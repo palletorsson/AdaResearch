@@ -72,14 +72,23 @@ const MAX_VISITORS := 8
 ## and would hold the wall open. Twice a second the list is rebuilt from scratch.
 const RESYNC_S := 0.5
 const OPEN_EDGE := 0.05
+## How much of `reach_m` you have to have crossed before the slats at your
+## shoulder are ALL the way open rather than most of the way. At 0.55 the hole is
+## full by about 1.2 m out of a 2.6 m reach — walking-up distance, not touching
+## distance.
+const COMMIT_AT := 0.55
 const SLIDE_SPAN := 1.6               # slide_x moves a slat this many of its own widths
 ## The one place the mode names are written down, so the export hint, the config
 ## reader and the index cannot drift apart.
 const MODE_NAMES := ["swing", "slide_y", "slide_x"]
 
-## How many slats the wall is cut into. More slats means the hole can follow you
-## more finely; the wall is no more open at ten than at forty, only smoother.
-@export var slats: int = 15
+## How many slats the wall is cut into, ASKED FOR — the build lowers it if the
+## slats would come out too narrow to walk between. More slats means the hole can
+## follow you more finely, but a slat can never clear more than its own width less
+## the thickness it leaves standing at its hinge, so past a certain count the wall
+## turns into a set of louvres: visibly open, impossible to walk through. See the
+## clamp in _build, which is where the number is actually decided.
+@export var slats: int = 7
 ## The wall's span, metres. Its plane is local XY and its face looks down local -Z.
 @export var width_m: float = 4.4
 ## How tall it stands. The bottom sits on the floor at y = 0.
@@ -104,9 +113,11 @@ const MODE_NAMES := ["swing", "slide_y", "slide_x"]
 ## How far a slat turns when it is fully open, degrees. Past ninety it tucks back
 ## against its neighbour instead of standing in the doorway.
 @export var swing_deg: float = 95.0
-## The shoulder width is_passable() is asked about. A gap narrower than this is a
-## view, not a way through.
-@export var pass_width_m: float = 0.55
+## THE WIDTH THE WALL GUARANTEES, in metres — not a hope, a promise. Enough
+## slats next to you are driven fully open to clear this much, and is_passable()
+## is asked about the same number, so there is one width in this file and not two
+## that can disagree. 0.62 is a 0.52 m pair of shoulders with 10 cm to spare.
+@export var min_clear_m: float = 0.62
 ## Seconds a visitor may stand in front of a wall that never moves before it says
 ## so out loud.
 @export var seal_report_s: float = 4.0
@@ -144,6 +155,10 @@ var _vz := PackedFloat32Array()
 
 var _mode := MODE_SWING
 var _slat_w := 0.0
+## How many neighbouring slats have to be fully open to clear min_clear_m.
+var _core := 0
+## Per-slat floor under this frame's targets: what the guarantee demands.
+var _force := PackedFloat32Array()
 var _vn := 0
 var _resync := 0.0
 var _widest := 0.0
@@ -176,8 +191,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		ease_s = float(config_data["ease"])
 	if config_data.has("swing"):
 		swing_deg = float(config_data["swing"])
-	if config_data.has("pass_width"):
-		pass_width_m = float(config_data["pass_width"])
+	if config_data.has("min_clear"):
+		min_clear_m = float(config_data["min_clear"])
 	# open_by arrives either as its name or as its index, because a map token and a
 	# registry sweep do not agree about which one a value is.
 	if config_data.has("open_by"):
@@ -225,7 +240,31 @@ func _build() -> void:
 	width_m = maxf(width_m, 0.1)
 	height_m = maxf(height_m, 0.1)
 	thickness_m = maxf(thickness_m, 0.01)
+	# THE SLAT HAS TO BE BIGGER THAN THE HOLE IT MAKES.
+	#
+	# 2026-09-08, Palle, having walked it: "In the approach_wall rotation the
+	# element has to be bigger for me to pass. I guess at least 0.5 m width."
+	#
+	# A slat is hinged on one edge and turns about it, so at full swing it vacates
+	# its own width and leaves its own THICKNESS standing at the hinge: the widest
+	# hole one slat can ever make is slat_w - thickness_m, whatever the angle. At
+	# fifteen slats across 4.4 m that is 0.293 - 0.12 = 0.17 m, and the wall was
+	# measured opening 0.00 m for a 0.52 m body at every distance while reporting
+	# an openness of 0.884. It was not shut and it was not open; it was louvres.
+	#
+	# So the count is bounded by the promise rather than the promise hoped for
+	# from the count, and it says so when a map asks for more than it can have.
+	var most: int = maxi(1, int(floor(width_m / (min_clear_m + thickness_m))))
+	if n > most:
+		push_warning("approach_wall: %d slats across %.2f m gives %.2f m each, and a slat clears only its width less %.2f m of hinge — %d slats to promise %.2f m"
+			% [n, width_m, width_m / float(n), thickness_m, most, min_clear_m])
+		n = most
 	_slat_w = width_m / float(n)
+	# One slat now clears min_clear_m by construction, so the run only has to be
+	# long enough to hold it — but keep the arithmetic, because a map may raise
+	# min_clear_m past what one slat gives and then it takes two.
+	_core = maxi(1, int(ceil((min_clear_m + thickness_m) / maxf(_slat_w, 0.001))))
+	_force.resize(n)
 	_mode = _mode_index()
 
 	_cx.resize(n)
@@ -340,13 +379,14 @@ func _physics_process(delta: float) -> void:
 	if _slats.is_empty():
 		return
 	_sense(delta)
+	_force_core()
 
 	# Frame-rate independent approach: the same fraction of the remaining distance
 	# per second whatever the headset is managing. Nothing here allocates.
 	var k: float = 1.0 - exp(-delta / maxf(ease_s, 0.01))
 	var widest := 0.0
 	for i in _slats.size():
-		var target: float = _target_for(i)
+		var target: float = maxf(_target_for(i), _force[i])
 		# The latch is taken on the way up only. A visitor who walks through the
 		# plane flips the sign of their own z, and without this the slat would swing
 		# back through the body it just made room for.
@@ -421,6 +461,45 @@ func _sense(delta: float) -> void:
 		# person walking past the far end is not evidence of anything.
 		if absf(p.z) < reach_m and absf(p.x) < half_x:
 			_covered = true
+
+
+## THE GUARANTEE, and the reason it had to exist.
+##
+## 2026-09-08, Palle, having walked it: "In the approach_wall rotation the element
+## has to be bigger for me to pass. I guess at least 0.5 m width."
+##
+## He was being generous. Measured with a shoulder-wide sphere swept along the
+## wall's own plane, the hole this wall opened was 0.00 m at every distance, up to
+## an openness of 0.884 — not too small, absent. The geometry was never the
+## problem: each slat is hinged on its inner edge, so a slat at full swing does
+## vacate its whole 0.293 m. The DRIVE was. `openness` falls off with distance
+## along the wall, so the slat at your shoulder reached 0.88 while its neighbour
+## reached 0.66 and still stood in 0.13 m of the plane, and a contiguous run of
+## 0.52 m never existed. A unit-less 0.884 reads like a wall that is mostly open
+## and is not a width; nothing in this file reported metres until the probe did.
+##
+## So the wall now promises a width instead of hoping for one. The _core slats
+## nearest a visitor are driven fully open — enough of them to clear min_clear_m —
+## gated only by how far through `reach_m` that visitor has come. The falloff still
+## shapes everything outside that run, so the hole is still a portrait of your
+## approach; it is just a portrait with a person-sized hole in the middle of it.
+##
+## Gate: commons/testing/probe_approach_wall_clear.gd, which reports METRES.
+func _force_core() -> void:
+	for i in _force.size():
+		_force[i] = 0.0
+	if _core <= 0 or _slat_w <= 0.0:
+		return
+	for v in _vn:
+		var g: float = clampf((1.0 - absf(_vz[v]) / maxf(reach_m, 0.001)) / COMMIT_AT, 0.0, 1.0)
+		if g <= 0.0:
+			continue
+		g = g * g * (3.0 - 2.0 * g)
+		var mid: int = clampi(int(round((_vx[v] + width_m * 0.5) / _slat_w - 0.5)), 0, _force.size() - 1)
+		var first: int = clampi(mid - _core / 2, 0, maxi(0, _force.size() - _core))
+		for j in range(first, mini(first + _core, _force.size())):
+			if g > _force[j]:
+				_force[j] = g
 
 
 ## How far this slat should be out of the way, given where everybody is.
@@ -536,7 +615,7 @@ func openness() -> float:
 func is_passable() -> bool:
 	if _slats.is_empty() or _slat_w <= 0.0:
 		return false
-	var need: int = maxi(1, int(ceil(pass_width_m / _slat_w)))
+	var need: int = maxi(1, int(ceil(min_clear_m / _slat_w)))
 	var thr: float = 0.9 if _mode == MODE_SLIDE_Y else (0.7 if _mode == MODE_SLIDE_X else 0.75)
 	var run := 0
 	for i in _open.size():

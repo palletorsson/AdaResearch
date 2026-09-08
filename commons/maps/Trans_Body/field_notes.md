@@ -64,6 +64,39 @@ came back as a wall of wireframe from within the geometry; `top.png` is the one
 that reads. Not chased — it is the capture pipeline's framing on a long thin room,
 not the room.
 
+## The wall could not be walked through, and openness never said so
+
+2026-09-08, Palle, in the headset: *"In the approach_wall rotation the element
+has to be bigger for me to pass. I guess at least 0.5 m width."*
+
+He was being generous. Measured with a sphere swept along the wall's own plane,
+the hole was **0.00 m at every distance**, while `openness()` read 0.884 and the
+seal probe, the behaviour probe and the museum boot were all green. Every number
+this artifact reported about itself was unit-less, and a unit-less 0.884 sounds
+like a wall that is most of the way open.
+
+The geometry was innocent: each slat is hinged on its inner edge, so a slat at
+full swing does vacate its own width. The arithmetic was the fault. A slat leaves
+its own THICKNESS standing at the hinge, so the widest hole one slat can ever make
+is `slat_w - thickness_m` — at fifteen slats across 4.4 m that is
+0.293 - 0.12 = **0.17 m**, and no angle, easing or falloff can improve it. It was
+not shut and it was not open. It was louvres.
+
+Two changes. The slat count is now bounded by the width it must clear
+(`floor(width_m / (min_clear_m + thickness_m))`, so 4.4 m gives five boards of
+0.88 m, and a map asking for more gets a push_warning saying so), and the slats
+nearest a visitor are driven fully open rather than left to the distance falloff.
+`pass_width_m` is gone: `min_clear_m` is one number that both drives the opening
+and is what `is_passable()` is asked about, so the two cannot disagree.
+Measured after: **0.82 m**, a body fits, 0.00 m again once you walk away.
+
+**And the ruler was half the confusion.** A sweep of spheres of radius r reports
+the run of free CENTRES, which is the gap less 2r — so the first probe printed
+0.00 m for every hole narrower than 0.52 m and 0.30 m for a 0.82 m one. I read
+0.00 as "the wall does not open" and went looking for a geometry fault. The probe
+now sweeps a needle to measure the hole and a shoulder to ask whether a body fits,
+and prints both.
+
 ## Rejected
 
 **Trans_Pit.** Thematically the closest existing hall — "a room where the center
@@ -80,9 +113,13 @@ is a different predicate and probably wants its own name.
 
 ## Open
 
-- Nobody has walked it in VR.
-- The museum plan has not been re-applied, so the chapter is still eight rows and
-  Trans_Body is not dealt a hall.
+- The museum plan HAS been re-applied (`tools/em_map_halls.py --apply`,
+  2026-09-08): the transformation chapter is nine rows and `trans body` is dealt a
+  hall at tile 13x25, 4 verbatim of 4, 0 plinths. The museum reports all three
+  artifacts as severing the route, which is the 2026-09-08 placement ruling working
+  — but it is a new KIND of severance, one that un-severs for a body, and anyone
+  reading `em_built.json`'s `severed` array will read three entries here as a
+  broken hall.
 - No book pearl, and no page in the encyclopedia's tutorial skeleton — both are
   hand-splices, and Trans_Pre's own additions on 2026-09-05 left the same two open.
 - carve_grid is 3.69 m of lattice to melt through at roughly one 0.34 m shell per
