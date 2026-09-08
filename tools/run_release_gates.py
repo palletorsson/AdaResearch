@@ -720,6 +720,60 @@ def build_report(
             }
         )
 
+        # Gate N: every tool on this disk is in the repository. The fourth
+        # surface, and the one gate H cannot reach. H walks: it collects what a
+        # runner INVOKES and what a gate tool NAMES, then asks git about those.
+        # A walk cannot see an orphan. tools/pull_vr_feedback.py was written on
+        # 2026-09-07, tested on a real Quest, recorded as LANDED and left
+        # untracked; H read 53 referenced / 0 unreachable every day it sat
+        # there, and widening H from INVOKED to NAMED would not have found it
+        # either -- the only files naming it were its own uncommitted hunks, so
+        # HEAD grepped 0. When a tool and its callers land or fail to land as
+        # one commit, the naming set is empty exactly when the file is absent.
+        # The population a tools gate must ask about is the DIRECTORY.
+        rc_tools_reach, out_tools_reach = run_cmd(
+            [sys.executable, "tools/check_tools_reachable.py", "--json"]
+        )
+        # Its negative half. Every gate in this table convicted something
+        # innocent on its first run; this one's exposure is a concurrent
+        # session's open buffers, so the selftest fixtures the 24-hour hold at
+        # its boundary, the ignored file, and the nested .gd.
+        rc_tools_reach_neg, _ = run_cmd(
+            [sys.executable, "tools/check_tools_reachable.py", "--selftest"]
+        )
+        treach = {}
+        if out_tools_reach.strip():
+            try:
+                treach = json.loads(out_tools_reach)
+            except json.JSONDecodeError:
+                treach = {}
+        gates.append(
+            {
+                "id": "N",
+                "name": "Tools Reachable From A Clone",
+                "pass": int(treach.get("unreachable_from_a_clone", 999999)) == 0
+                # An empty scan is a broken check, not a green one.
+                and int(treach.get("tools_on_disk", 0)) > 0
+                and rc_tools_reach_neg == 0,
+                "metrics": {
+                    "detector_selftest": "PASS" if rc_tools_reach_neg == 0 else "FAIL",
+                    "tools_on_disk": int(treach.get("tools_on_disk", -1)),
+                    "tools_tracked": int(treach.get("tools_tracked", -1)),
+                    "unreachable_from_a_clone": int(
+                        treach.get("unreachable_from_a_clone", -1)
+                    ),
+                    # Not this gate's verdict, printed so the census stays whole:
+                    # a file written in the last 24h is somebody's open buffer,
+                    # and one that is gitignored is absent by decision.
+                    "live_uncommitted": int(treach.get("live_uncommitted", -1)),
+                    "ignored_on_purpose": int(treach.get("ignored_on_purpose", -1)),
+                    "stranded": ", ".join(
+                        "%s (%.0fh)" % (r["path"], r["age_hours"])
+                        for r in treach.get("stranded", [])) or "none",
+                },
+            }
+        )
+
         pass_count, enabled_count, overall_pass, overall_status = apply_gate_toggles(
             gates, gate_enabled
         )
@@ -741,6 +795,7 @@ def build_report(
                 "check_map_tokens": rc_tok,
                 "check_prose_reachable": rc_prose,
                 "check_artifacts_reachable": rc_art_reach,
+                "check_tools_reachable": rc_tools_reach,
             },
             "gates": gates,
             "raw": {
