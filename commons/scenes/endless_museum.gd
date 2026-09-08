@@ -10074,10 +10074,19 @@ func _write_built(seg: Node3D, chapter: String, deal: Variant, zbase: int, w: in
 		if not seg.is_ancestor_of(n):
 			continue
 		var kind := String(rd.get("kind", "artifact"))
+		# THE SCALE THE BODY ACTUALLY WEARS (2026-09-08, Palle: "I change from
+		# coordinate_readout:90:1.4:4 to coordinate_readout:90:1.4:2 and nothing
+		# happened"). This file calls itself "every body's final world pose" and
+		# recorded position and yaw only, so no derived file could say what size
+		# anything was built at — answering that question took a diff of the map,
+		# the bake and HEAD. Read off the live node, so it is the size AFTER
+		# _ready and any config tail have had their say, not the size we asked
+		# for. Written always, like `rot`, so two runs can be diffed.
 		bodies.append({"token": rd.get("token", ""), "kind": kind, "inv": rd.get("inv", ""),
 			"tile_cell": rd.get("tile_cell", []), "world": [snappedf(n.global_position.x, 0.01),
 			snappedf(n.global_position.y, 0.01), snappedf(n.global_position.z, 0.01)],
-			"rot": snappedf(n.rotation_degrees.y, 0.1), "walk_kind": rd.get("walk_kind", ""),
+			"rot": snappedf(n.rotation_degrees.y, 0.1), "scale": snappedf(n.scale.x, 0.001),
+			"walk_kind": rd.get("walk_kind", ""),
 			"walk_space": rd.get("walk_space", "")})
 	var seg_no: int = _seg_index - 1          # already advanced by the time the segment finishes
 	var cards: Array = []
@@ -12991,6 +13000,11 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	var sc: float = float(cell.get("scale", 1.0))
 	if not is_equal_approx(sc, 1.0):
 		node.scale = Vector3.ONE * sc
+		# SAY IT (2026-09-08). A scale edit had no audible consequence anywhere:
+		# not in the strip, not in the editor, not in em_built.json, not in the
+		# console. One line, only when a scale is actually applied, so a curator
+		# who changes the fourth field can see the museum obey from the log.
+		print("[em-scale] %s built at %.2fx" % [lookup, sc])
 	# DRESS offset/scale — the token's own fine staging, same law as the
 	# curator's rulings above: transform only, the seal keeps the cell.
 	if plan_config.has("offset"):
