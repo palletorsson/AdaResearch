@@ -1,0 +1,203 @@
+{
+ "_what": "THE THREE BODY-OPERATED TRANSFORMATIONS.",
+ "_why": "2026-09-08, Palle: 'In the transformation sequence. Three new artifacts. Collider movement space. A cube grid and when we walk it space is created by removing what our collider touches. On the same theme a wall mech that is closed but open when we approach. The same with scaling scale down around us so we can walk.'\n\nEverywhere else in the chapter a cube is translated, turned or scaled while the visitor watches: the artifact is the operator and the visitor is the audience. In these three the operator is the visitor's own body and the operand is the room. That is the chapter's standing ruling of 2026-09-05 - 'transformation creates empty space, the holes are the pathway' - taken one step past where a map can follow, because the hole is no longer authored into the structure layer. It is made by arriving.",
+ "_shared": "All three find the visitor the same way and it is the thing that makes or breaks them: an Area3D masking BOTH physics layer 20 (the grid's player body) and physics layer 1 (the endless museum's Walker, a bare CharacterBody3D in group em_walker and nothing else). An artifact masking only the player layer does nothing in the museum, with no error and no log line. They then refuse any body that is not a visitor - hazard_creature_base extends CharacterBody3D, so 'any CharacterBody3D' would hand all three to the museum's own traffic and a visitor would arrive at a room another creature had already transformed. Gate: commons/testing/probe_body_transform_artifacts.gd, which asserts the bite in both directions.",
+
+ "artifacts": {
+  "carve_grid": {
+   "category": "transformations",
+   "complexity": "intermediate",
+   "description": "A solid lattice of small cubes standing in the way, which loses every cube your body touches, so walking through cuts a tunnel that stays cut. Translation performed with your legs: the corridor is the only record of where you went. Nothing in it moves on its own.",
+   "dev_themes": [
+    "commons",
+    "transformations"
+   ],
+   "footprint": [
+    4,
+    2,
+    4
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "carve_grid",
+   "map_ready": true,
+   "map_sequences": [
+    "transformation"
+   ],
+   "name": "Carve Grid",
+   "parameters": {
+    "footprint": [
+     4,
+     2,
+     4
+    ],
+    "size_group": "large"
+   },
+   "qfep_connection": "The trace is the only evidence, and it is shaped like the body that made it rather than like the rule that permitted it. Space here is not found and not given: it is subtracted, and by you.",
+   "scene": "res://commons/artifacts/carve_grid/carve_grid.tscn",
+   "size_group": "large",
+   "tags": [
+    "transformation",
+    "translation",
+    "subtraction",
+    "trace",
+    "voxel",
+    "multimesh",
+    "body"
+   ],
+   "measurements": {
+    "aabb_size": [
+     3.69,
+     1.31,
+     3.69
+    ],
+    "aabb_center": [
+     0.0,
+     0.66,
+     0.0
+    ],
+    "grid_cells": [
+     4,
+     4
+    ],
+    "max_dimension_m": 3.69,
+    "measured_from": "derived from the built extent: (cells - 1) * cell_m + (cell_m - gap_m), defaults 11 x 4 x 11 at 0.34 with a 0.05 gap"
+   }
+  },
+
+  "approach_wall": {
+   "category": "transformations",
+   "complexity": "intermediate",
+   "description": "A wall of slats that is closed and opens exactly where you approach it, then closes again behind you. Not a door - a door has one hinge and one place it opens; this one makes way where your body is, so the aperture is a portrait of your approach. Opens by swinging, sinking or parting.",
+   "dev_themes": [
+    "commons",
+    "transformations"
+   ],
+   "footprint": [
+    5,
+    3,
+    2
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "approach_wall",
+   "map_ready": true,
+   "map_sequences": [
+    "transformation"
+   ],
+   "name": "Approach Wall",
+   "parameters": {
+    "footprint": [
+     5,
+     3,
+     2
+    ],
+    "size_group": "large"
+   },
+   "qfep_connection": "A boundary that is a function of who is standing at it is not the same object as a boundary. The wall keeps its identity - every slat is where it always was - and stops being an obstacle, which is the chapter's question about invariants asked from the far side.",
+   "scene": "res://commons/artifacts/approach_wall/approach_wall.tscn",
+   "size_group": "large",
+   "tags": [
+    "transformation",
+    "rotation",
+    "threshold",
+    "wall",
+    "aperture",
+    "proximity",
+    "body"
+   ],
+   "dna": {
+    "axes": {
+     "open_by": [
+      "swing",
+      "slide_y",
+      "slide_x"
+     ]
+    },
+    "predicted_degeneracy": {
+     "pair": [
+      "swing",
+      "slide_x"
+     ],
+     "expected_focus_pct": 6.0,
+     "arithmetic": "At the canonical standpoint the wall is photographed with no visitor, so every value renders the SAME closed wall and all three should measure near zero. Photographed open, swing turns each slat about its inner edge (95 deg, so its face leaves the plane entirely) while slide_x moves it along the plane by up to a slat's width - both clear roughly two thirds of the aperture but only swing changes the silhouette's shading. slide_y sinks the slats and is the odd one out. This axis is expected to need a fixture holding a visitor at the wall; without one it is INERT for a reason that is about the capture, not the design."
+    }
+   },
+   "measurements": {
+    "aabb_size": [
+     4.4,
+     3.0,
+     0.12
+    ],
+    "aabb_center": [
+     0.0,
+     1.5,
+     0.0
+    ],
+    "grid_cells": [
+     5,
+     1
+    ],
+    "max_dimension_m": 4.4,
+    "measured_from": "derived from width_m x height_m x thickness_m; the swing mode sweeps up to about 0.5 m out of the plane, which is why the footprint claims 2 cells of depth"
+   }
+  },
+
+  "approach_scale": {
+   "category": "transformations",
+   "complexity": "intermediate",
+   "description": "A field of blocks set too close together to walk between. The ones near you scale down about their own centres until the gap is wide enough to pass, and grow back once you are through, so the size of the room is a function of how close you are standing.",
+   "dev_themes": [
+    "commons",
+    "transformations"
+   ],
+   "footprint": [
+    5,
+    2,
+    5
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "approach_scale",
+   "map_ready": true,
+   "map_sequences": [
+    "transformation"
+   ],
+   "name": "Approach Scale",
+   "parameters": {
+    "footprint": [
+     5,
+     2,
+     5
+    ],
+    "size_group": "large"
+   },
+   "qfep_connection": "Scale as the reciprocal of the grower block: there the world grows into you and the transformation is a threat, here it withdraws and the same arithmetic is hospitality. Nothing about the operation changes - only which way the factor runs, and who it is measured from.",
+   "scene": "res://commons/artifacts/approach_scale/approach_scale.tscn",
+   "size_group": "large",
+   "tags": [
+    "transformation",
+    "scale",
+    "proximity",
+    "passage",
+    "field",
+    "body"
+   ],
+   "measurements": {
+    "aabb_size": [
+     4.15,
+     1.15,
+     4.15
+    ],
+    "aabb_center": [
+     0.0,
+     0.58,
+     0.0
+    ],
+    "grid_cells": [
+     5,
+     5
+    ],
+    "max_dimension_m": 4.15,
+    "measured_from": "derived from (cols - 1) * spacing_m + block_m, defaults 3 x 3 at 1.5 spacing with 1.15 blocks"
+   }
+  }
+ }
+}
