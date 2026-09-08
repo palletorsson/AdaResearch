@@ -15387,6 +15387,11 @@ func _aim_moon(t: float) -> void:
 
 
 func _process(_delta: float) -> void:
+	# Out of the tree, same as _physics_process — a torn-down museum has no
+	# get_tree(), and --em-die's GameManager lookup and the death watchdog's
+	# create_timer both reach for one.
+	if not is_inside_tree():
+		return
 	if Engine.is_editor_hint() or _studio:
 		return
 	# --em-die: kill the visitor on a timer, through the road a hazard uses.
@@ -16318,6 +16323,22 @@ func _track_acoustic() -> void:
 		return
 
 func _physics_process(_delta: float) -> void:
+	# THE MUSEUM CAN BE OUT OF THE TREE AND STILL TICKING (2026-09-07).
+	#
+	#     endless_museum.gd:16341 @ _physics_process():
+	#     Parameter "data.tree" is null.
+	#     Cannot call method 'get_first_node_in_group' on a null value.
+	#
+	# New since the death started actually LEAVING the museum: staging tears this
+	# scene down to load the death scene, and a frame already in flight finishes
+	# against a node whose tree is gone. The early-out below tests `_player ==
+	# null`, which is a fact about VR and not about the tree — on desktop the
+	# walker is very much alive while its tree is not, so it let this through.
+	#
+	# is_inside_tree() FIRST, before anything reaches for get_tree(). The standing
+	# rule in this project (config can run out of the tree) earned itself again.
+	if not is_inside_tree():
+		return
 	# THE FIRST PHYSICS STEP: in Main::iteration physics runs BEFORE idle, so
 	# this splits the silent window into engine flush plus physics on one side
 	# and the deferred-call queue plus render sync on the other (2026-08-26).
