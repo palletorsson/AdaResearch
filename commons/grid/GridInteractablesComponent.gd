@@ -129,6 +129,31 @@ const CONFIG_PARAM_NAMES = [
 	# them, which is why this went unnoticed. No token anywhere in the corpus
 	# carries "#color:" today (2,826,608 cells scanned), so listing it moves no map.
 	"color",
+	# Trans_Pit's hazards (2026-09-08, Astra's brief: "investigate the stationary
+	# grower blocks"). The map says grower_block#min:0.3#max:3.5#speed:0.3 three
+	# times over, and `speed` was listed while `min` and `max` were not — so the
+	# shorthand branch below ate them, handed the artifact `true`, and
+	# grower_block.gd:92 took float(true) = 1.0 for BOTH. grower_block.gd:42 is
+	# lerpf(min_scale, max_scale, t), and lerp between one and one is a constant:
+	# the block stood still. Measured in the grid lane before this line existed —
+	# min_scale 1.000, max_scale 1.000, size swing 0.000 m over five seconds — by
+	# commons/testing/probe_pit_hazard_config.gd, which is the negative test for
+	# this entry and fails again the moment it is removed.
+	#
+	# The museum was never affected: its lane has no shorthand branch and
+	# em_plan.json carries {"min": "0.3", "max": "3.5"} as strings. So the same
+	# three blocks breathed in the museum and stood still in the grid, which is
+	# also why nobody caught it.
+	#
+	# distance/pause are the same fault one room earlier: the pushing stones
+	# travelled push_distance 1.00 m of the 3 m their token asks for.
+	#
+	# Blast radius checked before adding: across every map_data.json these four
+	# keys appear on grower_block and pusher_block ONLY, 15 placements each, and
+	# both artifacts read exactly these names in apply_grid_config. Naming them
+	# also stops the shorthand rewriting those tokens' yaw, which for a cube and
+	# for a stone whose axis comes from the word #axis: changes nothing functional.
+	"min", "max", "distance", "pause",
 	# generic
 	"no_collider",
 ]
