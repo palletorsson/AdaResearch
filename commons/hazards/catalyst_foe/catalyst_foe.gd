@@ -899,15 +899,18 @@ func _sil_contact_tick() -> void:
 		# the bite is SEEN on the biter: a red pulse at the chest, which reaches a
 		# headset where no canvas overlay can (2026-08-29, "silhouettes in vr")
 		_spawn_light_pulse(Color(1.0, 0.15, 0.1), Vector3(0, silhouette_height_m * 0.5, 0))
+		_sil_spend_after_attack()
 		return
 	if _try_damage_target(_player_node):
 		_contact_timer = contact_cooldown
+		_sil_spend_after_attack()
 		return
 	var gm: Node = get_node_or_null("/root/GameManager")
 	if gm != null and gm.has_method("apply_health_damage"):
 		gm.call("apply_health_damage", contact_damage)
 		caught_player.emit()
 		_contact_timer = contact_cooldown
+		_sil_spend_after_attack()
 
 
 ## THE MUSEUM'S WALKER IS NOT A PLAYER (a standing trap: it joins only
@@ -973,6 +976,90 @@ func _sil_become_statue(color: Color) -> void:
 		_spawn_hit_burst(flash, Vector3(0, silhouette_height_m * 0.5, 0), 0.8)
 		_spawn_light_pulse(flash, Vector3(0, silhouette_height_m * 0.5, 0))
 	turned_to_statue.emit()
+
+
+## THE ATTACK IS THE LAST THING IT DOES (2026-09-08, Palle: "Make it so that
+## after an attack the silhouette becomes a sculpture for 5 sec. and then fades
+## and disappears").
+##
+## It reuses _sil_become_statue rather than growing a second way to stop: the
+## same stillness, the same plinth in the drawing's own mean value, the same
+## departure from the "enemy" group. What differs is the ending, and the
+## difference is the argument. A SHOT statue STANDS — the visitor turned it with
+## the gun, and it is the hall's Giacometti. A SPENT one has already taken what
+## it came for, so it holds for five seconds and goes: the attack costs it its
+## own continuation.
+##
+## Together with the museum no longer shoving the walker, a bite is now a thing
+## you SEE rather than a thing that moves you — the silhouette stops mid-stride
+## and becomes the sculpture it was always about to be.
+const SIL_SPENT_HOLD_S := 5.0
+const SIL_SPENT_FADE_S := 1.2
+var _sil_spent: bool = false
+var _sil_fade_mats: Array[StandardMaterial3D] = []
+
+
+func _sil_spend_after_attack() -> void:
+	if body != "silhouette" or _sil_spent or _sil_statue or _blown_up:
+		return
+	_sil_spent = true
+	_sil_become_statue(Color(1.0, 0.15, 0.1, 1.0))
+	if not is_inside_tree():
+		queue_free()
+		return
+	# THE DRAWING IS CUT, NOT BLENDED, so alpha means nothing to it yet: the
+	# sprite ships TRANSPARENCY_ALPHA_SCISSOR at a 0.35 threshold (a binary
+	# keep-or-drop per pixel), and tweening albedo alpha under scissor does
+	# nothing at all until the whole figure blinks out in one frame. Every
+	# material that will fade is moved to real alpha blending first.
+	#
+	# AND IT IS NOT ON material_override. The base's _add_mesh
+	# (hazard_creature_base.gd:665) attaches a creature's material with
+	# set_surface_override_material(0, m), while _sil_become_statue's plinth uses
+	# material_override — so a collector reading only the latter fades the plinth
+	# and leaves the figure standing on it. probe_silhouette_spends caught exactly
+	# that: the drawing's alpha never left 1.0.
+	_sil_fade_mats.clear()
+	var stack: Array = [self]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		for c in n.get_children():
+			stack.append(c)
+		var mi := n as MeshInstance3D
+		if mi == null:
+			continue
+		var found: Array[StandardMaterial3D] = []
+		var mo := mi.material_override as StandardMaterial3D
+		if mo != null:
+			found.append(mo)
+		for si in range(mi.get_surface_override_material_count()):
+			var so := mi.get_surface_override_material(si) as StandardMaterial3D
+			if so != null:
+				found.append(so)
+			elif mi.mesh != null:
+				# a mesh's own material is SHARED with every other body built from
+				# it — fade a per-instance copy, never the original
+				var sm := mi.mesh.surface_get_material(si) as StandardMaterial3D
+				if sm != null:
+					var dup := sm.duplicate() as StandardMaterial3D
+					mi.set_surface_override_material(si, dup)
+					found.append(dup)
+		for m in found:
+			m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			_sil_fade_mats.append(m)
+	var tw := create_tween()
+	tw.tween_interval(SIL_SPENT_HOLD_S)
+	tw.tween_method(_sil_set_alpha, 1.0, 0.0, SIL_SPENT_FADE_S)
+	tw.tween_callback(queue_free)
+
+
+func _sil_set_alpha(a: float) -> void:
+	for m in _sil_fade_mats:
+		if m == null:
+			continue
+		var c: Color = m.albedo_color
+		c.a = a
+		m.albedo_color = c
 
 
 ## ONE METRE, ONE SNAP. The one-dimensional man does not glide across a room;

@@ -7114,26 +7114,25 @@ func walker_bitten(from: Vector3) -> void:
 	_bite_at = now
 	_bite_n += 1
 	_hazard_flash()
+	# A BITE NO LONGER MOVES THE BODY (2026-09-08, Palle: "When the silhouette
+	# attacks it moves the player the result can be that the player bounces in
+	# side the wall so remove that behavior").
+	#
+	# Both lanes wrote the position DIRECTLY — `_player.position += away * 1.1`
+	# on the desktop and `rig.global_position += vaway * 1.1` in the headset —
+	# and a direct write is not a move. It skips move_and_slide and therefore
+	# every collider between here and 1.1 m away, so a bite taken with your back
+	# to a wall put the body INSIDE the wall, where depenetration decides where
+	# you come out and you bounce. In the headset it was worse than a bug: shoving
+	# the rig moves the room under a person who is standing still.
+	#
+	# The bite still lands. The flash, the veil and a third of the health bar are
+	# untouched, and the silhouette now answers for it by stopping (see
+	# catalyst_foe._sil_spend_after_attack). Only the displacement is gone. If the
+	# shove is ever wanted back as FEEL, it has to travel through move_and_slide —
+	# or be refused by test_move first — never through an assignment.
 	if _vr:
-		# THE HEADSET IS SHOVED (2026-08-29, Palle: "we should have silhouettes in
-		# vr"). Nothing rides the walker there, so the RIG moves, by the eye's own
-		# horizontal offset from the biter, as the death moves it; and the flash
-		# is a veil at the eye, since no canvas reaches a headset. Until today
-		# this returned at the null walker and a silhouette in VR could never
-		# touch anyone.
-		var rig: Node3D = _vr_rig()
-		var eye: Camera3D = _vr_eye()
-		if rig != null and eye != null:
-			var vaway: Vector3 = eye.global_position - from
-			vaway.y = 0.0
-			if vaway.length() > 0.001:
-				rig.global_position += vaway.normalized() * 1.1
 		_vr_veil(Color(1.0, 0.1, 0.05), 0.5, 0.45)
-	else:
-		var away: Vector3 = _player.global_position - from
-		away.y = 0.0
-		if away.length() > 0.001:
-			_player.position += away.normalized() * 1.1
 	# A BITE IS DAMAGE NOW, NOT A TALLY (2026-09-07, Palle: "The death sequence
 	# should be connected with the player health game manager").
 	#
