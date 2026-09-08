@@ -6551,7 +6551,9 @@ func _page_close() -> void:
 
 
 ## ONE WEDGE, ONE PLACER. The walkableprism (commons/scenes/mapobjects/
-## walkableprism.tscn) is a PrismMesh 2 x 1 x 1 with a concave collider and NO
+## walkableprism.tscn) holds a PrismMesh of 2 x 1 x 1 under a 90 deg yaw, so the
+## SCENE measures 1 wide x 1 high x 2 long — the distinction cost a wedge half its
+## width until 2026-09-08. It carries a concave collider and NO
 ## script — no autoload, no player detection, no layer gate — which is why it is
 ## the one grid body the museum can stamp without a shim. Scaled to `rise` and
 ## turned to `facing`, it is a climbable slope from the floor to the height above.
@@ -6573,7 +6575,21 @@ func _stamp_wedge(seg: Node3D, cell: Vector2i, facing: String, rise: float, zbas
 	# base_y sinks a wedge onto a pool floor (the simulation courtyards).
 	w.position = Vector3(cell.x + 0.5, base_y + rise * 0.5, cell.y + 0.5)
 	w.rotation_degrees = Vector3(0, yaw, 0)
-	w.scale = Vector3(0.5 * maxf(0.2, run_cells), maxf(0.05, rise), 1.0)   # the mesh is 2 x 1 x 1
+	# THE SCENE ROOT IS 1 x 1 x 2, NOT 2 x 1 x 1 (2026-09-08, Palle: "wp:90 in
+	# endless museum it scaled so its less wide then in the grid it should be one
+	# meter"). The PrismMesh resource IS 2 x 1 x 1 — the old comment here was
+	# reading that — but walkableprism.tscn bakes a 90 deg yaw into the
+	# MeshInstance3D above it (basis X -> (0,0,1), Z -> (-1,0,0)), so in the root
+	# space this scale multiplies, the long axis is Z and the WIDTH is X:
+	#     width  x in [-0.5, 0.5]  = 1 m
+	#     height y in [-0.5, 0.5]  = 1 m
+	#     length z in [-1.5, 0.5]  = 2 m   (half in this cell, half in the approach)
+	# The run factor was therefore landing on the width and the width factor on
+	# the length: every museum wedge stood HALF A METRE wide where the grid builds
+	# a full metre, and `run` widened a ramp instead of lengthening it. The grid is
+	# the authority and applies no scale at all — GridUtilitiesComponent.gd:552
+	# only seats the prism half a cube up and sets its yaw.
+	w.scale = Vector3(1.0, maxf(0.05, rise), maxf(0.2, run_cells))
 	seg.add_child(w)
 	_walk_cells[Vector2i(cell.x, zbase + cell.y)] = true
 	_walk_climb[Vector2i(cell.x, zbase + cell.y)] = true
