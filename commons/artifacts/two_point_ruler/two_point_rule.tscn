@@ -18,7 +18,6 @@ metallic = 0.1
 
 [node name="Rule" instance=ExtResource("1_pickable")]
 freeze = true
-ranged_grab_method = 0
 second_hand_grab = 2
 
 [node name="CollisionShape3D" parent="." index="0"]
