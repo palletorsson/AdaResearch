@@ -43,7 +43,10 @@ signal state_changed(hand: String, state: String)
 signal weapon_adopted(weapon: Node3D)
 
 const CATALYST_SCENE := "res://commons/hazards/becoming_catalyst/becoming_catalyst.tscn"
-const WEAPON_TOKENS: Array[String] = ["pink_gun", "line_sledgehammer"]
+## 2026-09-05, Palle: "add a laser to pick up weapon inventory". laser_measure
+## is the third: a measuring tool that, with #burns:1, takes down a barrier — so
+## it is carried for the same reason the other two are, and holstered the same way.
+const WEAPON_TOKENS: Array[String] = ["pink_gun", "line_sledgehammer", "laser_measure"]
 
 @export var enabled: bool = true
 @export var click_action: String = "primary_click"
@@ -194,6 +197,7 @@ func _adopt(w: Node3D, hand: String) -> void:
 		return
 	var pk: XRToolsFunctionPickup = _pickups[hand]
 	_busy = true
+	_watch(w)
 	pk.drop_object()
 	var old: Node = w.get_parent()
 	if old != null:
@@ -303,6 +307,7 @@ func _draw(hand: String, w: Node3D) -> void:
 		return
 	var pk: XRToolsFunctionPickup = _pickups[hand]
 	_busy = true
+	_watch(w)          # every weapon, however it got here — see _watch
 	if w.get_parent() == null:
 		_holster.add_child(w)
 	w.set("enabled", true)
@@ -332,6 +337,101 @@ func _stow(hand: String) -> void:
 	if p != null:
 		p.remove_child(w)
 	_busy = false
+
+
+# ── a hand may not aim at a body that is not in the tree ─────────────────
+#
+## 2026-09-08, Palle, in the headset, "when shooting with pink gun towards the
+## spider": grab_point.gd _weight() with `!is_inside_tree()`, then `create_snap:
+## Cannot call method 'add_child' on a null value`. grab_driver.gd:211 is
+## `p_target.get_parent().add_child(driver)`, so the null is get_parent(): a hand
+## had picked up a pickable WITH NO PARENT, and its grab points were outside the
+## tree with it. Measured exit code 3221225477 — an access violation, not a
+## printed error.
+##
+## THE TRACE PROVES ITS OWN MECHANISM, which is worth keeping because it means
+## the next report of this shape can be read without a probe. pickable.gd:325 is
+## the create_snap inside `if by.picked_up_ranged:`; the ordinary one is :328.
+## picked_up_ranged is `not _object_in_grab_area.has(target)`
+## (function_pickup.gd:438), and grab_stick.tscn sets `ranged_grab_method = 0`,
+## so the gun can never be in the ranged list either. The flag cannot mean
+## "grabbed from a distance": it can only mean the grab-area list had already let
+## go of it — which is what an Area3D does when a body leaves the TREE. So Palle's
+## paste says, by itself, that the body was out of the tree before the grip was
+## pressed. :316 says the same again: it passes `current = null`, the primary
+## branch, so nobody was holding it.
+##
+## THE UNPARENTED BODY IS OURS. "Stowed = out of the tree" is this file's holster
+## mechanism, and it is a good one: no physics, no draw, a gun's fire() refuses
+## by itself. But XRToolsFunctionPickup keeps a `closest_object` that nothing
+## clears except its own _update_closest_object(), which runs at the END of
+## _process — 11 lines AFTER the grip is read. So for exactly one frame the hand
+## still points at the weapon we have just taken out of the world, and
+## _on_grip_pressed guards it with is_instance_valid() alone, which is true for a
+## live node with no parent.
+##
+## The window opens every time a weapon is holstered while a hand is near it,
+## which is every time the visitor lets go — and it opens on BOTH hands, not only
+## the one that was holding: a bare hand standing next to the weapon has elected
+## it too. Measured in commons/testing/probe_stowed_weapon_regrab.gd, which drives
+## the real grip axis rather than calling _pick_up_object, because
+## function_pickup._process returns at its first line unless the controller is
+## active and an untracked fake rig never gets that far.
+##
+## SO WE CLEAN UP AFTER OURSELVES, ON tree_exited RATHER THAN AT EACH CALL SITE.
+## _stow is not the only place a weapon leaves the tree — _adopt does it too, on
+## its way to the holster — and the next path added would have to remember. The
+## signal cannot be forgotten. It also covers the case a per-frame correction
+## could not: function_pickup._process returns at its first line while the
+## controller is not being tracked, so a hand put down or turned away holds its
+## stale closest_object for the whole untracked stretch, however long that is,
+## and reads it at line 191 the moment tracking returns. The addon's own hole
+## stays open (addons/ is
+## gitignored: /addons/* in .gitignore, one file tracked in the whole tree, so a
+## patch there would never be committed and would vanish on a fresh clone), but
+## nothing else in this project parks a live pickable outside the tree.
+## _forget TAKES NO ARGUMENT, and that is deliberate twice over.
+##
+## First, correctness: `w.tree_exited.connect(_forget.bind(w))` cannot be guarded
+## by `is_connected(_forget)`, because a bound Callable never compares equal to
+## the unbound one — the guard would read "not connected" forever and _watch would
+## stack a fresh connection on every draw. Nothing to bind, nothing to mismatch.
+##
+## Second, reach: the question a hand has to answer is not "did THIS weapon
+## leave" but "am I pointing at something that is no longer in the world", and
+## that is answerable without knowing who called. So a stow sweeps every stale
+## reference, including one another system left behind.
+func _watch(w: Node) -> void:
+	if not w.tree_exited.is_connected(_forget):
+		w.tree_exited.connect(_forget)
+
+
+func _forget() -> void:
+	for hand in _pickups.keys():
+		var pk: XRToolsFunctionPickup = _pickups[hand]
+		if not is_instance_valid(pk):
+			continue
+		var co: Node3D = pk.closest_object
+		if co != null and (not is_instance_valid(co) or not co.is_inside_tree()):
+			# drop the highlight the same way the addon would have, so a weapon
+			# does not come back out of the holster still glowing
+			if is_instance_valid(co) and co.has_method("request_highlight"):
+				co.call("request_highlight", pk, false)
+			pk.closest_object = null
+		# the addon erases these on the body's own tree-exit and the probe
+		# confirms it (grab_area drops to 0), but its bookkeeping is not ours to
+		# depend on, and a list of two is not worth being clever about
+		_drop_absent(pk.get("_object_in_grab_area") as Array)
+		_drop_absent(pk.get("_object_in_ranged_area") as Array)
+
+
+func _drop_absent(a: Array) -> void:
+	if a == null:
+		return
+	for i in range(a.size() - 1, -1, -1):
+		var o: Variant = a[i]
+		if o == null or not is_instance_valid(o) or not (o as Node).is_inside_tree():
+			a.remove_at(i)
 
 
 # ── the catalyst on and off a hand ───────────────────────────────────────
