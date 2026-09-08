@@ -28,8 +28,10 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 ## edge-on, so the line only existed from above. A body reads from every angle.
 @export var stripe_h_m: float = 0.012
 ## Metres the legend sits behind the stripe (toward the reader), so the words
-## announce the line before the feet reach it.
-@export var standoff_m: float = 0.42
+## announce the line before the feet reach it. Centre of the stencil, whose
+## height is 0.17 m, so 0.16 leaves a few centimetres of floor between the
+## letters and the paint: the words belong to the line, they do not float.
+@export var standoff_m: float = 0.16
 ## Draw the stripe. Without it the legend is a statement; with it the line has a
 ## position — and the two are different claims, which is why this artifact and
 ## the barrier are a pair rather than one object.
