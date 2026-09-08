@@ -2614,6 +2614,12 @@
 			]
 		},
 		"baggage_grammar": {
+			"lookup_name": "baggage_grammar",
+			"map_ready": true,
+			"include_in_map_data": true,
+			"map_sequences": [
+				"transformation"
+			],
 			"name": "Baggage Grammar",
 			"class_name": "BaggageGrammar",
 			"scene": "res://commons/artifacts/baggage_grammar/baggage_grammar.tscn",
@@ -2680,6 +2686,12 @@
 			}
 		},
 		"two_cakes": {
+			"lookup_name": "two_cakes",
+			"map_ready": true,
+			"include_in_map_data": true,
+			"map_sequences": [
+				"transformation"
+			],
 			"name": "Two Cakes",
 			"class_name": "TwoCakes",
 			"scene": "res://commons/artifacts/two_cakes/two_cakes.tscn",
