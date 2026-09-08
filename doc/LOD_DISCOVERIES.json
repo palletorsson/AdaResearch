@@ -642,6 +642,12 @@
       "topic": "gate-tools-text-channel",
       "insight": "A gate tool may not SPELL a tools/*.py path: gate H level 2 greps every gate tool's source for that pattern and treats each hit as a remedy the repo must contain, so gate N's five fictional selftest fixtures and five example orphans took H from PASS to FAIL. Fixtures belong under a non-matching root; say counts, not filenames. Runtime output is safe - H reads source, not stdout.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-09-08T17:03:19.065609+00:00",
+      "topic": "release gates",
+      "insight": "A gate verdict is a statement about a TREE and 11 of the 16 gate tools never say which. Gates I and J flipped PASS to FAIL between two runs on 2026-09-08 with no commit between them, convicting five primitives rooms whose anchors all read HELD against git show HEAD. Only check_prose_reachable, check_artifacts_reachable, check_tools_reachable, check_gate_chain and the runner read git at all; every content gate reads the disk. Before believing a red gate, diff the failing rows against HEAD.",
+      "lod": 3
     }
   ]
 }

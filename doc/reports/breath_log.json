@@ -6574,6 +6574,123 @@
         "THE PIPELINE MOVED 0.000 FOR THE SIXTH CONSECUTIVE BREATH AND THE DENOMINATOR MOVED INSTEAD. 6.083 over 24 sequences, 23 of them parked at stage 6. Yesterday's -0.004 was array_tutorial entering; today's 0.000 spans tiling entering too, so the mean is holding while the corpus grows, which is the only thing global_avg can say right now. Stage 6 needs a comment pulled off a headset, and the tool that does it landed today - untracked since yesterday morning, which is why it could not."
       ],
       "duration_minutes": 42
+    },
+    {
+      "breath_id": "2026-09-08T18:55",
+      "mode": "evolve-only",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "denominator": 24,
+      "head_at_read": "98f9fb279",
+      "tree_at_read": {
+        "dirty_paths": 1281,
+        "untracked_paths": 769
+      },
+      "commits": [],
+      "items_attempted": [
+        "review-todays-breath-log-one-entry-2026-09-08T09-06-full-delta-0.000",
+        "verify-that-breaths-claims-against-HEAD-per-claim-not-by-its-own-ledger-prop-030",
+        "re-measure-the-pipeline-unpiped-exit-code-read-directly-prop-017",
+        "re-run-the-release-gates-and-account-for-every-state-change-since-09-06",
+        "sweep-the-class-todays-finding-belongs-to-rather-than-reporting-the-instance",
+        "duplicate-check-both-candidates-against-all-47-proposals-before-writing-a-48th",
+        "update-improvement_trajectory.json"
+      ],
+      "items_succeeded": [
+        "MORNING-BREATH-VERIFIED-PER-FILE-AND-IT-LANDED-all-four-commits-plus-its-own-harvest-248c12309-025f73af8-3aa301d87-e0b448d8b-251246e7f-and-git-cat-file-e-HEAD-plus-git-diff-quiet-HEAD-say-pull_vr_feedback.py-comment_box.gd-sequence_pipeline_scorer.py-check_tools_reachable.py-run_release_gates.py-are-all-TRACKED-and-CLEAN-at-18-52-nine-hours-and-sixteen-commits-later-the-first-morning-breath-in-the-recent-run-whose-work-survived-the-afternoon",
+        "TWO-GATES-FLIPPED-WITH-NO-COMMIT-BETWEEN-THEM-gate-I-Edge-Anchors-and-gate-J-Artifact-Citations-both-PASS-at-09-06-and-both-FAIL-at-18-55-convicting-the-same-five-primitives-rooms-Point_Line_Grid-Primitives_Polythedra-Point_Animatedcube-Primitives_Ignorance-Primitives_Portals-through-the-same-five-anchors-all-in-critical.md-and-none-of-the-sixteen-afternoon-commits-is-prose",
+        "PROVED-IT-BLOB-BY-BLOB-NOT-BY-INFERENCE-re-ran-edge_gates-own-verdict-logic-against-git-show-HEAD-of-each-anchor-file-importing-its-norm-and-content-so-the-matcher-is-identical-five-of-five-read-HELD-in-HEAD-and-LOST-in-the-working-tree-the-repository-is-green-the-disk-is-red",
+        "NAMED-THE-WRITER-a-live-session-is-revising-the-primitives-chapter-41-dirty-tracked-md-under-commons-maps-six-critical-md-rewritten-15-50-to-18-15-newest-38-minutes-before-the-reading-HEADs-last-commit-12-minutes-before-it-and-Point_Trace-is-the-sixth-whose-anchor-survived-so-this-is-five-of-six-not-all",
+        "SWEPT-THE-CLASS-NOT-THE-INSTANCE-of-the-16-tools-run_release_gates-invokes-only-5-touch-git-at-all-check_prose_reachable-check_artifacts_reachable-check_tools_reachable-check_gate_chain-and-the-runner-every-content-gate-edge-cite-want-map_tokens-museum_templates-workbench-reads-the-working-tree-only-and-none-states-which-tree-produced-the-verdict",
+        "CLAUSE-3-BROKEN-IN-THE-LEDGER-NOT-IN-THEORY-this-mornings-entry-records-gates_before-and-gates_after-with-no-tree-stamp-on-either-half-and-the-after-half-was-already-false-by-evening-through-nobodys-commit-which-is-exactly-what-prop-025-clause-3-forbids-written-by-the-breath-that-would-benefit-most-29-days-after-the-proposal-was-filed",
+        "THE-MORNINGS-GATE-L-HOLD-EXPIRED-AND-NOTHING-NOTICED-the-09-06-deferral-live-writer-mid-run-do-not-commit-them-was-correct-the-writer-stopped-at-10-09-38-and-committed-nothing-142-files-58633-words-all-untracked-in-HEAD-zero-touched-in-the-last-8-7-hours-140-in-the-6-12h-bucket-plus-10566-words-between-the-morning-reading-and-10-09-and-0-since",
+        "THE-DEFERRAL-RULE-IS-THE-NEW-SUB-SHAPE-a-defer-on-mtime-carve-out-is-right-at-the-moment-it-fires-and-silently-wrong-when-the-writer-stops-nothing-re-checks-it-gate-N-ships-the-same-untracked-and-touched-inside-24h-rule-and-inherits-the-same-hole-and-the-only-instrument-that-ever-looks-again-is-the-next-mornings-breath-which-applies-the-same-rule-and-defers-again-six-of-the-last-seven-have",
+        "LARGEST-INSTANCE-IN-THE-CORPUS-BY-VOLUME-58633-stranded-words-is-more-than-every-previously-recorded-exists-vs-git-instance-combined",
+        "DUPLICATE-CHECK-RUN-OVER-ALL-47-PROPOSALS-both-candidates-already-housed-prop-025-a-gate-must-name-the-tree-and-prop-044-exists-vs-git-NO-48th-OPENED-fifth-consecutive-evening-of-appending",
+        "EVIDENCE-APPENDED-to-prop-025-occurrence-4-the-first-tracked-and-modified-case-where-the-two-trees-demand-opposite-actions-and-to-prop-044-occurrence-7-largest-by-volume-plus-the-first-counter-instance-on-the-same-day",
+        "FORUM-260908-mz613-ANSWERED-with-the-evening-resolution-and-two-cheap-fixes-age-the-hold-at-N-6h-and-print-the-deferrals-newest-mtime-and-age-committed-nothing-from-that-tree",
+        "FORUM-260908-sq9zq-POSTED-naming-the-five-broken-anchors-with-the-exact-sentence-the-book-quotes-from-each-file-so-the-primitives-writer-can-land-the-book-edit-with-the-prose-edit-instead-of-turning-HEAD-red",
+        "PIPELINE-RE-READ-6-083-exit-0-unpiped-identical-to-this-morning-seventh-consecutive-0-000-and-the-denominator-held-at-24-this-time-so-the-mean-of-sixes-is-genuinely-flat-rather-than-absorbing-a-new-sequence",
+        "CAUGHT-A-13201-LINE-REFORMAT-OF-MY-OWN-LEDGERS-BEFORE-COMMITTING-json-dump-at-indent-1-ensure_ascii-False-against-a-corpus-written-at-indent-2-ASCII-since-creation-re-dumped-to-match-and-the-staged-diff-went-from-9738-insertions-9589-deletions-to-158-insertions-9-deletions-found-by-prop-012-clause-2s-git-diff-cached-stat-before-commit"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "items_cooled": [
+        "gate-M-41-unreachable (ruling 260906-dds7a, 0 replies, 2 days)",
+        "gate-K-4-echo (blocked on human question 260831-z5s2i)",
+        "gate-F-contended_builder (Godot lock / museum autopilot)",
+        "gate-L-142-stranded (NOT a fault of HEAD; owner's call, escalated in 260908-mz613)",
+        "gate-I-and-J-5-lost-anchors (working-tree-only, another session's live edits; escalated in 260908-sq9zq)"
+      ],
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "gates_before": {
+        "tree": "working tree at HEAD 251246e7f, 09:06, dirty 1141",
+        "pass": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "G",
+          "H",
+          "I",
+          "J"
+        ],
+        "fail": [
+          "F",
+          "K",
+          "L",
+          "M",
+          "N"
+        ]
+      },
+      "gates_after": {
+        "tree": "working tree at HEAD 98f9fb279, 18:55, dirty 1281, untracked 769",
+        "pass": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "G",
+          "H"
+        ],
+        "fail": [
+          "F",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N"
+        ],
+        "note": "I and J are working-tree-only failures. Measured against HEAD's blobs both are PASS. No breath action caused either; no breath action reverted either."
+      },
+      "files_changed": [
+        "doc/reports/skill_evolution_proposals.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/breath_log.json",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md"
+      ],
+      "discoveries": [
+        "A GATE'S VERDICT IS A STATEMENT ABOUT A TREE, AND ELEVEN OF OUR SIXTEEN GATE TOOLS DO NOT KNOW WHICH TREE THEY READ. Gates I and J went PASS -> FAIL between two runs of the same day with no commit between them. The cause is five critical.md files rewritten this afternoon in the working tree by a session revising the primitives chapter; edge_gate's own verdict logic, re-run against git show HEAD:<file>, reads HELD in HEAD for all five. Of the 16 tools run_release_gates.py invokes, only 5 read git at all, and every content gate -- edge (I), cite (J), want (K), map tokens (G), museum templates (E), workbench (A) -- reads the disk and reports as though it had read the release. The verdict is not even wrong: edge_gate's docstring explicitly welcomes a lost anchor as the curriculum moving. But fired against a half-written tree it is a prediction, not a finding, and it un-fires if the writer reverts. prop-025, filed 2026-08-10, proposes the two clauses that end this -- print the HEAD sha with dirty/untracked counts above the Overall line, and mark each failing row tracked-and-clean / tracked-and-modified / untracked. All five of today's rows would read tracked-and-modified, which is the state none of the three previously recorded occurrences had.",
+        "A DEFERRAL RULE HAS NO EXPIRY, SO A CORRECT HOLD BECOMES A PERMANENT BLIND SPOT. This morning's breath refused to convict gate L's 107 stranded essays because the mtimes showed a writer mid-run -- right, and posted as 260908-mz613. The writer stopped at 10:09:38 and committed nothing. At 18:55 it is 142 files and 58,633 words, all untracked, none touched in 8.7 hours, sixteen commits landed on top. The moment the files crossed from 'live work, hands off' to 'finished output sitting outside the repository' passed unobserved, because the only instrument that looks again is tomorrow's breath, which will read the same mtime rule and defer a seventh time. Gate N ships the identical untracked-and-touched-inside-24h carve-out and inherits the identical hole. The fix is an aged hold (deferred only while the mtime is younger than N hours) plus printing the deferral's age, so 'writer active 45s ago' and 'writer idle 8.7h' stop being the same silence.",
+        "THE MORNING BREATH LANDED ITS OWN WORK, AND THAT IS THE ENTRY WORTH KEEPING. Occurrence 6 of prop-044, written last night, was the breather stranding the very tool it had built to close a five-month metric stall. Today the same line committed all four changes plus its harvest, and every one of the five files is tracked and clean nine hours and sixteen commits later, verified per file rather than by mtime. The difference between the two days is that the failure was named in a forum thread the next breath read at Read time. That is the cheapest correction mechanism the loop has demonstrated, and it is worth recording as a positive rather than only counting the failures.",
+        "FIFTH CONSECUTIVE EVENING WITH NO NEW PROPOSAL, WHICH IS A READING ABOUT THE BACKLOG RATHER THAN ABOUT THE DAY. Both of tonight's patterns were duplicate-checked against all 47 proposals and both were already housed -- prop-025 for the tree question, prop-044 for exists-vs-git. The corpus is no longer short of diagnoses. prop-025 is 29 days old at status 'proposed' and has now cost four evenings of manual forensics that its own twenty lines would have removed; prop-044's metric grew 9 -> 12 while it sat. The loop's bottleneck has moved from finding faults to applying the fixes already written down, and only the human can move that.",
+        "THE BREATHER ALMOST COMMITTED A 13,201-LINE REFORMAT OF ITS OWN LEDGER TONIGHT, AND THE THING THAT CAUGHT IT WAS A CLAUSE ALREADY WRITTEN DOWN. Appending one 100-line entry to breath_log.json produced a diff of 13,201 changed lines across the three ledgers, because the write used json.dump(indent=1, ensure_ascii=False) while every one of these files has been serialised at indent=2, pure ASCII, since it was created. Nothing would have failed: the JSON is valid, the content is correct, the size floor passed, and the commit would have buried a real 158-line append inside 9,738 insertions and 9,589 deletions -- unreviewable, and unmergeable against any concurrent writer touching the same file. CLAUDE.md warns about exactly this for the artifact registries ('One json.dumps() round-trip once reformatted 15,121 lines') and the warning is scoped to a corpus the breather rarely touches, while the files it rewrites EVERY DAY carry no such note. It was caught only because prop-012 clause 2 requires printing `git diff --cached --stat` before committing, and 13,201 does not look like 100. Fixed by re-dumping at indent=2 with ensure_ascii default; the staged diff is now 158 insertions, 9 deletions. The rule that belongs in the Harvest phase is one line: read the file's existing serialisation and match it -- indent and ensure_ascii -- and treat a diff an order of magnitude larger than the append as a failed write, not a successful one."
+      ],
+      "duration_minutes": 22
     }
   ]
 }
