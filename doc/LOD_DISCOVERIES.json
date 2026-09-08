@@ -576,6 +576,72 @@
       "topic": "sequence_pipeline_scorer",
       "insight": "Stage 6 (vr_testing) tested map name membership with an unanchored substring search over desktop_feedback.md; color passed on 'array' inside an Array_Basics entry from another sequence. Anchored to the three forms the bridge writer emits (## ts | map, - Map: `map`, [map:map]); measured divergence across all 22 spine sequences = exactly 1. The 216 walked.md files are NOT VR evidence -- they say 'ghost-drafted from the working map'.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-08-29T07:19:28.672225+00:00",
+      "topic": "gate chain integrity",
+      "insight": "A gate that only checks what a runner INVOKES is blind to what a gate NAMES as its own remedy: check_map_tokens printed 'run tools/normalize_map_fillers.py --apply' for a file in no commit, while gate H read 46 tools / 0 unreachable. One regex level deeper found it. Separately: on NTFS core.ignorecase hides a case-only rename, so a tracked GravityWell.gd and a scene asking for gravitywell.gd read as clean forever on Windows and break on the Quest export.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-08-29T13:22:04.041729+00:00",
+      "topic": "placement",
+      "insight": "map_info.dimensions lies (269/2789 depths, 159 widths); room_from_map now sizes from the structure grid via grid_dims_from_map; 41 placed maps carry mismatched grids, 35 artifacts on phantom rows, repair pending",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-01T07:24:23.725936+00:00",
+      "topic": "map dimensions",
+      "insight": "The engine sizes a map by map_info.dimensions (JsonMapLoader.get_dimensions, verbatim); the Python tools size it by len(structure) (place_artifacts.grid_dims_from_map). Both overlay layers place with for x in range(min(dimensions.x, row.size())), so a cell outside the DECLARED width is never built (UNREACHED) while a cell inside the declaration but past the structure IS built and floats over void (UNFLOORED). Same authored cell, two fates, decided by a number in map_info.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-03T07:23:12.093088+00:00",
+      "topic": "em_plan staleness",
+      "insight": "A derived file's date bounds how stale it CAN be, not how stale it IS. em_plan.json was stamped 21 August but 149 of 152 halls still agreed with their maps cell-for-cell; only the 3 maps edited the day before diverged. Compare a cache to its SOURCE, never to its own timestamp. Re-derive with em_map_halls.py --apply then em_bake.py.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-03T07:23:12.232449+00:00",
+      "topic": "em_bake",
+      "insight": "The bake MERGES into em_bake.json rather than replacing it, so a segment count matching the plan's row count can still be the wrong 150. On 2026-09-03: primitives|primitives melencolia in the plan with no segment, array_tutorial|trans introduction a fossil from a chapter dissolved 2026-08-24. Compare the bake's KEYS to the plan's keys, never the counts.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-03T16:59:07.473318+00:00",
+      "topic": "pipeline steering metric",
+      "insight": "global_avg is ONE-WAY: 21 of 22 spine sequences wait on stage 6 (vr_testing, human-gated) so no headless work can raise it, but any commit declaring a map without blurb/intent lowers it in one step -- 6.091 to 5.909 on 2026-09-03 from the boolean fold. A final.md alone does not count: compose_docs.py defines it as DRAWING on blurb/intent and reads the three new halls at 0.00 source ratio.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-04T07:11:23.726813+00:00",
+      "topic": "boolean_surfaces",
+      "insight": "The 2026-09-03 fold moved five halls into three and left blurb/intent behind; verify_sequence found 7 errors in three classes where the pipeline scorer reported one stage. Triage a fold regression with verify_sequence, not the scorer.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-05T07:21:55.249393+00:00",
+      "topic": "gate L / prose reachable",
+      "insight": "Every check in the project calls os.path.exists() where it means git ls-tree. On Windows that is wrong twice: it cannot see a file is uncommitted, and it cannot see a name is the wrong case. Both bit in one hour -- 7 essays untracked for 2 days with 4 instruments reporting clean, and 5 facade rooms declared in a case the disk lacks.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-06T07:52:38.025508+00:00",
+      "topic": "gitignore",
+      "insight": "An unanchored directory pattern cannot be undone by a later negation: git will not descend into an excluded DIRECTORY, so !*.gd and !*.tscn could not rescue three artifact folders swallowed by data_*/ in the Mono block. A negation CAN undo a later file pattern, but only if it comes after it -- .gitignore has !*.tres at 320 and *.tres at 328, and 328 wins. Both faults were invisible to every gate because gates A-K ask os.path.exists().",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-07T07:16:59.532594+00:00",
+      "topic": "vr feedback bridge",
+      "insight": "stage 6 reads 0% because feedback_writer.gd targets res:// which is read-only in a headset export - a comment typed in VR falls back to user:// on the Quest and nothing read it back until tools/pull_vr_feedback.py",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-08T07:20:04.979472+00:00",
+      "topic": "gate-tools-text-channel",
+      "insight": "A gate tool may not SPELL a tools/*.py path: gate H level 2 greps every gate tool's source for that pattern and treats each hit as a remedy the repo must contain, so gate N's five fictional selftest fixtures and five example orphans took H from PASS to FAIL. Fixtures belong under a non-matching root; say counts, not filenames. Runtime output is safe - H reads source, not stdout.",
+      "lod": 3
     }
   ]
 }

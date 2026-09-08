@@ -1,0 +1,103 @@
+{
+  "timestamp": "2026-09-08T09:08:16.894214",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "global_avg": 6.083,
+    "denominator": 24,
+    "sequences_scored": 24,
+    "complete": 1,
+    "heads": {
+      "stage_6_vr_testing": 23,
+      "stage_8_complete": 1
+    }
+  },
+  "heat_map_top_5": [
+    {
+      "temp": 80,
+      "item": "museum",
+      "reason": "active (6 recent commits)"
+    },
+    {
+      "temp": 70,
+      "item": "pattern",
+      "reason": "active (2 recent commits)"
+    },
+    {
+      "temp": 60,
+      "item": "gate L / prose reachable",
+      "reason": "deep discovery: Every check in the project calls os.path"
+    },
+    {
+      "temp": 60,
+      "item": "gitignore",
+      "reason": "deep discovery: An unanchored directory pattern cannot b"
+    },
+    {
+      "temp": 60,
+      "item": "vr feedback bridge",
+      "reason": "deep discovery: stage 6 reads 0% because feedback_writer"
+    }
+  ],
+  "release_gates": {
+    "A": {
+      "name": "Sequence Contract",
+      "pass": true
+    },
+    "B": {
+      "name": "Artifact Registry Integrity",
+      "pass": true
+    },
+    "C": {
+      "name": "Map Validation",
+      "pass": true
+    },
+    "D": {
+      "name": "Lab Progression Continuity",
+      "pass": true
+    },
+    "E": {
+      "name": "Museum Template Integrity",
+      "pass": true
+    },
+    "F": {
+      "name": "Museum Walkthrough (autopilot)",
+      "pass": false
+    },
+    "G": {
+      "name": "Map Token Resolution",
+      "pass": true
+    },
+    "H": {
+      "name": "Gate Chain Integrity",
+      "pass": true
+    },
+    "I": {
+      "name": "Edge Anchors",
+      "pass": true
+    },
+    "J": {
+      "name": "Artifact Citations",
+      "pass": true
+    },
+    "K": {
+      "name": "Wants Closed Honestly",
+      "pass": false
+    },
+    "L": {
+      "name": "Prose Reachable From A Clone",
+      "pass": false
+    },
+    "M": {
+      "name": "Artifacts Reachable From A Clone",
+      "pass": false
+    }
+  },
+  "working_tree": {
+    "dirty_paths": 1155,
+    "untracked_tools_py": 11,
+    "tools_py_on_disk": 671
+  },
+  "notes": [
+    "gate L's 107 stranded prose files are a LIVE WRITER mid-run: 105 of 107 written today, 8 in the minute before the reading. Not a defect of HEAD."
+  ]
+}

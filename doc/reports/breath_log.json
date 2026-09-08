@@ -6473,6 +6473,107 @@
         "doc/reports/skill_evolution_proposals.json"
       ],
       "duration_minutes": 26
+    },
+    {
+      "breath_id": "2026-09-08T09:06",
+      "mode": "full",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "denominator": 24,
+      "commits": [
+        "248c12309",
+        "025f73af8",
+        "3aa301d87",
+        "e0b448d8b"
+      ],
+      "items_attempted": [
+        "land-the-three-files-stranded-by-the-09-07-morning-breath-forum-260907-tywfw",
+        "build-the-absolute-tools-census-prop-044-clause-3-as-gate-N",
+        "re-measure-CLAUDE.md-scale-line-every-number-stale",
+        "diagnose-gate-L-142-stranded-essays-live-writer-not-a-fault",
+        "repair-the-gate-H-regression-gate-N-caused"
+      ],
+      "items_succeeded": [
+        "land-the-three-files-stranded-by-the-09-07-morning-breath-forum-260907-tywfw",
+        "build-the-absolute-tools-census-prop-044-clause-3-as-gate-N",
+        "re-measure-CLAUDE.md-scale-line-every-number-stale",
+        "diagnose-gate-L-142-stranded-essays-live-writer-not-a-fault",
+        "repair-the-gate-H-regression-gate-N-caused"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "items_cooled": [
+        "gate-M-33-tres (ruling 260906-dds7a, 0 replies, 2 days)",
+        "gate-K-4-echo (blocked on human question 260831-z5s2i)",
+        "gate-F-contended_builder (Godot lock / museum autopilot)"
+      ],
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "gates_before": {
+        "pass": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "G",
+          "H",
+          "I",
+          "J"
+        ],
+        "fail": [
+          "F",
+          "K",
+          "L",
+          "M"
+        ]
+      },
+      "gates_after": {
+        "pass": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "G",
+          "H",
+          "I",
+          "J"
+        ],
+        "fail": [
+          "F",
+          "K",
+          "L",
+          "M",
+          "N"
+        ]
+      },
+      "files_changed": [
+        "tools/pull_vr_feedback.py",
+        "commons/artifacts/comment_box/comment_box.gd",
+        "tools/sequence_pipeline_scorer.py",
+        "tools/check_tools_reachable.py",
+        "tools/run_release_gates.py",
+        "CLAUDE.md",
+        "doc/reports/breath_baseline_2026-09-08_09-06.json"
+      ],
+      "discoveries": [
+        "THE SIXTH DAY OF exists-vs-git ENDED WITH THE CLASS MEASURED RATHER THAN FOUND. Gate N is an absolute census of tools/ instead of a walk, and it reads 762 code files on disk, 749 in the repository, 5 stranded, oldest 313h. Gate H, the gate built for exactly this class, read 53 referenced / 0 unreachable through every one of those thirteen days. The reason is structural and worth stating once: a reachability walk cannot see an orphan, because the set of files that would name a tool is empty exactly when the tool is absent from the repo. prop-044 clause 1's proposed widening (INVOKED -> NAMED) does not fix it; the 09-07 evening breath measured that and it is why clause 3 exists. Walk and census are different instruments and the class needs both.",
+        "A GATE CONVICTED ANOTHER GATE OVER PROSE, AND NEITHER WAS WRONG. Landing gate N turned gate H from PASS to FAIL. H's level 2 greps every gate tool's SOURCE for a tools/*.py pattern and treats each hit as a remedy the repository must contain; N's first draft spelled ten such paths in prose - five fictional selftest fixtures and five real stranded tools quoted as examples - and H reported all ten, five NOT ON DISK and five NOT IN THE REPOSITORY. There is a text channel between gate tools that neither models: what one gate WRITES ABOUT paths becomes findings in another. H's own docstring concedes the regex cannot tell a remedy from a comment and argues the over-report is harmless because any mentioned tool clears the 'exists and tracked' bar - true for every gate written so far, false for the first gate whose SUBJECT is tool paths. Fixed on N (fixtures under fixture/, counts not filenames in the docstring). Found only because the Test phase re-ran a gate this change was not supposed to touch.",
+        "GATE L WAS RED ALL MORNING OVER A WRITER STILL TYPING, AND THE VERDICT WAS CORRECT AND USELESS AT THE SAME TIME. 107 files, 36,186 words at 09:06; 142 files, 48,067 words twenty minutes later; 51 final.md written in the five minutes before 09:40, newest 45 seconds old. Acting on that verdict would have meant committing 142 files out of another session's tree. The discriminator was not in the gate - it was the dirty count of the working tree, 1141 at 09:06 and 1155 six minutes later. Gate N takes the opposite stance deliberately (untracked-and-touched-inside-24h is counted, not convicted, gate M's vendored rule), but I did not put that hold on gate L: a gate that goes quiet during a long generation run also misses the real thing on the morning after, and that is the owner's call, posted as 260908-mz613.",
+        "THE STALE-NUMBERS LINE WAS ITSELF STALE, WHICH IS THE SAME SHAPE AS THE GATE THAT COULD NOT SEE ITS OWN ORPHAN. CLAUDE.md's scale line warned that the figures it replaced were a quarter of the truth, and every number in the replacement had drifted: 83->94 sequence files, 2049->2803 maps, 2671->3427 registry entries, 108->232 registry files (2.1x), 22->24 spine sequences. A warning written about the LAST generation of numbers reads as solved, so it is rewritten as an instruction - re-measure before quoting - with both drifts named. The spine moved twice on 09-07 alone and three separate lines in CLAUDE.md still said 22.",
+        "THE PIPELINE MOVED 0.000 FOR THE SIXTH CONSECUTIVE BREATH AND THE DENOMINATOR MOVED INSTEAD. 6.083 over 24 sequences, 23 of them parked at stage 6. Yesterday's -0.004 was array_tutorial entering; today's 0.000 spans tiling entering too, so the mean is holding while the corpus grows, which is the only thing global_avg can say right now. Stage 6 needs a comment pulled off a headset, and the tool that does it landed today - untracked since yesterday morning, which is why it could not."
+      ],
+      "duration_minutes": 42
     }
   ]
 }
