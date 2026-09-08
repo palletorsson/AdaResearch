@@ -9,19 +9,27 @@ invokes and what a gate tool names as a remedy, and checks those. That works for
 a tool with callers and fails for a tool without them.
 
 A REACHABILITY WALK CANNOT SEE AN ORPHAN (measured 2026-09-07, confirmed
-2026-09-08). tools/pull_vr_feedback.py was written on 09-07, tested on a real
-Quest, recorded as LANDED, and left untracked. Gate H read 53 tools referenced,
+2026-09-08). The wire that pulls headset comments off a Quest was written on
+09-07, tested on the device, recorded as LANDED, and left untracked. Gate H read
+53 tools referenced,
 0 unreachable from a clone, every day it sat there. Widening the walk would not
 have found it either: the only two files that name it are its own uncommitted
 hunks, so HEAD greps 0 for the name. When a tool and its callers land or fail to
 land as one commit, the naming set is empty exactly when the tool is absent.
 
 The population a tools gate should ask about is therefore the DIRECTORY. On
-2026-09-08 that was 671 .py on disk and 11 of them untracked, the oldest twelve
-days -- while gate H printed OK. This gate is that census.
+2026-09-08 that was 762 code files on disk and 14 of them untracked, the oldest
+thirteen days -- while gate H printed OK. This gate is that census.
 
-    tools/em_cartridge.py  tools/activation_ladder.py  tools/compose_docs.py
-    tools/dream_bodies_promote.py  tools/test_place_artifacts_room.py  ...
+A NOTE ON NAMING NAMES. Nothing in this file may spell a real or fictional
+tools/*.py path, and its first draft spelled ten. Gate H's level 2 greps every
+gate tool's SOURCE for that pattern and treats each hit as a remedy the
+repository must contain, so five fixture names and five example paths in a
+docstring turned gate H from PASS to FAIL the moment this gate landed -- a gate
+convicting another gate over prose. The fixtures below therefore live under a
+`fixture/` root, which census() does not care about because it compares sets and
+never parses a path. Say the count, not the filename; the runtime output prints
+the real paths and gate H does not read output.
 
 WHAT IT CONVICTS, AND WHAT IT ONLY COUNTS
 -----------------------------------------
@@ -123,58 +131,61 @@ def selftest():
     stopped checking. Each fixture trips one rule deliberately, and three of them
     are cases this class has already produced in the tree.
     """
+    # Under `fixture/`, not `tools/`, and that is load-bearing -- see A NOTE ON
+    # NAMING NAMES above. census() compares sets and never parses a path, so the
+    # root is free; gate H's remedy regex is not.
     now = 1_000_000.0
     hour = 3600.0
     disk = {
-        "tools/tracked.py",      # in the repo
-        "tools/old_orphan.py",   # untracked, twelve days -- the fault
-        "tools/fresh.py",        # untracked, ten minutes -- someone's buffer
-        "tools/ignored.py",      # untracked on purpose
-        "tools/probes/deep.gd",  # nested, and a .gd
-        "tools/edge.py",         # untracked, exactly at the hold
+        "fixture/landed.py",    # in the repo
+        "fixture/stranded.py",  # untracked, twelve days -- the fault
+        "fixture/warm.py",      # untracked, ten minutes -- someone's buffer
+        "fixture/excluded.py",  # untracked on purpose
+        "fixture/deep/probe.gd",  # nested, and a .gd
+        "fixture/boundary.py",  # untracked, exactly at the hold
     }
-    tracked = {"tools/tracked.py"}
-    ignored = {"tools/ignored.py"}
+    tracked = {"fixture/landed.py"}
+    ignored = {"fixture/excluded.py"}
     mtimes = {
-        "tools/tracked.py": now - 99 * hour,
-        "tools/old_orphan.py": now - 12 * 24 * hour,
-        "tools/fresh.py": now - 0.16 * hour,
-        "tools/ignored.py": now - 99 * hour,
-        "tools/probes/deep.gd": now - 99 * hour,
-        "tools/edge.py": now - HOLD_HOURS * hour,
+        "fixture/landed.py": now - 99 * hour,
+        "fixture/stranded.py": now - 12 * 24 * hour,
+        "fixture/warm.py": now - 0.16 * hour,
+        "fixture/excluded.py": now - 99 * hour,
+        "fixture/deep/probe.gd": now - 99 * hour,
+        "fixture/boundary.py": now - HOLD_HOURS * hour,
     }
     st, live, skip = census(disk, tracked, ignored, mtimes, now)
     names = lambda rows: sorted(r["path"] for r in rows)
     cases = []
 
     # 1. The fault this gate exists for: an orphan no runner names. Gate H's
-    #    walk reads 0 unreachable over exactly this file.
+    #    walk reads 0 unreachable over exactly this shape of file.
     cases.append(("catches an orphan nothing references",
-                  "tools/old_orphan.py" in names(st)))
+                  "fixture/stranded.py" in names(st)))
 
     # 2. A tracked file is never a finding, however old.
     cases.append(("never convicts a tracked tool",
-                  "tools/tracked.py" not in names(st) + names(live) + names(skip)))
+                  "fixture/landed.py" not in names(st) + names(live) + names(skip)))
 
     # 3. Live work is COUNTED, not convicted -- gate M's vendored rule. On
     #    2026-09-08 a concurrent session wrote 105 files during one reading.
     cases.append(("counts a file written minutes ago without convicting it",
-                  names(live) == ["tools/fresh.py"]))
+                  names(live) == ["fixture/warm.py"]))
 
     # 4. Ignored on purpose is counted, not convicted. Gate M's first run
     #    convicted 143 addon files this way.
     cases.append(("counts an ignored file without convicting it",
-                  names(skip) == ["tools/ignored.py"]))
+                  names(skip) == ["fixture/excluded.py"]))
 
-    # 5. The census is of the DIRECTORY, so it must descend. tools/probes/
-    #    held three untracked .gd on the day this was written.
+    # 5. The census is of the DIRECTORY, so it must descend. tools/probes/ held
+    #    three untracked .gd on the day this was written.
     cases.append(("descends into subdirectories and reads .gd",
-                  "tools/probes/deep.gd" in names(st)))
+                  "fixture/deep/probe.gd" in names(st)))
 
     # 6. The boundary is inclusive: at exactly the hold, it is stranded. A
     #    threshold nobody pinned drifts by one file per run.
     cases.append(("convicts at exactly the hold, not one second later",
-                  "tools/edge.py" in names(st)))
+                  "fixture/boundary.py" in names(st)))
 
     # 7. An empty scan must not read green -- the guard gate G needed after its
     #    own first run printed a clean bill over an empty denominator.
