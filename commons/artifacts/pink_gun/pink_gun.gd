@@ -29,6 +29,11 @@ var _mat: StandardMaterial3D = null
 var _muzzles: Array[Node3D] = []
 var _muzzle_glow: Array[MeshInstance3D] = []
 var _pickable: Node = null
+## Every mesh THIS build made. Kept as a list rather than read back off
+## get_children(), because _rebuild starts by queue_free()ing the old body and a
+## queued node is still a child for the rest of the frame — fitting the collider
+## from get_children() would fit it to the previous gun merged with this one.
+var _body: Array[MeshInstance3D] = []
 
 
 func apply_grid_config(config: Dictionary) -> void:
@@ -73,6 +78,7 @@ func _rebuild() -> void:
 		c.queue_free()
 	_muzzles.clear()
 	_muzzle_glow.clear()
+	_body.clear()
 
 	_mat = StandardMaterial3D.new()
 	_mat.albedo_color = PINK
@@ -127,6 +133,59 @@ func _rebuild() -> void:
 	var tm := _mesh(tip, _mat, Vector3(0, 0.032, -0.02))
 	tm.rotation_degrees = Vector3(0, 0, 0)
 
+	_fit_collider()
+
+
+## THE GUN YOU SEE MUST BE THE GUN YOU CAN GRAB.
+##
+## 2026-09-08, Palle, with a screenshot of the crosshair dead centre on the gun
+## in its cabinet: "when clicking on the gun nothing happens".
+##
+## It was not the click. This node builds its own body and hides grab_stick's
+## cube (see _ready), but it inherited the STICK'S COLLIDER and never resized
+## it: a 2.4 x 20.4 x 2 cm bar whose long axis is our X — lying ACROSS the
+## barrel, not along it. weapon_cabinet then hangs the gun turned 90 degrees, so
+## that bar points at the visitor and presents a 2 cm square. Measured with
+## commons/testing/probe_grab_reach.gd: ONE of 121 sample points across the
+## cabinet's face answered the grab ray, 1%. Every ring and the whole barrel had
+## no collision on them at all.
+##
+## It matters because a pickable is grabbable exactly where its SHAPE is and
+## never where its mesh is: the desktop hand casts one ray on the grab mask and
+## takes the first body it hits (DesktopInteractionPointer._find_grabbable), and
+## an XR hand asks the same physics world. A body that outgrew its collider is
+## invisible to both.
+##
+## DERIVED, NOT TYPED, because `form` changes the extent — stub reaches z -0.25,
+## long reaches -0.47, cluster is wider and shorter — so one transcribed box
+## would be wrong for two of the three bodies this artifact ships. The grab
+## points are untouched: they are their own nodes with their own transforms, so
+## the VR grip arithmetic probe_pink_gun_grip.gd asserts is unaffected.
+func _fit_collider() -> void:
+	var p: Node = get_parent()
+	if p == null:
+		return
+	var cs: CollisionShape3D = p.get_node_or_null("CollisionShape3D") as CollisionShape3D
+	if cs == null:
+		return
+	var box := AABB()
+	var got := false
+	for mi in _body:
+		if not is_instance_valid(mi) or mi.mesh == null:
+			continue
+		var b: AABB = mi.transform * mi.mesh.get_aabb()
+		box = b if not got else box.merge(b)
+		got = true
+	if not got:
+		return
+	# our frame -> the pickable's frame (identity in the shipped scene, composed
+	# anyway so a repositioned child cannot silently offset the grab volume)
+	box = transform * box
+	var shape := BoxShape3D.new()
+	shape.size = box.size.maxf(0.03)   # never a zero-thickness slab
+	cs.shape = shape
+	cs.transform = Transform3D(Basis.IDENTITY, box.get_center())
+
 
 func _barrel(at: Vector3, length: float, radius: float, m: Material) -> void:
 	var c := CapsuleMesh.new()          # rounded at both ends — no hard edge anywhere
@@ -173,6 +232,7 @@ func _mesh(mesh: Mesh, m: Material, at: Vector3) -> MeshInstance3D:
 	mi.material_override = m
 	mi.position = at
 	add_child(mi)
+	_body.append(mi)
 	return mi
 
 
