@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://commons/artifacts/two_point_ruler/two_point_ruler.gd" id="1_ruler"]
+[ext_resource type="PackedScene" path="res://commons/artifacts/two_point_ruler/two_point_rule.tscn" id="2_rule"]
 
 [node name="TwoPointRuler" type="Node3D"]
 script = ExtResource("1_ruler")
+
+[node name="Rule" parent="." instance=ExtResource("2_rule")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
