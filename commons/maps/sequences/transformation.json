@@ -35,7 +35,9 @@
 	"Trans_AxisDecomposition: Translation deconstructed into X, Y, Z axes",
 	"Trans_Rotation: Rotation as non-commutative composition — order matters",
 	"Trans_RotationSpectacle: Processional corridors converging on layered rotational finale",
-    "Trans_Scale: Scaling uniformly and non-uniformly against reference geometry"
+	"Trans_Scale: Scaling uniformly and non-uniformly against reference geometry",
+    "Trans_Body: The three operations performed BY the visitor — a wall that opens where you stand, a lattice you cut a tunnel through, a field that shrinks as you come",
+    "Trans_Pit: The same three turned back on the visitor as hazard — pushing stones over pits, revolving walls, a centre that grows and shoves you off the edge"
    ],
    "maps": [
 	"Trans_Pre",
@@ -45,6 +47,7 @@
 	"Trans_Rotation",
 	"Trans_RotationSpectacle",
 	"Trans_Scale",
+	"Trans_Body",
  
     "Trans_Pit"
    ],
@@ -162,6 +165,19 @@
 	 "size_budget": "mixed",
 	 "rationale": "Scale as relational change: interactive scaling against reference geometry. Callbacks to prism_block and cube_scene from primitives.",
 	 "grammar": "zelda"
+	},
+	{
+	 "map": "Trans_Body",
+	 "position": "synthesis",
+	 "artifacts": [
+	  "approach_wall",
+	  "carve_grid",
+	  "approach_scale",
+	  "dark_sphere"
+	 ],
+	 "size_budget": "large_only",
+	 "rationale": "The chapter turned on the visitor. Everywhere before this a cube is translated, turned or scaled while you watch: the artifact is the operator and you are the audience. Here the operator is you and the operand is the room, and the three thresholds are the three operations — a wall that makes way where your body is, a lattice that loses what you touch, a field whose blocks shrink as you approach. Each throat is cut to the width of the thing standing in it, so there is no way round any of them. It is the 2026-09-05 ruling (transformation creates empty space, the holes are the pathway) taken one step past where a map can follow, because the hole is not authored into the structure layer — you make it by arriving.",
+	 "grammar": "linear"
 	}
    ]
   }
