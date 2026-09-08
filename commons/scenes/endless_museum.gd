@@ -6550,6 +6550,33 @@ func _page_close() -> void:
 	_page_viz = null
 
 
+## HOW TALL IS A PLATFORM CELL — `p` is 1 cube, `p:N` is N (2026-08-23, Palle:
+## "the letter that ends the double meaning of 2"). 0 when the cell is not a
+## platform at all.
+##
+## ONE PARSE, because there were three and they disagreed. The geometry builder
+## read `pN` off substr(1) while the plinth support (:10924) and the wedge base
+## (:11343) both split on ":" — so `p:2` built a block ONE metre tall and then
+## seated bodies on it as if it were two, and `p2` did the reverse. Every one of
+## the four platform cells in the corpus is spelled `p:N` (three in
+## Primitives_Polythedra, one in Primitives_Melencolia), so the corpus was
+## getting the wrong half in the geometry. This matches
+## tools/map_pathfinder.py:parse_height, which is the canonical reader.
+func _platform_cubes(cell: String) -> int:
+	var s := cell.strip_edges()
+	if not s.begins_with("p"):
+		return 0
+	if s == "p":
+		return 1
+	if s.begins_with("p:"):
+		var tail := s.substr(2)
+		return maxi(1, int(tail)) if tail.is_valid_int() else 1
+	# tolerate the bare `pN` spelling the geometry used to read, so a map written
+	# against the old behaviour is not silently flattened
+	var d := s.substr(1)
+	return maxi(1, int(d)) if d.is_valid_int() else 1
+
+
 ## ONE WEDGE, ONE PLACER. The walkableprism (commons/scenes/mapobjects/
 ## walkableprism.tscn) holds a PrismMesh of 2 x 1 x 1 under a 90 deg yaw, so the
 ## SCENE measures 1 wide x 1 high x 2 long — the distinction cost a wedge half its
@@ -8954,10 +8981,7 @@ func _build_segment() -> void:
 			# stays conservative (the doll walker keeps to the floor); the
 			# player's body climbs it by wedge or jump.
 			if c.begins_with("p"):
-				var pn := 1
-				if c.length() > 1 and str(c.substr(1)).is_valid_int():
-					pn = maxi(1, int(str(c.substr(1))))
-				var pf := float(pn)
+				var pf := float(_platform_cubes(c))
 				_box(seg, Vector3(x + 0.5, pf / 2.0, z + 0.5), Vector3(1, pf, 1), Color(0.21, 0.21, 0.25), m_podium)
 				_add_col(solid, Vector3(x + 0.5, pf / 2.0, z + 0.5), Vector3(1, pf, 1))
 			if c == "1s":
