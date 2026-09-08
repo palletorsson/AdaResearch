@@ -48,6 +48,11 @@ const PBR := preload("res://commons/render/pbr_kit.gd")
 ## The circle they are scattered across before they let go.
 @export var drop_spread: float = 1.8
 @export var ball_radius: float = 0.09
+## 2026-09-08, Palle: "they should also be just white". They used to be
+## Color.from_hsv(rng.randf(), 0.42, 0.92) — a different hue per ball, which
+## read as a party. White lets the coordinate above each one be the only thing
+## on it that carries information.
+@export var ball_color: Color = Color(1, 1, 1)
 ## Seconds before a ball is removed. 0 keeps them forever, which on a Quest is a
 ## promise the frame budget cannot keep.
 @export var ball_life: float = 26.0
@@ -116,6 +121,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		rearm = _as_bool(config_data["rearm"])
 	if config_data.has("color"):
 		arrow_color = _as_color(config_data["color"], arrow_color)
+	if config_data.has("ball_color"):
+		ball_color = _as_color(config_data["ball_color"], ball_color)
 	if config_data.has("labels"):
 		ball_labels = _as_bool(config_data["labels"])
 	# WORD-VALUED, so it is safe in both engines: the grid reads #key:<float> as
@@ -356,6 +363,11 @@ func _drop() -> void:
 	mesh.rings = 8
 	var shape := SphereShape3D.new()
 	shape.radius = ball_radius
+	# ONE material for all of them, like the mesh and the shape above. It was per
+	# ball only because each ball had its own hue; now that they are one colour,
+	# a material each would be N StandardMaterial3Ds and N pipeline states for a
+	# single appearance — and this runs on a Quest.
+	var ball_mat := PBR.hard_plastic(ball_color, 0.60, 0.05)
 
 	for i in range(maxi(0, ball_count)):
 		var body := RigidBody3D.new()
@@ -365,8 +377,7 @@ func _drop() -> void:
 
 		var mi := MeshInstance3D.new()
 		mi.mesh = mesh
-		var m := PBR.hard_plastic(Color.from_hsv(rng.randf(), 0.42, 0.92), 0.60, 0.05)
-		mi.material_override = m
+		mi.material_override = ball_mat
 		body.add_child(mi)
 
 		var col := CollisionShape3D.new()
