@@ -23,8 +23,33 @@ const DESKTOP_MENU_PIXELS_PER_UNIT := 1800.0
 const MOBILE_MENU_PIXELS_PER_UNIT := 1200.0
 var map_browser_instance: Node3D = null
 
+## THE WAY INTO THE STAGED PATH WITHOUT A HAND (2026-09-07).
+##
+## Palle: "the error is in the desktop when I die or respawn" — after a run that
+## showed ZERO errors, because that run booted endless_museum.tscn directly and
+## took the `no XRToolsStaging` fallback. The desktop APP boots through this menu
+## into staging, which is a different branch and the one he is actually in.
+##
+## There was no way to reach it without clicking a 3D button, so a whole lane of
+## the shipped game could not be exercised headless at all. One flag fixes that:
+##
+##   godot --path . --xr-mode off commons/scenes/vr_staging.tscn \
+##       --em-autostart --em-die=12
+##
+## boots the app, enters the museum the way New Game does, dies, and runs the
+## death scene and the return THROUGH STAGING. Debug-only and inert without the
+## flag; it does not change a single frame of the shipped menu.
+const AUTOSTART_DELAY := 2.5
+
+
 func _ready():
 	_configure_menu_rendering()
+
+	for a in OS.get_cmdline_args():
+		if String(a) == "--em-autostart":
+			print("[menu] --em-autostart: entering the museum in %.1f s" % AUTOSTART_DELAY)
+			get_tree().create_timer(AUTOSTART_DELAY).timeout.connect(_on_new_game_clicked)
+			break
 
 	new_game_button.clicked.connect(_on_new_game_clicked)
 	load_game_button.clicked.connect(_on_load_game_clicked)
