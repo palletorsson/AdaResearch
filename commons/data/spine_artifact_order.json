@@ -1,19 +1,19 @@
 {
  "_meta": {
-  "generated": "2026-09-07 20:42:09",
+  "generated": "2026-09-08 04:23:01",
   "generator": "tools/build_spine_artifact_order.py",
   "rule": "first appearance walking the spine: sequence order -> map order -> the room's thread (ruled, else floor, else file)",
   "sequences": 24,
   "maps_read": 190,
   "maps_missing": 0,
-  "artifacts": 923,
+  "artifacts": 921,
   "ordered_by": {
-   "ruled": 102,
-   "floor": 786,
-   "file": 35
+   "ruled": 106,
+   "floor": 783,
+   "file": 32
   },
-  "primary": 62,
-  "unruled": 693
+  "primary": 66,
+  "unruled": 677
  },
  "order": [
   {
@@ -3065,7 +3065,7 @@
    "by": "floor"
   },
   {
-   "lookup": "draw_dot_time_domain",
+   "lookup": "lab_table",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Pendulum",
    "role": "unruled",
@@ -3079,7 +3079,28 @@
    "by": "floor"
   },
   {
-   "lookup": "lab_table",
+   "lookup": "draw_dot_time_domain",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Pendulum",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "WavePaintings",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Pendulum",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "foucault_pendulum",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Pendulum",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "PendulumWave",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Pendulum",
    "role": "unruled",
@@ -3100,23 +3121,30 @@
    "by": "floor"
   },
   {
-   "lookup": "foucault_pendulum",
+   "lookup": "sine_space",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum",
+   "map": "WaveFunctions_Sine_Space",
    "role": "unruled",
    "by": "floor"
   },
   {
-   "lookup": "WavePaintings",
+   "lookup": "sine_space_explanation",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum",
+   "map": "WaveFunctions_Sine_Space",
    "role": "unruled",
    "by": "floor"
   },
   {
-   "lookup": "PendulumWave",
+   "lookup": "sine_wall_corridor",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Pendulum",
+   "map": "WaveFunctions_Sine_Space",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "sine_wall_explanation",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Sine_Space",
    "role": "unruled",
    "by": "floor"
   },
@@ -3142,32 +3170,11 @@
    "by": "file"
   },
   {
-   "lookup": "sine_space_explanation",
+   "lookup": "coupled_oscillator_lattice",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_Sine_Space",
+   "map": "WaveFunctions_3D_Wave_Propagation",
    "role": "unruled",
    "by": "floor"
-  },
-  {
-   "lookup": "sine_wall_corridor",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Sine_Space",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "sine_wall_explanation",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Sine_Space",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "sine_space",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Sine_Space",
-   "role": "unruled",
-   "by": "file"
   },
   {
    "lookup": "kusama_sine",
@@ -3184,122 +3191,101 @@
    "by": "file"
   },
   {
-   "lookup": "coupled_oscillator_lattice",
+   "lookup": "RackSineBasic",
    "sequence": "wavefunctions",
-   "map": "WaveFunctions_3D_Wave_Propagation",
-   "role": "unruled",
-   "by": "file"
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "timbre_sculptor",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "chord_tension_spring",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "harmonic_distance_table",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "AudioContr",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "RackSineBasic",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
+   "role": "secondary",
    "by": "floor"
   },
   {
    "lookup": "Rack303Acid",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
+   "role": "secondary",
    "by": "floor"
   },
   {
    "lookup": "DualBallFMController",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
+   "role": "secondary",
    "by": "floor"
   },
   {
    "lookup": "rack_room",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
+   "role": "decoration",
    "by": "floor"
   },
   {
    "lookup": "RackMoogBass",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
+   "role": "secondary",
    "by": "floor"
   },
   {
    "lookup": "RackDX7Piano",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "wave_interference_3d",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "chord_tension_spring",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "harmonic_distance_table",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "MarioSoundController",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "MelodyChaser3D",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "mario_test_sound_ui",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "timbre_sculptor",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
+   "role": "secondary",
    "by": "floor"
   },
   {
    "lookup": "audio_catalog_tablet",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
+   "role": "secondary",
    "by": "floor"
   },
   {
-   "lookup": "interactable_demo",
+   "lookup": "MarioSoundController",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Effect_Sound",
-   "role": "unruled",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "MelodyChaser3D",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
+   "lookup": "wave_interference_3d",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Effect_Sound",
+   "role": "secondary",
    "by": "floor"
   },
   {
@@ -3331,18 +3317,18 @@
    "by": "floor"
   },
   {
-   "lookup": "dual_display_test",
+   "lookup": "ruth_asawa_sculpture",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_John_Cage",
    "role": "unruled",
    "by": "floor"
   },
   {
-   "lookup": "ruth_asawa_sculpture",
+   "lookup": "dual_display_test",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_John_Cage",
    "role": "unruled",
-   "by": "file"
+   "by": "floor"
   },
   {
    "lookup": "resonating_metallophone",
