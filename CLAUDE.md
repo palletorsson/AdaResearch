@@ -72,10 +72,17 @@ Godot 4 VR/desktop project. Algorithms taught through maps and interactable arti
 - `utilities`: spawn, teleporter, ramps, transport cubes, labels
 - `interactables`: artifacts by lookup name
 
-**Scale (measured 2026-08-01):** 83 sequence files, 2049 maps, 2671 registry entries across
-108 registry files, 22 spine sequences (symmetry dissolved into color's census room, and array_tutorial folded into color as its index + rule rungs, both 2026-08-24). The older figures here (42/503/752) were roughly a
-quarter of the truth, so any "sweep the corpus" or "rename everywhere" estimate made from
-them was off by 4x.
+**Scale (measured 2026-09-08):** 94 sequence files, 2803 maps, 3427 registry entries across
+232 registry files, **24 spine sequences**. The spine moved twice on 2026-09-07: array_tutorial
+was revived (22 -> 23, bb566b92d) and colour was unbraided, pattern becoming a sequence of its own
+and then renamed tiling (23 -> 24, 0e15e9e14 + 5c8111c55). Symmetry stays dissolved into color's
+census room (2026-08-24).
+
+Re-measure before quoting. This line has been wrong twice in the same way: the figures it
+replaced (42/503/752) were a quarter of the truth, and the ones it replaced *this* time
+(83/2049/2671/108/22) were stamped 2026-08-01 and had drifted by up to 2.1x — registry files
+alone went 108 -> 232. A "sweep the corpus" or "rename everywhere" estimate made from a stale
+line here is off by whatever the drift is, and the drift is not small.
 
 ## CLI Tools
 
@@ -84,7 +91,7 @@ Run from repo root:
 ### Steering & Status
 | Tool | Command | Purpose |
 |------|---------|---------|
-| **Pipeline Scorer** | `python tools/sequence_pipeline_scorer.py` | Score all 22 spine sequences through 7 completion stages |
+| **Pipeline Scorer** | `python tools/sequence_pipeline_scorer.py` | Score all 24 spine sequences through 7 completion stages |
 | **Pipeline (single)** | `python tools/sequence_pipeline_scorer.py <seq_id>` | Score one sequence |
 | **Dashboard** | `powershell -ExecutionPolicy Bypass -File commons/tools/project_dashboard_cli.ps1 -Mode status` | Project status, recommendations |
 | **Heat Map** | `python tools/heat_map_generator.py` | Temperature-based priority scoring |
@@ -381,7 +388,7 @@ See `doc/MAP_BUILDING_GUIDE.md` for full details. Key points:
 
 **Map Studio:** `/map-studio` in the encyclopedia — 3-layer visual editor built from scratch.
 
-**Spine sequences are the priority** — 22 sequences forming the core curriculum (symmetry dissolved 2026-08-24: its wallpaper heroes live in color's closing census room, Symmetry_Seventeen).
+**Spine sequences are the priority** — 24 sequences forming the core curriculum (symmetry dissolved 2026-08-24: its wallpaper heroes live in color's closing census room, Symmetry_Seventeen; array_tutorial revived and tiling unbraided from colour, both 2026-09-07).
 
 ## Heat Map
 
