@@ -11,6 +11,19 @@ class_name CommentBox
 ## was said. The writer is FeedbackWriter (commons/bridge), one implementation
 ## shared with the desktop overlays' format.
 ##
+## ON THE DESKTOP. In a headset the sentence above is FALSE, and this file said
+## it for two days (measured 2026-09-07). res:// is inside the .pck in an export
+## and is read-only, so FeedbackWriter.save() is refused and falls back to
+## user://desktop_feedback/ — which on a Quest is /data/data/<pkg>/files/, private
+## to the device. vr_link.gd had already written this down on 2026-08-31: "every
+## other bridge in this project (em_control.json, mapsim_control.json,
+## desktop_feedback.md) is a FILE poll that cannot cross to a headset at all".
+## The box shipped into Point_One — the museum lobby — five days later anyway.
+## Until the box learns to send over vr_link, `python tools/pull_vr_feedback.py`
+## is the wire: it reads that private file over adb and merges it here, and it is
+## the only thing that lets a comment typed in VR reach the bridge or stage 6 of
+## the pipeline scorer.
+##
 ## Map token: comment_box:<rot>#label:Leave a comment#box:west_wall
 ## (the museum keeps only the FIRST #key). Config keys: label, box, prompt, out
 ## (a path override for probes - a test must never write into ada_run).

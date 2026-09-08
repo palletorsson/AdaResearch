@@ -280,6 +280,14 @@ def score_sequence(seq_id, maps, registry_scenes):
     }
 
     # Stage 6: VR Testing
+    #
+    # This has read 0% for 21 of 22 sequences for months and it is NOT only
+    # human-gated (2026-09-07). FEEDBACK_FILE is ada_run/desktop_feedback.md,
+    # which FeedbackWriter can only write from the DESKTOP: in a headset export
+    # res:// is read-only and the write falls back to user:// on the Quest.
+    # So the human can walk every map in VR, type a comment in the lobby, and
+    # this still reads 0. `python tools/pull_vr_feedback.py` is the wire that
+    # brings those comments back; run it before trusting a 0% here.
     s6_done = 0
     s6_total = 1  # binary: has any VR feedback or not
     if FEEDBACK_FILE.exists():
