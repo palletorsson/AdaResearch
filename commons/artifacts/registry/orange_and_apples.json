@@ -1,0 +1,96 @@
+{
+	"artifacts": {
+		"orange_and_apples": {
+			"lookup_name": "orange_and_apples",
+			"name": "Orange and Apples",
+			"class_name": "OrangeAndApples",
+			"scene": "res://commons/artifacts/orange_and_apples/orange_and_apples.tscn",
+			"category": "qfep",
+			"artifact_type": "qfep_instrument",
+			"complexity": "intermediate",
+			"sequence": "qfeplaboratory",
+			"description": "Heisenberg's own 1927 analogy, built so a visitor has to perform it. A low bench holds a tray of eighteen identical dark knobs under a cantilevered hood; three of them are apples and the rest are decoys, made from the SAME mesh with the SAME material instance, so which is which cannot be read off the surface. Beside the bench stands a rack of oranges, and an orange is a grabbable throwable in both lanes - RMB and LMB on the desktop crosshair, grip and trigger in the headset. A struck apple registers WHERE it was, as a lit pin standing on the tray floor, and in the same instant takes a kick in a direction nobody chose. Position is bought with momentum. THE TRADE IS THE OBJECT AND NOT A CAPTION ON IT: on the panel above, a single outlined rectangle has WIDTH = the spread on position and HEIGHT = the spread on momentum, and its AREA NEVER CHANGES - squeeze it narrow and it has to grow tall. Above that rectangle sits the same rectangle drawn four times at four widths, dim, as a printed scale, so a still photograph shows the law without anyone touching anything. Impact speed sets all of it from one number, which is the actual content of the 1927 argument rather than decoration on it: a fast orange is a short wavelength, so it resolves the apple to a hairline pin and a narrow rectangle AND shoves it harder; a gentle one barely tells you anything and barely moves it. There is no throw that buys the first without paying the second. The concealment is geometry, never shadow - an unlit box photographs as a black rectangle and hall lighting is not a constant across this museum - so the apples hide in a CROWD, under a roof that cuts the sight line to the back rows. Note the sizes: the orange is 10.4 cm and the apple is 9.0 cm, and the probe being bigger than the thing probed is the reason the disturbance cannot be made small.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"footprint": [
+				3,
+				1,
+				2
+			],
+			"map_sequences": [
+				"qfeplaboratory",
+				"postfoundationscrisis"
+			],
+			"tags": [
+				"measurement",
+				"observer_effect",
+				"uncertainty",
+				"heisenberg",
+				"throwable",
+				"instrument",
+				"epistemology",
+				"physics",
+				"qfep"
+			],
+			"dev_themes": [
+				"a look is done WITH something, and the something arrives",
+				"the record of a measurement outlives the state it recorded",
+				"a rectangle of constant area is the whole relation, and it survives a still"
+			],
+			"qfep_connection": "The laboratory's other observer-effect piece, two_point_ruler, makes the OPPOSITE claim and the pair are worth standing near each other: there the subject is honest throughout - it never changes, so nothing about the reading is wrong - and the displacement lands on a bystander you can only catch by looking away from your own instrument. Here the displacement lands on the thing measured, which is Heisenberg's case rather than Schroedinger's, and there is no innocent subject anywhere in the room. Together they say the two things QFEP wants said about measurement at once: that an instrument alters what it is not pointed at, and that it alters what it is.",
+			"interactions": [
+				"Look into the hood before throwing anything. Eighteen identical knobs, and the question the artifact asks is already fully posed: which three of these are apples? Nothing about the surface answers it.",
+				"Throw gently. The pin comes up fat, the rectangle stays broad and flat, and the apple barely shifts. You have learned roughly where something was and cost it almost nothing.",
+				"Throw hard. The pin is a hairline, the rectangle stands up narrow and tall, and the apple leaves fast in a direction you did not choose. Same gauge, opposite proportions, same area.",
+				"Come back to the pins after four or five throws. There is one per apple, standing where that apple was when you last measured it and describing nothing presently in the tray - each was made by the act that emptied its own spot. It is not a growing bed: a second reading on the same apple moves its pin, because a record that accumulated would fill the tray and you could no longer see into it.",
+				"Place it once with #mode:open. The roof is gone, the apples are visible, no throw is needed and the instrument has nothing to say. That is the control condition and it is worth walking."
+			],
+			"config": {
+				"mode": "hood | open | deep - how hidden the apples are. `open` removes the roof and cheeks entirely and is the artifact's own control condition. `deep` reaches 16 cm further forward and drops 6 cm, hiding more WITHOUT narrowing the aperture; lowering the roof instead was tried first and left a 9 cm slot, which a 10.4 cm orange cannot enter.",
+				"cols": "2-9, default 6 - columns in the bed of knobs.",
+				"rows": "1-4, default 3 - rows in the bed. cols x rows is the size of the crowd the three apples hide in, which is what 'hard to find' actually means here.",
+				"count": "1-8, default 4 - oranges on the rack. The rack is SIZED from this, so a bigger magazine is a longer shelf and never two oranges spawned inside each other."
+			},
+			"config_note": "Every key is either word-valued (mode) or already in GridInteractablesComponent.CONFIG_PARAM_NAMES (rows, cols, count), so none can be eaten by the tutorial's #key:number shorthand. The number of APPLES is deliberately not a config key: it is three because the source says three, and a numeric #apples:3 is not in that list, so it would be read as tutorial_id:rotation, leave the artifact at its default and make the map token look correct while doing nothing.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 3,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none",
+				"clearance_note": "The front clearance is 3 and it is not padding. A visitor has to stand back far enough to throw an orange on an arc into a 28 cm slot; at 1 cell they are leaning over the tray and can only drop. This is the one artifact in the room whose clearance is a fact about a trajectory rather than about a sightline."
+			},
+			"measurements": {
+				"aabb_size": [
+					2.072,
+					1.9,
+					0.545
+				],
+				"aabb_center": [
+					0.0,
+					0.95,
+					-0.018
+				],
+				"grid_cells": [
+					3,
+					1
+				],
+				"source": "computed_from_geometry at the shipped defaults, no Godot was run for this figure. Width: the assembly is centred on the origin by construction (_bench_x derives the offset rather than typing it), running from bench_x - SLAB.x/2 to rack_x + shelf/2, and at count 4 the shelf is 4 x 0.128 + 0.06 = 0.572, so bench_x = -0.336 and the span is -1.036 to 1.036. Height: SLAB_TOP 0.78 + PANEL.y 1.12 = 1.90, and the readout plate tops out at 1.82 inside it. Depth: the back panel's rear face at -0.29 to the caption screen's glass at +0.245, with the hood roof reaching +0.24 and the tray's front rim +0.255. `deep` mode pushes the roof to +0.40 and takes the depth to 0.69; `open` removes it and leaves 0.545 unchanged. A larger #count lengthens the shelf and widens the whole box by the same amount at BOTH ends, because the centring is derived - at count 8 the width is 2.584 and the origin is still the middle."
+			},
+			"footprint_measured": [
+				3,
+				1,
+				2
+			],
+			"note": "Built 2026-09-09. Physics contract, because it is the part a later editor will break by tidying: apples are RigidBody3D on collision_layer 1 with mask 1|4 - layer 1 so the orange's shipped pickable mask (196615) reaches them, and deliberately NOT layer 3, since an apple on the grab layer could be lifted out and read with the hand, which is the one thing this bench must not allow. Decoys are StaticBody3D on layer 1. Oranges are instances of addons/godot-xr-tools/objects/pickable.tscn with their collision layer and mask left exactly as shipped (layer 3, which is what DesktopInteractionPointer.GRAB_MASK 393220 and the VR hand both look for); a bare RigidBody3D was the cheaper build and was rejected because function_pickup.gd:294 rejects anything without a pick_up() method before it reaches the grab list, so a plain body can be carried on desktop and never lifted in the headset. Contact monitoring lives on the ORANGE, not on the eighteen knobs, and the impact speed used for the reading is the one recorded at the top of the physics frame - by the time body_entered is emitted the step has already resolved the bounce and linear_velocity is what the fruit is doing on its way back out. The throw is action_pressed to charge and action_released to release, connected at build time because DesktopInteractionPointer._fires refuses to call action() at all unless the signal already has a listener; a charge held past CHARGE_S + 0.45 s launches anyway, so a lost release event cannot strand the fruit in a visitor's hand. NO dna.axes block: this artifact has never been swept and the declaration gate has never been run against it, and a hand-typed axis that does not match the code is the fault this project most often catches in itself."
+		}
+	}
+}

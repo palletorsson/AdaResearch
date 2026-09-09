@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/eleven_dots/eleven_dots.gd" id="1_eleven_dots"]
+
+; Everything is built in _ready(): eleven small spheres solved along the rays
+; from a marked spot on the floor, so they project into a cross from there and
+; into a scatter from anywhere else. Nothing is drawn between them.
+;
+; The script goes on the ROOT. GridInteractablesComponent sets config_* metadata
+; and calls apply_grid_config there (deferred, so it lands after _ready and the
+; artifact rebuilds); logic on a child makes every map token silently
+; unreachable.
+
+[node name="ElevenDots" type="Node3D"]
+script = ExtResource("1_eleven_dots")

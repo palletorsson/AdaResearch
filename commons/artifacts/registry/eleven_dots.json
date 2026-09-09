@@ -1,0 +1,65 @@
+{
+	"artifacts": {
+		"eleven_dots": {
+			"lookup_name": "eleven_dots",
+			"name": "Eleven Dots",
+			"class_name": "ElevenDots",
+			"scene": "res://commons/artifacts/eleven_dots/eleven_dots.tscn",
+			"category": "primitives",
+			"artifact_type": "demonstration",
+			"complexity": "beginner",
+			"sequence": "primitives",
+			"map_sequences": [
+				"primitives"
+			],
+			"description": "Max Wertheimer's array, built in a room. Eleven small matte spheres stand in the air with nothing drawn between them, and from a marked spot on the floor 3.2 m away they read unmistakably as a cross. Wertheimer's subjects reported the cross first and had to be asked twice before they counted the dots — evidence, he argued, that the whole arrives before the parts, against Mach's accumulation of discrete sense-atoms and alongside Ehrenfels on melody. The dots are NOT coplanar: each is slid along the ray from the mark through its place in the figure, so the cross is exact from the mark and sheared from anywhere else, which is what makes walking in dissolve the figure rather than merely enlarge it. The default depth (0.55 m across a 2.4 m figure) is deliberately modest — a bit under half the 0.40 m dot pitch of lateral shear at 35 degrees off-axis, so the cross survives a still while visibly not being flat. Turn it up and the figure exists only at the mark. #figure switches the demonstration: cross (proximity and continuation), square (eleven dots on a twelve-slot perimeter, the twelfth left out, and the eye closes it — that is closure, a different law), none (the control, seeded, in the cross's own bounding box). The dots have no colliders by default, because a visitor has to be able to walk into the field and because a point is position without extension. The primitives sequence opens by claiming exactly that; this is the objection standing next to it.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"tags": [
+				"primitive",
+				"point",
+				"gestalt",
+				"perception",
+				"standpoint",
+				"wertheimer",
+				"anamorphosis"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 4,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0
+			},
+			"auto_ground": false,
+			"measurements": {
+				"aabb_size": [
+					1.74,
+					2.94,
+					3.82
+				],
+				"source": "procedural, defaults: cross of 11 at spread_m 2.4 (0.40 m pitch), depth_m 0.55, dot_radius_m 0.05, mark at stand_distance_m 3.2 toward +Z"
+			},
+			"relationships": {
+				"pairs_with": [
+					"walk_this_line_marking"
+				]
+			},
+			"dev_themes": [
+				"the figure has no substrate",
+				"a point is position without extension",
+				"what you see is a fact about where you stand"
+			],
+			"qfep_connection": "The primitives arc opens on the point as position without extension — a definition that puts everything real in the parts and nothing in the arrangement. Eleven Dots is the counter-case standing in the same corridor: the cross is not in any dot, not between any two dots, and not anywhere in the room. It is produced by a body at a particular place, and it leaves when the body does. Reading the figure is not passive reception of what is there; it is something the visitor DOES, and the same eleven objects support a different truth from two metres to the left.",
+			"note": "ADDED 2026-09-09. THE ORIGIN IS THE FLOOR at the centre of the dot field — place the token on the DOT cell; the standing mark eats floor at +Z, toward the approach, which is what clearance.front is for. Config keys, every numeric one drawn from CONFIG_PARAM_NAMES because GridInteractablesComponent.gd:1705 reads an unlisted #key:<number> as the tutorial's positional shorthand: #figure:cross|square|none · #count:11 · #size:2.4 (figure height, alias #width) · #depth:0.55 (0 = coplanar) · #radius:0.05 · #outer:3.2 (metres to the mark) · #mark:false · #solid:true · #color1:e6e4dc (six hex digits, NO leading # — the token is split on # before it is parsed, so #color1:#e6e4dc loses the value entirely). Booleans must take WORD values — #solid:0 is a lone numeric on an unlisted key and is eaten as a rotation. eye_height_m is intentionally NOT reachable from a token: #height: means 'how tall is the thing' everywhere else in this corpus. No dna.axes block: the figure knob is a real family but nothing has swept or bitten it yet, and #figure:none is the honest control that a sweep would need. REVIEWED 2026-09-09: auto_ground is false because the dots are SUPPOSED to hang — with the mark painted the AABB base is 0.006 and auto-ground is a no-op inside its own 0.01 tolerance, but under #mark:false the lowest geometry is the lowest dot at 0.395 and the grid would drop the whole field by that much, eating the 0.12 m floor clearance and pulling the solved standpoint down under a standing visitor. Verified min_y 0.006 (mark) / 0.395 (dots) against the defaults; aabb_size re-measured to [1.74, 2.94, 3.82]."
+		}
+	}
+}

@@ -1,0 +1,109 @@
+{
+	"registry_info": {
+		"name": "serial_principle",
+		"description": "A rack of identical units on one continuous deck, and a plate above them that reads the row and names what the arrangement claims.",
+		"note": "Per-token registry file so parallel builders never share one JSON. The plate is DERIVED, never declared: it reads the built geometry and has no access to the `order` key, so the four shipped orders are a test of the classifier rather than four captions the artifact wrote for itself. If a still ever disagrees with its token, the plate is right and the preset is the bug."
+	},
+	"artifacts": {
+		"serial_principle": {
+			"lookup_name": "serial_principle",
+			"name": "The Serial Principle",
+			"class_name": "SerialPrinciple",
+			"scene": "res://commons/artifacts/serial_principle/serial_principle.tscn",
+			"category": "color",
+			"artifact_type": "instrument",
+			"complexity": "intermediate",
+			"sequence": "color",
+			"map_sequences": [
+				"color",
+				"qfeplaboratory"
+			],
+			"description": "Five identical units stand on one continuous steel deck at table height, and a plate on two posts above them says what the row is currently asserting. Leave them equal and evenly spaced and it reads NO UNIT ABOVE ANOTHER. Slide one out of line, lift one, or meet the rack already carrying a preset, and the plate names the hierarchy instead: a hero, a rank, a focal point, two camps, a group and an outsider. The naming is the artifact — a rack of equal blocks is furniture, a rack that tells you what your composition asserts is an argument. After Richard Paul Lohse, who composed with equal units in non-hierarchical order and said the serial principle is a radical democratic principle. The units are identical in size, shape and material and there is no per-unit colour anywhere in the code, because a colour difference is the cheapest hierarchy there is: it needs no space, no height and no size. The only differences available are the ones a visitor can also make with their hands. The deck carries no slots and no numbers, because a numbered slot is already a hierarchy — position 1 exists before anything stands in it.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "medium",
+			"hazard": false,
+			"interactions": [
+				"pick up a unit and set it down somewhere else — the plate re-reads before you have let go",
+				"raise one and hold it above the row: the units freeze where they are released, so a lift is an arrangement and not a moment",
+				"try to put the row back to equal by hand, and find out that equality is the one claim here that has to be maintained",
+				"turn a unit on its side — the plate measures the AABB, so it reads as a shorter unit, which is what the room actually shows",
+				"walk up to it already saying something: #order:hero, #order:graded, #order:centred"
+			],
+			"parameters": {
+				"order": "serial",
+				"unit_count": 5,
+				"unit_size_m": 0.16,
+				"unit_aspect": 1.75,
+				"unit_color": "#d7d2c6",
+				"deck_width_m": 1.8,
+				"deck_depth_m": 0.56,
+				"deck_height_m": 0.92,
+				"tolerance": 0.08,
+				"prominence_gate": 0.15,
+				"clamp_reach": true,
+				"solid": true
+			},
+			"token_examples": [
+				"serial_principle",
+				"serial_principle#order:hero",
+				"serial_principle#order:graded",
+				"serial_principle#order:centred",
+				"serial_principle#order:centred#count:7#width:2.4",
+				"serial_principle#count:3#size:0.22#color1:gainsboro"
+			],
+			"token_note": "EVERY NUMERIC KEY HERE ALREADY APPEARS IN GridInteractablesComponent.CONFIG_PARAM_NAMES (:16), and that is load-bearing rather than tidy: `#key:12` on a name outside that list is read as the tutorial's positional shorthand, the artifact receives the boolean `true`, and the map silently gains a 12 degree rotation. count=unit_count (1..7), width=deck_width_m, depth=deck_depth_m, size=unit_size_m, height=deck_height_m, color1=unit_color. `order` is word-valued and safe under any name, because a non-numeric value never reaches the shorthand branch. `solid` IS NOT, and the first draft of this note got it wrong: `solid` is absent from CONFIG_PARAM_NAMES and \"0\" passes is_valid_float(), so `#solid:0` takes the shorthand branch at :1705, the artifact is handed the BOOLEAN true, and the map gains a silent 0 degree rotation — the one spelling that reads as \"off\" is the one that turns the collider ON. Write `#solid:false` (or `no`, or `off`): none of them parse as a float, so they arrive as a value and GridInteractablesComponent:1770 coerces them to a real bool against the artifact's own export. The `_flag()` helper stays for the lanes that skip that coercion and pass a raw string, where bool(\"false\") is TRUE in GDScript. Same trap on the same key in fetish_portal and do_not_cross_barrier — a sweep, not a fix for this file. THERE IS DELIBERATELY NO `#pitch:` OR `#spacing:` — neither name is registered, so both would be traps. Spacing is derived from width and count, which are. COLOUR: use a NAMED colour (`#color1:gainsboro`), not an HTML hex — `#` is the token separator, so `#color1:#d7d2c6` splits into a keyless fragment. _as_color also accepts a Color or an [r,g,b] array set directly on the property.",
+			"map_note": "The deck's capacity is computed, not assumed: a row has to stay legible at the widest size any order can produce (hero, 1.55x) with a real gap between neighbours, so the shipped 1.80 m deck holds FIVE 0.16 m units. `#count:7` on a default deck is clamped to 5 and pushes a warning naming the width to add. Wants a front approach and about a metre of standing room — a visitor has to be able to reach in and move a unit without crouching, or the argument is behind glass.",
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"footprint_source": "authored",
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none",
+				"reading_radius": 2
+			},
+			"tags": [
+				"lohse",
+				"serial",
+				"composition",
+				"hierarchy",
+				"equality",
+				"grab",
+				"rack",
+				"plate",
+				"concrete_art",
+				"interactive",
+				"reflexive"
+			],
+			"qfep_connection": "The corpus arguing with its own curatorial habit. Every artifact in every room of this museum is sorted into primary, secondary and decoration (commons/data/artifact_roles.json) — which is precisely the hierarchy Lohse spent forty years refusing, and which this object puts on a table at hand height where it can be picked up and, with some difficulty, put back down. The classifier is the claim: equality between units is not a state the objects are in, it is a claim the arrangement makes, and it is the only claim here that has to be maintained, because every other one can be made by accident. Note the artifact does NOT read artifact_roles.json at runtime — the connection is the visitor's to make, not the code's to assert.",
+			"measurements": {
+				"aabb_size": [
+					1.8,
+					1.888,
+					0.56
+				],
+				"aabb_center": [
+					0.0,
+					0.944,
+					0.0
+				],
+				"max_dimension_m": 1.888,
+				"source": "computed from the shipped defaults — plinth 0 to 0.885, deck to 0.92, units to 1.20, plate 1.428 to 1.888. Minimum Y is 0: the whole object stands ON the node origin, so it seats correctly in the maps that skip auto-grounding.",
+				"measured_at": "unmeasured in engine — run tools/sync_footprints.py after the first capture"
+			}
+		}
+	}
+}

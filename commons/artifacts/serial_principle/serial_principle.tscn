@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/serial_principle/serial_principle.gd" id="1_serial"]
+
+; Plinth, deck, sign, five identical units and the sentence on the plate are all
+; built in _ready(). Nothing is authored here on purpose: the units have to be
+; provably identical, and five nodes hand-placed in a scene file are five chances
+; for them not to be.
+;
+; The script goes on the ROOT. GridInteractablesComponent sets config_* metadata
+; and calls apply_grid_config THERE (deferred, after _ready), so logic on a child
+; makes every map token silently unreachable.
+
+[node name="SerialPrinciple" type="Node3D"]
+script = ExtResource("1_serial")
