@@ -71,6 +71,169 @@ def measurement_stamp() -> dict[str, Any]:
     }
 
 
+def _git_lines(*args: str) -> list[str]:
+    try:
+        proc = subprocess.run(
+            ["git", *args],
+            cwd=REPO,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=60,
+        )
+    except Exception:
+        return []
+    return proc.stdout.splitlines() if proc.returncode == 0 else []
+
+
+def _tree_index() -> tuple[set[str], dict[str, str]]:
+    """Every tracked path, and the porcelain code for every changed one.
+
+    One pair of git calls for the whole run. Paths are normalised to forward
+    slashes so a metric string lifted from a gate's output compares directly.
+    """
+    tracked = {ln.strip().strip('"').replace("\\", "/") for ln in _git_lines("ls-files")}
+    changed: dict[str, str] = {}
+    for ln in _git_lines("status", "--porcelain"):
+        if len(ln) < 4:
+            continue
+        code, rest = ln[:2], ln[3:].strip().strip('"')
+        # a rename reads "old -> new"; the new path is the one on disk
+        if " -> " in rest:
+            rest = rest.split(" -> ", 1)[1].strip().strip('"')
+        changed[rest.replace("\\", "/").rstrip("/")] = code
+    return tracked, changed
+
+
+# A failing gate names its rows in prose: "a/b.md, c/d.md" or "Room_Name,
+# Other_Room" or "some/tool.py (262h)". These strip the decoration back to a
+# subject the tree can be asked about.
+_SUBJECT_TRAILER = re.compile(r"\s*\((?:[^()]*)\)\s*$")
+_NOT_A_SUBJECT = {"none", "PASS", "FAIL", "unknown", ""}
+
+
+def _metric_subjects(metrics: dict[str, Any]) -> list[str]:
+    subjects: list[str] = []
+    for key, value in metrics.items():
+        if not isinstance(value, str) or value in _NOT_A_SUBJECT:
+            continue
+        # counters rendered as prose ("empty 118 · stub 32") name no file
+        if key in {"detector_selftest", "reason", "open_not_counted"}:
+            continue
+        for raw in value.split(","):
+            token = _SUBJECT_TRAILER.sub("", raw.strip()).strip()
+            if not token or token in _NOT_A_SUBJECT or " " in token:
+                continue
+            subjects.append(token)
+    return subjects
+
+
+def classify_subjects(subjects: list[str], tracked: set[str], changed: dict[str, str]) -> dict[str, Any]:
+    """prop-025 clause 2: what is the git state of the thing this row convicts?
+
+    Three states, and they demand different actions. tracked-and-clean is a
+    finding about the release. tracked-and-modified is a prediction about
+    somebody's unsaved work and un-fires if they revert. untracked is content
+    that has not landed yet. The gate output could not tell them apart, which
+    is what cost four evenings of manual forensics between 2026-08-10 and
+    2026-09-08.
+    """
+    counts = {"tracked_clean": 0, "tracked_modified": 0, "untracked": 0, "not_resolved": 0}
+    examples: dict[str, list[str]] = {k: [] for k in counts}
+
+    for subject in subjects:
+        path = subject
+        if "/" not in path:
+            # a bare room name is a directory of prose and map data
+            candidate = f"commons/maps/{path}"
+            if (REPO / candidate).is_dir():
+                path = candidate
+            else:
+                counts["not_resolved"] += 1
+                if len(examples["not_resolved"]) < 4:
+                    examples["not_resolved"].append(subject)
+                continue
+
+        if (REPO / path).is_dir():
+            prefix = path.rstrip("/") + "/"
+            under = [p for p in changed if p.startswith(prefix)]
+            dirty = [p for p in under if not changed[p].startswith("??")]
+            if dirty:
+                state = "tracked_modified"
+            elif under:
+                state = "untracked"
+            elif any(p.startswith(prefix) for p in tracked):
+                state = "tracked_clean"
+            else:
+                state = "untracked"
+        else:
+            code = changed.get(path)
+            if path in tracked:
+                state = "tracked_modified" if code else "tracked_clean"
+            elif code and code.startswith("??"):
+                state = "untracked"
+            elif code:
+                state = "tracked_modified"
+            else:
+                state = "untracked" if (REPO / path).exists() else "not_resolved"
+
+        counts[state] += 1
+        if len(examples[state]) < 4:
+            examples[state].append(subject)
+
+    total = sum(counts.values())
+    if total == 0:
+        return {"subjects": 0}
+    out: dict[str, Any] = {"subjects": total}
+    for state, n in counts.items():
+        if n:
+            out[state] = n
+            out[state + "_eg"] = ", ".join(examples[state])
+    return out
+
+
+def annotate_tree_state(report: dict[str, Any]) -> None:
+    """Add a tree_state line to every failing gate. Never changes a verdict.
+
+    A gate that names no rows gets `named_subjects: 0` rather than silence --
+    the honest reading is that the gate cannot be attributed to a tree, not
+    that its subjects are clean.
+    """
+    failing = [
+        g for g in report.get("gates", [])
+        if bool(g.get("enabled", True)) and not g.get("pass")
+    ]
+    stamp = report.get("measurement")
+    if isinstance(stamp, dict):
+        # The annotator's own negative half. A classifier that answered
+        # "modified" to every subject would read plausibly on this tree and
+        # be worthless; 12 synthetic cases, no corpus, well under a second.
+        rc_self, _ = run_cmd([sys.executable, "tools/test_gate_tree_state.py"])
+        stamp["tree_state_detector"] = "PASS" if rc_self == 0 else f"FAIL(rc={rc_self})"
+    if not failing:
+        return
+    tracked, changed = _tree_index()
+    for gate in failing:
+        metrics = gate.get("metrics", {})
+        if not isinstance(metrics, dict):
+            continue
+        verdict = classify_subjects(_metric_subjects(metrics), tracked, changed)
+        if verdict.get("subjects"):
+            parts = []
+            for state in ("tracked_clean", "tracked_modified", "untracked", "not_resolved"):
+                if verdict.get(state):
+                    parts.append(f"{state.replace('_', '-')} {verdict[state]}")
+            summary = " | ".join(parts)
+            for state in ("tracked_modified", "untracked"):
+                eg = verdict.get(state + "_eg")
+                if eg:
+                    summary += f"  [{state.replace('_', '-')}: {eg}]"
+            metrics["tree_state"] = summary
+        else:
+            metrics["tree_state"] = "named_subjects 0 - this row cannot be attributed to a tree"
+
+
 def write_json_report(path: Path, report: dict[str, Any]) -> None:
     """Write, then read back and parse. prop-042.
 
@@ -931,6 +1094,11 @@ def main() -> int:
         report["overall_pass"] = False
         report["overall_status"] = "FAIL"
 
+    # prop-025 clause 2. Additive: reads git, writes one metric, touches no
+    # pass/fail. Runs after the policy verdicts so a strict-policy failure
+    # does not get a tree it has no rows in.
+    annotate_tree_state(report)
+
     report["gate_policy"] = {
         "toggle_source": gate_toggle_source,
         "ignore_gate_toggles": bool(args.ignore_gate_toggles),
@@ -952,6 +1120,8 @@ def main() -> int:
                 stamp.get("tree_untracked", "?"),
             )
         )
+        if stamp.get("tree_state_detector"):
+            print(f"Tree-state detector: {stamp['tree_state_detector']}")
     print(f"Overall: {report.get('overall_status', 'PASS' if report['overall_pass'] else 'FAIL')}")
     print(
         "Enabled gates: {}/{} passing ({} total)".format(
