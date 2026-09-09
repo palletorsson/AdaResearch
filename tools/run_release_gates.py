@@ -119,7 +119,7 @@ def _metric_subjects(metrics: dict[str, Any]) -> list[str]:
         if not isinstance(value, str) or value in _NOT_A_SUBJECT:
             continue
         # counters rendered as prose ("empty 118 · stub 32") name no file
-        if key in {"detector_selftest", "reason", "open_not_counted"}:
+        if key in {"detector_selftest", "reason", "open_not_counted", "age_reading"}:
             continue
         for raw in value.split(","):
             token = _SUBJECT_TRAILER.sub("", raw.strip()).strip()
@@ -819,6 +819,12 @@ def build_report(
                         prose.get("unreachable_from_a_clone", -1)
                     ),
                     "stranded_words": int(prose.get("stranded_words", -1)),
+                    # How old the stranded writing is. A red row where every
+                    # file was touched an hour ago is a session mid-sentence;
+                    # the same count at 133h is finished work left outside the
+                    # repository. Four consecutive mornings the breather did
+                    # this arithmetic by hand and deferred.
+                    "age_reading": str(prose.get("age_reading", "")) or "none",
                     "unreachable": ", ".join(
                         u.get("path", "") for u in (prose.get("unreachable") or [])
                     ) or "none",

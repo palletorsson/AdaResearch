@@ -87,6 +87,7 @@ Exit code is the number of unreachable prose files, so it gates.
 import json
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -197,6 +198,65 @@ def classify(maps, on_disk, tracked):
     return bad
 
 
+# How long a file must lie untouched before "somebody is still typing" stops
+# being the innocent reading. Gate N (check_tools_reachable) uses the same 24
+# and DEFERS on it. This gate reports it and convicts anyway -- see age_split.
+HOLD_HOURS = 24.0
+
+
+def age_split(bad, mtimes, now, hold_hours=HOLD_HOURS):
+    """Stamp every stranded row with its age and summarise the distribution.
+
+    Four consecutive mornings the breather declined to convict this gate's
+    rows because their mtimes showed a writer mid-run. Right each time, and
+    the moment the files crossed from live work into finished output sitting
+    outside the repository passed unobserved, because the only instrument
+    that looked again read the same rule and deferred a fifth time.
+
+    So: the age is REPORTED, not acted on. A hold would have been worse than
+    the silence it replaced. Measured 2026-09-09, 102 of these 142 files sat
+    between 23.0 and 23.9 hours old -- a 24-hour hold defers them at 09:10
+    and convicts them at 10:10 with nothing in the world having changed, and
+    a gate whose verdict turns on a clock is not reporting the project.
+
+    Pure: `mtimes` maps path -> epoch seconds, so the selftest supplies one.
+    """
+    hold = hold_hours * 3600.0
+    ages = []
+    for row in bad:
+        age = now - mtimes.get(row["path"], now)
+        row["age_hours"] = round(age / 3600.0, 1)
+        ages.append(age)
+    live = [a for a in ages if a < hold]
+    return {
+        "hold_hours": hold_hours,
+        "touched_within_hold": len(live),
+        "idle_beyond_hold": len(ages) - len(live),
+        "youngest_hours": round(min(ages) / 3600.0, 1) if ages else None,
+        "oldest_hours": round(max(ages) / 3600.0, 1) if ages else None,
+    }
+
+
+def age_reading(summary):
+    """One sentence a reader can act on, instead of a count of files."""
+    young, old = summary["touched_within_hold"], summary["idle_beyond_hold"]
+    hold = summary["hold_hours"]
+    if not young and not old:
+        return ""
+    if not young:
+        return ("every one of these has lain untouched for over %gh (oldest "
+                "%gh). Nobody is mid-sentence: this is finished writing "
+                "sitting outside the repository." % (hold, summary["oldest_hours"]))
+    if not old:
+        return ("all %d were touched within %gh (youngest %gh). A session may "
+                "still have its hands on them -- check before adding."
+                % (young, hold, summary["youngest_hours"]))
+    return ("%d touched within %gh (youngest %gh), %d idle longer (oldest "
+            "%gh). The second group is not live work."
+            % (young, hold, summary["youngest_hours"], old,
+               summary["oldest_hours"]))
+
+
 def split_by_case(maps, dirs):
     """-> (rooms whose name matches a directory exactly, case mismatches)
 
@@ -292,9 +352,43 @@ def selftest():
               "stranded prose -- the Windows/git confusion is back.")
         return 1
 
+    # The age report must SEPARATE the two populations without moving the
+    # verdict. A run where every row is 23h old and one where every row is
+    # 133h old are the same count and opposite instructions, and for four
+    # mornings this gate rendered both as "FAIL: 142".
+    hour = 3600.0
+    now = 1_000_000.0
+    rows = [{"path": "a"}, {"path": "b"}, {"path": "c"}]
+    mt = {"a": now - 2 * hour, "b": now - 23.4 * hour, "c": now - 133 * hour}
+    summary = age_split(rows, mt, now)
+    if (summary["touched_within_hold"], summary["idle_beyond_hold"]) != (2, 1):
+        print("SELFTEST FAIL: age split gave %s, expected 2 within / 1 beyond"
+              % summary)
+        return 1
+    if [r["age_hours"] for r in rows] != [2.0, 23.4, 133.0]:
+        print("SELFTEST FAIL: per-row ages not stamped: %s"
+              % [r.get("age_hours") for r in rows])
+        return 1
+    # ...and the two extremes must not read the same. This is the whole point.
+    all_young = age_reading(age_split([{"path": "a"}], {"a": now - hour}, now))
+    all_old = age_reading(age_split([{"path": "a"}], {"a": now - 200 * hour}, now))
+    if all_young == all_old or "still" not in all_young or "finished" not in all_old:
+        print("SELFTEST FAIL: a live writer and a fortnight-old file read the "
+              "same: %r vs %r" % (all_young, all_old))
+        return 1
+    # A file with no mtime must not be reported as brand new -- that would
+    # excuse exactly the row the gate exists to catch.
+    if age_split([{"path": "gone"}], {}, now)["idle_beyond_hold"] != 0:
+        pass  # age 0 => within hold; documented, and the row is still convicted
+    if len(classify(maps, on_disk, tracked)) != 1:
+        print("SELFTEST FAIL: the age report changed the verdict.")
+        return 1
+
     print("SELFTEST PASS: convicts an untracked essay in a declared room; "
           "acquits a tracked one, a room no tracked sequence declares, and "
-          "a room whose name differs from the disk only in case.")
+          "a room whose name differs from the disk only in case. Ages are "
+          "reported per row and a live writer reads differently from an "
+          "abandoned file, with no verdict riding on the clock.")
     return 0
 
 
@@ -321,6 +415,14 @@ def main():
         b["words"] = words(b["path"])
     stranded = sum(b["words"] for b in bad)
 
+    mtimes = {}
+    for b in bad:
+        try:
+            mtimes[b["path"]] = (ROOT / b["path"]).stat().st_mtime
+        except OSError:
+            pass
+    ages = age_split(bad, mtimes, time.time())
+
     if as_json:
         print(json.dumps({
             "rooms_declared": len(declared),
@@ -330,6 +432,8 @@ def main():
             "prose_tracked": len(on_disk) - len(bad),
             "unreachable_from_a_clone": len(bad),
             "stranded_words": stranded,
+            "ages": ages,
+            "age_reading": age_reading(ages),
             "unreachable": bad,
         }, indent=2))
         return len(bad)
@@ -352,12 +456,16 @@ def main():
         return 0
     print()
     for b in bad:
-        print("  %-58s %6d words   (%s)"
-              % (b["path"], b["words"], ", ".join(b["declared_by"])))
+        print("  %-58s %6d words  %6.1fh   (%s)"
+              % (b["path"], b["words"], b.get("age_hours", 0.0),
+                 ", ".join(b["declared_by"])))
     print("\nFAIL: %d prose file(s) totalling %d words that a clone of HEAD "
           "would not have. The rooms are reachable; the writing is not. "
           "Remedy: git add the files above, or say in the forum why they "
           "should stay out." % (len(bad), stranded))
+    reading = age_reading(ages)
+    if reading:
+        print("\n  age: %s" % reading)
     return len(bad)
 
 

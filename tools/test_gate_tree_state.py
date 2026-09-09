@@ -46,9 +46,10 @@ def main() -> int:
     #    Calling this tracked-clean would blame the release for content that
     #    is not in it.
     # NB: fixture paths deliberately avoid the tools/ namespace. Gate H
-    # collects every tools/*.py path NAMED in a gate tool's source, so a
-    # synthetic "tools/foo.py" here would land in the release report as a
-    # referenced tool absent from disk. It did, on the first run of this file.
+    # collects every path under that directory NAMED anywhere in a gate
+    # tool's source, so an invented one here lands in the release report as a
+    # referenced tool absent from disk. It did, on the first run of this file
+    # -- and then a second time, from the comment written to warn about it.
     v = classify(["fixture/brand_new.py"], tracked=set(), changed={"fixture/brand_new.py": "??"})
     check("untracked subject reads untracked", v.get("untracked"), 1)
     check("untracked subject is not tracked-clean", v.get("tracked_clean"), None)
