@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/bicho_hinge/bicho_hinge.gd" id="1_bicho_hinge"]
+
+; Everything is built in _ready(): a plinth, and on it a tree of identical 3 mm
+; aluminium plates joined by hinges, opened by a deterministic search to one
+; configuration it will never return to. Nothing is instanced from disk — the two
+; XR Tools scripts that make the joints grabbable are load()ed BY PATH at runtime
+; behind a ResourceLoader.exists guard, because /addons is gitignored in this repo
+; and a preload of a missing path is a hard parse failure. Without them the object
+; still stands, still photographs, and still drags from the desktop crosshair.
+;
+; The script goes on the ROOT. GridInteractablesComponent sets config_* metadata
+; and calls apply_grid_config there (deferred, so it lands after _ready and the
+; artifact rebuilds); logic on a child makes every map token silently unreachable.
+;
+; The root also carries pointer_event(), which is what DesktopInteractionPointer
+; finds when it walks up from a plate collider — one handler for the whole tree.
+
+[node name="BichoHinge" type="Node3D"]
+script = ExtResource("1_bicho_hinge")

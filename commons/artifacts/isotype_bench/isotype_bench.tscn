@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/isotype_bench/isotype_bench.gd" id="1_isotype_bench"]
+
+; Everything is built in _ready(): a bench, a board, and one number drawn twice.
+; Left, Neurath's rule — identical signs at a fixed pitch, the last one cut to
+; the remainder. Right, the same number as a single figure scaled by the count,
+; with half that count nested inside it at a quarter of the ink. One crank
+; (commons/interactables/dial_smooth.tscn, instanced at runtime) drives both.
+;
+; The script goes on the ROOT. GridInteractablesComponent sets config_* metadata
+; and calls apply_grid_config there, deferred, so it lands after _ready and the
+; chart redraws; logic on a child makes every map token silently unreachable.
+;
+; The origin is the FLOOR at the centre of the bench and nothing is below y=0 —
+; auto-grounding is skipped for any map token carrying an explicit y, and an
+; artifact centred on its own origin stands half-sunk wherever that happens.
+
+[node name="IsotypeBench" type="Node3D"]
+script = ExtResource("1_isotype_bench")

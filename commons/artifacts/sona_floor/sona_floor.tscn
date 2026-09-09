@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsonafloor0001"]
+
+[ext_resource type="Script" path="res://commons/artifacts/sona_floor/sona_floor.gd" id="1_sona_floor"]
+
+; Everything is built in _ready(): the 45-degree billiard that draws the sona,
+; one MultiMesh per closed line it decomposes into, the dot lattice, the floor
+; label and the body. Nothing is authored here, so there is nothing here to drift
+; out of step with the script.
+;
+; THE SCRIPT IS ON THE ROOT. GridInteractablesComponent sets config_* metadata and
+; calls apply_grid_config on the ROOT node; a scriptless root with the logic on a
+; child makes every map token silently unreachable.
+;
+; The root is a plain Node3D. The collider is a StaticBody3D child built at run
+; time with two shapes — the 45 mm deck and the floor label — both sized from the
+; same numbers as the geometry above them.
+
+[node name="SonaFloor" type="Node3D"]
+script = ExtResource("1_sona_floor")

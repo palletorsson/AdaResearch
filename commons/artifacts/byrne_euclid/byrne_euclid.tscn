@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/byrne_euclid/byrne_euclid.gd" id="1_byrne_euclid"]
+
+; Euclid I.47 printed twice on one panel at the same size — lettered on the
+; left, coloured on the right after Byrne 1847 — with the key that decodes the
+; letters standing behind the panel, where a visitor has to walk to it.
+;
+; Everything is built in _ready(): the deck, the paper, both figures (one
+; function, one boolean), the two sentences, and the key. There is nothing to
+; instance and no asset to load.
+;
+; The script goes on the ROOT. GridInteractablesComponent sets config_*
+; metadata and calls apply_grid_config THERE (deferred, so it lands after
+; _ready and the artifact rebuilds); logic on a child makes every map token
+; silently unreachable while the registry still advertises the keys.
+
+[node name="ByrneEuclid" type="Node3D"]
+script = ExtResource("1_byrne_euclid")

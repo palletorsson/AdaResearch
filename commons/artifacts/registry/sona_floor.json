@@ -1,0 +1,75 @@
+{
+	"artifacts": {
+		"sona_floor": {
+			"lookup_name": "sona_floor",
+			"name": "Sona Floor",
+			"class_name": "SonaFloor",
+			"scene": "res://commons/artifacts/sona_floor/sona_floor.tscn",
+			"category": "graphtheory",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"sequence": "graphtheory",
+			"description": "A 2.4 m floor plate carrying a lattice of pressed dots and the single closed line that goes round all of them without lifting - after the Chokwe lusona of Angola and northwestern Zambia, and the Tamil kolam. It ships at 5 columns by 3 rows, where one line is enough; #rows:4 #cols:6 is one token away, and there it is not, and the second line arrives in a different colour with its own bead. THE ARGUMENT IS NOT EULER'S THEOREM, and that is the point of the object. Every crossing in this drawing has degree 4 and every rim turn degree 2, so every degree is even and a single closed walk using every edge exactly once exists for EVERY lattice - the finger could always do it, if it were allowed to turn where the line crosses itself. It is not allowed: at a crossing the finger goes straight on, because a sand line that turned there would be a different figure. That constraint is about the hand, not about the graph, and under it the edge set decomposes into exactly gcd(rows, cols) closed lines. GT_Foundations already carries Euler, but as an impossibility - KonigsbergBridge has four odd vertices, therefore no walk, and the map's critical.md calls that proof complete, elegant, devastating. The positive case is stated there only in prose (technical.md, one sentence about a triangle); no OBJECT in this corpus has been an Eulerian circuit, and the count - how many lines a given lattice takes - is nowhere at all. THE LINE IS TRACED, NOT TRANSCRIBED. Working in half-pitch units the rim is the rectangle 0..2*cols by 0..2*rows, dots sit at the points with both coordinates odd, and the line runs through the points with an ODD coordinate sum, stepping by one in each axis and reflecting specularly off the rim; each unit cell then admits exactly one legal diagonal, the one that misses its dot. Because both rim dimensions are even, all four corners have an even coordinate sum and the line can never stand on one, so a reflection always flips exactly one component and there is no ambiguous case. Hard-coding a named figure (the lion's stomach, the chased antelope) as a point list was rejected: a transcribed figure has no failure case, and the failure case is half the lesson. MEASURED in a Python mirror of the script (2026-09-09): for all 64 lattices with rows and cols in 1..8 the traced number of closed lines equals gcd(rows, cols) exactly; segments traversed equals 4*rows*cols in every case, with an assert that no cell diagonal is ever used twice; rim turns equal 2*(rows+cols) in every case; and over rows and cols in 1..12, all 3744 runs are proper 45-degree chords with no degenerate one. 5x3 gives 1 line of 16 runs over 60 diagonals; 6x4 gives 2 lines of 10 runs each over 96. At the shipped defaults the unit is 0.2222 m, the dot pitch 0.4444 m, the cord 40.0 mm wide, the dot radius 48.9 mm, with 274 mm of black between parallel runs and 88 mm of clearance between any dot and any cord; 48 instances in total. The two diagonal families ride 1 mm apart in height and that millimetre is the only reason the crossings render at all - two flat-topped ribbons meeting at 45 degrees at one height share a coplanar top over the whole overlap, which is a z-fight. Breaking the under strand with a gap instead, the way proper knotwork does it and the way salesman_knot's halo does it, was rejected because it would chop every line into dashes at the crossings and continuity is the entire argument. The rim caps are the exact miter for a right-angle join of two bands - a square of the cord's width with its sides along the two run directions - and the field is re-fitted to the space the caps need, because sizing it to the bare panel first put them 9 mm inside the rail. The plate is a slab, never a quad, so it does not vanish edge-on; the origin is its base, so it does not stand half in the floor where auto-grounding is skipped; the collider is 45 mm because the rim is 45 mm, with a second shape for the floor label. The Eulerian twin of salesman_knot: same panel, same near-black ground and bone ink, opposite theorem - that one visits every vertex once and finds the routing makes no difference, this one visits every edge once and finds the routing is the only thing there is.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"footprint": [
+				3,
+				3,
+				1
+			],
+			"map_sequences": [
+				"graphtheory"
+			],
+			"tags": [
+				"graph",
+				"eulerian",
+				"sona",
+				"lusona",
+				"kolam",
+				"gcd",
+				"unicursal",
+				"sand_drawing",
+				"floor",
+				"lattice"
+			],
+			"parameters": {
+				"footprint": [
+					3,
+					3,
+					1
+				],
+				"size_group": "large"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 3,
+					"back": 2,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.4,
+					0.238,
+					2.4
+				],
+				"source": "procedural: a 12 mm sand bed the full panel, a 45 mm rim round it, the line as 10 mm ribbons and the dots as 16 mm studs on top - and the reclined floor label, which is the tall part at 238 mm and the reason the AABB is not 45 mm. The 238 is arithmetic, not a render: text_screen PAD lies its frame back 58 degrees about X, so a 0.52 m screen (frame 0.3584 tall with the bezel) reaches cos(58)*0.1792 + sin(58)*0.006 = 0.1000 above its own centre, the holder sits 0.03 + 0.32*0.3224 = 0.1332 above the screen node, the tilt swings the frame's own -8 mm z offset down to -0.0068, and the screen node stands on the 12 mm bed: 0.0120 + 0.1332 - 0.0068 + 0.1000 = 0.2384. Reviewed 2026-09-09: the registry said 0.23, which is 3.5% low, and check_body_overlap / audit_prop_sizes / build_size_manifest all read this field"
+			},
+			"dev_themes": [
+				"a rule that lives in the hand and not in the structure",
+				"a count nobody chose, falling out of two numbers set by hand",
+				"the positive case of Euler, and the price of drawing it"
+			],
+			"qfep_connection": "The graphtheory sequence opens at Konigsberg, where an impossibility is proved from vertex parity and the structure is made to carry the whole verdict: no route exists, and no amount of walking will find one. This floor is the same theorem read from the other side. Here the walk always exists - every degree is even, Euler guarantees it - and what forbids the single line is not the figure but the discipline the drawer holds themselves to: the finger does not turn at a crossing. Relax that and one line always closes. Keep it and the answer is gcd(rows, cols). So the impossibility is real, it is measurable, it changes with the lattice, and it is not a property of the object at all; it is a property of a practice that a tradition kept and a graph theorist would drop without noticing. Integration, the sequence's QFEP term, usually means finding the structure under the practice. This is the case where the practice is the structure, and where the thing that looks like a law of the figure turns out to be a law of the body drawing it.",
+			"note": "NEW 2026-09-09. Config keys: #rows:<1..16> and #cols:<1..16> the dot lattice (THE LESSON - ships coprime at 3 rows by 5 cols, #rows:4 #cols:6 is the failing case), #size:<m> panel edge, #width:<0.03..0.30> line width as a fraction of the dot pitch, #plaque:off hides the floor label and gives the drawing its reserved band back, #solid:off drops the collider, #color1 the first line and #color2 every line after it. rows, cols, size, width, color1 and color2 are all in GridInteractablesComponent.CONFIG_PARAM_NAMES, which is why those keys and not better-named ones: an unlisted numeric key is read as the tutorial's positional shorthand, so #lattice_rows:4 would set the artifact's yaw to 4 degrees and leave the lattice at its default, silently. plaque and solid are NOT on that list, so their values must be words - #solid:0 is eaten as shorthand and leaves the collider ON; write #solid:off. Colours take no leading hash. NO dna.axes block: the axis that matters is the rows-by-cols PAIR and no sweep has seen it. NOT COMPILED AND NOT CAPTURED in the session that wrote it - the owner had the editor open and a second Godot instance dies on the user:// lock. The numbers above are geometry from a Python mirror, not renders. REVIEWED 2026-09-09, still without Godot, and two of the writer's four open worries are closed by evidence already in the tree. (1) text_screen PAD is NOT untested: unreliable_clock, wireframe_confession, wallflower_and_star and undo_door all ship mode = 2, and unreliable_clock's front.png has the reclined plate legible in frame - PAD and SCREEN call the same _build_screen, so PAD only tilts the proven mesh about X and never about Y. (2) WEAVE_DY 1 mm is not marginal: Godot's Forward+ depth is reverse-Z float32, whose resolution at the 3-4 m the capture stands at is on the order of 1e-6 m, so the separation is roughly a thousand times the precision. Still open: the two-line case has never been rendered, so nobody has seen the ochre. And the framing worry is unfounded - the AABB diagonal is 3.404 m against salesman_knot's 3.394 m, a 0.3% difference on the same 2.4 m plate, and salesman_knot photographs its whole drawing legibly from the canonical camera."
+		}
+	}
+}
