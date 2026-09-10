@@ -6899,6 +6899,68 @@
         "FIFTH EVENING OF THE APPEND-DON'T-OPEN DISCIPLINE, AND THE FIRST TO OVERRULE IT. Both of the last four evenings found their patterns already housed. Tonight's duplicate-check against all 47 found the nearest neighbours (prop-002 verify-the-blocker, prop-024 stale-input, prop-021 absent-number) and found none of them reaching the prescription itself: prop-002's remedy re-tests a premise in a different file, prop-024's whole machinery is a measured_at stamp and a producing tool to re-run, and a hand-written proposed_change has neither. Opened prop-048 and cross-referenced all three, with a paragraph saying explicitly what is shared and what is new, so the reviewer can overrule the call in one read."
       ],
       "duration_minutes": 22
+    },
+    {
+      "breath_id": "2026-09-10T18:55",
+      "mode": "evolve-only",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "gap_days": 1,
+      "gap_commits": 0,
+      "head_at_read": "aeddf7e2b",
+      "dirty_at_read": 830,
+      "untracked_at_read": 11577,
+      "items_attempted": [
+        "gap_check_prop026",
+        "scorer_reading",
+        "release_gates_full",
+        "forum_open_sweep",
+        "gate_L_attribution_measurement",
+        "proposal_duplicate_check"
+      ],
+      "items_succeeded": [
+        "gap_check_prop026",
+        "scorer_reading",
+        "release_gates_full",
+        "forum_open_sweep",
+        "gate_L_attribution_measurement",
+        "proposal_duplicate_check"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "The agent forum store is ada_encyclopedia/public/agent-forum/threads.json -- a TRACKED file in the companion repo, 226 KB, 61 threads, 51 open, 50 of which name a repo path. In AdaResearch_46 exactly one tracked file mentions it: tools/forum.py. No gate, scorer or breather phase opens it.",
+        "Gate L's 156 convictions include 10 rows / 8,311 words that two forum threads announced hours before the gate ran (260910-5zr9o 11:14, 260910-8in5c 13:34). The attribution existed in writing and in machine-readable form and was still reconstructed by mtime.",
+        "prop-026 occurrence 6: no morning breath logged for 2026-09-10 although ada-morning-breath is scheduled. gap_commits is 0 -- a full working day with no commit at all, against 1,272 untracked files created and 267 tracked files rewritten.",
+        "Gates I and L both moved while HEAD stood still (aeddf7e2b since 09-09 19:02). L +7 rows / +11,847 words, I +3 rooms, all working-tree writes. First evening where the failing set changed with no commit in between.",
+        "Untracked file count is 11,577, up from 903 last night; the growth is derived output under ada_run/ (interaction 2,681, interaction_v1 2,674, em_cartridges 1,670), not authored content. A raw untracked count is not a measure of stranded work."
+      ],
+      "files_changed": [
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/breath_log.json",
+        "doc/reports/skill_evolution_proposals.json",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md"
+      ],
+      "proposals_opened": [
+        "prop-049"
+      ],
+      "proposals_evidenced": [
+        "prop-012",
+        "prop-026"
+      ],
+      "duration_minutes": 30
     }
   ]
 }
