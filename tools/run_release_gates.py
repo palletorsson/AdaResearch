@@ -943,6 +943,60 @@ def build_report(
             }
         )
 
+        # Gate O: every cell in every map layer is a string. The convention is
+        # as old as the maps and until today nothing in either language checked
+        # it, which is why the same eleven maps crashed a live museum walk in
+        # GDScript on 2026-08-24 and the encyclopedia's strip in TypeScript on
+        # 2026-09-10. Both times the READER was swept and the data was left as
+        # it was, so the third reader inherits the trap -- and the trap is not
+        # always a crash. `cell == "1"` is False against the integer 1, so a
+        # floor reads as void with nothing printed anywhere.
+        rc_cells, out_cells = run_cmd(
+            [sys.executable, "tools/check_cell_types.py", "--json"]
+        )
+        rc_cells_neg, _ = run_cmd(
+            [sys.executable, "tools/check_cell_types.py", "--selftest"]
+        )
+        cells = {}
+        if out_cells.strip():
+            try:
+                cells = json.loads(out_cells)
+            except json.JSONDecodeError:
+                cells = {}
+        gates.append(
+            {
+                "id": "O",
+                "name": "Cells Are Strings",
+                "pass": int(cells.get("non_string_cells", 999999)) == 0
+                # An empty scan is a broken check, not a green one.
+                and int(cells.get("cells_scanned", 0)) > 0
+                and not cells.get("unreadable")
+                and rc_cells_neg == 0,
+                "metrics": {
+                    "detector_selftest": "PASS" if rc_cells_neg == 0 else "FAIL",
+                    "maps_scanned": int(cells.get("maps_scanned", -1)),
+                    "cells_scanned": int(cells.get("cells_scanned", -1)),
+                    "non_string_cells": int(cells.get("non_string_cells", -1)),
+                    "maps_affected": int(cells.get("maps_with_non_string_cells", -1)),
+                    # Not a defence, printed so the reader can tell a stale
+                    # corpus fault from a live session's open buffer.
+                    "in_working_tree": int(cells.get("in_working_tree", -1)),
+                    "unreadable": ", ".join(cells.get("unreadable", [])) or "none",
+                    "offenders": ", ".join(
+                        "%s (%d %s%s)"
+                        % (
+                            o["map"],
+                            o["count"],
+                            "/".join(o["kinds"]),
+                            ", open in working tree" if o["in_working_tree"] else "",
+                        )
+                        for o in cells.get("offenders", [])
+                    )
+                    or "none",
+                },
+            }
+        )
+
         pass_count, enabled_count, overall_pass, overall_status = apply_gate_toggles(
             gates, gate_enabled
         )
@@ -965,6 +1019,7 @@ def build_report(
                 "check_prose_reachable": rc_prose,
                 "check_artifacts_reachable": rc_art_reach,
                 "check_tools_reachable": rc_tools_reach,
+                "check_cell_types": rc_cells,
             },
             "gates": gates,
             "raw": {
