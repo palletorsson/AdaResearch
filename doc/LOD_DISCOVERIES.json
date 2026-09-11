@@ -648,6 +648,78 @@
       "topic": "release gates",
       "insight": "A gate verdict is a statement about a TREE and 11 of the 16 gate tools never say which. Gates I and J flipped PASS to FAIL between two runs on 2026-09-08 with no commit between them, convicting five primitives rooms whose anchors all read HELD against git show HEAD. Only check_prose_reachable, check_artifacts_reachable, check_tools_reachable, check_gate_chain and the runner read git at all; every content gate reads the disk. Before believing a red gate, diff the failing rows against HEAD.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-09-10T12:04:25.670267+00:00",
+      "topic": "endless_museum",
+      "insight": "Map-authored halls must skip the necklace hand at BOTH sites: the peek/stamp-clear (8204) and the transplant's hand lookup (~10898). A bench bead claims a body by token and builds it at the bead's cell; em_pack_report rows with rings 0 and target != grid are the fingerprint. Probes that hand the museum an empty hand file cannot see it - probe_wcn_random_definition loads the real one.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-10T12:04:25.936817+00:00",
+      "topic": "perlin_noise",
+      "insight": "Drew simplex under the Perlin name until 2026-09-10: _noise_type_for defaults to simplex and no placement passed generator:perlin. Noise_Perlin_Simplex now places both fields with seed:20260910 size:8 ramp:shared panel:front; readouts name the basis from the generator.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-10T12:04:26.157951+00:00",
+      "topic": "control_pendulum",
+      "insight": "Label prints signed angular velocity (shipped abs); reference:plumb builds a plumb line and a rest ring that lights per centre crossing and emits centre_crossed(direction, omega); evidence:trace draws theta(t) for the 0.3 rad standard release, not the visitor's.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-10T12:04:26.365326+00:00",
+      "topic": "seed_replay_demo",
+      "insight": "comparison gains offset; +1 DRAW toggles an extra draw on the last grid (same seed, different grid); RANDOM uses a local RNG so the global generator is untouched; draw count printed under the headline.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-10T14:04:55.267936+00:00",
+      "topic": "endless_museum",
+      "insight": "A wide body with NO collider is a venue: _occupied_cells seals nothing and the walker walks in; any CollisionShape3D makes the whole footprint seal (clamped to MAX_BODY_RADIUS 6). A RackTemplates panel's button areas count as colliders unless the panel carries meta em_local_instrument.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-10T14:04:55.419821+00:00",
+      "topic": "PendulumWave",
+      "insight": "2026-09-10: motion on _physics_process, fixed-time sampler with two limits (300 marks, 10 s), depth = age x 0.6 m/s, FINE/COARSE/STROBE (measured period), gallows frame + readout + panel; placed (6,11):180 in WaveFunctions_Pendulum so the record recedes toward the exit.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-10T14:04:55.566290+00:00",
+      "topic": "sine_wall_corridor",
+      "insight": "2026-09-10: panel=entrance adds AMP/PHASE sliders + FREEZE/RESET + gap readout; offset pi flips every sine so the walls copy each other and the gap is the width everywhere (a snake), offset 0 pinches; walls carry no collider in the placed scene and the final says so.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-10T15:49:44.719641+00:00",
+      "topic": "endless_museum",
+      "insight": "The map-authored lane does NOT ground a body whose geometry is built in _ready (measured 2026-09-10: sine_wall_corridor stood 2 m into the deck); build the deck at the origin. museum.sculpture_clear_rects [[x0,z0,x1,z1]] now keeps dealt plinths off map-authored floors too. A body whose collider AABB reaches the door-side rows can be scaled (0.65) and turned by the museum.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-10T15:49:44.861356+00:00",
+      "topic": "probes",
+      "insight": "A SceneTree probe cannot exercise XR Tools pickables: pickable.gd names XRToolsUserSettings and grab_sphere.gd names TextManager at compile time, so the grab sphere loses its script chain and control_pendulum's bob never enters the tree. Use --log-file to see it; the watchdog swallows Godot's output.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-10T17:05:04.891433+00:00",
+      "topic": "forum-as-attribution-ledger",
+      "insight": "The agent forum store (ada_encyclopedia/public/agent-forum/threads.json) is tracked, 51 open threads, 50 naming a repo path - and exactly one tracked file in AdaResearch_46 mentions it (tools/forum.py). No gate reads it, so gates spend evenings reconstructing by mtime an attribution that writers already typed. prop-049.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-11T07:28:24.645653+00:00",
+      "topic": "forum-as-attribution-ledger",
+      "insight": "A remedy can be wrong without the corpus moving: prop-049 clause 1 said cross a gate's convicted paths against open forum threads, and measured against gate L's live 164 rows it matched 2 by explicit path, while the obvious widening to any-mention matched 40 of which 21 were false (a room named as a to-do in an eight-day-old handoff, a room named in the breather's own ruling request, a room a loop session had finished). The shipped reader accepts exactly two things: a claims list written as data, or a first-person claim sentence with the name in that sentence. 19 of 164 rows, all verified by hand. MEASURE WHAT A MECHANISM WILL MATCH BEFORE WRITING IT.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-11T17:07:15.816307+00:00",
+      "topic": "tool discoverability",
+      "insight": "An affordance whose only invoker is a person is inert until it is named on the surface that person reads: forum.py --claims got 0 of 3 threads in 8 hours with no CLAUDE.md row, while forum.py itself has 70 threads by 45 authors with a table",
+      "lod": 3
     }
   ]
 }
