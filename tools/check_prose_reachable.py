@@ -77,6 +77,24 @@ dirty is normal mid-session: a clone gets a working older version, which is
 a different and much smaller loss than getting nothing. The same line gate H
 draws, for the same reason.
 
+WHO IS HOLDING IT, AND WHY THAT IS NOT AN EXCUSE
+------------------------------------------------
+The remedy below has said "say in the forum why they should stay out" since
+this gate was written, and until 2026-09-11 nothing in the battery opened the
+forum. Three evenings running the gate printed rows that two sessions had
+announced in writing hours earlier -- 260910-5zr9o at 11:14, 260910-8in5c at
+13:34 -- and each evening a breath spent its time reconstructing from mtimes
+and blob comparisons an attribution that was already typed into a tracked
+file. Rows are now stamped with who claimed them (tools/forum_claims.py).
+
+The verdict does not move. Measured the day it was wired: 164 convictions, 19
+claimed, 145 nobody's -- and the count, the exit code and the failing set are
+identical with the forum present and absent, which the selftest asserts. A
+claim is a fact about who, not a licence to stop counting; gate N's 24-hour
+clock moved four fifths of its verdict overnight with nothing in the world
+changing, and a verdict that turned on someone's post would be the same fault
+in politer clothes.
+
     python tools/check_prose_reachable.py            # human
     python tools/check_prose_reachable.py --json     # machine-readable
     python tools/check_prose_reachable.py --selftest # the gate still bites
@@ -89,6 +107,12 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+try:
+    import forum_claims
+except ImportError:  # the gate must still run if the reader is absent
+    forum_claims = None
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -257,6 +281,53 @@ def age_reading(summary):
                summary["oldest_hours"]))
 
 
+def claim_reading(named, bad):
+    """One sentence: who said what, and how much is nobody's.
+
+    The unclaimed count is the useful half. A reader of this gate wants to
+    know which rows to leave alone and which have no owner at all, and until
+    today the gate said neither.
+    """
+    if not bad:
+        return ""
+    if not named:
+        return ("nobody has claimed any of these in the forum. Either the "
+                "claims are unwritten or the writing is abandoned.")
+    authors = sorted({w.split(" (")[0] for w in named.values()})
+    return ("%d of %d claimed in writing by %s -- leave those alone. The "
+            "other %d are nobody's: no open thread names them."
+            % (len(named), len(bad), ", ".join(authors), len(bad) - len(named)))
+
+
+def stamp_claims(bad):
+    """Name the rows somebody claimed in the forum. -> {path: "who"}.
+
+    Three evenings running this gate printed rows that two sessions had
+    announced in writing hours earlier, and each evening a breath
+    reconstructed the attribution from mtimes and blob comparisons instead of
+    reading the ledger it had been telling people to write in. This gate's own
+    remedy line says "say in the forum why they should stay out"; until today
+    nothing in the battery opened the forum.
+
+    A claim NAMES a row, it never removes one. Measured 2026-09-11: of 164
+    convicted rows, 19 are claimed and 145 are not, and the 19 are the live
+    wave and pilot writing. The count, the exit code and the verdict are
+    identical with the forum present and absent -- which the selftest asserts,
+    because a gate whose number moves when somebody posts is not a gate.
+    """
+    if forum_claims is None:
+        return {}
+    claimed = forum_claims.claims(forum_claims.load())
+    hits = forum_claims.attribute([b["path"] for b in bad], claimed)
+    named = {}
+    for b in bad:
+        found = hits.get(b["path"])
+        if found:
+            b["claimed_by"] = forum_claims.who(found)
+            named[b["path"]] = b["claimed_by"]
+    return named
+
+
 def split_by_case(maps, dirs):
     """-> (rooms whose name matches a directory exactly, case mismatches)
 
@@ -384,11 +455,40 @@ def selftest():
         print("SELFTEST FAIL: the age report changed the verdict.")
         return 1
 
+    # THE FORUM MAY NOT MOVE THE NUMBER. stamp_claims reads another
+    # repository, which means the battery's verdict would otherwise depend on
+    # whether a companion checkout is present and on what somebody posted an
+    # hour ago. Gate N already showed what a gate that takes a hint from the
+    # clock does: 5 convictions to 21 overnight with nothing in the world
+    # changing. So: run the classifier, stamp it, and assert the set is
+    # untouched -- claims annotate rows, they never remove them.
+    rows = classify(maps, on_disk, tracked)
+    before = sorted(r["path"] for r in rows)
+    named = stamp_claims(rows)
+    if sorted(r["path"] for r in rows) != before:
+        print("SELFTEST FAIL: reading the forum changed the convicted set.")
+        return 1
+    if not set(named).issubset(set(before)):
+        print("SELFTEST FAIL: a claim named a path the gate never convicted.")
+        return 1
+    # ...and the sentence must distinguish nobody-claimed from somebody-did.
+    none_said = claim_reading({}, rows)
+    some_said = claim_reading({before[0]: "fable-w3 (t, 0d)"}, rows)
+    if "nobody" not in none_said or "fable-w3" not in some_said:
+        print("SELFTEST FAIL: the claim reading does not separate an "
+              "unclaimed row from a claimed one: %r vs %r"
+              % (none_said, some_said))
+        return 1
+    if claim_reading({}, []) != "":
+        print("SELFTEST FAIL: a clean run printed a claim line.")
+        return 1
+
     print("SELFTEST PASS: convicts an untracked essay in a declared room; "
           "acquits a tracked one, a room no tracked sequence declares, and "
           "a room whose name differs from the disk only in case. Ages are "
           "reported per row and a live writer reads differently from an "
-          "abandoned file, with no verdict riding on the clock.")
+          "abandoned file, with no verdict riding on the clock. Forum claims "
+          "name rows and cannot add, remove or excuse one.")
     return 0
 
 
@@ -422,6 +522,7 @@ def main():
         except OSError:
             pass
     ages = age_split(bad, mtimes, time.time())
+    named = stamp_claims(bad)
 
     if as_json:
         print(json.dumps({
@@ -434,6 +535,9 @@ def main():
             "stranded_words": stranded,
             "ages": ages,
             "age_reading": age_reading(ages),
+            "claimed_in_the_forum": len(named),
+            "claimed_reading": claim_reading(named, bad),
+            "claimed_by": named,
             "unreachable": bad,
         }, indent=2))
         return len(bad)
@@ -456,9 +560,10 @@ def main():
         return 0
     print()
     for b in bad:
-        print("  %-58s %6d words  %6.1fh   (%s)"
+        print("  %-58s %6d words  %6.1fh   (%s)%s"
               % (b["path"], b["words"], b.get("age_hours", 0.0),
-                 ", ".join(b["declared_by"])))
+                 ", ".join(b["declared_by"]),
+                 "  CLAIMED: " + b["claimed_by"] if b.get("claimed_by") else ""))
     print("\nFAIL: %d prose file(s) totalling %d words that a clone of HEAD "
           "would not have. The rooms are reachable; the writing is not. "
           "Remedy: git add the files above, or say in the forum why they "
@@ -466,6 +571,10 @@ def main():
     reading = age_reading(ages)
     if reading:
         print("\n  age: %s" % reading)
+    if named:
+        print("\n  claimed: %s" % claim_reading(named, bad))
+        for path in sorted(named):
+            print("    %-56s %s" % (path, named[path]))
     return len(bad)
 
 

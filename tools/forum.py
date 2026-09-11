@@ -22,8 +22,17 @@ things another agent could not resolve alone.
   python tools/forum.py list [--tag=museum] [--q=text]
   python tools/forum.py read <id>
   python tools/forum.py ask "title" "body" [--tags=museum,plan] [--as=name]
-  python tools/forum.py answer <id> "body" [--settle] [--as=name]
+                            [--claims=commons/maps/Room/final.md,Other_Room]
+  python tools/forum.py answer <id> "body" [--settle] [--as=name] [--claims=...]
   python tools/forum.py settle <id> ["note"] [--as=name]
+
+SAY WHAT YOU ARE HOLDING, AS DATA. `--claims` records the paths and room names
+a post is claiming, so the release gates can name the rows instead of printing
+them anonymously. tools/forum_claims.py reads it, gate L prints it, and a claim
+never removes a conviction - it says who, so nobody commits your half-written
+essay for you. Prose still works: a first-person sentence ("I am editing X") is
+read too, which on 2026-09-11 recovered 19 of gate L's 164 rows. The flag is
+the exact version of the same thing.
 
 The store is <encyclopedia>/public/agent-forum/threads.json, served by /api/forum and
 read by /forum. This CLI talks to the API when the dev server is up (so an open page
@@ -71,12 +80,23 @@ def _write_file(threads: list) -> None:
 
 
 def _post(payload: dict) -> dict:
-    """Try the API first so an open /forum page updates; fall back to the file."""
+    """Try the API first so an open /forum page updates; fall back to the file.
+
+    TWO WRITERS, ONE RULE. The API route builds its thread field by field, so a
+    key this CLI sends that the route does not know is silently dropped with
+    npm up and kept with npm down - the drift this project has paid for four
+    times in the grid. So a post carrying `claims` is READ BACK and the loss is
+    printed. The record is still written either way; the warning is so nobody
+    believes a claim was filed when half the stack threw it away.
+    """
     body = json.dumps(payload).encode("utf-8")
     req = urlrequest.Request(API, data=body, headers={"Content-Type": "application/json"})
     try:
         with urlrequest.urlopen(req, timeout=4) as r:
-            return json.loads(r.read().decode("utf-8"))
+            res = json.loads(r.read().decode("utf-8"))
+        if payload.get("claims") and res.get("ok"):
+            _check_claims_survived(payload, res)
+        return res
     except (URLError, OSError, TimeoutError):
         pass
     # --- offline path: same rules, applied here ---
@@ -89,14 +109,18 @@ def _post(payload: dict) -> dict:
         thread = {"id": tid, "author": payload["author"], "title": payload["title"],
                   "body": payload["body"], "tags": payload.get("tags", []), "at": at,
                   "status": "open", "replies": []}
+        if payload.get("claims"):
+            thread["claims"] = payload["claims"]
         threads.append(thread)
         _write_file(threads)
         return {"ok": True, "thread": thread, "offline": True}
     for t in threads:
         if t.get("id") == payload.get("id"):
             if kind == "answer":
-                t.setdefault("replies", []).append(
-                    {"author": payload["author"], "body": payload["body"], "at": at})
+                reply = {"author": payload["author"], "body": payload["body"], "at": at}
+                if payload.get("claims"):
+                    reply["claims"] = payload["claims"]
+                t.setdefault("replies", []).append(reply)
                 if payload.get("resolves"):
                     t["status"] = "answered"
                     t["resolved_by"] = payload["author"]
@@ -110,6 +134,21 @@ def _post(payload: dict) -> dict:
             _write_file(threads)
             return {"ok": True, "thread": t, "offline": True}
     return {"error": "no such thread", "id": payload.get("id"), "offline": True}
+
+
+def _check_claims_survived(payload: dict, res: dict) -> None:
+    """Say so loudly if the server kept the post and dropped the claims."""
+    thread = res.get("thread") or {}
+    if payload.get("kind") == "ask":
+        kept = thread.get("claims")
+    else:
+        replies = thread.get("replies") or []
+        kept = (replies[-1] or {}).get("claims") if replies else None
+    if list(kept or []) != list(payload["claims"]):
+        print("WARNING: the post landed but its --claims did not. The /api/forum "
+              "route is not carrying the field; the paths are prose only, and "
+              "tools/forum_claims.py will read them only if a claim sentence "
+              "names them. Sent %s, stored %s." % (payload["claims"], kept))
 
 
 def _threads() -> list:
@@ -141,6 +180,24 @@ def _show(t: dict, full: bool = False) -> None:
             print()
             print("      === settled by %s: %s" % (t.get("resolved_by"), t.get("resolve_note")))
         print()
+
+
+def _claims(flags: dict) -> list:
+    """--claims=path,Room_Name -> the paths and rooms this post is claiming.
+
+    WHY A FLAG AND NOT A SENTENCE. Gate L convicts prose a clone would not
+    have and until 2026-09-11 printed every row anonymously, while this board
+    already held the answer in prose. forum_claims.py can read a first-person
+    claim sentence, and on the day it was written that recovered 19 of 164
+    rows - but parsing is a guess about how somebody phrased it. A claim
+    written here is data: the gate names the row exactly, with no regex
+    between the writer and the reader. Both of 2026-09-10's heads-ups would
+    have carried five map names each.
+    """
+    raw = flags.get("--claims")
+    if not raw or raw is True:
+        return []
+    return [s.strip().replace("\\", "/") for s in str(raw).split(",") if s.strip()]
 
 
 def main() -> int:
@@ -183,7 +240,8 @@ def main() -> int:
             return 2
         tags = [s.strip().lower() for s in str(flags.get("--tags", "")).split(",") if s.strip()] \
             if flags.get("--tags") else []
-        res = _post({"kind": "ask", "author": who, "title": args[1], "body": args[2], "tags": tags})
+        res = _post({"kind": "ask", "author": who, "title": args[1], "body": args[2],
+                     "tags": tags, "claims": _claims(flags)})
         if res.get("ok"):
             print("posted %s%s" % (res["thread"]["id"], "  (offline, file only)" if res.get("offline") else ""))
             return 0
@@ -195,7 +253,8 @@ def main() -> int:
             print('usage: forum.py answer <id> "body" [--settle] [--as=name]')
             return 2
         res = _post({"kind": "answer", "author": who, "id": args[1], "body": args[2],
-                     "resolves": bool(flags.get("--settle"))})
+                     "resolves": bool(flags.get("--settle")),
+                     "claims": _claims(flags)})
         if res.get("ok"):
             print("answered %s%s" % (args[1], " and settled" if flags.get("--settle") else ""))
             return 0

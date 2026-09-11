@@ -119,7 +119,11 @@ def _metric_subjects(metrics: dict[str, Any]) -> list[str]:
         if not isinstance(value, str) or value in _NOT_A_SUBJECT:
             continue
         # counters rendered as prose ("empty 118 · stub 32") name no file
-        if key in {"detector_selftest", "reason", "open_not_counted", "age_reading"}:
+        # claimed_* name the same paths `unreachable` already names, wrapped in
+        # prose about who said so; reading them again would double every row
+        # in the tree-state attribution.
+        if key in {"detector_selftest", "reason", "open_not_counted",
+                   "age_reading", "claimed_reading", "claimed_by"}:
             continue
         for raw in value.split(","):
             token = _SUBJECT_TRAILER.sub("", raw.strip()).strip()
@@ -825,6 +829,18 @@ def build_report(
                     # repository. Four consecutive mornings the breather did
                     # this arithmetic by hand and deferred.
                     "age_reading": str(prose.get("age_reading", "")) or "none",
+                    # Who said, in writing, that they are holding these rows.
+                    # The forum is a tracked ledger and until 2026-09-11 no
+                    # gate opened it, so three evenings running a breath
+                    # rebuilt from mtimes an attribution already typed into a
+                    # file. It names rows; it moves no number -- the verdict
+                    # above is computed before this line and does not read it.
+                    "claimed_in_the_forum": int(prose.get("claimed_in_the_forum", -1)),
+                    "claimed_reading": str(prose.get("claimed_reading", "")) or "none",
+                    "claimed_by": ", ".join(
+                        "%s -> %s" % (p, w)
+                        for p, w in sorted((prose.get("claimed_by") or {}).items())
+                    ) or "none",
                     "unreachable": ", ".join(
                         u.get("path", "") for u in (prose.get("unreachable") or [])
                     ) or "none",
