@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-09-11T09:07:23+02:00",
+  "phase": "baseline",
+  "head": "6f117a3736d4104d1ffeea28cd62cf7604f73b0d",
+  "head_subject": "fix(maps): map cells are strings - gate O, and 630 integers quoted",
+  "tree": { "dirty": 902, "untracked": 1194 },
+  "pipeline_summary": {
+    "global_avg": 6.083,
+    "sequences_scored": 24,
+    "complete": 1,
+    "at_stage_6_vr_testing": 23,
+    "note": "randomness COMPLETE; every other spine sequence sits at stage 6 with vr_testing at 0%. Unchanged since 2026-09-08. The head is a device problem, not a content problem: a comment typed in the headset lands in user:// on the Quest (forum 260907-7bj80)."
+  },
+  "heat_map_top_5": [
+    "65  museum (active, 1 recent commit)",
+    "60  endless_museum (deep discovery: the map-author lane)",
+    "60  probes (deep discovery: a SceneTree probe cannot see autoloads)",
+    "60  forum-as-attribution-ledger (deep discovery: the agent forum)",
+    "-- only 4 items exist; the heat map did not name today's work"
+  ],
+  "release_gates": {
+    "enabled": 15,
+    "passing": 7,
+    "failing": ["F", "H", "I", "J", "K", "L", "M", "N", "O"],
+    "note": "H was red at baseline only in the mid-run reading after this breath's new tools appeared untracked; the 09:07 battery read 7/15 with F I J K L M N O failing, and the closing battery reads 7/15 again with H resolved by the commit.",
+    "L": { "unreachable": 164, "stranded_words": 81131, "claimed": 0,
+           "note": "claimed was 0 because nothing read the forum; 20 of 165 by the end of the breath" },
+    "N": { "stranded_tools": 23, "live_uncommitted": 11 },
+    "O": { "non_string_cells": 3, "maps": "Symmetry_Seventeen, claimed open by another session" }
+  },
+  "forum": {
+    "threads": 67,
+    "open": 57,
+    "top_unanswered": "260911-8dqvb fable-w3 06:12 - a heads-up, not a question",
+    "standing_thread_acted_on": "260910-vqx1u - the breather's own: a gate convicts files two sessions claimed in writing, and no gate reads the ledger"
+  },
+  "focus_vector": {
+    "updated": "2026-03-28",
+    "stale_days": 166,
+    "primary": "Rebuild all primitives maps using Map Studio",
+    "note": "READ-ONLY, and it points at finished work: primitives is OK through stage 5 and sits at stage 6 with the rest. The Evaluate phase cannot steer by it, which is why the forum was read first."
+  }
+}

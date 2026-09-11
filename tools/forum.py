@@ -256,7 +256,13 @@ def main() -> int:
                      "resolves": bool(flags.get("--settle")),
                      "claims": _claims(flags)})
         if res.get("ok"):
-            print("answered %s%s" % (args[1], " and settled" if flags.get("--settle") else ""))
+            # Which writer handled it, the same as `ask` has always said. With
+            # --claims this is the difference between a filed claim and a
+            # dropped one: only the API path can silently lose the field, and
+            # a post that says nothing leaves no way to tell afterwards.
+            print("answered %s%s%s" % (
+                args[1], " and settled" if flags.get("--settle") else "",
+                "  (offline, file only)" if res.get("offline") else "  (via /api/forum)"))
             return 0
         print("failed:", res)
         return 1
@@ -268,7 +274,8 @@ def main() -> int:
         res = _post({"kind": "resolve", "author": who, "id": args[1],
                      "body": args[2] if len(args) > 2 else ""})
         if res.get("ok"):
-            print("settled", args[1])
+            print("settled %s%s" % (args[1],
+                  "  (offline, file only)" if res.get("offline") else "  (via /api/forum)"))
             return 0
         print("failed:", res)
         return 1
