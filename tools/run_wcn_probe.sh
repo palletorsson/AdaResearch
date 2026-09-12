@@ -40,7 +40,8 @@ case "${1:-}" in
   columns)  MAP=Noise_Columns;               EXPECT=probe_columns;       SCRIPT=probe_wcn_columns ;;
   torus)    MAP=Noise_One;                   EXPECT=probe_torus;         SCRIPT=probe_wcn_torus ;;
   voxel)    MAP=Noise_Voxel;                 EXPECT=probe_voxel;         SCRIPT=probe_wcn_voxel ;;
-  *) echo "usage: $0 intro|random|noise|pendulum|sine|effect|air|synth|entropy|entropy_once|remove|walk|gauss|mush|game|points|columns|torus|voxel [live]"; exit 3 ;;
+  wall)     MAP=Noise_6_Wall;                EXPECT=probe_wall;          SCRIPT=probe_wcn_wall ;;
+  *) echo "usage: $0 intro|random|noise|pendulum|sine|effect|air|synth|entropy|entropy_once|remove|walk|gauss|mush|game|points|columns|torus|voxel|wall [live]"; exit 3 ;;
 esac
 OUT="ada_run/waves_chance_noise/$MAP"
 SUFFIX=""; [ "$MODE" = "live" ] && SUFFIX="_live"

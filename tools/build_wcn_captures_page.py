@@ -50,6 +50,8 @@ HALLS = [
      ['', '_relief', '_colour', '_readout', '_desktop_front', '_plan']),
     ('Noise_Voxel', 'probe_voxel', 'N4', 'When does a value become a place a body can occupy?',
      ['', '_readout', '_terrain', '_desktop_front', '_plan']),
+    ('Noise_6_Wall', 'probe_wall', 'N5', 'Which layer of a surface are you attending to?',
+     ['', '_readout', '_interior', '_desktop_front', '_plan']),
 ]
 
 VIEW_NAMES = {'': 'the primary, from the visitor\'s spot', '_desktop_front': 'the desktop rig\'s own camera, live lane'}
