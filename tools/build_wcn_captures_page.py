@@ -40,6 +40,8 @@ HALLS = [
      ['', '_uniform', '_poisson', '_running', '_display', '_readout', '_keypad', '_north_door', '_south_door', '_arena', '_plan', '_desktop_front']),
     ('Random_Mushrooms', 'probe_mushrooms', 'R4', 'Which parts of this population were allowed to vary?',
      ['', '_readout', '_specimens', '_panel', '_bed', '_rejected', '_edibles', '_eaten', '_north_door', '_south_door', '_west_margin', '_plan', '_desktop_front']),
+    ('Random_Game', 'probe_game', 'R5', 'How can you plan when the next state is known but its timing is not?',
+     ['', '_approach', '_tablet', '_stele', '_row', '_bed', '_idol', '_desktop_crossing', '_desktop_fallen', '_plan']),
 ]
 
 VIEW_NAMES = {'': 'the primary, from the visitor\'s spot', '_desktop_front': 'the desktop rig\'s own camera, live lane'}
