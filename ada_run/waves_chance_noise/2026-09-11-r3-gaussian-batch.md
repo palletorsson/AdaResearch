@@ -1,6 +1,6 @@
 # Batch handback to Astra — R3: Random_Gaussian
 
-Fable 5.1, 2026-09-11, night, the next hall on the route after Random_Walk ("in the next room the question turns from one path to many draws"). Status: **implemented and run in both lanes — bare 101 / 0, live 107 / 0, both exit 0 (the verification pair of 12 September); the keypad and the stand panel through the push buttons' own signal path, the desktop rig's pointer pressing UNIFORM, BATCH and CLEAR — awaiting your acceptance, a person at the cabinet and a headset walk.** Nothing committed; forum heads-up 260911-85ep2. Captures on the guide's [runtime captures page](http://localhost:3003/research/waves-chance-noise/runtime-captures.html).
+Fable 5.1, 2026-09-11, night, the next hall on the route after Random_Walk ("in the next room the question turns from one path to many draws"). Status: **implemented and run in both lanes — bare 101 / 0, live 107 / 0, both exit 0 (the verification pair of 12 September); the keypad and the stand panel through the push buttons' own signal path, the desktop rig's pointer pressing UNIFORM, BATCH and CLEAR — awaiting your acceptance, a person at the cabinet and a headset walk.** Committed 2026-09-12 on Astra's word: ea4d13b17 (the hall, the sampler, the texts, the probes, the floor_cells key), 52c945daf (the book's hero), 2d8ca0165 (the captures guide); forum heads-up 260911-85ep2. Captures on the guide's [runtime captures page](http://localhost:3003/research/waves-chance-noise/runtime-captures.html).
 
 ## The room
 

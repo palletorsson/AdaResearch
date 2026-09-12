@@ -1,97 +1,46 @@
 # Random_Mushrooms - Map Summary
 
 ## Overview
-This map combines biological randomness (fungal growth) with historical randomness (RAND Corporation's 1955 million random digits). Mushrooms appear where spores land and conditions allow—demonstrating how random distribution meets environmental constraint. The 1955 RAND book page grounds this in history: before PRNGs, randomness came from physical processes and was published in tables.
+A six-metre raised bed of mushrooms in the middle of the hall and a specimen table at its north edge. The bed is an arrangement made from draws — six templates, eighty candidates gated by a noise threshold, a facing and a size for each accepted one, a ring and two clusters placed on purpose — and the table shows the six templates, prints the population's counts, rings every copy of one template or one kind in the bed, and regrows the population from a named seed. Question: which parts of this population were allowed to vary?
 
 ## Spatial Layout
-- **Dimensions**: 12×13 grid
-- **Architecture**: Walled arena with elevated perimeter (heights 2-3), central floor at height 1
-- **Height**: Variable—corner towers at 3, walls at 2, floor at 1, exit at 0
+- **Dimensions**: 13 × 13 cells; the interior x 1–10 at floor level, a one-metre platform strip along x 11 (rows 3–9)
+- **Doors**: north at x 5–7 (row 0), south at (6,12); the teleporter at (8,12), floored in the museum by `museum.floor_cells`
+- **The bed**: x 3.5–9.5, z 4.5–10.5, its ground lifted 0.18 m clear of the floor and boarded
+- **The table**: 1.5 × 0.5 × 0.9 m, its face at z ≈ 3.1, facing the north door; the visitor's spot at (6.5, 2.3)
+- **The walk**: north door → west margin (x 1–3.5) → south margin (z 10.5–12) → south door
 
 ## Key Elements
 
 ### Interactables
-- **dark_sphere** (5,5) - Central ambient zone
-- **mushrooms** (4,6) - Fungal growth visualization
-- **bubbles_random** (5,6) height -0.5m, scale 1.0 - Random bubble particles
-- **random_number_book_page_1955** (5,12) - RAND Corporation's "A Million Random Digits"
+- **mushrooms** (6,7), `mushrooms:180#stand:specimen#size:6` — the primary: the bed and its table
+- **reaction_diffusion_intro** (9,11) — the book pearl's hero line: a Gray-Scott field, spots from two rates
+- **bubbles_random** (10,4), **bubble_particles** (10,9) — bubbles in the east nook
+- **random_number_book_page_collection** (10,7) — the RAND Corporation's 1955 digits, cascading
+- **dark_sphere** (10,2) — the anchor, north-east
 
-### Utilities
-- **Spawn point** (0,0) height 5.5m - Elevated entry
-- **Teleporter** (8,12) - Exit to next map (Random_Space_Geometry)
-- **sp (spawn marker)** (10,12) - Secondary spawn reference
+### The table's controls
+- **SHOW** — the next template; an orange ring and a pin on every copy of it in the bed
+- **KIND** — scattered (blue) · rings (green) · clusters (violet) · rejected candidates (grey) · back to the template
+- **SIZE** — the size rule off under the same seed (every mushroom at 1), and on again
+- **REGROW** — the same population again, ground and all
+- **NEW SEED** — another population, another ground
 
-## Atmosphere
-- **Background**: Sky blue [0.2, 0.3, 0.7]
-- **Lighting**: Standard cool ambient with warm directional
-- **Mood**: Organic, historical, connecting natural and computational randomness
+### The plate (six lines)
+seed and REGROW's policy · candidates, accepted, rejected · rings (placed), clusters (placed), templates · the SHOW or KIND line with its count · the size rule or SIZE off · glow, lit of the cap, mushrooms
 
 ## Learning Sequence
-1. Player spawns elevated, looking down into arena
-2. Descends into walled space
-3. Encounters dark sphere at center
-4. Observes mushrooms visualization—random growth patterns
-5. Watches bubbles_random—particles in random motion
-6. Discovers random_number_book_page_1955—historical artifact
-7. Connects biological and computational randomness
-8. Exits to continue sequence
+1. From the north door, the table first: six specimens on discs, the plate, the panel
+2. Pick two related mushrooms in the bed; SHOW until their template is named and ringed; they differ in facing and size only
+3. REGROW: the same population returns; SIZE: the same population at one size; NEW SEED: another
+4. KIND rejected: grey marks where candidates were refused by the noise threshold
+5. KIND rings: the circle was an instruction with a centre, a radius and a count; clusters have a rule of their own
+6. Round the west margin and along the south to the door; the bubbles, the digits and the reaction-diffusion field in the east and south
 
-## Design Intent
-The juxtaposition of organic (mushrooms, bubbles) and archival (1955 book page) creates a bridge between nature and computation. Both involve randomness, but the 1955 book reminds us that digital randomness was once laboriously extracted from physical processes and printed in tables.
+## Museum
+`wall_height 3`, `gate_depth_rows 0`, `artifact_placement map`, `sculpture_clear_rects [[3,1,10,12]]`, `floor_cells [[8,12]]`. The dealt lane neither slides nor shrinks the map's bodies; dealt plinths stay out of cells 3–9 × 1–11.
 
 ## Connection to Sequence
-- **Position in randomness sequence**: 10/13
-- **Precedes**: Random_Space_Geometry
-- **Follows**: Random_Pheromone
-- **Theme**: Historical and biological randomness—where our random numbers come from
-
-## Historical Framework
-
-### RAND Corporation's "A Million Random Digits" (1955)
-
-Before computers generated pseudorandom numbers, researchers needed tables of random values. RAND Corporation used an electronic roulette wheel connected to a computer to generate 1,000,000 random digits, published in 1955.
-
-The book became essential for:
-- Statistical sampling
-- Monte Carlo simulations
-- Cryptographic applications
-- Scientific experiments
-
-It's now free online, but for decades it was how scientists accessed randomness.
-
-### From Tables to Algorithms
-
-The progression:
-1. **1955**: Published random tables (RAND book)
-2. **1958**: Linear congruential generators (Lehmer)
-3. **1997**: Mersenne Twister (Matsumoto & Nishimura)
-4. **Modern**: Cryptographically secure PRNGs, hardware RNGs
-
-We moved from consuming randomness (tables) to generating it (algorithms) to verifying it (statistical tests).
-
-### Fungi as Random Samplers
-
-Mushroom spores disperse randomly—wind-carried, animal-transported, or explosively ejected. But germination isn't random: it requires specific moisture, temperature, substrate, and symbiotic partners.
-
-This is constrained randomness: random distribution meeting environmental selection. Only where conditions align do mushrooms fruit. The visible mushrooms are survivors of a random dispersal process.
-
-## QFEP Connection
-
-The mushroom/RAND juxtaposition illustrates two entropy sources:
-
-**Biological (mushrooms)**:
-- Continuous physical randomness (spore dispersal)
-- Environmental constraints (λ parameter)
-- Adaptive response (the φΔE term)
-
-**Computational (1955 tables)**:
-- Extracted randomness (hardware RNG → printed tables)
-- Deterministic consumption (read table sequentially)
-- No adaptation (tables don't change)
-
-The QFEP requires ongoing randomness injection—the φΔE(S,t) term. Tables exhaust; biology renews. This distinction matters for living systems: they must continuously generate entropy, not just consume it.
-
-## Sources
-- RAND Corporation (1955). *A Million Random Digits with 100,000 Normal Deviates*
-- Money, N.P. (2016). *Mushroom* (spore dispersal biology)
-- Knuth, D. (1997). *The Art of Computer Programming, Vol. 2: Seminumerical Algorithms* (PRNG history)
+- **Follows**: Random_Gaussian — many draws under one law
+- **Precedes**: Random_Game — a draw that decides an outcome
+- **Theme**: an arrangement is the sum of several kinds of draw, and each can be read separately

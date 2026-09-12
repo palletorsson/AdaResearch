@@ -34,7 +34,8 @@ case "${1:-}" in
   remove)   MAP=Random_Remove;               EXPECT=probe_remove;        SCRIPT=probe_wcn_remove ;;
   walk)     MAP=Random_Walk;                 EXPECT=probe_walk;          SCRIPT=probe_wcn_walk ;;
   gauss)    MAP=Random_Gaussian;             EXPECT=probe_gaussian;      SCRIPT=probe_wcn_gaussian ;;
-  *) echo "usage: $0 intro|random|noise|pendulum|sine|effect|air|synth|entropy|entropy_once|remove|walk|gauss [live]"; exit 3 ;;
+  mush)     MAP=Random_Mushrooms;            EXPECT=probe_mushrooms;     SCRIPT=probe_wcn_mushrooms ;;
+  *) echo "usage: $0 intro|random|noise|pendulum|sine|effect|air|synth|entropy|entropy_once|remove|walk|gauss|mush [live]"; exit 3 ;;
 esac
 OUT="ada_run/waves_chance_noise/$MAP"
 SUFFIX=""; [ "$MODE" = "live" ] && SUFFIX="_live"

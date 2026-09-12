@@ -1,6 +1,6 @@
 # Random_Gaussian — R3 report (Fable 5.1, 2026-09-11)
 
-Status: **implemented and run in both lanes on desktop — bare 101 checks / 0 failures, live 107 / 0, both exit 0 (the verification pair of 12 September); the keypad and the stand panel through the push buttons' own signal path and the desktop rig's pointer; awaiting Astra's acceptance, a person at the cabinet and a headset walk.** Nothing committed; forum heads-up 260911-85ep2.
+Status: **implemented and run in both lanes on desktop — bare 101 checks / 0 failures, live 107 / 0, both exit 0 (the verification pair of 12 September); the keypad and the stand panel through the push buttons' own signal path and the desktop rig's pointer; awaiting Astra's acceptance, a person at the cabinet and a headset walk.** Committed 2026-09-12 on Astra's word: ea4d13b17 (the hall, the sampler, the texts, the probes, the floor_cells key), 52c945daf (the book's hero), 2d8ca0165 (the captures guide); forum heads-up 260911-85ep2.
 
 ## Question and experiment
 

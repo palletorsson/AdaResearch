@@ -1,6 +1,6 @@
 # Handoff — Waves, Randomness and Noise, batch R3: Random_Gaussian (Fable 5.1, 2026-09-11)
 
-Status: **implemented and run in both lanes on desktop — bare 101 / 0, live 107 / 0, both exit 0 (the verification pair of 12 September); the keypad and the stand panel through the push buttons' own signal path and the desktop rig's pointer; handback `ada_run/waves_chance_noise/2026-09-11-r3-gaussian-batch.md` — awaiting Astra's acceptance, a person at the cabinet and a headset walk.** Nothing committed.
+Status: **implemented and run in both lanes on desktop — bare 101 / 0, live 107 / 0, both exit 0 (the verification pair of 12 September); the keypad and the stand panel through the push buttons' own signal path and the desktop rig's pointer; handback `ada_run/waves_chance_noise/2026-09-11-r3-gaussian-batch.md` — awaiting Astra's acceptance, a person at the cabinet and a headset walk.** Committed 2026-09-12 on Astra's word: ea4d13b17 (the hall, the sampler, the texts, the probes, the floor_cells key), 52c945daf (the book's hero), 2d8ca0165 (the captures guide).
 
 Read first: `doc/research/waves-chance-noise/maps/Random_Gaussian.md` (the card), the handback, the guide's `runtime-captures.html` (every hall's probe captures, by `tools/build_wcn_captures_page.py`), `ada_run/waves_chance_noise/Random_Gaussian/report.md`, `commons/maps/Random_Gaussian/field_notes.md` (the ruling, the floor recovery, the runtime findings, the rejected ideas).
 

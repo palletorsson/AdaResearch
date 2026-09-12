@@ -108,7 +108,7 @@ def runtime_status():
     rooms=[('WaveFunctions_Intro','probe_intro'),('Random_Definition','probe_random_definition'),
            ('Noise_Perlin_Simplex','probe_noise_pair'),('WaveFunctions_Pendulum','probe_pendulum'),
            ('WaveFunctions_Sine_Space','probe_sine_space'),('WaveFunctions_Effect_Sound','probe_effect_sound'),('WaveFunctions_AirMusic','probe_air_music'),
-           ('WaveFunctions_Synthesis_Lab','probe_synthesis_lab'),('Random_Entropy','probe_entropy'),('Random_Remove','probe_remove'),('Random_Walk','probe_walk'),('Random_Gaussian','probe_gaussian')]
+           ('WaveFunctions_Synthesis_Lab','probe_synthesis_lab'),('Random_Entropy','probe_entropy'),('Random_Remove','probe_remove'),('Random_Walk','probe_walk'),('Random_Gaussian','probe_gaussian'),('Random_Mushrooms','probe_mushrooms')]
     for name,stem in rooms:
         for suffix in ('','_live'):
             p=ROOT/'ada_run/waves_chance_noise'/name/f'{stem}{suffix}.json'
