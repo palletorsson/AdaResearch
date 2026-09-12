@@ -349,6 +349,14 @@ func run() -> void:
 			check(now != was, "%s pressed through the pointer changes what it says it changes (%s → %s)" % [pair[1], str(was), str(now)])
 		if capture:
 			var board2: Node3D = panel_body.get_node_or_null("SamplePanel")
+			# BACK TO THE READING LANDING. The rig was last standing at a button, 0.45 m from
+			# the board and off to one side; aiming from there photographs the board as a wedge.
+			# This is the view a body has while READING it.
+			var rig3: CharacterBody3D = drv.get("rig")
+			if rig3 != null:
+				rig3.global_position = seg.to_global(Vector3(SPOT.x, 0.05, SPOT.z + vest))
+				rig3.velocity = Vector3.ZERO
+			for i in range(8): await process_frame
 			drv.call("aim_at", board2.global_position + Vector3(0, 1.28, 0) if board2 != null else stand_at)
 			for i in range(8): await process_frame
 			await create_timer(0.3, true, false, true).timeout
