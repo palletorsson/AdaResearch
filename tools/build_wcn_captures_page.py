@@ -48,6 +48,8 @@ HALLS = [
      ['', '_slot0', '_slot1', '_slot2', '_matte', '_readout', '_desktop_front', '_plan']),
     ('Noise_One', 'probe_torus', 'N3', 'Is the restless thing a field, a surface or our way of reading it?',
      ['', '_relief', '_colour', '_readout', '_desktop_front', '_plan']),
+    ('Noise_Voxel', 'probe_voxel', 'N4', 'When does a value become a place a body can occupy?',
+     ['', '_readout', '_terrain', '_desktop_front', '_plan']),
 ]
 
 VIEW_NAMES = {'': 'the primary, from the visitor\'s spot', '_desktop_front': 'the desktop rig\'s own camera, live lane'}
