@@ -1,0 +1,539 @@
+extends SceneTree
+## Random_Remove, batch R1b (doc/research/waves-chance-noise, 2026-09-11, Astra's thread from
+## Random_Entropy: the same sample rearranged → which cells were eligible before chance acted):
+## who was eligible to disappear?
+##
+## Stands up the ACTUAL museum hall with its artifacts (the pattern of probe_wcn_entropy.gd),
+## hands the museum the REAL necklace hand file, finds remove_random on its owned bench
+## (#local_grid:true), and measures: the bench (pedestal, board, sixty-four cubes, slot plates,
+## the labels, the panel with seven buttons); the arrival set (RANGE: sixteen amber, forty-eight
+## grey); REMOVE ONE through the push button's own signal path (area → push_button.pressed →
+## the fixture → remove_one) and a full run — every removed index in the initial set, none
+## repeated, the grey untouched, the exhausted set inert; RESET restoring all sixty-four and
+## replaying the same seed's order; NEW SEED giving another; ROW, COLUMN and ALL sets, and the
+## same seed over two masks (the same draws landing on different cubes); the museum's floor and
+## bodies untouched by the operation; walks, the museum's verdicts, plinths, captures and
+## streaming. The live port adds the project's desktop rig pressing the panel through its pointer.
+## Physical absence is not claimed by the map and not tested.
+##
+##   godot --rendering-method gl_compatibility --path . --xr-mode off --script res://commons/testing/probe_wcn_remove.gd -- --capture
+##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_wcn_remove.gd
+##
+## Writes res://ada_run/waves_chance_noise/Random_Remove/probe_remove.json
+## (and probe_remove*.png under --capture). Exit code 1 on any failed check.
+var checks := 0
+var failures: Array[String] = []
+var measurements: Dictionary = {}
+const MAP := "Random_Remove"
+const OUT := "res://ada_run/waves_chance_noise/Random_Remove/"
+const MAP_CELL := Vector2i(6, 7)
+const SIDE := 8
+
+func _initialize() -> void: run.call_deferred()
+
+func _live() -> bool:
+	return str(get_script().resource_path).ends_with("_live.gd")
+
+func check(ok: bool, message: String) -> void:
+	checks += 1
+	if not ok: failures.append(message)
+	print("[wcn-remove] ", "PASS " if ok else "FAIL ", message)
+
+func run() -> void:
+	if "--capture" in OS.get_cmdline_user_args() and DisplayServer.get_name() == "headless":
+		check(false, "PNG capture requires a rendered window; omit --headless, or omit --capture for logic only")
+		_finish(); return
+	var em: Node3D = load("res://commons/scenes/endless_museum.tscn").instantiate()
+	var ctl := "res://ada_run/waves_chance_noise/wcn-probe-control.json"
+	em.set("EM_CONTROL", ctl); em.set("_overrides_path", ctl + ".unused")
+	em.set("_hand_path", "res://ada_run/necklace_hand.json")   # the REAL hand, on purpose
+	em.set("start_chapter", "randomness"); em.set("start_map", MAP)
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/em_layout.json"))
+	layout.get_or_add("stream", {})["bodies"] = 1
+	em.set("_layout", layout)
+	var f := FileAccess.open(ctl, FileAccess.WRITE)
+	f.store_string(JSON.stringify({"first_chapter": "randomness", "dollhouse": 0, "grid_pack": 1})); f.close()
+	root.add_child(em); current_scene = em
+	await create_timer(1.0).timeout
+	em.set_process(false); em.call("flush_stamps")
+	var player: Node = em.get("_player")
+	if player != null: player.set_process(false); player.set_physics_process(false)
+	var seg: Node3D
+	for rec: Dictionary in em.get("_segments"):
+		if rec.node.get_meta("em_map", "") == MAP: seg = rec.node; break
+	check(seg != null, "the hall exists in the active museum")
+	if seg == null:
+		_finish(); return
+	for i in range(30): await process_frame
+	var vest: int = int(em.get("VESTIBULE_H"))
+	var capture: bool = "--capture" in OS.get_cmdline_user_args()
+	var cam: Camera3D
+	if capture:
+		var wc: Camera3D = em.get("_cam")
+		if wc != null and is_instance_valid(wc):
+			for c in wc.get_children():
+				if c is Timer: (c as Timer).stop()
+		cam = Camera3D.new(); em.add_child(cam); cam.fov = 62
+
+	# ── 1. built where the map put it, its bench facing east ─────────────────
+	var rem: Node3D
+	var rem_cell: Array = []
+	for record: Dictionary in em.get("_edit_records"):
+		var node: Node = record.get("node")
+		if node != null and seg.is_ancestor_of(node) and node.get_script() != null and str(node.get_script().resource_path).ends_with("RemoveRandom.gd"):
+			rem = node; rem_cell = record.get("tile_cell", [])
+	if rem == null:
+		for n in seg.find_children("*", "Node3D", true, false):
+			if n.get_script() != null and str(n.get_script().resource_path).ends_with("RemoveRandom.gd"): rem = n; break
+	check(rem != null, "remove_random is built in the hall")
+	if rem == null:
+		_finish(); return
+	if rem_cell.size() >= 2:
+		check(int(rem_cell[0]) == MAP_CELL.x and int(rem_cell[1]) == MAP_CELL.y, "built at the map's cell (6,7) (got %s)" % str(rem_cell))
+	var lo: Vector3 = seg.to_local(rem.global_position)
+	measurements["origin_local"] = [lo.x, lo.y, lo.z - vest]
+	check(absf(lo.x - 6.5) < 0.6 and absf(lo.z - (7.5 + vest)) < 0.6, "the remover stands on its cell (%.1f, %.1f)" % [lo.x, lo.z - vest])
+	check(absf(lo.y) < 0.05, "the deck is the origin: the bench stands ON the floor (y %.2f)" % lo.y)
+	var front: Vector3 = seg.global_transform.basis.inverse() * (rem.global_transform.basis * Vector3(0, 0, 1))
+	check(front.x > 0.9, "the front (+z: the panel) faces east, where a visitor stands (x %.2f)" % front.x)
+	check(bool(rem.get("local_grid")), "the token's #local_grid:true reached the artifact: an owned grid, not the room's")
+	var st: Dictionary = rem.call("get_state")
+	measurements["arrival"] = st.duplicate()
+	check(bool(st["bound"]) and int(st["total"]) == 64, "the remover is bound to its own sixty-four cubes (%s)" % str(st["bound"]))
+	check(str(st["mode"]) == "Range" and int(st["eligible_at_start"]) == 16 and int(st["remaining"]) == 16 and int(st["removed"]) == 0, "on arrival: RANGE, sixteen eligible, none removed (%s)" % str({"mode": st["mode"], "eligible": st["eligible_at_start"], "remaining": st["remaining"]}))
+	check(bool(st["replay_on_reset"]), "the bench replays its seed on reset (replay_on_reset)")
+	var seed0: int = int(st["seed"])
+	var initial: Array = st["initial_eligible"]
+	var want16: Array = []
+	for z in range(2, 6):
+		for x in range(2, 6): want16.append(z * SIDE + x)
+	check(initial == want16, "the initial eligible set is the 4×4 block, columns 2–5 and rows 2–5 (%s)" % str(initial))
+
+	# ── 2. the bench ──────────────────────────────────────────────────────────
+	var fixture: Node3D = rem.get_node_or_null("LocalGrid")
+	check(fixture != null, "the owned bench exists (LocalGrid)")
+	if fixture == null:
+		_finish(); return
+	var pedestal: Node3D = fixture.get_node_or_null("Pedestal")
+	var board: Node3D = fixture.get_node_or_null("Board")
+	check(pedestal != null and not pedestal.find_children("*", "StaticBody3D", false, false).is_empty() and board != null, "a pedestal with a collider and a board on it")
+	var board_top: float = seg.to_local(board.global_position).y + 0.03 if board != null else -1.0
+	measurements["board_top"] = board_top
+	check(absf(board_top - 1.02) < 0.02, "the board's top is at 1.02 m (%.2f)" % board_top)
+	var mmi: MultiMeshInstance3D = fixture.get_node_or_null("GridMultiMesh")
+	check(mmi != null and mmi.multimesh != null and mmi.multimesh.instance_count == 64, "sixty-four cubes in one MultiMesh")
+	var slots: int = 0
+	for c in fixture.get_children():
+		if str(c.name).begins_with("Slot_"): slots += 1
+	check(slots == 64, "sixty-four permanent slot plates under them (%d)" % slots)
+	var status: Label3D = fixture.get("_status")
+	var last: Label3D = fixture.get("_last")
+	check(status != null and status.text.begins_with("RANGE: columns 2-5, rows 2-5 · seed %d" % seed0) and seed0 >= 10000 and seed0 <= 99999, "the status names the set and a five-digit seed (%s)" % (status.text.get_slice("\n", 0) if status != null else ""))
+	check(status != null and status.text.get_slice("\n", 1) == "Eligible: 16   Remaining: 16   Removed: 0", "…and the counts (%s)" % (status.text.get_slice("\n", 1) if status != null else ""))
+	check(last != null and last.text.begins_with("Amber: can be chosen. Grey: outside the set."), "the legend reads amber / grey (%s)" % (last.text.get_slice("\n", 0) if last != null else ""))
+	var panel: Node3D = fixture.get("panel")
+	check(panel != null, "the panel exists")
+	for b in ["Btn_0", "Btn_1", "Btn_2", "Btn_3", "Btn_4", "Btn_5", "Btn_6"]:
+		check(panel != null and panel.find_child(b, true, false) != null, "the panel has %s" % b)
+	var colours: Dictionary = _colour_count(mmi)
+	measurements["arrival_colours"] = colours
+	check(int(colours.get("eligible", 0)) == 16 and int(colours.get("excluded", 0)) == 48, "sixteen amber cubes, forty-eight grey (%s)" % str(colours))
+	if capture:
+		cam.global_position = seg.to_global(Vector3(8.7, 1.6, 7.5 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 1.1, 7.5 + vest)))
+		for i in range(20): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_remove.png")
+		measurements["captures"] = {"primary": _cam_pose(cam)}
+
+	# ── 3. REMOVE ONE through the push button's own path ─────────────────────
+	var museum_bodies_before: int = _count_outside(seg, rem)
+	var xf_before: Array = _transforms(mmi)
+	check(_press(panel, "Btn_4"), "REMOVE ONE pressed through the push button's signal path")
+	await create_timer(0.15).timeout
+	st = rem.call("get_state")
+	check(bool(st["busy"]) and int(st["last_selected"]) >= 0, "…one cube is chosen and highlighted before it goes (busy, selected %d)" % int(st["last_selected"]))
+	check(last != null and last.text.begins_with("Choosing column"), "…the label says which it is choosing (%s)" % (last.text.get_slice("\n", 0) if last != null else ""))
+	await create_timer(0.5).timeout
+	st = rem.call("get_state")
+	measurements["after_one"] = {"removed": st["removed"], "remaining": st["remaining"], "last_removed": st["last_removed"], "log": st["removal_log"]}
+	check(int(st["removed"]) == 1 and int(st["remaining"]) == 15, "…and it is gone: one removed, fifteen remain")
+	var idx1: int = int(st["last_removed"])
+	check(idx1 in want16, "…the removed index %d was in the initial set" % idx1)
+	var t1: Transform3D = mmi.multimesh.get_instance_transform(idx1)
+	check(t1.basis.get_scale().length() < 0.001, "…its cube is scaled to nothing (the slot plate stays: %s)" % str(fixture.get_node_or_null("Slot_%d_%d" % [idx1 % SIDE, idx1 / SIDE]) != null))
+	check(status != null and status.text.get_slice("\n", 1) == "Eligible: 16   Remaining: 15   Removed: 1", "the status counts it (%s)" % (status.text.get_slice("\n", 1) if status != null else ""))
+	check(last != null and last.text.begins_with("Last removed: column %d, row %d" % [idx1 % SIDE, idx1 / SIDE]), "the label names its column and row (%s)" % (last.text.get_slice("\n", 0) if last != null else ""))
+	if capture:
+		for i in range(6): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_remove_one.png")
+		measurements["captures"]["one"] = _cam_pose(cam)
+
+	# ── 4. a full run of the range ───────────────────────────────────────────
+	for k in range(15):
+		_press(panel, "Btn_4")
+		await create_timer(0.55).timeout
+	st = rem.call("get_state")
+	var log_a: Array = st["removal_log"]
+	measurements["run_a"] = {"log": log_a, "removed": st["removed"], "remaining": st["remaining"], "seed": st["seed"]}
+	check(int(st["removed"]) == 16 and int(st["remaining"]) == 0, "sixteen presses empty the set: removed 16, remaining 0")
+	var distinct := true
+	var in_set := true
+	for i in range(log_a.size()):
+		if not (int(log_a[i]) in want16): in_set = false
+		for j in range(i + 1, log_a.size()):
+			if int(log_a[i]) == int(log_a[j]): distinct = false
+	check(log_a.size() == 16 and in_set, "every removed index belonged to the initial eligible set (%s)" % str(log_a))
+	check(distinct, "no index repeats")
+	var grey_untouched := true
+	var xf_after: Array = _transforms(mmi)
+	for i in range(64):
+		if i in want16: continue
+		if not (xf_after[i] as Transform3D).is_equal_approx(xf_before[i]): grey_untouched = false
+	check(grey_untouched, "the forty-eight grey cubes stand where they stood")
+	_press(panel, "Btn_4")
+	await create_timer(0.55).timeout
+	st = rem.call("get_state")
+	check(int(st["removed"]) == 16 and int(st["remaining"]) == 0 and not bool(st["busy"]), "REMOVE ONE on the exhausted set does nothing")
+	check(last != null and last.text.begins_with("No eligible cubes remain"), "…and the label says so (%s)" % (last.text.get_slice("\n", 0) if last != null else ""))
+	if capture:
+		for i in range(6): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_remove_emptied.png")
+		measurements["captures"]["emptied"] = _cam_pose(cam)
+
+	# ── 5. RESET restores all sixty-four and replays the seed ─────────────────
+	check(_press(panel, "Btn_5"), "RESET pressed")
+	await process_frame
+	await process_frame
+	st = rem.call("get_state")
+	var restored := true
+	var xf_r: Array = _transforms(mmi)
+	for i in range(64):
+		if not (xf_r[i] as Transform3D).is_equal_approx(xf_before[i]): restored = false
+	check(restored and int(st["removed"]) == 0 and int(st["remaining"]) == 16, "all sixty-four cubes are back where they were, sixteen eligible again")
+	check(int(st["seed"]) == seed0, "the seed is the same (%d)" % int(st["seed"]))
+	for k in range(16):
+		_press(panel, "Btn_4")
+		await create_timer(0.55).timeout
+	st = rem.call("get_state")
+	var log_b: Array = st["removal_log"]
+	measurements["run_b_same_seed"] = {"log": log_b}
+	check(log_b == log_a, "the same seeded run repeats: the sixteen go in the same order")
+	check(_press(panel, "Btn_6"), "NEW SEED pressed")
+	await process_frame
+	await process_frame
+	st = rem.call("get_state")
+	var seed1: int = int(st["seed"])
+	check(seed1 != seed0 and int(st["removed"]) == 0 and int(st["remaining"]) == 16, "a new seed is named (%d) and the set restored" % seed1)
+	for k in range(16):
+		_press(panel, "Btn_4")
+		await create_timer(0.55).timeout
+	st = rem.call("get_state")
+	var log_c: Array = st["removal_log"]
+	measurements["run_c_new_seed"] = {"seed": seed1, "log": log_c}
+	check(log_c != log_a and log_c.size() == 16, "under the new seed the same set empties in another order")
+	check(status != null and status.text.begins_with("RANGE: columns 2-5, rows 2-5 · seed %d" % seed1), "the status names the new seed")
+
+	# ── 6. the masks: ROW, COLUMN, ALL — and the same seed over two masks ─────
+	rem.call("set_random_seed", 20260911)
+	check(_press(panel, "Btn_1"), "ROW pressed")
+	await process_frame
+	await process_frame
+	st = rem.call("get_state")
+	var row_set: Array = []
+	for x in range(SIDE): row_set.append(3 * SIDE + x)
+	check(str(st["mode"]) == "Row" and int(st["eligible_at_start"]) == 8 and (st["initial_eligible"] as Array) == row_set, "ROW: eight eligible, row 3 (%s)" % str(st["initial_eligible"]))
+	check(_colour_count(mmi).get("eligible", 0) == 8 and int(st["remaining"]) == 8 and int(st["removed"]) == 0, "…eight amber, all sixty-four present")
+	if capture:
+		for i in range(6): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_remove_row.png")
+		measurements["captures"]["row"] = _cam_pose(cam)
+	for k in range(8):
+		_press(panel, "Btn_4")
+		await create_timer(0.55).timeout
+	st = rem.call("get_state")
+	var log_row: Array = st["removal_log"]
+	check(log_row.size() == 8 and int(st["remaining"]) == 0, "ROW empties in eight presses (%s)" % str(log_row))
+	check(_press(panel, "Btn_2"), "COLUMN pressed")
+	await process_frame
+	await process_frame
+	st = rem.call("get_state")
+	var col_set: Array = []
+	for z in range(SIDE): col_set.append(z * SIDE + 3)
+	check(str(st["mode"]) == "Column" and (st["initial_eligible"] as Array) == col_set and int(st["removed"]) == 0, "COLUMN: eight eligible, column 3, all restored (%s)" % str(st["initial_eligible"]))
+	check(_press(panel, "Btn_3"), "ALL pressed")
+	await process_frame
+	await process_frame
+	st = rem.call("get_state")
+	check(str(st["mode"]) == "All" and int(st["eligible_at_start"]) == 64 and _colour_count(mmi).get("eligible", 0) == 64, "ALL: sixty-four eligible, every cube amber")
+	# the same seed over two masks: RANGE then ROW, both from seed S
+	rem.call("set_random_seed", 777)
+	_press(panel, "Btn_0")
+	await process_frame
+	await process_frame
+	for k in range(8):
+		_press(panel, "Btn_4")
+		await create_timer(0.55).timeout
+	var range8: Array = (rem.call("get_state") as Dictionary)["removal_log"]
+	rem.call("set_random_seed", 777)
+	_press(panel, "Btn_1")
+	await process_frame
+	await process_frame
+	for k in range(8):
+		_press(panel, "Btn_4")
+		await create_timer(0.55).timeout
+	var row8: Array = (rem.call("get_state") as Dictionary)["removal_log"]
+	measurements["same_seed_two_masks"] = {"seed": 777, "range_first8": range8, "row8": row8}
+	var row_ok := row8.size() == 8
+	for i in row8:
+		if not (int(i) in row_set): row_ok = false
+	var range_ok := range8.size() == 8
+	for i in range8:
+		if not (int(i) in want16): range_ok = false
+	check(range_ok and row_ok, "seed 777 over two masks: the RANGE run stays in its block, the ROW run in its row")
+	check(range8 != row8, "…the same draws land on different cubes (%s vs %s)" % [str(range8), str(row8)])
+	_press(panel, "Btn_0")
+	await process_frame
+	await process_frame
+
+	# ── 7. the museum untouched ───────────────────────────────────────────────
+	var museum_bodies_after: int = _count_outside(seg, rem)
+	measurements["museum_bodies"] = {"before": museum_bodies_before, "after": museum_bodies_after}
+	check(museum_bodies_after == museum_bodies_before, "the hall's other meshes and bodies are as many as before (%d): the operation stayed inside its owned grid" % museum_bodies_after)
+	check(rem.get("multimesh_instance") != null and rem.is_ancestor_of(rem.get("multimesh_instance")), "the bound MultiMesh is the remover's own descendant")
+	await create_timer(0.3).timeout
+	var severed: Array = em.get("_seg_severed") if em.get("_seg_severed") != null else []
+	var sev_tokens: Array = []
+	for s2 in severed: sev_tokens.append(str((s2 as Dictionary).get("token", "")))
+	measurements["museum_severed_tokens"] = sev_tokens
+	var walk_sev: Array = em.get("_walk_severed") if em.get("_walk_severed") != null else []
+	var mine_sev: Array = []
+	for e in walk_sev:
+		if str((e as Dictionary).get("hall", "")).contains(MAP): mine_sev.append(e)
+	measurements["museum_walk_severed"] = mine_sev
+	check(mine_sev.is_empty(), "the museum walks this hall door to door (local seals: %s)" % str(sev_tokens))
+	var plinths: Array = []
+	for n in seg.find_children("ArtPlinth*", "", true, false):
+		var pl2: Vector3 = seg.to_local((n as Node3D).global_position)
+		plinths.append([n.name, int(floor(pl2.x)), int(floor(pl2.z)) - vest])
+	measurements["plinths"] = plinths
+	var in_rect := false
+	for p in plinths:
+		if int(p[1]) >= 3 and int(p[1]) <= 9 and int(p[2]) >= 4 and int(p[2]) <= 10: in_rect = true
+	check(not in_rect, "no dealt plinth stands in the cells the rect protects, (3,4)–(9,10) (the rect names 10 and 11: its far edge is exclusive) (plinths: %s)" % str(plinths))
+
+	# ── 8. walks: past the bench on both sides, into it, before the panel ─────
+	var pspace := seg.get_world_3d().direct_space_state
+	var capsule := CapsuleShape3D.new(); capsule.radius = 0.22; capsule.height = 1.6
+	var wq := PhysicsShapeQueryParameters3D.new(); wq.shape = capsule
+	for route in [["south past the bench's west side, column 4", Vector3(4.5, 0.81, 4.5), Vector3(0, 0, 6.0), 1],
+			["south past the bench's east side, column 8", Vector3(8.6, 0.81, 4.5), Vector3(0, 0, 6.0), 1],
+			["south along column 5, beside the bench (the dark sphere stands at (5,8))", Vector3(5.3, 0.81, 4.5), Vector3(0, 0, 6.0), 2],
+			["south along the centre, column 6, into the pedestal", Vector3(6.5, 0.81, 4.5), Vector3(0, 0, 3.0), 0],
+			["west from the visitor's spot into the pedestal", Vector3(8.4, 0.81, 7.5), Vector3(-1.9, 0, 0), 0]]:
+		wq.transform = Transform3D(Basis.IDENTITY, seg.to_global(Vector3(route[1].x, route[1].y, route[1].z + vest)))
+		wq.motion = route[2]
+		var frac: float = pspace.cast_motion(wq)[0]
+		var key: String = "walk_" + str(route[0]).replace(" ", "_").replace("'", "").replace(",", "")
+		measurements[key] = frac
+		if frac < 0.99:
+			var blockers: Array = []
+			var stop: Vector3 = wq.transform.origin + route[2] * frac + route[2].normalized() * 0.03
+			var q2 := PhysicsShapeQueryParameters3D.new(); q2.shape = capsule; q2.transform = Transform3D(Basis.IDENTITY, stop)
+			for hit in pspace.intersect_shape(q2, 8):
+				var col: Node = (hit as Dictionary).get("collider")
+				if col != null: blockers.append(str(col.get_path()).right(70))
+			measurements[key + "_blockers"] = blockers
+		if int(route[3]) == 1:
+			check(frac > 0.99, "a body walks %s (%.2f of the way)" % [route[0], frac])
+		elif int(route[3]) == 2:
+			print("[wcn-remove] measured: %s %.2f of the way (%s)" % [route[0], frac, str(measurements.get(key + "_blockers", []))])
+		else:
+			check(frac < 0.95, "the pedestal is solid: a body walking %s is stopped (%.2f of the way)" % [route[0], frac])
+	var eye: Vector3 = seg.to_global(Vector3(8.3, 1.55, 7.5 + vest))
+	var b4: Node3D = panel.find_child("Btn_4", true, false)
+	measurements["reach_to_remove_button"] = eye.distance_to(b4.global_position) if b4 != null else -1.0
+	check(b4 != null and eye.distance_to(b4.global_position) < 1.25, "REMOVE ONE is within a lean of the visitor's spot (%.2f m from the eye)" % (eye.distance_to(b4.global_position) if b4 != null else -1.0))
+	var far_cube: Vector3 = mmi.to_global(Vector3(0, 0, 0))
+	measurements["reading_distance_far_corner"] = eye.distance_to(far_cube)
+	check(eye.distance_to(far_cube) < 2.6, "the board's far corner is within reading distance (%.2f m)" % eye.distance_to(far_cube))
+
+	# ── ACTUAL DESKTOP INPUT (live harness only) ─────────────────────────────
+	if _live():
+		var drv: Node = load("res://commons/testing/wcn_desktop_driver.gd").new()
+		root.add_child(drv)   # a SceneTree has no add_child; the port maps root. to get_tree().root.
+		var stand: Vector3 = seg.to_global(Vector3(8.9, 0.0, 7.5 + vest))
+		drv.call("spawn", stand, em)
+		await create_timer(0.5).timeout
+		var st0: Dictionary = rem.call("get_state")
+		var rec4: Dictionary = await drv.call("press", b4, stand) if b4 != null else {}
+		await create_timer(0.6).timeout
+		st = rem.call("get_state")
+		measurements["desktop_input"] = {"press_remove": rec4, "removed_before": st0["removed"], "removed_after": st["removed"]}
+		check(str(rec4.get("hover", "")).contains("Btn_4") or str(rec4.get("hover", "")).contains("InteractableAreaButton"), "the desktop pointer had REMOVE ONE under the crosshair (%s)" % str(rec4.get("hover", "")))
+		check(int(st["removed"]) == int(st0["removed"]) + 1, "REMOVE ONE pressed through the pointer removes one cube (%d → %d)" % [int(st0["removed"]), int(st["removed"])])
+		if capture:
+			drv.call("aim_at", rem.to_global(Vector3(0.0, 1.15, 0.0)))
+			for i in range(12): await process_frame
+			await create_timer(0.3, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_remove_desktop_front.png")
+			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
+		var b5: Node3D = panel.find_child("Btn_5", true, false)
+		var rec5: Dictionary = await drv.call("press", b5, stand) if b5 != null else {}
+		await process_frame
+		await process_frame
+		st = rem.call("get_state")
+		measurements["desktop_input"]["press_reset"] = rec5
+		check(int(st["removed"]) == 0 and int(st["remaining"]) == 16, "RESET pressed through the pointer restores the set")
+		drv.get("rig").global_position = seg.to_global(Vector3(5.3, 0.05, 3.5 + vest))
+		await physics_frame
+		drv.call("aim_at", seg.to_global(Vector3(5.3, 1.2, 12.0 + vest)))
+		var moved_v: Vector3 = await drv.call("walk", "ui_up", 30)
+		var ml: Vector3 = seg.global_transform.basis.inverse() * moved_v
+		measurements["desktop_input"]["walk_past_west"] = [snappedf(ml.x, 0.01), snappedf(ml.z, 0.01)]
+		check(ml.z > 2.0, "the rig walks south past the bench's west side on ui_up (%.2f m in half a second)" % ml.z)
+		drv.get("rig").global_position = seg.to_global(Vector3(8.6, 0.05, 7.5 + vest))
+		await physics_frame
+		drv.call("aim_at", seg.to_global(Vector3(6.5, 1.0, 7.5 + vest)))
+		moved_v = await drv.call("walk", "ui_up", 20)
+		ml = seg.global_transform.basis.inverse() * moved_v
+		measurements["desktop_input"]["walk_into_the_bench"] = [snappedf(ml.x, 0.01), snappedf(ml.z, 0.01)]
+		check(ml.x > -1.6, "walking west from the visitor's spot, the rig is stopped by the pedestal (%.2f m of a possible 1.67)" % -ml.x)
+		await drv.call("teardown")
+		measurements["desktop_input"]["log"] = drv.get("log")
+		measurements["desktop_input"]["walker_cam_guard_stopped"] = drv.get("walker_cam_guard_stopped")
+		await process_frame
+
+	# ── captures ─────────────────────────────────────────────────────────────
+	if capture:
+		await create_timer(0.3).timeout
+		cam.global_position = seg.to_global(Vector3(8.7, 1.6, 7.5 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 1.1, 7.5 + vest)))
+		for i in range(20): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_remove.png")
+		measurements["captures"]["primary"] = _cam_pose(cam)
+		if status != null:
+			cam.global_position = status.global_position + seg.global_transform.basis * Vector3(1.1, 0.05, 0.0); cam.look_at(status.global_position)
+			for i in range(15): cam.make_current(); await process_frame
+			await create_timer(0.3, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_remove_status.png")
+			measurements["captures"]["status"] = _cam_pose(cam)
+		cam.global_position = panel.global_position + seg.global_transform.basis * Vector3(0.9, 0.55, 0.0); cam.look_at(panel.global_position)
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_remove_panel.png")
+		measurements["captures"]["panel"] = _cam_pose(cam)
+		cam.global_position = rem.to_global(Vector3(0.0, 2.3, 0.0)); cam.look_at(rem.to_global(Vector3(0.0, 1.0, 0.01)))
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_remove_board.png")
+		measurements["captures"]["board"] = _cam_pose(cam)
+		cam.global_position = seg.to_global(Vector3(6.5, 2.0, 1.2 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 1.0, 7.5 + vest)))
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_remove_overview.png")
+		measurements["captures"]["overview"] = _cam_pose(cam)
+		cam.queue_free()
+
+	# ── MUSEUM STREAMING: free the hall, rebuild it ──────────────────────────────
+	var seg_i: int = -1
+	var segs: Array = em.get("_segments")
+	for i in range(segs.size()):
+		if (segs[i] as Dictionary).get("node") == seg: seg_i = i
+	if seg_i >= 0 and em.has_method("_stream_free"):
+		var z0: float = seg.global_position.z
+		var rem_ref: WeakRef = weakref(rem)
+		var fix_ref: WeakRef = weakref(fixture)
+		em.call("_stream_free", seg_i, "south")
+		for i in range(5): await process_frame
+		var freed: bool = rem_ref.get_ref() == null and fix_ref.get_ref() == null
+		check(freed, "the museum's streamer frees the hall, the remover and its bench with it")
+		var rec: Dictionary = {}
+		for r in em.get("_freed"):
+			if absf(float((r as Dictionary).get("z0", -1e9)) - z0) < 0.01: rec = r
+		if rec.is_empty():
+			for r in em.get("_freed"): rec = r
+		measurements["streaming"] = {"freed": freed, "rebuildable": rec.has("snap")}
+		if rec.has("snap"):
+			em.call("_stream_rebuild", rec)
+			await create_timer(1.5).timeout
+			var seg2: Node3D
+			for rec2: Dictionary in em.get("_segments"):
+				if rec2.node.get_meta("em_map", "") == MAP: seg2 = rec2.node
+			var rem2: Node3D
+			if seg2 != null:
+				for n in seg2.find_children("*", "Node3D", true, false):
+					if n.get_script() != null and str(n.get_script().resource_path).ends_with("RemoveRandom.gd"): rem2 = n; break
+			var st2: Dictionary = rem2.call("get_state") if rem2 != null else {}
+			var rebuilt := {"found": rem2 != null, "bound": st2.get("bound", null), "total": st2.get("total", null), "eligible": st2.get("eligible_at_start", null),
+				"mode": st2.get("mode", null), "local_grid": rem2.get("local_grid") if rem2 != null else null, "fixture": rem2 != null and rem2.get_node_or_null("LocalGrid") != null,
+				"panel": rem2 != null and rem2.get_node_or_null("LocalGrid/Controls") != null, "children": rem2.get_child_count() if rem2 != null else -1}
+			measurements["rebuilt"] = rebuilt
+			check(rem2 != null and bool(st2.get("bound", false)) and int(st2.get("total", 0)) == 64 and int(st2.get("eligible_at_start", 0)) == 16 and rem2.get_node_or_null("LocalGrid/Controls") != null,
+				"the rebuilt hall has its remover again on its bench: sixty-four cubes, sixteen eligible, the panel (%s)" % str(rebuilt))
+	_finish()
+
+## The cubes by their colour: eligible (amber), excluded (grey), highlighted (red), and the rest.
+func _colour_count(mmi: MultiMeshInstance3D) -> Dictionary:
+	var out := {"eligible": 0, "excluded": 0, "highlight": 0, "other": 0}
+	if mmi == null or mmi.multimesh == null: return out
+	var el := Color(1.0, 0.68, 0.18)
+	var ex := Color(0.28, 0.35, 0.42)
+	var hi := Color(1.0, 0.15, 0.12)
+	for i in range(mmi.multimesh.instance_count):
+		var c: Color = mmi.multimesh.get_instance_color(i)
+		var d_el: float = absf(c.r - el.r) + absf(c.g - el.g) + absf(c.b - el.b)
+		var d_ex: float = absf(c.r - ex.r) + absf(c.g - ex.g) + absf(c.b - ex.b)
+		var d_hi: float = absf(c.r - hi.r) + absf(c.g - hi.g) + absf(c.b - hi.b)
+		var m: float = minf(d_el, minf(d_ex, d_hi))
+		if m > 0.12: out["other"] += 1
+		elif m == d_el: out["eligible"] += 1
+		elif m == d_ex: out["excluded"] += 1
+		else: out["highlight"] += 1
+	return out
+
+func _transforms(mmi: MultiMeshInstance3D) -> Array:
+	var out: Array = []
+	for i in range(mmi.multimesh.instance_count): out.append(mmi.multimesh.get_instance_transform(i))
+	return out
+
+## Meshes and bodies in the hall that are not the remover's: what the operation must not touch.
+func _count_outside(seg: Node3D, rem: Node3D) -> int:
+	var n: int = 0
+	for c in seg.find_children("*", "MeshInstance3D", true, false):
+		if not rem.is_ancestor_of(c): n += 1
+	for c in seg.find_children("*", "MultiMeshInstance3D", true, false):
+		if not rem.is_ancestor_of(c): n += 1
+	for c in seg.find_children("*", "StaticBody3D", true, false):
+		if not rem.is_ancestor_of(c): n += 1
+	return n
+
+## The push button's own path: the area's button_pressed → push_button.gd → its `pressed` →
+## the fixture's connection. Emitting the area's signal is what a poke or a pointer press does.
+func _press(panel: Node, btn_name: String) -> bool:
+	if panel == null: return false
+	var btn: Node = panel.find_child(btn_name, true, false)
+	var area: Node = btn.get_node_or_null("InteractableAreaButton") if btn != null else null
+	if area == null or not area.has_signal("button_pressed"): return false
+	area.emit_signal("button_pressed", area)
+	return true
+
+## Which camera the viewport draws from at a capture, and where it stands and looks.
+func _cam_pose(cam: Camera3D) -> Dictionary:
+	var cur: Camera3D = root.get_camera_3d()
+	var fwd: Vector3 = -cam.global_transform.basis.z
+	return {"current_camera": str(cur.get_path()).right(50) if cur != null else "none", "is_ours": cur == cam,
+		"at": [snappedf(cam.global_position.x, 0.01), snappedf(cam.global_position.y, 0.01), snappedf(cam.global_position.z, 0.01)],
+		"forward": [snappedf(fwd.x, 0.01), snappedf(fwd.y, 0.01), snappedf(fwd.z, 0.01)]}
+
+func _finish() -> void:
+	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,
+		"control_path": "the push button's own signal path (area button_pressed → push_button.pressed → the fixture's connection → RemoveRandom); set_random_seed() for the two-mask comparison; the live lane adds the desktop rig's pointer pressing the panel; no tracked hand; physical absence not claimed, not tested",
+		"hand_file": "ada_run/necklace_hand.json (real)", "headset_verified": false,
+		"engine": Engine.get_version_info().string, "physics_fps": Engine.physics_ticks_per_second}
+	var f := FileAccess.open(OUT + "probe_remove.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify(report, "  ")); f.close()
+	print("[wcn-remove] ", checks, " checks; ", failures.size(), " failures")
+	quit(0 if failures.is_empty() else 1)

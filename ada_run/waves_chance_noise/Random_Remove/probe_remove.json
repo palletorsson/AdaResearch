@@ -1,0 +1,314 @@
+{
+  "checks": 72,
+  "control_path": "the push button's own signal path (area button_pressed → push_button.pressed → the fixture's connection → RemoveRandom); set_random_seed() for the two-mask comparison; the live lane adds the desktop rig's pointer pressing the panel; no tracked hand; physical absence not claimed, not tested",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "Random_Remove",
+  "measurements": {
+    "after_one": {
+      "last_removed": 44,
+      "log": [
+        44
+      ],
+      "remaining": 15,
+      "removed": 1
+    },
+    "arrival": {
+      "bound": true,
+      "busy": false,
+      "eligible_at_start": 16,
+      "generation": 1,
+      "initial_eligible": [
+        18,
+        19,
+        20,
+        21,
+        26,
+        27,
+        28,
+        29,
+        34,
+        35,
+        36,
+        37,
+        42,
+        43,
+        44,
+        45
+      ],
+      "last_removed": -1,
+      "last_selected": -1,
+      "mode": "Range",
+      "remaining": 16,
+      "removal_log": [],
+      "removed": 0,
+      "replay_on_reset": true,
+      "seed": 64376,
+      "total": 64
+    },
+    "arrival_colours": {
+      "eligible": 16,
+      "excluded": 48,
+      "highlight": 0,
+      "other": 0
+    },
+    "board_top": 1.02000000953674,
+    "captures": {
+      "board": {
+        "at": [
+          6.5,
+          2.3,
+          7.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3790",
+        "forward": [
+          0.01,
+          -1.0,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "emptied": {
+        "at": [
+          8.7,
+          1.6,
+          7.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3790",
+        "forward": [
+          -0.98,
+          -0.22,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "one": {
+        "at": [
+          8.7,
+          1.6,
+          7.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3790",
+        "forward": [
+          -0.98,
+          -0.22,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "overview": {
+        "at": [
+          6.5,
+          2.0,
+          1.2
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3790",
+        "forward": [
+          0.0,
+          -0.16,
+          0.99
+        ],
+        "is_ours": true
+      },
+      "panel": {
+        "at": [
+          8.22,
+          1.42,
+          7.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3790",
+        "forward": [
+          -0.85,
+          -0.52,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          8.7,
+          1.6,
+          7.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3790",
+        "forward": [
+          -0.98,
+          -0.22,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "row": {
+        "at": [
+          8.7,
+          1.6,
+          7.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3790",
+        "forward": [
+          -0.98,
+          -0.22,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "status": {
+        "at": [
+          6.94,
+          1.62,
+          7.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3790",
+        "forward": [
+          -1.0,
+          -0.05,
+          0.0
+        ],
+        "is_ours": true
+      }
+    },
+    "museum_bodies": {
+      "after": 1056,
+      "before": 1056
+    },
+    "museum_severed_tokens": [],
+    "museum_walk_severed": [],
+    "origin_local": [
+      6.5,
+      0.0,
+      7.5
+    ],
+    "plinths": [
+      [
+        "ArtPlinth0",
+        3,
+        12
+      ],
+      [
+        "ArtPlinth1",
+        10,
+        16
+      ],
+      [
+        "ArtPlinth2",
+        5,
+        13
+      ],
+      [
+        "ArtPlinth3",
+        6,
+        17
+      ]
+    ],
+    "reach_to_remove_button": 1.18330061435699,
+    "reading_distance_far_corner": 2.38736176490784,
+    "run_a": {
+      "log": [
+        44,
+        28,
+        34,
+        35,
+        42,
+        18,
+        27,
+        45,
+        19,
+        26,
+        21,
+        36,
+        29,
+        43,
+        20,
+        37
+      ],
+      "remaining": 0,
+      "removed": 16,
+      "seed": 64376
+    },
+    "run_b_same_seed": {
+      "log": [
+        44,
+        28,
+        34,
+        35,
+        42,
+        18,
+        27,
+        45,
+        19,
+        26,
+        21,
+        36,
+        29,
+        43,
+        20,
+        37
+      ]
+    },
+    "run_c_new_seed": {
+      "log": [
+        29,
+        18,
+        35,
+        19,
+        20,
+        42,
+        26,
+        37,
+        34,
+        21,
+        27,
+        36,
+        45,
+        28,
+        44,
+        43
+      ],
+      "seed": 50627
+    },
+    "same_seed_two_masks": {
+      "range_first8": [
+        29,
+        27,
+        20,
+        43,
+        19,
+        21,
+        35,
+        34
+      ],
+      "row8": [
+        31,
+        24,
+        29,
+        27,
+        26,
+        28,
+        25,
+        30
+      ],
+      "seed": 777
+    },
+    "streaming": {
+      "freed": true,
+      "rebuildable": true
+    },
+    "walk_south_along_column_5_beside_the_bench_(the_dark_sphere_stands_at_(58))": 0.5625,
+    "walk_south_along_column_5_beside_the_bench_(the_dark_sphere_stands_at_(58))_blockers": [
+      "/root/EndlessMuseum/Seg0_soane-cabinet-vista/DarkSphere/GestationHit"
+    ],
+    "walk_south_along_the_centre_column_6_into_the_pedestal": 0.69140625,
+    "walk_south_along_the_centre_column_6_into_the_pedestal_blockers": [
+      "cabinet-vista/RandomRemovalAlgorithm/LocalGrid/Board/@StaticBody3D@495"
+    ],
+    "walk_south_past_the_benchs_east_side_column_8": 1.0,
+    "walk_south_past_the_benchs_west_side_column_4": 1.0,
+    "walk_west_from_the_visitors_spot_into_the_pedestal": 0.36328125,
+    "walk_west_from_the_visitors_spot_into_the_pedestal_blockers": [
+      "e-cabinet-vista/RandomRemovalAlgorithm/LocalGrid/Controls/Btn_5/Button"
+    ]
+  },
+  "physics_fps": 60
+}

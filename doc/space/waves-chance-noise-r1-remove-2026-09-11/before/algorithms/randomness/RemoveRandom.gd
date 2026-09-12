@@ -21,17 +21,6 @@ signal instance_removed(index: int)
 @export var local_grid: bool = false
 # Explicit descendants only. Missing or external targets fail closed.
 @export var multimesh_path: NodePath = "LocalGrid/GridMultiMesh"
-## THE REPLAY (2026-09-11, Waves/Chance/Noise R1b, Random_Remove). Off, the private RNG
-## keeps its stream across resets, as it always did. On — the owned bench turns it on —
-## every reset re-seeds the RNG with the run's seed, so the same set empties in the same
-## order, and another set under the same seed shows the same draws landing elsewhere.
-## The seed is named so the comparison can be reproduced.
-@export var replay_on_reset: bool = false
-var run_seed: int = 0
-## The indices removed in this run, in order; cleared on reset. The evidence a probe reads:
-## every entry was in the set at the start, none repeats.
-var removal_log: Array[int] = []
-var initial_eligible: Array[int] = []
 
 const ELIGIBLE := Color(1.0, 0.68, 0.18)
 const EXCLUDED := Color(0.28, 0.35, 0.42)
@@ -52,7 +41,6 @@ var _rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	_rng.randomize()
-	run_seed = _rng.seed
 	timer = Timer.new()
 	timer.wait_time = 0.5 / maxf(removal_speed, 0.01)
 	timer.timeout.connect(remove_one)
@@ -130,8 +118,6 @@ func find_all_instances() -> void:
 			multimesh.set_instance_color(i, ELIGIBLE if included else EXCLUDED)
 	# An empty set stays empty. It never expands to All.
 	initial_count = active_instances.size() + removed_count
-	if removed_count == 0:
-		initial_eligible = active_instances.duplicate()
 	state_changed.emit()
 
 func remove_one() -> void:
@@ -158,7 +144,6 @@ func remove_one() -> void:
 	active_instances.remove_at(offset)
 	removed_count += 1
 	last_removed_index = index
-	removal_log.append(index)
 	_removal_in_progress = false
 	if active_instances.is_empty():
 		stop_removal()
@@ -177,9 +162,6 @@ func reset_and_find_instances() -> void:
 	removed_count = 0
 	last_removed_index = -1
 	last_selected_index = -1
-	removal_log.clear()
-	if replay_on_reset:
-		_rng.seed = run_seed
 	if multimesh:
 		for i in range(_original.size()):
 			multimesh.set_instance_transform(i, _original[i])
@@ -195,22 +177,13 @@ func stop_removal() -> void:
 
 func set_random_seed(value: int) -> void:
 	_rng.seed = value
-	run_seed = value
-
-## A fresh seed, named, and the set restored: the next run is a different order.
-func new_seed() -> void:
-	_rng.randomize()
-	run_seed = _rng.seed
-	reset_and_find_instances()
 
 func get_state() -> Dictionary:
 	return {"bound": multimesh != null, "mode": selection_mode,
 		"total": _original.size(), "eligible_at_start": initial_count,
 		"remaining": active_instances.size(), "removed": removed_count,
 		"last_selected": last_selected_index, "last_removed": last_removed_index,
-		"busy": _removal_in_progress, "generation": _generation,
-		"seed": run_seed, "replay_on_reset": replay_on_reset,
-		"removal_log": removal_log.duplicate(), "initial_eligible": initial_eligible.duplicate()}
+		"busy": _removal_in_progress, "generation": _generation}
 
 func apply_grid_config(config: Dictionary) -> void:
 	if config.has("local_grid"):
