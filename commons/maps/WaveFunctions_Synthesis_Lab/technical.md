@@ -14,7 +14,7 @@ Each term contributes one harmonic. The fundamental (n=1) sets the pitch. The ov
 
 ## Additive Synthesis: Stacking Harmonics
 
-The `additive_wave_demo` is the laboratory's central instrument. Five sliders control the amplitudes of harmonics 1 through 5. The combined waveform draws in real time above the control panel, and below it each harmonic renders as a separate colored line.
+The `additive_wave_demo` is the laboratory's central instrument and the room's primary. Five sliders control the amplitudes of harmonics 1 through 5. The combined waveform is drawn every frame from 256 samples across two metres, four cycles wide and scrolling at one cycle a second, and below it each harmonic is drawn as its own row (the `components` axis: `ladder`, the shipped default; `overlay` draws the rows on the sum's own axis; `hidden` withholds them). The room places it with `#waveform:sawtooth`, so the five amplitudes arrive at 1, 1/2, 1/3, 1/4 and 1/5, and with `#stand:bench`, the W4 staging described below.
 
 ```gdscript
 func _calculate_wave_value(phase: float) -> float:
@@ -36,7 +36,7 @@ if a[0] > 0.9 and a[1] < 0.1 and abs(a[2] - a[0]/3.0) < 0.1 and a[3] < 0.1:
     return "= Square Wave (odd harmonics)"
 ```
 
-A square wave contains only odd harmonics (1, 3, 5, 7...) with amplitudes that decay as 1/n. The demo approximates this with five sliders. Five harmonics is enough to see the flat tops forming. It takes infinitely many to produce a true square wave — the partial sum always overshoots at the discontinuities, a phenomenon called Gibbs ringing. The demo does not name this effect, but the learner sees it: the waveform almost squares off, but the corners ripple.
+A square wave contains only odd harmonics (1, 3, 5, 7...) with amplitudes that decay as 1/n; a sawtooth all of them at 1/n. The demo approximates either with five sliders, and five is enough to see the flat tops or the ramp forming and not enough to make a corner. It takes infinitely many terms to produce a true discontinuity, and even then the partial sums overshoot beside it by about nine per cent of the jump (Gibbs). With five terms the ripple is the visible thing: for the placed sawtooth, whose ideal Σ sin(nφ)/n = (π − φ)/2 drops in no distance, the drawn sum climbs from trough to crest over 11 of the 64 samples in a cycle (about 9 cm of 50), its slope carries about five local maxima per cycle where the ideal has one, and its peak is 1.58 against the ideal's π/2 = 1.571. The demo does not name the effect; the learner sees it, and the W4 readout lets them read it at one place.
 
 A sawtooth wave uses all harmonics at 1/n amplitude. A triangle wave uses only odd harmonics at 1/n-squared. The preset system detects all three by comparing slider positions against known signatures. The distinction between waveforms is entirely in the harmonic recipe — which overtones are present and how loud they are. Timbre, in music, is this recipe. A trumpet and a flute on the same note differ because their harmonic amplitudes differ. The additive demo makes this audible concept visual.
 
@@ -44,12 +44,26 @@ The formula label updates dynamically as sliders move:
 
 ```gdscript
 if h == 0:
-    active_terms.append("%.1f*sin(wt)" % harmonic_amplitudes[h])
+    active_terms.append("%.1f·sin(ωt)" % harmonic_amplitudes[h])
 else:
-    active_terms.append("%.1f*sin(%dwt)" % [harmonic_amplitudes[h], h + 1])
+    active_terms.append("%.1f·sin(%dωt)" % [harmonic_amplitudes[h], h + 1])
 ```
 
-Every slider position maps to a term in the Fourier series. The label reads `f(t) = 1.0*sin(wt) + 0.3*sin(3wt) + 0.2*sin(5wt)` and the learner sees both the equation and its shape simultaneously. The symbol and the signal occupy the same space.
+Every slider position maps to a term in the Fourier series. The label reads `f(t) = 1.0·sin(ωt) + 0.3·sin(3ωt) + 0.2·sin(5ωt)` and the learner sees both the equation and its shape simultaneously. The symbol and the signal occupy the same space.
+
+### The bench (W4, 2026-09-11): the `stand` axis
+
+The shipped scene hangs its component ladder from −0.35 to −1.15 m below the demo's origin and puts the five sliders in front of the sum's right third; placed at a 0.5 m offset, harmonics 2–5 were drawn under the floor. `additive_wave_demo:0#stand:bench` (opt-in; `none` is the previous behaviour byte for byte, in the artifact's ten other placements) lifts the display 1.75 m onto a dark backboard — the rows' axes at 1.40, 1.25, 1.10, 0.95 and 0.80 m, which a standing eye 0.55 m before the bench sees over the bench's back edge — and builds a 2.90 × 0.50 m bench at 0.92 m with a collider. The shipped `ControlPanel` becomes a console at the bench's right end (handles between about 0.99 and 1.36 m, the farthest 0.86 m from a standing eye at the console's spot). The sum and the rows are drawn as flat triangle ribbons under the bench (half-thickness 7 and 4.5 mm), because a one-pixel line strip vanishes in a capture; the point at sample k is the mean of vertices 6k and 6k + 5.
+
+Three push buttons (RackTemplates) on the bench's front-left are wired to the same paths the sliders use: BASELINE restores `_baseline`, the five coefficients recorded after `set_preset(waveform)` at `_ready` (and again whenever the grid config changes the preset), through `_set_amplitudes`, so every slider moves back; H1 ALONE keeps the first coefficient and zeroes the rest; HOLD stops `_time`, and with it the scroll. A housed readout prints five lines: the coefficients, the arrival five, each drawn row's value at a marker, the sum of the drawn rows beside the total the sum mesh was drawn from (with `=` or `≠`), and `differs: a2 0.50→0.00, …`. The marker is sample `round(0.625 · 255) = 159`, x = +0.247 m, drawn as an amber line across the sum and the ladder. The readout's arithmetic is `display_values(i)`, the same loop and the same phase the meshes are built from:
+
+```gdscript
+func phase_at(i: int) -> float:
+	var t: float = float(i) / float(WAVE_POINTS - 1)
+	return t * TAU * 4.0 + _time * TAU
+```
+
+For probes, `get_synthesis_state()` returns the staging, the coefficients, the baseline, the values at the mark and the differences. The probe `commons/testing/probe_wcn_synthesis_lab.gd` reads the ribbons' own vertices at six samples in one frame and compares the drawn total with the sum of the drawn rows; the runtime record is in `field_notes.md`.
 
 ## Chladni Patterns: Where Vibration Cancels to Zero
 

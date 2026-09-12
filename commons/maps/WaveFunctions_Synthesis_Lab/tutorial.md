@@ -1,105 +1,80 @@
 # Synthesis Lab
 
-Fourier said any signal is a sum of sines. Build the room where stacking harmonics rebuilds the world.
+Fourier said any periodic signal is a sum of sines. Build the bench where five amounts of five sines make a shape, and take it apart again. Every excerpt below is from `commons/artifacts/additive_wave_demo/additive_wave_demo.gd`.
 
-Declare a harmonic.
-
-```gdscript
-class_name Harmonic
-extends Resource
-
-@export var harmonic_number: int = 1
-@export var amplitude: float = 0.0
-@export var phase: float = 0.0
-```
-
-One harmonic, three numbers. The harmonic number is the integer multiple of the fundamental.
-
-Sum a harmonic bank.
+Keep five amounts.
 
 ```gdscript
-func sample_bank(harmonics: Array[Harmonic], fundamental: float, t: float) -> float:
-    var out := 0.0
-    for h in harmonics:
-        out += h.amplitude * sin(TAU * fundamental * h.harmonic_number * t + h.phase)
-    return out
+var harmonic_amplitudes: Array[float] = [1.0, 0.0, 0.0, 0.0, 0.0]
 ```
 
-Each harmonic contributes its weighted sine. The bank is the Fourier sum. Fundamental sets the base note.
+Five coefficients, one per harmonic. Harmonic h + 1 runs at h + 1 times the fundamental; nothing in this file changes the fundamental itself.
 
-Build the adjustable bank.
+Sum them at one phase.
 
 ```gdscript
-func build_bank(n: int) -> Array[Harmonic]:
-    var bank: Array[Harmonic] = []
-    for i in n:
-        var h := Harmonic.new()
-        h.harmonic_number = i + 1
-        bank.append(h)
-    return bank
+func _calculate_wave_value(phase: float) -> float:
+	var value = 0.0
+	for h in range(harmonic_amplitudes.size()):
+		value += harmonic_amplitudes[h] * sin(phase * (h + 1))
+	return value
 ```
 
-Ten harmonics is a usable bank. More is possible but adds little audible difference for most shapes.
+The loop body is the Fourier series made operational. The output is one number: the sum's height at that phase.
 
-Wire sliders to amplitudes.
+Draw the sum from 256 samples, four cycles across two metres, scrolling with a clock.
 
 ```gdscript
-func _on_slider_moved(index: int, v: float) -> void:
-    bank[index].amplitude = lerp(0.0, 1.0, v)
-    rebuild_waveform()
+	for i in range(WAVE_POINTS):
+		var t = float(i) / (WAVE_POINTS - 1)
+		var x = (t - 0.5) * WAVE_LENGTH
+		var phase = t * TAU * 4.0 + _time * TAU
 ```
 
-Each slider controls one amplitude. Raising the odd harmonics produces a square wave; raising all produces a sawtooth. The learner sees the wave grow.
+`WAVE_POINTS` is 256 and `WAVE_LENGTH` 2.0. The same `t` and `phase` draw each harmonic's own row, one sine each, so the rows and the sum are always at the same places.
 
-Render the live waveform.
+Hang the rows under the sum, one per harmonic.
 
 ```gdscript
-func update_trace(line: Line2D) -> void:
-    line.clear_points()
-    for i in 256:
-        var t := float(i) / 256.0
-        var y := sample_bank(bank, 1.0, t)
-        line.add_point(Vector2(i * 2.0, -y * 40.0))
+	return Vector3(x, y * 0.2 - 0.35 - h * 0.15, 0.1)
 ```
 
-The trace redraws each frame. Moving a slider changes the shape immediately. The room responds at the speed of thought.
+The ladder: row h sits 0.15 m below the row above, drawn at two thirds of the sum's scale. This is the ingredient list; `components:overlay` draws the rows on the sum's own axis instead.
 
-Play the bank audibly.
+Wire each slider to its amount.
 
 ```gdscript
-func feed_audio(playback: AudioStreamGeneratorPlayback) -> void:
-    var frames_needed: int = playback.get_frames_available()
-    for i in frames_needed:
-        var t := audio_time
-        audio_time += 1.0 / 44100.0
-        var s: float = sample_bank(bank, 220.0, t) * 0.3
-        playback.push_frame(Vector2(s, s))
+func _on_harmonic_changed(_value, harmonic_index: int) -> void:
+	if harmonic_index < harmonic_sliders.size() and harmonic_sliders[harmonic_index]:
+		harmonic_amplitudes[harmonic_index] = harmonic_sliders[harmonic_index].get_normalized_value()
+		_dirty = true
+		waveform_changed.emit(harmonic_amplitudes)
 ```
 
-Fundamental at 220 Hz gives a low A. The timbre changes as sliders move. Seeing and hearing align.
+A slider changes exactly one number, read back from the handle's position. The meshes redraw every frame; the labels and the readout only when something changed.
 
-Map harmonics to biological oscillators.
+Name the recipes.
 
 ```gdscript
-func link_bio_example(name: String, h: int, a: float) -> void:
-    var entry := Label3D.new()
-    entry.text = "%s: harmonic %d at %.2f" % [name, h, a]
-    bio_panel.add_child(entry)
+		"sawtooth":
+			# Sawtooth: all harmonics, amplitude 1/n
+			_set_amplitudes([1.0, 0.5, 0.333, 0.25, 0.2])
 ```
 
-A side panel lists heartbeats, DNA rotation, circadian rhythms. Each entry names a harmonic pattern from biology. The lab is not only a synthesizer.
+`set_preset` writes a table of amounts onto the five sliders. The room is placed with this one; `_detect_preset` gives the label its name back when the amounts are near a table, and "Custom Waveform" when they are not.
 
-Trigger chords from harmonic presets.
+Stage it for a body (the `stand` axis, opt-in by token).
 
 ```gdscript
-func load_preset(preset_name: String) -> void:
-    match preset_name:
-        "square": _load_odd_only()
-        "sawtooth": _load_all_inverse()
-        "triangle": _load_odd_inverse_squared()
+func restore_baseline() -> void:
+	_set_amplitudes(_baseline)
+	waveform_changed.emit(harmonic_amplitudes)
 ```
 
-Presets set common waveforms instantly. The learner can start from any of them and adjust.
+Under `#stand:bench` the display is lifted onto a backboard, the sliders stand as a console on a bench, and three buttons use the same paths the sliders use: BASELINE writes the arrival table back, H1 ALONE keeps the first amount and zeroes the rest, HOLD stops `_time` so a place on the board can be read. A readout prints each row's value at a marker and the sum of the drawn rows beside the drawn total, from the same loop.
 
-You have synthesized the whole sequence. The final map, Chamber Waves, turns oscillation into contact.
-<<</MAP>>>
+Let five fail to make a corner.
+
+The sawtooth's ideal, Σ sin(nφ)/n = (π − φ)/2, drops in no distance at all. Five terms climb from trough to crest over about nine centimetres of a fifty-centimetre cycle and ripple about once per row on the flank. No slider straightens that; more terms would, and this bench has five.
+
+You have synthesized the sequence: sines as shape, as source, as sound, as a sum built on purpose. The museum's route goes on to Random_Definition, where a result that looks as involved as this one is asked whether it can be brought back at all.

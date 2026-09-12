@@ -1,0 +1,1693 @@
+{
+  "checks": 93,
+  "control_path": "sliders through move_slider (the end of the handle's and the pointer's drag path); panel buttons through the push button's own signal; the live lane adds the desktop rig's pointer dragging a slider and pressing the panel; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "WaveFunctions_Synthesis_Lab",
+  "measurements": {
+    "after_baseline": {
+      "amplitudes": [
+        1.0,
+        0.5,
+        0.333,
+        0.25,
+        0.2
+      ],
+      "sliders": [
+        1.0,
+        0.5,
+        0.333,
+        0.25,
+        0.2
+      ]
+    },
+    "arrival_amplitudes": [
+      1.0,
+      0.5,
+      0.333,
+      0.25,
+      0.2
+    ],
+    "arrival_slider_values": [
+      1.0,
+      0.5,
+      0.333,
+      0.25,
+      0.2
+    ],
+    "bench_top": 0.92000000834465,
+    "captures": {
+      "console": {
+        "at": [
+          5.86,
+          1.5,
+          3.9
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.0,
+          -0.39,
+          -0.92
+        ],
+        "is_ours": true
+      },
+      "h1_alone": {
+        "at": [
+          4.5,
+          1.55,
+          4.15
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.0,
+          -0.12,
+          -0.99
+        ],
+        "is_ours": true
+      },
+      "ladder": {
+        "at": [
+          4.5,
+          1.25,
+          3.75
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.0,
+          -0.17,
+          -0.99
+        ],
+        "is_ours": true
+      },
+      "overview": {
+        "at": [
+          2.3,
+          2.0,
+          6.2
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.65,
+          -0.18,
+          -0.74
+        ],
+        "is_ours": true
+      },
+      "plan": {
+        "at": [
+          7.0,
+          2.9,
+          6.8
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          4.5,
+          1.55,
+          4.15
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.0,
+          -0.12,
+          -0.99
+        ],
+        "is_ours": true
+      },
+      "readout": {
+        "at": [
+          4.65,
+          1.53,
+          3.94
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.0,
+          -0.66,
+          -0.75
+        ],
+        "is_ours": true
+      }
+    },
+    "desktop_input": {
+      "a2_after": 0.851248468671526,
+      "a2_before": 0.5,
+      "button_inspection": {
+        "area": "/AdditiveWaveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+        "at_position_mask_1310720": [
+          "aveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+          "aveDemo/Staging/Panel/Btn_1/InteractableAreaButton"
+        ],
+        "at_position_mask_4294967295": [
+          "-chain/AdditiveWaveDemo/Staging/Panel/Btn_0/Button",
+          "-chain/AdditiveWaveDemo/Staging/Panel/Btn_1/Button",
+          "aveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+          "/AdditiveWaveDemo/Staging/Panel/Btn_0/HandPoseArea",
+          "aveDemo/Staging/Panel/Btn_1/InteractableAreaButton",
+          "/AdditiveWaveDemo/Staging/Panel/Btn_1/HandPoseArea"
+        ],
+        "cap_normal": [
+          0.0,
+          0.87,
+          0.5
+        ],
+        "control": "ouisiana-pavilion-chain/AdditiveWaveDemo/Staging/Panel/Btn_0",
+        "global_position": [
+          3.628,
+          0.983,
+          3.329
+        ],
+        "global_scale": [
+          0.55,
+          0.55,
+          0.55
+        ],
+        "inside_tree": true,
+        "layer": 1048576,
+        "mask": 393216,
+        "monitorable": true,
+        "monitoring": true,
+        "process_mode": 0,
+        "ray_along_normal_from_0.3_mask_1310720": "aveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+        "ray_along_normal_from_0.3_mask_4294967295": "/AdditiveWaveDemo/Staging/Panel/Btn_0/HandPoseArea",
+        "ray_camera_to_centre_mask_1310720": "aveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+        "ray_camera_to_centre_mask_4294967295": "/AdditiveWaveDemo/Staging/Panel/Btn_1/HandPoseArea",
+        "ray_camera_to_outer_cap_mask_1310720": "aveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+        "ray_camera_to_outer_cap_mask_4294967295": "/AdditiveWaveDemo/Staging/Panel/Btn_0/HandPoseArea",
+        "shapes": [
+          {
+            "at": [
+              3.628,
+              0.995,
+              3.336
+            ],
+            "disabled": false,
+            "radius": -1.0,
+            "shape": "CylinderShape3D"
+          }
+        ],
+        "visible": true
+      },
+      "drag": {
+        "dragging_midway": true,
+        "frames": 20,
+        "from": [
+          5.86,
+          1.27,
+          3.1
+        ],
+        "hover": "pavilion-chain/AdditiveWaveDemo/ControlPanel/Harmonic2Slider",
+        "to": [
+          5.91,
+          1.27,
+          3.1
+        ]
+      },
+      "front_capture_pose": {
+        "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+        "eye": [
+          4.8,
+          1.6,
+          4.3
+        ],
+        "forward": [
+          -0.16,
+          -0.11,
+          -0.98
+        ],
+        "rig": [
+          4.8,
+          0.0,
+          4.3
+        ]
+      },
+      "handle_inspection": {
+        "area": "none",
+        "control": "derOrigin/InteractableSlider/HandleOrigin/InteractableHandle"
+      },
+      "log": [
+        {
+          "event": "walker_cam_guard_stopped",
+          "value": true
+        },
+        {
+          "at": [
+            5.8600001335144,
+            0.0,
+            3.84999990463257
+          ],
+          "event": "spawn"
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.09,
+              -0.44,
+              -0.9
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "press_down"
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.09,
+              -0.44,
+              -0.9
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.09,
+              -0.44,
+              -0.9
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.1,
+              -0.44,
+              -0.9
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.1,
+              -0.43,
+              -0.9
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.1,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.1,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.11,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.11,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.11,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.12,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.12,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.02,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.12,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.13,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.13,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.13,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.14,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.14,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.14,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.15,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.79,
+              1.6,
+              3.78
+            ],
+            "forward": [
+              0.15,
+              -0.43,
+              -0.89
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.79,
+              0.0,
+              3.78
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "release"
+        },
+        {
+          "event": "drag",
+          "record": {
+            "dragging_midway": true,
+            "frames": 20,
+            "from": [
+              5.86,
+              1.27,
+              3.1
+            ],
+            "hover": "pavilion-chain/AdditiveWaveDemo/ControlPanel/Harmonic2Slider",
+            "to": [
+              5.91,
+              1.27,
+              3.1
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              3.7,
+              1.6,
+              3.85
+            ],
+            "forward": [
+              -0.09,
+              -0.76,
+              -0.64
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              3.7,
+              0.0,
+              3.85
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "ouisiana-pavilion-chain/AdditiveWaveDemo/Staging/Panel/Btn_0",
+            "hover": "nothing",
+            "ray": {
+              "camera_dir": [
+                -0.09,
+                -0.76,
+                -0.64
+              ],
+              "camera_from": [
+                3.7,
+                1.6,
+                3.74
+              ],
+              "independent_ray": "none",
+              "raycast_areas": true,
+              "raycast_collider": "none",
+              "raycast_colliding": false,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "stand": [
+              3.7,
+              0.0,
+              3.85
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              3.7,
+              1.6,
+              3.85
+            ],
+            "forward": [
+              -0.09,
+              -0.76,
+              -0.64
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              3.7,
+              0.0,
+              3.85
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "/AdditiveWaveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+            "hover": "nothing",
+            "ray": {
+              "camera_dir": [
+                -0.09,
+                -0.76,
+                -0.64
+              ],
+              "camera_from": [
+                3.7,
+                1.6,
+                3.74
+              ],
+              "independent_ray": "none",
+              "raycast_areas": true,
+              "raycast_collider": "none",
+              "raycast_colliding": false,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "stand": [
+              3.7,
+              0.0,
+              3.85
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              4.4,
+              1.6,
+              4.3
+            ],
+            "forward": [
+              -0.56,
+              -0.45,
+              -0.7
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              4.4,
+              0.0,
+              4.3
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "ouisiana-pavilion-chain/AdditiveWaveDemo/Staging/Panel/Btn_0",
+            "hover": "/AdditiveWaveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.56,
+                -0.45,
+                -0.7
+              ],
+              "camera_from": [
+                4.4,
+                1.6,
+                4.3
+              ],
+              "independent_ray": "lion-chain/AdditiveWaveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "lion-chain/AdditiveWaveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                3.64,
+                1.0,
+                3.35
+              ]
+            },
+            "stand": [
+              4.4,
+              0.0,
+              4.3
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              3.7,
+              1.6,
+              3.85
+            ],
+            "forward": [
+              0.09,
+              -0.76,
+              -0.64
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              3.7,
+              0.0,
+              3.85
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "ouisiana-pavilion-chain/AdditiveWaveDemo/Staging/Panel/Btn_2",
+            "hover": "nothing",
+            "ray": {
+              "camera_dir": [
+                0.09,
+                -0.76,
+                -0.64
+              ],
+              "camera_from": [
+                3.7,
+                1.6,
+                3.74
+              ],
+              "independent_ray": "none",
+              "raycast_areas": true,
+              "raycast_collider": "none",
+              "raycast_colliding": false,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "stand": [
+              3.7,
+              0.0,
+              3.85
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              4.4,
+              1.6,
+              4.3
+            ],
+            "forward": [
+              -0.48,
+              -0.47,
+              -0.74
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              4.4,
+              0.0,
+              4.3
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "ouisiana-pavilion-chain/AdditiveWaveDemo/Staging/Panel/Btn_2",
+            "hover": "/AdditiveWaveDemo/Staging/Panel/Btn_2/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.48,
+                -0.47,
+                -0.74
+              ],
+              "camera_from": [
+                4.4,
+                1.6,
+                4.3
+              ],
+              "independent_ray": "lion-chain/AdditiveWaveDemo/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "lion-chain/AdditiveWaveDemo/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                3.79,
+                1.0,
+                3.35
+              ]
+            },
+            "stand": [
+              4.4,
+              0.0,
+              4.3
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              4.8,
+              1.65,
+              4.3
+            ],
+            "forward": [
+              -0.16,
+              -0.11,
+              -0.98
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              4.8,
+              0.05,
+              4.3
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              4.4,
+              1.6,
+              4.3
+            ],
+            "forward": [
+              -0.48,
+              -0.47,
+              -0.74
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              4.4,
+              0.0,
+              4.3
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "ouisiana-pavilion-chain/AdditiveWaveDemo/Staging/Panel/Btn_2",
+            "hover": "/AdditiveWaveDemo/Staging/Panel/Btn_2/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.48,
+                -0.47,
+                -0.74
+              ],
+              "camera_from": [
+                4.4,
+                1.6,
+                4.3
+              ],
+              "independent_ray": "lion-chain/AdditiveWaveDemo/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "lion-chain/AdditiveWaveDemo/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                3.79,
+                1.0,
+                3.35
+              ]
+            },
+            "stand": [
+              4.4,
+              0.0,
+              4.3
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              8.5,
+              1.65,
+              0.7
+            ],
+            "forward": [
+              0.0,
+              -0.08,
+              1.0
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              8.5,
+              0.05,
+              0.7
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 30,
+          "moved": [
+            0.0,
+            -0.05,
+            2.5
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              8.5,
+              1.6,
+              3.2
+            ],
+            "forward": [
+              0.0,
+              -0.08,
+              1.0
+            ],
+            "rig": [
+              8.5,
+              0.0,
+              3.2
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              4.5,
+              1.6,
+              4.3
+            ],
+            "forward": [
+              0.0,
+              -0.32,
+              -0.95
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              4.5,
+              0.0,
+              4.3
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 20,
+          "moved": [
+            0.0,
+            0.0,
+            -0.55
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@2147/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              4.5,
+              1.6,
+              3.75
+            ],
+            "forward": [
+              0.0,
+              -0.32,
+              -0.95
+            ],
+            "rig": [
+              4.5,
+              0.0,
+              3.75
+            ]
+          }
+        },
+        {
+          "current_camera_after": "/root/EndlessMuseum/Walker/@Camera3D@4",
+          "event": "teardown"
+        }
+      ],
+      "press_baseline": {
+        "control": "ouisiana-pavilion-chain/AdditiveWaveDemo/Staging/Panel/Btn_0",
+        "hover": "/AdditiveWaveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.56,
+            -0.45,
+            -0.7
+          ],
+          "camera_from": [
+            4.4,
+            1.6,
+            4.3
+          ],
+          "independent_ray": "lion-chain/AdditiveWaveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "lion-chain/AdditiveWaveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            3.64,
+            1.0,
+            3.35
+          ]
+        },
+        "stand": [
+          4.4,
+          0.0,
+          4.3
+        ]
+      },
+      "press_baseline_tries": [
+        {
+          "control": "ouisiana-pavilion-chain/AdditiveWaveDemo/Staging/Panel/Btn_0",
+          "hover": "nothing",
+          "ray": {
+            "camera_dir": [
+              -0.09,
+              -0.76,
+              -0.64
+            ],
+            "camera_from": [
+              3.7,
+              1.6,
+              3.74
+            ],
+            "independent_ray": "none",
+            "raycast_areas": true,
+            "raycast_collider": "none",
+            "raycast_colliding": false,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "stand": [
+            3.7,
+            0.0,
+            3.85
+          ]
+        },
+        {
+          "control": "/AdditiveWaveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+          "hover": "nothing",
+          "ray": {
+            "camera_dir": [
+              -0.09,
+              -0.76,
+              -0.64
+            ],
+            "camera_from": [
+              3.7,
+              1.6,
+              3.74
+            ],
+            "independent_ray": "none",
+            "raycast_areas": true,
+            "raycast_collider": "none",
+            "raycast_colliding": false,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "stand": [
+            3.7,
+            0.0,
+            3.85
+          ]
+        },
+        {
+          "control": "ouisiana-pavilion-chain/AdditiveWaveDemo/Staging/Panel/Btn_0",
+          "hover": "/AdditiveWaveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.56,
+              -0.45,
+              -0.7
+            ],
+            "camera_from": [
+              4.4,
+              1.6,
+              4.3
+            ],
+            "independent_ray": "lion-chain/AdditiveWaveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "lion-chain/AdditiveWaveDemo/Staging/Panel/Btn_0/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              3.64,
+              1.0,
+              3.35
+            ]
+          },
+          "stand": [
+            4.4,
+            0.0,
+            4.3
+          ]
+        }
+      ],
+      "press_hold": {
+        "control": "ouisiana-pavilion-chain/AdditiveWaveDemo/Staging/Panel/Btn_2",
+        "hover": "/AdditiveWaveDemo/Staging/Panel/Btn_2/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.48,
+            -0.47,
+            -0.74
+          ],
+          "camera_from": [
+            4.4,
+            1.6,
+            4.3
+          ],
+          "independent_ray": "lion-chain/AdditiveWaveDemo/Staging/Panel/Btn_2/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "lion-chain/AdditiveWaveDemo/Staging/Panel/Btn_2/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            3.79,
+            1.0,
+            3.35
+          ]
+        },
+        "stand": [
+          4.4,
+          0.0,
+          4.3
+        ]
+      },
+      "walk_door_route_south": [
+        0.0,
+        2.5
+      ],
+      "walk_into_the_bench": [
+        0.0,
+        -0.55
+      ],
+      "walker_cam_guard_stopped": true
+    },
+    "drawn_total_vs_rows": [
+      {
+        "error": 0.0,
+        "rows_drawn": [
+          -0.881,
+          0.417,
+          0.03,
+          -0.23,
+          0.156
+        ],
+        "sample": 20,
+        "sum_of_rows_drawn": -0.507,
+        "total_computed": -0.507,
+        "total_drawn": -0.507,
+        "x": -0.843
+      },
+      {
+        "error": 0.0,
+        "rows_drawn": [
+          0.978,
+          -0.203,
+          -0.27,
+          0.185,
+          0.101
+        ],
+        "sample": 59,
+        "sum_of_rows_drawn": 0.792,
+        "total_computed": 0.792,
+        "total_drawn": 0.792,
+        "x": -0.537
+      },
+      {
+        "error": 0.0,
+        "rows_drawn": [
+          -0.446,
+          -0.399,
+          -0.327,
+          -0.24,
+          -0.147
+        ],
+        "sample": 100,
+        "sum_of_rows_drawn": -1.561,
+        "total_computed": -1.561,
+        "total_drawn": -1.561,
+        "x": -0.216
+      },
+      {
+        "error": 0.0,
+        "rows_drawn": [
+          -0.802,
+          -0.479,
+          -0.114,
+          0.137,
+          0.2
+        ],
+        "sample": 159,
+        "sum_of_rows_drawn": -1.058,
+        "total_computed": -1.058,
+        "total_drawn": -1.058,
+        "x": 0.247
+      },
+      {
+        "error": 0.0,
+        "rows_drawn": [
+          0.031,
+          -0.031,
+          0.031,
+          -0.031,
+          0.031
+        ],
+        "sample": 200,
+        "sum_of_rows_drawn": 0.031,
+        "total_computed": 0.031,
+        "total_drawn": 0.031,
+        "x": 0.569
+      },
+      {
+        "error": 0.0,
+        "rows_drawn": [
+          0.696,
+          0.5,
+          0.247,
+          0.016,
+          -0.13
+        ],
+        "sample": 240,
+        "sum_of_rows_drawn": 1.328,
+        "total_computed": 1.328,
+        "total_drawn": 1.328,
+        "x": 0.882
+      }
+    ],
+    "finite_corner": {
+      "local_maxima_over_four_cycles": 19,
+      "max_error_near_corner": 1.54,
+      "max_error_on_flank": 0.285,
+      "peak": 1.583,
+      "per_cycle": 4.75,
+      "rise_samples": 11,
+      "rise_width_m": 0.086,
+      "trough": -1.582
+    },
+    "h1_alone_peak": 0.999999841054281,
+    "handles_local": [
+      [
+        5.93,
+        1.36,
+        3.06
+      ],
+      [
+        5.86,
+        1.27,
+        3.1
+      ],
+      [
+        5.84,
+        1.17,
+        3.13
+      ],
+      [
+        5.82,
+        1.08,
+        3.16
+      ],
+      [
+        5.82,
+        0.99,
+        3.2
+      ]
+    ],
+    "marker_x_local": 0.247058868408203,
+    "museum_severed_tokens": [
+      "air_music_display_case",
+      "record_room",
+      "GlassRack",
+      "spring_demo"
+    ],
+    "museum_walk_severed": [],
+    "origin_local": [
+      4.5,
+      0.0,
+      2.5
+    ],
+    "other_players_playing": [
+      [
+        "adioRack/SoundscapePlayer/@AudioStreamPlayer3D@852",
+        7.7
+      ]
+    ],
+    "plinths": [
+      [
+        "ArtPlinth0",
+        9,
+        6
+      ],
+      [
+        "ArtPlinth1",
+        8,
+        6
+      ],
+      [
+        "ArtPlinth2",
+        12,
+        4
+      ],
+      [
+        "ArtPlinth3",
+        11,
+        3
+      ]
+    ],
+    "reach_to_farthest_handle": 0.863602101802826,
+    "row_axis_heights": [
+      1.4,
+      1.25,
+      1.1,
+      0.95,
+      0.8
+    ],
+    "sight_line": {
+      "bench_back_edge": [
+        2.95,
+        0.92000000834465,
+        0.987500035337034
+      ],
+      "eye": [
+        4.5,
+        1.54999995231628,
+        4.0
+      ],
+      "lowest_row_axis": [
+        4.5,
+        0.800000011920929,
+        2.59999990463257
+      ],
+      "readout_top_edge": [
+        3.22906732559204,
+        1.03250002861023,
+        1.13700036626765
+      ]
+    },
+    "sliders": [
+      {
+        "after": 0.7,
+        "before": 1.0,
+        "differences": [
+          "a1 1.00→0.70"
+        ],
+        "harmonic": 1,
+        "only_this_changed": true,
+        "row_peak": 0.7,
+        "value_label": "0.7"
+      },
+      {
+        "after": 0.7,
+        "before": 0.5,
+        "differences": [
+          "a1 1.00→0.70",
+          "a2 0.50→0.70"
+        ],
+        "harmonic": 2,
+        "only_this_changed": true,
+        "row_peak": 0.7,
+        "value_label": "0.7"
+      },
+      {
+        "after": 0.7,
+        "before": 0.333,
+        "differences": [
+          "a1 1.00→0.70",
+          "a2 0.50→0.70",
+          "a3 0.33→0.70"
+        ],
+        "harmonic": 3,
+        "only_this_changed": true,
+        "row_peak": 0.7,
+        "value_label": "0.7"
+      },
+      {
+        "after": 0.7,
+        "before": 0.25,
+        "differences": [
+          "a1 1.00→0.70",
+          "a2 0.50→0.70",
+          "a3 0.33→0.70",
+          "a4 0.25→0.70"
+        ],
+        "harmonic": 4,
+        "only_this_changed": true,
+        "row_peak": 0.7,
+        "value_label": "0.7"
+      },
+      {
+        "after": 0.7,
+        "before": 0.2,
+        "differences": [
+          "a1 1.00→0.70",
+          "a2 0.50→0.70",
+          "a3 0.33→0.70",
+          "a4 0.25→0.70",
+          "a5 0.20→0.70"
+        ],
+        "harmonic": 5,
+        "only_this_changed": true,
+        "row_peak": 0.699,
+        "value_label": "0.7"
+      }
+    ],
+    "streaming": {
+      "freed": true,
+      "rebuildable": true
+    },
+    "sum_axis_height": 1.75,
+    "sum_vertices": 256,
+    "walk_along_the_benchs_front_from_the_console_to_the_displays_centre": 1.0,
+    "walk_column_8_south_from_row_8_to_row_10,_past_the_lifted_radio_rack": 1.0,
+    "walk_column_8_south_from_row_8_to_row_10,_past_the_lifted_radio_rack_blockers": [],
+    "walk_from_the_corridor_west_along_row_3_to_the_consoles_spot": 1.0,
+    "walk_from_the_displays_centre_south_into_the_room": 1.0,
+    "walk_into_the_bench": 0.3515625,
+    "walk_row_3_west_past_the_platform_at_3,4,_between_it_and_the_bench": 1.0,
+    "walk_row_3_west_past_the_platform_at_3,4,_between_it_and_the_bench_blockers": [],
+    "walk_the_corridor_south_along_column_7,_from_row_3_to_row_10": 0.78515625,
+    "walk_the_corridor_south_along_column_7,_from_row_3_to_row_10_blockers": [],
+    "walk_the_detour_east_from_7,8_to_column_8": 1.0,
+    "walk_the_detour_east_from_7,8_to_column_8_blockers": [],
+    "walk_west_from_8,10_back_to_the_corridor_and_the_door_approach": 1.0,
+    "walk_west_from_8,10_back_to_the_corridor_and_the_door_approach_blockers": []
+  },
+  "physics_fps": 60
+}

@@ -1,0 +1,431 @@
+{
+  "checks": 84,
+  "control_path": "sliders through move_slider (the end of the handle's and the pointer's drag path); panel buttons through the push button's own signal; the live lane adds the desktop rig's pointer dragging a slider and pressing the panel; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "WaveFunctions_Synthesis_Lab",
+  "measurements": {
+    "after_baseline": {
+      "amplitudes": [
+        1.0,
+        0.5,
+        0.333,
+        0.25,
+        0.2
+      ],
+      "sliders": [
+        1.0,
+        0.5,
+        0.333,
+        0.25,
+        0.2
+      ]
+    },
+    "arrival_amplitudes": [
+      1.0,
+      0.5,
+      0.333,
+      0.25,
+      0.2
+    ],
+    "arrival_slider_values": [
+      1.0,
+      0.5,
+      0.333,
+      0.25,
+      0.2
+    ],
+    "bench_top": 0.92000000834465,
+    "captures": {
+      "console": {
+        "at": [
+          5.86,
+          1.5,
+          3.9
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.0,
+          -0.39,
+          -0.92
+        ],
+        "is_ours": true
+      },
+      "h1_alone": {
+        "at": [
+          4.5,
+          1.55,
+          4.15
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.0,
+          -0.12,
+          -0.99
+        ],
+        "is_ours": true
+      },
+      "ladder": {
+        "at": [
+          4.5,
+          1.25,
+          3.75
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.0,
+          -0.17,
+          -0.99
+        ],
+        "is_ours": true
+      },
+      "overview": {
+        "at": [
+          2.3,
+          2.0,
+          6.2
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.65,
+          -0.18,
+          -0.74
+        ],
+        "is_ours": true
+      },
+      "plan": {
+        "at": [
+          7.0,
+          2.9,
+          6.8
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          4.5,
+          1.55,
+          4.15
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.0,
+          -0.12,
+          -0.99
+        ],
+        "is_ours": true
+      },
+      "readout": {
+        "at": [
+          4.65,
+          1.53,
+          3.94
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2146",
+        "forward": [
+          0.0,
+          -0.66,
+          -0.75
+        ],
+        "is_ours": true
+      }
+    },
+    "drawn_total_vs_rows": [
+      {
+        "error": 0.0,
+        "rows_drawn": [
+          -0.945,
+          0.309,
+          0.181,
+          -0.243,
+          0.018
+        ],
+        "sample": 20,
+        "sum_of_rows_drawn": -0.68,
+        "total_computed": -0.68,
+        "total_drawn": -0.68,
+        "x": -0.843
+      },
+      {
+        "error": 0.0,
+        "rows_drawn": [
+          0.932,
+          -0.337,
+          -0.148,
+          0.249,
+          -0.055
+        ],
+        "sample": 59,
+        "sum_of_rows_drawn": 0.641,
+        "total_computed": 0.641,
+        "total_drawn": 0.641,
+        "x": -0.537
+      },
+      {
+        "error": 0.0,
+        "rows_drawn": [
+          -0.297,
+          -0.284,
+          -0.262,
+          -0.234,
+          -0.2
+        ],
+        "sample": 100,
+        "sum_of_rows_drawn": -1.276,
+        "total_computed": -1.276,
+        "total_drawn": -1.276,
+        "x": -0.216
+      },
+      {
+        "error": 0.0,
+        "rows_drawn": [
+          -0.696,
+          -0.5,
+          -0.246,
+          -0.015,
+          0.13
+        ],
+        "sample": 159,
+        "sum_of_rows_drawn": -1.327,
+        "total_computed": -1.327,
+        "total_drawn": -1.327,
+        "x": 0.247
+      },
+      {
+        "error": 0.0,
+        "rows_drawn": [
+          -0.129,
+          0.128,
+          -0.126,
+          0.124,
+          -0.121
+        ],
+        "sample": 200,
+        "sum_of_rows_drawn": -0.124,
+        "total_computed": -0.124,
+        "total_drawn": -0.124,
+        "x": 0.569
+      },
+      {
+        "error": 0.0,
+        "rows_drawn": [
+          0.802,
+          0.479,
+          0.115,
+          -0.137,
+          -0.2
+        ],
+        "sample": 240,
+        "sum_of_rows_drawn": 1.059,
+        "total_computed": 1.059,
+        "total_drawn": 1.059,
+        "x": 0.882
+      }
+    ],
+    "finite_corner": {
+      "local_maxima_over_four_cycles": 19,
+      "max_error_near_corner": 1.537,
+      "max_error_on_flank": 0.285,
+      "peak": 1.582,
+      "per_cycle": 4.75,
+      "rise_samples": 11,
+      "rise_width_m": 0.086,
+      "trough": -1.583
+    },
+    "h1_alone_peak": 1.00000003973643,
+    "handles_local": [
+      [
+        5.93,
+        1.36,
+        3.06
+      ],
+      [
+        5.86,
+        1.27,
+        3.1
+      ],
+      [
+        5.84,
+        1.17,
+        3.13
+      ],
+      [
+        5.82,
+        1.08,
+        3.16
+      ],
+      [
+        5.82,
+        0.99,
+        3.2
+      ]
+    ],
+    "marker_x_local": 0.247058868408203,
+    "museum_severed_tokens": [
+      "air_music_display_case",
+      "record_room",
+      "GlassRack",
+      "spring_demo"
+    ],
+    "museum_walk_severed": [],
+    "origin_local": [
+      4.5,
+      0.0,
+      2.5
+    ],
+    "other_players_playing": [
+      [
+        "adioRack/SoundscapePlayer/@AudioStreamPlayer3D@852",
+        7.7
+      ]
+    ],
+    "plinths": [
+      [
+        "ArtPlinth0",
+        9,
+        6
+      ],
+      [
+        "ArtPlinth1",
+        8,
+        6
+      ],
+      [
+        "ArtPlinth2",
+        12,
+        4
+      ],
+      [
+        "ArtPlinth3",
+        11,
+        3
+      ]
+    ],
+    "reach_to_farthest_handle": 0.863602101802826,
+    "row_axis_heights": [
+      1.4,
+      1.25,
+      1.1,
+      0.95,
+      0.8
+    ],
+    "sight_line": {
+      "bench_back_edge": [
+        2.95,
+        0.92000000834465,
+        0.987500035337034
+      ],
+      "eye": [
+        4.5,
+        1.54999995231628,
+        4.0
+      ],
+      "lowest_row_axis": [
+        4.5,
+        0.800000011920929,
+        2.59999990463257
+      ],
+      "readout_top_edge": [
+        3.22906732559204,
+        1.03250002861023,
+        1.13700036626765
+      ]
+    },
+    "sliders": [
+      {
+        "after": 0.7,
+        "before": 1.0,
+        "differences": [
+          "a1 1.00→0.70"
+        ],
+        "harmonic": 1,
+        "only_this_changed": true,
+        "row_peak": 0.7,
+        "value_label": "0.7"
+      },
+      {
+        "after": 0.7,
+        "before": 0.5,
+        "differences": [
+          "a1 1.00→0.70",
+          "a2 0.50→0.70"
+        ],
+        "harmonic": 2,
+        "only_this_changed": true,
+        "row_peak": 0.7,
+        "value_label": "0.7"
+      },
+      {
+        "after": 0.7,
+        "before": 0.333,
+        "differences": [
+          "a1 1.00→0.70",
+          "a2 0.50→0.70",
+          "a3 0.33→0.70"
+        ],
+        "harmonic": 3,
+        "only_this_changed": true,
+        "row_peak": 0.7,
+        "value_label": "0.7"
+      },
+      {
+        "after": 0.7,
+        "before": 0.25,
+        "differences": [
+          "a1 1.00→0.70",
+          "a2 0.50→0.70",
+          "a3 0.33→0.70",
+          "a4 0.25→0.70"
+        ],
+        "harmonic": 4,
+        "only_this_changed": true,
+        "row_peak": 0.7,
+        "value_label": "0.7"
+      },
+      {
+        "after": 0.7,
+        "before": 0.2,
+        "differences": [
+          "a1 1.00→0.70",
+          "a2 0.50→0.70",
+          "a3 0.33→0.70",
+          "a4 0.25→0.70",
+          "a5 0.20→0.70"
+        ],
+        "harmonic": 5,
+        "only_this_changed": true,
+        "row_peak": 0.7,
+        "value_label": "0.7"
+      }
+    ],
+    "streaming": {
+      "freed": true,
+      "rebuildable": true
+    },
+    "sum_axis_height": 1.75,
+    "sum_vertices": 256,
+    "walk_along_the_benchs_front_from_the_console_to_the_displays_centre": 1.0,
+    "walk_column_8_south_from_row_8_to_row_10,_past_the_lifted_radio_rack": 1.0,
+    "walk_column_8_south_from_row_8_to_row_10,_past_the_lifted_radio_rack_blockers": [],
+    "walk_from_the_corridor_west_along_row_3_to_the_consoles_spot": 1.0,
+    "walk_from_the_displays_centre_south_into_the_room": 1.0,
+    "walk_into_the_bench": 0.3515625,
+    "walk_row_3_west_past_the_platform_at_3,4,_between_it_and_the_bench": 1.0,
+    "walk_row_3_west_past_the_platform_at_3,4,_between_it_and_the_bench_blockers": [],
+    "walk_the_corridor_south_along_column_7,_from_row_3_to_row_10": 0.78515625,
+    "walk_the_corridor_south_along_column_7,_from_row_3_to_row_10_blockers": [],
+    "walk_the_detour_east_from_7,8_to_column_8": 1.0,
+    "walk_the_detour_east_from_7,8_to_column_8_blockers": [],
+    "walk_west_from_8,10_back_to_the_corridor_and_the_door_approach": 1.0,
+    "walk_west_from_8,10_back_to_the_corridor_and_the_door_approach_blockers": []
+  },
+  "physics_fps": 60
+}
