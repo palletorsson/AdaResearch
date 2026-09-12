@@ -19,9 +19,7 @@
   },
   "museum": {
    "wall_height": 3,
-   "gate_depth_rows": 0,
-   "sculpture_clear_rects": [ [ 3, 1, 7, 5 ] ],
-   "artifact_placement": "map"
+   "gate_depth_rows": 0
   }
  },
  "utility_definitions": {
@@ -64,16 +62,16 @@
  "layers": {
   "structure": [
    [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ],
-   [ "w", "2", "2", "2", "1", "1", "1", "1", "3", "2", "2", "2", "w" ],
-   [ "w", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "w" ],
-   [ "w", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "w" ],
-   [ "0", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "w" ],
-   [ "w", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "w" ],
-   [ "w", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "w" ],
-   [ "w", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "w" ],
-   [ "w", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "w" ],
-   [ "w", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "w" ],
-   [ "w", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "w" ],
+   [ "w", "2", "2", "2", "3", "1", "1", "1", "3", "2", "2", "2", "w" ],
+   [ "w", "2", "0", "0", "0", "0", "0", "1", "0", "0", "0", "2", "w" ],
+   [ "w", "2", "0", "0", "0", "0", "0", "1", "0", "0", "0", "2", "w" ],
+   [ "0", "2", "0", "0", "0", "0", "0", "1", "0", "0", "0", "2", "w" ],
+   [ "w", "2", "0", "0", "0", "0", "0", "1", "0", "0", "0", "2", "w" ],
+   [ "w", "2", "0", "0", "0", "0", "0", "1", "0", "0", "0", "2", "w" ],
+   [ "w", "2", "0", "0", "0", "0", "0", "1", "0", "0", "0", "2", "w" ],
+   [ "w", "2", "0", "0", "0", "0", "0", "1", "0", "0", "0", "2", "w" ],
+   [ "w", "2", "0", "0", "0", "0", "0", "1", "0", "0", "0", "2", "w" ],
+   [ "w", "2", "0", "0", "0", "0", "0", "1", "0", "0", "0", "2", "w" ],
    [ "w", "2", "2", "2", "2", "2", "2", "1", "2", "2", "2", "2", "w" ],
    [ "w", "2", "2", "2", "2", "1", "1", "1", "2", "2", "0", "2", "w" ],
    [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ]
@@ -96,17 +94,17 @@
   ],
   "interactables": [
    [ "", "", "catalyst_prompter_box:0:0#emergence:hatch#sequence:auto#lease_s:45", "", "", "", "", "", "", "catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto", "", "", "" ],
-   [ "", "", "", "", "random_walk_terrarium:90#stand:logbook", "", "", "", "", "", "", "pixel_cloud:90:0:0.5#walk_seed:101", "" ],
+   [ "", "", "", "", "random_walk_terrarium:180:-0.3", "random_walk_collection:90", "", "", "", "", "", "", "pixel_cloud:90" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "lab_room#room_width:3.5#room_depth:3.5#room_height:3.0#show_observation_window:true#window_wall:east#accent_color:0.95,0.55,0.20#signage_top:RANDOM WALK LAB#signage_sub:Brownian sampling pavilion#annotation_top:every step is independent — the walk is the integral#annotation_bottom:dx_i ~ Normal(0, sigma) — sum to t = position at t#mounted_artifact_scene:res://commons/artifacts/monte_carlo_apparatus/monte_carlo_apparatus.tscn", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "random_walk_128:0:0:0.2", "", "", "", "", "", "lab_room#room_width:3.5#room_depth:3.5#room_height:3.0#show_observation_window:true#window_wall:east#accent_color:0.95,0.55,0.20#signage_top:RANDOM WALK LAB#signage_sub:sampling pavilion — Monte Carlo workshop#annotation_top:each step is independent of the last — the position is their sum#annotation_bottom:fixed 0.015 m steps in a random direction, LEVY capped at ten — not Gaussian#mounted_artifact_scene:res://commons/artifacts/monte_carlo_apparatus/monte_carlo_apparatus.tscn", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "random_walk_collection:90", "", "dark_sphere", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "random_walk_128", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "dark_sphere", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "random_walk_leash", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "catalyst_pickup#sequence_name:randomness#label_text:CHAOS CATALYST#orb_color:0.95,0.55,0.20#accent_color:0.95,0.55,0.20", "", "", "", "", "", "" ],
-   [ "", "pixel_cloud:270:0:0.5#walk_seed:102", "", "", "", "", "", "", "", "", "", "pixel_cloud:90:0:0.5#walk_seed:103", "" ],
+   [ "pixel_cloud:270", "", "", "", "", "", "", "", "", "", "", "", "pixel_cloud:90" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
   ]

@@ -1,113 +1,89 @@
 # Random Walk
 
-Each step is chosen, none remembered. Build the walker that drifts through space without a plan.
+A position, a step, a drawing. Every excerpt below is from `commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd`, the tank on the cabinet.
 
-Declare the walker.
-
-```gdscript
-class_name RandomWalker
-extends Node3D
-
-@export var step_size: float = 0.2
-@export var step_delay: float = 0.1
-var path: PackedVector3Array = PackedVector3Array()
-```
-
-Size and delay. The path records every step for visualisation.
-
-Pick a direction.
+Draw one number. Everything the walk decides comes through this function, from the global stream by default or from a private generator once a seed is named:
 
 ```gdscript
-func pick_direction() -> Vector3:
-    return Vector3(
-        randf_range(-1.0, 1.0),
-        0.0,
-        randf_range(-1.0, 1.0)
-    ).normalized()
+func _rand() -> float:
+	if walk_seed < 0:
+		return randf()
+	if _rng == null:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = walk_seed
+	return _rng.randf()
 ```
 
-A uniform direction in the xz plane. The walker stays on the floor. The method is unbiased in heading.
-
-Take a step.
+Turn the number into a step. In 2D the length is fixed and only the heading is drawn:
 
 ```gdscript
-func step() -> void:
-    var dir := pick_direction()
-    position += dir * step_size
-    path.append(position)
+		WalkMode.WALK_2D:
+			var angle = _rand() * TAU
+			return Vector3(cos(angle), 0, sin(angle)) * step_size
 ```
 
-Position accumulates; path grows. The walker has no memory of where it came from; the path records it for us.
-
-Animate the step rate.
+In 3D two draws pick a direction on the sphere; the length stays fixed. LEVY keeps the direction and draws a length as well:
 
 ```gdscript
-func _process(dt: float) -> void:
-    step_timer += dt
-    if step_timer > step_delay:
-        step_timer = 0.0
-        step()
-        render_path()
+			var u = _rand()
+			var levy_step = step_size * pow(u + LEVY_OFFSET, LEVY_EXPONENT)
+			levy_step = minf(levy_step, step_size * LEVY_STEP_CAP)
+			return direction * levy_step
 ```
 
-A timer paces the steps. The delay controls visibility. Slower makes the walk readable.
+With the offset at 0.01 and the exponent at −0.5 the power never exceeds ten, so the cap of ten step-lengths is reached, not overrun.
 
-Render the path.
+Add the step, fold it back at the glass, and record the position before it changes:
 
 ```gdscript
-func render_path() -> void:
-    var line := path_mesh.mesh as ImmediateMesh
-    line.clear_surfaces()
-    line.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-    for p in path:
-        line.surface_add_vertex(p)
-    line.surface_end()
+		var step = _generate_step()
+		var new_pos = _walker_positions[i] + step
+
+		# Boundary reflection
+		new_pos = _reflect_boundaries(new_pos)
+
+		# Record trail
+		_walker_trails[i].append(_walker_positions[i])
+		if _walker_trails[i].size() > trail_length:
+			_walker_trails[i] = _walker_trails[i].slice(1)
 ```
 
-A single polyline traces the history. The shape is a scribble with probability in its curves. Brownian motion on the floor.
+The trail keeps `trail_length` positions, two hundred here; the walker keeps one. Nothing the step does reads the trail.
 
-Measure the end-to-end displacement.
+Fold at the wall. An overshoot comes back by the distance it overshot; in 2D the height is pinned to the middle plane:
 
 ```gdscript
-func displacement() -> float:
-    if path.is_empty(): return 0.0
-    return path[0].distance_to(path[-1])
+	if pos.x < -half.x: pos.x = -half.x + (-half.x - pos.x)
+	if pos.x > half.x: pos.x = half.x - (pos.x - half.x)
 ```
-
-Displacement grows as the square root of step count. The tutorial does not derive this; it lets the learner see the slowness.
-
-Compare multiple walkers.
 
 ```gdscript
-func spawn_cohort(count: int) -> void:
-    for i in count:
-        var walker := preload("res://commons/artifacts/randomness/random_walker.tscn").instantiate()
-        walker.global_position = Vector3.ZERO
-        add_child(walker)
+	else:
+		pos.y = terrarium_size.y / 2.0
 ```
 
-Many walkers start from the same origin. Over time they spread. The cloud of endpoints is the distribution.
-
-Cap the path length.
+Pace the steps. Frame time is accumulated and spent in whole steps, and a long frame is capped so it cannot dump a second of steps into one jump:
 
 ```gdscript
-func cap_path() -> void:
-    while path.size() > 500:
-        path.remove_at(0)
+	var interval = 1.0 / maxf(steps_per_second, 0.001)
+	_step_timer = minf(_step_timer + delta, interval * MAX_CATCHUP_STEPS)
+
+	while _step_timer >= interval:
+		_step_timer -= interval
+		_step_all_walkers()
 ```
 
-Old steps drop so memory stays bounded. The walk is infinite; the visualisation is not.
+Simulation time is steps over the cadence, thirty a second. The wing's plate prints both clocks so you can watch them drift apart.
 
-You have drawn a stochastic path. The next map, Random Gaussian, accumulates steps into a bell curve.
-<<</MAP>>>
-
-Colour older segments faintly.
+Decide what RESET means. Without a seed the stream simply continues and a reset is a new walk. With a seed the generator is re-seeded first, and the same walk returns:
 
 ```gdscript
-func fade_old_segments(mesh: ImmediateMesh) -> void:
-    for i in path.size():
-        var age: float = float(path.size() - i) / float(path.size())
-        mesh.surface_set_color(Color(1.0, 0.9, 0.6, 1.0 - age))
+	if walk_seed >= 0:
+		if _rng == null:
+			_rng = RandomNumberGenerator.new()
+		_rng.seed = walk_seed
 ```
 
-Old portions of the path fade. Recent steps are bright. Memory visibly decays.
+The logbook names a five-digit seed on its plate; NEW SEED draws another from a private generator, never from the global stream. Press 2D, then 3D, under one seed: the first draw is the heading in the plane in one and the azimuth on the sphere in the other. The same number, another rule, another place.
+
+The next room, Random Gaussian, gathers many draws into a distribution.

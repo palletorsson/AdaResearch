@@ -1,0 +1,1399 @@
+{
+  "checks": 112,
+  "control_path": "the push buttons' own signal path (area button_pressed → the artifact's connections) on the keypad and the wing; _step_all_walkers / _generate_step / _reflect_boundaries / _process driven directly with processing off for the deterministic sections; set_walk_seed for the shipped-policy comparison; the live lane adds the desktop rig's pointer; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "Random_Walk",
+  "measurements": {
+    "after_300_2d": [
+      [
+        0.246598780155182,
+        0.200000002980232,
+        0.0979879274964333
+      ],
+      [
+        0.142702296376228,
+        0.200000002980232,
+        0.0721796303987503
+      ],
+      [
+        0.22156548500061,
+        0.200000002980232,
+        0.0212437994778156
+      ],
+      [
+        0.0437637194991112,
+        0.200000002980232,
+        -0.154271572828293
+      ],
+      [
+        -0.221235886216164,
+        0.200000002980232,
+        0.0286673177033663
+      ]
+    ],
+    "arrival": {
+      "box": [
+        0.5,
+        0.400000005960464,
+        0.5
+      ],
+      "catchup_cap": 5,
+      "clock": 1.51931866666667,
+      "follow_one": true,
+      "frames": 60,
+      "levy_cap": 10.0,
+      "lines": [
+        "3D · fixed 0.015 m steps in the volume",
+        "steps 45 · sim 1.5 s at 30 steps/s",
+        "clock 1.5 s · 60 frames · cap 5/frame",
+        "trail 45/200 kept · one followed, 4 dimmed",
+        "seed 76573 · RESET replays it",
+        "glass folds a step back at every wall"
+      ],
+      "memory": "tail",
+      "mode": 1,
+      "mode_name": "3D",
+      "num_walkers": 5,
+      "positions": [
+        [
+          0.0531147718429565,
+          0.296649873256683,
+          -0.0455025434494019
+        ],
+        [
+          -0.0340681299567223,
+          0.212103724479675,
+          0.00932695902884007
+        ],
+        [
+          0.0496309176087379,
+          0.16488441824913,
+          0.0408111363649368
+        ],
+        [
+          0.114768892526627,
+          0.165862366557121,
+          0.0352021791040897
+        ],
+        [
+          0.077700711786747,
+          0.20211598277092,
+          0.0574595779180527
+        ]
+      ],
+      "replay": true,
+      "seed": 76573,
+      "sim_time": 1.5,
+      "stand": "logbook",
+      "step_size": 0.015,
+      "steps": 45,
+      "steps_per_second": 30.0,
+      "trail_kept": 45,
+      "trail_length": 200
+    },
+    "arrival_colours": {
+      "dim": 4,
+      "other": 0,
+      "own": 1
+    },
+    "bare_default": {
+      "children": 2,
+      "colours": {
+        "dim": 0,
+        "other": 0,
+        "own": 5
+      },
+      "follow_one": false,
+      "logbook": false,
+      "stand": "none",
+      "top_level": [
+        "Cabinet",
+        "Tank"
+      ],
+      "walk_seed": -1
+    },
+    "bodies": [
+      {
+        "at": [
+          7.5,
+          1.7,
+          -3.5
+        ],
+        "cell": [],
+        "token": "lobby:window"
+      },
+      {
+        "at": [
+          7.5,
+          1.7,
+          -2.0
+        ],
+        "cell": [],
+        "token": "lobby:view"
+      },
+      {
+        "at": [
+          11.0,
+          1.6,
+          -2.94
+        ],
+        "cell": [],
+        "token": "lobby:counter"
+      },
+      {
+        "at": [
+          1.14,
+          0.0,
+          -1.4
+        ],
+        "cell": [],
+        "token": "lobby:extinguisher"
+      },
+      {
+        "at": [
+          15.94,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "token": "lobby:elevator"
+      },
+      {
+        "at": [
+          15.1,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "token": "lobby:pallet"
+      },
+      {
+        "at": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "cell": [],
+        "token": "lobby:point_zero"
+      },
+      {
+        "at": [
+          2.5,
+          1.0,
+          1.5
+        ],
+        "cell": [
+          2,
+          1
+        ],
+        "token": "catalyst_prompter_box"
+      },
+      {
+        "at": [
+          9.5,
+          1.0,
+          1.5
+        ],
+        "cell": [
+          9,
+          1
+        ],
+        "token": "catalyst_vent"
+      },
+      {
+        "at": [
+          4.5,
+          0.0,
+          1.5
+        ],
+        "cell": [
+          4,
+          1
+        ],
+        "token": "random_walk_terrarium"
+      },
+      {
+        "at": [
+          11.5,
+          1.0,
+          1.5
+        ],
+        "cell": [
+          11,
+          1
+        ],
+        "token": "pixel_cloud"
+      },
+      {
+        "at": [
+          3.5,
+          0.0,
+          4.5
+        ],
+        "cell": [
+          3,
+          4
+        ],
+        "token": "random_walk_128"
+      },
+      {
+        "at": [
+          9.5,
+          0.0,
+          4.5
+        ],
+        "cell": [
+          9,
+          4
+        ],
+        "token": "lab_room"
+      },
+      {
+        "at": [
+          3.5,
+          0.0,
+          7.5
+        ],
+        "cell": [
+          3,
+          7
+        ],
+        "token": "random_walk_collection"
+      },
+      {
+        "at": [
+          5.5,
+          0.0,
+          7.5
+        ],
+        "cell": [
+          5,
+          7
+        ],
+        "token": "dark_sphere"
+      },
+      {
+        "at": [
+          8.5,
+          0.0,
+          8.5
+        ],
+        "cell": [
+          8,
+          8
+        ],
+        "token": "random_walk_leash"
+      },
+      {
+        "at": [
+          6.5,
+          0.0,
+          10.5
+        ],
+        "cell": [
+          6,
+          10
+        ],
+        "token": "catalyst_pickup"
+      },
+      {
+        "at": [
+          1.5,
+          1.0,
+          11.5
+        ],
+        "cell": [
+          1,
+          11
+        ],
+        "token": "pixel_cloud"
+      },
+      {
+        "at": [
+          11.5,
+          1.0,
+          11.5
+        ],
+        "cell": [
+          11,
+          11
+        ],
+        "token": "pixel_cloud"
+      },
+      {
+        "at": [
+          6.5,
+          0.0,
+          0.5
+        ],
+        "cell": [],
+        "token": "gate:random walk"
+      },
+      {
+        "at": [
+          2.0,
+          1.58,
+          12.99
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          9.0,
+          1.58,
+          15.01
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.0,
+          1.58,
+          15.99
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          2.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          2.0
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          10.99,
+          1.58,
+          16.0
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          11.99,
+          1.58,
+          2.0
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          6.01,
+          1.58,
+          15.0
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.99,
+          1.58,
+          14.0
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          4.0,
+          1.58,
+          12.99
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          4.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          7.0
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          11.99,
+          1.58,
+          4.0
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          9.0,
+          1.58,
+          12.99
+        ],
+        "cell": [],
+        "token": "showing"
+      },
+      {
+        "at": [
+          6.5,
+          3.52,
+          -1.0
+        ],
+        "cell": [],
+        "token": "exit_sign"
+      },
+      {
+        "at": [
+          6.5,
+          3.0,
+          16.0
+        ],
+        "cell": [],
+        "token": "exit_sign"
+      },
+      {
+        "at": [
+          1.02,
+          2.25,
+          -3.5
+        ],
+        "cell": [],
+        "token": "wall_clock"
+      },
+      {
+        "at": [
+          1.0,
+          1.7,
+          3.5
+        ],
+        "cell": [],
+        "token": "info_screen"
+      },
+      {
+        "at": [
+          1.0,
+          1.5,
+          -2.5
+        ],
+        "cell": [],
+        "token": "electrical_panel"
+      },
+      {
+        "at": [
+          3.7,
+          4.64,
+          6.23
+        ],
+        "cell": [],
+        "token": "ceiling_vent"
+      },
+      {
+        "at": [
+          8.5,
+          0.42,
+          12.5
+        ],
+        "cell": [],
+        "token": "dream_bodies"
+      }
+    ],
+    "captures": {
+      "arena": {
+        "at": [
+          6.5,
+          2.4,
+          12.6
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "forward": [
+          -0.06,
+          -0.23,
+          -0.97
+        ],
+        "is_ours": true
+      },
+      "keypad": {
+        "at": [
+          5.6,
+          1.22,
+          1.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "forward": [
+          -0.84,
+          -0.54,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "logbook": {
+        "at": [
+          5.29,
+          1.38,
+          2.11
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "forward": [
+          -0.9,
+          -0.42,
+          -0.06
+        ],
+        "is_ours": true
+      },
+      "north_door": {
+        "at": [
+          6.5,
+          1.6,
+          0.3
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "forward": [
+          0.0,
+          -0.12,
+          0.99
+        ],
+        "is_ours": true
+      },
+      "plan": {
+        "at": [
+          6.5,
+          9.0,
+          7.0
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "forward": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          5.8,
+          1.55,
+          1.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "forward": [
+          -0.93,
+          -0.36,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "running": {
+        "at": [
+          5.8,
+          1.55,
+          1.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "forward": [
+          -0.93,
+          -0.36,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "tank": {
+        "at": [
+          5.45,
+          1.3,
+          1.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "forward": [
+          -0.98,
+          -0.19,
+          0.0
+        ],
+        "is_ours": true
+      }
+    },
+    "catchup_steps_for_2s_frame": 5,
+    "desktop_input": {
+      "front_capture_pose": {
+        "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+        "eye": [
+          5.9,
+          1.6,
+          1.5
+        ],
+        "forward": [
+          -0.93,
+          -0.37,
+          0.0
+        ],
+        "rig": [
+          5.9,
+          0.0,
+          1.5
+        ]
+      },
+      "log": [
+        {
+          "event": "walker_cam_guard_stopped",
+          "value": true
+        },
+        {
+          "at": [
+            5.90000009536743,
+            0.0,
+            1.5
+          ],
+          "event": "spawn"
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.9,
+              1.6,
+              1.5
+            ],
+            "forward": [
+              -0.79,
+              -0.61,
+              0.06
+            ],
+            "miss_deg": 0.03,
+            "rig": [
+              5.9,
+              0.0,
+              1.5
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "ne-cabinet-vista/RandomWalkTerrarium/Cabinet/RackPanel/Btn_0",
+            "hover": "WalkTerrarium/Cabinet/RackPanel/Btn_0/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.79,
+                -0.61,
+                0.06
+              ],
+              "camera_from": [
+                5.9,
+                1.6,
+                1.5
+              ],
+              "independent_ray": "sta/RandomWalkTerrarium/Cabinet/RackPanel/Btn_0/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "sta/RandomWalkTerrarium/Cabinet/RackPanel/Btn_0/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                4.91,
+                0.83,
+                1.57
+              ]
+            },
+            "stand": [
+              5.9,
+              0.0,
+              1.5
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.9,
+              1.6,
+              1.5
+            ],
+            "forward": [
+              -0.71,
+              -0.59,
+              0.37
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.9,
+              0.0,
+              1.5
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "ane-cabinet-vista/RandomWalkTerrarium/Logbook/LogPanel/Btn_2",
+            "hover": "mWalkTerrarium/Logbook/LogPanel/Btn_2/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.71,
+                -0.59,
+                0.37
+              ],
+              "camera_from": [
+                5.9,
+                1.6,
+                1.5
+              ],
+              "independent_ray": "ista/RandomWalkTerrarium/Logbook/LogPanel/Btn_2/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "ista/RandomWalkTerrarium/Logbook/LogPanel/Btn_2/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                4.86,
+                0.73,
+                2.05
+              ]
+            },
+            "stand": [
+              5.9,
+              0.0,
+              1.5
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.9,
+              1.6,
+              1.5
+            ],
+            "forward": [
+              -0.75,
+              -0.66,
+              0.0
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.9,
+              0.0,
+              1.5
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "ne-cabinet-vista/RandomWalkTerrarium/Cabinet/RackPanel/Btn_3",
+            "hover": "WalkTerrarium/Cabinet/RackPanel/Btn_3/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.75,
+                -0.66,
+                0.0
+              ],
+              "camera_from": [
+                5.9,
+                1.6,
+                1.5
+              ],
+              "independent_ray": "sta/RandomWalkTerrarium/Cabinet/RackPanel/Btn_3/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "sta/RandomWalkTerrarium/Cabinet/RackPanel/Btn_3/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                4.95,
+                0.76,
+                1.5
+              ]
+            },
+            "stand": [
+              5.9,
+              0.0,
+              1.5
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.9,
+              1.6,
+              1.5
+            ],
+            "forward": [
+              -0.93,
+              -0.37,
+              0.0
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.9,
+              0.0,
+              1.5
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              6.5,
+              1.65,
+              1.0
+            ],
+            "forward": [
+              0.0,
+              -0.04,
+              1.0
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              6.5,
+              0.05,
+              1.0
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 30,
+          "moved": [
+            0.0,
+            -0.05,
+            2.5
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              6.5,
+              1.6,
+              3.5
+            ],
+            "forward": [
+              0.0,
+              -0.04,
+              1.0
+            ],
+            "rig": [
+              6.5,
+              0.0,
+              3.5
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.8,
+              1.6,
+              1.5
+            ],
+            "forward": [
+              -0.91,
+              -0.42,
+              0.0
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.8,
+              0.0,
+              1.5
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 20,
+          "moved": [
+            -0.55,
+            0.0,
+            0.0
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.25,
+              1.6,
+              1.5
+            ],
+            "forward": [
+              -0.91,
+              -0.42,
+              0.0
+            ],
+            "rig": [
+              5.25,
+              0.0,
+              1.5
+            ]
+          }
+        },
+        {
+          "current_camera_after": "/root/EndlessMuseum/Walker/@Camera3D@4",
+          "event": "teardown"
+        }
+      ],
+      "mode_after": 0,
+      "press_2d": {
+        "control": "ne-cabinet-vista/RandomWalkTerrarium/Cabinet/RackPanel/Btn_0",
+        "hover": "WalkTerrarium/Cabinet/RackPanel/Btn_0/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.79,
+            -0.61,
+            0.06
+          ],
+          "camera_from": [
+            5.9,
+            1.6,
+            1.5
+          ],
+          "independent_ray": "sta/RandomWalkTerrarium/Cabinet/RackPanel/Btn_0/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "sta/RandomWalkTerrarium/Cabinet/RackPanel/Btn_0/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            4.91,
+            0.83,
+            1.57
+          ]
+        },
+        "stand": [
+          5.9,
+          0.0,
+          1.5
+        ]
+      },
+      "press_new_seed": {
+        "control": "ane-cabinet-vista/RandomWalkTerrarium/Logbook/LogPanel/Btn_2",
+        "hover": "mWalkTerrarium/Logbook/LogPanel/Btn_2/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.71,
+            -0.59,
+            0.37
+          ],
+          "camera_from": [
+            5.9,
+            1.6,
+            1.5
+          ],
+          "independent_ray": "ista/RandomWalkTerrarium/Logbook/LogPanel/Btn_2/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "ista/RandomWalkTerrarium/Logbook/LogPanel/Btn_2/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            4.86,
+            0.73,
+            2.05
+          ]
+        },
+        "stand": [
+          5.9,
+          0.0,
+          1.5
+        ]
+      },
+      "press_reset": {
+        "control": "ne-cabinet-vista/RandomWalkTerrarium/Cabinet/RackPanel/Btn_3",
+        "hover": "WalkTerrarium/Cabinet/RackPanel/Btn_3/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.75,
+            -0.66,
+            0.0
+          ],
+          "camera_from": [
+            5.9,
+            1.6,
+            1.5
+          ],
+          "independent_ray": "sta/RandomWalkTerrarium/Cabinet/RackPanel/Btn_3/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "sta/RandomWalkTerrarium/Cabinet/RackPanel/Btn_3/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            4.95,
+            0.76,
+            1.5
+          ]
+        },
+        "stand": [
+          5.9,
+          0.0,
+          1.5
+        ]
+      },
+      "seed_after": 74567,
+      "seed_before": 84744,
+      "steps_after_reset": 0,
+      "steps_before_reset": 23,
+      "walk_into_the_case": [
+        -0.55,
+        0.0
+      ],
+      "walk_south_column_6": [
+        0.0,
+        2.5
+      ],
+      "walker_cam_guard_stopped": true
+    },
+    "foes": 0,
+    "keypad_local": [
+      4.89599990844727,
+      0.774999976158142,
+      1.5
+    ],
+    "levy_2000": {
+      "max": 0.144832506775856,
+      "mean": 0.027119506392628,
+      "over_0.10": 29
+    },
+    "longest_line": 42,
+    "msd": {
+      "recomputed": 0.0468192242085934,
+      "screen": 0.0468
+    },
+    "museum_bodies": 2386,
+    "museum_severed_tokens": [
+      "lab_room",
+      "pixel_cloud"
+    ],
+    "museum_walk_severed": [],
+    "origin_local": [
+      4.5,
+      0.0,
+      1.5
+    ],
+    "pixel_clouds": [
+      [
+        11.5,
+        1.0,
+        1.5,
+        101,
+        0.5
+      ],
+      [
+        1.5,
+        1.0,
+        11.5,
+        102,
+        0.5
+      ],
+      [
+        11.5,
+        1.0,
+        11.5,
+        103,
+        0.5
+      ]
+    ],
+    "plate_local": [
+      4.53999996185303,
+      1.02499997615814,
+      2.05599975585938
+    ],
+    "plinths": [
+      [
+        "ArtPlinth0",
+        8,
+        12
+      ]
+    ],
+    "raised_cells": 41,
+    "reach": {
+      "keypad_2d": 0.962414860725403,
+      "new_seed": 1.19723057746887,
+      "plate": 1.22733902931213,
+      "tank": 1.08853113651276
+    },
+    "rebuilt": {
+      "children": 3,
+      "found": true,
+      "logbook": true,
+      "panel": true,
+      "seed": 27781,
+      "stand": "logbook",
+      "walkers": 5
+    },
+    "reflect_2d": [
+      [
+        0.199999988079071,
+        0.200000002980232,
+        0.0
+      ],
+      [
+        -0.229999989271164,
+        0.200000002980232,
+        0.240000009536743
+      ],
+      [
+        0.0,
+        0.200000002980232,
+        0.0
+      ]
+    ],
+    "reflect_3d": [
+      [
+        0.0,
+        0.0500000007450581,
+        0.0
+      ],
+      [
+        0.0,
+        0.350000023841858,
+        0.0
+      ]
+    ],
+    "replay": {
+      "run_a": [
+        [
+          0.0474971793591976,
+          0.287361890077591,
+          -0.0257464349269867
+        ],
+        [
+          -0.0253501906991005,
+          0.224203735589981,
+          0.0336515754461288
+        ],
+        [
+          0.0745072960853577,
+          0.202948585152626,
+          0.0590212643146515
+        ],
+        [
+          0.145533382892609,
+          0.166404291987419,
+          0.030247937887907
+        ],
+        [
+          0.0864520817995071,
+          0.211776524782181,
+          0.0939056575298309
+        ]
+      ],
+      "run_b": [
+        [
+          0.0474971793591976,
+          0.287361890077591,
+          -0.0257464349269867
+        ],
+        [
+          -0.0253501906991005,
+          0.224203735589981,
+          0.0336515754461288
+        ],
+        [
+          0.0745072960853577,
+          0.202948585152626,
+          0.0590212643146515
+        ],
+        [
+          0.145533382892609,
+          0.166404291987419,
+          0.030247937887907
+        ],
+        [
+          0.0864520817995071,
+          0.211776524782181,
+          0.0939056575298309
+        ]
+      ],
+      "seed": 76573
+    },
+    "rw128": {
+      "at": [
+        3.5,
+        0.0,
+        4.5
+      ],
+      "cubes": 368,
+      "extent_x": [
+        2.53,
+        4.09
+      ],
+      "extent_z": [
+        3.53,
+        5.47
+      ],
+      "scale": 0.200000002980232
+    },
+    "same_seed_two_rules": {
+      "azimuth_3d": 2.24154682583643,
+      "first_step_2d": [
+        -0.00932360906153917,
+        0.200000002980232,
+        0.0117503320798278
+      ],
+      "first_step_3d": [
+        -0.00853632669895887,
+        0.21075813472271,
+        0.00603270996361971
+      ],
+      "heading_2d": 2.241546675018
+    },
+    "stats_y": 0.57039999961853,
+    "stream": {
+      "seconds": 0.851,
+      "steps_in_a_second": 30
+    },
+    "stream_no_replay": {
+      "run_a": [
+        [
+          -0.102700918912888,
+          0.162350118160248,
+          0.0101915597915649
+        ],
+        [
+          0.0918693989515305,
+          0.244648739695549,
+          -0.0421283729374409
+        ],
+        [
+          0.0919982343912125,
+          0.201746940612793,
+          -0.0555797219276428
+        ],
+        [
+          0.0121786659583449,
+          0.180616617202759,
+          0.013612711802125
+        ],
+        [
+          -0.0380449257791042,
+          0.140891626477242,
+          -0.0319028198719025
+        ]
+      ],
+      "run_b": [
+        [
+          -0.0212295390665531,
+          0.253249734640121,
+          0.00579288881272078
+        ],
+        [
+          0.0102672465145588,
+          0.353143513202667,
+          0.0442737191915512
+        ],
+        [
+          0.0556169375777245,
+          0.181267753243446,
+          -0.0472395829856396
+        ],
+        [
+          -0.0605141520500183,
+          0.181250602006912,
+          -0.0570984110236168
+        ],
+        [
+          0.0389804765582085,
+          0.171760261058807,
+          -0.0270695649087429
+        ]
+      ]
+    },
+    "streaming": {
+      "freed": true,
+      "rebuildable": true
+    },
+    "tank_y": 0.920000016689301,
+    "tile": [
+      "4444411144444",
+      "4111111141114",
+      "4111111111114",
+      "4111111111114",
+      "0111111111114",
+      "1111111111114",
+      "4111111111114",
+      "4111111111114",
+      "4111111111114",
+      "4111111111114",
+      "4111111111114",
+      "4111111111114",
+      "4111111111014",
+      "4444411144444",
+      "4444441144444",
+      "4444441111144",
+      "4444444441144"
+    ],
+    "vent": {
+      "require_armed": true,
+      "started": false
+    },
+    "walk_east_along_row_7_from_column_5_to_the_leash": 1.0,
+    "walk_south_along_column_6_from_the_door_strip_to_row_10_the_routes_west_half": 1.0,
+    "walk_south_along_column_7_from_row_10_through_the_rings_gap_into_the_south_strip": 1.0,
+    "walk_south_down_the_door_strip_past_the_cabinet_column_5": 1.0,
+    "walk_south_out_of_the_south_door_along_its_centre_column_6": 1.0,
+    "walk_west_from_the_door_strip_into_the_wing": 0.34765625,
+    "walk_west_from_the_door_strip_into_the_wing_blockers": [
+      "_soane-cabinet-vista/RandomWalkTerrarium/Logbook/LogPanel/Btn_0/Button",
+      "_soane-cabinet-vista/RandomWalkTerrarium/Logbook/LogPanel/Btn_1/Button",
+      "_soane-cabinet-vista/RandomWalkTerrarium/Logbook/LogPanel/Btn_2/Button"
+    ],
+    "walk_west_from_the_visitors_spot_into_the_cabinet": 0.2734375,
+    "walk_west_from_the_visitors_spot_into_the_cabinet_blockers": [
+      "soane-cabinet-vista/RandomWalkTerrarium/Cabinet/RackPanel/Btn_3/Button"
+    ],
+    "wing_local": [
+      4.59999990463257,
+      0.0,
+      2.05599975585938
+    ]
+  },
+  "physics_fps": 60
+}

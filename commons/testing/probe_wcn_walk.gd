@@ -1,0 +1,684 @@
+extends SceneTree
+## Random_Walk, batch R2 (doc/research/waves-chance-noise, 2026-09-11, Astra's thread from
+## Random_Remove: the set of places a walker can reach is decided one step at a time):
+## what does a trail remember that the next step does not use?
+##
+## Stands up the ACTUAL museum hall with its artifacts (the pattern of probe_wcn_remove.gd),
+## hands the museum the REAL necklace hand file, finds random_walk_terrarium on the recovered
+## arena floor beside the north door strip, and measures: the cabinet (case, tank at 0.92 m,
+## keypad 2D · 3D · LEVY / RESET, stats screen), the logbook wing (a body, the plate, six
+## readout lines, ONE · ALL / NEW SEED); the stream (steps against the clock, the stats screen
+## against the counter); through the push buttons' own signal path: 2D pins y and reflects x
+## and z, 3D reflects all three, LEVY's step law and its cap, trails capped at trail_length,
+## the catch-up cap; RESET replaying the named seed cube for cube and a stream walk that does
+## not replay; the same seed under two rules (the first draw is a heading in 2D and the azimuth
+## in 3D); NEW SEED; ONE / ALL; the museum's floor and bodies untouched, the walk verdict,
+## plinths against the rect, walks past and into the case, reach, captures, streaming. The
+## live port adds the project's desktop rig pressing the keypad and the wing through its pointer.
+##
+##   godot --rendering-method gl_compatibility --path . --xr-mode off --script res://commons/testing/probe_wcn_walk.gd -- --capture
+##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_wcn_walk.gd
+##
+## Writes res://ada_run/waves_chance_noise/Random_Walk/probe_walk.json
+## (and probe_walk*.png under --capture). Exit code 1 on any failed check.
+var checks := 0
+var failures: Array[String] = []
+var measurements: Dictionary = {}
+const MAP := "Random_Walk"
+const OUT := "res://ada_run/waves_chance_noise/Random_Walk/"
+const MAP_CELL := Vector2i(4, 1)
+const SPOT := Vector3(5.5, 0.0, 1.5)      # the visitor's spot, on the door strip, facing west
+const EYE_H := 1.55
+
+func _initialize() -> void: run.call_deferred()
+
+func _live() -> bool:
+	return str(get_script().resource_path).ends_with("_live.gd")
+
+func check(ok: bool, message: String) -> void:
+	checks += 1
+	if not ok: failures.append(message)
+	print("[wcn-walk] ", "PASS " if ok else "FAIL ", message)
+
+func run() -> void:
+	if "--capture" in OS.get_cmdline_user_args() and DisplayServer.get_name() == "headless":
+		check(false, "PNG capture requires a rendered window; omit --headless, or omit --capture for logic only")
+		_finish(); return
+	var em: Node3D = load("res://commons/scenes/endless_museum.tscn").instantiate()
+	var ctl := "res://ada_run/waves_chance_noise/wcn-probe-control.json"
+	em.set("EM_CONTROL", ctl); em.set("_overrides_path", ctl + ".unused")
+	em.set("_hand_path", "res://ada_run/necklace_hand.json")   # the REAL hand, on purpose
+	em.set("start_chapter", "randomness"); em.set("start_map", MAP)
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/em_layout.json"))
+	layout.get_or_add("stream", {})["bodies"] = 1
+	em.set("_layout", layout)
+	var f := FileAccess.open(ctl, FileAccess.WRITE)
+	f.store_string(JSON.stringify({"first_chapter": "randomness", "dollhouse": 0, "grid_pack": 1})); f.close()
+	root.add_child(em); current_scene = em
+	await create_timer(1.0).timeout
+	em.set_process(false); em.call("flush_stamps")
+	var player: Node = em.get("_player")
+	if player != null: player.set_process(false); player.set_physics_process(false)
+	var seg: Node3D
+	for rec: Dictionary in em.get("_segments"):
+		if rec.node.get_meta("em_map", "") == MAP: seg = rec.node; break
+	check(seg != null, "the hall exists in the active museum")
+	if seg == null:
+		_finish(); return
+	for i in range(30): await process_frame
+	var vest: int = int(em.get("VESTIBULE_H"))
+	var capture: bool = "--capture" in OS.get_cmdline_user_args()
+	var cam: Camera3D
+	if capture:
+		var wc: Camera3D = em.get("_cam")
+		if wc != null and is_instance_valid(wc):
+			for c in wc.get_children():
+				if c is Timer: (c as Timer).stop()
+		cam = Camera3D.new(); em.add_child(cam); cam.fov = 62
+
+	# ── 0. the hall as the museum built it: the recovered floor ───────────────
+	var tile: Array = seg.get_meta("em_tile", [])
+	var tile_rows: Array = []
+	for row in tile:
+		var line := ""
+		for c in row: line += str(c)
+		tile_rows.append(line)
+	measurements["tile"] = tile_rows
+	var holes: int = 0
+	for r in range(2, 11):
+		for c in range(2, 11):
+			if r < tile.size() and c < (tile[r] as Array).size() and str(tile[r][c]) == "0": holes += 1
+	check(holes == 0 and tile_rows.size() >= 14, "the arena floor is floor: no hole tile in cells (2..10, 2..10) (%d)" % holes)
+	check(tile_rows.size() > 1 and str(tile_rows[1]).length() > 4 and str(tile_rows[1])[4] == "1", "the terrarium's cell (4,1) is floor, not the old wall stub (row 1: %s)" % str(tile_rows[1] if tile_rows.size() > 1 else ""))
+	var heights: Dictionary = seg.get_meta("em_heights", {})
+	measurements["raised_cells"] = heights.size()
+	check(heights.size() == 41, "the recovery's forty-one platform cells stand a metre up (%d)" % heights.size())
+	var bodies: Array = []
+	var terr: Node3D
+	var terr_cell: Array = []
+	var vent: Node3D
+	for record: Dictionary in em.get("_edit_records"):
+		var node: Node = record.get("node")
+		if node == null or not (node is Node3D) or not seg.is_ancestor_of(node): continue
+		var lp: Vector3 = seg.to_local((node as Node3D).global_position)
+		var sp: String = str(node.get_script().resource_path).get_file() if node.get_script() != null else "-"
+		if str(record.get("token", "")) == "": continue
+		bodies.append({"token": record.get("token"), "cell": record.get("tile_cell", []), "at": [snappedf(lp.x, 0.01), snappedf(lp.y, 0.01), snappedf(lp.z - vest, 0.01)]})
+		if sp == "random_walk_terrarium.gd": terr = node; terr_cell = record.get("tile_cell", [])
+		if sp == "catalyst_vent.gd": vent = node
+	measurements["bodies"] = bodies
+	if terr == null:
+		for n in seg.find_children("*", "Node3D", true, false):
+			if n.get_script() != null and str(n.get_script().resource_path).ends_with("random_walk_terrarium.gd"): terr = n; break
+	check(terr != null, "random_walk_terrarium is built in the hall")
+	if terr == null:
+		_finish(); return
+	var rw128: Node3D
+	for n in seg.find_children("*", "Node3D", true, false):
+		if n.get_script() != null and str(n.get_script().resource_path).ends_with("RandomWalk128Algorithm.gd"): rw128 = n; break
+	if rw128 != null:
+		var rl: Vector3 = seg.to_local(rw128.global_position)
+		var ext_min := Vector3(1e9, 1e9, 1e9)
+		var ext_max := Vector3(-1e9, -1e9, -1e9)
+		for c in rw128.find_children("Cube_*", "Node3D", false, false):
+			var cp: Vector3 = seg.to_local((c as Node3D).global_position)
+			ext_min = ext_min.min(cp); ext_max = ext_max.max(cp)
+		measurements["rw128"] = {"at": [snappedf(rl.x, 0.01), snappedf(rl.y, 0.01), snappedf(rl.z - vest, 0.01)], "scale": rw128.scale.x, "cubes": rw128.find_children("Cube_*", "Node3D", false, false).size(),
+			"extent_x": [snappedf(ext_min.x, 0.01), snappedf(ext_max.x, 0.01)], "extent_z": [snappedf(ext_min.z - vest, 0.01), snappedf(ext_max.z - vest, 0.01)]}
+		check(absf(rw128.scale.x - 0.2) < 0.01, "the 128 walk wears the token's scale, a fifth: a two-metre carpet of tiny cubes (%.2f)" % rw128.scale.x)
+		check(ext_max.x < 4.6 and ext_min.x > 1.4, "…and it lies west of the route, columns 2–3 (x %.2f–%.2f)" % [ext_min.x, ext_max.x])
+	var clouds: Array = []
+	var clouds_pinned := true
+	for n in seg.find_children("*", "Node3D", true, false):
+		if n.get_script() != null and str(n.get_script().resource_path).ends_with("pixel_cloud.gd"):
+			var cl: Vector3 = seg.to_local((n as Node3D).global_position)
+			clouds.append([snappedf(cl.x, 0.01), snappedf(cl.y, 0.01), snappedf(cl.z - vest, 0.01), int(n.get("walk_seed")), snappedf((n as Node3D).scale.x, 0.01)])
+			if int(n.get("walk_seed")) < 0 or absf((n as Node3D).scale.x - 0.5) > 0.01: clouds_pinned = false
+	measurements["pixel_clouds"] = clouds
+	check(clouds.size() == 3 and clouds_pinned, "the three pixel clouds stand on the ring at half scale with named seeds, so their shapes — and the cells they seal — are the same every boot (%s)" % str(clouds))
+
+	# ── 1. built where the map put it, on the floor, facing the door strip ───
+	if terr_cell.size() >= 2:
+		check(int(terr_cell[0]) == MAP_CELL.x and int(terr_cell[1]) == MAP_CELL.y, "built at the map's cell (4,1) (got %s)" % str(terr_cell))
+	var lo: Vector3 = seg.to_local(terr.global_position)
+	measurements["origin_local"] = [lo.x, lo.y, lo.z - vest]
+	check(absf(lo.x - 4.5) < 0.6 and absf(lo.z - (1.5 + vest)) < 0.6, "the terrarium stands on its cell (%.1f, %.1f)" % [lo.x, lo.z - vest])
+	check(absf(lo.y) < 0.05, "the deck is the origin: the cabinet stands ON the floor (y %.2f)" % lo.y)
+	var front: Vector3 = seg.global_transform.basis.inverse() * (terr.global_transform.basis * Vector3(0, 0, 1))
+	check(front.x > 0.9, "the front (+z: keypad and stats) faces east, the door strip where a visitor stands (x %.2f)" % front.x)
+	check(str(terr.get("stand")) == "logbook", "the token's #stand:logbook reached the artifact")
+	check(bool(terr.get("case_body")), "the shipped cabinet stands (case_body)")
+	var seed0: int = int(terr.get("walk_seed"))
+	check(seed0 >= 10000 and seed0 <= 99999, "the logbook runs a named five-digit seed (%d)" % seed0)
+	check(bool(terr.get("follow_one")), "on arrival one walker is followed, the others dimmed")
+	check(int(terr.get("num_walkers")) == 5 and int(terr.get("walk_mode")) == 1, "five walkers in 3D on arrival (mode %d)" % int(terr.get("walk_mode")))
+
+	# ── 2. the cabinet, the tank, the keypad, the stats screen ───────────────
+	var cab: Node3D = terr.get("_cab")
+	var tank: Node3D = terr.get("_tank")
+	var keypad: Node3D = terr.get("_control_panel")
+	var stats: Label3D = terr.get("_stats_label")
+	check(cab != null and cab.get_child_count() >= 15, "the cabinet is built (%d parts)" % (cab.get_child_count() if cab != null else 0))
+	var tank_y: float = seg.to_local(tank.global_position).y if tank != null else -1.0
+	measurements["tank_y"] = tank_y
+	check(absf(tank_y - 0.92) < 0.02, "the tank stands on the cabinet top at 0.92 m (%.2f)" % tank_y)
+	var glass: Node3D = tank.get_node_or_null("GlassBox") if tank != null else null
+	check(glass != null and glass.get_child_count() == 5, "the glass box: a base and four walls")
+	var walkers: MultiMeshInstance3D = tank.get_node_or_null("Walkers") if tank != null else null
+	check(walkers != null and walkers.multimesh != null and walkers.multimesh.instance_count == 5, "five walker beads in one MultiMesh")
+	check(keypad != null, "the keypad exists")
+	for b in ["Btn_0", "Btn_1", "Btn_2", "Btn_3"]:
+		check(keypad != null and keypad.find_child(b, true, false) != null, "the keypad has %s" % b)
+	var kp: Vector3 = seg.to_local(keypad.global_position) if keypad != null else Vector3.ZERO
+	measurements["keypad_local"] = [kp.x, kp.y, kp.z - vest]
+	check(kp.y > 0.70 and kp.y < 0.85, "the keypad sits at hand height on the fascia (%.2f m)" % kp.y)
+	check(stats != null and stats.text.begins_with("3D Walk\nSteps: "), "the stats screen reads the mode and the steps (%s)" % (stats.text.replace("\n", " | ") if stats != null else ""))
+	var sy: float = seg.to_local(stats.global_position).y if stats != null else -1.0
+	measurements["stats_y"] = sy
+	print("[wcn-walk] measured: the stats screen at %.2f m (the cabinet's seated pocket; the logbook plate is the housed readout at reach)" % sy)
+
+	# ── 3. the logbook wing ──────────────────────────────────────────────────
+	var logbook: Node3D = terr.get_node_or_null("Logbook")
+	check(logbook != null, "the logbook wing exists")
+	if logbook == null:
+		_finish(); return
+	var wing: StaticBody3D = logbook.get_node_or_null("Wing")
+	check(wing != null and not wing.find_children("*", "CollisionShape3D", false, false).is_empty(), "the wing is a body with a collider")
+	var cab_body: Node = logbook.get_node_or_null("CabinetBody")
+	check(cab_body != null and not cab_body.find_children("*", "CollisionShape3D", false, false).is_empty(), "under the logbook the cabinet itself has a body")
+	var wl: Vector3 = seg.to_local(wing.global_position) if wing != null else Vector3.ZERO
+	measurements["wing_local"] = [wl.x, wl.y, wl.z - vest]
+	check(wl.x < 5.0 and wl.z - vest > 1.7 and wl.z - vest < 2.4, "the wing hangs on the cabinet's south flank, off the door strip (%.2f, %.2f)" % [wl.x, wl.z - vest])
+	var plate: Node3D = logbook.get_node_or_null("Plate")
+	var readout: Label3D = plate.get_node_or_null("Readout") if plate != null else null
+	check(readout != null, "the plate carries the readout")
+	var pl: Vector3 = seg.to_local(plate.global_position) if plate != null else Vector3.ZERO
+	measurements["plate_local"] = [pl.x, pl.y, pl.z - vest]
+	check(pl.y > 0.95 and pl.y < 1.15, "the plate is at reading height (%.2f m)" % pl.y)
+	var lpanel: Node3D = logbook.get_node_or_null("LogPanel")
+	check(lpanel != null, "the wing's panel exists")
+	for b in ["Btn_0", "Btn_1", "Btn_2"]:
+		check(lpanel != null and lpanel.find_child(b, true, false) != null, "the wing's panel has %s" % b)
+	var st: Dictionary = terr.call("get_logbook_state")
+	measurements["arrival"] = st.duplicate()
+	var lines: Array = st["lines"]
+	check(lines.size() == 6, "the readout has six lines")
+	check(lines.size() == 6 and str(lines[0]).begins_with("3D · fixed 0.015 m steps"), "line 1 names the rule and its dimension (%s)" % str(lines[0] if lines.size() > 0 else ""))
+	check(lines.size() == 6 and str(lines[1]).begins_with("steps ") and str(lines[1]).contains("sim ") and str(lines[1]).contains("30 steps/s"), "line 2: steps and simulation time at the cadence (%s)" % str(lines[1] if lines.size() > 1 else ""))
+	check(lines.size() == 6 and str(lines[2]).begins_with("clock ") and str(lines[2]).contains("cap 5/frame"), "line 3: the frame clock, frames and the catch-up cap (%s)" % str(lines[2] if lines.size() > 2 else ""))
+	check(lines.size() == 6 and str(lines[3]).contains("/200 kept") and str(lines[3]).contains("one followed, 4 dimmed"), "line 4: the trail kept and who is followed (%s)" % str(lines[3] if lines.size() > 3 else ""))
+	check(lines.size() == 6 and str(lines[4]) == "seed %d · RESET replays it" % seed0, "line 5: the seed and RESET's policy (%s)" % str(lines[4] if lines.size() > 4 else ""))
+	check(lines.size() == 6 and str(lines[5]).begins_with("glass folds a step back"), "line 6: the glass rule (%s)" % str(lines[5] if lines.size() > 5 else ""))
+	var longest: int = 0
+	for l in lines: longest = maxi(longest, str(l).length())
+	measurements["longest_line"] = longest
+	check(longest <= 44, "every line fits the plate (longest %d characters)" % longest)
+	var cols: Dictionary = _walker_colours(walkers, terr)
+	measurements["arrival_colours"] = cols
+	check(int(cols.get("own", 0)) == 1 and int(cols.get("dim", 0)) == 4, "one bead in its own colour, four dimmed (%s)" % str(cols))
+	if capture:
+		cam.global_position = seg.to_global(Vector3(SPOT.x + 0.3, EYE_H, SPOT.z + vest)); cam.look_at(terr.to_global(Vector3(0.0, 1.05, 0.0)))
+		for i in range(20): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_walk.png")
+		measurements["captures"] = {"primary": _cam_pose(cam)}
+
+	# ── 4. the stream runs: steps against the clock, the screen against the counter ──
+	var s0: int = int(terr.get("_total_steps"))
+	var t0: int = Time.get_ticks_msec()
+	await create_timer(1.0).timeout
+	var s1: int = int(terr.get("_total_steps"))
+	var dt: float = float(Time.get_ticks_msec() - t0) / 1000.0
+	measurements["stream"] = {"steps_in_a_second": s1 - s0, "seconds": dt}
+	check(s1 - s0 >= 20 and s1 - s0 <= 40, "the walk steps at about thirty a second (%d in %.2f s)" % [s1 - s0, dt])
+	st = terr.call("get_logbook_state")
+	check(absf(float(st["sim_time"]) - float(st["steps"]) / 30.0) < 1e-6, "simulation time is steps over the cadence (%.2f s for %d steps)" % [float(st["sim_time"]), int(st["steps"])])
+	check(stats != null and stats.text.get_slice("\n", 1) == "Steps: %d" % int(st["steps"]), "the stats screen and the logbook count the same steps (%s vs %d)" % [stats.text.get_slice("\n", 1) if stats != null else "", int(st["steps"])])
+
+	# ── 5. through the keypad: the rules, the glass, the trails, the catch-up ─
+	terr.set_process(false)   # the probe drives the steps; the clock stands still
+	check(_press(keypad, "Btn_0"), "2D pressed through the push button's signal path")
+	await process_frame
+	check(int(terr.get("walk_mode")) == 0 and int(terr.get("_total_steps")) == 0, "…the mode is 2D and the walk restarted (steps %d)" % int(terr.get("_total_steps")))
+	for k in range(300): terr.call("_step_all_walkers")
+	var pos: Array = terr.call("walker_positions")
+	var y_pinned := true
+	var inside := true
+	for p in pos:
+		if absf(float(p[1]) - 0.2) > 1e-6: y_pinned = false
+		if absf(float(p[0])) > 0.25 + 1e-6 or absf(float(p[2])) > 0.25 + 1e-6: inside = false
+	measurements["after_300_2d"] = pos
+	check(y_pinned, "2D: after 300 steps every walker's y is the middle plane, 0.20 (the constrained coordinate)")
+	check(inside, "2D: every walker is inside the glass in x and z after 300 steps")
+	var trails: Array = terr.get("_walker_trails")
+	var kept: int = (trails[0] as PackedVector3Array).size() if trails.size() > 0 else -1
+	check(kept == 200 and int(terr.get("_total_steps")) == 300, "the trail keeps trail_length positions, 200 of the 300 steps (kept %d)" % kept)
+	# the glass, by the rule itself
+	var r1: Vector3 = terr.call("_reflect_boundaries", Vector3(0.30, 0.2, 0.0))
+	var r2: Vector3 = terr.call("_reflect_boundaries", Vector3(-0.27, 0.2, 0.26))
+	var r3: Vector3 = terr.call("_reflect_boundaries", Vector3(0.0, 0.35, 0.0))
+	measurements["reflect_2d"] = [[r1.x, r1.y, r1.z], [r2.x, r2.y, r2.z], [r3.x, r3.y, r3.z]]
+	check(absf(r1.x - 0.20) < 1e-6 and absf(r2.x + 0.23) < 1e-6 and absf(r2.z - 0.24) < 1e-6, "a step past a wall folds back the same distance: 0.30 → 0.20, −0.27 → −0.23, 0.26 → 0.24")
+	check(absf(r3.y - 0.2) < 1e-6, "in 2D a stray y is pinned back to 0.20")
+	check(_press(keypad, "Btn_1"), "3D pressed")
+	await process_frame
+	var r4: Vector3 = terr.call("_reflect_boundaries", Vector3(0.0, -0.05, 0.0))
+	var r5: Vector3 = terr.call("_reflect_boundaries", Vector3(0.0, 0.45, 0.0))
+	measurements["reflect_3d"] = [[r4.x, r4.y, r4.z], [r5.x, r5.y, r5.z]]
+	check(int(terr.get("walk_mode")) == 1 and absf(r4.y - 0.05) < 1e-6 and absf(r5.y - 0.35) < 1e-6, "in 3D the floor and the lid reflect too: −0.05 → 0.05, 0.45 → 0.35")
+	for k in range(300): terr.call("_step_all_walkers")
+	pos = terr.call("walker_positions")
+	inside = true
+	var y_varies := false
+	for p in pos:
+		if absf(float(p[0])) > 0.25 + 1e-6 or absf(float(p[2])) > 0.25 + 1e-6 or float(p[1]) < -1e-6 or float(p[1]) > 0.4 + 1e-6: inside = false
+		if absf(float(p[1]) - 0.2) > 1e-4: y_varies = true
+	check(inside and y_varies, "3D: after 300 steps every walker is inside the box and y is free")
+	# LEVY: the step law and its cap
+	check(_press(keypad, "Btn_2"), "LEVY pressed")
+	await process_frame
+	check(int(terr.get("walk_mode")) == 2, "…the mode is LEVY")
+	var max_len: float = 0.0
+	var sum_len: float = 0.0
+	var long_steps: int = 0
+	for k in range(2000):
+		var stp: Vector3 = terr.call("_generate_step")
+		var L: float = stp.length()
+		max_len = maxf(max_len, L); sum_len += L
+		if L > 0.10: long_steps += 1
+	measurements["levy_2000"] = {"max": max_len, "mean": sum_len / 2000.0, "over_0.10": long_steps}
+	check(max_len <= 0.15 + 1e-6 and max_len > 0.10, "LEVY: 2000 draws never exceed the cap 10 × 0.015 = 0.15 m, and reach past 0.10 (max %.4f)" % max_len)
+	check(sum_len / 2000.0 > 0.022 and sum_len / 2000.0 < 0.032, "LEVY: the mean step is about 0.027 m (∫(u+0.01)^-0.5 = 1.81 × 0.015) (%.4f)" % (sum_len / 2000.0))
+	check(long_steps > 5 and long_steps < 60, "LEVY: about one draw in eighty is a long one (%d of 2000 over 0.10 m)" % long_steps)
+	for k in range(300): terr.call("_step_all_walkers")
+	pos = terr.call("walker_positions")
+	inside = true
+	for p in pos:
+		if absf(float(p[0])) > 0.25 + 1e-6 or absf(float(p[2])) > 0.25 + 1e-6 or float(p[1]) < -1e-6 or float(p[1]) > 0.4 + 1e-6: inside = false
+	check(inside, "LEVY: after 300 steps with long jumps every walker is still inside the glass (one reflection suffices: cap 0.15 < half the box)")
+	# the catch-up cap: a two-second frame yields five steps, not sixty
+	var before_catch: int = int(terr.get("_total_steps"))
+	terr.call("_process", 2.0)
+	var caught: int = int(terr.get("_total_steps")) - before_catch
+	measurements["catchup_steps_for_2s_frame"] = caught
+	check(caught == 5, "a two-second frame is caught up by at most MAX_CATCHUP_STEPS = 5 steps (%d)" % caught)
+	terr.call("_update_stats")
+	st = terr.call("get_logbook_state")
+	check(stats != null and stats.text.get_slice("\n", 1) == "Steps: %d" % int(st["steps"]) and stats.text.begins_with("Lévy Walk"), "the stats screen names Lévy and the count (%s)" % (stats.text.replace("\n", " | ") if stats != null else ""))
+	var msd_calc: float = 0.0
+	for p in pos:
+		msd_calc += Vector3(float(p[0]) - 0.0, float(p[1]) - 0.2, float(p[2]) - 0.0).length_squared()
+	msd_calc /= 5.0
+	# the screen was updated before the catch-up steps moved the walkers; recompute from now
+	terr.call("_update_stats")
+	pos = terr.call("walker_positions")
+	msd_calc = 0.0
+	for p in pos: msd_calc += Vector3(float(p[0]), float(p[1]) - 0.2, float(p[2])).length_squared()
+	msd_calc /= 5.0
+	var msd_screen: float = float(stats.text.get_slice("MSD: ", 1)) if stats != null else -1.0
+	measurements["msd"] = {"screen": msd_screen, "recomputed": msd_calc}
+	check(absf(msd_screen - msd_calc) < 5e-4, "the screen's MSD is the mean squared displacement from the release point (%.4f vs %.4f)" % [msd_screen, msd_calc])
+
+	# ── 6. RESET replays the named seed; the stream does not; the same seed under two rules ─
+	check(_press(keypad, "Btn_1"), "3D pressed again")
+	await process_frame
+	for k in range(30): terr.call("_step_all_walkers")
+	var steps_before_reset: int = int(terr.get("_total_steps"))
+	check(_press(keypad, "Btn_3"), "RESET pressed through the push button's signal path (steps %d before)" % steps_before_reset)
+	await process_frame
+	var reset_fired: bool = steps_before_reset == 30 and int(terr.get("_total_steps")) == 0
+	check(reset_fired, "…and the walk restarted: the keypad's RESET reaches the walk (steps %d → %d)" % [steps_before_reset, int(terr.get("_total_steps"))])
+	if not reset_fired:
+		terr.call("_reset_walkers")
+	for k in range(60): terr.call("_step_all_walkers")
+	var p1: Array = terr.call("walker_positions")
+	_press(keypad, "Btn_3")
+	await process_frame
+	if int(terr.get("_total_steps")) != 0: terr.call("_reset_walkers")
+	for k in range(60): terr.call("_step_all_walkers")
+	var p2: Array = terr.call("walker_positions")
+	measurements["replay"] = {"seed": seed0, "run_a": p1, "run_b": p2}
+	check(_same_positions(p1, p2), "RESET replays the seed: sixty steps land the five walkers on the same spots, bit for bit")
+	check(int(terr.get("walk_seed")) == seed0, "the seed is the same (%d)" % int(terr.get("walk_seed")))
+	# the shipped policy: walk_seed -1 draws from the global stream — RESET starts another walk
+	terr.call("set_walk_seed", -1)
+	for k in range(60): terr.call("_step_all_walkers")
+	var p3: Array = terr.call("walker_positions")
+	terr.call("_reset_walkers")
+	for k in range(60): terr.call("_step_all_walkers")
+	var p4: Array = terr.call("walker_positions")
+	measurements["stream_no_replay"] = {"run_a": p3, "run_b": p4}
+	check(not _same_positions(p3, p4), "without a seed (the shipped default) RESET starts another walk: sixty steps land elsewhere")
+	st = terr.call("get_logbook_state")
+	check(str((st["lines"] as Array)[4]) == "seed: the global stream · RESET: a new walk", "…and the readout says so (%s)" % str((st["lines"] as Array)[4]))
+	terr.call("set_walk_seed", seed0)
+	# the same seed under two rules: the first draw is the heading in 2D and the azimuth in 3D
+	_press(keypad, "Btn_0")
+	await process_frame
+	terr.call("_step_all_walkers")
+	var q2: Array = terr.call("walker_positions")
+	var a2: float = atan2(float(q2[0][2]), float(q2[0][0]))
+	_press(keypad, "Btn_1")
+	await process_frame
+	terr.call("_step_all_walkers")
+	var q3: Array = terr.call("walker_positions")
+	var a3: float = atan2(float(q3[0][1]) - 0.2, float(q3[0][0]))
+	measurements["same_seed_two_rules"] = {"first_step_2d": q2[0], "first_step_3d": q3[0], "heading_2d": a2, "azimuth_3d": a3}
+	check(absf(wrapf(a2 - a3, -PI, PI)) < 1e-4, "the same seed's first draw is walker 0's heading in 2D and its azimuth in 3D (%.4f vs %.4f rad)" % [a2, a3])
+	check(int(terr.get("walk_seed")) == seed0 and not _same_positions(q2, q3), "…the same draws, another rule: different places")
+
+	# ── 7. the wing's buttons: NEW SEED, ALL, ONE ────────────────────────────
+	check(_press(lpanel, "Btn_2"), "NEW SEED pressed through the wing's signal path")
+	await process_frame
+	var seed1: int = int(terr.get("walk_seed"))
+	check(seed1 != seed0 and seed1 >= 10000 and seed1 <= 99999 and int(terr.get("_total_steps")) == 0, "a new five-digit seed is named (%d) and the walk restarted" % seed1)
+	for k in range(60): terr.call("_step_all_walkers")
+	var p5: Array = terr.call("walker_positions")
+	check(not _same_positions(p5, p1) and not _same_positions(p5, p2), "under the new seed sixty steps land elsewhere")
+	st = terr.call("get_logbook_state")
+	check(str((st["lines"] as Array)[4]) == "seed %d · RESET replays it" % seed1, "the readout names the new seed (%s)" % str((st["lines"] as Array)[4]))
+	check(_press(lpanel, "Btn_1"), "ALL pressed")
+	await process_frame
+	cols = _walker_colours(walkers, terr)
+	check(not bool(terr.get("follow_one")) and int(cols.get("own", 0)) == 5, "ALL: five beads in their own colours (%s)" % str(cols))
+	st = terr.call("get_logbook_state")
+	check(str((st["lines"] as Array)[3]).ends_with("5 walkers"), "…the readout says five walkers (%s)" % str((st["lines"] as Array)[3]))
+	check(_press(lpanel, "Btn_0"), "ONE pressed")
+	await process_frame
+	cols = _walker_colours(walkers, terr)
+	check(bool(terr.get("follow_one")) and int(cols.get("own", 0)) == 1 and int(cols.get("dim", 0)) == 4, "ONE: one bead bright, four dimmed again (%s)" % str(cols))
+	terr.call("set_walk_seed", seed1)
+	terr.set_process(true)
+	await create_timer(0.5).timeout
+	if capture:
+		for i in range(6): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_walk_running.png")
+		measurements["captures"]["running"] = _cam_pose(cam)
+
+	# ── 8. the museum untouched; the walk; plinths; walks; reach ─────────────
+	var museum_bodies: int = _count_outside(seg, terr)
+	measurements["museum_bodies"] = museum_bodies
+	await create_timer(0.3).timeout
+	var severed: Array = em.get("_seg_severed") if em.get("_seg_severed") != null else []
+	var sev_tokens: Array = []
+	for s2 in severed: sev_tokens.append(str((s2 as Dictionary).get("token", "")))
+	measurements["museum_severed_tokens"] = sev_tokens
+	var walk_sev: Array = em.get("_walk_severed") if em.get("_walk_severed") != null else []
+	var mine_sev: Array = []
+	for e in walk_sev:
+		if str((e as Dictionary).get("hall", "")).contains(MAP): mine_sev.append(e)
+	measurements["museum_walk_severed"] = mine_sev
+	check(mine_sev.is_empty(), "the museum walks this hall door to door (local seals: %s)" % str(sev_tokens))
+	check(not ("random_walk_terrarium" in sev_tokens), "the terrarium and its wing seal nothing the route needs")
+	var plinths: Array = []
+	for n in seg.find_children("ArtPlinth*", "", true, false):
+		var pl2: Vector3 = seg.to_local((n as Node3D).global_position)
+		plinths.append([n.name, int(floor(pl2.x)), int(floor(pl2.z)) - vest])
+	measurements["plinths"] = plinths
+	var in_rect := false
+	for p in plinths:
+		if int(p[1]) >= 3 and int(p[1]) <= 6 and int(p[2]) >= 1 and int(p[2]) <= 4: in_rect = true
+	check(not in_rect, "no dealt plinth stands in the cells the rect protects, (3,1)–(6,4) (plinths: %s)" % str(plinths))
+	var pspace := seg.get_world_3d().direct_space_state
+	var capsule := CapsuleShape3D.new(); capsule.radius = 0.22; capsule.height = 1.6
+	var wq := PhysicsShapeQueryParameters3D.new(); wq.shape = capsule
+	for route in [["south down the door strip past the cabinet, column 5", Vector3(5.5, 0.81, 0.5), Vector3(0, 0, 5.0), 1],
+			["south along column 6 from the door strip to row 10, the route's west half", Vector3(6.5, 0.81, 1.5), Vector3(0, 0, 9.0), 1],
+			["south along column 7 from row 10 through the ring's gap into the south strip", Vector3(7.5, 0.81, 10.5), Vector3(0, 0, 2.0), 1],
+			["south out of the south door along its centre, column 6", Vector3(6.5, 0.81, 12.5), Vector3(0, 0, 1.4), 1],
+			["east along row 7 from column 5 to the leash", Vector3(5.5, 0.81, 7.5), Vector3(4.0, 0, 0), 2],
+			["west from the visitor's spot into the cabinet", Vector3(SPOT.x, 0.81, SPOT.z), Vector3(-1.2, 0, 0), 0],
+			["west from the door strip into the wing", Vector3(5.5, 0.81, 2.05), Vector3(-1.2, 0, 0), 0]]:
+		wq.transform = Transform3D(Basis.IDENTITY, seg.to_global(Vector3(route[1].x, route[1].y, route[1].z + vest)))
+		wq.motion = route[2]
+		var frac: float = pspace.cast_motion(wq)[0]
+		var key: String = "walk_" + str(route[0]).replace(" ", "_").replace("'", "").replace(",", "")
+		measurements[key] = frac
+		if frac < 0.99:
+			var blockers: Array = []
+			var stop: Vector3 = wq.transform.origin + route[2] * frac + route[2].normalized() * 0.03
+			var q2b := PhysicsShapeQueryParameters3D.new(); q2b.shape = capsule; q2b.transform = Transform3D(Basis.IDENTITY, stop)
+			for hit in pspace.intersect_shape(q2b, 8):
+				var col: Node = (hit as Dictionary).get("collider")
+				if col != null: blockers.append(str(col.get_path()).right(70))
+			measurements[key + "_blockers"] = blockers
+		if int(route[3]) == 1:
+			check(frac > 0.99, "a body walks %s (%.2f of the way)" % [route[0], frac])
+		elif int(route[3]) == 2:
+			print("[wcn-walk] measured: %s %.2f of the way (%s)" % [route[0], frac, str(measurements.get(key + "_blockers", []))])
+		else:
+			check(frac < 0.7, "the case is solid: a body walking %s is stopped (%.2f of the way)" % [route[0], frac])
+	var eye: Vector3 = seg.to_global(Vector3(SPOT.x, EYE_H, SPOT.z + vest))
+	var b0: Node3D = keypad.find_child("Btn_0", true, false)
+	var lb2: Node3D = lpanel.find_child("Btn_2", true, false)
+	measurements["reach"] = {"keypad_2d": eye.distance_to(b0.global_position) if b0 != null else -1.0, "new_seed": eye.distance_to(lb2.global_position) if lb2 != null else -1.0,
+		"plate": eye.distance_to(plate.global_position), "tank": eye.distance_to(tank.global_position + Vector3(0, 0.2, 0))}
+	check(b0 != null and eye.distance_to(b0.global_position) < 1.15, "the keypad is within a lean of the visitor's spot (%.2f m from the eye)" % float(measurements["reach"]["keypad_2d"]))
+	check(lb2 != null and eye.distance_to(lb2.global_position) < 1.45, "NEW SEED on the wing is within a step and a lean (%.2f m)" % float(measurements["reach"]["new_seed"]))
+	check(eye.distance_to(plate.global_position) < 1.45, "the plate is at reading distance (%.2f m)" % float(measurements["reach"]["plate"]))
+	check(eye.distance_to(tank.global_position + Vector3(0, 0.2, 0)) < 1.3, "the tank's middle is an arm's length from the eye (%.2f m)" % float(measurements["reach"]["tank"]))
+	var foes: int = 0
+	for n in root.find_children("*", "Node3D", true, false):
+		if n.get_script() != null and str(n.get_script().resource_path).get_file().to_lower().begins_with("catalyst_foe"): foes += 1
+	measurements["foes"] = foes
+	measurements["vent"] = {"started": vent.get("_started"), "require_armed": vent.get("require_catalyst_armed")} if vent != null else {}
+	check(foes == 0 and (vent == null or (bool(vent.get("require_catalyst_armed")) and not bool(vent.get("_started")))), "the vent waits for the bracelet: no brood in the hall (%d foes; %s)" % [foes, str(measurements["vent"])])
+
+	# ── 9. the shipped default, beside it: a token without #stand ────────────
+	var bare: Node3D = load("res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn").instantiate()
+	bare.position = Vector3(0, -60, 0)
+	root.add_child(bare)
+	await process_frame
+	await process_frame
+	var bare_walkers: MultiMeshInstance3D = (bare.get("_tank") as Node3D).get_node_or_null("Walkers") if bare.get("_tank") != null else null
+	var bare_cols: Dictionary = _walker_colours(bare_walkers, bare)
+	measurements["bare_default"] = {"stand": bare.get("stand"), "walk_seed": bare.get("walk_seed"), "follow_one": bare.get("follow_one"), "logbook": bare.get_node_or_null("Logbook") != null,
+		"colours": bare_cols, "children": bare.get_child_count(), "top_level": bare.get_children().map(func(c): return c.name)}
+	check(bare.get_node_or_null("Logbook") == null and str(bare.get("stand")) == "none" and int(bare.get("walk_seed")) == -1 and not bool(bare.get("follow_one")),
+		"a token without #stand builds the shipped cabinet: no wing, the global stream, nobody dimmed (%s)" % str(measurements["bare_default"]["top_level"]))
+	check(int(bare_cols.get("own", 0)) == 5, "…five beads in their own colours (%s)" % str(bare_cols))
+	bare.set_process(false)
+	for k in range(20): bare.call("_step_all_walkers")
+	var bare_panel: Node3D = bare.get("_control_panel")
+	var bare_before: int = int(bare.get("_total_steps"))
+	_press(bare_panel, "Btn_3")
+	await process_frame
+	check(bare_before == 20 and int(bare.get("_total_steps")) == 0, "…and its keypad's RESET reaches the walk too — the relay is the one shipped-behaviour change (steps %d → %d)" % [bare_before, int(bare.get("_total_steps"))])
+	bare.queue_free()
+	await process_frame
+
+	# ── ACTUAL DESKTOP INPUT (live harness only) ─────────────────────────────
+	if _live():
+		var drv: Node = load("res://commons/testing/wcn_desktop_driver.gd").new()
+		root.add_child(drv)   # a SceneTree has no add_child; the port maps root. to get_tree().root.
+		var stand: Vector3 = seg.to_global(Vector3(SPOT.x + 0.4, 0.0, SPOT.z + vest))
+		drv.call("spawn", stand, em)
+		await create_timer(0.5).timeout
+		var rec0: Dictionary = await drv.call("press", b0, stand) if b0 != null else {}
+		await process_frame
+		await process_frame
+		measurements["desktop_input"] = {"press_2d": rec0, "mode_after": int(terr.get("walk_mode"))}
+		check(str(rec0.get("hover", "")).contains("Btn_0") or str(rec0.get("hover", "")).contains("InteractableAreaButton"), "the desktop pointer had 2D under the crosshair (%s)" % str(rec0.get("hover", "")))
+		check(int(terr.get("walk_mode")) == 0, "2D pressed through the pointer switches the mode")
+		var seed_before: int = int(terr.get("walk_seed"))
+		var rec2: Dictionary = await drv.call("press", lb2, stand) if lb2 != null else {}
+		await process_frame
+		await process_frame
+		measurements["desktop_input"]["press_new_seed"] = rec2
+		measurements["desktop_input"]["seed_before"] = seed_before
+		measurements["desktop_input"]["seed_after"] = int(terr.get("walk_seed"))
+		check(int(terr.get("walk_seed")) != seed_before, "NEW SEED pressed through the pointer names another seed (%d → %d)" % [seed_before, int(terr.get("walk_seed"))])
+		await create_timer(0.7).timeout
+		var b3: Node3D = keypad.find_child("Btn_3", true, false)
+		var steps_live_before: int = int(terr.get("_total_steps"))
+		var rec3: Dictionary = await drv.call("press", b3, stand) if b3 != null else {}
+		var steps_live_after: int = int(terr.get("_total_steps"))
+		measurements["desktop_input"]["press_reset"] = rec3
+		measurements["desktop_input"]["steps_before_reset"] = steps_live_before
+		measurements["desktop_input"]["steps_after_reset"] = steps_live_after
+		check(steps_live_before > 10 and steps_live_after < steps_live_before, "RESET pressed through the pointer restarts the walk (%d → %d)" % [steps_live_before, steps_live_after])
+		if capture:
+			drv.call("aim_at", terr.to_global(Vector3(0.0, 1.05, 0.0)))
+			for i in range(12): await process_frame
+			await create_timer(0.3, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_walk_desktop_front.png")
+			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
+		drv.get("rig").global_position = seg.to_global(Vector3(6.5, 0.05, 1.0 + vest))
+		await physics_frame
+		drv.call("aim_at", seg.to_global(Vector3(6.5, 1.2, 12.0 + vest)))
+		var moved_v: Vector3 = await drv.call("walk", "ui_up", 30)
+		var ml: Vector3 = seg.global_transform.basis.inverse() * moved_v
+		measurements["desktop_input"]["walk_south_column_6"] = [snappedf(ml.x, 0.01), snappedf(ml.z, 0.01)]
+		check(ml.z > 2.0, "the rig walks south down column 6 past the case on ui_up (%.2f m in half a second)" % ml.z)
+		drv.get("rig").global_position = seg.to_global(Vector3(SPOT.x + 0.3, 0.05, SPOT.z + vest))
+		await physics_frame
+		drv.call("aim_at", terr.to_global(Vector3(0.0, 1.0, 0.0)))
+		moved_v = await drv.call("walk", "ui_up", 20)
+		ml = seg.global_transform.basis.inverse() * moved_v
+		measurements["desktop_input"]["walk_into_the_case"] = [snappedf(ml.x, 0.01), snappedf(ml.z, 0.01)]
+		check(ml.x > -1.0, "walking west from the visitor's spot, the rig is stopped by the case (%.2f m of a possible 1.1)" % -ml.x)
+		await drv.call("teardown")
+		measurements["desktop_input"]["log"] = drv.get("log")
+		measurements["desktop_input"]["walker_cam_guard_stopped"] = drv.get("walker_cam_guard_stopped")
+		await process_frame
+
+	# ── captures ─────────────────────────────────────────────────────────────
+	if capture:
+		await create_timer(0.3).timeout
+		cam.global_position = seg.to_global(Vector3(SPOT.x + 0.3, EYE_H, SPOT.z + vest)); cam.look_at(terr.to_global(Vector3(0.0, 1.05, 0.0)))
+		for i in range(20): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_walk.png")
+		measurements["captures"]["primary"] = _cam_pose(cam)
+		cam.global_position = terr.to_global(Vector3(0.0, 1.30, 0.95)); cam.look_at(terr.to_global(Vector3(0.0, 1.12, 0.0)))
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_walk_tank.png")
+		measurements["captures"]["tank"] = _cam_pose(cam)
+		cam.global_position = plate.global_position + seg.global_transform.basis * Vector3(0.75, 0.35, 0.05); cam.look_at(plate.global_position)
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_walk_logbook.png")
+		measurements["captures"]["logbook"] = _cam_pose(cam)
+		cam.global_position = keypad.global_position + seg.global_transform.basis * Vector3(0.7, 0.45, 0.0); cam.look_at(keypad.global_position)
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_walk_keypad.png")
+		measurements["captures"]["keypad"] = _cam_pose(cam)
+		cam.global_position = seg.to_global(Vector3(6.5, 1.6, 0.3 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 0.8, 7.0 + vest)))
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_walk_north_door.png")
+		measurements["captures"]["north_door"] = _cam_pose(cam)
+		cam.global_position = seg.to_global(Vector3(6.5, 2.4, 12.6 + vest)); cam.look_at(seg.to_global(Vector3(6.0, 0.6, 5.0 + vest)))
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_walk_arena.png")
+		measurements["captures"]["arena"] = _cam_pose(cam)
+		cam.global_position = seg.to_global(Vector3(6.5, 9.0, 7.0 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 0.0, 7.01 + vest)))
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_walk_plan.png")
+		measurements["captures"]["plan"] = _cam_pose(cam)
+		cam.queue_free()
+
+	# ── MUSEUM STREAMING: free the hall, rebuild it ──────────────────────────────
+	var seg_i: int = -1
+	var segs: Array = em.get("_segments")
+	for i in range(segs.size()):
+		if (segs[i] as Dictionary).get("node") == seg: seg_i = i
+	if seg_i >= 0 and em.has_method("_stream_free"):
+		var z0: float = seg.global_position.z
+		var terr_ref: WeakRef = weakref(terr)
+		var log_ref: WeakRef = weakref(logbook)
+		em.call("_stream_free", seg_i, "south")
+		for i in range(5): await process_frame
+		var freed: bool = terr_ref.get_ref() == null and log_ref.get_ref() == null
+		check(freed, "the museum's streamer frees the hall, the terrarium and its wing with it")
+		var rec: Dictionary = {}
+		for r in em.get("_freed"):
+			if absf(float((r as Dictionary).get("z0", -1e9)) - z0) < 0.01: rec = r
+		if rec.is_empty():
+			for r in em.get("_freed"): rec = r
+		measurements["streaming"] = {"freed": freed, "rebuildable": rec.has("snap")}
+		if rec.has("snap"):
+			em.call("_stream_rebuild", rec)
+			await create_timer(1.5).timeout
+			var seg2: Node3D
+			for rec2: Dictionary in em.get("_segments"):
+				if rec2.node.get_meta("em_map", "") == MAP: seg2 = rec2.node
+			var terr2: Node3D
+			if seg2 != null:
+				for n in seg2.find_children("*", "Node3D", true, false):
+					if n.get_script() != null and str(n.get_script().resource_path).ends_with("random_walk_terrarium.gd"): terr2 = n; break
+			var st2: Dictionary = terr2.call("get_logbook_state") if terr2 != null else {}
+			var rebuilt := {"found": terr2 != null, "stand": st2.get("stand", null), "seed": st2.get("seed", null), "walkers": st2.get("num_walkers", null),
+				"logbook": terr2 != null and terr2.get_node_or_null("Logbook") != null, "panel": terr2 != null and terr2.get_node_or_null("Logbook/LogPanel") != null,
+				"children": terr2.get_child_count() if terr2 != null else -1}
+			measurements["rebuilt"] = rebuilt
+			check(terr2 != null and str(st2.get("stand", "")) == "logbook" and int(st2.get("num_walkers", 0)) == 5 and terr2.get_node_or_null("Logbook/LogPanel") != null,
+				"the rebuilt hall has its terrarium again with the wing: five walkers, a seed, the panel (%s)" % str(rebuilt))
+	_finish()
+
+## The beads by colour: their own (walker_colors) or the dimmed grey, by nearest.
+func _walker_colours(mmi: MultiMeshInstance3D, terr: Node3D) -> Dictionary:
+	var out := {"own": 0, "dim": 0, "other": 0}
+	if mmi == null or mmi.multimesh == null: return out
+	var own: Array = terr.get("walker_colors")
+	var dim: Color = terr.get("LOG_DIM") if terr.get("LOG_DIM") != null else Color(0.42, 0.45, 0.50)
+	for i in range(mmi.multimesh.instance_count):
+		var c: Color = mmi.multimesh.get_instance_color(i)
+		var oc: Color = own[i % own.size()]
+		var d_own: float = absf(c.r - oc.r) + absf(c.g - oc.g) + absf(c.b - oc.b)
+		var d_dim: float = absf(c.r - dim.r) + absf(c.g - dim.g) + absf(c.b - dim.b)
+		if minf(d_own, d_dim) > 0.12: out["other"] += 1
+		elif d_own <= d_dim: out["own"] += 1
+		else: out["dim"] += 1
+	return out
+
+func _same_positions(a: Array, b: Array) -> bool:
+	if a.size() != b.size(): return false
+	for i in range(a.size()):
+		for k in range(3):
+			if float(a[i][k]) != float(b[i][k]): return false
+	return true
+
+## Meshes and bodies in the hall that are not the terrarium's: what the walk must not touch.
+func _count_outside(seg: Node3D, terr: Node3D) -> int:
+	var n: int = 0
+	for c in seg.find_children("*", "MeshInstance3D", true, false):
+		if not terr.is_ancestor_of(c): n += 1
+	for c in seg.find_children("*", "MultiMeshInstance3D", true, false):
+		if not terr.is_ancestor_of(c): n += 1
+	for c in seg.find_children("*", "StaticBody3D", true, false):
+		if not terr.is_ancestor_of(c): n += 1
+	return n
+
+## The push button's own path: the area's button_pressed → the connections the artifact made.
+## Emitting the area's signal is what a poke or a pointer press does.
+func _press(panel: Node, btn_name: String) -> bool:
+	if panel == null: return false
+	var btn: Node = panel.find_child(btn_name, true, false)
+	var area: Node = btn.get_node_or_null("InteractableAreaButton") if btn != null else null
+	if area == null or not area.has_signal("button_pressed"): return false
+	area.emit_signal("button_pressed", area)
+	return true
+
+## Which camera the viewport draws from at a capture, and where it stands and looks.
+func _cam_pose(cam: Camera3D) -> Dictionary:
+	var cur: Camera3D = root.get_camera_3d()
+	var fwd: Vector3 = -cam.global_transform.basis.z
+	return {"current_camera": str(cur.get_path()).right(50) if cur != null else "none", "is_ours": cur == cam,
+		"at": [snappedf(cam.global_position.x, 0.01), snappedf(cam.global_position.y, 0.01), snappedf(cam.global_position.z, 0.01)],
+		"forward": [snappedf(fwd.x, 0.01), snappedf(fwd.y, 0.01), snappedf(fwd.z, 0.01)]}
+
+func _finish() -> void:
+	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,
+		"control_path": "the push buttons' own signal path (area button_pressed → the artifact's connections) on the keypad and the wing; _step_all_walkers / _generate_step / _reflect_boundaries / _process driven directly with processing off for the deterministic sections; set_walk_seed for the shipped-policy comparison; the live lane adds the desktop rig's pointer; no tracked hand",
+		"hand_file": "ada_run/necklace_hand.json (real)", "headset_verified": false,
+		"engine": Engine.get_version_info().string, "physics_fps": Engine.physics_ticks_per_second}
+	var f := FileAccess.open(OUT + "probe_walk.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify(report, "  ")); f.close()
+	print("[wcn-walk] ", checks, " checks; ", failures.size(), " failures")
+	quit(0 if failures.is_empty() else 1)

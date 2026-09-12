@@ -113,22 +113,6 @@ const MEMORIES: PackedStringArray = ["tail", "none", "chord", "cloud"]
 ## the precondition for the `memory` axis measuring the drawing rather than the dice.
 @export var walk_seed: int = -1
 
-## THE LOGBOOK (waves / randomness / noise, R2, 2026-09-11) — an opt-in staging for a body:
-## `#stand:logbook` bolts a wing to the cabinet's flank that carries a housed readout (the
-## step rule and its dimension, steps accepted, simulation time against the clock, frames
-## and the catch-up cap, the trail kept, the seed and what RESET does with it, the glass
-## rule) and three push buttons — ONE (follow one walker, the other four dimmed), ALL, and
-## NEW SEED. Under the logbook the tank runs a NAMED five-digit seed, so RESET replays the
-## same walk and a mode change shows the same draws under another rule; NEW SEED draws
-## another. `stand:none` (the default) builds nothing of this and leaves the stream alone.
-##
-##   "random_walk_terrarium:90#stand:logbook"          the bench, its own seed
-##   "random_walk_terrarium:90#stand:logbook#seed:777" the bench, a pinned seed
-@export_enum("none", "logbook") var stand: String = "none"
-## One walker bright, the others dimmed to grey with faint trails — so a single trail can be
-## followed before the population is read. The logbook starts with it on; ONE / ALL toggle it.
-@export var follow_one: bool = false
-
 ## Colors assigned to each walker (wraps if fewer than num_walkers)
 @export var walker_colors: Array[Color] = [
 	Color(1.0, 0.3, 0.3),
@@ -157,19 +141,6 @@ var _stats_label: Label3D
 var _control_panel: Node3D
 var _reset_area: Node
 
-# THE LOGBOOK (stand:logbook only). Nothing here is created on the default path.
-const LOG_WING_W: float = 0.44        # the wing along the flank (local -x), from the cabinet's side
-const LOG_WING_D: float = 0.44        # its depth (local z), flush with the cabinet's front face
-const LOG_TOP_H: float = 0.94         # the wing's top
-const LOG_DIM := Color(0.42, 0.45, 0.50)   # the four dimmed walkers
-var _logbook_root: Node3D
-var _logbook_label: Label3D
-var _logbook_panel: Node3D
-var _run_clock: float = 0.0           # seconds since the last reset, by the frame clock
-var _run_frames: int = 0              # frames since the last reset
-var _logbook_accum: float = 0.0
-var _built: bool = false
-
 # Seeded stream — stays null on the default path so randf() is untouched.
 var _rng: RandomNumberGenerator = null
 
@@ -193,13 +164,10 @@ func _ready():
 	_create_labels()
 	_create_vr_controls()
 	_reset_walkers()
-	_built = true
-	_apply_stand()
-	_apply_follow()
 
 func _exit_tree():
-	if _reset_area and _reset_area.button_pressed.is_connected(_on_reset_pressed):
-		_reset_area.button_pressed.disconnect(_on_reset_pressed)
+	if _reset_area and _reset_area.button_pressed.is_connected(_reset_walkers):
+		_reset_area.button_pressed.disconnect(_reset_walkers)
 
 ## Where the specimen lives. The tank, its walkers and their trails all ride one
 ## container lifted to the cabinet top, so the whole exhibit moves together.
@@ -492,18 +460,12 @@ func _create_vr_controls():
 			if area:
 				area.button_pressed.connect(func(_b): walk_mode = mode_idx as WalkMode)
 
-	# RESET (Btn_3). The area's button_pressed carries the button as its one argument;
-	# connecting the zero-argument _reset_walkers directly was refused at every emit
-	# ("Method expected 0 argument(s), but called with 1" — measured 2026-09-11), so the
-	# keypad's RESET had never reached the walk. KEY_R had. A one-argument relay.
+	# RESET (Btn_3)
 	var reset_btn: Node = _control_panel.find_child("Btn_3", true, false)
 	if reset_btn:
 		_reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
 		if _reset_area:
-			_reset_area.button_pressed.connect(_on_reset_pressed)
-
-func _on_reset_pressed(_button) -> void:
-	_reset_walkers()
+			_reset_area.button_pressed.connect(_reset_walkers)
 
 func _reset_walkers():
 	if _walker_positions.is_empty():
@@ -519,8 +481,6 @@ func _reset_walkers():
 	if _cloud_mm:
 		_cloud_mm.visible_instance_count = 0
 	_total_steps = 0
-	_run_clock = 0.0
-	_run_frames = 0
 	for i in range(num_walkers):
 		_walker_positions[i] = Vector3(0, terrarium_size.y / 2.0, 0)
 		_walker_trails[i].clear()
@@ -538,13 +498,6 @@ func _process(delta):
 	_update_trails()
 	_update_memory()
 	_update_stats()
-	if _logbook_label != null:
-		_run_clock += delta
-		_run_frames += 1
-		_logbook_accum += delta
-		if _logbook_accum >= 0.1:
-			_logbook_accum = 0.0
-			_update_logbook()
 
 func _step_all_walkers():
 	_total_steps += 1
@@ -634,14 +587,14 @@ func _update_trails():
 			_trail_ims[i].clear_surfaces()
 			continue
 
-		var color = _trail_colour(i)
+		var color = walker_colors[i % walker_colors.size()]
 
 		_trail_ims[i].clear_surfaces()
 		_trail_ims[i].surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 
 		for j in range(trail.size()):
 			var alpha = float(j) / float(trail.size())
-			_trail_ims[i].surface_set_color(Color(color.r, color.g, color.b, alpha * TRAIL_MAX_ALPHA * color.a))
+			_trail_ims[i].surface_set_color(Color(color.r, color.g, color.b, alpha * TRAIL_MAX_ALPHA))
 			_trail_ims[i].surface_add_vertex(trail[j])
 
 		_trail_ims[i].surface_end()
@@ -684,238 +637,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			memory = _m
 			_clear_memory()
 			touched = true
-	if config_data.has("seed") and not config_data.has("walk_seed"):
-		# the programme's shared key (#seed:N is whitelisted as a value); walk_seed keeps priority
-		walk_seed = int(str(config_data["seed"]))
-		touched = true
-	if config_data.has("stand"):
-		var sv: String = str(config_data["stand"]).strip_edges().to_lower()
-		var s2: String = "logbook" if sv in ["logbook", "log", "bench", "desk", "stand", "wing"] else "none"
-		if s2 != stand:
-			stand = s2
-			touched = true
-	if config_data.has("follow"):
-		var fv: String = str(config_data["follow"]).strip_edges().to_lower()
-		follow_one = fv in ["one", "1", "true", "on", "yes"]
-		touched = true
 	if touched:
 		_reset_walkers()
-	# The museum hands a token's config to apply_grid_config BEFORE _ready (the values are
-	# stored and _ready honours them); the grid hands it after. Only a built body rebuilds.
-	if touched and _built:
-		_apply_stand()
-		_apply_follow()
-
-
-# ═════════════════════════════════════════════════════════════════════
-# THE LOGBOOK — the staging (stand:logbook), its readout and its buttons
-# ═════════════════════════════════════════════════════════════════════
-
-func _apply_stand() -> void:
-	if stand == "logbook":
-		if walk_seed < 0:
-			# a NAMED seed the visitor can read and repeat — drawn from a private generator,
-			# never from the global stream (R6)
-			var r := RandomNumberGenerator.new()
-			r.randomize()
-			walk_seed = r.randi_range(10000, 99999)
-			_rng = null
-			follow_one = true
-			_reset_walkers()
-		if _logbook_root == null and case_body:
-			_build_logbook()
-		_update_logbook()
-	elif _logbook_root != null:
-		_logbook_root.get_parent().remove_child(_logbook_root)
-		_logbook_root.queue_free()
-		_logbook_root = null
-		_logbook_label = null
-		_logbook_panel = null
-
-
-## The wing: a shelf bolted to the cabinet's flank on the visitor's left (local -x), its
-## front flush with the cabinet's face, a post to the floor with a collider the walker
-## meets, the readout on a plate tilted toward the visitor, the three buttons on its front.
-func _build_logbook() -> void:
-	var w: float = terrarium_size.x + 0.14
-	var d: float = terrarium_size.z + 0.14
-	var face_z: float = d * 0.5
-	var pal: Dictionary = HangarKit.finish_palette(finish)
-	var steel: StandardMaterial3D = HangarKit.worn_metal((pal["body"] as Color).lightened(0.10))
-	var shell: StandardMaterial3D = HangarKit.finish_body(finish, pal["body"], wear)
-	_logbook_root = Node3D.new()
-	_logbook_root.name = "Logbook"
-	_logbook_root.set_meta("housing", true)
-	# the wing's centre: half a wing out from the flank, its front at the cabinet's face
-	_logbook_root.position = Vector3(-(w * 0.5 + 0.016 + LOG_WING_W * 0.5), 0.0, face_z - LOG_WING_D * 0.5)
-	add_child(_logbook_root)
-	# the shelf and its post are one solid: a body the walker meets, a hand rests on
-	var body := StaticBody3D.new()
-	body.name = "Wing"
-	_logbook_root.add_child(body)
-	var top := HangarKit.box(Vector3(0, LOG_TOP_H - 0.02, 0), Vector3(LOG_WING_W, 0.04, LOG_WING_D), steel)
-	top.name = "Top"
-	body.add_child(top)
-	var post := HangarKit.box(Vector3(0, (LOG_TOP_H - 0.04) * 0.5, -LOG_WING_D * 0.5 + 0.06), Vector3(LOG_WING_W * 0.6, LOG_TOP_H - 0.04, 0.10), shell)
-	post.name = "Post"
-	body.add_child(post)
-	var col := CollisionShape3D.new()
-	col.name = "Collider"
-	var shape := BoxShape3D.new()
-	shape.size = Vector3(LOG_WING_W, LOG_TOP_H, LOG_WING_D)
-	col.shape = shape
-	col.position = Vector3(0, LOG_TOP_H * 0.5, 0)
-	body.add_child(col)
-	# the cabinet itself is meshes only (HangarKit boxes); under the logbook it gets one body,
-	# so a walker meets the case instead of putting a head through the glass
-	var cab_body := StaticBody3D.new()
-	cab_body.name = "CabinetBody"
-	cab_body.position = Vector3(w * 0.5 + 0.016 + LOG_WING_W * 0.5, 0.0, -(face_z - LOG_WING_D * 0.5))   # back at the cabinet's origin
-	var cab_col := CollisionShape3D.new()
-	cab_col.name = "Collider"
-	var cab_shape := BoxShape3D.new()
-	cab_shape.size = Vector3(w + 0.032, base_height + terrarium_size.y, d)
-	cab_col.shape = cab_shape
-	cab_col.position = Vector3(0, (base_height + terrarium_size.y) * 0.5, 0)
-	cab_body.add_child(cab_col)
-	_logbook_root.add_child(cab_body)
-	# the plate: on the top, leaning back 28° so a standing eye reads it
-	var plate_root := Node3D.new()
-	plate_root.name = "Plate"
-	plate_root.set_meta("em_local_instrument", true)
-	plate_root.position = Vector3(0, LOG_TOP_H + 0.085, -0.06)
-	plate_root.rotation_degrees = Vector3(-28, 0, 0)
-	_logbook_root.add_child(plate_root)
-	var dark := StandardMaterial3D.new()
-	dark.albedo_color = Color(0.11, 0.115, 0.13)
-	dark.roughness = 0.8
-	var plate := HangarKit.box(Vector3.ZERO, Vector3(LOG_WING_W - 0.02, 0.19, 0.016), dark)
-	plate.name = "PlateMesh"
-	plate_root.add_child(plate)
-	var tag: MeshInstance3D = HangarKit.stencil("LOGBOOK", Vector2(0.11, 0.018), (pal["accent"] as Color).lightened(0.30))
-	if tag:
-		tag.position = Vector3(-LOG_WING_W * 0.5 + 0.075, 0.075, 0.010)
-		plate_root.add_child(tag)
-	_logbook_label = Label3D.new()
-	_logbook_label.name = "Readout"
-	_logbook_label.pixel_size = 0.0011
-	_logbook_label.font_size = 16
-	_logbook_label.line_spacing = 2.0
-	_logbook_label.outline_size = 0
-	_logbook_label.modulate = Color(0.86, 0.94, 1.0)
-	_logbook_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_logbook_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	_logbook_label.position = Vector3(-LOG_WING_W * 0.5 + 0.02, 0.055, 0.012)
-	plate_root.add_child(_logbook_label)
-	# the buttons: ONE · ALL / NEW SEED, on the wing's front, at hand height
-	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
-	if RackTpl != null:
-		_logbook_panel = RackTpl.create_panel("", [
-			[{"type": "button", "label": "ONE"}, {"type": "button", "label": "ALL"}],
-			[{"type": "button", "label": "NEW SEED"}],
-		], true)
-		_logbook_panel.name = "LogPanel"
-		_logbook_panel.set_meta("em_local_instrument", true)
-		_logbook_panel.position = Vector3(0.0, 0.76, LOG_WING_D * 0.5 + 0.012)
-		HangarKit.harmonize(_logbook_panel, finish)
-		_logbook_root.add_child(_logbook_panel)
-		var actions := {"Btn_0": func(): set_follow_one(true), "Btn_1": func(): set_follow_one(false), "Btn_2": func(): new_seed()}
-		for btn_name in actions.keys():
-			var btn: Node = _logbook_panel.find_child(btn_name, true, false)
-			if btn == null:
-				continue
-			var area: Node = btn.get_node_or_null("InteractableAreaButton")
-			if area != null and area.has_signal("button_pressed"):
-				var action: Callable = actions[btn_name]
-				area.button_pressed.connect(func(_b): action.call())
-
-
-## What the readout says: the rule and its dimension; steps against the two clocks and the
-## catch-up cap; the trail kept; the seed and what RESET does with it; the glass.
-func _update_logbook() -> void:
-	if _logbook_label == null:
-		return
-	_logbook_label.text = "\n".join(logbook_lines())
-
-
-func logbook_lines() -> Array[String]:
-	var rule: String
-	var glass: String
-	match walk_mode:
-		WalkMode.WALK_2D:
-			rule = "2D · fixed %.3f m steps in the plane" % step_size
-			glass = "glass folds a step back · 2D pins y"
-		WalkMode.WALK_3D:
-			rule = "3D · fixed %.3f m steps in the volume" % step_size
-			glass = "glass folds a step back at every wall"
-		_:
-			rule = "LEVY · 3D · step %.3f m × (u+%.2f)^%.1f" % [step_size, LEVY_OFFSET, LEVY_EXPONENT]
-			glass = "glass folds a step back · LEVY cap %d×" % int(LEVY_STEP_CAP)
-	var kept: int = _walker_trails[0].size() if _walker_trails.size() > 0 else 0
-	var who: String = "one followed, %d dimmed" % (num_walkers - 1) if follow_one else "%d walkers" % num_walkers
-	var seed_line: String = "seed %d · RESET replays it" % walk_seed if walk_seed >= 0 \
-		else "seed: the global stream · RESET: a new walk"
-	return [rule,
-		"steps %d · sim %.1f s at %d steps/s" % [_total_steps, float(_total_steps) / maxf(steps_per_second, 0.001), int(steps_per_second)],
-		"clock %.1f s · %d frames · cap %d/frame" % [_run_clock, _run_frames, MAX_CATCHUP_STEPS],
-		"trail %d/%d kept · %s" % [kept, trail_length, who],
-		seed_line, glass]
-
-
-func _apply_follow() -> void:
-	if _walker_mm == null:
-		return
-	for i in range(num_walkers):
-		var c: Color = walker_colors[i % walker_colors.size()]
-		_walker_mm.set_instance_color(i, LOG_DIM if (follow_one and i != 0) else c)
-
-
-## The trail's colour: the walker's own, or — under ONE — a faint grey for the others.
-## Alpha is a factor on the strip's fade; the shipped colours carry 1.0.
-func _trail_colour(i: int) -> Color:
-	if follow_one and i != 0:
-		return Color(LOG_DIM.r, LOG_DIM.g, LOG_DIM.b, 0.35)
-	return walker_colors[i % walker_colors.size()]
-
-
-func set_follow_one(on: bool) -> void:
-	follow_one = on
-	_apply_follow()
-	_update_logbook()
-
-
-## Another named seed from a private generator; the walk restarts under it.
-func new_seed() -> void:
-	var r := RandomNumberGenerator.new()
-	r.randomize()
-	var next: int = r.randi_range(10000, 99999)
-	while next == walk_seed:
-		next = r.randi_range(10000, 99999)
-	set_walk_seed(next)
-
-
-## A seed by hand (the probe's controlled comparison); -1 returns to the global stream.
-func set_walk_seed(value: int) -> void:
-	walk_seed = value
-	_rng = null
-	_reset_walkers()
-	_update_logbook()
-
-
-func walker_positions() -> Array:
-	var out: Array = []
-	for p in _walker_positions:
-		out.append([p.x, p.y, p.z])
-	return out
-
-
-func get_logbook_state() -> Dictionary:
-	return {"stand": stand, "mode": int(walk_mode), "mode_name": ["2D", "3D", "LEVY"][int(walk_mode)], "steps": _total_steps,
-		"sim_time": float(_total_steps) / maxf(steps_per_second, 0.001), "steps_per_second": steps_per_second, "clock": _run_clock,
-		"frames": _run_frames, "catchup_cap": MAX_CATCHUP_STEPS, "trail_kept": _walker_trails[0].size() if _walker_trails.size() > 0 else 0,
-		"trail_length": trail_length, "seed": walk_seed, "replay": walk_seed >= 0, "follow_one": follow_one, "num_walkers": num_walkers,
-		"step_size": step_size, "levy_cap": LEVY_STEP_CAP, "box": [terrarium_size.x, terrarium_size.y, terrarium_size.z],
-		"positions": walker_positions(), "lines": logbook_lines(), "memory": memory}
 
 
 # ── MEMORY ───────────────────────────────────────────────────────────────────

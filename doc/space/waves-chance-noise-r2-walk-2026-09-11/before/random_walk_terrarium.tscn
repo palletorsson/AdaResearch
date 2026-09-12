@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpqw8mx3n5r7k"]
+
+[ext_resource type="Script" path="res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd" id="1_main"]
+
+[node name="RandomWalkTerrarium" type="Node3D"]
+script = ExtResource("1_main")

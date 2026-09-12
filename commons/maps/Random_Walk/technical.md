@@ -1,180 +1,37 @@
-# Random_Walk - Technical Tutorial
+# Random_Walk — technical
 
-## The Random Walk Algorithm
+## The terrarium
 
-A random walk is the simplest model of diffusion: accumulate random steps.
+`commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd` (scene `random_walk_terrarium.tscn`, a `Node3D` with the script and nothing else; class `RandomWalkTerrarium`). Exports: `case_body` true (the cabinet), `finish` `terminal`, `wear` 0.10, `unit_code` `RW-11`, `base_height` 0.92 (the cabinet top the tank stands on), `terrarium_size` (0.5, 0.4, 0.5) — the tank's full extents, so the walk lives in x, z ∈ [−0.25, 0.25] and y ∈ [0, 0.4] — `num_walkers` 5, `step_size` 0.015, `steps_per_second` 30, `trail_length` 200, `walk_mode` (`WALK_2D` · `WALK_3D` · `LEVY_FLIGHT`, default 3D; the setter resets the walk), the registry's `memory` axis (`tail` · `none` · `chord` · `cloud`, default `tail`), `walk_seed` −1, `walker_colors` (red, green, blue, yellow, violet); since R2, `stand` (`none` · `logbook`) and `follow_one` false.
 
-```gdscript
-class Walker:
-    var position: Vector3 = Vector3.ZERO
-    var history: Array[Vector3] = []
-    var rng: RandomNumberGenerator
+The step. `_process` accumulates frame time into `_step_timer`, clamped to `interval × MAX_CATCHUP_STEPS` (5), and spends it in whole steps of `1 / steps_per_second`; a two-second frame therefore yields five steps, not sixty. `_step_all_walkers` increments `_total_steps` once per step and, for each walker, draws a step, adds it, reflects the result at the glass, appends the previous position to the trail (sliced to `trail_length`) and moves the bead. `_generate_step`: 2D draws one number for a heading and returns `(cos, 0, sin) × step_size`; 3D draws two, θ and φ = acos(2u − 1), for a direction on the sphere; LEVY draws the same direction and a third number u for the length `step_size × (u + 0.01)^−0.5`, then `minf` against `step_size × 10`. With the offset at 0.01 the power's supremum is exactly 10, so the cap is reached and never exceeded; measured over 2000 draws: max 0.1494 m, mean 0.0263 m (the integral gives 1.81 × 0.015 = 0.0272), 22 draws over 0.10 m. Every draw goes through `_rand()`: `randf()` from the global stream when `walk_seed` < 0, else a private `RandomNumberGenerator` seeded once and re-seeded by `_reset_walkers`.
 
-    func _init():
-        rng = RandomNumberGenerator.new()
-        rng.randomize()
-        history.append(position)
+The glass. `_reflect_boundaries` folds an overshoot in x or z back by the same distance (`half.x − (pos.x − half.x)`); in 3D it folds y at 0 and at `terrarium_size.y`; in 2D it pins `pos.y = terrarium_size.y / 2`. One reflection suffices because the largest step (0.15) is smaller than the half-box (0.25).
 
-    func step(step_size: float = 1.0):
-        # Random direction in 3D
-        var direction = Vector3(
-            rng.randf_range(-1, 1),
-            rng.randf_range(-1, 1),
-            rng.randf_range(-1, 1)
-        ).normalized()
+The trail and the stats. `_update_trails` rebuilds one `ImmediateMesh` line strip per walker from its trail, alpha ramping to `TRAIL_MAX_ALPHA` 0.6; under R2 the colour comes from `_trail_colour(i)`, which returns the walker's own colour (alpha 1, byte-identical to before) unless `follow_one` dims the others. `_update_stats` prints `"%s Walk\nSteps: %d\nMSD: %.4f"` with the mean squared displacement from the release point (0, 0.2, 0) — bounded by the glass, so it stalls. `_update_memory` handles the `chord` / `cloud` / `none` values and returns at once under `tail`.
 
-        position += direction * step_size
-        history.append(position)
-        return position
-```
+The keypad. `_create_vr_controls` builds a frameless RackTemplates panel — 2D (`Btn_0`), 3D (`Btn_1`), LEVY (`Btn_2`) / RESET (`Btn_3`) — on a wedge shoulder at 0.775 m, tilted −32°. The mode buttons connect `func(_b): walk_mode = …`. RESET had been connected as `button_pressed.connect(_reset_walkers)`, a zero-argument method on a one-argument signal, which Godot refuses at every emit ("Method expected 0 argument(s), but called with 1" — measured in this hall on 2026-09-11); the keypad's RESET had never restarted the walk, only KEY_R had. R2 relays it through `_on_reset_pressed(_button)`. The keyboard keys 1, 2, 3 and R do the same four things.
 
-### 2D Grid Random Walk
+## The logbook (`#stand:logbook`)
 
-The classic discrete version:
+`_apply_stand` runs at the end of `_ready` (after `_built`) and after `apply_grid_config` on a built body. Under `logbook`: if no seed is set it draws a five-digit one from a private `RandomNumberGenerator` (never the global stream), turns `follow_one` on and resets; then `_build_logbook` once, and `_update_logbook`. `apply_grid_config` gained `stand`, `follow` (`one` / `all`) and a `seed` alias for `walk_seed` (`#seed:N` is a whitelisted config key); the museum hands the config before `_ready`, the grid after, and only a built body rebuilds.
 
-```gdscript
-func grid_walk_step() -> Vector2i:
-    # Four directions: up, down, left, right
-    var direction = rng.randi() % 4
-    match direction:
-        0: position.y += 1  # North
-        1: position.y -= 1  # South
-        2: position.x += 1  # East
-        3: position.x -= 1  # West
-    return position
-```
+`_build_logbook`: a `Logbook` root at local (−(w/2 + 0.016 + 0.22), 0, face_z − 0.22), w = d = 0.64 — the wing centred 0.22 m out from the cabinet's flank on the visitor's left, its front flush with the fascia. `Wing`, a `StaticBody3D` with a 0.44 × 0.94 × 0.44 `Collider`: a steel top at 0.92–0.94 m and a shell post. `CabinetBody`, a `StaticBody3D` whose collider boxes the cabinet (w + 0.032 wide, `base_height + terrarium_size.y` tall, d deep) so a walker meets the case; the shipped cabinet is HangarKit meshes only. `Plate`, tilted −28° on the top at 1.025 m, meta `em_local_instrument`: a dark 0.42 × 0.19 plate, a `LOGBOOK` stencil, and `Readout`, a left-aligned `Label3D` (pixel size 0.0011, font 16, line spacing 2) refreshed at 10 Hz. `LogPanel`, a frameless RackTemplates panel on the wing's front at 0.76 m — ONE (`Btn_0`) → `set_follow_one(true)`, ALL (`Btn_1`) → `set_follow_one(false)`, NEW SEED (`Btn_2`) → `new_seed()`.
 
-### Properties of Random Walks
+The six lines of `logbook_lines()`, each at most 42 characters: the rule and its dimension (`3D · fixed 0.015 m steps in the volume`, `2D · … in the plane`, `LEVY · 3D · step 0.015 m × (u+0.01)^-0.5`); `steps N · sim T s at 30 steps/s` (T = N / cadence); `clock C s · F frames · cap 5/frame` (the frame clock and frames since the last reset); `trail k/200 kept · one followed, 4 dimmed` or `· 5 walkers`; `seed S · RESET replays it` or `seed: the global stream · RESET: a new walk`; the glass rule (`glass folds a step back at every wall`, `· 2D pins y`, `· LEVY cap 10×`). API for probes and other rooms: `set_walk_seed(v)`, `new_seed()`, `set_follow_one(on)`, `walker_positions()`, `logbook_lines()`, `get_logbook_state()`.
 
-```gdscript
-# Key statistical property: displacement grows as sqrt(N)
-func expected_displacement(steps: int) -> float:
-    # RMS displacement after N steps of unit size
-    return sqrt(steps)
+`_apply_follow` writes the bead colours on the MultiMesh (`LOG_DIM` grey for the others under `follow_one`); `_trail_colour` gives their trails the grey at alpha 0.35 as a factor on the strip's fade.
 
-# Example: after 100 steps, expected distance from origin ~ 10
-# After 10000 steps, expected distance ~ 100
+## The map
 
-# This is the "drunkard's walk" theorem
-# Linear steps, but sqrt displacement—inefficient exploration
-```
+`commons/maps/Random_Walk/map_data.json`, 13 × 14. Structure: a `w` perimeter (the 10 September recovery's explicit walls), a ring of `2` platforms inside it (41 cells, one metre up under `museum.wall_height: 3`), a `3` post at (8,1), the north and south door strips `1` at columns 5–7, and — since R2 — an arena of `1` floor from (2,2) to (10,10). Before R2 the arena was `0`, which the grid walks as ground but the museum reads as holes ("value 0 for floating objects", 2026-08-23): the museum built a starry void with a one-cell floor strip down column 7 and the ring unreachable a metre up. The two `0` that remain, (0,4) and (10,12), carry the grid lane's teleporters. (4,1) was a `3` post carrying the terrarium at −0.3; it is floor now. In the grid lane the change raises the arena from the ground plane to the strip's level, half a metre; the ring stays a metre above it.
 
-### Visualizing the Walk
+Tokens: `random_walk_terrarium:90#stand:logbook` at (4,1) — the front (+z, keypad and stats) toward the door strip; `random_walk_128:0:0:0.2` at (3,4) — the 128 walk is a 32 × 32 lattice over 10 m of 31 cm cubes with a collider each, so unscaled it carpets the arena and stands against the cabinet; at a fifth it is a two-metre floor drawing of six-centimetre cubes west of the route; `lab_room#…` at (9,4) — moved from (8,3) off the door approach, `signage_sub` now `sampling pavilion — Monte Carlo workshop` and the annotations `each step is independent of the last — the position is their sum` / `fixed 0.015 m steps in a random direction, LEVY capped at ten — not Gaussian` in place of `dx_i ~ Normal(0, sigma)`, which described neither the mounted Monte Carlo apparatus nor the terrarium; `random_walk_collection:90` at (3,7) — off the door strip, where it had sealed the north door; `dark_sphere` (5,7), `random_walk_leash` (8,8), `catalyst_pickup` (6,10) as they were; the three `pixel_cloud` on the ring cells (11,1), (1,11), (11,11) where the museum had already been standing them; `catalyst_prompter_box` (2,0) and `catalyst_vent` (9,0) as they were — the museum stands them on the ring's row 1. Museum block: `wall_height 3`, `gate_depth_rows 0` kept; `sculpture_clear_rects [[3,1,7,5]]` (cells 3–6 × 1–4, the far edge exclusive); `artifact_placement: "map"`.
 
-```gdscript
-extends Node3D
+## Verification
 
-@export var num_steps: int = 128
-@export var step_size: float = 0.1
-@export var trail_color: Color = Color.WHITE
+`commons/testing/probe_wcn_walk.gd` (`bash tools/run_wcn_probe.sh walk [live]`; the live port `probe_wcn_walk_live.gd` is regenerated by `tools/port_wcn_probes_live.py`): the tile (no holes in the arena, (4,1) floor, 41 raised cells); placement, facing and stand; the cabinet, tank height, glass box, five beads, keypad, stats screen; the wing's body, plate, panel and six lines; the stream against the clock and the screen against the counter; through the buttons' signal path with processing off and the steps driven directly: 2D pins y and reflects x, z (300 steps), the reflection rule on given points, 3D's floor and lid, LEVY's 2000-draw law and cap, trails capped at 200, the catch-up cap, the screen's MSD recomputed; RESET replaying the named seed (sixty steps, bit for bit), the shipped stream not replaying, the same seed's first draw as heading (2D) and azimuth (3D); NEW SEED, ALL, ONE; the museum's verdict, seals, plinths against the rect, capsule walks down the door strip and the route and into the case and the wing, reach from the visitor's spot, no brood; captures; the streamer freeing and rebuilding the hall with the wing. The live lane adds the desktop rig pressing 2D, NEW SEED and RESET through its pointer and walking the route.
 
-var walker: Walker
-var trail_mesh: ImmediateMesh
+## Known limits
 
-func _ready():
-    walker = Walker.new()
-    trail_mesh = ImmediateMesh.new()
-
-    # Generate the walk
-    for i in range(num_steps):
-        walker.step(step_size)
-
-    # Draw the trail
-    draw_trail()
-
-func draw_trail():
-    trail_mesh.clear_surfaces()
-    trail_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-
-    for point in walker.history:
-        trail_mesh.surface_add_vertex(point)
-
-    trail_mesh.surface_end()
-```
-
-### The 128-Step Walk
-
-The `random_walk_128` element visualizes exactly 128 steps:
-
-```gdscript
-# Why 128?
-# - Power of 2 (clean computationally)
-# - Long enough to show statistical behavior
-# - Short enough to remain legible
-# - Expected displacement: sqrt(128) ≈ 11.3 units
-```
-
-## Brownian Motion
-
-Random walks model **Brownian motion**—the jittery movement of particles in fluid:
-
-```gdscript
-# Continuous Brownian motion approximation
-func brownian_step(delta: float, diffusion_coeff: float) -> Vector3:
-    # Wiener process: displacement ~ sqrt(dt) * Normal(0,1)
-    var sigma = sqrt(2 * diffusion_coeff * delta)
-    return Vector3(
-        rng.randfn(0, sigma),
-        rng.randfn(0, sigma),
-        rng.randfn(0, sigma)
-    )
-```
-
-### Self-Avoiding Walk
-
-A variant that doesn't cross its own path:
-
-```gdscript
-var visited: Dictionary = {}
-
-func self_avoiding_step() -> Vector3:
-    var attempts = 0
-    while attempts < 100:
-        var candidate = position + random_direction()
-        var key = hash_position(candidate)
-        if not visited.has(key):
-            visited[key] = true
-            position = candidate
-            return position
-        attempts += 1
-    # Stuck—no valid moves
-    return position
-```
-
-## Implementation Notes
-
-### Pit Structure
-The map's void floor (height 0) surrounded by walls (height 2-3) creates an observation deck. Walks are visualized in the pit, viewed from above.
-
-### pixel_cloud Elements
-The three `pixel_cloud` elements at corners demonstrate point distributions—related to random walk endpoints after many trials.
-
-### random_walk_collection
-Multiple walks displayed together show:
-- Variability: same algorithm, different outcomes
-- Statistics: ensemble behavior visible
-- Comparison: which walks drifted further?
-
-## Key Takeaway
-
-The random walk demonstrates **emergent complexity from simple rules**:
-- Each step is trivially random
-- But accumulated steps create finely traced paths
-- The walker has no memory of direction, only position
-- Long-term behavior is predictable statistically (sqrt(N) displacement) but unpredictable individually
-
-This is a fundamental model for diffusion, stock prices, polymer chains, and many natural phenomena. It shows that **randomness + accumulation = complexity**.
-
-## Axiom References
-- `commons/context/clipboard/tutorial_text/random_walk_axioms.md`
-- `commons/context/clipboard/tutorial_text/info_randomwalk.md`
-
-## Within the Sequence
-
-Random_Walk introduces the random walk as a stochastic process. The walk's accumulated trajectory — the path that emerges from a sequence of independent steps — is the sequence's first example of structure emerging from repeated sampling.
-
-The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
-
-Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
-
-The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.
+The engine log carries four `SCRIPT ERROR`s per run from `lab_room.gd:725`, `bool(get_meta(...))` on the token's `show_observation_window` — the `bool` constructor takes no String in Godot 4 — a pre-existing fault in the lab room's own token reading (two maps carry the key); not the hall's, not fixed here. The pixel clouds are towers of one-metre cubes and rise through the hall's roof, as the artifact builds them everywhere. The tank's MSD cannot show a root-N law because the glass bounds it; the room says so. The walk's replay holds for one body in one process; the museum's streamer rebuilds the hall with a new seed.

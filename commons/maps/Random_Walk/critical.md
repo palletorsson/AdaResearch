@@ -1,90 +1,33 @@
-# Random_Walk - Critical Reflection
+# The trail is not the walker's — memory, projection and the glass
 
-## The Walker Without Purpose
+## A memory that belongs to the observer
 
-The random walker has no goal, no plan, no destination. It moves because moving is what it does. Each step is arbitrary. The path that emerges is accidental.
+The walker in the tank carries one thing: where it is. The next step is drawn without consulting anything else, and the rule that draws it has no term for the past. Yet the tank is full of history. Five trails curl through it, two hundred positions each, fading toward their oldest end. That history is real, but it is the display's. The source appends the current position to a trail array before the position changes, and caps the array; the step function never reads it. So the first critical move the room asks for is a change of owner: the trail is a record the observer keeps about the walker, not a record the walker keeps about itself. Everything a tangle seems to say — hesitation, exploration, a wish to return — is said by the record to the reader. The walker has not heard it.
 
-Yet we look at the path and see something that looks **intentional**. The walker seems to explore, to wander, to search. We project narrative onto noise.
+## Purpose as a reading
 
-This is the deepest lesson of the random walk: **apparent purpose can emerge from purposelessness**. The universe may be full of random walkers that look like they're going somewhere.
+We look at the red bead's trail and see a creature. It appears to head for a corner, to change its mind, to circle back to a place it liked. The room does not scold this reading; it makes it testable. Predict the next step from the trail's apparent intention, then watch. The prediction fails at the rate chance dictates, and the reader learns something more useful than "it is random": that purpose, here, is a property of the reading and not of the process. Karl Pearson's walker of 1905 and Robert Brown's pollen of 1827 were both read as purposeful before they were read as random, and Einstein's account of the pollen did not remove the appearance of purpose. It relocated it.
 
-## Accumulation Without Memory
+## The step, the sum and the drawing
 
-The walker remembers where it is but forgets where it was going.
+Three objects are easy to fold into one word. The step is an increment that exists for one update. The position is the sum of every increment so far, and it is the only state. The drawing is a bounded window onto the sequence of positions. The rooms before this one separated a rule from a draw and a set from a choice; this room separates an increment from an accumulation and both from their record. The separation matters because each object has a different relation to memory. The step has none. The position is memory in the thinnest possible sense: a total, with the order of the addends lost. The drawing keeps the order, for a while, and then forgets from the far end. None of the three is the walker's mind, because there is none.
 
-This selective memory is crucial:
-- **Position persists**: The walker doesn't teleport; it moves from where it is
-- **Direction forgets**: Each step is independent of the last
+## The glass
 
-The result: history accumulates without plan. The walker leaves a trace—a trail through space—but this trace is not a decision, not a design. It's just the residue of randomness.
+A random walk in open space spreads without limit, and its mean squared displacement grows in proportion to the number of steps. The tank forbids that reading. An overshoot is folded back by the distance it overshot, so every wall is a rule of the process and not merely a frame around it. The screen on the cabinet prints the mean squared displacement, and a patient reader watches it stall as the beads reach the glass. This is a lesson about exhibiting randomness at all: to be seen, the walk has to be kept in frame, and the frame changes what is seen. The room's honest claim is about the rule, in the box, and it says so rather than gesturing at a law the box prevents. LEVY makes the point again from inside the rule: the heavy tail that gives the long jumps is capped at ten step-lengths, and the offset in the formula already bounds it at exactly that, so the drama of the leaps is a designed drama with a ceiling.
 
-## The Drunkard's Walk
+## A crossing that is not there
 
-The classic metaphor: a drunk leaves a bar and staggers home, taking random steps. How far does the drunk get?
+Under 3D a trail can seem to cross itself. Step to the side of the tank and the two stretches separate in depth; the crossing belonged to the viewpoint. The point is small and it generalises: a temporal record read from one place is also a spatial projection, and the reader who wants to know what happened has to move. That the room is walkable makes this a bodily discovery rather than a footnote.
 
-Answer: **sqrt(N)** where N is the number of steps.
+## Seed, replay and what a reset means
 
-This is deeply inefficient. Linear steps, square-root distance. The drunk covers a lot of ground but gets nowhere fast.
+RESET on the shipped cabinet used to mean nothing more than "start the stream again"; the walk after a reset was another walk. The logbook names a seed and re-seeds before the restart, so RESET replays the same walk, and NEW SEED is the honest name for the other operation. The same seed under a different rule sends the same draws to different places, and the first draw can be watched doing so: a heading in the plane, an azimuth on the sphere. Replay is what makes a chance process a thing you can point at twice. It does not make it less random; it makes it discussable.
 
-But efficiency isn't the point. The random walk isn't trying to get anywhere. It's just walking. The sqrt(N) law is not a failure—it's a description of what purposeless motion looks like.
+## What the room excludes
 
-## What the Random Walk Cannot Hold
+No goal pulls the walker, no momentum carries it, no other walker repels it, no terrain slows it. Real walking has all of these, and so do the queer walks the sequence will come to: a self-avoiding walk that refuses the memoryless assumption, a walk that follows deposited traces, a walk that flees or seeks its kin. Those are different decisions, and the pixel clouds in the walls of this hall make one of them. The terrarium makes none. Its value is the baseline it holds still, so that every later refusal can be read as a refusal.
 
-The random walk model excludes:
-- **Goals**: No destination pulls the walker
-- **Memory of direction**: No momentum, no inertia
-- **Environment**: No obstacles, no terrain, no others
-- **Meaning**: No reason for any step
+## The QFEP reading
 
-Real walking has all of these. We walk toward something, we maintain heading, we navigate around obstacles, we walk for reasons. The random walk strips all this away, leaving pure motion without context.
-
-## The Statistics of Drift
-
-Over many trials, random walkers show predictable statistical behavior:
-- Average position: stays near origin (no net drift in symmetric walk)
-- Variance: grows linearly with steps
-- Distribution: becomes Gaussian (central limit theorem)
-
-Individual walks are unpredictable. Ensemble behavior is lawful. This is the magic of large numbers: randomness becomes regularity at scale.
-
-## Brownian Motion and the Real
-
-Einstein's 1905 paper on Brownian motion showed that pollen grains jittering in water were evidence for atoms. The random walk wasn't just a mathematical toy—it was the signature of molecular bombardment.
-
-This connects the abstract (random walk model) to the material (molecular reality). The paths traced by pollen grains are random walks. So are polymer chains, stock prices, foraging paths, and neural spike patterns.
-
-The random walk is not just a metaphor. It's a **physical process** that occurs whenever small particles are buffeted by smaller particles.
-
-## The Observation Platform
-
-The map places the player above the random walks—on an elevated deck looking down into a pit.
-
-This is the scientist's position: observing from outside, analyzing from above. The random walk is object, not subject. We watch it wander; we don't wander ourselves.
-
-But the player is also a walker. Moving through VR space. Making decisions that feel purposeful but might, at some level, be random. The distance between observer and observed is smaller than it seems.
-
-## Questions That Remain
-
-1. **Are we random walkers?** Our paths through life accumulate without clear direction. We remember where we are, forget where we were going. Is biography a random walk with narrative imposed?
-
-2. **What distinguishes random from intentional motion?** From the outside, they can look the same. A walker with hidden goals and a random walker might trace similar paths. How do we know the difference?
-
-3. **Is sqrt(N) displacement a failure?** Only if efficiency matters. If the goal is exploration, coverage, exposure to possibility—random walks might be optimal. They don't find targets quickly, but they encounter everything eventually.
-
-4. **What would a queer random walk look like?** Perhaps one that refuses the memoryless assumption—that carries traces of its history into each step. Or one that avoids its own path (self-avoiding walk). Or one that's attracted to or repelled by other walkers.
-
-## The QFEP Connection
-
-The random walk is fundamental to the QFEP:
-
-- **E(S) injected continuously**: Each step adds entropy (random direction)
-- **State persists**: Position accumulates (memory of where, not where-to)
-- **φΔE(S,t) > 0**: Entropy is constantly flowing into the system
-- **Emergent structure**: Complex paths arise without design
-
-The random walk shows what continuous entropy injection looks like: not chaos, but **complex trajectories**. The walker isn't ordered or disordered—it's both, simultaneously, at different scales.
-
-At the micro level (each step): pure randomness, maximum local entropy.
-At the macro level (the path): structure, pattern, apparent purpose.
-
-This is the QFEP in miniature: entropy and order coexisting, each enabling the other. The random walk is the edge of chaos extended through time.
+Entropy is injected at every step and the state persists as a sum. The trajectory is complex without design, ordered at the scale of the position and disordered at the scale of the increment. The room's addition to that familiar reading is the observer's share: the record that makes the complexity visible is not part of the process, and the sense of purpose the record produces is the reader's own contribution to the system. What the trail remembers, the walker never knew.
