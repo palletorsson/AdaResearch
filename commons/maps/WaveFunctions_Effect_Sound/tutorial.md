@@ -1,6 +1,6 @@
 # Effect Sound
 
-Waves become bleeps. Build the audio lab where sine drives a speaker and FFT reveals the harmonics.
+Waves become bleeps. This lesson builds the smallest tone player and a spectrum reader from scratch — the vocabulary the hall's racks use. The hall's own primary is a phase-modulation rig; its code is quoted in `final.md`.
 
 Declare the tone player.
 
@@ -96,5 +96,5 @@ func _on_frequency_knob(v: float) -> void:
 
 Two octaves from A2 to A6. The knob sweeps the audible range in that band. Pitch follows the hand.
 
-You have turned waves into sound. The next map, Bernini, wraps oscillation around columns.
+You have turned waves into sound. In the hall itself the primary, `DualBallFMController`, goes one step further: a second oscillator enters the first one's phase (see `final.md` and `technical.md`). The next room on the active route, AirMusic, strikes a resonance and waits for it; Bernini, further along, wraps oscillation around columns.
 <<</MAP>>>

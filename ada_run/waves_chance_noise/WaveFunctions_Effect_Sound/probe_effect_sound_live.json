@@ -1,5 +1,5 @@
 {
-  "checks": 97,
+  "checks": 100,
   "control_path": "button_pressed emitted programmatically on the AUDITION panel; the balls moved by setting the mapper points' positions (the mapper's own values_changed path); no tracked hand",
   "engine": "4.6-stable (official)",
   "failures": [],
@@ -48,14 +48,14 @@
         "I 0.00→4.00"
       ],
       "drag_note_cap": 0.0,
-      "drag_notes_played": 9,
+      "drag_notes_played": 10,
       "last_note_seconds": 1.8,
       "last_note_tag": "B",
-      "last_synth_ms": 45.309,
+      "last_synth_ms": 43.564,
       "lift": 0.92,
-      "notes_played": 16,
+      "notes_played": 17,
       "playing": true,
-      "readout": "now  fc 440  A 0.01  D 1.5 | R 2.00  I 4.0  τ 0.50\nref  fc 440  A 0.01  D 1.5 | R 2.00  I 0.0  τ 0.50\ndiffers: I 0.00→4.00\n▶ B  1.8 s note · synth 45 ms · 16 notes",
+      "readout": "now  fc 440  A 0.01  D 1.5 | R 2.00  I 4.0  τ 0.50\nref  fc 440  A 0.01  D 1.5 | R 2.00  I 0.0  τ 0.50\ndiffers: I 0.00→4.00\n▶ B  1.8 s note · synth 44 ms · 17 notes",
       "reference": {
         "attack_time": 0.01,
         "carrier_freq": 440.000152587891,
@@ -465,7 +465,7 @@
           2.3,
           0.8
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2660",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2717",
         "forward": [
           0.14,
           -0.13,
@@ -479,7 +479,7 @@
           1.55,
           9.2
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2660",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2717",
         "forward": [
           -0.09,
           -0.19,
@@ -490,16 +490,17 @@
       "readout": {
         "at": [
           9.08,
-          0.69,
-          9.88
+          1.5,
+          9.93
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2660",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2717",
         "forward": [
           0.0,
-          -0.02,
-          1.0
+          -0.68,
+          0.73
         ],
-        "is_ours": true
+        "is_ours": true,
+        "line_of_sight": "clear"
       },
       "scope": {
         "at": [
@@ -507,7 +508,7 @@
           1.55,
           9.95
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2660",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2717",
         "forward": [
           0.0,
           -0.06,
@@ -582,7 +583,7 @@
         ]
       },
       "front_capture_pose": {
-        "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+        "current_camera": "/root/@Node@2716/WcnDesktopRig/Head/Camera3D",
         "eye": [
           7.75,
           1.6,
@@ -647,7 +648,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2716/WcnDesktopRig/Head/Camera3D",
             "eye": [
               7.75,
               1.6,
@@ -708,7 +709,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2716/WcnDesktopRig/Head/Camera3D",
             "eye": [
               7.75,
               1.6,
@@ -769,7 +770,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2716/WcnDesktopRig/Head/Camera3D",
             "eye": [
               7.75,
               1.6,
@@ -830,7 +831,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2716/WcnDesktopRig/Head/Camera3D",
             "eye": [
               7.75,
               1.6,
@@ -852,7 +853,29 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2716/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              8.25,
+              1.65,
+              8.95
+            ],
+            "forward": [
+              0.0,
+              -0.3,
+              0.95
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              8.25,
+              0.05,
+              8.95
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2716/WcnDesktopRig/Head/Camera3D",
             "eye": [
               8.5,
               1.65,
@@ -881,7 +904,7 @@
             3.04
           ],
           "pose": {
-            "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2716/WcnDesktopRig/Head/Camera3D",
             "eye": [
               8.5,
               1.6,
@@ -904,6 +927,40 @@
           "event": "teardown"
         }
       ],
+      "operating_view": {
+        "in_frustum": {
+          "CARRIER": true,
+          "MODULATOR": true,
+          "carrier ball": true,
+          "modulator ball": true,
+          "panel": true,
+          "readout": true,
+          "scope plate": true
+        },
+        "pose": {
+          "current_camera": "/root/@Node@2716/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            8.25,
+            1.6,
+            8.95
+          ],
+          "forward": [
+            0.0,
+            -0.3,
+            0.95
+          ],
+          "rig": [
+            8.25,
+            0.0,
+            8.95
+          ]
+        },
+        "rig": [
+          8.25,
+          0.0,
+          8.95
+        ]
+      },
       "tag_after_baseline": "baseline",
       "walk_to_the_desks": [
         0.0,
@@ -915,9 +972,9 @@
       "I 0.00→4.00"
     ],
     "drag_test": {
-      "drag_notes": 5,
-      "elapsed_s": 1.647,
-      "last_synth_ms": 45.435,
+      "drag_notes": 6,
+      "elapsed_s": 1.856,
+      "last_synth_ms": 43.845,
       "moves": 20
     },
     "front_local": [
@@ -968,6 +1025,10 @@
     ],
     "museum_walk_reopened": [],
     "museum_walk_severed": [],
+    "name_label_heights": [
+      0.86,
+      0.86
+    ],
     "origin_local": [
       8.5,
       0.0,
@@ -1019,7 +1080,7 @@
       "freed": true,
       "rebuildable": true
     },
-    "synth_ms_index4": 49.995,
+    "synth_ms_index4": 44.828,
     "walk_down_to_the_desks_front": 1.0,
     "walk_into_the_desks": 0.63671875,
     "walk_row_7_east_to_the_audition_quarter": 1.0,

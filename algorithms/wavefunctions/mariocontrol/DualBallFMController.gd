@@ -812,6 +812,16 @@ func _build_staging() -> void:
 	_build_panel()
 	_build_readout()
 	_localise_sound()
+	# the two names onto their desks' upper front faces (Astra's review of the visual pass,
+	# 12 September: "the lowered scope cuts through CARRIER and MODULATOR"): they had hung
+	# 0.75 m over the ball nodes, in the scope's band; here they sit with their desks, out of
+	# the scope and out of the balls' travel
+	for pair in [["Ball1_Carrier/CarrierLabel", -0.25], ["Ball2_Modulator/ModulatorLabel", 0.75]]:
+		var lbl: Label3D = get_node_or_null(pair[0])
+		if lbl != null:
+			lbl.position = (lbl.get_parent() as Node3D).to_local(to_global(Vector3(pair[1], 0.86, 0.57)))
+			lbl.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+			lbl.font_size = 22
 
 func _desk(desk_name: String, at: Vector3, size: Vector3, mat: Material) -> void:
 	var body := StaticBody3D.new()
@@ -854,6 +864,12 @@ func _teardown_staging() -> void:
 	var info: Node3D = get_node_or_null("InfoLabel")
 	if info != null:
 		info.position = Vector3(0.0, -1.15, 0.0)
+	for name in ["Ball1_Carrier/CarrierLabel", "Ball2_Modulator/ModulatorLabel"]:
+		var lbl: Label3D = get_node_or_null(name)
+		if lbl != null:
+			lbl.position = Vector3(0.25, 0.75, 0.0)
+			lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+			lbl.font_size = 28
 
 ## Four buttons on the visitor's side at hand height. BASELINE deals the unmodulated note
 ## (index 0); HOLD keeps the note you hear as the reference A; PLAY re-plays the

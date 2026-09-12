@@ -93,6 +93,13 @@ func apply_grid_config(data: Dictionary) -> void:
 	if data.has("octave"):
 		base_octave = int(data["octave"])
 
+	# Config can arrive BEFORE _ready: the museum's map-authored lane calls this while
+	# the root is still outside the tree (the grid component defers it until after).
+	# The rebuild needs the @onready mapper; before it exists the words above are
+	# kept and _ready builds from them. (2026-09-10: the full museum probe logged the
+	# null-mapper errors this used to throw for every configured placement.)
+	if not is_node_ready() or mapper == null:
+		return
 	# Rebuild if config changed
 	_setup_note_positions()
 	_create_note_markers()

@@ -474,6 +474,37 @@ func run() -> void:
 			await get_tree().create_timer(0.3, true, false, true).timeout
 			get_viewport().get_texture().get_image().save_png(OUT + "probe_effect_sound_desktop_front_live.png")
 			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
+		# THE OPERATING VIEW (Astra's review, 12 September): one valid standing position from
+		# which both balls, both names, the full readout, the AUDITION panel and the scope are
+		# in the frame — a step and a half back from the desks, the eye on the balls' desks
+		drv.get("rig").global_position = seg.to_global(Vector3(8.25, 0.05, 8.95 + vest))
+		await get_tree().physics_frame
+		drv.call("aim_at", rig.to_global(Vector3(0.25, 0.95, 0.3)))
+		for i in range(12): await get_tree().process_frame
+		var rcam: Camera3D = drv.get("cam")
+		var in_view: Dictionary = {}
+		var pts := {"carrier ball": cpt.global_position, "modulator ball": mpt.global_position,
+			"readout": readout.global_position, "panel": (panel as Node3D).global_position}
+		var cl_lbl: Node3D = rig.get_node_or_null("Ball1_Carrier/CarrierLabel")
+		var ml_lbl: Node3D = rig.get_node_or_null("Ball2_Modulator/ModulatorLabel")
+		if cl_lbl != null: pts["CARRIER"] = cl_lbl.global_position
+		if ml_lbl != null: pts["MODULATOR"] = ml_lbl.global_position
+		if scope != null and scope.get_node_or_null("ScopePlate") != null: pts["scope plate"] = (scope.get_node("ScopePlate") as Node3D).global_position
+		var all_in: bool = rcam != null
+		for k in pts.keys():
+			var ok: bool = rcam != null and rcam.is_position_in_frustum(pts[k])
+			in_view[k] = ok
+			if not ok: all_in = false
+		measurements["desktop_input"]["operating_view"] = {"rig": [8.25, 0.0, 8.95], "in_frustum": in_view, "pose": drv.call("pose")}
+		check(all_in, "from the operating spot 1.9 m before the desks the rig's camera holds both balls, both names, the readout, the panel and the scope (%s)" % str(in_view))
+		if cl_lbl != null and ml_lbl != null:
+			var cly: float = rig.to_local(cl_lbl.global_position).y
+			var mly: float = rig.to_local(ml_lbl.global_position).y
+			measurements["name_label_heights"] = [snappedf(cly, 0.01), snappedf(mly, 0.01)]
+			check(cly < 0.95 and mly < 0.95, "CARRIER and MODULATOR sit on their desks' front faces, under the balls and out of the scope's band (%.2f, %.2f)" % [cly, mly])
+		if "--capture" in OS.get_cmdline_user_args():
+			await get_tree().create_timer(0.3, true, false, true).timeout
+			get_viewport().get_texture().get_image().save_png(OUT + "probe_effect_sound_desktop_operating_live.png")
 		# walking into the desks from the front: they stop the rig
 		drv.get("rig").global_position = seg.to_global(Vector3(8.5, 0.05, 7.6 + vest))
 		await get_tree().physics_frame
@@ -504,12 +535,21 @@ func run() -> void:
 		measurements["captures"] = {"primary": _cam_pose(cam)}
 		# the readout from reading distance
 		if readout != null:
-			cam.global_position = readout.global_position + seg.global_transform.basis * Vector3(0.0, 0.02, -0.95)
+			# the reachable close view: a standing eye on the visitor's side, 0.9 m before the plate
+			# and looking down at it (12 September, twice: a camera at the plate's own height saw the
+			# desk's face; one offset along the artifact's -z stood BEHIND the desks, the artifact being
+			# turned 180 degrees in this hall, and a desk block hid the plate's left third)
+			var rl: Vector3 = seg.to_local(readout.global_position)
+			cam.global_position = seg.to_global(Vector3(rl.x, 1.5, rl.z - 0.9))
 			cam.look_at(readout.global_position)
 			for i in range(20): cam.make_current(); await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
 			get_viewport().get_texture().get_image().save_png(OUT + "probe_effect_sound_readout_live.png")
 			measurements["captures"]["readout"] = _cam_pose(cam)
+			var los: Dictionary = cam.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(cam.global_position, readout.global_position))
+			var los_clear: bool = los.is_empty() or (los.collider is Node and rig.is_ancestor_of(los.collider))
+			measurements["captures"]["readout"]["line_of_sight"] = "clear" if los.is_empty() else str((los.collider as Node).name)
+			check(los_clear, "the close view's line of sight to the readout is clear (%s)" % ("nothing in the way" if los.is_empty() else str((los.collider as Node).name)))
 		# the scope: the four lanes and their captions
 		if scope != null:
 			cam.global_position = rig.to_global(Vector3(0.25, 1.55, 1.55)); cam.look_at(rig.to_global(Vector3(0.25, 1.45, 0.0)))
