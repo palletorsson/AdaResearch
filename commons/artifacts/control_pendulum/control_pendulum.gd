@@ -63,6 +63,11 @@ class_name ControlPendulum
 signal oscillation_updated(y_offset: float, angular_velocity: float, amplitude: float)
 signal grabbed
 signal released
+## The bob passed through the hanging position. direction is the sign of the
+## angular velocity at the crossing: +1 towards +x, -1 towards -x. Two visits to
+## the same place with opposite signs are the Intro room's whole first lesson,
+## and this is what a probe listens to when it asks whether they happened.
+signal centre_crossed(direction: int, angular_velocity: float)
 
 @export var pendulum_length: float = 0.6
 @export var bob_radius: float = 0.06
@@ -72,11 +77,25 @@ signal released
 @export_enum("free", "underdamped", "critical", "overdamped", "resonance") var regime: String = "free"
 ## Stage-2 DNA axis — how much of the working stands behind the swing.
 @export_enum("result", "trace", "longhand", "axiom") var evidence: String = "result"
+## The still thing the swing is measured against (2026-09-10, the Intro pilot in
+## doc/research/waves-chance-noise: "keep a still reference and a visible centre
+## crossing").
+##   none   the shipped build — pivot, rod, bob, a label. Every placement so far.
+##   plumb  a hairline from the pivot to the rest point, a ring at the rest point
+##          that brightens for a moment each time the bob passes through it, and
+##          the label counts those crossings with their direction.
+## Word-valued, so a map spells it in the token (#reference:plumb) without the
+## grid mistaking it for a rotation.
+@export_enum("none", "plumb") var reference: String = "none"
 
 const GRAB_SPHERE_SCENE = preload("res://commons/primitives/point/grab_sphere_point.tscn")
 
 const REGIMES: PackedStringArray = ["free", "underdamped", "critical", "overdamped", "resonance"]
 const EVIDENCE: PackedStringArray = ["result", "trace", "longhand", "axiom"]
+const REFERENCES: PackedStringArray = ["none", "plumb"]
+## A crossing counts only when the bob is actually moving: a bob parked at the
+## rest point by a rebuild, or released from exactly the centre, does not "cross".
+const CROSSING_MIN_OMEGA: float = 0.02
 
 ## The shipped starting angle. `_angle`'s initialiser below is this same number; it is named
 ## here so the drawn prediction is a statement about the artifact's design rather than about
@@ -102,9 +121,15 @@ var _rod: MeshInstance3D
 var _bob_sphere: Node3D  # The grabbable sphere instance
 var _label: Label3D
 var _evidence_root: Node3D
+var _reference_root: Node3D
+var _ring_mat: StandardMaterial3D
+var _ring_glow: float = 0.0
 
 var _angle: float = 0.3  # Starting angle (radians)
 var _angular_velocity: float = 0.0
+var _prev_angle: float = 0.3      # last frame's angle, for the sign change that is a crossing
+var _crossings: int = 0
+var _last_crossing_dir: int = 0
 var _is_grabbed: bool = false
 var _last_bob_position: Vector3
 var _grab_start_time: float = 0.0
@@ -119,6 +144,7 @@ var current_amplitude: float = 0.0
 func _ready():
 	regime = _pick(regime, REGIMES, "free")
 	evidence = _pick(evidence, EVIDENCE, "result")
+	reference = _pick(reference, REFERENCES, "none")
 	_build_all()
 
 func _build_all() -> void:
@@ -126,6 +152,7 @@ func _build_all() -> void:
 	_create_rod()
 	_create_grabbable_bob()
 	_create_label()
+	_build_reference()
 	_update_bob_position()
 	_build_evidence()
 
@@ -200,12 +227,78 @@ func _create_label():
 	_label.modulate = Color(0.7, 0.7, 0.8)
 	add_child(_label)
 
+## The still reference. Nothing here moves: a hairline where the rod would hang
+## at rest, and a ring around the rest point that the bob passes THROUGH. The
+## ring is lit briefly by _physics_process on each crossing, so "the bob is at
+## the centre" is something the room says out loud rather than something the
+## visitor has to judge against thin air. Built only under reference=plumb; at
+## the default this function returns before a node exists, so every shipped
+## placement is what it was.
+func _build_reference() -> void:
+	if reference != "plumb":
+		return
+	_reference_root = Node3D.new()
+	_reference_root.name = "Reference"
+	add_child(_reference_root)
+	var plumb := MeshInstance3D.new()
+	plumb.name = "Plumb"
+	var hair := CylinderMesh.new()
+	hair.top_radius = 0.0015
+	hair.bottom_radius = 0.0015
+	hair.height = pendulum_length
+	plumb.mesh = hair
+	plumb.position = Vector3(0.0, -pendulum_length * 0.5, 0.0)
+	plumb.material_override = _flat_mat(Color(0.6, 0.66, 0.78, 1.0), 0.35)
+	_reference_root.add_child(plumb)
+	var ring := MeshInstance3D.new()
+	ring.name = "RestRing"
+	var torus := TorusMesh.new()
+	torus.inner_radius = bob_radius * 1.7
+	torus.outer_radius = bob_radius * 1.7 + 0.006
+	ring.mesh = torus
+	# TorusMesh lies in the XZ plane; the bob swings in XY along x, so turn the
+	# ring's normal to x and the bob threads it at every crossing.
+	ring.rotation_degrees = Vector3(0.0, 0.0, 90.0)
+	ring.position = Vector3(0.0, -pendulum_length, 0.0)
+	_ring_mat = _flat_mat(Color(1.0, 0.84, 0.42, 1.0), 0.4)
+	ring.material_override = _ring_mat
+	_reference_root.add_child(ring)
+	# the visual pass of 12 September: the pale bob, rod and ring vanished against the
+	# museum's bright wall and floor, and the state label was small above the pivot. A dark
+	# matte slate behind the swing plane (behind the trace plot too, at -0.30) gives the
+	# bob, the ring and the plot something to be seen against; the label is made a cased
+	# readout beside the pivot, out of the swing, at a size a standing eye reads.
+	var slate := MeshInstance3D.new()
+	slate.name = "Slate"
+	var sbox := BoxMesh.new()
+	sbox.size = Vector3(1.6, 1.9, 0.02)
+	slate.mesh = sbox
+	var smat := StandardMaterial3D.new()
+	smat.albedo_color = Color(0.13, 0.13, 0.15)
+	smat.roughness = 0.9
+	slate.material_override = smat
+	slate.position = Vector3(0.0, -0.62, -0.30)
+	_reference_root.add_child(slate)
+	if _label != null:
+		var plate := MeshInstance3D.new()
+		plate.name = "LabelPlate"
+		var pbox := BoxMesh.new()
+		pbox.size = Vector3(0.62, 0.20, 0.012)
+		plate.mesh = pbox
+		plate.material_override = smat
+		plate.position = Vector3(0.78, -0.10, -0.012)
+		_reference_root.add_child(plate)
+		_label.position = Vector3(0.78, -0.10, 0.0)
+		_label.font_size = 24
+		_label.pixel_size = 0.0011
+		_label.modulate = Color(0.85, 0.95, 1.0)
+
 func _update_bob_position():
 	# Calculate bob position from angle
 	if _bob_sphere and not _is_grabbed:
 		var bob_x = sin(_angle) * pendulum_length
 		var bob_y = -cos(_angle) * pendulum_length
-		_bob_sphere.global_position = global_position + Vector3(bob_x, bob_y, 0)
+		_bob_sphere.global_position = to_global(Vector3(bob_x, bob_y, 0))
 		_last_bob_position = _bob_sphere.global_position
 
 # ── the regime family ─────────────────────────────────────────────────────────────────
@@ -261,6 +354,8 @@ func _physics_process(delta):
 			_last_bob_position = current_pos
 			_angle = new_angle
 			_angular_velocity = 0.0
+		# a held bob does not cross anything; the count resumes at the release
+		_prev_angle = _angle
 
 		_update_label("GRABBED\nRelease to swing")
 	else:
@@ -276,10 +371,31 @@ func _physics_process(delta):
 		# Clamp angle
 		_angle = clampf(_angle, -PI * 0.45, PI * 0.45)
 
+		# A CROSSING is a sign change of the angle while the bob is moving. The
+		# direction is the sign of omega at that moment — the thing a still
+		# picture of "the bob at the centre" cannot show.
+		if signf(_angle) != signf(_prev_angle) and signf(_angle) != 0.0 \
+				and absf(_angular_velocity) > CROSSING_MIN_OMEGA:
+			_crossings += 1
+			_last_crossing_dir = 1 if _angular_velocity > 0.0 else -1
+			_ring_glow = 1.0
+			centre_crossed.emit(_last_crossing_dir, _angular_velocity)
+		_prev_angle = _angle
+
 		# Update bob position
 		_update_bob_position()
 
-		_update_label("Swing: %.1f deg\nSpeed: %.2f" % [rad_to_deg(_angle), abs(_angular_velocity)])
+		# The angle and the SIGNED angular velocity. The shipped label printed
+		# abs(omega), which is the one number this room exists to reveal — two
+		# crossings of the same point with opposite signs — thrown away.
+		var line := "θ %+.1f°   ω %+.2f rad/s" % [rad_to_deg(_angle), _angular_velocity]
+		if reference == "plumb":
+			line += "\ncrossings %d%s" % [_crossings, _dir_word()]
+		_update_label(line)
+
+	if _ring_mat != null:
+		_ring_glow = maxf(0.0, _ring_glow - delta * 3.0)
+		_ring_mat.emission_energy_multiplier = 0.4 + 2.4 * _ring_glow
 
 	# Update visual rotation of pivot (for rod)
 	_pivot.rotation.z = _angle
@@ -295,6 +411,35 @@ func _physics_process(delta):
 func _update_label(text: String):
 	if _label:
 		_label.text = text
+
+func _dir_word() -> String:
+	if _last_crossing_dir > 0:
+		return ", last → +x"
+	if _last_crossing_dir < 0:
+		return ", last → -x"
+	return ""
+
+# ── read by the Intro probe (commons/testing/probe_wcn_intro.gd) ──────────────
+func crossings() -> int:
+	return _crossings
+
+func last_crossing_direction() -> int:
+	return _last_crossing_dir
+
+func angle() -> float:
+	return _angle
+
+func angular_velocity() -> float:
+	return _angular_velocity
+
+func is_grabbed() -> bool:
+	return _is_grabbed
+
+func bob_world_position() -> Vector3:
+	return _bob_sphere.global_position if _bob_sphere != null else global_position
+
+func rest_world_position() -> Vector3:
+	return to_global(Vector3(0.0, -pendulum_length, 0.0))
 
 func _on_bob_picked_up(_pickable):
 	_is_grabbed = true
@@ -312,10 +457,12 @@ func _on_bob_dropped(_pickable):
 		for v in _grab_velocity_samples:
 			avg_velocity += v
 		avg_velocity /= _grab_velocity_samples.size()
+		# Samples are world-space hand motion; the angle belongs to this pivot.
+		avg_velocity = global_basis.inverse() * avg_velocity
 
 		# Convert linear velocity to angular velocity
 		# Tangential velocity at pendulum length gives angular velocity
-		var tangent_direction = Vector3(-cos(_angle), -sin(_angle), 0)
+		var tangent_direction = Vector3(cos(_angle), sin(_angle), 0)
 		var tangent_velocity = avg_velocity.dot(tangent_direction)
 		_angular_velocity = tangent_velocity / pendulum_length
 
@@ -323,6 +470,7 @@ func _on_bob_dropped(_pickable):
 		_angular_velocity = clampf(_angular_velocity, -10.0, 10.0)
 
 	_grab_velocity_samples.clear()
+	_prev_angle = _angle
 	released.emit()
 
 func grab():
@@ -355,7 +503,7 @@ func set_angle_from_position(world_pos: Vector3):
 ## and they rebuild only when the word actually differs and only after _ready has built.
 func apply_grid_config(config_data: Dictionary):
 	for key in config_data:
-		if key == "regime" or key == "evidence":
+		if key == "regime" or key == "evidence" or key == "reference":
 			continue
 		if key in self:
 			set(key, config_data[key])
@@ -370,6 +518,11 @@ func apply_grid_config(config_data: Dictionary):
 		if e != evidence:
 			evidence = e
 			dirty = true
+	if config_data.has("reference"):
+		var f: String = _pick(str(config_data["reference"]), REFERENCES, reference)
+		if f != reference:
+			reference = f
+			dirty = true
 	if dirty and is_node_ready():
 		_rebuild()
 
@@ -382,10 +535,16 @@ func _rebuild() -> void:
 	_bob_sphere = null
 	_label = null
 	_evidence_root = null
+	_reference_root = null
+	_ring_mat = null
+	_ring_glow = 0.0
 	_is_grabbed = false
 	_grab_velocity_samples.clear()
 	_angle = START_ANGLE
+	_prev_angle = START_ANGLE
 	_angular_velocity = 0.0
+	_crossings = 0
+	_last_crossing_dir = 0
 	_drive_t = 0.0
 	_build_all()
 

@@ -1,0 +1,153 @@
+{
+  "checks": 31,
+  "control_path": "picked_up/dropped emitted programmatically on the bob pickable; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "headset_verified": false,
+  "map": "WaveFunctions_Intro",
+  "measurements": {
+    "bob_present_when_found": true,
+    "bob_tree_events": [
+      {
+        "event": "added",
+        "frame": 0,
+        "parent": "ControlPendulum",
+        "parent_in_tree": true,
+        "parent_ready": true
+      }
+    ],
+    "crossings": [
+      {
+        "dir": -1,
+        "omega": -2.65210770433299,
+        "t": 0.802
+      },
+      {
+        "dir": 1,
+        "omega": 2.35450461380912,
+        "t": 1.58
+      },
+      {
+        "dir": -1,
+        "omega": -2.08735849611602,
+        "t": 2.383
+      },
+      {
+        "dir": 1,
+        "omega": 1.86003841637066,
+        "t": 3.179
+      },
+      {
+        "dir": -1,
+        "omega": -1.65542446896428,
+        "t": 3.944
+      },
+      {
+        "dir": 1,
+        "omega": 2.39199318947029,
+        "t": 4.969
+      },
+      {
+        "dir": -1,
+        "omega": -2.12261703819822,
+        "t": 5.756
+      },
+      {
+        "dir": 1,
+        "omega": 1.88066378201532,
+        "t": 6.562
+      },
+      {
+        "dir": -1,
+        "omega": -1.67479255848317,
+        "t": 7.328
+      },
+      {
+        "dir": 1,
+        "omega": 1.49023769991525,
+        "t": 8.112
+      },
+      {
+        "dir": -1,
+        "omega": -1.32545871289815,
+        "t": 8.946
+      }
+    ],
+    "desktop_input": {
+      "bob_moved_m": 0.0,
+      "carry_hover": "nothing",
+      "log": [
+        {
+          "event": "walker_cam_guard_stopped",
+          "value": true
+        },
+        {
+          "at": [
+            2.5,
+            0.0,
+            13.0
+          ],
+          "event": "spawn"
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@5770/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              2.5,
+              1.6,
+              13.0
+            ],
+            "forward": [
+              -0.09,
+              -0.41,
+              -0.91
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              2.5,
+              0.0,
+              13.0
+            ]
+          }
+        },
+        {
+          "button": 2,
+          "event": "click"
+        },
+        {
+          "button": 2,
+          "event": "click"
+        },
+        {
+          "current_camera_after": "/root/EndlessMuseum/Walker/@Camera3D@4",
+          "event": "teardown"
+        }
+      ],
+      "note": "the desktop carry (RMB) is a stand-in for VR grab and does not call the pickable's pick_up; a headset release is a separate lane",
+      "pendulum_grabbed_after": false,
+      "pendulum_grabbed_before": false,
+      "walker_cam_guard_stopped": true
+    },
+    "installation_aabb": [
+      1.89,
+      1.9,
+      0.42
+    ],
+    "pendulum_found_at_frame": 0,
+    "rest_point_local": [
+      2.5,
+      0.899999976158142,
+      15.5
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "physics_fps": 60,
+  "release_exercised": true,
+  "skipped": [],
+  "status": "passed"
+}

@@ -1,0 +1,167 @@
+{
+  "checks": 29,
+  "control_path": "InteractableAreaButton.button_pressed emitted programmatically; slider read, not driven; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "res://ada_run/necklace_hand.json (the live stamps, on purpose)",
+  "headset_verified": false,
+  "map": "Random_Definition",
+  "measurements": {
+    "built_cell": [
+      8,
+      11
+    ],
+    "cells_changed_by_one_extra_draw": 64,
+    "desktop_input": {
+      "camera": "desktop rig at (7.4, 0.0, 15.5)",
+      "log": [
+        {
+          "event": "walker_cam_guard_stopped",
+          "value": true
+        },
+        {
+          "at": [
+            7.40000009536743,
+            0.0,
+            11.5
+          ],
+          "event": "spawn"
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@3442/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.4,
+              1.6,
+              11.5
+            ],
+            "forward": [
+              0.83,
+              -0.56,
+              0.0
+            ],
+            "miss_deg": 0.02,
+            "rig": [
+              7.4,
+              0.0,
+              11.5
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "ssMuseum/Seg0_soane-cabinet-vista/SeedReplayDemo/Panel/Btn_1",
+            "hover": "inet-vista/SeedReplayDemo/Panel/Btn_1/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                0.83,
+                -0.56,
+                0.0
+              ],
+              "camera_from": [
+                7.4,
+                1.6,
+                11.5
+              ],
+              "independent_ray": "_soane-cabinet-vista/SeedReplayDemo/Panel/Btn_1/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "_soane-cabinet-vista/SeedReplayDemo/Panel/Btn_1/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                8.37,
+                0.94,
+                11.5
+              ]
+            },
+            "stand": [
+              7.4,
+              0.0,
+              11.5
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@3442/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              8.0,
+              1.65,
+              5.5
+            ],
+            "forward": [
+              0.08,
+              -0.09,
+              0.99
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              8.0,
+              0.05,
+              5.5
+            ]
+          }
+        },
+        {
+          "current_camera_after": "/root/EndlessMuseum/Walker/@Camera3D@4",
+          "event": "teardown"
+        }
+      ],
+      "press": {
+        "control": "ssMuseum/Seg0_soane-cabinet-vista/SeedReplayDemo/Panel/Btn_1",
+        "hover": "inet-vista/SeedReplayDemo/Panel/Btn_1/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            0.83,
+            -0.56,
+            0.0
+          ],
+          "camera_from": [
+            7.4,
+            1.6,
+            11.5
+          ],
+          "independent_ray": "_soane-cabinet-vista/SeedReplayDemo/Panel/Btn_1/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "_soane-cabinet-vista/SeedReplayDemo/Panel/Btn_1/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            8.37,
+            0.94,
+            11.5
+          ]
+        },
+        "stand": [
+          7.4,
+          0.0,
+          11.5
+        ]
+      },
+      "seed_after": 454,
+      "seed_before": 244,
+      "walker_cam_guard_stopped": true
+    },
+    "map_cell": [
+      8,
+      11
+    ],
+    "panel_height": 1.02549028396606,
+    "platform_cells": 8,
+    "platform_cells_at_one_metre": 8,
+    "seeds": [
+      42,
+      339,
+      244
+    ]
+  }
+}

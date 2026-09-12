@@ -3,7 +3,7 @@
   "name": "WaveFunctions_OscillationDriver",
   "title": "Spatial Sound Laboratory",
   "lookup_name": "WaveFunctions_AirMusic",
-  "description": "Basic Oscillation",
+  "description": "What continues after the hand has left. A void basin fills the middle of the hall with a single pillar in it; the walkable ring runs round it. On the south side the primary, resonating_metallophone, stands at (5,9) on a table at hand height, its row of eight bars cut to the pentatonic scale, a cradle on the front edge holding the striker, the Hz labels on the table's front, the combined wave and its voices readout above the row; a visitor stands on row 10 with the south wall behind. The display case at (3,9), the pipes at (7,8), the drone rack at (1,8), the glass racks and lab tables on the north side stay where they were. Structure recovered 2026-09-10: interior 2 = 1 m platform, perimeter w, wall_height 3, gate at the doorway; museum.sculpture_clear_rects keeps dealt plinths off the playing strip.",
   "version": "1.0",
   "format": "json",
   "dimensions": {
@@ -16,7 +16,8 @@
    "category": "algorithms",
    "estimated_time": "5 minutes",
    "learning_objectives": [ "Wavefunctions" ]
-  }
+  },
+  "museum": {"wall_height": 3, "gate_depth_rows": 0, "sculpture_clear_rects": [[3, 8, 8, 11], [1, 2, 3, 11], [8, 2, 10, 11]], "artifact_placement": "map"}
  },
  "utility_definitions": {
   "t": {
@@ -40,24 +41,12 @@
   "key_elements": [ "SystemsMusicTest - Spatial audio triggered by movement through space", "GlassRack - Spiral tube and fractional distillation on lab tables", "lab_table - Workbenches flanking the entrance", "RackAmbientDrone - Ambient drone synthesizer with lissajous display", "BigPipeSystem - Pipe run with vertical bypass along south wall", "air_music_display_case - Air Music spatial audio in glass display case", "resonating_metallophone - Metal bars tuned to different pitches" ]
  },
  "lighting": {
-  "ambient_color": [
-   0.4,
-   0.4,
-   0.5
-  ],
+  "ambient_color": [ 0.4, 0.4, 0.5 ],
   "ambient_energy": 0.6,
   "directional_light": {
    "enabled": true,
-   "direction": [
-	-0.4,
-	-0.7,
-	-0.4
-   ],
-   "color": [
-	1,
-	0.9,
-	0.8
-   ],
+   "direction": [ -0.4, -0.7, -0.4 ],
+   "color": [ 1, 0.9, 0.8 ],
    "energy": 1.2
   }
  },
@@ -70,16 +59,12 @@
   "initial_tile_visibility": "hidden_except_corners",
   "background": {
    "type": "sky",
-   "color": [
-	0.2,
-	0.2,
-	0.7
-   ]
+   "color": [ 0.2, 0.2, 0.7 ]
   }
  },
  "layers": {
   "structure": [
-   [ "2", "1", "3", "3", "3", "3", "1", "3", "3", "3", "3", "w", "w" ],
+   [ "w", "1", "3", "3", "3", "3", "1", "3", "3", "3", "3", "w", "w" ],
    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "3", "1", "w" ],
    [ "3", "1", "1", "1", "1", "1", "1", "1", "1", "1", "3", "1", "w" ],
    [ "3", "1", "1", "0", "0", "0", "0", "0", "1", "1", "3", "1", "w" ],
@@ -116,7 +101,7 @@
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "RackAmbientDrone:0:1", "", "", "", "", "", "BigPipeSystem:90:1#path:straight,straight,up,straight,down,straight,straight", "", "", "", "", "" ],
-   [ "", "", "", "air_music_display_case:0:1", "", "resonating_metallophone", "", "", "", "", "", "", "" ],
+   [ "", "", "", "air_music_display_case:0:1", "", "resonating_metallophone:0#stand:table", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
   ]

@@ -1,0 +1,384 @@
+{
+  "checks": 57,
+  "control_path": "strikes through the striker's collision path (the stick body moved into a bar, body_entered → the note), strike_bar() from code only where the JSON says so; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "map": "WaveFunctions_AirMusic",
+  "measurements": {
+    "bar_displacement_after_strike": 0.0,
+    "bar_heights": [
+      0.875,
+      0.875,
+      0.875,
+      0.875,
+      0.875,
+      0.875,
+      0.875,
+      0.875
+    ],
+    "bar_lengths": [
+      0.3,
+      0.283,
+      0.267,
+      0.245,
+      0.231,
+      0.212,
+      0.2,
+      0.189
+    ],
+    "captures": {
+      "overview": {
+        "at": [
+          6.5,
+          2.2,
+          0.8
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3407",
+        "forward": [
+          -0.11,
+          -0.15,
+          0.98
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          5.5,
+          1.55,
+          10.9
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3407",
+        "forward": [
+          0.0,
+          -0.34,
+          -0.94
+        ],
+        "is_ours": true
+      },
+      "readout": {
+        "at": [
+          5.5,
+          1.61,
+          10.55
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3407",
+        "forward": [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        "is_ours": true
+      },
+      "two_voices": {
+        "at": [
+          5.5,
+          1.55,
+          10.9
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3407",
+        "forward": [
+          0.0,
+          -0.34,
+          -0.94
+        ],
+        "is_ours": true
+      }
+    },
+    "decay_ratio_per_second": 0.713922298533266,
+    "desktop_input": {
+      "carry_hover": "nothing",
+      "front_capture_pose": {
+        "current_camera": "/root/@Node@3408/WcnDesktopRig/Head/Camera3D",
+        "eye": [
+          5.5,
+          1.6,
+          10.55
+        ],
+        "forward": [
+          0.0,
+          -0.5,
+          -0.87
+        ],
+        "rig": [
+          5.5,
+          0.0,
+          10.55
+        ]
+      },
+      "log": [
+        {
+          "event": "walker_cam_guard_stopped",
+          "value": true
+        },
+        {
+          "at": [
+            5.5,
+            0.0,
+            10.5500001907349
+          ],
+          "event": "spawn"
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@3408/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.5,
+              1.6,
+              10.55
+            ],
+            "forward": [
+              -0.5,
+              -0.44,
+              -0.75
+            ],
+            "miss_deg": 0.02,
+            "rig": [
+              5.5,
+              0.0,
+              10.55
+            ]
+          }
+        },
+        {
+          "button": 2,
+          "event": "click"
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@3408/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.5,
+              1.6,
+              10.55
+            ],
+            "forward": [
+              0.0,
+              -0.5,
+              -0.87
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.5,
+              0.0,
+              10.55
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@3408/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              2.0,
+              1.65,
+              10.5
+            ],
+            "forward": [
+              1.0,
+              -0.09,
+              0.0
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              2.0,
+              0.05,
+              10.5
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 30,
+          "moved": [
+            2.5,
+            -0.05,
+            0.0
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@3408/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              4.5,
+              1.6,
+              10.5
+            ],
+            "forward": [
+              1.0,
+              -0.09,
+              0.0
+            ],
+            "rig": [
+              4.5,
+              0.0,
+              10.5
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@3408/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.5,
+              1.6,
+              10.6
+            ],
+            "forward": [
+              0.0,
+              -0.35,
+              -0.94
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              5.5,
+              0.0,
+              10.6
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 20,
+          "moved": [
+            0.0,
+            0.0,
+            -0.5
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@3408/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              5.5,
+              1.6,
+              10.1
+            ],
+            "forward": [
+              0.0,
+              -0.35,
+              -0.94
+            ],
+            "rig": [
+              5.5,
+              0.0,
+              10.1
+            ]
+          }
+        },
+        {
+          "current_camera_after": "/root/EndlessMuseum/Walker/@Camera3D@4",
+          "event": "teardown"
+        }
+      ],
+      "note": "the desktop rig's RMB carry never calls an XR Tools pickable's pick_up; the striker is a hand's instrument — a headset lane",
+      "stick_held_after_rmb": false,
+      "walk_into_the_table": [
+        0.0,
+        -0.5
+      ],
+      "walk_strip_east": [
+        2.5,
+        0.0
+      ],
+      "walker_cam_guard_stopped": true
+    },
+    "hz_labels": 8,
+    "museum_severed_tokens": [
+      "lab_table",
+      "lab_table",
+      "RackAmbientDrone",
+      "resonating_metallophone"
+    ],
+    "museum_walk_severed": [],
+    "origin_local": [
+      5.5,
+      0.0,
+      9.5
+    ],
+    "other_players_playing": [],
+    "plinths": [
+      [
+        "ArtPlinth0",
+        5,
+        13
+      ],
+      [
+        "ArtPlinth1",
+        8,
+        11
+      ],
+      [
+        "ArtPlinth2",
+        7,
+        16
+      ],
+      [
+        "ArtPlinth3",
+        3,
+        2
+      ]
+    ],
+    "reach_to_farthest_bar": 1.29430449008942,
+    "sound_seconds": 7.5,
+    "stick_rest_local": [
+      4.80000019073486,
+      0.980000019073486,
+      9.5
+    ],
+    "stick_return": {
+      "distance_from_rest": 0.0,
+      "returns": 1
+    },
+    "stream_seconds": 7.5,
+    "streaming": {
+      "freed": true,
+      "rebuildable": true
+    },
+    "strike_1": {
+      "held_like": "frozen kinematic, mask 0, layer picked_up_layer",
+      "hit_velocity": 1.0,
+      "hits_seen": 1,
+      "stick_speed_before_contact": 1.67999982833862,
+      "through_collision": true
+    },
+    "strike_2": {
+      "hit_velocity": 0.559995174407959,
+      "through_collision": true
+    },
+    "strike_tip_offset_local": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "table_top": 0.850000011920929,
+    "voices_after_second_strike": [
+      {
+        "amplitude": 0.172343091759367,
+        "frequency": 261.63,
+        "index": 0,
+        "playing": true,
+        "seconds": 3.19536266666666
+      },
+      {
+        "amplitude": 0.251469868820469,
+        "frequency": 440.0,
+        "index": 4,
+        "playing": true,
+        "seconds": 0.322373428571429
+      }
+    ],
+    "walk_from_the_tables_front_to_the_south_door": 1.0,
+    "walk_into_the_table": 0.49609375,
+    "walk_row_10_from_the_east_to_the_tables_front": 1.0,
+    "walk_row_10_from_the_west_to_the_tables_front": 1.0,
+    "walk_the_east_aisle_down_the_basin": 1.0,
+    "walk_the_west_aisle_down_the_basin": 0.61328125,
+    "wave_height": 1.35000002384186,
+    "wave_vertices": 594
+  },
+  "physics_fps": 60
+}

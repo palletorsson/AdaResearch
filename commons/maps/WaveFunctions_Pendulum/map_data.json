@@ -1,136 +1,143 @@
 {
-  "map_info": {
-    "name": "WaveFunctions_Pendulum",
-    "title": "WaveFunctions_Pendulum",
-    "lookup_name": "WaveFunctions_Pendulum",
-    "description": "Pendulum Wave\n\n[Placement applied simulated_annealing engine — constraint 0.838→0.904, walkability 0.623→0.652]",
-    "version": "placed-simulated_annealing",
-    "format": "json",
-    "dimensions": {
-      "width": 13,
-      "depth": 21,
-      "max_height": 4
-    },
-    "metadata": {
-      "difficulty": "beginner",
-      "category": "algorithms",
-      "estimated_time": "5 minutes",
-      "learning_objectives": ["Gravity creates oscillation","Simple pendulum mechanics","Spring-mass systems","Pendulum wave patterns","Chaos: double pendulum sensitivity"]
-    },
-    "eye_shot_adopted": "Trial_eye_WaveFunctions_Pendulum"
+ "map_info": {
+  "name": "WaveFunctions_Pendulum",
+  "title": "WaveFunctions_Pendulum",
+  "lookup_name": "WaveFunctions_Pendulum",
+  "description": "Where a movement puts its past. One pendulum swings under a gallows frame at the head of the open south half; every 25 ms its position is kept together with the time it was taken, and drawn behind the bob at 0.6 m per second of age, so the record recedes down the hall toward the exit. Two limits hold the record: 300 marks and 10 s. A panel on the walk-side post switches the sampler (FINE 25 ms, COARSE 200 ms, STROBE once per measured period) and resets this experiment; a cased readout beside the trail prints the count, the span kept, the interval, the depth rate and the period. The seismograph and the Foucault rig keep other records on other clocks. Structure recovered 2026-09-10: interior 2 = platform, perimeter w, wall_height 3.",
+  "version": "placed-simulated_annealing",
+  "format": "json",
+  "dimensions": {
+   "width": 13,
+   "depth": 21,
+   "max_height": 4
   },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next Lesson",
-      "description": "Continue",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    },
-    "s": {
-      "properties": {
-        "height": 1.5
-      }
-    }
+  "metadata": {
+   "difficulty": "beginner",
+   "category": "algorithms",
+   "estimated_time": "5 minutes",
+   "learning_objectives": [ "Gravity creates oscillation", "Simple pendulum mechanics", "Spring-mass systems", "Pendulum wave patterns", "Chaos: double pendulum sensitivity" ]
   },
-  "documentation": {
-    "summary": "Pendulum Wave",
-    "layout": "Standard layout",
-    "objective": "Observe the wave function",
-    "key_elements": ["PendulumWave - Three pendulum wave installations along the east wall","WavePaintings - Pendulum bob paints oscillation traces on canvas","foucault_pendulum - Rosette patterns proving Earth's rotation","GlassRack - Reflux apparatus and spiral condenser on lab tables","lab_table - Workbenches for glass apparatus","BigPipeSystem - Industrial pipe run along south corridor","VRAudioMonitor - Audio waveform display","seismograph - Drum chart recorder with sine trace"]
-  },
-  "lighting": {
-    "ambient_color": [0.4,0.4,0.5],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "enabled": true,
-      "direction": [-0.4,-0.7,-0.4],
-      "color": [1,0.9,0.8],
-      "energy": 1.2
-    }
-  },
-  "settings": {
-    "cube_size": 1,
-    "gutter": 0,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "hidden_except_corners",
-    "background": {
-      "type": "sky",
-      "color": [0.2,0.3,0.7]
-    }
-  },
-  "layers": {
-    "structure": [
-      ["w","w","w","w","w","1","1","1","w","w","w","w","w"],
-      ["w","1","1","1","1","1","1","1","1","1","1","1","w"],
-      ["w","1","2","1","1","1","1","1","1","1","1","1","w"],
-      ["w","1","1","1","1","1","1","1","1","1","1","1","w"],
-      ["w","1","1","1","1","1","1","1","1","1","1","1","w"],
-      ["w","1","1","4","2","4","4","4","2","4","1","1","w"],
-      ["w","1","1","4","2","2","2","2","2","4","1","1","w"],
-      ["w","1","1","4","2","2","2","2","2","4","1","1","w"],
-      ["w","1","0","4","2","2","2","2","2","4","1","1","w"],
-      ["w","1","1","4","4","4","4","4","4","4","1","1","w"],
-      ["w","1","1","1","1","1","1","1","1","1","1","1","w"],
-      ["w","1","1","1","1","1","1","1","1","1","1","1","w"],
-      ["w","1","1","1","1","1","1","1","1","1","1","1","w"],
-      ["w","1","1","1","1","1","1","1","1","1","1","1","w"],
-      ["w","1","1","1","1","1","1","1","1","1","1","1","w"],
-      ["w","1","1","1","1","1","1","1","1","1","1","1","w"],
-      ["w","1","1","1","1","1","1","1","1","1","1","1","w"],
-      ["w","1","1","1","1","1","1","1","1","1","1","1","w"],
-      ["w","1","1","1","1","1","1","0","1","1","1","1","w"],
-      ["w","4","1","1","1","1","1","1","1","1","1","4","w"],
-      ["w","w","w","w","w","1","1","1","w","w","w","w","w"]
-    ],
-    "utilities": [
-      ["","","","","","","","","","","","",""],
-      ["","sp","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","wp","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","tc:3:y","","","","","","","","tc:3:y","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","t","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""]
-    ],
-    "interactables": [
-      ["","","","","","","","","","","","",""],
-      ["","","WavePaintings:180:1:0.2","","","","","","foucault_pendulum","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","draw_dot_time_domain","","","","","","",""],
-      ["","","","","","","","BigPipeSystem:0:1#path:straight,straight,corner_right,straight,straight","","dark_sphere","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","PendulumWave:90","","",""," ","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","lab_table","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","seismograph","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","GlassRack:0:0.6#config:reflux_apparatus","","","","",""],
-      ["","","","","","","","","","","","VRAudioMonitor",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""],
-      ["","","","","","","","","","","","",""]
-    ]
+  "eye_shot_adopted": "Trial_eye_WaveFunctions_Pendulum",
+  "museum": {
+   "wall_height": 3,
+   "gate_depth_rows": 0,
+   "sculpture_clear_rects": [[3, 10, 12, 19]],
+   "artifact_placement": "map",
+   "floor_cells": [ [ 2, 8 ], [ 7, 18 ] ]
   }
+ },
+ "utility_definitions": {
+  "t": {
+   "type": "teleporter",
+   "name": "Next Lesson",
+   "description": "Continue",
+   "properties": {
+	"action": "next_in_sequence"
+   }
+  },
+  "s": {
+   "properties": {
+	"height": 1.5
+   }
+  }
+ },
+ "documentation": {
+  "summary": "Pendulum Wave",
+  "layout": "Standard layout",
+  "objective": "Walk down the record: find the same crossing twice in the trail and count the marks between, switch the sampler and read what the count and the kept span do, then watch the oldest mark leave.",
+  "key_elements": [ "PendulumWave - one pendulum in a gallows frame at (6,11), rotated 180 so its record recedes south down the open half of the hall; sampler panel on the east post, cased readout 3 m down the trail", "seismograph - a drum recorder on the west walkway beside the trail: another record on another clock", "WavePaintings - three double pendulums painting on canvases, north-west", "foucault_pendulum - rosette patterns from a precessing swing plane, north-east corner at half scale (at full scale its 7 m body sealed the door row in the museum)", "draw_dot_time_domain - the dot plotter beside the end of the record, south-west (it sealed the wedge onto the stage where it stood before)", "lab_table, GlassRack, BigPipeSystem, VRAudioMonitor - the laboratory around the raised stage" ]
+ },
+ "lighting": {
+  "ambient_color": [ 0.4, 0.4, 0.5 ],
+  "ambient_energy": 0.6,
+  "directional_light": {
+   "enabled": true,
+   "direction": [ -0.4, -0.7, -0.4 ],
+   "color": [ 1, 0.9, 0.8 ],
+   "energy": 1.2
+  }
+ },
+ "settings": {
+  "cube_size": 1,
+  "gutter": 0,
+  "show_grid": true,
+  "enable_physics": true,
+  "auto_reveal_on_entry": false,
+  "initial_tile_visibility": "hidden_except_corners",
+  "background": {
+   "type": "sky",
+   "color": [ 0.2, 0.3, 0.7 ]
+  }
+ },
+ "layers": {
+  "structure": [
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "4", "2", "4", "4", "4", "2", "4", "1", "1", "w" ],
+   [ "w", "1", "1", "4", "2", "2", "2", "2", "2", "4", "1", "1", "w" ],
+   [ "w", "1", "1", "4", "2", "2", "2", "2", "2", "4", "1", "1", "w" ],
+   [ "w", "1", "0", "4", "2", "2", "2", "2", "2", "4", "1", "1", "w" ],
+   [ "w", "1", "1", "4", "4", "4", "4", "4", "4", "4", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "0", "1", "1", "1", "1", "w" ],
+   [ "w", "4", "1", "1", "1", "1", "1", "1", "1", "1", "1", "4", "w" ],
+   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ]
+  ],
+  "utilities": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "sp", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "wp", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "tc:3:y", "", "", "", "", "", "", "", "tc:3:y", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "t", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ],
+  "interactables": [
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "WavePaintings:180:1:0.2", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "foucault_pendulum:0:0:0.5", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "BigPipeSystem:0:1#path:straight,straight,corner_right,straight,straight", "", "dark_sphere", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", " ", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "lab_table", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "PendulumWave:180", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "GlassRack:0:0.6#config:reflux_apparatus", "", "" ],
+   [ "", "", "seismograph", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "VRAudioMonitor", "" ],
+   [ "", "", "", "", "draw_dot_time_domain", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+  ]
+ }
 }

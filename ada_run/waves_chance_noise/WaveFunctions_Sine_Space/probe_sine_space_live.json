@@ -1,0 +1,661 @@
+{
+  "checks": 64,
+  "control_path": "slider_moved and button_pressed emitted programmatically on the panel's own controls; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "WaveFunctions_Sine_Space",
+  "measurements": {
+    "axis_world": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "built_bodies": [
+      [
+        "lobby:window",
+        [
+          7.5,
+          1.7,
+          -3.5
+        ],
+        []
+      ],
+      [
+        "lobby:view",
+        [
+          7.5,
+          1.7,
+          -2.0
+        ],
+        []
+      ],
+      [
+        "lobby:counter",
+        [
+          11.0,
+          1.6,
+          -2.94
+        ],
+        []
+      ],
+      [
+        "lobby:extinguisher",
+        [
+          1.14,
+          0.0,
+          -1.4
+        ],
+        []
+      ],
+      [
+        "lobby:elevator",
+        [
+          15.94,
+          0.0,
+          -1.8
+        ],
+        []
+      ],
+      [
+        "lobby:pallet",
+        [
+          15.1,
+          0.0,
+          -1.8
+        ],
+        []
+      ],
+      [
+        "lobby:point_zero",
+        [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        []
+      ],
+      [
+        "sine_wall_explanation",
+        [
+          1.5,
+          0.0,
+          1.5
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        "sine_wall_corridor",
+        [
+          6.5,
+          0.0,
+          4.5
+        ],
+        [
+          6,
+          4
+        ]
+      ],
+      [
+        "dark_sphere",
+        [
+          9.5,
+          0.0,
+          14.5
+        ],
+        [
+          9,
+          14
+        ]
+      ],
+      [
+        "sine_space",
+        [
+          9.5,
+          0.0,
+          16.5
+        ],
+        [
+          9,
+          16
+        ]
+      ],
+      [
+        "gate:wavefunctions sine space",
+        [
+          6.5,
+          0.0,
+          0.5
+        ],
+        []
+      ]
+    ],
+    "built_cells": [
+      "pp.########################",
+      "................p##########",
+      "##..............p##########",
+      "##............#############",
+      "######...##################",
+      "##ss###..##################",
+      "##...........##############",
+      "##.ssssssss.###############",
+      "##.ssssssss..##############",
+      "##.ssssssss..##############",
+      "##########...##############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########.###############",
+      "###########..##############",
+      "##########....#############",
+      "########....#.#############",
+      "########.##...#############",
+      "######...##################",
+      "######...##################",
+      "#######..##################",
+      "######...##################",
+      "######...##################",
+      "######...##################",
+      "######...##################",
+      "######...##################",
+      "######..###################",
+      "######...##################"
+    ],
+    "built_refused": [],
+    "built_seals": {
+      "1,1": "sine_wall_explanation",
+      "2,1": "sine_wall_explanation",
+      "2,3": "sine_wall_corridor",
+      "2,4": "sine_wall_corridor",
+      "2,5": "sine_wall_corridor",
+      "3,3": "sine_wall_corridor",
+      "3,4": "sine_wall_corridor",
+      "3,5": "sine_wall_corridor",
+      "4,3": "sine_wall_corridor",
+      "4,4": "sine_wall_corridor",
+      "4,5": "sine_wall_corridor",
+      "5,3": "sine_wall_corridor",
+      "5,4": "sine_wall_corridor",
+      "5,5": "sine_wall_corridor",
+      "6,3": "sine_wall_corridor",
+      "6,4": "sine_wall_corridor",
+      "6,5": "sine_wall_corridor",
+      "7,3": "sine_wall_corridor",
+      "7,4": "sine_wall_corridor",
+      "7,5": "sine_wall_corridor",
+      "8,3": "sine_wall_corridor",
+      "8,4": "sine_wall_corridor",
+      "8,5": "sine_wall_corridor",
+      "9,3": "sine_wall_corridor",
+      "9,4": "sine_wall_corridor",
+      "9,5": "sine_wall_corridor"
+    },
+    "built_severed": [],
+    "cells": {
+      "corridor": [
+        6,
+        4
+      ],
+      "sine_space": [
+        9,
+        16
+      ],
+      "sine_wall_explanation": [
+        1,
+        1
+      ]
+    },
+    "contract": {
+      "amplitude": 0.2,
+      "animate": true,
+      "collision": false,
+      "cut": "skin",
+      "frequency": 4.5,
+      "height": 4.0,
+      "layers": 3,
+      "length": 7.0,
+      "phase": 0.526790716666667,
+      "phase_offset": 0.6,
+      "width": 2.0
+    },
+    "desktop_input": {
+      "exit_capture_pose": {
+        "current_camera": "/root/@Node@3251/WcnDesktopRig/Head/Camera3D",
+        "eye": [
+          9.88,
+          1.62,
+          4.5
+        ],
+        "forward": [
+          0.2,
+          -0.2,
+          0.96
+        ],
+        "rig": [
+          9.88,
+          0.02,
+          4.5
+        ]
+      },
+      "log": [
+        {
+          "event": "walker_cam_guard_stopped",
+          "value": true
+        },
+        {
+          "at": [
+            2.0,
+            0.0,
+            4.60000038146973
+          ],
+          "event": "spawn"
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@3251/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              2.0,
+              1.6,
+              4.6
+            ],
+            "forward": [
+              0.48,
+              -0.52,
+              0.71
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              2.0,
+              0.0,
+              4.6
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "m/Seg0_louisiana-pavilion-chain/SineWallCorridor/Panel/Btn_0",
+            "hover": "on-chain/SineWallCorridor/Panel/Btn_0/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                0.48,
+                -0.52,
+                0.71
+              ],
+              "camera_from": [
+                2.0,
+                1.6,
+                4.6
+              ],
+              "independent_ray": "ana-pavilion-chain/SineWallCorridor/Panel/Btn_0/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "ana-pavilion-chain/SineWallCorridor/Panel/Btn_0/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                2.61,
+                0.94,
+                5.5
+              ]
+            },
+            "stand": [
+              2.0,
+              0.0,
+              4.6
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@3251/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              3.3,
+              1.65,
+              4.5
+            ],
+            "forward": [
+              1.0,
+              -0.06,
+              0.0
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              3.3,
+              0.05,
+              4.5
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 40,
+          "moved": [
+            3.33,
+            -0.03,
+            0.0
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@3251/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              6.63,
+              1.62,
+              4.5
+            ],
+            "forward": [
+              1.0,
+              -0.06,
+              0.0
+            ],
+            "rig": [
+              6.63,
+              0.02,
+              4.5
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 40,
+          "moved": [
+            3.25,
+            0.0,
+            0.0
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@3251/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              9.88,
+              1.62,
+              4.5
+            ],
+            "forward": [
+              1.0,
+              -0.06,
+              0.0
+            ],
+            "rig": [
+              9.88,
+              0.02,
+              4.5
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@3251/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              9.88,
+              1.62,
+              4.5
+            ],
+            "forward": [
+              0.2,
+              -0.2,
+              0.96
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              9.88,
+              0.02,
+              4.5
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@3251/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              2.0,
+              1.6,
+              4.6
+            ],
+            "forward": [
+              0.48,
+              -0.52,
+              0.71
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              2.0,
+              0.0,
+              4.6
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "m/Seg0_louisiana-pavilion-chain/SineWallCorridor/Panel/Btn_0",
+            "hover": "on-chain/SineWallCorridor/Panel/Btn_0/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                0.48,
+                -0.52,
+                0.71
+              ],
+              "camera_from": [
+                2.0,
+                1.6,
+                4.6
+              ],
+              "independent_ray": "ana-pavilion-chain/SineWallCorridor/Panel/Btn_0/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "ana-pavilion-chain/SineWallCorridor/Panel/Btn_0/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                2.61,
+                0.94,
+                5.5
+              ]
+            },
+            "stand": [
+              2.0,
+              0.0,
+              4.6
+            ]
+          }
+        },
+        {
+          "current_camera_after": "/root/EndlessMuseum/Walker/@Camera3D@4",
+          "event": "teardown"
+        }
+      ],
+      "mid_capture_pose": {
+        "current_camera": "/root/@Node@3251/WcnDesktopRig/Head/Camera3D",
+        "eye": [
+          6.63,
+          1.62,
+          4.5
+        ],
+        "forward": [
+          1.0,
+          -0.06,
+          0.0
+        ],
+        "rig": [
+          6.63,
+          0.02,
+          4.5
+        ]
+      },
+      "press": {
+        "control": "m/Seg0_louisiana-pavilion-chain/SineWallCorridor/Panel/Btn_0",
+        "hover": "on-chain/SineWallCorridor/Panel/Btn_0/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            0.48,
+            -0.52,
+            0.71
+          ],
+          "camera_from": [
+            2.0,
+            1.6,
+            4.6
+          ],
+          "independent_ray": "ana-pavilion-chain/SineWallCorridor/Panel/Btn_0/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "ana-pavilion-chain/SineWallCorridor/Panel/Btn_0/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            2.61,
+            0.94,
+            5.5
+          ]
+        },
+        "stand": [
+          2.0,
+          0.0,
+          4.6
+        ]
+      },
+      "press_again": {
+        "control": "m/Seg0_louisiana-pavilion-chain/SineWallCorridor/Panel/Btn_0",
+        "hover": "on-chain/SineWallCorridor/Panel/Btn_0/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            0.48,
+            -0.52,
+            0.71
+          ],
+          "camera_from": [
+            2.0,
+            1.6,
+            4.6
+          ],
+          "independent_ray": "ana-pavilion-chain/SineWallCorridor/Panel/Btn_0/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "ana-pavilion-chain/SineWallCorridor/Panel/Btn_0/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            2.61,
+            0.94,
+            5.5
+          ]
+        },
+        "stand": [
+          2.0,
+          0.0,
+          4.6
+        ]
+      },
+      "running_after": false,
+      "running_after_second_click": true,
+      "running_before": true,
+      "walk_passage": [
+        6.58,
+        0.0
+      ],
+      "walker_cam_guard_stopped": true
+    },
+    "drift": {
+      "at_z": 0.0418780413548083,
+      "at_z_after": 0.0900055488642286,
+      "just_west_before": -0.152408729126142
+    },
+    "extent_local": [
+      [
+        3.0,
+        0.0,
+        3.23923492431641
+      ],
+      [
+        10.0,
+        4.0,
+        5.77814102172852
+      ]
+    ],
+    "gap_amp_max_in_step": [
+      0.754892958464579,
+      3.24926442275875
+    ],
+    "gap_declared": [
+      1.48031614805858,
+      2.51519623739013
+    ],
+    "gap_half_turn": [
+      2.0,
+      2.0
+    ],
+    "gap_in_step": [
+      1.44665458158035,
+      2.55558479598686
+    ],
+    "museum_severed": [],
+    "museum_severed_tokens": [],
+    "museum_walk_inside": [
+      "sine_space"
+    ],
+    "panel_local": [
+      2.65691447257996,
+      1.07216954231262,
+      5.55000019073486
+    ],
+    "readout_lines": [
+      "amp 0.20 m · phase offset 0.60 rad",
+      "4.5 cycles over 7 m",
+      "x-gap 1.48–2.52 m",
+      "running"
+    ],
+    "sine_space_y": 0.0,
+    "sine_wall_explanation_extent_local": [
+      [
+        1.0,
+        -0.199999988079071,
+        1.04220056533813
+      ],
+      [
+        2.12494134902954,
+        0.699999988079071,
+        1.80000019073486
+      ]
+    ],
+    "sine_wall_explanation_origin_y": 0.0,
+    "walk_antechamber_east_to_the_bridge_head": 1.0,
+    "walk_bridge_head_south_onto_the_bridge": 1.0,
+    "walk_door_row_into_the_antechamber": 1.0,
+    "walk_from_the_east_mouth_to_the_bridge_head": 1.0,
+    "walk_passage_west_mouth_to_east_mouth": 1.0,
+    "walk_through_both_walls": 1.0,
+    "walk_west_approach_door_row_down_to_the_mouth": 1.0
+  },
+  "physics_fps": 60
+}

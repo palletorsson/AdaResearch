@@ -1,0 +1,1031 @@
+{
+  "checks": 97,
+  "control_path": "button_pressed emitted programmatically on the AUDITION panel; the balls moved by setting the mapper points' positions (the mapper's own values_changed path); no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "map": "WaveFunctions_Effect_Sound",
+  "measurements": {
+    "after_index_move": {
+      "attack_time": 0.00999999977648258,
+      "carrier_freq": 440.0,
+      "decay_time": 1.5,
+      "mod_decay": 0.499998474121094,
+      "mod_index": 4.00000005960464,
+      "mod_ratio": 1.99999856948853
+    },
+    "audio_controllers": [
+      [
+        "UniversalVRAudioController",
+        1,
+        true
+      ],
+      [
+        "@Node3D@593",
+        33,
+        true
+      ],
+      [
+        "@Node3D@850",
+        33,
+        true
+      ],
+      [
+        "@Node3D@974",
+        17,
+        true
+      ]
+    ],
+    "audio_files": [
+      "audio_A_baseline_unmodulated.wav",
+      "audio_B_index4_moddecay0.5.wav",
+      "audio_B_index4_moddecay1.5.wav"
+    ],
+    "audition_state": {
+      "differs": [
+        "I 0.00→4.00"
+      ],
+      "drag_note_cap": 0.0,
+      "drag_notes_played": 9,
+      "last_note_seconds": 1.8,
+      "last_note_tag": "B",
+      "last_synth_ms": 45.309,
+      "lift": 0.92,
+      "notes_played": 16,
+      "playing": true,
+      "readout": "now  fc 440  A 0.01  D 1.5 | R 2.00  I 4.0  τ 0.50\nref  fc 440  A 0.01  D 1.5 | R 2.00  I 0.0  τ 0.50\ndiffers: I 0.00→4.00\n▶ B  1.8 s note · synth 45 ms · 16 notes",
+      "reference": {
+        "attack_time": 0.01,
+        "carrier_freq": 440.000152587891,
+        "decay_time": 1.50000247955322,
+        "mod_decay": 0.5,
+        "mod_index": 0.0,
+        "mod_ratio": 2.0
+      },
+      "reference_seconds": 1.8,
+      "stand": "desks"
+    },
+    "ball_gap_x": 1.0,
+    "ball_heights": [
+      1.17000007629395,
+      1.17000007629395
+    ],
+    "baseline_params": {
+      "attack_time": 0.00999999977648258,
+      "carrier_freq": 440.0,
+      "decay_time": 1.5,
+      "mod_decay": 0.5,
+      "mod_index": 0.0,
+      "mod_ratio": 2.0
+    },
+    "baseline_peak": 0.331888794898987,
+    "baseline_samples": 79379,
+    "baseline_seconds": 1.79997732426304,
+    "baseline_vs_bare_carrier_max_err": 0.0000000000000129760483997577,
+    "built_bodies": [
+      [
+        "lobby:window",
+        []
+      ],
+      [
+        "lobby:view",
+        []
+      ],
+      [
+        "lobby:counter",
+        []
+      ],
+      [
+        "lobby:extinguisher",
+        []
+      ],
+      [
+        "lobby:elevator",
+        []
+      ],
+      [
+        "lobby:pallet",
+        []
+      ],
+      [
+        "lobby:point_zero",
+        []
+      ],
+      [
+        "BigPipeSystem",
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        "pick_up_cube",
+        [
+          2,
+          2
+        ]
+      ],
+      [
+        "AudioContr",
+        [
+          3,
+          2
+        ]
+      ],
+      [
+        "pick_up_cube",
+        [
+          5,
+          2
+        ]
+      ],
+      [
+        "pick_up_cube",
+        [
+          10,
+          2
+        ]
+      ],
+      [
+        "GlassRack",
+        [
+          11,
+          2
+        ]
+      ],
+      [
+        "pick_up_cube",
+        [
+          2,
+          3
+        ]
+      ],
+      [
+        "AudioContr",
+        [
+          3,
+          3
+        ]
+      ],
+      [
+        "RackSineBasic",
+        [
+          5,
+          3
+        ]
+      ],
+      [
+        "cable_builder",
+        [
+          10,
+          3
+        ]
+      ],
+      [
+        "VRAudioMonitor",
+        [
+          11,
+          3
+        ]
+      ],
+      [
+        "pick_up_cube",
+        [
+          8,
+          4
+        ]
+      ],
+      [
+        "pick_up_cube",
+        [
+          9,
+          4
+        ]
+      ],
+      [
+        "dark_sphere",
+        [
+          10,
+          4
+        ]
+      ],
+      [
+        "Rack303Acid",
+        [
+          5,
+          5
+        ]
+      ],
+      [
+        "rack_room",
+        [
+          6,
+          5
+        ]
+      ],
+      [
+        "RackMoogBass",
+        [
+          7,
+          5
+        ]
+      ],
+      [
+        "RackDX7Piano",
+        [
+          8,
+          5
+        ]
+      ],
+      [
+        "AudioContr",
+        [
+          9,
+          5
+        ]
+      ],
+      [
+        "audio_catalog_tablet",
+        [
+          10,
+          5
+        ]
+      ],
+      [
+        "AudioContr",
+        [
+          11,
+          5
+        ]
+      ],
+      [
+        "wave_interference_3d",
+        [
+          6,
+          6
+        ]
+      ],
+      [
+        "pick_up_cube",
+        [
+          11,
+          7
+        ]
+      ],
+      [
+        "harmonic_distance_table",
+        [
+          3,
+          8
+        ]
+      ],
+      [
+        "chord_tension_spring",
+        [
+          5,
+          8
+        ]
+      ],
+      [
+        "timbre_sculptor",
+        [
+          9,
+          8
+        ]
+      ],
+      [
+        "GlassRack",
+        [
+          3,
+          9
+        ]
+      ],
+      [
+        "MarioSoundController",
+        [
+          2,
+          10
+        ]
+      ],
+      [
+        "MarioSoundController",
+        [
+          2,
+          11
+        ]
+      ],
+      [
+        "MelodyChaser3D",
+        [
+          5,
+          11
+        ]
+      ],
+      [
+        "DualBallFMController",
+        [
+          8,
+          11
+        ]
+      ],
+      [
+        "MarioSoundController",
+        [
+          2,
+          12
+        ]
+      ],
+      [
+        "lab_table",
+        [
+          4,
+          12
+        ]
+      ],
+      [
+        "gate:wavefunctions effect sound",
+        []
+      ]
+    ],
+    "built_refused": [],
+    "built_seals": {
+      "1,1": "BigPipeSystem",
+      "10,2": "pick_up_cube",
+      "10,3": "cable_builder",
+      "10,4": "dark_sphere",
+      "10,5": "audio_catalog_tablet",
+      "10,6": "audio_catalog_tablet",
+      "11,2": "GlassRack",
+      "11,3": "cable_builder",
+      "11,5": "AudioContr",
+      "11,7": "pick_up_cube",
+      "2,10": "MarioSoundController",
+      "2,11": "MarioSoundController",
+      "2,12": "MarioSoundController",
+      "2,2": "pick_up_cube",
+      "2,3": "pick_up_cube",
+      "3,10": "MarioSoundController",
+      "3,11": "MarioSoundController",
+      "3,12": "MarioSoundController",
+      "3,2": "AudioContr",
+      "3,3": "AudioContr",
+      "3,4": "AudioContr",
+      "3,8": "harmonic_distance_table",
+      "3,9": "GlassRack",
+      "4,12": "lab_table",
+      "5,10": "MelodyChaser3D",
+      "5,11": "MelodyChaser3D",
+      "5,12": "lab_table",
+      "5,2": "pick_up_cube",
+      "5,3": "RackSineBasic",
+      "5,5": "Rack303Acid",
+      "5,7": "chord_tension_spring",
+      "5,8": "chord_tension_spring",
+      "6,10": "MelodyChaser3D",
+      "6,11": "MelodyChaser3D",
+      "6,3": "RackSineBasic",
+      "6,5": "Rack303Acid",
+      "6,6": "wave_interference_3d",
+      "7,10": "DualBallFMController",
+      "7,11": "DualBallFMController",
+      "7,5": "rack_room",
+      "8,10": "DualBallFMController",
+      "8,11": "DualBallFMController",
+      "8,3": "cable_builder",
+      "8,4": "pick_up_cube",
+      "8,5": "RackMoogBass",
+      "9,10": "DualBallFMController",
+      "9,11": "DualBallFMController",
+      "9,3": "cable_builder",
+      "9,4": "pick_up_cube",
+      "9,5": "RackDX7Piano",
+      "9,6": "AudioContr",
+      "9,8": "timbre_sculptor"
+    },
+    "built_severed": [
+      {
+        "cells": [
+          [
+            2,
+            2
+          ]
+        ],
+        "token": "pick_up_cube"
+      },
+      {
+        "cells": [
+          [
+            11,
+            5
+          ]
+        ],
+        "token": "AudioContr"
+      },
+      {
+        "cells": [
+          [
+            11,
+            7
+          ]
+        ],
+        "token": "pick_up_cube"
+      }
+    ],
+    "bus_names_after_build": [
+      "Master",
+      "EmTone",
+      "EmSpace",
+      "RackBus_392754629923",
+      "RackBus_409481514740",
+      "LayoutBus_440116711164",
+      "LayoutBus_450317259409",
+      "LayoutBus_460501029731",
+      "LayoutBus_464544339114",
+      "RackBus_468604425578",
+      "RackBus_500430804952"
+    ],
+    "bus_names_after_free": [
+      "Master",
+      "EmTone",
+      "EmSpace"
+    ],
+    "buses_after_build": 11,
+    "buses_after_free": 3,
+    "buses_before_build": 1,
+    "cage_floor_heights": [
+      0.920000016689301,
+      0.920000016689301
+    ],
+    "captures": {
+      "overview": {
+        "at": [
+          6.5,
+          2.3,
+          0.8
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2660",
+        "forward": [
+          0.14,
+          -0.13,
+          0.98
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          8.6,
+          1.55,
+          9.2
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2660",
+        "forward": [
+          -0.09,
+          -0.19,
+          0.98
+        ],
+        "is_ours": true
+      },
+      "readout": {
+        "at": [
+          9.08,
+          0.69,
+          9.88
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2660",
+        "forward": [
+          0.0,
+          -0.02,
+          1.0
+        ],
+        "is_ours": true
+      },
+      "scope": {
+        "at": [
+          8.25,
+          1.55,
+          9.95
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2660",
+        "forward": [
+          0.0,
+          -0.06,
+          1.0
+        ],
+        "is_ours": true
+      }
+    },
+    "desktop_input": {
+      "baseline": {
+        "control": "iana-pavilion-chain/DualBallFMController/Staging/Panel/Btn_0",
+        "hover": "lBallFMController/Staging/Panel/Btn_0/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            0.03,
+            -0.7,
+            0.71
+          ],
+          "camera_from": [
+            7.75,
+            1.6,
+            9.94
+          ],
+          "independent_ray": "-chain/DualBallFMController/Staging/Panel/Btn_0/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "-chain/DualBallFMController/Staging/Panel/Btn_0/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            7.79,
+            0.71,
+            10.83
+          ]
+        },
+        "stand": [
+          7.75,
+          0.0,
+          9.94
+        ]
+      },
+      "compare": {
+        "control": "iana-pavilion-chain/DualBallFMController/Staging/Panel/Btn_3",
+        "hover": "lBallFMController/Staging/Panel/Btn_3/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.03,
+            -0.75,
+            0.67
+          ],
+          "camera_from": [
+            7.75,
+            1.6,
+            9.94
+          ],
+          "independent_ray": "-chain/DualBallFMController/Staging/Panel/Btn_3/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "-chain/DualBallFMController/Staging/Panel/Btn_3/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            7.71,
+            0.66,
+            10.78
+          ]
+        },
+        "stand": [
+          7.75,
+          0.0,
+          9.94
+        ]
+      },
+      "front_capture_pose": {
+        "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+        "eye": [
+          7.75,
+          1.6,
+          9.94
+        ],
+        "forward": [
+          0.35,
+          -0.32,
+          0.88
+        ],
+        "rig": [
+          7.75,
+          0.0,
+          9.94
+        ]
+      },
+      "hold": {
+        "control": "iana-pavilion-chain/DualBallFMController/Staging/Panel/Btn_1",
+        "hover": "lBallFMController/Staging/Panel/Btn_1/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.03,
+            -0.7,
+            0.71
+          ],
+          "camera_from": [
+            7.75,
+            1.6,
+            9.94
+          ],
+          "independent_ray": "-chain/DualBallFMController/Staging/Panel/Btn_1/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "-chain/DualBallFMController/Staging/Panel/Btn_1/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            7.71,
+            0.71,
+            10.83
+          ]
+        },
+        "stand": [
+          7.75,
+          0.0,
+          9.94
+        ]
+      },
+      "log": [
+        {
+          "event": "walker_cam_guard_stopped",
+          "value": true
+        },
+        {
+          "at": [
+            7.75,
+            0.0,
+            9.94000053405762
+          ],
+          "event": "spawn"
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.75,
+              1.6,
+              9.94
+            ],
+            "forward": [
+              0.03,
+              -0.7,
+              0.71
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.75,
+              0.0,
+              9.94
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "iana-pavilion-chain/DualBallFMController/Staging/Panel/Btn_0",
+            "hover": "lBallFMController/Staging/Panel/Btn_0/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                0.03,
+                -0.7,
+                0.71
+              ],
+              "camera_from": [
+                7.75,
+                1.6,
+                9.94
+              ],
+              "independent_ray": "-chain/DualBallFMController/Staging/Panel/Btn_0/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "-chain/DualBallFMController/Staging/Panel/Btn_0/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                7.79,
+                0.71,
+                10.83
+              ]
+            },
+            "stand": [
+              7.75,
+              0.0,
+              9.94
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.75,
+              1.6,
+              9.94
+            ],
+            "forward": [
+              -0.03,
+              -0.7,
+              0.71
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.75,
+              0.0,
+              9.94
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "iana-pavilion-chain/DualBallFMController/Staging/Panel/Btn_1",
+            "hover": "lBallFMController/Staging/Panel/Btn_1/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.03,
+                -0.7,
+                0.71
+              ],
+              "camera_from": [
+                7.75,
+                1.6,
+                9.94
+              ],
+              "independent_ray": "-chain/DualBallFMController/Staging/Panel/Btn_1/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "-chain/DualBallFMController/Staging/Panel/Btn_1/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                7.71,
+                0.71,
+                10.83
+              ]
+            },
+            "stand": [
+              7.75,
+              0.0,
+              9.94
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.75,
+              1.6,
+              9.94
+            ],
+            "forward": [
+              -0.03,
+              -0.75,
+              0.67
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.75,
+              0.0,
+              9.94
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "iana-pavilion-chain/DualBallFMController/Staging/Panel/Btn_3",
+            "hover": "lBallFMController/Staging/Panel/Btn_3/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.03,
+                -0.75,
+                0.67
+              ],
+              "camera_from": [
+                7.75,
+                1.6,
+                9.94
+              ],
+              "independent_ray": "-chain/DualBallFMController/Staging/Panel/Btn_3/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "-chain/DualBallFMController/Staging/Panel/Btn_3/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                7.71,
+                0.66,
+                10.78
+              ]
+            },
+            "stand": [
+              7.75,
+              0.0,
+              9.94
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.75,
+              1.6,
+              9.94
+            ],
+            "forward": [
+              0.35,
+              -0.32,
+              0.88
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.75,
+              0.0,
+              9.94
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              8.5,
+              1.65,
+              7.6
+            ],
+            "forward": [
+              0.0,
+              -0.12,
+              0.99
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              8.5,
+              0.05,
+              7.6
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 45,
+          "moved": [
+            0.0,
+            -0.05,
+            3.04
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@2659/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              8.5,
+              1.6,
+              10.64
+            ],
+            "forward": [
+              0.0,
+              -0.12,
+              0.99
+            ],
+            "rig": [
+              8.5,
+              0.0,
+              10.64
+            ]
+          }
+        },
+        {
+          "current_camera_after": "/root/EndlessMuseum/Walker/@Camera3D@4",
+          "event": "teardown"
+        }
+      ],
+      "tag_after_baseline": "baseline",
+      "walk_to_the_desks": [
+        0.0,
+        3.04
+      ],
+      "walker_cam_guard_stopped": true
+    },
+    "differs_after_index_move": [
+      "I 0.00→4.00"
+    ],
+    "drag_test": {
+      "drag_notes": 5,
+      "elapsed_s": 1.647,
+      "last_synth_ms": 45.435,
+      "moves": 20
+    },
+    "front_local": [
+      0.0,
+      -1.0
+    ],
+    "index4_decay1.5_tail_diff": 0.0303824610211299,
+    "index4_vs_baseline_head_diff": 0.320781423596247,
+    "index4_vs_baseline_tail_diff": 0.00882501871446859,
+    "melody_chaser": {
+      "beat_interval": 1.0,
+      "markers": 13,
+      "scale": "fifths_circle"
+    },
+    "museum_severed": [
+      {
+        "cells": [
+          [
+            2,
+            2
+          ]
+        ],
+        "token": "pick_up_cube"
+      },
+      {
+        "cells": [
+          [
+            11,
+            5
+          ]
+        ],
+        "token": "AudioContr"
+      },
+      {
+        "cells": [
+          [
+            11,
+            7
+          ]
+        ],
+        "token": "pick_up_cube"
+      }
+    ],
+    "museum_severed_tokens": [
+      "pick_up_cube",
+      "AudioContr",
+      "pick_up_cube"
+    ],
+    "museum_walk_reopened": [],
+    "museum_walk_severed": [],
+    "origin_local": [
+      8.5,
+      0.0,
+      11.5
+    ],
+    "panel_local": [
+      7.75,
+      0.660000026226044,
+      10.8400001525879
+    ],
+    "panel_rig_x": 0.75,
+    "player_reach": [
+      3.0,
+      18.0
+    ],
+    "players_playing_beyond_5m": [
+      [
+        "vilion-chain/HarmonicDistanceTable/@AudioStreamPlayer3D@1351",
+        5.9
+      ],
+      [
+        "vilion-chain/HarmonicDistanceTable/@AudioStreamPlayer3D@1352",
+        5.9
+      ]
+    ],
+    "players_playing_within_5m": [],
+    "plinths": [
+      [
+        "ArtPlinth0",
+        9,
+        2
+      ]
+    ],
+    "rack_buses_left_after_free": 0,
+    "readout_height": 0.667713463306427,
+    "readout_rig_x": -0.579999923706055,
+    "reference_seconds": 1.8,
+    "scope_bottom": 1.49999997019768,
+    "scope_lanes": [
+      "Lane_modulator",
+      "Lane_carrier",
+      "Lane_rule",
+      "Lane_output"
+    ],
+    "sculptor_distance_from_desks": 3.31662487983704,
+    "sculptor_listener_guard_timers_stopped": 1,
+    "staging_between_the_balls": [],
+    "streaming": {
+      "freed": true,
+      "rebuildable": true
+    },
+    "synth_ms_index4": 49.995,
+    "walk_down_to_the_desks_front": 1.0,
+    "walk_into_the_desks": 0.63671875,
+    "walk_row_7_east_to_the_audition_quarter": 1.0,
+    "walk_the_audition_floor_west_of_the_desks": 1.0,
+    "walk_to_the_south_door": 1.0,
+    "walk_west_aisle_past_the_bench_row": 1.0
+  },
+  "physics_fps": 60
+}

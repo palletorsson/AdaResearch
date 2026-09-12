@@ -1,136 +1,59 @@
 # WaveFunctions Effect Sound — Technical
 
-Four synthesiser stations drive oscillators at different waveforms and pipe their output to Godot's audio bus. An FFT station decomposes live input into frequency components.
+## The primary: two balls, six parameters, one expression
+
+`DualBallFMController` (`algorithms/wavefunctions/mariocontrol/DualBallFMController.gd`) holds two `ValueMapper3D` cages of 0.5 m. Each cage maps its ball's position along x, y and z onto three parameters, and emits `values_changed` every frame; the rig ignores an unchanged triple.
+
+| ball | x | y | z |
+|---|---|---|---|
+| carrier (blue) | frequency 100–2000 Hz | attack 0.01–0.5 s | decay 0.1–3.0 s |
+| modulator (orange) | ratio 0.5–8 | index 0–10 | modulator decay 0.1–2.0 s |
+
+A note is synthesised when a ball has moved more than 1 cm since the last note and at least 0.3 s have passed (`movement_threshold`, `min_play_interval`), or when an audition button is pressed. The whole note is computed on the main thread, at 44,100 samples per second, for 1.2 × the decay and three seconds at most:
 
 ```gdscript
-class_name Synthesizer extends AudioStreamPlayer
-
-@export var frequency: float = 440.0  # Hz
-@export var waveform: String = "sine"
-
-var stream_generator: AudioStreamGenerator
-var playback: AudioStreamGeneratorPlayback
-
-func _ready() -> void:
-    stream_generator = AudioStreamGenerator.new()
-    stream_generator.mix_rate = 44100.0
-    stream_generator.buffer_length = 0.1
-    stream = stream_generator
-    play()
-    playback = get_stream_playback()
-    fill_buffer()
-
-func fill_buffer() -> void:
-    var sample_rate: float = stream_generator.mix_rate
-    while playback.can_push_buffer(1):
-        var phase_step: float = frequency / sample_rate * TAU
-        var sample: float = waveform_sample(phase)
-        playback.push_frame(Vector2(sample, sample))
-        phase = fmod(phase + phase_step, TAU)
-
-func waveform_sample(phase: float) -> float:
-    match waveform:
-        "sine": return sin(phase)
-        "square": return 1.0 if sin(phase) > 0.0 else -1.0
-        "sawtooth": return 2.0 * (phase / TAU) - 1.0
-        "triangle":
-            var t: float = phase / TAU
-            return 2.0 * abs(2.0 * (t - floor(t + 0.5))) - 1.0
-    return 0.0
+	var duration = min(decay_time * 1.2, 3.0)
 ```
 
-## FFT
-
-The FFT monitor decomposes the live audio signal into frequency bins. Godot's `AudioServer.get_bus_peak_volume_left_db` exposes bus levels but not full spectra; a custom FFT implementation reads the audio buffer and transforms it.
+Per sample, the modulator is a decaying sinusoid at `mod_ratio` times the carrier's frequency, and it enters the carrier's phase:
 
 ```gdscript
-class_name FFTMonitor extends Node
-
-@export var buffer_size: int = 1024
-
-var samples: PackedFloat32Array
-
-func compute_fft() -> PackedFloat32Array:
-    # Cooley-Tukey radix-2 FFT
-    var n: int = samples.size()
-    if n <= 1: return samples
-    # Bit-reverse permutation
-    var real: PackedFloat32Array = samples.duplicate()
-    var imag: PackedFloat32Array = []; imag.resize(n)
-    bit_reverse_permute(real)
-    # Butterfly stages
-    var stage: int = 1
-    while stage < n:
-        var angle_step: float = -PI / stage
-        for k in range(0, n, stage * 2):
-            for j in range(stage):
-                var angle: float = angle_step * j
-                var wr: float = cos(angle)
-                var wi: float = sin(angle)
-                # butterfly
-                var tr: float = wr * real[k + j + stage] - wi * imag[k + j + stage]
-                var ti: float = wr * imag[k + j + stage] + wi * real[k + j + stage]
-                real[k + j + stage] = real[k + j] - tr
-                imag[k + j + stage] = imag[k + j] - ti
-                real[k + j] += tr
-                imag[k + j] += ti
-        stage *= 2
-    var spectrum: PackedFloat32Array = []
-    for i in range(n / 2):
-        spectrum.append(sqrt(real[i] * real[i] + imag[i] * imag[i]))
-    return spectrum
+		var mod_env = exp(-t / mod_decay)
+		var modulator_freq = carrier_freq * mod_ratio
+		var modulator = sin(2.0 * PI * modulator_freq * t) * mod_index * mod_env
+		var carrier_env = attack_env * decay_env
+		var output = sin(2.0 * PI * carrier_freq * t + modulator) * carrier_env
+		output = tanh(output * 0.8) * 0.5
 ```
 
-## Complexity
+`attack_env` ramps linearly from 0 to 1 over `attack_time`; `decay_env` is `exp(-(t - attack_time) / decay_time)` after it. The tanh keeps every sample within ±0.5, so no setting clips. With `mod_index` 0 the modulator term is zero and the note is the bare carrier under its envelope and the tanh — unmodulated, not unprocessed — which is what BASELINE deals: 440 Hz, a 10 ms attack, a 1.5 s decay (a 1.8 s note), ratio 2, index 0, modulator decay 0.5 s.
 
-The FFT is O(N log N) for N samples. At N=1024, that is roughly 10,000 operations per transform; at 30 Hz update rate the total cost is 300,000 operations per second, well within budget.
+## The audition
 
-Per-sample synthesis is O(1). The per-frame audio buffer fill is O(buffer_size); at 44100 Hz mix rate and 0.1s buffer, that is 4410 samples per 100 ms, running continuously.
+Under the `#stand:desks` staging the rig builds two desks (0.92 m, the cages' floor), a shelf for the colour cube, an AUDITION panel and a cased readout leaning low in front of the desks at 0.66 m (below the hand space, since the visual pass of 12 September; they had stood centred at 1.02 and 1.30 m between the balls), the scope 0.12 m above the cages so a standing eye sees the balls and all four lanes in one view. HOLD stores the six values and the synthesised note itself as A; COMPARE plays A, waits its length plus a quarter second, then plays the current note B; PLAY re-plays B without a move; BASELINE deals the unmodulated note. The readout prints the current six values, the held six, which of them differ (`differs: I 0.00→4.00`), and, on its last line, what is sounding, the note's length, the synthesis time in milliseconds and the count of notes played. `get_audition_state()` and `render_samples()` expose the same facts to a probe as numbers.
 
-## Latency
+## The scope
 
-Every audio stage adds latency. Buffer size directly affects latency: a 100 ms buffer adds 100 ms of delay between a key press and the first sample of audible sound. Interactive audio applications minimise buffer size at the cost of higher CPU usage and occasional underruns.
+`#evidence:longhand` builds a plate above the cages with four lanes — the modulator, the bare carrier, a rule, the output — each drawn from `_fm_sample()`, which is the generator's inner loop without the byte packing, over two carrier periods starting at the top of the attack, 1200 points per lane. The captions are the terms as the generator writes them: `m(t) = I · e^(−t/τm) · sin(2π · R · fc · t)` and `out(t) = sin(2π · fc · t + m(t)) · env(t)`.
 
-Within the sequence, Effect_Sound is the pivot from visible waves to audible ones. Bernini will next treat wave geometry as sculptural form.
+## Sound locality and cleanup
 
-## Additive Synthesis
+The shipped player reaches 40 m; on the desks the rig shortens it to 18 m so the note stays in its hall. The `timbre_sculptor` at (9,8), 3.3 m from the desks, hums continuously as shipped; this placement's `#sound:near` (an opt-in word on that artifact, default off) lets its tone sound only while the listener — the viewport's camera — is within 3 m. Everything the staging builds is freed with the rig; the racks' dedicated audio buses are removed in their `_exit_tree`, so the museum's streamer leaves no bus behind when it frees and rebuilds the hall.
 
-Any periodic waveform can be built by adding sinusoids. The Fourier series expansion of a square wave is Σ (1/n) sin(nωt) for odd n. A sawtooth is Σ (1/n) sin(nωt) for all n. Truncating the series to a finite number of harmonics produces band-limited waveforms that avoid aliasing at high pitches.
+## Background: the vocabulary the racks use
 
-```gdscript
-func band_limited_square(phase: float, harmonics: int) -> float:
-    var result: float = 0.0
-    for k in range(1, harmonics + 1, 2):  # odd harmonics only
-        result += sin(phase * k) / k
-    return result * 4.0 / PI
-```
+### Additive synthesis
 
-## Sample Rate and Aliasing
+Any periodic waveform can be built by adding sinusoids. The Fourier series of a square wave is Σ (1/n) sin(nωt) for odd n; a sawtooth is Σ (1/n) sin(nωt) for all n. Truncating the series to a finite number of harmonics produces band-limited waveforms that avoid aliasing at high pitches. The `timbre_sculptor` stacks integer multiples of one fundamental this way, which is why no bell is reachable from its sliders.
 
-Generating audio at 44100 Hz restricts the signal's frequency content to half that rate — the Nyquist frequency at 22050 Hz. Any signal component above Nyquist folds back into the audible range as aliased frequencies. Band-limited synthesis techniques (windowed sinc interpolation, polyBLEP correction) prevent aliasing at the cost of additional computation.
+### Sample rate and aliasing
 
-## Subtractive Synthesis
+Generating audio at 44,100 Hz restricts the signal's frequency content to half that rate, the Nyquist frequency at 22,050 Hz. Any component above it folds back into the audible range as an alias. Under heavy modulation the FM rig's instantaneous frequency reaches fc·(1 + I·R·e^(−t/τm)); at the highest settings the top of that sweep aliases, which is audible as a metallic edge and is part of the room's offer of awkward timbres.
 
-The complementary technique filters a harmonically rich source through lowpass, highpass, or bandpass filters. An analog-style lowpass filter is a resonant biquad section:
+### Subtractive synthesis
 
-```gdscript
-func biquad_lowpass(input: float, state: Array, cutoff: float, q: float, sr: float) -> float:
-    var omega: float = 2.0 * PI * cutoff / sr
-    var sin_w: float = sin(omega)
-    var cos_w: float = cos(omega)
-    var alpha: float = sin_w / (2.0 * q)
-    var b0: float = (1.0 - cos_w) / 2.0
-    var b1: float = 1.0 - cos_w
-    var b2: float = (1.0 - cos_w) / 2.0
-    var a0: float = 1.0 + alpha
-    var a1: float = -2.0 * cos_w
-    var a2: float = 1.0 - alpha
-    var output: float = (b0 / a0) * input + (b1 / a0) * state[0] + (b2 / a0) * state[1] - (a1 / a0) * state[2] - (a2 / a0) * state[3]
-    state[1] = state[0]; state[0] = input
-    state[3] = state[2]; state[2] = output
-    return output
-```
+The complementary technique filters a harmonically rich source through lowpass, highpass or bandpass filters; the Moog and 303 racks work this way, a resonant lowpass carving a saw or a square down to a bass or a squelch.
 
-## Envelope Generators
+### Envelope generators
 
-An amplitude envelope shapes each note's volume over time. The classical ADSR model has four phases: Attack (rise to peak), Decay (drop to sustain), Sustain (held level), Release (drop to zero).
+An amplitude envelope shapes each note's volume over time. The classical ADSR has four phases: attack, decay, sustain, release. The FM rig uses two of them, a linear attack and an exponential decay, and gives the modulator its own decay, which is what lets the character of a note change independently of its loudness.
