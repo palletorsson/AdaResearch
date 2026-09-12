@@ -1,25 +1,53 @@
 # Tutorial — Random_Entropy
 
 ## Claim
-Entropy measures surprise, not mess. A shuffled deck and a sorted deck weigh the same; they differ in how many bits it takes to say which one you have.
+Entropy measures surprise, not mess. Sort a sequence of two hundred draws into blocks and the gauge reads the same number; change the shares between the symbols and it falls. Every excerpt below is from `commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd`, the room's gauge.
 
 ## Idea
-Shannon's move: don't ask what a message *means*, ask how *unexpected* it is. If every symbol is certain, entropy is zero — nothing to learn. If every symbol is equally likely, entropy is maximal — each one costs a full log2(N) bits to name. Everything in this room is a probability distribution wearing a body: the jar (order decaying toward uniform), the hardware (physical noise harvested as bits), the PRNG (a short seed pretending to be surprise).
+Shannon's move: do not ask what a message means, ask how unexpected each symbol is. If every draw is the same symbol, the single-symbol entropy is zero; this measurement leaves other questions about the sequence open. If ten symbols are equally likely, their entropy is log₂(10) = 3.32 bits per symbol; a fixed binary label for one of ten symbols still needs four bits. The gauge draws a sample, tallies it, and applies the formula to the tallies.
 
 ## Code
-```python
-import math
-def entropy(probs):
-    return -sum(p * math.log2(p) for p in probs if p > 0)
+Draw the sample from a seeded local generator, so the same two hundred symbols arrive every time the gauge is built:
 
-entropy([1.0])                  # 0.0    - certainty, no surprise
-entropy([0.5, 0.5])             # 1.0    - one fair coin, one bit
-entropy([1/6.0] * 6)            # 2.585  - one fair die
-entropy([0.9, 0.1])             # 0.469  - a loaded coin tells you less
+```gdscript
+	for i in range(sequence_length):
+		sequence.append(_rng.randi_range(0, num_symbols - 1))
+```
+
+Tally it — one count per symbol, nothing about position:
+
+```gdscript
+	for s in sequence:
+		counts[s] += 1
+```
+
+Turn the tallies into bits, skipping symbols that never occurred (a zero share has no logarithm):
+
+```gdscript
+	for c in counts:
+		if c > 0:
+			var p: float = float(c) / float(sequence_length)
+			entropy -= p * (log(p) / log(2.0))
+```
+
+Know the ceiling, which depends only on the alphabet:
+
+```gdscript
+	var max_h: float = log(num_symbols) / log(2.0)
+```
+
+The same loop, over any counts, is what the desk's readout uses for the sorted copy:
+
+```gdscript
+static func entropy_of(counts: Array, n: int) -> float:
 ```
 
 ## Try
-1. Read the Shannon meter, then look at what it is measuring. Low number: could you have guessed the next state? High number: could you?
-2. Watch the jar and the hardware decay. Nobody is stirring them. Ask what "work" would mean here — what it would cost to put the order back.
-3. Stand between the true and pseudo generators. One is harvested, one is grown from a seed you could write on a fingernail. Can you tell them apart? Can the meter?
-4. End at the dark sphere. It is the room's honest object: the thing about which the meter can only say "maximal — I know nothing."
+1. Read the tiles and the bars before the number. The bars are the tallies; the tiles are the order.
+2. Press SORT. The tiles regroup into ten blocks; the bars and H stay. The readout counts how many tiles moved and prints the sorted copy's H beside the reading.
+3. Press CONTRAST. Same ten symbols, same two hundred draws, a concentrated source: the number falls to about two bits and the first bar towers.
+4. Press DISCLOSE until the formula and then the source appear on the panel. The reading stays while the upper panel reveals its account; the desk keeps its tiles and readout. At the source rung the pale bars behind the live ones are the named source's expected counts — a flat line for the even source, a staircase for the concentrated one — and the plate prints them.
+5. Ask what the number did not notice: the order, any pattern between neighbours, whether the row meant anything.
+
+## Where it goes
+The next room, Random_Remove, makes the eligible set spatial: a rule decides what can be chosen before anything is removed at random.

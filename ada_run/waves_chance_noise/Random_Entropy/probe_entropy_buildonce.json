@@ -1,0 +1,136 @@
+{
+  "checks": 15,
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "measurements": {
+    "a_default": {
+      "entropy": 3.25564732026922,
+      "first10": [
+        7,
+        4,
+        8,
+        2,
+        5,
+        1,
+        1,
+        8,
+        8,
+        2
+      ],
+      "shape": {
+        "bars": 10,
+        "children": 42,
+        "disclosure": "works",
+        "formula": true,
+        "ghosts": 0,
+        "labels": 10,
+        "origin": false,
+        "staging": false,
+        "stand": "none",
+        "symbols": 10,
+        "tags": 1
+      }
+    },
+    "b_pre_ready_origin": {
+      "entropy": 3.25564732026922,
+      "shape": {
+        "bars": 10,
+        "children": 55,
+        "disclosure": "origin",
+        "formula": true,
+        "ghosts": 10,
+        "labels": 10,
+        "origin": true,
+        "staging": false,
+        "stand": "none",
+        "symbols": 10,
+        "tags": 1
+      }
+    },
+    "c_post_ready_tally": {
+      "shape": {
+        "bars": 10,
+        "children": 40,
+        "disclosure": "tally",
+        "formula": false,
+        "ghosts": 0,
+        "labels": 10,
+        "origin": false,
+        "staging": false,
+        "stand": "none",
+        "symbols": 10,
+        "tags": 1
+      }
+    },
+    "d_steps": {
+      "rungs": [
+        "oracle",
+        "tally",
+        "ledger",
+        "works"
+      ],
+      "shape": {
+        "bars": 10,
+        "children": 42,
+        "disclosure": "works",
+        "formula": true,
+        "ghosts": 0,
+        "labels": 10,
+        "origin": false,
+        "staging": false,
+        "stand": "none",
+        "symbols": 10,
+        "tags": 1
+      }
+    },
+    "e_seed7": {
+      "bars_e1": 10,
+      "bars_e2": 10,
+      "first10": [
+        3,
+        1,
+        8,
+        1,
+        7,
+        7,
+        6,
+        7,
+        5,
+        5
+      ],
+      "same_as_default": false
+    },
+    "f_pre_ready_ledger": {
+      "shape": {
+        "bars": 10,
+        "children": 42,
+        "disclosure": "ledger",
+        "formula": false,
+        "ghosts": 0,
+        "labels": 10,
+        "origin": false,
+        "staging": true,
+        "stand": "ledger",
+        "symbols": 10,
+        "tags": 1
+      },
+      "tiles": 200
+    },
+    "g_post_ready_origin": {
+      "shape": {
+        "bars": 10,
+        "children": 55,
+        "disclosure": "origin",
+        "formula": true,
+        "ghosts": 10,
+        "labels": 10,
+        "origin": true,
+        "staging": false,
+        "stand": "none",
+        "symbols": 10,
+        "tags": 1
+      }
+    }
+  },
+  "subject": "shannon_entropy_meter alone (no museum)"
+}

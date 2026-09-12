@@ -1,0 +1,1106 @@
+{
+  "checks": 96,
+  "control_path": "panel buttons through the push button's own signal; measure() for the contract's ends; the live lane adds the desktop rig's pointer pressing the panel; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "Random_Entropy",
+  "measurements": {
+    "after_sort": {
+      "counts": [
+        17,
+        11,
+        21,
+        31,
+        17,
+        18,
+        19,
+        24,
+        13,
+        29
+      ],
+      "entropy": 3.25564732026922,
+      "sort_t": 1.0,
+      "sorted_counts": [
+        17,
+        11,
+        21,
+        31,
+        17,
+        18,
+        19,
+        24,
+        13,
+        29
+      ],
+      "sorted_entropy": 3.25564732026922,
+      "sorted_view": true,
+      "tiles_moved": 198
+    },
+    "arrival": {
+      "counts": [
+        17,
+        11,
+        21,
+        31,
+        17,
+        18,
+        19,
+        24,
+        13,
+        29
+      ],
+      "entropy": 3.25564732026922,
+      "max": 3.32192809488736,
+      "seed": 1342042698,
+      "source": "uniform",
+      "sum": 200
+    },
+    "captures": {
+      "contrast": {
+        "at": [
+          6.95,
+          1.55,
+          6.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3474",
+        "forward": [
+          -0.96,
+          -0.27,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "origin": {
+        "at": [
+          6.5,
+          1.45,
+          6.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3474",
+        "forward": [
+          -1.0,
+          -0.05,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "overview": {
+        "at": [
+          8.6,
+          2.0,
+          10.6
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3474",
+        "forward": [
+          -0.56,
+          -0.18,
+          -0.81
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          6.95,
+          1.55,
+          6.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3474",
+        "forward": [
+          -0.96,
+          -0.27,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "readout": {
+        "at": [
+          6.81,
+          1.27,
+          7.05
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3474",
+        "forward": [
+          -0.75,
+          -0.66,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "ribbon": {
+        "at": [
+          6.6,
+          1.35,
+          6.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3474",
+        "forward": [
+          -0.87,
+          -0.5,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "sorted": {
+        "at": [
+          6.95,
+          1.55,
+          6.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3474",
+        "forward": [
+          -0.96,
+          -0.27,
+          0.0
+        ],
+        "is_ours": true
+      }
+    },
+    "contract_ends": {
+      "even": 3.32192809488736,
+      "log2_10": 3.32192809488736,
+      "single_symbol": 0.0
+    },
+    "contrast": {
+      "counts": [
+        109,
+        46,
+        20,
+        17,
+        6,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "entropy": 1.81760045686154,
+      "seed": 1342042699,
+      "source": "concentrated",
+      "strip": "1 0 2 5 0 0 2 2 3 3 0 0 0 0 0 2 4 1 0 0 1 0 1 1 1 3 0 0 4 1 0 0 3 0 0 1 0 2 1 0 ...",
+      "sum": 200
+    },
+    "desk_top": 0.92000000834465,
+    "desktop_input": {
+      "front_capture_pose": {
+        "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+        "eye": [
+          7.7,
+          1.6,
+          6.0
+        ],
+        "forward": [
+          -0.95,
+          -0.21,
+          0.24
+        ],
+        "rig": [
+          7.7,
+          0.0,
+          6.0
+        ]
+      },
+      "log": [
+        {
+          "event": "walker_cam_guard_stopped",
+          "value": true
+        },
+        {
+          "at": [
+            7.69999980926514,
+            0.0,
+            6.0
+          ],
+          "event": "spawn"
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.7,
+              1.6,
+              6.0
+            ],
+            "forward": [
+              -0.86,
+              -0.5,
+              -0.12
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "_soane-cabinet-vista/ShannonEntropyMeter/Staging/Panel/Btn_0",
+            "hover": "annonEntropyMeter/Staging/Panel/Btn_0/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.86,
+                -0.5,
+                -0.12
+              ],
+              "camera_from": [
+                7.7,
+                1.6,
+                6.0
+              ],
+              "independent_ray": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_0/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_0/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                6.23,
+                0.75,
+                5.8
+              ]
+            },
+            "stand": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.7,
+              1.6,
+              6.0
+            ],
+            "forward": [
+              -0.95,
+              -0.21,
+              0.24
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.7,
+              1.6,
+              6.0
+            ],
+            "forward": [
+              -0.86,
+              -0.5,
+              -0.12
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "_soane-cabinet-vista/ShannonEntropyMeter/Staging/Panel/Btn_0",
+            "hover": "annonEntropyMeter/Staging/Panel/Btn_0/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.86,
+                -0.5,
+                -0.12
+              ],
+              "camera_from": [
+                7.7,
+                1.6,
+                6.0
+              ],
+              "independent_ray": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_0/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_0/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                6.23,
+                0.75,
+                5.8
+              ]
+            },
+            "stand": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.7,
+              1.6,
+              6.0
+            ],
+            "forward": [
+              -0.86,
+              -0.49,
+              -0.16
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "_soane-cabinet-vista/ShannonEntropyMeter/Staging/Panel/Btn_1",
+            "hover": "annonEntropyMeter/Staging/Panel/Btn_1/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.86,
+                -0.49,
+                -0.16
+              ],
+              "camera_from": [
+                7.7,
+                1.6,
+                6.0
+              ],
+              "independent_ray": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_1/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_1/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                6.23,
+                0.75,
+                5.73
+              ]
+            },
+            "stand": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.7,
+              1.6,
+              6.0
+            ],
+            "forward": [
+              -0.86,
+              -0.49,
+              -0.16
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "_soane-cabinet-vista/ShannonEntropyMeter/Staging/Panel/Btn_1",
+            "hover": "annonEntropyMeter/Staging/Panel/Btn_1/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.86,
+                -0.49,
+                -0.16
+              ],
+              "camera_from": [
+                7.7,
+                1.6,
+                6.0
+              ],
+              "independent_ray": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_1/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_1/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                6.23,
+                0.75,
+                5.73
+              ]
+            },
+            "stand": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.7,
+              1.6,
+              6.0
+            ],
+            "forward": [
+              -0.85,
+              -0.49,
+              -0.2
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "_soane-cabinet-vista/ShannonEntropyMeter/Staging/Panel/Btn_2",
+            "hover": "annonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.85,
+                -0.49,
+                -0.2
+              ],
+              "camera_from": [
+                7.7,
+                1.6,
+                6.0
+              ],
+              "independent_ray": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                6.23,
+                0.75,
+                5.65
+              ]
+            },
+            "stand": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.7,
+              1.6,
+              6.0
+            ],
+            "forward": [
+              -0.85,
+              -0.49,
+              -0.2
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "_soane-cabinet-vista/ShannonEntropyMeter/Staging/Panel/Btn_2",
+            "hover": "annonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.85,
+                -0.49,
+                -0.2
+              ],
+              "camera_from": [
+                7.7,
+                1.6,
+                6.0
+              ],
+              "independent_ray": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                6.23,
+                0.75,
+                5.65
+              ]
+            },
+            "stand": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.7,
+              1.6,
+              6.0
+            ],
+            "forward": [
+              -0.85,
+              -0.49,
+              -0.2
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "_soane-cabinet-vista/ShannonEntropyMeter/Staging/Panel/Btn_2",
+            "hover": "annonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.85,
+                -0.49,
+                -0.2
+              ],
+              "camera_from": [
+                7.7,
+                1.6,
+                6.0
+              ],
+              "independent_ray": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                6.23,
+                0.75,
+                5.65
+              ]
+            },
+            "stand": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.7,
+              1.6,
+              6.0
+            ],
+            "forward": [
+              -0.85,
+              -0.49,
+              -0.2
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "_soane-cabinet-vista/ShannonEntropyMeter/Staging/Panel/Btn_2",
+            "hover": "annonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.85,
+                -0.49,
+                -0.2
+              ],
+              "camera_from": [
+                7.7,
+                1.6,
+                6.0
+              ],
+              "independent_ray": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                6.23,
+                0.75,
+                5.65
+              ]
+            },
+            "stand": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.7,
+              1.6,
+              6.0
+            ],
+            "forward": [
+              -0.85,
+              -0.49,
+              -0.2
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "_soane-cabinet-vista/ShannonEntropyMeter/Staging/Panel/Btn_2",
+            "hover": "annonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.85,
+                -0.49,
+                -0.2
+              ],
+              "camera_from": [
+                7.7,
+                1.6,
+                6.0
+              ],
+              "independent_ray": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                6.23,
+                0.75,
+                5.65
+              ]
+            },
+            "stand": [
+              7.7,
+              0.0,
+              6.0
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              8.5,
+              1.65,
+              1.2
+            ],
+            "forward": [
+              0.0,
+              -0.07,
+              1.0
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              8.5,
+              0.05,
+              1.2
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 30,
+          "moved": [
+            0.0,
+            -0.05,
+            2.5
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              8.5,
+              1.6,
+              3.7
+            ],
+            "forward": [
+              0.0,
+              -0.07,
+              1.0
+            ],
+            "rig": [
+              8.5,
+              0.0,
+              3.7
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.4,
+              1.6,
+              6.5
+            ],
+            "forward": [
+              -0.95,
+              -0.3,
+              0.0
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.4,
+              0.0,
+              6.5
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 20,
+          "moved": [
+            -0.92,
+            0.0,
+            0.0
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@6603/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              6.48,
+              1.6,
+              6.5
+            ],
+            "forward": [
+              -0.95,
+              -0.3,
+              0.0
+            ],
+            "rig": [
+              6.48,
+              0.0,
+              6.5
+            ]
+          }
+        },
+        {
+          "current_camera_after": "/root/EndlessMuseum/Walker/@Camera3D@4",
+          "event": "teardown"
+        }
+      ],
+      "press_contrast": {
+        "control": "_soane-cabinet-vista/ShannonEntropyMeter/Staging/Panel/Btn_1",
+        "hover": "annonEntropyMeter/Staging/Panel/Btn_1/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.86,
+            -0.49,
+            -0.16
+          ],
+          "camera_from": [
+            7.7,
+            1.6,
+            6.0
+          ],
+          "independent_ray": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_1/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_1/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            6.23,
+            0.75,
+            5.73
+          ]
+        },
+        "stand": [
+          7.7,
+          0.0,
+          6.0
+        ]
+      },
+      "press_disclose": {
+        "control": "_soane-cabinet-vista/ShannonEntropyMeter/Staging/Panel/Btn_2",
+        "hover": "annonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.85,
+            -0.49,
+            -0.2
+          ],
+          "camera_from": [
+            7.7,
+            1.6,
+            6.0
+          ],
+          "independent_ray": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_2/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            6.23,
+            0.75,
+            5.65
+          ]
+        },
+        "stand": [
+          7.7,
+          0.0,
+          6.0
+        ]
+      },
+      "press_sort": {
+        "control": "_soane-cabinet-vista/ShannonEntropyMeter/Staging/Panel/Btn_0",
+        "hover": "annonEntropyMeter/Staging/Panel/Btn_0/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.86,
+            -0.5,
+            -0.12
+          ],
+          "camera_from": [
+            7.7,
+            1.6,
+            6.0
+          ],
+          "independent_ray": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_0/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "t-vista/ShannonEntropyMeter/Staging/Panel/Btn_0/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            6.23,
+            0.75,
+            5.8
+          ]
+        },
+        "stand": [
+          7.7,
+          0.0,
+          6.0
+        ]
+      },
+      "sorted_after": true,
+      "walk_door_route_south": [
+        0.0,
+        2.5
+      ],
+      "walk_into_the_desk": [
+        -0.92,
+        0.0
+      ],
+      "walker_cam_guard_stopped": true
+    },
+    "disclose": [
+      {
+        "entropy": 3.25564732026922,
+        "rung": "works"
+      },
+      {
+        "entropy": 3.25564732026922,
+        "rung": "origin"
+      }
+    ],
+    "histogram_bar_diffs": {
+      "bars": 10,
+      "diffs": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max_count": 31
+    },
+    "histogram_bar_ratios": [
+      0.548,
+      0.355,
+      0.677,
+      1.0,
+      0.548,
+      0.581,
+      0.613,
+      0.774,
+      0.419,
+      0.935
+    ],
+    "museum_severed_tokens": [],
+    "museum_walk_severed": [],
+    "origin_local": [
+      5.5,
+      0.0,
+      6.5
+    ],
+    "panel_centre_height": 1.39999997615814,
+    "plinths": [
+      [
+        "ArtPlinth0",
+        13,
+        10
+      ],
+      [
+        "ArtPlinth1",
+        10,
+        4
+      ],
+      [
+        "ArtPlinth2",
+        14,
+        4
+      ]
+    ],
+    "reach_to_sort_button": 0.93337082862854,
+    "reading_distance_to_ribbon_end": 1.51637709140778,
+    "rebuilt": {
+      "bars": 10,
+      "children": 42,
+      "desk": true,
+      "found": true,
+      "panel": true,
+      "ribbon": true,
+      "stand": "ledger"
+    },
+    "ribbon_tile_counts": [
+      17,
+      11,
+      21,
+      31,
+      17,
+      18,
+      19,
+      24,
+      13,
+      29
+    ],
+    "streaming": {
+      "freed": true,
+      "rebuildable": true
+    },
+    "strip": "7 4 8 2 5 1 1 8 8 2 4 5 9 6 0 8 0 5 0 9 0 6 3 6 5 5 9 8 6 7 5 2 2 7 2 5 3 2 2 9 ...",
+    "walk_along_the_desks_front_north_to_south": 1.0,
+    "walk_from_the_corridor_west_to_the_desks_front": 1.0,
+    "walk_into_the_desk_from_the_corridor_side": 0.50390625,
+    "walk_into_the_desk_from_the_corridor_side_blockers": [
+      "ndlessMuseum/Seg0_soane-cabinet-vista/ShannonEntropyMeter/Staging/Desk"
+    ],
+    "walk_the_door_route_south_along_column_7_row_1_to_row_10": 0.1796875,
+    "walk_the_door_route_south_along_column_7_row_1_to_row_10_blockers": [
+      "/root/EndlessMuseum/Seg0_soane-cabinet-vista/EntropyJar/PedestalTop",
+      "/root/EndlessMuseum/Seg0_soane-cabinet-vista/EntropyJar/Pedestal"
+    ],
+    "walk_the_door_route_south_along_column_8_row_1_to_row_10": 1.0,
+    "walk_the_door_route_south_along_column_9_row_1_to_row_10": 1.0
+  },
+  "physics_fps": 60
+}
