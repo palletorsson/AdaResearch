@@ -22167,6 +22167,15 @@ func _derive_map_row(map_name: String) -> Dictionary:
 	var _wall_h: int = int(_md.get("wall_height", 2))
 	if _wall_threshold_run > 0:
 		_wall_h = _wall_threshold_run
+	# museum.floor_cells (2026-09-12, Random_Gaussian): cells the museum lays as FLOOR
+	# whatever the structure says — the grid's rules keep a teleporter on a `0` void,
+	# and without this a void inside a hall is a one-cell hole. Twin in
+	# tools/em_map_halls.py; a map without the key builds exactly as before.
+	var _floor_cells: Dictionary = {}
+	if _md.get("floor_cells") is Array:
+		for fc in (_md.get("floor_cells") as Array):
+			if fc is Array and (fc as Array).size() >= 2:
+				_floor_cells[Vector2i(int((fc as Array)[0]), int((fc as Array)[1]))] = true
 	var heights: Dictionary = {}
 	# THE GRID CLAMPS A STACK to dimensions.max_height (GridStructureComponent:
 	# min(stack_height, grid_y)), so a 3 in a max_height-2 map is two cubes there.
@@ -22201,7 +22210,9 @@ func _derive_map_row(map_name: String) -> Dictionary:
 			# LETTERS end the double meaning of "2" (same day): "w" is an
 			# explicit WALL; "p"/"p:N" an explicit PLATFORM tile ("p"/"pN")
 			# — a climbable block in the hall, never a wall.
-			if sv2 == "w":
+			if _floor_cells.has(Vector2i(c, r)):
+				line.append("1")                 # museum.floor_cells: floor over the grid's void
+			elif sv2 == "w":
 				line.append("4")
 			elif sv2 == "p" or sv2.begins_with("p:"):
 				var pn := 1

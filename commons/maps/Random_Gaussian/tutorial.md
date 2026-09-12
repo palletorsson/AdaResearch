@@ -1,89 +1,97 @@
 # Random Gaussian
 
-The bell curve emerges from accumulation. Build the Galton board where balls fall through pegs and settle into a Gaussian.
+Many draws, one law, the shape they make. Every excerpt below is from `commons/artifacts/distribution_sampler/distribution_sampler.gd`, the histogram on the cabinet.
 
-Declare the board.
-
-```gdscript
-class_name GaltonBoard
-extends Node3D
-
-@export var rows: int = 12
-@export var peg_spacing: float = 0.3
-```
-
-Rows stack down; each row has one more peg than the one above. The triangle widens with depth.
-
-Place the pegs.
+Draw one number. Everything the sampler shows comes through this function, from the global stream by default or from a private generator once a seed is named:
 
 ```gdscript
-func place_pegs() -> void:
-    for r in rows:
-        for p in r + 1:
-            var peg := preload("res://commons/artifacts/randomness/peg.tscn").instantiate()
-            var x: float = (p - r * 0.5) * peg_spacing
-            var y: float = -r * peg_spacing
-            peg.position = Vector3(x, y, 0.0)
-            add_child(peg)
+func _rand() -> float:
+	# The pre-seeded history, when one is being laid down. Null at every other
+	# moment, including the whole of the default path.
+	if _evidence_rng != null:
+		return _evidence_rng.randf()
+	if sample_seed < 0:
+		return randf()
+	if _rng == null:
+		_rng = RandomNumberGenerator.new()
+		_rng.seed = sample_seed
+	return _rng.randf()
 ```
 
-A triangle of pegs. Each ball that lands on a peg has a 50/50 chance of going left or right. Over many balls, positions converge.
-
-Drop a ball.
+Choose a law. UNIFORM uses the number as it comes; GAUSS turns two into one by the Box-Muller transform; POISSON counts how many uniform draws it takes to fall under e^−λ; EXPON takes a logarithm:
 
 ```gdscript
-func drop_ball() -> void:
-    var ball := preload("res://commons/artifacts/randomness/ball.tscn").instantiate()
-    ball.position = Vector3(0.0, 0.3, 0.0)
-    ball.linear_velocity = Vector3(0, -0.5, 0)
-    add_child(ball)
-    balls.append(ball)
+		DistType.UNIFORM:
+			return _rand()
 ```
-
-The ball starts at the top centre with a small downward push. Physics handles the bouncing. The end position depends on which side of each peg the ball took.
-
-Collect the landing position.
 
 ```gdscript
-func record_landing(ball: Node3D) -> void:
-    var bucket_index: int = int(round(ball.position.x / peg_spacing))
-    histogram[bucket_index] = histogram.get(bucket_index, 0) + 1
+		DistType.GAUSSIAN:
+			var u1 := _rand()
+			var u2 := _rand()
+			var z := sqrt(-2.0 * log(u1 + 0.0001)) * cos(TAU * u2)
+			return _fit(gaussian_mean + z * gaussian_std)
 ```
-
-Each landing slot increments a bucket. The histogram updates.
-
-Render the histogram.
 
 ```gdscript
-func update_histogram_mesh(mesh: ArrayMesh) -> void:
-    for key in histogram:
-        var bar := get_bar_for(key)
-        bar.scale.y = float(histogram[key]) * 0.05
-        bar.position.y = bar.scale.y * 0.5
+		DistType.POISSON:
+			var L := exp(-poisson_lambda)
+			var k := 0
+			var p := 1.0
+			while p > L:
+				k += 1
+				p *= _rand()
+			return _fit(float(k - 1) / maxf(poisson_lambda * 3, 0.0001))
 ```
-
-Bars rise behind the slots. The curve reveals itself as more balls land. The peak sits at the centre; tails spread outward.
-
-Compare to an analytic bell curve.
 
 ```gdscript
-func analytic_gaussian(x: float) -> float:
-    var sigma: float = sqrt(float(rows) / 4.0)
-    return exp(-(x * x) / (2.0 * sigma * sigma))
+		DistType.EXPONENTIAL:
+			var u := _rand()
+			var val := -log(u + 0.0001) / maxf(exponential_rate, 0.0001)
+			return _fit(val / 2.0)
 ```
 
-The formula predicts the shape from the row count. The prediction is overlaid on the histogram. The measured bars approach the line.
-
-Drop many balls.
+Fit the value to the display. The histogram runs from 0 to 1; a draw outside lands on the edge it crossed, and the fold is counted:
 
 ```gdscript
-func drop_cohort(count: int) -> void:
-    for i in count:
-        drop_ball()
-        await get_tree().create_timer(0.04).timeout
+func _fit(raw: float) -> float:
+	if raw < 0.0 or raw > 1.0:
+		_clipped += 1
+	return clampf(raw, 0.0, 1.0)
 ```
 
-A coroutine drops a ball every 40 milliseconds. A few hundred balls fill the histogram. The Central Limit Theorem becomes a scene.
+Bin it. A bead falls from the top of the display and, when it lands, one bin grows:
 
-You have watched the bell curve emerge. The next map, Random Mushrooms, grounds Gaussian sampling in biological form.
-<<</MAP>>>
+```gdscript
+		var bin_idx := int(sample.value * num_bins)
+		bin_idx = clampi(bin_idx, 0, num_bins - 1)
+```
+
+Draw the bars against the tallest, so the display is always full:
+
+```gdscript
+	var max_count := 1
+	for count in _bins:
+		max_count = maxi(max_count, count)
+```
+
+Draw the law's density at its own scale, which is why the curve and the bars share a shape and not an axis:
+
+```gdscript
+		DistType.GAUSSIAN:
+			var z := (x - gaussian_mean) / maxf(gaussian_std, 0.0001)
+			return exp(-0.5 * z * z) / (maxf(gaussian_std, 0.0001) * sqrt(TAU))
+```
+
+Decide what CLEAR means. Without a seed the stream continues and the next histogram is new; with a seed the generator is re-seeded first, and the same draws return:
+
+```gdscript
+	if sample_seed >= 0:
+		if _rng == null:
+			_rng = RandomNumberGenerator.new()
+		_rng.seed = sample_seed
+```
+
+The cabinet names a five-digit seed on its plate, lands a hundred at once on BATCH, pauses the rain, re-bins the same draws on BINS, and draws behind every bar the count the law expects at the present N with the folded mass in the edge bins — so the bars have something honest to be compared with.
+
+The next room, Random Mushrooms, grows a population from draws like these.

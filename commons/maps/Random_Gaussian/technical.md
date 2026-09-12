@@ -1,161 +1,33 @@
-# Random_Gaussian - Technical Documentation
+# Random_Gaussian — technical
 
-## Core Concept in Code
+## The sampler
 
-### Generating Gaussian Random Numbers
+`commons/artifacts/distribution_sampler/distribution_sampler.gd` (scene `distribution_sampler.tscn`, a `Node3D` with the script and nothing else; class `DistributionSampler`). Exports: `display_width` 0.6, `display_height` 0.4, `num_bins` 30, `max_samples` 1000, `distribution` (`UNIFORM` · `GAUSSIAN` · `POISSON` · `EXPONENTIAL`, default Gaussian; the setter clears the histogram), `gaussian_mean` 0.5, `gaussian_std` 0.15, `poisson_lambda` 5, `exponential_rate` 3, `samples_per_second` 50, `auto_sample` true, `sample_seed` −1, the registry's DNA axes `law` (the same four laws by word) and `evidence` (`none` · `anecdote` · `sample` · `census`: 0, 1, 25 or 1000 draws laid down at build from `evidence_seed` through a private generator), the three colours; since R3, `stand` (`none` · `cabinet`) and `batch_size` 100.
 
-GDScript provides `randfn()` for Gaussian random values, but understanding the Box-Muller transform is essential:
+The draw. `_process` accumulates frame time and calls `_add_sample` at the cadence while `auto_sample` holds and the landed count is under the cap; each sample is a value in [0, 1] and a bead spawned 5 cm above the display that falls at 0.5 m/s and, on landing, adds one to its bin (`int(value × num_bins)`, clamped to the last bin) and one to the landed count. `_sample_distribution` dispatches on the law: UNIFORM returns `_rand()`; GAUSSIAN is Box-Muller, `sqrt(−2 ln(u1 + 0.0001)) · cos(2π u2)`, scaled by σ and shifted by μ — the offset that keeps ln(0) away also bounds |z| at √(−2 ln 10⁻⁴) ≈ 4.29; POISSON is Knuth's loop (multiply uniforms until the product falls under e^−λ; the count minus one is the variate) scaled by 1/(3λ); EXPONENTIAL is −ln(u + 0.0001)/rate, halved. Every raw value goes through `_fit`, the clamp the display always applied, which now counts the values it folded onto an edge. `_rand()` is the one draw: `randf()` from the global stream at `sample_seed` −1, else a private `RandomNumberGenerator` seeded once and re-seeded by `_clear_samples`; the evidence draws use their own generator for their duration.
 
-```gdscript
-# Box-Muller transform: uniform → Gaussian
-func gaussian_random(mean: float = 0.0, std_dev: float = 1.0) -> float:
-    var u1 = randf()
-    var u2 = randf()
+The picture. Bars are a MultiMesh of `num_bins` boxes, each scaled to its count over the tallest count (`_update_bars`), so the display is always full; the density curve (`_theoretical_pdf`, drawn by `_update_theory_curve` at `y × display_height × 0.8`) keeps the law's own scale, which for the Gaussian's peak of 2.66 is twice the display's height — shape, not counts. `_update_stats` prints law, n, and a mean and deviation computed from bin centres on the side plate. The keypad (RackTemplates, `DISTRIBUTIONS`: UNIFORM `Btn_0`, GAUSS `Btn_1`, POISSON `Btn_2`, EXPON `Btn_3` / CLEAR `Btn_4`) stands at local (0, −0.08, 0.15), tilted −25°: eight centimetres below the deck on every shipped placement. The title is a HangarKit signage on a stalk above the display; the stats plate hangs on a side bracket. Keys 1–4, SPACE (pause), C (clear) and S (one sample) do the same.
 
-    # Avoid log(0) edge case
-    while u1 == 0:
-        u1 = randf()
+Bookkeeping added on every path (an append and a compare per draw): `_values` (the landed values, so a change of bins re-bins the same draws), `_drawn`, `_clipped`; `_clear_samples` resets them.
 
-    var z0 = sqrt(-2.0 * log(u1)) * cos(2.0 * PI * u2)
-    return mean + z0 * std_dev
+## The cabinet (`#stand:cabinet`)
 
-# Generate values clustered around 100 with std_dev of 15
-var iq_score = gaussian_random(100.0, 15.0)
-```
+`_apply_stand` runs at the end of `_ready` (after `_built`) and after `apply_grid_config` on a built body. Under `cabinet`: if no seed is set it draws a five-digit one from a private generator (never the global stream), then clears; `_build_cabinet` once; `_update_readout`. `apply_grid_config` gained `stand`, `batch` and a `seed` alias for `sample_seed` (`#seed:N` is a whitelisted config key).
 
-### Using Godot's Built-in Gaussian
+`_build_cabinet`: a `Cabinet` root; `Body`, a `StaticBody3D` with a `Collider` boxing the shell (1.60 × 0.95 × 0.40, its front face at local z 0.16, its back at −0.24; a steel cap, an ember stripe under the cap, a stencil `DISTRIBUTION SAMPLER` low on the fascia); a wedge shoulder across the front at 0.70 m; `_lift_shipped(0.95)` moves every shipped child up onto the cabinet top and puts the keypad on the shoulder, outboard at (−0.55, 0.755, 0.236), tilted −32°, its cream plate and white caps as shipped; `Readout`, a plate 0.62 × 0.15 on the front face at 0.832 m leaning back 12° — its top edge at 0.905 m under the cap's lip, nothing on the shoulder in front of it — meta `em_local_instrument`, with `Text`, a left-aligned `Label3D` (pixel size 0.00095, font 15) refreshed at 10 Hz; `StandPanel`, a frameless RackTemplates panel outboard at (0.55, 0.755, 0.236), not harmonized (the terminal recolour blanks a panel's labels) — BATCH (`Btn_0`) → `batch(batch_size)`, PAUSE (`Btn_1`) → `set_running(not auto_sample)`, NEW SEED (`Btn_2`) → `new_seed()`, BINS (`Btn_3`) → `cycle_bins()`; and `Ghosts`, a second MultiMesh of `num_bins` pale frames 6 mm behind the bars at the cabinet top, each scaled to the expected count of its bin over the same tallest count the bars use.
 
-```gdscript
-var rng = RandomNumberGenerator.new()
-rng.randomize()
+The expectation. `bin_probabilities()` gives the law's mass in each bin of the display with the folded mass in the edge bins: UNIFORM 1/bins; GAUSSIAN Φ((hi − μ)/σ) − Φ((lo − μ)/σ) with the first bin taking everything below and the last everything above (Φ by Abramowitz–Stegun 7.1.26, error under 1.5 × 10⁻⁷); POISSON the lattice X/(3λ) summed into bins with X ≥ 3λ on the last; EXPONENTIAL e^(−2r·lo) − e^(−2r·hi) with the last bin keeping the tail past t = 2. `expected_counts()` multiplies by the landed count; the ghosts follow every `_update_bars`. The six lines of `readout_lines()`: the law and its transform (`GAUSS · μ 0.50 σ 0.15 · Box-Muller`); `landed N · in flight k · cap 1000`; `clipped c of d drawn · first bin a · last b`; `bins n · mean m · σ s (binned)`; `seed S · CLEAR replays it` or `seed: the global stream · CLEAR: new draws`; `running · 50 draws/s · BATCH lands 100` or `paused · BATCH lands 100`. `batch(n)` lands n draws through the same `_sample_distribution`, binned directly, without beads, up to the cap. `set_bins(n)` re-bins `_values` into n bins, rebuilds the bars and the ghosts (keeping their lift) and touches no draw; `cycle_bins` runs 10 → 30 → 60. `set_sample_seed(v)` (−1 returns to the stream) and `new_seed()` clear. API for probes: `landed_values()`, `readout_lines()`, `expected_counts()`, `bin_probabilities()`, `get_stand_state()`.
 
-# randfn(mean, deviation) - returns Gaussian random
-var value = rng.randfn(0.0, 1.0)  # Standard normal: mean=0, std=1
-```
+## The map
 
-## Implementation Details
+`commons/maps/Random_Gaussian/map_data.json`, 14 × 22. Structure: a `w` perimeter; a north hall of `1` floor (rows 2–13) with the 10 September recovery's `2` platforms along its sides (19 cells, a metre up under `museum.wall_height 3`) and `3`, `4`, `5`, `6` walls where the sides step up; the door strips `1` at columns 5–7; and — since R3 — a south hall of `1` floor from row 14 to row 20. Before R3 the south half was `0`, which the grid walks as ground and the museum reads as holes: it built a starry void with a one-cell strip down column 7, and the twenty-metre bell terrain covered the hall. The one `0` left, (10,3), carries the grid lane's teleporter, which the grid's rules want on a void cell; the museum lays floor over it through `museum.floor_cells: [[10,3]]` — a key both derivers read (`endless_museum._derive_map_row` and `tools/em_map_halls.py`, added 2026-09-12), absent from every other map. The `wp` wedge at (10,12), which bridged the half-metre step into the pit in the grid lane, is gone with the step.
 
-### GaussianBlurShader
+Tokens: `distribution_sampler:180#stand:cabinet` at (11,19) — the front (+z, keypad and readout) to the north, where a visitor stands at (11.5, 18.6), 0.7 m before the face; it had been `:180:0.5:1`, half a metre up with its keypad under the floor. `random_bell_curve:0:0:0.3` at (3,17) — a 20 × 20 m, 5 m tall Gaussian terrain with a heightmap collider at a third of its size: a 6 m mound 1.5 m high in the south-west; it had been at (10,14), where it covered the sampler's cells. `gaussian_random` from (10,18) to (10,15), out of the visitor's spot. `galton_board:180:0:1.5` at (9,20) — it had been `:180:1:4` at (8,20), four times bench scale and a metre up, a machine through the roof, and at (8,20) its three sealed cells took the door strip's column, which the museum reopened by sliding it; at (9,20) it stands where the map put it. `distribution_comparator:0:-0.5` (5,18), `dark_sphere` (7,10), `GaussianBlurCircle:0:-0.5` (11,8), `GaussianPaintSplatter:180:1.5` (8,6), `GaussianBlurShader:180:1` (3,2) as they were. Museum block: `wall_height 3`, `gate_depth_rows 0` kept; `sculpture_clear_rects [[9,16,13,21]]` (cells 9–12 × 16–20, the far edge exclusive); `floor_cells [[10,3]]`; `artifact_placement: "map"`.
 
-The blur shader applies a Gaussian kernel to pixels. The kernel weights follow the bell curve:
+## Verification
 
-```gdscript
-# 1D Gaussian kernel generation
-func generate_gaussian_kernel(size: int, sigma: float) -> Array:
-    var kernel = []
-    var sum = 0.0
-    var center = size / 2
+`commons/testing/probe_wcn_gaussian.gd` (`bash tools/run_wcn_probe.sh gauss [live]`; the live port regenerated by `tools/port_wcn_probes_live.py`): the tile (no holes in rows 14–20, 19 raised cells); the Galton board's scale and height, the mound's, gaussian_random's cell; placement, facing and stand; the cabinet's body, the bars at 0.95 m, the keypad and the stand panel on the shoulder, the readout's height and six lines, thirty ghosts; the rain landing at the cadence with the bins summing to the landed draws and drawn = landed + in flight; the ghosts summing to N; through the buttons' signal path: PAUSE (no new draws), CLEAR (everything reset), BATCH (a hundred landed, no beads), three batches under GAUSS (the middle six bins over half, a loose fit against the expectation, the clamp's count equal to the values sitting on 0 or 1), UNIFORM at equal N (ten expected per bin, nothing clipped), EXPON (the leftmost bin tallest, the ghost's last bin carrying the tail), POISSON (a lattice of at most sixteen bins); CLEAR replaying the named seed bin for bin, the shipped stream not replaying, NEW SEED, BINS through 60 and 10 back to 30 with the same values and the same histogram, RUN; the museum's verdict, seals, plinths against the rect, capsule walks down the middle and to the visitor's spot and into the cabinet, reach; the shipped default beside it (no cabinet, no ghosts, the keypad at −0.08 m, the bars at 0, fifty draws binning as before); captures; the streamer freeing and rebuilding the hall with the cabinet. The live lane adds the desktop rig pressing UNIFORM, BATCH and CLEAR through its pointer and walking the recovered floor.
 
-    for i in range(size):
-        var x = i - center
-        var weight = exp(-(x * x) / (2.0 * sigma * sigma))
-        kernel.append(weight)
-        sum += weight
+## Known limits
 
-    # Normalize so weights sum to 1
-    for i in range(size):
-        kernel[i] /= sum
-
-    return kernel
-```
-
-In shader code (GLSL/Godot shader):
-```glsl
-// Separable Gaussian blur - horizontal pass
-float gaussian_weight(float x, float sigma) {
-    return exp(-(x * x) / (2.0 * sigma * sigma));
-}
-
-void fragment() {
-    vec4 color = vec4(0.0);
-    float total_weight = 0.0;
-    float sigma = 2.0;
-
-    for (int i = -5; i <= 5; i++) {
-        float weight = gaussian_weight(float(i), sigma);
-        color += texture(TEXTURE, UV + vec2(float(i) * TEXTURE_PIXEL_SIZE.x, 0.0)) * weight;
-        total_weight += weight;
-    }
-
-    COLOR = color / total_weight;
-}
-```
-
-### GaussianPaintSplatter
-
-Splatter positions are generated with Gaussian distribution around a center point:
-
-```gdscript
-func create_splatter(center: Vector2, count: int, spread: float) -> Array:
-    var points = []
-    var rng = RandomNumberGenerator.new()
-    rng.randomize()
-
-    for i in range(count):
-        # Gaussian offset from center
-        var offset_x = rng.randfn(0.0, spread)
-        var offset_y = rng.randfn(0.0, spread)
-        points.append(center + Vector2(offset_x, offset_y))
-
-    return points
-
-# Most splatter lands near center, fewer at edges
-var splatter = create_splatter(Vector2(512, 512), 1000, 50.0)
-```
-
-### random_decay_objects
-
-Objects decay with Gaussian probability over time:
-
-```gdscript
-var decay_mean = 5.0      # Average lifetime in seconds
-var decay_std = 1.5       # Variation in lifetime
-var lifetime: float
-
-func _ready():
-    var rng = RandomNumberGenerator.new()
-    rng.randomize()
-    # Each object gets its own lifetime from Gaussian distribution
-    lifetime = max(0.5, rng.randfn(decay_mean, decay_std))
-
-func _process(delta):
-    lifetime -= delta
-    if lifetime <= 0:
-        decay()
-```
-
-## Map-Specific Configuration
-
-### Structure Array Analysis
-- 12×13 grid (12 columns, 13 rows)
-- Perimeter walls at heights 2-3 create enclosed arena
-- Exit gap at position (8,12) with height 0
-
-### Interactable Positioning
-Demonstrations arranged for progressive discovery:
-- Northwest: theoretical (clipboard, blur shader)
-- Center: contemplation zone (dark_sphere)
-- Central-south: artistic application (splatter)
-- Southeast: temporal and generative (decay, gaussian_random)
-
-## Key Takeaways
-
-1. **Gaussian emerges from accumulation** - Central Limit Theorem explains ubiquity
-2. **Box-Muller bridges uniform to Gaussian** - computational technique for generating bell curves
-3. **Same math, different domains** - blur, splatter, decay all use Gaussian
-4. **68-95-99.7 rule** - predictable clustering around mean
-
-## Related Systems
-- `RandomNumberGenerator.randfn()` - Godot's built-in Gaussian
-- `FastNoiseLite` - uses Gaussian in some noise generation modes
-- Particle systems often use Gaussian for natural-looking spread
-
-## Within the Sequence
-
-Random_Gaussian is the sequence's introduction to non-uniform distributions. The Gaussian sample machinery, and the Box-Muller transform that produces it, is the foundation for every later map where normal-distribution sampling appears.
-
-The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
-
-Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
-
-The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.
+The book's pearl for this hall names the sampler as its hero since 12 September (Astra's word; it had named the comparator) and keeps the comparator's line as supporting material. No control varies μ or σ, so the Gaussian's fold stays at a handful per thousand; EXPON shows the fold. The teleporter's void at (10,3) is floored in the museum by `floor_cells`. The stats plate's mean and deviation are computed from bin centres (the shipped rule) and say so on the readout. The bell terrain's surface noise is unseeded (`add_noise` true), so the mound's top varies between 1.25 and 1.55 m across runs. 

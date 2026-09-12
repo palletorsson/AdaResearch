@@ -1,0 +1,1761 @@
+{
+  "checks": 107,
+  "control_path": "the push buttons' own signal path (area button_pressed → the artifact's connections) on the keypad and the stand panel; batch() lands draws without the rain; set_sample_seed(-1) for the shipped-policy comparison; the live lane adds the desktop rig's pointer; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "Random_Gaussian",
+  "measurements": {
+    "arrival": {
+      "batch_size": 100,
+      "bins": 30,
+      "clipped": 0,
+      "counts": [
+        13,
+        26,
+        27,
+        13,
+        18,
+        11,
+        23,
+        10,
+        17,
+        21,
+        18,
+        22,
+        15,
+        19,
+        12,
+        16,
+        19,
+        12,
+        18,
+        25,
+        29,
+        16,
+        20,
+        15,
+        12,
+        9,
+        20,
+        10,
+        7,
+        22
+      ],
+      "drawn": 83,
+      "expected": [
+        0.0354156852709094,
+        0.0380419126755098,
+        0.072098562858645,
+        0.130087256241114,
+        0.223452444631176,
+        0.365406528038389,
+        0.568862620938712,
+        0.843097961209002,
+        1.18956584937594,
+        1.59786296823843,
+        2.04330009708614,
+        2.48752205565213,
+        2.88299157767242,
+        3.18097302525855,
+        3.34132147385294,
+        3.34132143585294,
+        3.18097302525856,
+        2.88299157767241,
+        2.48752205565213,
+        2.04330009708614,
+        1.59786296823843,
+        1.18956584937594,
+        0.843097961209002,
+        0.568862620938714,
+        0.365406528038387,
+        0.223452444631176,
+        0.130087256241116,
+        0.072098562858645,
+        0.0380419126755056,
+        0.0354156852709115
+      ],
+      "in_flight": 45,
+      "landed": 38,
+      "law": 1,
+      "law_name": "GAUSS",
+      "lines": [
+        "GAUSS · μ 0.50 σ 0.15 · Box-Muller",
+        "landed 38 · in flight 45 · cap 1000",
+        "clipped 0 of 83 drawn · first bin 1 · last 0",
+        "bins 30 · mean 0.460 · σ 0.166 (binned)",
+        "seed 72131 · CLEAR replays it",
+        "running · 50 draws/s · BATCH lands 100"
+      ],
+      "max_samples": 1000,
+      "replay": true,
+      "running": true,
+      "seed": 72131,
+      "stand": "cabinet",
+      "values": 38
+    },
+    "bare_default": {
+      "bars_y": 0.0,
+      "cabinet": false,
+      "ghosts": false,
+      "panel_y": -0.0799999982118607,
+      "seed": -1,
+      "stand": "none",
+      "top_level": [
+        "BackPanel",
+        "@MeshInstance3D@4233",
+        "@MeshInstance3D@4234",
+        "Bars",
+        "TheoryCurve",
+        "SampleMarkers",
+        "Signage",
+        "@Node3D@4252",
+        "StatsLabel",
+        "DISTRIBUTIONS"
+      ]
+    },
+    "bars_y": 0.949999988079071,
+    "bell": {
+      "at": [
+        3.5,
+        17.5
+      ],
+      "scale": 0.300000011920929,
+      "top": 1.71677768230438
+    },
+    "bins_cycle": {
+      "after": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        1,
+        4,
+        6,
+        5,
+        12,
+        14,
+        14,
+        19,
+        16,
+        16,
+        18,
+        16,
+        7,
+        16,
+        6,
+        10,
+        9,
+        4,
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "before": [
+        0,
+        0,
+        0,
+        0,
+        3,
+        1,
+        4,
+        6,
+        5,
+        12,
+        14,
+        14,
+        19,
+        16,
+        16,
+        18,
+        16,
+        7,
+        16,
+        6,
+        10,
+        9,
+        4,
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "bodies": [
+      {
+        "at": [
+          7.5,
+          1.7,
+          -3.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:window"
+      },
+      {
+        "at": [
+          7.5,
+          1.7,
+          -2.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:view"
+      },
+      {
+        "at": [
+          11.0,
+          1.6,
+          -2.94
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:counter"
+      },
+      {
+        "at": [
+          1.14,
+          0.0,
+          -1.4
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:extinguisher"
+      },
+      {
+        "at": [
+          15.94,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:elevator"
+      },
+      {
+        "at": [
+          15.1,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:pallet"
+      },
+      {
+        "at": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:point_zero"
+      },
+      {
+        "at": [
+          3.5,
+          1.0,
+          2.5
+        ],
+        "cell": [
+          3,
+          2
+        ],
+        "scale": 1.0,
+        "token": "GaussianBlurShader"
+      },
+      {
+        "at": [
+          8.5,
+          1.5,
+          6.5
+        ],
+        "cell": [
+          8,
+          6
+        ],
+        "scale": 1.0,
+        "token": "GaussianPaintSplatter"
+      },
+      {
+        "at": [
+          11.5,
+          0.0,
+          8.5
+        ],
+        "cell": [
+          11,
+          8
+        ],
+        "scale": 1.0,
+        "token": "GaussianBlurCircle"
+      },
+      {
+        "at": [
+          7.5,
+          0.0,
+          10.5
+        ],
+        "cell": [
+          7,
+          10
+        ],
+        "scale": 1.0,
+        "token": "dark_sphere"
+      },
+      {
+        "at": [
+          10.5,
+          0.0,
+          15.5
+        ],
+        "cell": [
+          10,
+          15
+        ],
+        "scale": 1.0,
+        "token": "gaussian_random"
+      },
+      {
+        "at": [
+          3.5,
+          0.0,
+          17.5
+        ],
+        "cell": [
+          3,
+          17
+        ],
+        "scale": 0.3,
+        "token": "random_bell_curve"
+      },
+      {
+        "at": [
+          5.5,
+          0.0,
+          18.5
+        ],
+        "cell": [
+          5,
+          18
+        ],
+        "scale": 1.0,
+        "token": "distribution_comparator"
+      },
+      {
+        "at": [
+          11.5,
+          0.0,
+          19.5
+        ],
+        "cell": [
+          11,
+          19
+        ],
+        "scale": 1.0,
+        "token": "distribution_sampler"
+      },
+      {
+        "at": [
+          9.5,
+          0.0,
+          20.5
+        ],
+        "cell": [
+          9,
+          20
+        ],
+        "scale": 1.5,
+        "token": "galton_board"
+      },
+      {
+        "at": [
+          6.5,
+          0.0,
+          0.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "gate:random gaussian"
+      },
+      {
+        "at": [
+          2.0,
+          1.58,
+          20.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          9.0,
+          1.58,
+          23.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.0,
+          1.58,
+          23.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          9.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          3.0,
+          1.58,
+          2.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          5.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          10.99,
+          1.58,
+          24.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          11.99,
+          1.58,
+          3.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          12.99,
+          1.58,
+          5.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          2.01,
+          1.58,
+          3.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          6.01,
+          1.58,
+          23.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.99,
+          1.58,
+          22.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          4.0,
+          1.58,
+          20.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          11.0,
+          1.58,
+          2.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          7.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          11.99,
+          1.58,
+          12.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          12.99,
+          1.58,
+          7.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.0,
+          3.52,
+          -1.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "exit_sign"
+      },
+      {
+        "at": [
+          6.5,
+          3.0,
+          24.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "exit_sign"
+      },
+      {
+        "at": [
+          1.02,
+          2.25,
+          -3.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "wall_clock"
+      },
+      {
+        "at": [
+          1.0,
+          1.7,
+          10.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "info_screen"
+      },
+      {
+        "at": [
+          1.0,
+          1.5,
+          -2.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "electrical_panel"
+      },
+      {
+        "at": [
+          3.5,
+          4.64,
+          6.23
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "ceiling_vent"
+      },
+      {
+        "at": [
+          1.28,
+          0.85,
+          17.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "fire_hose_box"
+      },
+      {
+        "at": [
+          10.5,
+          0.42,
+          14.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "dream_bodies"
+      }
+    ],
+    "captures": {
+      "arena": {
+        "at": [
+          7.0,
+          2.6,
+          12.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3683",
+        "forward": [
+          0.15,
+          -0.29,
+          0.95
+        ],
+        "is_ours": true
+      },
+      "display": {
+        "at": [
+          11.5,
+          1.35,
+          18.45
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3683",
+        "forward": [
+          0.0,
+          -0.21,
+          0.98
+        ],
+        "is_ours": true
+      },
+      "keypad": {
+        "at": [
+          11.5,
+          1.25,
+          18.55
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3683",
+        "forward": [
+          0.0,
+          -0.58,
+          0.82
+        ],
+        "is_ours": true
+      },
+      "north_door": {
+        "at": [
+          6.5,
+          1.6,
+          0.3
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3683",
+        "forward": [
+          0.0,
+          -0.08,
+          1.0
+        ],
+        "is_ours": true
+      },
+      "plan": {
+        "at": [
+          7.0,
+          16.0,
+          11.0
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3683",
+        "forward": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "poisson": {
+        "at": [
+          11.5,
+          1.55,
+          18.6
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3683",
+        "forward": [
+          0.0,
+          -0.45,
+          0.89
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          11.5,
+          1.55,
+          18.6
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3683",
+        "forward": [
+          0.0,
+          -0.45,
+          0.89
+        ],
+        "is_ours": true
+      },
+      "readout": {
+        "at": [
+          11.5,
+          1.15,
+          18.65
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3683",
+        "forward": [
+          0.37,
+          -0.32,
+          0.87
+        ],
+        "is_ours": true
+      },
+      "running": {
+        "at": [
+          11.5,
+          1.55,
+          18.6
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3683",
+        "forward": [
+          0.0,
+          -0.45,
+          0.89
+        ],
+        "is_ours": true
+      },
+      "south_door": {
+        "at": [
+          6.5,
+          1.6,
+          21.2
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3683",
+        "forward": [
+          0.11,
+          -0.09,
+          -0.99
+        ],
+        "is_ours": true
+      },
+      "uniform": {
+        "at": [
+          11.5,
+          1.55,
+          18.6
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3683",
+        "forward": [
+          0.0,
+          -0.45,
+          0.89
+        ],
+        "is_ours": true
+      }
+    },
+    "desktop_input": {
+      "front_capture_pose": {
+        "current_camera": "/root/@Node@4271/WcnDesktopRig/Head/Camera3D",
+        "eye": [
+          11.5,
+          1.6,
+          18.3
+        ],
+        "forward": [
+          0.0,
+          -0.38,
+          0.92
+        ],
+        "rig": [
+          11.5,
+          0.0,
+          18.3
+        ]
+      },
+      "landed_after": 100,
+      "landed_after_clear": 0,
+      "landed_before": 0,
+      "law_after": 0,
+      "log": [
+        {
+          "event": "walker_cam_guard_stopped",
+          "value": true
+        },
+        {
+          "at": [
+            11.5,
+            0.0,
+            18.3000011444092
+          ],
+          "event": "spawn"
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@4271/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              11.5,
+              1.6,
+              18.3
+            ],
+            "forward": [
+              0.46,
+              -0.57,
+              0.68
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              11.5,
+              0.0,
+              18.3
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "_soane-cabinet-vista/DistributionSampler/DISTRIBUTIONS/Btn_0",
+            "hover": "stributionSampler/DISTRIBUTIONS/Btn_0/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                0.46,
+                -0.57,
+                0.68
+              ],
+              "camera_from": [
+                11.5,
+                1.6,
+                18.3
+              ],
+              "independent_ray": "t-vista/DistributionSampler/DISTRIBUTIONS/Btn_0/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "t-vista/DistributionSampler/DISTRIBUTIONS/Btn_0/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                12.14,
+                0.81,
+                19.25
+              ]
+            },
+            "stand": [
+              11.5,
+              0.0,
+              18.3
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@4271/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              11.5,
+              1.6,
+              18.3
+            ],
+            "forward": [
+              -0.38,
+              -0.59,
+              0.71
+            ],
+            "miss_deg": 0.02,
+            "rig": [
+              11.5,
+              0.0,
+              18.3
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "e-cabinet-vista/DistributionSampler/Cabinet/StandPanel/Btn_0",
+            "hover": "utionSampler/Cabinet/StandPanel/Btn_0/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                -0.38,
+                -0.59,
+                0.71
+              ],
+              "camera_from": [
+                11.5,
+                1.6,
+                18.3
+              ],
+              "independent_ray": "ta/DistributionSampler/Cabinet/StandPanel/Btn_0/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "ta/DistributionSampler/Cabinet/StandPanel/Btn_0/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                11.0,
+                0.81,
+                19.25
+              ]
+            },
+            "stand": [
+              11.5,
+              0.0,
+              18.3
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@4271/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              11.5,
+              1.6,
+              18.3
+            ],
+            "forward": [
+              0.4,
+              -0.63,
+              0.67
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              11.5,
+              0.0,
+              18.3
+            ]
+          }
+        },
+        {
+          "button": 1,
+          "event": "click"
+        },
+        {
+          "event": "press",
+          "record": {
+            "control": "_soane-cabinet-vista/DistributionSampler/DISTRIBUTIONS/Btn_4",
+            "hover": "stributionSampler/DISTRIBUTIONS/Btn_4/InteractableAreaButton",
+            "ray": {
+              "camera_dir": [
+                0.4,
+                -0.63,
+                0.67
+              ],
+              "camera_from": [
+                11.5,
+                1.6,
+                18.3
+              ],
+              "independent_ray": "t-vista/DistributionSampler/DISTRIBUTIONS/Btn_4/InteractableAreaButton",
+              "raycast_areas": true,
+              "raycast_collider": "t-vista/DistributionSampler/DISTRIBUTIONS/Btn_4/InteractableAreaButton",
+              "raycast_colliding": true,
+              "raycast_length": 5.0,
+              "raycast_mask": 1310720,
+              "raycast_point": [
+                12.04,
+                0.74,
+                19.21
+              ]
+            },
+            "stand": [
+              11.5,
+              0.0,
+              18.3
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@4271/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              11.5,
+              1.6,
+              18.3
+            ],
+            "forward": [
+              0.0,
+              -0.38,
+              0.92
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              11.5,
+              0.0,
+              18.3
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@4271/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.5,
+              1.65,
+              12.0
+            ],
+            "forward": [
+              0.0,
+              -0.05,
+              1.0
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              7.5,
+              0.05,
+              12.0
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 30,
+          "moved": [
+            0.0,
+            -0.05,
+            2.5
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@4271/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              7.5,
+              1.6,
+              14.5
+            ],
+            "forward": [
+              0.0,
+              -0.05,
+              1.0
+            ],
+            "rig": [
+              7.5,
+              0.0,
+              14.5
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@4271/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              11.5,
+              1.6,
+              18.3
+            ],
+            "forward": [
+              0.0,
+              -0.5,
+              0.86
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              11.5,
+              0.0,
+              18.3
+            ]
+          }
+        },
+        {
+          "action": "ui_up",
+          "event": "walk",
+          "frames": 20,
+          "moved": [
+            0.0,
+            0.0,
+            0.72
+          ],
+          "pose": {
+            "current_camera": "/root/@Node@4271/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              11.5,
+              1.6,
+              19.02
+            ],
+            "forward": [
+              0.0,
+              -0.5,
+              0.86
+            ],
+            "rig": [
+              11.5,
+              0.0,
+              19.02
+            ]
+          }
+        },
+        {
+          "current_camera_after": "/root/EndlessMuseum/Walker/@Camera3D@4",
+          "event": "teardown"
+        }
+      ],
+      "press_batch": {
+        "control": "e-cabinet-vista/DistributionSampler/Cabinet/StandPanel/Btn_0",
+        "hover": "utionSampler/Cabinet/StandPanel/Btn_0/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            -0.38,
+            -0.59,
+            0.71
+          ],
+          "camera_from": [
+            11.5,
+            1.6,
+            18.3
+          ],
+          "independent_ray": "ta/DistributionSampler/Cabinet/StandPanel/Btn_0/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "ta/DistributionSampler/Cabinet/StandPanel/Btn_0/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            11.0,
+            0.81,
+            19.25
+          ]
+        },
+        "stand": [
+          11.5,
+          0.0,
+          18.3
+        ]
+      },
+      "press_clear": {
+        "control": "_soane-cabinet-vista/DistributionSampler/DISTRIBUTIONS/Btn_4",
+        "hover": "stributionSampler/DISTRIBUTIONS/Btn_4/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            0.4,
+            -0.63,
+            0.67
+          ],
+          "camera_from": [
+            11.5,
+            1.6,
+            18.3
+          ],
+          "independent_ray": "t-vista/DistributionSampler/DISTRIBUTIONS/Btn_4/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "t-vista/DistributionSampler/DISTRIBUTIONS/Btn_4/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            12.04,
+            0.74,
+            19.21
+          ]
+        },
+        "stand": [
+          11.5,
+          0.0,
+          18.3
+        ]
+      },
+      "press_uniform": {
+        "control": "_soane-cabinet-vista/DistributionSampler/DISTRIBUTIONS/Btn_0",
+        "hover": "stributionSampler/DISTRIBUTIONS/Btn_0/InteractableAreaButton",
+        "ray": {
+          "camera_dir": [
+            0.46,
+            -0.57,
+            0.68
+          ],
+          "camera_from": [
+            11.5,
+            1.6,
+            18.3
+          ],
+          "independent_ray": "t-vista/DistributionSampler/DISTRIBUTIONS/Btn_0/InteractableAreaButton",
+          "raycast_areas": true,
+          "raycast_collider": "t-vista/DistributionSampler/DISTRIBUTIONS/Btn_0/InteractableAreaButton",
+          "raycast_colliding": true,
+          "raycast_length": 5.0,
+          "raycast_mask": 1310720,
+          "raycast_point": [
+            12.14,
+            0.81,
+            19.25
+          ]
+        },
+        "stand": [
+          11.5,
+          0.0,
+          18.3
+        ]
+      },
+      "walk_into_the_cabinet": [
+        0.0,
+        0.72
+      ],
+      "walk_south_middle": [
+        0.0,
+        2.5
+      ],
+      "walker_cam_guard_stopped": true
+    },
+    "expon_300": {
+      "clipped": 2,
+      "counts": [
+        47,
+        44,
+        32,
+        39,
+        27,
+        19,
+        9,
+        11,
+        12,
+        13,
+        9,
+        10,
+        8,
+        5,
+        4,
+        1,
+        3,
+        1,
+        0,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "expected": [
+        54.3807740766055,
+        44.5232121127028,
+        36.4525229824839,
+        29.8448015930414,
+        24.4348568837338,
+        20.0055687777721,
+        16.3791743911787,
+        13.4101337840853,
+        10.9792889319206,
+        8.98908149549216,
+        7.35963746228364,
+        6.02556152187643,
+        4.93331252252358,
+        4.03905467673477,
+        3.30689827720621,
+        2.70745931684932,
+        2.21668020541204,
+        1.81486425391005,
+        1.48588517733809,
+        1.21653989022943,
+        0.996018620476938,
+        0.815471075222781,
+        0.667651247530462,
+        0.546626608684066,
+        0.447540014980367,
+        0.366414773497409,
+        0.299995043444432,
+        0.24561516783892,
+        0.201092691332135,
+        0.908266423612745
+      ]
+    },
+    "galton": {
+      "at": [
+        9.5,
+        20.5
+      ],
+      "scale": 1.5,
+      "top": 1.42500007152557
+    },
+    "gauss_300": {
+      "clipped": 1,
+      "counts": [
+        3,
+        0,
+        2,
+        1,
+        3,
+        4,
+        8,
+        7,
+        15,
+        9,
+        16,
+        23,
+        24,
+        19,
+        30,
+        20,
+        21,
+        26,
+        20,
+        6,
+        13,
+        12,
+        5,
+        8,
+        2,
+        2,
+        0,
+        0,
+        1,
+        0
+      ],
+      "drawn": 300,
+      "expected": [
+        0.279597515296653,
+        0.300330889543499,
+        0.569199180462987,
+        1.02700465453511,
+        1.76409824708823,
+        2.88478837925044,
+        4.49102069162141,
+        6.65603653586054,
+        9.39130933717844,
+        12.6147076439876,
+        16.1313165559432,
+        19.6383320183063,
+        22.7604598237296,
+        25.1129449362517,
+        26.3788537409443,
+        26.3788534409443,
+        25.1129449362518,
+        22.7604598237296,
+        19.6383320183063,
+        16.1313165559432,
+        12.6147076439876,
+        9.39130933717848,
+        6.65603653586054,
+        4.49102069162143,
+        2.88478837925042,
+        1.76409824708823,
+        1.02700465453512,
+        0.569199180462987,
+        0.300330889543465,
+        0.27959751529667
+      ],
+      "seed": 72131
+    },
+    "gaussian_random_at": [
+      10.5,
+      15.5
+    ],
+    "keypad_local": [
+      12.0500001907349,
+      0.754999995231628,
+      19.2639999389648
+    ],
+    "longest_line": 44,
+    "museum_severed_tokens": [
+      "galton_board"
+    ],
+    "museum_walk_severed": [],
+    "origin_local": [
+      11.5,
+      0.0,
+      19.5
+    ],
+    "plate_top": 0.905361087221173,
+    "plinths": [
+      [
+        "ArtPlinth0",
+        10,
+        14
+      ]
+    ],
+    "poisson_300": {
+      "clipped": 0,
+      "counts": [
+        2,
+        0,
+        11,
+        0,
+        22,
+        0,
+        36,
+        0,
+        60,
+        0,
+        54,
+        0,
+        58,
+        0,
+        20,
+        0,
+        15,
+        0,
+        11,
+        0,
+        5,
+        0,
+        4,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        2.02138409972564,
+        0.0,
+        10.1069204986282,
+        0.0,
+        25.2673012465705,
+        0.0,
+        42.1121687442842,
+        0.0,
+        52.6402109303552,
+        0.0,
+        52.6402109303552,
+        0.0,
+        43.8668424419627,
+        0.0,
+        31.3334588871162,
+        0.0,
+        19.5834118044476,
+        0.0,
+        10.8796732246931,
+        0.0,
+        5.43983661234656,
+        0.0,
+        2.47265300561207,
+        0.0,
+        1.0302720856717,
+        0.0,
+        0.396258494489114,
+        0.0,
+        0.141520890888969,
+        0.0678761028019907
+      ]
+    },
+    "rain": {
+      "drawn": 275,
+      "in_flight": 41,
+      "landed_after": 234,
+      "landed_before": 182,
+      "seconds": 1.04
+    },
+    "raised_cells": 19,
+    "reach": {
+      "batch": 1.13679277896881,
+      "display": 0.984885394573212,
+      "gauss": 1.17110979557037,
+      "readout": 1.02181661128998
+    },
+    "readout_local": [
+      11.789999961853,
+      0.898636877536774,
+      19.3319396972656
+    ],
+    "rebuilt": {
+      "bins": 30,
+      "cabinet": true,
+      "found": true,
+      "panel": true,
+      "seed": 98661,
+      "stand": "cabinet"
+    },
+    "replay": {
+      "run_a": [
+        2,
+        0,
+        1,
+        0,
+        3,
+        4,
+        5,
+        4,
+        8,
+        6,
+        11,
+        16,
+        15,
+        13,
+        22,
+        13,
+        16,
+        17,
+        9,
+        4,
+        8,
+        10,
+        3,
+        6,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "run_b": [
+        2,
+        0,
+        1,
+        0,
+        3,
+        4,
+        5,
+        4,
+        8,
+        6,
+        11,
+        16,
+        15,
+        13,
+        22,
+        13,
+        16,
+        17,
+        9,
+        4,
+        8,
+        10,
+        3,
+        6,
+        2,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      "seed": 72131
+    },
+    "stream_no_replay": {
+      "run_a": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        0,
+        1,
+        1,
+        8,
+        10,
+        7,
+        12,
+        16,
+        25,
+        15,
+        18,
+        13,
+        22,
+        7,
+        12,
+        3,
+        7,
+        3,
+        6,
+        5,
+        1,
+        3,
+        0,
+        1,
+        0
+      ],
+      "run_b": [
+        0,
+        0,
+        0,
+        1,
+        2,
+        2,
+        2,
+        4,
+        4,
+        7,
+        15,
+        12,
+        12,
+        18,
+        26,
+        12,
+        19,
+        16,
+        12,
+        9,
+        4,
+        5,
+        6,
+        5,
+        2,
+        3,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    "streaming": {
+      "freed": true,
+      "rebuildable": true
+    },
+    "teleporter_cell_floor": -0.0000000968575477600098,
+    "tile": [
+      "44444111444444",
+      "44441111114444",
+      "44111111111144",
+      "44111111111144",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "44111111111144",
+      "44111111111144",
+      "44111111111144",
+      "44111111111144",
+      "44111111111144",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "44444111444444",
+      "44444411444444",
+      "44444411111444",
+      "44444444411444"
+    ],
+    "uniform_300": {
+      "clipped": 0,
+      "counts": [
+        7,
+        10,
+        13,
+        16,
+        15,
+        11,
+        10,
+        2,
+        8,
+        9,
+        10,
+        12,
+        9,
+        13,
+        13,
+        13,
+        12,
+        6,
+        6,
+        13,
+        9,
+        12,
+        9,
+        8,
+        12,
+        9,
+        5,
+        11,
+        6,
+        11
+      ],
+      "expected": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ]
+    },
+    "walk_east_along_row_18_from_the_middle_to_the_visitors_spot": 1.0,
+    "walk_south-west_across_the_mounds_cells_row_17": 0.4375,
+    "walk_south-west_across_the_mounds_cells_row_17_blockers": [
+      "dlessMuseum/Seg0_soane-cabinet-vista/RandomBellCurve/@StaticBody3D@595"
+    ],
+    "walk_south_down_column_6_through_the_north_hall_to_row_13": 1.0,
+    "walk_south_down_the_middle_of_the_south_hall_to_the_door_strip": 1.0,
+    "walk_south_from_the_visitors_spot_into_the_cabinet": 0.328125,
+    "walk_south_from_the_visitors_spot_into_the_cabinet_blockers": [
+      "ndlessMuseum/Seg0_soane-cabinet-vista/DistributionSampler/Cabinet/Body"
+    ],
+    "walk_west_along_row_18_from_the_middle_toward_the_comparator": 1.0
+  },
+  "physics_fps": 60
+}

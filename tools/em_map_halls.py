@@ -88,6 +88,14 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
     # and below it is floor. Default 2 = the rule every other map already has.
     mus_decl = (md.get("map_info", {}) or {}).get("museum", {}) or {}
     wall_h = int(mus_decl.get("wall_height", 2)) if isinstance(mus_decl, dict) else 2
+    # museum.floor_cells (2026-09-12): cells laid as floor whatever the structure says — a
+    # teleporter's void stays a void for the grid and is not a hole in the hall. Twin of the
+    # museum's live re-read (endless_museum._derive_map_row); absent, nothing changes.
+    floor_cells = set()
+    if isinstance(mus_decl, dict) and isinstance(mus_decl.get("floor_cells"), list):
+        for fc in mus_decl["floor_cells"]:
+            if isinstance(fc, list) and len(fc) >= 2:
+                floor_cells.add((int(fc[0]), int(fc[1])))
     inter = md["layers"].get("interactables", [])
     # ORIGIN-PINNED (the ruling drift lesson: tile cells ARE map cells,
     # forever). Cropping to the content bbox moved (0,0) whenever the map's
@@ -122,7 +130,9 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
             # explicit WALL, "p"/"p:N" an explicit PLATFORM (tile "p"/"pN" —
             # a climbable block, never a wall).
             sv2 = str(raw[r][c]).strip() if r < len(raw) and c < len(raw[r]) else ""
-            if sv2 == "w":
+            if (c, r) in floor_cells:
+                line.append("1")          # museum.floor_cells: floor over the grid's void
+            elif sv2 == "w":
                 line.append("4")
             elif sv2 == "p" or sv2.startswith("p:"):
                 n = 1

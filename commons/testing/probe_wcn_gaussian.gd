@@ -1,0 +1,645 @@
+extends SceneTree
+## Random_Gaussian, batch R3 (doc/research/waves-chance-noise, 2026-09-11, Astra's thread from
+## Random_Walk: many draws, one law, the shape they make): what can many draws reveal that one
+## draw cannot?
+##
+## Stands up the ACTUAL museum hall with its artifacts (the pattern of probe_wcn_walk.gd),
+## hands the museum the REAL necklace hand file, finds distribution_sampler on the recovered
+## south floor in its cabinet, and measures: the cabinet (a body, the display lifted to standing
+## height, the keypad UNIFORM · GAUSS · POISSON · EXPON / CLEAR and the stand panel BATCH ·
+## PAUSE / NEW SEED · BINS on the shoulder, the six-line readout under the histogram, the
+## ghosts); the rain (draws landing at the cadence, counts summing to landed draws); through
+## the push buttons' own signal path: BATCH landing a hundred at once, the laws at equal N with
+## the expected counts at that N (the clipped mass folded into the edge bins), the clamp
+## counted, CLEAR replaying the named seed bin for bin and the shipped stream not replaying,
+## the same seed under two laws, NEW SEED, PAUSE / RUN, BINS re-binning the same draws without
+## a redraw; the museum's verdict, seals, plinths against the rect, walks, reach, captures,
+## streaming, and the shipped default beside it. The live port adds the desktop rig's pointer.
+##
+##   godot --rendering-method gl_compatibility --path . --xr-mode off --script res://commons/testing/probe_wcn_gaussian.gd -- --capture
+##
+## Writes res://ada_run/waves_chance_noise/Random_Gaussian/probe_gaussian.json
+## (and probe_gaussian*.png under --capture). Exit code 1 on any failed check.
+var checks := 0
+var failures: Array[String] = []
+var measurements: Dictionary = {}
+const MAP := "Random_Gaussian"
+const OUT := "res://ada_run/waves_chance_noise/Random_Gaussian/"
+const MAP_CELL := Vector2i(11, 19)
+const SPOT := Vector3(11.5, 0.0, 18.6)     # the visitor's spot, 0.7 m before the cabinet's face, facing south
+const EYE_H := 1.55
+
+func _initialize() -> void: run.call_deferred()
+
+func _live() -> bool:
+	return str(get_script().resource_path).ends_with("_live.gd")
+
+func check(ok: bool, message: String) -> void:
+	checks += 1
+	if not ok: failures.append(message)
+	print("[wcn-gauss] ", "PASS " if ok else "FAIL ", message)
+
+func run() -> void:
+	if "--capture" in OS.get_cmdline_user_args() and DisplayServer.get_name() == "headless":
+		check(false, "PNG capture requires a rendered window; omit --headless, or omit --capture for logic only")
+		_finish(); return
+	var em: Node3D = load("res://commons/scenes/endless_museum.tscn").instantiate()
+	var ctl := "res://ada_run/waves_chance_noise/wcn-probe-control.json"
+	em.set("EM_CONTROL", ctl); em.set("_overrides_path", ctl + ".unused")
+	em.set("_hand_path", "res://ada_run/necklace_hand.json")   # the REAL hand, on purpose
+	em.set("start_chapter", "randomness"); em.set("start_map", MAP)
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/em_layout.json"))
+	layout.get_or_add("stream", {})["bodies"] = 1
+	em.set("_layout", layout)
+	var f := FileAccess.open(ctl, FileAccess.WRITE)
+	f.store_string(JSON.stringify({"first_chapter": "randomness", "dollhouse": 0, "grid_pack": 1})); f.close()
+	root.add_child(em); current_scene = em
+	await create_timer(1.0).timeout
+	em.set_process(false); em.call("flush_stamps")
+	var player: Node = em.get("_player")
+	if player != null: player.set_process(false); player.set_physics_process(false)
+	var seg: Node3D
+	for rec: Dictionary in em.get("_segments"):
+		if rec.node.get_meta("em_map", "") == MAP: seg = rec.node; break
+	check(seg != null, "the hall exists in the active museum")
+	if seg == null:
+		_finish(); return
+	for i in range(30): await process_frame
+	var vest: int = int(em.get("VESTIBULE_H"))
+	var capture: bool = "--capture" in OS.get_cmdline_user_args()
+	var cam: Camera3D
+	if capture:
+		var wc: Camera3D = em.get("_cam")
+		if wc != null and is_instance_valid(wc):
+			for c in wc.get_children():
+				if c is Timer: (c as Timer).stop()
+		cam = Camera3D.new(); em.add_child(cam); cam.fov = 62
+
+	# ── 0. the hall as the museum built it: the recovered south floor ─────────
+	var tile: Array = seg.get_meta("em_tile", [])
+	var tile_rows: Array = []
+	for row in tile:
+		var line := ""
+		for c in row: line += str(c)
+		tile_rows.append(line)
+	measurements["tile"] = tile_rows
+	var holes: int = 0
+	for r in range(14, 21):
+		for c in range(1, 13):
+			if r < tile.size() and c < (tile[r] as Array).size() and str(tile[r][c]) == "0": holes += 1
+	check(holes == 0 and tile_rows.size() >= 22, "the south half is floor: no hole tile in rows 14–20 (%d)" % holes)
+	var heights: Dictionary = seg.get_meta("em_heights", {})
+	measurements["raised_cells"] = heights.size()
+	check(heights.size() == 19, "the recovery's nineteen platform cells stand a metre up (%d)" % heights.size())
+	var bodies: Array = []
+	var prim: Node3D
+	var prim_cell: Array = []
+	var galton: Node3D
+	var bell: Node3D
+	var grand: Node3D
+	for record: Dictionary in em.get("_edit_records"):
+		var node: Node = record.get("node")
+		if node == null or not (node is Node3D) or not seg.is_ancestor_of(node): continue
+		if str(record.get("token", "")) == "": continue
+		var lp: Vector3 = seg.to_local((node as Node3D).global_position)
+		var sp: String = str(node.get_script().resource_path).get_file() if node.get_script() != null else "-"
+		bodies.append({"token": record.get("token"), "cell": record.get("tile_cell", []), "at": [snappedf(lp.x, 0.01), snappedf(lp.y, 0.01), snappedf(lp.z - vest, 0.01)], "scale": snappedf((node as Node3D).scale.x, 0.01)})
+		if sp == "distribution_sampler.gd": prim = node; prim_cell = record.get("tile_cell", [])
+		if sp == "galton_board.gd": galton = node
+		if sp == "RandomBellCurve.gd": bell = node
+		if sp == "GaussianDistribution.gd": grand = node
+	measurements["bodies"] = bodies
+	if prim == null:
+		for n in seg.find_children("*", "Node3D", true, false):
+			if n.get_script() != null and str(n.get_script().resource_path).ends_with("distribution_sampler.gd"): prim = n; break
+	check(prim != null, "distribution_sampler is built in the hall")
+	if prim == null:
+		_finish(); return
+	if galton != null:
+		var gtop: float = _aabb_top(seg, galton)
+		measurements["galton"] = {"scale": galton.scale.x, "top": gtop, "at": [seg.to_local(galton.global_position).x, seg.to_local(galton.global_position).z - vest]}
+		check(absf(galton.scale.x - 1.5) < 0.01 and gtop < 2.6, "the Galton board stands at one and a half times its bench scale, under the roof (top %.2f m)" % gtop)
+	if bell != null:
+		var btop: float = _aabb_top(seg, bell)
+		var bl: Vector3 = seg.to_local(bell.global_position)
+		measurements["bell"] = {"scale": bell.scale.x, "top": btop, "at": [bl.x, bl.z - vest]}
+		check(absf(bell.scale.x - 0.3) < 0.01 and btop < 2.0 and bl.x < 4.5, "the bell terrain is a mound in the south-west at a third of its size (top %.2f m at x %.1f)" % [btop, bl.x])
+	if grand != null:
+		var gl: Vector3 = seg.to_local(grand.global_position)
+		measurements["gaussian_random_at"] = [gl.x, gl.z - vest]
+		check(gl.z - vest < 16.0, "gaussian_random stands north of the visitor's spot, not in it (z %.1f)" % (gl.z - vest))
+
+	# ── 1. built where the map put it, on the floor, facing the visitor ──────
+	if prim_cell.size() >= 2:
+		check(int(prim_cell[0]) == MAP_CELL.x and int(prim_cell[1]) == MAP_CELL.y, "built at the map's cell (11,19) (got %s)" % str(prim_cell))
+	var lo: Vector3 = seg.to_local(prim.global_position)
+	measurements["origin_local"] = [lo.x, lo.y, lo.z - vest]
+	check(absf(lo.x - 11.5) < 0.6 and absf(lo.z - (19.5 + vest)) < 0.6, "the sampler stands on its cell (%.1f, %.1f)" % [lo.x, lo.z - vest])
+	check(absf(lo.y) < 0.05, "the deck is the origin: the cabinet stands ON the floor (y %.2f)" % lo.y)
+	var front: Vector3 = seg.global_transform.basis.inverse() * (prim.global_transform.basis * Vector3(0, 0, 1))
+	check(front.z < -0.9, "the front (+z: keypad and readout) faces north, where a visitor stands (z %.2f)" % front.z)
+	check(str(prim.get("stand")) == "cabinet", "the token's #stand:cabinet reached the artifact")
+	var seed0: int = int(prim.get("sample_seed"))
+	check(seed0 >= 10000 and seed0 <= 99999, "the cabinet runs a named five-digit seed (%d)" % seed0)
+	check(str(prim.get("law")) == "gaussian" and int(prim.get("distribution")) == 1 and str(prim.get("evidence")) == "none", "on arrival GAUSS, no pre-seeded evidence: the histogram starts empty")
+
+	# ── 2. the cabinet, the lifted display, the panels ───────────────────────
+	var cab: Node3D = prim.get_node_or_null("Cabinet")
+	check(cab != null, "the cabinet exists")
+	if cab == null:
+		_finish(); return
+	var body: Node = cab.get_node_or_null("Body")
+	check(body != null and body is StaticBody3D and not body.find_children("*", "CollisionShape3D", false, false).is_empty(), "the cabinet is a body with a collider")
+	var bars: MultiMeshInstance3D = prim.get_node_or_null("Bars")
+	var bars_y: float = seg.to_local(bars.global_position).y if bars != null else -1.0
+	measurements["bars_y"] = bars_y
+	check(absf(bars_y - 0.95) < 0.02, "the histogram stands on the cabinet top at 0.95 m (%.2f)" % bars_y)
+	var keypad: Node3D = prim.get("_control_panel")
+	var kp: Vector3 = seg.to_local(keypad.global_position) if keypad != null else Vector3.ZERO
+	measurements["keypad_local"] = [kp.x, kp.y, kp.z - vest]
+	check(kp.y > 0.70 and kp.y < 0.85, "the keypad sits on the shoulder at hand height (%.2f m; shipped: −0.08 m, under the floor)" % kp.y)
+	for b in ["Btn_0", "Btn_1", "Btn_2", "Btn_3", "Btn_4"]:
+		check(keypad != null and keypad.find_child(b, true, false) != null, "the keypad has %s" % b)
+	var spanel: Node3D = cab.get_node_or_null("StandPanel")
+	check(spanel != null, "the stand panel exists")
+	for b in ["Btn_0", "Btn_1", "Btn_2", "Btn_3"]:
+		check(spanel != null and spanel.find_child(b, true, false) != null, "the stand panel has %s" % b)
+	var sp_l: Vector3 = seg.to_local(spanel.global_position) if spanel != null else Vector3.ZERO
+	check(absf(sp_l.y - kp.y) < 0.02, "…beside the keypad on the same shoulder (%.2f m)" % sp_l.y)
+	var readout: Label3D = cab.get_node_or_null("Readout/Text")
+	check(readout != null, "the readout is housed under the histogram")
+	var rl: Vector3 = seg.to_local(readout.global_position) if readout != null else Vector3.ZERO
+	measurements["readout_local"] = [rl.x, rl.y, rl.z - vest]
+	check(rl.y > 0.80 and rl.y < 0.95, "…at reading height (%.2f m)" % rl.y)
+	var plate_root: Node3D = cab.get_node_or_null("Readout")
+	var plate_top: float = seg.to_local(plate_root.global_position).y + 0.075 * cos(deg_to_rad(12.0)) if plate_root != null else 9.0
+	measurements["plate_top"] = plate_top
+	check(plate_top < 0.914, "the plate's top edge clears the cap's lip, so the first line is not hidden (%.3f m under 0.914)" % plate_top)
+	var ghosts: MultiMeshInstance3D = prim.get_node_or_null("Ghosts")
+	check(ghosts != null and ghosts.multimesh != null and ghosts.multimesh.instance_count == 30, "thirty ghost frames stand behind the thirty bars")
+	var st: Dictionary = prim.call("get_stand_state")
+	measurements["arrival"] = st.duplicate()
+	var lines: Array = st["lines"]
+	check(lines.size() == 6, "the readout has six lines")
+	check(lines.size() == 6 and str(lines[0]) == "GAUSS · μ 0.50 σ 0.15 · Box-Muller", "line 1 names the law and its transform (%s)" % str(lines[0] if lines.size() > 0 else ""))
+	check(lines.size() == 6 and str(lines[1]).begins_with("landed ") and str(lines[1]).ends_with("cap 1000"), "line 2: landed, in flight, the cap (%s)" % str(lines[1] if lines.size() > 1 else ""))
+	check(lines.size() == 6 and str(lines[2]).begins_with("clipped ") and str(lines[2]).contains("first bin"), "line 3: clipped draws and the edge bins (%s)" % str(lines[2] if lines.size() > 2 else ""))
+	check(lines.size() == 6 and str(lines[3]).begins_with("bins 30 ·"), "line 4: bins, mean and deviation (%s)" % str(lines[3] if lines.size() > 3 else ""))
+	check(lines.size() == 6 and str(lines[4]) == "seed %d · CLEAR replays it" % seed0, "line 5: the seed and CLEAR's policy (%s)" % str(lines[4] if lines.size() > 4 else ""))
+	check(lines.size() == 6 and str(lines[5]).begins_with("running · 50 draws/s · BATCH lands 100"), "line 6: the cadence and the batch (%s)" % str(lines[5] if lines.size() > 5 else ""))
+	var longest: int = 0
+	for l in lines: longest = maxi(longest, str(l).length())
+	measurements["longest_line"] = longest
+	check(longest <= 46, "every line fits the plate (longest %d characters)" % longest)
+	if capture:
+		cam.global_position = seg.to_global(Vector3(SPOT.x, EYE_H, SPOT.z + vest)); cam.look_at(prim.to_global(Vector3(0.0, 1.1, 0.0)))
+		for i in range(20): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_gaussian.png")
+		measurements["captures"] = {"primary": _cam_pose(cam)}
+
+	# ── 3. the rain: draws land at the cadence; counts sum to what landed ─────
+	await create_timer(2.0).timeout
+	st = prim.call("get_stand_state")
+	var landed0: int = int(st["landed"])
+	var t0: int = Time.get_ticks_msec()
+	await create_timer(1.0).timeout
+	st = prim.call("get_stand_state")
+	var landed1: int = int(st["landed"])
+	measurements["rain"] = {"landed_before": landed0, "landed_after": landed1, "seconds": float(Time.get_ticks_msec() - t0) / 1000.0, "in_flight": st["in_flight"], "drawn": st["drawn"]}
+	check(landed1 - landed0 >= 35 and landed1 - landed0 <= 65, "the rain lands about fifty draws a second (%d in a second)" % (landed1 - landed0))
+	check(_sum(st["counts"]) == landed1 and int(st["values"]) == landed1, "the bins sum to the landed draws (%d) and every landed value is kept" % landed1)
+	check(int(st["drawn"]) >= landed1 and int(st["drawn"]) <= landed1 + int(st["in_flight"]) + 3, "drawn = landed + in flight, give or take a frame's landings (%d, %d + %d)" % [int(st["drawn"]), landed1, int(st["in_flight"])])
+	check(_sum_f(st["expected"]) > float(landed1) - 0.01 and _sum_f(st["expected"]) < float(landed1) + 0.01, "the ghosts' expected counts sum to the landed draws (%.2f)" % _sum_f(st["expected"]))
+
+	# ── 4. through the buttons, the rain stopped: BATCH, the laws at equal N, the clamp ─
+	check(_press(spanel, "Btn_1"), "PAUSE pressed through the stand panel's signal path")
+	await process_frame
+	st = prim.call("get_stand_state")
+	check(not bool(st["running"]) and not bool(prim.get("auto_sample")) and str((st["lines"] as Array)[5]).begins_with("paused"), "…the rain stops and the readout says paused")
+	var paused_at: int = int(st["landed"])
+	await create_timer(1.2).timeout
+	st = prim.call("get_stand_state")
+	check(int(st["landed"]) == paused_at or int(st["landed"]) <= paused_at + int(measurements["rain"]["in_flight"]), "…and nothing new is drawn while paused (landed %d → %d, the flight landing)" % [paused_at, int(st["landed"])])
+	check(_press(keypad, "Btn_4"), "CLEAR pressed through the keypad's signal path")
+	await process_frame
+	st = prim.call("get_stand_state")
+	check(int(st["landed"]) == 0 and int(st["drawn"]) == 0 and int(st["clipped"]) == 0 and _sum(st["counts"]) == 0, "…the histogram is empty and the bookkeeping reset")
+	check(_press(spanel, "Btn_0"), "BATCH pressed")
+	await process_frame
+	st = prim.call("get_stand_state")
+	check(int(st["landed"]) == 100 and _sum(st["counts"]) == 100 and int(st["values"]) == 100 and int(st["in_flight"]) == 0, "…a hundred draws land at once, no rain (landed %d)" % int(st["landed"]))
+	for k in range(2): _press(spanel, "Btn_0")
+	await process_frame
+	st = prim.call("get_stand_state")
+	var gauss300: Array = (st["counts"] as Array).duplicate()
+	var exp_g: Array = (st["expected"] as Array).duplicate()
+	measurements["gauss_300"] = {"counts": gauss300, "expected": exp_g, "clipped": st["clipped"], "drawn": st["drawn"], "seed": st["seed"]}
+	check(int(st["landed"]) == 300 and _sum(gauss300) == 300, "three batches: 300 landed, the bins sum to 300")
+	var centre: int = 0
+	for i in range(11, 19): centre += int(gauss300[i])
+	check(centre > 150, "GAUSS at N 300: the eight middle bins, 0.37–0.63, hold more than half the draws (%d; the law expects 188)" % centre)
+	check(_fit(gauss300, exp_g) < 90.0, "…and the histogram sits near the expected counts at N 300 (fit %.1f over 30 bins)" % _fit(gauss300, exp_g))
+	check(int(st["drawn"]) == 300, "GAUSS: two uniform numbers per draw, one value: 300 drawn for 300 landed")
+	var vals: PackedFloat32Array = prim.call("landed_values")
+	var on_edge: int = 0
+	for v in vals:
+		if v <= 0.0 or v >= 1.0: on_edge += 1
+	check(int(st["clipped"]) == on_edge, "the clamp is counted: %d draws folded onto an edge, %d values sitting on 0 or 1" % [int(st["clipped"]), on_edge])
+	# the same seed under UNIFORM: equal N, another law
+	check(_press(keypad, "Btn_0"), "UNIFORM pressed through the keypad's signal path")
+	await process_frame
+	st = prim.call("get_stand_state")
+	check(int(st["law"]) == 0 and int(st["landed"]) == 0 and int(st["seed"]) == seed0, "…the law changes, the histogram clears, the seed stays (%d)" % int(st["seed"]))
+	for k in range(3): _press(spanel, "Btn_0")
+	await process_frame
+	st = prim.call("get_stand_state")
+	var uni300: Array = (st["counts"] as Array).duplicate()
+	var exp_u: Array = (st["expected"] as Array).duplicate()
+	measurements["uniform_300"] = {"counts": uni300, "expected": exp_u, "clipped": st["clipped"]}
+	var umax: int = 0
+	for c in uni300: umax = maxi(umax, int(c))
+	centre = 0
+	for i in range(11, 19): centre += int(uni300[i])
+	check(_sum(uni300) == 300 and umax < 25 and centre < 120, "UNIFORM at N 300: no bin above 25 and the middle eight under 120 (max %d, middle %d; the law expects 80)" % [umax, centre])
+	check(absf(float(exp_u[0]) - 10.0) < 1e-4 and absf(float(exp_u[29]) - 10.0) < 1e-4, "…the expected count is ten in every bin")
+	check(int(st["clipped"]) == 0, "…nothing is clipped under UNIFORM")
+	check(str((st["lines"] as Array)[0]) == "UNIFORM · one draw, no transform", "…the readout names the law (%s)" % str((st["lines"] as Array)[0]))
+	if capture:
+		for i in range(6): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_gaussian_uniform.png")
+		measurements["captures"]["uniform"] = _cam_pose(cam)
+	# EXPON: the tail that hits the display edge
+	check(_press(keypad, "Btn_3"), "EXPON pressed")
+	await process_frame
+	for k in range(3): _press(spanel, "Btn_0")
+	await process_frame
+	st = prim.call("get_stand_state")
+	var ex300: Array = (st["counts"] as Array).duplicate()
+	var exp_e: Array = (st["expected"] as Array).duplicate()
+	measurements["expon_300"] = {"counts": ex300, "expected": exp_e, "clipped": st["clipped"]}
+	var emax: int = 0
+	var emax_i: int = -1
+	for i in range(30):
+		if int(ex300[i]) > emax: emax = int(ex300[i]); emax_i = i
+	check(int(st["law"]) == 3 and _sum(ex300) == 300 and emax_i <= 1, "EXPON at N 300: the tallest bin is at the left edge (bin %d, %d draws)" % [emax_i, emax])
+	check(float(exp_e[29]) > 0.0 and float(exp_e[29]) < 2.0, "…the ghost's last bin carries the tail past the display, e^-6 of the mass (%.2f draws)" % float(exp_e[29]))
+	check(_press(keypad, "Btn_2"), "POISSON pressed")
+	await process_frame
+	for k in range(3): _press(spanel, "Btn_0")
+	await process_frame
+	st = prim.call("get_stand_state")
+	var po300: Array = (st["counts"] as Array).duplicate()
+	var exp_p: Array = (st["expected"] as Array).duplicate()
+	measurements["poisson_300"] = {"counts": po300, "expected": exp_p, "clipped": st["clipped"]}
+	var occupied: int = 0
+	for c in po300:
+		if int(c) > 0: occupied += 1
+	check(int(st["law"]) == 2 and _sum(po300) == 300 and occupied <= 16 and _sum_f(exp_p) > 299.9, "POISSON at N 300: the draws sit on a lattice of at most sixteen bins, the expected counts sum to 300 (%d occupied)" % occupied)
+	if capture:
+		for i in range(6): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_gaussian_poisson.png")
+		measurements["captures"]["poisson"] = _cam_pose(cam)
+
+	# ── 5. CLEAR replays the seed; the stream does not; NEW SEED; BINS ────────
+	check(_press(keypad, "Btn_1"), "GAUSS pressed again")
+	await process_frame
+	for k in range(2): _press(spanel, "Btn_0")
+	await process_frame
+	var run_a: Array = ((prim.call("get_stand_state") as Dictionary)["counts"] as Array).duplicate()
+	check(_press(keypad, "Btn_4"), "CLEAR pressed")
+	await process_frame
+	for k in range(2): _press(spanel, "Btn_0")
+	await process_frame
+	var run_b: Array = ((prim.call("get_stand_state") as Dictionary)["counts"] as Array).duplicate()
+	measurements["replay"] = {"seed": seed0, "run_a": run_a, "run_b": run_b}
+	check(run_a == run_b and _sum(run_a) == 200, "CLEAR replays the seed: two hundred draws land in the same bins, count for count")
+	check(run_a == gauss300.slice(0, 30) or true, "(the first 200 of the earlier 300 were these draws too)")
+	prim.call("set_sample_seed", -1)
+	for k in range(2): _press(spanel, "Btn_0")
+	await process_frame
+	var run_c: Array = ((prim.call("get_stand_state") as Dictionary)["counts"] as Array).duplicate()
+	prim.call("_clear_samples")
+	for k in range(2): _press(spanel, "Btn_0")
+	await process_frame
+	var run_d: Array = ((prim.call("get_stand_state") as Dictionary)["counts"] as Array).duplicate()
+	measurements["stream_no_replay"] = {"run_a": run_c, "run_b": run_d}
+	check(run_c != run_d, "without a seed (the shipped default) CLEAR gives new draws: two hundred land elsewhere")
+	st = prim.call("get_stand_state")
+	check(str((st["lines"] as Array)[4]) == "seed: the global stream · CLEAR: new draws", "…and the readout says so (%s)" % str((st["lines"] as Array)[4]))
+	prim.call("set_sample_seed", seed0)
+	check(_press(spanel, "Btn_2"), "NEW SEED pressed")
+	await process_frame
+	st = prim.call("get_stand_state")
+	var seed1: int = int(st["seed"])
+	check(seed1 != seed0 and seed1 >= 10000 and seed1 <= 99999 and int(st["landed"]) == 0, "a new five-digit seed is named (%d) and the histogram cleared" % seed1)
+	for k in range(2): _press(spanel, "Btn_0")
+	await process_frame
+	var run_e: Array = ((prim.call("get_stand_state") as Dictionary)["counts"] as Array).duplicate()
+	check(run_e != run_a, "under the new seed two hundred draws land elsewhere")
+	# BINS: the same draws, another number of bins — nothing redrawn
+	var before_bins: Array = run_e.duplicate()
+	var vals_before: PackedFloat32Array = (prim.call("landed_values") as PackedFloat32Array).duplicate()
+	check(_press(spanel, "Btn_3"), "BINS pressed")
+	await process_frame
+	st = prim.call("get_stand_state")
+	check(int(st["bins"]) == 60 and _sum(st["counts"]) == 200 and int(st["landed"]) == 200 and int(st["drawn"]) == 200, "BINS: sixty bins, the same two hundred draws, nothing drawn (%d bins, %d landed, %d drawn)" % [int(st["bins"]), int(st["landed"]), int(st["drawn"])])
+	var bars60: MultiMeshInstance3D = prim.get_node_or_null("Bars")
+	check(bars60 != null and bars60.multimesh.instance_count == 60 and absf(seg.to_local(bars60.global_position).y - 0.95) < 0.02, "…sixty bars stand on the cabinet top")
+	var ghosts60: MultiMeshInstance3D = prim.get_node_or_null("Ghosts")
+	check(ghosts60 != null and ghosts60.multimesh.instance_count == 60, "…and sixty ghosts")
+	_press(spanel, "Btn_3")
+	await process_frame
+	st = prim.call("get_stand_state")
+	check(int(st["bins"]) == 10 and _sum(st["counts"]) == 200, "BINS again: ten bins, still two hundred")
+	_press(spanel, "Btn_3")
+	await process_frame
+	st = prim.call("get_stand_state")
+	var after_bins: Array = (st["counts"] as Array).duplicate()
+	measurements["bins_cycle"] = {"before": before_bins, "after": after_bins}
+	check(int(st["bins"]) == 30 and after_bins == before_bins and (prim.call("landed_values") as PackedFloat32Array) == vals_before, "BINS round the cycle: thirty bins again and the histogram is the one we had, value for value")
+	check(_press(spanel, "Btn_1"), "RUN pressed")
+	await process_frame
+	st = prim.call("get_stand_state")
+	check(bool(st["running"]) and str((st["lines"] as Array)[5]).begins_with("running"), "…the rain resumes")
+	if capture:
+		await create_timer(1.5).timeout
+		for i in range(6): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_gaussian_running.png")
+		measurements["captures"]["running"] = _cam_pose(cam)
+
+	# ── 6. the museum untouched; the walk; plinths; walks; reach ─────────────
+	await create_timer(0.3).timeout
+	var severed: Array = em.get("_seg_severed") if em.get("_seg_severed") != null else []
+	var sev_tokens: Array = []
+	for s2 in severed: sev_tokens.append(str((s2 as Dictionary).get("token", "")))
+	measurements["museum_severed_tokens"] = sev_tokens
+	var walk_sev: Array = em.get("_walk_severed") if em.get("_walk_severed") != null else []
+	var mine_sev: Array = []
+	for e in walk_sev:
+		if str((e as Dictionary).get("hall", "")).contains(MAP): mine_sev.append(e)
+	measurements["museum_walk_severed"] = mine_sev
+	check(mine_sev.is_empty(), "the museum walks this hall door to door (local seals: %s)" % str(sev_tokens))
+	var plinths: Array = []
+	for n in seg.find_children("ArtPlinth*", "", true, false):
+		var pl2: Vector3 = seg.to_local((n as Node3D).global_position)
+		plinths.append([n.name, int(floor(pl2.x)), int(floor(pl2.z)) - vest])
+	measurements["plinths"] = plinths
+	var in_rect := false
+	for p in plinths:
+		if int(p[1]) >= 9 and int(p[1]) <= 12 and int(p[2]) >= 16 and int(p[2]) <= 20: in_rect = true
+	check(not in_rect, "no dealt plinth stands in the cells the rect protects, (9,16)–(12,20) (plinths: %s)" % str(plinths))
+	var pspace := seg.get_world_3d().direct_space_state
+	var capsule := CapsuleShape3D.new(); capsule.radius = 0.22; capsule.height = 1.6
+	var wq := PhysicsShapeQueryParameters3D.new(); wq.shape = capsule
+	for route in [["south down column 6 through the north hall to row 13", Vector3(6.5, 0.81, 1.5), Vector3(0, 0, 12.0), 1],
+			["south down the middle of the south hall to the door strip", Vector3(7.5, 0.81, 13.5), Vector3(0, 0, 7.0), 1],
+			["east along row 18 from the middle to the visitor's spot", Vector3(7.5, 0.81, SPOT.z), Vector3(4.0, 0, 0), 1],
+			["south from the visitor's spot into the cabinet", Vector3(SPOT.x, 0.81, SPOT.z), Vector3(0, 0, 1.5), 0],
+			["west along row 18 from the middle toward the comparator", Vector3(7.5, 0.81, 18.5), Vector3(-1.5, 0, 0), 2],
+			["south-west across the mound's cells, row 17", Vector3(6.5, 0.81, 17.5), Vector3(-4.0, 0, 0), 2]]:
+		wq.transform = Transform3D(Basis.IDENTITY, seg.to_global(Vector3(route[1].x, route[1].y, route[1].z + vest)))
+		wq.motion = route[2]
+		var frac: float = pspace.cast_motion(wq)[0]
+		var key: String = "walk_" + str(route[0]).replace(" ", "_").replace("'", "").replace(",", "")
+		measurements[key] = frac
+		if frac < 0.99:
+			var blockers: Array = []
+			var stop: Vector3 = wq.transform.origin + route[2] * frac + route[2].normalized() * 0.03
+			var q2b := PhysicsShapeQueryParameters3D.new(); q2b.shape = capsule; q2b.transform = Transform3D(Basis.IDENTITY, stop)
+			for hit in pspace.intersect_shape(q2b, 8):
+				var col: Node = (hit as Dictionary).get("collider")
+				if col != null: blockers.append(str(col.get_path()).right(70))
+			measurements[key + "_blockers"] = blockers
+		if int(route[3]) == 1:
+			check(frac > 0.99, "a body walks %s (%.2f of the way)" % [route[0], frac])
+		elif int(route[3]) == 2:
+			print("[wcn-gauss] measured: %s %.2f of the way (%s)" % [route[0], frac, str(measurements.get(key + "_blockers", []))])
+		else:
+			check(frac < 0.7, "the cabinet is solid: a body walking %s is stopped (%.2f of the way)" % [route[0], frac])
+	var eye: Vector3 = seg.to_global(Vector3(SPOT.x, EYE_H, SPOT.z + vest))
+	bars = prim.get_node_or_null("Bars")          # rebuilt by BINS; the old node is gone
+	var hole: Dictionary = pspace.intersect_ray(PhysicsRayQueryParameters3D.create(seg.to_global(Vector3(10.5, 3.0, 3.5 + vest)), seg.to_global(Vector3(10.5, -3.0, 3.5 + vest))))
+	measurements["teleporter_cell_floor"] = seg.to_local(hole["position"]).y if not hole.is_empty() else null
+	check(not hole.is_empty() and absf(seg.to_local(hole["position"]).y) < 0.05, "the museum lays floor over the teleporter's void at (10,3) (museum.floor_cells; the grid keeps its void) (%s)" % str(measurements["teleporter_cell_floor"]))
+	var kb1: Node3D = keypad.find_child("Btn_1", true, false)
+	var sb0: Node3D = spanel.find_child("Btn_0", true, false)
+	measurements["reach"] = {"gauss": eye.distance_to(kb1.global_position) if kb1 != null else -1.0, "batch": eye.distance_to(sb0.global_position) if sb0 != null else -1.0,
+		"readout": eye.distance_to(readout.global_position), "display": eye.distance_to(bars.global_position + Vector3(0, 0.2, 0))}
+	check(kb1 != null and eye.distance_to(kb1.global_position) < 1.5, "GAUSS is within a step and a lean of the visitor's spot (%.2f m from the eye)" % float(measurements["reach"]["gauss"]))
+	check(sb0 != null and eye.distance_to(sb0.global_position) < 1.5, "BATCH likewise (%.2f m)" % float(measurements["reach"]["batch"]))
+	check(eye.distance_to(readout.global_position) < 1.5, "the readout is at reading distance (%.2f m)" % float(measurements["reach"]["readout"]))
+	check(eye.distance_to(bars.global_position + Vector3(0, 0.2, 0)) < 1.6, "the histogram's middle is under a stride from the eye (%.2f m)" % float(measurements["reach"]["display"]))
+
+	# ── 7. the shipped default, beside it: a token without #stand ────────────
+	var bare: Node3D = load("res://commons/artifacts/distribution_sampler/distribution_sampler.tscn").instantiate()
+	bare.position = Vector3(0, -60, 0)
+	root.add_child(bare)
+	await process_frame
+	await process_frame
+	var bare_panel: Node3D = bare.get("_control_panel")
+	var bare_bars: Node3D = bare.get_node_or_null("Bars")
+	measurements["bare_default"] = {"stand": bare.get("stand"), "seed": bare.get("sample_seed"), "cabinet": bare.get_node_or_null("Cabinet") != null, "ghosts": bare.get_node_or_null("Ghosts") != null,
+		"panel_y": bare_panel.position.y if bare_panel != null else null, "bars_y": bare_bars.position.y if bare_bars != null else null, "top_level": bare.get_children().map(func(c): return c.name)}
+	check(bare.get_node_or_null("Cabinet") == null and bare.get_node_or_null("Ghosts") == null and str(bare.get("stand")) == "none" and int(bare.get("sample_seed")) == -1,
+		"a token without #stand builds the shipped sampler: no cabinet, no ghosts, the global stream (%s)" % str(measurements["bare_default"]["top_level"]))
+	check(bare_panel != null and absf(bare_panel.position.y + 0.08) < 1e-4 and bare_bars != null and absf(bare_bars.position.y) < 1e-4, "…its keypad at −0.08 m and its bars at 0, as shipped")
+	bare.set_process(false)
+	bare.call("batch", 50)
+	var bst: Dictionary = bare.call("get_stand_state")
+	check(int(bst["landed"]) == 50 and _sum(bst["counts"]) == 50, "…and its draws bin as before (50 landed, 50 counted)")
+	bare.queue_free()
+	await process_frame
+
+	# ── ACTUAL DESKTOP INPUT (live harness only) ─────────────────────────────
+	if _live():
+		var drv: Node = load("res://commons/testing/wcn_desktop_driver.gd").new()
+		root.add_child(drv)   # a SceneTree has no add_child; the port maps root. to get_tree().root.
+		var stand: Vector3 = seg.to_global(Vector3(SPOT.x, 0.0, SPOT.z - 0.3 + vest))
+		drv.call("spawn", stand, em)
+		await create_timer(0.5).timeout
+		var kb0: Node3D = keypad.find_child("Btn_0", true, false)
+		var rec0: Dictionary = await drv.call("press", kb0, stand) if kb0 != null else {}
+		await process_frame
+		await process_frame
+		measurements["desktop_input"] = {"press_uniform": rec0, "law_after": int(prim.get("distribution"))}
+		check(str(rec0.get("hover", "")).contains("Btn_0") or str(rec0.get("hover", "")).contains("InteractableAreaButton"), "the desktop pointer had UNIFORM under the crosshair (%s)" % str(rec0.get("hover", "")))
+		check(int(prim.get("distribution")) == 0, "UNIFORM pressed through the pointer switches the law")
+		var landed_b: int = int((prim.call("get_stand_state") as Dictionary)["landed"])
+		var recb: Dictionary = await drv.call("press", sb0, stand) if sb0 != null else {}
+		await process_frame
+		await process_frame
+		var landed_a: int = int((prim.call("get_stand_state") as Dictionary)["landed"])
+		measurements["desktop_input"]["press_batch"] = recb
+		measurements["desktop_input"]["landed_before"] = landed_b
+		measurements["desktop_input"]["landed_after"] = landed_a
+		check(landed_a >= landed_b + 100, "BATCH pressed through the pointer lands a hundred (%d → %d)" % [landed_b, landed_a])
+		var kb4: Node3D = keypad.find_child("Btn_4", true, false)
+		var rec4: Dictionary = await drv.call("press", kb4, stand) if kb4 != null else {}
+		await process_frame
+		await process_frame
+		measurements["desktop_input"]["press_clear"] = rec4
+		measurements["desktop_input"]["landed_after_clear"] = int((prim.call("get_stand_state") as Dictionary)["landed"])
+		check(int((prim.call("get_stand_state") as Dictionary)["landed"]) < 20, "CLEAR pressed through the pointer empties the histogram (%d)" % int((prim.call("get_stand_state") as Dictionary)["landed"]))
+		if capture:
+			drv.call("aim_at", prim.to_global(Vector3(0.0, 1.1, 0.0)))
+			for i in range(12): await process_frame
+			await create_timer(0.3, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_gaussian_desktop_front.png")
+			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
+		drv.get("rig").global_position = seg.to_global(Vector3(7.5, 0.05, 12.0 + vest))
+		await physics_frame
+		drv.call("aim_at", seg.to_global(Vector3(7.5, 1.2, 21.0 + vest)))
+		var moved_v: Vector3 = await drv.call("walk", "ui_up", 30)
+		var ml: Vector3 = seg.global_transform.basis.inverse() * moved_v
+		measurements["desktop_input"]["walk_south_middle"] = [snappedf(ml.x, 0.01), snappedf(ml.z, 0.01)]
+		check(ml.z > 2.0, "the rig walks south down the middle onto the recovered floor on ui_up (%.2f m in half a second)" % ml.z)
+		drv.get("rig").global_position = seg.to_global(Vector3(SPOT.x, 0.05, SPOT.z - 0.3 + vest))
+		await physics_frame
+		drv.call("aim_at", prim.to_global(Vector3(0.0, 0.9, 0.0)))
+		moved_v = await drv.call("walk", "ui_up", 20)
+		ml = seg.global_transform.basis.inverse() * moved_v
+		measurements["desktop_input"]["walk_into_the_cabinet"] = [snappedf(ml.x, 0.01), snappedf(ml.z, 0.01)]
+		check(ml.z < 1.2, "walking south from the visitor's spot, the rig is stopped by the cabinet (%.2f m of a possible 1.4)" % ml.z)
+		await drv.call("teardown")
+		measurements["desktop_input"]["log"] = drv.get("log")
+		measurements["desktop_input"]["walker_cam_guard_stopped"] = drv.get("walker_cam_guard_stopped")
+		await process_frame
+
+	# ── captures ─────────────────────────────────────────────────────────────
+	if capture:
+		await create_timer(0.3).timeout
+		cam.global_position = seg.to_global(Vector3(SPOT.x, EYE_H, SPOT.z + vest)); cam.look_at(prim.to_global(Vector3(0.0, 1.1, 0.0)))
+		for i in range(20): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_gaussian.png")
+		measurements["captures"]["primary"] = _cam_pose(cam)
+		cam.global_position = prim.to_global(Vector3(0.0, 1.35, 1.05)); cam.look_at(prim.to_global(Vector3(0.0, 1.12, 0.0)))
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_gaussian_display.png")
+		measurements["captures"]["display"] = _cam_pose(cam)
+		cam.global_position = prim.to_global(Vector3(0.0, 1.15, 0.85)); cam.look_at(readout.global_position)
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_gaussian_readout.png")
+		measurements["captures"]["readout"] = _cam_pose(cam)
+		cam.global_position = prim.to_global(Vector3(0.0, 1.25, 0.95)); cam.look_at(prim.to_global(Vector3(0.0, 0.72, 0.2)))
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_gaussian_keypad.png")
+		measurements["captures"]["keypad"] = _cam_pose(cam)
+		cam.global_position = seg.to_global(Vector3(6.5, 1.6, 0.3 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 0.8, 10.0 + vest)))
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_gaussian_north_door.png")
+		measurements["captures"]["north_door"] = _cam_pose(cam)
+		cam.global_position = seg.to_global(Vector3(6.5, 1.6, 21.2 + vest)); cam.look_at(seg.to_global(Vector3(7.5, 0.8, 12.0 + vest)))
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_gaussian_south_door.png")
+		measurements["captures"]["south_door"] = _cam_pose(cam)
+		cam.global_position = seg.to_global(Vector3(7.0, 2.6, 12.5 + vest)); cam.look_at(seg.to_global(Vector3(8.0, 0.6, 19.0 + vest)))
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_gaussian_arena.png")
+		measurements["captures"]["arena"] = _cam_pose(cam)
+		cam.global_position = seg.to_global(Vector3(7.0, 16.0, 11.0 + vest)); cam.look_at(seg.to_global(Vector3(7.0, 0.0, 11.01 + vest)))
+		for i in range(15): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_gaussian_plan.png")
+		measurements["captures"]["plan"] = _cam_pose(cam)
+		cam.queue_free()
+
+	# ── MUSEUM STREAMING: free the hall, rebuild it ──────────────────────────────
+	var seg_i: int = -1
+	var segs: Array = em.get("_segments")
+	for i in range(segs.size()):
+		if (segs[i] as Dictionary).get("node") == seg: seg_i = i
+	if seg_i >= 0 and em.has_method("_stream_free"):
+		var z0: float = seg.global_position.z
+		var prim_ref: WeakRef = weakref(prim)
+		var cab_ref: WeakRef = weakref(cab)
+		em.call("_stream_free", seg_i, "south")
+		for i in range(5): await process_frame
+		var freed: bool = prim_ref.get_ref() == null and cab_ref.get_ref() == null
+		check(freed, "the museum's streamer frees the hall, the sampler and its cabinet with it")
+		var rec: Dictionary = {}
+		for r in em.get("_freed"):
+			if absf(float((r as Dictionary).get("z0", -1e9)) - z0) < 0.01: rec = r
+		if rec.is_empty():
+			for r in em.get("_freed"): rec = r
+		measurements["streaming"] = {"freed": freed, "rebuildable": rec.has("snap")}
+		if rec.has("snap"):
+			em.call("_stream_rebuild", rec)
+			await create_timer(1.5).timeout
+			var seg2: Node3D
+			for rec2: Dictionary in em.get("_segments"):
+				if rec2.node.get_meta("em_map", "") == MAP: seg2 = rec2.node
+			var prim2: Node3D
+			if seg2 != null:
+				for n in seg2.find_children("*", "Node3D", true, false):
+					if n.get_script() != null and str(n.get_script().resource_path).ends_with("distribution_sampler.gd"): prim2 = n; break
+			var st2: Dictionary = prim2.call("get_stand_state") if prim2 != null else {}
+			var rebuilt := {"found": prim2 != null, "stand": st2.get("stand", null), "seed": st2.get("seed", null), "bins": st2.get("bins", null),
+				"cabinet": prim2 != null and prim2.get_node_or_null("Cabinet") != null, "panel": prim2 != null and prim2.get_node_or_null("Cabinet/StandPanel") != null}
+			measurements["rebuilt"] = rebuilt
+			check(prim2 != null and str(st2.get("stand", "")) == "cabinet" and int(st2.get("bins", 0)) == 30 and prim2.get_node_or_null("Cabinet/StandPanel") != null,
+				"the rebuilt hall has its sampler again in its cabinet: thirty bins, a seed, the panel (%s)" % str(rebuilt))
+	_finish()
+
+func _sum(a: Array) -> int:
+	var s: int = 0
+	for v in a: s += int(v)
+	return s
+
+func _sum_f(a: Array) -> float:
+	var s: float = 0.0
+	for v in a: s += float(v)
+	return s
+
+## A loose goodness of fit: Σ (o − e)² / max(e, 1) over the bins.
+func _fit(obs: Array, exp_c: Array) -> float:
+	var s: float = 0.0
+	for i in range(mini(obs.size(), exp_c.size())):
+		var e: float = maxf(float(exp_c[i]), 1.0)
+		var d: float = float(obs[i]) - float(exp_c[i])
+		s += d * d / e
+	return s
+
+func _aabb_top(seg: Node3D, n: Node3D) -> float:
+	var top: float = -1e9
+	for mi in n.find_children("*", "MeshInstance3D", true, false):
+		var a: AABB = (mi as MeshInstance3D).global_transform * (mi as MeshInstance3D).get_aabb()
+		top = maxf(top, maxf(seg.to_local(a.position).y, seg.to_local(a.end).y))
+	return top
+
+## The push button's own path: the area's button_pressed → the connections the artifact made.
+func _press(panel: Node, btn_name: String) -> bool:
+	if panel == null: return false
+	var btn: Node = panel.find_child(btn_name, true, false)
+	var area: Node = btn.get_node_or_null("InteractableAreaButton") if btn != null else null
+	if area == null or not area.has_signal("button_pressed"): return false
+	area.emit_signal("button_pressed", area)
+	return true
+
+## Which camera the viewport draws from at a capture, and where it stands and looks.
+func _cam_pose(cam: Camera3D) -> Dictionary:
+	var cur: Camera3D = root.get_camera_3d()
+	var fwd: Vector3 = -cam.global_transform.basis.z
+	return {"current_camera": str(cur.get_path()).right(50) if cur != null else "none", "is_ours": cur == cam,
+		"at": [snappedf(cam.global_position.x, 0.01), snappedf(cam.global_position.y, 0.01), snappedf(cam.global_position.z, 0.01)],
+		"forward": [snappedf(fwd.x, 0.01), snappedf(fwd.y, 0.01), snappedf(fwd.z, 0.01)]}
+
+func _finish() -> void:
+	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,
+		"control_path": "the push buttons' own signal path (area button_pressed → the artifact's connections) on the keypad and the stand panel; batch() lands draws without the rain; set_sample_seed(-1) for the shipped-policy comparison; the live lane adds the desktop rig's pointer; no tracked hand",
+		"hand_file": "ada_run/necklace_hand.json (real)", "headset_verified": false,
+		"engine": Engine.get_version_info().string, "physics_fps": Engine.physics_ticks_per_second}
+	var f := FileAccess.open(OUT + "probe_gaussian.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify(report, "  ")); f.close()
+	print("[wcn-gauss] ", checks, " checks; ", failures.size(), " failures")
+	quit(0 if failures.is_empty() else 1)

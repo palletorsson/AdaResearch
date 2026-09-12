@@ -1,0 +1,1309 @@
+{
+  "checks": 101,
+  "control_path": "the push buttons' own signal path (area button_pressed → the artifact's connections) on the keypad and the stand panel; batch() lands draws without the rain; set_sample_seed(-1) for the shipped-policy comparison; the live lane adds the desktop rig's pointer; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "Random_Gaussian",
+  "measurements": {
+    "arrival": {
+      "batch_size": 100,
+      "bins": 30,
+      "clipped": 1,
+      "counts": [
+        0,
+        3,
+        0,
+        2,
+        6,
+        11,
+        10,
+        15,
+        16,
+        27,
+        35,
+        38,
+        62,
+        60,
+        68,
+        62,
+        57,
+        52,
+        51,
+        46,
+        32,
+        26,
+        24,
+        11,
+        11,
+        4,
+        1,
+        1,
+        0,
+        1
+      ],
+      "drawn": 84,
+      "expected": [
+        0.0372796687062205,
+        0.0400441186057998,
+        0.0758932240617316,
+        0.136933953938014,
+        0.235213099611764,
+        0.384638450566726,
+        0.598802758882855,
+        0.887471538114739,
+        1.25217457829046,
+        1.68196101919834,
+        2.1508422074591,
+        2.6184442691075,
+        3.03472797649728,
+        3.3483926581669,
+        3.51718049879257,
+        3.51718045879257,
+        3.3483926581669,
+        3.03472797649728,
+        2.6184442691075,
+        2.15084220745909,
+        1.68196101919834,
+        1.25217457829046,
+        0.887471538114739,
+        0.598802758882857,
+        0.384638450566723,
+        0.235213099611764,
+        0.136933953938017,
+        0.0758932240617316,
+        0.0400441186057954,
+        0.0372796687062227
+      ],
+      "in_flight": 44,
+      "landed": 40,
+      "law": 1,
+      "law_name": "GAUSS",
+      "lines": [
+        "GAUSS · μ 0.50 σ 0.15 · Box-Muller",
+        "landed 40 · in flight 44 · cap 1000",
+        "clipped 1 of 84 drawn · first bin 0 · last 0",
+        "bins 30 · mean 0.492 · σ 0.155 (binned)",
+        "seed 90292 · CLEAR replays it",
+        "running · 50 draws/s · BATCH lands 100"
+      ],
+      "max_samples": 1000,
+      "replay": true,
+      "running": true,
+      "seed": 90292,
+      "stand": "cabinet",
+      "values": 40
+    },
+    "bare_default": {
+      "bars_y": 0.0,
+      "cabinet": false,
+      "ghosts": false,
+      "panel_y": -0.0799999982118607,
+      "seed": -1,
+      "stand": "none",
+      "top_level": [
+        "BackPanel",
+        "@MeshInstance3D@3890",
+        "@MeshInstance3D@3891",
+        "Bars",
+        "TheoryCurve",
+        "SampleMarkers",
+        "Signage",
+        "@Node3D@3909",
+        "StatsLabel",
+        "DISTRIBUTIONS"
+      ]
+    },
+    "bars_y": 0.949999988079071,
+    "bell": {
+      "at": [
+        3.5,
+        17.5
+      ],
+      "scale": 0.300000011920929,
+      "top": 1.63033306598663
+    },
+    "bins_cycle": {
+      "after": [
+        0,
+        1,
+        0,
+        1,
+        2,
+        3,
+        3,
+        3,
+        5,
+        5,
+        14,
+        11,
+        18,
+        14,
+        17,
+        17,
+        15,
+        16,
+        14,
+        14,
+        7,
+        9,
+        3,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "before": [
+        0,
+        1,
+        0,
+        1,
+        2,
+        3,
+        3,
+        3,
+        5,
+        5,
+        14,
+        11,
+        18,
+        14,
+        17,
+        17,
+        15,
+        16,
+        14,
+        14,
+        7,
+        9,
+        3,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "bodies": [
+      {
+        "at": [
+          7.5,
+          1.7,
+          -3.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:window"
+      },
+      {
+        "at": [
+          7.5,
+          1.7,
+          -2.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:view"
+      },
+      {
+        "at": [
+          11.0,
+          1.6,
+          -2.94
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:counter"
+      },
+      {
+        "at": [
+          1.14,
+          0.0,
+          -1.4
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:extinguisher"
+      },
+      {
+        "at": [
+          15.94,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:elevator"
+      },
+      {
+        "at": [
+          15.1,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:pallet"
+      },
+      {
+        "at": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "lobby:point_zero"
+      },
+      {
+        "at": [
+          3.5,
+          1.0,
+          2.5
+        ],
+        "cell": [
+          3,
+          2
+        ],
+        "scale": 1.0,
+        "token": "GaussianBlurShader"
+      },
+      {
+        "at": [
+          8.5,
+          1.5,
+          6.5
+        ],
+        "cell": [
+          8,
+          6
+        ],
+        "scale": 1.0,
+        "token": "GaussianPaintSplatter"
+      },
+      {
+        "at": [
+          11.5,
+          0.0,
+          8.5
+        ],
+        "cell": [
+          11,
+          8
+        ],
+        "scale": 1.0,
+        "token": "GaussianBlurCircle"
+      },
+      {
+        "at": [
+          7.5,
+          0.0,
+          10.5
+        ],
+        "cell": [
+          7,
+          10
+        ],
+        "scale": 1.0,
+        "token": "dark_sphere"
+      },
+      {
+        "at": [
+          10.5,
+          0.0,
+          15.5
+        ],
+        "cell": [
+          10,
+          15
+        ],
+        "scale": 1.0,
+        "token": "gaussian_random"
+      },
+      {
+        "at": [
+          3.5,
+          0.0,
+          17.5
+        ],
+        "cell": [
+          3,
+          17
+        ],
+        "scale": 0.3,
+        "token": "random_bell_curve"
+      },
+      {
+        "at": [
+          5.5,
+          0.0,
+          18.5
+        ],
+        "cell": [
+          5,
+          18
+        ],
+        "scale": 1.0,
+        "token": "distribution_comparator"
+      },
+      {
+        "at": [
+          11.5,
+          0.0,
+          19.5
+        ],
+        "cell": [
+          11,
+          19
+        ],
+        "scale": 1.0,
+        "token": "distribution_sampler"
+      },
+      {
+        "at": [
+          9.5,
+          0.0,
+          20.5
+        ],
+        "cell": [
+          9,
+          20
+        ],
+        "scale": 1.5,
+        "token": "galton_board"
+      },
+      {
+        "at": [
+          6.5,
+          0.0,
+          0.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "gate:random gaussian"
+      },
+      {
+        "at": [
+          2.0,
+          1.58,
+          20.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          9.0,
+          1.58,
+          23.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.0,
+          1.58,
+          23.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          9.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          3.0,
+          1.58,
+          2.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          5.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          10.99,
+          1.58,
+          24.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          11.99,
+          1.58,
+          3.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          12.99,
+          1.58,
+          5.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          2.01,
+          1.58,
+          3.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          6.01,
+          1.58,
+          23.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.99,
+          1.58,
+          22.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          4.0,
+          1.58,
+          20.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          11.0,
+          1.58,
+          2.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          7.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          11.99,
+          1.58,
+          12.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          12.99,
+          1.58,
+          7.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.0,
+          3.52,
+          -1.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "exit_sign"
+      },
+      {
+        "at": [
+          6.5,
+          3.0,
+          24.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "exit_sign"
+      },
+      {
+        "at": [
+          1.02,
+          2.25,
+          -3.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "wall_clock"
+      },
+      {
+        "at": [
+          1.0,
+          1.7,
+          10.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "info_screen"
+      },
+      {
+        "at": [
+          1.0,
+          1.5,
+          -2.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "electrical_panel"
+      },
+      {
+        "at": [
+          3.5,
+          4.64,
+          6.23
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "ceiling_vent"
+      },
+      {
+        "at": [
+          1.28,
+          0.85,
+          17.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "fire_hose_box"
+      },
+      {
+        "at": [
+          10.5,
+          0.42,
+          14.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "token": "dream_bodies"
+      }
+    ],
+    "captures": {
+      "arena": {
+        "at": [
+          7.0,
+          2.6,
+          12.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3332",
+        "forward": [
+          0.15,
+          -0.29,
+          0.95
+        ],
+        "is_ours": true
+      },
+      "display": {
+        "at": [
+          11.5,
+          1.35,
+          18.45
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3332",
+        "forward": [
+          0.0,
+          -0.21,
+          0.98
+        ],
+        "is_ours": true
+      },
+      "keypad": {
+        "at": [
+          11.5,
+          1.25,
+          18.55
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3332",
+        "forward": [
+          0.0,
+          -0.58,
+          0.82
+        ],
+        "is_ours": true
+      },
+      "north_door": {
+        "at": [
+          6.5,
+          1.6,
+          0.3
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3332",
+        "forward": [
+          0.0,
+          -0.08,
+          1.0
+        ],
+        "is_ours": true
+      },
+      "plan": {
+        "at": [
+          7.0,
+          16.0,
+          11.0
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3332",
+        "forward": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "poisson": {
+        "at": [
+          11.5,
+          1.55,
+          18.6
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3332",
+        "forward": [
+          0.0,
+          -0.45,
+          0.89
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          11.5,
+          1.55,
+          18.6
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3332",
+        "forward": [
+          0.0,
+          -0.45,
+          0.89
+        ],
+        "is_ours": true
+      },
+      "readout": {
+        "at": [
+          11.5,
+          1.15,
+          18.65
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3332",
+        "forward": [
+          0.37,
+          -0.32,
+          0.87
+        ],
+        "is_ours": true
+      },
+      "running": {
+        "at": [
+          11.5,
+          1.55,
+          18.6
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3332",
+        "forward": [
+          0.0,
+          -0.45,
+          0.89
+        ],
+        "is_ours": true
+      },
+      "south_door": {
+        "at": [
+          6.5,
+          1.6,
+          21.2
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3332",
+        "forward": [
+          0.11,
+          -0.09,
+          -0.99
+        ],
+        "is_ours": true
+      },
+      "uniform": {
+        "at": [
+          11.5,
+          1.55,
+          18.6
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3332",
+        "forward": [
+          0.0,
+          -0.45,
+          0.89
+        ],
+        "is_ours": true
+      }
+    },
+    "expon_300": {
+      "clipped": 2,
+      "counts": [
+        44,
+        53,
+        37,
+        27,
+        31,
+        20,
+        13,
+        15,
+        12,
+        8,
+        7,
+        5,
+        6,
+        2,
+        0,
+        4,
+        2,
+        2,
+        0,
+        3,
+        2,
+        1,
+        2,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        2
+      ],
+      "expected": [
+        54.3807740766055,
+        44.5232121127028,
+        36.4525229824839,
+        29.8448015930414,
+        24.4348568837338,
+        20.0055687777721,
+        16.3791743911787,
+        13.4101337840853,
+        10.9792889319206,
+        8.98908149549216,
+        7.35963746228364,
+        6.02556152187643,
+        4.93331252252358,
+        4.03905467673477,
+        3.30689827720621,
+        2.70745931684932,
+        2.21668020541204,
+        1.81486425391005,
+        1.48588517733809,
+        1.21653989022943,
+        0.996018620476938,
+        0.815471075222781,
+        0.667651247530462,
+        0.546626608684066,
+        0.447540014980367,
+        0.366414773497409,
+        0.299995043444432,
+        0.24561516783892,
+        0.201092691332135,
+        0.908266423612745
+      ]
+    },
+    "galton": {
+      "at": [
+        9.5,
+        20.5
+      ],
+      "scale": 1.5,
+      "top": 1.42500007152557
+    },
+    "gauss_300": {
+      "clipped": 1,
+      "counts": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        3,
+        6,
+        8,
+        11,
+        8,
+        21,
+        26,
+        21,
+        13,
+        33,
+        27,
+        15,
+        23,
+        27,
+        21,
+        12,
+        11,
+        5,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "drawn": 300,
+      "expected": [
+        0.279597515296653,
+        0.300330889543499,
+        0.569199180462987,
+        1.02700465453511,
+        1.76409824708823,
+        2.88478837925044,
+        4.49102069162141,
+        6.65603653586054,
+        9.39130933717844,
+        12.6147076439876,
+        16.1313165559432,
+        19.6383320183063,
+        22.7604598237296,
+        25.1129449362517,
+        26.3788537409443,
+        26.3788534409443,
+        25.1129449362518,
+        22.7604598237296,
+        19.6383320183063,
+        16.1313165559432,
+        12.6147076439876,
+        9.39130933717848,
+        6.65603653586054,
+        4.49102069162143,
+        2.88478837925042,
+        1.76409824708823,
+        1.02700465453512,
+        0.569199180462987,
+        0.300330889543465,
+        0.27959751529667
+      ],
+      "seed": 90292
+    },
+    "gaussian_random_at": [
+      10.5,
+      15.5
+    ],
+    "keypad_local": [
+      12.0500001907349,
+      0.754999995231628,
+      19.2639999389648
+    ],
+    "longest_line": 44,
+    "museum_severed_tokens": [
+      "galton_board"
+    ],
+    "museum_walk_severed": [],
+    "origin_local": [
+      11.5,
+      0.0,
+      19.5
+    ],
+    "plate_top": 0.905361087221173,
+    "plinths": [
+      [
+        "ArtPlinth0",
+        10,
+        14
+      ]
+    ],
+    "poisson_300": {
+      "clipped": 0,
+      "counts": [
+        1,
+        0,
+        11,
+        0,
+        21,
+        0,
+        55,
+        0,
+        50,
+        0,
+        48,
+        0,
+        37,
+        0,
+        35,
+        0,
+        20,
+        0,
+        12,
+        0,
+        5,
+        0,
+        3,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        2.02138409972564,
+        0.0,
+        10.1069204986282,
+        0.0,
+        25.2673012465705,
+        0.0,
+        42.1121687442842,
+        0.0,
+        52.6402109303552,
+        0.0,
+        52.6402109303552,
+        0.0,
+        43.8668424419627,
+        0.0,
+        31.3334588871162,
+        0.0,
+        19.5834118044476,
+        0.0,
+        10.8796732246931,
+        0.0,
+        5.43983661234656,
+        0.0,
+        2.47265300561207,
+        0.0,
+        1.0302720856717,
+        0.0,
+        0.396258494489114,
+        0.0,
+        0.141520890888969,
+        0.0678761028019907
+      ]
+    },
+    "rain": {
+      "drawn": 277,
+      "in_flight": 41,
+      "landed_after": 236,
+      "landed_before": 187,
+      "seconds": 0.998
+    },
+    "raised_cells": 19,
+    "reach": {
+      "batch": 1.13679277896881,
+      "display": 0.984885394573212,
+      "gauss": 1.17110979557037,
+      "readout": 1.02181661128998
+    },
+    "readout_local": [
+      11.789999961853,
+      0.898636877536774,
+      19.3319396972656
+    ],
+    "rebuilt": {
+      "bins": 30,
+      "cabinet": true,
+      "found": true,
+      "panel": true,
+      "seed": 67335,
+      "stand": "cabinet"
+    },
+    "replay": {
+      "run_a": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        3,
+        5,
+        6,
+        5,
+        6,
+        15,
+        19,
+        16,
+        11,
+        17,
+        14,
+        11,
+        17,
+        15,
+        11,
+        7,
+        9,
+        5,
+        3,
+        1,
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "run_b": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        3,
+        5,
+        6,
+        5,
+        6,
+        15,
+        19,
+        16,
+        11,
+        17,
+        14,
+        11,
+        17,
+        15,
+        11,
+        7,
+        9,
+        5,
+        3,
+        1,
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "seed": 90292
+    },
+    "stream_no_replay": {
+      "run_a": [
+        0,
+        0,
+        1,
+        2,
+        2,
+        3,
+        3,
+        2,
+        4,
+        11,
+        10,
+        11,
+        13,
+        17,
+        15,
+        16,
+        13,
+        16,
+        10,
+        9,
+        13,
+        10,
+        8,
+        4,
+        2,
+        0,
+        3,
+        1,
+        0,
+        1
+      ],
+      "run_b": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2,
+        2,
+        7,
+        4,
+        10,
+        15,
+        20,
+        19,
+        24,
+        13,
+        26,
+        12,
+        11,
+        7,
+        9,
+        6,
+        7,
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "streaming": {
+      "freed": true,
+      "rebuildable": true
+    },
+    "teleporter_cell_floor": -0.0000000968575477600098,
+    "tile": [
+      "44444111444444",
+      "44441111114444",
+      "44111111111144",
+      "44111111111144",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "44111111111144",
+      "44111111111144",
+      "44111111111144",
+      "44111111111144",
+      "44111111111144",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "44444111444444",
+      "44444411444444",
+      "44444411111444",
+      "44444444411444"
+    ],
+    "uniform_300": {
+      "clipped": 0,
+      "counts": [
+        14,
+        7,
+        10,
+        8,
+        9,
+        12,
+        11,
+        9,
+        8,
+        8,
+        12,
+        18,
+        11,
+        4,
+        8,
+        13,
+        10,
+        12,
+        8,
+        10,
+        11,
+        8,
+        15,
+        11,
+        13,
+        7,
+        5,
+        6,
+        12,
+        10
+      ],
+      "expected": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ]
+    },
+    "walk_east_along_row_18_from_the_middle_to_the_visitors_spot": 1.0,
+    "walk_south-west_across_the_mounds_cells_row_17": 0.453125,
+    "walk_south-west_across_the_mounds_cells_row_17_blockers": [
+      "dlessMuseum/Seg0_soane-cabinet-vista/RandomBellCurve/@StaticBody3D@595"
+    ],
+    "walk_south_down_column_6_through_the_north_hall_to_row_13": 1.0,
+    "walk_south_down_the_middle_of_the_south_hall_to_the_door_strip": 1.0,
+    "walk_south_from_the_visitors_spot_into_the_cabinet": 0.328125,
+    "walk_south_from_the_visitors_spot_into_the_cabinet_blockers": [
+      "ndlessMuseum/Seg0_soane-cabinet-vista/DistributionSampler/Cabinet/Body"
+    ],
+    "walk_west_along_row_18_from_the_middle_toward_the_comparator": 1.0
+  },
+  "physics_fps": 60
+}

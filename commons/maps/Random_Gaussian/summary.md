@@ -1,87 +1,51 @@
-# Random_Gaussian - Map Summary
+# Random_Gaussian — Summary
 
-## Overview
-This map introduces the Gaussian (normal) distribution—the bell curve that emerges whenever random effects accumulate. Unlike uniform randomness where all outcomes are equally likely, Gaussian randomness clusters values around a mean, with extreme values becoming exponentially rare. This is not arbitrary: it's a mathematical inevitability called the Central Limit Theorem.
+What can many draws reveal that one draw cannot? A long hall in two halves. The north half holds the Gaussian applied elsewhere — a blur shader, a paint splatter, a blur circle — and a dark reference sphere; the south half holds the draws: a walkable mound in the shape of a bell in the south-west, a comparator racking three laws side by side, a Galton board dropping beads through pegs by the south door, and, against the east wall, the primary: a histogram on a dark cabinet with beads raining onto its bars, a plate of six lines under it, and two panels at hand height.
 
-## Spatial Layout
-- **Dimensions**: 12×13 grid
-- **Architecture**: Walled arena with elevated perimeter (heights 2-3), central demonstration area at height 1
-- **Height**: Variable—corner towers at height 3, walls at 2, floor at 1, exit gap at 0
+GAUSS is running when the visitor arrives. PAUSE, CLEAR, and a dozen beads make a lopsided picture that the plate counts honestly; BATCH lands a hundred at once and the hump appears with a gap in it. Behind every bar a pale frame stands at the count the law expects for that bin at this many draws, with the mass beyond the display folded into the edge bins. UNIFORM at the same count gives thirty frames of ten and bars wandering round them; EXPON puts the tallest bar at the left edge and a quarter of a percent past the right. CLEAR replays the seed the plate names; NEW SEED names another; BINS re-bins the same draws through sixty and ten and back to thirty without drawing again. The density curve over the bars keeps its own scale and never moves with N.
 
-## Key Elements
+## Spatial layout
 
-### Interactables
-- **clipboard#bell_curve_axioms** (2,1) rotated 180°, height 1.5m - Theory of Gaussian distribution
-- **GaussianBlurShader** (2,2) height 1m - Visual demonstration of blur as Gaussian convolution
-- **dark_sphere** (5,5) - Ambient contemplation zone at map center
-- **GaussianPaintSplatter** (5,6) rotated 180°, height 1m - Paint splatter using Gaussian distribution
-- **random_decay_objects** (8,10) - Objects decaying with Gaussian probability
-- **gaussian_random** (3,11) - Core Gaussian random number generator visualization
+- **Dimensions**: 14 × 22 cells, walls on the perimeter, doors at columns 5–7 on the north and south edges.
+- **The north hall**: rows 2–13, floor, with the recovery's nineteen platform cells a metre up along the sides and stepped walls where the sides rise.
+- **The south hall**: rows 14–20, floor since this hall was staged; until then it was `0`, which the museum read as holes — a void with a one-cell strip of floor down column 7, the primary half a metre up with its keypad under the floor, and a twenty-metre bell terrain over everything.
+- **The route**: north door → the north hall → the south hall's middle → the south door; the sampler's spot is off the middle to the east, the mound to the west.
 
-### Utilities
-- **Spawn point** (0,0) height 5.5m - Elevated entry point
-- **Teleporter** (8,12) - Exit to next map (Random_Random_Bell_Curve)
+## Key elements
 
-## Atmosphere
-- **Background**: Sky blue [0.2, 0.3, 0.7]
-- **Lighting**: Cool ambient with warm directional light
-- **Mood**: Analytical, demonstrative, observing emergence of order from chaos
+- **distribution_sampler** (11,19), facing north: the primary. The cabinet (0.95 m), the histogram on top, the keypad and the stand panel outboard on a shoulder at 0.755 m, the readout at 0.90 m between them, ghosts behind the bars, a named seed.
+- **distribution_comparator** (5,18): three laws side by side at one sample count.
+- **galton_board** (9,20), at one and a half times bench scale: beads through pegs into bins, by the south door.
+- **random_bell_curve** (3,17), at a third of its size: a 6 m Gaussian mound, 1.5 m high, walkable.
+- **gaussian_random** (10,15): a bell drawn by a generator, north of the visitor's spot.
+- **GaussianBlurShader** (3,2), **GaussianPaintSplatter** (8,6), **GaussianBlurCircle** (11,8): the law applied to pixels and marks. **dark_sphere** (7,10): a reference body.
 
-## Learning Sequence
-1. Player spawns elevated, overlooking the arena
-2. Descends to encounter bell curve axioms—theoretical grounding
-3. Observes GaussianBlurShader—blur is Gaussian convolution
-4. Enters central zone via dark sphere
-5. Witnesses GaussianPaintSplatter—artistic application
-6. Observes random_decay_objects—temporal Gaussian processes
-7. Studies gaussian_random generator—the underlying mechanism
-8. Exits to continue sequence
+## The encounter
 
-## Design Intent
-The walled arena creates a contained laboratory for observing Gaussian phenomena. Multiple demonstrations (blur, splatter, decay, generation) show how the same distribution manifests across domains: spatial (blur), artistic (splatter), temporal (decay), computational (generation). The elevated spawn creates an overview perspective before immersion.
+1. Enter from the north; walk the north hall past the applications.
+2. Cross into the south hall; the mound on the right, the comparator, the cabinet ahead on the left against the east wall.
+3. PAUSE, CLEAR, twelve beads: say what is there. BATCH three times: a hill with a gap.
+4. Read the frames behind the bars; find bars over and under.
+5. UNIFORM at the same count; EXPON for the fold at the edge; POISSON for a lattice.
+6. CLEAR twice with a batch after each: the same histogram. NEW SEED: another. BINS round the cycle: the same draws, three pictures.
+7. The Galton board by the door; out.
 
-## Connection to Sequence
-- **Position in randomness sequence**: 7/13
-- **Precedes**: Random_Random_Bell_Curve
-- **Follows**: Random_Walk
-- **Theme**: From uniform chaos to structured distributions—randomness with central tendency
+## Connection to the sequence
 
-## Theoretical Framework
+Random_Walk separated a step from its sum and from the drawing of the sum; this room gathers many draws into a picture and separates the picture from the law, the sample from its expectation, and the bins from the values. Random_Mushrooms grows a population of forms from draws like these and asks which of its features were allowed to vary.
 
-### The Central Limit Theorem
-The most important theorem in probability: when you add many independent random variables, their sum approaches a Gaussian distribution, regardless of the original distribution.
+## Historical context
 
-Roll one die: uniform distribution (1-6 equally likely)
-Roll two dice, sum them: triangular distribution (7 most likely)
-Roll many dice, sum them: approaches Gaussian
+De Moivre found the bell as the limit of the binomial in 1733; Gauss put it under the errors of astronomy in 1809; Galton built the board in 1873 to make the limit fall into bins by itself; Pearson's chi-square of 1900 is the comparison between a histogram and its expectation made into a number; Box and Muller's transform of 1958 is the two lines in the sampler that turn two uniform draws into one normal one. Quetelet's average man of 1835 is the caution: a frequent region under a model, read as a norm.
 
-This is why the bell curve appears everywhere—heights, IQ scores, measurement errors, stock price changes. Anything that results from accumulating many small independent effects will be Gaussian.
+## QFEP connection
 
-### Box-Muller Transform
-Computers generate uniform random numbers easily, but Gaussian is harder. The Box-Muller transform converts two uniform random numbers into two Gaussian random numbers:
-
-```
-z0 = sqrt(-2 * ln(u1)) * cos(2π * u2)
-z1 = sqrt(-2 * ln(u1)) * sin(2π * u2)
-```
-
-This is how the gaussian_random visualization generates its values.
-
-### Standard Deviation and the 68-95-99.7 Rule
-- 68% of values fall within 1 standard deviation of the mean
-- 95% fall within 2 standard deviations
-- 99.7% fall within 3 standard deviations
-
-Values beyond 3σ are rare. Beyond 6σ: practically impossible (1 in 500 million).
-
-### Gaussian Blur
-Image blur is convolution with a Gaussian kernel. Each pixel becomes the weighted average of its neighbors, with weights following a bell curve. Close neighbors contribute more; distant neighbors contribute less. This is why GaussianBlurShader demonstrates the same mathematics as the random number generator.
-
-## QFEP Connection
-The Gaussian distribution represents a specific balance point in the QFEP: **constrained entropy**. Unlike maximum entropy (uniform distribution where anything is equally likely), Gaussian has structure—central tendency, defined variance. Yet it remains random: unpredictable within its constraints. This is the λ parameter in action: entropy is present but modulated, chaos shaped but not eliminated. The Central Limit Theorem shows how this balance emerges naturally from accumulation—a key insight for understanding how systems self-organize at the edge of chaos.
+Constrained entropy: the uniform law spends its draws everywhere, the Gaussian concentrates them, and neither law is visible in one draw. The room's addition is the observer's contract — the count, the bins, the range, the fold at the edge and the normalisation printed beside the picture, so that the shape the many draws make is read as evidence rather than completed in language.
 
 ## Sources
-- De Moivre, A. (1733). Approximation to the sum of binomial terms (first derivation of normal curve)
-- Gauss, C.F. (1809). Theoria Motus (error distribution in astronomical observations)
-- Box, G.E.P. & Muller, M.E. (1958). "A Note on the Generation of Random Normal Deviates"
-- Shiffman, D. *The Nature of Code*, Chapter 0: Randomness (Box-Muller implementation)
+
+- De Moivre, A. (1733). Approximatio ad summam terminorum binomii (a+b)ⁿ in seriem expansi.
+- Galton, F. (1889). Natural Inheritance (the quincunx).
+- Pearson, K. (1900). "On the criterion that a given system of deviations…" Philosophical Magazine 50.
+- Box, G. E. P. and Muller, M. E. (1958). "A Note on the Generation of Random Normal Deviates." Annals of Mathematical Statistics 29.
+- `commons/artifacts/distribution_sampler/distribution_sampler.gd`; `commons/maps/Random_Gaussian/field_notes.md`.

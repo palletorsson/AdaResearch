@@ -1,92 +1,29 @@
-# Random_Gaussian - Critical Documentation
+# The bell that is not there yet — sample, law, display and the fold at the edge
 
-## Philosophical Framing
+## Completing the curve in language
 
-### The Tyranny of the Mean
+Twelve beads have landed. Three bars stand, none in the middle. The visitor who says "the bell is forming" has said something about a model, not about the bins. The room's first demand is a description that stops at what is visible: three bars, two adjacent, one off to the left, a gap where the middle will presumably be. Presumably is the model speaking. The plate keeps the count, twelve of a thousand, so that the reader can measure how little the picture is standing on. Astra's card asks for the sparse, lopsided histogram to be resisted rather than smoothed, and the cabinet obliges by making a hundred draws a single press: the reader can watch the picture change from twelve to a hundred to three hundred, and can watch it stay lopsided longer than expected.
 
-The Gaussian distribution has a dark side: it creates a norm. The bell curve doesn't just describe—it *prescribes*. When IQ tests, standardized assessments, and performance metrics follow Gaussian distributions, they create an implicit hierarchy: the center is normal, the edges are deviant.
+## Two halves of a comparison
 
-Quetelet's 19th-century "l'homme moyen" (the average man) was a Gaussian construction—the idea that there exists a statistical ideal toward which individuals should converge. This is not neutral mathematics; it's normative statistics.
+A histogram alone invites the eye to complete it. Behind every bar the cabinet draws a pale frame at the count the law expects for that bin at the present N. This changes the comparison from "does it look like a bell?" to "where is this sample above or below its expectation?". The answer is always: in several places, by amounts that shrink with N and never vanish. Karl Pearson's chi-square of 1900 is exactly this comparison made into a number; the room keeps it as a picture, because the number would tempt the reader to grade the sample. A bar over its frame is not an error. It is what a sample is.
 
-### What the Bell Curve Cannot Hold
+## The law at its own scale
 
-The Gaussian assumes:
-- **Independence**: each random effect is independent
-- **Additivity**: effects combine through addition
-- **Finite variance**: extreme events are exponentially rare
+The orange curve over the bars is the density, drawn at the same height whatever N is; the bars are drawn against the tallest of them, so they fill the display at twelve draws and at a thousand. The two share a shape and nothing else, and the room says so rather than rescaling one to flatter the other. This is the measurement contract in miniature: name the sample size, the bins, the range, the clipping and the normalisation, and do not let appearance stand in for a quantity.
 
-But many phenomena violate these assumptions:
+## The fold
 
-**Fat tails**: Stock market crashes, earthquakes, and pandemic spread follow power law distributions, not Gaussian. The 2008 financial crisis was a "25-sigma event"—statistically impossible if markets were Gaussian. They're not.
+The display runs from zero to one. The Gaussian does not; it runs everywhere, thinly. Every draw that falls beyond the display is folded onto the edge it crossed, and the plate counts the folds. Under GAUSS at these parameters that count is a handful per thousand. Under EXPON the fold is visible: the law's tail past the right edge is a quarter of a percent, and the ghost's last frame carries it. The point is not the size of the fold but its existence: a bounded histogram is the product of a decision the display made, and the honest picture says where the decision bit. The same is true of every bounded chart of an unbounded quantity, and of every "normal range" printed on a form.
 
-**Correlated effects**: The Central Limit Theorem requires independence. When effects correlate (panic spreads, trends compound), Gaussian assumptions fail catastrophically.
+## The mean of what
 
-**The Long Tail**: In networked systems (wealth, citations, social media), a few entities capture most resources. This is Pareto, not Gauss.
+The mean the plate prints is the mean of the bins, a frequent region under one model of one sample of one law. It is not a fact about the value of anything that was measured. Quetelet's average man of 1835 was a Gaussian construction that turned a frequent region into a norm, and the history of the bell curve since then is largely the history of that confusion being put to use. The room's version of the caution is concrete: the edge bins here hold what the model could not fit, and they are on the display, counted.
 
-## Politics and Assumptions
+## Replay
 
-### Bell Curve Politics
+CLEAR replays the seed the plate names; NEW SEED names another. A replay does not make a sample less random. It makes it a thing you can point at twice, compare across laws with the same stream, and re-bin without redrawing. BINS is the sharpest of these: sixty bins and ten bins of the same three hundred values look like different distributions, and the values have not moved. The difference between them is the reader's choice of bins, which is why the bins are printed on the plate with the rest of the contract.
 
-Murray and Herrnstein's *The Bell Curve* (1994) used Gaussian distributions to make claims about intelligence and race—claims thoroughly debunked but politically potent. The bell curve's mathematical elegance lent false legitimacy to racist arguments.
+## What the room excludes
 
-The lesson: mathematical tools are not politically neutral. The choice to model something as Gaussian is an ideological choice, one that centers "normal" and marginalizes deviation.
-
-### Measurement Creates the Distribution
-
-IQ tests are *designed* to produce Gaussian distributions through norming. The bell curve is not discovered in intelligence; it's constructed through test design. This circularity—measuring to produce the expected distribution—is rarely examined.
-
-### Who Benefits from Normality?
-
-Gaussian models favor:
-- Prediction within "normal" ranges
-- Actuarial pricing that ignores tail risks
-- Educational tracking that sorts students around a mean
-- Medical diagnoses that pathologize deviation
-
-They fail:
-- Those at the margins (disabled, gifted, neurodiverse)
-- Systems subject to cascading failures
-- Any context where extreme events matter most
-
-## Queer Readings
-
-### Against the Mean
-
-Queer theory is fundamentally anti-normative. The bell curve instantiates normativity mathematically—it defines a center and measures deviation from it. A queer reading asks: why center anything? Why measure distance from "normal"?
-
-The Gaussian's appeal is its elegance, its mathematical tractability, its seeming inevitability (Central Limit Theorem). But these are aesthetic and computational conveniences, not truths about nature.
-
-### Celebrating the Tails
-
-What if deviation is not error but possibility? The 3-sigma outlier is not a malfunction—it's where new forms emerge. Evolution happens in the tails. Innovation comes from deviation. Queerness *is* the tail.
-
-A queer approach to Gaussian randomness might:
-- Use Gaussian generation but *celebrate* outliers
-- Visualize the tails as vividly as the center
-- Question why we're using Gaussian at all
-
-### The Violence of Averaging
-
-Averaging erases. The mean of a bimodal distribution represents no one. The "average user" is a fiction. When we aggregate to Gaussian, we perform epistemic violence on the particular.
-
-This map shows Gaussian blur, splatter, decay—all smoothing operations, all averaging. What is lost in the smoothing? What particulars disappear into the mean?
-
-## Questions That Remain Open
-
-1. **Is the Central Limit Theorem descriptive or prescriptive?** Does it reveal something about nature, or does it reveal something about how we choose to aggregate?
-
-2. **When should we refuse Gaussian models?** At what point does mathematical convenience become political complicity?
-
-3. **Can we visualize fat tails?** How might this map be different if it showed power law distributions alongside Gaussian?
-
-4. **What does "random" mean when constrained to a distribution?** Is Gaussian randomness truly random, or is it chaos forced into bell-curved shape?
-
-5. **How does the QFEP relate to non-Gaussian distributions?** The formula assumes continuous variables—what happens with discrete, fat-tailed, or multimodal distributions?
-
-## The Map's Tension
-
-This map teaches Gaussian distribution as useful, elegant, natural. It demonstrates blur, splatter, decay—all genuinely useful applications. But it doesn't question whether Gaussian *should* be used.
-
-The critical reading is not that Gaussian is wrong—it's often genuinely appropriate. The critical reading is that the map (like most education) presents Gaussian as default without examining the choice.
-
-The QFEP frames this as: the λ parameter can take different values. Gaussian is one setting (constrained entropy with central tendency). Power law is another (scale-free, fat-tailed). The question is not which is "correct" but which is *chosen* and *why*.
+No control varies the mean or the deviation, so the visitor cannot push the Gaussian's tail into the edge bins on purpose; EXPON has to stand in. The comparator on the west side puts three laws beside each other at one count, and the Galton board in the corner lets pegs do the drawing; neither is needed for the lesson and both are honest company. The next room grows a population of forms from draws like these, and asks which of its features were allowed to vary — the question this room asks of a histogram, put to bodies.
