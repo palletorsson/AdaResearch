@@ -44,6 +44,8 @@ HALLS = [
      ['', '_approach', '_tablet', '_stele', '_row', '_bed', '_idol', '_desktop_crossing', '_desktop_fallen', '_plan']),
     ('Random_Noise_Types', 'probe_points', 'N1', 'Can randomly proposed points still keep their distance?',
      ['', '_volumes', '_admitted', '_proposed', '_packed', '_readout', '_violation', '_desktop_carry', '_plan']),
+    ('Noise_Columns', 'probe_columns', 'N2', 'Can you tell how a body changes just by looking at its strange shape?',
+     ['', '_slot0', '_slot1', '_slot2', '_matte', '_readout', '_desktop_front', '_plan']),
 ]
 
 VIEW_NAMES = {'': 'the primary, from the visitor\'s spot', '_desktop_front': 'the desktop rig\'s own camera, live lane'}
