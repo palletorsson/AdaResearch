@@ -39,7 +39,7 @@ HALLS = [
     ('Random_Gaussian', 'probe_gaussian', 'R3', 'What can many draws reveal that one draw cannot?',
      ['', '_uniform', '_poisson', '_running', '_display', '_readout', '_keypad', '_north_door', '_south_door', '_arena', '_plan', '_desktop_front']),
     ('Random_Mushrooms', 'probe_mushrooms', 'R4', 'Which parts of this population were allowed to vary?',
-     ['', '_readout', '_specimens', '_panel', '_bed', '_rejected', '_north_door', '_south_door', '_west_margin', '_plan', '_desktop_front']),
+     ['', '_readout', '_specimens', '_panel', '_bed', '_rejected', '_edibles', '_eaten', '_north_door', '_south_door', '_west_margin', '_plan', '_desktop_front']),
 ]
 
 VIEW_NAMES = {'': 'the primary, from the visitor\'s spot', '_desktop_front': 'the desktop rig\'s own camera, live lane'}

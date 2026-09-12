@@ -30,7 +30,7 @@ ROOMS = [
     ('WaveFunctions_Sine_Space', 'probe_sine_space', 'The readout reflowed into four lines inside a taller plate; the passage\'s two thresholds marked on the floor.',
      ['_approach', '_desktop_mid', '_panel'], []),
     ('WaveFunctions_Effect_Sound', 'probe_effect_sound', 'The readout and the AUDITION panel low in front of the desks, below the hand space; the scope lowered to sit with the balls; the sculptor\'s listener check hardened.',
-     ['_desktop_front', '_overview', '', '_readout', '_scope'], []),
+     ['_desktop_front', '_overview', '', '_readout', '_scope'], ['_desktop_operating']),
     ('WaveFunctions_AirMusic', 'probe_air_music', 'The striker\'s cradle at the table\'s left end, front to back, leaving the bars free; a pale rail on the playable edge and a dark kerb at the back; the shutdown crash fixed at its source.',
      ['_desktop_front', '_two_voices', '', '_readout'], []),
     ('WaveFunctions_Synthesis_Lab', 'probe_synthesis_lab', 'The hallway hero fitted to its synthesis stand (a sixty-metre tunnel had filled the hall); the coloredlines ornament that dressed the visitor\'s camera in fog removed; the corridor rect that protected nothing corrected; the shutdown crash fixed at its source.',
@@ -46,7 +46,7 @@ ROOMS = [
     ('Random_Gaussian', 'probe_gaussian', 'A headline over the six lines (the law, N, bins, the clipped count and the edge bins) at a readable size; the shipped side plate off under the cabinet.',
      ['_desktop_front', '_readout', ''], []),
     ('Random_Mushrooms', 'probe_mushrooms', 'The disc numbers readable; a ring on the shown specimen\'s disc in the highlight\'s colour; saturated highlights and larger pins in the bed.',
-     ['', '_specimens', '_bed', '_north_door', '_south_door'], []),
+     ['', '_specimens', '_bed', '_north_door', '_south_door'], ['_edibles', '_eaten']),
 ]
 
 
