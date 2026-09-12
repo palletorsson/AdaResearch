@@ -1,113 +1,121 @@
 # Random Noise Types
 
-White noise. Blue noise. Each has a spectral signature.
+Points proposed at random, and a rule that admits or refuses each one. Every line below is from `algorithms/randomness/randompoints/randompoints.gd`, the artifact the map places as `randompoints`.
 
-Generate white noise.
-
-```gdscript
-func white_noise_grid(size: Vector2i) -> Array:
-    var grid: Array = []
-    for y in size.y:
-        var row: Array = []
-        for x in size.x:
-            row.append(randf())
-        grid.append(row)
-    return grid
-```
-
-Each cell independent. No structure.
-
-Generate blue noise via dart throwing.
+Route every draw through one call.
 
 ```gdscript
-func blue_noise_points(count: int, bounds: Rect2, min_distance: float) -> Array:
-    var points: Array = []
-    var attempts: int = 0
-    while points.size() < count and attempts < count * 30:
-        var candidate := Vector2(randf() * bounds.size.x, randf() * bounds.size.y) + bounds.position
-        var valid: bool = true
-        for p in points:
-            if candidate.distance_to(p) < min_distance:
-                valid = false
-                break
-        if valid:
-            points.append(candidate)
-        attempts += 1
-    return points
+func _rf(a: float, b: float) -> float:
+	return _rng.randf_range(a, b) if _rng != null else randf_range(a, b)
 ```
 
-Dart throwing with minimum-distance constraint. Rejects candidates that are too close to existing points.
+With no seed `_rng` is null and the call falls through to the global stream — the same call in the same order as before, so an unseeded placement draws exactly what it always drew. Under a named seed every draw in the file comes from one generator, which is what makes a cloud repeatable.
 
-Render noise as texture.
+Propose a point anywhere in the volume.
 
 ```gdscript
-func noise_to_texture(grid: Array) -> ImageTexture:
-    var height: int = grid.size()
-    var width: int = grid[0].size()
-    var image := Image.create(width, height, false, Image.FORMAT_L8)
-    for y in height:
-        for x in width:
-            image.set_pixel(x, y, Color(grid[y][x], grid[y][x], grid[y][x]))
-    return ImageTexture.create_from_image(image)
+func _generate_uniform(count: int, extents: Vector3) -> Array:
+	var pts = []
+	for i in range(count):
+		var pos = Vector3(
+			_rf(-extents.x, extents.x),
+			_rf(-extents.y, extents.y),
+			_rf(-extents.z, extents.z)
+		)
+		pts.append(pos)
+	return pts
 ```
 
-Grayscale intensity maps to noise value. Noisy textures for use in shaders.
+Count in, count out. Nothing can refuse anything here, which is why the left-hand plate on the bench keeps every candidate it is offered.
 
-Build an FFT to see the spectrum.
+Now ask one question before letting a candidate land.
 
 ```gdscript
-func spectral_power(grid: Array) -> Array:
-    var fft_result := compute_2d_fft(grid)
-    var power: Array = []
-    for row in fft_result:
-        var power_row: Array = []
-        for c in row:
-            power_row.append(c.real * c.real + c.imag * c.imag)
-        power.append(power_row)
-    return power
+			var min_dist = INF
+			if pts.is_empty():
+				min_dist = INF
+			else:
+				for existing in pts:
+					var d = candidate.distance_to(existing)
+					if d < min_dist:
+						min_dist = d
+
+			# Enforce minimum distance
+			if min_dist >= blue_noise_min_dist:
+				pts.append(candidate)
+				placed = true
+				break
 ```
 
-Fourier transform followed by magnitude. White noise has flat power; blue noise concentrates power at high frequencies.
+Dart throwing: the candidate is compared with every point already admitted, and the nearest of those decides. This is the whole of the rule. Note what it is not — nothing is moved, nudged, relaxed or optimised, and no point already admitted is ever reconsidered.
 
-Radial power spectrum.
+Keep the refusals.
 
 ```gdscript
-func radial_spectrum(power: Array) -> Array:
-    var centre_x: int = power[0].size() / 2
-    var centre_y: int = power.size() / 2
-    var bins: Array = []
-    for _i in 30: bins.append(0.0)
-    var counts: Array = []
-    for _i in 30: counts.append(0)
-    for y in power.size():
-        for x in power[0].size():
-            var r: float = Vector2(x - centre_x, y - centre_y).length()
-            var bin: int = int(r / 2)
-            if bin < bins.size():
-                bins[bin] += power[y][x]
-                counts[bin] += 1
-    for i in bins.size():
-        if counts[i] > 0: bins[i] /= counts[i]
-    return bins
+			if _rejected.size() < GHOST_CAP:
+				_rejected.append(candidate)
 ```
 
-Average power at each radial frequency. The shape of this curve distinguishes noise types.
+A refusal is a candidate that fell inside somebody's excluded neighbourhood. The bench draws them where they fell, as grey specks, because a rule whose cost is invisible looks free.
 
-Classify by spectrum.
+And say what happens when the rule cannot be satisfied.
 
 ```gdscript
-func classify_noise(radial_spec: Array) -> String:
-    var low_power: float = 0.0
-    var high_power: float = 0.0
-    for i in radial_spec.size() / 2:
-        low_power += radial_spec[i]
-    for i in range(radial_spec.size() / 2, radial_spec.size()):
-        high_power += radial_spec[i]
-    if low_power > high_power * 1.5: return "red (low-frequency)"
-    elif high_power > low_power * 1.5: return "blue (high-frequency)"
-    return "white (flat)"
+		if not placed:
+			# Relax constraint slightly if we fail?
+			# For now, just don't place the point (returns fewer points than requested)
+			# This is characteristic of Blue Noise (packing limit)
+			pass
 ```
 
-Heuristic from low-vs-high frequency content. Red noise has smooth ramps; blue noise has point-like structure.
+That comment is the shipped code's own, and the answer it settled on is the honest one: the point is not placed, and the population comes back short. The readout says so in words when it happens. A system that had answered the question in the comment the other way — relaxing the distance to make the number — would report a full count and no longer be doing what it claims.
 
-You can now generate white and blue noise, render as textures, compute their power spectra, and classify them. Noise_Columns extends into 3D noise for terrain.
+Set the rule's distance from the density, not by hand.
+
+```gdscript
+	if not _dist_asked:
+		var mean_gap: float = pow(max(0.001, area_size.x * area_size.y * area_size.z) / float(max(1, num_points)), 1.0 / 3.0)
+		blue_noise_min_dist = snappedf(0.8 * mean_gap, 0.005)
+```
+
+Eight tenths of the mean spacing the requested population implies in the volume given. Fixing it against the density rather than in metres keeps the packing limit in view at any count.
+
+Draw the excluded neighbourhood.
+
+```gdscript
+	var s := SphereMesh.new()
+	s.radius = blue_noise_min_dist * 0.5
+```
+
+Half the distance, and that is the exact geometry: if no two centres are closer than d, shells of radius d/2 can touch and never overlap. So the shells in the admitted plate kiss, and the ones in the proposed plate pass through each other.
+
+Look, but do not enforce.
+
+```gdscript
+			if a.global_position.distance_to(b.global_position) < blue_noise_min_dist - 0.001:
+				bad[i] = true
+				bad[j] = true
+```
+
+Four times a second, over the admitted cloud only. It colours shells and counts pairs; it moves nothing. A point carried into a neighbour's shell stays there, because the distance was a condition of admission and never a force.
+
+Put it back.
+
+```gdscript
+			if p is RigidBody3D:
+				var rb: RigidBody3D = p
+				rb.freeze = true
+				rb.linear_velocity = Vector3.ZERO
+				rb.angular_velocity = Vector3.ZERO
+			(p as Node3D).position = (p as Node3D).get_meta("home")
+```
+
+Each point remembers the position it was generated at. A point that has been carried is a live body again, so it is frozen before it is placed, or physics puts it back where physics wants it.
+
+Stage it in a map.
+
+```
+randompoints:180#stand:compare#count:24#size:0.9
+```
+
+`stand:compare` builds the bench: two matched volumes, the shells, the ghosts, the cased readout and REDRAW · NEW SEED · RULE · RESTORE. `count` is the requested population, `size` the square side of the sampled slab, `seed` pins the name, `radius` overrides the rule's distance, `mode` picks the shipped distribution. The `180` turns the bench's front toward the hall's north door, which is where the visitor arrives. Without the token the artifact is what it always was: one cloud of thirty points in a one-metre cube, on the global stream.

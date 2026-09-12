@@ -161,3 +161,22 @@ The per-frame cost of the map scales with the number of instanced artifacts and 
 Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
 
 The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.
+
+## The sampling bench (2026-09-12)
+
+`algorithms/randomness/randompoints/randompoints.gd`, opt-in through the map token `randompoints:180#stand:compare#count:24#size:0.9`. Defaults are untouched: at `stand:none` and with no seed, the artifact spawns one cloud as its own children off the global stream through the same calls it always used.
+
+| what | where |
+|---|---|
+| every draw, seeded or not | `_rf(a, b)` — a null generator falls through to `randf_range` |
+| the three shipped distributions | `_generate_uniform`, `_generate_gaussian`, `_generate_blue_noise` (dart throwing, unchanged rule) |
+| what the rule cost | `_attempts` and `_rejected`, filled inside `_generate_blue_noise`; `GHOST_CAP` bounds the record |
+| the named seed and the derived distance | `_prepare_bench` — five digits, and 0.8 × the mean spacing unless a token names `radius` |
+| the bench | `_build_bench` (table, two frames, captions, cased readout, panel, watch timer) |
+| both clouds and the ghosts | `_fill_volumes`, `_draw_ghosts` |
+| the excluded neighbourhood | `_add_shell` — radius is HALF `blue_noise_min_dist` |
+| looking without enforcing | `_watch_neighbours`, four times a second, over the admitted cloud only |
+| the controls | `redraw`, `new_seed`, `cycle_rule`, `restore` through `InteractableAreaButton.button_pressed` |
+| the whole state, for a probe | `sampling_state()` |
+
+Two framing decisions belong to the bench, not to the artifact: the sampled volume is a 0.9 × 0.9 × 0.12 m slab standing upright (a cube of translucent shells photographs as fog), and the point scene's own `Label3D` coordinate readout is hidden on staged points because the plate carries the numbers. `restore()` freezes a carried body before placing it, since a dropped `XRToolsPickable` is live again and physics otherwise wins.

@@ -78,3 +78,15 @@ This map explores the **quality** of entropy, not just its quantity. White noise
 - Ken Perlin's original 1985 paper: "An Image Synthesizer"
 - *The Book of Shaders*, Chapter 11: Noise (thebookofshaders.com)
 - Perlin's 2002 paper: "Improving Noise" (introducing simplex noise)
+
+## The sampling bench (2026-09-12)
+
+`randompoints#stand:compare` stands in the room's open east half as a bench with two square slabs of sampled space, the same size, side by side, twenty-four points each, both drawn from one named five-digit seed. The left slab keeps every candidate the uniform draw proposes. The right runs the shipped dart thrower over its own draws and keeps only what a minimum-distance rule admits, leaving every refusal where it fell as a grey ghost — thirty-nine refusals for twenty-four places, in sixty-three draws.
+
+Each accepted point wears its excluded neighbourhood as a shell of half the rule's distance, which is the exact geometry: two points that keep the distance can have their shells meet, and two that do not cannot. So the left slab's overlapping shells are not a fault but a picture of having no rule.
+
+The cased readout names the seed, the requested population, the volume and the rule, then both columns: kept, refused, draws taken, and the closest surviving pair. Ask for four times the population and it adds the line the algorithm has always deserved — `51 could not be placed at all: the volume ran out of room` — without reducing the distance to make the number.
+
+REDRAW brings both slabs back point for point. NEW SEED names another pair. RULE swaps the right slab to the shipped gaussian, which crowds the middle and keeps no distance at all. The points are pickable: carry one into a neighbour's shell and both turn red while the readout counts it, because the rule was a condition of admission and is not enforced afterwards. RESTORE puts every point back where it was generated, and it is a button rather than a law.
+
+The room's two small noise-colour galleries stay in their own row in the west half, four to six metres away. White and pink there are slopes of audio spectra, a statement about frequency; the bench is about a spatial relation between neighbours. The words travel between the two subjects and the mathematics does not.

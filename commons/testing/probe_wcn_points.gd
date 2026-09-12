@@ -1,0 +1,524 @@
+extends SceneTree
+## Random_Noise_Types, batch N1 (doc/research/waves-chance-noise, 2026-09-12, the first hall of
+## Astra's noise arc): can randomly proposed points still keep their distance?
+##
+## Stands up the ACTUAL museum hall with its artifacts, hands the museum the REAL necklace hand
+## file, and tests the sampling bench as the map stages it (randompoints:180#stand:compare#
+## count:40#size:0.9 at (10,3), placement authority with the map): two MATCHED volumes on one
+## table — AS PROPOSED, every candidate kept, and AS ADMITTED, the same named seed under the
+## minimum-distance rule — with every accepted point wearing its excluded neighbourhood as a
+## shell of half that distance, every refused candidate left where it fell as a ghost, a cased
+## readout of both columns, and REDRAW · NEW SEED · RULE · RESTORE.
+##
+## The measurement contract, which is what Astra asked for: the admitted cloud's closest pair is
+## not under the rule; the proposed cloud's is; both volumes are the same size; the arithmetic
+## closes (kept + could-not-be-placed == requested, and attempts >= kept + refused); the
+## shortfall is REPORTED rather than hidden by quietly shrinking the distance. Then the seed:
+## REDRAW brings both clouds back point for point, NEW SEED does not. Then the question the room
+## is really about — the live port carries a point through the desktop pointer's own grab into a
+## neighbour's shell and reads what happens: the shells turn red, the readout counts it, and
+## nothing moves itself back. The rule was applied at birth and is not enforced since; RESTORE
+## is the way back, and it is a button, not a law.
+##
+##   godot --rendering-method gl_compatibility --path . --xr-mode off --script res://commons/testing/probe_wcn_points.gd -- --capture
+##
+## Writes res://ada_run/waves_chance_noise/Random_Noise_Types/probe_points.json
+## (and probe_points*.png under --capture). Exit code 1 on any failed check.
+var checks := 0
+var failures: Array[String] = []
+var measurements: Dictionary = {}
+const MAP := "Random_Noise_Types"
+const OUT := "res://ada_run/waves_chance_noise/Random_Noise_Types/"
+const MAP_CELL := Vector2i(10, 3)
+const SPOT := Vector3(10.5, 0.0, 2.35)  # the visitor's spot: before the bench's FRONT, which the
+                                        # token's 180 turns toward the hall's north door
+const EYE_H := 1.6
+
+func _initialize() -> void: run.call_deferred()
+
+func _live() -> bool:
+	return str(get_script().resource_path).ends_with("_live.gd")
+
+func check(ok: bool, message: String) -> void:
+	checks += 1
+	if not ok: failures.append(message)
+	print("[wcn-points] ", "PASS " if ok else "FAIL ", message)
+
+func note(message: String) -> void:
+	print("[wcn-points] note: ", message)
+
+func run() -> void:
+	if "--capture" in OS.get_cmdline_user_args() and DisplayServer.get_name() == "headless":
+		check(false, "PNG capture requires a rendered window; omit --headless, or omit --capture for logic only")
+		_finish(); return
+	var em: Node3D = load("res://commons/scenes/endless_museum.tscn").instantiate()
+	var ctl := "res://ada_run/waves_chance_noise/wcn-probe-control.json"
+	em.set("EM_CONTROL", ctl); em.set("_overrides_path", ctl + ".unused")
+	em.set("_hand_path", "res://ada_run/necklace_hand.json")   # the REAL hand, on purpose
+	em.set("start_chapter", "noise"); em.set("start_map", MAP)
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/em_layout.json"))
+	layout.get_or_add("stream", {})["bodies"] = 1
+	em.set("_layout", layout)
+	var f := FileAccess.open(ctl, FileAccess.WRITE)
+	f.store_string(JSON.stringify({"first_chapter": "noise", "dollhouse": 0, "grid_pack": 1})); f.close()
+	root.add_child(em); current_scene = em
+	await create_timer(1.0).timeout
+	em.set_process(false); em.call("flush_stamps")
+	var player: Node = em.get("_player")
+	if player != null: player.set_process(false); player.set_physics_process(false)
+	var seg: Node3D
+	for rec: Dictionary in em.get("_segments"):
+		if rec.node.get_meta("em_map", "") == MAP: seg = rec.node; break
+	check(seg != null, "the hall exists in the active museum")
+	if seg == null:
+		_finish(); return
+	for i in range(30): await process_frame
+	var vest: int = int(em.get("VESTIBULE_H"))
+	var capture: bool = "--capture" in OS.get_cmdline_user_args()
+	var cam: Camera3D
+	if capture:
+		var wc: Camera3D = em.get("_cam")
+		if wc != null and is_instance_valid(wc):
+			for c in wc.get_children():
+				if c is Timer: (c as Timer).stop()
+		cam = Camera3D.new(); em.add_child(cam); cam.fov = 62
+	measurements["captures"] = {}
+
+	# ── 0. the hall: tile, bodies, plinths, the walk ─────────────────────────
+	var tile: Array = seg.get_meta("em_tile", [])
+	var tile_rows: Array = []
+	for row in tile:
+		var line := ""
+		for c in row: line += str(c)
+		tile_rows.append(line)
+	measurements["tile"] = tile_rows
+	for r in range(tile_rows.size()): note("tile %2d %s" % [r, tile_rows[r]])
+	var bodies: Array = []
+	var prim: Node3D
+	var by_token: Dictionary = {}
+	for record: Dictionary in em.get("_edit_records"):
+		var node: Node = record.get("node")
+		if node == null or not (node is Node3D) or not seg.is_ancestor_of(node): continue
+		if str(record.get("token", "")) == "": continue
+		var lp: Vector3 = seg.to_local((node as Node3D).global_position)
+		var sp: String = str(node.get_script().resource_path).get_file() if node.get_script() != null else "-"
+		var ent := {"token": record.get("token"), "script": sp, "cell": record.get("tile_cell", []), "at": [snappedf(lp.x, 0.01), snappedf(lp.y, 0.01), snappedf(lp.z - vest, 0.01)], "scale": snappedf((node as Node3D).scale.x, 0.01)}
+		bodies.append(ent)
+		by_token[str(record.get("token"))] = ent
+		if sp == "randompoints.gd" and node.get("stand") == "compare": prim = node
+	measurements["bodies"] = bodies
+	for b in bodies:
+		if not str(b["token"]).begins_with("lobby") and str(b["token"]) != "showing": note("body %-26s %-26s cell %-8s at %s scale %s" % [str(b["token"]), str(b["script"]), str(b["cell"]), str(b["at"]), str(b["scale"])])
+	check(prim != null, "the sampling bench is built in the hall")
+	if prim == null:
+		_finish(); return
+	var me: Dictionary = by_token.get("randompoints", {})
+	check(me.get("cell", []) == [MAP_CELL.x, MAP_CELL.y], "the bench stands at its map cell (10,3), in the hall's open half (%s)" % str(me.get("cell")))
+	check(is_equal_approx(float(me.get("scale", 0.0)), 1.0), "it stands at scale 1, not shrunk by the lane (%s)" % str(me.get("scale")))
+	# Astra: separate the audio-noise galleries or correct their context. They are a row of
+	# their own now, and the distance is the separation.
+	var gaps: Array = []
+	for g in ["WhiteNoiseGallery", "NoiseColors3D", "randompoint"]:
+		var e: Dictionary = by_token.get(g, {})
+		if e.is_empty(): continue
+		var d: float = Vector2(float(e["at"][0]) - float(me["at"][0]), float(e["at"][2]) - float(me["at"][2])).length()
+		gaps.append([g, snappedf(d, 0.1), e.get("cell")])
+	measurements["gallery_gaps"] = gaps
+	check(gaps.size() >= 2 and gaps.all(func(g): return float(g[1]) > 3.0), "the audio-noise galleries keep their own row, metres from the sampling bench (%s)" % str(gaps))
+	var plinths: Array = []
+	var plinths_in_rect: int = 0
+	for n in seg.find_children("ArtPlinth*", "", true, false):
+		var pl2: Vector3 = seg.to_local((n as Node3D).global_position)
+		var cx: int = int(floor(pl2.x)); var cz: int = int(floor(pl2.z)) - vest
+		plinths.append([n.name, cx, cz, snappedf(pl2.y, 0.01)])
+		if cx >= 9 and cx <= 11 and cz >= 2 and cz <= 5: plinths_in_rect += 1
+	measurements["plinths"] = plinths
+	check(plinths_in_rect == 0, "no dealt plinth stands in the cleared rect x 9..11, z 2..5 (%s)" % str(plinths))
+	await create_timer(0.3).timeout
+	var severed: Array = em.get("_seg_severed") if em.get("_seg_severed") != null else []
+	measurements["museum_severed"] = severed
+	var walk_sev: Array = em.get("_walk_severed") if em.get("_walk_severed") != null else []
+	var mine_sev: Array = []
+	for e in walk_sev:
+		if str((e as Dictionary).get("hall", "")).contains(MAP): mine_sev.append(e)
+	measurements["museum_walk_severed"] = mine_sev
+	check(mine_sev.is_empty(), "the museum walks this hall door to door with the bench in it (severed: %s; seals: %s)" % [str(mine_sev), str(severed)])
+
+	# ── 1. the bench, and the measurement contract ───────────────────────────
+	var st: Dictionary = prim.call("sampling_state")
+	measurements["sampling"] = _brief(st)
+	note("sampling " + JSON.stringify(_brief(st)))
+	var bench: Node3D = prim.get_node_or_null("Bench")
+	check(bench != null, "the bench stands under the artifact as one node")
+	if bench == null:
+		_finish(); return
+	var want := ["Table", "Volume_proposed", "Volume_admitted", "Readout", "Panel", "NeighbourWatch"]
+	var missing: Array = []
+	for n in want:
+		if bench.get_node_or_null(n) == null: missing.append(n)
+	check(missing.is_empty(), "the bench is built: table, both volumes, the cased readout, the panel, the watch (missing %s)" % str(missing))
+	var caps: Array = []
+	for c in bench.find_children("Caption_*", "", false, false):
+		caps.append([str(c.name), snappedf((c as Node3D).rotation_degrees.x, 0.1)])
+	measurements["captions"] = caps
+	check(caps.size() >= 2 and caps.all(func(c): return abs(float(c[1])) < 1.0), "each volume is captioned standing up, facing the way a body arrives — a stencil laid flat reads mirrored (%s)" % str(caps))
+	var vp: Node3D = bench.get_node_or_null("Volume_proposed")
+	var va: Node3D = bench.get_node_or_null("Volume_admitted")
+	var frame_p: Vector3 = _frame_span(vp)
+	var frame_a: Vector3 = _frame_span(va)
+	measurements["volume_frames"] = {"proposed": [snappedf(frame_p.x, 0.01), snappedf(frame_p.y, 0.01), snappedf(frame_p.z, 0.01)],
+		"admitted": [snappedf(frame_a.x, 0.01), snappedf(frame_a.y, 0.01), snappedf(frame_a.z, 0.01)]}
+	check(frame_p.distance_to(frame_a) < 0.02 and abs(frame_p.x - float(st["volume"])) < 0.05 and frame_p.y > 0.3 and frame_p.z < 0.25,
+		"both volumes are drawn as the same box — a square slab standing up, the side the readout names (%s vs %s, named %s)" % [str(measurements["volume_frames"]["proposed"]), str(measurements["volume_frames"]["admitted"]), str(st["volume"])])
+	var lbl_hidden: int = 0
+	var lbl_total: int = 0
+	for p in va.find_children("Admitted_*", "", false, false):
+		var l: Node3D = (p as Node3D).get_node_or_null("MeshInstance3DSphere/Label3D")
+		if l != null:
+			lbl_total += 1
+			if not l.visible: lbl_hidden += 1
+	measurements["coordinate_labels"] = {"total": lbl_total, "hidden": lbl_hidden}
+	check(lbl_total > 0 and lbl_hidden == lbl_total, "the points do not print their own coordinates over the cloud: the readout carries the numbers (%d of %d hidden)" % [lbl_hidden, lbl_total])
+	var pr: Dictionary = st["proposed"]
+	var ad: Dictionary = st["admitted"]
+	var dist: float = float(st["min_dist"])
+	check(int(st["seed"]) >= 10000 and int(st["seed"]) <= 99999, "the draws are named by a five-digit seed (%s)" % str(st["seed"]))
+	check(int(pr["accepted"]) == int(st["requested"]), "the proposed volume keeps every candidate: %d of %d" % [int(pr["accepted"]), int(st["requested"])])
+	check(float(ad["closest"]) >= dist - 0.001, "no admitted pair is under the rule: closest %.3f m against %.3f m" % [float(ad["closest"]), dist])
+	check(float(pr["closest"]) < dist, "and the comparison is real — the unconstrained draw has a pair the rule would have refused (%.3f m)" % float(pr["closest"]))
+	check(int(ad["accepted"]) + int(ad["short"]) == int(st["requested"]), "the arithmetic closes: %d kept + %d unplaceable = %d requested" % [int(ad["accepted"]), int(ad["short"]), int(st["requested"])])
+	check(int(ad["attempts"]) >= int(ad["accepted"]) + int(ad["refused"]), "the audit adds up: %d draws for %d kept and %d refused" % [int(ad["attempts"]), int(ad["accepted"]), int(ad["refused"])])
+	check(int(ad["refused"]) > 0, "the rule refused candidates, and they are counted (%d)" % int(ad["refused"]))
+	var ghosts: Node = va.get_node_or_null("Refused")
+	var ghost_n: int = int((ghosts as MultiMeshInstance3D).multimesh.instance_count) if ghosts != null and (ghosts as MultiMeshInstance3D).multimesh != null else 0
+	measurements["ghosts_drawn"] = ghost_n
+	check(ghost_n > 0 and ghost_n == int(ad["refused"]), "every refusal is left where it fell, as a ghost in the admitted volume (%d drawn, %d refused)" % [ghost_n, int(ad["refused"])])
+	# the shells: half the rule's distance, so two legal points touch at the limit
+	var any_point: Node3D = va.get_node_or_null("Admitted_0")
+	var shell: MeshInstance3D = any_point.get_node_or_null("Shell") if any_point != null else null
+	var shell_r: float = float((shell.mesh as SphereMesh).radius) if shell != null and shell.mesh is SphereMesh else -1.0
+	measurements["shell_radius"] = snappedf(shell_r, 0.001)
+	check(abs(shell_r - dist * 0.5) < 0.002, "each point wears the excluded neighbourhood as a shell of HALF the distance (%.3f m of %.3f m)" % [shell_r, dist])
+	# the readout says all of it
+	var ro: Label3D = bench.get_node_or_null("Readout/Text")
+	check(ro != null, "the readout is cased on the bench's front")
+	if ro != null:
+		var lines: PackedStringArray = ro.text.split("\n")
+		measurements["readout"] = ro.text.split("\n")
+		for l in lines: note("readout | " + l)
+		check(lines.size() >= 3, "it prints the seed and both columns (%d lines)" % lines.size())
+		check(ro.text.contains(str(int(st["seed"]))) and ro.text.contains("refused") and ro.text.contains("closest"),
+			"naming the seed, what was refused and the closest surviving pair")
+		check(ro.font_size >= 16 and ro.outline_size >= 2 and (ro.modulate.r + ro.modulate.g + ro.modulate.b) / 3.0 > 0.8,
+			"and reads from a standing eye: light, outlined, %d px" % ro.font_size)
+		if int(ad["short"]) > 0:
+			check(ro.text.contains("ran out of room"), "the shortfall is stated, not hidden by quietly relaxing the distance (%d unplaceable)" % int(ad["short"]))
+
+	# ── 2. the seed: the same two clouds again, or another pair ──────────────
+	var panel: Node = bench.get_node_or_null("Panel")
+	var before: Dictionary = prim.call("sampling_state")
+	check(_press(panel, "Btn_0"), "REDRAW pressed through the button's signal (one argument)")
+	await create_timer(0.5, true, false, true).timeout
+	var after: Dictionary = prim.call("sampling_state")
+	var same: Dictionary = _same_points(before, after)
+	measurements["redraw"] = same
+	check(bool(same["same"]), "REDRAW brings both clouds back point for point under the same name (%s)" % JSON.stringify(same))
+	check(int(after["seed"]) == int(before["seed"]), "and keeps the name (%s)" % str(after["seed"]))
+	check(_press(panel, "Btn_1"), "NEW SEED pressed")
+	await create_timer(0.5, true, false, true).timeout
+	var other: Dictionary = prim.call("sampling_state")
+	measurements["new_seed"] = {"was": int(before["seed"]), "now": int(other["seed"]), "same_points": bool(_same_points(after, other)["same"])}
+	check(int(other["seed"]) != int(before["seed"]) and not bool(_same_points(after, other)["same"]), "NEW SEED names another pair of clouds (%d → %d)" % [int(before["seed"]), int(other["seed"])])
+	check(float((other["admitted"] as Dictionary)["closest"]) >= float(other["min_dist"]) - 0.001, "the rule holds for the new draw too (%.3f m)" % float((other["admitted"] as Dictionary)["closest"]))
+	# back to the first crossing's seed for the rest of the run
+	prim.set("sampling_seed", int(before["seed"]))
+	prim.call("redraw")
+	await create_timer(0.4, true, false, true).timeout
+
+	# ── 2b. the packing limit, on purpose ───────────────────────────────────
+	var ask: int = int(st["requested"]) * 4
+	prim.set("num_points", ask)
+	prim.call("redraw")
+	await create_timer(0.8, true, false, true).timeout
+	var tight: Dictionary = prim.call("sampling_state")
+	var tad: Dictionary = tight["admitted"]
+	measurements["packing_limit"] = {"requested": ask, "kept": int(tad["accepted"]), "short": int(tad["short"]),
+		"refused": int(tad["refused"]), "closest": float(tad["closest"]), "min_dist": float(tight["min_dist"])}
+	note("packing limit " + JSON.stringify(measurements["packing_limit"]))
+	check(int(tad["short"]) > 0, "asked for four times the population, the rule runs out of room — %d of %d placed" % [int(tad["accepted"]), ask])
+	check(float(tad["closest"]) >= float(tight["min_dist"]) - 0.001, "and it does NOT quietly reduce the distance to make the number: closest %.3f m against %.3f m" % [float(tad["closest"]), float(tight["min_dist"])])
+	var rot: Label3D = bench.get_node_or_null("Readout/Text")
+	check(rot != null and rot.text.contains("ran out of room"), "the shortfall is on the plate, in words")
+	if capture and cam != null:
+		cam.global_position = va.global_position + seg.global_transform.basis * Vector3(0.0, 0.02, -1.35)
+		cam.look_at(va.global_position)
+		for i in range(16): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_points_packed.png")
+		measurements["captures"]["packed"] = _cam_pose(cam)
+	prim.set("num_points", int(st["requested"]))
+	prim.call("redraw")
+	await create_timer(0.6, true, false, true).timeout
+
+	# ── 3. the other rule, on the same volume ───────────────────────────────
+	check(_press(panel, "Btn_2"), "RULE pressed")
+	await create_timer(0.5, true, false, true).timeout
+	var clustered: Dictionary = prim.call("sampling_state")
+	measurements["clustered"] = _brief(clustered)
+	check(str(clustered["rule_now"]) == "clustered", "the right volume takes the shipped gaussian instead (%s)" % str(clustered["rule_now"]))
+	check(float((clustered["admitted"] as Dictionary)["closest"]) < float(clustered["min_dist"]),
+		"which keeps no distance at all — it crowds the middle (%.3f m under %.3f m)" % [float((clustered["admitted"] as Dictionary)["closest"]), float(clustered["min_dist"])])
+	check(_press(panel, "Btn_2"), "RULE pressed back to the distance rule")
+	await create_timer(0.5, true, false, true).timeout
+	check(str(prim.call("sampling_state")["rule_now"]) == "spaced", "and the distance rule returns")
+
+	# ── 4. birth, not enforcement: a point moved into a neighbour's shell ───
+	var moved_by_hand: Dictionary = {}
+	var pts: Array = va.find_children("Admitted_*", "", false, false)
+	if pts.size() >= 2:
+		var a: Node3D = pts[0]
+		var b: Node3D = pts[1]
+		var home: Vector3 = a.get_meta("home")
+		# put it just inside the rule, the way a hand would, and see what the room says
+		a.position = (b.get_meta("home") as Vector3) + Vector3(dist * 0.45, 0.0, 0.0)
+		await create_timer(0.6, true, false, true).timeout
+		var during: Dictionary = prim.call("sampling_state")
+		var sh: MeshInstance3D = a.get_node_or_null("Shell")
+		var col: Color = (sh.material_override as StandardMaterial3D).albedo_color if sh != null and sh.material_override is StandardMaterial3D else Color.BLACK
+		moved_by_hand = {"moved": int(during["moved"]), "under": int(during["under_distance"]), "shell_red": col.r > 0.8 and col.g < 0.4,
+			"placed_at": [snappedf(a.position.x, 0.01), snappedf(a.position.y, 0.01), snappedf(a.position.z, 0.01)]}
+		check(int(during["moved"]) >= 1 and int(during["under_distance"]) >= 1, "a point pushed inside a neighbour's shell is counted, not corrected (%s)" % JSON.stringify(moved_by_hand))
+		check(bool(moved_by_hand["shell_red"]), "and its excluded neighbourhood turns red where it is being shared")
+		var ro2: Label3D = bench.get_node_or_null("Readout/Text")
+		check(ro2 != null and ro2.text.contains("at birth, not since"), "the readout says which kind of fact this is: the rule was applied at birth, not since")
+		if capture and cam != null:
+			cam.global_position = a.global_position + seg.global_transform.basis * Vector3(0.0, 0.16, -0.62)
+			cam.look_at(a.global_position)
+			for i in range(16): cam.make_current(); await process_frame
+			await create_timer(0.3, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_points_violation.png")
+			measurements["captures"]["violation"] = _cam_pose(cam)
+		check(_press(panel, "Btn_3"), "RESTORE pressed")
+		await create_timer(0.5, true, false, true).timeout
+		var back: Dictionary = prim.call("sampling_state")
+		moved_by_hand["after_restore"] = {"moved": int(back["moved"]), "under": int(back["under_distance"]),
+			"home_again": (a.position - home).length() < 0.005}
+		check(int(back["moved"]) == 0 and int(back["under_distance"]) == 0 and bool((moved_by_hand["after_restore"] as Dictionary)["home_again"]),
+			"RESTORE puts every point back where it was generated (%s)" % JSON.stringify(moved_by_hand["after_restore"]))
+	measurements["moved_by_hand"] = moved_by_hand
+
+	# ── 5. captures, and the desktop rig in the live port ───────────────────
+	if capture:
+		# the standing view: far enough back that the whole bench is in one frame (the
+		# visitor's own spot, 1.1 m out, overflows it — measured in the first captures)
+		var front: Vector3 = seg.to_global(Vector3(SPOT.x, 1.55, SPOT.z - 1.05 + vest))
+		var bench_at: Vector3 = seg.to_global(Vector3(10.5, 1.12, 3.5 + vest))
+		cam.global_position = front
+		cam.look_at(bench_at)
+		for i in range(20): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_points.png")
+		measurements["captures"]["primary"] = _cam_pose(cam)
+		# the two volumes side by side, from reading distance
+		cam.global_position = seg.to_global(Vector3(10.5, 1.32, 5.35 + vest))
+		cam.look_at(seg.to_global(Vector3(10.5, 1.26, 3.5 + vest)))
+		for i in range(16): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_points_volumes.png")
+		measurements["captures"]["volumes"] = _cam_pose(cam)
+		# the admitted volume alone: shells kissing, ghosts where the refusals fell
+		cam.global_position = va.global_position + seg.global_transform.basis * Vector3(0.0, 0.02, -1.35)
+		cam.look_at(va.global_position)
+		for i in range(16): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_points_admitted.png")
+		measurements["captures"]["admitted"] = _cam_pose(cam)
+		cam.global_position = vp.global_position + seg.global_transform.basis * Vector3(0.0, 0.02, -1.35)
+		cam.look_at(vp.global_position)
+		for i in range(16): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_points_proposed.png")
+		measurements["captures"]["proposed"] = _cam_pose(cam)
+		# the readout from the eye that reads it
+		var rn: Node3D = bench.get_node_or_null("Readout")
+		if rn != null:
+			cam.global_position = rn.global_position + seg.global_transform.basis * Vector3(0.0, 0.30, -0.62)
+			cam.look_at(rn.global_position)
+			for i in range(16): cam.make_current(); await process_frame
+			await create_timer(0.3, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_points_readout.png")
+			measurements["captures"]["readout"] = _cam_pose(cam)
+		# the hall in plan: the bench in its own half, the galleries in theirs
+		cam.global_position = seg.to_global(Vector3(6.5, 13.0, 4.5 + vest))
+		cam.look_at(seg.to_global(Vector3(6.45, 0.0, 4.6 + vest)))
+		for i in range(16): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_points_plan.png")
+		measurements["captures"]["plan"] = _cam_pose(cam)
+
+	if _live():
+		var drv: Node = load("res://commons/testing/wcn_desktop_driver.gd").new()
+		root.add_child(drv)
+		var stand_at: Vector3 = seg.to_global(Vector3(SPOT.x, 0.05, SPOT.z + vest))
+		drv.call("spawn", stand_at, em)
+		for i in range(20): await process_frame
+		check(bool(drv.call("is_ready")), "the desktop rig stands before the bench")
+		measurements["desktop_input"] = {"stand_pose": drv.call("pose")}
+		# the four controls, pressed through the pointer, from arm's length
+		var pnode0: Node3D = bench.get_node_or_null("Panel")
+		var press_from: Vector3 = stand_at
+		if pnode0 != null:
+			var pl: Vector3 = seg.to_local(pnode0.global_position)
+			press_from = seg.to_global(Vector3(pl.x, 0.05, pl.z - 0.45))
+		measurements["desktop_input"]["press_from"] = [snappedf(press_from.x, 0.01), snappedf(press_from.z, 0.01)]
+		var seed_before: int = int(prim.call("sampling_state")["seed"])
+		var b1: Node = panel.find_child("Btn_1", true, false) if panel != null else null
+		var rec1: Dictionary = await drv.call("press", b1, press_from) if b1 != null else {}
+		await create_timer(0.5, true, false, true).timeout
+		var seed_after: int = int(prim.call("sampling_state")["seed"])
+		measurements["desktop_input"]["press_new_seed"] = rec1
+		var pnode: Node3D = bench.get_node_or_null("Panel")
+		measurements["desktop_input"]["panel_at"] = [snappedf(pnode.global_position.x, 0.01), snappedf(pnode.global_position.y, 0.01), snappedf(pnode.global_position.z, 0.01)] if pnode != null else []
+		check(seed_after != seed_before, "NEW SEED pressed through the pointer names another pair of clouds (%d → %d)" % [seed_before, seed_after])
+		var b0: Node = panel.find_child("Btn_0", true, false) if panel != null else null
+		var pre: Dictionary = prim.call("sampling_state")
+		var rec0: Dictionary = await drv.call("press", b0, press_from) if b0 != null else {}
+		await create_timer(0.5, true, false, true).timeout
+		measurements["desktop_input"]["press_redraw"] = rec0
+		check(bool(_same_points(pre, prim.call("sampling_state"))["same"]), "REDRAW pressed through the pointer brings the same clouds back")
+
+		# THE GRAB: the pointer's own ray, on a point of the admitted cloud
+		var live_pts: Array = va.find_children("Admitted_*", "", false, false)
+		var target: Node3D = null
+		var best: float = 99.0
+		for p in live_pts:
+			var d: float = (p as Node3D).global_position.distance_to(stand_at + Vector3(0, 1.2, 0))
+			if d < best: best = d; target = p
+		var grab: Dictionary = {}
+		if target != null:
+			var ptr: Node = drv.get("pointer")
+			drv.call("aim_at", target.global_position)
+			for i in range(8): await process_frame
+			var found: Node = ptr.call("_find_grabbable") if ptr != null and ptr.has_method("_find_grabbable") else null
+			grab["ray_finds"] = str(found.name) if found != null else "nothing"
+			grab["target"] = str(target.name)
+			grab["distance"] = snappedf(best, 0.01)
+			if found == target:
+				await drv.call("press_down", MOUSE_BUTTON_RIGHT)
+				for i in range(8): await process_frame
+				var held: Node = ptr.get("_held")
+				grab["held"] = str(held.name) if held != null else "nothing"
+				check(held == target, "the pointer's own grab ray finds a point in the admitted cloud and the right button carries it (%s)" % JSON.stringify(grab))
+				# carry it toward its nearest neighbour and read what the room says
+				var neighbour: Node3D = null
+				var nd: float = 99.0
+				for p in live_pts:
+					if p == target: continue
+					var d2: float = (p as Node3D).global_position.distance_to(target.global_position)
+					if d2 < nd: nd = d2; neighbour = p
+				if neighbour != null:
+					drv.call("aim_at", neighbour.global_position)
+					for i in range(12): await process_frame
+					await create_timer(0.6, true, false, true).timeout
+					var carried: Dictionary = prim.call("sampling_state")
+					grab["while_carried"] = {"moved": int(carried["moved"]), "under": int(carried["under_distance"]),
+						"held_at": [snappedf(target.global_position.x, 0.01), snappedf(target.global_position.y, 0.01), snappedf(target.global_position.z, 0.01)],
+						"neighbour_gap": snappedf(target.global_position.distance_to(neighbour.global_position), 0.01)}
+					check(int(carried["moved"]) >= 1, "carrying it off its generated place is counted at once (%s)" % JSON.stringify(grab["while_carried"]))
+					if int(carried["under_distance"]) == 0:
+						# the pointer carries at its own hold distance, which may not reach
+						# inside a 0.1 m shell; the geometry is then set as the desktop
+						# stand-in and said so, exactly as with the edible mushroom in R4
+						target.position = (neighbour.get_meta("home") as Vector3) + Vector3(dist * 0.4, 0.0, 0.0)
+						await create_timer(0.6, true, false, true).timeout
+						var forced: Dictionary = prim.call("sampling_state")
+						grab["set_as_stand_in"] = {"under": int(forced["under_distance"]), "why": "the pointer's hold distance does not reach inside a %.2f m shell" % (dist * 0.5)}
+						check(int(forced["under_distance"]) >= 1, "and inside the shell the room counts it as sharing an excluded neighbourhood (%s)" % JSON.stringify(grab["set_as_stand_in"]))
+				if capture:
+					await create_timer(0.3, true, false, true).timeout
+					root.get_texture().get_image().save_png(OUT + "probe_points_desktop_carry.png")
+					grab["capture_pose"] = drv.call("pose")
+				await drv.call("press_down", MOUSE_BUTTON_RIGHT)   # a toggle: the second press drops it
+				await drv.call("release", MOUSE_BUTTON_RIGHT)
+				await create_timer(0.5, true, false, true).timeout
+				grab["held_after_release"] = str((ptr.get("_held") as Node).name) if ptr.get("_held") != null else "nothing"
+				check(ptr.get("_held") == null, "the second right-button press puts the point down (%s)" % str(grab["held_after_release"]))
+			else:
+				check(false, "the pointer's grab ray finds the point it is aimed at (%s)" % JSON.stringify(grab))
+		measurements["desktop_input"]["grab"] = grab
+		var b3: Node = panel.find_child("Btn_3", true, false) if panel != null else null
+		var rec3: Dictionary = await drv.call("press", b3, press_from) if b3 != null else {}
+		measurements["desktop_input"]["press_restore"] = rec3
+		await create_timer(0.6, true, false, true).timeout
+		check(not rec3.is_empty(), "RESTORE pressed through the pointer after the carry")
+		await create_timer(0.9, true, false, true).timeout
+		var settled: Dictionary = prim.call("sampling_state")
+		measurements["desktop_input"]["after_restore"] = {"moved": int(settled["moved"]), "under": int(settled["under_distance"])}
+		check(int(settled["under_distance"]) == 0, "and the cloud is back inside its own rule (%s)" % JSON.stringify(measurements["desktop_input"]["after_restore"]))
+		drv.call("teardown")
+
+	_finish()
+
+## The twelve-edge frame's outer span, so "matched volume" is measured and not asserted.
+func _frame_span(vol: Node3D) -> Vector3:
+	if vol == null:
+		return Vector3.ZERO
+	var lo := Vector3(INF, INF, INF)
+	var hi := Vector3(-INF, -INF, -INF)
+	for e in vol.find_children("Edge_*", "", false, false):
+		var m: MeshInstance3D = e
+		var box: BoxMesh = m.mesh
+		if box == null: continue
+		var half: Vector3 = box.size * 0.5
+		lo = Vector3(min(lo.x, m.position.x - half.x), min(lo.y, m.position.y - half.y), min(lo.z, m.position.z - half.z))
+		hi = Vector3(max(hi.x, m.position.x + half.x), max(hi.y, m.position.y + half.y), max(hi.z, m.position.z + half.z))
+	return hi - lo
+
+func _same_points(a: Dictionary, b: Dictionary) -> Dictionary:
+	var pa: Dictionary = a.get("points", {})
+	var pb: Dictionary = b.get("points", {})
+	var worst: float = 0.0
+	var counts: Array = []
+	for k in ["proposed", "admitted"]:
+		var la: Array = pa.get(k, [])
+		var lb: Array = pb.get(k, [])
+		counts.append([k, la.size(), lb.size()])
+		if la.size() != lb.size():
+			return {"same": false, "why": "different counts", "counts": counts}
+		for i in range(la.size()):
+			for c in range(3):
+				worst = max(worst, abs(float(la[i][c]) - float(lb[i][c])))
+	return {"same": worst < 0.0005, "worst_move": snappedf(worst, 0.0001), "counts": counts}
+
+func _brief(st: Dictionary) -> Dictionary:
+	var out: Dictionary = {}
+	for k in st.keys():
+		if k == "points": continue
+		out[k] = st[k]
+	return out
+
+func _press(panel: Node, btn_name: String) -> bool:
+	if panel == null: return false
+	var btn: Node = panel.find_child(btn_name, true, false)
+	if btn == null: return false
+	var area: Node = btn.get_node_or_null("InteractableAreaButton")
+	if area == null or not area.has_signal("button_pressed"): return false
+	area.emit_signal("button_pressed", area)
+	return true
+
+func _cam_pose(cam: Camera3D) -> Dictionary:
+	var cur: Camera3D = root.get_camera_3d()
+	var fwd: Vector3 = -cam.global_transform.basis.z
+	return {"current_camera": str(cur.get_path()).right(50) if cur != null else "none", "is_ours": cur == cam,
+		"at": [snappedf(cam.global_position.x, 0.01), snappedf(cam.global_position.y, 0.01), snappedf(cam.global_position.z, 0.01)],
+		"forward": [snappedf(fwd.x, 0.01), snappedf(fwd.y, 0.01), snappedf(fwd.z, 0.01)]}
+
+func _finish() -> void:
+	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,
+		"control_path": "REDRAW / NEW SEED / RULE / RESTORE through InteractableAreaButton.button_pressed (one argument); the live port presses NEW SEED and REDRAW through the desktop pointer and carries a point with the pointer's own grab",
+		"hand_file": "ada_run/necklace_hand.json (real)", "headset_verified": false,
+		"engine": Engine.get_version_info().string, "physics_fps": Engine.physics_ticks_per_second}
+	var f := FileAccess.open(OUT + "probe_points.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify(report, "  ")); f.close()
+	print("[wcn-points] ", checks, " checks; ", failures.size(), " failures")
+	quit(0 if failures.is_empty() else 1)
