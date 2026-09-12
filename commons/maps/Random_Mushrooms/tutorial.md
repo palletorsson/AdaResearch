@@ -105,10 +105,27 @@ func regrow() -> void:
 
 The same order as the first build, so under a seed every instance and the ground come back where they were. NEW SEED draws another five-digit seed first; SIZE sets `size_variation` and regrows under the seed you have.
 
+Plant the edible ones last.
+
+```gdscript
+	var half: float = meadow_size * 0.5
+	for i in range(n):
+		var x: float
+		var z: float
+		if i % 2 == 0:
+			x = half - 0.32
+			z = -half + 0.5 + _rf() * (meadow_size - 1.0)
+		else:
+			z = -half + 0.32
+			x = -half + 0.5 + _rf() * (meadow_size - 1.0)
+```
+
+The project's pickable `edible_mushroom`, planted after everything else so the population's draws are untouched, alternately at the local +x and −z kerbs — the margins a visitor walks. `edible` is `none` unless a token says `#edible:some` (three) or `#edible:many` (six).
+
 Stage it in a map.
 
 ```
-mushrooms:180#stand:specimen#size:6
+mushrooms:180#stand:specimen#size:6#edible:some
 ```
 
 `stand:specimen` raises the bed clear of the museum's floor, boards it, and stands the table with the six specimens, the plate and SHOW · KIND · SIZE / REGROW · NEW SEED at the bed's edge; `size` is the bed's side in metres; `seed` pins the population. Without the token's config the meadow builds exactly as it shipped: ten metres, the global stream, no table.

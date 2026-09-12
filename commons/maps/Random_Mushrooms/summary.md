@@ -13,7 +13,7 @@ A six-metre raised bed of mushrooms in the middle of the hall and a specimen tab
 ## Key Elements
 
 ### Interactables
-- **mushrooms** (6,7), `mushrooms:180#stand:specimen#size:6` — the primary: the bed and its table
+- **mushrooms** (6,7), `mushrooms:180#stand:specimen#size:6#edible:some` — the primary: the bed, its table, and three edible mushrooms at the bed's reachable edges
 - **reaction_diffusion_intro** (9,11) — the book pearl's hero line: a Gray-Scott field, spots from two rates
 - **bubbles_random** (10,4), **bubble_particles** (10,9) — bubbles in the east nook
 - **random_number_book_page_collection** (10,7) — the RAND Corporation's 1955 digits, cascading
@@ -27,7 +27,10 @@ A six-metre raised bed of mushrooms in the middle of the hall and a specimen tab
 - **NEW SEED** — another population, another ground
 
 ### The plate (six lines)
-seed and REGROW's policy · candidates, accepted, rejected · rings (placed), clusters (placed), templates · the SHOW or KIND line with its count · the size rule or SIZE off · glow, lit of the cap, mushrooms
+seed and REGROW's policy · candidates, accepted, rejected · rings (placed), clusters (placed), templates · the SHOW or KIND line with its count · the size rule or SIZE off · glow, lit of the cap, mushrooms, the edible ones still standing
+
+### The edible ones
+The project's `edible_mushroom` (a pickable red cap with spots that heals five percent and starts a ten-second perception shader when brought to the face), three of them planted a third of a metre inside the west and south kerbs where the walk runs, at seeded places REGROW repeats; picked up by hand in a headset or carried by the desktop pointer's right button (which holds it too far to eat).
 
 ## Learning Sequence
 1. From the north door, the table first: six specimens on discs, the plate, the panel
@@ -35,7 +38,7 @@ seed and REGROW's policy · candidates, accepted, rejected · rings (placed), cl
 3. REGROW: the same population returns; SIZE: the same population at one size; NEW SEED: another
 4. KIND rejected: grey marks where candidates were refused by the noise threshold
 5. KIND rings: the circle was an instruction with a centre, a radius and a count; clusters have a rule of their own
-6. Round the west margin and along the south to the door; the bubbles, the digits and the reaction-diffusion field in the east and south
+6. Round the west margin and along the south to the door, past the three edible mushrooms at the kerb (pick one; in a headset, eat it); the bubbles, the digits and the reaction-diffusion field in the east and south
 
 ## Museum
 `wall_height 3`, `gate_depth_rows 0`, `artifact_placement map`, `sculpture_clear_rects [[3,1,10,12]]`, `floor_cells [[8,12]]`. The dealt lane neither slides nor shrinks the map's bodies; dealt plinths stay out of cells 3–9 × 1–11.

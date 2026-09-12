@@ -49,15 +49,19 @@ The draw is made whether or not the rule is on, so switching `size_variation` un
 
 API for probes and other callers: `regrow()`, `new_seed()`, `set_population_seed(v)`, `set_size_variation(on)`, `show_template(i)`, `cycle_show()`, `set_kind(i)`, `cycle_kind()`, `instances()`, `ground_signature()`, `readout_lines()`, `highlighted_count()`, `get_specimen_state()`.
 
+### The edible ones (`edible`, opt-in; Palle, 12 September)
+
+`edible` is a word-valued export enum `none | some | many` (3 or 6; `#edible:some` in this map's token) read by `apply_grid_config`. `_plant_edibles()` runs after the whole build (and after every regrow): its draws come last on the same generator, so the population is exactly what it is without them and REGROW plants them at the same places; NEW SEED elsewhere. Each is an instance of `res://commons/hazards/mushroom/edible_mushroom.tscn` (`EdibleMushroom extends XRToolsPickable`, a RigidBody3D on the pickable layer) at `mushroom_scale` 1.5, planted still (frozen) at the ground's height plus the lift, a third of a metre inside the local +x or −z kerb in turn — under the token's 180° turn the west and south margins, where the walk runs. `edibles_state()` reports planted, present, eaten and both the planted and the settled positions; the plate's last line counts the ones still standing (`glow 6 · lit 6/12 · mushrooms 104 · edible 3`), refreshed by a one-second watch because an eaten mushroom dissolves without a signal. Eating is the artifact's own rule: held within 0.25 m of the camera (a headset brings it to the face) it heals five percent, triggers a `MushroomEffect` (a screen shader for ten seconds) and dissolves. The desktop pointer carries it at a metre or more, so on desktop it can be picked up and put down but not eaten by that rule; the live probe calls the eat as the desktop stand-in and says so.
+
 ### Map configuration
 
 `apply_grid_config` reads `size` (the bed's side in metres; a whitelisted key), `count`, `density`, `seed` and `stand`. The museum hands the config before `_ready`, so the values are stored and the first build uses them; the grid hands it after, and a built meadow regrows. The Random_Mushrooms token:
 
 ```
-mushrooms:180#stand:specimen#size:6
+mushrooms:180#stand:specimen#size:6#edible:some
 ```
 
-A six-metre bed at cell (6,7) with its table at the north edge facing the north door, its own seed each run. `#seed:NNNNN` pins one.
+A six-metre bed at cell (6,7) with its table at the north edge facing the north door, its own seed each run, three edible mushrooms at its reachable edges. `#seed:NNNNN` pins one.
 
 ## The hall
 

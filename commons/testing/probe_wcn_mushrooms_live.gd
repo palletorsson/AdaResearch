@@ -336,6 +336,42 @@ func run() -> void:
 	_press(panel, "Btn_1")   # back to the template
 	await get_tree().process_frame
 
+	# ── 5b. the edible ones (Palle, 12 September: "add the eatable mushroom to the mushroom landscape") ──
+	await get_tree().create_timer(1.0).timeout   # the pickables settle onto the bed's ground
+	var est: Dictionary = prim.call("edibles_state")
+	measurements["edibles"] = est
+	check(int(est["planted"]) == 3 and int(est["present"]) == 3, "three edible mushrooms are planted in the bed under #edible:some (%s)" % str({"planted": est["planted"], "present": est["present"]}))
+	var ed_ok: bool = int(est["present"]) == 3
+	var ed_local: Array = []
+	for e in prim.get("_edibles"):
+		if not is_instance_valid(e): continue
+		var gl: Vector3 = seg.to_local((e as Node3D).global_position)
+		var lx: float = gl.x; var lz: float = gl.z - vest
+		ed_local.append([snappedf(lx, 0.01), snappedf(gl.y, 0.01), snappedf(lz, 0.01)])
+		var near_west: bool = lx >= 3.5 and lx <= 3.95
+		var near_south: bool = lz >= 10.05 and lz <= 10.5
+		var inside: bool = lx >= 3.5 and lx <= 9.5 and lz >= 4.5 and lz <= 10.5
+		if not (inside and (near_west or near_south)): ed_ok = false
+		if gl.y < -0.02 or gl.y > 0.55: ed_ok = false
+		var sp2: String = str((e as Node).get_script().resource_path) if (e as Node).get_script() != null else ""
+		if not sp2.ends_with("edible_mushroom.gd") or not (e as Node).is_in_group("edible"): ed_ok = false
+	measurements["edibles_local"] = ed_local
+	check(ed_ok, "each stands inside the bed within a third of a metre of the west or south kerb, on the lifted ground, and is the project's EdibleMushroom (%s)" % str(ed_local))
+	var st_e: Dictionary = prim.call("get_specimen_state")
+	check(str((st_e["lines"] as Array)[5]).ends_with("· edible 3"), "the plate's last line counts the edible ones (%s)" % str((st_e["lines"] as Array)[5]))
+	var planted_before: Array = (est["planted_at"] as Array).duplicate(true)
+	_press(panel, "Btn_3")   # REGROW
+	await get_tree().process_frame; await get_tree().process_frame
+	var est2: Dictionary = prim.call("edibles_state")
+	check(int(est2["present"]) == 3 and str(est2["planted_at"]) == str(planted_before), "REGROW plants the edible ones again at the same places (%s)" % str(est2["planted_at"]))
+	_press(panel, "Btn_4")   # NEW SEED
+	await get_tree().process_frame; await get_tree().process_frame
+	var est3: Dictionary = prim.call("edibles_state")
+	check(int(est3["present"]) == 3 and str(est3["planted_at"]) != str(planted_before), "NEW SEED plants them elsewhere (%s)" % str(est3["planted_at"]))
+	prim.call("set_population_seed", seed0)
+	await get_tree().process_frame; await get_tree().process_frame
+	await get_tree().create_timer(1.0).timeout
+
 	# ── 6. the floor and the walk ─────────────────────────────────────────────
 	var pspace := seg.get_world_3d().direct_space_state
 	for spot in [[6.5, 7.5, "the bed centre", "GroundCollision"], [5.0, 6.0, "the bed north-west", "GroundCollision"], [SPOT.x, SPOT.z, "the visitors spot", "Collision"], [6.5, 3.35, "the table", "Collider"], [8.5, 12.5, "the teleporter cell", "Collision"], [2.0, 7.5, "the west margin", "Collision"], [6.5, 11.4, "the south margin", "Collision"]]:
@@ -411,6 +447,65 @@ func run() -> void:
 			await get_tree().create_timer(0.3, true, false, true).timeout
 			get_viewport().get_texture().get_image().save_png(OUT + "probe_mushrooms_desktop_front_live.png")
 			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
+		# the edible one at the west kerb: the rig stands on the west margin beside it, grabs
+		# it with the pointer's carry (right button), and it is eaten when it comes within the
+		# artifact's own eat_distance of the camera — if the pointer holds it farther than that,
+		# the eat is called as the desktop stand-in for bringing it to the face, and said so
+		var ed_target: Node3D = null
+		for e in prim.get("_edibles"):
+			if is_instance_valid(e) and seg.to_local((e as Node3D).global_position).x < 4.0: ed_target = e; break
+		measurements["desktop_input"]["edible"] = {}
+		if ed_target != null:
+			var el: Vector3 = seg.to_local(ed_target.global_position)
+			drv.get("rig").global_position = seg.to_global(Vector3(2.7, 0.05, el.z))
+			await get_tree().physics_frame
+			drv.call("aim_at", ed_target.global_position)
+			var seen_e: Node = await drv.call("hover_target")
+			var hov: String = str(seen_e.get_path()).right(50) if seen_e != null else "nothing"
+			# the pointer's own grab ray (GRAB_MASK: layer 3, the pickable layer this mushroom is on),
+			# aimed at the cap rather than the base
+			drv.call("aim_at", ed_target.global_position + Vector3(0.0, 0.12, 0.0))
+			await get_tree().process_frame
+			var ptr: Node = drv.get("pointer")
+			var found: Node = ptr.call("_find_grabbable") if ptr != null and ptr.has_method("_find_grabbable") else null
+			await drv.call("press_down", MOUSE_BUTTON_RIGHT)
+			for i in range(8): await get_tree().process_frame
+			# the desktop pointer carries by freezing and moving the body (_grab_held), without
+			# XR Tools' pick_up: the pointer's own _held is the truth
+			var held: bool = (ptr != null and ptr.get("_held") == ed_target) or (ed_target.has_method("is_picked_up") and bool(ed_target.call("is_picked_up")))
+			var cam_d: float = ed_target.global_position.distance_to((drv.get("cam") as Camera3D).global_position) if drv.get("cam") != null else -1.0
+			measurements["desktop_input"]["edible"] = {"hover": hov, "grab_ray_found": str(found.get_path()).right(40) if found != null else "nothing", "held": held, "distance_to_camera_when_held": snappedf(cam_d, 0.01)}
+			check(found == ed_target, "the desktop pointer's grab ray finds the edible mushroom under the crosshair (%s)" % measurements["desktop_input"]["edible"]["grab_ray_found"])
+			check(held, "…and the right button carries it (held %s)" % str(held))
+			var eaten_by_rule: bool = false
+			if held:
+				for i in range(20):
+					await get_tree().process_frame
+					if bool(ed_target.get("_is_eaten")): eaten_by_rule = true; break
+			if not eaten_by_rule and is_instance_valid(ed_target) and not bool(ed_target.get("_is_eaten")):
+				ed_target.call("_eat")
+				measurements["desktop_input"]["edible"]["eat_path"] = "called _eat(): the desktop carry holds it %.2f m from the camera, past eat_distance 0.25 — a headset brings it to the face" % cam_d
+			else:
+				measurements["desktop_input"]["edible"]["eat_path"] = "eaten by the artifact's own rule (within eat_distance of the camera)"
+			await get_tree().process_frame
+			var effect: Node = null
+			for n in get_tree().root.find_children("*", "Node3D", true, false):
+				if n.is_in_group("mushroom_effect"): effect = n; break
+			var tripping: bool = effect != null and effect.has_method("is_tripping") and bool(effect.call("is_tripping"))
+			measurements["desktop_input"]["edible"]["effect"] = {"found": effect != null, "tripping": tripping, "path": str(effect.get_path()).right(50) if effect != null else "none"}
+			check(tripping, "eating it starts the perception effect (a MushroomEffect in the tree, tripping)")
+			if capture:
+				for i in range(12): await get_tree().process_frame
+				await get_tree().create_timer(0.3, true, false, true).timeout
+				get_viewport().get_texture().get_image().save_png(OUT + "probe_mushrooms_eaten_live.png")
+				measurements["desktop_input"]["edible"]["capture_pose"] = drv.call("pose")
+			await drv.call("release", MOUSE_BUTTON_RIGHT)
+			await get_tree().create_timer(0.7).timeout
+			var est_after: Dictionary = prim.call("edibles_state")
+			measurements["desktop_input"]["edible"]["after"] = {"present": est_after["present"], "eaten": est_after["eaten"]}
+			check(int(est_after["present"]) == 2 and int(est_after["eaten"]) == 1, "the eaten one dissolves and the plate counts two (%s)" % str(measurements["desktop_input"]["edible"]["after"]))
+		else:
+			check(false, "an edible mushroom stands at the west kerb for the rig to reach")
 		drv.get("rig").global_position = seg.to_global(Vector3(6.5, 0.05, 0.6 + vest))
 		await get_tree().physics_frame
 		drv.call("aim_at", seg.to_global(Vector3(6.5, 1.2, 8.0 + vest)))
@@ -469,6 +564,16 @@ func run() -> void:
 		await get_tree().create_timer(0.3, true, false, true).timeout
 		get_viewport().get_texture().get_image().save_png(OUT + "probe_mushrooms_south_door_live.png")
 		measurements["captures"]["south_door"] = _cam_pose(cam)
+		var ed_first: Node3D = null
+		for e in prim.get("_edibles"):
+			if is_instance_valid(e) and not bool((e as Node).get("_is_eaten")) and seg.to_local((e as Node3D).global_position).x < 4.0: ed_first = e; break
+		if ed_first != null:
+			var efl: Vector3 = seg.to_local(ed_first.global_position)
+			cam.global_position = seg.to_global(Vector3(2.4, 1.35, efl.z - 0.9)); cam.look_at(ed_first.global_position)
+			for i in range(15): cam.make_current(); await get_tree().process_frame
+			await get_tree().create_timer(0.3, true, false, true).timeout
+			get_viewport().get_texture().get_image().save_png(OUT + "probe_mushrooms_edibles_live.png")
+			measurements["captures"]["edibles"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(2.0, 1.6, 2.0 + vest)); cam.look_at(seg.to_global(Vector3(9.0, 0.4, 8.0 + vest)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
@@ -480,6 +585,17 @@ func run() -> void:
 		get_viewport().get_texture().get_image().save_png(OUT + "probe_mushrooms_plan_live.png")
 		measurements["captures"]["plan"] = _cam_pose(cam)
 		cam.queue_free()
+
+	# ── 8b. the shipped default plants none ──────────────────────────────────
+	var bare: Node3D = load("res://algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.tscn").instantiate()
+	bare.position = Vector3(60.0, -60.0, 60.0)
+	em.add_child(bare)
+	await get_tree().process_frame; await get_tree().process_frame
+	var bare_e: Dictionary = bare.call("edibles_state")
+	check(str(bare.get("edible")) == "none" and int(bare_e["planted"]) == 0 and str(bare.get("stand")) == "none", "a token without #edible plants no edible mushroom and builds no table (%s, %s)" % [str(bare.get("edible")), str(bare_e["planted"])])
+	em.remove_child(bare)
+	bare.queue_free()
+	await get_tree().process_frame
 
 	# ── 9. the templates go with the hall ────────────────────────────────────
 	var refs: Array = []

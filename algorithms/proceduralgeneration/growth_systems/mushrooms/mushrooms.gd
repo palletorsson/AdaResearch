@@ -41,6 +41,18 @@ extends Node3D
 ##   "mushrooms:180#stand:specimen#size:6"          a six-metre bed with its table, its own seed
 ##   "mushrooms:180#stand:specimen#size:6#seed:777"   the same with a pinned seed
 @export_enum("none", "specimen") var stand: String = "none"
+## THE EDIBLE ONES (Palle, 12 September 2026: "add the eatable mushroom to the mushroom
+## landscape"). `commons/hazards/mushroom/edible_mushroom.tscn` — the project's pickable
+## mushroom, a red cap with spots that heals and starts a ten-second perception shader when it
+## is brought to the face — planted at the bed's reachable edges (the local +x and −z kerbs:
+## under the Random_Mushrooms token's 180° turn, the west and south margins, where the walk
+## runs). Its draws come AFTER the whole build, so the population is what it would be without
+## them, and REGROW plants them at the same places. Word-valued, so a map spells it
+## `#edible:some` without the grid mistaking it for a rotation. none (shipped): nothing.
+@export_enum("none", "some", "many") var edible: String = "none"
+const EDIBLE_SCENE: String = "res://commons/hazards/mushroom/edible_mushroom.tscn"
+var _edibles: Array = []
+var _edible_planted: Array = []   # where each was planted (local), for a probe's replay check
 ## The population seed. -1 (the default) draws from the global stream exactly as before —
 ## the same calls in the same order. Non-negative: a private generator makes every draw of
 ## the build, and the ground's generator takes seed + 1 unless ground_seed says otherwise.
@@ -108,6 +120,8 @@ func _ready() -> void:
 	_lift_bed()
 	_built = true
 	_apply_stand()
+	_plant_edibles()
+	_update_readout()
 
 
 ## What the stand needs before the first build: a NAMED seed a visitor can read and repeat
@@ -1094,6 +1108,10 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("stand"):
 		var sv: String = str(config["stand"]).strip_edges().to_lower()
 		stand = "specimen" if sv in ["specimen", "table", "bench", "stand"] else "none"
+	if config.has("edible"):
+		var ev: String = str(config["edible"]).strip_edges().to_lower()
+		edible = "some" if ev in ["some", "few", "yes", "true", "on", "3"] else ("many" if ev in ["many", "6"] else "none")
+		regrow_needed = true
 	if not _built:
 		return
 	if stand == "specimen":
@@ -1149,10 +1167,83 @@ func regrow() -> void:
 	if add_ground_cover:
 		add_ground_details()
 	_lift_bed()
+	_plant_edibles()
 	if _stand_root != null:
 		_refresh_specimens()
 		_refresh_highlight()
 		_update_readout()
+
+
+var _edible_shown: int = -1
+
+func _refresh_edible_count() -> void:
+	var p: int = int(edibles_state()["present"])
+	if p != _edible_shown:
+		_edible_shown = p
+		_update_readout()
+
+
+func edible_count() -> int:
+	return 3 if edible == "some" else (6 if edible == "many" else 0)
+
+
+## The edible ones, planted after everything else: one to the local +x kerb, the next to the
+## local −z kerb, and so on, a third of a metre inside the boards where a hand from the margin
+## reaches, each at the ground's height plus the lift. A RigidBody3D pickable; it settles onto
+## the bed's own ground.
+func _plant_edibles() -> void:
+	for e in _edibles:
+		if is_instance_valid(e):
+			remove_child(e)
+			(e as Node).queue_free()
+	_edibles.clear()
+	_edible_planted.clear()
+	var n: int = edible_count()
+	if n <= 0:
+		return
+	var packed: PackedScene = load(EDIBLE_SCENE)
+	if packed == null:
+		return
+	var half: float = meadow_size * 0.5
+	for i in range(n):
+		var x: float
+		var z: float
+		if i % 2 == 0:
+			x = half - 0.32
+			z = -half + 0.5 + _rf() * (meadow_size - 1.0)
+		else:
+			z = -half + 0.32
+			x = -half + 0.5 + _rf() * (meadow_size - 1.0)
+		var y: float = get_ground_height(x, z) + bed_lift
+		var inst: Node3D = packed.instantiate()
+		inst.name = "Edible_%d" % i
+		if "mushroom_scale" in inst:
+			inst.set("mushroom_scale", 1.5)
+		inst.position = Vector3(x, y, z)
+		inst.rotation_degrees.y = _rf() * 360.0
+		inst.set_meta("edible_index", i)
+		add_child(inst)
+		# planted STILL: a free rigid body rolled down the bed's slope and off the kerb (the
+		# boards have no collider) in the first run; a hand or the desktop carry unfreezes it
+		if inst is RigidBody3D:
+			(inst as RigidBody3D).freeze = true
+		_edibles.append(inst)
+		_edible_planted.append(Vector3(x, y, z))
+
+
+## For a probe and the plate: how many were planted, how many still stand, where they were put.
+func edibles_state() -> Dictionary:
+	var present: int = 0
+	var poses: Array = []
+	for e in _edibles:
+		if is_instance_valid(e) and not bool((e as Node).get("_is_eaten")):
+			present += 1
+			var p: Vector3 = (e as Node3D).position
+			poses.append([snappedf(p.x, 0.001), snappedf(p.y, 0.001), snappedf(p.z, 0.001)])
+	var planted: Array = []
+	for p in _edible_planted:
+		planted.append([snappedf(p.x, 0.001), snappedf(p.y, 0.001), snappedf(p.z, 0.001)])
+	return {"planted": _edible_planted.size(), "present": present, "eaten": _edible_planted.size() - present, "positions": poses, "planted_at": planted}
 
 
 func new_seed() -> void:
@@ -1334,6 +1425,13 @@ func _build_table() -> void:
 	_highlight_mmi.multimesh = mm
 	_highlight_mmi.material_override = hm
 	add_child(_highlight_mmi)
+	# the plate's edible count follows an eaten one (it dissolves without a signal): a watch
+	var watch := Timer.new()
+	watch.name = "EdibleWatch"
+	watch.wait_time = 1.0
+	watch.autostart = true
+	watch.timeout.connect(_refresh_edible_count)
+	_stand_root.add_child(watch)
 	var pin := SphereMesh.new()
 	pin.radius = 0.06
 	pin.height = 0.12
@@ -1479,7 +1577,8 @@ func readout_lines() -> Array[String]:
 		"candidates %d · accepted %d · rejected %d" % [_candidates_requested, scattered, _rejected.size()],
 		"rings %d (%d) · clusters %d (%d) · templates %d" % [_rings.size(), ring_placed, _clusters.size(), cluster_placed, mushroom_types.size()],
 		show_line, size_line,
-		"glow %d · lit %d of %d · mushrooms %d" % [_glow_instances, _lit_lights, max_glow_lights if max_glow_lights > 0 else _glow_instances, mushrooms.size()]]
+		("glow %d · lit %d/%d · mushrooms %d · edible %d" % [_glow_instances, _lit_lights, max_glow_lights if max_glow_lights > 0 else _glow_instances, mushrooms.size(), edibles_state()["present"]]) if edible_count() > 0
+		else "glow %d · lit %d of %d · mushrooms %d" % [_glow_instances, _lit_lights, max_glow_lights if max_glow_lights > 0 else _glow_instances, mushrooms.size()]]
 
 
 func _update_readout() -> void:
@@ -1517,4 +1616,4 @@ func get_specimen_state() -> Dictionary:
 		"candidates": _candidates_requested, "rejected": _rejected.size(), "rings": _rings.duplicate(true), "clusters": _clusters.duplicate(true),
 		"templates": mushroom_types.size(), "show_template": _show_template, "kind": KINDS[_kind], "highlighted": highlighted_count(),
 		"glow_instances": _glow_instances, "lit_lights": _lit_lights, "max_glow_lights": max_glow_lights, "instances": instances(),
-		"ground": ground_signature(), "meadow_size": meadow_size, "bed_lift": bed_lift, "lines": lines}
+		"ground": ground_signature(), "meadow_size": meadow_size, "bed_lift": bed_lift, "edible": edibles_state(), "lines": lines}

@@ -1,5 +1,5 @@
 {
-  "checks": 84,
+  "checks": 94,
   "control_path": "REGROW / NEW SEED / SIZE / SHOW / KIND through InteractableAreaButton.button_pressed (one argument); set_population_seed by call; the live port presses REGROW, SHOW and NEW SEED through the desktop pointer",
   "engine": "4.6-stable (official)",
   "failures": [],
@@ -430,11 +430,25 @@
           2.4,
           2.2
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2913",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2857",
         "forward": [
           0.0,
           -0.37,
           0.93
+        ],
+        "is_ours": true
+      },
+      "edibles": {
+        "at": [
+          2.4,
+          1.35,
+          7.81
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2857",
+        "forward": [
+          0.69,
+          -0.58,
+          0.44
         ],
         "is_ours": true
       },
@@ -444,7 +458,7 @@
           1.6,
           0.3
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2913",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2857",
         "forward": [
           0.0,
           -0.14,
@@ -458,7 +472,7 @@
           1.25,
           2.4
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2913",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2857",
         "forward": [
           0.0,
           -0.66,
@@ -472,7 +486,7 @@
           14.0,
           6.5
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2913",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2857",
         "forward": [
           0.0,
           -1.0,
@@ -486,7 +500,7 @@
           1.6,
           2.3
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2913",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2857",
         "forward": [
           0.0,
           -0.66,
@@ -500,7 +514,7 @@
           1.15,
           2.4
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2913",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2857",
         "forward": [
           0.44,
           -0.37,
@@ -514,7 +528,7 @@
           2.4,
           2.2
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2913",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2857",
         "forward": [
           0.0,
           -0.37,
@@ -528,7 +542,7 @@
           1.6,
           12.2
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2913",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2857",
         "forward": [
           0.0,
           -0.19,
@@ -542,7 +556,7 @@
           1.3,
           2.5
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2913",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2857",
         "forward": [
           0.0,
           -0.37,
@@ -556,7 +570,7 @@
           1.6,
           2.0
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2913",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2857",
         "forward": [
           0.75,
           -0.13,
@@ -566,8 +580,42 @@
       }
     },
     "desktop_input": {
+      "edible": {
+        "after": {
+          "eaten": 1,
+          "present": 2
+        },
+        "capture_pose": {
+          "current_camera": "/root/@Node@2962/WcnDesktopRig/Head/Camera3D",
+          "eye": [
+            2.7,
+            1.6,
+            5.09
+          ],
+          "forward": [
+            0.65,
+            -0.76,
+            0.0
+          ],
+          "rig": [
+            2.7,
+            0.0,
+            5.09
+          ]
+        },
+        "distance_to_camera_when_held": 1.82,
+        "eat_path": "called _eat(): the desktop carry holds it 1.82 m from the camera, past eat_distance 0.25 — a headset brings it to the face",
+        "effect": {
+          "found": true,
+          "path": "/root/EndlessMuseum/MushroomEffect",
+          "tripping": true
+        },
+        "grab_ray_found": "0_soane-cabinet-vista/Mushrooms/Edible_0",
+        "held": true,
+        "hover": "nothing"
+      },
       "front_capture_pose": {
-        "current_camera": "/root/@Node@2970/WcnDesktopRig/Head/Camera3D",
+        "current_camera": "/root/@Node@2962/WcnDesktopRig/Head/Camera3D",
         "eye": [
           6.5,
           1.6,
@@ -600,7 +648,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2970/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2962/WcnDesktopRig/Head/Camera3D",
             "eye": [
               6.5,
               1.6,
@@ -661,7 +709,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2970/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2962/WcnDesktopRig/Head/Camera3D",
             "eye": [
               6.5,
               1.6,
@@ -722,7 +770,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2970/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2962/WcnDesktopRig/Head/Camera3D",
             "eye": [
               6.5,
               1.6,
@@ -783,7 +831,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2970/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2962/WcnDesktopRig/Head/Camera3D",
             "eye": [
               6.5,
               1.6,
@@ -805,7 +853,59 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2970/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2962/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              2.7,
+              1.65,
+              5.09
+            ],
+            "forward": [
+              0.6,
+              -0.8,
+              0.0
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              2.7,
+              0.05,
+              5.09
+            ]
+          }
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2962/WcnDesktopRig/Head/Camera3D",
+            "eye": [
+              2.7,
+              1.6,
+              5.09
+            ],
+            "forward": [
+              0.65,
+              -0.76,
+              0.0
+            ],
+            "miss_deg": 0.0,
+            "rig": [
+              2.7,
+              0.0,
+              5.09
+            ]
+          }
+        },
+        {
+          "button": 2,
+          "event": "press_down"
+        },
+        {
+          "button": 2,
+          "event": "release"
+        },
+        {
+          "event": "aim",
+          "pose": {
+            "current_camera": "/root/@Node@2962/WcnDesktopRig/Head/Camera3D",
             "eye": [
               6.5,
               1.65,
@@ -834,7 +934,7 @@
             2.2
           ],
           "pose": {
-            "current_camera": "/root/@Node@2970/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2962/WcnDesktopRig/Head/Camera3D",
             "eye": [
               6.5,
               1.6,
@@ -855,7 +955,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2970/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2962/WcnDesktopRig/Head/Camera3D",
             "eye": [
               2.0,
               1.6,
@@ -884,7 +984,7 @@
             2.5
           ],
           "pose": {
-            "current_camera": "/root/@Node@2970/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2962/WcnDesktopRig/Head/Camera3D",
             "eye": [
               2.0,
               1.6,
@@ -1007,8 +1107,8 @@
         "compared": 91,
         "same": true
       },
-      "seed_after": 58785,
-      "seed_before": 47158,
+      "seed_after": 92038,
+      "seed_before": 53738,
       "walk_south_from_the_door": [
         0.0,
         2.2
@@ -1019,12 +1119,68 @@
       ],
       "walker_cam_guard_stopped": true
     },
+    "edibles": {
+      "eaten": 0,
+      "planted": 3,
+      "planted_at": [
+        [
+          2.68,
+          0.105,
+          1.719
+        ],
+        [
+          2.2,
+          0.247,
+          -2.68
+        ],
+        [
+          2.68,
+          0.118,
+          1.519
+        ]
+      ],
+      "positions": [
+        [
+          2.68,
+          0.105,
+          1.719
+        ],
+        [
+          2.2,
+          0.247,
+          -2.68
+        ],
+        [
+          2.68,
+          0.118,
+          1.519
+        ]
+      ],
+      "present": 3
+    },
+    "edibles_local": [
+      [
+        3.82,
+        0.1,
+        5.78
+      ],
+      [
+        4.3,
+        0.25,
+        10.18
+      ],
+      [
+        3.82,
+        0.12,
+        5.98
+      ]
+    ],
     "floor_the_bed_centre": [
-      0.071,
+      0.078,
       "-cabinet-vista/Mushrooms/Ground/GroundStaticBody"
     ],
     "floor_the_bed_north-west": [
-      0.237,
+      0.171,
       "-cabinet-vista/Mushrooms/Ground/GroundStaticBody"
     ],
     "floor_the_south_margin": [
@@ -1063,35 +1219,35 @@
     "kind_cycle": [
       [
         "scattered",
-        70
+        68
       ],
       [
         "rings",
-        10
+        7
       ],
       [
         "clusters",
-        11
+        16
       ],
       [
         "rejected",
-        10
+        12
       ],
       [
         "template",
-        28
+        21
       ]
     ],
     "kinds0": {
-      "cluster": 11,
-      "ring": 10,
-      "scattered": 70
+      "cluster": 16,
+      "ring": 7,
+      "scattered": 68
     },
     "meadow": {
       "glow_lights_in_field": 4,
       "lit": 4,
-      "mesh_instances": 254,
-      "multimeshes": 25,
+      "mesh_instances": 269,
+      "multimeshes": 29,
       "mushrooms": 91,
       "templates": 6
     },
@@ -1119,15 +1275,15 @@
     "new_seed": {
       "ground_same": false,
       "kinds": {
-        "cluster": 14,
+        "cluster": 20,
         "ring": 10,
-        "scattered": 69
+        "scattered": 64
       },
       "same": {
-        "first_diff": "count 91 vs 93",
+        "first_diff": "count 91 vs 94",
         "same": false
       },
-      "seed_after": 41118
+      "seed_after": 69691
     },
     "plinths": [
       [
@@ -1150,12 +1306,12 @@
       ]
     ],
     "readout_lines": [
-      "seed 47158 · REGROW grows it again",
-      "candidates 80 · accepted 70 · rejected 10",
-      "rings 1 (10) · clusters 2 (11) · templates 6",
-      "SHOW template 0 · 11 instances ringed",
+      "seed 53738 · REGROW grows it again",
+      "candidates 80 · accepted 68 · rejected 12",
+      "rings 1 (7) · clusters 2 (16) · templates 6",
+      "SHOW template 0 · 16 instances ringed",
       "size 0.7–1.3 · ring 0.8–1.2 · cluster 0.5–1.2",
-      "glow 4 · lit 4 of 12 · mushrooms 91"
+      "glow 4 · lit 4/12 · mushrooms 91 · edible 3"
     ],
     "regrow": {
       "ground_same": true,
@@ -1163,7 +1319,7 @@
         "compared": 91,
         "same": true
       },
-      "seed_after": 47158
+      "seed_after": 53738
     },
     "seed_back": {
       "ground_same": true,
@@ -1187,61 +1343,100 @@
       "clusters": [
         {
           "centre": [
-            -2.43855772912502,
-            2.64692902565002
+            -2.02461737394333,
+            1.11312210559845
           ],
-          "placed": 6,
-          "requested": 6,
-          "size": 1.40737038850784,
+          "placed": 12,
+          "requested": 12,
+          "size": 0.58141465485096,
           "template": 4
         },
         {
           "centre": [
-            2.89112842082977,
-            -1.82055231928825
+            2.57302272319794,
+            2.96499073505402
           ],
-          "placed": 5,
-          "requested": 6,
-          "size": 1.02784812450409,
-          "template": 2
+          "placed": 4,
+          "requested": 12,
+          "size": 1.29980546236038,
+          "template": 3
         }
       ],
+      "edible": {
+        "eaten": 0,
+        "planted": 3,
+        "planted_at": [
+          [
+            2.68,
+            0.105,
+            1.719
+          ],
+          [
+            2.2,
+            0.247,
+            -2.68
+          ],
+          [
+            2.68,
+            0.118,
+            1.519
+          ]
+        ],
+        "positions": [
+          [
+            2.68,
+            0.105,
+            1.719
+          ],
+          [
+            2.2,
+            0.247,
+            -2.68
+          ],
+          [
+            2.68,
+            0.118,
+            1.519
+          ]
+        ],
+        "present": 3
+      },
       "glow_instances": 4,
       "ground": {
         "cells": 1369,
-        "hash": 3531961079,
-        "max": 0.179865539073944,
-        "min": -0.179848566651344
+        "hash": 2289040597,
+        "max": 0.179935693740845,
+        "min": -0.179850071668625
       },
-      "highlighted": 11,
+      "highlighted": 16,
       "instances": 91,
       "kind": "template",
       "lines": [
-        "seed 47158 · REGROW grows it again",
-        "candidates 80 · accepted 70 · rejected 10",
-        "rings 1 (10) · clusters 2 (11) · templates 6",
-        "SHOW template 0 · 11 instances ringed",
+        "seed 53738 · REGROW grows it again",
+        "candidates 80 · accepted 68 · rejected 12",
+        "rings 1 (7) · clusters 2 (16) · templates 6",
+        "SHOW template 0 · 16 instances ringed",
         "size 0.7–1.3 · ring 0.8–1.2 · cluster 0.5–1.2",
-        "glow 4 · lit 4 of 12 · mushrooms 91"
+        "glow 4 · lit 4/12 · mushrooms 91 · edible 3"
       ],
       "lit_lights": 4,
       "max_glow_lights": 12,
       "meadow_size": 6.0,
-      "rejected": 10,
+      "rejected": 12,
       "replay": true,
       "rings": [
         {
           "centre": [
-            1.82231605052948,
-            0.590409278869629
+            2.44554805755615,
+            -2.45221003890038
           ],
-          "placed": 10,
-          "radius": 1.9885122179985,
-          "requested": 15,
+          "placed": 7,
+          "radius": 2.63720691204071,
+          "requested": 21,
           "template": 1
         }
       ],
-      "seed": 47158,
+      "seed": 53738,
       "show_template": 0,
       "size_variation": true,
       "stand": "specimen",
@@ -1253,11 +1448,11 @@
       3.35
     ],
     "template_counts0": [
-      11,
-      28,
-      20,
-      11,
-      17,
+      16,
+      21,
+      14,
+      15,
+      21,
       4
     ],
     "templates_freed_with_the_hall": [
