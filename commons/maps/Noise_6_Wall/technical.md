@@ -293,3 +293,24 @@ void fragment() {
     COLOR = vec4(n, n, n, 1.0);
 }
 ```
+
+## The sample panel (2026-09-12)
+
+`algorithms/randomness/shadernoisespace/noiseroom.gd` (opt-in `#stand:panel`) and `WallNoiseShader.gdshader`. At `stand:none` the immersive room builds and animates exactly as before.
+
+| what | where |
+|---|---|
+| the layer count | `uniform int layers` in the shader; `for (int i = 0; i < layers; i++)` in `cloud_noise` |
+| the sum alone | `uniform int show_term`, with `term_gain` applied equally to every patch |
+| the four patches | `_build_sample_panel` — one `ShaderMaterial` each, local to the scene, every parameter but `layers` identical |
+| the declared weights | `PANEL_WEIGHTS`, printed by `_update_panel_readout` |
+| the freeze | `set_frozen` — `animation`, `animation_enabled`, `color_cycling`, `cloud_density_animation`, and `time_scale` on walls and patches |
+| the layer control | `set_layers` + `next_layers`, with `_broadcast_layers` scoped by `_hall_ancestor()` |
+| the basis, separately | `next_basis` → `_apply_generator`, which writes only `noise_basis` |
+| per-instance materials | `_setup_materials` duplicates both shared resources and re-assigns every wall |
+| the board alone | `_strip_enclosure_for_panel` — the 27 m enclosure leaves the tree once the materials are held |
+| the state, for a probe | `panel_state()` |
+
+The shader's turbulence term (four octaves of its own) is untouched and is not part of the comparison: the patches show `cloud_noise` alone, which is the sum the room is named for.
+
+The token sits at (9,2) with a reading landing at row 1, cols 8-10, and (8,2). At (7,3), in the one-cell entrance corridor, the board sealed the only route and the museum's reach repair slid it by (2,-1) to reopen the walk; the probe now checks the built position against the cell the map named.

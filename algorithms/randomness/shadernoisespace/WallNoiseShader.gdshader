@@ -21,6 +21,14 @@ uniform vec4 dark_corner : source_color = vec4(0.2, 0.1, 0.2, 1.0);
 // QueerNoiseShader.gdshader, which is the same shader on the room sphere.
 uniform int noise_basis : hint_range(0, 3) = 1;
 
+// 2026-09-12 (Noise_6_Wall, N5): the room is named for six scales and nobody could take one
+// away. `layers` is that loop's real bound and `show_term` opens the accumulation on its own,
+// without the turbulence and the colour the room paints over it. Both default to the shipped
+// picture: six layers, full mix.
+uniform int layers : hint_range(1, 6) = 6;
+uniform int show_term : hint_range(0, 1) = 0;   // 0 = the room's picture, 1 = the sum alone
+uniform float term_gain : hint_range(0.5, 4.0) = 2.0;   // the same on every comparison patch
+
 varying vec2 world_uv;
 varying vec3 world_position;
 
@@ -117,8 +125,11 @@ float cloud_noise(vec2 pos, float t) {
     float amplitude = 0.5;
     float frequency = 1.0;
 
-    // Multiple octaves for cloud-like appearance
-    for (int i = 0; i < 6; i++) {
+    // Multiple octaves for cloud-like appearance. The bound is a uniform now: each term is
+    // half the amplitude and twice the frequency of the one before it, so the first carries
+    // 0.5 of the weight, the first two 0.75, the first four 0.9375 and all six 0.984375 —
+    // which is why a one-layer patch is darker than a six-layer one and NOT otherwise different.
+    for (int i = 0; i < layers; i++) {
         vec2 animated_pos = pos * frequency;
         animated_pos.x += sin(t * 0.3 + pos.y * 0.5) * 0.3;
         animated_pos.y += cos(t * 0.2 + pos.x * 0.3) * 0.2;
@@ -209,4 +220,19 @@ void fragment() {
     ) * 0.1;
 
     NORMAL_MAP = vec3(normal_offset, 1.0);
+
+    // THE SUM ALONE. Astra's card asks that one layer and six differ only by declared
+    // contributions, so the comparison surface shows the accumulation and nothing else:
+    // no turbulence, no colour, no corner darkening.
+    if (show_term == 1) {
+        // The sum, shown as LIGHT rather than as a lit surface: a comparison patch in a dark
+        // interior photographs black otherwise. `term_gain` is the same on every patch, so
+        // the relative difference between one layer and six is untouched — and the plate
+        // says what the gain is, because a display gain nobody declares is a lie about a
+        // measurement.
+        float bare = clamp(cloud_noise(uv * cloud_scale, time * time_scale) * term_gain, 0.0, 1.0);
+        ALBEDO = vec3(bare);
+        EMISSION = vec3(bare) * 0.9;
+        ALPHA = 1.0;
+    }
 }

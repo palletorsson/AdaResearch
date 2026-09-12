@@ -1,132 +1,114 @@
-# Noise 6-Wall
+# Noise 6 Wall
 
-Six octaves of noise rendered per-pixel in a shader.
+A sum of six scales, and what it takes to see one of them. Every line below is from `algorithms/randomness/shadernoisespace/WallNoiseShader.gdshader` and `noiseroom.gd`, the shader and script this hall places.
 
-Write a fragment shader.
+Make the bound a uniform.
 
-```gdscript
-const SHADER_CODE: String = """
-shader_type canvas_item;
+```glsl
+uniform int layers : hint_range(1, 6) = 6;
+uniform int show_term : hint_range(0, 1) = 0;   // 0 = the room's picture, 1 = the sum alone
+```
 
-uniform float time;
+Six is the shipped room, and it was written into the loop as a literal, which is why this room's own text could propose isolating an octave that nobody could isolate.
 
-float hash(vec2 p) {
-    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
-}
+Add the terms.
 
-float smoothstep_val(float t) {
-    return t * t * (3.0 - 2.0 * t);
-}
+```glsl
+    for (int i = 0; i < layers; i++) {
+        vec2 animated_pos = pos * frequency;
+        animated_pos.x += sin(t * 0.3 + pos.y * 0.5) * 0.3;
+        animated_pos.y += cos(t * 0.2 + pos.x * 0.3) * 0.2;
 
-float value_noise(vec2 p) {
-    vec2 i = floor(p);
-    vec2 f = fract(p);
-    f = vec2(smoothstep_val(f.x), smoothstep_val(f.y));
-    return mix(
-        mix(hash(i), hash(i + vec2(1, 0)), f.x),
-        mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x),
-        f.y
-    );
-}
-
-float fbm(vec2 p) {
-    float total = 0.0;
-    float amplitude = 0.5;
-    for (int i = 0; i < 6; i++) {
-        total += value_noise(p) * amplitude;
-        p *= 2.0;
+        value += amplitude * abs(noise2d(animated_pos));
         amplitude *= 0.5;
+        frequency *= 2.0;
     }
-    return total;
-}
-
-void fragment() {
-    vec2 p = UV * 8.0 + vec2(time * 0.1, 0.0);
-    float n = fbm(p);
-    COLOR = vec4(n, n, n, 1.0);
-}
-"""
 ```
 
-Six octaves stacked in a for loop. Each octave doubles the frequency and halves the amplitude.
+Half the amplitude and twice the frequency each time round. Two consequences, and the room shows both: the sum of the amplitudes is 0.5 for one term and 0.984375 for six, which is a brightness difference and nothing else; and each term is ADDED, so nothing a later term does can move what an earlier one put there.
 
-Attach the shader.
+Show the sum on its own.
 
-```gdscript
-func create_shader_material() -> ShaderMaterial:
-    var shader := Shader.new()
-    shader.code = SHADER_CODE
-    var material := ShaderMaterial.new()
-    material.shader = shader
-    return material
-```
-
-Standard pipeline: create Shader, wrap in ShaderMaterial, apply to a node.
-
-Apply to a wall.
-
-```gdscript
-func setup_wall() -> void:
-    var wall := MeshInstance3D.new()
-    wall.mesh = QuadMesh.new()
-    wall.mesh.size = Vector2(6, 3)
-    wall.material_override = create_shader_material()
-    add_child(wall)
-```
-
-A flat quad takes the shader's output as its albedo. The wall flickers with noise.
-
-Pass time as a uniform.
-
-```gdscript
-var wall_material: ShaderMaterial
-
-func _process(_delta: float) -> void:
-    wall_material.set_shader_parameter("time", Time.get_ticks_msec() / 1000.0)
-```
-
-The shader reads the time; the noise scrolls accordingly.
-
-Render as 3D fog.
-
-```gdscript
-const VOLUMETRIC_SHADER := """
-shader_type spatial;
-render_mode unshaded, depth_draw_never, cull_disabled;
-
-uniform float density_scale = 1.0;
-
-float fbm(vec3 p) {
-    // same pattern as 2D but with 3D hash
-    float total = 0.0;
-    float amplitude = 0.5;
-    for (int i = 0; i < 6; i++) {
-        total += value_noise_3d(p) * amplitude;
-        p *= 2.0;
-        amplitude *= 0.5;
+```glsl
+    if (show_term == 1) {
+        float bare = clamp(cloud_noise(uv * cloud_scale, time * time_scale) * term_gain, 0.0, 1.0);
+        ALBEDO = vec3(bare);
+        EMISSION = vec3(bare) * 0.9;
+        ALPHA = 1.0;
     }
-    return total;
-}
-
-void fragment() {
-    float density = fbm(VERTEX * density_scale);
-    ALPHA = density * 0.3;
-    ALBEDO = vec3(1.0);
-}
-"""
 ```
 
-A 3D noise shader on a transparent volume. The cloud appears as drifting fog.
+No turbulence, no colour, no corner darkening. The patch emits its own value rather than being lit, because a comparison surface in a dark interior photographs black; `term_gain` is the same on all four, and the plate says what it is.
 
-Tune the frequencies.
+Build four patches that differ in one thing.
 
 ```gdscript
-@export_range(0.5, 4.0) var base_frequency: float = 1.0
-
-func update_frequency() -> void:
-    wall_material.set_shader_parameter("frequency", base_frequency)
+		mat.set_shader_parameter("layers", n)
+		mat.set_shader_parameter("show_term", 1)
+		mat.set_shader_parameter("time", 0.0)
+		mat.set_shader_parameter("cloud_scale", 2.0)
+		mat.set_shader_parameter("cloud_density", 1.0)
 ```
 
-Lower values produce broad patterns; higher values produce fine detail.
+Every patch gets the same everything except `n`. The probe reads all four materials back and fails if any other parameter differs, because a fair comparison is a claim that has to be checkable.
 
-You can now write a fBm fragment shader, apply it to walls, scroll it over time, and extend to volumetric 3D rendering. Noise_Inside_Noise extends into domain warping.
+Stop every clock, not one of them.
+
+```gdscript
+func set_frozen(frozen: bool) -> void:
+	animation = "frozen" if frozen else "live"
+	animation_enabled = not frozen
+	color_cycling = not frozen
+	cloud_density_animation = not frozen
+	for m in [room_material, wall_material]:
+		if m != null:
+			m.set_shader_parameter("time_scale", 0.0 if frozen else 0.2)
+	for p in _patches:
+		var mat: ShaderMaterial = (p as Dictionary)["mat"]
+		if mat != null:
+			mat.set_shader_parameter("time_scale", 0.0 if frozen else 0.2)
+```
+
+Three movers and a shader clock, on the walls and on all four patches. Freezing one of them leaves a still picture of a moving thing.
+
+Give every instance its own materials.
+
+```gdscript
+		if room_material != null and not room_material.resource_local_to_scene:
+			room_material = room_material.duplicate() as ShaderMaterial
+			room_material.resource_local_to_scene = true
+```
+
+The scene's materials were shared resources, so a uniform set in one hall was set in every placement of this room. Duplicating changes no pixel and stops the leak.
+
+And speak only to your own hall.
+
+```gdscript
+	var hall: Node = _hall_ancestor()
+	for r in get_tree().get_nodes_in_group("noise_rooms"):
+		if hall != null and not hall.is_ancestor_of(r):
+			continue
+```
+
+The same boundary the voxel bench needed a room earlier: the museum streams several halls at once, and a group is not a place.
+
+Stage it in a map.
+
+```
+shader_noise_space:180#stand:panel
+```
+
+`stand:panel` builds the board, the four patches, the plate and LAYERS, BASIS and FREEZE; `layers` sets the count from the token. Without it the artifact is the immersive interior it always was, six layers deep, with the generator axis an earlier pass gave it.
+
+And a board is not a room.
+
+```gdscript
+func _strip_enclosure_for_panel() -> void:
+	for n in ["RoomContainer", "WallsContainer", "LightingContainer", "Camera3D"]:
+		var node: Node = get_node_or_null(n)
+		if node != null:
+			remove_child(node)
+			node.queue_free()
+```
+
+The staged body used to carry the whole 27 m enclosure behind the board. Removed rather than hidden: an extent is measured from the tree, and the museum decides where a body may stand from its extent. Put a 2 m board across a 1 m corridor and the museum will seal the route and then slide the body aside to reopen it — which is the right call, and worth knowing before you write that the board stands where you put it.

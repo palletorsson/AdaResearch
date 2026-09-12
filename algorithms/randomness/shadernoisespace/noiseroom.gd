@@ -40,6 +40,42 @@ const GENERATORS: PackedStringArray = ["simplex", "perlin", "value", "cellular"]
 ## and a typed bool silently rejects "true". No placement passes it.
 @export_enum("live", "frozen") var animation: String = "live"
 
+# ── THE PANEL (stand:panel) — N5, 12 September 2026 ─────────────────────────
+#
+# WHICH LAYER OF A SURFACE ARE YOU ATTENDING TO? This room is lined with a sum
+# of six spatial scales and, until now, a visitor could not take one away. The
+# shader's loop bound is a uniform since this pass, and `show_term` opens the
+# accumulation on its own; both default to the shipped picture.
+#
+#   stand:none   SHIPPED. The immersive interior, six layers, full mix.
+#   stand:panel  A reading surface at the entrance: four patches of ONE field at
+#                1, 2, 4 and 6 layers, at one seed, one set of coordinates, one
+#                contrast, one colour and one time — differing only in how many
+#                terms are summed, with the weights each term carries declared
+#                on the plate. LAYERS sets the ROOM's walls (scoped to this hall
+#                and no other), BASIS changes the generator as its own separate
+#                comparison, FREEZE stops every animated term the comparison
+#                uses: the shader's clock, the colour cycling and the density.
+#
+# AND EVERY INSTANCE GETS ITS OWN MATERIALS. The room's walls shared one
+# ShaderMaterial resource with every other placement of this scene, so a uniform
+# set in one hall was set in all of them — the same class of fault as the group
+# broadcast found in Noise_Voxel a room earlier.
+const PANEL_LAYERS: Array = [1, 2, 4, 6]
+const PANEL_WEIGHTS: Array = [0.5, 0.75, 0.9375, 0.984375]
+const PANEL_PATCH: float = 0.42
+const PANEL_GAP: float = 0.06
+const PANEL_GAIN: float = 2.0     # the same display gain on all four patches, declared on the plate
+
+@export_enum("none", "panel") var stand: String = "none"
+@export var layers: int = 6
+
+var _panel_root: Node3D = null
+var _patches: Array = []
+var _panel_readout: Label3D = null
+var _last_touched: String = "nothing yet"
+var _last_broadcast: Dictionary = {}
+
 # Animation controls
 @export var animation_enabled: bool = true
 @export var animation_speed: float = 1.0
@@ -69,6 +105,10 @@ func _ready() -> void:
 	_apply_generator()
 	if animation == "frozen":
 		animation_enabled = false
+	add_to_group("noise_rooms")
+	if stand == "panel":
+		_strip_enclosure_for_panel()
+		_build_sample_panel()
 	_setup_ui()
 
 
@@ -90,11 +130,24 @@ func _setup_materials() -> void:
 	var room_sphere = get_node("RoomContainer/MainRoomBody/RoomShape")
 	if room_sphere and room_sphere.material_override:
 		room_material = room_sphere.material_override as ShaderMaterial
-	
+		# ONE INSTANCE, ONE MATERIAL. The scene's ShaderMaterial is a shared resource:
+		# every placement of this room pointed at the same one, so a uniform set in one
+		# hall was set in all of them. Duplicating changes no pixel and stops the leak.
+		if room_material != null and not room_material.resource_local_to_scene:
+			room_material = room_material.duplicate() as ShaderMaterial
+			room_material.resource_local_to_scene = true
+			room_sphere.material_override = room_material
+
 	# Find the wall material (all walls use the same material)
 	var front_wall = get_node("WallsContainer/FrontWall")
 	if front_wall and front_wall.material_override:
 		wall_material = front_wall.material_override as ShaderMaterial
+		if wall_material != null and not wall_material.resource_local_to_scene:
+			wall_material = wall_material.duplicate() as ShaderMaterial
+			wall_material.resource_local_to_scene = true
+			for w in get_node("WallsContainer").get_children():
+				if w is GeometryInstance3D and (w as GeometryInstance3D).material_override != null:
+					(w as GeometryInstance3D).material_override = wall_material
 	
 	print("Noise Room: Materials found - Room: ", room_material != null, ", Wall: ", wall_material != null)
 
@@ -306,6 +359,11 @@ func get_animation_info() -> Dictionary:
 ## placements) gets no call at all. Nothing is torn down here in any case: the basis is a
 ## single int uniform, so switching it repaints the field without rebuilding the room.
 func apply_grid_config(config: Dictionary) -> void:
+	if config.has("stand"):
+		var sv: String = str(config["stand"]).strip_edges().to_lower()
+		stand = "panel" if sv in ["panel", "samples", "entrance", "compare"] else "none"
+	if config.has("layers"):
+		set_layers(int(config["layers"]))
 	if not config.has("generator"):
 		return
 	var g: String = str(config["generator"]).strip_edges().to_lower()
@@ -313,3 +371,253 @@ func apply_grid_config(config: Dictionary) -> void:
 		return
 	generator = g
 	_apply_generator()
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE SAMPLE PANEL — stand:panel. Nothing below runs at stand:none.
+# ═════════════════════════════════════════════════════════════════════════════
+
+## How many terms the walls sum. The shader's loop bound; 6 is the shipped room.
+func set_layers(n: int) -> void:
+	layers = clampi(n, 1, 6)
+	if room_material:
+		room_material.set_shader_parameter("layers", layers)
+	if wall_material:
+		wall_material.set_shader_parameter("layers", layers)
+
+
+## Every animated term the comparison uses, stopped together: the shader's own
+## clock, the colour cycling and the density breathing. Astra's card asks for a
+## freeze that covers all of them rather than one parameter at zero.
+func set_frozen(frozen: bool) -> void:
+	animation = "frozen" if frozen else "live"
+	animation_enabled = not frozen
+	color_cycling = not frozen
+	cloud_density_animation = not frozen
+	for m in [room_material, wall_material]:
+		if m != null:
+			m.set_shader_parameter("time_scale", 0.0 if frozen else 0.2)
+	for p in _patches:
+		var mat: ShaderMaterial = (p as Dictionary)["mat"]
+		if mat != null:
+			mat.set_shader_parameter("time_scale", 0.0 if frozen else 0.2)
+	_last_touched = "FREEZE"
+	_update_panel_readout()
+
+
+## A BOARD IS NOT A ROOM (2026-09-12, N5). `stand:panel` used to place the whole
+## scene and hang the board on it, so a 27 m enclosure stood invisibly around the
+## entrance — its walls outside the hall's own walls, its ceiling above the hall's
+## ceiling — and the museum's reach repair had a body far larger than the thing a
+## visitor can see. The materials are already held by _setup_materials, so the
+## enclosure can leave the tree: the staged body is the board and nothing else.
+## Removed rather than hidden, because an extent is measured from the tree.
+func _strip_enclosure_for_panel() -> void:
+	for n in ["RoomContainer", "WallsContainer", "LightingContainer", "Camera3D"]:
+		var node: Node = get_node_or_null(n)
+		if node != null:
+			remove_child(node)
+			node.queue_free()
+
+func is_frozen() -> bool:
+	return animation == "frozen"
+
+
+## Four patches of one field, differing only in how many terms are summed.
+func _build_sample_panel() -> void:
+	var HangarKit := load("res://commons/artifacts/_hangar/hangar_kit.gd")
+	var shader: Shader = wall_material.shader if wall_material != null else null
+	if shader == null and room_material != null:
+		shader = room_material.shader
+	_panel_root = Node3D.new()
+	_panel_root.name = "SamplePanel"
+	add_child(_panel_root)
+	var dark := StandardMaterial3D.new()
+	dark.albedo_color = Color(0.10, 0.105, 0.12)
+	dark.roughness = 0.85
+	var frame := StandardMaterial3D.new()
+	frame.albedo_color = Color(0.52, 0.50, 0.48)
+	frame.roughness = 0.8
+
+	var width: float = PANEL_LAYERS.size() * PANEL_PATCH + (PANEL_LAYERS.size() - 1) * PANEL_GAP
+	var board: MeshInstance3D = HangarKit.box(Vector3(0, 1.30, 0.0), Vector3(width + 0.16, PANEL_PATCH + 0.44, 0.06), frame)
+	board.name = "Board"
+	_panel_root.add_child(board)
+	var head: MeshInstance3D = HangarKit.stencil("ONE FIELD · ONE SEED · ONE CLOCK · MORE TERMS", Vector2(width, 0.044), Color(0.12, 0.13, 0.15))
+	if head:
+		head.position = Vector3(0, 1.30 + PANEL_PATCH * 0.5 + 0.13, 0.035)
+		_panel_root.add_child(head)
+
+	_patches.clear()
+	for i in range(PANEL_LAYERS.size()):
+		var n: int = int(PANEL_LAYERS[i])
+		var x: float = (float(i) - (PANEL_LAYERS.size() - 1) * 0.5) * (PANEL_PATCH + PANEL_GAP)
+		var quad := MeshInstance3D.new()
+		quad.name = "Patch_%d" % n
+		var qm := QuadMesh.new()
+		qm.size = Vector2(PANEL_PATCH, PANEL_PATCH)
+		quad.mesh = qm
+		var mat := ShaderMaterial.new()
+		mat.shader = shader
+		mat.resource_local_to_scene = true
+		# every patch the same, except the count
+		mat.set_shader_parameter("layers", n)
+		mat.set_shader_parameter("show_term", 1)
+		mat.set_shader_parameter("term_gain", PANEL_GAIN)
+		mat.set_shader_parameter("time", 0.0)
+		mat.set_shader_parameter("time_scale", 0.0 if is_frozen() else 0.2)
+		mat.set_shader_parameter("cloud_scale", 2.0)
+		mat.set_shader_parameter("cloud_density", 1.0)
+		mat.set_shader_parameter("pink_intensity", 0.8)
+		mat.set_shader_parameter("noise_basis", maxi(0, GENERATORS.find(generator)))
+		quad.material_override = mat
+		quad.position = Vector3(x, 1.30, 0.035)
+		_panel_root.add_child(quad)
+		var cap: MeshInstance3D = HangarKit.stencil("%d" % n, Vector2(0.10, 0.05), Color(0.12, 0.13, 0.15))
+		if cap:
+			cap.name = "Cap_%d" % n
+			cap.position = Vector3(x, 1.30 - PANEL_PATCH * 0.5 - 0.07, 0.035)
+			_panel_root.add_child(cap)
+		_patches.append({"layers": n, "mat": mat, "quad": quad})
+
+	var case_root := Node3D.new()
+	case_root.name = "Readout"
+	case_root.set_meta("em_local_instrument", true)
+	case_root.position = Vector3(0.0, 0.86, 0.10)
+	case_root.rotation_degrees = Vector3(-24, 0, 0)
+	_panel_root.add_child(case_root)
+	case_root.add_child(HangarKit.box(Vector3.ZERO, Vector3(width + 0.16, 0.26, 0.014), dark))
+	_panel_readout = Label3D.new()
+	_panel_readout.name = "Text"
+	_panel_readout.pixel_size = 0.00088
+	_panel_readout.font_size = 17
+	_panel_readout.line_spacing = 0.5
+	_panel_readout.modulate = Color(0.88, 0.94, 1.0)
+	_panel_readout.outline_size = 3
+	_panel_readout.outline_modulate = Color(0, 0, 0, 1)
+	_panel_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_panel_readout.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	_panel_readout.position = Vector3(-(width + 0.10) * 0.5, 0.118, 0.010)
+	case_root.add_child(_panel_readout)
+
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	if RackTpl != null:
+		var panel: Node3D = RackTpl.create_panel("", [
+			[{"type": "button", "label": "LAYERS"}, {"type": "button", "label": "BASIS"}],
+			[{"type": "button", "label": "FREEZE"}],
+		], true)
+		panel.name = "Panel"
+		panel.set_meta("em_local_instrument", true)
+		panel.position = Vector3((width + 0.16) * 0.5 + 0.22, 1.02, 0.12)
+		panel.rotation_degrees = Vector3(-24, 0, 0)
+		panel.scale = Vector3(1.35, 1.35, 1.35)
+		_panel_root.add_child(panel)
+		var actions := {"Btn_0": func(): next_layers(), "Btn_1": func(): next_basis(), "Btn_2": func(): set_frozen(not is_frozen())}
+		for btn_name in actions.keys():
+			var btn: Node = panel.find_child(btn_name, true, false)
+			if btn == null:
+				continue
+			var area: Node = btn.get_node_or_null("InteractableAreaButton")
+			if area != null and area.has_signal("button_pressed"):
+				var action: Callable = actions[btn_name]
+				area.button_pressed.connect(func(_b): action.call())
+
+	set_layers(layers)
+	_update_panel_readout()
+
+
+## The room's walls take the next count — in THIS hall. A material set on a
+## shared resource, or a call to every room in the tree, would reach the others.
+func next_layers() -> void:
+	if stand != "panel":
+		return
+	var order: Array = [1, 2, 4, 6]
+	var i: int = order.find(layers)
+	set_layers(int(order[(i + 1) % order.size()]) if i >= 0 else 6)
+	_last_touched = "LAYERS"
+	_broadcast_layers()
+	_update_panel_readout()
+
+
+func next_basis() -> void:
+	if stand != "panel":
+		return
+	var i: int = GENERATORS.find(generator)
+	generator = GENERATORS[(i + 1) % GENERATORS.size()]
+	_apply_generator()
+	for p in _patches:
+		var mat: ShaderMaterial = (p as Dictionary)["mat"]
+		if mat != null:
+			mat.set_shader_parameter("noise_basis", maxi(0, GENERATORS.find(generator)))
+	_last_touched = "BASIS (a different generator — not a different number of layers)"
+	_broadcast_layers()
+	_update_panel_readout()
+
+
+## Tell the other rooms of THIS hall, and no others. The nearest ancestor that
+## owns a hall is the boundary; with none, only this body changes.
+func _broadcast_layers() -> void:
+	if not is_inside_tree():
+		return
+	var hall: Node = _hall_ancestor()
+	var reached: Array = []
+	for r in get_tree().get_nodes_in_group("noise_rooms"):
+		if r == self:
+			continue
+		if hall != null and not hall.is_ancestor_of(r):
+			continue
+		if r.has_method("set_layers"):
+			r.call("set_layers", layers)
+			reached.append(str((r as Node).name))
+	_last_broadcast = {"hall": str(hall.name) if hall != null else "(none)", "reached": reached,
+		"rooms_in_tree": get_tree().get_nodes_in_group("noise_rooms").size()}
+
+
+func _hall_ancestor() -> Node:
+	var n: Node = get_parent()
+	while n != null:
+		if n.has_meta("em_map") or str(n.name).begins_with("Seg"):
+			return n
+		n = n.get_parent()
+	return null
+
+
+func _update_panel_readout() -> void:
+	if _panel_readout == null or not is_instance_valid(_panel_readout):
+		return
+	var lines: PackedStringArray = PackedStringArray()
+	lines.append("the same field in all four: one seed, one coordinate frame, one contrast, one clock%s" % ("  FROZEN" if is_frozen() else ""))
+	lines.append("layers   1        2        4        6      · each term half the amplitude, twice the frequency")
+	lines.append("weight   %.3f    %.3f    %.4f   %.4f  · which is the whole of why the left patch is darker" % [
+		float(PANEL_WEIGHTS[0]), float(PANEL_WEIGHTS[1]), float(PANEL_WEIGHTS[2]), float(PANEL_WEIGHTS[3])])
+	lines.append("shown at a display gain of %.1f, the same on all four · the walls are at %d · basis %s" % [PANEL_GAIN, layers, generator])
+	lines.append("last touched: %s" % _last_touched)
+	_panel_readout.text = "\n".join(lines)
+
+
+## The panel as the room can read it.
+func panel_state() -> Dictionary:
+	var patches: Array = []
+	for p in _patches:
+		var mat: ShaderMaterial = (p as Dictionary)["mat"]
+		patches.append({
+			"layers": int((p as Dictionary)["layers"]),
+			"show_term": int(mat.get_shader_parameter("show_term")) if mat != null else -1,
+			"time_scale": float(mat.get_shader_parameter("time_scale")) if mat != null else -1.0,
+			"cloud_scale": float(mat.get_shader_parameter("cloud_scale")) if mat != null else -1.0,
+			"cloud_density": float(mat.get_shader_parameter("cloud_density")) if mat != null else -1.0,
+			"noise_basis": int(mat.get_shader_parameter("noise_basis")) if mat != null else -1,
+			"shader": str(mat.shader.resource_path).get_file() if mat != null and mat.shader != null else "-",
+			"local": mat.resource_local_to_scene if mat != null else false,
+		})
+	return {
+		"stand": stand, "layers": layers, "generator": generator, "frozen": is_frozen(),
+		"weights": PANEL_WEIGHTS, "patches": patches, "last_touched": _last_touched,
+		"broadcast": _last_broadcast,
+		"room_material_local": room_material.resource_local_to_scene if room_material != null else false,
+		"wall_material_local": wall_material.resource_local_to_scene if wall_material != null else false,
+		"room_layers": int(room_material.get_shader_parameter("layers")) if room_material != null else -1,
+		"wall_layers": int(wall_material.get_shader_parameter("layers")) if wall_material != null else -1,
+		"wall_time_scale": float(wall_material.get_shader_parameter("time_scale")) if wall_material != null else -1.0,
+		"animation": animation, "animation_enabled": animation_enabled,
+		"color_cycling": color_cycling, "cloud_density_animation": cloud_density_animation,
+	}
