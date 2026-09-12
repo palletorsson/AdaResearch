@@ -525,7 +525,7 @@ func _reset_walkers():
 		_walker_positions[i] = Vector3(0, terrarium_size.y / 2.0, 0)
 		_walker_trails[i].clear()
 		if _walker_mm:
-			_walker_mm.set_instance_transform(i, Transform3D(Basis(), _walker_positions[i]))
+			_walker_mm.set_instance_transform(i, Transform3D(_walker_basis(i), _walker_positions[i]))
 
 func _process(delta):
 	var interval = 1.0 / maxf(steps_per_second, 0.001)
@@ -562,7 +562,7 @@ func _step_all_walkers():
 			_walker_trails[i] = _walker_trails[i].slice(1)
 
 		_walker_positions[i] = new_pos
-		_walker_mm.set_instance_transform(i, Transform3D(Basis(), new_pos))
+		_walker_mm.set_instance_transform(i, Transform3D(_walker_basis(i), new_pos))
 
 func _generate_step() -> Vector3:
 	match walk_mode:
@@ -724,6 +724,7 @@ func _apply_stand() -> void:
 			_reset_walkers()
 		if _logbook_root == null and case_body:
 			_build_logbook()
+			_build_backboard()
 		_update_logbook()
 	elif _logbook_root != null:
 		_logbook_root.get_parent().remove_child(_logbook_root)
@@ -731,6 +732,35 @@ func _apply_stand() -> void:
 		_logbook_root = null
 		_logbook_label = null
 		_logbook_panel = null
+		var bb: Node = _stage().get_node_or_null("Backboard")
+		if bb != null:
+			_stage().remove_child(bb)
+			bb.queue_free()
+
+
+## A dark matte board behind the tank, so the beads and their trails are read against it
+## and not against the museum's bright wall (Astra's visual review, 12 September: "the tank
+## nearly vanishes into the bright room; its small point is faint"). Logbook stand only.
+func _build_backboard() -> void:
+	if _stage().get_node_or_null("Backboard") != null:
+		return
+	var board := MeshInstance3D.new()
+	board.name = "Backboard"
+	var box := BoxMesh.new()
+	box.size = Vector3(terrarium_size.x + 0.30, terrarium_size.y + 0.30, 0.02)
+	board.mesh = box
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.10, 0.11, 0.13)
+	mat.roughness = 0.92
+	board.material_override = mat
+	board.position = Vector3(0.0, terrarium_size.y * 0.5 + 0.06, -terrarium_size.z * 0.5 - 0.04)
+	_stage().add_child(board)
+
+
+## The followed bead twice the size of the others under the logbook stand, so the present
+## point is told from its trail by size as well as colour (12 September).
+func _walker_basis(i: int) -> Basis:
+	return Basis().scaled(Vector3.ONE * (2.0 if (stand == "logbook" and follow_one and i == 0) else 1.0))
 
 
 ## The wing: a shelf bolted to the cabinet's flank on the visitor's left (local -x), its

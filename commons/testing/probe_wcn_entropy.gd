@@ -139,6 +139,18 @@ func run() -> void:
 	var formula: Node3D = meter.get("_formula_label")
 	check(formula == null, "at ledger the formula is withheld (works reveals it)")
 
+	# ── 2b. the visual pass of 12 September: the first forty magnified on the desk's front ──
+	var excerpt: MultiMeshInstance3D = meter.get_node_or_null("Staging/Excerpt")
+	check(excerpt != null and excerpt.multimesh.instance_count == 40, "the first forty draws stand magnified on the desk's front (%d)" % (excerpt.multimesh.instance_count if excerpt != null else -1))
+	if excerpt != null and ribbon != null:
+		var same_colours: bool = true
+		for i in range(40):
+			if not excerpt.multimesh.get_instance_color(i).is_equal_approx(ribbon.multimesh.get_instance_color(i)): same_colours = false
+		check(same_colours, "…in the ribbon's own colours, draw for draw")
+		var eb: BoxMesh = excerpt.multimesh.mesh
+		check(eb.size.y >= 0.09 and eb.size.x >= 0.024, "…at four times the tile (%.3f × %.3f)" % [eb.size.x, eb.size.y])
+	check(meter.get_node_or_null("Staging/ExcerptCaption") != null, "…and labelled as the excerpt it is")
+
 	# ── 3. the measurement contract ───────────────────────────────────────────
 	var st: Dictionary = meter.call("get_ledger_state")
 	var counts: Array = st["counts"]
@@ -414,8 +426,8 @@ func run() -> void:
 	measurements["plinths"] = plinths
 	var in_rect := false
 	for p in plinths:
-		for rc in [[4, 4, 7, 9], [7, 0, 9, 11]]:
-			if int(p[1]) >= rc[0] and int(p[1]) <= rc[2] and int(p[2]) >= rc[1] and int(p[2]) <= rc[3]: in_rect = true
+		for rc in [[4, 4, 7, 9], [7, 0, 10, 11]]:
+			if int(p[1]) >= rc[0] and int(p[1]) < rc[2] and int(p[2]) >= rc[1] and int(p[2]) < rc[3]: in_rect = true   # the far edge is exclusive, as the museum reads it
 	check(not in_rect, "no dealt plinth stands in the clear rects (the desk and its approach, the door route) (plinths: %s)" % str(plinths))
 
 	# ── 9. walks: the door route, the approach, into the desk, along its front ──

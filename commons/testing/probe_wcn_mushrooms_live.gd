@@ -172,6 +172,11 @@ func run() -> void:
 	for c in table.get_node("Specimens").get_children():
 		if str(c.name).begins_with("Specimen_"): specimens += 1
 	check(specimens == 6, "six type specimens stand on the table (%d)" % specimens)
+	# the visual pass of 12 September: the shown specimen's disc wears the highlight's colour
+	var dring: MeshInstance3D = table.get_node_or_null("Specimens/DiscRing")
+	check(dring != null and dring.visible and abs(dring.position.x - (-0.55)) < 0.01, "a ring on disc 0 marks the shown template on the table (x %.2f)" % (dring.position.x if dring != null else 99.0))
+	var tag0: Label3D = table.get_node_or_null("Specimens/Tag_0")
+	check(tag0 != null and tag0.font_size >= 20, "the disc numbers are readable from standing (font %d)" % (tag0.font_size if tag0 != null else -1))
 	var kerb: Node = prim.get_node_or_null("Kerb")
 	check(kerb != null and kerb.get_child_count() == 4, "the bed has its four kerb boards")
 	var panel: Node = table.get_node_or_null("Panel")
@@ -297,6 +302,8 @@ func run() -> void:
 	await get_tree().process_frame
 	var st6: Dictionary = prim.call("get_specimen_state")
 	check(int(st6["show_template"]) == 1 and int(st6["highlighted"]) == int(tmpl_counts[1]), "SHOW moves to template 1 and rings its %d instances (%d)" % [int(tmpl_counts[1]), int(st6["highlighted"])])
+	var dring1: MeshInstance3D = table.get_node_or_null("Specimens/DiscRing")
+	check(dring1 != null and abs(dring1.position.x - (-0.33)) < 0.01, "…and the disc ring moves to disc 1 (x %.2f)" % (dring1.position.x if dring1 != null else 99.0))
 	check(str(st6["lines"][3]) == "SHOW template 1 · %d instances ringed" % int(tmpl_counts[1]), "the readout names the shown template and its count (%s)" % str(st6["lines"][3]))
 	var kind_seq: Array = []
 	var kind_ok: bool = true

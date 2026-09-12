@@ -43,8 +43,17 @@ func build(remover: Node3D) -> void:
 		col.rotation_degrees.x = -90
 		var row := _label(str(i), Vector3(-0.64, 1.032, (i-3.5)*PITCH), 32, 0.0018)
 		row.rotation_degrees.x = -90
-	_status = _label("", Vector3(0, 1.57, -0.66), 32, 0.0018)
-	_last = _label("", Vector3(0, 1.39, -0.66), 26, 0.0016)
+	# the status and the legend cased on a post at the tray's LEFT, turned to the visitor, at
+	# reading height; they had floated on the wall behind and above the tray (Astra's
+	# visual review, 12 September: "the state text floats much farther away")
+	_status = _label("", Vector3(-1.12, 1.16, 0.40), 24, 0.0016)
+	_status.rotation_degrees = Vector3(0, 30, 0)
+	_last = _label("", Vector3(-1.12, 1.00, 0.40), 19, 0.0014)
+	_last.rotation_degrees = Vector3(0, 30, 0)
+	_box("StatusPlate", Vector3(1.0, 0.36, 0.012), Vector3(-1.12, 1.08, 0.40), Color(0.07, 0.10, 0.14))
+	get_node("StatusPlate").rotation_degrees = Vector3(0, 30, 0)
+	get_node("StatusPlate").position += Vector3(-0.5, 0, -0.87) * 0.008   # behind the text (its normal for yaw +30° is (0.5, 0, 0.87))
+	_box("StatusPost", Vector3(0.04, 0.90, 0.04), Vector3(-1.12, 0.45, 0.40), Color(0.07, 0.10, 0.14))
 	var rack: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
 	panel = rack.create_panel("CHOOSE THE SET, THEN REMOVE", [
 		[{"type":"button", "label":"RANGE"}, {"type":"button", "label":"ROW"}, {"type":"button", "label":"COLUMN"}, {"type":"button", "label":"ALL"}],
@@ -52,8 +61,10 @@ func build(remover: Node3D) -> void:
 	])
 	panel.name = "Controls"
 	panel.scale = Vector3.ONE * 3.0
-	panel.position = Vector3(0, 0.87, 0.82)
-	panel.rotation_degrees.x = -35
+	# off the tray, to its right and turned to the visitor, so the near rows stay in view
+	# while a set is chosen (12 September; it had leaned in front of the tray)
+	panel.position = Vector3(0.95, 0.82, 0.70)
+	panel.rotation_degrees = Vector3(-35, -35, 0)
 	add_child(panel)
 	for i in range(4):
 		var mode: String = ["Range", "Row", "Column", "All"][i]

@@ -382,12 +382,59 @@ func run() -> void:
 	var in_rect := false
 	for p in plinths:
 		for rc in [[2, 2, 6, 4], [6, 0, 8, 3], [7, 3, 7, 11], [5, 10, 8, 13]]:
-			if int(p[1]) >= rc[0] and int(p[1]) <= rc[2] and int(p[2]) >= rc[1] and int(p[2]) <= rc[3]: in_rect = true
+			if int(p[1]) >= rc[0] and int(p[1]) < rc[2] and int(p[2]) >= rc[1] and int(p[2]) < rc[3]: in_rect = true   # the far edge is exclusive, as the museum reads it
 	check(not in_rect, "no dealt plinth stands in the clear rects (the bench, the north door, the corridor column, the south door approach) (plinths: %s)" % str(plinths))
 	var rows: Array = em.get("_built") if em.get("_built") != null else []
 	for r in rows:
 		if str((r as Dictionary).get("map", "")) == MAP:
 			measurements["built_seals"] = r.get("seals", []); measurements["built_severed"] = r.get("severed", [])
+
+	# ── 7b. the hallway hero on the synthesis stand fits its slab (12 September) ──────────
+	var syn_stand: Node3D
+	var hallway_solo: Node3D
+	for n in seg.find_children("*", "Node3D", true, false):
+		if n.get_script() == null: continue
+		var spath: String = str(n.get_script().resource_path)
+		if spath.ends_with("synthesis_stand.gd") and syn_stand == null: syn_stand = n
+		if spath.ends_with("hallway_scene.gd") and (n.get_parent() == null or n.get_parent().get_script() == null or not str(n.get_parent().get_script().resource_path).ends_with("synthesis_stand.gd")): hallway_solo = n
+	check(syn_stand != null, "the synthesis stand (subject hallway_scene, mode hero) is built")
+	if syn_stand != null:
+		var hero: Node3D
+		for c in syn_stand.find_children("*", "Node3D", true, false):
+			if c.get_script() != null and str(c.get_script().resource_path).ends_with("hallway_scene.gd"): hero = c
+		check(hero != null, "the stand carries the hallway scene as its hero")
+		if hero != null:
+			var hmin := Vector3(1e9, 1e9, 1e9)
+			var hmax := Vector3(-1e9, -1e9, -1e9)
+			var meshes: int = 0
+			for mi in hero.find_children("*", "MultiMeshInstance3D", true, false):
+				var aabb: AABB = (mi as MultiMeshInstance3D).get_aabb()
+				for k in range(8):
+					var gp: Vector3 = seg.to_local((mi as MultiMeshInstance3D).global_transform * aabb.get_endpoint(k))
+					hmin = hmin.min(gp); hmax = hmax.max(gp)
+				meshes += 1
+			var ext: Vector3 = hmax - hmin
+			measurements["hallway_hero"] = {"meshes": meshes, "min": [snappedf(hmin.x, 0.01), snappedf(hmin.y, 0.01), snappedf(hmin.z - vest, 0.01)], "max": [snappedf(hmax.x, 0.01), snappedf(hmax.y, 0.01), snappedf(hmax.z - vest, 0.01)], "extent": [snappedf(ext.x, 0.01), snappedf(ext.y, 0.01), snappedf(ext.z, 0.01)], "hallway_length": hero.get("hallway_length")}
+			print("[wcn-synthesis] measured: hallway hero %s" % str(measurements["hallway_hero"]))
+			check(meshes > 0 and ext.x < 4.0 and ext.z < 4.0 and ext.y < 2.5, "the hero fits its slab: under 4 m across and 2.5 m tall (%s)" % str(measurements["hallway_hero"]["extent"]))
+			check(hmax.x < 8.0 or hmin.x > 8.5, "the hero does not reach the bench's operating spot at x 4.8 (x %.2f..%.2f)" % [hmin.x, hmax.x])
+	if hallway_solo != null:
+		var smin := Vector3(1e9, 1e9, 1e9)
+		var smax := Vector3(-1e9, -1e9, -1e9)
+		for mi in hallway_solo.find_children("*", "MultiMeshInstance3D", true, false):
+			var aabb: AABB = (mi as MultiMeshInstance3D).get_aabb()
+			for k in range(8):
+				var gp: Vector3 = seg.to_local((mi as MultiMeshInstance3D).global_transform * aabb.get_endpoint(k))
+				smin = smin.min(gp); smax = smax.max(gp)
+		measurements["hallway_solo"] = {"scale": snappedf(hallway_solo.scale.x, 0.001), "min": [snappedf(smin.x, 0.01), snappedf(smin.y, 0.01), snappedf(smin.z - vest, 0.01)], "max": [snappedf(smax.x, 0.01), snappedf(smax.y, 0.01), snappedf(smax.z - vest, 0.01)]}
+		print("[wcn-synthesis] measured: the standalone hallway token %s" % str(measurements["hallway_solo"]))
+	var wcam0: Camera3D = em.get("_cam")
+	var env_note: String = "none"
+	if wcam0 != null and is_instance_valid(wcam0) and wcam0.environment != null:
+		var e: Environment = wcam0.environment
+		env_note = "bg %d · sky %s · fog %s %.3f · glow %s" % [e.background_mode, str(e.sky != null), str(e.volumetric_fog_enabled), e.volumetric_fog_density, str(e.glow_enabled)]
+	measurements["walker_camera_environment"] = env_note
+	check(env_note == "none", "the museum walker's camera carries no environment override (%s; coloredlines.setup_scene dresses the current camera in a dark sky and fog)" % env_note)
 
 	# ── 8. walks: the door route, the aisle before the bench, into the bench ────
 	var pspace := seg.get_world_3d().direct_space_state

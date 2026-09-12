@@ -21,7 +21,7 @@
   "museum": {
    "wall_height": 3,
    "gate_depth_rows": 0,
-   "sculpture_clear_rects": [ [ 2, 2, 6, 4 ], [ 6, 0, 8, 3 ], [ 7, 3, 7, 11 ], [ 5, 10, 8, 13 ] ],
+   "sculpture_clear_rects": [ [ 2, 2, 6, 7 ], [ 6, 0, 8, 3 ], [ 7, 3, 8, 12 ], [ 5, 10, 8, 13 ] ],
    "props_deny": [ "bench" ],
    "artifact_placement": "map"
   }
@@ -100,7 +100,7 @@
    [ "", "", "dna_specimen:0:0.4", "holographicdisplay:0:1", "electronicscales:0:1", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "air_music_display_case:0:1", "", "", "additive_wave_demo:0#stand:bench#waveform:sawtooth", "", "", "dark_sphere", "", "biomagneticresonator:0:1", "UnitCircleTrig:-90:0:0.1", "", "record_room:-90:0", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "GlassRack:0:0.8#config:spiral_tube", "", "", "coloredlines:0:1:0.05", "", "", "hallway_scene:0:0:0.1", "", "synthesis_stand#subject:hallway_scene#mode:hero", "", "", "", "" ],
+   [ "", "", "GlassRack:0:0.8#config:spiral_tube", "", "", "", "", "", "hallway_scene:0:0:0.1", "", "synthesis_stand#subject:hallway_scene#mode:hero", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "lissajous_curves:0:1:0.1", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],

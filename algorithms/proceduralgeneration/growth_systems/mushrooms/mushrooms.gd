@@ -1263,8 +1263,8 @@ func _build_table() -> void:
 		var tag := Label3D.new()
 		tag.name = "Tag_%d" % k
 		tag.text = str(k)
-		tag.pixel_size = 0.0012
-		tag.font_size = 14
+		tag.pixel_size = 0.0015
+		tag.font_size = 22
 		tag.modulate = Color(0.86, 0.94, 1.0)
 		tag.position = Vector3(-0.55 + 0.22 * k, TABLE_H + 0.02, 0.12)
 		tag.rotation_degrees = Vector3(-90, 0, 0)
@@ -1335,8 +1335,8 @@ func _build_table() -> void:
 	_highlight_mmi.material_override = hm
 	add_child(_highlight_mmi)
 	var pin := SphereMesh.new()
-	pin.radius = 0.045
-	pin.height = 0.09
+	pin.radius = 0.06
+	pin.height = 0.12
 	pin.radial_segments = 12
 	pin.rings = 6
 	var pm := MultiMesh.new()
@@ -1380,32 +1380,55 @@ func _refresh_highlight() -> void:
 	if _highlight_mmi == null:
 		return
 	var pts: Array = []
-	var col: Color = Color(1.0, 0.72, 0.2)
+	# saturated against pale caps and grass (12 September: "pale field highlights compete
+	# with the bright meadow"): magenta for the shown template, and one colour per kind
+	var col: Color = Color(1.0, 0.15, 0.55)
 	match KINDS[_kind]:
 		"template":
 			for m in mushrooms:
 				if is_instance_valid(m) and int((m as Node).get_meta("template", -1)) == _show_template:
 					pts.append((m as Node3D).position)
 		"scattered":
-			col = Color(0.55, 0.9, 1.0)
+			col = Color(0.15, 0.35, 1.0)
 			for m in mushrooms:
 				if is_instance_valid(m) and str((m as Node).get_meta("kind", "")) == "scattered":
 					pts.append((m as Node3D).position)
 		"rings":
-			col = Color(0.4, 1.0, 0.5)
+			col = Color(0.05, 0.85, 0.25)
 			for m in mushrooms:
 				if is_instance_valid(m) and str((m as Node).get_meta("kind", "")) == "ring":
 					pts.append((m as Node3D).position)
 		"clusters":
-			col = Color(0.75, 0.55, 1.0)
+			col = Color(0.65, 0.15, 0.95)
 			for m in mushrooms:
 				if is_instance_valid(m) and str((m as Node).get_meta("kind", "")) == "cluster":
 					pts.append((m as Node3D).position)
 		"rejected":
-			col = Color(0.5, 0.5, 0.55)
+			col = Color(0.20, 0.20, 0.25)
 			for p in _rejected:
 				pts.append(p)
 	var pin_h: float = 0.35 if KINDS[_kind] == "rejected" else 0.75
+	# the shown template's disc on the table wears the same colour as its instances in the
+	# bed, so the specimen and its copies are recognised together (12 September)
+	var slots_n: Node3D = _stand_root.get_node_or_null("Specimens") if _stand_root != null else null
+	if slots_n != null:
+		var dring: MeshInstance3D = slots_n.get_node_or_null("DiscRing")
+		if dring == null:
+			dring = MeshInstance3D.new()
+			dring.name = "DiscRing"
+			var tor := TorusMesh.new()
+			tor.inner_radius = 0.115
+			tor.outer_radius = 0.135
+			tor.rings = 32
+			tor.ring_segments = 8
+			dring.mesh = tor
+			var dm := StandardMaterial3D.new()
+			dm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			dring.material_override = dm
+			slots_n.add_child(dring)
+		(dring.material_override as StandardMaterial3D).albedo_color = col
+		dring.visible = KINDS[_kind] == "template"
+		dring.position = Vector3(-0.55 + 0.22 * _show_template, TABLE_H + 0.012, -0.04)
 	var mm: MultiMesh = _highlight_mmi.multimesh
 	var pm: MultiMesh = _pins_mmi.multimesh if _pins_mmi != null else null
 	mm.instance_count = pts.size()

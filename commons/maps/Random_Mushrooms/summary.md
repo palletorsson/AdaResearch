@@ -20,7 +20,7 @@ A six-metre raised bed of mushrooms in the middle of the hall and a specimen tab
 - **dark_sphere** (10,2) — the anchor, north-east
 
 ### The table's controls
-- **SHOW** — the next template; an orange ring and a pin on every copy of it in the bed
+- **SHOW** — the next template; a magenta ring and a pin on every copy of it in the bed, and a ring on its disc
 - **KIND** — scattered (blue) · rings (green) · clusters (violet) · rejected candidates (grey) · back to the template
 - **SIZE** — the size rule off under the same seed (every mushroom at 1), and on again
 - **REGROW** — the same population again, ground and all

@@ -1,5 +1,5 @@
 {
-  "checks": 77,
+  "checks": 79,
   "control_path": "the push button's own signal path (area button_pressed → push_button.pressed → the fixture's connection → RemoveRandom); set_random_seed() for the two-mask comparison; the live lane adds the desktop rig's pointer pressing the panel; no tracked hand; physical absence not claimed, not tested",
   "engine": "4.6-stable (official)",
   "failures": [],
@@ -8,9 +8,9 @@
   "map": "Random_Remove",
   "measurements": {
     "after_one": {
-      "last_removed": 42,
+      "last_removed": 37,
       "log": [
-        42
+        37
       ],
       "remaining": 15,
       "removed": 1
@@ -45,7 +45,7 @@
       "removal_log": [],
       "removed": 0,
       "replay_on_reset": true,
-      "seed": 90129,
+      "seed": 49187,
       "total": 64
     },
     "arrival_colours": {
@@ -62,7 +62,7 @@
           2.3,
           7.5
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@3508",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3734",
         "forward": [
           0.01,
           -1.0,
@@ -76,7 +76,7 @@
           1.6,
           7.5
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@3508",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3734",
         "forward": [
           -0.98,
           -0.22,
@@ -90,7 +90,7 @@
           1.6,
           7.5
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@3508",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3734",
         "forward": [
           -0.98,
           -0.22,
@@ -104,7 +104,7 @@
           2.0,
           1.2
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@3508",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3734",
         "forward": [
           0.0,
           -0.16,
@@ -114,11 +114,11 @@
       },
       "panel": {
         "at": [
-          8.22,
-          1.42,
-          7.5
+          8.1,
+          1.37,
+          6.55
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@3508",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3734",
         "forward": [
           -0.85,
           -0.52,
@@ -132,7 +132,7 @@
           1.6,
           7.5
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@3508",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3734",
         "forward": [
           -0.98,
           -0.22,
@@ -146,7 +146,7 @@
           1.6,
           7.5
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@3508",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3734",
         "forward": [
           -0.98,
           -0.22,
@@ -156,11 +156,11 @@
       },
       "status": {
         "at": [
-          6.94,
-          1.62,
-          7.5
+          8.0,
+          1.21,
+          8.62
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@3508",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3734",
         "forward": [
           -1.0,
           -0.05,
@@ -171,7 +171,7 @@
     },
     "desktop_input": {
       "front_capture_pose": {
-        "current_camera": "/root/@Node@3509/WcnDesktopRig/Head/Camera3D",
+        "current_camera": "/root/@Node@3735/WcnDesktopRig/Head/Camera3D",
         "eye": [
           8.9,
           1.6,
@@ -204,16 +204,16 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@3509/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@3735/WcnDesktopRig/Head/Camera3D",
             "eye": [
               8.9,
               1.6,
               7.5
             ],
             "forward": [
-              -0.87,
-              -0.48,
-              0.13
+              -0.84,
+              -0.42,
+              -0.34
             ],
             "miss_deg": 0.0,
             "rig": [
@@ -234,9 +234,9 @@
             "hover": "valAlgorithm/LocalGrid/Controls/Btn_4/InteractableAreaButton",
             "ray": {
               "camera_dir": [
-                -0.87,
-                -0.48,
-                0.13
+                -0.84,
+                -0.42,
+                -0.34
               ],
               "camera_from": [
                 8.9,
@@ -250,9 +250,9 @@
               "raycast_length": 5.0,
               "raycast_mask": 1310720,
               "raycast_point": [
-                7.5,
-                0.83,
-                7.7
+                7.24,
+                0.77,
+                6.82
               ]
             },
             "stand": [
@@ -265,7 +265,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@3509/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@3735/WcnDesktopRig/Head/Camera3D",
             "eye": [
               8.9,
               1.6,
@@ -287,16 +287,16 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@3509/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@3735/WcnDesktopRig/Head/Camera3D",
             "eye": [
               8.9,
               1.6,
               7.5
             ],
             "forward": [
-              -0.88,
-              -0.48,
-              0.0
+              -0.79,
+              -0.42,
+              -0.44
             ],
             "miss_deg": 0.0,
             "rig": [
@@ -317,9 +317,9 @@
             "hover": "valAlgorithm/LocalGrid/Controls/Btn_5/InteractableAreaButton",
             "ray": {
               "camera_dir": [
-                -0.88,
-                -0.48,
-                0.0
+                -0.79,
+                -0.42,
+                -0.44
               ],
               "camera_from": [
                 8.9,
@@ -333,9 +333,9 @@
               "raycast_length": 5.0,
               "raycast_mask": 1310720,
               "raycast_point": [
-                7.5,
-                0.83,
-                7.5
+                7.35,
+                0.77,
+                6.65
               ]
             },
             "stand": [
@@ -348,7 +348,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@3509/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@3735/WcnDesktopRig/Head/Camera3D",
             "eye": [
               5.3,
               1.65,
@@ -377,7 +377,7 @@
             2.5
           ],
           "pose": {
-            "current_camera": "/root/@Node@3509/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@3735/WcnDesktopRig/Head/Camera3D",
             "eye": [
               5.3,
               1.6,
@@ -398,7 +398,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@3509/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@3735/WcnDesktopRig/Head/Camera3D",
             "eye": [
               8.6,
               1.6,
@@ -422,14 +422,14 @@
           "event": "walk",
           "frames": 20,
           "moved": [
-            -0.81,
+            -1.08,
             0.0,
             0.0
           ],
           "pose": {
-            "current_camera": "/root/@Node@3509/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@3735/WcnDesktopRig/Head/Camera3D",
             "eye": [
-              7.79,
+              7.52,
               1.6,
               7.5
             ],
@@ -439,7 +439,7 @@
               0.0
             ],
             "rig": [
-              7.79,
+              7.52,
               0.0,
               7.5
             ]
@@ -455,9 +455,9 @@
         "hover": "valAlgorithm/LocalGrid/Controls/Btn_4/InteractableAreaButton",
         "ray": {
           "camera_dir": [
-            -0.87,
-            -0.48,
-            0.13
+            -0.84,
+            -0.42,
+            -0.34
           ],
           "camera_from": [
             8.9,
@@ -471,9 +471,9 @@
           "raycast_length": 5.0,
           "raycast_mask": 1310720,
           "raycast_point": [
-            7.5,
-            0.83,
-            7.7
+            7.24,
+            0.77,
+            6.82
           ]
         },
         "stand": [
@@ -487,9 +487,9 @@
         "hover": "valAlgorithm/LocalGrid/Controls/Btn_5/InteractableAreaButton",
         "ray": {
           "camera_dir": [
-            -0.88,
-            -0.48,
-            0.0
+            -0.79,
+            -0.42,
+            -0.44
           ],
           "camera_from": [
             8.9,
@@ -503,9 +503,9 @@
           "raycast_length": 5.0,
           "raycast_mask": 1310720,
           "raycast_point": [
-            7.5,
-            0.83,
-            7.5
+            7.35,
+            0.77,
+            6.65
           ]
         },
         "stand": [
@@ -517,7 +517,7 @@
       "removed_after": 1,
       "removed_before": 0,
       "walk_into_the_bench": [
-        -0.81,
+        -1.08,
         0.0
       ],
       "walk_past_west": [
@@ -537,6 +537,7 @@
       0.0,
       7.5
     ],
+    "panel_fixture_x": 0.949999809265137,
     "plinths": [
       [
         "ArtPlinth0",
@@ -559,7 +560,7 @@
         17
       ]
     ],
-    "reach_to_remove_button": 1.18330061435699,
+    "reach_to_remove_button": 1.57202088832855,
     "reading_distance_far_corner": 2.38736176490784,
     "rebuilt": {
       "bound": true,
@@ -574,67 +575,67 @@
     },
     "run_a": {
       "log": [
-        42,
-        29,
-        21,
+        37,
         27,
-        34,
-        36,
-        45,
-        26,
-        43,
-        28,
-        44,
-        19,
         20,
+        26,
+        45,
+        28,
+        21,
         18,
+        36,
+        19,
+        34,
+        42,
+        43,
+        29,
         35,
-        37
+        44
       ],
       "remaining": 0,
       "removed": 16,
-      "seed": 90129
+      "seed": 49187
     },
     "run_b_same_seed": {
       "log": [
-        42,
-        29,
-        21,
+        37,
         27,
-        34,
-        36,
-        45,
-        26,
-        43,
-        28,
-        44,
-        19,
         20,
+        26,
+        45,
+        28,
+        21,
         18,
+        36,
+        19,
+        34,
+        42,
+        43,
+        29,
         35,
-        37
+        44
       ]
     },
     "run_c_new_seed": {
       "log": [
-        36,
         35,
-        18,
-        27,
-        19,
         29,
-        21,
-        42,
-        45,
         34,
         20,
-        37,
-        26,
+        36,
+        19,
         28,
+        18,
+        21,
+        45,
         44,
-        43
+        26,
+        43,
+        42,
+        27,
+        37
       ],
-      "seed": 32719
+      "seed": 58756
     },
     "same_seed_two_masks": {
       "range_first8": [
@@ -659,6 +660,7 @@
       ],
       "seed": 777
     },
+    "status_fixture_x": -1.11999940872192,
     "streaming": {
       "freed": true,
       "rebuildable": true
@@ -673,9 +675,9 @@
     ],
     "walk_south_past_the_benchs_east_side_column_8": 1.0,
     "walk_south_past_the_benchs_west_side_column_4": 1.0,
-    "walk_west_from_the_visitors_spot_into_the_pedestal": 0.36328125,
+    "walk_west_from_the_visitors_spot_into_the_pedestal": 0.515625,
     "walk_west_from_the_visitors_spot_into_the_pedestal_blockers": [
-      "e-cabinet-vista/RandomRemovalAlgorithm/LocalGrid/Controls/Btn_5/Button"
+      "cabinet-vista/RandomRemovalAlgorithm/LocalGrid/Board/@StaticBody3D@495"
     ]
   },
   "physics_fps": 60

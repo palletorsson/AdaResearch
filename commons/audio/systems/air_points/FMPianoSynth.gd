@@ -54,6 +54,16 @@ func play_note(freq: float, vel: float, sustain_time: float = 1.5):
 	var q_sustain = snapped(sustain_time, 0.1)
 	
 	var cache_key = "%s_%s_%s" % [q_freq, q_vel, q_sustain]
+	if _pending_tasks.size() > 32:
+		# a completed task is RELEASED only by wait_for_task_completion (a no-op wait);
+		# dropping its id leaves it in the pool, and the pool crashes the engine at exit
+		var still: Array[int] = []
+		for tid in _pending_tasks:
+			if WorkerThreadPool.is_task_completed(tid):
+				WorkerThreadPool.wait_for_task_completion(tid)
+			else:
+				still.append(tid)
+		_pending_tasks = still
 	
 	_cache_mutex.lock()
 	var cached_stream = _sample_cache.get(cache_key)
@@ -61,18 +71,40 @@ func play_note(freq: float, vel: float, sustain_time: float = 1.5):
 	
 	if cached_stream:
 		_play_stream(cached_stream)
-	else:
+	elif not _closing:
 		# Generate in background thread to prevent blocking
-		WorkerThreadPool.add_task(
+		var task_id: int = WorkerThreadPool.add_task(
 			func(): _generate_and_cache(cache_key, q_freq, q_vel, q_sustain)
 		)
+		_pending_tasks.append(task_id)
+
+## THE TASKS OUTLIVED THE NODE (2026-09-11). Every new note queues a worker-pool task that
+## calls back into this node when done; nothing joined them when the node was freed, and
+## a hall carrying the looper crashed Godot with a signal 11 on shutdown (the museum
+## probes of WaveFunctions_AirMusic, after their reports were written). Tasks are tracked
+## and joined here; a task started after closing does nothing.
+## AND A TASK MUST BE WAITED TO BE RELEASED (2026-09-12): the first fix skipped tasks that
+## had already completed, so their pool entries were never freed and the engine still
+## crashed at exit (3221225477 in WaveFunctions_AirMusic and WaveFunctions_Synthesis_Lab,
+## both carrying air_music_display_case; commons/testing/probe_wcn_shutdown.gd reproduces
+## it with one synth and one note). Every tracked id is waited, completed or not.
+var _pending_tasks: Array[int] = []
+var _closing: bool = false
+
+func _exit_tree() -> void:
+	_closing = true
+	for tid in _pending_tasks:
+		WorkerThreadPool.wait_for_task_completion(tid)
+	_pending_tasks.clear()
 
 func _generate_and_cache(key: String, f: float, v: float, s: float):
+	if _closing:
+		return
 	# HEAVY MATH HAPPENING HERE (InBackground)
 	var new_stream = FMPianoGenerator.generate_note(f, v, s)
 	
 	# Guard: node may have been freed while thread was running
-	if not is_instance_valid(self) or _cache_mutex == null:
+	if _closing or not is_instance_valid(self) or _cache_mutex == null:
 		return
 	
 	_cache_mutex.lock()

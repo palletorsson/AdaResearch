@@ -56,8 +56,30 @@ const ELEMENTS: PackedStringArray = ["braid", "walls", "vault", "deck"]
 var tube_segments: Array[MultiMeshInstance3D] = []
 var elapsed: float = 0.0
 
+## A synthesis stand builds this scene as its hero at the scene's own size: a sixty-metre
+## tunnel of eighty-metre tubes, 0.4 m thick, swinging 2.5 m, over the whole hall
+## (WaveFunctions_Synthesis_Lab, Astra's visual review of 12 September: "large red geometry
+## fills the desktop operating view"). On a stand the tunnel is a miniature of itself: the
+## same tubes, the same waves per metre, the same sway in proportion, three metres long.
+func _on_a_stand() -> bool:
+	var p: Node = get_parent()
+	return p != null and p.get_script() != null and str(p.get_script().resource_path).ends_with("synthesis_stand.gd")
+
+func _fit_to_slab() -> void:
+	var k: float = 3.0 / maxf(hallway_length, 0.001)   # 60 m → 3 m
+	hallway_length *= k
+	hallway_width *= k
+	hallway_height *= k
+	tube_length *= k
+	wave_amplitude *= k
+	wave_frequency /= k
+	tube_radius *= k
+	segment_spacing *= k
+
 func _ready() -> void:
 	_read_dna_meta()
+	if _on_a_stand():
+		_fit_to_slab()
 	_setup_environment()
 	_create_sine_tubes()
 

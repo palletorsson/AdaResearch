@@ -167,6 +167,11 @@ func run() -> void:
 	var sp_l: Vector3 = seg.to_local(spanel.global_position) if spanel != null else Vector3.ZERO
 	check(absf(sp_l.y - kp.y) < 0.02, "…beside the keypad on the same shoulder (%.2f m)" % sp_l.y)
 	var readout: Label3D = cab.get_node_or_null("Readout/Text")
+	# the visual pass of 12 September: a headline over the six lines; the shipped side plate off
+	var headline: Label3D = cab.get_node_or_null("Readout/Headline")
+	check(headline != null and headline.font_size >= 20 and headline.text.begins_with("GAUSS · N ") and headline.text.contains(" bins · clipped "), "a headline names the law, N, the bins and the clipped count at a readable size (%s)" % (headline.text if headline != null else "none"))
+	var side_label: Label3D = prim.get("_stats_label")
+	check(side_label != null and not side_label.visible, "the shipped side plate is off under the cabinet (its n, μ, σ are the readout's fourth line)")
 	check(readout != null, "the readout is housed under the histogram")
 	var rl: Vector3 = seg.to_local(readout.global_position) if readout != null else Vector3.ZERO
 	measurements["readout_local"] = [rl.x, rl.y, rl.z - vest]

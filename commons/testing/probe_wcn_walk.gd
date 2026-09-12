@@ -223,6 +223,15 @@ func run() -> void:
 		root.get_texture().get_image().save_png(OUT + "probe_walk.png")
 		measurements["captures"] = {"primary": _cam_pose(cam)}
 
+	# ── 3b. the visual pass of 12 September: a backboard behind the tank, the followed bead larger ──
+	check(terr.get_node_or_null("Tank/Backboard") != null, "a dark backboard stands behind the tank under the logbook stand")
+	var wmm: MultiMesh = (terr.get_node_or_null("Tank/Walkers") as MultiMeshInstance3D).multimesh if terr.get_node_or_null("Tank/Walkers") != null else null
+	if wmm != null and wmm.instance_count >= 2:
+		var s0: float = wmm.get_instance_transform(0).basis.get_scale().x
+		var s1: float = wmm.get_instance_transform(1).basis.get_scale().x
+		measurements["bead_scales"] = [snappedf(s0, 0.01), snappedf(s1, 0.01)]
+		check(s0 > 1.8 and abs(s1 - 1.0) < 0.05, "the followed bead is twice the size of the dimmed ones (%.2f vs %.2f)" % [s0, s1])
+
 	# ── 4. the stream runs: steps against the clock, the screen against the counter ──
 	var s0: int = int(terr.get("_total_steps"))
 	var t0: int = Time.get_ticks_msec()
@@ -484,7 +493,10 @@ func run() -> void:
 	var bare_before: int = int(bare.get("_total_steps"))
 	_press(bare_panel, "Btn_3")
 	await process_frame
-	check(bare_before == 20 and int(bare.get("_total_steps")) == 0, "…and its keypad's RESET reaches the walk too — the relay is the one shipped-behaviour change (steps %d → %d)" % [bare_before, int(bare.get("_total_steps"))])
+	# the bare instance may tick ONCE on its own between its build and set_process(false)
+	# landing (Astra's isolated rerun of 12 September counted 21 before RESET and failed on
+	# an exact 20); what the check claims is that RESET reaches the walk: steps > 0 → 0
+	check(bare_before >= 20 and int(bare.get("_total_steps")) == 0, "…and its keypad's RESET reaches the walk too — the relay is the one shipped-behaviour change (steps %d → %d)" % [bare_before, int(bare.get("_total_steps"))])
 	bare.queue_free()
 	await process_frame
 

@@ -133,6 +133,14 @@ func run() -> void:
 	check(last != null and last.text.begins_with("Amber: can be chosen. Grey: outside the set."), "the legend reads amber / grey (%s)" % (last.text.get_slice("\n", 0) if last != null else ""))
 	var panel: Node3D = fixture.get("panel")
 	check(panel != null, "the panel exists")
+	# the visual pass of 12 September: the panel beside the tray, the status cased beside it
+	if panel != null and status != null:
+		var pfx: float = fixture.to_local(panel.global_position).x
+		var sfx: float = fixture.to_local(status.global_position).x
+		measurements["panel_fixture_x"] = pfx
+		measurements["status_fixture_x"] = sfx
+		check(pfx > 0.8, "the panel stands to the tray's right, off its near rows (fixture x %.2f)" % pfx)
+		check(sfx < -0.8 and fixture.get_node_or_null("StatusPlate") != null, "the status is cased on a plate at the tray's left (fixture x %.2f)" % sfx)
 	for b in ["Btn_0", "Btn_1", "Btn_2", "Btn_3", "Btn_4", "Btn_5", "Btn_6"]:
 		check(panel != null and panel.find_child(b, true, false) != null, "the panel has %s" % b)
 	var colours: Dictionary = _colour_count(mmi)
@@ -355,7 +363,9 @@ func run() -> void:
 	var eye: Vector3 = seg.to_global(Vector3(8.3, 1.55, 7.5 + vest))
 	var b4: Node3D = panel.find_child("Btn_4", true, false)
 	measurements["reach_to_remove_button"] = eye.distance_to(b4.global_position) if b4 != null else -1.0
-	check(b4 != null and eye.distance_to(b4.global_position) < 1.25, "REMOVE ONE is within a lean of the visitor's spot (%.2f m from the eye)" % (eye.distance_to(b4.global_position) if b4 != null else -1.0))
+	# the panel stands beside the tray since 12 September (the tray stays in view while a set is
+	# chosen), a step and a lean from the front-centre spot rather than a lean
+	check(b4 != null and eye.distance_to(b4.global_position) < 1.65, "REMOVE ONE is within a step and a lean of the visitor's spot (%.2f m from the eye)" % (eye.distance_to(b4.global_position) if b4 != null else -1.0))
 	var far_cube: Vector3 = mmi.to_global(Vector3(0, 0, 0))
 	measurements["reading_distance_far_corner"] = eye.distance_to(far_cube)
 	check(eye.distance_to(far_cube) < 2.6, "the board's far corner is within reading distance (%.2f m)" % eye.distance_to(far_cube))

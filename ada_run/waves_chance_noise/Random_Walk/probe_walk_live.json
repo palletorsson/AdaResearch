@@ -1,5 +1,5 @@
 {
-  "checks": 112,
+  "checks": 114,
   "control_path": "the push buttons' own signal path (area button_pressed → the artifact's connections) on the keypad and the wing; _step_all_walkers / _generate_step / _reflect_boundaries / _process driven directly with processing off for the deterministic sections; set_walk_seed for the shipped-policy comparison; the live lane adds the desktop rig's pointer; no tracked hand",
   "engine": "4.6-stable (official)",
   "failures": [],
@@ -9,29 +9,29 @@
   "measurements": {
     "after_300_2d": [
       [
-        0.246598780155182,
+        -0.0624396987259388,
         0.200000002980232,
-        0.0979879274964333
+        0.137293934822083
       ],
       [
-        0.142702296376228,
+        0.243214294314384,
         0.200000002980232,
-        0.0721796303987503
+        0.204940602183342
       ],
       [
-        0.22156548500061,
+        0.191290438175201,
         0.200000002980232,
-        0.0212437994778156
+        0.00308148376643658
       ],
       [
-        0.0437637194991112,
+        -0.0030486099421978,
         0.200000002980232,
-        -0.154271572828293
+        0.0630566626787186
       ],
       [
-        -0.221235886216164,
+        -0.085466206073761,
         0.200000002980232,
-        0.0286673177033663
+        -0.0660314708948135
       ]
     ],
     "arrival": {
@@ -41,16 +41,16 @@
         0.5
       ],
       "catchup_cap": 5,
-      "clock": 1.51931866666667,
+      "clock": 1.485592,
       "follow_one": true,
-      "frames": 60,
+      "frames": 61,
       "levy_cap": 10.0,
       "lines": [
         "3D · fixed 0.015 m steps in the volume",
-        "steps 45 · sim 1.5 s at 30 steps/s",
-        "clock 1.5 s · 60 frames · cap 5/frame",
-        "trail 45/200 kept · one followed, 4 dimmed",
-        "seed 76573 · RESET replays it",
+        "steps 44 · sim 1.5 s at 30 steps/s",
+        "clock 1.5 s · 61 frames · cap 5/frame",
+        "trail 44/200 kept · one followed, 4 dimmed",
+        "seed 13026 · RESET replays it",
         "glass folds a step back at every wall"
       ],
       "memory": "tail",
@@ -59,39 +59,39 @@
       "num_walkers": 5,
       "positions": [
         [
-          0.0531147718429565,
-          0.296649873256683,
-          -0.0455025434494019
+          -0.00177651923149824,
+          0.17695677280426,
+          0.100050173699856
         ],
         [
-          -0.0340681299567223,
-          0.212103724479675,
-          0.00932695902884007
+          0.0258291009813547,
+          0.201339572668076,
+          -0.117953561246395
         ],
         [
-          0.0496309176087379,
-          0.16488441824913,
-          0.0408111363649368
+          -0.0697265043854713,
+          0.204519003629684,
+          0.0130628757178783
         ],
         [
-          0.114768892526627,
-          0.165862366557121,
-          0.0352021791040897
+          -0.0326668992638588,
+          0.223937824368477,
+          0.135128423571587
         ],
         [
-          0.077700711786747,
-          0.20211598277092,
-          0.0574595779180527
+          0.00309081375598907,
+          0.200585022568703,
+          -0.0726500377058983
         ]
       ],
       "replay": true,
-      "seed": 76573,
-      "sim_time": 1.5,
+      "seed": 13026,
+      "sim_time": 1.46666666666667,
       "stand": "logbook",
       "step_size": 0.015,
-      "steps": 45,
+      "steps": 44,
       "steps_per_second": 30.0,
-      "trail_kept": 45,
+      "trail_kept": 44,
       "trail_length": 200
     },
     "arrival_colours": {
@@ -115,6 +115,10 @@
       ],
       "walk_seed": -1
     },
+    "bead_scales": [
+      2.0,
+      1.0
+    ],
     "bodies": [
       {
         "at": [
@@ -529,7 +533,7 @@
           2.4,
           12.6
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2790",
         "forward": [
           -0.06,
           -0.23,
@@ -543,7 +547,7 @@
           1.22,
           1.5
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2790",
         "forward": [
           -0.84,
           -0.54,
@@ -557,7 +561,7 @@
           1.38,
           2.11
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2790",
         "forward": [
           -0.9,
           -0.42,
@@ -571,7 +575,7 @@
           1.6,
           0.3
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2790",
         "forward": [
           0.0,
           -0.12,
@@ -585,7 +589,7 @@
           9.0,
           7.0
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2790",
         "forward": [
           0.0,
           -1.0,
@@ -599,7 +603,7 @@
           1.55,
           1.5
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2790",
         "forward": [
           -0.93,
           -0.36,
@@ -613,7 +617,7 @@
           1.55,
           1.5
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2790",
         "forward": [
           -0.93,
           -0.36,
@@ -627,7 +631,7 @@
           1.3,
           1.5
         ],
-        "current_camera": "/root/EndlessMuseum/@Camera3D@2745",
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2790",
         "forward": [
           -0.98,
           -0.19,
@@ -639,7 +643,7 @@
     "catchup_steps_for_2s_frame": 5,
     "desktop_input": {
       "front_capture_pose": {
-        "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+        "current_camera": "/root/@Node@2956/WcnDesktopRig/Head/Camera3D",
         "eye": [
           5.9,
           1.6,
@@ -672,7 +676,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2956/WcnDesktopRig/Head/Camera3D",
             "eye": [
               5.9,
               1.6,
@@ -733,7 +737,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2956/WcnDesktopRig/Head/Camera3D",
             "eye": [
               5.9,
               1.6,
@@ -794,7 +798,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2956/WcnDesktopRig/Head/Camera3D",
             "eye": [
               5.9,
               1.6,
@@ -855,7 +859,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2956/WcnDesktopRig/Head/Camera3D",
             "eye": [
               5.9,
               1.6,
@@ -877,7 +881,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2956/WcnDesktopRig/Head/Camera3D",
             "eye": [
               6.5,
               1.65,
@@ -906,7 +910,7 @@
             2.5
           ],
           "pose": {
-            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2956/WcnDesktopRig/Head/Camera3D",
             "eye": [
               6.5,
               1.6,
@@ -927,7 +931,7 @@
         {
           "event": "aim",
           "pose": {
-            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2956/WcnDesktopRig/Head/Camera3D",
             "eye": [
               5.8,
               1.6,
@@ -956,7 +960,7 @@
             0.0
           ],
           "pose": {
-            "current_camera": "/root/@Node@2899/WcnDesktopRig/Head/Camera3D",
+            "current_camera": "/root/@Node@2956/WcnDesktopRig/Head/Camera3D",
             "eye": [
               5.25,
               1.6,
@@ -1076,9 +1080,9 @@
           1.5
         ]
       },
-      "seed_after": 74567,
-      "seed_before": 84744,
-      "steps_after_reset": 0,
+      "seed_after": 81257,
+      "seed_before": 13153,
+      "steps_after_reset": 1,
       "steps_before_reset": 23,
       "walk_into_the_case": [
         -0.55,
@@ -1097,16 +1101,16 @@
       1.5
     ],
     "levy_2000": {
-      "max": 0.144832506775856,
-      "mean": 0.027119506392628,
-      "over_0.10": 29
+      "max": 0.147762045264244,
+      "mean": 0.0279277895884588,
+      "over_0.10": 32
     },
     "longest_line": 42,
     "msd": {
-      "recomputed": 0.0468192242085934,
-      "screen": 0.0468
+      "recomputed": 0.0353333089500666,
+      "screen": 0.0353
     },
-    "museum_bodies": 2386,
+    "museum_bodies": 2234,
     "museum_severed_tokens": [
       "lab_room",
       "pixel_cloud"
@@ -1164,7 +1168,7 @@
       "found": true,
       "logbook": true,
       "panel": true,
-      "seed": 27781,
+      "seed": 48636,
       "stand": "logbook",
       "walkers": 5
     },
@@ -1200,59 +1204,59 @@
     "replay": {
       "run_a": [
         [
-          0.0474971793591976,
-          0.287361890077591,
-          -0.0257464349269867
+          0.0112902615219355,
+          0.104042649269104,
+          0.0855316519737244
         ],
         [
-          -0.0253501906991005,
-          0.224203735589981,
-          0.0336515754461288
+          -0.00874827243387699,
+          0.266605764627457,
+          -0.0981468111276627
         ],
         [
-          0.0745072960853577,
-          0.202948585152626,
-          0.0590212643146515
+          -0.0949798077344894,
+          0.188098415732384,
+          0.0547787509858608
         ],
         [
-          0.145533382892609,
-          0.166404291987419,
-          0.030247937887907
+          -0.0069576371461153,
+          0.264341026544571,
+          0.11543158441782
         ],
         [
-          0.0864520817995071,
-          0.211776524782181,
-          0.0939056575298309
+          -0.0606115981936455,
+          0.212885141372681,
+          -0.11285987496376
         ]
       ],
       "run_b": [
         [
-          0.0474971793591976,
-          0.287361890077591,
-          -0.0257464349269867
+          0.0112902615219355,
+          0.104042649269104,
+          0.0855316519737244
         ],
         [
-          -0.0253501906991005,
-          0.224203735589981,
-          0.0336515754461288
+          -0.00874827243387699,
+          0.266605764627457,
+          -0.0981468111276627
         ],
         [
-          0.0745072960853577,
-          0.202948585152626,
-          0.0590212643146515
+          -0.0949798077344894,
+          0.188098415732384,
+          0.0547787509858608
         ],
         [
-          0.145533382892609,
-          0.166404291987419,
-          0.030247937887907
+          -0.0069576371461153,
+          0.264341026544571,
+          0.11543158441782
         ],
         [
-          0.0864520817995071,
-          0.211776524782181,
-          0.0939056575298309
+          -0.0606115981936455,
+          0.212885141372681,
+          -0.11285987496376
         ]
       ],
-      "seed": 76573
+      "seed": 13026
     },
     "rw128": {
       "at": [
@@ -1260,89 +1264,89 @@
         0.0,
         4.5
       ],
-      "cubes": 368,
+      "cubes": 297,
       "extent_x": [
         2.53,
-        4.09
+        4.03
       ],
       "extent_z": [
-        3.53,
+        3.84,
         5.47
       ],
       "scale": 0.200000002980232
     },
     "same_seed_two_rules": {
-      "azimuth_3d": 2.24154682583643,
+      "azimuth_3d": 0.669516221311129,
       "first_step_2d": [
-        -0.00932360906153917,
+        0.0117618292570114,
         0.200000002980232,
-        0.0117503320798278
+        0.00930909998714924
       ],
       "first_step_3d": [
-        -0.00853632669895887,
-        0.21075813472271,
-        0.00603270996361971
+        0.0110752563923597,
+        0.20876570045948,
+        -0.00504987081512809
       ],
-      "heading_2d": 2.241546675018
+      "heading_2d": 0.669516207232786
     },
     "stats_y": 0.57039999961853,
     "stream": {
-      "seconds": 0.851,
+      "seconds": 0.856,
       "steps_in_a_second": 30
     },
     "stream_no_replay": {
       "run_a": [
         [
-          -0.102700918912888,
-          0.162350118160248,
-          0.0101915597915649
+          -0.0407897010445595,
+          0.266702175140381,
+          0.0900075435638428
         ],
         [
-          0.0918693989515305,
-          0.244648739695549,
-          -0.0421283729374409
+          -0.0731233507394791,
+          0.282642602920532,
+          -0.09644415974617
         ],
         [
-          0.0919982343912125,
-          0.201746940612793,
-          -0.0555797219276428
+          -0.0112829878926277,
+          0.27233824133873,
+          0.0475645661354065
         ],
         [
-          0.0121786659583449,
-          0.180616617202759,
-          0.013612711802125
+          -0.00938832573592663,
+          0.211840257048607,
+          0.0654060170054436
         ],
         [
-          -0.0380449257791042,
-          0.140891626477242,
-          -0.0319028198719025
+          -0.0211566966027021,
+          0.262060403823853,
+          -0.102671839296818
         ]
       ],
       "run_b": [
         [
-          -0.0212295390665531,
-          0.253249734640121,
-          0.00579288881272078
+          0.120304703712463,
+          0.145548850297928,
+          -0.0174497608095407
         ],
         [
-          0.0102672465145588,
-          0.353143513202667,
-          0.0442737191915512
+          -0.0669362470507622,
+          0.091020442545414,
+          -0.112458400428295
         ],
         [
-          0.0556169375777245,
-          0.181267753243446,
-          -0.0472395829856396
+          -0.0569861568510532,
+          0.158206507563591,
+          -0.00929562840610743
         ],
         [
-          -0.0605141520500183,
-          0.181250602006912,
-          -0.0570984110236168
+          0.022619467228651,
+          0.193417862057686,
+          0.0420618280768394
         ],
         [
-          0.0389804765582085,
-          0.171760261058807,
-          -0.0270695649087429
+          -0.0898735076189041,
+          0.178611859679222,
+          -0.00882147252559662
         ]
       ]
     },

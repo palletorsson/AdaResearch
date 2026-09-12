@@ -221,6 +221,8 @@ var _sample_mat: StandardMaterial3D
 # Labels and controls
 var _info_label: Label3D
 var _stats_label: Label3D
+var _stats_plate: Node3D
+var _headline: Label3D   # the law, N, bins and the clipped count, large, over the six lines (12 September)
 var _control_panel: Node3D
 
 # Shared materials
@@ -394,6 +396,7 @@ func _create_labels() -> void:
 	var stats_plate := HangarKit.signage("", [], Vector2(0.34, 0.3), arm, Vector3(1, 0, 0))
 	stats_plate.position = Vector3(sx, sy, 0)
 	add_child(stats_plate)
+	_stats_plate = stats_plate
 	_stats_label = Label3D.new()
 	_stats_label.name = "StatsLabel"
 	_stats_label.pixel_size = 0.0011
@@ -817,6 +820,13 @@ func _lift_shipped(dy: float) -> void:
 		else:
 			_control_panel.position = Vector3(0, -0.08, 0.15)
 			_control_panel.rotation_degrees = Vector3(-25, 0, 0)
+	# under the cabinet the shipped side plate (n, μ, σ from bin centres, at font 12 on a
+	# bracket) says less than the housed readout's fourth line and was "hard to decipher"
+	# from the operating view (Astra's visual review, 12 September): it goes dark there
+	if _stats_plate != null:
+		_stats_plate.visible = dy <= 0.0
+	if _stats_label != null:
+		_stats_label.visible = dy <= 0.0
 
 
 func _build_cabinet() -> void:
@@ -871,16 +881,29 @@ func _build_cabinet() -> void:
 	var plate: MeshInstance3D = HangarKit.box(Vector3.ZERO, Vector3(0.62, 0.150, 0.014), dark)
 	plate.name = "Plate"
 	plate_root.add_child(plate)
+	# the headline: the law, the landed N, the bins and the clipped count at a size the
+	# operating view reads; the six lines follow, smaller (12 September: "prioritise law,
+	# landed N, bins and edge clipping at readable size")
+	_headline = Label3D.new()
+	_headline.name = "Headline"
+	_headline.pixel_size = 0.00095
+	_headline.font_size = 21
+	_headline.outline_size = 0
+	_headline.modulate = Color(0.95, 0.97, 1.0)
+	_headline.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_headline.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	_headline.position = Vector3(-0.29, 0.068, 0.010)
+	plate_root.add_child(_headline)
 	_readout = Label3D.new()
 	_readout.name = "Text"
 	_readout.pixel_size = 0.00095
-	_readout.font_size = 15
+	_readout.font_size = 11
 	_readout.outline_size = 0
-	_readout.line_spacing = 0.5
-	_readout.modulate = Color(0.86, 0.94, 1.0)
+	_readout.line_spacing = 0.3
+	_readout.modulate = Color(0.80, 0.90, 0.98)
 	_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	_readout.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	_readout.position = Vector3(-0.29, 0.066, 0.010)
+	_readout.position = Vector3(-0.29, 0.040, 0.010)
 	plate_root.add_child(_readout)
 	# the second panel: BATCH · PAUSE / NEW SEED · BINS, beside the keypad on the shoulder
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
@@ -1118,7 +1141,15 @@ func readout_lines() -> Array[String]:
 func _update_readout() -> void:
 	if _readout == null:
 		return
-	_readout.text = "\n".join(readout_lines())
+	var lines: Array[String] = readout_lines()
+	_readout.text = "\n".join(lines)
+	if _headline != null:
+		var first: int = _bins[0] if _bins.size() > 0 else 0
+		var last: int = _bins[num_bins - 1] if _bins.size() >= num_bins else 0
+		_headline.text = "%s · N %d · %d bins · clipped %d · edges %d|%d" % [str(lines[0]).get_slice(" ", 0), _total_samples, num_bins, _clipped, first, last]
+
+func headline_text() -> String:
+	return _headline.text if _headline != null else ""
 
 
 func landed_values() -> PackedFloat32Array:

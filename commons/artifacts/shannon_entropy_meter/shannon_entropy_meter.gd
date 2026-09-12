@@ -180,6 +180,7 @@ var _panel: Node3D
 var _readout_case: Node3D
 var _readout: Label3D
 var _ribbon: MultiMeshInstance3D
+var _excerpt: MultiMeshInstance3D   # the first forty, magnified on the desk's front (12 September)
 var _strip_mark: MeshInstance3D
 var _sample_uniform: Array[int] = []
 var _sample_contrast: Array[int] = []
@@ -996,6 +997,39 @@ func _build_ribbon() -> void:
 	_strip_mark.material_override = mmat
 	_strip_mark.position = Vector3(-RIBBON_W * 0.5 + mk.size.x * 0.5, DESK_H + 0.004, RIBBON_Z + TILE.z * 0.5 + 0.012)
 	_staging_root.add_child(_strip_mark)
+	# the visual pass of 12 September: the ribbon's two hundred tiles are a thin strip from
+	# the approach, so the first forty stand again on the desk's FRONT face at four times the
+	# size, as drawn and staying as drawn through SORT — the same sample, the same colours,
+	# labelled as the excerpt it is
+	_excerpt = MultiMeshInstance3D.new()
+	_excerpt.name = "Excerpt"
+	var em := MultiMesh.new()
+	em.transform_format = MultiMesh.TRANSFORM_3D
+	em.use_colors = true
+	var ebox := BoxMesh.new()
+	ebox.size = Vector3(0.026, 0.10, 0.012)
+	var emat := StandardMaterial3D.new()
+	emat.vertex_color_use_as_albedo = true
+	emat.roughness = 0.6
+	ebox.material = emat
+	em.mesh = ebox
+	em.instance_count = mini(40, sequence_length)
+	var epitch: float = 0.032
+	for i in range(em.instance_count):
+		em.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(-1.08 + epitch * (float(i) + 0.5), 0.0, 0.0)))
+	_excerpt.multimesh = em
+	_excerpt.position = Vector3(0.0, 0.80, DESK_Z + DESK_D * 0.5 + 0.008)
+	_staging_root.add_child(_excerpt)
+	var ecap := Label3D.new()
+	ecap.name = "ExcerptCaption"
+	ecap.text = "the first forty draws · ×4 · as drawn (they stay while the ribbon sorts)"
+	ecap.pixel_size = 0.0012
+	ecap.font_size = 12
+	ecap.outline_size = 0
+	ecap.modulate = Color(0.86, 0.94, 1.0)
+	ecap.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	ecap.position = Vector3(-1.08, 0.715, DESK_Z + DESK_D * 0.5 + 0.012)
+	_staging_root.add_child(ecap)
 
 
 ## Where tile i stands as drawn, and where it stands in the sorted copy.
@@ -1027,6 +1061,10 @@ func _refresh_ribbon() -> void:
 				j += 1
 	for i in range(sequence_length):
 		mm.set_instance_color(i, _symbol_color(_sequence[i]))
+	if _excerpt != null and is_instance_valid(_excerpt):
+		var em: MultiMesh = _excerpt.multimesh
+		for i in range(mini(em.instance_count, sequence_length)):
+			em.set_instance_color(i, _symbol_color(_sequence[i]))
 	_place_tiles(_sort_t)
 
 
@@ -1109,6 +1147,7 @@ func _teardown_ledger() -> void:
 	if is_instance_valid(_staging_root):
 		_staging_root.queue_free()
 	_staging_root = null
+	_excerpt = null
 	_panel = null
 	_readout_case = null
 	_readout = null
