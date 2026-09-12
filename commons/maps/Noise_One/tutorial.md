@@ -1,107 +1,85 @@
 # Noise One
 
-Fractal Brownian motion. Stack octaves for rich detail.
+One field, read twice. Every line below is from `algorithms/randomness/noisetorus/noisetorus.gd` and `commons/resourses/shaders/noiseTorus.gdshader`, the artifact and shader the map places as `noisetorus`.
 
-Sample fBm.
+Sample the field once, in the vertex stage.
 
-```gdscript
-@export var octaves: int = 4
-@export var lacunarity: float = 2.0  # frequency multiplier per octave
-@export var persistence: float = 0.5  # amplitude multiplier per octave
+```glsl
+    vec2 noise_input = vec2(object_pos.x * noise_scale, object_pos.z * noise_scale);
+    float wrapped_time = mod(TIME, 3600.0);
+    float time_offset = wrapped_time * noise_speed;
+    noise_input += vec2(time_offset, time_offset);
 
-func fbm(p: Vector2) -> float:
-    var total: float = 0.0
-    var frequency: float = 1.0
-    var amplitude: float = 1.0
-    var max_value: float = 0.0
-    for _i in octaves:
-        total += noise.get_noise_2d(p.x * frequency, p.y * frequency) * amplitude
-        max_value += amplitude
-        frequency *= lacunarity
-        amplitude *= persistence
-    return total / max_value
+    float noise_value = noise(noise_input);
+    vec3 displacement = NORMAL * noise_value * height_multiplier * show_relief;
 ```
 
-Stack multiple octaves at increasing frequency and decreasing amplitude. Normalised to [-1, 1].
+And again, in the fragment stage, from the same expression.
 
-Build a torus surface.
-
-```gdscript
-func torus_mesh(R: float, r: float, resolution: Vector2i) -> ArrayMesh:
-    var st := SurfaceTool.new()
-    st.begin(Mesh.PRIMITIVE_TRIANGLES)
-    for major in resolution.x + 1:
-        var u: float = major * TAU / resolution.x
-        for minor in resolution.y + 1:
-            var v: float = minor * TAU / resolution.y
-            var x: float = (R + r * cos(v)) * cos(u)
-            var y: float = r * sin(v)
-            var z: float = (R + r * cos(v)) * sin(u)
-            st.add_vertex(Vector3(x, y, z))
-    # triangle indices
-    return st.commit()
+```glsl
+    vec2 noise_input = vec2(object_pos.x * noise_scale, object_pos.z * noise_scale) + vec2(time_offset, time_offset);
+    float noise_value = noise(noise_input);
+    ALBEDO = mix(plain_albedo, rainbow_color * noise_value, show_colour);
 ```
 
-Two-radius parametric torus. R is the main radius; r is the tube radius.
+Two stages, one coordinate, one value. That is why the two rings on the bench can be called readings of the same field rather than two fields that happen to resemble each other.
 
-Sample noise on the torus.
+Notice what the second one cannot do. `noise()` returns minus one to plus one; `ALBEDO` cannot be negative. Where the value is below zero the multiplication drives the colour to black and the pipeline clamps it there, so the colour reading keeps the positive half of the field and throws the rest away. The displacement above keeps both halves, pushing inward for one of them.
 
-```gdscript
-func torus_noise(u: float, v: float) -> float:
-    return fbm(Vector2(u, v))
-```
-
-Evaluate fBm at (u, v) coordinates. The output is used to tint or displace the torus.
-
-Wrap noise without seams.
+Read the field on the processor too, for the plate.
 
 ```gdscript
-func wrapped_torus_noise(u: float, v: float) -> float:
-    var weight_u1: float = 1 - abs(u - 0.5) * 2
-    var weight_u2: float = 1 - abs(u) * 2
-    var weight_v1: float = 1 - abs(v - 0.5) * 2
-    var weight_v2: float = 1 - abs(v) * 2
-    return (
-        fbm(Vector2(u, v)) * weight_u1 * weight_v1 +
-        fbm(Vector2(u + 1, v)) * weight_u2 * weight_v1 +
-        fbm(Vector2(u, v + 1)) * weight_u1 * weight_v2 +
-        fbm(Vector2(u + 1, v + 1)) * weight_u2 * weight_v2
-    )
+func _hash2(p: Vector2) -> float:
+	var q: Vector2 = (p * 0.3183099 + Vector2(0.71, 0.113))
+	q = Vector2(q.x - floor(q.x), q.y - floor(q.y)) * 50.0
+	var v: float = q.x * q.y * (q.x + q.y)
+	return -1.0 + 2.0 * (v - floor(v))
 ```
 
-Blend four noise samples at the torus's seam. Produces a continuous noise without visible seams.
+The same hash the shader uses, ported line for line, so the plate can say what the field IS at a coordinate rather than what it looks like. The graphics card computes this in 32-bit arithmetic and this runs in 64-bit, so the last digits of a very chaotic hash differ; what the plate claims is a definition, not a screenshot.
 
-Displace torus vertices.
+Spend the value two ways.
 
 ```gdscript
-func displace_torus(mesh: ArrayMesh, amplitude: float) -> ArrayMesh:
-    var arrays := mesh.surface_get_arrays(0)
-    var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
-    var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
-    for i in vertices.size():
-        var v: Vector3 = vertices[i]
-        var u: float = atan2(v.z, v.x) / TAU + 0.5
-        var v_coord: float = atan2(v.y, sqrt(v.x * v.x + v.z * v.z) - main_radius) / TAU + 0.5
-        var offset: float = wrapped_torus_noise(u, v_coord) * amplitude
-        vertices[i] = v + normals[i] * offset
-    arrays[Mesh.ARRAY_VERTEX] = vertices
-    var new_mesh := ArrayMesh.new()
-    new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-    return new_mesh
+func relief_of(value: float) -> float:
+	return value * float(PAIR_AMPS[_amp_i])
+
+
+func colour_of(value: float) -> float:
+	return maxf(value, 0.0)
 ```
 
-Displace along the normal. The torus keeps its topology but gains organic texture.
+One line each, and the difference between them is the room.
 
-Render octave layers.
+Stop every clock, not just the visible one.
 
 ```gdscript
-func render_octaves_separately() -> void:
-    for i in octaves:
-        octaves = i + 1
-        var mesh := displace_torus(base_mesh, 0.2)
-        spawn_torus_at_offset(mesh, Vector3(i * 5, 0, 0))
+		mat.set_shader_parameter("noise_speed", 0.0 if _pair_frozen else noise_speed)
+		mat.set_shader_parameter("hue_shift_speed", 0.0 if _pair_frozen else hue_shift_speed)
 ```
 
-Walk down the row and see how detail accumulates as octaves are added.
+The shader has two: one slides the coordinate the field is sampled at, the other rotates the hue. Zeroing the second alone would leave a ring whose colours had stopped while its sample kept moving — a still picture of a moving thing. Every `TIME` in that file reaches an output through one of these two, which is what makes this a freeze.
 
-You can now compute fBm by stacking octaves, build parametric tori, wrap noise around them seamlessly, and render octave-by-octave. Noise_Voxel extends into 3D voxel displacement.
+Tell a reading from the field.
+
+```gdscript
+func cycle_amplitude() -> void:
+	_amp_i = (_amp_i + 1) % PAIR_AMPS.size()
+	_last_touched = "AMPLITUDE (a reading: the field did not move)"
+```
+
+```gdscript
+func cycle_frequency() -> void:
+	_freq_i = (_freq_i + 1) % PAIR_FREQS.size()
+	_last_touched = "FREQUENCY (the field itself: another value is here now)"
+```
+
+Amplitude scales what the surface does with a value; frequency changes which value is at the coordinate. The plate prints whichever was touched last, in those words, because the two buttons look alike and are not alike at all.
+
+Stage it in a map.
+
+```
+noisetorus:180#stand:pair
+```
+
+`stand:pair` builds the bench, the two rings, the markers, the plate and FREEZE, SAMPLE, AMPLITUDE and FREQUENCY. The `180` turns the bench toward the hall's door. Without the token the artifact is the single ring it always was, spending the field as relief and colour at once, with the `readout` axis (relief, plate, none) that an earlier pass gave it.

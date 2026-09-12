@@ -128,11 +128,80 @@ var _built: bool = false
 var _wrote_material: bool = false
 
 
+# ── THE PAIR (stand:pair) — N3, 12 September 2026 ───────────────────────────
+#
+# IS THE RESTLESS THING A FIELD, A SURFACE, OR OUR WAY OF READING IT? The ring
+# already answers half of that by itself: noiseTorus.gdshader samples one value
+# per point and spends it twice, once as displacement in the vertex stage and
+# once as brightness in the fragment stage, at the same coordinate, from the
+# same expression. So the staging puts the two spendings side by side on one
+# support and lets a visitor compare them.
+#
+#   stand:none  SHIPPED. One ring, both readings at once, exactly as before.
+#   stand:pair  Two rings of the same size on one bench, the same shader, the
+#               same noise_scale — the same FIELD — with one showing only the
+#               relief and the other only the colour; a marker standing on the
+#               same coordinate of both; a plate naming that coordinate, the
+#               field's value there and what each reading makes of it; and
+#               FREEZE · SAMPLE · AMPLITUDE · FREQUENCY.
+#
+# WHAT THE PAIR IS FOR. The two readings are NOT equivalent, and the room is
+# honest about which one loses: the field runs from -1 to 1, the relief spends
+# the whole of it (inward for the negative half) and the colour clamps the
+# negative half to black. A visitor reading the mottling is reading a rectified
+# field. That is not a bug in the shader; it is what a reading is.
+#
+# FREEZE stops BOTH clocks. Every TIME in that shader is multiplied by one of
+# the two speed uniforms — the displacement offset and the hue rotation — so
+# zeroing both really does stop everything, which is the thing Astra's card
+# said a single material parameter at zero does not prove.
+#
+# AMPLITUDE is a reading and FREQUENCY is the field: height_multiplier scales
+# what the surface does with the value, noise_scale changes which value is at
+# this coordinate at all. The plate says which of the two just moved.
+#
+# AND NOTHING HERE IS SOLID. The displacement lives in the vertex stage, where
+# no collider can see it, and this scene ships no collision shape at all: the
+# corrugation you can see is not a corrugation you could touch.
+@export_enum("none", "pair") var stand: String = "none"
+
+const PAIR_GAP: float = 1.30
+const PAIR_H: float = 1.22          # the rings' centre height, a standing eye
+const PAIR_INNER: float = 0.18    # a tube of radius 0.14: wide enough that the relief
+const PAIR_OUTER: float = 0.46    # corrugates the surface instead of folding it through itself
+const PAIR_BENCH_W: float = 2.60
+const PAIR_BENCH_D: float = 0.90
+const PAIR_BENCH_H: float = 0.78
+# THE SHIPPED NUMBERS ARE FOR THE SHIPPED RING. height_multiplier 0.2 and noise_scale
+# 3.575 were set for a torus of radius ~1.8: on the pair's 0.42 m rings that amplitude
+# is half the radius (the ring photographs as a blob) and that frequency puts barely
+# one noise cell across the whole ring (nothing to see). Both are scaled to this body,
+# which is the same fault the trio in Noise_Columns paid a run for.
+const PAIR_AMPS: Array = [0.0, 0.01, 0.02, 0.04]
+const PAIR_FREQS: Array = [7.0, 14.0, 24.0]
+const PAIR_SAMPLES: Array = [0.0, 0.9, 1.8, 2.7, 3.6, 4.5]   # radians round the ring
+
+var _pair_root: Node3D = null
+var _rings: Array = []              # [{kind, mesh, mat, marker}]
+var _pair_readout: Label3D = null
+var _pair_frozen: bool = false
+var _sample_i: int = 0
+var _amp_i: int = 2                 # PAIR_AMPS[2] is the shipped 0.2
+var _freq_i: int = 1                # PAIR_FREQS[1] is the shipped 3.575
+var _pair_time: float = 0.0
+var _last_touched: String = "nothing yet"
+
+
 func _ready() -> void:
 	# The grid sets config_* metadata SYNCHRONOUSLY before add_child and calls
 	# apply_grid_config call_deferred, i.e. after this — so the meta read happens here.
 	_read_meta_overrides()
 	_apply_stray()
+	if stand == "pair":
+		_build_pair()
+		_built = true
+		set_process(true)
+		return
 	_apply_readout()
 	_built = true
 
@@ -226,6 +295,9 @@ func _read_meta_overrides() -> void:
 		hue_shift_speed = float(str(get_meta("config_hue_shift_speed")))
 	if has_meta("config_stray_planet"):
 		stray_planet = _is_truthy(get_meta("config_stray_planet"))
+	if has_meta("config_stand"):
+		var sv: String = str(get_meta("config_stand")).strip_edges().to_lower()
+		stand = "pair" if sv in ["pair", "two", "compare", "bench"] else "none"
 
 
 ## Guarded like prng_crank_machine's: an unchanged readout touches nothing and says
@@ -248,3 +320,308 @@ func apply_grid_config(config: Dictionary) -> void:
 		return
 	_apply_readout()
 	print("[Noisetorus] Config applied — readout=%s" % [readout])
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE PAIR — stand:pair. Nothing below runs at stand:none.
+# ═════════════════════════════════════════════════════════════════════════════
+
+## The shader's own noise, in GDScript, line for line. The plate has to be able to
+## say what the field is AT a coordinate, and the only honest source for that is
+## the same expression the shader uses. Ported, not approximated:
+##
+##   p = 50.0 * fract(p * 0.3183099 + vec2(0.71, 0.113));
+##   return -1.0 + 2.0 * fract(p.x * p.y * (p.x + p.y));
+##
+## The GPU computes this in 32-bit and this runs in 64-bit, so the last digits of
+## a very chaotic hash will differ. What the plate claims is the FIELD's value at
+## a coordinate, which is a definition, not a screenshot.
+func _hash2(p: Vector2) -> float:
+	var q: Vector2 = (p * 0.3183099 + Vector2(0.71, 0.113))
+	q = Vector2(q.x - floor(q.x), q.y - floor(q.y)) * 50.0
+	var v: float = q.x * q.y * (q.x + q.y)
+	return -1.0 + 2.0 * (v - floor(v))
+
+
+func _noise2(p: Vector2) -> float:
+	var i := Vector2(floor(p.x), floor(p.y))
+	var f := Vector2(p.x - i.x, p.y - i.y)
+	var u := Vector2(f.x * f.x * (3.0 - 2.0 * f.x), f.y * f.y * (3.0 - 2.0 * f.y))
+	var a: float = _hash2(i + Vector2(0.0, 0.0))
+	var b: float = _hash2(i + Vector2(1.0, 0.0))
+	var c: float = _hash2(i + Vector2(0.0, 1.0))
+	var d: float = _hash2(i + Vector2(1.0, 1.0))
+	return lerp(lerp(a, b, u.x), lerp(c, d, u.x), u.y)
+
+
+## The field at an object-space point, at a time. This is the shader's
+## `vec2(object_pos.x * noise_scale, object_pos.z * noise_scale) + time_offset`.
+func field_value(x: float, z: float, t: float) -> float:
+	var scale: float = float(PAIR_FREQS[_freq_i])
+	var off: float = fmod(t, 3600.0) * noise_speed
+	return _noise2(Vector2(x * scale + off, z * scale + off))
+
+
+## What each reading makes of that value. The relief spends all of it; the colour
+## clamps the negative half to black, because ALBEDO cannot go below zero.
+func relief_of(value: float) -> float:
+	return value * float(PAIR_AMPS[_amp_i])
+
+
+func colour_of(value: float) -> float:
+	return maxf(value, 0.0)
+
+
+func _sample_point() -> Vector3:
+	var a: float = float(PAIR_SAMPLES[_sample_i])
+	var r: float = (PAIR_INNER + PAIR_OUTER) * 0.5 + (PAIR_OUTER - PAIR_INNER) * 0.5
+	return Vector3(cos(a) * r, 0.0, sin(a) * r)
+
+
+func _build_pair() -> void:
+	var HangarKit := load("res://commons/artifacts/_hangar/hangar_kit.gd")
+	var mi: MeshInstance3D = _torus()
+	var shader: Shader = null
+	if mi != null and mi.material_override is ShaderMaterial:
+		shader = (mi.material_override as ShaderMaterial).shader
+		mi.visible = false          # the shipped ring steps aside; the pair is the exhibit
+	_pair_root = Node3D.new()
+	_pair_root.name = "Pair"
+	add_child(_pair_root)
+
+	var stone := StandardMaterial3D.new()
+	stone.albedo_color = Color(0.58, 0.57, 0.55)
+	stone.roughness = 0.9
+	var dark := StandardMaterial3D.new()
+	dark.albedo_color = Color(0.11, 0.115, 0.13)
+	dark.roughness = 0.85
+
+	var body := StaticBody3D.new()
+	body.name = "Bench"
+	_pair_root.add_child(body)
+	body.add_child(HangarKit.box(Vector3(0, PAIR_BENCH_H - 0.02, 0), Vector3(PAIR_BENCH_W, 0.04, PAIR_BENCH_D), stone))
+	body.add_child(HangarKit.box(Vector3(0, (PAIR_BENCH_H - 0.04) * 0.5, 0), Vector3(PAIR_BENCH_W * 0.9, PAIR_BENCH_H - 0.04, PAIR_BENCH_D * 0.6), stone))
+	var col := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = Vector3(PAIR_BENCH_W, PAIR_BENCH_H, PAIR_BENCH_D)
+	col.shape = shape
+	col.position = Vector3(0, PAIR_BENCH_H * 0.5, 0)
+	body.add_child(col)
+
+	_rings.clear()
+	for entry in [["relief", -PAIR_GAP * 0.5, "AS RELIEF · the field moves the surface"], ["colour", PAIR_GAP * 0.5, "AS COLOUR · the field lights the surface"]]:
+		var kind: String = entry[0]
+		var x: float = entry[1]
+		var holder := Node3D.new()
+		holder.name = "Ring_%s" % kind
+		holder.position = Vector3(x, PAIR_H, 0.0)
+		_pair_root.add_child(holder)
+		var ring := MeshInstance3D.new()
+		ring.name = "Torus"
+		var tm := TorusMesh.new()
+		tm.inner_radius = PAIR_INNER
+		tm.outer_radius = PAIR_OUTER
+		# the relief is sampled per VERTEX, so the mesh has to out-resolve the field or the
+		# corrugation aliases into spikes (measured: 13 noise cells across 48 segments
+		# photographed as crumpled paper)
+		tm.rings = 96
+		tm.ring_segments = 40
+		ring.mesh = tm
+		var mat := ShaderMaterial.new()
+		mat.shader = shader
+		mat.resource_local_to_scene = true
+		ring.material_override = mat
+		holder.add_child(ring)
+		# a post, so the ring stands rather than floats
+		var post: MeshInstance3D = HangarKit.box(Vector3(x, (PAIR_H - PAIR_OUTER + PAIR_BENCH_H) * 0.5, 0.0),
+				Vector3(0.06, PAIR_H - PAIR_OUTER - PAIR_BENCH_H + 0.1, 0.06), stone)
+		post.name = "Post_%s" % kind
+		_pair_root.add_child(post)
+		# the marker: one on each ring, at the same coordinate of the same field
+		var marker := MeshInstance3D.new()
+		marker.name = "Marker"
+		var sm := SphereMesh.new()
+		sm.radius = 0.035
+		sm.height = 0.07
+		marker.mesh = sm
+		marker.material_override = HangarKit.emissive(Color(1.0, 0.95, 0.55), 2.4)
+		holder.add_child(marker)
+		var cap: MeshInstance3D = HangarKit.stencil(entry[2], Vector2(0.92, 0.040), Color(0.16, 0.17, 0.19))
+		if cap:
+			cap.name = "Caption_%s" % kind
+			cap.position = Vector3(x, PAIR_BENCH_H + 0.09, PAIR_BENCH_D * 0.5 - 0.03)
+			_pair_root.add_child(cap)
+		_rings.append({"kind": kind, "mesh": ring, "mat": mat, "marker": marker, "holder": holder})
+
+	var case_root := Node3D.new()
+	case_root.name = "Readout"
+	case_root.set_meta("em_local_instrument", true)
+	case_root.position = Vector3(-0.50, PAIR_BENCH_H + 0.30, PAIR_BENCH_D * 0.5 + 0.02)
+	case_root.rotation_degrees = Vector3(-18, 0, 0)
+	_pair_root.add_child(case_root)
+	case_root.add_child(HangarKit.box(Vector3.ZERO, Vector3(1.22, 0.28, 0.014), dark))
+	_pair_readout = Label3D.new()
+	_pair_readout.name = "Text"
+	_pair_readout.pixel_size = 0.00092
+	_pair_readout.font_size = 17
+	_pair_readout.line_spacing = 0.5
+	_pair_readout.modulate = Color(0.88, 0.94, 1.0)
+	_pair_readout.outline_size = 3
+	_pair_readout.outline_modulate = Color(0, 0, 0, 1)
+	_pair_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_pair_readout.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	_pair_readout.position = Vector3(-0.585, 0.128, 0.010)
+	case_root.add_child(_pair_readout)
+
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	if RackTpl != null:
+		var panel: Node3D = RackTpl.create_panel("", [
+			[{"type": "button", "label": "FREEZE"}, {"type": "button", "label": "SAMPLE"}],
+			[{"type": "button", "label": "AMPLITUDE"}, {"type": "button", "label": "FREQUENCY"}],
+		], true)
+		panel.name = "Panel"
+		panel.set_meta("em_local_instrument", true)
+		panel.position = Vector3(0.92, PAIR_BENCH_H + 0.24, PAIR_BENCH_D * 0.5 + 0.08)
+		panel.rotation_degrees = Vector3(-26, 0, 0)
+		panel.scale = Vector3(1.4, 1.4, 1.4)
+		_pair_root.add_child(panel)
+		var actions := {"Btn_0": func(): toggle_pair_freeze(), "Btn_1": func(): next_sample(), "Btn_2": func(): cycle_amplitude(), "Btn_3": func(): cycle_frequency()}
+		for btn_name in actions.keys():
+			var btn: Node = panel.find_child(btn_name, true, false)
+			if btn == null:
+				continue
+			var area: Node = btn.get_node_or_null("InteractableAreaButton")
+			if area != null and area.has_signal("button_pressed"):
+				var action: Callable = actions[btn_name]
+				area.button_pressed.connect(func(_b): action.call())
+
+	_apply_pair_params()
+	_place_markers()
+	_update_pair_readout()
+
+
+## Both rings get the same field and differ in what they are allowed to show.
+func _apply_pair_params() -> void:
+	for r in _rings:
+		var mat: ShaderMaterial = r["mat"]
+		if mat == null:
+			continue
+		mat.set_shader_parameter("noise_scale", float(PAIR_FREQS[_freq_i]))
+		mat.set_shader_parameter("height_multiplier", float(PAIR_AMPS[_amp_i]))
+		mat.set_shader_parameter("elongation_factor", 1.0)
+		mat.set_shader_parameter("noise_speed", 0.0 if _pair_frozen else noise_speed)
+		mat.set_shader_parameter("hue_shift_speed", 0.0 if _pair_frozen else hue_shift_speed)
+		mat.set_shader_parameter("show_relief", 1.0 if str(r["kind"]) == "relief" else 0.0)
+		mat.set_shader_parameter("show_colour", 1.0 if str(r["kind"]) == "colour" else 0.0)
+
+
+## The marker stands on the surface at the sampled coordinate — on the relief ring
+## it rides the displacement, so the same coordinate is visibly in two states.
+func _place_markers() -> void:
+	var p: Vector3 = _sample_point()
+	var v: float = field_value(p.x, p.z, _pair_time)
+	for r in _rings:
+		var marker: Node3D = r["marker"]
+		if marker == null or not is_instance_valid(marker):
+			continue
+		var out: float = relief_of(v) if str(r["kind"]) == "relief" else 0.0
+		var dir: Vector3 = Vector3(p.x, 0.0, p.z).normalized()
+		marker.position = Vector3(p.x, 0.0, p.z) + dir * (out + 0.04)
+
+
+func _process(delta: float) -> void:
+	if stand != "pair":
+		return
+	if not _pair_frozen:
+		_pair_time += delta
+		_place_markers()
+		if fmod(_pair_time, 0.25) < delta:
+			_update_pair_readout()
+
+
+func _update_pair_readout() -> void:
+	if _pair_readout == null or not is_instance_valid(_pair_readout):
+		return
+	var p: Vector3 = _sample_point()
+	var v: float = field_value(p.x, p.z, _pair_time)
+	var lines: PackedStringArray = PackedStringArray()
+	lines.append("one field, two readings%s · amplitude %.2f · frequency %.3f" % [
+		("  FROZEN at t %.2f s" % _pair_time) if _pair_frozen else "", float(PAIR_AMPS[_amp_i]), float(PAIR_FREQS[_freq_i])])
+	lines.append("sample  x %+.3f  z %+.3f   field value %+.3f" % [p.x, p.z, v])
+	lines.append("relief  %+.3f m of surface" % relief_of(v))
+	if v < 0.0:
+		lines.append("colour  black — the reading clamps at zero and loses this half")
+	else:
+		lines.append("colour  brightness %.3f of the hue" % colour_of(v))
+	lines.append("last touched: %s · no collider anywhere: the relief is not a surface you can hit" % _last_touched)
+	_pair_readout.text = "\n".join(lines)
+
+
+## Stop both clocks. Every TIME in the shader is multiplied by one of these two.
+func toggle_pair_freeze() -> void:
+	if stand != "pair":
+		return
+	_pair_frozen = not _pair_frozen
+	_last_touched = "FREEZE"
+	_apply_pair_params()
+	_update_pair_readout()
+
+
+func next_sample() -> void:
+	if stand != "pair":
+		return
+	_sample_i = (_sample_i + 1) % PAIR_SAMPLES.size()
+	_last_touched = "SAMPLE"
+	_place_markers()
+	_update_pair_readout()
+
+
+## A READING. The value at the coordinate does not move.
+func cycle_amplitude() -> void:
+	if stand != "pair":
+		return
+	_amp_i = (_amp_i + 1) % PAIR_AMPS.size()
+	_last_touched = "AMPLITUDE (a reading: the field did not move)"
+	_apply_pair_params()
+	_place_markers()
+	_update_pair_readout()
+
+
+## THE FIELD. Another value stands at this coordinate now.
+func cycle_frequency() -> void:
+	if stand != "pair":
+		return
+	_freq_i = (_freq_i + 1) % PAIR_FREQS.size()
+	_last_touched = "FREQUENCY (the field itself: another value is here now)"
+	_apply_pair_params()
+	_place_markers()
+	_update_pair_readout()
+
+
+## The pair as the room can read it.
+func pair_state() -> Dictionary:
+	var p: Vector3 = _sample_point()
+	var v: float = field_value(p.x, p.z, _pair_time)
+	var rings: Array = []
+	for r in _rings:
+		var mat: ShaderMaterial = r["mat"]
+		var mesh: MeshInstance3D = r["mesh"]
+		rings.append({
+			"kind": r["kind"],
+			"show_relief": float(mat.get_shader_parameter("show_relief")) if mat != null else -1.0,
+			"show_colour": float(mat.get_shader_parameter("show_colour")) if mat != null else -1.0,
+			"noise_scale": float(mat.get_shader_parameter("noise_scale")) if mat != null else -1.0,
+			"height_multiplier": float(mat.get_shader_parameter("height_multiplier")) if mat != null else -1.0,
+			"noise_speed": float(mat.get_shader_parameter("noise_speed")) if mat != null else -1.0,
+			"hue_shift_speed": float(mat.get_shader_parameter("hue_shift_speed")) if mat != null else -1.0,
+			"shader": str(mat.shader.resource_path).get_file() if mat != null and mat.shader != null else "-",
+			"marker_at": [snappedf((r["marker"] as Node3D).position.x, 0.001), snappedf((r["marker"] as Node3D).position.y, 0.001), snappedf((r["marker"] as Node3D).position.z, 0.001)],
+			"aabb": snappedf((mesh.mesh as TorusMesh).outer_radius, 0.001) if mesh != null else -1.0,
+		})
+	return {
+		"stand": stand, "frozen": _pair_frozen, "time": snappedf(_pair_time, 0.01),
+		"sample_index": _sample_i, "sample_at": [snappedf(p.x, 0.001), snappedf(p.z, 0.001)],
+		"value": snappedf(v, 0.0001), "relief": snappedf(relief_of(v), 0.0001), "colour": snappedf(colour_of(v), 0.0001),
+		"amplitude": float(PAIR_AMPS[_amp_i]), "frequency": float(PAIR_FREQS[_freq_i]),
+		"amp_index": _amp_i, "freq_index": _freq_i, "last_touched": _last_touched,
+		"rings": rings,
+	}

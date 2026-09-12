@@ -255,3 +255,20 @@ This is the promise of procedural generation and the reason the Noise sequence e
 **persistence_landscape** — A split-view artifact showing three identical noise seeds rendered simultaneously at persistence values of 0.3, 0.5, and 0.7. The learner sees the same topological structure — same peaks, same valleys — with radically different surface character. Demonstrates that persistence does not change where features are, only how much small-scale detail they carry. Useful for building intuition about the persistence parameter before Noise_Space_10 opens full parameter exploration.
 
 **seamless_torus_inspector** — Renders the torus with a color-mapped seam indicator: vertices near the wrap boundary glow proportionally to their distance from the seam line. When using naive 2D noise mapping, the seam lights up. Switching to 4D circular embedding, the glow vanishes — no vertex is closer to a "seam" than any other because the seam does not exist. Makes the topological argument for higher-dimensional noise sampling visual and immediate.
+
+## The pair (2026-09-12)
+
+`algorithms/randomness/noisetorus/noisetorus.gd`, opt-in through `#stand:pair`. At `stand:none` the single ring builds exactly as before, including the earlier `readout` axis and its legacy early return.
+
+| what | where |
+|---|---|
+| the two readings | `commons/resourses/shaders/noiseTorus.gdshader`, uniforms `show_relief` and `show_colour`, both 1.0 by default |
+| the field, on the CPU | `_hash2` / `_noise2` / `field_value(x, z, t)` — the shader's own hash and interpolation, ported line for line |
+| what each reading makes of a value | `relief_of(value)` and `colour_of(value)`, the second of which clamps at zero |
+| the bench and the two rings | `_build_pair` — one shader, one noise scale, one ring size, two materials |
+| the marker | `_place_markers` — the same coordinate on both rings, riding the displacement on the relief one |
+| both clocks | `_apply_pair_params` sets `noise_speed` and `hue_shift_speed` to zero together |
+| the controls | `toggle_pair_freeze`, `next_sample`, `cycle_amplitude`, `cycle_frequency` |
+| the state, for a probe | `pair_state()` |
+
+Three sizes are the pair's own and not the artifact's: the rings are 0.46 m with a 0.14 m tube, the amplitudes run 0 to 0.04 and the frequencies 7 to 24. The shipped `height_multiplier` 0.2 and `noise_scale` 3.575 are for a torus of radius 1.8; at this size that amplitude folds the tube through itself and that frequency puts one noise cell across the whole ring. The mesh is 96 x 40 because the relief is sampled per vertex and a field finer than the mesh aliases into spikes.

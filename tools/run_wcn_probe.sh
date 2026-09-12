@@ -38,7 +38,8 @@ case "${1:-}" in
   game)     MAP=Random_Game;                  EXPECT=probe_game;          SCRIPT=probe_wcn_game ;;
   points)   MAP=Random_Noise_Types;          EXPECT=probe_points;        SCRIPT=probe_wcn_points ;;
   columns)  MAP=Noise_Columns;               EXPECT=probe_columns;       SCRIPT=probe_wcn_columns ;;
-  *) echo "usage: $0 intro|random|noise|pendulum|sine|effect|air|synth|entropy|entropy_once|remove|walk|gauss|mush|game|points|columns [live]"; exit 3 ;;
+  torus)    MAP=Noise_One;                   EXPECT=probe_torus;         SCRIPT=probe_wcn_torus ;;
+  *) echo "usage: $0 intro|random|noise|pendulum|sine|effect|air|synth|entropy|entropy_once|remove|walk|gauss|mush|game|points|columns|torus [live]"; exit 3 ;;
 esac
 OUT="ada_run/waves_chance_noise/$MAP"
 SUFFIX=""; [ "$MODE" = "live" ] && SUFFIX="_live"

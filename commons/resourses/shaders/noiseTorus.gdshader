@@ -7,6 +7,14 @@ uniform float noise_speed = 0.05;       // Speed of the noise animation
 uniform float elongation_factor = 2.0;  // Factor to elongate the sphere vertically
 uniform float hue_shift_speed = 0.05;   // Speed of hue shift for a subtle rainbow effect
 
+// 2026-09-12 (Noise_One, N2 of the noise arc): two readings of ONE field, so a room can put
+// them side by side. Both default to 1.0, which is the shipped picture exactly — the ring
+// displaces by the field and colours by the same field.
+uniform float show_relief = 1.0;        // 1 = the field displaces the surface, 0 = it does not
+uniform float show_colour = 1.0;        // 1 = the field colours it, 0 = one flat tone instead
+uniform vec3 plain_albedo = vec3(0.60, 0.59, 0.56);   // the tone used when show_colour is 0
+                                                      // (mid grey: a ridge has to cast a shade)
+
 varying vec3 v_object_position;
 
 // Simple 2D noise function
@@ -52,7 +60,7 @@ void vertex() {
 
     // Generate noise and apply displacement
     float noise_value = noise(noise_input);
-    vec3 displacement = NORMAL * noise_value * height_multiplier;
+    vec3 displacement = NORMAL * noise_value * height_multiplier * show_relief;
     VERTEX = object_pos + displacement;
 
     // Pass object space position to fragment shader
@@ -76,9 +84,14 @@ void fragment() {
     vec3 hsv_color = vec3(hue_shift, 1.0, 1.0); // Full saturation and brightness
     vec3 rainbow_color = hsv2rgb(hsv_color);
 
-    // Set base color with noise-modulated brightness
-    ALBEDO = rainbow_color * noise_value;
+    // Set base color with noise-modulated brightness. NOTE what this does with the half of
+    // the field that is negative: noise() returns -1..1, so a negative sample multiplies the
+    // hue into negative albedo and the pipeline clamps it to black. The colour reading keeps
+    // the positive half of the field and throws the rest away; the displacement above keeps
+    // both halves and pushes inward for one of them. Same value, two readings, one of them
+    // lossy — which is the whole subject of the room this shader stands in.
+    ALBEDO = mix(plain_albedo, rainbow_color * noise_value, show_colour);
 
     // Emission with subtle sparkle effect
-    EMISSION = rainbow_color * noise_value * 0.5;
+    EMISSION = rainbow_color * noise_value * 0.5 * show_colour;
 }
