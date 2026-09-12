@@ -152,8 +152,14 @@ func run() -> void:
 			if not excerpt.multimesh.get_instance_color(i).is_equal_approx(ribbon.multimesh.get_instance_color(i)): same_colours = false
 		check(same_colours, "…in the ribbon's own colours, draw for draw")
 		var eb: BoxMesh = excerpt.multimesh.mesh
-		check(eb.size.y >= 0.09 and eb.size.x >= 0.024, "…at four times the tile (%.3f × %.3f)" % [eb.size.x, eb.size.y])
-	check(meter.get_node_or_null("Staging/ExcerptCaption") != null, "…and labelled as the excerpt it is")
+		check(eb.size.y >= 0.075 and eb.size.x >= 0.024, "…at four times the tile's width, and taller (%.3f × %.3f)" % [eb.size.x, eb.size.y])
+		var rcase: Node3D = meter.get_node_or_null("Staging/ReadoutCase")
+		var ex_bottom: float = excerpt.position.y - eb.size.y * 0.5
+		var case_top: float = (rcase.position.y + 0.105) if rcase != null else 0.0
+		measurements["excerpt_clearance"] = snappedf(ex_bottom - case_top, 0.001)
+		check(rcase != null and ex_bottom > case_top, "the whole row stands clear above the cased readout's plate (bottom %.3f, plate top %.3f)" % [ex_bottom, case_top])
+	var ecap: Label3D = meter.get_node_or_null("Staging/ExcerptCaption")
+	check(ecap != null and ecap.font_size >= 16 and ecap.text.contains("as drawn"), "…and labelled as the original-order excerpt at a readable size (font %d)" % (ecap.font_size if ecap != null else -1))
 
 	# ── 3. the measurement contract ───────────────────────────────────────────
 	var st: Dictionary = meter.call("get_ledger_state")

@@ -1007,7 +1007,7 @@ func _build_ribbon() -> void:
 	em.transform_format = MultiMesh.TRANSFORM_3D
 	em.use_colors = true
 	var ebox := BoxMesh.new()
-	ebox.size = Vector3(0.026, 0.10, 0.012)
+	ebox.size = Vector3(0.026, 0.08, 0.012)
 	var emat := StandardMaterial3D.new()
 	emat.vertex_color_use_as_albedo = true
 	emat.roughness = 0.6
@@ -1018,17 +1018,19 @@ func _build_ribbon() -> void:
 	for i in range(em.instance_count):
 		em.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(-1.08 + epitch * (float(i) + 0.5), 0.0, 0.0)))
 	_excerpt.multimesh = em
-	_excerpt.position = Vector3(0.0, 0.80, DESK_Z + DESK_D * 0.5 + 0.008)
+	# just under the desk's top edge, clear of the cased readout's plate (its top at 0.825; Astra's
+	# review of the visual pass: the left tiles sat behind it)
+	_excerpt.position = Vector3(0.0, 0.872, DESK_Z + DESK_D * 0.5 + 0.008)
 	_staging_root.add_child(_excerpt)
 	var ecap := Label3D.new()
 	ecap.name = "ExcerptCaption"
-	ecap.text = "the first forty draws · ×4 · as drawn (they stay while the ribbon sorts)"
-	ecap.pixel_size = 0.0012
-	ecap.font_size = 12
+	ecap.text = "the first forty · ×4 · as drawn"
+	ecap.pixel_size = 0.0014
+	ecap.font_size = 18
 	ecap.outline_size = 0
 	ecap.modulate = Color(0.86, 0.94, 1.0)
 	ecap.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	ecap.position = Vector3(-1.08, 0.715, DESK_Z + DESK_D * 0.5 + 0.012)
+	ecap.position = Vector3(0.27, 0.872, DESK_Z + DESK_D * 0.5 + 0.012)
 	_staging_root.add_child(ecap)
 
 
