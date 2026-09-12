@@ -3,7 +3,7 @@
   "name": "Random Algorithms Arena",
   "title": "Entropy as Wilderness",
   "lookup_name": "Random_Definition",
-  "description": "12x12 grid with 8x8 middle area for algorithm demonstrations",
+  "description": "A random-looking picture can be brought back. The west column runs order to chaos: the entropy axiom at (3,6) is a 10 x 10 x 40 point cloud, 0.2 m spacing, whose disorder grows southward through x 2.6-4.4, with the entropy jar and the butterflies inside it. The primary, seed_replay_demo, stands on a table at (8,11) in the open east half, turned to face west: two grids drawn from the same seed, REPLAY / RANDOM / +1 DRAW on its panel, a visitor at (7,11) reading it with the east wall behind and the cloud behind them. Recovered 2026-09-10: interior 2 = 1 m platform, perimeter w, wall_height 3, gate at the doorway; museum.sculpture_clear_rects keeps dealt plinths off the demo's spot.",
   "version": "1.0",
   "format": "json",
   "dimensions": {
@@ -16,6 +16,12 @@
    "category": "algorithms",
    "estimated_time": "5-7 minutes",
    "learning_objectives": [ "Algorithm visualization", "Grid manipulation", "Random processes", "8x8 region operations" ]
+  },
+  "museum": {
+   "wall_height": 3,
+   "gate_depth_rows": 0,
+   "sculpture_clear_rects": [[5, 9, 10, 13]],
+   "artifact_placement": "map"
   }
  },
  "utility_definitions": {
@@ -33,11 +39,7 @@
    "description": "Learn about random walk algorithms",
    "properties": {
 	"category": "Randomness",
-	"category_color": [
-	 0.8,
-	 0.5,
-	 0.9
-	]
+	"category_color": [ 0.8, 0.5, 0.9 ]
    }
   },
   "s": {
@@ -47,24 +49,12 @@
   }
  },
  "lighting": {
-  "ambient_color": [
-   0.4,
-   0.4,
-   0.5
-  ],
+  "ambient_color": [ 0.4, 0.4, 0.5 ],
   "ambient_energy": 0.6,
   "directional_light": {
    "enabled": true,
-   "direction": [
-	-0.4,
-	-0.7,
-	-0.4
-   ],
-   "color": [
-	1.0,
-	0.9,
-	0.8
-   ],
+   "direction": [ -0.4, -0.7, -0.4 ],
+   "color": [ 1.0, 0.9, 0.8 ],
    "energy": 1.2
   }
  },
@@ -77,11 +67,7 @@
   "initial_tile_visibility": "hidden_except_corners",
   "background": {
    "type": "sky",
-   "color": [
-	0.2,
-	0.3,
-	0.7
-   ]
+   "color": [ 0.2, 0.3, 0.7 ]
   }
  },
  "layers": {
@@ -145,12 +131,12 @@
    [ "", "", "", "2d_in_3d_randomness_vis:0:-0.5", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "science_screen:180:1.5#mode:scatter", "", "", "", "", "", "", "" ],
    [ "", "", "", "entropy_jar:90", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "random_butterflies:90", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "seed_replay_demo:0:-0.5", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "dark_sphere", "", "", "", "", "", "", "", "", "" ],
-   [ "", "synthesis_stand#subject:catalyst_pickup#mode:hero", "", "", "", "clipboard#prng_axioms:-94", "", "", "", "", "", "", "" ],
+   [ "", "", "", "random_butterflies:90", "", "", "", "", "seed_replay_demo:-90#comparison:replicas#stand:table", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "digital_materiality_glitch:90:-0.4:0.1", "", "catalyst_pickup#sequence_name:randomness#label_text:CHAOS CATALYST#orb_color:0.95,0.55,0.20#accent_color:0.95,0.55,0.20", "", "trng_vs_prng:-90:-0.2:0.1", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "synthesis_stand#subject:catalyst_pickup#mode:hero", "", "", "", "clipboard#prng_axioms:-94", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "dark_sphere", "", "" ],
+   [ "", "digital_materiality_glitch:90:-0.4:0.1", "", "catalyst_pickup#sequence_name:randomness#label_text:RANDOMNESS CATALYST#orb_color:0.95,0.55,0.20#accent_color:0.95,0.55,0.20", "", "trng_vs_prng:-90:-0.2:0.1", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],

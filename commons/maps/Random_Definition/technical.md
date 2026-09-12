@@ -235,7 +235,18 @@ This is why the map opens the Randomness sequence in the E_entropy phase. Every 
 
 ## Possible Artifacts
 
-**seed_reproducibility_demo** — Two side-by-side grids, each populated by a PRNG with an editable seed field. Set both seeds to the same value and watch identical patterns emerge tile by tile. Change one seed and watch the patterns diverge immediately. Makes the determinism of pseudo-randomness viscerally obvious — same input, same output, every time.
+**seed_reproducibility_demo — built.** This is `seed_replay_demo`, the room's primary encounter since 2026-09-10, placed as `seed_replay_demo:0:-0.5#comparison:replicas`: two 8×8 grids from one seed, a seed slider, REPLAY, RANDOM and a third button, +1 DRAW, which makes the right-hand grid consume one value from the generator before it colours. The draw count is printed under the headline (192 per grid, three per cell, row by row). RANDOM uses an artifact-local `RandomNumberGenerator`, so the game's global generator — the one `randf()` and `randi()` share, as noted above — is not advanced by the panel. The colouring loop is the whole procedure:
+
+```gdscript
+_rng.seed = s
+for mi in cubes:
+	var mat: StandardMaterial3D = (mi as MeshInstance3D).material_override
+	mat.albedo_color = Color(
+		_rng.randf(),
+		_rng.randf(),
+		_rng.randf()
+	)
+```
 
 **entropy_gradient_strip** — A horizontal strip of 12 cells transitioning from pure order (left) to pure randomness (right). Each cell's contents are generated with increasing entropy levels — the leftmost cell is a solid color, the rightmost is pixel noise. The strip makes the continuous nature of entropy visible as a spatial gradient rather than a binary switch.
 

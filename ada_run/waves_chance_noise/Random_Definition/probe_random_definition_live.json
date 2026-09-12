@@ -1,5 +1,5 @@
 {
-  "checks": 29,
+  "checks": 32,
   "control_path": "InteractableAreaButton.button_pressed emitted programmatically; slider read, not driven; no tracked hand",
   "engine": "4.6-stable (official)",
   "failures": [],
@@ -147,21 +147,31 @@
           11.5
         ]
       },
-      "seed_after": 454,
-      "seed_before": 244,
+      "seed_after": 12,
+      "seed_before": 109,
       "walker_cam_guard_stopped": true
     },
     "map_cell": [
       8,
       11
     ],
+    "panel_contrast": {
+      "dark_plates": 11,
+      "labels": 3,
+      "lettered_tags": 4,
+      "light_labels": 3,
+      "pale_plates": 0,
+      "smallest_font": 22
+    },
     "panel_height": 1.02549028396606,
+    "panel_lettered_tags": 4,
+    "panel_pale_meshes": [],
     "platform_cells": 8,
     "platform_cells_at_one_metre": 8,
     "seeds": [
       42,
-      339,
-      244
+      62,
+      109
     ]
   }
 }

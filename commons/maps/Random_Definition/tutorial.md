@@ -1,117 +1,55 @@
 # Random Definition
 
-Randomness is irreducibility. Build the crank machine that separates pseudo-random from true random.
+Two grids from one seed, and one button that breaks the match. The order below is the order of the encounter.
 
-Declare the PRNG.
+Look before pressing. Find a patch of the left grid you could not have predicted. Check the same patch in the right grid.
 
-```gdscript
-class_name PRNGCrank
-extends Node
-
-@export var seed: int = 42
-var state: int = 0
-
-func _ready() -> void:
-    state = seed
-```
-
-A PRNG keeps state. The seed is the only hidden input. Same seed, same sequence.
-
-Step the state.
+Press REPLAY. Both grids are rebuilt from their seeds:
 
 ```gdscript
-func next() -> int:
-    state = (state * 1103515245 + 12345) & 0x7fffffff
-    return state
+func _column_seeds() -> Array:
+	match comparison:
+		"replicas", "offset":
+			return [_current_seed, _current_seed]
 ```
 
-A linear congruential step. The numbers look random but are fully determined by the previous state.
+Under `comparison=replicas` the two columns share one seed, so they are the same grid built twice.
 
-Produce a uniform float.
+Read the colouring loop. It is the whole procedure:
 
 ```gdscript
-func uniform() -> float:
-    return float(next()) / float(0x7fffffff)
+_rng.seed = s
+for mi in cubes:
+	var mat: StandardMaterial3D = (mi as MeshInstance3D).material_override
+	mat.albedo_color = Color(
+		_rng.randf(),
+		_rng.randf(),
+		_rng.randf()
+	)
 ```
 
-Dividing by the maximum yields a value in [0, 1). The function is reproducible across runs with the same seed.
+Three draws per cell, row by row: 192 per grid, as the panel says.
 
-Expose a crank handle.
+Press RANDOM. A new seed is chosen from a generator that belongs to this artifact, so nothing else in the hall is disturbed:
 
 ```gdscript
-func _on_crank_turned(turns: float) -> void:
-    for i in int(turns):
-        var v := uniform()
-        history.append(v)
-        readout_label.text = "%.4f" % v
+func _randomize_seed() -> void:
+	_current_seed = _pick.randi() % 1000
+	_regenerate()
 ```
 
-Each quarter turn emits one sample. The readout updates. The learner watches the sequence appear.
+Move the slider to a seed of your own, then return it. The same seed reconstructs the same grid across an intervening change.
 
-Compare to a TRNG source.
+Press +1 DRAW. The right-hand grid asks the generator for one value and discards it before colouring:
 
 ```gdscript
-func true_random_sample() -> float:
-    var t := Time.get_ticks_usec()
-    var hardware: int = (t ^ (t >> 13)) & 0xfffff
-    return float(hardware) / float(0xfffff)
+if _extra_on and i == _columns.size() - 1:
+	for k in range(extra_draws):
+		_rng.randf()
 ```
 
-Hardware entropy from the clock is not cryptographic, but it is not reproducible. The same program on the same seed yields different values every run.
+Same seed, same cells, different picture. Press again to mend it. Reproducibility belongs to the seed, the generator and the draw order together.
 
-Log the seed and sample.
+Then turn the crank machine across the room, which advances a generator one state at a time, and read the true-versus-pseudo bench beside it.
 
-```gdscript
-func log_sample(v: float, kind: String) -> void:
-    log_entries.append({"kind": kind, "value": v, "seed": seed})
-```
-
-Entries tag which source produced the value. The log becomes evidence for the distinction.
-
-Plot the histogram.
-
-```gdscript
-func update_histogram(values: Array) -> void:
-    var bins := PackedInt32Array()
-    bins.resize(10)
-    for v in values:
-        bins[int(clamp(v * 10.0, 0, 9))] += 1
-    histogram.update(bins)
-```
-
-Ten bins show the distribution. Uniform means equal heights, roughly. Deviations shrink as the sample grows.
-
-You have named the vocabulary. The next map, Random Remove, turns randomness into subtraction.
-<<</MAP>>>
-
-Seed from player input.
-
-```gdscript
-func _on_seed_keyboard_entry(text: String) -> void:
-    if text.is_valid_int():
-        seed = int(text)
-        state = seed
-```
-
-The learner can type a seed. Any reproducible run becomes shareable.
-
-Compare PRNG and TRNG side by side.
-
-```gdscript
-func compare_sources(count: int) -> void:
-    for i in count:
-        log_sample(uniform(), "prng")
-        log_sample(true_random_sample(), "trng")
-```
-
-Pairs of samples accumulate under each label. The histograms diverge subtly over time.
-
-Expose a bit view.
-
-```gdscript
-func bit_view(v: float) -> String:
-    var bits: int = int(v * 0xffffff)
-    return String.num_int64(bits, 2).pad_zeros(24)
-```
-
-Each float becomes a binary string. The view exposes the underlying entropy source in its rawest form.
+The next room, Entropy, asks what a number can retain from a sequence.

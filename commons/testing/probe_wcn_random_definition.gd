@@ -146,6 +146,38 @@ func run() -> void:
 	check(aline != null and (aline.text.begins_with("RANDOM · seed ") or aline.text.begins_with("ARRIVAL · seed ")) and aline.text.ends_with("grids equal"), "a cased action line at the panel's foot names the last action, the seed and the grids' agreement (%s)" % (aline.text if aline != null else "none"))
 	var dpanel: Node3D = demo.get_node_or_null("Panel")
 	check(dpanel != null and dpanel.scale.x > 1.4, "the panel is enlarged for its labels (scale %.2f)" % (dpanel.scale.x if dpanel != null else 0.0))
+	# Astra's review of the visual pass: material and lettering contrast, not just size
+	if dpanel != null:
+		var dark_plates: int = 0
+		var pale_plates: int = 0
+		var lettered_tags: int = 0   # the rack's baked-text tags: black lettering baked into an off-white albedo texture
+		var pale_paths: Array = []
+		for mi in dpanel.find_children("*", "MeshInstance3D", true, false):
+			var mat: Material = (mi as MeshInstance3D).material_override
+			if mat == null and (mi as MeshInstance3D).mesh != null and (mi as MeshInstance3D).mesh.get_surface_count() > 0: mat = (mi as MeshInstance3D).mesh.surface_get_material(0)
+			if mat is StandardMaterial3D:
+				var c: Color = (mat as StandardMaterial3D).albedo_color
+				var lum: float = (c.r + c.g + c.b) / 3.0
+				if (mat as StandardMaterial3D).albedo_texture != null and lum >= 0.75:
+					lettered_tags += 1
+				elif lum >= 0.75:
+					pale_plates += 1
+					pale_paths.append([str((mi as Node).get_path()).right(40), (mi as MeshInstance3D).visible, snappedf(lum, 0.01)])
+				elif lum < 0.25: dark_plates += 1
+		measurements["panel_pale_meshes"] = pale_paths
+		measurements["panel_lettered_tags"] = lettered_tags
+		var light_labels: int = 0
+		var labels: int = 0
+		var smallest: int = 999
+		for l in dpanel.find_children("*", "Label3D", true, false):
+			labels += 1
+			var lm: Color = (l as Label3D).modulate
+			if (lm.r + lm.g + lm.b) / 3.0 > 0.85 and (l as Label3D).outline_size >= 4: light_labels += 1
+			smallest = mini(smallest, (l as Label3D).font_size)
+		measurements["panel_contrast"] = {"pale_plates": pale_plates, "dark_plates": dark_plates, "lettered_tags": lettered_tags, "labels": labels, "light_labels": light_labels, "smallest_font": smallest}
+		check(pale_plates == 0 and dark_plates >= 1, "the panel's bare plates are dark (%d pale, %d dark)" % [pale_plates, dark_plates])
+		check(lettered_tags >= 3, "the button names are baked tags, black lettering on off-white, kept pale on purpose (%d tags)" % lettered_tags)
+		check(labels > 0 and light_labels == labels and smallest >= 16, "every label on it is light with a dark outline, none under 16 px (%d of %d, smallest %d)" % [light_labels, labels, smallest])
 
 	# ── 3. reach and the recovered platforms ──────────────────────────────────
 	var panel: Node3D = demo.find_child("Param_0", true, false)

@@ -251,8 +251,10 @@ func _build_grid() -> void:
 			cap.name = "ColumnSeed_%d" % c
 			cap.text = "SEED: %d" % int(seeds[c])
 			cap.pixel_size = 0.002
-			cap.font_size = 14
-			cap.modulate = Color(0.9, 0.85, 0.5)
+			cap.font_size = 20
+			cap.outline_size = 5
+			cap.outline_modulate = Color(0, 0, 0, 1)
+			cap.modulate = Color(0.95, 0.9, 0.55)
 			cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			cap.position = Vector3(
 				origin_x + (col_w - cube_size) * 0.5,
@@ -398,6 +400,8 @@ func _build_panel() -> void:
 	panel.rotation_degrees = Vector3(-20, 0, 0)
 	panel.scale = Vector3(1.5, 1.5, 1.5)   # 12 September: the labels read from the operating position
 	add_child(panel)
+	_contrast_panel(panel)
+	_contrast_panel.call_deferred(panel)   # and once more a frame later, for parts built on entering the tree
 
 	# Seed slider (Param_0)
 	var seed_slider: Node = panel.find_child("Param_0", true, false)
@@ -470,6 +474,36 @@ func column_colors(i: int) -> PackedColorArray:
 	for mi in (_columns[i]["cubes"] as Array):
 		out.append(((mi as MeshInstance3D).material_override as StandardMaterial3D).albedo_color)
 	return out
+
+## The rack panel ships cream with small dark lettering, which washes out under the museum's
+## light (Astra's review of the visual pass, 12 September: "finish contrast, not just size"):
+## its pale plates go dark and every label on it goes light with a dark outline, a third
+## larger. Local to this panel; the rack template is untouched.
+func _contrast_panel(p: Node3D) -> void:
+	for mi in p.find_children("*", "MeshInstance3D", true, false):
+		var m: MeshInstance3D = mi
+		var mat: Material = m.material_override
+		if mat == null and m.mesh != null and m.get_surface_override_material_count() > 0:
+			mat = m.get_surface_override_material(0)
+		if mat == null and m.mesh != null:
+			mat = m.mesh.surface_get_material(0) if m.mesh.get_surface_count() > 0 else null
+		if not (mat is StandardMaterial3D):
+			continue
+		var sm: StandardMaterial3D = mat
+		var lum: float = (sm.albedo_color.r + sm.albedo_color.g + sm.albedo_color.b) / 3.0
+		if lum < 0.75 or sm.albedo_texture != null:
+			continue
+		var dm: StandardMaterial3D = sm.duplicate()
+		dm.albedo_color = Color(0.14, 0.14, 0.16, 1.0)
+		dm.roughness = 0.85
+		dm.emission_energy_multiplier = 0.0
+		m.material_override = dm
+	for l in p.find_children("*", "Label3D", true, false):
+		var lb: Label3D = l
+		lb.modulate = Color(0.95, 0.96, 1.0)
+		lb.outline_size = 6
+		lb.outline_modulate = Color(0, 0, 0, 1)
+		lb.font_size = int(round(lb.font_size * 1.35))
 
 func replay() -> void:
 	_regenerate()
