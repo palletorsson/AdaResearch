@@ -46,6 +46,8 @@ HALLS = [
      ['', '_volumes', '_admitted', '_proposed', '_packed', '_readout', '_violation', '_desktop_carry', '_plan']),
     ('Noise_Columns', 'probe_columns', 'N2', 'Can you tell how a body changes just by looking at its strange shape?',
      ['', '_slot0', '_slot1', '_slot2', '_matte', '_readout', '_desktop_front', '_plan']),
+    ('Noise_One', 'probe_torus', 'N3', 'Is the restless thing a field, a surface or our way of reading it?',
+     ['', '_relief', '_colour', '_readout', '_desktop_front', '_plan']),
 ]
 
 VIEW_NAMES = {'': 'the primary, from the visitor\'s spot', '_desktop_front': 'the desktop rig\'s own camera, live lane'}
