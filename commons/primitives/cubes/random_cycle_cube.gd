@@ -89,6 +89,65 @@ const WARNINGS: PackedStringArray = ["beacon", "stain", "cage", "none"]
 @export var wireframe_emission_strength: float = 1.45
 @export var force_upright: bool = true
 
+# ── THE CHASM (stand:chasm) — R5, 12 September 2026 ─────────────────────────
+#
+# WHAT THIS IS FOR. Everything above is one tile. The room this tile was written
+# for asks a question a single tile cannot pose: HOW CAN YOU PLAN WHEN THE NEXT
+# STATE IS KNOWN BUT ITS TIMING IS NOT? The state order is fixed and public —
+# it stands, it leaves, it is gone, it returns — and only the waits are drawn.
+# So the staging is a CROSSING: a row of these tiles across a hole in the floor,
+# read from its near lip and rewarded at its far one.
+#
+# THE HOLE IS THE HALL'S, NOT THE ARTIFACT'S. Random_Game's map carries a five
+# by three pit of `0` cells, and a `0` is a hole the museum lays no floor on —
+# which is why that room's own text could only say its support was unverified.
+# The staging cuts that void into a crossing instead of papering it: the museum
+# keeps its hole, and the artifact supplies the three things a hole needs before
+# a body may be asked to cross it —
+#
+#   a BED       one metre down, the artifact's own slab, so the fall is a fall
+#               and not a disappearance. A sunken stone comes to rest two
+#               centimetres proud of it: the floor that left you is the floor
+#               you land on.
+#   a WAY OUT   a ramp up the pit's west side, back to the near lip. A fall
+#               costs the walk back, nothing else.
+#   a LIP       cut sides, kerbs broken where the stones cross, and the far
+#               side worth reaching.
+#
+#   stand:none    SHIPPED. Builds nothing of this. The 7 existing placements
+#                 take the identical path they always took.
+#   stand:chasm   The bed, the way out, the cut sides and kerbs, the carved
+#                 stele (the ORDER), the live tablet (the DRAWN waits and the
+#                 time left of each), the controls, two braziers, and the idol
+#                 at the far lip with the crossing's seed cut into it.
+#
+# This cube is the MIDDLE stone: the tile the token names is the tile you step
+# on. The apron is its child and is held still while this cube sinks (_process
+# cancels the sink out of the staging's own offset), because the floor betraying
+# you must not take the room with it.
+#
+# THE DEADLINE IS STORED. The loop drew its wait and handed it straight to a
+# timer, so the wait existed only inside that timer: nothing could say how long
+# was left, and a countdown drawn fresh each frame is not a countdown but a new
+# dice roll wearing a clock's face. _note_step records the kind, the draw and
+# the millisecond it expires; the tablet and the cue both read THAT.
+#
+#   advance_seconds  0 = shipped (the beacon, lit only while the block moves).
+#                    > 0 lights a crown ring this long before the STORED
+#                    deadline, while the block still stands — the difference
+#                    between being told and finding out.
+#   hidden_*         0 = shipped (one band for both waits). Set, they give the
+#                    gone-wait its own band, so a crossing can be crossable.
+#   count            how many stones (odd, so this one stays the middle).
+#   seed             the crossing's five-digit name; -1 names one and prints it.
+@export_enum("none", "chasm") var stand: String = "none"
+@export var crossing_seed: int = -1
+@export var stone_count: int = 3
+@export var advance_seconds: float = 0.0
+@export var hidden_min_seconds: float = 0.0
+@export var hidden_span_seconds: float = 0.0
+@export var pit_width: float = 5.0
+
 enum CycleState {
 	IDLE,
 	GOING_OUT,
@@ -115,6 +174,24 @@ var _warn_root: Node3D = null
 var _warn_material: StandardMaterial3D = null
 var _built: bool = false
 
+# The stored deadline: what was drawn, and when it runs out.
+var _step_kind: String = ""
+var _step_wait: float = 0.0
+var _step_until_ms: int = 0
+var _cycles_done: int = 0
+var _crown: MeshInstance3D = null
+var _crown_material: StandardMaterial3D = null
+
+# The crossing (stand:chasm only).
+var _crossing: Node3D = null
+var _crossing_base_y: float = 0.0
+var _stones: Array = []
+var _tablet: Label3D = null
+var _seed_cut: Label3D = null
+var _idol_material: StandardMaterial3D = null
+var _crossing_rng: RandomNumberGenerator = null
+var _tablet_due: float = 0.0
+
 func _ready() -> void:
 	if cycle_seed == 0:
 		_rng.randomize()
@@ -133,6 +210,11 @@ func _ready() -> void:
 		_apply_posture()
 	call_deferred("_anchor_warning")
 	_built = true
+	# Shipped placements do not tick: nothing below is asked of a bare cube.
+	set_process(false)
+	if stand == "chasm":
+		_prepare_crossing()
+		_apply_stand()
 
 func _ensure_nodes() -> void:
 	_cube_mesh = get_node_or_null("CubeMesh") as MeshInstance3D
@@ -302,6 +384,7 @@ func _restart_cycle_loop() -> void:
 func _run_cycle_loop(ticket: int) -> void:
 	while is_inside_tree() and ticket == _loop_ticket:
 		var visible_wait: float = _next_random_wait()
+		_note_step("stands", visible_wait)
 		await get_tree().create_timer(visible_wait).timeout
 		if not is_inside_tree() or ticket != _loop_ticket:
 			return
@@ -318,7 +401,8 @@ func _run_cycle_loop(ticket: int) -> void:
 		_set_collision_enabled(false)
 		_set_state(CycleState.HIDDEN)
 
-		var hidden_wait: float = _next_random_wait()
+		var hidden_wait: float = _next_random_wait("gone")
+		_note_step("gone", hidden_wait)
 		await get_tree().create_timer(hidden_wait).timeout
 		if not is_inside_tree() or ticket != _loop_ticket:
 			return
@@ -334,6 +418,7 @@ func _run_cycle_loop(ticket: int) -> void:
 			return
 
 		_set_state(CycleState.IDLE)
+		_cycles_done += 1
 
 func _animate_vertical(target_y: float, duration_seconds: float) -> void:
 	var tween: Tween = create_tween()
@@ -393,12 +478,40 @@ func _set_indicator_visual(color_value: Color, is_visible: bool) -> void:
 		_warn_material.albedo_color = Color(color_value.r, color_value.g, color_value.b, wa)
 		_warn_material.emission = Color(color_value.r, color_value.g, color_value.b, 1.0)
 
-func _next_random_wait() -> float:
+## The draw. `kind` is "stands" or "gone"; the gone-wait takes its own band only
+## when one was set (hidden_span_seconds > 0), so the shipped call — one band for
+## both ends of the cycle — is unchanged.
+func _next_random_wait(kind: String = "stands") -> float:
 	var min_wait: float = max(0.1, wait_min_seconds)
 	var max_wait: float = max(min_wait, wait_span_seconds)
+	if kind == "gone" and hidden_span_seconds > 0.0:
+		min_wait = max(0.1, hidden_min_seconds)
+		max_wait = max(min_wait, hidden_span_seconds)
 	if is_equal_approx(min_wait, max_wait):
 		return min_wait
 	return _rng.randf_range(min_wait, max_wait)
+
+
+## The stored deadline. One draw, one expiry, read by everything that wants to
+## know how long is left: the tablet's bar, the advance cue, a probe.
+func _note_step(kind: String, wait_seconds: float) -> void:
+	_step_kind = kind
+	_step_wait = wait_seconds
+	_step_until_ms = Time.get_ticks_msec() + int(round(wait_seconds * 1000.0))
+
+
+## What this tile is doing, as the room can read it.
+func step_state() -> Dictionary:
+	var left: float = max(0.0, float(_step_until_ms - Time.get_ticks_msec()) / 1000.0)
+	return {
+		"step": _step_kind,
+		"wait": snappedf(_step_wait, 0.01),
+		"left": snappedf(left, 0.01),
+		"cycles": _cycles_done,
+		"standing": _state == CycleState.IDLE,
+		"supports": _collision_shape != null and not _collision_shape.disabled,
+		"crown": _crown != null and _crown.visible,
+	}
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.is_empty():
@@ -420,6 +533,42 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		if WARNINGS.has(w) and w != warning:
 			warning = w
 			restate = true
+
+	# The crossing: a word for the staging, its five-digit name, the stone count
+	# and which cue it offers. Read before the numeric shorthand below, like the
+	# axes above, and each guarded so a shipped token reaches none of it.
+	var restage: bool = false
+
+	if config_data.has("stand"):
+		var sv: String = str(config_data["stand"]).strip_edges().to_lower()
+		var want: String = "chasm" if sv in ["chasm", "crossing", "pit", "tomb"] else "none"
+		if want != stand:
+			stand = want
+			restage = true
+
+	if config_data.has("count"):
+		var sc: int = int(config_data["count"])
+		if sc >= 1 and sc != stone_count:
+			stone_count = sc if sc % 2 == 1 else sc + 1
+			restage = true
+
+	if config_data.has("size"):
+		var pw: float = _to_float(config_data["size"], pit_width)
+		if not is_equal_approx(pw, pit_width):
+			pit_width = max(3.0, pw)
+			restage = true
+
+	if config_data.has("seed"):
+		var cs: int = int(config_data["seed"])
+		if cs != crossing_seed:
+			crossing_seed = cs
+			restage = true
+
+	if config_data.has("cue"):
+		var cv: String = str(config_data["cue"]).strip_edges().to_lower()
+		advance_seconds = CROSSING_ADVANCE if cv in ["advance", "notice", "countdown"] else 0.0
+		if _built:
+			_build_crown()
 
 	if config_data.has("cycle_seed"):
 		var sd: int = int(config_data["cycle_seed"])
@@ -469,6 +618,13 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		_build_warning()
 		call_deferred("_anchor_warning")
 
+	if restage and _built:
+		if stand == "chasm":
+			if _crossing_rng == null:
+				_prepare_crossing()
+			_teardown_crossing()
+		_apply_stand()
+
 	if posture == "cycle":
 		# Shipped path, unconditional and unchanged: the timing knobs above have
 		# moved, so the loop is restarted exactly as it always was.
@@ -488,3 +644,537 @@ func _to_float(value: Variant, fallback: float) -> float:
 	if text.is_valid_float():
 		return float(text)
 	return fallback
+
+# ═════════════════════════════════════════════════════════════════════
+# THE CROSSING — stand:chasm: the apron, the stones, the stele, the tablet,
+# the rim, the braziers, the idol. Nothing below runs at stand:none.
+# ═════════════════════════════════════════════════════════════════════
+
+const CROSSING_ADVANCE: float = 1.2   # seconds of notice, when a cue is asked for
+const CH_PROUD: float = 0.22          # how far a standing stone's top rises ABOVE the hall floor
+const CH_FLOOR: float = 0.28          # the hall floor, root-local (this tile's top is CH_PROUD over it)
+const CH_BED: float = -0.74           # the bed's top, one metre and two centimetres below the floor
+const CH_PITCH: float = 1.12          # stone to stone; a 1 m stone leaves a 0.12 m gap
+const CH_LAP: float = 0.12            # how far the end stones lap their lips
+const CH_STANDS: Vector2 = Vector2(2.4, 4.6)   # the band a stone stands for
+const CH_GONE: Vector2 = Vector2(1.1, 2.2)     # and the band it is gone for
+const CH_SINK: float = 1.22           # gone: a stone comes to rest on the bed it drops you onto
+
+
+## What the crossing needs before anything is built: a name a visitor can read
+## and repeat. The seed is five digits so it can be said out loud; every stone's
+## own cycle_seed is drawn from it, so one number replays the whole rhythm.
+func _prepare_crossing() -> void:
+	# The museum places a body's origin ON the deck (measured 2026-09-12: the token's
+	# own y offset is not read in the map-authored lane), which would leave this cube
+	# standing half proud of the floor and the whole crossing half a metre in the air.
+	# So the staging takes the height itself. It does not take the whole half metre:
+	# a row flush with the floor is invisible from a standing eye — the pit's own near
+	# wall occludes it and a top face at eye-grazing angle has no thickness (measured,
+	# third live capture) — so the stones stand CH_PROUD over it, as stepping stones,
+	# with a threshold at each lip so the step onto them is never a wall.
+	position.y -= (0.5 - CH_PROUD)
+	_base_position = position
+	if crossing_seed < 0:
+		var namer := RandomNumberGenerator.new()
+		namer.randomize()
+		crossing_seed = namer.randi_range(10000, 99999)
+	_crossing_rng = RandomNumberGenerator.new()
+	_crossing_rng.seed = crossing_seed
+	_adopt_crossing_timing(self)
+	cycle_seed = _crossing_rng.randi_range(1, 1 << 30)
+	_rng.seed = cycle_seed
+
+
+## The timing a crossing needs: a stone stands longer than it is gone, or the
+## rhythm is a coin toss with a one-metre penalty. Shipped bands are untouched
+## at stand:none — this is only ever called by the staging.
+func _adopt_crossing_timing(stone: Node) -> void:
+	stone.set("wait_min_seconds", CH_STANDS.x)
+	stone.set("wait_span_seconds", CH_STANDS.y)
+	stone.set("hidden_min_seconds", CH_GONE.x)
+	stone.set("hidden_span_seconds", CH_GONE.y)
+	stone.set("advance_seconds", advance_seconds)
+	stone.set("sink_distance", CH_SINK)
+
+
+func _apply_stand() -> void:
+	if stand == "chasm":
+		if _crossing == null:
+			_build_crossing()
+		_build_crown()
+		_update_tablet()
+	else:
+		_teardown_crossing()
+	set_process(_crossing != null or _crown != null)
+
+
+func _teardown_crossing() -> void:
+	for s in _stones:
+		if is_instance_valid(s):
+			(s as Node).get_parent().remove_child(s)
+			(s as Node).queue_free()
+	_stones.clear()
+	if _crossing != null and is_instance_valid(_crossing):
+		remove_child(_crossing)
+		_crossing.queue_free()
+	_crossing = null
+	_tablet = null
+	_seed_cut = null
+	_idol_material = null
+
+
+## Half the pit, across and along, derived so the row and the hole agree: the
+## stones lap each lip by CH_LAP, and the width is the room's to set (`size`).
+func _pit_half() -> Vector2:
+	var along: float = float(stone_count - 1) * CH_PITCH * 0.5 + 0.5 - CH_LAP
+	return Vector2(max(1.5, pit_width * 0.5), along)
+
+
+## What the museum leaves out. Sandstone the colour of a dry riverbed: the bed a
+## metre down, the ramp back out of it, the cut sides, and kerbs at both lips
+## broken where the stones cross — a gate, not a fence.
+func _build_crossing() -> void:
+	var HangarKit := load("res://commons/artifacts/_hangar/hangar_kit.gd")
+	var pit: Vector2 = _pit_half()
+	_crossing = Node3D.new()
+	_crossing.name = "Crossing"
+	_crossing_base_y = 0.0
+	add_child(_crossing)
+
+	var stone_mat: StandardMaterial3D = StandardMaterial3D.new()
+	stone_mat.albedo_color = Color(0.55, 0.47, 0.36)
+	stone_mat.roughness = 0.95
+	var dark_mat: StandardMaterial3D = StandardMaterial3D.new()
+	dark_mat.albedo_color = Color(0.13, 0.12, 0.11)
+	dark_mat.roughness = 0.9
+	var sand_mat: StandardMaterial3D = StandardMaterial3D.new()
+	sand_mat.albedo_color = Color(0.40, 0.35, 0.27)
+	sand_mat.roughness = 1.0
+
+	# the bed: the only floor under the stones, and the whole of what a fall costs
+	var bed_size := Vector3(pit.x * 2.0, 0.08, pit.y * 2.0)
+	var bed_at := Vector3(0.0, CH_BED - 0.04, 0.0)
+	var bed: MeshInstance3D = HangarKit.box(bed_at, bed_size, sand_mat)
+	bed.name = "Bed"
+	_crossing.add_child(bed)
+	var bed_col: StaticBody3D = HangarKit.box_collider(bed_size, bed_at)
+	bed_col.name = "BedCollider"
+	_crossing.add_child(bed_col)
+
+	# the cut sides. West and east run the pit's whole length; the near and far ones
+	# are in two pieces, broken for the width the row needs — with those ends left
+	# open a standing eye looked straight through the pit and out under the hall's
+	# own floor, at the museum's sky (measured 2026-09-12, the first run's captures).
+	var cut_h: float = CH_FLOOR - CH_BED
+	for s in [-1.0, 1.0]:
+		var wall_at := Vector3(s * (pit.x - 0.07), (CH_BED + CH_FLOOR) * 0.5, 0.0)
+		var wall_size := Vector3(0.14, cut_h, pit.y * 2.0)
+		var w: MeshInstance3D = HangarKit.box(wall_at, wall_size, stone_mat)
+		w.name = "Side_%s" % ("west" if s < 0.0 else "east")
+		_crossing.add_child(w)
+		var wc: StaticBody3D = HangarKit.box_collider(wall_size, wall_at)
+		wc.name = "%sCollider" % w.name
+		_crossing.add_child(wc)
+	# The near and far walls run the FULL width, their tops four centimetres under the
+	# hall's floor: a gate left open for the row let a standing eye look straight
+	# through both ends and out under the floor at the sky (two runs, 12 September).
+	# The end stones lap these walls by CH_LAP with that clearance, which is also the
+	# step a body takes from the floor onto the first stone.
+	for s in [-1.0, 1.0]:
+		var end_at := Vector3(0.0, (CH_BED + CH_FLOOR - 0.04) * 0.5, s * (pit.y - 0.07))
+		var end_size := Vector3(pit.x * 2.0, cut_h - 0.04, 0.14)
+		var e: MeshInstance3D = HangarKit.box(end_at, end_size, stone_mat)
+		e.name = "End_%s" % ("near" if s < 0.0 else "far")
+		_crossing.add_child(e)
+		var ec: StaticBody3D = HangarKit.box_collider(end_size, end_at)
+		ec.name = "%sCollider" % e.name
+		_crossing.add_child(ec)
+
+	# the way out: a ramp up the pit's west third, from the bed to the near lip
+	_crossing.add_child(_ramp(Vector3(-pit.x * 0.66, CH_BED, pit.y - 0.4),
+			Vector3(-pit.x * 0.66, CH_FLOOR, -pit.y - 0.2), 1.0, sand_mat, "WayOut"))
+
+	# a worn threshold at each lip, so the step up onto the row is a slope and not a
+	# wall for any body the engine will not lift
+	for s in [-1.0, 1.0]:
+		_crossing.add_child(_ramp(Vector3(0.0, CH_FLOOR, s * (pit.y + 0.34)),
+				Vector3(0.0, CH_FLOOR + CH_PROUD, s * (pit.y - 0.04)), 1.0, stone_mat,
+				"Threshold_%s" % ("near" if s < 0.0 else "far")))
+
+	# kerbs on both lips, broken for the width of the row: a gate, not a fence
+	for s in [-1.0, 1.0]:
+		for side in [-1.0, 1.0]:
+			var run: float = (pit.x - 0.72) * 0.5
+			var k: MeshInstance3D = HangarKit.box(
+					Vector3(side * (0.72 + run), CH_FLOOR + 0.06, s * (pit.y + 0.09)),
+					Vector3(run * 2.0, 0.12, 0.18), stone_mat)
+			k.name = "Kerb_%s_%s" % [("n" if s < 0.0 else "s"), ("w" if side < 0.0 else "e")]
+			_crossing.add_child(k)
+
+	_build_stele(HangarKit, pit, stone_mat, dark_mat)
+	_build_tablet(HangarKit, pit, dark_mat)
+	_build_controls(pit)
+	_build_idol(HangarKit, pit, stone_mat, dark_mat)
+	for bz in [Vector3(-(pit.x - 0.30), CH_FLOOR, -pit.y - 0.78), Vector3(pit.x - 0.30, CH_FLOOR, pit.y + 0.78)]:
+		_build_brazier(HangarKit, bz, dark_mat)
+	_spawn_stones()
+
+
+## A walkable slab from a to b, both points on its top surface, with a collider
+## that matches. Godot's looking_at does the aiming, so a ramp is one call.
+func _ramp(a: Vector3, b: Vector3, width: float, mat: Material, node_name: String) -> Node3D:
+	var HangarKit := load("res://commons/artifacts/_hangar/hangar_kit.gd")
+	var holder := Node3D.new()
+	holder.name = node_name
+	holder.position = (a + b) * 0.5
+	holder.basis = Basis.looking_at(b - a, Vector3.UP)
+	var run: float = (b - a).length()
+	var size := Vector3(width, 0.14, run)
+	holder.add_child(HangarKit.box(Vector3(0.0, -0.07, 0.0), size, mat))
+	var col: StaticBody3D = HangarKit.box_collider(size, Vector3(0.0, -0.07, 0.0))
+	holder.add_child(col)
+	return holder
+
+
+## THE ORDER, cut in stone on the watch ledge: four steps, fixed, public, and
+## true of every stone in the row. Nothing here is drawn.
+func _build_stele(HangarKit, pit: Vector2, stone_mat: Material, dark_mat: Material) -> void:
+	var stele := Node3D.new()
+	stele.name = "Stele"
+	stele.position = Vector3(2.02, CH_FLOOR, -pit.y - 0.86)
+	stele.rotation_degrees = Vector3(0, 122, 0)
+	stele.set_meta("em_local_instrument", true)
+	_crossing.add_child(stele)
+	var slab: MeshInstance3D = HangarKit.box(Vector3(0, 0.66, 0), Vector3(1.16, 1.32, 0.13), stone_mat)
+	slab.name = "Slab"
+	stele.add_child(slab)
+	var head: MeshInstance3D = HangarKit.stencil("THE ORDER IS CUT IN STONE", Vector2(0.90, 0.052), Color(0.16, 0.14, 0.12))
+	if head:
+		head.position = Vector3(0, 1.18, 0.068)
+		stele.add_child(head)
+	var steps := ["I   IT STANDS", "II  IT LEAVES", "III IT IS GONE", "IV  IT RETURNS"]
+	for i in range(steps.size()):
+		var line: MeshInstance3D = HangarKit.stencil(steps[i], Vector2(0.80, 0.080), Color(0.17, 0.15, 0.13))
+		if line:
+			line.position = Vector3(0, 0.99 - 0.175 * float(i), 0.068)
+			stele.add_child(line)
+	var foot: MeshInstance3D = HangarKit.stencil("ONLY THE WAITS ARE DRAWN", Vector2(0.86, 0.048), Color(0.21, 0.17, 0.14))
+	if foot:
+		foot.position = Vector3(0, 0.22, 0.068)
+		stele.add_child(foot)
+
+
+## THE DRAWN WAITS, live, on a lectern at the chasm's lip: a visitor standing on
+## the ledge reads the tablet with the stones themselves right behind it.
+func _build_tablet(HangarKit, pit: Vector2, dark_mat: Material) -> void:
+	var root := Node3D.new()
+	root.name = "Tablet"
+	root.position = Vector3(-1.38, CH_FLOOR + 0.94, -pit.y - 0.34)
+	root.rotation_degrees = Vector3(-20, 155, 0)
+	root.set_meta("em_local_instrument", true)
+	_crossing.add_child(root)
+	var plate: MeshInstance3D = HangarKit.box(Vector3.ZERO, Vector3(0.84, 0.40, 0.016), dark_mat)
+	plate.name = "Plate"
+	root.add_child(plate)
+	var cap: MeshInstance3D = HangarKit.stencil("DRAWN, THIS CYCLE", Vector2(0.44, 0.030), Color(0.92, 0.74, 0.42))
+	if cap:
+		cap.position = Vector3(-0.18, 0.163, 0.012)
+		root.add_child(cap)
+	_tablet = Label3D.new()
+	_tablet.name = "Text"
+	_tablet.pixel_size = 0.0011
+	_tablet.font_size = 20
+	_tablet.line_spacing = 0.6
+	_tablet.modulate = Color(0.88, 0.95, 1.0)
+	_tablet.outline_size = 4
+	_tablet.outline_modulate = Color(0, 0, 0, 1)
+	_tablet.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_tablet.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	_tablet.position = Vector3(-0.395, 0.128, 0.011)
+	root.add_child(_tablet)
+
+
+## REPLAY the same rhythm, draw a NEW one, or change what the stones tell you
+## before they go. On the watch ledge, where the planning happens.
+func _build_controls(pit: Vector2) -> void:
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	if RackTpl == null:
+		return
+	var panel: Node3D = RackTpl.create_panel("", [
+		[{"type": "button", "label": "REPLAY"}, {"type": "button", "label": "NEW SEED"}],
+		[{"type": "button", "label": "CUE"}],
+	], true)
+	panel.name = "Controls"
+	panel.set_meta("em_local_instrument", true)
+	panel.position = Vector3(1.24, CH_FLOOR + 0.86, -pit.y - 0.50)
+	panel.rotation_degrees = Vector3(-34, 180, 0)
+	panel.scale = Vector3(1.5, 1.5, 1.5)
+	_crossing.add_child(panel)
+	var actions := {"Btn_0": func(): replay_crossing(), "Btn_1": func(): new_crossing(), "Btn_2": func(): toggle_cue()}
+	for btn_name in actions.keys():
+		var btn: Node = panel.find_child(btn_name, true, false)
+		if btn == null:
+			continue
+		var area: Node = btn.get_node_or_null("InteractableAreaButton")
+		if area != null and area.has_signal("button_pressed"):
+			var action: Callable = actions[btn_name]
+			area.button_pressed.connect(func(_b): action.call())
+
+
+## The reason to cross: a plinth on the far platform with a lit form on it, and
+## the crossing's five-digit name cut into the face that looks back at the row.
+## What you carry out of a trap room is the ability to run it again.
+func _build_idol(HangarKit, pit: Vector2, stone_mat: Material, dark_mat: Material) -> void:
+	var root := Node3D.new()
+	root.name = "Idol"
+	root.position = Vector3(0.0, CH_FLOOR, pit.y + 0.72)
+	_crossing.add_child(root)
+	var plinth: MeshInstance3D = HangarKit.box(Vector3(0, 0.40, 0), Vector3(0.54, 0.80, 0.54), stone_mat)
+	plinth.name = "Plinth"
+	root.add_child(plinth)
+	_idol_material = HangarKit.emissive(Color(1.0, 0.78, 0.30), 2.2)
+	var form := MeshInstance3D.new()
+	form.name = "Form"
+	var prism := PrismMesh.new()
+	prism.size = Vector3(0.26, 0.34, 0.26)
+	form.mesh = prism
+	form.material_override = _idol_material
+	form.position = Vector3(0, 0.98, 0)
+	root.add_child(form)
+	var glow := OmniLight3D.new()
+	glow.name = "IdolLight"
+	glow.light_color = Color(1.0, 0.82, 0.45)
+	glow.light_energy = 1.5
+	glow.omni_range = 4.0
+	glow.shadow_enabled = false
+	glow.position = Vector3(0, 1.10, 0)
+	root.add_child(glow)
+	var cut := Node3D.new()
+	cut.name = "SeedCut"
+	cut.position = Vector3(0.0, 0.52, -0.28)
+	cut.rotation_degrees = Vector3(0, 180, 0)
+	root.add_child(cut)
+	_seed_cut = Label3D.new()
+	_seed_cut.name = "Text"
+	_seed_cut.pixel_size = 0.0014
+	_seed_cut.font_size = 30
+	_seed_cut.modulate = Color(0.96, 0.86, 0.62)
+	_seed_cut.outline_size = 5
+	_seed_cut.outline_modulate = Color(0.10, 0.08, 0.06, 1)
+	_seed_cut.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	cut.add_child(_seed_cut)
+
+
+func _build_brazier(HangarKit, at: Vector3, dark_mat: Material) -> void:
+	var root := Node3D.new()
+	root.name = "Brazier_%d" % _crossing.get_children().filter(func(c): return str(c.name).begins_with("Brazier")).size()
+	root.position = at
+	_crossing.add_child(root)
+	var stem := MeshInstance3D.new()
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = 0.16
+	cyl.bottom_radius = 0.10
+	cyl.height = 0.86
+	stem.mesh = cyl
+	stem.material_override = dark_mat
+	stem.position = Vector3(0, 0.43, 0)
+	root.add_child(stem)
+	var coals := MeshInstance3D.new()
+	coals.name = "Coals"
+	var bowl := SphereMesh.new()
+	bowl.radius = 0.15
+	bowl.height = 0.18
+	coals.mesh = bowl
+	coals.material_override = HangarKit.emissive(Color(1.0, 0.42, 0.12), 1.1)
+	coals.position = Vector3(0, 0.90, 0)
+	root.add_child(coals)
+	var fire := OmniLight3D.new()
+	fire.name = "Fire"
+	fire.light_color = Color(1.0, 0.66, 0.34)
+	fire.light_energy = 2.2
+	fire.omni_range = 7.5
+	fire.shadow_enabled = false
+	fire.position = Vector3(0, 1.02, 0)
+	root.add_child(fire)
+
+
+## The other stones: this cube's own siblings, one scene each, every one of them
+## seeded from the crossing's number so the row is a rhythm and not a mess. They
+## are handed the crossing's bands before they enter the tree, so their own
+## _ready reads them; their `stand` stays none, so none of them stages anything.
+func _spawn_stones() -> void:
+	_stones.clear()
+	var scene: PackedScene = load("res://commons/primitives/cubes/random_cycle_cube.tscn")
+	var half: int = int((stone_count - 1) / 2)
+	for i in range(-half, half + 1):
+		# near lip to far, this cube taking its place in the row at local z 0. It is
+		# appended in order rather than sorted: its own position is the hall's,
+		# while the siblings' are the crossing's, and the two do not compare.
+		if i == 0:
+			_stones.append(self)
+			continue
+		if scene == null:
+			continue
+		var stone: Node3D = scene.instantiate()
+		stone.name = "Stone_%d" % (i + half)
+		_adopt_crossing_timing(stone)
+		stone.set("cycle_seed", _crossing_rng.randi_range(1, 1 << 30))
+		stone.set("warning", "none")
+		stone.position = Vector3(0.0, 0.0, CH_PITCH * float(i))
+		_crossing.add_child(stone)
+		_stones.append(stone)
+
+
+## A crown ring, built only when a cue was asked for: lit while the stone still
+## stands and the stored deadline is inside the notice window. The beacon says
+## "I am leaving" as it leaves; this says "I am about to".
+func _build_crown() -> void:
+	if _crown != null and is_instance_valid(_crown):
+		_crown.get_parent().remove_child(_crown)
+		_crown.queue_free()
+		_crown = null
+		_crown_material = null
+	if advance_seconds <= 0.0:
+		set_process(_crossing != null)
+		return
+	set_process(true)
+	_crown_material = StandardMaterial3D.new()
+	_crown_material.albedo_color = Color(1.0, 0.86, 0.32, 0.95)
+	_crown_material.emission_enabled = true
+	_crown_material.emission = Color(1.0, 0.80, 0.26)
+	_crown_material.emission_energy_multiplier = 3.2
+	_crown_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_crown = MeshInstance3D.new()
+	_crown.name = "Crown"
+	var ring := TorusMesh.new()
+	ring.inner_radius = 0.40
+	ring.outer_radius = 0.50
+	ring.rings = 20
+	ring.ring_segments = 8
+	_crown.mesh = ring
+	_crown.material_override = _crown_material
+	_crown.position = Vector3(0, 0.54, 0)
+	_crown.visible = false
+	add_child(_crown)
+
+
+## Two things a staged cube owes the room every frame: the apron must not sink
+## when this stone does (it is the stone's child, so the sink is cancelled out of
+## the staging's own offset), and the crown must answer the stored deadline.
+func _process(_delta: float) -> void:
+	if _crown != null and is_instance_valid(_crown):
+		var left: float = float(_step_until_ms - Time.get_ticks_msec()) / 1000.0
+		_crown.visible = advance_seconds > 0.0 and _step_kind == "stands" and left <= advance_seconds and left > -0.05
+	if _crossing == null or not is_instance_valid(_crossing):
+		return
+	_crossing.position.y = _crossing_base_y - (position.y - _base_position.y)
+	_tablet_due -= _delta
+	if _tablet_due <= 0.0:
+		_tablet_due = 0.12
+		_update_tablet()
+
+
+## The tablet: one line per stone, west to east — which step it is in, the wait
+## that was DRAWN for this one, and how much of it is left. The bar is the same
+## number twice: what the draw gave, and what the clock has taken from it.
+func _update_tablet() -> void:
+	if _tablet == null or not is_instance_valid(_tablet):
+		return
+	var lines: PackedStringArray = PackedStringArray()
+	for i in range(_stones.size()):
+		var st: Node = _stones[i]
+		if not is_instance_valid(st):
+			continue
+		var s: Dictionary = st.call("step_state")
+		var bars: int = 0
+		if float(s["wait"]) > 0.0:
+			bars = int(round(8.0 * clampf(float(s["left"]) / float(s["wait"]), 0.0, 1.0)))
+		var mark: String = "|".repeat(bars) + ".".repeat(8 - bars)
+		lines.append("%d  %-6s drawn %4.1f s  left %4.1f  %s%s" % [
+			i + 1, ("STANDS" if str(s["step"]) == "stands" else "GONE"),
+			float(s["wait"]), float(s["left"]), mark,
+			"  <" if bool(s["crown"]) else "",
+		])
+	lines.append("seed %d · cue %s" % [crossing_seed, ("advance %.1f s" % advance_seconds) if advance_seconds > 0.0 else "beacon only"])
+	_tablet.text = "\n".join(lines)
+	if _seed_cut != null and is_instance_valid(_seed_cut):
+		_seed_cut.text = "SEED\n%d" % crossing_seed
+
+
+## The same rhythm again: every stone re-seeded from the crossing's number in the
+## order it was dealt, every loop restarted. A crossing you can practise.
+func replay_crossing() -> void:
+	if stand != "chasm":
+		return
+	_crossing_rng = RandomNumberGenerator.new()
+	_crossing_rng.seed = crossing_seed
+	cycle_seed = _crossing_rng.randi_range(1, 1 << 30)
+	_rng.seed = cycle_seed
+	_cycles_done = 0
+	_restart_cycle_loop()
+	for s in _stones:
+		if s == self or not is_instance_valid(s):
+			continue
+		s.set("cycle_seed", _crossing_rng.randi_range(1, 1 << 30))
+		s.call("restart_from_seed")
+	_update_tablet()
+
+
+## Another rhythm, named: a new five-digit seed, the same room.
+func new_crossing() -> void:
+	if stand != "chasm":
+		return
+	var namer := RandomNumberGenerator.new()
+	namer.randomize()
+	crossing_seed = namer.randi_range(10000, 99999)
+	replay_crossing()
+
+
+## What the stones tell you before they go: the shipped beacon, or a crown timed
+## from the stored deadline. Both, always, on every stone at once.
+func toggle_cue() -> void:
+	advance_seconds = 0.0 if advance_seconds > 0.0 else CROSSING_ADVANCE
+	_build_crown()
+	for s in _stones:
+		if s == self or not is_instance_valid(s):
+			continue
+		s.set("advance_seconds", advance_seconds)
+		s.call("_build_crown")
+	_update_tablet()
+
+
+## Re-seed and restart, for a stone the crossing owns.
+func restart_from_seed() -> void:
+	_rng.seed = cycle_seed
+	_cycles_done = 0
+	_restart_cycle_loop()
+
+
+## The whole crossing as the room can read it: the seed, the cue, the geometry a
+## body has to trust, and every stone's drawn wait and stored deadline.
+func crossing_state() -> Dictionary:
+	var pit: Vector2 = _pit_half()
+	var stones: Array = []
+	for i in range(_stones.size()):
+		var st: Node = _stones[i]
+		if not is_instance_valid(st):
+			continue
+		var s: Dictionary = st.call("step_state")
+		s["z"] = 0.0 if st == self else snappedf((st as Node3D).position.z, 0.01)
+		s["seed"] = int(st.get("cycle_seed"))
+		stones.append(s)
+	return {
+		"seed": crossing_seed,
+		"cue": "advance" if advance_seconds > 0.0 else "beacon",
+		"advance_seconds": advance_seconds,
+		"stones": stones,
+		"stands_band": [CH_STANDS.x, CH_STANDS.y],
+		"gone_band": [CH_GONE.x, CH_GONE.y],
+		"geometry": {
+			"floor": CH_FLOOR, "bed": CH_BED, "drop": snappedf(CH_FLOOR - CH_BED, 0.01), "proud": CH_PROUD,
+			"pitch": CH_PITCH, "gap": snappedf(CH_PITCH - 1.0, 0.01), "lap": CH_LAP,
+			"pit_across": snappedf(pit.x * 2.0, 0.01), "pit_along": snappedf(pit.y * 2.0, 0.01),
+			"sink": CH_SINK, "stone_count": stone_count,
+		},
+	}

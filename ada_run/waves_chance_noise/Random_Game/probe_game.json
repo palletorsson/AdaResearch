@@ -1,0 +1,1817 @@
+{
+  "checks": 47,
+  "control_path": "REPLAY / NEW SEED / CUE through InteractableAreaButton.button_pressed (one argument); the live port presses all three through the desktop pointer and walks the row",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "Random_Game",
+  "measurements": {
+    "bodies": [
+      {
+        "at": [
+          7.5,
+          1.7,
+          -3.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "large_window.gd",
+        "token": "lobby:window"
+      },
+      {
+        "at": [
+          7.5,
+          1.7,
+          -2.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "animated_folding_past.gd",
+        "token": "lobby:view"
+      },
+      {
+        "at": [
+          11.0,
+          1.6,
+          -2.94
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "frame_counter_display.gd",
+        "token": "lobby:counter"
+      },
+      {
+        "at": [
+          1.14,
+          0.0,
+          -1.4
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "fire_extinguisher.gd",
+        "token": "lobby:extinguisher"
+      },
+      {
+        "at": [
+          15.94,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "station_door.gd",
+        "token": "lobby:elevator"
+      },
+      {
+        "at": [
+          15.1,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "wooden_pallet.gd",
+        "token": "lobby:pallet"
+      },
+      {
+        "at": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "origin.gd",
+        "token": "lobby:point_zero"
+      },
+      {
+        "at": [
+          3.5,
+          0.08,
+          1.5
+        ],
+        "cell": [
+          3,
+          1
+        ],
+        "scale": 1.0,
+        "script": "miura_crawler.gd",
+        "token": "miura_crawler"
+      },
+      {
+        "at": [
+          3.5,
+          -0.28,
+          4.5
+        ],
+        "cell": [
+          3,
+          4
+        ],
+        "scale": 1.0,
+        "script": "random_cycle_cube.gd",
+        "token": "r_c"
+      },
+      {
+        "at": [
+          2.5,
+          0.24,
+          7.5
+        ],
+        "cell": [
+          2,
+          7
+        ],
+        "scale": 0.74,
+        "script": "armadillo_eggling.gd",
+        "token": "armadillo_eggling"
+      },
+      {
+        "at": [
+          7.5,
+          0.36,
+          7.5
+        ],
+        "cell": [
+          7,
+          7
+        ],
+        "scale": 1.0,
+        "script": "origami_droideka.gd",
+        "token": "origami_droideka"
+      },
+      {
+        "at": [
+          2.5,
+          0.27,
+          8.5
+        ],
+        "cell": [
+          2,
+          8
+        ],
+        "scale": 1.0,
+        "script": "scissor_stalker.gd",
+        "token": "scissor_stalker"
+      },
+      {
+        "at": [
+          4.5,
+          0.16,
+          10.5
+        ],
+        "cell": [
+          4,
+          10
+        ],
+        "scale": 1.0,
+        "script": "kaleidocycle_enemy.gd",
+        "token": "kaleidocycle_enemy"
+      },
+      {
+        "at": [
+          6.5,
+          0.0,
+          12.5
+        ],
+        "cell": [
+          6,
+          12
+        ],
+        "scale": 1.0,
+        "script": "CubeSpawner.gd",
+        "token": "cube_projectile_spawner"
+      },
+      {
+        "at": [
+          12.5,
+          0.56,
+          13.5
+        ],
+        "cell": [
+          12,
+          13
+        ],
+        "scale": 1.0,
+        "script": "kresling_spire.gd",
+        "token": "kresling_spire"
+      },
+      {
+        "at": [
+          7.5,
+          0.0,
+          0.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "station_door.gd",
+        "token": "gate:random game"
+      },
+      {
+        "at": [
+          10.0,
+          1.58,
+          19.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          8.0,
+          1.58,
+          19.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          2.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          2.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          11.99,
+          1.58,
+          20.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          13.99,
+          1.58,
+          2.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.01,
+          1.58,
+          19.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          8.99,
+          1.58,
+          18.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          4.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          7.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          13.99,
+          1.58,
+          4.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          10.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          9.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.5,
+          3.52,
+          -1.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "exit_sign.gd",
+        "token": "exit_sign"
+      },
+      {
+        "at": [
+          7.5,
+          3.0,
+          20.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "exit_sign.gd",
+        "token": "exit_sign"
+      },
+      {
+        "at": [
+          1.02,
+          2.25,
+          -3.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "wall_clock.gd",
+        "token": "wall_clock"
+      },
+      {
+        "at": [
+          1.0,
+          1.7,
+          15.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "info_screen.gd",
+        "token": "info_screen"
+      },
+      {
+        "at": [
+          1.0,
+          1.5,
+          -2.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "electrical_panel.gd",
+        "token": "electrical_panel"
+      },
+      {
+        "at": [
+          3.75,
+          4.64,
+          6.23
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "ceiling_vent.gd",
+        "token": "ceiling_vent"
+      },
+      {
+        "at": [
+          7.5,
+          4.36,
+          13.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "cable_tray.gd",
+        "token": "cable_tray"
+      },
+      {
+        "at": [
+          6.5,
+          0.0,
+          1.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "floor_grate.gd",
+        "token": "floor_grate"
+      },
+      {
+        "at": [
+          3.5,
+          0.42,
+          15.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "dream_bodies.gd",
+        "token": "dream_bodies"
+      },
+      {
+        "at": [
+          11.5,
+          0.42,
+          5.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "dream_bodies.gd",
+        "token": "dream_bodies"
+      },
+      {
+        "at": [
+          7.5,
+          0.42,
+          3.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "dream_bodies.gd",
+        "token": "dream_bodies"
+      },
+      {
+        "at": [
+          10.5,
+          0.42,
+          2.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "dream_bodies.gd",
+        "token": "dream_bodies"
+      }
+    ],
+    "bypass": {
+      "doorway": "1",
+      "far_lip_reached": true,
+      "pit_cells": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      "reached_cells": 172
+    },
+    "captures": {
+      "approach": {
+        "at": [
+          7.0,
+          1.6,
+          1.2
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2961",
+        "forward": [
+          -0.7,
+          -0.23,
+          0.68
+        ],
+        "is_ours": true
+      },
+      "bed": {
+        "at": [
+          2.1,
+          -0.55,
+          4.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2961",
+        "forward": [
+          0.83,
+          0.56,
+          0.0
+        ],
+        "is_ours": true
+      },
+      "idol": {
+        "at": [
+          3.5,
+          1.05,
+          5.37
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2961",
+        "forward": [
+          0.0,
+          -0.15,
+          0.99
+        ],
+        "is_ours": true
+      },
+      "plan": {
+        "at": [
+          6.5,
+          15.0,
+          7.0
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2961",
+        "forward": [
+          -0.01,
+          -1.0,
+          0.01
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          3.15,
+          1.6,
+          1.85
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2961",
+        "forward": [
+          0.09,
+          -0.4,
+          0.91
+        ],
+        "is_ours": true
+      },
+      "row": {
+        "at": [
+          3.5,
+          0.55,
+          2.35
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2961",
+        "forward": [
+          0.0,
+          -0.22,
+          0.98
+        ],
+        "is_ours": true
+      },
+      "stele": {
+        "at": [
+          6.5,
+          1.3,
+          1.53
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2961",
+        "forward": [
+          -0.77,
+          -0.41,
+          0.48
+        ],
+        "is_ours": true
+      },
+      "tablet": {
+        "at": [
+          2.12,
+          1.36,
+          1.94
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2961",
+        "forward": [
+          0.0,
+          -0.5,
+          0.86
+        ],
+        "is_ours": true
+      }
+    },
+    "crossing": {
+      "advance_seconds": 1.2,
+      "cue": "advance",
+      "geometry": {
+        "bed": -0.74,
+        "drop": 1.02,
+        "floor": 0.28,
+        "gap": 0.12,
+        "lap": 0.12,
+        "pit_across": 5.0,
+        "pit_along": 3.0,
+        "pitch": 1.12,
+        "proud": 0.22,
+        "sink": 1.22,
+        "stone_count": 3
+      },
+      "gone_band": [
+        1.10000002384186,
+        2.20000004768372
+      ],
+      "seed": 34504,
+      "stands_band": [
+        2.40000009536743,
+        4.59999990463257
+      ],
+      "stones": [
+        {
+          "crown": false,
+          "cycles": 0,
+          "left": 0.32,
+          "seed": 732672811,
+          "standing": true,
+          "step": "stands",
+          "supports": true,
+          "wait": 3.04,
+          "z": -1.12
+        },
+        {
+          "crown": false,
+          "cycles": 0,
+          "left": 0.0,
+          "seed": 578624811,
+          "standing": true,
+          "step": "stands",
+          "supports": true,
+          "wait": 2.61,
+          "z": 0.0
+        },
+        {
+          "crown": false,
+          "cycles": 0,
+          "left": 1.34,
+          "seed": 654145823,
+          "standing": true,
+          "step": "stands",
+          "supports": true,
+          "wait": 4.06,
+          "z": 1.12
+        }
+      ]
+    },
+    "crown_moments": [
+      {
+        "left": 1.06,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 0.81,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 0.56,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 0.31,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 0.06,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 1.1,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 0.83,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 0.56,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 0.3,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 0.03,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 1.04,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 0.77,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 0.49,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 0.23,
+        "step": "stands",
+        "supports": true
+      },
+      {
+        "left": 0.0,
+        "step": "stands",
+        "supports": true
+      }
+    ],
+    "draws": {
+      "gone": [
+        1.15,
+        1.72,
+        1.17,
+        2.18
+      ],
+      "stands": [
+        2.61,
+        3.26,
+        4.28,
+        3.99
+      ]
+    },
+    "museum_severed": [
+      {
+        "cells": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "token": "r_c"
+      }
+    ],
+    "museum_walk_severed": [],
+    "new_seed": {
+      "now": 38066,
+      "stone_seeds": [
+        123513942,
+        599019246,
+        124780787
+      ],
+      "was": 34504
+    },
+    "pit_rays": [
+      {
+        "at": [
+          4.40000009536743,
+          4.5
+        ],
+        "below_floor": 1.02,
+        "hit": "BedCollider"
+      },
+      {
+        "at": [
+          2.0,
+          3.59999990463257
+        ],
+        "below_floor": 0.3,
+        "hit": "Collider"
+      },
+      {
+        "at": [
+          3.5,
+          4.5
+        ],
+        "below_floor": -0.22,
+        "hit": "ColliderBody"
+      },
+      {
+        "at": "standing eye down the row",
+        "below_floor": -0.22,
+        "hit": "ColliderBody"
+      }
+    ],
+    "plinths": [
+      [
+        "ArtPlinth0",
+        3,
+        15,
+        0.0
+      ],
+      [
+        "ArtPlinth1",
+        11,
+        5,
+        0.0
+      ],
+      [
+        "ArtPlinth2",
+        7,
+        3,
+        0.0
+      ],
+      [
+        "ArtPlinth3",
+        10,
+        2,
+        0.0
+      ]
+    ],
+    "replay": {
+      "first": [
+        732672811,
+        578624811,
+        654145823
+      ],
+      "second": [
+        732672811,
+        578624811,
+        654145823
+      ],
+      "seed": 34504
+    },
+    "stele_children": 7,
+    "tablet": [
+      "1  STANDS drawn  4.0 s  left  3.6  |||||||.",
+      "2  STANDS drawn  2.9 s  left  2.6  |||||||.",
+      "3  STANDS drawn  4.3 s  left  3.9  |||||||.",
+      "seed 38066 · cue advance 1.2 s"
+    ],
+    "tile": [
+      "444444111444444",
+      "411111110111114",
+      "411111111111114",
+      "400000110111114",
+      "400000110111114",
+      "400000111111114",
+      "411111111111114",
+      "411111010111114",
+      "411111010111114",
+      "411111111111114",
+      "411111111111114",
+      "411111010111114",
+      "411111010111114",
+      "411111111111114",
+      "411111111111114",
+      "411111111111114",
+      "400000010000004",
+      "444444111444444",
+      "444444411444444",
+      "444444411111444",
+      "444444444411444"
+    ],
+    "tile_top_above_floor": 0.21,
+    "watch": [
+      {
+        "crown": false,
+        "cycles": 0,
+        "left": 0.0,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 0.0,
+        "wait": 2.61
+      },
+      {
+        "crown": false,
+        "cycles": 0,
+        "left": 0.0,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 0.25,
+        "wait": 2.61
+      },
+      {
+        "crown": false,
+        "cycles": 0,
+        "left": 0.0,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 0.5,
+        "wait": 2.61
+      },
+      {
+        "crown": false,
+        "cycles": 0,
+        "left": 0.0,
+        "standing": false,
+        "step": "stands",
+        "supports": true,
+        "t": 0.75,
+        "wait": 2.61
+      },
+      {
+        "crown": false,
+        "cycles": 0,
+        "left": 0.0,
+        "standing": false,
+        "step": "stands",
+        "supports": true,
+        "t": 1.0,
+        "wait": 2.61
+      },
+      {
+        "crown": false,
+        "cycles": 0,
+        "left": 0.0,
+        "standing": false,
+        "step": "stands",
+        "supports": true,
+        "t": 1.25,
+        "wait": 2.61
+      },
+      {
+        "crown": false,
+        "cycles": 0,
+        "left": 1.04,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 1.5,
+        "wait": 1.15
+      },
+      {
+        "crown": false,
+        "cycles": 0,
+        "left": 0.77,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 1.75,
+        "wait": 1.15
+      },
+      {
+        "crown": false,
+        "cycles": 0,
+        "left": 0.51,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 2.0,
+        "wait": 1.15
+      },
+      {
+        "crown": false,
+        "cycles": 0,
+        "left": 0.24,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 2.25,
+        "wait": 1.15
+      },
+      {
+        "crown": false,
+        "cycles": 0,
+        "left": 0.0,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 2.5,
+        "wait": 1.15
+      },
+      {
+        "crown": false,
+        "cycles": 0,
+        "left": 0.0,
+        "standing": false,
+        "step": "gone",
+        "supports": true,
+        "t": 2.75,
+        "wait": 1.15
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 3.13,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 3.0,
+        "wait": 3.26
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 2.86,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 3.25,
+        "wait": 3.26
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 2.6,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 3.5,
+        "wait": 3.26
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 2.33,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 3.75,
+        "wait": 3.26
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 2.06,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 4.0,
+        "wait": 3.26
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 1.81,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 4.25,
+        "wait": 3.26
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 1.56,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 4.5,
+        "wait": 3.26
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 1.31,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 4.75,
+        "wait": 3.26
+      },
+      {
+        "crown": true,
+        "cycles": 1,
+        "left": 1.06,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 5.0,
+        "wait": 3.26
+      },
+      {
+        "crown": true,
+        "cycles": 1,
+        "left": 0.81,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 5.25,
+        "wait": 3.26
+      },
+      {
+        "crown": true,
+        "cycles": 1,
+        "left": 0.56,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 5.5,
+        "wait": 3.26
+      },
+      {
+        "crown": true,
+        "cycles": 1,
+        "left": 0.31,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 5.75,
+        "wait": 3.26
+      },
+      {
+        "crown": true,
+        "cycles": 1,
+        "left": 0.06,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 6.0,
+        "wait": 3.26
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 0.0,
+        "standing": false,
+        "step": "stands",
+        "supports": true,
+        "t": 6.25,
+        "wait": 3.26
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 0.0,
+        "standing": false,
+        "step": "stands",
+        "supports": true,
+        "t": 6.5,
+        "wait": 3.26
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 0.0,
+        "standing": false,
+        "step": "stands",
+        "supports": true,
+        "t": 6.75,
+        "wait": 3.26
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 1.45,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 7.0,
+        "wait": 1.72
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 1.2,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 7.25,
+        "wait": 1.72
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 0.94,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 7.5,
+        "wait": 1.72
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 0.67,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 7.75,
+        "wait": 1.72
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 0.4,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 8.0,
+        "wait": 1.72
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 0.13,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 8.25,
+        "wait": 1.72
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 0.0,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 8.5,
+        "wait": 1.72
+      },
+      {
+        "crown": false,
+        "cycles": 1,
+        "left": 0.0,
+        "standing": false,
+        "step": "gone",
+        "supports": true,
+        "t": 8.75,
+        "wait": 1.72
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 4.03,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 9.0,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 3.77,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 9.25,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 3.5,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 9.5,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 3.23,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 9.75,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 2.96,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 10.0,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 2.7,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 10.25,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 2.43,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 10.5,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 2.17,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 10.75,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 1.9,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 11.0,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 1.63,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 11.25,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 1.36,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 11.5,
+        "wait": 4.28
+      },
+      {
+        "crown": true,
+        "cycles": 2,
+        "left": 1.1,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 11.75,
+        "wait": 4.28
+      },
+      {
+        "crown": true,
+        "cycles": 2,
+        "left": 0.83,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 12.0,
+        "wait": 4.28
+      },
+      {
+        "crown": true,
+        "cycles": 2,
+        "left": 0.56,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 12.25,
+        "wait": 4.28
+      },
+      {
+        "crown": true,
+        "cycles": 2,
+        "left": 0.3,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 12.5,
+        "wait": 4.28
+      },
+      {
+        "crown": true,
+        "cycles": 2,
+        "left": 0.03,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 12.75,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 0.0,
+        "standing": false,
+        "step": "stands",
+        "supports": true,
+        "t": 13.0,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 0.0,
+        "standing": false,
+        "step": "stands",
+        "supports": true,
+        "t": 13.25,
+        "wait": 4.28
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 1.12,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 13.5,
+        "wait": 1.17
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 0.86,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 13.75,
+        "wait": 1.17
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 0.59,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 14.0,
+        "wait": 1.17
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 0.32,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 14.25,
+        "wait": 1.17
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 0.05,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 14.5,
+        "wait": 1.17
+      },
+      {
+        "crown": false,
+        "cycles": 2,
+        "left": 0.0,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 14.75,
+        "wait": 1.17
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 3.94,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 15.0,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 3.68,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 15.25,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 3.41,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 15.5,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 3.14,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 15.75,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 2.88,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 16.0,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 2.6,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 16.25,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 2.35,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 16.5,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 2.11,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 16.75,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 1.84,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 17.0,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 1.57,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 17.25,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 1.31,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 17.5,
+        "wait": 3.99
+      },
+      {
+        "crown": true,
+        "cycles": 3,
+        "left": 1.04,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 17.75,
+        "wait": 3.99
+      },
+      {
+        "crown": true,
+        "cycles": 3,
+        "left": 0.77,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 18.0,
+        "wait": 3.99
+      },
+      {
+        "crown": true,
+        "cycles": 3,
+        "left": 0.49,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 18.25,
+        "wait": 3.99
+      },
+      {
+        "crown": true,
+        "cycles": 3,
+        "left": 0.23,
+        "standing": true,
+        "step": "stands",
+        "supports": true,
+        "t": 18.5,
+        "wait": 3.99
+      },
+      {
+        "crown": true,
+        "cycles": 3,
+        "left": 0.0,
+        "standing": false,
+        "step": "stands",
+        "supports": true,
+        "t": 18.75,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 0.0,
+        "standing": false,
+        "step": "stands",
+        "supports": true,
+        "t": 19.0,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 0.0,
+        "standing": false,
+        "step": "stands",
+        "supports": true,
+        "t": 19.25,
+        "wait": 3.99
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 2.06,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 19.5,
+        "wait": 2.18
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 1.83,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 19.75,
+        "wait": 2.18
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 1.56,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 20.0,
+        "wait": 2.18
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 1.29,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 20.25,
+        "wait": 2.18
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 1.03,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 20.5,
+        "wait": 2.18
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 0.76,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 20.75,
+        "wait": 2.18
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 0.49,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 21.0,
+        "wait": 2.18
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 0.23,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 21.25,
+        "wait": 2.18
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 0.0,
+        "standing": false,
+        "step": "gone",
+        "supports": false,
+        "t": 21.5,
+        "wait": 2.18
+      },
+      {
+        "crown": false,
+        "cycles": 3,
+        "left": 0.0,
+        "standing": false,
+        "step": "gone",
+        "supports": true,
+        "t": 21.75,
+        "wait": 2.18
+      }
+    ]
+  },
+  "physics_fps": 60
+}

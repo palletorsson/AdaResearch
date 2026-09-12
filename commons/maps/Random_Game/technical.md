@@ -160,3 +160,21 @@ On death, the arena locks briefly and shows a score summary before offering retr
 ## Score Display
 
 A subtle score readout appears at the edge of the arena, updating without drawing the learner's attention away from the hazard field.
+
+## The crossing staging (2026-09-12)
+
+`commons/primitives/cubes/random_cycle_cube.gd`, opt-in through the map token `r_c#stand:chasm#cue:advance`. Defaults are untouched: at `stand:none` the seven existing placements take the identical path they took before, and `advance_seconds` and `hidden_span_seconds` are both 0, which are the shipped behaviours.
+
+| what | where |
+|---|---|
+| the drawn wait, and its stored deadline | `_next_random_wait(kind)` and `_note_step`; read through `step_state()` |
+| the advance cue | `_build_crown` and `_process`, gated on `advance_seconds > 0` |
+| the pit's geometry | `_pit_half()`, derived from `stone_count` and `pit_width` |
+| the bed, sides, thresholds, kerbs, way out | `_build_crossing` and `_ramp` |
+| the row | `_spawn_stones`, one scene instance per stone, each seeded from the crossing's generator |
+| the two surfaces | `_build_stele` (the order, cut) and `_build_tablet` / `_update_tablet` (the draws, live) |
+| the controls | `_build_controls` — REPLAY, NEW SEED, CUE through `InteractableAreaButton.button_pressed` |
+| the far lip | `_build_idol`, with the crossing's seed cut into the plinth |
+| the whole state, for a probe | `crossing_state()` |
+
+Three numbers hold the vertical arrangement: the hall floor sits at root-local `CH_FLOOR`, a standing stone's top `CH_PROUD` above it, and the bed's top `CH_BED`, one metre and two centimetres under the floor. `CH_SINK` is set so a sunken stone comes to rest two centimetres proud of that bed — the floor that left you is the floor you land on. The staging is the tile's own child and the tile sinks by moving itself, so `_process` cancels the sink out of the staging's offset; and because the map-authored lane places a body's origin on the deck and does not read the token's `y` offset, `_prepare_crossing` lowers the tile itself before anything is built.

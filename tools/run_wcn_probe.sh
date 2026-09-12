@@ -35,7 +35,8 @@ case "${1:-}" in
   walk)     MAP=Random_Walk;                 EXPECT=probe_walk;          SCRIPT=probe_wcn_walk ;;
   gauss)    MAP=Random_Gaussian;             EXPECT=probe_gaussian;      SCRIPT=probe_wcn_gaussian ;;
   mush)     MAP=Random_Mushrooms;            EXPECT=probe_mushrooms;     SCRIPT=probe_wcn_mushrooms ;;
-  *) echo "usage: $0 intro|random|noise|pendulum|sine|effect|air|synth|entropy|entropy_once|remove|walk|gauss|mush [live]"; exit 3 ;;
+  game)     MAP=Random_Game;                  EXPECT=probe_game;          SCRIPT=probe_wcn_game ;;
+  *) echo "usage: $0 intro|random|noise|pendulum|sine|effect|air|synth|entropy|entropy_once|remove|walk|gauss|mush|game [live]"; exit 3 ;;
 esac
 OUT="ada_run/waves_chance_noise/$MAP"
 SUFFIX=""; [ "$MODE" = "live" ] && SUFFIX="_live"

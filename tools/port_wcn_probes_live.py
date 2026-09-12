@@ -13,10 +13,10 @@ import io, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-NAMES = ['intro', 'random_definition', 'noise_pair', 'pendulum', 'sine_space', 'effect_sound', 'air_music', 'synthesis_lab', 'entropy', 'remove', 'walk', 'gaussian', 'mushrooms']
+NAMES = ['intro', 'random_definition', 'noise_pair', 'pendulum', 'sine_space', 'effect_sound', 'air_music', 'synthesis_lab', 'entropy', 'remove', 'walk', 'gaussian', 'mushrooms', 'game']
 JSON_NAMES = {'intro': 'probe_intro', 'random_definition': 'probe_random_definition',
               'noise_pair': 'probe_noise_pair', 'pendulum': 'probe_pendulum', 'sine_space': 'probe_sine_space',
-              'effect_sound': 'probe_effect_sound', 'air_music': 'probe_air_music', 'synthesis_lab': 'probe_synthesis_lab', 'entropy': 'probe_entropy', 'remove': 'probe_remove', 'walk': 'probe_walk', 'gaussian': 'probe_gaussian', 'mushrooms': 'probe_mushrooms'}
+              'effect_sound': 'probe_effect_sound', 'air_music': 'probe_air_music', 'synthesis_lab': 'probe_synthesis_lab', 'entropy': 'probe_entropy', 'remove': 'probe_remove', 'walk': 'probe_walk', 'gaussian': 'probe_gaussian', 'mushrooms': 'probe_mushrooms', 'game': 'probe_game'}
 
 SUBS = [
     (r'^extends SceneTree\s*$', 'extends Node'),
