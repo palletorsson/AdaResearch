@@ -1,103 +1,92 @@
 # Noise Voxel
 
-Sample 3D noise into a voxel grid. Carve solids from density.
+A value, a line, and a decision with two states. Every line below is from `commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd` and `algorithms/randomness/voxelnoise/voxelnoise.gd`, the two artifacts this hall places.
 
-Set up the voxel grid.
-
-```gdscript
-@export var grid_size: Vector3i = Vector3i(32, 32, 32)
-@export var threshold: float = 0.5
-
-var density: Array = []
-
-func initialise() -> void:
-    density.clear()
-    for x in grid_size.x:
-        density.append([])
-        for y in grid_size.y:
-            density[x].append([])
-            for z in grid_size.z:
-                var p := Vector3(x, y, z) * 0.1
-                density[x][y].append(noise.get_noise_3dv(p))
-```
-
-Each voxel stores a noise value. The density field becomes the raw material.
-
-Threshold to binary.
+Write the sampler down once.
 
 ```gdscript
-func is_solid(x: int, y: int, z: int) -> bool:
-    return density[x][y][z] > threshold
+static func contract_noise(seed_value: int, scale: float, octaves: int) -> FastNoiseLite:
+	var n := FastNoiseLite.new()
+	n.noise_type = FastNoiseLite.TYPE_PERLIN
+	n.fractal_type = FastNoiseLite.FRACTAL_FBM
+	n.frequency = scale * 0.1
+	n.fractal_octaves = octaves
+	n.seed = seed_value
+	return n
 ```
 
-Above threshold is solid; below is empty. The threshold decides what the world looks like.
+One basis, made one way, from a named number. Before this pass the bench and the terrain each made their own, and the link between them passed settings rather than samples.
 
-Render solid voxels.
+Ask at a normalised place.
 
 ```gdscript
-func render_voxels() -> void:
-    var multimesh := MultiMesh.new()
-    multimesh.transform_format = MultiMesh.TRANSFORM_3D
-    multimesh.mesh = BoxMesh.new()
-    var solid_voxels: Array = []
-    for x in grid_size.x:
-        for y in grid_size.y:
-            for z in grid_size.z:
-                if is_solid(x, y, z):
-                    solid_voxels.append(Vector3i(x, y, z))
-    multimesh.instance_count = solid_voxels.size()
-    for i in solid_voxels.size():
-        var t := Transform3D.IDENTITY
-        t.origin = Vector3(solid_voxels[i])
-        multimesh.set_instance_transform(i, t)
-    var instance := MultiMeshInstance3D.new()
-    instance.multimesh = multimesh
-    add_child(instance)
+static func contract_value(n: FastNoiseLite, u: float, v: float, w: float) -> float:
+	return n.get_noise_3d(u * CONTRACT_SPAN, v * CONTRACT_SPAN, w * CONTRACT_SPAN)
 ```
 
-MultiMesh is essential at these voxel counts. One draw call for the entire volume.
+`u`, `v` and `w` are where you are INSIDE the display, from 0 to 1. That is the whole of the scale relationship: a 24-cell model and a 32-cell terrain hand the same numbers to the same field, so one is a magnified reading of the other rather than a lookalike.
 
-Cull interior voxels.
+Keep the bias, and name it.
 
 ```gdscript
-func is_visible(x: int, y: int, z: int) -> bool:
-    for axis in [Vector3i(1, 0, 0), Vector3i(-1, 0, 0), Vector3i(0, 1, 0), Vector3i(0, -1, 0), Vector3i(0, 0, 1), Vector3i(0, 0, -1)]:
-        var neighbour: Vector3i = Vector3i(x, y, z) + axis
-        if neighbour.x < 0 or neighbour.x >= grid_size.x: return true
-        if neighbour.y < 0 or neighbour.y >= grid_size.y: return true
-        if neighbour.z < 0 or neighbour.z >= grid_size.z: return true
-        if not is_solid(neighbour.x, neighbour.y, neighbour.z): return true
-    return false
+static func contract_bias(v: float) -> float:
+	return (v - 0.5) * CONTRACT_BIAS_SCALE
 ```
 
-A voxel is visible only if at least one neighbour is empty. Interior cubes are invisible and can be skipped.
+Higher cells are hindered and lower ones helped. This is what makes a terrain rather than a cloud, and it is part of the predicate, so it belongs on the plate beside the value.
 
-Animate threshold.
+Then the line.
 
 ```gdscript
-func _process(delta: float) -> void:
-    threshold = 0.3 + 0.4 * sin(Time.get_ticks_msec() / 1000.0 * 0.5)
-    regenerate()
+static func contract_occupied(value: float, v: float, threshold: float) -> bool:
+	return value - contract_bias(v) > threshold
 ```
 
-The threshold oscillates. The world morphs between sparse clouds and dense blocks.
+Greater-than, and nothing else. Two consequences follow from that one symbol: the answer has exactly two states however finely the value varies, and raising the threshold can only ever take cells away.
 
-Carve out a tunnel.
+Let the receiver use the same four.
 
 ```gdscript
-func carve_tunnel(start: Vector3i, end: Vector3i, radius: int) -> void:
-    var steps: int = int(Vector3(start - end).length())
-    for i in steps:
-        var t: float = float(i) / steps
-        var centre: Vector3 = lerp(Vector3(start), Vector3(end), t)
-        for dx in range(-radius, radius + 1):
-            for dy in range(-radius, radius + 1):
-                for dz in range(-radius, radius + 1):
-                    if Vector3(dx, dy, dz).length() < radius:
-                        var voxel: Vector3i = Vector3i(centre) + Vector3i(dx, dy, dz)
-                        density[voxel.x][voxel.y][voxel.z] = -1.0
+				if _contract:
+					var u := float(x) / float(maxi(1, chunk_size - 1))
+					var v := float(y - 1) / float(maxi(1, world_height - 1))
+					var w := float(z) / float(maxi(1, chunk_size - 1))
+					val = PerlinTerrainSculptor.contract_value(noise, u, v, w)
+					occupied = PerlinTerrainSculptor.contract_occupied(val, v, iso)
+				else:
+					val = noise.get_noise_3d(p.x, p.y, p.z)
+					occupied = val > iso
 ```
 
-Set density to a very negative value, ensuring the voxel is empty. A tunnel runs through the terrain.
+The `else` is the shipped path, kept: without a staged bench handing over the contract, the terrain samples its own coordinates exactly as before.
 
-You can now sample 3D noise into a density field, threshold to voxels, render via MultiMesh, cull interior voxels, animate threshold, and carve tunnels. Noise_6_Wall extends into shader-based fBm rendering.
+Count the pieces, and say what that is worth.
+
+```gdscript
+				var queue: Array = [k]
+				seen[k] = true
+				while not queue.is_empty():
+					var cur: Vector3i = queue.pop_back()
+					size += 1
+```
+
+A flood fill over faces gives the number of separate pieces of the occupied set and the size of the largest. It is a fact about cells touching, and the plate follows it with the sentence that matters: connected is not walkable.
+
+Speak only to your own hall.
+
+```gdscript
+	var hall: Node = _hall_ancestor()
+	for r in get_tree().get_nodes_in_group("voxelnoise_receivers"):
+		if hall != null and not hall.is_ancestor_of(r):
+			continue
+```
+
+`call_group` reaches every receiver in the tree. In a museum that streams several halls at once, that meant a visitor turning this threshold retuned a terrain in a room nobody was standing in.
+
+Stage it in a map.
+
+```
+perlin_terrain_sculptor:180:0.5:1#mount:shelf#stand:lattice
+```
+
+`stand:lattice` names a five-digit seed, takes the contract, and stands the cage, the plate and THRESHOLD, CELL, SEED and CUT. Without the token the bench is what it always was: its own noise at its own coordinates, seeded by `randi()`, with the sliders it shipped with.

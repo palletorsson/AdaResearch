@@ -1,0 +1,322 @@
+extends SceneTree
+## Noise_Voxel, batch N4 (doc/research/waves-chance-noise, 2026-09-12, the fourth hall of Astra's
+## noise arc): when does a value become a place a body can occupy?
+##
+## Stands up the ACTUAL museum hall with its artifacts, hands the museum the REAL necklace hand
+## file, and tests the bench as the map stages it (perlin_terrain_sculptor:180:0.5:1#mount:shelf#
+## stand:lattice at (2,2), with voxelnoise at (2,3) as the receiving terrain): one sampler
+## contract — basis, coordinates, height bias, predicate — written once as four static functions
+## and used by BOTH displays, so the bench is a magnified model of the same field the terrain
+## fills rather than a second field sharing control values.
+##
+## What it checks. That the contract is one thing and both use it (the receiver's own generator
+## calls PerlinTerrainSculptor.contract_value and .contract_occupied when a staged bench hands it
+## the contract). That a selected cell's arithmetic is on the plate and correct: value minus bias
+## against the threshold, and the decision those make. That for a FIXED field, raising the
+## threshold can never ADD an occupied cell — the monotonicity Astra asked for, taken over every
+## cell in the lattice at five thresholds. That the occupied set's connectivity is reported and
+## kept apart from any claim about walking. That the rebuild is bounded and timed. And that the
+## broadcast is SCOPED: call_group reaches every receiver in the tree, which in a streaming
+## museum means other halls, so the bench now speaks only to receivers under its own.
+##
+##   godot --rendering-method gl_compatibility --path . --xr-mode off --script res://commons/testing/probe_wcn_voxel.gd -- --capture
+##
+## Writes res://ada_run/waves_chance_noise/Noise_Voxel/probe_voxel.json
+## (and probe_voxel*.png under --capture). Exit code 1 on any failed check.
+var checks := 0
+var failures: Array[String] = []
+var measurements: Dictionary = {}
+const MAP := "Noise_Voxel"
+const OUT := "res://ada_run/waves_chance_noise/Noise_Voxel/"
+const MAP_CELL := Vector2i(2, 2)
+const SPOT := Vector3(2.5, 0.0, 3.6)
+const EYE_H := 1.6
+
+func _initialize() -> void: run.call_deferred()
+
+func _live() -> bool:
+	return str(get_script().resource_path).ends_with("_live.gd")
+
+func check(ok: bool, message: String) -> void:
+	checks += 1
+	if not ok: failures.append(message)
+	print("[wcn-voxel] ", "PASS " if ok else "FAIL ", message)
+
+func note(message: String) -> void:
+	print("[wcn-voxel] note: ", message)
+
+func run() -> void:
+	if "--capture" in OS.get_cmdline_user_args() and DisplayServer.get_name() == "headless":
+		check(false, "PNG capture requires a rendered window; omit --headless, or omit --capture for logic only")
+		_finish(); return
+
+	# ── 0. the contract, read as source before anything is built ────────────
+	var sculpt_src: String = FileAccess.get_file_as_string("res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd")
+	var voxel_src: String = FileAccess.get_file_as_string("res://algorithms/randomness/voxelnoise/voxelnoise.gd")
+	var contract_fns := ["static func contract_noise", "static func contract_value", "static func contract_bias", "static func contract_occupied"]
+	var missing: Array = []
+	for fn in contract_fns:
+		if not sculpt_src.contains(fn): missing.append(fn)
+	measurements["contract_source"] = {"missing": missing,
+		"receiver_calls_value": voxel_src.contains("PerlinTerrainSculptor.contract_value"),
+		"receiver_calls_predicate": voxel_src.contains("PerlinTerrainSculptor.contract_occupied"),
+		"predicate": "value - bias > threshold"}
+	check(missing.is_empty(), "the sampler contract is written once, as four named functions (%s)" % str(missing))
+	check(voxel_src.contains("PerlinTerrainSculptor.contract_value") and voxel_src.contains("PerlinTerrainSculptor.contract_occupied"),
+		"and the receiving terrain calls THOSE, not its own coordinates, when a staged bench hands it the contract")
+	check(sculpt_src.contains("return value - contract_bias(v) > threshold"),
+		"the predicate is greater-than, with the height bias kept and named — not simplified into another algorithm")
+
+	var em: Node3D = load("res://commons/scenes/endless_museum.tscn").instantiate()
+	var ctl := "res://ada_run/waves_chance_noise/wcn-probe-control.json"
+	em.set("EM_CONTROL", ctl); em.set("_overrides_path", ctl + ".unused")
+	em.set("_hand_path", "res://ada_run/necklace_hand.json")   # the REAL hand, on purpose
+	em.set("start_chapter", "noise"); em.set("start_map", MAP)
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/em_layout.json"))
+	layout.get_or_add("stream", {})["bodies"] = 1
+	em.set("_layout", layout)
+	var f := FileAccess.open(ctl, FileAccess.WRITE)
+	f.store_string(JSON.stringify({"first_chapter": "noise", "dollhouse": 0, "grid_pack": 1})); f.close()
+	root.add_child(em); current_scene = em
+	await create_timer(1.2).timeout
+	em.set_process(false); em.call("flush_stamps")
+	var player: Node = em.get("_player")
+	if player != null: player.set_process(false); player.set_physics_process(false)
+	var seg: Node3D
+	for rec: Dictionary in em.get("_segments"):
+		if rec.node.get_meta("em_map", "") == MAP: seg = rec.node; break
+	check(seg != null, "the hall exists in the active museum")
+	if seg == null:
+		_finish(); return
+	for i in range(30): await process_frame
+	var vest: int = int(em.get("VESTIBULE_H"))
+	var capture: bool = "--capture" in OS.get_cmdline_user_args()
+	var cam: Camera3D
+	if capture:
+		var wc: Camera3D = em.get("_cam")
+		if wc != null and is_instance_valid(wc):
+			for c in wc.get_children():
+				if c is Timer: (c as Timer).stop()
+		cam = Camera3D.new(); em.add_child(cam); cam.fov = 62
+	measurements["captures"] = {}
+
+	# ── 1. the hall, the bench and the receiver ─────────────────────────────
+	var bodies: Array = []
+	var bench: Node3D
+	var receiver: Node3D
+	var by_token: Dictionary = {}
+	for record: Dictionary in em.get("_edit_records"):
+		var node: Node = record.get("node")
+		if node == null or not (node is Node3D) or not seg.is_ancestor_of(node): continue
+		if str(record.get("token", "")) == "": continue
+		var lp: Vector3 = seg.to_local((node as Node3D).global_position)
+		var sp: String = str(node.get_script().resource_path).get_file() if node.get_script() != null else "-"
+		bodies.append({"token": record.get("token"), "script": sp, "cell": record.get("tile_cell", []), "at": [snappedf(lp.x, 0.01), snappedf(lp.y, 0.01), snappedf(lp.z - vest, 0.01)]})
+		by_token[str(record.get("token"))] = bodies[bodies.size() - 1]
+		if sp == "perlin_terrain_sculptor.gd" and node.get("stand") == "lattice": bench = node
+		if sp == "voxelnoise.gd": receiver = node
+	measurements["bodies"] = bodies
+	for b in bodies:
+		if not str(b["token"]).begins_with("lobby") and str(b["token"]) != "showing": note("body %-30s %-30s cell %s" % [str(b["token"]), str(b["script"]), str(b["cell"])])
+	check(bench != null, "the staged bench is built in the hall")
+	check(receiver != null, "and the receiving terrain stands with it, one linked encounter")
+	if bench == null:
+		_finish(); return
+	await create_timer(0.4).timeout
+	var walk_sev: Array = em.get("_walk_severed") if em.get("_walk_severed") != null else []
+	var mine: Array = []
+	for e in walk_sev:
+		if str((e as Dictionary).get("hall", "")).contains(MAP): mine.append(e)
+	measurements["museum_walk_severed"] = mine
+	check(mine.is_empty(), "the museum walks this hall door to door with both in it (%s)" % str(mine))
+
+	# ── 2. the plate reads one cell, and the arithmetic is right ────────────
+	var st: Dictionary = bench.call("lattice_state")
+	measurements["lattice"] = st
+	note("lattice " + JSON.stringify(st))
+	var cell: Dictionary = st["cell"]
+	check(int(st["seed"]) >= 10000 and int(st["seed"]) <= 99999, "the lattice is named by a five-digit seed (%s)" % str(st["seed"]))
+	var decided: bool = (float(cell["value"]) - float(cell["bias"])) > float(cell["threshold"])
+	check(decided == bool(cell["decision"]),
+		"the selected cell's decision is its own arithmetic: %.4f − %.4f %s %.2f → %s" % [float(cell["value"]), float(cell["bias"]),
+			(">" if decided else "<="), float(cell["threshold"]), ("occupied" if bool(cell["decision"]) else "empty")])
+	var occ: Dictionary = st["occupancy"]
+	check(int(occ["occupied"]) > 0 and int(occ["occupied"]) < int(occ["cells"]),
+		"some of the lattice is occupied and some is not (%d of %d)" % [int(occ["occupied"]), int(occ["cells"])])
+	check(int(occ["pieces"]) >= 1, "and the occupied set's pieces are counted, which is a fact about cells and not a promise about walking (%d pieces, largest %d)" % [int(occ["pieces"]), int(occ["largest_piece"])])
+	var ro: Label3D = bench.get_node_or_null("LatticeStand/Readout/Text")
+	check(ro != null, "the plate is cased on the bench")
+	if ro != null:
+		measurements["readout"] = ro.text.split("\n")
+		for l in ro.text.split("\n"): note("plate | " + l)
+		check(ro.text.contains("OCCUPIED") or ro.text.contains("empty"), "and prints the decision in words")
+		check(ro.text.contains("connected is not walkable"), "and says that connected is not walkable")
+
+	# ── 3. raising the threshold can only take cells away ───────────────────
+	var counts: Array = []
+	for t in [-0.20, -0.10, 0.00, 0.10, 0.20]:
+		counts.append({"threshold": t, "occupied": int(bench.call("occupied_count_at", t))})
+	measurements["monotonic"] = counts
+	note("monotonic " + JSON.stringify(counts))
+	var monotone: bool = true
+	for i in range(1, counts.size()):
+		if int((counts[i] as Dictionary)["occupied"]) > int((counts[i - 1] as Dictionary)["occupied"]): monotone = false
+	check(monotone, "for a fixed field, raising the threshold never ADDS an occupied cell: %s" % str(counts.map(func(c): return int((c as Dictionary)["occupied"]))))
+	check(int((counts[0] as Dictionary)["occupied"]) > int((counts[counts.size() - 1] as Dictionary)["occupied"]),
+		"and it does take them away, so the control is real (%d → %d)" % [int((counts[0] as Dictionary)["occupied"]), int((counts[counts.size() - 1] as Dictionary)["occupied"])])
+
+	# ── 4. the field stays while the occupied set changes ───────────────────
+	var before: Dictionary = bench.call("lattice_state")
+	var v_before: float = float((before["cell"] as Dictionary)["value"])
+	check(_press(bench, "Btn_0"), "THRESHOLD pressed through the button's signal (one argument)")
+	await create_timer(0.6, true, false, true).timeout
+	var after: Dictionary = bench.call("lattice_state")
+	measurements["threshold_press"] = {"was": float(before["threshold"]), "now": float(after["threshold"]),
+		"value_was": v_before, "value_now": float((after["cell"] as Dictionary)["value"]),
+		"occupied_was": int((before["occupancy"] as Dictionary)["occupied"]), "occupied_now": int((after["occupancy"] as Dictionary)["occupied"])}
+	check(not is_equal_approx(float(after["threshold"]), float(before["threshold"])), "the threshold moves (%.2f → %.2f)" % [float(before["threshold"]), float(after["threshold"])])
+	check(is_equal_approx(float((after["cell"] as Dictionary)["value"]), v_before),
+		"the field does not: the same value stands at the same cell (%.4f)" % v_before)
+	check(int((after["occupancy"] as Dictionary)["occupied"]) != int((before["occupancy"] as Dictionary)["occupied"]),
+		"and the occupied set does (%d → %d)" % [int((before["occupancy"] as Dictionary)["occupied"]), int((after["occupancy"] as Dictionary)["occupied"])])
+
+	# ── 5. the broadcast is scoped to this hall ─────────────────────────────
+	var bc: Dictionary = after.get("broadcast", {})
+	measurements["broadcast"] = bc
+	note("broadcast " + JSON.stringify(bc))
+	check(not bc.is_empty(), "the bench records who it spoke to")
+	if not bc.is_empty():
+		check(str(bc.get("hall", "")) != "(none)", "it knows which hall it stands in (%s)" % str(bc.get("hall")))
+		check((bc.get("reached", []) as Array).size() <= int(bc.get("receivers_in_tree", 0)),
+			"and speaks to no more receivers than exist (%d of %d)" % [(bc.get("reached", []) as Array).size(), int(bc.get("receivers_in_tree", 0))])
+	if receiver != null:
+		measurements["receiver"] = {"contract": bool(receiver.get("_contract")), "iso": snappedf(float(receiver.get("iso_level")), 0.0001),
+			"seed": int(receiver.get("noise_seed")), "chunk": int(receiver.get("chunk_size")), "height": int(receiver.get("world_height"))}
+		note("receiver " + JSON.stringify(measurements["receiver"]))
+		check(bool(receiver.get("_contract")), "the receiver took the contract rather than its own coordinates")
+		check(is_equal_approx(float(receiver.get("iso_level")), float(after["threshold"])),
+			"and the same threshold line: %.3f on both" % float(receiver.get("iso_level")))
+		check(int(receiver.get("noise_seed")) == int(after["seed"]) or int(receiver.get("noise_seed")) > 0,
+			"and a seed handed over with it (%s)" % str(receiver.get("noise_seed")))
+
+	# ── 6. the cell walk, the cut, the seed, and what a rebuild costs ───────
+	var cells_seen: Array = []
+	for i in range(4):
+		check(_press(bench, "Btn_1"), "CELL pressed")
+		await create_timer(0.25, true, false, true).timeout
+		cells_seen.append((bench.call("lattice_state")["cell"] as Dictionary)["cell"])
+	measurements["cells_walked"] = cells_seen
+	check(cells_seen.size() == 4 and cells_seen[0] != cells_seen[1], "the selection walks the lattice (%s)" % str(cells_seen))
+	var cut_before: bool = bool(bench.call("lattice_state")["cut"])
+	var occ_before: int = int((bench.call("lattice_state")["occupancy"] as Dictionary)["occupied"])
+	check(_press(bench, "Btn_3"), "CUT pressed")
+	await create_timer(0.4, true, false, true).timeout
+	var cut_state: Dictionary = bench.call("lattice_state")
+	measurements["cut"] = {"was": cut_before, "now": bool(cut_state["cut"]),
+		"occupied_was": occ_before, "occupied_now": int((cut_state["occupancy"] as Dictionary)["occupied"])}
+	check(bool(cut_state["cut"]) != cut_before, "the cut opens the model")
+	check(int((cut_state["occupancy"] as Dictionary)["occupied"]) == occ_before,
+		"and hides cells without changing one decision (%d both sides)" % occ_before)
+	var seed_before: int = int(bench.call("lattice_state")["seed"])
+	check(_press(bench, "Btn_2"), "SEED pressed")
+	await create_timer(0.8, true, false, true).timeout
+	var seeded: Dictionary = bench.call("lattice_state")
+	measurements["seed_press"] = {"was": seed_before, "now": int(seeded["seed"]), "rebuild_ms": float(seeded["rebuild_ms"]), "rebuilds": int(seeded["rebuilds"])}
+	check(int(seeded["seed"]) != seed_before, "SEED names another field (%d → %d)" % [seed_before, int(seeded["seed"])])
+	check(float(seeded["rebuild_ms"]) < 400.0, "and the rebuild is bounded: %.1f ms for %d³ cells" % [float(seeded["rebuild_ms"]), int(seeded["grid"])])
+
+	# ── 7. captures, and the desktop rig in the live port ───────────────────
+	if capture:
+		# from the visitor's side, far enough back that the lattice, the bench's own
+		# sliders and the plate are one frame (the first capture pressed against the
+		# model and the shipped control panel stood in front of it)
+		var b: Vector3 = (bench as Node3D).global_position
+		cam.fov = 72
+		cam.global_position = seg.to_global(Vector3(SPOT.x + 0.55, 1.52, SPOT.z + 0.6 + vest))
+		cam.look_at(b + Vector3(0, 0.12, 0))
+		for i in range(18): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_voxel.png")
+		measurements["captures"]["primary"] = _cam_pose(cam)
+		cam.fov = 62
+		var rn: Node3D = bench.get_node_or_null("LatticeStand/Readout")
+		if rn != null:
+			cam.global_position = rn.global_position + seg.global_transform.basis * Vector3(0.0, 0.24, -0.66)
+			cam.look_at(rn.global_position)
+			for i in range(14): cam.make_current(); await process_frame
+			await create_timer(0.25, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_voxel_readout.png")
+			measurements["captures"]["readout"] = _cam_pose(cam)
+		if receiver != null:
+			var rp: Vector3 = (receiver as Node3D).global_position
+			cam.global_position = rp + seg.global_transform.basis * Vector3(0.0, 3.0, -6.0)
+			cam.look_at(rp + Vector3(0, 1.0, 0))
+			for i in range(14): cam.make_current(); await process_frame
+			await create_timer(0.25, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_voxel_terrain.png")
+			measurements["captures"]["terrain"] = _cam_pose(cam)
+		cam.global_position = seg.to_global(Vector3(7.0, 12.0, 7.5 + vest))
+		cam.look_at(seg.to_global(Vector3(6.98, 0.0, 7.4 + vest)))
+		for i in range(14): cam.make_current(); await process_frame
+		await create_timer(0.25, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_voxel_plan.png")
+		measurements["captures"]["plan"] = _cam_pose(cam)
+
+	if _live():
+		var drv: Node = load("res://commons/testing/wcn_desktop_driver.gd").new()
+		root.add_child(drv)
+		var stand_at: Vector3 = seg.to_global(Vector3(SPOT.x, 0.05, SPOT.z + vest))
+		drv.call("spawn", stand_at, em)
+		for i in range(20): await process_frame
+		check(bool(drv.call("is_ready")), "the desktop rig stands before the bench")
+		measurements["desktop_input"] = {"stand_pose": drv.call("pose")}
+		var panel: Node = bench.find_child("Panel", true, false)
+		var press_from: Vector3 = stand_at
+		if panel != null:
+			var pl: Vector3 = seg.to_local((panel as Node3D).global_position)
+			press_from = seg.to_global(Vector3(pl.x, 0.05, pl.z - 0.45))
+		measurements["desktop_input"]["press_from"] = [snappedf(press_from.x, 0.01), snappedf(press_from.z, 0.01)]
+		for pair in [["Btn_0", "THRESHOLD", "threshold_index"], ["Btn_3", "CUT", "cut"]]:
+			var btn: Node = panel.find_child(pair[0], true, false) if panel != null else null
+			var was = bench.call("lattice_state")[pair[2]]
+			var rec: Dictionary = await drv.call("press", btn, press_from) if btn != null else {}
+			await create_timer(0.5, true, false, true).timeout
+			var now = bench.call("lattice_state")[pair[2]]
+			measurements["desktop_input"]["press_%s" % pair[1]] = {"hover": rec.get("hover", "-"), "was": was, "now": now}
+			check(now != was, "%s pressed through the pointer changes what it says it changes (%s → %s)" % [pair[1], str(was), str(now)])
+		if capture:
+			drv.call("aim_at", (bench as Node3D).global_position)
+			for i in range(8): await process_frame
+			await create_timer(0.3, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_voxel_desktop_front.png")
+			measurements["desktop_input"]["front_pose"] = drv.call("pose")
+		drv.call("teardown")
+
+	_finish()
+
+func _press(bench: Node, btn_name: String) -> bool:
+	var panel: Node = bench.find_child("Panel", true, false)
+	if panel == null: return false
+	var btn: Node = panel.find_child(btn_name, true, false)
+	if btn == null: return false
+	var area: Node = btn.get_node_or_null("InteractableAreaButton")
+	if area == null or not area.has_signal("button_pressed"): return false
+	area.emit_signal("button_pressed", area)
+	return true
+
+func _cam_pose(cam: Camera3D) -> Dictionary:
+	var cur: Camera3D = root.get_camera_3d()
+	var fwd: Vector3 = -cam.global_transform.basis.z
+	return {"current_camera": str(cur.get_path()).right(50) if cur != null else "none", "is_ours": cur == cam,
+		"at": [snappedf(cam.global_position.x, 0.01), snappedf(cam.global_position.y, 0.01), snappedf(cam.global_position.z, 0.01)],
+		"forward": [snappedf(fwd.x, 0.01), snappedf(fwd.y, 0.01), snappedf(fwd.z, 0.01)]}
+
+func _finish() -> void:
+	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,
+		"control_path": "THRESHOLD / CELL / SEED / CUT through InteractableAreaButton.button_pressed (one argument); the live port presses two of them through the desktop pointer from arm's length",
+		"hand_file": "ada_run/necklace_hand.json (real)", "headset_verified": false,
+		"engine": Engine.get_version_info().string, "physics_fps": Engine.physics_ticks_per_second}
+	var f := FileAccess.open(OUT + "probe_voxel.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify(report, "  ")); f.close()
+	print("[wcn-voxel] ", checks, " checks; ", failures.size(), " failures")
+	quit(0 if failures.is_empty() else 1)

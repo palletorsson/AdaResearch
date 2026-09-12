@@ -253,3 +253,20 @@ Floating islands persist where isolated pockets of high noise survive above the 
 **density_histogram** — A real-time histogram of noise values across the entire grid, with the threshold marked as a vertical line. As the threshold slider moves, the learner sees what fraction of the volume is solid versus void, and how the distribution of noise values determines the sensitivity of terrain to small threshold changes. Flat distributions produce gradual transitions; peaked distributions produce sudden phase changes where a small slider movement flips thousands of voxels.
 
 **resolution_comparator** — The same noise field sampled at three grid resolutions side by side — 8x8x8, 16x16x16, 32x32x32. Same noise parameters, same threshold, different lattice density. Demonstrates that resolution and content are independent and shows exactly where fine details appear and vanish as the sampling interval changes. The coarse grid misses narrow caves that the fine grid preserves. The noise field contains them all. Only the lattice decides which survive.
+
+## The contract and the lattice (2026-09-12)
+
+`commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd` (opt-in `#stand:lattice`) and `algorithms/randomness/voxelnoise/voxelnoise.gd`. At `stand:none` both keep their shipped behaviour exactly, including the receiver's legacy link.
+
+| what | where |
+|---|---|
+| the basis | `PerlinTerrainSculptor.contract_noise(seed, scale, octaves)` — Perlin, fbm |
+| the coordinates | `contract_value(noise, u, v, w)` — u, v, w are the position INSIDE the display, 0 to 1, times `CONTRACT_SPAN` |
+| the height bias | `contract_bias(v)` — the shipped bias, named |
+| the predicate | `contract_occupied(value, v, threshold)` — `value - bias > threshold` |
+| the receiver's use of it | `voxelnoise._generate_chunk`, guarded by `_contract`, set from the payload's `contract` flag |
+| the lattice's own state | `lattice_state()`, `cell_report()`, `occupancy_report()`, `occupied_count_at(t)` |
+| the controls | `next_threshold`, `next_cell`, `new_lattice_seed`, `toggle_cut` |
+| the scoped broadcast | `_broadcast_controls_to_voxelnoise` + `_hall_ancestor()` |
+
+`occupied_count_at(t)` answers the threshold question without touching the display, which is how the probe takes the monotonicity over every cell at five lines. `toggle_cut` hides the near half in `_rebuild_multimesh` and changes no decision, which the probe checks by comparing the occupied count either side.

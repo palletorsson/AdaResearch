@@ -31,6 +31,8 @@ extends Node3D
 @export var linked_frequency_max: float = 0.18
 @export var linked_iso_bias: float = 0.0
 
+var _contract: bool = false     # true once a staged bench has handed over the contract
+
 # ─────────────────────────────────────────────────────────────────────────────
 # STAGE-2 DNA PROMOTION (2026-08-06).
 #
@@ -109,9 +111,22 @@ func _generate_chunk(chunk_pos: Vector3i) -> void:
 				var world_z = chunk_pos.z * chunk_size + z + generation_offset.z
 
 				var p = Vector3(world_x, world_y, world_z)
-				var val = noise.get_noise_3d(p.x, p.y, p.z)
+				var val: float = 0.0
+				var occupied: bool = false
+				if _contract:
+					# THE CONTRACT (set by a staged perlin_terrain_sculptor in this hall):
+					# the same field the bench reads, asked at the same NORMALISED place,
+					# through the same predicate — one field, two representations.
+					var u := float(x) / float(maxi(1, chunk_size - 1))
+					var v := float(y - 1) / float(maxi(1, world_height - 1))
+					var w := float(z) / float(maxi(1, chunk_size - 1))
+					val = PerlinTerrainSculptor.contract_value(noise, u, v, w)
+					occupied = PerlinTerrainSculptor.contract_occupied(val, v, iso)
+				else:
+					val = noise.get_noise_3d(p.x, p.y, p.z)
+					occupied = val > iso
 
-				if val > iso:
+				if occupied:
 					_add_cube(st, p * voxel_scale)
 
 	st.generate_normals()
@@ -191,6 +206,12 @@ func apply_perlin_terrain_controls(payload: Dictionary) -> void:
 		noise_octaves = clampi(int(payload.get("noise_octaves", noise_octaves)), 1, 8)
 	if payload.has("seed"):
 		noise_seed = int(payload.get("seed", noise_seed))
+	# A staged bench declares the contract; anything else keeps the legacy link, in
+	# which this receiver samples its own coordinates with its own iso level.
+	_contract = bool(payload.get("contract", false))
+	if _contract:
+		iso_level = clampf(threshold_value, -1.0, 1.0)   # no bias: the contract owns the line
+		noise = PerlinTerrainSculptor.contract_noise(noise_seed, payload.get("noise_scale", noise_scale), noise_octaves)
 
 	if debug:
 		print("Voxelnoise: linked update -> iso=%.3f freq=%.4f oct=%d seed=%d" % [iso_level, noise_scale, noise_octaves, noise_seed])

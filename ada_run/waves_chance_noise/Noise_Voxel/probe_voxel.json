@@ -1,0 +1,550 @@
+{
+  "checks": 37,
+  "control_path": "THRESHOLD / CELL / SEED / CUT through InteractableAreaButton.button_pressed (one argument); the live port presses two of them through the desktop pointer from arm's length",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "Noise_Voxel",
+  "measurements": {
+    "bodies": [
+      {
+        "at": [
+          7.5,
+          1.7,
+          -3.5
+        ],
+        "cell": [],
+        "script": "large_window.gd",
+        "token": "lobby:window"
+      },
+      {
+        "at": [
+          7.5,
+          1.7,
+          -2.0
+        ],
+        "cell": [],
+        "script": "animated_folding_past.gd",
+        "token": "lobby:view"
+      },
+      {
+        "at": [
+          11.0,
+          1.6,
+          -2.94
+        ],
+        "cell": [],
+        "script": "frame_counter_display.gd",
+        "token": "lobby:counter"
+      },
+      {
+        "at": [
+          1.14,
+          0.0,
+          -1.4
+        ],
+        "cell": [],
+        "script": "fire_extinguisher.gd",
+        "token": "lobby:extinguisher"
+      },
+      {
+        "at": [
+          15.94,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "script": "station_door.gd",
+        "token": "lobby:elevator"
+      },
+      {
+        "at": [
+          15.1,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "script": "wooden_pallet.gd",
+        "token": "lobby:pallet"
+      },
+      {
+        "at": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "cell": [],
+        "script": "origin.gd",
+        "token": "lobby:point_zero"
+      },
+      {
+        "at": [
+          7.5,
+          0.0,
+          0.5
+        ],
+        "cell": [],
+        "script": "station_door.gd",
+        "token": "gate:noise voxel"
+      },
+      {
+        "at": [
+          2.0,
+          1.58,
+          14.99
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          6.0,
+          1.58,
+          18.01
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          8.0,
+          1.58,
+          22.99
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          2.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          2.0
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          13.99,
+          1.58,
+          2.0
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          5.01,
+          1.58,
+          19.0
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          6.01,
+          1.58,
+          16.0
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          8.99,
+          1.58,
+          16.0
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          4.0,
+          1.58,
+          14.99
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          10.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          6.0
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          13.99,
+          1.58,
+          4.0
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          5.01,
+          1.58,
+          21.0
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          8.99,
+          1.58,
+          18.0
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          10.0,
+          1.58,
+          14.99
+        ],
+        "cell": [],
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.5,
+          3.52,
+          -1.0
+        ],
+        "cell": [],
+        "script": "exit_sign.gd",
+        "token": "exit_sign"
+      },
+      {
+        "at": [
+          1.02,
+          2.25,
+          -3.5
+        ],
+        "cell": [],
+        "script": "wall_clock.gd",
+        "token": "wall_clock"
+      },
+      {
+        "at": [
+          1.0,
+          1.5,
+          -2.5
+        ],
+        "cell": [],
+        "script": "electrical_panel.gd",
+        "token": "electrical_panel"
+      },
+      {
+        "at": [
+          3.75,
+          4.64,
+          6.23
+        ],
+        "cell": [],
+        "script": "ceiling_vent.gd",
+        "token": "ceiling_vent"
+      },
+      {
+        "at": [
+          10.5,
+          0.42,
+          10.5
+        ],
+        "cell": [],
+        "script": "dream_bodies.gd",
+        "token": "dream_bodies"
+      },
+      {
+        "at": [
+          2.5,
+          0.5,
+          2.5
+        ],
+        "cell": [
+          2,
+          2
+        ],
+        "script": "perlin_terrain_sculptor.gd",
+        "token": "perlin_terrain_sculptor"
+      },
+      {
+        "at": [
+          12.5,
+          1.5,
+          2.5
+        ],
+        "cell": [
+          12,
+          2
+        ],
+        "script": "science_screen.gd",
+        "token": "science_screen"
+      },
+      {
+        "at": [
+          2.5,
+          0.0,
+          3.5
+        ],
+        "cell": [
+          2,
+          3
+        ],
+        "script": "voxelnoise.gd",
+        "token": "voxelnoise"
+      },
+      {
+        "at": [
+          6.5,
+          0.0,
+          7.5
+        ],
+        "cell": [
+          6,
+          7
+        ],
+        "script": "dark_sphere.gd",
+        "token": "dark_sphere"
+      }
+    ],
+    "broadcast": {
+      "hall": "Seg0_kanazawa-room-matrix",
+      "reached": [
+        "Voxelnoise"
+      ],
+      "receivers_in_tree": 1
+    },
+    "captures": {
+      "plan": {
+        "at": [
+          7.0,
+          12.0,
+          7.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2723",
+        "forward": [
+          0.0,
+          -1.0,
+          -0.01
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          3.05,
+          1.52,
+          4.2
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2723",
+        "forward": [
+          -0.27,
+          -0.45,
+          -0.85
+        ],
+        "is_ours": true
+      },
+      "readout": {
+        "at": [
+          2.5,
+          0.32,
+          1.22
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2723",
+        "forward": [
+          0.0,
+          -0.34,
+          0.94
+        ],
+        "is_ours": true
+      },
+      "terrain": {
+        "at": [
+          2.5,
+          3.0,
+          -2.5
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@2723",
+        "forward": [
+          0.0,
+          -0.32,
+          0.95
+        ],
+        "is_ours": true
+      }
+    },
+    "cells_walked": [
+      [
+        6,
+        8,
+        17
+      ],
+      [
+        17,
+        6,
+        9
+      ],
+      [
+        9,
+        17,
+        6
+      ],
+      [
+        15,
+        12,
+        15
+      ]
+    ],
+    "contract_source": {
+      "missing": [],
+      "predicate": "value - bias > threshold",
+      "receiver_calls_predicate": true,
+      "receiver_calls_value": true
+    },
+    "cut": {
+      "now": true,
+      "occupied_now": 5116,
+      "occupied_was": 5116,
+      "was": false
+    },
+    "lattice": {
+      "broadcast": {
+        "hall": "Seg0_kanazawa-room-matrix",
+        "reached": [],
+        "receivers_in_tree": 0
+      },
+      "cell": {
+        "bias": 0.0109,
+        "cell": [
+          12,
+          12,
+          12
+        ],
+        "decision": false,
+        "normalised": [
+          0.522,
+          0.522,
+          0.522
+        ],
+        "threshold": 0.0,
+        "value": -0.0038
+      },
+      "contract": {
+        "basis": "perlin fbm",
+        "bias_scale": 0.5,
+        "octaves": 3,
+        "scale": 4.0,
+        "span": 9.6
+      },
+      "cut": false,
+      "grid": 24,
+      "occupancy": {
+        "cells": 13824,
+        "largest_piece": 7100,
+        "occupied": 7199,
+        "pieces": 12
+      },
+      "rebuild_ms": 10.02,
+      "rebuilds": 1,
+      "seed": 46245,
+      "stand": "lattice",
+      "threshold": 0.0,
+      "threshold_index": 2
+    },
+    "monotonic": [
+      {
+        "occupied": 11054,
+        "threshold": -0.2
+      },
+      {
+        "occupied": 9293,
+        "threshold": -0.1
+      },
+      {
+        "occupied": 7199,
+        "threshold": 0.0
+      },
+      {
+        "occupied": 5116,
+        "threshold": 0.1
+      },
+      {
+        "occupied": 3050,
+        "threshold": 0.2
+      }
+    ],
+    "museum_walk_severed": [],
+    "readout": [
+      "seed 46245 · threshold +0.00 · 24³ cells · rebuilt in 10.0 ms",
+      "cell 12,12,12   field -0.0038   bias +0.0109",
+      "-0.0038 − +0.0109 = -0.0147  >  +0.00   →   empty",
+      "7199 of 13824 cells occupied, in 12 separate pieces (the largest 7100)",
+      "connected is not walkable: this is a set of cells, not a verified passage"
+    ],
+    "receiver": {
+      "chunk": 32,
+      "contract": true,
+      "height": 32,
+      "iso": 0.1,
+      "seed": 46245
+    },
+    "seed_press": {
+      "now": 59350,
+      "rebuild_ms": 10.56,
+      "rebuilds": 4,
+      "was": 46245
+    },
+    "threshold_press": {
+      "now": 0.1,
+      "occupied_now": 5116,
+      "occupied_was": 7199,
+      "value_now": -0.0038,
+      "value_was": -0.0038,
+      "was": 0.0
+    }
+  },
+  "physics_fps": 60
+}
