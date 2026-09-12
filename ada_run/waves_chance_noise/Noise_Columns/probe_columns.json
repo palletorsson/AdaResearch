@@ -1,0 +1,972 @@
+{
+  "checks": 37,
+  "control_path": "FREEZE / REVEAL / SPIN / MARBLE through InteractableAreaButton.button_pressed (one argument); the live port presses all four through the desktop pointer from arm's length",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "Noise_Columns",
+  "measurements": {
+    "bodies": [
+      {
+        "at": [
+          7.5,
+          1.7,
+          -3.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "large_window.gd",
+        "token": "lobby:window"
+      },
+      {
+        "at": [
+          7.5,
+          1.7,
+          -2.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "animated_folding_past.gd",
+        "token": "lobby:view"
+      },
+      {
+        "at": [
+          11.0,
+          1.6,
+          -2.94
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "frame_counter_display.gd",
+        "token": "lobby:counter"
+      },
+      {
+        "at": [
+          1.14,
+          0.0,
+          -1.4
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "fire_extinguisher.gd",
+        "token": "lobby:extinguisher"
+      },
+      {
+        "at": [
+          15.94,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "station_door.gd",
+        "token": "lobby:elevator"
+      },
+      {
+        "at": [
+          15.1,
+          0.0,
+          -1.8
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "wooden_pallet.gd",
+        "token": "lobby:pallet"
+      },
+      {
+        "at": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "origin.gd",
+        "token": "lobby:point_zero"
+      },
+      {
+        "at": [
+          6.5,
+          0.0,
+          5.5
+        ],
+        "cell": [
+          6,
+          5
+        ],
+        "scale": 1.0,
+        "script": "dark_sphere.gd",
+        "token": "dark_sphere"
+      },
+      {
+        "at": [
+          9.5,
+          0.0,
+          7.5
+        ],
+        "cell": [
+          9,
+          7
+        ],
+        "scale": 1.0,
+        "script": "MeltingBerniniColumns.gd",
+        "token": "MeltingBerniniScene"
+      },
+      {
+        "at": [
+          2.5,
+          0.0,
+          9.5
+        ],
+        "cell": [
+          2,
+          9
+        ],
+        "scale": 1.0,
+        "script": "synthesis_stand.gd",
+        "token": "synthesis_stand"
+      },
+      {
+        "at": [
+          6.5,
+          0.0,
+          0.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "station_door.gd",
+        "token": "gate:noise columns"
+      },
+      {
+        "at": [
+          2.0,
+          1.58,
+          14.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          9.0,
+          1.58,
+          17.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.0,
+          1.58,
+          17.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          2.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          2.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          10.99,
+          1.58,
+          18.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          12.99,
+          1.58,
+          2.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          6.01,
+          1.58,
+          17.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.99,
+          1.58,
+          16.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          4.0,
+          1.58,
+          14.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          4.0,
+          1.58,
+          1.01
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          1.01,
+          1.58,
+          4.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          12.99,
+          1.58,
+          4.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          9.0,
+          1.58,
+          14.99
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "-",
+        "token": "showing"
+      },
+      {
+        "at": [
+          7.0,
+          3.52,
+          -1.0
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "exit_sign.gd",
+        "token": "exit_sign"
+      },
+      {
+        "at": [
+          1.02,
+          2.25,
+          -3.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "wall_clock.gd",
+        "token": "wall_clock"
+      },
+      {
+        "at": [
+          1.28,
+          0.85,
+          2.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "fire_hose_box.gd",
+        "token": "fire_hose_box"
+      },
+      {
+        "at": [
+          4.5,
+          0.42,
+          13.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "dream_bodies.gd",
+        "token": "dream_bodies"
+      },
+      {
+        "at": [
+          5.5,
+          0.42,
+          7.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "dream_bodies.gd",
+        "token": "dream_bodies"
+      },
+      {
+        "at": [
+          7.5,
+          0.42,
+          13.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "dream_bodies.gd",
+        "token": "dream_bodies"
+      },
+      {
+        "at": [
+          3.5,
+          0.42,
+          7.5
+        ],
+        "cell": [],
+        "scale": 1.0,
+        "script": "dream_bodies.gd",
+        "token": "dream_bodies"
+      }
+    ],
+    "captures": {
+      "matte": {
+        "at": [
+          9.5,
+          1.6,
+          4.0
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3059",
+        "forward": [
+          0.0,
+          -0.09,
+          1.0
+        ],
+        "is_ours": true
+      },
+      "plan": {
+        "at": [
+          7.5,
+          12.0,
+          7.6
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3059",
+        "forward": [
+          0.0,
+          -1.0,
+          -0.01
+        ],
+        "is_ours": true
+      },
+      "primary": {
+        "at": [
+          9.5,
+          1.6,
+          4.0
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3059",
+        "forward": [
+          0.0,
+          -0.1,
+          1.0
+        ],
+        "is_ours": true
+      },
+      "readout": {
+        "at": [
+          10.05,
+          1.28,
+          5.18
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3059",
+        "forward": [
+          0.0,
+          -0.34,
+          0.94
+        ],
+        "is_ours": true
+      },
+      "slot0": {
+        "at": [
+          11.7,
+          1.57,
+          5.65
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3059",
+        "forward": [
+          0.0,
+          -0.08,
+          1.0
+        ],
+        "is_ours": true
+      },
+      "slot1": {
+        "at": [
+          9.5,
+          1.57,
+          5.65
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3059",
+        "forward": [
+          0.0,
+          -0.08,
+          1.0
+        ],
+        "is_ours": true
+      },
+      "slot2": {
+        "at": [
+          7.3,
+          1.57,
+          5.65
+        ],
+        "current_camera": "/root/EndlessMuseum/@Camera3D@3059",
+        "forward": [
+          0.0,
+          -0.08,
+          1.0
+        ],
+        "is_ours": true
+      }
+    },
+    "colliders": [],
+    "cost": {
+      "bound_hz": 12.0,
+      "moving_columns": 2,
+      "rebuild_ms": 3.74,
+      "rebuilds_per_second": 20.0,
+      "segments": [
+        40,
+        16
+      ]
+    },
+    "frozen": {
+      "rebuilds_after": 45,
+      "rebuilds_before": 45,
+      "t": 1.82,
+      "t_after": 1.82,
+      "tops_after": [
+        2.48,
+        2.099,
+        2.544
+      ],
+      "tops_before": [
+        2.48,
+        2.099,
+        2.544
+      ]
+    },
+    "hall_walk": {
+      "cells": 173,
+      "north_door": [
+        5,
+        6,
+        7
+      ],
+      "reached": 3,
+      "south_door": [
+        5,
+        6,
+        7
+      ]
+    },
+    "map_description": "Three columns in one frame, the same mesh at the same resolution, the same material and the same mapped displacement range, differing only in what drives the melt: one held at a fixed phase, one on th",
+    "marble": {
+      "after": false,
+      "before": true,
+      "checksum": 112.7043
+    },
+    "matched_samples": [
+      {
+        "field": {
+          "checksum": 118.9263,
+          "driver": "field",
+          "drop": 0.2518,
+          "phase": 0.3597,
+          "slot": 1,
+          "t": 3.0
+        },
+        "periodic": {
+          "checksum": 103.4811,
+          "driver": "periodic",
+          "drop": 0.4996,
+          "phase": 0.7137,
+          "slot": 2,
+          "t": 3.0
+        },
+        "t": 3.0
+      },
+      {
+        "field": {
+          "checksum": 119.5469,
+          "driver": "field",
+          "drop": 0.2418,
+          "phase": 0.3455,
+          "slot": 1,
+          "t": 7.5
+        },
+        "periodic": {
+          "checksum": 102.987,
+          "driver": "periodic",
+          "drop": 0.5075,
+          "phase": 0.725,
+          "slot": 2,
+          "t": 7.5
+        },
+        "t": 7.5
+      },
+      {
+        "field": {
+          "checksum": 124.7869,
+          "driver": "field",
+          "drop": 0.1579,
+          "phase": 0.2255,
+          "slot": 1,
+          "t": 12.25
+        },
+        "periodic": {
+          "checksum": 134.6402,
+          "driver": "periodic",
+          "drop": 0.0002,
+          "phase": 0.0002,
+          "slot": 2,
+          "t": 12.25
+        },
+        "t": 12.25
+      },
+      {
+        "field": {
+          "checksum": 106.4984,
+          "driver": "field",
+          "drop": 0.4511,
+          "phase": 0.6445,
+          "slot": 1,
+          "t": 19.0
+        },
+        "periodic": {
+          "checksum": 134.3011,
+          "driver": "periodic",
+          "drop": 0.0056,
+          "phase": 0.008,
+          "slot": 2,
+          "t": 19.0
+        },
+        "t": 19.0
+      }
+    ],
+    "museum_walk_severed": [
+      {
+        "hall": "Noise_Columns",
+        "z0": -4,
+        "z1": 18
+      }
+    ],
+    "plates_after_reveal": [
+      [
+        0,
+        "BASELINE"
+      ],
+      [
+        1,
+        "FIELD"
+      ],
+      [
+        2,
+        "PERIODIC"
+      ]
+    ],
+    "plates_before_reveal": [
+      "?",
+      "?",
+      "?"
+    ],
+    "plinths": [
+      [
+        "ArtPlinth0",
+        4,
+        13
+      ],
+      [
+        "ArtPlinth1",
+        5,
+        7
+      ],
+      [
+        "ArtPlinth2",
+        7,
+        13
+      ],
+      [
+        "ArtPlinth3",
+        3,
+        7
+      ]
+    ],
+    "repeatable": {
+      "other_t": {
+        "checksum": 121.6001,
+        "driver": "field",
+        "drop": 0.2089,
+        "phase": 0.2985,
+        "slot": 1,
+        "t": 11.5
+      },
+      "same_t": [
+        {
+          "checksum": 112.7043,
+          "driver": "field",
+          "drop": 0.3516,
+          "phase": 0.5022,
+          "slot": 1,
+          "t": 11.0
+        },
+        {
+          "checksum": 112.7043,
+          "driver": "field",
+          "drop": 0.3516,
+          "phase": 0.5022,
+          "slot": 1,
+          "t": 11.0
+        }
+      ]
+    },
+    "returns": {
+      "gaps": {
+        "field": [
+          0.55,
+          0.15,
+          0.2,
+          0.25,
+          1.45,
+          0.2,
+          0.6,
+          0.2,
+          0.35,
+          0.7,
+          0.2,
+          0.3,
+          0.3,
+          1.35,
+          0.45,
+          0.3,
+          0.2,
+          1.15,
+          0.25,
+          0.65,
+          1.5,
+          1.65,
+          0.2,
+          1.5,
+          0.55,
+          0.25,
+          0.4,
+          0.3,
+          0.25,
+          0.25,
+          0.45,
+          0.75,
+          0.65,
+          0.45,
+          0.6,
+          1.1,
+          0.4,
+          0.2,
+          0.4,
+          0.1,
+          0.8,
+          0.35,
+          0.25,
+          0.2,
+          0.25,
+          1.05,
+          1.0,
+          0.5,
+          1.05,
+          0.4,
+          0.45,
+          0.55,
+          0.45,
+          1.2,
+          0.55,
+          0.9,
+          1.15,
+          1.1,
+          0.5,
+          0.15,
+          0.4,
+          0.65,
+          0.8,
+          1.15,
+          0.7,
+          0.65,
+          0.35,
+          0.3,
+          0.1,
+          0.45,
+          1.0,
+          0.2,
+          0.45,
+          0.7,
+          0.25,
+          0.75,
+          0.6,
+          1.5,
+          0.85,
+          0.45,
+          0.2
+        ],
+        "periodic": [
+          7.0,
+          6.95,
+          7.0,
+          6.95,
+          7.0,
+          7.0
+        ]
+      },
+      "peaks": {
+        "field": [
+          0.8,
+          1.35,
+          1.5,
+          1.7,
+          1.95,
+          3.4,
+          3.6,
+          4.2,
+          4.4,
+          4.75,
+          5.45,
+          5.65,
+          5.95,
+          6.25,
+          7.6,
+          8.05,
+          8.35,
+          8.55,
+          9.7,
+          9.95,
+          10.6,
+          12.1,
+          13.75,
+          13.95,
+          15.45,
+          16.0,
+          16.25,
+          16.65,
+          16.95,
+          17.2,
+          17.45,
+          17.9,
+          18.65,
+          19.3,
+          19.75,
+          20.35,
+          21.45,
+          21.85,
+          22.05,
+          22.45,
+          22.55,
+          23.35,
+          23.7,
+          23.95,
+          24.15,
+          24.4,
+          25.45,
+          26.45,
+          26.95,
+          28.0,
+          28.4,
+          28.85,
+          29.4,
+          29.85,
+          31.05,
+          31.6,
+          32.5,
+          33.65,
+          34.75,
+          35.25,
+          35.4,
+          35.8,
+          36.45,
+          37.25,
+          38.4,
+          39.1,
+          39.75,
+          40.1,
+          40.4,
+          40.5,
+          40.95,
+          41.95,
+          42.15,
+          42.6,
+          43.3,
+          43.55,
+          44.3,
+          44.9,
+          46.4,
+          47.25,
+          47.7,
+          47.9
+        ],
+        "periodic": [
+          1.75,
+          8.75,
+          15.7,
+          22.7,
+          29.65,
+          36.65,
+          43.65
+        ]
+      },
+      "spread": {
+        "field": 1.55,
+        "periodic": 0.05
+      }
+    },
+    "spin": {
+      "checksum": 112.7043,
+      "yaw_after": 22.92,
+      "yaw_before": 0.0
+    },
+    "tile": [
+      "44444111444444",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111111114",
+      "41111111110114",
+      "41111111111114",
+      "44444111444444",
+      "44444411444444",
+      "44444411111444",
+      "44444444411444"
+    ],
+    "trio": {
+      "columns": [
+        {
+          "aabb": [
+            0.656,
+            2.48,
+            0.632
+          ],
+          "driver": "baseline",
+          "drop": 0.07,
+          "marble": true,
+          "phase": 0.1,
+          "plate": "?",
+          "slot": 0,
+          "top": 2.48,
+          "verts": 697,
+          "yaw": 0.0
+        },
+        {
+          "aabb": [
+            0.628,
+            2.118,
+            0.609
+          ],
+          "driver": "field",
+          "drop": 0.437,
+          "marble": true,
+          "phase": 0.625,
+          "plate": "?",
+          "slot": 1,
+          "top": 2.113,
+          "verts": 697,
+          "yaw": 0.0
+        },
+        {
+          "aabb": [
+            0.624,
+            1.897,
+            0.59
+          ],
+          "driver": "periodic",
+          "drop": 0.7,
+          "marble": true,
+          "phase": 1.0,
+          "plate": "?",
+          "slot": 2,
+          "top": 1.85,
+          "verts": 697,
+          "yaw": 0.0
+        }
+      ],
+      "field_now": 0.613,
+      "frozen": false,
+      "marble": true,
+      "order": [
+        "baseline",
+        "field",
+        "periodic"
+      ],
+      "periodic_now": 0.999,
+      "range": [
+        0.0,
+        0.7
+      ],
+      "rebuild_hz": 12.0,
+      "rebuild_ms": 3.66,
+      "rebuilds": 37,
+      "revealed": false,
+      "seed": 38048,
+      "segments": [
+        40,
+        16
+      ],
+      "spin": false,
+      "time": 1.82
+    }
+  },
+  "physics_fps": 60
+}

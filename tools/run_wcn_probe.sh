@@ -37,7 +37,8 @@ case "${1:-}" in
   mush)     MAP=Random_Mushrooms;            EXPECT=probe_mushrooms;     SCRIPT=probe_wcn_mushrooms ;;
   game)     MAP=Random_Game;                  EXPECT=probe_game;          SCRIPT=probe_wcn_game ;;
   points)   MAP=Random_Noise_Types;          EXPECT=probe_points;        SCRIPT=probe_wcn_points ;;
-  *) echo "usage: $0 intro|random|noise|pendulum|sine|effect|air|synth|entropy|entropy_once|remove|walk|gauss|mush|game|points [live]"; exit 3 ;;
+  columns)  MAP=Noise_Columns;               EXPECT=probe_columns;       SCRIPT=probe_wcn_columns ;;
+  *) echo "usage: $0 intro|random|noise|pendulum|sine|effect|air|synth|entropy|entropy_once|remove|walk|gauss|mush|game|points|columns [live]"; exit 3 ;;
 esac
 OUT="ada_run/waves_chance_noise/$MAP"
 SUFFIX=""; [ "$MODE" = "live" ] && SUFFIX="_live"

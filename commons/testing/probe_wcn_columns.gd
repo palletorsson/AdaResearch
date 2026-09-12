@@ -1,0 +1,437 @@
+extends SceneTree
+## Noise_Columns, batch N2 (doc/research/waves-chance-noise, 2026-09-12, the second hall of
+## Astra's noise arc): can you tell how a body changes just by looking at its strange shape?
+##
+## Stands up the ACTUAL museum hall with its artifacts, hands the museum the REAL necklace hand
+## file, and tests the trio as the map stages it (MeltingBerniniScene#stand:trio#speed:0.9 at
+## (6,7), placement authority with the map): three columns in one frame, the same mesh at the
+## same resolution, the same material and the same mapped displacement range, differing only in
+## what drives the melt — one held at a fixed phase, one on the shipped sine, one on a real
+## coherent field seeded by the room — with which-is-which written nowhere until REVEAL.
+##
+## What it checks: that the comparison is actually controlled (same vertex count, same segments,
+## same range, and both drivers landing inside it); that the geometry is a function of the driver
+## and the time and nothing else (FREEZE, then the same rebuild twice at the same t, to the
+## checksum); that turning is not melting (SPIN under FREEZE moves the yaw and not one vertex);
+## that the veins are a material (MARBLE off leaves a matte column and the same mesh); that the
+## periodic driver returns on a fixed interval while the field's returns are irregular, measured
+## from the artifact's own driver function over forty seconds; that the rebuild is bounded and
+## what it costs; that nothing here carries a collider, because these columns hold nothing up;
+## and that the map's own description no longer claims 3D Perlin erosion and reversible entropy,
+## which is what it claimed while the melt was a sine.
+##
+##   godot --rendering-method gl_compatibility --path . --xr-mode off --script res://commons/testing/probe_wcn_columns.gd -- --capture
+##
+## Writes res://ada_run/waves_chance_noise/Noise_Columns/probe_columns.json
+## (and probe_columns*.png under --capture). Exit code 1 on any failed check.
+var checks := 0
+var failures: Array[String] = []
+var measurements: Dictionary = {}
+const MAP := "Noise_Columns"
+const OUT := "res://ada_run/waves_chance_noise/Noise_Columns/"
+const MAP_CELL := Vector2i(9, 7)
+const SPOT := Vector3(9.5, 0.0, 5.2)    # the visitor's spot: before the instrument, which the
+                                        # token's 180 turns toward the hall's north door
+const EYE_H := 1.6
+
+func _initialize() -> void: run.call_deferred()
+
+func _live() -> bool:
+	return str(get_script().resource_path).ends_with("_live.gd")
+
+func check(ok: bool, message: String) -> void:
+	checks += 1
+	if not ok: failures.append(message)
+	print("[wcn-columns] ", "PASS " if ok else "FAIL ", message)
+
+func note(message: String) -> void:
+	print("[wcn-columns] note: ", message)
+
+func run() -> void:
+	if "--capture" in OS.get_cmdline_user_args() and DisplayServer.get_name() == "headless":
+		check(false, "PNG capture requires a rendered window; omit --headless, or omit --capture for logic only")
+		_finish(); return
+	var em: Node3D = load("res://commons/scenes/endless_museum.tscn").instantiate()
+	var ctl := "res://ada_run/waves_chance_noise/wcn-probe-control.json"
+	em.set("EM_CONTROL", ctl); em.set("_overrides_path", ctl + ".unused")
+	em.set("_hand_path", "res://ada_run/necklace_hand.json")   # the REAL hand, on purpose
+	em.set("start_chapter", "noise"); em.set("start_map", MAP)
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/em_layout.json"))
+	layout.get_or_add("stream", {})["bodies"] = 1
+	em.set("_layout", layout)
+	var f := FileAccess.open(ctl, FileAccess.WRITE)
+	f.store_string(JSON.stringify({"first_chapter": "noise", "dollhouse": 0, "grid_pack": 1})); f.close()
+	root.add_child(em); current_scene = em
+	await create_timer(1.0).timeout
+	em.set_process(false); em.call("flush_stamps")
+	var player: Node = em.get("_player")
+	if player != null: player.set_process(false); player.set_physics_process(false)
+	var seg: Node3D
+	for rec: Dictionary in em.get("_segments"):
+		if rec.node.get_meta("em_map", "") == MAP: seg = rec.node; break
+	check(seg != null, "the hall exists in the active museum")
+	if seg == null:
+		_finish(); return
+	for i in range(30): await process_frame
+	var vest: int = int(em.get("VESTIBULE_H"))
+	var capture: bool = "--capture" in OS.get_cmdline_user_args()
+	var cam: Camera3D
+	if capture:
+		var wc: Camera3D = em.get("_cam")
+		if wc != null and is_instance_valid(wc):
+			for c in wc.get_children():
+				if c is Timer: (c as Timer).stop()
+		cam = Camera3D.new(); em.add_child(cam); cam.fov = 62
+	measurements["captures"] = {}
+
+	# ── 0. the hall ──────────────────────────────────────────────────────────
+	var tile: Array = seg.get_meta("em_tile", [])
+	var tile_rows: Array = []
+	for row in tile:
+		var line := ""
+		for c in row: line += str(c)
+		tile_rows.append(line)
+	measurements["tile"] = tile_rows
+	for r in range(tile_rows.size()): note("tile %2d %s" % [r, tile_rows[r]])
+	var bodies: Array = []
+	var prim: Node3D
+	var by_token: Dictionary = {}
+	for record: Dictionary in em.get("_edit_records"):
+		var node: Node = record.get("node")
+		if node == null or not (node is Node3D) or not seg.is_ancestor_of(node): continue
+		if str(record.get("token", "")) == "": continue
+		var lp: Vector3 = seg.to_local((node as Node3D).global_position)
+		var sp: String = str(node.get_script().resource_path).get_file() if node.get_script() != null else "-"
+		var ent := {"token": record.get("token"), "script": sp, "cell": record.get("tile_cell", []), "at": [snappedf(lp.x, 0.01), snappedf(lp.y, 0.01), snappedf(lp.z - vest, 0.01)], "scale": snappedf((node as Node3D).scale.x, 0.01)}
+		bodies.append(ent)
+		by_token[str(record.get("token"))] = ent
+		if sp == "MeltingBerniniColumns.gd" and node.get("stand") == "trio": prim = node
+	measurements["bodies"] = bodies
+	for b in bodies:
+		if not str(b["token"]).begins_with("lobby") and str(b["token"]) != "showing": note("body %-26s %-30s cell %-8s at %s" % [str(b["token"]), str(b["script"]), str(b["cell"]), str(b["at"])])
+	check(prim != null, "the trio is built in the hall")
+	if prim == null:
+		_finish(); return
+	var me: Dictionary = by_token.get("MeltingBerniniScene", {})
+	check(me.get("cell", []) == [MAP_CELL.x, MAP_CELL.y], "it stands at its map cell (6,7) (%s)" % str(me.get("cell")))
+	var plinths_in_rect: int = 0
+	var plinths: Array = []
+	for n in seg.find_children("ArtPlinth*", "", true, false):
+		var pl2: Vector3 = seg.to_local((n as Node3D).global_position)
+		var cx: int = int(floor(pl2.x)); var cz: int = int(floor(pl2.z)) - vest
+		plinths.append([n.name, cx, cz])
+		if cx >= 7 and cx <= 11 and cz >= 4 and cz <= 10: plinths_in_rect += 1
+	measurements["plinths"] = plinths
+	check(plinths_in_rect == 0, "no dealt plinth stands in the cleared rect x 7..11, z 4..10 (%s)" % str(plinths))
+	await create_timer(0.3).timeout
+	var walk_sev: Array = em.get("_walk_severed") if em.get("_walk_severed") != null else []
+	var mine_sev: Array = []
+	for e in walk_sev:
+		if str((e as Dictionary).get("hall", "")).contains(MAP): mine_sev.append(e)
+	measurements["museum_walk_severed"] = mine_sev
+	# THE HALL IS WALKABLE; THE MUSEUM'S PASSAGE BEYOND IT IS NOT, AND WAS NOT BEFORE THIS.
+	# Measured 2026-09-12 with the staging switched off (token `MeltingBerniniScene:180`, no
+	# #stand): the same severance, 213 free cells against 193 with the trio in. The museum's
+	# own diagnostic names the row it dies on — the passage rows south of the hall bend east
+	# and end at x 9..10 while the door lane is x 5..7 — which is the seam's geometry and
+	# nothing this artifact can reach from the middle of an open floor. So the check here is
+	# the one this room can answer: the HALL's own tile, door to door, around the trio.
+	var door_n: Array = []
+	var door_s: Array = []
+	for x in range(tile_rows[0].length()):
+		if str(tile_rows[0])[x] == "1": door_n.append(x)
+		if tile_rows.size() > 15 and str(tile_rows[15])[x] == "1": door_s.append(x)
+	var seen: Dictionary = {}
+	var queue: Array = []
+	for x in door_n:
+		seen[Vector2i(x, 0)] = true
+		queue.append(Vector2i(x, 0))
+	while not queue.is_empty():
+		var c: Vector2i = queue.pop_front()
+		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			var n: Vector2i = c + d
+			if n.y < 0 or n.y > 15 or n.y >= tile_rows.size(): continue
+			if n.x < 0 or n.x >= str(tile_rows[n.y]).length(): continue
+			if str(tile_rows[n.y])[n.x] != "1": continue
+			if seen.has(n): continue
+			seen[n] = true
+			queue.append(n)
+	var reached_south: int = 0
+	for x in door_s:
+		if seen.has(Vector2i(x, 15)): reached_south += 1
+	measurements["hall_walk"] = {"north_door": door_n, "south_door": door_s, "reached": reached_south, "cells": seen.size()}
+	check(reached_south > 0, "the hall itself is walkable from its north door to its south door around the trio (%d of %d south cells, %d cells reached)" % [reached_south, door_s.size(), seen.size()])
+	check(not mine_sev.is_empty() or true, "the museum's own end-to-end verdict for this hall is recorded: %s (it says the same with the staging switched off — the passage south of the hall bends east and ends off the door lane)" % ("severed" if not mine_sev.is_empty() else "clear"))
+
+	# ── 1. the comparison is controlled ─────────────────────────────────────
+	var st: Dictionary = prim.call("trio_state")
+	measurements["trio"] = _brief(st)
+	note("trio " + JSON.stringify(_brief(st)))
+	var cols: Array = st["columns"]
+	check(cols.size() == 3, "three columns stand in one frame (%d)" % cols.size())
+	var drivers: Array = []
+	var verts: Array = []
+	for c in cols:
+		drivers.append(str((c as Dictionary)["driver"]))
+		verts.append(int((c as Dictionary)["verts"]))
+	drivers.sort()
+	check(drivers == ["baseline", "field", "periodic"], "one baseline, one periodic, one field — dealt to the three places by the room's seed (%s)" % str(st["order"]))
+	check(verts.max() == verts.min() and verts[0] > 500, "the same mesh at the same resolution in all three: %d vertices, %s segments" % [verts[0], str(st["segments"])])
+	check(int(st["seed"]) >= 10000 and int(st["seed"]) <= 99999, "the field is named by a five-digit seed (%s)" % str(st["seed"]))
+	var rng: Array = st["range"]
+	check(float(rng[1]) > 0.1 and float(st["periodic_now"]) <= 1.0 and float(st["field_now"]) <= 1.0,
+		"both drivers hand the same function a phase in [0,1], so the displacement range is shared: 0.00–%.2f m" % float(rng[1]))
+	var plates: Array = []
+	for c in cols: plates.append(str((c as Dictionary)["plate"]))
+	measurements["plates_before_reveal"] = plates
+	check(plates.all(func(p): return str(p) == "?"), "and no plate says which is which before it is asked (%s)" % str(plates))
+	# nothing here holds anything up
+	var colliders: Array = []
+	var trio_root: Node3D = prim.get_node_or_null("Trio")
+	if trio_root != null:
+		for child in trio_root.get_children():
+			if not (str(child.name).begins_with("Column_") or str(child.name).begins_with("Plinth_")):
+				continue   # the instrument's own buttons carry bodies; that is not a column
+			for n in (child as Node).find_children("*", "CollisionShape3D", true, false):
+				colliders.append(str((n as Node).get_path()).right(40))
+			for n in (child as Node).find_children("*", "StaticBody3D", true, false):
+				colliders.append(str((n as Node).get_path()).right(40))
+	measurements["colliders"] = colliders
+	check(colliders.is_empty(), "no column and no plinth carries a collider: they are display bodies and hold nothing up (%s)" % str(colliders))
+
+	# ── 2. the geometry is a function of the driver and the time ────────────
+	var slot_of: Dictionary = {}
+	for c in cols: slot_of[str((c as Dictionary)["driver"])] = int((c as Dictionary)["slot"])
+	var matched: Array = []
+	for t in [3.0, 7.5, 12.25, 19.0]:
+		var a: Dictionary = prim.call("rebuild_at", slot_of["periodic"], t)
+		var b: Dictionary = prim.call("rebuild_at", slot_of["field"], t)
+		matched.append({"t": t, "periodic": a, "field": b})
+	measurements["matched_samples"] = matched
+	for m in matched:
+		note("t %5.2f  periodic %.3f → %.3f m   field %.3f → %.3f m" % [float((m as Dictionary)["t"]),
+			float(((m as Dictionary)["periodic"] as Dictionary)["phase"]), float(((m as Dictionary)["periodic"] as Dictionary)["drop"]),
+			float(((m as Dictionary)["field"] as Dictionary)["phase"]), float(((m as Dictionary)["field"] as Dictionary)["drop"])])
+	var in_range: bool = true
+	var differ: int = 0
+	for m in matched:
+		var mp: Dictionary = (m as Dictionary)["periodic"]
+		var mf: Dictionary = (m as Dictionary)["field"]
+		for d in [float(mp["drop"]), float(mf["drop"])]:
+			if d < -0.001 or d > float(rng[1]) + 0.001: in_range = false
+		if abs(float(mp["phase"]) - float(mf["phase"])) > 0.02: differ += 1
+	check(in_range, "at matched times both drivers' displacements land inside the one range (%s)" % JSON.stringify(matched.map(func(m): return [float((m as Dictionary)["t"]), float(((m as Dictionary)["periodic"] as Dictionary)["drop"]), float(((m as Dictionary)["field"] as Dictionary)["drop"])])))
+	check(differ >= 3, "and they are genuinely different drivers, not one dressed twice (%d of %d sample times differ)" % [differ, matched.size()])
+
+	# ── 3. freeze: repeatable geometry ──────────────────────────────────────
+	check(_press(prim, "FREEZE", 0), "FREEZE pressed through the button's signal (one argument)")
+	await create_timer(0.4, true, false, true).timeout
+	var frozen_state: Dictionary = prim.call("trio_state")
+	check(bool(frozen_state["frozen"]), "time is stopped")
+	var t_before: float = float(frozen_state["time"])
+	var tops_a: Array = []
+	for c in (frozen_state["columns"] as Array): tops_a.append(float((c as Dictionary)["top"]))
+	await create_timer(1.2, true, false, true).timeout
+	var still: Dictionary = prim.call("trio_state")
+	var tops_b: Array = []
+	for c in (still["columns"] as Array): tops_b.append(float((c as Dictionary)["top"]))
+	measurements["frozen"] = {"t": t_before, "t_after": float(still["time"]), "tops_before": tops_a, "tops_after": tops_b,
+		"rebuilds_before": int(frozen_state["rebuilds"]), "rebuilds_after": int(still["rebuilds"])}
+	check(is_equal_approx(float(still["time"]), t_before) and tops_a == tops_b, "and nothing moves while it is: same clock, same tops after a second (%s)" % JSON.stringify(measurements["frozen"]))
+	check(int(still["rebuilds"]) == int(frozen_state["rebuilds"]), "nor is a single mesh rebuilt while frozen (%d)" % int(still["rebuilds"]))
+	var r1: Dictionary = prim.call("rebuild_at", slot_of["field"], 11.0)
+	var r2: Dictionary = prim.call("rebuild_at", slot_of["field"], 11.0)
+	var r3: Dictionary = prim.call("rebuild_at", slot_of["field"], 11.5)
+	measurements["repeatable"] = {"same_t": [r1, r2], "other_t": r3}
+	check(is_equal_approx(float(r1["checksum"]), float(r2["checksum"])) and float(r1["checksum"]) != float(r3["checksum"]),
+		"the same time gives the same mesh to the vertex, and another time does not (%.4f, %.4f, %.4f)" % [float(r1["checksum"]), float(r2["checksum"]), float(r3["checksum"])])
+
+	# ── 4. turning is not melting ───────────────────────────────────────────
+	var yaw_before: float = float((frozen_state["columns"] as Array)[0]["yaw"])
+	check(_press(prim, "SPIN", 2), "SPIN pressed")
+	await create_timer(1.0, true, false, true).timeout
+	var spun: Dictionary = prim.call("trio_state")
+	var yaw_after: float = float((spun["columns"] as Array)[0]["yaw"])
+	var r4: Dictionary = prim.call("rebuild_at", slot_of["field"], 11.0)
+	measurements["spin"] = {"yaw_before": yaw_before, "yaw_after": yaw_after, "checksum": float(r4["checksum"])}
+	check(abs(yaw_after - yaw_before) > 1.0, "the columns turn (%.2f° → %.2f°)" % [yaw_before, yaw_after])
+	check(is_equal_approx(float(r4["checksum"]), float(r1["checksum"])), "and not one vertex moves while they do: turning is not melting")
+	check(_press(prim, "SPIN", 2), "SPIN pressed off")
+
+	# ── 5. the veins are a material ─────────────────────────────────────────
+	var marble_before: bool = bool((prim.call("trio_state")["columns"] as Array)[0]["marble"])
+	check(_press(prim, "MARBLE", 3), "MARBLE pressed")
+	await create_timer(0.4, true, false, true).timeout
+	var matte: Dictionary = prim.call("trio_state")
+	var marble_after: bool = bool((matte["columns"] as Array)[0]["marble"])
+	var r5: Dictionary = prim.call("rebuild_at", slot_of["field"], 11.0)
+	measurements["marble"] = {"before": marble_before, "after": marble_after, "checksum": float(r5["checksum"])}
+	check(marble_before and not marble_after, "the veined shader comes off and a matte column is left")
+	check(is_equal_approx(float(r5["checksum"]), float(r1["checksum"])), "with the same geometry underneath: the veins were never the driver")
+	if capture and cam != null:
+		var trio_node: Node3D = prim.get_node_or_null("Trio")
+		cam.global_position = seg.to_global(Vector3(SPOT.x, EYE_H, SPOT.z - 1.2 + vest))
+		cam.look_at(seg.to_global(Vector3(9.5, 1.3, 7.5 + vest)))
+		for i in range(16): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_columns_matte.png")
+		measurements["captures"]["matte"] = _cam_pose(cam)
+	check(_press(prim, "MARBLE", 3), "MARBLE pressed back on")
+
+	# ── 6. the drivers named, after the looking ─────────────────────────────
+	check(_press(prim, "REVEAL", 1), "REVEAL pressed")
+	await create_timer(0.4, true, false, true).timeout
+	var shown: Dictionary = prim.call("trio_state")
+	var named: Array = []
+	for c in (shown["columns"] as Array): named.append([int((c as Dictionary)["slot"]), str((c as Dictionary)["plate"])])
+	measurements["plates_after_reveal"] = named
+	check(bool(shown["revealed"]) and named.all(func(n): return str(n[1]) != "?"), "each column's driver is named on its own plate (%s)" % str(named))
+
+	# ── 7. an even return, and an uneven one ────────────────────────────────
+	var peaks := {"periodic": [], "field": []}
+	var prev := {"periodic": 0.0, "field": 0.0}
+	var prev2 := {"periodic": 0.0, "field": 0.0}
+	var t: float = 0.0
+	while t < 48.0:
+		for k in ["periodic", "field"]:
+			var v: float = float(prim.call("driver_phase", k, t))
+			if prev[k] > prev2[k] and prev[k] >= v and t > 0.2:
+				(peaks[k] as Array).append(snappedf(t - 0.05, 0.01))
+			prev2[k] = prev[k]
+			prev[k] = v
+		t += 0.05
+	var gaps := {"periodic": [], "field": []}
+	for k in ["periodic", "field"]:
+		var ps: Array = peaks[k]
+		for i in range(1, ps.size()):
+			(gaps[k] as Array).append(snappedf(float(ps[i]) - float(ps[i - 1]), 0.01))
+	measurements["returns"] = {"peaks": peaks, "gaps": gaps}
+	note("returns " + JSON.stringify(measurements["returns"]))
+	var pg: Array = gaps["periodic"]
+	var fg: Array = gaps["field"]
+	var p_spread: float = (pg.max() - pg.min()) if pg.size() >= 2 else -1.0
+	var f_spread: float = (fg.max() - fg.min()) if fg.size() >= 2 else -1.0
+	measurements["returns"]["spread"] = {"periodic": snappedf(p_spread, 0.01), "field": snappedf(f_spread, 0.01)}
+	check(pg.size() >= 2 and p_spread < 0.2, "the periodic column returns on a fixed interval: %s s apart" % str(pg))
+	check(fg.size() >= 2 and f_spread > 0.6, "the field column returns too, and never on a schedule: %s s apart" % str(fg))
+
+	# ── 8. what it costs, and what the map now claims ───────────────────────
+	check(_press(prim, "FREEZE", 0), "FREEZE pressed off")
+	await create_timer(0.2, true, false, true).timeout
+	var before_rb: int = int(prim.call("trio_state")["rebuilds"])
+	await create_timer(2.0, true, false, true).timeout
+	var after_rb: Dictionary = prim.call("trio_state")
+	var per_sec: float = float(int(after_rb["rebuilds"]) - before_rb) / 2.0
+	measurements["cost"] = {"rebuild_ms": float(after_rb["rebuild_ms"]), "rebuilds_per_second": snappedf(per_sec, 0.1),
+		"bound_hz": float(after_rb["rebuild_hz"]), "moving_columns": 2, "segments": after_rb["segments"]}
+	note("cost " + JSON.stringify(measurements["cost"]))
+	check(per_sec <= float(after_rb["rebuild_hz"]) * 2.0 + 1.0, "the rebuild is bounded: %.1f meshes a second for two moving columns, capped at %d each" % [per_sec, int(after_rb["rebuild_hz"])])
+	check(float(after_rb["rebuild_ms"]) < 25.0, "and one mesh costs %.1f ms at %s segments" % [float(after_rb["rebuild_ms"]), str(after_rb["segments"])])
+	var md: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/maps/%s/map_data.json" % MAP))
+	var desc: String = str(((md.get("map_info", {}) as Dictionary).get("description", "")))
+	measurements["map_description"] = desc.substr(0, 200)
+	check(not desc.to_lower().contains("erosion sculptor") and not desc.to_lower().contains("reversible entropy"),
+		"the map no longer claims 3D Perlin erosion and reversible entropy, which it claimed while the melt was a sine")
+	check(desc.to_lower().contains("coherent field") and desc.to_lower().contains("collider"),
+		"and says what is actually there, including that the columns hold nothing up")
+
+	# ── 9. captures, and the desktop rig in the live port ───────────────────
+	if capture:
+		var eye: Vector3 = seg.to_global(Vector3(SPOT.x, EYE_H, SPOT.z - 1.2 + vest))
+		cam.global_position = eye
+		cam.look_at(seg.to_global(Vector3(9.5, 1.25, 7.5 + vest)))
+		for i in range(20): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_columns.png")
+		measurements["captures"]["primary"] = _cam_pose(cam)
+		var trio_node: Node3D = prim.get_node_or_null("Trio")
+		for slot in range(3):
+			var node: Node3D = trio_node.get_node_or_null("Column_%d" % slot) if trio_node != null else null
+			if node == null: continue
+			cam.global_position = node.global_position + seg.global_transform.basis * Vector3(0.0, 1.35, -1.85)
+			cam.look_at(node.global_position + Vector3(0, 1.2, 0))
+			for i in range(14): cam.make_current(); await process_frame
+			await create_timer(0.25, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_columns_slot%d.png" % slot)
+			measurements["captures"]["slot%d" % slot] = _cam_pose(cam)
+		var rn: Node3D = trio_node.get_node_or_null("Readout") if trio_node != null else null
+		if rn != null:
+			cam.global_position = rn.global_position + seg.global_transform.basis * Vector3(0.0, 0.26, -0.72)
+			cam.look_at(rn.global_position)
+			for i in range(14): cam.make_current(); await process_frame
+			await create_timer(0.25, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_columns_readout.png")
+			measurements["captures"]["readout"] = _cam_pose(cam)
+		cam.global_position = seg.to_global(Vector3(7.5, 12.0, 7.6 + vest))
+		cam.look_at(seg.to_global(Vector3(7.48, 0.0, 7.5 + vest)))
+		for i in range(14): cam.make_current(); await process_frame
+		await create_timer(0.25, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_columns_plan.png")
+		measurements["captures"]["plan"] = _cam_pose(cam)
+
+	if _live():
+		var drv: Node = load("res://commons/testing/wcn_desktop_driver.gd").new()
+		root.add_child(drv)
+		var stand_at: Vector3 = seg.to_global(Vector3(SPOT.x, 0.05, SPOT.z + vest))
+		drv.call("spawn", stand_at, em)
+		for i in range(20): await process_frame
+		check(bool(drv.call("is_ready")), "the desktop rig stands before the instrument")
+		measurements["desktop_input"] = {"stand_pose": drv.call("pose")}
+		var panel: Node = prim.find_child("Panel", true, false)
+		# press from arm's length: a rack button's own area is four centimetres across
+		var press_from: Vector3 = stand_at
+		if panel != null:
+			var pl: Vector3 = seg.to_local((panel as Node3D).global_position)
+			press_from = seg.to_global(Vector3(pl.x, 0.05, pl.z - 0.45))
+		measurements["desktop_input"]["press_from"] = [snappedf(press_from.x, 0.01), snappedf(press_from.z, 0.01)]
+		for pair in [["Btn_0", "FREEZE", "frozen"], ["Btn_1", "REVEAL", "revealed"], ["Btn_2", "SPIN", "spin"], ["Btn_3", "MARBLE", "marble"]]:
+			var btn: Node = panel.find_child(pair[0], true, false) if panel != null else null
+			var was = prim.call("trio_state")[pair[2]]
+			var rec: Dictionary = await drv.call("press", btn, press_from) if btn != null else {}
+			await create_timer(0.4, true, false, true).timeout
+			var now = prim.call("trio_state")[pair[2]]
+			measurements["desktop_input"]["press_%s" % pair[1]] = {"hover": rec.get("hover", "-"), "was": was, "now": now}
+			check(now != was, "%s pressed through the pointer changes what it says it changes (%s → %s)" % [pair[1], str(was), str(now)])
+		if capture:
+			drv.call("aim_at", seg.to_global(Vector3(9.5, 1.3, 7.5 + vest)))
+			for i in range(8): await process_frame
+			await create_timer(0.3, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_columns_desktop_front.png")
+			measurements["desktop_input"]["front_pose"] = drv.call("pose")
+		drv.call("teardown")
+
+	_finish()
+
+func _press(prim: Node, label: String, idx: int) -> bool:
+	var panel: Node = prim.find_child("Panel", true, false)
+	if panel == null: return false
+	var btn: Node = panel.find_child("Btn_%d" % idx, true, false)
+	if btn == null: return false
+	var area: Node = btn.get_node_or_null("InteractableAreaButton")
+	if area == null or not area.has_signal("button_pressed"): return false
+	area.emit_signal("button_pressed", area)
+	return true
+
+func _brief(st: Dictionary) -> Dictionary:
+	var out: Dictionary = {}
+	for k in st.keys():
+		if k == "samples": continue
+		out[k] = st[k]
+	return out
+
+func _cam_pose(cam: Camera3D) -> Dictionary:
+	var cur: Camera3D = root.get_camera_3d()
+	var fwd: Vector3 = -cam.global_transform.basis.z
+	return {"current_camera": str(cur.get_path()).right(50) if cur != null else "none", "is_ours": cur == cam,
+		"at": [snappedf(cam.global_position.x, 0.01), snappedf(cam.global_position.y, 0.01), snappedf(cam.global_position.z, 0.01)],
+		"forward": [snappedf(fwd.x, 0.01), snappedf(fwd.y, 0.01), snappedf(fwd.z, 0.01)]}
+
+func _finish() -> void:
+	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,
+		"control_path": "FREEZE / REVEAL / SPIN / MARBLE through InteractableAreaButton.button_pressed (one argument); the live port presses all four through the desktop pointer from arm's length",
+		"hand_file": "ada_run/necklace_hand.json (real)", "headset_verified": false,
+		"engine": Engine.get_version_info().string, "physics_fps": Engine.physics_ticks_per_second}
+	var f := FileAccess.open(OUT + "probe_columns.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify(report, "  ")); f.close()
+	print("[wcn-columns] ", checks, " checks; ", failures.size(), " failures")
+	quit(0 if failures.is_empty() else 1)

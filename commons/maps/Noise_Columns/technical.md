@@ -245,3 +245,22 @@ What follows in the sequence is Noise_One, where octave layering stacks multiple
 **frequency_sculptor** — A single column with a real-time frequency slider on the noise field. At frequency 0.1 the column gently bows and tilts as a whole — features larger than the mesh. At 0.5 broad lobes appear, pushing the column into an organic undulating form. At 2.0 the surface develops fine pockmarks and ridges. At 8.0 the displacement approaches per-vertex independence and the surface roughens toward noise-floor static. The slider makes the relationship between frequency and deformation character kinetic rather than conceptual — the learner feels the parameter.
 
 **displacement_mode_selector** — Toggles the displacement direction between normal-aligned, vertical, and vector-field modes on the same column with the same noise seed. Normal displacement produces Bernini-style surface sculpting. Vertical displacement produces compression-and-stretch bands. Vector-field displacement produces full 3D warping and twisting. The same noise, the same mesh, three radically different deformations — demonstrating that the displacement direction is as consequential as the noise function itself.
+
+## The trio (2026-09-12)
+
+`algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd`, opt-in through `#stand:trio`. At `stand:none` the ring of nine builds and animates exactly as before.
+
+| what | where |
+|---|---|
+| the two drivers | `driver_phase(kind, t)` - the shipped sine, and `FastNoiseLite` seeded by the room |
+| the shared mapping | `mapped_drop(phase)` - both phases go through one function into one range |
+| the deal | `_prepare_trio` - the seed names the field and shuffles the drivers into the three places |
+| the trio's frame | `_prepare_trio` again: height, radius, segments, and every deformation amplitude scaled by height/10 |
+| the hardcoded wobbles | `_amp_scale`, 1.0 by default, applied to `wave1/2/3` and the vertex chaos in `generate_spiral_column_mesh` |
+| the bench | `_build_trio` - plinths, blank plates, the cased readout, the four-button panel |
+| the bounded rebuild | `_trio_process` - at most `TRIO_HZ` a second, never while frozen, never for the baseline |
+| the cost | `_rebuild_column` times each mesh and keeps a running average |
+| the controls | `toggle_freeze`, `reveal_drivers`, `toggle_spin`, `toggle_marble` |
+| the state, for a probe | `trio_state()`; `rebuild_at(slot, t)` rebuilds one column at a named time and returns a vertex checksum |
+
+The scene file changed too: `MeltingBerniniScene.tscn` now carries the script on its root with the child's exports moved up verbatim, and its `Camera3D` (which was `current = true`) is gone. The grid calls `apply_grid_config` on the root, so the scriptless root made every map token unreachable, and the camera took the view in each of the twelve halls that place this scene.

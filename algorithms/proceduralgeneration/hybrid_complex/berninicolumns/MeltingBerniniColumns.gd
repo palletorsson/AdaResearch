@@ -61,6 +61,67 @@ var marble_shader: Shader = null
 @export var melt_speed: float = 0.3
 var time: float = 0.0
 
+# ── THE TRIO (stand:trio) — N2, 12 September 2026 ───────────────────────────
+#
+# WHAT THE ROOM ASKS. Can you tell how a body changes just by looking at its
+# strange shape? The hall's own description claimed 3D Perlin erosion and
+# reversible entropy; the shipped melt is a sine, there was no field anywhere in
+# it, and nine columns all moving at once let nobody compare anything. So the
+# staging is a CONTROLLED COMPARISON: three columns in one frame, the same mesh
+# at the same resolution, the same material, the same mapped displacement range
+# and the same viewing distance — differing in ONE thing, which is what drives
+# the melt.
+#
+#   baseline   a fixed phase. The column you can recognise as a column.
+#   periodic   sin(time * melt_speed) * 0.5 + 0.5 — the shipped driver, unchanged.
+#   field      a real coherent field (FastNoiseLite, seeded), sampled along time
+#              and mapped through the SAME [0,1] phase into the SAME function.
+#              Newly implemented for this room, and labelled as such.
+#
+# WHICH COLUMN IS WHICH IS NOT WRITTEN ANYWHERE until REVEAL is pressed, and the
+# three drivers are dealt to the three positions from the room's own seed, so the
+# arrangement is reproducible and not learnable. A shape does not say what made
+# it, and a label before the looking would answer the question the room asks.
+#
+#   stand:none  SHIPPED. The ring of nine, built and animated exactly as before.
+#   stand:trio  The three, the plinths, the instrument, FREEZE · REVEAL · SPIN ·
+#               MARBLE, and a rebuild bounded to TRIO_HZ with its cost measured.
+#
+# FREEZE stops time, so the geometry is repeatable and can be inspected; SPIN
+# turns the whole column without touching the deformation, so rotation cannot be
+# mistaken for melting; MARBLE swaps the veined shader for a matte material, so
+# the material's noise cannot be mistaken for the geometric driver. Nothing here
+# carries a collider: these are display columns and hold nothing up.
+@export_enum("none", "trio") var stand: String = "none"
+@export var field_seed: int = -1
+
+const TRIO_GAP: float = 2.2       # column to column
+const TRIO_H: float = 2.55        # under a three-metre hall's wall
+const TRIO_R: float = 0.20
+const TRIO_VSEG: int = 40         # bounded resolution: the shipped 80 x 24 is 2025
+const TRIO_RSEG: int = 16         # vertices a frame, per column, forever
+const TRIO_MELT: float = 0.35     # phase 0..1 maps to a 0.00..0.70 m drop at the top
+const TRIO_HZ: float = 12.0       # bounded rebuild rate
+const TRIO_BASE_PHASE: float = 0.10
+const TRIO_DRIVERS: PackedStringArray = ["baseline", "periodic", "field"]
+
+var _stand_root: Node3D = null
+var _trio: Array = []
+var _readout: Label3D = null
+var _noise: FastNoiseLite = null
+var _named_seed: int = 0
+var _frozen: bool = false
+var _revealed: bool = false
+var _marble_on: bool = true
+var _spin_on: bool = false
+var _rebuild_ms: float = 0.0
+var _rebuilds: int = 0
+var _next_rebuild: float = 0.0
+var _next_readout: float = 0.0
+var _order: Array = []
+var _samples: Array = []
+var _amp_scale: float = 1.0       # 1.0 is the shipped mesh, to the vertex
+
 # -- Scene State --
 var columns: Array = []  # Holds dictionaries with column node, mesh, material, and metadata
 var column_positions: Array[Vector3] = []
@@ -87,6 +148,11 @@ func _ready() -> void:
 	marble_shader = MARBLE_SHADER if is_instance_valid(MARBLE_SHADER) else null
 	if use_marble_shader and not marble_shader:
 		push_warning("Marble shader missing, reverting to standard material fallback.")
+
+	if stand == "trio":
+		_prepare_trio()
+		_build_trio()
+		return
 
 	# Create the melting columns with different colors
 	for i in range(column_positions.size()):
@@ -128,6 +194,10 @@ func _build_column_positions() -> void:
 		column_positions.append(Vector3(x, 0.0, z))
 
 func _process(delta: float) -> void:
+	if stand == "trio":
+		_trio_process(delta)
+		return
+
 	# Animate the columns if enabled
 	time += delta
 
@@ -370,9 +440,9 @@ func generate_spiral_column_mesh(melt_phase: float = 0.5) -> Mesh:
 		center_offset_z += cos(spiral_angle * 0.5) * overhang
 
 		# Multiple wave frequencies for organic complexity
-		var wave1 = sin(v * PI * 6) * 0.15
-		var wave2 = cos(v * PI * 12) * 0.08
-		var wave3 = sin(v * PI * 20) * 0.04
+		var wave1 = sin(v * PI * 6) * 0.15 * _amp_scale
+		var wave2 = cos(v * PI * 12) * 0.08 * _amp_scale
+		var wave3 = sin(v * PI * 20) * 0.04 * _amp_scale
 		center_offset_x += wave1 + wave2 + wave3
 		center_offset_z += wave1 - wave2 + wave3
 
@@ -392,7 +462,7 @@ func generate_spiral_column_mesh(melt_phase: float = 0.5) -> Mesh:
 			var angle = u * 2.0 * PI + v * twist_factor * 2.0 * PI
 
 			# Add per-vertex randomness for organic texture
-			var vertex_chaos = sin(u * 234.7 + v * 157.3) * chaos_factor * 0.3
+			var vertex_chaos = sin(u * 234.7 + v * 157.3) * chaos_factor * 0.3 * _amp_scale
 
 			# RIBS/FLUTES: Create vertical profile grooves
 			var rib_angle = u * rib_count * 2.0 * PI  # Angle for rib pattern
@@ -642,5 +712,352 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## The map's own hand. `stand` asks for the trio, `seed` names the field, `speed`
+## the sine's rate. Shipped placements send none of these and reach none of it.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.is_empty():
+		return
+	if config.has("stand"):
+		var sv: String = str(config["stand"]).strip_edges().to_lower()
+		stand = "trio" if sv in ["trio", "three", "compare", "colonnade"] else "none"
+	if config.has("seed"):
+		field_seed = int(config["seed"])
+	if config.has("speed"):
+		melt_speed = float(config["speed"])
+	if config.has("count"):
+		column_count = maxi(1, int(config["count"]))
+
+
+# ═════════════════════════════════════════════════════════════════════
+# THE TRIO — stand:trio. Nothing below runs at stand:none.
+# ═════════════════════════════════════════════════════════════════════
+
+## A five-digit name for the field, and the deal that decides which driver stands
+## where. Both come from the one seed, so the room is repeatable and the
+## arrangement is not something a reader can learn once and carry between visits.
+func _prepare_trio() -> void:
+	if field_seed < 0:
+		var namer := RandomNumberGenerator.new()
+		namer.randomize()
+		field_seed = namer.randi_range(10000, 99999)
+	_named_seed = field_seed
+	_noise = FastNoiseLite.new()
+	_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	_noise.seed = field_seed
+	_noise.frequency = 0.35
+	var deal := RandomNumberGenerator.new()
+	deal.seed = field_seed + 7
+	_order = []
+	for d in TRIO_DRIVERS:
+		_order.append(d)
+	for i in range(_order.size() - 1, 0, -1):
+		var j: int = deal.randi_range(0, i)
+		var tmp = _order[i]; _order[i] = _order[j]; _order[j] = tmp
+	# the trio's own frame: three columns a visitor can hold in one look, at a
+	# resolution a room can afford, with the melt mapped into a range both drivers
+	# share exactly
+	column_height = TRIO_H
+	column_radius = TRIO_R
+	vertical_segments = TRIO_VSEG
+	radial_segments = TRIO_RSEG
+	melt_strength = TRIO_MELT
+	rotate_columns = false
+	animate_melting = false
+	show_platform = false
+	# EVERY DEFORMATION AMPLITUDE IN THIS FILE IS IN METRES, and they were tuned for a
+	# column eight to ten metres tall. On a 2.55 m one they tear the shape into flying
+	# shards (measured: the first trio photographed as stacked ribbons, not columns), and
+	# Astra's card asks for a RECOGNISABLE baseline column. So they scale with the height.
+	var k: float = TRIO_H / 10.0
+	_amp_scale = k
+	spiral_density = 1.0            # one turn over the height: a spiral column, not a corkscrew
+	sine_amplitude = 0.30 * k
+	cosine_amplitude = 0.30 * k
+	twist_factor = 0.5
+	overhang_factor = 0.25 * k
+	bulge_amplitude = 0.22 * k
+	chaos_factor = 0.08 * k
+	rib_count = 14
+	rib_depth = 0.14 * k
+	rib_sharpness = 2.0
+
+
+## The phase each driver asks for at time t. One function, three answers; every
+## one of them lands in [0,1] and goes through the same mesh call.
+func driver_phase(kind: String, t: float) -> float:
+	match kind:
+		"periodic":
+			return sin(t * melt_speed) * 0.5 + 0.5          # the shipped driver
+		"field":
+			return clampf(_noise.get_noise_2d(t * 0.55, 0.0) * 0.5 + 0.5, 0.0, 1.0)
+		_:
+			return TRIO_BASE_PHASE
+
+
+## What a phase costs the column: the top loses this much height. Both drivers
+## map through it, so the displacement RANGE is shared and the comparison is of
+## drivers and nothing else.
+func mapped_drop(phase: float) -> float:
+	return 2.0 * melt_strength * phase
+
+
+func _build_trio() -> void:
+	var HangarKit := load("res://commons/artifacts/_hangar/hangar_kit.gd")
+	_stand_root = Node3D.new()
+	_stand_root.name = "Trio"
+	add_child(_stand_root)
+	var stone := StandardMaterial3D.new()
+	stone.albedo_color = Color(0.62, 0.60, 0.56)
+	stone.roughness = 0.9
+	var dark := StandardMaterial3D.new()
+	dark.albedo_color = Color(0.11, 0.115, 0.13)
+	dark.roughness = 0.85
+
+	_trio.clear()
+	for slot in range(3):
+		var kind: String = str(_order[slot])
+		var x: float = (float(slot) - 1.0) * TRIO_GAP
+		var plinth: MeshInstance3D = HangarKit.box(Vector3(x, 0.11, 0.0), Vector3(0.86, 0.22, 0.86), stone)
+		plinth.name = "Plinth_%d" % slot
+		_stand_root.add_child(plinth)
+		var data: Dictionary = create_spiral_column(Color(0.86, 0.84, 0.80), slot)
+		var node: Node3D = data["node"]
+		node.name = "Column_%d" % slot
+		node.position = Vector3(x, 0.22, 0.0)
+		_stand_root.add_child(node)
+		# a plate that says nothing yet: the shape is the only evidence until asked
+		var plate_root := Node3D.new()
+		plate_root.name = "Plate_%d" % slot
+		plate_root.position = Vector3(x, 0.13, 0.45)
+		_stand_root.add_child(plate_root)
+		plate_root.add_child(HangarKit.box(Vector3.ZERO, Vector3(0.52, 0.11, 0.012), dark))
+		var label := Label3D.new()
+		label.name = "Text"
+		label.text = "?"
+		label.pixel_size = 0.0016
+		label.font_size = 20
+		label.modulate = Color(0.88, 0.94, 1.0)
+		label.outline_size = 3
+		label.outline_modulate = Color(0, 0, 0, 1)
+		label.position = Vector3(0, 0, 0.010)
+		plate_root.add_child(label)
+		data["driver"] = kind
+		data["slot"] = slot
+		data["plate"] = label
+		data["phase"] = driver_phase(kind, 0.0)
+		_trio.append(data)
+		_rebuild_column(data, data["phase"])
+
+	# the instrument: what both drivers are doing right now, and in what range
+	var plate_case := Node3D.new()
+	plate_case.name = "Readout"
+	plate_case.set_meta("em_local_instrument", true)
+	plate_case.position = Vector3(-0.55, 1.02, 1.60)
+	plate_case.rotation_degrees = Vector3(-16, 0, 0)
+	_stand_root.add_child(plate_case)
+	plate_case.add_child(HangarKit.box(Vector3.ZERO, Vector3(1.18, 0.26, 0.014), dark))
+	_readout = Label3D.new()
+	_readout.name = "Text"
+	_readout.pixel_size = 0.00092
+	_readout.font_size = 17
+	_readout.line_spacing = 0.5
+	_readout.modulate = Color(0.88, 0.94, 1.0)
+	_readout.outline_size = 3
+	_readout.outline_modulate = Color(0, 0, 0, 1)
+	_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_readout.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	_readout.position = Vector3(-0.565, 0.118, 0.010)
+	plate_case.add_child(_readout)
+
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	if RackTpl != null:
+		var panel: Node3D = RackTpl.create_panel("", [
+			[{"type": "button", "label": "FREEZE"}, {"type": "button", "label": "REVEAL"}],
+			[{"type": "button", "label": "SPIN"}, {"type": "button", "label": "MARBLE"}],
+		], true)
+		panel.name = "Panel"
+		panel.set_meta("em_local_instrument", true)
+		panel.position = Vector3(0.92, 1.06, 1.62)
+		panel.rotation_degrees = Vector3(-26, 0, 0)
+		panel.scale = Vector3(1.4, 1.4, 1.4)
+		_stand_root.add_child(panel)
+		var actions := {"Btn_0": func(): toggle_freeze(), "Btn_1": func(): reveal_drivers(), "Btn_2": func(): toggle_spin(), "Btn_3": func(): toggle_marble()}
+		for btn_name in actions.keys():
+			var btn: Node = panel.find_child(btn_name, true, false)
+			if btn == null:
+				continue
+			var area: Node = btn.get_node_or_null("InteractableAreaButton")
+			if area != null and area.has_signal("button_pressed"):
+				var action: Callable = actions[btn_name]
+				area.button_pressed.connect(func(_b): action.call())
+	create_lighting()
+	_update_trio_readout()
+
+
+## One column's mesh, rebuilt at a phase, with the cost kept. This is the only
+## place the trio spends anything, and the readout prints what it spent.
+func _rebuild_column(data: Dictionary, phase: float) -> void:
+	var shaft: MeshInstance3D = data.get("shaft")
+	if shaft == null or not is_instance_valid(shaft):
+		return
+	var t0: int = Time.get_ticks_usec()
+	shaft.mesh = generate_spiral_column_mesh(phase)
+	var ms: float = float(Time.get_ticks_usec() - t0) / 1000.0
+	_rebuilds += 1
+	_rebuild_ms = ms if _rebuilds <= 1 else (_rebuild_ms * 0.9 + ms * 0.1)
+	data["phase"] = phase
+	data["drop"] = mapped_drop(phase)
+
+
+func _trio_process(delta: float) -> void:
+	if not _frozen:
+		time += delta
+	for data in _trio:
+		var mat = data.get("material")
+		if mat is ShaderMaterial and (mat as ShaderMaterial).shader == marble_shader:
+			(mat as ShaderMaterial).set_shader_parameter("u_time", time)
+	if _spin_on:
+		for data in _trio:
+			var node: Node3D = data.get("node")
+			if node != null and is_instance_valid(node):
+				node.rotation.y += delta * rotation_speed * 2.0
+	# the rebuild is bounded: a column is remade at most TRIO_HZ times a second,
+	# and never at all while frozen or at the baseline
+	if not _frozen and time >= _next_rebuild:
+		_next_rebuild = time + 1.0 / TRIO_HZ
+		for data in _trio:
+			if str(data.get("driver")) == "baseline":
+				continue
+			_rebuild_column(data, driver_phase(str(data.get("driver")), time))
+		if _samples.size() < 600:
+			_samples.append({"t": snappedf(time, 0.01),
+				"periodic": snappedf(driver_phase("periodic", time), 0.001),
+				"field": snappedf(driver_phase("field", time), 0.001)})
+	if time >= _next_readout:
+		_next_readout = time + 0.2
+		_update_trio_readout()
+
+
+## The instrument. It says what each driver is doing and what that costs the
+## column in metres — and it does NOT say which column is which until asked.
+func _update_trio_readout() -> void:
+	if _readout == null or not is_instance_valid(_readout):
+		return
+	var p: float = driver_phase("periodic", time)
+	var fld: float = driver_phase("field", time)
+	var lines: PackedStringArray = PackedStringArray()
+	lines.append("t %6.2f s%s · seed %d · same mesh %d×%d · same range 0.00–%.2f m" % [
+		time, ("  FROZEN" if _frozen else ""), _named_seed, vertical_segments, radial_segments, mapped_drop(1.0)])
+	lines.append("periodic  phase %.3f → drop %.2f m" % [p, mapped_drop(p)])
+	lines.append("field     phase %.3f → drop %.2f m" % [fld, mapped_drop(fld)])
+	lines.append("rebuild %.1f ms · at most %d/s · marble %s · spin %s" % [
+		_rebuild_ms, int(TRIO_HZ), ("on" if _marble_on else "off"), ("on" if _spin_on else "off")])
+	if not _revealed:
+		lines.append("which column is which: press REVEAL — after you have looked")
+	_readout.text = "\n".join(lines)
+
+
+## Stop every changing input. The geometry stands still and can be inspected,
+## and a rebuild at the same time gives the same mesh.
+func toggle_freeze() -> void:
+	if stand != "trio":
+		return
+	_frozen = not _frozen
+	_update_trio_readout()
+
+
+## Name the drivers, after the looking.
+func reveal_drivers() -> void:
+	if stand != "trio":
+		return
+	_revealed = not _revealed
+	for data in _trio:
+		var lbl: Label3D = data.get("plate")
+		if lbl != null and is_instance_valid(lbl):
+			lbl.text = (str(data.get("driver")).to_upper() if _revealed else "?")
+	_update_trio_readout()
+
+
+## Turn the whole column without touching its shape, so a body that is turning
+## cannot be mistaken for a body that is changing.
+func toggle_spin() -> void:
+	if stand != "trio":
+		return
+	_spin_on = not _spin_on
+	_update_trio_readout()
+
+
+## The veins are a material, not a geometry. Take them off and the shape is all
+## that is left to go on.
+func toggle_marble() -> void:
+	if stand != "trio":
+		return
+	_marble_on = not _marble_on
+	for data in _trio:
+		var shaft: MeshInstance3D = data.get("shaft")
+		if shaft == null or not is_instance_valid(shaft):
+			continue
+		if _marble_on:
+			shaft.material_override = data.get("material")
+		else:
+			var matte := StandardMaterial3D.new()
+			matte.albedo_color = Color(0.80, 0.78, 0.74)
+			matte.roughness = 0.85
+			matte.metallic = 0.0
+			shaft.material_override = matte
+	_update_trio_readout()
+
+
+## The trio as the room can read it: the seed, the deal, both drivers now, what
+## each column is doing, what the rebuild costs, and the samples taken so far.
+func trio_state() -> Dictionary:
+	var cols: Array = []
+	for data in _trio:
+		var shaft: MeshInstance3D = data.get("shaft")
+		var mesh: Mesh = shaft.mesh if shaft != null and is_instance_valid(shaft) else null
+		var aabb: AABB = mesh.get_aabb() if mesh != null else AABB()
+		var verts: int = 0
+		if mesh != null and mesh.get_surface_count() > 0:
+			verts = mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX].size()
+		var node: Node3D = data.get("node")
+		cols.append({
+			"slot": data.get("slot"), "driver": data.get("driver"),
+			"phase": snappedf(float(data.get("phase", 0.0)), 0.001),
+			"drop": snappedf(float(data.get("drop", 0.0)), 0.001),
+			"verts": verts,
+			"top": snappedf(aabb.position.y + aabb.size.y, 0.001),
+			"aabb": [snappedf(aabb.size.x, 0.001), snappedf(aabb.size.y, 0.001), snappedf(aabb.size.z, 0.001)],
+			"yaw": snappedf(node.rotation_degrees.y, 0.01) if node != null else 0.0,
+			"plate": str((data.get("plate") as Label3D).text) if data.get("plate") != null else "",
+			"marble": (shaft.material_override is ShaderMaterial) if shaft != null else false,
+		})
+	return {
+		"seed": _named_seed, "order": _order, "time": snappedf(time, 0.01),
+		"frozen": _frozen, "revealed": _revealed, "spin": _spin_on, "marble": _marble_on,
+		"range": [0.0, snappedf(mapped_drop(1.0), 0.001)],
+		"periodic_now": snappedf(driver_phase("periodic", time), 0.001),
+		"field_now": snappedf(driver_phase("field", time), 0.001),
+		"rebuild_ms": snappedf(_rebuild_ms, 0.01), "rebuilds": _rebuilds, "rebuild_hz": TRIO_HZ,
+		"segments": [vertical_segments, radial_segments],
+		"columns": cols, "samples": _samples,
+	}
+
+
+## Rebuild one column at a named time, whatever the clock says: the probe's way
+## of asking whether the geometry is a function of the driver and nothing else.
+func rebuild_at(slot: int, t: float) -> Dictionary:
+	if slot < 0 or slot >= _trio.size():
+		return {}
+	var data: Dictionary = _trio[slot]
+	var phase: float = driver_phase(str(data.get("driver")), t)
+	_rebuild_column(data, phase)
+	var shaft: MeshInstance3D = data.get("shaft")
+	var mesh: Mesh = shaft.mesh if shaft != null else null
+	var checksum: float = 0.0
+	if mesh != null and mesh.get_surface_count() > 0:
+		var verts: PackedVector3Array = mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
+		for i in range(0, verts.size(), 17):
+			checksum += verts[i].x * 1.7 + verts[i].y * 2.3 + verts[i].z * 3.1
+	return {"slot": slot, "driver": data.get("driver"), "t": snappedf(t, 0.001),
+		"phase": snappedf(phase, 0.0001), "drop": snappedf(mapped_drop(phase), 0.0001),
+		"checksum": snappedf(checksum, 0.0001)}

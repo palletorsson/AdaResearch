@@ -1,96 +1,89 @@
 # Noise Columns
 
-Classical columns reshape under coherent noise. Baroque emerges.
+Two ways to make a shape move, and one function they both go through. Every line below is from `algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd`, the artifact the map places as `MeltingBerniniScene`.
 
-Create a noise-driven displacement.
-
-```gdscript
-var noise := FastNoiseLite.new()
-
-func setup_noise(seed: int = 12345) -> void:
-    noise.seed = seed
-    noise.noise_type = FastNoiseLite.TYPE_PERLIN
-    noise.frequency = 0.3
-```
-
-FastNoiseLite is Godot's built-in noise generator. Perlin is the classic choice.
-
-Displace a cylinder's vertices.
+Ask each driver for a phase.
 
 ```gdscript
-func displace_column_vertices(mesh: ArrayMesh, strength: float) -> ArrayMesh:
-    var arrays: Array = mesh.surface_get_arrays(0)
-    var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
-    for i in vertices.size():
-        var v: Vector3 = vertices[i]
-        var offset: float = noise.get_noise_3dv(v) * strength
-        var radial: Vector3 = Vector3(v.x, 0, v.z).normalized()
-        vertices[i] = v + radial * offset
-    arrays[Mesh.ARRAY_VERTEX] = vertices
-    var new_mesh := ArrayMesh.new()
-    new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-    return new_mesh
+func driver_phase(kind: String, t: float) -> float:
+	match kind:
+		"periodic":
+			return sin(t * melt_speed) * 0.5 + 0.5          # the shipped driver
+		"field":
+			return clampf(_noise.get_noise_2d(t * 0.55, 0.0) * 0.5 + 0.5, 0.0, 1.0)
+		_:
+			return TRIO_BASE_PHASE
 ```
 
-Noise drives radial displacement. The column bulges and contracts along its length.
+Three answers, one shape of answer: a number between zero and one. The sine is the melt this artifact shipped with. The field is `FastNoiseLite`, seeded by the room and sampled along time, added for this room and the first coherent field the file has ever contained.
 
-Build the base column mesh.
+Spend the phase in one place.
 
 ```gdscript
-func build_column_mesh(height: float = 3.0, radius: float = 0.5, resolution: Vector2i = Vector2i(16, 32)) -> ArrayMesh:
-    var st := SurfaceTool.new()
-    st.begin(Mesh.PRIMITIVE_TRIANGLES)
-    for ring in range(resolution.y + 1):
-        var t: float = float(ring) / resolution.y
-        for side in range(resolution.x + 1):
-            var angle: float = float(side) / resolution.x * TAU
-            var v := Vector3(cos(angle) * radius, t * height, sin(angle) * radius)
-            st.add_vertex(v)
-    # triangle indices...
-    return st.commit()
+func mapped_drop(phase: float) -> float:
+	return 2.0 * melt_strength * phase
 ```
 
-A parametric cylinder. Resolution balances smoothness against vertex count.
+The phase goes into the same mesh call for every column, and this is what it costs: the height the top loses. Because both drivers hand the same function the same kind of number, the displacement range is shared exactly, and the only difference left between two columns is what proposed the phase.
 
-Animate the displacement.
+Deal the drivers from the seed.
 
 ```gdscript
-@export var displacement_strength: float = 0.0
-@export var target_strength: float = 0.5
-
-func _process(delta: float) -> void:
-    displacement_strength = lerp(displacement_strength, target_strength, delta * 0.5)
-    mesh_instance.mesh = displace_column_vertices(base_mesh, displacement_strength)
+	for i in range(_order.size() - 1, 0, -1):
+		var j: int = deal.randi_range(0, i)
+		var tmp = _order[i]; _order[i] = _order[j]; _order[j] = tmp
 ```
 
-Smooth transition from classical to baroque. The column morphs in real time.
+One number names the field and decides which column is which. The arrangement is reproducible and not learnable, and the plates read a question mark until somebody presses REVEAL.
 
-Sample a terrain height field.
+Scale the amplitudes to the body.
 
 ```gdscript
-func terrain_height(x: float, z: float, frequency: float, amplitude: float) -> float:
-    return noise.get_noise_2d(x * frequency, z * frequency) * amplitude
+	var k: float = TRIO_H / 10.0
+	_amp_scale = k
+	spiral_density = 1.0            # one turn over the height: a spiral column, not a corkscrew
+	sine_amplitude = 0.30 * k
 ```
 
-Samples a 2D noise field. Use this as the Y coordinate for terrain vertices.
+Every deformation amplitude in this file is in metres and they were tuned for a column four times this tall. Unscaled, a 2.55 m column photographs as flying shards. `_amp_scale` is 1.0 by default and reaches the three wobbles hardcoded inside the mesh generator, so the shipped mesh is unchanged to the vertex.
 
-Build a terrain mesh.
+Bound the rebuild.
 
 ```gdscript
-func build_terrain(size: Vector2i, world_size: Vector2, amplitude: float) -> ArrayMesh:
-    var st := SurfaceTool.new()
-    st.begin(Mesh.PRIMITIVE_TRIANGLES)
-    for z in size.y + 1:
-        for x in size.x + 1:
-            var world_x: float = x * world_size.x / size.x
-            var world_z: float = z * world_size.y / size.y
-            var world_y: float = terrain_height(world_x, world_z, 0.2, amplitude)
-            st.add_vertex(Vector3(world_x, world_y, world_z))
-    # triangle strip indices...
-    st.generate_normals()
-    return st.commit()
+	if not _frozen and time >= _next_rebuild:
+		_next_rebuild = time + 1.0 / TRIO_HZ
+		for data in _trio:
+			if str(data.get("driver")) == "baseline":
+				continue
+			_rebuild_column(data, driver_phase(str(data.get("driver")), time))
 ```
 
-Each vertex sits at a noise-sampled height. The terrain rolls smoothly.
+Twelve meshes a second for the two that move, none for the one that does not, and none at all while frozen. The shipped ring rebuilt nine full meshes every frame.
 
-You can now build noise-displaced columns and height-field terrain via coherent noise. Noise_One extends into fBm (fractal Brownian motion).
+Time what it costs.
+
+```gdscript
+	var t0: int = Time.get_ticks_usec()
+	shaft.mesh = generate_spiral_column_mesh(phase)
+	var ms: float = float(Time.get_ticks_usec() - t0) / 1000.0
+```
+
+About 3.5 ms a mesh at forty by sixteen segments, printed on the plate beside the drivers, because a room that rebuilds geometry should say what that costs.
+
+Make the shape answerable.
+
+```gdscript
+func rebuild_at(slot: int, t: float) -> Dictionary:
+	var phase: float = driver_phase(str(data.get("driver")), t)
+	_rebuild_column(data, phase)
+```
+
+Rebuild one column at a named time and return a checksum over its vertices. The same time twice gives the same mesh; another time gives a different one; turning the column changes neither. That is how a probe, or a visitor with FREEZE and SPIN, establishes that the geometry is a function of the driver and the time and of nothing else.
+
+Stage it in a map.
+
+```
+MeltingBerniniScene:180#stand:trio#speed:0.9
+```
+
+`stand:trio` builds the three columns, the plinths, the blank plates, the instrument and FREEZE, REVEAL, SPIN and MARBLE; `seed` names the field; `speed` sets the sine rate, and 0.9 puts a full period inside a look. The `180` turns the instrument toward the hall's north door. Without the token the artifact is what it always was: a ring of thirteen columns melting on a sine.
