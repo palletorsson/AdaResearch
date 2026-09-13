@@ -57,3 +57,25 @@ Two harness faults found on the way, both of which had made the first live chain
 `bash tools/run_wcn_probe.sh sine live`, Godot free: 61 checks, 0 failures. Why the rerun: after this room's 20:50 run the shared probe sources changed (the capture settle moved from the render server's `frame_post_draw` to a timer; the driver's pose log and the guard flag were added), so the evidence is regenerated from the sources that now stand; the results are the same as the second pass. Captures refreshed in place. Headset: pending.
 
 **2026-09-12 — the visual pass (Astra: "the long readout line escapes its black plate at the approach… make the entrance/exit floor boundary clear").** The readout is four lines (amp and phase; cycles over length; the x-gap; running or frozen), none over 34 characters, on a 0.95 × 0.36 m plate at +0.64 m over the panel; the passage's two mouths carry a dark threshold strip across the floor. The panel keeps its place at the west mouth. Live: 64 checks / 0 failures.
+
+
+## Sine contact forecourt — 2026-09-12
+
+Added a separate six-row forecourt, preserving the previous four artifacts and all internal corridor/bridge/basin spacing. One stationary sine contact tray with a side desk, tilted display and transparent side guards makes the article question an in-hall action. RELEASE/RELIEF/SIZE/RESET/RULE; 32 interacting spheres and a twelve-second deadline. Two primaries now match explicit final.md sections: tray, then corridor. Existing case and basin remain available. Corrected stale technical dimensions and the floor-collision description. Original files saved in doc/space/sine-flow-hall-2026-09-12/before. Runtime evidence is kept separately from the article series; headset review remains pending.
+
+
+## 2026-09-13 — W1c: clearance, the player's body, and what a change leaves behind (Fable; Astra's status "Runtime report reviewed; actual input and headset pending")
+
+**Found before starting.** This hall carries a complete piece of another session's work from 2026-09-12 15:40–16:53, uncommitted and unclaimed on the forum. It includes the six-row forecourt, the corridor moved from (6,4) to (6,10), `sine_flow_tray` with its registry entry and its own probe (`probe_sine_flow_hall`, 41 checks), a new final and rewritten supporting texts, an article page and a before snapshot. Astra's current card already lists the tray as a primary. I worked on the corridor, which her evidence list is about, and did not modify the tray, its probe or its article (forum 260913-l46cz).
+
+**Clearance across everything the panel can reach.** The sweep covered 720 states: five AMP steps, nine PHASE offsets and sixteen running phases, all evaluated on `wall_displacements` with no rebuild in between. It measured the local-X gap and the true shortest distance between the two wall curves, with a per-state search window that makes the second exact. Both minima are 0.725 m, at full AMP, walls in step, running phase zero. The x-gap and the true clearance coincide there, because the pinch is symmetric. My first window was a fixed 0.70 m, narrower than the answer, so that run could not show it was exact.
+
+**The player's own body.** The rig's CharacterBody3D walked 7.5 m through the passage at the narrowest setting. Its 87 contacts were all floors: 79 with FloorBody and 8 with the hall's Collision. The corridor produced no side contact.
+
+**Changes and colliders.** Everything went through the desktop pointer. FREEZE held both meshes still for twenty frames. Dragging AMP (0.20 to 0.34 m) changed both meshes. Dragging PHASE (0.60 to 1.89 rad) changed only the right wall, which is the one the offset belongs to. The collider census was one floor slab throughout, including after RESET, and RESET returned 0.20 m, 0.60 rad and running.
+
+**A trap on the way.** A slider's grabbable part is its HANDLE, a body of its own riding the track at the current value, not the slider's root. The first drags aimed at the root and met nothing. The Perlin/Simplex drag earlier today worked only because its handle sat near mid-track.
+
+**A risk, reported and not changed.** While running, both walls are rebuilt through SurfaceTool every frame, about 8,400 vertices each. That took 9 to 12.5 ms of a 16.7 ms desktop frame across runs. On a headset's mobile CPU this is likely to break the frame budget. The scene is placed in eight maps, and a throttle or a vertex-shader version would change how the walls move in every one of them, so that is Palle's and Astra's call.
+
+Bare lane 65 checks / 0 failures, live 84 / 0. Pending: headset, where the rebuild cost matters most; a person at the panel; Astra's review.

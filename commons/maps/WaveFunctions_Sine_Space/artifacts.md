@@ -1,48 +1,11 @@
-# WaveFunctions Sine Space — Artifacts
-*Wavefunctions: Everything Oscillates · oscillation · 6 artifacts*
+# Sine Space — current artifacts
 
-> The wave made spatial. Walk through a sine function frozen in three dimensions — amplitude as height, frequency as compression, phase as shift. The mathematics of oscillation becomes architecture you can inhabit.
+| Order | Artifact | Role | Place and question |
+|---|---|---|---|
+| 1 | `sine_flow_tray` | Primary / book | Forecourt (3,4): what does this stationary surface permit this body to do? |
+| 2 | `sine_wall_corridor` | Primary / book | Passage (6,10): what changes when a visible wave has no wall collision? |
+| 3 | `sine_wall_explanation` | Secondary | West nook (1,7): inspect the wall rule at another scale. |
+| 4 | `sine_space` | Secondary | Basin (9,22): an older animated product-of-sines field. |
+| 5 | `dark_sphere` | Decoration / reference | Basin (9,20): a reference body within the older scene. |
 
-The map, read through what it holds — its artifacts in the order you meet them:
-
-## Sine Wall Corridor
-![Sine Wall Corridor](/scene-catalog/sine_wall_corridor.png)
-
-A passageway bounded by undulating walls—walking through is walking through a frozen wave. The body experiences wavelength as architectural scale.
-
-`sine_wall_corridor`
-
-## Sine Wall Explanation
-![Sine Wall Explanation](/scene-catalog/sine_wall_explanation.png)
-
-1m display case showing how sine function shapes corridor walls. Animated mini-corridor demonstrates x = A·sin(f·z)—the wave displacement that creates the sine_wall_corridor effect. Shows amplitude, frequency parameters with live wave propagation.
-
-`sine_wall_explanation`
-
-## Sine Space Explanation
-![Sine Space Explanation](/scene-catalog/sine_space_explanation.png)
-
-1m display case showing how sine waves modulate 3D space. An 8×8 grid of points demonstrates y = A·sin(x)·sin(z)—the product of two sine functions creating a wave surface. Points rise and fall showing phase relationships across X and Z axes.
-
-`sine_space_explanation`
-
-## colorballs
-![colorballs](/scene-catalog/colorballs.png)
-
-N rigid spheres sampled from named color palettes — physics + palette = chromatic rain
-
-`colorballs`
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
-
-## Sine Space
-![Sine Space](/scene-catalog/sine_space.png)
-
-3D space defined by sine waves — walls, floors, and ceilings undulate according to wave parameters. An environment where the sine function becomes architecture.
-
-`sine_space`
+Primary assignments and order are stored in `commons/data/artifact_roles.json`. Both primary tokens have explicit sections in final.md. Existing secondary material is retained; the new tray uses its own script, leaving the article's recorded four-tray apparatus unchanged.
