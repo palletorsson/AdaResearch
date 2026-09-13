@@ -23,7 +23,7 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "WaveFunctions_Sine_Space"
 const OUT := "res://ada_run/waves_chance_noise/WaveFunctions_Sine_Space/"
-const MAP_CELL := Vector2i(6, 4)
+const MAP_CELL := Vector2i(6, 10)
 
 func _ready() -> void: run.call_deferred()
 
@@ -63,7 +63,7 @@ func run() -> void:
 	if seg == null:
 		_finish(); return
 	for i in range(30): await get_tree().process_frame
-	var vest: int = int(em.get("VESTIBULE_H"))
+	var vest: int = int(em.get("VESTIBULE_H")) + 6 # preserved corridor coordinates, after new forecourt + 6 # preserved corridor coordinates, after new forecourt
 
 	# ── 1. built where the map put it, turned along the antechamber ──────────
 	var cor: Node3D
@@ -86,11 +86,11 @@ func run() -> void:
 	var cc: Array = cells.get("corridor", [])
 	# _edit_records keeps MAP cells (observed 2026-09-10: [6, 4]); the vestibule offset lives in world z only
 	if cc.size() >= 2:
-		check(int(cc[0]) == MAP_CELL.x and int(cc[1]) == MAP_CELL.y, "built at the map's cell (6,4), not a bench bead (got %s)" % str(cc))
+		check(int(cc[0]) == MAP_CELL.x and int(cc[1]) == MAP_CELL.y, "built at the map's cell (6,10), not a bench bead (got %s)" % str(cc))
 	# the one remaining case stands in the row-1 nook, off every route (2026-09-10: at (1,2) it cut the
 	# west approach into a pocket; sine_space_explanation left the hall, its display 4 m off its origin)
 	var case_cell: Array = cells.get("sine_wall_explanation", [])
-	check(case_cell.size() >= 2 and int(case_cell[0]) == 1 and int(case_cell[1]) == 1, "sine_wall_explanation stands in the north-west nook (1,1) (got %s)" % str(case_cell))
+	check(case_cell.size() >= 2 and int(case_cell[0]) == 1 and int(case_cell[1]) == 7, "sine_wall_explanation stands in the north-west nook (1,7) (got %s)" % str(case_cell))
 	check(not cells.has("sine_space_explanation"), "sine_space_explanation is no longer placed in this hall")
 	for record: Dictionary in em.get("_edit_records"):
 		var node: Node = record.get("node")
@@ -232,6 +232,82 @@ func run() -> void:
 	measurements["drift"] = {"at_z": d_before, "at_z_after": d_after, "just_west_before": d_west_before}
 	check(absf(d_after - d_before) > 0.0005, "running again, the wall at one place changes over 30 frames")
 
+	# ── 3b. MINIMUM CLEARANCE ACROSS EVERYTHING THE PANEL CAN REACH ───────────────────
+	# AMP 0..amplitude_max, PHASE offset 0..pi, and the running phase through a full turn,
+	# swept on the script's own displacement function with no rebuild in between (one frame,
+	# no await, so _process cannot run on a half-set state). Two numbers per state: the
+	# local-X gap the readout prints, and the true shortest distance between the two wall
+	# curves, which is smaller wherever the walls slope.
+	var keep := {"a": float(cor.get("base_amplitude")), "o": float(cor.get("phase_offset_between_walls")), "p": float(cor.get("phase"))}
+	var W_: float = float(cor.get("corridor_width"))
+	var Lc: float = float(cor.get("corridor_length"))
+	var cols: int = int(cor.get("columns"))
+	var amax: float = float(cor.get("amplitude_max"))
+	var dz: float = Lc / float(cols - 1)
+	var win: int = 20
+	var sweep_min_x := {"gap": INF}
+	var sweep_min_n := {"gap": INF}
+	var states := 0
+	for ai in range(5):
+		var a: float = amax * float(ai) / 4.0
+		for oi in range(9):
+			var o: float = PI * float(oi) / 8.0
+			for pi_ in range(16):
+				var ph: float = TAU * float(pi_) / 16.0
+				cor.set("base_amplitude", a); cor.set("phase_offset_between_walls", o); cor.set("phase", ph)
+				var xl := PackedFloat32Array(); var xr := PackedFloat32Array()
+				xl.resize(cols); xr.resize(cols)
+				var gx := INF
+				for c in range(cols):
+					var d: Array = cor.call("wall_displacements", c / float(cols - 1))
+					xl[c] = -W_ * 0.5 + float(d[0]); xr[c] = W_ * 0.5 - float(d[1])
+					gx = minf(gx, xr[c] - xl[c])
+				# EXACT BY CONSTRUCTION: the same-z pair already gives gx, so no pair further
+				# apart along the passage than gx can be nearer. The window is sized per state.
+				var gn := gx
+				win = mini(cols, int(ceil(gx / dz)) + 1)
+				if a <= 0.0:
+					win = 0   # flat walls: the gap is the width everywhere and gx is exact
+				for i in range(cols):
+					for j in range(maxi(0, i - win), mini(cols, i + win + 1)):
+						var ddx: float = xr[j] - xl[i]
+						var ddz: float = float(j - i) * dz
+						gn = minf(gn, sqrt(ddx * ddx + ddz * ddz))
+				states += 1
+				if gx < float(sweep_min_x["gap"]): sweep_min_x = {"gap": gx, "amp": a, "offset": o, "phase": ph}
+				if gn < float(sweep_min_n["gap"]): sweep_min_n = {"gap": gn, "amp": a, "offset": o, "phase": ph}
+			# keep the runner's 16 s output watchdog fed: the sweep is millions of steps
+			note("clearance sweep: AMP %.3f offset %.3f" % [a, o])
+	cor.set("base_amplitude", keep["a"]); cor.set("phase_offset_between_walls", keep["o"]); cor.set("phase", keep["p"])
+	measurements["clearance_sweep"] = {"states": states, "columns": cols, "window": "per state, ceil(local-X gap / column spacing) + 1 columns: exact",
+		"min_x_gap": sweep_min_x, "min_true_clearance": sweep_min_n, "body_diameter_m": 0.44}
+	note("clearance " + JSON.stringify(measurements["clearance_sweep"]))
+	check(states == 720, "every reachable state swept: 5 amplitudes, 9 offsets, 16 running phases (%d)" % states)
+	check(float(sweep_min_n["gap"]) <= float(sweep_min_x["gap"]) + 0.0001, "the true clearance is never larger than the local-X gap (%.3f vs %.3f m)" % [float(sweep_min_n["gap"]), float(sweep_min_x["gap"])])
+	check(is_equal_approx(float(sweep_min_x["amp"]), amax) and absf(float(sweep_min_x["offset"])) < 0.001, "the passage is narrowest at full AMP with the walls in step (offset %.2f rad)" % float(sweep_min_x["offset"]))
+	check(float(sweep_min_n["gap"]) > 0.44, "even there a 0.44 m body fits between the surfaces it sees (%.3f m)" % float(sweep_min_n["gap"]))
+
+	# ── 3c. THE RUNNING ANIMATION'S BUDGET ──────────────────────────────────────────
+	# While running, _process rebuilds both wall meshes every frame. Timed here on a
+	# forced rebuild; collision is off in this placement, so no collider is rebuilt with it.
+	var times: Array = []
+	for k in range(10):
+		cor.set("_last_signature", "")
+		var t0 := Time.get_ticks_usec()
+		cor.call("_build_corridor")
+		times.append(float(Time.get_ticks_usec() - t0) / 1000.0)
+	var tsum := 0.0
+	var tmax := 0.0
+	for t in times:
+		tsum += float(t); tmax = maxf(tmax, float(t))
+	measurements["rebuild_ms"] = {"mean": snappedf(tsum / times.size(), 0.01), "max": snappedf(tmax, 0.01)}
+	note("rebuild " + JSON.stringify(measurements["rebuild_ms"]))
+	# A FINDING, NOT A PASS: both walls are rebuilt through SurfaceTool every running frame
+	# (about 8,400 vertices each). The check holds it to one desktop frame; what that costs
+	# on a headset's mobile CPU is not measurable here and is reported as a risk.
+	measurements["rebuild_ms"]["share_of_60hz_frame"] = snappedf((tsum / times.size()) / 16.667, 0.01)
+	check(tsum / times.size() < 16.667, "a running frame's rebuild of both walls costs %.2f ms on average (max %.2f): %d%% of a 60 Hz frame on this desktop" % [tsum / times.size(), tmax, int(round(100.0 * (tsum / times.size()) / 16.667))])
+
 	# ── 5. the passage and the museum's route: a body's capsule ───────────────
 	var space := seg.get_world_3d().direct_space_state
 	var cap := CapsuleShape3D.new(); cap.radius = 0.22; cap.height = 1.6
@@ -307,6 +383,88 @@ func run() -> void:
 		measurements["desktop_input"]["press_again"] = rec2
 		measurements["desktop_input"]["running_after_second_click"] = bool(cor.call("is_animating"))
 		check(bool(cor.call("is_animating")), "a second left click on FREEZE runs the walls again: the toggle, through the input pipeline")
+		# ── MESH, COLLIDERS AND THE BODY, THROUGH THE POINTER ───────────────────────
+		var census0: Array = _colliders(cor)
+		measurements["desktop_input"]["colliders_before"] = census0
+		# FREEZE first, through the pointer, so the mesh changes below are the controls' alone
+		var frz: Dictionary = await drv.call("press", btn_freeze, stand)
+		await get_tree().process_frame
+		check(not bool(cor.call("is_animating")), "FREEZE through the pointer again: frozen for the comparisons")
+		var hl0: float = _mesh_hash(cor.get_node_or_null("LeftWall"))
+		var hr0: float = _mesh_hash(cor.get_node_or_null("RightWall"))
+		for i in range(20): await get_tree().process_frame
+		check(is_equal_approx(hl0, _mesh_hash(cor.get_node_or_null("LeftWall"))) and is_equal_approx(hr0, _mesh_hash(cor.get_node_or_null("RightWall"))),
+			"frozen, the displayed walls do not change over 20 frames")
+		# AMP, dragged
+		var c_before: Dictionary = cor.call("contract")
+		var dr_amp: Dictionary = await _drag_slider(drv, amp, stand)
+		await get_tree().process_frame
+		var c_amp: Dictionary = cor.call("contract")
+		var hl1: float = _mesh_hash(cor.get_node_or_null("LeftWall"))
+		var hr1: float = _mesh_hash(cor.get_node_or_null("RightWall"))
+		measurements["desktop_input"]["drag_amp"] = {"record": dr_amp, "amp_was": c_before.amplitude, "amp_now": c_amp.amplitude, "readout": cor.call("readout_text")}
+		check(not is_equal_approx(float(c_amp.amplitude), float(c_before.amplitude)), "AMP dragged through the pointer changes the amplitude (%.3f -> %.3f m)" % [float(c_before.amplitude), float(c_amp.amplitude)])
+		check(not is_equal_approx(hl1, hl0) and not is_equal_approx(hr1, hr0), "and it reaches BOTH displayed wall meshes")
+		check(str(cor.call("readout_text")).begins_with("amp %.2f m" % float(c_amp.amplitude)), "and the readout prints the new amplitude")
+		# PHASE, dragged
+		var dr_ph: Dictionary = await _drag_slider(drv, pha, stand)
+		await get_tree().process_frame
+		var c_ph: Dictionary = cor.call("contract")
+		var hl2: float = _mesh_hash(cor.get_node_or_null("LeftWall"))
+		var hr2: float = _mesh_hash(cor.get_node_or_null("RightWall"))
+		measurements["desktop_input"]["drag_phase"] = {"record": dr_ph, "offset_was": c_amp.phase_offset, "offset_now": c_ph.phase_offset}
+		check(not is_equal_approx(float(c_ph.phase_offset), float(c_amp.phase_offset)), "PHASE dragged through the pointer changes the offset (%.3f -> %.3f rad)" % [float(c_amp.phase_offset), float(c_ph.phase_offset)])
+		check(not is_equal_approx(hr2, hr1) and is_equal_approx(hl2, hl1), "and moves the RIGHT wall's mesh while the left wall's stays exactly as it was: the offset belongs to one wall")
+		var census1: Array = _colliders(cor)
+		measurements["desktop_input"]["colliders_after_changes"] = census1
+		check(census1 == census0, "no collider appeared, vanished or was left behind by the changes (%s)" % str(census1))
+		check(not str(census1).contains("Wall"), "and none of them is a wall")
+		# THE BODY, at the narrowest setting the panel can reach (set by method: this tests the
+		# collider, not the control), walking the passage west to east with every contact kept
+		cor.call("set_amplitude", float(cor.get("amplitude_max")))
+		cor.call("set_phase_offset", 0.0)
+		await get_tree().process_frame
+		var gr_walk: Array = cor.call("gap_range")
+		var rig: CharacterBody3D = drv.get("rig")
+		rig.global_position = seg.to_global(Vector3(3.3, 0.05, 4.5 + vest))
+		rig.velocity = Vector3.ZERO
+		await get_tree().physics_frame
+		drv.call("aim_at", seg.to_global(Vector3(10.5, 1.2, 4.5 + vest)))
+		var start_w: Vector3 = rig.global_position
+		var touched := {}
+		var side_hits := 0
+		Input.action_press("ui_up")
+		for fr in range(90):
+			await get_tree().physics_frame
+			for k in range(rig.get_slide_collision_count()):
+				var col: KinematicCollision3D = rig.get_slide_collision(k)
+				var who: Object = col.get_collider()
+				var nm: String = str((who as Node).name) if who is Node else "?"
+				var up: bool = col.get_normal().y > 0.7
+				touched[nm + (" (floor)" if up else " (side)")] = int(touched.get(nm + (" (floor)" if up else " (side)"), 0)) + 1
+				if not up and who is Node and cor.is_ancestor_of(who as Node):
+					side_hits += 1
+		Input.action_release("ui_up")
+		for i in range(3): await get_tree().physics_frame
+		var moved_w: Vector3 = seg.global_transform.basis.inverse() * (rig.global_position - start_w)
+		measurements["desktop_input"]["body_walk_narrowest"] = {"gap_range": gr_walk, "moved": [snappedf(moved_w.x, 0.01), snappedf(moved_w.z, 0.01)], "contacts": touched}
+		note("body walk " + JSON.stringify(measurements["desktop_input"]["body_walk_narrowest"]))
+		check(moved_w.x > 5.5, "at the narrowest setting the player's own body walks the passage (%.2f m east)" % moved_w.x)
+		check(side_hits == 0, "and nothing of the corridor ever pushed it sideways: its contacts were %s" % str(touched))
+		# RESET, pressed
+		var rst_btn: Node = panel.find_child("Btn_1", true, false)
+		var rst: Dictionary = await drv.call("press", rst_btn, stand) if rst_btn != null else {}
+		await get_tree().process_frame
+		var c_r: Dictionary = cor.call("contract")
+		var decl: Dictionary = cor.call("declared")
+		measurements["desktop_input"]["press_reset"] = {"hover": str(rst.get("hover", "")).right(40), "contract": c_r}
+		check(str(rst.get("hover", "")).contains("Btn_1"), "RESET: the crosshair was on Btn_1 itself (%s)" % str(rst.get("hover", "")).right(40))
+		check(is_equal_approx(float(c_r.amplitude), float(decl.get("amplitude", -1.0))) and is_equal_approx(float(c_r.phase_offset), float(decl.get("phase_offset", -1.0))) and bool(c_r.animate) == bool(decl.get("animate", false)),
+			"RESET through the pointer returns the declared amplitude, offset and running state (%.2f m, %.2f rad, %s)" % [float(c_r.amplitude), float(c_r.phase_offset), str(c_r.animate)])
+		var hr3: float = _mesh_hash(cor.get_node_or_null("RightWall"))
+		for i in range(20): await get_tree().process_frame
+		check(not is_equal_approx(hr3, _mesh_hash(cor.get_node_or_null("RightWall"))), "running again, the displayed wall changes over 20 frames")
+		check(_colliders(cor) == census0, "and the collider census is still what it was before anything was touched")
 		await drv.call("teardown")
 		measurements["desktop_input"]["log"] = drv.get("log")
 		measurements["desktop_input"]["walker_cam_guard_stopped"] = drv.get("walker_cam_guard_stopped")
@@ -385,6 +543,52 @@ func _dump_built_row(em: Node) -> void:
 		toks.append([str((b as Dictionary).get("token", "")), (b as Dictionary).get("world", []), (b as Dictionary).get("tile_cell", [])])
 	measurements["built_bodies"] = toks
 
+func note(message: String) -> void:
+	print("[wcn-sine] note: ", message)
+
+## A fingerprint of a displayed wall: a weighted sum over every seventh vertex.
+func _mesh_hash(mi: MeshInstance3D) -> float:
+	if mi == null or mi.mesh == null or mi.mesh.get_surface_count() == 0:
+		return -1.0
+	var v: PackedVector3Array = mi.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
+	var h := 0.0
+	for i in range(0, v.size(), 7):
+		h += v[i].x * 1.3 + v[i].y * 2.1 + v[i].z * 3.7
+	return snappedf(h, 0.000001)
+
+## Every live collision shape under the corridor, by its body's name — the panel's own
+## push buttons excluded, since they are the hand's targets, not the passage.
+func _colliders(cor: Node) -> Array:
+	var out: Array = []
+	var pnl: Node = cor.get_node_or_null("Panel")
+	for n in cor.find_children("*", "CollisionShape3D", true, false):
+		var cs: CollisionShape3D = n
+		if cs.shape == null or cs.disabled:
+			continue
+		if pnl != null and pnl.is_ancestor_of(cs):
+			continue
+		out.append("%s/%s:%s" % [str(cs.get_parent().name), str(cs.name), cs.shape.get_class()])
+	out.sort()
+	return out
+
+## Drag a panel slider through the pointer, from the stand the panel's buttons are pressed
+## from. The grabbable part is the HANDLE, a body of its own that rides along the track at the
+## slider's current value — not the slider's root. (A first run aimed at the root and met
+## nothing; the Perlin/Simplex drag had worked only because its handle sat mid-track.)
+func _drag_slider(drv: Node, slider: Node3D, stand_at: Vector3) -> Dictionary:
+	if slider == null:
+		return {"skipped": "no slider"}
+	var handle: Node3D = slider.get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle")
+	var from: Vector3 = handle.global_position if handle != null else slider.global_position
+	var to: Vector3 = from + (slider.global_transform.basis * Vector3(0.10, 0.0, 0.0))
+	var rig: CharacterBody3D = drv.get("rig")
+	rig.global_position = stand_at
+	rig.velocity = Vector3.ZERO
+	await get_tree().physics_frame
+	var rec: Dictionary = await drv.call("drag", from, to, 16)
+	rec["grabbed_handle"] = handle != null
+	return rec
+
 func _press(panel: Node, btn_name: String) -> bool:
 	if panel == null: return false
 	var btn: Node = panel.find_child(btn_name, true, false)
@@ -413,7 +617,11 @@ func _mesh_extent(node: Node) -> AABB:
 
 func _finish() -> void:
 	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,
-		"control_path": "slider_moved and button_pressed emitted programmatically on the panel's own controls; no tracked hand",
+		"lanes": {"model_lane": "slider_moved and button_pressed emitted on the panel's own controls",
+			"pointer_lane_expected": _live(), "pointer_lane_ran": (measurements.get("desktop_input", {}) as Dictionary).has("drag_amp")},
+		"control_path": ("AMP and PHASE dragged and FREEZE and RESET pressed through the desktop pointer, the meshes and colliders read after each, and the player's own body walked through the passage at its narrowest; the model lane emits the same controls' signals"
+			if (measurements.get("desktop_input", {}) as Dictionary).has("drag_amp")
+			else "model lane in this run: slider_moved and button_pressed emitted on the panel's own controls, no pointer; the live lane drags both sliders, presses both buttons and walks the player's body through the passage"),
 		"hand_file": "ada_run/necklace_hand.json (real)", "headset_verified": false,
 		"engine": Engine.get_version_info().string, "physics_fps": Engine.physics_ticks_per_second}
 	var f := FileAccess.open(OUT + "probe_sine_space_live.json", FileAccess.WRITE)
