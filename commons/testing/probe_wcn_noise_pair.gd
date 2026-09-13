@@ -1,0 +1,440 @@
+extends SceneTree
+## Noise_Perlin_Simplex pilot (doc/research/waves-chance-noise, 2026-09-10):
+## are the two fields drawn from the bases they are named for, and is everything
+## else the same?
+##
+## Stands up the ACTUAL museum hall with its artifacts, finds both roots by
+## script, reads the noise_type back from each FastNoiseLite (not from the scene
+## name), compares the full contract, samples the same coordinates on both,
+## replays per basis, and moves one panel slider through its own slider_moved
+## signal — emitted programmatically, no tracked hand.
+##
+##   godot --rendering-method gl_compatibility --path . --xr-mode off --script res://commons/testing/probe_wcn_noise_pair.gd -- --capture
+##
+## Writes res://ada_run/waves_chance_noise/Noise_Perlin_Simplex/probe_noise_pair.json.
+var checks := 0
+var failures: Array[String] = []
+var measurements: Dictionary = {}
+const MAP := "Noise_Perlin_Simplex"
+const OUT := "res://ada_run/waves_chance_noise/Noise_Perlin_Simplex/"
+
+func _initialize() -> void: run.call_deferred()
+
+## True under the live harness (probe_live.tscn, project startup with autoloads);
+## false under --script, where the desktop rig cannot compile.
+func _live() -> bool:
+	return str(get_script().resource_path).ends_with("_live.gd")
+
+func note(message: String) -> void:
+	print("[wcn-noise] note: ", message)
+
+func check(ok: bool, message: String) -> void:
+	checks += 1
+	if not ok: failures.append(message)
+	print("[wcn-noise] ", "PASS " if ok else "FAIL ", message)
+
+func run() -> void:
+	if "--capture" in OS.get_cmdline_user_args() and DisplayServer.get_name() == "headless":
+		check(false, "PNG capture requires a rendered window; omit --headless, or omit --capture for logic only")
+		_finish()
+		return
+	var em: Node3D = load("res://commons/scenes/endless_museum.tscn").instantiate()
+	var ctl := "res://ada_run/waves_chance_noise/wcn-probe-control.json"
+	em.set("EM_CONTROL", ctl); em.set("_overrides_path", ctl + ".unused"); em.set("_hand_path", ctl + ".unused-hand")
+	em.set("start_chapter", "noise"); em.set("start_map", MAP)
+	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/em_layout.json"))
+	layout.get_or_add("stream", {})["bodies"] = 1
+	em.set("_layout", layout)
+	var f := FileAccess.open(ctl, FileAccess.WRITE)
+	f.store_string(JSON.stringify({"first_chapter": "noise", "dollhouse": 0, "grid_pack": 1})); f.close()
+	root.add_child(em); current_scene = em
+	await create_timer(1.0).timeout
+	em.set_process(false); em.set_physics_process(false); em.call("flush_stamps")
+	var player: Node = em.get("_player")
+	if player != null: player.set_process(false); player.set_physics_process(false)
+	var seg: Node3D
+	for rec: Dictionary in em.get("_segments"):
+		if rec.node.get_meta("em_map", "") == MAP: seg = rec.node; break
+	check(seg != null, "the hall exists in the active museum")
+	if seg == null:
+		_finish(); return
+	for i in range(30): await process_frame
+
+	var vest_early: int = int(em.get("VESTIBULE_H"))
+	var simplex: Node3D; var perlin: Node3D
+	for n in seg.find_children("*", "Node3D", true, false):
+		if n.get_script() == null: continue
+		var p := str(n.get_script().resource_path)
+		if p.ends_with("SimplexNoise.gd"): simplex = n
+		elif p.ends_with("PerlinNoise.gd"): perlin = n
+	check(simplex != null, "the simplex display is built")
+	check(perlin != null, "the perlin display is built")
+	if simplex == null or perlin == null:
+		_finish(); return
+
+	# ── 1. the bases, read back from the generators ───────────────────────────
+	check(int(perlin.call("noise_type")) == FastNoiseLite.TYPE_PERLIN, "the display named Perlin draws TYPE_PERLIN (%d)" % int(perlin.call("noise_type")))
+	check(int(simplex.call("noise_type")) == FastNoiseLite.TYPE_SIMPLEX, "the display named Simplex draws TYPE_SIMPLEX (%d)" % int(simplex.call("noise_type")))
+	check(str(perlin.call("basis_name")) == "perlin", "the perlin readout reports its basis from the generator")
+
+	# ── 2. the contract ───────────────────────────────────────────────────────
+	var cs: Dictionary = simplex.call("contract"); var cp: Dictionary = perlin.call("contract")
+	measurements["contract_simplex"] = cs; measurements["contract_perlin"] = cp
+	for key in ["seed", "octaves", "frequency", "gain", "amplitude", "size", "resolution", "ramp", "readout"]:
+		check(cs.get(key) == cp.get(key), "shared %s: %s == %s" % [key, str(cs.get(key)), str(cp.get(key))])
+	check(int(cs.get("seed", -1)) == 20260910, "the declared seed reached both fields (%d)" % int(cs.get("seed", -1)))
+	check(str(cs.get("ramp")) == "shared", "both fields use the shared ramp")
+	check(int(cs.get("size", 0)) == 8, "both fields are 8 cells on a side")
+
+	# Independent of sample_at's label: every visible cube must carry the
+	# sample at its actual position, before and after an update/replay.
+	for display in [simplex, perlin]:
+		var field:Node3D=display.get_node("NoiseField")
+		var errors:=0
+		for cube in field.get("noise_cubes"):
+			var value:float=field.call("sample_at",cube.position.x,cube.position.z)
+			if not is_equal_approx(cube.position.y,value*float(cs.amplitude)):errors+=1
+		check(errors==0,str(display.name)+" visible samples agree with their spatial addresses")
+		var before_values:Array=[]
+		for cube in field.get("noise_cubes"):before_values.append(cube.position.y)
+		field.call("update_noise_field")
+		var after_values:Array=[]
+		for cube in field.get("noise_cubes"):after_values.append(cube.position.y)
+		check(before_values==after_values,str(display.name)+" unchanged update preserves all visible samples")
+		var mat:StandardMaterial3D=field.get("noise_cubes")[0].material_override
+		check(is_equal_approx(mat.metallic,0.1) and is_equal_approx(mat.roughness,0.8),"matched reflective finish")
+	check(is_equal_approx(float(cs.gain),0.5),"explicit shared gain overrides the Simplex scene's 0.1 slider default")
+	check(is_equal_approx(float(cs.amplitude),0.8),"shared amplitude keeps cube bottoms above the floor")
+
+	# ── 3. the same coordinates, two bases; replay per basis ──────────────────
+	var sa: float = simplex.call("sample_at", -1.0, 0.5); var sb: float = simplex.call("sample_at", 1.0, -1.0)
+	var pa: float = perlin.call("sample_at", -1.0, 0.5); var pb: float = perlin.call("sample_at", 1.0, -1.0)
+	measurements["values"] = {"simplex": [sa, sb], "perlin": [pa, pb]}
+	# BOTH coordinates, not either: `not (A and B)` passes when one of the two happens to
+	# differ, which a single coincidence can supply. Two independent points is the control.
+	check(not is_equal_approx(sa, pa) and not is_equal_approx(sb, pb),
+		"the same seed in two bases gives different values at BOTH sampled coordinates (%.4f/%.4f vs %.4f/%.4f)" % [sa, sb, pa, pb])
+	simplex.call("regenerate"); await process_frame
+	var s_regen: int = int(simplex.call("current_seed"))
+	check(s_regen != 20260910, "REGEN moved the simplex field to another, recorded seed (%d)" % s_regen)
+	check(not is_equal_approx(float(simplex.call("sample_at", -1.0, 0.5)), sa), "and its value at (-1,0.5) changed")
+	simplex.call("replay"); await process_frame
+	check(int(simplex.call("current_seed")) == 20260910, "REPLAY restored the declared seed")
+	check(is_equal_approx(float(simplex.call("sample_at", -1.0, 0.5)), sa) and is_equal_approx(float(simplex.call("sample_at", 1.0, -1.0)), sb), "and the two values came back exactly")
+	perlin.call("regenerate"); await process_frame; perlin.call("replay"); await process_frame
+	check(is_equal_approx(float(perlin.call("sample_at", -1.0, 0.5)), pa), "the perlin field replays per basis too")
+
+	# ── 4. matching dials, moved on one side, through their own signals ────────
+	var fs: Node = simplex.find_child("Param_0", true, false)
+	check(fs != null and fs.has_method("set_normalized_value"), "the simplex FREQ slider exists on a reachable panel")
+	if fs != null:
+		fs.set_normalized_value(0.6)
+		fs.emit_signal("slider_moved", 0.6)
+		await process_frame
+		var f_after: float = float((simplex.call("contract") as Dictionary).get("frequency"))
+		measurements["frequency_after_slider"] = f_after
+		check(not is_equal_approx(f_after, float(cs.get("frequency"))), "moving FREQ changed the simplex field's frequency (%.2f -> %.2f)" % [float(cs.get("frequency")), f_after])
+		check(is_equal_approx(float((perlin.call("contract") as Dictionary).get("frequency")), float(cp.get("frequency"))), "and left the perlin field alone — one variable, one side")
+		var oct: Node = simplex.find_child("Param_1", true, false)
+		check(oct != null, "the OCTAVES slider exists")
+		if oct != null:
+			oct.set_normalized_value(1.0)
+			oct.emit_signal("slider_moved", 1.0)
+			check(int((simplex.call("contract") as Dictionary).get("octaves")) == 8, "OCTAVES changes through its panel signal")
+		var replay_button: Node = simplex.find_child("Btn_1", true, false)
+		var replay_area: Node = replay_button.get_node_or_null("InteractableAreaButton") if replay_button != null else null
+		check(replay_area != null and replay_area.has_signal("button_pressed"), "the REPLAY button exposes its interaction signal")
+		if replay_area != null:
+			replay_area.emit_signal("button_pressed", replay_area)
+			await process_frame
+			check(simplex.call("contract") == cs, "REPLAY restores the complete declared comparison after both sliders change")
+			check(is_equal_approx(float(fs.get_normalized_value()), (float(cs.frequency) - 1.0) / 19.0), "REPLAY returns the FREQ handle to its declared position")
+			if oct != null:
+				check(is_equal_approx(float(oct.get_normalized_value()), float(int(cs.octaves) - 1) / 7.0), "REPLAY returns the OCTAVES handle too")
+			check(is_equal_approx(float(simplex.call("sample_at", -1.0, 0.5)), sa), "REPLAY restores the original field sample")
+	# ── 4b. the witness: the contract read off the GENERATORS ─────────────────
+	# `contract()` reports each script's own bookkeeping variables, so "the frequencies
+	# match" has been a claim about two GDScript floats. generator_readback() asks the
+	# two FastNoiseLite objects that actually drew the fields.
+	var rs: Dictionary = simplex.call("generator_readback")
+	var rp: Dictionary = perlin.call("generator_readback")
+	measurements["readback_simplex"] = rs
+	measurements["readback_perlin"] = rp
+	note("readback simplex " + JSON.stringify(rs))
+	note("readback perlin  " + JSON.stringify(rp))
+	check(not rs.is_empty() and not rp.is_empty(), "both generators answer for themselves")
+	for key in ["seed", "gen_frequency", "fractal_type", "fractal_octaves", "fractal_gain", "fractal_lacunarity", "sample_scale", "sample_offset"]:
+		var same: bool = (is_equal_approx(float(rs.get(key, 0.0)), float(rp.get(key, 1.0)))
+			if typeof(rs.get(key)) == TYPE_FLOAT else rs.get(key) == rp.get(key))
+		check(same, "held equal at the generator: %s  %s == %s" % [key, str(rs.get(key)), str(rp.get(key))])
+	check(int(rs.get("noise_type", -1)) != int(rp.get("noise_type", -1)),
+		"and the one term that differs is the basis (%d vs %d)" % [int(rs.get("noise_type", -1)), int(rp.get("noise_type", -1))])
+	# the perlin side's extra sampling term, named rather than assumed away: NoiseVisualizer
+	# adds animation_offset to BOTH coordinates and SimplexVisualizer has no such term
+	check(is_equal_approx(float(rp.get("sample_offset", 1.0)), 0.0),
+		"the perlin side's extra sampling term is zero, so the coordinates really are the same (%.3f)" % float(rp.get("sample_offset", -1.0)))
+
+	var ws: Dictionary = simplex.call("witness_state")
+	measurements["witness"] = ws
+	for line in ws.get("lines", []): note("witness | " + str(line))
+	check(bool(ws.get("twin_found", false)), "the witness plate found its twin in this hall (%s, %s)" % [str(ws.get("twin", "")), str(ws.get("hall", ""))])
+	check(bool(ws.get("basis_differs", false)), "and reports the bases as differing")
+	check((ws.get("differing", []) as Array).is_empty(), "with nothing else differing (%s)" % str(ws.get("differing", [])))
+	var wl: Label3D = simplex.get_node_or_null("Witness/Case/Text")
+	check(wl != null, "the plate stands between the two displays")
+	if wl != null:
+		measurements["witness_plate"] = wl.text.split("\n")
+		check(wl.text.contains("simplex") and wl.text.contains("perlin"), "and names both bases")
+		check(wl.text.contains("the one term that differs"), "and says which term is the difference")
+		var wp: Vector3 = seg.to_local((wl as Node3D).global_position)
+		measurements["witness_plate_at"] = [snappedf(wp.x, 0.01), snappedf(wp.y, 0.01), snappedf(wp.z, 0.01) - vest_early]
+		check(wp.y > 0.7 and wp.y < 2.0, "at a standing eye's height (%.2f m)" % wp.y)
+
+	var readout: Label3D = simplex.get_node_or_null("Readout")
+	check(readout != null and readout.text.begins_with("simplex · seed 20260910"), "the readout names the basis and the seed")
+	var pr: Label3D = perlin.get_node_or_null("Readout")
+	check(pr != null and pr.text.begins_with("perlin · seed 20260910"), "the perlin readout does too")
+
+	# ── 5. reach, the aisle, the walk, the door ───────────────────────────────
+	for pair in [["simplex", simplex], ["perlin", perlin]]:
+		var pn: Node3D = (pair[1] as Node3D).find_child("Param_0", true, false)
+		if pn != null:
+			var h: float = seg.to_local(pn.global_position).y
+			measurements[str(pair[0]) + "_panel_height"] = h
+			check(h > 0.6 and h < 1.7, "%s panel at hand height (%.2f m)" % [pair[0], h])
+	var vest: int = int(em.get("VESTIBULE_H"))
+	var space := seg.get_world_3d().direct_space_state
+	var cap := CapsuleShape3D.new(); cap.radius = 0.22; cap.height = 1.6
+	var q := PhysicsShapeQueryParameters3D.new(); q.shape = cap
+	# the east corridor, the front row, and the aisle between the fields
+	# the east corridor from row 5: this map declares no gate_depth_rows, so the museum's gate
+	# stands four rows in (world z 4.5) and its side wall is what a cast from z 1.5 met (2026-09-10)
+	# (x 10.5 is the perlin field's own east edge; the free column is x 11)
+	for route in [["east corridor", Vector3(11.5, 0.81, 5.5), Vector3(0, 0, 7.5)],
+			["front row", Vector3(1.5, 0.81, 2.5), Vector3(10.0, 0, 0)],
+			["aisle between the fields", Vector3(6.0, 0.81, 4.5), Vector3(0, 0, 6.0)]]:
+		q.transform = Transform3D(Basis.IDENTITY, seg.to_global(Vector3(route[1].x, route[1].y, route[1].z + vest)))
+		q.motion = route[2]
+		var frac: float = space.cast_motion(q)[0]
+		measurements["walk_" + str(route[0]).replace(" ", "_")] = frac
+		if frac <= 0.99:
+			# which colliders stand where the capsule stopped (diagnostic, 2026-09-10)
+			var stop := PhysicsShapeQueryParameters3D.new()
+			stop.shape = q.shape
+			stop.transform = Transform3D(Basis.IDENTITY, q.transform.origin + q.motion * minf(frac + 0.03, 1.0))
+			var blockers: Array = []
+			for h in space.intersect_shape(stop, 8):
+				var c: Node = h.collider
+				var pth: String = str(c.get_path()) if c != null else "?"
+				var pl: Vector3 = seg.to_local((c as Node3D).global_position) if c is Node3D else Vector3.ZERO
+				blockers.append({"collider": pth.get_slice("/", pth.get_slice_count("/") - 1), "path": pth.right(90), "at": [snappedf(pl.x, 0.01), snappedf(pl.y, 0.01), snappedf(pl.z, 0.01) - vest]})
+			measurements["blocked_" + str(route[0]).replace(" ", "_")] = blockers
+		check(frac > 0.99, "a body walks the %s (%.2f of the way)" % [route[0], frac])
+	# the museum's own record of this hall as built: walk grid, seals, severance, bodies
+	var rows_b: Array = em.get("_built") if em.get("_built") != null else []
+	for r in rows_b:
+		if str((r as Dictionary).get("map", "")) != MAP and r != rows_b[rows_b.size() - 1]: continue
+		measurements["built_cells"] = (r as Dictionary).get("cells", [])
+		measurements["built_seals"] = (r as Dictionary).get("seals", [])
+		measurements["built_severed"] = (r as Dictionary).get("severed", [])
+		var toks: Array = []
+		for b in (r as Dictionary).get("bodies", []):
+			toks.append([str((b as Dictionary).get("token", "")), (b as Dictionary).get("world", [])])
+		measurements["built_bodies"] = toks
+	var portal: Node = null; var terrain100: Node = null
+	for record: Dictionary in em.get("_edit_records"):
+		var child: Node3D = record.get("node")
+		if child == null or not is_instance_valid(child) or not seg.is_ancestor_of(child): continue
+		if str(record.get("token", "")) == "configurable_portal": portal = child
+		# The map places `perlin_noise_terrain`; matching on "noise_terrain" matched nothing
+		# and passed without looking. Match the body the map actually holds.
+		if str(record.get("token", "")) == "perlin_noise_terrain": terrain100 = child
+	check(portal != null, "the optional Lab Path portal still stands")
+	# WHERE THE DOOR GOES, independently of what is written on it (Astra's card).
+	if portal != null and portal.has_method("resolve_destination"):
+		var dest: Dictionary = portal.call("resolve_destination")
+		measurements["portal"] = dest
+		note("portal " + JSON.stringify(dest))
+		check(str(dest.get("destination_map", "")) == "Lab_Path", "its configured destination is Lab_Path (%s)" % str(dest.get("destination_map", "")))
+		# This is REPORTED, not asserted green: the portal is inert, and a probe that
+		# quietly passed would be the same silence the label already provides.
+		if not bool(dest.get("resolves", false)):
+			note("THE PORTAL IS INERT: label says %s, code resolves to %s — %s" % [
+				str(dest.get("label", "")), str(dest.get("via", "")), str(dest.get("why", ""))])
+		check(true, "and its resolution is recorded rather than assumed (resolves=%s via %s)" % [
+			str(dest.get("resolves", false)), str(dest.get("via", ""))])
+	measurements["terrain_body"] = str((terrain100 as Node3D).name) if terrain100 != null else ""
+	if terrain100 != null:
+		var tb: AABB = AABB()
+		var first_t := true
+		for gi in (terrain100 as Node3D).find_children("*", "GeometryInstance3D", true, false):
+			var gbox: AABB = ((terrain100 as Node3D).global_transform.affine_inverse() * (gi as GeometryInstance3D).global_transform) * (gi as GeometryInstance3D).get_aabb()
+			if first_t:
+				tb = gbox; first_t = false
+			else:
+				tb = tb.merge(gbox)
+		measurements["terrain_extent"] = [snappedf(tb.size.x, 0.1), snappedf(tb.size.y, 0.1), snappedf(tb.size.z, 0.1)]
+		note("the secondary terrain measures %.1f x %.1f x %.1f m" % [tb.size.x, tb.size.y, tb.size.z])
+	check(terrain100 != null, "the secondary terrain stands, and is measured rather than assumed away (%s)" % str(measurements.get("terrain_extent", [])))
+
+	# ── ACTUAL DESKTOP INPUT (live harness only: the desktop rig names autoloads) ──
+	# The rig stands before the simplex field's front panel, looks at REGEN and
+	# left-clicks through the input pipeline; then walks the aisle on ui_up.
+	if _live():
+		var drv: Node = load("res://commons/testing/wcn_desktop_driver.gd").new()
+		root.add_child(drv)   # a SceneTree has no add_child; the port maps root. to get_tree().root.
+		var regen_btn: Node = simplex.find_child("Btn_0", true, false)
+		var panel_node: Node3D = simplex.find_child("Param_0", true, false)
+		var panel_local: Vector3 = seg.to_local(panel_node.global_position) if panel_node != null else Vector3(3.5, 1.0, 4.8 + vest)
+		# the panel faces its own +z; stand 0.9 m on that side of it at deck level
+		var facing: Vector3 = (simplex.global_transform.basis * Vector3(0, 0, 1)).normalized()
+		var stand: Vector3 = panel_node.global_position + facing * 0.9 if panel_node != null else seg.to_global(Vector3(3.5, 0.0, 5.5 + vest))
+		stand.y = seg.to_global(Vector3(0, 0, 0)).y
+		drv.call("spawn", stand, em)
+		await create_timer(0.5).timeout
+		var seed_before: int = int(simplex.call("current_seed"))
+		var rec: Dictionary = await drv.call("press", regen_btn, stand) if regen_btn != null else {}
+		await process_frame
+		var seed_after: int = int(simplex.call("current_seed"))
+		measurements["desktop_input"] = {"press": rec, "seed_before": seed_before, "seed_after": seed_after, "panel_local": [panel_local.x, panel_local.y, panel_local.z - vest]}
+		check(str(rec.get("hover", "")).contains("Btn_0") or str(rec.get("hover", "")).contains("InteractableAreaButton"), "the desktop pointer had REGEN under the crosshair (%s)" % str(rec.get("hover", "")))
+		check(seed_after != seed_before, "a left click through the input pipeline regenerated the simplex field (%d -> %d): actual desktop input" % [seed_before, seed_after])
+		check(int(simplex.call("noise_type")) == FastNoiseLite.TYPE_SIMPLEX, "and the basis survived the press")
+
+		# EVERY CONTROL, BOTH PANELS, THROUGH THE POINTER. The pilot pressed one button on
+		# one panel and drove the rest by emitting signals, which tests the model and not the
+		# input. Each press stands in front of ITS OWN button: a rack's buttons sit on two
+		# rows, and a stand aimed from the panel's centre reaches the upper one and misses
+		# the lower (measured in Noise_6_Wall, 2026-09-12).
+		var pressed: Array = []
+		for spec in [[simplex, "Btn_1", "simplex REPLAY"], [perlin, "Btn_0", "perlin REGEN"], [perlin, "Btn_1", "perlin REPLAY"]]:
+			var owner_display: Node3D = spec[0]
+			var btn: Node = owner_display.find_child(str(spec[1]), true, false)
+			if btn == null:
+				check(false, "%s exists" % str(spec[2]))
+				continue
+			# THE PILOT'S RECIPE, WHICH IS MEASURED TO WORK: 0.9 m along the display's own
+			# facing from Param_0, the panel's top slider — not 0.55 m in front of the button.
+			# At half a metre the rig's own 0.22 m capsule is inside the panel's reach and the
+			# museum pushes it out AFTER the aim, so the ray leaves from somewhere the aim
+			# never accounted for. Both buttons of these racks sit on ONE row, so one stand
+			# reaches both; the two-row rack in Noise_6_Wall is what needed a stand per button.
+			var facing2: Vector3 = (owner_display.global_transform.basis * Vector3(0.0, 0.0, 1.0)).normalized()
+			var ref2: Node3D = owner_display.find_child("Param_0", true, false)
+			var from_here: Vector3 = ((ref2.global_position if ref2 != null else (btn as Node3D).global_position)
+				+ facing2 * 0.9)
+			from_here.y = seg.to_global(Vector3(0.0, 0.0, 0.0)).y
+			var area2: Node = btn.find_child("InteractableAreaButton", true, false)
+			var tally := {"n": 0}
+			if area2 != null and area2.has_signal("button_pressed"):
+				area2.connect("button_pressed", func(_b): tally["n"] = int(tally["n"]) + 1)
+			var prec: Dictionary = await drv.call("press", btn, from_here)
+			await create_timer(0.3, true, false, true).timeout
+			var basis_now: String = str(owner_display.call("basis_name"))
+			pressed.append({"what": str(spec[2]), "hover": prec.get("hover", "-"), "emissions": int(tally["n"]),
+				"basis_after": basis_now, "seed_after": int(owner_display.call("current_seed"))})
+			# the hover must name the BUTTON, not just the class every push button shares
+			check(str(prec.get("hover", "")).contains(str(spec[1])), "%s: the crosshair was on %s, not merely on some InteractableAreaButton (%s)" % [str(spec[2]), str(spec[1]), str(prec.get("hover", ""))])
+			check(int(tally["n"]) == 1, "%s took exactly one press from one click (%d)" % [str(spec[2]), int(tally["n"])])
+			check(basis_now == ("perlin" if owner_display == perlin else "simplex"), "%s: the basis survived it (%s)" % [str(spec[2]), basis_now])
+		measurements["desktop_input"]["presses"] = pressed
+
+		# and a slider DRAGGED through the pointer, not set by method
+		var drag_slider: Node3D = perlin.find_child("Param_0", true, false)
+		if drag_slider != null:
+			var f_before: float = float((perlin.call("contract") as Dictionary).get("frequency"))
+			var handle_from: Vector3 = drag_slider.global_position
+			var handle_to: Vector3 = handle_from + (drag_slider.global_transform.basis * Vector3(0.14, 0.0, 0.0))
+			var facing3: Vector3 = (perlin.global_transform.basis * Vector3(0.0, 0.0, 1.0)).normalized()
+			var stand3: Vector3 = handle_from + facing3 * 0.9
+			stand3.y = seg.to_global(Vector3(0.0, 0.0, 0.0)).y
+			drv.get("rig").global_position = stand3
+			drv.get("rig").velocity = Vector3.ZERO
+			drv.get("rig").velocity = Vector3.ZERO
+			await physics_frame
+			var drec: Dictionary = await drv.call("drag", handle_from, handle_to, 16)
+			await create_timer(0.3, true, false, true).timeout
+			var f_after2: float = float((perlin.call("contract") as Dictionary).get("frequency"))
+			measurements["desktop_input"]["drag_perlin_freq"] = {"record": drec, "was": f_before, "now": f_after2}
+			check(not is_equal_approx(f_after2, f_before), "the perlin FREQ slider moved under a dragged pointer (%.2f -> %.2f)" % [f_before, f_after2])
+			check(str(perlin.call("basis_name")) == "perlin", "and the basis survived the drag")
+			perlin.call("replay")
+			await create_timer(0.3, true, false, true).timeout
+			check(str(perlin.call("basis_name")) == "perlin", "and REPLAY does not quietly reset it to the default basis")
+			check(int(perlin.call("noise_type")) == FastNoiseLite.TYPE_PERLIN,
+				"the perlin display still draws TYPE_PERLIN after every control has been used (%d)" % int(perlin.call("noise_type")))
+			# THE PLATE, FROM A BODY'S EYE. Two probe cameras placed by arithmetic framed the
+			# wrong surface; the rig is already standing at a measured viewpoint with the
+			# plate in its line of sight, and its camera is the one a visitor has.
+			if "--capture" in OS.get_cmdline_user_args():
+				var case_node: Node3D = simplex.get_node_or_null("Witness/Case")
+				if case_node != null:
+					var cl: Vector3 = seg.to_local(case_node.global_position)
+					var stand_w: Vector3 = seg.to_global(Vector3(cl.x, 0.0, cl.z + 1.15))
+					drv.get("rig").global_position = stand_w
+					drv.get("rig").velocity = Vector3.ZERO
+					await physics_frame
+					drv.call("aim_at", case_node.global_position)
+					for i in range(10): await process_frame
+					await create_timer(0.35, true, false, true).timeout
+					root.get_texture().get_image().save_png(OUT + "probe_noise_pair_witness.png")
+					measurements["desktop_input"]["witness_pose"] = drv.call("pose")
+		if "--capture" in OS.get_cmdline_user_args():
+			# the panel and its readout from where the click was made (0.9 m, hand height):
+			# legibility at reach, the rig's own camera drawing
+			for i in range(10): await process_frame
+			await create_timer(0.3, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_noise_pair_desktop_panel.png")
+			measurements["desktop_input"]["panel_capture_pose"] = drv.call("pose")
+		drv.get("rig").global_position = seg.to_global(Vector3(6.0, 0.05, 4.5 + vest))
+		await physics_frame
+		drv.call("aim_at", seg.to_global(Vector3(6.0, 1.2, 12.0 + vest)))
+		var moved: Vector3 = await drv.call("walk", "ui_up", 60)
+		var moved_local: Vector3 = seg.global_transform.basis.inverse() * moved
+		measurements["desktop_input"]["walk_aisle_1s"] = [snappedf(moved_local.x, 0.01), snappedf(moved_local.z, 0.01)]
+		check(moved_local.z > 3.5, "the rig walked the aisle between the fields on ui_up (%.2f m in one second)" % moved_local.z)
+		if "--capture" in OS.get_cmdline_user_args():
+			for i in range(10): await process_frame
+			await create_timer(0.3, true, false, true).timeout
+			root.get_texture().get_image().save_png(OUT + "probe_noise_pair_desktop_aisle.png")
+		await drv.call("teardown")
+		measurements["desktop_input"]["log"] = drv.get("log")
+		measurements["desktop_input"]["walker_cam_guard_stopped"] = drv.get("walker_cam_guard_stopped")
+		await process_frame
+	if "--capture" in OS.get_cmdline_user_args():
+		# the walker's guard reclaims the view a second after a probe camera takes it
+		var wc2: Camera3D = em.get("_cam")
+		if wc2 != null and is_instance_valid(wc2):
+			for c in wc2.get_children():
+				if c is Timer: (c as Timer).stop()
+		var cam := Camera3D.new(); em.add_child(cam); cam.fov = 62
+		cam.global_position = seg.to_global(Vector3(6.0, 2.4, 1.0 + vest)); cam.look_at(seg.to_global(Vector3(6.0, 0.9, 7.5 + vest)))
+		for i in range(30): cam.make_current(); await process_frame
+		await create_timer(0.3, true, false, true).timeout
+		root.get_texture().get_image().save_png(OUT + "probe_noise_pair.png")
+		# THE PLATE, which is this hall's evidence: read it from where a body stands
+		# The plate is photographed from the rig's own eye in the live lane (above), which
+		# is a measured viewpoint; a camera placed here by arithmetic framed the wrong
+		# surface twice.
+	_finish()
+
+func _finish() -> void:
+	# SAY WHICH LANE RAN. _live() is a filename test, so the whole desktop block can be
+	# skipped in silence and the run still exits 0 — the pilot's report said "no tracked
+	# hand" on runs where the pointer lane had passed, and said nothing on runs where it
+	# had never started.
+	var lanes := {
+		"model_lane": "sliders driven by set_normalized_value + slider_moved; REPLAY by button_pressed; regenerate/replay called by method",
+		"pointer_lane_expected": _live(),
+		"pointer_lane_ran": measurements.has("desktop_input"),
+		"pointer_controls": (measurements.get("desktop_input", {}) as Dictionary).get("presses", []),
+	}
+	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,
+		"lanes": lanes,
+		"control_path": ("every control on both panels pressed or dragged through the desktop pointer, with the basis read back after each; the model lane drives the same controls by signal"
+			if bool(lanes["pointer_lane_ran"]) else "model lane in this run: sliders and buttons driven by signal, no pointer; the live lane presses or drags every control on both panels through the desktop pointer and re-reads the basis after each"),
+		"headset_verified": false, "engine": Engine.get_version_info().string}
+	var f := FileAccess.open(OUT + "probe_noise_pair.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify(report, "  ")); f.close()
+	print("[wcn-noise] ", checks, " checks; ", failures.size(), " failures")
+	quit(0 if failures.is_empty() else 1)

@@ -52,6 +52,9 @@ HALLS = [
      ['', '_readout', '_terrain', '_desktop_front', '_plan']),
     ('Noise_6_Wall', 'probe_wall', 'N5', 'Which layer of a surface are you attending to?',
      ['', '_readout', '_interior', '_desktop_front', '_plan']),
+    ('Noise_Perlin_Simplex', 'probe_noise_pair', 'N6',
+     'What must stay the same before a difference can be attributed to a rule?',
+     ['', '_witness', '_desktop_panel', '_desktop_aisle']),
 ]
 
 VIEW_NAMES = {'': 'the primary, from the visitor\'s spot', '_desktop_front': 'the desktop rig\'s own camera, live lane'}
