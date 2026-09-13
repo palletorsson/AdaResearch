@@ -3,7 +3,7 @@
   "name": "Perlin vs Simplex: The Evolution of Gradient Noise",
   "title": "Perlin vs Simplex",
   "lookup_name": "Noise_Perlin_Simplex",
-  "description": "Compare the two foundational gradient noise algorithms. Experience Perlin noise (1983, Academy Award) and Simplex noise (2001, improved version). See how iterative refinement creates better quality and performance.",
+  "description": "Two matched noise fields on one floor: one told to draw a Perlin basis, one a simplex basis, with the same seed, the same sampling, the same octaves and the same colour ramp, each with a reachable panel and a readout of the field's value at two fixed coordinates. What must stay the same before a difference can be attributed to a rule.",
   "version": "1.0",
   "format": "json",
   "dimensions": {
@@ -16,6 +16,10 @@
    "category": "noise",
    "estimated_time": "10-12 minutes",
    "learning_objectives": [ "Perlin noise gradient interpolation", "Simplex noise triangular grid optimization", "Comparative analysis of noise algorithms", "Terrain generation applications" ]
+  },
+  "museum": {
+   "sculpture_clear_rects": [[1, 1, 11, 10]],
+   "artifact_placement": "map"
   }
  },
  "utility_definitions": {
@@ -34,24 +38,12 @@
   }
  },
  "lighting": {
-  "ambient_color": [
-   0.4,
-   0.4,
-   0.5
-  ],
+  "ambient_color": [ 0.4, 0.4, 0.5 ],
   "ambient_energy": 0.6,
   "directional_light": {
    "enabled": true,
-   "direction": [
-    -0.4,
-    -0.7,
-    -0.4
-   ],
-   "color": [
-    1,
-    0.9,
-    0.8
-   ],
+   "direction": [ -0.4, -0.7, -0.4 ],
+   "color": [ 1, 0.9, 0.8 ],
    "energy": 1.2
   }
  },
@@ -64,29 +56,25 @@
   "initial_tile_visibility": "hidden_except_corners",
   "background": {
    "type": "sky",
-   "color": [
-    0.2,
-    0.3,
-    0.7
-   ]
+   "color": [ 0.2, 0.3, 0.7 ]
   }
  },
  "layers": {
   "structure": [
    [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ],
-   [ "w", "1", "1", "0", "0", "0", "0", "1", "1", "1", "1", "1", "w" ],
-   [ "w", "1", "1", "0", "0", "0", "0", "0", "0", "0", "1", "1", "w" ],
-   [ "w", "0", "0", "0", "0", "0", "0", "0", "0", "0", "w", "1", "w" ],
-   [ "w", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1", "1", "w" ],
-   [ "w", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1", "1", "w" ],
-   [ "w", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1", "1", "w" ],
-   [ "w", "0", "0", "0", "0", "0", "0", "0", "0", "0", "w", "1", "w" ],
-   [ "w", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1", "1", "w" ],
-   [ "w", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1", "1", "w" ],
-   [ "w", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1", "1", "w" ],
-   [ "w", "0", "0", "0", "0", "0", "0", "0", "0", "0", "w", "1", "w" ],
-   [ "w", "0", "0", "0", "0", "0", "0", "1", "1", "1", "1", "1", "w" ],
-   [ "w", "0", "0", "0", "0", "0", "0", "1", "0", "0", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
    [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ]
   ],
   "utilities": [
@@ -111,16 +99,16 @@
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "simplex_noise", "", "", "", "", "perlin_noise", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "noise_terrain", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "dark_sphere", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "simplex_noise:0:1.1#seed:20260910#size:8#ramp:shared#panel:front#frequency:10#amplitude:0.8#persistence:0.5#octaves:4#witness:show", "", "", "", "", "perlin_noise:0:1.1#generator:perlin#seed:20260910#size:8#ramp:shared#panel:front#frequency:10#amplitude:0.8#persistence:0.5#octaves:4", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "perlin_noise_terrain", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "configurable_portal#dest_map:Lab_Path#label:Return to Lab", "", "", "" ],
+   [ "", "", "perlin_noise_terrain", "", "", "", "dark_sphere", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "", "", "", "configurable_portal#dest_map:Lab_Path#label:Lab Path (optional)", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
   ]
  }

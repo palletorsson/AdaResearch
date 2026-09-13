@@ -1,7 +1,16 @@
 # Noise Perlin Simplex — Artifacts
+
+> **PREDATES THE 2026-09-10 REPAIR.** This file describes a six-body cast including
+> `noise_terrain`, a 100 m footprint that used to be this hall's floor. It was removed on
+> 2026-09-10 when the basin was floored, and the hall holds five bodies now: `simplex_noise`,
+> `perlin_noise`, `perlin_noise_terrain`, `dark_sphere` and `configurable_portal`. Every
+> measurement below was taken in the hall as it stood before that, and is kept as a record of
+> it rather than corrected — hand-editing a generated clearance table would be inventing
+> numbers. Read `field_notes.md` and `technical.md` for the hall as it is.
+
 *Noise: Entropy with Memory · E_entropy · 6 artifacts*
 
-> Perlin noise: the original coherent gradient noise, 1983. Simplex noise: Ken Perlin's improved version, 2001. Compare them side by side. Perlin has axis-aligned artifacts; Simplex is cleaner in higher dimensions. Evolution of an algorithm. Thirty years of refinement in two functions.
+> Perlin noise: the original coherent gradient noise, 1983. Simplex noise: Ken Perlin's improved version, 2001. Compare them side by side. Perlin has axis-aligned artifacts; Simplex is cleaner in higher dimensions. Evolution of an algorithm. Eighteen years of refinement in two functions (1983 to 2001; the registry's own blurb said thirty, corrected 2026-09-13).
 
 The map, read through what it holds — its artifacts in the order you meet them:
 

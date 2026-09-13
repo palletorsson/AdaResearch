@@ -557,3 +557,36 @@ func apply_grid_config(config: Dictionary):
 	
 	# Rebuild with new settings
 	_build_portal()
+## WHERE THIS DOOR ACTUALLY GOES (2026-09-13, N6) — read-only, and it acts on nothing.
+## Astra's card for Noise_Perlin_Simplex asks that a portal's destination be verified
+## independently of its label. This runs exactly the lookups _load_destination_map()
+## runs and reports which branch would be taken, so a probe and a plate can state the
+## label and the code separately instead of trusting the words on the frame.
+func resolve_destination() -> Dictionary:
+	var out := {
+		"label": (label_text if label_text != "" else destination_map),
+		"destination_map": destination_map,
+		"resolves": false,
+		"via": "",
+		"why": "",
+	}
+	if destination_map == "":
+		out["via"] = "none"
+		out["why"] = "no destination_map is configured: this portal moves the player within the map"
+		return out
+	var grid_system: Node = _find_grid_system()
+	out["grid_system"] = str(grid_system.name) if grid_system != null else ""
+	if grid_system != null and grid_system.has_method("load_map"):
+		out["resolves"] = true
+		out["via"] = "grid_system.load_map"
+		out["why"] = "the grid system answers load_map"
+		return out
+	var scene_manager: Node = get_tree().get_first_node_in_group("scene_manager") if get_tree() != null else null
+	if scene_manager != null and scene_manager.has_method("load_scene"):
+		out["resolves"] = true
+		out["via"] = "scene_manager.load_scene"
+		out["why"] = "a node in group scene_manager answers load_scene"
+		return out
+	out["via"] = "nothing"
+	out["why"] = "neither branch exists: the grid system has no load_map and no node is in group scene_manager, so _load_destination_map() reaches its push_warning"
+	return out

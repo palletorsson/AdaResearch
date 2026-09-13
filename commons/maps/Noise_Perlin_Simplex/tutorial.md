@@ -1,93 +1,55 @@
 # Noise Perlin / Simplex
 
-Two algorithms, same family. Different grids.
+Two fields, one aisle, and four things held still. The order below is the order of the encounter.
 
-Sample Perlin noise.
+Walk between the fields and point at a difference. Then read the text above the left panel, and the text above the right one, line by line.
 
-```gdscript
-func perlin_noise(p: Vector2) -> float:
-    var perlin := FastNoiseLite.new()
-    perlin.noise_type = FastNoiseLite.TYPE_PERLIN
-    return perlin.get_noise_2d(p.x, p.y)
-```
+One format string prints both readouts, so the two are the same shape. The first line differs in exactly one word, its basis; the second line differs in every number it prints. That is the whole demonstration: the seed, the octaves, the frequency, the gain and the two coordinates are identical, so the numbers can only have moved because the word did.
 
-Uses a hypercubic grid. Axis-aligned artifacts visible at the right angles.
-
-Sample Simplex noise.
+Press REGEN on the left. The seed changes and the field is redrawn:
 
 ```gdscript
-func simplex_noise(p: Vector2) -> float:
-    var simplex := FastNoiseLite.new()
-    simplex.noise_type = FastNoiseLite.TYPE_SIMPLEX
-    return simplex.get_noise_2d(p.x, p.y)
+func regenerate_noise() -> void:
+	current_seed = randi()
+	noise_generator.seed = current_seed
+	update_noise_field()
 ```
 
-Uses a simplicial grid (triangles in 2D). No axis-aligned artifacts.
-
-Compare outputs side by side.
+Press REPLAY. The declared seed is restored and the field, and its two values, come back:
 
 ```gdscript
-func render_comparison() -> void:
-    var perlin_texture := render_noise_function(perlin_noise, Rect2(0, 0, 10, 10), Vector2i(256, 256))
-    var simplex_texture := render_noise_function(simplex_noise, Rect2(0, 0, 10, 10), Vector2i(256, 256))
-    spawn_texture_at(perlin_texture, Vector3(-2, 0, 0))
-    spawn_texture_at(simplex_texture, Vector3(2, 0, 0))
+func reseed(s: int) -> void:
+	current_seed = s
+	noise_generator.seed = s
+	update_noise_field()
 ```
 
-Same seed, same frequency. Any visible difference is algorithmic.
+Move the FREQ slider on one side. The features change scale; the two values move. Move it back until the readouts match again.
 
-Rotate to expose artifacts.
+Read where the basis is chosen. It is one match statement in the visualizer:
 
 ```gdscript
-func render_rotated(rotation_deg: float) -> ImageTexture:
-    var r: float = deg_to_rad(rotation_deg)
-    var image := Image.create(256, 256, false, Image.FORMAT_L8)
-    for py in 256:
-        for px in 256:
-            var p := Vector2(px - 128, py - 128)
-            var rotated := p.rotated(r)
-            var value: float = perlin_noise(rotated / 16.0)
-            image.set_pixel(px, py, Color(value, value, value))
-    return ImageTexture.create_from_image(image)
+func _noise_type_for(name_in: String) -> int:
+	match name_in:
+		"perlin":
+			return FastNoiseLite.TYPE_PERLIN
+		"value":
+			return FastNoiseLite.TYPE_VALUE
+		"cellular":
+			return FastNoiseLite.TYPE_CELLULAR
+		_:
+			return FastNoiseLite.TYPE_SIMPLEX
 ```
 
-Rotate the sample coordinates before evaluation. Perlin's axis-aligned artifacts travel with the rotation; Simplex's don't.
+The default is simplex. The display named Perlin never received the word until it was placed with `generator:perlin`.
 
-Measure isotropy.
+Read how both fields sample. The same line, at the same coordinates, half a metre apart:
 
 ```gdscript
-func measure_isotropy(noise_func: Callable, samples: int = 1000) -> float:
-    var angle_bins: Array = []
-    for _i in 16: angle_bins.append(0.0)
-    for _i in samples:
-        var p := Vector2(randf() * 100, randf() * 100)
-        var h: float = 0.01
-        var grad := Vector2(
-            (noise_func.call(p + Vector2(h, 0)) - noise_func.call(p - Vector2(h, 0))) / (2 * h),
-            (noise_func.call(p + Vector2(0, h)) - noise_func.call(p - Vector2(0, h))) / (2 * h)
-        )
-        var bin: int = int(grad.angle() / (TAU / 16) + 16) % 16
-        angle_bins[bin] += 1
-    # Compute variance across bins; lower is more isotropic
-    var mean: float = float(samples) / 16
-    var variance: float = 0.0
-    for b in angle_bins: variance += (b - mean) * (b - mean)
-    return variance / 16
+func generate_noise_at(x: float, z: float) -> float:
+	return noise_generator.get_noise_2d(x * frequency, z * frequency)
 ```
 
-Sample many gradient directions; bin by angle. Uniform bins mean isotropic; skewed bins mean axis bias.
+Set both OCTAVES sliders to one. With a single octave the basis is easiest to see; with six the detail buries it. Compare the character of the variation rather than any particular ridge: the same integer in two bases gives two unrelated fields.
 
-Benchmark performance.
-
-```gdscript
-func benchmark(noise_func: Callable, samples: int) -> float:
-    var start: int = Time.get_ticks_usec()
-    for _i in samples:
-        noise_func.call(Vector2(randf(), randf()))
-    var elapsed: int = Time.get_ticks_usec() - start
-    return float(elapsed) / samples
-```
-
-Microseconds per sample. Perlin is slightly faster in 2D; Simplex is faster in higher dimensions.
-
-You can now sample Perlin and Simplex noise, compare them visually side by side, rotate to expose artifacts, measure isotropy, and benchmark performance. Lab_Path closes the sequence with the corridor template.
+Behind the pair, the small terrain turns the same sampling into ground. The corner door is labelled Lab Path and does nothing: its code looks for two ways to load a map and finds neither, so it is a door in the sense a painted door is. The hall after this one on the spine is CA_Introduction, which keeps a grid of cells whose values come from their neighbours, not from a function.

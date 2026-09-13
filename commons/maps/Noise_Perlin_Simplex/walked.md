@@ -1,5 +1,14 @@
 # Noise_Perlin_Simplex — walked
 
+> **PREDATES THE 2026-09-10 REPAIR.** This file describes a six-body cast including
+> `noise_terrain`, a 100 m footprint that used to be this hall's floor. It was removed on
+> 2026-09-10 when the basin was floored, and the hall holds five bodies now: `simplex_noise`,
+> `perlin_noise`, `perlin_noise_terrain`, `dark_sphere` and `configurable_portal`. Every
+> measurement below was taken in the hall as it stood before that, and is kept as a record of
+> it rather than corrected — hand-editing a generated clearance table would be inventing
+> numbers. Read `field_notes.md` and `technical.md` for the hall as it is.
+
+
 > ghost-drafted from the working map (second walk slot, noise thread); Palle rules the voice.
 
 ## The cast
