@@ -168,7 +168,9 @@ func run() -> void:
 	# The swing, crossings and readout remain partial evidence, not a release test.
 	var release_testable: bool = bob != null and bob.has_signal("picked_up") and bob.has_signal("dropped")
 	if not release_testable:
-		var reason := "Required pickup/release was not exercised: bob or pickable signals missing. See engine log and test through project startup with its autoloads."
+		# Still a FAILURE, by the 12 September ruling: a script-only run must not pass the
+		# release contract. It now says where the contract IS exercised.
+		var reason := "Required pickup/release was not exercised in this lane: under --script the grab sphere cannot compile without its autoloads, so the bob never enters the tree. The release is exercised through the desktop pointer's right-click in the live lane (probe_intro_live.json)."
 		measurements["release_path"] = reason
 		skipped.append(reason)
 		check(false, reason)
@@ -237,37 +239,110 @@ func run() -> void:
 	measurements["scale"] = [pend.scale.x, pend.scale.y, pend.scale.z]
 	check(pend.scale.is_equal_approx(Vector3.ONE), "the subject's scale is what the map asked (1)")
 
-	# ── ACTUAL DESKTOP INPUT (live harness only): the desktop rig's right-click carry ──
-	# Recorded separately from the emitted signals above. The rig's carry lifts a
-	# pickable in front of the camera; whether the pendulum learns of it (its own
-	# picked_up handler) is what this measures. No assertion: it is a finding.
+	# ── ACTUAL DESKTOP INPUT (live harness only): grab, carry, release, from both sides ──
+	# The pilot aimed at the bob and right-clicked, and recorded "nothing" — but its hover
+	# read the INTERACTION ray, which cannot see layer 3, and its bob position was whatever
+	# the integrator had just written, because nothing had told the pendulum the bob was
+	# held. Since 2026-09-13 the pointer's carry reaches the pendulum's own pickup and drop
+	# handlers (desktop_hook_target). This lane exercises exactly that path.
 	if _live() and release_testable:
 		var drv: Node = load("res://commons/testing/wcn_desktop_driver.gd").new()
 		get_tree().root.add_child(drv)   # a SceneTree has no add_child; the port maps root. to get_tree().root.
-		var stand: Vector3 = pend.to_global(Vector3(0.0, 0.0, 1.5))
+		# 1.15 m in front of the swing plane: the driven cube stands two cells behind the
+		# pendulum at (2,13), and the pilot's 1.5 m stand put the rig inside it.
+		var stand: Vector3 = pend.to_global(Vector3(0.0, 0.0, 1.15))
 		stand.y = seg.to_global(Vector3(0, 0, 0)).y
 		drv.call("spawn", stand, em)
 		await get_tree().create_timer(0.5).timeout
-		drv.call("aim_at", pend.call("bob_world_position"))
-		var seen: Node = await drv.call("hover_target")
-		var grabbed_before: bool = bool(pend.call("is_grabbed"))
-		var bob_before: Vector3 = pend.call("bob_world_position")
-		await drv.call("click", MOUSE_BUTTON_RIGHT)
-		for i in range(20): await get_tree().physics_frame
-		var grabbed_after: bool = bool(pend.call("is_grabbed"))
-		var bob_after: Vector3 = pend.call("bob_world_position")
-		await drv.call("click", MOUSE_BUTTON_RIGHT)   # drop, if anything was carried
-		for i in range(5): await get_tree().physics_frame
-		measurements["desktop_input"] = {"carry_hover": (str(seen.get_path()).right(60) if seen != null else "nothing"),
-			"pendulum_grabbed_before": grabbed_before, "pendulum_grabbed_after": grabbed_after,
-			"bob_moved_m": snappedf(bob_before.distance_to(bob_after), 0.01),
-			"note": "the desktop carry (RMB) is a stand-in for VR grab and does not call the pickable's pick_up; a headset release is a separate lane"}
-		if "--capture" in OS.get_cmdline_user_args():
-			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_intro_desktop_primary_live.png")
+		var ptr: Node = drv.get("pointer")
+		var rig: Node3D = drv.get("rig")
+		var di := {"stand_asked": _v(seg.to_local(stand)), "stand_after_spawn": _v(seg.to_local(rig.global_position))}
+		measurements["desktop_release"] = di
+		check(ptr != null and ptr.has_method("is_holding"), "the rig carries the pointer that grabs (%s)" % (str(ptr.get_path()).right(50) if ptr != null else "none"))
+		check(rig.global_position.distance_to(stand) < 0.15, "and it stands where it was put, not pushed off a neighbour (%.2f m)" % rig.global_position.distance_to(stand))
+		if ptr != null and ptr.has_method("is_holding"):
+			var releases: Array = []
+			for side in [1.0, -1.0]:
+				var g: Dictionary = await _desktop_grab(drv, ptr, pend)
+				var rec := {"side": side, "grab": g}
+				var name_side: String = "right" if side > 0.0 else "left"
+				check(bool(g.get("held", false)), "%s release: the pointer's right-click holds the bob (attempt %d, grab ray %s)" % [name_side, int(g.get("attempt", -1)), str(g.get("grab_ray", "-"))])
+				check(bool(g.get("pendulum_knows", false)), "%s release: and the PENDULUM knows it is held — the desktop grab reached its own pickup handler" % name_side)
+				if not bool(g.get("held", false)):
+					releases.append(rec)
+					continue
+				var c: Dictionary = await _desktop_carry_and_drop(drv, ptr, pend, 0.6 * side, name_side)
+				rec["carry"] = c
+				check(float(c.get("bob_to_target_m", 9.0)) < 0.12, "%s release: the carried bob reached the release position (%.2f m away)" % [name_side, float(c.get("bob_to_target_m", 9.0))])
+				check(signf(float(c.get("held_angle", 0.0))) == side and absf(float(c.get("held_angle", 0.0))) > 0.35,
+					"%s release: the pendulum read its angle off the carried bob (%+.2f rad)" % [name_side, float(c.get("held_angle", 0.0))])
+				check(bool(c.get("released", false)), "%s release: the right-click drop reached its release handler — not grabbed, pointer empty" % name_side)
+				check(bool(c.get("released_signal_heard", false)), "%s release: the pendulum's own released signal fired" % name_side)
+				check(absf(float(c.get("release_omega", 9.0))) < 0.3, "%s release: a still hand releases from rest — omega %+.2f rad/s at the release handler, angle %+.2f rad" % [name_side, float(c.get("release_omega", 9.0)), float(c.get("release_angle", 9.0))])
+				var n0: int = crossings.size()
+				var samples: Array = []
+				var turns: Array = []
+				var prev_w: float = float(pend.call("angular_velocity"))
+				for fr in range(210):
+					await get_tree().physics_frame
+					var bp: Vector3 = pend.call("bob_world_position")
+					samples.append(seg.to_local(bp))
+					var w: float = float(pend.call("angular_velocity"))
+					# a TURNING POINT: omega changes sign away from the centre. The pointer's
+					# own grab ray is cast at the bob there, at both sides of the swing.
+					if signf(w) != signf(prev_w) and absf(float(pend.call("angle"))) > 0.15 and turns.size() < 2:
+						turns.append({"angle": float(pend.call("angle")), "ray": _grab_ray_to(drv, bp)})
+					prev_w = w
+				var after: Array = crossings.slice(n0)
+				rec["crossings"] = after
+				rec["turns"] = turns
+				rec["swing_x"] = _swing_x(samples)
+				releases.append(rec)
+				check(after.size() >= 2, "%s release: at least two centre crossings follow (%d)" % [name_side, after.size()])
+				if after.size() >= 2:
+					check(signf(float(after[0]["omega"])) != signf(float(after[1]["omega"])),
+						"%s release: the first two cross the same point with opposite angular velocities (%+.2f, %+.2f rad/s)" % [name_side, float(after[0]["omega"]), float(after[1]["omega"])])
+					check(int(after[0]["dir"]) == -int(side), "%s release: and the first goes back toward the centre from the %s (dir %d)" % [name_side, name_side, int(after[0]["dir"])])
+				var hits_bob := 0
+				for t in turns:
+					if str((t as Dictionary).get("ray", "")).contains("BobSphere"): hits_bob += 1
+				check(turns.size() == 2 and hits_bob == 2, "%s release: the pointer's grab ray finds the bob at both turning points of the swing (%d of %d)" % [name_side, hits_bob, turns.size()])
+			di["releases"] = releases
+			if releases.size() == 2 and (releases[0] as Dictionary).has("crossings") and (releases[1] as Dictionary).has("crossings"):
+				var a0: Array = (releases[0] as Dictionary)["crossings"]
+				var b0: Array = (releases[1] as Dictionary)["crossings"]
+				if a0.size() > 0 and b0.size() > 0:
+					check(int(a0[0]["dir"]) != int(b0[0]["dir"]),
+						"released from the other side, the first crossing goes the other way (%d then %d)" % [int(a0[0]["dir"]), int(b0[0]["dir"])])
+					# the energy of the first crossing: two from-rest releases at equal and opposite
+					# angles must arrive at the centre equally fast, which no late read can fake
+					var wa: float = absf(float(a0[0]["omega"]))
+					var wb: float = absf(float(b0[0]["omega"]))
+					check(absf(wa - wb) < 0.05 * maxf(wa, wb), "and the two first crossings arrive equally fast: |omega| %.3f and %.3f rad/s" % [wa, wb])
+			# PLAYER CLEARANCE DURING A SWING, from the bob's own sampled positions. The aisle
+			# at the pendulum's row runs from the west wall (x = 1) to the raised strip (x = 4).
+			var xmin := 99.0
+			var xmax := -99.0
+			for r in releases:
+				if (r as Dictionary).has("swing_x"):
+					xmin = minf(xmin, float((r as Dictionary)["swing_x"][0]))
+					xmax = maxf(xmax, float((r as Dictionary)["swing_x"][1]))
+			var br: float = float(pend.get("bob_radius"))
+			var gap_w: float = (xmin - br) - 1.0
+			var gap_e: float = 4.0 - (xmax + br)
+			var Lp: float = float(pend.get("pendulum_length"))
+			var clamp_reach: float = sin(PI * 0.45) * Lp + br
+			var px: float = seg.to_local(pend.global_position).x
+			di["clearance"] = {"swing_x": [snappedf(xmin, 0.01), snappedf(xmax, 0.01)], "gap_west_m": snappedf(gap_w, 0.01), "gap_east_m": snappedf(gap_e, 0.01),
+				"worst_case_at_clamp": {"gap_west_m": snappedf((px - clamp_reach) - 1.0, 0.01), "gap_east_m": snappedf(4.0 - (px + clamp_reach), 0.01)}}
+			note("clearance " + JSON.stringify(di["clearance"]))
+			check(gap_w >= 0.44 and gap_e >= 0.44, "a walking body passes the swing on either side: %.2f m west, %.2f m east (a 0.22 m capsule needs 0.44)" % [gap_w, gap_e])
+			if "--capture" in OS.get_cmdline_user_args():
+				await get_tree().create_timer(0.2, true, false, true).timeout
+				get_viewport().get_texture().get_image().save_png(OUT + "probe_intro_desktop_primary_live.png")
 		await drv.call("teardown")
-		measurements["desktop_input"]["log"] = drv.get("log")
-		measurements["desktop_input"]["walker_cam_guard_stopped"] = drv.get("walker_cam_guard_stopped")
+		di["log"] = drv.get("log")
+		di["walker_cam_guard_stopped"] = drv.get("walker_cam_guard_stopped")
 		await get_tree().process_frame
 	if "--capture" in OS.get_cmdline_user_args():
 		var cam := Camera3D.new(); em.add_child(cam); cam.fov = 60
@@ -297,6 +372,102 @@ func _release(pend: Node3D, bob: Node3D, angle: float) -> Dictionary:
 	await get_tree().physics_frame
 	return {"angle": a, "omega": float(pend.call("angular_velocity")), "release_omega": release_omega}
 
+## A grab by the desktop pointer, timed to a turning point: the bob is slowest there, so the
+## aim taken now and the click a frame or two later still agree on where it is.
+func _desktop_grab(drv: Node, ptr: Node, pend: Node3D, tries: int = 8) -> Dictionary:
+	for attempt in range(tries):
+		var waited := 0
+		while absf(float(pend.call("angular_velocity"))) > 0.25 and waited < 240:
+			await get_tree().physics_frame
+			waited += 1
+		var at: Vector3 = pend.call("bob_world_position")
+		drv.call("aim_at", at)
+		var ray: String = _grab_ray_to(drv, at)
+		await drv.call("click", MOUSE_BUTTON_RIGHT)
+		for i in range(4): await get_tree().physics_frame
+		var held: bool = bool(ptr.call("is_holding"))
+		var knows: bool = bool(pend.call("is_grabbed"))
+		if held and knows:
+			return {"held": true, "pendulum_knows": true, "attempt": attempt, "grab_ray": ray, "waited_frames": waited}
+		if held and not knows:
+			# the pointer took something that is not this bob, or the hook did not fire
+			var other: Variant = ptr.get("_held")
+			await drv.call("click", MOUSE_BUTTON_RIGHT)
+			for i in range(3): await get_tree().physics_frame
+			return {"held": true, "pendulum_knows": false, "attempt": attempt, "grab_ray": ray,
+				"held_instead": (str((other as Node).name) if other is Node else "?")}
+	return {"held": false, "pendulum_knows": false, "attempt": tries, "grab_ray": "exhausted"}
+
+
+## Carry the held bob to `angle` on this pendulum, hold still, drop. The pointer eases the
+## carried body 0.4 of the way to the aim each frame, so 45 physics frames leave the hand's
+## last motion samples still: this is a release from rest at the held angle.
+func _desktop_carry_and_drop(drv: Node, ptr: Node, pend: Node3D, angle: float, name_side: String) -> Dictionary:
+	var L: float = float(pend.get("pendulum_length"))
+	var target: Vector3 = pend.to_global(Vector3(sin(angle) * L, -cos(angle) * L, 0.0))
+	drv.call("aim_at", target)
+	for i in range(30): await get_tree().physics_frame
+	# The photograph comes BEFORE the hold settles. Taken between the hold and the drop, its
+	# stall made the frame that processed the click run catch-up physics with the bob already
+	# released (first run, 2026-09-13: a from-rest release read at omega -1.63).
+	if name_side == "right" and "--capture" in OS.get_cmdline_user_args():
+		await get_tree().create_timer(0.15, true, false, true).timeout
+		get_viewport().get_texture().get_image().save_png(OUT + "probe_intro_desktop_hold_live.png")
+	for i in range(45): await get_tree().physics_frame
+	var held_angle: float = float(pend.call("angle"))
+	var bob_at: Vector3 = pend.call("bob_world_position")
+	var still_held: bool = bool(pend.call("is_grabbed"))
+	# READ THE RELEASE WHERE IT HAPPENS. _on_bob_dropped emits `released` synchronously after
+	# computing omega from the hand's samples and before any physics step integrates it.
+	var at_release := {"omega": 99.0, "angle": 99.0, "heard": false}
+	var on_release := func():
+		at_release["omega"] = float(pend.call("angular_velocity"))
+		at_release["angle"] = float(pend.call("angle"))
+		at_release["heard"] = true
+	pend.connect("released", on_release, CONNECT_ONE_SHOT)
+	await drv.call("click", MOUSE_BUTTON_RIGHT)
+	for i in range(2): await get_tree().physics_frame
+	return {"target": _v(target), "bob_to_target_m": snappedf(bob_at.distance_to(target), 0.01),
+		"held_angle": snappedf(held_angle, 0.001), "held_until_drop": still_held,
+		"released": (not bool(pend.call("is_grabbed"))) and not bool(ptr.call("is_holding")),
+		"released_signal_heard": bool(at_release["heard"]),
+		"release_omega": snappedf(float(at_release["omega"]), 0.001),
+		"release_angle": snappedf(float(at_release["angle"]), 0.001)}
+
+
+## What the pointer's own grab ray meets on the way to `at` — the same mask and the same kind
+## of query DesktopInteractionPointer._find_grabbable casts.
+func _grab_ray_to(drv: Node, at: Vector3) -> String:
+	var cam: Camera3D = drv.get("cam")
+	if cam == null:
+		return "no camera"
+	var from: Vector3 = cam.global_position
+	var q := PhysicsRayQueryParameters3D.create(from, from + (at - from).normalized() * 5.0, 393220)
+	q.collide_with_bodies = true
+	q.collide_with_areas = false
+	var hit: Dictionary = cam.get_world_3d().direct_space_state.intersect_ray(q)
+	if hit.is_empty():
+		return "nothing"
+	var c: Node = hit.get("collider")
+	return str(c.name) if c != null else "?"
+
+
+func _swing_x(samples: Array) -> Array:
+	var lo := 99.0
+	var hi := -99.0
+	for s in samples:
+		lo = minf(lo, (s as Vector3).x)
+		hi = maxf(hi, (s as Vector3).x)
+	return [lo, hi]
+
+
+func _v(p: Vector3) -> Array:
+	return [snappedf(p.x, 0.01), snappedf(p.y, 0.01), snappedf(p.z, 0.01)]
+
+
+func note(message: String) -> void:
+	print("[wcn-intro] note: ", message)
+
 func _solid_at(seg: Node3D, p: Vector3, r: float) -> bool:
 	var s := SphereShape3D.new(); s.radius = r
 	var q := PhysicsShapeQueryParameters3D.new(); q.shape = s; q.transform = Transform3D(Basis.IDENTITY, p)
@@ -313,7 +484,14 @@ func _aabb(node: Node) -> Array:
 
 func _finish() -> void:
 	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,
-		"control_path": ("picked_up/dropped emitted programmatically on the bob pickable; no tracked hand" if release_exercised else "pickup/release NOT exercised; autonomous motion observations only"),
+		# SAY WHICH LANE RAN. _live() is a filename test: the whole pointer block can be
+		# skipped in silence while every other check stays green.
+		"lanes": {"model_lane": "picked_up/dropped emitted on the bob pickable, the bob moved by setting its position",
+			"pointer_lane_expected": _live(), "pointer_lane_ran": measurements.has("desktop_release")},
+		"control_path": (("the bob grabbed, carried and released through the desktop pointer's right-click from both sides, the pendulum hearing it through its own pickup and drop handlers; the model lane emits the pickable's signals" if measurements.has("desktop_release")
+			else "model lane in this run: picked_up/dropped emitted on the bob pickable, no pointer; the live lane grabs, carries and releases the bob through the desktop pointer from both sides") if release_exercised
+			else ("pickup/release NOT exercised in this lane: under --script the pickable cannot compile without its autoloads; the live lane grabs, carries and releases the bob through the desktop pointer from both sides" if not _live()
+				else "pickup/release NOT exercised; autonomous motion observations only")),
 		"skipped": skipped, "release_exercised": release_exercised,
 		"status": ("passed" if failures.is_empty() and release_exercised else "incomplete_or_failed"),
 		"headset_verified": false, "engine": Engine.get_version_info().string,

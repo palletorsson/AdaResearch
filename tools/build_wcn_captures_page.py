@@ -28,6 +28,8 @@ WIDTH = 960
 # (map, probe stem, batch, question, the views in the order they are read; a view is the
 #  suffix after the stem, '' for the primary)
 HALLS = [
+    ('WaveFunctions_Intro', 'probe_intro', 'W0', 'When a body returns to the same place, what has changed?',
+     ['', '_desktop_hold', '_desktop_primary']),
     ('WaveFunctions_Synthesis_Lab', 'probe_synthesis_lab', 'W4', 'What shape can several simple returns make together?',
      ['', '_console', '_readout', '_hold', '_overview', '_desktop_front']),
     ('Random_Entropy', 'probe_entropy', 'R1', 'Which differences disappear when a sequence becomes one number?',
