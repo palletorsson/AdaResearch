@@ -38,6 +38,10 @@ const CONFIG_PARAM_NAMES = [
 	"animate", "duration", "no_collision", "rotate_collision",
 	# Comment box (2026-09-05): its id, its output path, its prompt - `#box:3` must stay a value
 	"box", "out", "prompt",
+	# Waves / randomness / noise pilots (2026-09-10): `#seed:20260910`, `#octaves:1`
+	# and `#offset:1` are values. `octaves` was already documented as a placement
+	# in SimplexNoise.gd's header and was being read as a rotation.
+	"seed", "octaves", "offset", "contrast_seed", "frequency", "amplitude", "persistence",
 	# Waves / randomness / noise R2 (2026-09-11): `#walk_seed:N` is the seed pixel_cloud and
 	# random_walk_terrarium read; as a bare key:number it was a rotation shorthand.
 	"walk_seed",
