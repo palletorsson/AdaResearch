@@ -43,3 +43,37 @@ Actual desktop input, tried and recorded separately: the project's desktop rig s
 `bash tools/run_wcn_probe.sh intro live`, Godot free: 28 checks, 0 failures, `status: passed`. Why the rerun: after this room's 20:50 run the shared probe sources changed (the capture settle moved from the render server's `frame_post_draw` to a timer; the driver's pose log and the guard flag were added), so the evidence is regenerated from the sources that now stand; the results are the same as the second pass. Captures refreshed in place. Headset: pending.
 
 **2026-09-12 — the visual pass (Astra's illustrated review: "the pale bob, rod and prediction nearly disappear against the bright floor; the counter is distant and small").** Under `reference:plumb` only: a dark matte slate (1.6 × 1.9 m) stands 0.30 m behind the swing plane, behind the trace plot too, so the bob, the rod, the rest ring and the prediction are read against it; the state label is a cased readout on a plate beside the pivot (x +0.78, out of the swing), font 24 at 1.1 mm per pixel. The hand target is untouched. Live: 31 checks / 0 failures; the capture from the approach shows the bob, its ring, the plot and the signs and count on one dark ground.
+
+
+## 2026-09-13 — W0: the release, by a desktop hand (Fable; Astra's card: "Partial probe evidence; required pickup/release untested")
+
+**The ruling.** The 2026-09-10 entry above concluded that "on the desktop lane the pickup cannot be made through input in this project". That was a true description of the code and a wrong reading of why. The desktop pointer DID pick the bob up. Its right-click carry (`DesktopInteractionPointer._grab_held`) found the bob on its own grab mask, froze it and began easing it toward the aim. What it never did was tell the pendulum: the carry calls one opt-in hook, `on_desktop_grab`, on the carried body, and on drop it called nothing. The pendulum hears only the XR pickable's `picked_up` and `dropped`. So its integrator went on writing the bob's position every physics frame, overwriting the carry, and `_on_bob_dropped` never ran. The readings that looked like a miss were two instruments pointed at the wrong thing: the hover read the pointer's INTERACTION ray, whose mask cannot see layer 3, and the bob position was whatever the integrator had just written.
+
+**The fix, and why it has that shape.** The bob is `grab_sphere_point.tscn`, one scene used by 54 files, so the hooks cannot go in its script without changing every one of them. The pointer now asks the carried body for a `desktop_hook_target` meta and calls the hooks there, falling back to the body itself, which is exactly the old behaviour for every body without the meta. It also gained the missing drop hook, `on_desktop_drop`, called after freeze and layers are restored. The pendulum sets the meta on its own bob and routes both hooks into `_on_bob_picked_up` and `_on_bob_dropped` — the same handlers the VR grab reaches. So a desktop release is computed by the real code: the angle from the carried bob's position about the pivot, the angular velocity from the hand's own motion samples.
+
+The grab hook itself was not mine. It came with the drink-me bottle work of 2026-09-09, uncommitted and unclaimed; `drink_me_bottle.gd` is still untracked. I committed the pointer with it and said so, and left the bottle, `drink_me_room.gd` and `scale_me.gd` alone (forum 260913-9wk5k).
+
+**Measured, through the pointer's right-click, from one standing spot 1.15 m in front of the swing:**
+
+| | right | left |
+|---|---|---|
+| grab ray meets | BobSphere | BobSphere |
+| pointer holds, pendulum knows | yes | yes |
+| carried bob to release point | 0.00 m | 0.01 m |
+| angle at the release handler | +0.600 rad | −0.600 rad |
+| ω at the release handler | 0.0 | 0.0 |
+| first crossing | −2.250 rad/s | +2.249 rad/s |
+| second crossing | +1.996 rad/s | −1.995 rad/s |
+| grab ray at both turning points | BobSphere, BobSphere | BobSphere, BobSphere |
+
+Two visits to the centre with opposite angular velocities, from either side, and the two sides mirror each other to a thousandth — which is also the evidence that both were releases from rest, since a late read cannot make two first crossings arrive equally fast.
+
+**Clearance during a swing**, from every sampled bob position rather than an assumed envelope: the bob ran from x 2.17 to 2.83 in the hall's cells, so a walking body has 1.11 m between the swing and the west wall and 1.11 m between the swing and the raised strip. At the integrator's clamp of ±0.45π the worst case is 0.85 m each side. A 0.22 m capsule needs 0.44.
+
+**Two traps in my own first run, both fixed.** The pilot's stand, 1.5 m in front, put the rig inside the driven cube two cells behind the pendulum; the stand is 1.15 m now and the probe checks the rig was not pushed. And a from-rest release read ω −1.63 two frames after the drop, because the hold photograph was taken between the hold and the drop: its stall made the frame that processed the click run catch-up physics with the bob already free. The release is now read inside the pendulum's own `released` signal, which `_on_bob_dropped` emits before any physics step integrates it, and the photograph is taken before the hold settles.
+
+**The bare lane still fails its release check, on purpose.** Under `--script` the grab sphere cannot compile without its autoloads, so the bob never enters the tree, and the 12 September ruling is that a script-only run must not pass the release contract. The failure now says where the contract IS exercised.
+
+**Also found and handed to a rewrite:** `technical.md` still described the February oscilloscope room, with code headed by the names of three real files that is not in them, two files that do not exist, and the pendulum's release quoted with a flipped sign (`-cos`, `-sin`). It is rewritten from the scripts the map actually places.
+
+**Pending.** A headset walk and a tracked hand. Whether the ring is legible at hall lighting from the approach. Astra's review.

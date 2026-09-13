@@ -214,6 +214,12 @@ func _create_grabbable_bob():
 		_bob_sphere.picked_up.connect(_on_bob_picked_up)
 	if _bob_sphere.has_signal("dropped"):
 		_bob_sphere.dropped.connect(_on_bob_dropped)
+	# THE DESKTOP HAND (2026-09-13, W0). The desktop pointer's right-click carry never
+	# emits picked_up or dropped, so until now a desktop visitor carried the bob while
+	# the integrator kept writing its position, and the release handler never ran. The
+	# bob is a shared grab-sphere scene, so the hooks live here and the bob names this
+	# node as the one to ask.
+	_bob_sphere.set_meta("desktop_hook_target", self)
 
 	# Add as child of the main node (not pivot) so it can move freely when grabbed
 	add_child(_bob_sphere)
@@ -472,6 +478,19 @@ func _on_bob_dropped(_pickable):
 	_grab_velocity_samples.clear()
 	_prev_angle = _angle
 	released.emit()
+
+## The desktop pointer's carry, routed into the SAME handlers the VR grab uses: the
+## release angle comes from the carried bob's position about this pivot and the angular
+## velocity from the hand's own motion samples — not from a stand-in.
+func on_desktop_grab(_pointer: Node) -> void:
+	if _bob_sphere != null and not _is_grabbed:
+		_on_bob_picked_up(_bob_sphere)
+
+
+func on_desktop_drop(_pointer: Node) -> void:
+	if _bob_sphere != null and _is_grabbed:
+		_on_bob_dropped(_bob_sphere)
+
 
 func grab():
 	# Manual grab (for non-VR)

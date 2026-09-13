@@ -1,97 +1,77 @@
 # Wavefunctions Intro
 
-A room lined with oscilloscopes. Four cubes teach the grammar. Start where every periodic motion starts.
+One pendulum you release by hand, a line that does not move, and cubes that were only told where to be. The order below is the order of the room.
 
-Declare the waveform kinds.
+Find the still reference first. From the pivot a hairline hangs to a ring. Nothing about it changes while the bob swings.
 
-```gdscript
-enum WaveKind { SINE, SQUARE, SAWTOOTH, TRIANGLE }
-
-@export var kind: WaveKind = WaveKind.SINE
-@export var amplitude: float = 1.0
-@export var frequency: float = 1.0
-```
-
-Four kinds, three parameters. The enum is the alphabet. Amplitude and frequency are the first two letters.
-
-Sample a sine wave.
+Take the bob and release it from one side. It is an XR Tools pickable; the pendulum listens to its `picked_up` and `dropped` signals.
 
 ```gdscript
-func sample_sine(t: float) -> float:
-    return amplitude * sin(TAU * frequency * t)
+func _on_bob_picked_up(_pickable):
+	_is_grabbed = true
+	_grab_velocity_samples.clear()
 ```
 
-Time goes in, displacement comes out. The function is the entire contract. Everything else is visualization.
+While the bob is held, the pendulum only follows your hand and computes the angle from the bob's position. No swing is integrated and no crossing is counted.
 
-Render the trace to an oscilloscope line.
+Watch the ring. It brightens once as the bob passes through, and once again on the way back. Read the label: the angle, and the angular velocity with its sign. The sign differs between the two crossings.
 
 ```gdscript
-func render_trace(line: Line2D, width: float) -> void:
-    line.clear_points()
-    for i in 128:
-        var x := float(i) / 128.0 * width
-        var t := float(i) / 128.0
-        line.add_point(Vector2(x, -sample(t) * 40.0))
+if signf(_angle) != signf(_prev_angle) and signf(_angle) != 0.0 \
+		and absf(_angular_velocity) > CROSSING_MIN_OMEGA:
+	_crossings += 1
+	_last_crossing_dir = 1 if _angular_velocity > 0.0 else -1
+	centre_crossed.emit(_last_crossing_dir, _angular_velocity)
 ```
 
-Green pixels sweep left to right. The trace is the waveform made visible. Oscillation becomes legible as a shape.
+A crossing is a sign change of the angle while the bob is moving. The room counts them and says which way the last one went.
 
-Spawn the four teaching cubes.
+Release from the other side and compare the direction of the first crossing.
+
+Follow the swing to a turning point. The velocity reading passes through zero and changes sign; the angle is at its extreme.
+
+Read the update that makes all of this happen. Each physics step:
 
 ```gdscript
-func build_cubes(parent: Node3D) -> void:
-    for i in 4:
-        var cube := preload("res://commons/artifacts/wavefunctions/teach_cube.tscn").instantiate()
-        cube.kind = i
-        cube.position = Vector3(i * 1.5 - 2.25, 1.0, 0.0)
-        parent.add_child(cube)
+var angular_acceleration: float = -(gravity / pendulum_length) * sin(_angle)
+_angular_velocity += angular_acceleration * delta
+_angular_velocity *= _damping_multiplier(delta)
+_angle += _angular_velocity * delta
 ```
 
-Four cubes in a row. Static, rotating, oscillating, transforming. The progression runs left to right: rest, motion, return, change.
+Gravity pulls toward the hanging position in proportion to sin(θ); the pull changes the velocity; the velocity changes the angle. Under the shipped `free` regime the damping multiplier is a constant 0.995 per physics frame.
 
-Animate the oscillating cube.
+Release again, faster. On release the pendulum averages the bob's last positions into a velocity and keeps only the part along the swing:
 
 ```gdscript
-func animate_oscillating(cube: Node3D, t: float) -> void:
-    cube.position.y = 1.0 + 0.5 * sin(TAU * t)
+var tangent_velocity = avg_velocity.dot(tangent_direction)
+_angular_velocity = tangent_velocity / pendulum_length
 ```
 
-The cube rises and falls between 0.5 and 1.5. The learner sees the sine trace on the scope and the cube in the air as the same curve.
-
-Switch kinds by button.
+At a desk, the hand is the pointer. Right-click the bob, turn the view to carry it out, hold still and right-click again. The pointer does not know what a pendulum is, so the bob tells it who to tell:
 
 ```gdscript
-func _on_kind_button_pressed(k: int) -> void:
-    current_kind = k
-    sample_func = _sampler_for(k)
-    trace_line.clear_points()
+_bob_sphere.set_meta("desktop_hook_target", self)
 ```
 
-Each press selects a waveform. The sampler changes; the scope redraws. The button cycles through the alphabet.
-
-Expose the parameter sliders.
+and the two hooks go to the same handlers a headset's grab reaches:
 
 ```gdscript
-func _on_amplitude_slider(v: float) -> void:
-    amplitude = lerp(0.1, 2.0, v)
-
-func _on_frequency_slider(v: float) -> void:
-    frequency = lerp(0.2, 4.0, v)
+func on_desktop_grab(_pointer: Node) -> void:
+	if _bob_sphere != null and not _is_grabbed:
+		_on_bob_picked_up(_bob_sphere)
 ```
-
-Two sliders control the trace. Turning amplitude taller or frequency faster is done by hand. The math is the room.
-
-You have met the grammar. The next map, Pendulum, grounds sine in gravity.
-<<</MAP>>>
-
-Cycle the kind on a timer.
 
 ```gdscript
-func auto_cycle(dt: float) -> void:
-    cycle_time += dt
-    if cycle_time > 3.0:
-        current_kind = (current_kind + 1) % 4
-        cycle_time = 0.0
+func on_desktop_drop(_pointer: Node) -> void:
+	if _bob_sphere != null and _is_grabbed:
+		_on_bob_dropped(_bob_sphere)
 ```
 
-A demo mode walks through the four kinds automatically. The learner sees the shapes transition without touching controls.
+Held still before letting go, the release is from rest: the hand's last samples are zero, so the tangent velocity is zero too.
+
+Try a small release and a large one and count crossings for each. Behind the swing the predicted θ(t) is drawn for the standard starting angle of 0.3 rad. A large release does not follow it: the sine in the acceleration lengthens a wide swing and the damping shortens each pass.
+
+Then look at the cubes. `y_oscillation_cube` and `transformation_cube` set their height from a sine of the clock; `rotating_cube` spins at a constant rate; `oscillation_controlled_cube` listens to this pendulum's `oscillation_updated` signal and maps one swing to height, tilt and size. Take the bob and the driven cube stops with it; the clock-driven cubes do not notice.
+
+The next room, Pendulum, records the swing along a depth axis. Carry the centre crossing with you.

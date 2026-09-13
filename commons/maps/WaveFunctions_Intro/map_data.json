@@ -3,7 +3,7 @@
   "name": "Oscillation Control Room",
   "title": "Oscillation Control Room",
   "lookup_name": "WaveFunctions_Intro",
-  "description": "A small control room where you first encounter oscillation. Multiple oscilloscopes display different waveforms. Interactive demos let you feel the parameters. This is where you learn the language before the journey begins.",
+  "description": "The first wave room. A pendulum you release by hand, with a plumb line and a ring at its rest point so two visits to the centre can be told apart by direction; around it, cubes that follow a prescribed sin(t), a spinning cube, a cube driven by the pendulum's own signal, and a time trace — the integrated swing set beside motions that were only told where to be.",
   "version": "1.0",
   "format": "json",
   "dimensions": {
@@ -16,6 +16,12 @@
    "category": "wavefunctions",
    "estimated_time": "5-8 minutes",
    "learning_objectives": [ "What is oscillation? Periodic motion between extremes", "The sine wave: x = A·sin(ωt + φ)", "Parameters: Amplitude, Frequency, Phase", "Harmonic motion in springs and pendulums", "Visualizing waveforms on an oscilloscope" ]
+  },
+  "museum": {
+   "wall_height": 3,
+   "gate_depth_rows": 0,
+   "sculpture_clear_rects": [[1, 9, 5, 14]],
+   "artifact_placement": "map"
   }
  },
  "utility_definitions": {
@@ -29,31 +35,19 @@
   }
  },
  "documentation": {
-  "summary": "WaveFunctions Intro - The Control Room",
-  "layout": "Intimate 9x11 control room with oscilloscope banks, interactive demos at center tables, and 4-stage oscillation cube progression",
-  "objective": "Learn the fundamental concepts of oscillation through interactive exploration before venturing into larger wave experiences",
-  "key_elements": [ "oscilloscope_bank - Multiple oscilloscopes showing different waveforms", "static_reference_cube - Stage 1: Motionless baseline for comparison", "y_oscillation_cube - Stage 2: y = A·sin(ωt) vertical oscillation", "rotating_cube_demo - Stage 3: θ += ω·dt continuous rotation", "control_pendulum + oscillation_controlled_cube - Stage 4: Combined pendulum control", "harmonic_motion_demo - Interactive SHM with sliders", "spring_demo - Hooke's Law visualization" ],
-  "progression": "Static → Y-oscillation → Rotation → Combined (pendulum-controlled)"
+  "summary": "WaveFunctions Intro - Returning differently",
+  "layout": "13x22 hall on the recovered one-metre platforms (museum.wall_height 3): the pendulum at (2,11) on the floor beside the raised strip at x=4 that carries the pick-up cubes; the prescribed-motion cubes near the entrance; the driven cube and the time trace behind the pendulum",
+  "objective": "Release a pendulum and tell two visits to the same place apart by their direction; then set the integrated swing beside cubes that merely follow sin(t)",
+  "key_elements": [ "control_pendulum#reference:plumb#evidence:trace - the primary: a grabbable bob, a plumb line and a ring at the rest point that lights at each centre crossing, the label reading the angle and the signed angular velocity, and the predicted theta(t) drawn behind the swing", "pickup_cube_static / transformation_cube / y_oscillation_cube - stationary and prescribed sin(t) motions kept as the comparison: told where to be, not integrated", "rotating_cube / rotating_cube_demo - constant angular velocity, no return", "oscillation_controlled_cube - driven by the pendulum's oscillation_updated signal: one integrated signal, three transformations", "mario_cube_time_trace - a trail of its own child cube's prescribed sin(t) motion along +z: the history of a motion told where to be, not of the swing; the handoff to the Pendulum room", "SphericalHarmonics, science_screen#mode:wave - secondary" ],
+  "progression": "Release → two centre crossings, opposite directions → the integration excerpt → a second, larger release troubles the small-angle period → the record (next room)"
  },
  "lighting": {
-  "ambient_color": [
-   0.15,
-   0.18,
-   0.22
-  ],
+  "ambient_color": [ 0.15, 0.18, 0.22 ],
   "ambient_energy": 0.4,
   "directional_light": {
    "enabled": true,
-   "direction": [
-    -0.3,
-    -0.8,
-    -0.3
-   ],
-   "color": [
-    0.8,
-    0.85,
-    1
-   ],
+   "direction": [ -0.3, -0.8, -0.3 ],
+   "color": [ 0.8, 0.85, 1 ],
    "energy": 0.6
   }
  },
@@ -64,37 +58,33 @@
   "enable_physics": true,
   "background": {
    "type": "color",
-   "color": [
-    0.05,
-    0.07,
-    0.1
-   ]
+   "color": [ 0.05, 0.07, 0.1 ]
   }
  },
  "layers": {
   "structure": [
-   [ "1", "1", "2", "2", "2", "2", "1", "2", "2", "w", "w", "w", "w" ],
+   [ "1", "1", "w", "w", "w", "w", "1", "w", "w", "w", "w", "w", "w" ],
    [ "1", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "1", "1", "1", "2", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "1", "1", "2", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "2", "2", "1", "2", "2", "2", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "2", "1", "1", "1", "1", "1", "2", "2", "1", "1", "1", "w" ],
-   [ "2", "1", "1", "1", "0", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "2", "2", "2", "2", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
-   [ "4", "2", "2", "2", "2", "1", "1", "1", "4", "w", "w", "w", "w" ]
+   [ "w", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "2", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "2", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "2", "2", "1", "2", "2", "2", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "2", "1", "1", "1", "1", "1", "2", "2", "1", "1", "1", "w" ],
+   [ "w", "1", "1", "1", "0", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "w", "2", "2", "2", "1", "1", "1", "1", "2", "1", "1", "1", "w" ],
+   [ "4", "w", "w", "w", "w", "1", "1", "1", "4", "w", "w", "w", "w" ]
   ],
   "utilities": [
    [ "sp", "", "", "", "", "", "", "", "", "", "", "", "" ],
@@ -132,7 +122,7 @@
    [ "", "", "", "", "pickup_cube_rotating", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "dark_sphere", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "control_pendulum:0:1.5:1", "", "pick_up_cube:0:0:0.6", "", "", "", "", "", "", "", "" ],
+   [ "", "", "control_pendulum:0:1.5:1#reference:plumb#evidence:trace", "", "pick_up_cube:0:0:0.6", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "pick_up_cube:0:0:0.7", "", "", "", "", "", "", "", "" ],
    [ "", "", "oscillation_controlled_cube:180:0.5:1", "", "pick_up_cube:0:0:0.8", "", "mario_cube_time_trace:0:1:0.5", "", "", "", "", "", "" ],
    [ "", "", "", "", "pick_up_cube:0:0:0.9", "", "", "", "", "", "", "", "" ],

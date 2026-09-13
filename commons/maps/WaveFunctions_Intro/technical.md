@@ -1,281 +1,290 @@
-# A control room lined with oscilloscopes and four cubes on rails
+# A pendulum released by hand, among cubes told where to be
 
-In Forces we watched springs oscillate and pendulums swing. Those were side effects — objects under force happened to repeat. A spring compressed, overshot equilibrium, compressed again. A pendulum traced an arc because gravity and tension conspired. The oscillation was real, but it was downstream of something else. This map treats oscillation as the primary event. Not a consequence of force — the phenomenon itself, isolated and controllable.
+In Forces, oscillation was a side effect of a restoring force. This hall puts the repetition first. One pendulum is integrated step by step; around it stand cubes whose height is `sin` of a clock, cubes spinning at a constant rate, a cube driven by the pendulum's output, a screen and a time trace. The comparison is about state: what each object carries from one frame to the next, and what a hand can change.
 
-The room is small and deliberately closed. Oscilloscopes line the walls, green traces sweeping left to right — sine, square, sawtooth, triangle. Each one a different signature of the same principle: periodic motion between extremes. Four cubes sit on vertical rails at the center.
+## What the hall places
 
-The first is still. The second oscillates. The third rotates. The fourth transforms under external control. Together they build the grammar of oscillation from rest to parametric expression.
+`commons/maps/WaveFunctions_Intro/map_data.json` is 13 by 22 cells, with the spawn at (0,0) and the teleporter at (4,19). Near the entrance, three small cubes at scale 0.2 stand at (2,4), (3,4) and (5,4): a plain `cube_scene`, a `transformation_cube` that bobs and a `rotating_cube` that spins. Behind them the labelled versions of those two motions, `y_oscillation_cube` at (3,5) and `rotating_cube_demo` at (5,5), and a single `science_screen` in `wave` mode at (7,5). Down the column x = 4 run `rotatescalecubes` (4,1), `pickup_cube_static` (4,2), `pickup_cube_transforming` (4,7), `pickup_cube_rotating` (4,8) and a `dark_sphere` (4,9).
 
-## The Sine Function as Universal Oscillator
+The primary, `control_pendulum:0:1.5:1#reference:plumb#evidence:trace`, hangs at (2,11). Beside it, on the raised strip at x = 4, five `pick_up_cube` tokens from row 11 to row 15 carry the scales 0.6, 0.7, 0.8, 0.9 and 1.0 in their fourth field. Behind the pendulum stand `oscillation_controlled_cube` (2,13) and `mario_cube_time_trace` (6,13). Two `SphericalHarmonics` instruments at (1,18) and (7,18) close the hall.
 
-Every oscillation starts with sine. The function `sin(t)` takes an angle — measured in radians — and returns a value between -1 and 1. Feed it a steadily increasing angle and the output traces a wave: rising to 1, falling through 0 to -1, rising back. One complete cycle every 2π radians. The output is smooth, continuous, and perfectly periodic.
+## The equation the pendulum steps
+
+As a formula, the motion of a rigid pendulum of length L under gravity g is:
+
+```
+θ'' = -(g/L)·sin θ
+```
+
+The script never solves this. It steps it, once per physics frame, in `_physics_process` of `commons/artifacts/control_pendulum/control_pendulum.gd`:
 
 ```gdscript
-# The simplest oscillation: position driven by time
-extends Node3D
-
-var time: float = 0.0
-
-func _process(delta: float) -> void:
-    time += delta
-    position.y = sin(time)
+var angular_acceleration: float = -(gravity / pendulum_length) * sin(_angle)
+if regime == "resonance":
+    _drive_t += delta
+    angular_acceleration += _drive_accel() * cos(_omega0() * _drive_t)
+_angular_velocity += angular_acceleration * delta
+_angular_velocity *= _damping_multiplier(delta)
+_angle += _angular_velocity * delta
+...
+_angle = clampf(_angle, -PI * 0.45, PI * 0.45)
 ```
 
-That's it. A node whose y-position follows `sin(time)`. At t = 0, position is 0. At t = π/2, position is 1. At t = π, back to 0.
+The placement names no `regime`, so the default `free` runs and the drive lines never execute. Velocity is updated first and moves the angle: semi-implicit Euler. The sine sits in the acceleration, not the position, and nothing here reads a clock; `delta` is only the step size. The whole state is two numbers, `_angle` and `_angular_velocity`. The clamp at ±0.45π stops a hard release from carrying the bob over the pivot.
 
-At t = 3π/2, down to -1. At t = 2π, the cycle completes and begins again. The object never leaves. It never arrives. It oscillates.
+Under `free`, `_damping_multiplier` returns the raw export `damping`, 0.995 per physics frame, which the file's own comment puts at a damping ratio of ζ = 0.037 against ω₀ = √(g/L). With `gravity` 9.8 and `pendulum_length` 0.6, the familiar period is a small-angle result. As a formula:
 
-Why sine and not some other repeating function? Because sine is the projection of uniform circular motion onto a line. Imagine a point moving at constant speed around a circle. Its shadow on the wall traces a sine wave. This is not a metaphor — it is the geometric definition. The `rotating_cube_demo` artifact in this map makes this connection visible: a cube spinning at constant angular velocity, its vertical shadow tracing the same curve as the `y_oscillation_cube` below it.
+```
+sin θ ≈ θ   gives   T = 2π·√(L/g)
+```
+
+The integrator never makes that substitution, so a wide release swings more slowly than T says. The token lifts the pivot 1.5 and the rod is 0.6 long; the probe below measured the rest point at 0.90 m.
+
+## The release is an initial condition
+
+While the bob is held, `commons/artifacts/control_pendulum/control_pendulum.gd` stops integrating. It reads the angle back from wherever the bob is and zeroes the velocity:
 
 ```gdscript
-# rotating_cube_demo.gd — constant angular velocity
-extends Node3D
-
-@export var angular_velocity: float = 2.0  # radians per second
-var angle: float = 0.0
-
-func _process(delta: float) -> void:
-    angle += angular_velocity * delta
-    rotation.y = angle
+var local_pos = to_local(_bob_sphere.global_position)
+var new_angle = atan2(local_pos.x, -local_pos.y)
+new_angle = clampf(new_angle, -PI * 0.45, PI * 0.45)
+...
+_last_bob_position = current_pos
+_angle = new_angle
+_angular_velocity = 0.0
 ```
 
-Rotation is the parent of oscillation. The cube spins — its angle increases without bound. But project that rotation onto a single axis and the unbounded becomes bounded. The spin becomes a wave.
-
-## The Governing Equation
-
-The raw `sin(time)` oscillation has amplitude 1, completes one cycle every 2π seconds, and starts at zero. Those are defaults. The governing equation introduces three parameters that control everything:
-
-```
-x = A · sin(ωt + φ)
-```
-
-**A** is amplitude — the height of oscillation, the maximum displacement from center. **ω** (omega) is angular frequency — how fast the cycle completes. **φ** (phi) is phase — where in the cycle the motion begins. Three numbers. Complete control over any sinusoidal oscillation.
+It also keeps the last five frame-to-frame velocities of the bob. On release, `_on_bob_dropped` in `commons/artifacts/control_pendulum/control_pendulum.gd` averages them, turns them into the pivot's frame and keeps only the part along the swing:
 
 ```gdscript
-# oscillation_controlled_cube.gd — full parametric control
-extends Node3D
-
-@export var amplitude: float = 2.0     # A: max displacement
-@export var omega: float = 3.0         # ω: angular frequency
-@export var phase: float = 0.0         # φ: phase offset
-var time: float = 0.0
-
-func _process(delta: float) -> void:
-    time += delta
-    position.y = amplitude * sin(omega * time + phase)
+avg_velocity /= _grab_velocity_samples.size()
+...
+avg_velocity = global_basis.inverse() * avg_velocity
+...
+var tangent_direction = Vector3(cos(_angle), sin(_angle), 0)
+var tangent_velocity = avg_velocity.dot(tangent_direction)
+_angular_velocity = tangent_velocity / pendulum_length
 ```
 
-The `oscillation_controlled_cube` artifact exposes these three parameters as sliders. Drag amplitude — the cube rides higher and lower on its rail. Drag omega — the cube speeds up or slows down. Drag phase — the entire motion shifts in time, as if rewinding or fast-forwarding the cycle. The equation is the same. The experience changes completely.
-
-## Amplitude: The Range of Motion
-
-Amplitude scales the sine output. `sin(t)` lives in [-1, 1]. Multiply by A and the range becomes [-A, A]. An amplitude of 3 means the cube travels 3 units above center and 3 units below. An amplitude of 0.1 means the cube barely moves — a tremor. An amplitude of 0 means stillness.
+The sign of that tangent follows from where the free pendulum puts the bob, in the same `commons/artifacts/control_pendulum/control_pendulum.gd`:
 
 ```gdscript
-# The first cube: amplitude = 0, pure rest
-# This is the baseline — no oscillation, no motion
-@export var amplitude: float = 0.0
-
-func _process(delta: float) -> void:
-    time += delta
-    position.y = amplitude * sin(omega * time + phase)
-    # amplitude is 0, so position.y is always 0
+func _update_bob_position():
+    # Calculate bob position from angle
+    if _bob_sphere and not _is_grabbed:
+        var bob_x = sin(_angle) * pendulum_length
+        var bob_y = -cos(_angle) * pendulum_length
+        _bob_sphere.global_position = to_global(Vector3(bob_x, bob_y, 0))
 ```
 
-The first cube in the room sits still. Not because it lacks a sine function — it has one. Its amplitude is zero. Stillness is not the absence of oscillation. It is oscillation with zero amplitude.
-
-The equation still runs. The output is just a flatline. This matters because the oscilloscope beside it shows exactly that: a horizontal green trace at y = 0. The equation and the trace agree. Zero is a valid amplitude, and the system handles it without special cases.
-
-Amplitude is always positive by convention. A negative amplitude flips the wave — but that is equivalent to a phase shift of π. The system has redundancy: `A · sin(ωt)` and `-A · sin(ωt)` produce the same motion, just started from opposite sides. Phase absorbs the sign.
-
-## Angular Frequency: The Speed of Cycling
-
-Angular frequency ω determines how many radians the argument of sine advances per second. Since one full cycle is 2π radians, the period T — the time for one complete oscillation — is:
+Differentiating that position with respect to the angle gives the tangent. As a formula:
 
 ```
-T = 2π / ω
+bob(θ)     = L·( sin θ, -cos θ )
+d bob / dθ = L·( cos θ,  sin θ )
 ```
 
-And the ordinary frequency f — cycles per second, measured in Hertz — is:
+An earlier version of this document printed the tangent with both components negated, which would reverse every angular velocity taken from a throw. The hand gives the pendulum exactly two numbers: `atan2` discards how far from the pivot the bob was held, and the dot product discards sideways motion. On the next free frame `_update_bob_position` returns the bob to its circle.
 
-```
-f = ω / 2π = 1 / T
-```
+## A desktop hand
 
-Higher ω means faster oscillation. Double ω, halve the period. The `oscillation_controlled_cube` demonstrates this directly — slide the omega parameter up and the cube races through its cycles. Slide it toward zero and the motion slows to a crawl, approaching the static cube's flatline.
+VR reaches those handlers through the pickable's own signals, connected in `_create_grabbable_bob`. A desktop visitor has no pickable signals: the pointer in `commons/scenes/DesktopInteractionPointer.gd` carries a RigidBody on right-click and puts it down on the next one:
 
 ```gdscript
-# Frequency comparison: two cubes side by side
-# Cube A: omega = 1.0 → period ≈ 6.28 seconds
-# Cube B: omega = 4.0 → period ≈ 1.57 seconds
-# Cube B completes four cycles in the time Cube A completes one
-
-var omega_slow: float = 1.0
-var omega_fast: float = 4.0
-
-# In _process:
-cube_a.position.y = amplitude * sin(omega_slow * time)
-cube_b.position.y = amplitude * sin(omega_fast * time)
+if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+    if _held:
+        _drop_held()
+    else:
+        var p := _find_grabbable()
+        if p:
+            _grab_held(p)
 ```
 
-Angular frequency connects to angular velocity from the `rotating_cube_demo`. A cube spinning at ω radians per second and a cube oscillating at ω radians per second are doing the same thing — one in the full circular plane, the other projected onto a line. The number is identical. The domain is different.
-
-## Phase: Where the Cycle Begins
-
-Phase φ shifts the starting point. At t = 0, the position is `A · sin(φ)` instead of `A · sin(0) = 0`. A phase of π/2 starts the oscillation at maximum displacement — the top of the wave. A phase of π starts it at zero but moving in the opposite direction. A phase of 2π is the same as a phase of 0 — the wave is periodic, so the shift wraps around.
+The bob is a grab-sphere scene shared by many artifacts, so the hooks cannot live in the bob's own script. Since 2026-09-13 `commons/scenes/DesktopInteractionPointer.gd` asks the carried body who should hear the carry, and calls that object from `_grab_held`, and from `_drop_held` once freeze and collision layers are restored:
 
 ```gdscript
-# Three cubes with different phase offsets
-# Same amplitude, same frequency, different starting points
-var phase_a: float = 0.0           # starts at center, moving up
-var phase_b: float = PI / 2.0     # starts at maximum
-var phase_c: float = PI           # starts at center, moving down
-
-func _process(delta: float) -> void:
-    time += delta
-    cube_a.position.y = amplitude * sin(omega * time + phase_a)
-    cube_b.position.y = amplitude * sin(omega * time + phase_b)
-    cube_c.position.y = amplitude * sin(omega * time + phase_c)
+func _desktop_hook_target(p: Node) -> Object:
+    if p != null and is_instance_valid(p) and p.has_meta("desktop_hook_target"):
+        var t: Variant = p.get_meta("desktop_hook_target")
+        if t is Object and is_instance_valid(t):
+            return t
+    return p
+...
+var grab_hook: Object = _desktop_hook_target(p)
+if grab_hook != null and grab_hook.has_method("on_desktop_grab"):
+    grab_hook.call("on_desktop_grab", self)
+...
+var drop_hook: Object = _desktop_hook_target(_held)
+if drop_hook != null and drop_hook.has_method("on_desktop_drop"):
+    drop_hook.call("on_desktop_drop", self)
 ```
 
-Phase is the hardest parameter to grasp because it does not change what the motion looks like — only when it happens. All three cubes above trace the same path. They just occupy different positions along that path at any given instant. The oscilloscope reveals this: three identical waveforms, shifted left and right in time. The shape is invariant. The alignment is not.
-
-Phase becomes critical when oscillations interact. Two waves of equal amplitude and frequency but opposite phase (φ differs by π) cancel completely — destructive interference. Same phase, they reinforce — constructive interference. But interference is a later map. Here, phase is simply the third control on the parametric oscillator.
-
-## Combined Transformations: One Signal, Three Outputs
-
-The fourth cube — the `control_pendulum` artifact — demonstrates that a single oscillation can drive multiple properties simultaneously. A pendulum swings. Its angle is a sine function. That angle maps to three outputs: position, rotation, and scale.
+The pendulum names itself on its bob and routes both hooks into the same handlers the VR signals reach, in `commons/artifacts/control_pendulum/control_pendulum.gd`:
 
 ```gdscript
-# control_pendulum.gd — one signal, three transformations
-extends Node3D
-
-@export var pendulum_amplitude: float = 1.5
-@export var pendulum_omega: float = 2.0
-@export var scale_range: float = 0.3
-var time: float = 0.0
-
-@onready var driven_cube: Node3D = $DrivenCube
-
-func _process(delta: float) -> void:
-    time += delta
-    var signal := sin(pendulum_omega * time)
-
-    # Position: vertical displacement
-    driven_cube.position.y = pendulum_amplitude * signal
-
-    # Rotation: tilt proportional to signal
-    driven_cube.rotation.z = signal * 0.5
-
-    # Scale: pulse between (1 - range) and (1 + range)
-    var s := 1.0 + scale_range * signal
-    driven_cube.scale = Vector3(s, s, s)
+if _bob_sphere.has_signal("picked_up"):
+    _bob_sphere.picked_up.connect(_on_bob_picked_up)
+if _bob_sphere.has_signal("dropped"):
+    _bob_sphere.dropped.connect(_on_bob_dropped)
+...
+_bob_sphere.set_meta("desktop_hook_target", self)
+...
+func on_desktop_grab(_pointer: Node) -> void:
+    if _bob_sphere != null and not _is_grabbed:
+        _on_bob_picked_up(_bob_sphere)
+...
+func on_desktop_drop(_pointer: Node) -> void:
+    if _bob_sphere != null and _is_grabbed:
+        _on_bob_dropped(_bob_sphere)
 ```
 
-One call to `sin()`. One variable — `signal`. Three different uses. The cube rises when the signal is positive and falls when negative. It tilts right at the peak and left at the trough. It swells and shrinks in sync. The motion looks complex — three things changing at once — but the source is a single oscillation. This is oscillation as control language: one periodic signal routed to multiple outputs.
+Before this, a desktop carry never reached the pendulum, so the integrator kept rewriting the bob's position. The pointer froze and moved the bob, but `_is_grabbed` stayed false, so the guard in `_update_bob_position` passed and the bob was put back on its circle every physics frame; the release handler never ran. The pointer also eases a carried body towards a point in front of the camera, so the velocity samples measure that eased motion, not the mouse.
 
-The `mario_cube_time_trace` artifact extends this idea by drawing the signal's history as a visible trail — a ribbon of past positions tracing the sine wave in space. Time made spatial. The oscilloscope does the same thing on its screen: amplitude on the vertical axis, time on the horizontal. The trace is the oscillation's autobiography.
+## Two visits to the centre
 
-## The Oscilloscope: Time Made Visible
-
-An oscilloscope plots amplitude against time. The green traces on the walls of this room are doing exactly what `_process` does — sampling a signal every frame and plotting the result:
+`reference:plumb` builds a hairline from the pivot to the rest point and a ring there that the bob threads. In `commons/artifacts/control_pendulum/control_pendulum.gd` a crossing is a sign change of the angle while the bob is moving:
 
 ```gdscript
-# oscilloscope_trace.gd — draw a waveform as a polyline
-extends Node3D
-
-@export var trace_length: int = 200
-@export var time_scale: float = 0.05
-@export var amplitude_scale: float = 1.0
-@export var waveform: String = "sine"
-
-var samples: PackedVector2Array = PackedVector2Array()
-
-func _process(delta: float) -> void:
-    var t := Time.get_ticks_msec() / 1000.0
-    var value := _sample_waveform(t)
-    samples.append(Vector2(samples.size() * time_scale, value * amplitude_scale))
-    if samples.size() > trace_length:
-        samples.remove_at(0)
-
-func _sample_waveform(t: float) -> float:
-    match waveform:
-        "sine":
-            return sin(t * omega)
-        "square":
-            return sign(sin(t * omega))
-        "sawtooth":
-            return 2.0 * fmod(t * omega / TAU, 1.0) - 1.0
-        "triangle":
-            return 2.0 * abs(2.0 * fmod(t * omega / TAU, 1.0) - 1.0) - 1.0
-    return 0.0
+if signf(_angle) != signf(_prev_angle) and signf(_angle) != 0.0 \
+        and absf(_angular_velocity) > CROSSING_MIN_OMEGA:
+    _crossings += 1
+    _last_crossing_dir = 1 if _angular_velocity > 0.0 else -1
+    _ring_glow = 1.0
+    centre_crossed.emit(_last_crossing_dir, _angular_velocity)
+...
+var line := "θ %+.1f°   ω %+.2f rad/s" % [rad_to_deg(_angle), _angular_velocity]
 ```
 
-Four waveforms. All periodic. All oscillating between -1 and 1. The sine is smooth — continuous in value and in slope. The square wave snaps between extremes — maximum or minimum, nothing between. The sawtooth ramps linearly then drops. The triangle ramps up and ramps down — continuous in value but with sharp corners in slope.
+The label prints the signed angular velocity, because the sign is what tells two visits to the same place apart.
 
-Each waveform has the same period. Each has the same amplitude. They differ in shape — in how the signal traverses the space between -1 and 1. Sine takes its time at the extremes (the derivative is zero at peaks) and rushes through the center (maximum derivative at zero crossings). Square spends all its time at the extremes. Sawtooth moves at constant speed in one direction, then teleports back. These are different answers to the same question: how do you fill the space between -1 and 1 periodically?
+A live probe on 2026-09-13 carried the bob with the pointer's right-click and released it from +0.600 rad and from -0.600 rad at ω = 0.0, both values read inside the pendulum's own `released` signal. After the right release, the first two crossings were ω = -2.250 then +1.996 rad/s. After the left release they were +2.249 then -1.995. The bob passes θ = 0 at each crossing, so position alone cannot distinguish them; the velocity has opposite signs. The two releases are mirror images, differing only in the third decimal, as they should be for an equation odd in θ. The second crossing in each pair is slower than the first, which is the 0.995 multiplier at work.
 
-## Springs: The Physical Oscillator
+During the swing the bob's x ran from 2.17 to 2.83 in the hall's cell coordinates. The aisle at that row is 1.11 m clear of the swing on each side, and at the clamp of ±0.45π the worst case is 0.85 m.
 
-Hooke's Law states that the restoring force of a spring is proportional to displacement:
+## The predicted trace
 
-```
-F = -kx
-```
-
-**k** is the spring constant — stiffness. **x** is displacement from equilibrium. The negative sign means the force opposes the displacement: stretch the spring right, the force pulls left. Compress it left, the force pushes right. Always toward center. Always proportional.
+`evidence:trace` draws θ(t) behind the swing for six seconds, computed at build time by `_predict` in `commons/artifacts/control_pendulum/control_pendulum.gd` with the same rule, from the fixed `START_ANGLE` of 0.3 rather than from any release:
 
 ```gdscript
-# spring_oscillator.gd — Hooke's Law producing oscillation
-extends Node3D
-
-@export var spring_k: float = 4.0
-@export var mass: float = 1.0
-@export var initial_displacement: float = 2.0
-var displacement: float
-var velocity: float = 0.0
-
-func _ready() -> void:
-    displacement = initial_displacement
-
-func _process(delta: float) -> void:
-    var force := -spring_k * displacement  # Hooke's Law
-    var acceleration := force / mass       # Newton's second law
-    velocity += acceleration * delta       # Euler integration
-    displacement += velocity * delta
-    position.y = displacement
+var th: float = START_ANGLE
+...
+var acc: float = -(gravity / pendulum_length) * sin(th)
+...
+om += acc * dt
+om *= mult
+th += om * dt
 ```
 
-Force from displacement. Acceleration from force. Velocity from acceleration. Position from velocity. Four links in the chain — and the result is oscillation. The block bounces. Not because anyone told it to follow a sine wave — because the physics produces one. The analytical solution of F = -kx under Newton's second law is:
+The curve is a prediction, not a record, so a release from 0.6 rad will not match it.
 
-```
-x(t) = A · sin(√(k/m) · t + φ)
-```
+## Motions told where to be
 
-The governing equation again. Angular frequency ω = √(k/m). Higher stiffness k means faster oscillation. Higher mass m means slower. Amplitude A and phase φ come from initial conditions — how far you pulled the spring and how fast it was moving when you let go.
-
-This is the bridge from Forces. The `control_pendulum` in this map connects backward to the spring systems and pendulums of the previous sequence. There, the oscillation emerged from physical simulation — forces integrated over time. Here, the same oscillation is described analytically. Two paths to the same curve. The simulation is general but approximate (Euler integration accumulates error). The equation is exact but specific (only works for simple harmonic motion). Both are needed.
-
-## Oscillation as Non-Trivial Time
-
-Constant motion is trivial — the same thing forever. Random motion is unpredictable — no structure to exploit. Oscillation sits between these extremes. It changes — but predictably. It repeats — but not monotonically. It has structure in time the way geometry has structure in space.
-
-The `dark_sphere` artifact in this map pulses with a sine-driven emission:
+`y_oscillation_cube` keeps one number, a clock, in `commons/artifacts/y_oscillation_cube/y_oscillation_cube.gd`:
 
 ```gdscript
-# dark_sphere.gd — emission energy oscillation
-var pulse_t := (sin(time * pulse_speed) + 1.0) * 0.5
-sphere_material.emission_energy_multiplier = lerpf(pulse_min, pulse_max, pulse_t)
+    _time += delta
+...
+var omega = frequency * TAU  # ω = 2πf
+var sin_value = sin(omega * _time)
+var y_offset = amplitude * sin_value
+...
+_cube_mesh.position.y = _base_y + y_offset
 ```
 
-The `(sin(...) + 1.0) * 0.5` pattern maps [-1, 1] to [0, 1] — a normalized oscillation. The `lerpf` then maps [0, 1] to [pulse_min, pulse_max]. Two remappings: shift-and-scale to normalize, linear interpolation to target. The sphere breathes. Not because it is alive — because its emission follows a periodic function of time. Oscillation animates.
+With no config, `_time` simply accumulates; `amplitude` is 0.2 and `frequency` 1.0. There is no velocity variable: every frame the position is a fresh evaluation of the formula, so a disturbance would have nowhere to persist. `commons/primitives/cubes/animation/TransformationTween.gd`, under `transformation_cube` and `pickup_cube_transforming`, does the same with `var bob_offset = sin(time_passed * bob_speed) * bob_height`. The five pick-up cubes do it too, in `commons/scenes/mapobjects/pick_up_cube.gd`:
 
-This is the first non-trivial temporal pattern in the sequence. Constants describe equilibrium. Linear functions describe uniform change. Oscillation describes return — the system that moves away from center and comes back, endlessly. The QFEP framework treats oscillatory dynamics as the foundation of wave mechanics — the φ·ΔE(S,t) term acquires periodic structure here, before the sequence extends it to pendulums, coupled oscillators, and eventually standing waves. The four cubes are not demonstrations. They are the grammar. Rest, oscillation, rotation, combined transformation — from these four primitives, everything that waves is built.
+```gdscript
+rotate_y(rotation_speed * delta)
+...
+time_passed += delta
+var bob_offset = sin(time_passed * bob_speed) * bob_height
+global_position.y = original_y + bob_offset
+```
 
-## Possible Artifacts
+Because the bob writes `global_position.y`, the five sizes share one amplitude in metres.
 
-**waveform_composer** — An interactive artifact with four oscilloscope-style traces (sine, square, sawtooth, triangle) and a fifth trace showing their weighted sum. Sliders control the amplitude of each component waveform. Demonstrates that complex periodic signals decompose into simpler periodic components — the intuition behind Fourier analysis without naming it. The learner sees how adjusting one waveform's contribution reshapes the composite. Connects the four wall-mounted oscilloscopes in the room to the idea that waveforms combine.
+## Constant rotation
 
-**parameter_space_explorer** — A three-dimensional control surface where the x-axis maps to amplitude, the y-axis to frequency, and the z-axis to phase. A point in this space defines a unique oscillation. The learner drags the point and watches the resulting waveform update on an oscilloscope display beside it. Collapses the three separate slider experiences of the `oscillation_controlled_cube` into a single spatial interaction. Makes visible that the space of all sinusoidal oscillations is itself three-dimensional.
+`rotating_cube_demo` is an accumulator, in `commons/artifacts/rotating_cube_demo/rotating_cube_demo.gd`:
 
-**spring_vs_sine_comparator** — Two cubes side by side: one driven by the analytical equation `A · sin(ωt + φ)`, the other by Euler-integrated Hooke's Law simulation. Both start with identical initial conditions. Over time the simulated version drifts — Euler error accumulates, the amplitude grows or decays, the phase slips. The analytical version is exact. A residual trace shows the growing difference. Teaches why closed-form solutions matter and where numerical simulation breaks down — the bridge between Forces' simulation approach and this map's analytical one.
+```gdscript
+_current_angle += rotation_speed * delta
+...
+    _cube_instance.rotation.y = _current_angle
+```
+
+Its first line has the shape of the pendulum's `_angle += _angular_velocity * delta`, but `rotation_speed` is a constant 1.5 and nothing feeds the angle back into the rate. It returns to an orientation every 2π by geometry alone, never slowing, never turning back. `rotating_cube` and `pickup_cube_rotating` spin the same way through `target_node.rotate_y(rotation_speed * delta)` in `commons/primitives/cubes/animation/RotationTween.gd`.
+
+## One signal, three transformations
+
+Every physics frame, held or free, the pendulum emits its state in `commons/artifacts/control_pendulum/control_pendulum.gd`:
+
+```gdscript
+current_y_offset = sin(_angle) * pendulum_length
+current_angular_velocity = _angular_velocity
+current_amplitude = abs(_angle) / (PI * 0.45)  # Normalized 0-1
+...
+oscillation_updated.emit(current_y_offset, current_angular_velocity, current_amplitude)
+```
+
+Despite its name, `y_offset` is the bob's horizontal displacement. `commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.gd` looks among its parent's children for a `ControlPendulum`, connects, and maps the three values onto height, heading and size:
+
+```gdscript
+if _pendulum and _pendulum.has_signal("oscillation_updated"):
+    _pendulum.oscillation_updated.connect(_on_oscillation_updated)
+...
+position.y = _base_position.y + (y_offset * translation_scale if _face_height else 0.0)
+...
+    _current_rotation += angular_velocity * rotation_scale * get_process_delta_time()
+...
+var scale_factor = (lerp(scale_range.x, scale_range.y, amplitude) if _face_size else 1.0)
+```
+
+While the bob is held the signal keeps coming: the cube's height follows the held angle, its spin stops because the held velocity is 0.0, and its size follows |θ|.
+
+## The screen and the time trace
+
+Two seconds after it enters the tree, the screen looks once among its siblings for the nearest node with an `_angle` property, closer than `scan_radius + 1.0`. In this hall only the pendulum's script declares one; if nothing is found, the screen draws from its own defaults. It then draws, in `commons/artifacts/science_screen/science_screen.gd`:
+
+```gdscript
+var t: float = Time.get_ticks_msec() / 1000.0
+...
+if "current_amplitude" in art: amplitude = float(art.get("current_amplitude"))
+if "current_angular_velocity" in art: angular_vel = float(art.get("current_angular_velocity"))
+if "_angle" in art: cur_angle = float(art.get("_angle"))
+...
+if cur_angle != 0.0:
+    frequency = maxf(absf(angular_vel) / TAU, 0.1)
+...
+var y_val: float = amplitude * sin(frequency * (x_val + t) * TAU + cur_angle)
+```
+
+The screen is a told-where-to-be curve with borrowed parameters: a sine of the wall clock whose amplitude, frequency and phase are the pendulum's state of the moment. Its wave is flattest exactly when the bob passes the centre fastest, because the normalised amplitude is then near zero.
+
+`mario_cube_time_trace` records, but not the pendulum. Its target is its own child `PickUpCube`, in `commons/scenes/mapobjects/mario_cube_time_trace.gd`:
+
+```gdscript
+var z_offset = time_axis_speed * delta
+for i in range(_trail_points.size()):
+    _trail_points[i].z += z_offset
+...
+var current_global = _target.global_position
+...
+var trace_point = Vector3(current_global.x, current_global.y, _origin_z)
+_trail_points.append(trace_point)
+```
+
+The scene sets `time_axis_speed` to 0.6. Left alone, the child runs the pick-up bob, so the trace lays a prescribed sine out along +Z: time turned into distance. The pendulum keeps its own past only as a crossing count and a last direction.
+
+## The rest of the room
+
+`dark_sphere` breathes on the same pattern as the clock cubes, in `commons/artifacts/dark_sphere/dark_sphere.gd`:
+
+```gdscript
+var pulse_t := (sin(_time_elapsed * pulse_speed) + 1.0) * 0.5
+_sphere_material.emission_energy_multiplier = lerpf(pulse_min * _emit_mul, pulse_max * _emit_mul, pulse_t)
+```
+
+`rotatescalecubes` is a MultiMesh field of cubes each turning at its own rate, and `SphericalHarmonics` sends a small sphere around a large one with a square-wave chirp. The three `pickup_cube_*` tokens share `commons/primitives/cubes/pickups/pickup_wrapper.gd`, whose scenes set every rate on the wrapper to zero; their motion comes from the cube scene inside.
+
+The hall sets three kinds of state side by side. A clock cube holds time and nothing else. A spinning cube holds an angle and a constant rate. The pendulum holds an angle and a velocity that feed each other, which is why a hand can give it a new beginning and why its centre can be visited in two directions.

@@ -475,6 +475,18 @@ func is_holding() -> bool:
 
 
 # Ray from the crosshair; returns the first pickable / RigidBody hit (walks up to the owner).
+## WHO HEARS A DESKTOP GRAB AND DROP (2026-09-13). A grab sphere is one scene shared by
+## dozens of artifacts, so an artifact that owns one cannot put the hooks in its script.
+## It names itself instead: `desktop_hook_target` on the carried body. Without the meta the
+## body itself is asked, which is exactly the behaviour every other pickable already has.
+func _desktop_hook_target(p: Node) -> Object:
+	if p != null and is_instance_valid(p) and p.has_meta("desktop_hook_target"):
+		var t: Variant = p.get_meta("desktop_hook_target")
+		if t is Object and is_instance_valid(t):
+			return t
+	return p
+
+
 func _find_grabbable() -> Node3D:
 	if not _camera:
 		return null
@@ -507,6 +519,10 @@ func _grab_held(p: Node3D) -> void:
 		(p as CollisionObject3D).collision_mask = 0
 	if _camera:
 		_hold_distance = clampf(_camera.global_position.distance_to(p.global_position), 1.0, 4.0)
+	# Opt-in pickup actions share the desktop carry gesture with VR's picked_up.
+	var grab_hook: Object = _desktop_hook_target(p)
+	if grab_hook != null and grab_hook.has_method("on_desktop_grab"):
+		grab_hook.call("on_desktop_grab", self)
 
 	# A WEAPON IS ADOPTED ON FIRST GRAB — the same reason HandInventory adopts one
 	# in VR, and the reason this is a reparent rather than a fixed offset applied
@@ -563,6 +579,13 @@ func _drop_held() -> void:
 		if _held is CollisionObject3D:
 			(_held as CollisionObject3D).collision_layer = _held_layer
 			(_held as CollisionObject3D).collision_mask = _held_mask
+		# THE DROP HOOK (2026-09-13). The grab has had one since the drink-me bottle;
+		# the drop had none, so an artifact that heard a desktop grab could never hear
+		# the release. Called after freeze and layers are back, so the owner acts on
+		# the body as it will stay.
+		var drop_hook: Object = _desktop_hook_target(_held)
+		if drop_hook != null and drop_hook.has_method("on_desktop_drop"):
+			drop_hook.call("on_desktop_drop", self)
 		if _is_weapon:
 			# It leaves the arsenal visible and running, whatever it was while
 			# stowed — a weapon put down disabled would lie on the floor inert.
