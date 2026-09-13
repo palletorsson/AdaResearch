@@ -226,6 +226,88 @@ func run() -> void:
 	check(str(pend.get("sampler")) == "strobe", "the chosen sampler survives a reset (the reset is of the experiment, not the settings)")
 	check(Engine.get_physics_frames() > engine_ticks_before, "engine physics ticks advance while the local experiment resets")
 
+	# ── 5b. ONE POLICY, TWO RENDER RATES (Astra's evidence) ──────────────────────
+	# The sampler runs on the physics step, so the render rate should change nothing it
+	# records. Asserted, not assumed: the same FINE record at 30 and at 120 frames a
+	# second, with the frames actually drawn counted so the two rates are shown to differ.
+	var fps_saved: int = Engine.max_fps
+	var rates: Dictionary = {}
+	pend.call("set_sampler", "fine")
+	for fps in [30, 120]:
+		Engine.max_fps = fps
+		pend.call("reset_experiment")
+		await physics_frame
+		var f0: int = Engine.get_frames_drawn()
+		var p0: int = Engine.get_physics_frames()
+		var w0: int = Time.get_ticks_msec()
+		while float(pend.call("experiment_time")) < 3.0:
+			await physics_frame
+		var wall: float = maxf(0.001, float(Time.get_ticks_msec() - w0) / 1000.0)
+		var g: Vector2 = pend.call("recorded_interval_range")
+		rates[str(fps)] = {"count": int(pend.call("sample_count")), "kept_s": snappedf(float(pend.call("retained_seconds")), 0.001),
+			"gap_ms": [snappedf(g.x * 1000.0, 0.1), snappedf(g.y * 1000.0, 0.1)],
+			"frames_drawn": Engine.get_frames_drawn() - f0, "physics_steps": Engine.get_physics_frames() - p0,
+			"render_fps": snappedf(float(Engine.get_frames_drawn() - f0) / wall, 0.1)}
+		note("render %d: %s" % [fps, JSON.stringify(rates[str(fps)])])
+	Engine.max_fps = fps_saved
+	measurements["render_rates"] = rates
+	var r30: Dictionary = rates["30"]
+	var r120: Dictionary = rates["120"]
+	check(float(r120["render_fps"]) > 1.8 * float(r30["render_fps"]), "the two render rates really differ (%.1f and %.1f frames a second)" % [float(r30["render_fps"]), float(r120["render_fps"])])
+	check(absi(int(r30["count"]) - int(r120["count"])) <= 1, "and the record does not: %d marks at 30, %d at 120" % [int(r30["count"]), int(r120["count"])])
+	check(absf(float(r30["kept_s"]) - float(r120["kept_s"])) < 0.03, "the same span kept (%.3f s, %.3f s)" % [float(r30["kept_s"]), float(r120["kept_s"])])
+	check(r30["gap_ms"] == r120["gap_ms"], "the same actual gaps, which are the physics step's, not the requested 25 ms (%s ms)" % str(r30["gap_ms"]))
+
+	# ── 5c. EVICTION, AND MEMORY THAT STOPS GROWING ──────────────────────────────
+	# Past the 300-mark cap the record must lose its oldest marks as it gains new ones.
+	# Sampled three times, five seconds apart: the count, the OLDEST retained timestamp
+	# (which must move on), the marks' instance count and the trail's vertex count, and
+	# the engine's static memory.
+	var tm: ImmediateMesh = pend.get("trail_mesh")
+	var mmi: MultiMeshInstance3D = pend.get("_marks")
+	var evict: Array = []
+	for target in [9.0, 14.0, 19.0]:
+		while float(pend.call("experiment_time")) < target:
+			await create_timer(0.5, true, false, true).timeout
+			note("record at %.1f s: %d marks" % [float(pend.call("experiment_time")), int(pend.call("sample_count"))])
+		var pts: Array = pend.get("trail_points")
+		evict.append({"t": snappedf(float(pend.call("experiment_time")), 0.01), "count": pts.size(),
+			"oldest_stamp": snappedf(float((pts.back() as Vector3).z), 0.01) if not pts.is_empty() else -1.0,
+			"instance_count": mmi.multimesh.instance_count if mmi != null else -1,
+			"visible_instances": mmi.multimesh.visible_instance_count if mmi != null else -1,
+			# ImmediateMesh has no surface_get_array_len in 4.6; read the vertex array itself
+			"trail_vertices": ((tm.surface_get_arrays(0)[Mesh.ARRAY_VERTEX] as PackedVector3Array).size() if tm != null and tm.get_surface_count() > 0 else -1),
+			"static_mb": snappedf(Performance.get_monitor(Performance.MEMORY_STATIC) / 1048576.0, 0.01)})
+	measurements["eviction"] = evict
+	note("eviction " + JSON.stringify(evict))
+	check(evict.all(func(e): return int((e as Dictionary)["count"]) == 300), "past the cap the count holds at 300 at 9, 14 and 19 s (%s)" % str(evict.map(func(e): return e["count"])))
+	check(float(evict[2]["oldest_stamp"]) - float(evict[0]["oldest_stamp"]) > 9.5, "while the oldest retained mark moves on by ten seconds: old marks are evicted (%.2f s -> %.2f s)" % [float(evict[0]["oldest_stamp"]), float(evict[2]["oldest_stamp"])])
+	check(evict.all(func(e): return int((e as Dictionary)["instance_count"]) == 300 and int((e as Dictionary)["trail_vertices"]) == 300), "the marks' instances and the trail's vertices stay at 300: nothing accumulates in the drawing either")
+	var growth_mb: float = float(evict[2]["static_mb"]) - float(evict[0]["static_mb"])
+	measurements["static_memory_growth_mb"] = snappedf(growth_mb, 0.01)
+	check(growth_mb < 4.0, "and the engine's static memory does not climb with the record (%+.2f MB over ten seconds)" % growth_mb)
+
+	# ── 5d. A STEP LONGER THAN THE INTERVAL ──────────────────────────────────────
+	# The sampler can only fire on a physics step. At 30 ticks a step is 33.3 ms, longer
+	# than FINE's 25 ms: the request cannot be met, and the record says so in its gaps.
+	# The carried clock must stay under one interval; the shipped code let it grow by
+	# 8.3 ms every step.
+	var ticks_saved: int = Engine.physics_ticks_per_second
+	Engine.physics_ticks_per_second = 30
+	pend.call("reset_experiment")
+	var clock_max := 0.0
+	while float(pend.call("experiment_time")) < 2.0:
+		await physics_frame
+		clock_max = maxf(clock_max, float(pend.call("sample_clock")))
+	var g30: Vector2 = pend.call("recorded_interval_range")
+	Engine.physics_ticks_per_second = ticks_saved
+	measurements["slow_step"] = {"ticks": 30, "gap_ms": [snappedf(g30.x * 1000.0, 0.1), snappedf(g30.y * 1000.0, 0.1)],
+		"clock_max_ms": snappedf(clock_max * 1000.0, 0.1), "count_2s": int(pend.call("sample_count"))}
+	note("slow step " + JSON.stringify(measurements["slow_step"]))
+	check(absf(g30.x - 1.0 / 30.0) < 0.001 and absf(g30.y - 1.0 / 30.0) < 0.001, "at 30 ticks every gap is one 33.3 ms step: the 25 ms request is not met, and the record shows it (%s ms)" % str(measurements["slow_step"]["gap_ms"]))
+	check(clock_max < float(pend.get("fine_interval")), "and the sampler's carried clock stays under one interval (max %.1f ms, bound 25 ms)" % (clock_max * 1000.0))
+	pend.call("reset_experiment")
+
 	# ── 6. the walkways beside the record ─────────────────────────────────────
 	var space := seg.get_world_3d().direct_space_state
 	var cap := CapsuleShape3D.new(); cap.radius = 0.22; cap.height = 1.6
@@ -248,15 +330,50 @@ func run() -> void:
 	if _live():
 		var drv: Node = load("res://commons/testing/wcn_desktop_driver.gd").new()
 		root.add_child(drv)   # a SceneTree has no add_child; the port maps root. to get_tree().root.
-		var btn_coarse: Node = panel.find_child("Btn_1", true, false) if panel != null else null
+		# EVERY BUTTON, THROUGH THE POINTER. The pilot pressed COARSE and emitted the
+		# other three. Each press is counted at the button's own signal, the hover must
+		# name the button (every push button shares the InteractableAreaButton class),
+		# and the sampler is read back after each.
 		var stand: Vector3 = seg.to_global(Vector3(8.3, 0.0, 10.3 + vest))
 		drv.call("spawn", stand, em)
 		await create_timer(0.5).timeout
-		var rec: Dictionary = await drv.call("press", btn_coarse, stand) if btn_coarse != null else {}
-		await physics_frame
-		measurements["desktop_input"] = {"press": rec, "sampler_after": str(pend.get("sampler"))}
-		check(str(rec.get("hover", "")).contains("Btn_1") or str(rec.get("hover", "")).contains("InteractableAreaButton"), "the desktop pointer had COARSE under the crosshair (%s)" % str(rec.get("hover", "")))
-		check(str(pend.get("sampler")) == "coarse", "a left click through the input pipeline switched the sampler to COARSE: actual desktop input, not an emitted signal")
+		var facing_p: Vector3 = (panel.global_transform.basis * Vector3(0.0, 0.0, 1.0)).normalized() if panel != null else Vector3.RIGHT
+		var presses: Array = []
+		for spec in [["Btn_1", "COARSE", "coarse"], ["Btn_2", "STROBE", "strobe"], ["Btn_0", "FINE", "fine"], ["Btn_3", "RESET", ""]]:
+			var btn: Node = panel.find_child(str(spec[0]), true, false) if panel != null else null
+			if btn == null:
+				check(false, "%s exists on the panel" % str(spec[1]))
+				continue
+			var area_b: Node = btn.find_child("InteractableAreaButton", true, false)
+			var tally := {"n": 0}
+			if area_b != null and area_b.has_signal("button_pressed"):
+				area_b.connect("button_pressed", func(_b): tally["n"] = int(tally["n"]) + 1)
+			var t_exp_before: float = float(pend.call("experiment_time"))
+			var rec: Dictionary = await drv.call("press", btn, stand)
+			await physics_frame
+			var how := "the walkway stand"
+			if int(tally["n"]) == 0:
+				# a 2 x 2 rack: from one stand the lower row can sit under the crosshair's
+				# reach. Stand in front of THIS button along the panel's facing and try once.
+				var own: Vector3 = (btn as Node3D).global_position + facing_p * 0.55
+				own.y = seg.to_global(Vector3.ZERO).y
+				rec = await drv.call("press", btn, own)
+				await physics_frame
+				how = "a stand in front of the button"
+			var row := {"button": str(spec[1]), "hover": str(rec.get("hover", "")).right(40), "emissions": int(tally["n"]), "from": how,
+				"sampler_after": str(pend.get("sampler")), "count_after": int(pend.call("sample_count")),
+				"interval_after": snappedf(float(pend.call("current_interval")), 0.001), "experiment_time_after": snappedf(float(pend.call("experiment_time")), 0.001)}
+			presses.append(row)
+			note("press " + JSON.stringify(row))
+			check(str(rec.get("hover", "")).contains(str(spec[0])), "%s: the crosshair was on %s itself (%s)" % [str(spec[1]), str(spec[0]), row["hover"]])
+			check(int(tally["n"]) == 1, "%s took exactly one press from one click (%d, from %s)" % [str(spec[1]), int(tally["n"]), how])
+			if str(spec[2]) != "":
+				check(str(pend.get("sampler")) == str(spec[2]) and int(pend.call("sample_count")) <= 1,
+					"%s switched the sampler and started the record again (%s, %d marks)" % [str(spec[1]), str(pend.get("sampler")), int(pend.call("sample_count"))])
+			else:
+				check(float(pend.call("experiment_time")) < 0.1 and t_exp_before > 0.5 and str(pend.get("sampler")) == "fine",
+					"RESET returned the experiment clock to zero and kept the chosen sampler (%.2f s, %s)" % [float(pend.call("experiment_time")), str(pend.get("sampler"))])
+		measurements["desktop_input"] = {"presses": presses}
 		drv.get("rig").global_position = seg.to_global(Vector3(9.5, 0.05, 10.5 + vest))
 		await physics_frame
 		drv.call("aim_at", seg.to_global(Vector3(9.5, 1.2, 19.0 + vest)))
@@ -295,7 +412,9 @@ func run() -> void:
 		# frame ahead, the record running away to the left, the panel on the near post — a
 		# wider lens than the other captures, because the panel is close and to the side
 		cam.fov = 80
-		cam.global_position = seg.to_global(Vector3(11.5, 1.6, 12.2 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 1.2, 13.0 + vest)))
+		# (13 September) south of the GlassRack at (10,12): from z 12.2 the camera looked
+		# straight through the rack's black frame, which filled the foreground of the frame
+		cam.global_position = seg.to_global(Vector3(11.5, 1.7, 13.7 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 1.2, 12.0 + vest)))
 		for i in range(30): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
 		root.get_texture().get_image().save_png(OUT + "probe_pendulum.png")
@@ -380,6 +499,9 @@ func run() -> void:
 			measurements["streaming"]["note"] = "no cursor snapshot for the start hall (pre-window hall): the museum's streamer frees it but cannot rebuild it by design"
 	_finish()
 
+func note(message: String) -> void:
+	print("[wcn-pendulum] note: ", message)
+
 func _press(panel: Node, btn_name: String) -> bool:
 	if panel == null: return false
 	var btn: Node = panel.find_child(btn_name, true, false)
@@ -408,7 +530,12 @@ func _solid_hits(seg: Node3D, q: PhysicsShapeQueryParameters3D) -> int:
 
 func _finish() -> void:
 	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,
-		"control_path": "button_pressed emitted programmatically on the panel's push buttons; no tracked hand",
+		# SAY WHICH LANE RAN: _live() is a filename test, so the pointer block can be skipped in silence.
+		"lanes": {"model_lane": "button_pressed emitted on the panel's push buttons", "pointer_lane_expected": _live(),
+			"pointer_lane_ran": (measurements.get("desktop_input", {}) as Dictionary).has("presses")},
+		"control_path": ("all four sampler buttons pressed through the desktop pointer, the sampler read back after each; the model lane emits the same buttons' signals"
+			if (measurements.get("desktop_input", {}) as Dictionary).has("presses")
+			else "model lane in this run: button_pressed emitted on the panel's push buttons, no pointer; the live lane presses all four through the desktop pointer"),
 		"hand_file": "ada_run/necklace_hand.json (real)", "headset_verified": false,
 		"engine": Engine.get_version_info().string, "physics_fps": Engine.physics_ticks_per_second}
 	var f := FileAccess.open(OUT + "probe_pendulum.json", FileAccess.WRITE)

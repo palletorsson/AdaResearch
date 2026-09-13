@@ -30,6 +30,8 @@ WIDTH = 960
 HALLS = [
     ('WaveFunctions_Intro', 'probe_intro', 'W0', 'When a body returns to the same place, what has changed?',
      ['', '_desktop_hold', '_desktop_primary']),
+    ('WaveFunctions_Pendulum', 'probe_pendulum', 'W1', 'Where does a movement put its past?',
+     ['', '_readout', '_controls', '_desktop_walk']),
     ('WaveFunctions_Synthesis_Lab', 'probe_synthesis_lab', 'W4', 'What shape can several simple returns make together?',
      ['', '_console', '_readout', '_hold', '_overview', '_desktop_front']),
     ('Random_Entropy', 'probe_entropy', 'R1', 'Which differences disappear when a sequence becomes one number?',
