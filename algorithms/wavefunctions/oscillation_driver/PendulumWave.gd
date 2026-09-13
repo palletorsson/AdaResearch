@@ -295,6 +295,13 @@ func _physics_process(delta: float) -> void:
 	_sample_clock += delta
 	if _sample_clock >= sample_interval:
 		_sample_clock -= sample_interval
+		# A BOUNDED CLOCK (2026-09-13). The sampler fires at most once per physics step,
+		# so when a step is longer than the interval (FINE's 25 ms under 40 ticks a
+		# second) the request cannot be met, and the carried remainder would grow without
+		# end — a slow stretch would leave a backlog the record then over-samples to
+		# drain. Carry less than one interval. At the shipped 60 ticks this never runs.
+		if _sample_clock >= sample_interval:
+			_sample_clock = fmod(_sample_clock, sample_interval)
 		var bob_local := Vector3(length * sin(angle), pivot_height - length * cos(angle), 0.0)
 		trail_points.push_front(Vector3(bob_local.x, bob_local.y, time))
 	while trail_points.size() > max_trail_length:
@@ -421,6 +428,10 @@ func period_measured() -> float:
 
 func current_interval() -> float:
 	return sample_interval
+
+## The carried remainder of the sampler's clock: bounded below one interval.
+func sample_clock() -> float:
+	return _sample_clock
 
 ## Observed gaps between retained timestamped samples, not the requested rate.
 func recorded_interval_range() -> Vector2:
