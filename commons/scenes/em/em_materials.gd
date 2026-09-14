@@ -151,8 +151,10 @@ extends RefCounted
 # mean and the ramp's mean, so the quoted figures are what the surface has.
 #
 # THREADED GENERATION
-# NoiseTexture2D generates on a worker thread. Call EmMaterials.warm_up() once in
-# _ready() or the first surface of each family pops from flat white to textured.
+# NoiseTexture2D generates on a worker thread — but only because _tex() assigns the noise
+# deferred; a texture's first generation is otherwise synchronous (see _tex). Call
+# EmMaterials.warm_up() once in _ready() or the first surface of each family pops from
+# flat white to textured.
 
 # ── tunables ─────────────────────────────────────────────────────────────────
 # Resolution is bought where the millimetres demand it. A meso feature must land
@@ -1132,8 +1134,18 @@ static func _tex(key_base: String, noise: FastNoiseLite, size: int, ramp: Gradie
 	elif ramp != null:
 		t.color_ramp = ramp
 	# assign the noise LAST: every property write queues a regeneration, so this
-	# ordering costs one generation instead of six
-	t.noise = noise
+	# ordering costs one generation instead of six.
+	#
+	# AND ASSIGN IT DEFERRED (2026-09-14). A NoiseTexture2D does NOT generate its FIRST image
+	# on a worker thread: the engine's _update_texture runs the first one synchronously
+	# (first_time), from a deferred call, on the main thread. The museum warms ~20 of these
+	# at boot, so the window froze for 5.1 s right after segment 0 was built — the largest
+	# single cost of a New Game boot, found by queueing a deferred marker behind every node
+	# and log line (commons/testing/probe_boot_frames.gd). With the noise set deferred, the
+	# first update finds no noise (cheap, spends first_time) and the real generation runs
+	# threaded. Measured on 12 textures at 1024 px: main thread blocked 4264 ms -> 5 ms, all
+	# images ready after 505 ms, identical pixels.
+	t.set_deferred("noise", noise)
 	_tex_cache[key] = t
 	return t
 
