@@ -212,9 +212,6 @@ func _build_scene() -> void:
 	_build_surface(tank)
 	_build_sources(tank)
 
-	print("CodexOpticsTrialV2: grid=%dx%d verts=%d meshes=%d lambda=%.3f k=%.2f gap=%.2f (d/lambda=%.2f) seed=%d" % [
-		GRID_RES, GRID_RES, _vertex_count, _mesh_count,
-		WAVELENGTH, _k, SOURCE_GAP, SOURCE_GAP / WAVELENGTH, SEED])
 
 
 ## The water surface: a GRID_RES × GRID_RES quad mesh, every vertex displaced by

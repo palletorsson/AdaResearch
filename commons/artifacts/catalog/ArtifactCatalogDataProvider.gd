@@ -159,7 +159,6 @@ static func _load_standalone_registry() -> void:
 	if _standalone_loaded:
 		return
 	
-	print("ArtifactCatalogDataProvider: Loading artifacts directly (standalone mode)...")
 	_standalone_registry.clear()
 	
 	# Legacy base registry — DEPRECATED: all entries migrated to registry/*.json
@@ -180,7 +179,6 @@ static func _load_standalone_registry() -> void:
 		dir.list_dir_end()
 	
 	_standalone_loaded = true
-	print("ArtifactCatalogDataProvider: ✅ Standalone registry loaded with %d artifacts" % _standalone_registry.size())
 
 ## Load a single registry JSON file into _standalone_registry
 static func _load_registry_file(path: String) -> void:
@@ -212,13 +210,11 @@ static func _load_registry_file(path: String) -> void:
 					var lookup_name: String = str(coerced.get("lookup_name", str(key))).strip_edges()
 					_standalone_registry[lookup_name] = coerced
 		var count_added = _standalone_registry.size() - count_before
-		print("ArtifactCatalogDataProvider: Loaded %d artifacts from %s" % [count_added, path.get_file()])
 
 ## Get all artifacts from GridInteractablesComponent registry
 ## Falls back to direct JSON loading if GridSystem not available (desktop/standalone mode)
 ## Returns array of artifact dictionaries
 static func get_all_artifacts() -> Array:
-	print("ArtifactCatalogDataProvider: get_all_artifacts() called")
 
 	var grid_system = _find_grid_system()
 	if not grid_system:
@@ -227,7 +223,6 @@ static func get_all_artifacts() -> Array:
 		_load_standalone_registry()
 		return _sanitize_artifacts(_standalone_registry.values())
 
-	print("ArtifactCatalogDataProvider: Found GridSystem: %s" % grid_system.name)
 
 	if not grid_system.has_node("GridInteractablesComponent"):
 		# Fallback: load directly
@@ -236,7 +231,6 @@ static func get_all_artifacts() -> Array:
 		return _sanitize_artifacts(_standalone_registry.values())
 
 	var interactables = grid_system.get_node("GridInteractablesComponent")
-	print("ArtifactCatalogDataProvider: Found GridInteractablesComponent")
 
 	if not "grid_artifact_registry" in interactables:
 		push_warning("ArtifactCatalogDataProvider: grid_artifact_registry property not found in GridInteractablesComponent")
@@ -252,7 +246,6 @@ static func get_all_artifacts() -> Array:
 		_load_standalone_registry()
 		return _sanitize_artifacts(_standalone_registry.values())
 	
-	print("ArtifactCatalogDataProvider: ✅ Found %d artifacts in registry" % artifact_count)
 	return _sanitize_artifacts(registry.values())
 
 ## Look up artifacts by lookup_names

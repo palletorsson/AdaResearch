@@ -234,13 +234,6 @@ func _build() -> void:
 	#body.position = Vector3(0, 0.005, 0)
 	#add_child(body)
 
-	print("[PolkaDotFieldFloor] Built %dx%d grid, %d dots (%d dark tris, %d light tris, %d grout tris)" % [
-		gw, gh,
-		dots_x * dots_z,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		grout_verts.size() / 3,
-	])
 
 
 ## Deterministic pseudo-random hash for jitter (returns 0.0 to 1.0)

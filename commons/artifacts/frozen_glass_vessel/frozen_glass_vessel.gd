@@ -163,10 +163,6 @@ func _build_vessel() -> void:
 	_mi.material_override = mat
 	add_child(_mi)
 
-	print("FrozenGlassVessel: %d verts × %d steps → frozen vessel (g=(%.1f, %.1f, %.1f), stiff=%.2f, pin=%.2f)" % [
-		final_verts.size(), sim_steps,
-		gravity_x, gravity_y, gravity_z, stiffness, pin_top_fraction
-	])
 
 
 func _build_label() -> void:

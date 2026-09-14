@@ -253,6 +253,3 @@ func _build() -> void:
 	#_body.position = Vector3(0.0, 0.0, 0.0)
 	#add_child(_body)
 
-	print("[GuillocheBorderFloor] Built %dx%d grid, border=%d cells/side, panel=%dx%d" % [
-		gw, gh, border_each, panel_tw, panel_th
-	])

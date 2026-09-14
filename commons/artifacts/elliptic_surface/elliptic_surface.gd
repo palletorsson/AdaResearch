@@ -506,7 +506,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[EllipticSurface] Config applied — postulate=%s, radius=%.2f" % [postulate, radius])
 
 
 ## Accept an axis value only if it names something this artifact actually builds.

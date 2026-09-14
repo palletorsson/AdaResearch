@@ -810,7 +810,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if disclosure == before:
 		return
 	_rebuild_now()
-	print("[BiasVisualizer] Config applied — disclosure=%s" % [disclosure])
 
 
 ## Tear down what this script built and build it again INLINE. Not deferred: the

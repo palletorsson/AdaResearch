@@ -348,10 +348,3 @@ func _build() -> void:
 	#_body.position = Vector3(0.0, 0.0, 0.0)
 	#add_child(_body)
 
-	print("[TumblingBlocksFloor] Built %d cols x %d rows (%d dark, %d med, %d light, %d grout tris)" % [
-		cols, rows,
-		dark_verts.size() / 3,
-		med_verts.size() / 3,
-		light_verts.size() / 3,
-		grout_verts.size() / 3,
-	])

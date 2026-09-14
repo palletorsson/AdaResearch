@@ -196,8 +196,6 @@ func _ready() -> void:
 	_build_control_plate()
 	_build_exhibit()
 
-	print("[PatternMachineC] Kaleidoscope Mill built — %dx%d hopper, group %s, carpet %.1fm, exhibit %s" % [
-		hopper_size, hopper_size, GROUP_NAMES[_group_index], carpet_world_size, exhibit])
 
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -826,7 +824,6 @@ func _select_color(idx: int) -> void:
 	for i in _palette_indicators.size():
 		var m: StandardMaterial3D = _palette_indicators[i].material_override
 		m.emission_energy_multiplier = 2.5 if i == _selected_color else 0.0
-	print("[PatternMachineC] paint colour -> %d" % idx)
 
 
 func _cycle_group() -> void:
@@ -838,12 +835,10 @@ func _cycle_group() -> void:
 	# Rebuild rotors so the mirror count matches the new group's fold order.
 	_rebuild_rotors()
 	_update_carpet()
-	print("[PatternMachineC] group -> %s" % group)
 
 
 func _toggle_spin() -> void:
 	_spin_dir = -_spin_dir
-	print("[PatternMachineC] rotor spin reversed (dir=%.0f)" % _spin_dir)
 
 
 func _reseed_motif() -> void:
@@ -855,7 +850,6 @@ func _reseed_motif() -> void:
 			_grid_data[y][x] = clampi(int(motif[y][x]), 0, n - 1)
 	_refresh_hopper_visuals()
 	_update_carpet()
-	print("[PatternMachineC] reseeded motif (seed=%d)" % motif_seed)
 
 
 func _clear_hopper() -> void:

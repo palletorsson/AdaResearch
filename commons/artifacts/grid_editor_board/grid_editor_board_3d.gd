@@ -61,8 +61,6 @@ func _ready() -> void:
 	_build_status_label()
 	_build_capture_camera()
 	_load_preset(CBS.PRESET_MISSION_CONTROL)
-	print("[GridEditorBoard3D] Built — %dx%d grid, cell %.3fm, %d elements" % [
-		_grid_w, _grid_h, cell_size, _placements.size()])
 
 func _process(delta: float) -> void:
 	_time += delta
@@ -94,7 +92,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			var pos: Array = p.get("position", [0, 0])
 			_place_element(str(p["element"]), roundi(pos[0]), roundi(pos[1]))
 		_update_status()
-		print("[GridEditorBoard3D] Loaded web layout — %d elements (%d inline defs) on %dx%d" % [_placements.size(), _inline_elements.size(), new_w, new_h])
 
 # ═══════════════════════════════════════════════════════════════════════
 # DATA
@@ -295,8 +292,6 @@ func _load_preset(preset: Dictionary) -> void:
 		_place_element(str(p["element"]), int(p["x"]), int(p["y"]))
 
 	_update_status()
-	print("[GridEditorBoard3D] Loaded '%s' — %d elements (%d animated)" % [
-		_current_preset_name, _placements.size(), _animated_elements.size()])
 
 # ═══════════════════════════════════════════════════════════════════════
 # PLACEMENT

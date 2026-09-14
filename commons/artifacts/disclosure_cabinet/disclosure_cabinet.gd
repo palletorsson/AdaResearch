@@ -747,7 +747,6 @@ func apply_grid_config(config: Dictionary) -> void:
 	if disclosure == before_disclosure and draw_seed == before_seed:
 		return                      # curation_station's {"emissive": false} lands here
 	_rebuild_now()
-	print("[DisclosureCabinet] Config applied — disclosure=%s seed=%d" % [disclosure, draw_seed])
 
 
 ## Tear down what this script built and build it again, INLINE. No call_deferred:

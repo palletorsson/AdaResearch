@@ -148,7 +148,6 @@ func _start_cycling() -> void:
 		wallpaper_group = (wallpaper_group + 1) % 17
 		_apply_wall_pattern()
 		_adjust_material()
-		print("[WallPatternColorizer] Cycled to group %d" % wallpaper_group)
 
 func _exit_tree() -> void:
 	_cycle_active = false

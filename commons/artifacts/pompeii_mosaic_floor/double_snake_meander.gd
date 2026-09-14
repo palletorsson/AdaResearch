@@ -210,7 +210,6 @@ func _build() -> void:
 	#_body.position = Vector3(0, 0.005, 0)
 	#add_child(_body)
 
-	print("[DoubleSnakeMeander] Built %dx%d grid, border=%d, band=%d, period=%d" % [gw, gh, d, b, _period])
 
 
 # ──────────────────────────────────────────────────────────────

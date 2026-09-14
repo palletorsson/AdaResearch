@@ -401,10 +401,6 @@ func _build() -> void:
 	#_body.position = Vector3(0, 0.005, 0)
 	#add_child(_body)
 
-	print("[FreeMeanderFloor] Built %dx%d grid, band=%d, border=%d (%d stone, %d walk, %d grout tris)" % [
-		gw, gh, band_width, border_depth,
-		stone_verts.size() / 3, walk_verts.size() / 3, grout_verts.size() / 3,
-	])
 
 
 func _add_rect(verts: PackedVector3Array, x: float, z: float, w: float, h: float) -> PackedVector3Array:

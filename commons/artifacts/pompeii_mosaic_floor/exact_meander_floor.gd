@@ -158,9 +158,6 @@ func _build() -> void:
 	#_body.position = Vector3(0, 0.005, 0)
 	#add_child(_body)
 
-	print("[ExactMeanderFloor] Built %dx%d grid (%d dark, %d light, %d grout tris)" % [
-		GW, GH, dark_verts.size() / 3, light_verts.size() / 3, grout_verts.size() / 3,
-	])
 
 
 ## Build the full grid. 1=dark, 0=light. Border region only.

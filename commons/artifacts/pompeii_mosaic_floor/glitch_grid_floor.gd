@@ -165,4 +165,3 @@ func _build() -> void:
 	var total_tris: int = 0
 	for i in 6:
 		total_tris += color_verts[i].size() / 3
-	print("[GlitchGridFloor] Built %dx%d grid (%d total tris)" % [gw, gh, total_tris])

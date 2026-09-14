@@ -116,7 +116,6 @@ func apply_grid_config(config: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[GodelSentenceMachine] Config applied — verdict=%s" % [verdict])
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a map

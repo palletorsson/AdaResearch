@@ -176,8 +176,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if not _built:
 		_build_all()
 		_built = true
-		print("[LibraryRack] Config applied — %dx%d, collection=%s, guard=%s" % [
-			columns, rows, _collection_name, guard])
 		return
 
 	if (_collection_name == before_collection
@@ -194,8 +192,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[LibraryRack] Config applied — %dx%d, collection=%s, guard=%s" % [
-		columns, rows, _collection_name, guard])
 
 
 ## Load + build, synchronously. Children exist when this returns, so the deferred
@@ -454,7 +450,6 @@ func _try_load_layout() -> bool:
 
 	columns = int(data.get("cols", columns))
 	rows = int(data.get("rows", rows))
-	print("[LibraryRack] Layout loaded: %dx%d from %s (%d entries)" % [columns, rows, layout_path, _entries.size()])
 	return true
 
 
@@ -526,7 +521,6 @@ func _load_collection() -> void:
 		"category":
 			_entries.sort_custom(func(a, b): return a["category"] + a["name"] < b["category"] + b["name"])
 
-	print("[LibraryRack] Loaded %d artifacts from %s (filter='%s')" % [_entries.size(), _collection_name, _filter])
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -673,7 +667,6 @@ func _build_shader_cube(slot: Node3D, entry: Dictionary) -> void:
 			_try_set_param(mat, "emission_strength", 0.6)
 			_try_set_param(mat, "u_resolution", Vector2(256, 256))
 			cube.material_override = mat
-			print("[LibraryRack] Shader cube: %s" % shader_path.get_file())
 		else:
 			_apply_colored_cube(cube, entry)
 	else:

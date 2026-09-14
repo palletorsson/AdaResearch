@@ -471,9 +471,3 @@ func _build() -> void:
 	#_body.position = Vector3(0, 0.005, 0)
 	#add_child(_body)
 
-	print("[LabyrinthFloor] Built %dx%d grid, labyrinth %dx%d (%d dark tris, %d light tris, %d grout tris)" % [
-		gw, gh, lab_size, lab_size,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		grout_verts.size() / 3,
-	])

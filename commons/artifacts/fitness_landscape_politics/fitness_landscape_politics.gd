@@ -184,8 +184,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			and is_equal_approx(arena_size, before_arena):
 		return
 	_rebuild_now()
-	print("[FitnessLandscapePolitics] Config applied — mandate=%s, particles=%d, arena=%.2f" % [
-		mandate, particle_count, arena_size])
 
 
 ## Free only what this script built, then build again inline. Synchronous by

@@ -119,8 +119,6 @@ func _build_city() -> void:
 	_mmi.material_override = mat
 	add_child(_mmi)
 
-	print("CAConwayCity: %d buildings from %s (B=%s, S=%s)" % [
-		alive.size(), rule, r_def["B"], r_def["S"]])
 
 
 func _build_label() -> void:

@@ -162,9 +162,6 @@ func _build_cypress() -> void:
 	cup_mmi.material_override = cup_mat
 	add_child(cup_mmi)
 
-	print("ModulorCypress: %d branches + %d Modulor cups at rung %d (%.3fm)" % [
-		segments.size(), leaf_positions.size(), modulor_level, rung
-	])
 
 
 func _build_label() -> void:

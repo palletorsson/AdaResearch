@@ -114,7 +114,6 @@ func spawn_artifact(lookup_name: String) -> bool:
 	# Emit success signal
 	artifact_spawned.emit(lookup_name, artifact)
 
-	print("ArtifactSpawnManager: Spawned '%s' at %s" % [lookup_name, spawn_pos])
 	return true
 
 
@@ -180,7 +179,6 @@ func _get_artifact_info(lookup_name: String) -> Dictionary:
 ## Cleanup currently spawned artifact
 func _cleanup_current_artifact():
 	if _current_spawned_artifact and is_instance_valid(_current_spawned_artifact):
-		print("ArtifactSpawnManager: Removing previous artifact")
 		_current_spawned_artifact.queue_free()
 		_current_spawned_artifact = null
 

@@ -127,7 +127,6 @@ func _ready() -> void:
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	print("FacadeBuilder: Applying config: %s" % str(config_data))
 
 	if config_data.has("preset"):
 		preset = str(config_data["preset"])
@@ -183,7 +182,6 @@ func build_facade() -> void:
 			add_child(facade_node)
 			_add_facade_lights()
 			_build_armature()
-			print("[FacadeBuilder] Built from plan: %s" % plan_path)
 			return
 
 	# Also check ada_run/facade_plan.json for web editor sync
@@ -194,7 +192,6 @@ func build_facade() -> void:
 			add_child(facade_node)
 			_add_facade_lights()
 			_build_armature()
-			print("[FacadeBuilder] Built from synced plan")
 			return
 
 	# Fallback: built-in preset-based geometry
@@ -207,9 +204,6 @@ func build_facade() -> void:
 	_add_facade_lights()
 	_build_armature()
 
-	print("[FacadeBuilder] Built '%s' facade: %d bays x %d stories, %.1f x %.1f m" % [
-		preset, bay_count, story_count, facade_width, facade_height
-	])
 
 
 func _build_composition():

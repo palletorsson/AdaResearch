@@ -164,4 +164,3 @@ func _build() -> void:
 	var total_tris: int = 0
 	for i in 7:
 		total_tris += color_verts[i].size() / 3
-	print("[RainbowCheckerFloor] Built %dx%d grid (%d total tris)" % [gw, gh, total_tris])

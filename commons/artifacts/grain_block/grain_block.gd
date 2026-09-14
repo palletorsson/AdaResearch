@@ -205,7 +205,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if kerf == before_kerf and reckoning == before_reck:
 		return
 	_rebuild_now()
-	print("[GrainBlock] kerf=%s reckoning=%s" % [kerf, reckoning])
 
 
 ## The grid stamps config_<key> metadata on the artifact ROOT before _ready; a wrapper

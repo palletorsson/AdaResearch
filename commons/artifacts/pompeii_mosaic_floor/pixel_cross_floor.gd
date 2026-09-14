@@ -216,9 +216,3 @@ func _build() -> void:
 	#_body.position = Vector3(0.0, 0.0, 0.0)
 	#add_child(_body)
 
-	print("[PixelCrossFloor] Built %dx%d grid (%d black, %d green, %d pink tris)" % [
-		gw, gh,
-		black_verts.size() / 3,
-		green_verts.size() / 3,
-		pink_verts.size() / 3,
-	])

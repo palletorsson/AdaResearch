@@ -394,5 +394,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[ViscousFluidBlob] Config applied — size=%.2f, stiffness %.2f..%.2f, gain=%.2f, damping=%.3f" % [
-		blob_size, base_stiffness, thick_stiffness, thicken_gain, damping])

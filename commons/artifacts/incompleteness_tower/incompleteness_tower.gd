@@ -148,7 +148,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return    # curation_station's {"emissive": false}: touch nothing, say nothing
 
 	_rebuild_now()
-	print("[IncompletenessTower] Config applied — regress=%s, levels=%d, pitch=%.3f" % [regress, _n, _pitch])
 
 
 ## Accept an axis value only if it names something we actually build.

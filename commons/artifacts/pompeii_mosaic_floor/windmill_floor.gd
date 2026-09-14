@@ -291,10 +291,3 @@ func _build() -> void:
 	#body.position = Vector3(0, 0.0, 0)
 	#add_child(body)
 
-	print("[WindmillFloor] Built %dx%d units (%d dark tris, %d light tris, %d terra tris, %d grout tris)" % [
-		units_x, units_y,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		terra_verts.size() / 3,
-		grout_verts.size() / 3,
-	])

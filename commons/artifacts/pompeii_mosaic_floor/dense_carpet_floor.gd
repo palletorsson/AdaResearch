@@ -241,13 +241,6 @@ func _build() -> void:
 	var cell_count := cell
 	var crosses_x := field_w / cell_count
 	var crosses_y := field_h / cell_count
-	print("[DenseCarpetFloor] Built %dx%d grid, ~%d crosses (%d dark tris, %d light tris, %d grout tris)" % [
-		gw, gh,
-		crosses_x * crosses_y,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		grout_verts.size() / 3,
-	])
 
 
 ## Draw one ring of border tiles at the given inset level

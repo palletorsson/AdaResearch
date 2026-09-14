@@ -50,8 +50,6 @@ func _ready() -> void:
 	_build_speaker()
 	_build_led_strip()
 	_build_lighting()
-	print("[ControlBoard] Built on XY plane — %d CRTs, %d LEDs, %d faders" % [
-		_crt_screens.size(), _led_indicators.size(), _faders.size()])
 
 func _process(delta: float) -> void:
 	_time += delta
@@ -231,7 +229,6 @@ func _on_board_button(index: int) -> void:
 		var led: Dictionary = _led_indicators[index]
 		led["state"] = not led["state"]
 		_set_led_color(led)
-	print("[ControlBoard] Button %d pressed" % index)
 
 # ══════════════════════════════════════════════════════════════════════
 #  SWITCH ROW — toggle switches, lower-left

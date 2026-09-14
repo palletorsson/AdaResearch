@@ -442,5 +442,3 @@ func _build_sculpture() -> void:
 			var hp: Vector3 = (halo as MeshInstance3D).position
 			(halo as MeshInstance3D).position = hp + Vector3(0.0, jitter, 0.0)
 
-	print("CodexOpticsTrialV3: meshes=%d regions=%s spectrum_segs=%d (seed=%d)" % [
-		_mesh_count, str(_region_cells), SPECTRUM_SEGMENTS, SEED])

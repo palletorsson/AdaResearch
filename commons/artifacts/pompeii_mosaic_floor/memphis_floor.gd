@@ -250,4 +250,3 @@ func _build() -> void:
 	#_body.position = Vector3(0.0, 0.0, 0.0)
 	#add_child(_body)
 
-	print("[MemphisFloor] Built %dx%d grid" % [gw, gh])

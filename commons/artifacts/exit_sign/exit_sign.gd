@@ -240,8 +240,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[ExitSign] Config applied — support=%s, text=%s, arrow=%s" % [
-		support, text, arrow_direction])
 
 
 func _read_metadata_overrides() -> void:

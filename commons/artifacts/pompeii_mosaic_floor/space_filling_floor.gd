@@ -652,8 +652,3 @@ func _build() -> void:
 
 	var mode_names: Array[String] = ["Greek Key Meander", "Hilbert Curve", "Peano Curve", "Penrose-ish"]
 	var mode_name: String = mode_names[clampi(mode, 0, 3)]
-	print("[SpaceFillingFloor] Built %dx%d, mode=%s, border_depth=%d (%d dark, %d light, %d pattern, %d grout tris)" % [
-		gw, gh, mode_name, border_depth,
-		dark_verts.size() / 3, light_verts.size() / 3,
-		pattern_verts.size() / 3, grout_verts.size() / 3,
-	])

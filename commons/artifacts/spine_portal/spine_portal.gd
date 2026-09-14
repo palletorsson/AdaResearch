@@ -87,7 +87,6 @@ func _on_body_entered(body: Node) -> void:
 		return
 	_triggered = true
 	_label.text = "ENTERING CORRIDOR..."
-	print("SpinePortal: entering corridor mode → %s" % target_scene)
 	_request_scene_load()
 
 

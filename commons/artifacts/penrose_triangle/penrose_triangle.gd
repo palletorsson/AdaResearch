@@ -258,4 +258,3 @@ func _rebuild() -> void:
 	_info_label = null
 	_is_at_sweet_spot = false
 	_build()
-	print("PenroseTriangle: disclosure=%s" % disclosure)

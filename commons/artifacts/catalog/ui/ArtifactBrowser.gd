@@ -45,10 +45,6 @@ func populate(theme_filter: String = "all", complexity_filter: String = "all", s
 		folder_keys.append(str(folder_name))
 	folder_keys.sort()
 
-	print("ArtifactBrowser: Populated with %d artifacts across %d folders" % [
-		_current_artifacts.size(),
-		folder_keys.size()
-	])
 
 	for folder_name in folder_keys:
 		var folder_artifacts: Array = artifacts_by_folder.get(folder_name, [])

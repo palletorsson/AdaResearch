@@ -151,7 +151,6 @@ func _connect_pendulum():
 	
 	if _pendulum and _pendulum.has_signal("oscillation_updated"):
 		_pendulum.oscillation_updated.connect(_on_oscillation_updated)
-		print("OscillationControlledCube connected to pendulum")
 
 func _create_cube():
 	_cube_instance = CUBE_SCENE.instantiate()

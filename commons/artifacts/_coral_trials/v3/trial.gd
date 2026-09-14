@@ -82,9 +82,6 @@ func _ready() -> void:
 	# Recentre the colony horizontally so the capture AABB frames it.
 	_recentre(colony)
 
-	print("CoralTrialV3: seed=%d depth=%d branches=%d forks=%d corallites=%d meshes=%d" % [
-		SEED, _max_reached_depth, _branch_count, _fork_count, _corallite_count, _mesh_count
-	])
 
 
 func apply_grid_config(_c: Dictionary) -> void:

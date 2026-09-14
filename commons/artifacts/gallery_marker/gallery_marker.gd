@@ -312,7 +312,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[GalleryMarker] Config applied — mode=%s" % [mode])
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a

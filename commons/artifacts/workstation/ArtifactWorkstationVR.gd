@@ -84,7 +84,6 @@ func _connect_ui(viewport: Node) -> void:
 
 	if _ui_instance and _ui_instance.has_signal("artifact_changed"):
 		_ui_instance.artifact_changed.connect(_on_artifact_changed)
-		print("ArtifactWorkstation: UI connected")
 		# Load the first artifact (signal was emitted before we connected)
 		if _ui_instance.has_method("_get_current_lookup"):
 			_load_artifact(_ui_instance._get_current_lookup())
@@ -150,7 +149,6 @@ func _load_artifact(lookup_name: String) -> void:
 	_current_artifact = instance
 	_disable_cameras_recursive(instance)
 	call_deferred("_fit_artifact")
-	print("ArtifactWorkstation: Showing '%s'" % lookup_name)
 
 ## Safe scene loading — returns null on any error (broken script, type mismatch, missing file)
 func _safe_load(path: String) -> PackedScene:

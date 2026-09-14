@@ -329,5 +329,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[DataLaborCounter] Config applied — labels_per_mark=%d, seed=%d, max=%d" % [
-		labels_per_mark, seed_marks, max_marks])

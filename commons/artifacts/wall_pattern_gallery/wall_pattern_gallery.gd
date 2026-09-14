@@ -222,7 +222,6 @@ func _build_gallery() -> void:
 	_add_lights(grid_origin, z_values, total_size)
 
 	var num_groups := mini(group_index + 1, GROUP_NAMES.size())
-	print("[WallPatternGallery] Built %d clusters showing %d wallpaper groups on %d Z-rows" % [num_groups, mini(num_groups, GROUP_NAMES.size()), z_values.size()])
 
 ## The corridor the artifact raises for itself when there is no host map: two
 ## walls two cubes high, fifteen rows deep — five clusters at the default
@@ -434,7 +433,6 @@ func _build_ceiling(grid_origin: Vector3, positions: Array, z_values: Array, z_g
 			z_count = 0
 			group_index += 1
 
-	print("[WallPatternGallery] Built ceiling + floor at y=%d spanning x=%d to x=%d" % [max_y + 1, x_min, x_max])
 
 func _add_lights(grid_origin: Vector3, z_values: Array, total_size: float) -> void:
 	if z_values.is_empty():

@@ -100,8 +100,6 @@ func _ready() -> void:
 	_build_touch_area()
 	_build_capture_camera()
 	_load_preset(CBS.PRESET_MISSION_CONTROL)
-	print("[GridEditorBoard] Built — %dx%d grid, cell %.3fm" % [
-		_grid_w, _grid_h, cell_size])
 
 func _process(_delta: float) -> void:
 	_check_touch()
@@ -557,8 +555,6 @@ func _load_preset(preset: Dictionary) -> void:
 		_place_element(el_id, gx, gy)
 
 	_update_status()
-	print("[GridEditorBoard] Loaded preset '%s' — %d elements" % [
-		_current_preset_name, _placements.size()])
 
 # ═══════════════════════════════════════════════════════════════════════
 # PLACEMENT
@@ -726,8 +722,6 @@ func _select_placement(inst_id: String) -> void:
 			_highlight_rect.visible = true
 
 	_update_status()
-	print("[GridEditorBoard] Selected: %s (%s)" % [inst_id,
-		_placements[inst_id]["element"] if _placements.has(inst_id) else "?"])
 
 func _delete_selected() -> void:
 	if _selected_id == "" or not _placements.has(_selected_id):
@@ -751,7 +745,6 @@ func _delete_selected() -> void:
 	_selected_id = ""
 	_highlight_rect.visible = false
 	_update_status()
-	print("[GridEditorBoard] Deleted element")
 
 func _update_status() -> void:
 	if not is_instance_valid(_status_label):

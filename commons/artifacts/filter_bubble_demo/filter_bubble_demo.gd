@@ -459,5 +459,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[FilterBubbleDemo] Config applied — points=%d, contraction=%.2f, radius=%.2f" % [
-		point_count, contraction, ring_radius])

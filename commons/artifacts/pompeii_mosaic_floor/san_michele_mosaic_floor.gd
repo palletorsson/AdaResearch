@@ -333,12 +333,6 @@ func _build() -> void:
 	#_body.position = Vector3(0.0, 0.005, 0.0)
 	#add_child(_body)
 
-	print("[SanMicheleMosaicFloor] Built circular floor R=%.3f (%d dark, %d light, %d terra tris)" % [
-		R,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		terra_verts.size() / 3,
-	])
 
 	# CONDITION, appended LAST so every vertex, surface, y-offset and child above is
 	# untouched on the legacy path. "design" adds no node at all.

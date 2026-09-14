@@ -174,7 +174,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if prospect == before_prospect:
 		return
 	_rebuild_now()
-	print("[EntropyFan] Config applied — prospect=%s" % [prospect])
 
 
 ## Accept an axis value only if it names something we actually build.

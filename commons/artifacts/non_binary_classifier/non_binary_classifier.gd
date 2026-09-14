@@ -692,8 +692,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if sample_count != before_samples or build_seed != before_seed \
 			or not is_equal_approx(field_half, before_half):
 		_rebuild_now()
-		print("[NonBinaryClassifier] Config applied — rebuilt: samples=%d margin=%.2f" % [
-			sample_count, margin_width])
 		return
 	# margin_width and the descent knobs need no geometry: the next frame reads
 	# them. Rebuilding here would throw away the run in progress, which is the

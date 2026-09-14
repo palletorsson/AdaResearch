@@ -389,10 +389,3 @@ func _build() -> void:
 	#add_child(_body)
 
 	var n_circles := (row_max - row_min + 1) * (col_max - col_min + 1)
-	print("[ChainLinkFloor] Built %dx%d grid, %d circles (%d dark, %d light, %d terra, %d grout tris)" % [
-		gw, gh, n_circles,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		terra_verts.size() / 3,
-		grout_verts.size() / 3,
-	])

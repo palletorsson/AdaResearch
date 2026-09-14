@@ -461,10 +461,6 @@ func _build() -> void:
 
 	var mode_names: Array[String] = ["Greek Key Meander", "Hilbert Curve", "Peano Curve"]
 	var mode_name: String = mode_names[clampi(border_mode, 0, 2)]
-	print("[TurtleMeanderFloor] Built %dx%d grid, mode=%s, depth=%d (%d dark, %d light, %d grout tris)" % [
-		gw, gh, mode_name, meander_depth,
-		dark_verts.size() / 3, light_verts.size() / 3, grout_verts.size() / 3,
-	])
 
 
 # ── Hilbert border: trace a Hilbert curve segment along each side ──

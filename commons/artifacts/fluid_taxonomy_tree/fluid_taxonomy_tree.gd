@@ -637,8 +637,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if leaf_count != before_leaves or max_branches != before_max \
 			or start_branches != before_start or build_seed != before_seed:
 		_rebuild_now()
-		print("[FluidTaxonomyTree] Config applied — rebuilt: leaves=%d interval=%.2f" % [
-			leaf_count, reclassify_interval])
 		return
 	# The interval needs no geometry; the next frame reads it. Rebuilding would
 	# reset a tree mid-migration, which is the state worth looking at.

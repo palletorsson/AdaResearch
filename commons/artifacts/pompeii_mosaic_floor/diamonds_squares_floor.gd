@@ -254,12 +254,6 @@ func _build() -> void:
 	#_body.position = Vector3(0.0, 0.0, 0.0)
 	#add_child(_body)
 
-	print("[DiamondsSquaresFloor] Built %dx%d grid (%d dark tris, %d light tris, %d grout tris)" % [
-		gw, gh,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		grout_verts.size() / 3,
-	])
 
 
 func _add_diag_line(verts: PackedVector3Array, x0: float, z0: float, x1: float, z1: float, dh: float) -> void:

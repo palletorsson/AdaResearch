@@ -247,16 +247,8 @@ func _input(event: InputEvent) -> void:
 		return
 	match event.keycode:
 		KEY_N:
-			print("SpineRunner: ======= N PRESSED: forcing forward rotation =======")
-			print("  queue_index=%d  prev=%s  current=%s  next=%s" % [
-				_queue_index,
-				"null" if _prev_slot == null else _prev_slot.name,
-				"null" if _current_slot == null else _current_slot.name,
-				"null" if _next_slot == null else _next_slot.name,
-			])
 			_rotate_forward()
 		KEY_P:
-			print("SpineRunner: ======= P PRESSED: forcing backward rotation =======")
 			_rotate_backward()
 
 

@@ -260,6 +260,3 @@ func _build() -> void:
 	#body.position = Vector3(0, 0.005, 0)
 	#add_child(body)
 
-	print("[SolomonsKnotFloor] Built %dx%d tiles, %dx%d px grid" % [
-		tiles_x, tiles_y, gw_px, gh_px,
-	])

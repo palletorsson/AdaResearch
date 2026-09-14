@@ -775,7 +775,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if not _built:
 		return
 	_rebuild()
-	print("SeamStair: seam=%s facing=%s" % [seam, facing])
 
 func _normalise_facing(raw: String, fallback: String) -> String:
 	var v: String = raw.to_lower().strip_edges()

@@ -50,7 +50,6 @@ func _ready() -> void:
 	_setup_sliders()
 	_create_trail_ghosts()
 	_update_visualization()
-	print("VectorTranslationDemo ready")
 
 ## Connects slider signals and sets default ranges/values
 func _setup_sliders() -> void:

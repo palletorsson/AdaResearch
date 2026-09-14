@@ -321,4 +321,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[LatentSpaceWalk] Config applied — grid=%dx%d over %.2f m" % [grid_n, grid_n, plane_size])

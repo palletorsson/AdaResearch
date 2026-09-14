@@ -259,8 +259,6 @@ func _cut_at_blade() -> int:
 	_cut_total += removed
 	_refresh_render()
 	_refresh_readout()
-	print("[SoftBodySlicer] Cut %d springs — %d of %d remain" % [
-		removed, _sim.springs.size(), _spring_count_initial])
 	return removed
 
 
@@ -399,5 +397,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[SoftBodySlicer] Config applied — grid_n=%d cell=%.3f precut=%s" % [
-		grid_n, cell, str(precut)])

@@ -318,8 +318,6 @@ func _build_coral() -> void:
 		var septa_n: int = 8 + (_rng.randi() % 9)          # 8..16 septa
 		_septa_total += _build_cup(colony, centre, cup_r, septa_n)
 
-	print("CoralTrialV4: corallites=%d meshes=%d septa_total=%d (seed=%d)" % [
-		_corallite_count, _mesh_count, _septa_total, SEED])
 
 
 ## Low domed cushion/boulder — a revolution of a clean, monotone bottom→top

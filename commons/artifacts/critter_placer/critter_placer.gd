@@ -199,7 +199,6 @@ func _spawn_organism() -> void:
 	set_meta("kingdom", _dna.get_kingdom_name())
 	set_meta("is_critter_placer", true)
 
-	print("[CritterPlacer] Spawned %s (preset or custom)" % _dna.get_kingdom_name())
 
 
 # ═══════════════════════════════════════════════════════════════

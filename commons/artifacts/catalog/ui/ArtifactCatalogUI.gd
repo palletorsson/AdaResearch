@@ -60,7 +60,6 @@ func _connect_to_grid_system():
 		if grid_system.has_signal("map_generation_complete"):
 			if not grid_system.map_generation_complete.is_connected(_on_map_generation_complete):
 				grid_system.map_generation_complete.connect(_on_map_generation_complete)
-				print("ArtifactCatalogUI: Connected to GridSystem map_generation_complete signal")
 
 
 func _initial_refresh():
@@ -77,12 +76,11 @@ func _initial_refresh():
 		if scene_tree:
 			var grid_systems = scene_tree.get_nodes_in_group("grid_system")
 			if grid_systems.size() > 0:
-				print("ArtifactCatalogUI: GridSystem found in group, loading catalog...")
 				_refresh_catalog()
 				_update_stats()
 				return
 			elif attempt % 10 == 0:
-				print("ArtifactCatalogUI: Still waiting for GridSystem... (attempt %d/%d)" % [attempt, max_attempts])
+				pass
 
 		attempt += 1
 		# out-of-tree guard: get_tree() is null once a map is torn down
@@ -97,7 +95,6 @@ func _initial_refresh():
 
 
 func _on_map_generation_complete():
-	print("ArtifactCatalogUI: Map generation complete, refreshing catalog...")
 	refresh()
 
 

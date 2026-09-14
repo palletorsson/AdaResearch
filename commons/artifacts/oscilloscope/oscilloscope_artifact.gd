@@ -282,7 +282,6 @@ func get_frequency_ratio() -> float:
 #   trace_3d              - Show 3D trace: true/1 or false/0
 
 func apply_grid_config(config: Dictionary) -> void:
-	print("OscilloscopeArtifact: Applying grid config: %s" % str(config))
 
 	# Frequency A
 	if config.has("freq_a"):
@@ -366,6 +365,3 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("preset"):
 		set_preset(str(config.preset))
 
-	print("OscilloscopeArtifact: Config applied - freq_a=%.1f, freq_b=%.1f, amp=%.2f, mode=%d, style=%s" % [
-		initial_freq_a, initial_freq_b, initial_amplitude, initial_mode, phosphor_style
-	])

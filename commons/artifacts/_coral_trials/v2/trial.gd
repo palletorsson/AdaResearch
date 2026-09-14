@@ -192,10 +192,6 @@ func _build_brain_coral() -> void:
 		min_y = minf(min_y, ridged_pos[i].y)
 	position.y = -min_y
 
-	print("CoralTrialV2: route B (Gray-Scott '%s' RD). icosphere subdiv=%d, "
-		% [RD_PRESET, ICO_SUBDIVISIONS],
-		"RD grid=%d^2 x %d iters, verts=%d, ridge tris=%d, glow tris=%d"
-		% [RD_GRID, RD_ITERS, vcount, fcount, glow_tris])
 
 
 # Emit one vertex carrying its ridge value in vertex-colour so the material can

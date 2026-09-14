@@ -199,14 +199,12 @@ func _parse_config():
 	# Check config_target meta (set by map loader via #target:mode syntax)
 	if has_meta("config_target"):
 		var mode = get_meta("config_target")
-		print("[SentryTurret] Found config_target meta: %s" % mode)
 		_apply_target_mode(str(mode))
 		return
 
 	# Check direct target meta
 	if has_meta("target"):
 		var mode = get_meta("target")
-		print("[SentryTurret] Found target meta: %s" % mode)
 		_apply_target_mode(str(mode))
 		return
 
@@ -225,7 +223,6 @@ func _apply_target_mode(mode: String):
 		"all":
 			target_player = true
 			target_balls = true
-	print("[SentryTurret] Target mode set: %s (player=%s, balls=%s)" % [mode, target_player, target_balls])
 
 ## Build all turret geometry: base, head, barrel, laser
 func _build_turret():
@@ -391,15 +388,11 @@ func _find_target():
 	# Find balls
 	if target_balls:
 		var balls = _find_balls()
-		if do_debug:
-			print("[Turret] Found %d balls, target_balls=%s" % [balls.size(), target_balls])
 		for ball in balls:
 			if not is_instance_valid(ball):
 				continue
 			var ball_pos = _get_target_position(ball)
 			var dist = global_position.distance_to(ball_pos)
-			if do_debug:
-				print("[Turret]   Ball at %s, dist=%.1f (range=%.1f)" % [ball_pos, dist, detection_range])
 			if dist < detection_range and dist < best_dist:
 				best_dist = dist
 				best_target = ball
@@ -407,11 +400,9 @@ func _find_target():
 	if best_target != current_target:
 		if best_target:
 			current_target = best_target
-			print("[Turret] TARGET ACQUIRED: %s at dist %.1f" % [best_target.name, best_dist])
 			emit_signal("target_acquired", current_target)
 		elif current_target:
 			current_target = null
-			print("[Turret] TARGET LOST")
 			emit_signal("target_lost")
 
 ## Locate the player node (XR camera, player group, or fallback camera)
@@ -531,13 +522,9 @@ func _update_shooting(delta: float):
 	# Laser damage mode - just fire if target is in range (laser visual already hits)
 	if use_laser_damage:
 		if is_close_enough:
-			if not is_laser_firing:
-				print("[Turret] *** LASER FIRING *** dist: %.1f" % dist_to_target)
 			is_laser_firing = true
 			_apply_laser_damage(delta)
 		else:
-			if is_laser_firing:
-				print("[Turret] Target out of range - dist: %.1f" % dist_to_target)
 			is_laser_firing = false
 		return
 
@@ -606,14 +593,12 @@ func _apply_laser_damage(delta: float):
 	_damage_debug_timer += delta
 	if _damage_debug_timer > 0.3:
 		_damage_debug_timer = 0.0
-		print("[Turret] BURNING %s - damage/frame: %.2f, Health: %.1f/%.1f" % [current_target.name, damage, health, max_health])
 
 	# Visual burn effect on ball
 	_apply_burn_effect(current_target)
 
 	# Check if destroyed
 	if health <= 0:
-		print("[Turret] *** BALL DESTROYED! *** Health: %.1f" % health)
 		_destroy_target(current_target)
 
 ## Tint target material with burn glow based on remaining health
@@ -646,7 +631,6 @@ func _destroy_target(target: Node3D):
 	var pos = _get_target_position(target)
 	var color = target.get_meta("ball_color") if target.has_meta("ball_color") else Color(1.0, 0.5, 0.2)
 
-	print("[Turret] Destroying ball at %s" % pos)
 
 	# Clear current target FIRST to prevent re-processing
 	var was_current = (current_target == target)
@@ -663,14 +647,12 @@ func _destroy_target(target: Node3D):
 		if dropper.has_method("remove_ball"):
 			dropper.remove_ball(target)
 			removed = true
-			print("[Turret] Ball recycled via dropper")
 			break
 
 	# If no dropper handled it, just hide/free it
 	if not removed:
 		target.visible = false
 		target.queue_free()
-		print("[Turret] Ball freed directly")
 
 	if was_current:
 		emit_signal("target_lost")
@@ -938,7 +920,6 @@ func set_target_mode(mode: String):
 
 ## Called by map loader when using #config syntax
 func configure(config_data: Dictionary):
-	print("[SentryTurret] configure() called with: %s" % config_data)
 	if config_data.has("target"):
 		_apply_target_mode(str(config_data["target"]))
 

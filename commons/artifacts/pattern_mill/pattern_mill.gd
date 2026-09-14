@@ -223,8 +223,6 @@ func _ready() -> void:
 	# machine: every child index and position above is untouched. `service` adds nothing.
 	_build_upkeep()
 
-	print("[PatternMill] Built — %dx%d head, group %s, palette %s, exhibit %s" % [
-		motif_size, motif_size, GROUP_NAMES[_group_index], palette, exhibit])
 
 
 func _process(delta: float) -> void:
@@ -862,7 +860,6 @@ func _select_ink(idx: int) -> void:
 	for i in _ink_indicators.size():
 		var m: StandardMaterial3D = _ink_indicators[i].material_override
 		m.emission_energy_multiplier = 2.5 if i == _ink else 0.0
-	print("[PatternMill] ink -> %d" % _ink)
 
 
 func _cycle_group() -> void:
@@ -886,7 +883,6 @@ func _reseed_motif() -> void:
 			_grid[y][x] = clampi(int(motif[y][x]), 0, n - 1)
 	_refresh_head_visuals()
 	_rebake_output()
-	print("[PatternMill] reseeded motif (seed=%d)" % motif_seed)
 
 
 func _clear_head() -> void:

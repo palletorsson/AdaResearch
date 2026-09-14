@@ -332,7 +332,6 @@ func _landed(target: Node, finished: bool = true) -> void:
 		_broken.append(target)
 	_cool = STRIKE_COOLDOWN
 	struck.emit(target, _recent_speed)
-	print("line_sledgehammer: struck %s at %.2f m/s" % [target.name, _recent_speed])
 	_recent_speed = 0.0
 
 

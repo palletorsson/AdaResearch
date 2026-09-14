@@ -122,7 +122,6 @@ var _phase_plate: Label3D = null
 
 
 func _ready():
-	print("y_oscillation_cube: cube_size = ", cube_size)  # Debug
 	_base_y = cube_size / 2.0  # Rest position (cube sits on ground)
 	_create_cube()
 	_create_rail()

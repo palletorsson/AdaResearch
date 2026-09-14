@@ -126,7 +126,6 @@ func strike(from: Vector3 = Vector3.ZERO, by: Node = null) -> bool:
 		lean.tween_property(tgt, "rotation_degrees:z",
 			tgt.rotation_degrees.z + 7.0, 0.18).set_trans(Tween.TRANS_ELASTIC)
 		hit.emit(_hp)
-		print("do_not_cross_barrier: hit, %d left" % _hp)
 		return true
 
 	_broken = true

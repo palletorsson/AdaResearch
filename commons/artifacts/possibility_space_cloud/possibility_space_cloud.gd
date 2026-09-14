@@ -111,7 +111,6 @@ func apply_grid_config(config: Dictionary) -> void:
 	if occupancy == before_occupancy:
 		return
 	_rebuild_now()
-	print("[PossibilitySpaceCloud] Config applied — occupancy=%s" % [occupancy])
 
 
 ## Accept an axis value only if it names something we actually build; a typo has to

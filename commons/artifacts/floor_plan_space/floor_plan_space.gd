@@ -186,7 +186,6 @@ func _build_all_rooms() -> void:
 	var auto_y: float = -global_position.y
 	container.position.y = auto_y
 	add_child(container)
-	print("FloorPlanSpace: global_pos.y=%s, auto_y=%s" % [global_position.y, auto_y])
 
 	# Big floor collider spanning the entire scene
 	var grid_size: Array = _floor_plan_data.get("grid_size", [20, 20])
@@ -218,7 +217,6 @@ func _build_all_rooms() -> void:
 		_place_room_wall_patterns(room, room_node, cell_size)
 		_build_exhibit_walls(room, room_node, cell_size)
 
-	print("FloorPlanSpace: Built %d rooms from floor plan" % rooms.size())
 
 	# Add a simple fly camera only when running standalone (not placed in a map)
 	if not _placed_as_artifact and not get_viewport().get_camera_3d():
@@ -377,9 +375,6 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	floor_instance.position = Vector3(center_x, 0.005, center_z)  # Artifact floor above base
 	floor_instance.name = "Floor_%s" % str(room.get("id", "room"))
 
-	print("FloorPlanSpace: Placed floor '%s' at (%.1f, %.1f) size %.1fx%.1f" % [
-		floor_pattern, center_x, center_z, room_w, room_h
-	])
 
 
 func _place_per_cell_floor(cells: Array, parent: Node3D, cell_size: float, room: Dictionary) -> void:
@@ -422,7 +417,6 @@ func _place_per_cell_floor(cells: Array, parent: Node3D, cell_size: float, room:
 	mi.name = "PerCellFloor_%s" % str(room.get("id", "room"))
 	parent.add_child(mi)
 
-	print("FloorPlanSpace: Per-cell floor for '%s' (%d cells)" % [str(room.get("id", "")), cells.size()])
 
 
 func _place_fallback_floor(parent: Node3D, cx: float, cz: float,
@@ -500,9 +494,6 @@ func _place_room_ceiling(room: Dictionary, parent: Node3D, cell_size: float) -> 
 	ceiling_instance.rotation_degrees.x = 180.0
 	ceiling_instance.name = "Ceiling_%s" % str(room.get("id", "room"))
 
-	print("FloorPlanSpace: Placed ceiling '%s' at (%.1f, %.1f) y=%.1f size %.1fx%.1f" % [
-		ceiling_pattern, center_x, center_z, wall_height, room_w, room_h
-	])
 
 
 # ── Wall pattern placement ───────────────────────────────────────────────────
@@ -610,9 +601,6 @@ func _place_room_wall_patterns(room: Dictionary, parent: Node3D, cell_size: floa
 		pattern_instance.name = "WallPattern_%s_%d" % [dir, pattern_count]
 		pattern_count += 1
 
-	print("FloorPlanSpace: Placed %d wall pattern panels for room '%s'" % [
-		pattern_count, str(room.get("id", "room"))
-	])
 
 
 ## Group boundary edges into contiguous segments for wall patterns (no doorway filtering).
@@ -761,9 +749,6 @@ func _generate_room_walls(room: Dictionary, parent: Node3D, cell_size: float,
 	for seg in segments:
 		_build_wall_segment(seg, wall_container, cell_size, wall_height, wall_preset, wall_thickness)
 
-	print("FloorPlanSpace: Generated %d wall segments for room '%s'" % [
-		segments.size(), str(room.get("id", "room"))
-	])
 
 
 ## Group boundary edges into contiguous wall segments.
@@ -1033,9 +1018,6 @@ func _build_exhibit_walls(room: Dictionary, parent: Node3D, cell_size: float) ->
 		if ew_y_offset < 0.01:
 			_build_exhibit_pedestal(container, world_x, world_z, ew_width, wall_thickness, ew_rotation)
 
-	print("FloorPlanSpace: Placed %d exhibit walls in room '%s'" % [
-		exhibit_walls.size(), str(room.get("id", "room"))
-	])
 
 
 ## Build a thin dark pedestal base under an exhibit wall.
@@ -1211,6 +1193,3 @@ func _add_fly_camera(rooms: Array, cell_size: float) -> void:
 	env.environment = environment
 	add_child(env)
 
-	print("FloorPlanSpace: Camera at (%.1f, %.1f, %.1f), museum span %.0fx%.0f m" % [
-		cx, cam_height, cz + cam_back, span_x, span_z
-	])

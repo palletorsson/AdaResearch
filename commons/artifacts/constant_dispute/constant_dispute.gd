@@ -268,8 +268,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		if r in ["bare", "count", "spread", "drift"] and r != record:
 			record = r
 			touched = true
-	if touched:
-		print("ConstantDispute: claim=%s record=%s" % [claim, record])
 
 
 func _rebuild() -> void:

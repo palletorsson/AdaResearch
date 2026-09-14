@@ -103,7 +103,6 @@ func _connect_ui(viewport: Node) -> void:
 			_ui_instance.place_requested.connect(_spawn_into_world)
 		if _ui_instance.has_method("_get_current_lookup"):
 			_load_artifact(_ui_instance._get_current_lookup())
-		print("[HandWorkstation] UI connected")
 	else:
 		print("[HandWorkstation] Could not connect UI")
 
@@ -168,7 +167,6 @@ func _spawn_into_world(lookup_name: String) -> void:
 		pickable.set_meta("grid_rotation_y", 0.0)
 		if pickable.has_signal("dropped") and not pickable.is_connected("dropped", _on_placed_artifact_dropped):
 			pickable.connect("dropped", _on_placed_artifact_dropped)
-		print("[HandWorkstation] placed '%s' on grid cell (%d,%d) y=%d" % [lookup_name, cell.x, cell.y, y_pos])
 	else:
 		# Fallback (no grid): ~1.6 m in front at floor level, rests by gravity.
 		var cam := _find_xr_camera()
@@ -398,7 +396,6 @@ func _on_placed_artifact_dropped(pickable) -> void:
 		(pickable as RigidBody3D).linear_velocity = Vector3.ZERO
 		(pickable as RigidBody3D).angular_velocity = Vector3.ZERO
 		(pickable as RigidBody3D).freeze = true
-	print("[HandWorkstation] re-snapped artifact to cell (%d,%d) y=%d yaw=%d" % [x, z, y_level, int(snapped_yaw)])
 
 ## Depth-first search for a node by exact name (rare calls: place / drop).
 func _find_node_by_name(root: Node, target_name: String) -> Node:

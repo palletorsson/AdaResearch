@@ -1027,8 +1027,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[QFEPBalanceWorkbench] Config applied — settling=%s (F %.2f / E %.2f / λ %.2f / φ %.2f)" % [
-		settling, _F, _E, _lambda, _phi])
 
 
 ## Tear down only what this script built, then build again — synchronously, so

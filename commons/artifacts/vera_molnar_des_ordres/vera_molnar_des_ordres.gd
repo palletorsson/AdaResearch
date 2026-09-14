@@ -359,4 +359,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			_slider.set_normalized_value(clampf(max_rotation / ROTATION_MAX, 0.0, 1.0))
 	else:
 		_rebuild_now()
-	print("[VeraMolnarDesOrdres] style=%d grid=%s max_rot=%.1f" % [style, str(grid_size), max_rotation])

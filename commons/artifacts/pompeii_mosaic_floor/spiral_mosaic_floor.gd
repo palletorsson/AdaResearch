@@ -364,13 +364,6 @@ func _build() -> void:
 	#_body.add_child(col)
 	#add_child(_body)
 
-	print("[SpiralMosaicFloor] Built %.1f rotations (%.2fm radius) — %d dark tris, %d light tris, %d accent tris, %d grout tris" % [
-		num_rotations, floor_radius,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		accent_verts.size() / 3,
-		grout_verts.size() / 3,
-	])
 
 	# CONDITION, appended LAST so every vertex, surface, y-offset and child above is
 	# untouched on the legacy path. "design" adds no node at all.

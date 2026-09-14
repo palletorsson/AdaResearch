@@ -240,8 +240,6 @@ func measure() -> float:
 		_readout.body = "%.2f m\n(the pale block, unchanged)" % reading
 
 	measured.emit(reading, s)
-	print("two_point_ruler: read %.2f m off the subject; the witness is now %.2f"
-		% [reading, s])
 	return reading
 
 

@@ -778,7 +778,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if grouping == before:
 		return
 	_rebuild_now()
-	print("[MutualityGraph] Config applied — grouping=%s" % grouping)
 
 
 ## SYNCHRONOUS. Free only what this script created and build again inline: a

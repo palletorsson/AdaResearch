@@ -358,10 +358,3 @@ func _build() -> void:
 	#_body.position = Vector3(0, 0.0, 0)
 	#add_child(_body)
 
-	print("[PeltaShieldFloor] Built %dx%d grid, radius=%.3f (%d dark, %d light, %d terra, %d grout tris)" % [
-		gw, gh, pelta_radius,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		terra_verts.size() / 3,
-		grout_verts.size() / 3,
-	])

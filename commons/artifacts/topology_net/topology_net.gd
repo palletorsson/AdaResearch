@@ -669,5 +669,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if topology == before_topology and reading == before_reading and layout == before_layout:
 		return
 	_rebuild()
-	print("[TopologyNet] Config applied — topology=%s reading=%s layout=%s" % [
-		topology, reading, layout])

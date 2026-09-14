@@ -188,7 +188,6 @@ func _ready() -> void:
 	# legacy build put it. "none" falls through and adds nothing at all.
 	_apply_interference()
 
-	print("FoucaultPendulum ready - latitude: ", latitude, "° | precession = Earth × sin(lat)")
 
 
 func _create_podium() -> void:
@@ -525,7 +524,6 @@ func _create_gravity_spheres(ring_gap: float = 0.8) -> void:
 
 		_gravity_spheres[i] = sphere
 
-	print("Created %d gravity spheres" % _gravity_spheres.size())
 
 
 func _create_simple_gravity_sphere(color: Color) -> Node3D:
@@ -754,7 +752,6 @@ func _update_debug_visuals() -> void:
 		var local_x = tip_world.x - global_position.x
 		var local_z = tip_world.z - global_position.z
 		var in_bounds = abs(local_x) <= half_canvas and abs(local_z) <= half_canvas
-		print("Tip local: (", local_x, ", ", local_z, ") | In bounds: ", in_bounds, " | Trail pts: ", trail_points.size())
 
 
 func _update_pendulum_visual() -> void:

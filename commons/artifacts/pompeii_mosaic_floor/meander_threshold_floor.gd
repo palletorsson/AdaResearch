@@ -197,10 +197,6 @@ func _build() -> void:
 	#_body.position = Vector3(0, 0.005, 0)
 	#add_child(_body)
 
-	print("[MeanderThresholdFloor] Built %dx%d px grid, %d dots (%d dark tris, %d light tris, %d grout tris)" % [
-		gw_px, gh_px, dots_x * dots_z,
-		dark_verts.size() / 3, light_verts.size() / 3, grout_verts.size() / 3,
-	])
 
 
 ## Build pixel grid with Greek key meander in the border region.

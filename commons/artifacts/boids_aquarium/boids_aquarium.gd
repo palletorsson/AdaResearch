@@ -941,7 +941,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if accord == before_accord and boid_count == before_count and tank_size == before_tank:
 		return
 	_rebuild_now()
-	print("[BoidsAquarium] Config applied — accord=%s, boids=%d" % [accord, boid_count])
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a

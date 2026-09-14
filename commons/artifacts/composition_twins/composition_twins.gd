@@ -347,8 +347,6 @@ func _build() -> void:
 		_add_pool_key(big, step * _off_s * float(n))
 
 	set_process(true)
-	print("[composition_twins] %d x %s | body %.3f m -> twin %.2f m | offset x%.0f | pool floor y=%.2f | lift %.3f m -> %.2f m"
-		% [n, str(shapes), m, big, _off_s, _pool_anchor.y, _reach, _reach * _off_s])
 	if n > 1 and step * _off_s < big * 1.02:
 		var fits: int = int(float(maxf(pool_m, big)) / maxf(big, 0.01))
 		push_warning("composition_twins: %d twins %.2f m across sit %.2f m apart and overlap. A %.1f m pool holds about %d at x%.0f — lower object_count, raise pool_m, or lower twin_scale."

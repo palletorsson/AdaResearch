@@ -43,7 +43,6 @@ func _ready() -> void:
 	_build_gallery()
 	_add_lights()
 	_add_labels()
-	print("[ArtHistoryGallery] Rendered %d compositions, %d total quads" % [AHP.PRESET_NAMES.size(), _total_tiles])
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("tile_resolution"):

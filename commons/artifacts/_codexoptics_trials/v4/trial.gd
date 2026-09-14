@@ -172,8 +172,6 @@ func _build_packet() -> void:
 	# ── Baseline axis + dark backdrop. ────────────────────────────────────
 	_build_axis_and_backdrop()
 
-	print("CodexOpticsTrialV4: meshes=%d samples=%d k=%.2f sigma=%.2f beads=%d (seed=%d)" % [
-		_mesh_count, SAMPLES, K_WAVE, SIGMA, DENSITY_BEADS, SEED])
 
 
 ## Sweep a circular profile along a baked point array, building a tube that

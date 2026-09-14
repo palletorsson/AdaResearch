@@ -31,7 +31,6 @@ func _ready():
 func set_references(grid_system: Node, spawn_manager: ArtifactSpawnManager):
 	_grid_system_ref = grid_system
 	_spawn_manager = spawn_manager
-	print("DesktopArtifactCatalog: References set, forcing catalog refresh")
 	if _catalog_ui and _catalog_ui.has_method("refresh"):
 		_catalog_ui.refresh()
 
@@ -88,7 +87,6 @@ func open():
 		_catalog_ui.grab_focus()
 
 	catalog_opened.emit()
-	print("DesktopArtifactCatalog: Opened")
 
 
 ## Close the catalog
@@ -100,11 +98,9 @@ func close():
 	get_tree().paused = false
 
 	catalog_closed.emit()
-	print("DesktopArtifactCatalog: Closed")
 
 
 func _on_spawn_requested(lookup_name: String):
-	print("DesktopArtifactCatalog: Spawn requested for '%s'" % lookup_name)
 
 	# Try to spawn directly if we have spawn manager
 	if _spawn_manager:

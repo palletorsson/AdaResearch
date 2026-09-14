@@ -179,7 +179,6 @@ func apply_grid_config(config: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[BarberParadox] Config applied — roster=%s" % [roster])
 
 
 ## Accept an axis value only if it names something we actually build.

@@ -28,7 +28,6 @@ func _connect_ui_signals():
 		_catalog_ui = _viewport_2d_in_3d.get_scene_instance()
 		if _catalog_ui:
 			_catalog_ui.spawn_requested.connect(_on_spawn_requested)
-			print("ArtifactCatalogTablet3D: Connected to UI signals")
 		else:
 			push_warning("ArtifactCatalogTablet3D: Could not get catalog UI instance")
 	else:
@@ -36,7 +35,6 @@ func _connect_ui_signals():
 		_catalog_ui = _find_catalog_ui_recursive(_viewport_2d_in_3d)
 		if _catalog_ui:
 			_catalog_ui.spawn_requested.connect(_on_spawn_requested)
-			print("ArtifactCatalogTablet3D: Found and connected to UI")
 
 
 func _find_catalog_ui_recursive(node: Node) -> ArtifactCatalogUI:
@@ -57,7 +55,6 @@ func _ensure_viewport_updates():
 		var viewport = _viewport_2d_in_3d.get_node_or_null("Viewport")
 		if viewport and viewport is SubViewport:
 			viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-			print("ArtifactCatalogTablet3D: Set viewport to UPDATE_ALWAYS")
 
 		# Also try setting the update_mode property if it exists
 		if _viewport_2d_in_3d.has_method("set_update_mode"):
@@ -96,7 +93,6 @@ func _find_spawn_manager():
 
 
 func _on_spawn_requested(lookup_name: String):
-	print("ArtifactCatalogTablet3D: Spawn requested for '%s'" % lookup_name)
 
 	# Try to spawn directly if we have spawn manager
 	if _spawn_manager:

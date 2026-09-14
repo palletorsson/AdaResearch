@@ -582,5 +582,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[DomeKit] Config applied — station=%s, subdivision=%s, member=%s"
-		% [station, subdivision, member])

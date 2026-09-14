@@ -141,8 +141,6 @@ func apply_grid_config(config: Dictionary) -> void:
 			and token_count == before_tokens:
 		return    # nothing structural moved — say nothing, touch nothing
 	_rebuild_now()
-	print("[ProvabilitySorter] Config applied — reach=%s, rings=%.2f/%.2f" % [
-		reach, _r_inner, _r_outer])
 
 
 ## Accept an axis value only if it names something we actually build. A typo has

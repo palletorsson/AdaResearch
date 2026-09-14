@@ -317,6 +317,3 @@ func _build() -> void:
 		total_tris += color_verts[cv_key].size() / 3
 	total_tris += grout_verts.size() / 3
 
-	print("[OpusSectileFloor] Built %dx%d grid, %d cells, %d total tris" % [
-		gw, gh, (fx1 - fx0) * (fy1 - fy0), total_tris
-	])

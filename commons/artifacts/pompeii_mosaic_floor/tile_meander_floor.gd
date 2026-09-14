@@ -232,11 +232,6 @@ func _build() -> void:
 	_mi.position = Vector3(-fw * 0.5, 0.005, -fh * 0.5)
 	add_child(_mi)
 
-	print("[TileMeanderFloor] Built %dx%d grid (%d field, %d line tris)" % [
-		gw, gh,
-		field_verts.size() / 3,
-		line_verts.size() / 3,
-	])
 
 
 # ── Paint horizontal keys along bottom or top side ──

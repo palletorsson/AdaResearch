@@ -113,10 +113,6 @@ func _build_garden() -> void:
 	_mmi.material_override = mat
 	add_child(_mmi)
 
-	print("RDCoralGarden: %d polyps from %s (F/K=%s)" % [
-		alive.size(), preset,
-		"custom" if custom_F > 0 else "preset"
-	])
 
 
 func _build_label() -> void:

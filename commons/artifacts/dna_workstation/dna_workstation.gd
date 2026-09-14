@@ -112,7 +112,6 @@ func _connect_ui(viewport: Node) -> void:
 			break
 	if _ui_instance and _ui_instance.has_signal("dna_changed"):
 		_ui_instance.dna_changed.connect(_on_dna_changed)
-		print("DNAWorkstation: UI connected")
 		# Load whatever's currently selected — the UI auto-selected the first
 		# substrate + first config in its _ready(), but that signal fired before
 		# we connected. Pull the current selection now.
@@ -194,7 +193,6 @@ func _load_variant(substrate: String, config_id: String) -> void:
 		_:                _show_placeholder("%s · config only — see /dna" % substrate); return
 	if node == null:
 		_show_placeholder("build failed: %s/%s" % [substrate, config_id])
-		print("DNAWorkstation: %s/%s returned null" % [substrate, config_id])
 		return
 	_current_artifact = node
 	# Always wrap the artifact in a container Node3D so _fit_artifact can
@@ -206,7 +204,6 @@ func _load_variant(substrate: String, config_id: String) -> void:
 	_presentation_area.add_child(container)
 	_current_artifact = container
 	call_deferred("_fit_artifact")
-	print("DNAWorkstation: loaded %s/%s" % [substrate, config_id])
 
 
 func _find_config(substrate: String, config_id: String) -> Dictionary:
@@ -258,7 +255,6 @@ func _build_lsystem(cfg: Dictionary) -> Node3D:
 		"width_shrink": float(cfg.get("width_shrink", 0.75)),
 	})
 	var segments: Array = walk.get("segments", [])
-	print("DNAWorkstation: L-system %s → %d segments" % [cfg.get("id", "?"), segments.size()])
 	var ct := _c(cfg.get("color_trunk", [0.45, 0.28, 0.12]))
 	var cp := _c(cfg.get("color_tip",   [0.2, 0.65, 0.15]))
 	return LSystemTurtle.to_tubes(walk, ct, cp, int(cfg.get("tube_sides", 6)))
@@ -269,8 +265,6 @@ func _build_trajectory(cfg: Dictionary) -> Node3D:
 	var trails: Array = result["trajectories"]
 	var sample_total: int = 0
 	for t in trails: sample_total += (t as PackedVector3Array).size()
-	print("DNAWorkstation: Trajectory %s → %d trail(s), %d samples" % [
-		cfg.get("id", "?"), trails.size(), sample_total])
 	var root := Node3D.new()
 	var cs := _c(cfg.get("color_start", [0.2, 0.3, 0.5]))
 	var ce := _c(cfg.get("color_end",   [0.9, 0.55, 0.2]))
@@ -317,9 +311,6 @@ func _build_trajectory(cfg: Dictionary) -> Node3D:
 
 func _build_pattern(cfg: Dictionary) -> Node3D:
 	var img: Image = PatternSim.render_to_image(cfg)
-	print("DNAWorkstation: Pattern %s → image %s" % [
-		cfg.get("id", "?"),
-		"null" if img == null else str(img.get_size())])
 	if img == null: return null
 	var tex := ImageTexture.create_from_image(img)
 	var root := Node3D.new()
@@ -339,10 +330,7 @@ func _build_pattern(cfg: Dictionary) -> Node3D:
 
 func _build_rd(cfg: Dictionary) -> Node3D:
 	var N: int = int(cfg.get("grid_size", 96))
-	print("DNAWorkstation: RD %s → simulating %d×%d, %d iterations…" % [
-		cfg.get("id", "?"), N, N, int(cfg.get("iterations", 3000))])
 	var field: PackedFloat32Array = RDSim.simulate(cfg)
-	print("DNAWorkstation: RD %s → field length %d" % [cfg.get("id", "?"), field.size()])
 	var color_lo := _c(cfg.get("color_lo", [0.15, 0.2, 0.3]))
 	var color_hi := _c(cfg.get("color_hi", [0.9, 0.8, 0.5]))
 	var world_size: float = 1.5
@@ -386,8 +374,6 @@ func _build_rd(cfg: Dictionary) -> Node3D:
 
 func _build_primitive_stack(cfg: Dictionary) -> Node3D:
 	var n := PrimStack.build(cfg)
-	print("DNAWorkstation: PrimStack %s → %d children" % [
-		cfg.get("id", "?"), n.get_child_count() if n else -1])
 	return n
 
 
@@ -412,8 +398,6 @@ func _build_morphology(cfg: Dictionary) -> Node3D:
 	if mesh == null or mesh.get_surface_count() == 0:
 		print("DNAWorkstation: Morphology %s → empty mesh" % cfg.get("id", "?"))
 		return null
-	print("DNAWorkstation: Morphology %s → %d surfaces (%s)" % [
-		cfg.get("id", "?"), mesh.get_surface_count(), str(surface_names)])
 	var root := Node3D.new()
 	var mi := MeshInstance3D.new()
 	mi.mesh = mesh

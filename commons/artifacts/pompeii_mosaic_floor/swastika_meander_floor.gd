@@ -306,6 +306,3 @@ func _build() -> void:
 	#_body.position = Vector3(0.0, 0.0, 0.0)
 	#add_child(_body)
 
-	print("[SwastikaMeanderFloor] Built %dx%d tiles, %dx%d px grid" % [
-		tiles_x, tiles_y, gw_px, gh_px,
-	])

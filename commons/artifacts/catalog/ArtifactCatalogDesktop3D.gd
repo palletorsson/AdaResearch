@@ -51,12 +51,10 @@ var _hud_label: Label = null
 
 
 func _ready():
-	print("ArtifactCatalogDesktop3D: Initializing standalone catalog...")
 
 	# Connect overlay sidebar signal
 	if _overlay:
 		_overlay.artifact_selected.connect(_on_artifact_selected)
-		print("ArtifactCatalogDesktop3D: Connected to overlay artifact_selected signal")
 
 	# Build HUD
 	_build_hud()
@@ -71,7 +69,6 @@ func _ready():
 func _refresh_catalog():
 	# Force load standalone registry
 	var artifacts = ArtifactCatalogDataProvider.get_all_artifacts()
-	print("ArtifactCatalogDesktop3D: Loaded %d artifacts" % artifacts.size())
 
 	# Auto-load artifact from command line: --artifact=<lookup_name>
 	var args: PackedStringArray = OS.get_cmdline_user_args()
@@ -80,7 +77,6 @@ func _refresh_catalog():
 		if arg.begins_with("--artifact="):
 			var lookup: String = arg.substr(11).strip_edges()
 			if not lookup.is_empty():
-				print("ArtifactCatalogDesktop3D: Auto-loading from CLI: %s" % lookup)
 				call_deferred("_load_preview_artifact", lookup)
 				return
 
@@ -96,7 +92,6 @@ func _process(delta: float):
 
 
 func _on_artifact_selected(lookup_name: String):
-	print("ArtifactCatalogDesktop3D: Artifact selected: %s" % lookup_name)
 	_send_to_claude("artifact_selected", lookup_name)
 	_load_preview_artifact(lookup_name)
 
@@ -154,11 +149,6 @@ func _load_preview_artifact(lookup_name: String):
 	# Animate in
 	_animate_preview_in(artifact)
 
-	print("ArtifactCatalogDesktop3D: OK previewing: %s (%s, %.1f units)" % [
-		lookup_name,
-		_current_analysis.get("size_name", "?"),
-		_current_analysis.get("max_dimension", 0.0),
-	])
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -446,7 +436,6 @@ func _send_to_claude(event_type: String, value: String) -> void:
 		"lookup_name": value,
 		"source": "ArtifactCatalogDesktop3D",
 	})
-	print("ClaudeBridge: sending %s -> %s" % [event_type, value])
 	var err := http.request(
 		"http://127.0.0.1:9876/message",
 		["Content-Type: application/json"],

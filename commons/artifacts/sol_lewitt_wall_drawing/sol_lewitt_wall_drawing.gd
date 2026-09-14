@@ -330,4 +330,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[SolLewittWallDrawing] instruction=%s seed=%d" % [instruction, draft_seed])

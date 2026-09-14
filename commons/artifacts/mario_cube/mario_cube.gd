@@ -44,7 +44,6 @@ func _connect_to_next_cubes() -> void:
 	# Fallback: find by class
 	if count == 0:
 		_find_next_cubes_recursive(get_tree().current_scene)
-	print("MarioCube: Connected to %d NextCubes" % count)
 
 ## Recursively searches the scene tree for NextCube nodes to connect to.
 func _find_next_cubes_recursive(node: Node) -> void:
@@ -128,7 +127,6 @@ func _remove_dark_sphere() -> void:
 		tween.tween_property(_dark_sphere_ref, "scale", Vector3.ZERO, 1.2) \
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
 		tween.tween_callback(_dark_sphere_ref.queue_free)
-		print("MarioCube: Removing DarkSphere")
 	else:
 		print("MarioCube: No DarkSphere found")
 

@@ -381,13 +381,6 @@ func _build() -> void:
 	#_body.add_child(col)
 	#add_child(_body)
 
-	print("[CompassRoseFloor] Built 16-point star (%.2fm radius) — %d dark tris, %d light tris, %d accent tris, %d grout tris" % [
-		floor_radius,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		accent_verts.size() / 3,
-		grout_verts.size() / 3,
-	])
 
 
 func _add_ring_grout(verts: PackedVector3Array, radius: float, half_w: float, segments: int) -> void:

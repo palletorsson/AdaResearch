@@ -679,8 +679,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		or build_seed != before_seed)
 	if world_changed:
 		_rebuild_now()
-		print("[OverfittingDemo] Config applied — rebuilt: samples=%d degree=%d" % [
-			sample_count, degree])
 		return
 	if degree != before_degree:
 		if _slider != null and _slider.has_method("set_normalized_value"):

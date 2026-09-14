@@ -665,7 +665,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return  # nothing geometric moved — touch nothing, say nothing
 
 	_rebuild_now()
-	print("[RiemannSphere] Config applied — postulate=%s, infinity=%s" % [postulate, infinity])
 
 
 ## Synchronous. A deferred rebuild would leave the node empty when _auto_ground_artifact

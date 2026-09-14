@@ -497,5 +497,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[FoundObjectAssembler] Config applied — fragments=%d, snap_step=%.3f, seed=%d" % [
-		fragment_count, snap_step, pile_seed])

@@ -98,7 +98,6 @@ func _ready() -> void:
 	_build_composition()
 	_render()
 	_add_lights()
-	print("[PatternCompositor] Rendered %s preset: %dx%d = %d tiles" % [preset_name, grid_width, grid_height, _tile_count])
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("preset"):

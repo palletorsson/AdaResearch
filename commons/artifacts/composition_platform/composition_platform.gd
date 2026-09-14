@@ -203,7 +203,6 @@ func capture() -> Dictionary:
 		_label.text = "%s · captured %d (last: %d primitives)" % [
 			label_prefix, _capture_count, sequence.size(),
 		]
-	print("[composition_platform] captured %d primitives -> %s" % [sequence.size(), _last_path])
 	composition_captured.emit(_last_path, cfg)
 	return cfg
 

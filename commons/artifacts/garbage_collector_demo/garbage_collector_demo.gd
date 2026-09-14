@@ -719,4 +719,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[GarbageCollectorDemo] Config applied — heap=%dx%d, roots=%d" % [heap_cols, heap_rows, root_count])

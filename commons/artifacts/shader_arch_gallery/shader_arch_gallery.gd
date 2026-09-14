@@ -52,7 +52,6 @@ func _ready() -> void:
 	_rng.seed = 42
 	_build_tunnel()
 	_build_lights()
-	print("[ShaderArchGallery] Built %d tile-pattern cubes" % _tile_count)
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("tunnel_width"):

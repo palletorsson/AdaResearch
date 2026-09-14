@@ -122,8 +122,6 @@ func _ready() -> void:
 	_build_capture_camera()
 	_rebake_output()
 
-	print("[PatternMachineB] Built — %dx%d motif, group %s, palette %s" % [
-		motif_size, motif_size, GROUP_NAMES[_group_index], palette])
 
 
 func _process(delta: float) -> void:

@@ -394,5 +394,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[AttentionEconomySim] Config applied — streams=%d, escalation=%.3f" % [
-		stream_count, escalation])

@@ -117,8 +117,6 @@ func _build_tree() -> void:
 	_mmi.material_override = mat
 	add_child(_mmi)
 
-	print("LindenmayerTubeTree: %d segments from '%s' → '%s' ×%d @ %.1f°" % [
-		segments.size(), axiom, rule_F, iterations, angle_deg])
 
 
 func _build_label() -> void:

@@ -327,10 +327,3 @@ func _build() -> void:
 	#_body.position = Vector3(0.0, 0.0, 0.0)
 	#add_child(_body)
 
-	print("[PerspectiveCubesFloor] Built %d cols x %d rows (%d dark, %d med, %d light, %d grout tris)" % [
-		cols, int(ceil(field_h / grid_row_step)) + 2,
-		dark_verts.size() / 3,
-		med_verts.size() / 3,
-		light_verts.size() / 3,
-		grout_verts.size() / 3,
-	])

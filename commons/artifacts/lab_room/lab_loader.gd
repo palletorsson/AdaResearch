@@ -156,7 +156,6 @@ static func load_into(host_mount: Node3D, json_path: String) -> Array:
 		if not skip_collider and instance is Node3D:
 			_attach_auto_collider(instance)
 
-	print("LabLoader: instantiated %d props from %s" % [nodes.size(), json_path])
 	return nodes
 
 

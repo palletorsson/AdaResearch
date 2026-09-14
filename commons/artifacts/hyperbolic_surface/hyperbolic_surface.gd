@@ -678,8 +678,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[HyperbolicSurface] Config applied — postulate=%s, size=%.3f, resolution=%d, curvature=%.3f" % [
-		postulate, size, resolution, curvature])
 
 
 ## Accept an axis value only if it names something this artifact actually builds. A typo

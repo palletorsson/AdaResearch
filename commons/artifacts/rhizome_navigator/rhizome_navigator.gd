@@ -392,5 +392,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[RhizomeNavigator] Config applied — nodes=%d, links=%d, patch=%.2f, seed=%d" % [
-		_points.size(), links_per_node, patch_size, nav_seed])

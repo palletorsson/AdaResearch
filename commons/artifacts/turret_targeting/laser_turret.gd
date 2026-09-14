@@ -270,7 +270,6 @@ func _reset_hunt() -> void:
 	if last_target_position != Vector3.ZERO:
 		var dir = (last_target_position - global_position).normalized()
 		last_target_direction = dir
-	print("[Turret] Reset hunt - looking for targets (kills: %d)" % total_kills)
 
 func _find_target() -> void:
 	var best: Node3D = null

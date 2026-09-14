@@ -149,7 +149,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return  # curation_station's {"emissive": false} lands here: touch nothing.
 
 	_rebuild_now()
-	print("[LiarLoop] Config applied — valuation=%s" % [valuation])
 
 
 ## Accept an axis value only if it names something we actually build.

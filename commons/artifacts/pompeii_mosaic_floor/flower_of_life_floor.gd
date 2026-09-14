@@ -347,10 +347,3 @@ func _build() -> void:
 	#_body.position = Vector3(0, 0.0, 0)
 	#add_child(_body)
 
-	print("[FlowerOfLifeFloor] Built %dx%d grid, %d circles, %d petals (%d dark, %d light, %d terra, %d grout tris)" % [
-		gw, gh, centers.size(), petal_counter,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		terra_verts.size() / 3,
-		grout_verts.size() / 3,
-	])

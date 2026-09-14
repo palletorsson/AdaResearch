@@ -308,9 +308,3 @@ func _build() -> void:
 	#_body.position = Vector3(0, 0.005, 0)
 	#add_child(_body)
 
-	print("[SteppedZigzagFloor] Built %dx%d tiles, %dx%d px grid (%d dark, %d med, %d light tris)" % [
-		tiles_x, tiles_y, gw_px, gh_px,
-		dark_verts.size() / 3,
-		med_verts.size() / 3,
-		light_verts.size() / 3,
-	])

@@ -30,7 +30,6 @@ func _build() -> void:
 	# ── PROGRAM 1: a heavy reactor. Infer needs, then let the needs build the response. ──
 	var reactor_pos := Vector3(-1.5, 0.0, -1.3)
 	var reactor_need := NeedsModel.infer([], "machine", "reactor", {"footprint_cells": 4})
-	print("CAUSED: REACTOR needs = ", reactor_need)
 	var base_y := 0.0
 	if int(reactor_need["load"]) >= 2:                                   # load -> structure: a supported slab
 		add_child(HangarKit.box(reactor_pos + Vector3(0, 0.07, 0), Vector3(1.3, 0.14, 1.1), HangarKit.rams_body(HangarKit.PANEL_TRIM, 0.1)))
@@ -49,7 +48,6 @@ func _build() -> void:
 	var table_pos := Vector3(1.6, 0.0, -0.6)
 	_table(table_pos, 1.2, 0.7, 0.9)
 	var console_need := NeedsModel.infer([], "console", "work screen readout", {"footprint_cells": 1})
-	print("CAUSED: WORK SCREEN needs = ", console_need)
 	var ro := HangarKit.readout("STATUS", ["POWER   ON", "DATA    LINK"], Vector2(0.5, 0.32))
 	ro.position = table_pos + Vector3(0, 1.18, -0.05)
 	add_child(ro)

@@ -143,7 +143,6 @@ func apply_grid_config(config: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[SelfMembershipSet] Config applied — descent=%s, levels=%d" % [descent, levels])
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a

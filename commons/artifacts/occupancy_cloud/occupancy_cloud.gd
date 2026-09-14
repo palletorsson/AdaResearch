@@ -145,7 +145,6 @@ func apply_grid_config(config: Dictionary) -> void:
 	if occupancy == before_occupancy and site == before_site:
 		return
 	_rebuild_now()
-	print("[OccupancyCloud] Config applied — occupancy=%s site=%s" % [occupancy, site])
 
 
 ## Accept a value only if it names something this file actually builds. A typo has to

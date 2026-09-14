@@ -800,8 +800,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			and karger_seed == before_seed and karger_runs == before_runs:
 		return
 	_rebuild_now()
-	print("[BottleneckCut] bottleneck=%s against=%s | pushed=%.1f cut=%.1f found=%.1f of %.1f" % [
-		bottleneck, against, _flow_w, _cut_w, _found_w, _total_w])
 
 
 ## Accept an axis value only if it names something this artifact actually

@@ -283,13 +283,6 @@ func _build() -> void:
 	#_body.position = Vector3(0, 0.005, 0)
 	#add_child(_body)
 
-	print("[MultiZoneCarpetFloor] Built %dx%d px grid (%d dark, %d light, %d terra, %d grout tris)" % [
-		gw_px, gh_px,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		terra_verts.size() / 3,
-		grout_verts.size() / 3,
-	])
 
 
 ## Draw scallop (half-circle) border frame — semicircles alternating dark/light.

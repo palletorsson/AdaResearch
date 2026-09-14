@@ -133,8 +133,6 @@ func _ready() -> void:
 	_build_capture_camera()
 	_update_carpet()
 	_build_control_plate()
-	print("[PatternMachineD] Tile-stamp press built — %dx%d matrix, group %s" % [
-		matrix_size, matrix_size, WallpaperGroups.get_group_name(_current_group)])
 
 
 # ═══════════════════════════════════════════════════════════════════════

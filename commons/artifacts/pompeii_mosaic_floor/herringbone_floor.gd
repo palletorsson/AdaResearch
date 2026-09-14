@@ -337,9 +337,3 @@ func _build() -> void:
 	#_body.position = Vector3(0.0, 0.0, 0.0)  # Centered since mesh is centered
 	#add_child(_body)
 
-	print("[HerringboneFloor] Built %dx%d grid (%d dark tris, %d light tris, %d grout tris)" % [
-		gw, gh,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		grout_verts.size() / 3,
-	])

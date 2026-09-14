@@ -218,9 +218,6 @@ func _build() -> void:
 	#_body.position = Vector3(0, 0.005, 0)
 	#add_child(_body)
 
-	print("[BraidMeanderFloor] Built %dx%d grid, border=%d, band=%d, crossings=%d" % [
-		gw, gh, d, b, crossing_number,
-	])
 
 
 # ──────────────────────────────────────────────────────────────────────────────

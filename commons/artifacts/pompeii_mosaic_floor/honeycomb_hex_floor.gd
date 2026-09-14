@@ -254,12 +254,6 @@ func _build() -> void:
 	#_body.position = Vector3(0, 0.0, 0)
 	#add_child(_body)
 
-	print("[HoneycombHexFloor] Built hex grid (%d dark tris, %d light tris, %d terra tris, %d grout tris)" % [
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		terra_verts.size() / 3,
-		grout_verts.size() / 3,
-	])
 
 
 func _add_rect(verts: PackedVector3Array, x: float, z: float, w: float, h: float) -> PackedVector3Array:

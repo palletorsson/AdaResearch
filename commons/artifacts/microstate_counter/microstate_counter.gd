@@ -127,7 +127,6 @@ func apply_grid_config(config: Dictionary) -> void:
 	if macrostate == before_m:
 		return
 	_rebuild_now()
-	print("[MicrostateCounter] Config applied — macrostate=%s" % [macrostate])
 
 
 ## Accept an axis value only if it names something we actually build.
