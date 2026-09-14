@@ -43,7 +43,7 @@ grid maps — §5).
 | **Sequence card (staged)** | menu → `_enter_museum(sequence)` | that chapter's first hall | same path |
 | **Direct dev boot** | run `res://commons/scenes/endless_museum.tscn` (F6 in the editor, or `--path . --xr-mode off res://commons/scenes/endless_museum.tscn`) | the scene's Inspector `start_chapter` / `start_map` | no staging, no menu; what probes and most proof shots use |
 | **Test lanes** | `--em-autostart` (clicks New Game after 2.5 s), `--em-die`, `--em-shot-*`, `--em-autopilot`, `--em-map`/`--em-chapter`; the FILE `user://em_autolaunch.txt` skips the menu entirely and loads the museum after 5 s | as asked | see `project_desktop_test_lanes` memory |
-| **Reload** | F6, J, L, H, a watched file changing (§6.5) | depends on the trigger — only H returns to the hall (§6.5) | `reload_current_scene`; under staging that reloads `vr_staging.tscn`, i.e. the menu [I] |
+| **Reload** | F6, J, L, H, a watched file changing (§6.5) | H, F6 and the watchers: the hall you were in; J/L: the hall you picked | `EM::_reload_museum` — through staging's `load_scene` when there is staging |
 | **Return after death** | `death_scene.gd::_on_continue` → staging loads `endless_museum_staged.tscn` | the hall you died in | a brand-new museum instance (§6.4) |
 
 Comparing boot numbers across lanes is only fair when the first hall is the same:
@@ -272,22 +272,29 @@ dealer places the chapter's pearls (`EM::_deal_from_plan`).
 
 ### 6.5 Reloads (all rebuild from scratch)
 What a reload keeps is decided by what it writes to `ada_run/em_control.json` and by the
-start-chapter precedence in `EM::_start_at_chapter`: **flag → resume (`resume_eye` present) →
-menu statics → Inspector `start_chapter` → `em_control.json`**. Both shipped scenes set an
-Inspector chapter (`endless_museum.tscn`: fractals; `endless_museum_staged.tscn`: primitives).
+start-chapter precedence in `EM::_start_at_chapter`: **flag → resume (`resume_eye` present) or
+travel (`travel: 1`, one-shot) → menu statics → Inspector `start_chapter` →
+`em_control.json`**. Both shipped scenes set an Inspector chapter (`endless_museum.tscn`:
+fractals; `endless_museum_staged.tscn`: primitives), which is why a door that writes only the
+control file would land where the scene says.
 
-| Trigger | Function | Writes | Where you land (by reading the code) |
+| Trigger | Function | Writes | Where you land |
 |---|---|---|---|
-| H (doll house ↔ walk) | `EM::_doll_toggle` | chapter, `_resume_hall`, eye, yaw, gate, doll house | **the same hall and spot** — `EM::_follow_resume` builds forward up to 12 halls to reach it |
-| F6 | `EM::_follow_reload` | chapter, `first_map ""`, eye, yaw, gate, doll house | the **chapter's** start (the Inspector map if it is that chapter, else its first pearl), at the eye's local z — not the hall you were in |
+| H (doll house ↔ walk) | `EM::_doll_toggle` | `EM::_resume_doc`: chapter, `first_map` + `_resume_hall` (the hall), eye, yaw, gate, doll house flipped | the same hall and spot — `EM::_follow_resume` builds forward up to 12 halls to reach it |
+| F6 | `EM::_follow_reload` | the same `EM::_resume_doc`, doll house kept | the same hall and spot |
 | the plan file changed (2 s poll, 2.5 s settle) | `EM::_follow_check` → `EM::_follow_reload` | same as F6 | same as F6 |
 | rulings or the current hall's `map_data.json` changed **by another writer** (1 s poll) | `EM::_edit_watch` → `EM::_follow_reload` | same as F6 | same as F6. The museum's own ruling saves are recorded by `EM::_edit_watch_own_write` and do not rebuild; its own map writes (paint, passage, config) do, on purpose |
-| J (jump list), L (spine strip) | `EM::_jump_go`, `EM::_spine_travel` | chapter + map, no `resume_eye` | **the Inspector's chapter** — the jump target ranks below it. Looks like a bug; found by reading, not run |
-| death | GameManager → death scene | nothing (statics `menu_chapter`/`menu_map`) | the hall you died in, in a new instance |
+| J (jump list), L (spine strip) | `EM::_jump_go`, `EM::_spine_travel` | chapter + map + `travel: 1` | the target hall's start (its pearl's head hall); `travel` is spent on arrival |
+| death | GameManager → death scene | nothing (statics `menu_chapter`/`menu_map`) | the hall you died in, at its arrival point, in a new instance |
 
-Every reload except death flushes unsaved rulings first (`EM::_edit_flush`). Under XR
-staging (the shipped desktop app) `reload_current_scene` reloads `vr_staging.tscn`, i.e. the
-menu [I]. VR has no reload path except death.
+Every reload goes through `EM::_reload_museum`: under XR Tools staging (the shipped desktop app
+and the Quest) it asks staging to `load_scene` the museum's own scene, as the death scene's
+continue does; without staging it reloads the current scene. Before 2026-09-14 every door
+called `reload_current_scene`, which under staging reloaded `vr_staging.tscn` — the menu.
+A hall without a map (a template hall) cannot be named, so F6 from one returns to its
+chapter's start. Every reload except death flushes unsaved rulings first (`EM::_edit_flush`).
+VR has no reload path except death. Tested by `commons/testing/probe_reload_resume.gd` (direct
+lane: H, F6, J, L; staged lane: F6, J).
 
 ### 6.6 Input (desktop)
 J jump list · F7 environment tier · F6 follow reload · H walk → iso → plan → walk · L spine

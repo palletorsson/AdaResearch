@@ -2628,14 +2628,30 @@ func _start_at_chapter() -> void:
 	var ctl0: String = _shipped(EM_CONTROL)
 	if FileAccess.file_exists(ctl0):
 		var pv: Variant = JSON.parse_string(FileAccess.get_file_as_string(ctl0))
-		if pv is Dictionary and (pv as Dictionary).get("resume_eye") != null:
+		# A TRAVEL (J, the spine strip) ranks with the resume (2026-09-14). It wrote only
+		# chapter and map, and the control file ranks BELOW the Inspector — both shipped
+		# scenes set start_chapter — so every jump landed where the scene said, not where
+		# the visitor asked (commons/testing/probe_reload_resume.gd). One-shot: spent here.
+		var travel: bool = pv is Dictionary and int((pv as Dictionary).get("travel", 0)) == 1
+		if travel:
+			var spent: Dictionary = (pv as Dictionary).duplicate()
+			spent.erase("travel")
+			var fw := FileAccess.open(ctl0, FileAccess.WRITE)
+			if fw != null:
+				fw.store_string(JSON.stringify(spent, " "))
+				fw.close()
+		if pv is Dictionary and ((pv as Dictionary).get("resume_eye") != null or travel):
 			var pd0: Dictionary = pv
 			if String(pd0.get("first_chapter", "")) != "":
 				_first_chapter = String(pd0["first_chapter"])
 				resuming = true
 			if String(pd0.get("first_map", "")) != "":
 				start_map = String(pd0["first_map"])
-			if resuming:
+			elif travel:
+				start_map = ""      # a travel to a chapter opens at its first pearl, not the Inspector's map
+			if resuming and travel:
+				print("[em-jump] arriving at %s / %s" % [_first_chapter, start_map if start_map != "" else "its first pearl"])
+			elif resuming:
 				print("[em-resume] the view changed inside %s / %s — the walk reopens there, not at the door" % [
 					_first_chapter, start_map])
 	# THE MENU'S VOICE, above the Inspector and below everything else. It has to
@@ -17390,6 +17406,7 @@ func _spine_travel(idx: int) -> void:
 		"_readme": "the spine strip's voice: which chapter and map the museum opens at",
 		"first_chapter": String(target.get("chapter", "")),
 		"first_map": String(target.get("map", "")),
+		"travel": 1,     # one-shot: outranks the scene's Inspector chapter (EM::_start_at_chapter)
 		"dollhouse": 1 if _dollhouse else 0,
 		"grid_pack": 1 if _grid_pack else 0,
 	}, " "))
@@ -17397,7 +17414,7 @@ func _spine_travel(idx: int) -> void:
 	_edit_flush()
 	print("[em-spine] travelling to %s · %s" % [target.get("chapter"), target.get("pearl")])
 	if get_tree().current_scene != null:
-		get_tree().reload_current_scene()
+		_reload_museum()
 
 
 ## THE GAG (2026-08-21). In the walk the artifacts may listen to the
@@ -17683,6 +17700,7 @@ func _jump_go(idx: int) -> void:
 		"_readme": "the menu's / the jump's voice: which chapter and map the museum opens at",
 		"first_chapter": String(target.get("chapter", "")),
 		"first_map": String(target.get("map", "")),
+		"travel": 1,     # one-shot: outranks the scene's Inspector chapter (EM::_start_at_chapter)
 		# the ladder holds through a travel: a jump made from the doll house
 		# lands in the doll house
 		"dollhouse": 1 if _dollhouse else 0,
@@ -17691,7 +17709,7 @@ func _jump_go(idx: int) -> void:
 	f.close()
 	_edit_flush()
 	print("[em-jump] travelling to %s · %s" % [target.get("chapter"), target.get("map")])
-	get_tree().reload_current_scene()
+	_reload_museum()
 
 
 ## The plan changed on disk. Wait until the write settles (editors fold and
@@ -17725,35 +17743,36 @@ func _follow_check() -> void:
 func _follow_reload() -> void:
 	if get_tree().current_scene == null:
 		return   # a probe added the museum by hand; reloading would tear its harness
-	var ch := ""
-	var z_local: float = 0.0
-	var eye_z: float = _eye_pos().z
-	for sv in _segments:
-		var sd: Dictionary = sv
-		if eye_z >= float(sd["z0"]) and eye_z < float(sd["z1"]):
-			var sn: Node3D = _node_or_null(sd.get("node"))
-			if sn != null and sn.has_meta("em_chapter"):
-				ch = String(sn.get_meta("em_chapter"))
-			z_local = eye_z - float(sd["z0"])
-			break
 	var f := FileAccess.open(EM_CONTROL, FileAccess.WRITE)
 	if f == null:
 		return
-	var doc := {
-		"_readme": "the menu's / the jump's / the follow's voice: which chapter the museum opens at",
-		"first_chapter": ch,
-		"first_map": "",
-		"dollhouse": 1 if _dollhouse else 0,
-		"grid_pack": 1 if _grid_pack else 0,
-		"gate_open": 1 if (_gate_t >= 0.0 or _gate.is_empty()) else 0,
-	}
-	if _player != null:
-		doc["resume_eye"] = [_player.position.x, _player.position.y, z_local]
-		doc["resume_yaw"] = _yaw   # the walker's heading is the _yaw var, not the body
+	# the same hall-naming document the doll-house toggle writes, the doll house kept as it is
+	var doc := _resume_doc(1 if _dollhouse else 0)
 	f.store_string(JSON.stringify(doc, " "))
 	f.close()
 	_edit_flush()
-	print("[em-follow] the plan changed under the museum — rebuilding around the eye (chapter %s, z %.1f local)" % [ch, z_local])
+	var eye: Variant = doc.get("resume_eye")
+	print("[em-follow] the plan changed under the museum — rebuilding around the eye (chapter %s, hall %s, z %.1f local)" % [
+		doc.get("first_chapter", ""), doc.get("first_map", ""), float((eye as Array)[2]) if eye is Array else 0.0])
+	_reload_museum()
+
+
+## A REBUILD STAYS IN THE MUSEUM (2026-09-14). Under XR Tools staging — the shipped
+## desktop app and the Quest — the tree's current_scene is the staging root, so
+## get_tree().reload_current_scene() reloaded vr_staging.tscn: the main menu. F6, H, J and L
+## all dropped the visitor at the menu; the probe only came back because --em-autostart
+## clicked New Game again. Staging loads the museum's own scene instead, the way the death
+## scene's continue does. Without staging (a direct dev boot) the scene reloads as before.
+func _reload_museum() -> void:
+	var n: Node = get_parent()
+	while n != null:
+		if n.has_method("load_scene") and n.has_signal("scene_loaded"):
+			var path: String = String(n.get("current_scene_path"))
+			if path != "":
+				n.call("load_scene", path)
+				return
+			break
+		n = n.get_parent()
 	get_tree().reload_current_scene()
 
 
@@ -17791,6 +17810,15 @@ func _notification(what: int) -> void:
 ## the door. Now the hall is named, and an eye outside every segment takes the
 ## NEAREST one instead of nothing.
 func _toggle_doc() -> Dictionary:
+	return _resume_doc(0 if _dollhouse else 1)
+
+
+## What a rebuild around the eye writes: the chapter, the HALL (first_map + _resume_hall)
+## and the eye's place in it. H flips the doll house; F6 and the follow keep it
+## (2026-09-14, Palle: "fix the reload and jump bugs" — F6 used to write the chapter with
+## first_map "", so a reload from the third hall of fractals came back at Fractal_Recursion,
+## the chapter's head; commons/testing/probe_reload_resume.gd measured it).
+func _resume_doc(dollhouse_after: int) -> Dictionary:
 	var ch := ""
 	var mp := ""
 	var z_local: float = 0.0
@@ -17821,7 +17849,7 @@ func _toggle_doc() -> Dictionary:
 		"first_chapter": ch,
 		"first_map": mp,
 		"_resume_hall": mp,
-		"dollhouse": 0 if _dollhouse else 1,
+		"dollhouse": dollhouse_after,
 		"grid_pack": 1 if _grid_pack else 0,
 		"gate_open": 1 if (_gate_t >= 0.0 or _gate.is_empty()) else 0,
 		"resume_eye": [_player.position.x, _player.position.y, z_local] if _player != null else null,
@@ -17839,7 +17867,7 @@ func _doll_toggle() -> void:
 	f.close()
 	_edit_flush()
 	print("[em-doll] %s — rebuilding around the eye" % ("back to the walk" if _dollhouse else "up into the doll house"))
-	get_tree().reload_current_scene()
+	_reload_museum()
 
 
 ## The other side of the follow: stand the visitor at the nearest walkable
