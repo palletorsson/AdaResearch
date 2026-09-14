@@ -160,7 +160,6 @@ func _find_and_connect_to_uvac():
 	for child in parent.get_children():
 		if child.has_signal("sound_played"):
 			child.connect("sound_played", _on_sound_played)
-			print("VRAudioMonitor: Connected to UVAC")
 			break
 
 func _on_sound_played(_stream):

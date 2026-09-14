@@ -107,7 +107,6 @@ func _ready() -> void:
 	# Create visual indicator - always create it (even in editor for preview)
 	if show_indicator:
 		_create_indicator()
-		print("AttachmentPoint: Created indicator for face %d" % face)
 
 	# Add to group for easy finding
 	add_to_group("attachment_points")
@@ -122,7 +121,6 @@ func _ready() -> void:
 	# Set initial position based on face
 	_update_position_for_face()
 
-	print("AttachmentPoint: Ready at position %v (face %d)" % [position, face])
 
 
 func _process(_delta: float) -> void:

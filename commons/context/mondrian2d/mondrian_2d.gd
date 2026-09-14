@@ -80,11 +80,9 @@ func setup_pattern_timer():
 	pattern_timer.timeout.connect(_on_pattern_timer_timeout)
 	add_child(pattern_timer)
 	pattern_timer.start()
-	print("Pattern change timer started - changing every ", pattern_change_interval, " seconds")
 
 func _on_pattern_timer_timeout():
 	"""Called every time the pattern timer expires"""
-	print("Timer expired - generating new pattern automatically")
 	generate_new_pattern()
 	# Force immediate update for 3D context
 	force_immediate_update()
@@ -101,20 +99,17 @@ func start_auto_change():
 		setup_pattern_timer()
 	else:
 		pattern_timer.start()
-	print("Auto pattern change started")
 
 func stop_auto_change():
 	"""Stop automatic pattern changes"""
 	if pattern_timer:
 		pattern_timer.stop()
-	print("Auto pattern change stopped")
 
 func set_change_interval(new_interval: float):
 	"""Change the interval between pattern changes"""
 	pattern_change_interval = new_interval
 	if pattern_timer:
 		pattern_timer.wait_time = new_interval
-		print("Pattern change interval set to ", new_interval, " seconds")
 
 func get_timer_status() -> Dictionary:
 	"""Get current timer status for debugging"""
@@ -129,7 +124,6 @@ func get_timer_status() -> Dictionary:
 # Simple manual trigger method
 func change_pattern_now():
 	"""Manually trigger a pattern change immediately"""
-	print("Manual pattern change triggered")
 	generate_new_pattern()
 	force_immediate_update()
 	# Reset timer so next automatic change happens in full interval
@@ -352,7 +346,6 @@ func generate_new_pattern():
 	# Emit signal for pattern change
 	pattern_changed.emit()
 	
-	print("Generated new Mondrian pattern")
 
 func _force_viewport_update():
 	"""Force the SubViewport to update and refresh the 3D texture"""
@@ -367,7 +360,6 @@ func _force_viewport_update():
 			parent.size = Vector2(current_size.x + 1, current_size.y + 1)
 			await get_tree().process_frame
 			parent.size = current_size
-			print("Forced SubViewport update")
 			break
 		parent = parent.get_parent()
 	
@@ -387,7 +379,6 @@ func _force_viewport_update():
 		await get_tree().process_frame
 		subviewport.size = current_size
 		
-		print("Forced SubViewport update via direct path")
 
 # Public method to force a pattern update (can be called from 3D context)
 func force_pattern_update():
@@ -406,7 +397,6 @@ func force_pattern_update():
 			parent.size = parent.size
 			parent.update_mode = SubViewport.UPDATE_ALWAYS
 			
-			print("Forced comprehensive SubViewport update")
 			break
 		parent = parent.get_parent()
 	
@@ -426,7 +416,6 @@ func force_pattern_update():
 		await get_tree().process_frame
 		subviewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 		
-		print("Forced aggressive SubViewport update via direct access")
 
 # Method to force immediate update without waiting
 func force_immediate_update():
@@ -446,12 +435,10 @@ func force_immediate_update():
 		# Force render target update
 		subviewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 		
-		print("Forced immediate SubViewport update")
 
 # Public method that can be called from 3D context
 func manual_pattern_change():
 	"""Public method to manually trigger a pattern change - useful for debugging"""
-	print("Manual pattern change triggered")
 	generate_new_pattern()
 	force_immediate_update()
 	pattern_changed.emit()
@@ -507,11 +494,9 @@ func generate_random_colored_sections():
 # Event handlers for grab/drop functionality
 func _on_grab_cube_grabbed():
 	"""Called when the Mondrian is grabbed"""
-	print("Mondrian grabbed")
 
 func _on_grab_cube_dropped():
 	"""Called when the Mondrian is dropped"""
-	print("Mondrian dropped - generating new pattern")
 	# Use the more robust update method
 	force_pattern_update()
 	# Also force immediate update for better responsiveness

@@ -44,8 +44,6 @@ var board_meta: Dictionary = {}
 @onready var navigation_buttons = $MarginContainer/HBoxContainer/LeftPanel/NavigationButtons
 
 func _ready():
-	print("[UniversalInfoBoard] _ready() called - board_id: %s, display_mode: %d, auto_load: %s" % [board_id, display_mode, auto_load_on_ready])
-	print("[UniversalInfoBoard] text_container path check: %s" % text_container)
 
 	# Setup UI first (connect buttons, etc.)
 	setup_ui()
@@ -58,7 +56,6 @@ func _ready():
 				else:
 					push_error("UniversalInfoBoard: SINGLE_SLIDE mode requires slide_id to be set")
 			DisplayMode.SINGLE_BOARD:
-				print("[UniversalInfoBoard] Loading board: %s" % board_id)
 				load_board(board_id)
 			DisplayMode.ALL_SLIDES:
 				load_all_slides()
@@ -66,7 +63,6 @@ func _ready():
 		# Show the initial page
 		update_page()
 
-	print("[UniversalInfoBoard] _ready() complete")
 
 # PUBLIC API - Load a single slide by ID (no navigation)
 func load_slide(new_slide_id: String) -> bool:
@@ -92,7 +88,6 @@ func load_slide(new_slide_id: String) -> bool:
 	else:
 		board_meta = {"title": "InfoBoard", "subtitle": ""}
 
-	print("UniversalInfoBoard: Loaded slide '%s' from board '%s'" % [slide_id, parent_board_id])
 
 	# Show the single slide
 	current_page = 0
@@ -114,7 +109,6 @@ func load_board(new_board_id: String) -> bool:
 		show_error_content()
 		return false
 
-	print("UniversalInfoBoard: Loaded '%s - %s' (%d pages)" % [board_meta.title, board_meta.subtitle, total_pages])
 
 	# Reset to first page
 	current_page = 0
@@ -139,7 +133,6 @@ func load_all_slides() -> bool:
 		"subtitle": "Complete InfoBoard Collection"
 	}
 
-	print("UniversalInfoBoard: Loaded all slides (%d total)" % total_pages)
 
 	# Reset to first page
 	current_page = 0
@@ -173,7 +166,6 @@ func _process(delta):
 			vis_control.queue_redraw()
 
 func update_page():
-	print("[UniversalInfoBoard] update_page() called - current_page: %d, total: %d" % [current_page, total_pages])
 
 	if page_content.is_empty():
 		print("[UniversalInfoBoard] ERROR: page_content is empty!")
@@ -183,7 +175,6 @@ func update_page():
 		print("[UniversalInfoBoard] ERROR: text_container is null!")
 		return
 
-	print("[UniversalInfoBoard] text_container info - visible: %s, size: %s, child_count: %d" % [text_container.visible, text_container.size, text_container.get_child_count()])
 
 	# Clear previous content
 	for child in text_container.get_children():
@@ -207,7 +198,6 @@ func update_page():
 
 	# Build display text from structured page data
 	var text_lines: Array = _build_text_lines(current_page_data)
-	print("[UniversalInfoBoard] Text lines count: %d" % text_lines.size())
 
 	for entry in text_lines:
 		var entry_type = "paragraph"
@@ -228,7 +218,6 @@ func update_page():
 			text_container.add_child(spacer)
 			continue
 
-		print("[UniversalInfoBoard] Adding text (%s): %s" % [entry_type, entry_text.substr(0, min(60, entry_text.length()))])
 
 		var label = Label.new()
 		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL

@@ -70,8 +70,6 @@ const PRIDE_COLORS = [
 ]
 
 func _ready():
-	if debug_output:
-		print("RockFactory: _ready() called, auto_generate=%s, number_of_rocks=%d" % [auto_generate, number_of_rocks])
 	if auto_generate:
 		generate_rocks()
 
@@ -82,23 +80,15 @@ func apply_grid_config(config: Dictionary):
 
 	if config.has("number_of_rocks"):
 		number_of_rocks = int(config["number_of_rocks"])
-		if debug_output:
-			print("RockFactory: Config set number_of_rocks = %d" % number_of_rocks)
 
 	if config.has("generation_seed"):
 		generation_seed = int(config["generation_seed"])
-		if debug_output:
-			print("RockFactory: Config set generation_seed = %d" % generation_seed)
 
 	if config.has("spawn_mode"):
 		spawn_mode = int(config["spawn_mode"])
-		if debug_output:
-			print("RockFactory: Config set spawn_mode = %d" % spawn_mode)
 
 	if config.has("container_height"):
 		container_height = float(config["container_height"])
-		if debug_output:
-			print("RockFactory: Config set container_height = %.2f" % container_height)
 
 	if config.has("spawn_area_x"):
 		spawn_area.x = float(config["spawn_area_x"])
@@ -115,19 +105,13 @@ func apply_grid_config(config: Dictionary):
 	if config.has("use_pride_colors"):
 		var val = config["use_pride_colors"]
 		use_pride_colors = val if val is bool else (val == "true")
-		if debug_output:
-			print("RockFactory: Config set use_pride_colors = %s" % str(use_pride_colors))
 
 	if config.has("enable_gravity"):
 		var val = config["enable_gravity"]
 		enable_gravity = val if val is bool else (val == "true")
 		make_rocks_static = not enable_gravity
-		if debug_output:
-			print("RockFactory: Config set enable_gravity = %s" % str(enable_gravity))
 
 	# Generate with new configuration
-	if debug_output:
-		print("RockFactory: Generating rocks with grid config")
 	generate_rocks()
 
 func generate_rocks():
@@ -144,15 +128,11 @@ func generate_rocks():
 	# Load rock scene
 	rock_scene = preload("res://commons/primitives/proceduralrock/proceduralrock.tscn")
 
-	if debug_output:
-		print("RockFactory: Generating %d rocks in %s mode" % [number_of_rocks, SpawnMode.keys()[spawn_mode]])
 
 	# Generate rocks based on spawn mode
 	for i in range(number_of_rocks):
 		_create_rock(i)
 
-	if debug_output:
-		print("RockFactory: Generated %d rocks" % rocks.size())
 
 func _create_rock(index: int):
 	"""Create a single rock with randomized properties"""
@@ -200,8 +180,6 @@ func _create_rock(index: int):
 			static_body.queue_free()
 
 		rocks.append(rigid_body)
-		if debug_output:
-			print("RockFactory: Created dynamic rock %d" % index)
 	else:
 		# Create static rock (original simple approach)
 		var rock = rock_scene.instantiate()
@@ -223,8 +201,6 @@ func _create_rock(index: int):
 		rock.generate_rocks()
 
 		rocks.append(rock)
-		if debug_output:
-			print("RockFactory: Created static rock %d" % index)
 
 func _get_spawn_position(index: int) -> Vector3:
 	"""Calculate spawn position based on spawn mode"""

@@ -211,8 +211,6 @@ func _validate_segment_ports(segment: Node3D, label: String) -> bool:
 		push_warning("⚠️ %s: Not terminal but has no output ports!" % label)
 		valid = false
 	
-	if valid:
-		print("✓ %s: %d ports OK" % [label, ports.size()])
 	
 	return valid
 

@@ -102,7 +102,6 @@ func place_sphere(position: Vector3) -> Node3D:
 # Utility function to instance the sphere from PackedScene and scale it down
 func create_sphere_instance() -> Node3D:
 	if not sphere_scene:
-		print("Sphere scene not assigned")
 		return null
 	
 	# Instance the sphere

@@ -241,4 +241,3 @@ func _connect_to_sliders():
 			slider.lambda_changed.connect(on_lambda_changed)
 		if slider.has_signal("phi_changed"):
 			slider.phi_changed.connect(on_phi_changed)
-	print("QFEPOscilloscope: Connected to sliders")

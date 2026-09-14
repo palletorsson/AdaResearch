@@ -156,7 +156,6 @@ func _build() -> void:
 	mmi.multimesh = mm
 	mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 	add_child(mmi)
-	print("  [pixel_icon] %s — %d voxels, 1 draw call" % [icon_shape, transforms.size()])
 
 
 func _make_cube_mesh(side: float, depth: float) -> Mesh:

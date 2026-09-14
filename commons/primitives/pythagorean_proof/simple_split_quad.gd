@@ -14,9 +14,6 @@ var pink_color: Color = Color.DEEP_PINK
 
 func _ready():
 	create_split_quad()
-	print("Simple Split Quad created!")
-	print("Black triangle + Pink triangle = Perfect quad alignment")
-	print("Static triangles - Black and Pink with Purple outlines")
 
 func create_split_quad():
 	# Create the split quad using two triangles
@@ -147,7 +144,6 @@ func _input(event):
 				# Recreate the split quad
 				remove_triangles()
 				create_split_quad()
-				print("Split quad recreated with purple outlines!")
 			KEY_SPACE:
 				# Toggle visibility
 				toggle_triangle_visibility()

@@ -195,7 +195,6 @@ func _setup_chair_targets() -> void:
 	back.scale_tolerance = 0.03
 	piece_targets.append(back)
 
-	print("FurnitureAssemblyPuzzle: Setup %d chair targets" % piece_targets.size())
 
 
 ## Stool: Simple seat + legs (5 pieces)
@@ -287,7 +286,6 @@ func _setup_shelf_targets() -> void:
 	shelf.scale_tolerance = 0.04
 	piece_targets.append(shelf)
 
-	print("FurnitureAssemblyPuzzle: Setup %d simple shelf targets" % piece_targets.size())
 
 
 ## Spawn pieces at workbench positions
@@ -328,7 +326,6 @@ func _spawn_pieces() -> void:
 		register_piece(target.piece_id, piece)
 		furniture_pieces.append(piece)
 
-		print("FurnitureAssemblyPuzzle: Spawned piece '%s' at %v" % [target.piece_id, spawn_pos])
 
 	# Spawn extra pieces (spares in case some fall)
 	for i in range(extra_pieces):
@@ -352,7 +349,6 @@ func _spawn_pieces() -> void:
 		register_piece("extra_%d" % i, piece)
 		furniture_pieces.append(piece)
 
-		print("FurnitureAssemblyPuzzle: Spawned extra piece 'extra_%d' at %v" % [i, spawn_pos])
 
 
 ## Calculate where to spawn pieces (laid out nicely)
@@ -373,7 +369,6 @@ func _calculate_spawn_positions(total_count: int = -1) -> void:
 ## Called when a final wood piece is created (from base class signal)
 func _on_final_piece_created(piece: Node3D, target_id: String) -> void:
 	final_pieces.append(piece)
-	print("FurnitureAssemblyPuzzle: Tracking final piece for '%s' (total: %d)" % [target_id, final_pieces.size()])
 
 
 ## Override completion to add grow animation
@@ -388,7 +383,6 @@ func _complete_puzzle() -> void:
 
 ## Make assembled furniture into a grabbable object - clean transition
 func _grow_to_final_size() -> void:
-	print("FurnitureAssemblyPuzzle: Spawning reward...")
 
 	# Calculate center of assembled pieces for positioning reward
 	var center = Vector3.ZERO
@@ -442,12 +436,10 @@ func _grow_to_final_size() -> void:
 	furniture_assembled.emit()
 	furniture_grown.emit(assembled_furniture.global_position)
 
-	print("FurnitureAssemblyPuzzle: Reward chair spawned at %v (scale: %.1f)" % [assembled_furniture.global_position, reward_scale])
 
 
 ## Remove all remaining cubes that weren't used
 func _remove_remaining_cubes() -> void:
-	print("FurnitureAssemblyPuzzle: Removing %d remaining cubes..." % furniture_pieces.size())
 	for piece in furniture_pieces:
 		if is_instance_valid(piece):
 			piece.queue_free()
@@ -504,7 +496,6 @@ func _play_completion_sound() -> void:
 ## Apply configuration from grid system / artifact registry
 ## Accepts explicit names: "chair", "stool", "table", "shelf" or numbers
 func apply_grid_config(config_data: Dictionary) -> void:
-	print("FurnitureAssemblyPuzzle: Applying config: %s" % config_data)
 
 	# AXIS — read BEFORE the furniture_type branch so a token that sets both rebuilds once.
 	# An unknown word keeps the current value rather than silently building a different puzzle.
@@ -585,7 +576,6 @@ func _rebuild_for_new_type() -> void:
 	if auto_spawn_pieces and piece_scene:
 		call_deferred("_spawn_pieces")
 
-	print("FurnitureAssemblyPuzzle: Rebuilt for %s" % get_furniture_type_name())
 
 
 # ── TELL ─────────────────────────────────────────────────────────────────────

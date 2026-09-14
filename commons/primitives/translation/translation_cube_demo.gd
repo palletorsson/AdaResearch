@@ -319,7 +319,6 @@ func _create_constrained_door(
 	return door
 
 func _on_door_goal_reached(door_name: String) -> void:
-	print("Translation Demo: %s opened!" % door_name)
 	_check_both_complete()
 
 func _check_both_complete() -> void:
@@ -331,7 +330,6 @@ func _check_both_complete() -> void:
 
 	if left_done and right_done:
 		_both_reached = true
-		print("Translation Demo: Both doors open! Puzzle complete!")
 
 
 # ── the guide ─────────────────────────────────────────────────────────

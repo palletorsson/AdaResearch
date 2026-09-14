@@ -84,9 +84,6 @@ func load_panels() -> void:
 	# Defer wiring: wait for VRPanelInstance content injection (which awaits 1 frame)
 	_wire_operations.call_deferred()
 
-	print("PanelBridgeLoader: Loaded %d panels (%s) from '%s'" % [
-		panel_instances.size(), page_type, layout_json_path
-	])
 
 
 ## Load panels for loom_simulator page — uses DraftDataStore.
@@ -240,9 +237,6 @@ func _wire_operations() -> void:
 	if data_store:
 		for root in roots:
 			_wire_data_store_in_tree(root)
-		print("PanelBridgeLoader: Wired operations bars to DraftDataStore across %d panels" % roots.size())
-	else:
-		print("PanelBridgeLoader: Wired operations bars across %d panels" % roots.size())
 
 
 ## Recursively find OperationsBarWidgets and set their data_store reference.

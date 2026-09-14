@@ -153,7 +153,3 @@ func rebuild() -> void:
 		_mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	_mmi.gi_mode = GeometryInstance3D.GI_MODE_DISABLED
 	add_child(_mmi)
-	print("[SDFVoxelPreview] inside=%d emitted=%d (%.0f%% reduction)" % [
-		stats_inside, stats_emitted,
-		0.0 if stats_inside == 0 else 100.0 * (1.0 - float(stats_emitted) / float(stats_inside))
-	])

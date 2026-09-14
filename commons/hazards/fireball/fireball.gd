@@ -45,7 +45,6 @@ func _ready():
 	collision_layer = 16  # Hazard layer
 	collision_mask = 1 | 2  # World and player layers
 	
-	print("Fireball launched with speed: ", speed)
 
 func _create_fireball_visual():
 	# Create fireball mesh
@@ -136,17 +135,14 @@ func _on_body_entered(body):
 	if has_exploded:
 		return
 	
-	print("Fireball hit: ", body.name)
 	
 	# Check if it's the player or a damageable object
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
 		emit_signal("fireball_hit", body, damage)
-		print("Dealt ", damage, " damage to ", body.name)
 	elif body.has_method("apply_health_damage"):
 		body.apply_health_damage(damage)
 		emit_signal("fireball_hit", body, damage)
-		print("Applied health damage to ", body.name)
 	elif "player" in body.name.to_lower() or body.is_in_group("player"):
 		# Try multiple ways to deal damage to player
 		if body.has_signal("health_changed"):

@@ -95,7 +95,6 @@ const PROGRAM_MAP = {
 
 static func export_song(genre_id: String, output_path: String, params: Dictionary = {}) -> bool:
 	"""Export a full song's patterns to MIDI file"""
-	print("MidiExporter: Exporting %s to %s" % [genre_id, output_path])
 	
 	var bpm = params.get("bpm", _get_default_bpm(genre_id))
 	var num_bars = params.get("bars", 4)  # Default to 4 bars
@@ -570,7 +569,6 @@ static func export_from_capture(capture: MidiCapture, output_path: String) -> bo
 		push_error("MidiExporter: Cannot export — capture is null or has no tracks")
 		return false
 
-	print("MidiExporter: Exporting capture '%s' (%d tracks) to %s" % [capture.song_name, capture.tracks.size(), output_path])
 	var midi_data = _build_midi_file_from_capture(capture)
 	return _save_midi_file(midi_data, output_path)
 

@@ -53,7 +53,6 @@ func _register_base_commands() -> void:
 	_command_handlers["up"] = _cmd_up
 	_command_handlers["d"] = _cmd_down
 	_command_handlers["down"] = _cmd_down
-	print("TurtlePipeBase: Registered %d commands: %s" % [_command_handlers.size(), _command_handlers.keys()])
 
 ## Override in subclass to register type-specific commands
 func _register_custom_commands() -> void:
@@ -119,7 +118,6 @@ func _build_from_paths(paths: Array) -> void:
 # =============================================================================
 
 func generate_from_code(code: String) -> void:
-	print("TurtlePipeBase: generate_from_code('%s'), handlers=%d" % [code, _command_handlers.size()])
 	build_started.emit()
 	clear_segments()
 	reset_cursor()

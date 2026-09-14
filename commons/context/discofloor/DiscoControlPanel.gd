@@ -36,7 +36,6 @@ func _ready() -> void:
 	
 	_create_panel()
 	_connect_signals()
-	print("DiscoControlPanel: Ready, connected to disco floor (using rack interactables)")
 
 func _find_disco_floor() -> StandaloneDiscoFloor:
 	# Search siblings first
@@ -229,7 +228,6 @@ func _connect_signals() -> void:
 	disco_floor.disco_toggled.connect(_on_disco_toggled)
 
 func _on_rack_button_pressed(action: String) -> void:
-	print("DiscoControlPanel: Button pressed - %s" % action)
 	match action:
 		"prev":
 			disco_floor.previous_pattern()
@@ -239,7 +237,6 @@ func _on_rack_button_pressed(action: String) -> void:
 			disco_floor.toggle_disco()
 
 func _on_pattern_button_pressed(index: int) -> void:
-	print("DiscoControlPanel: Pattern button pressed - %d" % index)
 	disco_floor.set_pattern(index)
 
 func _on_speed_slider_moved(value: float) -> void:
@@ -250,7 +247,6 @@ func _on_speed_slider_moved(value: float) -> void:
 	# Map slider 0-1 to speed 0.02-0.20.
 	var speed = lerp(0.02, 0.20, normalized)
 	disco_floor.set_speed(speed)
-	print("DiscoControlPanel: Speed set to %.3f" % speed)
 
 func _on_pattern_changed(pattern_name: String) -> void:
 	current_label.text = "Pattern: " + pattern_name

@@ -34,7 +34,6 @@ signal portal_focused(sequence_id: String)
 signal portal_unfocused(sequence_id: String)
 
 func _ready():
-	print("SequencePortal: Initializing portal for sequence '%s'" % sequence_id)
 	_setup_visual_components()
 	_setup_interaction()
 	_update_visibility()
@@ -47,7 +46,6 @@ func setup_portal(config: Dictionary):
 	portal_color = Color(config.get("color", Color.CYAN))
 	preview_info = config.get("preview", {})
 	
-	print("SequencePortal: Configured portal '%s' (%s)" % [portal_name, sequence_id])
 	_update_visual_style()
 
 func _setup_visual_components():
@@ -87,7 +85,6 @@ func _setup_visual_components():
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(info_label)
 	
-	print("SequencePortal: Visual components created")
 
 func _setup_interaction():
 	"""Setup interaction detection"""
@@ -109,7 +106,6 @@ func _setup_interaction():
 	interaction_area.body_exited.connect(_on_body_exited)
 	interaction_area.area_entered.connect(_on_area_entered)
 	
-	print("SequencePortal: Interaction setup complete")
 
 func _update_visual_style():
 	"""Update visual appearance based on current state"""
@@ -177,7 +173,6 @@ func unlock():
 
 func lock():
 	"""Lock this portal"""
-	print("SequencePortal: Locking portal '%s'" % portal_name)
 	is_portal_unlocked = false
 	_update_visual_style()
 
@@ -203,25 +198,21 @@ func _on_body_entered(body):
 		return
 	
 	if _is_player_body(body):
-		print("SequencePortal: Player entered portal '%s'" % portal_name)
 		portal_focused.emit(sequence_id)
 		_start_entry_sequence(body)
 
 func _on_body_exited(body):
 	"""Handle player leaving portal area"""
 	if _is_player_body(body):
-		print("SequencePortal: Player left portal '%s'" % portal_name)
 		portal_unfocused.emit(sequence_id)
 
 func _on_area_entered(area):
 	"""Handle area-based interaction"""
 	if "Hand" in area.name and is_portal_unlocked:
-		print("SequencePortal: Hand interaction with portal '%s'" % portal_name)
 		_trigger_portal_entry()
 
 func _start_entry_sequence(_body):
 	"""Start the portal entry sequence"""
-	print("SequencePortal: Starting entry sequence for '%s'" % portal_name)
 	
 	# Add brief delay for dramatic effect
 	await get_tree().create_timer(1.0).timeout
@@ -229,7 +220,6 @@ func _start_entry_sequence(_body):
 
 func _trigger_portal_entry():
 	"""Actually trigger the portal entry"""
-	print("SequencePortal: Activating portal to '%s'" % sequence_id)
 	portal_entered.emit(sequence_id)
 
 func _show_locked_message():

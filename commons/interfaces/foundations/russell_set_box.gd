@@ -127,7 +127,6 @@ func _ready() -> void:
 	_create_labels()
 	_create_interactable()
 	_stage_outside()
-	print("RussellSetBox: Ready — 'Does this set contain itself?'")
 
 func apply_grid_config(config: Dictionary) -> void:
 	# GUARD FIRST, ON THE KEYS THIS ARTIFACT ACTUALLY CONSUMES. Everything below ends in
@@ -291,7 +290,6 @@ func _build_outside_habitat() -> void:
 		Vector3(size * 0.55, size * 0.33, size * 0.55), 9, 7,
 		Vector2(size * 0.72, size * 0.72), outer_color, inner_color,
 		Vector2(size * 1.13, size * 1.13), size * 1.53, 1901, true)
-	print("RussellSetBox: outside=habitat — %d boxes, none containing another" % count)
 
 func _create_nested_boxes() -> void:
 	for i in range(max_visible_depth):
@@ -440,7 +438,6 @@ func open_next_layer() -> void:
 	_update_paradox_text()
 	emit_signal("paradox_observed", _current_depth)
 	
-	print("RussellSetBox: Opened layer %d — another box inside!" % _current_depth)
 
 func _rebuild_paradox_label(text: String) -> void:
 	# Rebuild the paradox display board with new text (baked, so it can't

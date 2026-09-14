@@ -31,14 +31,12 @@ signal snapped_to_target()
 signal line_locked()
 
 func _ready() -> void:
-	print("SnapLineSegment: Initializing...")
 	
 	# Find the two snap point children
 	var snap_points = []
 	for child in get_children():
 		if child is XRToolsPickable and child.has_signal("point_moved"):
 			snap_points.append(child)
-			print("  Found snap point: ", child.name)
 	
 	if snap_points.size() >= 2:
 		endpoint_a = snap_points[0]
@@ -53,29 +51,23 @@ func _ready() -> void:
 		# Connect to endpoint movement signals
 		if endpoint_a.has_signal("point_moved"):
 			endpoint_a.point_moved.connect(_on_endpoint_moved)
-			print("  Connected point_moved for ", endpoint_a.name)
 		if endpoint_b.has_signal("point_moved"):
 			endpoint_b.point_moved.connect(_on_endpoint_moved)
-			print("  Connected point_moved for ", endpoint_b.name)
 		
 		# Connect to pickup/drop signals for validation
 		if endpoint_a.has_signal("dropped"):
 			endpoint_a.dropped.connect(_on_endpoint_dropped.bind(endpoint_a))
-			print("  Connected dropped for ", endpoint_a.name)
 		if endpoint_b.has_signal("dropped"):
 			endpoint_b.dropped.connect(_on_endpoint_dropped.bind(endpoint_b))
-			print("  Connected dropped for ", endpoint_b.name)
 	else:
 		push_error("SnapLineSegment: Need at least 2 snap point children! Found: %d" % snap_points.size())
 		return
 	
 	# Create the line mesh
 	_create_line_mesh()
-	print("  Line mesh created with material")
 	
 	# Initial line update
 	call_deferred("_update_line_geometry")
-	print("SnapLineSegment: Initialization complete")
 
 func _create_line_mesh() -> void:
 	"""Create the visual line mesh - Alyx holographic style"""
@@ -192,7 +184,6 @@ func _on_endpoint_dropped(_pickable: Node3D, endpoint: Node3D) -> void:
 		if endpoint.has_method("trigger_haptic_pulse"):
 			endpoint.trigger_haptic_pulse(0.6, 0.15)
 
-		print("SnapLineSegment: ✓ Endpoint snapped to target at ", best_target)
 		_update_line_geometry()
 		snapped_to_target.emit()
 
@@ -200,7 +191,6 @@ func set_shared_targets(targets: Array[Vector3]) -> void:
 	"""Set the shared target pool for this line segment (in global coordinates)"""
 	shared_targets = targets
 	has_targets = not targets.is_empty()
-	print("SnapLineSegment: Received %d shared targets" % targets.size())
 
 func is_at_target() -> bool:
 	"""Check if both endpoints are at any target position"""
@@ -296,7 +286,5 @@ func _hide_endpoint_spheres() -> void:
 	"""Hide the endpoint spheres when puzzle is solved"""
 	if endpoint_a:
 		endpoint_a.visible = false
-		print("  Hidden endpoint A sphere")
 	if endpoint_b:
 		endpoint_b.visible = false
-		print("  Hidden endpoint B sphere")

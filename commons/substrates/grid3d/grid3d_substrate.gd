@@ -247,13 +247,11 @@ func _resolve_algorithm_from_lookup_name() -> void:
 	}
 	if key in algo_map:
 		algorithm = algo_map[key]
-		print("Grid3D: Auto-selected '%s' from lookup_name '%s'" % [key, lookup])
 
 
 ## --- Grid config from map system ---
 
 func apply_grid_config(config: Dictionary) -> void:
-	print("Grid3D: apply_grid_config called with: %s" % str(config))
 
 	if config.has("nodes"):
 		node_count = int(config["nodes"])
@@ -278,7 +276,6 @@ func apply_grid_config(config: Dictionary) -> void:
 		}
 		if algo_name in algo_map:
 			algorithm = algo_map[algo_name]
-			print("Grid3D: Config set algorithm to '%s'" % algo_name)
 
 	if auto_play and not _is_playing:
 		play()

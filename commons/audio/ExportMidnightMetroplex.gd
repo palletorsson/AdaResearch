@@ -9,8 +9,6 @@
 extends Node
 
 func _ready():
-	print("=== EXPORTING MIDNIGHT METROPLEX ===")
-	print("")
 	
 	# Create exports directory
 	if not DirAccess.dir_exists_absolute("res://exports"):

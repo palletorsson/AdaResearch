@@ -530,7 +530,6 @@ func _apply_finish() -> void:
 			n_acc += 1
 		else:
 			n_base += 1
-	print("[head_crab] finish: %d body shape(s), %d joint(s)" % [n_base, n_acc])
 
 
 func _quiet_rig() -> void:

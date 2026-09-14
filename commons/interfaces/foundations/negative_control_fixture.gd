@@ -333,4 +333,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if not config_data.has("proof"):
 		return
 	proof = normalise_proof(str(config_data["proof"]), proof)
-	print("NegativeControlFixture: proof=%s" % proof)

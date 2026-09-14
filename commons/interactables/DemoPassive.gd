@@ -59,7 +59,6 @@ func _ready():
 		lbl.transform.origin = Vector3(x, ROW_Y - 0.14, 0.03)
 		add_child(lbl)
 
-	print("DemoPassive: %d elements" % elements.size())
 
 
 func apply_grid_config(_config: Dictionary) -> void:

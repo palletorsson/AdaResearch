@@ -69,7 +69,6 @@ var _current_alignment: Variant = null
 func _ready() -> void:
 	# Find parent cube
 	_parent_cube = get_parent()
-	print("FaceSnapSystem: Initialized, parent=%s" % [_parent_cube.name if _parent_cube else "null"])
 
 	if not Engine.is_editor_hint():
 		# Add to group for easy finding
@@ -77,7 +76,6 @@ func _ready() -> void:
 
 		# Connect to parent pickup signals
 		_connect_parent_signals()
-		print("FaceSnapSystem: Added to group and connected signals")
 
 
 func _exit_tree() -> void:
@@ -215,7 +213,6 @@ func _on_released(_pickable, _by) -> void:
 
 	var best_snap = _find_best_snap()
 	if best_snap:
-		print("FaceSnapSystem: Snapping %s face %d -> %s face %d" % [_parent_cube.name, best_snap.my_face, best_snap.cube.name, best_snap.other_face])
 		_perform_snap(best_snap.cube, best_snap.my_face, best_snap.other_face, best_snap.snap_pos)
 
 	_hide_all_grids()
@@ -303,7 +300,6 @@ func _check_cube_alignment(other_cube: Node3D) -> Variant:
 				continue
 
 			# Found a valid alignment!
-			print("FaceSnapSystem: ALIGNED! Face %d -> %s face %d (dist=%.3f)" % [my_face, other_cube.name, other_face, face_dist])
 
 			# Check if faces are aligned (projecting one onto other's plane)
 			var to_other = other_face_center - my_face_center
@@ -418,7 +414,6 @@ func _calculate_snap_position(_my_center: Vector3, other_center: Vector3, normal
 	var along_normal = target_center.dot(my_normal_world)
 	var snapped_pos = tangent1 * snapped_u + tangent2 * snapped_v + my_normal_world * along_normal
 
-	print("FaceSnapSystem: Snap calc - my_half=%.3f, other_half=%.3f, target=%s" % [my_half, other_half, snapped_pos])
 
 	return snapped_pos
 
@@ -441,7 +436,6 @@ func _perform_snap(other_cube: Node3D, my_face: int, other_face: int, snap_pos: 
 	_create_snap_joint(other_cube)
 
 	face_snapped.emit(other_cube, my_face, other_face)
-	print("FaceSnapSystem: Snapped %s to %s using physics joint" % [_parent_cube.name, other_cube.name])
 
 
 ## Create a locked physics joint between this cube and another
@@ -486,7 +480,6 @@ func _create_snap_joint(other_cube: Node3D) -> void:
 	# Now set position (midpoint between cube centers)
 	_snap_joint.global_position = (_parent_cube.global_position + other_cube.global_position) / 2.0
 
-	print("FaceSnapSystem: Created physics joint between %s and %s" % [_parent_cube.name, other_cube.name])
 
 
 func _break_snap() -> void:
@@ -495,7 +488,6 @@ func _break_snap() -> void:
 		if _snap_joint and is_instance_valid(_snap_joint):
 			_snap_joint.queue_free()
 			_snap_joint = null
-			print("FaceSnapSystem: Removed physics joint from %s" % _parent_cube.name)
 
 		face_unsnapped.emit(_snapped_to)
 		_snapped_to = null

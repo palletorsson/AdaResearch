@@ -262,7 +262,6 @@ static func _dna_resource_to_params(path: String) -> Dictionary:
 	for k in ["wave_amplitude", "wave_frequency", "wave_intensity"]:
 		if k in res:
 			out[k] = res.get(k)
-	print("[BillboardCollector] loaded DNA from %s: %d uniform(s)" % [path, out.size()])
 	return out
 
 

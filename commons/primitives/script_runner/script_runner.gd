@@ -120,13 +120,11 @@ func _check_config_metadata():
 		var meta_key = "config_%s" % script
 		if has_meta(meta_key) and get_meta(meta_key):
 			script_name = script
-			print("ScriptRunner: Found config metadata, setting script_name = '%s'" % script)
 			return
 
 	# Also check for explicit script_name in metadata
 	if has_meta("config_script_name"):
 		script_name = get_meta("config_script_name")
-		print("ScriptRunner: Found explicit script_name = '%s'" % script_name)
 
 func _setup_display():
 	# Create SubViewport for 2D UI
@@ -323,7 +321,6 @@ func _load_script_from_json(name: String):
 			converted_line["params"] = _convert_params(converted_line["params"])
 		script_lines.append(converted_line)
 
-	print("ScriptRunner: Loaded script '%s' with %d lines" % [name, script_lines.size()])
 
 func _convert_params(params: Dictionary) -> Dictionary:
 	var result = params.duplicate()
@@ -1060,14 +1057,14 @@ func _on_play_button_touched(area: Area3D):
 	var area_name = area.name.to_lower()
 	if "finger" in area_name or "hand" in area_name or "pointer" in area_name:
 		if _try_toggle_from_interaction():
-			print("ScriptRunner: Button touched by %s" % area.name)
+			pass
 
 func _on_play_button_body_touched(body: Node3D):
 	# Handle physics body collision (grabbing hand, thrown objects, etc.)
 	var body_name = body.name.to_lower()
 	if "hand" in body_name or "finger" in body_name or "controller" in body_name:
 		if _try_toggle_from_interaction():
-			print("ScriptRunner: Button touched by body %s" % body.name)
+			pass
 
 func _on_play_button_hover():
 	# Brighten button on hover

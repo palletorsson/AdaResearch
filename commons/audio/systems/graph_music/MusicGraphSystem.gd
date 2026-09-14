@@ -22,7 +22,6 @@ func _cycle_preset():
 	elif current_preset == "Chaos": current_preset = "Melodic"
 	else: current_preset = "Ambient"
 	
-	print("Switching to: " + current_preset)
 	_load_preset(current_preset)
 
 func _load_preset(name: String):

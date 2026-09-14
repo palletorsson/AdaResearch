@@ -162,7 +162,6 @@ func _tune_to_station(station_index: int):
 	var preset_name = station_presets[station_index]
 	var preset_path = PRESETS_PATH + preset_name
 	
-	print("📻 Tuning to station %d: %s" % [station_index, preset_name])
 	
 	# Stop current soundscape
 	if soundscape_player.has_method("stop"):
@@ -179,7 +178,6 @@ func _tune_to_station(station_index: int):
 
 func _play_noise():
 	"""Play static noise between stations"""
-	print("📻 Between stations - static noise")
 	
 	# Stop current soundscape
 	if soundscape_player.has_method("stop"):

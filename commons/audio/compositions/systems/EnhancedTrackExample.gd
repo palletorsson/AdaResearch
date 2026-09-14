@@ -5,7 +5,6 @@ extends Node
 var enhanced_track: EnhancedDarkTrack
 
 func _ready():
-	print("🎵 Enhanced Track System Example 🎵")
 	setup_enhanced_track()
 
 func setup_enhanced_track():
@@ -59,7 +58,6 @@ func setup_enhanced_track():
 	# Start the track
 	enhanced_track.start_track()
 	
-	print("✅ Enhanced track setup complete!")
 
 func _create_custom_patterns():
 	"""Create custom patterns using the advanced sequencer"""
@@ -83,7 +81,6 @@ func _create_custom_patterns():
 	# Apply probability for variation
 	enhanced_track.sequencer.apply_probability(acid_bass, 0.8)
 	
-	print("   ✨ Custom patterns created")
 
 func _setup_automation():
 	"""Setup automated effects and transitions"""
@@ -112,7 +109,6 @@ func _trigger_filter_sweep():
 	# Also apply to the effects rack
 	enhanced_track.effects_rack.apply_filter_sweep("Layer_bass_sub", 100.0, 2000.0, 2.0)
 	
-	print("   🌊 Filter sweep triggered")
 
 func _trigger_bass_drop():
 	"""Trigger a bass drop effect"""
@@ -127,11 +123,9 @@ func _trigger_bass_drop():
 	# Bring bass back with impact
 	enhanced_track.effects_rack.apply_volume_fade("Layer_bass_sub", -20.0, 0.0, 0.3, "bass_return")
 	
-	print("   💥 Bass drop triggered")
 
 func _on_section_changed(new_section: String, old_section: String):
 	"""Handle section changes"""
-	print("   🎭 Section changed: %s -> %s" % [old_section, new_section])
 	
 	match new_section:
 		"intro":
@@ -211,7 +205,6 @@ func _setup_sidechain_effect():
 			tween.tween_property(bass_layer, "layer_volume", original_vol - 6.0, 0.05)
 			tween.tween_property(bass_layer, "layer_volume", original_vol, 0.15)
 		)
-		print("   🔗 Sidechain effect setup")
 
 func _on_beat_triggered(beat_number: int):
 	"""Handle beat events for real-time control"""
@@ -237,7 +230,6 @@ func _apply_random_variation():
 	if randf() < 0.2:
 		enhanced_track.effects_rack.apply_delay_throw("Layer_bass_sub", randf_range(1.0, 3.0))
 	
-	print("   🎲 Random variation applied")
 
 func _trigger_special_effects():
 	"""Trigger special effects periodically"""
@@ -249,17 +241,14 @@ func _trigger_special_effects():
 	match chosen_effect:
 		"master_filter_sweep":
 			enhanced_track.effects_rack.apply_master_filter_sweep(50.0, 4000.0, 2.0)
-			print("   🌊 Master filter sweep!")
 		
 		"volume_duck":
 			enhanced_track.effects_rack.apply_master_volume_duck(8.0, 0.2, 0.8)
-			print("   🦆 Master volume duck!")
 		
 		"reverb_burst":
 			enhanced_track.effects_rack.set_master_reverb(0.9, 0.3, 0.6)
 			await get_tree().create_timer(2.0).timeout
 			enhanced_track.effects_rack.set_master_reverb(0.6, 0.5, 0.2)
-			print("   🏢 Reverb burst!")
 
 # ===== INPUT CONTROLS =====
 
@@ -305,7 +294,6 @@ func _toggle_layer(category: String, layer: String):
 	var layer_obj = enhanced_track.get_layer(category, layer)
 	if layer_obj:
 		enhanced_track.set_layer_enabled(category, layer, not layer_obj.enabled)
-		print("   🎛️ Toggled %s/%s: %s" % [category, layer, "ON" if layer_obj.enabled else "OFF"])
 
 # ===== CONSOLE COMMANDS =====
 

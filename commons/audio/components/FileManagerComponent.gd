@@ -198,7 +198,6 @@ func _load_from_file(file_path: String):
 		if parse_result == OK:
 			var loaded_data = json.data
 			preset_loaded.emit(loaded_data)
-			print("FileManagerComponent: Loaded preset from %s" % file_path)
 		else:
 			print("FileManagerComponent: Failed to parse JSON from %s" % file_path)
 	else:
@@ -409,4 +408,3 @@ func delete_preset(preset_name: String):
 	var file_path = preset_directory + preset_name
 	if FileAccess.file_exists(file_path):
 		DirAccess.open("user://").remove(file_path)
-		print("FileManagerComponent: Deleted preset %s" % preset_name) 

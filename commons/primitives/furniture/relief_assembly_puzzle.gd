@@ -146,7 +146,6 @@ func _setup_biederman_targets() -> void:
 		piece_targets.append(target)
 		piece_colors[bar[0]] = palette[bar[6]]
 
-	print("ReliefAssemblyPuzzle: Setup %d Biederman targets" % piece_targets.size())
 
 
 ## Mondrian-style: Grid-based, De Stijl primary colors
@@ -327,7 +326,6 @@ func _spawn_pieces() -> void:
 		register_piece(target.piece_id, piece)
 		relief_pieces.append(piece)
 
-		print("ReliefAssemblyPuzzle: Spawned piece '%s' size=%s" % [target.piece_id, target.target_scale])
 
 	# Spawn extra pieces (use average target size)
 	var avg_size = Vector3(0.15, 0.15, 0.05)  # Default size for extras
@@ -401,7 +399,6 @@ func _on_final_piece_created(piece: Node3D, target_id: String) -> void:
 	var color = piece_colors.get(target_id, Color.WHITE)
 	_apply_final_piece_color(piece, color)
 
-	print("ReliefAssemblyPuzzle: Final piece for '%s' with color %s" % [target_id, color])
 
 
 func _apply_final_piece_color(piece: MeshInstance3D, color: Color) -> void:
@@ -446,7 +443,6 @@ func _complete_puzzle() -> void:
 	# Remove leftover unused cubes so they don't cover the artwork
 	_remove_remaining_cubes()
 	relief_assembled.emit()
-	print("ReliefAssemblyPuzzle: Relief composition complete!")
 
 
 ## Remove remaining unused cubes
@@ -484,13 +480,11 @@ func add_bar_target(bar_id: String, pos: Vector3, rot: Vector3, size: Vector3, c
 ## Accepts explicit names: "biederman", "mondrian", "albers", "constructivist" or numbers
 ## Shorthand: #biederman, #mondrian, #albers, #constructivist
 func apply_grid_config(config_data: Dictionary) -> void:
-	print("ReliefAssemblyPuzzle: Applying config: %s" % config_data)
 
 	# Check for relief_type in config
 	if config_data.has("relief_type"):
 		var new_type = _parse_relief_type(config_data["relief_type"])
 		if new_type != relief_type:
-			print("ReliefAssemblyPuzzle: Changing relief type to %s" % get_relief_type_name())
 			relief_type = new_type
 			_rebuild_for_new_type()
 
@@ -573,4 +567,3 @@ func _rebuild_for_new_type() -> void:
 	if auto_spawn_pieces and piece_scene:
 		call_deferred("_spawn_pieces")
 
-	print("ReliefAssemblyPuzzle: Rebuilt for %s type" % get_relief_type_name())

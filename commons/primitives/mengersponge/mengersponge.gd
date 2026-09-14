@@ -39,7 +39,6 @@ func create_menger_sponge():
 	# Add collision (approximate with box)
 	create_collision()
 
-	print("Menger Sponge generated at level %d" % level)
 
 func generate_menger(surface_tool: SurfaceTool, center: Vector3, cube_size: float, depth: int):
 	if depth == 0:

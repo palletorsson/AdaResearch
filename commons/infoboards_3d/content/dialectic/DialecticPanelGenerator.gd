@@ -70,8 +70,6 @@ func generate_from_dialectic(dialectic_name: String, origin: Vector3, rotation_d
 			x_spacing = layout.get("x_spacing", x_spacing)
 			panel_scale = layout.get("panel_scale", panel_scale) * scale_factor
 
-	print("DialecticPanelGenerator: Loaded '%s' with %d levels" % [dialectic_name, dialectic_data.get("levels", []).size()])
-	print("DialecticPanelGenerator: Layout - z_spacing: %.1f, x_spacing: %.1f, scale: %.2f" % [z_spacing, x_spacing, panel_scale])
 
 	# Generate panels for each level
 	var levels = dialectic_data.get("levels", [])
@@ -90,7 +88,6 @@ func generate_from_dialectic(dialectic_name: String, origin: Vector3, rotation_d
 
 			_spawn_panel(panel_data, panel_position, theme, level_index)
 
-	print("DialecticPanelGenerator: Generated %d panels" % panels.size())
 	return true
 
 # Spawn a single panel at the given position
@@ -142,7 +139,6 @@ func _set_panel_content_delayed(panel: Node, content: String) -> void:
 	if not is_instance_valid(panel):
 		return
 
-	print("DialecticPanelGenerator: Setting content on panel (length: %d)" % content.length())
 
 	if panel.has_method("set_tutorial_from_text"):
 		panel.set_tutorial_from_text(content)

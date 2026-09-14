@@ -25,8 +25,6 @@ signal section_changed_extended(new_section: String, old_section: String)
 signal section_progress_updated(section: String, progress: float)
 
 func _ready():
-	print("🎵 ENHANCED DARK TRACK 🎵")
-	print("Initializing advanced track system...")
 	
 	super()
 	_initialize_enhanced_track()
@@ -50,13 +48,11 @@ func _initialize_enhanced_track():
 	# Setup automation
 	_setup_section_automation()
 	
-	print("   ✅ Enhanced track initialized")
 
 # ===== SOUND GENERATION =====
 
 func _generate_sound_bank():
 	"""Generate comprehensive sound bank"""
-	print("   🔧 Generating enhanced sound bank...")
 	
 	# Drum sounds
 	sound_bank["kick_808"] = _generate_enhanced_808_kick(1.5)
@@ -89,7 +85,6 @@ func _generate_sound_bank():
 	sound_bank["ambient_texture"] = _generate_ambient_texture(32.0)
 	sound_bank["reverse_cymbal"] = _generate_reverse_cymbal(3.0)
 	
-	print("   ✅ Sound bank generated (%d sounds)" % sound_bank.size())
 
 func _generate_enhanced_808_kick(duration: float) -> AudioStreamWAV:
 	"""Enhanced 808 kick with better synthesis"""
@@ -252,7 +247,6 @@ func _generate_reverse_cymbal(duration: float) -> AudioStreamWAV:
 
 func _create_intro_patterns():
 	"""Create intro section patterns"""
-	print("   🎭 Creating intro patterns...")
 	
 	# Minimal intro - just kick and atmosphere
 	var kick_pattern = sequencer.create_pattern("intro_kick", 16)
@@ -263,7 +257,6 @@ func _create_intro_patterns():
 
 func _create_buildup_patterns():
 	"""Create buildup section patterns"""
-	print("   🎭 Creating buildup patterns...")
 	
 	# Increasing intensity kick pattern
 	var buildup_kick = sequencer.create_pattern("buildup_kick", 32)
@@ -271,7 +264,6 @@ func _create_buildup_patterns():
 
 func _create_drop_patterns():
 	"""Create drop section patterns"""
-	print("   🎭 Creating drop patterns...")
 	
 	# Heavy kick pattern
 	var drop_kick = sequencer.create_pattern("drop_kick", 16)
@@ -279,7 +271,6 @@ func _create_drop_patterns():
 
 func _create_breakdown_patterns():
 	"""Create breakdown section patterns"""
-	print("   🎭 Creating breakdown patterns...")
 	
 	# Sparse kick
 	var breakdown_kick = sequencer.create_pattern("breakdown_kick", 32)
@@ -288,7 +279,6 @@ func _create_breakdown_patterns():
 
 func _create_outro_patterns():
 	"""Create outro section patterns"""
-	print("   🎭 Creating outro patterns...")
 	
 	# Fading kick
 	var outro_kick = sequencer.create_pattern("outro_kick", 16)
@@ -297,7 +287,6 @@ func _create_outro_patterns():
 
 func _assign_layer_sounds():
 	"""Assign sounds to layers"""
-	print("   🔊 Assigning layer sounds...")
 	
 	# Assign sounds to drum layers
 	if layers["drums"]["kick"]:
@@ -307,7 +296,6 @@ func _assign_layer_sounds():
 
 func _setup_section_automation():
 	"""Setup automation for different sections"""
-	print("   🎛️ Setting up section automation...")
 	
 	# Connect to beat signal for section tracking
 	beat_triggered.connect(_on_beat_for_sections)
@@ -347,6 +335,3 @@ func get_section_info() -> Dictionary:
 func section_info():
 	"""Show section information"""
 	var info = get_section_info()
-	print("🎭 SECTION INFO 🎭")
-	print("   Current: %s (%.1f%% complete)" % [info.current_section, info.section_progress * 100])
-	print("   Bar: %d/%d" % [info.bar_position, info.section_length]) 

@@ -143,17 +143,14 @@ func start():
 	step = 0
 	bar = 0
 	phrase = 0
-	print("LiveRack: Started at %d BPM" % bpm)
 
 
 func stop():
 	playing = false
-	print("LiveRack: Stopped")
 
 
 func set_bpm(new_bpm: float):
 	bpm = clamp(new_bpm, 60.0, 200.0)
-	print("LiveRack: BPM = %.1f" % bpm)
 
 
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -389,7 +386,6 @@ func build_tension():
 	acid_cutoff_target = 200.0
 	acid_pattern_intensity = 0.8
 	master_filter_target = 0.4
-	print("LiveRack: Building tension...")
 
 
 func drop():
@@ -397,7 +393,6 @@ func drop():
 	acid_cutoff_target = 2500.0
 	master_filter_target = 1.0
 	acid_accent = 0.8
-	print("LiveRack: DROP")
 
 
 func breakdown():
@@ -406,7 +401,6 @@ func breakdown():
 	channel_mutes["hats"] = true
 	acid_cutoff_target = 600.0
 	master_filter_target = 0.7
-	print("LiveRack: Breakdown")
 
 
 func bring_it_back():
@@ -415,7 +409,6 @@ func bring_it_back():
 	channel_mutes["hats"] = false
 	acid_cutoff_target = 1500.0
 	master_filter_target = 1.0
-	print("LiveRack: Bringing it back")
 
 
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•

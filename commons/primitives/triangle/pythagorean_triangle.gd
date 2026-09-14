@@ -289,7 +289,6 @@ func reset_to_right_triangle():
 	if drag_points:
 		drag_points.set_points_positions(vertex_positions)
 	update_visuals()
-	print("Reset to standard right triangle")
 
 func _on_point_moved(index: int, position: Vector3, _meta: Dictionary) -> void:
 	if index < 0 or index >= vertex_positions.size():

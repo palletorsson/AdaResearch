@@ -40,7 +40,6 @@ func _parse_config_string(config_str: String) -> void:
 		radial_segments = max(3, int(parts[0]))  # Minimum 3 for a valid polygon
 	if parts.size() >= 2 and parts[1].is_valid_int():
 		rings = max(1, int(parts[1]))  # Minimum 1 ring
-	print("Cylinder configured: radial_segments=%d, rings=%d" % [radial_segments, rings])
 
 # Called by grid system for #config syntax
 func apply_grid_config(config_data: Dictionary) -> void:

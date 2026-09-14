@@ -35,7 +35,6 @@ func _ready():
 	if auto_play_on_ready:
 		play_primary_sound()
 	
-	print("CubeAudioPlayer: Ready with sounds loaded")
 
 func _setup_audio_players():
 	# Create 3D audio player for spatial sounds
@@ -49,7 +48,6 @@ func _setup_audio_players():
 	# VR-specific audio settings
 	var xr_interface = XRServer.get_primary_interface()
 	if xr_interface and xr_interface.is_initialized():
-		print("CubeAudioPlayer: Configuring for VR audio")
 		audio_player_3d.volume_db = volume_db + 6.0  # Louder for VR
 		audio_player_3d.max_distance = max_distance * 2.0  # Larger range for VR
 		# Use logarithmic attenuation for better VR experience
@@ -87,7 +85,6 @@ func _ensure_sound_cached(sound_type: AudioSynthesizer.SoundType):
 	var sound_name = _get_sound_filename(sound_type)
 	var file_path = "res://commons/audio/" + sound_name + ".tres"
 	
-	print("CubeAudioPlayer: Checking for %s at %s (VR: %s)" % [sound_name, file_path, is_vr])
 	
 	if ResourceLoader.exists(file_path):
 		var loaded_sound = load(file_path)
@@ -105,7 +102,6 @@ func _generate_fallback_sound(sound_type: AudioSynthesizer.SoundType, sound_name
 	# Generate sound if not found
 	var duration = _get_sound_duration(sound_type)
 	sound_cache[sound_type] = AudioSynthesizer.generate_sound(sound_type, duration)
-	print("CubeAudioPlayer: Generated %s dynamically" % sound_name)
 
 func _get_sound_filename(sound_type: AudioSynthesizer.SoundType) -> String:
 	match sound_type:
@@ -162,16 +158,11 @@ func _play_sound(sound_type: AudioSynthesizer.SoundType, spatial: bool):
 	var is_vr = xr_interface and xr_interface.is_initialized()
 	
 	if is_vr:
-		print("CubeAudioPlayer: VR Mode - Audio Player Volume: %s dB, Bus: %s" % [player.volume_db, player.bus])
 		
 		# Check audio server state in VR
 		var master_bus = AudioServer.get_bus_index("Master")
 		var master_volume = AudioServer.get_bus_volume_db(master_bus)
-		print("CubeAudioPlayer: VR Audio Server Master: %s dB" % master_volume)
 	
-	# Debug looping info
-	if stream is AudioStreamWAV:
-		print("CubeAudioPlayer: Stream loop mode: %s, data size: %s" % [stream.loop_mode, stream.data.size()])
 	
 	player.play()
 	

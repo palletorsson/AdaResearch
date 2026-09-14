@@ -90,9 +90,6 @@ signal breakdown_moment(intensity: float)
 signal build_peak(energy: float)
 
 func _ready():
-	print("🎵 EXTENDED SYNCOPATED TRACK PLAYER - 128 BARS 🎵")
-	print("Epic rhythmic journey with evolving syncopation...")
-	print("Total duration: %.1f minutes" % ((BARS_TOTAL * 4 * BEAT_DURATION) / 60.0))
 	
 	_setup_audio_players()
 	_setup_advanced_rhythm_system()
@@ -141,7 +138,6 @@ func _setup_audio_players():
 	add_child(breakdown_player)
 	
 	_update_all_volumes()
-	print("   ✅ Enhanced multi-layer audio system ready")
 
 func _setup_advanced_rhythm_system():
 	"""Setup precision timing with humanization"""
@@ -153,11 +149,9 @@ func _setup_advanced_rhythm_system():
 	sixteenth_timer.timeout.connect(_on_advanced_sixteenth)
 	add_child(sixteenth_timer)
 	
-	print("   ✅ Advanced rhythm system with %.1f%% humanization" % (humanization * 100))
 
 func _initialize_pattern_library():
 	"""Create evolving patterns for each section"""
-	print("   🎵 Building 128-bar pattern library...")
 	
 	# INTRO Section (Bars 1-16) - Minimal, building anticipation
 	pattern_library[Section.INTRO] = {
@@ -247,11 +241,9 @@ func _initialize_pattern_library():
 		"atmospheric": [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
 	}
 	
-	print("   ✅ Pattern library complete - 8 sections x 16 patterns each")
 
 func _generate_all_sounds():
 	"""Generate enhanced sound palette"""
-	print("   🔧 Generating enhanced 128-bar sound palette...")
 	
 	# Core sounds
 	sound_cache[TrackSound.SPINE_KICK] = _generate_sound(TrackSound.SPINE_KICK, 0.6)
@@ -271,17 +263,12 @@ func _generate_all_sounds():
 	sound_cache[TrackSound.VINYL_CRACKLE] = _generate_sound(TrackSound.VINYL_CRACKLE, 0.8)
 	sound_cache[TrackSound.REVERSE_SNARE] = _generate_sound(TrackSound.REVERSE_SNARE, 0.7)
 	
-	print("   ✅ Enhanced sound palette ready - 14 unique sounds")
 
 func start_epic_track():
 	"""Start the epic 128-bar journey"""
 	if is_playing:
 		return
 	
-	print("🎵 STARTING 128-BAR SYNCOPATED EPIC...")
-	print("   💫 Journey through 8 unique sections")
-	print("   🎯 Total duration: %.1f minutes" % ((BARS_TOTAL * 4 * BEAT_DURATION) / 60.0))
-	print("   🎵 Dynamic swing evolution and humanization")
 	
 	is_playing = true
 	current_sixteenth = 0
@@ -348,7 +335,6 @@ func _on_advanced_sixteenth():
 	
 	# End of track
 	if current_sixteenth >= TOTAL_SIXTEENTHS:
-		print("🎵 Epic 128-bar track complete! 🎵")
 		stop_epic_track()
 
 func _play_pattern_element(name: String, intensity: int, swing_factor: float, player: AudioStreamPlayer, sound: TrackSound):
@@ -400,7 +386,6 @@ func _announce_section_change():
 		"OUTRO - Resolution and fade"
 	]
 	
-	print("🎵 Section %d: %s (Bar %d)" % [current_section + 1, section_names[current_section], current_bar + 1])
 
 func _handle_section_specials(pattern_pos: int):
 	"""Handle special events per section"""
@@ -781,12 +766,10 @@ func set_dynamic_swing(base: float, evolution: float, shuffle: float):
 	base_swing = clamp(base, 0.0, 0.5)
 	swing_evolution = clamp(evolution, 0.0, 0.1)
 	groove_shuffle = clamp(shuffle, 0.0, 0.1)
-	print("🎵 Swing updated: base=%.1f%%, evolution=%.1f%%, shuffle=%.1f%%" % [base_swing * 100, swing_evolution * 100, groove_shuffle * 100])
 
 func set_humanization(amount: float):
 	"""Adjust humanization amount"""
 	humanization = clamp(amount, 0.0, 0.1)
-	print("🎵 Humanization set to %.1f%%" % (humanization * 100))
 
 func get_epic_track_info() -> Dictionary:
 	"""Get comprehensive track information"""

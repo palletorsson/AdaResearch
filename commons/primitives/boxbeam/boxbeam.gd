@@ -133,7 +133,6 @@ func create_beam() -> void:
 	# Add collision
 	var collision_body := create_collision()
 
-	print("Portal frame created: Opening=%.2fx%.2f, Depth=%.2f, Wall=%.2f" % [width, height, depth, thickness])
 
 func apply_queer_material():
 	var material = ShaderMaterial.new()

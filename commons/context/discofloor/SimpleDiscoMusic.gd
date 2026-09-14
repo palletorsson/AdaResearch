@@ -82,7 +82,6 @@ var reverb_buffer: Array[float] = []
 var reverb_index: int = 0
 
 func _ready():
-	print("🌊 Initializing EXTREME LO-FI DROWNED Disco - Underwater vibes! 📼✨")
 	setup_audio_generation()
 	setup_lofi_processing()
 	calculate_timing()
@@ -110,19 +109,13 @@ func setup_lofi_processing():
 	for i in range(reverb_size):
 		reverb_buffer[i] = 0.0
 	
-	print("🌊 Lo-fi underwater processing initialized!")
-	print("📼 Bit depth: ", int(bit_crush_factor), " bits")
-	print("🎵 Sample rate crush: ", sample_rate_crush, " Hz")
-	print("💧 Underwater depth: ", int(underwater_depth * 100), "%")
 
 func calculate_timing():
 	"""Calculate disco timing with groove"""
 	beat_duration = 60.0 / bpm
-	print("🎵 Disco groove at: ", bpm, " BPM (", beat_duration, "s per beat)")
 
 func start_disco_music():
 	"""Start the disco party! 🎉"""
-	print("🎶 Starting authentic disco groove! Let's boogie! 🕺")
 	var timer = Timer.new()
 	timer.wait_time = beat_duration / 8  # Higher resolution for groove
 	timer.timeout.connect(_on_beat_timer)
@@ -342,20 +335,17 @@ func set_disco_style(style: String):
 			groove_swing = 0.05
 	
 	calculate_timing()
-	print("🕺 Disco style: ", style.to_upper(), " at ", bpm, " BPM!")
 
 func set_tempo(new_bpm: float):
 	"""Change the disco tempo with style"""
 	bpm = clamp(new_bpm, 90.0, 150.0)
 	calculate_timing()
-	print("🎵 Disco tempo boosted to: ", bpm, " BPM! Let's dance! 💃")
 
 func set_volume(new_volume: float):
 	"""Set disco volume with style"""
 	volume = clamp(new_volume, 0.0, 1.0)
 	volume_db = linear_to_db(volume)
 	var emoji = "🔊" if volume > 0.7 else "🔉" if volume > 0.3 else "🔈"
-	print(emoji, " Disco volume: ", int(volume * 100), "% - ", get_volume_description())
 
 func get_volume_description() -> String:
 	"""Get funky volume description"""
@@ -369,10 +359,8 @@ func toggle_music():
 	"""Toggle disco with style!"""
 	disco_enabled = !disco_enabled
 	if disco_enabled:
-		print("🎵 DISCO IS BACK! Let's boogie! 🕺✨")
 		volume_db = linear_to_db(volume)
 	else:
-		print("🛑 Disco paused... but the groove lives on! 💫")
 		volume_db = -80.0
 
 # Educational mode (restored for compatibility)
@@ -381,15 +369,12 @@ func set_educational_mode(enabled: bool):
 	if enabled:
 		set_volume(0.3)  # Quieter for classroom
 		set_disco_style("classic")  # Gentle classic style
-		print("🎓 Educational mode: ON (quieter disco)")
 	else:
 		set_volume(0.6)  # Party volume
-		print("🕺 Party mode: ON (louder disco)")
 
 func restart_music():
 	"""Restart disco music from beginning"""
 	time_position = 0.0
-	print("🔄 Disco music restarted - back to the beat!")
 
 func get_disco_info() -> Dictionary:
 	"""Get comprehensive disco info"""
@@ -498,17 +483,12 @@ func set_lofi_intensity(intensity: float):
 	sample_rate_crush = 22050.0 - intensity * 14050.0  # 22kHz down to 8kHz
 	lo_pass_frequency = 2000.0 - intensity * 1200.0  # 2kHz down to 800Hz
 	
-	print("🌊 Lo-fi intensity: ", int(intensity * 100), "% drowned")
-	print("📼 Tape saturation: ", int(tape_saturation * 100), "%")
-	print("💧 Underwater depth: ", int(underwater_depth * 100), "%")
 
 func toggle_lofi():
 	"""Toggle lo-fi processing on/off"""
 	lofi_enabled = !lofi_enabled
 	if lofi_enabled:
-		print("🌊 DROWNED DISCO MODE: ON! Welcome to the underwater party! 💧📼")
-	else:
-		print("✨ CLEAN DISCO MODE: ON! Crystal clear vibes! 🕺")
+		pass
 
 func set_underwater_style():
 	"""Preset for maximum underwater drowning effect"""
@@ -516,4 +496,3 @@ func set_underwater_style():
 	lo_pass_frequency = 600.0  # Very muffled
 	reverb_decay = 0.92  # Long underwater echo
 	underwater_depth = 0.95  # Almost completely submerged
-	print("🌊💧 MAXIMUM UNDERWATER DROWNING ACTIVATED! Glub glub... 🐟")

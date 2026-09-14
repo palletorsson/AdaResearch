@@ -68,7 +68,6 @@ func setup_complete_cube():
 		await tree_entered
 	await get_tree().process_frame
 	is_ready_complete = true
-	print("Cube setup complete - should see cube and spheres now")
 
 func create_vr_cube():
 	var st = SurfaceTool.new()
@@ -119,10 +118,8 @@ func create_vr_cube():
 	hover_area.mouse_entered.connect(_on_hover_start)
 	hover_area.mouse_exited.connect(_on_hover_end)
 	
-	print("Created cube mesh")
 
 func create_grab_spheres():
-	print("Creating grab spheres...")
 	
 	# Load the grab sphere point scene
 	var grab_sphere_scene = preload("res://commons/primitives/point/grab_sphere_point.tscn")
@@ -144,14 +141,13 @@ func create_grab_spheres():
 		if sphere_node.has_signal("dropped"):
 			sphere_node.dropped.connect(_on_sphere_dropped.bind(i))
 		
-		print("Created sphere ", i, " at position ", current_vertices[i])
 
 	# All eight spheres always exist so grab_spheres stays index-aligned with
 	# current_vertices; the handles axis only decides which ones are live.
 	_apply_handle_visibility()
 
 func _on_sphere_picked_up(vertex_index: int, _pickable = null):
-	print("Sphere ", vertex_index, " picked up")
+	pass
 
 func _on_sphere_dropped(vertex_index: int, _pickable = null):
 	if vertex_index < grab_spheres.size():
@@ -161,7 +157,6 @@ func _on_sphere_dropped(vertex_index: int, _pickable = null):
 		# Update the vertex position based on the sphere's new position
 		current_vertices[vertex_index] = drop_position
 		update_cube_mesh()
-		print("Sphere ", vertex_index, " dropped at: ", drop_position)
 
 func _process(_delta):
 	if not is_ready_complete:
@@ -277,7 +272,6 @@ func set_base_color(color: Color):
 # VR interaction methods
 func activate():
 	# Called when VR controller selects this cube
-	print("Cube activated")
 	
 	# Visual feedback
 	var tween = create_tween()
@@ -378,4 +372,3 @@ func test_deform_corner(corner_index: int, new_pos: Vector3):
 		if corner_index < grab_spheres.size():
 			grab_spheres[corner_index].position = new_pos
 		update_cube_mesh()
-		print("Deformed corner ", corner_index, " to ", new_pos)

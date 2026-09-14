@@ -19,7 +19,7 @@ signal pattern_saved
 
 
 func _ready() -> void:
-	print("TraceData: Autoload Singleton READY")
+	pass
 
 
 # --- Trace API ---

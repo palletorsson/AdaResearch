@@ -268,4 +268,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if not config_data.has("crossing"):
 		return
 	crossing = normalise_crossing(str(config_data["crossing"]), crossing)
-	print("FluencySeam: crossing=%s" % crossing)

@@ -153,9 +153,6 @@ func _expire() -> void:
 # ═════════════════════════════════════════════════════════════════════════
 
 func _on_body_entered(body: Node3D) -> void:
-	if DEBUG_LOG:
-		print("[Projectile] body_entered fired with body='%s' (class=%s) at pos=%s" % [
-			body.name, body.get_class(), global_position])
 	if has_hit:
 		return
 	# Don't hit the catalyst itself

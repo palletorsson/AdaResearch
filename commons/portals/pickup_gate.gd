@@ -55,7 +55,6 @@ var collision_shape: CollisionShape3D = null
 var label: Label3D = null
 
 func _ready() -> void:
-	print("PickupGate: Initialized, requires %d pickups" % required_pickups)
 
 	# Find child nodes
 	blocking_mesh = find_child("BlockingMesh", true, false) as MeshInstance3D
@@ -81,13 +80,11 @@ func _ready() -> void:
 
 func _initial_gate_check() -> void:
 	# Called deferred after _ready() to allow configuration to be applied first
-	print("PickupGate: Performing initial gate check with %d required pickups" % required_pickups)
 	if GameManager:
 		_check_and_update_gate(GameManager.get_score())
 	_update_label()
 
 func _on_score_updated(new_score: int) -> void:
-	print("PickupGate: Score updated to %d (need %d)" % [new_score, required_pickups])
 	_check_and_update_gate(new_score)
 
 func _check_and_update_gate(current_score: int) -> void:
@@ -103,11 +100,9 @@ func _check_and_update_gate(current_score: int) -> void:
 
 func _open_gate() -> void:
 	is_open = true
-	print("PickupGate: OPENING GATE!")
 
 	# Remove collision body IMMEDIATELY (so player can pass through right away)
 	if collision_body and is_instance_valid(collision_body):
-		print("  Removing collision body...")
 		# Disable collision layers instantly (belt and suspenders approach)
 		collision_body.collision_layer = 0
 		collision_body.collision_mask = 0
@@ -136,7 +131,6 @@ func _open_gate() -> void:
 
 func _close_gate() -> void:
 	is_open = false
-	print("PickupGate: CLOSING GATE")
 
 	# Show blocking mesh
 	if blocking_mesh:
@@ -215,7 +209,6 @@ func _play_open_sound() -> void:
 # Public API - called by GridInteractablesComponent to set parameters
 func set_required_pickups(count: int) -> void:
 	required_pickups = max(1, count)
-	print("PickupGate: Required pickups set to %d" % required_pickups)
 	_update_label()
 
 # Helper for grid spawning - parse parameters from token like "pickup_gate:5"
@@ -228,21 +221,18 @@ func parse_parameters(params: Array) -> void:
 # Called by GridInteractablesComponent when using # syntax
 # Supports: pickup_gate#pickups:5 or pickup_gate#count:3
 func apply_grid_config(config: Dictionary) -> void:
-	print("PickupGate: Applying grid config: %s" % config)
 
 	# Check for pickup count configuration
 	if config.has("pickups"):
 		var count_str = str(config["pickups"])
 		if count_str.is_valid_int():
 			set_required_pickups(int(count_str))
-			print("  Set required pickups from 'pickups' key: %d" % required_pickups)
 
 	# Also support "count" as alias
 	if config.has("count"):
 		var count_str = str(config["count"])
 		if count_str.is_valid_int():
 			set_required_pickups(int(count_str))
-			print("  Set required pickups from 'count' key: %d" % required_pickups)
 
 	# Support color configuration
 	if config.has("color"):

@@ -197,7 +197,6 @@ func _ready() -> void:
 	_create_glow()
 	_create_interactable()
 	_update_display()
-	print("GodelStatementPlaque: Ready — 'Every formal system has an outside'")
 
 func _create_plaque() -> void:
 	_plaque_mesh = MeshInstance3D.new()
@@ -409,7 +408,6 @@ func _build_habitat() -> void:
 		Vector3(0.100, 0.068, 0.014), 13, 9, Vector2(0.115, 0.105),
 		plaque_color.lightened(0.06), Color(0.4, 0.35, 0.2).darkened(0.35),
 		Vector2(width * 0.58, height * 0.58), 0.0, 1931, false)
-	print("GodelStatementPlaque: outside=habitat — %d unwritten plates" % count)
 
 func _create_text() -> void:
 	# Main statement
@@ -521,7 +519,6 @@ func advance_statement() -> void:
 	# Visual feedback
 	_glow_effect.light_energy = 1.0
 	
-	print("GodelStatementPlaque: '%s'" % statements[current_index])
 
 func previous_statement() -> void:
 	current_index = (current_index - 1 + statements.size()) % statements.size()
@@ -559,7 +556,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			n.queue_free()
 	_body_nodes.clear()
 	_build_body()
-	print("GodelStatementPlaque: outside=%s" % outside)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # THE SHARED VOCABULARY. Everything below is static and russell_set_box.gd calls it

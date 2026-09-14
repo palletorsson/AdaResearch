@@ -18,7 +18,6 @@ func _ready():
 	randomize()
 	_apply_dimensions()
 	_apply_material_variation()
-	print("scene init")
 
 func _apply_dimensions():
 	if mesh_instance == null or collision_shape == null:

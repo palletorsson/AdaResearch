@@ -13,7 +13,6 @@ var surface_skin_idx: int = -1
 var surface_nails_idx: int = -1
 
 func _ready() -> void:
-	print("RightHandNails: _ready called")
 	# Wait a frame to ensure everything is loaded
 	await get_tree().process_frame
 
@@ -23,7 +22,6 @@ func _ready() -> void:
 
 	# Listen for color changes
 	if GameManager:
-		print("RightHandNails: Connecting to GameManager signals")
 		if GameManager.has_signal("nail_color_changed"):
 			GameManager.nail_color_changed.connect(_on_nail_color_changed)
 		if GameManager.has_signal("hand_color_changed"):
@@ -44,8 +42,6 @@ func _find_surface_indices() -> void:
 	if surface_skin_idx == -1 and surface_nails_idx != -1 and hand_mesh.mesh.get_surface_count() == 2:
 		surface_skin_idx = 1 - surface_nails_idx
 			
-	if debug:
-		print("RightHandNails: Surface indices found - Skin: ", surface_skin_idx, ", Nails: ", surface_nails_idx)
 
 func _find_hand_mesh() -> void:
 	# Get parent (which should be the RightHand root node)
@@ -54,8 +50,6 @@ func _find_hand_mesh() -> void:
 		push_warning("RightHandNails: No parent node found")
 		return
 
-	if debug:
-		print("RightHandNails: Parent node is ", hand_root.name)
 
 	# Try to find right hand mesh relative to parent
 	var possible_paths = [
@@ -66,8 +60,6 @@ func _find_hand_mesh() -> void:
 	for path in possible_paths:
 		hand_mesh = hand_root.get_node_or_null(path)
 		if hand_mesh:
-			if debug: 
-				print("RightHandNails: Found hand mesh at: ", path)
 			break
 
 	if not hand_mesh:
@@ -132,13 +124,9 @@ func _on_nail_color_changed(new_color: Color) -> void:
 		nail_material.emission = new_color * 0.3
 		if hand_mesh and surface_nails_idx != -1:
 			hand_mesh.set_surface_override_material(surface_nails_idx, nail_material)
-		if debug: 
-			print("RightHandNails: Nail color updated to: ", new_color)
 
 func _on_skin_color_changed(new_color: Color) -> void:
 	if skin_material:
 		skin_material.albedo_color = new_color
 		if hand_mesh and surface_skin_idx != -1:
 			hand_mesh.set_surface_override_material(surface_skin_idx, skin_material)
-		if debug:
-			print("RightHandNails: Skin color updated to: ", new_color)

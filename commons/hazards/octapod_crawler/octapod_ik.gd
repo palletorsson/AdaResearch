@@ -102,7 +102,6 @@ func _ready() -> void:
 		if f == null: missing += 1
 	if missing > 0:
 		push_warning("octapod_ik: %d of %d foot targets missing — the .tscn changed" % [missing, LEG_COUNT])
-	print("[OctapodIK] eight legs ready — threshold %.2f, ring %.2f" % [step_threshold, RING_R])
 
 
 func _process(delta: float) -> void:

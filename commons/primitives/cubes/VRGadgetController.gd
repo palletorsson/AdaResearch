@@ -41,7 +41,6 @@ func _ready():
 	# Find player camera for UI orientation
 	_find_player_camera()
 	
-	print("VRGadgetController: VR gadget ready with UI system")
 
 func _process(_delta):
 	# Update UI visibility based on player proximity
@@ -96,10 +95,9 @@ func _on_touch_area_entered(area: Area3D):
 		_provide_haptic_feedback(area)
 
 func _on_touch_area_exited(area: Area3D):
-	print("VRGadgetController: Touch area exited")
+	pass
 
 func _trigger_touch_interaction(touch_position: Vector3):
-	print("VRGadgetController: Gadget touched at: %s" % touch_position)
 	
 	# Visual feedback
 	_flash_touch_indicator()
@@ -138,7 +136,6 @@ func _update_info_display():
 		var info_label = info_control.find_child("InfoLabel")
 		if info_label:
 			info_label.text = info_text
-		print("VRGadgetController: Updating info display")
 
 # Override grab behavior to hide UI
 func grabbed(grabber):
@@ -157,5 +154,4 @@ func set_info_text(text: String):
 	_update_info_display()
 
 func trigger_examination_mode():
-	print("VRGadgetController: Entering examination mode")
 	gadget_examined.emit(1.0)  # Duration placeholder

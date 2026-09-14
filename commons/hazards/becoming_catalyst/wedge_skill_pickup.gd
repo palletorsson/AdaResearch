@@ -321,7 +321,6 @@ func _on_prism_grabbed(_pickable) -> void:
 	_fading = true
 	_fade_progress = 0.0
 	skill_collected.emit()
-	print("[WedgePickup] Skill collected — cage fading")
 
 
 ## Guarded: `after` is a plain assignment (nothing to rebuild), and the housing is

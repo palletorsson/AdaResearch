@@ -262,4 +262,3 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if not config_data.has("relocation"):
 		return
 	relocation = normalise_relocation(str(config_data["relocation"]), relocation)
-	print("CriticRegressStack: relocation=%s" % relocation)

@@ -44,7 +44,6 @@ func _ready() -> void:
 
 
 func _create_attachment_points() -> void:
-	print("GrabCubeAttachable: Creating attachment points, flags=%d" % attachment_faces)
 
 	# Clear existing
 	for point in _attachment_points:

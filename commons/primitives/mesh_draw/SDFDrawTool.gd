@@ -27,7 +27,6 @@ var _last_blob_pos: Vector3 = Vector3.INF
 
 func _ready():
 	super._ready()
-	print("SDFDrawTool: Ready")
 
 func _process(delta):
 	# Handle VR Input (Trigger)
@@ -74,7 +73,6 @@ func _spawn_generator():
 			return
 
 	# Create new
-	print("Tool: Spawning new MC_Sculpture...")
 	var container = Node3D.new()
 	container.name = "MC_Sculpture"
 	get_tree().root.add_child(container)

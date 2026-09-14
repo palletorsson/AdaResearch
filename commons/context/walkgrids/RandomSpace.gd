@@ -373,19 +373,15 @@ func _update_collision():
 # Public API for external control
 func set_animation_type(new_type: AnimationType):
 	animation_type = new_type
-	print("RandomSpace: Animation type set to ", AnimationType.keys()[new_type])
 
 func set_animation_speed(speed: float):
 	animation_speed = speed
-	print("RandomSpace: Animation speed set to ", speed)
 
 func set_animation_amplitude(amp: float):
 	animation_amplitude = amp
-	print("RandomSpace: Animation amplitude set to ", amp)
 
 func toggle_animation():
 	enable_animation = !enable_animation
-	print("RandomSpace: Animation ", "enabled" if enable_animation else "disabled")
 
 func reset_animation():
 	"""Reset animation to base state"""
@@ -393,7 +389,6 @@ func reset_animation():
 	current_heights = base_heights.duplicate()
 	_update_mesh()
 	_update_collision()
-	print("RandomSpace: Animation reset")
 
 func get_animation_info() -> Dictionary:
 	"""Get current animation state information"""

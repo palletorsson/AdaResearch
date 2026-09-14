@@ -309,13 +309,11 @@ func _resolve_algorithm_from_lookup_name() -> void:
 	}
 	if key in algo_map:
 		algorithm = algo_map[key]
-		print("Grid2D: Auto-selected '%s' from lookup_name '%s'" % [key, lookup])
 
 
 ## --- Grid config from map system ---
 
 func apply_grid_config(config: Dictionary) -> void:
-	print("Grid2D: apply_grid_config called with: %s" % str(config))
 
 	# Collect size changes first (before algorithm setter triggers _load_cartridge)
 	if config.has("width"):
@@ -348,11 +346,9 @@ func apply_grid_config(config: Dictionary) -> void:
 		}
 		if algo_name in algo_map:
 			algorithm = algo_map[algo_name]
-			print("Grid2D: Config set algorithm to '%s'" % algo_name)
 		else:
 			push_warning("Grid2D: Unknown algorithm '%s'" % algo_name)
 
 	# Ensure playback is running
 	if auto_play and not _is_playing:
 		play()
-		print("Grid2D: Auto-play started after config")

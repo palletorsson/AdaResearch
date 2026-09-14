@@ -104,10 +104,6 @@ static func forms_closed_loop(line_endpoints: Array, tolerance: float = DEFAULT_
 		_add_or_increment_vertex(vertices, vertex_counts, start, tolerance)
 		_add_or_increment_vertex(vertices, vertex_counts, end, tolerance)
 
-	# Debug output
-	print("GeometryUtils.forms_closed_loop: Found %d unique vertices for %d lines" % [vertices.size(), line_endpoints.size()])
-	for i in range(vertices.size()):
-		print("  Vertex %d: %s (count=%d)" % [i, vertices[i], vertex_counts[i]])
 
 	# For a closed loop, each vertex should have exactly 2 connections
 	# (one line coming in, one going out)

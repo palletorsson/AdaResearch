@@ -235,13 +235,11 @@ func _resolve_algorithm_from_lookup_name() -> void:
 	}
 	if key in algo_map:
 		algorithm = algo_map[key]
-		print("Profile: Auto-selected '%s' from lookup_name '%s'" % [key, lookup])
 
 
 ## --- Grid config ---
 
 func apply_grid_config(config: Dictionary) -> void:
-	print("Profile: apply_grid_config: %s" % str(config))
 
 	if config.has("samples"):
 		sample_count = int(config["samples"])

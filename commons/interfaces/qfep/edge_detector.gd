@@ -209,4 +209,3 @@ func _connect_to_lambda():
 	for slider in sliders:
 		if slider.has_signal("lambda_changed"):
 			slider.lambda_changed.connect(on_lambda_changed)
-			print("EdgeDetector: Connected to lambda slider")

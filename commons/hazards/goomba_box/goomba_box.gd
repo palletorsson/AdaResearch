@@ -71,7 +71,6 @@ func _ready() -> void:
 	_patrol_direction = Vector3(randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0)).normalized()
 	if _patrol_direction.length_squared() < 0.01:
 		_patrol_direction = Vector3.FORWARD
-	print("GoombaBox: READY at %s" % global_position)
 
 
 func _physics_process(delta: float) -> void:

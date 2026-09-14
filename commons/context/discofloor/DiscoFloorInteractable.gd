@@ -39,7 +39,6 @@ func _setup_disco() -> void:
 		control_panel.disco_floor_path = NodePath("../DiscoFloor")
 		add_child(control_panel)
 	
-	print("DiscoFloorInteractable: Created %dx%d disco floor" % [width, depth])
 
 ## Called by GridInteractablesComponent to apply map parameters
 func apply_grid_config(data: Dictionary) -> void:

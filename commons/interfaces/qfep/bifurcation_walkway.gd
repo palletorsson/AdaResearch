@@ -115,7 +115,6 @@ func _ready() -> void:
 
 	add_to_group("qfep_reactive")
 	_built = true
-	print("BifurcationWalkway: Walk through the phase transition")
 
 
 ## Grid system integration.
@@ -317,7 +316,6 @@ func _generate_bifurcation_columns() -> void:
 	add_child(mm_instance)
 	_dots_instance = mm_instance
 	_build_frame_anchor()
-	print("BifurcationWalkway: %d bifurcation dots" % all_positions.size())
 
 
 ## An invisible box that tells a capture where the cloud actually is.

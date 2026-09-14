@@ -127,7 +127,6 @@ func _ready() -> void:
 			await tree_entered
 		await get_tree().process_frame
 		TagSystem.trigger_tag_action(trigger_tag, "hide")
-		print("%s: Auto-hid objects with tag '%s'" % [name, trigger_tag])
 
 
 func _process(delta: float) -> void:
@@ -162,7 +161,6 @@ func register_piece(piece_id: String, piece_node: Node3D) -> void:
 	if piece_node.has_signal("dropped"):
 		piece_node.dropped.connect(_on_piece_dropped.bind(piece_id))
 
-	print("TransformPuzzleBase: Registered piece '%s'" % piece_id)
 
 
 ## Unregister a piece
@@ -184,7 +182,6 @@ func _setup_ghost_guides() -> void:
 	if not ghost_container:
 		return
 
-	print("TransformPuzzleBase: Creating ghost guides for %d targets" % piece_targets.size())
 
 	for target in piece_targets:
 		var ghost = _create_ghost_for_target(target)
@@ -344,7 +341,6 @@ func _validate_all_pieces() -> void:
 
 ## Snap a specific piece to a specific target (flexible matching)
 func _snap_piece_to_target(piece_id: String, piece: Node3D, target: PieceTarget) -> void:
-	print("TransformPuzzleBase: Snapping piece '%s' to target '%s'" % [piece_id, target.piece_id])
 
 	# Mark target as snapped AND mark the cube as used
 	piece_snapped[target.piece_id] = true
@@ -658,7 +654,6 @@ func _complete_puzzle() -> void:
 	is_completed = true
 	current_state = PuzzleState.VALIDATING
 
-	print("TransformPuzzleBase: Puzzle completed!")
 
 	# Play completion pulse on all ghosts
 	_play_completion_pulse()
@@ -683,7 +678,6 @@ func _complete_puzzle() -> void:
 	# Trigger tag action
 	if trigger_tag != "":
 		var action = trigger_action if trigger_action != "" else "reveal"
-		print("TransformPuzzleBase: Triggering tag action: %s -> %s" % [trigger_tag, action])
 		TagSystem.trigger_tag_action(trigger_tag, action)
 
 	current_state = PuzzleState.COMPLETED

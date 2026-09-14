@@ -37,7 +37,6 @@ var history_max: int = 8
 func _ready() -> void:
 	_initialize_display()
 	resized.connect(_on_resized)
-	print("VRLissajousDisplay: Ready with freq_x=%.1f, freq_y=%.1f" % [freq_x, freq_y])
 
 func _initialize_display():
 	##Initialize display geometry##
@@ -191,4 +190,3 @@ func _on_resized():
 	##Handle resize##
 	if is_initialized:
 		_initialize_display()
-		print("VRLissajousDisplay: Resized to ", size)

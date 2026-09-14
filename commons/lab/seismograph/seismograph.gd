@@ -97,7 +97,6 @@ func setup_seismograph():
 	add_to_group('monitoring_devices')
 	add_to_group('geological_instruments')
 
-	print('📊 SEISMOGRAPH: Geological monitoring station initialized')
 
 func start_monitoring():
 	# Drum rotation for continuous recording
@@ -177,7 +176,6 @@ func update_seismic_displays():
 
 func trigger_seismic_event():
 	var event_magnitude = randf_range(0.2, 0.8)
-	print('🌍 SEISMOGRAPH: Seismic event detected - Magnitude: %.2f' % event_magnitude)
 	emit_signal('seismic_event_detected', event_magnitude)
 
 	# Temporary spike in readings
@@ -193,7 +191,6 @@ func trigger_seismic_event():
 func trigger_earthquake():
 	earthquake_detected = true
 	var magnitude = randf_range(3.0, 7.5)
-	print('🚨 EARTHQUAKE DETECTED! Magnitude: %.1f' % magnitude)
 	emit_signal('earthquake_warning', magnitude)
 
 	# Intense seismic activity
@@ -229,7 +226,6 @@ func set_baseline_reading(current_value: float):
 
 func earthquake_complete():
 	earthquake_detected = false
-	print('📊 SEISMOGRAPH: Earthquake event concluded - Returning to normal monitoring')
 
 func _on_area_3d_body_entered(body):
 	if body.is_in_group('player'):
@@ -240,16 +236,12 @@ func display_seismic_status():
 	print('  Current Activity: %.3f' % seismic_activity)
 	print('  Sensitivity: %.1fx' % sensitivity)
 	print('  Recording: ', 'ACTIVE' if recording_active else 'STANDBY')
-	if earthquake_detected:
-		print('  🚨 EARTHQUAKE IN PROGRESS')
 
 func calibrate_sensitivity(new_sensitivity: float):
 	sensitivity = clamp(new_sensitivity, 0.1, 5.0)
-	print('📊 SEISMOGRAPH: Sensitivity calibrated to %.1fx' % sensitivity)
 
 func start_recording():
 	recording_active = true
-	print('📊 SEISMOGRAPH: Recording activated')
 
 	# Paper roll animation
 	var paper_tween = create_tween()
@@ -258,7 +250,6 @@ func start_recording():
 
 func stop_recording():
 	recording_active = false
-	print('📊 SEISMOGRAPH: Recording stopped')
 	emit_signal('data_recording_complete')
 
 

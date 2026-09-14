@@ -367,7 +367,6 @@ func _setup_vr_input():
 	vr_input_handler.scroll_changed.connect(_on_vr_scroll_changed)
 	vr_input_handler.vr_input_detected.connect(_on_vr_input_detected)
 	
-	print("AlgorithmInfoBoardBase: VR input handler configured")
 
 func _on_vr_scroll_changed(_scroll_value: float):
 	"""Handle VR scroll changes - override in child classes for custom behavior"""
@@ -375,4 +374,3 @@ func _on_vr_scroll_changed(_scroll_value: float):
 
 func _on_vr_input_detected(controller: XRController3D):
 	"""Handle VR input detection - override in child classes for custom behavior"""
-	print("AlgorithmInfoBoardBase: VR input detected from controller: ", controller.name)

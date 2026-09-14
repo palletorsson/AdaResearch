@@ -432,10 +432,8 @@ func _connect_to_sliders():
 	for slider in sliders:
 		if slider.has_signal("lambda_changed"):
 			slider.lambda_changed.connect(set_lambda)
-			print("QFEPReactor: Connected to lambda slider")
 		if slider.has_signal("phi_changed"):
 			slider.phi_changed.connect(set_phi)
-			print("QFEPReactor: Connected to phi slider")
 
 # Check if currently at edge of chaos
 func is_at_edge() -> bool:

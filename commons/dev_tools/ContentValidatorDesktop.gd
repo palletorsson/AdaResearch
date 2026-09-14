@@ -8,12 +8,6 @@ extends Control
 @onready var close_btn: Button = $MarginContainer/VBoxContainer/TitleBar/CloseButton
 
 func _ready():
-	print("")
-	print("╔══════════════════════════════════════════╗")
-	print("║   AdaResearch Content Validator          ║")
-	print("║   F5 = Refresh | Esc = Close             ║")
-	print("╚══════════════════════════════════════════╝")
-	print("")
 	
 	if close_btn:
 		close_btn.pressed.connect(_on_close_pressed)
@@ -25,10 +19,10 @@ func _ready():
 		validator_ui.map_opened.connect(_on_map_opened)
 
 func _on_sequence_opened(seq_name: String):
-	print("→ Sequence: %s" % seq_name)
+	pass
 
 func _on_map_opened(seq_name: String, map_name: String):
-	print("→ Map: %s/%s" % [seq_name, map_name])
+	pass
 
 func _on_export_pressed():
 	if not validator_ui:
@@ -112,4 +106,3 @@ func _input(event: InputEvent):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_F5:
 		if validator_ui:
 			validator_ui.refresh()
-			print("🔄 Refreshed")

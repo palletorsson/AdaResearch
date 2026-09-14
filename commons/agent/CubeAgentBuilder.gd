@@ -33,11 +33,9 @@ signal agent_built()
 signal agent_build_failed(error: String)
 
 func _ready() -> void:
-	print("CubeAgentBuilder: Initializing...")
 	build_agent()
 
 func build_agent() -> void:
-	print("CubeAgentBuilder: Building agent from %s" % agent_data_path)
 
 	# Load agent data
 	if not _load_agent_data():
@@ -62,7 +60,6 @@ func build_agent() -> void:
 	agent_built.emit()
 
 func _load_agent_data() -> bool:
-	print("CubeAgentBuilder: Loading agent data from %s" % agent_data_path)
 
 	if not FileAccess.file_exists(agent_data_path):
 		push_error("CubeAgentBuilder: Agent data file not found: %s" % agent_data_path)
@@ -94,7 +91,6 @@ func _load_agent_data() -> bool:
 	return true
 
 func _generate_cube_bodies() -> void:
-	print("CubeAgentBuilder: Generating cube bodies...")
 
 	var structure = agent_data["layers"]["structure"]
 
@@ -114,7 +110,6 @@ func _generate_cube_bodies() -> void:
 			# Create stacked cubes for this grid position
 			_create_cube_stack(x, z, height)
 
-	print("CubeAgentBuilder: Created %d cube bodies" % cube_bodies.size())
 
 func _create_cube_stack(grid_x: int, grid_z: int, height: float) -> void:
 	# Calculate how many cubes to stack
@@ -186,7 +181,6 @@ func _get_cube_color(_grid_x: int, grid_z: int) -> Color:
 		return Color(0.4, 0.3, 0.2)  # Lower legs/feet - shoes
 
 func _create_joints() -> void:
-	print("CubeAgentBuilder: Creating joints...")
 
 	if not agent_data["layers"].has("joints"):
 		print("CubeAgentBuilder: No joints layer found")
@@ -202,7 +196,6 @@ func _create_joints() -> void:
 			if joint_marker == "j":
 				_create_joint_at_position(x, z)
 
-	print("CubeAgentBuilder: Created %d joints" % joints.size())
 
 func _create_joint_at_position(grid_x: int, grid_z: int) -> void:
 	# Find the cube at this position
@@ -269,7 +262,6 @@ func _create_articulated_joint(body_a: RigidBody3D, body_b: RigidBody3D, joint_p
 	add_child(joint)
 	joints.append(joint)
 
-	print("  Created joint between %s and %s" % [body_a.name, body_b.name])
 
 func _create_fixed_joint(body_a: RigidBody3D, body_b: RigidBody3D) -> void:
 	# Create a rigid joint for vertically stacked cubes (no movement)
@@ -318,7 +310,6 @@ func _get_neighbor_cubes(grid_x: int, grid_z: int) -> Array[RigidBody3D]:
 	return neighbors
 
 func _classify_body_parts() -> void:
-	print("CubeAgentBuilder: Classifying body parts...")
 
 	# Simple classification based on grid position
 	for key in cube_bodies.keys():
@@ -343,15 +334,8 @@ func _classify_body_parts() -> void:
 		else:
 			body_parts["right_leg"].append(cube)
 
-	print("  Head: %d cubes" % body_parts["head"].size())
-	print("  Torso: %d cubes" % body_parts["torso"].size())
-	print("  Left arm: %d cubes" % body_parts["left_arm"].size())
-	print("  Right arm: %d cubes" % body_parts["right_arm"].size())
-	print("  Left leg: %d cubes" % body_parts["left_leg"].size())
-	print("  Right leg: %d cubes" % body_parts["right_leg"].size())
 
 func _setup_physics() -> void:
-	print("CubeAgentBuilder: Setting up physics properties...")
 
 	# Set up collision layers
 	for cube in cube_bodies.values():

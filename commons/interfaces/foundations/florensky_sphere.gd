@@ -242,7 +242,6 @@ func _ready() -> void:
 	_create_interactable()
 	_update_visual_state()
 	_built = true
-	print("FlorenskySphere: Ready — 'A and not-A'")
 
 func _create_sphere() -> void:
 	_sphere = MeshInstance3D.new()
@@ -479,8 +478,6 @@ func observe() -> void:
 		emit_signal("superposition_collapsed")
 		emit_signal("state_observed", current_state == LogicState.A, current_state == LogicState.NOT_A)
 		
-		print("FlorenskySphere: Observation collapsed state to %s" % ("A" if current_state == LogicState.A else "¬A"))
-		print("FlorenskySphere: Will return to superposition in %.1f seconds" % OBSERVATION_DURATION)
 
 func cycle_state() -> void:
 	match current_state:
@@ -495,7 +492,6 @@ func cycle_state() -> void:
 	
 	_is_observed = false
 	_update_visual_state()
-	print("FlorenskySphere: State set to %s" % LogicState.keys()[current_state])
 
 func set_state(state: LogicState) -> void:
 	current_state = state
@@ -527,7 +523,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if seam == before or not _built:
 		return
 	_rebuild_seam()
-	print("FlorenskySphere: seam=%s" % seam)
 
 ## The skin itself changes shape between values, so this rebuilds the whole body
 ## rather than a seam overlay — the same full-rebuild pattern russell_set_box.gd

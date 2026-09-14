@@ -77,8 +77,6 @@ func _create_columns():
 
 func create_parameter_controls(sound_key: String, parameters: Dictionary):
 	"""Create parameter controls for a sound type"""
-	print("🎛️ Creating parameter controls for: %s" % sound_key)
-	print("📊 Parameters received: %s" % str(parameters))
 
 	current_sound_key = sound_key
 	current_parameters = parameters.duplicate()
@@ -94,10 +92,8 @@ func create_parameter_controls(sound_key: String, parameters: Dictionary):
 		var param_name = param_names[i]
 		var param_config = parameters[param_name]
 		var column_index = i % column_count
-		print("🎚️ Creating control for %s: %s" % [param_name, str(param_config)])
 		_create_parameter_control_in_column(columns[column_index], param_name, param_config)
 
-	print("✅ ParameterControlsComponent: Created %d parameter controls for %s" % [param_names.size(), sound_key])
 
 func _clear_controls():
 	"""Clear all existing parameter controls"""
@@ -180,7 +176,6 @@ func _create_slider_control(container: VBoxContainer, param_name: String, config
 
 	# Connect signal
 	slider.value_changed.connect(func(value): _on_slider_changed(value, param_name))
-	print("🔌 Connected slider signal for %s (value: %s)" % [param_name, slider.value])
 
 	container.add_child(slider)
 	parameter_controls[param_name] = slider
@@ -272,7 +267,6 @@ func _on_slider_changed(arg1: Variant, arg2: Variant = null) -> void:
 	else:
 		value = float(arg1)
 		param_name = String(arg2)
-	print("🎚️ ParameterControls: Slider changed - %s = %s" % [param_name, value])
 	if current_parameters.has(param_name) and current_parameters[param_name] is Dictionary:
 		current_parameters[param_name]["value"] = value
 	else:

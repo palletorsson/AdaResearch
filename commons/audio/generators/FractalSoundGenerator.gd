@@ -69,7 +69,6 @@ func _initialize_fractal_levels():
 			"intensity": 1.0 / (i + 1)  # Deeper levels are quieter
 		})
 
-	print("FractalSoundGenerator: Initialized %d fractal levels" % fractal_depth)
 
 func _generate_pattern_at_scale(level: int) -> Array[float]:
 	"""Generate pattern for a specific fractal level"""

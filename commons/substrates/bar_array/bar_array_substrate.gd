@@ -380,13 +380,11 @@ func _resolve_algorithm_from_lookup_name() -> void:
 	}
 	if key in algo_map:
 		algorithm = algo_map[key]
-		print("BarArray: Auto-selected '%s' from lookup_name '%s'" % [key, lookup])
 
 
 ## --- Grid config from map system ---
 
 func apply_grid_config(config: Dictionary) -> void:
-	print("BarArray: apply_grid_config called with: %s" % str(config))
 
 	if config.has("size"):
 		array_size = int(config["size"])
@@ -437,7 +435,6 @@ func apply_grid_config(config: Dictionary) -> void:
 		if algo_name in algo_map:
 			algorithm = algo_map[algo_name]
 			reload = false   # the setter already re-ran _load_cartridge with the new order
-			print("BarArray: Config set algorithm to '%s'" % algo_name)
 		else:
 			push_warning("BarArray: Unknown algorithm '%s'" % algo_name)
 
@@ -448,4 +445,3 @@ func apply_grid_config(config: Dictionary) -> void:
 
 	if auto_play and not _is_playing:
 		play()
-		print("BarArray: Auto-play started after config")

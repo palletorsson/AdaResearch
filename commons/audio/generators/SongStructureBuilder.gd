@@ -63,7 +63,6 @@ static func build_song(config: SongConfig, parameters: Dictionary = {}) -> Audio
 		scale
 	)
 
-	print("AudioSynthesizer: Generating %s in %s" % [config.genre_id, root_note])
 
 	var clip_count = config.sections.size()
 	var playback = AudioStreamInteractive.new()

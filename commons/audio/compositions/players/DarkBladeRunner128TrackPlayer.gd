@@ -94,9 +94,6 @@ signal blade_runner_moment(intensity: float)
 signal cyberpunk_pulse(energy: float)
 
 func _ready():
-	print("🎬 BLADE RUNNER 128-BAR EPIC TRACK 🎬")
-	print("Loading dark cyberpunk atmosphere...")
-	print("Total duration: %.1f minutes of dystopian soundscape" % ((BARS_TOTAL * 4 * BEAT_DURATION) / 60.0))
 	
 	_setup_epic_audio_system()
 	_setup_advanced_rhythm_system()
@@ -149,7 +146,6 @@ func _setup_epic_audio_system():
 	add_child(cityscape_player)
 	
 	_update_all_volumes()
-	print("   ✅ Epic multi-layer audio system ready")
 
 func _setup_advanced_rhythm_system():
 	"""Setup precision timing for 128-bar epic"""
@@ -170,11 +166,9 @@ func _setup_advanced_rhythm_system():
 	section_timer.timeout.connect(_on_section_change)
 	add_child(section_timer)
 	
-	print("   ✅ Advanced 128-bar rhythm system ready at %.0f BPM" % BPM)
 
 func _initialize_section_patterns():
 	"""Create evolving patterns for each of 8 sections"""
-	print("   🎬 Building 128-bar Blade Runner pattern library...")
 	
 	# INTRO Section (Bars 1-16) - Dark atmospheric emergence
 	pattern_library[Section.INTRO] = {
@@ -266,11 +260,9 @@ func _initialize_section_patterns():
 	
 	# Set initial patterns
 	current_patterns = pattern_library[Section.INTRO]
-	print("   ✅ 8-section Blade Runner pattern library complete")
 
 func _generate_cyberpunk_sounds():
 	"""Generate enhanced cyberpunk and Blade Runner sounds"""
-	print("   🔧 Generating cyberpunk sound palette...")
 	
 	# Core rhythm sounds
 	sound_cache[TrackSound.DARK_808_KICK] = _generate_sound(TrackSound.DARK_808_KICK, 1.5)
@@ -292,17 +284,12 @@ func _generate_cyberpunk_sounds():
 	sound_cache[TrackSound.SYNTHETIC_VOICE] = _generate_sound(TrackSound.SYNTHETIC_VOICE, 4.0)
 	sound_cache[TrackSound.CITYSCAPE_WASH] = _generate_sound(TrackSound.CITYSCAPE_WASH, 12.0)
 	
-	print("   ✅ Complete cyberpunk sound palette ready - 14 unique sounds")
 
 func start_epic_blade_runner_track():
 	"""Start the epic 128-bar Blade Runner journey"""
 	if is_playing:
 		return
 	
-	print("🎬 STARTING BLADE RUNNER 128-BAR EPIC...")
-	print("   🌆 Dystopian cityscape emerging...")
-	print("   ⚡ Total duration: %.1f minutes of cyberpunk atmosphere" % ((BARS_TOTAL * 4 * BEAT_DURATION) / 60.0))
-	print("   🎵 8 evolving sections with Blade Runner themes")
 	
 	is_playing = true
 	current_step = 0
@@ -383,7 +370,6 @@ func _on_epic_step():
 	
 	# End of epic track
 	if current_step >= TOTAL_STEPS:
-		print("🎬 Epic 128-bar Blade Runner track complete! 🎬")
 		stop_epic_blade_runner_track()
 
 func _play_epic_pattern_element(name: String, intensity: int, player: AudioStreamPlayer, sound: TrackSound):
@@ -421,7 +407,6 @@ func _handle_section_specials(pattern_pos: int):
 				blade_runner_player.stream = sound_cache[TrackSound.SYNTHETIC_VOICE]
 				blade_runner_player.volume_db = blade_runner_volume + master_volume + 3.0
 				blade_runner_player.play()
-				print("   🎬 Synthetic voice moment at bar %d" % (current_bar + 1))
 		
 		Section.NEON_PULSE:
 			# Neon pulse effects
@@ -472,7 +457,6 @@ func _announce_section_change():
 		"FADE OUT - Return to the endless night"
 	]
 	
-	print("🎬 Section %d: %s (Bar %d)" % [current_section + 1, section_names[current_section], current_bar + 1])
 
 func _get_base_volume_for_epic_player(player: AudioStreamPlayer) -> float:
 	"""Get base volume for player type"""
@@ -868,7 +852,6 @@ func set_cyberpunk_parameters(intensity: float, rain: float, neon_rate: float):
 	cyberpunk_intensity = clamp(intensity, 0.0, 1.0)
 	rain_density = clamp(rain, 0.0, 1.0)
 	neon_pulse_rate = clamp(neon_rate, 0.5, 5.0)
-	print("🎬 Cyberpunk params: intensity=%.1f%%, rain=%.1f%%, neon_rate=%.1f Hz" % [cyberpunk_intensity * 100, rain_density * 100, neon_pulse_rate])
 
 func get_blade_runner_track_info() -> Dictionary:
 	"""Get comprehensive track information"""
@@ -954,13 +937,10 @@ func _input(event):
 				set_cyberpunk_parameters(cyberpunk_intensity, rain_density, neon_pulse_rate + 0.5)
 			KEY_B: # B = Blade Runner mode (max atmosphere)
 				set_cyberpunk_parameters(1.0, 0.8, 3.0)
-				print("🎬 BLADE RUNNER MODE ACTIVATED")
 			KEY_C: # C = Clear atmosphere (minimal)
 				set_cyberpunk_parameters(0.2, 0.1, 1.0)
-				print("🌆 Minimal atmosphere mode")
 			KEY_M: # M = Matrix rain mode
 				set_cyberpunk_parameters(0.7, 1.0, 2.5)
-				print("💊 MATRIX RAIN MODE")
 
 # ===== JSON CONFIGURATION SYSTEM =====
 
@@ -989,7 +969,6 @@ func load_from_json(json_path: String):
 		STEP_DURATION = BEAT_DURATION / 4.0
 		if step_timer:
 			step_timer.wait_time = STEP_DURATION
-		print("   🎵 BPM set to %.0f" % BPM)
 	
 	# Load 128-bar patterns (expand from 64-step base patterns)
 	if "patterns" in data:
@@ -1010,17 +989,12 @@ func load_from_json(json_path: String):
 			rain_density = cyberpunk.rain_density
 		if "neon_pulse_rate" in cyberpunk:
 			neon_pulse_rate = cyberpunk.neon_pulse_rate
-		print("   🎬 Cyberpunk settings loaded")
 	
 	# Load track metadata
-	if "name" in data:
-		print("   📛 Track: %s" % data.name)
 	
-	print("✅ Loaded complete Blade Runner configuration from %s" % json_path)
 
 func _load_expanded_patterns(patterns: Dictionary):
 	"""Load and expand patterns for 128-bar structure"""
-	print("   🎵 Loading and expanding patterns for 128-bar structure...")
 	
 	# Take base patterns and create variations for each section
 	var base_kick = patterns.get("kick", [])
@@ -1040,7 +1014,6 @@ func _load_expanded_patterns(patterns: Dictionary):
 		# Update patterns in library with base patterns
 		_update_section_patterns_from_base(kick_base, hihat_base, snare_base, effect_base, blade_base)
 		
-		print("   ✅ Patterns expanded and loaded into 8 sections")
 
 func _update_section_patterns_from_base(kick_base: Array, hihat_base: Array, snare_base: Array, effect_base: Array, blade_base: Array):
 	"""Update section patterns using base patterns as foundation"""
@@ -1118,7 +1091,6 @@ func _load_volume_settings(volumes: Dictionary):
 		cityscape_volume = volumes.cityscape
 	
 	_update_all_volumes()
-	print("   🔊 Volume settings applied")
 
 # ===== CONSOLE COMMANDS =====
 
@@ -1137,26 +1109,18 @@ func status():
 func blade_mode():
 	"""Console command: activate full Blade Runner atmosphere"""
 	set_cyberpunk_parameters(1.0, 0.8, 3.0)
-	print("🎬 BLADE RUNNER MODE ACTIVATED - Full cyberpunk atmosphere")
 
 func rain_mode():
 	"""Console command: activate digital rain mode"""
 	set_cyberpunk_parameters(0.7, 1.0, 2.5)
-	print("🌧️ DIGITAL RAIN MODE - Matrix-style atmosphere")
 
 func minimal_mode():
 	"""Console command: minimal atmosphere"""
 	set_cyberpunk_parameters(0.2, 0.1, 1.0)
-	print("🌆 MINIMAL MODE - Sparse cyberpunk elements")
 
 func section_info():
 	"""Console command: show section information"""
 	var info = get_blade_runner_track_info()
-	print("🎬 SECTION INFO 🎬")
-	print("   Current: %s (Section %d/8)" % [info.section_name, current_section + 1])
-	print("   Bar: %d of %d in this section" % [(current_bar % 16) + 1, 16])
-	print("   Total progress: %.1f%%" % info.progress_percent)
-	print("   Time in section: %.1f minutes" % (((current_bar % 16) * 4 * BEAT_DURATION) / 60.0))
 
 # ===== ACHIEVEMENT SYSTEM =====
 
@@ -1165,19 +1129,15 @@ func check_achievements():
 	var info = get_blade_runner_track_info()
 	
 	if info.progress_percent >= 25.0 and info.progress_percent < 25.1:
-		print("🏆 ACHIEVEMENT: Quarter Replicant - 25% complete!")
+		pass
 	elif info.progress_percent >= 50.0 and info.progress_percent < 50.1:
-		print("🏆 ACHIEVEMENT: Half Electric Sheep - 50% complete!")
+		pass
 	elif info.progress_percent >= 75.0 and info.progress_percent < 75.1:
-		print("🏆 ACHIEVEMENT: Three-Quarter Nexus - 75% complete!")
+		pass
 	elif info.progress_percent >= 100.0:
-		print("🏆 ACHIEVEMENT: Full Blade Runner - Epic journey complete!")
+		pass
 		
-	if current_section == Section.BLADE_STORM:
-		print("🎬 ACHIEVEMENT: Eye of the Storm - Reached maximum Blade Runner intensity!")
 	
-	if cyberpunk_intensity >= 0.9 and rain_density >= 0.9:
-		print("🌧️ ACHIEVEMENT: Digital Monsoon - Maximum cyberpunk atmosphere!")
 
 # ===== AUTO-CONFIG SYSTEM =====
 
@@ -1219,7 +1179,6 @@ func create_enhanced_json_config() -> String:
 	}
 	
 	var json_string = JSON.stringify(config, "\t")
-	print("📄 Enhanced JSON config generated")
 	return json_string
 
 func save_current_config(file_path: String):

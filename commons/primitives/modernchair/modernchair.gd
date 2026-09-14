@@ -198,8 +198,6 @@ func create_chair() -> void:
 	# Add collision
 	create_collision()
 
-	print("Chair created: Width=%.2f, Depth=%.2f, Seat=%.2f, Legs=%.2f, Back=%.2f" %
-		[seat_width, seat_depth, seat_thickness, leg_height, back_height])
 
 func apply_queer_material():
 	var material = ShaderMaterial.new()

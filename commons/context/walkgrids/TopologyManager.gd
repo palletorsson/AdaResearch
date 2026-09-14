@@ -115,7 +115,6 @@ func create_selected_topology_spaces():
 				spaces.append(space)
 				position_index += 1
 
-	print("TopologyManager: Created %d mathematical spaces" % spaces.size())
 
 func _create_space_from_path(space_name: String, script_path: String) -> Node3D:
 	var script = load(script_path)
@@ -190,7 +189,6 @@ func add_space_at_runtime(registry_key: String) -> Node3D:
 	if space:
 		space.position.x = spaces.size() * space_separation
 		spaces.append(space)
-		print("TopologyManager: Added %s (total: %d)" % [entry[1], spaces.size()])
 	return space
 
 func remove_space(index: int):

@@ -102,7 +102,6 @@ func _ready() -> void:
 	_create_highlight()
 	_create_labels()
 	_built = true
-	print("BifurcationDiagram: Ready — walk through the edge of chaos")
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	var changed: bool = false
@@ -208,7 +207,6 @@ func _generate_bifurcation_data() -> void:
 	_points_multimesh.material_override = mat
 	
 	add_child(_points_multimesh)
-	print("BifurcationDiagram: Generated %d points" % _total_points)
 
 func _get_color_for_r(r: float) -> Color:
 	if r < R_STABLE:

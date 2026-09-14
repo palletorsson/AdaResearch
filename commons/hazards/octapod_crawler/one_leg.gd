@@ -36,8 +36,6 @@ func _ready() -> void:
 	# Build scene (floor, camera, lighting)
 	_build_scene()
 
-	print("[OneLeg] Ready — body at Y=%.1f" % global_position.y)
-	print("[OneLeg] WASD to move. Leg should bend to reach ground.")
 
 func _process(delta: float) -> void:
 	# THE POGO PACES TOO (2026-08-27). It was the only member of the seven with
@@ -77,7 +75,6 @@ func _add_skinned_mesh() -> void:
 	mi.material_override = leg_mat
 	skeleton.add_child(mi)
 
-	print("[OneLeg] Skinned mesh: %d bones, bind poses OK" % skin.get_bind_count())
 
 func _make_tapered_tube(bone_count: int, spacing: float, base_r: float, tip_r: float, segs: int) -> ArrayMesh:
 	var verts := PackedVector3Array()

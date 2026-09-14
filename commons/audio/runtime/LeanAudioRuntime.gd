@@ -30,10 +30,8 @@ static func initialize():
 	if is_initialized:
 		return
 		
-	print("🎵 LeanAudioRuntime: Initializing...")
 	_load_sound_configurations()
 	is_initialized = true
-	print("✅ LeanAudioRuntime: Ready")
 
 # Load sound configurations from JSON files
 static func _load_sound_configurations():
@@ -53,7 +51,6 @@ static func _load_sound_configurations():
 		if sound_config:
 			var sound_key = config_file.get_basename()
 			sound_parameters[sound_key] = sound_config
-			print("📄 Loaded config: %s" % sound_key)
 
 # Load a single JSON configuration file
 static func _load_json_config(file_path: String) -> Dictionary:

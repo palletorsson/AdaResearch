@@ -187,8 +187,6 @@ func _check_connection():
 	
 	connection_changed.emit(output_jack, input_jack)
 	
-	if output_jack and input_jack:
-		print("SynthCable: Connected %s → %s" % [output_jack.parameter_name, input_jack.parameter_name])
 
 
 ## API

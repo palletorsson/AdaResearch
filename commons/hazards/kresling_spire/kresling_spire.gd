@@ -155,7 +155,6 @@ func _ready() -> void:
 	if pin >= 0.0:
 		_twist = pin
 		_update_mesh()
-	print("KreslingSpire: READY at %s" % global_position)
 	# WARNING dressing, appended LAST so the collision shape and the mesh root keep
 	# their child indices. "none" adds nothing at all — the legacy lineage.
 	_build_warning()

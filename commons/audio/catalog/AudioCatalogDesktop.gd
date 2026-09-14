@@ -53,9 +53,6 @@ func _ready():
 	_effect_board.play_requested.connect(_on_play_requested)
 	_effect_board.stop_requested.connect(_on_stop_requested)
 	
-	print("Audio Catalog Desktop ready")
-	print("  - Genre Synth Browser: 10 genres, 40+ elements")
-	print("  - Sound Catalog: %d sounds" % AudioCatalogDataProvider.get_sound_count())
 
 
 func _on_play_requested(sound_key: String, parameters: Dictionary):

@@ -164,8 +164,6 @@ func generate_from_code(code: String) -> void:
 	
 	if auto_snap_ports:
 		var fixes := auto_connect_segments(true, true)
-		if fixes > 0:
-			print("TurtlePipeBase: auto-connect snapped %d joints" % fixes)
 	
 	if show_port_debug:
 		_add_port_debug_visualization()
@@ -247,8 +245,6 @@ func _build_from_segments(segments: Array) -> void:
 	
 	if auto_snap_ports:
 		var fixes := auto_connect_segments(true, true)
-		if fixes > 0:
-			print("TurtlePipeBase: auto-connect snapped %d joints (segments mode)" % fixes)
 	
 	if show_port_debug:
 		_add_port_debug_visualization()

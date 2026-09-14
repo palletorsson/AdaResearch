@@ -22,7 +22,7 @@ signal board_generation_complete(board_count: int)
 signal board_interacted(board_type: String, position: Vector3, data: Dictionary)
 
 func _ready():
-	print("InfoBoardComponent: Initialized")
+	pass
 
 # Initialize with references and settings
 func initialize(parent: Node3D, settings: Dictionary = {}):
@@ -33,13 +33,11 @@ func initialize(parent: Node3D, settings: Dictionary = {}):
 	gutter = settings.get("gutter", 0.0)
 	default_height = settings.get("default_height", 1.5)
 
-	print("InfoBoardComponent: Initialized with cube_size=%f, gutter=%f, default_height=%f" % [cube_size, gutter, default_height])
 
 # Initialize with grid structure component (optional)
 func initialize_with_structure(parent: Node3D, struct_component, settings: Dictionary = {}):
 	initialize(parent, settings)
 	structure_component = struct_component
-	print("InfoBoardComponent: Initialized with structure component")
 
 # Generate info boards from layout data
 func generate_boards(board_data, board_definitions: Dictionary = {}):
@@ -60,7 +58,6 @@ func generate_boards(board_data, board_definitions: Dictionary = {}):
 		print("InfoBoardComponent: Received type: %s" % typeof(board_data))
 		return
 
-	print("InfoBoardComponent: Generating info boards")
 
 	var total_size = cube_size + gutter
 	var board_count = 0
@@ -102,7 +99,6 @@ func generate_boards(board_data, board_definitions: Dictionary = {}):
 				_place_board(x, y_pos, z, board_type, parameters, board_definition, total_size)
 				board_count += 1
 
-	print("InfoBoardComponent: Added %d info boards" % board_count)
 	board_generation_complete.emit(board_count)
 
 # Create a board using the universal template
@@ -133,7 +129,6 @@ func _create_board_with_universal_template(board_id: String) -> Node3D:
 	ui.set_script(universal_script)
 	ui.board_id = board_id
 
-	print("InfoBoardComponent: Created board '%s' using UniversalInfoBoard template (Content: %d pages)" % [board_id, page_count])
 
 	return board_3d
 
@@ -162,7 +157,6 @@ func _place_board(x: int, y: int, z: int, board_type: String, parameters: Array,
 
 		# Apply parameters if supported
 		if parameters.size() > 0 and InfoBoardRegistry.supports_parameters(board_type):
-			print("InfoBoardComponent: Applying parameters for board type '%s'" % board_type)
 			_apply_board_parameters(board_object, board_type, parameters)
 
 		# Apply definition properties
@@ -182,7 +176,6 @@ func _place_board(x: int, y: int, z: int, board_type: String, parameters: Array,
 		var param_info = ""
 		if parameters.size() > 0:
 			param_info = " (params: %s)" % str(parameters)
-		print("  Added %s at (%d,%d,%d)%s" % [InfoBoardRegistry.get_board_name(board_type), x, y, z, param_info])
 
 # Apply board parameters
 func _apply_board_parameters(board_object: Node3D, board_type: String, parameters: Array):
@@ -192,7 +185,6 @@ func _apply_board_parameters(board_object: Node3D, board_type: String, parameter
 		if param.is_valid_float():
 			var height_offset = float(param)
 			board_object.position.y += height_offset
-			print("InfoBoardComponent: Applied height offset: %.2f" % height_offset)
 
 	# Board-specific parameters can be added here
 	# For example: rotation, scale, specific page to open, etc.
@@ -225,7 +217,6 @@ func _set_board_color(board_object: Node3D, color: Color):
 	var ui_node = _find_info_board_ui(board_object)
 	if ui_node and "category_color" in ui_node:
 		ui_node.category_color = color
-		print("InfoBoardComponent: Set board category color to %s" % color)
 
 # Find InfoBoardUI node in board hierarchy
 func _find_info_board_ui(board_object: Node3D) -> Control:
@@ -265,7 +256,6 @@ func _connect_board_signals(board_object: Node3D, board_type: String):
 	# Connect page_changed signal
 	if ui_node.has_signal("page_changed"):
 		ui_node.page_changed.connect(_on_board_page_changed.bind(board_type, board_object))
-		print("InfoBoardComponent: Connected page_changed signal for %s" % board_type)
 
 	# Connect animation_toggled signal
 	if ui_node.has_signal("animation_toggled"):
@@ -280,12 +270,11 @@ func _on_board_page_changed(page_index: int, board_type: String, board_object: N
 		"page_index": page_index
 	}
 
-	print("InfoBoardComponent: Board page changed to %d" % page_index)
 	board_interacted.emit(board_type, board_object.global_position, board_data)
 
 # Handle board animation toggle
 func _on_board_animation_toggled(is_playing: bool, board_type: String, board_object: Node3D):
-	print("InfoBoardComponent: Board animation toggled: %s" % ("playing" if is_playing else "paused"))
+	pass
 
 # Load scene with caching
 func _load_scene_cached(scene_path: String) -> PackedScene:
@@ -295,7 +284,6 @@ func _load_scene_cached(scene_path: String) -> PackedScene:
 	if scene_cache.has(scene_path):
 		return scene_cache[scene_path]
 
-	print("InfoBoardComponent: Attempting to load scene: %s" % scene_path)
 
 	if ResourceLoader.exists(scene_path):
 		var scene = ResourceLoader.load(scene_path)
@@ -317,8 +305,6 @@ func _list_available_board_scenes():
 		var file_name = dir.get_next()
 
 		while file_name != "":
-			if file_name.ends_with(".tscn"):
-				print("  → %s" % file_name)
 			file_name = dir.get_next()
 	else:
 		print("InfoBoardComponent: Could not open scenes directory: %s" % InfoBoardRegistry.INFO_BOARD_SCENES_PATH)
@@ -351,7 +337,6 @@ func place_board_at(board_type: String, position: Vector3, parameters: Array = [
 
 		parent_node.add_child(board_object)
 
-		print("InfoBoardComponent: Placed %s at %s" % [InfoBoardRegistry.get_board_name(board_type), position])
 		return board_object
 
 	return null
@@ -367,7 +352,6 @@ func has_board_at(x: int, y: int, z: int) -> bool:
 
 # Clear all boards
 func clear_boards():
-	print("InfoBoardComponent: Clearing all info boards")
 
 	for key in info_boards.keys():
 		var board = info_boards[key]

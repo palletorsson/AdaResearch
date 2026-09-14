@@ -124,4 +124,3 @@ func _build_plant_tufts(positions: Array, base_seed: int) -> void:
 	mat.roughness = 0.9
 	mmi.material_override = mat
 	add_child(mmi)
-	print("  [softbody_flora] %d plant tufts (%d blades) → 1 draw call" % [positions.size(), mm.instance_count])

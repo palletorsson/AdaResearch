@@ -123,7 +123,6 @@ func load_preset(preset_name: String, uvac: Node3D) -> void:
 	# Center the entire rack at origin
 	_center_rack()
 
-	print("EurorackRack: Loaded preset '%s' — %d modules across %d rows" % [preset_name, modules.size(), row_count])
 
 
 func _build_frame() -> void:
@@ -241,7 +240,6 @@ func _setup_cable_system() -> void:
 			var cable_x: float = (float(i) / float(CABLE_POOL_SIZE - 1)) * rack_width * 0.8 + rack_width * 0.1
 			var spawn_pos := Vector3(cable_x, tray_y, 0.02)
 			cable_manager.spawn_cable(spawn_pos)
-		print("EurorackRack: Cable system — %d jacks, %d cables" % [jack_count, CABLE_POOL_SIZE])
 	else:
 		print("EurorackRack: Desktop mode — %d jacks registered, cables skipped" % jack_count)
 

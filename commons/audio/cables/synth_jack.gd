@@ -175,7 +175,6 @@ func _connect_plug(plug: Node3D):
 	var cable = plug.get_parent() if plug.get_parent().has_method("is_synth_cable") else plug
 	cable_connected.emit(cable, plug)
 	
-	print("SynthJack: Connected plug to %s (%s)" % [parameter_name, "OUTPUT" if jack_type == JackType.OUTPUT else "INPUT"])
 
 
 func _disconnect_plug():
@@ -190,7 +189,6 @@ func _disconnect_plug():
 	
 	cable_disconnected.emit(cable, old_plug)
 	
-	print("SynthJack: Disconnected from %s" % parameter_name)
 
 
 func _set_connected_visual(connected: bool):

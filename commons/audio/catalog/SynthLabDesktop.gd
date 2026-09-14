@@ -13,7 +13,6 @@ var _status_label: Label
 func _ready():
 	get_tree().root.title = "AdaResearch Synth Lab"
 	_build_ui()
-	print("Synth Lab Desktop ready")
 
 
 func _build_ui():

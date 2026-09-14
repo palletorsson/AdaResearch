@@ -100,8 +100,6 @@ func apply(ctx: Dictionary) -> void:
 				inst_placed += 1
 		if inst_placed >= INSTANCE_CAP and batch_placed >= BATCH_CAP:
 			break
-	if inst_placed > 0 or batch_placed > 0:
-		print("  [object_scatter] %d instanced + %d batched artifact(s) across %d layer(s)" % [inst_placed, batch_placed, idx])
 
 
 ## Bake up to (BATCH_CAP - already) copies of `scene` at `positions` into

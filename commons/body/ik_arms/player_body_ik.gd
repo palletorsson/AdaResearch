@@ -80,7 +80,6 @@ func _ready() -> void:
 	if right_hand:
 		_right_arm.set_controller(right_hand)
 
-	print("[PlayerBodyIK] Initialized with 2 arm rigs")
 
 
 func _physics_process(_delta: float) -> void:

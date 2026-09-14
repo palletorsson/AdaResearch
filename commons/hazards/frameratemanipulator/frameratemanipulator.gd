@@ -171,7 +171,6 @@ func _initialize_performance_monitoring():
 func _start_manipulation():
 	current_target_fps = original_fps_limit
 	_change_chaos_mode()
-	print("FramerateManipulatorEntity: Started performance manipulation")
 	emit_signal("entity_detected")
 
 func _process(delta):
@@ -267,7 +266,6 @@ func _apply_malicious_freeze(_delta):
 
 func _set_target_fps(fps: int):
 	Engine.max_fps = fps
-	print("FramerateManipulatorEntity: Changed FPS to ", fps)
 	emit_signal("fps_changed", fps)
 	
 	# Update visual intensity based on how bad the FPS is
@@ -302,7 +300,6 @@ func _trigger_artificial_lag():
 	is_lagging = true
 	var lag_duration = lag_duration_ms / 1000.0  # Convert to seconds
 	
-	print("FramerateManipulatorEntity: Triggering artificial lag for ", lag_duration, " seconds")
 	emit_signal("lag_spike_started", lag_duration)
 	
 	# Create lag by busy waiting (evil but effective)
@@ -319,14 +316,12 @@ func _trigger_artificial_lag():
 
 func _end_artificial_lag():
 	is_lagging = false
-	print("FramerateManipulatorEntity: Artificial lag ended")
 
 func _trigger_frame_dropping():
 	if is_dropping_frames:
 		return
 	
 	is_dropping_frames = true
-	print("FramerateManipulatorEntity: Starting frame dropping")
 	
 	var drop_timer = Timer.new()
 	drop_timer.wait_time = frame_drop_duration
@@ -337,14 +332,12 @@ func _trigger_frame_dropping():
 
 func _end_frame_dropping():
 	is_dropping_frames = false
-	print("FramerateManipulatorEntity: Frame dropping ended")
 
 func _trigger_screen_freeze():
 	if is_screen_frozen:
 		return
 	
 	is_screen_frozen = true
-	print("FramerateManipulatorEntity: Triggering screen freeze for ", screen_freeze_duration, " seconds")
 	emit_signal("screen_freeze_started", screen_freeze_duration)
 	
 	# Temporarily set FPS to 1 for freeze effect
@@ -361,7 +354,6 @@ func _trigger_screen_freeze():
 func _end_screen_freeze(restore_fps: int):
 	is_screen_frozen = false
 	Engine.max_fps = restore_fps
-	print("FramerateManipulatorEntity: Screen freeze ended")
 
 func _update_visual_effects(delta):
 	if not entity_mesh or not warning_light:
@@ -385,12 +377,10 @@ func _change_chaos_mode():
 	# Randomly select a new chaos mode
 	var mode_count = ChaosMode.size()
 	current_chaos_mode = ChaosMode.values()[randi() % mode_count]
-	print("FramerateManipulatorEntity: Changed to chaos mode: ", ChaosMode.keys()[current_chaos_mode])
 
 # Public API
 func set_chaos_intensity(intensity: float):
 	chaos_intensity = clamp(intensity, 0.1, 5.0)
-	print("FramerateManipulatorEntity: Chaos intensity set to ", chaos_intensity)
 
 func set_target_fps_range(min_fps: int, max_fps: int):
 	target_fps_min = max(1, min_fps)
@@ -398,14 +388,12 @@ func set_target_fps_range(min_fps: int, max_fps: int):
 
 func force_chaos_mode(mode: ChaosMode):
 	current_chaos_mode = mode
-	print("FramerateManipulatorEntity: Forced chaos mode to ", ChaosMode.keys()[mode])
 
 func restore_original_performance():
 	Engine.max_fps = original_fps_limit
 	is_lagging = false
 	is_dropping_frames = false
 	is_screen_frozen = false
-	print("FramerateManipulatorEntity: Performance restored to original settings")
 
 func get_performance_stats() -> Dictionary:
 	var avg_fps = 0.0
@@ -428,4 +416,3 @@ func get_performance_stats() -> Dictionary:
 func destroy_entity():
 	restore_original_performance()
 	queue_free()
-	print("FramerateManipulatorEntity: Entity destroyed, performance restored")

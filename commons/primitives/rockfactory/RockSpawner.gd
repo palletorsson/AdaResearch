@@ -39,7 +39,6 @@ func spawn_rocks():
 
 		add_child(rock)
 
-	print("RockSpawner: Spawned %d rocks" % rock_count)
 
 func apply_grid_config(config: Dictionary):
 	"""Apply configuration from grid system"""

@@ -56,4 +56,3 @@ func apply(ctx: Dictionary) -> void:
 	# only once the kingdom is curriculum-unlocked (stage_order gate, matching spawn).
 	sub.set_paint_layers(ctx.get("paint_layers", []), int(ctx.get("rng_seed", 0)), int(ctx.get("stage_order", 999)))
 	add_child(sub)
-	print("[ground_substrate] %dx%d ground, max_height=%.2f%s" % [gw, gd, max_h, "  (flat default)" if max_h == 0.0 else ""])

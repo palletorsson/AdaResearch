@@ -29,7 +29,6 @@ func _ready():
 	# Call parent ready after our setup
 	super()
 	
-	print("UtilityCubeController: Smart utility cube ready - type: %s" % utility_type)
 
 func _setup_behavior_system():
 	# Create behavior manager
@@ -47,7 +46,6 @@ func _load_utility_configuration():
 	var grid_metadata = get_meta("utility_definition", {})
 	if not grid_metadata.is_empty():
 		utility_config = grid_metadata
-		print("UtilityCubeController: Loaded config from grid metadata")
 	
 	# Load from file if specified
 	elif not config_file.is_empty():
@@ -107,7 +105,6 @@ func _get_default_config_for_type(type: String) -> Dictionary:
 			return {}
 
 func _apply_utility_configuration():
-	print("UtilityCubeController: Applying configuration for type: %s" % utility_type)
 	
 	# Apply type-specific configuration
 	match utility_type:
@@ -174,7 +171,6 @@ func _configure_as_hybrid():
 func _add_behavior(behavior_name: String):
 	if behavior_name not in current_behaviors:
 		current_behaviors.append(behavior_name)
-		print("UtilityCubeController: Added behavior: %s" % behavior_name)
 
 func _has_behavior(behavior_name: String) -> bool:
 	return behavior_name in current_behaviors
@@ -199,7 +195,7 @@ func _setup_trigger_area(area_size: Vector3):
 
 func _add_physics_body():
 	# Convert to physics if needed
-	print("UtilityCubeController: Adding physics behavior")
+	pass
 	# This would require more complex restructuring
 
 # Override parent activation to use utility system

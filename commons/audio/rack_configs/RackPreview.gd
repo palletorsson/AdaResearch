@@ -37,7 +37,6 @@ func _scan_rack_configs():
 			file_name = dir.get_next()
 		dir.list_dir_end()
 	rack_configs.sort()
-	print("RackPreview3D: Found %d rack configs" % rack_configs.size())
 
 func _populate_dropdown():
 	dropdown.clear()
@@ -52,7 +51,6 @@ func _on_option_button_item_selected(index):
 func _load_config_by_index(index: int):
 	var config_file = rack_configs[index]
 	var full_path = RACK_CONFIG_PATH + config_file
-	print("RackPreview3D: Loading " + full_path)
 
 	# Tell the controller to load this config
 	if controller:

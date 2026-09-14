@@ -47,7 +47,6 @@ func _setup_audio():
 		print("SimpleWaveformDisplay: Bus '%s' not found, using Master" % source_bus)
 		audio_bus_index = AudioServer.get_bus_index("Master")
 
-	print("SimpleWaveformDisplay: Monitoring bus '%s' (index %d)" % [source_bus, audio_bus_index])
 
 	# Find or create spectrum analyzer
 	for i in range(AudioServer.get_bus_effect_count(audio_bus_index)):

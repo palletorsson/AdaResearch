@@ -86,7 +86,6 @@ func _ready() -> void:
 	_find_player()
 	add_to_group("enemy")
 	add_to_group("tentacle_enemy")
-	print("TentacleCube: READY at %s with %d tentacles" % [global_position, tentacle_count])
 
 
 func _physics_process(delta: float) -> void:
@@ -195,7 +194,6 @@ func _set_state(new_state: State) -> void:
 		State.DEAD:
 			emit_signal("enemy_destroyed", self)
 	
-	print("TentacleCube: %s â†’ %s" % [State.keys()[old_state], State.keys()[new_state]])
 
 
 # === GEOMETRY BUILDING ===

@@ -305,7 +305,6 @@ static func _load_trait_rules():
 		
 		if error == OK:
 			_trait_rules = json.data.get("trait_rules", {})
-			print("SoundIdentity: Loaded %d trait rules from JSON" % _trait_rules.size())
 		else:
 			push_warning("SoundIdentity: Failed to parse word_synthesis_map.json")
 			_load_fallback_rules()

@@ -364,7 +364,6 @@ func _load_from_map_data() -> void:
 		
 		if clipboard_data.has("pages") and typeof(clipboard_data.pages) == TYPE_ARRAY:
 			description_sets = clipboard_data.pages
-			print("Loaded %d pages from map data" % description_sets.size())
 		
 		if clipboard_data.has("title") and typeof(clipboard_data.title) == TYPE_STRING:
 			title = clipboard_data.title
@@ -402,7 +401,6 @@ func refresh_content() -> void:
 			_set_text(description_plain_label, "No content loaded")
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	print("Clipboard: Applying grid configuration: %s" % config_data)
 	var needs_refresh = false
 
 	# Check if there's a direct tutorial ID as a key (shorthand syntax)
@@ -435,14 +433,12 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			# Try to use codeDisplay node if available
 			if code_display_node and code_display_node.has_method("set_tutorial"):
 				code_display_node.set_tutorial(key_str)
-				print("  -> Loaded tutorial via codeDisplay: %s" % key_str)
 				return  # Done - codeDisplay handles everything
 			else:
 				# Fallback to loading content directly
 				var tutorial_content = _library().get_tutorial_content(key_str)
 				if not tutorial_content.is_empty():
 					description_sets = [tutorial_content]
-					print("  -> Loaded tutorial from shorthand: %s" % key_str)
 					needs_refresh = true
 					break  # Use the first valid tutorial found
 
@@ -474,7 +470,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 				else:
 					# Regular code snippet
 					description_sets.append("code#%s" % key.to_lower())
-			print("  -> Set pages from keys: %s" % str(page_keys))
 		else:
 			var single_key = pages_config.strip_edges()
 			if not single_key.is_empty():
@@ -494,13 +489,11 @@ func apply_grid_config(config_data: Dictionary) -> void:
 				else:
 					# Regular code snippet
 					description_sets.append("code#%s" % single_key.to_lower())
-			print("  -> Set single page: %s" % pages_config)
 		needs_refresh = true
 
 	if config_data.has("title"):
 		title = str(config_data.title)
 		_set_text(title_node, title)
-		print("  -> Set title: %s" % title)
 
 	if config_data.has("content"):
 		var content_config = str(config_data.content)
@@ -518,7 +511,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			var tutorial_content = _library().get_tutorial_content(tutorial_id)
 			if not tutorial_content.is_empty():
 				description_sets = [tutorial_content]
-				print("  -> Loaded tutorial: %s" % tutorial_id)
 			else:
 				print("  -> Warning: Tutorial '%s' not found" % tutorial_id)
 				description_sets = ["[color=red]Error: Tutorial '%s' not found[/color]" % tutorial_id]
@@ -529,14 +521,12 @@ func apply_grid_config(config_data: Dictionary) -> void:
 				description_sets[i] = description_sets[i].strip_edges()
 		else:
 			description_sets = [content_config]
-		print("  -> Set content pages: %d" % description_sets.size())
 		needs_refresh = true
 
 	if needs_refresh:
 		current_index = 0
 		if description_sets.size() > 0:
 			_update_display()
-		print("  -> Refreshed clipboard display")
 func _first_existing_node(paths: Array[String]) -> Node:
 	for path in paths:
 		var node = get_node_or_null(path)

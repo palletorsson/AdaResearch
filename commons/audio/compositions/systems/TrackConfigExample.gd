@@ -5,21 +5,17 @@ extends Node
 var track_system: EnhancedTrackSystem
 
 func _ready():
-	print("🎛️ JSON Configuration System Example")
-	print("=====================================")
 	
 	# Create the track system
 	track_system = EnhancedTrackSystem.new()
 	add_child(track_system)
 	
 	# Example 1: Load the dark game track configuration
-	print("\n📁 Loading Dark Game Track Configuration")
 	load_and_apply_config("commons/audio/configs/dark_game_track.json")
 	
 	# Wait a moment, then show some live modifications
 	await get_tree().create_timer(8.0).timeout
 	
-	print("\n🎛️ Demonstrating live effects...")
 	demonstrate_realtime_modifications()
 	
 	# Wait, then demonstrate saving current config
@@ -28,7 +24,6 @@ func _ready():
 		await tree_entered
 	await get_tree().create_timer(5.0).timeout
 	
-	print("\n💾 Example 3: Saving Current Configuration")
 	save_current_config()
 	
 	# Demonstrate real-time config modifications
@@ -37,13 +32,11 @@ func _ready():
 		await tree_entered
 	await get_tree().create_timer(2.0).timeout
 	
-	print("\n🎚️ Example 4: Real-time Configuration Modifications")
 	demonstrate_realtime_modifications()
 
 func load_and_apply_config(config_path: String):
 	"""Load and apply a JSON configuration"""
 	
-	print("   Loading config: %s" % config_path)
 	
 	# Load the configuration
 	var config = TrackConfigLoader.load_track_config(config_path)
@@ -57,7 +50,6 @@ func load_and_apply_config(config_path: String):
 	# Start playing
 	track_system.play()
 	
-	print("   ✅ Configuration loaded and playing!")
 
 func save_current_config():
 	"""Save the current track configuration to JSON"""
@@ -79,7 +71,6 @@ func save_current_config():
 func demonstrate_realtime_modifications():
 	"""Show how to modify configs in real-time"""
 	
-	print("   🎚️ Starting real-time modifications...")
 	
 	# Create a configuration for live modifications
 	var live_config = {
@@ -116,7 +107,6 @@ func demonstrate_realtime_modifications():
 	# Apply the live modifications
 	TrackConfigLoader.apply_config_to_track(track_system, live_config)
 	
-	print("   ✅ Real-time modifications applied!")
 
 func _input(event):
 	"""Handle keyboard input for live configuration changes"""
@@ -167,7 +157,6 @@ func toggle_layer_from_config(category: String, layer_name: String):
 	if layer:
 		var new_enabled = not layer.enabled
 		track_system.set_layer_enabled(category, layer_name, new_enabled)
-		print("   🎛️ %s/%s: %s" % [category, layer_name, "ON" if new_enabled else "OFF"])
 
 func apply_filter_sweep_config():
 	"""Apply a filter sweep using configuration format"""
@@ -187,7 +176,6 @@ func apply_filter_sweep_config():
 	}
 	
 	TrackConfigLoader.apply_config_to_track(track_system, sweep_config)
-	print("   🌊 Filter sweep applied!")
 
 func apply_reverb_config():
 	"""Apply reverb settings using configuration format"""
@@ -203,7 +191,6 @@ func apply_reverb_config():
 	}
 	
 	TrackConfigLoader.apply_config_to_track(track_system, reverb_config)
-	print("   🏛️ Reverb settings updated!")
 
 func apply_compression_config():
 	"""Apply compression settings using configuration format"""
@@ -220,7 +207,6 @@ func apply_compression_config():
 	}
 	
 	TrackConfigLoader.apply_config_to_track(track_system, comp_config)
-	print("   🗜️ Compression settings updated!")
 
 func quick_save_config():
 	"""Quick save current configuration"""
@@ -236,7 +222,6 @@ func quick_load_config():
 	if FileAccess.file_exists(load_path):
 		var config = TrackConfigLoader.load_track_config(load_path)
 		TrackConfigLoader.apply_config_to_track(track_system, config)
-		print("   📁 Quick loaded from: %s" % load_path)
 	else:
 		print("   ❌ No quick save found")
 
@@ -277,7 +262,6 @@ func generate_random_pattern_config():
 			if pattern:
 				layer.pattern = pattern.steps
 				layer.pattern_length = pattern.length
-				print("   🎲 Random %s pattern applied to %s/%s" % [selected_type, category, layer_name])
 
 func get_random_style_for_type(pattern_type: String) -> String:
 	"""Get a random style for the given pattern type"""
@@ -301,7 +285,6 @@ func _exit_tree():
 	
 	if track_system:
 		track_system.stop()
-		print("🛑 Track system stopped")
 
 # ===== CONSOLE COMMANDS =====
 

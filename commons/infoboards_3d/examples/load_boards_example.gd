@@ -40,7 +40,6 @@ func example_3_runtime_switching():
 	await get_tree().create_timer(3.0).timeout
 	var ui = board.get_node("SubViewport/InfoBoardUI")
 	ui.switch_to_board("triangle")
-	print("Switched to Triangle!")
 
 	# Wait 3 more seconds, switch to Point
 	# out-of-tree guard: get_tree() is null once a map is torn down
@@ -48,7 +47,6 @@ func example_3_runtime_switching():
 		await tree_entered
 	await get_tree().create_timer(3.0).timeout
 	ui.switch_to_board("point")
-	print("Switched to Point!")
 
 ## EXAMPLE 4: Create a gallery of all fundamental boards
 func example_4_create_gallery():
@@ -66,7 +64,6 @@ func example_5_load_by_category():
 	var x_offset = -4.0
 	for board_id in fundamental_boards:
 		var meta = InfoBoardContentLoader.get_board_meta(board_id)
-		print("Loading: %s - %s" % [meta.title, meta.subtitle])
 
 		var board = create_info_board(board_id, Vector3(x_offset, 1.5, 0))
 		x_offset += 4.0
@@ -81,7 +78,6 @@ func example_6_board_selector():
 	active_board = create_info_board(board_ids[0], Vector3(0, 1.5, 0))
 
 	# Switch boards on input
-	print("Press N for next board, P for previous board")
 
 func _input(event):
 	if not active_board:
@@ -103,7 +99,6 @@ func cycle_board(direction: int):
 	ui.switch_to_board(new_board_id)
 
 	var meta = InfoBoardContentLoader.get_board_meta(new_board_id)
-	print("Switched to: %s - %s" % [meta.title, meta.subtitle])
 
 ## Use one of the examples in _ready()
 func _ready():

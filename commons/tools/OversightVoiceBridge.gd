@@ -59,7 +59,6 @@ func _ready() -> void:
 	# clean and fast. Enforced before any bridge state is touched.
 	if "--no-bridges" in OS.get_cmdline_user_args() or "--no-bridges" in OS.get_cmdline_args():
 		enabled = false
-		print("OversightVoiceBridge: disabled by --no-bridges")
 		return
 
 	var root_singleton := get_node_or_null("/root/OversightVoiceBridge")
@@ -75,12 +74,6 @@ func _ready() -> void:
 		print("OversightVoiceBridge: disabled (enabled=false) — bridge inactive, no wiring")
 		return
 
-	print("OversightVoiceBridge: ready (enabled=%s, base_url=%s, push_action=%s, secondary_action=%s)" % [
-		enabled,
-		oversight_base_url,
-		push_to_talk_action,
-		secondary_push_to_talk_action
-	])
 	if not bool(ProjectSettings.get_setting("audio/driver/enable_input", false)):
 		push_warning("OversightVoiceBridge: audio input is disabled in Project Settings (audio/driver/enable_input=false)")
 	_log_mic_capture_context()
@@ -154,7 +147,6 @@ func _ensure_input_action() -> void:
 	var key_event := InputEventKey.new()
 	key_event.physical_keycode = KEY_F8
 	InputMap.action_add_event(push_to_talk_action, key_event)
-	print("OversightVoiceBridge: created input action '%s' on F8" % push_to_talk_action)
 
 func _is_push_to_talk_pressed(event: InputEvent) -> bool:
 	if _event_is_action_pressed(event, push_to_talk_action):
@@ -259,8 +251,6 @@ func _connect_controller(controller: XRController3D) -> void:
 	if owner_id != 0 and owner_id != get_instance_id():
 		var owner := instance_from_id(owner_id)
 		if owner != null:
-			if debug_controller_input:
-				print("OversightVoiceBridge: controller %s already owned by %d" % [controller.name, owner_id])
 			return
 	if owner_id == get_instance_id():
 		return
@@ -268,12 +258,10 @@ func _connect_controller(controller: XRController3D) -> void:
 	var pressed_cb := _on_controller_button_pressed.bind(controller)
 	if not controller.button_pressed.is_connected(pressed_cb):
 		controller.button_pressed.connect(pressed_cb)
-		print("OversightVoiceBridge: connected button_pressed on %s (%s)" % [controller.name, controller.tracker])
 
 	var released_cb := _on_controller_button_released.bind(controller)
 	if not controller.button_released.is_connected(released_cb):
 		controller.button_released.connect(released_cb)
-		print("OversightVoiceBridge: connected button_released on %s (%s)" % [controller.name, controller.tracker])
 
 	controller.set_meta(CONTROLLER_OWNER_META, get_instance_id())
 
@@ -285,8 +273,6 @@ func _release_controller_owner(controller: XRController3D) -> void:
 		controller.remove_meta(CONTROLLER_OWNER_META)
 
 func _on_controller_button_pressed(button: String, controller: XRController3D) -> void:
-	if debug_controller_input:
-		print("OversightVoiceBridge: controller pressed %s on %s (%s)" % [button, controller.name, controller.tracker])
 	if not enabled:
 		return
 	if _controller_button_matches(button, controller):
@@ -294,8 +280,6 @@ func _on_controller_button_pressed(button: String, controller: XRController3D) -
 		_start_recording()
 
 func _on_controller_button_released(button: String, controller: XRController3D) -> void:
-	if debug_controller_input:
-		print("OversightVoiceBridge: controller released %s on %s (%s)" % [button, controller.name, controller.tracker])
 	if not enabled:
 		return
 	if _controller_button_matches(button, controller):
@@ -364,10 +348,6 @@ func _setup_recording_pipeline() -> void:
 	_mic_player.bus = RECORD_BUS_NAME
 	_mic_player.volume_db = 0.0
 	add_child(_mic_player)
-	print("OversightVoiceBridge: recording pipeline ready (bus=%s, input_enabled=%s)" % [
-		RECORD_BUS_NAME,
-		bool(ProjectSettings.get_setting("audio/driver/enable_input", false))
-	])
 
 func _ensure_record_bus() -> int:
 	var idx := AudioServer.get_bus_index(RECORD_BUS_NAME)
@@ -407,7 +387,6 @@ func _start_recording() -> void:
 	_mic_player.play()
 	_record_effect.set_recording_active(true)
 	emit_signal("voice_recording_started")
-	print("OversightVoiceBridge: recording started (mic_player.playing=%s)" % _mic_player.playing)
 	_set_status("REC", Color(1.0, 0.25, 0.25, 1.0), 0.0)
 
 func _stop_and_dispatch() -> void:
@@ -426,7 +405,6 @@ func _stop_and_dispatch() -> void:
 	_set_status("Sending...", Color(1.0, 0.85, 0.3, 1.0), 8.0)
 
 	if duration_sec < min_recording_seconds:
-		print("OversightVoiceBridge: recording ignored (%.2fs < %.2fs)" % [duration_sec, min_recording_seconds])
 		_set_status("Ignored: too short", Color(1.0, 0.7, 0.25, 1.0), 2.5)
 		return
 
@@ -465,7 +443,6 @@ func _stop_and_dispatch() -> void:
 	if peak <= silence_peak_threshold:
 		_emit_fail("Captured audio is silent (peak=%.6f). Check Quest mic permission + audio input setting." % peak)
 		return
-	print("OversightVoiceBridge: captured %.2fs audio (%d bytes)" % [duration_sec, data.size()])
 
 	var payload := {
 		"audio_base64": Marshalls.raw_to_base64(data),
@@ -630,7 +607,6 @@ func _send_payload(payload: Dictionary) -> void:
 		_emit_fail("Voice request failed to start: %s" % error_string(err))
 		return
 
-	print("OversightVoiceBridge: sent voice payload to %s" % url)
 	_set_status("Upload sent", Color(0.75, 0.85, 1.0, 1.0), 3.0)
 
 func _on_request_completed(
@@ -664,12 +640,9 @@ func _on_request_completed(
 	if parsed is Dictionary:
 		var parsed_dict := parsed as Dictionary
 		emit_signal("voice_dispatch_succeeded", parsed_dict)
-		if parsed_dict.has("id"):
-			print("OversightVoiceBridge: audio stored id=%s" % str(parsed_dict["id"]))
 	else:
 		emit_signal("voice_dispatch_succeeded", {"raw": text})
 
-	print("OversightVoiceBridge: dispatch complete (%d)" % response_code)
 	_set_status("Sent to Oversight", Color(0.45, 1.0, 0.45, 1.0), 3.0)
 
 func _emit_fail(message: String) -> void:
@@ -705,7 +678,6 @@ func _ensure_android_microphone_permission(request_if_missing: bool) -> bool:
 		return false
 
 	var granted_now: bool = OS.request_permission(ANDROID_RECORD_AUDIO_PERMISSION)
-	print("OversightVoiceBridge: request_permission(%s) -> %s" % [ANDROID_RECORD_AUDIO_PERMISSION, granted_now])
 	if granted_now:
 		return true
 

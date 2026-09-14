@@ -33,26 +33,15 @@ var current_key: String = ""
 var modified: bool = false
 
 func _ready() -> void:
-	print("TutorialTextEditor: _ready() called")
 	if not Engine.is_editor_hint():
-		print("TutorialTextEditor: Not in editor, exiting")
 		return
 
-	print("TutorialTextEditor: Setting up UI...")
 	_setup_ui()
-	print("TutorialTextEditor: Loading tutorials...")
 	_load_tutorials()
-	print("TutorialTextEditor: Updating list...")
 	_update_list()
-	print("TutorialTextEditor: Ready complete")
 
 func _setup_ui() -> void:
 	"""Setup UI connections"""
-	print("TutorialTextEditor: _setup_ui() - Checking UI nodes...")
-	print("  - new_button: %s" % ("OK" if new_button else "NULL"))
-	print("  - tutorial_list: %s" % ("OK" if tutorial_list else "NULL"))
-	print("  - content_edit: %s" % ("OK" if content_edit else "NULL"))
-	print("  - preview_label: %s" % ("OK" if preview_label else "NULL"))
 
 	if new_button:
 		new_button.pressed.connect(_on_new_tutorial)
@@ -68,7 +57,6 @@ func _setup_ui() -> void:
 		reload_button.pressed.connect(_on_reload_tutorials)
 	if tutorial_list:
 		tutorial_list.item_selected.connect(_on_tutorial_selected)
-		print("TutorialTextEditor: Connected item_selected signal to tutorial_list")
 	if tutorial_name:
 		tutorial_name.text_changed.connect(_on_name_changed)
 	if content_edit:
@@ -178,7 +166,6 @@ func _populate_file_chooser() -> void:
 			for file in file_list:
 				file_chooser.add_item(file)
 
-			print("TutorialTextEditor: Found %d .txt files in %s" % [file_list.size(), dir_path])
 		else:
 			print("TutorialTextEditor: Could not open directory: %s" % dir_path)
 	else:
@@ -315,29 +302,24 @@ func _save_current_tutorial() -> void:
 
 func _update_list() -> void:
 	"""Update the tutorial list"""
-	print("TutorialTextEditor: _update_list() called with %d tutorials" % tutorials.size())
 	tutorial_list.clear()
 	var keys = tutorials.keys()
 	keys.sort()
 
 	for key in keys:
 		tutorial_list.add_item(key)
-		print("TutorialTextEditor: Added item to list: '%s'" % key)
 
 	# Select current if exists
 	if not current_key.is_empty():
-		print("TutorialTextEditor: Looking for current_key '%s' in list" % current_key)
 		for i in range(tutorial_list.item_count):
 			if tutorial_list.get_item_text(i) == current_key:
 				tutorial_list.select(i)
-				print("TutorialTextEditor: Selected index %d" % i)
 				break
 	else:
 		print("TutorialTextEditor: No current_key set, not selecting anything")
 
 func _load_tutorial(key: String) -> void:
 	"""Load a tutorial into the editor"""
-	print("TutorialTextEditor: _load_tutorial() called for key: '%s'" % key)
 
 	if not tutorials.has(key):
 		print("TutorialTextEditor: ERROR - Tutorial key '%s' not found in tutorials dict" % key)
@@ -351,55 +333,44 @@ func _load_tutorial(key: String) -> void:
 	tutorial_name.text = key
 
 	var tutorial_data = tutorials[key]
-	print("TutorialTextEditor: tutorial_data type: %s, value: %s" % [typeof(tutorial_data), str(tutorial_data)])
 
 	# Handle different formats
 	if typeof(tutorial_data) == TYPE_DICTIONARY:
-		print("TutorialTextEditor: Tutorial data is Dictionary")
 		# New format with content or content_file
 		if tutorial_data.has("content_file"):
 			# Load from external file
 			var file_path = tutorial_data.content_file
-			print("TutorialTextEditor: Loading from external file: %s" % file_path)
 			if FileAccess.file_exists(file_path):
 				var file = FileAccess.open(file_path, FileAccess.READ)
 				if file:
 					var file_content = file.get_as_text()
 					file.close()
 					content_edit.text = file_content
-					print("TutorialTextEditor: Loaded %d characters from file" % file_content.length())
 					if use_external_file:
 						use_external_file.button_pressed = true
 				else:
 					var error_msg = "[ERROR: Could not open file: %s]" % file_path
 					content_edit.text = error_msg
-					print("TutorialTextEditor: %s" % error_msg)
 			else:
 				var error_msg = "[ERROR: File not found: %s]" % file_path
 				content_edit.text = error_msg
-				print("TutorialTextEditor: %s" % error_msg)
 		elif tutorial_data.has("content"):
 			# Inline content
-			print("TutorialTextEditor: Using inline content (%d chars)" % tutorial_data.content.length())
 			content_edit.text = tutorial_data.content
 			if use_external_file:
 				use_external_file.button_pressed = false
 		else:
 			var error_msg = "[ERROR: Tutorial has no content or content_file]"
 			content_edit.text = error_msg
-			print("TutorialTextEditor: %s" % error_msg)
 	elif typeof(tutorial_data) == TYPE_STRING:
 		# Legacy format: direct string content
-		print("TutorialTextEditor: Using legacy string format (%d chars)" % tutorial_data.length())
 		content_edit.text = tutorial_data
 		if use_external_file:
 			use_external_file.button_pressed = false
 	else:
 		var error_msg = "[ERROR: Unknown tutorial data format: %s]" % typeof(tutorial_data)
 		content_edit.text = error_msg
-		print("TutorialTextEditor: %s" % error_msg)
 
-	print("TutorialTextEditor: content_edit.text length after load: %d" % content_edit.text.length())
 	_update_preview()
 	_update_navigation_buttons()
 
@@ -548,15 +519,12 @@ func _on_reload_tutorials() -> void:
 
 func _on_tutorial_selected(index: int) -> void:
 	"""Tutorial selected in list"""
-	print("TutorialTextEditor: _on_tutorial_selected() called with index: %d" % index)
 
 	# Save current before switching
 	if not current_key.is_empty():
-		print("TutorialTextEditor: Saving current tutorial: %s" % current_key)
 		_save_current_tutorial()
 
 	var key = tutorial_list.get_item_text(index)
-	print("TutorialTextEditor: Selected tutorial key: '%s'" % key)
 	_load_tutorial(key)
 
 func _on_name_changed(new_name: String) -> void:

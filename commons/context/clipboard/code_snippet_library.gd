@@ -37,7 +37,6 @@ func _load_snippets_from_file() -> void:
 	var data = json.data
 	if data.has("snippets") and typeof(data.snippets) == TYPE_DICTIONARY:
 		_snippets = data.snippets
-		print("Loaded ", _snippets.size(), " snippets from JSON file")
 	else:
 		print("Error: Invalid snippets JSON structure")
 		_load_fallback_snippets()

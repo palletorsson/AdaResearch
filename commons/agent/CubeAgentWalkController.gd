@@ -38,7 +38,6 @@ func _ready() -> void:
 		push_error("CubeAgentWalkController: No agent builder found!")
 
 func _on_agent_built() -> void:
-	print("CubeAgentWalkController: Agent built, caching body parts...")
 	_cache_body_parts()
 
 	# Start walking automatically for testing
@@ -55,10 +54,6 @@ func _cache_body_parts() -> void:
 	torso_cubes = agent_builder.get_body_part("torso")
 	root_body = agent_builder.get_root_body()
 
-	print("CubeAgentWalkController: Cached %d body parts" % (
-		left_leg_cubes.size() + right_leg_cubes.size() +
-		left_arm_cubes.size() + right_arm_cubes.size() + torso_cubes.size()
-	))
 
 func _physics_process(delta: float) -> void:
 	if not is_walking or not root_body:
@@ -148,11 +143,9 @@ func _apply_forward_movement(_delta: float) -> void:
 func start_walking(direction: Vector3 = Vector3.FORWARD) -> void:
 	is_walking = true
 	walk_direction = direction.normalized()
-	print("CubeAgentWalkController: Started walking in direction %s" % direction)
 
 func stop_walking() -> void:
 	is_walking = false
-	print("CubeAgentWalkController: Stopped walking")
 
 func set_walk_direction(direction: Vector3) -> void:
 	walk_direction = direction.normalized()

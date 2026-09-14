@@ -251,7 +251,6 @@ func _connect_signals() -> void:
 	if connection_manager:
 		if not connection_manager.octahedron_formed.is_connected(_on_octahedron_formed):
 			connection_manager.octahedron_formed.connect(_on_octahedron_formed)
-		print("SnapOctahedronPuzzle: Connected to octahedron_formed signal")
 
 func _on_octahedron_formed(points: Array) -> void:
 	# Check if this octahedron uses our snap points
@@ -262,7 +261,6 @@ func _on_octahedron_formed(points: Array) -> void:
 
 	# If all 6 points are ours, this is our octahedron!
 	if our_points_count == 6:
-		print("SnapOctahedronPuzzle: Octahedron completed with our points!")
 		_complete_puzzle()  # Call base class completion method
 
 func _apply_puzzle_materials() -> void:
@@ -290,7 +288,6 @@ func _apply_puzzle_materials() -> void:
 		if mesh_instance and mesh_instance is MeshInstance3D:
 			# Apply material to the mesh instance
 			mesh_instance.material_override = puzzle_material
-			print("SnapOctahedronPuzzle: Applied transparent material to ", point.name)
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -642,7 +639,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	enable_reset_timer = _reset_timer_shipped and solid == "loose"
 
 	_rebuild_now()
-	print("[SnapOctahedronPuzzle] Config applied — solid=%s dual=%s" % [solid, dual])
 
 
 ## Free ONLY what this script made, put the scene's own children back the way they

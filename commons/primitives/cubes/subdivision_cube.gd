@@ -64,7 +64,6 @@ func _on_body_entered(body: Node):
 	# Divide on hand touch or player collision
 	if is_hand or is_player or body is CharacterBody3D:
 		touch_cooldown_timer = touch_cooldown
-		print("SubdivisionCube: Touched by %s, dividing!" % body.name)
 		divide_cube_delayed()
 
 func pick_up(by: Node3D) -> void:
@@ -117,7 +116,6 @@ func divide_cube():
 		return
 
 	has_divided = true
-	print("SubdivisionCube: Dividing at level %d" % current_division)
 
 	# Get current properties before any changes
 	var current_scale = scale

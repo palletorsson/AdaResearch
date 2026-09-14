@@ -110,8 +110,6 @@ func find_and_clip_rocks():
 	var root = get_tree().root
 	find_rocks_recursive(root)
 
-	if debug_output:
-		print("RockClipper: Found ", rocks.size(), " rock meshes to clip")
 
 	if rocks.size() == 0 and debug_output:
 		print("RockClipper: WARNING - No rocks found! Searching for RigidBody3D nodes with 'Rock' in name...")
@@ -124,14 +122,8 @@ func find_and_clip_rocks():
 func find_rocks_recursive(node: Node):
 	# Look for MeshInstance3D children of RigidBody3D rocks
 	if node is RigidBody3D and node.name.contains("Rock"):
-		if debug_output:
-			print("RockClipper: Found RigidBody3D rock: ", node.name, " with ", node.get_child_count(), " children")
 		for child in node.get_children():
-			if debug_output:
-				print("  - Child: ", child.name, " (", child.get_class(), ")")
 			if child is MeshInstance3D:
-				if debug_output:
-					print("    -> Adding MeshInstance3D to clip list")
 				rocks.append(child)
 
 	for child in node.get_children():
@@ -148,8 +140,6 @@ func debug_scene_tree(node: Node, depth: int):
 
 func apply_clipping_shader(mesh_inst: MeshInstance3D):
 	"""Apply clipping shader material to a mesh"""
-	if debug_output:
-		print("RockClipper: Applying clipping shader to: ", mesh_inst.name)
 
 	var material = ShaderMaterial.new()
 	var shader = Shader.new()

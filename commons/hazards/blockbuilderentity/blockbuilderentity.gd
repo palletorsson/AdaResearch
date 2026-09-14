@@ -164,7 +164,6 @@ func _ready():
 	hive_offsets = _generate_octa_brick_offsets(hive_layers)
 	block_vertex_cost = _estimate_block_vertex_cost()
 	_update_thought_label(true)
-	print("BlockBuilderEntity: Grey goo initialized; block cost =", block_vertex_cost)
 
 func _create_entity_mesh():
 	mesh_instance = MeshInstance3D.new()
@@ -306,8 +305,6 @@ func _find_player():
 			player_node = _resolve_node3d(named_candidate)
 	if not player_node and get_tree().current_scene:
 		_search_for_player(get_tree().current_scene)
-	if player_node:
-		print("BlockBuilderEntity: Player located - ", player_node.name)
 
 func _search_for_player(node: Node):
 	if not node or player_node:
@@ -772,5 +769,4 @@ func _change_state(new_state: GooState):
 		return
 	current_state = new_state
 	state_timer = 0.0
-	print("BlockBuilderEntity: State -> ", new_state)
 	_update_thought_label(true)

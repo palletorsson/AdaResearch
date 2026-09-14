@@ -63,7 +63,6 @@ func _setup_effects_chain():
 	_add_panner(layer_bus_index)
 	_add_delay(layer_bus_index)
 	
-	print("   🔧 Effects chain setup for layer: %s" % layer_name)
 
 func _add_compressor(bus_idx: int):
 	"""Add compressor to the effects chain"""
@@ -302,7 +301,6 @@ func setup_lfo(target: String, rate: float, depth: float):
 	lfo_rate = rate
 	lfo_depth = depth
 	lfo_phase = 0.0
-	print("   🌊 LFO setup: %s -> %s (Rate: %.2f, Depth: %.2f)" % [layer_name, target, rate, depth])
 
 func modulate_filter_sweep(start_freq: float, end_freq: float, duration: float):
 	"""Create a filter sweep effect"""

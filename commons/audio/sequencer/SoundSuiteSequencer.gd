@@ -142,8 +142,6 @@ func _auto_register_soundbanks():
 		entry = dir.get_next()
 	dir.list_dir_end()
 
-	if registered_count > 0:
-		print("SoundSuiteSequencer: Auto-registered %d soundbank suites" % registered_count)
 
 
 func initialize(config: Dictionary):

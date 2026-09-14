@@ -86,7 +86,6 @@ signal player_exited_danger(danger_type: Type)
 signal damage_dealt(amount: float, danger_type: Type)
 
 func _ready() -> void:
-	print("[DangerZone] _ready() called - type: %s, position: %s" % [Type.keys()[danger_type], global_position])
 	config = TYPE_CONFIG.get(danger_type, TYPE_CONFIG[Type.GENERIC])
 	add_to_group("danger_zone")  # world-power systems (neutralizer, bridger tendril) find zones via this group
 
@@ -101,7 +100,6 @@ func _ready() -> void:
 	_setup_collision()
 	_setup_visuals()
 	_setup_audio()
-	print("[DangerZone] Setup complete")
 
 func _setup_collision() -> void:
 	# Ensure we have monitoring enabled - match subtitle_trigger settings
@@ -522,7 +520,6 @@ func _on_body_entered(body: Node3D) -> void:
 	if not _is_player(body):
 		return
 	
-	print("[DangerZone] Player entered! Type: %s" % Type.keys()[danger_type])
 	player_inside = true
 	damage_timer = 0.0
 	player_entered_danger.emit(danger_type)
@@ -537,7 +534,6 @@ func _on_body_exited(body: Node3D) -> void:
 	if not _is_player(body):
 		return
 	
-	print("[DangerZone] Player exited")
 	player_inside = false
 	player_exited_danger.emit(danger_type)
 

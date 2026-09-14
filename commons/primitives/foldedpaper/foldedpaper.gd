@@ -161,10 +161,9 @@ func add_triangle_with_normal(st: SurfaceTool, vertices: Array):
 		st.add_vertex(v1)
 
 func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
-	print("DEBUG PICKUP")
+	pass
 
 func _on_point_dropped(index: int, _pickable, meta: Dictionary) -> void:
-	print("folded paper sphere dropped ")
 	var folded_context := {
 		"vertex": index,
 		"paper_length": "%.2f" % get_paper_length(),
@@ -222,7 +221,6 @@ func reset_to_accordion():
 	# Reset to accordion fold pattern (70% compressed)
 	create_folded_vertices()
 	update_sphere_positions()
-	print("Reset to accordion fold pattern (70% compressed)")
 
 func reset_to_zigzag_fold():
 	# Reset to zigzag fold pattern
@@ -232,7 +230,6 @@ func reset_to_zigzag_fold():
 		var y_val = sphere_y_offset + (i % 2) * fold_height
 		vertex_positions.append(Vector3(x, y_val, 0.0))
 	update_sphere_positions()
-	print("Reset to zigzag fold pattern")
 
 func reset_to_wave_fold():
 	# Reset to wave fold pattern
@@ -242,7 +239,6 @@ func reset_to_wave_fold():
 		var y_val = sphere_y_offset + sin(i * PI / segment_count) * fold_height * 0.5 + fold_height * 0.5
 		vertex_positions.append(Vector3(x, y_val, 0.0))
 	update_sphere_positions()
-	print("Reset to wave fold pattern")
 
 func reset_to_flat():
 	# Reset to flat paper
@@ -252,7 +248,6 @@ func reset_to_flat():
 		var y_val = sphere_y_offset
 		vertex_positions.append(Vector3(x, y_val, 0.0))
 	update_sphere_positions()
-	print("Reset to flat paper")
 
 func update_sphere_positions():
 	if drag_points:

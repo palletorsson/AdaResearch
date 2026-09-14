@@ -68,7 +68,6 @@ func _ready() -> void:
 	size = viewport_size
 	custom_minimum_size = viewport_size
 
-	print("GraphicsDisplayControl._ready: viewport_size=%s, my_size=%s" % [viewport_size, size])
 
 	# Defer loading to ensure proper sizing
 	call_deferred("_load_visualization")
@@ -145,7 +144,6 @@ func _load_visualization() -> void:
 	# Add to tree after configuring
 	add_child(_vis_control)
 
-	print("GraphicsDisplayControl: Loading %s/%s, viewport=%s, vis_size=%s" % [visualization_topic, vis_type, viewport_size, _vis_control.size])
 
 	_initialize_visualization_data(_vis_control)
 

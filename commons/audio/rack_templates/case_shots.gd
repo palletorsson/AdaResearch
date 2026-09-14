@@ -64,7 +64,6 @@ func _show_shot(idx: int) -> void:
 			child.queue_free()
 
 	if idx >= _shots.size():
-		print("CaseShots: All %d shots ready" % _shots.size())
 		return
 
 	var shot = _shots[idx]
@@ -78,7 +77,6 @@ func _show_shot(idx: int) -> void:
 	cam.transform.origin = shot["cam_pos"]
 	cam.look_at(shot["cam_target"], Vector3.UP)
 
-	print("CaseShots: Showing %s (%d/%d)" % [shot["name"], idx + 1, _shots.size()])
 
 
 func _process(delta: float) -> void:
@@ -103,7 +101,7 @@ func _copy_to_blog() -> void:
 		var dst: String = blog_dir + "2026-04-14-" + str(shot["name"]) + ".png"
 		var err: int = DirAccess.copy_absolute(src, dst)
 		if err == OK:
-			print("CaseShots: Copied %s -> %s" % [shot["name"], dst])
+			pass
 		else:
 			print("CaseShots: FAILED to copy %s (err=%d)" % [shot["name"], err])
 

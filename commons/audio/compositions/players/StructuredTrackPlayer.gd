@@ -90,8 +90,6 @@ signal section_changed(section_type: SectionType, bar_number: int)
 signal phrase_completed(phrase_number: int)
 
 func _ready():
-	print("🎵 STRUCTURED TRACK PLAYER 🎵")
-	print("Demonstrating ABAC/AABD phrasing structure...")
 	
 	_setup_audio_players()
 	_setup_rhythm_system()
@@ -128,7 +126,6 @@ func _setup_audio_players():
 	crash_player.volume_db = accent_volume + master_volume
 	add_child(crash_player)
 	
-	print("   ✅ Instrument audio players configured")
 
 func _setup_rhythm_system():
 	"""Setup beat and bar timers for structure"""
@@ -149,11 +146,9 @@ func _setup_rhythm_system():
 	bar_timer.timeout.connect(_on_bar)
 	add_child(bar_timer)
 	
-	print("   ✅ Structured rhythm system ready at %d BPM" % BPM)
 
 func _generate_all_sounds():
 	"""Generate sounds for structured composition"""
-	print("   🔧 Generating structured sounds...")
 	
 	sound_cache[TrackSound.CORE_KICK] = _generate_sound(TrackSound.CORE_KICK, 0.8)
 	sound_cache[TrackSound.CORE_SNARE] = _generate_sound(TrackSound.CORE_SNARE, 0.6)
@@ -165,7 +160,6 @@ func _generate_all_sounds():
 	sound_cache[TrackSound.FILL_TOM_LOW] = _generate_sound(TrackSound.FILL_TOM_LOW, 0.7)
 	sound_cache[TrackSound.ACCENT_CRASH] = _generate_sound(TrackSound.ACCENT_CRASH, 2.0)
 	
-	print("   ✅ All structured sounds generated")
 
 func start_track():
 	"""Start the structured track"""
@@ -235,7 +229,6 @@ func _on_bar():
 	if phrase_bar == 0:
 		var phrase_num = current_bar / 8
 		phrase_completed.emit(phrase_num)
-		print("✨ Phrase %d completed! Starting new 8-bar phrase..." % phrase_num)
 
 func _on_beat():
 	"""Handle individual beats within current section"""
@@ -569,7 +562,6 @@ func toggle_empties():
 	"""Toggle between fills and empties for D sections"""
 	use_empties = !use_empties
 	var mode = "Empties" if use_empties else "Fills"
-	print("🎵 Switched to %s mode for D sections" % mode)
 
 func get_structure_info() -> Dictionary:
 	"""Get current structure state"""

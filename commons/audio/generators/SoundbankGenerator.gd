@@ -931,9 +931,6 @@ static func generate_song(genre_id: String, parameters: Dictionary = {}) -> Audi
 	
 	var has_song_research = not song_patterns.is_empty() or not song_melodies.is_empty()
 	if has_song_research:
-		print("SoundbankGenerator: Generating %s in %s at %s BPM (swing: %s%%) [SONG-RESEARCH MODE: %d patterns, %d melodies, %d progressions]" % [genre_id, root_note, bpm, swing_pct, song_patterns.size(), song_melodies.size(), progressions_map.size()])
-		print("  Song patterns: %s" % ", ".join(song_patterns.keys()))
-		print("  Song melodies: %s" % ", ".join(song_melodies.keys()))
 		var prog_keys = []
 		var voicing_keys = []
 		for k in progressions_map.keys():
@@ -941,12 +938,6 @@ static func generate_song(genre_id: String, parameters: Dictionary = {}) -> Audi
 				voicing_keys.append(k.replace("__voicing_freqs", ""))
 			else:
 				prog_keys.append(k)
-		print("  Progressions map: %s" % str({})  )
-		for pk in prog_keys:
-			print("    %s: degrees=%s voicings=%s" % [pk, str(progressions_map[pk]), "YES" if pk in voicing_keys else "no"])
-		print("  Default progression (degrees): %s" % str(progression))
-	else:
-		print("SoundbankGenerator: Generating %s in %s at %s BPM (swing: %s%%)" % [genre_id, root_note, bpm, swing_pct])
 	
 	var structure = STRUCTURES.get(genre_id, STRUCTURES["detroit_techno"])
 	var arrangement_plan = _resolve_arrangement_plan(structure, parameters.get("arrangement", {}), bank.get_available_sounds())
@@ -1505,9 +1496,6 @@ static func generate_hybrid_song(hybrid_id: String, parameters: Dictionary = {})
 	var scale = PopMusicTheory.get_minor_scale_notes(root_note) if key_value.is_empty() or _is_minor_key(key_value) else PopMusicTheory.get_major_scale_notes(root_note)
 	var progression = _resolve_progression_from_parameters(hybrid_id, parameters, scale)
 	
-	print("SoundbankGenerator: Generating hybrid '%s' (%s × %s) in %s at %s BPM" % [
-		hybrid_id, config.primary_bank, config.secondary_bank, root_note, bpm
-	])
 	
 	var structure = STRUCTURES.get(hybrid_id, STRUCTURES["detroit_techno"])
 	var arrangement_plan = _resolve_arrangement_plan(structure, parameters.get("arrangement", {}), config.sound_sources.keys())
@@ -1784,8 +1772,6 @@ static func _generate_section(bank: SoundbankLoader, genre_id: String, sounds: A
 	var progressions_map: Dictionary = song_data.get("progressions_map", {})
 	var voicing_freq_arrays: Array = progressions_map.get(voicing_freqs_key, []) if not voicing_freqs_key.is_empty() else []
 	var has_voicing_freqs = not voicing_freq_arrays.is_empty()
-	if has_voicing_freqs:
-		print("    [VOICING] Using %d voiced chords from '%s'" % [voicing_freq_arrays.size(), prog_name])
 	
 	for bar in range(num_bars):
 		var bar_start = int(bar * bar_duration * SAMPLE_RATE)

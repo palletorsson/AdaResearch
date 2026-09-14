@@ -232,7 +232,6 @@ func _ready():
 	_setup_spectrum_analyzer()
 	_snapshot_a = live_params.duplicate(true)
 	_snapshot_b = live_params.duplicate(true)
-	print("Song Dev Tools ready!")
 
 
 func _setup_audio():
@@ -1420,7 +1419,6 @@ func _load_archive_index():
 		return
 	
 	_archive_index = json.data
-	print("Loaded archive index with %d entries" % _archive_index.get("archives", []).size())
 
 
 func _refresh_archive_list():
@@ -1571,7 +1569,6 @@ func _load_songs_from_folder() -> Array:
 	# Sort alphabetically
 	songs.sort_custom(func(a, b): return a[1] < b[1])
 	
-	print("Loaded %d songs from folder" % songs.size())
 	return songs
 
 
@@ -4161,7 +4158,6 @@ func _on_word_clicked(layer: String, word: String):
 	var opposites = _word_bridge.get_opposites(word)
 	var opp_text = " (try: %s)" % ", ".join(opposites) if not opposites.is_empty() else ""
 	_status_label.text = "🏷️ %s: %s%s" % [layer, word, opp_text]
-	print("Word applied: %s → %s, updated params: %s" % [layer, word, new_params])
 
 
 func _on_layer_selected(layer: String):
@@ -5668,7 +5664,6 @@ func _load_subsets():
 				_subset_dropdown.add_item(display_name, idx)
 				_subset_dropdown.set_item_metadata(idx, subset.id)
 				idx += 1
-				print("Loaded subset: ", subset.id, " - ", display_name)
 		file_name = dir.get_next()
 	
 	dir.list_dir_end()
@@ -5723,7 +5718,6 @@ func _set_current_subset(subset_id: String):
 	var subset_data = _loaded_subsets[subset_id]
 	
 	_status_label.text = "📦 Subset: %s" % subset_data.get("name", subset_id)
-	print("Selected subset: ", subset_id)
 	
 	# Emit signal for other components to react
 	subset_changed.emit(subset_id, subset_data)

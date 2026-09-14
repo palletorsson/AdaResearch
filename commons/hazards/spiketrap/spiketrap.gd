@@ -82,7 +82,6 @@ func _ready():
 	# Setup audio
 	_setup_audio()
 	
-	print("SpikeTrapHazard: Initialized with ", spike_count, " spikes")
 
 func _create_warning_indicator():
 	warning_indicator = MeshInstance3D.new()
@@ -254,12 +253,10 @@ func _change_state(new_state: TrapState):
 			_play_sound(spike_retract_sound)
 	
 	emit_signal("trap_state_changed", new_state)
-	print("SpikeTrap state changed: ", TrapState.keys()[old_state], " -> ", TrapState.keys()[new_state])
 
 func _on_body_entered(body):
 	if _is_player(body):
 		players_in_area.append(body)
-		print("Player entered spike trap area: ", body.name)
 		
 		# Check if should trigger on fall
 		if trigger_on_fall and current_state == TrapState.IDLE:
@@ -278,7 +275,6 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	if _is_player(body):
 		players_in_area.erase(body)
-		print("Player exited spike trap area: ", body.name)
 
 func _check_proximity_trigger():
 	for player in players_in_area:
@@ -293,7 +289,6 @@ func _trigger_trap():
 		triggered_by_player = true
 		_change_state(TrapState.WARNING)
 		emit_signal("spike_trap_triggered", global_position)
-		print("Spike trap triggered!")
 
 func _check_spike_damage():
 	for player in players_in_area:
@@ -328,7 +323,6 @@ func _damage_player(player):
 	_play_sound(damage_sound)
 	
 	emit_signal("spike_damage_dealt", player, damage_dealt)
-	print("Spike trap dealt ", damage_dealt, " damage to ", player.name)
 
 func _create_blood_effect(position: Vector3):
 	# Create blood particle effect

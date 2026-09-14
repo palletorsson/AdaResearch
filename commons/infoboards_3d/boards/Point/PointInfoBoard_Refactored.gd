@@ -86,7 +86,6 @@ func load_content_from_json() -> void:
 
 	# Optional: Load and display board metadata
 	var meta = InfoBoardContentLoader.get_board_meta(BOARD_ID)
-	print("Loaded InfoBoard: %s - %s (%d pages)" % [meta.title, meta.subtitle, total_pages])
 
 func _process(delta):
 	if animation_playing:

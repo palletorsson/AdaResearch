@@ -185,7 +185,6 @@ func set_text_color(color: Color):
 # VR interaction methods
 func activate():
 	# Called when VR controller selects this menu item
-	print("Menu item activated: ", menu_text)
 	
 	# Visual feedback
 	var tween = create_tween()

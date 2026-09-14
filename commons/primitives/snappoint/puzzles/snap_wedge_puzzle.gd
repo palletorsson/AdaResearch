@@ -17,7 +17,6 @@ func _connect_signals() -> void:
 	if connection_manager:
 		if not connection_manager.wedge_formed.is_connected(_on_wedge_formed):
 			connection_manager.wedge_formed.connect(_on_wedge_formed)
-		print("SnapWedgePuzzle: Connected to wedge_formed signal")
 
 func _on_wedge_formed(points: Array) -> void:
 	# Check if this wedge uses our snap points
@@ -28,7 +27,6 @@ func _on_wedge_formed(points: Array) -> void:
 	
 	# If all 6 points are ours, this is our wedge!
 	if our_points_count == 6:
-		print("SnapWedgePuzzle: Wedge completed with our points!")
 		_complete_puzzle()  # Call base class completion method
 
 func _apply_puzzle_materials() -> void:
@@ -55,4 +53,3 @@ func _apply_puzzle_materials() -> void:
 		if mesh_instance and mesh_instance is MeshInstance3D:
 			# Apply material to the mesh instance
 			mesh_instance.material_override = puzzle_material
-			print("SnapWedgePuzzle: Applied transparent material to ", point.name)

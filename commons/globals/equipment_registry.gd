@@ -15,7 +15,6 @@ signal equipment_released(id: String, equipment_type: String)
 
 func _ready() -> void:
 	add_to_group("equipment_registry")
-	print("EquipmentRegistry: Initialized")
 
 
 ## Register new equipment (called when assembly line completes a product)
@@ -33,7 +32,6 @@ func register(id: String, equipment: Node3D, equipment_type: String, metadata: D
 	equipment.add_to_group("registered_equipment")
 	equipment.add_to_group("equipment_%s" % equipment_type)
 
-	print("EquipmentRegistry: Registered %s (%s)" % [id, equipment_type])
 	equipment_registered.emit(id, equipment_type)
 
 
@@ -74,7 +72,6 @@ func consume(id: String) -> Node3D:
 		var entry = _equipment[id]
 		if entry.available and is_instance_valid(entry.node):
 			entry.available = false
-			print("EquipmentRegistry: Consumed %s (%s)" % [id, entry.type])
 			equipment_consumed.emit(id, entry.type)
 			return entry.node
 	return null
@@ -94,7 +91,6 @@ func consume_node(equipment: Node3D) -> bool:
 func release(id: String) -> void:
 	if _equipment.has(id):
 		_equipment[id].available = true
-		print("EquipmentRegistry: Released %s" % id)
 		equipment_released.emit(id, _equipment[id].type)
 
 
@@ -106,7 +102,6 @@ func unregister(id: String) -> void:
 			entry.node.remove_from_group("registered_equipment")
 			entry.node.remove_from_group("equipment_%s" % entry.type)
 		_equipment.erase(id)
-		print("EquipmentRegistry: Unregistered %s" % id)
 
 
 ## Get equipment info by ID

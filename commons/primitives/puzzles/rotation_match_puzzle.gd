@@ -211,7 +211,6 @@ func _spawn_pieces_on_side():
 
 # Grid artifact configuration API
 func apply_grid_config(config: Dictionary) -> void:
-	print("RotationMatchPuzzle: Applying config: %s" % str(config))
 
 	if config.has("style"):
 		var style_str = str(config["style"]).to_lower()

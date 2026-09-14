@@ -100,7 +100,6 @@ func activate_selected_item():
 			selected_item.activate()
 
 func _on_menu_item_selected(item_text: String):
-	print("Selected menu item: ", item_text)
 	
 	# Handle menu actions
 	match item_text:
@@ -114,27 +113,22 @@ func _on_menu_item_selected(item_text: String):
 			quit_game()
 
 func start_game():
-	print("Starting game...")
 	# Load main game scene
 	get_tree().change_scene_to_file("res://scenes/game/main_game.tscn")
 
 func open_options():
-	print("Opening options menu...")
 	# Load options scene
 	get_tree().change_scene_to_file("res://scenes/menus/options.tscn")
 
 func open_about():
-	print("Opening about page...")
 	# Load about scene
 	get_tree().change_scene_to_file("res://scenes/menus/about.tscn")
 
 func quit_game():
-	print("Quitting game...")
 	# Confirmation dialog could go here
 	get_tree().quit()
 
 func close_menu():
-	print("Closing menu...")
 	# Could return to previous scene or show pause menu
 	queue_free()
 

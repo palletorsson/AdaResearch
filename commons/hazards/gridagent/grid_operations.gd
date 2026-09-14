@@ -11,13 +11,10 @@ static func copy_cube(grid: Node, source: Vector3i, target: Vector3i) -> bool:
 		return false  # Nothing to copy
 	
 	if GridInterface.is_cell_occupied(grid, target):
-		print("GridOperations.copy_cube: Target %s is occupied" % [target])
 		return false  # Target occupied
 	
 	var cube_data = GridInterface.get_cube_at_cell(grid, source)
-	print("GridOperations.copy_cube: Copying cube from %s to %s" % [source, target])
 	var success = GridInterface.place_cube_at_cell(grid, target, cube_data.color)
-	print("GridOperations.copy_cube: Result = %s" % [success])
 	return success
 
 # Copy a cube adjacent to source
@@ -51,7 +48,6 @@ static func rotate_structure_90(grid: Node, center: Vector3i, axis: Vector3i, ra
 	var max_pos = center + Vector3i.ONE * radius
 	var cubes = GridInterface.get_occupied_cells_in_region(grid, min_pos, max_pos)
 	
-	print("GridOperations.rotate_structure_90: Found %d cubes around %s" % [cubes.size(), center])
 	
 	if cubes.size() == 0:
 		return false
@@ -64,7 +60,6 @@ static func rotate_structure_90(grid: Node, center: Vector3i, axis: Vector3i, ra
 		if GridInterface.remove_cube_at_cell(grid, cube_pos):
 			removed_count += 1
 	
-	print("GridOperations.rotate_structure_90: Removed %d cubes for rotation" % removed_count)
 	
 	# Rotate each cube's position
 	var placed_count = 0
@@ -74,7 +69,6 @@ static func rotate_structure_90(grid: Node, center: Vector3i, axis: Vector3i, ra
 		if GridInterface.place_cube_at_cell(grid, rotated_pos, cube_data.color):
 			placed_count += 1
 	
-	print("GridOperations.rotate_structure_90: Placed %d cubes at rotated positions" % placed_count)
 	return true
 
 # Helper: Rotate a point 90° around axis at center

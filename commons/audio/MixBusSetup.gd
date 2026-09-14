@@ -75,8 +75,6 @@ static func setup() -> void:
 	_setup_lead_effects(bus_lead)
 	_ensure_master_safety()
 
-	print("MixBusSetup: buses ready — Drums=%d  Bass=%d  Synth=%d  Lead=%d" % [
-		bus_drums, bus_bass, bus_synth, bus_lead])
 
 
 static func get_bus_for_instrument(track_name: String, is_drum: bool) -> String:

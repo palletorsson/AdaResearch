@@ -309,8 +309,6 @@ func _load_map(name: String) -> void:
 	# (but not over an explicit --stage).
 	if _map_overrides.has("stage_order") and not _stage_explicit:
 		start_stage = clampi(int(_map_overrides["stage_order"]), MIN_STAGE, 99)
-	print("[scrubber] loaded map %s — %dx%d, seq=%s, stage=%d, paint_rows=%d" % [
-		name, grid_w, grid_d, _map_seq, start_stage, _map_paint.size()])
 
 
 # ── Build the accrual at the current stage, honoring the disabled set ──
@@ -1464,7 +1462,6 @@ func _run_contact_sheet() -> void:
 		for _i in range(45):
 			await get_tree().process_frame
 		_take_screenshot("%s_%02d.png" % [_contact_base, s])
-	print("[scrubber] contact sheet complete")
 	# out-of-tree guard: get_tree() is null once a map is torn down
 	if not is_inside_tree():
 		return
@@ -1481,7 +1478,6 @@ func _run_solo_sheet() -> void:
 		for _i in range(45):
 			await get_tree().process_frame
 		_take_screenshot("%s_%02d_%s.png" % [_solo_base, _order_of_kind.get(k, 0), k])
-	print("[scrubber] solo sheet complete (%d layers)" % kinds.size())
 	# out-of-tree guard: get_tree() is null once a map is torn down
 	if not is_inside_tree():
 		return

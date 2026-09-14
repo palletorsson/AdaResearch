@@ -149,10 +149,9 @@ func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):
 	st.add_vertex(v1)
 
 func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
-	print("DEBUG PICKUP")
+	pass
 
 func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:
-	print("triangle sphere dropped ")
 	var triangle_context := {
 		"vertex": index,
 		"pink_area": "%.2f" % get_triangle_area(triangle1_indices),
@@ -224,7 +223,6 @@ func apply_triangle_material(mesh_instance: MeshInstance3D, color: Color):
 
 		# Fallback to random selection for other colors
 		var rand = randi() % 3
-		print("interative triangle: random " + str(rand))
 		if rand == 0:
 			chosen_color = Color.BLACK
 		elif rand == 1:
@@ -246,7 +244,6 @@ func reset_to_equilateral():
 		Vector3(0.0, sphere_y_offset + 1.0, 0.0)    # Top-center
 	]
 	update_sphere_positions()
-	print("Reset to equilateral standing triangle")
 
 func reset_to_right_angled():
 	# Reset to right-angled standing triangle
@@ -256,7 +253,6 @@ func reset_to_right_angled():
 		Vector3(-1.0, sphere_y_offset + 1.0, 0.0)   # Top-left
 	]
 	update_sphere_positions()
-	print("Reset to right-angled standing triangle")
 
 func reset_to_isosceles():
 	# Reset to isosceles standing triangle
@@ -266,7 +262,6 @@ func reset_to_isosceles():
 		Vector3(0.0, sphere_y_offset + 1.0, 0.0)    # Top-center
 	]
 	update_sphere_positions()
-	print("Reset to isosceles standing triangle")
 
 func reset_to_wide():
 	# Reset to wide standing triangle
@@ -276,7 +271,6 @@ func reset_to_wide():
 		Vector3(0.0, sphere_y_offset + 1.0, 0.0)    # Top-center
 	]
 	update_sphere_positions()
-	print("Reset to wide standing triangle")
 
 func print_help():
 	print("=== Standing Triangle Controls ===")

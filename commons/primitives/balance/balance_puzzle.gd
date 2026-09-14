@@ -292,7 +292,6 @@ func _spawn_pieces() -> void:
 
 		_pieces.append(piece)
 
-	print("BalancePuzzle: Spawned %d pieces" % piece_count)
 
 
 func _update_height_check() -> void:
@@ -345,7 +344,6 @@ func _update_stability_check(delta: float) -> void:
 	if all_stable:
 		if _state != PuzzleState.STABILIZING:
 			_state = PuzzleState.STABILIZING
-			print("BalancePuzzle: Height reached! Checking stability...")
 
 		_stability_timer += delta
 		stability_progress.emit(_stability_timer / stability_time)
@@ -365,7 +363,6 @@ func _trigger_transformation() -> void:
 
 	_state = PuzzleState.TRANSFORMING
 	transformation_started.emit()
-	print("BalancePuzzle: TRANSFORMATION TRIGGERED!")
 
 	# Hide height indicator
 	if _height_indicator:
@@ -451,7 +448,6 @@ func _transform_to_walker() -> void:
 	_state = PuzzleState.WALKING
 	transformation_complete.emit()
 	walker_created.emit(_walker)
-	print("BalancePuzzle: Walker created and walking!")
 
 
 func _calculate_walker_position(index: int, total: int, original_rel: Vector3) -> Vector3:
@@ -512,7 +508,6 @@ func _update_walker(delta: float) -> void:
 	var distance_from_start = _walker.global_position.distance_to(global_position)
 	if distance_from_start > 2.0:
 		_state = PuzzleState.COMPLETE
-		print("BalancePuzzle: Walker departed. Puzzle complete!")
 
 
 ## Find GridScene for proper piece parenting

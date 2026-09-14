@@ -96,7 +96,6 @@ func _ready() -> void:
 	# Idempotent: with the defaults this writes back exactly what _init() wrote.
 	_layout()
 	super._ready()
-	print("QuadLinePuzzle: 4 lines, 4 vertices, figure=%s plane=%s, constraint: CLOSED_LOOP (any connection order)" % [figure, plane])
 
 
 ## Build target_positions and line_start_positions from the two axes.

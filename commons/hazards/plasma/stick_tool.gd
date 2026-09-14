@@ -55,7 +55,6 @@ func _ready() -> void:
 	picked_up.connect(_on_picked_up)
 	dropped.connect(_on_dropped)
 
-	print("[StickTool] Ready at %s" % global_position)
 
 func _process(_delta: float) -> void:
 	# Subtle glow at tip when no plasma is attached (inviting interaction)
@@ -81,7 +80,6 @@ func receive_plasma(plasma: PlasmaCritter) -> void:
 			plasma.plasma_depleted.connect(_on_plasma_depleted)
 
 	plasma_attached.emit(plasma)
-	print("[StickTool] Plasma attached: %s" % PlasmaCritter.Form.keys()[plasma.current_form])
 
 func release_plasma() -> void:
 	if attached_plasma == null:
@@ -95,7 +93,6 @@ func release_plasma() -> void:
 			old_plasma.plasma_depleted.disconnect(_on_plasma_depleted)
 
 	plasma_detached.emit()
-	print("[StickTool] Plasma released")
 
 func _on_plasma_depleted() -> void:
 	release_plasma()
@@ -171,11 +168,9 @@ func _setup_physics() -> void:
 
 func _on_picked_up(_pickable) -> void:
 	is_held = true
-	print("[StickTool] Picked up")
 
 func _on_dropped(_pickable) -> void:
 	is_held = false
-	print("[StickTool] Dropped")
 
 # ═══════════════════════════════════════════════════════════════════════════
 # GRID INTEGRATION

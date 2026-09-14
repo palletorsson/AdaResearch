@@ -11,7 +11,6 @@ var music_enabled: bool = false
 var _pending_config: Dictionary = {}
 
 func _ready():
-	print("🎉 DiscoFloorController: Setting up grid-based disco system")
 	
 	# Create the disco grid algorithm
 	disco_algorithm = DiscoGridAlgorithm.new()
@@ -24,7 +23,6 @@ func _ready():
 	
 	# Apply any pending config that arrived before ready
 	if not _pending_config.is_empty():
-		print("DiscoFloorController: Applying pending configuration...")
 		apply_grid_config(_pending_config)
 		_pending_config.clear()
 	
@@ -32,7 +30,6 @@ func _ready():
 	if music_enabled:
 		_setup_music()
 	
-	print("🕺 DiscoFloorController: Grid disco system ready!")
 
 func _setup_music():
 	"""Setup optional disco music"""
@@ -53,7 +50,6 @@ func _on_algorithm_finished():
 
 func apply_grid_config(data: Dictionary):
 	"""Apply configuration from map data (GridInteractablesComponent)"""
-	print("DiscoFloorController: Applying config: %s" % data)
 	if not disco_algorithm:
 		print("DiscoFloorController: Deferring config (not ready)")
 		_pending_config = data

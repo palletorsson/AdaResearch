@@ -62,10 +62,6 @@ func _process(delta: float) -> void:
 		# If we're moving fast and not held, something is pushing us
 		if velocity.length() > 0.5 and _push_cooldown <= 0.0:
 			_push_cooldown = 1.0  # Don't spam
-			print("=== GRAB_CUBE PUSHED ===")
-			print("  Name: %s" % name)
-			print("  Velocity: %s (%.2f m/s)" % [str(velocity), velocity.length()])
-			print("  Position: %s" % str(global_position))
 			_print_contacting_bodies()
 
 	if not snap_to_shelf:
@@ -78,14 +74,6 @@ func _process(delta: float) -> void:
 func _on_debug_body_entered(body: Node) -> void:
 	if not debug_collisions:
 		return
-	print("=== GRAB_CUBE COLLISION ===")
-	print("  %s touched by: %s" % [name, body.name])
-	print("  Body path: %s" % str(body.get_path()))
-	print("  Body class: %s" % body.get_class())
-	if body is Node3D:
-		print("  Body position: %s" % str(body.global_position))
-	if body is PhysicsBody3D:
-		print("  Body collision_layer: %d" % body.collision_layer)
 
 
 func _print_contacting_bodies() -> void:

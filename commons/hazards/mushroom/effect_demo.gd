@@ -84,8 +84,6 @@ func _ready() -> void:
 	_build_overlay()
 	_build_ui()
 	_apply_effect(0)
-	print("[EffectDemo] Ready — [ ] cycle effects, +/- intensity, Space auto-animate")
-	print("[EffectDemo] WASD move, right-click + mouse to look, 1-6 jump to effect")
 
 func _input(event: InputEvent) -> void:
 	# ── Desktop mouse look (hold right button) ──
@@ -220,7 +218,6 @@ func _apply_effect(idx: int) -> void:
 			_color_rect.visible = true
 
 	_update_ui()
-	print("[EffectDemo] Effect: %s (intensity=%.2f)" % [effect["name"], _intensity])
 
 func _update_intensity() -> void:
 	if _shader_mat:
@@ -525,7 +522,6 @@ func _build_camera() -> void:
 	var xr_origin: Node = get_tree().get_first_node_in_group("player")
 	if xr_origin != null:
 		_is_vr = true
-		print("[EffectDemo] VR mode detected — use controller buttons to cycle effects")
 		return
 
 	var scene_root: Node = get_tree().current_scene
@@ -544,4 +540,3 @@ func _build_camera() -> void:
 	_camera.fov = 65.0
 	_camera.current = true
 	add_child(_camera)
-	print("[EffectDemo] Desktop camera active")

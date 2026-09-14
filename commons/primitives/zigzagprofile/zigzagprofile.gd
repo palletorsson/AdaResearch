@@ -158,10 +158,9 @@ func add_triangle_with_normal(st: SurfaceTool, vertices: Array):
 		st.add_vertex(v1)
 
 func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
-	print("DEBUG PICKUP")
+	pass
 
 func _on_point_dropped(index: int, _pickable, meta: Dictionary) -> void:
-	print("zigzag sphere dropped ")
 	var zigzag_context := {
 		"vertex": index,
 		"profile_length": "%.2f" % get_profile_length(),
@@ -217,7 +216,6 @@ func reset_to_zigzag():
 	# Reset to perfect zigzag pattern (70% folded)
 	create_zigzag_vertices()
 	update_sphere_positions()
-	print("Reset to zigzag pattern (70% folded)")
 
 func reset_to_sine_wave():
 	# Reset to sine wave pattern
@@ -227,7 +225,6 @@ func reset_to_sine_wave():
 		var y_val = sphere_y_offset + sin(i * PI / segment_count) * segment_height * 0.5
 		vertex_positions.append(Vector3(x, y_val, 0.0))
 	update_sphere_positions()
-	print("Reset to sine wave pattern")
 
 func reset_to_sawtooth():
 	# Reset to sawtooth pattern
@@ -237,7 +234,6 @@ func reset_to_sawtooth():
 		var y_val = sphere_y_offset + (i % 2) * segment_height
 		vertex_positions.append(Vector3(x, y_val, 0.0))
 	update_sphere_positions()
-	print("Reset to sawtooth pattern")
 
 func update_sphere_positions() -> void:
 	if drag_points:

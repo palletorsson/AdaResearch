@@ -40,10 +40,6 @@ func _ready():
 	initial_position = target_node.position
 	initial_scale = target_node.scale
 	
-	print("CubeAnimator: Starting animation")
-	print("  Rotation: %s" % ("ON" if enable_rotation else "OFF"))
-	print("  Oscillation: %s" % ("ON" if enable_oscillation else "OFF"))
-	print("  Scale Pulse: %s" % ("ON" if enable_scale_pulse else "OFF"))
 
 func _process(delta):
 	if not target_node:
@@ -104,19 +100,16 @@ func set_animation_speed(speed_multiplier: float):
 # Individual animation control methods
 func toggle_rotation(enabled: bool):
 	enable_rotation = enabled
-	print("CubeAnimator: Rotation %s" % ("enabled" if enabled else "disabled"))
 
 func toggle_oscillation(enabled: bool):
 	enable_oscillation = enabled
 	if not enabled and target_node:
 		target_node.position = initial_position
-	print("CubeAnimator: Oscillation %s" % ("enabled" if enabled else "disabled"))
 
 func toggle_scale_pulse(enabled: bool):
 	enable_scale_pulse = enabled
 	if not enabled and target_node:
 		target_node.scale = initial_scale
-	print("CubeAnimator: Scale pulse %s" % ("enabled" if enabled else "disabled"))
 
 # Preset combinations for teaching
 func set_animation_preset(preset_name: String):
@@ -149,4 +142,3 @@ func set_animation_preset(preset_name: String):
 			print("CubeAnimator: Unknown preset: %s" % preset_name)
 			return
 	
-	print("CubeAnimator: Applied preset '%s'" % preset_name)

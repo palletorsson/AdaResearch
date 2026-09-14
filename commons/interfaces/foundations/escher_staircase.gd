@@ -201,7 +201,6 @@ func _ready() -> void:
 	_create_labels()
 	_create_highlight()
 	_built = true
-	print("EscherStaircase: Ready — 'Locally valid, globally impossible'")
 
 func _create_staircase() -> void:
 	# Create 4 sides of stairs that form an impossible loop
@@ -450,7 +449,6 @@ func climb_step() -> void:
 	# Check for paradox completion (full loop)
 	if _current_step == 0 and _steps_climbed > 0:
 		emit_signal("paradox_completed")
-		print("EscherStaircase: PARADOX — climbed %d steps 'up' and returned to start!" % _steps_climbed)
 		_paradox_label.text = "PARADOX COMPLETE\nClimbed %d steps up\nReturned to start" % _steps_climbed
 
 func descend_step() -> void:
@@ -475,7 +473,6 @@ func descend_step() -> void:
 	
 	if _current_step == 0 and _steps_climbed > 0:
 		emit_signal("paradox_completed")
-		print("EscherStaircase: PARADOX — descended %d steps 'down' and returned to start!" % _steps_climbed)
 
 func _update_counter() -> void:
 	var counter = get_node_or_null("StepCounter")
@@ -533,7 +530,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if seam == before or not _built:
 		return
 	_rebuild_seam()
-	print("EscherStaircase: seam=%s" % seam)
 
 ## Step heights and step COUNT both change between values, so this rebuilds the
 ## whole figure rather than a seam overlay. The climb ledger resets with it — a

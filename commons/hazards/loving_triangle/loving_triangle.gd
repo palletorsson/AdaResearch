@@ -99,7 +99,6 @@ func _ready() -> void:
 	add_to_group("companion")
 	add_to_group("loving_triangle")
 
-	print("[LovingTriangle] Ready — tier %d" % _current_tier)
 
 
 func _physics_process(delta: float) -> void:
@@ -429,7 +428,6 @@ func _mark_sequence_completed(sequence_name: String, notify: bool) -> void:
 		_save_state()
 		if notify:
 			tier_changed.emit(_current_tier)
-			print("[LovingTriangle] Evolved to tier %d" % _current_tier)
 
 
 func _get_all_tier_sequences() -> Array[String]:

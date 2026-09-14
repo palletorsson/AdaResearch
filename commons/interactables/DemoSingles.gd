@@ -45,7 +45,6 @@ func _ready():
 		lbl.transform.origin = Vector3(x, ROW_Y - 0.15, CONTROL_Z + 0.01)
 		add_child(lbl)
 
-	print("DemoSingles: %d controls" % types.size())
 
 
 func _build(c: Node3D, t: String, copper: Color, dark: Color) -> void:

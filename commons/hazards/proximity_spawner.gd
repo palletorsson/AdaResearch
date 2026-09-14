@@ -41,7 +41,6 @@ const ENEMY_SCENES: Dictionary = {
 
 
 func _ready() -> void:
-	print("ProximitySpawner: READY at %s, type='%s', spawn_radius=%s" % [global_position, enemy_type, spawn_radius])
 	# Delay player search to ensure scene is fully loaded
 	call_deferred("_deferred_init")
 
@@ -49,7 +48,7 @@ func _ready() -> void:
 func _deferred_init() -> void:
 	_find_player()
 	if _player_node:
-		print("ProximitySpawner: Found player: %s" % _player_node.name)
+		pass
 	else:
 		print("ProximitySpawner: WARNING - No player found yet, will keep searching")
 
@@ -67,7 +66,6 @@ func _physics_process(delta: float) -> void:
 	if is_instance_valid(_current_enemy):
 		# Despawn if player too far
 		if dist > despawn_radius:
-			print("ProximitySpawner: Player too far (%s), despawning %s" % [dist, enemy_type])
 			_current_enemy.queue_free()
 			_current_enemy = null
 	else:
@@ -75,8 +73,6 @@ func _physics_process(delta: float) -> void:
 		if _respawn_timer > 0.0:
 			_respawn_timer -= delta
 		elif dist <= spawn_radius:
-			if not _spawn_attempted:
-				print("ProximitySpawner: Player in range (%s <= %s), spawning %s" % [dist, spawn_radius, enemy_type])
 			_spawn_enemy()
 
 
@@ -125,7 +121,6 @@ func _spawn_enemy() -> void:
 	var p_label: String = ""
 	if hm:
 		p_label = " [%s]" % hm.get_hazard_personality(enemy_type)
-	print("ProximitySpawner: Spawned %s%s at %s" % [enemy_type, p_label, _current_enemy.global_position])
 
 
 func _on_enemy_destroyed(_enemy: Node3D) -> void:
@@ -176,7 +171,6 @@ func _find_player() -> void:
 
 
 func configure(config: Dictionary) -> void:
-	print("ProximitySpawner: configure() called with: %s" % config)
 	if config.has("type"):
 		enemy_type = str(config["type"])
 	if config.has("spawn_radius"):
@@ -185,7 +179,6 @@ func configure(config: Dictionary) -> void:
 		despawn_radius = float(config["despawn_radius"])
 	if config.has("respawn_delay"):
 		respawn_delay = float(config["respawn_delay"])
-	print("ProximitySpawner: Configured - type=%s, spawn_radius=%s" % [enemy_type, spawn_radius])
 
 
 func apply_grid_config(config: Dictionary) -> void:

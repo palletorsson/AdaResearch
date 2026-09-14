@@ -95,7 +95,6 @@ func _ready() -> void:
 	_find_player()
 	add_to_group("enemy")
 	add_to_group("sphere_droideka")
-	print("SphereDroideka: READY at %s" % global_position)
 
 
 func _physics_process(delta: float) -> void:

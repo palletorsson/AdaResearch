@@ -282,9 +282,6 @@ static func build_from_dict(data: Dictionary) -> Node3D:
 		_apply_bilateral_symmetry(elements_container, total_width, bays, cell_width,
 			row_y_bottoms, row_heights, stories, wall_depth, placements_data)
 
-	print("FacadeComposer: Built facade with %d placements (%d bays x %d stories)" % [
-		placements_data.size(), bays, stories
-	])
 
 	return root
 

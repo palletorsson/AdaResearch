@@ -55,8 +55,6 @@ signal track_started()
 signal beat_triggered(beat_number: int)
 
 func _ready():
-	print("🎵 DARK GAME TRACK PLAYER (JSON Enhanced) 🎵")
-	print("Setting up atmospheric 808/606 track with JSON patterns...")
 	
 	_setup_audio_players()
 	_setup_rhythm_system()
@@ -99,7 +97,6 @@ func _apply_config():
 	if current_config.has("bpm"):
 		BPM = current_config.bpm
 		BEAT_DURATION = 60.0 / BPM
-		print("   🎵 BPM: %d" % BPM)
 	
 	# Load patterns
 	if current_config.has("patterns"):
@@ -119,27 +116,22 @@ func _load_patterns_from_config():
 	# Load kick pattern
 	if patterns.has("kick"):
 		kick_pattern = _convert_pattern_to_array(patterns.kick)
-		print("   🥁 Kick pattern loaded: %d steps" % kick_pattern.size())
 	
 	# Load hihat pattern
 	if patterns.has("hihat"):
 		hihat_pattern = _convert_pattern_to_array(patterns.hihat)
-		print("   🎩 HiHat pattern loaded: %d steps" % hihat_pattern.size())
 	
 	# Load snare pattern
 	if patterns.has("snare"):
 		snare_pattern = _convert_pattern_to_array(patterns.snare)
-		print("   🔥 Snare pattern loaded: %d steps" % snare_pattern.size())
 	
 	# Load effect pattern
 	if patterns.has("effect"):
 		effect_pattern = _convert_pattern_to_array(patterns.effect)
-		print("   ⚡ Effect pattern loaded: %d steps" % effect_pattern.size())
 	
 	# Load blade runner pattern
 	if patterns.has("blade_runner"):
 		blade_runner_pattern = _convert_pattern_to_array(patterns.blade_runner)
-		print("   🏙️ Blade Runner harmonic pattern loaded: %d steps" % blade_runner_pattern.size())
 	
 	# Set pattern length to the longest pattern
 	var max_length = 8  # Default
@@ -155,7 +147,6 @@ func _load_patterns_from_config():
 		max_length = blade_runner_pattern.size()
 	
 	pattern_length = max_length
-	print("   🎵 Pattern length set to: %d beats" % pattern_length)
 
 func _convert_pattern_to_array(pattern_data) -> Array:
 	"""Convert JSON pattern to array format"""
@@ -190,7 +181,6 @@ func _set_default_patterns():
 	blade_runner_pattern = [1, 0, 0, 0, 0, 0, 0, 0]  # Long atmospheric hits
 	pattern_length = 8
 	
-	print("   🎵 Using default hardcoded patterns")
 
 func _apply_volume_settings():
 	"""Apply volume settings from JSON"""
@@ -242,7 +232,6 @@ func _setup_audio_players():
 	blade_runner_player.name = "BladeRunnerPlayer"
 	add_child(blade_runner_player)
 	
-	print("   ✅ Audio players configured")
 
 func _setup_rhythm_system():
 	"""Setup rhythm system"""
@@ -254,11 +243,9 @@ func _setup_rhythm_system():
 	beat_timer.timeout.connect(_on_beat)
 	add_child(beat_timer)
 	
-	print("   ✅ Rhythm system ready")
 
 func _generate_all_sounds():
 	"""Generate all sounds (using original generation code)"""
-	print("   🔧 Generating track sounds...")
 	
 	sound_cache[TrackSound.DARK_808_KICK] = _generate_808_kick_sound(1.5)
 	sound_cache[TrackSound.ACID_606_HIHAT] = _generate_606_hihat_sound(0.3)
@@ -269,7 +256,6 @@ func _generate_all_sounds():
 	sound_cache[TrackSound.DEEP_RUMBLE] = _generate_deep_rumble_sound(12.0)
 	sound_cache[TrackSound.BLADE_RUNNER_HARMONIC] = _generate_blade_runner_harmonic_sound(8.0)
 	
-	print("   ✅ All sounds generated and cached")
 
 # ===== SOUND GENERATION (Original methods) =====
 
@@ -545,7 +531,6 @@ func start_track():
 	if is_playing:
 		return
 	
-	print("🎵 Starting JSON-enhanced dark game track...")
 	is_playing = true
 	current_beat = 0
 	
@@ -584,7 +569,6 @@ func _start_ambient_layers():
 		bass_player.stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
 	
 	# Blade Runner harmonics now only trigger from patterns, not as ambient layer
-	print("🎵 Ambient layers started (bass + drone only)")
 
 func _on_beat():
 	if not is_playing:
@@ -613,7 +597,6 @@ func _on_beat():
 		blade_runner_player.stop()  # Stop previous harmonic
 		blade_runner_player.stream = sound_cache[TrackSound.BLADE_RUNNER_HARMONIC]
 		blade_runner_player.play()
-		print("🏙️ Blade Runner harmonic triggered at beat %d (pattern pos %d)" % [current_beat, pattern_pos])
 	
 	beat_triggered.emit(current_beat)
 	current_beat += 1
@@ -627,7 +610,6 @@ func _on_beat():
 
 func reload_config():
 	"""Reload configuration from JSON file"""
-	print("🔄 Reloading configuration...")
 	_load_config()
 
 func get_pattern_info() -> Dictionary:
@@ -648,7 +630,6 @@ func set_bpm(new_bpm: float):
 	BEAT_DURATION = 60.0 / BPM
 	if beat_timer:
 		beat_timer.wait_time = BEAT_DURATION
-	print("🎵 BPM changed to: %d" % BPM)
 
 func _input(event):
 	"""Input controls"""
@@ -659,9 +640,6 @@ func _input(event):
 			start_track()
 	elif event.is_action_pressed("ui_select"):
 		var info = get_pattern_info()
-		print("🎵 PATTERN INFO 🎵")
-		for key in info.keys():
-			print("   %s: %s" % [key, str(info[key])])
 	elif event.is_action_pressed("ui_right"):
 		reload_config()
 	elif event.is_action_pressed("ui_up"):

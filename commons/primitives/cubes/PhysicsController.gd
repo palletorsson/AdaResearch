@@ -27,9 +27,7 @@ func _ready():
 		# Connect physics signals
 		rigid_body.body_entered.connect(_on_collision)
 		rigid_body.sleeping_state_changed.connect(_on_sleep_changed)
-		print("PhysicsController: Connected to RigidBody3D")
 	
-	print("PhysicsController: Physics cube ready")
 
 func _process(delta):
 	# Auto-settle detection
@@ -49,7 +47,6 @@ func _on_collision(_body: Node):
 	collision_count += 1
 	last_collision_time = 0.0
 	
-	print("PhysicsController: Collision #%d with impact: %f" % [collision_count, impact_velocity])
 	
 	# Trigger bounce effects if impact is significant
 	if impact_velocity > bounce_sound_threshold:
@@ -58,7 +55,6 @@ func _on_collision(_body: Node):
 
 func _on_sleep_changed():
 	if rigid_body.sleeping:
-		print("PhysicsController: Cube has settled (physics sleep)")
 		cube_settled.emit()
 		_apply_settled_effects()
 
@@ -90,7 +86,6 @@ func _settle_cube():
 	if rigid_body and not rigid_body.sleeping:
 		# Force physics sleep
 		rigid_body.sleeping = true
-		print("PhysicsController: Force settled cube")
 
 # Public interaction methods
 func apply_impulse(direction: Vector3, strength: float = -1.0):
@@ -106,7 +101,6 @@ func apply_impulse(direction: Vector3, strength: float = -1.0):
 	
 	rigid_body.apply_central_impulse(impulse_vector)
 	cube_thrown.emit(impulse_vector)
-	print("PhysicsController: Applied impulse: %s" % impulse_vector)
 
 func apply_upward_force():
 	apply_impulse(Vector3.UP, impulse_strength * 1.5)
@@ -126,7 +120,6 @@ func reset_physics():
 		rigid_body.sleeping = false
 		collision_count = 0
 		last_collision_time = 0.0
-		print("PhysicsController: Physics reset")
 
 # Configuration methods
 func set_mass(new_mass: float):

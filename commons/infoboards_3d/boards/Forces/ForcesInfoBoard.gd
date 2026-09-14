@@ -209,7 +209,6 @@ func _on_vr_scroll_changed(_scroll_value: float):
 
 func _on_vr_input_detected(controller: XRController3D):
 	"""Handle VR input detection - Forces-specific behavior"""
-	print("ForcesInfoBoard: VR input detected from controller: ", controller.name)
 
 func create_visualization(vis_type: String) -> Control:
 	"""Create appropriate visualization for the given type"""

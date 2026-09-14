@@ -132,7 +132,6 @@ func _initialize_grid_data() -> void:
 func set_cell(x: int, y: int, color_idx: int) -> void:
 	if x < 0 or x >= GRID_SIZE or y < 0 or y >= GRID_SIZE:
 		return
-	print("PatternPlate: paint cell (%d,%d) color %d" % [x, y, color_idx])
 	_grid_data[y][x] = clampi(color_idx, 0, palette.size() - 1)
 	# Update cell visual
 	var idx: int = y * GRID_SIZE + x
@@ -561,7 +560,6 @@ func _get_tiled_color(px: int, py: int) -> int:
 
 func _select_color(idx: int) -> void:
 	selected_color = clampi(idx, 0, palette.size() - 1)
-	print("PatternPlate: selected color %d" % selected_color)
 	for i in _palette_indicators.size():
 		var ind: MeshInstance3D = _palette_indicators[i]
 		if ind and ind.material_override:

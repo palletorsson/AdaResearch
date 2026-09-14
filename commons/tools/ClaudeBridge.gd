@@ -67,7 +67,6 @@ func _ready() -> void:
 	# chatter during screenshots. Same flag honored by OversightVoiceBridge.
 	if "--no-bridges" in OS.get_cmdline_user_args() or "--no-bridges" in OS.get_cmdline_args():
 		enabled = false
-		print("ClaudeBridge: disabled by --no-bridges")
 		return
 
 	if not enabled:
@@ -108,7 +107,6 @@ func _ready() -> void:
 		_setup_voice_pipeline()
 		call_deferred("_connect_voice_button")
 
-	print("ClaudeBridge: ready (dir=%s, voice=%s)" % [_bridge_dir, voice_enabled])
 
 
 # ── Path helpers ────────────────────────────────────────────────────
@@ -120,7 +118,6 @@ func _ensure_bridge_dir() -> void:
 			dir.make_dir(BRIDGE_SUBDIR)
 	else:
 		DirAccess.make_dir_recursive_absolute(_bridge_dir)
-	print("ClaudeBridge: dir=%s" % _bridge_dir)
 
 
 func _test_file_access(dir_path: String) -> bool:
@@ -137,7 +134,6 @@ func _test_file_access(dir_path: String) -> bool:
 		return false
 	r.close()
 	DirAccess.remove_absolute(test_path)
-	print("ClaudeBridge: path OK: %s" % dir_path)
 	return true
 
 
@@ -287,7 +283,6 @@ func _setup_panel() -> void:
 
 	_panel_setup_done = true
 	_refresh_display()
-	print("ClaudeBridge: console attached to %s" % left_hand.name)
 
 
 func _find_left_hand() -> Node3D:
@@ -301,9 +296,6 @@ func _find_left_hand() -> Node3D:
 		return null
 	# Last found = deepest in tree = loaded scene's controller
 	var picked: Node3D = candidates.back() as Node3D
-	if candidates.size() > 1:
-		print("ClaudeBridge: found %d left hands, using %s (path: %s)" % [
-			candidates.size(), picked.name, picked.get_path()])
 	return picked
 
 
@@ -334,9 +326,6 @@ func _process(delta: float) -> void:
 			var current_left := _find_left_hand()
 			if current_left != null and _panel.get_parent() != current_left:
 				# Panel is on wrong controller — remove old and reattach
-				print("ClaudeBridge: controller changed (%s → %s) — re-attaching" % [
-					_panel.get_parent().name if _panel.get_parent() else "null",
-					current_left.name])
 				_panel.get_parent().remove_child(_panel)
 				_panel.queue_free()
 				_reattach()
@@ -375,7 +364,6 @@ func _reattach() -> void:
 		call_deferred("_hide_right_wrist_display")
 	if voice_enabled:
 		call_deferred("_connect_voice_button")
-	print("ClaudeBridge: re-attaching console")
 
 
 func _refresh_display() -> void:
@@ -446,7 +434,6 @@ func _connect_confirm_button() -> void:
 		controller.button_pressed.connect(_on_left_button_pressed)
 		_left_controller = controller
 		_confirm_connected = true
-		print("ClaudeBridge: confirm on %s (button=%s)" % [controller.name, confirm_button_name])
 
 
 func _on_left_button_pressed(button: String) -> void:
@@ -468,7 +455,6 @@ func _poll_outbox() -> void:
 
 	if _poll_debug_count % 10 == 1:
 		var exists := FileAccess.file_exists(outbox_path)
-		print("ClaudeBridge: poll #%d exists=%s" % [_poll_debug_count, exists])
 
 	if not FileAccess.file_exists(outbox_path):
 		return
@@ -497,7 +483,6 @@ func _poll_outbox() -> void:
 		_message_history = _message_history.slice(-MAX_CONSOLE_MESSAGES)
 	_refresh_display()
 
-	print("ClaudeBridge: message #%d → %s" % [msg_id, _current_message.substr(0, 80)])
 	claude_message_received.emit(_current_message)
 
 
@@ -514,7 +499,6 @@ func _send_confirm(response_text: String = "done") -> void:
 		return
 	f.store_string(JSON.stringify(payload))
 	f.close()
-	print("ClaudeBridge: confirmed #%d" % _last_message_id)
 
 	# Green flash
 	if _panel:
@@ -555,7 +539,6 @@ func _setup_voice_pipeline() -> void:
 	_mic_player.bus = VOICE_BUS_NAME
 	_mic_player.volume_db = 0.0
 	add_child(_mic_player)
-	print("ClaudeBridge: voice pipeline ready (bus=%s)" % VOICE_BUS_NAME)
 
 
 func _connect_voice_button() -> void:
@@ -582,7 +565,6 @@ func _connect_voice_button() -> void:
 		ctrl.button_released.connect(_on_voice_button_released)
 		_right_controller = ctrl
 		_voice_connected = true
-		print("ClaudeBridge: voice button on %s (B=%s tracker=%s)" % [ctrl.name, voice_button_name, voice_tracker])
 
 
 func _collect_controllers(node: Node, names: Array, out: Array[Node3D]) -> void:
@@ -625,7 +607,6 @@ func _start_voice_recording() -> void:
 		var perms := OS.get_granted_permissions()
 		if not perms.has("android.permission.RECORD_AUDIO"):
 			OS.request_permission("android.permission.RECORD_AUDIO")
-			print("ClaudeBridge: requesting mic permission")
 			return
 
 	_record_start_msec = Time.get_ticks_msec()
@@ -634,7 +615,6 @@ func _start_voice_recording() -> void:
 	_mic_player.play()
 	_record_effect.set_recording_active(true)
 	_refresh_display_with_voice(0.0)
-	print("ClaudeBridge: recording started")
 
 
 func _stop_voice_recording() -> void:
@@ -645,7 +625,6 @@ func _stop_voice_recording() -> void:
 	_is_recording = false
 
 	var duration_sec := float(Time.get_ticks_msec() - _record_start_msec) / 1000.0
-	print("ClaudeBridge: recording stopped (%.2fs)" % duration_sec)
 	# Restore panel color from recording orange
 	if is_instance_valid(_panel):
 		_panel.modulate = Color(0.85, 0.92, 1.0, 0.95)
@@ -677,7 +656,6 @@ func _stop_voice_recording() -> void:
 	var peak := _estimate_wav_peak(data)
 	if peak <= voice_silence_threshold:
 		_show_voice_status("Silent")
-		print("ClaudeBridge: audio silent (peak=%.6f)" % peak)
 		return
 
 	# Write voice_ready flag for Claude to pull

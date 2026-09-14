@@ -151,7 +151,6 @@ func reset_to_equilateral():
 		Vector3(0.0, sphere_y_offset + 0.25, 0.0)     # Top-center
 	]
 	update_sphere_positions()
-	print("Reset to equilateral triangle")
 
 func reset_to_right_angled():
 	# Reset to right-angled triangle spanning 0.5 units
@@ -161,7 +160,6 @@ func reset_to_right_angled():
 		Vector3(-0.25, sphere_y_offset + 0.25, 0.0)   # Top-left
 	]
 	update_sphere_positions()
-	print("Reset to right-angled triangle")
 
 func reset_to_isosceles():
 	# Reset to isosceles triangle spanning 0.5 units
@@ -171,7 +169,6 @@ func reset_to_isosceles():
 		Vector3(0.0, sphere_y_offset + 0.25, 0.0)     # Top-center
 	]
 	update_sphere_positions()
-	print("Reset to isosceles triangle")
 
 func update_sphere_positions():
 	if drag_points:
@@ -221,10 +218,9 @@ func get_triangle_area(indices: Array[int]) -> float:
 	return cross.length() * 0.5
 
 func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
-	print("DEBUG PICKUP")
+	pass
 
 func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:
-	print("triangle sphere dropped ")
 	var triangle_context := {
 		"vertex": index,
 		"area": "%.2f" % get_triangle_area(triangle_indices)

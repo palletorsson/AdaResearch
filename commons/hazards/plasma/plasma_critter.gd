@@ -159,7 +159,6 @@ func _ready() -> void:
 
 	add_to_group("plasma")
 	add_to_group("critter")
-	print("[PlasmaCritter] Ready at %s — form: %s" % [global_position, Form.keys()[current_form]])
 
 func _process(delta: float) -> void:
 	_damage_timer = max(0.0, _damage_timer - delta)
@@ -193,7 +192,6 @@ func set_form(new_form: Form) -> void:
 	_fuel = burn_duration
 	_apply_form_visuals()
 	form_changed.emit(new_form)
-	print("[PlasmaCritter] Form changed to: %s" % Form.keys()[new_form])
 
 func _apply_form_visuals() -> void:
 	var config: Dictionary = FORM_VISUALS.get(current_form, FORM_VISUALS[Form.RAW])
@@ -257,7 +255,6 @@ func attach_to(target: Node3D) -> void:
 
 	_fuel = burn_duration
 	plasma_attached.emit(target)
-	print("[PlasmaCritter] Attached to: %s" % target.name)
 
 func detach() -> void:
 	if _attached_to == null:
@@ -276,7 +273,6 @@ func detach() -> void:
 		_collision.disabled = false
 
 	plasma_detached.emit()
-	print("[PlasmaCritter] Detached from: %s" % old_target.name)
 
 # ═══════════════════════════════════════════════════════════════════════════
 # FUEL / DEPLETION
@@ -401,7 +397,6 @@ func _handle_player_contact(player: Node3D) -> void:
 		player.apply_health_damage(damage_amount)
 
 	_damage_timer = damage_cooldown
-	print("[PlasmaCritter] Damaged player: %.1f (%s form)" % [damage_amount, Form.keys()[current_form]])
 
 func _handle_stick_contact(stick: Node3D) -> void:
 	# Stick contact → become fire form and attach

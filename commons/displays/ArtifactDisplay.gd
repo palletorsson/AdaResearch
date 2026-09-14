@@ -31,7 +31,7 @@ signal artifact_examined(artifact_id: String)
 signal artifact_interacted(artifact_id: String)
 
 func _ready():
-	print("ArtifactDisplay: Initializing display")
+	pass
 
 func setup_display(data: Dictionary):
 	"""Setup the display with artifact data"""
@@ -41,7 +41,6 @@ func setup_display(data: Dictionary):
 	display_type = data.get("display_type", "pedestal")
 	enable_interaction = data.get("interactive", false)
 	
-	print("ArtifactDisplay: Setting up display for '%s' (type: %s)" % [artifact_name, display_type])
 	
 	_create_display_base()
 	_create_artifact_visual()
@@ -85,7 +84,6 @@ func _create_pedestal():
 	pedestal.material_override = material
 	
 	display_base.add_child(pedestal)
-	print("ArtifactDisplay: Created pedestal base")
 
 func _create_hologram_base():
 	"""Create a holographic projector base"""
@@ -105,12 +103,10 @@ func _create_hologram_base():
 	projector.material_override = material
 	
 	display_base.add_child(projector)
-	print("ArtifactDisplay: Created hologram base")
 
 func _create_floating_base():
 	"""Create an invisible base for floating artifacts"""
 	# Just a position marker, no visual
-	print("ArtifactDisplay: Created floating base")
 
 func _create_interactive_base():
 	"""Create an interactive display base"""
@@ -128,7 +124,6 @@ func _create_interactive_base():
 	base.material_override = material
 	
 	display_base.add_child(base)
-	print("ArtifactDisplay: Created interactive base")
 
 func _create_artifact_visual():
 	"""Create the visual representation of the artifact"""
@@ -178,7 +173,6 @@ func _create_cube_visual():
 	
 	_apply_artifact_material(mesh_instance)
 	artifact_visual.add_child(mesh_instance)
-	print("ArtifactDisplay: Created cube visual")
 
 func _create_sphere_visual():
 	"""Create a sphere artifact visual"""
@@ -190,7 +184,6 @@ func _create_sphere_visual():
 	
 	_apply_artifact_material(mesh_instance)
 	artifact_visual.add_child(mesh_instance)
-	print("ArtifactDisplay: Created sphere visual")
 
 func _create_crystal_visual():
 	"""Create a crystal artifact visual"""
@@ -202,7 +195,6 @@ func _create_crystal_visual():
 	
 	_apply_artifact_material(mesh_instance, true)  # More crystalline
 	artifact_visual.add_child(mesh_instance)
-	print("ArtifactDisplay: Created crystal visual")
 
 func _create_disc_visual():
 	"""Create a disc artifact visual"""
@@ -215,7 +207,6 @@ func _create_disc_visual():
 	
 	_apply_artifact_material(mesh_instance)
 	artifact_visual.add_child(mesh_instance)
-	print("ArtifactDisplay: Created disc visual")
 
 func _create_generic_visual():
 	"""Create a generic artifact visual"""
@@ -292,7 +283,6 @@ func _create_info_panel():
 	label.modulate = Color(0.9, 0.9, 1.0)
 	info_panel.add_child(label)
 	
-	print("ArtifactDisplay: Created info panel")
 
 func _setup_interaction():
 	"""Setup interaction for interactive artifacts"""
@@ -311,7 +301,6 @@ func _setup_interaction():
 	interaction_area.body_entered.connect(_on_interaction_entered)
 	interaction_area.area_entered.connect(_on_interaction_area_entered)
 	
-	print("ArtifactDisplay: Interaction setup complete")
 
 func _process(delta):
 	if not artifact_visual:
@@ -328,13 +317,11 @@ func _process(delta):
 func _on_interaction_entered(body):
 	"""Handle interaction with the artifact"""
 	if _is_player_body(body):
-		print("ArtifactDisplay: Player examining artifact '%s'" % artifact_name)
 		artifact_examined.emit(artifact_id)
 
 func _on_interaction_area_entered(area):
 	"""Handle area-based interaction"""
 	if "Hand" in area.name:
-		print("ArtifactDisplay: Hand interaction with artifact '%s'" % artifact_name)
 		artifact_interacted.emit(artifact_id)
 
 func _is_player_body(body: Node3D) -> bool:

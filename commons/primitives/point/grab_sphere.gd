@@ -169,7 +169,6 @@ func _on_dropped(_pickable) -> void:
 	if alter_freeze and has_method("set_freeze_enabled"):
 		var current_frozen = freeze
 		set_freeze_enabled(!current_frozen)
-		print("DEBUG: Toggled freeze state from ", current_frozen, " to ", !current_frozen)
 	
 	# Unsubscribe to controller button events when dropped
 	if _current_controller:

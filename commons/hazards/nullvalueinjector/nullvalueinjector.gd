@@ -240,7 +240,6 @@ func _scan_for_targets():
 		if _is_valid_target(node):
 			target_nodes.append(node)
 	
-	print("NullInjectorEntity: Found ", target_nodes.size(), " potential targets")
 
 func _get_all_scene_nodes(node: Node) -> Array:
 	var nodes = [node]
@@ -336,7 +335,6 @@ func _inject_null_reference(target: Node):
 		
 		_create_corruption_effect(target.global_position if target.has_method("get_global_position") else global_position)
 		emit_signal("null_injected", target, prop_name, InjectionType.NULL_REFERENCE)
-		print("NullInjectorEntity: Nullified reference '", prop_name, "' in ", target.name)
 
 func _inject_empty_string(target: Node):
 	# Find string properties and empty them
@@ -351,7 +349,6 @@ func _inject_empty_string(target: Node):
 				target.set(prop.name, "")
 				_create_corruption_effect(target.global_position if target.has_method("get_global_position") else global_position)
 				emit_signal("null_injected", target, prop.name, InjectionType.EMPTY_STRING)
-				print("NullInjectorEntity: Emptied string '", prop.name, "' in ", target.name)
 				break
 
 func _inject_zero_vector(target: Node):
@@ -367,7 +364,6 @@ func _inject_zero_vector(target: Node):
 			target.set(prop.name, zero_value)
 			_create_corruption_effect(target.global_position if target.has_method("get_global_position") else global_position)
 			emit_signal("null_injected", target, prop.name, InjectionType.ZERO_VECTOR)
-			print("NullInjectorEntity: Zeroed vector '", prop.name, "' in ", target.name)
 			break
 
 func _inject_invalid_resource(target: Node):
@@ -398,7 +394,6 @@ func _inject_broken_signal(target: Node):
 			
 			_create_corruption_effect(target.global_position if target.has_method("get_global_position") else global_position)
 			emit_signal("null_injected", target, signal_name, InjectionType.BROKEN_SIGNAL)
-			print("NullInjectorEntity: Broke signal connection '", signal_name, "' in ", target.name)
 
 func _inject_corrupted_property(target: Node):
 	# Corrupt numeric properties with invalid values
@@ -427,7 +422,6 @@ func _inject_missing_child(target: Node):
 		target.remove_child(child_to_remove)
 		_create_corruption_effect(target.global_position if target.has_method("get_global_position") else global_position)
 		emit_signal("null_injected", target, "child_node", InjectionType.MISSING_CHILD)
-		print("NullInjectorEntity: Removed child '", child_to_remove.name, "' from ", target.name)
 
 func _inject_deleted_scene(target: Node):
 	# Mark entire nodes for deletion (most destructive)
@@ -437,7 +431,6 @@ func _inject_deleted_scene(target: Node):
 		
 		_create_corruption_effect(target.global_position if target.has_method("get_global_position") else global_position)
 		emit_signal("null_injected", target, "entire_node", InjectionType.DELETED_SCENE)
-		print("NullInjectorEntity: Marking node for deletion: ", target.name)
 		
 		# Delay the deletion to make it more chaotic
 		var delete_timer = Timer.new()
@@ -508,12 +501,10 @@ func _check_cascading_failures():
 		
 	if affected_count > 15:
 		emit_signal("reality_breach_detected")
-		print("NullInjectorEntity: REALITY BREACH - System critically destabilized!")
 
 func _on_potential_target_entered(body):
 	if _is_valid_target(body) and not body in target_nodes:
 		target_nodes.append(body)
-		print("NullInjectorEntity: New target acquired: ", body.name)
 
 # Public API
 func set_corruption_level(level: float):
@@ -565,4 +556,3 @@ func get_corruption_stats() -> Dictionary:
 func destroy_entity():
 	restore_all_corruptions()
 	queue_free()
-	print("NullInjectorEntity: Entity destroyed, attempting to restore reality...")

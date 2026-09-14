@@ -547,7 +547,6 @@ func _apply_capture_environment_if_active() -> void:
 	var floor_node := get_node_or_null("Floor")
 	if floor_node:
 		floor_node.visible = false
-	print("MapCatalogDesktop3D: capture environment applied (floor hidden, lights damped)")
 
 func _start_default_spin() -> void:
 	set_camera_mode(CameraMode.SPIN)

@@ -269,9 +269,6 @@ func get_uv_from_world_pos(world_pos: Vector3) -> Vector2:
 
 	if _debug_uv_transform:
 		var parent_name = get_parent().get_parent().get_parent().name if get_parent() and get_parent().get_parent() and get_parent().get_parent().get_parent() else "unknown"
-		print("Canvas [%s]: world=%s, gt.origin=%s, local=%s, uv=(%0.2f, %0.2f)" % [
-			parent_name, world_pos, gt.origin, local_pos, uv_x, uv_y
-		])
 
 	return Vector2(uv_x, uv_y)
 

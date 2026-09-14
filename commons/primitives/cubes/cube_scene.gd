@@ -142,7 +142,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[CubeScene] Config applied — grain=%s" % [grain])
 
 
 func _read_metadata_overrides() -> void:

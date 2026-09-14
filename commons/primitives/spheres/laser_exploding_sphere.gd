@@ -353,35 +353,26 @@ func hit_by_laser() -> void:
 	if _is_exploding:
 		return
 
-	print("LaserExplodingSphere: Hit by laser, exploding!")
 	_explode()
 
 ## Alternative: Called when pointer action is triggered while pointing at this object
 func pointer_pressed(_at_position: Vector3) -> void:
-	print("LaserExplodingSphere: Pointer pressed, exploding!")
 	hit_by_laser()
 
 ## Alternative: Called by function pointer on click
 func action() -> void:
-	print("LaserExplodingSphere: Action triggered, exploding!")
 	hit_by_laser()
 
 ## Called by XR Tools pointer system when pointer events occur
 func pointer_event(event) -> void:
 	var event_type = event.event_type
-	print("LaserExplodingSphere: pointer_event called! event_type = ", event_type, " (type: ", typeof(event_type), ")")
-	print("  Checking if event_type == 0: ", (event_type == 0))
 
 	# Explode when laser enters (touches) the sphere
 	if event_type == 0:  # XRToolsPointerEvent.Type.ENTERED = 0
-		print(">>> LaserExplodingSphere: Laser touched sphere, EXPLODING NOW!")
 		hit_by_laser()
 	# Also support trigger click if it works
 	elif event_type == 2:  # XRToolsPointerEvent.Type.PRESSED = 2
-		print(">>> LaserExplodingSphere: Pointer event (PRESSED), EXPLODING NOW!")
 		hit_by_laser()
-	else:
-		print("  Not exploding - event type is: ", event_type)
 
 
 ## Trigger explosion effect

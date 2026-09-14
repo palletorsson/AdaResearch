@@ -72,23 +72,17 @@ func _ready():
 		start_algorithm()
 
 func _find_grid_resources():
-	print("DiscoGrid: Searching for grid resources (GridColorizer style)...")
 
 	# Search parent hierarchy first
 	multimesh_instance_ref = _find_multimesh_recursive(get_parent())
-	if multimesh_instance_ref:
-		print("DiscoGrid: Found GridMultiMesh in parent hierarchy!")
 
 	# If not found, search from scene root
 	if not multimesh_instance_ref:
 		var root = get_tree().current_scene
 		multimesh_instance_ref = _find_multimesh_recursive(root)
-		if multimesh_instance_ref:
-			print("DiscoGrid: Found GridMultiMesh in scene root!")
 
 	if multimesh_instance_ref:
 		multimesh_ref = multimesh_instance_ref.multimesh
-		print("DiscoGrid: MultiMesh resource: %s (instances: %d)" % [multimesh_ref, multimesh_ref.instance_count if multimesh_ref else 0])
 
 		# CRITICAL: Adjust material to make instance colors visible
 		var material = multimesh_instance_ref.material_override
@@ -96,7 +90,6 @@ func _find_grid_resources():
 			material.set_shader_parameter("modelColor", Color.WHITE)
 			material.set_shader_parameter("show_interior", true)
 			material.set_shader_parameter("wireframeOpacity", 0.3)
-			print("DiscoGrid: Adjusted material (modelColor=WHITE, show_interior=true)")
 		elif material == null:
 			print("DiscoGrid: WARNING - material_override is null, shader parameters not set")
 	else:
@@ -108,7 +101,7 @@ func _find_grid_resources():
 		grid_structure = _find_grid_structure(get_tree().current_scene)
 
 	if grid_structure:
-		print("DiscoGrid: Found GridStructureComponent! cube_positions.size() = %d" % grid_structure.cube_positions.size())
+		pass
 	else:
 		print("DiscoGrid: WARNING - GridStructureComponent not found, will use fallback indexing")
 
@@ -130,7 +123,6 @@ func _find_grid_structure(node: Node) -> GridStructureComponent:
 	return null
 
 func apply_grid_config(data: Dictionary):
-	print("DiscoGrid: Config received: %s" % data)
 	if data.has("min_x"): region_min_x = int(data.min_x)
 	if data.has("max_x"): region_max_x = int(data.max_x)
 	if data.has("min_z"): region_min_z = int(data.min_z)
@@ -148,7 +140,6 @@ func start_algorithm():
 	animation_step = 0
 	step_timer = 0.0
 	timer.start()
-	print("DiscoGrid: Algorithm started.")
 
 func stop_algorithm():
 	is_running = false
@@ -171,17 +162,13 @@ func setup_disco_grid():
 	grid_width = region_max_x - region_min_x + 1
 	grid_depth = region_max_z - region_min_z + 1
 
-	print("DiscoGrid: Region bounds: x=[%d,%d], z=[%d,%d], y=%d" % [region_min_x, region_max_x, region_min_z, region_max_z, target_y_level])
-	print("DiscoGrid: Grid dimensions: %dx%d" % [grid_width, grid_depth])
 
 	# Mapping logic following GridColorizer
 	var instance_count = multimesh_ref.instance_count
-	print("DiscoGrid: MultiMesh instance_count = %d" % instance_count)
 
 	# Use cube_positions from GridStructureComponent if available
 	if grid_structure and grid_structure.cube_positions.size() > 0:
 		var all_positions = grid_structure.cube_positions
-		print("DiscoGrid: Found GridStructureComponent with %d cube positions" % all_positions.size())
 
 		for i in range(all_positions.size()):
 			var pos = all_positions[i]
@@ -191,7 +178,6 @@ func setup_disco_grid():
 				disco_indices.append(i)
 				disco_grid_map[Vector2i(pos.x - region_min_x, pos.z - region_min_z)] = i
 
-		print("DiscoGrid: Mapped %d cubes using cube_positions" % disco_indices.size())
 	else:
 		# Fallback to square grid logic from GridColorizer.gd
 		print("DiscoGrid: WARNING - No GridStructureComponent, using fallback square grid logic")
@@ -210,8 +196,6 @@ func setup_disco_grid():
 		print("DiscoGrid: Mapped %d cubes using fallback" % disco_indices.size())
 
 	print("DiscoGrid: Setup complete. %dx%d area, %d cubes mapped." % [grid_width, grid_depth, disco_indices.size()])
-	if disco_indices.size() > 0:
-		print("DiscoGrid: First 5 indices: %s" % str(disco_indices.slice(0, min(5, disco_indices.size()))))
 
 func _process(delta):
 	if not disco_enabled or not is_running: return

@@ -53,8 +53,6 @@ signal beat_triggered(beat_number: int)
 signal section_changed(new_section: String)
 
 func _ready():
-	print("🎛️ ENHANCED TRACK SYSTEM 🎛️")
-	print("Initializing modular architecture...")
 	
 	_setup_core_systems()
 	_create_track_layers()
@@ -80,7 +78,6 @@ func _setup_core_systems():
 	beat_timer.timeout.connect(_on_global_beat)
 	add_child(beat_timer)
 	
-	print("   ✅ Core systems initialized")
 
 func _create_track_layers():
 	"""Create all track layer instances"""
@@ -94,7 +91,6 @@ func _create_track_layers():
 			add_child(layer)
 			layers[category][layer_name] = layer
 	
-	print("   ✅ Track layers created")
 
 func _on_global_beat():
 	"""Handle global beat timing"""
@@ -120,7 +116,6 @@ func start_track():
 	if is_playing:
 		return
 	
-	print("🎵 Starting enhanced track...")
 	is_playing = true
 	global_beat = 0
 	
@@ -131,7 +126,6 @@ func start_track():
 	beat_timer.start()
 	
 	track_started.emit()
-	print("   🎵 Enhanced track playing at %.1f BPM" % bpm)
 
 func stop_track():
 	"""Stop the track system"""
@@ -160,7 +154,6 @@ func set_bpm(new_bpm: float):
 	"""Change the track BPM"""
 	bpm = new_bpm
 	beat_timer.wait_time = 60.0 / bpm / 4.0
-	print("🎵 BPM changed to %.1f" % bpm)
 
 # ===== LAYER CONTROL API =====
 
@@ -170,7 +163,6 @@ func set_layer_enabled(category: String, layer: String, enabled: bool):
 		var layer_obj = layers[category][layer]
 		if layer_obj:
 			layer_obj.enabled = enabled
-			print("Track: %s/%s = %s" % [category, layer, enabled])
 
 func set_layer_volume(category: String, layer: String, volume_db: float):
 	"""Set layer volume"""
@@ -258,16 +250,7 @@ func get_track_info() -> Dictionary:
 func info():
 	"""Show detailed track information"""
 	var track_info = get_track_info()
-	print("🎛️ ENHANCED TRACK INFO 🎛️")
-	print("   Playing: %s | Beat: %d | BPM: %.1f" % [track_info.is_playing, track_info.global_beat, track_info.bpm])
 	
 	for category in track_info.layers.keys():
-		print("   [%s]:" % category.to_upper())
 		for layer_name in track_info.layers[category].keys():
 			var layer_data = track_info.layers[category][layer_name]
-			print("     %s: %s | Vol: %.1fdB | Solo: %s" % [
-				layer_name, 
-				"ON" if layer_data.enabled else "OFF",
-				layer_data.volume,
-				"YES" if layer_data.solo else "NO"
-			]) 

@@ -83,7 +83,6 @@ func _init() -> void:
 func _ready() -> void:
 	_apply_dna()
 	super._ready()
-	print("ParallelLinePuzzle: 2 lines, 4 vertices, pose=%s stock=%s, constraints: PARALLEL" % [pair_pose, start_state])
 
 
 func _complete_puzzle() -> void:

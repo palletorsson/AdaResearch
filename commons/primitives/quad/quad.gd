@@ -157,10 +157,9 @@ func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):
 	st.add_vertex(v1)
 
 func _on_point_picked_up(_index: int, _pickable, _meta: Dictionary) -> void:
-	print("DEBUG PICKUP")
+	pass
 
 func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:
-	print("quad sphere dropped ")
 	var quad_context := {
 		"vertex": index,
 		"pink_area": "%.2f" % get_triangle_area(triangle_a_indices),
@@ -237,7 +236,6 @@ func reset_to_square():
 		Vector3(-0.8, sphere_y_offset + 0.8, 0.0)   # Top-left
 	]
 	update_sphere_positions()
-	print("Reset to square shape")
 
 func reset_to_rectangle():
 	# Reset to rectangular quad
@@ -248,7 +246,6 @@ func reset_to_rectangle():
 		Vector3(-1.2, sphere_y_offset + 0.6, 0.0)   # Top-left
 	]
 	update_sphere_positions()
-	print("Reset to rectangular quad")
 
 func reset_to_diamond():
 	# Reset to diamond shape
@@ -259,7 +256,6 @@ func reset_to_diamond():
 		Vector3(-1.0, sphere_y_offset, 0.0)        # Left
 	]
 	update_sphere_positions()
-	print("Reset to diamond shape")
 
 func print_help():
 	print("=== Quad Controls ===")

@@ -37,7 +37,6 @@ func _load_tutorials_from_file() -> void:
 	var data = json.data
 	if data.has("tutorials") and typeof(data.tutorials) == TYPE_DICTIONARY:
 		_tutorials = data.tutorials
-		print("Loaded ", _tutorials.size(), " tutorial texts from JSON file")
 	else:
 		print("Error: Invalid tutorial text JSON structure")
 		_load_fallback_tutorials()
@@ -56,7 +55,6 @@ func has_tutorial(tutorial_id: String) -> bool:
 func get_tutorial_content(tutorial_id: String) -> String:
 	"""Get tutorial content by ID, supports both inline content and content_file"""
 	var id = tutorial_id.to_lower()
-	print("TutorialTextLibrary: get_tutorial_content() called for '%s'" % id)
 
 	if not _tutorials.has(id):
 		print("TutorialTextLibrary: Tutorial ID '%s' not found in library" % id)
@@ -64,19 +62,15 @@ func get_tutorial_content(tutorial_id: String) -> String:
 		return ""
 
 	var tutorial_data = _tutorials[id]
-	print("TutorialTextLibrary: Found tutorial data: %s" % str(tutorial_data))
 
 	# Check if content_file is specified
 	if tutorial_data.has("content_file") and typeof(tutorial_data.content_file) == TYPE_STRING:
 		var file_path = tutorial_data.content_file
-		print("TutorialTextLibrary: Loading from external file: %s" % file_path)
 		var content = _load_text_from_file(file_path)
-		print("TutorialTextLibrary: Loaded %d characters from file" % content.length())
 		return content
 
 	# Check if inline content is specified
 	if tutorial_data.has("content") and typeof(tutorial_data.content) == TYPE_STRING:
-		print("TutorialTextLibrary: Using inline content (%d chars)" % tutorial_data.content.length())
 		return tutorial_data.content
 
 	print("TutorialTextLibrary: WARNING - Tutorial '%s' has neither content_file nor content" % id)
@@ -115,11 +109,9 @@ func _load_text_from_file(file_path: String) -> String:
 	"""Load text content from an external file
 	Supports both .gd files (loaded as resources) and .txt files (filesystem access)
 	"""
-	print("TutorialTextLibrary: _load_text_from_file() called for: %s" % file_path)
 
 	# Check if it's a .gd file - use resource loading (MUCH better for Godot!)
 	if file_path.ends_with(".gd"):
-		print("TutorialTextLibrary: Loading as GDScript resource")
 		var script = load(file_path)
 		if script == null:
 			print("TutorialTextLibrary: ERROR - Could not load script: %s" % file_path)
@@ -145,17 +137,14 @@ func _load_text_from_file(file_path: String) -> String:
 			return ""
 
 	# For .txt files, use filesystem access
-	print("TutorialTextLibrary: Loading as text file from filesystem")
 
 	# Build absolute path manually
 	var absolute_path = file_path
 	if file_path.begins_with("res://"):
 		var project_path = ProjectSettings.globalize_path("res://")
-		print("TutorialTextLibrary: Project path: %s" % project_path)
 
 		var relative_path = file_path.substr(6)  # Remove "res://"
 		absolute_path = project_path + relative_path
-		print("TutorialTextLibrary: Constructed absolute path: %s" % absolute_path)
 
 	# Check if file exists
 	if not FileAccess.file_exists(absolute_path):

@@ -37,7 +37,6 @@ func _ready() -> void:
 
 
 func _setup_face_snap_system() -> void:
-	print("GrabCubeSnappable: Setting up face snap system for %s" % name)
 	_face_snap_system = FaceSnapSystemScript.new()
 	_face_snap_system.name = "FaceSnapSystem"
 	_face_snap_system.show_grid_overlay = show_snap_grid
@@ -47,7 +46,6 @@ func _setup_face_snap_system() -> void:
 	_face_snap_system.face_snapped.connect(_on_face_snapped)
 	_face_snap_system.face_unsnapped.connect(_on_face_unsnapped)
 
-	print("GrabCubeSnappable: Face snap system initialized for %s, child count: %d" % [name, get_child_count()])
 
 
 func _on_face_snapped(other_cube: Node3D, my_face: int, other_face: int) -> void:

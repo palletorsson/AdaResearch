@@ -34,7 +34,6 @@ static func load_content() -> bool:
 	_content_cache = json.data
 	_is_loaded = true
 
-	print("InfoBoardContentLoader: Loaded content for %d boards" % _content_cache.get("boards", {}).size())
 	return true
 
 # Get content for a specific board

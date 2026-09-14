@@ -41,7 +41,6 @@ var current_ambient_preset: String = ""
 var current_ambient_controller: Node = null  # Weak reference via instance_id
 
 func _ready():
-	print("🎵 SoundBankSingleton initializing...")
 	generation_mutex = Mutex.new()
 	generation_thread = Thread.new()
 
@@ -54,7 +53,6 @@ func _ready():
 	# Connect to scene manager signals for pause during transitions
 	call_deferred("_connect_scene_manager_signals")
 
-	print("✅ SoundBankSingleton ready")
 	sound_bank_ready.emit()
 
 func _connect_scene_manager_signals():
@@ -64,11 +62,9 @@ func _connect_scene_manager_signals():
 		if scene_manager.has_signal("scene_transition_started"):
 			if not scene_manager.scene_transition_started.is_connected(_on_scene_transition_started):
 				scene_manager.scene_transition_started.connect(_on_scene_transition_started)
-				print("SoundBank: Connected to scene_transition_started")
 		if scene_manager.has_signal("scene_transition_completed"):
 			if not scene_manager.scene_transition_completed.is_connected(_on_scene_transition_completed):
 				scene_manager.scene_transition_completed.connect(_on_scene_transition_completed)
-				print("SoundBank: Connected to scene_transition_completed")
 	else:
 		print("SoundBank: SceneManager not found, will retry...")
 		# Retry after a short delay
@@ -84,8 +80,6 @@ func _on_scene_transition_started(_from_scene: String, _to_scene: String, _trans
 		return
 	_is_transitioning = true
 	pause_all_music()
-	if _currently_paused_players.size() > 0:
-		print("SoundBank: ⏸️ Paused %d music player(s) for transition" % _currently_paused_players.size())
 
 func _on_scene_transition_completed(_scene_name: String, _user_data: Dictionary):
 	"""Track transition state and resume previously paused music players."""
@@ -185,7 +179,6 @@ func _load_ambient_presets():
 		return
 		
 	var preset_list = manifest_data["presets"]
-	print("📂 Found %d presets in manifest. Loading..." % preset_list.size())
 	
 	# 2. Load Each Preset File
 	for preset_id in preset_list:
@@ -223,7 +216,6 @@ func get_preset(preset_name: String) -> Dictionary:
 
 func trigger_ambient_change(preset_name: String):
 	"""Trigger a global change of ambient preset"""
-	print("🔊 SoundBank: Requesting global ambient change to: ", preset_name)
 	request_ambient_change.emit(preset_name)
 
 # ===== SOUND GENERATION =====
@@ -247,7 +239,6 @@ func get_sound(sound_id: String) -> AudioStream:
 							   "MORODER_DISCO_SONG", "DETROIT_TECHNO_SONG", "SYNTHWAVE_SONG", "RAVE_SONG"]
 		for song_type in async_song_types:
 			if sound_id.contains(song_type):
-				print("SoundBank: Triggering async generation for ", sound_id)
 				_request_async_generation(sound_id)
 				return null  # Caller must listen to sound_generated signal
 			
@@ -284,7 +275,6 @@ func _on_async_sound_ready(stream: AudioStream):
 	
 	if stream:
 		sound_registry[sound_id] = stream
-		print("SoundBank: Async sound ready: ", sound_id)
 		sound_generated.emit(sound_id)
 	else:
 		print("SoundBank: Async generation failed for: ", sound_id)
@@ -378,7 +368,6 @@ func _generate_synthesizer_sound(sound_name: String) -> AudioStreamWAV:
 	# These take 10+ seconds to generate synchronously!
 	if sound_name in ["POP_INTERACTIVE_SONG", "AMBIENT_WORKS_SONG", "PROG_SYNTH_SONG", 
 					  "MORODER_DISCO_SONG", "DETROIT_TECHNO_SONG", "SYNTHWAVE_SONG", "RAVE_SONG"]:
-		print("SoundBank: Interactive song '%s' requires async generation" % sound_name)
 		return null  # Triggers async path in get_sound()
 	
 	var AudioSynth = preload("res://commons/audio/generators/AudioSynthesizer.gd")
@@ -422,7 +411,6 @@ func _generate_techno_noir_sound(sound_name: String, params: Dictionary = {}) ->
 	var stream = TechnoNoir.generate_sound(sound_name, params)
 
 	if stream:
-		print("✅ Generated tech noir sound: ", sound_name)
 		return stream
 	else:
 		print("⚠️ Unknown tech noir sound: ", sound_name)
@@ -436,7 +424,6 @@ func _generate_trap_beats_sound(sound_name: String, params: Dictionary = {}) -> 
 	var stream = TrapBeats.generate_sound(sound_name, params)
 
 	if stream:
-		print("✅ Generated trap beat: ", sound_name, " 🔥")
 		return stream
 	else:
 		print("⚠️ Unknown trap beat: ", sound_name)
@@ -483,7 +470,6 @@ func _generate_cinematic_sound(sound_name: String) -> AudioStreamWAV:
 	var stream = CinematicGen.generate_sound(sound_name, params)
 	
 	if stream:
-		print("✅ Generated cinematic sound: ", sound_name, " 🎬")
 		return stream
 	else:
 		print("⚠️ Unknown cinematic sound: ", sound_name)
@@ -497,7 +483,6 @@ func _generate_epic_sound(sound_name: String) -> AudioStreamWAV:
 	var stream = EpicGen.generate_patch(sound_name, params)
 	
 	if stream:
-		print("✅ Generated EPIC sound: ", sound_name, " 🎹")
 		return stream
 	else:
 		print("⚠️ Unknown epic sound: ", sound_name)
@@ -509,7 +494,6 @@ func _generate_sci_fi_dystopia_sound(sound_name: String) -> AudioStreamWAV:
 	var stream = SciFiGen.generate_preview(sound_name)
 	
 	if stream:
-		print("✅ Generated SciFi Dystopia preview: ", sound_name, " 🎷")
 		return stream
 	else:
 		print("⚠️ Unknown sci_fi sound: ", sound_name)
@@ -530,7 +514,6 @@ func _generate_cyber_jazz_sound(sound_name: String) -> AudioStreamWAV:
 			return null
 			
 	if stream:
-		print("✅ Generated Cyber Jazz sound: ", sound_name, " 🎷")
 		return stream
 	return null
 
@@ -541,7 +524,6 @@ func _generate_house_drums_sound(sound_name: String) -> AudioStreamWAV:
 	var stream = HouseDrums.generate_sound(sound_name)
 	
 	if stream:
-		print("✅ Generated House Drum: ", sound_name, " 🥁")
 		return stream
 	else:
 		print("⚠️ Unknown house drum: ", sound_name)
@@ -572,13 +554,11 @@ func pregenerate_preset_sounds(preset_name: String):
 					sounds_to_generate.append(sound_id)
 
 	# Generate all sounds
-	print("🔧 Pre-generating %d sounds for preset '%s'..." % [sounds_to_generate.size(), preset_name])
 	for i in range(sounds_to_generate.size()):
 		var sound_id = sounds_to_generate[i]
 		get_sound(sound_id)
 		generation_progress.emit(i + 1, sounds_to_generate.size(), sound_id)
 
-	print("✅ Pre-generation complete for preset '%s'" % preset_name)
 	preset_loaded.emit(preset_name)
 
 # ===== AUDIO BUS MANAGEMENT =====
@@ -607,12 +587,10 @@ func _create_or_update_bus(bus_name: String, config: Dictionary):
 		AudioServer.add_bus(bus_idx)
 		AudioServer.set_bus_name(bus_idx, bus_name)
 		AudioServer.set_bus_send(bus_idx, "Master")
-		print("✅ Created audio bus: ", bus_name)
 	else:
 		# Clear existing effects
 		for i in range(AudioServer.get_bus_effect_count(bus_idx)):
 			AudioServer.remove_bus_effect(bus_idx, 0)
-		print("🔧 Updating audio bus: ", bus_name)
 
 	# Add effects
 	if "effects" in config:
@@ -708,7 +686,6 @@ func _generate_fourier_space_sound(sound_name: String) -> AudioStream:
 func clear_cache():
 	"""Clear all cached sounds"""
 	sound_registry.clear()
-	print("🧹 Sound cache cleared")
 
 func clear_inactive_buses():
 	"""Remove buses that are no longer in use"""

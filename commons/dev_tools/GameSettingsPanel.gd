@@ -118,7 +118,6 @@ func _populate_sequence_list():
 # === UI CALLBACKS (store pending, don't apply yet) ===
 
 func _on_game_mode_option_item_selected(index: int):
-	print("GameSettingsPanel: Game mode selected: %d" % index)
 	pending_changes["game_mode"] = index
 	_mark_unsaved()
 
@@ -167,14 +166,12 @@ func _on_unlock_all_pressed():
 	_update_status("All sequences unlocked!")
 
 func _on_save_pressed():
-	print("GameSettingsPanel: Save pressed - pending_changes: %s" % str(pending_changes))
 	
 	# Apply all pending changes NOW
 	_apply_pending_changes()
 	
 	# Then save to file
 	if GameManager:
-		print("GameSettingsPanel: Saving - current game_mode: %s" % GameManager.get_game_mode_name())
 		GameManager.save_game()
 	if MapProgressionManager:
 		MapProgressionManager.save_player_progress()
@@ -194,7 +191,6 @@ func _apply_pending_changes():
 		if mode == GameManager.GameMode.EXPLORER:
 			MapProgressionManager.unlock_all_sequences()
 			_populate_sequence_list()
-		print("Applied game mode: %s" % GameManager.get_game_mode_name())
 	
 	if pending_changes.has("score"):
 		GameManager.set_score(pending_changes["score"])
@@ -258,4 +254,3 @@ func _on_sequence_completed(sequence_name: String):
 
 func _update_status(message: String):
 	status_label.text = message
-	print("GameSettingsPanel: %s" % message)

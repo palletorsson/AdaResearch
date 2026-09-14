@@ -164,7 +164,6 @@ func setup_audio():
 
 func generate_bell_cache():
 	# Pre-generate multiple jazz bell sounds with different intensities
-	print("Pre-generating jazzy bell sound cache...")
 	bell_sound_cache.clear()
 	
 	for i in range(cache_size):
@@ -185,7 +184,6 @@ func generate_bell_cache():
 		bell_frequency = original_freq
 		jazz_intensity = original_jazz
 	
-	print("Jazzy bell sound cache generated: ", bell_sound_cache.size(), " sounds")
 
 func check_movement():
 	# Check if the node has moved since last frame
@@ -221,13 +219,9 @@ func check_movement():
 	var was_moving = is_moving
 	is_moving = distance_moved > movement_threshold
 	
-	# Debug movement detection
-	if distance_moved > 0.001:  # Only print if there's any movement
-		print("DEBUG: Distance moved: ", distance_moved, " Y(0-3): ", y_delta, " X(0-6): ", x_delta, " Z(0-6): ", z_delta, " Jazz intensity: ", jazz_intensity)
 	
 	# Play bell sound and start melodies when starting to move
 	if not was_moving and is_moving:
-		print("DEBUG: Movement started - playing jazzy bell sound, FÃ¼r Elise, and Moonlight Sonata")
 		play_bell_sound()
 		start_fur_elise()
 		start_moonlight_sonata()
@@ -337,7 +331,6 @@ func play_bell_sound():
 			jazz_index = clamp(jazz_index, 0, bell_sound_cache.size() - 1)
 			audio_player.stream = bell_sound_cache[jazz_index]
 			
-			print("DEBUG: Playing jazzy bell - intensity: ", jazz_intensity, " index: ", jazz_index)
 		elif bell_sound:
 			# Use pitch scaling for pre-recorded sound
 			var pitch = randf_range(bell_pitch_range.x, bell_pitch_range.y)
@@ -345,7 +338,6 @@ func play_bell_sound():
 		
 		# Play the bell sound
 		audio_player.play()
-		print("DEBUG: Jazzy bell sound played!")
 
 func initialize_fur_elise():
 	# FÃ¼r Elise melody in frequencies (A4 = 440Hz as reference)
@@ -393,7 +385,6 @@ func initialize_fur_elise():
 		0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5   # Fourth phrase
 	]
 	
-	print("FÃ¼r Elise melody initialized with ", fur_elise_notes.size(), " notes")
 
 func start_fur_elise():
 	if not play_fur_elise:
@@ -402,11 +393,9 @@ func start_fur_elise():
 	fur_elise_playing = true
 	fur_elise_current_note = 0
 	fur_elise_note_timer = 0.0
-	print("Started FÃ¼r Elise melody!")
 
 func stop_fur_elise():
 	fur_elise_playing = false
-	print("Stopped FÃ¼r Elise melody")
 
 func update_fur_elise(delta: float):
 	if not fur_elise_playing or fur_elise_notes.size() == 0:
@@ -427,7 +416,6 @@ func update_fur_elise(delta: float):
 			# Check if melody is complete
 			if fur_elise_current_note >= fur_elise_notes.size():
 				fur_elise_playing = false
-				print("FÃ¼r Elise melody completed!")
 				return
 			
 			# Play current note with jazz effects
@@ -461,7 +449,6 @@ func play_fur_elise_note():
 		audio_player.pitch_scale = 1.0  # No additional pitch scaling
 		audio_player.play()
 	
-	print("Playing FÃ¼r Elise note ", fur_elise_current_note + 1, "/", fur_elise_notes.size(), " - Frequency: ", jazz_frequency)
 
 func generate_fur_elise_note(frequency: float) -> AudioStreamWAV:
 	# Generate a single note with jazz characteristics
@@ -538,7 +525,6 @@ func update_melody_position_from_x_movement():
 		# Play the note at the new position
 		play_fur_elise_note()
 		
-		print("DEBUG: Melody position changed by ", note_change, " - Now at note ", fur_elise_current_note + 1, "/", fur_elise_notes.size())
 		
 		# Reset X movement accumulation
 		x_movement = 0.0
@@ -593,7 +579,6 @@ func initialize_moonlight_sonata():
 		1.0, 1.0, 1.0, 1.0   # Eighth arpeggio
 	]
 	
-	print("Moonlight Sonata melody initialized with ", moonlight_notes.size(), " notes")
 
 func start_moonlight_sonata():
 	if not play_moonlight_sonata:
@@ -602,11 +587,9 @@ func start_moonlight_sonata():
 	moonlight_playing = true
 	moonlight_current_note = 0
 	moonlight_note_timer = 0.0
-	print("Started Moonlight Sonata melody!")
 
 func stop_moonlight_sonata():
 	moonlight_playing = false
-	print("Stopped Moonlight Sonata melody")
 
 func update_moonlight_sonata(delta: float):
 	if not moonlight_playing or moonlight_notes.size() == 0:
@@ -627,7 +610,6 @@ func update_moonlight_sonata(delta: float):
 			# Check if melody is complete
 			if moonlight_current_note >= moonlight_notes.size():
 				moonlight_playing = false
-				print("Moonlight Sonata melody completed!")
 				return
 			
 			# Play current note with jazz effects
@@ -661,7 +643,6 @@ func play_moonlight_note():
 		audio_player.pitch_scale = 1.0  # No additional pitch scaling
 		audio_player.play()
 	
-	print("Playing Moonlight note ", moonlight_current_note + 1, "/", moonlight_notes.size(), " - Frequency: ", jazz_frequency)
 
 func generate_moonlight_note(frequency: float) -> AudioStreamWAV:
 	# Generate a single note with jazz characteristics for Moonlight Sonata
@@ -739,7 +720,6 @@ func update_moonlight_position_from_z_movement():
 		# Play the note at the new position
 		play_moonlight_note()
 		
-		print("DEBUG: Moonlight position changed by ", note_change, " - Now at note ", moonlight_current_note + 1, "/", moonlight_notes.size())
 		
 		# Reset Z movement accumulation
 		z_movement = 0.0
@@ -752,11 +732,9 @@ func toggle_emission():
 
 func start_emission():
 	is_emitting = true
-	print("Started text emission")
 
 func stop_emission():
 	is_emitting = false
-	print("Stopped emission")
 
 func handle_letter_emission(delta: float):
 	emission_timer += delta
@@ -780,7 +758,6 @@ func emit_next_letter():
 	# Check if we've reached the end of the text
 	if current_char_index >= manifesto_text.length():
 		current_char_index = 0  # Loop back to beginning
-		print("Manifesto complete! Starting over...")
 	
 	var character = manifesto_text[current_char_index]
 	
@@ -915,17 +892,14 @@ func remove_oldest_letter():
 # Utility functions
 func reset_emission():
 	current_char_index = 0
-	print("Reset to beginning of manifesto")
 
 func clear_all_letters():
 	for letter_data in emitted_letters:
 		letter_data.label.queue_free()
 	emitted_letters.clear()
-	print("Cleared all letters")
 
 func set_emission_rate(new_rate: float):
 	emission_rate = new_rate
-	print("Emission rate set to: ", new_rate, " letters per second")
 
 func print_progress():
 	var progress = (float(current_char_index) / float(manifesto_text.length())) * 100.0
@@ -944,7 +918,6 @@ func set_emission_pattern(pattern: String):
 		"explosive":
 			float_speed = 5.0
  
-	print("Emission pattern set to: ", pattern)
 
 # Alternative: Generate different bell types
 func generate_bell_type(bell_type: String) -> AudioStreamWAV:
@@ -973,8 +946,7 @@ func set_bell_type(type: String):
 	bell_sound = generate_bell_type(type)
 	if audio_player:
 		audio_player.stream = bell_sound
-	print("Bell type changed to: ", type)
 
 # Test function to verify script is working
 func test_script():
-	print("Script is working correctly!")
+	pass

@@ -55,7 +55,6 @@ func _ready():
 		lbl.transform.origin = Vector3(x, ROW_Y - 0.14, 0.03)
 		add_child(lbl)
 
-	print("DemoCompounds: %d compounds" % compounds.size())
 
 
 func _build(c: Node3D, t: String, count: int, copper: Color, dark: Color) -> void:

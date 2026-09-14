@@ -27,7 +27,6 @@ func _resolve_player() -> void:
 	var xr_origin = get_node_or_null("../XROrigin3D")
 	if xr_origin and xr_origin is Node3D:
 		_player = xr_origin
-		print("PlayerPositionConsoleDisplay: Using XROrigin3D at %s" % xr_origin.get_path())
 		return
 
 	# Then try the exported player_path
@@ -35,7 +34,6 @@ func _resolve_player() -> void:
 		var candidate = get_node_or_null(player_path)
 		if candidate and candidate is Node3D:
 			_player = candidate
-			print("PlayerPositionConsoleDisplay: Using player_path: %s" % candidate.get_path())
 			return
 
 	# Finally, try common player groups
@@ -47,7 +45,6 @@ func _resolve_player() -> void:
 	for candidate in candidates:
 		if candidate and candidate is Node3D:
 			_player = candidate
-			print("PlayerPositionConsoleDisplay: Using player from group: %s" % candidate.get_path())
 			return
 
 	push_warning("PlayerPositionConsoleDisplay: Could not find player node")

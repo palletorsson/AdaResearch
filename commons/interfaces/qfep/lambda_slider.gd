@@ -195,7 +195,6 @@ func _ready() -> void:
 	if broadcast_globally:
 		add_to_group("qfep_lambda_controllers")
 	
-	print("LambdaSlider ready at λ = %.2f" % lambda)
 
 ## Where the rail rides. The slider is authored from x=0 to x=rail_length at y=0,
 ## so the stage centres it on the shoulder and lifts it into the reach band without
@@ -581,7 +580,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if calibration == before or not _built:
 		return
 	_rebuild_calibration()
-	print("LambdaSlider: calibration=%s" % calibration)
 
 func _rebuild_calibration() -> void:
 	for n in _calib_nodes:

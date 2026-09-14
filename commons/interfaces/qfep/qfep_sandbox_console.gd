@@ -78,7 +78,6 @@ func _ready() -> void:
 	add_to_group("qfep_phi_controllers")
 	add_to_group("qfep_reactive")
 
-	print("QFEPSandboxConsole: F = E - λS | Find the edge of chaos")
 
 # ---------------------------------------------------------------------------
 # Console panel — dark backing

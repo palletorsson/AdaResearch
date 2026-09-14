@@ -101,7 +101,6 @@ func _ready() -> void:
 	_create_interactable()
 	_update_display()
 	_built = true
-	print("MagrittePipe: Ready — 'The map is not the territory'")
 
 func _build_body() -> void:
 	_create_frame()
@@ -332,7 +331,6 @@ func advance_layer() -> void:
 	_update_display()
 	emit_signal("representation_questioned")
 	
-	print("MagrittePipe: Layer %d — '%s'" % [current_layer, layers[current_layer]])
 
 func normalise_presence(raw: String, fallback: String) -> String:
 	# An unrecognised string keeps whatever we already had rather than silently
@@ -371,7 +369,6 @@ func _rebuild_body() -> void:
 	_explanation_label = null
 	_build_body()
 	_update_display()
-	print("MagrittePipe: presence=%s" % presence)
 
 func reset() -> void:
 	current_layer = 0

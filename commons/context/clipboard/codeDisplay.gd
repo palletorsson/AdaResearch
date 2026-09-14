@@ -563,7 +563,6 @@ func _apply_support_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[CodeDisplay] Config applied — support=%s" % [support])
 
 
 ## Synchronous teardown + rebuild. remove_child() takes the old nodes out of the
@@ -581,36 +580,29 @@ func _rebuild_now() -> void:
 
 func _find_rich_text_label() -> void:
 	"""Find the RichTextLabel within the Viewport2Din3D's viewport scene"""
-	print("CodeDisplay: _find_rich_text_label() called")
 
 	if not viewport_2d:
 		push_warning("CodeDisplay: Viewport2Din3D not found")
 		return
 
-	print("CodeDisplay: Waiting for scene to load...")
 	# Wait for scene to load
 	# out-of-tree guard: get_tree() is null once a map is torn down mid-build
 	if not is_inside_tree():
 		await tree_entered
 	await get_tree().process_frame
 	await get_tree().process_frame
-	print("CodeDisplay: Scene load wait complete")
 
 	# Try to find by path first (faster and more reliable)
 	# Try TextUIControl.tscn path first (used by codeDisplay.tscn)
 	var textui_path = "Viewport/Control/ScrollContainer/RichTextLabel"
-	print("CodeDisplay: Trying TextUIControl path: %s" % textui_path)
 	rich_text_label = viewport_2d.get_node_or_null(textui_path)
 	if rich_text_label:
-		print("CodeDisplay: ✅ Found RichTextLabel at path: %s" % textui_path)
 		return
 
 	# Fallback to tutorial_display_2d.tscn path
 	var tutorial_path = "Viewport/TutorialDisplay2D/MarginContainer/ScrollContainer/TutorialContent"
-	print("CodeDisplay: Trying TutorialDisplay2D path: %s" % tutorial_path)
 	rich_text_label = viewport_2d.get_node_or_null(tutorial_path)
 	if rich_text_label:
-		print("CodeDisplay: ✅ Found RichTextLabel at path: %s" % tutorial_path)
 		return
 	else:
 		print("CodeDisplay: ❌ Both direct paths failed")
@@ -618,13 +610,10 @@ func _find_rich_text_label() -> void:
 	# Try to get the scene instance from Viewport2Din3D
 	print("CodeDisplay: Checking if viewport_2d has get_scene_instance method...")
 	if viewport_2d.has_method("get_scene_instance"):
-		print("CodeDisplay: Method exists, calling it...")
 		var scene_instance = viewport_2d.get_scene_instance()
 		if scene_instance:
-			print("CodeDisplay: Got scene instance: %s, searching recursively..." % scene_instance.name)
 			rich_text_label = _find_rich_text_label_recursive(scene_instance)
 			if rich_text_label:
-				print("CodeDisplay: ✅ Found RichTextLabel via scene instance")
 				return
 			else:
 				print("CodeDisplay: ❌ Recursive search in scene instance failed")
@@ -637,21 +626,16 @@ func _find_rich_text_label() -> void:
 	print("CodeDisplay: Trying fallback - searching in Viewport node...")
 	var viewport = viewport_2d.get_node_or_null("Viewport")
 	if viewport:
-		print("CodeDisplay: Found Viewport node, searching recursively...")
 		rich_text_label = _find_rich_text_label_recursive(viewport)
 		if rich_text_label:
-			print("CodeDisplay: ✅ Found RichTextLabel in viewport")
+			pass
 		else:
 			push_warning("CodeDisplay: ❌ Could not find RichTextLabel in viewport")
-			print("CodeDisplay: Viewport children count: %d" % viewport.get_child_count())
-			if viewport.get_child_count() > 0:
-				print("CodeDisplay: First child: %s" % viewport.get_child(0).name)
 	else:
 		push_warning("CodeDisplay: ❌ Could not find Viewport node")
 		var child_names = []
 		for child in viewport_2d.get_children():
 			child_names.append(child.name)
-		print("CodeDisplay: Available children of viewport_2d: %s" % str(child_names))
 
 func _find_rich_text_label_recursive(node: Node) -> RichTextLabel:
 	"""Recursively search for RichTextLabel in the node tree"""
@@ -667,23 +651,19 @@ func _find_rich_text_label_recursive(node: Node) -> RichTextLabel:
 
 func set_tutorial(tutorial_id: String) -> void:
 	"""Set the tutorial content by ID"""
-	print("CodeDisplay: set_tutorial() called with ID: '%s'" % tutorial_id)
 
 	if not tutorial_library:
 		push_warning("CodeDisplay: Tutorial library not initialized")
 		return
 
 	current_tutorial_id = tutorial_id.to_lower()
-	print("CodeDisplay: Loading tutorial: '%s'" % current_tutorial_id)
 
 	var content = tutorial_library.get_tutorial_content(current_tutorial_id)
 
 	if content.is_empty():
 		push_warning("CodeDisplay: Tutorial '%s' not found or has no content" % tutorial_id)
-		print("CodeDisplay: Available tutorials: %s" % str(tutorial_library.get_all_tutorial_ids()))
 		return
 
-	print("CodeDisplay: Got content (length: %d)" % content.length())
 	await _display_content(content)
 
 func set_tutorial_from_text(text: String) -> void:
@@ -704,20 +684,16 @@ func set_tutorial_from_text(text: String) -> void:
 
 func _display_content(content: String) -> void:
 	"""Display content in the RichTextLabel"""
-	print("CodeDisplay: _display_content() called, rich_text_label is: %s" % ("FOUND" if rich_text_label else "NULL"))
 
 	if not rich_text_label:
 		# Try to find it again if not set
-		print("CodeDisplay: Searching for RichTextLabel...")
 		await _find_rich_text_label()
-		print("CodeDisplay: After search, rich_text_label is: %s" % ("FOUND" if rich_text_label else "NULL"))
 
 		if not rich_text_label:
 			push_warning("CodeDisplay: Cannot display content - RichTextLabel not found")
 			return
 
 	if rich_text_label:
-		print("CodeDisplay: Setting content on RichTextLabel...")
 		rich_text_label.clear()
 		rich_text_label.text = ""
 		if _should_render_plain_text(content):
@@ -779,9 +755,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	  - #tutorial:line_axioms  (explicit)
 	  - #line_axioms           (shorthand - value used as tutorial key)
 	"""
-	print("CodeDisplay: apply_grid_config() called with: %s" % config_data)
-	print("CodeDisplay: tutorial_library initialized? %s" % ("YES" if tutorial_library else "NO"))
-	print("CodeDisplay: rich_text_label found? %s" % ("YES" if rich_text_label else "NO"))
 
 	# Ensure we're ready before trying to set content
 	if not is_node_ready():
@@ -797,7 +770,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	# Check for explicit tutorial key first
 	if config_data.has("tutorial"):
 		var tutorial_key = str(config_data.tutorial).strip_edges()
-		print("CodeDisplay: Found explicit 'tutorial' key: '%s'" % tutorial_key)
 		if tutorial_key.begins_with("tt:"):
 			# Extract tutorial ID from tt:name format
 			var parts = tutorial_key.split(":")
@@ -809,15 +781,12 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	elif config_data.has("content"):
 		var content_config = str(config_data.content)
-		print("CodeDisplay: Found 'content' key: '%s'" % content_config)
 		set_tutorial_from_text(content_config)
 
 	else:
 		# Check for shorthand syntax (e.g., #line_axioms)
 		# Parser stores these as { line_axioms: true }
-		print("CodeDisplay: Checking for shorthand syntax...")
 		for key in config_data.keys():
-			print("CodeDisplay: Key '%s' = %s" % [key, config_data[key]])
 			# `is bool` FIRST, never a bare `== true`. The parser stores a bare
 			# `#flag` as boolean true (GridInteractablesComponent:1565/1586) but a
 			# `#key:value` pair as a STRING (:1583), and `"wall" == true` is not
@@ -825,7 +794,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			# and 'bool'". One valued key anywhere on the token killed the scan.
 			if config_data[key] is bool and config_data[key]:
 				var tutorial_key = key.strip_edges()
-				print("CodeDisplay: Using shorthand tutorial key: '%s'" % tutorial_key)
 				set_tutorial(tutorial_key)
 				break
 

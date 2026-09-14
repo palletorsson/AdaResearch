@@ -29,18 +29,15 @@ func _ready():
 	pickable_parent.picked_up.connect(_on_picked_up)
 	pickable_parent.dropped.connect(_on_dropped)
 	
-	print("XR Distance constraint attached to: ", target_node.name)
 
 # Called when the object is picked up in VR
 func _on_picked_up(_pickable):
 	is_grabbed = true
 	start_position = target_node.global_position
-	print("XR Grab started at position: ", start_position)
 
 # Called when the object is dropped in VR
 func _on_dropped(_pickable):
 	is_grabbed = false
-	print("XR Grab released")
 
 # Update constraint every physics frame
 func _physics_process(_delta):
@@ -113,7 +110,6 @@ func apply_hard_constraint():
 		elif target_node is CharacterBody3D:
 			(target_node as CharacterBody3D).velocity = Vector3.ZERO
 		
-		print("Hard constraint applied - snapped to boundary")
 
 # Optional: Get the controller currently holding this object
 func get_holding_controller() -> XRController3D:

@@ -277,7 +277,6 @@ func _on_generation_complete():
 	generation_complete.emit()
 	soundscape_started.emit()
 	
-	print("✅ Soundscape generation complete, playback started")
 
 func _create_players_from_precreated():
 	"""Create audio players from pre-generated streams"""
@@ -309,7 +308,6 @@ func _create_players_from_precreated():
 		player.play()
 		continuous_players.append(player)
 		
-		print("  ✓ Started layer from precreated stream")
 
 # ===== INTERNAL: RANDOM EVENTS =====
 

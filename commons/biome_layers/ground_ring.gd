@@ -33,7 +33,6 @@ func apply(ctx: Dictionary) -> void:
 	# per cell (the grid-native ring). Data-gated retirement: maps without
 	# halo cells run the ring exactly as before.
 	if bool(ctx.get("has_biome_halo", false)):
-		print("[ground_ring] map declares biome halo cells — ring retired for this map")
 		return
 	var density: float = float(ctx.get("density", 0.0))
 	# Barren maps (seq 1-2, density < 0.05): no ground ring. This mirrors the
@@ -51,4 +50,3 @@ func apply(ctx: Dictionary) -> void:
 	ring.name = "BiomeRing"
 	add_child(ring)
 	ring.generate(grid_dims, cube_size, terrain_mode, kingdoms, density)
-	print("[ground_ring] accrual layer → ring generated (density=%.2f, terrain=%s)" % [density, terrain_mode])

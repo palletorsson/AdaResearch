@@ -643,15 +643,10 @@ func _friend_biome_tick() -> void:
 
 func hit_by_projectile(color: Color) -> void:
 	# Legacy entry — assume primitives mode (goo).
-	if DEBUG_LOG:
-		print("[CatalystFoe] hit_by_projectile(%s) → primitives mode" % color)
 	hit_by_catalyst_mode(color, "primitives")
 
 
 func hit_by_catalyst_mode(color: Color, mode_id: String) -> void:
-	if DEBUG_LOG:
-		print("[CatalystFoe] hit_by_catalyst_mode mode_id='%s', personality='%s'" % [
-			mode_id, _personality])
 	if body == "silhouette":
 		_sil_become_statue(color)
 		return

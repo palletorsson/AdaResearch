@@ -7,7 +7,6 @@ extends Node
 @onready var label = $Label
 
 func _ready():
-	print("AmbientWorksPlayer: Requesting song...")
 	label.text = "Requesting Ambient Works Song..."
 	
 	# Connect to async generation signal
@@ -19,15 +18,12 @@ func _ready():
 	var stream = SoundBank.get_sound("AudioSynthesizer.AMBIENT_WORKS_SONG")
 	
 	if stream:
-		print("AmbientWorksPlayer: Stream returned immediately (Cached?)")
 		_play_stream(stream)
 	else:
-		print("AmbientWorksPlayer: Waiting for async generation...")
 		label.text = "Generating... (Subjective Time Dilation Active)"
 
 func _on_sound_generated(sound_id: String):
 	if sound_id == "AudioSynthesizer.AMBIENT_WORKS_SONG":
-		print("AmbientWorksPlayer: Song Generated!")
 		var stream = SoundBank.get_sound(sound_id)
 		_play_stream(stream)
 
@@ -35,7 +31,6 @@ func _play_stream(stream: AudioStream):
 	player.stream = stream
 	player.play()
 	label.text = "Now Playing: Aphex Twin Style Ambient\nSection: Intro (Crossfading...)"
-	print("AmbientWorksPlayer: Playing.")
 
 var acc_time = 0.0
 var bpm = 90.0

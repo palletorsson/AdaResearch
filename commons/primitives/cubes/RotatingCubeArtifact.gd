@@ -28,7 +28,6 @@ signal artifact_activated()
 signal sequence_triggered(sequence_name: String)
 
 func _ready():
-	print("RotatingCubeArtifact: Initializing - will auto-trigger in %s seconds" % auto_trigger_time)
 	
 	# Store initial position
 	initial_position = position
@@ -36,7 +35,6 @@ func _ready():
 	# Setup visual components using cube_scene.tscn
 	_setup_visual_components()
 	
-	print("RotatingCubeArtifact: Ready - starting auto-trigger countdown")
 
 func _setup_visual_components():
 	"""Load and configure the cube from cube_scene.tscn"""

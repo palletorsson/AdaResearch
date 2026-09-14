@@ -5,7 +5,6 @@ extends "res://addons/godot-xr-tools/objects/viewport_2d_in_3d.gd"
 
 # Grid system configuration
 func apply_grid_config(config_data: Dictionary) -> void:
-	print("GraphicsMonitor: Applying grid config: %s" % config_data)
 
 	# Check for topic configuration
 	var valid_topics = ["vectors", "forces", "arrays", "waves", "randomness", "procedural",

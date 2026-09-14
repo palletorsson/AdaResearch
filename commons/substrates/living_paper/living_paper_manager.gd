@@ -76,8 +76,6 @@ func _ready() -> void:
 
 	if not mesh_instance:
 		push_error("LivingPaper: RandomWalkPlanMesh not found! Children: %s" % str(_get_child_names()))
-	else:
-		print("LivingPaper: Found mesh at %s" % mesh_instance.get_path())
 
 	# Auto-detect algorithm from artifact lookup_name (e.g. living_paper_rule30 → rule30)
 	_resolve_algorithm_from_lookup_name()
@@ -142,7 +140,6 @@ func _resolve_algorithm_from_lookup_name() -> void:
 	}
 	if key in algo_map:
 		algorithm = algo_map[key]
-		print("LivingPaper: Auto-selected algorithm '%s' from lookup_name '%s'" % [key, lookup])
 
 
 func _setup_algorithm() -> void:
@@ -172,7 +169,6 @@ func _setup_algorithm() -> void:
 		mat.emission_texture = _texture
 		mat.emission_energy_multiplier = 0.3
 		mesh_instance.material_override = mat
-		print("LivingPaper: Applied material to mesh at %s (texture %dx%d)" % [mesh_instance.get_path(), width, height])
 	else:
 		push_error("LivingPaper: mesh_instance is null, cannot apply texture!")
 

@@ -88,7 +88,6 @@ func _setup_master_bus_monitoring():
 		if effect is AudioEffectSpectrumAnalyzer:
 			existing_analyzer = effect
 			spectrum_instance = AudioServer.get_bus_effect_instance(master_bus_index, i) as AudioEffectSpectrumAnalyzerInstance
-			print("AudioVisualizationComponent: Using existing spectrum analyzer on Master bus")
 			return
 	
 	# Create new spectrum analyzer if none exists
@@ -101,7 +100,6 @@ func _setup_master_bus_monitoring():
 	effect_count = AudioServer.get_bus_effect_count(master_bus_index)
 	spectrum_instance = AudioServer.get_bus_effect_instance(master_bus_index, effect_count - 1) as AudioEffectSpectrumAnalyzerInstance
 	
-	print("AudioVisualizationComponent: Created spectrum analyzer on Master bus - monitoring ALL game audio")
 
 func _setup_player_monitoring():
 	"""Setup analysis of specific audio player"""
@@ -126,7 +124,6 @@ func _setup_player_monitoring():
 	
 	# Connect target audio player to analysis bus
 	target_audio_player.bus = bus_name
-	print("AudioVisualizationComponent: Monitoring specific audio player: %s" % target_audio_player.name)
 
 func _create_visualization_ui():
 	"""Create the visualization UI components"""

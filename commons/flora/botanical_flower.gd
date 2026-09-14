@@ -1789,7 +1789,5 @@ static func create_garden(count: int = 12, radius: float = 1.0, base_seed: int =
 		_build_bucket_multimesh(garden, key, buckets[key])
 		total_instances += buckets[key].transforms.size()
 
-	print("BotanicalGarden: %d flowers → %d buckets, %d instances" % [
-		count, buckets.size(), total_instances])
 
 	return garden

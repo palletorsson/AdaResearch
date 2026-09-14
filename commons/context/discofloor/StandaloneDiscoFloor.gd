@@ -70,7 +70,6 @@ func _ready() -> void:
 
 func _create_floor_grid() -> void:
 	"""Create the tile grid using MultiMesh for performance"""
-	print("StandaloneDiscoFloor: Creating %dx%d tile grid at Y=%.2f" % [grid_width, grid_depth, floor_y_offset])
 	
 	# Create MultiMesh
 	multimesh = MultiMesh.new()
@@ -122,7 +121,6 @@ func _create_floor_grid() -> void:
 	if walkable:
 		_create_floor_collision(offset_x, offset_z)
 	
-	print("StandaloneDiscoFloor: Created %d tiles" % multimesh.instance_count)
 
 func _create_floor_collision(offset_x: float, offset_z: float) -> void:
 	"""Create a single collision shape for the entire floor for walking"""
@@ -145,7 +143,6 @@ func _create_floor_collision(offset_x: float, offset_z: float) -> void:
 	floor_body.add_child(collision_shape)
 	add_child(floor_body)
 	
-	print("StandaloneDiscoFloor: Added walkable floor collision")
 
 func _process(delta: float) -> void:
 	if not is_running:
@@ -317,13 +314,11 @@ func start_disco() -> void:
 	animation_step = 0
 	step_timer = 0.0
 	disco_toggled.emit(true)
-	print("StandaloneDiscoFloor: Started")
 
 func stop_disco() -> void:
 	is_running = false
 	_fill_all(base_color)
 	disco_toggled.emit(false)
-	print("StandaloneDiscoFloor: Stopped")
 
 func toggle_disco() -> void:
 	if is_running:
@@ -335,7 +330,6 @@ func next_pattern() -> void:
 	current_pattern = (current_pattern + 1) % Pattern.size()
 	animation_step = 0
 	pattern_changed.emit(pattern_names[current_pattern])
-	print("StandaloneDiscoFloor: Pattern -> %s" % pattern_names[current_pattern])
 
 func previous_pattern() -> void:
 	current_pattern = (current_pattern - 1 + Pattern.size()) % Pattern.size()
@@ -391,7 +385,6 @@ func set_floor_height(y_offset: float) -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	"""Apply configuration from map_data.json # syntax"""
-	print("StandaloneDiscoFloor: Applying config: %s" % str(config))
 	
 	var needs_rebuild := false
 	

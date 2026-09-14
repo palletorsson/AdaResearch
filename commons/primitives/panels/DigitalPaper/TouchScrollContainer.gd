@@ -51,13 +51,11 @@ func _handle_touch(event: InputEventScreenTouch) -> void:
 		_touch_start = event.position
 		_scroll_start = Vector2(scroll_horizontal, scroll_vertical)
 		_scroll_velocity = Vector2.ZERO
-		print("TouchScroll: Touch DOWN at %s" % event.position)
 	else:
 		# Touch up - end drag
 		if event.index == _touch_index:
 			_touch_active = false
 			_touch_index = -1
-			print("TouchScroll: Touch UP")
 
 
 func _handle_drag(event: InputEventScreenDrag) -> void:

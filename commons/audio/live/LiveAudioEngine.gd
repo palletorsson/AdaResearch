@@ -76,13 +76,11 @@ func start():
 	audio_player.play()
 	playback = audio_player.get_stream_playback()
 	set_process(true)
-	print("LiveAudioEngine: Started")
 
 
 func stop():
 	audio_player.stop()
 	set_process(false)
-	print("LiveAudioEngine: Stopped")
 
 
 func _process(_delta: float):

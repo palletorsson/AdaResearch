@@ -126,7 +126,6 @@ func _build_edit_system() -> void:
 
 
 func _load_map() -> void:
-	print("[VoxelBuilderVR] Loading map: %s" % _map_name)
 
 	var grid_system_scene := load("res://commons/grid/GridSystem.tscn")
 	if not grid_system_scene:
@@ -161,7 +160,6 @@ func _load_map() -> void:
 	_edit_controller.cube_size = _structure_component.cube_size
 
 	_initialized = true
-	print("[VoxelBuilderVR] Ready to edit in VR")
 
 
 # ═══════════════════════════════════════════════════════════════

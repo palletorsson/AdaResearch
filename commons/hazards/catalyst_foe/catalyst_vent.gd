@@ -237,7 +237,6 @@ func _resolve_brood_kind() -> void:
 	var kind: String = SequenceBinding.foe_kind_for_sequence(seq)
 	if not kind.is_empty():
 		default_foe_mode = kind
-		print("[CatalystVent] sequence '%s' -> brood kind '%s'" % [seq, kind])
 	else:
 		print("[CatalystVent] sequence '%s' has no binding — brood stays default" % seq)
 	bind_sequence = ""  # settled; don't re-resolve
@@ -283,9 +282,6 @@ func _emit_one() -> void:
 	_emitted += 1
 	_live_count += 1
 	foe.tree_exited.connect(_on_foe_exited)
-	if DEBUG_LOG:
-		print("[CatalystVent] emitted foe %d/%d at %s (vent at %s)" % [
-			_emitted, wave_size, foe.global_position, global_position])
 
 
 func _on_foe_exited() -> void:

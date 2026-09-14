@@ -33,7 +33,6 @@ func _ready():
 	get_tree().root.title = "AdaResearch Song Preview"
 	_setup_ui()
 	_setup_audio()
-	print("Song Preview ready - click a song to generate and play!")
 
 
 func _setup_audio():

@@ -15,13 +15,11 @@ func start_grab():
 	if not is_grabbed:
 		is_grabbed = true
 		start_position = global_position
-		print("Grab started at position: ", start_position)
 
 # Called when the object is released
 func release_grab():
 	if is_grabbed:
 		is_grabbed = false
-		print("Grab released")
 
 # Update constraint every physics frame
 func _physics_process(_delta):
@@ -77,7 +75,6 @@ func apply_hard_constraint():
 		elif rigid_body is CharacterBody3D:
 			(rigid_body as CharacterBody3D).velocity = Vector3.ZERO
 		
-		print("Hard constraint applied - snapped to boundary")
 
 # Call this from your grab system when grab starts
 func _on_grab_started():

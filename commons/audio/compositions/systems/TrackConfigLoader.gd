@@ -22,7 +22,6 @@ static func load_track_config(file_path: String) -> Dictionary:
 		return {}
 	
 	var config = json.data
-	print("✅ Loaded track config: %s" % config.get("metadata", {}).get("name", "Unnamed"))
 	
 	return config
 
@@ -33,7 +32,6 @@ static func apply_config_to_track(track: EnhancedTrackSystem, config: Dictionary
 		print("❌ Empty configuration")
 		return
 	
-	print("🎛️ Applying track configuration...")
 	
 	# Apply metadata
 	_apply_metadata(track, config.get("metadata", {}))
@@ -60,13 +58,11 @@ static func _apply_metadata(track: EnhancedTrackSystem, metadata: Dictionary):
 	
 	if metadata.has("bpm"):
 		track.set_bpm(metadata.bpm)
-		print("   🎵 BPM set to: %d" % metadata.bpm)
 	
 	if metadata.has("master_volume"):
 		if track.effects_rack:
 			var master_bus = AudioServer.get_bus_index("Master")
 			AudioServer.set_bus_volume_db(master_bus, metadata.master_volume)
-		print("   🔊 Master volume: %.1fdB" % metadata.master_volume)
 
 static func _apply_layer_configs(track: EnhancedTrackSystem, layers_config: Dictionary):
 	"""Apply layer configurations"""
@@ -106,7 +102,6 @@ static func _apply_layer_configs(track: EnhancedTrackSystem, layers_config: Dict
 			if layer_config.has("pattern"):
 				_assign_pattern_to_layer(track, layer, layer_config.pattern)
 			
-			print("   🎛️ Configured layer: %s/%s" % [category, layer_name])
 
 static func _apply_layer_effects(layer: TrackLayer, effects_config: Dictionary):
 	"""Apply effects configuration to a layer"""
@@ -177,7 +172,6 @@ static func _apply_patterns(track: EnhancedTrackSystem, patterns_config: Diction
 		if pattern_config.has("probability"):
 			track.sequencer.apply_probability(pattern, pattern_config.probability)
 		
-		print("   🎹 Created pattern: %s (%d steps)" % [pattern_name, pattern.length])
 
 static func _generate_pattern_by_type(sequencer: PatternSequencer, pattern: PatternSequencer.Pattern, config: Dictionary):
 	"""Generate pattern based on type configuration"""

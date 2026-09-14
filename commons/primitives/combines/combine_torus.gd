@@ -65,10 +65,6 @@ func generate_torus_grid():
 	var x_pos = 0.0
 	var z_pos = 0.0
 
-	print("Generating Torus Grid:")
-	print("Rings: ", rings_values)
-	print("Segments: ", segments_values)
-	print("---")
 	
 	# Calculate total count for gradient
 	var total = rings_values.size() * segments_values.size()
@@ -87,7 +83,6 @@ func generate_torus_grid():
 
 		z_pos += spacing
 
-	print("Generated ", torus_instances.size(), " torus instances")
 
 func create_torus_at_position(pos: Vector3, rings: int, segments: int, gradient_ratio: float):
 	# Create MeshInstance3D
@@ -154,7 +149,6 @@ func create_torus_at_position(pos: Vector3, rings: int, segments: int, gradient_
 	add_child(mesh_instance)
 	torus_instances.append(mesh_instance)
 
-	print("Created torus at ", pos, " - Rings: ", rings, ", Segments: ", segments)
 
 func create_label_for_torus(pos: Vector3, rings: int, segments: int):
 	# Create a Label3D to show the parameters

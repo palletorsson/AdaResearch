@@ -826,7 +826,6 @@ func handle_vr_button(button: String, controller_name: String) -> void:
 ## Config system (like PatternTilePuzzle)
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	print("ArraySequencer: Applying config: %s" % config_data)
 
 	var needs_rebuild := false
 

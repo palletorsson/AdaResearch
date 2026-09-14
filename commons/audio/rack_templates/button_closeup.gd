@@ -41,7 +41,6 @@ func _ready():
 	])
 	add_child(panel)
 
-	print("ButtonCloseup: ready")
 
 
 func _process(delta: float) -> void:

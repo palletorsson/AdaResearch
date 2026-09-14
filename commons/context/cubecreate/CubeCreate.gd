@@ -60,13 +60,10 @@ func setup_materials():
 	grid_material.set_shader_parameter("wireframe_brightness", 2.5)
 
 func start_tutorial():
-	print("=== 3D Mesh Tutorial: From Triangle to Primitives ===")
-	print("Chapter 1: The Triangle - Simplest Possible Mesh")
 	await get_tree().create_timer(1.0).timeout
 	create_triangle()
 
 func create_triangle():
-	print("Creating triangle mesh - 3 vertices, 1 face")
 	var triangle_vertices = [
 		Vector3(0, 1, 0),     # Top center
 		Vector3(-1, -1, 0),   # Bottom left  
@@ -78,7 +75,6 @@ func create_triangle():
 	
 	# Position at origin (leftmost)
 	mesh_instance.position.x = -9.0
-	print("Triangle positioned at: ", mesh_instance.position)
 	
 	# Animate appearance
 	mesh_instance.scale = Vector3.ZERO
@@ -89,7 +85,6 @@ func create_triangle():
 	advance_tutorial()
 
 func create_mesh_from_vertices(vertices_array: Array, mesh_name: String) -> MeshInstance3D:
-	print("Building %s with %d vertices" % [mesh_name, vertices_array.size()])
 	
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.name = mesh_name
@@ -171,7 +166,6 @@ func create_mesh_from_vertices(vertices_array: Array, mesh_name: String) -> Mesh
 	return mesh_instance
 
 func create_star_mesh(vertices_array: Array, mesh_name: String) -> MeshInstance3D:
-	print("Building star with %d vertices" % vertices_array.size())
 	
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.name = mesh_name
@@ -236,7 +230,6 @@ func create_star_mesh(vertices_array: Array, mesh_name: String) -> MeshInstance3
 	return mesh_instance
 
 func create_fish_mesh(vertices_array: Array, mesh_name: String) -> MeshInstance3D:
-	print("Building fish with %d vertices - perfect for vector tutorials!" % vertices_array.size())
 	
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.name = mesh_name
@@ -307,12 +300,10 @@ func advance_tutorial():
 	
 	match current_step:
 		TutorialStep.CREATE_PLANE:
-			print("\nChapter 2: The Plane - Two Triangles")
 			await get_tree().create_timer(1.0).timeout
 			create_plane()
 			
 		TutorialStep.CREATE_PYRAMID:
-			print("\nChapter 3: The Pyramid - First 3D Shape")
 			# out-of-tree guard: get_tree() is null once a map is torn down
 			if not is_inside_tree():
 				await tree_entered
@@ -320,7 +311,6 @@ func advance_tutorial():
 			create_pyramid()
 			
 		TutorialStep.CREATE_CUBE:
-			print("\nChapter 4: The Cube - Complex 3D Shape")
 			# out-of-tree guard: get_tree() is null once a map is torn down
 			if not is_inside_tree():
 				await tree_entered
@@ -329,7 +319,6 @@ func advance_tutorial():
 			
 		# Row 2: Advanced shapes
 		TutorialStep.CREATE_STAR:
-			print("\nChapter 5: The Star - Complex 2D Shape")
 			# out-of-tree guard: get_tree() is null once a map is torn down
 			if not is_inside_tree():
 				await tree_entered
@@ -337,7 +326,6 @@ func advance_tutorial():
 			create_star()
 			
 		TutorialStep.CREATE_CYLINDER:
-			print("\nChapter 6: The Cylinder - Circular Cross-Section")
 			# out-of-tree guard: get_tree() is null once a map is torn down
 			if not is_inside_tree():
 				await tree_entered
@@ -345,7 +333,6 @@ func advance_tutorial():
 			create_cylinder()
 			
 		TutorialStep.CREATE_SPHERE:
-			print("\nChapter 7: The Sphere - Curved Surface Approximation")
 			# out-of-tree guard: get_tree() is null once a map is torn down
 			if not is_inside_tree():
 				await tree_entered
@@ -353,7 +340,6 @@ func advance_tutorial():
 			create_sphere()
 			
 		TutorialStep.CREATE_FISH:
-			print("\nChapter 8: The Fish - Organic Shape for Vector Tutorial")
 			# out-of-tree guard: get_tree() is null once a map is torn down
 			if not is_inside_tree():
 				await tree_entered
@@ -361,11 +347,9 @@ func advance_tutorial():
 			create_fish()
 			
 		TutorialStep.SHOW_PRIMITIVES:
-			print("\nChapter 9: Tutorial Complete!")
 			show_completion()
 
 func create_plane():
-	print("Creating plane mesh - 4 vertices, 2 triangles")
 	var plane_vertices = [
 		Vector3(-1, 1, 0),    # Top left
 		Vector3(1, 1, 0),     # Top right  
@@ -388,7 +372,6 @@ func create_plane():
 	advance_tutorial()
 
 func create_pyramid():
-	print("Creating pyramid mesh - 5 vertices, 6 triangles")
 	var pyramid_vertices = [
 		Vector3(-1, -1, 0),   # Base: bottom front left
 		Vector3(1, -1, 0),    # Base: bottom front right  
@@ -397,16 +380,13 @@ func create_pyramid():
 		Vector3(0, 1.5, -1),  # Apex (standing upright)
 	]
 	
-	print("Pyramid vertices: ", pyramid_vertices)
 	var mesh_instance = create_mesh_from_vertices(pyramid_vertices, "Pyramid")
-	print("Pyramid mesh created: ", mesh_instance.name)
 	
 	meshes.append(mesh_instance)
 	tutorial_parent.add_child(mesh_instance)
 	
 	# Position offset
 	mesh_instance.position.x = 3.0
-	print("Pyramid positioned at: ", mesh_instance.position)
 	
 	# Animate appearance
 	mesh_instance.scale = Vector3.ZERO
@@ -417,7 +397,6 @@ func create_pyramid():
 	advance_tutorial()
 
 func create_cube():
-	print("Creating cube mesh - 8 vertices, 12 triangles")
 	# Use BoxMesh for simplicity, but show it's built from vertices
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.name = "Cube"
@@ -443,7 +422,6 @@ func create_cube():
 # === ROW 2: ADVANCED SHAPES ===
 
 func create_star():
-	print("Creating 5-pointed star - multiple triangular sections")
 	var star_vertices = []
 	var center = Vector3(0, 0, 0)
 	var outer_radius = 1.5
@@ -476,7 +454,6 @@ func create_star():
 	advance_tutorial()
 
 func create_cylinder():
-	print("Creating cylinder - circular cross-section with triangular faces")
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.name = "Cylinder"
 	var cylinder_mesh = CylinderMesh.new()
@@ -503,7 +480,6 @@ func create_cylinder():
 	advance_tutorial()
 
 func create_sphere():
-	print("Creating sphere approximation - curved surface made of triangles")
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.name = "Sphere"
 	var sphere_mesh = SphereMesh.new()
@@ -530,7 +506,6 @@ func create_sphere():
 	advance_tutorial()
 
 func create_fish():
-	print("Creating fish mesh - perfect for vector tutorials!")
 	var fish_vertices = [
 		# Body (diamond shape)
 		Vector3(0, 0.5, 0),      # Top fin connection
@@ -565,22 +540,8 @@ func create_fish():
 	advance_tutorial()
 
 func show_completion():
-	print("Tutorial Complete!")
-	print("\nYou've learned procedural mesh construction:")
-	print("ROW 1 - Basic Shapes:")
-	print("✓ Triangle - simplest mesh (3 vertices, 1 face)")
-	print("✓ Plane - two triangles (4 vertices, 2 faces)")  
-	print("✓ Pyramid - 3D shape (5 vertices, 6 faces)")
-	print("✓ Cube - complex 3D (8 vertices, 12 faces)")
-	print("\nROW 2 - Advanced Shapes:")
-	print("✓ Star - complex 2D polygon (multiple triangular sections)")
-	print("✓ Cylinder - circular cross-section (radial segments)")
-	print("✓ Sphere - curved surface approximation (subdivision)")
-	print("✓ Fish - organic shape (perfect for vector tutorials!)")
-	print("\nNow you understand how ALL 3D objects are built from triangles!")
 	
 	await get_tree().create_timer(1.0).timeout
-	print("Rotating camera to show all angles...")
 	
 	# Rotate camera around all the meshes (both rows)
 	var center_point = Vector3(0, 0, -3)  # Center between both rows

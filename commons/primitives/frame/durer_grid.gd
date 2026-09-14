@@ -48,7 +48,6 @@ func _parse_config_string(config_str: String) -> void:
 		rows = max(2, int(parts[0]))
 	if parts.size() >= 2 and parts[1].is_valid_int():
 		cols = max(2, int(parts[1]))
-	print("DurerGrid configured: rows=%d, cols=%d" % [rows, cols])
 
 # Called by grid system for #config syntax
 func apply_grid_config(config_data: Dictionary) -> void:

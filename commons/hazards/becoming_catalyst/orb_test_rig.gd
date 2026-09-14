@@ -85,15 +85,11 @@ func _bootstrap() -> void:
 	if auto_spawn_creatures:
 		_spawn_test_creatures()
 
-	if verbose:
-		print("[OrbTestRig] active — detector under %s, orb under %s" % [_xr_origin.name, name])
 
 
 func _on_orb_formed(mode: String, origin: Vector3, direction: Vector3, two_handed: bool) -> void:
 	if _orb:
 		_orb.form(mode, origin, direction, two_handed)
-	if verbose:
-		print("[OrbTestRig] orb formed: mode=%s, two_handed=%s" % [mode, two_handed])
 
 
 func _on_orb_state_tick(mode: String, origin: Vector3, direction: Vector3, cone_length: float, two_handed: bool) -> void:
@@ -107,16 +103,14 @@ func _on_orb_dissolved() -> void:
 
 
 func _on_hand_cooldown_started(hand: String) -> void:
-	if verbose:
-		print("[OrbTestRig] %s hand cooldown" % hand)
+	pass
 	# Bracelet stone dim wiring goes here once the bracelet exposes a
 	# luminance API. For the slice, the cooldown is felt via gesture
 	# failure (the orb simply does not form on that hand).
 
 
 func _on_hand_cooldown_finished(hand: String) -> void:
-	if verbose:
-		print("[OrbTestRig] %s hand recovered" % hand)
+	pass
 
 
 # ── Creature spawning ───────────────────────────────────────────────────

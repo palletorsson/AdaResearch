@@ -65,7 +65,6 @@ func _ready() -> void:
 	# _init() already set, so the shipped placements are untouched.
 	_apply_dna()
 	super._ready()
-	print("PlusLinePuzzle: 2 lines, 4 vertices, proof=%s, stock=%s" % [proof, stock])
 
 func _complete_puzzle() -> void:
 	var display = get_node_or_null("PlusLogicDisplay")

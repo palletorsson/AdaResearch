@@ -43,7 +43,6 @@ func _ready() -> void:
 func register_snap_point(point: Node3D) -> void:
 	if not point in _adjacency:
 		_adjacency[point] = []
-		print("SnapConnectionManager: Registered point ", point.name)
 
 func unregister_snap_point(point: Node3D) -> void:
 	if point in _adjacency:
@@ -81,7 +80,6 @@ func create_connection(point_a: Node3D, point_b: Node3D) -> Node3D:
 	var line = _create_snap_line(point_a, point_b)
 	_connections[key] = line
 	
-	print("SnapConnectionManager: Created connection ", key)
 	connection_created.emit(point_a, point_b, line)
 	
 	# Check for new shapes
@@ -358,7 +356,6 @@ func _detect_wedges() -> void:
 		if not _wedges.has(key):
 			_wedges[key] = found_wedges[key]
 			wedge_formed.emit(found_wedges[key])
-			print("SnapConnectionManager: Detected wedge with 6 points")
 
 	# Remove wedges that no longer exist
 	var keys_to_remove: Array[String] = []
@@ -368,7 +365,6 @@ func _detect_wedges() -> void:
 	
 	for key in keys_to_remove:
 		_wedges.erase(key)
-		print("SnapConnectionManager: Removed wedge")
 
 func _detect_octahedrons() -> void:
 	var found_octahedrons: Dictionary = {}
@@ -387,8 +383,6 @@ func _detect_octahedrons() -> void:
 			if _adjacency[point].size() == 4:
 				points_with_4_connections += 1
 	
-	if total_points == 6:
-		print("SnapConnectionManager: Checking octahedron - %d total points, %d with 4 connections" % [total_points, points_with_4_connections])
 	
 	# Find all points with exactly 4 connections (potential octahedron vertices)
 	var candidates = []
@@ -398,8 +392,6 @@ func _detect_octahedrons() -> void:
 	
 	# Need at least 6 points for an octahedron
 	if candidates.size() < 6:
-		if total_points == 6 and candidates.size() > 0:
-			print("SnapConnectionManager: Not enough candidates with 4 connections (%d/6)" % candidates.size())
 		return
 	
 	# Try all combinations of 6 points
@@ -433,7 +425,6 @@ func _detect_octahedrons() -> void:
 								continue  # Skip this combination
 							
 							# All 6 points have exactly 4 connections to each other - potential octahedron!
-							print("SnapConnectionManager: Testing 6-point set where all have 4 connections")
 							
 							# Find the two polar vertices: they are the only pair NOT connected to each other
 							var polar_points = []
@@ -445,7 +436,6 @@ func _detect_octahedrons() -> void:
 										# Found the two points that aren't connected - these are the polar vertices!
 										polar_points = [test_points[p_i], test_points[p_j]]
 										found_polar_pair = true
-										print("SnapConnectionManager: Found polar pair (not connected to each other)")
 										break
 								if found_polar_pair:
 									break
@@ -484,7 +474,6 @@ func _detect_octahedrons() -> void:
 										break
 							
 							if valid_octahedron:
-								print("SnapConnectionManager: ✓✓✓ FOUND VALID OCTAHEDRON! 2 polar + 4 equatorial")
 								var key = _make_shape_key(test_points)
 								if not found_octahedrons.has(key):
 									found_octahedrons[key] = test_points
@@ -494,7 +483,6 @@ func _detect_octahedrons() -> void:
 		if not _octahedrons.has(key):
 			_octahedrons[key] = found_octahedrons[key]
 			octahedron_formed.emit(found_octahedrons[key])
-			print("SnapConnectionManager: Detected octahedron with 6 points")
 	
 	# Remove octahedrons that no longer exist
 	var keys_to_remove: Array[String] = []
@@ -504,7 +492,6 @@ func _detect_octahedrons() -> void:
 	
 	for key in keys_to_remove:
 		_octahedrons.erase(key)
-		print("SnapConnectionManager: Removed octahedron")
 
 func _detect_square_pyramids() -> void:
 	var found_pyramids: Dictionary = {}
@@ -576,7 +563,6 @@ func _detect_square_pyramids() -> void:
 		if not _square_pyramids.has(key):
 			_square_pyramids[key] = found_pyramids[key]
 			square_pyramid_formed.emit(found_pyramids[key])
-			print("SnapConnectionManager: Detected square pyramid with 5 points")
 	
 	# Remove square pyramids that no longer exist
 	var keys_to_remove: Array[String] = []
@@ -586,7 +572,6 @@ func _detect_square_pyramids() -> void:
 	
 	for key in keys_to_remove:
 		_square_pyramids.erase(key)
-		print("SnapConnectionManager: Removed square pyramid")
 
 func _create_triangle(points: Array) -> void:
 	var key = _make_shape_key(points)
@@ -610,7 +595,6 @@ func _create_triangle(points: Array) -> void:
 	_triangles[key] = triangle_node
 	triangle_formed.emit(points)
 	
-	print("SnapConnectionManager: Created triangle with points: ", points[0].name, ", ", points[1].name, ", ", points[2].name)
 
 func _destroy_triangle(key: String) -> void:
 	if _triangles.has(key):
@@ -641,7 +625,6 @@ func _create_tetrahedron(points: Array) -> void:
 	_tetrahedrons[key] = tetra_node
 	tetrahedron_formed.emit(points)
 	
-	print("SnapConnectionManager: Created tetrahedron with 4 points")
 
 func _destroy_tetrahedron(key: String) -> void:
 	if _tetrahedrons.has(key):

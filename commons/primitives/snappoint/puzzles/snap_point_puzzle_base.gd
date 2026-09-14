@@ -79,7 +79,6 @@ func _ready() -> void:
 			await tree_entered
 		await get_tree().process_frame
 		TagSystem.trigger_tag_action(trigger_tag, "hide")
-		print("%s: Auto-hid objects with tag '%s' (action=%s)" % [get_class(), trigger_tag, trigger_action])
 
 func _process(delta: float) -> void:
 	if not enable_reset_timer:
@@ -107,7 +106,6 @@ func _find_snap_points() -> void:
 			if not child.is_in_group("no_gravity_gun"):
 				child.add_to_group("no_gravity_gun")
 
-	print("%s: Found %d snap points (added to no_gravity_gun group)" % [get_class(), snap_points.size()])
 
 ## Create success label if enabled
 func _setup_success_label() -> void:
@@ -219,7 +217,7 @@ func _find_connection_manager() -> void:
 		connection_manager = _find_connection_manager_recursive(get_tree().root)
 	
 	if connection_manager:
-		print("%s: Connected to SnapConnectionManager" % get_class())
+		pass
 	else:
 		push_error("%s: Could not find SnapConnectionManager!" % get_class())
 
@@ -253,7 +251,6 @@ func _complete_puzzle() -> void:
 
 	current_state = PuzzleState.LOCKED
 
-	print("%s: Puzzle completed!" % get_class())
 
 	# Play completion sound
 	_play_completion_sound()
@@ -264,7 +261,6 @@ func _complete_puzzle() -> void:
 	# Tag system (like LineSnapPuzzleBase)
 	if trigger_tag != "":
 		var action = trigger_action if trigger_action != "" else "shrink_and_remove"
-		print("%s: Triggering tag action: %s -> %s" % [get_class(), trigger_tag, action])
 		TagSystem.trigger_tag_action(trigger_tag, action)
 	
 	# Show success message
@@ -331,7 +327,6 @@ func _play_completion_sound() -> void:
 
 	player.finished.connect(player.queue_free)
 	player.play()
-	print("%s: Playing completion sound" % get_class())
 
 ## Hide/remove all snap points and their visual connections
 func _hide_puzzle() -> void:
@@ -347,7 +342,6 @@ func _hide_puzzle() -> void:
 			for child in point.get_children():
 				if child is CollisionShape3D:
 					child.disabled = true
-			print("%s: Hidden snap point %s" % [get_class(), point.name])
 
 	# Hide any lines/triangles that were created
 	_hide_visual_connections()
@@ -360,7 +354,6 @@ func _hide_puzzle() -> void:
 	if boundary:
 		boundary.visible = false
 
-	print("%s: Puzzle hidden" % get_class())
 
 ## Hide lines and triangles connected to our snap points
 func _hide_visual_connections() -> void:
@@ -424,7 +417,6 @@ func _spawn_object() -> void:
 	# Emit signal
 	object_spawned.emit(spawned_object)
 	
-	print("%s: Spawned object at %v" % [get_class(), world_spawn_pos])
 
 ## Find the GridScene node to spawn objects in
 func _find_grid_scene() -> Node:

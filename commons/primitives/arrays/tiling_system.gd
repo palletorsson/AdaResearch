@@ -175,7 +175,6 @@ func load_study_pack(pack_name: String) -> void:
 	_pack_data = json.data
 	study_pack_name = pack_name
 	study_pack_loaded.emit(pack_name)
-	print("TilingSystem: Loaded study pack '%s'" % pack_name)
 
 
 ## Get available techniques from the loaded pack.
@@ -520,7 +519,6 @@ func spawn_wall(at_position: Vector3, wall_size: Vector2 = Vector2(2.0, 2.0), no
 ## Apply configuration from grid system / artifact registry.
 ## Accepts: study_pack, technique, period, site, motif, etc.
 func apply_grid_config(config_data: Dictionary) -> void:
-	print("TilingSystem: Applying config: %s" % config_data)
 
 	if config_data.has("study_pack"):
 		load_study_pack(str(config_data["study_pack"]))

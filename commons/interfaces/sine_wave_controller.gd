@@ -129,10 +129,6 @@ func _ready() -> void:
 	if use_mario_slider:
 		_find_mario_slider()
 
-	print("SineWaveController ready")
-	print("- Frequency range: %.0f - %.0f Hz" % [mapper_2d.output_x_min, mapper_2d.output_x_max])
-	print("- Amplitude range: %.2f - %.2f" % [mapper_2d.output_y_min, mapper_2d.output_y_max])
-	print("- Phase range: %.2f - %.2f" % [mapper_1d.output_min, mapper_1d.output_max])
 
 func _find_mario_slider() -> void:
 	# Wait for scene to load
@@ -142,7 +138,7 @@ func _find_mario_slider() -> void:
 		return
 	mario_slider = get_tree().get_first_node_in_group("mario_slider_control")
 	if mario_slider:
-		print("SineWaveController: Connected to SimpleMarioSlider")
+		pass
 	else:
 		push_warning("SineWaveController: Could not find SimpleMarioSlider")
 
@@ -151,7 +147,6 @@ func _on_2d_values_changed(freq_value: float, amp_value: float) -> void:
 	amplitude = amp_value
 	_refresh_plot()
 
-	print("Sine wave: Frequency=%.1f Hz, Amplitude=%.2f" % [frequency, amplitude])
 
 	# If using Mario slider, update its parameters
 	if use_mario_slider and mario_slider:
@@ -160,7 +155,6 @@ func _on_2d_values_changed(freq_value: float, amp_value: float) -> void:
 func _on_1d_value_changed(phase_value: float) -> void:
 	phase = phase_value
 	_refresh_plot()
-	print("Sine wave: Phase=%.2f" % phase)
 
 	# If using Mario slider, update its parameters
 	if use_mario_slider and mario_slider:
@@ -190,8 +184,6 @@ func _update_mario_slider() -> void:
 		var volume_slider = mario_slider.get_node("VBox/VolumeContainer/VolumeSlider")
 		volume_slider.value = amplitude
 
-	print("SineWaveController: Updated Mario slider - Freq1=%.1f Hz, Freq2=%.1f Hz, Volume=%.2f" %
-		[freq1, freq2, amplitude])
 
 # Public API for getting current sine wave value
 func get_sine_value(time: float) -> float:

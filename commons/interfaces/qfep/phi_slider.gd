@@ -144,7 +144,6 @@ func _ready() -> void:
 	if broadcast_globally:
 		add_to_group("qfep_phi_controllers")
 	
-	print("PhiSlider ready at φ = %.2f" % phi)
 
 func _build_slider() -> void:
 	# Create the XR Tools slider - horizontal along X axis
@@ -423,7 +422,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if calibration == before or not _built:
 		return
 	_rebuild_calibration()
-	print("PhiSlider: calibration=%s" % calibration)
 
 func _rebuild_calibration() -> void:
 	for n in _calib_nodes:

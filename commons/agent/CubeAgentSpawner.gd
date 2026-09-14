@@ -17,13 +17,11 @@ var agent_builder: CubeAgentBuilder = null
 var walk_controller: CubeAgentWalkController = null
 
 func _ready() -> void:
-	print("CubeAgentSpawner: Ready")
 
 	if spawn_on_ready:
 		call_deferred("spawn_agent")
 
 func spawn_agent() -> CubeAgentBuilder:
-	print("CubeAgentSpawner: Spawning agent...")
 
 	# Create agent builder
 	agent_builder = CubeAgentBuilder.new()
@@ -53,7 +51,6 @@ func despawn_agent() -> void:
 		agent_builder.queue_free()
 		agent_builder = null
 		walk_controller = null
-		print("CubeAgentSpawner: Agent despawned")
 
 # Public API for grid system integration
 
@@ -69,7 +66,6 @@ func get_walk_controller() -> CubeAgentWalkController:
 # Called when spawned via grid interactables layer
 # Supports config like: "agent_spawner#direction:1,0,0"
 func apply_grid_config(config: Dictionary) -> void:
-	print("CubeAgentSpawner: Applying grid config: %s" % config)
 
 	# Parse direction from config
 	if config.has("direction"):
@@ -81,12 +77,10 @@ func apply_grid_config(config: Dictionary) -> void:
 				float(parts[1]),
 				float(parts[2])
 			).normalized()
-			print("  Set walk direction to: %s" % walk_direction)
 
 	# Parse cube size
 	if config.has("size"):
 		cube_size = float(config["size"])
-		print("  Set cube size to: %f" % cube_size)
 
 	# Spawn if not already spawned
 	if not agent_builder:

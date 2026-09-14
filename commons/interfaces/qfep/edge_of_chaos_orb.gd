@@ -57,7 +57,6 @@ func _ready() -> void:
 
 	# Try connecting to existing lambda/phi controllers
 	call_deferred("_connect_to_controllers")
-	print("EdgeOfChaosOrb: Observing the edge of chaos")
 
 # ---------------------------------------------------------------------------
 # Orb — central glowing sphere
@@ -197,12 +196,10 @@ func _connect_to_controllers() -> void:
 	for slider in get_tree().get_nodes_in_group("qfep_lambda_controllers"):
 		if slider.has_signal("lambda_changed"):
 			slider.lambda_changed.connect(func(v: float): lambda = v)
-			print("EdgeOfChaosOrb: Connected to lambda controller")
 
 	for slider in get_tree().get_nodes_in_group("qfep_phi_controllers"):
 		if slider.has_signal("phi_changed"):
 			slider.phi_changed.connect(func(v: float): phi = v)
-			print("EdgeOfChaosOrb: Connected to phi controller")
 
 # ---------------------------------------------------------------------------
 # State computation

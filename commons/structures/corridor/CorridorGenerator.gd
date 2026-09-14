@@ -142,7 +142,6 @@ func _generate():
 	if show_entrance_text:
 		_create_entrance_text()
 
-	print("CorridorGenerator: Created entrance room with %d blocks (width=%d, exit_width=%d)" % [transforms.size(), grid_width, exit_width])
 
 func _create_collision(pos: Vector3):
 	var static_body = StaticBody3D.new()

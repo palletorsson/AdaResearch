@@ -47,7 +47,6 @@ func _load_word_map():
 		
 		if error == OK:
 			_word_map = json.data
-			print("WordSynthDisplay: Loaded word map with %d timbral words" % _word_map.get("timbral_words", {}).size())
 		else:
 			push_warning("WordSynthDisplay: Failed to parse word map")
 	else:
@@ -269,8 +268,6 @@ func _on_word_clicked(layer_name: String, word: String):
 	
 	# Show available alternatives (opposites)
 	var opposites = _get_opposites(word)
-	if not opposites.is_empty():
-		print("WordSynthDisplay: '%s' clicked. Opposites: %s" % [word, opposites])
 
 
 func _on_add_word_pressed(layer_name: String, button: Button):
@@ -309,7 +306,6 @@ func _on_layer_preview(layer_name: String):
 			if not all_params.has(key):
 				all_params[key] = word_params[key]
 	
-	print("WordSynthDisplay: Preview '%s' with params: %s" % [layer_name, all_params])
 	layer_preview_requested.emit(layer_name, all_params)
 
 

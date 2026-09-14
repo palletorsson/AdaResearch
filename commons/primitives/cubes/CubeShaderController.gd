@@ -18,7 +18,6 @@ func _ready():
 	
 	if mesh_instance and mesh_instance.material_override:
 		shader_material = mesh_instance.material_override as ShaderMaterial
-		print("CubeShaderController: Found shader material")
 	else:
 		print("CubeShaderController: No shader material found")
 

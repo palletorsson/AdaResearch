@@ -126,7 +126,6 @@ func build_from_definition(def: Dictionary, uvac: Node3D) -> void:
 	# ModuleFaceTexture handles ALL visuals AND interaction (both desktop + VR)
 	# via SubViewport + StaticBody3D pointer collision + _gui_input()
 	# This avoids XRTools RigidBody3D script compilation errors entirely.
-	print("EurorackModule: Using 2D face texture for all interaction")
 
 
 func _add_screws(panel_w: float, panel_h: float) -> void:

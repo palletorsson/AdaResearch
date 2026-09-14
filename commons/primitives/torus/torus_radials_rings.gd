@@ -108,7 +108,6 @@ func _parse_config_string(config_str: String) -> void:
 		rings = max(3, int(parts[0]))  # Minimum 3 for a valid torus
 	if parts.size() >= 2 and parts[1].is_valid_int():
 		ring_segments = max(3, int(parts[1]))  # Minimum 3 for tube cross-section
-	print("Torus configured: rings=%d, ring_segments=%d" % [rings, ring_segments])
 
 # Called by grid system for #config syntax
 func apply_grid_config(config_data: Dictionary) -> void:

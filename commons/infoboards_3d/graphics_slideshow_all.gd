@@ -19,7 +19,6 @@ func _set_current_topic():
 	var topic = _all_topics[_current_topic_index]
 	if scene_node and scene_node.has_method("set_topic"):
 		scene_node.set_topic(topic)
-		print("GraphicsSlideshowAll: Showing topic %d/%d: %s" % [_current_topic_index + 1, _all_topics.size(), topic])
 
 func next_topic():
 	_current_topic_index = (_current_topic_index + 1) % _all_topics.size()
@@ -40,7 +39,6 @@ func _input(event):
 
 # Grid system configuration
 func apply_grid_config(config_data: Dictionary) -> void:
-	print("GraphicsSlideshowAll: Applying grid config: %s" % config_data)
 
 	# Optional: start at specific topic
 	if config_data.has("start_topic"):

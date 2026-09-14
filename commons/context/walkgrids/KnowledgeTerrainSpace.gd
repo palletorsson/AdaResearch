@@ -64,7 +64,6 @@ func _load_knowledge_data():
 		# Fallback: load directly from curriculum_spine.json
 		_load_from_spine_file()
 	
-	print("KnowledgeTerrainSpace: Loaded %d sequences" % _sequences.size())
 
 func _load_from_spine_file():
 	"""Fallback loader if WorldMapDataProvider not available"""

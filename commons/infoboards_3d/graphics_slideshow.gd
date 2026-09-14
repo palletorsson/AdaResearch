@@ -118,7 +118,6 @@ func _load_visualization() -> void:
 		_vis_control.position = Vector2.ZERO
 		root.add_child(_vis_control)
 		_initialize_visualization_data(_vis_control)
-		print("GraphicsSlideshow: Loaded visualization '%s' frame '%s'" % [visualization_topic, vis_type])
 	else:
 		_create_fallback_visualization(vis_type)
 
@@ -167,32 +166,27 @@ func get_total_frames() -> int:
 
 # Grid system configuration
 func apply_grid_config(config_data: Dictionary) -> void:
-	print("GraphicsSlideshow: Applying grid config: %s" % config_data)
 
 	# Check for topic configuration
 	if config_data.has("topic"):
 		var topic = str(config_data.topic).to_lower()
 		if topic in _visualizations:
 			set_topic(topic)
-			print("  -> Set topic: %s" % topic)
 
 	# Check for shorthand topic (e.g., graphics_slideshow#vectors)
 	for key in config_data.keys():
 		var key_str = str(key).to_lower()
 		if key_str in _visualizations:
 			set_topic(key_str)
-			print("  -> Set topic from shorthand: %s" % key_str)
 			break
 
 	# Optional: frame duration config
 	if config_data.has("duration"):
 		frame_duration = float(config_data.duration)
-		print("  -> Set frame duration: %s" % frame_duration)
 
 	# Optional: auto-advance config
 	if config_data.has("auto"):
 		auto_advance = str(config_data.auto).to_lower() == "true"
-		print("  -> Set auto advance: %s" % auto_advance)
 
 func _initialize_visualization_data(vis_ctrl: Control) -> void:
 	# Initialize particles and forces for visualizations that need them

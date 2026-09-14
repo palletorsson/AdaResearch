@@ -78,8 +78,6 @@ func apply(ctx: Dictionary) -> void:
 	p.draw_pass_1 = quad
 
 	add_child(p)
-	print("  [ambient_particles] %d sparse motes over %.0f×%.0f, y=%.1f–%.1f" % [
-		count, span_x, span_z, y_min, y_max])
 
 
 func _parse_color(v) -> Color:

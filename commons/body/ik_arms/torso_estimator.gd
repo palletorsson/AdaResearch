@@ -125,7 +125,6 @@ func set_tracking_refs(cam: XRCamera3D, l_hand: Node3D, r_hand: Node3D) -> void:
 	right_hand = r_hand
 	if _refs_valid():
 		set_physics_process(true)
-		print("[TorsoEstimator] Tracking refs set — physics processing enabled")
 	else:
 		push_error("[TorsoEstimator] One or more tracking references are null")
 

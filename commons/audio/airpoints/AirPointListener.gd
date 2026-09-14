@@ -75,11 +75,6 @@ func _ready() -> void:
 		_previous_position = target_air_point.global_position
 		_is_initialized = true
 	
-	print("SystemsMusicListener: Ready")
-	print("  Target Air Point: ", target_air_point)
-	print("  Reference Position: ", reference_position)
-	print("  Max Distance: %.1f m" % max_distance)
-	print("  Update Rate: %.0f Hz" % update_rate)
 
 
 func _process(delta: float) -> void:

@@ -13,7 +13,6 @@ const SAMPLE_RATE = 44100.0
 
 static func export_song(genre_id: String, output_path: String, params: Dictionary = {}) -> bool:
 	"""Export a soundbank-based song to WAV file"""
-	print("SongExporter: Generating %s..." % genre_id)
 	
 	var stream = SoundbankGenerator.generate_song(genre_id, params)
 	if stream == null:
@@ -45,7 +44,6 @@ static func _export_interactive_stream(stream: AudioStreamInteractive, output_pa
 	var all_samples: PackedFloat32Array = PackedFloat32Array()
 	var clip_count = stream.clip_count
 	
-	print("SongExporter: Concatenating %d sections..." % clip_count)
 	
 	for i in range(clip_count):
 		var clip_name = stream.get_clip_name(i)
@@ -58,7 +56,6 @@ static func _export_interactive_stream(stream: AudioStreamInteractive, output_pa
 		if clip_stream is AudioStreamWAV:
 			var wav: AudioStreamWAV = clip_stream
 			var section_samples = _wav_to_float_array(wav)
-			print("  Section '%s': %d samples (%.1fs)" % [clip_name, section_samples.size(), section_samples.size() / SAMPLE_RATE])
 			all_samples.append_array(section_samples)
 		else:
 			push_warning("SongExporter: Clip %d (%s) is not AudioStreamWAV" % [i, clip_name])

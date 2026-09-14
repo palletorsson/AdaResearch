@@ -732,7 +732,6 @@ func _spawn_crystal() -> void:
 		_crystal.call_deferred("apply_grid_config", _pending_crystal_cfg)
 		_pending_crystal_cfg = {}
 
-	print("[CatalystPedestal] Crystal spawned at center of cage")
 
 
 func _on_crystal_taken(_pickable) -> void:
@@ -745,9 +744,6 @@ func _on_crystal_taken(_pickable) -> void:
 		# manager's clock (~lease_s after absorb); the cage returns a
 		# grace beat later so the two never overlap.
 		_return_left = _lease_s + RETURN_GRACE
-		print("[CatalystPedestal] Crystal taken on a %.0fs lease — return countdown started" % _lease_s)
-	else:
-		print("[CatalystPedestal] Crystal taken — fading cage")
 
 
 ## Lease over: restore the cage and grow a fresh crystal with the same
@@ -768,7 +764,6 @@ func _rematerialize() -> void:
 	_pending_crystal_cfg = _last_crystal_cfg.duplicate()
 	_spawn_crystal()
 	catalyst_returned.emit()
-	print("[CatalystPedestal] Lease over — cage re-materialized, crystal returned")
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -857,7 +852,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			cap_mgr._catalyst_modes.clear()
 			if cap_mgr.has_method("save_state"):
 				cap_mgr.call("save_state")
-		print("[CatalystPedestal] clear_modes ran — freed %d ghost catalysts; bracelet preserved" % freed)
 
 	# lease_s: the pedestal needs it too (return countdown + survive fade).
 	if config_data.has("lease_s"):

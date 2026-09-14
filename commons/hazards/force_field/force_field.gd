@@ -126,7 +126,6 @@ func _ready() -> void:
 	add_to_group("hazard")
 
 	var force_name: String = ForceTransmutationConfig.get_force_name(type_int)
-	print("[ForceField] Ready: %s at %s (intensity=%.1f)" % [force_name, global_position, force_intensity])
 
 
 func _process(delta: float) -> void:
@@ -232,7 +231,6 @@ func _begin_transmutation() -> void:
 	_set_mode(ForceMode.TRANSMUTING)
 	_transmutation_progress = 0.0
 	transmutation_started.emit()
-	print("[ForceField] Transmutation started (%s)" % ForceTransmutationConfig.get_force_name(force_type as int))
 
 
 func _complete_transmutation() -> void:
@@ -246,7 +244,6 @@ func _complete_transmutation() -> void:
 		_show_subtitle(hint)
 
 	var force_name: String = ForceTransmutationConfig.get_force_name(force_type as int)
-	print("[ForceField] Transmutation complete! %s → %s" % [force_name, _transmuted_cfg.get("description", "BENEFIT")])
 
 
 func _revert_to_hazard() -> void:
@@ -254,7 +251,6 @@ func _revert_to_hazard() -> void:
 	_transmutation_progress = 0.0
 	_exposure_time = 0.0
 	transmutation_reverted.emit()
-	print("[ForceField] Reverted to hazard mode")
 
 
 func _set_mode(new_mode: ForceMode) -> void:

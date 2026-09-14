@@ -83,8 +83,6 @@ func _ready() -> void:
 	# Scene setup
 	_build_scene()
 
-	print("[ThreeLegCritter] Stepping gait ready — step_threshold=%.1f, step_duration=%.2f" % [
-		step_threshold, step_duration])
 
 func _process(delta: float) -> void:
 	# ── Movement ──────────────────────────────────────────────────────────

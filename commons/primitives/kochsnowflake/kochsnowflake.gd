@@ -33,7 +33,6 @@ func create_snowflake():
 	create_line_mesh()
 	apply_material()
 
-	print("Koch Snowflake created: depth=%d, size=%.2f, segments=%d" % [depth, size, vertices.size() / 2])
 
 func koch_iteration(v1: Vector3, v2: Vector3, current_depth: int):
 	if current_depth == 0:

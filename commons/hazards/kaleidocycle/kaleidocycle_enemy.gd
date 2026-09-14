@@ -95,7 +95,6 @@ func _ready() -> void:
 	_find_player()
 	add_to_group("enemy")
 	add_to_group("kaleidocycle_enemy")
-	print("KaleidocycleEnemy: READY at %s" % global_position)
 	# WARNING dressing, appended LAST so every node built above keeps its index.
 	# "none" adds nothing at all — the legacy lineage.
 	_build_warning()

@@ -69,11 +69,6 @@ func _ready() -> void:
 	play()
 	_playback = get_stream_playback()
 	
-	print("SystemsMusicOscillator: Ready and playing")
-	print("  Frequency: %.1f Hz" % _current_frequency)
-	print("  Amplitude: %.2f" % _current_amplitude)
-	print("  Waveform: ", waveform)
-	print("  Listener connected: ", listener != null)
 
 
 func _process(_delta: float) -> void:

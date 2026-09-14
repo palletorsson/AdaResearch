@@ -446,7 +446,6 @@ func load_current_slide():
 	asset_edit.text_changed.connect(_on_asset_changed)
 	files_edit.text_changed.connect(_on_files_changed)
 
-	print("Loaded slide %d: %s" % [current_page_index + 1, page.get("title", "")])
 
 func _get_current_page() -> Dictionary:
 	if current_board_id.is_empty():

@@ -8,14 +8,12 @@ extends Node
 @onready var label = $Label
 
 func _ready():
-	print("ProgSynthPlayer: Generating 70s Prog Synth track...")
 	label.text = "Generating 70s Prog Synth Track...\n(Warming up the Minimoog...)"
 	
 	# Generate directly (sync for simplicity)
 	var stream = AudioSynthesizer.generate_prog_synth_song({})
 	
 	if stream:
-		print("ProgSynthPlayer: Track ready!")
 		_play_stream(stream)
 	else:
 		label.text = "ERROR: Failed to generate track"
@@ -24,7 +22,6 @@ func _play_stream(stream: AudioStream):
 	player.stream = stream
 	player.play()
 	label.text = "Now Playing: 70s Prog Synth\nSection: Intro"
-	print("ProgSynthPlayer: Playing.")
 
 var acc_time = 0.0
 var bpm = 110.0

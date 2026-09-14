@@ -94,7 +94,6 @@ func _ready() -> void:
 	_spawn_hazards()
 	_setup_camera()
 
-	print("[HazardsDemo] Scene ready — walk into plasma, grab stick, approach egg-plant")
 
 # ═══════════════════════════════════════════════════════════════════════════
 # SCENE SETUP
@@ -263,19 +262,16 @@ func _spawn_hazards() -> void:
 		var plasma1: Node = PlasmaCritterScene.instantiate()
 		plasma1.position = Vector3(-2.0, 0.5, -1.0)
 		add_child(plasma1)
-		print("[HazardsDemo] Spawned plasma critter at (-2, 0.5, -1)")
 
 		# Second plasma further away
 		var plasma2: Node = PlasmaCritterScene.instantiate()
 		plasma2.position = Vector3(-4.0, 0.5, 1.5)
 		add_child(plasma2)
-		print("[HazardsDemo] Spawned plasma critter at (-4, 0.5, 1.5)")
 
 		# Third plasma — near the octapod for torch interaction
 		var plasma3: Node = PlasmaCritterScene.instantiate()
 		plasma3.position = Vector3(1.5, 0.5, -0.5)
 		add_child(plasma3)
-		print("[HazardsDemo] Spawned plasma critter at (1.5, 0.5, -0.5)")
 
 	# --- Stick Tools (frozen in air for easy grabbing) ---
 	if StickToolScene:
@@ -286,7 +282,6 @@ func _spawn_hazards() -> void:
 		# Freeze so it hangs in the air
 		if stick1 is RigidBody3D:
 			(stick1 as RigidBody3D).freeze = true
-		print("[HazardsDemo] Spawned stick tool at (0, 1.0, 0.5)")
 
 		# Second stick further back
 		var stick2: Node = StickToolScene.instantiate()
@@ -294,7 +289,6 @@ func _spawn_hazards() -> void:
 		add_child(stick2)
 		if stick2 is RigidBody3D:
 			(stick2 as RigidBody3D).freeze = true
-		print("[HazardsDemo] Spawned stick tool at (-1, 1.0, 2)")
 
 	# --- Octapod Crawlers (as egg-plants) ---
 	if OctapodCrawlerScene:
@@ -306,7 +300,6 @@ func _spawn_hazards() -> void:
 		var crawler1: Node = OctapodCrawlerScene.instantiate()
 		crawler1.position = Vector3(3.0, spawn_y, -2.0)
 		add_child(crawler1)
-		print("[HazardsDemo] Spawned octapod egg-plant at (3, %.1f, -2)" % spawn_y)
 
 		# Egg-plant 2: further away, larger hatch radius, more aggressive
 		var crawler2: Node = OctapodCrawlerScene.instantiate()
@@ -317,7 +310,6 @@ func _spawn_hazards() -> void:
 		# Configure aggression after ready (applies multipliers)
 		if crawler2.has_method("configure"):
 			crawler2.configure({"aggression": "1.5"})
-		print("[HazardsDemo] Spawned octapod egg-plant at (-3.5, %.1f, -4)" % spawn_y)
 
 		# Active crawler (not dormant) for immediate testing
 		var crawler3: Node = OctapodCrawlerScene.instantiate()
@@ -326,7 +318,6 @@ func _spawn_hazards() -> void:
 		if "start_dormant" in crawler3:
 			crawler3.start_dormant = false
 		add_child(crawler3)
-		print("[HazardsDemo] Spawned active octapod at (5, %.1f, 2)" % spawn_y)
 
 	# --- Beast Demo IK Reference (scaled down, autonomous patrol) ---
 	var beast_scene = load("res://commons/hazards/octapod_crawler/beast_demo.tscn")
@@ -340,7 +331,6 @@ func _spawn_hazards() -> void:
 			# At 0.15 scale: body height = 2.2*0.15 = 0.33 above ground
 			beast_node.position = Vector3(0, 2.2 * 0.15, -3.0)
 			add_child(beast_node)
-			print("[HazardsDemo] Spawned scaled beast_demo at (0, %.2f, -3)" % beast_node.position.y)
 		beast_world.queue_free()
 
 	# --- IK Leg Critters (stepping gait demo) ---
@@ -349,21 +339,18 @@ func _spawn_hazards() -> void:
 		var critter3: Node = three_leg_scene.instantiate()
 		critter3.position = Vector3(-5.0, 0, 3.0)
 		add_child(critter3)
-		print("[HazardsDemo] Spawned 3-leg critter at (-5, 0, 3)")
 
 	var four_leg_scene: PackedScene = load("res://commons/hazards/octapod_crawler/four_leg_critter.tscn")
 	if four_leg_scene:
 		var critter4: Node = four_leg_scene.instantiate()
 		critter4.position = Vector3(5.0, 0, 3.0)
 		add_child(critter4)
-		print("[HazardsDemo] Spawned 4-leg critter at (5, 0, 3)")
 
 	var six_leg_scene: PackedScene = load("res://commons/hazards/octapod_crawler/six_leg_critter.tscn")
 	if six_leg_scene:
 		var critter6: Node = six_leg_scene.instantiate()
 		critter6.position = Vector3(0, 0, 5.0)
 		add_child(critter6)
-		print("[HazardsDemo] Spawned 6-leg critter at (0, 0, 5)")
 
 	# Critter labels
 	var critter_label := Label3D.new()
@@ -443,7 +430,6 @@ func _spawn_hazards() -> void:
 			(m6 as RigidBody3D).freeze = true
 		add_child(m6)
 
-		print("[HazardsDemo] Spawned 6 mushrooms — each triggers a different effect (10s)")
 
 	# Mushroom label
 	var mush_label := Label3D.new()
@@ -487,7 +473,6 @@ func _spawn_force_fields() -> void:
 
 		var type_int: int = cfg["type"] as int
 		var force_name: String = ForceTransmutationConfig.get_force_name(type_int)
-		print("[HazardsDemo] Spawned ForceField: %s at %s" % [force_name, str(cfg["pos"])])
 
 	# Force field section label
 	var ff_label := Label3D.new()
@@ -499,7 +484,6 @@ func _spawn_force_fields() -> void:
 	ff_label.text = "FORCE FIELDS\nWalk in = hazard damage\nBring mushroom in = TRANSMUTE\nSame potential, different restraint"
 	add_child(ff_label)
 
-	print("[HazardsDemo] Spawned 4 force fields — grab a mushroom and bring it in to transmute!")
 
 
 func _add_glowing_pillar(pos: Vector3, color: Color) -> void:
@@ -567,7 +551,6 @@ func _setup_camera() -> void:
 	_camera.current = true
 	add_child(_camera)
 	_update_camera_transform()
-	print("[HazardsDemo] Desktop camera active — WASD to move, mouse to look, ESC to release")
 
 func _input(event: InputEvent) -> void:
 	if _camera == null:

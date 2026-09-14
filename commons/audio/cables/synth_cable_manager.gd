@@ -62,12 +62,10 @@ func register_jack(jack: SynthJack):
 		output_jacks[param] = jack
 		if not routes.has(param):
 			routes[param] = []
-		print("SynthCableManager: Registered output jack '%s'" % param)
 	else:
 		if not input_jacks.has(param):
 			input_jacks[param] = []
 		input_jacks[param].append(jack)
-		print("SynthCableManager: Registered input jack '%s'" % param)
 	
 	# Connect jack signals
 	jack.cable_connected.connect(_on_jack_connected.bind(jack))
@@ -102,7 +100,6 @@ func register_cable(cable: SynthCable):
 	# Assign a color
 	cable.set_cable_color(_get_next_color())
 	
-	print("SynthCableManager: Registered cable (total: %d)" % cables.size())
 
 
 ## Create a new cable
@@ -144,7 +141,6 @@ func _on_cable_connection_changed(output_jack: SynthJack, input_jack: SynthJack,
 			routes[out_param].append(in_param)
 			parameter_routed.emit(out_param, in_param)
 			connection_made.emit(cable, output_jack, input_jack)
-			print("SynthCableManager: Routed %s → %s" % [out_param, in_param])
 	else:
 		# Connection broken - find and remove the route
 		_remove_cable_route(cable)
@@ -173,7 +169,6 @@ func _remove_cable_route(cable: SynthCable):
 				routes[out_param].erase(in_param)
 				parameter_unrouted.emit(out_param, in_param)
 				connection_broken.emit(cable)
-				print("SynthCableManager: Unrouted %s → %s" % [out_param, in_param])
 
 
 func _cable_was_routing(cable: SynthCable, out_param: String, in_param: String) -> bool:
@@ -266,7 +261,6 @@ func auto_connect_matching():
 				cable.plug_a.snap_to_jack(out_jack)
 				cable.plug_b.snap_to_jack(in_jack)
 				
-				print("SynthCableManager: Auto-connected %s" % out_param)
 
 
 ## Get cable count
@@ -365,8 +359,6 @@ func _set_pending_jack(jack: SynthJack) -> void:
 	_pending_highlight.omni_attenuation = 2.0
 	jack.add_child(_pending_highlight)
 
-	print("TouchPatch: Selected %s jack '%s' — touch another jack to connect" % [
-		"output" if jack.is_output() else "input", jack.parameter_name])
 
 
 func _clear_pending_jack() -> void:
@@ -400,7 +392,6 @@ func _touch_connect(jack_a: SynthJack, jack_b: SynthJack) -> void:
 	cable.plug_a.snap_to_jack(out_jack)
 	cable.plug_b.snap_to_jack(in_jack)
 
-	print("TouchPatch: Connected %s → %s" % [out_jack.parameter_name, in_jack.parameter_name])
 	_clear_pending_jack()
 
 
@@ -416,5 +407,4 @@ func _touch_disconnect(jack: SynthJack) -> void:
 			if in_j:
 				in_j.force_disconnect()
 			remove_cable(cable)
-			print("TouchPatch: Disconnected cable from '%s'" % jack.parameter_name)
 			return

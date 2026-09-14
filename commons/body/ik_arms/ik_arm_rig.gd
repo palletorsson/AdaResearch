@@ -137,10 +137,6 @@ func _ready() -> void:
 	_build_procedural_mesh()
 
 	var side_label: String = "Left" if is_left else "Right"
-	print("[IKArmRig] %s arm: upper %.2f + fore %.2f = %.2f m to the wrist, "
-		% [side_label, upper_arm_length, lower_arm_length,
-		   upper_arm_length + lower_arm_length]
-		+ "then the VR hand")
 
 
 func _physics_process(delta: float) -> void:
@@ -157,9 +153,6 @@ func _physics_process(delta: float) -> void:
 			_wrist_retry += 1
 			if _wrist_retry % 30 == 0:
 				_find_wrist(_controller)
-				if _hand_skel != null:
-					print("[IKArmRig] %s sleeve ends at %s (found late)" % [
-						("Left" if is_left else "Right"), _hand_skel.get_bone_name(_wrist_bone)])
 		_ik_target.global_position = _wrist_xform().origin
 
 	## 2. Let the axle travel, then aim the elbow from wherever it ended up. The
@@ -195,9 +188,6 @@ func set_controller(node: Node3D) -> void:
 	_wrist_bone = -1
 	if node != null:
 		_find_wrist(node)
-	if _hand_skel != null:
-		print("[IKArmRig] %s sleeve ends at %s" % [
-			("Left" if is_left else "Right"), _hand_skel.get_bone_name(_wrist_bone)])
 
 
 ## THE CONTROLLER IS NOT THE WRIST (2026-08-29, Palle, from inside the headset:

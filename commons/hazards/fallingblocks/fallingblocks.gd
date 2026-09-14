@@ -119,11 +119,6 @@ func _spawn_falling_cube() -> void:
 	cube_body.sleeping = false
 	cube_body.can_sleep = false
 	
-	# Debug information
-	print("FallingBlocks: Spawned cube at position: ", cube_body.global_position)
-	print("FallingBlocks: Gravity scale: ", cube_body.gravity_scale)
-	print("FallingBlocks: Mass: ", cube_body.mass)
-	print("FallingBlocks: Initial velocity: ", cube_body.linear_velocity)
 	
 	_active_cubes.append(cube_body)
 

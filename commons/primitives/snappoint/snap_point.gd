@@ -371,7 +371,6 @@ func _attempt_snap(target_point: Node3D) -> void:
 	
 	snap_completed.emit(target_point)
 	
-	print("SnapPoint: Connected ", name, " to ", target_point.name)
 
 func add_connection(point: Node3D) -> void:
 	if point not in connected_points:

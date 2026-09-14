@@ -88,7 +88,6 @@ func _ready():
 	collision_layer = 0    # Don't collide with anything
 	collision_mask = 2     # Detect player layer
 	
-	print("HazardousMaterial: Initialized - Type: ", MaterialType.keys()[material_type])
 
 func _setup_collision_shape():
 	collision_shape = CollisionShape3D.new()
@@ -343,7 +342,6 @@ func _apply_damage_to_players():
 
 func _on_body_entered(body):
 	if _is_player(body):
-		print("Player entered hazardous material: ", body.name, " (", MaterialType.keys()[material_type], ")")
 		
 		# Create exposure data
 		var exposure_data = ExposureData.new()
@@ -376,7 +374,6 @@ func _on_body_exited(body):
 		exposure_data.is_in_area = false
 		exposure_data.lingering_timer = lingering_damage_duration
 		
-		print("Player left hazardous material: ", body.name, " (exposed for ", exposure_data.exposure_time, "s)")
 		
 		# Remove movement effects
 		if slows_movement:

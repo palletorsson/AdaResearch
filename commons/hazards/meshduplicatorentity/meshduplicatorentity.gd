@@ -71,7 +71,6 @@ func _ready():
 	# Add to group for identification
 	add_to_group("mesh_duplicator")
 	
-	print("MeshDuplicatorEntity: Chaos entity initialized")
 
 func _create_entity_mesh():
 	entity_mesh = MeshInstance3D.new()
@@ -189,10 +188,8 @@ func _animate_entity(delta):
 func _start_scan():
 	if created_duplicates.size() >= max_total_duplicates:
 		emit_signal("entity_overloaded")
-		print("MeshDuplicatorEntity: Maximum duplicates reached!")
 		return
 	
-	print("MeshDuplicatorEntity: Starting mesh scan...")
 	is_scanning = true
 	scan_timer = 0.0
 	
@@ -221,7 +218,6 @@ func _scan_for_meshes():
 				scanned_meshes.append(node)
 				emit_signal("mesh_found", node)
 	
-	print("MeshDuplicatorEntity: Found ", scanned_meshes.size(), " meshes to duplicate")
 
 func _get_all_scene_nodes(node: Node) -> Array:
 	var nodes = [node]
@@ -250,7 +246,6 @@ func _duplicate_mesh(original_mesh: MeshInstance3D):
 	# Check if we've already duplicated this mesh too many times
 	var duplicate_count = _count_duplicates_of_mesh(original_mesh)
 	if duplicate_count >= max_duplicates_per_mesh:
-		print("MeshDuplicatorEntity: Max duplicates reached for mesh: ", original_mesh.name)
 		return
 	
 	# Create duplicate
@@ -302,7 +297,6 @@ func _duplicate_mesh(original_mesh: MeshInstance3D):
 		audio_player.play()
 	
 	emit_signal("mesh_duplicated", original_mesh, duplicate)
-	print("MeshDuplicatorEntity: Duplicated mesh: ", original_mesh.name)
 	
 	# Check chaos level
 	_check_chaos_level()
@@ -514,7 +508,6 @@ func _destroy_duplicate(duplicate_data: DuplicateData):
 		
 		# Remove the duplicate
 		duplicate_data.mesh_instance.queue_free()
-		print("MeshDuplicatorEntity: Destroyed duplicate: ", duplicate_data.mesh_instance.name)
 
 func _create_destruction_effect(position: Vector3):
 	# Create implosion effect
@@ -587,7 +580,6 @@ func clear_all_duplicates():
 	for duplicate_data in created_duplicates:
 		_destroy_duplicate(duplicate_data)
 	created_duplicates.clear()
-	print("MeshDuplicatorEntity: Cleared all duplicates")
 
 func target_specific_mesh(mesh_name: String):
 	# Find and duplicate a specific mesh by name

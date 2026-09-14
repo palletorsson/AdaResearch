@@ -352,7 +352,6 @@ static func generate_pop_interactive_song(parameters: Dictionary = {}) -> AudioS
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 
-	print("AudioSynthesizer: Generating Pop Song in ", root_note)
 
 	# Create Interactive Stream
 	var playback = AudioStreamInteractive.new()
@@ -404,7 +403,6 @@ static func generate_ambient_works_song(parameters: Dictionary = {}) -> AudioStr
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 
-	print("AudioSynthesizer: Generating Ambient Works Song in ", root_note)
 
 	# Create Interactive Stream
 	var playback = AudioStreamInteractive.new()
@@ -472,7 +470,6 @@ static func generate_prog_synth_song(parameters: Dictionary = {}) -> AudioStream
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 
-	print("AudioSynthesizer: Generating 70s Prog Synth Track in ", root_note)
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 5
@@ -561,7 +558,6 @@ static func generate_prog_odyssey_song(parameters: Dictionary = {}) -> AudioStre
 	# Vanishing: pure root drone
 	var vanishing_prog = [0, 0, 0, 0]
 
-	print("AudioSynthesizer: Generating Prog Odyssey Suite in B minor - 7 movements")
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 7
@@ -651,7 +647,6 @@ static func generate_moroder_disco_song(parameters: Dictionary = {}) -> AudioStr
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 
-	print("AudioSynthesizer: Generating Moroder Disco Track in ", root_note)
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 4
@@ -1180,7 +1175,6 @@ static func generate_acid_house_song(parameters: Dictionary = {}) -> AudioStream
 	# Acid house often uses minimal harmonic movement
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
-	print("AudioSynthesizer: Generating Acid House Track in ", root_note)
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 4
@@ -2542,7 +2536,6 @@ static func generate_boards_of_canada_song(parameters: Dictionary = {}) -> Audio
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 
-	print("AudioSynthesizer: Generating Boards of Canada in ", root_note)
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 3
@@ -2700,7 +2693,6 @@ static func generate_burial_song(parameters: Dictionary = {}) -> AudioStreamInte
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 
-	print("AudioSynthesizer: Generating Burial in ", root_note)
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 3
@@ -2851,7 +2843,6 @@ static func generate_kraftwerk_song(parameters: Dictionary = {}) -> AudioStreamI
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song("kraftwerk"), scale)
 
-	print("AudioSynthesizer: Generating Kraftwerk in %s @ %.1f BPM" % [root_note, bpm])
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 3
@@ -2899,7 +2890,6 @@ static func generate_dark_kraftwerk_ambience_song(parameters: Dictionary = {}) -
 	var scale: Array = PopMusicTheory.get_minor_scale_notes(root_note) if _is_minor_key(key_value) else PopMusicTheory.get_major_scale_notes(root_note)
 
 	var progression: Array = _resolve_progression_from_parameters(parameters, _default_progression_for_song("dark_kraftwerk_ambience"), scale)
-	print("AudioSynthesizer: Generating Dark Kraftwerk Ambience in %s @ %.1f BPM" % [root_note, bpm])
 
 	var playback := AudioStreamInteractive.new()
 	playback.clip_count = 4
@@ -3255,7 +3245,6 @@ static func generate_boards_of_canada_v2_song(parameters: Dictionary = {}) -> Au
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 
-	print("AudioSynthesizer: Generating Boards of Canada V2 in ", root_note)
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 4
@@ -3503,7 +3492,6 @@ static func generate_burial_v2_song(parameters: Dictionary = {}) -> AudioStreamI
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 
-	print("AudioSynthesizer: Generating Burial V2 in ", root_note)
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 4
@@ -3747,7 +3735,6 @@ static func generate_kraftwerk_v2_song(parameters: Dictionary = {}) -> AudioStre
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 
-	print("AudioSynthesizer: Generating Kraftwerk V2 in ", root_note)
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 4
@@ -3996,7 +3983,6 @@ static func generate_gypsy_woman_house_song(parameters: Dictionary = {}) -> Audi
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 
-	print("AudioSynthesizer: Generating Gypsy Woman House in F major")
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 4
@@ -4203,7 +4189,6 @@ static func generate_pop_madonna_song(parameters: Dictionary = {}) -> AudioStrea
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 
-	print("AudioSynthesizer: Generating Madonna 80s Pop in ", root_note)
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 5
@@ -4501,7 +4486,6 @@ static func generate_pop_v2_song(parameters: Dictionary = {}) -> AudioStreamInte
 
 	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
 
-	print("AudioSynthesizer: Generating Pop V2 in ", root_note, " (modern synth-pop)")
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 5
@@ -4873,7 +4857,6 @@ static func generate_prog_synth_v2_song(parameters: Dictionary = {}) -> AudioStr
 	# Identity token: a signature motif interval (perfect 5th rise)
 	var motif_interval = 7  # Perfect 5th - recognizable, prog-like
 
-	print("AudioSynthesizer: Generating Prog Synth V2 in ", root_note, " (optimized)")
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 5
@@ -5221,7 +5204,6 @@ static func generate_kpop_prog_song(parameters: Dictionary = {}) -> AudioStreamI
 	var main_prog = [0, 5, 3, 4]  # i - VI - iv - V
 	var lift_prog = [0, 2, 5, 4]  # Ascending feel
 
-	print("AudioSynthesizer: Generating K-Pop Prog Remix - CONSTANT BEAT - Em ÃƒÆ'Ã'Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã'Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ G ÃƒÆ'Ã'Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã'Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ Fm")
 
 	var playback = AudioStreamInteractive.new()
 	playback.clip_count = 5
@@ -5666,14 +5648,12 @@ static func _generate_kpop_prog_section(progression: Array, scale: Array, instru
 
 static func generate_pop_song_async(parameters: Dictionary, callback_object: Object, callback_method: String):
 	if is_generating:
-		print("AudioSynthesizer: Already generating sound")
 		return
 
 	if not generation_thread:
 		generation_thread = Thread.new()
 
 	is_generating = true
-	print("AudioSynthesizer: Starting background generation...")
 
 	# Pass data as a single dictionary to the thread function
 	var thread_data = {
@@ -5685,7 +5665,6 @@ static func generate_pop_song_async(parameters: Dictionary, callback_object: Obj
 	generation_thread.start(_thread_generate_pop_song.bind(thread_data))
 
 static func _thread_generate_pop_song(data: Dictionary):
-	print("AudioSynthesizer: Thread started")
 	var stream = null
 	var song_type = data.params.get("type", "POP")
 
@@ -5700,7 +5679,6 @@ static func _thread_generate_pop_song(data: Dictionary):
 	_on_generation_complete.call_deferred(stream, data)
 
 static func _on_generation_complete(stream: AudioStreamInteractive, data: Dictionary):
-	print("AudioSynthesizer: Background generation complete")
 
 	if generation_thread.is_alive():
 		generation_thread.wait_to_finish()
@@ -7611,7 +7589,6 @@ static func _create_stereo_audio_stream(data_stereo: PackedFloat32Array, loop_mo
 
 # Save sounds to disk for reuse in the same directory
 static func generate_and_save_all_sounds():
-	print("AudioSynthesizer: Generating all sounds...")
 
 	var sounds = {
 		"pickup_mario": generate_sound(SoundType.PICKUP_MARIO, 0.5),
@@ -7632,7 +7609,6 @@ static func generate_and_save_all_sounds():
 
 	if not dir.dir_exists("audio"):
 		dir.make_dir("audio")
-		print("AudioSynthesizer: Created audio directory at res://commons/audio/")
 
 	for sound_name in sounds.keys():
 		var file_path = script_path + sound_name + ".tres"

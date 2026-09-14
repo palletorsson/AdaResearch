@@ -118,7 +118,6 @@ func _connect_signals() -> void:
 	if connection_manager:
 		if not connection_manager.tetrahedron_formed.is_connected(_on_tetrahedron_formed):
 			connection_manager.tetrahedron_formed.connect(_on_tetrahedron_formed)
-		print("SnapTetrahedronPuzzle: Connected to tetrahedron_formed signal")
 
 
 func _on_tetrahedron_formed(points: Array) -> void:
@@ -130,7 +129,6 @@ func _on_tetrahedron_formed(points: Array) -> void:
 
 	# If all 4 points are ours, this is our tetrahedron!
 	if our_points_count == 4:
-		print("SnapTetrahedronPuzzle: Tetrahedron completed with our points!")
 		_complete_puzzle()  # Call base class completion method
 
 
@@ -157,7 +155,6 @@ func _apply_puzzle_materials() -> void:
 		if mesh_instance and mesh_instance is MeshInstance3D:
 			# Apply material to the mesh instance
 			mesh_instance.material_override = puzzle_material
-			print("SnapTetrahedronPuzzle: Applied transparent material to ", point.name)
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -416,7 +413,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	# A non-default arrangement must not be restored by the reset timer.
 	enable_reset_timer = (solid == "loose")
 	_rebuild_now()
-	print("[SnapTetrahedronPuzzle] Config applied — solid=%s" % [solid])
 
 
 func _rebuild_now() -> void:

@@ -69,7 +69,6 @@ func _connect_scene_signals():
 		if scene_manager.has_signal("scene_transition_completed"):
 			if not scene_manager.scene_transition_completed.is_connected(_on_scene_transition_completed):
 				scene_manager.scene_transition_completed.connect(_on_scene_transition_completed)
-		print("AmbientSoundController: Connected to SceneManager signals")
 	else:
 		print("AmbientSoundController: SceneManager not found, retrying...")
 		# out-of-tree guard: get_tree() is null once a map is torn down
@@ -83,16 +82,13 @@ func _on_scene_transition_started(_from_scene: String, _to_scene: String, _trans
 	"""Pause ambient when transitioning between maps"""
 	if is_playing and not is_paused:
 		pause_ambient()
-		print("AmbientSoundController: 🔇 Paused for map transition")
 
 func _on_scene_transition_completed(_scene_name: String, _user_data: Dictionary = {}):
 	"""Resume ambient after map transition (if same preset)"""
 	if is_paused and persist_across_maps:
 		resume_ambient()
-		print("AmbientSoundController: 🔊 Resumed after map transition")
 
 func _on_global_ambient_request(new_preset: String):
-	print("AmbientSoundController: Received global request for: ", new_preset)
 	# Only switch if different
 	if new_preset != preset_name:
 		crossfade_to_preset(new_preset)
@@ -117,7 +113,6 @@ func load_preset(preset_id: String, volume: float = 0.0, fade_duration: float = 
 	
 	# Check if we should persist (don't restart if same preset and persist is enabled)
 	if preset_id == preset_name and is_playing and persist_across_maps:
-		print("AmbientSoundController: Preset '%s' persists across maps, not restarting" % preset_id)
 		return
 	
 	# If paused with same preset, just resume
@@ -127,7 +122,6 @@ func load_preset(preset_id: String, volume: float = 0.0, fade_duration: float = 
 	
 	# Check SoundBank for transition state - skip if same preset during transition
 	if sound_bank and sound_bank.should_skip_generation(preset_id):
-		print("AmbientSoundController: Same preset '%s' during transition, taking over" % preset_id)
 		preset_name = preset_id
 		volume_adjustment = volume
 		# Take over as the new controller
@@ -192,7 +186,6 @@ func _start_async_generation(preset: Dictionary):
 	# FAST PATH: Check if all sounds are already cached before any heavy setup
 	var all_cached = _check_all_sounds_cached(preset)
 	if all_cached:
-		print("AmbientSoundController: All sounds cached, starting immediately (fast path)")
 		_is_loading = false
 		call_deferred("start_ambient")
 		return
@@ -241,13 +234,11 @@ func _start_async_generation(preset: Dictionary):
 	
 	if sounds_needed.is_empty():
 		# All sounds cached (shouldn't reach here due to fast path, but just in case)
-		print("AmbientSoundController: All sounds cached, starting immediately")
 		_is_loading = false
 		loading_complete.emit(preset_name)
 		call_deferred("start_ambient")
 		return
 	
-	print("AmbientSoundController: Generating %d sounds in background..." % sounds_needed.size())
 	
 	# Queue all sounds for generation
 	for item in sounds_needed:
@@ -275,13 +266,11 @@ func _on_sound_generated_async(sound_id: String, stream: AudioStream):
 		if _pending_sounds.has(sound_id):
 			_pending_sounds[sound_id]["ready"] = true
 		
-		print("✅ Async generated: ", sound_id)
 
 func _on_all_sounds_ready():
 	"""Called when all queued sounds are generated"""
 	_is_loading = false
 	loading_complete.emit(preset_name)
-	print("AmbientSoundController: All sounds ready, starting ambient")
 	
 	# Fade out placeholder
 	_fade_out_placeholder()
@@ -300,7 +289,6 @@ func start_ambient():
 		print("⚠️ AmbientSoundController: Preset not found: ", preset_name)
 		return
 
-	print("🎵 Starting ambient preset: ", preset_name)
 
 	# Start continuous layers
 	_start_continuous_layers(preset)
@@ -358,7 +346,6 @@ func pause_ambient():
 	if not is_playing or is_paused:
 		return
 	
-	print("⏸️ Pausing ambient preset: ", preset_name)
 	_paused_positions.clear()
 	
 	# Pause continuous players and save positions
@@ -386,7 +373,6 @@ func resume_ambient():
 	if not is_paused:
 		return
 	
-	print("▶️ Resuming ambient preset: ", preset_name)
 	
 	# Resume continuous players
 	for player in continuous_players:
@@ -500,7 +486,6 @@ func _create_placeholder_player(config: Dictionary) -> AudioStreamPlayer:
 	player.play()
 	
 	_placeholder_player = player
-	print("🎵 Started placeholder layer: ", sound_id, " (while main song generates)")
 	
 	return player
 
@@ -514,7 +499,6 @@ func _fade_out_placeholder(duration: float = 3.0):
 	tween.tween_property(_placeholder_player, "volume_db", -40.0, duration)
 	tween.tween_callback(_placeholder_player.queue_free)
 	tween.tween_callback(func(): _placeholder_player = null)
-	print("🔊→🔇 Fading out placeholder layer")
 
 func _create_continuous_player(config: Dictionary, placeholder_config = null) -> AudioStreamPlayer:
 	"""Create and configure a continuous layer player"""
@@ -546,13 +530,11 @@ func _create_continuous_player(config: Dictionary, placeholder_config = null) ->
 		if stream is AudioStreamWAV:
 			stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
 		player.play()
-		print("✅ Started continuous layer: ", sound_id, " on bus ", player.bus)
 		
 		# Fade out placeholder if main sound is ready immediately
 		if placeholder_config and placeholder_config.get("fade_out_when_ready", false):
 			_fade_out_placeholder(placeholder_config.get("fade_duration", 3.0))
 	else:
-		print("⏳ Continuous layer waiting for sound: ", sound_id)
 		# Listen for this specific sound, pass placeholder config for fade
 		sound_bank.sound_generated.connect(_on_sound_generated_with_placeholder.bind(player, sound_id, placeholder_config))
 
@@ -568,7 +550,6 @@ func _on_sound_generated_with_placeholder(sound_id: String, player: AudioStreamP
 			
 			if is_playing:
 				player.play()
-				print("✅ Started delayed continuous layer: ", sound_id)
 				
 				# Fade out placeholder now that main sound is ready
 				if placeholder_config and placeholder_config.get("fade_out_when_ready", false):
@@ -588,7 +569,6 @@ func _on_sound_generated(sound_id: String, player: AudioStreamPlayer, target_id:
 			
 			if is_playing: # Only play if we are still in playing state
 				player.play()
-				print("✅ Started delayed continuous layer: ", sound_id)
 			
 			# Disconnect to avoid double handling
 			if sound_bank.sound_generated.is_connected(_on_sound_generated):

@@ -59,7 +59,6 @@ func _ready():
 	# Initialize timer
 	reset_timer()
 	
-	print("TimeLimitHazard: Initialized with ", time_limit, " seconds")
 
 func _setup_ui():
 	# Create background panel
@@ -110,7 +109,7 @@ func _find_game_manager():
 		game_manager = get_tree().current_scene.find_child("*Manager*", true, false)
 	
 	if game_manager:
-		print("TimeLimitHazard: Found game manager: ", game_manager.name)
+		pass
 	else:
 		print("TimeLimitHazard: Warning - No game manager found")
 	
@@ -226,7 +225,6 @@ func _time_expired():
 	current_time = 0
 	is_running = false
 	
-	print("TimeLimitHazard: Time expired!")
 	emit_signal("time_expired")
 	
 	# Play timeout sound
@@ -252,7 +250,6 @@ func _create_timeout_effect():
 	tween.tween_property(warning_overlay, "color", Color(0, 0, 0, 1.0), fade_out_time)
 
 func _restart_level():
-	print("TimeLimitHazard: Restarting level in ", restart_delay, " seconds...")
 	
 	# Create restart timer
 	var restart_timer = Timer.new()
@@ -263,7 +260,6 @@ func _restart_level():
 	restart_timer.start()
 
 func _perform_restart():
-	print("TimeLimitHazard: Performing level restart")
 	
 	# Try different restart methods
 	if game_manager and game_manager.has_method("restart_level"):
@@ -290,19 +286,15 @@ func _format_time(time_seconds: float) -> String:
 func start_timer():
 	is_running = true
 	is_paused = false
-	print("TimeLimitHazard: Timer started")
 
 func stop_timer():
 	is_running = false
-	print("TimeLimitHazard: Timer stopped")
 
 func pause_timer():
 	is_paused = true
-	print("TimeLimitHazard: Timer paused")
 
 func resume_timer():
 	is_paused = false
-	print("TimeLimitHazard: Timer resumed")
 
 func reset_timer():
 	current_time = time_limit
@@ -321,17 +313,14 @@ func reset_timer():
 	if warning_overlay:
 		warning_overlay.color = Color(1, 0, 0, 0)
 	
-	print("TimeLimitHazard: Timer reset to ", time_limit, " seconds")
 
 func add_time(seconds: float):
 	current_time += seconds
 	current_time = min(current_time, time_limit)  # Cap at original limit
-	print("TimeLimitHazard: Added ", seconds, " seconds. New time: ", current_time)
 
 func remove_time(seconds: float):
 	current_time -= seconds
 	current_time = max(current_time, 0)
-	print("TimeLimitHazard: Removed ", seconds, " seconds. New time: ", current_time)
 
 func set_time_limit(new_limit: float):
 	time_limit = new_limit

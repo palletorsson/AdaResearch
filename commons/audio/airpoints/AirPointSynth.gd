@@ -136,18 +136,6 @@ func _ready() -> void:
 	# Start note (continuous synthesis)
 	_trigger_note()
 	
-	print("SystemsMusicSynth: Ready and playing")
-	print("  REDESIGNED FOR BELL/PIANO/AIRY QUALITY")
-	print("  Voice 1: Triangle wave (soft)")
-	print("  Voice 2: Sine wave")
-	print("  Voice 3: Filtered noise (10% for air)")
-	print("  Filter: Two-pole low-pass (aggressive)")
-	print("  Attack: %.3fs (percussive)" % attack_time)
-	print("  Release: %.1fs (exponential decay)" % release_time)
-	print("  Frequency: %.1f Hz" % _current_frequency)
-	print("  Amplitude: %.2f" % _current_amplitude)
-	print("  Volume: %.1f dB" % volume_db)
-	print("  Listener connected: ", listener != null)
 
 
 func _process(delta: float) -> void:

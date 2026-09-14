@@ -1662,7 +1662,6 @@ func handle_vr_button(button: String, controller_name: String) -> void:
 ## Shorthand: #mirror, #4x4, #8x8, #brick, #herringbone
 ## Wallpaper groups: #p1, #p2, #pm, #p4m, #p6m, etc. or wallpaper_group: "p4m"
 func apply_grid_config(config_data: Dictionary) -> void:
-	print("PatternTilePuzzle: Applying config: %s" % config_data)
 
 	var needs_rebuild := false
 

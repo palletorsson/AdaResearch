@@ -28,8 +28,7 @@ func _ready():
 		lid_mesh = get_node_or_null(lid_mesh_path)
 
 	if lid_mesh:
-		print("[ViewClearanceZone] ✅ Initialized - lid mesh: %s (visible: %s)" % [lid_mesh.name, lid_mesh.visible])
-		print("[ViewClearanceZone] Collision mask: %d, Layer: %d" % [collision_mask, collision_layer])
+		pass
 	else:
 		print("[ViewClearanceZone] ⚠️ No lid mesh found - auto_find_lid: %s" % auto_find_lid)
 
@@ -40,11 +39,9 @@ func _auto_find_lid():
 		for child in parent.get_children():
 			if child is MeshInstance3D and ("lid" in child.name.to_lower() or "cover" in child.name.to_lower()):
 				lid_mesh = child
-				print("[ViewClearanceZone] Auto-found lid: %s" % child.name)
 				return
 
 func _on_area_entered(area: Area3D) -> void:
-	print("[ViewClearanceZone] 🔵 Area entered: %s (type: %s)" % [area.name, area.get_class()])
 
 	# Hide lid for ANY area entry (less restrictive for testing)
 	entry_count += 1
@@ -59,14 +56,12 @@ func _on_area_exited(area: Area3D) -> void:
 		_show_lid()
 
 func _on_body_entered(body: Node3D) -> void:
-	print("[ViewClearanceZone] 🟢 Body entered: %s (type: %s)" % [body.name, body.get_class()])
 
 	# Hide lid for ANY body entry (less restrictive for testing)
 	entry_count += 1
 	_hide_lid()
 
 func _on_body_exited(body: Node3D) -> void:
-	print("[ViewClearanceZone] 🟠 Body exited: %s" % body.name)
 
 	entry_count -= 1
 	if entry_count <= 0:
@@ -76,12 +71,10 @@ func _on_body_exited(body: Node3D) -> void:
 func _hide_lid():
 	if lid_mesh and lid_mesh.visible:
 		lid_mesh.visible = false
-		print("[ViewClearanceZone] 👁️ LID HIDDEN (entry_count: %d)" % entry_count)
 
 func _show_lid():
 	if lid_mesh and not lid_mesh.visible:
 		lid_mesh.visible = true
-		print("[ViewClearanceZone] 👁️ LID SHOWN (entry_count: %d)" % entry_count)
 
 # Check if this is a player-related area
 func _is_player_area(area: Area3D) -> bool:

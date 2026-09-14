@@ -39,7 +39,6 @@ var sample_rate: float = 44100.0  # Will be updated from AudioServer
 var beat_duration: float
 
 func _ready():
-	print("🎵 Initializing Original Disco Music Generator 🕺")
 	setup_audio_generation()
 	calculate_timing()
 	if disco_enabled:
@@ -63,11 +62,9 @@ func setup_audio_generation():
 func calculate_timing():
 	"""Calculate beat timing from BPM"""
 	beat_duration = 60.0 / bpm
-	print("🎵 Disco tempo: ", bpm, " BPM (", beat_duration, "s per beat)")
 
 func start_disco_music():
 	"""Start generating disco music"""
-	print("🎶 Starting original disco groove!")
 	var timer = Timer.new()
 	timer.wait_time = beat_duration / 4  # 16th note resolution
 	timer.timeout.connect(_on_beat_timer)
@@ -205,33 +202,27 @@ func set_disco_tempo(new_bpm: float):
 	"""Change the disco tempo"""
 	bpm = clamp(new_bpm, 80.0, 140.0)
 	calculate_timing()
-	print("🎵 Tempo changed to: ", bpm, " BPM")
 
 func trigger_disco_break():
 	"""Trigger a disco break/bridge section"""
-	print("🕺 DISCO BREAK! 💃")
 	# Could modify patterns here for breaks
 
 func add_disco_flourish():
 	"""Add a musical flourish for special moments"""
-	print("✨ Disco flourish! ✨")
 	disco_flourish_triggered.emit()
 
 func toggle_disco_music():
 	"""Toggle disco music on/off"""
 	disco_enabled = !disco_enabled
 	if disco_enabled:
-		print("🎵 Disco music: ON")
 		volume_db = linear_to_db(volume)
 	else:
-		print("🎵 Disco music: OFF")
 		volume_db = -80.0  # Mute
 
 func set_disco_volume(new_volume: float):
 	"""Set disco music volume (0.0 to 1.0)"""
 	volume = clamp(new_volume, 0.0, 1.0)
 	volume_db = linear_to_db(volume)
-	print("🔊 Disco volume: ", int(volume * 100), "%")
 
 # Integration with Array Disco Game
 func sync_with_array_pattern(pattern_name: String):
@@ -275,11 +266,9 @@ func set_educational_mode(enabled: bool):
 		# Softer volumes for classroom use
 		volume = 0.4
 		set_disco_volume(volume)
-		print("🎓 Educational mode: ON (quieter)")
 	else:
 		volume = 0.7
 		set_disco_volume(volume)
-		print("🕺 Party mode: ON (louder)")
 
 func sync_with_lesson_phase(lesson_phase: String):
 	"""Sync music with specific lesson phases"""
@@ -304,7 +293,6 @@ func create_custom_pattern(kick: Array[bool], hihat: Array[bool], bass: Array[in
 		hihat_pattern = hihat
 	if bass.size() == 8:
 		bass_pattern = bass
-	print("🎵 Custom disco pattern applied!")
 
 func get_musical_info() -> Dictionary:
 	"""Get current musical information for debugging/display"""

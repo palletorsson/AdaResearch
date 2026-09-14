@@ -242,7 +242,6 @@ func create_stepped_pyramid() -> void:
 		collision_body.rotate_z(deg_to_rad(90.0))
 		collision_body.scale *= 0.5
 
-	print("Stepped pyramid created with %d vertices and %d faces" % [scaled_vertices.size(), faces.size()])
 
 func apply_queer_material():
 	var material = ShaderMaterial.new()

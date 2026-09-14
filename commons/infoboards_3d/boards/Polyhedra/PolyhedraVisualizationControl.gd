@@ -117,4 +117,3 @@ func load_visualization():
 			camera.position = Vector3(0, 1, 2.5)
 			camera.look_at(Vector3.ZERO, Vector3.UP)
 
-	print("PolyhedraVisualizationControl: Loaded visualization '%s' from %s" % [visualization_type, scene_path])

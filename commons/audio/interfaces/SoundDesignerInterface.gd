@@ -424,47 +424,39 @@ func _ready():
 
 func connect_signals():
 	# Connect signals after UI is created
-	print("🔌 Connecting signals...")
 	
 	if sound_type_option:
 		sound_type_option.item_selected.connect(_on_sound_type_changed)
-		print("✅ Sound type option connected")
 	else:
 		print("❌ Sound type option not found")
 		
 	if preview_button:
 		preview_button.pressed.connect(_on_preview_pressed)
-		print("✅ Preview button connected")
 	else:
 		print("❌ Preview button not found")
 		
 	if stop_button:
 		stop_button.pressed.connect(_on_stop_pressed)
-		print("✅ Stop button connected")
 	else:
 		print("❌ Stop button not found")
 		
 	if save_button:
 		save_button.pressed.connect(_on_save_pressed)
-		print("✅ Save button connected")
 	else:
 		print("❌ Save button not found")
 		
 	if load_button:
 		load_button.pressed.connect(_on_load_pressed)
-		print("✅ Load button connected")
 	else:
 		print("❌ Load button not found")
 		
 	if export_button:
 		export_button.pressed.connect(_on_export_pressed)
-		print("✅ Export button connected")
 	else:
 		print("❌ Export button not found")
 		
 	if realtime_toggle:
 		realtime_toggle.toggled.connect(_on_realtime_toggled)
-		print("✅ Realtime toggle connected")
 	else:
 		print("❌ Realtime toggle not found")
 		
@@ -472,7 +464,6 @@ func connect_signals():
 	var copy_json_button = get_node_or_null("VBox/Controls/CopyJsonButton")
 	if copy_json_button:
 		copy_json_button.pressed.connect(_show_json_popup)
-		print("✅ Copy JSON button connected")
 	else:
 		print("❌ Copy JSON button not found")
 
@@ -654,11 +645,9 @@ func setup_ui():
 	parameters_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(parameters_container)
 	
-	print("✅ UI setup complete - all elements created")
 
 func load_parameters_from_files():
 	"""Load sound parameters from JSON files in the restructured directories"""
-	print("📂 Loading sound parameters from JSON files...")
 	
 	# Use the enhanced parameter loader to get all parameters
 	var loaded_params = EnhancedParameterLoader.load_all_parameters()
@@ -666,7 +655,6 @@ func load_parameters_from_files():
 	if loaded_params.size() > 0:
 		# Replace the hardcoded parameters with loaded ones
 		sound_parameters = loaded_params
-		print("✅ Loaded %d sound parameter sets from JSON files" % sound_parameters.size())
 	else:
 		print("⚠️ No parameters loaded from JSON, keeping hardcoded defaults")
 
@@ -805,7 +793,6 @@ func setup_realtime_timer():
 	update_timer.one_shot = false  # Continuous timer
 	add_child(update_timer)
 	update_timer.start()
-	print("⏰ Real-time timer started (50ms intervals)")
 
 func populate_sound_types():
 	if not sound_type_option:
@@ -819,7 +806,6 @@ func populate_sound_types():
 		var display_name = _create_display_name_with_emoji(sound_key)
 		sound_type_option.add_item(display_name)
 	
-	print("🎵 Populated %d sound types from loaded parameters" % sound_parameters.size())
 
 func _create_display_name_with_emoji(sound_key: String) -> String:
 	"""Create a display name with emoji for a sound key"""
@@ -967,7 +953,6 @@ func create_parameter_control_in_column(column: VBoxContainer, param_name: Strin
 	else:
 		create_slider_control_compact(control_container, param_name, param_config)
 	
-	print("✅ Created compact parameter control for: %s" % param_name)
 
 func create_parameter_control(_param_name: String, param_config: Dictionary):
 	# Legacy function - now redirects to column version
@@ -1007,7 +992,6 @@ func create_slider_control_compact(container: VBoxContainer, param_name: String,
 	
 	# Connect the signal with proper lambda function
 	slider.value_changed.connect(func(value): _on_slider_changed(param_name, value))
-	print("🎛️ Created compact slider for %s (%.2f to %.2f, current: %.2f)" % [param_name, slider.min_value, slider.max_value, slider.value])
 	
 	container.add_child(slider)
 	parameter_controls[param_name] = slider
@@ -1037,8 +1021,6 @@ func create_option_control_compact(container: VBoxContainer, param_name: String,
 	container.add_child(option_button)
 	parameter_controls[param_name] = option_button
 	
-	print("🎛️ Created compact option control for %s (options: %s, current: %s)" % [param_name, options, current_value])
-	print("🔗 Signal connected for %s option control (FIXED LAMBDA)" % param_name)
 	
 	# Update value label
 	update_value_label(param_name, current_value)
@@ -1071,8 +1053,6 @@ func create_slider_control(container: HBoxContainer, param_name: String, config:
 	
 	# Connect the signal with proper lambda function
 	slider.value_changed.connect(func(value): _on_slider_changed(param_name, value))
-	print("🎛️ Created slider for %s (%.2f to %.2f, current: %.2f)" % [param_name, slider.min_value, slider.max_value, slider.value])
-	print("🔗 Signal connected for %s slider" % param_name)
 	
 	container.add_child(slider)
 	parameter_controls[param_name] = slider
@@ -1103,14 +1083,12 @@ func create_option_control(container: HBoxContainer, param_name: String, config:
 	update_value_label(param_name, current_value)
 
 func update_value_label(param_name: String, value):
-	print("📝 Updating value label for %s with value: %s" % [param_name, value])
 	if value_labels.has(param_name):
 		var label = value_labels[param_name]
 		if value is float:
 			label.text = "%.2f" % value
 		else:
 			label.text = str(value)
-		print("✅ Updated %s = %s" % [param_name, label.text])  # Debug output
 	else:
 		print("❌ No value label found for parameter: %s" % param_name)
 		print("🔍 Available value labels: %s" % value_labels.keys())
@@ -1129,7 +1107,6 @@ func _on_sound_type_changed(index: int):
 	var sound_keys = sound_parameters.keys()
 	if index < sound_keys.size():
 		current_sound_key = sound_keys[index]
-		print("🎵 Changed to sound: %s" % current_sound_key)
 		await create_parameter_controls()
 		if realtime_enabled:
 			trigger_audio_update()
@@ -1137,16 +1114,12 @@ func _on_sound_type_changed(index: int):
 		print("❌ Invalid sound index: %d" % index)
 
 func _on_slider_changed(param_name: String, value: float):
-	print("🎛️ SLIDER MOVED: %s changed to %.2f" % [param_name, value])  # Enhanced debug output
-	print("🔑 Sound key: %s" % current_sound_key)
 	
 	sound_parameters[current_sound_key][param_name]["value"] = value
 	update_value_label(param_name, value)
-	print("Slider changed: %s = %.2f" % [param_name, value])  # Debug output
 	
 	# Force immediate audio update if real-time is enabled
 	if realtime_enabled:
-		print("🔄 Triggering real-time audio update...")
 		# Cancel any pending update and do it immediately
 		needs_audio_update = false
 		update_audio_immediately()
@@ -1154,20 +1127,15 @@ func _on_slider_changed(param_name: String, value: float):
 		print("⏸️ Real-time disabled, no audio update")
 
 func _on_option_changed(param_name: String, index: int):
-	print("🎚️ OPTION CHANGED TRIGGERED: %s to index %d" % [param_name, index])
 	var option_button = parameter_controls[param_name] as OptionButton
 	var value = option_button.get_item_text(index)
 	
-	print("🔑 Sound key: %s" % current_sound_key)
-	print("📝 Setting %s.%s = %s" % [current_sound_key, param_name, value])
 	
 	sound_parameters[current_sound_key][param_name]["value"] = value
 	update_value_label(param_name, value)
-	print("✅ Option changed: %s = %s" % [param_name, value])
 	
 	# Force immediate audio update if real-time is enabled
 	if realtime_enabled:
-		print("🔄 Real-time enabled, triggering immediate audio update...")
 		# Cancel any pending update and do it immediately
 		needs_audio_update = false
 		update_audio_immediately()
@@ -1176,7 +1144,6 @@ func _on_option_changed(param_name: String, index: int):
 
 func _on_realtime_toggled(enabled: bool):
 	realtime_enabled = enabled
-	print("🔄 Real-time updates: %s" % ("ENABLED" if enabled else "DISABLED"))
 	if enabled:
 		# Start playing current sound when real-time is enabled
 		update_audio_immediately()
@@ -1184,7 +1151,6 @@ func _on_realtime_toggled(enabled: bool):
 		# Stop audio when real-time is disabled
 		if audio_player and audio_player.playing:
 			audio_player.stop()
-			print("⏹️ Audio stopped (real-time disabled)")
 
 func trigger_audio_update():
 	needs_audio_update = true
@@ -1196,7 +1162,6 @@ func _on_realtime_update():
 
 func update_audio_immediately():
 	"""Immediately update and play audio with current parameters"""
-	print("🎵 Immediate audio update... (Real-time: %s)" % realtime_enabled)
 	
 	if not audio_player:
 		print("❌ Audio player not found")
@@ -1205,11 +1170,9 @@ func update_audio_immediately():
 	# Stop current audio
 	if audio_player.playing:
 		audio_player.stop()
-		print("⏸️ Stopped previous audio")
 	
 	var params = get_current_parameter_values(current_sound_key)
 	
-	print("🎛️ Using parameters for %s: %s" % [current_sound_key, params])
 	
 	# Generate new audio with current parameters - need to get the enum type
 	var sound_type = get_type_from_sound_key(current_sound_key)
@@ -1217,7 +1180,6 @@ func update_audio_immediately():
 	if audio_stream:
 		audio_player.stream = audio_stream
 		audio_player.play()
-		print("▶️ Real-time audio started playing (Duration: %.2fs)" % params.get("duration", 0.0))
 		
 		# Update visualizations
 		update_visualizations()
@@ -1255,18 +1217,14 @@ func get_current_parameter_values(sound_key: String) -> Dictionary:
 			# Provide a safe default
 			params[param_name] = 0.0
 	
-	print("📊 Current %s parameters: %s" % [sound_key, params])
 	return params
 
 func _on_preview_pressed():
-	print("🔊 Preview button pressed!")
 	update_audio()
 
 func _on_stop_pressed():
-	print("⏹️ Stop button pressed!")
 	if audio_player and audio_player.playing:
 		audio_player.stop()
-		print("🛑 Audio stopped")
 	else:
 		print("🔇 No audio playing")
 
@@ -1351,7 +1309,6 @@ func _load_from_file(file_path: String):
 							sound_parameters[sound_key][param_name]["value"] = loaded_data[sound_key][param_name]
 			
 			create_parameter_controls()
-			print("✅ Sound parameters loaded from: ", file_path)
 		else:
 			print("❌ Failed to parse JSON file: ", file_path)
 	else:
@@ -1426,7 +1383,6 @@ func _show_json_popup():
 	# Clean up when closed
 	popup.close_requested.connect(popup.queue_free)
 	
-	print("📋 JSON popup displayed - ready for copying!")
 
 # Visualization functions
 func initialize_visualizations():
@@ -1436,7 +1392,6 @@ func initialize_visualizations():
 	current_spectrum_data.resize(spectrum_bands)
 	current_spectrum_data.fill(0.0)
 	
-	print("📊 Visualizations initialized - Waveform: %d samples, Spectrum: %d bands" % [visualization_sample_count, spectrum_bands])
 
 func update_visualizations():
 	"""Update waveform and spectrum data from current audio parameters"""
@@ -1763,19 +1718,16 @@ func _execute_exercise(params: Dictionary):
 	# Play the sound to demonstrate
 	_on_preview_pressed()
 	
-	print("✅ Exercise completed! Parameters applied: ", params)
 
 func _on_tutorial_mode_toggled(enabled: bool):
 	"""Toggle tutorial mode on/off"""
 	tutorial_mode = enabled
 	
 	if tutorial_mode:
-		print("📚 Tutorial mode activated - Educational features enabled")
 		theory_panel.visible = true
 		update_theory_display()
 		create_interactive_exercises()
 	else:
-		print("🎛️ Expert mode activated - Simplified interface")
 		theory_panel.visible = false
 
 func calculate_lesson_progress() -> float:

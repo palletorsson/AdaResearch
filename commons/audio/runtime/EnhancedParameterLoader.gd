@@ -23,7 +23,6 @@ static func load_all_parameters() -> Dictionary:
 	if is_initialized and cached_parameters.size() > 0:
 		return cached_parameters
 	
-	print("🔄 Loading parameters from all categories...")
 	cached_parameters.clear()
 	
 	var base_path = "res://commons/audio/parameters/"
@@ -33,7 +32,6 @@ static func load_all_parameters() -> Dictionary:
 		load_parameters_from_directory(category_path, category)
 	
 	is_initialized = true
-	print("✅ Loaded %d sound parameter sets" % cached_parameters.size())
 	return cached_parameters
 
 # Load parameters from a specific directory
@@ -43,7 +41,6 @@ static func load_parameters_from_directory(dir_path: String, category: String):
 		print("⚠️ Cannot access directory: %s" % dir_path)
 		return
 	
-	print("📂 Loading from %s category..." % category)
 	
 	dir.list_dir_begin()
 	var file_name = dir.get_next()
@@ -58,13 +55,11 @@ static func load_parameters_from_directory(dir_path: String, category: String):
 			if params.size() > 0:
 				cached_parameters[sound_key] = params
 				count += 1
-				print("  ✅ %s" % sound_key)
 			else:
 				print("  ❌ Failed to load %s" % sound_key)
 		
 		file_name = dir.get_next()
 	
-	print("📊 Loaded %d parameters from %s category" % [count, category])
 
 # Load a single JSON parameter file
 static func load_json_parameters(file_path: String) -> Dictionary:

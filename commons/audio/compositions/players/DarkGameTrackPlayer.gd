@@ -77,9 +77,6 @@ signal track_started()
 signal beat_triggered(beat_number: int)
 
 func _ready():
-	print("🎵 ADVANCED DARK GAME TRACK PLAYER 🎵")
-	print("Setting up complex 64-step rhythmic patterns...")
-	print("BPM: %.0f | Pattern Length: %d steps" % [BPM, pattern_length])
 	
 	_analyze_rhythm_patterns()
 	_setup_audio_players()
@@ -96,14 +93,12 @@ func _auto_load_config():
 	"""Try to auto-load JSON configuration"""
 	var config_path = "res://commons/audio/configs/dark_game_track_simple.json"
 	if FileAccess.file_exists(config_path):
-		print("🔧 Auto-loading configuration...")
 		load_from_json(config_path)
 	else:
 		print("ℹ️ No auto-config found, using default patterns")
 
 func _analyze_rhythm_patterns():
 	"""Analyze patterns using rhythm theory concepts"""
-	print("   🔍 Analyzing rhythm patterns...")
 	
 	# Identify strong beats (downbeats) - every 16th step (beat 1 of each bar)
 	for i in range(0, pattern_length, 16):
@@ -125,10 +120,6 @@ func _analyze_rhythm_patterns():
 		if hihat_pattern[i] == 1 and kick_pattern[i] == 0 and snare_pattern[i] == 0:
 			ghost_positions.append(i)
 	
-	print("   • Strong beats: %d positions" % strong_beats.size())
-	print("   • Back beats: %d positions" % back_beats.size()) 
-	print("   • Weak beats: %d positions" % weak_beats.size())
-	print("   • Ghost positions: %d positions" % ghost_positions.size())
 
 func _setup_audio_players():
 	"""Setup separate audio players for each track element"""
@@ -175,7 +166,6 @@ func _setup_audio_players():
 	blade_runner_player.volume_db = blade_runner_volume
 	add_child(blade_runner_player)
 	
-	print("   ✅ Advanced audio players configured")
 
 func _setup_rhythm_system():
 	"""Setup advanced rhythm system with 16th note precision"""
@@ -196,12 +186,9 @@ func _setup_rhythm_system():
 	bar_timer.timeout.connect(_on_bar)
 	add_child(bar_timer)
 	
-	print("   ✅ Advanced rhythm system ready at %.0f BPM" % BPM)
-	print("   🎵 16th note precision with %.1f%% swing" % (swing_amount * 100))
 
 func _generate_all_sounds():
 	"""Pre-generate all sounds for the track"""
-	print("   🔧 Generating track sounds...")
 	
 	# Generate individual drum sounds
 	sound_cache[TrackSound.DARK_808_KICK] = _generate_sound(TrackSound.DARK_808_KICK, 1.5)
@@ -215,7 +202,6 @@ func _generate_all_sounds():
 	sound_cache[TrackSound.DEEP_RUMBLE] = _generate_sound(TrackSound.DEEP_RUMBLE, 12.0)
 	sound_cache[TrackSound.BLADE_RUNNER_HIT] = _generate_sound(TrackSound.BLADE_RUNNER_HIT, 4.0)
 	
-	print("   ✅ All advanced sounds generated and cached")
 
 # ===== TRACK CONTROL =====
 
@@ -224,11 +210,6 @@ func start_track():
 	if is_playing:
 		return
 	
-	print("🎵 Starting advanced dark game track...")
-	print("   • 64-step complex patterns")
-	print("   • Sophisticated syncopation")
-	print("   • Ghost notes and rhythm theory")
-	print("   • %.0f BPM high-energy groove" % BPM)
 	
 	is_playing = true
 	current_step = 0
@@ -243,7 +224,6 @@ func start_track():
 	bar_timer.start()
 	
 	track_started.emit()
-	print("   🎵 Advanced track playing at %.0f BPM" % BPM)
 
 func stop_track():
 	"""Stop the advanced track"""
@@ -341,7 +321,6 @@ func _on_step():
 	if blade_runner_pattern[pattern_pos] == 1:
 		blade_runner_player.stream = sound_cache[TrackSound.BLADE_RUNNER_HIT]
 		blade_runner_player.play()
-		print("   ⚡ Blade Runner hit at step %d" % current_step)
 	
 	# Emit step signal for external sync
 	beat_triggered.emit(current_step)
@@ -352,7 +331,6 @@ func _on_step():
 	if current_step >= pattern_length:
 		current_step = 0
 		phrase_position += 1
-		print("   🔄 64-step phrase completed (%d)" % phrase_position)
 		if not loop_track:
 			stop_track()
 
@@ -366,9 +344,7 @@ func _on_bar():
 	
 	# Log structural information
 	if bar_in_phrase == 1:
-		print("   📊 Bar %d: Phrase start" % current_bar)
-	else:
-		print("   📊 Bar %d" % current_bar)
+		pass
 
 # ===== SOUND GENERATION (from working test) =====
 
@@ -567,7 +543,6 @@ func set_bpm(new_bpm: float):
 	if bar_timer:
 		bar_timer.wait_time = BEAT_DURATION * 4.0
 	
-	print("🎵 BPM changed to %.0f" % new_bpm)
 
 func set_master_volume(volume_db: float):
 	"""Set overall track volume"""
@@ -600,7 +575,6 @@ func customize_pattern(element: String, pattern: Array):
 	
 	# Re-analyze patterns after change
 	_analyze_rhythm_patterns()
-	print("🎵 Updated %s pattern (%d steps)" % [element, pattern.size()])
 
 func get_track_info() -> Dictionary:
 	"""Get current advanced track information"""
@@ -628,11 +602,9 @@ func get_track_info() -> Dictionary:
 func set_swing(amount: float):
 	"""Set swing amount (0.0 to 0.5)"""
 	swing_amount = clamp(amount, 0.0, 0.5)
-	print("🎵 Swing set to %.1f%%" % (swing_amount * 100))
 
 func analyze_syncopation():
 	"""Analyze and report syncopation in current patterns"""
-	print("🎵 SYNCOPATION ANALYSIS 🎵")
 	
 	var kick_on_weak = 0
 	var snare_on_weak = 0
@@ -647,9 +619,6 @@ func analyze_syncopation():
 			if i in weak_beats:
 				snare_on_weak += 1
 	
-	print("   • Kick hits on weak beats: %d/%d" % [kick_on_weak, total_hits])
-	print("   • Snare hits on weak beats: %d" % snare_on_weak)
-	print("   • Syncopation level: %.1f%%" % ((kick_on_weak + snare_on_weak) / float(total_hits) * 100))
 
 func load_from_json(json_path: String):
 	"""Load patterns from JSON file"""
@@ -709,46 +678,21 @@ func load_from_json(json_path: String):
 			blade_runner_volume = volumes.blade_runner
 			blade_runner_player.volume_db = blade_runner_volume + master_volume
 		
-		print("   🔊 Applied volume settings from JSON")
 	
 	# Load track name if available
-	if "name" in data:
-		print("   📛 Track: %s" % data.name)
 	
-	print("✅ Loaded complete configuration from %s" % json_path)
 	analyze_syncopation()  # Analyze the newly loaded patterns
 
 func show_json_utilization():
 	"""Show how JSON features are being utilized"""
-	print("🎵 JSON FEATURE UTILIZATION 🎵")
 	
 	# Pattern utilization
-	print("   📊 PATTERNS (64 steps each):")
-	print("      • Kick: %d hits" % kick_pattern.count(1))
-	print("      • Hi-hat: %d hits" % hihat_pattern.count(1))
-	print("      • Snare: %d hits" % snare_pattern.count(1))
-	print("      • Effect: %d hits" % effect_pattern.count(1))
-	print("      • Blade Runner: %d hits" % blade_runner_pattern.count(1))
 	
 	# Volume utilization
-	print("   🔊 VOLUME SETTINGS:")
-	print("      • Kick: %.1f dB" % kick_volume)
-	print("      • Hi-hat: %.1f dB" % hihat_volume)
-	print("      • Bass: %.1f dB" % bass_volume)
-	print("      • Ambient: %.1f dB" % ambient_volume)
-	print("      • Effect: %.1f dB" % effect_volume)
-	print("      • Blade Runner: %.1f dB" % blade_runner_volume)
 	
 	# BPM utilization
-	print("   ⚡ TEMPO: %.0f BPM" % BPM)
 	
 	# Advanced features being applied
-	print("   🎛️ ADVANCED FEATURES ACTIVE:")
-	print("      • Swing groove: %.1f%%" % (swing_amount * 100))
-	print("      • Ghost note system: %.1f dB" % ghost_note_volume)
-	print("      • Accent system: +%.1f dB boost" % accent_boost)
-	print("      • Pattern analysis: ✅")
-	print("      • Syncopation detection: ✅")
 
 # ===== CONSOLE COMMANDS =====
 
@@ -795,10 +739,8 @@ func _input(event):
 		info()
 	elif event.is_action_pressed("ui_up"):       # Up = Volume up
 		set_master_volume(master_volume + 3.0)
-		print("🔊 Master Volume: %.1f dB" % master_volume)
 	elif event.is_action_pressed("ui_down"):     # Down = Volume down
 		set_master_volume(master_volume - 3.0)
-		print("🔉 Master Volume: %.1f dB" % master_volume)
 	elif event.is_action_pressed("ui_right"):    # Right = More swing
 		set_swing(swing_amount + 0.05)
 	elif event.is_action_pressed("ui_left"):     # Left = Less swing
@@ -816,20 +758,15 @@ func _input(event):
 			KEY_1: # 1-5 = Toggle individual elements
 				kick_volume = 0.0 if kick_volume < -20.0 else -999.0
 				kick_player.volume_db = kick_volume + master_volume
-				print("🥁 Kick: %s" % ("ON" if kick_volume > -20.0 else "OFF"))
 			KEY_2:
 				hihat_volume = 0.0 if hihat_volume < -20.0 else -999.0
 				hihat_player.volume_db = hihat_volume + master_volume
-				print("🎩 Hi-hat: %s" % ("ON" if hihat_volume > -20.0 else "OFF"))
 			KEY_3:
 				snare_volume = -3.0 if snare_volume < -20.0 else -999.0
 				snare_player.volume_db = snare_volume + master_volume
-				print("🥁 Snare: %s" % ("ON" if snare_volume > -20.0 else "OFF"))
 			KEY_4:
 				effect_volume = -12.0 if effect_volume < -20.0 else -999.0
 				effect_player.volume_db = effect_volume + master_volume
-				print("⚡ Effects: %s" % ("ON" if effect_volume > -20.0 else "OFF"))
 			KEY_5:
 				blade_runner_volume = -1.0 if blade_runner_volume < -20.0 else -999.0
 				blade_runner_player.volume_db = blade_runner_volume + master_volume
-				print("🎬 Blade Runner: %s" % ("ON" if blade_runner_volume > -20.0 else "OFF"))

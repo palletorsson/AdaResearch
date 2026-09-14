@@ -9,8 +9,6 @@ func _ready() -> void:
 	_build_lighting()
 	_build_camera()
 	_spawn_creatures()
-	print("[LegDemo] Ready — 1, 2, 3, 4, 5, 6 leg critters + beast_demo reference")
-	print("[LegDemo] WASD moves all walking critters. All auto-patrol too.")
 
 func _spawn_creatures() -> void:
 	# Layout: spread across X axis, 6 spacing
@@ -28,7 +26,6 @@ func _spawn_creatures() -> void:
 		var one_leg: Node = one_leg_scene.instantiate()
 		one_leg.position = Vector3(-15, 0, 0)
 		add_child(one_leg)
-		print("[LegDemo] Spawned one-leg at X=-15")
 
 	# Two-leg critter — stepping gait
 	var two_leg_scene: PackedScene = load("res://commons/hazards/octapod_crawler/two_leg_critter.tscn")
@@ -36,7 +33,6 @@ func _spawn_creatures() -> void:
 		var two_leg: Node = two_leg_scene.instantiate()
 		two_leg.position = Vector3(-9, 0, 0)
 		add_child(two_leg)
-		print("[LegDemo] Spawned two-leg at X=-9")
 
 	# Three-leg critter — stepping gait
 	var three_leg_scene: PackedScene = load("res://commons/hazards/octapod_crawler/three_leg_critter.tscn")
@@ -44,7 +40,6 @@ func _spawn_creatures() -> void:
 		var three_leg: Node = three_leg_scene.instantiate()
 		three_leg.position = Vector3(-3, 0, 0)
 		add_child(three_leg)
-		print("[LegDemo] Spawned three-leg at X=-3")
 
 	# Four-leg critter — stepping gait
 	var four_leg_scene: PackedScene = load("res://commons/hazards/octapod_crawler/four_leg_critter.tscn")
@@ -52,7 +47,6 @@ func _spawn_creatures() -> void:
 		var four_leg: Node = four_leg_scene.instantiate()
 		four_leg.position = Vector3(3, 0, 0)
 		add_child(four_leg)
-		print("[LegDemo] Spawned four-leg at X=3")
 
 	# Five-leg critter — stepping gait
 	var five_leg_scene: PackedScene = load("res://commons/hazards/octapod_crawler/five_leg_critter.tscn")
@@ -60,7 +54,6 @@ func _spawn_creatures() -> void:
 		var five_leg: Node = five_leg_scene.instantiate()
 		five_leg.position = Vector3(9, 0, 0)
 		add_child(five_leg)
-		print("[LegDemo] Spawned five-leg at X=9")
 
 	# Six-leg critter — stepping gait
 	var six_leg_scene: PackedScene = load("res://commons/hazards/octapod_crawler/six_leg_critter.tscn")
@@ -68,7 +61,6 @@ func _spawn_creatures() -> void:
 		var six_leg: Node = six_leg_scene.instantiate()
 		six_leg.position = Vector3(15, 0, 0)
 		add_child(six_leg)
-		print("[LegDemo] Spawned six-leg at X=15")
 
 	# Beast_demo reference (scaled down)
 	var beast_scene: PackedScene = load("res://commons/hazards/octapod_crawler/beast_demo.tscn")
@@ -80,7 +72,6 @@ func _spawn_creatures() -> void:
 			beast_node.scale = Vector3(0.3, 0.3, 0.3)
 			beast_node.position = Vector3(0, 2.2 * 0.3, -8)
 			add_child(beast_node)
-			print("[LegDemo] Spawned beast_demo reference at Z=-8")
 		beast_world.queue_free()
 
 	# Info labels

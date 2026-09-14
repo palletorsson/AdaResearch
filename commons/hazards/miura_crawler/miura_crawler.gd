@@ -103,7 +103,6 @@ func _ready() -> void:
 	# Start in CRAWL for visibility during dev
 	_set_state(State.CRAWL)
 	_fold_amount = 0.7
-	print("MiuraCrawler: READY at %s" % global_position)
 	# WARNING dressing, appended LAST so the mesh root and every crease keep their
 	# child indices. "none" adds nothing at all — the legacy lineage.
 	_build_warning()

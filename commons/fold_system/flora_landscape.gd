@@ -153,7 +153,6 @@ func _place_real_scenes(layers: Dictionary, w: int, d: int) -> void:
 			if inst.has_method("apply_grid_config"):
 				inst.apply_grid_config({})
 			add_child(inst)
-			print("FloraSpawner: placed real %s at [%d,%d]" % [flora_type, p["r"], p["c"]])
 
 
 func _build_flora(layers: Dictionary, w: int, d: int) -> void:

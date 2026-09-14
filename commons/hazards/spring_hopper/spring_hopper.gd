@@ -186,7 +186,6 @@ func _ready() -> void:
 	add_to_group("enemy")
 	add_to_group("spring_enemy")
 	_set_state(State.IDLE)
-	print("SpringHopper: READY at %s" % global_position)
 
 
 func _physics_process(delta: float) -> void:

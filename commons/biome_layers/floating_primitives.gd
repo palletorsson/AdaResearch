@@ -136,8 +136,6 @@ func _apply_sphere_field(ctx: Dictionary) -> void:
 
 	field.position = grid_center
 	add_child(field)
-	print("  [floating_primitives] sphere-field face — count=%d bounds=%s" % [
-		field.sphere_count, str(field.bounds)])
 
 
 func _parse_color_param(v) -> Color:
@@ -189,7 +187,6 @@ func _spawn_multimesh(kind: String, transforms: Array) -> void:
 	mmi.custom_aabb = AABB(Vector3(-50, -10, -50), Vector3(100, 60, 100))
 	mmi.gi_mode = GeometryInstance3D.GI_MODE_DISABLED
 	add_child(mmi)
-	print("  [floating_primitives] spawned MultiMesh kind=%s count=%d" % [kind, transforms.size()])
 
 
 func _mesh_for_kind(kind: String) -> Mesh:

@@ -39,7 +39,6 @@ var current_faces: Array[Array] = []
 func _ready():
 	setup_mesh_builder()
 	setup_sample_timer()
-	print("Continuous Mesh Builder initialized - Sampling every ", sample_interval, " seconds")
 
 func setup_mesh_builder():
 	"""Initialize the mesh building system"""
@@ -100,7 +99,6 @@ func add_tracked_point(point: Node3D):
 	"""Add a point to be tracked and sampled"""
 	if point not in tracked_points:
 		tracked_points.append(point)
-		print("Now tracking point: ", point.name)
 		
 		# Create visual indicator if enabled
 		if show_sample_points:
@@ -117,7 +115,6 @@ func remove_tracked_point(point: Node3D):
 			point_instances[index].queue_free()
 			point_instances.remove_at(index)
 		
-		print("Stopped tracking point: ", point.name)
 
 func create_point_indicator(point: Node3D):
 	"""Create visual indicator for tracked point"""
@@ -155,7 +152,6 @@ func _on_sample_timer_timeout():
 	if sample_history.size() > max_sample_points:
 		sample_history.pop_front()
 	
-	print("Sampled ", current_positions.size(), " points at time ", current_time)
 	
 	# Rebuild mesh if auto-triangulation is enabled
 	if auto_triangulate and sample_history.size() >= 3:
@@ -317,7 +313,6 @@ func create_mesh_from_data():
 	if wireframe_overlay and wireframe_instance:
 		wireframe_instance.mesh = new_mesh
 	
-	print("Mesh rebuilt with ", current_vertices.size(), " vertices and ", current_faces.size(), " faces")
 
 func add_triangle_to_surface(face: Array):
 	"""Add a triangle to the surface tool"""
@@ -356,21 +351,18 @@ func clear_sample_history():
 	if wireframe_instance:
 		wireframe_instance.mesh = null
 	
-	print("Sample history cleared")
 
 func set_sample_interval(new_interval: float):
 	"""Change the sampling interval"""
 	sample_interval = max(0.1, new_interval)
 	if sample_timer:
 		sample_timer.wait_time = sample_interval
-	print("Sample interval set to: ", sample_interval, " seconds")
 
 func set_triangulation_method(method: String):
 	"""Change triangulation method and rebuild mesh"""
 	triangulation_method = method
 	if sample_history.size() >= 3:
 		rebuild_mesh()
-	print("Triangulation method set to: ", method)
 
 func export_mesh_data() -> Dictionary:
 	"""Export current mesh data for saving/analysis"""
@@ -392,7 +384,6 @@ func import_mesh_data(data: Dictionary):
 		sample_history = data["sample_history"]
 	
 	create_mesh_from_data()
-	print("Mesh data imported")
 
 func get_mesh_statistics() -> Dictionary:
 	"""Get statistics about the current mesh"""
@@ -428,7 +419,6 @@ func connect_to_split_quad(split_quad: Node3D):
 	for sphere in grab_spheres:
 		add_tracked_point(sphere)
 	
-	print("Connected to SplitQuad with ", grab_spheres.size(), " tracked points")
 
 # === DEBUG AND VISUALIZATION ===
 
@@ -441,7 +431,6 @@ func _input(event):
 		match event.keycode:
 			KEY_F5:
 				force_sample()
-				print("Forced sample")
 			KEY_F6:
 				clear_sample_history()
 			KEY_F7:
@@ -462,7 +451,6 @@ func toggle_wireframe():
 	"""Toggle wireframe overlay visibility"""
 	if wireframe_instance:
 		wireframe_instance.visible = not wireframe_instance.visible
-		print("Wireframe overlay: ", "ON" if wireframe_instance.visible else "OFF")
 
 func _on_tree_exiting():
 	"""Cleanup when exiting"""

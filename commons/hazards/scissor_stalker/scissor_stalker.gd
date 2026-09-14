@@ -102,7 +102,6 @@ func _ready() -> void:
 	# Start stalking for visibility during dev
 	_set_state(State.STALK)
 	_leg_extension = 0.5
-	print("ScissorStalker: READY at %s" % global_position)
 	# WARNING dressing, appended LAST so the body, the eye and every leg root keep
 	# their child indices. "none" adds nothing at all — the legacy lineage.
 	_build_warning()

@@ -186,14 +186,12 @@ func _ready() -> void:
 		_show_creature(false)
 		_ik_active = false
 		_set_fabrik_active(false)  # FABRIK3D defaults active in .tscn — disable for dormant
-		print("[OctapodCrawler] Dormant egg-plant at %s" % [global_position])
 	else:
 		_show_egg_plant(false)
 		_show_creature(true)
 		_ik_active = true
 		_set_fabrik_active(true)
 		_set_state(State.IDLE)
-		print("[OctapodCrawler] Ready at %s — HP: %.0f" % [global_position, _health])
 
 func _physics_process(delta: float) -> void:
 	_state_time += delta
@@ -458,7 +456,6 @@ func _process_hatching(delta: float) -> void:
 func _begin_hatching() -> void:
 	_set_state(State.HATCHING)
 	_hatch_progress = 0.0
-	print("[OctapodCrawler] Hatching! Player detected nearby")
 
 func _finish_hatching() -> void:
 	# Remove egg-plant visuals
@@ -476,7 +473,6 @@ func _finish_hatching() -> void:
 
 	hatched.emit()
 	_set_state(State.DETECT)
-	print("[OctapodCrawler] Hatched! Transitioning to active")
 
 func _unfurl_legs(progress: float) -> void:
 	## During hatching phase 3: lerp foot targets outward from body center.
@@ -790,7 +786,6 @@ func _build_legs() -> void:
 			var c: Node = skel.get_child(ci)
 			if c is SkeletonModifier3D:
 				fabrik_found = true
-				print("[OctapodCrawler] FABRIK3D found: %s, active=%s" % [c.name, c.active])
 		if not fabrik_found:
 			print("[OctapodCrawler] WARNING: No FABRIK3D/SkeletonModifier3D found in skeleton!")
 		print("[OctapodCrawler] IK rig loaded: %d legs, %d skeletons, %d foot targets" % [
@@ -1075,7 +1070,6 @@ func _apply_damage(amount: float) -> void:
 		return
 
 	_health -= max(0.0, amount)
-	print("[OctapodCrawler] Took %.1f damage — HP: %.1f/%.1f" % [amount, _health, max_health])
 
 	if _health <= 0.0:
 		_die()
@@ -1093,7 +1087,6 @@ func _die() -> void:
 	velocity = Vector3.ZERO
 	_set_eye_glow(0.2)
 	enemy_destroyed.emit(self)
-	print("[OctapodCrawler] Destroyed")
 
 func _play_hit_feedback() -> void:
 	if _body_mesh:

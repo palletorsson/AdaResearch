@@ -126,8 +126,7 @@ signal track_removed(track_name: String)
 
 
 func _ready():
-	print("🎹 PATTERN SEQUENCER 🎹")
-	print("Unified pattern system ready (drums, bass, chords, arps)")
+	pass
 
 
 # ===== TRACK MANAGEMENT =====
@@ -157,7 +156,6 @@ func create_track(name: String, track_type: String = "drum", length: int = 16) -
 	
 	tracks[name] = track
 	track_added.emit(name, track_type)
-	print("   ✨ Track created: %s (type: %s, %d steps)" % [name, track_type, length])
 	return track
 
 
@@ -171,7 +169,6 @@ func delete_track(name: String):
 	if tracks.has(name):
 		tracks.erase(name)
 		track_removed.emit(name)
-		print("   🗑️ Track deleted: %s" % name)
 
 
 func get_all_tracks() -> Array:
@@ -445,7 +442,6 @@ func create_pattern(name: String, length: int) -> Pattern:
 	
 	patterns[name] = pattern
 	pattern_created.emit(name)
-	print("   ✨ Pattern created: %s (%d steps)" % [name, length])
 	return pattern
 
 
@@ -458,7 +454,6 @@ func delete_pattern(name: String):
 	"""Delete a pattern (legacy compatibility)"""
 	if patterns.has(name):
 		patterns.erase(name)
-		print("   🗑️ Pattern deleted: %s" % name)
 
 
 # ===== EUCLIDEAN RHYTHMS =====
@@ -519,7 +514,6 @@ func generate_euclidean_rhythm(pattern: Pattern, pulses: int, steps: int = -1):
 			"micro_timing": 0.0
 		}
 	
-	print("   🔄 Euclidean rhythm: %d pulses in %d steps" % [pulses, steps])
 
 
 # ===== PATTERN MANIPULATION =====
@@ -664,22 +658,14 @@ func get_track_info() -> Dictionary:
 
 func list_patterns():
 	"""List all patterns"""
-	print("🎹 PATTERN LIST 🎹")
 	var info = get_pattern_info()
 	
 	for name in info.keys():
 		var data = info[name]
-		print("   %s: %d steps (%d active) | Swing: %.2f" % [
-			name, 
-			data.length, 
-			data.active_steps, 
-			data.swing
-		])
 
 
 func list_tracks():
 	"""List all tracks"""
-	print("🎹 TRACK LIST 🎹")
 	var info = get_track_info()
 	
 	for name in info.keys():
@@ -689,11 +675,3 @@ func list_tracks():
 			status = " [MUTED]"
 		elif data.solo:
 			status = " [SOLO]"
-		print("   %s (%s): %d steps (%d active) | Swing: %.2f%s" % [
-			name,
-			data.type,
-			data.length, 
-			data.active_steps, 
-			data.swing,
-			status
-		])

@@ -175,7 +175,6 @@ func _ready():
 	_spawn_compounds()
 	_spawn_new_modules()
 	_add_title()
-	print("InteractableDemo: %d controls + %d passive + %d compounds + %d new modules" % [controls.size(), passive_elements.size(), compounds.size(), new_modules.size()])
 
 
 func load_demo_config_from_dict(data: Dictionary) -> void:

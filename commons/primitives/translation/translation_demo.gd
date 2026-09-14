@@ -140,7 +140,6 @@ func _process(_delta: float) -> void:
 
 	# Visual feedback when path is cleared
 	if _path_clear and not was_clear:
-		print("Translation Demo: Path cleared!")
 		_on_path_cleared()
 
 func _on_path_cleared() -> void:

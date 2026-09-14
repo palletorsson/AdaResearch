@@ -343,9 +343,6 @@ func _on_crystal_taken(_pickable) -> void:
 	if _lease_s > 0.0:
 		_return_left = _lease_s + RETURN_GRACE
 		_leased_out = true
-		print("[PrompterBox] Crystal taken on a %.0fs lease — the floor waits" % _lease_s)
-	else:
-		print("[PrompterBox] Crystal taken — the hatch closes")
 
 
 func _rematerialize() -> void:
@@ -355,7 +352,6 @@ func _rematerialize() -> void:
 	_pending_crystal_cfg = _last_crystal_cfg.duplicate()
 	_spawn_crystal()
 	catalyst_returned.emit()
-	print("[PrompterBox] Lease over — the crystal is back beneath the floor")
 
 
 func apply_grid_config(config_data: Dictionary) -> void:

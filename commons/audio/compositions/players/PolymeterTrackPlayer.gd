@@ -67,8 +67,6 @@ signal track_started()
 signal polymeter_alignment(patterns_aligned: Array)
 
 func _ready():
-	print("🎵 POLYMETER TRACK PLAYER 🎵")
-	print("Demonstrating 3 vs 4 vs 5 vs 7 beat patterns...")
 	
 	_setup_audio_players()
 	_setup_rhythm_system()
@@ -115,7 +113,6 @@ func _setup_audio_players():
 	ambient_player.volume_db = ambient_volume + master_volume
 	add_child(ambient_player)
 	
-	print("   ✅ Polymeter audio players configured")
 
 func _setup_rhythm_system():
 	"""Setup beat timer for polymeter rhythm"""
@@ -127,11 +124,9 @@ func _setup_rhythm_system():
 	beat_timer.timeout.connect(_on_beat)
 	add_child(beat_timer)
 	
-	print("   ✅ Polymeter rhythm system ready at %d BPM" % BPM)
 
 func _generate_all_sounds():
 	"""Generate sounds optimized for polymeter demonstration"""
-	print("   🔧 Generating polymeter sounds...")
 	
 	sound_cache[TrackSound.DEEP_KICK] = _generate_sound(TrackSound.DEEP_KICK, 0.8)
 	sound_cache[TrackSound.SHARP_SNARE] = _generate_sound(TrackSound.SHARP_SNARE, 0.6)
@@ -141,20 +136,12 @@ func _generate_all_sounds():
 	sound_cache[TrackSound.PERCUSSION_HIT] = _generate_sound(TrackSound.PERCUSSION_HIT, 0.3)
 	sound_cache[TrackSound.AMBIENT_PAD] = _generate_sound(TrackSound.AMBIENT_PAD, 8.0)
 	
-	print("   ✅ All polymeter sounds generated")
 
 func start_track():
 	"""Start the polymeter demonstration"""
 	if is_playing:
 		return
 	
-	print("🎵 Starting polymeter track...")
-	print("   • Kick: 4-beat pattern")
-	print("   • Snare: 3-beat pattern") 
-	print("   • Bass: 3-beat pattern")
-	print("   • Lead: 5-beat pattern")
-	print("   • Percussion: 7-beat pattern")
-	print("   Watch how they align and drift apart!")
 	
 	is_playing = true
 	current_beat = 0
@@ -209,7 +196,6 @@ func _on_beat():
 	if perc_pos == 0: aligned_patterns.append("perc")
 	
 	if aligned_patterns.size() > 1:
-		print("🎯 Polymeter alignment: %s" % str(aligned_patterns))
 		polymeter_alignment.emit(aligned_patterns)
 	
 	# Play sounds based on current pattern positions

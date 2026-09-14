@@ -43,7 +43,6 @@ func _load_word_map():
 			param_mapping = _word_map.get("param_mapping", {})
 			trait_rules = _word_map.get("trait_rules", {})
 			
-			print("WordSynthBridge: Loaded word map with %d trait rules" % trait_rules.size())
 		else:
 			push_warning("WordSynthBridge: Failed to parse word map")
 	else:

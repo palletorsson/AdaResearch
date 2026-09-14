@@ -84,7 +84,6 @@ class MidiNote:
 
 static func import_midi(path: String) -> Dictionary:
 	"""Import MIDI file and return song configuration"""
-	print("MidiImporter: Loading %s" % path)
 	
 	var file = FileAccess.open(path, FileAccess.READ)
 	if file == null:
@@ -144,9 +143,6 @@ static func _parse_midi(data: PackedByteArray) -> MidiFile:
 	midi.ticks_per_quarter = _read_int(data, pos, 2)
 	pos += 2
 	
-	print("MidiImporter: Format %d, %d tracks, %d ticks/quarter" % [
-		midi.format, midi.num_tracks, midi.ticks_per_quarter
-	])
 	
 	# Parse tracks
 	for i in range(midi.num_tracks):

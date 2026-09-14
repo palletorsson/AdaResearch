@@ -88,9 +88,6 @@ func _create_gallery():
 		if show_labels:
 			_add_label(pos, label_text, i)
 
-	print("WalkgridShowcase: Created %d spaces in %dx%d grid" % [
-		spaces.size(), columns, ceili(float(GALLERY_ORDER.size()) / columns)
-	])
 
 func _create_space(registry_key: String) -> Node3D:
 	if not TopologyManager.SPACE_REGISTRY.has(registry_key):

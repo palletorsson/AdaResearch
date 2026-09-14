@@ -24,7 +24,6 @@ func _generate_new_song():
 	var scale = PopMusicTheory.get_major_scale_notes(root_note)
 	var progression = PopMusicTheory.PROG_POP_4 # Default for now
 	
-	print("Generating Song in ", root_note, " Major. Progression: ", progression)
 	
 	# Create Interactive Stream
 	playback = AudioStreamInteractive.new()

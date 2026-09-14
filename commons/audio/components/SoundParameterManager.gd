@@ -123,7 +123,6 @@ static func initialize():
 	DirAccess.open("user://").make_dir_recursive("sound_parameters")
 	
 	is_initialized = true
-	print("SoundParameterManager: Initialized")
 
 static func get_sound_parameters(sound_key: String) -> Dictionary:
 	"""Get parameters for a specific sound type, always merged with defaults"""
@@ -165,7 +164,6 @@ static func _load_sound_parameters(sound_key: String) -> Dictionary:
 	var params = _load_json_file(user_path)
 	
 	if not params.is_empty():
-		print("SoundParameterManager: Loaded user parameters for %s" % sound_key)
 		return params
 	
 	# Try resource directory
@@ -173,12 +171,10 @@ static func _load_sound_parameters(sound_key: String) -> Dictionary:
 	params = _load_json_file(resource_path)
 	
 	if not params.is_empty():
-		print("SoundParameterManager: Loaded default parameters for %s" % sound_key)
 		return params
 	
 	# Fall back to built-in defaults
 	if default_parameters.has(sound_key):
-		print("SoundParameterManager: Using built-in defaults for %s" % sound_key)
 		return default_parameters[sound_key]
 	
 	print("SoundParameterManager: No parameters found for %s, using basic sine wave" % sound_key)
@@ -286,7 +282,6 @@ static func create_default_parameter_files():
 		file.store_string(json_string)
 		file.close()
 		
-		print("SoundParameterManager: Created default file: %s" % file_path)
 
 static func _get_sound_description(sound_key: String) -> String:
 	"""Get a description for each sound type"""
@@ -322,10 +317,8 @@ static func reload_parameters(sound_key: String = ""):
 	"""Reload parameters from files (clears cache)"""
 	if sound_key == "":
 		parameter_cache.clear()
-		print("SoundParameterManager: Cleared all parameter cache")
 	else:
 		parameter_cache.erase(sound_key)
-		print("SoundParameterManager: Cleared cache for %s" % sound_key)
 
 static func get_parameter_file_path(sound_key: String, user_directory: bool = true) -> String:
 	"""Get the file path for a sound type's parameters"""

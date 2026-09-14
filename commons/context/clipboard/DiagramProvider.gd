@@ -49,5 +49,3 @@ static func process_text_with_diagrams(text: String, rtl: RichTextLabel) -> Stri
 
 static func _on_meta_clicked(meta):
     """Handle clicks on diagram metadata"""
-    if meta is String and meta.begins_with("diagram://"):
-        print("Diagram clicked: %s" % meta)

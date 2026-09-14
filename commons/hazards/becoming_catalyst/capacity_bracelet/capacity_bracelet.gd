@@ -637,7 +637,6 @@ func _commit_mode(idx: int) -> void:
 	if _controller:
 		_controller.trigger_haptic_pulse("haptic", 0.0, 0.1, 0.4, 0.0)  # firm "selected"
 	bracelet_mode_selected.emit(str(_unlocked_modes[idx]))
-	print("[Bracelet] Touch-select -> mode: %s" % str(_unlocked_modes[idx]))
 
 ## The hand that is NOT wearing the bracelet (the one that touches it).
 func _get_other_controller() -> XRController3D:

@@ -424,7 +424,6 @@ func _on_equipment_snapped(_equipment: Node3D, slot_index: int) -> void:
 func _on_workstation_complete() -> void:
 	var ws = _workstation_sequence[_current_workstation_index]
 
-	print("Equipment Assembly: Workstation complete - %s" % ws.name)
 
 	# Create workstation container
 	var workstation = Node3D.new()

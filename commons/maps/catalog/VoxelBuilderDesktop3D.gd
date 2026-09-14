@@ -102,7 +102,6 @@ func _build_scene() -> void:
 
 func _load_map(map_name: String) -> void:
 	_map_name = map_name
-	print("[VoxelBuilder] Loading map: %s" % map_name)
 
 	# Create a GridSystem to load the map
 	var grid_system_scene := load("res://commons/grid/GridSystem.tscn")
@@ -161,7 +160,6 @@ func _load_map(map_name: String) -> void:
 	_pitch = -0.3
 
 	_initialized = true
-	print("[VoxelBuilder] Ready to edit: %s (%dx%d)" % [map_name, dims.x, dims.z])
 
 
 # ═══════════════════════════════════════════════════════════════

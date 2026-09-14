@@ -51,7 +51,6 @@ func _ready() -> void:
 	# _init() already set, so the shipped placements are untouched.
 	_apply_dna()
 	super._ready()
-	print("CrossLinePuzzle: 2 lines, 4 vertices, frame=%s, stock=%s, constraints: PERPENDICULAR + INTERSECT_CENTER" % [frame, stock])
 
 func _complete_puzzle() -> void:
 	var display = get_node_or_null("CrossLogicDisplay")

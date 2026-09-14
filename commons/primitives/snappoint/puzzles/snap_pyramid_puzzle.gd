@@ -66,7 +66,6 @@ func _connect_signals() -> void:
 	if connection_manager:
 		if not connection_manager.square_pyramid_formed.is_connected(_on_pyramid_formed):
 			connection_manager.square_pyramid_formed.connect(_on_pyramid_formed)
-		print("SnapPyramidPuzzle: Connected to square_pyramid_formed signal")
 
 func _on_pyramid_formed(points: Array) -> void:
 	# Check if this pyramid uses our snap points
@@ -77,7 +76,6 @@ func _on_pyramid_formed(points: Array) -> void:
 	
 	# If all 5 points are ours, this is our pyramid!
 	if our_points_count == 5:
-		print("SnapPyramidPuzzle: Pyramid completed with our points!")
 		_complete_puzzle()  # Call base class completion method
 
 # ── Geometry (apex height + base outline) ───────────────────────────────────
@@ -183,4 +181,3 @@ func _apply_puzzle_materials() -> void:
 		if mesh_instance and mesh_instance is MeshInstance3D:
 			# Apply material to the mesh instance
 			mesh_instance.material_override = puzzle_material
-			print("SnapPyramidPuzzle: Applied transparent material to ", point.name)

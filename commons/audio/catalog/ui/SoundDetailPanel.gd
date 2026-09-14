@@ -1826,7 +1826,7 @@ func _on_suggestion_apply(suggestion: Dictionary):
 
 func _on_add_word_pressed():
 	# TODO: Show word picker popup
-	print("SoundDetailPanel: Add word requested for %s" % _current_layer)
+	pass
 
 
 func _on_preview_pressed():
@@ -1896,7 +1896,6 @@ func _on_copy_config_pressed():
 	# Copy current config to clipboard
 	var config_text = JSON.stringify(_current_params, "\t")
 	DisplayServer.clipboard_set(config_text)
-	print("SoundDetailPanel: Config copied to clipboard")
 
 
 func get_current_pattern() -> Dictionary:

@@ -146,7 +146,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return                      # touch nothing, say nothing
 
 	_rebuild_now()
-	print("[PrismBlock] Config applied — grain=%s" % [grain])
 
 
 ## Accept an axis value only if it names something this script actually builds. Lower-case,

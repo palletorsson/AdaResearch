@@ -19,15 +19,10 @@ var is_shown: bool = false
 func _process(_delta):
 	# Check if A button is pressed
 	if Input.is_action_pressed("vr_button_a"):
-		print("A button is being held")
 		toggle_text()
 	# Check if A button was just pressed this frame
-	if Input.is_action_just_pressed("vr_button_a"):
-		print("A button was just pressed")
 	
 	# Check if A button was just released
-	if Input.is_action_just_released("vr_button_a"):
-		print("A button was released")
 		
 		
 func _unhandled_input(event: InputEvent) -> void:

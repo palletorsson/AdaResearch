@@ -52,11 +52,10 @@ func setup_info_boards():
 	# info_board_component.place_board_at("ib_randomwalk", Vector3(5, 1.5, 0))
 
 func _on_boards_generated(board_count: int):
-	print("Example: Generated %d info boards" % board_count)
+	pass
 
 func _on_board_interacted(board_type: String, position: Vector3, data: Dictionary):
-	print("Example: Board '%s' interacted at %s" % [board_type, position])
-	print("  Page: %d" % data.get("page_index", 0))
+	pass
 
 # Example: Dynamically add a board during gameplay
 func add_board_dynamically():
@@ -64,5 +63,3 @@ func add_board_dynamically():
 	var position = Vector3(0, 1.5, 5)
 
 	var board = info_board_component.place_board_at(board_type, position)
-	if board:
-		print("Example: Dynamically added board at %s" % position)

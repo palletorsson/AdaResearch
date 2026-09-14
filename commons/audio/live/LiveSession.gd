@@ -37,18 +37,6 @@ func _ready():
 	_setup_engine()
 	_build_ui()
 	
-	print("═══════════════════════════════════════════════════════")
-	print("  LIVE SESSION READY")
-	print("═══════════════════════════════════════════════════════")
-	print("  SPACE  - Play/Stop")
-	print("  T      - Build Tension")
-	print("  D      - DROP")
-	print("  B      - Breakdown")
-	print("  R      - Bring It Back")
-	print("  N      - New Acid Pattern")
-	print("  ↑/↓    - Filter Sweep")
-	print("  1/2/3  - Mute Kick/Hats/Acid")
-	print("═══════════════════════════════════════════════════════")
 
 
 func _setup_rack():

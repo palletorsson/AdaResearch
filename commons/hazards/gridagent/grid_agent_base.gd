@@ -72,7 +72,6 @@ func _ready():
 	current_grid = GridInterface.get_grid_at_position(global_position)
 	if current_grid:
 		grid_cell_position = GridInterface.get_cell_at_position(current_grid, global_position)
-		print("GridAgent: Found grid, starting at cell %s" % grid_cell_position)
 	else:
 		print("GridAgent: Warning - No grid found at spawn position")
 	
@@ -213,7 +212,6 @@ func _process_feeding(_delta):
 		# Consume the cube
 		GridInterface.remove_cube_at_cell(current_grid, target_cell)
 		evolution_xp += 1
-		print("GridAgent: Consumed cube at %s (XP: %d)" % [target_cell, evolution_xp])
 	
 	# Return to wandering after feeding
 	if state_timer >= 2.0:
@@ -228,8 +226,6 @@ func _process_working(_delta):
 	# Execute operation based on tier
 	var success = _execute_tier_operation()
 	
-	if success:
-		print("GridAgent: Executed %s operation at %s" % [EvolutionTiers.get_tier_string(current_tier), grid_cell_position])
 	
 	# Return to wandering after working
 	if state_timer >= 1.5:
@@ -651,8 +647,6 @@ func configure_modifier_stack(config: Dictionary) -> void:
 		return
 	
 	modifier_stack = _build_modifier_stack_from_config(config)
-	if not modifier_stack.is_empty():
-		print("GridAgent: Configured modifier stack (%d steps)" % modifier_stack.size())
 
 func capture():
 	"""Called by algo-gun when capturing agent"""
@@ -676,4 +670,3 @@ func add_xp(amount: int):
 		# Tier up!
 		current_tier = max_tier
 		_update_visual_tier()
-		print("GridAgent: Evolved to %s!" % EvolutionTiers.get_display_name(current_tier))

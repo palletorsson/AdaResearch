@@ -40,7 +40,6 @@ func _parse_config_string(config_str: String) -> void:
 		count = max(1, int(parts[0]))
 	if parts.size() >= 2 and parts[1].is_valid_float():
 		spacing = float(parts[1])
-	print("LightRod configured: count=%d, spacing=%.2f" % [count, spacing])
 
 # Called by grid system for #config syntax
 func apply_grid_config(config_data: Dictionary) -> void:

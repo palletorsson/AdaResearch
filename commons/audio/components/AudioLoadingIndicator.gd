@@ -34,7 +34,6 @@ func _create_loading_label():
 	loading_label.visible = false
 	
 	add_child(loading_label)
-	print("AudioLoadingIndicator: Created loading label")
 
 func _connect_to_generators():
 	# Find any SciFiLoFiSoundscape in the scene tree
@@ -54,7 +53,6 @@ func _connect_to_generators():
 		if sound_bank.has_signal("generation_complete"):
 			sound_bank.generation_complete.connect(_on_generation_complete)
 	
-	print("AudioLoadingIndicator: Connected to %d soundscape(s)" % soundscapes.size())
 
 func _find_all_soundscapes(node: Node) -> Array:
 	var result = []
@@ -75,7 +73,6 @@ func _connect_to_soundscape(soundscape: SciFiLoFiSoundscape):
 	if not soundscape.generation_complete.is_connected(_on_generation_complete):
 		soundscape.generation_complete.connect(_on_generation_complete)
 	
-	print("AudioLoadingIndicator: Connected to soundscape: %s" % soundscape.name)
 
 func _on_generation_started():
 	is_loading = true
@@ -83,7 +80,6 @@ func _on_generation_started():
 	current_layer = ""
 	_update_label()
 	loading_label.visible = true
-	print("AudioLoadingIndicator: Audio generation started")
 
 func _on_generation_progress(progress: float, layer_name: String):
 	current_progress = progress
@@ -93,7 +89,6 @@ func _on_generation_progress(progress: float, layer_name: String):
 func _on_generation_complete():
 	is_loading = false
 	loading_label.visible = false
-	print("AudioLoadingIndicator: Audio generation complete")
 
 func _update_label():
 	if not loading_label:
