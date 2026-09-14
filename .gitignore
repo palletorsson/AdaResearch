@@ -416,3 +416,33 @@ commons/data/spine_order_ops.json.tmp
 # by --apply. Same rule as the spine order beside it: the SOURCE is the tool,
 # not its output.
 commons/data/museum_order_effective.json
+
+# -- EVIDENCE IMAGES DO NOT ENTER GIT (2026-09-14) -----------------------------
+# Palle: "we also need to ... redirect to ada encyclopedia so we do not [get] more of
+# the images etc in the repo." Evidence lives in ada_encyclopedia/captures/ now
+# (tools/evidence_root.py, commons/testing/evidence_root.gd, tools/sweep_evidence.py).
+#
+# The writers were not all redirected on the day, because the two families producing
+# the growth were owned by live sessions with uncommitted edits: 22 WCN probes mid-edit
+# and 31 brand-new review builders. So git refuses the images instead, for every
+# writer at once, whatever path it still uses. Already-tracked files stay tracked.
+#
+# Checked before writing: no game file (commons/, algorithms/, addons/ outside
+# commons/testing) names an image under ada_run/ -- every one is a probe screenshot --
+# and em_cartridges/ holds no images. Game data here is JSON and scenes, untouched.
+ada_run/**/*.png
+ada_run/**/*.jpg
+ada_run/**/*.jpeg
+ada_run/**/*.webp
+ada_run/**/*.gif
+ada_run/**/*.exr
+ada_run/**/*.png.import
+ada_run/**/*.jpg.import
+ada_run/**/*.webp.import
+doc/reports/**/*.png
+doc/reports/**/*.jpg
+doc/reports/**/*.jpeg
+doc/reports/**/*.webp
+doc/reports/**/*.gif
+doc/reports/**/*.png.import
+doc/reports/**/*.jpg.import
