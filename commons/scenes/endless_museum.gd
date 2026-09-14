@@ -1429,7 +1429,6 @@ func _boot_museum() -> void:
 	var stuck: Node = get_node_or_null("/root/StuckDetector")
 	if stuck != null and "enabled" in stuck:
 		stuck.set("enabled", false)
-		print("[endless_museum] StuckDetector stood down for the museum (spawn_point at 7.5, 0.1, 1.5)")
 	# LAZY: one segment now, the rest owed. A shot run still builds all it
 	# needs synchronously — a frame of a museum half-built is not a proof.
 	var preload_n: int = _shot_segments if _shot_path != "" else 1
@@ -1865,13 +1864,6 @@ func _load_modules() -> void:
 	GATE_REACH_M = _L("gate", "reach_m", GATE_REACH_M)
 	AUTOSAVE_S = _L("editor", "autosave_seconds", AUTOSAVE_S)
 	_mod_pool = _load_module("em_pool.gd")
-	print("[endless_museum] modules: mats=%s light=%s env=%s detail=%s feel=%s audio=%s" % [
-		_mod_mats != null, _mod_light != null, _mod_env != null,
-		_mod_detail != null, _mod_feel != null, _mod_audio != null])
-	print("[endless_museum] deal modules: sets=%s multiples=%s budget=%s" % [
-		_mod_sets != null, _mod_mult != null, _mod_budget != null])
-	print("[endless_museum] dress modules: plinths=%s props=%s pool=%s" % [
-		_mod_plinths != null, _mod_props != null, _mod_pool != null])
 	_build_surfaces()
 
 ## The relation file, once. 2.6 MB of JSON, parsed at startup because every
@@ -1893,7 +1885,6 @@ func _load_relations() -> void:
 	_rel_db = parsed as Dictionary
 	var arts: Variant = _rel_db.get("artifacts", {})
 	var n: int = (arts as Dictionary).size() if arts is Dictionary else 0
-	print("[endless_museum] relations: %d artifacts with authored neighbours" % n)
 
 ## ── THE GUEST POOL, ONCE ─────────────────────────────────────────────────────
 ## em_pool reads the 47 DNA-gallery manifests under the encyclopedia checkout and
@@ -2372,7 +2363,6 @@ func _build_surfaces() -> void:
 		var src: String = String(pair[1])
 		if _surf.has(src):
 			_detail_mats[role] = _surf[src]
-	print("[endless_museum] surfaces: %d roles from em_materials" % _surf.size())
 
 ## ── ANTIALIASING ─────────────────────────────────────────────────────────────
 ## A critic measured this and it was the single largest look gap in the build:
@@ -2394,7 +2384,6 @@ func _setup_antialiasing() -> void:
 	vp.msaa_3d = Viewport.MSAA_4X
 	vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA
 	vp.use_debanding = true
-	print("[endless_museum] AA: MSAA 4x + FXAA + debanding")
 
 func _mat_of(fn: String, args: Array) -> Material:
 	if not _mod_has(_mod_mats, fn):
@@ -2429,7 +2418,6 @@ func _load_extra_source(into: Dictionary) -> void:
 		s["em_order"] = 50
 		into[str(s.get("key", k))] = s
 		n += 1
-	print("endless_museum: +%d spine segments (--em-source=%s)" % [n, _source])
 
 
 func _load_museums() -> void:
@@ -2485,8 +2473,6 @@ func _load_crowns() -> void:
 	var crowns: Dictionary = data.get("crowns", {})
 	for seq in crowns:
 		_crowns[String(seq)] = String((crowns[seq] as Dictionary).get("template", ""))
-	if not _crowns.is_empty():
-		print("[endless_museum] %d crowned chapters loaded" % _crowns.size())
 
 func _load_pool() -> void:
 	# the registry decides what is ALIVE (map_ready + scene on disk); the order
@@ -2564,14 +2550,10 @@ func _load_pool() -> void:
 			live[String(dd["lookup"])] = {"scene": String((tgt as Dictionary)["scene"]),
 				"fp": _footprint_of(dd["entry"] as Dictionary)}
 			lent += 1
-	if not delegates.is_empty():
-		print("[endless_museum] %d of %d delegating token(s) resolved through delegate_to" % [
-			lent, delegates.size()])
 	_live = live
 	if _mod_has(_mod_mult, "prime"):
 		_mod_mult.call("prime", dna_by_token)
 		_dna_axes = dna_by_token
-		print("[endless_museum] dna: %d promoted tokens handed to em_multiples" % dna_by_token.size())
 	if _order_mode == "spine" and _load_spine_pool(live):
 		return
 	if _order_mode != "shuffle" and _load_policy_pool(live, _order_mode):
@@ -2588,7 +2570,6 @@ func _load_pool() -> void:
 		var tmp: Variant = _pool[i]
 		_pool[i] = _pool[j]
 		_pool[j] = tmp
-	print("[endless_museum] pool: shuffle, %d artifacts, seed %d" % [_pool.size(), _seed])
 
 ## A DECLARED policy as the dealing order (step 4): dig, size, text — anything
 ## commons/data/artifact_order_policies.json carries. Additive by construction:
@@ -2730,8 +2711,6 @@ func _load_spine_pool(live: Dictionary) -> bool:
 	var order_path: String = _order_file
 	if order_path == "":
 		order_path = SPINE_ORDER_HAND if FileAccess.file_exists(SPINE_ORDER_HAND) else SPINE_ORDER
-		if order_path == SPINE_ORDER_HAND:
-			print("[endless_museum] dealing order: the HAND's (%s)" % SPINE_ORDER_HAND)
 	var f := FileAccess.open(order_path, FileAccess.READ)
 	if f == null:
 		# name WHICH file refused — an --em-order-file typo used to be
@@ -2754,8 +2733,6 @@ func _load_spine_pool(live: Dictionary) -> bool:
 			skipped += 1
 	if _pool.is_empty():
 		return false
-	print("[endless_museum] pool: SPINE ORDER, %d of %d curriculum artifacts alive (%d not map_ready/on disk)" % [
-		_pool.size(), rows.size(), skipped])
 	return true
 
 ## Widest horizontal footprint dimension declared for an artifact (cells).
@@ -2859,8 +2836,6 @@ func _vr_eye() -> Camera3D:
 	var nm: String = str(pick.get_path())
 	if nm != _vr_eye_name:
 		_vr_eye_name = nm
-		print("[endless_museum] VR eye: %s (current=%s, %d origin(s) in the tree)" % [
-			nm, str(bool(pick.get("current"))), origins.size()])
 	return _vr_cam
 
 
@@ -2947,13 +2922,9 @@ func _plain_hands() -> void:
 					continue
 				(n as Node).queue_free()
 				removed += 1
-	if kept_health > 0:
-		print("[endless_museum] plain hands: %d health readout(s) kept on the wrist" % kept_health)
 	var mgr: Node = get_node_or_null("/root/CatalystCapabilityManager")
 	if mgr != null and mgr.has_method("is_bracelet_activated") and bool(mgr.call("is_bracelet_activated")) 			and mgr.has_method("end_lease_now"):
 		mgr.call("end_lease_now")
-		print("[endless_museum] plain hands: an activated bracelet was ended")
-	print("[endless_museum] plain hands: %d wrist tool(s) removed from %d rig(s)" % [removed, origins.size()])
 
 ## A body the plan dealt that would put a tool on the hand: shown, not grabbed.
 func _plain_hands_disarm(node: Node3D, lookup: String) -> int:
@@ -3357,7 +3328,6 @@ func _setup_world() -> void:
 	if _studio:
 		_mode_label = "studio"
 		_setup_environment()
-		print("[endless_museum] STUDIO: building only — the studio owns camera and input")
 		return
 	if _vr:
 		_mode_label = "vr"
@@ -3375,8 +3345,6 @@ func _setup_world() -> void:
 		if bounds != null:
 			bounds.set("check_type", 0)  # BOX
 			bounds.set("box_bounds", Vector3(20.0, 10.0, 1.0e12))
-			print("[endless_museum] PlayerBoundsCheck reshaped for the museum: x ±20, y ±10, z unbounded")
-		print("[endless_museum] VR: building only — the XR rig owns the walker")
 		_plain_hands()
 		return
 	# the walker is a body, not a gliding camera: a capsule the walls and
@@ -3930,7 +3898,6 @@ func _pattern_wall(seg: Node3D, zbase: int, w: int) -> void:
 	lab.rotation_degrees = Vector3(0, -90, 0)
 	lab.position = Vector3(x, 0.45, z0 + float(PATTERN_WALL_COLS) * cell * 0.5)
 	seg.add_child(lab)
-	print("[em-pattern] a choosing wall: %d configs at z %.1f" % [cfgs.size(), z0])
 
 
 ## The swatch the eye is actually pointing at: nearest ANGLE within reach, not
@@ -4049,7 +4016,6 @@ func _pattern_panel(seg: Node3D, zbase: int, decl: Dictionary,
 		"seg": seg, "i": gi, "decl": decl, "wall_mat": wall_mat, "floor_mat": floor_mat,
 		"floor_g": _decl_group(decl.get("floor"))})
 	_pattern_panel_show(_pattern_panels[-1])
-	print("[em-pattern] a panel on the wall at z %.1f — click it to re-dress the room" % z)
 
 
 func _pattern_groups() -> Array:
@@ -4137,8 +4103,6 @@ func _pattern_cycle(rec: Dictionary) -> void:
 	rec["floor_mat"] = floor_new
 	rec["floor_g"] = fg
 	_pattern_panel_show(rec)
-	print("[em-pattern] the room -> %s / %s (%d surface(s), %d boxes; declare with museum.pattern)" % [
-		wg, fg, swapped, boxes])
 
 
 func _pattern_material(base: Material, spec: Variant, tiles: float) -> Material:
@@ -4393,8 +4357,6 @@ func _widen_doors(tile_in: Array) -> Array:
 				elif _flank_ok(tile_in, x, y - 1, 0, -1):
 					(tile[y - 1] as Array)[x] = "1"
 					opened += 1
-	if opened > 0:
-		print("[em-doors] %d one-cell door(s) widened to 2 m" % opened)
 	return tile
 
 
@@ -4470,8 +4432,6 @@ func _open_bays(tile_in: Array, key: String, chapter: String) -> Array:
 				continue     # already floor (another bay, or a widened door)
 			(tile[y] as Array)[x] = "1"
 			opened += 1
-	if opened > 0:
-		print("[em-bay] %d interior wall cell(s) opened into bays for %s" % [opened, chapter])
 	return tile
 
 
@@ -4549,9 +4509,6 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 		# that ran its cycle for a month with nobody aboard.
 		if kind == "tc":
 			var widened_gap: int = UtilityRegistry.make_carriable(node)
-			if widened_gap > 0:
-				print("[em-gap] %s carries the walker (%d area(s) widened to layer 1)" % [
-					node.name, widened_gap])
 		# and its top belongs on the deck, measured after the settle, exactly as
 		# the utility door does it — these scenes build in _ready and the cube's
 		# visible mesh is 1.8 m against a 1 m collider, so the thing to lay flush
@@ -4573,7 +4530,6 @@ func _stamp_gaps(seg: Node3D, tile: Array, zbase: int) -> void:
 					_walk_cells[gc] = true
 				else:
 					_ride_cells[gc] = kind
-		print("[em-gap] %s: %d x %d cells hollow, crossing %s at (%.1f, %.1f)" % [_cur_stage_pearl, w, d, spec, cx, cz])
 
 
 func _prereq_data() -> Dictionary:
@@ -4770,8 +4726,6 @@ func _viz_pages(seg: Node3D, chapter: String, pearl: String, tile: Array) -> voi
 		lbl.font_size = maxi(24, lbl.font_size - 14)
 		lbl.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
 		hung += 1
-	if hung > 0:
-		print("[em-page] %s · %s: %d visualization page(s)" % [chapter, pearl, hung])
 
 
 ## The wall work the visitor is AIMING at: nearest hung line inside a cone from
@@ -4870,8 +4824,6 @@ func _wall_read_toggle(hit: Dictionary) -> bool:
 	panel.global_rotation = lbl.global_rotation
 	_wall_read = panel
 	_wall_read_si = si
-	print("[em-page] reading %s · %s · page %02d%s" % [chapter, pearl, si + 1,
-		("  (+%d characters of field notes)" % note_txt.length()) if note_txt != "" else ""])
 	return true
 
 
@@ -6963,7 +6915,6 @@ func _basin_fire(seg: Node3D, cells: Array, depth: float, top_y: float) -> void:
 	var lowered := 0
 	for o_dv in obstacles:
 		var od: Dictionary = o_dv
-		print("[em-basin]   crosses the water: %-18s cells %s" % [od["who"], str(od["rect"])])
 	for r_v in rects:
 		var r: Rect2i = r_v
 		# THE FILL STOPS UNDER WHATEVER IT WOULD HIDE. Never below floor + 0.5,
@@ -7020,8 +6971,6 @@ func _basin_fire(seg: Node3D, cells: Array, depth: float, top_y: float) -> void:
 	var tw := area.create_tween().set_loops()
 	tw.tween_property(m_fire, "emission_energy_multiplier", 1.9, 1.1)
 	tw.tween_property(m_fire, "emission_energy_multiplier", 1.1, 0.9)
-	print("[em-basin] fire: %d cell(s) -> %d cube(s), top at %.2f (%d lowered under %d crossing(s))" % [
-		cells.size(), rects.size(), top_y, lowered, obstacles.size()])
 
 
 ## Greedy rectangles over a cell set: widest run first, then grown in z while
@@ -7681,18 +7630,21 @@ func _gap_seat(node: Node3D, deck_y: float) -> void:
 	var before: float = node.position.y
 	_utility_seat(node, deck_y)
 	if absf(node.position.y - before) > 0.0005:
-		print("[em-gap] %s seated: y %.3f -> %.3f (top on the deck at %.2f)" % [
-			node.name, before, node.position.y, deck_y])
-	else:
-		print("[em-gap] %s already flush with the deck at %.2f" % [node.name, deck_y])
+		pass
 
 
 ## Seat one utility body so the top of its FULL extent lies on the cell's
 ## deck. Deferred: these scenes build in _ready and a few animate, so an
 ## immediate measure photographs a half-grown cube.
-func _utility_seat(node: Node3D, deck_y: float) -> void:
-	if node == null or not is_instance_valid(node):
+##
+## The body arrives UNTYPED (2026-09-14, Palle's log: "Error calling from signal 'timeout' to
+## callable _utility_seat: Cannot convert argument 1 from Object to Object"). The 0.45 s timer
+## outlives a hall the stream frees ahead of the eye; Godot refuses to pass a freed object into
+## a typed Node3D parameter, so the is_instance_valid guard below never got the chance to run.
+func _utility_seat(node_v, deck_y: float) -> void:
+	if node_v == null or not is_instance_valid(node_v):
 		return
+	var node: Node3D = node_v
 	# WHAT YOU STAND ON IS THE COLLIDER, NOT THE PICTURE (2026-08-25). Seating
 	# by the visual AABB sank the transport cube: its mesh is 1.8 m tall
 	# (marker included) while the box you can actually stand on is 1 m, so
@@ -7781,8 +7733,6 @@ func _stamp_ramps(seg: Node3D, tile: Array, zbase: int) -> void:
 		var rise: float = clampf(float(r.get("rise", 0.4)), 0.1, 2.0)
 		if _stamp_wedge(seg, Vector2i(cx, cz), String(r.get("facing", "north")), rise, zbase, float(r.get("run", 1))):
 			made += 1
-	if made > 0:
-		print("[em-ramp] %s: %d wedge(s) placed by the pearl" % [_cur_stage_pearl, made])
 
 
 ## The pearl's raised platforms: deck, collider, walk cells, and the wedge up.
@@ -7835,8 +7785,6 @@ func _stamp_stages(seg: Node3D, solid: StaticBody3D, tile: Array, zbase: int) ->
 			# the same placer the free ramps use, so the wedge is understood once
 			if _stamp_wedge(seg, Vector2i(cx, cz + VESTIBULE_H), ramp, hgt, zbase):
 				wedges += 1
-		print("[em-stage] %s: %d cell(s) raised to %.2f m, %d wedge(s) on the %s side" % [
-			_cur_stage_pearl, cells_made, hgt, wedges, ramp])
 
 
 ## How high the ground stands at a tile cell — 0 unless a stage raises it.
@@ -7895,8 +7843,6 @@ func _stamp_wall_runs(seg: Node3D, solid: StaticBody3D, cells: Dictionary,
 		_add_col(solid, pos, size)
 		emitted += 1
 		longest = maxi(longest, best_n)
-	print("[em_wall_runs] %d wall cells -> %d boxes (%.2fx fewer), longest run %d m" % [
-		cells.size(), emitted, float(cells.size()) / float(maxi(emitted, 1)), longest])
 
 func _build_segment() -> void:
 	_seg_refused = []
@@ -8144,9 +8090,6 @@ func _build_segment() -> void:
 			# Two rooms, one map, two readings of the same character. The annex runs
 			# the hall's own match below instead.
 			vest_rules[Vector2i(ax, az)] = "1" if av == "1s" else av
-	if not annex_rows.is_empty():
-		print("[em-annex] %d row(s) from the map -> %d cell(s) in the enter room" % [
-			mini(annex_rows.size(), VESTIBULE_H), vest_rules.size()])
 	var hall_is_authored := String(peek.get("authored", "")) == "map"
 	for cv_v in _edit_overrides:
 		var cvd: Dictionary = cv_v
@@ -8462,8 +8405,6 @@ func _build_segment() -> void:
 			_clear_cells[pk_v] = true
 			clear_drowned += 1
 	if not _clear_cells.is_empty():
-		print("[em-clear] %d cell(s) clear in the enter room: %d ruled by hand, %d taken by the pool" % [
-			_clear_cells.size(), clear_ruled, clear_drowned])
 		seg.set_meta("em_clear_cells", _clear_cells.keys())
 	for zr in range(VESTIBULE_H):
 		for x in range(vest_w):
@@ -8540,8 +8481,6 @@ func _build_segment() -> void:
 					continue
 				_wall_at(seg, solid, wcells, int(sx), zr, corner_col, m_corner, wr)
 				vest_side_walls += 1
-	if vest_side_walls > 0:
-		print("[em-lobby] %d side-wall cell(s) kept because a ruling asked for them" % vest_side_walls)
 	# ruled WALLS inside the enter room (partitions, a narrowed mouth…)
 	for vk_v in vest_rules.keys():
 		var vk: Vector2i = vk_v
@@ -8588,8 +8527,6 @@ func _build_segment() -> void:
 				continue
 			_wall_at(seg, solid, wcells, vk.x, vk.y, wall_col, m_wall, wr)
 			_walk_cells.erase(Vector2i(vk.x, zbase + vk.y))
-	if vest_drowned > 0:
-		print("[em-basin] %d annex wall(s) give way to the pool that claims their cell" % vest_drowned)
 	var lobby_on: bool = _seg_index == 0 and _L("lobby", "enabled", 1.0) > 0.5
 	var win_x0: int = int(_L("lobby", "window_x0", 6.0))
 	var win_x1: int = int(_L("lobby", "window_x1", 8.0))
@@ -8793,8 +8730,6 @@ func _build_segment() -> void:
 			_wall_at(seg, solid, wcells, nb.x, nb.y, corner_col, m_corner, wr)
 			aisle_sealed[nb] = true
 	_skin_note = "aisle: %d cell(s) floored, %d wall cell(s) closing its ends, %d row(s) glazed where no floor reaches" % [skin_filled, aisle_sealed.size(), skin_glazed]
-	if not aisle_sealed.is_empty():
-		print("[em-basin] the aisle is closed at both ends: %d wall cell(s)" % aisle_sealed.size())
 	seg.set_meta("em_skin_step", [int(side_step.get(0, 0)), int(side_step.get(1, 0))])
 	seg.set_meta("em_aisle_cells", aisle_cells)
 	if skin_stepped > 0:
@@ -9372,9 +9307,6 @@ func _build_segment() -> void:
 		for j in joint:
 			var ch := String((j as Dictionary).get("chapter", "?"))
 			by_ch[ch] = int(by_ch.get(ch, 0)) + 1
-		print("[em-court] joint after seg %d: %d court(s), %d m deep, %s%s" % [
-			_seg_index, joint.size(), joint_depth, str(by_ch),
-			(", %d queued" % _court_queue.size()) if not _court_queue.is_empty() else ""])
 		court_depth = _build_courtyard(seg, solid, w, tile.size() + porch_depth, zbase,
 			joint, wall_col, m_wall)
 	_flush_boxes(seg)
@@ -9518,8 +9450,14 @@ func _build_segment() -> void:
 	var wk_d: Dictionary = deal.get("walk_kinds", {}) if deal is Dictionary else {}
 	if not wk_d.is_empty():
 		print("[endless_museum]   HERO WALK in %s: %s" % [seg_seq, str(wk_d)])
-	print("[endless_museum] seg %d = %s (%s) chapter=%s placed %d/%d (%d leads, %d relatives, %d repeats, %d guests) + %d plinths + %d props, z %.0f..%.0f, lights %d" % [
-		_seg_index - 1, spec["key"], spec["museum"], seg_seq if seg_seq != "" else "-",
+	# the building is the ARCHITECTURE the hall stands in; a hall transplanted from its map
+	# names the map too, and its chapter (2026-09-14, Palle reading the System Console: "some
+	# miss match name and artifacts there?" — a fractals hall read as "Centre Pompidou,
+	# chapter=-"). tools/spine_run.py SEG_RE reads `seg N = key … chapter=X placed n/b (…)`.
+	var seg_map: String = String(seg.get_meta("em_map", ""))
+	print("[endless_museum] seg %d = %s (%s)%s chapter=%s placed %d/%d (%d leads, %d relatives, %d repeats, %d guests) + %d plinths + %d props, z %.0f..%.0f, lights %d" % [
+		_seg_index - 1, spec["key"], spec["museum"], (" in map %s" % seg_map) if seg_map != "" else "",
+		seg_seq if seg_seq != "" else (String(seg.get_meta("em_chapter", "")) if String(seg.get_meta("em_chapter", "")) != "" else "-"),
 		placed, int(deal.get("max_objects", 0)), int(deal.get("leads", 0)),
 		int(deal.get("relatives", 0)), int(deal.get("repeats", 0)),
 		int(deal.get("guests", 0)), int(deal.get("plinths", 0)),
@@ -9527,10 +9465,6 @@ func _build_segment() -> void:
 		_segments[-1]["z0"], _segments[-1]["z1"], n_lights])
 	if wc:
 		var wcb: Dictionary = deal.get("budget", {})
-		print("[white-cube] seg %d: hang licence %d (min wall %d m), 1 card per %d faces, props/10m %.4f" % [
-			_seg_index - 1, int(deal.get("wall_features_max", -1)),
-			int(deal.get("hang_min_stretch", 2)), int(deal.get("label_every", 11)),
-			float(wcb.get("props_per_10m", -1.0))])
 
 ## ── THE SET DEAL ─────────────────────────────────────────────────────────────
 ## v1 dealt ONE artifact per slot in spine order and stopped at eight. A critic
@@ -11074,7 +11008,6 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			base_x = clampi(int(floor(float(cb.get("x", 0.0)))), bx0, bx1)
 			base_z = clampi(int(floor(float(cb.get("z", 0.0)))), bz0, bz1)
 			claimed_plinth = bool(cb.get("plinth", claimed_plinth))
-			print("[em-stamp]   %s claimed by a stamped bead -> [%d,%d]" % [b["token"], base_x, base_z])
 		var cfg := {}
 		if String(b["att"]) != "":
 			# EVERY #k:v segment, not just the first — a token can carry
@@ -12552,9 +12485,6 @@ func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 				var zc2: int = int((self_cells[i2] as Dictionary).get("y", 0))
 				z_lo = mini(z_lo, zc2)
 				z_hi2 = maxi(z_hi2, zc2)
-			print("[endless_museum]   %s x%d z-spread %d cell(s)%s" % [
-				lead_tok, self_placed, z_hi2 - z_lo,
-				" — broadside" if z_hi2 - z_lo <= 1 else " — strung down the axis"])
 
 		# ── 5. stamp the relatives ──────────────────────────────────────────
 		for p0 in set_pl:
@@ -12670,8 +12600,6 @@ func _deal_segment(seg: Node3D, slots: Array, zbase: int, spec: Dictionary,
 				# reason this line is the only place to read.
 				print("[endless_museum]   guests: 0 of %d offered into %d free slot(s) — %d not alive, %d already here" % [
 					glist.size(), free_g.size(), n_drop_live, n_drop_dupe])
-		else:
-			print("[endless_museum]   guests: none — every slot in this building is spent")
 
 	out["placed"] = placed
 	out["sequence"] = seg_seq
@@ -14836,7 +14764,6 @@ func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _d
 		pool.erase(c)
 		if pool.is_empty():
 			break
-	print("[em-art] %s: %s" % [key, str(stood)])
 
 
 ## The relief on the hall's west wall, a frame later, once the walls are in the
@@ -14890,7 +14817,6 @@ func _stand_relief_async(seg: Node3D, zbase: int, key: String, ch: String, pearl
 		"kind": "artifact", "token": "dream_bodies", "segment": _seg_no(seg),
 		"world": [snappedf(n.global_position.x, 0.1), snappedf(n.global_position.y, 0.1),
 			snappedf(n.global_position.z, 0.1)], "cell": [int(face_x), int(lz) - VESTIBULE_H]})
-	print("[em-art] %s: [{ \"figure\": \"stella_wall\", \"seed\": %d, \"x\": %.2f }]" % [key, body_seed, n.global_position.x])
 
 
 ## THE ONE-DIMENSIONAL MEN IN THE GREY HALLS (2026-08-29, Palle: "put silhouettes
@@ -15126,7 +15052,6 @@ func _dress_foes(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: D
 			_walk_cells.erase(best)
 			_walk_erased[best] = "prop:pink_gun"
 			gun_cell = [best.x, best.y]
-	print("[em-foes] %s: %d silhouette(s) %s, gun %s, %d cabinet(s) %s" % [key, placed.size(), str(placed), str(gun_cell), cabinets.size(), str(cabinets)])
 	_foes_note(key, {"chapter": ch, "pearl": pearl, "map": map_name, "grey": true,
 		"silhouettes": placed, "gun": gun_cell, "cabinets": cabinets, "seg": _seg_no(seg), "zbase": zbase, "w": w, "h": h})
 
@@ -15176,7 +15101,6 @@ func _stand_cabinets_async(seg: Node3D, zbase: int, key: String, ch: String, pea
 			face_x, facing, int(sp["index"]), float(sp["lz"]))
 		if not rec.is_empty():
 			cabinets.append(rec)
-	print("[em-foes] %s: %d cabinet(s) %s" % [key, cabinets.size(), str(cabinets)])
 	var row: Dictionary = (_foes_report.get(key, {}) as Dictionary).duplicate()
 	if row.is_empty():
 		row = {"chapter": ch, "pearl": pearl, "map": map_name, "grey": true, "silhouettes": placed, "gun": null, "seg": _seg_no(seg)}
@@ -15378,8 +15302,6 @@ func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
 	if n_ok > 0:
 		_deal_stats["props"] = int(_deal_stats.get("props", 0)) + n_ok
 		_deal_stats["prop_cells"] = int(_deal_stats.get("prop_cells", 0)) + n_floor
-		print("[endless_museum]   props: %d of %d offered (%s); %d walk cell(s) surrendered" % [
-			n_ok, rows.size(), str(kinds), n_floor])
 	seg.set_meta("em_props_placed", n_ok)
 
 
@@ -16102,8 +16024,6 @@ func _render_window(ez: float, radius: float) -> int:
 			hidden += 1
 	if hidden != _render_hidden:
 		_render_hidden = hidden
-		print("[em-render] %d hall(s) drawn, %d hidden (the one-hall window, %.0f m)" % [
-			shown, hidden, radius])
 	return shown
 
 
@@ -20621,7 +20541,6 @@ func _seat_late(node_v: Variant, seat_y: float, lookup: String) -> void:
 	# drags a field down by its floaters (the probe caught exactly that).
 	if absf(gap) > 0.01 and absf(gap) <= 0.6:
 		node.position.y -= gap
-		print("[em-seat] %s re-seated %+.2f m after the settle (late-built geometry)" % [lookup, -gap])
 
 
 func _dress_replinth() -> void:
