@@ -91,10 +91,7 @@ func validate_and_report() -> bool:
 	var validation = validate()
 	
 	if validation.valid:
-		print("✅ Utility data validation passed for map '%s'" % map_name)
 		var summary = get_utility_summary()
-		print("   Total utilities: %d" % summary.utility_cells)
-		print("   Categories used: %s" % str(summary.by_category.keys()))
 		return true
 	else:
 		print("❌ Utility data validation FAILED for map '%s'" % map_name)

@@ -62,7 +62,6 @@ func _load_artifacts_data():
 				file.close()
 		file_name = dir.get_next()
 	dir.list_dir_end()
-	print("InfoLabel: Loaded %d artifacts from registry" % artifacts_data.size())
 
 # Update the label text based on keyid
 func _update_label_text():
@@ -84,7 +83,6 @@ func _update_label_text():
 	else:
 		artifact_name = artifact.get("name", keyid)
 		label_node.text = "(x) " + artifact_name
-		print("InfoLabel: Displaying '%s' with hint for keyid '%s'" % [label_node.text, keyid])
 
 # Find artifact by lookup_name (keyid)
 func _find_artifact_by_keyid(id: String) -> Dictionary:
@@ -105,10 +103,8 @@ func _find_artifact_by_keyid(id: String) -> Dictionary:
 
 # Debug function to list all available artifacts
 func list_available_artifacts():
-	print("InfoLabel: Available artifacts:")
 	for key in artifacts_data.keys():
 		var artifact = artifacts_data[key]
 		if typeof(artifact) == TYPE_DICTIONARY:
 			var lookup = artifact.get("lookup_name", "N/A")
 			var name = artifact.get("name", "N/A")
-			print("  %s -> lookup_name: %s, name: %s" % [key, lookup, name])

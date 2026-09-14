@@ -216,7 +216,6 @@ func _wire_controllers() -> void:
 		_wired.append(n)
 		if show_vr_hand:
 			_build_vr_hand(n as Node3D)
-		print("[mushroom-hand] wired %s — trigger or A/X throws" % (n as Node).name)
 
 
 func _on_vr_button(action: String, controller: Node) -> void:

@@ -47,8 +47,6 @@ func _physics_process(delta: float) -> void:
 func _on_timer_timeout() -> void:
 	_is_falling = true
 	_current_velocity = 0.0
-	if enable_logs:
-		print("PickupCubeDanger: Fall started")
 
 func _queue_drop(delay: float) -> void:
 	_timer.stop()
@@ -80,16 +78,10 @@ func _configure_detection_area() -> void:
 	_debug_detection_area()
 
 func _on_detection_area_body_entered(body) -> void:
-	if enable_logs:
-		print("PickupCubeDanger: Area detected: ", body.name, " (", body.get_class(), ")")
 	
 	if not _is_player(body):
-		if enable_logs:
-			print("PickupCubeDanger: Not a player, ignoring: ", body.name)
 		return
 	
-	if enable_logs:
-		print("PickupCubeDanger: Player detected! Resetting: ", body.name)
 	
 	_reset_player(body)
 	_queue_drop(hit_reset_delay)
@@ -116,8 +108,6 @@ func _is_valid_target(body) -> bool:
 	return name_lower.find("player") != -1 or name_lower.find("xrorigin") != -1
 
 func _reset_player(body) -> void:
-	if enable_logs:
-		print("PickupCubeDanger: Resetting player: ", body.name)
 	
 	# Reset velocity FIRST (like ResetTeleporter)
 	_reset_velocity(body)
@@ -153,12 +143,8 @@ func _teleport_player(body: Node3D):
 	var player_root = _find_player_root(body)
 	if player_root:
 		player_root.global_position = RESET_POSITION
-		if enable_logs:
-			print("PickupCubeDanger: Teleported player to %s" % RESET_POSITION)
 	else:
 		body.global_position = RESET_POSITION
-		if enable_logs:
-			print("PickupCubeDanger: Teleported body to %s" % RESET_POSITION)
 
 func _clear_velocity(node: Node) -> void:
 	# Legacy function - now using _reset_velocity

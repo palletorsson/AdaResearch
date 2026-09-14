@@ -96,7 +96,6 @@ var lesson_colors: Dictionary = {
 signal ceiling_generation_complete(tile_count: int, light_count: int)
 
 func _ready():
-	print("GridCeilingComponent: Initialized")
 	_setup_materials()
 
 # Initialize component
@@ -121,8 +120,6 @@ func initialize(grid_sys: Node3D, data_comp: GridDataComponent, settings: Dictio
 	var grid_cell_size = cube_size + gutter
 	tile_size = 0.5  # Force 0.5m cells for ceiling grid
 
-	print("GridCeilingComponent: Ready to generate ceiling")
-	print("  Height: %s, Tile size: %s, Light spacing: %d" % [ceiling_height, tile_size, light_spacing])
 
 # Setup materials for ceiling elements
 func _setup_materials():
@@ -148,7 +145,6 @@ func _setup_materials():
 
 # Generate ceiling for the entire grid
 func generate_ceiling(ceiling_config: Dictionary = {}):
-	print("GridCeilingComponent: Generating suspended ceiling...")
 
 	# Parse config if provided (from map data)
 	_parse_ceiling_config(ceiling_config)
@@ -185,8 +181,6 @@ func generate_ceiling(ceiling_config: Dictionary = {}):
 	var coverage_width_m = width * tile_size
 	var coverage_depth_m = depth * tile_size
 
-	print("GridCeilingComponent: Creating ceiling with 0.5m cells covering %.1fm × %.1fm (%d×%d cells) at height %.1fm" % [coverage_width_m, coverage_depth_m, width, depth, ceiling_height])
-	print("  Grid dimensions: %dx%d (cube_size: %.1fm, gutter: %.1fm) offset: (%.1f, %.1f)" % [dimensions.x, dimensions.z, cube_size, gutter, ceiling_offset_x, ceiling_offset_z])
 
 	# Store dimensions for disco mode
 	grid_width_cells = width
@@ -204,7 +198,6 @@ func generate_ceiling(ceiling_config: Dictionary = {}):
 	# Generate procedural ceiling fixtures (vents/sprinklers/sensors/speakers/panels)
 	var fixture_count = _generate_ceiling_fixtures(width, depth)
 
-	print("GridCeilingComponent: ✅ Ceiling complete - %d tiles, %d lights, %d fixtures" % [tile_count, light_count, fixture_count])
 	ceiling_generation_complete.emit(tile_count, light_count)
 
 # Parse ceiling configuration from map data
@@ -375,7 +368,6 @@ func _create_ceiling_cap(width: int, depth: int, container: Node3D):
 	# Position above the visible ceiling
 	cap.position = Vector3(ceiling_offset_x + width_m / 2.0 - 0.25, ceiling_height + 0.2, ceiling_offset_z + depth_m / 2.0 - 0.25)
 	container.add_child(cap)
-	print("GridCeilingComponent: Created ceiling cap (%.1fm x %.1fm)" % [width_m, depth_m])
 
 # Create a single T-grid beam
 func _create_grid_beam(length: float, thickness: float) -> MeshInstance3D:
@@ -822,13 +814,11 @@ func start_array_learning():
 	
 	# Clear current lighting
 	_clear_all_lights()
-	print("GridCeilingComponent: 🎓 Array Learning Mode STARTED. Lights: %d, Size: %dx%d" % [ceiling_lights.size(), grid_width_cells, grid_depth_cells])
 	_print_current_lesson()
 
 func stop_array_learning():
 	array_learning_enabled = false
 	_restore_normal_lighting()
-	print("GridCeilingComponent: Array Learning Mode STOPPED")
 
 func next_lesson():
 	current_lesson = (current_lesson + 1) % ArrayLesson.size()

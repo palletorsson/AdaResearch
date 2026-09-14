@@ -25,7 +25,6 @@ var time_passed: float = 0.0
 func _ready() -> void:
 	_create_bridge_material()
 	_generate_bridge()
-	print("BridgePath: Created %d-segment bridge along %s axis" % [bridge_length, bridge_axis])
 
 func _process(delta: float) -> void:
 	if pulse_speed > 0.0 and bridge_material:

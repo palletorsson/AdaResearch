@@ -40,9 +40,6 @@ var _form_type_order: Dictionary = {} # form_type -> min sequence order required
 func _ready() -> void:
 	_load_grammar()
 	_index_form_type_orders()
-	print("GrammarOperationsManager: Loaded %d sequences, %d form types" % [
-		_sequences.size(), _form_types.size()
-	])
 
 
 # ─────────────────────────────────────────────────────────────

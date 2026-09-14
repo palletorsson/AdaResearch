@@ -33,7 +33,6 @@ signal narration_complete()
 func _ready():
 	if not enabled:
 		return
-	print("SceneNarrator: Initializing perception system...")
 	_ensure_output_dir()
 	_connect_game_manager()
 	# GridSystem is per-scene, connect on first map load
@@ -52,10 +51,8 @@ func _ready():
 func narrate_full() -> void:
 	if not enabled:
 		return
-	print("SceneNarrator: Running full narration...")
 	take_spatial_snapshot()
 	walk_journey()
-	print("SceneNarrator: Full narration complete.")
 	narration_complete.emit()
 
 ## Full narration to custom output paths
@@ -240,7 +237,6 @@ func take_spatial_snapshot() -> void:
 		return
 	var text = _build_spatial_analysis(gs)
 	_write_file(SPATIAL_PATH, text)
-	print("SceneNarrator: Spatial snapshot written to %s" % SPATIAL_PATH)
 	snapshot_written.emit(SPATIAL_PATH)
 
 ## Lens 2: Simulation watch — start/stop periodic state capture
@@ -258,13 +254,11 @@ func start_simulation_watch(interval: float = -1.0) -> void:
 	_on_simulation_tick()
 	_simulation_timer.wait_time = simulation_interval
 	_simulation_timer.start()
-	print("SceneNarrator: Simulation watch started (%.1fs interval)" % simulation_interval)
 
 func stop_simulation_watch() -> void:
 	_simulation_active = false
 	_simulation_timer.stop()
 	_append_file(SIMULATION_PATH, "\n## Watch Stopped\nStopped: %s | Ticks: %d\n" % [Time.get_datetime_string_from_system(), _simulation_tick])
-	print("SceneNarrator: Simulation watch stopped after %d ticks" % _simulation_tick)
 
 ## Lens 3: Journey walk — BFS from spawn, encounter narrative
 func walk_journey() -> void:
@@ -274,7 +268,6 @@ func walk_journey() -> void:
 		return
 	var text = _build_journey_narrative(gs)
 	_write_file(JOURNEY_PATH, text)
-	print("SceneNarrator: Journey narrative written to %s" % JOURNEY_PATH)
 
 ## Event stream — log significant events as JSONL
 func start_event_stream() -> void:
@@ -283,13 +276,11 @@ func start_event_stream() -> void:
 	var header_line = JSON.stringify({"t": _timestamp(), "event": "stream_started"}) + "\n"
 	_write_file(EVENTS_PATH, header_line)
 	set_process(true)
-	print("SceneNarrator: Event stream started")
 
 func stop_event_stream() -> void:
 	_event_stream_active = false
 	set_process(false)
 	_log_event({"event": "stream_stopped"})
-	print("SceneNarrator: Event stream stopped")
 
 # ============================================================
 # LENS 1: SPATIAL ANALYSIS
@@ -1316,7 +1307,6 @@ func _connect_game_manager() -> void:
 		gm.player_damaged.connect(_on_player_damaged)
 
 func _on_map_changed(new_map_name: String) -> void:
-	print("SceneNarrator: Map changed to %s" % new_map_name)
 	_try_connect_grid_system()
 	if _event_stream_active:
 		_log_event({"event": "map_changed", "map": new_map_name})
@@ -1362,7 +1352,6 @@ func _try_connect_grid_system() -> void:
 		_grid_system = nodes[0] as GridSystem
 		_grid_system.map_generation_complete.connect(_on_grid_generation_complete)
 		_grid_system.interactable_activated.connect(_on_interactable_activated)
-		print("SceneNarrator: Connected to GridSystem (%s)" % _grid_system.map_name)
 
 func _get_grid_system() -> GridSystem:
 	if _grid_system and is_instance_valid(_grid_system):

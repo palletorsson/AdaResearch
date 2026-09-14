@@ -39,7 +39,6 @@ func load_map(map_path: String) -> bool:
 	if not layers.is_empty():
 		layers = GridUtilitiesComponent.preprocess_select_repeat(layers)
 		map_data["layers"] = layers
-		print("JsonMapLoader: Layers preprocessed for select-repeat utilities")
 
 	# Create data adapter instances FIRST
 	structure_data_instance = JsonStructureDataAdapter.new()

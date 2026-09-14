@@ -198,7 +198,6 @@ func _ready() -> void:
 	_hud = _make_hud()
 	_update_hud()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	print("[prop-wall] %d props hung; E select, UP/DOWN nudge, R reset, F5 save" % _records.size())
 
 
 func _process(delta: float) -> void:

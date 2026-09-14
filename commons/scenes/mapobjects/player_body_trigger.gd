@@ -41,10 +41,8 @@ func _ready():
 	# Also monitor Area3D entries (in case player uses Area3D for detection)
 	area_entered.connect(_on_area_entered)
 
-	print("PlayerBodyTrigger: Ready - feature='%s', color='%s'" % [feature_name, color_param])
 
 func _on_area_entered(area: Area3D):
-	print("PlayerBodyTrigger: Area entered: %s" % area.name)
 	# Check if this area belongs to the player (hands, etc.)
 	if area.name.contains("Hand") or area.name.contains("Player"):
 		_trigger_from_node(area)
@@ -66,7 +64,6 @@ func _create_visual():
 	add_child(_mesh_instance)
 
 func _on_body_entered(body: Node3D):
-	print("PlayerBodyTrigger: Body entered: %s (class: %s)" % [body.name, body.get_class()])
 
 	if one_shot and _has_triggered:
 		return
@@ -81,13 +78,11 @@ func _trigger_from_node(node: Node):
 	if one_shot and _has_triggered:
 		return
 
-	print("PlayerBodyTrigger: Triggering '%s' from node: %s" % [feature_name, node.name])
 	_has_triggered = true
 
 	# Find PlayerCustomization
 	var customization = _find_player_customization(node)
 	if customization:
-		print("PlayerBodyTrigger: Found PlayerCustomization, applying feature...")
 		_apply_feature(customization)
 	else:
 		push_warning("PlayerBodyTrigger: Could not find PlayerCustomization!")
@@ -96,9 +91,7 @@ func _trigger_from_node(node: Node):
 		if root:
 			var xr_origin = root.find_child("XROrigin3D", true, false)
 			if xr_origin:
-				print("PlayerBodyTrigger: XROrigin found at %s" % xr_origin.get_path())
-				for child in xr_origin.get_children():
-					print("  - Child: %s" % child.name)
+				pass
 			else:
 				print("PlayerBodyTrigger: No XROrigin3D found in scene!")
 
@@ -127,7 +120,6 @@ func _find_player_customization(body: Node3D) -> Node:
 	while current:
 		var customization = current.get_node_or_null("PlayerCustomization")
 		if customization:
-			print("PlayerBodyTrigger: Found PlayerCustomization in hierarchy at %s" % customization.get_path())
 			return customization
 		current = current.get_parent()
 
@@ -140,7 +132,6 @@ func _find_player_customization(body: Node3D) -> Node:
 		if xr_origin:
 			var customization = xr_origin.get_node_or_null("PlayerCustomization")
 			if customization:
-				print("PlayerBodyTrigger: Found PlayerCustomization via XROrigin search")
 				return customization
 
 	# Try XROrigin3D group
@@ -148,14 +139,12 @@ func _find_player_customization(body: Node3D) -> Node:
 	if xr_origin:
 		var customization = xr_origin.get_node_or_null("PlayerCustomization")
 		if customization:
-			print("PlayerBodyTrigger: Found PlayerCustomization via group")
 			return customization
 
 	# Last resort - search entire scene tree
 	if root:
 		var customization = root.find_child("PlayerCustomization", true, false)
 		if customization:
-			print("PlayerBodyTrigger: Found PlayerCustomization via full tree search")
 			return customization
 
 	return null
@@ -164,17 +153,14 @@ func _apply_feature(customization: Node):
 	match feature_name.to_lower():
 		"dress", "dress_basic":
 			customization.give_dress()
-			print("PlayerBodyTrigger: Gave player the basic dress!")
 
 		"dress_wicked", "gown":
 			customization.give_wicked_gown()
-			print("PlayerBodyTrigger: Gave player the Wicked gown!")
 
 		"skin_color", "skin":
 			if not color_param.is_empty():
 				var color = _parse_color(color_param)
 				customization.set_skin_color(color)
-				print("PlayerBodyTrigger: Set skin color to %s" % color)
 			else:
 				customization.unlock_and_activate("skin_color")
 
@@ -182,7 +168,6 @@ func _apply_feature(customization: Node):
 			if not color_param.is_empty():
 				var color = _parse_color(color_param)
 				customization.set_nail_color(color)
-				print("PlayerBodyTrigger: Set nail color to %s" % color)
 			else:
 				customization.unlock_and_activate("nail_color")
 
@@ -190,7 +175,6 @@ func _apply_feature(customization: Node):
 			if not color_param.is_empty():
 				var color = _parse_color(color_param)
 				customization.set_dress_color(color)
-				print("PlayerBodyTrigger: Set dress color to %s" % color)
 
 		_:
 			# Generic feature unlock
@@ -228,7 +212,6 @@ func configure(params: Array):
 	if params.size() > 1:
 		color_param = params[1]
 
-	print("PlayerBodyTrigger: Configured - feature='%s', color='%s'" % [feature_name, color_param])
 
 # Reset trigger (for testing)
 func reset_trigger():

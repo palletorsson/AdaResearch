@@ -77,7 +77,6 @@ func load_floor_plan(map_dir: String) -> bool:
 		_floor_plan_data = json.data
 		has_floor_plan = true
 		var room_count: int = (_floor_plan_data.get("rooms", []) as Array).size()
-		print("FloorPlanLoader: Loaded %d rooms from %s" % [room_count, path])
 		return true
 
 	push_error("FloorPlanLoader: Expected Dictionary root in %s" % path)
@@ -110,7 +109,6 @@ func apply_floor_plan(parent: Node3D, cell_size: float) -> void:
 		_place_room_floor(room, room_node, cell_size)
 		_generate_room_walls(room, room_node, cell_size)
 
-	print("FloorPlanLoader: Generated %d rooms" % rooms.size())
 
 
 # ── Floor placement ─────────────────────────────────────────────────────────
@@ -188,9 +186,6 @@ func _place_room_floor(room: Dictionary, parent: Node3D, cell_size: float) -> vo
 	floor_instance.position = Vector3(center_x, 0.01, center_z)
 	floor_instance.name = "Floor_%s" % str(room.get("id", "room"))
 
-	print("FloorPlanLoader: Placed floor '%s' at (%.1f, %.1f) size %.1fx%.1f" % [
-		floor_pattern, center_x, center_z, room_w, room_h
-	])
 
 
 func _add_floor_collider(parent: Node3D, cx: float, cz: float, w: float, h: float) -> void:
@@ -302,9 +297,6 @@ func _generate_room_walls(room: Dictionary, parent: Node3D, cell_size: float) ->
 	for seg in segments:
 		_build_wall_segment(seg, wall_container, cell_size, wall_height, wall_preset, wall_thickness)
 
-	print("FloorPlanLoader: Generated %d wall segments for room '%s'" % [
-		segments.size(), str(room.get("id", "room"))
-	])
 
 
 ## Group boundary edges into contiguous wall segments.

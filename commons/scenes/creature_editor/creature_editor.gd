@@ -655,7 +655,6 @@ func _load_biome_stages() -> void:
 	if parsed is Dictionary:
 		_biome_stages = parsed as Dictionary
 		var stage_count: int = (_biome_stages.get("stages", {}) as Dictionary).size()
-		print("[CreatureEditor] Loaded %d biome stages" % stage_count)
 	else:
 		push_warning("[CreatureEditor] Failed to parse soft_stages.json")
 

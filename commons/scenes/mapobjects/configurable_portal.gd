@@ -204,9 +204,6 @@ func _build_portal():
 		_:
 			pass                                  # "mark" / "none" — handled above
 
-	print("ConfigurablePortal: Built portal %.1fx%.1f, dest=%s, map=%s" % [
-		portal_width, portal_height, destination_position, destination_map
-	])
 
 func _build_frame():
 	_frame_node = Node3D.new()
@@ -268,7 +265,6 @@ func _on_body_entered(body: Node3D):
 	if not body.is_in_group("player_body"):
 		return
 	
-	print("ConfigurablePortal: Player entered portal")
 	
 	# Start cooldown
 	_can_teleport = false
@@ -294,14 +290,11 @@ func _on_body_entered(body: Node3D):
 		print("ConfigurablePortal: No destination set, signal emitted only")
 
 func _teleport_player(body: Node3D):
-	print("ConfigurablePortal: Teleporting to %s" % destination_position)
 	
 	# Find XRToolsPlayerBody which has the proper teleport method
 	var player_body = _find_xr_player_body(body)
 	
 	if player_body and player_body.has_method("teleport"):
-		print("ConfigurablePortal: Using XRToolsPlayerBody.teleport()")
-		print("ConfigurablePortal: Player was at %s" % player_body.global_position)
 		
 		# Build target transform at destination
 		var target_transform = Transform3D()
@@ -314,7 +307,6 @@ func _teleport_player(body: Node3D):
 		# Reset velocity
 		player_body.velocity = Vector3.ZERO
 		
-		print("ConfigurablePortal: Player now at %s" % player_body.global_position)
 	else:
 		# Fallback for non-XR or missing player body
 		var player_root = _find_player_root(body)
@@ -322,7 +314,6 @@ func _teleport_player(body: Node3D):
 			print("ConfigurablePortal: Fallback - direct position set")
 			print("ConfigurablePortal: Player was at %s" % player_root.global_position)
 			player_root.global_position = destination_position
-			print("ConfigurablePortal: Player now at %s" % player_root.global_position)
 			
 			if "velocity" in player_root:
 				player_root.velocity = Vector3.ZERO
@@ -367,13 +358,11 @@ func _clear_xr_fade(player_root: Node3D):
 		player_body = get_tree().get_first_node_in_group("player_body")
 	if player_body and "_fade_value" in player_body:
 		player_body._fade_value = 0.0
-		print("ConfigurablePortal: Reset PlayerBody fade value")
 	
 	# Clear the actual fade overlay
 	var fade_node = get_tree().get_first_node_in_group("xr_fade")
 	if fade_node and fade_node.has_method("set_fade_level"):
 		fade_node.set_fade_level(self, Color(0, 0, 0, 0))
-		print("ConfigurablePortal: Cleared XR fade overlay")
 
 func _find_player_root(body: Node3D) -> Node3D:
 	var current = body
@@ -387,7 +376,6 @@ func _load_destination_map():
 	# Find GridSystem or SceneManager to load the map
 	var grid_system = _find_grid_system()
 	if grid_system and grid_system.has_method("load_map"):
-		print("ConfigurablePortal: Loading map '%s'" % destination_map)
 		grid_system.load_map(destination_map)
 	else:
 		# Try to find a scene manager
@@ -481,7 +469,6 @@ func _tell_box(nm: String, center: Vector3, size: Vector3, mat: Material) -> Mes
 
 # Config API for map loading
 func apply_grid_config(config: Dictionary):
-	print("ConfigurablePortal: Applying config: %s" % str(config))
 
 	# AXIS — an unknown word keeps the current value rather than silently sealing a door.
 	if config.has("tell"):

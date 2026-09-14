@@ -131,10 +131,6 @@ func generate(grid_dims: Vector3i, cube_size: float, terrain_mode: String,
 	# if density >= 0.1:
 	#     _spawn_dna_organisms(grid_center, kingdoms, density)
 
-	print("[BiomeRing] Generated: %.0fx%.0f grid, ring=%.1fm, fade=%.1fm, density=%.2f, kingdoms=%s, chunks=%s" % [
-		grid_w, grid_d, ring_width, fade_width, density, str(kingdoms),
-		"yes" if _chunk_manager else "no"
-	])
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -302,7 +298,6 @@ func _place_foliage(grid_w: float, grid_d: float, grid_center: Vector3,
 			for t in before:
 				if not types.has(t):
 					dropped.append(t)
-			print("[BiomeRing] Grammar gated foliage — dropped: %s" % str(dropped))
 
 	if types.is_empty():
 		types = ["grass"]
@@ -640,9 +635,6 @@ func _spawn_dna_organisms(grid_center: Vector3, kingdoms: Array, density: float)
 
 	add_child(_chunk_manager)
 
-	print("[BiomeRing] ChunkManager: pop=%d radius=%.1f kingdoms=%s density=%.2f" % [
-		pop, total_radius, str(kingdom_strings), density
-	])
 
 
 

@@ -28,7 +28,6 @@ var audio_player: Node3D
 var warning_tween: Tween
 
 func _ready():
-	print("QuitGameController: Initializing quit cube...")
 	
 	# Setup Area3D collision detection (EXACTLY like teleport cube)
 	_setup_quit_area()
@@ -42,7 +41,6 @@ func _ready():
 	# Setup audio (optional)
 	_setup_audio()
 	
-	print("QuitGameController: Quit cube ready")
 
 func _setup_quit_area():
 	"""Setup Area3D collision detection - CRITICAL: Must match teleport cube pattern"""
@@ -50,7 +48,6 @@ func _setup_quit_area():
 		push_error("QuitGameController: QuitArea not found! Check scene structure.")
 		return
 	
-	print("QuitGameController: Setting up quit area collision...")
 	
 	# EXACT same settings as teleport cube
 	quit_area.collision_layer = 0      # This area doesn't provide collision
@@ -61,14 +58,11 @@ func _setup_quit_area():
 	# Connect the body_entered signal (CRITICAL - like teleport cube)
 	if not quit_area.is_connected("body_entered", Callable(self, "_on_quit_area_body_entered")):
 		quit_area.body_entered.connect(_on_quit_area_body_entered)
-		print("QuitGameController: ✅ Connected body_entered signal")
 	
 	# Also connect body_exited for cancellation
 	if not quit_area.is_connected("body_exited", Callable(self, "_on_quit_area_body_exited")):
 		quit_area.body_exited.connect(_on_quit_area_body_exited)
-		print("QuitGameController: ✅ Connected body_exited signal")
 	
-	print("QuitGameController: Area collision setup complete")
 
 func _setup_visual_elements():
 	"""Setup cube appearance and warning label"""
@@ -82,7 +76,6 @@ func _setup_visual_elements():
 		material.metallic = 0.1
 		material.roughness = 0.9
 		cube_mesh.material_override = material
-		print("QuitGameController: Cube material applied")
 	
 	# Setup warning label (like teleport cube debug label)
 	if quit_label:
@@ -103,7 +96,6 @@ func _setup_confirmation_timer():
 	# Connect timer signal
 	quit_timer.timeout.connect(_on_quit_timer_timeout)
 	
-	print("QuitGameController: Confirmation timer setup complete")
 
 func _setup_audio():
 	"""Setup audio player (optional - like teleport cube)"""
@@ -112,7 +104,6 @@ func _setup_audio():
 	audio_player.name = "QuitAudio"
 	add_child(audio_player)
 	
-	print("QuitGameController: Audio setup complete")
 
 # MAIN EVENT HANDLERS (following teleport cube pattern)
 
@@ -122,7 +113,6 @@ func _on_quit_area_body_entered(body: Node3D):
 	if not _is_player_body(body):
 		return
 	
-	print("QuitGameController: Player entered quit area!")
 	player_in_area = true
 	
 	# Start quit sequence
@@ -136,7 +126,6 @@ func _on_quit_area_body_exited(body: Node3D):
 	if not _is_player_body(body):
 		return
 	
-	print("QuitGameController: Player left quit area")
 	player_in_area = false
 	
 	# Cancel any ongoing confirmation
@@ -164,7 +153,6 @@ func _is_player_body(body: Node3D) -> bool:
 
 func _start_confirmation_sequence():
 	"""Start quit confirmation sequence"""
-	print("QuitGameController: Starting quit confirmation...")
 	confirmation_active = true
 	quit_game_requested.emit()
 	
@@ -197,7 +185,6 @@ func _update_countdown_display():
 
 func _cancel_quit_sequence():
 	"""Cancel the quit sequence"""
-	print("QuitGameController: Cancelling quit sequence")
 	confirmation_active = false
 	quit_timer.stop()
 	quit_cancelled.emit()
@@ -226,7 +213,6 @@ func _reset_to_normal_state():
 
 func _quit_immediately():
 	"""Quit immediately without confirmation"""
-	print("QuitGameController: Immediate quit!")
 	quit_game_requested.emit()
 	_execute_quit()
 
@@ -238,7 +224,6 @@ func _on_quit_timer_timeout():
 
 func _execute_quit():
 	"""Actually quit the game"""
-	print("QuitGameController: QUITTING GAME...")
 	confirmation_active = false
 	quit_confirmed.emit()
 	
@@ -295,7 +280,6 @@ func _stop_warning_animation():
 
 func _save_before_quit():
 	"""Save important data before quitting"""
-	print("QuitGameController: Saving before quit...")
 	
 	# Save quit log
 	var quit_data = {
@@ -330,7 +314,6 @@ func set_confirmation_timeout(timeout: float):
 
 func force_quit():
 	"""Force quit immediately (for external systems)"""
-	print("QuitGameController: Force quit requested")
 	_execute_quit()
 
 func get_quit_state() -> Dictionary:

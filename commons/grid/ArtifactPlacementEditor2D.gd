@@ -1539,4 +1539,3 @@ func _save_map() -> void:
 func _set_status(message: String) -> void:
 	if _status_label:
 		_status_label.text = message
-	print("[artifact-placement-editor] " + message)

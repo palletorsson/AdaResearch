@@ -50,14 +50,8 @@ func _initialize() -> void:
 			_gated_providers[ability_name] = provider
 			var is_unlocked: bool = _cap_mgr.is_movement_available(ability_name)
 			_set_provider_enabled(provider, is_unlocked)
-			print("MovementCapabilityGate: '%s' (%s) -> %s" % [
-				ability_name, provider.name, "ENABLED" if is_unlocked else "DISABLED"
-			])
 		# else: provider not in scene, that's fine (e.g., climb not added yet)
 
-	print("MovementCapabilityGate: Initialized — %d providers gated, stage %d" % [
-		_gated_providers.size(), _cap_mgr.get_current_stage_order()
-	])
 
 
 func _on_movement_ability_unlocked(ability: String) -> void:
@@ -119,7 +113,6 @@ func unlock_all() -> void:
 		var provider = _gated_providers[ability]
 		if is_instance_valid(provider):
 			_set_provider_enabled(provider, true)
-	print("MovementCapabilityGate: All providers force-enabled")
 
 
 # Debug: force-disable all gated providers
@@ -128,4 +121,3 @@ func lock_all() -> void:
 		var provider = _gated_providers[ability]
 		if is_instance_valid(provider):
 			_set_provider_enabled(provider, false)
-	print("MovementCapabilityGate: All providers force-disabled")

@@ -266,7 +266,6 @@ func _format_name(raw: String) -> String:
 # ── Signals ───────────────────────────────────────────────────────────
 
 func _on_play_pressed(sequence_name: String) -> void:
-	print("SequencePicker: play %s" % sequence_name)
 	sequence_play_requested.emit(sequence_name)
 
 

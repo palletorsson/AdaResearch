@@ -103,7 +103,6 @@ func change_suite(suite_name: String):
 	_initialize_suite(suite_name)
 
 	suite_changed.emit(suite_name)
-	print("🎨 Switched to suite: %s" % suite_name)
 
 	if was_playing:
 		start()
@@ -259,7 +258,6 @@ func set_sound_params(sound_name: String, params: Dictionary):
 		sound_params[sound_name] = {}
 
 	sound_params[sound_name].merge(params, true)
-	print("🎛️ Set params for %s: %s" % [sound_name, params])
 
 ## Get parameters for a specific sound
 func get_sound_params(sound_name: String) -> Dictionary:
@@ -278,7 +276,6 @@ func start():
 	step_timer.wait_time = step_duration
 	step_timer.start()
 
-	print("▶️ Playing suite: %s" % current_suite)
 
 ## Stop playback
 func stop():
@@ -288,7 +285,6 @@ func stop():
 	is_playing = false
 	step_timer.stop()
 
-	print("⏹️ Stopped")
 
 ## Step timer callback
 func _on_step_timer_timeout():

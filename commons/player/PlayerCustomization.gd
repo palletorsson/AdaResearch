@@ -222,10 +222,8 @@ func _activate_dress(scene: PackedScene, key: String) -> bool:
 	if _camera:
 		# Hip is roughly 55% of camera height
 		hip_y = _camera.position.y * 0.55
-		print("PlayerCustomization: Camera Y=%.2f, calculated hip Y=%.2f" % [_camera.position.y, hip_y])
 
 	dress.position = Vector3(0, hip_y, 0)
-	print("PlayerCustomization: Dress added at position %s" % dress.position)
 
 	_active_features[key] = dress
 	_log("Activated dress: %s" % key)

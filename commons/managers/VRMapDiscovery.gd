@@ -30,7 +30,6 @@ static func discover_available_maps() -> Dictionary:
 	var found_maps: Array[String] = []
 	
 	if dir:
-		print("VRMapDiscovery: Scanning directory: %s" % maps_dir)
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		
@@ -40,7 +39,6 @@ static func discover_available_maps() -> Dictionary:
 				var map_data_path = maps_dir + file_name + "/map_data.json"
 				if ResourceLoader.exists(map_data_path):
 					found_maps.append(file_name)
-					print("VRMapDiscovery: Found valid map: %s" % file_name)
 				else:
 					print("VRMapDiscovery: Skipping '%s' - no map_data.json" % file_name)
 			file_name = dir.get_next()

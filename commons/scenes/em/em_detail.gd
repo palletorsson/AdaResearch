@@ -402,9 +402,6 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 		if walls.erase(v):
 			voided_w += 1
 	_report_head = "void_cells: %d asked, %d floors erased, %d walls erased" % [voids.size(), voided_f, voided_w]
-	if voided_f > 0 or voided_w > 0:
-		print("[em_detail] the scene declares %d cell(s) void: %d floor, %d wall — nothing dressed there" % [
-			voids.size(), voided_f, voided_w])
 
 	# ── transform buckets, one draw call each ───────────────────────────────
 	var trim_x: Array = []    # cornice, jambs, head linings, arris beads, labels
@@ -468,9 +465,6 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 					hang_faces.append(f0)
 		_add_wall_showings(hang_faces, hang_cap, hang_frame_x, hang_mount_x, hang_field_x,
 			hang_min)
-	print("[em_detail] walls: %d dressed faces, licence %d, %d showings hung (min wall %d m)%s" % [
-		faces.size(), hang_cap, hang_mount_x.size(), hang_min,
-		"" if hang_on else " (building hangs nothing)"])
 
 	# CHAMFER PRIORITY ORDER. Under budget this is just an order; over budget it
 	# is a ranking, so state it as one. Reveals first — a door is the one arris

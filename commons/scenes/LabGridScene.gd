@@ -5,7 +5,6 @@ extends Node3D
 # No LabManager - progressive maps are handled by LabGridSystem itself
 
 func _ready():
-	print("LabGridScene: Initializing progressive lab scene...")
 
 	# Wait for SceneManager
 	var scene_manager = await SceneManagerHelper.wait_for_scene_manager(self)
@@ -54,7 +53,6 @@ func _ready():
 	# Handle scene user data and progressive map loading
 	_process_scene_user_data()
 
-	print("LabGridScene: Progressive lab scene ready")
 
 
 func _consume_pending_sequence_request(scene_manager) -> bool:
@@ -103,9 +101,6 @@ func _process_scene_user_data():
 	var user_data = get_meta("scene_user_data", {})
 	var staging_override = get_tree().current_scene.get_meta("lab_map_override", "")
 	
-	print("🔍 DEBUG: LabGridScene._process_scene_user_data() called")
-	print("🔍 DEBUG: user_data = %s" % user_data)
-	print("🔍 DEBUG: staging_override = '%s'" % staging_override)
 	
 	# ALSO check the staging node directly
 	var staging_node = get_node("/root/VRStaging")
@@ -118,15 +113,10 @@ func _process_scene_user_data():
 	if staging_node:
 		staging_lab_override = staging_node.get_meta("lab_map_override", "")
 		staging_scene_data = staging_node.get_meta("scene_user_data", {})
-		print("🔍 DEBUG: staging_lab_override = '%s'" % staging_lab_override)
-		print("🔍 DEBUG: staging_scene_data = %s" % staging_scene_data)
 	
 	if lab_grid_system:
-		print("🔍 DEBUG: lab_grid_system found: %s" % lab_grid_system.name)
 		if "map_name" in lab_grid_system:
-			print("🔍 DEBUG: lab_grid_system.map_name BEFORE = '%s'" % lab_grid_system.map_name)
-		else:
-			print("🔍 DEBUG: lab_grid_system has no 'map_name' property")
+			pass
 	else:
 		print("🔍 DEBUG: ❌ lab_grid_system NOT FOUND!")
 	
@@ -138,31 +128,23 @@ func _process_scene_user_data():
 	# 1. Check staging node lab_map_override
 	if not staging_lab_override.is_empty():
 		lab_map_name = staging_lab_override
-		print("🔍 DEBUG: Using staging lab_map_override: %s" % lab_map_name)
 	# 2. Check staging scene_user_data for map_name
 	elif staging_scene_data.has("map_name"):
 		lab_map_name = staging_scene_data["map_name"]
-		print("🔍 DEBUG: Using staging scene_user_data.map_name: %s" % lab_map_name)
 	# 3. Check local user_data for lab_map_override
 	elif user_data.has("lab_map_override"):
 		lab_map_name = user_data["lab_map_override"]
-		print("🔍 DEBUG: Using user_data.lab_map_override: %s" % lab_map_name)
-		print("🔍 DEBUG: ✅ Found lab_map_override in user_data!")
 	# 4. Check local user_data for map_name
 	elif user_data.has("map_name"):
 		lab_map_name = user_data["map_name"]
-		print("🔍 DEBUG: Using user_data.map_name: %s" % lab_map_name)
 	# 5. Check current scene root metadata
 	elif not staging_override.is_empty():
 		lab_map_name = staging_override
-		print("🔍 DEBUG: Using scene root staging_override: %s" % lab_map_name)
 	
 	# Apply the lab map override if found
 	if not lab_map_name.is_empty() and lab_grid_system and "map_name" in lab_grid_system:
-		print("LabGridScene: 🎯 APPLYING LAB MAP OVERRIDE: %s" % lab_map_name)
 		lab_grid_system.map_name = lab_map_name
 		map_override_applied = true
-		print("🔍 DEBUG: ✅ Set lab_grid_system.map_name = '%s'" % lab_map_name)
 	
 	if not map_override_applied:
 		print("🔍 DEBUG: ⚠️ No map override found")
@@ -177,8 +159,6 @@ func _process_scene_user_data():
 			print("🔍 DEBUG: ⚠️ Normal lab load - using lab manager state")
 			_use_lab_manager_state()
 	
-	if lab_grid_system:
-		print("🔍 DEBUG: lab_grid_system.map_name AFTER = '%s'" % lab_grid_system.map_name)
 	
 	# Handle sequence completion when returning from other scenes
 	if user_data.has("completion_data") or staging_scene_data.has("completion_data"):
@@ -202,7 +182,6 @@ func _use_lab_manager_state():
 	
 	# Determine map based on completed sequences
 	var state_map = _determine_map_from_sequences(completed_sequences)
-	print("LabGridScene: Using lab map based on completed sequences %s: %s" % [str(completed_sequences), state_map])
 	
 	# Update debug label with map name
 	_update_debug_label(state_map, completed_sequences)
@@ -230,15 +209,11 @@ func _determine_map_from_sequences(completed_sequences: Array[String]) -> String
 		return progression_config.get("fallback_map", "Lab/map_data_init")
 	
 	# Check from most recent to oldest completed sequence
-	print("LabGridScene: 🔍 DEBUG - All completed sequences: %s" % str(completed_sequences))
-	print("LabGridScene: 🔍 DEBUG - Available mappings: %s" % str(sequence_to_post_map.keys()))
 	
 	for i in range(completed_sequences.size() - 1, -1, -1):
 		var sequence_name = completed_sequences[i]
-		print("LabGridScene: 🔍 DEBUG - Checking sequence[%d]: '%s'" % [i, sequence_name])
 		if sequence_to_post_map.has(sequence_name):
 			var lab_map = sequence_to_post_map[sequence_name]
-			print("LabGridScene: 📍 Latest completed sequence '%s' → lab map: %s" % [sequence_name, lab_map])
 			return lab_map
 		else:
 			print("LabGridScene: 🔍 DEBUG - No mapping found for '%s'" % sequence_name)
@@ -280,19 +255,15 @@ func _wait_for_lab_ready():
 
 func _on_lab_generation_complete():
 	"""Handle lab generation completion"""
-	print("LabGridScene: Lab generation complete")
 
 func _on_lab_transition_complete(new_state: String):
 	"""Handle lab transition completion"""
-	print("LabGridScene: Lab transition complete - new state: %s" % new_state)
 
 func _on_lab_artifact_activated(artifact_id: String):
 	"""Handle lab artifact activation"""
-	print("LabGridScene: Lab artifact activated: %s" % artifact_id)
 
 func _on_lab_sequence_triggered(sequence_name: String):
 	"""Handle lab sequence trigger"""
-	print("LabGridScene: Lab sequence triggered: %s" % sequence_name)
 	SceneManagerHelper.start_sequence(sequence_name, self)
 
 # =============================================================================
@@ -305,21 +276,16 @@ func _input(event):
 		print("🔍 Debug: Checking lab status...")
 		print_lab_status()
 	elif event.is_action_pressed("ui_select"):  # Shift key (or other key)
-		print("🔧 Debug: Running progression fix...")
 		fix_progression_issue()
 	elif event.is_action_pressed("ui_cancel"):  # Escape key
-		print("🔄 Debug: Resetting lab progression...")
 		reset_lab_progression()
 	elif Input.is_action_just_pressed("ui_home"):  # Home key - immediate force load
-		print("🎯 Debug: Force loading post-array map...")
 		force_load_post_array_map()
 	elif Input.is_action_just_pressed("ui_end"):  # End key - force array only
-		print("🧹 Debug: Clean save - only array_tutorial...")
 		force_clean_array_only()
 
 func force_complete_sequence(sequence_name: String):
 	"""Force complete a sequence for testing"""
-	print("LabGridScene: Force completing sequence: %s" % sequence_name)
 	
 	# Manually save sequence completion for testing
 	var save_path = "user://lab_progression.save"
@@ -355,7 +321,6 @@ func force_complete_sequence(sequence_name: String):
 
 func reset_lab_progression():
 	"""Reset lab progression for testing"""
-	print("LabGridScene: Resetting lab progression")
 	var save_path = "user://lab_progression.save"
 	var file = FileAccess.open(save_path, FileAccess.WRITE)
 	file.store_var({"completed_sequences": [], "timestamp": Time.get_datetime_string_from_system()})
@@ -405,7 +370,6 @@ func fix_progression_issue():
 		for seq in loaded_sequences:
 			completed_sequences.append(str(seq))
 	
-	print("🔍 Current progression before fix: %s" % str(completed_sequences))
 	
 	# If geometric_algorithms is present but randomness_exploration is not, it's incorrect
 	if "geometric_algorithms" in completed_sequences and "randomness" not in completed_sequences:
@@ -427,19 +391,14 @@ func fix_progression_issue():
 		file.store_var(save_data)
 		file.close()
 		
-		print("✅ Fixed progression to: %s" % str(corrected_sequences))
-		print("🔄 You should now reload the lab scene to see the correct state")
 		
 		# Determine correct map and reload if possible
 		var correct_map = _determine_map_from_sequences(corrected_sequences)
-		print("📍 Correct lab map should be: %s" % correct_map)
 		
 		if lab_grid_system:
 			lab_grid_system.map_name = correct_map
 			if lab_grid_system.has_method("reload_map_with_name"):
 				lab_grid_system.reload_map_with_name(correct_map)
-			else:
-				print("🔄 Reload the scene to apply the fix")
 	else:
 		print("✅ Progression looks correct, no fix needed")
 
@@ -466,7 +425,6 @@ func _load_lab_progression_config() -> Dictionary:
 		print("LabGridScene: ERROR - Failed to parse lab progression JSON: %s" % json.error_string)
 		return {}
 	
-	print("LabGridScene: ✅ Loaded lab progression config")
 	return json.data
 
 func _validate_and_fix_progression(completed_sequences: Array[String], config: Dictionary) -> Array[String]:
@@ -499,7 +457,7 @@ func _validate_and_fix_progression(completed_sequences: Array[String], config: D
 	
 	if issues_found:
 		if auto_fix and log_issues:
-			print("LabGridScene: 🔧 Auto-fixing progression from %s to %s" % [str(completed_sequences), str(valid_sequences)])
+			pass
 		elif not auto_fix:
 			print("LabGridScene: ❌ Progression issues found but auto-fix disabled")
 			return completed_sequences
@@ -508,7 +466,6 @@ func _validate_and_fix_progression(completed_sequences: Array[String], config: D
 
 func force_load_post_array_map():
 	"""Debug helper: compute target via JSON rules after faking array completion"""
-	print("LabGridScene: 🎯 FORCE LOAD via rules (array_tutorial only)")
 	var save_path = "user://lab_progression.save"
 	var save_data = {
 		"completed_sequences": ["array_tutorial"],
@@ -519,7 +476,6 @@ func force_load_post_array_map():
 	file.store_var(save_data)
 	file.close()
 	var new_map = _determine_map_from_sequences(["array_tutorial"])
-	print("LabGridScene: 🚀 Loading map via rules: %s" % new_map)
 	if lab_grid_system:
 		lab_grid_system.map_name = new_map
 		if lab_grid_system.has_method("reload_map_with_name"):
@@ -531,7 +487,6 @@ func force_load_post_array_map():
 
 func force_clean_array_only():
 	"""Force a clean save with only array_tutorial completed"""
-	print("LabGridScene: 🧹 Creating clean save - only array_tutorial")
 	var save_path = "user://lab_progression.save"
 	var save_data = {
 		"completed_sequences": ["array_tutorial"],
@@ -542,11 +497,8 @@ func force_clean_array_only():
 	file.store_var(save_data)
 	file.close()
 	
-	print("LabGridScene: ✅ Clean save created: ['array_tutorial']")
-	print("LabGridScene: 🔄 Reloading lab to apply...")
 	
 	var new_map = _determine_map_from_sequences(["array_tutorial"])
-	print("LabGridScene: 📍 Should load lab map: %s" % new_map)
 	
 	if lab_grid_system:
 		lab_grid_system.map_name = new_map
@@ -574,4 +526,3 @@ func _update_debug_label(map_name: String, completed_sequences: Array[String]):
 	
 	label.text = debug_text
 	label.modulate = Color.CYAN  # Make it stand out
-	print("LabGridScene: 🏷️ Updated debug label: %s" % map_file)

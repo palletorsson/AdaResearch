@@ -68,4 +68,3 @@ func _setup_environment() -> void:
 	_env.environment = env
 	add_child(_env)
 
-	print("DarkSphereUtility: radius=%.1f, ambient=%.2f" % [sphere_radius, ambient_light_energy])

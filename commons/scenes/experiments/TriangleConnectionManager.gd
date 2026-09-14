@@ -74,7 +74,6 @@ func find_triangles():
 	for child in get_children():
 		if child.has_method("update_sphere_positions"):
 			triangles.append(child)
-	print("TriangleConnectionManager: Found %d triangles" % triangles.size())
 
 func collect_spheres():
 	all_spheres.clear()
@@ -117,7 +116,6 @@ func _create_connection(s1_data, s2_data):
 	var s2 = s2_data.node
 	if s1 == s2: return
 	
-	print("TriangleConnectionManager: Merging %s into shared vertex" % s2.name)
 	
 	# Move s2 to s1
 	s2.global_position = s1.global_position
@@ -133,7 +131,6 @@ func _create_connection(s1_data, s2_data):
 		s2.queue_free()
 		
 		connection_count += 1
-		print("TriangleConnectionManager: Connections: %d" % connection_count)
 
 # Gravity activation disabled per user request
 # func _check_gravity_condition():

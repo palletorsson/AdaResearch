@@ -42,7 +42,6 @@ func _ready():
 	if interaction_area:
 		interaction_area.area_entered.connect(_on_hand_entered)
 		interaction_area.area_exited.connect(_on_hand_exited)
-		print("PickupController: Interaction area connected")
 
 func _setup_audio():
 	# Create audio player component
@@ -54,7 +53,6 @@ func _setup_audio():
 	audio_player.volume_db = -6.0  # Slightly quieter
 	add_child(audio_player)
 	
-	print("PickupController: Audio system ready")
 
 func _on_hand_entered(area: Area3D):
 	if "hand" in area.name.to_lower():
@@ -113,14 +111,12 @@ func grabbed(_grabber):
 		audio_player.play_primary_sound(true)  # Use primary for grab
 	
 	cube_grabbed.emit(self)
-	print("PickupController: Cube grabbed with sound!")
 
 # Called by XR-Tools when released
 func released(_grabber):
 	is_grabbed = false
 	_remove_grab_effect()
 	cube_released.emit(self)
-	print("PickupController: Cube released")
 
 func _apply_grab_effect():
 	if mesh_instance and mesh_instance.material_override:

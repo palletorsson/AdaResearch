@@ -159,8 +159,6 @@ func generate_segments(walls_layer: Array, structure_layer: Array, config: Dicti
 					_accent_for(int(cn.get("x", 0)), int(cn.get("z", 0))))
 			node.position = Vector3(float(cn["x"]) * total2, cy, float(cn["z"]) * total2)
 			_container.add_child(node)
-	print("GridWallSegmentsComponent: built %d wall segments (%d with doors, variants: %s)"
-			% [count, _door_count, "on" if _lib != null else "off"])
 	wall_segments_complete.emit(count)
 
 var _door_count := 0

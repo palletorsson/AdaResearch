@@ -291,7 +291,6 @@ static func band(key: String, code_v: float) -> float:
 			var doc: Variant = JSON.parse_string(FileAccess.get_file_as_string(STANDING_RULES))
 			if doc is Dictionary and (doc as Dictionary).get("band") is Dictionary:
 				_band_hand = (doc as Dictionary)["band"]
-				print("[em_plinths] hand viewing band from %s: %s" % [STANDING_RULES, str(_band_hand)])
 	var v: Variant = _band_hand.get(key, null)
 	return float(v) if (v is float or v is int) else code_v
 

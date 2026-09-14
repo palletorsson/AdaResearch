@@ -77,10 +77,6 @@ func _ready():
 	_rebuild_state()
 	call_deferred("_connect_progression_signals")
 	call_deferred("_connect_catalyst_signals")
-	print("CatalystCapabilityManager: Initialized — capacity L%d (%s), %d verbs, %d modes, bracelet_activated=%s, tracker='%s'" % [
-		_capacity_level, get_capacity_level_name(), _hand_verbs.size(), _catalyst_modes.size(),
-		_bracelet_activated, _bracelet_tracker
-	])
 
 func _process(delta: float) -> void:
 	_tick_lease(delta)
@@ -106,7 +102,6 @@ func _process(delta: float) -> void:
 		return
 	if _apply_launch_impulse(impulse):
 		_launcher_cooldown_left = LAUNCHER_COOLDOWN_S
-		print("CatalystCapabilityManager: Launcher — forces friends underfoot boost jump (+%.1f m/s)" % impulse.y)
 
 ## Player node used as the position reference for the launcher check.
 func _find_launcher_player() -> Node3D:
@@ -255,19 +250,16 @@ func get_friend_power_info(power: String) -> Dictionary:
 ## Spawn (or re-spawn) the bracelet on a controller. Called by BecomingCatalyst
 ## after absorb, and internally after scene transitions.
 func spawn_bracelet_on_controller(controller: XRController3D) -> void:
-	print("[BraceletMgr] spawn_bracelet_on_controller called — controller: '%s'" % [controller.name if controller else "NULL"])
 	if not is_instance_valid(controller):
 		print("[BraceletMgr] ABORT: controller invalid")
 		return
 
 	# Guard against duplicate spawns on the same controller
 	if is_instance_valid(_bracelet) and _bracelet.get_parent() == controller:
-		print("[BraceletMgr] SKIP: bracelet already on this controller")
 		return
 
 	# Clean up old bracelet if it exists
 	if is_instance_valid(_bracelet):
-		print("[BraceletMgr] Cleaning up old bracelet on '%s'" % [_bracelet.get_parent().name if _bracelet.get_parent() else "orphan"])
 		_bracelet.queue_free()
 		_bracelet = null
 
@@ -282,7 +274,6 @@ func spawn_bracelet_on_controller(controller: XRController3D) -> void:
 		push_error("[BraceletMgr] FAILED to instantiate bracelet scene")
 		return
 
-	print("[BraceletMgr] Bracelet instantiated, parenting to controller '%s'" % controller.name)
 
 	# Parent to controller at wrist offset — rotated so ring wraps around wrist
 	controller.add_child(_bracelet)
@@ -304,7 +295,6 @@ func spawn_bracelet_on_controller(controller: XRController3D) -> void:
 			var id := str(m)
 			if id not in bracelet_modes:
 				bracelet_modes.append(id)
-		print("[BraceletMgr] Using active catalyst '%s' with %d modes" % [active_cat.name, bracelet_modes.size()])
 	else:
 		# Fallback: any catalyst in scene (legacy path)
 		for cat in get_tree().get_nodes_in_group("catalyst"):
@@ -325,7 +315,6 @@ func spawn_bracelet_on_controller(controller: XRController3D) -> void:
 		print("[BraceletMgr] WARNING: no modes found, adding 'voxel_editor' fallback")
 		bracelet_modes.append("voxel_editor")
 
-	print("[BraceletMgr] Activating bracelet with %d modes: %s" % [bracelet_modes.size(), bracelet_modes])
 
 	# Activate with only the unlocked modes — no "show all dimmed" display
 	if _bracelet.has_method("activate"):
@@ -368,7 +357,6 @@ func begin_lease(seconds: float) -> void:
 	_lease_last_whole = int(ceil(seconds)) + 1
 	lease_started.emit(seconds)
 	_lease_readout(int(ceil(seconds)))
-	print("CatalystCapabilityManager: Lease started — %.0fs on the catalyst" % seconds)
 
 func is_lease_running() -> bool:
 	return _lease_left > 0.0
@@ -403,7 +391,6 @@ func end_lease_now() -> void:
 	_bracelet_tracker = ""
 	save_state()
 	lease_ended.emit()
-	print("CatalystCapabilityManager: Lease ended — %d crystal(s) dissolved; progression retained" % dissolved)
 
 func _tick_lease(delta: float) -> void:
 	if _lease_left <= 0.0:
@@ -501,7 +488,6 @@ func _connect_progression_signals() -> void:
 	if mpm and mpm.has_signal("sequence_completed"):
 		if not mpm.sequence_completed.is_connected(_on_sequence_completed):
 			mpm.sequence_completed.connect(_on_sequence_completed)
-		print("CatalystCapabilityManager: Connected to MapProgressionManager.sequence_completed")
 	else:
 		push_warning("CatalystCapabilityManager: MapProgressionManager not found or missing signal")
 
@@ -612,7 +598,6 @@ func _on_catalyst_mode_unlocked(mode_id: String) -> void:
 		# Notify bracelet about the new mode
 		if is_instance_valid(_bracelet) and _bracelet.has_method("_on_mode_unlocked"):
 			_bracelet._on_mode_unlocked(mode_id)
-		print("CatalystCapabilityManager: Catalyst mode registered — '%s'" % mode_id)
 
 func _advance_stage(sequence_name: String) -> void:
 	if _completed_sequences.has(sequence_name):
@@ -636,9 +621,6 @@ func _advance_stage(sequence_name: String) -> void:
 		capacity_level_changed.emit(_capacity_level)
 
 	hand_verbs_changed.emit(get_available_hand_verbs())
-	print("CatalystCapabilityManager: Stage advanced — '%s' (L%d %s, %d verbs)" % [
-		sequence_name, _capacity_level, get_capacity_level_name(), _hand_verbs.size()
-	])
 
 # ---------------------------------------------------------------------------
 # Bracelet re-spawn after scene transitions
@@ -811,5 +793,3 @@ func _load_saved_progress() -> void:
 			_friend_powers[str(k)] = str(fp[k])
 	_bracelet_activated = bool(data.get("bracelet_activated", false))
 	_bracelet_tracker = str(data.get("bracelet_tracker", ""))
-	print("CatalystCapabilityManager: Loaded progression — %d sequences, %d modes, %d friend powers" % [
-		_completed_sequences.size(), _catalyst_modes.size(), _friend_powers.size()])

@@ -81,7 +81,6 @@ func _ready() -> void:
 		scene_loaded.connect(func(scene, _user_data):
 			if scene != null:
 				(func(): bare.apply(scene.find_child("XROrigin3D", true, false))).call_deferred())
-		print("AdaVRStaging: MOVEMENT-ONLY HANDS armed — gadgets stripped on every scene load")
 
 	# Specify the camera to track (logic from XRToolsStaging)
 	if xr_camera:
@@ -99,7 +98,6 @@ func _ready() -> void:
 	# Disable prompt for continue to avoid blocking input
 	prompt_for_continue = false
 	
-	print("AdaVRStaging: Starting initialization with consolidated architecture...")
 	
 	# DEBUG: Check for duplicate WorldEnvironments
 	var envs = find_children("*", "WorldEnvironment", true, false)
@@ -116,7 +114,6 @@ func _ready() -> void:
 	var menu = find_child("MainMenu3D", true, false)
 	if menu:
 		menu.visible = true
-		print("AdaVRStaging: MainMenu3D set to visible")
 	
 	# FIX: Set up the loading screen curve to prevent errors
 	_fix_loading_screen_curve()
@@ -140,7 +137,6 @@ func _process(delta: float) -> void:
 
 func _fix_loading_screen_curve():
 	"""Fix the follow_speed curve to prevent the null error"""
-	print("AdaVRStaging: Fixing loading screen follow_speed curve...")
 	
 	# Find the loading screen
 	var loading_screen = find_child("LoadingScreen", true, false)
@@ -163,27 +159,21 @@ func _fix_loading_screen_curve():
 		loading_screen.follow_speed = curve
 		
 		print("AdaVRStaging: âœ… follow_speed curve created successfully")
-	else:
-		print("AdaVRStaging: follow_speed curve already exists")
 
 func _connect_staging_signals():
 	"""Connect to XRToolsStaging signals properly"""
-	print("AdaVRStaging: Connecting to XRToolsStaging signals...")
 	
 	# Connect to scene loaded signal
 	if has_signal("scene_loaded") and not scene_loaded.is_connected(_on_scene_loaded_handler):
 		scene_loaded.connect(_on_scene_loaded_handler)
-		print("AdaVRStaging: Connected to scene_loaded signal")
 	
 	# Connect to scene visible signal  
 	if has_signal("scene_visible") and not scene_visible.is_connected(_on_scene_visible_handler):
 		scene_visible.connect(_on_scene_visible_handler)
-		print("AdaVRStaging: Connected to scene_visible signal")
 	
 	# Connect to scene exiting signal
 	if has_signal("scene_exiting") and not scene_exiting.is_connected(_on_scene_exiting_handler):
 		scene_exiting.connect(_on_scene_exiting_handler)
-		print("AdaVRStaging: Connected to scene_exiting signal")
 
 func _start_game():
 	# Check for MainMenu3D
@@ -228,7 +218,6 @@ func _start_game():
 		load_scene(MUSEUM_STAGED_SCENE)
 		return
 	if menu:
-		print("AdaVRStaging: Menu found, waiting for user input")
 		if not menu.start_game_requested.is_connected(_on_menu_start_game):
 			menu.start_game_requested.connect(_on_menu_start_game)
 		if not menu.quit_requested.is_connected(_on_menu_quit):
@@ -245,7 +234,6 @@ func _start_game():
 		_preload_museum_scene()
 		return
 
-	print("AdaVRStaging: Starting game with consolidated system")
 
 	if use_lab_system:
 		await _setup_lab_system()
@@ -275,7 +263,6 @@ func _load_lab_with_loading_screen():
 
 			if status == ResourceLoader.THREAD_LOAD_LOADED:
 				loading_screen.progress = 1.0
-				print("AdaVRStaging: Lab scene loaded!")
 				break
 			elif status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
 				loading_screen.progress = progress[0]
@@ -311,7 +298,6 @@ func _preload_museum_scene():
 	if _museum_preload_started:
 		return
 	_museum_preload_started = true
-	print("AdaVRStaging: Starting background preload of the endless museum...")
 	ResourceLoader.load_threaded_request(MUSEUM_STAGED_SCENE)
 	if OS.is_debug_build():
 		_monitor_museum_preload()
@@ -339,7 +325,6 @@ func _preload_lab_scene():
 		return
 
 	_preload_started = true
-	print("AdaVRStaging: Starting background preload of lab scene...")
 
 	# Start threaded loading - this runs in background
 	ResourceLoader.load_threaded_request(main_lab_scene)
@@ -358,7 +343,6 @@ func _monitor_preload():
 			print("AdaVRStaging: Lab scene preloaded successfully!")
 			break
 		elif status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-			print("AdaVRStaging: Preload progress: %.0f%%" % (progress[0] * 100))
 			await get_tree().create_timer(0.5).timeout
 		elif status == ResourceLoader.THREAD_LOAD_FAILED:
 			print("AdaVRStaging: ERROR - Lab scene preload failed!")
@@ -413,7 +397,6 @@ func _on_menu_start_game():
 	if left_pointer: left_pointer.visible = false
 	if right_pointer: right_pointer.visible = false
 
-	print("AdaVRStaging: Menu start requested")
 
 	# Force prompt_for_continue to false just in case
 	prompt_for_continue = false
@@ -424,12 +407,10 @@ func _on_menu_start_game():
 		await _setup_basic_vr_scene()
 
 func _on_menu_quit():
-	print("AdaVRStaging: Menu quit requested")
 	get_tree().quit()
 
 func _setup_lab_system():
 	"""Setup lab system - loads lab.tscn directly"""
-	print("AdaVRStaging: Loading lab.tscn for hub experience")
 	
 	var user_data = {
 		"system_mode": "lab_hub",
@@ -438,23 +419,14 @@ func _setup_lab_system():
 	
 	# Load lab.tscn (which contains LabManager and rotating cube)
 	await load_scene(main_lab_scene, user_data)
-	print("AdaVRStaging: Lab hub loaded")
 
 func _setup_basic_vr_scene():
-	print("AdaVRStaging: Setting up basic VR scene")
 	
 	# Just load the main scene without special configuration
-	print("AdaVRStaging: Loading main scene: %s" % main_scene)
 	await load_scene(main_scene)
-	print("AdaVRStaging: Basic VR scene load completed")
 
 func _show_startup_info():
-	print("=== AdaVRStaging Startup Info ===")
-	print("Use lab system: %s" % use_lab_system)
-	print("Start with grid system: %s" % start_with_grid_system)
-	print("Preferred grid map: %s" % preferred_grid_map)
-	print("Main scene: %s" % main_scene)
-	print("===============================")
+	pass
 
 # Standalone dev loop: tools/push_map_to_quest.ps1 adb-pushes a map to the headset and writes its
 # name to override_map/_start.txt in the app's files dir. If present, boot straight into that map
@@ -521,7 +493,6 @@ func _live_reload(want_map: String) -> void:
 			leftover.free()
 	if "map_name" in _current_grid_system and str(_current_grid_system.get("map_name")) != want_map:
 		_current_grid_system.set("map_name", want_map)
-	print("AdaVRStaging: hot-reload -> %s" % want_map)
 	if _current_grid_system.has_method("reload_map_setter"):
 		_current_grid_system.reload_map_setter(true)
 	elif _current_grid_system.has_method("_reload_current_map"):
@@ -536,11 +507,9 @@ func _on_scene_loaded_handler(scene, user_data):
 	# Pass user data to the scene if it has the method
 	if scene and user_data and scene.has_method("set_scene_user_data"):
 		scene.set_scene_user_data(user_data)
-		print("AdaVRStaging: Passed user data to scene: %s" % user_data)
 	elif scene and user_data:
 		# Fallback: set as metadata
 		scene.set_meta("scene_user_data", user_data)
-		print("AdaVRStaging: Set user data as metadata: %s" % user_data)
 	
 	# Setup the scene
 	if scene and user_data:
@@ -554,14 +523,11 @@ func _on_scene_visible_handler(scene, _user_data):
 	# Read beside [em-boot]'s first_frame — the difference is staging's hold.
 	print("[em-boot] scene_visible at %d ms since process start" % Time.get_ticks_msec())
 	"""Connected to XRToolsStaging scene_visible signal"""
-	print("AdaVRStaging: Scene visible - %s" % scene.name if scene else "null")
 
 func _on_scene_exiting_handler(scene, _user_data):
 	"""Connected to XRToolsStaging scene_exiting signal"""
-	print("AdaVRStaging: Scene exiting - %s" % scene.name if scene else "null")
 
 func _setup_scene_systems(scene: Node, user_data: Dictionary):
-	print("AdaVRStaging: Setting up scene systems...")
 	
 	# Find the grid system in the scene - prioritize new consolidated system
 	var grid_system = scene.find_child("GridSystem", true, false)
@@ -573,7 +539,6 @@ func _setup_scene_systems(scene: Node, user_data: Dictionary):
 		print("AdaVRStaging: No grid system found in scene")
 		return
 	
-	print("AdaVRStaging: Found grid system: %s" % grid_system.name)
 	_current_grid_system = grid_system
 	# Prime the hot-reload token so we only react to a NEW push, not a stale signal at launch.
 	if FileAccess.file_exists("user://reload_signal.txt"):
@@ -588,8 +553,6 @@ func _setup_scene_systems(scene: Node, user_data: Dictionary):
 	var _pushed := _pushed_start_map()
 	if _pushed != "":
 		map_name = _pushed
-		print("AdaVRStaging: pushed start map → loading '%s'" % map_name)
-	print("AdaVRStaging: Setting grid system map to: %s" % map_name)
 	
 	if grid_system.has_method("load_map"):
 		grid_system.load_map(map_name)
@@ -598,7 +561,6 @@ func _setup_scene_systems(scene: Node, user_data: Dictionary):
 		if grid_system.has_method("generate_layout"):
 			grid_system.generate_layout()
 	
-	print("AdaVRStaging: âœ… Scene setup complete")
 
 # Utility functions
 func get_scene_loaded() -> bool:
@@ -606,7 +568,6 @@ func get_scene_loaded() -> bool:
 
 # Support for scene switching
 func switch_to_scene(scene_path: String, user_data = null):
-	print("AdaVRStaging: Switching to scene: %s" % scene_path)
 	load_scene(scene_path, user_data)
 
 ## Override load_scene to support quick transitions for in-sequence map changes
@@ -619,9 +580,9 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 	var tracking_delay = 0.02 if _use_quick_transition else 0.1  # Minimal delay for fast transitions
 	
 	if force_fast_transition_fade:
-		print("AdaVRStaging: Fast transition fades enabled (%.1fs)" % fade_duration)
+		pass
 	elif _use_quick_transition:
-		print("AdaVRStaging: Quick transition mode (%.1fs fades)" % fade_duration)
+		pass
 	
 	# Do not load if in the editor
 	if Engine.is_editor_hint():
@@ -794,7 +755,6 @@ func _safe_remove_signals(p_scene: Node):
 
 # Manager initialization
 func _initialize_managers():
-	print("AdaVRStaging: Initializing managers...")
 	
 	# Get map progression manager
 	map_progression_manager = get_node_or_null("/root/MapProgressionManager")
@@ -806,9 +766,7 @@ func _initialize_managers():
 		grid_system_manager = VRGridSystemManager.new()
 		grid_system_manager.name = "VRGridSystemManager"
 		add_child(grid_system_manager)
-		print("AdaVRStaging: Grid system manager created")
 	
-	print("AdaVRStaging: Managers initialized")
 
 func _handle_map_loader_spawn_shortcut() -> void:
 	var action_down := _is_spawn_map_loader_action_down()
@@ -842,7 +800,6 @@ func _on_map_loader_controller_button_pressed(button_action: StringName, control
 	if not _matches_map_loader_spawn_action(button_action):
 		return
 
-	print("AdaVRStaging: Spawn map loader with %s on %s" % [button_action, controller_name])
 	_trigger_map_loader_spawn()
 
 func _matches_map_loader_spawn_action(action_name: StringName) -> bool:
@@ -898,7 +855,6 @@ func _spawn_or_move_map_loader_kiosk() -> void:
 	var spawn_transform := _build_map_loader_spawn_transform()
 	if existing_kiosk:
 		existing_kiosk.global_transform = spawn_transform
-		print("AdaVRStaging: Moved map loader kiosk in front of player")
 		return
 
 	var kiosk_scene = load(VR_MAP_LOADER_KIOSK_SCENE_PATH)
@@ -917,7 +873,6 @@ func _spawn_or_move_map_loader_kiosk() -> void:
 	var kiosk_node := kiosk_instance as Node3D
 	kiosk_node.global_transform = spawn_transform
 	kiosk_node.add_to_group(SPAWNED_MAP_LOADER_GROUP)
-	print("AdaVRStaging: Spawned map loader kiosk")
 
 func _find_spawned_map_loader_kiosk(target_root: Node) -> Node3D:
 	var scene_tree := get_tree()
@@ -1001,7 +956,6 @@ func _update_loading_screen_text(level_name: String, description: String = ""):
 		text += "\n\nHold Trigger to Continue"
 	
 	label.text = text
-	print("AdaVRStaging: Updated loading screen text for: %s" % level_name)
 
 # Simple API to update loading text from external systems
 func set_loading_level_info(level_name: String, description: String = ""):

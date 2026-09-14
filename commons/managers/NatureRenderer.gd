@@ -51,7 +51,6 @@ func _deferred_init() -> void:
 	# scaffold doesn't provide, and the resulting null derefs were
 	# blocking glass-rack / interactable-scenes / big-pipe renders.
 	if "--no-bridges" in OS.get_cmdline_user_args() or "--no-bridges" in OS.get_cmdline_args():
-		print("NatureRenderer: disabled by --no-bridges")
 		return
 
 	_eco = get_node_or_null("/root/EcosystemManager")
@@ -106,9 +105,6 @@ func _poll_and_update() -> void:
 	_cached_kingdoms = kingdoms.duplicate()
 	_cached_terrain = terrain
 
-	print("NatureRenderer: density=%.2f kingdoms=[%s] terrain=%s" % [
-		density, ",".join(PackedStringArray(kingdoms)), terrain
-	])
 
 	# Apply per-map overrides if present
 	var effective_density: float = _map_overrides.get("vegetation_density", density)
@@ -318,7 +314,6 @@ func _update_living_ground(terrain_mode: String, density: float, kingdoms: Array
 
 
 func _activate_living_ground(terrain_mode: String, density: float, kingdoms: Array) -> void:
-	print("NatureRenderer: Activating living ground (mode=%s)" % terrain_mode)
 
 	# Create presence grid sized to the map
 	var grid_data := _find_grid_data()
@@ -363,7 +358,6 @@ func _activate_living_ground(terrain_mode: String, density: float, kingdoms: Arr
 				scene_root.add_child(_evolution_system)
 				if _evolution_system.has_method("start"):
 					_evolution_system.start()
-				print("NatureRenderer: EvolutionSystem started (self_generating)")
 
 		# Transmutation manager: player bonding with creatures
 		if ResourceLoader.exists("res://algorithms/nature_system/systems/transmutation_manager.gd"):
@@ -372,7 +366,6 @@ func _activate_living_ground(terrain_mode: String, density: float, kingdoms: Arr
 				_transmutation_manager = trans_script.new()
 				_transmutation_manager.name = "TransmutationManager"
 				scene_root.add_child(_transmutation_manager)
-				print("NatureRenderer: TransmutationManager started (self_generating)")
 
 	# Create living ground mesh overlay
 	var shader_path: String = "res://algorithms/nature_system/shaders/living_ground.gdshader"
@@ -453,9 +446,6 @@ func _seed_from_biome_paint(grid_data: GridDataComponent, _map_size: Vector2) ->
 			continue
 		_presence_grid.deposit(world_pos, k, s, cube_size)
 		deposit_count += 1
-	if deposit_count + carve_count > 0:
-		print("NatureRenderer: seeded biome_paint — %d deposits, %d carves across %dx%d"
-			% [deposit_count, carve_count, W, D])
 
 
 func _deactivate_living_ground() -> void:
@@ -471,7 +461,6 @@ func _deactivate_living_ground() -> void:
 		_transmutation_manager.queue_free()
 	_transmutation_manager = null
 	_living_ground_active = false
-	print("NatureRenderer: Deactivated living ground")
 
 
 func _deposit_nearby_organisms() -> void:
@@ -515,8 +504,6 @@ func _deposit_recursive(node: Node) -> void:
 ## Called when a new map loads — checks for per-map "environment" overrides.
 func load_map_overrides(overrides: Dictionary) -> void:
 	_map_overrides = overrides
-	if not overrides.is_empty():
-		print("NatureRenderer: Loaded %d per-map overrides" % overrides.size())
 	# Force re-poll to apply overrides
 	_cached_density = -1.0
 	if _initialized:

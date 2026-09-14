@@ -9,7 +9,7 @@ var _target_position: Vector3
 var _target_rotation: float
 
 func _ready() -> void:
-	print("MenuFollower: Ready, parent is ", get_parent().name)
+	pass
 
 func _process(delta: float) -> void:
 	var camera = get_viewport().get_camera_3d()

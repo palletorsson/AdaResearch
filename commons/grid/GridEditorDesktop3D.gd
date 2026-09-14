@@ -393,8 +393,6 @@ func _build_real_grid() -> void:
 	_populate_map_dropdown()
 	_reloading = false
 	_update_hud()
-	print("[grid-editor] ready: map=%s  %dx%d  maxH=%d" % [
-		(_loaded_map if _loaded_map != "" else "SYNTHETIC"), _grid_w, _grid_d, _grid_max_h])
 
 	# Headless biome-paint proof — stamp a brush blob at the grid centre and run the
 	# live rebuild, so a --map=<X> --paintbiome=<el> --shot=<p> run renders painted
@@ -2039,8 +2037,6 @@ func _load_artifact_catalog() -> void:
 	if _panel and _panel.has_method("set_artifact_sequences"):
 		_panel.set_artifact_sequences(_artifact_sequences)
 	_update_artifact_preview()
-	print("[grid-editor] artifact catalog: %d map-ready lookups, %d sequences" % [
-		_artifact_list.size(), _artifact_sequences.size()])
 
 
 ## Set the active sequence filter, then rebuild the composed list. Kept for the
@@ -3509,7 +3505,6 @@ func _bare_studio_setup() -> void:
 	# 3. Frame the camera on the ARTIFACT, not the grid — the footprint zoom that
 	#    makes a bead read as a catalog object instead of a floor with a speck.
 	_bare_frame_artifact()
-	print("[grid-editor] bare studio setup: off-white cubes + neutral backdrop")
 
 
 ## Compute the world-space AABB of every spawned artifact and zoom the iso camera

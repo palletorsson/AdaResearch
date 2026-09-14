@@ -14,13 +14,11 @@ var sequence_data: Dictionary = {}
 var current_map_index: int = 0
 
 func _ready():
-	print("GridScene: Initializing with SceneManagerHelper integration")
 
 	# Connect to grid system signal BEFORE any await
 	if grid_system:
 		if grid_system.has_signal("map_generation_complete"):
 			grid_system.map_generation_complete.connect(_on_map_generation_complete)
-			print("GridScene: Connected to map_generation_complete signal")
 
 		# Deferred fallback in case signal was missed
 		call_deferred("_deferred_entry_check")
@@ -37,7 +35,6 @@ func _ready():
 	# Handle scene user data from staging
 	call_deferred("_process_scene_user_data")
 	
-	print("GridScene: Grid scene ready with SceneManagerHelper")
 
 func _process_scene_user_data():
 	"""Process user data passed from staging/SceneManager"""
@@ -55,11 +52,9 @@ func _process_scene_user_data():
 	
 	if user_data.has("initial_map"):
 		var initial_map = user_data.initial_map
-		print("GridScene: Setting initial map: %s" % initial_map)
 		_configure_grid_system_for_map(initial_map)
 	elif user_data.has("map_name"):
 		var map_name = user_data.map_name
-		print("GridScene: Setting map from user_data: %s" % map_name)
 		_configure_grid_system_for_map(map_name)
 
 func _configure_grid_system_for_map(map_name: String):
@@ -67,7 +62,6 @@ func _configure_grid_system_for_map(map_name: String):
 	if not grid_system:
 		return
 	
-	print("GridScene: Configuring grid system for map: %s" % map_name)
 	
 	# Set map name
 	if "map_name" in grid_system:
@@ -101,7 +95,6 @@ func _spawn_entry_by_type():
 		print("GridScene: Timeline found — skipping entry cubes")
 		return
 
-	print("GridScene: Spawning entry type '%s'" % enter_type)
 
 	# Clear any existing entry
 	var existing = get_node_or_null("ActiveEntry")
@@ -141,7 +134,6 @@ func _spawn_entry_by_type():
 
 	instance.name = "ActiveEntry"
 	add_child(instance)
-	print("GridScene: Spawned %s at position %s" % [enter_type, instance.position])
 
 func _deferred_entry_check():
 	"""Fallback check — wait for map generation signal instead of spawning immediately"""
@@ -151,7 +143,6 @@ func _deferred_entry_check():
 
 func _on_map_generation_complete():
 	"""Handle grid system completing map generation"""
-	print("GridScene: Map generation complete")
 
 	# Spawn entry based on map settings
 	_spawn_entry_by_type()
@@ -189,7 +180,6 @@ func _show_map_subtitle():
 
 func _setup_sequence_exit_trigger():
 	"""Setup automatic sequence progression trigger"""
-	print("GridScene: Setting up sequence exit trigger")
 	
 	# Create a timer for automatic progression (remove this in production)
 	var auto_advance_timer = Timer.new()
@@ -199,11 +189,9 @@ func _setup_sequence_exit_trigger():
 	add_child(auto_advance_timer)
 	auto_advance_timer.start()
 	
-	print("GridScene: Auto-advance timer started (10 seconds)")
 
 func _on_auto_advance_timeout():
 	"""Handle automatic sequence advancement (for testing)"""
-	print("GridScene: Auto-advancing sequence")
 	SceneManagerHelper.advance_sequence(self)
 
 # Public methods for sequence management
@@ -213,7 +201,6 @@ func advance_sequence():
 
 func complete_sequence():
 	"""Complete the current sequence and return to lab"""
-	print("GridScene: Sequence complete - returning to lab")
 	
 	var completion_data = {
 		"sequence_completed": sequence_data.get("sequence_name", "unknown"),
@@ -236,5 +223,4 @@ func handle_teleporter_activation(destination: String):
 # Debug helper
 func _input(event):
 	if event.is_action_pressed("ui_accept"):  # Space or Enter key
-		print("GridScene: Manual sequence advance triggered")
 		SceneManagerHelper.advance_sequence(self)

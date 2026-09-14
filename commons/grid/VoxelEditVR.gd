@@ -88,14 +88,12 @@ func enable() -> void:
 	_ray_visual.visible = true
 	_label.visible = true
 	_label.text = "VOXEL EDIT\nTrigger=Add Grip=Remove"
-	print("[VoxelEditVR] Enabled")
 
 
 func disable() -> void:
 	_active = false
 	if _ray_visual: _ray_visual.visible = false
 	if _label: _label.visible = false
-	print("[VoxelEditVR] Disabled")
 
 
 func is_active() -> bool:

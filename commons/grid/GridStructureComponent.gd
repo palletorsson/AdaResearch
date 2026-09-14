@@ -52,7 +52,7 @@ signal animation_started()
 signal animation_complete()
 
 func _ready():
-	print("GridStructureComponent: Initialized")
+	pass
 
 # Initialize with references and settings
 func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary = {}):
@@ -77,7 +77,6 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 		animation_delay = anim_settings.get("delay_between", 0.05)
 		animation_order = anim_settings.get("order", "sequential")
 		animation_easing = anim_settings.get("easing", "ease_out")
-		print("GridStructureComponent: Animation enabled - type=%s, order=%s, duration=%.2f" % [animation_type, animation_order, animation_duration])
 
 	# Create collision parent
 	collision_parent = Node3D.new()
@@ -94,11 +93,9 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 	var mat_to_use: Material = _cached_material
 	
 	if is_instance_valid(base_cube):
-		print("GridStructureComponent: Inspecting base_cube: %s" % base_cube)
 		_print_tree(base_cube)
 		var mesh_instance = _find_mesh_instance(base_cube)
 		if mesh_instance:
-			print("GridStructureComponent: Found mesh instance: %s" % mesh_instance.name)
 			if mesh_instance.mesh:
 				mesh_to_use = mesh_instance.mesh
 				_cached_mesh = mesh_to_use  # Cache for future reloads
@@ -116,7 +113,7 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 		else:
 			print("GridStructureComponent: Failed to find mesh instance in %s" % base_cube.name)
 	elif _cached_mesh:
-		print("GridStructureComponent: Using cached mesh data (base_cube unavailable)")
+		pass
 	else:
 		push_error("GridStructureComponent: No base_cube and no cached mesh data!")
 		return
@@ -147,7 +144,6 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 		if settings.has("color_overrides"):
 			var overrides = settings["color_overrides"]
 			var override_mat = multimesh_instance.material_override
-			print("GridStructureComponent: Applying color overrides: %s" % overrides)
 
 			if override_mat is ShaderMaterial:
 				# Map JSON keys to Shader Uniforms
@@ -172,7 +168,6 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 							value = _parse_color_string(value)
 						
 						override_mat.set_shader_parameter(uniform_name, value)
-						print("  -> Set shader param '%s' = %s" % [uniform_name, str(value)])
 					else:
 						print("  -> Warning: Unknown override key '%s'" % key)
 			
@@ -188,7 +183,6 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 	else:
 		push_error("GridStructureComponent: Could not find mesh to use")
 
-	print("GridStructureComponent: Initialized with MultiMesh, cube_size=%f, gutter=%f" % [cube_size, gutter])
 
 # Helper to find MeshInstance3D in the base cube hierarchy
 func _find_mesh_instance(node: Node) -> MeshInstance3D:
@@ -236,7 +230,6 @@ func generate_structure(structure_data, dimensions: Vector3i):
 	grid_y = dimensions.y
 	grid_z = dimensions.z
 	
-	print("GridStructureComponent: Generating structure %dx%dx%d" % [grid_x, grid_y, grid_z])
 	
 	# Initialize grid
 	_initialize_grid()
@@ -246,7 +239,6 @@ func generate_structure(structure_data, dimensions: Vector3i):
 
 # Initialize the 3D grid array
 func _initialize_grid():
-	print("GridStructureComponent: Initializing grid array")
 	grid = []
 	cube_positions.clear()
 
@@ -308,7 +300,6 @@ func _apply_structure_data(structure_data):
 			# Immediate generation (no animation)
 			_generate_cubes_immediate(temp_positions, total_size)
 
-	print("GridStructureComponent: Added %d cubes using MultiMesh with collisions" % cube_count)
 	structure_generation_complete.emit(cube_count)
 
 # Generate cubes immediately without animation
@@ -367,7 +358,6 @@ func _height_color_for(level: int) -> Color:
 
 # Prepare and start animated cube generation
 func _prepare_animated_generation(positions: Array, total_size: float):
-	print("GridStructureComponent: Starting animated cube generation (%d cubes)" % positions.size())
 	animation_started.emit()
 	_animation_in_progress = true
 	
@@ -588,7 +578,6 @@ func _get_tween_trans() -> Tween.TransitionType:
 
 # Animation completion callback
 func _on_animation_complete():
-	print("GridStructureComponent: Animation complete")
 	_animation_in_progress = false
 	_pending_cube_data.clear()
 	animation_complete.emit()
@@ -646,7 +635,6 @@ func get_cube_at(_x: int, y: int, z: int) -> Node3D:
 
 # Clear all cubes
 func clear_structure():
-	print("GridStructureComponent: Clearing all cubes")
 
 	# Clear MultiMesh instances
 	if multimesh:
@@ -835,7 +823,6 @@ func snapshot_transforms() -> void:
 	_stored_transforms.resize(multimesh.instance_count)
 	for i in range(multimesh.instance_count):
 		_stored_transforms[i] = multimesh.get_instance_transform(i)
-	print("GridStructureComponent: Snapshot %d transforms" % _stored_transforms.size())
 
 func restore_transforms() -> void:
 	## Restore transforms from the last snapshot.
@@ -844,7 +831,6 @@ func restore_transforms() -> void:
 	var count = mini(multimesh.instance_count, _stored_transforms.size())
 	for i in range(count):
 		multimesh.set_instance_transform(i, _stored_transforms[i])
-	print("GridStructureComponent: Restored %d transforms" % count)
 
 func distort_explode(center: Vector3i, radius: int = 5, strength: float = 3.0) -> bool:
 	## Explode cubes outward from center — transforms scale + translate away from the origin point.
@@ -883,7 +869,6 @@ func distort_explode(center: Vector3i, radius: int = 5, strength: float = 3.0) -
 		multimesh.set_instance_transform(i, t)
 		affected += 1
 
-	print("GridStructureComponent: Explode distort affected %d instances" % affected)
 	return affected > 0
 
 func distort_twist(center: Vector3i, radius: int = 5, angle_per_unit: float = 15.0, axis: String = "y") -> bool:
@@ -925,7 +910,6 @@ func distort_twist(center: Vector3i, radius: int = 5, angle_per_unit: float = 15
 		multimesh.set_instance_transform(i, t)
 		affected += 1
 
-	print("GridStructureComponent: Twist distort affected %d instances" % affected)
 	return affected > 0
 
 func distort_scatter(center: Vector3i, radius: int = 5, scatter_strength: float = 2.0, rotation_strength: float = 45.0) -> bool:
@@ -965,7 +949,6 @@ func distort_scatter(center: Vector3i, radius: int = 5, scatter_strength: float 
 		multimesh.set_instance_transform(i, t)
 		affected += 1
 
-	print("GridStructureComponent: Scatter distort affected %d instances" % affected)
 	return affected > 0
 
 func distort_wave(amplitude: float = 1.5, frequency: float = 0.5, phase: float = 0.0, axis: String = "y") -> bool:
@@ -1017,7 +1000,6 @@ func enable_editing(structure_data) -> void:
 				new_row.append(str(cell))
 			_editable_layout.append(new_row)
 		_edit_dimensions = Vector3i(grid_x, grid_y, grid_z)
-		print("GridStructureComponent: Editing enabled (%dx%d)" % [grid_x, grid_z])
 
 
 ## Get height at grid position (x, z).

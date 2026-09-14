@@ -146,8 +146,6 @@ func _mount_visibility() -> void:
 	var map_dims: Vector3i = _read_map_dimensions()
 	if map_dims != Vector3i.ZERO:
 		_vis_mutator.grid_dims = map_dims
-		if debug_logs:
-			print("GridSubstrateRunner: grid_dims=%s from map" % map_dims)
 	_vis_mutator.cycle_interval_seconds = visibility_cycle_seconds
 	_vis_mutator.auto_cycle_enabled = true
 	_vis_mutator.debug_logs = debug_logs

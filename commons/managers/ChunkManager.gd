@@ -162,7 +162,6 @@ func _connect_signals() -> void:
 			eco.ecosystem_stage_advanced.connect(_on_stage_advanced)
 		if eco.has_signal("vegetation_config_changed"):
 			eco.vegetation_config_changed.connect(_on_vegetation_changed)
-		print("ChunkManager: Connected to EcosystemManager")
 
 
 func _initial_populate() -> void:
@@ -362,7 +361,6 @@ func _rebuild_population() -> void:
 	# Nothing to spawn
 	if density <= 0.0 or kingdoms.is_empty():
 		_despawn_all()
-		print("ChunkManager: Nothing to spawn (density=%.2f, kingdoms=%s)" % [density, str(kingdoms)])
 		return
 
 	# Skip if population is already roughly correct
@@ -505,9 +503,6 @@ func _rebuild_population() -> void:
 			break
 
 	_has_populated = true
-	print("ChunkManager: Queued %d organisms across %d chunks (density=%.2f, kingdoms=%s)" % [
-		queued_total, _chunks.size(), density, str(kingdoms)
-	])
 
 
 ## Scale DNA complexity by curriculum density.

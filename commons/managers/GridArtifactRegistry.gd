@@ -36,7 +36,6 @@ func load_artifact_data() -> void:
 	# 2. Load all files in registry directory (authoritative source)
 	_load_directory(REGISTRY_DIR_PATH)
 
-	print("Total loaded: %d artifact definitions" % artifacts.size())
 	emit_signal("registry_loaded")
 
 func _load_directory(dir_path: String) -> void:
@@ -47,7 +46,6 @@ func _load_directory(dir_path: String) -> void:
 		while file_name != "":
 			if !dir.current_is_dir() and file_name.ends_with(".json"):
 				var full_path = dir_path + file_name
-				print("Loading registry file: %s" % full_path)
 				_load_single_file(full_path)
 			file_name = dir.get_next()
 	else:
@@ -102,7 +100,6 @@ func _load_single_file(file_path: String) -> void:
 		artifacts[artifact_id] = artifact
 		loaded_count += 1
 		
-	print("Loaded %d artifacts from %s" % [loaded_count, file_path])
 
 # Get an artifact's metadata by ID
 func get_artifact(id: String) -> Dictionary:

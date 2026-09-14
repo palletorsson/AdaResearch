@@ -17,20 +17,17 @@ var current_sequence_data: Dictionary = {}
 var current_map_index: int = 0
 
 func _ready() -> void:
-	print("DesktopMapTester: Initializing...")
 
 	# CLI override: --map=<Name> (after "--" in the launch args)
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--map="):
 			start_map = a.substr(6)
-			print("DesktopMapTester: cmdline map -> '%s'" % start_map)
 
 	# MapToolEditor "Show in desktop" handoff: a one-shot start map in user://current_map.txt.
 	if FileAccess.file_exists("user://current_map.txt"):
 		var handoff := FileAccess.get_file_as_string("user://current_map.txt").strip_edges()
 		if handoff != "":
 			start_map = handoff
-			print("DesktopMapTester: MapToolEditor handoff → '%s'" % start_map)
 			var f := FileAccess.open("user://current_map.txt", FileAccess.WRITE)   # clear (one-shot)
 			if f:
 				f.store_string("")
@@ -39,7 +36,6 @@ func _ready() -> void:
 	# Connect to AdaSceneManager if available
 	if AdaSceneManager.is_available():
 		AdaSceneManager.get_instance()
-		print("DesktopMapTester: Connected to AdaSceneManager")
 
 	if auto_load_on_ready:
 		call_deferred("_auto_load_sequence")
@@ -47,7 +43,6 @@ func _ready() -> void:
 func _auto_load_sequence() -> void:
 	# A single map by name (e.g. a Corridor_* sibling) takes priority over the sequence path.
 	if not start_map.is_empty():
-		print("DesktopMapTester: Loading single map: %s" % start_map)
 		load_map(start_map)
 		return
 
@@ -85,7 +80,6 @@ func load_sequence(sequence_name: String, map_index: int = 0) -> void:
 		return
 
 	var map_name: String = str(maps[map_index])
-	print("DesktopMapTester: Loading sequence '%s', map %d/%d: %s" % [sequence_name, map_index + 1, maps.size(), map_name])
 
 	load_map(map_name)
 
@@ -100,7 +94,6 @@ func load_map(map_name: String) -> void:
 		push_error("DesktopMapTester: Map file not found for id: %s" % map_name)
 		return
 
-	print("DesktopMapTester: Loading map from: %s" % map_path)
 
 	# Load map data
 	var file: FileAccess = FileAccess.open(map_path, FileAccess.READ)
@@ -126,10 +119,8 @@ func load_map(map_name: String) -> void:
 	# Build the map
 	if grid_system.has_method("build_from_data"):
 		grid_system.build_from_data(map_data)
-		print("DesktopMapTester: Map loaded via build_from_data: %s" % map_name)
 		_position_player_at_spawn(map_data)
 	elif _reload_grid_system_map(map_name):
-		print("DesktopMapTester: Map queued for GridSystem reload: %s" % map_name)
 		_position_player_at_spawn(map_data)
 	else:
 		push_error("DesktopMapTester: GridSystem cannot load map with current API")
@@ -200,7 +191,6 @@ func _position_player_at_spawn(map_data: Dictionary) -> void:
 	var settings: Dictionary = map_data.get("settings", {})
 	if bool(settings.get("start_fly", false)) and "fly_mode" in player:
 		player.fly_mode = true
-		print("DesktopMapTester: start_fly -> player in FLY mode (F toggles)")
 
 	# Look for spawn point in utilities layer
 	var layers: Dictionary = map_data.get("layers", {})
@@ -218,7 +208,6 @@ func _position_player_at_spawn(map_data: Dictionary) -> void:
 				# Position player at spawn (convert grid coords to world)
 				var spawn_pos: Vector3 = Vector3(x, 3.0, z)  # above floor top; gravity settles the player
 				player.global_position = spawn_pos
-				print("DesktopMapTester: Player spawned at grid position (%d, %d) = %s" % [x, z, spawn_pos])
 				return
 
 	print("DesktopMapTester: No spawn point found, using default position")
@@ -231,7 +220,6 @@ func next_map() -> void:
 
 	var maps: Array = current_sequence_data.get("maps", [])
 	if current_map_index + 1 >= maps.size():
-		print("DesktopMapTester: End of sequence reached")
 		return
 
 	current_map_index += 1
@@ -240,7 +228,6 @@ func next_map() -> void:
 func previous_map() -> void:
 	"""Load previous map in sequence"""
 	if current_map_index <= 0:
-		print("DesktopMapTester: Already at first map")
 		return
 
 	current_map_index -= 1

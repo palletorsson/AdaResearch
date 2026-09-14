@@ -454,8 +454,6 @@ func _ready():
 	_read_dna_meta()
 	_dress()
 
-	print("----------------------------------------------------------------------")
-	print("AnnotationInfoBoard: Initializing map info display board")
 
 	# Connect to GameManager for XP updates if available
 	if GameManager and GameManager.has_signal("score_updated"):
@@ -478,7 +476,6 @@ func _delayed_initialization():
 	# a detached node, so bail out instead of crashing on .process_frame.
 	if not is_inside_tree():
 		return
-	print("AnnotationInfoBoard: Starting delayed initialization...")
 
 	# Wait additional frames to ensure grid utilities are fully loaded.
 	# Re-check after each await — the node can be freed/detached mid-wait.
@@ -502,13 +499,10 @@ func _check_for_sequence_parameter():
 	"""Check if a sequence parameter was provided via utility placement"""
 	if "sequence_name" in self:
 		sequence_name = self.sequence_name
-		print("AnnotationInfoBoard: Using sequence from property: " + sequence_name)
 	elif has_meta("sequence_name"):
 		sequence_name = get_meta("sequence_name")
-		print("AnnotationInfoBoard: Using sequence from metadata: " + sequence_name)
 	
 	if not sequence_name.is_empty():
-		print("AnnotationInfoBoard: Will load sequence data for: " + sequence_name)
 		_load_sequence_data()
 
 func _load_sequence_data():
@@ -535,14 +529,12 @@ func _load_sequence_data():
 			for map_id in maps_array:
 				typed_maps.append(str(map_id).strip_edges())  # Strip whitespace
 			sequence_data["maps"] = typed_maps
-			print("AnnotationInfoBoard: Loaded %d maps from sequence: %s" % [typed_maps.size(), typed_maps])
 		else:
 			sequence_data["maps"] = []
 		
 		# Map index will be calculated in _update_info_board based on current map
 		sequence_data["map_index"] = 0 
 		sequence_data["total_maps"] = sequence_data["maps"].size()
-		print("AnnotationInfoBoard: ✅ Loaded sequence data for: " + sequence_name)
 		
 		# Also load current map info so we can display both sequence and map details
 		_load_current_map_info_for_display()
@@ -572,7 +564,6 @@ func _load_current_map_info_for_display():
 				# Try to load blurb.md first, fall back to description
 				current_description = _load_blurb_or_description(current_map_name, map_info.get("description", "No description available"))
 
-				print("AnnotationInfoBoard: Loaded current map info for display - Name: '%s'" % current_map_name)
 			else:
 				# Fallback to metadata method
 				var metadata = data_component.get_map_metadata()
@@ -603,7 +594,6 @@ func _find_grid_system():
 		# Connect to map loaded signal
 		if grid_system.has_signal("map_loaded") and not grid_system.map_loaded.is_connected(_on_map_loaded):
 			grid_system.map_loaded.connect(_on_map_loaded)
-			print("AnnotationInfoBoard: Connected to GridSystem.map_loaded")
 		
 		# Get current map info
 		_load_current_map_info(grid_system)
@@ -624,7 +614,6 @@ func _find_node_by_class(node: Node, target_class_name: String) -> Node:
 
 func _on_map_loaded(map_name: String, format: String):
 	"""Handle when a new map is loaded"""
-	print("AnnotationInfoBoard: Map loaded - %s (%s)" % [map_name, format])
 	
 	# Find grid system to get data
 	var grid_system = get_tree().get_first_node_in_group("grid_system")
@@ -651,8 +640,6 @@ func _load_current_map_info(grid_system):
 		# Try to load blurb.md first, fall back to description
 		current_description = _load_blurb_or_description(current_map_name, map_info.get("description", "No description available"))
 
-		print("AnnotationInfoBoard: Loaded from map_info - Name: '%s'" % current_map_name)
-		print("AnnotationInfoBoard: Description: '%s'" % current_description)
 	else:
 		# Fallback to metadata method
 		var metadata = data_component.get_map_metadata()
@@ -669,7 +656,6 @@ func _load_current_map_info(grid_system):
 
 func _update_info_board():
 	"""Update the info board with current map information"""
-	print("DEBUG INFOBOARD: Current Map: '%s'" % current_map_name)
 	
 	# ALWAYS try to determine the true Map ID (filename)
 	var check_id = MapProgressionManager.current_map if MapProgressionManager else ""
@@ -679,10 +665,8 @@ func _update_info_board():
 		var gs_map_name = grid_system_ref.get("map_name")
 		if gs_map_name:
 			check_id = gs_map_name
-			print("AnnotationInfoBoard: Got ID '%s' from GridSystem.map_name" % check_id)
 		elif "current_map_name" in grid_system_ref:
 			check_id = grid_system_ref.current_map_name
-			print("AnnotationInfoBoard: Got ID '%s' from GridSystem.current_map_name" % check_id)
 		
 		# If GridSystem property failed, try DataComponent (MOST RELIABLE)
 		if check_id.is_empty():
@@ -691,18 +675,15 @@ func _update_info_board():
 				var dc_name = data_comp.get_current_map_name()
 				if not dc_name.is_empty():
 					check_id = dc_name
-					print("AnnotationInfoBoard: Got ID '%s' from GridDataComponent.get_current_map_name()" % check_id)
 	
 	# Fallback: Get from scene filename
 	if check_id.is_empty():
 		var scene_path = get_tree().current_scene.scene_file_path
 		if not scene_path.is_empty():
 			check_id = scene_path.get_file().get_basename()
-			print("AnnotationInfoBoard: Extracted ID '%s' from scene path" % check_id)
 			
 	if not check_id.is_empty():
 		current_map_id = str(check_id).strip_edges() # Store valid ID for index lookup (normalized)
-		print("AnnotationInfoBoard: Stored normalized map ID: '%s'" % current_map_id)
 	
 	# 1. Primary Check: current_map_id
 	var candidates = []
@@ -713,7 +694,6 @@ func _update_info_board():
 	# 2. Secondary Check: Lookup Name (Explicit Override)
 	if not current_lookup_name.is_empty():
 		candidates.append(current_lookup_name)
-		print("AnnotationInfoBoard: Added lookup_name candidate: '%s'" % current_lookup_name)
 
 	
 	# 2. Secondary Check: Display Name -> ID conversion (Point Zero -> Point_Zero)
@@ -928,14 +908,12 @@ func _load_blurb_or_description(map_name: String, fallback_description: String) 
 
 	for candidate in path_candidates:
 		var blurb_path = "res://commons/maps/%s/blurb.md" % candidate
-		print("AnnotationInfoBoard: Trying blurb path: %s" % blurb_path)
 		if FileAccess.file_exists(blurb_path):
 			var file = FileAccess.open(blurb_path, FileAccess.READ)
 			if file:
 				var content = file.get_as_text().strip_edges()
 				file.close()
 				if not content.is_empty():
-					print("AnnotationInfoBoard: ✅ Loaded blurb.md from '%s'" % blurb_path)
 					return content
 
 	print("AnnotationInfoBoard: No blurb.md found, using JSON description")

@@ -47,7 +47,6 @@ var _reach: Dictionary = {}   # tracker -> {min: Vector2, max: Vector2}
 
 
 func _ready() -> void:
-	print("JoystickCalibrate: waiting %.1fs for controllers..." % settle_delay)
 	await get_tree().create_timer(settle_delay).timeout
 	_left = XRHelpers.get_left_controller(self)
 	_right = XRHelpers.get_right_controller(self)

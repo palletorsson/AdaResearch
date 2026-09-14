@@ -32,12 +32,11 @@ signal data_loaded(map_name: String, format: String)
 signal data_load_failed(map_name: String, error: String)
 
 func _ready():
-	print("GridDataComponent: Initialized")
+	pass
 
 # Load map data
 func load_map_data(target_map_name: String) -> bool:
 	map_name = target_map_name
-	print("GridDataComponent: Loading data for map '%s'" % map_name)
 	
 	if prefer_json_format:
 		return _load_json_map()
@@ -70,34 +69,24 @@ func _map_override_path(original: String, name: String) -> String:
 func _load_json_map() -> bool:
 	var json_path = ""
 	
-	print("🔍 DEBUG: GridDataComponent._load_json_map() called")
-	print("🔍 DEBUG: map_name = '%s'" % map_name)
 	
 	# Handle Lab subfolder structure
 	if map_name.begins_with("Lab/"):
 		# For Lab progressive maps: res://commons/maps/Lab/map_data_init.json
 		var lab_map_file = map_name.substr(4)  # Remove "Lab/" prefix
 		json_path = MAPS_PATH + "Lab/" + lab_map_file + ".json"
-		print("🔍 DEBUG: Lab progressive map detected")
-		print("🔍 DEBUG: lab_map_file = '%s'" % lab_map_file)
-		print("🔍 DEBUG: json_path = '%s'" % json_path)
 	elif map_name == "Lab":
 		# For base Lab map: res://commons/maps/Lab/map_data.json  
 		json_path = MAPS_PATH + "Lab/map_data.json"
-		print("🔍 DEBUG: Base Lab map")
-		print("🔍 DEBUG: json_path = '%s'" % json_path)
 	else:
 		# For regular maps: res://commons/maps/Tutorial_Start/map_data.json
 		json_path = MAPS_PATH + map_name + "/map_data.json"
-		print("🔍 DEBUG: Regular map")
-		print("🔍 DEBUG: json_path = '%s'" % json_path)
 
 	# Spine-runner corridor variant: prefer map_data.corridor.json when present
 	# and prefer_corridor_variant is set. Falls back silently if not generated yet.
 	if prefer_corridor_variant and not map_name.begins_with("Lab"):
 		var corridor_path = MAPS_PATH + map_name + "/map_data.corridor.json"
 		if FileAccess.file_exists(corridor_path):
-			print("GridDataComponent: loading CORRIDOR variant: %s" % corridor_path)
 			json_path = corridor_path
 		else:
 			print("GridDataComponent: corridor variant not found, using base map_data.json")
@@ -114,8 +103,6 @@ func _load_json_map() -> bool:
 		lab_dir.list_dir_begin()
 		var file_name = lab_dir.get_next()
 		while file_name != "":
-			if file_name.ends_with(".json"):
-				print("🔍 DEBUG:   → %s" % file_name)
 			file_name = lab_dir.get_next()
 	else:
 		print("🔍 DEBUG: Could not open Lab folder!")
@@ -130,7 +117,6 @@ func _load_json_map() -> bool:
 		data_load_failed.emit(map_name, error)
 		return false
 	
-	print("GridDataComponent: Loading JSON map from '%s'" % json_path)
 	
 	# Rest of the method stays the same...
 	json_loader = JsonMapLoader.new()
@@ -361,7 +347,6 @@ func get_current_format() -> String:
 
 # Debug: List available maps
 func _list_available_maps():
-	print("GridDataComponent: Listing available maps in %s:" % MAPS_PATH)
 	
 	var dir = DirAccess.open(MAPS_PATH)
 	if dir:

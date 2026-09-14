@@ -61,28 +61,23 @@ func _ready():
 
 	# Debug audio setup
 	if teleport_audio:
-		print("Teleport: Audio component found - Volume: %s dB, Max distance: %s" % [teleport_audio.volume_db, teleport_audio.max_distance])
 		
 		# Check if we're in VR mode
 		var xr_interface = XRServer.get_primary_interface()
 		if xr_interface and xr_interface.is_initialized():
-			print("Teleport: VR Mode detected - Interface: %s" % xr_interface.get_name())
 			
 			# Check and boost Master bus volume
 			var master_bus_index = AudioServer.get_bus_index("Master")
 			var master_volume = AudioServer.get_bus_volume_db(master_bus_index)
 			var master_mute = AudioServer.is_bus_mute(master_bus_index)
-			print("Teleport: Master bus - Volume: %s dB, Muted: %s" % [master_volume, master_mute])
 			
 			# Temporarily boost Master bus for testing
 			if master_volume < 0.0:
 				AudioServer.set_bus_volume_db(master_bus_index, 0.0)
-				print("Teleport: Boosted Master bus to 0dB for testing")
 			
 			# Unmute if muted
 			if master_mute:
 				AudioServer.set_bus_mute(master_bus_index, false)
-				print("Teleport: Unmuted Master bus")
 		else:
 			print("Teleport: Desktop mode - No VR interface active")
 			
@@ -90,29 +85,23 @@ func _ready():
 			var master_bus_index = AudioServer.get_bus_index("Master")
 			var master_volume = AudioServer.get_bus_volume_db(master_bus_index)
 			var master_mute = AudioServer.is_bus_mute(master_bus_index)
-			print("Teleport: Master bus - Volume: %s dB, Muted: %s" % [master_volume, master_mute])
 			
 			# Boost Master bus for testing
 			if master_volume < 0.0:
 				AudioServer.set_bus_volume_db(master_bus_index, 0.0)
-				print("Teleport: Boosted Master bus to 0dB for testing")
 			
 			# Unmute if muted
 			if master_mute:
 				AudioServer.set_bus_mute(master_bus_index, false)
-				print("Teleport: Unmuted Master bus")
 		
 		# Start continuous teleporter ambient sound
-		print("Teleport: Starting continuous ambient teleporter sound...")
 		await get_tree().create_timer(0.5).timeout  # Brief delay for setup
 		#teleport_audio.set_volume(-6.0)  # Moderate ambient volume
 		teleport_audio.play_secondary_sound(true)  # Play ghost drone spatially
-		print("Teleport: Ambient ghost drone now running continuously")
 	else:
 		print("Teleport: ❌ Audio component not found!")
 
 	if teleport_area:
-		print("Teleport: TeleportArea found - Collision layer: %s, mask: %s" % [teleport_area.collision_layer, teleport_area.collision_mask])
 		
 		# Ensure the signal is connected. If already connected in editor, this might print a harmless error.
 		if not teleport_area.is_connected("body_entered", Callable(self, "_on_teleport_area_body_entered")):
@@ -121,24 +110,18 @@ func _ready():
 				printerr("Teleport: Failed to connect body_entered signal for TeleportArea. Error code: %s" % error_code)
 			else:
 				print("Teleport: Successfully connected body_entered signal")
-		else:
-			print("Teleport: body_entered signal already connected")
 	else:
 		printerr("Teleport: 'TeleportArea' node not found or is not an Area3D. Teleporter will not function.")
 
 
 func _on_teleport_area_body_entered(body: Node3D):
-	print("Teleport: Body entered teleporter: %s (groups: %s)" % [body.name, body.get_groups()])
 	
 	if not active:
-		print("Teleport: Player entered but teleporter is inactive.")
 		return
 
 	if not body.is_in_group("player_body"): # Make sure your player's physics body is in the "player_body" group
-		print("Teleport: Non-player body entered, ignoring. Body: %s" % body.name)
 		return
 
-	print("Teleport: Player activated teleporter - advancing sequence")
 
 	# Request any active audio scenes to wind down before teleporting
 	if get_tree():
@@ -162,9 +145,7 @@ func _update_title_visuals():
 			if material is ShaderMaterial:
 				material.set_shader_parameter("Title", title)
 			elif material:
-				print_debug("Teleport: Material for title is not a ShaderMaterial.")
-		else:
-			print_debug("Teleport: 'Cube' does not have enough surface materials for title.")
+				pass
 	elif title and not top_mesh_node:
 		print_debug("Teleport: 'Cube' node not found for title.")
 
@@ -200,7 +181,7 @@ func _update_teleport_visuals():
 				material.set_shader_parameter("beam_color", inactive_beam_color)
 				cylinder_mesh_node.visible = inactive_beam_visible
 		elif material:
-			print_debug("Teleport: Beam material is not a ShaderMaterial.")
+			pass
 	elif not cylinder_mesh_node:
 		print_debug("Teleport: 'Cube' node not found for visuals.")
 
@@ -303,13 +284,11 @@ func _update_scene_label():
 # - set_collision_disabled(p_disable) # This might still be useful depending on your needs.
 
 func apply_grid_config(data: Dictionary):
-	print("Teleport: Applying grid config: %s" % str(data))
 	
 	if data.has("destination"):
 		var dest = str(data["destination"])
 		set_meta("destination", dest)
 		self.scene_name = dest
-		print("Teleport: Set destination to %s" % dest)
 		
 	if data.has("action"):
 		set_meta("action", str(data["action"]))

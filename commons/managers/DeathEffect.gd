@@ -117,7 +117,6 @@ func hurt(damage_pos: Vector3) -> void:
 	# Use MushroomEffect's proven VR overlay for the red flash
 	_trigger_damage_flash()
 	_haptic_burst(0.15, 0.5)
-	print("[DeathEffect] HURT at %s" % damage_pos)
 
 
 ## FLASH ONLY — no teleport, no health change.
@@ -172,7 +171,6 @@ func _teleport_to_spawn() -> void:
 	var xr_origin := _find_xr_origin()
 	if xr_origin and spawn_pos != Vector3.ZERO:
 		xr_origin.global_position = spawn_pos
-		print("[DeathEffect] Teleported to spawn at %s" % spawn_pos)
 	else:
 		print("[DeathEffect] Could not find spawn — no teleport")
 
@@ -304,7 +302,6 @@ func _create_vignette(_color: Color) -> void:
 		print("[DeathEffect] WARNING: Could not load damage shader")
 
 	_xr_camera.add_child(_vignette_quad)
-	print("[DeathEffect] VR vignette created on %s" % _xr_camera.name)
 
 
 func _update_vignette_color(color: Color) -> void:

@@ -42,7 +42,6 @@ func _ready():
 		beam_area.body_entered.connect(_on_player_entered_beam)
 		beam_area.body_exited.connect(_on_player_exited_beam)
 	
-	print("TeleportController: Ready with drone audio - destination: %s" % destination)
 
 func _setup_teleporter_audio():
 	# Create dedicated audio player for teleporter sounds using resource path
@@ -55,7 +54,6 @@ func _setup_teleporter_audio():
 	teleport_audio.max_distance = 15.0  # Larger range for teleporter
 	add_child(teleport_audio)
 	
-	print("TeleportController: Teleporter audio system ready")
 
 func _process(delta):
 	super(delta)
@@ -77,7 +75,6 @@ func _process(delta):
 func _on_player_entered_beam(body: Node3D):
 	if _is_player_body(body):
 		players_in_beam.append(body)
-		print("TeleportController: Player entered beam")
 		
 		if activation_method == "proximity":
 			_start_teleport_sequence()
@@ -108,7 +105,6 @@ func _start_teleport_sequence():
 	if is_charging or destination.is_empty():
 		return
 	
-	print("TeleportController: Starting teleport sequence")
 	is_charging = true
 	charge_progress = 0.0
 	
@@ -123,7 +119,6 @@ func _start_teleport_sequence():
 	_start_charge_animation()
 
 func _cancel_teleport_sequence():
-	print("TeleportController: Teleport sequence cancelled")
 	is_charging = false
 	charge_progress = 0.0
 	
@@ -138,7 +133,6 @@ func _cancel_teleport_sequence():
 	_stop_charge_animation()
 
 func _complete_teleport_charge():
-	print("TeleportController: Teleport fully charged!")
 	is_charging = false
 	charge_progress = 1.0
 	
@@ -146,7 +140,6 @@ func _complete_teleport_charge():
 	_activate_teleporter()
 
 func _activate_teleporter():
-	print("TeleportController: 🚀 TELEPORTER ACTIVATED!")
 	
 	# Stop charging drone, play activation sound
 	if teleport_audio:

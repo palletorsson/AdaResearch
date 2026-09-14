@@ -65,7 +65,6 @@ func _connect_signals() -> void:
 		if eco.has_signal("terrain_mode_changed"):
 			eco.terrain_mode_changed.connect(_on_terrain_mode_changed)
 		_current_mode = eco.get_terrain_mode()
-		print("EcosystemTerrainGenerator: Connected (mode='%s')" % _current_mode)
 
 
 func _build_initial() -> void:
@@ -81,7 +80,6 @@ func _on_terrain_mode_changed(new_mode: String) -> void:
 		return
 	_current_mode = new_mode
 	_generate_terrain()
-	print("EcosystemTerrainGenerator: Rebuilt terrain (mode='%s')" % _current_mode)
 
 
 # ── Terrain Generation ────────────────────────────────────────────────

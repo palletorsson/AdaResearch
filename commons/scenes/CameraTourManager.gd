@@ -117,7 +117,6 @@ func _deferred_start() -> void:
 			lab_grid_system._on_lab_map_ready_for_catalog):
 		lab_grid_system.map_generation_complete.disconnect(
 			lab_grid_system._on_lab_map_ready_for_catalog)
-		print("CameraTourManager: Disconnected catalog setup (not needed for tour)")
 
 	_initialize_tour()
 
@@ -130,9 +129,6 @@ func _initialize_tour() -> void:
 			fade_rect.color.a = 0.0
 		return
 
-	print("CameraTourManager: Loaded %d sequences for tour" % tour_data.size())
-	for td in tour_data:
-		print("  - %s: %d maps" % [td.display_name, td.maps.size()])
 
 	# If start_sequence is set, jump directly to that sequence
 	if start_sequence != "":
@@ -145,7 +141,6 @@ func _initialize_tour() -> void:
 				lab_grid_system.map_name = current_map_name
 				_update_sequence_display()
 				_update_map_display()
-				print("CameraTourManager: Jumping to sequence '%s' (index %d)" % [start_sequence, i])
 				_wait_for_initial_map()
 				found = true
 				break
@@ -173,7 +168,6 @@ func _initialize_tour() -> void:
 
 func _wait_for_initial_map() -> void:
 	"""Wait for the first map (loaded by LabGridSystem._ready) to finish generating."""
-	print("CameraTourManager: Waiting for initial map '%s'..." % current_map_name)
 	is_transitioning = true
 
 	var wait_time: float = 0.0
@@ -209,7 +203,6 @@ func _wait_for_initial_map() -> void:
 	if audio_comp and audio_comp.has_method("stop_ambient"):
 		audio_comp.stop_ambient()
 
-	print("CameraTourManager: Map '%s' ready (%.2fs)" % [current_map_name, wait_time])
 	_generate_path()
 	_position_camera_at_start()
 	await _fade_from_black(fade_duration)
@@ -311,7 +304,6 @@ func _load_map(map_name: String) -> void:
 	_update_sequence_display()
 	_update_map_display()
 
-	print("CameraTourManager: Transitioning to map '%s' via reload_map" % map_name)
 
 	var audio_comp = lab_grid_system.get_node_or_null("GridAudioComponent")
 
@@ -366,7 +358,6 @@ func _load_map(map_name: String) -> void:
 	if audio_comp and audio_comp.has_method("stop_ambient"):
 		audio_comp.stop_ambient()
 
-	print("CameraTourManager: Map '%s' ready (%.2fs)" % [current_map_name, wait_time])
 	_generate_path()
 	_position_camera_at_start()
 	await _fade_from_black(fade_duration)
@@ -391,7 +382,6 @@ func _take_snapshot() -> void:
 	_root_snapshot.clear()
 	for child in get_tree().root.get_children():
 		_root_snapshot.append(child.name)
-	print("CameraTourManager: Snapshot taken — root: %d nodes" % _root_snapshot.size())
 
 func _nuke_map_content() -> void:
 	"""Destroy ALL non-essential children of LabGridSystem and stray root nodes.
@@ -419,7 +409,6 @@ func _nuke_map_content() -> void:
 			child.queue_free()
 			removed += 1
 
-	print("CameraTourManager: Nuked %d nodes before map reload" % removed)
 
 # ---------------------------------------------------------------------------
 # Camera positioning — always start at origin looking +Z
@@ -451,9 +440,7 @@ func _generate_path() -> void:
 
 	# Collect POIs
 	var artifacts := _collect_artifacts()
-	print("CameraTourManager: Found %d artifacts in '%s'" % [artifacts.size(), current_map_name])
 	var utilities := _collect_utilities()
-	print("CameraTourManager: Found %d utilities in '%s'" % [utilities.size(), current_map_name])
 
 	var all_pois: Array[Dictionary] = []
 	all_pois.append_array(artifacts)
@@ -656,7 +643,6 @@ func _move_to_next_waypoint() -> void:
 	_is_looking = true
 	_update_progress_display()
 
-	print("CameraTourManager: [%d/%d] %s" % [waypoint_index + 1, waypoints.size(), wp.name])
 
 	var distance := tour_camera.global_position.distance_to(wp.position)
 	var move_duration := distance / maxf(move_speed, 0.1)
@@ -706,7 +692,6 @@ func _advance_waypoint() -> void:
 	_move_to_next_waypoint()
 
 func _on_map_tour_complete() -> void:
-	print("CameraTourManager: Map '%s' tour complete" % current_map_name)
 	_is_looking = false
 	_advance_to_next_map()
 
@@ -729,7 +714,6 @@ func _advance_to_next_map() -> void:
 	_tour_finished()
 
 func _tour_finished() -> void:
-	print("CameraTourManager: === TOUR COMPLETE ===")
 	tour_complete = true
 	if sequence_label:
 		sequence_label.text = "TOUR COMPLETE"
@@ -786,14 +770,12 @@ func _toggle_pause() -> void:
 	if active_tween and active_tween.is_valid():
 		active_tween.set_speed_scale(0.0 if is_paused else speed_multiplier)
 	_update_speed_display()
-	print("CameraTourManager: %s" % ("PAUSED" if is_paused else "RESUMED"))
 
 func _change_speed(factor: float) -> void:
 	speed_multiplier = clampf(speed_multiplier * factor, 0.25, 100.0)
 	if active_tween and active_tween.is_valid() and not is_paused:
 		active_tween.set_speed_scale(speed_multiplier)
 	_update_speed_display()
-	print("CameraTourManager: Speed = %.1fx" % speed_multiplier)
 
 func _skip_to_next_map() -> void:
 	if is_transitioning or tour_complete:
@@ -922,7 +904,6 @@ func _build_artifact_registry() -> void:
 				if entry is Dictionary and entry.has("scene"):
 					_artifact_registry[key] = entry["scene"]
 			if _artifact_registry.size() > 0:
-				print("CameraTourManager: Built registry from GridInteractablesComponent (%d entries)" % _artifact_registry.size())
 				return
 
 	# Fallback: read registry JSONs ourselves
@@ -951,7 +932,6 @@ func _build_artifact_registry() -> void:
 				var sp: String = entry.get("scene", "")
 				if sp != "":
 					_artifact_registry[key] = sp
-	print("CameraTourManager: Built registry from JSON files (%d entries)" % _artifact_registry.size())
 
 func _extract_lookup_name(token: String) -> String:
 	"""Strip #config and :rotation suffixes from a map interactable token."""
@@ -1003,4 +983,3 @@ func _precache_sequence(seq_index: int) -> void:
 			if batch >= 5:
 				batch = 0
 				await get_tree().process_frame
-	print("CameraTourManager: Pre-cached %d scenes for '%s'" % [count, seq.sequence_name])

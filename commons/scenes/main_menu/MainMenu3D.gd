@@ -47,7 +47,6 @@ func _ready():
 
 	for a in OS.get_cmdline_args():
 		if String(a) == "--em-autostart":
-			print("[menu] --em-autostart: entering the museum in %.1f s" % AUTOSTART_DELAY)
 			get_tree().create_timer(AUTOSTART_DELAY).timeout.connect(_on_new_game_clicked)
 			break
 
@@ -157,12 +156,10 @@ func _enter_museum(chapter: String, map: String = "") -> void:
 	var right_pointer = find_child("FunctionPointerRight", true, false)
 	if left_pointer: left_pointer.visible = false
 	if right_pointer: right_pointer.visible = false
-	print("MainMenu: entering the museum at %s%s" % [chapter, (" / " + map) if map != "" else ""])
 	staging.load_scene(MUSEUM_SCENE)
 
 
 func _on_new_game_clicked():
-	print("MainMenu: New Game clicked — the endless museum at %s" % FIRST_MAP)
 
 	# Clear any existing checkpoints
 	var checkpoint_manager = get_node_or_null("/root/CheckpointManager")
@@ -190,7 +187,6 @@ func _on_load_game_clicked():
 	# (The old behavior — resume from checkpoint OR start new game — was
 	# broken when no checkpoint existed and gave the player no way to
 	# pick a sequence. The picker fixes that.)
-	print("MainMenu: Load Game clicked — opening sequence picker")
 	_open_sequence_picker()
 
 
@@ -238,7 +234,6 @@ const SETTINGS_SCENE = preload("res://commons/scenes/main_menu/objects/settings_
 var settings_instance: Node3D = null
 
 func _on_browse_clicked():
-	print("MainMenu: Browse clicked")
 
 	# Close settings if open
 	if settings_instance:
@@ -282,7 +277,6 @@ func _on_sequence_selected(sequence_name: String):
 	# i.e. the SAME staging-aware path a teleporter uses, so the VR rig is
 	# preserved. Calling it from the stable menu context avoids the empty-lab
 	# limbo entirely. When the sequence ends it still returns_to "lab".
-	print("MainMenu: Sequence picker selected: %s" % sequence_name)
 
 	# Close the picker
 	if sequence_picker_instance:
@@ -293,7 +287,6 @@ func _on_sequence_selected(sequence_name: String):
 	# editing) — a straight scene change, not a staging load; F10 inside it
 	# returns here. It is the ONE card that is not a room in the museum.
 	if sequence_name == "prop_corridor":
-		print("MainMenu: entering the prop corridor")
 		get_tree().change_scene_to_file("res://commons/scenes/prop_reference_wall.tscn")
 		return
 
@@ -325,7 +318,6 @@ func _find_staging() -> XRToolsStaging:
 	return null
 
 func _on_map_selected(map_name: String):
-	print("MainMenu: Loading map: %s" % map_name)
 	# Use SceneManager to load the map directly
 	var scene_manager = get_node_or_null("/root/SceneManager")
 	if scene_manager:
@@ -341,7 +333,6 @@ func _on_browser_back():
 		about_display.visible = true
 
 func _on_settings_clicked():
-	print("MainMenu: Settings clicked")
 
 	# Close map browser if open
 	if map_browser_instance:
@@ -371,6 +362,5 @@ func _on_settings_clicked():
 		settings_instance.rotation_degrees.y = 0
 
 func _on_quit_clicked():
-	print("MainMenu: Quit clicked")
 	quit_requested.emit()
 	get_tree().quit()

@@ -83,7 +83,6 @@ func _ready() -> void:
 	_build_world()
 	_load_walk()
 	_connect()
-	print("[viewer] dialling %s:%d — start the game with --vr-link" % [HOST, PORT])
 
 
 ## A VIEWER IS NOT A GAME, BUT IT BOOTS LIKE ONE. Every scene in this project
@@ -109,7 +108,6 @@ func _quiet_autoloads() -> void:
 		n.set_physics_process(false)
 		_hide_visuals(n)
 		hushed.append(n_name)
-	print("[viewer] quieted %d autoloads: %s" % [hushed.size(), ", ".join(hushed)])
 
 
 func _hide_visuals(n: Node) -> void:
@@ -258,7 +256,6 @@ func _process(delta: float) -> void:
 			await RenderingServer.frame_post_draw
 			var img: Image = get_viewport().get_texture().get_image()
 			img.save_png(ProjectSettings.globalize_path(p))
-			print("[viewer] shot -> %s" % p)
 			get_tree().quit(0)
 
 
@@ -341,7 +338,6 @@ func _load_walk() -> void:
 	var v: Variant = JSON.parse_string(FileAccess.get_file_as_string(WALK_PATH))
 	if v is Dictionary and (v as Dictionary).has("halls"):
 		_halls = (v as Dictionary)["halls"]
-		print("[viewer] %d halls from the museum's own layout record" % _halls.size())
 
 
 ## Rebuild only when the hall (or its live z) actually changes. The pose arrives
@@ -428,7 +424,6 @@ func _draw_map(name: String) -> bool:
 				open.append(t)
 	_fill(_solid, solid)
 	_fill(_floor, open)
-	print("[viewer] map %s — %d solid, %d floor" % [name, solid.size(), open.size()])
 	return true
 
 
@@ -555,4 +550,3 @@ func _teleport_at(screen: Vector2) -> void:
 		return
 	var hit: Vector3 = from + dir * t
 	_say({"cmd": "goto", "pos": [hit.x, 0.0, hit.z]})
-	print("[viewer] goto %.2f 0 %.2f" % [hit.x, hit.z])

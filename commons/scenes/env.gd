@@ -74,7 +74,6 @@ func _ready():
 	if auto_setup_on_ready:
 		setup_vr_environment()
 		setup_performance_monitoring()
-		print("VR Environment initialized - Theme: " + primary_theme)
 
 func setup_vr_environment():
 	"""Main setup function that configures the entire VR environment"""
@@ -115,7 +114,6 @@ func configure_rendering_backend():
 	#viewport.hdr_2d = true
 	# viewport.use_debanding = true
 	
-	print("Rendering backend configured for: " + target_platform)
 
 func create_world_environment():
 	"""Create and configure the WorldEnvironment with VR-optimized settings"""
@@ -585,14 +583,12 @@ func adjust_quality_down():
 	if particle_density > 0.3:
 		particle_density = max(0.3, particle_density - 0.1)
 		update_particle_counts()
-		print("Quality reduced to maintain performance - Particle density: " + str(particle_density))
 
 func adjust_quality_up():
 	"""Increase visual quality when performance allows"""
 	if particle_density < 1.0:
 		particle_density = min(1.0, particle_density + 0.1)
 		update_particle_counts()
-		print("Quality increased - Particle density: " + str(particle_density))
 
 func update_particle_counts():
 	"""Update particle system counts based on current density"""
@@ -604,7 +600,6 @@ func update_particle_counts():
 
 func apply_visual_theme():
 	"""Apply the selected visual theme to all elements"""
-	print("Applying visual theme: " + primary_theme)
 	
 	# Update magical light colors
 	var theme_colors = color_themes[primary_theme]
@@ -625,7 +620,6 @@ func set_theme(theme_name: String):
 	if theme_name in color_themes:
 		primary_theme = theme_name
 		apply_visual_theme()
-		print("Theme changed to: " + theme_name)
 	else:
 		print("Unknown theme: " + theme_name)
 
@@ -647,7 +641,6 @@ func toggle_performance_mode():
 		enable_advanced_effects = false
 	
 	setup_vr_environment()
-	print("Switched to: " + target_platform)
 
 func get_environment_info() -> Dictionary:
 	"""Get current environment configuration info"""

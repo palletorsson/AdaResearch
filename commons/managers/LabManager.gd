@@ -28,7 +28,6 @@ signal progression_event(event_name: String, event_data: Dictionary)
 signal lab_state_changed(new_state: String, unlocked_artifacts: Array)
 
 func _ready():
-	print("LabManager: Initializing enhanced lab system with progression")
 
 	# Get lab scene reference
 	lab_scene = get_parent()
@@ -78,7 +77,6 @@ func _consume_pending_sequence_request() -> void:
 	# Wait a frame so any remaining lab wiring finishes before we ask
 	# the SceneManager to transition again.
 	await get_tree().process_frame
-	print("LabManager: 🎯 Picker-pending sequence detected: %s — routing through lab-teleporter path" % pending)
 	if scene_manager.has_method("request_transition"):
 		scene_manager.request_transition({
 			"type": 1, # TransitionType.TELEPORTER — matches LabGridSystem
@@ -112,7 +110,6 @@ func _load_artifact_definitions():
 	
 	if parse_result == OK:
 		artifact_definitions = json.data.get("artifacts", {})
-		print("LabManager: Loaded %d artifact definitions" % artifact_definitions.size())
 	else:
 		print("LabManager: ERROR - Failed to parse lab_artifacts.json: %s" % json.get_error_message())
 
@@ -132,7 +129,6 @@ func _load_artifact_system_state():
 	if json.parse(json_text) == OK:
 		artifact_system_state = json.data
 		current_lab_state = artifact_system_state.get("lab_state", "initial")
-		print("LabManager: Loaded artifact system state - current state: %s" % current_lab_state)
 
 func _load_progression_state():
 	"""Load progression state from save file"""
@@ -146,8 +142,6 @@ func _load_progression_state():
 		completed_sequences = save_data.get("completed_sequences", [])
 		current_lab_state = save_data.get("current_lab_state", "initial")
 		
-		print("LabManager: Loaded progression - completed sequences: %s" % str(completed_sequences))
-		print("LabManager: Current lab state: %s" % current_lab_state)
 	else:
 		print("LabManager: No progression save found - starting fresh")
 
@@ -170,7 +164,6 @@ func _create_artifacts_from_current_state():
 	var state_config = _get_state_configuration(current_lab_state)
 	var visible_artifacts = state_config.get("visible_artifacts", ["rotating_cube"])
 	
-	print("LabManager: Creating artifacts for state '%s': %s" % [current_lab_state, str(visible_artifacts)])
 	
 	# Clear existing artifacts
 	_clear_all_artifacts()
@@ -217,7 +210,6 @@ func _instantiate_artifact(artifact_id: String):
 	add_child(artifact_instance)
 	active_artifacts[artifact_id] = artifact_instance
 	
-	print("LabManager: ✅ Created artifact '%s'" % artifact_id)
 
 func _apply_artifact_transform(artifact_instance: Node3D, definition: Dictionary):
 	"""Apply position, rotation, and scale from definition"""
@@ -270,14 +262,12 @@ func _apply_lighting_from_state(state_name: String):
 			var env = world_env.environment
 			env.ambient_light_energy = config.get("ambient_energy", 0.1)
 		
-		print("LabManager: Applied lighting mode: %s" % lighting_mode)
 
 func _setup_scene_manager():
 	"""Setup scene manager connection"""
 	var scene_manager = get_node_or_null("/root/SceneManager")
 	if scene_manager:
 		scene_manager.connect_to_lab_manager(self)
-		print("LabManager: Connected to SceneManager")
 
 func _connect_progression_signals():
 	"""Connect to external progression systems"""
@@ -285,22 +275,18 @@ func _connect_progression_signals():
 	var map_progression = get_node_or_null("/root/MapProgressionManager")
 	if map_progression and map_progression.has_signal("sequence_completed"):
 		map_progression.sequence_completed.connect(_on_sequence_completed)
-		print("LabManager: Connected to MapProgressionManager")
 	
 	# Connect to SceneManager for sequence completion events
 	var scene_manager = get_node_or_null("/root/SceneManager")
 	if scene_manager and scene_manager.has_signal("scene_transition_completed"):
 		scene_manager.scene_transition_completed.connect(_on_scene_transition_completed)
-		print("LabManager: Connected to SceneManager transitions")
 
 # PROGRESSION EVENT HANDLERS
 
 func _on_sequence_completed(sequence_name: String):
 	"""Handle sequence completion from external systems"""
-	print("LabManager: 🎉 Sequence completed: %s" % sequence_name)
 	
 	if sequence_name in completed_sequences:
-		print("LabManager: Sequence already completed, ignoring")
 		return
 	
 	# Add to completed sequences
@@ -339,7 +325,6 @@ func _transition_to_state(new_state: String, newly_unlocked: Array = []):
 	var old_state = current_lab_state
 	current_lab_state = new_state
 	
-	print("LabManager: 🔄 Transitioning from '%s' to '%s'" % [old_state, new_state])
 	
 	# Create artifacts for new state
 	_create_artifacts_from_current_state()
@@ -379,19 +364,16 @@ func _on_scene_transition_completed(scene_name: String, user_data: Dictionary):
 		
 		if completion_data.has("sequence_completed"):
 			var completed_sequence = completion_data["sequence_completed"]
-			print("LabManager: 🔄 Player returned from sequence: %s" % completed_sequence)
 			_on_sequence_completed(completed_sequence)
 
 # SIGNAL HANDLERS (existing)
 
 func _on_artifact_activated(artifact_id: String):
 	"""Forward artifact activation to lab scene"""
-	print("LabManager: Artifact '%s' activated - forwarding to lab scene" % artifact_id)
 	artifact_activated.emit(artifact_id)
 
 func _on_sequence_triggered(artifact_id: String, sequence_name: String):
 	"""Forward sequence trigger to lab scene"""
-	print("LabManager: Sequence '%s' triggered by '%s'" % [sequence_name, artifact_id])
 	
 	var event_data = {
 		"artifact_id": artifact_id,
@@ -444,7 +426,6 @@ func force_unlock_sequence_rewards(sequence_name: String):
 
 func reset_progression():
 	"""Reset all progression (for testing)"""
-	print("LabManager: 🔄 Resetting all progression")
 	completed_sequences.clear()
 	current_lab_state = "initial"
 	_create_artifacts_from_current_state()
@@ -452,7 +433,6 @@ func reset_progression():
 
 func preview_state(state_name: String):
 	"""Preview a specific state (for testing)"""
-	print("LabManager: 👁️ Previewing state: %s" % state_name)
 	var old_state = current_lab_state
 	current_lab_state = state_name
 	_create_artifacts_from_current_state()
@@ -490,7 +470,6 @@ func get_progression_info() -> Dictionary:
 func _setup_distance_activation():
 	"""Setup timer for periodic distance checks"""
 	if not enable_distance_activation:
-		print("LabManager: Distance activation disabled")
 		return
 	
 	_distance_check_timer = Timer.new()
@@ -498,7 +477,6 @@ func _setup_distance_activation():
 	_distance_check_timer.timeout.connect(_check_artifact_distances)
 	_distance_check_timer.autostart = true
 	add_child(_distance_check_timer)
-	print("LabManager: Distance activation enabled (range: %.1fm, interval: %.1fs)" % [artifact_activation_distance, artifact_check_interval])
 
 func _check_artifact_distances():
 	"""Check distance to each artifact and activate/deactivate based on proximity"""
@@ -529,9 +507,6 @@ func _check_artifact_distances():
 				_deactivate_artifact_processing(artifact)
 				deactivated_count += 1
 	
-	# Debug output (only when changes happen)
-	if activated_count > 0 or deactivated_count > 0:
-		print("LabManager: Distance check - activated: %d, deactivated: %d" % [activated_count, deactivated_count])
 
 func _activate_artifact_processing(artifact: Node3D):
 	"""Activate an artifact's processing"""
@@ -557,11 +532,9 @@ func set_distance_activation_enabled(enabled: bool):
 	if _distance_check_timer:
 		if enabled:
 			_distance_check_timer.start()
-			print("LabManager: Distance activation enabled")
 		else:
 			_distance_check_timer.stop()
 			# Re-activate all artifacts
 			for artifact in active_artifacts.values():
 				if is_instance_valid(artifact):
 					_activate_artifact_processing(artifact)
-			print("LabManager: Distance activation disabled - all artifacts active")

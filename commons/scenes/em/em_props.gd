@@ -218,7 +218,6 @@ static func _ruled_y(token: String, code_y: float) -> float:
 			var doc: Variant = JSON.parse_string(FileAccess.get_file_as_string(RULES_PATH))
 			if doc is Dictionary and (doc as Dictionary).get("rules") is Dictionary:
 				_hand_rules = (doc as Dictionary)["rules"]
-				print("[em_props] %d hand mounting rule(s) from %s" % [_hand_rules.size(), RULES_PATH])
 	var r: Variant = _hand_rules.get(token, null)
 	if r is Dictionary and (r as Dictionary).has("h"):
 		return float((r as Dictionary)["h"])

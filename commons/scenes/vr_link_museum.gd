@@ -82,7 +82,6 @@ func _ready() -> void:
 	_build_ui()
 	_spawn_museum()
 	_connect()
-	print("[em-view] real museum + split view — dialling %s:%d" % [HOST, PORT])
 
 
 ## ————————————————————————————————————————————————————————————————————
@@ -96,7 +95,6 @@ func _spawn_museum() -> void:
 		return
 	_museum = ps.instantiate()
 	add_child(_museum)
-	print("[em-view] endless museum instanced — it will stream around the VR player")
 
 
 ## The Feel node is created during the museum's own _ready, so it cannot be
@@ -130,7 +128,6 @@ func _quiet_locomotion() -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if not feels.is_empty():
 		_quiet_done = true
-		print("[em-view] locomotion quieted (%d em_feel node(s)) — the headset drives the body" % feels.size())
 
 
 func _hide_visuals(n: Node) -> void:
@@ -305,10 +302,6 @@ func _process(delta: float) -> void:
 			_shot_path = ""
 			await RenderingServer.frame_post_draw
 			get_viewport().get_texture().get_image().save_png(ProjectSettings.globalize_path(p))
-			print("[em-view] shot -> %s" % p)
-			print("[em-view]   marker %s  eye-cam %s  plan-cam %s (size %.0f)" % [
-				str(_mark.global_position), str(_cam_eye.global_position),
-				str(_cam_plan.global_position), _plan_size])
 			get_tree().quit(0)
 
 

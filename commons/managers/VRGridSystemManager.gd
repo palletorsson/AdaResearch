@@ -37,12 +37,10 @@ signal map_loaded(map_name: String)
 signal grid_configured()
 
 func _ready():
-	print("VRGridSystemManager: Initialized")
 	
 	# Auto-determine starting map if not set
 	if auto_determine_starting_map and default_map.is_empty():
 		default_map = determine_starting_map()
-		print("VRGridSystemManager: Auto-determined starting map: %s" % default_map)
 
 # Initialize with staging reference
 func initialize_with_staging(staging_ref: XRToolsStaging):
@@ -50,7 +48,6 @@ func initialize_with_staging(staging_ref: XRToolsStaging):
 	if staging:
 		staging.scene_loaded.connect(_on_vr_scene_loaded)
 		staging.scene_visible.connect(_on_vr_scene_visible)
-		print("VRGridSystemManager: Connected to staging system")
 
 # Load a map directly into VR with grid system
 func load_map_in_vr(map_name: String, options: Dictionary = {}):
@@ -58,7 +55,6 @@ func load_map_in_vr(map_name: String, options: Dictionary = {}):
 		push_error("VRGridSystemManager: No staging reference available")
 		return
 	
-	print("VRGridSystemManager: Loading map '%s' in VR" % map_name)
 	
 	# Prepare scene data
 	var scene_user_data = {
@@ -80,7 +76,6 @@ func load_default_map():
 	if starting_map.is_empty():
 		starting_map = determine_starting_map()
 	
-	print("VRGridSystemManager: Loading starting map: %s" % starting_map)
 	load_map_in_vr(starting_map)
 
 # Switch to a different map
@@ -92,7 +87,6 @@ func _configure_grid_system(grid_system: Node, map_name: String):
 	if not grid_system:
 		return
 	
-	print("VRGridSystemManager: Configuring grid system for map: %s" % map_name)
 	
 	# Set map name
 	if "map_name" in grid_system:
@@ -115,15 +109,12 @@ func _configure_grid_system(grid_system: Node, map_name: String):
 	# Enable enhanced utility handler for progression support
 	if grid_system.has_method("enable_enhanced_utility_handler"):
 		grid_system.enable_enhanced_utility_handler()
-		print("VRGridSystemManager: Enabled enhanced utility handler")
 	elif grid_system.has_method("set_utility_handler_type"):
 		grid_system.set_utility_handler_type("enhanced")
-		print("VRGridSystemManager: Set utility handler to enhanced")
 	
 	# Generate/reload the grid
 	if grid_system.has_method("generate_layout"):
 		grid_system.generate_layout()
-		print("VRGridSystemManager: Grid layout generated")
 
 # Find and configure grid system in scene
 func _find_and_configure_grid_system(scene: Node, map_name: String, options: Dictionary = {}):
@@ -134,7 +125,6 @@ func _find_and_configure_grid_system(scene: Node, map_name: String, options: Dic
 	for grid_name in grid_names:
 		grid_system = scene.find_child(grid_name, true, false)
 		if grid_system:
-			print("VRGridSystemManager: Found grid system: %s" % grid_name)
 			break
 	
 	if not grid_system:
@@ -159,7 +149,6 @@ func _find_node_by_class(parent: Node, _class_name: String) -> Node:
 
 # Event handlers
 func _on_vr_scene_loaded(scene: Node, user_data):
-	print("VRGridSystemManager: VR scene loaded")
 	current_scene = scene
 	
 	# Configure grid system if requested
@@ -173,7 +162,7 @@ func _on_vr_scene_loaded(scene: Node, user_data):
 		map_loaded.emit(map_name)
 
 func _on_vr_scene_visible(scene: Node, user_data):
-	print("VRGridSystemManager: VR scene visible")
+	pass
 
 # Public API
 func get_current_grid_system() -> Node:
@@ -204,7 +193,6 @@ func list_available_maps() -> Array[String]:
 				var map_data_path = maps_dir + file_name + "/map_data.json"
 				if ResourceLoader.exists(map_data_path):
 					maps.append(file_name)
-					print("VRGridSystemManager: Found map: %s" % file_name)
 				else:
 					print("VRGridSystemManager: Skipping directory '%s' - no map_data.json found" % file_name)
 			file_name = dir.get_next()
@@ -212,7 +200,6 @@ func list_available_maps() -> Array[String]:
 		print("VRGridSystemManager: Could not open maps directory: %s" % maps_dir)
 	
 	maps.sort()
-	print("VRGridSystemManager: Total maps found: %d" % maps.size())
 	return maps
 
 func quick_test_map(map_name: String):
@@ -235,19 +222,16 @@ func determine_starting_map() -> String:
 	
 	# Check if Lab is available first (since it's the main hub)
 	if "Lab" in available_maps:
-		print("VRGridSystemManager: Using Lab as starting map (main hub)")
 		return "Lab"
 	
 	# Try to find maps in priority order
 	for priority_map in MAP_ORDER_PRIORITY:
 		if priority_map in available_maps:
-			print("VRGridSystemManager: Found priority starting map: %s" % priority_map)
 			return priority_map
 	
 	# If no priority maps found, use the first alphabetically
 	available_maps.sort()
 	var first_map = available_maps[0]
-	print("VRGridSystemManager: Using first available map: %s" % first_map)
 	return first_map
 
 # Get the determined starting map
@@ -258,7 +242,6 @@ func get_starting_map() -> String:
 
 # Load VR scene with grid system
 func load_vr_scene_with_grid(map_name: String) -> bool:
-	print("VRGridSystemManager: Loading VR scene with grid for map: %s" % map_name)
 	
 	# Load the VR base scene
 	var scene_instance = staging.load_scene_instance(vr_scene_path)
@@ -298,7 +281,6 @@ func _find_or_create_grid_system(scene: Node, map_name: String) -> Node:
 	for grid_name in grid_names:
 		grid_system = scene.find_child(grid_name, true, false)
 		if grid_system:
-			print("VRGridSystemManager: Found grid system: %s" % grid_name)
 			break
 	
 	if not grid_system:
@@ -336,7 +318,6 @@ func _handle_spawn_points(scene: Node):
 	if not scene:
 		return
 
-	print("VRGridSystemManager: Setting up player spawn positioning")
 
 	# Wait a frame for grid to be fully initialized
 	# out-of-tree guard: get_tree() is null once a map is torn down
@@ -347,7 +328,6 @@ func _handle_spawn_points(scene: Node):
 	# Let the GridSystem's spawn component handle the positioning
 	# It will read from map JSON or use defaults
 	if current_grid_system and current_grid_system.has_node("GridSpawnComponent"):
-		print("VRGridSystemManager: Using GridSpawnComponent for positioning")
 		# GridSpawnComponent will be called automatically by GridSystem
 		return
 
@@ -357,8 +337,6 @@ func _handle_spawn_points(scene: Node):
 
 # Position player at a default location
 func _position_player_at_default_location():
-	print("!!!! VRGridSystemManager: _position_player_at_default_location() CALLED !!!!")
-	print("!!!! THIS SHOULD NOT HAPPEN IF GridSpawnComponent EXISTS !!!!")
 
 	# Find the VR origin/staging in the scene
 	var vr_origin = _find_vr_origin()
@@ -374,7 +352,6 @@ func _position_player_at_default_location():
 	vr_origin.global_position = default_position
 	vr_origin.global_rotation_degrees = default_rotation
 
-	print("VRGridSystemManager: Positioned player at default location - Position: %s" % default_position)
 
 # Find VR origin in the scene
 func _find_vr_origin() -> Node3D:

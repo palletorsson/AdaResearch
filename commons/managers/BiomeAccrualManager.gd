@@ -41,9 +41,6 @@ var _budget_scale: float = -1.0
 func _ready() -> void:
 	_load_contributions()
 	_preload_layer_scripts()
-	print("BiomeAccrualManager: Loaded %d contributions, %d layer scripts available" % [
-		_contributions.size(), _layer_scripts.size()
-	])
 
 
 # ─────────────────────────────────────────────────────────────
@@ -98,10 +95,6 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 	var target_order: int = _current_stage_order()
 	if _stage_override < 0 and overrides.has("stage_order"):
 		target_order = int(overrides["stage_order"])
-	print("🌿 BiomeAccrual.apply() START — map=%s stage_order=%d contributions=%d overrides=%s" % [
-		str(context.get("map_name", "?")), target_order, _contributions.size(),
-		"yes" if not overrides.is_empty() else "no"
-	])
 	if target_order == 0:
 		push_warning("BiomeAccrual: stage_order=0 — no layers will apply. Check EcosystemManager.sync_to_map for this map.")
 	var applied: Array[String] = []

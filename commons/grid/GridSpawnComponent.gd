@@ -52,16 +52,14 @@ const PLAYER_EYE_HEIGHT = 1.8
 signal spawn_positioning_complete(spawn_position: Vector3)
 
 func _ready():
-	print("GridSpawnComponent: Initialized")
+	pass
 
 # Initialize with data component only
 func initialize(data_comp: GridDataComponent, settings: Dictionary = {}):
 	data_component = data_comp
-	print("GridSpawnComponent: Ready to handle spawning")
 
 # Handle player spawn positioning after map generation
 func handle_player_spawn():
-	print("GridSpawnComponent: STARTING SPAWN POSITIONING")
 
 	# Wait for VR system to be ready
 	await get_tree().process_frame
@@ -77,15 +75,10 @@ func handle_player_spawn():
 	# Resolve spawn through the priority chain documented at top of file.
 	var spawn_data = _get_spawn_data_from_json()
 
-	print("GridSpawnComponent: Spawn data retrieved:")
-	print("  Position: %s" % spawn_data.position)
-	print("  Rotation: %s" % spawn_data.rotation)
-	print("  Source: %s" % spawn_data.source)
 
 	var player_positioned: bool = _position_player(spawn_data)
 	_update_reset_systems(spawn_data.position)
 
-	print("GridSpawnComponent: SPAWN POSITIONING COMPLETE (player_positioned=%s)" % str(player_positioned))
 	spawn_positioning_complete.emit(spawn_data.position)
 
 
@@ -113,7 +106,6 @@ func _get_spawn_data_from_json() -> Dictionary:
 				if has_pos:
 					var position = Vector3(pos_array[0], pos_array[1], pos_array[2])
 					var rotation = Vector3(rot_array[0], rot_array[1], rot_array[2]) if has_rot else _compute_auto_rotation(position)
-					print("GridSpawnComponent: Using JSON spawn_points.default: %s (rotation %s)" % [position, "explicit" if has_rot else "auto"])
 					return {
 						"position": position,
 						"rotation": rotation,
@@ -186,7 +178,6 @@ func _check_utility_spawn() -> Dictionary:
 			rotation.y = float(utility.get_meta("player_rotation"))
 			rotation_is_auto = false
 
-		print("GridSpawnComponent: Using utility spawn at %s (rotation %s)" % [world_pos, "explicit" if not rotation_is_auto else "auto"])
 		return {
 			"position": world_pos,
 			"rotation": rotation,
@@ -202,7 +193,6 @@ func _check_utility_spawn() -> Dictionary:
 func _compute_smart_default() -> Dictionary:
 	var position = _compute_default_position()
 	var rotation = _compute_auto_rotation(position)
-	print("GridSpawnComponent: Smart default — position %s, rotation %s" % [position, rotation])
 	return {
 		"position": position,
 		"rotation": rotation,
@@ -344,7 +334,6 @@ func _position_player(spawn_data: Dictionary) -> bool:
 	vr_origin.global_position = position
 	vr_origin.global_rotation_degrees = rotation
 
-	print("GridSpawnComponent: ✓ Player spawned at %s (rotation: %s, source: %s)" % [position, rotation, spawn_data.source])
 	return true
 
 
@@ -377,5 +366,4 @@ func _update_reset_systems(spawn_position: Vector3):
 	for reset_node in reset_nodes:
 		if reset_node and reset_node.has_method("set_reset_position"):
 			reset_node.set_reset_position(spawn_position)
-			print("GridSpawnComponent: Updated %s to spawn position" % reset_node.name)
 			return

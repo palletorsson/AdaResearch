@@ -90,8 +90,6 @@ func _wire() -> void:
 		_pickups[hand] = pk
 		pk.has_picked_up.connect(_on_picked_up.bind(hand))
 		pk.has_dropped.connect(_on_dropped.bind(hand))
-	print("[inventory] wired %d controller(s), %d pickup(s); catalyst known: %s" % [
-		_controllers.size(), _pickups.size(), str(_has_catalyst)])
 
 
 static func _find_pickup(under: Node) -> XRToolsFunctionPickup:

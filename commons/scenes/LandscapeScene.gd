@@ -50,9 +50,6 @@ func _build_landscape() -> void:
 	_setup_horizon_marker()
 	_setup_ambient_audio()
 	_position_player()
-	print("LandscapeScene: Open landscape built — terrain %.0fm, %d DNA critters + curated creatures" % [
-		TERRAIN_SIZE, NATURE_MAX_POP
-	])
 
 
 # ── Environment ──────────────────────────────────────────────────────
@@ -221,7 +218,6 @@ func _setup_curated_creatures() -> void:
 	# Each garden is a cluster of species-accurate procedural flowers.
 	_setup_botanical_gardens(root)
 
-	print("LandscapeScene: Placed %d curated creatures, mushrooms & flowers" % root.get_child_count())
 
 
 func _setup_botanical_gardens(parent: Node3D) -> void:
@@ -273,7 +269,6 @@ func _setup_botanical_gardens(parent: Node3D) -> void:
 	orchids.position = Vector3(-4.0, 0.6, -18.0)
 	parent.add_child(orchids)
 
-	print("LandscapeScene: Planted 8 botanical flower gardens (~86 flowers)")
 
 
 func _place_scene(parent: Node3D, scene_path: String, pos: Vector3, scale_mult: float, node_name: String) -> void:
@@ -464,7 +459,6 @@ func _position_player() -> void:
 		xr_origin.global_position = SPAWN_POSITION
 		# Face inward (toward -Z where landscape center is)
 		xr_origin.rotation_degrees = Vector3(0, 180, 0)
-		print("LandscapeScene: Player positioned at %s facing landscape" % SPAWN_POSITION)
 	else:
 		push_warning("LandscapeScene: XROrigin3D not found — player position unchanged")
 
@@ -476,7 +470,6 @@ func _on_return_portal_entered(body: Node3D) -> void:
 	if not (body is CharacterBody3D or body.name == "PlayerBody"):
 		return
 
-	print("LandscapeScene: Return portal entered — going back to lab")
 	var scene_manager = get_node_or_null("/root/SceneManager")
 	if scene_manager and scene_manager.has_method("_return_to_hub"):
 		scene_manager._return_to_hub({"return_from": "landscape"})

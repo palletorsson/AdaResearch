@@ -36,7 +36,6 @@ func _init():
 	instance = self
 
 func _ready():
-	print("MapProgressionManager: Starting initialization...")
 	
 	# Try to load progression config, but don't hang if it fails
 	var config_loaded = load_progression_config()
@@ -54,7 +53,6 @@ func _ready():
 	# Update unlocked maps
 	update_unlocked_maps()
 	
-	print("MapProgressionManager: Initialized with %d completed maps" % completed_maps.size())
 	
 	# Check for ada CLI launch intent
 	call_deferred("_check_ada_launch_intent")
@@ -89,10 +87,8 @@ func _check_ada_launch_intent():
 	var timestamp: float = launch_data.get("timestamp", 0)
 	var age = Time.get_unix_time_from_system() - timestamp
 	if age > 30:
-		print("MapProgressionManager: Stale ada launch intent (%.1fs old), ignoring" % age)
 		return
 	
-	print("MapProgressionManager: Ada launch intent - map: '%s', sequence: '%s'" % [map_name, sequence_name])
 	
 	if not map_name.is_empty():
 		# Direct map launch
@@ -110,12 +106,10 @@ func _check_ada_launch_intent():
 func _navigate_to_target_map():
 	if current_target_map.is_empty():
 		return
-	print("MapProgressionManager: Navigating to target map: %s" % current_target_map)
 	SceneManager.load_map(current_target_map)
 
 # Load the central progression configuration
 func load_progression_config() -> bool:
-	print("MapProgressionManager: Loading progression configuration...")
 
 	# Sequence-first defaults.
 	progression_config = {}
@@ -140,10 +134,6 @@ func load_progression_config() -> bool:
 	_resolve_default_sequence()
 	_resolve_starting_map()
 
-	print(
-		"MapProgressionManager: Loaded %d sequences and synthesized %d map metadata entries"
-		% [sequences.size(), map_metadata.size()]
-	)
 
 	progression_loaded.emit()
 	return true
@@ -254,7 +244,6 @@ func _load_external_sequences(path: String):
 		var file_name = dir.get_next()
 		while file_name != "":
 			if not dir.current_is_dir() and file_name.ends_with(".json"):
-				print("MapProgressionManager: Loading sequence file: " + file_name)
 				var file = FileAccess.open(path + "/" + file_name, FileAccess.READ)
 				if file:
 					var json = JSON.new()
@@ -267,7 +256,6 @@ func _load_external_sequences(path: String):
 								if seq_data is Dictionary and seq_data.has("maps") and seq_data.maps is Array:
 									var normalized_id := str(seq_id)
 									sequences[normalized_id] = seq_data
-									print("  - Loaded sequence: " + normalized_id)
 								else:
 									print("  - Skipped non-sequence entry '%s' in %s" % [str(seq_id), file_name])
 						else:
@@ -286,7 +274,6 @@ func _check_audio_for_map(map_name: String):
 			# Check for ambient preset
 			if seq.has("ambient_preset"):
 				var preset = seq.ambient_preset
-				print("MapProgressionManager: Map '%s' implies ambient preset '%s'" % [map_name, preset])
 				# Trigger audio change via SoundBank
 				if is_instance_valid(SoundBank) and SoundBank.has_method("trigger_ambient_change"):
 					SoundBank.trigger_ambient_change(preset)
@@ -409,17 +396,14 @@ func is_map_completed(map_name: String) -> bool:
 # Mark a map as completed and unlock next maps
 func complete_map(map_name: String) -> Array[String]:
 	if map_name in completed_maps:
-		print("MapProgressionManager: Map '%s' already completed" % map_name)
 		return []
 
-	print("MapProgressionManager: Completing map '%s'" % map_name)
 	completed_maps.append(map_name)
 
 	# Award XP for completing the map
 	var xp_reward := get_map_xp_reward(map_name)
 	if xp_reward > 0 and is_instance_valid(GameManager):
 		GameManager.add_points(xp_reward)
-		print("MapProgressionManager: Awarded %d XP for completing '%s'" % [xp_reward, map_name])
 	
 	# Get newly unlocked maps
 	var newly_unlocked = get_unlocked_by_completion(map_name)
@@ -539,7 +523,6 @@ func get_scene_path_for_map(map_name: String) -> String:
 		return static_scene_path
 	else:
 		# Use DynamicMapSystem to generate scene
-		print("MapProgressionManager: Map '%s' will be generated dynamically" % map_name)
 		return "dynamic:" + map_name
 
 # Get all unlocked maps
@@ -625,7 +608,6 @@ func reset_progress():
 	if starting_map:
 		unlocked_maps.append(starting_map)
 	save_player_progress()
-	print("Progress reset for new game")
 
 # =============================================================================
 # GAME MODE HELPERS (Test Mode / Explorer Mode)
@@ -778,7 +760,6 @@ func get_first_map_in_sequence(sequence_name: String) -> String:
 # Set target map for next base scene load
 func set_current_target_map(map_name: String):
 	current_target_map = map_name
-	print("MapProgressionManager: Target map set to: %s" % map_name)
 
 # Get current target map
 func get_current_target_map() -> String:

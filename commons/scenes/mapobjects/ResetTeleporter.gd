@@ -20,7 +20,6 @@ func _ready():
 	# Delay activation to avoid triggering during scene transitions
 	await get_tree().create_timer(2.0).timeout
 	is_ready = true
-	print("ResetTeleporter: Now active and ready to detect player falls")
 
 func _find_spawn():
 	# out-of-tree guard: get_tree() is null once a map is torn down
@@ -33,7 +32,6 @@ func _find_spawn():
 		teleport_target = Node3D.new()
 		teleport_target.position = spawn_position
 		get_tree().current_scene.add_child(teleport_target)
-		print("ResetTeleporter: Created default spawn at %s" % teleport_target.position)
 
 func _get_grid_spawn_position() -> Vector3:
 	var scene_root = get_tree().current_scene
@@ -67,7 +65,6 @@ func _on_body_entered(body: Node3D):
 	if is_resetting or not _is_player(body):
 		return
 	
-	print("ResetTeleporter: Player detected in reset area - initiating reset")
 	is_resetting = true
 	await get_tree().create_timer(reset_delay).timeout
 	
@@ -131,7 +128,6 @@ func _teleport_player(body: Node3D):
 		player_root = _find_player_root(self)
 	if player_root:
 		player_root.global_position = teleport_target.global_position
-		print("Reset: Teleported player to %s" % teleport_target.global_position)
 
 func _is_player(body: Node3D) -> bool:
 	return (body.get_class().begins_with("XRToolsPlayerBody") or 
@@ -145,7 +141,6 @@ func set_reset_position(new_position: Vector3):
 		get_tree().current_scene.add_child(teleport_target)
 
 	teleport_target.global_position = new_position
-	print("ResetTeleporter: Updated spawn position to %s" % new_position)
 
 func is_xr_class(name: String) -> bool:
 	return name == "XRToolsTeleportArea"

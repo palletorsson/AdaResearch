@@ -66,10 +66,7 @@ static func apply(origin: Node) -> int:
 			var n: Node = origin.find_child(name, true, false)
 			if n == null:
 				break
-			print("[bare-hands] removed %s (%s)" % [name, origin.get_path_to(n)])
 			n.get_parent().remove_child(n)
 			n.queue_free()
 			gone += 1
-	if gone > 0:
-		print("[bare-hands] MOVEMENT-ONLY RIG: %d gadget(s) removed, locomotion untouched" % gone)
 	return gone

@@ -651,8 +651,6 @@ static func _ensure_registry() -> void:
 			var dna: Variant = (entry as Dictionary).get("dna", null)
 			if dna is Dictionary:
 				_dna_cache[str(lookup)] = dna
-	print("[em_multiples] dna: %d promoted tokens from %d registry files (%d ms)" % [
-		_dna_cache.size(), files, Time.get_ticks_msec() - t0])
 
 
 ## The relations row, accepting either the whole artifact_relations.json or just

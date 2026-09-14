@@ -112,22 +112,17 @@ func _ready() -> void:
 
 func _disable_viewport_on_startup() -> void:
 	# Called deferred so Viewport2Din3D._ready() has run and connected signals
-	print("MapManual: _disable_viewport_on_startup called")
 	if viewport_2d:
-		print("MapManual: viewport_2d found at %s" % str(viewport_2d.get_path()))
 		viewport_2d.visible = false
 		viewport_2d.scale = Vector3.ONE * 0.001
 		# Also directly disable collision as a safety measure
 		var collision = viewport_2d.get_node_or_null("StaticBody3D/CollisionShape3D")
 		if collision:
 			collision.disabled = true
-			print("MapManual: Collision DISABLED - was at %s, disabled=%s" % [str(collision.get_path()), collision.disabled])
 		else:
 			print("MapManual: ERROR - CollisionShape3D not found at StaticBody3D/CollisionShape3D!")
 			# Try to find it another way
 			var static_body = viewport_2d.get_node_or_null("StaticBody3D")
-			if static_body:
-				print("MapManual: StaticBody3D found, children: %s" % str(static_body.get_children()))
 	else:
 		print("MapManual: ERROR - viewport_2d is null!")
 
@@ -242,7 +237,6 @@ func show_manual() -> void:
 	if is_visible or is_animating:
 		return
 
-	print("MapManual: Showing manual...")
 
 	# Ensure UI nodes are found (in case they weren't during _ready)
 	if not tab_menu:
@@ -314,7 +308,6 @@ func _load_map_data() -> void:
 	"""Load map information from current map's data"""
 	pages.clear()
 	has_content = false
-	print("MapManual: Loading map data...")
 	
 	# Find GridSystem
 	# out-of-tree guard: get_tree() is null once a map is torn down
@@ -325,11 +318,9 @@ func _load_map_data() -> void:
 		grid_system = _find_node_by_class(get_tree().current_scene, "GridSystem")
 	
 	if grid_system:
-		print("MapManual: Found GridSystem")
 		var data_component = grid_system.get_data_component()
 		if data_component:
 			if data_component.json_loader and data_component.json_loader.map_data:
-				print("MapManual: Got map data from GridSystem.data_component.json_loader")
 				_parse_map_data(data_component.json_loader.map_data)
 				return
 	
@@ -357,7 +348,6 @@ func _parse_map_data(map_data: Dictionary) -> void:
 
 	# Detect available md files in map directory
 	# Try both original name and with underscores (e.g., "Point Zero" -> "Point_Zero")
-	print("MapManual: Detecting md files for map: '%s'" % current_map_name)
 	if not current_map_name.is_empty():
 		var folder_candidates = [
 			current_map_name,
@@ -371,16 +361,13 @@ func _parse_map_data(map_data: Dictionary) -> void:
 
 		for folder_name in folder_candidates:
 			var map_dir = "res://commons/maps/%s/" % folder_name
-			print("MapManual: Checking folder: %s" % map_dir)
 			for md_type in md_types:
 				if available_md_files.has(md_type):
 					continue  # Already found this type
 				var md_path = map_dir + md_type + ".md"
 				if FileAccess.file_exists(md_path):
 					available_md_files[md_type] = md_path
-					print("MapManual: Found %s.md in %s" % [md_type, folder_name])
 
-		print("MapManual: Total md files found: %d - %s" % [available_md_files.size(), str(available_md_files.keys())])
 
 	# Update tab visibility based on available files
 	_update_tab_visibility()
@@ -569,7 +556,6 @@ func _find_vr_controllers() -> void:
 		if not right_controller:
 			right_controller = xr_origin.find_child("RightController", true, false)
 		
-		print("MapManual: Found controllers - Left: %s, Right: %s" % [left_controller != null, right_controller != null])
 	
 	# Fallback: search for any XRController3D nodes
 	if not left_controller:
@@ -602,7 +588,6 @@ func _input(event: InputEvent) -> void:
 	# Desktop fallback: M key toggles manual
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_M:
-			print("MapManual: M key pressed, toggling manual")
 			toggle_manual()
 		elif is_visible:
 			if event.keycode == KEY_RIGHT or event.keycode == KEY_DOWN:
@@ -653,7 +638,6 @@ func _find_node_by_class(node: Node, target_class_name: String) -> Node:
 
 func _update_tab_visibility() -> void:
 	"""Show/hide tabs based on which md files exist"""
-	print("MapManual: _update_tab_visibility called, available_md_files: %s" % str(available_md_files.keys()))
 
 	if not tab_menu:
 		print("MapManual: Tab menu not found yet, trying to find UI nodes now...")
@@ -679,7 +663,6 @@ func _update_tab_visibility() -> void:
 	if available_md_files.has("critical"): visible_count += 1
 	if available_md_files.has("blurb"): visible_count += 1
 	tab_menu.visible = visible_count >= 1
-	print("MapManual: Tab menu visible: %s (tab count: %d)" % [tab_menu.visible, visible_count])
 
 func _on_tab_pressed(tab_type: String) -> void:
 	"""Handle tab button press"""
@@ -687,9 +670,7 @@ func _on_tab_pressed(tab_type: String) -> void:
 
 func _select_tab(tab_type: String) -> void:
 	"""Select and load a specific tab"""
-	print("MapManual: _select_tab called with: %s" % tab_type)
 	if not available_md_files.has(tab_type):
-		print("MapManual: Tab type '%s' not in available_md_files" % tab_type)
 		return
 
 	current_md_type = tab_type
@@ -700,11 +681,9 @@ func _select_tab(tab_type: String) -> void:
 
 	# Load the md file content
 	var file_path = available_md_files[tab_type]
-	print("MapManual: Loading content from: %s" % file_path)
 	var file_content = _load_markdown_file(file_path)
 
 	if not file_content.is_empty():
-		print("MapManual: Loaded %d characters from %s" % [file_content.length(), tab_type])
 		_split_and_add_pages(file_content)
 	else:
 		print("MapManual: File was empty for %s" % tab_type)

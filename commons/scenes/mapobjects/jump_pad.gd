@@ -370,10 +370,6 @@ func _launch() -> void:
 
 	jump_started.emit(target_world_pos)
 
-	print("JumpPad: LAUNCH v₀=(%.2f, %.2f, %.2f) t_land=%.2fs g=%.1f" % [
-		_launch_velocity.x, _launch_velocity.y, _launch_velocity.z,
-		_expected_land_time, _gravity
-	])
 
 
 func _on_landing() -> void:
@@ -398,9 +394,6 @@ func _on_landing() -> void:
 	_cooldown_timer = cooldown_time
 	jump_landed.emit(target_world_pos)
 
-	print("JumpPad: LANDED at %s (flight time: %.2fs, expected: %.2fs)" % [
-		target_world_pos, _flight_time, _expected_land_time
-	])
 
 	_player_node = null
 

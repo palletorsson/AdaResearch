@@ -26,7 +26,6 @@ var artifact_spawn_manager: ArtifactSpawnManager = null
 var desktop_catalog: DesktopArtifactCatalog = null
 
 func _ready():
-	print("LabGridSystem: Initializing lab variant of grid system...")
 
 	# Add to lab_system group so catalog can find us
 	add_to_group("lab_system")
@@ -34,7 +33,6 @@ func _ready():
 	# Set default map_name for lab if not already set
 	if map_name.is_empty() or map_name == "Tutorial_Start":
 		map_name = "Lab"
-		print("LabGridSystem: Set default map_name to 'Lab'")
 	
 	# Check if this is a progressive map
 	_check_for_progressive_map()
@@ -80,21 +78,17 @@ func _check_for_progressive_map():
 			_:
 				progression_state = "initial"
 		
-		print("LabGridSystem: ✅ Progressive map detected - state: %s" % progression_state)
 	else:
 		is_progressive_map = false
 		progression_state = "initial"
-		print("LabGridSystem: Standard lab map - using legacy progression system")
 
 func _on_lab_map_ready_for_catalog():
 	"""Called when map generation is complete - safe to initialize catalog"""
-	print("LabGridSystem: Map generation complete, initializing artifact catalog...")
 	_setup_artifact_catalog_system()
 
 
 func _setup_artifact_catalog_system():
 	"""Initialize artifact spawn manager and desktop catalog"""
-	print("LabGridSystem: Setting up artifact catalog system...")
 
 	# Verify GridInteractablesComponent is loaded and has artifacts
 	if not has_node("GridInteractablesComponent"):
@@ -106,7 +100,6 @@ func _setup_artifact_catalog_system():
 		push_warning("LabGridSystem: Artifact registry is empty, skipping catalog setup")
 		return
 
-	print("LabGridSystem: Found %d artifacts, proceeding with catalog setup" % interactables.grid_artifact_registry.size())
 
 	# Create and add spawn manager
 	artifact_spawn_manager = ArtifactSpawnManager.new()
@@ -117,7 +110,6 @@ func _setup_artifact_catalog_system():
 	artifact_spawn_manager.artifact_spawned.connect(_on_artifact_spawned_from_catalog)
 	artifact_spawn_manager.spawn_failed.connect(_on_artifact_spawn_failed)
 
-	print("LabGridSystem: Artifact spawn manager initialized")
 
 	# Check if in VR mode
 	var xr_interface = XRServer.get_primary_interface()
@@ -138,15 +130,11 @@ func _setup_artifact_catalog_system():
 			desktop_catalog.catalog_opened.connect(_on_catalog_opened)
 			desktop_catalog.catalog_closed.connect(_on_catalog_closed)
 
-			print("LabGridSystem: Desktop artifact catalog initialized (Tab key to toggle)")
 		else:
 			push_warning("LabGridSystem: Could not load desktop catalog scene")
-	else:
-		print("LabGridSystem: VR mode - using kiosk in Lab map")
 
 func _on_artifact_spawned_from_catalog(lookup_name: String, artifact: Node):
 	"""Handle artifact spawned from catalog"""
-	print("LabGridSystem: Artifact spawned from catalog: %s" % lookup_name)
 	lab_artifact_activated.emit(lookup_name)
 
 func _on_artifact_spawn_failed(lookup_name: String, error: String):
@@ -162,15 +150,12 @@ func _on_catalog_spawn_requested(lookup_name: String):
 
 func _on_catalog_opened():
 	"""Handle catalog opened"""
-	print("LabGridSystem: Artifact catalog opened")
 
 func _on_catalog_closed():
 	"""Handle catalog closed"""
-	print("LabGridSystem: Artifact catalog closed")
 
 func _apply_lab_styling():
 	"""Apply lab-specific visual styling"""
-	print("LabGridSystem: Applying lab styling - off-white cubes")
 	
 	# Override show_grid to false for cleaner lab look
 	show_grid = false
@@ -181,7 +166,6 @@ func _apply_lab_styling():
 
 func _on_lab_generation_complete():
 	"""Apply lab styling after grid generation"""
-	print("LabGridSystem: Applying lab materials to generated cubes...")
 	
 	# Apply lab cube materials
 	_apply_lab_cube_materials()
@@ -191,7 +175,6 @@ func _on_lab_generation_complete():
 	
 	# FIXED: Only filter artifacts if NOT using progressive maps
 	if not is_progressive_map:
-		print("LabGridSystem: Using legacy artifact filtering")
 		_filter_artifacts_by_progression()
 	else:
 		print("LabGridSystem: ✅ Progressive map - artifacts already defined in JSON, skipping filtering")
@@ -202,7 +185,6 @@ func _apply_lab_cube_materials():
 		return
 
 	var cube_count = structure_component.get_cube_count()
-	print("LabGridSystem: Applying lab materials to MultiMesh (%d instances)" % cube_count)
 
 	# Apply material to the MultiMeshInstance3D
 	if structure_component.multimesh_instance:
@@ -247,7 +229,6 @@ func _apply_lab_material_to_multimesh(multimesh_inst: MultiMeshInstance3D):
 
 func _apply_lab_lighting():
 	"""Apply lab-appropriate lighting"""
-	print("LabGridSystem: Applying lab lighting")
 	
 	# Find world environment
 	var world_env = get_tree().current_scene.find_child("WorldEnvironment", true, false)
@@ -262,7 +243,6 @@ func _apply_lab_lighting():
 			env.ambient_light_color = lab_ambient_color
 			env.ambient_light_energy = 0.4
 		
-		print("LabGridSystem: Lab lighting applied for state: %s" % progression_state)
 
 func _apply_progressive_lighting(env: Environment):
 	"""Apply lighting based on progression state"""
@@ -312,8 +292,6 @@ func _load_lab_progression():
 			unlocked_artifacts.append(str(artifact))
 		
 		print("LabGridSystem: Loaded lab progression - unlocked: %s" % str(unlocked_artifacts))
-	else:
-		print("LabGridSystem: Starting fresh lab progression")
 
 func _save_lab_progression():
 	"""Save lab progression state (legacy system only)"""
@@ -333,7 +311,6 @@ func _save_lab_progression():
 func _filter_artifacts_by_progression():
 	"""Filter interactables based on progression (LEGACY SYSTEM ONLY)"""
 	# Disabled per project setup: always show all artifacts in legacy maps
-	print("LabGridSystem: Legacy filtering disabled - showing all artifacts")
 	return
 
 # PROGRESSION MANAGEMENT (Legacy system only)
@@ -341,14 +318,12 @@ func _filter_artifacts_by_progression():
 func complete_sequence(sequence_name: String):
 	"""Complete a sequence and unlock new artifacts (LEGACY SYSTEM ONLY)"""
 	if is_progressive_map:
-		print("LabGridSystem: Sequence completion handled by LabManager for progressive maps")
 		return
 	
 	if sequence_name in completed_sequences:
 		return
 	
 	completed_sequences.append(sequence_name)
-	print("LabGridSystem: 🎉 Sequence completed: %s" % sequence_name)
 	
 	# Determine what to unlock
 	var newly_unlocked = _get_artifacts_to_unlock(sequence_name)
@@ -413,7 +388,6 @@ func _play_unlock_effect(artifact: Node3D):
 
 func _on_interactable_activated(object_id: String, position: Vector3, data: Dictionary):
 	"""Override interactable activation to add lab-specific handling"""
-	print("LabGridSystem: Lab interactable activated: %s" % object_id)
 	
 	# Check if it's an artifact activation
 	var artifact_lookup_name = data.get("lookup_name", object_id)
@@ -424,10 +398,8 @@ func _on_interactable_activated(object_id: String, position: Vector3, data: Dict
 	# Handle specific lab artifacts
 	match artifact_lookup_name:
 		"rotating_cube":
-			print("LabGridSystem: 🎯 Rotating cube activated - triggering array tutorial")
 			lab_sequence_triggered.emit("array_tutorial")
 		"randomness_sign":
-			print("LabGridSystem: 🎯 Randomness sign activated - triggering randomness exploration")
 			lab_sequence_triggered.emit("randomness_exploration")
 		_:
 			# Call parent method for normal handling
@@ -438,17 +410,14 @@ func _on_interactable_activated(object_id: String, position: Vector3, data: Dict
 
 func _on_utility_activated(utility_type: String, position: Vector3, data: Dictionary):
 	"""Override utility activation for lab-specific handling"""
-	print("LabGridSystem: Lab utility activated - %s" % utility_type)
 
 	# Handle lab teleporter differently
 	if utility_type == "t":
-		print("LabGridSystem: 🚀 Lab teleporter activated")
 
 		var destination = data.get("destination", "")
 
 		# Special destination: open landscape (endgame scene)
 		if destination == "landscape":
-			print("LabGridSystem: 🌄 Landscape teleporter activated — loading open landscape")
 			var scene_manager = _find_scene_manager()
 			if scene_manager:
 				scene_manager.request_transition({
@@ -463,18 +432,15 @@ func _on_utility_activated(utility_type: String, position: Vector3, data: Dictio
 		var sequence_name = ""
 		if _is_sequence_name(destination):
 			sequence_name = destination
-			print("LabGridSystem: Direct sequence teleporter: '%s'" % sequence_name)
 		else:
 			# Legacy: map name, try to determine sequence
 			sequence_name = _get_sequence_for_map(destination)
-			print("LabGridSystem: Map-based teleporter '%s' -> sequence '%s'" % [destination, sequence_name])
 
 		# Check if we're in desktop mode (no XR interface)
 		var xr_interface = XRServer.get_primary_interface()
 		var is_vr_mode = xr_interface != null and xr_interface.is_initialized()
 
 		if not is_vr_mode:
-			print("LabGridSystem: Desktop mode - emitting lab_sequence_triggered signal instead of using SceneManager")
 			# In desktop mode, emit the signal for DesktopLabManager to handle
 			if sequence_name:
 				lab_sequence_triggered.emit(sequence_name)
@@ -484,7 +450,6 @@ func _on_utility_activated(utility_type: String, position: Vector3, data: Dictio
 		var scene_manager = _find_scene_manager()
 		if scene_manager:
 			if sequence_name:
-				print("LabGridSystem: Starting sequence '%s'" % sequence_name)
 				scene_manager.request_transition({
 					"type": 1, # TransitionType.TELEPORTER
 					"action": "start_sequence",
@@ -493,7 +458,6 @@ func _on_utility_activated(utility_type: String, position: Vector3, data: Dictio
 					"position": position
 				})
 			else:
-				print("LabGridSystem: Loading single map '%s'" % destination)
 				scene_manager.request_transition({
 					"type": 1, # TransitionType.TELEPORTER
 					"action": "load_map",
@@ -565,7 +529,6 @@ func get_unlocked_artifacts() -> Array[String]:
 	return unlocked_artifacts.duplicate()
 
 func force_unlock_artifact(artifact_id: String):
-	print("LabGridSystem: Artifact filtering disabled - all artifacts visible")
 	return
 	"""Force unlock an artifact for testing (legacy system only)"""
 	if is_progressive_map:
@@ -589,7 +552,6 @@ func reset_lab_progression():
 	unlocked_artifacts.append("rotating_cube")
 	_save_lab_progression()
 	_filter_artifacts_by_progression()
-	print("LabGridSystem: 🔄 Lab progression reset")
 
 # DEBUG METHODS
 
@@ -622,7 +584,6 @@ func _on_cube_size_changed():
 
 func reload_map_with_name(new_map_name: String):
 	"""Reload the grid system with a new map name"""
-	print("LabGridSystem: Reloading with new map: %s" % new_map_name)
 	
 	# Update the map name
 	map_name = new_map_name

@@ -80,11 +80,9 @@ func _ready() -> void:
 	# Apply transport cube material
 	setup_transport_material()
 
-	print("TransportCube: Ready to transport from %s to %s (distance: %.1f)" % [initial_position, target_position, move_distance])
 
 	# Auto-start if enabled
 	if auto_start:
-		print("TransportCube: Auto-start enabled, beginning transport sequence")
 		start_transport()
 
 func setup_transport_material():
@@ -195,7 +193,6 @@ func _process(delta: float) -> void:
 			waiting_to_start = false
 			is_moving = true
 			movement_sound.play()
-			print("TransportCube: Starting movement to %s" % target_position)
 	
 	elif is_moving:
 		# Move towards target
@@ -215,11 +212,9 @@ func _process(delta: float) -> void:
 				is_moving = false
 				is_returning = false
 				movement_sound.stop()
-				print("TransportCube: Returned to start position")
 
 				# Auto-restart if auto_start is enabled (continuous loop)
 				if auto_start:
-					print("TransportCube: Auto-restart enabled, beginning next cycle")
 					start_transport()
 		else:
 			global_position = global_position.move_toward(target_position, move_speed * delta)
@@ -235,7 +230,6 @@ func _process(delta: float) -> void:
 				is_moving = false
 				movement_sound.stop()
 				return_timer = return_delay
-				print("TransportCube: Reached destination, returning in %.1f seconds" % return_delay)
 	
 	elif return_timer > 0 and global_position.distance_to(target_position) < 0.01:
 		# Handle return timer
@@ -348,7 +342,6 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
 		carried_player = body
 		detection_sound.play()
 		
-		print("TransportCube: Player %s detected, preparing transport" % body.name)
 		start_transport()
 
 func _on_detection_area_body_exited(body: Node3D) -> void:
@@ -362,7 +355,6 @@ func _on_detection_area_body_exited(body: Node3D) -> void:
 		if waiting_to_start:
 			waiting_to_start = false
 			start_timer = 0.0
-			print("TransportCube: Transport cancelled - player left cube")
 
 func start_transport():
 	"""Start the transport sequence"""
@@ -371,12 +363,10 @@ func start_transport():
 		if start_delay > 0:
 			waiting_to_start = true
 			start_timer = start_delay
-			print("TransportCube: Transport starting in %.1f seconds" % start_delay)
 		else:
 			is_moving = true
 			is_returning = false
 			movement_sound.play()
-			print("TransportCube: Transport started immediately")
 
 func start_return():
 	"""Start the return journey"""
@@ -384,7 +374,6 @@ func start_return():
 		is_moving = true
 		is_returning = true
 		movement_sound.play()
-		print("TransportCube: Returning to start position")
 
 # Public API for configuration
 func set_transport_parameters(distance: float, direction: Vector3):
@@ -392,7 +381,6 @@ func set_transport_parameters(distance: float, direction: Vector3):
 	move_distance = distance
 	move_direction = direction.normalized()
 	target_position = initial_position + (move_direction * move_distance)
-	print("TransportCube: Updated transport to %s (distance: %.1f)" % [target_position, move_distance])
 
 func set_movement_speed(speed: float):
 	"""Set movement speed"""
@@ -403,7 +391,6 @@ func set_auto_start(enabled: bool):
 	auto_start = enabled
 	# Only start if already in tree, otherwise _ready() will handle it
 	if enabled and is_inside_tree() and not is_moving and not waiting_to_start:
-		print("TransportCube: Auto-start enabled, beginning transport sequence")
 		start_transport()
 
 func set_return_delay(delay: float):

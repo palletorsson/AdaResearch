@@ -29,7 +29,6 @@ func _ready() -> void:
 	if GameManager:
 		next_requested.connect(_on_next_requested)
 	
-	print("NextCube: Ready at position %s" % global_position)
 
 func _process(delta: float) -> void:
 	if has_been_activated:
@@ -105,7 +104,6 @@ func activate() -> void:
 	
 	has_been_activated = true
 	
-	print("NextCube: Activated! Requesting next example from position %s" % global_position)
 	
 	# Emit the next signal
 	next_requested.emit(global_position)
@@ -203,12 +201,10 @@ func _respawn():
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
 	if _is_player(body):
-		print("NextCube: Player detected, activating next cube")
 		activate()
 
 func _on_next_requested(from_position: Vector3) -> void:
 	"""Handle the next signal - can be connected to scene managers"""
-	print("NextCube: Next signal received from position %s" % from_position)
 	# This can be connected to external listeners that need to handle "next" functionality
 
 # Public API for external control

@@ -139,7 +139,6 @@ func initialize(sequencer_config: Dictionary):
 	# Calculate step duration
 	_update_timing()
 
-	print("🥁 TrapSequencer initialized: %s @ %.0f BPM" % [pattern_name, bpm])
 
 func _load_pattern(pattern_id: String):
 	"""Load a pattern from configuration or presets"""
@@ -149,7 +148,6 @@ func _load_pattern(pattern_id: String):
 		# Load from preset patterns
 		current_pattern = _get_preset_pattern(pattern_id)
 
-	print("✅ Loaded pattern: %s (%d steps)" % [pattern_id, current_pattern.get("steps", 16)])
 
 func _get_preset_pattern(pattern_id: String) -> Dictionary:
 	"""Get a preset pattern by ID"""
@@ -206,7 +204,6 @@ func start():
 	step_timer.start(step_duration)
 
 	sequencer_started.emit()
-	print("▶️ Sequencer started: %s @ %.0f BPM" % [pattern_name, bpm])
 
 func stop():
 	"""Stop the sequencer"""
@@ -220,7 +217,6 @@ func stop():
 	_stop_all_players()
 
 	sequencer_stopped.emit()
-	print("⏹️ Sequencer stopped")
 
 func _stop_all_players():
 	"""Stop all audio players"""

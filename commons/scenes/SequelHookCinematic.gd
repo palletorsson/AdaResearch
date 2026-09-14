@@ -32,7 +32,6 @@ func _on_body_entered(body: Node3D) -> void:
 	if not (body is CharacterBody3D or body.name == "PlayerBody"):
 		return
 	_triggered = true
-	print("SequelHookCinematic: Triggered — beginning final sequence")
 	_run_cinematic()
 
 
@@ -321,13 +320,11 @@ func _disable_player_movement() -> void:
 			elif node.has_method("set_enabled"):
 				node.set_enabled(false)
 
-	print("SequelHookCinematic: Player movement disabled for cinematic")
 
 
 func _return_to_lab() -> void:
 	var scene_manager = get_node_or_null("/root/SceneManager")
 	if scene_manager and scene_manager.has_method("_return_to_hub"):
-		print("SequelHookCinematic: Returning to lab after cinematic")
 		scene_manager._return_to_hub({"return_from": "landscape_cinematic"})
 	else:
 		push_warning("SequelHookCinematic: SceneManager not found")

@@ -310,7 +310,6 @@ static func build_floor(composition_path: String, floor_size: Vector2, parent: N
 	for cv in color_verts:
 		total_tris += cv.size() / 3
 	total_tris += grout_verts.size() / 3
-	print("[MosaicFloorBuilder] Built %dx%d grid, motif=%s, %d tris" % [gw, gh, motif_id, total_tris])
 
 	return root
 

@@ -37,7 +37,6 @@ func _on_game_mode_changed(index: int):
 		if index == GameManager.GameMode.EXPLORER:
 			MapProgressionManager.unlock_all_sequences()
 		
-		print("Game mode changed to: %s" % GameManager.get_game_mode_name())
 
 func _on_infoboard_check_toggled(toggled_on):
 	if GameManager:

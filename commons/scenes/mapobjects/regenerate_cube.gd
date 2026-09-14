@@ -22,7 +22,6 @@ func _ready() -> void:
 	original_y = global_position.y
 	setup_activation_sound()
 	add_to_group("regenerate_emitters")
-	print("RegenerateCube: Ready at position %s" % global_position)
 
 func _process(delta: float) -> void:
 	if has_been_activated:
@@ -72,7 +71,6 @@ func activate() -> void:
 		metadata["message"] = status_message
 	if target_scenes.size() > 0:
 		metadata["scenes"] = Array(target_scenes)
-	print("RegenerateCube: Requesting regenerate for %d script targets" % scripts.size())
 	regenerate_requested.emit(global_position, scripts, metadata)
 	_play_activation_sound()
 	_play_activation_effect()
@@ -150,7 +148,6 @@ func set_targets_from_parameters(parameters: Array) -> void:
 				scripts.append(value)
 	target_scenes = PackedStringArray(scenes)
 	target_scripts = PackedStringArray(scripts)
-	print("RegenerateCube: Configured %d scene target(s) and %d script target(s)" % [target_scenes.size(), target_scripts.size()])
 
 func set_status_message(value: String) -> void:
 	status_message = value

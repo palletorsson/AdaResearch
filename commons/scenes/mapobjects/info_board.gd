@@ -170,7 +170,6 @@ func _find_grid_system() -> Node:
 	for path in potential_paths:
 		var node = get_node_or_null(path)
 		if node and (node.get_class() == "GridSystem" or node.get_class() == "LabGridSystem"):
-			print("InfoBoard: Found grid system at path: " + path)
 			return node
 	
 	# Try finding by class name in the scene tree
@@ -178,19 +177,16 @@ func _find_grid_system() -> Node:
 	if scene_root:
 		var grid_systems = _find_nodes_by_class_name(scene_root, "GridSystem")
 		if grid_systems.size() > 0:
-			print("InfoBoard: Found grid system by class search")
 			return grid_systems[0]
 		
 		var lab_grid_systems = _find_nodes_by_class_name(scene_root, "LabGridSystem")
 		if lab_grid_systems.size() > 0:
-			print("InfoBoard: Found lab grid system by class search")
 			return lab_grid_systems[0]
 	
 	# Try finding in parent hierarchy
 	var current = get_parent()
 	while current:
 		if current.get_class() == "GridSystem" or current.get_class() == "LabGridSystem":
-			print("InfoBoard: Found grid system in parent hierarchy")
 			return current
 		current = current.get_parent()
 	
@@ -233,7 +229,6 @@ func _load_map_data():
 	
 	# Load map data from map_data.json
 	var map_data_path = "res://commons/maps/" + map_name + "/map_data.json"
-	print("InfoBoard: Looking for map data at: " + map_data_path)
 	
 	if not FileAccess.file_exists(map_data_path):
 		push_error("InfoBoard: map_data.json not found at: " + map_data_path)
@@ -291,13 +286,10 @@ func _update_info_board_with_map_data():
 		push_error("InfoBoard: No map data available")
 		return
 	
-	print("InfoBoard: Updating info board with map data...")
 	
 	var map_info = map_data.get("map_info", {})
 	var metadata = map_info.get("metadata", {})
 	
-	print("InfoBoard: Map info keys: " + str(map_info.keys()))
-	print("InfoBoard: Metadata keys: " + str(metadata.keys()))
 	
 	# Extract map information
 	var map_name_display = map_info.get("name", "Unknown Map")
@@ -307,10 +299,6 @@ func _update_info_board_with_map_data():
 	var estimated_time = metadata.get("estimated_time", "Unknown")
 	var learning_objectives = metadata.get("learning_objectives", [])
 	
-	print("InfoBoard: Map name: " + map_name_display)
-	print("InfoBoard: Description: " + description)
-	print("InfoBoard: Category: " + category)
-	print("InfoBoard: Difficulty: " + difficulty)
 	
 	# Update labels with map information
 	level_number_label.text = "01"  # Could be enhanced to show map number if needed
@@ -448,7 +436,6 @@ func _create_summary_from_map_data(map_info: Dictionary, metadata: Dictionary):
 		dimensions_text += "Max Height: %d levels" % max_height
 		summary_sections.append(dimensions_text)
 	
-	print("InfoBoard: Created " + str(summary_sections.size()) + " summary sections from map data")
 	
 
 # Animation control functions

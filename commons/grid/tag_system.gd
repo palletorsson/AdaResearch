@@ -23,7 +23,6 @@ static func register_tagged_node(tag: String, node: Node) -> void:
 		_tagged_nodes[tag] = []
 	
 	_tagged_nodes[tag].append(node)
-	print("TagSystem: Registered node '%s' with tag '%s'" % [node.name, tag])
 	
 	# Connect to node's tree_exiting signal to auto-unregister
 	if not node.tree_exiting.is_connected(_on_node_freed.bind(tag, node)):
@@ -38,7 +37,6 @@ static func unregister_tagged_node(tag: String, node: Node) -> void:
 	var idx = nodes_array.find(node)
 	if idx >= 0:
 		nodes_array.remove_at(idx)
-		print("TagSystem: Unregistered node '%s' from tag '%s'" % [node.name, tag])
 	
 	# Clean up empty tag arrays
 	if nodes_array.is_empty():
@@ -57,7 +55,6 @@ static func trigger_tag_action(tag: String, action: String) -> void:
 	var nodes_array: Array = _tagged_nodes[tag].duplicate()  # Duplicate to avoid modification during iteration
 	var success_count: int = 0
 	
-	print("TagSystem: Triggering action '%s' on %d nodes with tag '%s'" % [action, nodes_array.size(), tag])
 	
 	for node in nodes_array:
 		if not is_instance_valid(node):
@@ -66,13 +63,11 @@ static func trigger_tag_action(tag: String, action: String) -> void:
 		if _execute_action(node, action):
 			success_count += 1
 	
-	print("TagSystem: Action '%s' executed on %d/%d nodes" % [action, success_count, nodes_array.size()])
 
 ## Execute a specific action on a node
 static func _execute_action(node: Node, action: String) -> bool:
 	match action.to_lower():
 		"remove":
-			print("  - '%s': queue_free()" % node.name)
 			node.queue_free()
 			return true
 		
@@ -82,7 +77,6 @@ static func _execute_action(node: Node, action: String) -> bool:
 				node.show()
 				# Re-enable collision shapes
 				_set_collision_enabled(node, true)
-				print("  - '%s': visible = true (collisions enabled)" % node.name)
 				return true
 			else:
 				push_warning("  - '%s': No 'visible' property (action: reveal)" % node.name)
@@ -94,7 +88,6 @@ static func _execute_action(node: Node, action: String) -> bool:
 				node.hide()
 				# Disable collision shapes to prevent invisible collisions
 				_set_collision_enabled(node, false)
-				print("  - '%s': visible = false (collisions disabled)" % node.name)
 				return true
 			else:
 				push_warning("  - '%s': No 'visible' property (action: hide)" % node.name)
@@ -103,7 +96,6 @@ static func _execute_action(node: Node, action: String) -> bool:
 		"freeze":
 			if node is RigidBody3D:
 				node.freeze = true
-				print("  - '%s': freeze = true" % node.name)
 				return true
 			else:
 				push_warning("  - '%s': Not a RigidBody3D (action: freeze)" % node.name)
@@ -112,7 +104,6 @@ static func _execute_action(node: Node, action: String) -> bool:
 		"unfreeze":
 			if node is RigidBody3D:
 				node.freeze = false
-				print("  - '%s': freeze = false" % node.name)
 				return true
 			else:
 				push_warning("  - '%s': Not a RigidBody3D (action: unfreeze)" % node.name)
@@ -123,7 +114,6 @@ static func _execute_action(node: Node, action: String) -> bool:
 				node.freeze = false
 				node.visible = true
 				node.show()
-				print("  - '%s': physics enabled (unfreeze + reveal)" % node.name)
 				return true
 			else:
 				push_warning("  - '%s': Not a RigidBody3D (action: enable_physics)" % node.name)
@@ -132,14 +122,12 @@ static func _execute_action(node: Node, action: String) -> bool:
 		"disable_physics":
 			if node is RigidBody3D:
 				node.freeze = true
-				print("  - '%s': physics disabled (freeze)" % node.name)
 				return true
 			else:
 				push_warning("  - '%s': Not a RigidBody3D (action: disable_physics)" % node.name)
 				return false
 				
 		"shrink_and_remove":
-			print("  - '%s': scaling down and removing" % node.name)
 			if "scale" in node:
 				var tween = node.create_tween()
 				tween.tween_property(node, "scale", Vector3.ZERO, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
@@ -161,7 +149,6 @@ static func get_nodes_with_tag(tag: String) -> Array:
 
 ## Clear all tag registrations (useful for scene changes)
 static func clear_all_tags() -> void:
-	print("TagSystem: Clearing all tag registrations")
 	_tagged_nodes.clear()
 
 ## Debug: Print all registered tags and their node counts

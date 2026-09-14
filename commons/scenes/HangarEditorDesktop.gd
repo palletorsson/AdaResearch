@@ -144,7 +144,6 @@ func _load_map(map_name: String) -> void:
 	_orbit_center = Vector3(dims.x * 0.5 * _cs, 0.0, dims.z * 0.5 * _cs)
 	_orbit_radius = maxf(float(dims.x), float(dims.z)) * _cs * 1.15 + 9.0
 	_update_camera()
-	print("[hangar] map '%s' dims=%s total_size=%.3f" % [_current_map, str(dims), _cs])
 
 
 func _load_inter_grid() -> void:
@@ -413,7 +412,6 @@ func _place(lookup: String, world_pos: Vector3) -> void:
 	# Sit on the floor surface (the highest cube layer), exactly like the game —
 	# GridInteractablesComponent.generate_interactables uses find_highest_y_at too.
 	var y_pos := _floor_y(gx, gz)
-	print("[hangar] place %s hit=%s -> cell=(%d,%d) y_pos=%d world_y=%.3f ts=%.3f" % [lookup, str(world_pos), gx, gz, y_pos, y_pos * _cs, _cs])
 	inter._place_artifact(gx, y_pos, gz, lookup, _cs)
 	_inter_grid[gz][gx] = lookup
 	# Target the floor surface the ray actually hit (world_pos.y) — robust to the
@@ -448,7 +446,6 @@ func _settle_on_floor(gx: int, gz: int, lookup: String, target_y: float) -> void
 			gp.y += shift
 			n.global_position = gp
 			final_base = target_y
-	print("[hangar] settled %s base=%.3f target=%.3f" % [lookup, final_base, target_y])
 
 
 func _floor_y(gx: int, gz: int) -> int:
@@ -538,7 +535,6 @@ func _left_press(screen_pos: Vector2, shift: bool) -> void:
 	# not the artifact has a physics collider (many are display-only, so a physics
 	# raycast would pass straight through and hit the floor cell behind it).
 	var node := _prop_near_screen(screen_pos)
-	print("[hangar] left_press ", screen_pos, " shift=", shift, " -> ", (node.name if node else "<none>"))
 	if node == null:
 		_clear_selection()
 		return

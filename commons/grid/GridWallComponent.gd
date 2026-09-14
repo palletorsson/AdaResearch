@@ -43,7 +43,7 @@ var wall_material: ShaderMaterial
 signal wall_generation_complete(wall_count: int)
 
 func _ready():
-	print("GridWallComponent: Initialized")
+	pass
 
 # Initialize component
 func initialize(grid_sys: Node3D, data_comp: GridDataComponent, settings: Dictionary = {}):
@@ -53,11 +53,9 @@ func initialize(grid_sys: Node3D, data_comp: GridDataComponent, settings: Dictio
 	cube_size = settings.get("cube_size", cube_size)
 	gutter = settings.get("gutter", gutter)
 
-	print("GridWallComponent: Ready to generate walls")
 
 # Generate walls from configuration
 func generate_walls(wall_config: Dictionary = {}):
-	print("GridWallComponent: Generating perimeter walls...")
 
 	# Parse config
 	_parse_wall_config(wall_config)
@@ -88,7 +86,6 @@ func generate_walls(wall_config: Dictionary = {}):
 	else:
 		grid_depth_m = dimensions.z * (cube_size + gutter)
 
-	print("GridWallComponent: Creating walls %.1fm x %.1fm, height %.1fm, offset (%.1f, %.1f)" % [grid_width_m, grid_depth_m, wall_height, wall_offset_x, wall_offset_z])
 
 	# Create wall container
 	var wall_container = Node3D.new()
@@ -141,7 +138,6 @@ func generate_walls(wall_config: Dictionary = {}):
 	wall_container.add_child(west)
 
 	var wall_count = 4
-	print("GridWallComponent: Walls complete - %d walls" % wall_count)
 	wall_generation_complete.emit(wall_count)
 
 # Create a single wall panel using PlaneMesh with UV-based grid shader
@@ -198,7 +194,6 @@ func _setup_wall_material():
 		wall_material.set_shader_parameter("wireframeOpacity", wireframe_opacity)
 		wall_material.set_shader_parameter("globalOpacity", global_opacity)
 		wall_material.set_shader_parameter("show_interior", show_interior)
-		print("GridWallComponent: Shader loaded from %s" % shader_path)
 	else:
 		push_warning("GridWallComponent: Failed to load shader at %s, using fallback" % shader_path)
 		_setup_fallback_material()
@@ -371,4 +366,3 @@ func clear_walls():
 		if obj and is_instance_valid(obj):
 			obj.queue_free()
 	wall_objects.clear()
-	print("GridWallComponent: Walls cleared")

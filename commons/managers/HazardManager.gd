@@ -33,9 +33,6 @@ func _ready():
 	_load_saved_progress()
 	_rebuild_state()
 	call_deferred("_connect_progression_signals")
-	print("HazardManager: Initialized with %d stages, %d completed sequences, %d hazard types allowed" % [
-		_all_stages.size(), _completed_sequences.size(), _allowed_types.size()
-	])
 
 # ---------------------------------------------------------------------------
 # Public API
@@ -112,7 +109,6 @@ func _connect_progression_signals() -> void:
 	if mpm and mpm.has_signal("sequence_completed"):
 		if not mpm.sequence_completed.is_connected(_on_sequence_completed):
 			mpm.sequence_completed.connect(_on_sequence_completed)
-		print("HazardManager: Connected to MapProgressionManager.sequence_completed")
 	else:
 		push_warning("HazardManager: MapProgressionManager not found or missing signal")
 
@@ -138,9 +134,6 @@ func _advance_stage(sequence_name: String) -> void:
 	save_state()
 
 	stage_advanced.emit(sequence_name)
-	print("HazardManager: Stage advanced — '%s' (order %d, %d types allowed, behavior: %s)" % [
-		sequence_name, _current_stage_order, _allowed_types.size(), _spawner_behavior
-	])
 
 # ---------------------------------------------------------------------------
 # State rebuild

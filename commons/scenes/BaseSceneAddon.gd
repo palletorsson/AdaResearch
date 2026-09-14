@@ -13,7 +13,6 @@ var base_scene_root: Node
 signal scene_manager_ready(scene_manager: SceneManager)
 
 func _ready():
-	print("BaseSceneAddon: Initializing SceneManager for base.tscn")
 	
 	# Get the root of base scene (the XRToolsSceneBase)
 	base_scene_root = get_parent()
@@ -59,7 +58,6 @@ func _setup_scene_manager():
 	var staging = _find_vr_staging()
 	if staging:
 		scene_manager.set_staging_reference(staging)
-		print("BaseSceneAddon: SceneManager connected to VR staging")
 	
 	# Auto-connect to scene systems after a brief delay
 	call_deferred("_auto_connect_scene_manager")
@@ -67,7 +65,6 @@ func _setup_scene_manager():
 	# Emit signal for other nodes
 	scene_manager_ready.emit(scene_manager)
 	
-	print("BaseSceneAddon: SceneManager available for scene: %s" % base_scene_root.name)
 
 func _auto_connect_scene_manager():
 	"""Automatically connect SceneManager to available systems"""
@@ -85,7 +82,6 @@ func _auto_connect_scene_manager():
 		await tree_entered
 	await get_tree().process_frame  # Extra frame for safety
 	
-	print("BaseSceneAddon: Auto-connecting SceneManager to scene systems")
 	
 	# Safely call auto-connect
 	if scene_manager.has_method("auto_connect_to_scene"):

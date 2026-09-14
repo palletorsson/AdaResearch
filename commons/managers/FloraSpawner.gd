@@ -70,7 +70,6 @@ func _initialize() -> void:
 	_load_nature_layer()
 	if not _nature_data.is_empty():
 		_build_multimeshes()
-		print("FloraSpawner: ready — %d flora types from nature_layer.json" % _multimeshes.size())
 
 
 func _process(delta: float) -> void:
@@ -116,7 +115,6 @@ func _load_nature_layer() -> void:
 		return
 
 	_nature_data = json.data
-	print("FloraSpawner: loaded nature_layer.json for %s" % map_name)
 
 
 # ═════════════════════════════════════════════════════════════════════════
@@ -163,7 +161,6 @@ func _build_multimeshes() -> void:
 		var real_count: int = mini(MAX_REAL_PER_TYPE, placements.size())
 		for i in real_count:
 			_place_real_scene(flora_type, placements[i])
-		print("FloraSpawner: %d real %s scenes placed" % [real_count, flora_type])
 
 	# TIER 1.5: Place canonical MorphologyRouter flora at top 3 strongest cells per type
 	for flora_type in instances:
@@ -178,8 +175,6 @@ func _build_multimeshes() -> void:
 				break
 			_place_canonical_flora(flora_type, placements[i])
 			canonical_count += 1
-		if canonical_count > 0:
-			print("FloraSpawner: %d canonical %s via MorphologyRouter" % [canonical_count, flora_type])
 
 	# TIER 2: Fill remaining cells with synthetic MultiMesh
 	for flora_type in instances:

@@ -42,7 +42,6 @@ func _ready() -> void:
 	position.y += y_offset
 	
 	var volume_ratio = (max_scale / min_scale) ** 3
-	print("ScaleCube: %.1f → %.1f (volume ×%.1f), pause=%.1fs, y_offset=%.1f" % [min_scale, max_scale, volume_ratio, pause_at_max, y_offset])
 
 func create_cube() -> void:
 	# Create mesh (1x1x1 base, we'll scale it)

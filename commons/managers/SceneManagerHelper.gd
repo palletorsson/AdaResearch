@@ -22,7 +22,6 @@ static func get_scene_manager(from_node: Node = null) -> SceneManager:
 	else:
 		var tree = from_node.get_tree()
 		if not tree:
-			print("SceneManagerHelper: Node not in scene tree")
 			return null
 		var scene_root = tree.current_scene
 		if not scene_root:
@@ -53,7 +52,6 @@ static func wait_for_scene_manager(from_node: Node) -> SceneManager:
 		return null
 	
 	if not from_node.get_tree():
-		print("SceneManagerHelper: Node not in scene tree")
 		return null
 	
 	var scene_manager = get_scene_manager(from_node)
@@ -68,7 +66,6 @@ static func wait_for_scene_manager(from_node: Node) -> SceneManager:
 		
 	var addon = scene_root.find_child("BaseSceneAddon", true, false)
 	if addon and addon.has_signal("scene_manager_ready"):
-		print("SceneManagerHelper: Waiting for BaseSceneAddon scene_manager_ready signal")
 		await addon.scene_manager_ready
 		if not is_instance_valid(from_node):
 			return null

@@ -19,7 +19,7 @@ func _ready():
 	# Find player body (parent should be XROrigin3D or similar)
 	_player_body = _find_player_body()
 	if _player_body:
-		print("StuckDetector: Monitoring player at %s" % _player_body.name)
+		pass
 	else:
 		print("StuckDetector: Warning - could not find player body, will retry")
 
@@ -41,7 +41,6 @@ func _process(delta: float):
 	# Check if stuck
 	if _is_stuck():
 		_stuck_count += 1
-		print("StuckDetector: Player appears stuck (%d/%d)" % [_stuck_count, stuck_threshold])
 		
 		if _stuck_count >= stuck_threshold:
 			print("StuckDetector: Rescuing player!")
@@ -93,14 +92,12 @@ func _rescue_player():
 		var spawn = _find_spawn_point()
 		if spawn:
 			rescue_pos = spawn.global_position + Vector3(0, 0.5, 0)
-			print("StuckDetector: Using spawn point at %s" % rescue_pos)
 		else:
 			print("StuckDetector: No spawn point found, using fallback %s" % rescue_pos)
 	
 	# Find the root player node to teleport
 	var player_root = _find_player_root()
 	if player_root:
-		print("StuckDetector: Teleporting %s to %s" % [player_root.name, rescue_pos])
 		player_root.global_position = rescue_pos
 		
 		# Reset velocity if applicable
@@ -173,7 +170,6 @@ func _find_spawn_point() -> Node3D:
 
 # Public API to force rescue
 func force_rescue():
-	print("StuckDetector: Force rescue triggered")
 	_rescue_player()
 	_stuck_count = 0
 

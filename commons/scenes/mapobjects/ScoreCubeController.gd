@@ -24,7 +24,6 @@ var base_scale: Vector3
 var is_animating: bool = false
 
 func _ready():
-	print("ScoreCube: Initializing score display cube")
 	
 	# Find visual components
 	_setup_visual_components()
@@ -46,7 +45,6 @@ func _setup_visual_components():
 	if mesh_instance:
 		base_scale = mesh_instance.scale
 		shader_material = mesh_instance.material_override as ShaderMaterial
-		print("ScoreCube: Found mesh instance")
 	else:
 		print("ScoreCube: WARNING - No mesh instance found")
 	
@@ -65,25 +63,21 @@ func _setup_visual_components():
 		score_label.outline_size = 8
 		score_label.outline_color = Color.BLACK
 		add_child(score_label)
-		print("ScoreCube: Created score label")
 
 func _connect_to_game_manager():
 	"""Connect to GameManager singleton signals"""
 	
 	if not GameManager.score_updated.is_connected(_on_score_updated):
 		GameManager.score_updated.connect(_on_score_updated)
-		print("ScoreCube: Connected to GameManager.score_updated")
 	
 	if not GameManager.pickup_collected.is_connected(_on_pickup_collected):
 		GameManager.pickup_collected.connect(_on_pickup_collected)
-		print("ScoreCube: Connected to GameManager.pickup_collected")
 
 func _on_score_updated(new_score: int):
 	"""Handle score updates from GameManager"""
 	var score_increase = new_score - current_score
 	current_score = new_score
 	
-	print("ScoreCube: Score updated to %d (increase: %d)" % [new_score, score_increase])
 	
 	# Update visual display
 	_update_score_display(new_score)
@@ -95,7 +89,6 @@ func _on_score_updated(new_score: int):
 
 func _on_pickup_collected(pickup_position: Vector3):
 	"""Handle pickup collection events"""
-	print("ScoreCube: Pickup collected at %s" % pickup_position)
 	
 	# Point towards the pickup location briefly
 	if pickup_position != Vector3.ZERO:
@@ -173,7 +166,6 @@ func _check_celebration_milestone(score: int):
 
 func _celebration_effect():
 	"""Special celebration effect for milestone achievements"""
-	print("ScoreCube: 🎉 CELEBRATION! Milestone reached!")
 	
 	if shader_material:
 		# Rainbow effect

@@ -38,9 +38,6 @@ func _ready():
 	_load_saved_progress()
 	_rebuild_state()
 	call_deferred("_connect_progression_signals")
-	print("EcosystemManager: Initialized with %d stages, %d maps indexed, %d completed sequences, %d flags active" % [
-		_all_stages.size(), _map_to_sequence.size(), _completed_sequences.size(), _allowed_flags.size()
-	])
 
 # ---------------------------------------------------------------------------
 # Public API
@@ -161,7 +158,6 @@ func _connect_progression_signals() -> void:
 	if mpm and mpm.has_signal("sequence_completed"):
 		if not mpm.sequence_completed.is_connected(_on_sequence_completed):
 			mpm.sequence_completed.connect(_on_sequence_completed)
-		print("EcosystemManager: Connected to MapProgressionManager.sequence_completed")
 	else:
 		push_warning("EcosystemManager: MapProgressionManager not found or missing signal")
 
@@ -187,9 +183,6 @@ func _advance_stage(sequence_name: String) -> void:
 	save_state()
 
 	ecosystem_stage_advanced.emit(sequence_name)
-	print("EcosystemManager: Stage advanced — '%s' (order %d, %d flags)" % [
-		sequence_name, _current_stage_order, _allowed_flags.size()
-	])
 
 # ---------------------------------------------------------------------------
 # State rebuild
@@ -252,7 +245,6 @@ func _notify_soundbank_ambient_change() -> void:
 	var sound_bank = get_node_or_null("/root/SoundBank")
 	if sound_bank and sound_bank.has_method("trigger_ambient_change"):
 		sound_bank.trigger_ambient_change(_current_ambient_preset)
-		print("EcosystemManager: Ambient -> '%s'" % _current_ambient_preset)
 
 # ---------------------------------------------------------------------------
 # JSON loading

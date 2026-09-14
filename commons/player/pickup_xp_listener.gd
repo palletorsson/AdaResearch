@@ -34,7 +34,6 @@ func _connect_to_pickups() -> void:
 		if pickup is XRToolsFunctionPickup:
 			if not pickup.has_picked_up.is_connected(_on_object_picked_up):
 				pickup.has_picked_up.connect(_on_object_picked_up)
-				print("PickupXPListener: Connected to ", pickup.name)
 
 func _on_object_picked_up(what: Node3D) -> void:
 	if not is_instance_valid(what):
@@ -52,7 +51,6 @@ func _on_object_picked_up(what: Node3D) -> void:
 	# Award XP if amount > 0
 	if xp_amount > 0 and GameManager:
 		GameManager.add_points(xp_amount, what.global_position)
-		print("PickupXPListener: +%d XP for picking up %s" % [xp_amount, what.name])
 
 	# Track this object
 	if once_per_object:

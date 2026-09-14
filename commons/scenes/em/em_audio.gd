@@ -180,9 +180,6 @@ class Rig extends Node:
 		_apply(1.0)
 		air_player.play()
 		rum_player.play()
-		print("[em_audio] %d generated buffers, %.0f KiB resident, buses %s/%s, space=%s" % [
-			2 + 1 + STEP_VARIANTS * 2, float(_bytes) / 1024.0,
-			BUS_TONE, BUS_SPACE, space])
 
 	## Two buses, both sending to Master.
 	##   EmTone  — the bed. A 12 dB/oct low-pass whose cutoff moves with room
@@ -466,7 +463,6 @@ class Rig extends Node:
 		emitter.connect(signal_name, cb)
 		_bound = true
 		set_process(false)
-		print("[em_audio] footsteps bound to %s.%s (%d args)" % [emitter, signal_name, argc])
 		return true
 
 	func _fs0() -> void:
@@ -777,8 +773,6 @@ class Rig extends Node:
 		if lofi_stream == null:
 			var t0 := Time.get_ticks_msec()
 			lofi_stream = _build_lofi()
-			print("[em_audio] lo-fi bed synthesised: %.1f s loop in %d ms" % [
-				lofi_stream.data.size() / 2.0 / LOFI_RATE, Time.get_ticks_msec() - t0])
 		if music_player == null:
 			music_player = AudioStreamPlayer.new()
 			music_player.name = "LofiBed"

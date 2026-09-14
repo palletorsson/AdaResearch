@@ -64,7 +64,6 @@ func speak():
 			selected_voice = voices[0]["id"]
 	
 	if not selected_voice.is_empty():
-		print("TTS Speaker saying: '%s'" % message)
 		DisplayServer.tts_speak(message, selected_voice, volume, pitch, rate)
 	elif voices.is_empty():
 		print("TTS Speaker Warning: No voices available, attempting default fallback")

@@ -32,7 +32,6 @@ func initialize(grid_system: Node, data_component: Node, structure_component: No
 	if map_name == "" and data_component and data_component.has_method("get_map_name"):
 		map_name = data_component.get_map_name().replace(" ", "_")
 
-	print("[Timeline] Init: map_name = '%s'" % map_name)
 
 	if map_name == "":
 		print("[Timeline] No map name found — skipping")
@@ -56,7 +55,6 @@ func initialize(grid_system: Node, data_component: Node, structure_component: No
 	_apply_initial_state()
 	_arm_triggers()
 	_initialized = true
-	print("[Timeline] ✓ Loaded %d events for %s" % [_events.size(), map_name])
 
 
 func _debug_list_artifacts():
@@ -140,7 +138,6 @@ func _retry_hide_teleporter() -> void:
 			for child in tp.get_children():
 				if child is Node3D:
 					child.visible = false
-			print("[Timeline] Teleporter hidden (retry %d)" % i)
 			return
 
 
@@ -242,7 +239,6 @@ func _on_event_fire(event_id: String) -> void:
 		return
 
 	_completed[event_id] = true
-	print("[Timeline] Event: %s" % event_id)
 	event_triggered.emit(event_id)
 
 	# Find and execute actions
@@ -258,7 +254,6 @@ func _on_event_fire(event_id: String) -> void:
 	# Check if all events done
 	if _completed.size() >= _events.size():
 		timeline_complete.emit()
-		print("[Timeline] Complete")
 
 
 func _check_dependent_triggers() -> void:
@@ -427,7 +422,6 @@ func _set_teleporters_active(active: bool) -> void:
 		for child in tp.get_children():
 			if child is Node3D:
 				child.visible = active
-		print("[Timeline] Teleporter %s: %s" % ["SHOWN" if active else "HIDDEN", tp.name])
 	else:
 		print("[Timeline] WARNING: No teleporter found")
 
