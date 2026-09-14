@@ -11,15 +11,17 @@ var audio_player: AudioStreamPlayer
 # Color scheme for different message types
 var type_colors = {
 	"info": Color.GREEN,
-	"warning": Color.GREEN,
+	"warning": Color(1.0, 0.8, 0.4),
 	"error": Color.RED,
 	"debug": Color.GREEN,
 	"success": Color.GREEN
 }
 
+# The beep used to be synthesised per ROW (a 4,410-sample loop) and played for every line.
+# Now the console hears the whole engine log, so only an error beeps, and the sound is built
+# the first time one does (2026-09-14).
 func _ready():
-	"""Initialize audio player for console sounds"""
-	create_console_sound()
+	pass
 
 func create_console_sound():
 	"""Create a simple console beep sound"""
@@ -51,7 +53,9 @@ func create_console_sound():
 
 func play_console_sound():
 	"""Play the console beep sound"""
-	if audio_player and audio_player.stream:
+	# a row is set up BEFORE VRconsole adds it to the tree, and an AudioStreamPlayer refuses to
+	# play outside the tree; so the beep is deferred, and dropped if the row never arrives
+	if audio_player and audio_player.stream and audio_player.is_inside_tree():
 		audio_player.play()
 
 func convert_to_12_hour(time_24h: String) -> String:
@@ -82,8 +86,10 @@ func setup_message(message_data: Dictionary):
 	var source = message_data.get("source", "system")
 	var timestamp = message_data.get("timestamp", "")
 	
-	# Play console sound for new message
-	play_console_sound()
+	if type == "error":
+		if audio_player == null:
+			create_console_sound()
+		play_console_sound.call_deferred()
 	
 	# Format timestamp (extract just time portion and convert to 12-hour format)
 	var time_part = ""
@@ -123,5 +129,5 @@ func setup_message(message_data: Dictionary):
 		source_label.add_theme_color_override("font_color", Color.GREEN)
 	if message_label:
 		message_label.text = text
-		message_label.add_theme_color_override("font_color", Color.GREEN)
+		message_label.add_theme_color_override("font_color", type_colors.get(type, Color.GREEN))
 	

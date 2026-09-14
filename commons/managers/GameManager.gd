@@ -7,6 +7,8 @@ extends Node
 const DEATH_CROSS_SCENE: PackedScene = preload("res://commons/primitives/plus/plus.tscn")
 const TESTPLUS_SEQUENCE_INDEX_PATH := "res://commons/maps/sequences/sequence_index.json"
 const FRIEND_POWER_GUARD := preload("res://commons/managers/FriendPowerGuard.gd")
+const SystemConsoleLogger = preload("res://commons/monitor/system_console_logger.gd")
+const SystemConsoleOverlay = preload("res://commons/monitor/system_console_overlay.gd")
 
 # Game Modes
 enum GameMode {
@@ -92,7 +94,8 @@ signal hand_color_changed(new_color: Color)
 signal settings_changed(setting_name: String, value: Variant) # New signal
 
 var console_messages: Array[Dictionary] = []
-var max_console_messages: int = 100
+var max_console_messages: int = 200
+var _console_logger = null     # commons/monitor/system_console_logger.gd, installed in _init
 
 # Color Manager (migrated from GridColorizer)
 var gradient_palettes: Dictionary = {
@@ -151,19 +154,50 @@ func get_all_gradient_names() -> Array:
 signal console_message_added(message_data: Dictionary)
 signal console_cleared()
 
+## THE SYSTEM CONSOLE HEARS THE ENGINE LOG (2026-09-14, Palle: "If we preserve any print
+## statement it would be good to update the system in-game terminal"). Installed at autoload
+## construction, before the main scene loads, so the boot is heard too. Every print, printerr,
+## push_warning and push_error still reaches stdout and godot.log unchanged; the console is
+## an extra copy. The logger may be called from any thread and only queues; the drain runs
+## here, deferred, on the main thread.
+func _init() -> void:
+	if Engine.is_editor_hint():
+		return
+	_console_logger = SystemConsoleLogger.new()
+	_console_logger.sink = _drain_console_log
+	OS.add_logger(_console_logger)
+
+
+func _drain_console_log() -> void:
+	if _console_logger == null:
+		return
+	var lines: Array[Dictionary] = _console_logger.drain()
+	_console_logger.muted = true     # add_console_message's own debug echo must not be heard again
+	for m in lines:
+		add_console_message(str(m["text"]), str(m["type"]), str(m["source"]))
+	_console_logger.muted = false
+
+
+func _exit_tree() -> void:
+	if _console_logger != null:
+		OS.remove_logger(_console_logger)
+		_console_logger = null
+
+
 # Called when the game starts
 func _ready() -> void:
 	_refresh_testplus_sequence_reference()
-	print("GameManager: Singleton initialized - game_mode before load: %s" % get_game_mode_name())
 	reset_game_state()
 	
 	# Load saved settings (game mode, colors, etc.)
 	if FileAccess.file_exists("user://savegame.save"):
-		print("GameManager: Save file exists, loading...")
 		load_game()
-		print("GameManager: After load - game_mode: %s (is_test=%s, is_testplus=%s)" % [get_game_mode_name(), is_test_mode(), is_testplus_mode()])
 	
 	add_test_console_messages()
+	# the desktop face of the console: F12 (a CanvasLayer is not drawn in the headset; VR has
+	# the left-hand panel, commons/monitor/VRconsole.tscn)
+	if DisplayServer.get_name() != "headless":
+		add_child(SystemConsoleOverlay.new())
 
 func _refresh_testplus_sequence_reference() -> void:
 	_testplus_sequence_ids.clear()
@@ -301,8 +335,6 @@ func end_game() -> void:
 # Score management - UPDATED FUNCTIONALITY
 func add_points(amount: int, pickup_position: Vector3 = Vector3.ZERO) -> void:
 	player_score += amount
-	if debug:
-		print("GameManager: Score increased by %d. Total: %d" % [amount, player_score])
 	
 	# Emit signals for UI updates and score cubes
 	emit_signal("score_updated", player_score)
@@ -432,7 +464,6 @@ func apply_health_damage(amount: float) -> void:
 	# absorb the hit entirely. Zero-cost no-op when no such friend exists.
 	var shield_player: Node3D = _resolve_player_node()
 	if shield_player and shield_player.is_inside_tree() and FRIEND_POWER_GUARD.try_absorb(get_tree(), shield_player.global_position):
-		print("FriendPower: shield absorbed %.0f damage" % amount)
 		return
 	set_health(player_health - amount)
 	# Health > 0: red flash + teleport to spawn (try again)
@@ -457,8 +488,6 @@ func set_max_health(new_max: float, refill: bool = true) -> void:
 func register_player(player: Node3D) -> void:
 	current_player = player
 	emit_signal("player_registered", player)
-	if debug:
-		print("GameManager: Player registered: %s" % player.name)
 
 func get_player() -> Node3D:
 	return current_player
@@ -517,8 +546,6 @@ func _handle_player_death() -> void:
 	var death_position: Vector3 = _get_player_death_position()
 	emit_signal("player_died", death_position)
 
-	if debug:
-		print("GameManager: Player health depleted at %s" % str(death_position))
 
 	# Play visceral death effect (red flash, shake, particles, haptic)
 	var death_fx = get_node_or_null("/root/DeathEffect")
@@ -810,8 +837,6 @@ func set_current_map(map_name: String) -> void:
 	current_map_name = normalized_name
 	emit_signal("current_map_changed", current_map_name)
 	refill_mushrooms()      # a new room is a full hand
-	if debug:
-		print("GameManager: Current map set to %s" % current_map_name)
 
 func get_current_map() -> String:
 	return current_map_name
@@ -819,8 +844,6 @@ func get_current_map() -> String:
 func set_message(message: String) -> void:
 	current_message = message
 	emit_signal("message_updated", current_message)
-	if debug:
-		print("GameManager: Message set to: " + message)
 
 func get_message() -> String:
 	return current_message
@@ -859,8 +882,6 @@ func add_test_console_messages():
 
 # Regenerate management
 func request_regenerate(origin: Vector3, targets: Array = [], metadata: Dictionary = {}):
-	if debug:
-		print("GameManager: Regenerate requested from %s with %d target(s)" % [origin, targets.size()])
 	emit_signal("regenerate_requested", origin, targets, metadata)
 
 # Audio management
@@ -948,7 +969,6 @@ func load_game() -> bool:
 			loaded_mode = int(loaded_mode)
 		if loaded_mode is int and loaded_mode >= 0 and loaded_mode < GameMode.size():
 			game_mode = loaded_mode as GameMode
-		print("GameManager: load_game() - game_mode: %s" % get_game_mode_name())
 
 		# Load nail color
 		var color_data = save_data.get("nail_color", null)
@@ -976,8 +996,6 @@ func set_game_mode(mode: GameMode) -> void:
 		return
 	game_mode = mode
 	emit_signal("game_mode_changed", mode)
-	if debug:
-		print("GameManager: Game mode set to %s" % GameMode.keys()[mode])
 	save_game()
 
 func get_game_mode() -> GameMode:
@@ -1057,5 +1075,3 @@ func add_test_points(amount: int = 10) -> void:
 
 func reset_score() -> void:
 	set_score(0)
-	if debug:
-		print("GameManager: Score reset to 0")
