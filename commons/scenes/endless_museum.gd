@@ -15504,6 +15504,7 @@ func _process(_delta: float) -> void:
 		if _autosave_t >= AUTOSAVE_S:
 			_autosave_t = 0.0
 			if _mod_editor.call("save", _edit_overrides, _overrides_path):
+				_edit_watch_own_write(_overrides_path)
 				print("[em-edit] autosaved %d ruling(s) -> %s" % [_edit_overrides.size(), _overrides_path])
 				# the curator is mid-ruling: the follow waits 45 s (the editors'
 				# auto-fold will change the plan moments after this write)
@@ -17322,6 +17323,18 @@ func _web_open_focus() -> void:
 ## surfaces drift apart in the first place, so there is one: rulings, the map of
 ## the hall the visitor stands in, and the open book page. Geometry rebuilds the
 ## hall; the book only refreshes the page it is written on.
+## THE MUSEUM'S OWN RULING SAVES ARE NOT "ANOTHER EDITOR" (2026-09-14). The watcher compares
+## em_overrides.json's mtime with the last one it saw, and an autosave, F5 or exit flush
+## moved it too: a second later the museum rebuilt the whole scene around rulings that were
+## already live, toasting "changed in another editor". The save sites record their own
+## write here. Map writes (paint, passage, config) are left out on purpose: they are
+## "MAP ONLY, no live surgery" and rely on this rebuild to show.
+func _edit_watch_own_write(path: String) -> void:
+	var mt: int = int(FileAccess.get_modified_time(path))
+	if mt != 0:
+		_edit_watch_mt[path] = mt
+
+
 func _edit_watch(delta: float) -> void:
 	if _edit_dirty:
 		return                    # our own unsaved work outranks a reload
@@ -17752,6 +17765,7 @@ func _edit_flush() -> void:
 	if not _edit_dirty or _mod_editor == null:
 		return
 	if _mod_editor.call("save", _edit_overrides, _overrides_path):
+		_edit_watch_own_write(_overrides_path)
 		_edit_dirty = false
 		print("[em-edit] flushed %d ruling(s) on exit -> %s" % [_edit_overrides.size(), _overrides_path])
 
@@ -18749,6 +18763,7 @@ func _edit_handle_key(key: int) -> bool:
 		KEY_F5:
 			var ok := true
 			if _mod_editor.call("save", _edit_overrides, _overrides_path):
+				_edit_watch_own_write(_overrides_path)
 				print("[em-edit] %d override(s) saved -> %s" % [_edit_overrides.size(), _overrides_path])
 			else:
 				ok = false
