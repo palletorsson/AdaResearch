@@ -174,7 +174,7 @@ func _on_regenerate_pressed() -> void:
 
 func _on_compare_pressed() -> void:
 	# This could open a comparison scene or overlay
-	print("Comparison feature - could show Perlin vs Simplex side by side")
+	pass
 
 func _update_noise_parameters() -> void:
 	if noise_field:

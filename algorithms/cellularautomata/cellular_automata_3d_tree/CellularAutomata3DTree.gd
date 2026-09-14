@@ -114,7 +114,6 @@ func grow_next_level() -> void:
 		current_level += 1
 	else:
 		is_growing = false
-		print("Tree growth complete at level: ", current_level)
 	
 	_update_multimesh()
 

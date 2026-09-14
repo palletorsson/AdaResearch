@@ -319,7 +319,6 @@ func apply_grid_config(config: Dictionary) -> void:
 			and is_equal_approx(hue_shift_speed, before_hue)):
 		return
 	_apply_readout()
-	print("[Noisetorus] Config applied — readout=%s" % [readout])
 
 # ═════════════════════════════════════════════════════════════════════════════
 # THE PAIR — stand:pair. Nothing below runs at stand:none.

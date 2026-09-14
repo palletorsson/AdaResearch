@@ -252,7 +252,6 @@ func _ready() -> void:
 	# only — no mode is armed unless a map opts in via `sequence:` config.
 	call_deferred("_resolve_home_sequence_passive")
 
-	print("[Catalyst] Ready — modes: %s" % [unlocked_modes])
 
 func _physics_process(delta: float) -> void:
 	fire_cooldown = maxf(0.0, fire_cooldown - delta)
@@ -465,7 +464,6 @@ func _on_controller_button(button_name: String) -> void:
 					_handle_wedge_remove()
 		"by_button":
 			# B = save the edited grid back to the repo's map_data.json.
-			print("[Catalyst] B (by_button) pressed — mode=%s" % mode_id)
 			match mode_id:
 				"voxel_editor", "wedge_placer", "artifact_edit":
 					_save_map()
@@ -760,7 +758,6 @@ func _reapply_modifier_stack_to_grid() -> void:
 ## interactables, lighting and settings are preserved untouched. Edit the map
 ## inside VR, press B, and the change lands on disk in the repo.
 func _save_map() -> void:
-	print("[Catalyst] _save_map() called")
 	# Map name from the live grid data — works in voxel mode AND edit mode.
 	var data := _get_grid_data_component()
 	var map_name := ""
@@ -872,7 +869,6 @@ func _collect_vr_placements() -> Array:
 ## and placements (route.ts merges it non-destructively). Existing callers that
 ## omit `modifiers` behave exactly as before.
 func _save_map_over_http(map_name: String, layout: Array, placements: Array = [], modifiers: Array = []) -> void:
-	print("[Catalyst] POSTing '%s' (%d rows, %d placed artifacts, %d modifiers) -> %s" % [map_name, layout.size(), placements.size(), modifiers.size(), MAP_SAVE_URL])
 	var http := HTTPRequest.new()
 	add_child(http)
 	http.request_completed.connect(_on_map_save_completed.bind(http))
@@ -895,7 +891,6 @@ func _on_map_save_completed(result: int, response_code: int, _headers: PackedStr
 	var mn := String(http.get_meta("map_name", ""))
 	http.queue_free()
 	if result == HTTPRequest.RESULT_SUCCESS and response_code >= 200 and response_code < 300:
-		print("[Catalyst] B-save: '%s' written on the PC (HTTP %d)" % [mn, response_code])
 		_flash_label("SAVED -> PC  " + mn, Color(0.4, 1.0, 0.6))
 		if controller:
 			controller.trigger_haptic_pulse("haptic", 0.0, 0.2, 0.6, 0.0)
@@ -970,7 +965,6 @@ func _save_biome() -> void:
 
 
 func _save_biome_over_http(map_name: String, paint_layers: Array) -> void:
-	print("[Catalyst] POSTing biome '%s' (%d paint layers) -> %s" % [map_name, paint_layers.size(), MAP_SAVE_URL])
 	var http := HTTPRequest.new()
 	add_child(http)
 	http.request_completed.connect(_on_map_save_completed.bind(http))  # reuse SAVED→PC flash
@@ -1060,7 +1054,6 @@ func _connect_biome_menu(vp: Node) -> void:
 		_biome_menu_ui.pressure_changed.connect(_on_biome_menu_pressure)
 	if _biome_menu_ui.has_signal("artifact_toggle_requested") and not _biome_menu_ui.artifact_toggle_requested.is_connected(_on_biome_menu_artifact):
 		_biome_menu_ui.artifact_toggle_requested.connect(_on_biome_menu_artifact)
-	print("[Catalyst] Biome menu connected")
 
 
 ## Create the biome brush on demand (idempotent) so the panel's BIOME tab can set the
@@ -1203,7 +1196,6 @@ func _connect_editor_panel(vp: Node) -> void:
 		ui.utility_op_selected.connect(_on_editor_utility_op)
 	# Sync the panel's active tab to whatever mode we're already in.
 	_sync_editor_panel_tab()
-	print("[Catalyst] Tabbed editor panel connected")
 
 
 ## Show the panel whenever an edit mode is active; hide in off/projectile modes.
@@ -1415,7 +1407,6 @@ func _ensure_vr_artifact_catalog() -> void:
 		_editor_panel_ui.set_artifact_sequences(seq_list)
 	_rebuild_vr_artifact_list()
 	_update_vr_artifact_panel_preview()
-	print("[Catalyst] artifact palette: %d map-ready lookups, %d sequences" % [_vr_artifact_list.size(), seq_list.size()])
 
 
 ## Rebuild _vr_artifact_list from the full catalog applying the active sequence
@@ -2107,7 +2098,6 @@ func _save_utilities() -> void:
 ## POST the utilities layer to /api/game/save-layers as a whole-layer replace.
 ## Same HTTPRequest pattern + SAVED→PC flash as _save_map_over_http / _save_biome_over_http.
 func _save_utilities_over_http(map_name: String, rows: Array) -> void:
-	print("[Catalyst] POSTing utilities '%s' (%d rows) -> %s" % [map_name, rows.size(), MAP_SAVE_URL])
 	var http := HTTPRequest.new()
 	add_child(http)
 	http.request_completed.connect(_on_map_save_completed.bind(http))  # reuse SAVED→PC flash
@@ -2182,7 +2172,6 @@ func _handle_wedge_add() -> void:
 	fire_cooldown = 0.2
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.2, 0.0)
-	print("[Catalyst] Wedge placed at (%d, %d) dir=%.0f" % [ac.x, ac.z, _wedge_ghost_dir])
 
 
 ## Wedge mode: grip = remove the wedge at the target neighbor.
@@ -2199,7 +2188,6 @@ func _handle_wedge_remove() -> void:
 			_placed_wedges.remove_at(i)
 			if controller:
 				controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.3, 0.0)
-			print("[Catalyst] Wedge removed at (%d, %d)" % [tc.x, tc.z])
 			return
 
 
@@ -2351,7 +2339,6 @@ func _activate_voxel_mode() -> void:
 	if not data or not data.has_method("is_data_loaded") or not data.is_data_loaded():
 		if _voxel_activate_retries < VOXEL_MAX_RETRIES:
 			_voxel_activate_retries += 1
-			print("[Catalyst] Grid data not loaded yet, retry %d/%d" % [_voxel_activate_retries, VOXEL_MAX_RETRIES])
 			get_tree().create_timer(VOXEL_RETRY_DELAY).timeout.connect(_activate_voxel_mode)
 			return
 		print("[Catalyst] Grid data not available after %d retries" % VOXEL_MAX_RETRIES)
@@ -2383,10 +2370,9 @@ func _activate_voxel_mode() -> void:
 					_xr_camera = child
 					break
 	if _xr_camera:
-		print("[Catalyst] Head raycast active — using %s" % _xr_camera.get_path())
+		pass
 	else:
 		push_warning("[Catalyst] No XRCamera3D found — falling back to controller ray")
-	print("[Catalyst] Voxel editor activated")
 
 
 func _deactivate_voxel_mode() -> void:
@@ -2573,7 +2559,6 @@ func _edit_release() -> void:
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.15, 0.5, 0.0)
 	_flash_label("MOVED  %s" % String(node.get_meta("artifact_lookup_name", "")), Color(0.4, 1.0, 0.6))
-	print("[Catalyst] Edit drop -> cell (%d,%d) y=%d yaw=%d" % [x, z, y_level, int(snapped_yaw)])
 
 func _end_edit_mode() -> void:
 	if is_instance_valid(_edit_grabbed):
@@ -2855,7 +2840,6 @@ func _snap01(v: float) -> float:
 ## B in Lab mode: POST the moved lab props back to their lab JSON (by id), over
 ## adb reverse, so the change lands in commons/labs/<name>.lab.json.
 func _save_lab() -> void:
-	print("[Catalyst] _save_lab() called")
 	var updates: Array = []
 	var lab_name := ""
 	for node in get_tree().get_nodes_in_group("vr_lab_moved"):
@@ -2882,7 +2866,6 @@ func _save_lab() -> void:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.12, 0.4, 0.0)
 
 func _save_lab_over_http(lab_name: String, updates: Array) -> void:
-	print("[Catalyst] POSTing lab '%s' (%d prop updates) -> %s" % [lab_name, updates.size(), LAB_SAVE_URL])
 	var http := HTTPRequest.new()
 	add_child(http)
 	http.request_completed.connect(_on_lab_save_completed.bind(http))
@@ -2973,7 +2956,6 @@ func _switch_mode(direction: int) -> void:
 	# ADDITIVE: keep the tabbed editor panel's tab in step with this mode.
 	_sync_editor_panel_tab()
 
-	print("[Catalyst] Switched to mode: %s" % mode_id)
 
 ## Set mode by absolute index (called by capacity bracelet).
 func set_mode_index(index: int) -> void:
@@ -2996,7 +2978,6 @@ func set_mode_index(index: int) -> void:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.15, 0.0)
 	# ADDITIVE: keep the tabbed editor panel's tab in step with this mode.
 	_sync_editor_panel_tab()
-	print("[Catalyst] Set mode to: %s" % mode_id)
 
 func _show_mode_label() -> void:
 	if not _mode_label:
@@ -3036,14 +3017,12 @@ func _connect_progression_signals() -> void:
 	if scene_mgr and scene_mgr.has_signal("sequence_completed"):
 		if not scene_mgr.sequence_completed.is_connected(_on_sequence_completed):
 			scene_mgr.sequence_completed.connect(_on_sequence_completed)
-			print("[Catalyst] Connected to AdaSceneManager.sequence_completed")
 
 	# Also try MapProgressionManager
 	var map_prog := get_node_or_null("/root/MapProgressionManager")
 	if map_prog and map_prog.has_signal("sequence_completed"):
 		if not map_prog.sequence_completed.is_connected(_on_map_progression_sequence_completed):
 			map_prog.sequence_completed.connect(_on_map_progression_sequence_completed)
-			print("[Catalyst] Connected to MapProgressionManager.sequence_completed")
 
 func _on_sequence_completed(sequence_name: String, _completion_data: Dictionary) -> void:
 	for mode_def in MODE_DEFS:
@@ -3160,7 +3139,6 @@ func _on_picked_up(_pickable) -> void:
 	controller = _find_xr_controller()
 	if controller:
 		_pickup_controller_name = controller.name
-		print("[Catalyst] Picked up — controller: '%s' (path: %s)" % [controller.name, controller.get_path()])
 		if not controller.button_pressed.is_connected(_on_controller_button):
 			controller.button_pressed.connect(_on_controller_button)
 	else:
@@ -3193,7 +3171,6 @@ func _replace_existing_catalyst(ctrl: XRController3D) -> void:
 			if ctrl.button_pressed.is_connected(cat._on_controller_button):
 				ctrl.button_pressed.disconnect(cat._on_controller_button)
 			cat.queue_free()
-			print("[Catalyst] Replaced previous catalyst on '%s'" % ctrl.name)
 
 ## Crystal is consumed — reparent to controller, release FunctionPickup hold.
 func _absorb_into_hand() -> void:
@@ -3208,7 +3185,6 @@ func _absorb_into_hand() -> void:
 
 	# If controller reference was lost, try to recover — prefer the SAME hand
 	if not is_instance_valid(controller):
-		print("[Catalyst] Controller lost since pickup, recovering...")
 		# Method A: Walk up from current holder (most reliable)
 		var holder = get_picked_up_by()
 		if holder:
@@ -3216,7 +3192,6 @@ func _absorb_into_hand() -> void:
 			while node:
 				if node is XRController3D:
 					controller = node
-					print("[Catalyst] Recovered controller from holder chain: '%s'" % controller.name)
 					break
 				node = node.get_parent()
 		# Method B: Find controller by saved name
@@ -3312,15 +3287,11 @@ func auto_absorb(ctrl: XRController3D) -> void:
 	if unlocked_modes[current_mode_index] == "voxel_editor":
 		call_deferred("_activate_voxel_mode")
 
-	print("[Catalyst] Auto-absorbed onto '%s' with %d modes: %s" % [
-		controller.name, unlocked_modes.size(), unlocked_modes])
 
 func _deferred_reparent() -> void:
 	if not is_instance_valid(controller):
 		print("[Catalyst] _deferred_reparent: controller INVALID, aborting")
 		return
-	print("[Catalyst] _deferred_reparent: reparenting to controller '%s' (path: %s, global_pos: %s)" % [
-		controller.name, controller.get_path(), controller.global_position])
 	var old_parent := get_parent()
 	if old_parent:
 		old_parent.remove_child(self)
@@ -3331,7 +3302,6 @@ func _deferred_reparent() -> void:
 	# Notify the capability manager to spawn the bracelet on this controller
 	var cap_mgr = get_node_or_null("/root/CatalystCapabilityManager")
 	if cap_mgr and cap_mgr.has_method("spawn_bracelet_on_controller"):
-		print("[Catalyst] Requesting bracelet spawn on controller '%s'" % controller.name)
 		cap_mgr.spawn_bracelet_on_controller(controller)
 	else:
 		print("[Catalyst] WARNING: CatalystCapabilityManager not found or missing spawn method")
@@ -3474,8 +3444,6 @@ func _resolve_home_sequence_passive() -> void:
 	if not is_inside_tree():
 		return
 	home_sequence = SequenceBinding.current_sequence(get_tree())
-	if not home_sequence.is_empty():
-		print("[Catalyst] home sequence (passive): '%s'" % home_sequence)
 
 ## Bind to a sequence and arm the native mode it maps to. `sequence_token`
 ## is an explicit sequence name, or "auto" to ask the scene manager.
@@ -3494,7 +3462,6 @@ func bind_to_sequence(sequence_token: String) -> void:
 	var idx: int = unlocked_modes.find(native)
 	if idx >= 0:
 		current_mode_index = idx
-	print("[Catalyst] bound to sequence '%s' — native mode '%s' armed" % [seq, native])
 
 func get_home_sequence() -> String:
 	return home_sequence
@@ -3519,5 +3486,4 @@ func _find_capability_manager() -> Node:
 func end_lease_dissolve() -> void:
 	if is_instance_valid(controller):
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.4, 0.7, 0.0)
-	print("[Catalyst] Lease expired — dissolving from hand")
 	queue_free()

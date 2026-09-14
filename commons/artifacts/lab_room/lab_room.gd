@@ -932,7 +932,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[LabRoom] Config applied — premises=%s, witness=%s" % [premises, witness])
 
 
 ## Every non-private, non-Object script property as one string — the state the

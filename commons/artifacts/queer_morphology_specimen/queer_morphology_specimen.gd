@@ -820,7 +820,6 @@ func apply_grid_config(config_data: Dictionary):
 		return
 
 	_rebuild_now()
-	print("[QueerMorphologySpecimen] Config applied — becoming=%s" % [becoming])
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a

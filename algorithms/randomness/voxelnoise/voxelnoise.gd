@@ -213,8 +213,6 @@ func apply_perlin_terrain_controls(payload: Dictionary) -> void:
 		iso_level = clampf(threshold_value, -1.0, 1.0)   # no bias: the contract owns the line
 		noise = PerlinTerrainSculptor.contract_noise(noise_seed, payload.get("noise_scale", noise_scale), noise_octaves)
 
-	if debug:
-		print("Voxelnoise: linked update -> iso=%.3f freq=%.4f oct=%d seed=%d" % [iso_level, noise_scale, noise_octaves, noise_seed])
 
 	_queue_rebuild()
 

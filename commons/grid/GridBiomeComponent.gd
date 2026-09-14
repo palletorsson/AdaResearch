@@ -268,8 +268,6 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 		needs_clock = true  # the loop needs the per-frame tick
 	if not _build_queue.is_empty():
 		needs_clock = true  # the queue drains on the same clock
-		print("GridBiomeComponent: %d organisms queued, %d/frame (deferred build)" % [
-			_build_queue.size(), _build_budget])
 	if needs_clock:
 		set_process(true)
 		print("GridBiomeComponent: clock ON (tick %.1fs, dwell %.1fs, %d tick cells)" % [
@@ -277,15 +275,6 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 	print("GridBiomeComponent: %d biome cells (%d seeds, %d fields, %d mutes, %d halos, %d reactive, %d invalid)" % [
 		_stats["cells"], _stats["seeds"], _stats["fields"], _stats["mutes"],
 		_stats["halos"], _stats["reactive"], _stats["invalid"]])
-	if _routed > 0 or _marker_only > 0:
-		print("GridBiomeComponent: routed %d cells -> BiomePaintDispatcher (stage_order %d), %d marker-only" % [
-			_routed, _stage_order, _marker_only])
-	if _halo_cells > 0:
-		print("GridBiomeComponent: halo spill from %d cells -> %d ground-cover instances (grid-native ring)" % [
-			_halo_cells, _halo_instances])
-	if _edge_cells > 0:
-		print("GridBiomeComponent: edge band on %d cells -> %d instances (transition, fades inward)" % [
-			_edge_cells, _edge_instances])
 
 
 # ── living_ground: the declared layer feeds the real ecology loop ──
@@ -372,8 +361,6 @@ func _start_living_ground() -> void:
 	_ground_spawner.max_ground_population = _ground_pop
 	_ground_spawner.spawner = CritterSpawner.new(_ground_holder)
 	_ground_spawner.spawner.max_population = _ground_pop
-	print("GridBiomeComponent: living_ground ON — PresenceGrid seeded from %d cells (span %.1fm), GroundSpawner cap %d" % [
-		seeded, span, _ground_pop])
 
 
 # Tick the ecology. The FIELD always diffuses (deterministic, allocates nothing
@@ -755,8 +742,6 @@ func _drain_build_queue() -> void:
 		_get_dispatcher().spawn_cell(_build_queue.pop_front(), _stage_order,
 			{"cube_size": _cube_size}, self)
 		n += 1
-	if _build_queue.is_empty() and n > 0:
-		print("GridBiomeComponent: build queue drained (budget %d/frame)" % _build_budget)
 
 
 func _get_dispatcher() -> Node3D:
@@ -786,7 +771,6 @@ func adopt_biome_organism(node: Node3D) -> void:
 		_chunk_mgr.name = "BiomeChunkLOD"
 		_chunk_mgr.adopt_only = true
 		add_child(_chunk_mgr)
-		print("GridBiomeComponent: chunk_lod ON — seed organisms adopt into BiomeChunkLOD (ChunkManager, adopt_only)")
 	_chunk_mgr.adopt(node)
 
 
@@ -1319,7 +1303,6 @@ func _rebuild_presence_overlay() -> void:
 	add_child(_presence_mmi)
 	if int(_stats.get("presence_cells", 0)) != cells.size():
 		_stats["presence_cells"] = cells.size()
-		print("GridBiomeComponent: presence stain over %d cells (the ground answers the standing life)" % cells.size())
 
 
 # ── biome-6: the batch machinery. One MultiMesh per (kind, kingdom, recipe)

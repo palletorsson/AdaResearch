@@ -30,7 +30,7 @@ signal utility_generation_complete(utility_count: int)
 signal utility_activated(utility_type: String, position: Vector3, data: Dictionary)
 
 func _ready():
-	print("GridUtilitiesComponent: Initialized")
+	pass
 
 # Initialize with references and settings
 func initialize(grid_parent: Node3D, struct_component: GridStructureComponent, settings: Dictionary = {}):
@@ -42,11 +42,9 @@ func initialize(grid_parent: Node3D, struct_component: GridStructureComponent, s
 	cube_size = settings.get("cube_size", 1.0)
 	gutter = settings.get("gutter", 0.0)
 
-	print("GridUtilitiesComponent: Initialized with cube_size=%f, gutter=%f" % [cube_size, gutter])
 
 # Generate Big Pipe System
 func _generate_big_pipe(bp_code: String, start_pos: Vector3 = Vector3.ZERO) -> void:
-	print("GridUtilitiesComponent: Generating Big Pipe System at %s with code: %s" % [start_pos, bp_code])
 
 	# Create BigPipeSystem instance (using global class_name)
 	var pipe_system = BigPipeSystem.new()
@@ -86,7 +84,6 @@ static func preprocess_select_repeat(layers: Dictionary) -> Dictionary:
 					var end_idx = int(parts[2])
 					var repeat_count = int(parts[3])
 
-					print("GridUtilitiesComponent: Processing sr:%d:%d:%d at position (%d,%d)" % [start_idx, end_idx, repeat_count, x, z])
 
 					# Apply the repeat operation
 					layers = _apply_select_repeat(layers, start_idx, end_idx, repeat_count, z)
@@ -145,7 +142,6 @@ static func _apply_select_repeat(layers: Dictionary, start_idx: int, end_idx: in
 	if layers.has("interactables"):
 		layers.interactables = new_interactables
 
-	print("GridUtilitiesComponent: ✅ Applied sr - Selected %d rows, repeated %d times. New grid size: %d" % [selected_rows_structure.size(), repeat_count, new_structure.size()])
 
 	return layers
 
@@ -159,7 +155,6 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 		print("GridUtilitiesComponent: No layout_data in utility data")
 		return
 
-	print("GridUtilitiesComponent: Generating utilities")
 
 	var utility_layout = utility_data.layout_data
 	_cached_utility_layout = utility_layout  # Cache for m:t:name lookups
@@ -255,7 +250,6 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 
 					# Ensure utility_definition is always a Dictionary (handle string references)
 					if typeof(utility_definition) != TYPE_DICTIONARY:
-						print("GridUtilitiesComponent: Note - Using external utility reference for '%s': %s" % [utility_type, str(utility_definition)])
 						utility_definition = {}
 
 					_place_utility(x, y_pos, z, utility_type, parameters, utility_definition, total_size, cell_config)
@@ -269,7 +263,6 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 	if not tutorial_display_data.is_empty():
 		_generate_tutorial_displays(tutorial_display_data)
 
-	print("GridUtilitiesComponent: Added %d utilities" % utility_count)
 	utility_generation_complete.emit(utility_count)
 
 # Parse Big Pipe utility string
@@ -362,7 +355,6 @@ func _find_safe_adjacent_cell(grid_x: int, grid_z: int) -> Vector2i:
 
 				# Ideal: structure "1" - flat ground, no wall above
 				if not has_above:
-					print("GridUtilitiesComponent: Safe flat floor (structure=1) at grid(%d,%d), %d cells from teleport" % [check_x, check_z, radius])
 					return Vector2i(check_x, check_z)
 
 	# If no structure=1 found, use best fallback
@@ -391,9 +383,7 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 			utility_object.position.y -= 0.1
 
 		# Apply parameters if supported
-		print("GridUtilitiesComponent: Utility type '%s' has %d parameters: %s" % [utility_type, parameters.size(), str(parameters)])
 		if parameters.size() > 0 and UtilityRegistry.supports_parameters(utility_type):
-			print("GridUtilitiesComponent: Applying parameters for utility type '%s'" % utility_type)
 			_apply_utility_parameters(utility_object, utility_type, parameters, cell_config)
 		else:
 			print("GridUtilitiesComponent: No parameters to apply for utility type '%s' (supports: %s)" % [utility_type, UtilityRegistry.supports_parameters(utility_type)])
@@ -418,7 +408,6 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 		var param_info = ""
 		if parameters.size() > 0:
 			param_info = " (params: %s)" % str(parameters)
-		print("  Added %s at (%d,%d,%d)%s" % [UtilityRegistry.get_utility_name(utility_type), x, y, z, param_info])
 
 
 ## Place a ForceField from notation like f:fire:1.5
@@ -441,7 +430,6 @@ func _place_force_field(cell_value: String, x: int, y: int, z: int, total_size: 
 	parent_node.add_child(force_field)
 	utility_objects[Vector3i(x, y, z)] = force_field
 
-	print("  Added ForceField (%s, intensity=%.1f) at (%d,%d,%d)" % [force_type_str, intensity, x, y, z])
 
 
 # Apply utility-specific parameters parsed from map notation (e.g. "t:next:3", "jp:15:3:8")
@@ -491,9 +479,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				if "scene_name" in utility_object:
 					utility_object.scene_name = destination
 
-				print("GridUtilitiesComponent: Set teleporter destination to: %s" % destination)
-			else:
-				print("GridUtilitiesComponent: Teleporter using default 'next_in_sequence' behavior from utility_definitions")
 
 			# Apply height offset if specified
 			if height_offset != 0.0:
@@ -505,7 +490,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				# Adjust the teleporter's vertical position
 				utility_object.position.y += height_offset
 
-				print("GridUtilitiesComponent: Set teleporter height offset to: %f" % height_offset)
 		"l":  # Lift
 			# DEAD PARAMETER, fixed 2026-07-25: platform.gd exports `lift_height`,
 			# not `height`, so the old property check never matched and every
@@ -521,13 +505,10 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 					var lift_h: float = float(raw_lift)
 					if "lift_height" in utility_object:
 						utility_object.lift_height = lift_h
-						print("GridUtilitiesComponent: Set lift_height to %.2f" % lift_h)
 					elif "height" in utility_object:
 						utility_object.height = lift_h
-						print("GridUtilitiesComponent: Set lift height to %.2f" % lift_h)
 				elif not raw_lift.is_empty():
 					utility_object.set_meta("lift_label", raw_lift)
-					print("GridUtilitiesComponent: Lift label '%s' (height left at default)" % raw_lift)
 		"s":  # Spawn point
 			if parameters.size() >= 3:
 				# Format: s:x:y:z (grid coordinates)
@@ -542,13 +523,11 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 
 					# Store coordinates as metadata for GridSpawnComponent to use
 					utility_object.set_meta("spawn_coordinates", Vector3(spawn_x, spawn_y, spawn_z))
-					print("GridUtilitiesComponent: ✅ Set spawn coordinates to (%.1f, %.1f, %.1f) on utility object: %s" % [spawn_x, spawn_y, spawn_z, utility_object.name])
 				else:
 					print("GridUtilitiesComponent: WARNING - Invalid spawn coordinates in parameters: %s" % parameters)
 			elif parameters.size() > 0:
 				# Legacy support: spawn name parameter
 				utility_object.set_meta("spawn_name", parameters[0])
-				print("GridUtilitiesComponent: Set spawn name to: %s" % parameters[0])
 		"wp":  # Walkable prism
 			# The prism mesh is CENTER-origin (spans -0.5..+0.5), but it is
 			# placed at the cube-top surface — so by default its base sinks
@@ -560,7 +539,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 			if parameters.size() > 0:
 				var rotation_y = float(parameters[0])
 				utility_object.rotation_degrees.y = rotation_y
-				print("GridUtilitiesComponent: Set walkable prism rotation to: %f degrees" % rotation_y)
 			# PARAM 1 IS DUAL, and it has to be. UtilityRegistry.parse_utility_cell
 			# DROPS empty parts, so `wp:0::0.5` never arrives as ["0","","0.5"]: it
 			# arrives as ["0","0.5"] and the lift lands in the COLOUR slot. Not a
@@ -581,10 +559,8 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				if p1.is_valid_float():
 					var lift: float = p1.to_float()
 					utility_object.position.y += cube_size * lift
-					print("GridUtilitiesComponent: Raised walkable prism by %.2f cube(s)" % lift)
 				elif p1 != "":
 					_apply_color_to_utility(utility_object, p1)
-					print("GridUtilitiesComponent: Applied color '%s' to walkable prism" % p1)
 		"el":  # Extra light
 			var energy_value = null
 			if parameters.size() > 0:
@@ -601,7 +577,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 					var light_node := utility_object.get_node_or_null("StaticBody3D/OmniLight3D")
 					if light_node:
 						light_node.light_energy = max(energy_value, 0.0)
-				print("GridUtilitiesComponent: Set extra light intensity to %.2f" % energy_value)
 			var hide_flag_set := false
 			var hide_flag := false
 			if parameters.size() > 1:
@@ -630,7 +605,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 							mesh_node = static_body.get_node_or_null("MeshInstance3D")
 						if mesh_node and mesh_node is Node3D:
 							mesh_node.visible = not hide_flag
-				print("GridUtilitiesComponent: Set extra light fixture hidden=%s" % str(hide_flag))
 			# Optional colour at parameters[2] — tints the light (department zoning).
 			if parameters.size() > 2:
 				var col_param := str(parameters[2]).strip_edges()
@@ -641,17 +615,14 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 					if light_node2 and light_node2 is Light3D:
 						var c := Color.html(col_param) if col_param.begins_with("#") else Color.from_string(col_param, Color.WHITE)
 						(light_node2 as Light3D).light_color = c
-						print("GridUtilitiesComponent: Tinted extra light '%s'" % col_param)
 		"3t":  # Text display
 			var text_value = _build_text_display_message(parameters)
 			utility_object.set_meta("display_text", text_value)
 			_apply_text_display_text(utility_object, text_value)
-			print("GridUtilitiesComponent: Set 3t text to '%s'" % text_value)
 		"tts":  # Text to Speech
 			var message = _build_text_display_message(parameters)
 			if "message" in utility_object:
 				utility_object.message = message
-				print("GridUtilitiesComponent: Set TTS message to '%s'" % message)
 		"sr":  # Speed reader
 			var sr_key = ""
 			if parameters.size() > 0:
@@ -671,7 +642,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				utility_object.configure_speed_reader(sr_key, sr_speed, sr_loop)
 			else:
 				utility_object.set_meta("speed_reader_key", sr_key)
-			print("GridUtilitiesComponent: Configured speed reader '%s' (seconds=%.2f, loop=%s)" % [sr_key, sr_speed, str(sr_loop)])
 		"an":  # Annotation/Info Board
 			var map_info = {}
 			# Try to fetch map info from the parent GridSystem
@@ -695,7 +665,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				if utility_object.has_method("set_content"):
 					utility_object.set_content(title, description)
 
-				print("GridUtilitiesComponent: Populated 'an' board with map info: %s" % title)
 			else:
 				print("GridUtilitiesComponent: 'an' board placed, but no map info found in parent")
 
@@ -703,7 +672,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 			if parameters.size() > 0:
 				var rot_y = float(parameters[0])
 				utility_object.rotation_degrees.y = rot_y
-				print("GridUtilitiesComponent: Set 'an' board rotation to %.1f degrees" % rot_y)
 		"tc", "br", "jp", "rc", "sc":
 			# ONE RULE, ONE DOOR (2026-09-05, Palle: "improve the utilities so they
 			# work similarly as in the grid"). tc moved to UtilityRegistry on
@@ -745,7 +713,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				var keyid = parameters[0]
 				if utility_object.has_method("set_keyid"):
 					utility_object.set_keyid(keyid)
-					print("GridUtilitiesComponent: Set label keyid to: %s" % keyid)
 				else:
 					print("GridUtilitiesComponent: Warning - Label object doesn't have set_keyid method")
 		"m":  # Move player - drops player at this cell's position from 2m above
@@ -767,7 +734,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 			utility_object.set_meta("move_delay", move_delay)
 			if "move_delay" in utility_object:
 				utility_object.move_delay = move_delay
-			print("GridUtilitiesComponent: m: placed at local %s, delay %.1fs (target computed at runtime from global_position)" % [utility_object.position, move_delay])
 
 		"pb":  # Player body trigger - unlocks/activates player customization
 			# Format: pb:feature or pb:feature:color
@@ -780,7 +746,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 					utility_object.feature_name = parameters[0]
 				if parameters.size() > 1:
 					utility_object.color_param = parameters[1]
-			print("GridUtilitiesComponent: Configured player body trigger for '%s'" % (parameters[0] if parameters.size() > 0 else "dress"))
 
 		"sub":  # Subtitle trigger - Portal 2-style subtitle on player entry
 			# Format: sub:key or sub:key:speaker or sub:key:speaker:level
@@ -849,7 +814,6 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 			if "damage_per_tick" in utility_object:
 				utility_object.damage_per_tick = damage
 
-			print("GridUtilitiesComponent: Configured hazard zone type=%s damage=%.1f" % [hazard_type, damage])
 
 # Apply color to utility object (works with materials and shaders)
 func _apply_color_to_utility(utility_object: Node3D, color_param: String):
@@ -916,7 +880,6 @@ func _apply_color_to_shader_material(shader_material: ShaderMaterial, color: Col
 	for param_name in shader_params:
 		if shader_material.shader and _shader_has_uniform(shader_material.shader, param_name):
 			shader_material.set_shader_parameter(param_name, color)
-			print("GridUtilitiesComponent: Set shader parameter '%s' to %s" % [param_name, color])
 			break
 
 	# Also try to set wireframe color to a complementary color
@@ -926,7 +889,6 @@ func _apply_color_to_shader_material(shader_material: ShaderMaterial, color: Col
 	for param_name in wireframe_params:
 		if shader_material.shader and _shader_has_uniform(shader_material.shader, param_name):
 			shader_material.set_shader_parameter(param_name, wireframe_color)
-			print("GridUtilitiesComponent: Set wireframe parameter '%s' to %s" % [param_name, wireframe_color])
 			break
 
 
@@ -952,7 +914,6 @@ func _apply_color_to_standard_material(standard_material: StandardMaterial3D, co
 	# Add subtle emission for better visibility
 	standard_material.emission_enabled = true
 	standard_material.emission = color * 0.2
-	print("GridUtilitiesComponent: Set standard material albedo to %s" % color)
 
 # Find MeshInstance3D in utility object
 func _find_mesh_instance_in_utility(utility_object: Node3D) -> MeshInstance3D:
@@ -1003,7 +964,6 @@ func _apply_text_display_text(utility_object: Node3D, text_value: String):
 		var text_mesh: TextMesh = mesh_resource.duplicate()
 		text_mesh.text = text_value
 		mesh_instance.mesh = text_mesh
-		print("GridUtilitiesComponent: Updated TextMesh content to '%s'" % text_value)
 	else:
 		print("GridUtilitiesComponent: WARNING - 3t utility missing TextMesh resource")
 
@@ -1080,7 +1040,6 @@ func _connect_utility_signals(utility_object: Node3D, utility_type: String):
 
 	if utility_object.has_signal("teleporter_activated"):
 		utility_object.teleporter_activated.connect(_on_teleporter_activated.bind(utility_object))
-		print("GridUtilitiesComponent: ✅ Connected teleporter_activated signal for %s" % utility_type)
 
 # Handle general utility activation
 func _on_utility_activated(utility_type: String, utility_object: Node3D):
@@ -1099,13 +1058,11 @@ func _on_utility_activated(utility_type: String, utility_object: Node3D):
 	# Add action property from metadata (crucial for teleporters!)
 	if utility_object.has_meta("action"):
 		utility_data["action"] = utility_object.get_meta("action")
-		print("GridUtilitiesComponent: 🎯 Found action in metadata: %s" % utility_data["action"])
 
 	utility_activated.emit(utility_type, utility_object.global_position, utility_data)
 
 # Handle teleporter activation specifically - connect to SceneManager
 func _on_teleporter_activated(utility_object: Node3D):
-	print("GridUtilitiesComponent: 🚀 Teleporter activated - checking for custom handling")
 
 	# Get destination and action from teleporter
 	var destination = ""
@@ -1126,14 +1083,10 @@ func _on_teleporter_activated(utility_object: Node3D):
 			"action": action
 		}
 
-		print("GridUtilitiesComponent: Delegating to parent GridSystem for custom handling")
-		print("GridUtilitiesComponent: Action: %s" % action)
-		print("GridUtilitiesComponent: Destination: %s" % destination)
 		parent_node._on_utility_activated("t", utility_object.global_position, utility_data)
 		return
 
 	# Fallback to default behavior
-	print("GridUtilitiesComponent: Using default teleporter behavior")
 	var scene_manager = _find_scene_manager()
 	if scene_manager:
 		scene_manager.request_transition({
@@ -1156,7 +1109,6 @@ func _find_scene_manager():
 
 	for manager in potential_managers:
 		if manager:
-			print("GridUtilitiesComponent: Found SceneManager at: %s" % manager.get_path())
 			return manager
 
 	return null
@@ -1207,7 +1159,6 @@ func _load_scene_cached(scene_filename: String) -> PackedScene:
 		return scene_cache[scene_filename]
 
 	var scene_path = MAP_OBJECTS_PATH + scene_filename
-	print("GridUtilitiesComponent: Attempting to load scene: %s" % scene_path)
 
 	if ResourceLoader.exists(scene_path):
 		var scene = ResourceLoader.load(scene_path)
@@ -1224,7 +1175,6 @@ func _load_scene_cached(scene_filename: String) -> PackedScene:
 
 # Debug: List available utility scenes
 func _list_available_scenes():
-	print("GridUtilitiesComponent: Listing available scenes in %s:" % MAP_OBJECTS_PATH)
 
 	var dir = DirAccess.open(MAP_OBJECTS_PATH)
 	if dir:
@@ -1232,8 +1182,6 @@ func _list_available_scenes():
 		var file_name = dir.get_next()
 
 		while file_name != "":
-			if file_name.ends_with(".tscn"):
-				print("  → %s" % file_name)
 			file_name = dir.get_next()
 	else:
 		print("GridUtilitiesComponent: Could not open scenes directory: %s" % MAP_OBJECTS_PATH)
@@ -1249,7 +1197,6 @@ func has_utility_at(x: int, y: int, z: int) -> bool:
 
 # Clear all utilities
 func clear_utilities():
-	print("GridUtilitiesComponent: Clearing all utilities")
 
 	for key in utility_objects.keys():
 		var utility = utility_objects[key]
@@ -1330,7 +1277,6 @@ func _parse_info_board_utility(utility_cell: String, x: int, z: int) -> Dictiona
 
 # Generate info boards at their specific locations
 func _generate_info_boards(info_board_data: Array):
-	print("GridUtilitiesComponent: Generating %d info boards at specific locations" % info_board_data.size())
 
 	# Place each info board at its specific location
 	for board_data in info_board_data:
@@ -1351,7 +1297,6 @@ func _generate_info_boards(info_board_data: Array):
 		# Generate the info board at this specific location
 		_place_info_board_at_position(board_type, position, rotation_degrees, scale_factor)
 
-		print("GridUtilitiesComponent: Placed %s info board at %s (rotation: %.1f°, scale: %.2f)" % [board_type, position, rotation_degrees, scale_factor])
 
 # Create info board using universal template (works with centralized JSON content)
 func _create_info_board_with_universal_template(board_id: String) -> Node3D:
@@ -1381,13 +1326,11 @@ func _create_info_board_with_universal_template(board_id: String) -> Node3D:
 		board_3d.set("auto_load_on_ready", true)
 		board_3d.set("enable_navigation", true)
 
-		print("GridUtilitiesComponent: Configured HandheldInfoBoard - board_id: %s" % board_id)
 	else:
 		push_error("GridUtilitiesComponent: HandheldInfoBoard doesn't have Viewport2Din3D script configured")
 		board_3d.queue_free()
 		return null
 
-	print("GridUtilitiesComponent: Created '%s' InfoBoard using UniversalInfoBoard (Content: %d pages)" % [board_id, page_count])
 
 	return board_3d
 
@@ -1499,7 +1442,6 @@ func _parse_tutorial_display_utility(utility_cell: String, x: int, z: int) -> Di
 
 # Generate tutorial displays at their specific locations
 func _generate_tutorial_displays(tutorial_display_data: Array):
-	print("GridUtilitiesComponent: Generating %d tutorial displays at specific locations" % tutorial_display_data.size())
 
 	# Place each tutorial display at its specific location
 	for display_data in tutorial_display_data:
@@ -1520,7 +1462,6 @@ func _generate_tutorial_displays(tutorial_display_data: Array):
 		# Generate the tutorial display at this specific location
 		_place_tutorial_display_at_position(tutorial_name, position, rotation_degrees, scale_factor)
 
-		print("GridUtilitiesComponent: Placed '%s' tutorial display at %s (rotation: %.1f°, scale: %.2f)" % [tutorial_name, position, rotation_degrees, scale_factor])
 
 # Place a single tutorial display at a specific position
 func _place_tutorial_display_at_position(tutorial_name: String, position: Vector3, rotation_degrees: float = 0.0, scale_factor: float = 1.0):
@@ -1564,7 +1505,6 @@ func _place_tutorial_display_at_position(tutorial_name: String, position: Vector
 		# Apply grid config with tutorial parameter
 		if display.has_method("apply_grid_config"):
 			display.apply_grid_config({"tutorial": tutorial_name})
-			print("GridUtilitiesComponent: Applied tutorial config '%s' to display" % tutorial_name)
 		else:
 			print("GridUtilitiesComponent: WARNING - Tutorial display doesn't have apply_grid_config method")
 
@@ -1680,8 +1620,6 @@ func _generate_border_frame(border_data: Dictionary):
 		"BorderFrame_West"
 	)
 
-	print("GridUtilitiesComponent: Generated border frame from (%.1f,%.1f) to (%.1f,%.1f) - thickness: %.1fm, height: %.1fm" %
-		[start_x, start_z, end_x, end_z, thickness, wall_height])
 
 # Create a single wall segment with collider
 func _create_wall(position: Vector3, size: Vector3, material: Material, wall_name: String):

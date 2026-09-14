@@ -309,7 +309,6 @@ var _success_player: AudioStreamPlayer3D
 var _progress_indicator: MeshInstance3D
 
 func _ready() -> void:
-	print("DrawDot: _ready called")
 	var trace_data = get_node_or_null("/root/TraceData")
 	print("DrawDot: TraceData status: " + str(trace_data))
 
@@ -445,7 +444,6 @@ func _trigger_unlock() -> void:
 	# Wait for 1 second
 	await get_tree().create_timer(1.0).timeout
 	
-	print("DrawDot: Movement threshold reached! Triggering tag '%s' action '%s'" % [trigger_tag, trigger_action])
 	
 	# Trigger action on the tag (e.g. "remove")
 	# Assuming TagSystem is a global class or autoload

@@ -149,7 +149,6 @@ func _setup_materials() -> void:
 				if w is GeometryInstance3D and (w as GeometryInstance3D).material_override != null:
 					(w as GeometryInstance3D).material_override = wall_material
 	
-	print("Noise Room: Materials found - Room: ", room_material != null, ", Wall: ", wall_material != null)
 
 func _store_original_parameters() -> void:
 	"""Store original shader parameters for restoration"""
@@ -310,11 +309,9 @@ func _input(event: InputEvent) -> void:
 	"""Handle input for animation controls"""
 	if event.is_action_pressed("ui_accept"):  # Space key
 		animation_enabled = !animation_enabled
-		print("Noise Room Animation: ", "Enabled" if animation_enabled else "Disabled")
 	
 	elif event.is_action_pressed("ui_cancel"):  # Escape key
 		_reset_to_original_parameters()
-		print("Noise Room: Reset to original parameters")
 
 func _reset_to_original_parameters() -> void:
 	"""Reset shaders to their original parameters"""

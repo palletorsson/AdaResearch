@@ -482,8 +482,6 @@ func _process(_delta: float) -> void:
 		_place(pt, _start_local())
 		if _settle_n >= 2:
 			_start_pending = false
-			print("[CoordinateSystem3M] point placed at world %s (frame %s, %s space)"
-				% [str(pt.global_position), str(global_position), floating_point_space])
 	_ensure_projection()
 	# frame-local coordinates survive a grab's re-parenting: read the GLOBAL
 	# position back through this frame (to_local includes the display scale)

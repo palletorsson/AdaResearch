@@ -130,8 +130,6 @@ func catch_up() -> int:
 		if bool(mgr.call("is_sequence_completed", seq)):
 			if give(seq, true):
 				n += 1
-	if n > 0:
-		print("[wardrobe] restored %d sequence(s) onto the costume" % n)
 	return n
 
 

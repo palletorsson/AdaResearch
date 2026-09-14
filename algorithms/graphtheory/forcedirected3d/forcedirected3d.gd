@@ -293,7 +293,6 @@ func initialize_graph() -> void:
 	if mutuality != "pockets":
 		_build_edges_for_mutuality()
 		calculate_node_degrees()
-		print("Created 3D graph with ", nodes.size(), " nodes and ", edges.size(), " edges")
 		return
 
 	# Create edges based on probability
@@ -308,7 +307,6 @@ func initialize_graph() -> void:
 	# Calculate node degrees
 	calculate_node_degrees()
 	
-	print("Created 3D graph with ", nodes.size(), " nodes and ", edges.size(), " edges")
 
 func get_initial_position(node_id: int) -> Vector3:
 	"""Get initial position based on distribution type"""
@@ -542,12 +540,10 @@ func start_simulation() -> void:
 	is_running = true
 	current_iteration = 0
 	temperature = 1.0
-	print("Starting 3D force-directed layout simulation")
 
 func stop_simulation() -> void:
 	"""Stop the simulation"""
 	is_running = false
-	print("Simulation stopped at iteration ", current_iteration)
 
 func simulation_step(delta: float) -> void:
 	"""Perform one step of the physics simulation"""
@@ -788,7 +784,6 @@ func check_convergence() -> void:
 	
 	if convergence_factor < convergence_threshold and pause_on_convergence:
 		stop_simulation()
-		print("Simulation converged at iteration ", current_iteration)
 
 func update_ui_stats() -> void:
 	"""Update UI statistics display"""
@@ -860,7 +855,6 @@ func reset_simulation() -> void:
 	initialize_graph()
 	create_visualization()
 
-	print("Simulation reset")
 
 # VR Interaction methods
 func grab_node(controller_id: int, world_position: Vector3) -> bool:

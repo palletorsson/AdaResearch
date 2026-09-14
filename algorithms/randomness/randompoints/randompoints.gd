@@ -116,7 +116,6 @@ func spawn_points() -> void:
 		DistributionType.BLUE_NOISE:
 			points = _generate_blue_noise(num_points, half_extents)
 	
-	print("RandomPoints: Generated %d points using %s distribution" % [points.size(), DistributionType.keys()[distribution_type]])
 	
 	for i in range(points.size()):
 		var p = point_scene.instantiate()

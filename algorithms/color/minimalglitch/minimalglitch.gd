@@ -10,7 +10,6 @@ var materials := []
 func _ready() -> void:
 	setup_basic_scene()
 	create_glitch_cubes()
-	print("🚀 All-in-One Glitch Demo Ready!")
 
 func setup_basic_scene() -> void:
 	# Camera

@@ -202,7 +202,7 @@ signal interactables_generation_complete(interactable_count: int)
 signal interactable_activated(object_id: String, position: Vector3, data: Dictionary)
 
 func _ready():
-	print("GridInteractablesComponent: Initialized with lookup_name validation")
+	pass
 	# Artifact registry will be loaded during initialization with map data
 
 ## WARM THE CATALOGUE ONCE, EARLY (2026-08-26, Palle: "fix the grid simulation
@@ -228,8 +228,6 @@ static func warm_registry_cache() -> int:
 
 # Load artifact registries based on map configuration
 func _load_artifact_registries() -> void:
-	print("GridInteractablesComponent: ============ LOADING ARTIFACT REGISTRIES ============")
-	print("GridInteractablesComponent: Starting artifact registry loading with lookup_name validation...")
 
 	# Get artifact registries from map external references
 	var artifact_paths: Array[String] = _get_artifact_registry_paths()
@@ -239,13 +237,9 @@ func _load_artifact_registries() -> void:
 		var cached_registry: Variant = _artifact_registry_cache_by_key.get(cache_key, {})
 		if cached_registry is Dictionary:
 			grid_artifact_registry = (cached_registry as Dictionary).duplicate(true)
-			print("GridInteractablesComponent: Using cached artifact registry (%d artifacts)" % grid_artifact_registry.size())
 			return
 
 	grid_artifact_registry.clear()
-	print("GridInteractablesComponent: Found %d registry paths to load" % artifact_paths.size())
-	for path in artifact_paths:
-		print("GridInteractablesComponent:   - %s" % path)
 
 	var total_loaded: int = 0
 	var validation_errors: Array[String] = []
@@ -254,7 +248,6 @@ func _load_artifact_registries() -> void:
 	for registry_path in artifact_paths:
 		var loaded_count: int = _load_single_artifact_registry(registry_path, validation_errors, validation_warnings)
 		total_loaded += loaded_count
-		print("GridInteractablesComponent:   → Loaded %d artifacts from %s" % [loaded_count, registry_path])
 
 	if cache_artifact_registry:
 		_artifact_registry_cache_by_key[cache_key] = grid_artifact_registry.duplicate(true)
@@ -300,7 +293,6 @@ func _get_artifact_registry_paths() -> Array[String]:
 		var map_specific_registries = external_refs.get("artifact_registries", [])
 		
 		if map_specific_registries.size() > 0:
-			print("GridInteractablesComponent: Adding map-specific registries: %s" % str(map_specific_registries))
 			for path in map_specific_registries:
 				if not paths.has(path):
 					paths.append(str(path))
@@ -309,7 +301,6 @@ func _get_artifact_registry_paths() -> Array[String]:
 
 # Load a single artifact registry file
 func _load_single_artifact_registry(registry_path: String, validation_errors: Array, validation_warnings: Array) -> int:
-	print("GridInteractablesComponent: Loading registry: %s" % registry_path)
 	
 	if not FileAccess.file_exists(registry_path):
 		push_error("GridInteractablesComponent: Artifacts JSON file not found: %s" % registry_path)
@@ -524,7 +515,6 @@ func _resolve_artifact_scene_for_loading(lookup_name: String, artifact_info: Dic
 func get_artifact_info(lookup_name: String) -> Dictionary:
 	if not grid_artifact_registry.has(lookup_name):
 		push_warning("GridInteractablesComponent: Unknown artifact lookup_name: '%s'" % lookup_name)
-		print("GridInteractablesComponent: Available artifacts: %s" % str(grid_artifact_registry.keys()))
 		return {}
 	
 	return grid_artifact_registry[lookup_name]
@@ -561,9 +551,7 @@ func initialize(grid_parent: Node3D, struct_component: GridStructureComponent, u
 		mgr.name = "ProximityLOD"
 		mgr.configure(plod)
 		parent_node.add_child(mgr)
-		print("GridInteractablesComponent: ProximityLOD armed (radius=%s)" % str(mgr.radius))
 
-	print("GridInteractablesComponent: Initialized with cube_size=%f, gutter=%f" % [cube_size, gutter])
 
 ## Read a runtime flag from ada_run/runtime_flags.json. Mirrors GridSystem's
 ## helper so we can suppress interactable spawning during clean captures
@@ -608,7 +596,6 @@ func generate_interactables(interactable_data):
 		print("GridInteractablesComponent: No interactable layout found")
 		return
 	
-	print("GridInteractablesComponent: Generating interactables using lookup_name system")
 	
 	var total_size = cube_size + gutter
 	var interactable_count = 0
@@ -694,7 +681,6 @@ func generate_interactables(interactable_data):
 
 					if _place_dialectic_panels(dialectic_name, origin, rotation, scale_factor):
 						interactable_count += 1
-						print("GridInteractablesComponent: ✅ Placed dialectic panels '%s' at (%d,%d,%d)" % [dialectic_name, x, y_pos, z])
 					else:
 						placement_errors.append("Failed to place dialectic panels '%s' at (%d,%d,%d)" % [dialectic_name, x, y_pos, z])
 					continue
@@ -797,7 +783,6 @@ func _spine_map_set() -> Dictionary:
 		if maps is Array:
 			for m in maps:
 				_spine_maps_cache[str(m)] = true
-	print("GridInteractablesComponent: spine map set loaded (%d maps)" % _spine_maps_cache.size())
 	return _spine_maps_cache
 
 func _apply_spine_force_includes(total_size: float) -> int:
@@ -887,7 +872,6 @@ func _apply_spine_force_includes(total_size: float) -> int:
 			y_pos += 1
 		if _place_artifact(cell.x, y_pos, cell.y, lookup, total_size):
 			placed += 1
-			print("GridInteractablesComponent: ✅ force-included '%s' at (%d,%d) in spine map '%s'" % [lookup, cell.x, cell.y, map_name])
 	return placed
 
 
@@ -903,7 +887,6 @@ func _place_cluster(x: int, y: int, z: int, cluster_name: String, rotation: floa
 	resolver.position = Vector3(x * total_size, GridCommon.surface_world_y(y, total_size), z * total_size)   # LOCAL (under the GridSystem), like _place_artifact; surface_world_y seats it on the cube TOP (was y*total_size, half a cube high), and LOCAL avoids the GridSystem's own y-offset that floated it earlier
 	resolver.apply_grid_config({"cluster": cluster_name, "rotation": rotation})
 	interactable_objects[Vector3i(x, y, z)] = resolver
-	print("GridInteractablesComponent: ✅ Placed cluster '%s' at (%d,%d,%d)" % [cluster_name, x, y, z])
 	return true
 
 
@@ -931,7 +914,6 @@ func _place_marching_cubes_object(x: int, y: int, z: int, lookup_name: String, t
 	if overrides.has("uniform_scale"):
 		var s = float(overrides.get("uniform_scale", 1.0))
 		mc_object.scale = Vector3.ONE * s
-		print("GridInteractables: Applied uniform scale %f -> Final scale: %s" % [s, str(mc_object.scale)])
 		
 	# Apply rotation
 	if overrides.has("rotation_y_degrees"):
@@ -943,7 +925,6 @@ func _place_marching_cubes_object(x: int, y: int, z: int, lookup_name: String, t
 
 	# Apply material if specified
 	if config_data.has("material"):
-		print("GridInteractables: Applying material '%s' to '%s'" % [str(config_data.get("material")), lookup_name])
 		MarchingCubesAPI.apply_material(mc_object, str(config_data.get("material")))
 	else:
 		print("GridInteractables: No material in config_data for '%s'. Data keys: %s" % [lookup_name, config_data.keys()])
@@ -951,7 +932,6 @@ func _place_marching_cubes_object(x: int, y: int, z: int, lookup_name: String, t
 	parent_node.add_child(mc_object)
 	interactable_objects[Vector3i(x, y, z)] = mc_object
 	
-	print("  ✅ Placed Marching Cubes object '%s' at (%d,%d,%d)" % [lookup_name, x, y, z])
 	return true
 
 func _parse_grid_agent_token(token: String) -> Dictionary:
@@ -1059,7 +1039,6 @@ func _place_grid_agent(x: int, y: int, z: int, lookup_name: String, total_size: 
 	parent_node.add_child(agent)
 	interactable_objects[Vector3i(x, y, z)] = agent
 	
-	print("  ✅ Placed grid agent '%s' (tier: %s) at (%d,%d,%d)" % [lookup_name, tier, x, y, z])
 	return true
 
 # Place dialectic panels using DialecticPanelGenerator
@@ -1082,7 +1061,6 @@ func _place_dialectic_panels(dialectic_name: String, origin: Vector3, rotation: 
 		generator.queue_free()
 		return false
 
-	print("GridInteractablesComponent: ✅ Generated %d dialectic panels for '%s'" % [generator.get_panel_count(), dialectic_name])
 	return true
 
 # Artifact "packaging" — grounding furniture + a framed caption spawned around an artifact from
@@ -1163,8 +1141,6 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 		var should_be_visible = artifact_info.get("visible", true)
 		if "visible" in artifact_object:
 			artifact_object.visible = should_be_visible
-			if not should_be_visible:
-				print("    Set artifact '%s' to invisible (from artifact_definitions)" % lookup_name)
 	
 	# Handle different node types (Node3D vs Control)
 	if artifact_object is Node3D:
@@ -1180,13 +1156,11 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 		if overrides.has("y_position"):
 			var y_offset = float(overrides.get("y_position", 0.0))
 			artifact_object.position.y += y_offset
-			print("    Applied Y position offset: +%s" % str(y_offset))
 		
 		# Apply uniform scale override (e.g., random_number_book_page_1955:0:2.5:1.2 → scale all axes by 1.2)
 		if overrides.has("uniform_scale"):
 			var scale_factor = float(overrides.get("uniform_scale", 1.0))
 			artifact_object.scale *= scale_factor
-			print("    Applied uniform scale: %s" % str(scale_factor))
 		
 		# Apply rotation overrides (Z, X, Y axes)
 		var rotation_changed = false
@@ -1211,7 +1185,6 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 			# Only update rotation_degrees if we changed Z or X (Y is handled by rotate_y above)
 			if overrides.has("rotation_z_degrees") or overrides.has("rotation_x_degrees"):
 				artifact_object.rotation_degrees = current_rotation
-			print("    Applied rotation: Z=%s X=%s Y=%s" % [artifact_object.rotation_degrees.z, artifact_object.rotation_degrees.x, artifact_object.rotation_degrees.y])
 
 		# Apply continuous rotation flags
 		if overrides.has("continuous_rotation_z") or overrides.has("continuous_rotation_x") or overrides.has("continuous_rotation_y"):
@@ -1221,19 +1194,16 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 
 			# Add continuous rotation script
 			_add_continuous_rotation(artifact_object, cont_z, cont_x, cont_y)
-			print("    Applied continuous rotation: Z=%s X=%s Y=%s" % [cont_z, cont_x, cont_y])
 			
 	elif artifact_object is Control:
 		# Handle 2D/UI artifacts (like the algorithm overview)
 		# For Control nodes, position them to fill the screen or use anchors
 		artifact_object.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		print("    Applied fullscreen preset for Control artifact")
 		
 		# Apply scale override for Control nodes differently
 		if overrides.has("uniform_scale"):
 			var scale_factor = float(overrides.get("uniform_scale", 1.0))
 			artifact_object.scale = Vector2(scale_factor, scale_factor)
-			print("    Applied uniform scale for Control: %s" % str(scale_factor))
 	else:
 		print("GridInteractablesComponent: WARNING - Unknown artifact node type: %s" % artifact_object.get_class())
 
@@ -1245,7 +1215,6 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 		var label_node = artifact_object.find_child("Label3D", true, false)
 		if label_node and (label_node is Label3D):
 			label_node.text = label_text
-		print("    Applied label text: '%s'" % label_text)
 	
 	# Set artifact metadata using both lookup_name and display name
 	artifact_object.set_meta("artifact_lookup_name", lookup_name)
@@ -1305,7 +1274,6 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	# Apply map-wide palette if available
 	if current_palette != "":
 		_try_set_property(artifact_object, "default_palette", current_palette)
-		print("    Applied map palette: '%s'" % current_palette)
 	
 	# Handle tag system registration
 	# Only register ENTITIES (with #group:tag), not PUZZLES (with #tag:action)
@@ -1313,17 +1281,14 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	if tag != "" and trigger_action == "":
 		# This is an entity (e.g., cube_scene:0:0:0#group:fillhole)
 		TagSystem.register_tagged_node(tag, artifact_object)
-		print("    Registered entity with tag: '%s'" % tag)
 	
 	# Handle puzzle trigger setup
 	if trigger_action != "":
 		# Set properties on puzzle to trigger action on tag (e.g., cross_line_puzzle#fillhole:reveal)
 		if "trigger_tag" in artifact_object:
 			artifact_object.trigger_tag = tag
-			print("    Set puzzle trigger_tag: '%s'" % tag)
 		if "trigger_action" in artifact_object:
 			artifact_object.trigger_action = trigger_action
-			print("    Set puzzle trigger_action: '%s'" % trigger_action)
 
 	parent_node.add_child(artifact_object)
 
@@ -1428,7 +1393,6 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 
 # Handle successful placement
 	var display_name = artifact_info.get("name", lookup_name)
-	print("  ✅ Placed artifact '%s' (%s) at (%d,%d,%d)" % [display_name, lookup_name, x, y, z])
 
 	return true
 
@@ -1486,7 +1450,6 @@ func _parse_token_params(token: String, result: Dictionary) -> Dictionary:
 			var p = parts[4].strip_edges()
 			if p.is_valid_float():
 				result.overrides["uniform_scale"] = float(p)
-				print("GridInteractables: Found scale param in token: %f" % float(p))
 			else:
 				print("GridInteractables: Param 4 (scale) invalid float: '%s'" % p)
 			
@@ -1671,7 +1634,6 @@ func _parse_config_token(token: String) -> Dictionary:
 				
 			if name_parts.size() >= 5 and name_parts[4].is_valid_float():
 				result.overrides["uniform_scale"] = float(name_parts[4])
-				print("GridInteractables: (Config token) Found mc scale: %f" % result.overrides["uniform_scale"])
 				
 	elif artifact_name_part.find(":") != -1:
 		var name_parts = artifact_name_part.split(":", false)
@@ -1687,8 +1649,6 @@ func _parse_config_token(token: String) -> Dictionary:
 		if name_parts.size() >= 4 and name_parts[3].is_valid_float():
 			result.overrides["uniform_scale"] = float(name_parts[3])
 
-		if not result.overrides.is_empty():
-			print("GridInteractablesComponent: Parsed combined syntax - artifact='%s', overrides=%s" % [result.lookup_name, result.overrides])
 	else:
 		result.lookup_name = artifact_name_part
 
@@ -1735,7 +1695,6 @@ func _parse_config_token(token: String) -> Dictionary:
 					if parts.size() >= 4 and parts[3].is_valid_float():
 						result.overrides["uniform_scale"] = float(parts[3])
 
-					print("GridInteractablesComponent: Parsed config shorthand - tutorial='%s', transforms=%s" % [tutorial_id, result.overrides])
 					continue
 
 			# Otherwise, treat as regular key:value config
@@ -1804,7 +1763,6 @@ static func _coerce_to_export_type(target: Node, key: String, value: Variant) ->
 # Apply configuration data to an artifact using the # syntax
 # This is a general system that allows any artifact to receive custom configuration
 func _apply_artifact_config(artifact_object: Node, config_data: Dictionary, lookup_name: String):
-	print("GridInteractablesComponent: Applying config to '%s': %s" % [lookup_name, config_data])
 
 	# Type-match the text a token carries against what the artifact declared, so a
 	# typed export stops silently rejecting its own value. Purely additive: a key
@@ -1826,7 +1784,6 @@ func _apply_artifact_config(artifact_object: Node, config_data: Dictionary, look
 			continue
 		var meta_key = "config_%s" % sanitized_key
 		artifact_object.set_meta(meta_key, config_value)
-		print("  → Set metadata '%s' = '%s'" % [meta_key, str(config_value)])
 	
 	# Try to call a configuration method on the artifact if it exists
 	# This allows artifacts to handle their own configuration logic
@@ -1834,10 +1791,8 @@ func _apply_artifact_config(artifact_object: Node, config_data: Dictionary, look
 	# and the original dict may be modified before the deferred call executes
 	if artifact_object.has_method("apply_grid_config"):
 		artifact_object.call_deferred("apply_grid_config", config_data.duplicate(true))
-		print("  → Called apply_grid_config() method")
 	elif artifact_object.has_method("configure"):
 		artifact_object.call_deferred("configure", config_data.duplicate(true))
-		print("  → Called configure() method")
 	else:
 		# THE BENCH LOOKED HARDER THAN THE WORLD DID, and this closes that gap.
 		#
@@ -1960,8 +1915,6 @@ func _apply_artifact_transform(artifact_object: Node, artifact_info: Dictionary)
 func _load_and_instantiate_artifact(scene_path: String) -> Node:
 	var scene_resource = _load_scene_cached(scene_path)
 	if scene_resource:
-		# Log which scene is being instantiated (helps debug convex hull errors)
-		print("GridInteractablesComponent: Instantiating artifact: %s" % scene_path)
 		return scene_resource.instantiate()
 	return null
 
@@ -1976,7 +1929,6 @@ func _update_artifact_labels(artifact_object: Node, lookup_name: String, artifac
 			if label and label is Label3D:
 				var display_name = artifact_info.get("name", lookup_name)
 				label.text = "%s: %s" % [lookup_name, display_name]
-				print("  Updated 3D label: %s" % label.text)
 				break
 	elif artifact_object is Control:
 		# Look for common 2D label names
@@ -1987,7 +1939,6 @@ func _update_artifact_labels(artifact_object: Node, lookup_name: String, artifac
 			if label and label is Label:
 				var display_name = artifact_info.get("name", lookup_name)
 				label.text = "%s: %s" % [lookup_name, display_name]
-				print("  Updated 2D label: %s" % label.text)
 				break
 
 # Connect artifact signals using lookup_name
@@ -2005,10 +1956,8 @@ func _connect_artifact_signals(artifact_object: Node, lookup_name: String):
 	# Connect TELEPORTER signals (for Portal artifacts)
 	if artifact_object.has_signal("teleporter_activated"):
 		artifact_object.teleporter_activated.connect(_on_teleporter_artifact_activated.bind(lookup_name, artifact_object))
-		print("GridInteractables: Connected teleporter signal for '%s'" % lookup_name)
 
 func _on_teleporter_artifact_activated(lookup_name: String, artifact_object: Node):
-	print("GridInteractables: 🚀 Teleporter Artifact activated: %s" % lookup_name)
 	
 	var destination = artifact_object.get_meta("destination", "")
 	var action = artifact_object.get_meta("action", "")
@@ -2036,7 +1985,6 @@ func _on_teleporter_artifact_activated(lookup_name: String, artifact_object: Nod
 			"source": "teleporter_artifact",
 			"position": artifact_object.global_position
 		})
-		print("GridInteractables: Requested transition to '%s' (action: %s)" % [destination, action])
 	else:
 		printerr("GridInteractables: ❌ Could not find SceneManager to trigger teleport!")
 
@@ -2061,7 +2009,6 @@ func _on_artifact_interact(lookup_name: String, artifact_object: Node):
 		"sequence": artifact_info.get("sequence", "")
 	}
 	
-	print("GridInteractablesComponent: Artifact interaction - %s ('%s')" % [lookup_name, artifact_info.get("name", "")])
 	interactable_activated.emit(lookup_name, artifact_pos, artifact_data)
 
 # Handle artifact activation
@@ -2073,13 +2020,11 @@ func _load_scene_cached(scene_path: String) -> PackedScene:
 	if scene_cache.has(scene_path):
 		return scene_cache[scene_path]
 	
-	print("GridInteractablesComponent: Loading scene: %s" % scene_path)
 	
 	if ResourceLoader.exists(scene_path):
 		var scene = ResourceLoader.load(scene_path)
 		if scene and scene is PackedScene:
 			scene_cache[scene_path] = scene
-			print("GridInteractablesComponent: OK loaded scene: %s" % scene_path)
 			return scene
 		print("GridInteractablesComponent: ERROR - Failed to load PackedScene: %s" % scene_path)
 	else:
@@ -2103,7 +2048,6 @@ func has_interactable_at(x: int, y: int, z: int) -> bool:
 
 # Clear all interactables
 func clear_interactables():
-	print("GridInteractablesComponent: Clearing all interactables")
 	
 	for key in interactable_objects.keys():
 		var interactable = interactable_objects[key]
@@ -2206,7 +2150,6 @@ func _auto_ground_artifact(artifact: Node3D, lookup_name: String) -> void:
 		return
 
 	artifact.position.y += correction
-	print("  %s Auto-ground: shifted '%s' by %.3f" % ["↑" if correction > 0.0 else "↓", lookup_name, correction])
 
 
 ## Is the gated packaging feature on? Default OFF — existing maps untouched until flipped.
@@ -2247,8 +2190,6 @@ func _spawn_packaging_for(artifact: Node3D, lookup_name: String, artifact_info: 
 		var raise_to := float(spec.get("raise_to", -1.0))
 		if raise_to >= 0.0 and is_instance_valid(artifact):
 			artifact.position.y += raise_to
-	if specs.size() > 0:
-		print("  📦 Packaging: spawned %d prop(s) for '%s'" % [specs.size(), lookup_name])
 
 
 ## Render the map's kernel-emitted `systems` block (sources + edges) as visible flow infrastructure.
@@ -2291,7 +2232,6 @@ func render_map_systems() -> void:
 		edge.set_meta("is_system", true)
 		parent_node.add_child(edge)
 		n_edges += 1
-	print("GridInteractablesComponent: 🔌 systems — %d sources, %d edges" % [sys.get("sources", []).size(), n_edges])
 
 
 ## Recursively compute the local-space AABB of a node and all its children.

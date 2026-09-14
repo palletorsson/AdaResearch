@@ -174,8 +174,6 @@ func _create_binary_table() -> void:
 
 func _on_cube_removed(x: int, z: int) -> void:
 	# Called when a cube is picked up or removed from the grid
-	if debug:
-		print("Grid2D4x4: Cube removed at [%d, %d]" % [x, z])
 
 	# Update grid data
 	if x >= 0 and x < grid_data.size():

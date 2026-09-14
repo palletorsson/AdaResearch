@@ -103,7 +103,6 @@ signal grid_animation_started()
 signal grid_animation_complete()
 
 func _ready():
-	print("GridSystem: Initializing component-based grid system...")
 
 	# Add to group so other systems can find us
 	add_to_group("grid_system")
@@ -121,7 +120,6 @@ func _ready():
 
 func _deferred_initialization():
 	"""Deferred init to allow staging to set scene_user_data first"""
-	print("GridSystem: Deferred initialization starting...")
 
 	# Now check for scene data (metadata should be set by now)
 	_check_for_scene_data()
@@ -129,8 +127,6 @@ func _deferred_initialization():
 	# Load map data
 	if auto_load_map_on_ready:
 		_load_map_data()
-	else:
-		print("GridSystem: auto_load_map_on_ready=false (awaiting explicit reload_map trigger)")
 
 # Check for scene data and update map_name
 func _check_for_scene_data():
@@ -164,17 +160,14 @@ func _check_for_scene_data():
 			parent = parent.get_parent()
 
 	if not scene_data.is_empty():
-		print("GridSystem: Found scene data: %s" % scene_data)
 
 		# Update map name from scene data
 		if scene_data.has("map_name"):
 			var new_map_name = scene_data["map_name"]
-			print("GridSystem: Updating map_name from '%s' to '%s'" % [map_name, new_map_name])
 			map_name = new_map_name
 
 		if scene_data.has("initial_map"):
 			var new_map_name = scene_data["initial_map"]
-			print("GridSystem: Updating map_name from '%s' to '%s' (initial_map)" % [map_name, new_map_name])
 			map_name = new_map_name
 
 		# Store sequence data for reference
@@ -185,7 +178,6 @@ func _check_for_scene_data():
 
 # Initialize all components
 func _initialize_components():
-	print("GridSystem: Initializing components...")
 	
 	# Create and add components as children
 	data_component = DataComponentScript.new()
@@ -236,7 +228,6 @@ func _initialize_components():
 	# Connect component signals
 	_connect_component_signals()
 
-	print("GridSystem: ✅ All components initialized")
 
 # Connect signals from components
 func _connect_component_signals():
@@ -274,7 +265,6 @@ func _connect_component_signals():
 
 # Load map data using data component
 func _load_map_data():
-	print("GridSystem: Loading map data for '%s'" % map_name)
 	
 	# Check if map_name is actually a sequence name (should be handled by AdaSceneManager)
 	if _is_sequence_name(map_name):
@@ -348,9 +338,7 @@ func _on_data_loaded(loaded_map_name: String, format: String):
 	if not is_instance_valid(base_cube):
 		base_cube = get_node_or_null("CubeScene")
 		if base_cube:
-			print("GridSystem: Re-acquired base_cube reference in _on_data_loaded")
-		else:
-			print("GridSystem: base_cube unavailable, structure_component will use cached data")
+			pass
 	
 	# Get settings from data and apply them
 	var settings = data_component.get_settings()
@@ -433,8 +421,6 @@ func _apply_post_lab_structure_override_if_needed() -> void:
 
 	structure_data.layout_data = layout_data
 
-	if changed_cells > 0:
-		print("GridSystem: Flattened %d tall post-lab wall cells (threshold=%d)" % [changed_cells, post_lab_wall_height_threshold])
 
 func _is_post_lab_map_name(target_map_name: String) -> bool:
 	return target_map_name.begins_with("Lab/map_data_post_")
@@ -495,7 +481,6 @@ func _generate_grid():
 		return
 	
 	generation_in_progress = true
-	print("GridSystem: Starting component-based grid generation...")
 	
 	# Hide base_cube if it exists (it's just a template, not needed visually)
 	if is_instance_valid(base_cube):
@@ -503,7 +488,6 @@ func _generate_grid():
 	
 	# Get grid dimensions from data
 	var dimensions = data_component.get_grid_dimensions()
-	print("GridSystem: Grid dimensions: %dx%dx%d" % [dimensions.x, dimensions.y, dimensions.z])
 	
 	# Generate structure first
 	var structure_data = data_component.get_structure_data()
@@ -550,17 +534,14 @@ func _update_player_bounds(dimensions: Vector3i):
 		# in the grid game.
 		var prior: Vector3 = bounds_check.box_bounds
 		if prior.z > CORRIDOR_BOUND_M:
-			print("GridSystem: PlayerBoundsCheck left alone — z %.0f is corridor-scale, not this map's %.0f" % [prior.z, bounds_z])
 			return
 
 		bounds_check.box_bounds = Vector3(bounds_x, bounds_y, bounds_z)
-		print("GridSystem: Updated PlayerBoundsCheck limits to %s" % bounds_check.box_bounds)
 	else:
 		print("GridSystem: PlayerBoundsCheck node not found")
 
 # Handle structure generation completion
 func _on_structure_complete(cube_count: int):
-	print("GridSystem: Structure generation complete (%d cubes)" % cube_count)
 
 	# Apply the (optional) modifier op-stack on top of the freshly-built grid.
 	# Additive + non-destructive: no map without a `modifiers` key is affected.
@@ -605,21 +586,17 @@ func _apply_modifier_stack() -> void:
 			continue  # unchanged — leave the cube on its native material colour
 		structure_component.set_cell_color(k, col)
 		tinted += 1
-	print("GridSystem: Modifier stack applied (%d ops, %d cells tinted)" % [mods.size(), tinted])
 
 # Handle grid animation started
 func _on_grid_animation_started():
-	print("GridSystem: 🎬 Grid animation started")
 	grid_animation_started.emit()
 
 # Handle grid animation complete
 func _on_grid_animation_complete():
-	print("GridSystem: 🎬 Grid animation complete")
 	grid_animation_complete.emit()
 
 # Handle utilities generation completion
 func _on_utilities_complete(utility_count: int):
-	print("GridSystem: Utilities generation complete (%d utilities)" % utility_count)
 
 	# Spawn catalyst vents from editor-painted e: tokens (additive).
 	# Guarded inside: a map whose utilities hold no "e" token is untouched.
@@ -679,11 +656,9 @@ func _scan_catalyst_vents() -> void:
 		"cell_inset": 0.0,  # grid cells centre on x * total_size (editor centres on x + 0.5)
 		"y_lookup": y_lookup,
 	})
-	print("GridSystem: 🕳️ CatalystVentScanner spawned %d vent(s) from e: tokens" % vent_count)
 
 # Handle interactables generation completion
 func _on_interactables_complete(interactable_count: int):
-	print("GridSystem: Interactables generation complete (%d interactables)" % interactable_count)
 
 	# Render the map's kernel-emitted `systems` block as visible flow (gated, default OFF).
 	if interactables_component and interactables_component.has_method("render_map_systems"):
@@ -698,7 +673,6 @@ func _handle_ceiling_generation():
 	var ceiling_config = settings.get("ceiling", {})
 
 	if not ceiling_config.is_empty() or settings.has("enable_ceiling"):
-		print("GridSystem: Generating ceiling...")
 		ceiling_component.generate_ceiling(ceiling_config)
 	else:
 		# Skip ceiling, try walls
@@ -706,7 +680,6 @@ func _handle_ceiling_generation():
 
 # Handle ceiling generation completion
 func _on_ceiling_complete(tile_count: int, light_count: int):
-	print("GridSystem: Ceiling generation complete (%d tiles, %d lights)" % [tile_count, light_count])
 
 	# Generate walls after ceiling
 	_handle_wall_generation()
@@ -746,7 +719,6 @@ func _handle_wall_generation():
 			data_component.get_biome_meta())
 
 	if not wall_config.is_empty():
-		print("GridSystem: Generating walls...")
 		wall_component.generate_walls(wall_config)
 	else:
 		# No walls config — still try floor plan overlay
@@ -756,7 +728,6 @@ func _handle_wall_generation():
 
 # Handle wall generation completion
 func _on_wall_complete(wall_count: int):
-	print("GridSystem: Wall generation complete (%d walls)" % wall_count)
 	_try_load_floor_plan()
 	call_deferred("_handle_player_spawn")
 
@@ -773,14 +744,12 @@ func _try_load_floor_plan() -> void:
 	if current_map == "":
 		return
 	var map_dir: String = "res://commons/maps/" + current_map
-	print("GridSystem: Checking for floor plan at %s" % map_dir)
 	var loader := FloorPlanLoader.new()
 	loader.name = "FloorPlanLoader"
 	add_child(loader)
 	if loader.load_floor_plan(map_dir):
 		loader.apply_floor_plan(self, cube_size)
 		_floor_plan_loaded = true
-		print("GridSystem: Floor plan applied")
 	else:
 		print("GridSystem: No floor plan found")
 
@@ -794,7 +763,6 @@ var skip_player_spawn: bool = false
 
 func _handle_player_spawn():
 	if skip_player_spawn:
-		print("GridSystem: skip_player_spawn — the host owns the player")
 		# the host owns the player, so nothing downstream will ever close this
 		# build: say so here instead
 		generation_in_progress = false
@@ -802,12 +770,10 @@ func _handle_player_spawn():
 		print("[grid-phase] TOTAL %s: %d ms" % [map_name, Time.get_ticks_msec() - _phase_t0])
 		emit_signal("build_finished")
 		return
-	print("GridSystem: Handling player spawn positioning...")
 	spawn_component.handle_player_spawn()
 
 # Handle spawn positioning completion
 func _on_spawn_complete(spawn_position: Vector3):
-	print("GridSystem: Spawn positioning complete at %s" % spawn_position)
 
 	# bare_world (opt-in, default off): skip ALL the decorative world — ecosystem
 	# creatures, biome ring foliage, and the NatureRenderer sky/fog — so a viewer
@@ -878,13 +844,9 @@ func _handle_ecosystem_spawn():
 
 	add_child(spawner)
 	_ecosystem_spawner = spawner
-	print("GridSystem: Ecosystem spawner created (radius=%.1f, pop=%d, chunks=%s)" % [
-		spawner.spawn_radius, spawner.max_population, spawner.use_chunk_system
-	])
 
 # Handle audio start
 func _handle_audio_start():
-	print("GridSystem: Starting ambient audio...")
 	audio_component.start_ambient()
 
 
@@ -1006,7 +968,6 @@ func _handle_biome_ring(live_repaint: bool = false):
 		_sync_ecosystem_to_current_map(eco)
 	var density: float = eco.get_vegetation_density()
 	var kingdoms = eco.get_allowed_kingdoms() if eco.has_method("get_allowed_kingdoms") else []
-	print("GridSystem: Biome check — map='%s' density_before=%.2f density_after=%.2f kingdoms=%s" % [map_name, density_before, density, str(kingdoms)])
 	# Accrual stack runs regardless of density — the old density gate is
 	# a property of BiomeRingComponent, not the curriculum. Abstract layers
 	# (floating_primitives) must render even at density 0.
@@ -1130,10 +1091,6 @@ func _handle_biome_ring(live_repaint: bool = false):
 			ground_layer.queue_free()
 		else:
 			var src: Dictionary = ground_stats.get("by_source", {})
-			print("GridSystem: 🟫 Ground paint applied — %d tiles in %d draw calls (explicit=%d, kingdom=%d, terrain=%d)"
-				% [ground_stats.get("tiles", 0),
-				   ground_stats.get("draw_calls", 0),
-				   src.get("explicit", 0), src.get("kingdom", 0), src.get("terrain", 0)])
 
 	# CONSOLIDATION Phase 4b (2026-06-04): the biome ring is no longer a
 	# GridSystem special-case. It is now the `ground_ring` accrual layer
@@ -1149,7 +1106,7 @@ func _handle_biome_ring(live_repaint: bool = false):
 func _sync_ecosystem_to_current_map(eco) -> void:
 	if eco.has_method("sync_to_map"):
 		if eco.sync_to_map(map_name):
-			print("GridSystem: Ecosystem synced to '%s' for map '%s'" % [eco.get_sequence_for_map(map_name), map_name])
+			pass
 		return
 	# Fallback for older EcosystemManager without cached index
 	if not eco.has_method("force_advance_to"):
@@ -1166,8 +1123,6 @@ func _notify_nature_renderer():
 	if nr.has_method("load_map_overrides"):
 		var overrides: Dictionary = data_component.get_environment_overrides()
 		nr.load_map_overrides(overrides)
-		if not overrides.is_empty():
-			print("GridSystem: 🌍 Loaded %d environment overrides" % overrides.size())
 
 	# Trigger living ground activation check
 	if nr.has_method("apply_grid_config"):
@@ -1176,24 +1131,22 @@ func _notify_nature_renderer():
 
 # Audio component signal handlers
 func _on_audio_initialized():
-	print("GridSystem: Audio component initialized")
+	pass
 
 func _on_ambient_started(preset_name: String):
-	print("GridSystem: 🎵 Ambient audio started - %s" % preset_name)
+	pass
 
 func _on_ambient_stopped():
-	print("GridSystem: 🎵 Ambient audio stopped")
+	pass
 
 func _on_audio_error(error_message: String):
 	print("GridSystem: ⚠️ Audio error: %s" % error_message)
 
 # Handle utility activation
 func _on_utility_activated(utility_type: String, position: Vector3, data: Dictionary):
-	print("GridSystem: 🎯 Utility activated - %s at %s" % [utility_type, position])
 	
 	# For teleporters, also try to find and notify SceneManager directly
 	if utility_type == "t":
-		print("GridSystem: 🚀 Teleporter activation detected - notifying SceneManager")
 		_handle_teleporter_activation(position, data)
 	
 	# Forward to external systems if needed (for other integrations)
@@ -1204,7 +1157,6 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 	# Find SceneManager in the tree
 	var scene_manager = _find_scene_manager()
 	if scene_manager:
-		print("GridSystem: ✅ Found SceneManager - requesting transition")
 		
 		# Check if we're in a sequence context
 		var current_sequence = get_meta("current_sequence", {})
@@ -1212,14 +1164,9 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 		var destination = data.get("destination", "")
 		var sequence = ""
 		
-		print("GridSystem: 🔍 DEBUG - Current sequence metadata: %s" % current_sequence)
-		print("GridSystem: 🔍 DEBUG - Teleporter action: '%s'" % action)
-		print("GridSystem: 🔍 DEBUG - Destination from teleporter: '%s'" % destination)
-		print("GridSystem: 🔍 DEBUG - All metadata: %s" % get_meta_list())
 		
 		# RESPECT the teleporter's action property instead of overriding it
 		if action == "next_in_sequence":
-			print("GridSystem: ✅ Using teleporter's 'next_in_sequence' action")
 			# If no active sequence and destination is a sequence name, convert to start_sequence
 			if current_sequence.is_empty() and destination in ["primitives", "array_tutorial", "randomness", "noise", "wavefunctions", "qfeplaboratory"]:
 				print("GridSystem: 🔄 No active sequence, converting next_in_sequence to start_sequence for: %s" % destination)
@@ -1227,7 +1174,7 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 				sequence = destination
 				destination = ""
 		elif action == "next":
-			print("GridSystem: ✅ Using teleporter's 'next' action")
+			pass
 		elif destination.is_empty():
 			action = "next"
 			print("GridSystem: ⚠️ No action specified, using 'next' action as fallback")
@@ -1242,8 +1189,6 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 		else:
 			action = "load_map"
 		
-		print("GridSystem: Action: %s, Destination: %s, Sequence: %s" % [action, destination, sequence])
-		print("GridSystem: Current sequence context: %s" % current_sequence.get("sequence_name", "none"))
 		
 		# Request transition with appropriate action
 		var transition_request = {
@@ -1310,7 +1255,6 @@ func _find_scene_manager():
 	
 	for manager in autoload_managers:
 		if manager:
-			print("GridSystem: Found SceneManager autoload: %s" % manager.name)
 			return manager
 	
 	# Check scene tree
@@ -1321,7 +1265,6 @@ func _find_scene_manager():
 	
 	for manager in scene_managers:
 		if manager:
-			print("GridSystem: Found SceneManager in scene: %s" % manager.get_path())
 			return manager
 	
 	return null
@@ -1334,7 +1277,6 @@ func _debug_print_autoloads():
 
 # Handle interactable activation
 func _on_interactable_activated(object_id: String, position: Vector3, data: Dictionary):
-	print("GridSystem: Interactable activated - %s at %s" % [object_id, position])
 	emit_signal("interactable_activated", object_id, position, data)
 
 # Reload map setter
@@ -1345,7 +1287,6 @@ func reload_map_setter(value: bool):
 
 # Reload current map
 func _reload_current_map():
-	print("GridSystem: Reloading map '%s'" % map_name)
 	
 	# Clear all components
 	_clear_all_components()
@@ -1361,16 +1302,13 @@ func _reload_current_map():
 	if not is_instance_valid(base_cube):
 		base_cube = get_node_or_null("CubeScene")
 		if base_cube:
-			print("GridSystem: Re-acquired base_cube reference")
-		else:
-			print("GridSystem: base_cube unavailable, will use cached mesh data")
+			pass
 	
 	# Reload map data
 	_load_map_data()
 
 # Clear all components
 func _clear_all_components():
-	print("GridSystem: Clearing all components...")
 	
 	if structure_component:
 		structure_component.clear_structure()
