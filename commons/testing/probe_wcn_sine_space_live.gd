@@ -23,6 +23,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "WaveFunctions_Sine_Space"
 const OUT := "res://ada_run/waves_chance_noise/WaveFunctions_Sine_Space/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/WaveFunctions_Sine_Space") + "/"
 const MAP_CELL := Vector2i(6, 10)
 
 func _ready() -> void: run.call_deferred()
@@ -363,7 +366,7 @@ func run() -> void:
 			# mid-passage, as a visitor sees it walking east: walls either side, the east mouth ahead
 			for i in range(15): await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_sine_space_desktop_mid_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_sine_space_desktop_mid_live.png")
 			measurements["desktop_input"]["mid_capture_pose"] = drv.call("pose")
 		moved += await drv.call("walk", "ui_up", 40)
 		var moved_local: Vector3 = seg.global_transform.basis.inverse() * moved
@@ -374,7 +377,7 @@ func run() -> void:
 			drv.call("aim_at", seg.to_global(Vector3(10.5, 1.0, 7.5 + vest)))
 			for i in range(15): await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_sine_space_desktop_exit_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_sine_space_desktop_exit_live.png")
 			measurements["desktop_input"]["exit_capture_pose"] = drv.call("pose")
 		# FREEZE once more from the same spot: the toggle sets the walls moving again, so the
 		# later captures show the corridor as a visitor leaves it
@@ -474,12 +477,12 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(0.9, 1.6, 4.5 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 1.2, 4.5 + vest)))
 		for i in range(30): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_sine_space_approach_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_sine_space_approach_live.png")
 		# inside: from just within the west mouth, looking down the passage to the east mouth
 		cam.global_position = seg.to_global(Vector3(3.4, 1.55, 4.5 + vest)); cam.look_at(seg.to_global(Vector3(10.0, 1.1, 4.5 + vest)))
 		for i in range(20): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_sine_space_inside_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_sine_space_inside_live.png")
 		# the entrance panel and readout from where a body stands at the west mouth
 		# (every capture re-asserts the camera: another node made its own current between shots)
 		if panel != null:
@@ -488,17 +491,17 @@ func run() -> void:
 			cam.look_at(pp + seg.global_transform.basis * Vector3(0.0, 0.2, 0.0))
 			for i in range(20): cam.make_current(); await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_sine_space_panel_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_sine_space_panel_live.png")
 		# the basin from the bridge head: what stands below and beside the museum's route
 		cam.global_position = seg.to_global(Vector3(10.5, 1.7, 6.2 + vest)); cam.look_at(seg.to_global(Vector3(9.0, 0.3, 16.0 + vest)))
 		for i in range(20): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_sine_space_bridge_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_sine_space_bridge_live.png")
 		# the whole antechamber from above the door: passage, mouths, nook, panel, route
 		cam.global_position = seg.to_global(Vector3(6.5, 7.5, 0.2 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 0.0, 4.6 + vest)))
 		for i in range(20): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_sine_space_overview_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_sine_space_overview_live.png")
 	# the museum's own verdict on this body: a venue, sealing nothing, severing nothing
 	var severed: Array = em.get("_seg_severed") if em.get("_seg_severed") != null else []
 	var sev_tokens: Array = []

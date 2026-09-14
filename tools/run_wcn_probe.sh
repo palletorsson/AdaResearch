@@ -44,10 +44,15 @@ case "${1:-}" in
   *) echo "usage: $0 intro|random|noise|pendulum|sine|effect|air|synth|entropy|entropy_once|remove|walk|gauss|mush|game|points|columns|torus|voxel|wall [live]"; exit 3 ;;
 esac
 OUT="ada_run/waves_chance_noise/$MAP"
+# Screenshots, audio and both logs go to the evidence root (ada_encyclopedia/captures/ada-run/,
+# 2026-09-14); the JSON record the watchdog waits for stays in OUT, where it is committed.
+# tr: Windows Python ends its line with \r, which $(...) keeps.
+EVID="$(python tools/evidence_root.py --print "waves_chance_noise/$MAP" | tr -d '\r')"
+[ -n "$EVID" ] || EVID="$OUT"
 SUFFIX=""; [ "$MODE" = "live" ] && SUFFIX="_live"
-LOG="$OUT/${EXPECT}${SUFFIX}.log"
-ENGINE_LOG="$OUT/${EXPECT}${SUFFIX}_engine.log"
-mkdir -p "$OUT"
+LOG="$EVID/${EXPECT}${SUFFIX}.log"
+ENGINE_LOG="$EVID/${EXPECT}${SUFFIX}_engine.log"
+mkdir -p "$OUT" "$EVID"
 
 # ── inventory: PID, working set (KB), creation date, command line ──────────────────────
 INV=$(wmic process where "name like 'Godot%'" get processid,workingsetsize,creationdate,commandline /format:csv 2>/dev/null | tr -d '\r' | grep -i "godot")
@@ -93,5 +98,5 @@ fi
 RC=$?
 echo "[$1] exit $RC at $(date +%H:%M:%S)" | tee -a "$LOG"
 grep -c "SCRIPT ERROR" "$ENGINE_LOG" 2>/dev/null | sed 's/^/  script errors in engine log: /'
-ls -la "$OUT" | grep -E "${EXPECT}${SUFFIX}.*\.(json|png)" | head
+ls -la "$OUT" "$EVID" | grep -E "${EXPECT}${SUFFIX}.*\.(json|png)" | head
 exit $RC

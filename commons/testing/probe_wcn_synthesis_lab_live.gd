@@ -29,6 +29,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "WaveFunctions_Synthesis_Lab"
 const OUT := "res://ada_run/waves_chance_noise/WaveFunctions_Synthesis_Lab/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/WaveFunctions_Synthesis_Lab") + "/"
 const MAP_CELL := Vector2i(4, 2)
 const SAWTOOTH := [1.0, 0.5, 0.333, 0.25, 0.2]
 
@@ -242,7 +245,7 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(4.5, 1.55, 4.15 + vest)); cam.look_at(seg.to_global(Vector3(4.5, 1.35, 2.5 + vest)))
 		for i in range(20): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_synthesis_lab_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_synthesis_lab_live.png")
 		measurements["captures"] = {"primary": _cam_pose(cam)}
 
 	# ── 4. each slider through its real move path ──────────────────────────────
@@ -308,7 +311,7 @@ func run() -> void:
 	if capture:
 		for i in range(6): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_synthesis_lab_h1_alone.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_synthesis_lab_h1_alone.png")
 		measurements["captures"]["h1_alone"] = _cam_pose(cam)
 	# one harmonic back, on its slider
 	var xr2: Node = (sliders[1] as Node).get_node_or_null("SliderOrigin/InteractableSlider")
@@ -531,7 +534,7 @@ func run() -> void:
 			drv.call("aim_at", demo.to_global(Vector3(0.0, 1.45, 0.0)))
 			for i in range(12): await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_synthesis_lab_desktop_front_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_synthesis_lab_desktop_front_live.png")
 			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
 		var st2: Array = rec2.get("stand", [3.7, 0.0, 3.85 + vest])
 		await drv.call("press", b2, Vector3(float(st2[0]), float(st2[1]), float(st2[2])))
@@ -565,36 +568,36 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(4.5, 1.55, 4.15 + vest)); cam.look_at(seg.to_global(Vector3(4.5, 1.35, 2.5 + vest)))
 		for i in range(20): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_synthesis_lab_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_synthesis_lab_live.png")
 		measurements["captures"]["primary"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(4.5, 1.25, 3.75 + vest)); cam.look_at(seg.to_global(Vector3(4.5, 1.05, 2.6 + vest)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_synthesis_lab_ladder_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_synthesis_lab_ladder_live.png")
 		measurements["captures"]["ladder"] = _cam_pose(cam)
 		if readout_case != null:
 			cam.global_position = readout_case.global_position + seg.global_transform.basis * Vector3(0.0, 0.55, 0.62); cam.look_at(readout_case.global_position)
 			for i in range(15): cam.make_current(); await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_synthesis_lab_readout_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_synthesis_lab_readout_live.png")
 			measurements["captures"]["readout"] = _cam_pose(cam)
 		if console != null:
 			cam.global_position = seg.to_global(Vector3(5.86, 1.5, 3.9 + vest)); cam.look_at(console.global_position)
 			for i in range(15): cam.make_current(); await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_synthesis_lab_console_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_synthesis_lab_console_live.png")
 			measurements["captures"]["console"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(2.3, 2.0, 6.2 + vest)); cam.look_at(seg.to_global(Vector3(5.2, 1.2, 2.9 + vest)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_synthesis_lab_overview_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_synthesis_lab_overview_live.png")
 		measurements["captures"]["overview"] = _cam_pose(cam)
 		# the plan: straight down from under the ceiling, the whole hall
 		cam.fov = 110
 		cam.global_transform = Transform3D(Basis.looking_at(Vector3(0, -1, 0), Vector3(0, 0, -1)), seg.to_global(Vector3(7.0, 2.9, 6.8 + vest)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_synthesis_lab_plan_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_synthesis_lab_plan_live.png")
 		measurements["captures"]["plan"] = _cam_pose(cam)
 		cam.fov = 62
 		demo.call("set_held", false)

@@ -24,6 +24,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "Random_Definition"
 const OUT := "res://ada_run/waves_chance_noise/Random_Definition/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/Random_Definition") + "/"
 
 func _ready() -> void: run.call_deferred()
 
@@ -225,14 +228,14 @@ func run() -> void:
 		if "--capture" in OS.get_cmdline_user_args():
 			await get_tree().create_timer(0.3).timeout
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_random_definition_desktop_close_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_random_definition_desktop_close_live.png")
 			# the approach: from the north end of the east half, looking south at the demo
 			drv.get("rig").global_position = seg.to_global(Vector3(origin_d.x - 0.5, 0.05, origin_d.z - 6.0))
 			await get_tree().physics_frame
 			drv.call("aim_at", demo.global_position + Vector3(0, 1.1, 0))
 			for i in range(20): await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_random_definition_desktop_approach_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_random_definition_desktop_approach_live.png")
 		await drv.call("teardown")
 		measurements["desktop_input"]["log"] = drv.get("log")
 		measurements["desktop_input"]["walker_cam_guard_stopped"] = drv.get("walker_cam_guard_stopped")
@@ -243,7 +246,7 @@ func run() -> void:
 		cam.global_position = demo.to_global(Vector3(0.25, 1.55, 1.75)); cam.look_at(demo.to_global(Vector3(0, 1.2, 0)))
 		for i in range(30): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_random_definition_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_random_definition_live.png")
 	_finish()
 
 func _button_area(demo: Node, btn: String) -> Node:

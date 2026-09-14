@@ -422,10 +422,11 @@ commons/data/museum_order_effective.json
 # the images etc in the repo." Evidence lives in ada_encyclopedia/captures/ now
 # (tools/evidence_root.py, commons/testing/evidence_root.gd, tools/sweep_evidence.py).
 #
-# The writers were not all redirected on the day, because the two families producing
-# the growth were owned by live sessions with uncommitted edits: 22 WCN probes mid-edit
-# and 31 brand-new review builders. So git refuses the images instead, for every
-# writer at once, whatever path it still uses. Already-tracked files stay tracked.
+# Not every writer can follow. The WCN probes save their screenshots to the evidence
+# root; the review builders cannot, because they stage a Godot scene under
+# res://ada_run/<run>/ and Godot loads scenes only from inside the project. So git
+# refuses the images instead, for every writer at once, whatever path it still uses.
+# Already-tracked files stay tracked.
 #
 # Checked before writing: no game file (commons/, algorithms/, addons/ outside
 # commons/testing) names an image under ada_run/ -- every one is a probe screenshot --

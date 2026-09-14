@@ -15,6 +15,8 @@ import json, sys, html
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / 'tools'))
+from evidence_root import evidence_dir  # noqa: E402
 GUIDE = ROOT / 'doc/research/waves-chance-noise'
 IMAGES = GUIDE / 'images'
 RUNS = ROOT / 'ada_run/waves_chance_noise'
@@ -81,7 +83,10 @@ def main() -> int:
         befores = before_by_map.get(name, {})
         rows = []
         for v in views + extra:
-            after_png = RUNS / name / f'{stem}{v}_live.png'
+            # PNGs are in the evidence root since 2026-09-14; older runs left them beside the JSON
+            after_png = evidence_dir('waves_chance_noise', name, create=False) / f'{stem}{v}_live.png'
+            if not after_png.exists():
+                after_png = RUNS / name / f'{stem}{v}_live.png'
             before_rel = befores.get(f'{stem}{v}_live.png')
             after_rel = None
             if after_png.exists():

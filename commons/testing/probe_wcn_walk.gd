@@ -26,6 +26,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "Random_Walk"
 const OUT := "res://ada_run/waves_chance_noise/Random_Walk/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/Random_Walk") + "/"
 const MAP_CELL := Vector2i(4, 1)
 const SPOT := Vector3(5.5, 0.0, 1.5)      # the visitor's spot, on the door strip, facing west
 const EYE_H := 1.55
@@ -220,7 +223,7 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(SPOT.x + 0.3, EYE_H, SPOT.z + vest)); cam.look_at(terr.to_global(Vector3(0.0, 1.05, 0.0)))
 		for i in range(20): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_walk.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_walk.png")
 		measurements["captures"] = {"primary": _cam_pose(cam)}
 
 	# ── 3b. the visual pass of 12 September: a backboard behind the tank, the followed bead larger ──
@@ -402,7 +405,7 @@ func run() -> void:
 	if capture:
 		for i in range(6): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_walk_running.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_walk_running.png")
 		measurements["captures"]["running"] = _cam_pose(cam)
 
 	# ── 8. the museum untouched; the walk; plinths; walks; reach ─────────────
@@ -534,7 +537,7 @@ func run() -> void:
 			drv.call("aim_at", terr.to_global(Vector3(0.0, 1.05, 0.0)))
 			for i in range(12): await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_walk_desktop_front.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_walk_desktop_front.png")
 			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
 		drv.get("rig").global_position = seg.to_global(Vector3(6.5, 0.05, 1.0 + vest))
 		await physics_frame
@@ -561,37 +564,37 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(SPOT.x + 0.3, EYE_H, SPOT.z + vest)); cam.look_at(terr.to_global(Vector3(0.0, 1.05, 0.0)))
 		for i in range(20): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_walk.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_walk.png")
 		measurements["captures"]["primary"] = _cam_pose(cam)
 		cam.global_position = terr.to_global(Vector3(0.0, 1.30, 0.95)); cam.look_at(terr.to_global(Vector3(0.0, 1.12, 0.0)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_walk_tank.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_walk_tank.png")
 		measurements["captures"]["tank"] = _cam_pose(cam)
 		cam.global_position = plate.global_position + seg.global_transform.basis * Vector3(0.75, 0.35, 0.05); cam.look_at(plate.global_position)
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_walk_logbook.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_walk_logbook.png")
 		measurements["captures"]["logbook"] = _cam_pose(cam)
 		cam.global_position = keypad.global_position + seg.global_transform.basis * Vector3(0.7, 0.45, 0.0); cam.look_at(keypad.global_position)
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_walk_keypad.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_walk_keypad.png")
 		measurements["captures"]["keypad"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(6.5, 1.6, 0.3 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 0.8, 7.0 + vest)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_walk_north_door.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_walk_north_door.png")
 		measurements["captures"]["north_door"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(6.5, 2.4, 12.6 + vest)); cam.look_at(seg.to_global(Vector3(6.0, 0.6, 5.0 + vest)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_walk_arena.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_walk_arena.png")
 		measurements["captures"]["arena"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(6.5, 9.0, 7.0 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 0.0, 7.01 + vest)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_walk_plan.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_walk_plan.png")
 		measurements["captures"]["plan"] = _cam_pose(cam)
 		cam.queue_free()
 

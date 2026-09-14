@@ -27,6 +27,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "Noise_6_Wall"
 const OUT := "res://ada_run/waves_chance_noise/Noise_6_Wall/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/Noise_6_Wall") + "/"
 const MAP_CELL := Vector2i(9, 2)
 const SHADER_PATH := "res://algorithms/randomness/shadernoisespace/WallNoiseShader.gdshader"
 const SPOT := Vector3(9.5, 0.0, 1.5)
@@ -282,7 +285,7 @@ func run() -> void:
 			cam.look_at(board.global_position + Vector3(0, 1.28, 0))
 			for i in range(18): cam.make_current(); await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_wall.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_wall.png")
 			measurements["captures"]["primary"] = _cam_pose(cam)
 			var rn: Node3D = board.get_node_or_null("Readout")
 			if rn != null:
@@ -290,7 +293,7 @@ func run() -> void:
 				cam.look_at(rn.global_position)
 				for i in range(14): cam.make_current(); await process_frame
 				await create_timer(0.25, true, false, true).timeout
-				root.get_texture().get_image().save_png(OUT + "probe_wall_readout.png")
+				root.get_texture().get_image().save_png(_evidence + "probe_wall_readout.png")
 				measurements["captures"]["readout"] = _cam_pose(cam)
 		if room_body != null:
 			# NOT "inside the room" — there is no inside to stand in here (see the enclosure
@@ -300,14 +303,14 @@ func run() -> void:
 			cam.look_at(seg.to_global(Vector3(6.5, 1.2, 8.0 + vest)))
 			for i in range(14): cam.make_current(); await process_frame
 			await create_timer(0.25, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_wall_interior.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_wall_interior.png")
 			measurements["captures"]["interior"] = _cam_pose(cam)
 		# UNDER the room's ceiling (6.75 m, 16 x 24 m): a plan shot from 12 m photographed it.
 		cam.global_position = seg.to_global(Vector3(6.5, 5.6, 6.5 + vest))
 		cam.look_at(seg.to_global(Vector3(6.48, 0.0, 6.4 + vest)))
 		for i in range(14): cam.make_current(); await process_frame
 		await create_timer(0.25, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_wall_plan.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_wall_plan.png")
 		measurements["captures"]["plan"] = _cam_pose(cam)
 
 	if _live():
@@ -360,7 +363,7 @@ func run() -> void:
 			drv.call("aim_at", board2.global_position + Vector3(0, 1.28, 0) if board2 != null else stand_at)
 			for i in range(8): await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_wall_desktop_front.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_wall_desktop_front.png")
 			measurements["desktop_input"]["front_pose"] = drv.call("pose")
 		drv.call("teardown")
 

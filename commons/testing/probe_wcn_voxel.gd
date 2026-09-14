@@ -28,6 +28,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "Noise_Voxel"
 const OUT := "res://ada_run/waves_chance_noise/Noise_Voxel/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/Noise_Voxel") + "/"
 const MAP_CELL := Vector2i(2, 2)
 const SPOT := Vector3(2.5, 0.0, 3.6)
 const EYE_H := 1.6
@@ -236,7 +239,7 @@ func run() -> void:
 		cam.look_at(b + Vector3(0, 0.12, 0))
 		for i in range(18): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_voxel.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_voxel.png")
 		measurements["captures"]["primary"] = _cam_pose(cam)
 		cam.fov = 62
 		var rn: Node3D = bench.get_node_or_null("LatticeStand/Readout")
@@ -245,7 +248,7 @@ func run() -> void:
 			cam.look_at(rn.global_position)
 			for i in range(14): cam.make_current(); await process_frame
 			await create_timer(0.25, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_voxel_readout.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_voxel_readout.png")
 			measurements["captures"]["readout"] = _cam_pose(cam)
 		if receiver != null:
 			var rp: Vector3 = (receiver as Node3D).global_position
@@ -253,13 +256,13 @@ func run() -> void:
 			cam.look_at(rp + Vector3(0, 1.0, 0))
 			for i in range(14): cam.make_current(); await process_frame
 			await create_timer(0.25, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_voxel_terrain.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_voxel_terrain.png")
 			measurements["captures"]["terrain"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(7.0, 12.0, 7.5 + vest))
 		cam.look_at(seg.to_global(Vector3(6.98, 0.0, 7.4 + vest)))
 		for i in range(14): cam.make_current(); await process_frame
 		await create_timer(0.25, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_voxel_plan.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_voxel_plan.png")
 		measurements["captures"]["plan"] = _cam_pose(cam)
 
 	if _live():
@@ -288,7 +291,7 @@ func run() -> void:
 			drv.call("aim_at", (bench as Node3D).global_position)
 			for i in range(8): await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_voxel_desktop_front.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_voxel_desktop_front.png")
 			measurements["desktop_input"]["front_pose"] = drv.call("pose")
 		drv.call("teardown")
 

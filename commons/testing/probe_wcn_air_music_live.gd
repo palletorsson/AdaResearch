@@ -27,6 +27,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "WaveFunctions_AirMusic"
 const OUT := "res://ada_run/waves_chance_noise/WaveFunctions_AirMusic/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/WaveFunctions_AirMusic") + "/"
 const MAP_CELL := Vector2i(5, 9)
 var _hits: Array = []
 var _last_stick_speed: float = -1.0
@@ -235,7 +238,7 @@ func run() -> void:
 	if capture:
 		for i in range(6): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_air_music_two_voices_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_air_music_two_voices_live.png")
 		measurements["captures"] = {"two_voices": _cam_pose(cam)}
 	# the same bar again: it starts again, no third voice
 	var t_before: float = float(bar0.get("resonance_time"))
@@ -332,7 +335,7 @@ func run() -> void:
 			drv.call("aim_at", rig.to_global(Vector3(0.0, 1.0, 0.0)))
 			for i in range(12): await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_air_music_desktop_front_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_air_music_desktop_front_live.png")
 			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
 		# the strip: walk it east on ui_up; then into the table
 		drv.get("rig").global_position = seg.to_global(Vector3(2.0, 0.05, 10.5 + vest))
@@ -360,18 +363,18 @@ func run() -> void:
 		stand_cam.call()
 		for i in range(20): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_air_music_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_air_music_live.png")
 		measurements["captures"]["primary"] = _cam_pose(cam)
 		if status != null:
 			cam.global_position = status.global_position + seg.global_transform.basis * Vector3(0.0, 0.0, 1.05); cam.look_at(status.global_position)
 			for i in range(15): cam.make_current(); await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_air_music_readout_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_air_music_readout_live.png")
 			measurements["captures"]["readout"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(6.5, 2.2, 0.8 + vest)); cam.look_at(seg.to_global(Vector3(5.5, 0.9, 9.5 + vest)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_air_music_overview_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_air_music_overview_live.png")
 		measurements["captures"]["overview"] = _cam_pose(cam)
 		cam.queue_free()
 

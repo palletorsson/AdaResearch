@@ -30,6 +30,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "Random_Remove"
 const OUT := "res://ada_run/waves_chance_noise/Random_Remove/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/Random_Remove") + "/"
 const MAP_CELL := Vector2i(6, 7)
 const SIDE := 8
 
@@ -154,7 +157,7 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(8.7, 1.6, 7.5 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 1.1, 7.5 + vest)))
 		for i in range(20): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_remove_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_remove_live.png")
 		measurements["captures"] = {"primary": _cam_pose(cam)}
 
 	# ── 3. REMOVE ONE through the push button's own path ─────────────────────
@@ -178,7 +181,7 @@ func run() -> void:
 	if capture:
 		for i in range(6): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_remove_one_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_remove_one_live.png")
 		measurements["captures"]["one"] = _cam_pose(cam)
 
 	# ── 4. a full run of the range ───────────────────────────────────────────
@@ -211,7 +214,7 @@ func run() -> void:
 	if capture:
 		for i in range(6): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_remove_emptied_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_remove_emptied_live.png")
 		measurements["captures"]["emptied"] = _cam_pose(cam)
 
 	# ── 5. RESET restores all sixty-four and replays the seed ─────────────────
@@ -260,7 +263,7 @@ func run() -> void:
 	if capture:
 		for i in range(6): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_remove_row_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_remove_row_live.png")
 		measurements["captures"]["row"] = _cam_pose(cam)
 	for k in range(8):
 		_press(panel, "Btn_4")
@@ -392,7 +395,7 @@ func run() -> void:
 			drv.call("aim_at", rem.to_global(Vector3(0.0, 1.15, 0.0)))
 			for i in range(12): await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_remove_desktop_front_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_remove_desktop_front_live.png")
 			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
 		var b5: Node3D = panel.find_child("Btn_5", true, false)
 		var rec5: Dictionary = await drv.call("press", b5, stand) if b5 != null else {}
@@ -426,28 +429,28 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(8.7, 1.6, 7.5 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 1.1, 7.5 + vest)))
 		for i in range(20): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_remove_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_remove_live.png")
 		measurements["captures"]["primary"] = _cam_pose(cam)
 		if status != null:
 			cam.global_position = status.global_position + seg.global_transform.basis * Vector3(1.1, 0.05, 0.0); cam.look_at(status.global_position)
 			for i in range(15): cam.make_current(); await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_remove_status_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_remove_status_live.png")
 			measurements["captures"]["status"] = _cam_pose(cam)
 		cam.global_position = panel.global_position + seg.global_transform.basis * Vector3(0.9, 0.55, 0.0); cam.look_at(panel.global_position)
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_remove_panel_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_remove_panel_live.png")
 		measurements["captures"]["panel"] = _cam_pose(cam)
 		cam.global_position = rem.to_global(Vector3(0.0, 2.3, 0.0)); cam.look_at(rem.to_global(Vector3(0.0, 1.0, 0.01)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_remove_board_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_remove_board_live.png")
 		measurements["captures"]["board"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(6.5, 2.0, 1.2 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 1.0, 7.5 + vest)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_remove_overview_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_remove_overview_live.png")
 		measurements["captures"]["overview"] = _cam_pose(cam)
 		cam.queue_free()
 

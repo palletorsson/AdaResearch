@@ -5,7 +5,9 @@ carry images, so Palle can look at what the probes photographed without opening 
 
 For each hall listed in HALLS: reads ada_run/waves_chance_noise/<Map>/<stem>.json and
 <stem>_live.json (checks, failures, the captures' camera poses), copies the PNGs the probe
-saved — the live lane's when present, the bare lane's otherwise — into
+saved — the live lane's when present, the bare lane's otherwise; from the evidence root
+(ada_encyclopedia/captures/ada-run/waves_chance_noise/<Map>/) since 2026-09-14, from beside
+the JSON for older runs — into
 doc/research/waves-chance-noise/images/ as JPEGs at 960 px (a 1 MB PNG becomes ~120 KB), and
 writes doc/research/waves-chance-noise/runtime-captures.html: one section per hall, the
 question, the two lanes' counts, a figure per view with its camera's standpoint. Never
@@ -20,6 +22,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / 'tools'))
+from evidence_root import evidence_dir  # noqa: E402
 RUNS = ROOT / 'ada_run' / 'waves_chance_noise'
 GUIDE = ROOT / 'doc' / 'research' / 'waves-chance-noise'
 IMAGES = GUIDE / 'images'
@@ -109,10 +113,12 @@ def main() -> int:
         if bare is None and live is None:
             continue
         figs = []
+        # the probes save PNGs to the evidence root; a run before 2026-09-14 left them in d
+        shots = (evidence_dir('waves_chance_noise', name, create=False), d)
         for v in views:
-            src_live = d / f'{stem}{v}_live.png'
-            src_bare = d / f'{stem}{v}.png'
-            src = src_live if src_live.exists() else (src_bare if src_bare.exists() else None)
+            src_live = next((s / f'{stem}{v}_live.png' for s in shots if (s / f'{stem}{v}_live.png').exists()), None)
+            src_bare = next((s / f'{stem}{v}.png' for s in shots if (s / f'{stem}{v}.png').exists()), None)
+            src = src_live or src_bare
             if src is None:
                 continue
             lane = 'live' if src == src_live else 'bare'
@@ -143,7 +149,7 @@ def main() -> int:
             '.q{font-style:italic}.muted{color:#666;font-size:.9rem}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:1rem}'
             'figure{margin:0}img{width:100%;height:auto;border:1px solid #ddd;border-radius:.3rem}figcaption{font-size:.85rem;color:#444;margin-top:.3rem}'
             'a{color:#2a5d8f}</style></head><body><h1>Runtime captures</h1>'
-            '<p>What the museum probes photographed, hall by hall, in the order the route meets them. Every picture is a runtime capture by the probe\'s own camera or the desktop rig\'s, taken during a saved run whose JSON sits beside it under <code>ada_run/waves_chance_noise/</code>; none is edited. The live lane runs under project startup with the desktop rig pressing panels through its pointer; the bare lane is the SceneTree probe. <a href="index.html">Back to the plan</a> · <a href="all-maps.html">All maps</a>.</p>'
+            '<p>What the museum probes photographed, hall by hall, in the order the route meets them. Every picture is a runtime capture by the probe\'s own camera or the desktop rig\'s, taken during a saved run whose JSON record is under <code>ada_run/waves_chance_noise/</code>; none is edited. The live lane runs under project startup with the desktop rig pressing panels through its pointer; the bare lane is the SceneTree probe. <a href="index.html">Back to the plan</a> · <a href="all-maps.html">All maps</a>.</p>'
             + ''.join(sections) + '</body></html>')
     (GUIDE / 'runtime-captures.html').write_text(page, encoding='utf-8')
     print(json.dumps({'halls': len(sections), 'images': total, 'page': 'doc/research/waves-chance-noise/runtime-captures.html'}))

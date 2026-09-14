@@ -27,6 +27,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "Random_Mushrooms"
 const OUT := "res://ada_run/waves_chance_noise/Random_Mushrooms/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/Random_Mushrooms") + "/"
 const MAP_CELL := Vector2i(6, 7)
 const SPOT := Vector3(6.5, 0.0, 2.3)      # the visitor's spot: 0.8 m before the table's face
 const EYE_H := 1.6
@@ -327,7 +330,7 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(6.5, 2.4, 2.2 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 0.3, 7.5 + vest)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_mushrooms_rejected.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_mushrooms_rejected.png")
 		measurements["captures"]["rejected"] = _cam_pose(cam)
 	_press(panel, "Btn_1")   # back to the template
 	await process_frame
@@ -441,7 +444,7 @@ func run() -> void:
 			drv.call("aim_at", table.to_global(Vector3(0.0, 0.85, 0.3)))
 			for i in range(12): await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_mushrooms_desktop_front.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_mushrooms_desktop_front.png")
 			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
 		# the edible one at the west kerb: the rig stands on the west margin beside it, grabs
 		# it with the pointer's carry (right button), and it is eaten when it comes within the
@@ -493,7 +496,7 @@ func run() -> void:
 			if capture:
 				for i in range(12): await process_frame
 				await create_timer(0.3, true, false, true).timeout
-				root.get_texture().get_image().save_png(OUT + "probe_mushrooms_eaten.png")
+				root.get_texture().get_image().save_png(_evidence + "probe_mushrooms_eaten.png")
 				measurements["desktop_input"]["edible"]["capture_pose"] = drv.call("pose")
 			await drv.call("release", MOUSE_BUTTON_RIGHT)
 			await create_timer(0.7).timeout
@@ -528,37 +531,37 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(SPOT.x, EYE_H, SPOT.z + vest)); cam.look_at(tgt)
 		for i in range(20): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_mushrooms.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_mushrooms.png")
 		measurements["captures"]["primary"] = _cam_pose(cam)
 		cam.global_position = table.to_global(Vector3(-0.30, 1.15, 0.95)); cam.look_at(readout.global_position)
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_mushrooms_readout.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_mushrooms_readout.png")
 		measurements["captures"]["readout"] = _cam_pose(cam)
 		cam.global_position = table.to_global(Vector3(0.0, 1.30, 0.85)); cam.look_at(table.to_global(Vector3(0.0, 0.95, -0.04)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_mushrooms_specimens.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_mushrooms_specimens.png")
 		measurements["captures"]["specimens"] = _cam_pose(cam)
 		cam.global_position = table.to_global(Vector3(0.47, 1.25, 0.95)); cam.look_at((panel as Node3D).global_position)
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_mushrooms_panel.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_mushrooms_panel.png")
 		measurements["captures"]["panel"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(6.5, 2.4, 2.2 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 0.3, 7.5 + vest)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_mushrooms_bed.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_mushrooms_bed.png")
 		measurements["captures"]["bed"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(6.5, 1.6, 0.3 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 0.6, 7.5 + vest)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_mushrooms_north_door.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_mushrooms_north_door.png")
 		measurements["captures"]["north_door"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(6.5, 1.6, 12.2 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 0.4, 6.0 + vest)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_mushrooms_south_door.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_mushrooms_south_door.png")
 		measurements["captures"]["south_door"] = _cam_pose(cam)
 		var ed_first: Node3D = null
 		for e in prim.get("_edibles"):
@@ -568,17 +571,17 @@ func run() -> void:
 			cam.global_position = seg.to_global(Vector3(2.4, 1.35, efl.z - 0.9)); cam.look_at(ed_first.global_position)
 			for i in range(15): cam.make_current(); await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_mushrooms_edibles.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_mushrooms_edibles.png")
 			measurements["captures"]["edibles"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(2.0, 1.6, 2.0 + vest)); cam.look_at(seg.to_global(Vector3(9.0, 0.4, 8.0 + vest)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_mushrooms_west_margin.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_mushrooms_west_margin.png")
 		measurements["captures"]["west_margin"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(6.5, 14.0, 6.5 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 0.0, 6.51 + vest)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_mushrooms_plan.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_mushrooms_plan.png")
 		measurements["captures"]["plan"] = _cam_pose(cam)
 		cam.queue_free()
 

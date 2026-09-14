@@ -31,6 +31,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "Random_Game"
 const OUT := "res://ada_run/waves_chance_noise/Random_Game/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/Random_Game") + "/"
 const MAP_CELL := Vector2i(3, 4)
 const PIT_X0 := 1      # the map's void: cells x 1..5, z 3..5
 const PIT_X1 := 5
@@ -335,7 +338,7 @@ func run() -> void:
 		cam.look_at(stones_at)
 		for i in range(20): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_game.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_game.png")
 		measurements["captures"]["primary"] = _cam_pose(cam)
 		cam.fov = 68
 		# the approach, from the hall's north door
@@ -343,7 +346,7 @@ func run() -> void:
 		cam.look_at(seg.to_global(Vector3(3.6, 0.5, 4.5 + vest)))
 		for i in range(16): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_game_approach.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_game_approach.png")
 		measurements["captures"]["approach"] = _cam_pose(cam)
 		# the tablet and the stele from the reading eye
 		var tnode: Node3D = cross.get_node_or_null("Tablet")
@@ -352,14 +355,14 @@ func run() -> void:
 			cam.look_at(tnode.global_position)
 			for i in range(16): cam.make_current(); await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_game_tablet.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_game_tablet.png")
 			measurements["captures"]["tablet"] = _cam_pose(cam)
 		# the row along the crossing, from the lip at knee height: the gaps and the bed
 		cam.global_position = seg.to_global(Vector3(3.5, 0.55, 2.35 + vest))
 		cam.look_at(seg.to_global(Vector3(3.5, -0.3, 6.2 + vest)))
 		for i in range(16): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_game_row.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_game_row.png")
 		measurements["captures"]["row"] = _cam_pose(cam)
 		# the carved order, from the eye that reads it
 		var stele_node: Node3D = cross.get_node_or_null("Stele")
@@ -368,14 +371,14 @@ func run() -> void:
 			cam.look_at(stele_node.global_position + Vector3(0, 0.78, 0))
 			for i in range(16): cam.make_current(); await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_game_stele.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_game_stele.png")
 			measurements["captures"]["stele"] = _cam_pose(cam)
 		# from the bed, looking up at what left you
 		cam.global_position = seg.to_global(Vector3(2.1, -0.55, 4.5 + vest))
 		cam.look_at(seg.to_global(Vector3(3.5, 0.4, 4.5 + vest)))
 		for i in range(16): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_game_bed.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_game_bed.png")
 		measurements["captures"]["bed"] = _cam_pose(cam)
 		# the idol at the far lip, with its seed
 		var idol: Node3D = cross.get_node_or_null("Idol")
@@ -384,14 +387,14 @@ func run() -> void:
 			cam.look_at(idol.global_position + Vector3(0, 0.85, 0))
 			for i in range(16): cam.make_current(); await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_game_idol.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_game_idol.png")
 			measurements["captures"]["idol"] = _cam_pose(cam)
 		# the whole hall in plan, so the pit, the corridor and the arena read together
 		cam.global_position = seg.to_global(Vector3(6.5, 15.0, 7.0 + vest))
 		cam.look_at(seg.to_global(Vector3(6.4, 0.0, 7.2 + vest)))
 		for i in range(16): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_game_plan.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_game_plan.png")
 		measurements["captures"]["plan"] = _cam_pose(cam)
 
 	if _live():
@@ -455,7 +458,7 @@ func run() -> void:
 		check(crossed or in_bed or end_z > 3.0, "the walk moved onto the crossing (z %.2f, y %.2f: %s)" % [end_z, end_y, ("the far lip" if crossed else ("the bed" if in_bed else "the row"))])
 		if capture:
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_game_desktop_crossing.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_game_desktop_crossing.png")
 			measurements["desktop_input"]["crossing_capture_pose"] = drv.call("pose")
 		# THE FALL, on purpose: stand on the middle stone, wait for it to go, and read
 		# what caught the body. A crossing that only sometimes drops you is not evidence.
@@ -479,7 +482,7 @@ func run() -> void:
 		check(fell_at < -0.55 and fell_at > -1.35, "when that stone leaves, the body falls one metre and the bed catches it (y %.2f)" % fell_at)
 		if capture:
 			await create_timer(0.2, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_game_desktop_fallen.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_game_desktop_fallen.png")
 			measurements["desktop_input"]["fall"]["capture_pose"] = drv.call("pose")
 		# and out of the bed: to the ramp's foot, then up it
 		var in_bed_now: bool = fell_at < -0.55

@@ -30,6 +30,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "WaveFunctions_Effect_Sound"
 const OUT := "res://ada_run/waves_chance_noise/WaveFunctions_Effect_Sound/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/WaveFunctions_Effect_Sound") + "/"
 const MAP_CELL := Vector2i(8, 11)
 const SR := 44100.0
 
@@ -197,7 +200,7 @@ func run() -> void:
 	var base: PackedFloat32Array = rig.call("render_samples", 0.0)
 	# the notes themselves, for a person to listen to later (the probe cannot)
 	var wav_a: AudioStreamWAV = rig.call("_generate_fm_sound", 0.0)
-	wav_a.save_to_wav(OUT + "audio_A_baseline_unmodulated.wav")
+	wav_a.save_to_wav(_evidence + "audio_A_baseline_unmodulated.wav")
 	measurements["baseline_samples"] = base.size()
 	measurements["baseline_seconds"] = float(base.size()) / SR
 	check(absf(float(base.size()) / SR - 1.8) < 0.01, "the baseline note lasts decay × 1.2 = 1.8 s (%.2f s, %d samples at 44100 Hz)" % [float(base.size()) / SR, base.size()])
@@ -228,7 +231,7 @@ func run() -> void:
 	check(float(rig.get("last_synth_ms")) < 600.0, "a 1.8 s note is synthesised in under 600 ms on the main thread (%.0f ms)" % float(rig.get("last_synth_ms")))
 	var mod4: PackedFloat32Array = rig.call("render_samples", 0.0)
 	var wav_b: AudioStreamWAV = rig.call("_generate_fm_sound", 0.0)
-	wav_b.save_to_wav(OUT + "audio_B_index4_moddecay0.5.wav")
+	wav_b.save_to_wav(_evidence + "audio_B_index4_moddecay0.5.wav")
 	var head_diff: float = _mean_abs_diff(base, mod4, 0, int(0.10 * SR))
 	var tail_diff: float = _mean_abs_diff(base, mod4, int(1.45 * SR), int(1.75 * SR))
 	measurements["index4_vs_baseline_head_diff"] = head_diff
@@ -246,7 +249,7 @@ func run() -> void:
 	check(absf(float(p.mod_decay) - 1.5) < 0.05 and absf(float(p.mod_index) - 4.0) < 0.05, "moving the orange ball along z sets Mod Decay 1.5 s and keeps the index (τ %.2f, I %.2f)" % [p.mod_decay, p.mod_index])
 	var mod4_slow: PackedFloat32Array = rig.call("render_samples", 0.0)
 	var wav_b2: AudioStreamWAV = rig.call("_generate_fm_sound", 0.0)
-	wav_b2.save_to_wav(OUT + "audio_B_index4_moddecay1.5.wav")
+	wav_b2.save_to_wav(_evidence + "audio_B_index4_moddecay1.5.wav")
 	measurements["audio_files"] = ["audio_A_baseline_unmodulated.wav", "audio_B_index4_moddecay0.5.wav", "audio_B_index4_moddecay1.5.wav"]
 	var tail_diff_slow: float = _mean_abs_diff(base, mod4_slow, int(1.45 * SR), int(1.75 * SR))
 	measurements["index4_decay1.5_tail_diff"] = tail_diff_slow
@@ -472,7 +475,7 @@ func run() -> void:
 			drv.call("aim_at", rig.to_global(Vector3(0.25, 1.15, 0.3)))
 			for i in range(12): await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_effect_sound_desktop_front_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_effect_sound_desktop_front_live.png")
 			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
 		# THE OPERATING VIEW (Astra's review, 12 September): one valid standing position from
 		# which both balls, both names, the full readout, the AUDITION panel and the scope are
@@ -504,7 +507,7 @@ func run() -> void:
 			check(cly < 0.95 and mly < 0.95, "CARRIER and MODULATOR sit on their desks' front faces, under the balls and out of the scope's band (%.2f, %.2f)" % [cly, mly])
 		if "--capture" in OS.get_cmdline_user_args():
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_effect_sound_desktop_operating_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_effect_sound_desktop_operating_live.png")
 		# walking into the desks from the front: they stop the rig
 		drv.get("rig").global_position = seg.to_global(Vector3(8.5, 0.05, 7.6 + vest))
 		await get_tree().physics_frame
@@ -531,7 +534,7 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(8.6, 1.55, 9.2 + vest)); cam.look_at(seg.to_global(Vector3(8.4, 1.15, 11.3 + vest)))
 		for i in range(30): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_effect_sound_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_effect_sound_live.png")
 		measurements["captures"] = {"primary": _cam_pose(cam)}
 		# the readout from reading distance
 		if readout != null:
@@ -544,7 +547,7 @@ func run() -> void:
 			cam.look_at(readout.global_position)
 			for i in range(20): cam.make_current(); await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_effect_sound_readout_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_effect_sound_readout_live.png")
 			measurements["captures"]["readout"] = _cam_pose(cam)
 			var los: Dictionary = cam.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(cam.global_position, readout.global_position))
 			var los_clear: bool = los.is_empty() or (los.collider is Node and rig.is_ancestor_of(los.collider))
@@ -555,13 +558,13 @@ func run() -> void:
 			cam.global_position = rig.to_global(Vector3(0.25, 1.55, 1.55)); cam.look_at(rig.to_global(Vector3(0.25, 1.45, 0.0)))
 			for i in range(20): cam.make_current(); await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_effect_sound_scope_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_effect_sound_scope_live.png")
 			measurements["captures"]["scope"] = _cam_pose(cam)
 		# from the north door: the bench row, then the audition quarter beyond
 		cam.global_position = seg.to_global(Vector3(6.5, 2.3, 0.8 + vest)); cam.look_at(seg.to_global(Vector3(8.0, 0.9, 11.0 + vest)))
 		for i in range(20): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_effect_sound_overview_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_effect_sound_overview_live.png")
 		measurements["captures"]["overview"] = _cam_pose(cam)
 		cam.queue_free()
 

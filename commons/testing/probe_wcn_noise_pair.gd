@@ -17,6 +17,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "Noise_Perlin_Simplex"
 const OUT := "res://ada_run/waves_chance_noise/Noise_Perlin_Simplex/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/Noise_Perlin_Simplex") + "/"
 
 func _initialize() -> void: run.call_deferred()
 
@@ -377,14 +380,14 @@ func run() -> void:
 					drv.call("aim_at", case_node.global_position)
 					for i in range(10): await process_frame
 					await create_timer(0.35, true, false, true).timeout
-					root.get_texture().get_image().save_png(OUT + "probe_noise_pair_witness.png")
+					root.get_texture().get_image().save_png(_evidence + "probe_noise_pair_witness.png")
 					measurements["desktop_input"]["witness_pose"] = drv.call("pose")
 		if "--capture" in OS.get_cmdline_user_args():
 			# the panel and its readout from where the click was made (0.9 m, hand height):
 			# legibility at reach, the rig's own camera drawing
 			for i in range(10): await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_noise_pair_desktop_panel.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_noise_pair_desktop_panel.png")
 			measurements["desktop_input"]["panel_capture_pose"] = drv.call("pose")
 		drv.get("rig").global_position = seg.to_global(Vector3(6.0, 0.05, 4.5 + vest))
 		await physics_frame
@@ -396,7 +399,7 @@ func run() -> void:
 		if "--capture" in OS.get_cmdline_user_args():
 			for i in range(10): await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_noise_pair_desktop_aisle.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_noise_pair_desktop_aisle.png")
 		await drv.call("teardown")
 		measurements["desktop_input"]["log"] = drv.get("log")
 		measurements["desktop_input"]["walker_cam_guard_stopped"] = drv.get("walker_cam_guard_stopped")
@@ -411,7 +414,7 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(6.0, 2.4, 1.0 + vest)); cam.look_at(seg.to_global(Vector3(6.0, 0.9, 7.5 + vest)))
 		for i in range(30): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_noise_pair.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_noise_pair.png")
 		# THE PLATE, which is this hall's evidence: read it from where a body stands
 		# The plate is photographed from the rig's own eye in the live lane (above), which
 		# is a measured viewpoint; a camera placed here by arithmetic framed the wrong

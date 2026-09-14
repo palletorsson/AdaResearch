@@ -32,6 +32,9 @@ var skipped: Array[String] = []
 var t0 := 0.0
 const MAP := "WaveFunctions_Intro"
 const OUT := "res://ada_run/waves_chance_noise/WaveFunctions_Intro/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/WaveFunctions_Intro") + "/"
 
 func _ready() -> void: run.call_deferred()
 
@@ -339,7 +342,7 @@ func run() -> void:
 			check(gap_w >= 0.44 and gap_e >= 0.44, "a walking body passes the swing on either side: %.2f m west, %.2f m east (a 0.22 m capsule needs 0.44)" % [gap_w, gap_e])
 			if "--capture" in OS.get_cmdline_user_args():
 				await get_tree().create_timer(0.2, true, false, true).timeout
-				get_viewport().get_texture().get_image().save_png(OUT + "probe_intro_desktop_primary_live.png")
+				get_viewport().get_texture().get_image().save_png(_evidence + "probe_intro_desktop_primary_live.png")
 		await drv.call("teardown")
 		di["log"] = drv.get("log")
 		di["walker_cam_guard_stopped"] = drv.get("walker_cam_guard_stopped")
@@ -349,7 +352,7 @@ func run() -> void:
 		cam.global_position = pend.to_global(Vector3(0.9, 0.2, 1.9)); cam.look_at(pend.to_global(Vector3(0, -0.3, 0)))
 		for i in range(30): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_intro_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_intro_live.png")
 	_finish()
 
 ## The pickable's own signal path, emitted programmatically: picked_up, the bob
@@ -412,7 +415,7 @@ func _desktop_carry_and_drop(drv: Node, ptr: Node, pend: Node3D, angle: float, n
 	# released (first run, 2026-09-13: a from-rest release read at omega -1.63).
 	if name_side == "right" and "--capture" in OS.get_cmdline_user_args():
 		await get_tree().create_timer(0.15, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_intro_desktop_hold_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_intro_desktop_hold_live.png")
 	for i in range(45): await get_tree().physics_frame
 	var held_angle: float = float(pend.call("angle"))
 	var bob_at: Vector3 = pend.call("bob_world_position")

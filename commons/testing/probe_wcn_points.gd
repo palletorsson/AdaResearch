@@ -29,6 +29,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "Random_Noise_Types"
 const OUT := "res://ada_run/waves_chance_noise/Random_Noise_Types/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/Random_Noise_Types") + "/"
 const MAP_CELL := Vector2i(10, 3)
 const SPOT := Vector3(10.5, 0.0, 2.35)  # the visitor's spot: before the bench's FRONT, which the
                                         # token's 180 turns toward the hall's north door
@@ -254,7 +257,7 @@ func run() -> void:
 		cam.look_at(va.global_position)
 		for i in range(16): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_points_packed.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_points_packed.png")
 		measurements["captures"]["packed"] = _cam_pose(cam)
 	prim.set("num_points", int(st["requested"]))
 	prim.call("redraw")
@@ -296,7 +299,7 @@ func run() -> void:
 			cam.look_at(a.global_position)
 			for i in range(16): cam.make_current(); await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_points_violation.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_points_violation.png")
 			measurements["captures"]["violation"] = _cam_pose(cam)
 		check(_press(panel, "Btn_3"), "RESTORE pressed")
 		await create_timer(0.5, true, false, true).timeout
@@ -317,27 +320,27 @@ func run() -> void:
 		cam.look_at(bench_at)
 		for i in range(20): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_points.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_points.png")
 		measurements["captures"]["primary"] = _cam_pose(cam)
 		# the two volumes side by side, from reading distance
 		cam.global_position = seg.to_global(Vector3(10.5, 1.32, 5.35 + vest))
 		cam.look_at(seg.to_global(Vector3(10.5, 1.26, 3.5 + vest)))
 		for i in range(16): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_points_volumes.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_points_volumes.png")
 		measurements["captures"]["volumes"] = _cam_pose(cam)
 		# the admitted volume alone: shells kissing, ghosts where the refusals fell
 		cam.global_position = va.global_position + seg.global_transform.basis * Vector3(0.0, 0.02, -1.35)
 		cam.look_at(va.global_position)
 		for i in range(16): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_points_admitted.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_points_admitted.png")
 		measurements["captures"]["admitted"] = _cam_pose(cam)
 		cam.global_position = vp.global_position + seg.global_transform.basis * Vector3(0.0, 0.02, -1.35)
 		cam.look_at(vp.global_position)
 		for i in range(16): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_points_proposed.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_points_proposed.png")
 		measurements["captures"]["proposed"] = _cam_pose(cam)
 		# the readout from the eye that reads it
 		var rn: Node3D = bench.get_node_or_null("Readout")
@@ -346,14 +349,14 @@ func run() -> void:
 			cam.look_at(rn.global_position)
 			for i in range(16): cam.make_current(); await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_points_readout.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_points_readout.png")
 			measurements["captures"]["readout"] = _cam_pose(cam)
 		# the hall in plan: the bench in its own half, the galleries in theirs
 		cam.global_position = seg.to_global(Vector3(6.5, 13.0, 4.5 + vest))
 		cam.look_at(seg.to_global(Vector3(6.45, 0.0, 4.6 + vest)))
 		for i in range(16): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_points_plan.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_points_plan.png")
 		measurements["captures"]["plan"] = _cam_pose(cam)
 
 	if _live():
@@ -436,7 +439,7 @@ func run() -> void:
 						check(int(forced["under_distance"]) >= 1, "and inside the shell the room counts it as sharing an excluded neighbourhood (%s)" % JSON.stringify(grab["set_as_stand_in"]))
 				if capture:
 					await create_timer(0.3, true, false, true).timeout
-					root.get_texture().get_image().save_png(OUT + "probe_points_desktop_carry.png")
+					root.get_texture().get_image().save_png(_evidence + "probe_points_desktop_carry.png")
 					grab["capture_pose"] = drv.call("pose")
 				await drv.call("press_down", MOUSE_BUTTON_RIGHT)   # a toggle: the second press drops it
 				await drv.call("release", MOUSE_BUTTON_RIGHT)

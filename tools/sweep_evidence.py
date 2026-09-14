@@ -24,6 +24,9 @@ WHAT NEVER MOVES, derived on every run rather than written down:
   live work         anything written in the last --fresh-hours (48). Review folders are
                     dated and other sessions write them daily; a folder moved while its
                     session is still writing is split across two places.
+  scripts           a .py / .ps1 / .sh / .gd / .js (and kin) directly in ada_run/ — review
+                    pipelines live there. A run FOLDER still moves once it is quiet, with
+                    the probe copies inside it: those are the record of that run.
   committed ada_run evidence
                     tracked files under ada_run/ stay unless --include-tracked. Sessions
                     commit probe JSON there on purpose, as the record of a run.
@@ -57,6 +60,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from evidence_root import REPO, captures_root, encyclopedia_path  # noqa: E402
 
 IMG = (".png", ".jpg", ".jpeg", ".webp", ".gif", ".exr")
+# A script sitting loose in ada_run/ is somebody's pipeline, not its output: the review
+# sessions keep prepare_*.py, verify_*.py and publish_*.ps1 there and chain one into the
+# next. The first sweep (2026-09-14) moved 17 of them before this rule existed.
+CODE = (".py", ".ps1", ".sh", ".bat", ".cmd", ".gd", ".tscn", ".tres", ".gdshader", ".js", ".mjs", ".cjs", ".ts")
 SERVED_REPORT_DIRS = ("map_comparisons",)
 RES_ADA_RUN = re.compile(r"res://ada_run/([A-Za-z0-9_.\-]+)")
 BARE_ADA_RUN = re.compile(r"ada_run/([A-Za-z0-9_.\-]+)")
@@ -172,6 +179,9 @@ def plan(fresh_hours: float, include_tracked: bool):
             continue
         if name in enc:
             keep("the encyclopedia reads it", "%s  (%s)" % (name, enc[name]))
+            continue
+        if entry.is_file() and entry.suffix.lower() in CODE:
+            keep("a script, not evidence", name)
             continue
         if newest_mtime(entry) >= cutoff:
             keep("written in the last %g h" % fresh_hours, name)

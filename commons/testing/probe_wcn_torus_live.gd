@@ -33,6 +33,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "Noise_One"
 const OUT := "res://ada_run/waves_chance_noise/Noise_One/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/Noise_One") + "/"
 const MAP_CELL := Vector2i(5, 2)
 const SHADER_PATH := "res://commons/resourses/shaders/noiseTorus.gdshader"
 const SPOT := Vector3(5.5, 0.0, 1.35)   # the visitor's spot: before the bench's front
@@ -299,7 +302,7 @@ func run() -> void:
 		cam.look_at(seg.to_global(Vector3(5.5, 1.16, 2.45 + vest)))
 		for i in range(20): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_torus_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_torus_live.png")
 		measurements["captures"]["primary"] = _cam_pose(cam)
 		cam.fov = 62
 		for ring_name in ["Ring_relief", "Ring_colour"]:
@@ -311,7 +314,7 @@ func run() -> void:
 			cam.look_at(holder.global_position)
 			for i in range(14): cam.make_current(); await get_tree().process_frame
 			await get_tree().create_timer(0.25, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_torus_%s.png" % ring_name.to_lower().replace("ring_", ""))
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_torus_%s.png" % ring_name.to_lower().replace("ring_", ""))
 			measurements["captures"][ring_name] = _cam_pose(cam)
 		var rn: Node3D = pair_node.get_node_or_null("Readout") if pair_node != null else null
 		if rn != null:
@@ -319,13 +322,13 @@ func run() -> void:
 			cam.look_at(rn.global_position)
 			for i in range(14): cam.make_current(); await get_tree().process_frame
 			await get_tree().create_timer(0.25, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_torus_readout_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_torus_readout_live.png")
 			measurements["captures"]["readout"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(5.5, 11.0, 4.5 + vest))
 		cam.look_at(seg.to_global(Vector3(5.48, 0.0, 4.4 + vest)))
 		for i in range(14): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.25, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_torus_plan_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_torus_plan_live.png")
 		measurements["captures"]["plan"] = _cam_pose(cam)
 
 	if _live():
@@ -354,7 +357,7 @@ func run() -> void:
 			drv.call("aim_at", seg.to_global(Vector3(5.5, 1.2, 2.5 + vest)))
 			for i in range(8): await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_torus_desktop_front_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_torus_desktop_front_live.png")
 			measurements["desktop_input"]["front_pose"] = drv.call("pose")
 		drv.call("teardown")
 

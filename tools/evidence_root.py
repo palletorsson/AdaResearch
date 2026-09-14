@@ -46,8 +46,8 @@ def captures_root() -> Path | None:
     return (enc / "captures") if enc is not None else None
 
 
-def evidence_dir(*parts: str, kind: str = "ada-run") -> Path:
-    """A directory for evidence, created on demand.
+def evidence_dir(*parts: str, kind: str = "ada-run", create: bool = True) -> Path:
+    """A directory for evidence, created on demand (create=False for a reader that only looks).
 
     kind "ada-run" is what used to be ada_run/<parts>; "doc-reports" what used to be
     doc/reports/<parts>. With no encyclopedia on this machine it falls back to the old
@@ -60,7 +60,8 @@ def evidence_dir(*parts: str, kind: str = "ada-run") -> Path:
     else:
         base = root / kind
     d = base.joinpath(*parts) if parts else base
-    d.mkdir(parents=True, exist_ok=True)
+    if create:
+        d.mkdir(parents=True, exist_ok=True)
     return d
 
 

@@ -24,6 +24,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "WaveFunctions_Pendulum"
 const OUT := "res://ada_run/waves_chance_noise/WaveFunctions_Pendulum/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/WaveFunctions_Pendulum") + "/"
 const MAP_CELL := Vector2i(6, 11)
 
 func _ready() -> void: run.call_deferred()
@@ -389,7 +392,7 @@ func run() -> void:
 			print("[wcn-pendulum] capture: the rig's walk view, camera ", str(get_viewport().get_camera_3d().get_path()).right(40) if get_viewport().get_camera_3d() != null else "none")
 			for i in range(10): await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_pendulum_desktop_walk_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_pendulum_desktop_walk_live.png")
 			print("[wcn-pendulum] capture: saved")
 			measurements["desktop_input"]["walk_capture_pose"] = drv.call("pose")
 		# what stands between the rig and the south door on this walkway (meshes whose
@@ -421,7 +424,7 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(11.5, 1.7, 13.7 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 1.2, 12.0 + vest)))
 		for i in range(30): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_pendulum_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_pendulum_live.png")
 		measurements["captures"] = {"primary": _cam_pose(cam)}
 		# the cased readout from a visitor's standing distance on the east walkway
 		if readout != null:
@@ -430,7 +433,7 @@ func run() -> void:
 			cam.look_at(plate)
 			for i in range(20): cam.make_current(); await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_pendulum_readout_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_pendulum_readout_live.png")
 			measurements["captures"]["readout"] = _cam_pose(cam)
 			measurements["captures"]["readout_plate_world"] = [snappedf(plate.x, 0.01), snappedf(plate.y, 0.01), snappedf(plate.z, 0.01)]
 		# the controls from the walkway, a step from the post, with the bob and the near
@@ -440,7 +443,7 @@ func run() -> void:
 			cam.global_position = seg.to_global(Vector3(9.9, 1.55, 12.3 + vest)); cam.look_at((panel as Node3D).global_position + seg.global_transform.basis * Vector3(-0.6, 0.15, 0.3))
 			for i in range(20): cam.make_current(); await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_pendulum_controls_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_pendulum_controls_live.png")
 			measurements["captures"]["controls"] = _cam_pose(cam)
 	# the museum's own verdict on this body: not a severing seal
 	var severed: Array = em.get("_seg_severed") if em.get("_seg_severed") != null else []

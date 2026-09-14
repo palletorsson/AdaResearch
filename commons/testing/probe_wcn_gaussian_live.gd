@@ -29,6 +29,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "Random_Gaussian"
 const OUT := "res://ada_run/waves_chance_noise/Random_Gaussian/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/Random_Gaussian") + "/"
 const MAP_CELL := Vector2i(11, 19)
 const SPOT := Vector3(11.5, 0.0, 18.6)     # the visitor's spot, 0.7 m before the cabinet's face, facing south
 const EYE_H := 1.55
@@ -204,7 +207,7 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(SPOT.x, EYE_H, SPOT.z + vest)); cam.look_at(prim.to_global(Vector3(0.0, 1.1, 0.0)))
 		for i in range(20): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_live.png")
 		measurements["captures"] = {"primary": _cam_pose(cam)}
 
 	# ── 3. the rain: draws land at the cadence; counts sum to what landed ─────
@@ -277,7 +280,7 @@ func run() -> void:
 	if capture:
 		for i in range(6): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_uniform_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_uniform_live.png")
 		measurements["captures"]["uniform"] = _cam_pose(cam)
 	# EXPON: the tail that hits the display edge
 	check(_press(keypad, "Btn_3"), "EXPON pressed")
@@ -309,7 +312,7 @@ func run() -> void:
 	if capture:
 		for i in range(6): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_poisson_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_poisson_live.png")
 		measurements["captures"]["poisson"] = _cam_pose(cam)
 
 	# ── 5. CLEAR replays the seed; the stream does not; NEW SEED; BINS ────────
@@ -377,7 +380,7 @@ func run() -> void:
 		await get_tree().create_timer(1.5).timeout
 		for i in range(6): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_running_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_running_live.png")
 		measurements["captures"]["running"] = _cam_pose(cam)
 
 	# ── 6. the museum untouched; the walk; plinths; walks; reach ─────────────
@@ -497,7 +500,7 @@ func run() -> void:
 			drv.call("aim_at", prim.to_global(Vector3(0.0, 1.1, 0.0)))
 			for i in range(12): await get_tree().process_frame
 			await get_tree().create_timer(0.3, true, false, true).timeout
-			get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_desktop_front_live.png")
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_desktop_front_live.png")
 			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
 		drv.get("rig").global_position = seg.to_global(Vector3(7.5, 0.05, 12.0 + vest))
 		await get_tree().physics_frame
@@ -524,42 +527,42 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(SPOT.x, EYE_H, SPOT.z + vest)); cam.look_at(prim.to_global(Vector3(0.0, 1.1, 0.0)))
 		for i in range(20): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_live.png")
 		measurements["captures"]["primary"] = _cam_pose(cam)
 		cam.global_position = prim.to_global(Vector3(0.0, 1.35, 1.05)); cam.look_at(prim.to_global(Vector3(0.0, 1.12, 0.0)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_display_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_display_live.png")
 		measurements["captures"]["display"] = _cam_pose(cam)
 		cam.global_position = prim.to_global(Vector3(0.0, 1.15, 0.85)); cam.look_at(readout.global_position)
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_readout_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_readout_live.png")
 		measurements["captures"]["readout"] = _cam_pose(cam)
 		cam.global_position = prim.to_global(Vector3(0.0, 1.25, 0.95)); cam.look_at(prim.to_global(Vector3(0.0, 0.72, 0.2)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_keypad_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_keypad_live.png")
 		measurements["captures"]["keypad"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(6.5, 1.6, 0.3 + vest)); cam.look_at(seg.to_global(Vector3(6.5, 0.8, 10.0 + vest)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_north_door_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_north_door_live.png")
 		measurements["captures"]["north_door"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(6.5, 1.6, 21.2 + vest)); cam.look_at(seg.to_global(Vector3(7.5, 0.8, 12.0 + vest)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_south_door_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_south_door_live.png")
 		measurements["captures"]["south_door"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(7.0, 2.6, 12.5 + vest)); cam.look_at(seg.to_global(Vector3(8.0, 0.6, 19.0 + vest)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_arena_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_arena_live.png")
 		measurements["captures"]["arena"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(7.0, 16.0, 11.0 + vest)); cam.look_at(seg.to_global(Vector3(7.0, 0.0, 11.01 + vest)))
 		for i in range(15): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
-		get_viewport().get_texture().get_image().save_png(OUT + "probe_gaussian_plan_live.png")
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_plan_live.png")
 		measurements["captures"]["plan"] = _cam_pose(cam)
 		cam.queue_free()
 

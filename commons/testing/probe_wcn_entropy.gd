@@ -27,6 +27,9 @@ var failures: Array[String] = []
 var measurements: Dictionary = {}
 const MAP := "Random_Entropy"
 const OUT := "res://ada_run/waves_chance_noise/Random_Entropy/"
+## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
+## the JSON record stays in OUT, where it is committed.
+var _evidence: String = preload("res://commons/testing/evidence_root.gd").dir("waves_chance_noise/Random_Entropy") + "/"
 const MAP_CELL := Vector2i(5, 6)
 var _seg: Node3D
 var _lift: float = 0.0
@@ -202,7 +205,7 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(6.95, 1.55, 6.5 + vest)); cam.look_at(seg.to_global(Vector3(5.5, 1.15, 6.5 + vest)))
 		for i in range(20): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_entropy.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_entropy.png")
 		measurements["captures"] = {"primary": _cam_pose(cam)}
 
 	# ── 4. SORT through the panel's button signal ─────────────────────────────
@@ -231,7 +234,7 @@ func run() -> void:
 	if capture:
 		for i in range(6): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_entropy_sorted.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_entropy_sorted.png")
 		measurements["captures"]["sorted"] = _cam_pose(cam)
 	check(_press(panel, "Btn_0"), "SORT pressed again")
 	await create_timer(1.6).timeout
@@ -271,7 +274,7 @@ func run() -> void:
 	if capture:
 		for i in range(6): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_entropy_contrast.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_entropy_contrast.png")
 		measurements["captures"]["contrast"] = _cam_pose(cam)
 	check(_press(panel, "Btn_1"), "CONTRAST pressed again")
 	await process_frame
@@ -324,7 +327,7 @@ func run() -> void:
 		cam.global_position = meter.to_global(Vector3(0.0, LIFT + 0.05, 1.0)); cam.look_at(meter.to_global(Vector3(0.0, LIFT, 0.0)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_entropy_origin.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_entropy_origin.png")
 		measurements["captures"]["origin"] = _cam_pose(cam)
 	for k in range(3):
 		check(_press(panel, "Btn_2"), "DISCLOSE pressed (%d of 3 more)" % (k + 1))
@@ -389,7 +392,7 @@ func run() -> void:
 		cam.global_position = meter.to_global(Vector3(0.0, LIFT + 0.05, 1.0)); cam.look_at(meter.to_global(Vector3(0.0, LIFT, 0.0)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_entropy_origin_contrast.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_entropy_origin_contrast.png")
 		measurements["captures"]["origin_contrast"] = _cam_pose(cam)
 	check(_press(panel, "Btn_0"), "…SORT on at origin with the contrast")
 	await create_timer(1.6).timeout
@@ -499,7 +502,7 @@ func run() -> void:
 			drv.call("aim_at", meter.to_global(Vector3(0.0, 1.15, 0.2)))
 			for i in range(12): await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_entropy_desktop_front.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_entropy_desktop_front.png")
 			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
 		await drv.call("press", b0, stand)
 		await create_timer(1.6).timeout
@@ -554,42 +557,42 @@ func run() -> void:
 		cam.global_position = seg.to_global(Vector3(6.95, 1.55, 6.5 + vest)); cam.look_at(seg.to_global(Vector3(5.5, 1.15, 6.5 + vest)))
 		for i in range(20): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_entropy.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_entropy.png")
 		measurements["captures"]["primary"] = _cam_pose(cam)
 		var rc_node: Node3D = meter.get_node_or_null("Staging/ReadoutCase")
 		if rc_node != null:
 			cam.global_position = rc_node.global_position + meter.global_transform.basis * Vector3(0.0, 0.55, 0.62); cam.look_at(rc_node.global_position)
 			for i in range(15): cam.make_current(); await process_frame
 			await create_timer(0.3, true, false, true).timeout
-			root.get_texture().get_image().save_png(OUT + "probe_entropy_readout.png")
+			root.get_texture().get_image().save_png(_evidence + "probe_entropy_readout.png")
 			measurements["captures"]["readout"] = _cam_pose(cam)
 		cam.global_position = meter.to_global(Vector3(0.0, 1.35, 1.1)); cam.look_at(meter.to_global(Vector3(0.0, 0.95, 0.4)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_entropy_ribbon.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_entropy_ribbon.png")
 		measurements["captures"]["ribbon"] = _cam_pose(cam)
 		# standing approach: the corridor's west edge, 2.2 m from the panel, eye height
 		cam.global_position = seg.to_global(Vector3(7.7, 1.6, 6.9 + vest)); cam.look_at(seg.to_global(Vector3(5.5, 1.3, 6.5 + vest)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_entropy_approach.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_entropy_approach.png")
 		measurements["captures"]["approach"] = _cam_pose(cam)
 		# at the panel: leaning in, 0.75 m before it
 		cam.global_position = meter.to_global(Vector3(0.0, LIFT + 0.08, 0.75)); cam.look_at(meter.to_global(Vector3(0.0, LIFT, 0.0)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_entropy_panel_close.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_entropy_panel_close.png")
 		measurements["captures"]["panel_close"] = _cam_pose(cam)
 		# the buttons, from a standing eye a step to the right
 		cam.global_position = meter.to_global(Vector3(0.78, 1.55, 1.15)); cam.look_at(meter.to_global(Vector3(0.78, 0.74, 0.69)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_entropy_buttons.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_entropy_buttons.png")
 		measurements["captures"]["buttons"] = _cam_pose(cam)
 		cam.global_position = seg.to_global(Vector3(8.6, 2.0, 10.6 + vest)); cam.look_at(seg.to_global(Vector3(5.8, 1.1, 6.6 + vest)))
 		for i in range(15): cam.make_current(); await process_frame
 		await create_timer(0.3, true, false, true).timeout
-		root.get_texture().get_image().save_png(OUT + "probe_entropy_overview.png")
+		root.get_texture().get_image().save_png(_evidence + "probe_entropy_overview.png")
 		measurements["captures"]["overview"] = _cam_pose(cam)
 		cam.queue_free()
 
