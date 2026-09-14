@@ -2,6 +2,11 @@
 
 > Technical reference for system design and data flow
 
+> **2026-09-14: the game is now played as the endless museum**, and the grid system is a
+> part of it. This file still describes the grid-era runtime (teleporter → SceneManager →
+> GridSystem). For how the game actually starts, loads its first hall and runs each frame,
+> read [GAME_LOOP.md](GAME_LOOP.md).
+
 ## Overview
 
 AdaResearch is a VR/desktop educational platform built in Godot 4. The architecture centers on three pillars:
