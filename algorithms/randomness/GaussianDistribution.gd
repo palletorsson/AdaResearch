@@ -156,7 +156,6 @@ func _find_and_connect_grid() -> void:
 	
 	if grid_system:
 		set_grid_reference(grid_system)
-		print("GaussianDistributionAlgorithm: Connected to grid system")
 	else:
 		print("GaussianDistributionAlgorithm: WARNING - Could not find GridSystem!")
 
@@ -181,12 +180,10 @@ func start_algorithm() -> void:
 	setup_initial_state()
 	is_running = true
 	timer.start()
-	print("GaussianDistributionAlgorithm: Algorithm started")
 
 func stop_algorithm() -> void:
 	is_running = false
 	timer.stop()
-	print("GaussianDistributionAlgorithm: Algorithm stopped")
 
 func step_once():
 	if not grid_reference:
@@ -225,7 +222,6 @@ func setup_initial_state() -> void:
 	center_z = (region_min_z + region_max_z) / 2.0
 	total_raises = 0
 	
-	print("GaussianDistribution: Initialized with center at (%f, %f)" % [center_x, center_z])
 
 func execute_step() -> bool:
 	if total_raises >= max_raises:

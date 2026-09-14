@@ -39,7 +39,6 @@ func initialize_density_data() -> void:
 			x_layer.append(y_layer)
 		density_data.append(x_layer)
 	
-	print("VoxelChunk: Initialized %dx%dx%d density grid" % [chunk_size.x + 1, chunk_size.y + 1, chunk_size.z + 1])
 
 func set_density(local_pos: Vector3i, value: float) -> void:
 	"""Set density value at local voxel position"""

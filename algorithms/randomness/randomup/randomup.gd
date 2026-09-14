@@ -140,7 +140,6 @@ func _place_slope_cube(from: Vector3i, to: Vector3i) -> void:
 	add_child(slope_cube)
 	_register_cube(to, slope_cube)
 	_block_bridge_between(from, to)
-	print("Slope cube %s -> %s (rot: %.2f deg)" % [from, to, rad_to_deg(slope_cube.rotation.y)])
 
 
 func _register_cube(pos: Vector3i, node: Node3D) -> void:

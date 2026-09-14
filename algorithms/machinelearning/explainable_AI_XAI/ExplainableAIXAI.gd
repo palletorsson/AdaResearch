@@ -31,7 +31,6 @@ var _stats_label: Label3D = null
 
 func _ready() -> void:
 	# Initialize Explainable AI visualization
-	print("Explainable AI Visualization initialized")
 	create_input_particles()
 	create_explanation_particles()
 	create_flow_particles()

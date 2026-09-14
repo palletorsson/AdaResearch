@@ -138,7 +138,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if provenance == before_provenance:
 		return
 	_rebuild_now()
-	print("[LocatableKnowledgeStation] Config applied — provenance=%s" % [provenance])
 
 
 ## Accept an axis value only if it names something we actually build. Anything else is

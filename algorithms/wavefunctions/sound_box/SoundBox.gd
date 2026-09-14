@@ -15,7 +15,6 @@ func _ready() -> void:
 
 # Integration with the Map JSON system (e.g., soundboxes#collections:synthetic)
 func configure(data: Dictionary) -> void:
-	print("SoundBox: Configuring from Grid JSON: ", data)
 	
 	# Handle "collections" shorthand (matches user request)
 	if data.has("collections"):
@@ -144,7 +143,6 @@ func _on_button_triggered(sound_id: String) -> void:
 		_stop_all_sounds()
 		return
 		
-	print("SoundBox: Triggering ", sound_id)
 	if has_node("/root/SoundBank"):
 		var sound_bank = get_node("/root/SoundBank")
 		if sound_bank.has_method("get_sound"):

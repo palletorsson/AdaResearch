@@ -111,7 +111,6 @@ func setup_audio_synthesis() -> void:
 		audio_phase[i] = 0.0
 	
 	# Connect to audio generation callback
-	print("AdditiveSynthesis: Audio synthesis enabled - %d harmonics at %.1f Hz" % [harmonic_count, fundamental_freq])
 
 func create_harmonic_oscillators() -> void:
 	var osc_parent = $HarmonicOscillators
@@ -494,7 +493,6 @@ func apply_theme_profile(theme_name: String) -> void:
 	apply_theme_to_harmonics()
 	reset_audio_phases()
 	theme_timer = 0.0
-	print("AdditiveSynthesis: activated %s theme" % theme_name)
 
 func apply_theme_to_harmonics() -> void:
 	var amplitude_map: Dictionary = current_theme_profile.get("amplitude_map", {})

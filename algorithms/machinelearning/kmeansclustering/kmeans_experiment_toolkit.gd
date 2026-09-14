@@ -263,7 +263,6 @@ func _add_button(parent: Node3D, pos: Vector3, label_text: String, callback: Cal
 func _update_results(text: String) -> void:
 	if results_label:
 		results_label.text = text
-	print(text)
 
 func _draw_elbow_chart(k_values: Array, inertias: Array) -> void:
 	# Clear previous chart
@@ -625,7 +624,7 @@ func find_best_initialization_method(results: Dictionary) -> String:
 
 func connect_to_visualization() -> void:
 	if kmeans_visualization:
-		print("Connected to K-Means visualization")
+		pass
 	else:
 		print("No visualization connected - using simulation mode")
 

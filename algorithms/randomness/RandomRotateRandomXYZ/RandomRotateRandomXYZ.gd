@@ -147,14 +147,12 @@ func _ready() -> void:
 	if multimesh_instance:
 		multimesh = multimesh_instance.multimesh
 		if multimesh and multimesh.instance_count > 0:
-			print("✅ Found MultiMesh with %d instances" % multimesh.instance_count)
 			rotate_random_initial()
 
 			# Auto-detect center if bell center is zero (optional UX convenience)
 			if selection_mode == SelectionMode.CENTER_BELL and bell_center == Vector3.ZERO:
 				var aabb = multimesh.get_aabb()
 				bell_center = aabb.get_center()
-				print("Centered bell curve at: ", bell_center)
 
 			# The long exposure (bench only — 0 on every shipped path): the same
 			# step the live loop takes, run to completion so a still can show the
@@ -163,7 +161,6 @@ func _ready() -> void:
 				for _i in range(warmup_steps):
 					_step_once()
 				set_process(false)
-				print("Warmup applied: %d steps, visitation=%s" % [warmup_steps, visitation])
 		else:
 			push_warning("MultiMesh found but has no instances")
 	else:
@@ -200,7 +197,6 @@ func rotate_random_initial() -> void:
 		transform.basis = rotation_basis * transform.basis
 		multimesh.set_instance_transform(i, transform)
 
-	print("✅ Applied initial rotation to %d MultiMesh instances" % count)
 
 func _process(delta: float) -> void:
 	if not multimesh or multimesh.instance_count == 0:

@@ -37,7 +37,6 @@ func _ready() -> void:
 	# Create UI
 	create_info_label()
 
-	print("Example 4.2: Array of Particles - Auto-spawning particles")
 
 func _process(delta: float) -> void:
 	# Spawn particles

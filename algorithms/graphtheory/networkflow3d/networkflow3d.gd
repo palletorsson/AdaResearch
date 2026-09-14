@@ -245,7 +245,6 @@ func create_3d_network() -> void:
 	# Create edges with 3D considerations
 	create_3d_edges()
 	
-	print("Created 3D flow network: ", flow_nodes.size(), " nodes, ", flow_edges.size(), " edges")
 
 func generate_3d_node_position(node_id: int) -> Vector3:
 	"""Generate 3D position for a node"""
@@ -619,7 +618,6 @@ func calculate_max_flow() -> void:
 		_:
 			max_flow_value = run_edmonds_karp_3d()
 	
-	print("Maximum flow calculated: ", max_flow_value)
 	create_flow_particles()
 
 func run_edmonds_karp_3d() -> float:
@@ -857,7 +855,6 @@ func reset_network() -> void:
 	create_visualization()
 	calculate_max_flow()
 	
-	print("Network reset")
 
 func _exit_tree() -> void:
 	for child in get_children():
@@ -889,7 +886,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if bottleneck == before_bottleneck:
 		return
 	_rebuild_now()
-	print("[NetworkFlow3D] Config applied — bottleneck=%s" % [bottleneck])
 
 ## Accept an axis value only if it names something we actually build. A typo in a map
 ## token falls back to the shipped look rather than stranding the placement.

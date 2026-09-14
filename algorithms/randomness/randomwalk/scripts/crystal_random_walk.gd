@@ -118,14 +118,11 @@ func create_tetrahedron_mesh() -> void:
 	surface_array[Mesh.ARRAY_INDEX] = indices
 	surface_array[Mesh.ARRAY_NORMAL] = normals
 
-	print("Tetrahedron mesh - Vertices: ", verts.size(), " Indices: ", indices.size(), " Normals: ", normals.size())
 
 	var array_mesh = ArrayMesh.new()
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array)
 
 	tetrahedron_mesh = array_mesh
-	print("Tetrahedron mesh created with ", verts.size(), " vertices (", TETRA_FACES.size(), " faces)")
-	print("Tetrahedron size: ", tetrahedron_size)
 
 func generate_crystal() -> void:
 	"""Generate the crystal structure"""
@@ -136,10 +133,8 @@ func generate_crystal() -> void:
 	for child in get_children():
 		child.queue_free()
 	
-	print("Starting crystal generation with ", steps, " steps")
 	var start_transform = Transform3D.IDENTITY
 	_recursive_walk(start_transform, steps, branch_probability, 0, steps)
-	print("Recursive walk completed, creating multimesh with ", transforms.size(), " transforms")
 	
 	# If no transforms were created, add a test prism at origin
 	if transforms.is_empty():
@@ -169,9 +164,6 @@ func _recursive_walk(current_transform: Transform3D, remaining_steps: int,
 	var t = float(depth) / float(max_depth)
 	colors.append(color_start.lerp(color_end, t))
 
-	# Debug: Print first few transforms
-	if transforms.size() <= 5:
-		print("Transform ", transforms.size(), ": ", scaled_transform.origin, " Scale: ", scale_factor)
 
 	# Try to branch
 	if randf() < branch_chance and remaining_steps > 3:
@@ -282,12 +274,6 @@ func create_multimesh() -> void:
 	mmi.material_override = material
 
 	add_child(mmi)
-	print("Crystal generated with ", transforms.size(), " tetrahedra")
-	print("Tetrahedron mesh size: ", tetrahedron_mesh.get_faces().size() if tetrahedron_mesh else 0, " faces")
-	print("MultiMesh instance count: ", mm.instance_count)
-	print("MultiMesh use_colors: ", mm.use_colors)
-	print("Material emission: ", material.emission, " Energy: ", material.emission_energy_multiplier)
-	print("MultiMeshInstance3D added to scene")
 
 ## Public API
 func regenerate() -> void:
@@ -329,7 +315,6 @@ func _calculate_bounds() -> Dictionary:
 		max_pos.z = max(max_pos.z, transform.origin.z)
 	
 	var bounds = {"min": min_pos, "max": max_pos}
-	print("Crystal bounds - Min: ", min_pos, " Max: ", max_pos, " Size: ", max_pos - min_pos)
 	return bounds
 
 func _exit_tree() -> void:

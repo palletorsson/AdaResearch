@@ -39,7 +39,6 @@ var gradient_particles: Array = []
 var training_data_particles: Array = []
 
 func _ready() -> void:
-	print("[FineTuning_VR] Initializing transfer learning tower")
 	_initialize_layer_states()
 	_create_network_tower()
 	_create_lock_controls()

@@ -48,7 +48,6 @@ func _ready() -> void:
 	spawn_object_b(Vector3(0, 0.3, 0))
 	spawn_object_c(Vector3(0.2, 0.3, 0))
 
-	print("Example 6.8: Collision Layers - Selective collision demonstration")
 
 func _process(delta: float) -> void:
 	if auto_spawn:

@@ -6,8 +6,7 @@ extends Node3D
 
 func _ready() -> void:
 	# Just let the generator do its thing
-	if metaball_generator:
-		print("MetaballScene: Generator ready")
+	pass
 
 func apply_grid_config(config: Dictionary) -> void:
 	# THE AXES WERE UNREACHABLE FROM ANY MAP TOKEN UNTIL THIS FORWARDED, and

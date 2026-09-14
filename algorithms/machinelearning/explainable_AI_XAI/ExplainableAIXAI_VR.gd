@@ -61,7 +61,6 @@ var _prediction_holder: Node3D
 var _control_holder: Node3D
 
 func _ready() -> void:
-	print("[XAI_VR] Initializing explainable AI workspace")
 	_initialize_model_data()
 	_create_prediction_display()
 	_create_shap_zone()
@@ -616,7 +615,6 @@ func set_feature_importance(feature_idx: int, importance: float) -> void:
 
 func highlight_feature(feature_idx: int) -> void:
 	"""Highlight a specific feature"""
-	print("[XAI] Highlighting feature %d" % feature_idx)
 
 func _exit_tree() -> void:
 	for child in get_children():

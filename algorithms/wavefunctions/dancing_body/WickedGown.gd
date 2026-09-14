@@ -77,7 +77,6 @@ func _create_all_layers() -> void:
 	_layers.append(layer3)
 
 	_initialized = true
-	print("WickedGown: Created %d layers" % _layers.size())
 
 func _create_layer(r_top: float, r_bottom: float, length: float, pattern: String, color: Color, layer_idx: int) -> MeshInstance3D:
 	var surface_tool = SurfaceTool.new()

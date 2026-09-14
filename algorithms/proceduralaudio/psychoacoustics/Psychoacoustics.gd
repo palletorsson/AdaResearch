@@ -527,7 +527,6 @@ func apply_theme_profile(theme_name: String) -> void:
 	update_masking_parameters()
 	reset_audio_state()
 	theme_timer = 0.0
-	print("Psychoacoustics: activated %s theme" % theme_name)
 
 func update_theme_cycle(delta: float) -> void:
 	theme_timer += delta

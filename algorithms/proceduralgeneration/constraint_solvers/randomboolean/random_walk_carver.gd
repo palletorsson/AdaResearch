@@ -44,7 +44,6 @@ func generate_carved_cube() -> void:
 	if random_seed >= 0:
 		seed(random_seed)
 	
-	print("🔮 Starting random walk carving...")
 	
 	# Create base cube (as child of CSGCombiner3D)
 	_create_base_cube()
@@ -59,7 +58,6 @@ func generate_carved_cube() -> void:
 	if show_path_line:
 		_create_path_visualization()
 	
-	print("✅ Carving complete! ", path_points.size(), " points in path")
 
 ## Create the base solid cube (as child of CSGCombiner3D - this node)
 func _create_base_cube() -> void:
@@ -68,7 +66,6 @@ func _create_base_cube() -> void:
 	cube.size = cube_size
 	cube.material = _create_base_material()
 	add_child(cube)  # Add as child of CSGCombiner3D
-	print("📦 Created base cube: ", cube_size)
 
 ## Generate a random walk path that avoids crossing itself
 func _generate_random_walk() -> void:
@@ -115,7 +112,6 @@ func _generate_random_walk() -> void:
 				print("⚠️ Walk got stuck after ", step, " steps")
 				break
 	
-	print("🚶 Generated walk with ", path_points.size(), " points")
 
 ## Check if a move is valid (within bounds and not crossing)
 func _is_valid_move(pos: Vector3) -> bool:
@@ -136,7 +132,6 @@ func _is_valid_move(pos: Vector3) -> bool:
 func _carve_spheres_along_path() -> void:
 	var sphere_count = 0
 	
-	print("🔨 Carving ", path_points.size(), " spheres...")
 	
 	for i in range(path_points.size()):
 		var pos = path_points[i]
@@ -158,7 +153,6 @@ func _carve_spheres_along_path() -> void:
 		add_child(sphere)  # Add to CSGCombiner3D, not the cube!
 		sphere_count += 1
 	
-	print("✂️ Carved ", sphere_count, " spheres (CSGCombiner3D will combine them)")
 
 ## Create visual line showing the path
 func _create_path_visualization() -> void:
@@ -188,7 +182,6 @@ func _create_path_visualization() -> void:
 	line.material_override = mat
 	
 	add_child(line)
-	print("📏 Created path visualization")
 
 ## Create material for base cube
 func _create_base_material() -> StandardMaterial3D:

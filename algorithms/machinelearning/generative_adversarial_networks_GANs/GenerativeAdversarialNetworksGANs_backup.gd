@@ -10,7 +10,6 @@ var particle_count: int = 20
 
 func _ready() -> void:
 	# Initialize GAN visualization
-	print("Generative Adversarial Networks Visualization initialized")
 	create_noise_particles()
 	create_data_particles()
 	create_feedback_particles()

@@ -741,7 +741,6 @@ func _process(delta: float) -> void:
 
 func evolve_population() -> void:
 	generation += 1
-	print("\n=== Generation ", generation, " ===")
 	
 	# Calculate fitness
 	calculate_fitness()
@@ -876,7 +875,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if selection == before_selection:
 		return
 	_rebuild_now()
-	print("[EvolvingFlowers] Config applied — selection=%s" % [selection])
 
 
 ## Accept an axis value only if it names a population this artifact actually plants.

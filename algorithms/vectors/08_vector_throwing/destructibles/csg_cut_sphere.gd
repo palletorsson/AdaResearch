@@ -163,8 +163,6 @@ func _on_piece_hit(body: Node, piece: RigidBody3D) -> void:
 	elif data.split_level < max_split_levels:
 		# Cut this piece using CSG
 		await _cut_piece_with_csg(piece, data, impact_point, impact_velocity)
-	else:
-		print("[CSGCutSphere] Max split level reached")
 
 func _cut_piece_with_csg(piece: RigidBody3D, data: CSGPieceData, impact_point: Vector3, impact_velocity: Vector3) -> void:
 	"""Cut a piece in half using CSG operations"""
@@ -324,7 +322,6 @@ func _shatter_all_pieces(impact_velocity: Vector3, impact_point: Vector3) -> voi
 	await get_tree().create_timer(4.0).timeout
 	queue_free()
 
-	print("[CSGCutSphere] All pieces shattered!")
 
 func get_pieces_count() -> int:
 	return pieces.size()

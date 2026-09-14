@@ -118,7 +118,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[PeerEditLedger] Config applied — authorship=%s" % [authorship])
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a map

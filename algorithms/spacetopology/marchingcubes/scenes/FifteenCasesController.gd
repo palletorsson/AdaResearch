@@ -235,7 +235,6 @@ var _owned: Array[Node] = []
 var _built: bool = false
 
 func _ready() -> void:
-	print("🔮 Marching Cubes: Demonstrating 15 unique surface cases...")
 
 	_read_metadata_overrides()
 
@@ -489,7 +488,6 @@ func create_case_mesh_instance(mesh: ArrayMesh, cell_pos: Vector3, case_data: Di
 
 		mesh_instance.set_surface_override_material(0, material)
 
-		print("Case %d (%s): Generated mesh with %d surfaces" % [case_index, case_data.name, mesh.get_surface_count()])
 	else:
 		# No mesh generated - show indicator
 		var sphere_mesh = SphereMesh.new()
@@ -723,12 +721,10 @@ func _input(event: InputEvent) -> void:
 			KEY_W:
 				# Was "toggle wireframes" — now the axis that toggle became.
 				workings = String(WORKINGS[(_workings_index() + 1) % WORKINGS.size()])
-				print("Workings: %s" % workings)
 				if _built:
 					_rebuild()
 			KEY_M:
 				margin = String(MARGINS[(_margin_index() + 1) % MARGINS.size()])
-				print("Margin: %s" % margin)
 				if _built:
 					_rebuild()
 			KEY_L:
@@ -739,7 +735,6 @@ func _input(event: InputEvent) -> void:
 						label.visible = not label.visible
 			KEY_A:
 				animate_threshold = !animate_threshold
-				print("Animation: %s" % animate_threshold)
 			KEY_R:
 				# Regenerate cases. Frees ONLY what this script built — the old body
 				# freed every child of the root, which included the CameraController
@@ -783,25 +778,9 @@ func zoom_camera(delta: float) -> void:
 	var base_distance = current_zoom
 
 	camera_controller.position = Vector3(0, base_height, base_distance)
-	print("Camera zoom: %.1f (distance: %.1f)" % [current_zoom, base_distance])
 
 func _enter_tree() -> void:
-	print("""
-🔮 Marching Cubes 15 Cases Demo
-=============================
-Controls:
-- W: Cycle workings (expression / outcome / operands / trace)
-- M: Cycle margin (even / starved / swollen / brimming)
-- L: Show/hide labels
-- A: Toggle animation
-- R: Regenerate
-- Mouse Wheel: Zoom in/out
-- +/-: Zoom in/out (keyboard)
-
-This demonstrates the 15 fundamental surface cases that can occur
-in the Marching Cubes algorithm. Each case represents a unique
-surface topology configuration.
-""")
+	pass
 
 func _exit_tree() -> void:
 	# ONLY what this script built. The old body freed every child without an owner,

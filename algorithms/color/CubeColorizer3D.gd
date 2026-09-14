@@ -42,17 +42,14 @@ var colors = {
 }
 
 func _ready() -> void:
-	print("CubeColorizer3D: Ready to colorize cubes!")
 	# Small delay to ensure scene is fully loaded
 	await get_tree().create_timer(0.5).timeout
 	colorize_all_cubes()
 
 func colorize_all_cubes() -> void:
-	print("CubeColorizer3D: Starting cube colorization...")
 	
 	# Find all MeshInstance3D nodes with "cube" in their name
 	var cube_meshes = find_all_cube_meshes()
-	print("CubeColorizer3D: Found %d cube meshes" % cube_meshes.size())
 	
 	if cube_meshes.is_empty():
 		print("CubeColorizer3D: No cube meshes found!")
@@ -64,7 +61,6 @@ func colorize_all_cubes() -> void:
 	# Apply the rose vase color pattern
 	apply_pattern_to_cubes(sorted_cubes)
 	
-	print("CubeColorizer3D: Cube colorization complete! 🎨")
 
 func find_all_cube_meshes() -> Array[MeshInstance3D]:
 	var cube_meshes: Array[MeshInstance3D] = []
@@ -79,14 +75,12 @@ func find_cube_meshes_recursive(node: Node, cube_list: Array[MeshInstance3D]) ->
 	# Check if this node is a MeshInstance3D with "cube" in its name
 	if node is MeshInstance3D and "cube" in node.name.to_lower():
 		cube_list.append(node as MeshInstance3D)
-		print("CubeColorizer3D: Found cube mesh: %s at position %s" % [node.name, node.global_position])
 	
 	# Check all children
 	for child in node.get_children():
 		find_cube_meshes_recursive(child, cube_list)
 
 func sort_cubes_by_3d_position(cubes: Array[MeshInstance3D]) -> Array[MeshInstance3D]:
-	print("CubeColorizer3D: Sorting %d cubes by 3D position..." % cubes.size())
 	
 	# Sort by Z position first (depth/rows), then by X position (width/columns)
 	cubes.sort_custom(func(a: MeshInstance3D, b: MeshInstance3D):
@@ -107,16 +101,12 @@ func sort_cubes_by_3d_position(cubes: Array[MeshInstance3D]) -> Array[MeshInstan
 		return x_a < x_b
 	)
 	
-	# Debug: print sorted positions
-	print("CubeColorizer3D: Sorted cube positions:")
 	for i in range(min(10, cubes.size())):  # Print first 10 for debug
 		var pos = cubes[i].global_position
-		print("  Cube %d: %s at (%.1f, %.1f, %.1f)" % [i, cubes[i].name, pos.x, pos.y, pos.z])
 	
 	return cubes
 
 func apply_pattern_to_cubes(cubes: Array[MeshInstance3D]) -> void:
-	print("CubeColorizer3D: Applying rose vase pattern to %d cubes..." % cubes.size())
 	
 	var cube_index = 0
 	var colored_count = 0
@@ -156,33 +146,27 @@ func apply_color_to_mesh(mesh_instance: MeshInstance3D, color: Color, color_name
 	# Apply the material
 	mesh_instance.material_override = material
 	
-	print("CubeColorizer3D: Applied %s color to %s" % [color_name, mesh_instance.name])
 
 # Utility functions for manual control
 
 func reset_all_cube_colors() -> void:
 	"""Reset all cube colors to default"""
-	print("CubeColorizer3D: Resetting all cube colors...")
 	var cubes = find_all_cube_meshes()
 	
 	for cube in cubes:
 		cube.material_override = null
 	
-	print("CubeColorizer3D: Reset %d cubes" % cubes.size())
 
 func test_all_red() -> void:
 	"""Make all cubes red for testing"""
-	print("CubeColorizer3D: Making all cubes red...")
 	var cubes = find_all_cube_meshes()
 	
 	for cube in cubes:
 		apply_color_to_mesh(cube, Color.RED, "red")
 	
-	print("CubeColorizer3D: Made %d cubes red" % cubes.size())
 
 func test_rainbow() -> void:
 	"""Apply rainbow colors for testing"""
-	print("CubeColorizer3D: Applying rainbow colors...")
 	var cubes = find_all_cube_meshes()
 	var rainbow_colors = [Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, Color.PURPLE]
 	
@@ -190,7 +174,6 @@ func test_rainbow() -> void:
 		var color = rainbow_colors[i % rainbow_colors.size()]
 		apply_color_to_mesh(cubes[i], color, "rainbow_%d" % (i % rainbow_colors.size()))
 	
-	print("CubeColorizer3D: Applied rainbow to %d cubes" % cubes.size())
 
 func reapply_pattern() -> void:
 	"""Reapply the rose vase pattern"""

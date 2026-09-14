@@ -15,7 +15,6 @@ func _ready() -> void:
 	# Connect to their signals
 	connect_next_cube_signals()
 	
-	print("NextCubeExample: Ready with %d next cubes detected" % next_cubes.size())
 
 func find_next_cubes() -> void:
 	"""Find all NextCube instances in the scene"""
@@ -26,7 +25,6 @@ func find_next_cubes_recursive(node: Node) -> void:
 	"""Recursively find NextCube nodes"""
 	if node is NextCube:
 		next_cubes.append(node as NextCube)
-		print("Found NextCube at: %s" % node.global_position)
 	
 	for child in node.get_children():
 		find_next_cubes_recursive(child)
@@ -36,11 +34,9 @@ func connect_next_cube_signals() -> void:
 	for next_cube in next_cubes:
 		if not next_cube.next_requested.is_connected(_on_next_requested):
 			next_cube.next_requested.connect(_on_next_requested)
-			print("Connected to NextCube at %s" % next_cube.global_position)
 
 func _on_next_requested(from_position: Vector3) -> void:
 	"""Handle next pattern request from any next cube"""
-	print("🎨 Next pattern requested from position: %s" % from_position)
 	
 	# If grid colorizer exists, advance to next pattern
 	if grid_colorizer and grid_colorizer.has_method("advance_to_next_pattern"):
@@ -60,7 +56,6 @@ func _on_next_cube_activated() -> void:
 			
 			if grid_colorizer.has_method("set_pattern_by_index"):
 				grid_colorizer.set_pattern_by_index(next_index)
-				print("🎨 Advanced to pattern %d/%d" % [next_index + 1, pattern_count])
 
 # Example usage in a map JSON:
 # "utilities": [

@@ -689,7 +689,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[GraphSpace] Config applied — siting=%s" % [siting])
 
 ## Accept an axis value only if it names something we actually build. A typo in a
 ## map token falls back to the shipped look rather than leaving a placement with

@@ -133,7 +133,6 @@ func generate_next_iteration() -> void:
 		apply_koch_transformation()
 		update_vr_optimized_visual()
 	
-	print("🔺 Koch iteration: %d, segments: %d" % [current_iteration, total_segments])
 
 func apply_koch_transformation() -> void:
 	"""Applies the Koch curve transformation rule to each segment."""
@@ -344,7 +343,6 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("ui_select"):  # Enter key
 		var info = get_fractal_info()
-		print("📊 Fractal Info: ", info)
 
 func _exit_tree() -> void:
 	for child in get_children():

@@ -1,12 +1,9 @@
 extends Node3D
 
 func _ready() -> void:
-	print("=== SIMPLE GYROID TEST ===")
-	print("Setting up basic gyroid visualization...")
 
 	var gyroid_box := $GyroidBox
 	if gyroid_box:
-		print("✓ Found GyroidBox mesh")
 
 		# Create a simple shader that just shows a solid color first
 		var shader := Shader.new()
@@ -27,7 +24,6 @@ void fragment() {
 		material.set_shader_parameter("test_color", Vector3(0.3, 0.7, 1.0))
 
 		gyroid_box.material_override = material
-		print("✓ Applied test shader")
 	else:
 		print("✗ GyroidBox not found!")
 

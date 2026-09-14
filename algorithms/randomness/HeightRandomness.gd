@@ -83,7 +83,6 @@ func _find_and_connect_grid() -> void:
 	
 	if grid_system:
 		set_grid_reference(grid_system)
-		print("HeightRandomnessAlgorithm: Connected to grid system")
 	else:
 		print("HeightRandomnessAlgorithm: WARNING - Could not find GridSystem!")
 
@@ -137,18 +136,15 @@ func start_algorithm() -> void:
 	setup_initial_state()
 	is_running = true
 	timer.start()
-	print("HeightRandomnessAlgorithm: Algorithm started")
 
 func stop_algorithm() -> void:
 	is_running = false
 	timer.stop()
 	loop_timer.stop()  # Also stop the loop timer
-	print("HeightRandomnessAlgorithm: Algorithm stopped")
 
 func set_auto_loop(enabled: bool) -> void:
 	"""Enable or disable automatic looping"""
 	auto_loop = enabled
-	print("HeightRandomnessAlgorithm: Auto-loop %s" % ("enabled" if enabled else "disabled"))
 
 func step_once():
 	if not grid_reference:
@@ -163,7 +159,6 @@ func step_once():
 		
 		# Start loop timer if auto_loop is enabled
 		if auto_loop:
-			print("HeightRandomnessAlgorithm: Algorithm finished, restarting in %.1f seconds..." % loop_delay)
 			loop_timer.start()
 	
 	return result
@@ -187,7 +182,6 @@ func reset_algorithm() -> void:
 	if not structure_component:
 		return
 	
-	print("HeightRandomnessAlgorithm: Resetting cubes to base level...")
 
 	var mm = structure_component.multimesh
 	if not mm:
@@ -209,7 +203,6 @@ func reset_algorithm() -> void:
 	cube_heights.clear()
 	_position_cache.clear()
 	
-	print("HeightRandomnessAlgorithm: Reset complete - ready to restart")
 
 func setup_initial_state() -> void:
 	# Ensure there are base cubes in the 8x8 region
@@ -227,7 +220,6 @@ func setup_initial_state() -> void:
 				_place_cube_at(x, target_y_level, z)
 	
 	total_raises = 0
-	print("HeightRandomness: Initialized 8x8 region with base cubes")
 
 func execute_step() -> bool:
 	if total_raises >= max_raises:
@@ -294,7 +286,6 @@ func _raise_cube(x: int, z: int) -> void:
 		audio_player.pitch_scale = 0.8 + (current_height / max_height) * 0.4  # Higher pitch for higher cubes
 		audio_player.play()
 
-	print("HeightRandomness: Raised cube at (%d, %d) to height %.2f" % [x, z, cube_heights[cube_key]])
 
 func _try_raise_different_cube() -> void:
 	"""Try to find a different cube that hasn't reached max height"""
@@ -315,7 +306,6 @@ func _try_raise_different_cube() -> void:
 	
 	# If no suitable cube found, reduce max height slightly
 	max_height = max(min_height + 1.0, max_height - 0.5)
-	print("HeightRandomness: Reduced max height to %.2f" % max_height)
 
 func _add_visual_effect(position: Vector3) -> void:
 	"""Add a visual effect at the cube position"""

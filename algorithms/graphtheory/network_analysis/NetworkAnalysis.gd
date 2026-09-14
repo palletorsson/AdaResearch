@@ -94,7 +94,6 @@ var network_edges: Array = []
 var communities: Array = []
 
 func _ready() -> void:
-	print("Network Analysis Visualization initialized")
 	_open_rng()
 	setup_scene()
 	create_network_nodes()

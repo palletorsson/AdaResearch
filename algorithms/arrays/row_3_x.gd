@@ -96,8 +96,6 @@ func _create_binary_table() -> void:
 
 func _on_cube_removed(index: int) -> void:
 	# Called when a cube is picked up or removed from the row
-	if debug:
-		print("Row3X: Cube removed at index [%d]" % index)
 
 	# Update array data
 	if array_data.size() > 0 and index >= 0 and index < array_data[0].size():

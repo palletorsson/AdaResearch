@@ -36,10 +36,8 @@ var gyroid_mesh: MeshInstance3D
 var collision_body: StaticBody3D
 
 func _ready() -> void:
-	print("=== GYROID CHEESE VR (Marching Cubes) ===")
 	_setup_generator()
 	_generate_gyroid()
-	print("=== INITIALIZATION COMPLETE ===")
 
 func _setup_generator() -> void:
 	"""Initialize the gyroid field generator"""
@@ -53,8 +51,6 @@ func _setup_generator() -> void:
 	gyroid_generator.box_size = box_size
 	gyroid_generator.voxel_resolution = voxel_resolution
 
-	print("✓ Gyroid generator configured")
-	print("  Frequency: %.2f, Resolution: %s" % [frequency, voxel_resolution])
 
 func _generate_gyroid() -> void:
 	"""Generate the gyroid mesh and collision"""
@@ -88,11 +84,9 @@ func _apply_material() -> void:
 		material.set_shader_parameter("metallic", metallic)
 		material.set_shader_parameter("roughness", roughness)
 
-	print("✓ Shader parameters applied")
 
 func _regenerate() -> void:
 	"""Regenerate mesh with current parameters"""
-	print("Regenerating gyroid mesh...")
 
 	# Update generator parameters
 	gyroid_generator.frequency = frequency
@@ -112,7 +106,6 @@ func _regenerate() -> void:
 	# Apply material
 	_apply_material()
 
-	print("✓ Regeneration complete")
 
 # ---------------- Public API ----------------
 func set_box_size(new_size: Vector3) -> void:

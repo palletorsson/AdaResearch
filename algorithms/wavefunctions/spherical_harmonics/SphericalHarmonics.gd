@@ -136,7 +136,6 @@ func _ready() -> void:
 	_create_trail()
 	_setup_audio()
 	_setup_controls()
-	print("SphericalHarmonics: Ready - Mario Mode Activated! (Optimized)")
 
 func _apply_mode() -> void:
 	if not MODES.has(mode):
@@ -371,7 +370,6 @@ func _create_trail() -> void:
 		mm.set_instance_color(i, Color(1, 0.7, 0.2, 0.8 * (1.0 - age)))
 	
 	add_child(trail_multimesh)
-	print("SphericalHarmonics: Trail using MultiMesh (1 node instead of 128)")
 
 func _setup_audio() -> void:
 	audio_stream = AudioStreamGenerator.new()
@@ -387,7 +385,6 @@ func _setup_audio() -> void:
 	# Get playback immediately
 	playback = audio_player.get_stream_playback()
 
-	print("SphericalHarmonics: Audio synthesis enabled (Mario Mode)")
 
 func _setup_controls() -> void:
 	# TODO: Connect to interactables if available
@@ -529,7 +526,6 @@ func set_position_spherical(new_theta: float, new_phi: float) -> void:
 
 func toggle_auto_orbit() -> void:
 	auto_orbit = !auto_orbit
-	print("SphericalHarmonics: Auto-orbit %s" % ("ON" if auto_orbit else "OFF"))
 
 func _exit_tree() -> void:
 	for child in get_children():

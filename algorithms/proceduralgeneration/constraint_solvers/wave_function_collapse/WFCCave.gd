@@ -365,7 +365,6 @@ func setup_cave_tiles() -> void:
 		
 		cave_tiles.append(tile)
 	
-	print("Created ", cave_tiles.size(), " cave tile types")
 
 func initialize_cave_grid() -> void:
 	cave_grid.clear()
@@ -419,7 +418,6 @@ func initialize_cave_grid() -> void:
 				add_child(mesh_instance)
 				mesh_instances.append(mesh_instance)
 	
-	print("Initialized cave grid: ", cave_size, " = ", cave_grid.size(), " cells")
 
 func start_generation() -> void:
 	is_generating = true
@@ -438,7 +436,6 @@ func cave_wfc_step():
 	
 	if uncollapsed_cells.is_empty():
 		is_generating = false
-		print("Cave generation complete!")
 		_post_process_cave()
 		return
 	
@@ -579,7 +576,6 @@ func _propagate_cave_constraints(changed_cell: CaveCell) -> void:
 
 func _post_process_cave() -> void:
 	# Add additional cave features after main generation
-	print("Post-processing cave...")
 	
 	# Add lighting
 	_add_cave_lighting()

@@ -189,10 +189,6 @@ func _check_and_spawn() -> void:
 			_ground_spawned_count += 1
 			ground_birth.emit(entity, kingdom, pos)
 
-			if debug:
-				print("[GroundSpawner] Sprouted %s at %s (presence=%.2f)" % [
-					dna.get_kingdom_name(), str(pos), strength
-				])
 
 
 # ═══════════════════════════════════════════════════════════════

@@ -40,7 +40,6 @@ func _process(delta: float) -> void:
 
 		if construction_step > 10:
 			is_constructing = false
-			print("Chair construction complete!")
 
 
 func _build_complete_chair() -> void:
@@ -158,8 +157,6 @@ func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String) 
 	add_child(mesh_instance)
 	chair_parts.append(mesh_instance)
 
-	if show_construction:
-		print("Built: %s at %s with size %s" % [part_name, pos, size])
 
 
 func reset() -> void:

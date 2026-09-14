@@ -32,7 +32,6 @@ func _ready() -> void:
 	# Create a single falling box
 	create_box(Vector3(0, 0.3, 0))
 
-	print("Example 6.1: Basic RigidBody - Single falling box with gravity")
 
 func create_info_label() -> void:
 	"""Create info label"""
@@ -99,7 +98,6 @@ func create_box(position: Vector3, size: Vector3 = Vector3(0.1, 0.1, 0.1)):
 
 func _on_box_collision(body: Node, box: VRRigidBody) -> void:
 	"""Handle box collision"""
-	print("Box collided with: %s" % body.name)
 
 func spawn_box() -> void:
 	"""Spawn a new box at random position"""

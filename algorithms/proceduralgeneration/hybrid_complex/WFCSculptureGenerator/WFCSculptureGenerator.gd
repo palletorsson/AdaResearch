@@ -528,11 +528,9 @@ func run_sculpture_wfc() -> void:
 		
 		# Progress feedback
 		if iterations % 1000 == 0:
-			print("Sculpture generation progress: ", iterations, "/", max_iterations)
 			# Yield control back to the main thread every 1000 iterations
 			await get_tree().process_frame
 	
-	print("Sculpture WFC completed in ", iterations, " iterations")
 
 func find_sculpture_entropy_cell() -> SculptureCell:
 	var min_entropy = INF

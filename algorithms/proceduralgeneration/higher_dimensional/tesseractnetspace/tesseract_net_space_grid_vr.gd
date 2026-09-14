@@ -83,7 +83,6 @@ func setup_configurations() -> void:
 		})
 
 func generate_grid() -> void:
-	print("Generating tesseract net space grid...")
 	
 	# Clear existing
 	for net in net_instances:
@@ -117,7 +116,6 @@ func generate_grid() -> void:
 			
 			config_index += 1
 	
-	print("Generated %d tesseract net space instances" % net_instances.size())
 
 func create_net_space(config: Dictionary, position: Vector3) -> Node3D:
 	"""Create a single tesseract net space instance"""
@@ -162,15 +160,12 @@ func _input(event: InputEvent) -> void:
 	"""Handle input"""
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_R:
-			print("Regenerating grid...")
 			generate_grid()
 		elif event.keycode == KEY_EQUAL or event.keycode == KEY_KP_ADD:
 			spacing_between += 2.0
-			print("Spacing: %.1f" % spacing_between)
 			generate_grid()
 		elif event.keycode == KEY_MINUS or event.keycode == KEY_KP_SUBTRACT:
 			spacing_between = max(8.0, spacing_between - 2.0)
-			print("Spacing: %.1f" % spacing_between)
 			generate_grid()
 
 func _exit_tree() -> void:

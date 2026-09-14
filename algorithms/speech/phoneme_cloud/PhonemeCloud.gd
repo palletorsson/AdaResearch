@@ -48,7 +48,6 @@ func _process(_delta):
 
 func _initialize_players() -> void:
 	# Generate streams first
-	print("PhonemeCloud: Synthesizing phonemes...")
 	
 	for key in phonemes.keys():
 		var node_name: String = key.to_upper()

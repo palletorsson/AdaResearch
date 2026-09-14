@@ -50,7 +50,6 @@ func _set_particle_count(v: int) -> void:
 	create_feedback_particles()
 
 func _ready() -> void:
-	print("Generative Adversarial Networks Visualization initialized")
 	create_noise_particles()
 	create_data_particles()
 	create_feedback_particles()

@@ -162,14 +162,12 @@ func setup_noise_generators() -> void:
 	noise_cave_detail.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	noise_cave_detail.frequency = cave_noise_frequency * 4.0
 	
-	print("LandscapeCaveGenerator: Noise generators initialized")
 
 func setup_marching_cubes_tables() -> void:
 	"""Initialize marching cubes lookup tables"""
 	# Use the proper lookup tables class
 	edge_table = MarchingCubesLookupTables.get_edge_table()
 	triangle_table = MarchingCubesLookupTables.get_triangle_table()
-	print("LandscapeCaveGenerator: Marching cubes tables initialized")
 
 # === MAIN GENERATION FUNCTIONS ===
 func _process(_delta):
@@ -183,7 +181,6 @@ func generate_world() -> void:
 		return
 		
 	is_generating = true
-	print("LandscapeCaveGenerator: Starting world generation...")
 	
 	if fixed_map_size:
 		await generate_fixed_world()
@@ -191,7 +188,6 @@ func generate_world() -> void:
 		await generate_infinite_world()
 	
 	is_generating = false
-	print("LandscapeCaveGenerator: World generation complete!")
 
 func generate_fixed_world() -> void:
 	"""Generate a fixed-size world with chunks"""
@@ -228,7 +224,6 @@ func init_chunks() -> void:
 				chunk.set_up(get_material_for_chunk(coord), generate_colliders)
 				chunks.append(chunk)
 	
-	print("LandscapeCaveGenerator: Created %d chunks" % chunks.size())
 
 func init_visible_chunks() -> void:
 	"""Initialize chunks around viewer for infinite world"""
@@ -577,7 +572,6 @@ func create_mesh_from_triangles(chunk: TerrainChunk, triangles: Array[Triangle])
 	if material:
 		chunk.mesh_instance.set_surface_override_material(0, material)
 	
-	print("LandscapeCaveGenerator: Created mesh with %d triangles for chunk %s" % [triangles.size(), chunk.coord])
 
 func create_collision_for_chunk(chunk: TerrainChunk) -> void:
 	"""Create collision shape for chunk"""

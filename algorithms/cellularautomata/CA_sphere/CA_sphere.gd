@@ -108,7 +108,6 @@ func generate_initial_sphere() -> void:
 	indices = arrays[Mesh.ARRAY_INDEX]
 	original_positions = vertices.duplicate()
 	
-	print("Generated sphere with ", vertices.size(), " vertices")
 	update_mesh()
 
 func build_neighbor_topology() -> void:
@@ -274,13 +273,11 @@ func start_evolution() -> void:
 		evolution_timer.start()
 		
 		var mode_names = ["Cellular Automata", "Random Walk", "Hill Seeking"]
-		print("Starting evolution: ", mode_names[evolution_mode])
 
 func stop_evolution() -> void:
 	if is_evolving:
 		is_evolving = false
 		evolution_timer.stop()
-		print("Evolution stopped at iteration: ", current_iteration)
 
 func reset_sphere() -> void:
 	vertices = original_positions.duplicate()
@@ -288,7 +285,6 @@ func reset_sphere() -> void:
 	initialize_algorithms()
 	update_mesh()
 	sphere_material.albedo_color = Color(0.2, 0.6, 0.8, 1.0)
-	print("Sphere reset")
 
 func single_evolution_step() -> void:
 	if current_iteration < max_iterations:
@@ -308,11 +304,9 @@ func single_evolution_step() -> void:
 		var target_color = colors[evolution_mode]
 		sphere_material.albedo_color = Color.WHITE.lerp(target_color, progress * 0.7)
 		
-		print("Step: ", current_iteration, "/", max_iterations)
 		
 		if current_iteration >= max_iterations:
 			stop_evolution()
-			print("Evolution complete!")
 
 func _on_evolution_step() -> void:
 	single_evolution_step()
@@ -321,7 +315,6 @@ func set_evolution_mode(mode: int) -> void:
 	evolution_mode = mode
 	reset_sphere()
 	var mode_names = ["Cellular Automata", "Random Walk", "Hill Seeking"]
-	print("Switched to: ", mode_names[evolution_mode])
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):

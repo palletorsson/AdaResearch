@@ -300,7 +300,6 @@ func _input(event: InputEvent) -> void:
 			var tween = create_tween()
 			tween.tween_property(_stats_label, "modulate", Color(0.9, 0.3, 0.3, 1), 0.15)
 			tween.tween_property(_stats_label, "modulate", Color(1.0, 0.85, 0.2, 1), 0.3)
-		print("Randomness burst! Temperature: ", temperature)
 	
 	if event.is_action_pressed("ui_cancel"):  # Escape — full reset
 		walker_agents.clear()
@@ -308,7 +307,6 @@ func _input(event: InputEvent) -> void:
 		_best_fitness = 0.0
 		_avg_fitness = 0.0
 		create_walker_agents()
-		print("Experiment reset!")
 
 # ── Experiment Methods ────────────────────────────────────────────────────────
 

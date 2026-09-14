@@ -694,7 +694,6 @@ func apply_grid_config(config: Dictionary) -> void:
 	if impression == before:
 		return
 	_reimpress()
-	print("[TenPrintMaze] Config applied — impression=%s" % [impression])
 
 
 ## Redraw the SAME bits in a different hand. The maze array is not regenerated and no

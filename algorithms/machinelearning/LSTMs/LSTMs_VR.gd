@@ -52,7 +52,6 @@ var input_gate_body: RigidBody3D
 var output_gate_body: RigidBody3D
 
 func _ready() -> void:
-	print("[LSTMs_VR] Initializing room-scale LSTM visualization")
 	_build_lstm_cell()
 	_create_input_zone()
 	_create_output_zone()

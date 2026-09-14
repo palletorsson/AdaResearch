@@ -219,7 +219,6 @@ func _reset_fields_from_image(image_path: String) -> void:
 # RESET FUNCTION (EVERY reset_interval SECONDS)
 # ==============================
 func _on_Reset_Timer() -> void:
-	print("🔄 Resetting Reaction–Diffusion...")
 	_reset_fields()
 
 func _exit_tree() -> void:

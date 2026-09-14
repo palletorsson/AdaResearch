@@ -114,11 +114,9 @@ func _ensure_audio_initialized() -> void:
 	smoothed_bands.resize(spectrum_bands)
 	smoothed_bands.fill(0.0)
 	audio_initialized = true
-	print("Ruth Asawa: Audio initialized, spectrum_instance = ", spectrum_instance != null)
 
 func _setup_audio_analysis() -> void:
 	var master_bus_index = AudioServer.get_bus_index("Master")
-	print("Ruth Asawa: Setting up audio on Master bus (index ", master_bus_index, ")")
 
 	# Check if spectrum analyzer already exists
 	var effect_count = AudioServer.get_bus_effect_count(master_bus_index)
@@ -126,7 +124,6 @@ func _setup_audio_analysis() -> void:
 		var effect = AudioServer.get_bus_effect(master_bus_index, i)
 		if effect is AudioEffectSpectrumAnalyzer:
 			spectrum_instance = AudioServer.get_bus_effect_instance(master_bus_index, i) as AudioEffectSpectrumAnalyzerInstance
-			print("Ruth Asawa: Found existing spectrum analyzer")
 			return
 
 	# Create new spectrum analyzer
@@ -137,7 +134,6 @@ func _setup_audio_analysis() -> void:
 	AudioServer.add_bus_effect(master_bus_index, spectrum_analyzer)
 	effect_count = AudioServer.get_bus_effect_count(master_bus_index)
 	spectrum_instance = AudioServer.get_bus_effect_instance(master_bus_index, effect_count - 1) as AudioEffectSpectrumAnalyzerInstance
-	print("Ruth Asawa: Created new spectrum analyzer, instance = ", spectrum_instance != null)
 
 func _process(delta: float) -> void:
 	if auto_rotate:
@@ -153,7 +149,6 @@ func _process(delta: float) -> void:
 				debug_timer += delta
 				if debug_timer > 0.5:
 					debug_timer = 0.0
-					print("Ruth Asawa: volume=%.2f, bands[0]=%.2f, bands[8]=%.2f" % [smoothed_volume, smoothed_bands[0] if smoothed_bands.size() > 0 else 0, smoothed_bands[8] if smoothed_bands.size() > 8 else 0])
 
 func _create_default_curve() -> void:
 	radius_curve = Curve.new()

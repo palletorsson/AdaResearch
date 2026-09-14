@@ -40,7 +40,6 @@ func _ready() -> void:
 	# Create bridge
 	create_bridge()
 
-	print("Example 6.7: Bridge - Chain of joints forming suspension bridge")
 
 func _process(delta: float) -> void:
 	if auto_spawn:

@@ -49,7 +49,6 @@ func _ready() -> void:
 	_tile_walls()
 	_tile_ceiling()
 	_build_lighting()
-	print("[PixelCarpetGallery] Built — %d carpet panels across %.0fm corridor" % [_panel_idx, corridor_length])
 
 # ═══════════════════════════════════════════════════════════════════
 # CORRIDOR SHELL — thin dark backing behind the carpets

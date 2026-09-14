@@ -65,7 +65,6 @@ var _trail_meshes: Array[MeshInstance3D] = []
 func _ready() -> void:
 	generate_field()
 	set_process(true)
-	print("VectorField ready - Particles: ", particle_count, " Trail enabled: ", trail_enabled)
 
 func _process(delta: float) -> void:
 	if not Engine.is_editor_hint():
@@ -290,9 +289,6 @@ func _update_particles(delta: float) -> void:
 	if trail_enabled:
 		_update_trails()
 
-	# Debug: Print first particle trail size occasionally
-	if int(_time * 2.0) % 10 == 0 and fmod(_time, 0.5) < 0.02 and _particles.size() > 0:
-		print("Time: %.1f, Particle 0 trail: %d points, Total trail meshes: %d" % [_time, _particles[0].trail.size(), _trail_meshes.size()])
 
 func _get_field_at(pos: Vector3) -> Vector3:
 	var field := Vector3.ZERO

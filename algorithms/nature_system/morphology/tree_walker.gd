@@ -101,9 +101,6 @@ func setup(dna: CritterDNA, entity: Node3D) -> void:
 	_pick_new_direction()
 	_active = true
 
-	print("[TreeWalker] Walking tree with %d roots, speed=%.2f" % [
-		_root_tips.size(), wander_speed
-	])
 
 
 ## Recursively find root tip meshes tagged by TreeMorphology.

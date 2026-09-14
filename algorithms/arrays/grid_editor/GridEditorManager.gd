@@ -76,7 +76,6 @@ func _ready() -> void:
 	# Initialize with 3x3x3 cubes
 	initialize_cubes()
 	
-	print("GridEditorManager: Initialized with %d cube pairs" % cube_pairs.size())
 
 ## Initialize the starting 3x3x3 cube layout AND spawner row
 func initialize_cubes() -> void:
@@ -110,7 +109,6 @@ func add_cube_at_position(grid_pos: Vector3i, is_spawner: bool = false) -> Dicti
 	miniature_grid_container.add_child(mini_cube)
 	
 	if is_spawner:
-		print("GridEditorManager: Added SPAWNER at %s" % grid_pos)
 		return {"miniature": mini_cube}
 	
 	# Create full-scale cube (only for real cubes)
@@ -128,7 +126,6 @@ func add_cube_at_position(grid_pos: Vector3i, is_spawner: bool = false) -> Dicti
 	}
 	cube_pairs.append(pair)
 	
-	print("GridEditorManager: Added cube pair at %s" % grid_pos)
 	return pair
 
 func _create_fullscale_cube(grid_pos: Vector3i) -> GridEditorCube:
@@ -177,7 +174,6 @@ func remove_cube_at_position(grid_pos: Vector3i) -> void:
 			pair.miniature.queue_free()
 			pair.fullscale.queue_free()
 			cube_pairs.remove_at(i)
-			print("GridEditorManager: Removed cube pair at %s" % grid_pos)
 			return
 
 ## Create visual grid lines for reference

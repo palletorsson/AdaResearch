@@ -89,7 +89,6 @@ func _trigger_hit(impact_velocity: Vector3) -> void:
 	if pause_on_hit:
 		is_paused = true
 		pause_timer = 0.0
-		print("[MovingTarget] Pausing movement for ", pause_duration, "s")
 
 func reset() -> void:
 	"""Override to reset movement state"""

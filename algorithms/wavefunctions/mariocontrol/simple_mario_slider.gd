@@ -569,7 +569,6 @@ class SimpleMarioPickupCube:
 		add_to_group("mario_pickup_cubes")
 		setup_pickup_sound()
 		find_mario_slider()
-		print("SimpleMarioPickupCube ready")
 
 	func shutdown_audio() -> void:
 		if pickup_sound:

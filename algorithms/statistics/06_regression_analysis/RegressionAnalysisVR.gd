@@ -358,9 +358,7 @@ func toggle_point_adding_mode() -> void:
 	interactive_point.visible = is_adding_points
 	
 	if is_adding_points:
-		print("Point adding mode ON - move cursor and trigger to add points")
-	else:
-		print("Point adding mode OFF")
+		pass
 
 func add_data_point_at_cursor() -> void:
 	"""Add data point at cursor position"""
@@ -604,7 +602,6 @@ func fit_logistic_regression() -> void:
 		# Check for convergence
 		var change = abs(logistic_coefficients[0] - old_coefficients[0]) + abs(logistic_coefficients[1] - old_coefficients[1])
 		if change < convergence_threshold:
-			print("Logistic regression converged after %d iterations" % iteration)
 			break
 	
 	# Store in slope/intercept for compatibility

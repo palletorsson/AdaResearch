@@ -975,7 +975,6 @@ func apply_grid_config(config: Dictionary) -> void:
 	if disclosure == before_disclosure:
 		return                      # curation_station's {"emissive": false} lands here
 	_rebuild_now()
-	print("[PrngCrankMachine] Config applied — disclosure=%s" % [disclosure])
 
 
 ## Tear down what this script built and build it again, INLINE. No call_deferred:

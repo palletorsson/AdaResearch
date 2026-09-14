@@ -22,9 +22,6 @@ func _ready() -> void:
 	# Position camera to look at the generation space
 	look_at_generation_space()
 	
-	print("MoldSporeVRDemo Camera: Use WASD to move, mouse to look around")
-	print("MoldSporeVRDemo Camera: Right-click to capture/release mouse")
-	print("MoldSporeVRDemo Camera: Mouse wheel to zoom, F to focus on center")
 
 func _input(event: InputEvent) -> void:
 	# Handle mouse capture toggle
@@ -104,13 +101,11 @@ func capture_mouse() -> void:
 	"""Capture mouse for look controls"""
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	is_mouse_captured = true
-	print("MoldSporeVRDemo Camera: Mouse captured - move mouse to look around")
 
 func release_mouse() -> void:
 	"""Release mouse capture"""
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	is_mouse_captured = false
-	print("MoldSporeVRDemo Camera: Mouse released")
 
 func zoom_in() -> void:
 	"""Zoom camera closer to center"""
@@ -150,7 +145,6 @@ func focus_on_generation_space() -> void:
 	tween.tween_method(smooth_look_at, transform.basis, 
 		Basis.looking_at(orbit_center - target_position, Vector3.UP), 1.0)
 	
-	print("MoldSporeVRDemo Camera: Focusing on generation space")
 
 func smooth_look_at(basis: Basis) -> void:
 	"""Smooth basis interpolation for camera rotation"""

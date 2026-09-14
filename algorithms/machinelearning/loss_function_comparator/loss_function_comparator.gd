@@ -159,7 +159,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if tail == before_tail:
 		return
 	_rebuild_now()
-	print("[LossFunctionComparator] Config applied - tail=%s" % [tail])
 
 
 ## Inline, no call_deferred: a deferred rebuild that removes children first makes

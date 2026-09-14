@@ -177,8 +177,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			and is_equal_approx(ring_radius, before_ring_radius):
 		return
 	_rebuild_now()
-	print("[EdgeAsGroundCapstone] Config applied — rim=%s, assertion=%s, ring_radius=%.2f" % [
-		rim, assertion, ring_radius])
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a map

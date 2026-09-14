@@ -292,7 +292,6 @@ func generate_training_data() -> void:
 			_layout_blobs()
 
 	create_data_visualization()
-	print("Generated ", training_data.size(), " training samples (cohort=", cohort, ")")
 
 ## blobs — the shipped layout, expression for expression. Two 4.0 x 5.0 m clouds
 ## pushed `class_separation` apart in x, y smeared by `data_noise`. The only
@@ -482,7 +481,6 @@ func start_training() -> void:
 		train_svm_full()
 		create_decision_boundary()
 	
-	print("Starting SVM training with kernel: ", kernel_type)
 
 func initialize_svm_parameters() -> void:
 	"""Initialize SVM parameters"""
@@ -671,8 +669,6 @@ func finalize_training() -> void:
 		tw.tween_property(_stats_label_3d, "modulate", COLOR_SPECIAL, 0.2)
 		tw.tween_property(_stats_label_3d, "modulate", Color.WHITE, 0.8)
 	
-	print("SVM training completed")
-	print("Support vectors found: ", support_vectors.size())
 
 func extract_support_vectors() -> void:
 	"""Extract support vectors from training data"""
@@ -883,7 +879,6 @@ func change_kernel(new_kernel: String) -> void:
 	"""Change kernel type and retrain"""
 	kernel_type = new_kernel
 	reset_svm()
-	print("Changed kernel to: ", kernel_type)
 
 func get_algorithm_info() -> Dictionary:
 	"""Get comprehensive algorithm information"""
@@ -943,7 +938,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[SVM_Visualization] Config applied - cohort=%s" % [cohort])
 
 ## Accept an axis value only if it names something this artifact actually builds.
 ## A typo in a map token falls back to the shipped look rather than stranding a

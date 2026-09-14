@@ -163,7 +163,6 @@ func setup_tiles() -> void:
 	for tile in tiles:
 		tile.analyze_adjacency(tiles)
 	
-	print("Generated ", tiles.size(), " total tiles (including rotations)")
 
 func _should_generate_rotations(tile_index: int) -> bool:
 	# Don't rotate symmetric tiles (0, 1, 7, 10)
@@ -239,7 +238,6 @@ func initialize_grid() -> void:
 				add_child(mesh_instance)
 				mesh_instances.append(mesh_instance)
 	
-	print("Initialized grid: ", grid_size, " = ", grid.size(), " cells")
 
 func start_generation() -> void:
 	is_generating = true
@@ -258,7 +256,6 @@ func wfc_step() -> void:
 	
 	if uncollapsed_cells.is_empty():
 		is_generating = false
-		print("WFC Generation complete!")
 		return
 	
 	# Find cells with minimum entropy (fewest options)
@@ -410,12 +407,10 @@ func _draw_debug_info() -> void:
 		return
 	
 	var uncollapsed = grid.filter(func(cell): return not cell.collapsed)
-	print("Uncollapsed cells: ", uncollapsed.size(), "/", grid.size())
 	
 	if uncollapsed.size() > 0:
 		var min_entropy = uncollapsed.map(func(cell): return cell.options.size()).min()
 		var max_entropy = uncollapsed.map(func(cell): return cell.options.size()).max()
-		print("Entropy range: ", min_entropy, " - ", max_entropy)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key

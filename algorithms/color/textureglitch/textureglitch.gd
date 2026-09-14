@@ -142,14 +142,12 @@ func _ready() -> void:
 	initialize_system()
 	create_demo_objects()
 	setup_scene_environment()
-	print("✨ Layered Texture System v2.0 Ready!")
 
 # ===================
 # SYSTEM INITIALIZATION
 # ===================
 
 func initialize_system() -> void:
-	print("🔄 Initializing Layered Texture System...")
 	
 	# Setup noise generator
 	noise_generator = FastNoiseLite.new()
@@ -578,7 +576,6 @@ func trigger_layer_explosion(obj_index: int) -> void:
 	if not obj.is_container_valid():
 		return
 		
-	print("💥 Layer explosion on: ", obj.container.name)
 	
 	for i in range(obj.layers.size()):
 		var layer = obj.layers[i]
@@ -609,7 +606,6 @@ func trigger_chromatic_separation(obj_index: int) -> void:
 	if not obj.is_container_valid():
 		return
 	
-	print("🌈 Chromatic separation on: ", obj.container.name)
 	
 	var offsets = [
 		Vector3(-0.2, 0, 0),   # Red left
@@ -629,7 +625,6 @@ func trigger_chromatic_separation(obj_index: int) -> void:
 		tween.tween_property(layer, "position", Vector3.ZERO, 1.0)
 
 func trigger_system_wide_glitch() -> void:
-	print("⚡ SYSTEM-WIDE GLITCH ACTIVATED!")
 	
 	for i in range(objects.size()):
 		get_tree().create_timer(i * 0.4).timeout.connect(
@@ -647,7 +642,6 @@ func _input(event: InputEvent) -> void:
 	match event.keycode:
 		KEY_SPACE:
 			enable_layer_separation = !enable_layer_separation
-			print("🔄 Layer separation: ", enable_layer_separation)
 		
 		KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8:
 			var obj_idx = event.keycode - KEY_1
@@ -672,11 +666,9 @@ func _input(event: InputEvent) -> void:
 		
 		KEY_PLUS, KEY_EQUAL:
 			animation_speed = min(animation_speed * 1.2, 3.0)
-			print("🎮 Animation speed: ", animation_speed)
 		
 		KEY_MINUS:
 			animation_speed = max(animation_speed * 0.8, 0.1)
-			print("🎮 Animation speed: ", animation_speed)
 		
 		KEY_H:
 			print_help()
@@ -699,13 +691,7 @@ func print_help() -> void:
 	print("  • Advanced blending modes")
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_READY:
-		print("\n🚀 LAYERED TEXTURE SYSTEM v2.0 INITIALIZED")
-		print("📊 Objects: ", objects.size())
-		print("🎨 Layers per object: ", num_layers)
-		print("📱 Texture resolution: ", texture_size, "x", texture_size)
-		print("⚡ Update frequency: ", update_frequency, " FPS")
-		print("\nPress H for help!")
+	pass
 
 func _exit_tree() -> void:
 	# Cleanup

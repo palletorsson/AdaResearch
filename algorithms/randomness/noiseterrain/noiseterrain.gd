@@ -162,7 +162,6 @@ func _process(delta: float) -> void:
 		animate_terrain_colors(delta)
 
 func setup_noise_generators() -> void:
-	print("Setting up noise generators...")
 	
 	# Primary terrain noise - smoother settings
 	noise = FastNoiseLite.new()
@@ -253,7 +252,6 @@ func generate_terrain() -> void:
 	create_terrain_collision()
 	apply_terrain_material()
 	
-	print("Terrain generated: %d vertices, %d triangles" % [vertices.size(), indices.size() / 3])
 
 func clear_terrain() -> void:
 	vertices.clear()
@@ -266,7 +264,6 @@ func create_terrain_mesh() -> void:
 	var mesh_instance = $TerrainMesh
 	terrain_mesh = ArrayMesh.new()
 	
-	print("Generating terrain mesh...")
 	
 	# Generate vertex grid
 	for z in range(terrain_resolution + 1):
@@ -286,7 +283,6 @@ func create_terrain_mesh() -> void:
 			var color = generate_color_at_position(world_x, world_z, height)
 			colors.append(color)
 	
-	print("Generated %d vertices" % vertices.size())
 	
 	# Generate indices for triangles - FIXED winding order
 	for z in range(terrain_resolution):
@@ -303,7 +299,6 @@ func create_terrain_mesh() -> void:
 			indices.append(i + terrain_resolution + 2)
 			indices.append(i + terrain_resolution + 1)
 	
-	print("Generated %d triangles" % (indices.size() / 3))
 	
 	# Calculate normals
 	calculate_normals()
@@ -431,7 +426,6 @@ func calculate_normals() -> void:
 		else:
 			normals[i] = Vector3.UP
 	
-	print("Normals calculated for %d vertices" % normals.size())
 
 func create_terrain_collision() -> void:
 	var collision_shape = $TerrainBody/TerrainCollision
@@ -451,8 +445,6 @@ func create_terrain_collision() -> void:
 	shape.set_faces(collision_vertices)
 	collision_shape.shape = shape
 	
-	print("Collision mesh created with %d triangles" % (collision_vertices.size() / 3))
-	print("IMPORTANT: Make sure TerrainCollision uses ConcavePolygonShape3D, not ConvexPolygonShape3D!")
 
 func apply_terrain_material() -> void:
 	var mesh_instance = $TerrainMesh
@@ -463,7 +455,6 @@ func apply_terrain_material() -> void:
 			print("ERROR: Heightmap material is null!")
 			return
 		mesh_instance.material_override = heightmap_material
-		print("Applied heightmap shader material")
 	else:
 		# Create and apply standard material
 		terrain_material = StandardMaterial3D.new()
@@ -482,7 +473,6 @@ func apply_terrain_material() -> void:
 		terrain_material.cull_mode = BaseMaterial3D.CULL_BACK
 		
 		mesh_instance.material_override = terrain_material
-		print("Applied standard material")
 
 func animate_terrain_colors(_delta) -> void:
 	if not terrain_mesh:
@@ -601,7 +591,7 @@ func _on_enable_contours_toggled(enabled: bool) -> void:
 func setup_blob_system() -> void:
 	blob_spawner = $NoiseBlobSpawner
 	if blob_spawner:
-		print("Blob spawner found and connected!")
+		pass
 	else:
 		print("WARNING: Blob spawner not found!")
 

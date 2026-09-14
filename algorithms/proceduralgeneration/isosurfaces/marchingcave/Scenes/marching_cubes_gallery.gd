@@ -33,7 +33,6 @@ func _process(delta: float) -> void:
 				sculpture.rotation.y += rotation_speed * delta
 
 func generate_gallery() -> void:
-	print("🎨 Generating Marching Cubes Gallery with SDF Shapes...")
 	
 	for i in range(sculpture_configs.size()):
 		var config = sculpture_configs[i]
@@ -47,7 +46,6 @@ func generate_gallery() -> void:
 			row * spacing
 		) + Vector3(10, 0, 10) # Shift away from 0,0,0 to avoid player stuck
 
-		print("Creating item ", i, " at ", pos)
 		await create_sculpture(config, pos, i)
 		# Wait a bit more to let physics settling and memory cleanup happen
 		# out-of-tree guard: get_tree() is null once a map is torn down
@@ -55,7 +53,6 @@ func generate_gallery() -> void:
 			await tree_entered
 		await get_tree().create_timer(1.0).timeout
 	
-	print("✅ Gallery complete with ", sculptures.size(), " sculptures!")
 
 func create_sculpture(config: Dictionary, position: Vector3, index: int) -> void:
 	# Load the SHAPES generator, not the base one
@@ -116,7 +113,6 @@ func create_sculpture(config: Dictionary, position: Vector3, index: int) -> void
 	light.position = Vector3(0, 3, 3)
 	container.add_child(light)
 	
-	print("  🔨 Generated: ", config["name"])
 	
 	# Wait for next frame to avoid lag
 	await get_tree().process_frame
@@ -217,7 +213,6 @@ func visualize_islands(sculpture: MeshInstance3D, islands: Array, sculpture_inde
 			largest_island = island
 			largest_size = island.size()
 	
-	print("    📦 Found ", islands.size(), " components, keeping largest with ", largest_size, " vertices")
 	
 	# Create mesh for only the largest island
 	var island_mesh = create_island_mesh(sculpture.mesh, largest_island)
@@ -243,7 +238,6 @@ func visualize_islands(sculpture: MeshInstance3D, islands: Array, sculpture_inde
 	
 	# Hide original sculpture
 	sculpture.visible = false
-	print("    ✨ Single unified object created for sculpture ", sculpture_index)
 
 func create_island_mesh(original_mesh: Mesh, island_vertices: Array) -> ArrayMesh:
 	"""Create a new mesh containing only the specified vertices"""

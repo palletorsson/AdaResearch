@@ -10,7 +10,6 @@ func generate_smooth_corner_cube_geometry(surface_tool: SurfaceTool, subdivision
 
 # Method 3: Rounded corner cube using spherical blending
 func create_rounded_corner_cube() -> void:
-	print("Creating rounded corner cube...")
 	
 	var surface_tool = SurfaceTool.new()
 	var subdivisions = 8  # Higher subdivision for smoother corners
@@ -129,7 +128,6 @@ func _ready() -> void:
 
 # Method 1: SurfaceTool with manual subdivision and smoothing  
 func create_surface_tool_cube() -> void:
-	print("Creating SurfaceTool subdivided cube...")
 	
 	var surface_tool = SurfaceTool.new()
 	var subdivisions = 6  # Increased subdivisions for smoother result
@@ -167,7 +165,6 @@ func create_surface_tool_cube() -> void:
 
 # Method 2: Built-in BoxMesh with subdivision parameters
 func create_built_in_smooth_cube() -> void:
-	print("Creating built-in subdivided cube...")
 	
 	var box_mesh = BoxMesh.new()
 	box_mesh.size = Vector3.ONE
@@ -190,7 +187,6 @@ func create_built_in_smooth_cube() -> void:
 	
 	add_child(mesh_instance)
 	
-	print("Built-in cube created with subdivisions: %dx%dx%d" % [box_mesh.subdivide_width, box_mesh.subdivide_height, box_mesh.subdivide_depth])
 
 # Generate subdivided cube geometry using SurfaceTool
 func generate_subdivided_cube_geometry(surface_tool: SurfaceTool, subdivisions: int) -> void:
@@ -297,9 +293,6 @@ func setup_scene() -> void:
 	env.sky.sky_material = ProceduralSkyMaterial.new()
 	camera.environment = env
 	
-	print("Scene setup complete!")
-	print("Left (Cyan): SurfaceTool with manual subdivision")
-	print("Right (Orange): Built-in BoxMesh with subdivision parameters")
 
 # Optional: Add rotation for better visualization
 func _process(delta: float) -> void:

@@ -42,10 +42,6 @@ func _ready() -> void:
 	if auto_spawn:
 		_spawn_single_ball()
 	
-	print("=== TURRET DEMO ===")
-	print("SPACE: Spawn ball")
-	print("R: Reset all")
-	print("T: Toggle auto-spawn")
 
 func _create_stats_display() -> void:
 	stats_label = Label3D.new()
@@ -113,13 +109,11 @@ func _spawn_single_ball() -> void:
 			)
 		
 		balls_spawned += 1
-		print("[Demo] Spawned ball #%d at (%.1f, %.1f, %.1f)" % [balls_spawned, x, spawn_height, z])
 	
 	ball_spawner.spawn_height = old_height
 
 func _on_ball_destroyed(_ball: Node3D) -> void:
 	balls_destroyed += 1
-	print("[Demo] Ball destroyed! Total: %d" % balls_destroyed)
 
 func _update_stats() -> void:
 	if stats_label == null:
@@ -143,7 +137,6 @@ func _input(event: InputEvent) -> void:
 				_reset_demo()
 			KEY_T:
 				auto_spawn = !auto_spawn
-				print("[Demo] Auto-spawn: %s" % ("ON" if auto_spawn else "OFF"))
 
 func _reset_demo() -> void:
 	# Clear all balls
@@ -154,7 +147,6 @@ func _reset_demo() -> void:
 	balls_spawned = 0
 	spawn_timer = 0.0
 	
-	print("[Demo] Reset!")
 	
 	# Spawn initial ball
 	if auto_spawn:

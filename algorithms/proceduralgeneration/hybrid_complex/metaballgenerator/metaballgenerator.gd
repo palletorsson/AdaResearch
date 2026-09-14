@@ -672,12 +672,10 @@ func _process(delta: float) -> void:
 		current_step += 1
 		# Final mesh regen at step boundary for clean state
 		generate_mesh()
-		print("Metaball step %d/%d complete" % [current_step, max_steps])
 		
 		if max_steps > 0 and current_step >= max_steps:
 			stepping = false
 			is_stopped = true
-			print("Metaball simulation stopped after %d steps" % max_steps)
 
 # --- Public step API (for future player interface) ---
 
@@ -687,7 +685,6 @@ func start_stepping() -> void:
 	stepping = true
 	is_stopped = false
 	step_timer = 0.0
-	print("Metaball stepping started (max %d steps)" % max_steps)
 
 func do_single_step() -> void:
 	"""Execute one step on demand (for player button)."""
@@ -699,7 +696,6 @@ func do_single_step() -> void:
 		metaball.update(step_duration * animation_speed, bounds)
 	generate_mesh()
 	current_step += 1
-	print("Metaball manual step %d" % current_step)
 
 func reset_simulation() -> void:
 	"""Reset metaballs to fresh random positions."""

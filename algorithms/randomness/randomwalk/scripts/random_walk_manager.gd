@@ -57,7 +57,6 @@ func _ready() -> void:
 	
 	# Perform initial random walk (20-80 steps)
 	var initial_steps = randi_range(20, 80)
-	print("Performing initial random walk with ", initial_steps, " steps")
 	for i in range(initial_steps):
 		current_position = RandomWalk.perform_random_walk(
 			img, current_position, area_size, width, height, chosen_walk_type, visited_positions, pixel_color
@@ -87,7 +86,6 @@ func _process(delta: float) -> void:
 			time_since_last_step = 0.0
 
 func _on_grab_paper_grabbed(_pickable: Variant, by: Variant) -> void:
-	print("Item picked up, starting random walk")
 	is_walking = true
 	time_since_last_step = 0.0  # Reset timer for immediate step
 

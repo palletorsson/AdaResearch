@@ -13,10 +13,6 @@ func _ready() -> void:
 	# Create custom corridor tileset
 	create_corridor_tiles()
 
-	print("=== Corridor Tileset Created ===")
-	print("6 tiles with doorway connections")
-	print("Press SPACE to generate")
-	print("================================")
 
 func create_corridor_tiles() -> void:
 	"""Create a 6-tile corridor system with doorways"""
@@ -118,21 +114,17 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:
-				print("\n=== Generating Corridor WFC Grid ===")
 				wfc_grid.generate()
 			KEY_R:
-				print("\n=== Regenerating ===")
 				wfc_grid.regenerate()
 			KEY_A:
 				wfc_grid.animate_generation = not wfc_grid.animate_generation
-				print("Animation: ", "ON" if wfc_grid.animate_generation else "OFF")
 
 func _on_generation_started() -> void:
-	print("Generation started...")
+	pass
 
 func _on_generation_complete() -> void:
-	print("Generation complete!")
-	print("Total tiles placed: ", wfc_grid.tile_nodes.size())
+	pass
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass

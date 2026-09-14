@@ -59,7 +59,6 @@ func _find_and_connect_grid() -> void:
 	
 	if grid_system:
 		set_grid_reference(grid_system)
-		print("RandomWalkAlgorithm: Connected to grid system")
 	else:
 		print("RandomWalkAlgorithm: WARNING - Could not find GridSystem!")
 
@@ -84,12 +83,10 @@ func start_algorithm() -> void:
 	setup_initial_state()
 	is_running = true
 	timer.start()
-	print("RandomWalkAlgorithm: Algorithm started")
 
 func stop_algorithm() -> void:
 	is_running = false
 	timer.stop()
-	print("RandomWalkAlgorithm: Algorithm stopped")
 
 func step_once():
 	if not grid_reference:

@@ -157,7 +157,6 @@ func setup_ui() -> void:
 	# Setup initial state
 	#progress_bar.visible = false
 	
-	print("TerrainDemo: UI initialized")
 
 func setup_terrain_generator() -> void:
 	"""Initialize terrain generation system"""
@@ -169,7 +168,6 @@ func setup_terrain_generator() -> void:
 	# Configure initial parameters
 	update_terrain_parameters()
 	
-	print("TerrainDemo: Terrain generator initialized")
 
 func setup_camera() -> void:
 	"""Setup camera system"""
@@ -177,8 +175,6 @@ func setup_camera() -> void:
 	vr_camera = find_child("XRCamera3D") as XRCamera3D
 	
 	# Mouse capture for camera control
-	if not vr_camera:
-		print("TerrainDemo: Desktop camera controls enabled")
 
 func setup_vr_navigation() -> void:
 	"""Setup VR teleportation system"""
@@ -190,7 +186,6 @@ func setup_vr_navigation() -> void:
 				vr_controllers.append(child as XRController3D)
 				setup_controller_teleport(child as XRController3D)
 	
-	print("TerrainDemo: Found %d VR controllers" % vr_controllers.size())
 
 func setup_controller_teleport(controller: XRController3D) -> void:
 	"""Setup teleportation for a VR controller"""
@@ -371,7 +366,6 @@ func _on_generate_pressed() -> void:
 
 func generate_terrain_async() -> void:
 	"""Generate terrain asynchronously"""
-	print("TerrainDemo: Starting terrain generation...")
 	
 	# Disable UI during generation
 	generate_button.disabled = true
@@ -395,7 +389,6 @@ func generate_terrain_sync() -> void:
 
 	Same order as generate_terrain_async, including generation_complete firing before
 	add_terrain_to_scene, so _on_generation_complete sees exactly what it always saw."""
-	print("TerrainDemo: Starting terrain generation (synchronous)...")
 
 	if generate_button != null:
 		generate_button.disabled = true
@@ -459,7 +452,6 @@ func _on_generation_progress(percentage: float) -> void:
 
 func _on_generation_complete() -> void:
 	"""Handle generation completion"""
-	print("TerrainDemo: Generation complete!")
 	
 	# Re-enable UI
 	generate_button.disabled = false
@@ -553,7 +545,6 @@ func perform_vr_teleport(target_position: Vector3) -> void:
 	if xr_origin != null:
 		var teleport_position = target_position + Vector3(0, 0.1, 0)
 		xr_origin.global_position = teleport_position
-		print("VR Teleport: Moved to ", teleport_position)
 
 func _exit_tree() -> void:
 	for child in get_children():

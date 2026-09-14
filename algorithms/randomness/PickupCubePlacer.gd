@@ -38,7 +38,6 @@ func _find_grid_system() -> void:
 		grid_system = _find_node_by_class(get_tree().current_scene, "GridSystem")
 	
 	if grid_system:
-		print("PickupCubePlacer: Found grid system")
 		# Wait for grid to be ready
 		if grid_system.is_map_ready():
 			place_pickup_cubes()
@@ -58,7 +57,6 @@ func _find_node_by_class(node: Node, _class_name: String) -> Node:
 	return null
 
 func place_pickup_cubes() -> void:
-	print("PickupCubePlacer: Placing %d pickup cubes using '%s' pattern" % [number_of_cubes, placement_pattern])
 	
 	var positions = _generate_positions()
 	
@@ -66,7 +64,6 @@ func place_pickup_cubes() -> void:
 		var pos = positions[i]
 		_create_pickup_cube_at(pos.x+1, pos.y, pos.z)
 	
-	print("PickupCubePlacer: ✅ Placed %d pickup cubes" % pickup_cubes.size())
 
 func _generate_positions() -> Array[Vector3i]:
 	var positions: Array[Vector3i] = []
@@ -221,23 +218,19 @@ func _create_pickup_cube_at(x: int, y: int, z: int) -> void:
 	grid_system.add_child(pickup_cube)
 	pickup_cubes.append(pickup_cube)
 	
-	print("PickupCubePlacer: Created pickup cube at (%d,%d,%d)" % [x, y, z])
 
 # Public API
 func set_placement_pattern(pattern: String) -> void:
 	placement_pattern = pattern
-	print("PickupCubePlacer: Pattern set to '%s'" % pattern)
 
 func set_number_of_cubes(count: int) -> void:
 	number_of_cubes = max(1, count)
-	print("PickupCubePlacer: Number of cubes set to %d" % number_of_cubes)
 
 func clear_pickup_cubes() -> void:
 	for cube in pickup_cubes:
 		if is_instance_valid(cube):
 			cube.queue_free()
 	pickup_cubes.clear()
-	print("PickupCubePlacer: Cleared all pickup cubes")
 
 func respawn_pickup_cubes() -> void:
 	clear_pickup_cubes()

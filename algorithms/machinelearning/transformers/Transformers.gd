@@ -50,7 +50,6 @@ func _rebuild_tokens() -> void:
 
 func _ready() -> void:
 	# Initialize Transformers visualization
-	print("Transformers Visualization initialized")
 	create_input_tokens()
 	create_output_tokens()
 	create_flow_particles()

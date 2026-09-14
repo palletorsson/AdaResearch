@@ -146,7 +146,6 @@ func _rung() -> int:
 
 # -- Regenerate handling --
 func regenerate_scene() -> void:
-	print("envOne: Regenerating scene")
 	_clear_current_geometry()
 	generate_space()
 	apply_lighting()
@@ -193,10 +192,8 @@ func _on_tree_node_added(node: Node) -> void:
 func _connect_regenerate_cube(cube) -> void:
 	if cube and cube.has_signal("regenerate_requested") and not cube.regenerate_requested.is_connected(_on_regenerate_requested):
 		cube.regenerate_requested.connect(_on_regenerate_requested)
-		print("envOne: connected to regenerate cube %s" % cube.get_path())
 
 func _on_regenerate_requested(_origin: Vector3, targets: Array, metadata: Dictionary) -> void:
-	print("envOne: regenerate signal received with %d target(s)" % targets.size())
 	if targets.is_empty() or _matches_target(targets):
 		regenerate_scene()
 

@@ -38,7 +38,6 @@ var audio_phase: float = 0.0
 
 func _ready() -> void:
 	# Initialize Fourier Transform visualization
-	print("Fourier Transform Visualization initialized")
 	
 	_setup_audio()
 	

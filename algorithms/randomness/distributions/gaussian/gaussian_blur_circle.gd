@@ -248,7 +248,6 @@ func _initialize_image() -> void:
 
 	# Create texture
 	texture = ImageTexture.create_from_image(current_image)
-	print("GaussianBlurCircle: Initialized with sharp circle")
 
 # Setup the material with the texture
 #
@@ -382,7 +381,6 @@ func reset() -> void:
 	current_blur_radius = 0.0
 	current_image.copy_from(original_image)
 	texture.update(current_image)
-	print("GaussianBlurCircle: Reset to sharp circle")
 
 func pause() -> void:
 	"""Pause the blur animation"""

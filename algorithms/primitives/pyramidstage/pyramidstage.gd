@@ -29,7 +29,6 @@ func create_pyramid_stage() -> void:
 	create_corner_pyramids()
 	create_golden_cubes()
 	add_camera_and_light()
-	print("PyramidStage: Created obelisk-style pyramid stage")
 
 func create_base_plinth() -> void:
 	"""Create the base platform (scaled cube)"""

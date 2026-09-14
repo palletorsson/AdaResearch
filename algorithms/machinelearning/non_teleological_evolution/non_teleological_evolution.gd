@@ -462,7 +462,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[NonTeleologicalEvolution] Config applied - selection=%s" % [selection])
 
 
 ## Accept an axis value only if it names something we actually build. A typo has

@@ -962,7 +962,6 @@ func apply_grid_config(config: Dictionary) -> void:
 		if warrant == before:
 			return                  # curation_station's {"emissive": false} lands here
 		_rebuild_warrant()
-		print("[DiceThrow] Config applied — warrant=%s" % [warrant])
 
 
 func _read_meta_overrides() -> void:

@@ -106,8 +106,6 @@ func _anastomose() -> void:
 		_fusions.append(Vector2i(i, j))
 		taken[i] = true
 		taken[j] = true
-	if not _fusions.is_empty():
-		print("MyceliumColony: %d anastomoses — the tree closed into a web" % _fusions.size())
 
 
 ## Nearest node to i within r2 that is NOT one of i's recent ancestors or
@@ -199,7 +197,6 @@ func _render_web(radius: Array[float]) -> void:
 	web.mesh = st.commit()
 	web.material_override = _hypha_material()
 	add_child(web)
-	print("MyceliumColony: %d hyphae merged into 1 mesh node (tapers preserved)" % merged_in)
 
 
 ## One hypha as a tapering swept tube — the mesh only; the caller merges it.
@@ -405,4 +402,3 @@ func _render_spores(weight: Array[float], radius: Array[float]) -> void:
 	mmi.multimesh = mm
 	mmi.material_override = mat
 	add_child(mmi)
-	print("MyceliumColony: %d spores batched into 1 MultiMesh node" % tips.size())

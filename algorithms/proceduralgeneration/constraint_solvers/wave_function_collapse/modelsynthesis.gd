@@ -322,7 +322,6 @@ func create_cave_exemplar() -> void:
 	noise.seed = randi()
 	noise.frequency = 0.3
 	
-	print("Creating cave exemplar...")
 	
 	for x in range(exemplar_size.x):
 		for y in range(exemplar_size.y):
@@ -391,7 +390,6 @@ func setup_synthesis_order() -> void:
 	synthesis_order.shuffle()
 	
 	current_synthesis_pos = Vector3i.ZERO
-	print("Setup synthesis order for ", synthesis_order.size(), " voxels")
 
 func start_synthesis() -> void:
 	is_generating = true
@@ -408,7 +406,6 @@ func _process(delta: float) -> void:
 func synthesis_step() -> void:
 	if current_synthesis_pos.x >= synthesis_order.size():
 		is_generating = false
-		print("Model synthesis complete!")
 		return
 	
 	# Get next position to synthesize
@@ -423,8 +420,6 @@ func synthesis_step() -> void:
 	
 	current_synthesis_pos.x += 1
 	
-	if debug_mode and current_synthesis_pos.x % 100 == 0:
-		print("Synthesized ", current_synthesis_pos.x, "/", synthesis_order.size(), " voxels")
 
 func update_voxel_visual(pos: Vector3i, voxel_type: VoxelType) -> void:
 	var index = pos.x + pos.y * output_size.x + pos.z * output_size.x * output_size.y

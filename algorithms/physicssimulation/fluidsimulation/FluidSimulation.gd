@@ -71,7 +71,6 @@ func _ready() -> void:
 	_setup_vr()
 	_create_ui()
 
-	print("Fluid Simulation: %d particles | MultiMesh | spatial hash" % particle_count)
 
 # ===========================================================================
 # INITIALIZATION

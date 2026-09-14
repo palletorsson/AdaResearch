@@ -153,9 +153,6 @@ func _ready() -> void:
 	setup_stop_timers()
 
 
-	print("ðŸŽ¯ Four SoftBody Controller ready!")
-	print("   Positions: 2x2 grid with %.1fm spacing" % spacing)
-	print("   Stop times: ", stop_times)
 
 
 
@@ -196,7 +193,6 @@ func create_four_soft_bodies() -> void:
 			# its own 0.01 and nothing is written at all.
 			if body_damping >= 0.0:
 				soft_body_node.damping_coefficient = body_damping
-			print("âœ… Created SoftBody %d at %s" % [i + 1, positions[i]])
 		else:
 			print("âš ï¸  Could not find SoftBody3D in instance %d" % (i + 1))
 
@@ -275,7 +271,6 @@ func setup_stop_timers() -> void:
 		_owned.append(timer)
 		stop_timers.append(timer)
 		
-		print("â° Timer %d set for %.1f seconds" % [i + 1, timer.wait_time])
 
 
 func _process(_delta):
@@ -333,12 +328,10 @@ func stop_soft_body(index: int) -> void:
 		ui_labels[index].text = "SoftBody %d: STOPPED!" % [index + 1]
 		ui_labels[index].add_theme_color_override("font_color", Color.BLUE)
 	
-	print("ðŸ§Š SoftBody %d stopped and frozen!" % [index + 1])
 
 func restart_all() -> void:
 	"""Restart all soft bodies"""
 	
-	print("ðŸ”„ Restarting all soft bodies...")
 	
 	for i in range(soft_body_instances.size()):
 		if stopped_states[i]:
@@ -373,7 +366,6 @@ func restart_soft_body(index: int) -> void:
 		std_mat.albedo_color = Color.from_hsv(index * 0.25, 0.8, 1.0)
 		std_mat.albedo_color.a = 0.8
 	
-	print("âœ… SoftBody %d restarted!" % [index + 1])
 
 func _get_soft_body_material(soft_body: SoftBody3D, surface_index: int = 0) -> Material:
 	"""Resolve material safely for SoftBody3D instances in Godot 4."""
@@ -403,7 +395,6 @@ func _input(event: InputEvent) -> void:
 		print("ðŸ“Š Status Report:")
 		for i in range(soft_body_instances.size()):
 			var status = "RUNNING" if not stopped_states[i] else "STOPPED"
-			print("   SoftBody %d: %s" % [i + 1, status])
 	
 	# Stop individual soft bodies with number keys
 	if event is InputEventKey and event.pressed:

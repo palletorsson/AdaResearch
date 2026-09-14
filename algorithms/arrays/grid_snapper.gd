@@ -30,8 +30,6 @@ func _ready() -> void:
 	
 	if not _xr_origin:
 		push_warning("GridSnapper: XROrigin3D not found at path: %s" % xr_origin_path)
-	else:
-		print("GridSnapper: Controlling %s" % _xr_origin.name)
 		
 	if show_grid_points:
 		_setup_visualization()

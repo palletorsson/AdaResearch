@@ -88,7 +88,6 @@ func create_shader_file(path: String) -> void:
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	file.store_string(create_compute_shader_source())
 	file.close()
-	print("Created: ", path)
 
 func create_compute_shader_source() -> String:
 	"""Create the compute shader source code"""
@@ -498,7 +497,6 @@ func generate_mesh_gpu(density_data: PackedFloat32Array) -> ArrayMesh:
 	rd.submit()
 	rd.wait()
 	
-	print("FixedGPUMarchingCubes: GPU computation complete")
 	
 	# Read back results
 	return create_mesh_from_gpu_results()
@@ -512,7 +510,6 @@ func create_mesh_from_gpu_results() -> ArrayMesh:
 	var vertex_count = counter_data[0]
 	var triangle_count = counter_data[1]
 	
-	print("FixedGPUMarchingCubes: Generated %d vertices, %d triangles" % [vertex_count, triangle_count])
 	
 	if vertex_count == 0:
 		print("FixedGPUMarchingCubes: No geometry generated")
@@ -560,7 +557,6 @@ func create_mesh_from_gpu_results() -> ArrayMesh:
 	
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	
-	print("FixedGPUMarchingCubes: Mesh creation complete")
 	return mesh
 
 func cleanup() -> void:
@@ -592,7 +588,6 @@ func cleanup() -> void:
 		compute_shader = RID()
 	
 	is_initialized = false
-	print("FixedGPUMarchingCubes: GPU resources cleaned up")
 
 # Helper function for terrain density
 func create_terrain_density_field(size: Vector3i, world_bounds: AABB, terrain_height: float, noise: FastNoiseLite) -> PackedFloat32Array:

@@ -320,7 +320,6 @@ func start_simulation() -> void:
 func _monte_carlo_step() -> void:
 	if iteration_count >= ITERATIONS:
 		$SimulationTimer.stop()
-		print("Simulation complete!")
 		return
 	
 	# Perform multiple MC steps between visual updates for efficiency

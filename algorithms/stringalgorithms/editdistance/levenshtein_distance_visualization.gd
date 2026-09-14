@@ -189,7 +189,6 @@ func compute_levenshtein_distance() -> void:
 	# Backtrack to find optimal transformation sequence
 	build_transformation_sequence()
 	
-	print("Levenshtein distance from '", source_string, "' to '", target_string, "': ", computation_statistics.final_distance)
 
 func build_transformation_sequence() -> void:
 	"""Backtrack through DP table to find optimal transformation sequence"""
@@ -257,9 +256,6 @@ func build_transformation_sequence() -> void:
 			transformation_operations.push_front(operation)
 	
 	computation_statistics.total_operations = transformation_operations.size()
-	print("Transformation requires: ", computation_statistics.insertions, " insertions, ", 
-		  computation_statistics.deletions, " deletions, ", 
-		  computation_statistics.substitutions, " substitutions")
 
 func create_visualization() -> void:
 	"""Create the complete visualization of the algorithm"""
@@ -427,13 +423,11 @@ func start_transformation_animation() -> void:
 			child.queue_free()
 	
 	update_ui()
-	print("Starting transformation animation...")
 
 func perform_transformation_step() -> void:
 	"""Perform one step of the transformation animation"""
 	if current_operation_index >= transformation_operations.size():
 		is_animating_transformation = false
-		print("Transformation complete!")
 		update_ui()
 		return
 	

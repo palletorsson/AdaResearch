@@ -688,7 +688,6 @@ func complete_cross_validation() -> void:
 		
 		var coefficients = fit_polynomial(full_train_data, best_degree)
 		var test_mse = calculate_mse(test_set, coefficients)
-		print("Best model (degree %d) test MSE: %.4f" % [best_degree, test_mse])
 	
 	update_info_displays()
 

@@ -97,7 +97,6 @@ func setup_noise_generators() -> void:
 	noise_cave_detail.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	noise_cave_detail.frequency = cave_noise_frequency * 4.0
 	
-	print("FastLandscapeCaveGenerator: Noise generators initialized")
 
 func setup_gpu_marching_cubes() -> void:
 	"""Initialize marching cubes system with GPU acceleration"""
@@ -106,7 +105,6 @@ func setup_gpu_marching_cubes() -> void:
 	
 	if gpu_marching_cubes.is_initialized:
 		use_gpu_acceleration = true
-		print("FastLandscapeCaveGenerator: Using GPU acceleration")
 	else:
 		use_gpu_acceleration = false
 		# Fallback to CPU
@@ -118,7 +116,6 @@ func setup_gpu_marching_cubes() -> void:
 func generate_world_async() -> void:
 	"""Generate the complete world asynchronously using GPU acceleration"""
 	var start_time = Time.get_ticks_msec()
-	print("FastLandscapeCaveGenerator: Starting high-performance world generation...")
 	
 	if show_generation_progress:
 		generation_progress.emit(0.0)
@@ -127,7 +124,6 @@ func generate_world_async() -> void:
 	clear_previous_world()
 	
 	# Step 1: Create voxel chunk (30%)
-	print("FastLandscapeCaveGenerator: Step 1/4 - Creating voxel chunk...")
 	var chunk = await generate_unified_voxel_chunk()
 	if show_generation_progress:
 		generation_progress.emit(30.0)
@@ -135,23 +131,19 @@ func generate_world_async() -> void:
 	# Step 2: GPU/CPU marching cubes generation (50%)
 	var mesh: ArrayMesh
 	if use_gpu_acceleration:
-		print("FastLandscapeCaveGenerator: Step 2/4 - GPU mesh generation...")
 		mesh = await generate_mesh_gpu(chunk)
 	else:
-		print("FastLandscapeCaveGenerator: Step 2/4 - CPU mesh generation...")
 		mesh = await generate_mesh_cpu(chunk)
 	if show_generation_progress:
 		generation_progress.emit(80.0)
 	
 	# Step 3: Create visual representation (15%)
-	print("FastLandscapeCaveGenerator: Step 3/4 - Creating visual representation...")
 	create_mesh_instance(mesh)
 	if show_generation_progress:
 		generation_progress.emit(90.0)
 	
 	# Step 4: Generate collision (5%)
 	if generate_collision:
-		print("FastLandscapeCaveGenerator: Step 4/4 - Generating collision...")
 		create_collision_shape(mesh)
 	
 	if show_generation_progress:
@@ -161,7 +153,6 @@ func generate_world_async() -> void:
 	generation_time = (end_time - start_time) / 1000.0  # Convert to seconds
 	
 	generation_complete.emit(generation_time)
-	print("FastLandscapeCaveGenerator: World generation complete in %.2f seconds!" % generation_time)
 
 func generate_unified_voxel_chunk() -> VoxelChunk:
 	"""Generate a unified voxel chunk combining terrain and caves"""
@@ -263,7 +254,6 @@ func calculate_unified_density(world_pos: Vector3) -> float:
 
 func generate_mesh_gpu(chunk: VoxelChunk) -> ArrayMesh:
 	"""Generate mesh using GPU compute shader"""
-	print("FastLandscapeCaveGenerator: Starting GPU mesh generation...")
 	
 	# Convert VoxelChunk data to PackedFloat32Array for GPU
 	var density_data = PackedFloat32Array()
@@ -303,7 +293,6 @@ func generate_mesh_gpu(chunk: VoxelChunk) -> ArrayMesh:
 
 func generate_mesh_cpu(chunk: VoxelChunk) -> ArrayMesh:
 	"""Generate mesh using CPU marching cubes"""
-	print("FastLandscapeCaveGenerator: Starting CPU mesh generation...")
 	
 	# Generate mesh using proven CPU marching cubes
 	var mesh = marching_cubes.generate_mesh_from_chunk(chunk)
@@ -326,7 +315,6 @@ func create_mesh_instance(mesh: ArrayMesh) -> void:
 	terrain_mesh_instance.set_surface_override_material(0, material)
 	
 	add_child(terrain_mesh_instance)
-	print("FastLandscapeCaveGenerator: Mesh instance created")
 
 func create_collision_shape(mesh: ArrayMesh) -> void:
 	"""Create collision shape for physics interaction"""
@@ -357,7 +345,6 @@ func create_collision_shape(mesh: ArrayMesh) -> void:
 	collision_body.add_child(collision_shape)
 	
 	add_child(collision_body)
-	print("FastLandscapeCaveGenerator: Collision shape created")
 
 func get_landscape_material() -> StandardMaterial3D:
 	"""Create or return landscape material"""

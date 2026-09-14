@@ -40,7 +40,6 @@ func _ready() -> void:
 	# Create chain
 	create_chain()
 
-	print("Example 6.5: Chain - Generic6DOFJoint3D flexible connections")
 
 func _process(delta: float) -> void:
 	# Animate controller position

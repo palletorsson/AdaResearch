@@ -33,7 +33,6 @@ var _stats_label: Label3D = null
 
 func _ready() -> void:
 	# Initialize Feature Engineering visualization
-	print("Feature Engineering Visualization initialized")
 	create_raw_particles()
 	create_engineered_particles()
 	create_flow_particles()

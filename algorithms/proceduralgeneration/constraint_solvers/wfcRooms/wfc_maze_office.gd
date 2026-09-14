@@ -12,7 +12,6 @@ func _initialize_grid() -> void:
 		_generate_guide_path()
 
 func _generate_guide_path() -> void:
-	print("🗺️ Generating reliable path to Office...")
 	
 	# Start at (0,0) or random edge
 	var start_pos = Vector2i(0, 0)
@@ -27,7 +26,6 @@ func _generate_guide_path() -> void:
 	# Since grid is empty, Manhattan path is fine, but let's make it wiggly
 	var path = _get_wiggly_path(start_pos, end_pos)
 	
-	print("  Path length: ", path.size())
 	
 	# Apply constraints
 	for i in range(path.size()):
@@ -38,7 +36,6 @@ func _generate_guide_path() -> void:
 		if i == path.size() - 1:
 			# LAST CELL: Destination (Office)
 			possible[y][x] = office_tiles.duplicate()
-			print("  Office placed at ", x, ",", y)
 			
 		elif i == path.size() - 2:
 			# SECOND TO LAST: Transition (Corridor -> Office)

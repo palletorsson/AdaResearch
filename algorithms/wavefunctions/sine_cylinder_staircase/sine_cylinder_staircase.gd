@@ -214,8 +214,6 @@ func _add_plane_bridge(a_root: Node3D, a_span: float, b_root: Node3D, b_span: fl
 	body.add_child(col)
 	add_child(body)
 
-	if debug:
-		print("Bridge plane added between:", a_root.name, " <-> ", b_root.name)
 
 
 # ----------------- Helpers -----------------

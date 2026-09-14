@@ -84,7 +84,6 @@ func setup_audio_system() -> void:
 	frequency_data = PackedFloat32Array()
 	frequency_data.resize(frequency_bands)
 
-	print("Audio system initialized - Bus index: ", audio_bus_index)
 
 func setup_visualization() -> void:
 	for i in range(frequency_bands):
@@ -431,19 +430,15 @@ func start_recording() -> void:
 	is_recording = true
 	is_playing = true
 	playback_position = 0.0
-	print("Started recording audio timeline")
 
 func stop_recording() -> void:
 	is_recording = false
-	print("Stopped recording audio timeline")
 
 func start_playback() -> void:
 	is_playing = true
-	print("Started timeline playback")
 
 func stop_playback() -> void:
 	is_playing = false
-	print("Stopped timeline playback")
 
 func clear_timeline() -> void:
 	audio_buffer.clear()
@@ -451,7 +446,6 @@ func clear_timeline() -> void:
 		band_data.clear()
 	playback_position = 0.0
 	scroll_position = 0.0
-	print("Cleared timeline data")
 
 func set_zoom(new_zoom: float) -> void:
 	zoom_level = clamp(new_zoom, 0.1, 10.0)
@@ -465,7 +459,6 @@ func load_audio_file(file_path: String) -> void:
 	if not file:
 		print("Failed to open audio file: ", file_path)
 		return
-	print("Loading audio file: ", file_path)
 	file.close()
 
 # Export functionality

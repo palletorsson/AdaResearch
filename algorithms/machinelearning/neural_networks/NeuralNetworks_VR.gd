@@ -132,7 +132,6 @@ var _built: bool = false
 var _owned: Array[Node] = []
 
 func _ready() -> void:
-	print("[NeuralNetworks_VR] Initializing interactive neural network")
 	_build_all()
 	_built = true
 

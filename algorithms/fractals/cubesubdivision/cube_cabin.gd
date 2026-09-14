@@ -61,7 +61,6 @@ func _execute_step(s: int) -> void:
 		7: _step_details()
 		_:
 			is_constructing = false
-			print("Cabin complete! %d parts" % all_parts.size())
 
 func _build_instant() -> void:
 	_step_foundation()
@@ -82,7 +81,6 @@ func _step_foundation() -> void:
 		Vector3(cabin_size * 1.1, foundation_height, cabin_size * 1.1),
 		floor_color, "Foundation"
 	)
-	print("Step 0: Foundation")
 
 func _step_walls() -> void:
 	var wall_thickness = cabin_size * 0.08
@@ -119,7 +117,6 @@ func _step_walls() -> void:
 		wall_color, "RightWall"
 	)
 
-	print("Step 1: Walls")
 
 func _step_door_opening() -> void:
 	# Door frame and door
@@ -157,7 +154,6 @@ func _step_door_opening() -> void:
 		trim_color, "DoorFrameRight"
 	)
 
-	print("Step 2: Door")
 
 func _step_windows() -> void:
 	var window_size = cabin_size * 0.18
@@ -203,7 +199,6 @@ func _step_windows() -> void:
 			trim_color, "SideWindowFrame_%d" % side
 		)
 
-	print("Step 3: Windows")
 
 func _step_roof() -> void:
 	var wall_height = cabin_size * 0.6
@@ -254,7 +249,6 @@ func _step_roof() -> void:
 		wall_color, "BackGable"
 	)
 
-	print("Step 4: Roof")
 
 func _step_chimney() -> void:
 	var wall_height = cabin_size * 0.6
@@ -277,7 +271,6 @@ func _step_chimney() -> void:
 		chimney_color, "ChimneyCap"
 	)
 
-	print("Step 5: Chimney")
 
 func _step_porch() -> void:
 	var foundation_height = cabin_size * 0.08
@@ -317,7 +310,6 @@ func _step_porch() -> void:
 		floor_color, "PorchStep"
 	)
 
-	print("Step 6: Porch")
 
 func _step_details() -> void:
 	var foundation_height = cabin_size * 0.08
@@ -336,7 +328,6 @@ func _step_details() -> void:
 		Color(0.8, 0.7, 0.3), "Lantern"
 	)
 
-	print("Step 7: Details")
 
 func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String) -> MeshInstance3D:
 	var mesh_instance := MeshInstance3D.new()

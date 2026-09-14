@@ -94,7 +94,6 @@ func _ready() -> void:
 	_create_panel()
 	spawn_bodies(body_count)
 	setup_auto_reset()
-	print("Example 2.9: N-body attraction")
 
 func setup_auto_reset() -> void:
 	auto_reset_timer = Timer.new()

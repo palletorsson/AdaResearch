@@ -190,7 +190,6 @@ func setup_cave_generator() -> void:
 	cave_generator.generation_progress.connect(_on_generation_progress)
 	cave_generator.generation_complete.connect(_on_generation_complete)
 
-	print("RhizomeCaveDemo: Cave generator initialized")
 
 
 ## Everything the generator reads, in one place, so the async path and the capture path
@@ -235,7 +234,6 @@ func generate_cave_async() -> void:
 	if cave_generator == null:
 		return
 
-	print("RhizomeCaveDemo: Starting cave generation...")
 	_configure_generator()
 
 	# Start async generation
@@ -253,7 +251,6 @@ func generate_cave() -> void:
 func _build_now() -> void:
 	if cave_generator == null:
 		return
-	print("RhizomeCaveDemo: Starting cave generation (synchronous)...")
 	cave_generator.synchronous = true
 	_configure_generator()
 	await cave_generator.generate_cave_async()
@@ -363,11 +360,9 @@ func _on_generation_progress(percentage: float) -> void:
 	else:
 		status = "Creating physics..."
 
-	print("Cave Generation Progress: %.0f%% - %s" % [percentage, status])
 
 func _on_generation_complete() -> void:
 	"""Handle generation completion"""
-	print("RhizomeCaveDemo: Generation complete!")
 
 	# Log cave statistics
 	update_cave_statistics()
@@ -390,7 +385,6 @@ func update_cave_statistics() -> void:
 
 	# Calculate approximate memory usage
 	var memory_mb = (info.total_vertices * 12 + info.total_triangles * 6) / (1024 * 1024)
-	print("• Memory Est: %.1f MB" % memory_mb)
 
 func format_number(num: int) -> String:
 	"""Format large numbers with commas"""

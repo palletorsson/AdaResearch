@@ -47,7 +47,6 @@ func _ready() -> void:
 	for i in range(num_boxes):
 		spawn_box()
 
-	print("Example 6.2: Falling Boxes - %d boxes spawning" % num_boxes)
 
 func _process(delta: float) -> void:
 	if auto_spawn and boxes.size() < max_boxes:
@@ -176,7 +175,6 @@ func cleanup_fallen_boxes() -> void:
 func toggle_auto_spawn() -> void:
 	"""Toggle automatic spawning"""
 	auto_spawn = !auto_spawn
-	print("Auto-spawn: %s" % ("ON" if auto_spawn else "OFF"))
 
 func clear_boxes() -> void:
 	"""Clear all boxes"""

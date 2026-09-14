@@ -53,7 +53,6 @@ func _ready() -> void:
 		current_growth_depth = recursion_depth
 
 	update_info_label()
-	print("Example 8.6: Recursive Tree - Depth: %d, Angle: %.1f°" % [recursion_depth, branch_angle])
 
 func _process(delta: float) -> void:
 	if animate_growth and current_growth_depth < recursion_depth:
@@ -92,7 +91,6 @@ func _on_angle_changed(new_angle: float) -> void:
 	branch_angle = new_angle
 	clear_branches()
 	grow_tree(Vector3.ZERO, Vector3.UP, initial_length, initial_thickness, current_growth_depth)
-	print("Branch angle changed to: %.1f°" % branch_angle)
 
 func update_info_label() -> void:
 	"""Update info label"""
@@ -193,7 +191,6 @@ func increase_depth() -> void:
 	clear_branches()
 	grow_tree(Vector3.ZERO, Vector3.UP, initial_length, initial_thickness, recursion_depth)
 	update_info_label()
-	print("Recursion depth increased to: %d" % recursion_depth)
 
 func decrease_depth() -> void:
 	"""Decrease recursion depth"""
@@ -203,7 +200,6 @@ func decrease_depth() -> void:
 		clear_branches()
 		grow_tree(Vector3.ZERO, Vector3.UP, initial_length, initial_thickness, recursion_depth)
 		update_info_label()
-		print("Recursion depth decreased to: %d" % recursion_depth)
 
 func reset() -> void:
 	"""Reset growth animation"""
@@ -211,7 +207,6 @@ func reset() -> void:
 	growth_timer = 0.0
 	clear_branches()
 	update_info_label()
-	print("Tree reset")
 
 func _exit_tree() -> void:
 	for child in get_children():

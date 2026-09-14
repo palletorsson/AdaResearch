@@ -141,7 +141,6 @@ func _build_modulor_path() -> void:
 	line_points.append(Vector3(hip_width + foot_length * 0.7, base_y, foot_length * 0.5))
 	line_points.append(Vector3(hip_width, base_y, 0))
 
-	print("Modulor Man: Generated %d points for continuous line drawing" % line_points.size())
 	_print_segment_lengths()
 
 ## Print the length of each segment (educational/proportional reference)

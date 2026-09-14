@@ -135,7 +135,6 @@ func collapse_next_tile() -> void:
 	
 	if candidates.is_empty():
 		is_generating = false
-		print("Wave Function Collapse complete!")
 		return
 	
 	# Randomly pick from minimum entropy candidates

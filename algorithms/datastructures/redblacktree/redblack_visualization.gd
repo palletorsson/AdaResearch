@@ -187,7 +187,6 @@ func initialize_tree() -> void:
 	tree_height = 0
 	black_height = 1  # NIL nodes contribute to black height
 	
-	print("Red-Black Tree initialized with NIL sentinel")
 
 func start_demo() -> void:
 	"""Start comprehensive Red-Black Tree demonstration"""
@@ -215,7 +214,6 @@ func generate_demo_data() -> void:
 			demo_values = [50, 25, 75, 10, 30, 60, 80, 5, 15, 27, 35, 55, 65, 70, 90]
 			demo_values = demo_values.slice(0, demo_dataset_size)
 	
-	print("Generated demo data: ", demo_values)
 
 func perform_bulk_demo() -> void:
 	"""Perform bulk operations without animation"""
@@ -228,7 +226,6 @@ func perform_bulk_demo() -> void:
 
 func insert_value(value: int) -> void:
 	"""Insert value into Red-Black Tree"""
-	print("Inserting value: ", value)
 	current_operation = "Inserting " + str(value)
 	insertions_count += 1
 	
@@ -330,7 +327,6 @@ func rotate_left(node: RBNode) -> void:
 	if not node or node.right == nil_node:
 		return
 	
-	print("Performing left rotation on node ", node.value)
 	rotations_count += 1
 	
 	var right_child = node.right
@@ -360,7 +356,6 @@ func rotate_right(node: RBNode) -> void:
 	if not node or node.left == nil_node:
 		return
 	
-	print("Performing right rotation on node ", node.value)
 	rotations_count += 1
 	
 	var left_child = node.left
@@ -403,7 +398,6 @@ func delete_value(value: int) -> bool:
 		print("Value ", value, " not found for deletion")
 		return false
 	
-	print("Deleting value: ", value)
 	current_operation = "Deleting " + str(value)
 	deletions_count += 1
 	
@@ -783,7 +777,6 @@ func _on_operation_timer_timeout() -> void:
 		update_ui()
 	else:
 		operation_timer.stop()
-		print("Demo complete!")
 
 func highlight_search_path() -> void:
 	"""Highlight the search path in visualization"""
@@ -1022,7 +1015,6 @@ func reset_tree() -> void:
 	
 	initialize_tree()
 	update_ui()
-	print("Red-Black Tree reset")
 
 func get_algorithm_info() -> Dictionary:
 	"""Get comprehensive Red-Black Tree algorithm information"""

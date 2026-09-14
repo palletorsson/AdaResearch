@@ -84,7 +84,6 @@ func _setup_soft_body() -> void:
 			"cylinder": simulation_precision = 10
 			"capsule": simulation_precision = 12
 		
-		print("SoftBody: Initialized %s with properties: %s" % [soft_body_type, props])
 	else:
 		print("SoftBody: Warning - Unknown type '%s', using defaults" % soft_body_type)
 
@@ -97,7 +96,6 @@ func _setup_physics() -> void:
 	if global_position.y < 1.0:
 		global_position.y = 2.0
 	
-	print("SoftBody: %s physics configured at position %s" % [soft_body_type, global_position])
 
 func _setup_colors() -> void:
 	# Set up fallback colors for each type
@@ -111,7 +109,6 @@ func _setup_colors() -> void:
 	current_color = fallback_colors.get(soft_body_type, Color.WHITE)
 	target_color = current_color
 	
-	print("SoftBody: %s colors initialized" % soft_body_type)
 
 func _setup_interactions() -> void:
 	if enable_interaction:
@@ -165,7 +162,6 @@ func _change_state(new_state: BodyState) -> void:
 		BodyState.RECOVERING:
 			_apply_recovering_behavior()
 	
-	print("SoftBody: %s changed to state: %s" % [soft_body_type, BodyState.keys()[new_state]])
 
 func _apply_idle_behavior() -> void:
 	# Gentle, subtle movement
@@ -244,40 +240,33 @@ func _apply_force(force: Vector3) -> void:
 func _on_wind_zone_entered(body) -> void:
 	if body == self:
 		wind_force = Vector3(2.0, 0.0, 1.0)
-		print("SoftBody: %s entered wind zone" % soft_body_type)
 
 func _on_wind_zone_exited(body) -> void:
 	if body == self:
 		wind_force = Vector3.ZERO
-		print("SoftBody: %s exited wind zone" % soft_body_type)
 
 func _on_force_field_entered(body) -> void:
 	if body == self:
 		force_field_strength = 5.0
-		print("SoftBody: %s entered force field" % soft_body_type)
 
 func _on_force_field_exited(body) -> void:
 	if body == self:
 		force_field_strength = 0.0
-		print("SoftBody: %s exited force field" % soft_body_type)
 
 # Public API for external control
 func apply_external_impulse(force: Vector3) -> void:
 	"""Apply an external impulse to the soft body"""
 	external_forces += force
-	print("SoftBody: %s received impulse: %s" % [soft_body_type, force])
 
 func set_physics_properties(pressure: float) -> void:
 	"""Dynamically adjust physics properties"""
 	pressure_coefficient = pressure
-	print("SoftBody: %s physics updated - P:%.2f" % [soft_body_type, pressure])
 
 func reset_to_defaults() -> void:
 	"""Reset to type-specific default properties"""
 	if type_properties.has(soft_body_type):
 		var props = type_properties[soft_body_type]
 		pressure_coefficient = props.pressure
-		print("SoftBody: %s reset to defaults" % soft_body_type)
 
 # Debug functions
 func print_status() -> void:
@@ -290,7 +279,6 @@ func _validate_physics() -> void:
 	# Ensure the soft body doesn't fall below the floor
 	if global_position.y < -0.5:
 		global_position.y = 1.0
-		print("SoftBody: %s repositioned above floor" % soft_body_type)
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass

@@ -723,8 +723,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[Tarjan] Config applied — mutuality=%s, vertices=%d, edges=%d" % [
-		mutuality, vertices.size(), edges.size()])
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a

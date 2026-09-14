@@ -965,21 +965,18 @@ func create_angelic_texture():
 
 # Event handlers
 func _on_sacred_generation_started() -> void:
-	print("Sacred sound generation has begun...")
+	pass
 
 func _on_divine_sound_created(sound_name: String) -> void:
-	print("Divine sound created: " + sound_name.replace("_", " ").capitalize())
+	pass
 
 func _on_liturgical_progress_updated(progress: float) -> void:
 	var percentage = int(progress * 100)
-	print("Sacred generation progress: " + str(percentage) + "%")
 
 func _on_sacred_generation_complete() -> void:
-	print("Sacred sound generation complete. Entering divine presence...")
 	start_sacred_ambient()
 	is_initialized = true
 	is_generating = false
-	print("The liturgical atmosphere now surrounds you...")
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass

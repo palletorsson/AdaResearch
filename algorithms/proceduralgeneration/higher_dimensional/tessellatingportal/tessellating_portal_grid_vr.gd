@@ -27,7 +27,6 @@ func _ready() -> void:
 	generate_portal_grid()
 
 func generate_portal_grid() -> void:
-	print("Generating %dx%d portal grid..." % [grid_size, grid_size])
 	
 	# Clear existing portals
 	for portal in portals:
@@ -78,7 +77,6 @@ func generate_portal_grid() -> void:
 			
 			portal_index += 1
 	
-	print("Generated %d portals" % portals.size())
 
 func create_portal(type_index: int, position: Vector3, radius: float, thickness: float, block_sz: float, color: Color) -> Node3D:
 	"""Create a single portal instance"""
@@ -113,23 +111,19 @@ func _input(event: InputEvent) -> void:
 	"""Handle regeneration input"""
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_R:
-			print("Regenerating portal grid...")
 			generate_portal_grid()
 		elif event.keycode == KEY_T:
 			animate_portals = !animate_portals
-			print("Portal animation: ", "ON" if animate_portals else "OFF")
 			for portal in portals:
 				if is_instance_valid(portal):
 					portal.animate_rotation = animate_portals
 		elif event.keycode == KEY_EQUAL or event.keycode == KEY_KP_ADD:
 			# Increase spacing
 			spacing += 0.5
-			print("Spacing: %.1f" % spacing)
 			generate_portal_grid()
 		elif event.keycode == KEY_MINUS or event.keycode == KEY_KP_SUBTRACT:
 			# Decrease spacing
 			spacing = max(2.0, spacing - 0.5)
-			print("Spacing: %.1f" % spacing)
 			generate_portal_grid()
 
 func _exit_tree() -> void:

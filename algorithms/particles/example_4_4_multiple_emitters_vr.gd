@@ -44,7 +44,6 @@ func _ready() -> void:
 	# Create multiple emitters
 	create_emitters()
 
-	print("Example 4.4: Multiple Emitters - 4 emitters with different properties")
 
 func _process(_delta):
 	update_info_label()
@@ -157,7 +156,6 @@ func toggle_emitter(index: int) -> void:
 	if index < emitters.size():
 		var emitter = emitters[index]
 		emitter.emission_rate = 0.0 if emitter.emission_rate > 0 else 5.0 + index * 2.0
-		print("Emitter %d: %s" % [index + 1, "OFF" if emitter.emission_rate == 0 else "ON"])
 
 func clear_all() -> void:
 	"""Clear all particles"""

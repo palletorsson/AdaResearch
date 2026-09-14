@@ -68,7 +68,6 @@ func _ready() -> void:
 	_mesh_instance.material_override = mat
 	add_child(_mesh_instance)
 
-	print("SpectralMeter: Initialized with %d bars at %d fps" % [bar_count, update_rate])
 
 func _setup_spectrum_analyzer() -> void:
 	"""Setup the spectrum analyzer on the target audio player"""
@@ -85,7 +84,6 @@ func _setup_spectrum_analyzer() -> void:
 		AudioServer.add_bus()
 		bus_index = AudioServer.get_bus_count() - 1
 		AudioServer.set_bus_name(bus_index, bus_name)
-		print("SpectralMeter: Created audio bus '%s'" % bus_name)
 
 	# Add spectrum analyzer effect to the bus
 	spectrum_analyzer = AudioEffectSpectrumAnalyzer.new()
@@ -94,7 +92,6 @@ func _setup_spectrum_analyzer() -> void:
 	spectrum_analyzer.tap_back_pos = 0.01  # Slight delay for better analysis
 
 	AudioServer.add_bus_effect(bus_index, spectrum_analyzer)
-	print("SpectralMeter: Added spectrum analyzer to bus")
 
 	# Set the audio player to use this bus
 	target_audio_player.bus = bus_name
@@ -114,7 +111,6 @@ func _find_player_camera() -> void:
 	for camera in potential_cameras:
 		if camera and camera is Camera3D:
 			player_camera = camera
-			print("SpectralMeter: Found player camera - %s" % camera.name)
 			break
 
 func _process(delta: float) -> void:

@@ -271,7 +271,6 @@ func _pin_cap_to_stem(cap: SoftBody3D, stem: StaticBody3D, height: float) -> voi
 			if Vector2(v.x, v.z).length_squared() < pin_radius_sq:
 				pinned_indices.append(i)
 	
-	print("Mushroom at ", stem.position, ": Pinning ", pinned_indices.size(), " vertices.")
 	
 	if not pinned_indices.is_empty():
 		var path = stem.get_path()

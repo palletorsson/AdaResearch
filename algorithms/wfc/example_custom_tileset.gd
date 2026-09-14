@@ -22,8 +22,6 @@ func _ready() -> void:
 	# Create custom tileset for corridors/rooms
 	create_corridor_tileset()
 
-	print("Custom tileset created with ", wfc_grid.tile_types.size(), " tile types")
-	print("Press SPACE to generate")
 
 func create_corridor_tileset() -> void:
 	"""Create a tileset for generating corridor-like structures"""
@@ -119,7 +117,6 @@ func create_corridor_tileset() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
-			print("\n=== Generating Custom WFC Grid ===")
 			wfc_grid.generate()
 
 func apply_grid_config(config: Dictionary) -> void:

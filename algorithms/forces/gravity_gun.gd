@@ -227,8 +227,6 @@ func setup_vr_controller() -> void:
 	while parent and depth < 10:
 		if parent is XRController3D:
 			controller = parent
-			if debug:
-				print("[GravityGun] Found controller: ", controller.name)
 			break
 		parent = parent.get_parent()
 		depth += 1
@@ -261,15 +259,11 @@ func _check_input() -> void:
 	# Released grip - queue gravity restoration for the targeted object
 	if not is_attracting and was_attracting and targeted_object:
 		_queue_gravity_restore(targeted_object)
-		if debug:
-			print("[GravityGun] Released - gravity will restore in ", gravity_restore_time, "s")
 	
 	# Trigger to launch - only on rising edge (press, not hold)
 	if trigger_pressed and not last_trigger_pressed:
 		if not captured_objects.is_empty():
 			launch_one()
-			if debug:
-				print("[GravityGun] Trigger pressed - launched 1, remaining: ", captured_objects.size())
 	
 	last_trigger_pressed = trigger_pressed
 
@@ -394,8 +388,6 @@ func _update_gravity_restoration(delta: float) -> void:
 			# Restore gravity
 			body.gravity_scale = data["original_gravity"]
 			to_restore.append(body)
-			if debug:
-				print("[GravityGun] Restored gravity for: ", body.name)
 	
 	for body in to_restore:
 		gravity_restore_queue.erase(body)
@@ -440,8 +432,6 @@ func _capture_object(body: RigidBody3D) -> void:
 		return
 
 	if captured_objects.size() >= max_captured_objects:
-		if debug:
-			print("[GravityGun] Max captured objects reached")
 		return
 
 	captured_objects.append(body)
@@ -473,8 +463,6 @@ func _capture_object(body: RigidBody3D) -> void:
 		body.picked_up.connect(_on_captured_object_picked_up)
 
 	object_captured.emit(body)
-	if debug:
-		print("[GravityGun] Captured: ", body.name, " (total: ", captured_objects.size(), ")")
 
 ## Called when a captured object is picked up by a hand - release it from capture
 func _on_captured_object_picked_up(pickable) -> void:
@@ -493,8 +481,6 @@ func _on_captured_object_picked_up(pickable) -> void:
 	if pickable.has_signal("picked_up") and pickable.is_connected("picked_up", _on_captured_object_picked_up):
 		pickable.picked_up.disconnect(_on_captured_object_picked_up)
 
-	if debug:
-		print("[GravityGun] Released to hand: ", pickable.name, " (remaining: ", captured_objects.size(), ")")
 
 func _update_captured_objects() -> void:
 	if captured_objects.is_empty():
@@ -657,8 +643,6 @@ func launch_one() -> void:
 	recently_launched[obj] = launch_cooldown
 
 	object_launched.emit(obj, obj.linear_velocity)
-	if debug:
-		print("[GravityGun] Launched: ", obj.name)
 
 func launch_all() -> void:
 	while not captured_objects.is_empty():

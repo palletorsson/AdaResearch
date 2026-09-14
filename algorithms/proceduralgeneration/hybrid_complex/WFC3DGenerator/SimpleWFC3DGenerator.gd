@@ -123,7 +123,6 @@ func run_wfc() -> void:
 		propagate_constraints(pos)
 		iterations += 1
 	
-	print("WFC completed in ", iterations, " iterations")
 
 func find_lowest_entropy_cell():
 	var lowest_entropy = INF

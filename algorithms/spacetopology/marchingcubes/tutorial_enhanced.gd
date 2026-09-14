@@ -103,14 +103,12 @@ func generate() -> void:
 	remove_all_children()
 	setup_noise()
 	
-	print("🌍 Generating terrain with hole-free techniques...")
 	
 	if show_points:
 		generate_debug_points()
 	
 	generate_terrain_mesh()
 	
-	print("✅ Generation complete!")
 
 func generate_debug_points() -> void:
 	"""Generate debug point visualization"""
@@ -201,7 +199,6 @@ func generate_terrain_mesh() -> void:
 	mesh_instance.set_surface_override_material(0, material)
 	add_child(mesh_instance)
 	
-	print("Generated %d triangles from %d cubes" % [triangle_count, processed_cubes])
 
 func generate_cube_triangles(center: Vector3) -> Array:
 	"""Generate triangles for a single cube using hole-free marching cubes"""

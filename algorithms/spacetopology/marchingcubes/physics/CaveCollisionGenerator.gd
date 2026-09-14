@@ -46,14 +46,11 @@ func generate_collision_shape(mesh: ArrayMesh, type: CollisionType = CollisionTy
 func create_trimesh_collision(mesh: ArrayMesh) -> ConcavePolygonShape3D:
 	"""Create exact trimesh collision from mesh"""
 	var shape = mesh.create_trimesh_shape()
-	print("CaveCollision: Created trimesh with %d faces" % (shape.get_faces().size() / 3))
 	return shape
 
 func create_convex_hull_collision(mesh: ArrayMesh) -> ConvexPolygonShape3D:
 	"""Create convex hull collision approximation"""
 	var shape = mesh.create_convex_shape()
-	if shape != null:
-		print("CaveCollision: Created convex hull")
 	return shape
 
 func create_compound_collision(mesh: ArrayMesh) -> Shape3D:
@@ -79,7 +76,6 @@ func create_compound_collision(mesh: ArrayMesh) -> Shape3D:
 		var region_mesh = create_mesh_from_vertices(largest_region)
 		var convex_shape = region_mesh.create_convex_shape()
 		if convex_shape != null:
-			print("CaveCollision: Created simplified convex shape from largest region")
 			return convex_shape
 	
 	# Fallback to regular convex hull
@@ -119,7 +115,6 @@ func simplify_mesh(mesh: ArrayMesh, ratio: float) -> ArrayMesh:
 	new_arrays[Mesh.ARRAY_INDEX] = new_indices
 	simplified_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, new_arrays)
 	
-	print("CaveCollision: Simplified mesh from %d to %d triangles" % [indices.size() / 3, new_indices.size() / 3])
 	return simplified_mesh
 
 func get_mesh_vertices(mesh: ArrayMesh) -> PackedVector3Array:
@@ -216,7 +211,6 @@ func generate_multiple_lod_collision(mesh: ArrayMesh) -> Dictionary:
 	# LOD 3 - Lowest detail (compound convex)
 	lod_shapes["lod3"] = create_compound_collision(mesh)
 	
-	print("CaveCollision: Generated %d LOD levels" % lod_shapes.size())
 	return lod_shapes
 
 func get_collision_complexity(shape: Shape3D) -> Dictionary:
@@ -247,7 +241,6 @@ func get_collision_complexity(shape: Shape3D) -> Dictionary:
 
 func generate_walkable_collision(cave_meshes: Array[MeshInstance3D], parent_node: Node3D) -> Array[StaticBody3D]:
 	"""Generate VR-walkable collision surfaces from cave meshes"""
-	print("CaveCollisionGenerator: Generating VR walkable surfaces...")
 	
 	collision_bodies.clear()
 	walkable_surfaces.clear()
@@ -257,7 +250,6 @@ func generate_walkable_collision(cave_meshes: Array[MeshInstance3D], parent_node
 		if walkable_collision != null:
 			collision_bodies.append(walkable_collision)
 	
-	print("CaveCollisionGenerator: Generated %d walkable collision bodies" % collision_bodies.size())
 	return collision_bodies
 
 func create_walkable_collision_for_mesh(mesh_instance: MeshInstance3D, parent_node: Node3D) -> StaticBody3D:
@@ -292,7 +284,6 @@ func create_walkable_collision_for_mesh(mesh_instance: MeshInstance3D, parent_no
 		# Add to scene
 		parent_node.add_child(collision_body)
 		
-		print("Created walkable collision with %d triangles" % surface_data.walkable_triangles.size())
 		return collision_body
 	
 	return null
@@ -341,9 +332,6 @@ func analyze_walkable_surfaces(mesh: ArrayMesh) -> Dictionary:
 		# Check if surface is walkable (roughly horizontal)
 		var angle_from_up = rad_to_deg(triangle_normal.angle_to(Vector3.UP))
 		
-		# DEBUG: Show angle analysis for first few triangles
-		if surface_data.surface_count < 5:
-			print("Triangle %d: normal %v, angle from up: %.1fÂ°" % [surface_data.surface_count, triangle_normal, angle_from_up])
 		
 		# RELAXED: More permissive slope detection for voxel terrain
 		if angle_from_up <= 60.0:  # Increased from 30Â° to 60Â° for marching cubes terrain
@@ -364,10 +352,6 @@ func analyze_walkable_surfaces(mesh: ArrayMesh) -> Dictionary:
 				surface_data.total_walkable_area += area
 				surface_data.surface_count += 1
 	
-	print("DEBUG: Analyzed %d total triangles, found %d walkable (%.1f%%) with total area %.2f mÂ²" % 
-		[indices.size() / 3, surface_data.walkable_triangles.size(), 
-		(surface_data.walkable_triangles.size() * 100.0) / max(1, indices.size() / 3),
-		surface_data.total_walkable_area])
 	
 	return surface_data
 
@@ -409,7 +393,6 @@ func generate_navigation_tiles(walkable_triangles: Array, parent_node: Node3D) -
 	"""Generate 1x1 meter navigation tiles for VR teleportation"""
 	var navigation_tiles: Array[Area3D] = []
 	
-	print("CaveCollisionGenerator: Generating 1x1m navigation tiles...")
 	
 	# Group triangles into 1x1 meter grid cells
 	var tile_grid = create_tile_grid(walkable_triangles)
@@ -421,7 +404,6 @@ func generate_navigation_tiles(walkable_triangles: Array, parent_node: Node3D) -
 			if tile_area != null:
 				navigation_tiles.append(tile_area)
 	
-	print("Created %d navigation tiles" % navigation_tiles.size())
 	return navigation_tiles
 
 func create_tile_grid(walkable_triangles: Array) -> Dictionary:
@@ -497,7 +479,6 @@ func create_navigation_tile(grid_pos: Vector2i, tile_triangles: Array, parent_no
 
 func create_vr_teleport_markers(navigation_tiles: Array[Area3D], parent_node: Node3D) -> void:
 	"""Create visual markers for VR teleportation targets"""
-	print("CaveCollisionGenerator: Creating VR teleport markers...")
 	
 	for nav_tile in navigation_tiles:
 		var marker = create_teleport_marker(nav_tile)

@@ -82,9 +82,6 @@ func _ready() -> void:
 	_setup_mesh()
 	_setup_labels()
 
-	print("GameSoundMeter: Initialized - Style: %s, Bars: %d, FPS: %.1f" % [
-		DisplayStyle.keys()[display_style], bar_count, update_fps
-	])
 
 func _initialize_meter() -> void:
 	"""Initialize the meter arrays and settings"""
@@ -207,7 +204,6 @@ func _setup_audio_analysis() -> void:
 		var effect_count = AudioServer.get_bus_effect_count(master_bus_index)
 		spectrum_instance = AudioServer.get_bus_effect_instance(master_bus_index, effect_count - 1) as AudioEffectSpectrumAnalyzerInstance
 
-		print("GameSoundMeter: Monitoring Master Bus - analyzing ALL game audio")
 	else:
 		var bus_name = "GameSoundMeter_Analysis"
 		var bus_index = AudioServer.get_bus_index(bus_name)
@@ -228,7 +224,6 @@ func _setup_audio_analysis() -> void:
 
 		if target_audio_player:
 			target_audio_player.bus = bus_name
-			print("GameSoundMeter: Connected audio player to analysis bus")
 
 func _find_game_objects() -> void:
 	"""Auto-find teleport cube and audio components"""
@@ -246,7 +241,6 @@ func _find_game_objects() -> void:
 							target_audio_player = child
 							teleport_cube_node = node
 							_setup_audio_analysis()
-							print("GameSoundMeter: Auto-found teleport audio: %s" % child.name)
 							break
 
 	var cameras = [

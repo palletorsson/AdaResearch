@@ -492,7 +492,6 @@ func generate_data() -> void:
 			else:
 				generate_random_dataset()
 
-	print("Generated ", data_points.size(), " data points (cohort=", cohort, ")")
 
 func generate_clustered_dataset() -> void:
 	var points_per_cluster: int = int(data_point_count * (1.0 - noise_points_percentage) / natural_cluster_count)
@@ -702,7 +701,6 @@ func start_clustering() -> void:
 	distance_history.clear()
 	centroid_movement_history.clear()
 	
-	print("Starting K-means clustering with ", cluster_count, " clusters")
 
 func perform_clustering_step() -> void:
 	if converged:
@@ -764,7 +762,6 @@ func perform_clustering_step() -> void:
 		converged = true
 		if pause_on_convergence:
 			is_paused = true
-		print("Converged after ", iteration, " iterations")
 	
 	# Update visuals
 	update_visuals()
@@ -1297,9 +1294,7 @@ func run_k_comparison_experiment() -> void:
 	show_elbow_analysis(k_values, inertias)
 
 func show_elbow_analysis(k_values: Array, inertias: Array) -> void:
-	print("Elbow Method Analysis:")
-	for i in range(k_values.size()):
-		print("K=%d: Inertia=%.2f" % [k_values[i], inertias[i]])
+	pass
 
 # Advanced initialization methods
 func initialize_centroids_plus_plus() -> void:
@@ -1388,7 +1383,6 @@ func load_clustering_session(filename: String) -> bool:
 	centroid_movement_history = data.results.centroid_movement_history
 	assignments = data.cluster_assignments
 	
-	print("Session loaded: ", filename)
 	return true
 
 # Performance optimization
@@ -1491,8 +1485,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[EnhancedKMeans] Config applied - cohort=%s, points=%d, k=%d" % [
-		cohort, data_points.size(), centroids.size()])
 
 ## Accept an axis value only if it names something we actually build. A typo has
 ## to land on the shipped look rather than on an empty 25 m room.

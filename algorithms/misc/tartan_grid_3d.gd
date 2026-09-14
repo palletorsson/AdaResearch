@@ -122,7 +122,6 @@ var animation_speed = 1.0
 @export var wave_height: float = 2.0
 
 func _ready() -> void:
-	print("🏴󠁧󠁢󠁳󠁣󠁴󠁿 TartanGrid3D: Initializing 3D tartan cube gallery...")
 	
 	# Combine all tartan patterns
 	all_tartans = clan_tartans + modern_tartans
@@ -134,8 +133,6 @@ func _ready() -> void:
 	setup_camera()
 	generate_3d_tartan_grid()
 	
-	print("✅ Generated ", cube_instances.size(), " tartan cubes in 10x10x1 grid")
-	print("🎮 Controls: R=Regenerate, T=Toggle Animation, Space=Wave Effect")
 
 func setup_camera() -> void:
 	# Add a camera if none exists
@@ -144,7 +141,6 @@ func setup_camera() -> void:
 		camera.position = Vector3(GRID_SIZE * TOTAL_SPACING * 0.5, 15, GRID_SIZE * TOTAL_SPACING * 0.8)
 		camera.look_at(Vector3(GRID_SIZE * TOTAL_SPACING * 0.5, 0, GRID_SIZE * TOTAL_SPACING * 0.5), Vector3.UP)
 		add_child(camera)
-		print("📷 Added camera for 3D tartan grid view")
 
 func generate_3d_tartan_grid() -> void:
 	# Clear existing cubes
@@ -320,20 +316,16 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
-				print("🔄 Regenerating tartan grid...")
 				regenerate_grid()
 			KEY_T:
 				animate_colors = !animate_colors
-				print("🎭 Animation toggled: ", animate_colors)
 			KEY_SPACE:
 				trigger_wave_effect()
 			KEY_Q:
 				rotate_cubes = !rotate_cubes
-				print("🔄 Rotation toggled: ", rotate_cubes)
 			KEY_1, KEY_2, KEY_3, KEY_4, KEY_5:
 				var speed_level = event.keycode - KEY_0
 				animation_speed = speed_level * 0.5
-				print("⚡ Animation speed: ", animation_speed)
 
 func regenerate_grid() -> void:
 	# Regenerate random patterns
@@ -344,7 +336,6 @@ func regenerate_grid() -> void:
 	generate_3d_tartan_grid()
 
 func trigger_wave_effect() -> void:
-	print("🌊 Triggering wave effect...")
 	
 	for i in range(cube_instances.size()):
 		var cube = cube_instances[i]

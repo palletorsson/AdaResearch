@@ -36,7 +36,6 @@ func _initialize() -> void:
 	_setup_collision()
 	_setup_hit_detection()
 
-	print("DestructibleMarchingCube: Initialized with ", fragment_count, " potential fragments")
 
 func _setup_base_mesh() -> void:
 	# Find the MeshInstance3D from terrain generator
@@ -55,7 +54,6 @@ func _setup_base_mesh() -> void:
 			if mesh_instance.get_surface_override_material_count() > 0:
 				_base_mesh_instance.set_surface_override_material(0, mesh_instance.get_surface_override_material(0))
 
-			print("DestructibleMarchingCube: Mesh copied with ", _base_mesh.get_surface_count(), " surfaces")
 
 func _setup_collision() -> void:
 	# Create static body for collision
@@ -70,7 +68,6 @@ func _setup_collision() -> void:
 			var collision_shape = CollisionShape3D.new()
 			collision_shape.shape = shape
 			_collision_body.add_child(collision_shape)
-			print("DestructibleMarchingCube: Collision shape created")
 
 func _setup_hit_detection() -> void:
 	# Create area to detect projectile hits
@@ -109,7 +106,6 @@ func _on_body_entered(body: Node3D) -> void:
 		if body.has_method("get_contact_count"):
 			impact_point = body.global_position
 
-	print("DestructibleMarchingCube: Hit by ", body.name, " at ", impact_point)
 
 	# Reduce health
 	health -= 1
@@ -133,7 +129,6 @@ func _destroy(impact_point: Vector3, impact_velocity: Vector3) -> void:
 		return
 
 	_is_destroyed = true
-	print("DestructibleMarchingCube: Destroying!")
 
 	# Hide original mesh
 	if _base_mesh_instance:

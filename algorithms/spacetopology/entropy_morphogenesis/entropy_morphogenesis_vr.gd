@@ -160,15 +160,12 @@ func _apply_level() -> void:
 
 
 func _ready() -> void:
-	print("=== ENTROPY MORPHOGENESIS VR (Marching Cubes) ===")
 	_apply_found_state()
 	_apply_level()
-	print("  Entropy S = %.3f" % S)
 	_update_from_entropy()
 	_setup_generator()
 	_generate_gyroid()
 	_built = true
-	print("=== INITIALIZATION COMPLETE ===")
 
 func _update_from_entropy() -> void:
 	"""Map entropy S to field parameters"""
@@ -193,12 +190,9 @@ func _setup_generator() -> void:
 	if field_seed != 0 and gyroid_generator.noise != null:
 		gyroid_generator.noise.seed = field_seed
 
-	print("✓ Gyroid generator configured")
-	print("  S=%.2f → Freq:%.2f, Noise:%.3f, Threshold:%.2f" % [S, current_frequency, current_noise_amp, current_threshold])
 
 func _generate_gyroid() -> void:
 	"""Generate the gyroid mesh at current entropy state"""
-	print("Generating gyroid at entropy S=%.3f..." % S)
 
 	# Generate mesh using marching cubes
 	gyroid_mesh = gyroid_generator.generate_gyroid_mesh(self)
@@ -232,12 +226,9 @@ func _apply_material() -> void:
 		material.set_shader_parameter("metallic", metallic)
 		material.set_shader_parameter("roughness", roughness)
 
-	print("✓ Shader parameters applied")
 
 func _regenerate() -> void:
 	"""Regenerate mesh with new entropy state"""
-	print("=== REGENERATING AT NEW ENTROPY STATE ===")
-	print("  S = %.3f" % S)
 
 	_update_from_entropy()
 
@@ -258,8 +249,6 @@ func _regenerate() -> void:
 	# Apply material
 	_apply_material()
 
-	print("✓ Morphological transformation complete")
-	print("  New state: Freq:%.2f, Noise:%.3f, Threshold:%.2f" % [current_frequency, current_noise_amp, current_threshold])
 
 # ---------------- Public API ----------------
 func set_box_size(new_size: Vector3) -> void:

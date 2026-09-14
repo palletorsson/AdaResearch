@@ -100,7 +100,6 @@ func _ready() -> void:
 
 	_apply_reveal()
 
-	print("Example 6.6: VR Grabbable Objects - Click objects to grab/release")
 
 func _process(_delta):
 	# Simulate VR controller movement with mouse (placeholder)
@@ -295,7 +294,6 @@ func attempt_grab() -> void:
 	if nearest_object:
 		controller_grabbed_object = nearest_object
 		nearest_object.grab_start(simulated_controller)
-		print("Grabbed: %s" % nearest_object.name)
 		update_info_label()
 
 func release_object() -> void:
@@ -305,7 +303,6 @@ func release_object() -> void:
 		var throw_velocity = controller_grabbed_object.linear_velocity
 
 		controller_grabbed_object.grab_release(throw_velocity)
-		print("Released: %s" % controller_grabbed_object.name)
 		controller_grabbed_object = null
 		update_info_label()
 

@@ -434,7 +434,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[RhizomaticStructure] Config applied — mutuality=%s" % [mutuality])
 
 
 ## Accept an axis value only if it names something we actually grow. A typo in a

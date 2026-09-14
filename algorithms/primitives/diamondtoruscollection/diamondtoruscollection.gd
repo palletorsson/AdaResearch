@@ -137,7 +137,6 @@ func create_hanging_arrangement() -> void:
 			diamonds.append(diamond)
 			add_child(diamond)
 	
-	print("DiamondTorusCollection: Created %d cylinders and diamonds" % diamond_count)
 
 func create_hanging_cylinder(torus_position: Vector3) -> MeshInstance3D:
 	"""Create a thin cylinder hanging downward from the torus"""

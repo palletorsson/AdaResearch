@@ -88,7 +88,6 @@ func _on_demo_button_pressed(demo_index: int) -> void:
 		generate_demo_sound(demo_sounds[demo_index])
 
 func generate_demo_sound(sound_config: Dictionary) -> void:
-	print("Generating demo sound: ", sound_config["name"])
 
 	match sound_config["type"]:
 		"sweep":

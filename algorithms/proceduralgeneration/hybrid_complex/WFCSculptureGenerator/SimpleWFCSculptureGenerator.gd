@@ -33,7 +33,6 @@ func create_sculpture_variant(name: String, pos: Vector3, hollow: float, complex
 	# Generate the sculpture
 	await sculpture.create_hollow_sculpture()
 	
-	print("Created sculpture: ", name)
 
 # Call this function to regenerate the sculpture with new parameters
 func regenerate_all() -> void:
@@ -41,12 +40,10 @@ func regenerate_all() -> void:
 		if child is WFCSculptureGenerator:
 			child.clear_generated_sculpture()
 			await child.create_hollow_sculpture()
-			print("Regenerated sculpture: ", child.name)
 
 # Example of interactive parameter modification
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key
-		print("Regenerating all sculptures...")
 		await regenerate_all()
 	
 	if event.is_action_pressed("ui_select"):  # Enter key
@@ -66,7 +63,6 @@ func modify_random_sculpture() -> void:
 		random_sculpture.clear_generated_sculpture()
 		await random_sculpture.create_hollow_sculpture()
 		
-		print("Modified sculpture: ", random_sculpture.name)
 
 func _exit_tree() -> void:
 	for child in get_children():

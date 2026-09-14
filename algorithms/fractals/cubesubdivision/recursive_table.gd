@@ -102,7 +102,6 @@ func _execute_step(s: int) -> void:
 				_step_4_add_supports()
 		_:
 			is_animating = false
-			print("Recursive table complete! Total parts: %d" % all_cubes.size())
 
 
 func _build_instant() -> void:
@@ -149,7 +148,6 @@ func _is_leg_cell(x: int, z: int) -> bool:
 func _step_0_initial_cube() -> void:
 	# Create the initial cube that will become the table
 	_create_cube(Vector3(0, table_size * 0.4, 0), Vector3(table_size, table_size * 0.8, table_size), 0, "base")
-	print("Step 0: Initial cube")
 
 
 func _step_1_first_subdivision() -> void:
@@ -194,7 +192,6 @@ func _step_1_first_subdivision() -> void:
 				if role != "remove":
 					_create_cube(pos, Vector3(size_x * 0.95, size_y * 0.95, size_z * 0.95), 1, role)
 
-	print("Step 1: Subdivided into table shape")
 
 
 func _step_2_shape_tabletop() -> void:
@@ -220,7 +217,6 @@ func _step_2_shape_tabletop() -> void:
 		0, "tabletop_solid"
 	)
 
-	print("Step 2: Shaped tabletop (thin plastic)")
 
 
 func _step_3_create_legs() -> void:
@@ -263,7 +259,6 @@ func _step_3_create_legs() -> void:
 
 		cube_data.role = "leg"
 
-	print("Step 3: Extended legs (thin plastic, bridging gap)")
 
 
 func _step_4_add_supports() -> void:
@@ -334,7 +329,6 @@ func _step_4_add_supports() -> void:
 		3, "apron"
 	)
 
-	print("Step 4: Added apron supports (thin plastic)")
 
 
 func _create_cube(pos: Vector3, size: Vector3, generation: int, role: String) -> void:

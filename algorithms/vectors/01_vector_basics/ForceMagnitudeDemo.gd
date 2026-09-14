@@ -70,7 +70,6 @@ func _ready() -> void:
 	_mass = _body_mass()
 	super._ready()
 	_setup_demo()
-	print("ForceMagnitudeDemo: Ready - Drag the red force vector!")
 
 ## The ball the force pushes. Overridden only so `body` can reach it; at the default it
 ## hands straight back to the base and the legacy ball is built untouched.
@@ -203,7 +202,6 @@ func _reset_demo() -> void:
 	if line_container and line_container.has_method("refresh_connections"):
 		line_container.refresh_connections()
 	
-	print("ForceMagnitudeDemo: Reset")
 
 func apply_grid_config(config: Dictionary) -> void:
 	# The grid calls this DEFERRED, so _ready has already built the box. Nothing here may

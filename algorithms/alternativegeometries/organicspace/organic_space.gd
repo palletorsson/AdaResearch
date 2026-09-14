@@ -88,7 +88,6 @@ func setup_components() -> void:
 	add_child(material_manager)
 
 func generate_organic_space() -> void:
-	print("Generating organic VR space...")
 
 	_seed_rng()
 

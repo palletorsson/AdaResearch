@@ -80,11 +80,6 @@ func create_shelf_with_csg() -> void:
 
 	populate_compartment_texts()
 	
-	print("CSG Shelf created with ", GRID_SIZE, "x", GRID_SIZE, " compartments")
-	print("Compartment size: ", COMPARTMENT_SIZE * 100, "cm (exactly 2 dm)")
-	print("Total shelf size: ", SHELF_SIZE * 100, "cm")
-	print("Shelf depth: ", SHELF_DEPTH * 100, "cm")
-	print("Colliders enabled for shelf and individual compartments")
 func create_compartment_cutouts(parent_combiner: CSGCombiner3D) -> void:
 	# Calculate starting position for compartments
 	var start_x = -SHELF_SIZE/2 + WALL_THICKNESS + COMPARTMENT_SIZE/2

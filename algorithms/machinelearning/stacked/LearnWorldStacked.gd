@@ -50,7 +50,6 @@ var _status_label: Label3D = null
 func _ready() -> void:
 	_setup_environment()
 	_create_status_label()
-	print("BuildEnv: Ready! Waiting for step() calls to place geometry...")
 
 func _setup_environment() -> void:
 	"""Create ground plane and lighting"""
@@ -79,7 +78,6 @@ func _setup_environment() -> void:
 	ground_plane.add_child(ground_mesh_instance)
 	add_child(ground_plane)
 
-	print("BuildEnv: Environment setup complete (ground: %.1fx%.1f)" % [arena_size_x * 2, arena_size_z * 2])
 
 func _create_status_label() -> void:
 	"""Floating 3D label showing build stats"""
@@ -446,10 +444,6 @@ func _place_action(a: Dictionary) -> bool:
 		if child is MeshInstance3D:
 			child.material_override = typed_mat
 	
-	# Debug output
-	print("BuildEnv: Placed %s (ID:%d) at (%.1f, %.1f, %.1f) - Total bodies: %d" % [
-		primitive_name, pid, x, y_top, z, bodies.size()
-	])
 	
 	# Update status label
 	if _status_label:
@@ -860,7 +854,6 @@ func _try_add_motif(motif_data: Dictionary) -> void:
 	motif_data["count"] = 1
 	motif_data["discovered_episode"] = episode_count
 	motif_library.append(motif_data)
-	print("BuildEnv: Discovered new motif #%d (size: %d)" % [motif_library.size(), motif_data["size"]])
 
 func _motifs_similar(m1: Dictionary, m2: Dictionary, threshold: float = 0.8) -> bool:
 	"""Check if two motifs are similar"""
@@ -908,7 +901,6 @@ func _place_motif(motif_id: int, action: Dictionary) -> bool:
 		if _place_action(piece_action):
 			success_count += 1
 
-	print("BuildEnv: Placed motif #%d (%d/%d pieces)" % [motif_id, success_count, pattern.size()])
 	return success_count > 0
 
 func _get_debug_info() -> Dictionary:

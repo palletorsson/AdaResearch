@@ -508,8 +508,6 @@ func _evaluate_population() -> void:
 		creature.genome.fitness = forward * 2.0 + distance * 0.5 + height_bonus * 0.3
 		gen_best = max(gen_best, creature.genome.fitness)
 		gen_avg += creature.genome.fitness
-		if enable_debug_prints:
-			print("Generation %d fitness: %.2f" % [_generation, creature.genome.fitness])
 
 	gen_avg /= max(1, _population.size())
 	_best_fitness_ever = max(_best_fitness_ever, gen_best)
@@ -626,7 +624,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if selection == before_selection:
 		return
 	_rebuild_now()
-	print("[EvolvedCreatures] Config applied — selection=%s, bodies=%d" % [selection, _active_count])
 
 ## Accept an axis value only if it names something we actually build. A typo in a map
 ## token falls back to the legacy look rather than leaving an empty floor.

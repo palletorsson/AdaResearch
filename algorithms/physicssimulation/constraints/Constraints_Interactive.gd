@@ -56,7 +56,6 @@ func _ready() -> void:
 	create_all_demonstrations()
 	create_ui()
 
-	print("Interactive Constraints - Grab and play with physics joints!")
 
 func setup_vr_controllers() -> void:
 	var xr_origin = get_tree().get_first_node_in_group("XROrigin")

@@ -10,7 +10,6 @@ var latent_particles: Array = []
 
 func _ready() -> void:
 	# Initialize VAE visualization
-	print("Variational Autoencoders Visualization initialized")
 	create_input_particles()
 	create_output_particles()
 	create_latent_particles()

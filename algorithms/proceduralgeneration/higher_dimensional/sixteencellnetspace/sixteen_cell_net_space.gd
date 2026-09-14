@@ -86,7 +86,6 @@ func generate_16cell_space() -> void:
                 create_16cell_net(pos, rotation, color)
                 net_count += 1
     
-    print("Generated 16-cell net space: ", net_count, " nets, each with 16 tetrahedra")
 
 func get_net_bounds() -> Vector3:
     """Get bounding box of the 16-cell net"""

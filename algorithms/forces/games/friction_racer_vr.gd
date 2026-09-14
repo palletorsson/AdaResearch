@@ -72,7 +72,6 @@ func _ready() -> void:
 	create_ui()
 	position_camera_overhead()
 
-	print("Friction Racer VR - Master surface physics to win!")
 
 func _process(delta: float) -> void:
 	if race_active:

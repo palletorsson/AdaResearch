@@ -46,7 +46,6 @@ func _set_sequence_length(v: int) -> void:
 	create_output_tokens()
 
 func _ready() -> void:
-	print("LSTM Networks Visualization initialized")
 	create_input_tokens()
 	create_output_tokens()
 	create_memory_particles()

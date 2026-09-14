@@ -236,7 +236,6 @@ func start_boyer_moore_search() -> void:
 	position_pattern_overlay()
 	update_ui()
 	
-	print("Boyer-Moore search started for pattern: '", search_pattern, "'")
 
 func perform_search_step() -> void:
 	"""Perform one step of Boyer-Moore algorithm"""
@@ -247,7 +246,6 @@ func perform_search_step() -> void:
 		# Search complete
 		is_searching = false
 		algorithm_step = "complete"
-		print("Search complete. Found ", matches_found.size(), " matches.")
 		update_ui()
 		return
 	

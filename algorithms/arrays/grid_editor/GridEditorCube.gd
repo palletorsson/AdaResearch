@@ -116,7 +116,6 @@ func _on_picked_up(_pickable) -> void:
 	collision_layer = 0
 	collision_mask = 0
 	
-	print("GridEditorCube: Picked up at grid position %s" % grid_position)
 	
 	if is_spawner:
 		# I am now a real boy!
@@ -165,7 +164,6 @@ func _on_dropped(_pickable) -> void:
 		controller.trigger_haptic_pulse("haptic", 0, 0.5, 0.05, 0)
 	
 	freeze = true
-	print("GridEditorCube: Dropped at grid position %s" % grid_position)
 
 func _on_highlight_updated(_pickable, enable: bool) -> void:
 	_is_hovered = enable
@@ -220,8 +218,6 @@ func local_to_grid(local_pos: Vector3) -> Vector3i:
 
 func set_paired_cube(cube: GridEditorCube) -> void:
 	paired_cube = cube
-	if cube:
-		print("GridEditorCube: Paired with %s" % cube.name)
 
 func set_grid_origin(origin: Vector3) -> void:
 	grid_origin = origin

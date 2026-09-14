@@ -71,17 +71,13 @@ func _setup_hit_detection() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	"""Handle collision - destroy immediately"""
-	print("[SimpleDestroyCube] Body entered: ", body.name, " Groups: ", body.get_groups(), " Layer: ", body.collision_layer if body is CollisionObject3D else "N/A")
 
 	if body == self:
-		print("[SimpleDestroyCube] Ignoring self")
 		return
 
 	if not body.is_in_group("throwable"):
-		print("[SimpleDestroyCube] Not in throwable group, ignoring")
 		return
 
-	print("[SimpleDestroyCube] HIT DETECTED!")
 
 	# Get impact velocity
 	var impact_velocity = Vector3.ZERO

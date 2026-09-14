@@ -5,14 +5,12 @@
 extends Node3D
 
 func _ready() -> void:
-	print("🧪 Marching Cubes Test: Starting tests...")
 	test_basic_sphere()
 	test_voxel_chunk()
 	test_rhizome_generation()
 
 func test_basic_sphere() -> void:
 	"""Test basic marching cubes with a simple sphere"""
-	print("Testing basic sphere generation...")
 	
 	# Create a simple voxel chunk
 	var chunk = VoxelChunk.new(Vector3i(16, 16, 16), Vector3(-8, -8, -8), 1.0)
@@ -50,13 +48,11 @@ func test_basic_sphere() -> void:
 		mesh_instance.set_surface_override_material(0, material)
 		
 		add_child(mesh_instance)
-		print("✅ Sphere test passed - mesh generated")
 	else:
 		print("❌ Sphere test failed - no mesh generated")
 
 func test_voxel_chunk() -> void:
 	"""Test voxel chunk functionality"""
-	print("Testing voxel chunk operations...")
 	
 	var chunk = VoxelChunk.new(Vector3i(8, 8, 8), Vector3.ZERO, 1.0)
 	
@@ -65,7 +61,7 @@ func test_voxel_chunk() -> void:
 	var density = chunk.get_density(Vector3i(4, 4, 4))
 	
 	if abs(density - 0.5) < 0.001:
-		print("✅ Voxel chunk basic operations test passed")
+		pass
 	else:
 		print("❌ Voxel chunk test failed - density mismatch")
 	
@@ -74,13 +70,12 @@ func test_voxel_chunk() -> void:
 	var carved_density = chunk.get_density(Vector3i(4, 4, 4))
 	
 	if carved_density < 0.1:
-		print("✅ Sphere carving test passed")
+		pass
 	else:
 		print("❌ Sphere carving test failed")
 
 func test_rhizome_generation() -> void:
 	"""Test basic rhizome pattern generation"""
-	print("Testing rhizome growth pattern...")
 	
 	var rhizome = RhizomeGrowthPattern.new(42)
 	rhizome.add_growth_node(Vector3.ZERO, 2.0)
@@ -94,7 +89,6 @@ func test_rhizome_generation() -> void:
 	var network = rhizome.generate_rhizome_network(10)
 	
 	if network.all_nodes.size() > 1:
-		print("✅ Rhizome generation test passed - %d nodes created" % network.all_nodes.size())
 		
 		# Create a simple visualization
 		create_rhizome_visualization(network)
@@ -103,7 +97,6 @@ func test_rhizome_generation() -> void:
 
 func create_rhizome_visualization(network: Dictionary) -> void:
 	"""Create a vibrant visualization of the rhizome network"""
-	print("Creating rhizome visualization...")
 	
 	# Create node spheres with rainbow colors
 	for i in range(network.all_nodes.size()):
@@ -127,7 +120,6 @@ func create_rhizome_visualization(network: Dictionary) -> void:
 		line.position.x += 15  # Match node offset
 		add_child(line)
 	
-	print("✅ Vibrant rhizome visualization created")
 
 func create_debug_sphere(position: Vector3, radius: float, color: Color) -> MeshInstance3D:
 	"""Create a vibrant debug sphere for visualization"""

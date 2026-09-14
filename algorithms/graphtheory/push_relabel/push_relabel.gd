@@ -255,7 +255,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return  # curation_station's {"emissive": false} lands here: touch nothing.
 
 	_rebuild_now()
-	print("[PushRelabel] Config applied — relief=%s, graph_size=%d" % [relief, graph_size])
 
 
 ## Accept an axis value only if it names something we actually build.

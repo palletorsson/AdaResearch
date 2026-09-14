@@ -26,7 +26,6 @@ func _ready() -> void:
 	ensure_fish_tank()
 	create_ui()
 	spawn_walker()
-	print("Example 0.1: Random walk - traditional")
 
 func _physics_process(delta: float) -> void:
 	if not is_instance_valid(walker):

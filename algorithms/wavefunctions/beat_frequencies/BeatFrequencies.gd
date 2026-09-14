@@ -63,8 +63,6 @@ func _ready() -> void:
 	_create_visualizations()
 	_setup_controls()
 	_update_frequency_labels()
-	print("BeatFrequencies: Ready! Move sliders to hear beating (Optimized)")
-	print("BeatFrequencies: Current beat frequency = %.2f Hz" % abs(freq1 - freq2))
 
 func _setup_audio() -> void:
 	audio_stream = AudioStreamGenerator.new()
@@ -76,7 +74,6 @@ func _setup_audio() -> void:
 	audio_player.play()
 	is_playing = true
 
-	print("BeatFrequencies: Audio synthesis enabled at %.1f Hz" % SAMPLE_RATE)
 
 func _setup_controls() -> void:
 	if slider1:
@@ -109,7 +106,6 @@ func _create_visualizations() -> void:
 	_create_beat_envelope_multimesh()
 	_create_labels()
 
-	print("BeatFrequencies: Using MultiMesh (4 nodes instead of 224)")
 
 func _create_wave_multimesh() -> void:
 	var wave_sphere = SphereMesh.new()
@@ -268,16 +264,13 @@ func _update_frequency_labels() -> void:
 func _on_slider1_changed(value: float) -> void:
 	freq1 = lerp(freq_min, freq_max, value)
 	_update_frequency_labels()
-	print("BeatFrequencies: F1 = %.1f Hz, Beat = %.2f Hz" % [freq1, abs(freq1 - freq2)])
 
 func _on_slider2_changed(value: float) -> void:
 	freq2 = lerp(freq_min, freq_max, value)
 	_update_frequency_labels()
-	print("BeatFrequencies: F2 = %.1f Hz, Beat = %.2f Hz" % [freq2, abs(freq1 - freq2)])
 
 func _on_toggle_pressed() -> void:
 	is_playing = !is_playing
-	print("BeatFrequencies: Sound %s" % ("ON" if is_playing else "OFF"))
 
 var time: float = 0.0
 
@@ -421,7 +414,6 @@ func load_from_json(file_path: String) -> void:
 			freq_min = params.get("freq_min", freq_min)
 			freq_max = params.get("freq_max", freq_max)
 			_update_frequency_labels()
-			print("BeatFrequencies: Loaded parameters from %s" % file_path)
 		else:
 			push_error("BeatFrequencies: Failed to parse JSON")
 	else:

@@ -242,7 +242,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if sacrifice == before_sacrifice:
 		return  # nothing geometric changed — this is curation_station's {"emissive": false}
 	_rebuild_now()
-	print("[CAPTheoremWalk] Config applied — sacrifice=%s" % [sacrifice])
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a map

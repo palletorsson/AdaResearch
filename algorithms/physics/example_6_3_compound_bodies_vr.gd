@@ -43,7 +43,6 @@ func _ready() -> void:
 	spawn_t_shape(Vector3(0.2, 0.2, 0))
 	spawn_l_shape(Vector3(0, 0.3, 0.2))
 
-	print("Example 6.3: Compound Bodies - Multi-shape objects")
 
 func _process(delta: float) -> void:
 	if auto_spawn and compound_objects.size() < max_objects:

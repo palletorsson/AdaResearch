@@ -630,7 +630,6 @@ func is_stuck():
 
 func end_episode() -> void:
 	episode_count += 1
-	print("Episode %d ended. Total reward: %.2f, Distance: %.2f" % [episode_count, episode_reward, current_distance])
 	
 	# Flash the core body on episode end for visual feedback
 	if is_instance_valid(core_body):

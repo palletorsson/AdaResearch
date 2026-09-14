@@ -276,15 +276,12 @@ func _attempt_reproduction() -> void:
 	energy -= 0.3
 	
 	# This would be handled by the ecosystem controller via signals
-	print(name + " attempted reproduction")
 
 func apply_transformation(new_form: Dictionary) -> void:
 	current_form = new_form
 	
 	# Update visual representation
 	# This would be handled by the ecosystem controller in the full implementation
-	# For now, just log the transformation
-	print(name + " transformed to a new form")
 	
 	# Adjust traits based on the new form
 	traits.adjust_after_transformation(new_form)

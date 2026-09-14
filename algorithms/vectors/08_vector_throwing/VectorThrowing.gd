@@ -273,7 +273,6 @@ func _on_ball_thrown(_pickable: Node3D, ball: Node3D) -> void:
 	_update_physics_info()
 	if ball.has_method("get_throw_speed"):
 		var speed = ball.get_throw_speed()
-		print("Ball thrown at %.2f m/s" % speed)
 
 func _on_target_hit(target: Node3D, impact_velocity: Vector3) -> void:
 	total_hits += 1
@@ -283,11 +282,9 @@ func _on_target_hit(target: Node3D, impact_velocity: Vector3) -> void:
 		_update_score_display()
 	_update_physics_info()
 	var speed = impact_velocity.length()
-	print("Target hit! Impact: %.2f m/s, Points: %d" % [speed, target.get_points_value() if target.has_method("get_points_value") else 10])
 
 func _on_drone_player_hit(_drone: Node3D) -> void:
 	player_hits_taken += 1
-	print("Drone hit the player! Total hits taken: %d. Health: %.1f" % [player_hits_taken, GameManager.get_health()])
 	_update_physics_info()
 
 
@@ -302,7 +299,6 @@ func _on_drone_destroyed(drone: Node3D, points_awarded: int) -> void:
 	if spawn_index != -1:
 		drones_by_index.erase(spawn_index)
 		_schedule_drone_respawn(spawn_index)
-	print("Drone destroyed! Points: %d (total drones down: %d)" % [points_awarded, drones_destroyed])
 	_update_physics_info()
 
 func _schedule_drone_respawn(spawn_index: int) -> void:

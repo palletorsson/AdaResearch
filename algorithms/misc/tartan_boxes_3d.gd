@@ -17,7 +17,6 @@ func _ready() -> void:
 	create_tartan_grid()
 	setup_lighting()
 	
-	print("TartanBoxes3D: Created %d x %d grid with vibrant tartan patterns" % [grid_size, grid_size])
 
 func setup_lighting() -> void:
 	# Bright main directional light for vibrant colors
@@ -69,7 +68,6 @@ func create_tartan_grid() -> void:
 			box_instances.append(box)
 			add_child(box)
 	
-	print("Created %d vibrant tartan boxes" % box_instances.size())
 
 func create_tartan_box(row: int, col: int) -> Node3D:
 	var box_root = Node3D.new()

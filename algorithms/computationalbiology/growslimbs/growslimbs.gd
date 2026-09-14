@@ -56,7 +56,6 @@ func _ready() -> void:
 	# Visualize attractors
 	visualize_attractors()
 	
-	print("Press SPACE to start growth, R to reset")
 
 func create_limb_attractors() -> void:
 	# Create attractors for multiple limbs (arms and legs pattern)
@@ -100,7 +99,6 @@ func _process(_delta):
 		
 		if current_iteration >= max_iterations:
 			is_growing = false
-			print("Growth complete! %d bones created" % skeleton.get_bone_count())
 
 func grow_step() -> void:
 	var influenced_nodes: Dictionary = {}
@@ -275,7 +273,6 @@ func _input(event: InputEvent) -> void:
 
 func start_growth() -> void:
 	is_growing = true
-	print("Starting morphogenesis growth...")
 
 func reset_growth() -> void:
 	# Clear everything
@@ -306,7 +303,6 @@ func reset_growth() -> void:
 	
 	create_limb_attractors()
 	update_skeleton_and_mesh()
-	print("Growth reset. Press SPACE to start.")
 
 func _exit_tree() -> void:
 	for child in get_children():

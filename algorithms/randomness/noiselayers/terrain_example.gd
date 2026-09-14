@@ -28,7 +28,6 @@ var last_lod_update: float = 0.0
 
 func _ready() -> void:
 	"""Initialize the terrain example"""
-	print("Initializing Terrain Example...")
 	
 	# Setup camera
 	setup_camera()
@@ -205,14 +204,12 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		# Regenerate terrain
 		if terrain:
-			print("Regenerating terrain...")
 			terrain.regenerate_terrain()
 	
 	elif event.is_action_pressed("ui_select"):
 		# Toggle LOD system
 		if terrain:
 			terrain.enable_lod = !terrain.enable_lod
-			print("LOD system: %s" % ("Enabled" if terrain.enable_lod else "Disabled"))
 	
 	elif event.is_action_pressed("ui_home"):
 		# Debug terrain information
@@ -221,15 +218,9 @@ func _input(event: InputEvent) -> void:
 			terrain.debug_show_walkable_areas()
 			
 			var lod_info = terrain.get_current_lod_info()
-			print("Current LOD: %d, Resolution: %d, Vertices: %d" % [
-				lod_info.level, 
-				lod_info.resolution, 
-				lod_info.vertex_count
-			])
 
 func _on_terrain_generation_complete() -> void:
 	"""Called when terrain generation is complete"""
-	print("Terrain generation complete!")
 	
 	# Position player on terrain
 	if terrain:

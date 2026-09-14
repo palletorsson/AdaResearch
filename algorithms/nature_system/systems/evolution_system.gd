@@ -137,10 +137,6 @@ func start(interval: float = 30.0) -> void:
 	_running = true
 	_cycle_timer = 0.0
 
-	if debug:
-		print("[EvolutionSystem] Started — interval: %.1fs, target pop: %d" % [
-			_cycle_interval, target_population
-		])
 
 
 ## Stop automatic cycling (can still call evolve_step() manually).
@@ -203,15 +199,6 @@ func evolve_step() -> void:
 		_generation_history = _generation_history.slice(-250)
 	generation_complete.emit(current_generation, _generation_stats)
 
-	if debug:
-		print("[EvolutionSystem] Gen %d — pop: %d, born: %d, culled: %d, asexual: %d, avg_fit: %.3f" % [
-			current_generation,
-			spawner.get_population_count(),
-			offspring_count,
-			culled_count,
-			asexual_count,
-			_generation_stats.get("avg_fitness", 0.0),
-		])
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -383,12 +370,6 @@ func _reproduce(ranked: Array[CritterEntity]) -> int:
 			if not same_kingdom:
 				cross_kingdom_breed.emit(parent_a, parent_b, child.get_kingdom_name())
 
-				if debug:
-					print("[EvolutionSystem] Cross-kingdom breed! %s(%s) x %s(%s) → %s" % [
-						parent_a.name, parent_a.get_kingdom_name(),
-						parent_b.name, parent_b.get_kingdom_name(),
-						child.get_kingdom_name()
-					])
 		else:
 			break  # Spawner at capacity
 
@@ -429,10 +410,6 @@ func _asexual_rescue(ranked: Array[CritterEntity]) -> int:
 			born += 1
 			critter_born.emit(child, parent, null)
 
-			if debug:
-				print("[EvolutionSystem] Asexual rescue: %s → %s" % [
-					parent.name, child.name
-				])
 		else:
 			break
 

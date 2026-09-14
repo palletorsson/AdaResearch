@@ -283,7 +283,6 @@ func _create_simple_cave_mesh() -> void:
 	array_mesh.clear_surfaces()
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_arrays)
 
-	print("✅ Created double-sided cave tunnel with ", vertices.size(), " vertices, ", indices.size() / 3, " triangles")
 	_create_collision()
 
 

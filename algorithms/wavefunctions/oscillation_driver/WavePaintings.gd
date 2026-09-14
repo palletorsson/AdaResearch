@@ -135,7 +135,6 @@ func _spawn_pendulums() -> void:
 		add_child(pendulum)
 		pendulums.append(pendulum)
 	
-	print("WavePaintings: Spawned %d pendulums" % pendulums.size())
 
 func _disable_camera(pendulum: Node3D) -> void:
 	var camera = pendulum.get_node_or_null("Camera3D")

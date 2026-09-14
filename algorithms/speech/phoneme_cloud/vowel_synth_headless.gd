@@ -15,24 +15,19 @@ var anchors = {
 }
 
 func _ready() -> void:
-	print("HeadlessSynthesizer: Starting sequence in 1s...")
 	await get_tree().create_timer(1.0).timeout
 	_loop()
 
 func _loop() -> void:
 	while true:
-		print("HeadlessSynthesizer: Ada")
 		await _play_ada()
-		print("HeadlessSynthesizer: Waiting...")
 		# out-of-tree guard: get_tree() is null once a map is torn down
 		if not is_inside_tree():
 			await tree_entered
 		await get_tree().create_timer(1.0).timeout
 		
-		print("HeadlessSynthesizer: Research")
 		await _play_research()
 		
-		print("HeadlessSynthesizer: Loop Pause 4s")
 		# out-of-tree guard: get_tree() is null once a map is torn down
 		if not is_inside_tree():
 			await tree_entered

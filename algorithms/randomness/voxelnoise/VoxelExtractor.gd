@@ -52,7 +52,6 @@ func generate_chunk(box: AABB) -> void:
 	assert(field, "VoxelExtractor: assign a VoxelField.")
 	iso = iso if iso != 0.0 else field.iso
 
-	print("VoxelExtractor: Generating chunk at ", box.position, " size ", box.size, " iso=", iso)
 	_verts.clear(); _norms.clear(); _idx.clear()
 
 	# cube steps
@@ -80,7 +79,6 @@ func generate_chunk(box: AABB) -> void:
 			for x in range(nx - 1):
 				_poly_cube(x, y, z, nx, ny, grid)
 
-	print("VoxelExtractor: Generated ", _verts.size(), " vertices, ", _idx.size()/3, " triangles")
 	_commit_mesh()
 
 func _gi(x:int, y:int, z:int, nx:int, ny:int) -> int:
@@ -181,7 +179,6 @@ func _commit_mesh() -> void:
 		mat.roughness = 0.5
 		mat.metallic = 0.1
 		material_override = mat
-		print("VoxelExtractor: Added default material")
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass

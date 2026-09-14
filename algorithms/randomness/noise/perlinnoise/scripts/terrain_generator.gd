@@ -384,4 +384,3 @@ func apply_grid_config(config: Dictionary) -> void:
 	if readout == before:
 		return
 	generate_terrain()
-	print("[PerlinTerrainGenerator] Config applied — readout=%s" % [readout])

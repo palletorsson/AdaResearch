@@ -183,7 +183,7 @@ func update_parameters() -> void:
 
 func export_pattern() -> void:
 	# This could save the current pattern as an image or 3D model
-	print("Export functionality - could save pattern as image or 3D model")
+	pass
 
 func _exit_tree() -> void:
 	for child in get_children():

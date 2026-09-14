@@ -232,7 +232,6 @@ func create_edge_mesh(vertices: Array, edges: Array, vertices_5d: Array) -> void
 	
 	add_child(mesh_instance)
 	
-	print("Penteract double-projected: 32 vertices, 80 edges")
 
 func regenerate() -> void:
 	generate_penteract()

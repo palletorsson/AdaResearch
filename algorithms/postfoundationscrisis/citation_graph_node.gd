@@ -104,7 +104,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		# rebuilding here would throw away the label framing it applied a line earlier.
 		return
 	_rebuild_now()
-	print("[CitationGraphNode] Config applied — reception=%s" % [reception])
 
 
 ## Accept an axis value only if it names something we actually build. Lower-cased and

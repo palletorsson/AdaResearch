@@ -252,9 +252,6 @@ func _create_sine_wave_path(positions: Array[Node3D]) -> PackedVector3Array:
 			# Apply sine wave in Z direction - for floor sections
 			offset_vec = Vector3(0, 0, sine_offset)
 
-		# Debug first few points
-		if i < 3:
-			print("Point %d: base_pos.y=%.2f, use_vertical=%s, offset=%s" % [i, base_pos.y, use_vertical, offset_vec])
 
 		points.append(base_pos + offset_vec)
 

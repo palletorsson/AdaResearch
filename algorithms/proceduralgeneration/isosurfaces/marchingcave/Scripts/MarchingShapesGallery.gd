@@ -252,7 +252,6 @@ func _build() -> void:
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		_adopt(label)
 
-		print("Spawned " + shape_name)
 
 	if capture_anchor == "on":
 		_build_capture_anchor()

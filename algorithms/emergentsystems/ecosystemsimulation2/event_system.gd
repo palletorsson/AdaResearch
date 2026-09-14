@@ -391,7 +391,6 @@ func advance_narrative_arc() -> void:
 	current_narrative_arc = narrative_arcs[current_index]
 	narrative_progress = 0.0
 	
-	print("Narrative arc advanced to: " + current_narrative_arc)
 
 func get_active_events() -> Array:
 	return active_events.duplicate()

@@ -46,7 +46,6 @@ func _ready() -> void:
 	# Connect signals
 	_connect_signals()
 	
-	print("Queer Computational Ecosystem initialized with " + str(initial_entity_count) + " entities")
 
 func _initialize_components() -> void:
 	# Create environment
@@ -228,7 +227,6 @@ func _on_resource_spawned(resource) -> void:
 		visualization.add_resource_visualization(resource)
 
 func _on_event_triggered(event_type, affected_entities) -> void:
-	print("Event triggered: " + event_type + " affecting " + str(affected_entities.size()) + " entities")
 	
 	# Different event types might cause different ecosystem responses
 	match event_type:

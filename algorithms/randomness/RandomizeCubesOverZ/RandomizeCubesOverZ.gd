@@ -28,7 +28,6 @@ func _ready() -> void:
 	if multimesh_instance:
 		multimesh = multimesh_instance.multimesh
 		if multimesh and multimesh.instance_count > 0:
-			print("✅ Found MultiMesh with %d instances" % multimesh.instance_count)
 			randomize_cubes_over_z()
 		else:
 			push_warning("MultiMesh found but has no instances")
@@ -98,7 +97,6 @@ func randomize_cubes_over_z() -> void:
 			var final_color = base_col.lerp(rand_col, randomness)
 			multimesh.set_instance_color(i, final_color)
 
-	print("✅ Randomized %d instances with increasing randomness over Z" % multimesh.instance_count)
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass

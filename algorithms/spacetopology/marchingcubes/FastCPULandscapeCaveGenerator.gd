@@ -89,7 +89,6 @@ func setup_noise_generators() -> void:
 	noise_cave_detail.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	noise_cave_detail.frequency = cave_noise_frequency * 4.0
 	
-	print("FastCPULandscapeCaveGenerator: Noise generators initialized")
 
 func setup_marching_cubes() -> void:
 	"""Initialize marching cubes system"""
@@ -97,12 +96,10 @@ func setup_marching_cubes() -> void:
 	marching_cubes.threshold = 0.5
 	marching_cubes.smoothing_enabled = true
 	
-	print("FastCPULandscapeCaveGenerator: Marching cubes initialized")
 
 func generate_world_async() -> void:
 	"""Generate the complete world asynchronously using optimized CPU approach"""
 	var start_time = Time.get_ticks_msec()
-	print("FastCPULandscapeCaveGenerator: Starting optimized world generation...")
 	
 	if show_generation_progress:
 		generation_progress.emit(0.0)
@@ -111,19 +108,16 @@ func generate_world_async() -> void:
 	clear_previous_world()
 	
 	# Step 1: Create voxel chunk with optimized density field (40%)
-	print("FastCPULandscapeCaveGenerator: Step 1/3 - Creating voxel chunk...")
 	var chunk = await create_optimized_voxel_chunk()
 	if show_generation_progress:
 		generation_progress.emit(40.0)
 	
 	# Step 2: Generate mesh using proven marching cubes (40%)
-	print("FastCPULandscapeCaveGenerator: Step 2/3 - Generating mesh...")
 	var mesh = await generate_mesh_from_chunk(chunk)
 	if show_generation_progress:
 		generation_progress.emit(80.0)
 	
 	# Step 3: Create visual representation and collision (20%)
-	print("FastCPULandscapeCaveGenerator: Step 3/3 - Creating visual representation...")
 	create_mesh_instance(mesh)
 	
 	if generate_collision:
@@ -136,7 +130,6 @@ func generate_world_async() -> void:
 	generation_time = (end_time - start_time) / 1000.0
 	
 	generation_complete.emit(generation_time)
-	print("FastCPULandscapeCaveGenerator: World generation complete in %.2f seconds!" % generation_time)
 
 func create_optimized_voxel_chunk() -> VoxelChunk:
 	"""Create a single optimized voxel chunk for the entire world"""
@@ -237,7 +230,6 @@ func calculate_unified_density(world_pos: Vector3) -> float:
 
 func generate_mesh_from_chunk(chunk: VoxelChunk) -> ArrayMesh:
 	"""Generate mesh using proven marching cubes implementation"""
-	print("FastCPULandscapeCaveGenerator: Generating mesh from %s voxels..." % [voxel_resolution])
 	
 	# Use the proven marching cubes generator
 	var mesh = marching_cubes.generate_mesh_from_chunk(chunk)
@@ -257,7 +249,6 @@ func create_mesh_instance(mesh: ArrayMesh) -> void:
 		terrain_mesh_instance.set_surface_override_material(0, material)
 	
 	add_child(terrain_mesh_instance)
-	print("FastCPULandscapeCaveGenerator: Mesh instance created")
 
 func create_collision_shape(mesh: ArrayMesh) -> void:
 	"""Create collision shape for physics interaction"""
@@ -288,7 +279,6 @@ func create_collision_shape(mesh: ArrayMesh) -> void:
 	collision_body.add_child(collision_shape)
 	
 	add_child(collision_body)
-	print("FastCPULandscapeCaveGenerator: Collision shape created")
 
 func get_landscape_material() -> StandardMaterial3D:
 	"""Create or return landscape material"""

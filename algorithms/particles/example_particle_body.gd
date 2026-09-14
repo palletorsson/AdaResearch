@@ -51,13 +51,6 @@ func _ready() -> void:
 		blobfish_swarm.separation_strength = 2.5  # Strong separation
 		blobfish_swarm.cohesion_strength = 0.8  # Weak cohesion
 	
-	print("BlobfishDemo: Ready - Watch the blob swim!")
-	print("Controls:")
-	print("  1-6: Change connection mode")
-	print("  S: Toggle surface/lines")
-	print("  W/A/S/D: Nudge blob direction")
-	print("  Space: Random swim direction")
-	print("  +/-: Adjust connections")
 
 func _process(delta: float) -> void:
 	update_timer += delta
@@ -101,54 +94,40 @@ func _input(event: InputEvent) -> void:
 			# Connection modes
 			KEY_1:
 				particle_body.set_connection_mode(ParticleBody.ConnectionMode.NONE)
-				print("Mode: NONE")
 			KEY_2:
 				particle_body.set_connection_mode(ParticleBody.ConnectionMode.NEAREST)
-				print("Mode: NEAREST")
 			KEY_3:
 				particle_body.set_connection_mode(ParticleBody.ConnectionMode.OUTER_HULL)
-				print("Mode: OUTER_HULL")
 			KEY_4:
 				particle_body.set_connection_mode(ParticleBody.ConnectionMode.DELAUNAY)
-				print("Mode: DELAUNAY")
 			KEY_5:
 				particle_body.set_connection_mode(ParticleBody.ConnectionMode.ALL_LINES)
-				print("Mode: ALL_LINES")
 			KEY_6:
 				particle_body.set_connection_mode(ParticleBody.ConnectionMode.DISTANCE_BASED)
-				print("Mode: DISTANCE_BASED")
 			
 			# Surface toggle
 			KEY_S:
 				particle_body.toggle_surface_mode()
-				print("Surface mode: %s" % particle_body.use_surface)
 			
 			# Connection count
 			KEY_EQUAL, KEY_PLUS:
 				particle_body.max_connections_per_particle += 1
 				particle_body.update_body()
-				print("Max connections: %d" % particle_body.max_connections_per_particle)
 			KEY_MINUS:
 				particle_body.max_connections_per_particle = max(1, particle_body.max_connections_per_particle - 1)
 				particle_body.update_body()
-				print("Max connections: %d" % particle_body.max_connections_per_particle)
 			
 			# Nudge blob direction
 			KEY_W:
 				blobfish_swarm.nudge_blob(Vector3.FORWARD, 0.5)
-				print("Nudge: Forward")
 			KEY_A:
 				blobfish_swarm.nudge_blob(Vector3.LEFT, 0.5)
-				print("Nudge: Left")
 			KEY_D:
 				blobfish_swarm.nudge_blob(Vector3.RIGHT, 0.5)
-				print("Nudge: Right")
 			KEY_Q:
 				blobfish_swarm.nudge_blob(Vector3.UP, 0.5)
-				print("Nudge: Up")
 			KEY_E:
 				blobfish_swarm.nudge_blob(Vector3.DOWN, 0.5)
-				print("Nudge: Down")
 			
 			# Random direction
 			KEY_SPACE:
@@ -158,23 +137,18 @@ func _input(event: InputEvent) -> void:
 					randf_range(-1, 1)
 				).normalized()
 				blobfish_swarm.set_swim_direction(random_dir)
-				print("Random swim direction!")
 			
 			# Speed controls
 			KEY_UP:
 				blobfish_swarm.swim_speed += 0.1
-				print("Swim speed: %.1f" % blobfish_swarm.swim_speed)
 			KEY_DOWN:
 				blobfish_swarm.swim_speed = max(0.1, blobfish_swarm.swim_speed - 0.1)
-				print("Swim speed: %.1f" % blobfish_swarm.swim_speed)
 			
 			# Wiggle controls
 			KEY_LEFT:
 				blobfish_swarm.wiggle_amplitude = max(0.0, blobfish_swarm.wiggle_amplitude - 0.05)
-				print("Wiggle: %.2f" % blobfish_swarm.wiggle_amplitude)
 			KEY_RIGHT:
 				blobfish_swarm.wiggle_amplitude += 0.05
-				print("Wiggle: %.2f" % blobfish_swarm.wiggle_amplitude)
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass

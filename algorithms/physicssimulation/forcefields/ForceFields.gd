@@ -63,7 +63,6 @@ func _ready() -> void:
 	_build_wind_drag_field()
 	_spawn_balls()
 	_create_ui()
-	print("Force Fields — drop balls into the coloured zones!")
 
 # ===========================================================================
 # 1. GRAVITY FIELD — directional override (pushes everything sideways)

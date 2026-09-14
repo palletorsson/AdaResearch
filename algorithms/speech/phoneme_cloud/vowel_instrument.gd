@@ -29,7 +29,6 @@ func _ready() -> void:
 	if hand is XRController3D:
 		is_xr = true
 		xr_controller = hand
-		print("Vowel Instrument: Attached to XR Controller")
 
 func _process(delta: float) -> void:
 	if not vowel_synth or not head or not hand:

@@ -226,7 +226,6 @@ func initialize_graph() -> void:
 	# Initialize algorithm state
 	reset_algorithm_state()
 	
-	print("Initialized graph with ", vertices.size(), " vertices and ", edges.size(), " edges")
 
 func generate_vertex_positions() -> void:
 	"""Generate positions for vertices"""
@@ -714,7 +713,6 @@ func start_mst_computation() -> void:
 		_:
 			start_kruskal()
 	
-	print("Starting ", algorithm_type, " MST algorithm...")
 
 func start_kruskal() -> void:
 	"""Start Kruskal's algorithm"""
@@ -955,11 +953,6 @@ func finalize_computation() -> void:
 	computation_complete = true
 	computation_timer.stop()
 	
-	print("MST computation complete!")
-	print("Algorithm: ", algorithm_type)
-	print("MST cost: ", mst_cost)
-	print("MST edges: ", mst_edges.size())
-	print("Expected edges: ", graph_size - 1)
 	
 	update_ui()
 
@@ -1093,7 +1086,6 @@ func _input(event: InputEvent) -> void:
 				create_visualization()
 			KEY_S:
 				step_by_step = not step_by_step
-				print("Step-by-step mode: ", step_by_step)
 
 func stop_computation() -> void:
 	"""Stop the MST computation"""
@@ -1113,7 +1105,6 @@ func change_algorithm(new_algorithm: String) -> void:
 	"""Change the MST algorithm"""
 	algorithm_type = new_algorithm
 	reset_graph()
-	print("Changed to ", new_algorithm, " algorithm")
 
 func get_algorithm_info() -> Dictionary:
 	"""Get comprehensive algorithm information"""

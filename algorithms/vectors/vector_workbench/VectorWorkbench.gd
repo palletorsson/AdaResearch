@@ -366,7 +366,6 @@ func _setup_interactables() -> void:
 	# Initialize slider positions to match initial vectors
 	call_deferred("_sync_sliders_to_vectors")
 	
-	print("VectorWorkbench: Interactables connected for VR control")
 
 func _connect_slider(slider: Node, callback: String, range_min: float, range_max: float, label: String) -> void:
 	if not slider:

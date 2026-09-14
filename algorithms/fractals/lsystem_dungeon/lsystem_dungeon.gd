@@ -93,8 +93,6 @@ func generate_lsystem() -> void:
 				new_string += c
 		lsystem_string = new_string
 
-	print("L-System Dungeon: Generated string length: %d" % lsystem_string.length())
-	print("L-System: %s..." % lsystem_string.substr(0, min(50, lsystem_string.length())))
 
 func _build_instant() -> void:
 	"""Build entire dungeon at once"""
@@ -105,13 +103,11 @@ func _build_instant() -> void:
 	for c in lsystem_string:
 		_interpret_symbol(c)
 
-	print("L-System Dungeon: Built %d parts" % all_parts.size())
 
 func _build_step() -> void:
 	"""Build one symbol at a time"""
 	if step_index >= lsystem_string.length():
 		is_constructing = false
-		print("L-System Dungeon: Construction complete! %d parts" % all_parts.size())
 		return
 
 	var c = lsystem_string[step_index]

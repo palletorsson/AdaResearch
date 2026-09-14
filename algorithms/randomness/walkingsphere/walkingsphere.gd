@@ -82,7 +82,6 @@ func _ready() -> void:
 	setup_material()
 	setup_mode_label()
 	
-	print("=== Universal Sphere Modifier (Shader Version) ===")
 	print_current_mode()
 	print_controls()
 	
@@ -91,7 +90,6 @@ func _ready() -> void:
 
 	# Auto-start demo after a short delay
 	await get_tree().create_timer(2.0).timeout
-	print("Auto-starting demo in 2 seconds...")
 	# out-of-tree guard: get_tree() is null once a map is torn down
 	if not is_inside_tree():
 		await tree_entered
@@ -154,8 +152,6 @@ func generate_initial_sphere() -> void:
 	# Calculate original volume for change measurement
 	original_volume = calculate_sphere_volume()
 	
-	print("Generated sphere with %d vertices" % vertices.size())
-	print("Original volume: %.3f" % original_volume)
 
 func calculate_normals() -> PackedVector3Array:
 	var normals = PackedVector3Array()
@@ -192,9 +188,6 @@ func setup_material() -> void:
 	# Set initial shader parameters
 	update_shader_parameters()
 	
-	print("Walking Sphere: Using sphere modification shader for material")
-	print("Shader material created: %s" % shader_material)
-	print("Shader resource: %s" % shader)
 
 func setup_mode_label() -> void:
 	"""Create 3D labels to display the current mode and measurements"""
@@ -272,8 +265,6 @@ func measure_sphere_change() -> void:
 	if change_label != null:
 		change_label.text = "Vol: %.1f%% | Disp: %.3f" % [volume_change, total_displacement]
 	
-	# Print detailed measurements
-	print("Sphere Change - Volume: %.1f%% | Avg Displacement: %.3f" % [volume_change, total_displacement])
 
 func update_shader_parameters() -> void:
 	"""Update shader parameters with current values"""
@@ -288,13 +279,6 @@ func update_shader_parameters() -> void:
 	shader_material.set_shader_parameter("iteration", float(current_iteration))
 	shader_material.set_shader_parameter("iterations", float(iterations))
 	
-	# Debug: Print key parameters every 5 steps
-	if current_iteration % 5 == 0:
-		print("Shader params - Mode: %d, Iteration: %d/%d, Intensity: %.2f" % [modifier_mode, current_iteration, iterations, intensity])
-		print("Shader material valid: %s" % (shader_material != null))
-		if shader_material != null:
-			print("Shader mode param: %s" % shader_material.get_shader_parameter("mode"))
-			print("Shader intensity param: %s" % shader_material.get_shader_parameter("intensity"))
 	
 	# Spike parameters
 	shader_material.set_shader_parameter("spike_count", float(spike_count))
@@ -360,7 +344,6 @@ func update_material_color() -> void:
 		sphere_material.albedo_color = current_color
 	
 func single_evolution_step() -> void:
-	print("DEBUG: single_evolution_step - current_iteration: %d, iterations: %d" % [current_iteration, iterations])
 	if current_iteration < iterations:
 		current_iteration += 1
 		update_shader_parameters()
@@ -368,7 +351,6 @@ func single_evolution_step() -> void:
 		update_mode_label()
 		measure_sphere_change()
 		
-		print("Step %d/%d" % [current_iteration, iterations])
 	else:
 		print("DEBUG: single_evolution_step - iteration limit reached, not incrementing")
 
@@ -376,7 +358,6 @@ func start_evolution() -> void:
 	if not is_evolving:
 		is_evolving = true
 		evolution_timer.start()
-		print("Starting evolution...")
 
 func stop_evolution() -> void:
 	if is_evolving:
@@ -397,7 +378,6 @@ func reset_sphere() -> void:
 	if change_label != null:
 		change_label.text = "Vol: 0.0% | Disp: 0.000"
 	
-	print("Sphere reset")
 
 func change_mode(new_mode: int) -> void:
 	modifier_mode = new_mode
@@ -406,12 +386,9 @@ func change_mode(new_mode: int) -> void:
 	print_current_mode()
 
 func _on_evolution_step() -> void:
-	print("DEBUG: _on_evolution_step called - current_iteration: %d, iterations: %d" % [current_iteration, iterations])
 	single_evolution_step()
-	print("DEBUG: After single_evolution_step - current_iteration: %d, iterations: %d" % [current_iteration, iterations])
 	if current_iteration >= iterations:
 		stop_evolution()
-		print("Evolution complete!")
 		# If in demo mode, advance to next mode
 		if is_demo_running:
 			call_deferred("next_demo_mode")
@@ -428,11 +405,6 @@ func start_demo() -> void:
 	reset_sphere()
 	update_mode_label()
 	
-	print("=== STARTING DEMO SEQUENCE ===")
-	print("Running through all 7 simulation modes...")
-	print("Each mode will run for %d iterations" % iterations)
-	print("Current Mode: " + get_mode_name())
-	print("Starting evolution...")
 	
 	start_evolution()
 
@@ -440,16 +412,12 @@ func next_demo_mode() -> void:
 	demo_mode += 1
 	
 	if demo_mode >= 7:
-		print("=== DEMO COMPLETE ===")
-		print("All 7 simulation modes have been demonstrated")
 		is_demo_running = false
 		return
 	
 	modifier_mode = demo_mode
 	reset_sphere()
 	update_mode_label()
-	print("Current Mode: " + get_mode_name())
-	print("Starting evolution...")
 	start_evolution()
 	
 
@@ -457,7 +425,6 @@ func stop_demo() -> void:
 	if is_demo_running:
 		is_demo_running = false
 		stop_evolution()
-		print("Demo stopped")
 
 # INPUT HANDLING
 func _input(event: InputEvent) -> void:
@@ -479,11 +446,9 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_right"):
 		intensity = min(intensity + 0.1, 2.0)
 		update_shader_parameters()
-		print("Intensity: ", intensity)
 	elif event.is_action_pressed("ui_left"):
 		intensity = max(intensity - 0.1, 0.1)
 		update_shader_parameters()
-		print("Intensity: ", intensity)
 	elif event.is_action_pressed("ui_home"):
 		start_demo()
 	elif event.is_action_pressed("ui_end"):

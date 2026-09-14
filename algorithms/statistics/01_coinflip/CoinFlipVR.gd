@@ -63,7 +63,6 @@ func setup_vr() -> void:
 	if enable_vr:
 		xr_interface = XRServer.find_interface("OpenXR")
 		if xr_interface and xr_interface.is_initialized():
-			print("VR Interface found and initialized")
 			get_viewport().use_xr = true
 		else:
 			print("VR not available, using desktop mode")

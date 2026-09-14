@@ -637,7 +637,6 @@ func create_surface_grid(parent: Node3D) -> Array:
 	return surface
 
 func start_showcase_cycle() -> void:
-	print("VR CA Showcase initialized with ", SHOWCASE_COUNT, " demonstrations")
 	highlight_current_showcase()
 
 func _process(delta: float) -> void:
@@ -881,7 +880,6 @@ func update_self_organization(showcase: Node3D, delta) -> void:
 func cycle_to_next_showcase() -> void:
 	current_showcase = (current_showcase + 1) % SHOWCASE_COUNT
 	highlight_current_showcase()
-	print("Switched to showcase: ", current_showcase, " - ", get_ca_name(current_showcase))
 
 func highlight_current_showcase() -> void:
 	# Hide all showcases except the current one
@@ -1075,7 +1073,6 @@ func on_vr_controller_input(_controller_id: int, input_type: String) -> void:
 		cycle_to_next_showcase()
 	elif input_type == "grip_pressed":
 		auto_cycle = not auto_cycle
-		print("Auto-cycle: ", auto_cycle)
 
 func _input(event: InputEvent) -> void:
 	"""Handle keyboard input for testing and control"""
@@ -1085,22 +1082,17 @@ func _input(event: InputEvent) -> void:
 				cycle_to_next_showcase()
 			KEY_A:
 				auto_cycle = not auto_cycle
-				print("Auto-cycle: ", auto_cycle)
 			KEY_R:
 				reset_all_showcases()
-				print("Reset all showcases")
 			KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9:
 				var target_showcase = event.keycode - KEY_1
 				if target_showcase < SHOWCASE_COUNT:
 					current_showcase = target_showcase
 					highlight_current_showcase()
-					print("Switched to showcase: ", get_ca_name(current_showcase))
 			KEY_PLUS, KEY_EQUAL:
 				cycle_interval = max(5.0, cycle_interval - 2.0)
-				print("Cycle interval: ", cycle_interval, " seconds")
 			KEY_MINUS:
 				cycle_interval = min(60.0, cycle_interval + 2.0)
-				print("Cycle interval: ", cycle_interval, " seconds")
 			KEY_H:
 				print_help()
 
@@ -1140,7 +1132,6 @@ func reset_all_showcases() -> void:
 
 func set_auto_cycle_interval(seconds: float) -> void:
 	cycle_interval = max(5.0, seconds)  # Minimum 5 seconds
-	print("Auto-cycle interval set to: ", cycle_interval, " seconds")
 
 func print_help() -> void:
 	"""Print help information for controls"""

@@ -57,7 +57,6 @@ func _execute_step(s: int) -> void:
 		4: _step_4_top_trim()
 		_:
 			is_constructing = false
-			print("Bookshelf complete! %d parts" % all_parts.size())
 
 func _build_instant() -> void:
 	_step_0_back_panel()
@@ -77,7 +76,6 @@ func _step_0_back_panel() -> void:
 		Vector3(width * 0.96, height * 0.96, thickness),
 		back_color, "BackPanel"
 	)
-	print("Step 0: Back panel")
 
 func _step_1_outer_frame() -> void:
 	var thickness = shelf_size * 0.06
@@ -112,7 +110,6 @@ func _step_1_outer_frame() -> void:
 		frame_color, "Bottom"
 	)
 
-	print("Step 1: Outer frame")
 
 func _step_2_horizontal_shelves() -> void:
 	var thickness = shelf_size * 0.04
@@ -132,7 +129,6 @@ func _step_2_horizontal_shelves() -> void:
 			shelf_color, "Shelf_%d" % i
 		)
 
-	print("Step 2: Horizontal shelves (%d)" % (rows - 1))
 
 func _step_3_vertical_dividers() -> void:
 	var thickness = shelf_size * 0.03
@@ -155,7 +151,6 @@ func _step_3_vertical_dividers() -> void:
 			shelf_color, "Divider_%d" % col
 		)
 
-	print("Step 3: Vertical dividers (%d)" % (columns - 1))
 
 func _step_4_top_trim() -> void:
 	# Decorative crown molding at top
@@ -176,7 +171,6 @@ func _step_4_top_trim() -> void:
 		accent_color, "BaseMolding"
 	)
 
-	print("Step 4: Trim details")
 
 func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String) -> void:
 	var mesh_instance := MeshInstance3D.new()

@@ -47,7 +47,6 @@ func _ready() -> void:
 	_create_panel()
 	spawn_movers()
 	setup_auto_reset()
-	print("Example 2.2: Forces with mass variation")
 
 func setup_auto_reset() -> void:
 	auto_reset_timer = Timer.new()

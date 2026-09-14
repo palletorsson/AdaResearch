@@ -210,10 +210,6 @@ func on_interaction(entity: CritterEntity, action: String) -> void:
 	if new_level >= threshold and entity_id not in _transmuted_ids:
 		_trigger_transmutation(entity)
 
-	if debug:
-		print("[TransmutationManager] %s '%s' → bond: %.3f (delta: %.3f, affinity: %.2f)" % [
-			entity.name, action, new_level, final_delta, entity.dna.affinity
-		])
 
 
 ## Process passive proximity bonding. Call each tick with nearby critters.
@@ -254,10 +250,6 @@ func _trigger_transmutation(entity: CritterEntity) -> void:
 	transmutation_triggered.emit(entity, ability)
 	ability_granted.emit(ability["name"] as String, ability)
 
-	if debug:
-		print("[TransmutationManager] TRANSMUTATION! %s → grants '%s' (%s)" % [
-			entity.name, ability["name"], ability["description"]
-		])
 
 
 ## Determine which ability a critter's DNA would grant upon transmutation.
@@ -414,10 +406,6 @@ func _complete_ritual(entity: CritterEntity, bond: Dictionary, ritual_name: Stri
 	ritual_progress.emit(entity, ritual_name, 1.0)
 	bond_updated.emit(entity, old_level, bond["level"] as float)
 
-	if debug:
-		print("[TransmutationManager] Ritual '%s' completed! Bond: %.3f → %.3f" % [
-			ritual_name, old_level, bond["level"]
-		])
 
 
 # ═══════════════════════════════════════════════════════════════

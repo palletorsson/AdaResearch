@@ -860,8 +860,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	_rebuild_now()
 	if auto_start:
 		call_deferred("start_algorithm")
-	print("[TopologicalSort] Config applied — precedence=%s, vertices=%d, edges=%d" % [
-		precedence, vertices.size(), edges.size()])
 
 
 ## Accept an axis value only if it names something we actually build. A typo has to

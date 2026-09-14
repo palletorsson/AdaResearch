@@ -81,7 +81,6 @@ const UPDATE_INTERVAL = 0.1
 func _ready() -> void:
 	super._ready()
 	_setup_demo()
-	print("CombinedForcesDemo: Ready - Drag the force vectors!")
 
 func _start_force(slot: int) -> Vector3:
 	"""Initial vector for a force slot under the current composition."""
@@ -218,7 +217,6 @@ func _reset_demo() -> void:
 		if line_node and line_node.has_method("refresh_connections"):
 			line_node.refresh_connections()
 
-	print("CombinedForcesDemo: Reset")
 
 func _rebuild_forces() -> void:
 	"""Tear down the force arrows and build them again from the current DNA.

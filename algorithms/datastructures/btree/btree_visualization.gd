@@ -176,7 +176,6 @@ func initialize_btree() -> void:
 	total_keys = 0
 	
 	create_node_visualization(root, root_node_color)
-	print("B-Tree initialized with degree ", tree_degree)
 
 func start_demo() -> void:
 	"""Start comprehensive B-Tree demonstration"""
@@ -204,7 +203,6 @@ func generate_demo_data() -> void:
 			sorted_keys.shuffle()
 			demo_keys = sorted_keys
 	
-	print("Generated demo data: ", demo_keys)
 
 func perform_bulk_demo() -> void:
 	"""Perform bulk operations without animation"""
@@ -219,7 +217,6 @@ func insert_key(key: int) -> void:
 	if not root:
 		initialize_btree()
 	
-	print("Inserting key: ", key)
 	operations_performed += 1
 	
 	# Check if root is full
@@ -309,7 +306,6 @@ func split_child(parent: BTreeNode, index: int) -> void:
 		"median_key": parent.keys[index]
 	})
 	
-	print("Split node - median key: ", parent.keys[index])
 
 func search_key(key: int) -> BTreeNode:
 	"""Search for key in B-Tree"""
@@ -344,7 +340,6 @@ func search_node(node: BTreeNode, key: int) -> BTreeNode:
 
 func delete_key(key: int) -> bool:
 	"""Delete key from B-Tree"""
-	print("Deleting key: ", key)
 	operations_performed += 1
 	
 	var result = delete_from_node(root, key)
@@ -705,7 +700,6 @@ func _on_operation_timer_timeout() -> void:
 		update_ui()
 	else:
 		operation_timer.stop()
-		print("Demo complete!")
 
 func update_ui() -> void:
 	"""Update UI with current B-Tree state"""
@@ -855,13 +849,11 @@ func reset_btree() -> void:
 	
 	initialize_btree()
 	update_ui()
-	print("B-Tree reset")
 
 func change_degree(new_degree: int) -> void:
 	"""Change B-Tree degree"""
 	tree_degree = new_degree
 	reset_btree()
-	print("Changed B-Tree degree to ", new_degree)
 
 func get_algorithm_info() -> Dictionary:
 	"""Get comprehensive B-Tree algorithm information"""

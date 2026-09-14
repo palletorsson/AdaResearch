@@ -70,7 +70,6 @@ func _ready() -> void:
 	create_ui()
 	create_ground_visual()
 
-	print("Newton's Laws Enhanced - Beautiful Physics Visualization!")
 
 func create_balls() -> void:
 	var initial_positions = [

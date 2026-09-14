@@ -103,14 +103,12 @@ func _initialize_terrain() -> void:
 			})
 
 	_rebuild_mesh()
-	print("FibonacciTerrain: Initialized with %d faces" % faces.size())
 
 func _perform_growth_iteration():
 	"""One iteration of the growth algorithm"""
 	if current_iteration >= max_iterations:
 		is_growing = false
 		terrain_complete.emit()
-		print("FibonacciTerrain: Growth complete after %d iterations" % current_iteration)
 		return
 
 	# Safety check - prevent runaway face count
@@ -170,7 +168,6 @@ func _perform_growth_iteration():
 
 	current_iteration += 1
 	iteration_complete.emit(current_iteration)
-	print("FibonacciTerrain: Iteration %d complete, %d faces" % [current_iteration, faces.size()])
 
 func _lift_and_subdivide_face(face_idx: int) -> void:
 	"""Lift a face and optionally subdivide it"""
@@ -492,7 +489,6 @@ func toggle_spiral() -> void:
 # Grid system integration
 func configure(data: Dictionary) -> void:
 	"""Configure from grid spawn parameters (e.g., fibonacci_terrain#preset:mountain_peak)"""
-	print("FibonacciTerrain: Configuring from Grid JSON: ", data)
 
 	if data.has("preset"):
 		apply_preset(str(data["preset"]).to_lower())

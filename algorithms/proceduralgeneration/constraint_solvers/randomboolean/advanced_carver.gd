@@ -80,7 +80,6 @@ func generate() -> void:
 	if random_seed >= 0:
 		seed(random_seed)
 	
-	print("🎨 Generating carved shape with pattern: ", CarvePattern.keys()[pattern])
 	
 	# Create base shape (as child of CSGCombiner3D)
 	_create_base_shape()
@@ -105,7 +104,6 @@ func generate() -> void:
 	if show_path_line:
 		_create_path_visualization()
 	
-	print("✅ Carving complete!")
 
 func _create_base_shape() -> void:
 	var shape : CSGShape3D
@@ -277,7 +275,6 @@ func _carve_all_paths() -> void:
 			if point not in all_points:
 				all_points.append(point)
 	
-	print("🔨 Carving ", all_points.size(), " spheres...")
 	
 	for i in range(all_points.size()):
 		var pos = all_points[i]
@@ -298,7 +295,6 @@ func _carve_all_paths() -> void:
 		# Add as CHILD of CSGCombiner3D (sibling to base shape)
 		add_child(sphere)  # Add to CSGCombiner3D, not the base shape!
 	
-	print("✂️ Carved ", all_points.size(), " spheres (CSGCombiner3D will combine them)")
 
 func _create_path_visualization() -> void:
 	# Main path

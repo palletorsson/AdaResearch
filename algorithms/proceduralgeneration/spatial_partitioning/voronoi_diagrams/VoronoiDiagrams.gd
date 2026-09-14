@@ -15,7 +15,6 @@ var sweep_line_position: float = -5.0
 
 func _ready() -> void:
 	# Initialize Voronoi Diagrams visualization
-	print("Voronoi Diagrams Visualization initialized")
 	create_seed_points()
 	create_voronoi_cells()
 	create_boundaries()

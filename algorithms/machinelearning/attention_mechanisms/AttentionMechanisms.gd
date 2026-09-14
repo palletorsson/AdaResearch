@@ -81,7 +81,6 @@ func _ready() -> void:
 	_create_focus_indicators()
 	_setup_training_metrics()
 	_create_stats_label()
-	print("Attention Mechanisms Visualization initialized")
 
 func _process(delta: float) -> void:
 	time += delta

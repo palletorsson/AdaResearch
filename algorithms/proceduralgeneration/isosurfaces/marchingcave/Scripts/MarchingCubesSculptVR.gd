@@ -178,7 +178,6 @@ var blobs_painted: int = 0
 var _stack_deposits: Array[Vector4] = []
 
 func _ready() -> void:
-	print("MarchingCubesSculptVR: Initializing VR sculpting...")
 	# BEFORE the build. GridInteractablesComponent stamps config_* metadata on the
 	# artifact and only THEN adds it to the tree (_apply_artifact_config at line
 	# 1195, add_child at line 1220), so a placement's `hand` is already on the node
@@ -193,7 +192,6 @@ func _ready() -> void:
 	_find_controllers()
 	is_initialized = true
 	_update_status_label()
-	print("MarchingCubesSculptVR: Ready! Use triggers to paint in 3D.")
 
 func _create_terrain_generator() -> void:
 	# Load and instantiate the sculpt terrain generator
@@ -438,7 +436,6 @@ func _regenerate_sculpture() -> void:
 	if terrain_generator and terrain_generator.has_method("clear_blobs"):
 		terrain_generator.clear_blobs()
 		blobs_painted = 0
-		print("MarchingCubesSculptVR: Regenerating sculpture...")
 
 		await get_tree().process_frame
 		if terrain_generator.has_method("add_blob"):
@@ -459,13 +456,11 @@ func _toggle_erase() -> void:
 	erase_mode = !erase_mode
 	_update_brush_color()
 	_update_status_label()
-	print("Erase mode: ", "ON" if erase_mode else "OFF")
 
 func _change_brush_size(delta: float) -> void:
 	brush_radius = clampf(brush_radius + delta, brush_radius_min, brush_radius_max)
 	_update_brush_size()
 	_update_status_label()
-	print("Brush radius: ", brush_radius)
 
 func _find_controllers() -> void:
 	# Try to find XR controllers in the scene tree
@@ -486,10 +481,6 @@ func _find_controllers() -> void:
 	if not right_controller:
 		right_controller = _find_node_recursive(root, "RightHand")
 
-	if left_controller:
-		print("MarchingCubesSculptVR: Found left controller: ", left_controller.name)
-	if right_controller:
-		print("MarchingCubesSculptVR: Found right controller: ", right_controller.name)
 
 	if not left_controller and not right_controller:
 		print("MarchingCubesSculptVR: No VR controllers found. Use keyboard: SPACE to paint, E to erase, +/- for brush size")
@@ -663,7 +654,6 @@ func clear_sculpture() -> void:
 	if terrain_generator and terrain_generator.has_method("clear_blobs"):
 		terrain_generator.clear_blobs()
 		blobs_painted = 0
-		print("MarchingCubesSculptVR: Sculpture cleared")
 
 		# Add back a small starting blob
 		await get_tree().process_frame

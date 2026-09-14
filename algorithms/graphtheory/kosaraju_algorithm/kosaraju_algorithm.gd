@@ -759,8 +759,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[Kosaraju] Config applied — mutuality=%s, graph_size=%d, edge_density=%.2f" % [
-		mutuality, graph_size, edge_density])
 
 ## Accept an axis value only if it names something we actually build. A typo in a
 ## map token falls back to the shipped look; a half-recognised value would strand a

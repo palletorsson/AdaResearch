@@ -42,11 +42,9 @@ func _ready() -> void:
 		sp.name = "Springs"
 		add_child(sp)
 
-	print("Creating VR-optimized spring-mass system...")
 	_create_mass_point_grid()
 	_create_spring_connections()
 	_connect_ui()
-	print("Created ", mass_points.size(), " mass points and ", springs.size(), " springs")
 
 func _create_mass_point_grid() -> void:
 	# Create a grid of mass points
@@ -119,7 +117,6 @@ func _physics_process(delta: float) -> void:
 	performance_timer += delta
 	if performance_timer >= 1.0:  # Display FPS every second
 		var current_fps = Engine.get_frames_per_second()
-		print("Spring-Mass System FPS: ", current_fps, " | Mass Points: ", mass_points.size(), " | Springs: ", springs.size())
 		performance_timer = 0.0
 	
 	# VR Performance: Skip physics calculations on some frames

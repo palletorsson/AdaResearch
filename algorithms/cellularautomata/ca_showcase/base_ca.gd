@@ -73,7 +73,6 @@ func initialize_grid() -> void:
 
 func start_simulation() -> void:
 	is_running = true
-	print("Starting CA simulation: ", get_script().get_global_name())
 
 func stop_simulation() -> void:
 	is_running = false

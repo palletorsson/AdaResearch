@@ -103,14 +103,12 @@ func setup_blob_system() -> void:
 	blob_material.set_shader_parameter("morph_speed", 2.0)
 	blob_material.set_shader_parameter("color_shift_speed", 1.0)
 	
-	print("Blob system setup complete!")
 
 func find_terrain_reference() -> void:
 	# Look for terrain in parent or sibling nodes
 	var parent = get_parent()
 	if parent is QueerNoiseTerrain:
 		terrain_reference = parent
-		print("Found terrain reference in parent")
 		return
 	
 	# Look in siblings
@@ -118,19 +116,16 @@ func find_terrain_reference() -> void:
 		for child in parent.get_children():
 			if child is QueerNoiseTerrain:
 				terrain_reference = child
-				print("Found terrain reference in sibling")
 				return
 	
 	# Look globally
 	var terrain_nodes = get_tree().get_nodes_in_group("terrain")
 	if terrain_nodes.size() > 0:
 		terrain_reference = terrain_nodes[0]
-		print("Found terrain reference globally")
 	else:
 		print("WARNING: No terrain reference found!")
 
 func spawn_initial_blobs() -> void:
-	print("Spawning ", blob_count, " initial blobs...")
 	for i in range(blob_count):
 		spawn_single_blob()
 
@@ -186,7 +181,6 @@ func spawn_single_blob() -> void:
 	)
 	
 	blobs.append(blob_instance)
-	print("Spawned blob at position: ", spawn_pos)
 
 func update_blobs(delta: float) -> void:
 	for blob in blobs:
@@ -232,7 +226,6 @@ func cleanup_old_blobs() -> void:
 			if is_instance_valid(blob.mesh_instance):
 				blob.mesh_instance.queue_free()
 			blobs.remove_at(i)
-			print("Removed old blob")
 
 # Public API functions
 func spawn_blob_at_position(pos: Vector3) -> void:
@@ -271,7 +264,6 @@ func clear_all_blobs() -> void:
 		if is_instance_valid(blob.mesh_instance):
 			blob.mesh_instance.queue_free()
 	blobs.clear()
-	print("Cleared all blobs")
 
 func set_blob_parameters(params: Dictionary) -> void:
 	"""Update blob parameters dynamically"""
@@ -309,10 +301,8 @@ func _input(event: InputEvent) -> void:
 		match event.keycode:
 			KEY_B:
 				spawn_single_blob()
-				print("Spawned debug blob")
 			KEY_V:
 				clear_all_blobs()
-				print("Cleared all blobs")
 			KEY_N:
 				print("Blob stats: ", get_blob_stats())
 

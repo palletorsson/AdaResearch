@@ -34,7 +34,6 @@ func _ready() -> void:
 	original_y = global_position.y
 	setup_xr_slider_sound_system()
 	connect_slider_signals()
-	print("XRSliderPickupCube: Ready with XR slider-controlled sound")
 
 func _process(delta: float) -> void:
 	if has_been_collected:
@@ -88,23 +87,18 @@ func update_sound_parameters() -> void:
 
 func _on_pitch_changed(position: float) -> void:
 	current_pitch = lerp(0.5, 2.0, position)
-	print("Pitch changed to: ", current_pitch)
 
 func _on_volume_changed(position: float) -> void:
 	current_volume = position
-	print("Volume changed to: ", current_volume)
 
 func _on_tone_changed(position: float) -> void:
 	current_tone_blend = position
-	print("Tone blend changed to: ", current_tone_blend)
 
 func _on_harmony_changed(position: float) -> void:
 	current_harmony = position
-	print("Harmony changed to: ", current_harmony)
 
 func _on_reverb_changed(position: float) -> void:
 	current_reverb = position
-	print("Reverb changed to: ", current_reverb)
 
 func _is_player(body: Node3D) -> bool:
 	return body.is_in_group("player") or body.is_in_group("vr_player") or body.name.contains("Player") or body.is_in_group("player_body")
@@ -114,7 +108,6 @@ func collect() -> void:
 		return
 	
 	has_been_collected = true
-	print("XRSliderPickupCube: Collected! Generating dynamic sound")
 	
 	# Generate dynamic pickup sound based on current slider values
 	var dynamic_sound = sound_generator.generate_pickup_sound(
@@ -181,13 +174,11 @@ func _play_collection_effect() -> void:
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
 	if _is_player(body):
-		print("XRSliderPickupCube: Player detected, collecting with current slider settings")
 		collect()
 
 # Public API
 func set_points_value(new_value: int) -> void:
 	points_value = new_value
-	print("XRSliderPickupCube: Points value set to %d" % points_value)
 
 # XR Slider Sound Generator Class
 class XRSliderSoundGenerator:
@@ -258,7 +249,6 @@ class XRSliderSoundGenerator:
 # Scene setup helper function (call this from the scene's _ready)
 func setup_xr_slider_scene() -> void:
 	# This function helps set up a complete XR slider control scene
-	print("Setting up XR slider control scene for pickup cube")
 	
 	# You would create sliders here if they don't exist
 	# This is just a helper for scene organization

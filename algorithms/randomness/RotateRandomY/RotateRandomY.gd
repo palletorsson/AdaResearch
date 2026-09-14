@@ -30,7 +30,6 @@ func _ready() -> void:
 	if multimesh_instance:
 		multimesh = multimesh_instance.multimesh
 		if multimesh and multimesh.instance_count > 0:
-			print("âœ… Found MultiMesh with %d instances" % multimesh.instance_count)
 			rotate_random_y_safe()
 		else:
 			push_warning("MultiMesh found but has no instances")
@@ -60,7 +59,6 @@ func rotate_random_y_safe() -> void:
 
 		multimesh.set_instance_transform(i, transform)
 
-	print("âœ… Rotated %d cubes randomly between %.1fÂ° and %.1fÂ° on Y" % [count, min_y_degrees, max_y_degrees])
 
 func _process(_delta: float) -> void:
 	if not multimesh or multimesh.instance_count == 0:

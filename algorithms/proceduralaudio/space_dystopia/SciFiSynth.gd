@@ -99,7 +99,6 @@ func play_track(bgm_index: int) -> void:
 	step = 0
 	sequencer_active = true
 	
-	print("SciFiSynth: Playing Track %d" % bgm_index)
 	
 	match bgm_index:
 		1: _setup_track_1_drift()

@@ -67,7 +67,6 @@ func _init_materials() -> void:
 
 ## Main generation function
 func generate_dungeon() -> bool:
-	print("🏗️ Starting WFC dungeon generation...")
 	
 	# Setup random seed
 	if generation_seed >= 0:
@@ -124,7 +123,6 @@ func _load_tile_prototypes() -> bool:
 		root.queue_free()
 		return false
 	
-	print("📦 Loaded ", tile_prototypes.size(), " tile types")
 	
 	# Build socket compatibility rules
 	_build_socket_rules()
@@ -139,7 +137,6 @@ func _build_socket_rules() -> void:
 		var sockets = tile.get_meta("sockets", {})
 		socket_rules[tile.name] = sockets
 	
-	print("📋 Built socket rules for ", socket_rules.size(), " tiles")
 
 ## Initialize the grid with all possibilities
 func _initialize_grid() -> void:
@@ -156,7 +153,6 @@ func _initialize_grid() -> void:
 		grid.append(row)
 		possible.append(poss_row)
 	
-	print("🌐 Initialized grid: ", grid_width, "x", grid_height)
 
 ## Core WFC algorithm
 func _collapse_wave_function() -> bool:
@@ -341,7 +337,6 @@ func _place_tiles_in_world() -> void:
 			
 			add_child(tile)
 	
-	print("🎨 Placed ", grid_width * grid_height, " tiles in world")
 
 ## Decorate tile with props and proper materials
 func _decorate_tile(tile: Node3D, x: int, y: int) -> void:

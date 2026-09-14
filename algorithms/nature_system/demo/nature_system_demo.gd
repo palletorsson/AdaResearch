@@ -164,8 +164,6 @@ func _spawn_single_kingdom(kingdom: int) -> void:
 		randf_range(-5.0, 5.0)
 	)
 	var entity: CritterEntity = _spawner.spawn(dna, pos, _current_lod)
-	if entity:
-		print("Spawned %s at %s" % [entity.name, str(pos)])
 	_update_label()
 
 
@@ -250,14 +248,11 @@ func _update_label() -> void:
 # ═══════════════════════════════════════════════════════════════
 
 func _on_generation_complete(gen: int, stats: Dictionary) -> void:
-	print("[Demo] Generation %d complete — pop: %d, fitness: %.3f" % [
-		gen, stats.get("population", 0), stats.get("avg_fitness", 0.0)
-	])
 	_update_label()
 
 
 func _on_cross_kingdom(_parent_a: CritterEntity, _parent_b: CritterEntity, child_kingdom: String) -> void:
-	print("[Demo] Cross-kingdom breed! Child is: %s" % child_kingdom)
+	pass
 
 
 func _on_ability_granted(ability_name: String, _data: Dictionary) -> void:

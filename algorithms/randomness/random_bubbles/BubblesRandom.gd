@@ -293,7 +293,6 @@ func create_petri_dish() -> void:
 	area_light.name = "PetriDishLight"
 	petri_dish_container.add_child(area_light)
 	
-	print("BubblesRandom: Created petri dish with radius %.1f and height %.1f" % [petri_dish_radius, petri_dish_height])
 
 ## The grid writes config_<key> onto the artifact ROOT before add_child and only calls
 ## apply_grid_config deferred, i.e. AFTER _ready. Reading the metadata here means a token that

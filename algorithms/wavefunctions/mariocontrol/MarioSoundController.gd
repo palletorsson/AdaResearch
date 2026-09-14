@@ -161,7 +161,6 @@ func _update_mapper_config() -> void:
 		value_mapper.call("_update_output")
 
 func apply_grid_config(data: Dictionary) -> void:
-	print("UniversalSound: Config received: %s" % data)
 	if data.has("mode"):
 		var m_str = data.mode.to_upper()
 		if SoundMode.has(m_str): mode = SoundMode[m_str]

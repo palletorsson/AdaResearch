@@ -9,7 +9,6 @@ func _ready() -> void:
 
 func generate_simple_cave():
 	"""Generate a basic cave system"""
-	print("🏔️ Simple Cave Example: Starting generation...")
 	
 	# Create the cave generator
 	var cave_generator = RhizomeCaveGenerator.new()

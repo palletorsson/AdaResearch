@@ -376,7 +376,6 @@ func generate_data() -> void:
 	# AFTER the points, because create_original_data_visualization opens with
 	# clear_visualizations() and the body must survive that call.
 	_build_structure_body()
-	print("Generated ", num_samples, " samples with ", num_dimensions, " dimensions (bearing=", bearing, ")")
 
 ## aligned — THE SHIPPED CLOUD, formula untouched. Two latent bases, dimension 0 is
 ## base1 plus noise and every other dimension is a decreasingly correlated mix, which
@@ -710,7 +709,6 @@ func start_pca_computation() -> void:
 	else:
 		compute_pca_full()
 	
-	print("Starting PCA computation...")
 
 func _on_computation_timer_timeout() -> void:
 	"""Handle computation timer timeout"""
@@ -792,7 +790,6 @@ func center_and_normalize_data() -> void:
 	else:
 		normalized_data = centered_data.duplicate(true)
 	
-	print("Data centering and normalization complete")
 
 func compute_covariance_matrix() -> void:
 	"""Compute covariance matrix"""
@@ -815,7 +812,6 @@ func compute_covariance_matrix() -> void:
 				covariance += sample[i] * sample[j]
 			covariance_matrix[i][j] = covariance / (n - 1)
 	
-	print("Covariance matrix computed")
 
 func compute_eigenvalues_vectors() -> void:
 	"""Compute eigenvalues and eigenvectors using power iteration method"""
@@ -847,7 +843,6 @@ func compute_eigenvalues_vectors() -> void:
 	# Sort by eigenvalue (descending)
 	sort_eigen_pairs()
 	
-	print("Eigenvalues computed: ", eigenvalues)
 
 func power_iteration(matrix: Array, max_iterations: int) -> Dictionary:
 	"""Power iteration method for finding dominant eigenvalue/eigenvector"""
@@ -979,8 +974,6 @@ func select_principal_components() -> void:
 	for i in range(num_components):
 		explained_variance_ratio.append(eigenvalues[i] / total_variance)
 	
-	print("Selected ", num_components, " principal components")
-	print("Explained variance ratios: ", explained_variance_ratio)
 
 func project_data() -> void:
 	"""Project data onto principal components"""
@@ -999,7 +992,6 @@ func project_data() -> void:
 	# Create visualization of projected data
 	create_projected_data_visualization()
 	
-	print("Data projection complete")
 
 func _update_3d_stats() -> void:
 	"""Update in-scene 3D stats label with current PCA state."""
@@ -1129,7 +1121,6 @@ func finalize_pca() -> void:
 		start_projection_animation()
 	
 	computation_complete = true
-	print("PCA computation complete")
 
 func start_projection_animation() -> void:
 	"""Start animation showing projection process"""
@@ -1392,7 +1383,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[PCA_Visualization] Config applied - bearing=%s" % [bearing])
 
 ## Accept an axis value only if it names something we actually build. A typo in a map
 ## token falls back to the shipped look rather than stranding a placement with no

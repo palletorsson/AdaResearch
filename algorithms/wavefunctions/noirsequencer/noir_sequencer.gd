@@ -151,15 +151,6 @@ func create_cell_style(active, hover):
 	return style
 
 func initialize_audio() -> void:
-	# Print audio diagnostic information
-	print("=== AUDIO DIAGNOSTIC INFO ===")
-	print("Default bus count: ", AudioServer.get_bus_count())
-	print("Speaker mode: ", AudioServer.get_speaker_mode())
-	print("Mix rate: ", AudioServer.get_mix_rate())
-	print("Output device count: ", AudioServer.get_output_device_list().size())
-	print("Output devices: ", AudioServer.get_output_device_list())
-	print("Current device: ", AudioServer.get_output_device())
-	print("============================")
 	
 	# Make sure we clean up any previous audio players
 	for player in audio_players:
@@ -486,7 +477,6 @@ func test_basic_audio() -> void:
 		
 		playback.push_buffer(buffer)
 		
-		print("Basic audio test started - you should hear a 1-second tone")
 		set_status("Testing basic audio...")
 	
 	# Clean up after 2 seconds
@@ -576,7 +566,6 @@ func test_direct_output() -> void:
 	direct_player.bus = "Master"  # Use Master bus directly
 	direct_player.play()
 	
-	print("Direct audio test playing - 1 second tone")
 	set_status("Testing direct audio output...")
 	
 	# Clean up after 2 seconds
@@ -644,13 +633,10 @@ func advance_step() -> void:
 	current_step = (current_step + 1) % COLS
 	update_step_indicator()
 	
-	# Debug information
-	print("Step: ", current_step)
 	
 	# Play active notes for this step with enhanced error handling
 	for r in range(ROWS):
 		if grid[r][current_step]:
-			print("Playing note: ", noir_notes[r], " at step ", current_step)
 			
 			# Try multiple sound generation methods
 			# 1. First try direct audio for this step

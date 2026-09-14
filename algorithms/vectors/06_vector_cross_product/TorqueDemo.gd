@@ -64,7 +64,6 @@ var _torque_mirror_cache: Dictionary = {}
 func _ready() -> void:
 	super._ready()
 	_setup_demo()
-	print("TorqueDemo: Ready - Apply force off-center!")
 
 func _setup_demo() -> void:
 	"""Setup torque demonstration"""
@@ -197,7 +196,6 @@ func _reset_demo() -> void:
 	if line_f and line_f.has_method("refresh_connections"):
 		line_f.refresh_connections()
 	
-	print("TorqueDemo: Reset")
 
 # --- HANDEDNESS ---------------------------------------------------------------
 # One axis, three values, shared word for word with the bench next door. Nothing below

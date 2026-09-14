@@ -18,7 +18,6 @@ var total_triangles_generated: int = 0
 
 func _init() -> void:
 	lookup_tables = MarchingCubesLookupTables.new()
-	print("MarchingCubesGenerator: Initialized with seamless boundary support")
 
 func generate_mesh_from_chunk(chunk: VoxelChunk) -> ArrayMesh:
 	"""FIXED: Generate mesh with seamless boundary handling"""
@@ -81,9 +80,6 @@ func generate_mesh_from_chunk(chunk: VoxelChunk) -> ArrayMesh:
 		arrays[Mesh.ARRAY_INDEX] = indices
 		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 		
-		print("MarchingCubes: Generated mesh with %d vertices, %d triangles, %d indices" % 
-			[vertices.size(), total_triangles_generated, indices.size()])
-		print("MarchingCubes: Surface has %d vertices, %d indices" % [vertices.size(), indices.size()])
 	else:
 		print("MarchingCubes: No geometry generated - all densities might be uniform")
 	
@@ -328,4 +324,3 @@ func get_generation_stats() -> Dictionary:
 func set_terrain_generator_reference(terrain_gen: TerrainGenerator) -> void:
 	"""Set reference to terrain generator for boundary calculations"""
 	terrain_generator_ref = terrain_gen
-	print("MarchingCubesGenerator: Terrain generator reference set for seamless boundaries") 

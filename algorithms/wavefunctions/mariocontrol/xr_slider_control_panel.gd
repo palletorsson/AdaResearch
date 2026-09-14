@@ -25,7 +25,6 @@ func _ready() -> void:
 	connect_slider_signals()
 	find_pickup_cubes()
 	update_all_labels()
-	print("XR Slider Control Panel ready")
 
 func setup_slider_ranges() -> void:
 	# Configure slider limits and default positions
@@ -82,7 +81,6 @@ func find_pickup_cubes() -> void:
 		cube.harmony_slider = harmony_slider
 		cube.reverb_slider = reverb_slider
 	
-	print("Found and configured %d pickup cubes" % pickup_cubes.size())
 
 func _find_pickup_cubes_recursive(node: Node) -> void:
 	if node is XRSliderPickupCube:
@@ -95,12 +93,10 @@ func _find_pickup_cubes_recursive(node: Node) -> void:
 func _on_pitch_slider_moved(position: float) -> void:
 	var pitch_value = lerp(0.5, 2.0, position)
 	pitch_label.text = "Pitch: %.2fx" % pitch_value
-	print("Pitch adjusted to: %.2fx" % pitch_value)
 
 func _on_volume_slider_moved(position: float) -> void:
 	var volume_percent = position * 100
 	volume_label.text = "Volume: %d%%" % volume_percent
-	print("Volume adjusted to: %d%%" % volume_percent)
 
 func _on_tone_slider_moved(position: float) -> void:
 	var tone_description = ""
@@ -112,12 +108,10 @@ func _on_tone_slider_moved(position: float) -> void:
 		tone_description = "Bright"
 	
 	tone_label.text = "Tone: %s" % tone_description
-	print("Tone adjusted to: %s (%.2f)" % [tone_description, position])
 
 func _on_harmony_slider_moved(position: float) -> void:
 	var harmony_percent = position * 100
 	harmony_label.text = "Harmony: %d%%" % harmony_percent
-	print("Harmony adjusted to: %d%%" % harmony_percent)
 
 func _on_reverb_slider_moved(position: float) -> void:
 	var reverb_description = ""
@@ -131,7 +125,6 @@ func _on_reverb_slider_moved(position: float) -> void:
 		reverb_description = "Cathedral"
 	
 	reverb_label.text = "Reverb: %s" % reverb_description
-	print("Reverb adjusted to: %s (%.2f)" % [reverb_description, position])
 
 func update_all_labels() -> void:
 	# Update all labels with current slider values
@@ -148,7 +141,6 @@ func set_mario_classic_preset() -> void:
 	tone_slider.move_slider(0.7)   # Bright
 	harmony_slider.move_slider(0.4) # Some harmony
 	reverb_slider.move_slider(0.1)  # Minimal reverb
-	print("Applied Mario Classic preset")
 
 func set_ethereal_preset() -> void:
 	pitch_slider.move_slider(0.3)  # Lower pitch
@@ -156,7 +148,6 @@ func set_ethereal_preset() -> void:
 	tone_slider.move_slider(0.2)   # Dark tone
 	harmony_slider.move_slider(0.8) # Rich harmony
 	reverb_slider.move_slider(0.9)  # Heavy reverb
-	print("Applied Ethereal preset")
 
 func set_retro_8bit_preset() -> void:
 	pitch_slider.move_slider(0.8)  # High pitch
@@ -164,7 +155,6 @@ func set_retro_8bit_preset() -> void:
 	tone_slider.move_slider(0.9)   # Very bright
 	harmony_slider.move_slider(0.1) # Minimal harmony
 	reverb_slider.move_slider(0.0)  # No reverb
-	print("Applied Retro 8-bit preset")
 
 func set_ambient_preset() -> void:
 	pitch_slider.move_slider(0.2)  # Very low pitch
@@ -172,7 +162,6 @@ func set_ambient_preset() -> void:
 	tone_slider.move_slider(0.1)   # Very dark
 	harmony_slider.move_slider(0.6) # Moderate harmony
 	reverb_slider.move_slider(0.7)  # Significant reverb
-	print("Applied Ambient preset")
 
 # Reset all sliders to default
 func reset_to_defaults() -> void:
@@ -181,11 +170,9 @@ func reset_to_defaults() -> void:
 	tone_slider.move_slider(tone_slider.default_position)
 	harmony_slider.move_slider(harmony_slider.default_position)
 	reverb_slider.move_slider(reverb_slider.default_position)
-	print("Reset all sliders to default positions")
 
 # Test sound generation (for previewing without collecting a cube)
 func test_current_sound() -> void:
-	print("Testing current sound settings...")
 	
 	# Create a temporary sound generator
 	var temp_generator = XRSliderPickupCube.XRSliderSoundGenerator.new()
@@ -239,7 +226,6 @@ func apply_settings(settings: Dictionary) -> void:
 	if settings.has("reverb"):
 		reverb_slider.move_slider(settings.reverb)
 	
-	print("Applied custom settings: ", settings)# xr_slider_control_panel.gd - Scene setup for XR slider-controlled pickup sounds
 
 func _exit_tree() -> void:
 	for child in get_children():

@@ -1066,8 +1066,6 @@ func apply_grid_config(config: Dictionary) -> void:
 			and is_equal_approx(_density, before_density):
 		return
 	_rebuild_now()
-	print("[KargerAlgorithm] Config applied — bottleneck=%s, n=%d, edges=%d" % [
-		bottleneck, _n, _edge_count])
 
 
 ## Accept an axis value only if it names something this artifact actually builds.

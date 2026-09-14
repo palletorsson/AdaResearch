@@ -157,7 +157,6 @@ func _ready() -> void:
 	_add_info_label()
 	_warmup()
 	set_process(true)
-	print("PheromoneeTerrain: Initialized with %d walkers on %dx%d grid" % [walker_count, x_segments, y_segments])
 
 
 func _init_rng() -> void:

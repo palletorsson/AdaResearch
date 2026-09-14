@@ -36,7 +36,6 @@ func _ready() -> void:
 	# Create emitter
 	create_emitter()
 
-	print("Example 4.3: Particle Emitter - ParticleEmitter class demonstration")
 
 func _process(_delta):
 	update_info_label()

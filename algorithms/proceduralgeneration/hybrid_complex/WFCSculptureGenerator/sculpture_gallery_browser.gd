@@ -35,7 +35,6 @@ func _process(delta: float) -> void:
 			sculpture.rotation.y += rotation_speed * delta
 
 func generate_gallery_page() -> void:
-	print("🎨 Generating sculpture gallery page ", current_page, "...")
 	
 	# Clear existing
 	clear_gallery()
@@ -43,7 +42,6 @@ func generate_gallery_page() -> void:
 	# Generate interesting parameter combinations
 	generate_sculpture_variations()
 	
-	print("✅ Gallery page ", current_page, " complete with ", current_sculptures.size(), " sculptures")
 
 func clear_gallery() -> void:
 	for child in get_children():
@@ -264,9 +262,7 @@ func create_sculpture_from_config(config: Dictionary, pos: Vector3, index: int) 
 	add_child(label)
 	
 	# Generate
-	print("  🔨 Generating: ", config["name"])
 	await sculpture.create_hollow_sculpture()
-	print("  ✅ Complete: ", config["name"])
 
 func next_page() -> void:
 	current_page += 1

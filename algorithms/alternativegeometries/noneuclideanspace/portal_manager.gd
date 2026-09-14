@@ -23,7 +23,6 @@ func register_portal(portal: Portal) -> void:
 		active_portals.append(portal)
 		portal.body_entered.connect(_on_portal_body_entered.bind(portal))
 		portal.body_exited.connect(_on_portal_body_exited.bind(portal))
-		print("Registered portal: " + portal.name)
 
 func unregister_portal(portal: Portal) -> void:
 	if active_portals.has(portal):

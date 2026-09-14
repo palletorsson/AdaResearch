@@ -140,7 +140,6 @@ var grid_container: GridContainer
 var pattern_cells = []
 
 func _ready() -> void:
-	print("ðŸ´ó §ó ¢ó ³ó £ó ´ó ¿ TartanGrid10x10: Initializing tartan pattern gallery...")
 	
 	# Combine traditional and custom patterns
 	all_patterns = tartan_patterns + custom_patterns
@@ -152,7 +151,6 @@ func _ready() -> void:
 	setup_grid()
 	generate_tartan_grid()
 	
-	print("âœ… Generated ", all_patterns.size(), " tartan patterns in 10x10 grid")
 
 func setup_grid() -> void:
 	# Create grid container
@@ -243,10 +241,6 @@ func generate_random_tartan() -> Dictionary:
 	}
 
 func _on_tartan_clicked(pattern: Dictionary, index: int) -> void:
-	print("ðŸ´ó §ó ¢ó ³ó £ó ´ó ¿ Clicked tartan: ", pattern.name)
-	print("  Colors: ", pattern.colors.size())
-	print("  Pattern: ", pattern.pattern)
-	print("  Grid position: ", index, " (", index % GRID_SIZE, ",", index / GRID_SIZE, ")")
 	
 	# Could add popup with detailed pattern information
 	show_pattern_details(pattern, index)
@@ -289,10 +283,8 @@ func show_pattern_details(pattern: Dictionary, index: int) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_R:
-			print("ðŸ”„ Regenerating random patterns...")
 			regenerate_random_patterns()
 		elif event.keycode == KEY_S:
-			print("ðŸ’¾ Saving tartan gallery screenshot...")
 			save_screenshot()
 
 func regenerate_random_patterns() -> void:

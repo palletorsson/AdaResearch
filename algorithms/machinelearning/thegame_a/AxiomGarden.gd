@@ -89,7 +89,6 @@ func _on_prev_pressed() -> void:
 func grow_garden() -> void:
 	# 1. Generate String
 	var sequence = lsystem.generate(generations)
-	print("Generated sequence length: " + str(sequence.length()))
 	
 	# 2. Turtle Interpretation
 	turtle.step_length = step_length
@@ -156,7 +155,6 @@ func check_goals(lines: Array) -> void:
 				break
 		
 		if reached:
-			print("Target reached: " + target.name)
 			target.emit_signal("target_reached")
 
 
@@ -169,7 +167,6 @@ func _on_grow_pressed() -> void:
 			var predecessor = parts[0].strip_edges()
 			var successor = parts[1].strip_edges()
 			lsystem.set_rule(predecessor, successor)
-			print("Rule updated: " + predecessor + " -> " + successor)
 			grow_garden()
 
 func _exit_tree() -> void:

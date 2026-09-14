@@ -60,7 +60,6 @@ func _ready() -> void:
 	# Add instruction label
 	_add_instructions()
 	
-	print("Perception Altering Environment initialized")
 
 func _setup_environment() -> void:
 	# Create a world environment for global visual effects
@@ -236,7 +235,6 @@ func _create_distortion_region(position: Vector3, size: Vector3, color: Color, t
 
 func _on_region_entered(body: Node3D, region: Node3D, type: String, intensity: float) -> void:
 	if body == player:
-		print("Player entered " + type + " distortion region")
 		
 		# Apply the effect
 		var visual_box = region.get_node("VisualBox")
@@ -250,7 +248,6 @@ func _on_region_entered(body: Node3D, region: Node3D, type: String, intensity: f
 
 func _on_region_exited(body: Node3D, region: Node3D, type: String) -> void:
 	if body == player:
-		print("Player exited " + type + " distortion region")
 		
 		# Reduce the effect
 		var visual_box = region.get_node("VisualBox")

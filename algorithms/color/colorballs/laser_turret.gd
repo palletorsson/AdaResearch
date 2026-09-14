@@ -309,7 +309,6 @@ func _acquire_target(ball: Node3D) -> void:
 	is_firing = false
 	is_burning = false
 	emit_signal("target_acquired", ball)
-	print("[Turret] Target acquired: %s" % ball.name)
 
 func _lose_target() -> void:
 	current_target = null
@@ -384,7 +383,6 @@ func _start_firing() -> void:
 	is_firing = true
 	burn_timer = 0.0
 	muzzle_flash.emitting = true
-	print("[Turret] Firing at %s" % current_target.name)
 
 func _apply_burn_effect() -> void:
 	if target_rigid_body == null:
@@ -410,7 +408,6 @@ func _destroy_target() -> void:
 	if target_rigid_body:
 		target_pos = target_rigid_body.global_position
 	
-	print("[Turret] Ball destroyed: %s" % current_target.name)
 	
 	# Create explosion
 	_spawn_explosion(target_pos)

@@ -54,8 +54,7 @@ func setup_ui() -> void:
 	add_child(status_label)
 
 func _on_evolve_selected() -> void:
-	if engine and selected_genome_index >= 0:
-		print("Evolving from selected genome")
+	pass
 
 func _on_random_evolution() -> void:
 	if engine:

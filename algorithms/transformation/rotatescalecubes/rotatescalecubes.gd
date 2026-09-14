@@ -117,7 +117,6 @@ func setup_cubes() -> void:
 	
 	# Store colors for potential future use (Grid shader can't use per-instance colors directly)
 	# The cubes will all have the same Grid shader appearance for performance
-	print("VRCubes: Created %d cubes with Grid shader wireframe effect" % cube_count)
 
 func _process(delta: float) -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:

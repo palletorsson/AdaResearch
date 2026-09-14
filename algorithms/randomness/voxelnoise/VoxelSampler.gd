@@ -18,7 +18,6 @@ func _ready() -> void:
 	var samples = _sample_centered_volume()
 	# -> pass `samples` into your mesher (marching cubes) or ROI logic
 	# e.g., MeshFromDensity.build(samples, size, iso_level, voxel_size)
-	print("Sample volume ready, centered at local (0,0,0).")
 
 func _sample_centered_volume() -> PackedFloat32Array:
 	# Center grid in local space: indices in [-hx .. +hx], [-hy .. +hy], [-hz .. +hz]

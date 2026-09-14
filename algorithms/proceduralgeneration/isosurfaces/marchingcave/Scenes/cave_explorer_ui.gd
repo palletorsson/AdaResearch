@@ -82,7 +82,6 @@ func connect_ui_signals() -> void:
 			# Update initial preset name
 			control_panel.update_preset_name(get_current_preset_name())
 			
-			print("✅ UI signals connected!")
 		else:
 			print("⚠️ Control panel not found in viewport")
 
@@ -109,7 +108,6 @@ func create_mini_cave() -> void:
 	
 	display_node.add_child(mini_cave)
 	
-	print("🏔️ Mini cave created at scale: ", chunk_scale)
 
 func update_mini_cave() -> void:
 	if mini_cave:
@@ -126,17 +124,14 @@ func update_mini_cave() -> void:
 func on_noise_scale_changed(value: float) -> void:
 	noise_scale = value
 	update_mini_cave()
-	print("Noise Scale: %.2f" % value)
 
 func on_iso_level_changed(value: float) -> void:
 	iso_level = value
 	update_mini_cave()
-	print("Iso Level: %.2f" % value)
 
 func on_chunk_scale_changed(value: float) -> void:
 	chunk_scale = value
 	update_mini_cave()
-	print("Chunk Scale: %.0f" % value)
 
 # Scroll through presets
 func next_preset() -> void:
@@ -165,8 +160,6 @@ func load_preset(index: int) -> void:
 			control_panel.set_values(noise_scale, iso_level, chunk_scale)
 			control_panel.update_preset_name(preset["name"])
 	
-	print("📜 Loaded preset: ", preset["name"])
-	print("  Noise: %.2f | Iso: %.2f | Scale: %.0f" % [noise_scale, iso_level, chunk_scale])
 
 func get_current_preset_name() -> String:
 	return cave_presets[current_preset_index]["name"]

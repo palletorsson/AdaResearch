@@ -196,12 +196,6 @@ func _generate_grid_lines(partitions: Array, offset: Vector3) -> void:
 			
 			if is_top_edge or is_bottom_edge or is_left_edge or is_right_edge:
 				_try_place_spawners(e, offset, spawners_root)
-			else:
-				# Debug: why is this NOT a boundary?
-				if e.y == 0 or e.w == 0:
-					print("MondrianGenerator: Near-miss TOP edge? %s (y==0: %s, w==0: %s)" % [e, e.y==0, e.w==0])
-				if e.x == 0 or e.z == 0:
-					print("MondrianGenerator: Near-miss LEFT edge? %s (x==0: %s, z==0: %s)" % [e, e.x==0, e.z==0])
 
 
 func _try_place_spawners(coords: Vector4, offset: Vector3, parent: Node) -> void:
@@ -240,7 +234,6 @@ func _try_place_spawners(coords: Vector4, offset: Vector3, parent: Node) -> void
 		var spacing_int = int(round(spawner_spacing))
 		
 		if int(check_val) % spacing_int == 0:
-			print("MondrianGenerator: Placing spawner at %s (val=%d %% %d == 0)" % [pos_on_line, check_val, spacing_int])
 			_spawn_spawner(pos_on_line, offset, parent, is_horizontal)
 			
 		t += 1.0 # Check every unit

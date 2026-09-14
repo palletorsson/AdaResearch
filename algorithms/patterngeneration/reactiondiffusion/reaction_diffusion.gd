@@ -30,7 +30,6 @@ var btn_blast: Node
 var frame_count: int = 0
 
 func _ready() -> void:
-	print("Initializing Reaction-Diffusion System (Node3D)...")
 
 	_create_subviewports()
 	_create_display_surface()
@@ -134,7 +133,6 @@ func _setup_simulation() -> void:
 	var rect_b := buffer_b.get_node_or_null("ColorRect")
 	if rect_b:
 		rect_b.material = sim_material
-		print("Shader material applied to BufferB")
 
 	# 3. Initialize ping-pong
 	current_buffer = buffer_a
@@ -143,10 +141,8 @@ func _setup_simulation() -> void:
 	# 4. Add initial seeds
 	call_deferred("add_initial_seed")
 
-	print("Reaction-Diffusion system ready!")
 
 func add_initial_seed() -> void:
-	print("Adding initial seed points...")
 
 	# out-of-tree guard: get_tree() is null once a map is torn down
 	if not is_inside_tree():
@@ -185,7 +181,6 @@ func add_initial_seed() -> void:
 		await get_tree().process_frame
 
 	sim_material.set_shader_parameter("mouse_pos", Vector2(-1, -1))
-	print("Initial seed points created!")
 
 func _process(_delta: float) -> void:
 	if not sim_material or not sim_material.shader:
@@ -209,9 +204,6 @@ func _process(_delta: float) -> void:
 	if new_texture and display_material:
 		display_material.set_shader_parameter("sim_texture", new_texture)
 
-	# Debug output every few seconds
-	if frame_count % 180 == 0:
-		print("Frame ", frame_count, " - Simulation running (", current_buffer.name, " -> ", next_buffer.name, ")")
 
 	# 5. Ping-pong swap
 	var temp := current_buffer
@@ -221,19 +213,15 @@ func _process(_delta: float) -> void:
 # ─── VR Button Callbacks ───
 
 func _on_add_noise() -> void:
-	print("Adding random noise...")
 	add_random_noise()
 
 func _on_reset() -> void:
-	print("Resetting simulation...")
 	reset_simulation()
 
 func _on_add_seeds() -> void:
-	print("Adding seed points...")
 	add_seed_points()
 
 func _on_big_blast() -> void:
-	print("Big seed blast!")
 	big_seed_blast()
 
 # ─── Simulation Actions ───
@@ -281,7 +269,6 @@ func big_seed_blast() -> void:
 			await get_tree().process_frame
 
 		sim_material.set_shader_parameter("mouse_pos", Vector2(-1, -1))
-		print("Big seed blast complete!")
 
 func _set_shader_texture(param_name: String, texture: Texture2D) -> void:
 	if sim_material and sim_material.shader:

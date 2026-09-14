@@ -58,7 +58,6 @@ var activation_particles: Array = []
 var kernel_weights: Array = []
 
 func _ready() -> void:
-	print("[CNNs_VR] Initializing CNN architecture walkthrough")
 	_initialize_kernels()
 	_create_input_layer()
 	_create_convolutional_layers()
@@ -559,7 +558,6 @@ func set_kernel_weight(layer: int, filter: int, x: int, y: int, value: float) ->
 
 func inspect_feature_map(layer: int, filter: int) -> void:
 	"""Highlight and inspect a specific feature map"""
-	print("[CNN] Inspecting layer %d, filter %d" % [layer, filter])
 
 func _exit_tree() -> void:
 	for child in get_children():

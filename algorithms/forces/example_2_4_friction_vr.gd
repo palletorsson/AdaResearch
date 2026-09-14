@@ -54,7 +54,6 @@ func _ready() -> void:
 	_create_panel()
 	spawn_mover()
 	setup_auto_reset()
-	print("Example 2.4: Friction")
 
 func setup_auto_reset() -> void:
 	auto_reset_timer = Timer.new()

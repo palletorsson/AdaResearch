@@ -61,8 +61,6 @@ func _ready() -> void:
 	_create_reference_sine_curve()
 	_setup_audio()
 	_setup_controls()
-	print("OscillatingWave: Ready - Watch sine create curves! (Optimized)")
-	print("OscillatingWave: Horizontal position → Frequency, Vertical position → Amplitude")
 
 func _create_sphere() -> void:
 	# Oscillating sphere
@@ -148,7 +146,6 @@ func _create_wave_trail() -> void:
 		mm.set_instance_color(i, Color(1, 0.3, 0.8, 0.6 * (1.0 - age)))
 	
 	add_child(wave_trail_multimesh)
-	print("OscillatingWave: Wave trail using MultiMesh (1 node instead of 200)")
 
 func _create_reference_sine_curve() -> void:
 	# OPTIMIZED: Use MultiMesh instead of 100 individual MeshInstance3D nodes
@@ -176,7 +173,6 @@ func _create_reference_sine_curve() -> void:
 		mm.set_instance_transform(i, t)
 	
 	add_child(reference_curve_multimesh)
-	print("OscillatingWave: Reference curve using MultiMesh (1 node instead of 100)")
 
 func _setup_audio() -> void:
 	audio_stream = AudioStreamGenerator.new()
@@ -194,7 +190,6 @@ func _setup_audio() -> void:
 	for i in range(NUM_HARMONICS):
 		harmonic_amplitudes[i] = 1.0 / (i + 1)  # Sawtooth-like (1/n)
 
-	print("OscillatingWave: Audio synthesis enabled")
 
 func _setup_controls() -> void:
 	# TODO: Connect to interactables if available
@@ -330,13 +325,11 @@ func _update_visualizations() -> void:
 
 func set_oscillation_frequency(freq: float) -> void:
 	oscillation_frequency = clamp(freq, 0.1, 5.0)
-	print("OscillatingWave: Oscillation frequency set to %.2f Hz" % oscillation_frequency)
 
 func set_oscillation_amplitude(amp: float) -> void:
 	oscillation_amplitude = clamp(amp, 0.5, 3.0)
 	# Update reference curve when amplitude changes
 	_update_reference_curve()
-	print("OscillatingWave: Oscillation amplitude set to %.2f" % oscillation_amplitude)
 
 func _update_reference_curve() -> void:
 	if not reference_curve_multimesh or not reference_curve_multimesh.multimesh:
@@ -350,12 +343,10 @@ func _update_reference_curve() -> void:
 
 func set_horizontal_speed(speed: float) -> void:
 	horizontal_speed = clamp(speed, 0.1, 3.0)
-	print("OscillatingWave: Horizontal speed set to %.2f" % horizontal_speed)
 
 func toggle_reference_curve() -> void:
 	if reference_curve_multimesh:
 		reference_curve_multimesh.visible = !reference_curve_multimesh.visible
-		print("OscillatingWave: Reference curve %s" % ("visible" if reference_curve_multimesh.visible else "hidden"))
 
 func _exit_tree() -> void:
 	for child in get_children():

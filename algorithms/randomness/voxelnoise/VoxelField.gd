@@ -53,10 +53,8 @@ func interesting_score(center: Vector3) -> float:
 
 func find_interesting_rois(search_aabb: AABB, coarse: int, keep: int) -> Array:
 	"""Find regions of interest within the search AABB using a coarse grid"""
-	print("VoxelField: Searching for ROIs in ", search_aabb, " with coarse=", coarse, " keep=", keep)
 	var rois = []
 	var step = search_aabb.size / coarse
-	print("VoxelField: Step size = ", step)
 	
 	# Sample the field on a coarse grid
 	for x in range(coarse):
@@ -73,16 +71,12 @@ func find_interesting_rois(search_aabb: AABB, coarse: int, keep: int) -> Array:
 				}
 				rois.append(roi)
 	
-	print("VoxelField: Generated ", rois.size(), " ROIs, sample scores: ")
 	for i in range(min(5, rois.size())):
 		print("  Sample ROI ", i, ": score=", rois[i].score, " field=", field(rois[i].center))
 	
 	# Sort by score (highest first) and keep only the top 'keep' ROIs
 	rois.sort_custom(func(a, b): return a.score > b.score)
 	
-	print("VoxelField: Top scores after sorting:")
-	for i in range(min(keep, rois.size())):
-		print("  ROI ", i, ": score=", rois[i].score)
 	
 	# Return only the top ROIs
 	var result = []

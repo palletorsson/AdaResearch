@@ -62,7 +62,6 @@ var qkv_visualizations: Array = []
 var _metrics_text: String = ""
 
 func _ready() -> void:
-	print("[Transformers_VR] Initializing transformer architecture")
 	_initialize_attention()
 	_create_encoder_sequence()
 	_create_decoder_sequence()

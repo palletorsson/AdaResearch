@@ -496,7 +496,6 @@ func setup_interaction() -> void:
 func _on_area_input_event(_camera, event, _click_position, _click_normal, _shape_idx, equipment) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		# Handle interaction with the equipment
-		print("Interacted with: ", equipment.name)
 		
 		# Create a highlight effect
 		var highlight = create_highlight_effect(equipment)
@@ -507,7 +506,6 @@ func _on_area_input_event(_camera, event, _click_position, _click_normal, _shape
 
 func _on_area_mouse_entered(equipment) -> void:
 	# Change cursor or provide visual feedback
-	print("Hover over: ", equipment.name)
 	
 	# Apply a subtle highlight
 	var material = equipment.get_child(0).material_override
@@ -516,7 +514,6 @@ func _on_area_mouse_entered(equipment) -> void:
 
 func _on_area_mouse_exited(equipment) -> void:
 	# Restore original state
-	print("Exit from: ", equipment.name)
 	
 	# Remove the subtle highlight
 	var material = equipment.get_child(0).material_override

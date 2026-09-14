@@ -152,7 +152,6 @@ func _initialize_model() -> void:
 	if _structure_component.has_signal("cube_changed"):
 		_structure_component.cube_changed.connect(_on_big_grid_changed)
 
-	print("GridModel: Initialized %dx%d map at cell_size=%.3f" % [_map_width, _map_depth, _cell_size])
 
 
 func _compute_cell_size() -> void:

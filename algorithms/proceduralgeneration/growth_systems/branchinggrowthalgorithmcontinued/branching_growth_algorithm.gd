@@ -114,7 +114,6 @@ class Attractor:
 		is_temporary = temp
 
 func _ready() -> void:
-	print("Initializing VR Space Colonization...")
 	
 	# Set up simple mesh for VR performance
 	immediate_mesh = ImmediateMesh.new()
@@ -139,7 +138,6 @@ func _ready() -> void:
 	# Generate fewer attractors for VR
 	generate_attractors_vr_optimized()
 	
-	print("Starting growth with ", branches.size(), " branches and ", attractors.size(), " attractors")
 	
 	# Start growth process
 	start_growth()
@@ -197,7 +195,6 @@ func _process(delta: float) -> void:
 		var flag_names = pride_flags.keys()
 		current_pride_flag = (current_pride_flag + 1) % flag_names.size()
 		current_flag_name = flag_names[current_pride_flag]
-		print("Switching to ", current_flag_name, " pride colors! 🌈")
 	
 	# Always keep growing if continuous growth is enabled
 	if continuous_growth:
@@ -220,7 +217,6 @@ func _process(delta: float) -> void:
 			if not grow_step():
 				if not continuous_growth:
 					is_growing = false
-					print("Growth completed with ", branches.size(), " branches")
 				break
 			processed_count += 1
 			
@@ -262,7 +258,6 @@ func update_growth_phases() -> void:
 	if phase_timer > phase_duration:
 		phase_timer = 0.0
 		current_growth_phase = (current_growth_phase + 1) % 4
-		print("Growth phase changed to: ", get_phase_name(current_growth_phase), " 🌱")
 	
 	# Adjust growth parameters based on phase
 	match current_growth_phase:
@@ -641,7 +636,6 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
-				print("Restarting QUEER growth... 🌈")
 				clear_growth()
 				add_branch(Vector3.ZERO, Vector3.UP, -1, 0, time_elapsed)
 				generate_attractors_vr_optimized()
@@ -649,10 +643,8 @@ func _input(event: InputEvent) -> void:
 			KEY_P:
 				if is_growing:
 					pause_growth()
-					print("Growth paused")
 				else:
 					resume_growth()
-					print("Growth resumed")
 			KEY_S:
 				var stats = get_growth_stats()
 				print("SPICY Stats: ", stats, " Flag: ", current_flag_name, " 🌈")
@@ -662,43 +654,33 @@ func _input(event: InputEvent) -> void:
 				current_pride_flag = (current_pride_flag + 1) % flag_names.size()
 				current_flag_name = flag_names[current_pride_flag]
 				color_cycle_timer = 0.0
-				print("Switched to ", current_flag_name, " colors! 🏳️‍🌈")
 			KEY_T:
 				# Toggle sparkles
 				enable_sparkles = !enable_sparkles
-				print("Sparkles: ", "ON ✨" if enable_sparkles else "OFF")
 			KEY_Q:
 				# Toggle pride colors
 				enable_pride_colors = !enable_pride_colors
-				print("Pride colors: ", "FABULOUS 🌈" if enable_pride_colors else "Basic")
 			KEY_G:
 				# Toggle continuous growth
 				continuous_growth = !continuous_growth
-				print("Continuous growth: ", "ON 🌱" if continuous_growth else "OFF")
 			KEY_PLUS, KEY_EQUAL:
 				# Increase growth acceleration
 				growth_acceleration = min(3.0, growth_acceleration + 0.2)
-				print("Growth acceleration: ", growth_acceleration)
 			KEY_MINUS:
 				# Decrease growth acceleration
 				growth_acceleration = max(0.1, growth_acceleration - 0.2)
-				print("Growth acceleration: ", growth_acceleration)
 			KEY_F:
 				# Toggle growth phases
 				growth_phases = !growth_phases
-				print("Growth phases: ", "ON 🌱" if growth_phases else "OFF")
 			KEY_E:
 				# Toggle environmental effects
 				environmental_influence = !environmental_influence
-				print("Environmental effects: ", "ON 🌬️" if environmental_influence else "OFF")
 			KEY_N:
 				# Force new attractor generation
 				generate_new_attractors()
-				print("Generated new attractors! ✨")
 			KEY_L:
 				# Toggle seasonal changes
 				seasonal_changes = !seasonal_changes
-				print("Seasonal changes: ", "ON 🍂" if seasonal_changes else "OFF")
 
 func _exit_tree() -> void:
 	for child in get_children():

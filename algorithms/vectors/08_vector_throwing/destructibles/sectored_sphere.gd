@@ -283,7 +283,6 @@ func _shatter_all_sectors(impact_velocity: Vector3, impact_point: Vector3) -> vo
 	await get_tree().create_timer(4.0).timeout
 	queue_free()
 
-	print("[SectoredSphere] All sectors shattered!")
 
 func _split_sector(sector: RigidBody3D, data: SectorData, impact_velocity: Vector3) -> void:
 	"""Split sector into two halves"""
@@ -315,7 +314,6 @@ func _split_sector(sector: RigidBody3D, data: SectorData, impact_velocity: Vecto
 	sector_data.erase(sector)
 	sector.queue_free()
 
-	print("[SectoredSphere] Split sector into two halves")
 
 func _destroy_sector(sector: RigidBody3D, data: SectorData, impact_velocity: Vector3) -> void:
 	"""Destroy a sector completely"""
@@ -341,7 +339,6 @@ func _destroy_sector(sector: RigidBody3D, data: SectorData, impact_velocity: Vec
 	if sectors.is_empty():
 		sphere_fully_destroyed.emit(self)
 
-	print("[SectoredSphere] Sector destroyed")
 
 func _fade_out_sector(sector: RigidBody3D, mesh: MeshInstance3D) -> void:
 	"""Fade and remove sector"""

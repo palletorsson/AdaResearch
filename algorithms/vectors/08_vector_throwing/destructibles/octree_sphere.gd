@@ -209,7 +209,6 @@ func _subdivide_octant(piece: RigidBody3D, data: OctantData, impact_velocity: Ve
 
 	octant_split.emit(piece, children)
 
-	print("[OctreeSphere] Subdivided into 8 octants (level %d)" % (data.subdivision_level + 1))
 
 func _shatter_all_octants(impact_velocity: Vector3, impact_point: Vector3) -> void:
 	"""Shatter all octants at once with explosion effect"""
@@ -264,7 +263,6 @@ func _shatter_all_octants(impact_velocity: Vector3, impact_point: Vector3) -> vo
 	await get_tree().create_timer(4.0).timeout
 	queue_free()
 
-	print("[OctreeSphere] All octants shattered!")
 
 func get_pieces_count() -> int:
 	return pieces.size()

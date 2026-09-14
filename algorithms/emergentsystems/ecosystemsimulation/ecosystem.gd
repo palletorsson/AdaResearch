@@ -525,8 +525,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[Ecosystem] Config applied — quota=%s (prey %d / pred %d / food %d)" % [
-		quota, prey_population, predator_population, food_amount])
 
 ## Synchronous and inline. A deferred rebuild that removes children first makes
 ## auto-grounding measure a ZERO AABB and bail.

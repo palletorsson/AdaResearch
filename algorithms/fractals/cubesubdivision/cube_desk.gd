@@ -68,7 +68,6 @@ func _execute_step(s: int) -> void:
 		_step_details()
 	else:
 		is_constructing = false
-		print("Desk complete! %d parts" % all_parts.size())
 
 func _build_instant() -> void:
 	_step_desktop()
@@ -92,7 +91,6 @@ func _step_desktop() -> void:
 		Vector3(desk_width, top_thickness, desk_depth),
 		top_color, "Desktop"
 	)
-	print("Step: Desktop surface")
 
 func _step_legs() -> void:
 	var leg_thickness = desk_size * 0.04
@@ -113,7 +111,6 @@ func _step_legs() -> void:
 			frame_color, "Leg_%d" % i
 		)
 
-	print("Step: Legs")
 
 func _step_drawer_frame() -> void:
 	# Frame that holds the drawers (left side of desk)
@@ -158,7 +155,6 @@ func _step_drawer_frame() -> void:
 			frame_color, "DrawerDivider_%d" % i
 		)
 
-	print("Step: Drawer frame")
 
 func _step_back_panel() -> void:
 	var desk_height = desk_size * 0.4
@@ -171,7 +167,6 @@ func _step_back_panel() -> void:
 		Vector3(desk_width * 0.9, desk_height * 0.6, desk_size * 0.02),
 		frame_color, "BackPanel"
 	)
-	print("Step: Back panel")
 
 func _step_single_drawer(row: int, col: int) -> void:
 	var drawer_unit_width = desk_size * 0.5
@@ -211,7 +206,6 @@ func _step_single_drawer(row: int, col: int) -> void:
 		handle_color, "Handle_%d_%d" % [row, col]
 	)
 
-	print("Step: Drawer [%d,%d]" % [row, col])
 
 func _step_details() -> void:
 	var desk_height = desk_size * 0.4
@@ -231,7 +225,6 @@ func _step_details() -> void:
 		accent_color, "AccentStrip"
 	)
 
-	print("Step: Details")
 
 func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String) -> void:
 	var mesh_instance := MeshInstance3D.new()

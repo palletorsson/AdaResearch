@@ -159,7 +159,6 @@ func self_avoiding_walk(start: Vector3i, steps: int) -> void:
 
 		# If no valid moves, stop (walker is trapped)
 		if valid_moves.is_empty():
-			print("Walker trapped after ", walker_path.size(), " steps")
 			break
 
 		# Choose weighted random move
@@ -171,7 +170,6 @@ func self_avoiding_walk(start: Vector3i, steps: int) -> void:
 		walker_path.append(current)
 		occupied_cells[current] = true
 
-	print("Generated path with ", walker_path.size(), " cubes")
 
 ## The one place `bias` reaches. "rise" returns exactly what the inline weight
 ## computation returned before this axis existed.

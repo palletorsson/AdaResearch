@@ -84,7 +84,6 @@ func setup_sphere_system() -> void:
 	sphere_material.emission_enabled = emission_enabled
 	sphere_material.emission_energy_multiplier = emission_energy
 	
-	print("RigidBody Sphere Spawner: System setup complete!")
 
 func find_terrain_reference() -> void:
 	"""Find the terrain reference for height sampling"""
@@ -92,7 +91,6 @@ func find_terrain_reference() -> void:
 	var parent = get_parent()
 	if parent is QueerNoiseTerrain:
 		terrain_reference = parent
-		print("Found terrain reference in parent")
 		return
 	
 	# Look in siblings
@@ -100,20 +98,17 @@ func find_terrain_reference() -> void:
 		for child in parent.get_children():
 			if child is QueerNoiseTerrain:
 				terrain_reference = child
-				print("Found terrain reference in sibling")
 				return
 	
 	# Look globally
 	var terrain_nodes = get_tree().get_nodes_in_group("terrain")
 	if terrain_nodes.size() > 0:
 		terrain_reference = terrain_nodes[0]
-		print("Found terrain reference globally")
 	else:
 		print("WARNING: No terrain reference found!")
 
 func spawn_initial_spheres() -> void:
 	"""Spawn the initial set of spheres"""
-	print("Spawning ", sphere_count, " initial rigidbody spheres...")
 	for i in range(sphere_count):
 		spawn_single_sphere()
 
@@ -192,7 +187,6 @@ func spawn_single_sphere() -> void:
 	add_child(rigidbody)
 	spheres.append(rigidbody)
 	
-	print("Spawned rigidbody sphere at position: ", spawn_pos, " with force: ", force_direction * force_magnitude)
 
 func spawn_sphere_at_position(pos: Vector3, force: Vector3 = Vector3.ZERO) -> void:
 	"""Spawn a sphere at a specific position with optional force"""
@@ -256,7 +250,6 @@ func spawn_sphere_at_position(pos: Vector3, force: Vector3 = Vector3.ZERO) -> vo
 	add_child(rigidbody)
 	spheres.append(rigidbody)
 	
-	print("Spawned rigidbody sphere at specific position: ", spawn_pos)
 
 func cleanup_fallen_spheres() -> void:
 	"""Remove spheres that have fallen too far or are too old"""
@@ -273,7 +266,6 @@ func cleanup_fallen_spheres() -> void:
 		if sphere.position.y < -50.0 or distance_from_origin > spawn_radius * 3.0:
 			sphere.queue_free()
 			spheres.remove_at(i)
-			print("Removed fallen sphere")
 
 func clear_all_spheres() -> void:
 	"""Remove all spheres"""
@@ -281,7 +273,6 @@ func clear_all_spheres() -> void:
 		if is_instance_valid(sphere):
 			sphere.queue_free()
 	spheres.clear()
-	print("Cleared all rigidbody spheres")
 
 func set_sphere_parameters(params: Dictionary) -> void:
 	"""Update sphere parameters dynamically"""
@@ -347,21 +338,17 @@ func _input(event: InputEvent) -> void:
 		match event.keycode:
 			KEY_S:
 				spawn_single_sphere()
-				print("Spawned debug sphere")
 			KEY_C:
 				clear_all_spheres()
-				print("Cleared all spheres")
 			KEY_I:
 				print("Sphere stats: ", get_sphere_stats())
 			KEY_F:
 				# Apply upward force to all spheres
 				apply_impulse_to_all_spheres(Vector3(0, 10, 0))
-				print("Applied upward impulse to all spheres")
 			KEY_G:
 				# Toggle gravity
 				var new_gravity = 0.0 if gravity_scale > 0.0 else 1.0
 				set_gravity_scale(new_gravity)
-				print("Gravity scale set to: ", new_gravity)
 
 func _exit_tree() -> void:
 	for child in get_children():

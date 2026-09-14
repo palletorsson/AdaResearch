@@ -19,7 +19,6 @@ var wall_rules = [30, 110, 90, 150]  # Different rule for each wall
 var wall_names = ["North", "South", "East", "West"]
 
 func _ready() -> void:
-	print("Cellular Automata 1D - Wall Pattern initialized")
 	# Remove unused nodes
 	if has_node("RuleTable"):
 		$RuleTable.queue_free()

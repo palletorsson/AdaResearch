@@ -511,8 +511,6 @@ func generate_training_data() -> void:
 
 	create_data_visualization()
 	_build_cohort_regions()
-	print("Generated ", training_data.size(), " training samples with ", num_features,
-		" features — cohort=", cohort)
 
 
 ## THE SHIPPED CASE. A uniform cube cut by one slanted plane: the sign of
@@ -774,7 +772,6 @@ func start_training() -> void:
 	else:
 		train_all_trees()
 	
-	print("Starting Random Forest training with ", num_trees, " trees")
 
 func _on_training_timer_timeout() -> void:
 	"""Handle training timer timeout"""
@@ -827,7 +824,6 @@ func train_single_tree(tree_index: int) -> void:
 			decision_trees.size(), num_trees, training_data.size()
 		]
 	
-	print("Trained tree ", tree_index + 1, "/", num_trees)
 	update_ui()
 
 func train_all_trees() -> void:
@@ -862,7 +858,6 @@ func finalize_training() -> void:
 		tw2.tween_property(tree_vis, "scale", Vector3.ONE * 1.15, 0.2).set_ease(Tween.EASE_OUT)
 		tw2.tween_property(tree_vis, "scale", Vector3.ONE, 0.4).set_ease(Tween.EASE_IN_OUT)
 	
-	print("Random Forest training completed")
 	update_ui()
 
 func create_tree_visualization(tree: DecisionTree, tree_index: int) -> void:
@@ -1035,7 +1030,6 @@ func calculate_feature_importance():
 		for i in range(importance_scores.size()):
 			importance_scores[i] /= total_importance
 	
-	print("Feature importance: ", importance_scores)
 	return importance_scores
 
 func calculate_tree_importance(node: DecisionTreeNode, importance_scores: Array) -> void:
@@ -1206,7 +1200,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[RandomForest] Config applied — cohort=%s" % [cohort])
 
 
 ## Tear down exactly what this script built, then rebuild inline. SYNCHRONOUS: a

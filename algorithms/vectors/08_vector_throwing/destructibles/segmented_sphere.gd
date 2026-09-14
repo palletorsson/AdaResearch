@@ -257,7 +257,6 @@ func _shatter_all_segments(impact_velocity: Vector3, impact_point: Vector3) -> v
 	await get_tree().create_timer(4.0).timeout
 	queue_free()
 
-	print("[SegmentedSphere] All segments shattered!")
 
 func _show_segment_damage(data: SegmentData) -> void:
 	"""Visual feedback for damaged segment"""
@@ -305,7 +304,6 @@ func _destroy_segment(segment: Node3D, data: SegmentData, impact_velocity: Vecto
 		await get_tree().create_timer(2.0).timeout
 		queue_free()
 
-	print("[SegmentedSphere] Segment [%d,%d] destroyed" % [data.lat_index, data.lon_index])
 
 func _fade_out_segment(rb: RigidBody3D, mesh: MeshInstance3D) -> void:
 	"""Fade and remove segment"""

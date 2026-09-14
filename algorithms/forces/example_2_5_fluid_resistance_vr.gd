@@ -114,7 +114,6 @@ func _ready() -> void:
 	spawn_movers()
 	setup_auto_reset()
 	_built = true
-	print("Example 2.5: Fluid resistance")
 
 # --- DNA (stage 2) -----------------------------------------------------------
 

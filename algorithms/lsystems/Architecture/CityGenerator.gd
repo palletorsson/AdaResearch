@@ -61,7 +61,6 @@ func _ready() -> void:
 	# Generate structure
 	generate_structure()
 
-	print("CityGenerator: 3D architectural structure generated")
 
 func generate_structure() -> void:
 	"""Generate the 3D structure"""
@@ -69,7 +68,6 @@ func generate_structure() -> void:
 	lsystem.generate_n(iterations)
 
 	var sentence = lsystem.get_sentence()
-	print("CityGenerator: Generated %d instructions" % sentence.length())
 
 	# Clear previous structure
 	if turtle:

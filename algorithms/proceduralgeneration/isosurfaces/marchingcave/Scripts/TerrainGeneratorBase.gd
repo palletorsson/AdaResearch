@@ -70,7 +70,6 @@ var thread
 var _released : bool = false  # Guard release() against double-teardown (PREDELETE + _exit_tree etc.)
 
 func _ready() -> void:
-	print("🏳️‍🌈 %s: Starting generation..." % get_class_name())
 	_apply_capture_fade()
 	array_mesh = ArrayMesh.new()
 	mesh = array_mesh
@@ -82,7 +81,6 @@ func _ready() -> void:
 		_create_fallback_mesh()
 		return
 	
-	print("%s: Initializing compute shaders..." % get_class_name())
 	if not init_compute():
 		print("❌ %s: Compute initialization failed!" % get_class_name())
 		# Set flags to prevent compute processing
@@ -91,11 +89,9 @@ func _ready() -> void:
 		_create_fallback_mesh()
 		return
 	
-	print("%s: Running compute shader..." % get_class_name())
 	run_compute()
 	fetch_and_process_compute_data()
 	create_mesh()
-	print("✅ %s: Generation complete!" % get_class_name())
 	
 var _initial_generation_done : bool = false
 
@@ -128,26 +124,22 @@ func get_class_name() -> String:
 	return "TerrainGeneratorBase"
 
 func init_compute() -> bool:
-	print("%s: Creating rendering device..." % get_class_name())
 	rendering_device = RenderingServer.create_local_rendering_device()
 	if not rendering_device:
 		print("❌ Failed to create local rendering device")
 		return false
 	
-	print("%s: Loading compute shader..." % get_class_name())
 	var shader_path = get_compute_shader_path()
 	var shader_file : RDShaderFile = load(shader_path)
 	if not shader_file:
 		print("❌ Failed to load %s" % shader_path)
 		return false
 	
-	print("%s: Compiling SPIRV..." % get_class_name())
 	var shader_spirv : RDShaderSPIRV = shader_file.get_spirv()
 	if not shader_spirv:
 		print("❌ Failed to compile SPIRV from shader")
 		return false
 	
-	print("%s: Creating shader from SPIRV..." % get_class_name())
 	shader = rendering_device.shader_create_from_spirv(shader_spirv)
 	if not shader.is_valid():
 		print("❌ Failed to create shader from SPIRV")
@@ -206,7 +198,6 @@ func init_compute() -> bool:
 	lut_uniform.add_id(lut_buffer)
 	
 	# Create buffer setter and pipeline
-	print("%s: Creating uniform set and pipeline..." % get_class_name())
 	
 	var buffers = [triangle_uniform, params_uniform, counter_uniform, lut_uniform]
 	buffer_set = rendering_device.uniform_set_create(buffers, shader, buffer_set_index)
@@ -256,11 +247,9 @@ func fetch_and_process_compute_data() -> void:
 		_create_fallback_mesh()
 		return
 	
-	print("%s: Syncing compute shader..." % get_class_name())
 	rendering_device.sync()
 	waiting_for_compute = false
 	
-	print("%s: Fetching compute data..." % get_class_name())
 	# Get output
 	triangle_data_bytes = rendering_device.buffer_get_data(triangle_buffer)
 	counter_data_bytes = rendering_device.buffer_get_data(counter_buffer)
@@ -271,10 +260,8 @@ func fetch_and_process_compute_data() -> void:
 	last_meshthread_start_frame = frame
 	
 func process_mesh_data() -> void:
-	print("%s: Processing mesh data..." % get_class_name())
 	var triangle_data = triangle_data_bytes.to_float32_array()
 	num_triangles = counter_data_bytes.to_int32_array()[0]
-	print("%s: Compute shader generated %d triangles" % [get_class_name(), num_triangles])
 	
 	# SAFETY CAP: Prevent device hang if shader outputs garbage or too much density
 	# 500k triangles is the desktop limit. For Quest VR, reduce to ~65k.
@@ -320,7 +307,6 @@ func create_mesh() -> void:
 		thread = null
 	
 	waiting_for_meshthread = false
-	print("%s: Creating mesh - Triangles: %d Vertices: %d FPS: %f" % [get_class_name(), num_triangles, len(verts), Engine.get_frames_per_second()])
 	
 	if len(verts) > 0:
 		var mesh_data = []
@@ -385,7 +371,6 @@ func load_lut(file_path):
 		
 		# Try alternative path without res://
 		var alt_path = file_path.replace("res://", "")
-		print("Trying alternative path: " + alt_path)
 		file = FileAccess.open(alt_path, FileAccess.READ)
 		
 		if not file:
@@ -414,7 +399,6 @@ func get_embedded_lut() -> Array:
 		if s.strip_edges() != "":
 			indices.append(int(s))
 	
-	print("%s: Using embedded LUT data (%d indices)" % [get_class_name(), indices.size()])
 	return indices
 
 func _create_collision() -> void:
@@ -426,7 +410,6 @@ func _create_collision() -> void:
 	# Check if parent is a RigidBody3D (e.g., XRToolsPickable)
 	var parent_node = get_parent()
 	if parent_node is RigidBody3D:
-		print("TerrainGeneratorBase: Parent is RigidBody3D, attaching collision shape to parent.")
 		
 		# Find or create CollisionShape3D on parent
 		var collision_node = parent_node.find_child("CollisionShape3D", false)
@@ -472,7 +455,6 @@ func _create_collision() -> void:
 		if parent_node.owner: debug_mesh.owner = parent_node.owner
 		# ---------------------------
 		
-		print("✅ Created FAST Box collision shape for Pickable (Size: %s) and Re-Centered Object." % str(shape.size))
 		return
 
 	# Standard StaticBody3D logic for static placement
@@ -500,7 +482,6 @@ func _create_collision() -> void:
 	var shape = array_mesh.create_trimesh_shape()
 	if shape:
 		collision_shape.shape = shape
-		print("✅ Collision shape created with %d triangles" % [shape.get_faces().size() / 3])
 	else:
 		push_error("❌ Failed to create trimesh collision shape")
 	

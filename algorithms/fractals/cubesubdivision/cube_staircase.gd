@@ -90,7 +90,6 @@ func _execute_build() -> void:
 		2:  # Building handrail
 			_build_handrail()
 			is_constructing = false
-			print("Staircase complete! %d parts" % all_parts.size())
 
 func _build_instant() -> void:
 	for i in range(step_count):
@@ -141,7 +140,6 @@ func _build_single_step(index: int) -> void:
 			riser_color, "Riser_%d" % index
 		)
 
-	print("Step %d: Built tread and riser" % index)
 
 func _build_sides() -> void:
 	if not _shows_stringers():
@@ -170,7 +168,6 @@ func _build_sides() -> void:
 		side_color, "RightStringer"
 	)
 
-	print("Built side stringers")
 
 func _build_handrail() -> void:
 	if not _shows_handrail():
@@ -230,7 +227,6 @@ func _build_handrail() -> void:
 			rail_color, "Baluster_%d" % i
 		)
 
-	print("Built handrail with %d balusters" % (step_count - 1))
 
 func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String) -> void:
 	var mesh_instance := MeshInstance3D.new()

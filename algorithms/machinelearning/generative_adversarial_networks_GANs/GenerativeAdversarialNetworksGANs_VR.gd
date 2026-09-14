@@ -52,7 +52,6 @@ var discriminator_zone: Node3D
 var competition_arena: Node3D
 
 func _ready() -> void:
-	print("[GANs_VR] Initializing adversarial training arena")
 	_create_generator_zone()
 	_create_discriminator_zone()
 	_create_competition_arena()

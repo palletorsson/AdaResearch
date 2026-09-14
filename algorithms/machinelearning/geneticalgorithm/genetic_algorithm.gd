@@ -950,7 +950,6 @@ func _ready() -> void:
 	# Initialize queer forms detector
 	if queer_forms_detection:
 		queer_forms_detector = QueerFormsDetector.new()
-		print("Queer forms detector initialized")
 
 func _build_3d_labels() -> void:
 	## Create in-scene 3D labels for VR / immersive viewing.
@@ -1221,7 +1220,6 @@ func assign_to_species(creature: EvolutionaryCreature) -> void:
 	# Create new species
 	var new_species = Species.new(species_groups.size(), creature)
 	species_groups.append(new_species)
-	print("EcosystemEvolution: New species created - ID: %d, Members: %d" % [new_species.id, new_species.members.size()])
 
 func create_creature_visual(creature: EvolutionaryCreature) -> void:
 	## Create sophisticated visual representation of creature
@@ -1530,7 +1528,7 @@ func handle_creature_death(creature: EvolutionaryCreature, index: int) -> void:
 		var species = species_groups[creature.species_id]
 		if not species.remove_member(creature):
 			# Species went extinct
-			print("EcosystemEvolution: Species %d went extinct" % creature.species_id)
+			pass
 	
 	# Remove visual representation
 	if creature.mesh_instance:
@@ -1566,7 +1564,6 @@ func update_generation_timer(delta: float) -> void:
 
 func evolve_population() -> void:
 	## Advanced evolution with speciation and environmental pressure
-	print("EcosystemEvolution: Starting evolution - Generation %d" % generation)
 	
 	# Calculate fitness statistics
 	calculate_fitness_stats()
@@ -1605,7 +1602,6 @@ func evolve_population() -> void:
 		tw3.tween_property(_title_label_3d, "modulate", Color.WHITE, 0.1)
 		tw3.tween_property(_title_label_3d, "modulate", COLOR_SPECIAL, 0.5)
 	
-	print("EcosystemEvolution: Evolution complete - Generation %d, Species: %d, Best Fitness: %.2f" % [generation, species_groups.size(), best_fitness])
 
 func evolve_species() -> void:
 	## Evolve each species separately
@@ -2393,12 +2389,10 @@ func _on_environmental_pressure_changed(value: float) -> void:
 func _on_queer_forms_toggled(pressed: bool) -> void:
 	# Toggle queer forms detection
 	queer_forms_detection = pressed
-	print("Queer forms detection: ", pressed)
 
 func _on_tda_toggled(pressed: bool) -> void:
 	# Toggle topological data analysis
 	topological_analysis_enabled = pressed
-	print("Topological analysis: ", pressed)
 
 func _on_reset_pressed() -> void:
 	# Reset the entire simulation
@@ -2418,7 +2412,6 @@ func reset_simulation() -> void:
 	# Initialize new population
 	initialize_population()
 	
-	print("Simulation reset - new population generated")
 
 func _on_force_evolve_pressed() -> void:
 	# Force evolution to next generation
@@ -2880,7 +2873,6 @@ func trigger_environmental_event(event_type: String, intensity: float = 1.0) -> 
 		"resource_boom":
 			environmental_factors.resource_availability += intensity * 0.3
 	
-	print("EcosystemEvolution: Environmental event triggered - %s (intensity: %.2f)" % [event_type, intensity])
 
 func get_best_creature() -> EvolutionaryCreature:
 	## Get the current best performing creature

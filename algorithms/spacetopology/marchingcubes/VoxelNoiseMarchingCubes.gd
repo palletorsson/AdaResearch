@@ -187,19 +187,15 @@ func setup_noise() -> void:
 	noise.fractal_octaves = noise_octaves
 	noise.fractal_lacunarity = noise_lacunarity
 	noise.fractal_gain = noise_persistence
-	print("VoxelNoiseMarchingCubes: Noise generator initialized (%s / %s)"
-		% [generator, accretion])
 
 func setup_marching_cubes_tables() -> void:
 	"""Initialize marching cubes lookup tables"""
 	edge_table = MarchingCubesLookupTables.get_edge_table()
 	triangle_table = MarchingCubesLookupTables.get_triangle_table()
-	print("VoxelNoiseMarchingCubes: Marching cubes tables initialized")
 
 # === MAIN GENERATION ===
 func generate_world() -> void:
 	"""Generate the voxel world with marching cubes"""
-	print("VoxelNoiseMarchingCubes: Starting world generation...")
 
 	# Generate density field
 	var density_field = generate_density_field()
@@ -225,7 +221,6 @@ func generate_world() -> void:
 	if generate_colliders and mesh != null and mesh.get_surface_count() > 0:
 		create_collision(mesh)
 
-	print("VoxelNoiseMarchingCubes: World generation complete! Triangles: %d" % triangles.size())
 
 # === DENSITY FIELD GENERATION ===
 func generate_density_field() -> Array:

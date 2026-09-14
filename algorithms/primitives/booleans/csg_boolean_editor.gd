@@ -98,7 +98,6 @@ func generate_csg_grid() -> void:
 	if not Engine.is_editor_hint():
 		return
 	
-	print("Generating CSG grid in editor...")
 	
 	# Clear existing CSG objects
 	clear_all_csg()
@@ -141,7 +140,6 @@ func generate_csg_grid() -> void:
 				variation_index += 1
 	
 	update_grid_info()
-	print("Generated %d CSG variations!" % total_objects)
 
 func set_owner_recursive(node: Node, owner: Node) -> void:
 	for child in node.get_children():
@@ -160,7 +158,6 @@ func clear_all_csg() -> void:
 	for child in children_to_remove:
 		child.queue_free()
 	
-	print("Cleared all CSG objects")
 
 func toggle_labels_visibility() -> void:
 	if not Engine.is_editor_hint():

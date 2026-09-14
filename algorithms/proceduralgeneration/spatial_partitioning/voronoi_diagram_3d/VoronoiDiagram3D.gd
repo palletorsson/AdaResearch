@@ -100,7 +100,6 @@ func generate_voronoi() -> void:
 	detect_boundary_faces()
 	visualize_samples()
 	
-	print("Generated ", voronoi_cells.size(), " Voronoi cells with boundary faces")
 
 func generate_seeds() -> void:
 	seed_points.clear()

@@ -345,7 +345,6 @@ func _build_all() -> void:
 	create_grid_visualization()
 	_run_frontier()
 
-	print("3D Pathfinding initialized with grid ", grid_dimensions, " frontier=", frontier)
 
 func _process(_delta):
 	update_ui_stats()
@@ -462,7 +461,6 @@ func set_start_and_goal() -> void:
 	set_voxel_type(start_position, VoxelType.START)
 	set_voxel_type(goal_position, VoxelType.GOAL)
 
-	print("Start: ", start_position, " Goal: ", goal_position)
 
 ## Highest open cell, nearest the (0, *, 0) corner of that layer. Starting at the
 ## ceiling is what makes `flooded` fill the box: everything below a descent-only
@@ -791,7 +789,6 @@ func _on_search_step() -> void:
 		path_found = true
 		current_path = reconstruct_path(animated_came_from, current.position)
 		visualize_path()
-		print("Path found with length: ", current_path.size())
 		return
 	
 	animated_closed_set[current.position] = true
@@ -1293,7 +1290,6 @@ func reset_pathfinding() -> void:
 	# silently demotes a `flooded` placement to `unsearched`.
 	_run_frontier()
 
-	print("Pathfinding system reset")
 
 func recreate_grid_visualization() -> void:
 	"""Recreate grid visualization based on current settings"""
@@ -1357,7 +1353,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[Pathfinding3D] Config applied — frontier=%s" % [frontier])
 
 ## Accept an axis value only if it names something we actually build. A typo in a
 ## map token falls back to the value already standing rather than half-resolving

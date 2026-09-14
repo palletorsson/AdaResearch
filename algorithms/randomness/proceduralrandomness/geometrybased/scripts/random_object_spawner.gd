@@ -29,7 +29,6 @@ func _ready() -> void:
 		push_error("Base cube not found!")
 		return
 	
-	print("Starting cube spawner initialization")
 	base_cube.visible = false  # Hide the template
 	
 	# Create and synthesize the wood sound

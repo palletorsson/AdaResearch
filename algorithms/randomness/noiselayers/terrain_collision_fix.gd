@@ -51,7 +51,6 @@ func test_walkable_surfaces() -> void:
 	if not terrain:
 		return
 	
-	print("Testing walkable surface detection...")
 	
 	var test_positions = [
 		Vector3(0, 5, 0),      # Center, above terrain
@@ -65,9 +64,6 @@ func test_walkable_surfaces() -> void:
 		var height = terrain.get_terrain_height_at_position(pos.x, pos.z)
 		var slope = terrain.get_terrain_slope_at_position(pos.x, pos.z)
 		
-		print("Position %v: Walkable=%s, Height=%.2f, Slope=%.1f°" % [
-			pos, is_walkable, height, slope
-		])
 
 func fix_collision_issues() -> void:
 	"""Fix collision issues by using basic collision"""
@@ -77,7 +73,6 @@ func fix_collision_issues() -> void:
 	
 	print("Fixing collision issues...")
 	terrain.fix_collision_issues()
-	print("Collision fixed! Try moving around now.")
 
 func regenerate_terrain() -> void:
 	"""Regenerate the entire terrain"""
@@ -85,9 +80,7 @@ func regenerate_terrain() -> void:
 		print("No terrain found!")
 		return
 	
-	print("Regenerating terrain...")
 	terrain.regenerate_terrain()
-	print("Terrain regenerated!")
 
 func enable_basic_collision() -> void:
 	"""Permanently enable basic collision mode"""
@@ -97,7 +90,6 @@ func enable_basic_collision() -> void:
 	
 	terrain.enable_collision_optimization = false
 	terrain.regenerate_terrain()
-	print("Switched to basic collision mode")
 
 func enable_optimized_collision() -> void:
 	"""Enable optimized collision mode"""
@@ -107,7 +99,6 @@ func enable_optimized_collision() -> void:
 	
 	terrain.enable_collision_optimization = true
 	terrain.regenerate_terrain()
-	print("Switched to optimized collision mode")
 
 # Quick fix functions you can call from the editor or code
 func quick_fix() -> void:
@@ -115,7 +106,6 @@ func quick_fix() -> void:
 	if terrain:
 		terrain.enable_collision_optimization = false
 		terrain.regenerate_terrain()
-		print("Quick fix applied - using basic collision")
 
 func increase_walkable_slope() -> void:
 	"""Increase walkable slope to make more surfaces walkable"""
@@ -124,7 +114,6 @@ func increase_walkable_slope() -> void:
 	
 	terrain.max_walkable_slope = 45.0  # Increase from 30 to 45 degrees
 	terrain.regenerate_terrain()
-	print("Increased walkable slope to 45 degrees")
 
 func disable_erosion() -> void:
 	"""Disable erosion simulation which might cause collision issues"""
@@ -133,4 +122,3 @@ func disable_erosion() -> void:
 	
 	terrain.enable_erosion_simulation = false
 	terrain.regenerate_terrain()
-	print("Disabled erosion simulation")

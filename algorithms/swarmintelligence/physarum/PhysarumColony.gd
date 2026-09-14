@@ -373,7 +373,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[PhysarumColony] Config applied — anchorage=%s, agents=%d" % [anchorage, num_agents])
 
 
 ## Accept an axis value only if it names something we actually build. A typo has to

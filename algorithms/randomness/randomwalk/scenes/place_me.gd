@@ -9,7 +9,6 @@ func _ready() -> void:
 	# Place the camera at the same position as placeMe but 1 meter higher
 	if camera:
 		camera.global_position = global_position + Vector3(0, 0.2, -0.25)
-		print("Camera positioned at: ", camera.global_position)
 	else:
 		push_error("ViewPortCamera3D not found!")
 

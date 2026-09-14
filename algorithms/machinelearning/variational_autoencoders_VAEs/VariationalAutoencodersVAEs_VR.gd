@@ -53,7 +53,6 @@ var latent_sphere: Node3D
 var interpolation_points: Array = []
 
 func _ready() -> void:
-	print("[VAEs_VR] Initializing variational autoencoder")
 	_initialize_latent_distribution()
 	_create_input_area()
 	_create_encoder_tunnel()
@@ -644,7 +643,6 @@ func sample_latent_point(position: Vector3) -> void:
 	if not enable_generation:
 		return
 
-	print("[VAE] Sampling from latent position: ", position)
 	# Would trigger decoder to generate sample
 
 func interpolate_between_points(start: Vector3, end: Vector3, steps: int = 10) -> void:

@@ -70,7 +70,6 @@ func load_ca_scene(scene_path: String) -> void:
 		add_child(current_scene)
 		# Offset loaded scene so it doesn't overlap the menu
 		current_scene.position = Vector3(0.5, 0, 0)
-		print("Loaded CA scene: ", scene_path)
 
 func _on_back_pressed() -> void:
 	if current_scene:

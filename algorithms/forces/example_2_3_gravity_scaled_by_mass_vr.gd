@@ -123,7 +123,6 @@ func _ready() -> void:
 	spawn_movers()
 	setup_auto_reset()
 	_built = true
-	print("Example 2.3: Gravity scaled by mass")
 
 func setup_auto_reset() -> void:
 	auto_reset_timer = Timer.new()

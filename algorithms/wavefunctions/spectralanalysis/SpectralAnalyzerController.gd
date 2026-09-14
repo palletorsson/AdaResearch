@@ -153,7 +153,6 @@ func activate_analyzer() -> void:
 		spectral_meter.enabled = true
 	
 	analyzer_activated.emit()
-	print("SpectralAnalyzer: Activated")
 
 func deactivate_analyzer() -> void:
 	"""Deactivate the spectral analyzer"""
@@ -168,7 +167,6 @@ func deactivate_analyzer() -> void:
 		spectral_meter.enabled = false
 	
 	analyzer_deactivated.emit()
-	print("SpectralAnalyzer: Deactivated")
 
 func set_audio_target(audio_player: AudioStreamPlayer3D) -> void:
 	"""Set the target audio player for analysis"""
@@ -182,7 +180,6 @@ func set_audio_target(audio_player: AudioStreamPlayer3D) -> void:
 	if label_3d:
 		label_3d.text = "Spectral Analyzer\nAnalyzing: %s" % audio_player.name
 	
-	print("SpectralAnalyzer: Connected to audio source - %s" % audio_player.name)
 
 func toggle_display_style() -> void:
 	"""Toggle between different display styles"""
@@ -190,7 +187,6 @@ func toggle_display_style() -> void:
 		var current_style = game_sound_meter.display_style
 		var new_style = (current_style + 1) % 5  # Cycle through all display styles
 		game_sound_meter.display_style = new_style
-		print("SpectralAnalyzer: Display style changed to %d" % new_style) 
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass

@@ -73,7 +73,6 @@ var _addend_ims: Array[ImmediateMesh] = []
 func _ready() -> void:
 	# Initialize Wave Interference visualization
 	_read_meta_overrides()
-	print("Wave Interference Visualization initialized")
 	create_interference_field()
 	if evidence == "sources":
 		create_wave_rings()            # the legacy build, in the legacy order

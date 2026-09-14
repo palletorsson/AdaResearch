@@ -86,15 +86,9 @@ func setup_agent_detection() -> void:
 
 func _on_agent_entered_range(body: Node3D) -> void:
 	"""Called when a body enters agent detection range"""
-	if body is GridAgent and body not in captured_grid_agents:
-		if debug:
-			print("[AlgoGun] Grid Agent detected: ", body.name)
 
 func _on_agent_exited_range(body: Node3D) -> void:
 	"""Called when a body exits agent detection range"""
-	if body is GridAgent:
-		if debug:
-			print("[AlgoGun] Grid Agent left range: ", body.name)
 
 func _physics_process(delta: float) -> void:
 	"""Extend parent with agent management"""
@@ -117,8 +111,6 @@ func _check_agent_capture_input() -> void:
 	
 	# Detect rising edge (button just pressed)
 	if grip_pressed and not last_grip_state:
-		if debug:
-			print("[AlgoGun] Grip pressed - attempting agent operation")
 		
 		# If we have captured agents, aim and release one
 		if not captured_grid_agents.is_empty():
@@ -173,8 +165,6 @@ func _capture_agent(agent: GridAgent) -> void:
 	
 	agent_captured.emit(agent)
 	
-	if debug:
-		print("[AlgoGun] Captured Grid Agent: ", agent.name, " (tier: ", EvolutionTiers.get_tier_string(agent.current_tier), ")")
 
 func _update_captured_agents(delta: float) -> void:
 	"""Update positions of captured agents (orbit around muzzle)"""
@@ -234,8 +224,6 @@ func _direct_agent_to_target() -> void:
 	var target_position: Vector3
 	if result:
 		target_position = result.position
-		if debug:
-			print("[AlgoGun] Directing agent to grid at: ", target_position)
 	else:
 		# No hit, use point in front of gun
 		target_position = ray_origin + ray_direction * 5.0
@@ -264,8 +252,6 @@ func _release_agent(agent: GridAgent, target: Vector3) -> void:
 	agent_directed.emit(agent, target)
 	agent_released.emit(agent)
 	
-	if debug:
-		print("[AlgoGun] Released agent ", agent.name, " to target: ", target)
 
 func release_all_agents() -> void:
 	"""Release all captured agents (for cleanup)"""

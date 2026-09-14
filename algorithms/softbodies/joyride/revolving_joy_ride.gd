@@ -241,7 +241,6 @@ func _pin_soft_body(sb: SoftBody3D, parent_body: RigidBody3D) -> void:
 			pinned_indices.append(i)
 	
 	if not pinned_indices.is_empty():
-		print("Pinning %d vertices of SoftBody to %s" % [pinned_indices.size(), parent_body.name])
 		
 		# Use absolute path to be safe
 		var attachment_path = parent_body.get_path()

@@ -32,7 +32,6 @@ var _stats_label: Label3D = null
 
 func _ready() -> void:
 	# Initialize Time Series Analysis visualization
-	print("Time Series Analysis Visualization initialized")
 	create_time_series_particles()
 	create_forecast_particles()
 	create_flow_particles()

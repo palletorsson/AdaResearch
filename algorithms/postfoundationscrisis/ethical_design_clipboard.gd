@@ -172,7 +172,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[EthicalDesignClipboard] Config applied — adoption=%s" % [adoption])
 
 
 ## Accept an axis value only if it names something this artifact actually builds.

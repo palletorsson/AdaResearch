@@ -118,7 +118,6 @@ func build_visualization() -> void:
 			row_node.add_child(tube)
 			tube_count += 1
 
-	print("PulsarGlassTubes: Created %d tubes" % tube_count)
 
 func _create_tube(height: float, intensity: float) -> Node3D:
 	var group = Node3D.new()

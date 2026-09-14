@@ -31,7 +31,6 @@ var dying_cells: Array = []
 
 func _ready() -> void:
 	# Initialize Cellular Automata visualization
-	print("Cellular Automata 2D Visualization initialized")
 	$PatternEvolution.queue_free()
 	$AutomataMetrics.queue_free()
 	$RuleEngine.queue_free()

@@ -73,7 +73,6 @@ signal generation_progress(percentage: float)
 
 func _ready() -> void:
 	setup_random_generator()
-	print("SpaceColonizationMoldSpore: Initialized for 1x1x1 unit space")
 
 func setup_random_generator(seed_value: int = -1) -> void:
 	# Initialize random number generator
@@ -85,7 +84,6 @@ func setup_random_generator(seed_value: int = -1) -> void:
 
 func generate_mold_spore_network(seed_value: int = -1) -> Array[MeshInstance3D]:
 	# Generate complete 3D mold spore network using Space Colonization Algorithm
-	print("SpaceColonizationMoldSpore: Starting generation...")
 	
 	setup_random_generator(seed_value)
 	clear_previous_generation()
@@ -117,7 +115,6 @@ func generate_mold_spore_network(seed_value: int = -1) -> Array[MeshInstance3D]:
 	is_generating = false
 	generation_complete.emit()
 	
-	print("SpaceColonizationMoldSpore: Generation complete after %d iterations" % current_iteration)
 	return mesh_instances
 
 func clear_previous_generation() -> void:
@@ -163,7 +160,6 @@ func initialize_auxin_sources() -> void:
 		pos = pos.clamp(Vector3.ZERO, space_bounds)
 		auxin_sources.append(pos)
 	
-	print("SpaceColonizationMoldSpore: Created %d auxin sources" % auxin_sources.size())
 
 func initialize_growth_nodes() -> void:
 	# Create initial growth nodes (spore starting points)
@@ -188,7 +184,6 @@ func initialize_growth_nodes() -> void:
 		var growth_node = GrowthNode.new(start_pos, initial_direction)
 		growth_nodes.append(growth_node)
 	
-	print("SpaceColonizationMoldSpore: Created %d initial growth nodes" % growth_nodes.size())
 
 func space_colonization_iteration() -> void:
 	# Perform one iteration of the space colonization algorithm
@@ -373,7 +368,6 @@ func create_spore_mesh() -> void:
 		add_child(mesh_instance)
 		mesh_instances.append(mesh_instance)
 		
-		print("SpaceColonizationMoldSpore: Created mycelium mesh with %d branches" % spore_branches.size())
 
 func create_mycelium_mesh() -> ArrayMesh:
 	# Create the main mycelium (fungal thread) mesh
@@ -499,7 +493,6 @@ func add_spore_bodies() -> void:
 			add_child(spore_body)
 			mesh_instances.append(spore_body)
 	
-	print("SpaceColonizationMoldSpore: Added spore bodies to fertile branches")
 
 func create_spore_material() -> StandardMaterial3D:
 	# Create material for the main mycelium network
@@ -569,7 +562,6 @@ func reset_generation() -> void:
 	clear_previous_generation()
 	current_iteration = 0
 	is_generating = false
-	print("SpaceColonizationMoldSpore: Generator reset")
 
 func _exit_tree() -> void:
 	for child in get_children():

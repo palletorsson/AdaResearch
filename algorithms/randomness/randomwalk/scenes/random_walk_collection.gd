@@ -398,7 +398,6 @@ func _bare_the_rack() -> void:
 		if mi.mesh == null or not mi.is_visible_in_tree():
 			mi.queue_free()
 			stripped += 1
-	print("[RandomWalkCollection] bench_bare_rack: freed %d non-rendering mesh nodes" % stripped)
 
 
 func _inside_a_paper(n: Node) -> bool:

@@ -77,7 +77,6 @@ var travel_position: float = 0.0
 func _ready() -> void:
 	# --- Prime sequence ---
 	primes = _generate_primes(max_x)
-	print("Generated %d primes up to %d" % [primes.size(), max_x])
 
 	# --- Prime line visualization ---
 	_setup_prime_line()

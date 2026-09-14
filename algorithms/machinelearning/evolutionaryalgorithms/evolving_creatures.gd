@@ -761,7 +761,6 @@ func is_stuck():
 func end_episode() -> void:
 	episode_count += 1
 	_best_distance = max(_best_distance, current_distance)
-	print("Episode %d ended. Total reward: %.2f, Distance: %.2f, Best: %.2f" % [episode_count, episode_reward, current_distance, _best_distance])
 	
 	# Flash the core body on episode end
 	if core_body and is_instance_valid(core_body):

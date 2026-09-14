@@ -148,7 +148,6 @@ func _ready() -> void:
 	# for bit the pre-DNA one; at >= 0 the cloud and every jitter draw repeat.
 	if growth_seed >= 0:
 		seed(growth_seed)
-	print("Initializing VR Space Colonization...")
 
 	# Set up simple mesh for VR performance
 	immediate_mesh = ImmediateMesh.new()
@@ -173,7 +172,6 @@ func _ready() -> void:
 	# Generate fewer attractors for VR
 	generate_attractors_vr_optimized()
 	
-	print("Starting growth with ", branches.size(), " branches and ", attractors.size(), " attractors")
 
 	# Start growth process
 	start_growth()
@@ -234,7 +232,6 @@ func _process(delta: float) -> void:
 		var flag_names = pride_flags.keys()
 		current_pride_flag = (current_pride_flag + 1) % flag_names.size()
 		current_flag_name = flag_names[current_pride_flag]
-		print("Switching to ", current_flag_name, " pride colors! 🌈")
 	
 	if not is_growing:
 		return
@@ -252,7 +249,6 @@ func _process(delta: float) -> void:
 		for i in range(growth_per_frame):
 			if not grow_step():
 				is_growing = false
-				print("Growth completed with ", branches.size(), " branches")
 				break
 			processed_count += 1
 			
@@ -525,7 +521,6 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
-				print("Restarting QUEER growth... 🌈")
 				clear_growth()
 				add_branch(Vector3.ZERO, Vector3.UP, -1, 0, time_elapsed)
 				generate_attractors_vr_optimized()
@@ -533,10 +528,8 @@ func _input(event: InputEvent) -> void:
 			KEY_P:
 				if is_growing:
 					pause_growth()
-					print("Growth paused")
 				else:
 					resume_growth()
-					print("Growth resumed")
 			KEY_S:
 				var stats = get_growth_stats()
 				print("SPICY Stats: ", stats, " Flag: ", current_flag_name, " 🌈")
@@ -546,15 +539,12 @@ func _input(event: InputEvent) -> void:
 				current_pride_flag = (current_pride_flag + 1) % flag_names.size()
 				current_flag_name = flag_names[current_pride_flag]
 				color_cycle_timer = 0.0
-				print("Switched to ", current_flag_name, " colors! 🏳️‍🌈")
 			KEY_T:
 				# Toggle sparkles
 				enable_sparkles = !enable_sparkles
-				print("Sparkles: ", "ON ✨" if enable_sparkles else "OFF")
 			KEY_Q:
 				# Toggle pride colors
 				enable_pride_colors = !enable_pride_colors
-				print("Pride colors: ", "FABULOUS 🌈" if enable_pride_colors else "Basic")
 
 func _exit_tree() -> void:
 	for child in get_children():

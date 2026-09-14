@@ -423,7 +423,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[BoidManager] Config applied — accord=%s, boids=%d" % [accord, num_boids])
 
 
 ## Accept an axis value only if it names something we actually build. A

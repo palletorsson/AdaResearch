@@ -23,7 +23,6 @@ func _ready() -> void:
 		add_blob(center + Vector3(-s * 0.1, s * 0.6, s * 0.08), s * 0.22)
 		add_blob(center + Vector3(0, s * 1.0, 0), s * 0.18)    # neck
 		add_blob(center + Vector3(0.02, s * 1.3, -0.01), s * 0.15)  # top
-		print("%s: Seeded %d initial blobs" % [get_class_name(), blobs_array.size()])
 	super._ready()
 
 func get_compute_shader_path() -> String:
@@ -53,7 +52,6 @@ func get_params_array():
 # --- OVERRIDE INIT_COMPUTE TO ADD BLOB BUFFER ---
 # Copied from Base but added Blob Buffer creation and binding.
 func init_compute() -> bool:
-	print("%s: Creating rendering device..." % get_class_name())
 	rendering_device = RenderingServer.create_local_rendering_device()
 	if not rendering_device:
 		return false

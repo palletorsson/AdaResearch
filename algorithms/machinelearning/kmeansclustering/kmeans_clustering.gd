@@ -407,7 +407,6 @@ func generate_data() -> void:
 	else:
 		generate_random_dataset()
 	
-	print("Generated ", data_points.size(), " data points")
 
 func generate_clustered_dataset() -> void:
 	var points_per_cluster = int(data_point_count * (1.0 - noise_points_percentage) / natural_cluster_count)
@@ -547,7 +546,6 @@ func start_clustering() -> void:
 	distance_history.clear()
 	centroid_movement_history.clear()
 	
-	print("Starting K-means clustering with ", cluster_count, " clusters")
 
 func perform_clustering_step() -> void:
 	if converged:
@@ -610,7 +608,6 @@ func perform_clustering_step() -> void:
 		if pause_on_convergence:
 			is_paused = true
 		_play_convergence_celebration()
-		print("Converged after ", iteration, " iterations")
 	
 	# Update visuals
 	update_visuals()
@@ -1154,9 +1151,7 @@ func run_k_comparison_experiment() -> void:
 	show_elbow_analysis(k_values, inertias)
 
 func show_elbow_analysis(k_values: Array, inertias: Array) -> void:
-	print("Elbow Method Analysis:")
-	for i in range(k_values.size()):
-		print("K=%d: Inertia=%.2f" % [k_values[i], inertias[i]])
+	pass
 
 # Advanced initialization methods
 func initialize_centroids_plus_plus() -> void:
@@ -1245,7 +1240,6 @@ func load_clustering_session(filename: String) -> bool:
 	centroid_movement_history = data.results.centroid_movement_history
 	assignments = data.cluster_assignments
 	
-	print("Session loaded: ", filename)
 	return true
 
 # Performance optimization

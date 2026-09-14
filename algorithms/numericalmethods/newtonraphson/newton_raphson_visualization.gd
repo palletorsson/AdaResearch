@@ -265,7 +265,6 @@ func start_newton_raphson() -> void:
 		is_animating = true
 		animation_timer = 0.0
 	
-	print("Newton-Raphson started with initial guess: ", current_x)
 
 func perform_iteration_step() -> void:
 	"""Perform one iteration of Newton-Raphson method"""
@@ -296,7 +295,6 @@ func perform_iteration_step() -> void:
 		is_converged = true
 		is_animating = false
 		create_root_marker(next_x)
-		print("Converged to root: x = ", next_x, ", f(x) = ", next_function_value)
 	
 	# Update state
 	current_x = next_x

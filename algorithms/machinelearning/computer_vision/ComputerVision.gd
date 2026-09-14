@@ -33,7 +33,6 @@ var _stats_label: Label3D = null
 
 func _ready() -> void:
 	# Initialize Computer Vision visualization
-	print("Computer Vision Visualization initialized")
 	create_image_pixels()
 	create_feature_particles()
 	create_bounding_boxes()

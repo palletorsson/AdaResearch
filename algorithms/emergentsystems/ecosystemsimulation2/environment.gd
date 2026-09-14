@@ -43,7 +43,6 @@ func _ready() -> void:
 	#update_time_of_day(current_time)
 	set_season(current_season)
 	
-	print("Environment initialized with size: ", size)
 
 func _create_terrain() -> void:
 	# Create a terrain mesh

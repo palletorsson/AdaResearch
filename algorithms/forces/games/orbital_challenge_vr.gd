@@ -75,7 +75,6 @@ func _ready() -> void:
 	create_ui()
 	setup_level(1)
 
-	print("Orbital Challenge VR - Master gravity to achieve perfect orbits!")
 
 func _process(delta: float) -> void:
 	if game_active:

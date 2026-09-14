@@ -19,7 +19,6 @@ func _ready() -> void:
 	call_deferred("_generate_organic_cube")
 
 func _generate_organic_cube() -> void:
-	print("OrganicVoronoiCube: Generating ", cell_count, " organic fragments")
 
 	# Generate Voronoi seeds
 	var seeds = _generate_voronoi_seeds()
@@ -35,7 +34,6 @@ func _generate_organic_cube() -> void:
 	_setup_collision()
 	_setup_hit_detection()
 
-	print("OrganicVoronoiCube: Generation complete!")
 
 func _generate_voronoi_seeds() -> Array[Vector3]:
 	var seeds: Array[Vector3] = []
@@ -201,7 +199,6 @@ func _create_combined_visual() -> void:
 	material.metallic = 0.3
 	_mesh_instance.set_surface_override_material(0, material)
 
-	print("OrganicVoronoiCube: Visual cube created")
 
 func _setup_collision() -> void:
 	_collision_body = StaticBody3D.new()
@@ -230,7 +227,6 @@ func _setup_hit_detection() -> void:
 
 	_hit_area.body_entered.connect(_on_body_entered)
 
-	print("OrganicVoronoiCube: Hit detection ready - waiting for throwable objects")
 
 func _on_body_entered(body: Node3D) -> void:
 	if _is_destroyed or not body.is_in_group("throwable"):
@@ -240,7 +236,6 @@ func _on_body_entered(body: Node3D) -> void:
 	if body is RigidBody3D:
 		impact_velocity = body.linear_velocity
 
-	print("OrganicVoronoiCube: Hit!")
 
 	health -= 1
 	if health <= 0:
@@ -251,7 +246,6 @@ func _destroy(impact_velocity: Vector3) -> void:
 		return
 
 	_is_destroyed = true
-	print("OrganicVoronoiCube: Exploding into ", _fragments.size(), " organic pieces!")
 
 	# Hide combined mesh
 	if _mesh_instance:

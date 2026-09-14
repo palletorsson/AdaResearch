@@ -73,7 +73,6 @@ func run_ga_generation() -> void:
 func finish_ga_generation() -> void:
 	var best_fitness = fitness.max()
 	_best_fitness_ever = max(_best_fitness_ever, best_fitness)
-	print("Gen %d | Best %.4f | Record %.4f" % [current_generation, best_fitness, _best_fitness_ever])
 	
 	# Update HUD
 	if _status_label:

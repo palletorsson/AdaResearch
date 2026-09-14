@@ -86,7 +86,6 @@ func generate():
 	emit_signal("generation_started")
 	clear_grid()
 
-	print("WFC: Starting generation with grid size ", Vector3(grid_width, grid_height, grid_depth))
 
 	# Run the solver
 	var success = solver.generate()
@@ -121,7 +120,6 @@ func _on_tile_collapsed(position: Vector3, tile_id: String) -> void:
 func _on_generation_complete() -> void:
 	"""Called when generation is complete"""
 	emit_signal("generation_complete")
-	print("WFC: Generation complete - ", tile_nodes.size(), " tiles placed")
 
 func instantiate_all_tiles() -> void:
 	"""Instantiate all tiles from the solved grid"""

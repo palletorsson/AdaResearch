@@ -1091,7 +1091,6 @@ func apply_grid_config(config: Dictionary) -> void:
 	if disclosure == before and not reseed:
 		return
 	_rebuild_now()
-	print("[MonteCarloDartboard] Config applied — disclosure=%s seed=%d" % [disclosure, dart_seed])
 
 
 ## Tear down what this script built and build it again, INLINE. No call_deferred:

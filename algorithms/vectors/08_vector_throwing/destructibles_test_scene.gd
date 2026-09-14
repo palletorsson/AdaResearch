@@ -253,14 +253,13 @@ func _on_ball_thrown(_pickable: Node3D, _ball: Node3D) -> void:
 
 func _on_destructible_destroyed(_target: Variant = null, _impact: Variant = null, _velocity: Variant = null, type: String = "Object") -> void:
 	total_destroyed += 1
-	print("[Destructibles Test] %s destroyed! Total: %d" % [type, total_destroyed])
 	_update_info()
 
 func _on_box_split(_parent: Node3D, _children: Array) -> void:
-	print("[Destructibles Test] Cantor box split!")
+	pass
 
 func _on_prism_destroyed(prism: Node3D, _impact_velocity: Vector3) -> void:
-	print("[Destructibles Test] Prism destroyed: ", prism.name)
+	pass
 
 func _update_info() -> void:
 	if info_label:

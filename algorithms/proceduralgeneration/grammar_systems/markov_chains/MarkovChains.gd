@@ -38,7 +38,6 @@ var selected_probability: float = 0.0
 
 func _ready() -> void:
 	# Initialize Markov Chains visualization
-	print("Markov Chains Visualization initialized")
 	initialize_transition_matrix()
 	initialize_visit_frequency()
 	create_states()

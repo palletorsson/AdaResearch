@@ -169,8 +169,6 @@ void fragment() {
 """
 
 func _ready() -> void:
-	print("=== WATERFLOWERSVR SCRIPT IS RUNNING! ===")
-	print("WaterFlowersVR: Starting setup...")
 	
 	# Test if we can create objects at all
 	var test_sphere = MeshInstance3D.new()
@@ -187,20 +185,14 @@ func _ready() -> void:
 	test_sphere.set_surface_override_material(0, material)
 	
 	add_child(test_sphere)
-	print("WaterFlowersVR: GREEN TEST SPHERE created at: ", test_sphere.position)
 	
 	setup_scene()
-	print("WaterFlowersVR: Scene setup complete")
 	create_water_surface()
-	print("WaterFlowersVR: Water surface created")
 	create_floating_flowers()
-	print("WaterFlowersVR: Flowers created, total count: ", flowers.size())
 	
 	# Add a simple test cube to verify scene is working
 	create_test_cube()
-	print("WaterFlowersVR: Test cube created")
 	
-	print("=== WATERFLOWERSVR SETUP COMPLETE! ===")
 	# Animations are now handled entirely by the physics process.
 
 func create_test_cube() -> void:
@@ -217,7 +209,6 @@ func create_test_cube() -> void:
 	test_cube.set_surface_override_material(0, material)
 	
 	add_child(test_cube)
-	print("Test cube added at position: ", test_cube.position)
 
 func setup_scene() -> void:
 	# (Function remains unchanged)
@@ -265,8 +256,6 @@ func create_water_surface() -> void:
 	
 	add_child(water_mesh)
 	
-	print("Water surface created at position: ", water_mesh.position)
-	print("Water size: ", water_size)
 	
 	# TODO: Uncomment shader material when shader issues are resolved
 	# water_material = ShaderMaterial.new()
@@ -313,7 +302,6 @@ func create_floating_flower(index: int, color: Color, flower_type: String) -> vo
 	add_child(flower_body)
 	flowers.append(flower_body)
 	
-	print("Created flower ", index, " at position: ", flower_body.position)
 
 func _physics_process(delta: float) -> void:
 	# Use physics process for all interactions

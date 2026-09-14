@@ -72,8 +72,6 @@ func _ready() -> void:
 	_create_visualizations()
 	_setup_controls()
 	_apply_preset("sine")  # Start with pure sine
-	print("HarmonicBuilder: Ready! Adjust sliders to build your sound")
-	print("HarmonicBuilder: %d harmonics available" % NUM_HARMONICS)
 
 func _initialize_arrays() -> void:
 	harmonic_amplitudes.resize(NUM_HARMONICS)
@@ -91,7 +89,6 @@ func _setup_audio() -> void:
 	audio_player.volume_db = -3.0  # Comfortable level
 	audio_player.play()
 
-	print("HarmonicBuilder: Audio synthesis enabled")
 
 func _setup_controls() -> void:
 	# Find sliders (assuming named Slider1, Slider2, etc.)
@@ -246,7 +243,6 @@ func _on_harmonic_slider_changed(value: float, harmonic_index: int) -> void:
 func _on_frequency_changed(value: float) -> void:
 	fundamental_freq = lerp(freq_min, freq_max, value)
 	_update_frequency_label()
-	print("HarmonicBuilder: Fundamental = %.1f Hz" % fundamental_freq)
 
 func _update_frequency_label() -> void:
 	var freq_label = get_node_or_null("FrequencyLabel")
@@ -277,7 +273,6 @@ func _apply_preset(preset_name: String) -> void:
 			slider.slider_position = preset[i]
 
 	_update_harmonic_bars()
-	print("HarmonicBuilder: Applied preset '%s'" % preset_name)
 
 func _update_harmonic_bars() -> void:
 	for i in range(harmonic_bars.size()):

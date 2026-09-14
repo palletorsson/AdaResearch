@@ -10,7 +10,6 @@ var flow_particles: Array = []
 
 func _ready() -> void:
 	# Initialize Transformers visualization
-	print("Transformers Visualization initialized")
 	create_input_tokens()
 	create_output_tokens()
 	create_flow_particles()

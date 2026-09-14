@@ -40,7 +40,6 @@ func _ready() -> void:
 	# Create UI
 	create_info_label()
 
-	print("Example 4.5: Inheritance & Polymorphism - Mixed particle types")
 
 func _process(delta: float) -> void:
 	# Spawn particles

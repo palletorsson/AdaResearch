@@ -138,7 +138,6 @@ func _ready() -> void:
 		metaball_color.r, metaball_color.g, metaball_color.b))
 
 	_built = true
-	print("Metaball setup complete with strength: ", base_strength)
 
 ## The smin k the shader is handed. `distinct` SHORT-CIRCUITS to the raw
 ## exported blend_factor rather than to FUSION_K's 0.4, so a scene that
@@ -265,7 +264,6 @@ func set_strength(new_strength: float) -> void:
 	# Update shader parameters
 	update_shader_parameters()
 
-	print("Updated metaball strength to:", base_strength)
 
 # Reset metaballs with current parameters
 func reset_metaballs() -> void:

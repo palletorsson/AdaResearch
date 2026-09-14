@@ -97,7 +97,6 @@ func _process(delta: float) -> void:
 
 func set_scenario(mode: int) -> void:
 	grid.reset_costs()
-	print("Changing Flow Field Scenario: ", mode)
 	
 	match mode:
 		0: # Open Field (Target Center)
@@ -163,12 +162,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				# Set Target
-				print("New Target: ", coord)
 				update_field(coord.x, coord.y)
 				
 			elif event.button_index == MOUSE_BUTTON_RIGHT:
 				# Toggle Wall
-				print("Toggle Wall: ", coord)
 				grid.set_cost(coord.x, coord.y, 255)
 				# Update current target (we need to store it to refresh)
 				# Simplified: just refresh assuming last target is 0 cost

@@ -61,13 +61,13 @@ func _find_sound_controller() -> void:
 	# Try to find MarioSoundController in parent
 	sound_controller = get_parent()
 	if sound_controller and sound_controller.has_method("play_sound"):
-		print("PlaySoundButton: Found sound controller")
+		pass
 	else:
 		# Try to find it as a sibling
 		if get_parent():
 			sound_controller = get_parent().get_node_or_null("MarioSoundController")
 			if sound_controller and sound_controller.has_method("play_sound"):
-				print("PlaySoundButton: Found sound controller as sibling")
+				pass
 			else:
 				push_warning("PlaySoundButton: Could not find MarioSoundController")
 				sound_controller = null

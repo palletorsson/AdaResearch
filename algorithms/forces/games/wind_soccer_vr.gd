@@ -69,7 +69,6 @@ func _ready() -> void:
 	create_ui()
 	setup_vr_controllers()
 
-	print("Wind Soccer VR - Use controller triggers to push ball with wind!")
 
 func _process(delta: float) -> void:
 	if game_active:

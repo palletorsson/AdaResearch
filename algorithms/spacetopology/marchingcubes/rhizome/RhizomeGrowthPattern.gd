@@ -54,7 +54,6 @@ func add_growth_node(position: Vector3, radius: float = 2.0) -> GrowthNode:
 	growth_nodes.append(node)
 	active_nodes.append(node)
 	
-	print("RhizomeGrowth: Added growth node at %v with radius %.2f" % [position, radius])
 	return node
 
 func set_growth_rules(rules: Dictionary) -> void:
@@ -82,7 +81,6 @@ func set_growth_rules(rules: Dictionary) -> void:
 
 func generate_rhizome_network(iterations: int = 50) -> Dictionary:
 	"""Generate the complete rhizomatic network through iterative growth"""
-	print("RhizomeGrowth: Starting network generation with %d iterations" % iterations)
 	
 	for i in range(iterations):
 		if active_nodes.is_empty():
@@ -97,7 +95,6 @@ func generate_rhizome_network(iterations: int = 50) -> Dictionary:
 		# Remove exhausted nodes
 		prune_inactive_nodes()
 	
-	print("RhizomeGrowth: Generated network with %d total nodes, %d chambers" % [growth_nodes.size(), chamber_nodes.size()])
 	
 	return {
 		"all_nodes": growth_nodes,
@@ -189,7 +186,6 @@ func create_connection(node1: GrowthNode, node2: GrowthNode) -> void:
 	"""Create a connection between two nodes"""
 	if node1 != node2 and not node1.children.has(node2):
 		node1.children.append(node2)
-		print("RhizomeGrowth: Connected nodes at %v and %v" % [node1.position, node2.position])
 
 func create_chambers() -> void:
 	"""Create chamber nodes at intersection points"""
@@ -199,7 +195,6 @@ func create_chambers() -> void:
 				node.is_chamber = true
 				node.radius *= rng.randf_range(2.0, 4.0)  # Expand for chamber
 				chamber_nodes.append(node)
-				print("RhizomeGrowth: Created chamber at %v with radius %.2f" % [node.position, node.radius])
 
 func prune_inactive_nodes() -> void:
 	"""Remove nodes with low energy from active list"""

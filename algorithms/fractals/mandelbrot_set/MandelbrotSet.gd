@@ -185,7 +185,6 @@ func _generate_fractal() -> void:
 		fractal_multimesh.set_instance_transform(idx, transform)
 		fractal_multimesh.set_instance_color(idx, data.color)
 
-	print("Mandelbrot: Generated %d points" % instance_count)
 
 func _mandelbrot_iterations(c_real: float, c_imag: float) -> int:
 	var z_real := 0.0
@@ -223,7 +222,6 @@ func _input(event: InputEvent) -> void:
 		zoom = 1.0 + randf() * 500.0
 		center = Vector2(randf() * 2.0 - 1.5, randf() * 2.0 - 1.0)
 		_generate_fractal()
-		print("Mandelbrot: New zoom=%.1f center=(%.3f, %.3f)" % [zoom, center.x, center.y])
 
 # Public API
 func set_zoom_level(new_zoom: float) -> void:

@@ -59,8 +59,6 @@ func _ready() -> void:
 	create_icosphere(sphere_radius, initial_subdivisions)
 	update_mesh()
 	
-	print("Press SPACE to start growth, R to reset")
-	print("Growth will pick random points and grow limbs from them")
 
 func create_icosphere(radius: float, subdivisions: int) -> void:
 	vertices.clear()
@@ -200,7 +198,6 @@ func start_new_growth_zone() -> void:
 		grow_and_extrude()
 	
 	update_mesh()
-	print("New growth zone started at ", current_growth_point)
 
 func grow_and_extrude() -> void:
 	if dyntopo_enabled:
@@ -423,7 +420,6 @@ func _input(event: InputEvent) -> void:
 func start_growth() -> void:
 	is_growing = true
 	growth_timer = 0.0
-	print("Starting morphogenesis growth from sphere surface...")
 
 func reset_growth() -> void:
 	is_growing = false
@@ -437,7 +433,6 @@ func reset_growth() -> void:
 	
 	create_icosphere(sphere_radius, initial_subdivisions)
 	update_mesh()
-	print("Reset complete. Press SPACE to start growing.")
 
 func _exit_tree() -> void:
 	for child in get_children():

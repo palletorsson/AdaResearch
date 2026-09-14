@@ -342,7 +342,6 @@ func _acquire_player() -> void:
 	if gm_player and is_instance_valid(gm_player):
 		player_node = gm_player
 		player_path = player_node.get_path()
-		print("[Drone] Found player via GameManager: ", player_node.name)
 		return
 
 	# Try explicit path first
@@ -350,7 +349,6 @@ func _acquire_player() -> void:
 		var candidate := get_node_or_null(player_path) as Node3D
 		if candidate and candidate is Node3D:
 			player_node = candidate
-			print("[Drone] Found player via path: ", player_node.name)
 			return
 
 	# Try finding by group
@@ -358,7 +356,6 @@ func _acquire_player() -> void:
 	if xr_origin:
 		player_node = xr_origin
 		player_path = player_node.get_path()
-		print("[Drone] Found player via xr_origin group: ", player_node.name)
 		return
 
 	# Try finding XROrigin3D directly
@@ -367,7 +364,6 @@ func _acquire_player() -> void:
 		if found_xr:
 			player_node = found_xr
 			player_path = player_node.get_path()
-			print("[Drone] Found XROrigin3D: ", player_node.name)
 			return
 
 	# Fallback to searching by name
@@ -389,7 +385,6 @@ func _acquire_player() -> void:
 			if found:
 				player_node = found
 				player_path = player_node.get_path()
-				print("[Drone] Found player by name: ", player_node.name)
 				return
 
 	print("[Drone] WARNING: Could not find player!")
@@ -505,7 +500,6 @@ func _enter_kamikaze_mode() -> void:
 	# Flash red to indicate kamikaze mode
 	_flash_material(Color(1.0, 0.2, 0.0), 0.1, 0.1)
 
-	print("[Drone] Entering KAMIKAZE mode!")
 
 func _kamikaze_explode() -> void:
 	"""Explode and damage player"""
@@ -515,7 +509,6 @@ func _kamikaze_explode() -> void:
 	has_exploded = true
 	is_destroyed = true
 
-	print("[Drone] KAMIKAZE EXPLOSION!")
 
 	# Calculate random damage
 	var damage_percent = rng.randf_range(min_damage_percent, max_damage_percent)
@@ -523,7 +516,6 @@ func _kamikaze_explode() -> void:
 
 	# Apply damage to player
 	GameManager.apply_health_damage(damage_amount)
-	print("[Drone] Dealt %.1f%% damage (%.1f HP) to player" % [damage_percent, damage_amount])
 
 	# Disable collision
 	collision_layer = 0

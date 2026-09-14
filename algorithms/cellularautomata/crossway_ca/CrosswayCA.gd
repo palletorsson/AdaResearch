@@ -125,7 +125,6 @@ func initialize_rules() -> void:
 	for i in range(grid_height):
 		# Generate random rule (0-255)
 		rules[i] = randi() % 256
-	print("CrosswayCA: New rules initialized")
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass

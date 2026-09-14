@@ -18,7 +18,6 @@ func _ready() -> void:
 	_terrain_mesh_instance = find_child("*", true, false) as MeshInstance3D
 
 	if _terrain_mesh_instance:
-		print("DestructibleTerrainCube: Found terrain mesh instance")
 		# Wait for terrain to generate
 		call_deferred("_setup_after_generation")
 	else:
@@ -33,7 +32,6 @@ func _setup_after_generation() -> void:
 
 	if _terrain_mesh_instance and _terrain_mesh_instance.mesh:
 		_generated_mesh = _terrain_mesh_instance.mesh
-		print("DestructibleTerrainCube: Mesh generated with ", _generated_mesh.get_surface_count(), " surfaces")
 
 		_setup_collision()
 		_setup_hit_detection()
@@ -52,7 +50,6 @@ func _setup_collision() -> void:
 		var collision_shape = CollisionShape3D.new()
 		collision_shape.shape = shape
 		_collision_body.add_child(collision_shape)
-		print("DestructibleTerrainCube: Collision created")
 
 func _setup_hit_detection() -> void:
 	# Create hit detection area
@@ -71,7 +68,6 @@ func _setup_hit_detection() -> void:
 			_hit_area.add_child(area_shape)
 
 	_hit_area.body_entered.connect(_on_body_entered)
-	print("DestructibleTerrainCube: Hit detection ready")
 
 func _on_body_entered(body: Node3D) -> void:
 	if _is_destroyed or not body.is_in_group("throwable"):
@@ -81,7 +77,6 @@ func _on_body_entered(body: Node3D) -> void:
 	if body is RigidBody3D:
 		impact_velocity = body.linear_velocity
 
-	print("DestructibleTerrainCube: Hit by ", body.name)
 
 	health -= 1
 	if health <= 0:
@@ -92,7 +87,6 @@ func _destroy(impact_velocity: Vector3) -> void:
 		return
 
 	_is_destroyed = true
-	print("DestructibleTerrainCube: Destroying!")
 
 	# Hide original mesh
 	if _terrain_mesh_instance:
@@ -123,7 +117,6 @@ func _create_voronoi_fragments(impact_velocity: Vector3) -> void:
 		center += v
 	center /= vertices.size()
 
-	print("DestructibleTerrainCube: Creating ", fragment_count, " fragments from ", vertices.size(), " vertices")
 
 	# Generate Voronoi seeds
 	var seeds = []

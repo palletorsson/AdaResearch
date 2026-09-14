@@ -183,7 +183,6 @@ func start_generation() -> void:
 	generating = true
 	
 	update_cell_visual(current_cell, current_color)
-	print("Starting maze generation...")
 
 func generation_step() -> void:
 	var neighbors = get_unvisited_neighbors(current_cell)
@@ -221,7 +220,6 @@ func generation_step() -> void:
 		# Generation complete
 		generating = false
 		update_cell_visual(current_cell, visited_color)
-		print("Maze generation complete!")
 		
 		# Add entrance and exit
 		create_entrance_exit()

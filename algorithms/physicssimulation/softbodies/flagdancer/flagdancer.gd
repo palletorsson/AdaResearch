@@ -212,7 +212,6 @@ func _ready() -> void:
 	setup_joyful_animation()
 	_config_sig = _sig(crimp, heading, frozen_phase, wave_seed)
 	var flag_name = FlagType.keys()[flag_type]
-	print("🏳️‍🌈 %s Pride flag ready! Press SPACE for celebration! 🏳️‍🌈" % flag_name)
 
 func create_pride_flag_with_bones() -> void:
 	skeleton = Skeleton3D.new()
@@ -355,7 +354,6 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		celebration_mode = !celebration_mode
 		var flag_name = FlagType.keys()[flag_type]
-		print("🎉 %s flag celebration: %s! 🎉" % [flag_name, "ON" if celebration_mode else "OFF"])
 
 	# Vindeffekt med noise för mer naturlig rörelse
 	var noise_seed := int(time_offset * 1000) % 1000

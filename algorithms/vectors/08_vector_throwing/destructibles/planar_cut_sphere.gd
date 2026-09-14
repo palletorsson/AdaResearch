@@ -186,8 +186,6 @@ func _on_piece_hit(body: Node, piece: RigidBody3D) -> void:
 	elif data.split_level < max_split_levels:
 		# Split this piece
 		_split_piece(piece, data, impact_point, impact_velocity)
-	else:
-		print("[PlanarCutSphere] Already at max split level")
 
 func _split_piece(piece: RigidBody3D, data: SphereData, impact_point: Vector3, impact_velocity: Vector3) -> void:
 	"""Split a piece in half along a plane"""
@@ -214,7 +212,6 @@ func _split_piece(piece: RigidBody3D, data: SphereData, impact_point: Vector3, i
 
 	# Need vertices on both sides
 	if half1_verts.size() < 3 or half2_verts.size() < 3:
-		print("[PlanarCutSphere] Not enough vertices to split")
 		return
 
 	# Create two new pieces
@@ -249,7 +246,6 @@ func _split_piece(piece: RigidBody3D, data: SphereData, impact_point: Vector3, i
 	# Emit signal
 	piece_split.emit(piece, [child1, child2])
 
-	print("[PlanarCutSphere] Split into %d and %d vertices (level %d)" % [half1_verts.size(), half2_verts.size(), data.split_level + 1])
 
 func _shatter_all_pieces(impact_velocity: Vector3, impact_point: Vector3) -> void:
 	"""Shatter all pieces at once with explosion effect"""
@@ -304,7 +300,6 @@ func _shatter_all_pieces(impact_velocity: Vector3, impact_point: Vector3) -> voi
 	await get_tree().create_timer(4.0).timeout
 	queue_free()
 
-	print("[PlanarCutSphere] All pieces shattered!")
 
 func get_pieces_count() -> int:
 	return pieces.size()

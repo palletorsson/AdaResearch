@@ -48,7 +48,6 @@ func _ready() -> void:
 	_initialize_mutation_library()
 	_initialize_form_library()
 	
-	print("Morphology Generator initialized")
 
 func _initialize_component_library() -> void:
 	# Basic shapes

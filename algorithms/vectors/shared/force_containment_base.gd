@@ -26,7 +26,6 @@ func _ready() -> void:
 	_create_containment()
 	_create_physics_ball()
 	_create_info_label()
-	print("ForceContainmentBase: 1x1x1m containment ready")
 
 func _create_containment() -> void:
 	"""Create 1x1x1 meter glass box with physics walls"""

@@ -155,14 +155,12 @@ func create_visuals() -> void:
 func start_clustering() -> void:
 	iteration = 0
 	converged = false
-	print("Starting K-means clustering with ", cluster_count, " clusters")
 
 func perform_clustering_step() -> void:
 	if converged:
 		return
 	
 	iteration += 1
-	print("Iteration: ", iteration)
 	
 	# Assignment step
 	for i in range(data_points.size()):
@@ -199,7 +197,6 @@ func perform_clustering_step() -> void:
 	# Check convergence
 	if total_movement < 0.1 or iteration >= 20:
 		converged = true
-		print("Converged after ", iteration, " iterations")
 	
 	# Update visuals
 	update_visuals()

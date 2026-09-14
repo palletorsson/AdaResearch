@@ -54,7 +54,6 @@ func _ready() -> void:
 	_build_floor()
 	_build_cove_rows()
 	_build_lighting()
-	print("[CarpetCoveGallery] Built — %d cove displays on %dx%d grid" % [_cove_count, corridor_cells_x, corridor_cells_z])
 
 # ═══════════════════════════════════════════════════════════════════
 # FLOOR — dark gallery floor, grid-aligned

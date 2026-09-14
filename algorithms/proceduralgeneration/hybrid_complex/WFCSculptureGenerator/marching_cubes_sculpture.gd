@@ -110,7 +110,6 @@ func _process(delta: float) -> void:
 		camera.position += input_dir.normalized() * camera_speed * delta
 
 func generate_sculpture() -> void:
-	print("🎨 Generating marching cubes sculpture...")
 	clear_sculpture()
 	
 	# Generate density field based on sculpture type
@@ -119,7 +118,6 @@ func generate_sculpture() -> void:
 	# Create mesh using marching cubes
 	create_marching_cubes_mesh(density_field)
 	
-	print("✅ Sculpture complete!")
 
 func generate_density_field() -> Array:
 	var field = []
@@ -363,7 +361,6 @@ func simplex_noise(p: Vector3) -> float:
 	return sin(p.x * 2.3 + p.y * 1.7) * cos(p.z * 1.9 + p.x * 2.1) * sin(p.y * 2.5 + p.z * 1.8)
 
 func create_marching_cubes_mesh(density_field: Array) -> void:
-	print("🔨 Creating mesh from density field...")
 	
 	# Create mesh using simplified surface extraction
 	var surface_tool = SurfaceTool.new()
@@ -462,7 +459,6 @@ func create_marching_cubes_mesh(density_field: Array) -> void:
 		mesh_instance.material_override = material
 		
 		add_child(mesh_instance)
-		print("✅ Mesh created with ", vertex_count, " vertices, ", triangle_count, " triangles")
 	else:
 		print("⚠️ No mesh generated - no surface found")
 		print("   Try adjusting iso_level or checking density values")

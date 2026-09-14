@@ -13,11 +13,9 @@ extends Node3D
 @export var create_l_shape: bool = true
 
 func _ready() -> void:
-	print("Creating simple pink beam structure...")
 	create_basic_floor()
 	create_pink_beam_structure()
 	setup_simple_lighting()
-	print("Pink beam structure complete!")
 
 func create_basic_floor() -> void:
 	"""Create a simple floor to stand on"""
@@ -102,7 +100,6 @@ func create_beam(size: Vector3, pos: Vector3, name: String) -> void:
 	
 	beam_body.position = pos
 	
-	print("Created beam: ", name, " at position: ", pos)
 
 func create_l_shaped_structure() -> void:
 	"""Create an L-shaped architectural element"""

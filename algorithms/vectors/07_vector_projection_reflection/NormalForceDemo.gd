@@ -75,7 +75,6 @@ func _ready() -> void:
 	_setup_demo()
 	_update_surface_normal()
 	_dna_built = true
-	print("NormalForceDemo: Ready - See force decomposition!")
 
 ## The angle the chosen incline asks for. "slope" returns exactly the historical
 ## 30.0, so the default leaves every existing placement identical.
@@ -270,12 +269,10 @@ func _update_surface_angle() -> void:
 		surface_plane.rotation_degrees = Vector3(-surface_angle, 0, 0)
 	_place_surface_body(_surface_body_thickness())
 	_update_surface_normal()
-	print("NormalForceDemo: Angle = %.1f°" % surface_angle)
 
 func _reset_demo() -> void:
 	"""Reset to initial state"""
 	reset_ball(Vector3(0, 0.1, 0))
-	print("NormalForceDemo: Reset")
 
 func _exit_tree() -> void:
 	for child in get_children():

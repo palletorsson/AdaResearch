@@ -65,7 +65,6 @@ func _ready() -> void:
 	create_bowling_ball()
 	create_ui()
 
-	print("Force Bowling VR - Knock down pins with physics!")
 
 func _process(_delta: float):
 	update_ui()

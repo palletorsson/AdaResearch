@@ -11,7 +11,6 @@ func _ready() -> void:
 	
 	if noise_plane.mesh is PlaneMesh:
 		modify_top_edge_vertices()
-		print("is plane mesh")
 
 func modify_top_edge_vertices() -> void:
 	var mesh = noise_plane.mesh

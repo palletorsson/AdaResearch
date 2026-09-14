@@ -47,7 +47,6 @@ var GLITCH_TYPE_MAP = {
 }
 
 func _ready() -> void:
-	print("🚀 Starting Optimized Glitch System")
 	initialize_layer_system()
 	create_demo_objects()
 	setup_glitch_controllers()

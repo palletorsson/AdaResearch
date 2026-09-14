@@ -80,7 +80,6 @@ func _ready() -> void:
 	create_ui()
 	_built = true
 
-	print("Mass-Spring-Damper — grab a mass and release to oscillate!")
 
 # ---------------------------------------------------------------------------
 # Build the row of configurations the current genome asks for.

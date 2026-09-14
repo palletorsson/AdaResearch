@@ -10,7 +10,6 @@ var memory_particles: Array = []
 
 func _ready() -> void:
 	# Initialize LSTM visualization
-	print("LSTM Networks Visualization initialized")
 	create_input_tokens()
 	create_output_tokens()
 	create_memory_particles()

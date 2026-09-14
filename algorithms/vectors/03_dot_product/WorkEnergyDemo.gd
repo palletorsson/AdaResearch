@@ -34,7 +34,6 @@ func _ready() -> void:
 	super._ready()
 	_setup_demo()
 	last_position = physics_ball.global_position / SCENE_SCALE
-	print("WorkEnergyDemo: Ready - Drag force to do work!")
 
 func _setup_demo() -> void:
 	"""Setup work & energy demonstration"""
@@ -164,7 +163,6 @@ func _reset_demo() -> void:
 	work_meter.text = "Work: 0.00 J"
 	work_meter.modulate = Color(1.0, 1.0, 0.3, 1.0)
 	
-	print("WorkEnergyDemo: Reset")
 
 func _exit_tree() -> void:
 	for child in get_children():

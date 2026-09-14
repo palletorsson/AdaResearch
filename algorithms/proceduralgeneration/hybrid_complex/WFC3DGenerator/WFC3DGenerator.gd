@@ -126,9 +126,6 @@ func setup_tile_library() -> void:
 	# ADD SIMPLIFIED QUEER JOYFUL TILES
 	add_queer_joyful_tiles()
 	
-	print("Tile library setup complete. Total tiles: ", tile_library.size())
-	for tile in tile_library:
-		print("- ", tile.name, " (weight: ", tile.weight, ")")
 
 func add_queer_joyful_tiles() -> void:
 	"""Add simplified queer joyful tiles that are more compatible"""
@@ -163,33 +160,25 @@ func add_queer_joyful_tiles() -> void:
 		[SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.FLOOR_OPEN, SocketType.NONE, SocketType.WALL_SOLID],
 		3.0, "safe_alcove", Color(0.4, 0.7, 0.4), true))
 	
-	print("🌈 Added 6 simplified queer joyful tiles!")
 
 func generate_wfc_space() -> void:
 	if seed_value > 0:
 		seed(seed_value)
 	
-	print("\n=== STARTING WFC GENERATION ===")
-	print("Grid size: ", grid_dimensions)
-	print("Using seed: ", seed_value if seed_value > 0 else "random")
 	
 	clear_generated_content()
 	initialize_grid()
 	run_wfc_algorithm()
 	generate_3d_meshes()
-	print("=== WFC GENERATION COMPLETE ===\n")
 
 func clear_generated_content() -> void:
-	print("Clearing existing content...")
 	var cleared_count = 0
 	for child in get_children():
 		if child.has_meta("wfc_generated"):
 			child.queue_free()
 			cleared_count += 1
-	print("Cleared ", cleared_count, " generated objects")
 
 func initialize_grid() -> void:
-	print("Initializing grid...")
 	grid.clear()
 	grid.resize(grid_dimensions.x)
 	
@@ -206,10 +195,8 @@ func initialize_grid() -> void:
 				cell.possible_tiles = tile_library.duplicate()
 				grid[x][y][z] = cell
 	
-	print("Grid initialized with ", total_cells, " cells, each with ", tile_library.size(), " possible tiles")
 
 func run_wfc_algorithm() -> void:
-	print("Starting WFC algorithm...")
 	var max_iterations = grid_dimensions.x * grid_dimensions.y * grid_dimensions.z * 2
 	var iterations = 0
 	var last_progress = -1
@@ -230,13 +217,10 @@ func run_wfc_algorithm() -> void:
 		# Progress feedback
 		var progress = int((float(iterations) / float(max_iterations)) * 100)
 		if progress > last_progress and progress % 10 == 0:
-			print("Progress: ", progress, "% (", iterations, "/", max_iterations, " iterations)")
 			last_progress = progress
 	
 	var collapsed_count = count_collapsed_cells()
 	var total_cells = grid_dimensions.x * grid_dimensions.y * grid_dimensions.z
-	print("WFC completed in ", iterations, " iterations")
-	print("Collapsed cells: ", collapsed_count, "/", total_cells, " (", int(float(collapsed_count)/float(total_cells)*100), "%)")
 
 func count_collapsed_cells() -> int:
 	var count = 0
@@ -385,7 +369,6 @@ func is_fully_collapsed() -> bool:
 	return true
 
 func generate_3d_meshes() -> void:
-	print("Generating 3D meshes...")
 	var mesh_count = 0
 	
 	for x in grid_dimensions.x:
@@ -396,7 +379,6 @@ func generate_3d_meshes() -> void:
 					create_tile_mesh(cell)
 					mesh_count += 1
 	
-	print("Generated ", mesh_count, " meshes")
 
 func create_tile_mesh(cell: GridCell) -> void:
 	var mesh_instance = MeshInstance3D.new()

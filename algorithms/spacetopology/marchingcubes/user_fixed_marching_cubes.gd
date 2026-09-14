@@ -53,7 +53,6 @@ extends MeshInstance3D
 		var time = Time.get_ticks_msec()
 		generate()
 		var elapsed = (Time.get_ticks_msec()-time)/1000.0
-		print("Terrain generated in: " + str(elapsed) + "s")
 
 # === TRIANGULATION TABLE ===
 const TRIANGULATIONS = [
@@ -395,7 +394,6 @@ func generate() -> void:
 				var cube_triangles = march_cube_robust(x, y, z, voxel_grid)
 				triangle_count += cube_triangles
 				
-	print("🌍 Generated %d triangles from %d cubes" % [triangle_count, processed_cubes])
 	
 	# Create mesh
 	create_mesh_from_vertices(current_vertices)
@@ -564,7 +562,6 @@ func create_mesh_from_vertices(vertices: PackedVector3Array) -> void:
 	
 	mesh = surface_tool.commit()
 	
-	print("✅ Mesh created with %d vertices" % current_vertices.size())
 	current_vertices.clear()
 
 func get_triangulation(x: int, y: int, z: int, voxel_grid: VoxelGrid) -> Array:

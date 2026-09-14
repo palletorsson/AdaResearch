@@ -98,7 +98,6 @@ func _ready() -> void:
 	_create_panel()
 	spawn_bodies()
 	setup_auto_reset()
-	print("Example 2.8: Two-body attraction")
 
 func setup_auto_reset() -> void:
 	auto_reset_timer = Timer.new()

@@ -43,7 +43,6 @@ func _ready() -> void:
 	generate_platforms()
 	setup_camera()
 	create_environment()
-	print("SimpleOscillatingBridge: Created %d platforms" % num_platforms)
 
 func _process(delta: float) -> void:
 	time += delta * oscillation_speed

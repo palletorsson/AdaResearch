@@ -326,7 +326,6 @@ func setup_triangle_table() -> void:
 		triangle_table[i] = t[i]
 
 func generate_cave() -> void:
-	print("Generating queer bulgy cave landscape...")
 
 	# Resolve the two axes ONCE, here, so every loop below reads a plain float and
 	# the density field, the marching pass and the vertex colours cannot disagree
@@ -339,7 +338,6 @@ func generate_cave() -> void:
 	generate_mesh_marching_cubes()
 	create_collision()
 	
-	print("Cave generation complete!")
 
 func clear_previous_data() -> void:
 	vertices.clear()
@@ -369,7 +367,6 @@ func generate_density_field() -> void:
 				var index = x + y * grid_x + z * grid_x * grid_y
 				density_field[index] = density
 	
-	print("QueerMarchingCave: density field %dx%dx%d = %d voxels" % [grid_x, grid_y, grid_z, density_field.size()])
 
 func calculate_density_at_position(pos: Vector3) -> float:
 	# Primary cave structure

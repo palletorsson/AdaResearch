@@ -121,7 +121,6 @@ func insert_value(value: int) -> void:
 		create_node_visual(new_node)
 		calculate_positions()
 	
-	print("Inserted: ", value)
 
 func insert_recursive(node: TreeNode, new_node: TreeNode) -> void:
 	if new_node.value < node.value:
@@ -140,7 +139,6 @@ func insert_recursive(node: TreeNode, new_node: TreeNode) -> void:
 func delete_value(value: int) -> void:
 	root = delete_recursive(root, value)
 	calculate_positions()
-	print("Deleted: ", value)
 
 func delete_recursive(node: TreeNode, value: int) -> TreeNode:
 	if node == null:
@@ -301,7 +299,6 @@ func start_traversal(traversal_type: String) -> void:
 		"postorder":
 			postorder_traversal(root, traversal_order)
 	
-	print("Traversal (", traversal_type, "): ", traversal_order)
 	animate_traversal(traversal_order)
 
 func inorder_traversal(node: TreeNode, order: Array) -> void:

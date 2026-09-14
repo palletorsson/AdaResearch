@@ -111,11 +111,9 @@ func setup_noise() -> void:
 		high_freq_noise.fractal_lacunarity = 2.0
 		high_freq_noise.fractal_gain = 0.5
 	
-	print("Noise layers configured - Seed: %d" % base_seed)
 
 func generate_terrain() -> void:
 	"""Generate optimized terrain with human movement considerations"""
-	print("Generating terrain with %dx%d resolution..." % [terrain_size, terrain_size])
 	
 	var array_mesh = ArrayMesh.new()
 	var vertices = PackedVector3Array()
@@ -172,7 +170,6 @@ func generate_terrain() -> void:
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	mesh = array_mesh
 	
-	print("Terrain generated with %d vertices and %d triangles" % [vertices.size(), indices.size() / 3])
 
 func generate_height_field() -> Array:
 	"""Generate height field using three-layer noise system"""
@@ -207,7 +204,6 @@ func apply_erosion_simulation(height_field: Array) -> Array:
 	if not enable_erosion_simulation:
 		return height_field
 	
-	print("Applying erosion simulation...")
 	
 	# Simple erosion: reduce height differences in steep areas
 	for iteration in range(3):  # Multiple passes for better effect
@@ -362,7 +358,6 @@ func setup_collision() -> void:
 		setup_basic_collision()
 		return
 	
-	print("Setting up optimized collision for human movement...")
 	
 	# Create StaticBody3D for collision
 	var static_body = StaticBody3D.new()
@@ -373,7 +368,6 @@ func setup_collision() -> void:
 	var terrain_collision = generate_terrain_collision()
 	if terrain_collision:
 		static_body.add_child(terrain_collision)
-		print("Added basic terrain collision")
 	
 	# Generate walkable surface collision as additional layer
 	var walkable_collision = generate_walkable_collision()
@@ -381,7 +375,6 @@ func setup_collision() -> void:
 		static_body.add_child(walkable_collision)
 		static_body.set_meta("walkable_surface", true)
 		static_body.set_meta("max_slope", max_walkable_slope)
-		print("Added walkable surface collision")
 	else:
 		print("Warning: No walkable surfaces found, using basic collision only")
 	
@@ -405,7 +398,6 @@ func generate_walkable_collision() -> CollisionShape3D:
 	var walkable_mesh = create_walkable_mesh()
 	if walkable_mesh:
 		walkable_shape.shape = walkable_mesh.create_trimesh_shape()
-		print("Generated walkable collision with %d faces" % (walkable_mesh.get_faces().size() / 3))
 		return walkable_shape
 	
 	return null
@@ -432,7 +424,6 @@ func create_walkable_mesh() -> ArrayMesh:
 		print("Warning: No mesh data available for walkable surface generation")
 		return null
 	
-	print("Processing %d triangles for walkable surface detection..." % (original_indices.size() / 3))
 	
 	# Filter triangles based on walkability
 	var walkable_triangles = []
@@ -471,11 +462,6 @@ func create_walkable_mesh() -> ArrayMesh:
 			walkable_triangles.append([v0, v1, v2])
 			walkable_count += 1
 	
-	print("Found %d walkable triangles out of %d total (%.1f%%)" % [
-		walkable_count, 
-		total_triangles, 
-		(float(walkable_count) / total_triangles) * 100.0
-	])
 	
 	# If no walkable triangles found, create a fallback flat surface
 	if walkable_triangles.size() == 0:
@@ -503,7 +489,6 @@ func create_walkable_mesh() -> ArrayMesh:
 		walkable_arrays[Mesh.ARRAY_INDEX] = indices
 		
 		walkable_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, walkable_arrays)
-		print("Created walkable mesh with %d vertices and %d triangles" % [vertices.size(), indices.size() / 3])
 		return walkable_mesh
 	
 	return null
@@ -543,7 +528,6 @@ func create_fallback_walkable_mesh() -> ArrayMesh:
 
 func regenerate_terrain() -> void:
 	"""Regenerate terrain with current settings"""
-	print("Regenerating terrain...")
 	setup_noise()
 	generate_terrain()
 	
@@ -553,7 +537,6 @@ func regenerate_terrain() -> void:
 		static_body.queue_free()  # Remove old collision
 		setup_collision()  # Create new optimized collision
 	
-	print("Terrain regeneration complete")
 
 func get_walkable_surfaces() -> Array:
 	"""Get information about walkable surfaces for pathfinding"""
@@ -708,7 +691,6 @@ func fix_collision_issues() -> void:
 
 func setup_lod_system() -> void:
 	"""Initialize Level of Detail system"""
-	print("Setting up LOD system...")
 	
 	# Create LOD levels with different resolutions
 	lod_levels = [
@@ -722,7 +704,6 @@ func setup_lod_system() -> void:
 	for i in range(lod_levels.size()):
 		generate_lod_mesh(i)
 	
-	print("LOD system setup complete with %d levels" % lod_levels.size())
 
 func generate_lod_mesh(lod_index: int) -> void:
 	"""Generate mesh for specific LOD level"""
@@ -792,7 +773,6 @@ func generate_lod_mesh(lod_index: int) -> void:
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	lod_data.mesh = array_mesh
 	
-	print("Generated LOD %d with %dx%d resolution (%d vertices)" % [lod_index, lod_terrain_size, lod_terrain_size, vertices.size()])
 
 func update_lod_level() -> void:
 	"""Update LOD level based on player distance"""
@@ -832,7 +812,6 @@ func switch_to_lod(lod_index: int) -> void:
 	if enable_collision_optimization:
 		update_collision_for_lod(lod_index)
 	
-	print("Switched to LOD level %d" % lod_index)
 
 func update_collision_for_lod(lod_index: int) -> void:
 	"""Update collision shape for LOD level"""

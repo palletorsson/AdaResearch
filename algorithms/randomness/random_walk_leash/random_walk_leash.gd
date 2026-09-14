@@ -1145,7 +1145,6 @@ func apply_grid_config(config: Dictionary) -> void:
 
 	_clear_residue()
 	_build_residue()
-	print("[RandomWalkLeash] Config applied — residue=%s" % residue)
 
 
 func _read_meta_overrides() -> void:

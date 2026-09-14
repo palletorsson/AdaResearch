@@ -259,19 +259,15 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
-				print("Resetting network.")
 				reset_network()
 			KEY_T:
 				if not is_training:
-					print("Starting training.")
 					start_training()
 			KEY_SPACE:
 				# Test with a random input
 				var test_input = []
 				for i in range(input_layer_size): test_input.append(randf())
 				var result = test_network(test_input)
-				print("Test Input: ", test_input)
-				print("Network Output: ", result)
 
 #=============================================================================
 #  Initialization and Setup
@@ -634,7 +630,6 @@ func _run_training_batch() -> void:
 			if done_timer.get_parent() == self:
 				remove_child(done_timer)
 			done_timer.queue_free()
-		print("Training finished.")
 		return
 
 	var batch_inputs = []
@@ -936,7 +931,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[NeuralNetworkVisualization] Config applied — topology=%s presentation=%s" % [topology, presentation])
 
 ## Free ONLY what this script parented to self, then build again SYNCHRONOUSLY. No
 ## call_deferred anywhere in the build path: a deferred rebuild that removes children

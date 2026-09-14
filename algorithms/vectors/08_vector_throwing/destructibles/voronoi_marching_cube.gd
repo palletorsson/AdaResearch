@@ -17,7 +17,6 @@ func _ready() -> void:
 	call_deferred("_generate_voronoi_cube")
 
 func _generate_voronoi_cube() -> void:
-	print("VoronoiMarchingCube: Generating cube with ", cell_count, " cells")
 
 	# Generate Voronoi seed points within the cube
 	var voronoi_seeds = _generate_voronoi_seeds()
@@ -29,7 +28,6 @@ func _generate_voronoi_cube() -> void:
 	# Setup hit detection on the whole structure
 	_setup_hit_detection()
 
-	print("VoronoiMarchingCube: Generated ", _fragments.size(), " fragments")
 
 func _generate_voronoi_seeds() -> Array[Vector3]:
 	var seeds: Array[Vector3] = []
@@ -80,7 +78,6 @@ func _create_voronoi_fragment(seed: Vector3, all_seeds: Array[Vector3], index: i
 			collision_shape.shape = shape
 			fragment.add_child(collision_shape)
 
-		print("  Fragment ", index, " created at ", seed, " with mesh")
 	else:
 		print("  Fragment ", index, " - NO MESH GENERATED")
 		fragment.queue_free()
@@ -119,7 +116,6 @@ func _generate_voronoi_cell_mesh(seed: Vector3, all_seeds: Array[Vector3]) -> Ar
 
 	if vertex_count > 0:
 		surface_tool.generate_normals()
-		print("    Generated mesh with ~", vertex_count, " vertices")
 		return surface_tool.commit()
 
 	print("    No vertices generated for this cell")
@@ -250,7 +246,6 @@ func _on_body_entered(body: Node3D) -> void:
 	if not body.is_in_group("throwable"):
 		return
 
-	print("VoronoiMarchingCube: Hit by ", body.name)
 
 	var impact_velocity = Vector3.ZERO
 	if body is RigidBody3D:
@@ -263,7 +258,6 @@ func _destroy(impact_velocity: Vector3) -> void:
 		return
 
 	_is_destroyed = true
-	print("VoronoiMarchingCube: Exploding into ", _fragments.size(), " pieces!")
 
 	# Remove hit area
 	if _hit_area:

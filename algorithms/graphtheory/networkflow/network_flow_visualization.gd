@@ -142,7 +142,6 @@ func initialize_graph() -> void:
 	# Generate random graph structure
 	generate_graph_structure()
 	
-	print("Initialized network with ", nodes.size(), " nodes and ", edges.size(), " edges")
 
 func generate_node_positions() -> void:
 	"""Generate positions for nodes in a circular layout"""
@@ -421,7 +420,6 @@ func start_flow_computation() -> void:
 		_:
 			start_ford_fulkerson()
 	
-	print("Starting ", algorithm_type, " algorithm...")
 
 func start_ford_fulkerson() -> void:
 	"""Start Ford-Fulkerson algorithm"""
@@ -673,10 +671,6 @@ func finalize_computation() -> void:
 	if show_cut_visualization:
 		highlight_min_cut()
 	
-	print("Flow computation complete!")
-	print("Maximum flow: ", max_flow_value)
-	print("Number of augmenting paths: ", all_augmenting_paths.size())
-	print("Min cut nodes: ", min_cut_nodes)
 	
 	update_ui()
 
@@ -795,7 +789,6 @@ func change_algorithm(new_algorithm: String) -> void:
 	"""Change the flow algorithm"""
 	algorithm_type = new_algorithm
 	reset_network()
-	print("Changed to ", new_algorithm, " algorithm")
 
 func get_algorithm_info() -> Dictionary:
 	"""Get comprehensive algorithm information"""

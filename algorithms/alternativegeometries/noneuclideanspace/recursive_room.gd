@@ -200,7 +200,6 @@ func _create_recursive_portal(parent: Node3D, current_depth: int, position: Vect
 
 func _on_portal_entered(body: Node3D, depth: int, normal: Vector3, next_scale: Vector3) -> void:
 	if body is XROrigin3D:
-		print("Player entered portal at depth: " + str(depth))
 		
 		# Create the teleport effect
 		_teleport_player(body, depth, normal, next_scale)

@@ -32,7 +32,6 @@ var _stats_label: Label3D = null
 
 func _ready() -> void:
 	# Initialize NLP visualization
-	print("Natural Language Processing Visualization initialized")
 	create_text_particles()
 	create_result_particles()
 	create_flow_particles()

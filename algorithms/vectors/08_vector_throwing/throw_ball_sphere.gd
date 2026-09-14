@@ -48,8 +48,6 @@ func _ready() -> void:
 	picked_up.connect(_on_picked_up)
 	dropped.connect(_on_dropped)
 
-	# Debug: Print collision layers
-	print("[ThrowBall] Collision layer: ", collision_layer, " mask: ", collision_mask)
 
 func _setup_throwing_physics() -> void:
 	"""Configure physics for throwing"""
@@ -242,7 +240,6 @@ func _on_dropped(pickable: Variant) -> void:
 	# Ensure collision layer is still correct after drop
 	collision_layer |= 2
 
-	print("[ThrowBall] Dropped - velocity: ", throw_velocity.length(), " freeze: ", freeze, " layer: ", collision_layer)
 
 	# Keep velocity vector visible briefly
 	if velocity_arrow:

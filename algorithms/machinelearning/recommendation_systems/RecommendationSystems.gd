@@ -33,7 +33,6 @@ var _match_lines: Array = []  ## Lines connecting matched user-item pairs
 
 func _ready() -> void:
 	# Initialize Recommendation Systems visualization
-	print("Recommendation Systems Visualization initialized")
 	create_user_particles()
 	create_item_particles()
 	create_flow_particles()

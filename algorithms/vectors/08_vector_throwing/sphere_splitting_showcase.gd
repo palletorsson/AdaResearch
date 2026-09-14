@@ -253,7 +253,6 @@ func _on_sphere_split(_parent: Node3D, children: Array, sphere_name: String) -> 
 	_update_sphere_label(sphere_name)
 	_update_main_info(get_node_or_null("MainInfoLabel"))
 
-	print("[Showcase] %s split into %d pieces" % [sphere_name, children.size()])
 
 func _on_sector_destroyed(_sector: Node3D, _velocity: Vector3, sphere_name: String) -> void:
 	"""Handle when a sector is destroyed"""

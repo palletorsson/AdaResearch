@@ -568,7 +568,6 @@ func apply_theme_profile(theme_name: String) -> void:
 	reset_filter_state()
 	rebuild_audio_oscillators()
 	theme_timer = 0.0
-	print("SubtractiveSynthesis: activated %s theme" % theme_name)
 
 func rebuild_audio_oscillators() -> void:
 	audio_oscillators.clear()

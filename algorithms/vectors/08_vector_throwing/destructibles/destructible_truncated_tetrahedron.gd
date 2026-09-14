@@ -211,21 +211,19 @@ func _find_player_body() -> void:
 	var xr_origin = get_tree().get_first_node_in_group("xr_origin")
 	if xr_origin:
 		player_target = xr_origin
-		print("[KamikazeDrone] Found XROrigin3D: ", player_target.name)
 		return
 
 	# Try to find PlayerBody directly
 	var nodes = get_tree().get_nodes_in_group("player_body")
 	if nodes.size() > 0:
 		player_target = nodes[0]
-		print("[KamikazeDrone] Found player body: ", player_target.name)
 		return
 
 	# Fallback: search for PlayerBody by name
 	var root = get_tree().root
 	player_target = _find_player_recursive(root)
 	if player_target:
-		print("[KamikazeDrone] Found player: ", player_target.name)
+		pass
 	else:
 		print("[KamikazeDrone] WARNING: Could not find player")
 
@@ -283,7 +281,6 @@ func _kamikaze_explode() -> void:
 		return
 
 	has_exploded = true
-	print("[KamikazeDrone] EXPLODING! Dealing damage to player...")
 
 	# Calculate random damage between min and max percent
 	var damage_percent = rng.randf_range(min_damage_percent, max_damage_percent)
@@ -291,7 +288,6 @@ func _kamikaze_explode() -> void:
 
 	# Apply damage to player via GameManager
 	GameManager.apply_health_damage(damage_amount)
-	print("[KamikazeDrone] Dealt %.1f%% damage (%.1f HP)" % [damage_percent, damage_amount])
 
 	# Trigger visual explosion by destroying all parts
 	_explode_all_parts()

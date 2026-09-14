@@ -1491,7 +1491,6 @@ func apply_grid_config(config: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[SelfOrganizingPatterns] Config applied — cue=%s" % [cue])
 
 
 ## Accept an axis value only if it names something we actually build. A typo

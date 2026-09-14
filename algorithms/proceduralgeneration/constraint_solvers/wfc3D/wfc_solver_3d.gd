@@ -54,7 +54,6 @@ func _ready() -> void:
 			initial_collapsed_indices.append(i)
 	
 	# Initial Propagation: Constrain the empty cells based on the fixed base terrain
-	print("ðŸŒŠ Propagating initial constraints...")
 	for idx in initial_collapsed_indices:
 		if not _propagate(idx):
 			push_error("Initial propagation failed! Base terrain invalid.")
@@ -64,18 +63,16 @@ func _ready() -> void:
 	if not animate_generation:
 		var success = _run_rest_of_wfc_instant()
 		if success:
-			print("âœ… WFC (Instant) Completed!")
+			pass
 		else:
 			print("âŒ WFC (Instant) Failed!")
 	else:
-		print("â–¶ï¸ Starting WFC Animation...")
 		is_running = true
 
 func _process(_delta):
 	if is_running:
 		for i in range(steps_per_frame):
 			if cells_collapsed_count >= total_cells:
-				print("âœ… WFC (Animated) Completed!")
 				is_running = false
 				break
 				
@@ -112,7 +109,6 @@ func _load_prototypes() -> bool:
 		else:
 			push_warning("Skipping " + child.name + ": No sockets meta.")
 			
-	print("Loaded %d prototypes." % prototypes.size())
 	return true
 
 func _init_grid() -> void:
@@ -203,7 +199,6 @@ func _generate_base_terrain() -> void:
 		push_warning("âš ï¸ Biome tiles missing, skipping base terrain gen.")
 		return
 
-	print("ðŸŒ Generating Heightmap & Ramps...")
 	
 	# 1. Generate Raw Heightmap
 	var hmap = []

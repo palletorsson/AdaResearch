@@ -520,8 +520,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[AntColonyV2] Config applied — anchorage=%s, ants=%s, grid=%s" % [
-		anchorage, num_ants, grid_resolution])
 
 
 ## Free ONLY what this script made, then rebuild inline. No call_deferred: a

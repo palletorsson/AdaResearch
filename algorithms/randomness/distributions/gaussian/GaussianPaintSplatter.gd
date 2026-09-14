@@ -168,7 +168,6 @@ func _ready() -> void:
 	# returns immediately unless a bench asked for it.
 	_setup_seeded_streams()
 	_preroll()
-	print("GaussianPaintSplatter: Initialized with safe zone radius %.0f" % safe_zone_radius)
 
 # Initialize the image and texture
 func _initialize_texture() -> void:
@@ -217,7 +216,6 @@ func _on_timer_timeout() -> void:
 	if splatter_count % edge_detection_frequency == 0:
 		_detect_edges()
 		_create_outline_mesh()
-		print("GaussianPaintSplatter: Edge detection at splatter count %d" % splatter_count)
 
 # Add a splatter dot using Gaussian distribution
 func _add_gaussian_splatter() -> void:
@@ -368,7 +366,6 @@ func reset() -> void:
 	edge_points.clear()
 	splatter_count = 0
 	_create_outline_mesh()
-	print("GaussianPaintSplatter: Reset")
 
 func pause() -> void:
 	"""Pause splatter generation"""
@@ -381,12 +378,10 @@ func resume() -> void:
 func set_safe_zone_radius(radius: float) -> void:
 	"""Change the safe zone radius"""
 	safe_zone_radius = radius
-	print("GaussianPaintSplatter: Safe zone radius set to %.0f" % radius)
 
 func set_standard_deviation(new_stddev: float) -> void:
 	"""Change the standard deviation"""
 	stddev = new_stddev
-	print("GaussianPaintSplatter: Standard deviation set to %.1f" % stddev)
 
 func toggle_edge_outline() -> void:
 	"""Toggle edge outline visibility"""

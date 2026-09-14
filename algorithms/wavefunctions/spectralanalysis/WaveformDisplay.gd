@@ -41,7 +41,6 @@ func _ready() -> void:
 	_initialize_waveform()
 	_setup_mesh()
 	_setup_labels()
-	print("WaveformDisplay: Initialized with %d samples" % sample_count)
 
 	# Wait a moment for other audio systems to initialize first
 	await get_tree().process_frame
@@ -156,17 +155,14 @@ func _setup_audio_analysis() -> void:
 		print("WaveformDisplay: Bus '%s' not found, falling back to Master" % source_bus)
 		audio_bus_index = AudioServer.get_bus_index("Master")
 
-	print("WaveformDisplay: Monitoring audio bus '%s' (index %d)" % [source_bus, audio_bus_index])
 
 	# Try to find existing spectrum analyzer first
 	for i in range(AudioServer.get_bus_effect_count(audio_bus_index)):
 		var effect = AudioServer.get_bus_effect(audio_bus_index, i)
 		if effect is AudioEffectSpectrumAnalyzer:
 			spectrum_instance = AudioServer.get_bus_effect_instance(audio_bus_index, i) as AudioEffectSpectrumAnalyzerInstance
-			print("WaveformDisplay: Connected to existing spectrum analyzer on '%s'" % source_bus)
 			return
 
-	print("WaveformDisplay: Creating spectrum analyzer on '%s' bus" % source_bus)
 	spectrum_analyzer = AudioEffectSpectrumAnalyzer.new()
 	spectrum_analyzer.buffer_length = 0.5
 	spectrum_analyzer.fft_size = AudioEffectSpectrumAnalyzer.FFT_SIZE_1024
@@ -175,7 +171,6 @@ func _setup_audio_analysis() -> void:
 
 	var new_effect_count = AudioServer.get_bus_effect_count(audio_bus_index)
 	spectrum_instance = AudioServer.get_bus_effect_instance(audio_bus_index, new_effect_count - 1) as AudioEffectSpectrumAnalyzerInstance
-	print("WaveformDisplay: Created spectrum analyzer on '%s' bus" % source_bus)
 
 func set_source_bus(bus_name: String) -> void:
 	"""Change the audio bus being monitored"""

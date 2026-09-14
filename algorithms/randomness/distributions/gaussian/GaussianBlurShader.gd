@@ -36,7 +36,6 @@ func _ready() -> void:
 	if auto_start:
 		start()
 
-	print("GaussianBlurShader: Initialized (GPU-accelerated)")
 
 func _setup_shader_material() -> void:
 	"""Setup the shader material"""
@@ -84,12 +83,8 @@ func _process(delta: float) -> void:
 		# Update shader parameter
 		shader_material.set_shader_parameter("blur_amount", current_blur_radius)
 
-		# Debug output every 0.5 seconds
-		if int(blur_time * 2) != int((blur_time - delta) * 2):
-			print("GaussianBlurShader: Blur progress: %.1f%%, radius: %.2f" % [progress * 100, current_blur_radius])
 	else:
 		active = false
-		print("GaussianBlurShader: Animation complete")
 
 # Public API
 func start() -> void:
@@ -99,7 +94,6 @@ func start() -> void:
 	current_blur_radius = 0.0
 	if shader_material:
 		shader_material.set_shader_parameter("blur_amount", 0.0)
-	print("GaussianBlurShader: Started")
 
 func reset() -> void:
 	"""Reset to sharp circle"""
@@ -108,7 +102,6 @@ func reset() -> void:
 	active = false
 	if shader_material:
 		shader_material.set_shader_parameter("blur_amount", 0.0)
-	print("GaussianBlurShader: Reset to sharp circle")
 
 func pause() -> void:
 	"""Pause the blur animation"""

@@ -501,7 +501,6 @@ func apply_theme_profile(theme_name: String) -> void:
 	grain_position = audio_grain_position
 	theme_timer = 0.0
 	reset_audio_state()
-	print("GranularSynthesis: activated %s theme" % theme_name)
 
 func update_theme_cycle(delta: float) -> void:
 	theme_timer += delta

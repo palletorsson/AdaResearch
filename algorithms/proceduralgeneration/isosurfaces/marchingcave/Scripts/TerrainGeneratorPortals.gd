@@ -40,8 +40,6 @@ func _ready() -> void:
 		await tree_entered
 	await get_tree().create_timer(0.5).timeout  # Give portals time to initialize
 	
-	print("✅ TerrainGeneratorPortals: Complete!")
-	print("  - Check scene tree for Terrain and Portal_0 through Portal_%d nodes" % (num_portals - 1))
 
 func _create_terrain() -> void:
 	"""Create the base flat terrain"""
@@ -66,7 +64,6 @@ func _create_terrain() -> void:
 	# Add to tree AFTER configuration - this will trigger _ready()
 	add_child(terrain_mesh)
 	
-	print("✅ Terrain created")
 
 func _create_portals() -> void:
 	"""Create 7 torus portals at different positions"""
@@ -116,7 +113,6 @@ func _create_portals() -> void:
 		# Add portal marker/label
 		_create_portal_label(portal, i)
 	
-	print("✅ Created %d portals" % num_portals)
 
 func _create_portal_label(portal: MeshInstance3D, index: int) -> void:
 	"""Add a floating label above each portal"""

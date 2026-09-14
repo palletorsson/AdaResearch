@@ -43,7 +43,6 @@ func setup_components() -> void:
 	noise.frequency = noise_freq
 	noise.seed = randi()
 
-	print("GyroidFieldGenerator: Initialized")
 
 func calculate_gyroid_density(world_pos: Vector3) -> float:
 	"""
@@ -77,7 +76,6 @@ func calculate_gyroid_density(world_pos: Vector3) -> float:
 
 func generate_gyroid_mesh(parent_node: Node3D) -> MeshInstance3D:
 	"""Generate the gyroid mesh using marching cubes"""
-	print("GyroidFieldGenerator: Generating gyroid mesh...")
 	var start_time := Time.get_ticks_msec()
 
 	# Create voxel chunk for the gyroid volume
@@ -119,8 +117,6 @@ func generate_gyroid_mesh(parent_node: Node3D) -> MeshInstance3D:
 	parent_node.add_child(gyroid_mesh)
 
 	var elapsed := Time.get_ticks_msec() - start_time
-	print("GyroidFieldGenerator: Generated mesh in %d ms" % elapsed)
-	print("  Vertices: %d" % array_mesh.get_surface_count())
 
 	generation_complete.emit()
 
@@ -145,7 +141,6 @@ func fill_gyroid_chunk(chunk: VoxelChunk, offset: Vector3, scale: float) -> void
 				count += 1
 
 	chunk.is_dirty = false
-	print("GyroidFieldGenerator: Filled chunk with %d voxels" % count)
 
 func generate_collision(parent_node: Node3D) -> StaticBody3D:
 	"""Generate collision from the mesh"""
@@ -153,7 +148,6 @@ func generate_collision(parent_node: Node3D) -> StaticBody3D:
 		print("GyroidFieldGenerator: No mesh available for collision")
 		return null
 
-	print("GyroidFieldGenerator: Generating collision...")
 
 	collision_body = StaticBody3D.new()
 	collision_body.name = "GyroidCollision"
@@ -166,7 +160,6 @@ func generate_collision(parent_node: Node3D) -> StaticBody3D:
 	collision_body.add_child(collision_shape)
 	parent_node.add_child(collision_body)
 
-	print("GyroidFieldGenerator: Collision generated")
 
 	return collision_body
 

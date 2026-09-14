@@ -289,7 +289,6 @@ func initialize_population() -> void:
     evaluate_population()
     visualize_population()
     
-    print("Initialized population of ", population_size, " individuals")
 
 func create_random_genome() -> Genome:
     var genome = Genome.new()
@@ -388,7 +387,6 @@ func evaluate_population() -> void:
     best_genome = population[0]
     fitness_history.append(best_genome.fitness)
     
-    print("Generation ", current_generation, " - Best fitness: ", best_genome.fitness)
 
 func calculate_fitness(genome: Genome) -> float:
     var fitness = 0.0
@@ -496,7 +494,6 @@ func calculate_sphericity(genome: Genome) -> float:
 
 func evolve_generation() -> void:
     if current_generation >= max_generations:
-        print("Maximum generations reached")
         return
     
     var new_population: Array[Genome] = []

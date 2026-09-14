@@ -132,7 +132,6 @@ func _find_skeleton() -> void:
 		if _hip_bone_idx < 0:
 			_hip_bone_idx = _skeleton.find_bone("Hips")
 
-		print("ElphabaDress: Found skeleton, spine=%d, hip=%d" % [_spine_bone_idx, _hip_bone_idx])
 
 func _find_skeleton_recursive(node: Node) -> Skeleton3D:
 	if node is Skeleton3D:
@@ -207,7 +206,6 @@ func create_dress_mesh() -> void:
 	_precompute_vertex_params()
 
 	_initialized = true
-	print("ElphabaDress: Mesh created with %d vertex rows, %d packed verts" % [_base_vertices.size(), _base_vertices_packed.size()])
 
 func _precompute_vertex_params() -> void:
 	# For each vertex in the packed array, figure out which (i, j) grid cell it came from

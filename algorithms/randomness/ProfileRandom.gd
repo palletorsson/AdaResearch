@@ -123,7 +123,6 @@ func _ready() -> void:
 	generate_random_profile()
 	_built = true
 
-	print("SimpleRandomProfile: Created profile with %d points using RandomPlane" % point_count)
 
 func generate_random_profile() -> void:
 	"""Generate a random height profile using pure randomness"""
@@ -141,7 +140,6 @@ func generate_random_profile() -> void:
 		var point = Vector3(x_position, height, 0)
 		profile_points.append(point)
 		
-		print("Point %d: x=%.3f, height=%.3f" % [i, x_position, height])
 
 	# Create visual representation using the RandomPlane.
 	# READOUT dispatch, appended at the end of the generator and nowhere else: the
@@ -250,7 +248,6 @@ func _create_profile_mesh() -> void:
 	var mesh = surface_tool.commit()
 	profile_mesh.mesh = mesh
 	
-	print("Profile mesh created with %d points" % profile_points.size())
 
 func _add_quad(surface_tool: SurfaceTool, p1: Vector3, p2: Vector3, p3: Vector3, p4: Vector3) -> void:
 	"""Helper function to add a quad as two triangles"""
@@ -510,4 +507,3 @@ func apply_grid_config(config: Dictionary) -> void:
 			if profile_mesh.material_override != _shipped_material:
 				profile_mesh.material_override = _shipped_material
 			_create_profile_mesh()
-	print("[RandomEdgeProfile] Config applied — readout=%s" % [readout])

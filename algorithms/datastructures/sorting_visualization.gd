@@ -140,7 +140,6 @@ func start_sorting() -> void:
 		"merge_sort":
 			algorithm_state = {"size": 1}
 	
-	print("Starting ", sorting_algorithm, " with array size ", array.size())
 
 func perform_sorting_step() -> void:
 	match sorting_algorithm:

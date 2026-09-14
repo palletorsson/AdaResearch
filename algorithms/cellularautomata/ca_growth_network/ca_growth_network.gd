@@ -175,7 +175,6 @@ func _place_seeds() -> void:
 func grow_step() -> void:
 	if generation >= max_generations or active_tips.is_empty():
 		is_growing = false
-		print("Growth complete. Generation: ", generation, " Cells: ", grid.size())
 		return
 
 	var new_tips: Array[Vector3i] = []

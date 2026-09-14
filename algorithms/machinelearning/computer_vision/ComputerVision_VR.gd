@@ -164,7 +164,6 @@ var _owned: Array[Node] = []
 var _emissive: bool = true
 
 func _ready() -> void:
-	print("[ComputerVision_VR] Initializing computer vision workspace")
 	_build_all()
 	_built = true
 
@@ -875,7 +874,6 @@ func _apply_edge_detection(img: Array) -> Array:
 # Public API
 func apply_filter(filter_name: String) -> void:
 	"""Apply a filter to the input image"""
-	print("[CV] Applying filter: ", filter_name)
 	edge_map = _apply_edge_detection(input_image)
 
 func set_pixel_value(x: int, y: int, value: float) -> void:
@@ -916,7 +914,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if detection == before_detection:
 		return
 	_rebuild_now()
-	print("[ComputerVision_VR] Config applied - detection=%s" % [detection])
 
 
 ## Accept an axis value only if it names something this artifact actually builds. A

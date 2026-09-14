@@ -17,13 +17,11 @@ var viewport: SubViewport
 
 func _ready() -> void:
 	# Get the viewport
-	print("SpectralDisplayController [%s]: Looking for viewport at path: %s" % [name, viewport_node_path])
 	viewport = get_node(viewport_node_path) as SubViewport
 	if not viewport:
 		print("SpectralDisplayController [%s]: Could not find viewport at path: %s" % [name, viewport_node_path])
 		return
 	
-	print("SpectralDisplayController [%s]: Found viewport: %s" % [name, viewport.name])
 	
 	# Wait a frame for the viewport to initialize
 	await get_tree().process_frame
@@ -43,9 +41,6 @@ func _ready() -> void:
 		# Ensure proper texture filtering and wrapping
 		material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR
 		
-		print("SpectralDisplayController [%s]: Connected viewport texture to display material" % name)
-		print("SpectralDisplayController [%s]: Viewport: %s, Size: %s" % [name, viewport.name, viewport.size])
-		print("SpectralDisplayController [%s]: Texture size: %s" % [name, viewport_texture.get_size()])
 	else:
 		print("SpectralDisplayController: No StandardMaterial3D found") 
 

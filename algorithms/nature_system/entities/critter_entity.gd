@@ -70,10 +70,6 @@ func _on_dna_changed() -> void:
 	if not dna:
 		return
 
-	if debug_mode:
-		print("[CritterEntity: %s] DNA changed — kingdom: %s, gen: %d" % [
-			name, dna.get_kingdom_name(), dna.generation
-		])
 
 	# Store DNA reference in metadata for debug tools
 	set_meta("dna", dna)
@@ -101,10 +97,6 @@ func _apply_visual_traits() -> void:
 	_collect_mesh_instances()
 	_apply_materials()
 
-	if debug_mode:
-		print("[CritterEntity: %s] Applied visual traits to %d meshes" % [
-			name, _mesh_instances.size()
-		])
 
 
 ## Set gameplay parameters from DNA (speed, energy, behavior).
@@ -120,10 +112,6 @@ func _apply_gameplay_traits() -> void:
 	# Scale from DNA (growth_factor applied during growth chamber updates)
 	scale = Vector3.ONE * dna.scale
 
-	if debug_mode:
-		print("[CritterEntity: %s] Applied gameplay traits — energy: %.1f, scale: %.2f" % [
-			name, _max_energy, dna.scale
-		])
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -181,10 +169,6 @@ func _apply_materials() -> void:
 		if _bond_level > 0.01 and mmi.material_override is ShaderMaterial:
 			_trait_mapper.apply_bond_overlay(mmi.material_override, dna, _bond_level)
 
-	if debug_mode:
-		print("[CritterEntity: %s] Applied materials to %d meshes + %d multimeshes (seed: %d)" % [
-			name, _mesh_instances.size(), _multimesh_instances.size(), base_seed
-		])
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -232,10 +216,6 @@ func interact(action: String) -> void:
 
 	set_bond_level(_bond_level + delta)
 
-	if debug_mode:
-		print("[CritterEntity: %s] Interaction '%s' → bond: %.2f (delta: %.3f)" % [
-			name, action, _bond_level, delta
-		])
 
 
 ## Update all mesh materials to reflect current bond level.
@@ -363,8 +343,6 @@ func _attach_tree_walker() -> void:
 	walker.name = "TreeWalker"
 	add_child(walker)
 	walker.setup(dna, self)
-	if debug_mode:
-		print("[CritterEntity: %s] Walking tree! mobility=%.2f" % [name, dna.mobility])
 
 
 func apply_grid_config(config: Dictionary) -> void:

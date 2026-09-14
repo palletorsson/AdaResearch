@@ -82,7 +82,6 @@ func start_generation() -> void:
 	clear_cubes()
 	clear_generated_mesh()
 	
-	print("Dropping %d cubes..." % num_cubes)
 	drop_cubes()
 	state = "dropping"
 	timer = 0.0
@@ -140,7 +139,6 @@ func drop_cubes() -> void:
 		add_child(cube)
 		cubes.append(cube)
 	
-	print("Cubes dropped! Waiting for settlement...")
 
 ## Re-shape one already-drawn spawn into the geometry `release` names.
 ##
@@ -195,13 +193,11 @@ func _process(delta: float) -> void:
 		
 		# Force generation after settle_time regardless
 		if timer > settle_time or all_settled:
-			print("Cubes settled! Generating mesh...")
 			state = "generating"
 			# Wait a moment for physics to fully settle
 			await get_tree().create_timer(0.5).timeout
 			generate_mesh_from_cubes()
 			state = "done"
-			print("Mesh generation complete!")
 
 func generate_mesh_from_cubes() -> void:
 	# Get all cube positions (using global position for accuracy)
@@ -286,7 +282,6 @@ func generate_mesh_from_cubes() -> void:
 		collider.shape = tri_shape
 		static_body.add_child(collider)
 		add_child(static_body)
-		print("Collider created with %d triangles" % [tri_shape.get_faces().size() / 3])
 	else:
 		print("WARNING: Failed to create trimesh shape for collider")
 

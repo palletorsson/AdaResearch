@@ -27,7 +27,6 @@ func _ready() -> void:
 	
 	# Start adding cubes
 	timer.start()
-	print("Started randomly adding cubes to grid. Bounding box: ", bounding_box_min, " to ", bounding_box_max)
 
 func _on_add_timer_timeout() -> void:
 	"""Called every add_interval seconds to add a random cube"""
@@ -41,13 +40,11 @@ func _on_add_timer_timeout() -> void:
 	
 	# Check if position is already occupied
 	if is_position_occupied(random_pos):
-		print("Position occupied, trying again: ", random_pos)
 		return
 	
 	# Create and add the cube
 	add_cube_at_position(random_pos)
 	current_cube_count += 1
-	print("Added cube #", current_cube_count, " at position: ", random_pos)
 
 func generate_random_position() -> Vector3:
 	"""Generate a random position within the bounding box"""
@@ -84,37 +81,31 @@ func add_cube_at_position(pos: Vector3) -> void:
 	add_child(cube_instance)
 	added_cubes.append(cube_instance)
 	
-	print("Created cube: ", cube_instance.name, " at ", pos)
 
 func set_bounding_box(min_pos: Vector3, max_pos: Vector3) -> void:
 	"""Set the bounding box for random cube placement"""
 	bounding_box_min = min_pos
 	bounding_box_max = max_pos
-	print("Updated bounding box: ", bounding_box_min, " to ", bounding_box_max)
 
 func set_add_interval(interval: float) -> void:
 	"""Set how often to add cubes (in seconds)"""
 	add_interval = interval
 	if timer:
 		timer.wait_time = interval
-	print("Updated add interval to: ", interval, " seconds")
 
 func set_max_cubes(max: int) -> void:
 	"""Set maximum number of cubes to add"""
 	max_cubes = max
-	print("Updated max cubes to: ", max)
 
 func stop_adding() -> void:
 	"""Stop adding cubes"""
 	if timer:
 		timer.stop()
-	print("Stopped adding cubes. Total cubes: ", current_cube_count)
 
 func start_adding() -> void:
 	"""Start adding cubes"""
 	if timer:
 		timer.start()
-	print("Started adding cubes")
 
 func clear_all_cubes() -> void:
 	"""Remove all added cubes"""
@@ -123,7 +114,6 @@ func clear_all_cubes() -> void:
 			cube.queue_free()
 	added_cubes.clear()
 	current_cube_count = 0
-	print("Cleared all cubes")
 
 func get_cube_count() -> int:
 	"""Get current number of cubes"""

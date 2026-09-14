@@ -519,7 +519,6 @@ func force_remove_pink_cube_collisions() -> void:
 						if collision_body:
 							cube_node.remove_child(collision_body)
 							collision_body.queue_free()
-							print("Removed collision from pink cube at ", x, ",", y, ",", z)
 
 func _exit_tree() -> void:
 	for child in get_children():

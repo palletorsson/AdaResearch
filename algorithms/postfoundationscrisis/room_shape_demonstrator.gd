@@ -99,7 +99,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if plan == before_plan:
 		return
 	_rebuild_now()
-	print("[RoomShapeDemonstrator] Config applied — plan=%s" % [plan])
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a

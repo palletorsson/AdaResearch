@@ -200,7 +200,6 @@ func start_pathfinding() -> void:
 	frontier.append({"pos": start_pos, "distance": 0})
 	algorithm_running = true
 	
-	print("Starting pathfinding from ", start_pos, " to ", goal_pos)
 
 func pathfinding_step() -> void:
 	if frontier.is_empty():
@@ -235,7 +234,6 @@ func pathfinding_step() -> void:
 	if pos == goal_pos:
 		algorithm_running = false
 		reconstruct_path()
-		print("Path found!")
 		return
 	
 	# Check neighbors

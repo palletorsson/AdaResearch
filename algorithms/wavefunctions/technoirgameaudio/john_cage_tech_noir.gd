@@ -440,10 +440,9 @@ func animate_loading_bar(delta) -> void:
 	loading_bar_container.rotation_degrees.y += delta * 5
 
 func _on_generation_started() -> void:
-	print("Sound generation started...")
+	pass
 
 func _on_sound_created(sound_name: String) -> void:
-	print("Created: " + sound_name)
 	_maybe_start_stream(sound_name)
 	if progress_text:
 		progress_text.text = "Created: " + sound_name.replace("_", " ").capitalize()
@@ -466,7 +465,6 @@ func _on_progress_updated(progress: float) -> void:
 		loading_text.text = "Generating Sounds... " + str(percentage) + "%"
 
 func _on_generation_complete() -> void:
-	print("Sound generation complete!")
 	
 	# Hide loading bar with fade effect
 	if loading_bar_container:

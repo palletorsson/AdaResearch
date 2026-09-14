@@ -69,7 +69,6 @@ func setup_components(seed_value: int = -1) -> void:
 	# Setup noise generators
 	setup_noise_generators(seed_value)
 	
-	print("TerrainGenerator: Components initialized")
 
 func setup_noise_generators(seed_value: int) -> void:
 	"""Setup multiple noise layers for terrain variation"""
@@ -118,7 +117,6 @@ func configure_terrain(params: Dictionary) -> void:
 		# Enable debug mode to eliminate holes
 		debug_disable_surface_variation = params.get("debug_mode", false)
 		debug_minimum_density = params.get("min_density", 0.7)
-		print("TerrainGenerator: Debug mode enabled - surface variation: %s, min density: %.2f" % [not debug_disable_surface_variation, debug_minimum_density])
 	# Additive: a caller that never sends these keys keeps 1.0 / 0.2 / 0.3 untouched.
 	if params.has("height_weight"):
 		height_weight = params.height_weight
@@ -129,34 +127,28 @@ func configure_terrain(params: Dictionary) -> void:
 
 func generate_terrain_async() -> Array[MeshInstance3D]:
 	"""Generate terrain asynchronously"""
-	print("TerrainGenerator: Starting terrain generation...")
 	
 	# Clear previous generation
 	clear_previous_terrain()
 	
 	# Step 1: Create voxel grid
-	print("TerrainGenerator: Step 1/4 - Creating voxel grid...")
 	create_terrain_voxel_grid()
 	generation_progress.emit(25.0)
 	await Engine.get_main_loop().process_frame
 	
 	# Step 2: Generate height field
-	print("TerrainGenerator: Step 2/4 - Generating height field...")
 	await generate_height_field_async()
 	generation_progress.emit(50.0)
 	
 	# Step 3: Generate meshes
-	print("TerrainGenerator: Step 3/4 - Generating meshes...")
 	await generate_terrain_meshes_async()
 	generation_progress.emit(75.0)
 	
 	# Step 4: Create collision
-	print("TerrainGenerator: Step 4/4 - Creating collision...")
 	generate_walkable_collision()
 	generation_progress.emit(100.0)
 	
 	generation_complete.emit()
-	print("TerrainGenerator: Terrain generation complete!")
 
 	return terrain_meshes
 
@@ -186,7 +178,6 @@ func generate_terrain_sync() -> Array[MeshInstance3D]:
 	generation_progress.emit(100.0)
 
 	generation_complete.emit()
-	print("TerrainGenerator: Terrain generation complete (synchronous)!")
 
 	return terrain_meshes
 
@@ -204,7 +195,6 @@ func create_terrain_voxel_grid() -> void:
 	var chunks_z = int(ceil(terrain_size.y / chunk_world_size_z))
 	var chunks_y = 1  # Single layer for terrain
 	
-	print("Creating %dx%dx%d terrain chunks (seamless boundaries)" % [chunks_x, chunks_y, chunks_z])
 	
 	# Create chunks with precise positioning for seamless boundaries
 	for x in range(chunks_x):
@@ -223,11 +213,9 @@ func create_terrain_voxel_grid() -> void:
 	# Setup neighbor connections for reference (not used for density lookup anymore)
 	setup_chunk_neighbors(chunks_x, chunks_y, chunks_z)
 	
-	print("Created %d terrain chunks with seamless boundary handling" % terrain_chunks.size())
 
 func setup_chunk_neighbors(chunks_x: int, chunks_y: int, chunks_z: int) -> void:
 	"""Setup neighbor connections between chunks for seamless boundaries (inspired by reference)"""
-	print("TerrainGenerator: Setting up chunk neighbor connections...")
 	
 	for x in range(chunks_x):
 		for y in range(chunks_y):
@@ -263,7 +251,6 @@ func setup_chunk_neighbors(chunks_x: int, chunks_y: int, chunks_z: int) -> void:
 							var neighbor_chunk = terrain_chunks[neighbor_index]
 							current_chunk.set_neighbor_chunk(offset, neighbor_chunk)
 	
-	print("TerrainGenerator: Chunk neighbor connections established")
 
 func generate_height_field_async() -> void:
 	"""Generate height field data asynchronously"""
@@ -301,7 +288,6 @@ func fill_chunk_with_terrain(chunk: VoxelChunk) -> void:
 	# Mark chunk as clean after filling
 	chunk.is_dirty = false
 	
-	print("TerrainGenerator: Filled chunk %s with hole-free density data" % chunk.chunk_name)
 
 func calculate_terrain_density(world_pos: Vector3) -> float:
 	"""Calculate density value for terrain at world position - HOLE-FREE VERSION"""
@@ -390,7 +376,6 @@ func build_chunk_mesh(i: int) -> void:
 
 		terrain_meshes.append(mesh_instance)
 
-		print("Generated terrain mesh chunk %d/%d" % [i + 1, terrain_chunks.size()])
 
 func create_terrain_material(chunk_index: int) -> StandardMaterial3D:
 	"""Create material for terrain surface"""

@@ -9,7 +9,6 @@ var particle_count: int = 25
 
 func _ready() -> void:
 	# Initialize algorithmic bias visualization
-	print("Algorithmic Bias Visualization initialized")
 	create_data_groups()
 	create_bias_indicators()
 	create_impact_visualization()

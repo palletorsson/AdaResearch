@@ -272,8 +272,6 @@ func _ready() -> void:
 	_create_cell_grid()
 	_build_page_furniture()
 	_built = true
-	print("[RandomNumberBook] Live cascade started — %dx%d grid, speed %.1f rows/s, disclosure=%s" % [
-		_built_cols, _built_rows, cascade_speed, disclosure])
 
 func _process(delta: float) -> void:
 	if _pinned:

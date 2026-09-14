@@ -30,7 +30,6 @@ func _ready() -> void:
 	portal_manager.portal_entered.connect(_on_portal_entered)
 	portal_manager.portal_exited.connect(_on_portal_exited)
 	
-	print("Non-Euclidean Space Demo initialized")
 
 func _setup_debug_overlay() -> void:
 	debug_overlay = CanvasLayer.new()

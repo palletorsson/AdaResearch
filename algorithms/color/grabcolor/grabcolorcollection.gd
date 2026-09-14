@@ -310,7 +310,6 @@ func create_grab_paper_stack() -> void:
 		set_paper_color(paper_instance, color)
 
 		add_child(paper_instance)
-		print("Created GrabPaper_%d at grid position (col:%d, row:%d) with color: %s" % [i, col, row, color])
 
 func get_color_from_current_palette(paper_index: int) -> Color:
 	if palette_keys.is_empty():
@@ -330,7 +329,6 @@ func update_paper_colors() -> void:
 	var current_key = palette_keys[current_palette_index % palette_keys.size()]
 	var colors = _get_palette_colors(current_key)
 	var palette_title = _get_palette_title(current_key)
-	print("Using palette: %s" % palette_title)
 
 	for i in range(10):
 		var paper_name = "GrabPaper_%d" % i
@@ -338,7 +336,6 @@ func update_paper_colors() -> void:
 		if paper_instance:
 			var color = colors[i % colors.size()] if colors.size() > 0 else Color.WHITE
 			set_paper_color(paper_instance, color)
-			print("Updated %s with color: %s" % [paper_name, color])
 
 func set_paper_color(paper_instance: Node3D, color: Color) -> void:
 	var mesh_instance = paper_instance.get_node_or_null("MeshInstance3D")
@@ -394,7 +391,6 @@ func add_paper_to_top() -> void:
 	set_paper_color(paper_instance, color)
 
 	add_child(paper_instance)
-	print("Added paper at grid position (col:%d, row:%d) with color: %s" % [col, row, color])
 
 func cycle_to_next_palette() -> void:
 	if palette_keys.is_empty():
@@ -417,7 +413,6 @@ func remove_top_paper() -> void:
 
 	if papers.size() > 0:
 		var top_paper = papers[-1]
-		print("Removing paper: %s" % top_paper.name)
 		top_paper.queue_free()
 
 func _exit_tree() -> void:

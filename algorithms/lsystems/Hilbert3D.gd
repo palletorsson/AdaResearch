@@ -91,7 +91,6 @@ func _ready() -> void:
 		current_generation = generations
 
 	update_info_label()
-	print("Hilbert3D: 3D Space-Filling Curve - Generations: %d" % generations)
 
 func _process(delta: float) -> void:
 	# Handle generation animation
@@ -120,7 +119,6 @@ func _process(delta: float) -> void:
 
 		if current_segment_index >= all_segments.size():
 			is_animating = false
-			print("Hilbert3D: Animation complete!")
 
 func create_info_labels() -> void:
 	"""Create info labels"""
@@ -193,7 +191,6 @@ func increase_generations() -> void:
 		draw_lsystem()
 		if generation_controller:
 			generation_controller.set_value(float(generations))
-		print("Generations increased to: %d" % generations)
 
 func decrease_generations() -> void:
 	"""Decrease generation count"""
@@ -206,7 +203,6 @@ func decrease_generations() -> void:
 		draw_lsystem()
 		if generation_controller:
 			generation_controller.set_value(float(generations))
-		print("Generations decreased to: %d" % generations)
 
 func reset() -> void:
 	"""Reset L-System and turtle"""

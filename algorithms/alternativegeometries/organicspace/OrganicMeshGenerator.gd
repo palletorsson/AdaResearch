@@ -4,7 +4,7 @@ class_name OrganicMeshGenerator
 extends Node
 
 func _ready() -> void:
-	print("Organic mesh generator initialized")
+	pass
 
 func generate_organic_surface(size: Vector3, complexity: int) -> ArrayMesh:
 	"""Generate organic surface using procedural techniques"""

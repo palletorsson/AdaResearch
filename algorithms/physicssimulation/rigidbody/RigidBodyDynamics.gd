@@ -43,7 +43,6 @@ func _ready() -> void:
 	create_restitution_demo()
 	create_ui()
 	
-	print("Rigid Body Dynamics - Grab blocks and throw them in VR!")
 
 # ===========================================================================
 # VR CONTROLLER SETUP

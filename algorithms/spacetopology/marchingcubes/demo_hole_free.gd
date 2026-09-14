@@ -8,7 +8,6 @@ var terrain_generator: TerrainGenerator
 var terrain_meshes: Array[MeshInstance3D] = []
 
 func _ready() -> void:
-	print("🌍 Hole-Free Marching Cubes Demo")
 	generate_demo_terrain()
 
 func generate_demo_terrain() -> void:
@@ -26,7 +25,6 @@ func generate_demo_terrain() -> void:
 		"debug_mode": false                # Enable surface variation for natural look
 	})
 	
-	print("📐 Terrain configured: 40x40 units, 8 unit height")
 	
 	# Generate terrain asynchronously (non-blocking)
 	var meshes = await terrain_generator.generate_terrain_async()
@@ -96,7 +94,6 @@ func regenerate_terrain() -> void:
 	# Generate with new seed
 	terrain_generator = TerrainGenerator.new()
 	generate_demo_terrain()
-	print("🔄 Terrain regenerated with new seed")
 
 func toggle_debug_mode() -> void:
 	"""Toggle debug mode to eliminate surface variation"""
@@ -106,14 +103,12 @@ func toggle_debug_mode() -> void:
 			"debug_mode": not current_debug
 		})
 		regenerate_terrain()
-		print("🐛 Debug mode: %s" % ("ON" if not current_debug else "OFF"))
 
 func toggle_wireframe_mode() -> void:
 	"""Toggle wireframe rendering for mesh inspection"""
 	if terrain_generator:
 		terrain_generator.debug_wireframe_mode = not terrain_generator.debug_wireframe_mode
 		regenerate_terrain()
-		print("📐 Wireframe mode: %s" % ("ON" if terrain_generator.debug_wireframe_mode else "OFF"))
 
 func show_help() -> void:
 	"""Display help information"""

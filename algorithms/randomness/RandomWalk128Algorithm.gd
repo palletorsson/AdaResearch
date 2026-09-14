@@ -203,10 +203,6 @@ func _ready() -> void:
 	# is untouched to the bit.
 	if walk_seed >= 0:
 		seed(walk_seed)
-	print("RandomWalk128: Initializing 128x128 random walk system")
-	print("Grid size: %dx%d cubes" % [GRID_SIZE, GRID_SIZE])
-	print("Area size: %.1fx%.1f meters" % [GRID_AREA_SIZE, GRID_AREA_SIZE])
-	print("Cube size: %.4f meters (%.1f cm)" % [CUBE_SIZE, CUBE_SIZE * 100])
 	
 	# Load cube scene
 	cube_scene_resource = load(CUBE_SCENE_PATH)
@@ -234,10 +230,7 @@ func _ready() -> void:
 		_create_walker_indicator()
 	
 	if auto_start:
-		print("RandomWalk128: Auto-start enabled, starting walk...")
 		call_deferred("start_walk")
-	else:
-		print("RandomWalk128: Auto-start disabled. Use Space to start manually.")
 
 	# APPENDED LAST, all three, so every line above runs in its legacy order and
 	# consumes its legacy draws. At the shipped defaults (preroll_steps 0,
@@ -283,7 +276,6 @@ func _generate_step_sound() -> AudioStreamWAV:
 
 func _initialize_grid() -> void:
 	"""Initialize the 128x128 grid arrays"""
-	print("RandomWalk128: Initializing grid arrays...")
 	
 	grid.resize(GRID_SIZE)
 	cube_instances.resize(GRID_SIZE)
@@ -298,7 +290,6 @@ func _initialize_grid() -> void:
 			grid[x][z] = 0.0  # Initial height
 			cube_instances[x][z] = null  # No cube initially
 	
-	print("RandomWalk128: Grid initialized (%d x %d)" % [GRID_SIZE, GRID_SIZE])
 
 func _create_walker_indicator() -> void:
 	"""Create a visual indicator for the walker position"""
@@ -326,8 +317,6 @@ func start_walk() -> void:
 	if is_running:
 		return
 	
-	print("RandomWalk128: Starting random walk from center position")
-	print("Target steps: %d" % total_steps)
 	
 	is_running = true
 	current_step = 0
@@ -340,7 +329,6 @@ func stop_walk() -> void:
 	"""Stop the random walk"""
 	is_running = false
 	step_timer.stop()
-	print("RandomWalk128: Walk stopped at step %d" % current_step)
 
 func _step_walk() -> void:
 	"""Execute multiple walk steps per frame for performance"""
@@ -529,7 +517,6 @@ func _clear_all_cubes() -> void:
 func set_walk_speed(new_steps_per_frame: int) -> void:
 	"""Change the walking speed"""
 	steps_per_frame = clamp(new_steps_per_frame, 1, 100)
-	print("RandomWalk128: Speed set to %d steps per frame" % steps_per_frame)
 
 func get_walk_info() -> Dictionary:
 	"""Get current walk information"""
@@ -845,7 +832,6 @@ func apply_grid_config(config: Dictionary) -> void:
 	_clear_residue()
 	_refresh_residue()
 	_build_residue()
-	print("[RandomWalk128] Config applied — residue=%s" % residue)
 
 
 func _read_meta_overrides() -> void:

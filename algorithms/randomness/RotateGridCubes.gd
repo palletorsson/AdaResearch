@@ -87,7 +87,6 @@ func _ready() -> void:
 	if multimesh_instance:
 		multimesh = multimesh_instance.multimesh
 		if multimesh and multimesh.instance_count > 0:
-			print("RotateGridCubes: Found MultiMesh with %d instances" % multimesh.instance_count)
 
 			# Store initial transforms
 			for i in range(multimesh.instance_count):
@@ -133,7 +132,6 @@ func _calculate_pattern() -> void:
 	for section in _pattern:
 		_section_starts.append(_cycle_length)
 		_cycle_length += section[0]
-	print("RotateGridCubes: score '%s' cycle = %d rows, grain '%s'" % [score, _cycle_length, grain])
 
 func _find_multimesh_instance(node: Node) -> MultiMeshInstance3D:
 	if node is MultiMeshInstance3D:
@@ -148,7 +146,6 @@ func rotate_all_cubes() -> void:
 	if not multimesh:
 		return
 
-	print("RotateGridCubes: Applying Z→flat→Y→flat→X(-)→flat→All→flat pattern")
 
 	if use_animation:
 		animate_rotation()
@@ -251,7 +248,6 @@ func _rotate_collision_cubes() -> void:
 			child.rotation_degrees = Vector3(rot.x, rot.y, rot.z)
 			rotated_count += 1
 	
-	print("RotateGridCubes: Rotated %d collision cubes" % rotated_count)
 
 # Simple config for map parameters.
 #

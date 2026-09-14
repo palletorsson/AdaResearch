@@ -39,9 +39,6 @@ func setup_progress_bar() -> void:
 	progress_container.scale = Vector3(3.0, 3.0, 3.0)  # Even larger for VR
 	add_child(progress_container)
 	
-	# Debug: Print position for troubleshooting
-	print("Progress bar positioned at: ", progress_container.position)
-	print("Progress bar scale: ", progress_container.scale)
 	
 	# Background bar
 	progress_background = MeshInstance3D.new()
@@ -102,8 +99,6 @@ func update_progress_bar() -> void:
 	var percentage = int(current_progress * 100)
 	progress_text.text = str(percentage) + "%"
 	
-	# Debug output
-	print("Progress bar updated: ", percentage, "% - Fill width: ", fill_width)
 	
 	# Color transition as progress increases
 	var progress_color = Color(0.2, 0.8, 1.0).lerp(Color(0.8, 1.0, 0.2), current_progress)

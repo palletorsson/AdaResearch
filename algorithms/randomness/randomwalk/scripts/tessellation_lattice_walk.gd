@@ -100,10 +100,6 @@ func _ready() -> void:
 	# writes back the CUBE the enum already held, so nothing moves.
 	_resolve_cell()
 
-	print("=== Tessellation Lattice Walk ===")
-	print("Type: ", TessellationType.keys()[tessellation_type])
-	print("Grid size: ", grid_size)
-	print("Total cells: ", grid_size.x * grid_size.y * grid_size.z)
 
 	# Create the mesh for the selected tessellation type
 	create_cell_mesh()
@@ -199,7 +195,6 @@ func create_cell_mesh() -> void:
 		TessellationType.TRUNCATED_OCTAHEDRON:
 			cell_mesh = create_truncated_octahedron_mesh()
 
-	print("Cell mesh created: ", cell_mesh.get_faces().size(), " faces")
 
 func create_cube_mesh() -> Mesh:
 	"""Create a simple cube mesh"""
@@ -546,7 +541,6 @@ func generate_lattice() -> void:
 				lattice_transforms.append(transform)
 				index += 1
 
-	print("Generated lattice with ", lattice_positions.size(), " cells")
 
 func generate_walk_path() -> void:
 	"""Create a TRUE random walk path through the lattice (neighbor to neighbor)"""
@@ -566,7 +560,6 @@ func generate_walk_path() -> void:
 	walk_path.append(current_index)
 	visited[current_index] = true
 
-	print("Starting random walk from index ", start_index, " at ", lattice_positions[start_index])
 
 	# Continue until all cells are visited
 	while walk_path.size() < total_cells:
@@ -591,10 +584,7 @@ func generate_walk_path() -> void:
 				break
 
 		# Progress indicator
-		if walk_path.size() % 100 == 0:
-			print("Walk progress: ", walk_path.size(), " / ", total_cells)
 
-	print("Generated neighbor-based random walk with ", walk_path.size(), " steps")
 
 func _get_unvisited_neighbors(index: int, visited: Dictionary) -> Array[int]:
 	"""Get all unvisited neighbors of a cell"""
@@ -674,7 +664,6 @@ func setup_multimesh() -> void:
 	multimesh_instance.material_override = material
 	add_child(multimesh_instance)
 
-	print("Multimesh setup complete")
 
 func reveal_next_cell() -> void:
 	"""Reveal the next cell in the walk path"""
@@ -695,8 +684,6 @@ func reveal_next_cell() -> void:
 
 	current_walk_index += 1
 
-	if current_walk_index % 100 == 0:
-		print("Revealed ", current_walk_index, " / ", walk_path.size(), " cells")
 
 func reveal_all() -> void:
 	"""Reveal all cells at once"""
@@ -717,7 +704,6 @@ func reset_walk() -> void:
 	# Optionally regenerate walk path
 	generate_walk_path()
 
-	print("Walk reset")
 
 ## Public API
 func pause_walk() -> void:

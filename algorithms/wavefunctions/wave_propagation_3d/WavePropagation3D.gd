@@ -101,7 +101,6 @@ func setup_soundscape() -> void:
 	var WaveSoundscape = load("res://algorithms/wavefunctions/wave_propagation_3d/WaveSoundscapeComponent.gd")
 	soundscape = WaveSoundscape.new()
 	add_child(soundscape)
-	print("WavePropagation: Soundscape component initialized.")
 
 func create_wave_surface() -> void:
 	var surface_parent = $WaveSurface

@@ -5,7 +5,6 @@ extends Node3D
 @onready var combiner = $CSGCombiner3D_c_x
 
 func _ready() -> void:
-	print("🧪 Testing CSG carving - duplicating subtract sphere...")
 	
 	# Create a row of subtracting spheres along X axis
 	var num_spheres = 5
@@ -25,9 +24,7 @@ func _ready() -> void:
 		
 		# Add as child of CSGCombiner3D (sibling to body and original subtract)
 		combiner.add_child(new_sphere)
-		print("  ✓ Duplicated sphere at x=", x_pos, " radius=", sphere_radius)
 		
-	print("✅ Created ", num_spheres, " carving spheres in a row")
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass

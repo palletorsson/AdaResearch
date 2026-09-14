@@ -148,7 +148,6 @@ func create_terrain_collision() -> void:
 	static_body.add_child(collision_shape)
 	surface_mesh.add_child(static_body)
 
-	print("Terrain collision created with ", faces.size() / 3, " triangles")
 
 func generate_scatter_points() -> void:
 	# Sample points across the surface mesh

@@ -43,7 +43,6 @@ func _spawn_pendulum_grid() -> void:
 			add_child(pendulum)
 			pendulums.append(pendulum)
 	
-	print("PendulumGrid3x3: Spawned %d independent pendulum units" % pendulums.size())
 
 func _create_pendulum(row: int, col: int) -> Node3D:
 	"""Create a complete DoublePendulum instance with its own canvas"""

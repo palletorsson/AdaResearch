@@ -95,7 +95,6 @@ func generate_samples() -> void:
         if not found:
             active_list.remove_at(random_index)
     
-    print("Generated ", sample_points.size(), " sample points")
     visualize_samples()
 
 func get_initial_point() -> Vector3:

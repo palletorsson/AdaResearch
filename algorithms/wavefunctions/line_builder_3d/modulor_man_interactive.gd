@@ -54,7 +54,6 @@ func _spawn_modulor_points() -> void:
 		parent.add_child(p)
 		points.append(p)
 
-	print("Modulor Man Interactive: Spawned %d grabbable points" % points.size())
 
 func _get_modulor_positions() -> Array[Vector3]:
 	var positions: Array[Vector3] = []

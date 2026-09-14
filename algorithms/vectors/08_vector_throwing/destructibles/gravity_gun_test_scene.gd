@@ -124,7 +124,6 @@ func spawn_spheres() -> void:
 		_:
 			spawn_grid_pattern()
 
-	print("[GravityGunTest] Spawned ", spawned_spheres.size(), " spheres in ", arrangement, " arrangement")
 
 func spawn_grid_pattern() -> void:
 	"""Spawn spheres in a grid (2x5)"""

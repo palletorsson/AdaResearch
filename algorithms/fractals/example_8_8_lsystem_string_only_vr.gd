@@ -69,9 +69,6 @@ func _generate_lsystem() -> void:
 
 	_string_label.text = display_string
 
-	print("L-System Generation %d:" % generations)
-	print("String length: %d" % current_string.length())
-	print("First 100 chars: %s" % current_string.substr(0, min(100, current_string.length())))
 
 func _apply_rules(input_string: String) -> String:
 	var result := ""

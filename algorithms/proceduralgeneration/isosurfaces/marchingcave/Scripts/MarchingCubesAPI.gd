@@ -72,10 +72,6 @@ static func create(shape_name: String, position: Vector3 = Vector3.ZERO, scale: 
 				container.center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
 				container.center_of_mass = Vector3.ZERO
 				
-				print("MarchingCubesAPI: Forced Pickable Config -> ResetT: %s, LockRot: %s" % [
-					container.get("reset_transform_on_pickup"),
-					container.lock_rotation
-				])
 
 		else:
 			print("MarchingCubesAPI: ❌ Pickable scene not found, falling back to static Node3D")
@@ -173,7 +169,6 @@ static func apply_material(object: Node3D, material_name: String):
 	
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	generator.material_override = material
-	print("MarchingCubesAPI: ✅ Applied material '%s' to '%s'" % [key, object.name])
 
 static func list_available_shapes() -> Array:
 	return SHAPE_MAP.keys()

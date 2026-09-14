@@ -523,7 +523,6 @@ func apply_theme_profile(theme_name: String) -> void:
 	distortion_drive = current_theme_profile.get("distortion_drive", distortion_drive)
 	theme_timer = 0.0
 	reset_audio_delay_lines()
-	print("AudioEffects: activated %s theme" % theme_name)
 
 func update_theme_cycle(delta: float) -> void:
 	theme_timer += delta

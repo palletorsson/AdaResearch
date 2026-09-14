@@ -41,17 +41,10 @@ func _setup_scene() -> void:
 		if child is SoftBody3D:
 			soft_bodies.append(child)
 	
-	print("SceneController: Found %d soft bodies" % soft_bodies.size())
 	
 	# Print details of each soft body for comparison
 	for i in range(soft_bodies.size()):
 		var body = soft_bodies[i]
-		print("  %s: Precision=%d, Pressure=%.2f, Position=%s" % [
-			body.name, 
-			body.simulation_precision, 
-			body.pressure_coefficient, 
-			body.global_position
-		])
 	
 	# Setup interactive zones
 	_setup_interactive_zones()
@@ -142,7 +135,6 @@ func _change_demonstration_mode() -> void:
 			_start_collision_demo()
 
 func _start_physics_variations_demo() -> void:
-	print("SceneController: Starting Physics Variations Demo")
 	title_label.text = "Physics Variations Demo"
 	
 	# Apply different physics properties to each body
@@ -154,7 +146,6 @@ func _start_physics_variations_demo() -> void:
 			body.pressure_coefficient = params.pressure
 
 func _start_interactive_forces_demo() -> void:
-	print("SceneController: Starting Interactive Forces Demo")
 	title_label.text = "Interactive Forces Demo"
 	
 	# Reset all bodies to defaults
@@ -168,7 +159,6 @@ func _start_interactive_forces_demo() -> void:
 		force_field.monitoring = true
 
 func _start_state_cycling_demo() -> void:
-	print("SceneController: Starting State Cycling Demo")
 	title_label.text = "State Cycling Demo"
 	
 	# Each body cycles through states at different rates
@@ -177,7 +167,6 @@ func _start_state_cycling_demo() -> void:
 		body.state_duration = 2.0 + i * 1.0  # Different timing for each body
 
 func _start_collision_demo() -> void:
-	print("SceneController: Starting Collision Demo")
 	title_label.text = "Collision Demo"
 	
 	# Apply impulses to create collisions
@@ -191,20 +180,16 @@ func _start_collision_demo() -> void:
 
 # Interactive zone handlers
 func _on_wind_zone_body_entered(body) -> void:
-	if body is SoftBodyVariation:
-		print("SceneController: %s entered wind zone" % body.soft_body_type)
+	pass
 
 func _on_wind_zone_body_exited(body) -> void:
-	if body is SoftBodyVariation:
-		print("SceneController: %s exited wind zone" % body.soft_body_type)
+	pass
 
 func _on_force_field_body_entered(body) -> void:
-	if body is SoftBodyVariation:
-		print("SceneController: %s entered force field" % body.soft_body_type)
+	pass
 
 func _on_force_field_body_exited(body) -> void:
-	if body is SoftBodyVariation:
-		print("SceneController: %s exited force field" % body.soft_body_type)
+	pass
 
 # UI control handlers
 func _cycle_demo_mode() -> void:
@@ -212,18 +197,15 @@ func _cycle_demo_mode() -> void:
 	_change_demonstration_mode()
 
 func _apply_random_physics() -> void:
-	print("SceneController: Applying random physics to all bodies")
 	for body in soft_bodies:
 		var random_pressure = randf_range(0.1, 0.8)
 		body.set_physics_properties(random_pressure)
 
 func _reset_all_bodies() -> void:
-	print("SceneController: Resetting all bodies to defaults")
 	for body in soft_bodies:
 		body.reset_to_defaults()
 
 func _apply_random_impulse() -> void:
-	print("SceneController: Applying random impulse to all bodies")
 	for body in soft_bodies:
 		var random_force = Vector3(
 			randf_range(-5.0, 5.0),
@@ -244,11 +226,9 @@ func get_soft_body_by_type(type: String) -> SoftBodyVariation:
 
 func pause_demonstrations() -> void:
 	auto_cycle_demonstrations = false
-	print("SceneController: Demonstrations paused")
 
 func resume_demonstrations() -> void:
 	auto_cycle_demonstrations = true
-	print("SceneController: Demonstrations resumed")
 
 # Debug functions
 func print_scene_status() -> void:

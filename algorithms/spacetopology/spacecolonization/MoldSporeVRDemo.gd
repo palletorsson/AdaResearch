@@ -31,7 +31,6 @@ var environment_setup: bool = false
 var progress_indicator: MeshInstance3D
 
 func _ready() -> void:
-	print("MoldSporeVRDemo: Starting initialization...")
 	
 	# Add error handling to prevent crashes
 	try_setup_vr_scene()
@@ -47,24 +46,18 @@ func try_setup_vr_scene() -> void:
 	if not setup_vr_scene_safe():
 		print("MoldSporeVRDemo: Error in VR scene setup, using fallback")
 		fallback_scene_setup()
-	else:
-		print("MoldSporeVRDemo: VR scene setup completed")
 
 func try_setup_mold_generator() -> void:
 	"""Setup mold generator with error handling"""
 	if not setup_mold_generator_safe():
 		print("MoldSporeVRDemo: Error in mold generator setup")
 		push_error("Failed to initialize mold generator")
-	else:
-		print("MoldSporeVRDemo: Mold generator setup completed")
 
 func try_setup_auto_growth() -> void:
 	"""Setup auto growth with error handling"""
 	if not setup_auto_growth_safe():
 		print("MoldSporeVRDemo: Error in auto growth setup, disabling auto growth")
 		auto_growth_enabled = false
-	else:
-		print("MoldSporeVRDemo: Auto growth setup completed")
 
 func setup_vr_scene_safe() -> bool:
 	"""Safe VR scene setup that returns success status"""
@@ -98,7 +91,6 @@ func setup_vr_scene() -> void:
 	# Create a visual boundary for the 1x1x1 space
 	create_space_boundary()
 	
-	print("MoldSporeVRDemo: VR scene setup complete")
 
 func setup_vr_environment() -> void:
 	"""Create atmospheric environment optimized for VR"""
@@ -236,7 +228,6 @@ func setup_mold_generator() -> void:
 	# Set VR-optimized parameters
 	mold_generator.set_parameters(demo_parameters)
 	
-	print("MoldSporeVRDemo: Generator initialized with VR parameters")
 
 func setup_auto_growth() -> void:
 	"""Setup automatic growth cycling"""
@@ -257,7 +248,6 @@ func setup_auto_growth() -> void:
 	
 	auto_growth_timer.autostart = false
 	
-	print("MoldSporeVRDemo: Auto-growth system initialized")
 
 func create_initial_generation() -> void:
 	"""Create the first mold spore network"""
@@ -268,7 +258,6 @@ func start_new_generation() -> void:
 	if mold_generator.is_generating:
 		return
 	
-	print("MoldSporeVRDemo: Starting new generation cycle...")
 	
 	# Clear previous generation
 	clear_current_generation()
@@ -277,7 +266,6 @@ func start_new_generation() -> void:
 	var seed_value = randi()
 	start_async_generation(seed_value)
 	
-	print("MoldSporeVRDemo: Non-blocking generation started with seed %d" % seed_value)
 
 func start_async_generation(seed_value: int) -> void:
 	"""Start asynchronous, non-blocking generation"""
@@ -286,7 +274,6 @@ func start_async_generation(seed_value: int) -> void:
 
 func generate_async(seed_value: int) -> void:
 	"""Generate mold spore network asynchronously over multiple frames"""
-	print("MoldSporeVRDemo: Starting async generation...")
 	
 	# Set up the generator
 	mold_generator.setup_random_generator(seed_value)
@@ -324,7 +311,6 @@ func generate_async(seed_value: int) -> void:
 		await get_tree().process_frame
 	
 	# Generation complete - create the final mesh
-	print("MoldSporeVRDemo: Creating final mesh...")
 	mold_generator.create_spore_mesh()
 	mold_generator.add_spore_bodies()
 	
@@ -335,7 +321,6 @@ func generate_async(seed_value: int) -> void:
 	mold_generator.is_generating = false
 	_on_generation_complete()
 	
-	print("MoldSporeVRDemo: Async generation complete after %d iterations" % mold_generator.current_iteration)
 
 func create_progress_indicator() -> void:
 	"""Create a visual progress indicator for generation"""
@@ -383,14 +368,11 @@ func _on_auto_growth_cycle() -> void:
 	"""Handle automatic growth cycling"""
 	if auto_growth_enabled:
 		start_new_generation()
-		print("MoldSporeVRDemo: Auto-growth cycle triggered")
 
 func _on_generation_progress(percentage: float) -> void:
 	"""Handle generation progress updates"""
 	# Less frequent logging for async generation
 	var progress_percent = int(percentage * 100)
-	if progress_percent % 25 == 0 and progress_percent > 0:  # Log every 25%
-		print("MoldSporeVRDemo: Generation progress %d%%" % progress_percent)
 	
 	# Update any visual progress indicators here if needed
 	update_progress_visual(percentage)
@@ -398,10 +380,6 @@ func _on_generation_progress(percentage: float) -> void:
 func _on_generation_complete() -> void:
 	"""Handle generation completion"""
 	var stats = mold_generator.get_generation_statistics()
-	print("MoldSporeVRDemo: Generation complete - %d branches, %d spore bodies" % [
-		stats.total_branches,
-		stats.total_spore_bodies
-	])
 	
 	# Start the auto-growth timer for next cycle
 	if auto_growth_enabled and not auto_growth_timer.is_stopped():
@@ -424,19 +402,16 @@ func enable_auto_growth() -> void:
 	if not auto_growth_timer.is_stopped():
 		auto_growth_timer.stop()
 	auto_growth_timer.start()
-	print("MoldSporeVRDemo: Auto-growth enabled")
 
 func disable_auto_growth() -> void:
 	"""Disable automatic growth cycling"""
 	auto_growth_enabled = false
 	auto_growth_timer.stop()
-	print("MoldSporeVRDemo: Auto-growth disabled")
 
 func set_growth_cycle_time(new_time: float) -> void:
 	"""Set the time between growth cycles"""
 	growth_cycle_time = new_time
 	auto_growth_timer.wait_time = growth_cycle_time
-	print("MoldSporeVRDemo: Growth cycle time set to %.1f seconds" % new_time)
 
 func trigger_manual_growth() -> void:
 	"""Manually trigger a new growth cycle (for VR interaction)"""
@@ -624,7 +599,6 @@ func _exit_tree() -> void:
 	if auto_growth_timer:
 		auto_growth_timer.stop()
 	clear_current_generation()
-	print("MoldSporeVRDemo: VR demo cleaned up")
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass

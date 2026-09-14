@@ -46,8 +46,6 @@ func _ready() -> void:
 	# Verify VR camera reference
 	if not vr_camera:
 		push_error("XRCamera3D not found at path ../XROrigin3D/XRCamera3D - trees won't generate")
-	else:
-		print("Tree generator initialized with XR camera: " + vr_camera.name)
 
 func _process(delta: float) -> void:
 	# Skip processing if no camera reference

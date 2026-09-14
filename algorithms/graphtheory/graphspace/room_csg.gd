@@ -29,7 +29,6 @@ func carve_door_facing(dir: Vector3) -> void:
 	cut.transform = Transform3D(basis, pos)
 	
 	shell.add_child(cut)
-	print("Carved door facing direction: ", d)
 
 func _exit_tree() -> void:
 	for child in get_children():

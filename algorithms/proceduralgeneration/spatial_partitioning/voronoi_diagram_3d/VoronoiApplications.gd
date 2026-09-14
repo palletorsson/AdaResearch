@@ -58,7 +58,6 @@ func create_cave_system() -> void:
         voronoi_generator.region_size = Vector3(20, 10, 20)
         voronoi_generator.generate_voronoi_structure()
     
-    print("Cave system generated with ", cave_density, " chambers")
 
 func create_building_interior() -> void:
     # Use Voronoi cells as rooms
@@ -70,7 +69,6 @@ func create_building_interior() -> void:
         voronoi_generator.cell_wall_thickness = wall_thickness
         voronoi_generator.generate_voronoi_structure()
     
-    print("Building with ", num_rooms, " rooms generated")
 
 func create_fractured_object() -> void:
     # Create shattered/fractured geometry
@@ -81,7 +79,6 @@ func create_fractured_object() -> void:
         voronoi_generator.region_size = Vector3(5, 5, 5)
         voronoi_generator.generate_voronoi_structure()
     
-    print("Fractured object generated")
 
 func create_coral_reef() -> void:
     if voronoi_generator:
@@ -91,7 +88,6 @@ func create_coral_reef() -> void:
         voronoi_generator.region_size = Vector3(12, 8, 12)
         voronoi_generator.generate_voronoi_structure()
     
-    print("Coral reef generated")
 
 func create_rock_formation() -> void:
     if voronoi_generator:
@@ -102,7 +98,6 @@ func create_rock_formation() -> void:
         voronoi_generator.region_size = Vector3(10, 10, 10)
         voronoi_generator.generate_voronoi_structure()
     
-    print("Rock formation generated")
 
 func clear_application() -> void:
     for child in get_children():

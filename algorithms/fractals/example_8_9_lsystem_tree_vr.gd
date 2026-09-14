@@ -59,7 +59,6 @@ func _ready() -> void:
 		current_generation = generations
 
 	update_info_label()
-	print("Example 8.9: L-System Tree - Preset: %s, Generations: %d" % [get_preset_name(), generations])
 
 func _process(delta: float) -> void:
 	if show_generation_animation and current_generation < generations:
@@ -179,7 +178,6 @@ func cycle_preset() -> void:
 	if length_controller:
 		length_controller.set_value(step_length)
 
-	print("Preset changed to: %s" % get_preset_name())
 
 func increase_generations() -> void:
 	"""Increase generation count"""
@@ -188,7 +186,6 @@ func increase_generations() -> void:
 		reset()
 		lsystem.generate_n(current_generation)
 		draw_lsystem()
-		print("Generations increased to: %d" % generations)
 
 func decrease_generations() -> void:
 	"""Decrease generation count"""
@@ -199,7 +196,6 @@ func decrease_generations() -> void:
 		reset()
 		lsystem.generate_n(current_generation)
 		draw_lsystem()
-		print("Generations decreased to: %d" % generations)
 
 func reset() -> void:
 	"""Reset L-System and turtle"""

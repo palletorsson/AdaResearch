@@ -123,7 +123,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if headroom == before_headroom and ticks == before_ticks:
 		return
 	_rebuild_now()
-	print("[EntropyCeiling] Config applied — headroom=%s, ticks=%d" % [headroom, ticks])
 
 
 ## Accept an axis value only if it names something we actually build.

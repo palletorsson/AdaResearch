@@ -35,12 +35,10 @@ func setup_terrain_generator() -> void:
 	# Get terrain container
 	terrain_container = $TerrainContainer
 	
-	print("MarchingCubes: Terrain generator initialized")
 
 func setup_camera() -> void:
 	"""Setup camera system"""
 	camera = $Camera3D
-	print("MarchingCubes: Camera initialized")
 
 func _process(delta: float) -> void:
 	# Rotate camera automatically for better viewing
@@ -82,7 +80,6 @@ func _on_generation_progress(progress: float) -> void:
 
 func _on_generation_complete() -> void:
 	"""Handle generation completion"""
-	print("MarchingCubes: Terrain generation complete")
 	
 	# Randomize parameters for variety
 	terrain_size = randf_range(10.0, 20.0)

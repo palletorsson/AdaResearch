@@ -111,11 +111,6 @@ func spawn(dna: CritterDNA, world_position: Vector3 = Vector3.ZERO, lod_override
 	# Connect to tree_exiting for cleanup
 	entity.tree_exiting.connect(_on_critter_removed.bind(entity))
 
-	if debug:
-		print("[CritterSpawner] Spawned %s at %s (LOD %d, pop: %d/%d)" % [
-			entity.name, str(world_position), lod,
-			_active_critters.size(), max_population
-		])
 
 	return entity
 
@@ -239,10 +234,6 @@ func despawn(entity: CritterEntity) -> void:
 		entity.get_parent().remove_child(entity)
 	entity.queue_free()
 
-	if debug:
-		print("[CritterSpawner] Despawned %s (pop: %d/%d)" % [
-			entity.name, _active_critters.size(), max_population
-		])
 
 
 ## Remove all managed critters.
@@ -255,8 +246,6 @@ func despawn_all() -> void:
 
 	_active_critters.clear()
 
-	if debug:
-		print("[CritterSpawner] Despawned all critters")
 
 
 ## Cleanup callback when a critter is removed from the tree externally.
@@ -309,10 +298,6 @@ func update_lod_levels() -> void:
 			MorphologyRouter.rebuild(entity, entity.dna, trait_mapper, new_lod)
 			entity.set_meta("lod", new_lod)
 
-			if debug:
-				print("[CritterSpawner] LOD change: %s %d → %d" % [
-					entity.name, current_lod, new_lod
-				])
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -403,8 +388,6 @@ func transfer_entity(entity: CritterEntity, target_spawner: CritterSpawner) -> b
 		entity.tree_exiting.disconnect(_on_critter_removed)
 	entity.tree_exiting.connect(target_spawner._on_critter_removed.bind(entity))
 
-	if debug:
-		print("[CritterSpawner] Transferred %s to target spawner" % entity.name)
 
 	return true
 

@@ -143,7 +143,6 @@ func generate_structure() -> void:
 		# Generate entire structure
 		while grow_iteration() and current_iteration < max_iterations:
 			pass
-		print("Growth complete: ", current_iteration, " iterations, ", all_nodes.size(), " nodes")
 	else:
 		is_growing = true
 	

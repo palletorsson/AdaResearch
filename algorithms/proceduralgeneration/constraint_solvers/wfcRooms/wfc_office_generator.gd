@@ -48,7 +48,6 @@ func _ready() -> void:
 
 ## Main generation function
 func generate_office() -> bool:
-	print("Starting WFC office generation...")
 
 	# Setup random seed
 	if generation_seed >= 0:
@@ -125,13 +124,6 @@ func _load_tile_prototypes() -> bool:
 		root.queue_free()
 		return false
 
-	print("Loaded ", tile_prototypes.size(), " tile types")
-	print("  - Corridors: ", corridor_tiles.size())
-	print("  - Offices: ", office_tiles.size())
-	print("  - Open Plan: ", open_plan_tiles.size())
-	print("  - Conference: ", conference_tiles.size())
-	print("  - Cubicles: ", cubicle_tiles.size())
-	print("  - Transitions: ", transition_tiles.size())
 
 	# Build socket compatibility rules
 	_build_socket_rules()
@@ -147,7 +139,6 @@ func _build_socket_rules() -> void:
 		var sockets = tile.get_meta("sockets", {})
 		socket_rules[tile.name] = sockets
 
-	print("Built socket rules for ", socket_rules.size(), " tiles")
 
 ## Initialize the grid with all possibilities
 func _initialize_grid() -> void:
@@ -164,11 +155,9 @@ func _initialize_grid() -> void:
 		grid.append(row)
 		possible.append(poss_row)
 
-	print("Initialized grid: ", grid_width, "x", grid_height)
 
 ## Apply constraints for perimeter walls
 func _apply_perimeter_constraints() -> void:
-	print("Applying perimeter wall constraints...")
 
 	for y in range(grid_height):
 		for x in range(grid_width):
@@ -422,7 +411,6 @@ func _place_tiles_in_world() -> void:
 
 			add_child(tile)
 
-	print("Placed ", grid_width * grid_height, " tiles in world")
 
 	# Add ceiling (optional - creates enclosed feeling)
 	_add_ceiling()

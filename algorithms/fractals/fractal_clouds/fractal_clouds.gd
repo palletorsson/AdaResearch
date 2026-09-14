@@ -96,7 +96,6 @@ func _generate_cloud() -> void:
 						"base_position": local_pos  # For animation
 					})
 
-	print("FractalClouds: Generated %d cloud points" % cloud_points.size())
 
 	if use_multimesh:
 		_create_multimesh_cloud()
@@ -279,7 +278,6 @@ func randomize_cloud() -> void:
 # Grid system integration
 func configure(data: Dictionary) -> void:
 	"""Configure from grid spawn parameters (e.g., fractal_clouds#preset:storm)"""
-	print("FractalClouds: Configuring from Grid JSON: ", data)
 
 	if data.has("preset"):
 		apply_preset(str(data["preset"]).to_lower())

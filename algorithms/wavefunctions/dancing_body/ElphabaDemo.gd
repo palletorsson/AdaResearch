@@ -29,21 +29,16 @@ func _load_player_model() -> void:
 	if player_scene:
 		_player_model = player_scene.instantiate()
 		add_child(_player_model)
-		print("ElphabaDemo: Player model loaded")
 
 		# Find skeleton
 		_skeleton = _find_skeleton(_player_model)
 
 		if _skeleton:
-			# Print ALL bone names so we know what's available
-			print("ElphabaDemo: Skeleton found with %d bones:" % _skeleton.get_bone_count())
 			for i in range(_skeleton.get_bone_count()):
 				var bone_name = _skeleton.get_bone_name(i)
-				print("  Bone %d: '%s'" % [i, bone_name])
 				# Store all bones with lowercase key
 				_bone_indices[bone_name.to_lower()] = i
 
-			print("ElphabaDemo: Cached bone indices: ", _bone_indices.keys())
 		else:
 			print("ElphabaDemo: WARNING - No skeleton found in player model!")
 
@@ -56,16 +51,13 @@ func _setup_dress() -> void:
 	_dress = get_node_or_null("ElphabaDress")
 
 	if _dress:
-		print("ElphabaDemo: Dress node found at %s" % _dress.global_position)
 
 		# IMPORTANT: Disable the dress's own skeleton following - we handle it here
 		_dress.follow_skeleton = false
-		print("ElphabaDemo: Disabled dress's internal skeleton following")
 
 		if _skeleton:
 			# Try to find hip-like bone for attachment
 			var hip_bone_idx = _find_hip_bone()
-			print("ElphabaDemo: Dress attached, hip bone index: %d" % hip_bone_idx)
 
 			# Reparent dress to the skeleton so it moves with the player
 			var old_global_pos = _dress.global_position
@@ -77,7 +69,6 @@ func _setup_dress() -> void:
 				# Get hip bone position in skeleton local space
 				var bone_pose = _skeleton.get_bone_global_pose(hip_bone_idx)
 				_dress.transform = Transform3D(Basis.IDENTITY, bone_pose.origin)
-				print("ElphabaDemo: Dress parented to skeleton at hip: %s" % bone_pose.origin)
 			else:
 				# Fallback - position at skeleton origin with offset
 				_dress.position = Vector3(0, 1.0, 0)
@@ -98,7 +89,6 @@ func _find_hip_bone() -> int:
 	for hip_name in hip_names:
 		var idx = _bone_indices.get(hip_name.to_lower(), -1)
 		if idx >= 0:
-			print("ElphabaDemo: Using '%s' as hip bone" % hip_name)
 			return idx
 	return -1
 

@@ -920,18 +920,12 @@ func attempt_eulerian_path() -> void:
 	if not animate_path_attempts:
 		return
 	
-	print("Attempting Eulerian path... (parity=%s)" % parity)
-	print("Degrees: ", degree_counts)
-	print("Euler's theorem: A connected graph has an Eulerian path if and only if it has exactly 0 or 2 vertices of odd degree")
-	print(euler_analysis.get("euler_conclusion", ""))
 
 func demonstrate_bridge_removal() -> void:
 	"""Show how removing bridges affects Eulerian properties"""
 	if not interactive_bridge_removal:
 		return
 	
-	print("Try removing bridges to create an Eulerian path...")
-	print("Need to reduce odd-degree vertices to exactly 2 or 0")
 
 func _input(event: InputEvent) -> void:
 	"""Handle educational interactions"""
@@ -1030,8 +1024,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		return
 
 	_rebuild_now()
-	print("[Konigsberg] Config applied — parity=%s, bridges=%d, conclusion=%s" % [
-		parity, edges.size(), euler_analysis.get("euler_conclusion", "")])
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a

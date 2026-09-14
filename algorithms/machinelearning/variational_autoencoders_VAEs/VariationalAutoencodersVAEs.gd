@@ -48,7 +48,6 @@ func _set_particle_count(v: int) -> void:
 	create_output_particles()
 
 func _ready() -> void:
-	print("Variational Autoencoders Visualization initialized")
 	create_input_particles()
 	create_output_particles()
 	create_latent_particles()

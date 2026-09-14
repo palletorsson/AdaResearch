@@ -94,7 +94,6 @@ func create_forest() -> void:
         var scale_factor = randf_range(tree_scale_min, tree_scale_max)
         tree.scale = Vector3.ONE * scale_factor
     
-    print("Created forest with ", points.size(), " trees")
 
 func create_simple_tree() -> Node3D:
     var tree = Node3D.new()
@@ -152,7 +151,6 @@ func create_particles() -> void:
         material.emission_energy_multiplier = 2.0
         particle.material_override = material
     
-    print("Created particle cloud with ", points.size(), " particles")
 
 func create_star_field() -> void:
     if not poisson_sampler.has_method("get_sample_points"):
@@ -179,7 +177,6 @@ func create_star_field() -> void:
         material.emission_energy_multiplier = randf_range(1.0, 4.0)
         star.material_override = material
     
-    print("Created star field with ", points.size(), " stars")
 
 func create_cell_distribution() -> void:
     if not poisson_sampler.has_method("get_sample_points"):
@@ -205,7 +202,6 @@ func create_cell_distribution() -> void:
         material.roughness = 0.3
         cell.material_override = material
     
-    print("Created cell distribution with ", points.size(), " cells")
 
 func clear_application() -> void:
     for child in get_children():

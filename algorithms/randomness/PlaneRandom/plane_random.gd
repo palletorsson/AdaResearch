@@ -51,7 +51,6 @@ func _run_initial_rounds() -> void:
 	_commit_mesh()
 	_update_collider()
 	initial_rounds_complete = true
-	print("✅ Completed %d initial rounds" % initial_rounds)
 
 func _process(delta: float) -> void:
 	if not initial_rounds_complete:

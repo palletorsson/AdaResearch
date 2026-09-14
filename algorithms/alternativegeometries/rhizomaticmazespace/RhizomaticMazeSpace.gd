@@ -204,7 +204,6 @@ func setup_components() -> void:
 
 func generate_rhizomatic_maze() -> void:
 	"""Generate the complete rhizomatic maze system"""
-	print("🌿 RhizomaticMazeSpace: Starting generation...")
 	
 	# 1. Generate base network structure
 	generate_network_structure()
@@ -224,7 +223,6 @@ func generate_rhizomatic_maze() -> void:
 	# 6. Create navigation waypoints
 	generate_navigation_system()
 	
-	print("✅ RhizomaticMazeSpace: Generation complete!")
 
 func generate_network_structure() -> void:
 	"""Create the underlying rhizomatic network"""
@@ -257,7 +255,6 @@ func generate_network_structure() -> void:
 	var network = maze_generator.generate_rhizomatic_network()
 	path_network.set_network_data(network)
 	
-	print("🌱 Network structure: %d nodes, %d connections" % [network.nodes.size(), network.connections.size()])
 
 func create_rhizomatic_paths() -> void:
 	"""Create organic tunnel paths through the network"""
@@ -426,7 +423,6 @@ func create_organic_chamber(center: Vector3, properties: Dictionary) -> void:
 func build_tunnel_system() -> void:
 	"""Build the main tunnel system meshes"""
 	# This is handled in create_rhizomatic_paths()
-	print("🏗️ Built %d tunnel segments" % path_meshes.size())
 
 func add_organic_details() -> void:
 	"""Add organic surface details and growth"""
@@ -535,7 +531,6 @@ func generate_navigation_system() -> void:
 				distance = 0.0
 			distance += segment_length
 	
-	print("🧭 Generated %d navigation waypoints" % navigation_nodes.size())
 
 func get_navigation_nodes() -> Array[Vector3]:
 	"""Get all navigation waypoints for external systems"""

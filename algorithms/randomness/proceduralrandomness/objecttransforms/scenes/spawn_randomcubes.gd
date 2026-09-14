@@ -142,7 +142,6 @@ func setup_cube_area(cube) -> void:
 		)
 
 func _on_cube_hit(body, cube) -> void:
-	print("Cube hit by: ", body.name)
 	
 	# Check if the body is a torus
 	if body and ("torus" in body.name.to_lower() or "cube" in body.name.to_lower()):

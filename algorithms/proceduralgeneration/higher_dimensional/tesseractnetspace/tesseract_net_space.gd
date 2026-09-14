@@ -75,7 +75,6 @@ func generate_net_space() -> void:
                 
                 create_net_at_position(pos, rotation, base_color * color_mod)
     
-    print("Generated tesseract net space: ", space_size.x * space_size.y * space_size.z, " nets")
 
 func get_net_bounds() -> Vector3:
     """Get the bounding box size of the selected net type"""

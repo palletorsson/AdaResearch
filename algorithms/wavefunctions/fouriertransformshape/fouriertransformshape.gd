@@ -62,7 +62,6 @@ func setup_audio() -> void:
 		player.play()
 		audio_playbacks.append(player.get_stream_playback())
 	
-	print("FourierTransform: Ready with %d spatial harmonics" % wheels.size())
 	
 	setup_theremin()
 

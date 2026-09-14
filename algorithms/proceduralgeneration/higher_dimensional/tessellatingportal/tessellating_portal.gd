@@ -384,7 +384,6 @@ func create_multimesh() -> void:
 	mmi.material_override = material
 	
 	add_child(mmi)
-	print("Portal generated with ", transforms.size(), " blocks")
 
 func regenerate() -> void:
 	"""Regenerate portal"""
