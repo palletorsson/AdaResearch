@@ -132,12 +132,10 @@ func _run() -> void:
 	# second later (the 2026-08 version built three and found one).
 	var target: Dictionary = await _walk_deep(inst, chapter, 2)
 	var segs: Array = inst.get("_segments")
-	rep += "BOOT 1 — walked to hall %s; %d segment(s) standing:
-" % [str(target.get("index", "?")), segs.size()]
+	rep += "BOOT 1 — walked to hall %s; %d segment(s) standing:\n" % [str(target.get("index", "?")), segs.size()]
 	for sv in segs:
 		var sd: Dictionary = sv
-		rep += "   z %6.1f..%-6.1f  pearl=%-22s map=%s
-" % [float(sd.get("z0", 0)),
+		rep += "   z %6.1f..%-6.1f  pearl=%-22s map=%s\n" % [float(sd.get("z0", 0)),
 			float(sd.get("z1", 0)), String(sd.get("pearl", "?")), String(sd.get("map", "(none)"))]
 	check(not target.is_empty(), "boot 1 reaches a map-authored hall of %s past the first one" % chapter)
 	if target.is_empty():
