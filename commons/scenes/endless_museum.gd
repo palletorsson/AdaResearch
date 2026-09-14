@@ -17211,18 +17211,44 @@ func _spine_fill() -> void:
 					"pearl": String(pg2_v)})
 
 
-## The open book at the open pearl: {doc, pearl} read fresh from disk, or {}.
-func _spine_book() -> Dictionary:
-	var path := _book_dir + ("/%s.json" % String(_spine_cur.get("chapter", "")))
-	if not FileAccess.file_exists(path):
+## A BOOK PEARL ANSWERS TO TWO NAMES (2026-09-14). The book keys its pearls by its own short
+## name (point, lines, trace); the plan names a map-authored hall for its map (point one,
+## point lines). EM::_speak_for bridged the two for the wall text on 2026-08-31; the spine
+## strip and the web links never did, so the strip showed "no page in the book" for every
+## map-authored hall, and /lines — which finds a pearl by the book's exact name — opened
+## unfocused (found repairing commons/testing/probe_spine_strip.gd). Same bridge: the book's
+## own name first, then the map lowercased with its underscores opened.
+static func _book_pearl_is(book_pearl: Dictionary, name: String) -> bool:
+	if name == "":
+		return false
+	if String(book_pearl.get("pearl", "")) == name:
+		return true
+	var by_map: String = String(book_pearl.get("map", "")).replace("_", " ").to_lower()
+	return by_map != "" and by_map == name
+
+
+## The book pearl a plan name reaches in `chapter`'s book: {doc, pearl, path}, or {}. An exact
+## book name wins over a map bridge, so nothing that resolved before moves.
+func _book_pearl(chapter: String, name: String) -> Dictionary:
+	var path := _book_dir + ("/%s.json" % chapter)
+	if chapter == "" or name == "" or not FileAccess.file_exists(path):
 		return {}
 	var doc_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
 	if not (doc_v is Dictionary):
 		return {}
-	for pv in ((doc_v as Dictionary).get("pearls", []) as Array):
-		if String((pv as Dictionary).get("pearl", "")) == String(_spine_cur.get("pearl", "")):
+	var pearls: Array = (doc_v as Dictionary).get("pearls", [])
+	for pv in pearls:
+		if String((pv as Dictionary).get("pearl", "")) == name:
+			return {"doc": doc_v, "pearl": pv, "path": path}
+	for pv in pearls:
+		if _book_pearl_is(pv as Dictionary, name):
 			return {"doc": doc_v, "pearl": pv, "path": path}
 	return {}
+
+
+## The open book at the open pearl: {doc, pearl} read fresh from disk, or {}.
+func _spine_book() -> Dictionary:
+	return _book_pearl(String(_spine_cur.get("chapter", "")), String(_spine_cur.get("pearl", "")))
 
 
 func _spine_show_pearl(idx: int) -> void:
@@ -17239,6 +17265,8 @@ func _spine_show_pearl(idx: int) -> void:
 		return
 	_spine_mtime = int(FileAccess.get_modified_time(String(bk.get("path"))))
 	var pl: Dictionary = bk.get("pearl")
+	# from here on the open pearl carries the BOOK's name, which is what /lines finds
+	_spine_cur["pearl"] = String(pl.get("pearl", row.get("pearl")))
 	var hero := String(pl.get("hero", ""))
 	_spine_head.text = "%s · %s%s" % [row.get("chapter"), row.get("pearl"),
 		("   hero " + hero) if hero != "" else ""]
@@ -17309,6 +17337,17 @@ func _web_open_focus() -> void:
 	if i < 0:
 		print("[em-web] no artifact within reach — walk closer and press O again")
 		return
+	var target := _web_focus_target(i)
+	if String(target["chapter"]) == "":
+		print("[em-web] %s stands in no chapter — nothing to open" % target["token"])
+		return
+	OS.shell_open(_web_url(String(target["chapter"]), String(target["pearl"]), String(target["token"])))
+	print("[em-web] %s -> the web editor (%s · %s)" % [target["token"], target["chapter"], target["pearl"]])
+
+
+## What O opens for edit record `i`: {chapter, pearl, token}, the pearl in the BOOK's name
+## (the hall's plan name is bridged through EM::_book_pearl).
+func _web_focus_target(i: int) -> Dictionary:
 	var r: Dictionary = _edit_records[i]
 	var ch := String(r.get("chapter", ""))
 	var pearl := ""
@@ -17318,11 +17357,10 @@ func _web_open_focus() -> void:
 			ch = String(sg.get_meta("em_chapter"))
 		if sg.has_meta("em_pearl"):
 			pearl = String(sg.get_meta("em_pearl"))
-	if ch == "":
-		print("[em-web] %s stands in no chapter — nothing to open" % r.get("token"))
-		return
-	OS.shell_open(_web_url(ch, pearl, String(r.get("token", ""))))
-	print("[em-web] %s -> the web editor (%s · %s)" % [r.get("token"), ch, pearl])
+	var bk := _book_pearl(ch, pearl)
+	if not bk.is_empty():
+		pearl = String((bk["pearl"] as Dictionary).get("pearl", pearl))
+	return {"chapter": ch, "pearl": pearl, "token": String(r.get("token", ""))}
 
 
 ## THE ONE WATCHER (2026-08-26, Palle: "they are not shared or synced" and "can we
