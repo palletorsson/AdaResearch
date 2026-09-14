@@ -304,7 +304,13 @@ def main() -> int:
     ap.add_argument("--include-tracked", action="store_true", help="also move tracked files under ada_run/")
     ap.add_argument("--undo", type=Path, help="a manifest .jsonl to reverse")
     ap.add_argument("--list", type=int, default=8, help="how many kept items to print per reason")
+    ap.add_argument("--log", type=Path, help="append the report to this file instead of printing it "
+                    "(the scheduled run uses pythonw, which has no console)")
     a = ap.parse_args()
+    if a.log:
+        a.log.parent.mkdir(parents=True, exist_ok=True)
+        sys.stdout = open(a.log, "a", encoding="utf-8", buffering=1)
+        print("\n== %s ==" % dt.datetime.now().isoformat(timespec="seconds"))
 
     if captures_root() is None:
         print("no encyclopedia checkout found (set ADA_ENCYCLOPEDIA_PATH) — nothing to move to")
