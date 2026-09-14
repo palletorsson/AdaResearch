@@ -262,10 +262,3 @@ func _build() -> void:
 	#_body.add_child(col)
 	#_body.position = Vector3(0.0, 0.0, 0.0)
 	#add_child(_body)
-
-	print("[PompeiiMosaicFloor] Built %dx%d grid (%d dark tris, %d light tris, %d grout tris)" % [
-		gw, gh,
-		dark_verts.size() / 3,
-		light_verts.size() / 3,
-		grout_verts.size() / 3,
-	])
