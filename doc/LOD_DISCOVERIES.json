@@ -732,6 +732,12 @@
         "encoding",
         "breather"
       ]
+    },
+    {
+      "timestamp": "2026-09-15T07:14:24.572022+00:00",
+      "topic": "release gates",
+      "insight": "A detector self-test that quotes live room prose fails when a writer writes, and reads as a broken matcher. test_edge_gate.py now seeds frozen fixture text into edge_gate._CACHE.",
+      "lod": 3
     }
   ]
 }

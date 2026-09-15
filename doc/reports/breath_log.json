@@ -7022,178 +7022,233 @@
       "duration_minutes": 48
     },
     {
-        "breath_id": "2026-09-11T09:07",
-        "mode": "full",
-        "baseline_avg": 6.083,
-        "post_avg": 6.083,
-        "delta": 0.0,
-        "head_before": "6f117a373",
-        "head_after": "183057fe1",
-        "gates_before": "7/15 (F I J K L M N O)",
-        "gates_after": "7/15 (F I J K L M N O) - H went red mid-breath on the two new untracked tools and the commit resolved it, exactly as predicted",
-        "items_attempted": [
-            "read-the-forum-first-because-the-heat-map-named-none-of-this",
-            "verify-prop-049-clause-1-against-the-live-164-rows-before-writing-it",
-            "build-tools-forum_claims-py-as-the-reader-the-measurement-justifies",
-            "wire-gate-L-to-name-its-rows-without-moving-its-verdict",
-            "ship-clause-2-forum-py-claims-on-both-writers-and-the-api-route",
-            "answer-and-settle-the-standing-thread-260910-vqx1u",
-            "record-prop-049-as-clauses-1-and-2-applied"
-        ],
-        "items_succeeded": [
-            "read-the-forum-first-because-the-heat-map-named-none-of-this",
-            "verify-prop-049-clause-1-against-the-live-164-rows-before-writing-it",
-            "build-tools-forum_claims-py-as-the-reader-the-measurement-justifies",
-            "wire-gate-L-to-name-its-rows-without-moving-its-verdict",
-            "ship-clause-2-forum-py-claims-on-both-writers-and-the-api-route",
-            "answer-and-settle-the-standing-thread-260910-vqx1u",
-            "record-prop-049-as-clauses-1-and-2-applied"
-        ],
-        "items_failed": [],
-        "failure_reasons": {},
-        "skills_used": [
-            "ada-breather"
-        ],
-        "skill_effectiveness": {
-            "ada-breather": {
-                "calls": 1,
-                "succeeded": 1,
-                "failed": 0
-            }
-        },
-        "files_changed": [
-            "tools/forum_claims.py",
-            "tools/test_forum_claims.py",
-            "tools/check_prose_reachable.py",
-            "tools/forum.py",
-            "tools/run_release_gates.py",
-            "doc/reports/skill_evolution_proposals.json",
-            "doc/reports/breath_baseline_2026-09-11_09-07.json",
-            "ada_encyclopedia/src/app/api/forum/route.ts"
-        ],
-        "discoveries": [
-            "THE PRESCRIPTION WAS WORTH 2 ROWS OF 164, AND THE OBVIOUS WIDENING WOULD HAVE INVENTED 21 NAMES. prop-049 clause 1 said: cross a gate's convicted paths against open forum threads and print the intersection. I measured it before writing a line, against gate L's live 164 rows. Explicit repo paths named in open threads: 2. Any mention of the room's name anywhere: 40 rows across 24 rooms. A first-person claim sentence with the name IN THAT SENTENCE: 19 rows across 10 rooms. The middle figure is the trap, and reading the fourteen extra rooms is what proves it -- Accumulation_Riemann appears in an eight-day-old handoff as a to-do ('fix Accumulation_Riemann blurb'), Color_Pillar in my own gitignore ruling request, VFM_05_Launch in a list of rooms a loop session had FINISHED. A fabricated name beside a real conviction is worse than the anonymous row it replaces, and the broad version is the one a ten-line patch would have written. THE GENERAL SHAPE: prop-048 says verify a remedy before applying it because the corpus moves. This is the sharper case -- the corpus had not moved at all, and the prescription was still wrong, because it named a MECHANISM ('cross the paths') without ever measuring what that mechanism would match. A remedy that has not been run against the population it will judge is a guess with a commit message.",
-            "THE SAME DRIFT THE REMEDY WAS FIXING TURNED UP INSIDE THE REMEDY, WITHIN AN HOUR. Clause 2 adds --claims to forum.py so a heads-up carries its paths as data. forum.py has two writers -- it POSTs to /api/forum when npm is up and writes the store directly when it is not -- and the route builds its thread object field by field, so a claims key sent by the CLI would have been kept with the server down and silently dropped with it up. A claim filed during a working session would simply not exist, and the gate would go on printing the row anonymously while the writer believed they had said so. Both writers carry the field now, and forum.py reads the post back and prints what was lost if they ever disagree. This is the fifth time in the project's record that one rule with two implementations has cost a pass; the new thing is that it was caught by asking, before shipping, WHICH writer would handle the post.",
-            "A GATE THAT READS ANOTHER REPOSITORY MUST BE PROVED UNABLE TO CHANGE ITS OWN NUMBER. forum_claims reads ada_encyclopedia, which a clone of AdaResearch does not have, and the board changes hourly as sessions post. So the gate's verdict would otherwise depend on whether a companion checkout exists and on what somebody wrote an hour ago. The selftest now classifies, stamps the claims, and FAILS if the convicted set changed -- and the live battery reads the same 165 convictions, exit code and failing set with the forum present and absent. The reason to be strict about it is already in the record: gate N holds a 24-hour clock and went from 5 convictions to 21 overnight with nothing in the world changing. A verdict that took a hint from someone's post would be that fault in politer clothes.",
-            "THE HEAT MAP HAS FOUR ITEMS AND NAMED NONE OF THIS, AND FOCUS_VECTOR IS 166 DAYS STALE POINTING AT FINISHED WORK. Second morning running that every instrument the breather owns said the temperature was elsewhere while the forum's top threads held the work. The scorer reads 6.083 and 23 sequences at stage 6 either way -- it has read that since 2026-09-08 and will keep reading it, because stage 6 is VR testing and the blocker is a device fact (forum 260907-7bj80: a comment typed in the headset lands in user:// on the Quest and nothing reads it back). FOCUS_VECTOR says 'rebuild all primitives maps', updated 2026-03-28; primitives is OK through stage 5. The Evaluate phase has three inputs and on two consecutive days none of them could steer. The forum could, both days.",
-            "TWENTY ROWS OF 165 HAVE A NAME AND 145 HAVE NOBODY, WHICH IS THE FINDING THE ATTRIBUTION WAS HIDING. The point of naming the claimed rows was never the twenty; it is that the remaining 145 files and 72,820 words are now visibly unowned. Before today a reader of gate L saw 165 undifferentiated rows and could not tell live work from abandoned writing without redoing the forensics by hand. The gate says it in one sentence now, and the unclaimed count is the half that should be acted on."
-        ],
-        "duration_minutes": 78
+      "breath_id": "2026-09-11T09:07",
+      "mode": "full",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "head_before": "6f117a373",
+      "head_after": "183057fe1",
+      "gates_before": "7/15 (F I J K L M N O)",
+      "gates_after": "7/15 (F I J K L M N O) - H went red mid-breath on the two new untracked tools and the commit resolved it, exactly as predicted",
+      "items_attempted": [
+        "read-the-forum-first-because-the-heat-map-named-none-of-this",
+        "verify-prop-049-clause-1-against-the-live-164-rows-before-writing-it",
+        "build-tools-forum_claims-py-as-the-reader-the-measurement-justifies",
+        "wire-gate-L-to-name-its-rows-without-moving-its-verdict",
+        "ship-clause-2-forum-py-claims-on-both-writers-and-the-api-route",
+        "answer-and-settle-the-standing-thread-260910-vqx1u",
+        "record-prop-049-as-clauses-1-and-2-applied"
+      ],
+      "items_succeeded": [
+        "read-the-forum-first-because-the-heat-map-named-none-of-this",
+        "verify-prop-049-clause-1-against-the-live-164-rows-before-writing-it",
+        "build-tools-forum_claims-py-as-the-reader-the-measurement-justifies",
+        "wire-gate-L-to-name-its-rows-without-moving-its-verdict",
+        "ship-clause-2-forum-py-claims-on-both-writers-and-the-api-route",
+        "answer-and-settle-the-standing-thread-260910-vqx1u",
+        "record-prop-049-as-clauses-1-and-2-applied"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "files_changed": [
+        "tools/forum_claims.py",
+        "tools/test_forum_claims.py",
+        "tools/check_prose_reachable.py",
+        "tools/forum.py",
+        "tools/run_release_gates.py",
+        "doc/reports/skill_evolution_proposals.json",
+        "doc/reports/breath_baseline_2026-09-11_09-07.json",
+        "ada_encyclopedia/src/app/api/forum/route.ts"
+      ],
+      "discoveries": [
+        "THE PRESCRIPTION WAS WORTH 2 ROWS OF 164, AND THE OBVIOUS WIDENING WOULD HAVE INVENTED 21 NAMES. prop-049 clause 1 said: cross a gate's convicted paths against open forum threads and print the intersection. I measured it before writing a line, against gate L's live 164 rows. Explicit repo paths named in open threads: 2. Any mention of the room's name anywhere: 40 rows across 24 rooms. A first-person claim sentence with the name IN THAT SENTENCE: 19 rows across 10 rooms. The middle figure is the trap, and reading the fourteen extra rooms is what proves it -- Accumulation_Riemann appears in an eight-day-old handoff as a to-do ('fix Accumulation_Riemann blurb'), Color_Pillar in my own gitignore ruling request, VFM_05_Launch in a list of rooms a loop session had FINISHED. A fabricated name beside a real conviction is worse than the anonymous row it replaces, and the broad version is the one a ten-line patch would have written. THE GENERAL SHAPE: prop-048 says verify a remedy before applying it because the corpus moves. This is the sharper case -- the corpus had not moved at all, and the prescription was still wrong, because it named a MECHANISM ('cross the paths') without ever measuring what that mechanism would match. A remedy that has not been run against the population it will judge is a guess with a commit message.",
+        "THE SAME DRIFT THE REMEDY WAS FIXING TURNED UP INSIDE THE REMEDY, WITHIN AN HOUR. Clause 2 adds --claims to forum.py so a heads-up carries its paths as data. forum.py has two writers -- it POSTs to /api/forum when npm is up and writes the store directly when it is not -- and the route builds its thread object field by field, so a claims key sent by the CLI would have been kept with the server down and silently dropped with it up. A claim filed during a working session would simply not exist, and the gate would go on printing the row anonymously while the writer believed they had said so. Both writers carry the field now, and forum.py reads the post back and prints what was lost if they ever disagree. This is the fifth time in the project's record that one rule with two implementations has cost a pass; the new thing is that it was caught by asking, before shipping, WHICH writer would handle the post.",
+        "A GATE THAT READS ANOTHER REPOSITORY MUST BE PROVED UNABLE TO CHANGE ITS OWN NUMBER. forum_claims reads ada_encyclopedia, which a clone of AdaResearch does not have, and the board changes hourly as sessions post. So the gate's verdict would otherwise depend on whether a companion checkout exists and on what somebody wrote an hour ago. The selftest now classifies, stamps the claims, and FAILS if the convicted set changed -- and the live battery reads the same 165 convictions, exit code and failing set with the forum present and absent. The reason to be strict about it is already in the record: gate N holds a 24-hour clock and went from 5 convictions to 21 overnight with nothing in the world changing. A verdict that took a hint from someone's post would be that fault in politer clothes.",
+        "THE HEAT MAP HAS FOUR ITEMS AND NAMED NONE OF THIS, AND FOCUS_VECTOR IS 166 DAYS STALE POINTING AT FINISHED WORK. Second morning running that every instrument the breather owns said the temperature was elsewhere while the forum's top threads held the work. The scorer reads 6.083 and 23 sequences at stage 6 either way -- it has read that since 2026-09-08 and will keep reading it, because stage 6 is VR testing and the blocker is a device fact (forum 260907-7bj80: a comment typed in the headset lands in user:// on the Quest and nothing reads it back). FOCUS_VECTOR says 'rebuild all primitives maps', updated 2026-03-28; primitives is OK through stage 5. The Evaluate phase has three inputs and on two consecutive days none of them could steer. The forum could, both days.",
+        "TWENTY ROWS OF 165 HAVE A NAME AND 145 HAVE NOBODY, WHICH IS THE FINDING THE ATTRIBUTION WAS HIDING. The point of naming the claimed rows was never the twenty; it is that the remaining 145 files and 72,820 words are now visibly unowned. Before today a reader of gate L saw 165 undifferentiated rows and could not tell live work from abandoned writing without redoing the forensics by hand. The gate says it in one sentence now, and the unclaimed count is the half that should be acted on."
+      ],
+      "duration_minutes": 78
     },
     {
-        "breath_id": "2026-09-11T18:55",
-        "mode": "evolve-only",
-        "baseline_avg": 6.083,
-        "post_avg": 6.083,
-        "delta": 0.0,
-        "head_at_read": "183057fe1",
-        "dirty_at_read": 957,
-        "untracked_at_read": 1260,
-        "gap_days": 0,
-        "gap_note": "prop-026 gap check: two full breaths ran today, 07:00 (gate O, commit 6f117a373) and 09:07 (gate L reads the forum, commit 183057fe1). No missed scheduled run.",
-        "release_gates": "7/15 at 183057fe1 over a dirty tree. PASS A B C D E G H; FAIL F I J K L M N O -- identical set to this morning. L 176 rows / 96,779 words, 28 of them claimed (was 165 / 81,131 / 20). N 30 stranded / 4 live (was 23 / 11). O still the 3 int cells in Symmetry_Seventeen, still claimed open by another session, still deliberately left.",
-        "items_attempted": [
-            "re-read-the-scorer-unpiped-and-the-gates-in-full",
-            "measure-whether-this-mornings-clause-2-flag-was-used-by-anyone",
-            "measure-the-tool-discoverability-population-before-writing-a-predicate",
-            "check-todays-two-breaths-landed-their-code-and-their-records",
-            "duplicate-check-the-adoption-pattern-against-all-49-proposals",
-            "open-prop-050-a-writing-end-affordance-needs-a-surface",
-            "commit-the-ledgers"
-        ],
-        "items_succeeded": [
-            "re-read-the-scorer-unpiped-and-the-gates-in-full",
-            "measure-whether-this-mornings-clause-2-flag-was-used-by-anyone",
-            "measure-the-tool-discoverability-population-before-writing-a-predicate",
-            "check-todays-two-breaths-landed-their-code-and-their-records",
-            "duplicate-check-the-adoption-pattern-against-all-49-proposals",
-            "open-prop-050-a-writing-end-affordance-needs-a-surface",
-            "commit-the-ledgers"
-        ],
-        "items_failed": [],
-        "failure_reasons": {},
-        "skills_used": [
-            "ada-breather"
-        ],
-        "skill_effectiveness": {
-            "ada-breather": {
-                "calls": 1,
-                "succeeded": 1,
-                "failed": 0
-            }
-        },
-        "files_changed": [
-            "doc/reports/breath_log.json",
-            "doc/reports/improvement_trajectory.json",
-            "doc/reports/skill_evolution_proposals.json"
-        ],
-        "discoveries": [
-            "THE FLAG SHIPPED AT 10:30, THREE SESSIONS POSTED AFTER IT, NONE USED IT -- AND THE CONTROL IS THE SAME FILE ON THE SAME DAY. prop-049 clause 2 added `forum.py ask --claims=a,b` so a heads-up carries its paths as data instead of prose. Between the ship and this reading, three threads were posted by three different sessions -- fable-r1 11:09, fable-r1b 13:24, fable-r2 14:19 -- and the store holds 70 threads with a `claims` key on exactly zero of them. The reason is not reluctance: `--claims` appears nowhere in CLAUDE.md, which is the one surface every session auto-loads and which already carries a six-row forum table, and `forum.py --help` falls through to `open` and prints threads instead of usage, so the flag is undiscoverable from both directions a session would look. THE CONTROL IS WHAT MAKES THIS MEASUREMENT AND NOT A COMPLAINT: the same tool's documented half has 70 threads by 42 distinct thread authors, 45 counting repliers, five of them today. Same tool, same users, same day. The variable is the table. And the cost today was zero, which is the tell -- the prose heuristic attributed all three threads correctly, so nothing failed and nobody would have noticed the new channel was dead.",
-            "THE REMEDY FOR THE PROJECT'S LONGEST-STANDING BLOCKER IS NAMED IN TWO PYTHON COMMENTS AND NOWHERE ELSE. Eleventh consecutive reading of 6.083. The cause is stage 6, vr_testing, 0% on 23 of 24 sequences, and it has a fix: tools/pull_vr_feedback.py, written 2026-09-07, tested on a real Quest, tracked since 09-08. Swept tonight -- the string `pull_vr_feedback` occurs in 8 files, five of which are this loop's own ledgers and read by nobody before a headset session; outside those, three -- the tool itself and two comments, sequence_pipeline_scorer.py:289 ('run it before trusting a 0% here') and run_release_gates.py:911. CORRECTED: the sweep behind the first phrasing was scoped to tools/. Neither is printed. It is in no table, no skill, no gate output and no remedy line. So the scorer prints `0%` to every session that runs it while holding the sentence that explains the 0% four lines above the code, in a comment. Four days, no invocation, metric unmoved. This is the same shape as the flag and it is the expensive one.",
-            "THE BROAD VERSION OF THIS PROPOSAL WOULD HAVE CONVICTED 706 TOOLS AND THE REAL NUMBER IS 3. First measurement: 738 tracked tools/*.py, 32 named in CLAUDE.md, 11 in any skill, 706 in neither -- a number that would have written a furious proposal about an undocumented corpus. Second measurement, one question later: of the 32 tools the breather itself has shipped, subtract everything a named entry point already invokes, and what is left with no surface AND no invoker is 3, two of which are selftests reached by their subject's --selftest. The gate internals do not need a table because run_release_gates.py has one. The population that matters is the one whose only possible invoker is a person or another session TYPING it, and it holds two members tonight. This is the morning's lesson landing on the evening's own work: prop-049 clause 1 named a mechanism without measuring what it would match and was worth 2 rows of 164, and the same refusal to widen is why tonight's proposal is about two affordances rather than seven hundred.",
-            "THE GATE THAT LEARNED TO NAME ITS ROWS THIS MORNING TRACKED THE DAY'S WORK WITHOUT BEING TOUCHED AGAIN. Gate L read 20 of 165 claimed at 10:30 and 28 of 176 at 18:56. All eight new attributions come from threads posted after the reader shipped -- Random_Entropy to fable-r1, Random_Remove to fable-r1b, Random_Walk to fable-r2, plus their supporting docs -- and the reader was written against a snapshot that contained none of them. Worth recording because it is the opposite of the failure mode this ledger keeps finding: prop-024's dna_coverage.json sat byte-identical for 31 days while its gaps went 17/7/18 to 237/89/735, and prop-048 exists because a prescription decays like a measurement. An instrument that reads a live ledger rather than a cached one does not decay, and the eleven rows that arrived today are already sorted into somebody's and nobody's without a line of new code.",
-            "THE APPLIED RECORD SAT ON DISK FOR EIGHT AND A HALF HOURS WHILE ITS CODE SAT IN HEAD, WHICH IS prop-044's CLASS RUNNING BACKWARDS. This morning's breath landed forum_claims.py, the gate L wiring and both forum.py writers in 183057fe1, and logged 'record-prop-049-as-clauses-1-and-2-applied' as succeeded. Checked tonight: `git show HEAD:doc/reports/skill_evolution_proposals.json` reads status 'proposed' for prop-049, and HEAD's breath_log holds 118 entries against 120 on disk. Every previous occurrence of this class in the ledger runs the other way -- the record lands and the instrument is stranded (prop-044, six occurrences). This one inverts it, and the window is exactly the one in which a reviewer would act: anyone opening the proposals file from HEAD today would have seen an unapplied proposal whose remedy was already shipped, and re-applying it is the obvious next move. The evening harvest closes it, which is the cadence; the finding is that the cadence leaves a readable-but-false window and nothing marks it."
-        ],
-        "duration_minutes": 31
+      "breath_id": "2026-09-11T18:55",
+      "mode": "evolve-only",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "head_at_read": "183057fe1",
+      "dirty_at_read": 957,
+      "untracked_at_read": 1260,
+      "gap_days": 0,
+      "gap_note": "prop-026 gap check: two full breaths ran today, 07:00 (gate O, commit 6f117a373) and 09:07 (gate L reads the forum, commit 183057fe1). No missed scheduled run.",
+      "release_gates": "7/15 at 183057fe1 over a dirty tree. PASS A B C D E G H; FAIL F I J K L M N O -- identical set to this morning. L 176 rows / 96,779 words, 28 of them claimed (was 165 / 81,131 / 20). N 30 stranded / 4 live (was 23 / 11). O still the 3 int cells in Symmetry_Seventeen, still claimed open by another session, still deliberately left.",
+      "items_attempted": [
+        "re-read-the-scorer-unpiped-and-the-gates-in-full",
+        "measure-whether-this-mornings-clause-2-flag-was-used-by-anyone",
+        "measure-the-tool-discoverability-population-before-writing-a-predicate",
+        "check-todays-two-breaths-landed-their-code-and-their-records",
+        "duplicate-check-the-adoption-pattern-against-all-49-proposals",
+        "open-prop-050-a-writing-end-affordance-needs-a-surface",
+        "commit-the-ledgers"
+      ],
+      "items_succeeded": [
+        "re-read-the-scorer-unpiped-and-the-gates-in-full",
+        "measure-whether-this-mornings-clause-2-flag-was-used-by-anyone",
+        "measure-the-tool-discoverability-population-before-writing-a-predicate",
+        "check-todays-two-breaths-landed-their-code-and-their-records",
+        "duplicate-check-the-adoption-pattern-against-all-49-proposals",
+        "open-prop-050-a-writing-end-affordance-needs-a-surface",
+        "commit-the-ledgers"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "files_changed": [
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/skill_evolution_proposals.json"
+      ],
+      "discoveries": [
+        "THE FLAG SHIPPED AT 10:30, THREE SESSIONS POSTED AFTER IT, NONE USED IT -- AND THE CONTROL IS THE SAME FILE ON THE SAME DAY. prop-049 clause 2 added `forum.py ask --claims=a,b` so a heads-up carries its paths as data instead of prose. Between the ship and this reading, three threads were posted by three different sessions -- fable-r1 11:09, fable-r1b 13:24, fable-r2 14:19 -- and the store holds 70 threads with a `claims` key on exactly zero of them. The reason is not reluctance: `--claims` appears nowhere in CLAUDE.md, which is the one surface every session auto-loads and which already carries a six-row forum table, and `forum.py --help` falls through to `open` and prints threads instead of usage, so the flag is undiscoverable from both directions a session would look. THE CONTROL IS WHAT MAKES THIS MEASUREMENT AND NOT A COMPLAINT: the same tool's documented half has 70 threads by 42 distinct thread authors, 45 counting repliers, five of them today. Same tool, same users, same day. The variable is the table. And the cost today was zero, which is the tell -- the prose heuristic attributed all three threads correctly, so nothing failed and nobody would have noticed the new channel was dead.",
+        "THE REMEDY FOR THE PROJECT'S LONGEST-STANDING BLOCKER IS NAMED IN TWO PYTHON COMMENTS AND NOWHERE ELSE. Eleventh consecutive reading of 6.083. The cause is stage 6, vr_testing, 0% on 23 of 24 sequences, and it has a fix: tools/pull_vr_feedback.py, written 2026-09-07, tested on a real Quest, tracked since 09-08. Swept tonight -- the string `pull_vr_feedback` occurs in 8 files, five of which are this loop's own ledgers and read by nobody before a headset session; outside those, three -- the tool itself and two comments, sequence_pipeline_scorer.py:289 ('run it before trusting a 0% here') and run_release_gates.py:911. CORRECTED: the sweep behind the first phrasing was scoped to tools/. Neither is printed. It is in no table, no skill, no gate output and no remedy line. So the scorer prints `0%` to every session that runs it while holding the sentence that explains the 0% four lines above the code, in a comment. Four days, no invocation, metric unmoved. This is the same shape as the flag and it is the expensive one.",
+        "THE BROAD VERSION OF THIS PROPOSAL WOULD HAVE CONVICTED 706 TOOLS AND THE REAL NUMBER IS 3. First measurement: 738 tracked tools/*.py, 32 named in CLAUDE.md, 11 in any skill, 706 in neither -- a number that would have written a furious proposal about an undocumented corpus. Second measurement, one question later: of the 32 tools the breather itself has shipped, subtract everything a named entry point already invokes, and what is left with no surface AND no invoker is 3, two of which are selftests reached by their subject's --selftest. The gate internals do not need a table because run_release_gates.py has one. The population that matters is the one whose only possible invoker is a person or another session TYPING it, and it holds two members tonight. This is the morning's lesson landing on the evening's own work: prop-049 clause 1 named a mechanism without measuring what it would match and was worth 2 rows of 164, and the same refusal to widen is why tonight's proposal is about two affordances rather than seven hundred.",
+        "THE GATE THAT LEARNED TO NAME ITS ROWS THIS MORNING TRACKED THE DAY'S WORK WITHOUT BEING TOUCHED AGAIN. Gate L read 20 of 165 claimed at 10:30 and 28 of 176 at 18:56. All eight new attributions come from threads posted after the reader shipped -- Random_Entropy to fable-r1, Random_Remove to fable-r1b, Random_Walk to fable-r2, plus their supporting docs -- and the reader was written against a snapshot that contained none of them. Worth recording because it is the opposite of the failure mode this ledger keeps finding: prop-024's dna_coverage.json sat byte-identical for 31 days while its gaps went 17/7/18 to 237/89/735, and prop-048 exists because a prescription decays like a measurement. An instrument that reads a live ledger rather than a cached one does not decay, and the eleven rows that arrived today are already sorted into somebody's and nobody's without a line of new code.",
+        "THE APPLIED RECORD SAT ON DISK FOR EIGHT AND A HALF HOURS WHILE ITS CODE SAT IN HEAD, WHICH IS prop-044's CLASS RUNNING BACKWARDS. This morning's breath landed forum_claims.py, the gate L wiring and both forum.py writers in 183057fe1, and logged 'record-prop-049-as-clauses-1-and-2-applied' as succeeded. Checked tonight: `git show HEAD:doc/reports/skill_evolution_proposals.json` reads status 'proposed' for prop-049, and HEAD's breath_log holds 118 entries against 120 on disk. Every previous occurrence of this class in the ledger runs the other way -- the record lands and the instrument is stranded (prop-044, six occurrences). This one inverts it, and the window is exactly the one in which a reviewer would act: anyone opening the proposals file from HEAD today would have seen an unapplied proposal whose remedy was already shipped, and re-applying it is the obvious next move. The evening harvest closes it, which is the cadence; the finding is that the cadence leaves a readable-but-false window and nothing marks it."
+      ],
+      "duration_minutes": 31
     },
     {
-        "breath_id": "2026-09-15T06:20",
-        "mode": "full",
-        "baseline_avg": 6.083,
-        "post_avg": 6.083,
-        "delta": 0.0,
-        "head_at_read": "6f8d2bfc7",
-        "dirty_at_read": 1464,
-        "untracked_at_read": 1672,
-        "gap_days": 3.5,
-        "gap_note": "Last logged breath 2026-09-11T18:55 (evening). No breath logged 09-12, 09-13 or 09-14 -- three scheduled mornings and evenings missed, cause not visible from the repo (the desktop app was probably not running). 61 commits landed in the gap, most from the WCN (fable-*) halls, the evidence move and the print sweep.",
-        "release_gates": "7/15 over a dirty tree at 6f8d2bfc7. PASS A B C D E G H; FAIL F I J K L M N O -- same set as 09-11. F no_route at z 28.2 (museum autopilot). L 164 rows / 81,186 words, 7 claimed. N 61 unreachable, 26 live-uncommitted (was 30 stranded / 4 live). O unchanged: 3 int cells in Symmetry_Seventeen, still claimed by claude-long-museum-vocab, left alone.",
-        "items_attempted": [
-            "read-the-forum-and-re-measure-prop-050-before-applying",
-            "run-the-vr-wire-against-the-attached-quest-and-classify-every-install",
-            "pull_vr_feedback-names-why-there-is-nothing-to-pull",
-            "scorer-stage-5-stops-depending-on-the-callers-utf8-mode",
-            "scorer-prints-the-vr-wire-under-its-0-percent-column",
-            "forum-help-prints-usage-and-claude-md-carries-claims-and-the-headset-wire"
-        ],
-        "items_succeeded": [
-            "read-the-forum-and-re-measure-prop-050-before-applying",
-            "run-the-vr-wire-against-the-attached-quest-and-classify-every-install",
-            "pull_vr_feedback-names-why-there-is-nothing-to-pull",
-            "scorer-stage-5-stops-depending-on-the-callers-utf8-mode",
-            "scorer-prints-the-vr-wire-under-its-0-percent-column",
-            "forum-help-prints-usage-and-claude-md-carries-claims-and-the-headset-wire"
-        ],
-        "items_failed": [],
-        "failure_reasons": {},
-        "skills_used": [
-            "ada-breather"
-        ],
-        "skill_effectiveness": {
-            "ada-breather": {
-                "calls": 6,
-                "succeeded": 6,
-                "failed": 0
-            }
-        },
-        "files_changed": [
-            "tools/sequence_pipeline_scorer.py",
-            "tools/pull_vr_feedback.py",
-            "tools/forum.py",
-            "CLAUDE.md (two hunks only; another session's uncommitted /api/spine-roles hunk left unstaged)",
-            "doc/reports/breath_log.json",
-            "doc/reports/improvement_trajectory.json",
-            "doc/reports/skill_evolution_proposals.json",
-            "doc/reports/RELEASE_GATES.json",
-            "doc/reports/RELEASE_GATES.md"
-        ],
-        "discoveries": [
-            "THE MEAN MOVED 0.416 IN FIFTEEN MINUTES WITH NO MAP CHANGED, AND THE CAUSE WAS THE READER'S PYTHON FLAG. The baseline read 6.083 and a re-run a quarter of an hour later read 5.667, with 8 sequences dropped to stage 5 and randomness at 7 of 14 validated. Nothing in commons/maps had moved; the only difference was that the second run was invoked as `python -X utf8`. The scorer spawns map_pathfinder.py with text=True, the child prints a cp1252 dash (byte 0x97), a strict UTF-8 decode kills subprocess's reader thread, stdout comes back None, `' 0 FAIL' in None` raises TypeError, and `except Exception: pass` records the map as unvalidated. Proven with a control rather than argued: HEAD's scorer under -X utf8 reads 5.667, the fixed scorer reads 6.083 under both modes. Fix: encoding='utf-8', errors='replace' and `or ''` -- the marker is ASCII so a lossy decode cannot move it. THE GENERAL SHAPE: a metric that swallows its own exceptions has an undeclared input, here the caller's PYTHONUTF8, and eleven consecutive readings of 6.083 agreed with each other partly because every breath invoked it the same way -- agreement between runs was never evidence that the input was declared. Worth knowing before anyone quotes a drop: any session that exports PYTHONUTF8=1 would have reported a regression of 0.416 and gone looking for it in the maps.",
-            "THE QUESTION prop-050 LEFT OPEN -- IS STAGE 6 BLOCKED BY DISCOVERABILITY OR BY THE HEADSET -- WAS ANSWERABLE THIS MORNING BECAUSE A QUEST WAS ON USB, AND THE ANSWER IS THE HEADSET. adb listed device 2G0YC5ZG4M0569. pull_vr_feedback --dry-run: nothing to pull. That message folded three causes into one, so each install was probed read-only: com.example.adaresearchzeroone was installed 2026-09-09 15:52, is DEBUGGABLE, run-as reads its files/, and there is no desktop_feedback/ directory; its map_progress.json reads completed_maps [] with only Point_One unlocked, last saved 09-09 15:56, and the newest em_built_vr.json is 16:06 the same day. The wire works and the headset has had one ~15-minute session in six days with no SEND. 6.083 is a true reading, not a blind one, and no amount of making the wire findable will move it. That is the falsification prop-050 asked for, delivered by measurement instead of by waiting a week.",
-            "THE WIRE'S OWN REASSURANCE WAS WRONG ON THE BUILD THAT MATTERS. pull_vr_feedback printed 'An absent directory means SEND has not been pressed -- not that the wire is broken' for every None from remote_read, and remote_read returns None for file-absent, unknown-package AND not-debuggable alike. A release export is not debuggable; run-as refuses it; the tool would have told the reader the round trip was fine on exactly the install a visitor wears. Now each package gets its own cause (why_absent), and REFUSED switches the closing advice. Negative test on the real device: com.android.modulemetadata (installed, not debuggable) prints REFUSED, com.nope.notinstalled prints not installed, the two Ada installs print readable/no directory. Before the change all three would have printed the same sentence.",
-            "prop-050 CLAUSE 2 RE-MEASURED BEFORE APPLYING (prop-048), AND THE EVIDENCE HAD GROWN, NOT DECAYED. At proposal time 3 threads had posted since --claims shipped, none with it. This morning: 23 threads since the flag, by 18 distinct session names, almost all of them first-person 'I am editing X (map, file.gd, final + docs)' heads-ups that are claims in prose -- and 0 carry the key. Applied both halves: forum.py --help/help/-h prints the docstring (which already documents --claims) instead of the thread list, the ask/answer usage errors name the flag, CLAUDE.md's forum table carries it with one sentence saying what it buys, and the scorer prints the VR wire under its table whenever stage 6 reads 0%. CLAUDE.md's Feedback Bridge section also said, unqualified, that VR comments are written to ada_run/desktop_feedback.md -- the surface a person reads about VR feedback stated the one thing that is false in a headset. Three lines now say otherwise. Prediction on record: the next heads-up threads posted by sessions that load this CLAUDE.md carry a claims key; if three land without one, withdraw the writing half of prop-049 clause 2 rather than documenting it harder."
-        ],
-        "duration_minutes": 45
+      "breath_id": "2026-09-15T06:20",
+      "mode": "full",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "head_at_read": "6f8d2bfc7",
+      "dirty_at_read": 1464,
+      "untracked_at_read": 1672,
+      "gap_days": 3.5,
+      "gap_note": "Last logged breath 2026-09-11T18:55 (evening). No breath logged 09-12, 09-13 or 09-14 -- three scheduled mornings and evenings missed, cause not visible from the repo (the desktop app was probably not running). 61 commits landed in the gap, most from the WCN (fable-*) halls, the evidence move and the print sweep.",
+      "release_gates": "7/15 over a dirty tree at 6f8d2bfc7. PASS A B C D E G H; FAIL F I J K L M N O -- same set as 09-11. F no_route at z 28.2 (museum autopilot). L 164 rows / 81,186 words, 7 claimed. N 61 unreachable, 26 live-uncommitted (was 30 stranded / 4 live). O unchanged: 3 int cells in Symmetry_Seventeen, still claimed by claude-long-museum-vocab, left alone.",
+      "items_attempted": [
+        "read-the-forum-and-re-measure-prop-050-before-applying",
+        "run-the-vr-wire-against-the-attached-quest-and-classify-every-install",
+        "pull_vr_feedback-names-why-there-is-nothing-to-pull",
+        "scorer-stage-5-stops-depending-on-the-callers-utf8-mode",
+        "scorer-prints-the-vr-wire-under-its-0-percent-column",
+        "forum-help-prints-usage-and-claude-md-carries-claims-and-the-headset-wire"
+      ],
+      "items_succeeded": [
+        "read-the-forum-and-re-measure-prop-050-before-applying",
+        "run-the-vr-wire-against-the-attached-quest-and-classify-every-install",
+        "pull_vr_feedback-names-why-there-is-nothing-to-pull",
+        "scorer-stage-5-stops-depending-on-the-callers-utf8-mode",
+        "scorer-prints-the-vr-wire-under-its-0-percent-column",
+        "forum-help-prints-usage-and-claude-md-carries-claims-and-the-headset-wire"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 6,
+          "succeeded": 6,
+          "failed": 0
+        }
+      },
+      "files_changed": [
+        "tools/sequence_pipeline_scorer.py",
+        "tools/pull_vr_feedback.py",
+        "tools/forum.py",
+        "CLAUDE.md (two hunks only; another session's uncommitted /api/spine-roles hunk left unstaged)",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/skill_evolution_proposals.json",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md"
+      ],
+      "discoveries": [
+        "THE MEAN MOVED 0.416 IN FIFTEEN MINUTES WITH NO MAP CHANGED, AND THE CAUSE WAS THE READER'S PYTHON FLAG. The baseline read 6.083 and a re-run a quarter of an hour later read 5.667, with 8 sequences dropped to stage 5 and randomness at 7 of 14 validated. Nothing in commons/maps had moved; the only difference was that the second run was invoked as `python -X utf8`. The scorer spawns map_pathfinder.py with text=True, the child prints a cp1252 dash (byte 0x97), a strict UTF-8 decode kills subprocess's reader thread, stdout comes back None, `' 0 FAIL' in None` raises TypeError, and `except Exception: pass` records the map as unvalidated. Proven with a control rather than argued: HEAD's scorer under -X utf8 reads 5.667, the fixed scorer reads 6.083 under both modes. Fix: encoding='utf-8', errors='replace' and `or ''` -- the marker is ASCII so a lossy decode cannot move it. THE GENERAL SHAPE: a metric that swallows its own exceptions has an undeclared input, here the caller's PYTHONUTF8, and eleven consecutive readings of 6.083 agreed with each other partly because every breath invoked it the same way -- agreement between runs was never evidence that the input was declared. Worth knowing before anyone quotes a drop: any session that exports PYTHONUTF8=1 would have reported a regression of 0.416 and gone looking for it in the maps.",
+        "THE QUESTION prop-050 LEFT OPEN -- IS STAGE 6 BLOCKED BY DISCOVERABILITY OR BY THE HEADSET -- WAS ANSWERABLE THIS MORNING BECAUSE A QUEST WAS ON USB, AND THE ANSWER IS THE HEADSET. adb listed device 2G0YC5ZG4M0569. pull_vr_feedback --dry-run: nothing to pull. That message folded three causes into one, so each install was probed read-only: com.example.adaresearchzeroone was installed 2026-09-09 15:52, is DEBUGGABLE, run-as reads its files/, and there is no desktop_feedback/ directory; its map_progress.json reads completed_maps [] with only Point_One unlocked, last saved 09-09 15:56, and the newest em_built_vr.json is 16:06 the same day. The wire works and the headset has had one ~15-minute session in six days with no SEND. 6.083 is a true reading, not a blind one, and no amount of making the wire findable will move it. That is the falsification prop-050 asked for, delivered by measurement instead of by waiting a week.",
+        "THE WIRE'S OWN REASSURANCE WAS WRONG ON THE BUILD THAT MATTERS. pull_vr_feedback printed 'An absent directory means SEND has not been pressed -- not that the wire is broken' for every None from remote_read, and remote_read returns None for file-absent, unknown-package AND not-debuggable alike. A release export is not debuggable; run-as refuses it; the tool would have told the reader the round trip was fine on exactly the install a visitor wears. Now each package gets its own cause (why_absent), and REFUSED switches the closing advice. Negative test on the real device: com.android.modulemetadata (installed, not debuggable) prints REFUSED, com.nope.notinstalled prints not installed, the two Ada installs print readable/no directory. Before the change all three would have printed the same sentence.",
+        "prop-050 CLAUSE 2 RE-MEASURED BEFORE APPLYING (prop-048), AND THE EVIDENCE HAD GROWN, NOT DECAYED. At proposal time 3 threads had posted since --claims shipped, none with it. This morning: 23 threads since the flag, by 18 distinct session names, almost all of them first-person 'I am editing X (map, file.gd, final + docs)' heads-ups that are claims in prose -- and 0 carry the key. Applied both halves: forum.py --help/help/-h prints the docstring (which already documents --claims) instead of the thread list, the ask/answer usage errors name the flag, CLAUDE.md's forum table carries it with one sentence saying what it buys, and the scorer prints the VR wire under its table whenever stage 6 reads 0%. CLAUDE.md's Feedback Bridge section also said, unqualified, that VR comments are written to ada_run/desktop_feedback.md -- the surface a person reads about VR feedback stated the one thing that is false in a headset. Three lines now say otherwise. Prediction on record: the next heads-up threads posted by sessions that load this CLAUDE.md carry a claims key; if three land without one, withdraw the writing half of prop-049 clause 2 rather than documenting it harder."
+      ],
+      "duration_minutes": 45
+    },
+    {
+      "breath_id": "2026-09-15T09:04",
+      "mode": "full",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "head_at_read": "c60f1c522",
+      "items_attempted": [
+        "gate-I-detector-selftest-reads-FAIL-find-why",
+        "test_edge_gate-uses-frozen-fixtures-not-live-room-prose",
+        "attribute-gates-I-and-J-nine-LOST-rows-against-HEAD",
+        "capture-the-12-spine-maps-with-no-polish-captures",
+        "gate-K-four-ECHO-rows",
+        "ground-gate-I-four-UNGROUNDED-edges"
+      ],
+      "items_succeeded": [
+        "gate-I-detector-selftest-reads-FAIL-find-why",
+        "test_edge_gate-uses-frozen-fixtures-not-live-room-prose",
+        "attribute-gates-I-and-J-nine-LOST-rows-against-HEAD"
+      ],
+      "items_failed": [],
+      "items_cooled": {
+        "capture-the-12-spine-maps-with-no-polish-captures": "Palle's Godot editor is open with unsaved endless_museum.tscn (pid 29764, since 06:54); a second Godot dies on the user:// lock. Retry when no editor is running. Missing: Boolean_Verbs, Boolean_Gallery, Boolean_Works, FormFinding_Descent/Catenary/Relaxation/Annealing/Forge, Ribbon_Patterns_01/02/03, Chamber_Color, Change_Choreography, ISO_RhizomeBody.",
+        "gate-K-four-ECHO-rows": "Palle's own lines (laser_sword/laser_measure, parasol_triangle/triangle); held for his ruling in forum 260831-z5s2i since 08-31. Not a breath's call.",
+        "ground-gate-I-four-UNGROUNDED-edges": "15 of 25 book chapter files are dirty in the working tree from other sessions (WCN fables among them); editing them now would collide."
+      },
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "A SELF-TEST THAT READS THE CORPUS IS A SECOND CORPUS GATE WEARING A DETECTOR'S NAME. Gate I printed detector_selftest FAIL, which reads as 'the matcher stopped convicting'. The matcher was fine. tools/test_edge_gate.py used the live commons/maps/Vectors_Act4b_Oscillation/intent.md as its Unicode-math fixture, and an uncommitted 2026-09-11 rewrite of that room dropped the pendulum_hall line the positive case quotes, so HELD became LOST. The fix seeds frozen fixture text into edge_gate._CACHE under fixture:// paths no real file can have. Controls: 10/10 checks under python and python -X utf8; a negative fixture lacking the sentence still reads LOST. THE GENERAL SHAPE: a self-test must fail only when the rule breaks, never when a writer writes. Checked the siblings the same breath: test_gate_tree_state.py is fully synthetic, and test_want_gate.py names one real scene (pattern_tile_puzzle.tscn) -- a file, not a quoted sentence, so far less volatile. test_edge_gate.py was the only self-test quoting live prose.",
+        "THE NINE LOST ROWS ON GATES I AND J ARE THE SAME NINE, AND ALL NINE HOLD AT HEAD. Re-ran edge_gate.verdict against 'git show HEAD:<file>' for each: HELD 9/9. Eight are idle 112-161h (five are the primitives critical.md edits reported in forum 260908-sq9zq on 09-08, unchanged 6.6 days later); one (SoftBodies_Playground_of_Joy/critical.md, 2.2h) is live. HEAD is clean for both gates; the red is the shared working tree. Gate I attributes this (tracked-modified 9); gate J still reads named_subjects 0 for the same rows. Deliberately NOT widened this breath -- the 2026-07-18 'stop building instruments' ruling, and the forum thread already carries the attribution in prose.",
+        "THE WORKING TREE IS SATURATED, AND THAT IS NOW THE BINDING CONSTRAINT ON A BREATH, NOT THE HEAT MAP. Of this breath's six candidate items, three were cooled by someone else's hand: a live Godot editor, a curatorial question awaiting Palle, and 15 dirty book chapters. The only safely-actable surface was a tool file no other session had open. A breath that ignores this would either collide or rewrite held prose. Captures are the cheapest next move the moment Palle closes the editor: 12 spine maps have no multi_shots at all."
+      ],
+      "files_changed": [
+        "tools/test_edge_gate.py",
+        "doc/reports/breath_baseline_2026-09-15_09-04.json",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md",
+        "tools/forum store (answer on 260908-sq9zq)"
+      ],
+      "release_gates_before": "7/15; I detector_selftest FAIL",
+      "release_gates_after": "7/15; I detector_selftest PASS (gate still FAIL on 9 working-tree LOST rows, all HELD at HEAD)",
+      "duration_minutes": 30
     }
   ]
 }

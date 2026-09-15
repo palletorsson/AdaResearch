@@ -33,6 +33,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "tools"))
+import edge_gate as _edge_gate  # noqa: E402
 from edge_gate import verdict, norm  # noqa: E402
 
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
@@ -40,10 +41,35 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 
 FAILS: list[str] = []
 
-# A real file with real Unicode mathematics in it — the one whose edge read LOST.
-MATH_FILE = "commons/maps/Vectors_Act4b_Oscillation/intent.md"
-# A real file whose two quoted settings sit five lines apart.
-SPLIT_FILE = "commons/context/walkgrids/random_space.tscn"
+# FROZEN FIXTURES, not live files. Until 2026-09-15 MATH_FILE was the real
+# commons/maps/Vectors_Act4b_Oscillation/intent.md, and on 2026-09-11 a room
+# rewrite (uncommitted, idle four days) replaced its "Technical angle" paragraph.
+# The positive case read LOST, the self-test failed, and gate I printed
+# detector_selftest FAIL -- a verdict about a writer's prose, reported as a fault
+# in the matcher. A self-test tests the MATCHER; the corpus is edge_gate's own
+# job. So the bodies below are the exact lines those files held (HEAD 69a6c51e1
+# and random_space.tscn lines 13-18), seeded into edge_gate's read cache under
+# paths no real file can have. The live paths stay named for provenance only.
+MATH_FILE = "fixture://Vectors_Act4b_Oscillation/intent.md"
+SPLIT_FILE = "fixture://walkgrids/random_space.tscn"
+
+_edge_gate._CACHE[MATH_FILE] = norm(
+    "Technical angle: A 30×30 hall, max height 2. Interactables: spring_tower "
+    "(stiffen the coil and it gives less and ticks faster — F = −kx), pendulum_hall "
+    "(lengthen the string and the swing slows — T = 2π√(L/g), restoring force "
+    "mg sin θ), momentum_cradle (lift and release; momentum passes through the "
+    "still middle, conserved), bounce_well (set the bounciness e; each bounce a "
+    "fraction of the last, h' = e·h).\n")
+_edge_gate._CACHE[SPLIT_FILE] = norm(
+    '[node name="RandomSpace" type="Node3D"]\n'
+    'script = ExtResource("1_n8dtw")\n'
+    "seed_value = 1\n"
+    "space_size = Vector2(11, 20)\n"
+    "resolution = 50\n"
+    "chaos_level = 1.0\n"
+    "height_scale = 0.12\n"
+    "enable_animation = false\n"
+    "position_offset = Vector3(0, 0, 0)\n")
 
 
 def edge(rel: str, quote: str) -> dict:

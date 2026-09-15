@@ -1,11 +1,11 @@
 {
   "measurement": {
-    "measured_at": "2026-09-15T06:40:41+02:00",
+    "measured_at": "2026-09-15T09:12:04+02:00",
     "measured_by": "tools/run_release_gates.py",
-    "head": "6f8d2bfc7f58f279e664d1003043f100c1d0c0de",
-    "head_subject": "fix(test): probe_view_resume's report lines use \\n escapes, not literal line breaks inside the string",
-    "tree_dirty": 1373,
-    "tree_untracked": 1664,
+    "head": "c60f1c522ca92c73348689638c9293841d3f0966",
+    "head_subject": "fix(scorer,vr,forum): stage 5 no longer depends on the caller's UTF-8 mode, and the VR wire says why there is nothing to pull",
+    "tree_dirty": 1496,
+    "tree_untracked": 1751,
     "tree_state_detector": "PASS"
   },
   "overall_pass": false,
@@ -19,11 +19,11 @@
     "validate_map_all": 0,
     "audit_lab_chain": 0,
     "validate_museum_templates": 0,
-    "em_autopilot": 1,
+    "em_autopilot": 3,
     "check_map_tokens": 0,
-    "check_prose_reachable": 164,
+    "check_prose_reachable": 179,
     "check_artifacts_reachable": 119,
-    "check_tools_reachable": 61,
+    "check_tools_reachable": 64,
     "check_cell_types": 1
   },
   "gates": [
@@ -57,9 +57,9 @@
       "name": "Map Validation",
       "pass": true,
       "metrics": {
-        "grade_A": 2274,
+        "grade_A": 2275,
         "grade_B": 363,
-        "grade_C": 161,
+        "grade_C": 160,
         "grade_F": 0,
         "max_grade_c": null,
         "grade_c_blocking": false,
@@ -110,14 +110,14 @@
       "name": "Museum Walkthrough (autopilot)",
       "pass": false,
       "metrics": {
-        "museums": 3,
-        "z_reached": 28.2,
+        "museums": -1,
+        "z_reached": -1.0,
         "goal_z": -1.0,
-        "walked_s": 25.3,
-        "cells_unlearned": 1,
-        "stall_events": 9,
-        "frontier_z": 28,
-        "reason": "no_route",
+        "walked_s": -1.0,
+        "cells_unlearned": -1,
+        "stall_events": -1,
+        "frontier_z": -1,
+        "reason": "contended_builder",
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
@@ -131,7 +131,7 @@
         "maps_scanned": 193,
         "maps_named": 193,
         "maps_without_data": "none",
-        "placements": 1457,
+        "placements": 1472,
         "unresolved_placements": 0,
         "unresolved_tokens": "",
         "malformed_empty_cells": 0
@@ -155,14 +155,14 @@
       "name": "Edge Anchors",
       "pass": false,
       "metrics": {
-        "detector_selftest": "FAIL",
-        "edges": 189,
-        "held": 175,
+        "detector_selftest": "PASS",
+        "edges": 177,
+        "held": 161,
         "near": 3,
-        "lost": 8,
-        "ungrounded": 3,
-        "lost_rooms": "Point_Line_Grid, Primitives_Polythedra, Point_Animatedcube, Primitives_Ignorance, Primitives_Portals, Array_Patterns, Color_Flashlight, Chamber_Color",
-        "tree_state": "tracked-modified 8  [tracked-modified: Point_Line_Grid, Primitives_Polythedra, Point_Animatedcube, Primitives_Ignorance]"
+        "lost": 9,
+        "ungrounded": 4,
+        "lost_rooms": "Point_Line_Grid, Primitives_Polythedra, Point_Animatedcube, Primitives_Ignorance, Primitives_Portals, Array_Patterns, Color_Flashlight, Chamber_Color, SoftBodies_Playground_of_Joy",
+        "tree_state": "tracked-modified 9  [tracked-modified: Point_Line_Grid, Primitives_Polythedra, Point_Animatedcube, Primitives_Ignorance]"
       },
       "enabled": true
     },
@@ -171,10 +171,10 @@
       "name": "Artifact Citations",
       "pass": false,
       "metrics": {
-        "citations": 143,
-        "held": 131,
+        "citations": 130,
+        "held": 117,
         "near": 2,
-        "lost": 8,
+        "lost": 9,
         "elsewhere": 2,
         "no_such_work": 0,
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
@@ -187,14 +187,14 @@
       "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "token_lines": 689,
+        "token_lines": 687,
         "closed_dishonestly": 4,
         "ghost": 0,
         "echo": 4,
         "no_registry": 0,
         "broken_body": 0,
         "hero_ghost": 0,
-        "open_not_counted": "empty 110 · stub 55 · elsewhere 39 · no_body 7 · no_subject 48",
+        "open_not_counted": "empty 110 · stub 53 · elsewhere 39 · no_body 7 · no_subject 48",
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
@@ -207,17 +207,17 @@
         "detector_selftest": "PASS",
         "rooms_declared": 1017,
         "rooms_resolved": 937,
-        "prose_files": 1434,
+        "prose_files": 1449,
         "prose_tracked": 1270,
-        "unreachable_from_a_clone": 164,
-        "stranded_words": 81186,
-        "age_reading": "25 touched within 24h (youngest 3.3h), 139 idle longer (oldest 275h). The second group is not live work.",
+        "unreachable_from_a_clone": 179,
+        "stranded_words": 84691,
+        "age_reading": "48 touched within 24h (youngest 0.1h), 131 idle longer (oldest 277.5h). The second group is not live work.",
         "claimed_in_the_forum": 7,
-        "claimed_reading": "7 of 164 claimed in writing by claude-long-museum-vocab, claude-opus-artifacts, fable-n6, fable-r1 -- leave those alone. The other 157 are nobody's: no open thread names them.",
-        "claimed_by": "commons/maps/Color_Context_Placed/field_notes.md -> claude-opus-artifacts (260909-onegs, 5.6d), commons/maps/Color_Context_Placed/final.md -> claude-opus-artifacts (260909-onegs, 5.6d), commons/maps/Noise_Inside_Noise/field_notes.md -> fable-n6 (260913-7k0zy, 2d), commons/maps/Noise_Inside_Noise/final.md -> fable-n6 (260913-7k0zy, 2d), commons/maps/Random_Entropy/critical.md -> fable-r1 (260911-8zk7l, 3.7d), commons/maps/Symmetry_Seventeen/field_notes.md -> claude-long-museum-vocab (260910-624zx, 4.3d), commons/maps/Symmetry_Seventeen/final.md -> claude-long-museum-vocab (260910-624zx, 4.3d)",
-        "unreachable": "commons/maps/Accumulation_Riemann/final.md, commons/maps/Accumulation_Riemann/critical.md, commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md, commons/maps/Array/final.md, commons/maps/Array_Patterns/final.md, commons/maps/Array_Patterns/field_notes.md, commons/maps/Assemblage_Same_Desire/final.md, commons/maps/Assemblage_Same_Desire/intent.md, commons/maps/Assemblage_Same_Desire/technical.md, commons/maps/Assemblage_Same_Desire/critical.md, commons/maps/CA_AgentsCircuits/final.md, commons/maps/CA_BeyondBinary/final.md, commons/maps/CA_BeyondBinary/field_notes.md, commons/maps/CA_EdgeOfChaos/final.md, commons/maps/CA_EdgeOfChaos/field_notes.md, commons/maps/CA_ElementaryRules/final.md, commons/maps/CA_ElementaryRules/field_notes.md, commons/maps/CA_ExpandingSpace/final.md, commons/maps/CA_ExpandingSpace/field_notes.md, commons/maps/CA_GameOfLife/final.md, commons/maps/CA_GameOfLife/field_notes.md, commons/maps/CA_Introduction/final.md, commons/maps/CA_Introduction/field_notes.md, commons/maps/CA_SoftRules/final.md, commons/maps/CA_SoftRules/field_notes.md, commons/maps/Change_Intro/final.md, commons/maps/Change_Intro/critical.md, commons/maps/Change_Reconciliation/final.md, commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md, commons/maps/Color_Nails/final.md, commons/maps/Color_Nails/field_notes.md, commons/maps/Color_Pillar/final.md, commons/maps/Color_Pillar/field_notes.md, commons/maps/Color_Walls/final.md, commons/maps/Color_Walls/field_notes.md, commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md, commons/maps/CriticalAlgorithms_Applied_Ethics/final.md, commons/maps/Flow_Field/final.md, commons/maps/Flow_Field/critical.md, commons/maps/FormFinding_Descent/intent.md, commons/maps/FormFinding_Descent/critical.md, commons/maps/FormFinding_Forge/final.md, commons/maps/Fractal_CantorSet/final.md, commons/maps/Fractal_CrossSequence/final.md, commons/maps/Fractal_GoldenSpiral/final.md, commons/maps/Fractal_MengerSponge/final.md, commons/maps/Fractal_MengerSponge/field_notes.md, commons/maps/Fractal_RecursiveTrees/final.md, commons/maps/Fractal_Synthesis/final.md, commons/maps/GT_Connectivity/final.md, commons/maps/GT_Flow/final.md, commons/maps/GT_Foundations/final.md, commons/maps/GT_Layout/final.md, commons/maps/GT_Matching/final.md, commons/maps/GT_Network_Analysis/final.md, commons/maps/GT_Pathfinding/final.md, commons/maps/GT_Spanning_Trees/final.md, commons/maps/Godel_Incompleteness/final.md, commons/maps/ISO_AnimatedNoise/final.md, commons/maps/ISO_CaveGeneration/final.md, commons/maps/ISO_Caves/final.md, commons/maps/ISO_FlatTerrain/final.md, commons/maps/ISO_ImplicitModeling/final.md, commons/maps/ISO_Introduction/final.md, commons/maps/ISO_LookupTable/final.md, commons/maps/ISO_Metaballs/final.md, commons/maps/ISO_PortalLandscape/final.md, commons/maps/ISO_RhizomeBody/final.md, commons/maps/ISO_RhizomeBody/blurb.md, commons/maps/ISO_Sculpting/final.md, commons/maps/ISO_ShapesGallery/final.md, commons/maps/ISO_TorusGyroid/final.md, commons/maps/LSystems_Architecture/final.md, commons/maps/LSystems_Competition/final.md, commons/maps/LSystems_Grammar_Lab/final.md, commons/maps/LSystems_Grammars_And_Curves/final.md, commons/maps/LSystems_Growth/final.md, commons/maps/LSystems_Living/final.md, commons/maps/Lab_Path/final.md, commons/maps/ML_Classification/final.md, commons/maps/ML_Evolution/final.md, commons/maps/ML_Generative/final.md, commons/maps/ML_Gradient_Landscape/final.md, commons/maps/ML_Neural_Networks/final.md, commons/maps/ML_Perception/final.md, commons/maps/ML_Sequence_Memory/final.md, commons/maps/ML_Synthesis/final.md, commons/maps/Noise_Inside_Noise/final.md, commons/maps/Noise_Inside_Noise/field_notes.md, commons/maps/Noise_Space_10/final.md, commons/maps/Noise_Space_10/field_notes.md, commons/maps/PG_Branching_Growth/final.md, commons/maps/PG_Caves_Mazes/final.md, commons/maps/PG_Genetic_Evolution/final.md, commons/maps/PG_Mirrored_Patterns/final.md, commons/maps/PG_Percolation_Network/final.md, commons/maps/PG_Sculpted_Forms/final.md, commons/maps/PG_Space_Colonization/final.md, commons/maps/PRIM_RhizomeWorld/blurb.md, commons/maps/Pattern_Foundry/final.md, commons/maps/Pattern_Foundry/technical.md, commons/maps/Pattern_Foundry/critical.md, commons/maps/Pattern_Foundry/field_notes.md, commons/maps/PostCrisis_Synthesis/final.md, commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md, commons/maps/QFEP_E_Term/final.md, commons/maps/QFEP_Edge_Of_Chaos/final.md, commons/maps/QFEP_F_Term/final.md, commons/maps/QFEP_Introduction/final.md, commons/maps/QFEP_Lambda_Spectrum/final.md, commons/maps/QFEP_Phi_Term/final.md, commons/maps/QFEP_Sandbox/final.md, commons/maps/QFEP_Synthesis/final.md, commons/maps/Random_Cubes/final.md, commons/maps/Random_Entropy/critical.md, commons/maps/Random_Pheromone/final.md, commons/maps/Random_Rotate_Random_XYZ/final.md, commons/maps/Random_Space/final.md, commons/maps/Random_Space_Geometry/final.md, commons/maps/Randomness_10_PRINT_Algorithm/final.md, commons/maps/Randomness_Examples_of_Randomness/final.md, commons/maps/SoftBodies_Cloth_Physics/final.md, commons/maps/SoftBodies_Obsticals_Part2/final.md, commons/maps/SoftBodies_Playground_of_Joy/final.md, commons/maps/SpeculativeComputation_Collective_Knowledge/final.md, commons/maps/SpeculativeComputation_Paraconsistent_Engineering/final.md, commons/maps/SpeculativeComputation_Rhizome_Network/final.md, commons/maps/SpeculativeComputation_Situated_Computation/final.md, commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md, commons/maps/SwarmIntelligence_Ant_Colony_Optimization/final.md, commons/maps/SwarmIntelligence_Boids_Algorithm/final.md, commons/maps/SwarmIntelligence_FlowFields/final.md, commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md, commons/maps/SwarmIntelligence_PhysarumColony/final.md, commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md, commons/maps/Symmetry_Seventeen/final.md, commons/maps/Symmetry_Seventeen/field_notes.md, commons/maps/Topology_Entropy_Morphogenesis/final.md, commons/maps/Tutorial_Disco/final.md, commons/maps/Tutorial_Pattern/final.md, commons/maps/Tutorial_Pattern/field_notes.md, commons/maps/VFM_02_Operations/critical.md, commons/maps/VFM_03_Motion/final.md, commons/maps/VFM_03_Motion/critical.md, commons/maps/VFM_05_Launch/final.md, commons/maps/VFM_05_Launch/critical.md, commons/maps/VFM_07_Gravity/critical.md, commons/maps/VFM_08_Arena/final.md, commons/maps/VFM_08_Arena/critical.md, commons/maps/VFM_08_Arena/field_notes.md, commons/maps/VFM_09_Legs/critical.md, commons/maps/Vectors_Act1_WhatAVectorIs/critical.md, commons/maps/Vectors_Act2_VectorArithmetic/critical.md, commons/maps/Vectors_Act3_FieldsAndMotion/critical.md, commons/maps/Vectors_Act4a_KineticForces/critical.md, commons/maps/Vectors_Act4b_Oscillation/critical.md, commons/maps/Vectors_Act5_ForceAsPlace/critical.md, commons/maps/WaveFunctions_3D_Wave_Propagation/final.md, commons/maps/WaveFunctions_John_Cage/final.md, commons/maps/WaveFunctions_TrigWalkingPath/final.md, commons/maps/WaveFunctions_Unit_Circle/final.md, commons/maps/Wavefunctions_Bernini/final.md, commons/maps/Wavefunctions_Sky_Stairs/final.md",
+        "claimed_reading": "7 of 179 claimed in writing by claude-long-museum-vocab, claude-opus-artifacts, fable-n6, fable-r1 -- leave those alone. The other 172 are nobody's: no open thread names them.",
+        "claimed_by": "commons/maps/Color_Context_Placed/field_notes.md -> claude-opus-artifacts (260909-onegs, 5.8d), commons/maps/Color_Context_Placed/final.md -> claude-opus-artifacts (260909-onegs, 5.8d), commons/maps/Noise_Inside_Noise/field_notes.md -> fable-n6 (260913-7k0zy, 2.1d), commons/maps/Noise_Inside_Noise/final.md -> fable-n6 (260913-7k0zy, 2.1d), commons/maps/Random_Entropy/critical.md -> fable-r1 (260911-8zk7l, 3.8d), commons/maps/Symmetry_Seventeen/field_notes.md -> claude-long-museum-vocab (260910-624zx, 4.4d), commons/maps/Symmetry_Seventeen/final.md -> claude-long-museum-vocab (260910-624zx, 4.4d)",
+        "unreachable": "commons/maps/Accumulation_Riemann/final.md, commons/maps/Accumulation_Riemann/critical.md, commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md, commons/maps/Array/final.md, commons/maps/Array_Patterns/final.md, commons/maps/Array_Patterns/field_notes.md, commons/maps/Assemblage_Same_Desire/final.md, commons/maps/Assemblage_Same_Desire/intent.md, commons/maps/Assemblage_Same_Desire/technical.md, commons/maps/Assemblage_Same_Desire/critical.md, commons/maps/CA_AgentsCircuits/final.md, commons/maps/CA_BeyondBinary/final.md, commons/maps/CA_BeyondBinary/field_notes.md, commons/maps/CA_EdgeOfChaos/final.md, commons/maps/CA_EdgeOfChaos/field_notes.md, commons/maps/CA_ElementaryRules/final.md, commons/maps/CA_ElementaryRules/field_notes.md, commons/maps/CA_ExpandingSpace/final.md, commons/maps/CA_ExpandingSpace/field_notes.md, commons/maps/CA_GameOfLife/final.md, commons/maps/CA_GameOfLife/field_notes.md, commons/maps/CA_Introduction/final.md, commons/maps/CA_Introduction/field_notes.md, commons/maps/CA_SoftRules/final.md, commons/maps/CA_SoftRules/field_notes.md, commons/maps/Change_Intro/final.md, commons/maps/Change_Intro/critical.md, commons/maps/Change_Reconciliation/final.md, commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md, commons/maps/Color_Nails/final.md, commons/maps/Color_Nails/field_notes.md, commons/maps/Color_Pillar/final.md, commons/maps/Color_Pillar/field_notes.md, commons/maps/Color_Walls/final.md, commons/maps/Color_Walls/field_notes.md, commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md, commons/maps/CriticalAlgorithms_Applied_Ethics/final.md, commons/maps/Flow_Field/final.md, commons/maps/Flow_Field/critical.md, commons/maps/FormFinding_Descent/intent.md, commons/maps/FormFinding_Descent/critical.md, commons/maps/FormFinding_Forge/final.md, commons/maps/Fractal_CantorSet/final.md, commons/maps/Fractal_CrossSequence/final.md, commons/maps/Fractal_GoldenSpiral/final.md, commons/maps/Fractal_MengerSponge/final.md, commons/maps/Fractal_MengerSponge/field_notes.md, commons/maps/Fractal_RecursiveTrees/final.md, commons/maps/Fractal_Synthesis/final.md, commons/maps/GT_Connectivity/final.md, commons/maps/GT_Flow/final.md, commons/maps/GT_Foundations/final.md, commons/maps/GT_Layout/final.md, commons/maps/GT_Matching/final.md, commons/maps/GT_Network_Analysis/final.md, commons/maps/GT_Pathfinding/final.md, commons/maps/GT_Spanning_Trees/final.md, commons/maps/Godel_Incompleteness/final.md, commons/maps/ISO_AnimatedNoise/final.md, commons/maps/ISO_CaveGeneration/final.md, commons/maps/ISO_Caves/final.md, commons/maps/ISO_FlatTerrain/final.md, commons/maps/ISO_ImplicitModeling/final.md, commons/maps/ISO_Introduction/final.md, commons/maps/ISO_Introduction/intent.md, commons/maps/ISO_Introduction/technical.md, commons/maps/ISO_Introduction/critical.md, commons/maps/ISO_LookupTable/final.md, commons/maps/ISO_LookupTable/intent.md, commons/maps/ISO_LookupTable/technical.md, commons/maps/ISO_LookupTable/critical.md, commons/maps/ISO_Metaballs/final.md, commons/maps/ISO_PortalLandscape/final.md, commons/maps/ISO_RhizomeBody/final.md, commons/maps/ISO_RhizomeBody/blurb.md, commons/maps/ISO_Sculpting/final.md, commons/maps/ISO_Sculpting/intent.md, commons/maps/ISO_Sculpting/technical.md, commons/maps/ISO_Sculpting/critical.md, commons/maps/ISO_ShapesGallery/final.md, commons/maps/ISO_ShapesGallery/intent.md, commons/maps/ISO_ShapesGallery/technical.md, commons/maps/ISO_ShapesGallery/critical.md, commons/maps/ISO_TorusGyroid/final.md, commons/maps/ISO_TorusGyroid/intent.md, commons/maps/ISO_TorusGyroid/technical.md, commons/maps/ISO_TorusGyroid/critical.md, commons/maps/LSystems_Architecture/final.md, commons/maps/LSystems_Competition/final.md, commons/maps/LSystems_Grammar_Lab/final.md, commons/maps/LSystems_Grammars_And_Curves/final.md, commons/maps/LSystems_Growth/final.md, commons/maps/LSystems_Living/final.md, commons/maps/Lab_Path/final.md, commons/maps/ML_Classification/final.md, commons/maps/ML_Evolution/final.md, commons/maps/ML_Generative/final.md, commons/maps/ML_Gradient_Landscape/final.md, commons/maps/ML_Neural_Networks/final.md, commons/maps/ML_Perception/final.md, commons/maps/ML_Sequence_Memory/final.md, commons/maps/ML_Synthesis/final.md, commons/maps/Noise_Inside_Noise/final.md, commons/maps/Noise_Inside_Noise/field_notes.md, commons/maps/Noise_Space_10/final.md, commons/maps/Noise_Space_10/field_notes.md, commons/maps/PG_Branching_Growth/final.md, commons/maps/PG_Caves_Mazes/final.md, commons/maps/PG_Genetic_Evolution/final.md, commons/maps/PG_Mirrored_Patterns/final.md, commons/maps/PG_Percolation_Network/final.md, commons/maps/PG_Sculpted_Forms/final.md, commons/maps/PG_Space_Colonization/final.md, commons/maps/PRIM_RhizomeWorld/blurb.md, commons/maps/Pattern_Foundry/final.md, commons/maps/Pattern_Foundry/technical.md, commons/maps/Pattern_Foundry/critical.md, commons/maps/Pattern_Foundry/field_notes.md, commons/maps/PostCrisis_Synthesis/final.md, commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md, commons/maps/QFEP_E_Term/final.md, commons/maps/QFEP_Edge_Of_Chaos/final.md, commons/maps/QFEP_F_Term/final.md, commons/maps/QFEP_Introduction/final.md, commons/maps/QFEP_Lambda_Spectrum/final.md, commons/maps/QFEP_Phi_Term/final.md, commons/maps/QFEP_Sandbox/final.md, commons/maps/QFEP_Synthesis/final.md, commons/maps/Random_Cubes/final.md, commons/maps/Random_Entropy/critical.md, commons/maps/Random_Pheromone/final.md, commons/maps/Random_Rotate_Random_XYZ/final.md, commons/maps/Random_Space/final.md, commons/maps/Random_Space_Geometry/final.md, commons/maps/Randomness_10_PRINT_Algorithm/final.md, commons/maps/Randomness_Examples_of_Randomness/final.md, commons/maps/SoftBodies_Cloth_Physics/final.md, commons/maps/SoftBodies_Obsticals_Part2/final.md, commons/maps/SoftBodies_Playground_of_Joy/final.md, commons/maps/SpeculativeComputation_Collective_Knowledge/final.md, commons/maps/SpeculativeComputation_Paraconsistent_Engineering/final.md, commons/maps/SpeculativeComputation_Rhizome_Network/final.md, commons/maps/SpeculativeComputation_Situated_Computation/final.md, commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md, commons/maps/SwarmIntelligence_Ant_Colony_Optimization/final.md, commons/maps/SwarmIntelligence_Boids_Algorithm/final.md, commons/maps/SwarmIntelligence_FlowFields/final.md, commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md, commons/maps/SwarmIntelligence_PhysarumColony/final.md, commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md, commons/maps/Symmetry_Seventeen/final.md, commons/maps/Symmetry_Seventeen/field_notes.md, commons/maps/Topology_Entropy_Morphogenesis/final.md, commons/maps/Tutorial_Disco/final.md, commons/maps/Tutorial_Pattern/final.md, commons/maps/Tutorial_Pattern/field_notes.md, commons/maps/VFM_02_Operations/critical.md, commons/maps/VFM_03_Motion/final.md, commons/maps/VFM_03_Motion/critical.md, commons/maps/VFM_05_Launch/final.md, commons/maps/VFM_05_Launch/critical.md, commons/maps/VFM_07_Gravity/critical.md, commons/maps/VFM_08_Arena/final.md, commons/maps/VFM_08_Arena/critical.md, commons/maps/VFM_08_Arena/field_notes.md, commons/maps/VFM_09_Legs/critical.md, commons/maps/Vectors_Act1_WhatAVectorIs/critical.md, commons/maps/Vectors_Act2_VectorArithmetic/critical.md, commons/maps/Vectors_Act3_FieldsAndMotion/critical.md, commons/maps/Vectors_Act4a_KineticForces/critical.md, commons/maps/Vectors_Act4b_Oscillation/critical.md, commons/maps/Vectors_Act5_ForceAsPlace/critical.md, commons/maps/WaveFunctions_3D_Wave_Propagation/final.md, commons/maps/WaveFunctions_John_Cage/final.md, commons/maps/WaveFunctions_TrigWalkingPath/final.md, commons/maps/WaveFunctions_Unit_Circle/final.md, commons/maps/Wavefunctions_Bernini/final.md, commons/maps/Wavefunctions_Sky_Stairs/final.md",
         "declared_case_mismatch": "none",
-        "tree_state": "untracked 164  [untracked: commons/maps/Accumulation_Riemann/final.md, commons/maps/Accumulation_Riemann/critical.md, commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md, commons/maps/Array/final.md]"
+        "tree_state": "untracked 179  [untracked: commons/maps/Accumulation_Riemann/final.md, commons/maps/Accumulation_Riemann/critical.md, commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md, commons/maps/Array/final.md]"
       },
       "enabled": true
     },
@@ -243,13 +243,13 @@
       "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "tools_on_disk": 847,
+        "tools_on_disk": 852,
         "tools_tracked": 760,
-        "unreachable_from_a_clone": 61,
-        "live_uncommitted": 26,
+        "unreachable_from_a_clone": 64,
+        "live_uncommitted": 28,
         "ignored_on_purpose": 0,
-        "stranded": "tools/activation_ladder.py (404h), tools/analyze_landscape_size_series.py (64h), tools/build_air_music_review.py (60h), tools/build_ca_elementary_review.py (32h), tools/build_ca_history_review.py (32h), tools/build_ca_intro_review.py (33h), tools/build_ca_life_review.py (31h), tools/build_ca_proximity_review.py (31h), tools/build_ca_soft_rules_review.py (24h), tools/build_columns_review.py (45h), tools/build_effect_sound_review.py (61h), tools/build_entropy_review.py (57h), tools/build_game_review.py (47h), tools/build_gaussian_review.py (55h), tools/build_inside_review.py (39h), tools/build_landscape_article.py (64h), tools/build_mushrooms_review.py (54h), tools/build_pair_review.py (34h), tools/build_points_review.py (46h), tools/build_possible_bodies_guide.py (63h), tools/build_random_definition_review.py (57h), tools/build_remove_review.py (56h), tools/build_sequence_platform_recovery_report.py (110h), tools/build_sine_contact_guide.py (62h), tools/build_space_review.py (39h), tools/build_spine_platform_recovery_report.py (110h), tools/build_synthesis_lab_review.py (59h), tools/build_torus_review.py (45h), tools/build_voxel_review.py (43h), tools/build_walk_review.py (56h), tools/build_wall_review.py (42h), tools/build_waves_chance_noise_plan.py (62h), tools/build_wcn_visual_review.py (69h), tools/capture_wcn_visual_review.py (69h), tools/check_wave_platform_recovery.py (112h), tools/compose_docs.py (272h), tools/dream_bodies_promote.py (283h), tools/em_cartridge.py (478h), tools/em_refresh_sequence.py (164h), tools/museum_actions.py (168h), tools/museum_progress.py (162h), tools/probes/array_encounters.gd (165h), tools/probes/disco_encounter.gd (164h), tools/probes/museum_encounter.gd (164h), tools/probes/museum_snap_and_pen.gd (167h), tools/probes/museum_trace_speed.gd (168h), tools/probes/museum_triangle_fan.gd (168h), tools/probes/pickup_encounter.gd (164h), tools/recover_sequence_platforms.py (111h), tools/recover_spine_platforms.py (110h), tools/recover_wave_platforms.py (114h), tools/run_disco_encounter_probe.py (164h), tools/run_encounter_probe.py (164h), tools/run_pickup_encounter_probe.py (164h), tools/test_artifact_roles_book_inventory.py (141h), tools/test_build_spine_artifact_order.py (167h), tools/test_museum_actions.py (168h), tools/test_museum_necklace_ledger.py (135h), tools/test_museum_progress.py (162h), tools/test_place_artifacts_room.py (400h), tools/test_recover_spine_platforms.py (110h)",
-        "tree_state": "untracked 61  [untracked: tools/activation_ladder.py, tools/analyze_landscape_size_series.py, tools/build_air_music_review.py, tools/build_ca_elementary_review.py]"
+        "stranded": "tools/activation_ladder.py (406h), tools/analyze_landscape_size_series.py (66h), tools/build_air_music_review.py (62h), tools/build_ca_edge_review.py (24h), tools/build_ca_elementary_review.py (35h), tools/build_ca_forms_review.py (26h), tools/build_ca_history_review.py (34h), tools/build_ca_intro_review.py (35h), tools/build_ca_life_review.py (34h), tools/build_ca_proximity_review.py (33h), tools/build_ca_soft_rules_review.py (27h), tools/build_ca_volume_review.py (26h), tools/build_columns_review.py (48h), tools/build_effect_sound_review.py (63h), tools/build_entropy_review.py (59h), tools/build_game_review.py (49h), tools/build_gaussian_review.py (58h), tools/build_inside_review.py (42h), tools/build_landscape_article.py (66h), tools/build_mushrooms_review.py (57h), tools/build_pair_review.py (36h), tools/build_points_review.py (48h), tools/build_possible_bodies_guide.py (65h), tools/build_random_definition_review.py (60h), tools/build_remove_review.py (59h), tools/build_sequence_platform_recovery_report.py (113h), tools/build_sine_contact_guide.py (64h), tools/build_space_review.py (41h), tools/build_spine_platform_recovery_report.py (113h), tools/build_synthesis_lab_review.py (62h), tools/build_torus_review.py (47h), tools/build_voxel_review.py (46h), tools/build_walk_review.py (58h), tools/build_wall_review.py (44h), tools/build_waves_chance_noise_plan.py (64h), tools/build_wcn_visual_review.py (71h), tools/capture_wcn_visual_review.py (72h), tools/check_wave_platform_recovery.py (115h), tools/compose_docs.py (274h), tools/dream_bodies_promote.py (286h), tools/em_cartridge.py (480h), tools/em_refresh_sequence.py (167h), tools/museum_actions.py (170h), tools/museum_progress.py (164h), tools/probes/array_encounters.gd (167h), tools/probes/disco_encounter.gd (167h), tools/probes/museum_encounter.gd (167h), tools/probes/museum_snap_and_pen.gd (170h), tools/probes/museum_trace_speed.gd (170h), tools/probes/museum_triangle_fan.gd (170h), tools/probes/pickup_encounter.gd (167h), tools/recover_sequence_platforms.py (113h), tools/recover_spine_platforms.py (113h), tools/recover_wave_platforms.py (117h), tools/run_disco_encounter_probe.py (167h), tools/run_encounter_probe.py (167h), tools/run_pickup_encounter_probe.py (167h), tools/test_artifact_roles_book_inventory.py (144h), tools/test_build_spine_artifact_order.py (170h), tools/test_museum_actions.py (170h), tools/test_museum_necklace_ledger.py (138h), tools/test_museum_progress.py (164h), tools/test_place_artifacts_room.py (402h), tools/test_recover_spine_platforms.py (113h)",
+        "tree_state": "untracked 64  [untracked: tools/activation_ladder.py, tools/analyze_landscape_size_series.py, tools/build_air_music_review.py, tools/build_ca_edge_review.py]"
       },
       "enabled": true
     },
@@ -260,7 +260,7 @@
       "metrics": {
         "detector_selftest": "PASS",
         "maps_scanned": 2796,
-        "cells_scanned": 3638051,
+        "cells_scanned": 3690437,
         "non_string_cells": 3,
         "maps_affected": 1,
         "in_working_tree": 1,
@@ -285,8 +285,8 @@
       "cross_sequence_prefix_hints": 430
     },
     "artifact_audit_summary": {
-      "total_entries": 3018,
-      "dict_entries": 3018,
+      "total_entries": 3024,
+      "dict_entries": 3024,
       "non_dict_entries": 0,
       "placeholder_entries": 0,
       "missing_scene_path": 0,
@@ -296,13 +296,13 @@
       "unresolved_scene_files": 0,
       "missing_include_in_map_data": 118,
       "missing_map_ready": 113,
-      "missing_map_sequences_field": 326,
+      "missing_map_sequences_field": 332,
       "empty_map_sequences": 839,
       "algorithm_without_curation": 5
     },
     "grade_counts": {
-      "A": 2274,
-      "C": 161,
+      "A": 2275,
+      "C": 160,
       "B": 363
     },
     "lab_metrics": {
@@ -354,8 +354,8 @@
         "",
         "| Metric | Count |",
         "|---|---:|",
-        "| `total_entries` | 3018 |",
-        "| `dict_entries` | 3018 |",
+        "| `total_entries` | 3024 |",
+        "| `dict_entries` | 3024 |",
         "| `non_dict_entries` | 0 |",
         "| `placeholder_entries` | 0 |",
         "| `missing_scene_path` | 0 |",
@@ -365,7 +365,7 @@
         "| `unresolved_scene_files` | 0 |",
         "| `missing_include_in_map_data` | 118 |",
         "| `missing_map_ready` | 113 |",
-        "| `missing_map_sequences_field` | 326 |",
+        "| `missing_map_sequences_field` | 332 |",
         "| `empty_map_sequences` | 839 |",
         "| `algorithm_without_curation` | 5 |"
       ],
