@@ -720,6 +720,18 @@
       "topic": "tool discoverability",
       "insight": "An affordance whose only invoker is a person is inert until it is named on the surface that person reads: forum.py --claims got 0 of 3 threads in 8 hours with no CLAUDE.md row, while forum.py itself has 70 threads by 45 authors with a table",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-09-15T04:52:42.466501+00:00",
+      "topic": "pipeline scorer",
+      "insight": "Stage 5 of sequence_pipeline_scorer silently depended on the caller's UTF-8 mode: under python -X utf8 the pathfinder's cp1252 dash killed the subprocess reader, stdout came back None and the swallowed exception read 7 of 14 randomness maps as unvalidated (global_avg 5.667 vs 6.083). Fixed 2026-09-15 with encoding=utf-8 errors=replace. Separately: with a Quest on USB, the Ada install is readable and has never had SEND pressed, so stage 6's 0% is a true reading waiting on a walk, not a plumbing fault.",
+      "lod": 3,
+      "tags": [
+        "scorer",
+        "vr",
+        "encoding",
+        "breather"
+      ]
     }
   ]
 }

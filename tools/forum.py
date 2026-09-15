@@ -205,6 +205,12 @@ def main() -> int:
     flags = {a.split("=", 1)[0]: (a.split("=", 1)[1] if "=" in a else True)
              for a in sys.argv[1:] if a.startswith("--")}
     who = str(flags.get("--as", "agent"))
+    # --help used to fall through to `open` and print the thread list, so the
+    # --claims flag was invisible from the one place a session looks for flags
+    # (prop-050: 23 threads after it shipped, 0 carried it).
+    if "--help" in flags or (args and args[0] in ("help", "-h")):
+        print(__doc__)
+        return 0
     cmd = args[0] if args else "open"
 
     if cmd in ("open", "list"):
@@ -236,7 +242,7 @@ def main() -> int:
 
     if cmd == "ask":
         if len(args) < 3:
-            print('usage: forum.py ask "title" "body" [--tags=a,b] [--as=name]')
+            print('usage: forum.py ask "title" "body" [--tags=a,b] [--as=name] [--claims=path,Room]')
             return 2
         tags = [s.strip().lower() for s in str(flags.get("--tags", "")).split(",") if s.strip()] \
             if flags.get("--tags") else []
@@ -250,7 +256,7 @@ def main() -> int:
 
     if cmd == "answer":
         if len(args) < 3:
-            print('usage: forum.py answer <id> "body" [--settle] [--as=name]')
+            print('usage: forum.py answer <id> "body" [--settle] [--as=name] [--claims=path,Room]')
             return 2
         res = _post({"kind": "answer", "author": who, "id": args[1], "body": args[2],
                      "resolves": bool(flags.get("--settle")),

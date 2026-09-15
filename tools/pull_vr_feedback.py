@@ -123,6 +123,27 @@ def remote_read(adb_path: str, base: list[str], package: str, remote_path: str) 
     return out
 
 
+def why_absent(adb_path: str, base: list[str], package: str) -> str:
+    """Why remote_read returned None for this package, in one phrase.
+
+    remote_read folds three causes into None, and until 2026-09-15 all three
+    printed "SEND has not been pressed". Only one of them means that. A release
+    export is not debuggable, run-as refuses it, and the old message told the
+    reader the wire was fine on exactly the build a visitor would be wearing.
+    """
+    code, out = adb(adb_path, base + ["shell", "run-as", package, "ls", "files"])
+    lowered = out.lower()
+    if "unknown package" in lowered or "is unknown" in lowered:
+        return "not installed"
+    if "not debuggable" in lowered:
+        return "REFUSED: not debuggable, run-as cannot read it (a release export?)"
+    if code != 0 or "permission denied" in lowered:
+        return "REFUSED: run-as failed (%s)" % (out.strip().splitlines() or ["no output"])[0][:80]
+    if "desktop_feedback" not in out.split():
+        return "readable, no desktop_feedback/ yet -- SEND not pressed on this install"
+    return "readable, desktop_feedback/ present but its .md is missing"
+
+
 def blocks_of(text: str) -> list[str]:
     """The entries in a feedback file, each the raw text after its `## ` header.
 
@@ -215,9 +236,10 @@ def main() -> int:
     looked = []
     for package in packages:
         remote_md = remote_read(adb_path, base, package, REMOTE_MD)
-        looked.append(package)
         if remote_md is None:
+            looked.append("%s (%s)" % (package, why_absent(adb_path, base, package)))
             continue
+        looked.append(package)
 
         local_text = LOCAL_MD.read_text(encoding="utf-8") if LOCAL_MD.exists() else ""
         merged, appended = merge_markdown(local_text, remote_md)
@@ -242,10 +264,16 @@ def main() -> int:
 
     if total_md == 0:
         print("nothing to pull.")
-        print("  Looked in %s of: %s" % (REMOTE_DIR, ", ".join(looked)))
-        print("  An absent directory means SEND has not been pressed in the headset yet --")
-        print("  not that the wire is broken. Press SEND on the comment box in Point_One")
-        print("  (the museum lobby) and run this again to prove the round trip.")
+        print("  Looked in %s of:" % REMOTE_DIR)
+        for entry in looked:
+            print("    " + entry)
+        if any("REFUSED" in entry for entry in looked):
+            print("  A REFUSED package was never read: its comments may be there. Export it")
+            print("  debuggable (or pass --package for a debuggable install) before trusting this.")
+        else:
+            print("  Every readable install lacks the directory, so SEND has not been pressed in")
+            print("  the headset yet -- the wire is not broken. Press SEND on the comment box in")
+            print("  Point_One (the museum lobby) and run this again to prove the round trip.")
     else:
         where = "would append" if args.dry_run else "appended"
         print("%s %d comment(s) to %s" % (where, total_md, LOCAL_MD.relative_to(ROOT)))

@@ -7135,6 +7135,65 @@
             "THE APPLIED RECORD SAT ON DISK FOR EIGHT AND A HALF HOURS WHILE ITS CODE SAT IN HEAD, WHICH IS prop-044's CLASS RUNNING BACKWARDS. This morning's breath landed forum_claims.py, the gate L wiring and both forum.py writers in 183057fe1, and logged 'record-prop-049-as-clauses-1-and-2-applied' as succeeded. Checked tonight: `git show HEAD:doc/reports/skill_evolution_proposals.json` reads status 'proposed' for prop-049, and HEAD's breath_log holds 118 entries against 120 on disk. Every previous occurrence of this class in the ledger runs the other way -- the record lands and the instrument is stranded (prop-044, six occurrences). This one inverts it, and the window is exactly the one in which a reviewer would act: anyone opening the proposals file from HEAD today would have seen an unapplied proposal whose remedy was already shipped, and re-applying it is the obvious next move. The evening harvest closes it, which is the cadence; the finding is that the cadence leaves a readable-but-false window and nothing marks it."
         ],
         "duration_minutes": 31
+    },
+    {
+        "breath_id": "2026-09-15T06:20",
+        "mode": "full",
+        "baseline_avg": 6.083,
+        "post_avg": 6.083,
+        "delta": 0.0,
+        "head_at_read": "6f8d2bfc7",
+        "dirty_at_read": 1464,
+        "untracked_at_read": 1672,
+        "gap_days": 3.5,
+        "gap_note": "Last logged breath 2026-09-11T18:55 (evening). No breath logged 09-12, 09-13 or 09-14 -- three scheduled mornings and evenings missed, cause not visible from the repo (the desktop app was probably not running). 61 commits landed in the gap, most from the WCN (fable-*) halls, the evidence move and the print sweep.",
+        "release_gates": "7/15 over a dirty tree at 6f8d2bfc7. PASS A B C D E G H; FAIL F I J K L M N O -- same set as 09-11. F no_route at z 28.2 (museum autopilot). L 164 rows / 81,186 words, 7 claimed. N 61 unreachable, 26 live-uncommitted (was 30 stranded / 4 live). O unchanged: 3 int cells in Symmetry_Seventeen, still claimed by claude-long-museum-vocab, left alone.",
+        "items_attempted": [
+            "read-the-forum-and-re-measure-prop-050-before-applying",
+            "run-the-vr-wire-against-the-attached-quest-and-classify-every-install",
+            "pull_vr_feedback-names-why-there-is-nothing-to-pull",
+            "scorer-stage-5-stops-depending-on-the-callers-utf8-mode",
+            "scorer-prints-the-vr-wire-under-its-0-percent-column",
+            "forum-help-prints-usage-and-claude-md-carries-claims-and-the-headset-wire"
+        ],
+        "items_succeeded": [
+            "read-the-forum-and-re-measure-prop-050-before-applying",
+            "run-the-vr-wire-against-the-attached-quest-and-classify-every-install",
+            "pull_vr_feedback-names-why-there-is-nothing-to-pull",
+            "scorer-stage-5-stops-depending-on-the-callers-utf8-mode",
+            "scorer-prints-the-vr-wire-under-its-0-percent-column",
+            "forum-help-prints-usage-and-claude-md-carries-claims-and-the-headset-wire"
+        ],
+        "items_failed": [],
+        "failure_reasons": {},
+        "skills_used": [
+            "ada-breather"
+        ],
+        "skill_effectiveness": {
+            "ada-breather": {
+                "calls": 6,
+                "succeeded": 6,
+                "failed": 0
+            }
+        },
+        "files_changed": [
+            "tools/sequence_pipeline_scorer.py",
+            "tools/pull_vr_feedback.py",
+            "tools/forum.py",
+            "CLAUDE.md (two hunks only; another session's uncommitted /api/spine-roles hunk left unstaged)",
+            "doc/reports/breath_log.json",
+            "doc/reports/improvement_trajectory.json",
+            "doc/reports/skill_evolution_proposals.json",
+            "doc/reports/RELEASE_GATES.json",
+            "doc/reports/RELEASE_GATES.md"
+        ],
+        "discoveries": [
+            "THE MEAN MOVED 0.416 IN FIFTEEN MINUTES WITH NO MAP CHANGED, AND THE CAUSE WAS THE READER'S PYTHON FLAG. The baseline read 6.083 and a re-run a quarter of an hour later read 5.667, with 8 sequences dropped to stage 5 and randomness at 7 of 14 validated. Nothing in commons/maps had moved; the only difference was that the second run was invoked as `python -X utf8`. The scorer spawns map_pathfinder.py with text=True, the child prints a cp1252 dash (byte 0x97), a strict UTF-8 decode kills subprocess's reader thread, stdout comes back None, `' 0 FAIL' in None` raises TypeError, and `except Exception: pass` records the map as unvalidated. Proven with a control rather than argued: HEAD's scorer under -X utf8 reads 5.667, the fixed scorer reads 6.083 under both modes. Fix: encoding='utf-8', errors='replace' and `or ''` -- the marker is ASCII so a lossy decode cannot move it. THE GENERAL SHAPE: a metric that swallows its own exceptions has an undeclared input, here the caller's PYTHONUTF8, and eleven consecutive readings of 6.083 agreed with each other partly because every breath invoked it the same way -- agreement between runs was never evidence that the input was declared. Worth knowing before anyone quotes a drop: any session that exports PYTHONUTF8=1 would have reported a regression of 0.416 and gone looking for it in the maps.",
+            "THE QUESTION prop-050 LEFT OPEN -- IS STAGE 6 BLOCKED BY DISCOVERABILITY OR BY THE HEADSET -- WAS ANSWERABLE THIS MORNING BECAUSE A QUEST WAS ON USB, AND THE ANSWER IS THE HEADSET. adb listed device 2G0YC5ZG4M0569. pull_vr_feedback --dry-run: nothing to pull. That message folded three causes into one, so each install was probed read-only: com.example.adaresearchzeroone was installed 2026-09-09 15:52, is DEBUGGABLE, run-as reads its files/, and there is no desktop_feedback/ directory; its map_progress.json reads completed_maps [] with only Point_One unlocked, last saved 09-09 15:56, and the newest em_built_vr.json is 16:06 the same day. The wire works and the headset has had one ~15-minute session in six days with no SEND. 6.083 is a true reading, not a blind one, and no amount of making the wire findable will move it. That is the falsification prop-050 asked for, delivered by measurement instead of by waiting a week.",
+            "THE WIRE'S OWN REASSURANCE WAS WRONG ON THE BUILD THAT MATTERS. pull_vr_feedback printed 'An absent directory means SEND has not been pressed -- not that the wire is broken' for every None from remote_read, and remote_read returns None for file-absent, unknown-package AND not-debuggable alike. A release export is not debuggable; run-as refuses it; the tool would have told the reader the round trip was fine on exactly the install a visitor wears. Now each package gets its own cause (why_absent), and REFUSED switches the closing advice. Negative test on the real device: com.android.modulemetadata (installed, not debuggable) prints REFUSED, com.nope.notinstalled prints not installed, the two Ada installs print readable/no directory. Before the change all three would have printed the same sentence.",
+            "prop-050 CLAUSE 2 RE-MEASURED BEFORE APPLYING (prop-048), AND THE EVIDENCE HAD GROWN, NOT DECAYED. At proposal time 3 threads had posted since --claims shipped, none with it. This morning: 23 threads since the flag, by 18 distinct session names, almost all of them first-person 'I am editing X (map, file.gd, final + docs)' heads-ups that are claims in prose -- and 0 carry the key. Applied both halves: forum.py --help/help/-h prints the docstring (which already documents --claims) instead of the thread list, the ask/answer usage errors name the flag, CLAUDE.md's forum table carries it with one sentence saying what it buys, and the scorer prints the VR wire under its table whenever stage 6 reads 0%. CLAUDE.md's Feedback Bridge section also said, unqualified, that VR comments are written to ada_run/desktop_feedback.md -- the surface a person reads about VR feedback stated the one thing that is false in a headset. Three lines now say otherwise. Prediction on record: the next heads-up threads posted by sessions that load this CLAUDE.md carry a claims key; if three land without one, withdraw the writing half of prop-049 clause 2 rather than documenting it harder."
+        ],
+        "duration_minutes": 45
     }
   ]
 }

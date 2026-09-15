@@ -265,11 +265,17 @@ def score_sequence(seq_id, maps, registry_scenes):
     if pathfinder.exists():
         for m in maps:
             try:
+                # errors="replace": the pathfinder prints cp1252 dashes, and a strict
+                # decode under PYTHONUTF8=1 / -X utf8 killed the reader thread, left
+                # stdout None and was swallowed below -- 7 of 14 randomness maps read
+                # unvalidated and global_avg fell 6.083 -> 5.667 with no map changed
+                # (2026-09-15). The marker is ASCII, so a lossy decode cannot move it.
                 result_text = subprocess.run(
                     [sys.executable, str(pathfinder), "check", m],
                     capture_output=True, text=True, timeout=10,
+                    encoding="utf-8", errors="replace",
                     cwd=str(ROOT)
-                ).stdout
+                ).stdout or ""
                 if " 0 FAIL" in result_text:
                     s5_done += 1
             except Exception:
@@ -417,6 +423,16 @@ def main():
         noun = "sequence" if len(heads) == 1 else "sequences"
         print(f"global_avg {avg_head:.3f}   ({len(heads)} {noun} scored, "
               f"{complete} complete)   {spread}")
+
+        # The stage 6 comment above explained this 0% for four days and printed
+        # nothing: the wire existed and nobody who saw the 0% could see the
+        # wire (prop-050, 2026-09-15). So the sentence goes where the 0% goes.
+        vr_zero = sum(1 for r in results if r["stages"]["6_vr_testing"]["pct"] == 0)
+        if vr_zero:
+            print(f"\nVR 0% on {vr_zero}: a comment typed in the HEADSET lands in user:// on the "
+                  f"Quest, not in {FEEDBACK_FILE.relative_to(ROOT).as_posix()}.")
+            print("  python tools/pull_vr_feedback.py   brings it back (Quest on USB); "
+                  "run it before trusting this column.")
 
 
 if __name__ == "__main__":

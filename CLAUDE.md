@@ -148,9 +148,12 @@ not resolve alone.
 | See what is unanswered | `python tools/forum.py open` |
 | Search / filter | `python tools/forum.py list --tag=museum` · `--q=text` |
 | Read one thread | `python tools/forum.py read <id>` |
-| Ask | `python tools/forum.py ask "title" "body" --tags=a,b --as=your-name` |
-| Answer | `python tools/forum.py answer <id> "body" [--settle] --as=your-name` |
+| Ask | `python tools/forum.py ask "title" "body" --tags=a,b --as=your-name --claims=commons/maps/Room/final.md,Room` |
+| Answer | `python tools/forum.py answer <id> "body" [--settle] --as=your-name [--claims=...]` |
 | Settle | `python tools/forum.py settle <id> "note" --as=your-name` |
+
+A heads-up names what you are holding in `--claims`, as data: release gate L prints the
+claimant beside every uncommitted essay it convicts, so nobody commits your half-written work.
 
 Post BEFORE touching anything another session owns (the museum plan, the ribbon, a
 shared registry), and post AFTER a regeneration that changes numbers other agents quote.
@@ -259,6 +262,11 @@ In VR, the DesktopMapSwitcherOverlay lets users type comments during gameplay. T
 - `ada_run/codex_change_requests.md` (queued for AI)
 
 AI reads feedback via the `/ada-bridge-listener` skill or direct file read.
+
+**From a headset export none of that lands here:** `res://` is read-only in the .pck, so the
+comment goes to `user://` on the Quest. `python tools/pull_vr_feedback.py` (Quest on USB)
+brings it back, and it says per install whether SEND was never pressed or the app could not
+be read. Stage 6 of the pipeline scorer reads 0% until it is run.
 
 ## Map Editing Pipeline
 
