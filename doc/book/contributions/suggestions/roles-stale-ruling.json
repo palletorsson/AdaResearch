@@ -1,0 +1,648 @@
+{
+  "schema": "ada.contributions.v1",
+  "generator": {
+    "id": "roles-stale-ruling",
+    "version": "1"
+  },
+  "run_at": "2026-09-15T18:15:41.732Z",
+  "inputs": [
+    {
+      "path": "commons/data/artifact_roles.json",
+      "sha256_lf": "eb2c6e178bcd3d18ad5a71752cb5dd1fc9006ed58472d837a33a627ba914bbc5"
+    },
+    {
+      "path": "commons/data/em_layout.json",
+      "sha256_lf": "6d0270c23ffab86eebfc2a4da1609cf08e66274fbadd746a65ecbe21e20f2001"
+    },
+    {
+      "path": "commons/data/museum/em_plan.json",
+      "sha256_lf": "b054766e508bf6143ffce650363206cd4a4a68a6ea5c3fad9520d28971c83b64"
+    },
+    {
+      "path": "commons/maps/Point_Animatedcube/final.md",
+      "sha256_lf": "c726cbae8cd669beae2b53a1175e393a6ee889107c89bc66458c0af077f9a99c"
+    },
+    {
+      "path": "commons/maps/Point_Animatedcube/map_data.json",
+      "sha256_lf": "5806e445ef6b724ad63a2b0164a0de14a847685550f847a46c0062121e37c346"
+    },
+    {
+      "path": "commons/maps/Point_Line_Grid/final.md",
+      "sha256_lf": "3f1f257c6cf374d29904be54ce0244b42f3286450e915cb231b9800a0b32a3b6"
+    },
+    {
+      "path": "commons/maps/Point_Line_Grid/map_data.json",
+      "sha256_lf": "45293e87133bd533983154b9036a6a28ebde6285fb9abd2bb673aaa322126bd1"
+    },
+    {
+      "path": "commons/maps/Point_Lines/final.md",
+      "sha256_lf": "0b5de5aeb0fe1a5fce9a66a6768f10f09c105ee588228a731e21a3105dcc9680"
+    },
+    {
+      "path": "commons/maps/Point_Lines/map_data.json",
+      "sha256_lf": "2b76e652b70090d2ab4c4d4dafb29170d1863d156b76cfd84b2fa6e49fd36a69"
+    },
+    {
+      "path": "commons/maps/Point_One/final.md",
+      "sha256_lf": "e4d77efb2aa49232c43c4a253fbfa8f1b960f521411c3fb3a378b17387797947"
+    },
+    {
+      "path": "commons/maps/Point_One/map_data.json",
+      "sha256_lf": "12754f6e90d17623865a4746ddc56e9f200401c9b30cf44b6b6469103d86e7f4"
+    },
+    {
+      "path": "commons/maps/Point_Trace/final.md",
+      "sha256_lf": "d8f889c00ca520f3ee9ae7f676513259a0325e18c2af900b2bbf0f448ca1c5e2"
+    },
+    {
+      "path": "commons/maps/Point_Trace/map_data.json",
+      "sha256_lf": "be163b973cb0bb13b325e81e96d7486eb8c04b232aee69d73104023272f63e26"
+    },
+    {
+      "path": "commons/maps/Point_Triangle_Context/final.md",
+      "sha256_lf": "7e868fb877574c022bee3ee840dd77d950ee07370ca29522d2e1782928279b70"
+    },
+    {
+      "path": "commons/maps/Point_Triangle_Context/map_data.json",
+      "sha256_lf": "ac62038524f201011720f82c19be22cfb25957ecf226142fbe28bac296023ea2"
+    },
+    {
+      "path": "commons/maps/Primitives_Ignorance/final.md",
+      "sha256_lf": "b98f15ff47b9ec335120a54c20b08bce4af3d904a4059010f118bc707bd244c5"
+    },
+    {
+      "path": "commons/maps/Primitives_Ignorance/map_data.json",
+      "sha256_lf": "41100bba1dcd2999d9512ef1736a58ad3462e3f4d581f790ace23b0de6f998ce"
+    },
+    {
+      "path": "commons/maps/Primitives_Melencolia/final.md",
+      "sha256_lf": "035502c5a3ccd415baae246a9fcc6828c36c48e105b1fcd5e924b246b5c636d4"
+    },
+    {
+      "path": "commons/maps/Primitives_Melencolia/map_data.json",
+      "sha256_lf": "38055813ba009ec2dd5939b698d47e94272e28d182249ac5d8866b305405c923"
+    },
+    {
+      "path": "commons/maps/Primitives_Polythedra/final.md",
+      "sha256_lf": "48dd6c683061a51db4553a0845b9b920cf92934af66a5ebf44a2a41db4b628c6"
+    },
+    {
+      "path": "commons/maps/Primitives_Polythedra/map_data.json",
+      "sha256_lf": "c5f1b85492fe53063b0aa0234af5139bb22d2dc1c1833281c7b8c9cb845853fd"
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/final.md",
+      "sha256_lf": "8d617797d811beb26e777aa1c5ddaee6106becff9dceaa92a922067d7b4a42ff"
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/map_data.json",
+      "sha256_lf": "f2d43bc8fbb60b339ada1a58ff42fbe0df934676df37880509e65d4700f87efc"
+    },
+    {
+      "path": "commons/maps/curriculum_spine.json",
+      "sha256_lf": "c5da64cfb2c9e89e07bc7b94307b4a36108209746a0409f9274a9752bdb154ed"
+    },
+    {
+      "path": "commons/maps/sequences/array_tutorial.json",
+      "sha256_lf": "49cb6510ce89d95fcc450f8bcdf641f48984f03f6553d57337749d3fb4fd83db"
+    },
+    {
+      "path": "commons/maps/sequences/boolean_surfaces.json",
+      "sha256_lf": "3fe61365ce9b36bca67e25cd6da4fca1cbb7aa395a8a8963725aaa30d56fb753"
+    },
+    {
+      "path": "commons/maps/sequences/cellularautomata.json",
+      "sha256_lf": "46f5aeca412aefaf4c1774805185dc737b050c43ad24a752e50b7aa32a815cdd"
+    },
+    {
+      "path": "commons/maps/sequences/change.json",
+      "sha256_lf": "fb6395701429984f768a5351f566a5620510c5761ecd31e592d724c44fb35b9f"
+    },
+    {
+      "path": "commons/maps/sequences/color.json",
+      "sha256_lf": "d6a91a856e42837c7d35b553fe17fa72d0883e150ae75d99afc8bfcb1b4b674f"
+    },
+    {
+      "path": "commons/maps/sequences/forces.json",
+      "sha256_lf": "4db534f4ee0d79b5389b60b2741ee26dc30f77a5df582b29b8580e603d687b55"
+    },
+    {
+      "path": "commons/maps/sequences/formfinding.json",
+      "sha256_lf": "4290ececb789875b3411ca5de68aaee2224de8057c5e857b0d89f4f1b9e10b22"
+    },
+    {
+      "path": "commons/maps/sequences/foundationscrisis.json",
+      "sha256_lf": "46d26f02242f2fb5f38d148e13d8f5ac38e023f4cc121a74f243117a03501147"
+    },
+    {
+      "path": "commons/maps/sequences/fractals.json",
+      "sha256_lf": "8278982809b859f76e2712ee8bb3dbb63384f6722e190669d58586d39a378d65"
+    },
+    {
+      "path": "commons/maps/sequences/graphtheory.json",
+      "sha256_lf": "61a5925af3b4cd510f3521549a78aaba93c5133ae0d14fa53d36b5d90a80c8e2"
+    },
+    {
+      "path": "commons/maps/sequences/isosurfaces.json",
+      "sha256_lf": "bab9889495188e0e8794388ac301de5db78cc409b7be80bf178ae3b9f9c6498a"
+    },
+    {
+      "path": "commons/maps/sequences/lsystems.json",
+      "sha256_lf": "21e0ae4984d90af673b7af24e6dcdcce4916dbdd714590c4c20cf1318cf29a20"
+    },
+    {
+      "path": "commons/maps/sequences/machinelearning.json",
+      "sha256_lf": "96f899fc3cd97ad999edbc131580822cbbf524f20c04b314fcce7786bdcb99b9"
+    },
+    {
+      "path": "commons/maps/sequences/noise.json",
+      "sha256_lf": "4a7ca520a93f5f2044a74317dfd6ea4fe0059699b8fbb01c7a1dce3951e01d4a"
+    },
+    {
+      "path": "commons/maps/sequences/postfoundationscrisis.json",
+      "sha256_lf": "deaa446a48adbbc275d68e6ec6c4dc8a154c238aaa53008ae9b6954b3769c952"
+    },
+    {
+      "path": "commons/maps/sequences/primitives.json",
+      "sha256_lf": "de06347369fe8b732b86df32c052d49e25f7aa107e8b70ab283995a7e0b5b9c6"
+    },
+    {
+      "path": "commons/maps/sequences/proceduralgeneration.json",
+      "sha256_lf": "723298647a4e8fb0e19b0c684df8a388e80240358fbc3d082481570686ba7bfd"
+    },
+    {
+      "path": "commons/maps/sequences/qfeplaboratory.json",
+      "sha256_lf": "322e81e6e0e7b82f8f453239a98f68c58407766ace622e6305e3371a7184288e"
+    },
+    {
+      "path": "commons/maps/sequences/randomness.json",
+      "sha256_lf": "0ae1641c2439fbd3fb39b639ba8efbb22263faf739c5ba9b2a8286be707c6264"
+    },
+    {
+      "path": "commons/maps/sequences/softbodies.json",
+      "sha256_lf": "aa162e3273b36c1d20f1ca88f0a81325d314ab6d37311e85a964eac3d843ae59"
+    },
+    {
+      "path": "commons/maps/sequences/swarmintelligence.json",
+      "sha256_lf": "eb5ea84e2d8675a56dbd34fc1d79e2c478b9039d37f3964b539b6afc6c82da69"
+    },
+    {
+      "path": "commons/maps/sequences/tiling.json",
+      "sha256_lf": "ddc6fc0a2b0eae705a070a4ca0186f0315df9b78380d2fdcc3f1ae6e36979005"
+    },
+    {
+      "path": "commons/maps/sequences/transformation.json",
+      "sha256_lf": "22131e63d2fac3a40b621119161e0076b113ee8d4349255e37a8093bd8a33679"
+    },
+    {
+      "path": "commons/maps/sequences/wavefunctions.json",
+      "sha256_lf": "00040c435767e332725b0960f552e26113733b3ee35e46c80c9afb556d0f1851"
+    },
+    {
+      "path": "commons/primitives/temporal/animated_folding_past.tscn",
+      "sha256_lf": "6599d7b271db80828960df93ab7d903ed39e60fdd36ee1318e5b3b8916a9ee9b"
+    },
+    {
+      "path": "commons/scenes/endless_museum.gd",
+      "sha256_lf": "cccb0739c7d088c9daedbeef2e995dd150f4e31b88645d5762ad6991aff5751a"
+    }
+  ],
+  "suggestions": [
+    {
+      "id": "sug~roles-stale-ruling~bc70ac3c2e3a",
+      "key": "contribution|catalyst_prompter_box|Point_Triangle_Context",
+      "kind": "contribution",
+      "artifact": "catalyst_prompter_box",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Triangle_Context"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules catalyst_prompter_box secondary in Point_Triangle_Context, but nothing in Point_Triangle_Context places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Triangle_Context/catalyst_prompter_box is ruled secondary"
+        },
+        {
+          "path": "commons/maps/Point_Triangle_Context/map_data.json",
+          "note": "nothing in Point_Triangle_Context places catalyst_prompter_box: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:c47460b515d3796172998d3c13e865b0519836f15f0ead24c260376146416b6f"
+    },
+    {
+      "id": "sug~roles-stale-ruling~b894a4106807",
+      "key": "contribution|catalyst_vent|Point_Triangle_Context",
+      "kind": "contribution",
+      "artifact": "catalyst_vent",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Triangle_Context"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules catalyst_vent secondary in Point_Triangle_Context, but nothing in Point_Triangle_Context places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Triangle_Context/catalyst_vent is ruled secondary"
+        },
+        {
+          "path": "commons/maps/Point_Triangle_Context/map_data.json",
+          "note": "nothing in Point_Triangle_Context places catalyst_vent: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:44f8273132e65f4389bd75a0a7a228e97802a9dfc053310d04f5d9cc82a92721"
+    },
+    {
+      "id": "sug~roles-stale-ruling~d84478815b0f",
+      "key": "contribution|dark_sphere|Point_Lines",
+      "kind": "contribution",
+      "artifact": "dark_sphere",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Lines"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules dark_sphere decoration in Point_Lines, but nothing in Point_Lines places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Lines/dark_sphere is ruled decoration"
+        },
+        {
+          "path": "commons/maps/Point_Lines/map_data.json",
+          "note": "nothing in Point_Lines places dark_sphere: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:2c1f0064b9bc46612e7d33fc449c371f62fd284338e134943ffeb60041e25462"
+    },
+    {
+      "id": "sug~roles-stale-ruling~5a9fb706cd2d",
+      "key": "contribution|dark_sphere|Point_Triangle_Context",
+      "kind": "contribution",
+      "artifact": "dark_sphere",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Triangle_Context"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules dark_sphere secondary in Point_Triangle_Context, but nothing in Point_Triangle_Context places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Triangle_Context/dark_sphere is ruled secondary"
+        },
+        {
+          "path": "commons/maps/Point_Triangle_Context/map_data.json",
+          "note": "nothing in Point_Triangle_Context places dark_sphere: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:22368bb96e34cdef158c0a9431a1b11b60fd5949f983a384634a91c3533d0583"
+    },
+    {
+      "id": "sug~roles-stale-ruling~7e0a7a644934",
+      "key": "contribution|dark_sphere|Primitives_Polythedra",
+      "kind": "contribution",
+      "artifact": "dark_sphere",
+      "context": {
+        "sequence": "primitives",
+        "map": "Primitives_Polythedra"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules dark_sphere decoration in Primitives_Polythedra, but nothing in Primitives_Polythedra places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Primitives_Polythedra/dark_sphere is ruled decoration"
+        },
+        {
+          "path": "commons/maps/Primitives_Polythedra/map_data.json",
+          "note": "nothing in Primitives_Polythedra places dark_sphere: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:056e1666100a337884d081dec32828a0f1990bb85996ab743615973875ed3abd"
+    },
+    {
+      "id": "sug~roles-stale-ruling~c41dd0bb2c59",
+      "key": "contribution|floating_sphere_field|Point_Trace",
+      "kind": "contribution",
+      "artifact": "floating_sphere_field",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Trace"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules floating_sphere_field secondary in Point_Trace, but nothing in Point_Trace places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Trace/floating_sphere_field is ruled secondary"
+        },
+        {
+          "path": "commons/maps/Point_Trace/map_data.json",
+          "note": "nothing in Point_Trace places floating_sphere_field: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:fe51752f4c887bcc79a189a6745b3a46459147bbebda6c4efa2d6dd131956aa5"
+    },
+    {
+      "id": "sug~roles-stale-ruling~71b13df0a27f",
+      "key": "contribution|floating_sphere_field|Point_Triangle_Context",
+      "kind": "contribution",
+      "artifact": "floating_sphere_field",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Triangle_Context"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules floating_sphere_field secondary in Point_Triangle_Context, but nothing in Point_Triangle_Context places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Triangle_Context/floating_sphere_field is ruled secondary"
+        },
+        {
+          "path": "commons/maps/Point_Triangle_Context/map_data.json",
+          "note": "nothing in Point_Triangle_Context places floating_sphere_field: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:cc87651966b984607952014ba0b5e04683b9d1492bff8428c7df1185fdb17b65"
+    },
+    {
+      "id": "sug~roles-stale-ruling~2e7ef06f8782",
+      "key": "contribution|floating_sphere_field|Primitives_Ignorance",
+      "kind": "contribution",
+      "artifact": "floating_sphere_field",
+      "context": {
+        "sequence": "primitives",
+        "map": "Primitives_Ignorance"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules floating_sphere_field decoration in Primitives_Ignorance, but nothing in Primitives_Ignorance places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Primitives_Ignorance/floating_sphere_field is ruled decoration"
+        },
+        {
+          "path": "commons/maps/Primitives_Ignorance/map_data.json",
+          "note": "nothing in Primitives_Ignorance places floating_sphere_field: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:0e5a6ecc8865ab9e2794b14a48965957655c061e26aec958d781f9848621ab51"
+    },
+    {
+      "id": "sug~roles-stale-ruling~a268feabf08a",
+      "key": "contribution|fontana_puncture|Point_Lines",
+      "kind": "contribution",
+      "artifact": "fontana_puncture",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Lines"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules fontana_puncture secondary in Point_Lines, but nothing in Point_Lines places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Lines/fontana_puncture is ruled secondary"
+        },
+        {
+          "path": "commons/maps/Point_Lines/map_data.json",
+          "note": "nothing in Point_Lines places fontana_puncture: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:ee467427709241029af558f6c9b9b5f01f3114f093267498484cb53969c5a007"
+    },
+    {
+      "id": "sug~roles-stale-ruling~6bb19662dd45",
+      "key": "contribution|klee_walking_point|Point_Lines",
+      "kind": "contribution",
+      "artifact": "klee_walking_point",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Lines"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules klee_walking_point secondary in Point_Lines, but nothing in Point_Lines places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Lines/klee_walking_point is ruled secondary"
+        },
+        {
+          "path": "commons/maps/Point_Lines/map_data.json",
+          "note": "nothing in Point_Lines places klee_walking_point: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:4606f288b7f3d56470456e4e4e740f6287fd6fe6ad6d024bdac3eb351e1cf904"
+    },
+    {
+      "id": "sug~roles-stale-ruling~3cdd05fba7f0",
+      "key": "contribution|origin|Point_Trace",
+      "kind": "contribution",
+      "artifact": "origin",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Trace"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules origin secondary in Point_Trace, but nothing in Point_Trace places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Trace/origin is ruled secondary"
+        },
+        {
+          "path": "commons/maps/Point_Trace/map_data.json",
+          "note": "nothing in Point_Trace places origin: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:d576841fd4071c2106d89b8611831b8392549f5f349d9886de84e36a1f3b5f86"
+    },
+    {
+      "id": "sug~roles-stale-ruling~a8025e9ca273",
+      "key": "contribution|parasol_triangle|Point_Triangle_Context",
+      "kind": "contribution",
+      "artifact": "parasol_triangle",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Triangle_Context"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules parasol_triangle secondary in Point_Triangle_Context, but nothing in Point_Triangle_Context places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Triangle_Context/parasol_triangle is ruled secondary"
+        },
+        {
+          "path": "commons/maps/Point_Triangle_Context/map_data.json",
+          "note": "nothing in Point_Triangle_Context places parasol_triangle: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:9a6c92b7abada5ac23dcfd06c0dc0dfb52dc7c4c2276a7f8503725c555ee28aa"
+    },
+    {
+      "id": "sug~roles-stale-ruling~f13f3d4f8cd6",
+      "key": "contribution|plus_line_puzzle|Point_Lines",
+      "kind": "contribution",
+      "artifact": "plus_line_puzzle",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Lines"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules plus_line_puzzle secondary in Point_Lines, but nothing in Point_Lines places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Lines/plus_line_puzzle is ruled secondary"
+        },
+        {
+          "path": "commons/maps/Point_Lines/map_data.json",
+          "note": "nothing in Point_Lines places plus_line_puzzle: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:0b951bfb36bc069c4f480ce167843c342b5557a5022cbac5d0d54becf0102963"
+    },
+    {
+      "id": "sug~roles-stale-ruling~514845342d97",
+      "key": "contribution|right_triangle_lines|Point_Triangle_Context",
+      "kind": "contribution",
+      "artifact": "right_triangle_lines",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Triangle_Context"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules right_triangle_lines secondary in Point_Triangle_Context, but nothing in Point_Triangle_Context places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Triangle_Context/right_triangle_lines is ruled secondary"
+        },
+        {
+          "path": "commons/maps/Point_Triangle_Context/map_data.json",
+          "note": "nothing in Point_Triangle_Context places right_triangle_lines: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:1c11a90d43d97e16732623876b7faf4b83898f24c274165a830077677c515ad2"
+    },
+    {
+      "id": "sug~roles-stale-ruling~7f1a6f8ab807",
+      "key": "contribution|simulation_grid|Point_Line_Grid",
+      "kind": "contribution",
+      "artifact": "simulation_grid",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Line_Grid"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules simulation_grid primary in Point_Line_Grid, but nothing in Point_Line_Grid places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Line_Grid/simulation_grid is ruled primary"
+        },
+        {
+          "path": "commons/maps/Point_Line_Grid/map_data.json",
+          "note": "nothing in Point_Line_Grid places simulation_grid: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:591cd7eb422a0cde86b18c97cbaffb4236ce93a48514c41588e5043dfb3e3d1a"
+    },
+    {
+      "id": "sug~roles-stale-ruling~2a63a58497e5",
+      "key": "contribution|spore_mushroom|Point_One",
+      "kind": "contribution",
+      "artifact": "spore_mushroom",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_One"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules spore_mushroom decoration in Point_One, but nothing in Point_One places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_One/spore_mushroom is ruled decoration"
+        },
+        {
+          "path": "commons/maps/Point_One/map_data.json",
+          "note": "nothing in Point_One places spore_mushroom: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:01da0a4d6a238052bea0ffab428abe6c7b0de44576539e97fc386aabf9d2f679"
+    },
+    {
+      "id": "sug~roles-stale-ruling~8ac802944ff1",
+      "key": "contribution|tentacle_placer|Primitives_Polythedra",
+      "kind": "contribution",
+      "artifact": "tentacle_placer",
+      "context": {
+        "sequence": "primitives",
+        "map": "Primitives_Polythedra"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules tentacle_placer secondary in Primitives_Polythedra, but nothing in Primitives_Polythedra places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Primitives_Polythedra/tentacle_placer is ruled secondary"
+        },
+        {
+          "path": "commons/maps/Primitives_Polythedra/map_data.json",
+          "note": "nothing in Primitives_Polythedra places tentacle_placer: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        }
+      ],
+      "content_digest": "sha256:efade3b83cd7be826c052c3032235eb176a7621e8148af3f0be849a186b9f2f9"
+    },
+    {
+      "id": "sug~roles-stale-ruling~713f6f50e6c9",
+      "key": "contribution|two_point_ruler|Point_Lines",
+      "kind": "contribution",
+      "artifact": "two_point_ruler",
+      "context": {
+        "sequence": "primitives",
+        "map": "Point_Lines"
+      },
+      "placement": "removed_or_deferred",
+      "why": "commons/data/artifact_roles.json rules two_point_ruler primary in Point_Lines, but nothing in Point_Lines places it now (interactables, utilities and museum-entrance fittings checked). It may have been removed or deferred, or the ruling may be a leftover; the files do not say which. A hint for review, not a decision.",
+      "basis": "documented",
+      "hints": [
+        {
+          "path": "commons/data/artifact_roles.json",
+          "note": "/roles/Point_Lines/two_point_ruler is ruled primary"
+        },
+        {
+          "path": "commons/maps/Point_Lines/map_data.json",
+          "note": "nothing in Point_Lines places two_point_ruler: no interactables cell, no ruled or tagged utility cell, no museum-entrance fitting"
+        },
+        {
+          "path": "commons/maps/Point_Lines/final.md",
+          "note": "<!-- @two_point_ruler --> region at lines 108-110"
+        }
+      ],
+      "content_digest": "sha256:be62916370050d9e58cae4f426311cbd5200733917c516416be6de54639db51b"
+    }
+  ]
+}
