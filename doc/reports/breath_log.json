@@ -7310,6 +7310,46 @@
         "opened 260916-mqu1f"
       ],
       "duration_minutes": 50
+    },
+    {
+      "breath_id": "2026-09-16T18:55",
+      "mode": "evolve-only",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "avg_note": "Carried, not re-read: HEAD is 880660688 (the morning breath's own commit, 09:27) and nothing has landed on HEAD since, so the committed scorer input is identical. No project files changed by this pass.",
+      "items_attempted": [
+        "harvest-2026-09-16T09:07",
+        "level-3-pattern-check"
+      ],
+      "items_succeeded": [
+        "harvest-2026-09-16T09:07",
+        "level-3-pattern-check"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "ONE BREATH TODAY (09:07, full, 6/6, delta 0.0, gates 7/15 -> 8/15 on the working tree only). Its prop-051 already houses both of its read-past-the-qualifier errors, so Level 3 owes no new proposal for them.",
+        "THE LEDGER-REFORMAT CLASS CROSSED THREE OCCURRENCES: 09-08 evening (13,201 changed lines, indent=1/ensure_ascii=False), 09-09 morning (ensure_ascii read backwards on skill_evolution_proposals.json, 22 escapes unescaped), 09-16 morning (14,494 lines, both defaults). Same failure, same cause: a ledger write that does not reproduce the file's existing serialisation. It is not a new proposal -- prop-004's 09-08 and 09-09 evidence_updates already name it -- so it was recorded there as the third occurrence, with the one-line probe the morning breath proved: write only if json.dumps(json.loads(orig), indent=2, ensure_ascii=<file's>) + trailing newline == orig, otherwise append textually against a unique anchor. prop-004 is 102 days old and unapplied; it is the oldest open item that a breath keeps paying for.",
+        "Level 2: no skill below 50% -- the only skill dispatched in the last five breaths is ada-breather, 5/5 with zero failures. The zero is itself worth reading: failures stopped being recorded as items_failed and started appearing as corrected claims inside discoveries (two today). The ledger's failure count no longer measures failure.",
+        "Since the morning: Palle's Godot editor is live (pid 43804, from 17:12), forum 260916-7s0d5 announces a regularity-works placement session across three maps, and an uncommitted doc/reports/transport-cube-vr-2026-09-16.md records a VR carrying fix in Trans_Translation. None is a breath's to touch."
+      ],
+      "files_changed": [
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/skill_evolution_proposals.json"
+      ],
+      "duration_minutes": 12
     }
   ]
 }
