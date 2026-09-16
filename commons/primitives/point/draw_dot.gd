@@ -1,5 +1,7 @@
 extends Node3D
 
+const InstrumentPanelCase = preload("res://commons/ui/instrument_panel_case.gd")
+
 # @identity
 # essence: sample(hand_position) → ImmediateMesh trail — the hand writes points in 3D space
 # desire: learner experiences themselves as a drawing instrument — hand motion becomes visible line
@@ -214,13 +216,41 @@ func _update_progress_indicator_position() -> void:
 func _setup_data_table() -> void:
 	if not show_data_table:
 		return
-
+	_data_panel = Node3D.new()
+	_data_panel.name = "TraceDataPanel"
+	_data_panel.set_as_top_level(true)
+	_data_panel.visible = false
+	add_child(_data_panel)
+	var surface := MeshInstance3D.new()
+	surface.name = "PanelSurface"
+	var quad := QuadMesh.new()
+	quad.size = Vector2(0.92, 0.66)
+	surface.mesh = quad
+	var material := StandardMaterial3D.new()
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.albedo_color = Color(0.025, 0.035, 0.055)
+	surface.material_override = material
+	_data_panel.add_child(surface)
+	var casing := InstrumentPanelCase.new()
+	casing.name = "Casing"
+	_data_panel.add_child(casing)
+	casing.fit_rect(Vector2.ZERO, quad.size, trail_color)
+	_data_count_label = Label3D.new()
+	_data_count_label.name = "PointCount"
+	_data_count_label.font_size = 40
+	_data_count_label.pixel_size = 0.001
+	_data_count_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_data_count_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	_data_count_label.position = Vector3(-0.415, 0.29, 0.003)
+	_data_count_label.modulate = trail_color
+	_data_count_label.outline_size = 0
+	_data_panel.add_child(_data_count_label)
 	_data_table_label = Label3D.new()
 	_data_table_label.name = "DataTable"
 	_data_table_label.font_size = data_table_font_size
 	_data_table_label.pixel_size = 0.001  # Sharper text
 	_data_table_label.modulate = data_table_color
-	_data_table_label.outline_size = 2
+	_data_table_label.outline_size = 0
 	_data_table_label.outline_modulate = Color(0.1, 0.1, 0.2, 0.9)
 
 	# NOT billboard - fixed orientation
@@ -228,50 +258,100 @@ func _setup_data_table() -> void:
 	_data_table_label.fixed_size = false
 
 	# World-space positioning
-	_data_table_label.set_as_top_level(true)
 	_data_table_label.visible = false
 
 	# Horizontal alignment
 	_data_table_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_data_table_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	_data_table_label.position = Vector3(-0.415, 0.22, 0.003)
+	_data_panel.add_child(_data_table_label)
 
-	# Rotate 90° in X (parallel to ground) and 180° in Y
-	_data_table_label.rotation_degrees.x = -90
-	_data_table_label.rotation_degrees.y = 180
 
-	# Scale for sharper text
-	_data_table_label.scale = Vector3(1.0, 1.0, 1.0)
+func _hide_data_table() -> void:
+	if _data_table_label:
+		_data_table_label.visible = false
+	if _data_panel:
+		_data_panel.visible = false
 
-	add_child(_data_table_label)
+
+func _fit_data_panel() -> void:
+	# Label3D rebuilds its glyph mesh deferred. Fit after that rebuild, including
+	# larger coordinates, font overrides, and the time recorder's extra row.
+	if not is_instance_valid(_data_panel):
+		return
+	var left := -0.46
+	var right := 0.46
+	var top := 0.33
+	var bottom := -0.33
+	for label: Label3D in [_data_count_label, _data_table_label]:
+		var bounds := label.get_aabb()
+		var lo := bounds.position + label.position
+		var hi := bounds.end + label.position
+		left = minf(left, lo.x - 0.045)
+		right = maxf(right, hi.x + 0.045)
+		top = maxf(top, hi.y + 0.035)
+		bottom = minf(bottom, lo.y - 0.045)
+	var surface: MeshInstance3D = _data_panel.get_node("PanelSurface")
+	(surface.mesh as QuadMesh).size = Vector2(right - left, top - bottom)
+	surface.position = Vector3((left + right) * 0.5, (top + bottom) * 0.5, 0)
+	_data_panel.get_node("Casing").fit_rect(Vector2(surface.position.x, surface.position.y),
+		(surface.mesh as QuadMesh).size, trail_color)
+
+## A recorder with a different sampling mechanism must describe its own gate.
+## draw_stick uses this movement gate; draw_dot_time_domain overrides it.
+func _sampling_contract_text() -> String:
+	var grid_text: String = String.num(resolution_mm, 3) + " mm" if resolution_mm > 0.0 else "off"
+	return "Move: >= " + String.num(min_segment_distance * 1000.0, 3) + " mm | Grid: " + grid_text
+
+
+func _position_decimal_places() -> int:
+	# Do not print distinct 5 mm samples as the same centimetre value.
+	var step: float = min_segment_distance
+	if resolution_mm > 0.0:
+		step = minf(step, resolution_mm / 1000.0)
+	for digits in range(3, 7):
+		if pow(10.0, -digits) < step * 0.5:
+			return digits
+	return 6
+
 
 func _update_data_table() -> void:
 	if not _data_table_label or _trail_points.is_empty():
+		_hide_data_table()
 		return
 
-	var current_pos = _draw_sphere.global_position if _draw_sphere else Vector3.ZERO
-	var trail_length = _total_movement
 	var point_count = _trail_points.size()
-	var dist_from_origin = current_pos.length()
 
 	# Build table text with last 10 points
-	var table_text = "TRACE DATA\n"
+	var table_text = "POINTS RETAINED IN THIS LINE\n"
 	table_text += "─────────────────\n"
-	table_text += "Points: %d  Length: %.2f m\n" % [point_count, trail_length]
+	table_text += "Retained: %d / %d\n" % [point_count, trail_max_points]
+	table_text += _sampling_contract_text() + "\n"
 	table_text += "─────────────────\n"
-	table_text += "LAST 10 POSITIONS\n"
+	table_text += "LAST 10 WORLD POSITIONS (m)\n"
+	var number_format: String = "%." + str(_position_decimal_places()) + "f"
+	var row_format: String = "%2d: (" + number_format + ", " + number_format + ", " + number_format + ")\n"
 
 	# Show last 10 points (or fewer if less than 10 exist)
 	var start_idx = max(0, _trail_points.size() - 10)
 	for i in range(start_idx, _trail_points.size()):
 		var pt = _trail_points[i]
-		var idx = i - start_idx + 1
-		table_text += "%2d: (%.2f, %.2f, %.2f)\n" % [idx, pt.x, pt.y, pt.z]
+		var idx = i + 1  # Position in the current retained line, not in this excerpt.
+		table_text += row_format % [idx, pt.x, pt.y, pt.z]
 
+	_data_count_label.text = "%d POINT%s" % [point_count, "" if point_count == 1 else "S"]
+	_data_count_label.modulate = trail_color
 	_data_table_label.text = table_text
+	call_deferred("_fit_data_panel")
 	_data_table_label.visible = true
-
-	# Position near trail start, offset to the side and forward
-	var start_pos = _trail_points[0]
-	_data_table_label.global_position = start_pos + Vector3(0.15, data_table_height_offset - 0.1, 0.2)
+	_data_panel.visible = true
+	# Capture the reading surface once; capacity eviction must not drag it along.
+	if not _data_panel_anchored:
+		var facing := Basis(Vector3.UP, global_rotation.y)
+		_data_panel.global_transform = Transform3D(
+			facing * Basis(Vector3.RIGHT, deg_to_rad(-35.0)),
+			_trail_points[0] + facing * Vector3(0.55, data_table_height_offset, 0.45))
+		_data_panel_anchored = true
 
 @export var fade_trail: bool = false
 @export var fade_duration: float = 2.0
@@ -282,9 +362,12 @@ func _update_data_table() -> void:
 @export var show_data_table: bool = true
 @export var data_table_height_offset: float = -0.35  # Height relative to trail start
 @export var data_table_color: Color = Color(0.9, 0.95, 1.0, 1.0)
-@export var data_table_font_size: int = 20
+@export var data_table_font_size: int = 26
 @export var data_table_update_interval: float = 0.15  # Seconds between updates
 
+var _data_panel: Node3D
+var _data_count_label: Label3D
+var _data_panel_anchored: bool = false
 var _data_table_label: Label3D
 var _data_table_timer: float = 0.0
 
@@ -363,14 +446,16 @@ func _process(delta: float) -> void:
 				_cleanup_old_points()
 				_rebuild_trail()
 			
-			# Hide progress indicator and data table when not grabbed
+			# The retained record stays readable after releasing the pen.
 			if _progress_indicator:
 				_progress_indicator.visible = false
-			if _data_table_label:
-				_data_table_label.visible = false
+			_data_table_timer += delta
+			_refresh_data_table_if_due()
 
 			return
 	
+	_data_table_timer += delta
+
 	# Calculate movement since last frame
 	var dist = current_global.distance_to(_last_global_position)
 
@@ -378,6 +463,7 @@ func _process(delta: float) -> void:
 		if fade_trail:
 			_cleanup_old_points()
 			_rebuild_trail()
+		_refresh_data_table_if_due()
 		return
 
 	_last_global_position = current_global
@@ -387,6 +473,7 @@ func _process(delta: float) -> void:
 	# the line's corners sit on the grid, which is where the resolution shows.
 	var rec: Vector3 = _shape_sample(current_global)
 	if not _trail_points.is_empty() and _trail_points[_trail_points.size() - 1].is_equal_approx(rec):
+		_refresh_data_table_if_due()
 		return
 	# Use global position for the trail points since the mesh is top_level
 	_trail_points.append(rec)
@@ -397,12 +484,6 @@ func _process(delta: float) -> void:
 
 	# Position progress indicator above trail start point
 	_update_progress_indicator_position()
-
-	# Update data table (throttled)
-	_data_table_timer += delta
-	if _data_table_timer >= data_table_update_interval:
-		_data_table_timer = 0.0
-		_update_data_table()
 
 	if fade_trail:
 		_trail_times.append(_time_elapsed)
@@ -416,6 +497,13 @@ func _process(delta: float) -> void:
 		_cleanup_old_points()
 
 	_rebuild_trail()
+	# Display retained count after eviction, and refresh it while paused.
+	_refresh_data_table_if_due()
+
+func _refresh_data_table_if_due() -> void:
+	if _data_table_timer >= data_table_update_interval:
+		_data_table_timer = 0.0
+		_update_data_table()
 
 func _check_unlock_progress() -> void:
 	if _triggered or trigger_tag == "":
@@ -534,6 +622,9 @@ func _rebuild_trail() -> void:
 
 func clear_trail() -> void:
 	_trail_points.clear()
+	_trail_times.clear()
+	_hide_data_table()
+	_data_panel_anchored = false
 	if _trail_mesh:
 		_trail_mesh.clear_surfaces()
 	if is_instance_valid(_draw_sphere):
@@ -549,6 +640,8 @@ func _on_grab_point_dropped(_pickable) -> void:
 
 	if auto_clear_on_drop:
 		clear_trail()
+	else:
+		_update_data_table()
 
 
 # ── RETENTION ────────────────────────────────────────────────────────────────

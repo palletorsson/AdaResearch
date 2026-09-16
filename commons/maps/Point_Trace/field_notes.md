@@ -1,5 +1,7 @@
 # Point_Trace — field notes
 
+*Historical notes. For the installed recorder and present reading, see [technical.md](technical.md) and [encounter-reference.md](encounter-reference.md). In particular, the 200-frame buffer discussed below is not the current 4096-position recorder.*
+
 > Field notes hold what the wall text cannot carry. `final.md` is for the
 > visitor. This is for us.
 

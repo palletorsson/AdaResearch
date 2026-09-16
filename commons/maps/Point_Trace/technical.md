@@ -1,245 +1,49 @@
-# Point Trace - Technical Tutorial
+# Point Trace — implementation reference
 
-## The Trace as Continuous Recording
+The current book develops the selected-position recorder, its spatial grain, its sampling point, and the whiteboard's contact rule. [tutorial.md](tutorial.md) gives the short programming route. This reference distinguishes those installed behaviours from optional comparisons and possible extensions.
 
-A trace is not calculated - it is **accumulated**. Unlike a line (two points, one calculation), a trace records every position over time.
+## Drawing dots and stick
 
-```gdscript
-# Line: Two points, instant result
-var line_start = Vector3(0, 0, 0)
-var line_end = Vector3(5, 0, 0)
-var distance = line_start.distance_to(line_end)  # Instant: 5.0
+Both scenes use [draw_dot.gd](../../primitives/point/draw_dot.gd). Their scene properties set `min_segment_distance = 0.005` metres and `trail_max_points = 4096`. Recording requires the pickable to be held. The dot observes its GrabPoint; the stick observes `GrabStick/Blade/Top/TrackBall`.
 
-# Trace: Continuous recording
-var trace_points = []  # Accumulates over time
+In the recording branch of `_process()`, the script reads the observed world position and compares it with `_last_global_position`. A reading below the movement threshold is declined. Passing the gate updates that comparison position before calling `_shape_sample()`. If the shaped result approximately equals the immediately preceding saved position, it is declined; otherwise it is appended.
 
-func _process(delta):
-    var current_position = controller.global_position
-    trace_points.append(current_position)
-    # Result grows with every frame - not predetermined
-```
+The gate's reference is therefore the last gate-passing reading, not necessarily the last retained point or the previous frame's position. A released tool updates the reference without extending the trace. Returning to an earlier position after other saved positions is allowed.
 
-The trace has **no final form** until movement stops. It cannot be known in advance.
+The four dot placements use no added lattice, 10 mm, 40 mm and 80 mm spacing. In free space the helper rounds world X, Y and Z to multiples of the spacing. Near a whiteboard it can shape the sample in the board's frame, then convert it back to world coordinates. That capture zone extends 0.05 m from the board plane, with 0.02 m around its bounds; positions are clamped to the face and offset 0.004 m for visibility. This behaviour is separate from the board's own pens.
 
-## Implementing draw_dot: Recording Controller Movement
+## Reading the line
 
-The `draw_dot` tool tracks VR controller position and draws a continuous line through space:
+The retained coordinates enter an ImmediateMesh line strip. Adjacent positions are connected directly, including diagonals across the recording lattice. These segments are constructed geometry, not additional measurements.
 
-```gdscript
-extends Node3D
+The cased display tilts 35 degrees from vertical. Its count is read after capacity enforcement; the table shows the last ten retained positions in world metres, with at least three decimal places. Eighteen retained points produce rows 9–18. These numbers are current list positions, not permanent sample identifiers.
 
-var is_drawing: bool = false
-var current_line_points: PackedVector3Array = []
-var line_mesh: ImmediateMesh
-var mesh_instance: MeshInstance3D
-var min_distance: float = 0.01  # Minimum distance between points
+The panel anchors beside the trace and remains readable after release. Appending or evicting points does not make it chase the newest endpoint. The casing and display do not change the data being reported.
 
-func _ready():
-    # Setup immediate mesh for dynamic line drawing
-    line_mesh = ImmediateMesh.new()
-    mesh_instance = MeshInstance3D.new()
-    mesh_instance.mesh = line_mesh
+When the list exceeds 4096 positions, its oldest position is removed. Live fading is off here. The optional `_trail_times` array is populated only when fading is enabled, so it is empty under these placements' default settings. The live position list does not encode the duration of stationary pauses.
 
-    var material = StandardMaterial3D.new()
-    material.albedo_color = Color(0.3, 0.7, 1.0)
-    material.emission_enabled = true
-    material.emission = Color(0.5, 0.8, 1.0)
-    material.emission_energy = 2.0
-    material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-    mesh_instance.material_override = material
+## The whiteboard's pens
 
-    add_child(mesh_instance)
+The map enables separate pens with `#pens:1`. [whiteboard_pen.gd](../../artifacts/whiteboard/whiteboard_pen.gd) reads the nib of the held tool; [whiteboard_drawing.gd](../../artifacts/whiteboard/whiteboard_drawing.gd) converts its world position into the drawing surface's local frame.
 
-func _on_trigger_pressed():
-    is_drawing = true
-    current_line_points.clear()
-    var start_pos = global_position
-    current_line_points.append(start_pos)
+A nib outside the bounds or more than 0.035 m from the plane ends the stroke. The next valid contact starts another stroke. The four pens use 0/10/40/80 mm positional spacing before conversion to canvas coordinates. NO GRID omits that rounding; the image still consists of pixels.
 
-func _on_trigger_released():
-    is_drawing = false
+At this board's 1.6 by 1.2 m size, the canvas is 1024 by 768 pixels. A three-pixel brush connects valid contacts; the eraser paints white with a 22-pixel radius. The adapter disables the prior wet-paint simulation and renders the canvas when a stroke changes. Its image stays with the board during this visit.
 
-func _process(delta):
-    if is_drawing:
-        var current_pos = global_position
-
-        # Only add point if moved sufficient distance
-        if current_line_points.size() == 0 or \
-           current_pos.distance_to(current_line_points[-1]) > min_distance:
-            current_line_points.append(current_pos)
-            update_line_mesh()
-
-func update_line_mesh():
-    line_mesh.clear_surfaces()
-
-    if current_line_points.size() < 2:
-        return
+## Optional comparisons
 
-    line_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-
-    for point in current_line_points:
-        line_mesh.surface_add_vertex(point)
-
-    line_mesh.surface_end()
-```
+The telemetry diptych uses [hand_telemetry_display.gd](../../primitives/hand_telemetry_display/hand_telemetry_display.gd). Its default sampling interval is 0.12 seconds. A process callback crossing that timer threshold appends the current time and position, even if a tracked controller has stayed still. Actual cadence remains limited by callbacks; this is not a guarantee of perfectly periodic sampling.
 
-## The Sampling Problem
-
-The trace appears continuous, but it's actually **sampled** at frame rate (60-90 Hz in VR).
+The footer labels a found controller node as TRACKING and the synthetic fallback as DEMO FEED. The lookup checks tracker/name but not active-pose validity or the currently driven rig; TRACKING therefore does not establish live hardware input by itself. Without a controller, synthetic motion fills the rows. Confirming the active source is a pending implementation improvement.
 
-```gdscript
-# What we record (sampled)
-var trace_points = [
-    Vector3(0, 0, 0),      # Frame 1
-    Vector3(0.1, 0, 0),    # Frame 2
-    Vector3(0.2, 0.05, 0), # Frame 3
-    # ... gaps between frames
-]
-
-# What actually happened (continuous)
-# Infinite positions between samples - lost forever
-```
-
-The trace preserves **more** than the line (entire path, not just endpoints) but still **less** than the actual movement (gaps between samples).
-
-## Duration as Data
-
-Unlike geometric primitives, the trace encodes **time**:
-
-```gdscript
-# Trace with timestamps
-var trace_with_time = []
-
-func record_position():
-    var timestamp = Time.get_ticks_msec()
-    var position = global_position
-    trace_with_time.append({
-        "position": position,
-        "time": timestamp
-    })
-
-# Calculate drawing duration
-func get_trace_duration() -> float:
-    if trace_with_time.size() < 2:
-        return 0.0
+The automatic-writing desk uses changes of an available headset camera's position to vary the amplitude of wordless marks, with fallback demonstration motion. This mapping supports an experiment in interpreting marks; it does not measure confession, attention or intention.
 
-    var start_time = trace_with_time[0].time
-    var end_time = trace_with_time[-1].time
-    return (end_time - start_time) / 1000.0  # Convert to seconds
+## Transfer into Grid
 
-# Calculate drawing speed
-func get_average_speed() -> float:
-    var total_distance = 0.0
+On release, the dot or stick calls [TraceData.add_trace()](../../globals/trace_data.gd). That function requires at least two positions and duplicates the list. Its autoload storage survives room changes in the running game. It has no trace disk-save operation here and does not copy pen colour, identity or per-point timestamps. The whiteboard and player_trace do not publish their records to this store.
 
-    for i in range(1, trace_with_time.size()):
-        var prev_pos = trace_with_time[i-1].position
-        var curr_pos = trace_with_time[i].position
-        total_distance += prev_pos.distance_to(curr_pos)
-
-    var duration = get_trace_duration()
-    return total_distance / duration if duration > 0 else 0.0
-```
+[grid_lines.gd](../../primitives/line/grid_lines.gd) reads existing traces and listens for later releases. It subtracts the source bounding-box centre and applies a fivefold enlargement, reducing the factor if necessary to fit the longest dimension within five display metres. A second rendering rounds transformed coordinates to another lattice. Source positions remain unchanged. This supports the book's conditional ending: the bend may have grown.
 
-The trace knows **how long** and **how fast** - data that points and lines cannot hold.
+## Retained development material
 
-## Trace vs. Line: Data Comparison
-
-```gdscript
-# Line data structure (minimal)
-var line = {
-    "start": Vector3(0, 0, 0),
-    "end": Vector3(5, 3, 0),
-    "distance": 5.83  # Calculated once
-}
-# Memory: 3 Vector3 values + 1 float = ~28 bytes
-
-# Trace data structure (accumulating)
-var trace = {
-    "points": [
-        Vector3(0, 0, 0),
-        Vector3(0.1, 0.02, 0),
-        Vector3(0.2, 0.05, 0),
-        # ... potentially hundreds of points
-    ],
-    "start_time": 12345,
-    "end_time": 12890
-}
-# Memory: N * 12 bytes (where N = number of samples)
-# For 2 seconds at 90fps: 180 points * 12 bytes = 2,160 bytes
-```
-
-The trace is **77x more data** for the same spatial extent. This is the cost of preserving duration.
-
-## Persistence and Erasure
-
-The trace can be saved or cleared:
-
-```gdscript
-# Save trace permanently
-var saved_traces = []
-
-func save_current_trace():
-    saved_traces.append(current_line_points.duplicate())
-
-# Clear trace (erasing history)
-func clear_trace():
-    current_line_points.clear()
-    update_line_mesh()
-
-# Fade trace over time (decay)
-func apply_trace_decay(fade_rate: float):
-    for saved_trace in saved_traces:
-        # Reduce opacity or delete old points
-        pass  # Implementation would modify material alpha
-```
-
-Unlike mathematical objects, traces can **fade** - they exist in time and can disappear.
-
-## Performance Considerations
-
-Continuous trace recording has computational cost:
-
-```gdscript
-# Optimization: Simplify trace by removing redundant points
-func simplify_trace(tolerance: float = 0.05):
-    if current_line_points.size() < 3:
-        return
-
-    var simplified = [current_line_points[0]]
-
-    for i in range(1, current_line_points.size() - 1):
-        var prev = simplified[-1]
-        var curr = current_line_points[i]
-        var next = current_line_points[i + 1]
-
-        # Check if current point is necessary (Ramer-Douglas-Peucker)
-        var line_dist = point_to_line_distance(curr, prev, next)
-
-        if line_dist > tolerance:
-            simplified.append(curr)
-
-    simplified.append(current_line_points[-1])
-    current_line_points = simplified
-
-func point_to_line_distance(point: Vector3, line_start: Vector3, line_end: Vector3) -> float:
-    var line_vec = line_end - line_start
-    var point_vec = point - line_start
-    var line_len = line_vec.length()
-
-    if line_len == 0:
-        return point_vec.length()
-
-    var t = point_vec.dot(line_vec) / (line_len * line_len)
-    t = clamp(t, 0.0, 1.0)
-
-    var projection = line_start + line_vec * t
-    return point.distance_to(projection)
-```
-
-Simplification reduces the trace to "significant" points - a partial return to line-like compression.
-
-## Key Takeaway
-
-The trace is geometry that **remembers**. It preserves duration, gesture, and the path itself - not just the result. But preservation requires **continuous sampling** and **accumulating storage**. The trace resists the clean compression of points and lines, insisting that **how you moved matters**, not just where you ended up.
-
-The draw_dot tool makes this visible: Your hand's movement through VR space becomes persistent geometry. The trace is **proof of passage** - evidence that a body moved through this space at this speed for this duration.
+The [previous technical draft](../../../doc/space/point-trace-focus-2026-09-16/previous/technical.md) preserves experiments in timestamps, simplification, fading and storage. Those sketches need separate implementation and verification. Its numerical memory comparison and its named simplification algorithm were not reliable descriptions of the installed recorder; they should not be used as current evidence.

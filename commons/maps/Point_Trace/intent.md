@@ -1,6 +1,15 @@
-Concept: The trace introduces duration and embodied residue — geometry as lived process. Movement accumulates as record; gesture, hesitation, error, and return become geometric data.
-Sequence role: Third map. Breaks Point_Lines' static network by adding time. Lines were connections; traces are histories. The hand enters. Prepares Point_Line_Grid by generating the continuous movement that the grid will later quantize.
-Technical angle: Recording position over time (frame-by-frame trail), storing Vector3 arrays as path data, rendering accumulated points/lines as trails, delta-time and update loops, draw_dot as minimal drawing instrument.
-Critical angle: Derrida's trace — presence constituted by the residue of what has passed. The trace is not the line; it carries duration, error, the body's weight. Geometry shifts from ideation to inscription.
-Key artifacts: draw_dot as the primary embodied drawing tool; dark_sphere as persistent spatial anchor; cube_scene as the volume within which traces accumulate.
-Gap: Additional artifacts showing trace decay, trace comparison, or trace-as-data-export would strengthen the duration theme.
+# Point_Trace — current intent
+
+Question: What has to happen before movement enters a record?
+
+The book follows the detour from Point_Lines through four related decisions: whether movement passes the recorder's gate; where a retained position may stand; which part of a tool is being tracked; and whether contact admits movement to a drawing. An ordered list of selected positions, joined by straight segments, is the main new capability.
+
+The primary tokens are draw_dot, draw_stick and whiteboard. Four draw_dot placements offer no added lattice, then 10, 40 and 80 mm spacing. They share a 5 mm movement gate. The stick moves the observed point to its tip; the board makes contact and lifting consequential. These variations belong to the same inquiry.
+
+The telemetry diptych remains a secondary comparison for a pause: timed rows can continue when the movement-gated drawing list does not change. Its TRACKING/DEMO FEED label matters to that comparison. The automatic-writing desk remains a secondary encounter about interpreting an expressive mark. The science screen is secondary too. All nine physical placements remain.
+
+The recording rules can hide a small difference and make another position easier to return to. The critical text should ask what a particular practice needs from its record, who chooses the rules, and how those rules could be challenged. It should not equate a sampled position list with preserved intention, complete duration, or freedom.
+
+Release a dot or stick to copy its retained positions into TraceData. Grid receives that record, centres and scales its display, and applies another lattice. The source is already sampled and may already be spatially rounded; Grid makes addresses and changes of representation the next explicit question.
+
+Earlier drafts are preserved in [the previous texts](../../../doc/space/point-trace-focus-2026-09-16/previous/). Their proposals and historical descriptions are not the current interaction contract.

@@ -38,6 +38,8 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 @export_group("Tray")
 @export var show_tray: bool = true
+## Opt-in working drawing-paper surface and separate suspended board pens.
+@export var pens_enabled: bool = false
 
 # ── Constants ─────────────────────────────────────────────────────────
 
@@ -87,6 +89,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _read_metadata_overrides() -> void:
+	if has_meta("config_pens"):
+		pens_enabled = str(get_meta("config_pens")).to_lower() in ["1", "true"]
 	if has_meta("config_board_width"):
 		board_width = float(str(get_meta("config_board_width")))
 	if has_meta("config_board_height"):
@@ -121,6 +125,12 @@ func _build_board() -> void:
 	if show_tray:
 		_build_tray()
 	_build_text_lines()
+	if pens_enabled:
+		var drawing = load("res://commons/artifacts/whiteboard/whiteboard_drawing.gd").new()
+		drawing.name = "DrawingTools"
+		drawing.board_width = board_width
+		drawing.board_height = board_height
+		add_child(drawing)
 
 
 func _build_surface() -> void:

@@ -91,9 +91,15 @@
   "Point_Trace": {
    "origin": "secondary",
    "science_screen": "secondary",
-   "whiteboard": "secondary",
+   "whiteboard": "primary",
    "floating_sphere_field": "secondary",
-   "draw_stick": "secondary"
+   "draw_stick": "primary",
+   "automatic_writing_desk": "secondary",
+   "draw_dot": {
+    "role": "primary",
+    "group": "recording-contract"
+   },
+   "hand_telemetry_diptych": "secondary"
   },
   "Point_Line_Grid": {
    "grab_sphere_point_snap": "secondary",
@@ -714,7 +720,14 @@
     "role": "primary"
    }
   ],
-  "Trans_Introduction": []
+  "Trans_Introduction": [],
+  "Point_Trace": [
+   {
+    "id": "recording-contract",
+    "title": "One gesture, four recording rules",
+    "role": "primary"
+   }
+  ]
  },
  "order": {
   "Point_Lines": {
@@ -980,6 +993,22 @@
     "harmonic_distance_table",
     "VRAudioMonitor"
    ]
+  },
+  "Point_Trace": {
+   "primary": [
+    "@recording-contract",
+    "draw_stick",
+    "whiteboard"
+   ],
+   "primary|recording-contract": [
+    "draw_dot"
+   ],
+   "secondary": [
+    "science_screen",
+    "hand_telemetry_diptych",
+    "automatic_writing_desk"
+   ],
+   "decoration": []
   }
  },
  "notes": {
@@ -1236,14 +1265,15 @@
    }
   },
   "Point_Trace": {
-   "primary": {
-    "automatic_writing_desk": [
-     547.0,
-     75.0
-    ],
+   "primary": {},
+   "secondary": {
     "hand_telemetry_diptych": [
      338.0,
      76.0
+    ],
+    "automatic_writing_desk": [
+     547.0,
+     75.0
     ]
    }
   },
