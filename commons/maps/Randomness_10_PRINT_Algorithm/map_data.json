@@ -19,7 +19,27 @@
   },
   "museum": {
    "wall_height": 3,
-   "gate_depth_rows": 0
+   "gate_depth_rows": 0,
+   "floor_cells": [
+    [
+     6,
+     7
+    ]
+   ],
+   "artifact_placement": "map",
+   "plinths": false,
+   "sculpture_clear_rects": [
+    [
+     1,
+     1,
+     12,
+     13
+    ]
+   ],
+   "open_roof": true,
+   "props_deny": [
+    "dream_bodies"
+   ]
   }
  },
  "utility_definitions": {
