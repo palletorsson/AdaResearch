@@ -143,3 +143,21 @@ The sequence's later maps extend the line primitive into curves, traces, and tet
 ## Performance
 
 The map's grid is small enough that all rendering and interaction costs are trivial. For larger grids the geometry batches into MultiMeshInstance3D and scales to hundreds of thousands of instances on modern hardware. The map deliberately stays small because the concept being taught is multiplicity of points and their linear connections, and only a handful of examples is needed for the concept to land cleanly.
+
+
+## Encounter reference, 15 September 2026
+
+[Companion notes for the current book passage](encounter-reference.md) retain instrument settings, recording distinctions and code excerpts moved out of the main reading.
+
+
+## Repeated proof and the ruler bench — 16 September 2026
+
+The secondary `line_proof_pair` instantiates the existing plus puzzle twice through a scoped subclass, `commons/artifacts/line_proof_pair/repeatable_plus.gd`. It remains available as an optional comparison after the current book's simpler endpoint lesson. Both copies start at `stock=scattered`; A selects `proof=relation` and B `proof=invariant`. Both display the same reference targets. The subclass overrides completion with a current verdict, so changing the endpoints can revoke acceptance and success never hides or locks the handles. Ordinary plus puzzle scenes retain their previous completion behaviour.
+
+The move buttons add one common world-space displacement to all four endpoints, obtained from a local vector through the puzzle's basis. The reference targets stay put. This preserves segment direction vectors and coincident midpoints while changing endpoint positions relative to the targets. Target proximity is checked from current geometry, not cached snap flags.
+
+The geometric checks are approximate. `GeometryUtils.are_perpendicular` compares `abs(dir_a.dot(dir_b)) < 0.26`, with normalized directions; this value is a dot-product threshold, not an angle in radians. Midpoints must be within 0.05 m, and target membership uses the line's 0.08 m snap tolerance. The paired subclass rejects degenerate segments before testing their directions.
+
+The restored `two_point_ruler` placement uses `#block_base_y:0.75`. This builds a supporting bench and raises the subject and witness while presenting the pickable ruler at the front. The default remains zero for existing placements. Holding the tip inside the subject's padded bounds and pressing its action reads the pale subject's mesh width in world metres. The same action separately tweens the witness scale by 0.72, bounded to 0.18–2.4. Leaving the subject re-arms the action; pressing away from it is refused.
+
+The workshop uses private camera worlds. Its first camera is orthographic, and its four-line camera orbits automatically. Moving the visitor around a flat monitor does not move these cameras. Visitor camera control and an angle-only proof comparison are proposals for a later pass.

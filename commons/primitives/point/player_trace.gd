@@ -111,6 +111,8 @@ var _trail_points: Array[Vector3] = []
 var _trail_times: Array[float] = []  # Track when each point was added
 var _trail_speeds: Array[float] = []  # Speed (m/s) at which each point was reached
 var _last_global_position: Vector3 = Vector3.ZERO
+# Elapsed time belongs to the same displacement baseline as _last_global_position.
+var _step_elapsed: float = 0.0
 var _reference_frame: MeshInstance3D
 var _time_elapsed: float = 0.0
 var _start_marker: MeshInstance3D
@@ -165,7 +167,7 @@ func _ready() -> void:
 		set_process(true)
 		return
 
-	_last_global_position = _xr_origin.global_position
+	_last_global_position = _tracked_position()
 	set_process(true)
 
 	print("PlayerTrace: Tracking player at %s" % _xr_origin.get_path())
@@ -181,7 +183,21 @@ func _ready() -> void:
 const ORIGIN_RECHECK_S := 0.5
 var _origin_recheck := 0.0
 
+func _desktop_walker() -> Node3D:
+	# Require the museum walker's active camera, not a staging/capture body.
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	var ancestor: Node = camera
+	while ancestor != null:
+		if ancestor is Node3D and ancestor.is_in_group("em_walker"):
+			return ancestor as Node3D
+		ancestor = ancestor.get_parent()
+	return null
+
+
 func _find_xr_origin() -> Node3D:
+	var walker: Node3D = _desktop_walker()
+	if walker != null:
+		return walker
 	var origins: Array = []
 	_pt_collect(get_tree().root, "XROrigin3D", origins)
 	for og in origins:
@@ -194,8 +210,14 @@ func _find_xr_origin() -> Node3D:
 func _origin_is_live(o: Node) -> bool:
 	if o == null or not is_instance_valid(o):
 		return false
+	if o.is_in_group("em_walker"):
+		var camera: Camera3D = get_viewport().get_camera_3d()
+		return camera != null and o.is_ancestor_of(camera)
 	if not o.is_class("XROrigin3D"):
 		return true                       # an exported path to a plain node: trust it
+	# A desktop walker can appear after this artifact cached the staging rig.
+	if _desktop_walker() != null:
+		return false
 	if bool(o.get("current")):
 		return true
 	# not current -- live only if NO rig is current (a single-rig scene never sets it)
@@ -205,6 +227,22 @@ func _origin_is_live(o: Node) -> bool:
 		if og != o and bool(og.get("current")):
 			return false
 	return true
+
+func _tracked_position() -> Vector3:
+	var position_sample: Vector3 = _xr_origin.global_position
+	if _xr_origin is XROrigin3D:
+		# Physical steps move the headset inside the rig without moving its origin.
+		# Project onto rig floor height; this is not a measurement of the feet.
+		var camera: XRCamera3D = _xr_origin.get_node_or_null("XRCamera3D") as XRCamera3D
+		if camera == null:
+			for candidate in _xr_origin.find_children("*", "XRCamera3D", true, false):
+				camera = candidate as XRCamera3D
+				break
+		if camera != null:
+			position_sample.x = camera.global_position.x
+			position_sample.z = camera.global_position.z
+	return position_sample
+
 
 func _pt_collect(n: Node, cls: String, out: Array) -> void:
 	if n == null:
@@ -315,21 +353,15 @@ func _process(delta: float) -> void:
 				# segment from wherever the dead rig stood to wherever the live
 				# one is -- a phantom line across the room.
 				_xr_origin = o
-				_trail_points.clear()
-				_trail_times.clear()
-				_trail_speeds.clear()
-				_truth_points.clear()
-				_truth_length = 0.0
-				_gate_has_last = false
-				_last_global_position = o.global_position
-				_rebuild_trail()
+				clear_trail()
 				print("PlayerTrace: now tracking live origin %s" % o.get_path())
-	if not _xr_origin:
+	if not is_instance_valid(_xr_origin):
 		return
 
 	_time_elapsed += delta
+	_step_elapsed += delta
 
-	var current_global = _xr_origin.global_position
+	var current_global = _tracked_position()
 
 	# ── the path as WALKED — recorded every frame, unquantised, before any of the
 	# thresholds below get to decide what is worth keeping. This is the reference
@@ -368,9 +400,10 @@ func _process(delta: float) -> void:
 		return
 
 	# Speed of this step: distance / time — the derivative of the body's path.
-	var step_speed = 0.0 if delta <= 0.0 else step_distance / delta
+	var step_speed: float = 0.0 if _step_elapsed <= 0.0 else step_distance / _step_elapsed
 
 	_last_global_position = current_global
+	_step_elapsed = 0.0
 	# Convert to local space and add height offset
 	var local_point = to_local(current_global)
 	local_point.y += trace_height_offset  # Offset trail above ground
@@ -544,6 +577,7 @@ func clear_trail() -> void:
 	_unrecorded_m = 0.0
 	_gate_has_last = false
 	_sample_clock = 0.0
+	_step_elapsed = 0.0
 	if _ghost_mesh:
 		_ghost_mesh.clear_surfaces()
 	if _trail_mesh:
@@ -552,8 +586,8 @@ func clear_trail() -> void:
 		_start_marker.visible = false
 	if _now_marker:
 		_now_marker.visible = false
-	if _xr_origin:
-		_last_global_position = _xr_origin.global_position
+	if is_instance_valid(_xr_origin):
+		_last_global_position = _tracked_position()
 
 func get_trail_length() -> float:
 	"""Returns the total length of the trail in meters"""

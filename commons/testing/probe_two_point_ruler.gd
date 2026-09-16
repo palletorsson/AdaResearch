@@ -76,7 +76,11 @@ func _place_tip(a: Node3D, on_subject: bool) -> void:
 	rule.global_position = want - offset
 
 
-func _init() -> void:
+func _initialize() -> void:
+	call_deferred("_run")
+
+
+func _run() -> void:
 	print("TWO-POINT RULER — can a visitor take a reading, and is it true?")
 	print("")
 

@@ -1,5 +1,47 @@
 {
 	"artifacts": {
+		"line_space_workshop": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Four live filmed studies of two, three, four and more line segments. Animated 3D geometry lives in a private filming world; only four tilted 2D monitors appear in the museum. Monochrome, ink threshold, contour and scan-line images; fixed frontal, oblique and slowly orbiting cameras. Six-second holds, five-second rigid movements and a closed four-edge fold. No exposed rods, grab targets or buttons.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"spatial-relations"
+			],
+			"footprint": [
+				4,
+				3,
+				3
+			],
+			"include_in_map_data": true,
+			"lookup_name": "line_space_workshop",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Line Space Workshop",
+			"parameters": {
+				"footprint": [
+					4,
+					3,
+					3
+				],
+				"size_group": "large"
+			},
+			"scene": "res://commons/artifacts/line_space_workshop/line_space_workshop.tscn",
+			"size_group": "large",
+			"tags": [
+				"line",
+				"live-camera",
+				"parallel",
+				"grid",
+				"perspective",
+				"depth",
+				"edges"
+			],
+			"qfep_connection": "A crossing in an image can conceal separation in depth. Moving a segment or changing viewpoint exposes which relations belong to the arrangement and which to the observer."
+		},
 		"pixel_heart": {
 			"category": "primitives",
 			"complexity": "beginner",
@@ -26239,7 +26281,7 @@
 					"placeable",
 					"vr"
 				],
-				"theoreticalGrounding": "Point_Lines' escalation runs two points -> a distance -> a segment -> a direction -> pointing -> the drag -> scale -> destroy, and its wall text already claims that the same gesture at one scale reads a length and at another changes the thing it is reading. This artifact is that claim you can hold. Fixing a distance and carrying it around is the whole of metrology in one gesture. Displacing the effect onto a block you are not looking at is an observer effect you can walk around: you cannot see the change while you are causing it, because watching the witness means taking the rule off the subject, and the subject stays honest throughout so nothing about the reading is wrong. The only way to catch it is to look away from your own instrument."
+				"theoreticalGrounding": "The instrument reads the pale subject and separately changes the blue witness. This is an authored causal coupling: measurement does not inherently require another body to shrink. The visitor can compare the stable reading with the changing witness, repeat the action, and inspect the distinct instructions. Attention may miss the side effect, but looking toward the witness does not disable measurement. A unit enables comparison while the surrounding program decides what follows from using it."
 			},
 			"anamorphic_cross": {
 				"lookup_name": "anamorphic_cross",

@@ -1,0 +1,19 @@
+{
+  "artifacts": {
+    "line_proof_pair": {
+      "lookup_name": "line_proof_pair",
+      "scene": "res://commons/artifacts/line_proof_pair/line_proof_pair.tscn",
+      "name": "What Counts as a Plus?",
+      "description": "Two adjacent PlusLinePuzzle copies start with the same scattered endpoints and visible target rings. A tests target positions, perpendicular directions and coincident centres; B tests only the latter two relations. Grab endpoints to build each cross, then use the move buttons to translate both lines together. Acceptance is continuously reversible and handles remain available after success. Reset returns the scattered stock.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "map_ready": true,
+      "tags": ["line", "constraint", "invariance", "translation", "proof", "comparison"],
+      "interactions": ["Grab endpoints to make a cross in each bay", "Move both lines left or right without changing their relation", "Compare acceptance before and after translation", "Reset and try another arrangement"],
+      "qfep_connection": "A relation and its acceptance predicate can differ. Positional requirements and geometric tolerances decide which variations the instrument accepts; identical reference rings assist both bays but are binding only in A.",
+      "spatial_needs": {"footprint_cells": [3, 2], "height_m": 2.05},
+      "parameters": {},
+      "signals": []
+    }
+  }
+}

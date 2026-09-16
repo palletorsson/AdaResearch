@@ -1,173 +1,80 @@
-A point had no parts. Two of them have a distance.
-
-That is the whole gift of this room, and everything difficult in it follows from that one addition. Not a new object — a *relation*, which is worse, because a relation can be written down.
-
-<!-- @street_talker -->
-
-The board at the door says four words: *two points, a distance, a segment, a direction.*
-
-They are not four names for the same thing, and the room is the demonstration. A distance is a single number. An infinite line has no length at all. A segment has one because somebody chose two ends. A direction is what is left when you throw the length away. Each is the one before it with something added — and the something is always a body.
-
-<!-- @ -->
-
-## Two points, and what is between them
-
-```gdscript
-const GRID_SIZE := Vector2i(8, 8)
-const SPACING := 1.0
-```
-
-Two points determine a line. To keep only what lies between them is already a decision.
-
-<!-- @two_points_line -->
-
-Here are the two ends, and here is what was kept. Move either one and the between re-computes without being asked — which is the first sign that the segment is not a thing you drew but a *rule you agreed to*. You are holding one end of a promise, and the rest of the line, the infinite part, is still out there in both directions, unkept.
-
-<!-- @klee_walking_point -->
-
-A line is a dot that went for a walk. Klee said it and it stayed said, because it puts the time back in: the line is not a shape, it is the record of something having moved. Nothing here shows the walking. You get the trace and are asked to believe in the walk.
-
-<!-- @ -->
-
-## Length is length
-
-Distance is a relation between two points. Length is a property of the segment — of the part you decided to keep — and that difference is where everything starts, because a property can be written on a label.
-
-<!-- @scale_lines -->
-
-Rungs, ascending. Once you can say *how much*, you have a unit, and a unit came from somewhere — a foot, a forearm, a platinum bar in a vault outside Paris, and since 1983 the distance light travels in 1/299792458 of a second. The metric system is not a discovery about space. It is a decision about which line to trust.
-
-<!-- @modulor_man_demo -->
-
-Le Corbusier took one imaginary man — 1.83 m, six feet, the handsome policeman of an English detective novel — and made his body the measure of doorways, ceilings and chairs for a generation. Nobody was measured. The earlier version of the system used 1.75 m and was revised upward because six feet is a rounder number in the system he was arguing against. Stand next to him. The scale is either yours or it is not, and if it is not, the building will keep telling you so in small ways for as long as you are inside it.
-
-<!-- @two_point_ruler -->
-
-Stop adjusting the segment and it becomes a ruler. That is the whole of metrology in one gesture: not a special object, just a distance somebody decided to keep.
-
-Read the pale block. It measures 0.50 m, and it goes on measuring 0.50 m however many times you ask, because reading a thing does not change it.
-
-The blue block, which you did not measure, is smaller than it was.
-
-Nothing here is lying to you. The number is right, the subject is untouched, and the readout has no way of mentioning that what it described and what it altered were two different objects. You cannot catch it while you are doing it — watching the other block means taking the rule off this one. The only way to see it is to stop measuring and look somewhere you had no reason to look.
-
-<!-- @walk_this_line_marking -->
-
-Paint on the floor, and you follow it, and nobody asked you to. A measure only has to be *drawn* to start being obeyed.
-
-<!-- @ -->
-
-## Crossing
-
-```gdscript
-func connect_horizontal() -> void:
-    for y in GRID_SIZE.y:
-        for x in range(GRID_SIZE.x - 1):
-            draw_line(points[y][x].position, points[y][x + 1].position)
-```
-
-On a plane, two lines have exactly two options.
-
-Keep hold of that qualifier. You are standing in three dimensions and the room is about to speak as though you were not.
-
-<!-- @plus_line_puzzle -->
-
-They meet once. Two lines that cross agree on precisely one point and disagree about every other point in the universe, and we call that agreement an intersection, as though it were a place. It is a coincidence with a name.
-
-<!-- @parallel_line_puzzle -->
-
-Or they agree never to. Parallel is the stronger claim: not *they have not met yet* but *they will not, ever, however far you follow them*. It is a promise about infinity made by two short segments in a small room, and everything built square is built on it.
-
-<!-- @ -->
-
-## And then it points
-
-Give the segment an order — from here to there — and something new appears. It points.
-
-```gdscript
-var displacement := b - a
-var distance := displacement.length()
-var direction := displacement.normalized()
-```
-
-Three lines, three different objects, and the philosophical distinction and the computational one are the same distinction. `b - a` is a displacement: it has a size and a way round. `.length()` throws the way round away and keeps a number. `.normalized()` throws the number away and keeps the way round. Nothing is left of the segment in either result, and neither result can be turned back into it alone.
-
-Pick the third one up, and it is something you aim.
-
-<!-- @grabbable_line -->
-
-You measure by pulling. That is the moment the body enters: the hand is now inside the instrument, and the reading depends on where you decided to stop. Every measurement in this room is a measurement of your reach as much as of the thing.
-
-<!-- @laser_measure -->
-
-The beam finds the distance to whatever it lands on. Nothing about the beam knows what that is.
-
-<!-- @laser_exploding_sphere -->
-
-The same object. The same straight line, aimed the same way, with something different at the far end. Pointing and destroying are not two techniques; they are one technique and two situations, and the line cannot tell them apart. Nothing in the vector records the difference.
+The point gave us somewhere to begin. Now put two positions into relation.
 
 <!-- @line_demo -->
 
-Make one yourself. Two snap points and the segment between them, and you can pull the ends until the length is whatever you wanted. It is just a line. Nothing about it is doing anything.
+Two black points wait beside a barrier: **DO NOT CROSS.** Bring them near one another and release to request a connection. Watch for the segment between them. What else moved?
 
-<!-- @line_sledgehammer -->
+The barrier flies apart.
 
-Two seconds later it is a sledgehammer.
+Keep hold of this small beginning: **two distinct points determine a straight line.** Here we draw only the part between them: a segment. Move an endpoint. The segment changes length and direction while the connection remains.
 
-Not a metaphor and not a reward — the same object, still two points and everything between them, still a length and a direction, with a mass at one end and your hands at the other. Nothing was added but the body. That is the last rung of the escalation this room has been climbing since the first paragraph, and it took two seconds and no new geometry.
-
-It has to be *swung*. Resting it against something does nothing, which is the difference between a hammer and a wand: the damage is not in the object, it is in what you did with it.
+Already something else has attached itself to the lesson. Joining two points has opened a passage.
 
 <!-- @do_not_cross_barrier -->
 
-And a line drawn to keep you out is still just two points and a rule. It has no force. It stops you anyway.
+Try crossing where the barrier stood. While intact, its collider reached from the floor to the bar; the visible gap beneath the plank did not let you through. Disconnecting the points does not rebuild it.
 
-Until you swing at it. Then it turns out to have had no force at all — it falls over, still legible, and the way is open. Both halves of that sentence had to be true for either to mean anything, and until there was something in the room that could break it, only the second half was.
+On the first connection, the demonstration calls the nearby barrier's `trigger_explosion()`. Someone joined those events in code. Geometry supplies a relation; another instruction gives that relation a consequence for your body. We could have made the connection ring a bell, or left the barrier standing.
 
-You do not have to. It is a police line and a prohibition and somebody put it there, and walking round it costs nothing. But the room has now made the choice available, and *available* is a different thing from *forbidden*, which is what the barrier was pretending to be.
+The words, the plank and the collision boundary all helped to say **DO NOT CROSS**. Opening the way required changing what enforced that instruction. For a moment, a line has given us passage through another line's prohibition.
 
-<!-- @ -->
+There is a whole inquiry waiting there. Keep the question with you as you move to the next pair of endpoints.
 
-## Vertical, horizontal, and the one that lies
+<!-- @line -->
 
-```gdscript
-func connect_vertical() -> void:
-    for y in range(GRID_SIZE.y - 1):
-        for x in GRID_SIZE.x:
-            draw_line(points[y][x].position, points[y + 1][x].position)
-```
+This line has two ends you can hold. Pull them apart, then bring them closer. Watch the length display. Can you find a span of one metre?
 
-Horizontal and vertical are the same function with the indices swapped. Space does not have a preferred axis; the code does, and only because someone wrote `y` first.
+Hold one end still and move the other around it. Try keeping the same distance. The segment can turn while its length stays steady. Once we choose to go from A to B, we can calculate a displacement with a distance and a direction.
 
-<!-- @perspective_lines -->
-
-And here parallels meet after all — not because they stopped being parallel, but because you are standing somewhere. Perspective is the one honest confession the room makes: every reading so far has had a position in it, and this is the only place that says so out loud.
-
-<!-- @fontana_puncture -->
-
-One cut. Not a line drawn on the surface — a line that goes *through* it, which is the only way to prove the surface was ever there.
-
-<!-- @ -->
-
-## The fork
+Here is an example using the positions we began learning to write in the first room:
 
 ```gdscript
-func graph_stats() -> Dictionary:
-    var V: int = GRID_SIZE.x * GRID_SIZE.y
-    var E: int = (GRID_SIZE.x - 1) * GRID_SIZE.y + (GRID_SIZE.y - 1) * GRID_SIZE.x
-    return {"vertices": V, "edges": E}
+var a := Vector3(0, 0, 0)
+var b := Vector3(1, 0, 0)
+var displacement := b - a
+var distance := displacement.length()
 ```
 
-Lines that repeat become countable. Lines that are countable become a structure.
+`b - a` gives the displacement from the first position to the second: here, one unit along X. In this room we use that unit as a metre. `length()` gives the magnitude of that displacement, the straight distance between the endpoints.
 
-<!-- @dgrid -->
+Change either position and calculate again. The coordinates can change; we still have two endpoints and the segment between them. We have a small way to describe something that our hands can alter.
 
-The grid: the line made regular, repeatable, and completely indifferent to you. It is enormously useful and it does not care where you are standing, which are the same property described twice. What does not fit it is remainder — not wrong, just not counted, which in practice is the same thing.
+Even here, another question appears. Your hand may keep moving while the rounded number stays the same. How much difference can a display show? Remember it when we reach Trace and Grid.
+
+Two points were enough to begin. They have not made the world small.
+
+Nearby, a ruler offers a measure. Two crosses invite comparison. Lines on monitors seem to meet; a laser waits for something to stand in its way. Each could occupy the rest of our visit. There is pleasure in following these associations, in finding how quickly a familiar mark acquires another use.
+
+For now, hold on to the connection you made and the distance you changed. The other experiments remain available for a return.
+
+The clock in the first room was already running when we arrived. Beginning required leaving some code unread. Continuing asks us to choose a thread and let other questions remain open.
+
+Ahead, a line has acquired words.
+
+<!-- @walk_this_line_marking -->
+
+Across the glass cover of a shallow basin, a black stripe: **WALK THIS LINE.** The glass supports your crossing.
+
+Try following it. Then walk alongside it. Cross it at an angle. The stripe gives you something steady to vary your relation with.
+
+Did a sideways step feel like a mistake? The marking makes no such judgement: its script draws the stripe and lettering without scoring your walk. The instruction may still have changed how you moved. Another visitor might find an invitation to dance around it.
+
+Choose which end to start from, and the line gives you a direction to follow. It cannot settle what following will mean to a body.
+
+<!-- @player_trace -->
+
+Turn and look at the route your movement has left behind. Compare it with the stripe. That small sideways step is visible now.
+
+The recorder saves sampled positions and joins them. In VR it follows the headset's horizontal position at the rig's floor height; on desktop it follows the walker. The resulting line records one part of your movement.
+
+Choose a start and an end. Walk between them with a detour. Imagine walking directly between those same positions instead. The endpoint calculation, `b - a`, gives the same answer for both journeys. It contains no record of the turn you took.
+
+The trace has kept more positions. How many did it need? What happened between the ones it kept?
 
 <!-- @ -->
 
-Two exits, and they are opposites.
+We can leave the other experiments here. The question taking us towards the exit has become precise: **what must we save if we want to keep something of the journey?**
 
-The **grid** is the line made again and again until the making stops mattering. The **trace** is the line made once, by a body, and never recoverable. Both are made of exactly the same thing: two points, and a decision about what to keep.
+Two endpoints were enough for the segment. To remember the detour, we will need to add something.
 
-The next rooms are those two. Not in order of difficulty — in order of what you are willing to give up.
+Bring the detour.

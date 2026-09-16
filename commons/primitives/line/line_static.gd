@@ -5,12 +5,17 @@ extends Node3D
 @export var end_pos: Vector3 = Vector3(0.4, 0, 0)
 @export var line_thickness: float = 0.01
 @export var line_color: Color = Color(0.788235, 0.462745, 0.996078, 1)
+## Whether this line captions its own length. Default true — the caption IS
+## the point for a line you can stretch. Twelve of them around a fixed cube
+## are twelve copies of one sentence, so a parent can switch them off.
+@export var show_length_label: bool = true
 
 var current_line: MeshInstance3D
 var length_label: Label3D
 
 func _ready():
-	create_length_label()
+	if show_length_label:
+		create_length_label()
 	update_line()
 
 func create_length_label():
@@ -92,6 +97,19 @@ func update_length_label(start: Vector3, end: Vector3):
 	var center_pos = (start + end) / 2.0
 	center_pos.y += 0.05  # Offset up by 5cm
 	length_label.position = center_pos
+
+## Turn the caption off (or back on) from a parent. A child's _ready runs
+## BEFORE its parent's, so setting the export from above is always too late —
+## by then the label exists and has to be removed rather than not made.
+func set_length_label_visible(v: bool) -> void:
+	show_length_label = v
+	if v:
+		if length_label == null or not is_instance_valid(length_label):
+			create_length_label()
+			update_length_label(start_pos, end_pos)
+	elif length_label and is_instance_valid(length_label):
+		length_label.queue_free()
+		length_label = null
 
 # Public method to set positions and update
 func set_positions(start: Vector3, end: Vector3):

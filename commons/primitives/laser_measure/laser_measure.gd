@@ -4,8 +4,8 @@
 # critical_parameter: max_range and unit — they set what the tool can see and how it reports
 # triggers: _ready() builds handle + copper guard + LCD housing + lit screen panel + raycast + beam core + glow shell + inline hit-point label; _process() casts every frame, updates readouts
 # emerges: a wide glowing beam that snaps to surfaces, a hit-dot at the intersection, a glowing green-on-black LCD reading in the handle's saddled housing, and a billboarded numeric label AT the hit-point
-# needs: raycast configurable range [present]; unit selector m/cm [present]; damage mode for laser-hazard repurposing [present]; inline hit-point readout [present]; tick-mark ruler along beam [opt-in, default OFF 2026-08-23 — "just the laser"]; sword-style cylinder body [present, 2026-05-19; hand-scale grip 2026-08-23]; emissive LCD screen panel [present, 2026-05-19; saddle housing 2026-08-23]
-# relationships: shares body geometry vocabulary with laser_sword (cylinder handle + copper guard); companion to vectorline (geometric length) and to the science_screen family (in-world numeric readouts); doubles as a hazard via deals_damage flag
+# needs: raycast configurable range [present]; unit selector m/cm [present]; damage mode for laser-hazard repurposing [present]; burn-through on a dwell, opt-in via #burns:1 [present, 2026-09-05]; inline hit-point readout [present]; tick-mark ruler along beam [opt-in, default OFF 2026-08-23 — "just the laser"]; sword-style cylinder body [present, 2026-05-19; hand-scale grip 2026-08-23]; emissive LCD screen panel [present, 2026-05-19; saddle housing 2026-08-23]
+# relationships: answers do_not_cross_barrier's trigger_explosion() contract, which was written for this beam and had no caller but the sledgehammer; shares body geometry vocabulary with laser_sword (cylinder handle + copper guard); companion to vectorline (geometric length) and to the science_screen family (in-world numeric readouts); doubles as a hazard via deals_damage flag
 # truth: Measurement is a probe with a number attached. The beam without the readout is decoration; the readout without the beam is abstract. The pairing is the primitive — now made explicit in three places: a readout that rides the hit-point, a ruler that lives along the beam, and a screen on the handle that reads like a real instrument's LCD.
 
 extends Node3D
@@ -39,6 +39,24 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 ## A beam you are HOLDING hits your own body at arm's length. Only a hit
 ## further out than this is a beam you walked INTO.
 @export var lethal_min_distance: float = 0.8
+
+## THE BEAM BURNS THROUGH. Hold it on something that answers
+## `trigger_explosion()` or `strike()` and, after burn_seconds, it goes.
+##
+## 2026-09-05, Palle: "let the laser destroy the do_not_cross_barrier". The
+## barrier has advertised trigger_explosion() as "the laser\'s own contract"
+## since it learned to break, and until now the only caller was the sledgehammer
+## honouring it on the laser\'s behalf.
+##
+## OFF BY DEFAULT and it must stay off: this tool stands in 47 maps, and a beam
+## that quietly dismantles the scenery it sweeps past is a change nobody would
+## attribute to a laser they were only measuring with. A map turns it on with
+## `#burns:1`, exactly as it does for `#lethal:1`.
+@export var burns: bool = false
+## How long the beam must stay on ONE target. The dwell is the whole difference
+## between a decision and an accident: at 0 a beam crossing a room clears every
+## barrier in it.
+@export var burn_seconds: float = 1.2
 
 @export_category("Display Settings")
 @export var text_color: Color = Color(0.2, 1.0, 0.3, 1.0)
@@ -142,6 +160,8 @@ var tick_root: Node3D                  # parent for the tick ruler
 var _tick_mm: MultiMeshInstance3D = null
 var _tick_count: int = 0
 # New body geometry built in code (laser-sword-style handle)
+var _burn_target: Node = null
+var _burn_t: float = 0.0
 var _handle_mesh: MeshInstance3D
 var _guard_mesh: MeshInstance3D
 var _lcd_frame: MeshInstance3D
@@ -447,6 +467,11 @@ func perform_measurement():
 
 	raycast.force_raycast_update()
 
+	if not raycast.is_colliding():
+		# nothing under the beam: the burn does not bank, it resets
+		_burn_target = null
+		_burn_t = 0.0
+
 	if raycast.is_colliding():
 		var hit_point = raycast.get_collision_point()
 		var hit_object = raycast.get_collider()
@@ -461,6 +486,10 @@ func perform_measurement():
 		update_tick_marks(distance)
 		update_inline_readout(hit_point, distance)
 		update_display(distance, last_target, true)
+
+		if burns:
+			# one scan tick of dwell — perform_measurement runs at scan_frequency
+			_burn(hit_object, 1.0 / maxf(1.0, scan_frequency))
 
 		# LETHAL first: a kill is not a damage tick, and it must not wait on
 		# the cooldown. Only a hit past arm's length counts — see above.
@@ -745,7 +774,49 @@ func _kill_player() -> void:
 	_killed = false
 
 
+## WALK UP FROM THE COLLIDER. The thing the ray hits is a StaticBody3D; the
+## script that knows how to break is on an ancestor of it. Same walk the
+## sledgehammer does, and for the same reason.
+func _burnable(obj: Object) -> Node:
+	var node := obj as Node
+	while node != null:
+		if node.has_method("trigger_explosion") or node.has_method("strike"):
+			return node
+		node = node.get_parent()
+	return null
+
+
+## Dwell on one target, then take it. Looking away resets the count, and so does
+## looking at something else: a burn is spent on ONE thing.
+func _burn(obj: Object, dt: float) -> void:
+	var target := _burnable(obj)
+	if target == null:
+		_burn_target = null
+		_burn_t = 0.0
+		return
+	if target != _burn_target:
+		_burn_target = target
+		_burn_t = 0.0
+	_burn_t += dt
+	if _burn_t < maxf(0.0, burn_seconds):
+		return
+	_burn_t = 0.0
+	_burn_target = null
+	# trigger_explosion FIRST: it is the contract written for this instrument,
+	# and it takes the target down rather than down a notch. strike() is the
+	# fallback for anything that only knows how to be hit.
+	if target.has_method("trigger_explosion"):
+		target.call("trigger_explosion")
+	else:
+		target.call("strike", global_position, self)
+	print("laser_measure: burned through %s" % target.name)
+
+
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("burns"):
+		burns = str(config_data["burns"]).to_lower() in ["true", "1", "yes", "on"]
+	if config_data.has("burn_seconds"):
+		burn_seconds = float(config_data["burn_seconds"])
 	if config_data.has("lethal"):
 		lethal = str(config_data["lethal"]).to_lower() in ["true", "1", "yes", "on"]
 	if config_data.has("damage"):

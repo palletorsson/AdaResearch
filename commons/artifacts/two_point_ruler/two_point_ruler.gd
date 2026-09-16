@@ -6,29 +6,11 @@ extends Node3D
 ## measure. Two objects in front of you — one can be used to measure 0.5, but
 ## when you measure one object the other scales."
 ##
-## Two points gave the room a distance. Fix the distance and carry it around and
-## the distance becomes a UNIT, which is the whole of metrology in one gesture:
-## a ruler is not a special object, it is a segment somebody decided to stop
-## adjusting. This artifact is that decision, made once, in your hands.
-##
-## AND THEN IT DOES THE THING THE ROOM HAS BEEN ARGUING TOWARDS. Reading the
-## SUBJECT does not change the subject. It changes the WITNESS — the other block,
-## the one you are not looking at, standing off to the side. The number on the
-## readout is true. The world is different because you read it. Nothing in the
-## measurement records that, which is the same sentence the laser section ends on
-## and this is where you can watch it happen.
-##
-## The displacement is the point and it is not decoration:
-##
-##   - you cannot see the effect while you are causing it, because looking at the
-##     witness means not having the ruler on the subject
-##   - the subject is honest throughout: it never changes, so nothing about the
-##     reading is wrong
-##   - the only way to catch it is to look away from your own instrument
-##
-## An observer effect you can walk around. The witness carries a label saying what
-## it is, because a room that punishes you for not noticing is a different and
-## worse room than one that tells you and lets you watch.
+## The measuring action reads the pale subject's world-space width and separately
+## scales the blue witness. This causal coupling was authored; it is not an
+## inherent law of observation. Looking toward the witness does not disable the
+## ruler: the visitor can keep the tip on one object while watching the other.
+## The optional bench brings both blocks into reach without raising the readout.
 
 const TextScreenScript = preload("res://commons/ui/text_screen.gd")
 
@@ -36,6 +18,8 @@ const TextScreenScript = preload("res://commons/ui/text_screen.gd")
 @export var unit_m: float = 0.5
 ## How far apart subject and witness stand, metres.
 @export var spread_m: float = 1.1
+## Optional bench for maps that place the two blocks at hand height.
+@export var block_base_y: float = 0.0
 @export var subject_color: Color = Color(0.72, 0.70, 0.66)
 @export var witness_color: Color = Color(0.42, 0.55, 0.68)
 @export var rule_color: Color = Color(0.86, 0.78, 0.42)
@@ -147,6 +131,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		unit_m = float(config_data["unit_m"])
 	if config_data.has("spread_m"):
 		spread_m = float(config_data["spread_m"])
+	if config_data.has("block_base_y"):
+		block_base_y = clampf(float(config_data["block_base_y"]), 0.0, 0.9)
+		if is_instance_valid(_rule) and block_base_y > 0.0:
+			_rule.position = Vector3(0, block_base_y + 0.25, 0.35)
 	if _subject:
 		_build()
 
@@ -159,6 +147,10 @@ func _build() -> void:
 		if is_instance_valid(c):
 			c.queue_free()
 	_built.clear()
+	if block_base_y > 0.0:
+		_support_box(Vector3(0, block_base_y - 0.045, 0), Vector3(spread_m + unit_m + 0.22, 0.09, 0.90))
+		for x in [-spread_m * 0.5, spread_m * 0.5]:
+			_support_box(Vector3(x, (block_base_y - 0.09) * 0.5, 0), Vector3(0.10, maxf(0.01, block_base_y - 0.09), 0.66))
 
 	# THE RULE IS NOT DRAWN HERE ANY MORE. It used to be two marks and a bar
 	# painted at (0, 1, -0.5) because nothing could be held; the Rule child
@@ -290,7 +282,7 @@ func _mark_on(parent: Node3D, at: Vector3) -> Node3D:
 
 func _block(at: Vector3, size: float, col: Color) -> Node3D:
 	var holder := Node3D.new()
-	holder.position = at + Vector3(0, size * 0.5, 0)
+	holder.position = at + Vector3(0, block_base_y + size * 0.5, 0)
 	add_child(holder)
 	_built.append(holder)
 	var m := MeshInstance3D.new()
@@ -300,6 +292,24 @@ func _block(at: Vector3, size: float, col: Color) -> Node3D:
 	m.material_override = _mat(col, 0.62, 0.0)
 	holder.add_child(m)
 	return holder
+
+
+func _support_box(at: Vector3, size: Vector3) -> void:
+	var body := StaticBody3D.new()
+	body.position = at
+	add_child(body)
+	_built.append(body)
+	var visual := MeshInstance3D.new()
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	visual.mesh = mesh
+	visual.material_override = _mat(Color("283942"), 0.6, 0.2)
+	body.add_child(visual)
+	var collider := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = size
+	collider.shape = shape
+	body.add_child(collider)
 
 
 func _label(on: Node3D, text: String) -> void:

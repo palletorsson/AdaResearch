@@ -7,23 +7,8 @@ extends Node3D
 # triggers: any snap or unsnap event — CategoryLogicDisplay shows/hides to reflect current connection state
 # emerges: that snap networks can encode semantic rules — not just any point connects to any other
 # needs: [missing VR controls — purely demonstrative, driven by scene-level snap events]
-# relationships: depends on SnapConnectionManager; shows the engine that snap_tetrahedron_puzzle uses
+# relationships: depends on SnapConnectionManager; in Point_Lines the first connection blows apart the nearest do_not_cross_barrier in the same hall instance
 # truth: a connection is not just spatial proximity — it carries categorical meaning about what fits with what
-
-## THE LINE BECOMES A HAMMER — off by default, and the default matters.
-##
-## 2026-09-01, Palle, describing the walk through Point_Lines: "you create a
-## line, the line is just a line and you can adjust its length. After two seconds
-## the line is turned into a big sledgehammer."
-##
-## This artifact stands in FOUR maps (Point_One, Point_Lines, Point_Line, and
-## Ribbon_Primitives_08). Three of them are not making that argument and must be
-## bit-for-bit unaffected, so the transform is gated on new data: zero means
-## never, and only Point_Lines' map token asks for it, with
-## `line_demo#becomes_hammer_after:2`.
-@export var becomes_hammer_after: float = 0.0
-
-const HammerScene := preload("res://commons/artifacts/line_sledgehammer/line_sledgehammer.tscn")
 
 ## MAKE IT POP (2026-09-01, Palle: "larger points, glowing, new display that is
 ## a bit bigger and higher up").
@@ -92,10 +77,11 @@ const TextScreenScript = preload("res://commons/ui/text_screen.gd")
 @onready var manager = $SnapConnectionManager
 @onready var logic_display = $CategoryLogicDisplay
 
-var _hammer: Node3D = null
 var _screen = null
+var _solved: bool = false
 
-signal became_hammer(hammer: Node3D)
+## First successful connection; moving or reconnecting the ends remains possible.
+signal solved()
 
 func _ready() -> void:
 	if manager:
@@ -242,101 +228,54 @@ func _blacken(point: Node, mesh: MeshInstance3D) -> void:
 		point.set("_original_material", m)
 
 
-## THE MAP SAYS `#becomes_hammer_after:1`, AND IT ARRIVES AS `true`.
-##
-## The grid's `#key:value` shorthand is a FLAG shorthand: `#offset:1` reaches an
-## artifact as the boolean true, not as 1, and a value that is neither 0 nor 1 is
-## claimed by the positional transform parser instead — `#becomes_hammer_after:2`
-## was read as a 2-degree rotation and the config still arrived as `true`. That
-## is documented corpus behaviour (do_not_cross_barrier carries a `_flag()`
-## helper for the same reason: `#solid:0` arrives as the STRING "0", and
-## bool("0") is true in GDScript), so this reads the flag rather than fighting
-## shared grid code for a number it was never going to deliver.
-##
-## A real number still works when something sets the property directly, which is
-## what line_demo's own scene and any future editor will do.
-const DEFAULT_HAMMER_DELAY := 2.0
-
-func apply_grid_config(config_data: Dictionary) -> void:
-	if config_data.has("becomes_hammer_after"):
-		var v: Variant = config_data["becomes_hammer_after"]
-		if typeof(v) == TYPE_BOOL:
-			becomes_hammer_after = DEFAULT_HAMMER_DELAY if bool(v) else 0.0
-		elif typeof(v) == TYPE_STRING:
-			var t: String = str(v).strip_edges()
-			becomes_hammer_after = float(t) if t.is_valid_float() else 0.0
-		else:
-			becomes_hammer_after = float(v)
-
-func _on_connection_created(_point_a, _point_b, _line) -> void:
+func _on_connection_created(point_a, point_b, line) -> void:
 	# Hide instruction display when a connection is made
 	if logic_display:
 		logic_display.visible = false
-	if becomes_hammer_after > 0.0 and _hammer == null:
-		_turn_into_hammer(_point_a, _point_b)
-
-## Wait, then put the line in your hands as a different kind of object.
-##
-## The delay is the whole effect. If the hammer appeared on connection it would
-## read as a reward for completing a task; arriving two seconds later, after you
-## have looked at the line and decided it was finished, it reads as the line
-## having become something while you were holding it.
-func _turn_into_hammer(point_a, point_b) -> void:
-	var mid := global_position
-	var dir := Vector3.UP
-	if point_a is Node3D and point_b is Node3D:
-		mid = (point_a.global_position + point_b.global_position) * 0.5
-		var span: Vector3 = point_b.global_position - point_a.global_position
-		if span.length() > 0.01:
-			dir = span.normalized()
-	await get_tree().create_timer(becomes_hammer_after).timeout
-	# The tree can be gone by now — a map switch during the wait is ordinary.
-	if not is_inside_tree() or _hammer != null:
+	if _solved or not is_instance_valid(line):
 		return
+	# Only this demonstration's two ends can complete its encounter.
+	if not ((point_a == $SnapPoint1 and point_b == $SnapPoint2)
+			or (point_a == $SnapPoint2 and point_b == $SnapPoint1)):
+		return
+	_solved = true
+	solved.emit()
+	# Snap callbacks may arrive during a physics flush. Break the barrier afterward.
+	call_deferred("_open_point_lines_barrier")
 
-	var h := HammerScene.instantiate()
-	h.was_a_line = true
-	get_parent().add_child(h)
 
-	# ALONG THE LINE, NOT MERELY AT IT.
-	#
-	# Palle: "align the hammer with the line so it looks like the hammer comes
-	# from the line." The haft is built along the artifact's +Y, so the transform
-	# is a basis whose Y IS the line's direction — then the hammer lies where the
-	# line lay, and the change reads as the same object continuing rather than a
-	# tool arriving to replace one.
-	#
-	# Centred on the midpoint, so it occupies the segment rather than growing out
-	# of one end. Half a haft back along the direction puts the hammer's middle
-	# where the line's middle was.
-	var ref := Vector3.UP if absf(dir.dot(Vector3.UP)) < 0.95 else Vector3.FORWARD
-	var bx: Vector3 = ref.cross(dir).normalized()
-	var bz: Vector3 = bx.cross(dir).normalized()
-	h.global_transform = Transform3D(Basis(bx, dir, bz),
-			mid - dir * (h.haft_m * 0.5))
+func _open_point_lines_barrier() -> void:
+	# Never search the whole museum: several halls can be loaded at once.
+	var hall: Node = get_parent()
+	while hall != null:
+		var map_id: String = str(hall.get_meta("em_map", hall.get_meta("map_name", "")))
+		if not map_id.is_empty():
+			if map_id == "Point_Lines":
+				var barrier: Node3D = _nearest_barrier(hall)
+				if barrier != null:
+					barrier.trigger_explosion()
+			return
+		hall = hall.get_parent()
 
-	# IT MUST NOT FALL. A pickable is a RigidBody3D under gravity, so a hammer
-	# spawned in mid-air at the line's height is on the floor a second later —
-	# and a tool that lands at your feet has not been handed to you, it has been
-	# dropped. Frozen, it stays where the line was until someone takes it.
-	h.freeze = true
 
-	# AND THE LINE GOES. Leaving it would mean the room contains both the segment
-	# and the thing it turned into, which is two objects making the argument that
-	# there is one.
-	if manager and manager.has_method("break_connection") 			and point_a is Node3D and point_b is Node3D:
-		manager.break_connection(point_a, point_b)
-
-	_hammer = h
-	if logic_display:
-		logic_display.visible = false
-	if _screen != null and is_instance_valid(_screen):
-		_screen.title = "STILL A LINE"
-		_screen.body = "Two ends and everything between them.
-Now with a mass on one end."
-	became_hammer.emit(h)
-	print("line_demo: the line became a sledgehammer after %.1fs, along %s"
-		% [becomes_hammer_after, dir])
+func _nearest_barrier(hall: Node) -> Node3D:
+	var nearest: Node3D = null
+	var distance: float = INF
+	var pending: Array[Node] = [hall]
+	while not pending.is_empty():
+		var node: Node = pending.pop_back()
+		if node.is_queued_for_deletion():
+			continue
+		if node != hall and (node.has_meta("em_map") or node.has_meta("map_name")):
+			continue
+		if node is DoNotCrossBarrier and not node.is_broken():
+			var candidate_distance: float = global_position.distance_squared_to(node.global_position)
+			if candidate_distance < distance:
+				nearest = node
+				distance = candidate_distance
+		for child in node.get_children():
+			pending.append(child)
+	return nearest
 
 func _on_connection_broken(_point_a, _point_b) -> void:
 	# Show instruction display again if connection is broken
