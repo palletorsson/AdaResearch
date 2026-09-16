@@ -11200,9 +11200,22 @@
 			}
 		},
 		"parametric_pendulum_waves": {
+			"dna": {
+			 "axes": {
+			 "armature": [
+			 "none",
+			 "datum",
+			 "scaffold",
+			 "gantry"
+			 ]
+			 },
+			 "predicted_degeneracy": "PREDICTED 2026-09-16, BEFORE ANY CAPTURE of this axis, from a crude raster (tools-free numpy script: boxes and spheres rebuilt from the .gd at defaults, one light plus ambient, no shadows, the sweep camera yaw 0.62 / pitch -0.26 / FOV 34 / PAD 1.9 on the UNION box, the critic's luminance metric at 160 px). CLOSEST PAIR: none vs datum, focus 2.7%, frame 0.14%. Next: datum vs scaffold 9.3%, none vs scaffold 9.5%, none vs gantry 11.4%, datum vs gantry 12.0%, scaffold vs gantry 15.9%. THE ARITHMETIC: the union box is about 6.43 x 3.28 x 2.38 m, radius 3.80 m, so the frame is 2 x 1.9 x 3.80 = 14.4 m across at the subject, 208 m2. The datum's board is 5.16 x 2.84 m facing +Z, 11.5 m2 projected (x 0.79), 5.5% of the frame, far the largest thing any value adds. But its albedo luminance is about 0.83, and lit at n.l 0.5 that is 0.83 x 0.675 x 255 = 143 grey against a background near 149 (the corner tint the critic itself measured, 130,165,118), a difference of about 6 levels, under the critic's 10-level subject line. So the board nearly vanishes in luminance and the pair is carried by the ink datum line, the ticks and the orange length ladder. The scaffold and gantry add dark tube against a pale ground, which the luminance metric sees at full strength. SENSITIVITY, which is the honest size of this prediction: at a background of 130 the pair stays quietest at 5.6%; at 180 it ties none vs scaffold near 13%; at 100 the quietest becomes none vs scaffold at 3.1%. Across eight background and light settings the quietest pair was always none against datum or scaffold, never a gantry pair. READING THE RESULT: the number is a floor, as every prediction in this corpus has been. A measurement near or under 2.7% focus is a verdict about a pale board on a pale ground in a colour-blind metric, not about the axis; check focus_rgb and look at the PNG before calling datum decoration. Also expect a small shared floor in every pair: auto_release is on, so the bobs move between tiles by however long each settle lasts."
+			},
 			"category": "waves",
 			"complexity": "intermediate",
-			"description": "Parametric pendulum waves",
+			"description": "Fifteen pendulums hang from one bar, set out so that over one cycle each makes one more full swing than its neighbour: 38, 39 ... 52 swings in 93.4 s at the default length window of 0.8 to 1.5 m. Released together they swing in unison, drift into a travelling snake, split into two interleaved rows at half the cycle and three at a third, pass through stretches no eye can parse, and arrive back in unison at the end of the cycle. Nothing new is added to make any of those shapes: one motion at fifteen rates makes all of them, the same move as Steve Reich's Piano Phase (1967), where one pattern played at two speeds drifts apart and comes back. A caption on a post at the front left states the built cycle and swing counts, and a RELEASE button under it sets the bobs off together.",
+			"interaction": "Press RELEASE on the post at the front left (desktop pointer or VR hand) to lift every bob to the release angle and start the cycle from unison. With relaunch_each_cycle on (the default) the height the swing loses on the way out to mid-cycle is given back on the way home, so every return to unison arrives at full height: the rig never runs down and never jumps.",
+			"repair_note": "2026-09-16. The shipped rig could not phase, for three reasons. (1) Every computed length (0.21-0.34 m, for 51-65 swings in 60 s) was clamped to the 0.8 m floor of the length window, so all fifteen pendulums had one length and swung as one. (2) The bobs swung ALONG the bar, at amplitudes larger than the 0.3 m spacing, so neighbours passed through each other. (3) Damping multiplied the velocity once per frame, which left about 3% of the swing by the first return to unison at 60 fps and less on a headset. Now the swing counts are derived from the window and nothing is clamped (a cycle_time export fixes the cycle instead and warns loudly if the true lengths leave the window); the bobs swing across the bar; the motion is advanced exactly for the small-angle model the lengths are computed with, so any frame rate gives the same swing; and damping is the fraction of amplitude kept per second, applied as exp(-k dt). No export default changed its value. What the defaults DO changed, for every placement alike: distinct lengths 1.500 to 0.801 m, a 93.4 s cycle, a swing across the bar, and a swing that sinks to 91% of its height by mid-cycle and is given back by unison (with relaunch_each_cycle off it keeps sinking, 83% at the first unison). A first version relaunched by lifting the decayed bobs straight back to the release angle, a visible 11 cm jump at the longest bob at the one moment the rig exists to show; the envelope now scales amplitude only, so phase and unison time are untouched. The armature board and scaffold rows now stand past the swing, and the gantry's hoist hangs between the two middle stations and behind the bar instead of through the bar and the centre rod. The armature axis was declared from the code on the same day, before its first capture, with a predicted closest pair. The measurements block below predates the repair (the rig is now about 5.7 x 2.5 x 2.1 m with the caption post); re-run tools/sync_footprints.py after the next capture. Probe: commons/testing/probe_parametric_pendulum_waves.gd.",
 			"dev_themes": [
 				"oscillation",
 				"physics",
@@ -11216,7 +11229,9 @@
 			"scene": "res://algorithms/wavefunctions/parametric_pendulum_waves/parametric_pendulum_waves.tscn",
 			"tags": [
 				"pendulum",
-				"wave"
+				"wave",
+				"phase",
+				"interactive"
 			],
 			"geometry_spec": {
 				"mesh_type": "composed_primitives",

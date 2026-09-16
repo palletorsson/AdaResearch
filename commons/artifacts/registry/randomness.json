@@ -11707,9 +11707,26 @@
 			"qfep_connection": "Cubes are dealt at random intervals, drift on rails, and are deleted past a boundary, with a breakage routine ready to turn any of them into eight fragments. A population rather than objects: each cube is disposable because the distribution that issued it persists."
 		},
 		"ten_print": {
+			"dna": {
+				"fixture": {
+					"seed": 41,
+					"count": 400,
+					"when_full": "scroll"
+				},
+				"axes": {
+					"semicolon": [
+						"on",
+						"off"
+					]
+				},
+				"framing": 3.5,
+				"default": "semicolon=on is the export default and the row wrap the artifact always had. With seed -1, count 0 and when_full clear, every line of the shipped behaviour runs unchanged: the global randf() against the clock-breathing probability, one character per breathing tick, row-major, the wipe on the tick after a full field. Both live placements (Ribbon_Randomness_04 `ten_print`, TestMap_Unused_26 `ten_print:0:2`) carry no config key, so neither can move. The one deliberate change on the default path is a bounds guard in animate_ten_print: the frame between the last character of a full field and the wipe used to index grid_nodes[0][20] and raise an out-of-bounds error.",
+				"note": "THE AXIS IS THE SEMICOLON, after the book's p. 68: take it out of 10 PRINT and the output is a column of diagonals with no maze, because the maze exists only where a one-dimensional stream of coin flips is wrapped into a two-dimensional grid. `on` wraps row-major; `off` starts every character on a new row at column 0. The coin does not know which: with seed >= 0 character i is a pure function of (seed, i), so `on` and `off` print the same characters and the frames differ in layout alone.\n\nWHEN_FULL IS NOT DECLARED, although it CAN be seen in a still. `scroll` (rows move up, the top row leaves, as PRINT does on the C64 screen, p. 98) and `clear` are the same picture until the field is full, and past it they part for good. With `on`, count 430 and k characters printed during the settle, `clear` shows 30 + k lines in rows 0-1 and `scroll` a field of 390 + k: deterministic and far apart. At this fixture's count 400 the same gap appears, but it rests on at least one settle tick landing to do the wipe. It stays undeclared for two reasons, worked by hand and not yet measured. (1) Under `off` it nearly vanishes, because a column wipes or scrolls every twenty characters either way: at count 430 and k = 6, `off`+`clear` holds 16 lines (draws 420..435) and `off`+`scroll` holds 20 (draws 416..435), about a dozen differing lines, roughly 0.2% of frame. (2) The sweep takes the cartesian product of its axes and headlines the PEAK, so beside the live semicolon axis that near-flat pair would be hidden. Declare it later as its own sweep with semicolon at `on` and the count passed in, `python tools/cabinet_sweep.py ten_print --set when_full=clear,scroll --set count=430`, and read the per-pair rows. Here it is pinned in the fixture instead, for a reason that is about the camera.\n\nTHE FIXTURE. seed 41 pins the stream. count 400 prints a whole field during the build, because the live tick writes about six characters in the sweep's 1.1 s settle and six thin lines are not a field. when_full scroll because under `clear` a field of exactly 400 is WIPED by the first live tick of the settle and `on` would be photographed nearly empty; under scroll the field stays full (about 380 + k lines after k live ticks) and the column stays a full 20.\n\nTHE FRAMING. Every body here is a CSG node and there is no MeshInstance3D, so the sweep's _subtree_aabb falls back to its 1 m box at (0, 0.5, 0) and at framing 1.0 frames a 3.3 m crop of the field's centre - which leaves `off`'s column at x = -4 out of frame and would publish `off` as an empty grid. framing 3.5 puts the camera 18.8 m out; projected at yaw 0.62 / pitch -0.26 the field's corner cells land at x 175..605, y 135..696 px of 760 (line tips about 166..621, 122..713). Of the two indicators only the speed box at x = +8 m falls outside (about x 900 px). The probability bar at x = -8 m stays IN, a thin red bar at the left edge (about x 28..65, y 490..540 px). Its height follows the pinned threshold for the next draw, which is the same in both tiles, but its width pulses on the clock (1 + 0.1 sin 4t), so it adds a little timing noise to both tiles without touching the bite.\n\nTHIS FRAMING HOLDS ONLY WHILE _subtree_aabb IGNORES CSG. If the harness ever counts CSGShape3D or GeometryInstance3D, the union becomes the field plus both indicators, about 17 x 8 m (radius about 9.4 m), framing 3.5 would put the camera about 200 m out, and both tiles would be near-empty with nothing but the 5% floor below to object. Re-derive the framing then: about 0.32 restores today's 18.8 m camera distance.",
+				"predicted_degeneracy": "ONE PAIR ONLY, on against off, predicted at 5.5% of frame as a FLOOR and 9.2% from a raster.\n\nARITHMETIC. framing 3.5 on the 1 m fallback box: radius 0.866, dist = 0.866 / tan(17 deg) x 1.9 x 3.5 = 18.84 m, frame 2 x 18.84 x 0.3057 = 11.52 m across 760 px = 66 px/m. A line is a 0.566 m x 0.04 m cylinder, about 33 px x 2.6 px projected, roughly 87 px. `on` shows about 386 lines (400 prefilled; the first live tick scrolls and restarts the bottom row; about six ticks in the settle), `off` shows 20 in column 0, so about 366 x 87 = 31,800 px of 577,600 = 5.5% before counting the column-0 cells where the two print different characters. A Python raster of the same projection with square brushes gives 52,990 px = 9.17%. Everything else - 400 grid dots, the light, the background - is identical, bar the cursor highlight (a 6 cm sphere on the last character) and the clock-driven width pulse of the probability bar at the left edge.\n\nREAD IT AS A LOWER BOUND. If the sweep comes back BELOW 5%, stop before believing it: the likely faults are the fixture not taking (a rejected count leaves both tiles with a handful of live lines - check _rejects.json), dna.framing not being read (framing 1.0 crops `off`'s column out of frame and the pair measures the centre of `on` against empty dots), or the settle ticking past a wipe (only possible if when_full is not `scroll`). `off`'s own subject share will be small - a column and 400 dots - and that is the argument, not a framing fault."
+			},
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "Interactive recreation of the classic Commodore 64 10 PRINT maze generation algorithm",
+			"description": "The Commodore 64 one-liner 10 PRINT CHR$(205.5+RND(1)); : GOTO 10 as a 20 x 20 field of diagonals, one coin flip per tick. #semicolon:off drops the trailing semicolon, so the same stream prints as a single column and no maze; #when_full:scroll lets the rows move up as the C64 screen does instead of wiping the field; #seed pins the coin, so two instances print one stream and differ only in layout; #count prints that many characters at build.",
 			"dev_themes": [
 				"probability",
 				"procedural",
@@ -11731,6 +11748,13 @@
 				"size_group": "world_scale"
 			},
 			"scene": "res://algorithms/randomness/ten_print/ten_print.tscn",
+			"token_examples": [
+				"ten_print",
+				"ten_print#semicolon:off",
+				"ten_print#seed:41#semicolon:off#when_full:scroll",
+				"ten_print#seed:41#when_full:scroll#count:400"
+			],
+			"token_note": "seed and count are listed in GridInteractablesComponent.CONFIG_PARAM_NAMES, so #seed:41 and #count:400 arrive as values. semicolon and when_full are NOT listed and take WORDS only: #semicolon:on|off, #when_full:clear|scroll (a word never reaches the rotation shorthand; `#semicolon:0` would, and would hand the artifact a boolean and the map a silent rotation). seed -1 (default) keeps the unseeded global randf() and the probability breathing on the clock, 0.2..0.8; seed >= 0 draws character i from hash([seed, i]) against 0.5 + 0.3 sin(i x TAU / 540), the same breath counted in characters, so layout, when_full and the tick rate never reach the stream. count is clamped to 0..2000. A config change after the build restarts the stream on an empty field; an empty config changes nothing. The live tick still breathes with wall-clock time in every mode, so two instances side by side stay in step only under when_full scroll: under clear the wipe tick prints nothing, and `off` (a wipe every 20 characters) falls one tick behind `on` (one every 400) per column. NAMING: the script's forward_slash flag (rotation +45 deg about Z, logged as '/') reads as a backslash from the +Z side it presents; the stream log follows the flag.",
 			"sequence": "randomness",
 			"tags": [
 				"procedural"
@@ -11819,7 +11843,7 @@
 				"derived_at": "2026-04-29T09:39:46.247932Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The C64 one-liner, but with its coin rigged: the slash-or-backslash probability breathes between 0.2 and 0.8 on a slow sine as the maze writes itself row by row. The rule never changes \u2014 only the fairness of the coin, and that alone re-textures the whole labyrinth."
+			"qfep_connection": "The C64 one-liner, but with its coin rigged: the slash-or-backslash probability breathes between 0.2 and 0.8 on a slow sine as the maze writes itself row by row. The rule never changes \u2014 only the fairness of the coin, and that alone re-textures the whole labyrinth. Take the semicolon out and the same coin prints a single column of diagonals: the labyrinth was never in the stream, only in wrapping a one-dimensional run of flips into a two-dimensional grid - and the wrap, the cursor and the scroll belong to PRINT, not to the program."
 		},
 		"ten_print_maze_3d": {
 			"dna": {

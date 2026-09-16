@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/wall_drawing_291/wall_drawing_291.gd" id="1_script"]
+
+; wall_drawing_291.tscn — Sol LeWitt, Wall Drawing 291 (1976), with the visitor
+; as the draftsman. A black wall ruled into 30 cm squares; every square is a
+; press target that draws, then turns, its one line. All geometry is built in
+; wall_drawing_291.gd. The ROOT carries the script, so map tokens reach
+; apply_grid_config: columns, rows (both listed config keys), start (empty | drawn).
+
+[node name="wall_drawing_291" type="Node3D"]
+script = ExtResource("1_script")

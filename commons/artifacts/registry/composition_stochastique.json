@@ -1,0 +1,120 @@
+{
+	"registry_info": {
+		"name": "composition_stochastique",
+		"description": "Four ten-by-ten grids of one diagonal in which exactly 1, 5, 30 and 50 cells carry the other diagonal, after François and Vera Molnar, 1959.",
+		"note": "Per-token registry file so parallel builders never share one JSON. The counts are DEALT, not rolled: a seeded Fisher-Yates shuffle of the hundred cell indices, the first k taken. A probability per cell would only hit the chapter's numbers on average, so it is not used anywhere in the code."
+	},
+	"artifacts": {
+		"composition_stochastique": {
+			"dna": {
+				"axes": {
+				 "turned": [
+				  "series",
+				  "one",
+				  "five",
+				  "thirty",
+				  "fifty"
+				 ]
+				},
+				"default": "turned=series. The chapter (p. 80) presents the four grids together as a graded series with no privileged value, so the default shows all four and privileges none of them. The four single-grid values exist for collations: several placements on one wall, each one work.",
+				"framing": 0.6,
+				"framing_why": "capture_config_sweep fits by the AABB diagonal: dist = radius / tan(17 deg) * 1.9 * framing. The singles measure 1.34 x 1.752 x 0.42 m (radius 1.123), so framing 1.0 puts the camera 6.98 m out with a 4.27 m frame, which is 178 px per metre and draws a 7 mm stroke at about 1.2 px. The axis lives in 0.35 m grids on a 1.75 m board. At 0.6 the camera comes to 4.19 m, the frame to 2.56 m (297 px per metre, a stroke at about 2 px, a cell at about 10 px), and the board projects to roughly 52% of the frame's width and 70% of its height, so nothing is cropped. The series (1.894 m wide, radius 1.307) gets a 2.98 m frame at the same setting.",
+				"note": "THE AXIS IS THE COUNT, and it is the only thing that differs between the grids. `series` shows all four; `one`, `five`, `thirty` and `fifty` show a single grid with that many turned cells. All the values share one deal per (seed, draw): the permutation of the hundred indices is drawn once, and grid k turns its first k entries. So the series is ONE deal read at four depths (the cell turned in `one` is among the five turned in `five`, and so on up to `fifty`), and `five` on its own is the series' five-count grid cell for cell. That nesting is what makes the plate's sentence literally true: between neighbouring grids only the count changes. What it forecloses: the four grids are not four independent samples, so a visitor cannot compare four unrelated patterns at four doses. What lives in the dark spot: at fifty the turned and the unturned cells are equal in number, so which diagonal is the 'base' and which the 'intrusion' is undecidable from the picture alone. Only the order of the series says which is which. What the nesting costs the EVIDENCE: the DNA critic should list one/five, and probably thirty/fifty, as TWINS, because those pairs differ by exactly 4 and exactly 20 marks. That is the argument drawn to scale, not a dead value; predicted_degeneracy gives the numbers in both the sweep's units and the critic's.",
+				"predicted_degeneracy": {
+					"pair": "one against five",
+					"percent": 0.035,
+					"metric": "changed_pct as cabinet_sweep writes it and score_wave ranks it: pixels whose summed RGB difference exceeds 26, as a share of the whole 760 x 760 frame. NOT the critic's focus; see the arithmetic for both.",
+					"arithmetic": "Registered before any capture, as a floor. The four single-grid values share one camera: their AABB is identical (1.34 x 1.752 x 0.42 m) because only the stroke directions and one digit differ, so every single-to-single pair differs only in (a) cells whose diagonal flips and (b) the count's digits in the caption and on the plate. Nested deals make (a) exact: one vs five flips 4 cells, thirty vs fifty 20, five vs thirty 25, one vs thirty 29, five vs fifty 45, one vs fifty 49. One flipped cell is the XOR of a rising and a falling stroke: 2 x (0.0495 m x 0.007 m - 0.007^2 at the crossing) = 0.000595 m^2 of board face. Projection at yaw 0.62 and pitch 0.26: cos 0.62 x cos 0.26 = 0.787. Frame at framing 0.6: 2.559 m square = 6.551 m^2 (760 x 760 px). The text term is small when the digit count is unchanged: '1' and '5' are the same width in the project face, so about 0.0005 m^2 face for the caption digit plus the plate digit. When the digit count changes ('5' against '30') both lines re-centre and about 0.008 m^2 face flips. So one vs five = (4 x 0.000595 + 0.0005) x 0.787 = 0.00227 m^2 = 0.035% of frame, about 200 px. Next: thirty vs fifty = (20 x 0.000595 + 0.0005) x 0.787 = 0.0098 m^2 = 0.15% (about 860 px); five vs thirty 0.28%; one vs thirty 0.30%; five vs fifty 0.42%; one vs fifty 0.45%. Every pair with series moves the camera (1.894 m against 1.34 m wide) and the board itself changes shape, so those are expected in the tens of percent. THE BRIEF EXPECTED THIRTY AGAINST FIFTY, and to a visitor it probably is the closest pair, because both have gone past the count at which the rising lines still read as a field of parallels. That is a gestalt, which is the question this artifact asks and not something a pixel difference can measure: the critic counts flipped cells, and 20 flipped cells is five times 4. So the prediction names one against five (both single grids) and registers thirty against fifty second. IN THE CRITIC'S UNITS, WHICH ARE NOT THESE. Every figure above is changed_pct, a share of the frame. artifact_dna_critic judges FOCUS instead: the mean grey-level change over the hottest 5% of a 160 x 160 resample of the pair's union subject box, set against INERT_FOCUS 3%, TWIN_FOCUS 6% and WEAK_FOCUS 12%. The two must not be read against each other. For a single board that box is about 395 x 535 px, so one resampled pixel covers about 2.5 x 3.3 frame px. A flipped cell (about 41 frame px of changed ink at 297 px/m and 0.787 projection) comes to about 5 resampled-pixel equivalents, and the hottest 5% is 1,280 pixels, 326,400 grey-level-pixels at full contrast. The contrast itself cannot be known before a render, because the critic folds each frame around its own corner colour before it converts to grey, so ink and board pixels that sit at similar distances from the backdrop read alike. Bracketed at 30 to 175 grey levels, a flipped cell carries 150 to 875. One vs five: 4 cells plus a digit, about 0.2 to 1.3% focus. Thirty vs fifty: 20 cells plus a digit, about 1.0 to 5.6%. Five vs thirty: 25 cells plus a re-centred line, 1.8 to 10%. One vs fifty: 49 cells plus a re-centred line, 2.9 to 17%. Every pair against series changes the board's shape and the camera, so expect tens of percent. EXPECTED CRITIC OUTPUT: the axis mean is carried by the four pairs against series and should BITE, while one/five is certain, and thirty/fifty probable, to be listed as TWINS (under 6% focus in grey and per channel). Neither is a false declaration. One/five differs by exactly 4 marks and thirty/fifty by exactly 20, and that difference is the whole argument. THE NESTING COSTS EVIDENCE HERE, knowingly. Because one deal serves all four counts, thirty against fifty flips exactly 20 cells. Four independent deals would flip 30 + 50 - 2 x 15 = 50 cells on average (0.36% changed_pct, 2.9 to 17% focus), which would probably clear the twin bar. Nesting was chosen so that the plate's sentence, only the count changes, is literally true between neighbouring grids. The price is paid in DNA evidence for exactly the pair the brief expected to be closest. Investigate if one vs five comes back BELOW about 0.02% changed_pct or 0.1% focus (strokes aliasing away at 2 px, or the grid dealt identically), or if any single-to-single pair measures 0.00%, which would mean the axis never reached the deal."
+				}
+			},
+			"lookup_name": "composition_stochastique",
+			"name": "Composition Stochastique",
+			"class_name": "CompositionStochastique",
+			"scene": "res://commons/artifacts/composition_stochastique/composition_stochastique.tscn",
+			"category": "randomness",
+			"artifact_type": "demonstration",
+			"complexity": "beginner",
+			"sequence": "randomness",
+			"map_sequences": [
+				"randomness"
+			],
+			"description": "A free-standing board with four ten-by-ten grids of diagonal strokes on a light ground, after François and Vera Molnar's Composition Stochastique (1959), which the chapter describes as left and right diagonals at 1, 5, 30 and 50 percent, to show chaos intruding on order. On a hundred cells those percentages are exactly 1, 5, 30 and 50 cells, and that is what is drawn: in each grid every cell carries the same rising diagonal except EXACTLY k cells, which carry the falling one. The counts are exact because the cells are dealt, not rolled. A seeded shuffle of the hundred cell indices picks the first k. A chance per cell would only hit those numbers on average: a 30 percent chance per cell turns exactly thirty cells about one time in eleven (8.7%), and a 1 percent chance turns exactly one cell only 37% of the time. So the only thing chance decides here is WHERE. One shuffle serves all four grids, so the turned cells of each grid include those of the grid before it, and between neighbours only the count changes. A caption under each grid gives its count ('30 of 100'), and a plate asks where the grid stops reading as a grid. RESEED deals again: every position moves, every count holds. At the defaults (seed 1959, no presses) the four pictures are the same on every boot.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "medium",
+			"hazard": false,
+			"interactions": [
+				"walk the row from one to fifty and find the count at which the rising lines stop reading as a field of parallels",
+				"press RESEED (poke it in VR, click it on desktop): every turned cell moves, and every count stays exactly 1, 5, 30 and 50",
+				"find the one turned cell of the first grid inside the second, the third and the fourth: it is one deal read at four depths",
+				"at fifty, try to say which diagonal is the grid and which is the intrusion"
+			],
+			"parameters": {
+				"seed": 1959,
+				"turned": "series",
+				"cell_m": 0.035,
+				"stroke_m": 0.007,
+				"grid_gap_m": 0.11,
+				"solid": true
+			},
+			"token_examples": [
+				"composition_stochastique",
+				"composition_stochastique#seed:7",
+				"composition_stochastique#turned:five",
+				"composition_stochastique#turned:thirty#seed:1960",
+				"composition_stochastique#turned:fifty#cell_size:0.05",
+				"composition_stochastique#solid:off"
+			],
+			"token_note": "`seed` and `cell_size` are in GridInteractablesComponent.CONFIG_PARAM_NAMES, so `#seed:7` and `#cell_size:0.05` arrive as values. `turned` and `solid` are NOT listed: write them as WORDS (`#turned:thirty`, `#solid:off`). `#turned:30` would be read as the tutorial rotation shorthand, the artifact would receive the boolean true (which it refuses, keeping the series with a warning), and the map would gain a silent 30 degree rotation. `#solid:0` has the same trap and turns the collider ON. A seed given as text with a decimal ('1959.0') is read as 1959: the parser does not use String.to_int, which drops the point and would read 19590.",
+			"map_note": "Stands on its own feet and presents to +Z, origin at the base. The grids' centres sit at about 1.49 m, a little under eye height, and the RESEED button at about 1.0 m, right of the plate. Wants a front approach with about two metres of standing room: the grids are made to be read from walking distance, and a visitor has to be able to step up to the button. The series board is 1.89 m wide; a single grid (`#turned:five`) stands on a 1.34 m board, the same height, so a row of singles on one wall reads at one scale.",
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"footprint_source": "authored",
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none",
+				"reading_radius": 2
+			},
+			"tags": [
+				"molnar",
+				"vera_molnar",
+				"composition_stochastique",
+				"10_print",
+				"diagonal",
+				"grid",
+				"regularity",
+				"randomness",
+				"exact_count",
+				"shuffle",
+				"fisher_yates",
+				"seeded",
+				"series",
+				"interactive"
+			],
+			"qfep_connection": "A chance and a count are different instruments, and the corpus is easy to fool about which one it has. A percentage per cell describes a tendency that never promises any single grid; a dealt count promises every grid and hands chance only the positions. This board keeps the count fixed and asks the visitor to find the threshold at which order stops reading as order, a threshold that is in the person looking and not in the code, which only ever knows 1, 5, 30 and 50. At fifty the picture cannot say which diagonal is the rule and which the exception: 'deviation' is a fact about the order you walked, not about the marks.",
+			"measurements": {
+				"aabb_size": [
+					1.894,
+					1.752,
+					0.42
+				],
+				"aabb_center": [
+					0.0,
+					0.876,
+					-0.05
+				],
+				"max_dimension_m": 1.894,
+				"source": "computed from the shipped defaults for turned=series: board 1.87 m wide plus a 12 mm edge reveal on each side; feet from y 0 to 0.03, z -0.26 to 0.16; plate 0.60 to 1.095; captions to 1.29; grids 1.32 to 1.67; board top 1.74 plus the reveal. A single grid (turned=one/five/thirty/fifty) measures 1.34 x 1.752 x 0.42.",
+				"measured_at": "unmeasured in engine; run tools/sync_footprints.py after the first capture"
+			}
+		}
+	}
+}
