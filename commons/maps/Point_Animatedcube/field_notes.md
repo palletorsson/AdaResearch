@@ -1,3 +1,5 @@
+> Historical document. The 2026-09-16 source and room review is recorded in intent.md, tutorial.md and artifacts.md. This earlier text is retained as written; its former inventory and flexible-quad claims are not the current setup.
+
 # Point_Animatedcube — field notes
 
 > Field notes hold what the wall text cannot carry. `final.md` is for the

@@ -28,7 +28,7 @@ The held rod is now secondary; carrying a fixed span remains a useful preparatio
 
 Each bay has move-left, reset and move-right buttons. The move buttons translate all four endpoints by the same vector, within a 16 cm offset each way; they do not move the reference targets. Hands can move the endpoints independently. The existing constraints allow error: 8 cm target proximity, 5 cm between midpoints, and an absolute normalized dot product below 0.26 for perpendicular directions (about 15 degrees either side of a right angle). Degenerate segments are rejected. Acceptance therefore records a tolerance test, not a proof of exact mathematical equality.
 
-The four workshop monitors show separately filmed arrangements. Walking past a monitor changes the visitor's view of that screen, not the private camera's view of the rods. The four-line camera already orbits automatically. A visitor-controlled second camera and an angle-only comparison remain extensions, not current instructions.
+The four workshop monitors show separately filmed arrangements. Walking past a monitor changes the visitor's view of that screen, not the private camera's view of the rods.[^point-lines-return-panofsky] The four-line camera already orbits automatically. A visitor-controlled second camera and an angle-only comparison remain extensions, not current instructions.
 
 The workshop passage was shortened in the second editorial pass while keeping its four discoveries: projected crossing versus spatial intersection; the planarity of three joined segments; a closed four-edge boundary folding out of a plane; and edge arrangements that do not prescribe a unique surface. The third pass moves that passage out of the required reading; it remains in the archived chapter linked above. The earlier, longer version is retained in `doc/space/point-lines-proof-2026-09-16/workshop-extended.md` for later rooms.
 
@@ -48,3 +48,5 @@ _adjacency[point_b].append(point_a)
 ```gdscript
 var direction := displacement / distance
 ```
+
+[^point-lines-return-panofsky]: Erwin Panofsky, [*Perspective as Symbolic Form*](https://www.jstor.org/stable/j.ctv1453m48), translated by Christopher S. Wood (Zone Books, 1991; original essay 1927), treats perspective as a historically formed representational system. The workshop gives us a specific distinction between camera projection and spatial arrangement. Haraway’s situated-knowledge argument, introduced in Point One, supplies a related epistemological question; neither author’s account is exhausted by naming a camera transform.

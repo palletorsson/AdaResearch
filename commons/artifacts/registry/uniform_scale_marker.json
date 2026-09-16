@@ -1,0 +1,36 @@
+{
+  "artifacts": {
+    "uniform_scale_marker": {
+      "lookup_name": "uniform_scale_marker",
+      "name": "Uniform scale marker",
+      "scene": "res://commons/artifacts/uniform_scale_marker/uniform_scale_marker.tscn",
+      "category": "transforms",
+      "description": "A small cube expands uniformly from 0.7 to 1.3 times its saved size about a fixed centre. A stationary reference cage and live factor make scale readable beside a larger demonstration.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "footprint": [
+        0.8,
+        1.0,
+        0.5
+      ],
+      "size_group": "small",
+      "parameters": {
+        "footprint": [
+          0.8,
+          1.0,
+          0.5
+        ],
+        "size_group": "small"
+      },
+      "tags": [
+        "scale",
+        "marker",
+        "uniform",
+        "reference"
+      ]
+    }
+  }
+}

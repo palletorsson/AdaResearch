@@ -32,3 +32,19 @@
 **Pending:** a person at the keypad and the plate; a headset walk; Astra's review of the built room; Palle's calls on the mound's and the board's scales.
 
 **2026-09-12 — the visual pass (Astra: "its six-line readout is small from the operating view and the separate summary board is hard to decipher").** A headline (font 21) over the six lines (font 11) on the same plate names the law, the landed N, the bins, the clipped count and the two edge bins — `UNIFORM · N 231 · 30 bins · clipped 0 · edges 6|11` — and the shipped side plate on its bracket (n, μ, σ from bin centres at font 12) is switched off under the cabinet, its numbers being the readout's fourth line. Live: 109 checks / 0 failures.
+
+## 2026-09-12 — Astra: the values stay while their account moves
+
+Continued from Random Walk with the existing sampler cabinet as the one primary. Its scene, all nine explicit placements, the 14×22 layers, recovered platforms and museum settings remain. The book, tutorial, technical and critical text now lead through PAUSE's still-falling beads, equal-N GAUSS/UNIFORM batches, edge clipping and regrouping before explaining the code. A distribution does not prescribe the value of a body. Next: Random_Mushrooms.
+
+The logarithm guards now clamp only the lower input instead of adding an offset that could make the Gaussian square root invalid near one. Numerical seeded values deliberately change from the old offset; replay within the repaired procedure holds. Capacity now includes issued airborne draws. CLEAR removes their meshes, landing follows the actual rendered bar top, and the orange model shape stays inside its panel. The larger existing sign distinguishes shared count scales from the orange shape's separate scale.
+
+Accepted independent desktop run at 22:49:31–22:50:17 +02, PID 37520: **156 checks, zero failures, exit 0**, stable source fingerprints, original hand preserved through an isolated copy, no script error or shutdown leak warning. Five thousand retained values, twenty frozen prefix snapshots and twelve rebin snapshots were checked. The first export aliased mutable count arrays and was rejected; two subsequent harness compile attempts failed before the accepted run. Full receipts and explanations are retained in the review record.
+
+At seed 31415 the EXPON retained mean is 0.162196. Ten bins report 0.166; thirty report 0.162 without a new draw. None of the four common-seed thousand-value samples clips. A deliberately selected fifth EXPON sample, seed 1, has two clipped values; its selection is disclosed. The browser comparison uses these captured values, shared count axes and an optional individual-value strip. These additional reading controls are explicitly separate from the VR cabinet's controls.
+
+[Illustrated review](http://localhost:3003/research/possible-bodies/random-gaussian.html). The live primary page shows one written sampler card (820 words; full final 912). All 56 published assets match their served hashes; eight browser records cover controls, data, images and the primary passage. Both plan rows agree. An unrelated Noise_Voxel primary/book mismatch is recorded for its own review. Headset readability, reach and Quest performance remain pending; generated `david_drape` took 121 ms in the accepted run. Detailed record: `doc/space/gaussian-review-2026-09-12/README.md`.
+
+## 2026-09-16 — central hero and supporting studies
+
+Compare retained samples at the central cabinet; falling beads, three sampling laws and paint marks extend that comparison. Current placements and sizes are listed in artifacts.md. The staging manifest and desktop runtime evidence are in doc/space/randomness-staging-2026-09-16/. This pass supersedes older placement/count descriptions in these notes; tracked-hand reach, headset comfort and performance remain to be checked.

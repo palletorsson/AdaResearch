@@ -1,0 +1,76 @@
+[
+  {
+    "map": "Random_Walk",
+    "size": {
+      "width": 19,
+      "depth": 26,
+      "max_height": 6
+    },
+    "hero": "random_walk_terrarium",
+    "placements": [
+      {
+        "x": 9,
+        "z": 5,
+        "token": "random_walk_terrarium:180#stand:logbook#controls:compact#control_front:1.25",
+        "lookup": "random_walk_terrarium"
+      },
+      {
+        "x": 3,
+        "z": 5,
+        "token": "random_walk_collection:180#plinth:0.75#bench_bare_rack:1",
+        "lookup": "random_walk_collection"
+      },
+      {
+        "x": 15,
+        "z": 5,
+        "token": "random_walk_leash:180",
+        "lookup": "random_walk_leash"
+      },
+      {
+        "x": 9,
+        "z": 17,
+        "token": "random_walk_128:180#glass_width:12#glass_depth:12#glass_height:5#glass_title:WALK / RETAIN",
+        "lookup": "random_walk_128"
+      },
+      {
+        "x": 3,
+        "z": 9,
+        "token": "pixel_cloud:180:0.1:0.18#walk_seed:101",
+        "lookup": "pixel_cloud"
+      }
+    ],
+    "count": 5,
+    "purpose": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16."
+  },
+  {
+    "map": "Random_Mushrooms",
+    "size": {
+      "width": 17,
+      "depth": 20,
+      "max_height": 6
+    },
+    "hero": "mushrooms",
+    "placements": [
+      {
+        "x": 8,
+        "z": 11,
+        "token": "mushrooms:180#stand:specimen#size:6#edible:some#glass_width:8#glass_depth:8#glass_height:4.5#glass_title:POPULATION / DIFFERENCE#glass_entry:4#controls:compact#control_front:5.1",
+        "lookup": "mushrooms"
+      },
+      {
+        "x": 3,
+        "z": 5,
+        "token": "bubbles_random:180:0.85:0.25#plinth:0.85",
+        "lookup": "bubbles_random"
+      },
+      {
+        "x": 13,
+        "z": 4,
+        "lookup": "silhouette_arrivals",
+        "token": "silhouette_arrivals"
+      }
+    ],
+    "count": 3,
+    "purpose": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16."
+  }
+]

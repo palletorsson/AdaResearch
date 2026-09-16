@@ -1,0 +1,304 @@
+{
+  "artifacts": [
+    {
+      "bounds": {
+        "max": [
+          11.5,
+          1.33910274505615,
+          8.5
+        ],
+        "meshes": 44,
+        "min": [
+          6.49999952316284,
+          -1.15154361724854,
+          2.77000021934509
+        ]
+      },
+      "lookup": "r_c",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomCycleCube",
+      "position": "(9.0, -0.28, 6.0)",
+      "yaw": 0.0
+    },
+    {
+      "bounds": {
+        "max": [
+          14.5450000762939,
+          4.54500007629395,
+          22.6749992370605
+        ],
+        "meshes": 46,
+        "min": [
+          3.45499992370605,
+          -0.600000023841858,
+          10.3699998855591
+        ]
+      },
+      "lookup": "random_removal_arena",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RemovalArena",
+      "position": "(9.0, 0.0, 17.0)",
+      "yaw": 0.0
+    },
+    {
+      "bounds": {
+        "max": [
+          13.3249998092651,
+          3.30000019073486,
+          29.25
+        ],
+        "meshes": 48,
+        "min": [
+          4.67500019073486,
+          0.0,
+          24.3700008392334
+        ]
+      },
+      "lookup": "random_doors",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomDoors",
+      "position": "(9.0, 0.0, 29.0)",
+      "yaw": 0.0
+    },
+    {
+      "bounds": {
+        "max": [
+          15.1000003814697,
+          1.64000010490417,
+          41.0224990844727
+        ],
+        "meshes": 17,
+        "min": [
+          4.97749996185303,
+          -0.600815832614899,
+          31.3700008392334
+        ]
+      },
+      "lookup": "cube_projectile_spawner",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/CubeSpawner",
+      "position": "(9.0, 0.0, 37.0)",
+      "yaw": 0.0
+    }
+  ],
+  "checks": [
+    {
+      "check": "r_c/Btn_0 reachable from one mark: 0.573 m",
+      "passed": true
+    },
+    {
+      "check": "r_c/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "r_c/Btn_1 reachable from one mark: 0.573 m",
+      "passed": true
+    },
+    {
+      "check": "r_c/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "r_c/Btn_2 reachable from one mark: 0.540 m",
+      "passed": true
+    },
+    {
+      "check": "r_c/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "r_c has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_0 reachable from one mark: 0.553 m",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_1 reachable from one mark: 0.553 m",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_0 reachable from one mark: 0.590 m",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_1 reachable from one mark: 0.568 m",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_2 reachable from one mark: 0.590 m",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_3 reachable from one mark: 0.546 m",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_3 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_4 reachable from one mark: 0.546 m",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_4 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_doors has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner/Btn_0 reachable from one mark: 0.553 m",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner/Btn_1 reachable from one mark: 0.553 m",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "r_c: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "r_c: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "r_c: no missing or duplicated buttons after actions",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner: no missing or duplicated buttons after actions",
+      "passed": true
+    },
+    {
+      "check": "Arena cells restored to museum floor height",
+      "passed": true
+    },
+    {
+      "check": "Entering removes one cell AND its collider",
+      "passed": true
+    },
+    {
+      "check": "Walking requests a second removal",
+      "passed": true
+    },
+    {
+      "check": "Removed cell has a real hole, not museum floor beneath it",
+      "passed": true
+    },
+    {
+      "check": "Replay restores every physical cell",
+      "passed": true
+    },
+    {
+      "check": "Replay repeats the first draw",
+      "passed": true
+    },
+    {
+      "check": "Reset cancels pending draw without losing support",
+      "passed": true
+    },
+    {
+      "check": "VR button opens the seeded safe passage and clears its collider",
+      "passed": true
+    },
+    {
+      "check": "Other door releases visible fire after its warning",
+      "passed": true
+    },
+    {
+      "check": "Fire jet has an active hazard volume",
+      "passed": true
+    },
+    {
+      "check": "Fire mesh and hurt volume reach 2.7 m",
+      "passed": true
+    },
+    {
+      "check": "Entering fire jet invokes museum death",
+      "passed": true
+    },
+    {
+      "check": "Museum respawn completes after fire",
+      "passed": true
+    },
+    {
+      "check": "Door replay preserves the seeded assignment",
+      "passed": true
+    },
+    {
+      "check": "Door replay closes all doors",
+      "passed": true
+    },
+    {
+      "check": "Replay cancels an in-flight door action",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "floor_checks": [
+    {
+      "cell": "(9.0, 0.0)",
+      "supported": true
+    },
+    {
+      "cell": "(9.0, 44.0)",
+      "supported": true
+    },
+    {
+      "cell": "(1.0, 22.0)",
+      "supported": true
+    },
+    {
+      "cell": "(17.0, 22.0)",
+      "supported": true
+    }
+  ],
+  "headset_verified": false,
+  "map": "Random_Game",
+  "origin": "(0.5, 0.0, 0.5)"
+}

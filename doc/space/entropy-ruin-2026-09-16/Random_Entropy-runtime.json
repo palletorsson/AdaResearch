@@ -1,0 +1,262 @@
+{
+  "artifacts": [
+    {
+      "bounds": {
+        "max": [
+          3.19391989707947,
+          1.1800000667572,
+          5.19392013549805
+        ],
+        "meshes": 129,
+        "min": [
+          2.80608010292053,
+          -0.000499999150633812,
+          4.77135610580444
+        ]
+      },
+      "lookup": "entropy_jar",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/EntropyJar",
+      "position": "(3.0, 0.0, 5.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          9.14999961853027,
+          1.6599999666214,
+          5.0600004196167
+        ],
+        "meshes": 109,
+        "min": [
+          6.84999990463257,
+          0.0,
+          2.67000007629395
+        ]
+      },
+      "lookup": "shannon_entropy_meter",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/ShannonEntropyMeter",
+      "position": "(8.0, 0.0, 5.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          13.1071748733521,
+          0.199741214513779,
+          7.08750152587891
+        ],
+        "meshes": 3,
+        "min": [
+          12.3065223693848,
+          0.018958680331707,
+          4.54715585708618
+        ]
+      },
+      "lookup": "random_butterflies",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/butterflies",
+      "position": "(13.0, 0.0, 7.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          5.02200031280518,
+          1.55400013923645,
+          9.36061668395996
+        ],
+        "meshes": 100,
+        "min": [
+          0.947999715805054,
+          0.449999958276749,
+          8.63938331604004
+        ]
+      },
+      "lookup": "hardware_entropy_decay",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/HardwareEntropyDecay",
+      "position": "(3.0, 0.45, 9.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          13.0450000762939,
+          4.54500007629395,
+          20.1749992370605
+        ],
+        "meshes": 42,
+        "min": [
+          2.95499992370605,
+          -0.00500000268220901,
+          9.82499980926514
+        ]
+      },
+      "lookup": "entropy_axiom",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/EntropyAxiomMultiMesh",
+      "position": "(8.0, 0.0, 15.0)",
+      "yaw": 0.0
+    },
+    {
+      "bounds": {
+        "max": [
+          11.1749992370605,
+          3.53000020980835,
+          27.3999996185303
+        ],
+        "meshes": 146,
+        "min": [
+          4.82499980926514,
+          0.0,
+          23.3700008392334
+        ]
+      },
+      "lookup": "entropy_ruin",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/EntropyRuin",
+      "position": "(8.0, 0.0, 26.0)",
+      "yaw": 0.0
+    }
+  ],
+  "checks": [
+    {
+      "check": "shannon_entropy_meter/Btn_0 reachable from one mark: 0.570 m",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter/Btn_1 reachable from one mark: 0.547 m",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter/Btn_2 reachable from one mark: 0.570 m",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "entropy_ruin/Btn_0 reachable from one mark: 0.570 m",
+      "passed": true
+    },
+    {
+      "check": "entropy_ruin/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "entropy_ruin/Btn_1 reachable from one mark: 0.547 m",
+      "passed": true
+    },
+    {
+      "check": "entropy_ruin/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "entropy_ruin/Btn_2 reachable from one mark: 0.570 m",
+      "passed": true
+    },
+    {
+      "check": "entropy_ruin/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "entropy_ruin has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "Entropy field has square plan",
+      "passed": true
+    },
+    {
+      "check": "Square field holds 16 x 5 x 16 points",
+      "passed": true
+    },
+    {
+      "check": "Ruin retains 116 pieces",
+      "passed": true
+    },
+    {
+      "check": "Reachable ONE STONE button changes construction",
+      "passed": true
+    },
+    {
+      "check": "Reachable RESTORE returns intact, paused",
+      "passed": true
+    },
+    {
+      "check": "Museum replay restores selected stone sequence",
+      "passed": true
+    },
+    {
+      "check": "Ruin approach and bypass remain supported",
+      "passed": true
+    },
+    {
+      "check": "Ruin approach and bypass remain supported",
+      "passed": true
+    },
+    {
+      "check": "Ruin approach and bypass remain supported",
+      "passed": true
+    },
+    {
+      "check": "Ruin approach and bypass remain supported",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter: no missing or duplicated buttons after actions",
+      "passed": true
+    },
+    {
+      "check": "entropy_ruin: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "entropy_ruin: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "entropy_ruin: no missing or duplicated buttons after actions",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "floor_checks": [
+    {
+      "cell": "(8.0, 0.0)",
+      "supported": true
+    },
+    {
+      "cell": "(8.0, 30.0)",
+      "supported": true
+    },
+    {
+      "cell": "(1.0, 15.0)",
+      "supported": true
+    },
+    {
+      "cell": "(15.0, 15.0)",
+      "supported": true
+    }
+  ],
+  "headset_verified": false,
+  "map": "Random_Entropy",
+  "origin": "(0.5, 0.0, 0.5)"
+}

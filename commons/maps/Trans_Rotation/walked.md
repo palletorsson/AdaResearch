@@ -1,3 +1,5 @@
+> Historical account of the previous layout. The 2026-09-09 redesign is documented in `final.md`, `technical.md` and `field_notes.md`; human VR review of the two new studies is pending.
+
 # Trans_Rotation — walked
 
 > R-021, amended: this page is the considered critical tutorial for a map that

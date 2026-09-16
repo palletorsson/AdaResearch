@@ -1,0 +1,41 @@
+{
+  "artifacts": {
+    "super_drag_mirror": {
+      "lookup_name": "super_drag_mirror",
+      "name": "Super Drag Looking Glass",
+      "scene": "res://commons/artifacts/super_drag_mirror/super_drag_mirror.tscn",
+      "description": "Full-length camera mirror and a working wardrobe for the player's actual costume. Previous/Next selects Latex Cathedral, Chrome Orchid, Holographic Fan or Pearl Rococo; Walk Dress restores the progression garment. Saves appearance separately from earned trophies. Head-centred monoscopic reflection in XR.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "category": "body",
+      "complexity": "beginner",
+      "map_sequences": [
+        "tiling"
+      ],
+      "footprint": [
+        4,
+        3,
+        3
+      ],
+      "size_group": "large",
+      "tags": [
+        "avatar",
+        "mirror",
+        "drag",
+        "outfit",
+        "material",
+        "wardrobe"
+      ],
+      "parameters": {
+        "resolution": 768,
+        "active_distance": 7.0
+      },
+      "interactions": [
+        "Press Previous or Next to wear an outfit",
+        "Move before the mirror",
+        "Press Walk Dress to restore the earned garment"
+      ],
+      "qfep_connection": "A chosen appearance is composed over an inferred torso and tracked head/hands; looking, dressing and bodily collision remain distinct operations."
+    }
+  }
+}

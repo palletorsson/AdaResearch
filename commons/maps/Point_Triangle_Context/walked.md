@@ -1,3 +1,5 @@
+> Historical working text. Retained as research material after the 16 September 2026 focused revision. For the current two-artifact passage and installed behavior, read [final.md](final.md), [technical.md](technical.md) and [detours.md](detours.md). Claims below about rigid-rod resistance, universal triangle rendering or earlier placements are not current instructions. The unmodified text is also preserved in the dated source archive.
+
 # Point_Triangle_Context — walked
 
 > R-021, amended: the considered critical tutorial for a walked, working map.

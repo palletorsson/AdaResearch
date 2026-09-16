@@ -1,0 +1,31 @@
+{
+  "checks": 63,
+  "failures": [],
+  "headset_verified": false,
+  "stages": [
+    {
+      "detector_size": "(0.52, 0.52, 0.52)",
+      "motion": "still",
+      "position": "(9.5, 0.0, 7.5)",
+      "visual_scale": "(0.5, 0.5, 0.5)"
+    },
+    {
+      "detector_size": "(0.52, 0.52, 0.52)",
+      "motion": "slide",
+      "position": "(9.5, 0.16, 10.5)",
+      "visual_scale": "(0.5, 0.5, 0.5)"
+    },
+    {
+      "detector_size": "(0.52, 0.52, 0.52)",
+      "motion": "idle",
+      "position": "(9.5, 0.16, 13.5)",
+      "visual_scale": "(0.5, 0.5, 0.5)"
+    },
+    {
+      "detector_size": "(0.52, 0.52, 0.52)",
+      "motion": "all",
+      "position": "(9.5, 0.16, 16.5)",
+      "visual_scale": "(0.62, 0.62, 0.62)"
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "artifacts": [
+    {
+      "bounds": {
+        "max": [
+          5.82250022888184,
+          1.62739992141724,
+          6.26249980926514
+        ],
+        "meshes": 95,
+        "min": [
+          4.17749977111816,
+          0.0,
+          4.31999969482422
+        ]
+      },
+      "lookup": "distribution_sampler",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/DistributionSampler",
+      "position": "(5.0, 0.0, 6.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          3.10500001907349,
+          2.60500001907349,
+          7.02274990081787
+        ],
+        "meshes": 7,
+        "min": [
+          0.894999980926514,
+          0.394999980926514,
+          7.0
+        ]
+      },
+      "lookup": "GaussianPaintSplatter",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/GaussianPaintSplatter",
+      "position": "(2.0, 1.5, 7.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          2.7350001335144,
+          2.32500004768372,
+          10.1800003051758
+        ],
+        "meshes": 141,
+        "min": [
+          1.08499991893768,
+          -0.00000000745058059692383,
+          9.78250026702881
+        ]
+      },
+      "lookup": "galton_board",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/GaltonBoard",
+      "position": "(2.0, 0.9, 10.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          8.59799957275391,
+          1.70999991893768,
+          10.1300001144409
+        ],
+        "meshes": 116,
+        "min": [
+          7.38199949264526,
+          -0.0000000260770320892334,
+          9.86633777618408
+        ]
+      },
+      "lookup": "distribution_comparator",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/DistributionComparator",
+      "position": "(8.0, 0.83, 10.0)",
+      "yaw": -179.999984741211
+    }
+  ],
+  "checks": [
+    {
+      "check": "distribution_sampler/Btn_0 reachable from one mark: 0.655 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_1 reachable from one mark: 0.605 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_2 reachable from one mark: 0.575 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_3 reachable from one mark: 0.569 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_3 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_4 reachable from one mark: 0.567 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_4 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_0 reachable from one mark: 0.605 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_1 reachable from one mark: 0.655 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_2 reachable from one mark: 0.585 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_3 reachable from one mark: 0.636 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_3 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler: no missing or duplicated buttons after actions",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "floor_checks": [
+    {
+      "cell": "(5.0, 0.0)",
+      "supported": true
+    },
+    {
+      "cell": "(5.0, 12.0)",
+      "supported": true
+    },
+    {
+      "cell": "(1.0, 6.0)",
+      "supported": true
+    },
+    {
+      "cell": "(9.0, 6.0)",
+      "supported": true
+    }
+  ],
+  "headset_verified": false,
+  "map": "Random_Gaussian",
+  "origin": "(0.5, 0.0, 0.5)"
+}

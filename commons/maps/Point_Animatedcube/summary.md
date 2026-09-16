@@ -1,31 +1,33 @@
-# Point Animatedcube - Map Summary
+# Point Animatedcube — Map Summary
 
-## Overview
-Point_Animatedcube shifts from static primitive display to procedural construction. Multiple `animatedcubebuilder` instances stage the same cube-assembly process so learners can read structure as sequence, not only as finished form.
+## The room's experiment
 
-## Spatial Layout
-- Dimensions: 7x14 grid.
-- Architecture: Two raised pedestal pairs at (2,4)/(4,4) and (2,8)/(4,8).
-- Focus anchor: `dark_sphere` at (3,4).
-- Exit: teleporter `t` at (5,12).
+Follow an outline, reveal its layers, then move one corner. A diagonal becomes a crease: positions have changed while the triangle connections remain. Compare this deformation with the folding net's rigid faces and moving hinges.
 
-## Key Elements
-- `animatedcubebuilder:0:0:0.5` at (2,4), (4,4), (2,8), and (4,8).
-- `dark_sphere` at (3,4) for local contrast.
-- `polyhedron_nets_cube:0:1#loop_fold:true` at (3,10) as a fold/unfold bridge from face nets to enclosed volume.
-- Spawn orientation `an:-90` at (6,0).
+## Current spatial setup
 
-## Learning Flow
-1. Watch cube assembly phases (points, edges, faces) on the front pair.
-2. Cross-check the same logic on the rear pair.
-3. Read the cube net fold animation as another path to enclosure.
-4. Exit once procedural assembly is internalized.
+- Dimensions: 13 × 14 grid cells; maximum structure height value 2.
+- Fourteen artifact placements, twelve distinct artifact types.
+- Outline: `cube_lines` at (2,1).
+- Two instrumented builders at (5,5) and (2,8), both configured `#plinth#discovery:1`.
+- Folding net at (4,10), configured `polyhedron_nets_cube:0:1#loop_fold:true`.
+- Existing carton, crate, glove-box, shadow, phosphor, pyramid and sphere-field placements remain. See artifacts.md for every placement.
+- Spawn `sp` at (0,0), orientation `an:-90` at (6,0), exit `t` at (5,12).
 
-## Design Intent
-The map teaches that volume is constructed, not given. Repetition across four builders reduces one-off spectacle and emphasizes rule-based generation.
+Coordinates above are (column,row) indices from map_data.json, not world metres or measured visitor reach.
 
-## Sequence Context
-- Position in primitives sequence: 8/11.
-- Follows: `Primitives_Polythedra`.
-- Precedes: `Primitives_Ignorance`.
-- Role: procedural bridge from primitive vocabulary to volumetric construction logic.
+## Primary encounter order
+
+1. `cube_lines`: recognise a cube through its connected edges.
+2. `animatedcubebuilder`: replay; pause the local reveal; resume; move `v6` out of the face plane; find the shared diagonal; compare replay with restoration. Keep the second builder unchanged as a reference.
+3. `polyhedron_nets_cube`: follow one rigid square through the folding loop and distinguish hinge rotation from corner deformation.
+
+Three primary types make four physical placements. The tutorial's optional return visits keep the other exhibits available without making all their questions prerequisites for leaving.
+
+## Sequence context
+
+Seventh of ten maps in the current `primitives` sequence. Follows `Primitives_Polythedra`; precedes `Primitives_Ignorance`. The admission "A world without composition yet" stays in the book as the transition from known parts to relations still to investigate.
+
+## Verification limit
+
+The existing component probe checks actual pointer-button events, supplied handle movement, geometry updates and both map-configured instruments. Full-room headset reach and viewing comfort remain to be checked.

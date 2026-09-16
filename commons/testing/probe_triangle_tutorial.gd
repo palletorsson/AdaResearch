@@ -1,7 +1,9 @@
 extends SceneTree
-## The triangle room's tutorial code must be TRUE, not just plausible. Each
-## function is copied here verbatim from tutorial.md and asked a question with
-## a known answer -- a number the probe can be wrong about.
+## Historical tutorial examples, retained after the 2026-09-16 focused revision.
+## Source: doc/space/point-triangle-focus-2026-09-16/previous/tutorial.md.
+## These copied examples do not validate the installed room or current chapter.
+## Use probe_triangle_primary.gd and tools/probes/museum_triangle_fan.gd for
+## supplied-input checks against the actual artifact scenes.
 ##
 ##   1  third_vertex(3, 4, 5) lands at (0, 4): the 3-4-5 triangle is right-angled
 ##      at the origin, so Pythagoras alone placed the corner

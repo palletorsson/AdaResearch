@@ -1,3 +1,5 @@
+> Historical working text, retained on 16 September 2026. This describes earlier readings and configurations, including first-visit storage and grid spacings that do not match the current room. Use [tutorial.md](tutorial.md), [technical.md](technical.md) and [final.md](final.md) for the current encounter.
+
 # Point_Line_Grid — walked
 
 > R-021, amended: the considered critical tutorial for a walked, working map.

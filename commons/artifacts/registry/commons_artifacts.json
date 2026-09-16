@@ -2144,13 +2144,13 @@
   "cctv": {
    "dna": {
     "axes": {
-    "oversight": [
-    "monitor",
-    "housing",
-    "sightline",
-    "tally",
-    "dome"
-    ]
+     "oversight": [
+      "monitor",
+      "housing",
+      "sightline",
+      "tally",
+      "dome"
+     ]
     }
    },
    "category": "unknown",
@@ -3605,7 +3605,7 @@
    },
    "category": "emergence",
    "complexity": "beginner",
-   "description": "Sample from various probability distributions — uniform, Gaussian, Poisson, exponential — and watch the histogram build in real-time. Compare theoretical curves with empirical results, experiencing the law of large numbers as shapes converge.",
+   "description": "Sample uniform, guarded Gaussian, Poisson and exponential laws. The optional cabinet exposes a named seed, pause/batch/rebin controls, issued and landed counts, clipping and binned estimates; pale model counts and a separately scaled orange shape support comparison.",
    "dev_themes": [
     "commons",
     "emergence",
@@ -3630,7 +3630,7 @@
     ],
     "size_group": "compact"
    },
-   "qfep_connection": "Distributions as 'shape of randomness' â€” entropy has structure. Different distributions = different Î» signatures.",
+   "qfep_connection": "A sampling law, an edge clamp and a bin partition retain different aspects of the values. Rebinning can change a displayed centre without changing its population. Frequency and expected shape do not define what a body ought to be; an entropy claim requires its own measure.",
    "scene": "res://commons/artifacts/distribution_sampler/distribution_sampler.tscn",
    "sequence": "randomness",
    "tags": [
@@ -4067,12 +4067,12 @@
   "drawing_paper": {
    "dna": {
     "axes": {
-    "priming": [
-    "white",
-    "ochre",
-    "bole",
-    "verdaccio"
-    ]
+     "priming": [
+      "white",
+      "ochre",
+      "bole",
+      "verdaccio"
+     ]
     }
    },
    "category": "unknown",
@@ -4267,12 +4267,12 @@
   "durer_scene": {
    "dna": {
     "axes": {
-    "apparatus": [
-    "finish",
-    "cage",
-    "block",
-    "veil"
-    ]
+     "apparatus": [
+      "finish",
+      "cage",
+      "block",
+      "veil"
+     ]
     }
    },
    "category": "unknown",
@@ -5231,13 +5231,13 @@
   "game_of_life_petri": {
    "dna": {
     "axes": {
-    "culture": [
-    "mixed",
-    "pulsar",
-    "gun",
-    "soup",
-    "none"
-    ]
+     "culture": [
+      "mixed",
+      "pulsar",
+      "gun",
+      "soup",
+      "none"
+     ]
     }
    },
    "category": "emergence",
@@ -7536,13 +7536,13 @@
   "jelly_variants": {
    "dna": {
     "axes": {
-    "assay": [
-    "none",
-    "gauge",
-    "control",
-    "chart",
-    "vitrine"
-    ]
+     "assay": [
+      "none",
+      "gauge",
+      "control",
+      "chart",
+      "vitrine"
+     ]
     }
    },
    "category": "physics",
@@ -9073,13 +9073,28 @@
     "footprint_source": "measured_capped"
    },
    "measurements": {
-    "aabb_size": [0.5, 0.5, 0.5],
-    "aabb_center": [0.0, 0.5, 0.0],
-    "grid_cells": [1, 1],
+    "aabb_size": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "aabb_center": [
+     0.0,
+     0.5,
+     0.0
+    ],
+    "grid_cells": [
+     1,
+     1
+    ],
     "max_dimension_m": 0.5,
     "measured_at": "2026-09-05T13:59:45Z"
    },
-   "footprint_measured": [1, 1, 1.0],
+   "footprint_measured": [
+    1,
+    1,
+    1.0
+   ],
    "spatial_profile": {
     "dir_group": "panel",
     "range": 35,
@@ -10806,7 +10821,7 @@
     "vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "table",
+    "platform": "none",
     "footprint_cells": 1,
     "clearance": {
      "front": 1,
@@ -12160,17 +12175,17 @@
   "random_walk_terrarium": {
    "dna": {
     "axes": {
-    "memory": [
-    "tail",
-    "none",
-    "chord",
-    "cloud"
-    ]
+     "memory": [
+      "tail",
+      "none",
+      "chord",
+      "cloud"
+     ]
     }
    },
    "category": "procedural",
    "complexity": "intermediate",
-   "description": "A contained ecosystem where random walkers create terrain — trails accumulate into landscapes, paths cross to form structures, and the terrarium slowly fills with the emergent geography of stochastic exploration.",
+   "description": "Five random walkers in a reflecting glass tank: fixed-length 2D/3D proposals or bounded power-law LEVY steps. The default tail keeps 200 previous positions; the optional logbook stand exposes the named seed, two clocks and ONE/ALL visual emphasis.",
    "dev_themes": [
     "commons",
     "mixed",
@@ -12201,7 +12216,7 @@
     ],
     "size_group": "compact"
    },
-   "qfep_connection": "Random walk as pure E(S) â€” no memory, no direction, maximum entropy. LÃ©vy flights: structured randomness.",
+   "qfep_connection": "The next step does not consult the stored trail, although position, generator and timing state persist. Reflection, finite history and a catch-up cap change what can be seen and repeated. An entropy interpretation requires a defined measure; the cabinet displays mean squared displacement.",
    "scene": "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
    "sequence": "randomness",
    "size_group": "compact",
@@ -12861,11 +12876,11 @@
   "sine_wave_controller": {
    "dna": {
     "axes": {
-    "evidence": [
-    "result",
-    "trace",
-    "longhand"
-    ]
+     "evidence": [
+      "result",
+      "trace",
+      "longhand"
+     ]
     }
    },
    "category": "unknown",
@@ -16112,12 +16127,12 @@
   "transform_composition_workbench": {
    "dna": {
     "axes": {
-    "workings": [
-    "outcome",
-    "trace",
-    "operands",
-    "expression"
-    ]
+     "workings": [
+      "outcome",
+      "trace",
+      "operands",
+      "expression"
+     ]
     }
    },
    "name": "Transform Composition Workbench",

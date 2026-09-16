@@ -1,0 +1,394 @@
+{
+  "failures": [],
+  "headless": true,
+  "headset_verified": false,
+  "segments": [
+    {
+      "ms": 931.912,
+      "shell": false
+    },
+    {
+      "ms": 324.487,
+      "shell": true
+    },
+    {
+      "ms": 302.189,
+      "shell": true
+    },
+    {
+      "ms": 274.719,
+      "shell": true
+    },
+    {
+      "ms": 206.324,
+      "shell": true
+    }
+  ],
+  "stamps": [
+    {
+      "lookup": "prng_crank_machine",
+      "ms": 248.155,
+      "queued": true,
+      "scene": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn",
+      "success": true
+    },
+    {
+      "lookup": "slot_machine",
+      "ms": 80.663,
+      "queued": true,
+      "scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
+      "success": true
+    },
+    {
+      "lookup": "seed_replay_demo",
+      "ms": 68.166,
+      "queued": true,
+      "scene": "res://algorithms/randomness/seed_replay/seed_replay_demo.tscn",
+      "success": true
+    },
+    {
+      "lookup": "catalyst_pickup",
+      "ms": 16.55,
+      "queued": true,
+      "scene": "res://commons/artifacts/catalyst_pickup/catalyst_pickup.tscn",
+      "success": true
+    },
+    {
+      "lookup": "trng_vs_prng",
+      "ms": 30.077,
+      "queued": true,
+      "scene": "res://algorithms/randomness/trng_vs_prng/trng_vs_prng.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_number_book_page_1955",
+      "ms": 34.526,
+      "queued": true,
+      "scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
+      "success": true
+    },
+    {
+      "lookup": "entropy_jar",
+      "ms": 0.051,
+      "queued": true,
+      "scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
+      "success": true
+    },
+    {
+      "lookup": "shannon_entropy_meter",
+      "ms": 0.04,
+      "queued": true,
+      "scene": "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_butterflies",
+      "ms": 0.026,
+      "queued": true,
+      "scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn",
+      "success": true
+    },
+    {
+      "lookup": "hardware_entropy_decay",
+      "ms": 0.035,
+      "queued": true,
+      "scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
+      "success": true
+    },
+    {
+      "lookup": "entropy_axiom",
+      "ms": 0.039,
+      "queued": true,
+      "scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn",
+      "success": true
+    },
+    {
+      "lookup": "remove_random",
+      "ms": 0.04,
+      "queued": true,
+      "scene": "res://algorithms/randomness/remove_random.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_removal_arena",
+      "ms": 0.037,
+      "queued": true,
+      "scene": "res://commons/artifacts/randomness_space/removal_arena.tscn",
+      "success": true
+    },
+    {
+      "lookup": "entropy_axiom",
+      "ms": 12.019,
+      "queued": false,
+      "scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn",
+      "success": true
+    },
+    {
+      "lookup": "hardware_entropy_decay",
+      "ms": 117.116,
+      "queued": false,
+      "scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_butterflies",
+      "ms": 17.409,
+      "queued": false,
+      "scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn",
+      "success": true
+    },
+    {
+      "lookup": "shannon_entropy_meter",
+      "ms": 60.471,
+      "queued": false,
+      "scene": "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+      "success": true
+    },
+    {
+      "lookup": "entropy_jar",
+      "ms": 53.208,
+      "queued": false,
+      "scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_walk_collection",
+      "ms": 0.035,
+      "queued": true,
+      "scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_collection.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_walk_terrarium",
+      "ms": 0.024,
+      "queued": true,
+      "scene": "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_walk_leash",
+      "ms": 0.017,
+      "queued": true,
+      "scene": "res://algorithms/randomness/random_walk_leash/random_walk_leash.tscn",
+      "success": true
+    },
+    {
+      "lookup": "pixel_cloud",
+      "ms": 0.032,
+      "queued": true,
+      "scene": "res://algorithms/randomness/pixelcloud/pixel_cloud.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_walk_128",
+      "ms": 0.022,
+      "queued": true,
+      "scene": "res://algorithms/randomness/random_walk_128.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_removal_arena",
+      "ms": 47.035,
+      "queued": false,
+      "scene": "res://commons/artifacts/randomness_space/removal_arena.tscn",
+      "success": true
+    },
+    {
+      "lookup": "remove_random",
+      "ms": 30.234,
+      "queued": false,
+      "scene": "res://algorithms/randomness/remove_random.tscn",
+      "success": true
+    },
+    {
+      "lookup": "prng_crank_machine",
+      "ms": 0.061,
+      "queued": true,
+      "scene": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn",
+      "success": true
+    },
+    {
+      "lookup": "slot_machine",
+      "ms": 0.082,
+      "queued": true,
+      "scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
+      "success": true
+    },
+    {
+      "lookup": "seed_replay_demo",
+      "ms": 0.05,
+      "queued": true,
+      "scene": "res://algorithms/randomness/seed_replay/seed_replay_demo.tscn",
+      "success": true
+    },
+    {
+      "lookup": "catalyst_pickup",
+      "ms": 0.054,
+      "queued": true,
+      "scene": "res://commons/artifacts/catalyst_pickup/catalyst_pickup.tscn",
+      "success": true
+    },
+    {
+      "lookup": "trng_vs_prng",
+      "ms": 0.042,
+      "queued": true,
+      "scene": "res://algorithms/randomness/trng_vs_prng/trng_vs_prng.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_number_book_page_1955",
+      "ms": 0.035,
+      "queued": true,
+      "scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
+      "success": true
+    },
+    {
+      "lookup": "entropy_axiom",
+      "ms": 3.485,
+      "queued": false,
+      "scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn",
+      "success": true
+    },
+    {
+      "lookup": "hardware_entropy_decay",
+      "ms": 14.129,
+      "queued": false,
+      "scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_butterflies",
+      "ms": 4.173,
+      "queued": false,
+      "scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn",
+      "success": true
+    },
+    {
+      "lookup": "shannon_entropy_meter",
+      "ms": 15.583,
+      "queued": false,
+      "scene": "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+      "success": true
+    },
+    {
+      "lookup": "entropy_jar",
+      "ms": 29.339,
+      "queued": false,
+      "scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
+      "success": true
+    }
+  ],
+  "transitions": [
+    {
+      "drain": {
+        "drain_calls_ms": [],
+        "pending": 0
+      },
+      "shells": [
+        {
+          "content_roots": 66,
+          "map": "Random_Definition",
+          "shell": false
+        },
+        {
+          "content_roots": 0,
+          "map": "Random_Entropy",
+          "shell": true
+        }
+      ],
+      "step": 0,
+      "sync_transition_ms": 0.016
+    },
+    {
+      "drain": {
+        "drain_calls_ms": [
+          15.541,
+          117.153,
+          17.446,
+          60.502,
+          53.242,
+          115.755
+        ],
+        "pending": 0
+      },
+      "shells": [
+        {
+          "content_roots": 0,
+          "map": "Random_Definition",
+          "shell": true
+        },
+        {
+          "content_roots": 65,
+          "map": "Random_Entropy",
+          "shell": false
+        },
+        {
+          "content_roots": 0,
+          "map": "Random_Remove",
+          "shell": true
+        }
+      ],
+      "step": 1,
+      "sync_transition_ms": 305.502
+    },
+    {
+      "drain": {
+        "drain_calls_ms": [
+          61.743,
+          30.276,
+          93.746
+        ],
+        "pending": 0
+      },
+      "shells": [
+        {
+          "content_roots": 0,
+          "map": "Random_Entropy",
+          "shell": true
+        },
+        {
+          "content_roots": 59,
+          "map": "Random_Remove",
+          "shell": false
+        },
+        {
+          "content_roots": 0,
+          "map": "Random_Walk",
+          "shell": true
+        }
+      ],
+      "step": 2,
+      "sync_transition_ms": 277.569
+    },
+    {
+      "drain": {
+        "drain_calls_ms": [
+          33.876,
+          19.821,
+          29.38,
+          80.044
+        ],
+        "pending": 0
+      },
+      "shells": [
+        {
+          "content_roots": 0,
+          "map": "Random_Definition",
+          "shell": true
+        },
+        {
+          "content_roots": 65,
+          "map": "Random_Entropy",
+          "shell": false
+        },
+        {
+          "content_roots": 0,
+          "map": "Random_Remove",
+          "shell": true
+        }
+      ],
+      "step": 3,
+      "sync_transition_ms": 210.073
+    }
+  ]
+}

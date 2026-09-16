@@ -1,0 +1,83 @@
+{
+  "artifacts": {
+    "plan_vitrine": {
+      "lookup_name": "plan_vitrine",
+      "name": "Plan vitrine",
+      "scene": "res://commons/artifacts/plan_vitrine/plan_vitrine.tscn",
+      "class_name": "PlanVitrine",
+      "category": "primitives",
+      "description": "A glass room you walk into, standing on the five by five simulation plan, which it builds inside itself. No pane carries a collider, so every face is walk-through and the lit doorway is an invitation rather than a gate. In VR, standing inside puts a pen in each hand: the left draws freely in three dimensions, the right is a time-domain trace that stamps every sample on one plane and pushes the tape along world +Z, so the plan's numbered columns become an amplitude ruler and +Z becomes time. Stepping out takes both pens back and the marks hang for a few seconds before clearing. On desktop and in the endless museum the glass and the plan build normally and the hands stay empty, because there is no rig to mount a pen on and the only shared mount is the camera, which would draw a tracer on the visitor's head.",
+      "qfep_connection": "Two hands given incompatible instruments at the same moment. The left records position, the right records position against time and throws one axis away to do it, so the visitor feels the cost of a projection rather than being told about it.",
+      "signals": [],
+      "interactions": [
+        "walk in through any face; the lit opening shows the intended front",
+        "VR only: both controllers gain a draw_dot on entry and lose it on exit"
+      ],
+      "parameters": {
+        "span_m": "Outer face to outer face, metres (default 5.0, matching simulation_grid's walkable collider)",
+        "height_m": "Glass height (default 2.8)",
+        "door": "Which face opens: -x, +x, -z, +z, none (default -x)",
+        "lid": "Add a ceiling pane (default false)",
+        "wrap_plan": "Build simulation_grid inside the box (default true)",
+        "linger_s": "Seconds the marks hang after the visitor steps out (default 6.0)",
+        "left_ink": "Ink name for the free pen: magenta, cyan, amber, lime, white (default cyan)",
+        "right_ink": "Ink name for the time-domain pen (default amber)",
+        "footprint": [
+          5,
+          2.8,
+          5
+        ],
+        "size_group": "large"
+      },
+      "size": "large",
+      "interaction": "walk_in",
+      "sequence": "primitives",
+      "artifact_type": "enterable_display",
+      "capacity": "DRAW with two incompatible pens at once",
+      "dev_themes": [
+        "primitives",
+        "drawing",
+        "time_domain",
+        "vr_hands",
+        "vitrine"
+      ],
+      "dev_category": "primitives",
+      "complexity": "intermediate",
+      "tags": [
+        "glass",
+        "vitrine",
+        "enterable",
+        "walk_in",
+        "draw_dot",
+        "time_domain",
+        "vr",
+        "hands",
+        "area",
+        "grid",
+        "plan"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "auto_ground": false,
+      "map_sequences": [
+        "primitives"
+      ],
+      "footprint": [
+        5,
+        2.8,
+        5
+      ],
+      "size_group": "large",
+      "spatial_needs": {
+        "platform": "floor",
+        "footprint_cells": 25,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        }
+      }
+    }
+  }
+}

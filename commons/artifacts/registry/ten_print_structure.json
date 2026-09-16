@@ -1,0 +1,129 @@
+{
+  "artifacts": {
+    "ten_print_structure": {
+      "dna": {
+        "axes": {
+          "form": [
+            "floor",
+            "wall",
+            "overhead"
+          ]
+        },
+        "default": "form=floor, solid=off, channel empty, cols 20, rows 20, size 0.5, seed 1982, count 400. A default placement is a 10 x 10 m field of 0.25 m ridges with no collider, printed standalone from seed 1982: the same 400 characters the 10 PRINT hall's #seed:1982#count:400 screens print at build, laid on the floor. floor is the default because it is the form that can be READ from standing without entering it, which is how a screen is read, and it seals nothing. A floor ridge is never taller than half its cell (min(0.25, size / 2)), so the 0.25 m default holds from #size:0.5 up and a small field keeps floor visible between its ridges; the next-cell tile lies on the ridge tops, where a standing eye can see it.",
+        "note": "THE AXIS IS WHERE THE MAZE STANDS RELATIVE TO THE BODY, and the stream never changes with it. floor puts the maze below the eye: ridges up to 0.25 m tall (half a cell at smaller sizes) that a visitor steps among and reads like the screen laid down. wall raises the same slabs to 2.4 m: a maze to walk in, which is the Theseus view the book sets against 10 PRINT's Daedalus view (p. 84). overhead hangs 0.2 m slabs at 2.9 m: the maze read above the head, where it can be seen whole from inside and walked under but not walked. What the axis forecloses: every form is the SAME drawing, so none of them can show a second stream or a different grid; the argument is only about the body's position. What lives in the dark spot: the wall form at the default 0.5 m cell is not walkable (the corridor between two parallel slabs is 0.5 / sqrt 2 - 0.06 = 0.29 m), so at the defaults it is a maze to look INTO, and walking it needs #size:1.2 or more (0.79 m corridors, a 24 m field). That gap between 'a maze to walk in' and what the default actually admits is left visible rather than hidden by changing the size with the form. WHAT IS NOT DECLARED: solid (on/off) changes nothing a still can see; channel links to a screen and a still of a linked room is a still of whatever the screen printed; cols/rows/size move the camera more than they argue.",
+        "fixture": {
+          "seed": 41,
+          "count": 400
+        },
+        "framing": 0.6,
+        "framing_why": "capture_config_sweep fits by the AABB diagonal: dist = radius / tan(17 deg) x 1.9 x framing, frame = 2 x dist x tan(17 deg) = 3.8 x radius x framing. The subject AABB is MeshInstance3D only: the layers-0 anchor (10 x top x 10 m from the origin corner), the plate on its post at z 10.6 (foot to z 10.856, screen top 1.416 m) and the hidden marker inside the field. Sizes: floor 10 x 1.416 x 10.856 (radius 7.414), wall 10 x 2.4 x 10.856 (7.477), overhead 10 x 3.1 x 10.856 (7.541). At framing 1.0 the frame is 28.2 m across for a field whose projection at yaw 0.62 is about 14.4 m wide, 27 px per metre, so a 6 cm slab is under 2 px. At 0.6 the frame is 16.9 / 17.05 / 17.19 m, 45.0 / 44.6 / 44.2 px per metre, the field about 650 px of 760 wide, and the tallest form (overhead: 14.65 m of depth x sin 14.9 deg + 3.1 m x cos 14.9 deg = 6.8 m) about 300 px tall, so nothing is cropped.",
+        "predicted_degeneracy": {
+          "pair": "floor against overhead",
+          "percent": 8.0,
+          "metric": "changed_pct as cabinet_sweep writes it: pixels whose summed RGB difference exceeds 26, as a share of the 760 x 760 frame. A FLOOR, registered before any capture; the arithmetic below estimates 10.9%.",
+          "arithmetic": "Registered before any capture. floor and overhead draw the same 400 slabs from the same fixture stream (seed 41, count 400); they differ in slab height (0.25 against 0.2 m) and in height above the floor (0 against 2.9 m), and the AABB centre the camera aims at moves from y 0.708 to 1.55 m. So in the frame the maze band moves: floor slabs sit at 0.125 - 0.708 = -0.583 m from the aim, overhead at 3.0 - 1.55 = +1.45 m; times cos 14.9 deg that is 1.96 m apart in the image, 87 px at 44.6 px/m. The band itself is the 10 x 10 m field seen at a 14.9 deg pitch: 100 x sin 14.9 = 25.7 m^2 (about 51,100 px) and 168 px tall, so the two bands overlap over 81 of their 168 px and are uncorrelated there. INK PER SLAB, from the faces a 14.9 deg / yaw 0.62 camera sees (top L x T x 0.257; long side L x H x 0.966 x |sin| to the view, 0.165 for one diagonal and 0.986 for the other; end T x H likewise swapped), with L = 0.647 m and T = 0.06 m: floor 0.050 and 0.167 m^2, mean 0.108, 400 slabs 43.3 m^2, coverage 1 - exp(-43.3 / 25.7) = 81%; overhead 0.042 and 0.135 m^2, mean 0.089, 35.4 m^2, coverage 75%. CHANGED: the overlap (48% of the band) changes wherever the two frames are not both background (4.8%) or both ink of a near colour (taken as 20% of the both-ink pairs, 12%), so 83% of it: 20,400 px; the floor band alone outside the overlap 0.52 x 51,100 x 0.81 = 21,500 px; the overhead band alone 0.52 x 50,200 x 0.75 = 19,600 px. Total 61,500 px = 10.6% of 577,600, plus the plate (0.8 m wide, 36 px, shifted 36 px, about 1,800 px, 0.3%) = 10.9%. The camera's 1.7% zoom between the two AABBs adds a little and is not counted. Registered at 8.0 as a floor. THE OTHER PAIRS ARE FAR APART: a 2.4 m wall slab shows 0.39 and 1.51 m^2 (mean 0.95, 381 m^2 for 400) into a band that grows by the walls' own 2.3 m image height to about 59 m^2, so wall covers it completely and floor/wall and wall/overhead should each land near 20% or above. INVESTIGATE if floor/overhead comes back BELOW 8%: the likely faults are the fixture not taking (count 0 leaves the plate and the anchor only, and every pair measures the plate), form not reaching _build_nodes (three identical frames, read _rejects.json), or the harness framing on something other than the anchor (a fit on the plate alone would crop the field out). If floor/overhead is NOT the closest pair, the overlap estimate is the part to distrust: at this pitch a floor maze and a ceiling maze read as the same texture, and the bite comes from the shift, not from the heights."
+        }
+      },
+      "lookup_name": "ten_print_structure",
+      "name": "10 PRINT, at the Scale of a Room",
+      "class_name": "TenPrintStructure",
+      "scene": "res://commons/artifacts/ten_print_structure/ten_print_structure.tscn",
+      "category": "randomness",
+      "artifact_type": "installation",
+      "complexity": "intermediate",
+      "sequence": "randomness",
+      "map_sequences": [
+        "randomness"
+      ],
+      "description": "The larger 10 PRINT. A ten_print screen with #controls:panel#channel:<word> is the interface: the program you can edit, the maze seen from above as its architect sees it (p. 84), a machine that executes the pattern so the novice is free to vary it (p. 78). This is the structure it prints: a field of cols x rows cells (20 x 20 at 0.5 m, 10 x 10 m) laid on the floor, each cell one diagonal slab, printed cell by cell from the same stream. Press STEP and one slab appears; press SEMICOLON and the room empties and refills as a single column, because without the semicolon the stream is not wrapped and there is no maze; press BIAS + and the room leans. A bright tile marks the cell where the screen's next character will land. The screen read from its front and the floor read from its near edge draw the same glyph in the same cell: the floor is the screen tipped away onto the ground. With no screen in the hall the field is printed standalone from seed and count with ten_print's own pinned rule, and the plate says so. form moves the maze relative to the body: floor ridges to read standing (0.25 m, or half a cell when the cells are smaller), walls to walk in, slabs overhead.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "world_scale",
+      "hazard": false,
+      "auto_ground": true,
+      "interactions": [
+        "at the screen's console, press STEP and find the one slab that appeared on the floor",
+        "press SEMICOLON: the screen and the room both empty, and what comes back is a single column",
+        "press BIAS + three times and watch the room lean toward one diagonal while the one-liner's constant falls from 205.5 (RUN pauses the live tick and starts it again, STEP prints one character)",
+        "stand at the plate and read the floor as the screen laid down: row 0 farthest, column 0 on your left",
+        "follow the bright tile: it is where the next character will land, and under scroll it stays on the bottom row"
+      ],
+      "parameters": {
+        "form": "floor",
+        "solid": "off",
+        "channel": "",
+        "cols": 20,
+        "rows": 20,
+        "size": 0.5,
+        "seed": 1982,
+        "count": 400,
+        "footprint": [
+          10,
+          2,
+          11
+        ]
+      },
+      "token_examples": [
+        "ten_print_structure",
+        "ten_print_structure#seed:41#count:400",
+        "ten_print_structure#form:wall#size:1.2#cols:10#rows:10",
+        "ten_print_structure#form:overhead",
+        "ten_print:180:1.5:0.1875#semicolon:on#when_full:scroll#seed:1982#count:400#own_light:off#controls:panel#channel:hall",
+        "ten_print_structure:180#channel:hall#size:0.2"
+      ],
+      "token_note": "A LINKED PAIR is two tokens with one channel WORD in one hall: `ten_print:180:1.5:0.1875#controls:panel#channel:hall` and `ten_print_structure:180#channel:hall#size:0.2`. THE TWO YAWS MUST MATCH, and the screen must stand beyond the field's FAR edge (the row 0 side): the floor is the screen tipped away onto the ground, so a visitor at the plate reads the floor and then looks past it at the screen's front, and the two draw the same glyph in the same cell. Give the room a different yaw from its screen and a visitor reading the floor faces the screen's back with the field mirrored against it. The lookup is scoped: the structure walks up from its own parent and takes the nearest screen with that channel, stopping at a museum hall (em_map meta or a Seg* node) and never searching the whole scene, so the same channel word in two halls never crosses. `cols`, `rows`, `size`, `seed` and `count` are in GridInteractablesComponent.CONFIG_PARAM_NAMES and arrive as values. `form`, `solid` and `channel` are NOT listed and take WORDS: #form:wall, #solid:on, #channel:hall. `#solid:1` or `#channel:2` would be read as the tutorial rotation shorthand, the artifact receives the boolean true (refused, the value is kept) and the map gains a silent rotation. When linked, the field takes the screen's grid (20 x 20); cols and rows shape only the standalone field, size applies to both. The origin is the outer corner of the home cell (col 0, row 0): the field extends toward +X and +Z from the placement cell's centre, and a yaw turns it about that corner (180: toward -X and -Z). #solid:on gives every drawn slab a box collider, and in the endless museum any CollisionShape3D seals the WHOLE footprint, so a solid field is a closed block to the museum's walk; the default is a venue. COST: a character is one instance write, and a reset or a scroll is one reload of the whole field, deferred to the end of the frame and writing only the cells that changed - which is what a SEMICOLON press on a #when_full:scroll screen needs, because unwrapping its #count characters scrolls the screen once per character inside that one call.",
+      "map_note": "Lies on the floor with its origin at a corner, base at y 0; plate on a post 0.6 m beyond the near edge (z = rows x size), facing +Z. The default is 10 x 10 m, which is most of a 13-cell hall: in Randomness_10_PRINT_Algorithm a linked room fits at #size:0.2 (4 x 4 m) as `ten_print_structure:180#channel:hall#size:0.2` at cell (4, 10) in front of the (3, 11) screen, which then carries #controls:panel#channel:hall: rotated 180 the field covers world x 0..4, z 6..10, its near edge and plate face into the hall at z 5.4, and a visitor there looks toward +Z over the floor at the screen beyond it, row 0 against the screen, column 0 on the left, exactly as the screen reads. The screen's console stands at its local right, world x about 1.84 at the hall's scale, z 10.96, outside the field. Both tokens carry yaw 180 on purpose: the room must share its screen's yaw, or the floor reads mirrored against it. At #size:0.2 the ridges are 0.1 m (half a cell) and the next-cell tile lies on their tops. wall is walkable only from #size:1.2 (24 m field): at the default size it is a maze to look into. overhead needs 3.1 m of clear height.",
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 110,
+        "footprint_source": "authored",
+        "footprint_note": "10 x 11 cells for the default floor field (10 x 10 m) plus the plate row; scales with cols x size and rows x size",
+        "clearance": {
+          "front": 2,
+          "back": 0,
+          "left": 0,
+          "right": 0
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": "none",
+        "reading_radius": 3
+      },
+      "tags": [
+        "10_print",
+        "ten_print",
+        "regularity",
+        "randomness",
+        "maze",
+        "truchet",
+        "diagonal",
+        "grid",
+        "interface",
+        "daedalus",
+        "theseus",
+        "room_scale",
+        "seeded",
+        "linked",
+        "multimesh",
+        "venue"
+      ],
+      "qfep_connection": "The book gives 10 PRINT two viewers: Daedalus, who sees the maze from above as it is built, and Theseus, who is inside it (p. 84). A screen only ever offers the first. Printing the same stream as a room hands the visitor the second without giving up the first, and makes the relation between them a fact of the building rather than a metaphor: the architect's edit and the inhabitant's world are one data stream at two scales, and the room has no say in what it becomes. What the pairing makes thinkable is that the maze was never in the program at all: it appears only where a one-dimensional stream is wrapped into a grid, and the size of that grid is not the program's business either.",
+      "measurements": {
+        "aabb_size": [
+          10.0,
+          1.416,
+          10.856
+        ],
+        "aabb_center": [
+          5.0,
+          0.708,
+          5.428
+        ],
+        "max_dimension_m": 10.856,
+        "source": "computed from the shipped defaults (form floor): anchor 10 x 0.25 x 10 m from the origin corner; plate STAND at (5, 0, 10.6), screen 0.8 m wide, top 1.15 + 0.248 + 0.018 = 1.416 m, foot radius 0.256 m to z 10.856. wall: height 2.4; overhead: height 3.1.",
+        "measured_at": "unmeasured in engine; run tools/sync_footprints.py after the first capture"
+      }
+    }
+  }
+}

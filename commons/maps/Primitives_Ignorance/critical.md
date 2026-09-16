@@ -1,262 +1,61 @@
-# Primitives Ignorance - Critical Reflection
+# What the polygons cannot hold
 
-## "Let No One Ignorant of Geometry Enter Here"
+The room carries the motto traditionally associated with Plato's Academy. Its reversal asks what the geometric representation leaves unaccounted for. The visitor has learned enough to inspect the method, not only to submit to its catalogue of named forms.
 
-Plato's Academy inscription appears as floating text (4,6). But this map **inverts** its meaning.
+In the divided-line discussion of the [Republic, Book VI](https://classics.mit.edu/Plato/republic.7.vi.html), drawn figures assist thought directed toward geometric objects. Our method turns toward the particular implementation and asks what happens there. The approximation's ridges, distributions and costs become material for investigation. This is a change of research direction, not a demonstration that Plato mistook a drawing for an ideal object.
 
-Original intent: Geometry is **prerequisite for truth** - master geometry to access philosophy.
+The limit must remain specific. Flat triangles do not reproduce a spherical boundary exactly. That does not mean geometry cannot describe curvature, or that every polygonal construction fails to support bodies and uses. Nor does a rougher object necessarily escape a norm: a deliberately faceted style can become another default. Ask which distinction this particular construction preserves, which it loses, and what a different encounter might require.
 
-This map's intent: Geometry reveals its own **ignorance** - master primitives to discover their limits.
+## Understanding does not simply fold around the corner
 
-The inscription becomes **ironic** - geometric knowledge exposes what geometry **cannot know**.
+The capsule belongs in the main walk. Its five radial divisions let a ridge face a facet across the body. An assumed half-turn correspondence fails. The learner cannot obtain the unseen side merely by repeating a familiar front. Another view, or closer attention to the generative rule, becomes necessary.
 
-## Epistemic Reset Through Abundance
+This is a precise restriction on a shortcut. Five equal angular divisions still permit one-fifth-turn symmetry; the geometry remains describable. The productive uncertainty lies in what recognition had not yet taught us to look for. We should preserve that opening without declaring the body unknowable.
 
-From map_info: "A deliberate epistemic reset. 'Primitive' here names not a lowest form but a stage of unknowing."
+Palle calls this "transcendental inside restrictions": a form can exceed the categories and expectations with which we entered while remaining entirely produced by the available rules. The capsule matters as something found between familiar forms, before its facets are dismissed as unfinished smoothness. That is an artistic research proposition to pursue in the encounter: the geometry is finite, while our investigation of its possibilities remains open.
 
-The long gallery (22 rows) overwhelms with geometric **diversity**. But this abundance reveals **scarcity** - all these forms are:
-- Built from triangles
-- Faceted, not smooth
-- Approximations, not ideals
+A teaching method that sends the capsule to the margin would close this inquiry prematurely. The sphere comparisons teach us to specify an approximation; the capsule asks whether we have mistaken that specification for an exhaustive understanding of what the form offers. There is more to uncover inside the model's limits.
 
-The more forms you see, the more you recognize: **These are all the same thing** - triangular meshes arranged differently.
+## The instrument had an assumption too
 
-Abundance reveals **homogeneity** underneath variation.
+At first the counter offers four spheres and a question: which one would serve the use you have in mind? The prices are hidden. There is time to decide where a visitor might stand and what they might need to notice before a number begins to organise the answer.
 
-## Spheres: The Lie of Smoothness
+When the counts appear, there are two for each sphere. The mesh's index list contains triangle entries which collapse at its poles. Another count excludes triangles without measurable area. The same object supports two answers to a question that initially sounded complete: how many triangles?
 
-Three sphere resolutions (low, mid, high) teach the fundamental **deception** of computational geometry:
+The counter itself used to calculate only the smaller count. Inspecting the generated mesh revealed what that formula omitted. This does not make the earlier count meaningless. It makes its scope specific. We had to examine the instrument that was supposed to teach us to examine the sphere.
 
-**Spheres don't exist.**
+## A remainder can be an entry
 
-What appears smooth is **densely packed triangles**. Increase resolution and you get more triangles, but **never true curvature**.
+At a pole, a triangle can remain present as indices while providing almost no surface to see. It is neither a hidden room inside the sphere nor an alien substance outside computation. It is a consequence of how a repeated construction arrives at a place where its rows meet.
 
-This is **computational materialism** - there are no ideals, only:
-- Approximations
-- Trade-offs (smoothness vs. performance)
-- Optical illusions (appears curved, is faceted)
+This is a useful kind of strangeness because we can follow it. Read three indices, look up their positions, calculate an area, compare that result with the rendered mark. Each step answers something, and the answers do not become interchangeable just because the same word triangle appears in all of them.
 
-The sphere is **mathematical object rendered impossible** in discrete space.
+The area test also has a threshold. The helper excludes a sufficiently small squared cross product. Its practical count therefore brings another decision into view: at what scale do we treat a patch as collapsed? The calculation helps us inspect the mesh while retaining an assumption of its own.
 
-## What Primitives Cannot Express
+## Smoothness is not a confession
 
-The organic rocks, irregular forms, and complex shapes reveal primitive geometry's **limits**:
+The paired spheres keep their geometry and change the edge overlay. A surface can become easier to inspect without becoming more geometrically detailed. Conversely, removing an overlay can make a shape easier to recognise without erasing its triangle list.
 
-**Cannot represent**:
-- True continuity (only discrete samples)
-- Infinite detail (only finite vertices)
-- Organic growth (only static forms)
-- Ambiguity (only deterministic shapes)
-- Porosity (only solid/void binary)
+The faceted version is not inherently more truthful. The shaded version is not inherently a lie. Both are ways of making a finite construction available to a task. Ask what each reveals, what it makes harder to notice, and which encounter benefits from that choice.
 
-Primitives excel at **what can be calculated** - regular, symmetric, discrete forms.
+A deliberate ridge might be the feature by which we recognise an object. A smoother silhouette might help us attend to movement instead of tessellation. There is no obligation to recover a supposedly original appearance before these uses can begin. There is an obligation to be specific about what the construction supports.
 
-They fail at **what grows, curves, blurs, and resists quantification**.
+## Who decides what is enough?
 
-## The Platonic Solids: Complete Through Exclusion
+The counter measures mesh entries and area-bearing patches. It does not measure beauty, usefulness, frame time or the freedom of a visitor. A number can inform those questions without settling them.
 
-The five Platonic solids are **geometrically exhaustive** - no others are possible.
+Viewing distance matters. So do the task, eyesight, movement, display and other demands on the running system. A choice made for a distant background may become conspicuous when someone approaches. The difference was not absent at the doorway; the conditions for noticing it changed.
 
-But this completeness is achieved through **radical exclusion**:
-- Only convex (concave excluded)
-- Only regular (irregular excluded)
-- Only polyhedra (curves excluded)
-- Only symmetric (asymmetric excluded)
+The queer possibility can begin with changing the criterion. Instead of asking how cheaply the object can pass for an ideal sphere, ask which facet, seam or silhouette we want someone to encounter. That choice may spend more geometry or less. Its value belongs to what it lets us perceive and do, not to its position on a scale from coarse to fine.
 
-The Platonic solids are complete because they **rule out almost everything**.
+## A small catalogue leaves room
 
-This is how **formal systems achieve closure** - not by representing everything, but by excluding most things.
+The room's other forms remain available: regular solids, the faceted capsule, a truncated tetrahedron, an irregular rock, an absence marked by cones. They offer further questions without all becoming prerequisites for leaving the hall.
 
-## Gallery as Epistemic Exhaustion
+The five convex regular polyhedra answer a tightly specified geometric question. They do not exhaust useful forms. Cutting a corner can leave that family while producing another precise construction. Likewise, the capsule's five-sided cross-section can fail a half-turn symmetry test without becoming a failed object. Name the operation and the requirement before calling the result deficient.
 
-The 22-row gallery creates **physical exhaustion** - you walk and walk through geometric forms.
+We cannot inspect every source line or test every viewpoint before moving on. Choosing a path through this room is part of the research, and leaves something for another passage. The next hall approaches a limit with a finite sequence. We carry forward the habit of asking what each count includes.
 
-This exhaustion is **pedagogical** - it teaches:
-- **Abundance is not completeness** (many forms, same structure)
-- **Variation is not diversity** (all are triangular meshes)
-- **Mastery reveals limits** (knowing more shows what you don't know)
+## Implementation anchors
 
-The gallery says: "Look how much there is! And yet, it's not enough."
-
-## Architectural Elements: Primitives Applied
-
-The L-shapes, prisms, and building components show primitives **applied to human scale** - walls, rooms, construction.
-
-This reveals: **Architecture is applied primitives** - buildings are assemblies of rectilinear forms.
-
-But human habitation **exceeds** rectilinear logic:
-- Bodies curve
-- Movement flows
-- Light diffuses
-- Sound reverberates
-
-Primitive architecture creates **misfit** - spaces that don't conform to bodily experience.
-
-## The Octahedron: Dual of the Cube
-
-The octahedron is the **geometric dual** of the cube:
-- Cube: 8 vertices, 12 edges, 6 faces
-- Octahedron: 6 vertices, 12 edges, 8 faces
-
-This duality reveals: **Same relationships, different forms**. The octahedron is cube "turned inside out" topologically.
-
-But duality also means: **They're structurally equivalent**. Different appearances, same underlying math.
-
-This teaches: **Form is arbitrary** - many shapes express the same relationships.
-
-## Truncated and Modified Solids
-
-The truncatedtetrahedron (Archimedean solid) shows: Beyond the five Platonic solids lie **infinite variations**.
-
-You can truncate, stellate, chamfer, and modify regular polyhedra endlessly. The Platonic solids are **one point in infinite space** of possible forms.
-
-Their perfection is **local optimum**, not global truth.
-
-## Procedural Rocks: Breaking Regularity
-
-The rough, organic rocks demonstrate: **Irregularity requires computation**.
-
-To create natural-looking forms:
-- Start with regular base (sphere)
-- Apply noise/displacement
-- Break symmetry systematically
-
-**Irony**: Organic forms (which grow naturally) must be **procedurally generated** in computational space. Nature is simulated through systematic irregularity.
-
-## Ignorance as Productive Stance
-
-The map's title - "Primitives_Ignorance" - frames ignorance as **productive**:
-
-Not: "I don't know" (failure)
-But: "I know what I don't know" (critical awareness)
-
-**Epistemic humility**: Recognizing that primitives are **one system**, not the system. Other geometries exist:
-- Differential geometry (smooth manifolds)
-- Topology (continuous deformations)
-- Fractal geometry (self-similar at all scales)
-- Algebraic geometry (polynomial equations)
-
-Primitives are **useful** but **not complete**.
-
-## The Gallery's Meta-Function
-
-This map is **meta-commentary** on the entire primitives sequence. After teaching point, line, triangle, cube - the "fundamentals" - it reveals:
-
-**Fundamentals are contingent.**
-
-They're foundational for **this system** (computational graphics), not for **all systems** (mathematical geometry).
-
-The map teaches: **Don't mistake your tools for truth.**
-
-## Conclusion: Limits as Knowledge
-
-Primitives_Ignorance teaches that **knowing limits is knowledge**.
-
-After mastering primitives, you learn:
-- Spheres are fake (triangular approximations)
-- Smooth is illusion (faceted at sufficient zoom)
-- Organic requires irregularity (systematic noise)
-- Perfect forms are minority (Platonic solids vs. infinite variations)
-- Primitives are vocabulary (useful but incomplete)
-
-The long gallery **exhausts** the primitive system - you see so many forms that you recognize their **sameness** underneath.
-
-Plato's inscription inverts: Not "master geometry to enter," but "**enter to discover geometry's ignorance**."
-
-The question is: **What geometries are excluded** by privileging discrete, triangular, faceted primitives as "fundamental"?
-
-What forms are rendered **impossible** or **illegitimate** because they don't fit the primitive framework?
-
-Ignorance is productive when it reveals: **The system knows less than it claims.**
-
----
-
-## Chirimuuta and the Epistemic Limits of Abstraction
-
-M. Chirimuuta's work on neuroscience provides rigorous vocabulary for what this map stages. Her core claim: abstraction is necessary but dangerous.
-
-### Haptic Realism vs. the God's-Eye View
-
-Chirimuuta proposes **haptic realism**—knowledge as contact, not code:
-- Against the fantasy of "reading the source code of the universe"
-- Knowledge as interactive, not extractive
-- Understanding emerges from doing, probing, touching
-
-The primitive gallery embodies this: you don't learn geometry by viewing it from above—you **walk through** the abundance. The 22-row corridor forces **duration**, not instant comprehension.
-
-This rejects the God's-eye perspective. Primitives are learned **from within constraint**, not from transcendent overview.
-
-### Models Explain by Omission
-
-Chirimuuta warns that successful abstraction can crowd out alternatives. The triangular mesh is such a model:
-- It works (renders every game, film, simulation)
-- It became normative (what counts as "geometry" in graphics)
-- It excludes alternatives (differential geometry, topology, fractals)
-
-This map reveals: **Normative success narrows what appears intelligible**.
-
-The Platonic solids are "complete" by ruling out everything irregular. The sphere is "smooth" by hiding its facets. Success is achieved through strategic omission.
-
-### The Reflex Theory Parallel
-
-Chirimuuta's example of reflex theory applies directly:
-- Reflex theory was elegant, predictive, experimentally tractable
-- It reduced neural life to linear stimulus–response chains
-- What it left out: temporal plasticity, context sensitivity, whole-organism dynamics
-
-Similarly, primitive geometry:
-- Is elegant, calculable, GPU-optimized
-- Reduces form to triangular faces and vertex coordinates
-- Leaves out: continuous curves, organic growth, porosity, ambiguity
-
-**The cautionary lesson**: successful abstraction can become the norm that reshapes what counts as real.
-
-### Understanding as Enacted, Not Extracted
-
-The gallery creates **epistemic exhaustion**—you see so many forms that recognition shifts from individual forms to their sameness underneath.
-
-This is Chirimuuta's "understanding as situated success":
-- Not metaphysical disclosure ("this is how geometry really works")
-- But usable abstraction ("this is what primitives can do, within constraints")
-
-The map doesn't claim primitives reveal ultimate form. It stages primitives as **one system among possible systems**—contingent, historical, purpose-relative.
-
-### Finitude as Constitutive
-
-Drawing on Heidegger via Chirimuuta: finitude is not defect but condition.
-
-The wish to transcend triangular meshes, to reach "true" smoothness, assumes limitation is failure. But:
-- Orientation requires limits
-- Meaning arises within constraint, not beyond it
-- The faceted sphere is not failed circle—it's the form possible within this system
-
-**Resource allocation of time, energy, and attention is not incidental—it is cognition.** The primitives sequence teaches this by making you allocate attention across 22 rows of forms.
-
-### What Resists Abstraction Is Not Noise
-
-The organic rocks, procedural roughness, irregular forms—these are not failures of the system but **signals of what the system cannot capture**.
-
-Chirimuuta: "what resists abstraction is not noise, but signal."
-
-The map asks: What geometries are excluded? What forms are rendered impossible or illegitimate? What persists outside optimization?
-
-This is the **queer epistemic** position:
-- Not identity-based but formal
-- What exceeds representational closure
-- What forces models to remain provisional
-
----
-
-## Primitives as Haptic Epistemology
-
-This map practices **haptic epistemology**:
-- Learning by engagement, not representation alone
-- Exposing seams, staging failures
-- Giving form to what does not compress
-
-Plato's inscription inverts not once but twice:
-1. Original: "Master geometry to enter philosophy"
-2. This map: "Enter to discover geometry's ignorance"
-3. Chirimuuta's frame: "Enter to discover that ignorance is knowledge"
-
-**Abstraction is necessary but dangerous. Models explain by omission. Understanding is enacted, not extracted. Finitude is not bug, but condition.**
+`mesh_inspection.gd` reads generated triangle indices and applies the local area tolerance. `budget_of_smoothness.gd` exposes the two counts and independent overlay control. The three sphere scripts enable matched marked/plain pairs through room configuration. These encounters support specific comparisons; they do not establish a universal geometry budget or a numerical measure of queer possibility.

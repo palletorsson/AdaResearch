@@ -59,7 +59,11 @@ const PAD := 0.016            # panel edge padding
 ## Controls are placed at the same positions but with no backing mesh.
 static func create_panel(title: String, rows: Array, frameless: bool = false) -> Node3D:
 	var module := Node3D.new()
-	module.name = title.replace(" ", "_")
+	# Blank visible titles are intentional for controls embedded in an artifact's
+	# own cabinet, but Godot node names cannot be empty. Keep presentation and
+	# scene-tree identity independent at this shared boundary.
+	var module_name: String = title.strip_edges().replace(" ", "_")
+	module.name = module_name if not module_name.is_empty() else "RackPanel"
 
 	# ── 1. Measure ────────────────────────────────────────────────
 	var row_widths: Array[float] = []

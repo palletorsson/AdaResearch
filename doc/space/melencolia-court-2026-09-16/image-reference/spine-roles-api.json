@@ -1,0 +1,206 @@
+{
+  "map": "Primitives_Melencolia",
+  "cards": [
+    {
+      "token": "pyramid",
+      "row": 3,
+      "col": 3,
+      "count": 4,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "recognition-and-purpose",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "pyramidlong",
+      "row": 5,
+      "col": 5,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "recognition-and-purpose",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "cube_scene",
+      "row": 4,
+      "col": 5,
+      "count": 4,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "recognition-and-purpose",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "snap_pyramid_puzzle",
+      "row": 3,
+      "col": 9,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "recognition-and-purpose",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "durer_scene",
+      "row": 15,
+      "col": 5,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "recognition-and-purpose",
+      "ruled": true,
+      "from_book": true
+    },
+    {
+      "token": "prism_block",
+      "row": 6,
+      "col": 9,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "bigframe",
+      "row": 11,
+      "col": 2,
+      "count": 2,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "diamondtoruscollection",
+      "row": 14,
+      "col": 5,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "code_display",
+      "row": 16,
+      "col": 9,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "eleven_dots",
+      "row": 20,
+      "col": 9,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "dark_sphere",
+      "row": 9,
+      "col": 1,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "decoration",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    }
+  ],
+  "groups": [
+    {
+      "id": "recognition-and-purpose",
+      "title": "Four corners, a centre, then the tools",
+      "role": "primary",
+      "count": 5
+    }
+  ],
+  "notes": [
+    {
+      "id": "note-1",
+      "role": "primary",
+      "text": "the frame is a portal to the same map?"
+    },
+    {
+      "id": "note-2",
+      "role": "primary",
+      "text": "we need to add an aesthetic platform with pyramids here"
+    }
+  ],
+  "layout": {
+    "primary": [
+      {
+        "kind": "note",
+        "id": "note-1",
+        "text": "the frame is a portal to the same map?"
+      },
+      {
+        "kind": "group",
+        "id": "recognition-and-purpose"
+      },
+      {
+        "kind": "note",
+        "id": "note-2",
+        "text": "we need to add an aesthetic platform with pyramids here"
+      }
+    ],
+    "secondary": [
+      {
+        "kind": "card",
+        "token": "prism_block"
+      },
+      {
+        "kind": "card",
+        "token": "bigframe"
+      },
+      {
+        "kind": "card",
+        "token": "diamondtoruscollection"
+      },
+      {
+        "kind": "card",
+        "token": "code_display"
+      },
+      {
+        "kind": "card",
+        "token": "eleven_dots"
+      }
+    ],
+    "decoration": [
+      {
+        "kind": "card",
+        "token": "dark_sphere"
+      }
+    ]
+  },
+  "seq": "primitives",
+  "positions": {},
+  "ok": true
+}

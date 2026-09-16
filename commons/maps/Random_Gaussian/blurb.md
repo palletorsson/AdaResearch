@@ -1,3 +1,3 @@
-A histogram on a dark cabinet: thirty bars, a faint density curve over them, yellow beads falling from the top of the display and landing on the bars. Under it a plate of six lines: the law and its transform, landed and in flight against a cap of a thousand, the draws the display's edge folded and the counts in the two edge bins, bins with mean and deviation, the seed and what CLEAR does with it, the cadence. Two panels at hand height: UNIFORM, GAUSS, POISSON, EXPON and CLEAR; BATCH, PAUSE, NEW SEED and BINS.
+# The shape we counted
 
-What matters: one draw says nothing about the law; three hundred begin to. Behind every bar a pale frame stands at the count the law expects at that many draws, with the mass beyond the display folded into the edge bins, so the bounded picture cannot impersonate an unbounded law. The same seed feeds every law, CLEAR replays it, BINS re-bins the same draws, and the density curve keeps its own scale.
+A curve is waiting before the beads arrive. Count what actually lands, then change the bins while keeping every value. Even the printed centre may move. What did the picture preserve, and what did its edges absorb?

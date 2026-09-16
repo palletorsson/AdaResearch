@@ -15,18 +15,14 @@
    "interactive_point_origin_force": "primary",
    "spore_mushroom": "decoration",
    "fontana_puncture": "secondary",
-   "wireframe_threshold": "secondary",
    "street_talker": "secondary",
    "grab_sphere_point_snap": "secondary",
-   "the_invisible_point": "secondary",
+   "the_invisible_point": "primary",
    "origin": "primary",
    "3t": "secondary",
    "floating_sphere_field": "secondary",
    "frame_counter_display": "primary",
-   "drag_point_target": {
-    "role": "primary",
-    "group": "the-3d-coordinate-system"
-   },
+   "drag_point_target": "primary",
    "CoordinateSystem3M": {
     "role": "primary",
     "group": "the-3d-coordinate-system"
@@ -36,7 +32,9 @@
     "group": "the-3d-coordinate-system"
    },
    "you_are_here": "secondary",
-   "folding_past": "primary"
+   "folding_past": "primary",
+   "comment_box": "decoration",
+   "code_evolution_screen": "primary"
   },
   "Point_Lines": {
    "street_talker": "secondary",
@@ -102,10 +100,19 @@
    "hand_telemetry_diptych": "secondary"
   },
   "Point_Line_Grid": {
-   "grab_sphere_point_snap": "secondary",
+   "grab_sphere_point_snap": {
+    "role": "primary",
+    "group": "kept-and-discarded-position"
+   },
    "room_grammar": "secondary",
    "floating_sphere_field": "secondary",
-   "modulor_man_demo": "secondary"
+   "modulor_man_demo": "secondary",
+   "player_trace": {
+    "role": "primary",
+    "group": "kept-and-discarded-position"
+   },
+   "grid_lines": "primary",
+   "plan_vitrine": "primary"
   },
   "Point_Triangle_Context": {
    "dark_sphere": "secondary",
@@ -114,46 +121,118 @@
    "floating_sphere_field": "secondary",
    "science_screen": "secondary",
    "catalyst_prompter_box": "secondary",
-   "triangleprofiles": "primary",
-   "parasol_triangle": "secondary"
+   "triangleprofiles": "secondary",
+   "parasol_triangle": "secondary",
+   "triangle_line_puzzle": {
+    "role": "primary",
+    "group": "boundary-and-face"
+   },
+   "pink_triangle": "secondary",
+   "silhouette_gate": "secondary",
+   "right_triangle_lines": "secondary",
+   "draw_triangle_faces": {
+    "role": "primary",
+    "group": "boundary-and-face"
+   },
+   "interactivetriangle": "secondary",
+   "pythagorean_triangle_angles": "secondary",
+   "quad_line_puzzle": "secondary",
+   "quad": "secondary",
+   "triangle": "secondary",
+   "fetish_portal": "secondary",
+   "wireframe_threshold": "secondary",
+   "3t": "decoration"
   },
   "Point_Animatedcube": {
    "hangar_supply_pile": {
-    "role": "primary",
+    "role": "secondary",
     "group": "boxes-example"
    },
    "floating_sphere_field": "decoration",
    "first_shadow": "secondary",
    "wooden_pallet": {
-    "role": "primary",
+    "role": "secondary",
     "group": "boxes-example"
    },
    "crate": {
-    "role": "primary",
+    "role": "secondary",
     "group": "boxes-example"
    },
    "station_crates": {
-    "role": "primary",
+    "role": "secondary",
     "group": "boxes-example"
    },
    "glove_box": {
-    "role": "primary",
+    "role": "secondary",
     "group": "boxes-example"
    },
    "first_phosphor": {
-    "role": "primary",
+    "role": "secondary",
     "group": "boxes-example"
    },
-   "cube_lines": "primary"
+   "cube_lines": {
+    "role": "primary",
+    "group": "cube-construction"
+   },
+   "animatedcubebuilder": {
+    "role": "primary",
+    "group": "cube-construction"
+   },
+   "polyhedron_nets_cube": {
+    "role": "primary",
+    "group": "cube-construction"
+   },
+   "pyramid": "secondary"
   },
   "Primitives_Polythedra": {
    "becoming_catalyst": "secondary",
-   "cube_scene": "secondary",
+   "cube_scene": {
+    "role": "secondary",
+    "group": "count-and-change"
+   },
    "path_watchdog": "secondary",
    "path_game_controller": "secondary",
    "interactive_point_origin_force": "secondary",
    "tentacle_placer": "secondary",
-   "prism_block": "primary"
+   "prism_block": {
+    "role": "primary",
+    "group": "stop-and-flow"
+   },
+   "pyramid_edit": {
+    "role": "secondary",
+    "group": "count-and-change"
+   },
+   "grab_tetrahedron": {
+    "role": "primary",
+    "group": "enclosure-and-collision"
+   },
+   "grab_trihedron": {
+    "role": "primary",
+    "group": "enclosure-and-collision"
+   },
+   "dark_sphere": "decoration",
+   "diamonds": {
+    "role": "secondary",
+    "group": "solids-gather"
+   },
+   "rock_spawner": {
+    "role": "secondary",
+    "group": "solids-gather"
+   },
+   "rock_scanner": {
+    "role": "secondary",
+    "group": "solids-gather"
+   },
+   "concrete_barrier": {
+    "role": "primary",
+    "group": "stop-and-flow"
+   },
+   "street_sign": {
+    "role": "primary",
+    "group": "stop-and-flow"
+   },
+   "trafficcone": "decoration",
+   "if_not_exist_create": "secondary"
   },
   "Primitives_Ignorance": {
    "floating_sphere_field": "decoration",
@@ -176,7 +255,23 @@
    },
    "cube_scene": "secondary",
    "grab_octahedron": "secondary",
-   "snap_octahedron_puzzle": "secondary"
+   "snap_octahedron_puzzle": "secondary",
+   "platonic_grabbables": "secondary",
+   "budget_of_smoothness": {
+    "role": "primary",
+    "group": "spheres"
+   },
+   "primitive_pillar": "secondary",
+   "science_screen": "secondary",
+   "star_primitive": "secondary",
+   "hole_with_cones": "secondary",
+   "seven_words_choir": "secondary",
+   "truncatedtetrahedron": "secondary",
+   "cylinder_radials_rings": "secondary",
+   "capsule": "primary",
+   "diamonds": "secondary",
+   "roughrock": "secondary",
+   "righttriangle": "secondary"
   },
   "Trans_Introduction": {
    "scale_me": "decoration",
@@ -216,12 +311,8 @@
    "rotatescalecubes": "primary"
   },
   "Trans_Rotation": {
-   "science_screen": "secondary",
-   "dark_sphere": "decoration",
-   "catalyst_vent": "secondary",
-   "pick_up_cube": "secondary",
-   "pickup_gate": "secondary",
-   "catalyst_prompter_box": "secondary"
+   "rotation_wall_crossings": "primary",
+   "rotation_array_compare": "primary"
   },
   "Trans_RotationSpectacle": {
    "righttriangle": "secondary",
@@ -237,12 +328,44 @@
   },
   "Primitives_Portals": {
    "dark_sphere": "decoration",
-   "floating_sphere_field": "decoration"
+   "floating_sphere_field": "decoration",
+   "capsule": "secondary",
+   "combine_portals": {
+    "role": "primary",
+    "group": "finite-approaches"
+   },
+   "achilles_tortoise": {
+    "role": "primary",
+    "group": "finite-approaches"
+   }
   },
   "Primitives_Melencolia": {
    "dark_sphere": "decoration",
    "code_display": "secondary",
-   "snap_pyramid_puzzle": "secondary"
+   "snap_pyramid_puzzle": {
+    "role": "primary",
+    "group": "recognition-and-purpose"
+   },
+   "bigframe": "secondary",
+   "diamondtoruscollection": "secondary",
+   "pyramid": {
+    "role": "primary",
+    "group": "recognition-and-purpose"
+   },
+   "prism_block": "secondary",
+   "pyramidlong": {
+    "role": "primary",
+    "group": "recognition-and-purpose"
+   },
+   "durer_scene": {
+    "role": "primary",
+    "group": "recognition-and-purpose"
+   },
+   "cube_scene": {
+    "role": "primary",
+    "group": "recognition-and-purpose"
+   },
+   "eleven_dots": "secondary"
   },
   "Color_Grid_Pallet": {
    "dark_sphere": "decoration"
@@ -364,16 +487,34 @@
    "dark_sphere": "decoration"
   },
   "Random_Definition": {
-   "dark_sphere": "decoration"
+   "seed_replay_demo": "primary",
+   "prng_crank_machine": "secondary",
+   "slot_machine": "secondary",
+   "trng_vs_prng": "secondary",
+   "random_number_book_page_1955": "secondary",
+   "catalyst_pickup": "secondary",
+   "textile_comparison": "secondary"
   },
   "Random_Entropy": {
-   "dark_sphere": "decoration"
+   "shannon_entropy_meter": "primary",
+   "entropy_axiom": "primary",
+   "entropy_jar": "secondary",
+   "hardware_entropy_decay": "secondary",
+   "random_butterflies": "secondary",
+   "entropy_ruin": "primary"
   },
   "Random_Remove": {
-   "dark_sphere": "decoration"
+   "remove_random": "primary",
+   "random_removal_arena": "primary"
   },
   "Randomness_10_PRINT_Algorithm": {
-   "dark_sphere": "decoration"
+   "dark_sphere": "decoration",
+   "remove_random": "secondary",
+   "ten_print_maze_3d": "primary",
+   "pickup_cube_placer": "secondary",
+   "science_screen": "secondary",
+   "clipboard": "secondary",
+   "nature_system_demo": "secondary"
   },
   "Random_Cubes": {
    "dark_sphere": "decoration"
@@ -382,10 +523,18 @@
    "dark_sphere": "decoration"
   },
   "Random_Gaussian": {
-   "dark_sphere": "decoration"
+   "distribution_sampler": "primary",
+   "galton_board": "secondary",
+   "distribution_comparator": "secondary",
+   "GaussianPaintSplatter": "secondary"
   },
   "Random_Walk": {
-   "dark_sphere": "decoration"
+   "random_walk_terrarium": "primary",
+   "random_walk_128": "primary",
+   "random_walk_collection": "secondary",
+   "random_walk_leash": "secondary",
+   "pixel_cloud": "secondary",
+   "random_draw_dot": "primary"
   },
   "Random_Space_Geometry": {
    "dark_sphere": "decoration"
@@ -400,7 +549,10 @@
    "dark_sphere": "decoration"
   },
   "Random_Mushrooms": {
-   "dark_sphere": "decoration"
+   "mushrooms": "primary",
+   "bubbles_random": "secondary",
+   "silhouette_arrivals": "secondary",
+   "couture_comparison": "secondary"
   },
   "Noise_Columns": {
    "dark_sphere": "decoration"
@@ -684,6 +836,58 @@
    "example_2_5_fluid_resistance_vr": "secondary",
    "example_3_2_forces_with_arbitrary_angular_motion_vr": "secondary",
    "newton_cradle": "secondary"
+  },
+  "Symmetry_Seventeen": {
+   "wallpaper_cage": "primary",
+   "loom_alhambra_p6m": "secondary",
+   "wall_pattern_gallery": "secondary",
+   "pattern_loom": "secondary",
+   "loom_escher_mirror": "secondary",
+   "vr_tile_editor": "primary",
+   "mill_alhambra_p6m": "secondary",
+   "pattern_tile_puzzle": "secondary",
+   "mill_persian_p4": "secondary",
+   "mill_escher_p4g": "secondary",
+   "kaleidoscope": "secondary",
+   "pattern_atlas_gallery": "secondary",
+   "pattern_artifact": "secondary",
+   "tile_meander_floor": "secondary"
+  },
+  "Pattern_Foundry": {
+   "pattern_tile_4x4": "primary",
+   "pattern_tile_mirror": "primary",
+   "pattern_machine_c": "secondary",
+   "pattern_tile_herringbone": "secondary",
+   "pattern_maker_station": "secondary",
+   "pattern_machine_a": "primary",
+   "pattern_mill": "secondary",
+   "pattern_tile_plate": "secondary",
+   "pattern_studio_plate": "secondary",
+   "tiling_demo": "secondary",
+   "pattern_machine_d": "secondary",
+   "pattern_tile_brick": "secondary",
+   "super_drag_mirror": "secondary",
+   "drag_catwalk": "secondary"
+  },
+  "Random_Game": {
+   "r_c": "primary",
+   "random_removal_arena": "primary",
+   "random_doors": "primary",
+   "cube_projectile_spawner": "primary",
+   "waiting_profile": "secondary"
+  },
+  "Trans_Pre": {
+   "pick_up_cube": "primary",
+   "3t": "decoration",
+   "y_translation_cube": "secondary",
+   "rotation_oscillation_cube": "secondary",
+   "uniform_scale_marker": "secondary",
+   "health_cross": "secondary"
+  },
+  "Change_Choreography": {
+   "phase_rod_array": "primary",
+   "conveyor_backlog": "primary",
+   "if_not_exist_create": "decoration"
   }
  },
  "groups": {
@@ -698,6 +902,11 @@
    {
     "id": "boxes-example",
     "title": "Boxes Example",
+    "role": "secondary"
+   },
+   {
+    "id": "cube-construction",
+    "title": "Connections that survive a deformation",
     "role": "primary"
    }
   ],
@@ -716,7 +925,7 @@
   "Primitives_Ignorance": [
    {
     "id": "spheres",
-    "title": "spheres",
+    "title": "What the polygons cannot hold",
     "role": "primary"
    }
   ],
@@ -725,6 +934,58 @@
    {
     "id": "recording-contract",
     "title": "One gesture, four recording rules",
+    "role": "primary"
+   }
+  ],
+  "Point_Line_Grid": [
+   {
+    "id": "kept-and-discarded-position",
+    "title": "A place we can name again",
+    "role": "primary"
+   }
+  ],
+  "Trans_Rotation": [],
+  "Primitives_Polythedra": [
+   {
+    "id": "enclosure-and-collision",
+    "title": "What closes a surface, what blocks a body",
+    "role": "primary"
+   },
+   {
+    "id": "count-and-change",
+    "title": "Count a solid, change a corner",
+    "role": "secondary"
+   },
+   {
+    "id": "stop-and-flow",
+    "title": "Prism, barrier, slope and direction",
+    "role": "primary"
+   },
+   {
+    "id": "solids-gather",
+    "title": "Repetition, irregularity and sections",
+    "role": "secondary"
+   }
+  ],
+  "Point_Triangle_Context": [
+   {
+    "id": "boundary-and-face",
+    "title": "Close a boundary, then inspect its fill",
+    "role": "primary"
+   }
+  ],
+  "Primitives_Melencolia": [
+   {
+    "id": "recognition-and-purpose",
+    "title": "Four corners, a centre, then the tools",
+    "role": "primary"
+   }
+  ],
+  "Change_Choreography": [],
+  "Primitives_Portals": [
+   {
+    "id": "finite-approaches",
+    "title": "Finite displays of approaching a limit",
     "role": "primary"
    }
   ]
@@ -780,30 +1041,81 @@
     "frame_counter_display",
     "folding_past",
     "origin",
+    "the_invisible_point",
+    "code_evolution_screen",
     "interactive_point_origin_force",
-    "@the-3d-coordinate-system"
+    "@the-3d-coordinate-system",
+    "drag_point_target"
+   ],
+   "primary|the-3d-coordinate-system": [
+    "coordinate_readout",
+    "CoordinateSystem3M"
+   ],
+   "secondary": [
+    "street_talker",
+    "grab_sphere_point_snap",
+    "you_are_here",
+    "3t",
+    "fontana_puncture",
+    "floating_sphere_field"
+   ],
+   "decoration": [
+    "comment_box",
+    "spore_mushroom"
    ]
   },
   "Point_Animatedcube": {
    "primary": [
+    "@cube-construction"
+   ],
+   "primary|cube-construction": [
     "cube_lines",
-    "polyhedron_nets_cube",
     "animatedcubebuilder",
-    "@boxes-example"
+    "polyhedron_nets_cube"
+   ],
+   "secondary": [
+    "@boxes-example",
+    "first_shadow",
+    "pyramid"
+   ],
+   "secondary|boxes-example": [
+    "wooden_pallet",
+    "hangar_supply_pile",
+    "crate",
+    "station_crates",
+    "glove_box",
+    "first_phosphor"
+   ],
+   "decoration": [
+    "floating_sphere_field"
    ]
   },
   "Point_Triangle_Context": {
    "primary": [
+    "@boundary-and-face"
+   ],
+   "primary|boundary-and-face": [
     "triangle_line_puzzle",
-    "interactivetriangle",
-    "draw_triangle_faces",
-    "triangle",
+    "draw_triangle_faces"
+   ],
+   "secondary": [
     "pythagorean_triangle_angles",
     "right_triangle_lines",
     "silhouette_gate",
     "pink_triangle",
     "quad_line_puzzle",
-    "quad"
+    "quad",
+    "folded_strip",
+    "triangleprofiles",
+    "parasol_triangle",
+    "science_screen",
+    "fetish_portal",
+    "interactivetriangle",
+    "triangle",
+    "wireframe_threshold"
+   ],
+   "decoration": [
+    "3t"
    ]
   },
   "Trans_Introduction": {
@@ -825,39 +1137,98 @@
   },
   "Primitives_Ignorance": {
    "primary": [
+    "@spheres",
+    "capsule"
+   ],
+   "primary|spheres": [
+    "sphere",
+    "sphere_high",
+    "sphere_mid",
+    "sphere_low",
+    "budget_of_smoothness"
+   ],
+   "secondary": [
     "platonic_grabbables",
     "cube_scene",
-    "@spheres",
     "star_primitive",
     "hole_with_cones",
     "truncatedtetrahedron",
-    "capsule",
     "grab_octahedron",
     "snap_octahedron_puzzle",
     "roughrock",
-    "righttriangle"
+    "righttriangle",
+    "primitive_pillar",
+    "science_screen",
+    "seven_words_choir",
+    "cylinder_radials_rings",
+    "diamonds"
+   ],
+   "decoration": [
+    "dark_sphere",
+    "floating_sphere_field"
    ]
   },
   "Primitives_Melencolia": {
    "primary": [
     "#note-1",
+    "@recognition-and-purpose",
+    "#note-2"
+   ],
+   "primary|recognition-and-purpose": [
+    "pyramid",
+    "pyramidlong",
+    "cube_scene",
+    "snap_pyramid_puzzle",
+    "durer_scene"
+   ],
+   "secondary": [
+    "prism_block",
     "bigframe",
     "diamondtoruscollection",
-    "pyramid",
-    "#note-2",
-    "prism_block",
-    "pyramidlong",
-    "durer_scene"
+    "code_display",
+    "eleven_dots"
+   ],
+   "decoration": [
+    "dark_sphere"
    ]
   },
   "Primitives_Polythedra": {
    "primary": [
     "#note-1",
-    "pyramid_edit",
-    "grab_tetrahedron",
+    "@enclosure-and-collision",
+    "#note-2",
+    "@stop-and-flow"
+   ],
+   "primary|enclosure-and-collision": [
     "grab_trihedron",
+    "grab_tetrahedron"
+   ],
+   "secondary": [
+    "@count-and-change",
+    "@solids-gather",
+    "path_watchdog",
+    "path_game_controller",
+    "interactive_point_origin_force",
+    "becoming_catalyst",
+    "tentacle_placer",
+    "if_not_exist_create"
+   ],
+   "decoration": [
+    "dark_sphere"
+   ],
+   "primary|stop-and-flow": [
     "prism_block",
-    "#note-2"
+    "concrete_barrier",
+    "street_sign"
+   ],
+   "secondary|count-and-change": [
+    "pyramid_edit",
+    "cube_scene"
+   ],
+   "secondary|solids-gather": [
+    "diamonds",
+    "rock_spawner",
+    "rock_scanner"
    ]
   },
   "Vectors_Act1_WhatAVectorIs": {
@@ -1009,6 +1380,208 @@
     "automatic_writing_desk"
    ],
    "decoration": []
+  },
+  "Random_Entropy": {
+   "primary": [
+    "shannon_entropy_meter",
+    "entropy_axiom",
+    "entropy_ruin"
+   ],
+   "secondary": [
+    "entropy_jar",
+    "hardware_entropy_decay",
+    "random_butterflies"
+   ],
+   "decoration": []
+  },
+  "Random_Remove": {
+   "primary": [
+    "remove_random",
+    "random_removal_arena"
+   ],
+   "secondary": [],
+   "decoration": []
+  },
+  "Symmetry_Seventeen": {
+   "primary": [
+    "vr_tile_editor",
+    "wallpaper_cage"
+   ],
+   "secondary": [
+    "loom_alhambra_p6m",
+    "wall_pattern_gallery",
+    "pattern_loom",
+    "loom_escher_mirror",
+    "mill_alhambra_p6m",
+    "pattern_tile_puzzle",
+    "mill_persian_p4",
+    "mill_escher_p4g",
+    "kaleidoscope",
+    "pattern_atlas_gallery",
+    "pattern_artifact",
+    "tile_meander_floor"
+   ],
+   "decoration": []
+  },
+  "Random_Definition": {
+   "primary": [
+    "seed_replay_demo"
+   ],
+   "secondary": [
+    "prng_crank_machine",
+    "slot_machine",
+    "trng_vs_prng",
+    "random_number_book_page_1955",
+    "catalyst_pickup",
+    "textile_comparison"
+   ],
+   "decoration": []
+  },
+  "Randomness_10_PRINT_Algorithm": {
+   "primary": [
+    "ten_print_maze_3d"
+   ],
+   "secondary": [
+    "remove_random",
+    "pickup_cube_placer",
+    "science_screen",
+    "clipboard",
+    "nature_system_demo"
+   ],
+   "decoration": [
+    "dark_sphere"
+   ]
+  },
+  "Pattern_Foundry": {
+   "primary": [
+    "pattern_tile_4x4",
+    "pattern_tile_mirror",
+    "pattern_machine_a"
+   ],
+   "secondary": [
+    "pattern_machine_c",
+    "pattern_tile_herringbone",
+    "pattern_maker_station",
+    "pattern_mill",
+    "pattern_tile_plate",
+    "pattern_studio_plate",
+    "tiling_demo",
+    "pattern_machine_d",
+    "pattern_tile_brick",
+    "super_drag_mirror",
+    "drag_catwalk"
+   ],
+   "decoration": []
+  },
+  "Point_Line_Grid": {
+   "primary": [
+    "@kept-and-discarded-position",
+    "grid_lines",
+    "plan_vitrine"
+   ],
+   "primary|kept-and-discarded-position": [
+    "grab_sphere_point_snap",
+    "player_trace"
+   ],
+   "secondary": [
+    "room_grammar",
+    "floating_sphere_field",
+    "modulor_man_demo"
+   ],
+   "decoration": []
+  },
+  "Trans_Rotation": {
+   "primary": [
+    "rotation_wall_crossings",
+    "rotation_array_compare"
+   ]
+  },
+  "Random_Game": {
+   "primary": [
+    "r_c",
+    "random_removal_arena",
+    "random_doors",
+    "cube_projectile_spawner"
+   ],
+   "secondary": [
+    "waiting_profile"
+   ],
+   "decoration": []
+  },
+  "Random_Mushrooms": {
+   "primary": [
+    "mushrooms"
+   ],
+   "secondary": [
+    "bubbles_random",
+    "silhouette_arrivals",
+    "couture_comparison"
+   ],
+   "decoration": []
+  },
+  "Random_Gaussian": {
+   "primary": [
+    "distribution_sampler"
+   ],
+   "secondary": [
+    "galton_board",
+    "distribution_comparator",
+    "GaussianPaintSplatter"
+   ],
+   "decoration": []
+  },
+  "Random_Walk": {
+   "primary": [
+    "random_walk_terrarium",
+    "random_walk_128",
+    "random_draw_dot"
+   ],
+   "secondary": [
+    "random_walk_collection",
+    "random_walk_leash",
+    "pixel_cloud"
+   ],
+   "decoration": []
+  },
+  "Trans_Pre": {
+   "primary": [
+    "pick_up_cube"
+   ],
+   "secondary": [
+    "y_translation_cube",
+    "rotation_oscillation_cube",
+    "uniform_scale_marker",
+    "health_cross"
+   ],
+   "decoration": [
+    "3t"
+   ]
+  },
+  "Change_Choreography": {
+   "primary": [
+    "phase_rod_array",
+    "conveyor_backlog"
+   ],
+   "secondary": [],
+   "decoration": [
+    "if_not_exist_create"
+   ]
+  },
+  "Primitives_Portals": {
+   "primary": [
+    "@finite-approaches"
+   ],
+   "primary|finite-approaches": [
+    "combine_portals",
+    "achilles_tortoise"
+   ],
+   "secondary": [
+    "capsule"
+   ],
+   "decoration": [
+    "dark_sphere",
+    "floating_sphere_field"
+   ]
   }
  },
  "notes": {

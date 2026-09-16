@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "checks": {
+    "previous_final_archive": true,
+    "commons/maps/Primitives_Polythedra/map_data.json_unchanged": true,
+    "commons/data/artifact_roles.json_unchanged": true,
+    "commons/data/spine_artifact_order.json_unchanged": true,
+    "same_five_primary_tags": true,
+    "four_footnotes_resolve": true,
+    "hull_note_preserved": true,
+    "tutorial_change_only_one_added_section": true,
+    "live_text_matches": true,
+    "prior_component_sources_unchanged": true
+  },
+  "main_words_before": 1023,
+  "main_words_after": 788,
+  "words_with_notes": 997,
+  "runtime": "No new run: this pass changes prose only; inspected runtime source hashes match the previous 37-check run."
+}

@@ -1,0 +1,45 @@
+[
+  {
+    "map": "Random_Game",
+    "size": {
+      "width": 19,
+      "depth": 52,
+      "max_height": 9
+    },
+    "hero": "r_c",
+    "placements": [
+      {
+        "x": 9,
+        "z": 6,
+        "token": "r_c:0:3#stand:chasm#cue:advance#controls:compact#control_front:-2.6#control_facing:-z#control_height:1.38#control_floor:0.28#control_fixed:true",
+        "lookup": "r_c"
+      },
+      {
+        "x": 9,
+        "z": 17,
+        "token": "random_removal_arena:0:3#columns:9#rows:9#glass_width:11#glass_depth:11#glass_height:4.5#glass_title:THE SET UNDERFOOT#glass_grid:false#controls:compact#control_front:-6.0#control_facing:-z",
+        "lookup": "random_removal_arena"
+      },
+      {
+        "x": 9,
+        "z": 29,
+        "token": "random_doors#controls:compact#control_front:-4.0#control_facing:-z",
+        "lookup": "random_doors"
+      },
+      {
+        "x": 9,
+        "z": 37,
+        "token": "cube_projectile_spawner#mode:field#field_size:8x8#field_height:8#fall_min:1.6#fall_max:2.6#drift:0.25#jitter:0.25#jitter_interval:0.45#vertical_variation:0.2#spawn_interval:0.5#max_projectiles:24#stand:field#controls:compact#control_front:-5.0#control_facing:-z",
+        "lookup": "cube_projectile_spawner"
+      },
+      {
+        "x": 9,
+        "z": 47,
+        "lookup": "waiting_profile",
+        "token": "waiting_profile"
+      }
+    ],
+    "count": 5,
+    "purpose": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16."
+  }
+]

@@ -1,70 +1,106 @@
 # Told, or finding out
 
-How can you plan when the next state is known but its timing is not?
+In the mushroom bed, a draw helped decide which body appeared. Here it helps decide whether a body will still be there when yours arrives.
 
 <!-- @r_c -->
 
-The floor is missing in the west corner of this hall. Five metres by three of it, cut square, with the museum's own stars showing through before the artifact lines the sides and lays a bed a metre down. Three cyan blocks stand in the hole, level with the floor, in a row from the near lip to the far one. On the far lip a lit prism sits on a plinth with a number cut into its face. That is the whole room: a gap, three stones, and a reason to be on the other side.
+Three cyan stones cross a rectangular pit. Their tops stand a little above the museum floor. Beyond them, a prism carries a five-digit number. Watch the middle stone before stepping onto it. When it leaves, what would you be standing on?
 
-Do not step on anything yet. Stand at the near lip and read the stone on your right, which is cut and says the same thing whatever else changes:
+The stone turns orange and sinks. The bed below remains. Then green, a rise, cyan again. Watch a second cycle. The order may already feel familiar while the pauses refuse to settle into a beat.
 
-    I   IT STANDS
-    II  IT LEAVES
-    III IT IS GONE
-    IV  IT RETURNS
-
-Watch one block for two full turns of that. It waits at floor level in cyan. It goes orange and sinks. It is gone, dimmed, a hole with a bed under it. It comes back green and waits again. The order held both times, and it will hold every time, because the order is the machine and not the dice. Only the waiting is drawn:
+The stele at the lip names four states: IT STANDS, IT LEAVES, IT IS GONE, IT RETURNS. The procedure follows that order. A draw supplies the standing wait:
 
 ```gdscript
-		var visible_wait: float = _next_random_wait()
-		_note_step("stands", visible_wait)
-		await get_tree().create_timer(visible_wait).timeout
-
-		_set_state(CycleState.GOING_OUT)
+var visible_wait: float = _next_random_wait()
+_note_step("stands", visible_wait)
+await get_tree().create_timer(visible_wait).timeout
 ```
 
-`_next_random_wait` is the one place a number is invented, and all it invents is a duration:
+Inside the function, the interval becomes a number:
 
 ```gdscript
-	return _rng.randf_range(min_wait, max_wait)
+return _rng.randf_range(min_wait, max_wait)
 ```
 
-So you can say what will happen next and you cannot say when. That is not half a prediction. It is the whole of one kind and none of another, and the tablet at the lip's west separates them for you, a line per stone: `1 STANDS drawn 3.0 s left 2.6 |||||||.` The drawn figure is what this stone's dice gave it this turn. The figure beside it is what is left of that same gift. Watch the bar empty and notice what you have not been told: which figure the next turn will be given.
+For this crossing, the standing wait lies between 2.4 and 4.6 seconds; the hidden wait between 1.1 and 2.2. Sinking, rising and the short collider delays take additional time. Knowing those bands does not name the next draw.
 
-The bar can count because the draw is written down once, the instant it is made, and never asked again:
+Look at the tablet beside the pit. Each stone has a line: its present state, the last drawn wait and the time left of that wait. Now you can know something that watching cyan alone withheld. The current pause has already been chosen. The next one has not yet been drawn.
 
 ```gdscript
-func _note_step(kind: String, wait_seconds: float) -> void:
-	_step_kind = kind
-	_step_wait = wait_seconds
-	_step_until_ms = Time.get_ticks_msec() + int(round(wait_seconds * 1000.0))
+_step_wait = wait_seconds
+_step_until_ms = Time.get_ticks_msec() + int(round(wait_seconds * 1000.0))
 ```
 
-A countdown redrawn every frame is not a countdown. It is a new throw of the dice wearing a clock's face, and it would tell you nothing while looking exactly like knowledge.
+The counter reads the stored deadline. It does not keep asking for another duration. During LEAVES and RETURNS, the tablet retains the preceding draw at zero remaining time: it is an account of a wait, not a new measurement of movement.
 
-Now cross. Step from the lip onto the first stone while it stands, and take the next when you are ready rather than when you are moving — the gaps are a step and the stones are patient, standing about twice as long as they are gone. If one leaves under you the fall is a metre onto the bed, and the way out is the ramp up the pit's west side. Nothing is lost in the hole but the walk back, which is the only condition under which the timing of a floor is worth learning.
+Try the first stone when it stands. Its top is 22 centimetres above the hall floor, approached by a ramp and short landing; the spaces between stones are twelve centimetres. A stone can leave while you are on it. The pit has a bed 1.02 metres below the hall floor and a ramp up its west side. The corridor east of the pit also reaches the far lip. Crossing is one way to investigate this room; going around is another.
 
-The middle stone wears a gold ring on its crown for the second or so before it goes. That ring is not the machine; it is an interface, and it reads the deadline the machine wrote down. Press CUE at the lip and the ring stops being offered. What remains is the block's own small lamp, which lights as the block moves — the shipped signal, and a true one:
+Watch the gold rings. They light during the final 1.2 seconds of a standing wait. Press CUE and try observing without them. Each stone still has a small beacon that lights during its movement. The tablet still shows its deadline. This experiment changes the notice carried by the stones; it does not remove every way to anticipate them.
+
+Neither cue draws another wait. Yet the same next event becomes available to you differently: a ring before movement, a beacon during it, a number on a surface you must turn toward. Before describing a missed step as poor timing, ask where its warning was readable.
+
+There is another separation under your feet:
 
 ```gdscript
-		CycleState.GOING_OUT:
-			_set_cube_visual(outgoing_color, 1.0)
-			_set_indicator_visual(outgoing_color, true)
+_set_collision_enabled(false)
+_set_state(CycleState.HIDDEN)
 ```
 
-Cross again without the ring, then decide which of the two you were actually using. The lamp reports a change that has begun. The ring announces one that has not. Neither changes the state order, and neither changes a single drawn wait; what changes is how early a body can commit to a step. Before you call anyone slow or careless on a floor like this, ask which of those two the floor was offering them.
+The collider remains enabled through the sink and its short delay. It is disabled while the stone is hidden, then enabled before the rise. Appearance, movement and support have separate instructions. A dim shape below you is not necessarily something the collision system will hold you on. The bed supplies the recovery surface.
 
-One more thing the room keeps separate. A block's support is its own, switched on and off inside the same loop that moves it:
+REPLAY returns all three stones to their standing positions and restarts their seeded waits. Try it after a stone has begun moving. A repeated seed would mean little if an earlier motion kept pulling that stone down. Restarting must also cancel the old motion and restore support.
+
+The prism names this local construction. NEW SEED chooses a different current number; an older number may eventually return. REPLAY does not rewind the other artifacts or the visitor. You bring knowledge from the previous attempt into a crossing whose first waits have been restored.
+
+<!-- @random_removal_arena -->
+
+The next glass enclosure carries the removal rule under your feet. Here there are eighty-one cells. Entering selects one; walking farther asks for more. Red gives a short warning, then both the visible cell and its support disappear. The basin below burns. The dark apron remains a route around the changing set, and the console outside the entrance can restore it. This is a deliberate return to Random Remove: the rule you inspected there now participates in a crossing.
+
+<!-- @random_doors -->
+
+Beyond it, three doors face you. Stay at the console behind the amber line and choose one. A door lifts. It might remain a passage. It might announce fire, wait one second, then send a short jet toward the line. Watch before moving forward.
+
+One door is assigned passage at the beginning of the round:
 
 ```gdscript
-		_set_collision_enabled(false)
-		_set_state(CycleState.HIDDEN)
+rng.seed = run_seed
+safe_door = rng.randi_range(0, 2)
 ```
 
-Three facts, three mechanisms: the state, the wait, the collider. The hall's floor is a fourth and belongs to nobody here — the museum lays none in this pit, which is why the bed you land on is the artifact's own, and why a room that only *looked* like a crossing was not one until something under it was checked.
+The other two are assigned fire. Pressing a button reveals an existing choice; it does not redraw the outcome. A jet reaches 2.7 metres and then stops. That door closes again. The passage stays open until reset. There is always one passage in this construction, because we wrote that guarantee before drawing its index.
 
-REPLAY at the lip deals the same rhythm again, every stone's dice re-seeded from the five-digit number cut into the idol, so you can practise a crossing you already lost. NEW SEED names another. That is what you carry out of a trap room: not the prism, but the ability to run it again.
+REPLAY restores the same assignment. NEW SEED makes another seeded round, which may choose the same passage. After looking once, your next attempt is different even when the doors are not. Memory belongs to the player as well as to the machine.
+
+<!-- @cube_projectile_spawner -->
+
+After the doors, cubes arrive from above. Watch from the edge before entering their space. Does the interval between arrivals vary in the way the stones' pauses did?
+
+At the housed panel, press RUN / STOP. Wait. Some cubes continue moving. Press CLEAR and compare what disappears. Stopping the source did not recall what it had already released. Clearing the flights leaves the source's running state as it was, so stop it first when you want an empty field that stays empty.
+
+Here the timer attempts a launch every half-second. It skips the attempt if 24 projectiles are already active. The irregularity begins elsewhere:
+
+```gdscript
+var spawn_pos = field_origin + Vector3(
+    _rng.randf_range(-half_w, half_w),
+    field_spawn_height,
+    _rng.randf_range(-half_d, half_d)
+)
+```
+
+Two draws choose x and z in an eight-metre square. Height is fixed at eight metres above the field origin. The floor lines mark that region of initial centres. They are neither walls nor a forecast of every place a cube may reach.
+
+Another draw gives an initial downward speed between 1.6 and 2.6 metres per second. Small sideways velocities and later changes let the bodies drift. The projectile carries its own generator. A seed that repeats its launch position does not, by itself, repeat those later changes or its collisions.
+
+The crossing drew a duration. This machine draws positions and velocities on a regular launch clock. Both are called random, but the word cannot tell you where to look. Keep track of which encounter supplied your evidence: a sampled wait at the crossing, or a sampled launch in the field.
+
+At the last podium, wait for a small wooden cube. It drops from three metres above the floor onto a two-metre-square surface. Another arrives at the other position. The positions alternate; after the first one-second wait, each new delay is drawn between 0.3 and 1.3 seconds. The places are dependable while the rhythm is not.
+
+Pick one up. Arrivals wait while either cube is held. Release it and the waiting continues. There are at most two cubes: an arrival replaces the cube in its alternating slot. RUN / STOP holds the arrival clock, leaving released cubes to fall. REPLAY restores the arrival sequence, not the history of your hand or an identical physical landing.
+
+Beside the podium, five cutout profiles recede into the room. Their uneven horizons sit around eye height, 1.7 metres. The nearest is dark; those behind grow lighter. Move sideways and watch one contour uncover another. A landscape appears between flat panels.
+
+Each panel joins seventeen heights. The two ends are fixed; the interior samples vary, with smaller permitted deviations near the edges. PROFILE changes the contours. These heights are a separate experiment, not a graph of the cube delays. Here you can look back and forth along the sequence. At the podium you had to wait through it. What did seeing the whole shape let you anticipate?
 
 <!-- @ -->
 
-Noise Types follows. Carry the distinction this room drew with a hole in the floor: a procedure's structure and its choices are different things, and irregular timing no more means an unspecified process than an irregular surface means a shapeless one.
+The room leaves a more specific question than whether a world is predictable. Which decisions are already made, which are still to come, and what tells us the difference? In Noise Types we will carry that question between neighbouring places. A choice can be uncertain and still have a relation to the choice beside it.

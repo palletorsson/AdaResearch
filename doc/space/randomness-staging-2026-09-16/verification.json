@@ -1,0 +1,468 @@
+{
+  "checks": 115,
+  "failed": [],
+  "details": [
+    {
+      "passed": true,
+      "check": "Random_Definition: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: final.md anchors equal primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: role inventory equals placed inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: desktop and shipped plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: museum plan contains exact inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: museum instantiation and floor probe pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: all curated scenes instantiate"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: no runtime script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: no automatic walk-route repair required"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: prng_crank_machine visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: slot_machine visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: seed_replay_demo visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: catalyst_pickup visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: trng_vs_prng visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: random_number_book_page_1955 visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: live book serves revised prose"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: live room inventory agrees"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: final.md anchors equal primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: role inventory equals placed inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: desktop and shipped plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: museum plan contains exact inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: museum instantiation and floor probe pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: all curated scenes instantiate"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: no runtime script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: no automatic walk-route repair required"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: entropy_jar visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: shannon_entropy_meter visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: hardware_entropy_decay visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: entropy_axiom visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: live book serves revised prose"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: live room inventory agrees"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: final.md anchors equal primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: role inventory equals placed inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: desktop and shipped plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: museum plan contains exact inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: museum instantiation and floor probe pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: all curated scenes instantiate"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: no runtime script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: no automatic walk-route repair required"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: remove_random visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: live book serves revised prose"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: live room inventory agrees"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: final.md anchors equal primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: role inventory equals placed inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: desktop and shipped plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: museum plan contains exact inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: museum instantiation and floor probe pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: all curated scenes instantiate"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: no runtime script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: no automatic walk-route repair required"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: random_walk_128 visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: pixel_cloud visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: random_walk_terrarium visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: random_walk_collection visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: random_walk_leash visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: live book serves revised prose"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: live room inventory agrees"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: final.md anchors equal primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: role inventory equals placed inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: desktop and shipped plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: museum plan contains exact inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: museum instantiation and floor probe pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: all curated scenes instantiate"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: no runtime script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: no automatic walk-route repair required"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: distribution_sampler visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: GaussianPaintSplatter visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: galton_board visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: distribution_comparator visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: live book serves revised prose"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: live room inventory agrees"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: final.md anchors equal primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: role inventory equals placed inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: desktop and shipped plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: museum plan contains exact inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: museum instantiation and floor probe pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: all curated scenes instantiate"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: no runtime script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: no automatic walk-route repair required"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: mushrooms visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: bubbles_random visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: live book serves revised prose"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: live room inventory agrees"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: final.md anchors equal primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: role inventory equals placed inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: desktop and shipped plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: museum plan contains exact inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: museum instantiation and floor probe pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: all curated scenes instantiate"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: no runtime script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: no automatic walk-route repair required"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: r_c visual footprint inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: live book serves revised prose"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: live room inventory agrees"
+    },
+    {
+      "passed": true,
+      "check": "No artifact lookup repeats across the seven active halls"
+    }
+  ],
+  "placements": 25,
+  "headset_verified": false
+}

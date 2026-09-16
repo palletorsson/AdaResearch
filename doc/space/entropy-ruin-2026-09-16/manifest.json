@@ -1,0 +1,50 @@
+[
+  {
+    "map": "Random_Entropy",
+    "hero": "shannon_entropy_meter",
+    "size": {
+      "width": 17,
+      "depth": 31,
+      "max_height": 6
+    },
+    "placements": [
+      {
+        "x": 3,
+        "z": 5,
+        "lookup": "entropy_jar",
+        "token": "entropy_jar:180"
+      },
+      {
+        "x": 8,
+        "z": 5,
+        "lookup": "shannon_entropy_meter",
+        "token": "shannon_entropy_meter:180#stand:ledger#disclosure:ledger#controls:compact#control_front:1.7"
+      },
+      {
+        "x": 13,
+        "z": 7,
+        "lookup": "random_butterflies",
+        "token": "random_butterflies:180"
+      },
+      {
+        "x": 3,
+        "z": 9,
+        "lookup": "hardware_entropy_decay",
+        "token": "hardware_entropy_decay:180:0.45:0.6"
+      },
+      {
+        "x": 8,
+        "z": 15,
+        "lookup": "entropy_axiom",
+        "token": "entropy_axiom#square:true#glass_width:10#glass_depth:10#glass_height:4.5#glass_title:ORDER / DISPLACEMENT"
+      },
+      {
+        "x": 8,
+        "z": 26,
+        "lookup": "entropy_ruin",
+        "token": "entropy_ruin#controls:compact#control_front:-2.0#control_facing:-z"
+      }
+    ],
+    "count": 6
+  }
+]

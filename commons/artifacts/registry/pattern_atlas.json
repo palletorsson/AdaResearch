@@ -22,7 +22,7 @@
 			"name": "Pattern Atlas Gallery (the makers, named)",
 			"category": "symmetry",
 			"complexity": "intermediate",
-			"description": "Twelve world pattern traditions reproduced AS SHADERS (the rule, not an image), each on an upright plate with its makers named beneath: Kente strip-weavers of Ghana, ikat resist-dyers, bingata stencil-dyers of Ryukyu, kanga printers of the Swahili coast, indigo shibori dyers, Tibetan tiger-rug carpet-knotters, Iznik fritware potters, al-Andalus zellige tile-cutters, the Pompeii mosaic workshops, Anni Albers, Sonia Delaunay, Vasarely, Bridget Riley. The commons ledger's return performed in-game, plus Investigation II: Wang tiles (Hao Wang/Berger \u2014 tiling is undecidable), Javanese batik makers (the kawung and the crackle), Kuba/Shoowa weavers of DR Congo, sashiko/hitomezashi stitchers of northern Japan, Sami band weavers of Sapmi, adinkra carvers of Ghana.",
+			"description": "Twelve world pattern traditions reproduced AS SHADERS (the rule, not an image), each on an upright plate with its makers named beneath: Kente strip-weavers of Ghana, ikat resist-dyers, bingata stencil-dyers of Ryukyu, kanga printers of the Swahili coast, indigo shibori dyers, Tibetan tiger-rug carpet-knotters, Iznik fritware potters, al-Andalus zellige tile-cutters, the Pompeii mosaic workshops, Anni Albers, Sonia Delaunay, Vasarely, Bridget Riley. The commons ledger's return performed in-game, plus Investigation II: Wang tiles (Hao Wang/Berger — tiling is undecidable), Javanese batik makers (the kawung and the crackle), Kuba/Shoowa weavers of DR Congo, sashiko/hitomezashi stitchers of northern Japan, Sami band weavers of Sapmi, adinkra carvers of Ghana.",
 			"measurements": {
 				"aabb_size": [
 					10.32,
@@ -45,7 +45,9 @@
 				11,
 				1,
 				5
-			]
+			],
+			"map_ready": true,
+			"include_in_map_data": true
 		},
 		"mamma_monster_gallery": {
 			"lookup_name": "mamma_monster_gallery",
@@ -54,7 +56,7 @@
 			"name": "Mamma Monster (the origin gallery)",
 			"category": "symmetry",
 			"complexity": "intermediate",
-			"description": "Kristina Torsson's pattern vocabulary as living shaders \u2014 varma backen, Fjader, Bonan, the Mah-Jong stripe (1966, with Helena Henschen and Veronika Nygren), Rutan Oscillerar (the Vamlingbo room's oscillating check), and Moders Drom (Mothers Dream 2023, the img2img oscillation breathing on TIME). Ada Research begins in a landscape of my mother's patterns; this room says so, with her name on it.",
+			"description": "Kristina Torsson's pattern vocabulary as living shaders — varma backen, Fjader, Bonan, the Mah-Jong stripe (1966, with Helena Henschen and Veronika Nygren), Rutan Oscillerar (the Vamlingbo room's oscillating check), and Moders Drom (Mothers Dream 2023, the img2img oscillation breathing on TIME). Ada Research begins in a landscape of my mother's patterns; this room says so, with her name on it.",
 			"measurements": {
 				"aabb_size": [
 					9.87,

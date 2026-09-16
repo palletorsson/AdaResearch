@@ -1,193 +1,43 @@
-# Point Animatedcube - Critical Reflection
+# What returns when we begin again?
 
-## Geometry as Temporal Process
+The cube may already be assembled when we arrive. There is nothing mysterious about the timing: its script began a short delay after the scene entered the tree. Our arrival was not the beginning of its process. The finished form conceals that small difference until we give ourselves a way to replay it.
 
-The animated cube construction **temporalizes** what is usually instantaneous. When you call `BoxMesh.new()`, a cube appears immediately - no process visible.
+Pressing PAUSE here creates a local exception. This assembly stops advancing; the room and the other artifacts continue. It gives attention a place to stay without pretending that the surrounding computation can be gathered into the same present. We choose something to examine and leave other processes running.
 
-But the animation reveals: **The cube is not atomic. It's assembled.**
+## A construction can also be a presentation
 
-This is pedagogically and politically significant:
-- **Reveals construction** (nothing is "just there")
-- **Shows dependencies** (faces require edges, edges require vertices)
-- **Demonstrates sequence** (order matters)
-- **Makes labor visible** (geometry requires work)
+The builder shows corners, then edges, then surfaces. That order makes a useful teaching argument, but it is not a discovery that every cube must be made through this visible sequence. The script prepares hidden geometry before revealing it. Its triangle list already names the connections that will appear later.
 
-The cube doesn't exist eternally - it **becomes** through procedural assembly.
+There are also configured alternatives: surfaces can appear first, or everything can appear together. The relation between a triangle and its vertex positions remains; the order in which we encounter those relations can change. The lesson needs both facts. An animation can clarify construction while also staging a particular account of it.
 
-## From Surface to Solid: The Threshold of Volume
+The folding net offers another account. Squares keep their shape while hinge angles change. In the builder, moving a corner can change the shape of the triangles themselves. Calling both animation is accurate but insufficient for deciding what each allows us to learn.
 
-From cube_axioms: "The cube is the first geometry that occupies volume. It has interior. It displaces space. It blocks passage."
+## The diagonal was there before the crease
 
-This is the **critical threshold**: From boundaries (triangle) to **occupation** (cube).
+Move one corner away from a formerly flat face. The apparent square can split along a diagonal. The yellow overlay does not invent that split: it identifies the shared edge already present in the triangle list.
 
-The triangle said: "There is an inside and an outside."
+The seam becomes a place to inspect an assumption. We recognised six square faces, but the implementation supplied triangle pairs. Under the initial positions, the two descriptions agreed closely enough for the distinction to pass unnoticed. A small movement makes their difference consequential.
 
-The cube says: "**This space is taken. You cannot enter.**"
+This is a remainder we can locate in code and see in the room. It does not require treating every approximation as a betrayal of an original. The triangulation supports the encounter; it also gives the deformation a particular crease. Another triangulation could produce another result. The choice is productive and can still be questioned.
 
-Volume introduces **exclusion through occupation**. Only one thing can occupy a given volume at a time. This is fundamental to:
-- **Property** (this space belongs to X, others excluded)
-- **Architecture** (walls block movement)
-- **Collision** (objects cannot overlap)
-- **Privacy** (enclosed space prevents observation)
+## A name may cease to fit before a process stops
 
-The cube is **geometry of possession** - space claimed, held, defended.
+The connection lists remain unchanged while the handles move. Equal lengths, right angles and planar faces need not remain. Calling the result a cube therefore requires more than checking that eight vertices still exist. With larger changes, patches may collapse or cross, and the initial counts do not certify a valid enclosure.
 
-## Collision: Enforced Boundaries
+The script continues rebuilding those patches. That continuation opens room for another purpose: a silhouette, a folded-looking surface, an awkward form someone wants to keep exploring. Its departure from the cube is neither automatically a failure nor proof of freedom. We have to ask what became possible and which constraints are still doing the work.
 
-From cube_axioms: "With volume comes obstruction."
+The counter on the side panel measures displacement from the initial positions. A large number is not a measure of novelty or queer possibility. It is one geometric measurement which might help us compare two attempts. The interpretation belongs to the encounter we choose to build around it.
 
-```gdscript
-var collision_shape = BoxShape3D.new()
-// Movement is stopped
-```
+## Replay and restoration
 
-The triangle's boundary was **conceptual** - it defined inside/outside but didn't **enforce** it.
+Release a corner and replay the builder. The changed shape assembles again. The presentation returns to its beginning while the coordinates retain your intervention. RESTORE CUBE does something else: it replaces those coordinates with the stored initial positions.
 
-The cube's boundary is **physical** - collision detection prevents passage. The boundary has force.
+The button's name should keep that operation explicit. Restoration can support comparison and another attempt; it can also remove a form we were learning to value. The second builder lets us preserve a reference without requiring every experiment to end there. This version does not yet save a collection of deformations or test a new form as architecture.
 
-This is **spatial governance through geometry** - the cube doesn't just mark territory, it **enforces** it.
+The boxes later in the room carry an additional question about use. A crate, a sealed glove chamber and a pile of cartons draw on a familiar enclosure but offer different relations to storage, work and access. Their forms do not settle those relations by themselves. The words WITHOUT COMPOSITION / YET invite us to continue arranging what we have learned, even though an arrangement is already present.
 
-## Occlusion: Control of Visibility
+The next hall will unsettle another familiar primitive. We take the distinction with us: a name, the data beneath it, and the operations that can carry that data elsewhere.
 
-From cube_axioms: "The cube not only blocks movement — it blocks sight."
+## Implementation anchors
 
-Raycasts hit the cube and stop. What lies behind becomes **inaccessible to vision**.
-
-The cube governs:
-- **Movement** (collision)
-- **Vision** (occlusion)
-- **Space** (volume occupation)
-
-This is **triple enclosure** - physical, visual, and spatial.
-
-## The Cube as Spatial Unit
-
-From cube_axioms: "The cube is the fundamental unit of voxel space. Entire worlds are built from cubic cells."
-
-Minecraft, voxel engines, roguelikes - countless digital worlds are **cubic grids made solid**.
-
-Why cubes?
-- **Tile perfectly** (no gaps)
-- **Axis-aligned** (efficient collision)
-- **Uniform scale** (every cell equal)
-- **Computationally efficient** (fast to test, easy to index)
-
-The cube is **computational convenience elevated to worldbuilding principle**.
-
-But this means:
-- Worlds are **rectilinear** (only right angles)
-- Space is **quantized** (discrete cells)
-- Forms are **blocky** (no smooth curves)
-- Locality is **gridded** (addresses are coordinates)
-
-The cube-based world is **Cartesian space made mandatory**.
-
-## What the Cube Cannot Express
-
-From cube_axioms:
-- Curvature
-- Organic form
-- Gradual transition
-- Porous boundaries
-
-"The cube is the geometry of **construction, not growth**."
-
-Natural forms - trees, bodies, water, clouds - resist cubic decomposition. They curve, flow, branch, and merge.
-
-The cube represents what can be **built from discrete units**, not what **grows continuously**.
-
-## Animation as Demystification
-
-The procedural construction **demystifies** the cube - it's not magical or eternal, it's **assembled from components**.
-
-This is **critical pedagogy** - revealing how things are made rather than presenting them as finished facts.
-
-By showing vertices → edges → faces → volume, the animation teaches:
-- **Nothing is irreducible** (cubes decompose into simpler parts)
-- **Order matters** (must build edges before faces)
-- **Construction requires time** (process, not instant)
-
-This counters **technological mystification** - the ideology that computational objects are "just there" without labor or history.
-
-## The Twin Builders: Repetition as Proof
-
-Why two simultaneous constructions?
-
-- **Redundancy** reinforces the lesson
-- **Symmetry** suggests systematic procedure
-- **Repeatability** proves this is not unique event
-
-The twin builders say: "This is **how cubes are made** - always, systematically, procedurally."
-
-This is **algorithmic thinking** - the cube is not an object, it's the **result of a procedure** that can be repeated.
-
-## Unshaded Geometry: Refusal of Material
-
-We removed reflections (SHADING_MODE_UNSHADED) to make the cube **visually pure** - no environmental reflections, no surface texture, only **geometric form**.
-
-This aesthetic choice says: "We're studying **structure**, not **appearance**."
-
-But this is also **abstraction through erasure** - real cubes have materiality (metal reflects, wood absorbs, plastic shines). By removing all material properties, we create **ideal geometric form**.
-
-This is Platonic - privileging **abstract form** over **material reality**.
-
-## Volume as Exclusion
-
-The cube's most important property: **Only one thing can occupy its volume at a time.**
-
-This introduces **scarcity through geometry**. Space becomes:
-- **Finite** (limited volume available)
-- **Contested** (competition for occupation)
-- **Exclusive** (my cube blocks yours)
-
-This is the **spatial logic of property** - enclosure creates ownership through exclusion.
-
-## The Cube as Architecture
-
-From cube_axioms: "With the cube, geometry becomes inhabitable and restrictive."
-
-Rooms, walls, buildings - **architecture is applied cubes**. The cube is:
-- **Container** (encloses interior)
-- **Barrier** (prevents passage)
-- **Shelter** (protects from outside)
-- **Prison** (restricts movement)
-
-The cube is simultaneously **protective and restrictive** - it shelters by excluding.
-
-## Procedural Generation and Control
-
-The animated builder is **procedural** - it follows an algorithm to construct the cube.
-
-This reveals: Computational geometry is **generative** - forms are **outputs of processes** rather than handcrafted objects.
-
-This enables:
-- **Mass production** (generate thousands of cubes)
-- **Parametric variation** (change size, proportions)
-- **Systematic consistency** (all cubes follow same procedure)
-
-But procedural generation also means:
-- **Uniformity** (all products of same algorithm)
-- **Predictability** (no genuine surprise)
-- **Algorithmic control** (form determined by procedure)
-
-Procedural worlds are **systematically generated** rather than organically grown.
-
-## Conclusion: The Cube as Computational Atom
-
-Point_Animatedcube teaches that the cube is the **fundamental volumetric unit** of computational space.
-
-It demonstrates:
-- **Procedural assembly** (geometry as temporal process)
-- **Component synthesis** (points + lines + triangles = volume)
-- **Spatial occupation** (volume displaces, excludes, blocks)
-- **Enforced boundaries** (collision and occlusion)
-
-The cube is **geometry of possession** - it claims space, blocks passage, controls visibility.
-
-The animated construction **makes visible** what is usually hidden: Computational objects are **products of procedures**, assembled from components, constructed over time (even if that time is microseconds).
-
-When you watch the cube build itself, you witness **the becoming of form** - not eternal, not given, but **procedurally generated** through systematic assembly.
-
-This is the condition of computational geometry: **Everything is constructed. Nothing simply exists.**
-
-The question is: **Who controls the procedures that generate form? What forms are excluded by the algorithms that build worlds?**
+The claims about visibility, replay, restoration and fixed connectivity come from `animatedcubebuilder.gd` and `cube_experiment_panel.gd`. Hinge behavior comes from `polyhedron_nets.gd`. The builder's surfaces are visual meshes; pickup collision belongs to the handles. Their appearance does not establish a physical enclosure or a usable shelter.

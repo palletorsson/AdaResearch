@@ -1,29 +1,31 @@
-# The bell that is not there yet — sample, law, display and the fold at the edge
+# The account moves
 
-## Completing the curve in language
+The orange model curve is present before enough beads have landed to make a convincing sample. That anticipation can help us look, and can also finish the observation before it has happened. The opening asks the reader to describe a particular arrangement before naming what it ought to resemble. No particular sparse arrangement is guaranteed. A dozen observations can cluster, scatter or leave the expected centre empty.
 
-Twelve beads have landed. Three bars stand, none in the middle. The visitor who says "the bell is forming" has said something about a model, not about the bins. The room's first demand is a description that stops at what is visible: three bars, two adjacent, one off to the left, a gap where the middle will presumably be. Presumably is the model speaking. The plate keeps the count, twelve of a thousand, so that the reader can measure how little the picture is standing on. Astra's card asks for the sparse, lopsided histogram to be resisted rather than smoothed, and the cabinet obliges by making a hundred draws a single press: the reader can watch the picture change from twelve to a hundred to three hundred, and can watch it stay lopsided longer than expected.
+The pale frames compare observed counts with the ideal model's expected counts at the same N. They are not goals for the blue bars, and the generator does not consult their discrepancy to repair a sample. An individual bin's discrepancy need not shrink with each batch. Absolute count deviations and deviations in proportion are different quantities; more data does not make every local difference monotonically smaller.
 
-## Two halves of a comparison
+## More values do not change every law into a bell
 
-A histogram alone invites the eye to complete it. Behind every bar the cabinet draws a pale frame at the count the law expects for that bin at the present N. This changes the comparison from "does it look like a bell?" to "where is this sample above or below its expectation?". The answer is always: in several places, by amounts that shrink with N and never vanish. Karl Pearson's chi-square of 1900 is exactly this comparison made into a number; the room keeps it as a picture, because the number would tempt the reader to grade the sample. A bar over its frame is not an error. It is what a sample is.
+GAUSS explicitly applies a guarded Box–Muller transform. UNIFORM retains its uniform law as the sample grows. The cabinet does not demonstrate the claim that all accumulated independence becomes Gaussian. A limit theorem about suitably rescaled sums requires its own construction and assumptions; this artifact is comparing laws of individual returned values.
 
-## The law at its own scale
+The normal model is an ideal reference. The generator has finite resolution, and the safeguard at the logarithm limits the possible computed tail. During this review, a guard written as an added offset also admitted a negative square-root argument near the other end of its input range. Repairing it required naming which inputs the operation can accept. Treating such a fault as an interesting residue need not mean leaving a broken sampler in the lesson. The repaired boundary remains available to examine.
 
-The orange curve over the bars is the density, drawn at the same height whatever N is; the bars are drawn against the tallest of them, so they fill the display at twelve draws and at a thousand. The two share a shape and nothing else, and the room says so rather than rescaling one to flatter the other. This is the measurement contract in miniature: name the sample size, the bins, the range, the clipping and the normalisation, and do not let appearance stand in for a quantity.
+## The edge absorbs a distance
 
-## The fold
+In Random Walk an overshoot reflected back. Here an out-of-range value is stored at the edge. Two raw values far apart beyond one can become the same retained value, one. The clipped counter remembers that something crossed, while the stored value loses how far. The first and last bins also contain ordinary in-range values, so an edge count alone cannot reconstruct that loss.
 
-The display runs from zero to one. The Gaussian does not; it runs everywhere, thinly. Every draw that falls beyond the display is folded onto the edge it crossed, and the plate counts the folds. Under GAUSS at these parameters that count is a handful per thousand. Under EXPON the fold is visible: the law's tail past the right edge is a quarter of a percent, and the ghost's last frame carries it. The point is not the size of the fold but its existence: a bounded histogram is the product of a decision the display made, and the honest picture says where the decision bit. The same is true of every bounded chart of an unbounded quantity, and of every "normal range" printed on a form.
+This is a decision made by this implementation, not a necessary property of every bounded display. Another instrument could widen its range or keep overflow bins and raw values. Here the mismatch between the ideal tail and the available screen gives a concrete place to ask what an account should retain.
 
-## The mean of what
+## A centre that moves without its population
 
-The mean the plate prints is the mean of the bins, a frequent region under one model of one sample of one law. It is not a fact about the value of anything that was measured. Quetelet's average man of 1835 was a Gaussian construction that turned a frequent region into a norm, and the history of the bell curve since then is largely the history of that confusion being put to use. The room's version of the caution is concrete: the edge bins here hold what the model could not fit, and they are on the display, counted.
+BINS changes the grouping of already retained values. The count stays fixed, but the picture changes. The printed mean and deviation can move because they use bin centres as representatives. Returning to the earlier bins restores the earlier account. A different partition does not become arbitrary just because it is chosen: its interval width and the distinctions it can preserve remain inspectable.
 
-## Replay
+The tallest blue bar nearly fills the frame even with very little evidence. The orange curve has its own height normalisation. These visual choices help keep a small instrument legible and remove absolute magnitude from height alone. The numerical count and the pale expected-count bars supply information that a familiar silhouette cannot.
 
-CLEAR replays the seed the plate names; NEW SEED names another. A replay does not make a sample less random. It makes it a thing you can point at twice, compare across laws with the same stream, and re-bin without redrawing. BINS is the sharpest of these: sixty bins and ten bins of the same three hundred values look like different distributions, and the values have not moved. The difference between them is the reader's choice of bins, which is why the bins are printed on the plate with the rest of the contract.
+The queer question can stay at this concrete level: which differences remain possible and legible under a model, a boundary and a partition? Calling one region frequent does not give it authority over how a person ought to be. That further judgement would need purposes and values that the sampler does not compute.
 
-## What the room excludes
+## From numbers to forms
 
-No control varies the mean or the deviation, so the visitor cannot push the Gaussian's tail into the edge bins on purpose; EXPON has to stand in. The comparator on the west side puts three laws beside each other at one count, and the Galton board in the corner lets pegs do the drawing; neither is needed for the lesson and both are honest company. The next room grows a population of forms from draws like these, and asks which of its features were allowed to vary — the question this room asks of a histogram, put to bodies.
+This cabinet's PAUSE is local. Beads already issued continue landing; the wider museum keeps running. CLEAR returns a procedure to its named beginning and removes the old markers as well as their records. These affordances let a group compare the same sample without suggesting that all surrounding processes have been suspended.
+
+The next room asks which dimensions of a population can vary. A distribution alone cannot answer that. Someone must connect its values to height, width, colour, spacing or another property. The centre, spread and limits will then acquire consequences for the bodies that can be made.

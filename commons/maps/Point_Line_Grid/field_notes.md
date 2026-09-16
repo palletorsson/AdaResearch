@@ -1,3 +1,5 @@
+> Historical working text, retained on 16 September 2026. This describes earlier readings and configurations, including first-visit storage and grid spacings that do not match the current room. Use [tutorial.md](tutorial.md), [technical.md](technical.md) and [final.md](final.md) for the current encounter.
+
 # Point_Line_Grid — field notes
 
 > Field notes hold what the wall text cannot carry. `final.md` is for the

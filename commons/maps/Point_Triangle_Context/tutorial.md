@@ -1,76 +1,66 @@
-# Point Triangle Context
+# From a closed boundary to a visible face
 
-Everything the machine draws, it draws in triangles. This room is about why.
+In [Grid](../Point_Line_Grid/tutorial.md), positions became addresses we could return to. This hall uses that repeatability to make corners meet. Its first question is small: **does closing three edges also make their centre visible?**
 
-Three points always share a plane. Find it.
+## Close, look, then fill
 
-```gdscript
-func triangle_normal(a: Vector3, b: Vector3, c: Vector3) -> Vector3:
-    return (b - a).cross(c - a).normalized()
-```
+At `triangle_line_puzzle`, fit two edges and look through the opening. Fit the third. The instrument reports a closed boundary; the centre is still unfilled. Press SHOW / HIDE FILL. Compare the coloured face with the retained outline, and walk around it before hiding it again.
 
-Two edges out of one corner, crossed, give the direction the face looks in. There is no fourth point to disagree, so a triangle is flat by necessity, and a flat face is something a renderer can shade with one number.
-
-Measure the face.
+The completed puzzle's fill uses three target positions. This is the actual submission in its script:
 
 ```gdscript
-func triangle_area(a: Vector3, b: Vector3, c: Vector3) -> float:
-    return (b - a).cross(c - a).length() * 0.5
+mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+for p: Vector3 in target_positions: mesh.surface_add_vertex(p)
+mesh.surface_end()
 ```
 
-The same cross product, before normalising, has a length: twice the area. Direction and size out of one operation, the way the vector room split them.
+The primitive type tells the renderer how to interpret the vertices. Connecting line endpoints and submitting a filled triangle are separate operations. The button is enabled in effect only after the puzzle is complete: pressing it earlier creates no face.
 
-Fill any closed loop with triangles.
+Three distinct, non-collinear points determine a unique plane. Move your viewpoint until the face looks narrow. Its projected width can shrink while its area stays fixed. Making the points themselves collinear would be a different change, leaving zero triangle area. The puzzle's material displays both sides; an edge-on view is not proof that a side has been culled.
+
+## Record your own corners
+
+At `draw_triangle_faces`, pick up the drawing point. Hold at each intended corner until a numbered point appears. The held-placement interval is one second, with at least 0.15 metres of travel from the last corner; positions round to a 0.1-metre world grid. Returning within the existing-point snap radius can reuse a point. Make a triangle, returning to the first point to close it.
+
+The instrument separates filled loops from logical triangles. A three-corner loop adds one of each. SHOW / HIDE FILL changes visibility without deleting corners or boundary lines.
+
+Release at the closing corner. The release callback can record that position, but an unheld tool does not continue timed sampling. Existing corner handles remain editable; moving and releasing one stores its new snapped position and rebuilds its faces. This editor can change side lengths; it is not a linkage of rigid rods.
+
+For an independent comparison, release, press NEW OUTLINE and pick up again. Completed faces and their numbered corners remain. START identifies the first point in the new path; it is not a command to clear everything.
+
+## Keep the outline, change its start
+
+Make this simple L in a horizontal plane, clear of the practice triangle so its points do not catch the new corners. Coordinates are metres along two horizontal directions from a chosen origin; hold the height fixed. The labels A–F are our recipe, not labels supplied by the tool.
+
+```text
+A (0.0, 0.0)     B (1.2, 0.0)     C (1.2, 0.4)
+D (0.4, 0.4)     E (0.4, 1.2)     F (0.0, 1.2)
+```
+
+1. Follow A → B → C → D → E → F → A. Inspect the fill.
+2. Release, start a new outline and reuse those six corners in B → C → D → E → F → A → B order.
+3. Keep the boundary direction, positions and height fixed. Check START before closing; look into the missing notch after each fill.
+
+Both routes bound the same region. The fan from B extends into the notch. To locate the decision, read these lines from `_create_triangles_from_path()`:
 
 ```gdscript
-func fan_triangulate(loop: Array[Vector3]) -> Array:
-    var tris: Array = []
-    for i in range(1, loop.size() - 1):
-        tris.append([loop[0], loop[i], loop[i + 1]])
-    return tris
+var first_point = placed_points[loop_points[0]]
+for i in range(1, loop_points.size() - 1):
+    var v0 = first_point
+    var v1 = placed_points[loop_points[i]]
+    var v2 = placed_points[loop_points[i + 1]]
 ```
 
-Pick one corner and fan out from it. A loop of n points becomes n - 2 triangles, and that is what every surface in this museum is underneath: a closed outline, fanned.
+The following code submits each triple as a triangle, with normals, colour and a reversed copy. Here the important choice is which indices share `first_point`. From B, the logical triangles are BCD, BDE, BEF and BFA. Some cross the region you left open.
 
-Place a triangle from three lengths alone.
+For `n` corners, this loop makes `n - 2` logical triangles. Both Ls together add two loops and eight triangles. If you kept the first practice triangle and made no extra loops, the total becomes three loops and nine triangles. Hiding a fill does not subtract it from the counter.
 
-```gdscript
-func third_vertex(a: float, b: float, c: float) -> Vector2:
-    # first side laid along x, from (0, 0) to (a, 0)
-    var x := (a * a + b * b - c * c) / (2.0 * a)
-    var y := sqrt(maxf(b * b - x * x, 0.0))
-    return Vector2(x, y)   # Vector2(x, -y) is the same triangle, mirrored
-```
+A first-vertex fan fills a convex planar polygon. Some concave polygons also admit this fan from a suitable vertex. The failure is not “concave means impossible”; it is a particular method applied from a particular start. The artifact does not check coplanarity, self-intersections or whether the fan stays inside an intended polygon.
 
-Nothing but Pythagoras twice. Three numbers, and the third corner has exactly one place to be, plus its reflection. Lengths fix the shape, and the shape fixes every angle without anyone measuring one.
+## Carry a distinction to the next room
 
-Now try four rods.
+Explain the overspill by pointing to one emitted triangle. Then choose what you would preserve: the outline, this filling method or the unexpected surface as material for another work. A new use is possible without changing code; a different filling algorithm would require an implementation change.
 
-```gdscript
-func quad_from_rods(a: float, b: float, lean: Vector2) -> Array[Vector2]:
-    lean = lean.normalized() * b   # any direction at all: the rods do not care
-    return [Vector2.ZERO, Vector2(a, 0.0), Vector2(a, 0.0) + lean, lean]
-```
+The [secondary studies](detours.md) extend this into shared edges, folds, symbols and measurement. We can return to them. [Polyhedra](../Primitives_Polythedra/tutorial.md) asks what faces need to enclose a volume. Three faces meeting at a corner still leave an opening; a tetrahedron needs four triangular faces.
 
-Four lengths and a free direction. Every value of `lean` is a different quad with the same four sides. Four rods with hinges lean; three rods with hinges hold. That difference is why a truss is triangles.
-
-Ask whether four points are flat.
-
-```gdscript
-func is_planar(p: Array[Vector3], tol: float = 0.001) -> bool:
-    var n := (p[1] - p[0]).cross(p[2] - p[0]).normalized()
-    return absf((p[3] - p[0]).dot(n)) < tol
-```
-
-Three points pass by construction. The fourth may sit off the plane, and when it does the machine has no face to draw, so it splits the quad into two triangles and the split is a fold.
-
-Ask which side you are on.
-
-```gdscript
-func faces_you(a: Vector3, b: Vector3, c: Vector3, eye: Vector3) -> bool:
-    return triangle_normal(a, b, c).dot(eye - a) > 0.0
-```
-
-Swap `b` and `c` and the same three points face the other way. A triangle has a front, decided by the order its corners are listed in, and the renderer draws only the front unless told otherwise.
-
-You can now find the plane three points share, fill a loop with triangles, place a triangle from its lengths, show why a quad leans where a triangle holds, and tell a face's front from its back. Primitives_Polythedra will next meet three faces at a corner.
+Source details and validation limits are in [technical.md](technical.md) and [encounter-reference.md](encounter-reference.md).

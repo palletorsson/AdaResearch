@@ -1,0 +1,182 @@
+{
+  "artifacts": [
+    {
+      "bounds": {
+        "max": [
+          3.25599980354309,
+          1.62600004673004,
+          4.17000007629395
+        ],
+        "meshes": 62,
+        "min": [
+          2.74400019645691,
+          0.0000000335276126861572,
+          3.71199989318848
+        ]
+      },
+      "lookup": "prng_crank_machine",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/PrngCrankMachine",
+      "position": "(3.0, 0.62, 4.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          10.2800006866455,
+          1.42900002002716,
+          4.1725001335144
+        ],
+        "meshes": 49,
+        "min": [
+          9.71999931335449,
+          0.0,
+          3.7020001411438
+        ]
+      },
+      "lookup": "slot_machine",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/SlotMachine",
+      "position": "(10.0, 0.0, 4.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          6.42999982833862,
+          1.46000003814697,
+          6.34000015258789
+        ],
+        "meshes": 160,
+        "min": [
+          5.57000017166138,
+          0.0,
+          4.36999988555908
+        ]
+      },
+      "lookup": "seed_replay_demo",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/SeedReplayDemo",
+      "position": "(6.0, 0.0, 6.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          10.1979999542236,
+          0.901942074298859,
+          8.19799995422363
+        ],
+        "meshes": 3,
+        "min": [
+          9.80200004577637,
+          0.0,
+          7.80200004577637
+        ]
+      },
+      "lookup": "catalyst_pickup",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/CatalystPickup",
+      "position": "(10.0, 0.0, 8.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          4.12000036239624,
+          1.92000007629395,
+          12.1985054016113
+        ],
+        "meshes": 25,
+        "min": [
+          1.90000009536743,
+          0.118432462215424,
+          11.8014945983887
+        ]
+      },
+      "lookup": "trng_vs_prng",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/TrngVsPrng",
+      "position": "(3.0, 1.12, 12.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          10.6000003814697,
+          5.10000038146973,
+          12.0
+        ],
+        "meshes": 1,
+        "min": [
+          7.40000009536743,
+          0.299999952316284,
+          12.0
+        ]
+      },
+      "lookup": "random_number_book_page_1955",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/randomNumberBookPage1955",
+      "position": "(9.0, 2.7, 12.0)",
+      "yaw": 0.0
+    }
+  ],
+  "checks": [
+    {
+      "check": "seed_replay_demo/Btn_0 reachable from one mark: 0.563 m",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo/Btn_1 reachable from one mark: 0.540 m",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo/Btn_2 reachable from one mark: 0.563 m",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo: no missing or duplicated buttons after actions",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "floor_checks": [
+    {
+      "cell": "(6.0, 0.0)",
+      "supported": true
+    },
+    {
+      "cell": "(6.0, 15.0)",
+      "supported": true
+    },
+    {
+      "cell": "(1.0, 8.0)",
+      "supported": true
+    },
+    {
+      "cell": "(11.0, 8.0)",
+      "supported": true
+    }
+  ],
+  "headset_verified": false,
+  "map": "Random_Definition",
+  "origin": "(0.5, 0.0, 0.5)"
+}

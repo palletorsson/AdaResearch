@@ -1,13 +1,27 @@
-# Subtraction is authorship — randomness as erasure and the politics of selective absence
+# The cube that cannot be chosen
 
-A fully populated board is maximum order. Every slot is occupied; nothing is missing. The remover turns that order into a substrate for absence: press by press it takes cubes away, and the board after removal is not a damaged version of the original. It is a different board, one whose structure is defined by what the process chose to take — and, before that, by what it was allowed to choose from.
+Choose a grey cube and keep looking at it. Others become red, then disappear. This one can remain through every press. Its survival is decided by the range, before any draw occurs.
 
-Wolfgang Iser's reception theory argues that the work of interpretation depends on the gaps a text leaves. What a text does not say is as determinative as what it does say, because the reader's sense-making runs through the unsaid as much as through the said. Random_Remove installs Iser's reading at the scale of a bench. The board with holes is more legible than the board without: the slot plates under the gaps keep every address, so absence has a place even when the cube has none, and reading the pattern of the plates is what the room rewards.
+That distinction gives the argument a place on the board. An even draw among the sixteen amber candidates does not make the forty-eight excluded ones eligible. The code separates the filter, draw and removal. Each can be questioned in its own terms: why this set, what distribution within it, and what should happen to the selected thing?
 
-The bench separates three decisions the word "random" folds into one. A rule admits candidates — the amber cubes: a range of columns and rows, one row, one column, or all — and it is a question asked of each cube's own coordinates on the board, legible and changeable by a button. An even draw picks among the remaining candidates, and only among them: a grey cube has no chance at all, not a small one. A deletion scales the chosen cube to nothing and leaves its plate. The draw is the only one of the three that is chance, and the bench names the seed that makes it repeatable: RESET replays the order, NEW SEED starts another, and the same seed under another rule sends the same draws to different cubes.
+An excluded cube is protected from removal here. In another application, exclusion from a draw might withhold an opportunity. The colour alone cannot tell us which interpretation applies. The consequence of selection matters. Calling inclusion good or randomness fair before asking what the process does would discard precisely the distinction this bench lets us inspect.
 
-This is where the politics lives. Fairness inside the amber set — every candidate equally likely on every press — says nothing about fairness to the grey. The boundary was drawn by a rule before the generator ran, and neither the evenness of the draw nor the reproducibility of the seed can justify where it fell. A random lottery among the eligible is still a decision about eligibility, made elsewhere, by someone. The bench makes that someone the visitor, with a button, and lets them watch the consequence: equal counts (eight in a row, eight in a column) that make different places available.
+## Eight choices, different places
 
-The plates keep a second lesson. They record which addresses are empty and not the order they were emptied in; the status line keeps only the last removal. A record of absence is not a record of the process that produced it — two seeds empty the same square to the same final shape by different routes, and the board cannot tell them apart. To compare histories, someone must keep the log; the bench does, for a probe, and shows the visitor the seed instead.
+ROW and COLUMN each offer eight candidates. With the same seed they select equal offsets from equally sized lists, yet they remove cubes along different axes. The count leaves this spatial difference undescribed, just as the previous room's entropy reading omitted neighbours. Equal quantities need not supply interchangeable possibilities.
 
-Within the sequence, this room takes the repeatable arrangement of Random_Definition and the rearranged-but-unchanged sample of Random_Entropy and adds the set: chance acting inside a boundary that chance did not draw. Random_Walk carries the set forward as a walker whose reachable places are decided one draw at a time.
+There is also a small place for making. Stop before the set is exhausted. A partly emptied board may offer an opening, a rhythm or a broken symmetry you want to keep. Continue to the end and every range run reaches the same empty square. A rule made to demonstrate subtraction can furnish intermediate arrangements whose value the stopping condition never evaluates. The visitor can pause over one by withholding the next press.
+
+## The means of return
+
+The cube that disappears still has an instance slot. The source keeps its original transform. Removal changes the basis to zero; RESET restores it. There is no physical excavation of the museum floor, and no loss of every trace of the modelled cube. The word “remove” has a specific implementation here.
+
+The permanent slot plates retain addresses of absences. The status retains the last event, and `removal_log` retains the full sequence for code and review. These records answer different questions. Two orders can produce the same final empty range, leaving the board unable to distinguish their histories even while the program still can.
+
+Return depends on keeping things: original transforms, a seed, a generator, a candidate-list order and the filter. The ability to restore the visible body is carried by records that the visitor does not ordinarily see. This is one concrete answer to “what bodies are possible?” A body that can vanish and return is possible because the implementation retains the means of return.
+
+## A modest comparison to carry forward
+
+This instrument does not measure social fairness or an entropy threshold. It lets us test the narrower claim that equal sampling within a set cannot explain how that set was formed. A QFEP investigation would need named observations and an explicit measure before treating the gaps as evidence for a change in entropy.
+
+The next room makes a drawn choice move a walker. The path, the available directions and the boundary will each contribute to where the body can arrive. Keep asking which part of the possibility was chosen before the draw began.

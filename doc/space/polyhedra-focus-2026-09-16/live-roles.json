@@ -1,0 +1,296 @@
+{
+  "map": "Primitives_Polythedra",
+  "cards": [
+    {
+      "token": "path_watchdog",
+      "row": 1,
+      "col": 4,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "path_game_controller",
+      "row": 2,
+      "col": 6,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "interactive_point_origin_force",
+      "row": 4,
+      "col": 4,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "becoming_catalyst",
+      "row": 4,
+      "col": 6,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "if_not_exist_create",
+      "row": 18,
+      "col": 10,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "prism_block",
+      "row": 1,
+      "col": 5,
+      "count": 3,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "primary",
+      "group": "stop-and-flow",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "concrete_barrier",
+      "row": 10,
+      "col": 5,
+      "count": 12,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "stop-and-flow",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "street_sign",
+      "row": 9,
+      "col": 3,
+      "count": 5,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "stop-and-flow",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "grab_trihedron",
+      "row": 5,
+      "col": 9,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "primary",
+      "group": "enclosure-and-collision",
+      "ruled": true,
+      "from_book": true
+    },
+    {
+      "token": "grab_tetrahedron",
+      "row": 7,
+      "col": 6,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "primary",
+      "group": "enclosure-and-collision",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "pyramid_edit",
+      "row": 7,
+      "col": 4,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "count-and-change",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "cube_scene",
+      "row": 7,
+      "col": 8,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "count-and-change",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "diamonds",
+      "row": 12,
+      "col": 6,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "solids-gather",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "rock_spawner",
+      "row": 20,
+      "col": 4,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "solids-gather",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "rock_scanner",
+      "row": 22,
+      "col": 4,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "solids-gather",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "trafficcone",
+      "row": 16,
+      "col": 3,
+      "count": 2,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "decoration",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    }
+  ],
+  "groups": [
+    {
+      "id": "enclosure-and-collision",
+      "title": "What closes a surface, what blocks a body",
+      "role": "primary",
+      "count": 2
+    },
+    {
+      "id": "count-and-change",
+      "title": "Count a solid, change a corner",
+      "role": "secondary",
+      "count": 2
+    },
+    {
+      "id": "stop-and-flow",
+      "title": "Prism, barrier, slope and direction",
+      "role": "primary",
+      "count": 3
+    },
+    {
+      "id": "solids-gather",
+      "title": "Repetition, irregularity and sections",
+      "role": "secondary",
+      "count": 3
+    }
+  ],
+  "notes": [
+    {
+      "id": "note-1",
+      "role": "primary",
+      "text": "add prism lock as blocker"
+    },
+    {
+      "id": "note-2",
+      "role": "primary",
+      "text": "prism_block in combination shop the how basic shapes can from flow or obstacles"
+    }
+  ],
+  "layout": {
+    "primary": [
+      {
+        "kind": "note",
+        "id": "note-1",
+        "text": "add prism lock as blocker"
+      },
+      {
+        "kind": "group",
+        "id": "enclosure-and-collision"
+      },
+      {
+        "kind": "note",
+        "id": "note-2",
+        "text": "prism_block in combination shop the how basic shapes can from flow or obstacles"
+      },
+      {
+        "kind": "group",
+        "id": "stop-and-flow"
+      }
+    ],
+    "secondary": [
+      {
+        "kind": "group",
+        "id": "count-and-change"
+      },
+      {
+        "kind": "group",
+        "id": "solids-gather"
+      },
+      {
+        "kind": "card",
+        "token": "path_watchdog"
+      },
+      {
+        "kind": "card",
+        "token": "path_game_controller"
+      },
+      {
+        "kind": "card",
+        "token": "interactive_point_origin_force"
+      },
+      {
+        "kind": "card",
+        "token": "becoming_catalyst"
+      },
+      {
+        "kind": "card",
+        "token": "if_not_exist_create"
+      }
+    ],
+    "decoration": [
+      {
+        "kind": "card",
+        "token": "trafficcone"
+      }
+    ]
+  },
+  "seq": "primitives",
+  "positions": {},
+  "ok": true
+}

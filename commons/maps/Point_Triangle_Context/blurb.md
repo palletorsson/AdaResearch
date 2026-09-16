@@ -1,3 +1,1 @@
-Three points close a boundary, and now: rigidity. The triangle does not flex without breaking. Three distances mutually constrain three angles; move one vertex, the others resist. This is where measurement stabilizes, where the Pythagorean theorem first has somewhere to live.
-
-`interactivetriangle` lets you drag a vertex and feel the constraint. `pythagorean_triangle_angles` makes the algebra visible — one right angle, two others that must sum to its complement. The `folded_strip` shows how quads decompose into paired triangles, flexible where the triangle is fixed. Rigidity and flexibility are competing spatial ethics. The triangle chose: no deformation without rupture.
+Three edges meet. The middle stays empty until you ask the machine to show a face. Then draw your own outline and begin it again from another corner. The boundary stays put; the fill may stray beyond it. What did the program add, and which of its decisions would you keep?

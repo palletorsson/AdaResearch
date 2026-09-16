@@ -1,48 +1,15 @@
-# Trans Rotation — Artifacts
-*Transformation: What Stays the Same When Everything Changes · F_order · 6 artifacts*
+# Trans_Rotation — two primary encounters
 
-> Rotation produces space as anisotropic. Where translation leaves direction indifferent, rotation makes facing matter. Front differs from back, left from right. The spinning forms carve orientation into the void. To rotate is to declare: this way and not that way, toward and away, the difference that makes direction real.
+## Centre blades: bridge and climb
 
-The map, read through what it holds — its artifacts in the order you meet them:
+`rotation_wall_crossings` stages three 8.4 m blades turning about their middles. Y connects level banks; X and Z meet grid landings three metres higher. The crossing pose pauses for twelve seconds, followed by another half-turn. All static landings come from the map's structure layer.
 
-## Rotate Grid Cubes
-![Rotate Grid Cubes](/scene-catalog/rotate_grid_cubes.png)
+Source: `commons/artifacts/rotation_studies/wall_crossings.gd`.
 
-READ patterned rotation across a fixed lattice and compare flat rows against tilted ones.
+## Forward through a tilted 2D array
 
-`rotate_grid_cubes`
+`rotation_array_compare` contains four 4 by 10 cube arrays. X, Y, Z and XYZ bands receive the same row-angle progression from zero to ninety degrees. Cube centres stay fixed. Outlines expose individual cubes, and aisle labels expose row numbers and angles.
 
-## Science Screen
-![Science Screen](/scene-catalog/science_screen.png)
+Source: `commons/artifacts/rotation_studies/array_compare.gd`.
 
-COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
-
-`science_screen`
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
-
-## spin
-![spin](/scene-catalog/spin.png)
-
-EXPLAIN why translate-then-rotate differs from rotate-then-translate.
-
-`spin`
-
-## Pick Up Cube
-![Pick Up Cube](/scene-catalog/pick_up_cube.png)
-
-MOVE an object through space and understand translation as carried displacement.
-
-`pick_up_cube`
-
-## Pickup Gate
-![Pickup Gate](/scene-catalog/pickup_gate.png)
-
-REASON about threshold state change: when enough objects move through, the gate transforms from closed to open.
-
-`pickup_gate`
+These are the two book encounters in `final.md`, in this order. The preceding local-versus-parent prototype is preserved under `doc/space/rotation-studies-2026-09-09/centre-pivot-revision/before`.

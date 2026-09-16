@@ -1,33 +1,30 @@
-# Primitives 1 - Map Summary
+# Primitives_Polythedra — enclosure and passage
 
-## Overview
-Primitives_1 is the first explicit jump from 2D primitives into enclosed 3D form. It stages a trihedron as the corner condition for volume, then moves into tetrahedron assembly.
+This is room 6 of the current ten-room primitives sequence, between Point_Triangle_Context and Point_Animatedcube. It connects an open corner and a closed surface with the uses of those forms around a moving body.
 
-## Spatial Layout
-- Dimensions: 7x9 grid.
-- Architecture: Raised pedestals at (2,2) and (4,2), with a recessed fillhole strip at row 4.
-- Entry orientation: `an:-90` at (6,0).
-- Exit path: Teleporter `t` at (5,6).
+The map is 13 by 28 cells. Entry is `sp` at (7, 0); the exit `t` is at (4, 27). Coordinates below are (column, row), not world positions. The existing floor heights and museum placement rules still determine actual height.
 
-## Key Elements
-- `grab_trihedron:90:0:0.4` at (2,2): grabbable trihedron display.
-- `snap_tetrahedron_puzzle:0:0.5:0#fillhole:reveal` at (3,2): tetrahedron assembly puzzle.
-- `dark_sphere` at (3,3): local contrast dome for focus.
-- `cube_scene:0:0:0.90#group:fillhole` at (2,4), (3,4), (4,4): fillhole markers.
-- `pyramid_edit:0:0:0.4` at (1,7): optional side comparison with another polyhedron family.
-- Title text `3t:polythedra` at (3,8).
+## The first passage
 
-## Learning Flow
-1. Read the trihedron as a non-closed corner primitive.
-2. Transition to the snap puzzle and close a tetrahedron from triangular faces.
-3. Compare open junction vs closed volume.
-4. Exit through teleporter once dimensional shift is clear.
+| Encounter | Grid positions | Question |
+| --- | --- | --- |
+| Open corner: `grab_trihedron` | (9, 5) | Which face is missing, and does its collision model also leave it out? |
+| Closed surface: `grab_tetrahedron` | (6, 7) | What does another face enclose? |
+| Prism variants: `prism_block` | (5, 1), (2, 5), (3, 5) | What changes visually while the collision surface stays the same? |
+| Utility wedges: `wp` | (1, 3), (1, 12), (2, 12), (3, 12) | Where can forward movement become ascent? |
+| Twelve concrete sections | ring along columns 4–8, rows 10–14 | Where does the physical boundary redirect movement? |
+| STOP and four arrows | (3, 9), (6, 9), (2, 11), (3, 15), (7, 15) | What is requested, and what is mechanically enforced? |
 
-## Design Intent
-The map frames a clean progression: point -> line -> triangle -> volumetric enclosure. The trihedron and tetrahedron are paired so the learner can feel the threshold between "faces meeting" and "space enclosed".
+The book visits the corner and tetrahedron before returning to the prism examples near the entrance. This is an authored comparison route, not a claim that the current floor automatically presents everything in that order.
 
-## Sequence Context
-- Position in primitives sequence: 7/11.
-- Follows: `Point_Triangle_Context`.
-- Precedes: `Point_Animatedcube`.
-- Role: bridge from planar primitives to volumetric primitives.
+## Work to return to
+
+The five-handle pyramid and cube remain near the held solids. The diamond stack, thirty-rock spawner and scanner extend the lesson into repeated forms, gaps and sections. The scanner currently animates a cyan plane with a collider; its separate cross-section display is not activated by its own ready/process path. The legacy path-game nodes and catalyst objects remain available for a later gameplay review. The gallery request marker is a proposal, not a built gallery.
+
+[The tutorial](tutorial.md) includes return-visit questions for these works. [The technical reference](technical.md) retains face counts, angular defect, regular solids and volume calculations. [The inventory](artifacts.md) records all 34 current placements, including repeated objects.
+
+The former 7×9 layout and snap-tetrahedron puzzle described in earlier drafts are historical. The puzzle is absent from this room. Earlier drafts are preserved in the dated iteration archive.
+
+## Review still needed
+
+Inspect plinth reach, sign legibility, the backtrack to the prisms, the preserved central opening and the joins at each utility wedge in the actual museum. Component physics checks do not establish these full-room conditions. No layout or runtime behavior is changed by this editorial pass.

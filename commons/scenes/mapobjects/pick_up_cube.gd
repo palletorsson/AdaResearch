@@ -93,6 +93,11 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 ##   all    the three composed  - a Mario block
 ##   still  nothing moves
 @export_enum("idle", "slide", "turn", "swell", "all", "still") var motion: String = "idle"
+## Trans_Pre uses linear interpolation before wave functions are introduced.
+## Other placements retain their authored sine animation.
+@export_enum("sine", "lerp") var motion_curve: String = "sine"
+## Seconds from one endpoint to the other in lerp mode.
+@export_range(0.1, 10.0, 0.1) var lerp_duration: float = 1.5
 ## The scale oscillation the cube did not have: a fraction of its own size, so
 ## 0.3 breathes between 0.7x and 1.3x. 0.0 is off and writes nothing.
 @export var pulse_scale: float = 0.0
@@ -175,6 +180,14 @@ func _process(delta: float) -> void:
 	
 	# Make the cube bob up and down
 	time_passed += delta
+	if motion_curve == "lerp":
+		# Start halfway, at the authored height and size. Reverse at each end.
+		var t: float = pingpong(time_passed / maxf(lerp_duration, 0.001) + 0.5, 1.0)
+		global_position.y = lerp(original_y - bob_height, original_y + bob_height, t)
+		if pulse_scale > 0.0:
+			var size_factor: float = lerp(1.0 - pulse_scale, 1.0 + pulse_scale, t)
+			_apply_pulse(size_factor)
+		return
 	var bob_offset = sin(time_passed * bob_speed) * bob_height
 	global_position.y = original_y + bob_offset
 	# THE THIRD MOTION (2026-09-06). Gated on the amplitude, which is 0.0 in the
@@ -239,8 +252,10 @@ func _apply_motion() -> void:
 			area.monitorable = false
 
 func _is_player(body: Node3D) -> bool:
-	# More flexible player detection
-	return body.is_in_group("player") or body.is_in_group("vr_player") or body.name.contains("Player") or body.is_in_group("player_body")
+	# Detection also receives layer 1 for the museum's desktop Walker. That
+	# layer contains ordinary world bodies, so overlap alone must not collect.
+	# Recognise its dedicated group without adding it to broad player groups.
+	return body.is_in_group("player") or body.is_in_group("vr_player") or body.name.contains("Player") or body.is_in_group("player_body") or body.is_in_group("em_walker")
 
 func setup_pickup_sound() -> void:
 	# Create an AudioStreamPlayer3D node for the pickup sound
@@ -544,6 +559,8 @@ func _read_meta_overrides() -> void:
 	# the museum reads them.
 	if has_meta("config_motion"):
 		motion = str(get_meta("config_motion")).strip_edges().to_lower()
+	if has_meta("config_motion_curve"):
+		motion_curve = str(get_meta("config_motion_curve")).strip_edges().to_lower()
 	if has_meta("config_hold"):
 		hold = str(get_meta("config_hold")).strip_edges().to_lower()
 	if has_meta("config_rotation_speed"):

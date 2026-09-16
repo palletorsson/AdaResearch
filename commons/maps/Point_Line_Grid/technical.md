@@ -1,266 +1,98 @@
-# The Grid Trace
+# Point Line Grid — positions, frames and replay
 
-## From Continuous to Discrete
+Point_Trace distinguished the dot's position list from the whiteboard's painted image. Here, several artifacts apply rounding in different coordinate frames. Point_Triangle_Context follows by asking what a closed boundary needs before it can become a face.
 
-In Point_Trace, you moved through space and your path became geometry. The trail accumulated — an unbroken record of where you'd been, stored as a LINE_STRIP of Vector3 positions. That continuity was the point. The trace remembered everything, including the hesitations.
+The first passage follows `grab_sphere_point_snap`, `player_trace`, `grid_lines` and the placed `plan_vitrine`. The room's other three artifact types remain secondary. This reference expands the shorter program in [tutorial.md](tutorial.md).
 
-This map introduces a constraint: the grid.
+## Begin with the held point
 
-A grid doesn't record everything. It makes a decision about what counts as a position. Between grid nodes, movement is happening — but it doesn't exist yet, not as addressable data. The moment a position snaps to the nearest lattice point, it becomes legible to the system. Everything else is interpolation.
-
-This is not a limitation. It's the mechanism by which space becomes computable.
-
----
-
-## The Grid as Addressed Space
-
-A grid is a coordinate system made visible. The `grid_lines` artifact renders it as what it is: a set of intersection points, regularly spaced, extending across the XZ plane. Two numbers define the entire structure:
+`grab_sphere_point_snap` uses a 0.05 m grid in world X, Y and Z. Its central operation is:
 
 ```gdscript
-@export var grid_size: int = 8        # cells per axis
-@export var cell_spacing: float = 1.0  # meters between grid lines
+return Vector3(
+    round(pos.x / grid_size) * grid_size,
+    round(pos.y / grid_size) * grid_size,
+    round(pos.z / grid_size) * grid_size
+)
 ```
 
-How many cells. How far apart. The grid in this map is 8×14 cells with a central void — a physical space you can stand inside and measure your body against.
+Divide by the spacing, round, multiply back. With 0.05 m spacing, 0.12 m rounds to 0.10 m and 0.13 m rounds to 0.15 m. The two outcomes are one lattice interval apart. The inputs can lie arbitrarily close on opposite sides of the halfway boundary.
 
-What does `cell_spacing = 1.0` mean experientially? Walk from one intersection to the next: that distance is a meter. The grid is a ruler built into the floor. It transforms continuous space into a naming system — every intersection has an integer address, and positions between intersections have no name the grid recognizes.
+Move the held tool slowly and compare its marker with the trace. Its ground table reports retained positions in metres and signed lattice indices: a retained X of 0.15 m has index 3. These are two descriptions of the retained sample. There is no second column containing the original unrounded input.
 
-The rendering uses GDScript's `ImmediateMesh` to draw lines at runtime:
+On release the tool moves its handle by the correction required to place the visible sampled tip on the grid:
 
 ```gdscript
-func setup_grid() -> void:
-    var line_mesh := ImmediateMesh.new()
-    var instance := MeshInstance3D.new()
-    instance.mesh = line_mesh
-
-    line_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-    for i in range(-grid_size / 2, grid_size / 2 + 1):
-        var x := i * cell_spacing
-        # One line along Z, at this X position
-        line_mesh.surface_add_vertex(Vector3(x, 0, -grid_size * cell_spacing / 2.0))
-        line_mesh.surface_add_vertex(Vector3(x, 0,  grid_size * cell_spacing / 2.0))
-    for j in range(-grid_size / 2, grid_size / 2 + 1):
-        var z := j * cell_spacing
-        # One line along X, at this Z position
-        line_mesh.surface_add_vertex(Vector3(-grid_size * cell_spacing / 2.0, 0, z))
-        line_mesh.surface_add_vertex(Vector3( grid_size * cell_spacing / 2.0, 0, z))
-    line_mesh.surface_end()
+var tip_position: Vector3 = _draw_sphere.global_position
+var snapped_pos: Vector3 = snap_position_to_grid(tip_position)
+_grab_point.global_position += snapped_pos - tip_position
 ```
 
-`PRIMITIVE_LINES` draws each pair of vertices as an independent segment. No triangles, no filled surfaces — just directed edges. The grid is made of nothing but relationships between positions. It has no interior. That's what Point_Triangle will change.
+The local offset of the marker is preserved. The released tip is appended to the retained array and the table remains available. The callback can therefore append the release position even if that position was already the last recorded point. A row count is a count of stored entries, not necessarily of unique addresses.
 
----
+## Choose which point in the visitor to record
 
-## Recording Movement
+`player_trace` follows the active museum walking body on desktop. In VR, `_tracked_position()` combines headset-camera world X/Z with rig-origin world Y. Physical movement inside a stationary rig enters the record; a horizontal lean can enter too. Vertical head movement alone does not change this chosen floor position.
 
-`player_trace.gd` follows the XROrigin3D node and appends its position to an array whenever the player moves far enough. The structure is the same as Point_Trace introduced, but here it operates inside the grid, making the contrast visible:
-
-```gdscript
-@export var trail_max_points: int = 1024
-@export var min_segment_distance: float = 0.01
-@export var trace_height_offset: float = 0.05  # floats the trail above ground
-
-func _process(delta: float) -> void:
-    var current_global = _xr_origin.global_position
-
-    # Only record if movement exceeds the sampling threshold
-    if current_global.distance_to(_last_global_position) < min_segment_distance:
-        return
-
-    _last_global_position = current_global
-    var local_point = to_local(current_global)
-    local_point.y += trace_height_offset
-    _trail_points.append(local_point)
-
-    # Drop the oldest point when memory is full
-    if _trail_points.size() > trail_max_points:
-        _trail_points.pop_front()
-
-    _rebuild_trail()
-```
-
-`min_segment_distance = 0.01` means: only record a new point if you've moved at least 1cm. This is a sampling decision. The underlying movement is continuous — your body never stops being somewhere — but the trace samples it at intervals. Between recorded positions, you were there, but it wasn't written down.
-
-`trail_max_points = 1024` imposes a second constraint: only the last 1024 positions are kept. The oldest points get popped from the front as new ones arrive. Memory is finite. The trace forgets.
-
-`_rebuild_trail()` converts the array to a visible mesh each frame:
+The installed token enables `seam_grid:1.0` and `show_discarded:1`. The finer reference is sampled from the same selected position. It is still a sampled record. The coarser path uses:
 
 ```gdscript
-func _rebuild_trail() -> void:
-    _trail_mesh.clear_surfaces()
-    if _trail_points.size() < 2:
-        return
-
-    _trail_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-    for point in _trail_points:
-        _trail_mesh.surface_add_vertex(point)
-    _trail_mesh.surface_end()
-```
-
-`PRIMITIVE_LINE_STRIP` connects each vertex to the next — one continuous polyline through all recorded positions. The mesh is cleared and rebuilt every frame from the array. The geometry isn't persistent; the array is. This distinction matters: the visible line is derived from the data, not the other way around.
-
----
-
-## Quantization: The Snap
-
-Now introduce the grid's active role. The `grab_sphere_point_snap` artifact makes quantization tangible: grab a sphere, move it through space, and its trail snaps to grid intersections instead of following your hand exactly.
-
-The core operation is one function:
-
-```gdscript
-func snap_position_to_grid(pos: Vector3) -> Vector3:
-    if not snap_to_grid:
-        return pos
-    return Vector3(
-        round(pos.x / grid_size) * grid_size,
-        round(pos.y / grid_size) * grid_size,
-        round(pos.z / grid_size) * grid_size
-    )
-```
-
-`round(pos.x / grid_size) * grid_size` — divide by the grid size to get fractional cell coordinates, round to the nearest integer cell, multiply back to world coordinates. Three arithmetic operations convert a continuous position to the nearest lattice point.
-
-This operation is called quantization. It appears everywhere in computing: pixel coordinates in rasterization, sample positions in audio, voxels in volumetric data, tiles in game maps. The principle is always the same — divide continuous space into discrete units, assign each region to a representative point.
-
-The artifact records snapped positions, not raw positions:
-
-```gdscript
-func _process(delta: float) -> void:
-    var current_global = _draw_sphere.global_position
-
-    # Snap before any comparison or recording
-    var snapped_global = snap_position_to_grid(current_global)
-
-    if snapped_global.distance_to(_last_global_position) < min_segment_distance:
-        return
-
-    _total_trail_length += snapped_global.distance_to(_last_global_position)
-    _last_global_position = snapped_global
-    _trail_points.append(snapped_global)
-    _rebuild_trail()
-```
-
-Your hand moves continuously through space. The trail only records a new point when it crosses into a new grid cell. The hand knows no grid. The trace only knows the grid.
-
-When the sphere is released, it snaps physically to the nearest node:
-
-```gdscript
-func _on_grab_point_dropped(_pickable) -> void:
-    if snap_on_drop and _grab_point:
-        var snapped_pos = snap_position_to_grid(_grab_point.global_position)
-        _grab_point.global_position = snapped_pos
-```
-
-`snap_on_drop = true` means the sphere's visual position corrects itself at release. During the drag, the sphere and the trail can diverge — the sphere follows your hand, the trail follows the grid. The moment you let go, the sphere jumps to the nearest node. You feel the correction as a small haptic discontinuity in space.
-
-The data table that appears during interaction exposes the gap between raw and snapped:
-
-```gdscript
-# Show raw position and its grid address side-by-side
-var table_text = "  POINT (raw)      │  SNAP (grid)\n"
-for i in range(start_idx, _trail_points.size()):
-    var pt = _trail_points[i]
-    var snapped = snap_position_to_grid(pt)
-    var grid = snapped / grid_size
-    table_text += "(%.1f,%.1f,%.1f) │ (%d,%d,%d)\n" % [
-        pt.x, pt.y, pt.z,
-        int(grid.x), int(grid.y), int(grid.z)
-    ]
-```
-
-Two columns: the measured position, and the integer grid address. `(2.37, 0.0, -1.83)` becomes cell `(2, 0, -2)`. The decimal is erased. Where you precisely were is replaced by the name of the cell you were in. Information is discarded. That's what addressing requires.
-
----
-
-## The Dark Sphere as Invariant Reference
-
-This map includes a `dark_sphere` artifact: a slowly rotating, pulsing dark orb that provides no direct instruction. No interaction, no data display, no snapping behavior.
-
-```gdscript
-func _process(delta: float) -> void:
-    _time_elapsed += delta
-
-    if _sphere_mesh:
-        _sphere_mesh.rotation.y += rotation_speed * delta           # slow drift: 0.15 rad/s
-        _sphere_mesh.rotation.x = sin(_time_elapsed * 0.4) * 0.05  # subtle wobble
-
-    if _sphere_material:
-        var pulse_t := (sin(_time_elapsed * pulse_speed) + 1.0) * 0.5
-        _sphere_material.emission_energy_multiplier = lerpf(pulse_min, pulse_max, pulse_t)
-```
-
-`rotation_speed = 0.15` — a slow drift. `pulse_speed = 1.2` — emission that cycles roughly once per second between `0.05` and `0.35` energy. The sphere changes, but barely.
-
-Its function is perceptual. When you're tracing movement across the grid, watching snap points accumulate, the dark sphere occupies peripheral vision as something stable. Because it changes very little, surrounding changes become legible against it. Contrast requires a reference. The sphere doesn't teach the lesson — it holds the space steady so the teaching can happen.
-
-This is a principle of spatial design independent of VR: invariant anchors make variation legible. In an environment where everything moves or responds, choosing what stays still shapes what gets noticed.
-
----
-
-## What the Grid Does to a Path
-
-Two traces now exist simultaneously in this space: `player_trace`, which records continuous movement sampled at `min_segment_distance`, and `grab_sphere_point_snap`, which records the same kind of movement quantized to grid nodes.
-
-Walk a diagonal line across the grid while dragging the snap sphere along the same path. The player trace follows the diagonal. The snap trace draws a staircase — the Manhattan path through grid cells that approximates your diagonal.
-
-```gdscript
-# Continuous trace: records actual position at each sample
 var local_point = to_local(current_global)
-_trail_points.append(local_point)
-
-# Snapped trace: records only the grid cell crossing
-var snapped_global = snap_position_to_grid(current_global)
-if snapped_global.distance_to(_last_global_position) > min_segment_distance:
-    _trail_points.append(snapped_global)
+local_point.y += trace_height_offset
+local_point.x = roundf(local_point.x / seam_grid) * seam_grid
+local_point.z = roundf(local_point.z / seam_grid) * seam_grid
 ```
 
-The staircase and the diagonal represent the same physical movement. They differ because they answer different questions. The continuous trace asks: where was the body? The snapped trace asks: which cell was the body in?
+Only local X and Z are rounded. The display offset is 0.05 m. After the movement gate, consecutive duplicate rounded positions are suppressed. The path retains up to 1024 positions with sample times and speeds; the finer reference has its own limit of four times that count. Fading is off in this placement.
 
-As `cell_spacing` decreases toward zero, the staircase approximates the diagonal more closely. At `cell_spacing = 1.0` — one meter per cell — the deviation is large and visible. This degradation is called aliasing: the grid is a sampling frequency, and when the signal (your movement) changes faster than the sampling frequency, information is lost and artifacts appear. The staircase is an alias of the diagonal.
+Walk within one rounding region, then cross its edge. Compare how much the reference changes with how much the coarse position changes. The rounding regions extend halfway between lattice nodes. They are not necessarily the squares enclosed by a separately drawn set of grid lines.
 
-This map doesn't visualize aliasing directly — there is no side-by-side comparison — but you feel the gap when dragging the snap sphere. Your hand traces a smooth arc; the trail hops between nodes. The continuous and the discrete coexist in the same space. One of them writes the history.
+An ordered path can return to an earlier address. It is not a set containing each visited cell once. Both path meshes connect their accepted points directly; diagonal segments are allowed. Neither computes an axis-by-axis route or guarantees that the connecting segment follows walkable ground.
 
----
+## What arrives at grid_lines
 
-## Coordinates as Politics
+Releasing `draw_dot` or `draw_stick` sends its retained world-position list through `TraceData.add_trace()`. The store accepts lists with at least two points and duplicates them. `grid_lines` loads existing snapshots when it enters the scene and receives later ones through `trace_added`.
 
-The grid makes space addressable. A position that can't be named by the grid doesn't exist, from the system's perspective. This is not neutral.
+The store is an autoload in this running game. It survives changes of room but supplies no disk save here. It stores positions without the originating pen's colour, identity or timestamps. The separate whiteboard painting and `player_trace` do not publish their records to this store.
 
-Every coordinate system has an origin. The origin — `(0, 0, 0)` in Godot 4 — is the center of the reference frame. All positions are measured relative to it. Change the origin, change all the coordinates. The positions in space don't move; the names change.
+`grid_lines.tscn` supplies six lines in each direction. The script positions them one metre apart, from -2.5 to +2.5 in local X/Z, making five-by-five cells. This finite drawing neither limits the coordinate system nor defines the walking recorder's origin. Since five cells place zero between two rulings, no ruling is coloured as a zero axis in this scene.
+
+For each released trace, `_display_frame()` finds its bounding-box centre and chooses a scale: fivefold enlargement, reduced if necessary to keep its largest dimension within five display metres. The pink mesh uses:
 
 ```gdscript
-# player_trace.gd stores positions in local space
-var local_point = to_local(current_global)
+mesh.surface_add_vertex((p - center) * final_scale)
 ```
 
-`to_local()` transforms a world-space position into the coordinate frame of the `player_trace` node itself. If you move the node — drag it to a different location in the scene — all recorded coordinates shift, not because you moved differently, but because the reference frame moved. The trace is always relative to something. Absolute coordinates don't exist in Godot 4; only positions relative to some node's transform, composed all the way up to the scene root.
+The green mesh rounds the transformed positions:
 
-Every node in the scene tree carries a `Transform3D`. `global_position` is a convenience: the result of composing every parent transform from root to leaf. The "world" is just another coordinate frame, distinguished by convention.
+```gdscript
+var snap_step = cell_spacing / float(max(1, shadow_snap_subdivisions))
+var snapped = scaled.snapped(Vector3.ONE * snap_step)
+```
 
-The grid makes this concrete. `cell_spacing = 1.0` and `grid_size = 8` defines a specific frame — one where the relevant positions are integer multiples of one meter, centered on wherever the `grid_lines` node is placed. Walk outside the grid's footprint and the floor is still there, but the addressing stops. The space continues; the frame ends.
+The scene sets six subdivisions, so `snap_step` is 1/6 m in display space, in all three axes. Consecutive results must also pass the existing squared-distance threshold of 0.001 before entering the green mesh. With this pitch, identical snapped positions fail and distinct neighbours pass. Green is displayed only when at least two positions survive. Rotation is disabled by this map's token; the lattice itself never rotates.
 
-The choice of what to center, what to call zero, and how finely to subdivide is always made by someone. Coordinate systems encode decisions — about what differences matter, what distances are worth naming, whose body fits inside the frame. The grid makes those decisions visible as geometry.
+The cased panel names source count and length, enlargement and display pitch. Rows show the latest source's world coordinates to three decimal places, ten per page, advancing every two seconds. The summary covers the latest ten releases; the scene can still contain older replay meshes. Displayed length and source length should not be confused. The original source array is unchanged by either rendering transform.
 
----
+## The numbered plan
 
-## Into the Triangle
+The placed `plan_vitrine` wraps `commons/artifacts/simulation_grid/simulation_grid.tscn`. Its script creates 25 cell meshes with indices X/Z = 0 through 4. Their local centres use `Vector3(x-2, -0.024, z-2)`: the plan's cell `(2,2)` is horizontally centred at local zero. A one-metre change in either index moves a cell by one metre.
 
-Both Point_Trace and this map work with paths: sequences of positions connected by edges. A path has length. It has direction. What it doesn't have is area.
+These indices name finite cells in this particular plan. The held tool's signed lattice indices count from world zero. Neither numbering scheme defines the walking recorder's local origin. Keep the frame and the kind of thing being indexed explicit when comparing them.
 
-Three points arranged in a line don't close. Pull the third point off the axis, and something new appears: a bounded region. An interior. A surface with a front and a back.
+Each visual tile measures 0.988 by 0.988 m horizontally, with 0.06 m thickness and a top 0.006 m above local zero. A separate `PlanFloor` static body has one 5 by 0.06 by 5 m box collider centred at Y = -0.03, giving a continuous top at zero. The tile gaps do not become gaps in that collider. The vitrine's glass panes have no colliders. Its additional controller-mounted drawing behavior is outside the primary floor-plan exercise and awaits headset validation.
 
-The triangle is the first closed form. It's also the atomic unit of GPU rendering — everything rendered on screen, every mesh in this project, every face of every object, is decomposed into triangles before the hardware touches it. Point_Triangle begins where this map ends: not with where things are, but with what they enclose.
+## The basin and the next boundary
 
-The grid prepared the ground for this. A grid of quantized positions is a lattice of candidate vertices. Triangulation is the problem of connecting lattice points to form surfaces. The snap function that made your trace staircase is the same operation that would pin a mesh's vertices to integer coordinates. The grid and the triangle aren't separate topics — they're the same question at different scales.
+The current museum map requests a one-metre-deep basin with a glass lid. The museum builder supplies the walkable glass; `grid_lines` supplies line geometry without a floor collider. The readout stands beside the right rim, 1.2 m above deck height when stamped at that basin depth.
 
-This map ends with position. The next map ends with area.
+Positions can be named beyond the drawn lattice. Whether someone can stand there needs collision geometry and a route; coordinates alone do not answer it. The next room makes a related distinction between an edge loop and a filled triangle.
 
----
+Possible later controls include changing the walking grid's spacing or moving its origin while keeping the same source positions. They are proposals, not installed controls. The current experiment already lets the visitor change the gesture's purpose: use a coarse region to hold a stable address, or use crossings to compose a rhythm.
 
-## Possible Artifacts
 
-**dual_trace_comparator** — Places two simultaneous traces of the same movement: one continuous (from `player_trace`), one snapped (from `grab_sphere_point_snap`). A thin connecting line between corresponding points would visualize the quantization error — the distance between where you were and where the grid recorded you. Aliasing made visible rather than felt.
+## Encounter reference, 15 September 2026
 
-**grid_size_slider** — A Rams-style panel with a single `cell_spacing` slider. Adjusting it in real time would rebuild the grid and the snap function, letting the learner watch the staircase approximate a diagonal as quantization becomes finer. Currently both `grid_size` and `cell_spacing` are fixed at map load. This is the one parameter that changes the entire lesson's perceptual argument.
+[Companion notes for the current book passage](encounter-reference.md) retain instrument settings, recording distinctions and code excerpts moved out of the main reading.
 
-**coordinate_frame_shifter** — A grabbable origin marker. Moving it recomputes all displayed coordinates relative to the new position, making the relativity of coordinate frames tangible. The physical positions in space stay identical; the numbers change. No artifact currently demonstrates that coordinate values are reference-frame-dependent — which is the hardest conceptual move this map asks for.
+Source entry points: `commons/primitives/point/grab_sphere_point_snap.gd` and its scene; `commons/primitives/point/player_trace.gd`; `commons/globals/trace_data.gd`; `commons/primitives/line/grid_lines.gd` and its scene; `commons/artifacts/plan_vitrine/plan_vitrine.gd`; `commons/artifacts/simulation_grid/simulation_grid.gd`.

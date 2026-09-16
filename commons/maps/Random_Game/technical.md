@@ -1,180 +1,67 @@
-# Random Game — Technical
+# Random Game — state, time, position and support
 
-An 8×8 arena of falling cubes with origami enemies creates a probabilistic hazard space.
+Builds on Random_Mushrooms' distinction between construction and sampled choices; prepares for Noise_Types and relations between neighbouring samples. These excerpts come from the implemented crossing and falling-field scripts.
 
-## Cube Projectile Spawner
+## Crossing
 
-```gdscript
-class_name CubeProjectileSpawner extends Node3D
+`commons/primitives/cubes/random_cycle_cube.gd` supplies the `r_c` token. The map uses `r_c#stand:chasm#cue:advance` at (3,4), in its existing five-by-three pit of zero structure cells. It is a cycling cube, not a score controller.
 
-enum Mode { UNIFORM, CLUSTERED, WAVE }
-@export var mode: Mode = Mode.UNIFORM
-@export var grid_size: Vector2i = Vector2i(8, 8)
-@export var cube_drop_height: float = 15.0
-
-var cube_cycles: Array = []  # per-tile sink-rise phase
-
-func _ready() -> void:
-    for y in range(grid_size.y):
-        cube_cycles.append([])
-        for x in range(grid_size.x):
-            cube_cycles[y].append(randf_range(0.0, TAU))
-
-func _physics_process(delta: float) -> void:
-    match mode:
-        Mode.UNIFORM:
-            for y in range(grid_size.y):
-                for x in range(grid_size.x):
-                    cube_cycles[y][x] += delta * 1.5
-                    update_cube_at(x, y)
-        Mode.CLUSTERED:
-            apply_clustered_pattern(delta)
-        Mode.WAVE:
-            apply_wave_pattern(delta)
-
-func update_cube_at(x: int, y: int) -> void:
-    var phase: float = cube_cycles[y][x]
-    var height: float = sin(phase) * 2.0
-    cube_at(x, y).position.y = height
-```
-
-## Origami Enemies
-
-Each origami enemy implements a different stochastic movement pattern.
+The fixed order is IDLE → GOING_OUT → HIDDEN → COMING_IN. The wait bands in this hall are [2.4,4.6] and [1.1,2.2] seconds. Despite its name, `wait_span_seconds` is the upper endpoint, not an amount added to the lower endpoint.
 
 ```gdscript
-class_name KaleidocycleEnemy extends CharacterBody3D
-
-@export var face_cycle_interval: float = 2.0
-
-var current_face: int = 0
-var time_since_cycle: float = 0.0
-
-func _physics_process(delta: float) -> void:
-    time_since_cycle += delta
-    if time_since_cycle >= face_cycle_interval * randf_range(0.8, 1.2):
-        time_since_cycle = 0.0
-        current_face = (current_face + 1) % 4
-    # Move in a direction determined by current face
-    var move_direction: Vector3 = face_movement_vectors[current_face]
-    velocity = velocity.lerp(move_direction * 2.0, 0.1)
-    move_and_slide()
-
-class_name KreslingSpire extends StaticBody3D
-
-enum SpireState { FLAT, RISING, ATTACKING, COLLAPSING }
-var state: SpireState = SpireState.FLAT
-
-func _physics_process(delta: float) -> void:
-    match state:
-        SpireState.FLAT:
-            if randf() < 0.01:  # 1% chance per frame to rise
-                state = SpireState.RISING
-        SpireState.RISING:
-            transition_to_attacking_over_time(delta)
-        SpireState.ATTACKING:
-            fire_at_learner_if_possible()
-            if should_relocate():
-                state = SpireState.COLLAPSING
-        SpireState.COLLAPSING:
-            collapse_and_reposition(delta)
+var min_wait: float = max(0.1, wait_min_seconds)
+var max_wait: float = max(min_wait, wait_span_seconds)
 ```
 
-## Game Controller
-
-The `r_c` artifact handles overall game state: score, timer, enemy spawns, win conditions.
+The sampled duration is recorded once. The display subtracts engine uptime from a stored deadline:
 
 ```gdscript
-class_name GameController extends Node
-
-@export var survival_time: float = 60.0
-@export var score_per_second: int = 10
-@export var enemies_per_wave: int = 3
-
-var time_elapsed: float = 0.0
-var score: int = 0
-var enemies_active: Array = []
-
-func _process(delta: float) -> void:
-    if learner_alive():
-        time_elapsed += delta
-        score += int(score_per_second * delta)
-        maintain_enemy_count()
-    else:
-        end_game()
-
-func maintain_enemy_count() -> void:
-    while enemies_active.size() < enemies_per_wave:
-        spawn_random_enemy()
+var left: float = max(0.0, float(_step_until_ms - Time.get_ticks_msec()) / 1000.0)
 ```
 
-## Complexity
+The display is refreshed about every 0.12 seconds and rounds its values. SceneTree timers and tweens execute at engine frame boundaries. The stored millisecond deadline is a display estimate, not proof of exact wall-clock transition times. Changing Engine.time_scale or pausing the tree would require revisiting this clock agreement; those conditions are not this room's controls.
 
-Cube cycle updates are O(grid_size²). Enemy AI is O(enemy count) per frame. Per-frame total at typical counts (64 cubes, 8 enemies) is under a millisecond.
+`step_state()` now exposes the actual state separately from the last wait kind. LEAVES and RETURNS retain the last wait at zero; the tablet no longer calls sinking STANDS or rising GONE. The crown checks IDLE and a positive remaining interval of at most 1.2 seconds. All three stones keep during-motion beacons, including when CUE removes the rings. The tablet remains present in both conditions.
 
-## Within the Sequence
+The collider is disabled after the 0.5-second sink and 0.2-second delay; after the hidden wait, another 0.2-second delay precedes enabling collision and the 0.2-second rise. State, position and collider must be inspected independently.
 
-Random_Game is the playable capstone of the Randomness sequence. Surviving the arena requires inhabiting distributions rather than predicting instances.
+REPLAY reseeds the same assignment of streams and restores position/support. `_restart_cycle_loop` invalidates old tickets immediately and kills an active movement tween before starting the replacement loop. NEW SEED excludes the present five-digit number but keeps no history of earlier names. The sequence of draws is replayed; exact wall-clock timestamps and the rest of the museum are not.
 
-## Save State Integration
+The hall floor is root-local CH_FLOOR = 0.28, bed top CH_BED = −0.74, and stone tops CH_PROUD = 0.22 above the hall floor. CH_SINK = 1.22 leaves a sunken stone top 0.02 above the bed. The standing-top-to-bed difference is 1.24 m; floor-to-bed is 1.02 m. CH_PITCH = 1.12 gives 0.12 m gaps between one-metre stones.
 
-The chamber's progress is tracked via the save manager. Befriending a creature, completing a configuration, or reaching a milestone is recorded in the learner's profile and becomes available in subsequent sessions.
+The artifact supplies the bed, side/end walls, thresholds and west recovery ramp. `_process` cancels the moving root's displacement out of its staging child. The east corridor is an alternative route through the hall; a map flood fill does not prove absence of attacks from other artifacts.
+
+## Falling field
+
+`commons/primitives/cubes/CubeSpawner.gd` is configured at (6,12) with `mode:field`, an 8×8 region, launch height 8, fall range 1.6–2.6, drift 0.25, jitter 0.25, jitter interval 0.45, vertical variation 0.2, spawn interval 0.5 and a maximum of 24 projectiles. `stand:field` adds a panel and initial-position boundary strips; default placements add neither.
 
 ```gdscript
-func on_befriend_event(creature_name: String) -> void:
-    var save = get_tree().get_first_node_in_group("save_manager")
-    save.add_befriended_creature(creature_name)
-    save.mark_milestone(chamber_id + "_befriended", Time.get_datetime_string_from_system())
+var initial_velocity = Vector3(
+    _rng.randf_range(-field_initial_horizontal_speed, field_initial_horizontal_speed),
+    -fall_speed,
+    _rng.randf_range(-field_initial_horizontal_speed, field_initial_horizontal_speed)
+)
 ```
 
-## Performance Budget
+This mode samples x and z in world axes around the spawner's world origin, not rotated local axes. Its initial height is constant. Positions are continuous samples rather than selection of 64 grid cells. A regular Timer attempts launches; at the active-body cap the attempt is skipped. Existing global desktop P/O/C shortcuts remain, but the new panel provides local pointer controls.
 
-The chamber's per-frame cost is dominated by creature animations and the science screen's rendering. Both are modest: the creature uses a vertex-displacement shader or a prebuilt animation, and the science screen redraws scatter points incrementally rather than from scratch each frame.
+RUN / STOP toggles the timer. STOP leaves active bodies; CLEAR queues those bodies for deletion and clears their account without changing the running state. Repeated toggles cancel the prior pulse tween instead of stacking animations. Configuration can arrive before `_ready`, so the interval setter must retain the number even when its Timer node is not yet bound.
+
+`ProjectileCube.gd` gives each body its own randomized generator. Every jitter update selects a new lateral velocity and a downward speed near that body's base fall speed. Gravity is disabled in field mode, and the integration callback imposes the current velocity. This is prescribed velocity with collision response, not a freely accelerating rain model.
 
 ```gdscript
-func _process(_delta: float) -> void:
-    if science_screen.needs_redraw():
-        science_screen.redraw_incremental()
+velocity.x = _rng.randf_range(-horizontal_jitter_strength, horizontal_jitter_strength)
+velocity.z = _rng.randf_range(-horizontal_jitter_strength, horizontal_jitter_strength)
+velocity.y = -new_fall_speed
+linear_velocity = velocity
 ```
 
-## VR Comfort
+`field_seed` controls initial positions and velocities only. The review repeats those records while checking that projectile jitter streams remain independent. No distribution-mode panel, survival-score controller or per-frame performance measurement is claimed. The legacy empty audio placeholders are omitted rather than treated as playable sounds.
 
-The chamber avoids fast camera moves and sudden lighting changes. Projectiles fire from the learner's hand rather than from fixed spawners, so the learner controls the motion. The chamber's lighting is stable across the encounter; any changes happen gradually through creature state transitions.
+## Remaining company and validation limits
 
-## Accessibility
+Six folding creatures and `monte_carlo` remain secondary. The latter's π sampling implementation exists; its integration, option-pricing and random-walk alternatives are stubs. Its camera/input arrangement and staging need a separate pass before promotion. Enemies can detect and pursue; moving their map cells does not establish isolation. Combat balance and a controlled encounter activation scheme remain open.
 
-The chamber supports seated play: all interactive elements are within arm's reach, and the projectile direction is controllable from a single hand. The creature responds to either controller, so handedness is not a barrier.
+The independent desktop run checks museum placement, floor rays, recovery, real pointer controls, reset during movement, cue invariance, initial launch records and the cap. Headset approach, comfort, legibility and performance remain for a later visit.
 
-## Within the Curriculum
-
-This chamber is one of the curriculum's catalyst chambers — small, self-contained rooms where the sequence's accumulated vocabulary becomes relationship with a creature. The pattern is consistent across sequences: creature, catalyst (or its deliberate absence), science screen, return to Lab.
-
-## Persistence
-
-Each run of the arena is independent; scores and survival times are not persisted across runs by default, though an optional leaderboard mode records them locally.
-
-## Game Over
-
-On death, the arena locks briefly and shows a score summary before offering retry. The summary emphasises distribution exposure over score.
-
-## Score Display
-
-A subtle score readout appears at the edge of the arena, updating without drawing the learner's attention away from the hazard field.
-
-## The crossing staging (2026-09-12)
-
-`commons/primitives/cubes/random_cycle_cube.gd`, opt-in through the map token `r_c#stand:chasm#cue:advance`. Defaults are untouched: at `stand:none` the seven existing placements take the identical path they took before, and `advance_seconds` and `hidden_span_seconds` are both 0, which are the shipped behaviours.
-
-| what | where |
-|---|---|
-| the drawn wait, and its stored deadline | `_next_random_wait(kind)` and `_note_step`; read through `step_state()` |
-| the advance cue | `_build_crown` and `_process`, gated on `advance_seconds > 0` |
-| the pit's geometry | `_pit_half()`, derived from `stone_count` and `pit_width` |
-| the bed, sides, thresholds, kerbs, way out | `_build_crossing` and `_ramp` |
-| the row | `_spawn_stones`, one scene instance per stone, each seeded from the crossing's generator |
-| the two surfaces | `_build_stele` (the order, cut) and `_build_tablet` / `_update_tablet` (the draws, live) |
-| the controls | `_build_controls` — REPLAY, NEW SEED, CUE through `InteractableAreaButton.button_pressed` |
-| the far lip | `_build_idol`, with the crossing's seed cut into the plinth |
-| the whole state, for a probe | `crossing_state()` |
-
-Three numbers hold the vertical arrangement: the hall floor sits at root-local `CH_FLOOR`, a standing stone's top `CH_PROUD` above it, and the bed's top `CH_BED`, one metre and two centimetres under the floor. `CH_SINK` is set so a sunken stone comes to rest two centimetres proud of that bed — the floor that left you is the floor you land on. The staging is the tile's own child and the tile sinks by moving itself, so `_process` cancels the sink out of the staging's offset; and because the map-authored lane places a body's origin on the deck and does not read the token's `y` offset, `_prepare_crossing` lowers the tile itself before anything is built.
+The map still names `monte_carlo`, but the current museum loader reports no living scene for it and omits that body. It is a secondary candidate, not a verified encounter in this lane. Eight of the nine requested artifact placements currently build.

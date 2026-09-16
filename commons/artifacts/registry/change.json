@@ -2,15 +2,15 @@
 	"artifacts": {
 		"the_frame_you_were_given": {
 			"dna": {
-			 "axes": {
-			 "cut": [
-			 "sixteen",
-			 "one",
-			 "four",
-			 "sixty_four",
-			 "two_five_six"
-			 ]
-			 }
+				"axes": {
+					"cut": [
+						"sixteen",
+						"one",
+						"four",
+						"sixty_four",
+						"two_five_six"
+					]
+				}
 			},
 			"name": "The Frame You Were Given",
 			"class_name": "TheFrameYouWereGiven",
@@ -18,21 +18,21 @@
 			"description": "One curve and the left-endpoint Riemann sum beneath it at five grains - 1, 4, 16, 64, 256 slices - each frame printing the area it reports and the percent it is off. `_process(delta)` IS this sum, so the staircase is not an illustration of the engine, it is the engine drawn. The true area is computed at 20,000 samples and etched on the sill, so every frame reads against the same number. The last frame looks smooth and is still wrong. Export values are WORDS, not numerals, because a numeric-looking String export gets coerced to int and then refused in silence by Object.set(). 2026-08-27.",
 			"category": "change",
 			"tags": [
-			 "change",
-			 "riemann",
-			 "integral",
-			 "discretisation",
-			 "dna"
+				"change",
+				"riemann",
+				"integral",
+				"discretisation",
+				"dna"
 			],
 			"spatial_needs": {
-			 "footprint_cells": 4,
-			 "clearance_m": 0.8
+				"footprint_cells": 4,
+				"clearance_m": 0.8
 			}
 		},
 		"catalyst_sustain_demo": {
 			"name": "Catalyst Sustain Demo",
 			"lookup_name": "catalyst_sustain_demo",
-			"description": "Demonstrates the catalyst bracelet's sustain affordance \u2014 hold a state while time runs. A glowing torus floats above a pedestal; a trail of after-images shows the integral of held-position over time. First place the player meets 'hold this while time passes.'",
+			"description": "Demonstrates the catalyst bracelet's sustain affordance — hold a state while time runs. A glowing torus floats above a pedestal; a trail of after-images shows the integral of held-position over time. First place the player meets 'hold this while time passes.'",
 			"scene": "res://algorithms/change/catalyst_sustain_demo.tscn",
 			"category": "change",
 			"sequence": "change",
@@ -124,7 +124,7 @@
 			},
 			"name": "Slope Tangent Demo",
 			"lookup_name": "slope_tangent_demo",
-			"description": "A sine curve with a moving point that drags its tangent line. Where the curve is steep the tangent tilts, and it is steepest exactly at the zero crossings; at the crest and the trough it lies flat. The first map showing rate as a thing alongside the thing \u2014 derivative as instantaneous slope.",
+			"description": "A sine curve with a moving point that drags its tangent line. Where the curve is steep the tangent tilts, and it is steepest exactly at the zero crossings; at the crest and the trough it lies flat. The first map showing rate as a thing alongside the thing — derivative as instantaneous slope.",
 			"scene": "res://algorithms/change/slope_tangent_demo.tscn",
 			"category": "change",
 			"sequence": "change",
@@ -848,7 +848,7 @@
 		"riemann_sum_workbench": {
 			"name": "Riemann Sum Workbench",
 			"lookup_name": "riemann_sum_workbench",
-			"description": "An interactive workbench for the midpoint Riemann sum. One slider drives N (rectangle count) through six detents [4, 8, 16, 32, 64, 128]; N translucent blue rectangles regenerate under the curve f(x) = \u00bd + 0.4\u00b7sin(2x) + 0.15\u00b7cos(5x) on [0, 5]; a live readout shows \u03a3, the true \u222b \u2248 2.864, and the signed error; a side error-bar shrinks toward green as N grows. The slider IS the limit \u2014 at N=4 the polygon visibly under- and overshoots; at N=128 it traces the curve. Paired with the /riemann-sum-gallery web cells of this same instrument frozen at the six N-values.",
+			"description": "An interactive workbench for the midpoint Riemann sum. One slider drives N (rectangle count) through six detents [4, 8, 16, 32, 64, 128]; N translucent blue rectangles regenerate under the curve f(x) = ½ + 0.4·sin(2x) + 0.15·cos(5x) on [0, 5]; a live readout shows Σ, the true ∫ ≈ 2.864, and the signed error; a side error-bar shrinks toward green as N grows. The slider IS the limit — at N=4 the polygon visibly under- and overshoots; at N=128 it traces the curve. Paired with the /riemann-sum-gallery web cells of this same instrument frozen at the six N-values.",
 			"scene": "res://commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.tscn",
 			"category": "change",
 			"interaction": "grab_slide",
@@ -937,7 +937,7 @@
 		"tangent_slope_workbench": {
 			"name": "Tangent Slope Workbench",
 			"lookup_name": "tangent_slope_workbench",
-			"description": "An interactive workbench for the derivative as tangent slope. One slider drives x continuously across [0, 5]; a red marker slides along the curve f(x) = \u00bd + 0.4\u00b7sin(2x) + 0.15\u00b7cos(5x); a bright gold tangent line through the marker rotates to match f'(x) = 0.8\u00b7cos(2x) \u2212 0.75\u00b7sin(5x); a small f'(x) subplot above the main plot tracks the derivative as its own function; a live readout shows f'(x), f(x), an up/down/flat slope word, and x; a side sign indicator arrow tilts up (green) when rising, down (red) when falling, flat (white) at extrema. At local maxima/minima the tangent goes horizontal \u2014 the geometric moment of an extremum. Paired with the /tangent-slope-gallery web cells of this same instrument frozen at 8 x-positions. Sibling to riemann_sum_workbench \u2014 same f, differentiation vs. integration.",
+			"description": "An interactive workbench for the derivative as tangent slope. One slider drives x continuously across [0, 5]; a red marker slides along the curve f(x) = ½ + 0.4·sin(2x) + 0.15·cos(5x); a bright gold tangent line through the marker rotates to match f'(x) = 0.8·cos(2x) − 0.75·sin(5x); a small f'(x) subplot above the main plot tracks the derivative as its own function; a live readout shows f'(x), f(x), an up/down/flat slope word, and x; a side sign indicator arrow tilts up (green) when rising, down (red) when falling, flat (white) at extrema. At local maxima/minima the tangent goes horizontal — the geometric moment of an extremum. Paired with the /tangent-slope-gallery web cells of this same instrument frozen at 8 x-positions. Sibling to riemann_sum_workbench — same f, differentiation vs. integration.",
 			"scene": "res://commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.tscn",
 			"category": "calculus",
 			"interaction": "grab_slide",
@@ -1187,6 +1187,51 @@
 				"footprint_cells": 4,
 				"clearance_m": 0.6
 			}
+		},
+		"phase_rod_array": {
+			"lookup_name": "phase_rod_array",
+			"name": "Twenty clocks",
+			"scene": "res://commons/artifacts/timing_machines/phase_rod_array.tscn",
+			"description": "Twenty light rods: shift one phase, form a phase wave, or drift two rows by changing their frequency.",
+			"map_ready": true,
+			"include_in_map_data": true,
+			"category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"phase",
+				"timing",
+				"choreography"
+			],
+			"qfep_connection": "The relation between local rules and collective outcomes is inspectable. Difference can make a pattern or produce congestion; this exhibit does not measure entropy or establish a QFEP threshold.",
+			"interactions": [
+				"ONE +",
+				"WAVE",
+				"DRIFT",
+				"RESET",
+				"RULE"
+			]
+		},
+		"conveyor_backlog": {
+			"lookup_name": "conveyor_backlog",
+			"name": "The receiver",
+			"scene": "res://commons/artifacts/timing_machines/conveyor_backlog.tscn",
+			"description": "A moving belt transports rigid parcels into a timed receiver. Change collection interval and observe physical backlog and recovery.",
+			"map_ready": true,
+			"include_in_map_data": true,
+			"category": "change",
+			"complexity": "intermediate",
+			"tags": [
+				"phase",
+				"timing",
+				"choreography"
+			],
+			"qfep_connection": "The relation between local rules and collective outcomes is inspectable. Difference can make a pattern or produce congestion; this exhibit does not measure entropy or establish a QFEP threshold.",
+			"interactions": [
+				"BACK UP",
+				"RECOVER",
+				"RESET",
+				"RULE"
+			]
 		}
 	}
 }

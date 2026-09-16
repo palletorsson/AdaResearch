@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "check": "Platform structure and access unchanged",
+      "pass": true
+    },
+    {
+      "check": "Exit reachable from authored entrance at row 1, column 6",
+      "pass": true
+    },
+    {
+      "check": "All 18 placements retained",
+      "pass": true
+    },
+    {
+      "check": "Every placement cell reachable in grid model",
+      "pass": true
+    },
+    {
+      "check": "ada_run/em_plan.json: all other plan rows preserved",
+      "pass": true
+    },
+    {
+      "check": "commons/data/museum/em_plan.json: all other plan rows preserved",
+      "pass": true
+    },
+    {
+      "check": "Live book API serves updated final.md",
+      "pass": true
+    },
+    {
+      "check": "Five primary families agree with book",
+      "pass": true
+    },
+    {
+      "check": "Book encounter order preserved",
+      "pass": true
+    },
+    {
+      "check": "Accepted editorial feedback preserved",
+      "pass": true
+    }
+  ],
+  "headset_verified": false
+}

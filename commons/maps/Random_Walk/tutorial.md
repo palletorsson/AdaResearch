@@ -1,20 +1,16 @@
-# Random Walk
+# Random Walk — draw, fold, keep
 
-A position, a step, a drawing. Every excerpt below is from `commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd`, the tank on the cabinet.
+The primary is `random_walk_terrarium:90#stand:logbook` at map cell (4,1). Read the final passage as the encounter; use this chapter to follow the implementation. All GDScript excerpts are from `commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd`.
 
-Draw one number. Everything the walk decides comes through this function, from the global stream by default or from a private generator once a seed is named:
+## What the previous rooms supply
 
-```gdscript
-func _rand() -> float:
-	if walk_seed < 0:
-		return randf()
-	if _rng == null:
-		_rng = RandomNumberGenerator.new()
-		_rng.seed = walk_seed
-	return _rng.randf()
-```
+Coordinates locate the bead, a vector proposes its displacement, an array keeps sampled positions, and repeated addition accumulates movement. Random Remove asked which addresses a draw could choose. This room asks what follows when the choice changes a position and the enclosure then corrects it.
 
-Turn the number into a step. In 2D the length is fixed and only the heading is drawn:
+## Try the rule before naming it
+
+Follow red under ONE. Predict a direction, then compare 2D and 3D. Move around a suspected crossing. Try LEVY last. The cabinet has no pause control; mode changes and RESET restart the run. The logbook wing offers ONE, ALL and NEW SEED.
+
+## Draw a heading
 
 ```gdscript
 		WalkMode.WALK_2D:
@@ -22,7 +18,21 @@ Turn the number into a step. In 2D the length is fixed and only the heading is d
 			return Vector3(cos(angle), 0, sin(angle)) * step_size
 ```
 
-In 3D two draws pick a direction on the sphere; the length stays fixed. LEVY keeps the direction and draws a length as well:
+One draw chooses an angle in the xz plane. The proposed length is 0.015 m and the y increment is zero. In 3D two draws produce a uniformly sampled direction on the sphere:
+
+```gdscript
+			var theta = _rand() * TAU
+			var phi = acos(2.0 * _rand() - 1.0)
+			return Vector3(
+				sin(phi) * cos(theta),
+				sin(phi) * sin(theta),
+				cos(phi)
+			) * step_size
+```
+
+Here theta is the xy azimuth and z is the polar coordinate. Do not describe this as adding a y component to an unchanged 2D path. The draw consumption also changes: one, two or three draws per walker per step in 2D, 3D or LEVY. All five walkers share this private generator in a fixed order.
+
+LEVY uses the same 3D direction construction, then draws a length:
 
 ```gdscript
 			var u = _rand()
@@ -31,38 +41,32 @@ In 3D two draws pick a direction on the sphere; the length stays fixed. LEVY kee
 			return direction * levy_step
 ```
 
-With the offset at 0.01 and the exponent at −0.5 the power never exceeds ten, so the cap of ten step-lengths is reached, not overrun.
+With offset 0.01 and exponent −0.5, the proposed lengths range from approximately 0.01493 to 0.15 m. The power already bounds the maximum at ten base steps. Under an ideal uniform draw, length > 0.10 m corresponds to u < 0.0125: about one in eighty. This is a bounded power-law rule; it does not instantiate an unbounded Lévy process or a full physical model of Brownian motion.
 
-Add the step, fold it back at the glass, and record the position before it changes:
-
-```gdscript
-		var step = _generate_step()
-		var new_pos = _walker_positions[i] + step
-
-		# Boundary reflection
-		new_pos = _reflect_boundaries(new_pos)
-
-		# Record trail
-		_walker_trails[i].append(_walker_positions[i])
-		if _walker_trails[i].size() > trail_length:
-			_walker_trails[i] = _walker_trails[i].slice(1)
-```
-
-The trail keeps `trail_length` positions, two hundred here; the walker keeps one. Nothing the step does reads the trail.
-
-Fold at the wall. An overshoot comes back by the distance it overshot; in 2D the height is pinned to the middle plane:
+## The enclosure participates
 
 ```gdscript
 	if pos.x < -half.x: pos.x = -half.x + (-half.x - pos.x)
 	if pos.x > half.x: pos.x = half.x - (pos.x - half.x)
 ```
 
+The box spans x,z = −0.25..0.25 and y = 0..0.4. An endpoint past a wall folds back by its overshoot. Under 2D, y is pinned to 0.2. With these defaults, even the 0.15 m maximum proposal is shorter than the smallest half-extent, so the single reflection per side suffices. Arbitrary larger configuration values would need a separate boundary review.
+
+The accepted increment may differ from the proposal. The connected trail is a chord between accepted samples, not a collision path that includes the wall-contact point. After reflection, even fixed-length proposals can yield shorter displayed segments.
+
+## Keep an ordered window
+
 ```gdscript
-	else:
-		pos.y = terrarium_size.y / 2.0
+		_walker_trails[i].append(_walker_positions[i])
+		if _walker_trails[i].size() > trail_length:
+			_walker_trails[i] = _walker_trails[i].slice(1)
+
+		_walker_positions[i] = new_pos
 ```
 
-Pace the steps. Frame time is accumulated and spent in whole steps, and a long frame is capped so it cannot dump a second of steps into one jump:
+The default trail keeps 200 positions before their updates. At step N it contains positions max(0,N−200)..N−1; the bead is at N. No trail term appears in the generator or boundary rule. A controlled test can delete this history and continue the same positions. That is an internal test, not an eraser control offered to the visitor.
+
+## Distinguish step time from frame time
 
 ```gdscript
 	var interval = 1.0 / maxf(steps_per_second, 0.001)
@@ -73,9 +77,9 @@ Pace the steps. Frame time is accumulated and spent in whole steps, and a long f
 		_step_all_walkers()
 ```
 
-Simulation time is steps over the cadence, thirty a second. The wing's plate prints both clocks so you can watch them drift apart.
+The cadence is 30 step batches per second, with five walkers advanced in each batch. A two-second frame accepts five batches and discards the excess time. The logbook's frame clock still gains two seconds; the simulation-time field gains 5/30 seconds. No backlog remains to be recovered in later frames.
 
-Decide what RESET means. Without a seed the stream simply continues and a reset is a new walk. With a seed the generator is re-seeded first, and the same walk returns:
+## Replay a procedure
 
 ```gdscript
 	if walk_seed >= 0:
@@ -84,6 +88,21 @@ Decide what RESET means. Without a seed the stream simply continues and a reset 
 		_rng.seed = walk_seed
 ```
 
-The logbook names a five-digit seed on its plate; NEW SEED draws another from a private generator, never from the global stream. Press 2D, then 3D, under one seed: the first draw is the heading in the plane in one and the azimuth on the sphere in the other. The same number, another rule, another place.
+RESET restores the centre positions, clears trails and counters, and re-seeds this room's generator. It does not clear the residual step timer or logbook refresh accumulator. Compare equal step counts rather than assuming identical timestamps after reset. The generator implementation, mode, population and draw order must also agree.
 
-The next room, Random Gaussian, gathers many draws into a distribution.
+NEW SEED explicitly rejects the immediately current number, but can revisit an earlier one. ONE/ALL affects visual emphasis only. The unconfigured artifact uses `walk_seed = -1` and the global stream; resetting it does not rewind that stream. The room's named private seed makes a stronger replay promise.
+
+## Read the measurement
+
+MSD is the average of five squared distances from (0,0.2,0), in square metres. It can rise or fall. The finite box gives bounds of 0.125 m² in 2D and 0.165 m² in 3D/LEVY; these are geometric upper bounds, not promised plateaus. It measures neither total distance travelled nor the complexity of the line.
+
+Next: Random Gaussian. Keep the distinction between a draw, an accumulation and the way a display gathers its evidence.
+
+
+## Spatial staging — 16 September 2026
+
+The map keeps a reachable instrument alongside its spatial applications. `map_data.json` is authoritative for placements. `#controls:compact` gathers the existing Rack panels, preserving their callbacks, into an 80 cm console. `#glass_width` opts into an enclosure with open entrances; its grid marks are not floor colliders.
+
+### Gallery, basin, field
+
+Following Transformation staging, a 2.5 m basin separates the existing glass field from the gallery. The source floor cuts the moat; it is not a dark decal. Two bridges and the inner apron stay at gallery level. Outer glass rails border the gap, with openings at the bridges. The field retains its existing walk and raised-cell behaviour.

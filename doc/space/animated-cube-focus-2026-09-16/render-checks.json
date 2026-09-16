@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "check": "final renders with the book Markdown stack",
+      "pass": true
+    },
+    {
+      "check": "Two footnotes render with targets and backlinks",
+      "pass": true
+    },
+    {
+      "check": "Return visit and technical links use available book sections",
+      "pass": true
+    },
+    {
+      "check": "No duplicate rendered element ids",
+      "pass": true
+    },
+    {
+      "check": "tutorial renders with the book Markdown stack",
+      "pass": true
+    },
+    {
+      "check": "technical renders with the book Markdown stack",
+      "pass": true
+    },
+    {
+      "check": "intent renders with the book Markdown stack",
+      "pass": true
+    },
+    {
+      "check": "summary renders with the book Markdown stack",
+      "pass": true
+    },
+    {
+      "check": "blurb renders with the book Markdown stack",
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "checks": {
+    "Twelve exact before copies": true,
+    "Three runtime sources unchanged": true,
+    "Room geometry and placements unchanged": true,
+    "Only capsule role and intended buckets changed": true,
+    "Other spine entries and metadata unchanged": true,
+    "No spine membership lost": true,
+    "Six book encounters match spine primaries": true,
+    "Four unique matching footnotes": true,
+    "Seven live book sections agree": true,
+    "Live primary order agrees": true,
+    "All twenty-six live placements retained": true,
+    "Nine primary placements represented": true,
+    "Ten optional study paragraphs retained": true,
+    "Scoped diff check passes": true,
+    "Live capsule primary card matches book encounter": true
+  },
+  "scope": "The legacy from_book field marks only the first hero token, not all book encounters; the capsule is verified through its explicit primary role, layout card and authored encounter tag."
+}

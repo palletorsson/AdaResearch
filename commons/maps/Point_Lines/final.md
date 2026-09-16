@@ -6,7 +6,7 @@ Two black points wait beside a barrier: **DO NOT CROSS.** Bring them near one an
 
 The barrier flies apart.
 
-Keep hold of this small beginning: **two distinct points determine a straight line.** Here we draw only the part between them: a segment. Move an endpoint. The segment changes length and direction while the connection remains.
+Keep hold of this small beginning: **two distinct points determine a straight line.**[^point-lines-euclid] Here we draw only the part between them: a segment. Move an endpoint. The segment changes length and direction while the connection remains.
 
 Already something else has attached itself to the lesson. Joining two points has opened a passage.
 
@@ -43,7 +43,7 @@ Even here, another question appears. Your hand may keep moving while the rounded
 
 Two points were enough to begin. They have not made the world small.
 
-Nearby, a ruler offers a measure. Two crosses invite comparison. Lines on monitors seem to meet; a laser waits for something to stand in its way. Each could occupy the rest of our visit. There is pleasure in following these associations, in finding how quickly a familiar mark acquires another use.
+Nearby, a ruler offers a measure. Two crosses invite comparison. Lines on monitors seem to meet; a laser waits for something to stand in its way. Each could occupy the rest of our visit. There is pleasure in following these associations, in finding how quickly a familiar mark acquires another use.[^point-lines-ingold]
 
 For now, hold on to the connection you made and the distance you changed. The other experiments remain available for a return.
 
@@ -57,13 +57,13 @@ Across the glass cover of a shallow basin, a black stripe: **WALK THIS LINE.** T
 
 Try following it. Then walk alongside it. Cross it at an angle. The stripe gives you something steady to vary your relation with.
 
-Did a sideways step feel like a mistake? The marking makes no such judgement: its script draws the stripe and lettering without scoring your walk. The instruction may still have changed how you moved. Another visitor might find an invitation to dance around it.
+Did a sideways step feel like a mistake? The marking makes no such judgement: its script draws the stripe and lettering without scoring your walk. The instruction may still have changed how you moved.[^point-lines-ahmed-paths] Another visitor might find an invitation to dance around it.
 
 Choose which end to start from, and the line gives you a direction to follow. It cannot settle what following will mean to a body.
 
 <!-- @player_trace -->
 
-Turn and look at the route your movement has left behind. Compare it with the stripe. That small sideways step is visible now.
+Turn and look at the route your movement has left behind. Compare it with the stripe. That small sideways step is visible now.[^point-lines-ahmed-deviation]
 
 The recorder saves sampled positions and joins them. In VR it follows the headset's horizontal position at the rig's floor height; on desktop it follows the walker. The resulting line records one part of your movement.
 
@@ -78,3 +78,11 @@ We can leave the other experiments here. The question taking us towards the exit
 Two endpoints were enough for the segment. To remember the detour, we will need to add something.
 
 Bring the detour.
+
+[^point-lines-euclid]: See Euclid, [*Elements*, Book I, Postulate 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/post1.html), on drawing a straight line between two points. The construction concerns the finite segment; extending it and treating it as an unbounded line are further steps. The postulate is a historical reference, not an account of the renderer or the barrier’s programmed response.
+
+[^point-lines-ingold]: Tim Ingold, [*Lines: A Brief History*](https://www.routledge.com/Lines-A-Brief-History/Ingold/p/book/9781138640399) (Routledge Classics edition, 2016), especially “Traces, Threads and Surfaces” and “Up, Across and Along.” Walking, drawing, weaving and connecting enter his inquiry as different practices of making lines. This helps us take the room’s proliferation seriously: a connector, a trace and a boundary need not perform the same work merely because we call each a line.
+
+[^point-lines-ahmed-paths]: Sara Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology) (2006), 15–20, especially 16: repeated journeys make paths, while established paths help direct later journeys. Ada takes up this relation as an experiment. Its stripe is authored rather than worn into the ground, and its instruction does not score compliance. Being oriented by a line, evaluated against one and physically blocked by one remain different operations to investigate.
+
+[^point-lines-ahmed-deviation]: Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology), 20, considers how deviations can leave marks and generate other lines. This sampled drawing offers one specific record, not the whole history of the body’s deviation.

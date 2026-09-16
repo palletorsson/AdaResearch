@@ -1,0 +1,53 @@
+<p>What keeps you looking after you know the form?</p>
+&lt;!-- @pyramid --&gt;
+<p>Four pale blue pyramids mark the corners of a raised square. Before going closer, try to hold the arrangement in mind. Where would you put a fifth?</p>
+<p>Walk around the court. One pyramid passes in front of another. A gap opens where two outlines seemed to meet. The objects have stayed still; your movement changes the picture. You have met this distinction before, but now the picture has become a place with room around it.</p>
+<p>Take the side ramp onto the platform. The four corners repeat a form you can describe: a square base, four triangular sides, one apex. Five vertices, eight edges, five faces. Knowing those counts helps you recognise the family. It leaves you free to notice something else.</p>
+&lt;!-- @pyramidlong --&gt;
+<p>The fifth pyramid is pink, taller, and stands in the centre on a matching block. Look back at a corner. Does the centre seem to organise the others, or have you made it important because it rises above them?</p>
+<p>Its base is still square. Its apex is still a single point above it. The tall pyramid&#x27;s source collects the base vertices and then adds that point:</p>
+<pre><code class="language-gdscript">vertices.append_array(ring)
+vertices.append(_apex_position(ring))
+</code></pre>
+<p>The same connections can carry a different height. In this version the pyramid&#x27;s base is 0.8 metres wide and its apex rises 2.8 metres above that base. The pink block lifts the whole pyramid another 0.8 metres above the court. The script triangulates the square base into two faces for rendering; together with the four sides, that makes six triangles. We can explain how it is built without settling what its height does to the arrangement.</p>
+&lt;!-- @cube_scene --&gt;
+<p>Four ochre cubes sit around the spire in a cross. Follow that cross with your eyes, then look toward the corner pyramids. A few familiar solids are becoming a court, a monument, perhaps a model of somewhere you would like to go. Which reading arrived first?</p>
+<p>The arrangement returns to the room&#x27;s earlier floor plan. Its reference belongs to an anonymous sixteenth-century manuscript of geometric and perspective studies: solids drawn, combined and staged until a study begins to suggest an unfamiliar architecture.<sup><a href="#user-content-fn-solids" id="user-content-fnref-solids" data-footnote-ref="true" aria-describedby="footnote-label">1</a></sup> Here the forms stand on a platform made from the same cube vocabulary as the museum floor. The support is already part of the picture.</p>
+<p>Imagine one cube placed outside the cross. Its construction would be unchanged; its relation to the court would be different. You do not need to build every possibility before leaving this one.</p>
+&lt;!-- @snap_pyramid_puzzle --&gt;
+<p>Beside the front of the court, five snap points offer a small construction. Connect four into a base cycle and join each to the fifth. Watch what the puzzle accepts.</p>
+<p>Its detector recognises those connections. It does not measure whether the base is square. Keep that distinction close: the program can complete its test while your question about the form remains open. The court was here before the test succeeded. Its place in the room has another history.</p>
+&lt;!-- @ --&gt;
+<h2>The tools are still here</h2>
+&lt;!-- @durer_scene --&gt;
+<p>Follow the raised connection and the next ramp to the separate platform. The tableau gathers objects after Dürer&#x27;s <em>Melencolia I</em>: a polyhedron, a sphere, a compass, a ladder, a numbered square. Find something you now know how to begin making. Then find something in the arrangement that this knowledge has not explained.</p>
+<p>You have spent a chapter assembling a vocabulary. Here it returns as a scene. The compass belongs among the tools of geometry, but lying beside the other objects it also asks about work: begun, interrupted, waiting. These are possibilities for reading the tableau, not a solution hidden inside it.<sup><a href="#user-content-fn-durer" id="user-content-fnref-durer" data-footnote-ref="true" aria-describedby="footnote-label">2</a></sup></p>
+<p>Go close to the numbered square. Choose a row and add it before reading further.</p>
+<pre><code class="language-text">16   3   2  13
+ 5  10  11   8
+ 9   6   7  12
+ 4  15  14   1
+</code></pre>
+<p>Try a column. Each row and column, and the two main diagonals, sums to 34. The 15 and 14 in the bottom row recall 1514, the year of the engraving. The numbers work.</p>
+<p>Stay a little longer. Has that correct answer finished what you came to look at?</p>
+<p>Perhaps the pleasure of the arrangement is enough for now. Perhaps its precision makes the interruption more palpable: these instruments can still measure, while the next action remains uncertain. We can read melancholy here without making geometry useless. We can also want the scene for the questions it keeps available.</p>
+<h2>Enough to continue</h2>
+<p>The previous room left us approaching a curve with finite pieces. An exact mathematical description and a rendered body make different promises. More triangles can improve an approximation; they cannot decide what we should want to make with it.</p>
+<p>Dürer&#x27;s engraving is itself a made thing. An accomplished image gives us an encounter with unfinished work. That matters here. Looking, arranging, imagining and taking pleasure in a form can keep an investigation moving while its purpose is unsettled. The aesthetic attention is already doing work.</p>
+<p>A few tools, and more possible constructions than we have time to pursue.<sup><a href="#user-content-fn-sublime" id="user-content-fnref-sublime" data-footnote-ref="true" aria-describedby="footnote-label">3</a></sup></p>
+<p>Look back toward the five pyramids. They have become another picture from here. The objects stayed still while your viewpoint changed. In transformation, you can watch from one place as objects move, turn and scale. Choose one relation from this court—the repeated corners, the tall centre, the distance between the platforms—and ask what would survive such a change.</p>
+<p>We leave with enough to continue. There is still something here we have not finished looking at.</p>
+&lt;!-- @ --&gt;
+<section data-footnotes="true" class="footnotes"><h2 class="sr-only" id="footnote-label">Footnotes</h2>
+<ol>
+<li id="user-content-fn-solids">
+<p>Anonymous, sixteenth-century geometric and perspective manuscript, Herzog August Bibliothek, Cod. Guelf. 74.1 Aug. 2°. See <a href="https://publicdomainreview.org/collection/solid-objects/"><em>Solid Objects</em></a> and the <a href="https://pdimagearchive.org/images/4577a16c-d0e9-43d6-96fc-f125c47c6afe/">image selected for this room</a>. The court follows the drawing&#x27;s blue corner spires, pink centre and ochre blocks within the earlier AdaResearch floor arrangement. Its dimensions are adapted for the museum. The manuscript is not attributed here to Dürer; its additional compound solids remain references for later studies. <a href="#user-content-fnref-solids" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
+</li>
+<li id="user-content-fn-durer">
+<p>Albrecht Dürer, <em>Melencolia I</em> (1514), <a href="https://www.metmuseum.org/art/collection/search/360018">Metropolitan Museum of Art</a>. The museum describes several interpretations rather than a settled key. AdaResearch stages selected objects, not a complete or geometrically exact reconstruction of the engraving. Reading aesthetic attention as a way to continue is this book&#x27;s proposal. <a href="#user-content-fnref-durer" data-footnote-backref="" aria-label="Back to reference 2" class="data-footnote-backref">↩</a></p>
+</li>
+<li id="user-content-fn-sublime">
+<p>Kant&#x27;s <a href="https://www.gutenberg.org/files/48433/48433-h/48433-h.htm"><em>Critique of Judgement</em></a>, §§25–27, discusses the mathematical sublime through the distinction between apprehending parts and comprehending a whole; §49 describes aesthetic ideas as occasioning thought beyond what a determinate concept can exhaust. These offer a later vocabulary for this room&#x27;s investigation: how a finite arrangement can keep attention moving among possibilities we have not yet specified. <a href="#user-content-fnref-sublime" data-footnote-backref="" aria-label="Back to reference 3" class="data-footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>

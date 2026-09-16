@@ -1,5 +1,32 @@
 # Trans_Pre — field notes
 
+## Principle markers, 2026-09-09
+
+The first cube is now centred at (4,2). At (4,5), (4,8), (4,11), secondary Y-translation, rotation and uniform-scale markers stand two metres beside the cumulative pickup demonstrations. Translation and rotation reuse existing artifacts; uniform_scale_marker adds a compact animated cube, fixed reference cage and live factor. The book keeps one primary pickup passage and describes the markers within it. The physical probe now passes 76 checks, including all three marker placements and scale-factor limits.
+
+
+## Current ruling: build the pickup, then a small level
+
+Palle replaced the paired-copy itinerary on 2026-09-09: inert cube, vertical oscillation, add rotation, add scale; then a wedge ramp and a platform with five cubes. The prior draft below is historical. Current intent and final.md follow this new order. The card, sphere and duplicate static comparisons have been removed from this hall.
+
+The implementation reuses existing pickup modes and wedge utilities. Four demonstrations use hold:demo; the five platform cubes use motion:all and remain collectible. Physical ray measurements corrected the ascent to wp:0 at row 16 and descent to wp:180 at row 20. A capsule climbs to one metre, crosses and descends. Evidence: ada_run/trans_pre_build_up_checks.json (67 passing checks).
+
+Point_Line_Grid receives simulation_grid at (15,7), inside a new side room occupying previously empty columns; existing trace artifacts and basin remain. The plan has 25 one-metre cells, a five-metre collider and indices 0-4. It is a floor for placement and walking, not another trace recorder. Museum capture confirms unit scale and collision at all 25 cells.
+
+## Book trial — 2026-09-09
+
+The current `final.md` follows the pickup cube family and the transformation card. Its opening question is “What would have to change for you to call it another cube?” Comparison precedes naming; code follows an observation; the paragraph returns to a consequence or a question. “You took a route. The difference between their positions contains no ramp.” is the first bridge back to the Primitives sequence.
+
+Source inspection found that the old still comparisons had become default animated, collectible pickup cubes. The nine early placements now explicitly request `hold:demo` and `motion:still`. The four existing motion demonstrations and the last collectible retain their behaviours. Structure, utilities and artifact positions are unchanged from the staging snapshot. This is a deliberate configuration change after that snapshot, not a loss in the museum conversion.
+
+The live GridSystem probe `commons/testing/probe_trans_pre_book.gd` passed 36 checks: fourteen cube instances, nine stable noncollectible comparisons, displacement (4,1,0), yaw difference 45 degrees, uniform factor 1.5, mesh-centre lift 0.25 m, separated animation channels, fixed pulse centre and scaling from saved size. It does not verify headset traversal, sightlines or a reader's understanding. Evidence: `ada_run/trans_pre_book_checks.json` and `ada_run/trans_pre_book.log`.
+
+Use four provisional questions through the chapter: What changed? What persisted? What became possible between us? What remains after returning? Give each hall a particular encounter that can complicate one of these questions. Do not answer the whole chapter with preserved identity before testing its material.
+
+Next actionable pass: Trans_Introduction. Test each transport cube's actual crossing, then write the change from watching an operation to depending on it. Keep the scale-target and carry-behaviour issues visible in the audit until measured or repaired.
+
+The older notes below preserve the earlier design history; their Mario cube inventory and sightline claims are not current validation.
+
 > Field notes hold what the wall text cannot carry. `final.md` is for the
 > visitor. This is for us.
 

@@ -1,1 +1,1 @@
-A trihedron is a geometric configuration where three triangular faces meet at a single vertex, forming a corner of space. It is not a closed solid by itself, but a spatial junction - an elementary expression of volume beginning to form.
+Three faces meet and leave an opening. A fourth can enclose a region, but the body may already meet a boundary the eye cannot see. Follow a prism into a slope, concrete into a detour, and a triangle into an arrow asking you to move.

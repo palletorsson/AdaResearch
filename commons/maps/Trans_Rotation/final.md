@@ -1,74 +1,67 @@
-Rotation is the first operation where the order you do things in changes where you end up.
+The transport cube carried you without needing to turn. Here, a surface stays attached to its middle. Follow one end. Where does the other end go?
 
-Translation left direction alone: space was the same in every direction and a move was a move. Rotation makes facing matter. Front is now different from back, left from right, and the sentence on the wall says it: rotation produces space as anisotropic. Every turning form in this hall carves an orientation into the void, and declares this way and not that way.
+<!-- @rotation_wall_crossings -->
+
+The green blade turns around y. Its centre stays over the gap while its ends sweep towards the grid on either side. At ninety degrees it pauses. Walk across the length that has arrived in your direction of travel.
+
+The orange blade turns around x. Look at its middle before watching the edges. It has no hinge at the bank. One end descends as the other rises, like the blade of a large paddle wheel.
+
+The far landing is three grid cubes higher. Wait for the blade to lie between the two levels, then climb it during the pause. Look back from above. The middle did not travel up with you.
+
+At the blue blade, z is the axis. The same long surface tips sideways. Approach the lower grid bank beside it; the higher bank is across the blade, not straight ahead through the hall. Cross when it settles into its slope.
+
+These blades are 8.4 metres long and 2.4 metres wide. Their middle is the origin of the turn. The x and z axles sit between the two landing heights; the upper surface meets the grid at about twenty-three degrees. The grid supplies the banks. There is no additional platform hiding how the crossing meets them.
 
 ```gdscript
-func euler_rotate(node: Node3D, euler: Vector3) -> void:
-    node.rotate(Vector3.UP, euler.y)
-    node.rotate(Vector3.RIGHT, euler.x)
-    node.rotate(Vector3.FORWARD, euler.z)
+station.pivot.basis = Basis(
+	station.axis,
+	deg_to_rad(degrees * float(station.sign))
+)
 ```
 
-Three turns about three axes, and the order is in the body, not the name: up first, then right, then forward. Turn about up and then about right, or about right and then about up, and the same two angles leave the thing facing two different ways. Adding never did this. Rotation in three dimensions does, and it is the first thing in the chapter that cannot be undone by doing the same steps backwards in the same order.
+The panel sits at zero under this pivot. Turning the pivot moves both ends around their shared middle. Its collision body turns with the visible surface.
 
-## Direction
+Y leaves the green blade's height unchanged. X and z change the height of points away from the axle. The banks are arranged to receive those different movements. An axis, a centre, a length and a landing participate in the passage together.
 
-<!-- @rotate_grid_cubes -->
-
-Look down. The field of cubes in rows is the floor of this hall. It has no geometry of its own. It reaches into the grid the room is built from and turns that. The rows turn to a score. Six tip about one axis, four stay flat, six about the next axis, four flat, six about the third, four flat, and then six that tip about all three at once, thirty-five degrees on two of the axes and twenty-five on the third. The score runs forty-four rows and the hall is forty long, so you meet it once and walk off the end of it before it can come round. The collision cubes turn with the picture, so a tilted band is tilted underfoot.
-
-<!-- @science_screen -->
-
-The screen is not looking at the room. It is running as a waveform instrument, and what it draws is a sine rolling across an axis grid with an angle read out beside it. That is a rotation seen sideways: take a point going round a circle, keep one of its two numbers and plot it against time, and this is the curve you get. The diagram is a loss on purpose, and the number it threw away is the one that tells you where the point is.
-
-<!-- @furniture_turntable -->
-
-A record deck, playing a crate at thirty-three and a third. Watch the needle. It never moves, and the platter turns under it, and the point where they meet holds one radius forever, tracing the circle that was hidden in the motion. Thirty-three homecomings a minute. This is the second thing rotation makes, after direction: it makes a form come back to itself.
-
-<!-- @spin -->
-
-Thirty-three small cubes in a straight line against a red bar, alternating black and white. The first eleven all lean the same way. Through the middle twelve each copy is turned fifteen degrees further than the last, a hundred and eighty in all, and the ten that follow keep the new lean. The row never bends. Every step is the same step; only the orientation it is carrying has changed, and that is what the order cost. Placed twice on their plinths, one of them yawed half round, and the difference is the claim: the turn inside the sequence changes what each copy is doing, and the turn applied to the finished row only changes which way the row is pointing. Same angle, two places to put it, two different objects.
-
-<!-- @dark_sphere -->
-
-A dark sphere with no front. It is turning the whole time you stand there, slowly, and nothing about it changes, which is why it is the reference: it is the one thing in the hall a rotation cannot get hold of.
+The blades hold their crossing poses for twelve seconds, then continue in the reversed direction: the raised end of each climbing blade begins to descend. A half-turn brings this rectangular surface back to the same crossing geometry. Its other face can carry you now.
 
 <!-- @ -->
 
-## The hole is the way
+Reach the still grid beyond the blades. The next experiment holds the orientations in place so that you can walk into their differences.
 
-The floor of this hall is cut across three times, and each cut is the shape of a turn. The first is a row of three square holes, each the width of a plank turning about its centre: one turns a quarter and pauses, one a half, one forty-five degrees, and you cross when the corners meet the banks. There is no other way over. The second is three holes with the floor left round them, where cubes turn without stopping: a turntable you can cross while it turns under you, and two cubes rolling about the axes you walk along and across, which are no way at all. The third is three slots the width of a turning cube, crossed only carried: a quarter, the other way, half round. Past them a raised floor with a hole in its front, and in the hole a lift that turns you once around on the way up, the screw; and a slot down through its back, where a cube slides forward and down and turns you half round as it goes. Every empty cell here is the sweep of one rotation, and the rotation is the only way through it.
+<!-- @rotation_array_compare -->
 
-<!-- @mario_cube -->
+Four bands each contain four columns and ten rows of cubes. Begin at the row marked zero. Choose a column and walk forward along z.
 
-Eight yellow cubes, one at the far side of every crossing. Walk into one and a rainbow of seven bands stands up three metres over it. The first one you reach does something more: the dark sphere shrinks to nothing in little more than a second and is gone. The thing with no front is the price of the first crossing.
+Ten degrees. Twenty. Thirty.
+
+The centres keep the same spacing. The angle increases with each row. Follow an outlined edge when a surface begins to look continuous: it still belongs to one cube.
+
+Try the same forward movement in another band. Where do you climb, where do you descend, where does a face interrupt the route? If you stop, find the row number beside you. Try approaching that row from the still aisle and inspect what your feet were meeting.
+
+In the x band the tilts make rises and falls across your direction of travel. In the z band they make ridges running along it. The y band turns the square footprints while keeping the tops horizontal. In the fourth band each cube receives x, then y, then z. Follow an edge there: its tilt no longer belongs to one plane. The same sequence of angle values produces different ground under a forward-moving body.
+
+The angle keeps increasing through the difficult rows, towards ninety. If you cannot walk straight through, inspect what stopped you. A jump, a different column or a different body may expose another route; a tested limit belongs to a particular way of walking.
+
+The rule fits in two lines:
+
+```gdscript
+var degrees := float(cube.get_meta("row")) * row_angle_step
+cube.basis = rotation_for_band(band, degrees)
+```
+
+Every cube turns around its own fixed centre. The row supplies how much; the band supplies the axis or the combination. The combined band applies a fixed order:
+
+```gdscript
+return Basis(Vector3.BACK, radians) * Basis(Vector3.UP, radians) * Basis(Vector3.RIGHT, -radians)
+```
+
+The rightmost matrix acts first: x, then y, then z. Time is not increasing these angles while you walk. Your movement through the array brings you to the next value.
+
+At zero, all four bands are flat. Rotation has changed how their faces meet a body and one another. The cubes themselves have not been cut, joined or replaced.
 
 <!-- @ -->
 
-## Sameness of form
+A surface can become a climb. Repeated surfaces can become a difficulty. Neither result lives in the angle alone.
 
-Turn a square a quarter of a turn and it is the same square, corner for corner. Turn it an eighth and it is not. The turns that change nothing are a form's symmetry, and they are the part of rotation this chapter cares about most: not where a thing ends up, but which turns bring it home. A circle comes home under every turn, which is why the needle can hold one radius forever. A square comes home under four. And this is not only a fact about shapes. When physics asks what a particle is, one of the answers is how many turns it takes to come home, and there are particles that need two. How many turns a thing needs is a number physics gives to every particle, and it calls that number spin. It is sameness of form, taken as far as it goes.
-
-## What a turn does to a body
-
-<!-- @catalyst_prompter_box -->
-
-A floor hatch, one cell wide, whose lid slides open as you approach. A crystal rises from the recess. Walk away without taking it and the lid slides shut again. Take it and it is yours for forty-five seconds; let the lease run out and the floor takes it back, and the vent goes quiet with it.
-
-<!-- @catalyst_vent -->
-
-Turn round. Back up the hall a grey pillar four metres tall has been standing there all along, ringed on the floor at its foot with a dark orb sitting in it, and now that the crystal is in your hand it starts to breathe out bodies: five seconds, then one every two and a half, three of them, and then it goes quiet. They come as foes. The crystal does not damage them. Each hit walks one body a single step along an arc, foe to wary to neutral to curious to friend, so a friend costs four. That is the chapter's argument done to something living: a transformation is contact, not harm, and it does not finish in one go. Folded is not less.
-
-<!-- @pick_up_cube -->
-
-<!-- @pickup_gate -->
-
-Seven cubes and a gate that wants seven on the running score, as before: two past the plank holes, two past the carried turns, one up on the raised floor, one at the foot of the slot down, and the last beside the gate. You do not carry them. You walk into one and it is gone with a chirp, one point richer, and the gate reads the total. The rule has not changed since the first hall, and here it is the calm part of the room.
-
-<!-- @ -->
-
-## Process and outcome
-
-In the translation halls a move was reducible to its result: here, then there, and the between did not matter. Rotation ends that. Two turns in one order and two turns in the other are the same two turns and two different outcomes, so the process is now part of the thing. From this hall on, how you got somewhere is a fact about where you are.
-
-Next: the same turn, repeated, until it becomes architecture.
+The final row reaches ninety degrees. A cube can recover an axis-aligned outline there. The route to that flat-looking end still passes through everything before it. More rotation does not promise more obstruction. Carry the row where you stopped, and the possibility of another route, into the next hall.

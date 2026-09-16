@@ -1,41 +1,18 @@
-# Point Line Grid — Artifacts
-*Primitives: Points Build Worlds · F_order · 5 artifacts*
+# Point_Line_Grid — artifacts
 
-> The grid quantizes. Continuous movement snaps to discrete positions. Your trace, once fluid, becomes a sequence of cells. This is how space becomes computable — and how the body's path becomes data.
+Seven physical placements; four primary artifacts in book order. No placement is removed by the 16 September 2026 editorial pass. These roles match `commons/data/artifact_roles.json` for this room.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+## Primary
 
-## player_trace
-![player_trace](/scene-catalog/player_trace.png)
+- **grab_sphere_point_snap** — move and release the sphere; compare retained metres with integer indices on its five-centimetre world grid.
+- **player_trace** — follow the finer and one-metre local records of a chosen point in the visitor; try holding an address, crossing it and returning.
+- **grid_lines** — find a released Trace drawing, centred and scaled in pink, rounded again in green; read the source coordinates beside the display.
+- **plan_vitrine** — step onto the enclosed five-by-five plan and find cells by two indices. The internal `simulation_grid` supplies the numbered tiles and continuous floor collider.
 
-SEE your own motion become a drawable path through time.
+## Secondary
 
-`player_trace`
+- **room_grammar** — compare a generated wall-and-door arrangement with a route someone might take.
+- **floating_sphere_field** — watch movement outside the walking recorder's chosen input.
+- **modulor_man_demo** — compare an address with the space a represented body occupies.
 
-## grid_lines
-![grid_lines](/scene-catalog/grid_lines.png)
-
-grid = {x=i*step, z=j*step : i,j ∈ ℤ} — the XZ plane made legible as a lattice of lines
-
-`grid_lines`
-
-## Floating Sphere Field
-![Floating Sphere Field](/scene-catalog/floating_sphere_field.png)
-
-A sparse field of soft glowing spheres drifting in the void on a single GPUParticles3D. The subtle successor to the Kusama dot-grid biome layer — presence-by-scarcity instead of overwhelming repetition. Ambient atmosphere for the void around the player.
-
-`floating_sphere_field`
-
-## grab_sphere_point_snap
-![grab_sphere_point_snap](/scene-catalog/grab_sphere_point_snap.png)
-
-snap(position) = round(position / grid_size) * grid_size — discretise continuous space
-
-`grab_sphere_point_snap`
-
-## Room Grammar
-![Room Grammar](/scene-catalog/room_grammar.png)
-
-Shape grammar for architectural floor plans â€” binary space partitioning recursively splits a rectangle into rooms, draws wall outlines, adds door gaps, and colors rooms by area. The algorithmic foundation behind roguelike dungeon generation.
-
-`room_grammar`
+[Detours](detours.md) develop these optional encounters. [The map summary](summary.md) records all placement coordinates. The book's markers select the primary passage; the wider room remains available to explore.

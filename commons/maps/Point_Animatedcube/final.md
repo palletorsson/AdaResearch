@@ -1,78 +1,70 @@
-You have been inside one since the first room.
+You have been inside boxes since the first room. Now one of them lets you take hold of a corner. What must stay in place for it to remain a cube?
 
-The floor you stand on, the walls beside you, the plinths, the hall itself: this museum is made of cubes, and so is nearly every game you have ever played. The corner room said a cube spends its 720 degrees eight ways. This room puts one in your hands and takes it apart, and then it admits something about the world you are standing in.
+<!-- @cube_lines -->
+
+Begin with the outline. Follow the three edges leaving one corner. Look through to the far side. You can recognise a cube before any faces have appeared, although nothing has yet closed the gaps between these lines.
+
+The previous room gave us forms that could support a foot or interrupt a route. Here we return to their construction. What happens when the parts remain connected but their positions change?
 
 <!-- @animatedcubebuilder -->
 
-Watch it assemble. Eight points first, then twelve edges between them, then six faces to close it, with handles to take hold of.
+The builder may have finished before you arrive. Press **REPLAY** on its side instrument. Corners appear, then edges, then triangular patches. Press **PAUSE** at the moment you recognise the shape. How much did you need to see?
 
-Count what you saw. Eight corners, twelve edges, six faces, and eight minus twelve plus six is two, the way it was for the tetrahedron. Every one of the six faces is a quad, and you know from two rooms ago what a quad is: two triangles agreeing to lie flat. So the cube is twelve triangles and six seams, and the seams are hidden only while the faces stay flat. The box you push in every game is twelve of the unit, wearing a skin.
+Only this assembly pauses. The folding net and the rest of the room continue. We have borrowed a little attention from a world already running.
 
-<!-- @ -->
+The source has prepared the geometry before this presentation begins. The animation reveals pieces that were hidden. What looks like construction is also an arrangement of when we are allowed to see.
 
-## The net
+Resume. Once the assembly finishes, the numbered corner handles become available. Keep the second builder unchanged as a reference. On the one you will alter, find `v6`. Follow the square face containing `v4`, `v5`, `v6` and `v7`. Predict what will happen if you pull `v6` out of that face's plane, leaving its other corners where they are.
+
+Move it a little. Look along the face. Where did the crease appear?
+
+Try to locate the seam before pressing **DIAGONALS**. The yellow lines show the six diagonals that divide the cube's square faces into triangle pairs. Your hand has made one of those divisions matter.[^animatedcube-triangulation]
+
+That face is stored as two triples:
+
+```gdscript
+[4, 5, 7]
+[5, 6, 7]
+```
+
+Each number names a vertex. Both triples contain `5` and `7`: their shared edge. Only the second contains `6`. When you move that corner, the second triangle tilts while the first stays in place. A face that appeared to be one flat square can now bend along a choice made in its construction.
+
+The builder reads a moved handle back into its position list:
+
+```gdscript
+vertices[i] = handle_nodes[i].position / cube_size
+```
+
+The edge and triangle lists still refer to the same vertex numbers. The neighbours remain; equal lengths, right angles and flat square faces need not.[^animatedcube-boundary] The display measures the largest corner shift in local metres. It cannot tell us what the changed form is worth.
+
+Release the handle and press **REPLAY**. The layers return around your altered shape. Then try **RESTORE CUBE**. This time the initial corner positions return too. Repeating a presentation and undoing a change are different ways of beginning again.
+
+Compare the two builders. Name one property your alteration preserved and one it lost. You can keep a crease you like without claiming the result is still a cube.
 
 <!-- @polyhedron_nets_cube -->
 
-Here it is admitting it was flat all along. Six squares in a Latin cross, five folds between them, and when the folds close there is an inside where there was a sheet.
+Further on, watch the net fold. Choose one square and follow it from the flat arrangement into the closed form. Before it folds again, predict which faces will meet.
 
-There are exactly eleven ways to unfold a cube into a single connected sheet of six squares. Not ten, not twelve. This one shows the cross, the one every child's drawing uses, and can show three others: the staircase, the zed, the two rows. A cube is one solid and eleven flat things, and which flat thing it was depends on where you chose to cut. Cutting is a decision. The solid does not remember which one you made.
-
-<!-- @ -->
-
-## Given time
-
-```gdscript
-var tween := create_tween()
-tween.tween_property(cube, "position", END_POS, DURATION)
-```
-
-The map is called the animated cube, and this is the whole of an animation: two positions and a duration, and the machine fills the between. Keyframes define the targets. Interpolation invents everything else, at whatever easing you asked for, elastic or linear or a bounce at the end.
-
-You met this in the trace room from the other side. There, the machine invented the path between two samples of a hand and called it a line. Here it invents the path between two states of a solid and calls it motion. Nothing about the cube changes while it moves: still eight corners, still twelve triangles, still 720 degrees of corner. What changes is where it is, and the next chapter is about that and nothing else.
+Here each square stays rigid. The hinges turn. In the builder, you moved a corner and bent a square into two differently tilted triangles. Similar-looking movement can come from different operations. Knowing which data changes helps you predict what a form can do.
 
 <!-- @ -->
 
-## What the museum is made of
+Now look down at the floor, then along a wall. Find the box form again in the crates. The museum builds its floor slabs and wall blocks from scaled box meshes. The primitive on display has also been carrying us from room to room.
 
-The humblest object in any game is a crate. You push it, you hide behind it, you break it for what is inside, and a room full of them says *level* before it says anything else. The museum you are in is the same object at a different size, and this room is where it says so.
+The initial cube pairs twelve triangle patches into six square faces.[^animatedcube-counts] The crates add geometry for planks and reinforcing strips. We can recognise the box across these different meshes.
 
-<!-- @crate -->
+You can move a corner on the instrument while the museum's boxes support and redirect your body. What we are learning to inspect is also the place from which we inspect it.
 
-A wooden shipping crate, planks and an X-brace and a stamped plaque, the way every engine since the first has drawn one. Six quads. Twelve triangles. The floor under it is the same thing, larger.
+Read the cartons: **A WORLD / WITHOUT / COMPOSITION**. The supply pile and the stamped crate add **YET**.
 
-<!-- @wooden_pallet -->
+*A world without composition yet.* There is already an arrangement around us; the words cannot make it disappear. We can recognise what the museum is made from before we know how to compose another one.
 
-A pallet with three cartons on it, and read what they say. Three words across three boxes. They are the room's admission, and it is worth saying in full:
+The crates, glove box, shadow and glowing point offer more ways into that question. They can wait for a [return visit](/book?map=Point_Animatedcube&section=tutorial). For now, take the crease with you: a small movement exposed a decision inside a familiar shape.
 
-**A world without composition yet.**
+The next room asks what an engine gives us when it supplies another familiar name: a sphere.
 
-The crates are here. Nobody has arranged them. That is not a failure of the room; it is the room's honest state. Everything in this chapter has been about what a thing *is*: a point, a line, a face, a corner, a solid. Nothing yet has been about what things are *next to*. Composition is another chapter, three of them in fact, colour and pattern and the made thing, and none of them can start until there is something to compose. So here is something: cubes, in quantity, unarranged, stamped with the fact.
+[^animatedcube-triangulation]: Godot Engine 4.6, [Using the ArrayMesh](https://docs.godotengine.org/en/4.6/tutorials/3d/procedural_geometry/arraymesh.html), rectangle example: four positions are connected by two triangle triples. This builder submits its patches through `SurfaceTool` in triangle mode. A flat convex quadrilateral admits either diagonal; moving a corner out of its plane can make that choice visible as a different crease.
 
-<!-- @hangar_supply_pile -->
+[^animatedcube-boundary]: *Connectivity* names which vertices, edges and faces are incident; their positions place that structure in space. Compare the separate point and connectivity properties in Botsch, Sieger, Moeller and Fabri's [Surface Mesh manual](https://doc.cgal.org/latest/Surface_mesh/index.html), CGAL 6.2.1, “Connectivity” and “Properties.” Here the index lists preserve the combinatorial structure, but moving vertices may produce crossings or collapsed faces, so a valid geometric embedding is not guaranteed. The builder's patches also lack enclosing collision geometry; its handles have pickup colliders. See the [technical chapter](/book?map=Point_Animatedcube&section=technical).
 
-Two metal crates stacked, where a warehouse would stencil FRAGILE and KEEP DRY. These say the same thing the cartons say, split in two: *without composition*, and *yet*. The *yet* is the important word. It is a promise about the sequence, not an apology for the room.
-
-<!-- @station_crates -->
-
-A stack, with a canister, the back-of-house clutter that makes a clean stage believable. Every game has a corner like this, and it is always cubes.
-
-<!-- @glove_box -->
-
-And one cube you cannot touch. A sealed chamber with a single glove let into its side, the laboratory's vocabulary for *this work cannot be handled directly*. It is here so the others read as what they are: things you can move. The white cube of the gallery, the box the modernist container is named after, has a glove in its side and asks you not to.
-
-<!-- @ -->
-
-## Two small things across the room
-
-<!-- @first_shadow -->
-
-One triangle, casting a shadow, beside a line that casts none. That is the whole difference between a line and a surface, and the triangle room could only say it. A line has nothing to stop light. The smallest surface the engine accepts is enough.
-
-<!-- @first_phosphor -->
-
-An oscilloscope on a cart, a black shroud, and on the dark glass one green dot, breathing. It is the first point again, the one from the first room, and it is here in the room of the first solid because a chapter that began with *there was a point* should be able to see it from where it ends. Every cube in here is that dot, eight times over, with edges agreed between them.
-
-<!-- @ -->
-
-The next room takes the cube and puts it beside the four other solids that share its perfection, and then beside one that does not, and asks which of them the machine actually makes.
+[^animatedcube-counts]: Euler's [Elementa doctrinae solidorum](https://scholarlycommons.pacific.edu/euler-works/230/) (1758) investigates polyhedral counts. For the initial cube, `V - E + F = 8 - 12 + 6 = 2`. Splitting its squares adds six diagonals and six faces: `8 - 18 + 12 = 2` again. A proof for the sphere's triangulation appears in Heinz Hopf's [Selected Chapters of Geometry](https://pi.math.cornell.edu/~hatcher/Other/hopf-samelson.pdf), §I.3, from his 1940 lectures reconstructed and translated by Hans Samelson. The equality does not certify cube shape or a valid embedding. The instrument counts twelve patches, excluding reverse rendering copies.

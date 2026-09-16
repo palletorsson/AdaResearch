@@ -1,0 +1,446 @@
+{
+  "artifacts": [
+    {
+      "inventory": {
+        "collision_objects": 87,
+        "labels": 3,
+        "meshes": 131,
+        "multimesh_instances": 0,
+        "multimeshes": 0,
+        "nodes": 320,
+        "particles": 0,
+        "processing_nodes": 2,
+        "rigid_bodies": 81,
+        "viewports": 0
+      },
+      "lookup": "entropy_jar",
+      "without": {
+        "draw_calls": {
+          "max": 1062.0,
+          "median": 1062.0,
+          "p95": 1062.0
+        },
+        "frame_interval_ms": {
+          "max": 49.877,
+          "median": 14.469,
+          "p95": 16.27
+        },
+        "frames": 140,
+        "gpu_ms": {
+          "max": 47.1049995422363,
+          "median": 12.4359998703003,
+          "p95": 13.8039999008179
+        },
+        "physics_ms": {
+          "max": 2.353,
+          "median": 1.507,
+          "p95": 1.507
+        },
+        "primitives": {
+          "max": 7166372.0,
+          "median": 7166372.0,
+          "p95": 7166372.0
+        },
+        "process_ms": {
+          "max": 49.666,
+          "median": 47.286,
+          "p95": 47.286
+        },
+        "render_cpu_ms": {
+          "max": 5.42600011825562,
+          "median": 1.26800000667572,
+          "p95": 2.21700000762939
+        }
+      }
+    },
+    {
+      "inventory": {
+        "collision_objects": 0,
+        "labels": 0,
+        "meshes": 3,
+        "multimesh_instances": 0,
+        "multimeshes": 0,
+        "nodes": 10,
+        "particles": 0,
+        "processing_nodes": 1,
+        "rigid_bodies": 0,
+        "viewports": 0
+      },
+      "lookup": "random_butterflies",
+      "without": {
+        "draw_calls": {
+          "max": 1555.0,
+          "median": 1555.0,
+          "p95": 1555.0
+        },
+        "frame_interval_ms": {
+          "max": 50.76,
+          "median": 14.085,
+          "p95": 15.762
+        },
+        "frames": 141,
+        "gpu_ms": {
+          "max": 48.9259986877441,
+          "median": 12.1510000228882,
+          "p95": 13.5459995269775
+        },
+        "physics_ms": {
+          "max": 2.353,
+          "median": 1.989,
+          "p95": 2.353
+        },
+        "primitives": {
+          "max": 7296150.0,
+          "median": 7296150.0,
+          "p95": 7296150.0
+        },
+        "process_ms": {
+          "max": 49.666,
+          "median": 47.624,
+          "p95": 49.666
+        },
+        "render_cpu_ms": {
+          "max": 4.67600011825562,
+          "median": 1.60899996757507,
+          "p95": 2.56800007820129
+        }
+      }
+    },
+    {
+      "inventory": {
+        "collision_objects": 13,
+        "labels": 4,
+        "meshes": 107,
+        "multimesh_instances": 240,
+        "multimeshes": 2,
+        "nodes": 172,
+        "particles": 0,
+        "processing_nodes": 3,
+        "rigid_bodies": 0,
+        "viewports": 0
+      },
+      "lookup": "shannon_entropy_meter",
+      "without": {
+        "draw_calls": {
+          "max": 1126.0,
+          "median": 1121.0,
+          "p95": 1125.0
+        },
+        "frame_interval_ms": {
+          "max": 52.058,
+          "median": 13.63,
+          "p95": 15.961
+        },
+        "frames": 147,
+        "gpu_ms": {
+          "max": 49.8279991149902,
+          "median": 11.9729995727539,
+          "p95": 13.7679996490479
+        },
+        "physics_ms": {
+          "max": 0.344,
+          "median": 0.344,
+          "p95": 0.344
+        },
+        "primitives": {
+          "max": 7249966.0,
+          "median": 7249958.0,
+          "p95": 7249964.0
+        },
+        "process_ms": {
+          "max": 51.767,
+          "median": 51.767,
+          "p95": 51.767
+        },
+        "render_cpu_ms": {
+          "max": 4.78200006484985,
+          "median": 1.85800004005432,
+          "p95": 2.36100006103516
+        }
+      }
+    },
+    {
+      "inventory": {
+        "collision_objects": 8,
+        "labels": 1,
+        "meshes": 92,
+        "multimesh_instances": 0,
+        "multimeshes": 0,
+        "nodes": 133,
+        "particles": 0,
+        "processing_nodes": 3,
+        "rigid_bodies": 0,
+        "viewports": 0
+      },
+      "lookup": "hardware_entropy_decay",
+      "without": {
+        "draw_calls": {
+          "max": 1182.0,
+          "median": 1180.0,
+          "p95": 1182.0
+        },
+        "frame_interval_ms": {
+          "max": 49.33,
+          "median": 12.238,
+          "p95": 15.964
+        },
+        "frames": 164,
+        "gpu_ms": {
+          "max": 47.3819999694824,
+          "median": 10.5349998474121,
+          "p95": 13.8699998855591
+        },
+        "physics_ms": {
+          "max": 0.279,
+          "median": 0.276,
+          "p95": 0.279
+        },
+        "primitives": {
+          "max": 7157614.0,
+          "median": 7157610.0,
+          "p95": 7157614.0
+        },
+        "process_ms": {
+          "max": 49.039,
+          "median": 44.247,
+          "p95": 49.039
+        },
+        "render_cpu_ms": {
+          "max": 5.16099977493286,
+          "median": 1.92700004577637,
+          "p95": 2.51900005340576
+        }
+      }
+    },
+    {
+      "inventory": {
+        "collision_objects": 0,
+        "labels": 0,
+        "meshes": 12,
+        "multimesh_instances": 4000,
+        "multimeshes": 1,
+        "nodes": 16,
+        "particles": 0,
+        "processing_nodes": 0,
+        "rigid_bodies": 0,
+        "viewports": 0
+      },
+      "lookup": "entropy_axiom",
+      "without": {
+        "draw_calls": {
+          "max": 1555.0,
+          "median": 1547.0,
+          "p95": 1555.0
+        },
+        "frame_interval_ms": {
+          "max": 41.274,
+          "median": 11.712,
+          "p95": 13.33
+        },
+        "frames": 173,
+        "gpu_ms": {
+          "max": 39.2089996337891,
+          "median": 9.84700012207031,
+          "p95": 11.1029996871948
+        },
+        "physics_ms": {
+          "max": 0.344,
+          "median": 0.262,
+          "p95": 0.344
+        },
+        "primitives": {
+          "max": 383430.0,
+          "median": 383418.0,
+          "p95": 383430.0
+        },
+        "process_ms": {
+          "max": 49.039,
+          "median": 40.774,
+          "p95": 49.039
+        },
+        "render_cpu_ms": {
+          "max": 6.48999977111816,
+          "median": 1.81200003623962,
+          "p95": 2.79699993133545
+        }
+      }
+    }
+  ],
+  "device": "NVIDIA GeForce RTX 3070",
+  "engine": "4.6-stable (official)",
+  "full_after": {
+    "draw_calls": {
+      "max": 1568.0,
+      "median": 1568.0,
+      "p95": 1568.0
+    },
+    "frame_interval_ms": {
+      "max": 48.412,
+      "median": 13.624,
+      "p95": 15.422
+    },
+    "frames": 151,
+    "gpu_ms": {
+      "max": 46.3709983825684,
+      "median": 11.7829999923706,
+      "p95": 13.2469997406006
+    },
+    "physics_ms": {
+      "max": 0.308,
+      "median": 0.276,
+      "p95": 0.308
+    },
+    "primitives": {
+      "max": 7296234.0,
+      "median": 7296234.0,
+      "p95": 7296234.0
+    },
+    "process_ms": {
+      "max": 48.086,
+      "median": 43.352,
+      "p95": 48.086
+    },
+    "render_cpu_ms": {
+      "max": 6.88100004196167,
+      "median": 1.99100005626678,
+      "p95": 2.93300008773804
+    }
+  },
+  "full_before": {
+    "draw_calls": {
+      "max": 1568.0,
+      "median": 1568.0,
+      "p95": 1568.0
+    },
+    "frame_interval_ms": {
+      "max": 46.725,
+      "median": 14.074,
+      "p95": 20.707
+    },
+    "frames": 139,
+    "gpu_ms": {
+      "max": 44.8540000915527,
+      "median": 12.0839996337891,
+      "p95": 13.1260004043579
+    },
+    "physics_ms": {
+      "max": 2.163,
+      "median": 2.159,
+      "p95": 2.163
+    },
+    "primitives": {
+      "max": 7296202.0,
+      "median": 7296202.0,
+      "p95": 7296202.0
+    },
+    "process_ms": {
+      "max": 46.518,
+      "median": 42.567,
+      "p95": 46.518
+    },
+    "render_cpu_ms": {
+      "max": 3.875,
+      "median": 1.68599998950958,
+      "p95": 2.9300000667572
+    }
+  },
+  "headset_verified": false,
+  "map": "Random_Entropy",
+  "remaining_flush_ms": 0.008,
+  "renderer": "forward_plus",
+  "resolution": "1280x800",
+  "segment_times": [
+    {
+      "ms": 1704.921,
+      "shell": false
+    }
+  ],
+  "setup_wall_ms": 8849.293,
+  "stamp_times": [
+    {
+      "lookup": "entropy_jar",
+      "ms": 380.256,
+      "queued": true,
+      "scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
+      "success": true
+    },
+    {
+      "lookup": "random_butterflies",
+      "ms": 96.144,
+      "queued": true,
+      "scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn",
+      "success": true
+    },
+    {
+      "lookup": "shannon_entropy_meter",
+      "ms": 235.388,
+      "queued": true,
+      "scene": "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+      "success": true
+    },
+    {
+      "lookup": "hardware_entropy_decay",
+      "ms": 188.629,
+      "queued": true,
+      "scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
+      "success": true
+    },
+    {
+      "lookup": "entropy_axiom",
+      "ms": 36.166,
+      "queued": true,
+      "scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn",
+      "success": true
+    }
+  ],
+  "whole_segment": {
+    "collision_objects": 113,
+    "labels": 28,
+    "meshes": 697,
+    "multimesh_instances": 5057,
+    "multimeshes": 19,
+    "nodes": 1486,
+    "particles": 0,
+    "processing_nodes": 12,
+    "rigid_bodies": 81,
+    "viewports": 0
+  },
+  "without_artifacts": {
+    "draw_calls": {
+      "max": 244.0,
+      "median": 208.0,
+      "p95": 208.0
+    },
+    "frame_interval_ms": {
+      "max": 44.051,
+      "median": 10.953,
+      "p95": 12.59
+    },
+    "frames": 185,
+    "gpu_ms": {
+      "max": 41.2150001525879,
+      "median": 9.0930004119873,
+      "p95": 10.4479999542236
+    },
+    "physics_ms": {
+      "max": 0.322,
+      "median": 0.322,
+      "p95": 0.322
+    },
+    "primitives": {
+      "max": 76420.0,
+      "median": 68624.0,
+      "p95": 68624.0
+    },
+    "process_ms": {
+      "max": 48.086,
+      "median": 40.066,
+      "p95": 48.086
+    },
+    "render_cpu_ms": {
+      "max": 2.2039999961853,
+      "median": 0.660000026226044,
+      "p95": 1.06400001049042
+    }
+  }
+}

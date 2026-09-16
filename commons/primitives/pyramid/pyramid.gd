@@ -32,6 +32,7 @@ extends Node3D
 ##   "pyramid#base_sides:6#apex_stance:beyond"
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
 const PrimitiveMeshBuilder: GDScript = preload("res://commons/primitives/shared/primitive_mesh_builder.gd")
+const SolidFinish: GDScript = preload("res://commons/primitives/shared/solid_primitive_finish.gd")
 
 ## How many sides the base polygon has. 4 is the square base this artifact has
 ## always had; 3 makes it a tetrahedron, 6 a hexagonal pyramid.
@@ -47,6 +48,10 @@ var base_size: float = 0.6
 var _mesh_instance: MeshInstance3D
 
 func _ready():
+	var config: Dictionary = {}
+	for key in ["base_sides", "apex_stance", "height", "solid_color"]:
+		if has_meta("config_" + key): config[key] = get_meta("config_" + key)
+	apply_grid_config(config)
 	_rebuild_pyramid()
 
 func _rebuild_pyramid() -> void:
@@ -56,7 +61,7 @@ func _rebuild_pyramid() -> void:
 		_mesh_instance.queue_free()
 		_mesh_instance = null
 	var geometry := _pyramid_geometry()
-	var material = GridMaterialFactory.make(base_color)
+	var material = SolidFinish.for_instance(self, GridMaterialFactory.make(base_color))
 	_mesh_instance = PrimitiveMeshBuilder.build_mesh_instance(
 		geometry["vertices"],
 		geometry["faces"],
@@ -133,6 +138,15 @@ func _create_pyramid_faces() -> Array:
 ## already built once — an unguarded rebuild here breaks shipped placements.
 func apply_grid_config(config_data: Dictionary) -> void:
 	var rebuild: bool = false
+	# Placement-local proportions and pigment; unconfigured pyramids stay unchanged.
+	if config_data.has("height") and str(config_data["height"]).is_valid_float():
+		var height: float = maxf(0.01, float(config_data["height"]))
+		if not is_equal_approx(height, pyramid_height):
+			pyramid_height = height
+			rebuild = true
+	if config_data.has("solid_color"):
+		set_meta("config_solid_color", config_data["solid_color"])
+		rebuild = true
 	if config_data.has("base_sides"):
 		var sides: int = max(3, int(config_data["base_sides"]))
 		if sides != base_sides:
@@ -149,7 +163,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 func set_base_color(color: Color) -> void:
 	base_color = color
 	if _mesh_instance:
-		_mesh_instance.material_override = GridMaterialFactory.make(base_color)
+		_mesh_instance.material_override = SolidFinish.for_instance(self, GridMaterialFactory.make(base_color))
 
 func set_pyramid_size(height: float, base: float) -> void:
 	pyramid_height = height

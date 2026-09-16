@@ -1,65 +1,46 @@
-A transformation is a difference between a thing and its copy, and there are exactly three kinds.
+We leave Primitives with a cube, a wedge and a grid. Now we can make a familiar game object: a Mario-style pickup cube.
 
-It comes first because everything after it uses these three differences to get you somewhere. Here nothing moves and nothing is crossed - but the room does climb, in three levels, and the climb is part of the argument: the deck where the cube stands alone, a shelf a metre up, a summit two metres up. One yellow block stands alone, and then the same block stands twice, four times over, and each time the copy differs from the original in one way only. You walk the difference. That is the lesson, and it is the whole of it.
-
-```gdscript
-func difference(a: Transform3D, b: Transform3D) -> Transform3D:
-    return a.affine_inverse() * b
-```
-
-Take the copy's transform and divide out the original's, and what is left is the transformation: a translation if only the origin differs, a rotation if only the basis has turned, a scale if only the basis has stretched. The room lays the answer out in space so you can read it without the division.
-
-## One cube, then the difference
-
-<!-- @mario_cube -->
-
-A yellow block with an orange wire, half a metre on a side, alone on the deck behind a two-metre wall that closes off the rest of the room. That is the cube. It is the unit the whole museum is built from, and in this room it is also the thing being copied. Walk into it and a rainbow of seven bands stands up over it; every block in the room does that once, and the first one you reach does it first.
-
-Two blocks, four cells apart on the same row - and the second stands a metre up, on a plinth you reach by the ramp between them. Nothing about it is different from the first except where it is. Down here that difference is a vector with a metre of height in it, and the ramp is the part of it you walk. That difference is translation, and it is the only one of the three you could describe without looking at the block at all: a vector, four along x, nothing else.
-
-Two blocks again, and the second is turned forty-five degrees about the upright. It stands in the same place and it is the same size, and its corners point where the first block's faces do. That difference is rotation, and it is the first one that needs the block to have a shape: you cannot turn a point.
-
-Two blocks, and the second is one and a half times the size. Same place, same facing, more of it. That difference is scale, and it is the one you cannot see from inside: were you scaled with it, nothing would have happened.
-
-The last pair does all three at once. The copy is moved along the row and lifted a metre, turned forty-five degrees, and grown by half. One block, one copy, three differences, and the point of the chapter in a single object: those three are added one at a time to read, and applied all at once to do. The next hall gives each of them a hole to cross.
-
-<!-- @clipboard -->
-
-A card on the landing as the room comes back down. Walk within a metre and a half and its page fades up: the axioms of transformation, which say what the room just showed you in the language of a four-by-four matrix. Sixteen numbers, and every move a thing can make.
-
-<!-- @ -->
-
-## Before the holes
-
-Every later room in this chapter is a floor with holes in it, and every hole is the trace of one of these three differences, used as a way through. This room is the differences at rest. Learn to see them here, between a block and its copy, and you will see them in the floor.
-
-Next: three cubes, three pits, and the same three differences put to work.
-
-## And then the same three, in time
+Watch how its movement is built up, one addition at a time.
 
 <!-- @pick_up_cube -->
 
-A wall closes the climb, with one door in it. Everything behind you needed two
-cubes, a thing and its copy, differing in one way. Everything ahead needs one,
-because the copy is the same cube a moment later.
+The first cube holds still. Keep its shape in mind as you go to the next one.
 
-Three cubes stand in single file down the middle of a flat hall, one to a row,
-and each does exactly one thing. The first only rises and falls. The second only
-turns. The third only grows and shrinks. You walk past them one at a time and
-you cannot see two at once, which is the difference between the two halves of
-this room: a difference in space you compare by looking, a difference in time
-you compare by remembering.
+This cube moves up and down. Follow it through a complete rise and fall. Its position changes while its size and facing stay the same. Moving an object from one position to another is **translation**. Here that movement follows the vertical Y direction.
+
+The script chooses a height between two endpoints:
+
+```gdscript
+global_position.y = lerp(original_y - bob_height, original_y + bob_height, t)
+```
+
+`lerp` means **linear interpolation**: find a value between two values. Here the endpoints sit below and above the starting height. At `t = 0` the cube is at the lower end; at `t = 0.5` it is halfway; at `t = 1` it reaches the upper end. The animation runs `t` back and forth between zero and one, carrying the cube up and down at a steady speed on each leg.
+
+The third cube keeps moving up and down. What has been added?
+
+Follow a corner. The cube turns as well. Changing its facing is **rotation**. This line adds a small turn around the upright Y axis on each update:
 
 ```gdscript
 rotate_y(rotation_speed * delta)
-global_position.y = original_y + sin(time_passed * bob_speed) * bob_height
 ```
 
-Then the room goes back to pairs. On the left a cube doing all three at once. On
-the right a plain pick-up cube, the object this museum has handed you a hundred
-times, and the two lines above are its whole idle animation: a rotation and a
-translation, composed, forever. It has always been two of the three. The third
-it performs exactly once, when you walk into it and it swells and is gone.
+The cube can rise and turn at the same time. Both movements belong to the animation you are watching.
 
-A transformation applied once is a difference. Applied every frame, it is a
-motion. There is nothing else in it.
+At the fourth cube, watch the edges move apart and come together. It grows and shrinks while it rises and turns. Changing size is **scale**.
+
+```gdscript
+var size_factor: float = lerp(1.0 - pulse_scale, 1.0 + pulse_scale, t)
+_apply_pulse(size_factor)
+```
+
+The same `lerp` now chooses a size factor between 0.7 and 1.3. `_apply_pulse` multiplies the saved size by that factor. Below one, the cube becomes smaller; above one, larger. All three dimensions change together, so it keeps its cube shape.
+
+The small markers beside the examples help you recognise each operation. Look back along the four cubes: still; up and down; add turning; add growing and shrinking. Can you spot all three movements in the last one?
+
+Ahead, wedges lead onto a platform with four collectible cubes. Here the finished animation belongs to a small level made from forms we already know.
+
+Walk up and approach one. You can collect these by walking into them. The four demonstrations behind you stay in place for another look.
+
+A few lines of code have given a plain cube the movement of a game pickup: **translation changes position, rotation changes facing, scale changes size.** We will use these three operations throughout the next halls.
+
+<!-- @ -->

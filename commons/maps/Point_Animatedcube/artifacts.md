@@ -1,41 +1,51 @@
-# Point Animatedcube — Artifacts
-*Primitives: Points Build Worlds · F_order · 5 artifacts*
+# Point Animatedcube — artifact inventory
 
-> A manipulable quad-based object where you can drag cube corners. This map transitions from rigid relational closure to over-stabilization and manipulation. Quads relax the rigidity of triangles and introduce interactive constraint: agency within system limits. Geometry becomes something that can be touched and perturbed without collapsing.
+Current map_data.json and artifact_roles.json, reviewed 2026-09-16. Fourteen placements, twelve artifact types. All existing placements are retained.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+## Primary encounters
 
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
+The book and necklace order is **cube_lines → animatedcubebuilder → polyhedron_nets_cube**. These three types occupy four placements because the builder appears twice. One builder can remain a reference while the visitor changes the other.
 
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+## Every placement
 
-`dark_sphere`
+Coordinates are (column,row) grid indices, not world metres. Placement strings below preserve the current rotation, offset and configuration tokens.
 
-## animatedcubebuilder
-![animatedcubebuilder](/scene-catalog/animatedcubebuilder.png)
+| Grid cell | Artifact | Role | Full placement string |
+| --- | --- | --- | --- |
+| (2,1) | `cube_lines` | primary | `cube_lines:0:0` |
+| (2,2) | `floating_sphere_field` | decoration | `floating_sphere_field:0:0#bounds:4,3,8` |
+| (5,3) | `wooden_pallet` | secondary | `wooden_pallet:0:0#box_arrangement:pyramid#stencil_words:A_WORLD;WITHOUT;COMPOSITION` |
+| (11,3) | `first_shadow` | secondary | `first_shadow` |
+| (5,5) | `animatedcubebuilder` | primary | `animatedcubebuilder:0:0#plinth#discovery:1` |
+| (5,7) | `hangar_supply_pile` | secondary | `hangar_supply_pile:0:0#palette:metal#crate_count:2#stencil_words:WITHOUT_COMPOSITION;YET` |
+| (2,8) | `animatedcubebuilder` | primary | `animatedcubebuilder:0:0#plinth#discovery:1` |
+| (6,9) | `crate` | secondary | `crate:0:0#stamp_label:YET` |
+| (1,10) | `station_crates` | secondary | `station_crates#upkeep:store` |
+| (4,10) | `polyhedron_nets_cube` | primary | `polyhedron_nets_cube:0:1#loop_fold:true` |
+| (2,11) | `glove_box` | secondary | `glove_box:0:0#glove_count:1` |
+| (8,11) | `pyramid` | secondary | `pyramid#base_sides:8` |
+| (3,12) | `station_crates` | secondary | `station_crates:0:0` |
+| (11,12) | `first_phosphor` | secondary | `first_phosphor` |
 
-Animated construction sequence that steps from vertices to edges to full cube mesh with grab handles.
+## What the instrument makes available
 
-`animatedcubebuilder`
+Both builders have `#discovery:1`: REPLAY, local PAUSE / RESUME, RESTORE CUBE and DIAGONALS, with numbered handles enabled when assembly completes. The net uses the default cross configuration and folds repeatedly. The source supports other nets; this map contains one net placement.
 
-## Science Screen
-![Science Screen](/scene-catalog/science_screen.png)
+The edited cube's surfaces are visual meshes, not a collision enclosure. Four physical primary placements are not four builder instances. `dark_sphere` and `science_screen` are absent from this map's current interactables.
 
-COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+## Secondary and decorative work
 
-`science_screen`
+The pallet, supply pile, single crate, two station-crate placements, glove box and phosphor display retain the Boxes Example group. The shadow display and eight-sided pyramid remain secondary outside it. Their comparisons are available in tutorial.md. The floating sphere field remains decoration.
 
-## Floating Sphere Field
-![Floating Sphere Field](/scene-catalog/floating_sphere_field.png)
+The pallet, pile and crate carry Palle's "A world without composition yet" across their stencils; this admission remains in final.md. Secondary placement does not mean the work has been removed.
 
-A sparse field of soft glowing spheres drifting in the void on a single GPUParticles3D. The subtle successor to the Kusama dot-grid biome layer — presence-by-scarcity instead of overwhelming repetition. Ambient atmosphere for the void around the player.
+## Source references
 
-`floating_sphere_field`
+- `commons/primitives/line/cube_lines.gd`
+- `commons/primitives/animatedcubebuilder/animatedcubebuilder.gd`
+- `commons/ui/cube_experiment_panel.gd`
+- `commons/infoboards_3d/visualizations/polyhedron_nets.gd`
+- `commons/artifacts/first_shadow/first_shadow.gd`
+- `commons/artifacts/first_phosphor/first_phosphor.gd`
 
-## polyhedron_nets_cube
-![polyhedron_nets_cube](/scene-catalog/polyhedron_nets_cube.png)
-
-Cube net visualization with fold animation. Configurable via #fold_duration, #fold_delay, #auto_fold.
-
-`polyhedron_nets_cube`
+The archive and validation record are in `doc/space/animated-cube-focus-2026-09-16/`.

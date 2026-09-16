@@ -1,0 +1,3 @@
+The grid quantizes. Continuous movement snaps to discrete positions. Your trace, once fluid, becomes a sequence of cells. This is how space becomes computable — and how the body's path becomes data.
+
+`grid_lines` provides the fixed frame you did not choose. `player_trace` writes your position into the cell it falls inside, not where it actually was. `grab_sphere_point_snap` makes the constraint legible: you reach, the sphere jumps to the nearest cell, agency negotiating with imposed structure. Quantization is never neutral. The grid decides which differences count and which fall below resolution. Foucault already wrote this; the grid here is his disciplinary diagram rendered in Vector3.

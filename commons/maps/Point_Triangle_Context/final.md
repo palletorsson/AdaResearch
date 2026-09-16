@@ -1,121 +1,77 @@
-Everything you have seen so far was drawn in triangles.
+Three points can close a boundary. What must the machine add before there is a face to look at?
 
-The sphere in the first room. The hammer. The plinths, the walls, the floor you are standing on. Not the lines, which are their own thing, but every *surface*: each one is a closed outline filled with triangles, because that is the only shape the machine knows how to fill. This room is where you meet the unit.
+You have connected endpoints, recorded a path and given positions addresses you can return to. Now bring three edges together. Something can close without becoming a surface.
 
 <!-- @triangle_line_puzzle -->
 
-Three ends to drag, and the room asks for an equilateral. That is the door in, and it is the previous chapter's last sentence: two points have a distance, and a third point has a decision to make, whether to close.
+Bring two edges into place. Look through the remaining opening before adding the third. What do you expect to arrive with the last connection?
 
-It closes. Three points, three segments, and for the first time a *between* that is not a line but a region.
+The boundary closes. Its centre stays unfilled. The small instrument beside it reports the closed boundary and the hidden fill. Press **SHOW / HIDE FILL**, then look from another side. Press again. The edges remain while the patch of colour comes and goes.
 
-<!-- @ -->
+We have made two things happen separately. Connecting the endpoints closes a loop. Adding a triangle mesh gives that loop a visible face. The first operation does not secretly contain the second.
 
-## The unit
+The button waits for the completed boundary. Once it is closed, its mesh receives the three target positions:
 
 ```gdscript
-func triangle_normal(a: Vector3, b: Vector3, c: Vector3) -> Vector3:
-    return (b - a).cross(c - a).normalized()
+mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+for p: Vector3 in target_positions: mesh.surface_add_vertex(p)
+mesh.surface_end()
 ```
 
-Why triangles, and not squares, or anything else? Because three points always share a plane. There is no fourth point to disagree, so a triangle is flat by necessity, and a flat face is something the renderer can light with one direction. Two edges out of a corner, crossed, and the face has a way it is looking. The `.normalized()` at the end is the vector room's old move, keep the which-way and throw the how-far.
+The word `TRIANGLES` asks the renderer to treat each three vertices as a face. The positions alone did not ask for this. Their order, the primitive type and the material participate in what you see.
+
+This fill is visible from both sides. Walk around it. Its appearance can narrow almost to a line without its three corners moving. The material permits a view from either side; the edge-on projection leaves little of the surface to show.[^point-triangle-winding]
+
+Three distinct, non-collinear points determine a triangle and a unique plane. “Non-collinear” means that the third point is not on the line through the other two. Without that condition, the boundary can collapse into a line with no area.
+
+## Close a loop, then inspect the fill
 
 <!-- @draw_triangle_faces -->
 
-Draw a loop in the air, any shape you like, and bring the line back to where it started. The machine fills it, and watch *how*: it picks one corner and fans out from it, triangle after triangle, until the outline is a surface.
+Pick up the drawing point and make a small triangle in the air. The tool records a corner while held once its one-second interval has elapsed and the tip has moved far enough from the previous point. Move to each intended corner, watch for the numbered point, then return near the first to close the loop. Positions round to a ten-centimetre grid. The addressing we met in Grid helps corners meet here.
 
-```gdscript
-func fan_triangulate(loop: Array[Vector3]) -> Array:
-    var tris: Array = []
-    for i in range(1, loop.size() - 1):
-        tris.append([loop[0], loop[i], loop[i + 1]])
-    return tris
+Look for the filled face. The side instrument distinguishes **filled loops** from **triangles**: one three-corner loop makes one triangle. Press **SHOW / HIDE FILL** and compare the surface with its retained boundary. Hiding the fill preserves the points and edges.
+
+Each corner has a number. **START** marks the first point of the current path. That number is about order, not importance. We will give it a different job in a moment.
+
+Release the tool at the corner where you closed the loop. Release can record a final position; after that the resting tool adds no timed samples. Your earlier corners remain grabbable. Move one and release it; the faces that use it rebuild.
+
+For another independent outline, release the pen and press **NEW OUTLINE**, then pick it up again. The button keeps completed faces and lets you choose a new first corner. Use it before each comparison below.
+
+Beside your first triangle, in a clear patch of space, make a six-corner L in one horizontal plane. Think of a 1.2-metre square with a 0.8-metre square missing from one corner. Each arm of the L is 0.4 metres wide. Keep the line from crossing itself.
+
+For a precise version, the coordinates below name the two horizontal directions in metres, relative to the lower-left outer corner; keep every point at the same height:
+
+```text
+A (0.0, 0.0)     B (1.2, 0.0)     C (1.2, 0.4)
+D (0.4, 0.4)     E (0.4, 1.2)     F (0.0, 1.2)
 ```
 
-A loop of n points becomes n minus two triangles, every time, whatever you drew. This is not a rendering trick. It is what a surface *is* in here, and every wall in the museum was made by exactly this operation on a rectangle: two triangles, and a seam you were never meant to see.
+First follow **A → B → C → D → E → F → A**. Inspect the fill. Begin a new outline and follow the same boundary from its next corner: **B → C → D → E → F → A → B**. Reuse the six existing corner points. These letters name our route; the tool shows numbers. Check START before closing. Should beginning elsewhere change which region lies inside the L?
 
-<!-- @triangleprofiles -->
+The boundary has not moved, but from B the added fill reaches into the missing notch. Something is covering a place you left open.
 
-A pleated profile you can pull at. Every pleat is a face, and every face is the unit, and the folds are where one face ends and the next begins. Once you know that, you cannot stop seeing it.
+The tool uses the first point as the centre of a triangle fan, connecting it to successive pairs around the loop. For the second L it submits these four triangles:
 
-<!-- @ -->
-
-## Three numbers, one shape
-
-```gdscript
-func third_vertex(a: float, b: float, c: float) -> Vector2:
-    # first side laid along x, from (0, 0) to (a, 0)
-    var x := (a * a + b * b - c * c) / (2.0 * a)
-    var y := sqrt(maxf(b * b - x * x, 0.0))
-    return Vector2(x, y)   # Vector2(x, -y) is the same triangle, mirrored
+```text
+B C D
+B D E
+B E F
+B F A
 ```
 
-Give a triangle its three lengths and the third corner has exactly one place it can be, plus its reflection. Nothing in that function but Pythagoras used twice. No polygon with more sides has this property. Four rods with hinges lean; three rods with hinges hold, and that is why every truss, every bicycle frame and every roof that has stayed up is triangles under the skin.
+Follow their edges across the notch. The code kept its rule; the rule failed to keep your boundary. Choosing another start changed the input order, not the polygon's interior.
 
-<!-- @pythagorean_triangle_angles -->
+Each six-corner loop adds four triangles to the readout. Keeping both Ls adds two filled loops and eight triangles to whatever you already made. The counter includes the triangles that overspill. It can count a construction without deciding whether it fills the intended region.
 
-Three squares grown from three sides, and the two smaller ones sum to the largest exactly when the corner between them is square. Watch the labels as you pull: the theorem is a fact about *lengths*, and the right angle is what the lengths produce, not what produces them.
+The method works for a triangle and for a convex planar polygon. Some concave polygons also work from suitable starting vertices. Concavity by itself does not guarantee failure, which is why this comparison keeps the boundary fixed and changes the start deliberately.
 
-Hold on to that order. Fix the three lengths and you have fixed all three angles without measuring one. A length and an angle are one fact seen from two sides, and this chapter only ever looks at it from the side of length. Another chapter looks from the other side, and a great deal follows.
+You could choose a better starting vertex where one exists, redraw a shape the fan handles, or keep this outline and ask for another filling algorithm.[^point-triangle-triangulation] You might also want that unwanted patch for another work: a wing, a pleat, something extending beyond its frame. Changing its use would give the result another purpose. It would not repair the original fill.
 
-<!-- @interactivetriangle -->
+We need not settle every use of a triangle before leaving. The folds, symbols and other surfaces remain here to return to. Carry this distinction onward: closing a boundary, making a face and choosing how to show it are operations we can separate. A convenient method need not require everyone to want a convenient shape.
 
-Drag a corner. The panel follows, pink on one face, black on the other, and it reports its area every time you let go. Notice what you are actually doing: you cannot change the shape without changing a length. There is no other handle. That is rigidity said exactly, not that the triangle resists you, but that it has no way to move except through its sides.
+Next, faces meet at a corner. What must we add to enclose a volume?
 
-<!-- @triangle -->
+[^point-triangle-winding]: For the rendering convention, see [Godot 4.6’s SurfaceTool documentation](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html): triangle front faces use clockwise winding. Vertex order, shading normals and the material’s culling setting have different jobs. The puzzle deliberately displays both sides. That choice changes visibility; it does not give the face thickness or a collider.
 
-The same object with its presets: equilateral, right, isosceles. Three families of one unit, each a different set of three numbers.
-
-<!-- @ -->
-
-## Which side you are on
-
-```gdscript
-func faces_you(a: Vector3, b: Vector3, c: Vector3, eye: Vector3) -> bool:
-    return triangle_normal(a, b, c).dot(eye - a) > 0.0
-```
-
-<!-- @parasol_triangle -->
-
-A triangle on a stick, pink from here. Walk round it. Blue.
-
-A face has a front, and the front is decided by nothing more than the order its three corners are listed in. Swap two and the same three points face the other way. The renderer, by default, draws only the front and throws the back away unseen, so most of the triangles you have ever looked at were visible from one side and did not exist from the other. This parasol was built to show both, which is a decision somebody had to make, and the two colours are that decision made visible.
-
-<!-- @ -->
-
-## Four points, and a fold
-
-```gdscript
-func is_planar(p: Array[Vector3], tol: float = 0.001) -> bool:
-    var n := (p[1] - p[0]).cross(p[2] - p[0]).normalized()
-    return absf((p[3] - p[0]).dot(n)) < tol
-```
-
-Three points pass by construction. A fourth may not, and when it sits off the plane there is no face to draw, so the machine does the only thing it can: it splits the quad into two triangles, and the line it splits along is a fold.
-
-<!-- @quad_line_puzzle -->
-
-Four ends, and the room asks for a square. You will find it harder than the triangle was, and the reason is the one this room has been making: four lengths do not fix a shape.
-
-```gdscript
-func quad_from_rods(a: float, b: float, lean: Vector2) -> Array[Vector2]:
-    lean = lean.normalized() * b   # any direction at all: the rods do not care
-    return [Vector2.ZERO, Vector2(a, 0.0), Vector2(a, 0.0) + lean, lean]
-```
-
-Every value of `lean` is a different quad with the same four sides. The square is one member of a family that leans, and nothing in the four lengths prefers it.
-
-<!-- @quad -->
-
-Here it is, already split: pink triangle, black triangle, a diagonal between them. Drag a corner off the plane and watch the diagonal become a crease. The quad did not exist as one face. It was two faces agreeing to lie flat, and when they stop agreeing the seam appears.
-
-<!-- @folded_strip -->
-
-Twenty-four faces in a strip, pleated like paper, and every fold is where two triangles meet at an angle. Fold it further. Nothing tears, because nothing here was ever one surface. It was always this many, and the folds were only hidden while they were flat.
-
-<!-- @ -->
-
-## What a triangle is for
-
-It is the unit because it is the only shape that cannot lie: always flat, always one shape for its lengths, always facing one way. Everything larger is made by agreeing triangles together, and every fold, crease and seam you will ever see in here is a place where the agreement ends.
-
-The next room takes three of them and stands them up so they meet at a point. That is a corner, and a corner is the first thing in this chapter that has an inside.
+[^point-triangle-triangulation]: One available development route is Godot’s [`Geometry2D.triangulate_polygon`](https://docs.godotengine.org/en/4.6/classes/class_geometry2d.html#class-geometry2d-method-triangulate-polygon), which returns triangle indices for a 2D polygon and an empty result if triangulation fails. A planar 3D drawing would first need coordinates in its plane, followed by mapping the returned indices back to its vertices and handling winding. This room still uses its first-vertex fan; no alternate triangulator is installed by this note.

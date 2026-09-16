@@ -1,83 +1,36 @@
-# Primitives Polythedra — Artifacts
-*Primitives: Points Build Worlds · F_order · 11 artifacts*
+# Primitives_Polythedra — current inventory
 
-> A trihedron is a geometric configuration where three triangular faces meet at a single vertex, forming a corner of space. It is not a closed solid by itself, but a spatial junction - an elementary expression of volume beginning to form.
+16 September 2026. All 34 placements remain. Five artifact types carry the book's first passage; repeated instances keep their configurations. Role order is the authored route, while the grid coordinates below record actual placement. Coordinates are (column, row).
 
-The map, read through what it holds — its artifacts in the order you meet them:
+| Artifact | Role | Positions | Scene |
+| --- | --- | --- | --- |
+| `grab_trihedron` | primary | (9, 5) | [source](../../../commons/primitives/trihedron/grab_trihedron.tscn) |
+| `grab_tetrahedron` | primary | (6, 7) | [source](../../../commons/primitives/tetrahedron/grab_tetrahedron.tscn) |
+| `prism_block` | primary | (5, 1), (2, 5), (3, 5) | [source](../../../commons/primitives/prismes/prism_block.tscn) |
+| `concrete_barrier` | primary | (5, 10), (6, 10), (7, 10), (4, 11), (8, 11), (4, 12), (8, 12), (4, 13), (8, 13), (5, 14), (6, 14), (7, 14) | [source](../../../commons/artifacts/concrete_barrier/concrete_barrier.tscn) |
+| `street_sign` | primary | (3, 9), (6, 9), (2, 11), (3, 15), (7, 15) | [source](../../../commons/artifacts/street_sign/street_sign.tscn) |
+| `path_watchdog` | secondary | (4, 1) | [source](../../../commons/hazards/path_watchdog/path_watchdog.tscn) |
+| `path_game_controller` | secondary | (6, 2) | [source](../../../commons/hazards/path_game/path_game_controller.tscn) |
+| `interactive_point_origin_force` | secondary | (4, 4) | [source](../../../commons/primitives/point/interactive_point_origin_force.tscn) |
+| `becoming_catalyst` | secondary | (6, 4) | [source](../../../commons/hazards/becoming_catalyst/becoming_catalyst.tscn) |
+| `pyramid_edit` | secondary | (4, 7) | [source](../../../commons/primitives/pyramid/pyramid_edit.tscn) |
+| `cube_scene` | secondary | (8, 7) | [source](../../../commons/primitives/cubes/cube_scene.tscn) |
+| `diamonds` | secondary | (6, 12) | [source](../../../commons/primitives/combines/diamonds.tscn) |
+| `trafficcone` | decoration | (3, 16), (7, 16) | [source](../../../commons/primitives/trafficcone/trafficcone.tscn) |
+| `if_not_exist_create` | secondary | (10, 18) | [source](../../../commons/artifacts/if_not_exist_create/if_not_exist_create.tscn) |
+| `rock_spawner` | secondary | (4, 20) | [source](../../../commons/primitives/rockfactory/RockSpawner.tscn) |
+| `rock_scanner` | secondary | (4, 22) | [source](../../../commons/primitives/rockfactory/RockScanner.tscn) |
 
-## Lab Room
-![Lab Room](/scene-catalog/lab_room.png)
+## Configuration and purpose
 
-Procedurally-generated Half-Life-style modern test chamber that frames a workbench. White tile floor, observation glass, accent-colored strip naming the QFEP phase, signage like 'TEST CHAMBER λ-S'. Takes a mounted_artifact_scene path and instantiates that workbench at the central plinth. The room IS the staging — same script, different DNA = different chamber.
+- `prism_block`: the example at (5, 1) is solid; (2, 5) is quartered; (3, 5) is a shell. Their visible grain differs while the original collision surface remains.
+- `grab_trihedron`: rotated 90 degrees with a 0.90 m plinth request; `grab_tetrahedron` requests a 0.90 m plinth. These are token parameters, not a measured reach result.
+- Twelve `concrete_barrier` sections: 1 m long, 0.85 m high, 0.60 m wide at the base, with blocking enabled. They surround the preserved central opening.
+- Five `street_sign` placements: STOP/WAIT at (6, 9); both ways at (3, 9); ahead at (2, 11); left at (3, 15); right at (7, 15). All face toward earlier rows by a 180-degree rotation and request 1.70 m poles.
+- `pyramid_edit`, `cube_scene`, `diamonds`, `rock_spawner` and `rock_scanner` are now secondary return visits. Their placements and settings have not changed. See [tutorial.md](tutorial.md#return-visits) for what to try and which claims remain unverified.
+- `rock_spawner` requests thirty rocks. `rock_scanner` animates a plane with a collider; its own process path does not activate the cross-section display.
+- `if_not_exist_create` requests a future primitive gallery. Its presence does not mean that gallery has been constructed.
 
-`lab_room`
+Four `wp` utility wedges remain at (1, 3), (1, 12), (2, 12), (3, 12). They are floor infrastructure supporting the prism encounter, not extra artifact cards. Entry is (7, 0), exit (4, 27). The three text utilities and their wording remain unchanged.
 
-## Path Watchdog
-![Path Watchdog](/scene-catalog/path_watchdog.png)
-
-Runtime referee for the path-and-block game. BFS-checks every half-second whether a walkable route still exists from the player to the teleporter; draws it as a floor ribbon (green open / red blocked) and restarts the level if the path stays blocked past a grace window.
-
-`path_watchdog`
-
-## Path Game Controller
-![Path Game Controller](/scene-catalog/path_game_controller.png)
-
-Win/lose controller for the path-and-block game. Wins on reaching the teleporter OR befriending every foe; loses on the watchdog's blocked-path timeout. Pops a pixel thumb over a befriended foe and a pixel heart on a win.
-
-`path_game_controller`
-
-## 1.0.2 Interactive Point — Force Catalyst
-![1.0.2 Interactive Point — Force Catalyst](/scene-catalog/interactive_point_origin_force.png)
-
-Force-catalyst variant of interactive_point_origin. Starts as a plain point; on pickup a vertex shader morphs the surface into a pulsing 'force field' shell. While held with the morph engaged, nearby RigidBody3D objects feel an inverse-square pull toward the artifact. With both hands closed (the OrbGestureDetector two-hand gesture), the artifact spits a luminous projectile ball forward.
-
-`interactive_point_origin_force`
-
-## The Catalyst
-![The Catalyst](/scene-catalog/becoming_catalyst.png)
-
-An evolving hand force that grows alongside the player. Not a weapon of destruction but a tool of transformation, becoming, and boundary dissolution. Each Lab sequence unlocks a new expressive mode — from slow cubes to calming fields to swarm intelligence.
-
-`becoming_catalyst`
-
-## Snap Tetrahedron Puzzle
-![Snap Tetrahedron Puzzle](/scene-catalog/snap_tetrahedron_puzzle.png)
-
-Interactive puzzle where connecting 4 snap points forms a tetrahedron that spawns a cube.
-
-`snap_tetrahedron_puzzle`
-
-## Floating Sphere Field
-![Floating Sphere Field](/scene-catalog/floating_sphere_field.png)
-
-A sparse field of soft glowing spheres drifting in the void on a single GPUParticles3D. The subtle successor to the Kusama dot-grid biome layer — presence-by-scarcity instead of overwhelming repetition. Ambient atmosphere for the void around the player.
-
-`floating_sphere_field`
-
-## grab_trihedron
-![grab_trihedron](/scene-catalog/grab_trihedron.png)
-
-trihedron — 4 vertices, 3 triangular faces and 1 quad base: the wedge as 3D primitive
-
-`grab_trihedron`
-
-## Basic Cube Scene
-![Basic Cube Scene](/scene-catalog/cube_scene.png)
-
-TEST how cubes can split, snap, scale, and recombine while remaining the basic reference primitive.
-
-`cube_scene`
-
-## Tentacle Placer
-![Tentacle Placer](/scene-catalog/tentacle_placer.png)
-
-A 6-bone FABRIK3D tentacle on a pedestal (same IK family as octapod_crawler — steerable by target position). The cycle is: REST_INITIAL (hold upright 10s) → GRAB_UP (first sky reach) → DWELL_PRE → render cube in mid-air → DWELL_POST → DESCEND (carrying cube) → place pyramid → DWELL_PLACE → RISE (clean vertical lift above the just-placed pyramid) → TRANSIT (horizontal traverse at sky height to next placement) → REST → repeat. The RISE + TRANSIT split (instead of a diagonal cool-down) gives an unambiguous up-then-over silhouette. Defaults are slow (6s per travel phase) so the gesture reads as ritual. Wire `placed(index, world_position)` and `rendered(index, world_position)` signals.
-
-`tentacle_placer`
-
-## pyramid_edit
-![pyramid_edit](/scene-catalog/pyramid_edit.png)
-
-Interactive pyramid demo with grab handles to reshape the base and apex.
-
-`pyramid_edit`
+The old inventory listed `lab_room`, `snap_tetrahedron_puzzle`, `floating_sphere_field` and `tentacle_placer`; none is a current interactable placement here. The stored role file also retains some dormant historical entries. They are not counted as present objects. All original text is retained in the iteration archive.

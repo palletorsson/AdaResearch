@@ -1,0 +1,70 @@
+{
+  "checks": [
+    {
+      "check": "All fourteen archive copies preserve original bytes",
+      "pass": true
+    },
+    {
+      "check": "Current map placements and geometry unchanged",
+      "pass": true
+    },
+    {
+      "check": "Runtime source files unchanged",
+      "pass": true
+    },
+    {
+      "check": "Only intended role ordering changed; notes, positions and other rooms preserved",
+      "pass": true
+    },
+    {
+      "check": "All other spine entries and metadata preserved",
+      "pass": true
+    },
+    {
+      "check": "Existing room spine membership preserved",
+      "pass": true
+    },
+    {
+      "check": "Book tags agree with primary order",
+      "pass": true
+    },
+    {
+      "check": "Spine primary order agrees",
+      "pass": true
+    },
+    {
+      "check": "Composition admission retained",
+      "pass": true
+    },
+    {
+      "check": "field_notes.md historical content preserved",
+      "pass": true
+    },
+    {
+      "check": "walked.md historical content preserved",
+      "pass": true
+    },
+    {
+      "check": "Critical essay unchanged",
+      "pass": true
+    },
+    {
+      "check": "Footnote references resolve",
+      "pass": true
+    },
+    {
+      "check": "Live final matches file",
+      "pass": true
+    },
+    {
+      "check": "Live primary cards match book order",
+      "pass": true
+    },
+    {
+      "check": "Live cards retain all fourteen placements",
+      "pass": true
+    }
+  ],
+  "before_words": 1244,
+  "after_words": 778
+}

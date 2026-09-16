@@ -1,3 +1,5 @@
+> Historical development draft. The current route and placed inventory are described in [final.md](final.md), [tutorial.md](tutorial.md) and [artifacts.md](artifacts.md), revised 16 September 2026. The original record follows unchanged; its former placements and claims are not current validation.
+
 # Primitives_Polythedra — walked
 
 > R-021, amended: the considered critical tutorial for a walked, working map.

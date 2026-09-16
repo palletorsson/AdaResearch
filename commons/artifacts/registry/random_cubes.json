@@ -30,7 +30,7 @@
 			},
 			"name": "Random Cycle Cube",
 			"lookup_name": "r_c",
-			"description": "Cube that sinks out and rises back in on randomized timing, with in/out state indicator and collider gating.",
+			"description": "A cube with fixed state order, random standing/hidden waits and separately switched collision. Optional chasm staging supplies three seeded stones, a recoverable pit, state tablet, REPLAY, NEW SEED and CUE.",
 			"scene": "res://commons/primitives/cubes/random_cycle_cube.tscn",
 			"category": "hazards",
 			"include_in_map_data": true,
@@ -134,7 +134,12 @@
 				"derived_at": "2026-04-29T09:39:46.242943Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A floor tile with its own randomized schedule: it sinks, drops its collider after a 0.2-second grace, waits hidden, rises again. Ground stops being a promise and becomes a rhythm you must read off the state colors."
+			"qfep_connection": "A floor tile with its own randomized schedule: it sinks, drops its collider after a 0.2-second grace, waits hidden, rises again. Ground stops being a promise and becomes a rhythm you must read off the state colors.",
+			"interactions": [
+				"With stand:chasm, REPLAY restores standing stones and seeded waits",
+				"NEW SEED chooses a different current crossing seed",
+				"CUE toggles advance rings; movement beacons and state tablet remain"
+			]
 		}
 	}
 }

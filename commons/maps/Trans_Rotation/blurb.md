@@ -1,1 +1,1 @@
-Rotation produces space as anisotropic. Where translation leaves direction indifferent, rotation makes facing matter. Front differs from back, left from right. The spinning forms carve orientation into the void. To rotate is to declare: this way and not that way, toward and away, the difference that makes direction real.
+The middle stays while one end rises and the other descends. Climb a turning blade to a higher grid landing, then walk into a 2D array whose angle increases with every row. When does the same forward movement cease to work?

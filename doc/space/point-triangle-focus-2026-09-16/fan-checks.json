@@ -1,0 +1,196 @@
+{
+	"cases": [
+		{
+			"boundary_area_m2": 0.8,
+			"completed_faces": 1,
+			"grid_size_m": 0.1,
+			"hold_interval_seconds": 1.0,
+			"outside_centroids": 0,
+			"pause_adds_no_point": true,
+			"point_count": 6,
+			"restart_preserves_faces": true,
+			"start_vertex": 0,
+			"sum_triangle_area_m2": 0.800000011920929,
+			"triangles": [
+				{
+					"a": [
+						0.0,
+						0.0
+					],
+					"area_m2": 0.240000009536743,
+					"b": [
+						1.20000004768372,
+						0.0
+					],
+					"c": [
+						1.20000004768372,
+						0.400000005960464
+					],
+					"centroid": [
+						0.800000011920929,
+						0.133333340287209
+					],
+					"centroid_outside_boundary": false
+				},
+				{
+					"a": [
+						0.0,
+						0.0
+					],
+					"area_m2": 0.159999996423721,
+					"b": [
+						1.20000004768372,
+						0.400000005960464
+					],
+					"c": [
+						0.400000005960464,
+						0.400000005960464
+					],
+					"centroid": [
+						0.533333361148834,
+						0.266666680574417
+					],
+					"centroid_outside_boundary": false
+				},
+				{
+					"a": [
+						0.0,
+						0.0
+					],
+					"area_m2": 0.159999996423721,
+					"b": [
+						0.400000005960464,
+						0.400000005960464
+					],
+					"c": [
+						0.400000005960464,
+						1.20000004768372
+					],
+					"centroid": [
+						0.266666680574417,
+						0.533333361148834
+					],
+					"centroid_outside_boundary": false
+				},
+				{
+					"a": [
+						0.0,
+						0.0
+					],
+					"area_m2": 0.240000009536743,
+					"b": [
+						0.400000005960464,
+						1.20000004768372
+					],
+					"c": [
+						0.0,
+						1.20000004768372
+					],
+					"centroid": [
+						0.133333340287209,
+						0.800000011920929
+					],
+					"centroid_outside_boundary": false
+				}
+			]
+		},
+		{
+			"boundary_area_m2": 0.8,
+			"completed_faces": 2,
+			"grid_size_m": 0.1,
+			"hold_interval_seconds": 1.0,
+			"outside_centroids": 2,
+			"pause_adds_no_point": true,
+			"point_count": 6,
+			"restart_preserves_faces": true,
+			"start_vertex": 1,
+			"sum_triangle_area_m2": 1.44000007212162,
+			"triangles": [
+				{
+					"a": [
+						1.20000004768372,
+						0.0
+					],
+					"area_m2": 0.160000011324883,
+					"b": [
+						1.20000004768372,
+						0.400000005960464
+					],
+					"c": [
+						0.400000005960464,
+						0.400000005960464
+					],
+					"centroid": [
+						0.933333396911621,
+						0.266666680574417
+					],
+					"centroid_outside_boundary": false
+				},
+				{
+					"a": [
+						1.20000004768372,
+						0.0
+					],
+					"area_m2": 0.320000052452087,
+					"b": [
+						0.400000005960464,
+						0.400000005960464
+					],
+					"c": [
+						0.400000005960464,
+						1.20000004768372
+					],
+					"centroid": [
+						0.666666686534882,
+						0.533333361148834
+					],
+					"centroid_outside_boundary": true
+				},
+				{
+					"a": [
+						1.20000004768372,
+						0.0
+					],
+					"area_m2": 0.239999979734421,
+					"b": [
+						0.400000005960464,
+						1.20000004768372
+					],
+					"c": [
+						0.0,
+						1.20000004768372
+					],
+					"centroid": [
+						0.533333361148834,
+						0.800000011920929
+					],
+					"centroid_outside_boundary": true
+				},
+				{
+					"a": [
+						1.20000004768372,
+						0.0
+					],
+					"area_m2": 0.720000028610229,
+					"b": [
+						0.0,
+						1.20000004768372
+					],
+					"c": [
+						0.0,
+						0.0
+					],
+					"centroid": [
+						0.400000005960464,
+						0.400000005960464
+					],
+					"centroid_outside_boundary": false
+				}
+			]
+		}
+	],
+	"engine": "4.6-stable (official)",
+	"passed": true,
+	"scene": "res://commons/primitives/point/draw_triangle_faces.tscn",
+	"scope": "One real scene, pointer-button restart, timed placement and emitted meshes with supplied hand positions; no human/headset trial. Area sums include overlaps, not union area."
+}

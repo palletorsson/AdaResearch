@@ -1,0 +1,219 @@
+{
+  "artifacts": [
+    {
+      "bounds": {
+        "max": [
+          3.37467455863953,
+          0.904510617256165,
+          5.42735958099365
+        ],
+        "meshes": 12,
+        "min": [
+          2.60006213188171,
+          0.779999971389771,
+          4.91237640380859
+        ]
+      },
+      "lookup": "random_walk_collection",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomWalkCollection",
+      "position": "(3.0, 1.178302, 5.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          9.77600002288818,
+          1.53000009059906,
+          5.34250020980835
+        ],
+        "meshes": 68,
+        "min": [
+          8.56999969482422,
+          0.0,
+          3.12000012397766
+        ]
+      },
+      "lookup": "random_walk_terrarium",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomWalkTerrarium",
+      "position": "(9.0, 0.0, 5.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          15.3745222091675,
+          1.54999995231628,
+          5.15000009536743
+        ],
+        "meshes": 97,
+        "min": [
+          14.4200000762939,
+          0.0,
+          4.78279972076416
+        ]
+      },
+      "lookup": "random_walk_leash",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomWalkLeash",
+      "position": "(15.0, 0.0, 5.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          3.08999991416931,
+          2.52999997138977,
+          9.09000015258789
+        ],
+        "meshes": 23,
+        "min": [
+          2.37000012397766,
+          0.00999999791383743,
+          8.72999954223633
+        ]
+      },
+      "lookup": "pixel_cloud",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/PixelCloud",
+      "position": "(3.0, 0.1, 9.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          16.5249996185303,
+          5.04500007629395,
+          24.5249996185303
+        ],
+        "meshes": 572,
+        "min": [
+          1.47499930858612,
+          -0.140625,
+          9.47500038146973
+        ]
+      },
+      "lookup": "random_walk_128",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomWalk128",
+      "position": "(9.0, 0.0, 17.0)",
+      "yaw": -179.999984741211
+    }
+  ],
+  "checks": [
+    {
+      "check": "random_walk_terrarium/Btn_0 reachable from one mark: 0.648 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_1 reachable from one mark: 0.593 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_2 reachable from one mark: 0.569 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_3 reachable from one mark: 0.570 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_3 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_0 reachable from one mark: 0.593 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_1 reachable from one mark: 0.648 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_2 reachable from one mark: 0.594 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "Moat is open at (2.0, 17.0)",
+      "passed": true
+    },
+    {
+      "check": "Moat is open at (16.0, 17.0)",
+      "passed": true
+    },
+    {
+      "check": "Moat is open at (5.0, 10.0)",
+      "passed": true
+    },
+    {
+      "check": "Bridge or inner apron supported at (9.0, 10.0)",
+      "passed": true
+    },
+    {
+      "check": "Bridge or inner apron supported at (9.0, 24.0)",
+      "passed": true
+    },
+    {
+      "check": "Bridge or inner apron supported at (4.0, 17.0)",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium: no missing or duplicated buttons after actions",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "floor_checks": [
+    {
+      "cell": "(9.0, 0.0)",
+      "supported": true
+    },
+    {
+      "cell": "(9.0, 25.0)",
+      "supported": true
+    },
+    {
+      "cell": "(1.0, 13.0)",
+      "supported": true
+    },
+    {
+      "cell": "(17.0, 13.0)",
+      "supported": true
+    }
+  ],
+  "headset_verified": false,
+  "map": "Random_Walk",
+  "origin": "(0.5, 0.0, 0.5)"
+}

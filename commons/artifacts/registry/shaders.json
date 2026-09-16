@@ -80,7 +80,7 @@
 				"derived_at": "2026-04-29T09:39:46.268381Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Leather, velvet fur, pop plastic, super green, techno fungus: identical spheres in a row, differing only in surface program. Identity staged as pure material performance \u2014 the mesh beneath never changes and never needed to, which is the whole argument."
+			"qfep_connection": "Leather, velvet fur, pop plastic, super green, techno fungus: identical spheres in a row, differing only in surface program. Identity staged as pure material performance — the mesh beneath never changes and never needed to, which is the whole argument."
 		},
 		"alphahash": {
 			"category": "unknown",
@@ -192,7 +192,7 @@
 				"derived_at": "2026-04-29T09:39:46.268381Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Transparency without blending: each fragment flips a screen-space coin against its alpha and is drawn entirely or not at all. Ghostliness as statistics \u2014 opaque everywhere it exists, translucent only in aggregate, the way a population can be half-present while every member is binary."
+			"qfep_connection": "Transparency without blending: each fragment flips a screen-space coin against its alpha and is drawn entirely or not at all. Ghostliness as statistics — opaque everywhere it exists, translucent only in aggregate, the way a population can be half-present while every member is binary."
 		},
 		"art_history_gallery": {
 			"category": "shaders",
@@ -301,7 +301,7 @@
 				"derived_at": "2026-04-29T09:39:46.268381Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Kente beside Bauhaus beside Zellige, twenty traditions each reduced to a symmetry group and a neon palette on a floor tile. Walkable art history is art history made commensurable \u2014 the preset enum is the flattening to stay suspicious of."
+			"qfep_connection": "Kente beside Bauhaus beside Zellige, twenty traditions each reduced to a symmetry group and a neon palette on a floor tile. Walkable art history is art history made commensurable — the preset enum is the flattening to stay suspicious of."
 		},
 		"buffer_geometry_particles": {
 			"category": "shaders",
@@ -405,7 +405,7 @@
 				"derived_at": "2026-04-29T09:39:46.268381Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Ten thousand particles as one ArrayMesh whose drift, size, and lifecycle run in the vertex shader from attributes fixed at build time \u2014 after upload nothing is simulated, only replayed on a mod(TIME) loop. The swarm's whole future sits in the buffer; motion as pre-commitment."
+			"qfep_connection": "Ten thousand particles as one ArrayMesh whose drift, size, and lifecycle run in the vertex shader from attributes fixed at build time — after upload nothing is simulated, only replayed on a mod(TIME) loop. The swarm's whole future sits in the buffer; motion as pre-commitment."
 		},
 		"buffergeometryparticles": {
 			"category": "unknown",
@@ -516,7 +516,7 @@
 				"derived_at": "2026-04-29T09:39:46.268381Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Positions, velocities, and lifetimes are packed into the mesh's vertex attributes once; after that, motion is an equation of TIME evaluated in the vertex shader. Ten thousand particles and no events \u2014 nothing updates, the same frozen data merely reads differently each frame."
+			"qfep_connection": "Positions, velocities, and lifetimes are packed into the mesh's vertex attributes once; after that, motion is an equation of TIME evaluated in the vertex shader. Ten thousand particles and no events — nothing updates, the same frozen data merely reads differently each frame."
 		},
 		"carpet_cove_gallery": {
 			"category": "shaders",
@@ -623,7 +623,7 @@
 				"derived_at": "2026-04-29T09:39:46.268381Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Twenty-four coves in facing rows, RNG seeded to 77: a gallery of wallpaper symmetries that is itself deterministic wallpaper, variety exhibited by a process with no variance left in it. The three-metre aisle is where comparison actually happens \u2014 in the walking."
+			"qfep_connection": "Twenty-four coves in facing rows, RNG seeded to 77: a gallery of wallpaper symmetries that is itself deterministic wallpaper, variety exhibited by a process with no variance left in it. The three-metre aisle is where comparison actually happens — in the walking."
 		},
 		"clippingplanes": {
 			"category": "unknown",
@@ -694,12 +694,12 @@
 				"max_dimension_m": 0.0,
 				"measured_at": "2026-04-29T07:09:56.762620Z"
 			},
-			"qfep_connection": "Nothing is cut: the geometry stays whole while the fragment shader refuses to draw one side of a moving plane, glowing cyan along the line of refusal. Section drawing as pure ideology \u2014 the interior was always there; visibility is what the plane legislates."
+			"qfep_connection": "Nothing is cut: the geometry stays whole while the fragment shader refuses to draw one side of a moving plane, glowing cyan along the line of refusal. Section drawing as pure ideology — the interior was always there; visibility is what the plane legislates."
 		},
 		"cove_display": {
 			"category": "shaders",
 			"complexity": "advanced",
-			"description": "Cyclorama/infinity cove surface \u2014 curved floor-to-wall form built with SurfaceTool. Accepts any shader via grid config. Continuous UV mapping for seamless tiling.",
+			"description": "Cyclorama/infinity cove surface — curved floor-to-wall form built with SurfaceTool. Accepts any shader via grid config. Continuous UV mapping for seamless tiling.",
 			"dev_themes": [
 				"shaders",
 				"visual"
@@ -879,7 +879,7 @@
 				"derived_at": "2026-04-29T09:39:46.268381Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The surface keeps a 512-pixel memory of everywhere hands have been, while a clock increments the ruin at 0.005 per second regardless. Touch is recorded as damage and neglect accrues anyway \u2014 wear is the one texture the player authors just by existing near it."
+			"qfep_connection": "The surface keeps a 512-pixel memory of everywhere hands have been, while a clock increments the ruin at 0.005 per second regardless. Touch is recorded as damage and neglect accrues anyway — wear is the one texture the player authors just by existing near it."
 		},
 		"dynamic_cubemap": {
 			"category": "shaders",
@@ -985,7 +985,7 @@
 				"derived_at": "2026-04-29T09:39:46.268877Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Each reflective object carries its own ReflectionProbe set to UPDATE_ALWAYS \u2014 the room re-rendered per surface, reflection as every object's private subscription to its surroundings. Fidelity is then tiered by i % 3, so which mirror deserves the sharper world is decided by position in a list."
+			"qfep_connection": "Each reflective object carries its own ReflectionProbe set to UPDATE_ALWAYS — the room re-rendered per surface, reflection as every object's private subscription to its surroundings. Fidelity is then tiered by i % 3, so which mirror deserves the sharper world is decided by position in a list."
 		},
 		"dynamiccubemap": {
 			"category": "unknown",
@@ -1096,12 +1096,12 @@
 				"derived_at": "2026-04-29T09:39:46.268877Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Eight metallic objects with no appearance of their own \u2014 each frame their surfaces are refreshed with captures of the surrounding room, fresnel deciding how much borrowed world shows through. Identity as pure reflection: blank the environment and the objects go mute."
+			"qfep_connection": "Eight metallic objects with no appearance of their own — each frame their surfaces are refreshed with captures of the surrounding room, fresnel deciding how much borrowed world shows through. Identity as pure reflection: blank the environment and the objects go mute."
 		},
 		"filter_screen": {
 			"category": "shaders",
 			"complexity": "intermediate",
-			"description": "A 3D-to-2D projection surface using a real Camera3D inside a SubViewport. Unlike the ScienceScreen (grid data), the FilterScreen projects the live 3D scene onto a flat monitor \u2014 teaching projection itself as a primitive. Filter modes: normal, wireframe, depth, normals, silhouette, grid overlay. Points foreshorten, lines lose depth, triangles change area based on viewing angle.",
+			"description": "A 3D-to-2D projection surface using a real Camera3D inside a SubViewport. Unlike the ScienceScreen (grid data), the FilterScreen projects the live 3D scene onto a flat monitor — teaching projection itself as a primitive. Filter modes: normal, wireframe, depth, normals, silhouette, grid overlay. Points foreshorten, lines lose depth, triangles change area based on viewing angle.",
 			"dev_themes": [
 				"shaders",
 				"visual",
@@ -1216,7 +1216,7 @@
 				"derived_at": "2026-04-29T09:39:46.268877Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A real Camera3D flattens the live scene onto 640x480, and each filter mode confesses a different loss \u2014 depth keeps distance and discards color, silhouette keeps outline and discards everything else. Projection taught as the first lossy compression, with the discard menu made switchable."
+			"qfep_connection": "A real Camera3D flattens the live scene onto 640x480, and each filter mode confesses a different loss — depth keeps distance and discards color, silhouette keeps outline and discards everything else. Projection taught as the first lossy compression, with the discard menu made switchable."
 		},
 		"flashlight_demo": {
 			"dna": {
@@ -1428,7 +1428,7 @@
 				"derived_at": "2026-04-29T09:39:46.268877Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The glass never transmits anything; it samples the already-rendered screen behind it and bends the UVs by the refraction the surface normal implies. Transparency staged as a lie the GPU tells honestly \u2014 you see through the object only because the frame was finished before it asked."
+			"qfep_connection": "The glass never transmits anything; it samples the already-rendered screen behind it and bends the UVs by the refraction the surface normal implies. Transparency staged as a lie the GPU tells honestly — you see through the object only because the frame was finished before it asked."
 		},
 		"materialstransmission": {
 			"category": "unknown",
@@ -1542,7 +1542,7 @@
 				"derived_at": "2026-04-29T09:39:46.268877Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Fresnel makes the glass most present at the grazing angle, where you see it least directly \u2014 face it head-on and it nearly vanishes into what it refracts. A material legible only at its own edges, presence as boundary condition rather than substance."
+			"qfep_connection": "Fresnel makes the glass most present at the grazing angle, where you see it least directly — face it head-on and it nearly vanishes into what it refracts. A material legible only at its own edges, presence as boundary condition rather than substance."
 		},
 		"pattern_compositor": {
 			"category": "shaders",
@@ -1652,7 +1652,7 @@
 				"derived_at": "2026-04-29T09:39:46.268877Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A carpet is a jurisdiction map: field, border, medallion, gutter each ruled by a different wallpaper group with its own palette and seed. F_order as zoning law \u2014 the composition holds not because the patterns agree but because their borders are drawn first."
+			"qfep_connection": "A carpet is a jurisdiction map: field, border, medallion, gutter each ruled by a different wallpaper group with its own palette and seed. F_order as zoning law — the composition holds not because the patterns agree but because their borders are drawn first."
 		},
 		"pixel_carpet_gallery": {
 			"category": "shaders",
@@ -1759,7 +1759,7 @@
 				"derived_at": "2026-04-29T09:39:46.268877Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Sixty-nine carpets from one shader: seventeen symmetry groups crossed with ten neon palettes cover a thirty-metre corridor floor-to-ceiling without repeating. A demonstration that a small F_order plus seeded E_flux can outproduce a warehouse of unique assets \u2014 and that 'unique' was always a parameter count."
+			"qfep_connection": "Sixty-nine carpets from one shader: seventeen symmetry groups crossed with ten neon palettes cover a thirty-metre corridor floor-to-ceiling without repeating. A demonstration that a small F_order plus seeded E_flux can outproduce a warehouse of unique assets — and that 'unique' was always a parameter count."
 		},
 		"postprocessing_bloom": {
 			"category": "unknown",
@@ -1878,7 +1878,7 @@
 				"derived_at": "2026-04-29T09:39:46.268877Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Bloom is the camera's confession, not the object's property: whatever exceeds the threshold leaks light into its neighbors' pixels. The scene arranges its bodies purely to overdrive that leak \u2014 a hierarchy of importance measured in emission energy."
+			"qfep_connection": "Bloom is the camera's confession, not the object's property: whatever exceeds the threshold leaks light into its neighbors' pixels. The scene arranges its bodies purely to overdrive that leak — a hierarchy of importance measured in emission energy."
 		},
 		"queer_collection_gallery_a": {
 			"category": "shaders",
@@ -1962,7 +1962,7 @@
 				"derived_at": "2026-04-29T09:39:46.268877Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Five identical spheres, five affects compiled to fragment math \u2014 bruises as two noise fields intersecting, tears as scrolling roughness, melting as vertex displacement. Geometry is held constant so that all difference is skin, which is the claim: identity lives in the surface program, not the mesh."
+			"qfep_connection": "Five identical spheres, five affects compiled to fragment math — bruises as two noise fields intersecting, tears as scrolling roughness, melting as vertex displacement. Geometry is held constant so that all difference is skin, which is the claim: identity lives in the surface program, not the mesh."
 		},
 		"science_screen": {
 			"dna": {
@@ -1987,7 +1987,7 @@
 			},
 			"category": "shaders",
 			"complexity": "intermediate",
-			"description": "A large display that projects nearby 3D artifacts into simplified 2D abstractions. The screen keeps the structure of the source object but changes its representational state, turning embodied experience into diagram. That makes it a useful bridge between moving through a form and reasoning about it. It stages projection as a transformation with both gains and losses.",
+			"description": "Cased 2D instruments in 3D with stand, frame, cabinet and pylon supports. Explicit mode:voxel_slice reads its own hall lattice source and compares one horizontal biased-field section with the actual occupied/empty decisions, without substituting data when the source is absent.",
 			"dev_themes": [
 				"shaders",
 				"visual"
@@ -2128,7 +2128,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 01 \u2014 Shaping Functions",
+			"name": "Shader 01 — Shaping Functions",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_01_shaping.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -2239,7 +2239,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 02 \u2014 Colors",
+			"name": "Shader 02 — Colors",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_02_colors.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -2349,7 +2349,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 03 \u2014 Shapes",
+			"name": "Shader 03 — Shapes",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_03_shapes.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -2459,7 +2459,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 04 \u2014 Matrices",
+			"name": "Shader 04 — Matrices",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_04_matrices.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -2558,7 +2558,7 @@
 		"shader_05_patterns": {
 			"category": "shaders",
 			"complexity": "advanced",
-			"description": "Book of Shaders patterns \u2014 3 modes: classic tiling/truchet/brick, Wang tiles + Voronoi texture generation, procedural noise synthesis (simplex FBM, Worley cells, domain warp). VR slider controls per shader.",
+			"description": "Book of Shaders patterns — 3 modes: classic tiling/truchet/brick, Wang tiles + Voronoi texture generation, procedural noise synthesis (simplex FBM, Worley cells, domain warp). VR slider controls per shader.",
 			"dev_themes": [
 				"shaders",
 				"visual"
@@ -2569,7 +2569,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 05 \u2014 Patterns",
+			"name": "Shader 05 — Patterns",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_05_patterns.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -2685,7 +2685,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 06 \u2014 Random",
+			"name": "Shader 06 — Random",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_06_random.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -2797,7 +2797,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 07 \u2014 Noise",
+			"name": "Shader 07 — Noise",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_07_noise.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -2908,7 +2908,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 08 \u2014 Cellular Noise",
+			"name": "Shader 08 — Cellular Noise",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_08_cellularnoise.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -3018,7 +3018,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 09 \u2014 Fractal Brownian Motion",
+			"name": "Shader 09 — Fractal Brownian Motion",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_09_fbm.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -3129,7 +3129,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 10 \u2014 Reaction Diffusion",
+			"name": "Shader 10 — Reaction Diffusion",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_10_reactiondiffusion.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -3240,7 +3240,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 11 \u2014 Queer Rubber",
+			"name": "Shader 11 — Queer Rubber",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_11_queerrubber.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -3355,7 +3355,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 12 \u2014 Pink Extravaganza",
+			"name": "Shader 12 — Pink Extravaganza",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_12_pinkextravaganza.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -3571,7 +3571,7 @@
 		"shader_bibliotek": {
 			"category": "shaders",
 			"complexity": "intermediate",
-			"description": "Freestanding wall of cubes \u2014 each cube showcases a different shader from across the project. A physical library catalog of computational substrates.",
+			"description": "Freestanding wall of cubes — each cube showcases a different shader from across the project. A physical library catalog of computational substrates.",
 			"dev_themes": [
 				"shaders",
 				"visual",
@@ -3773,7 +3773,7 @@
 				"derived_at": "2026-04-29T09:39:46.268877Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Leather, velvet fur, pop plastic, techno fungus \u2014 spheres labeled like vitrines, a taxonomy of surfaces on one repeated mesh. The Degrading Rust holds its decay pinned at 0.65: even entropy is exhibited here as a dialed uniform rather than a process, decomposition curated into stillness."
+			"qfep_connection": "Leather, velvet fur, pop plastic, techno fungus — spheres labeled like vitrines, a taxonomy of surfaces on one repeated mesh. The Degrading Rust holds its decay pinned at 0.65: even entropy is exhibited here as a dialed uniform rather than a process, decomposition curated into stillness."
 		},
 		"tiles_explained": {
 			"category": "shaders",
@@ -3884,12 +3884,12 @@
 				"derived_at": "2026-04-29T09:39:46.268877Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Five boxes freeze five stages of one shader \u2014 raw UV, tiling, rotation, rotated pattern, finished surface \u2014 so the final image stands beside its own workings. The pipeline laid out as archaeology, revoking the shader's usual right to show only its conclusion."
+			"qfep_connection": "Five boxes freeze five stages of one shader — raw UV, tiling, rotation, rotated pattern, finished surface — so the final image stands beside its own workings. The pipeline laid out as archaeology, revoking the shader's usual right to show only its conclusion."
 		},
 		"wall_cove": {
 			"category": "shaders",
 			"complexity": "advanced",
-			"description": "Half-cove slope artifact \u2014 curved floor-to-wall transition built with SurfaceTool. High-res quarter-circle curve with continuous UVs for shader tiling. Place at wall base for smooth architectural transition.",
+			"description": "Half-cove slope artifact — curved floor-to-wall transition built with SurfaceTool. High-res quarter-circle curve with continuous UVs for shader tiling. Place at wall base for smooth architectural transition.",
 			"dev_themes": [
 				"art",
 				"shaders",
@@ -4083,7 +4083,7 @@
 				1,
 				1.0
 			],
-			"qfep_connection": "The architecture is conscripted as display: every wall cube above y=0 becomes a pixel whose color is settled by symmetry-group arithmetic on its own grid coordinates. The wall does not carry a pattern \u2014 it is one, and the map's structure layer was the image buffer all along."
+			"qfep_connection": "The architecture is conscripted as display: every wall cube above y=0 becomes a pixel whose color is settled by symmetry-group arithmetic on its own grid coordinates. The wall does not carry a pattern — it is one, and the map's structure layer was the image buffer all along."
 		},
 		"wall_pattern_gallery": {
 			"dna": {
@@ -4210,7 +4210,7 @@
 		"wall_shader_showcase": {
 			"category": "shaders",
 			"complexity": "advanced",
-			"description": "Replaces GridMultiMesh material with GPU shaders from the shader library. Cycles through different shaders on wall cubes \u2014 voronoi, tartan, rothko, truchet, etc.",
+			"description": "Replaces GridMultiMesh material with GPU shaders from the shader library. Cycles through different shaders on wall cubes — voronoi, tartan, rothko, truchet, etc.",
 			"dev_themes": [
 				"shaders",
 				"visual"
@@ -4301,7 +4301,7 @@
 				1,
 				1.0
 			],
-			"qfep_connection": "The room's whole material is revealed to be one slot: voronoi, tartan, rothko rotate through the GridMultiMesh override every few seconds while the geometry never moves. The original material is kept aside for restoration \u2014 the grid's look was always a swap-in, held in place by nothing but not-yet-being-replaced."
+			"qfep_connection": "The room's whole material is revealed to be one slot: voronoi, tartan, rothko rotate through the GridMultiMesh override every few seconds while the geometry never moves. The original material is kept aside for restoration — the grid's look was always a swap-in, held in place by nothing but not-yet-being-replaced."
 		}
 	}
 }

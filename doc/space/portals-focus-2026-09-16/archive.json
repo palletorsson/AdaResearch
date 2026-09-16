@@ -1,0 +1,74 @@
+{
+  "before": [
+    {
+      "path": "commons/maps/Primitives_Portals/final.md",
+      "sha256": "8d617797d811beb26e777aa1c5ddaee6106becff9dceaa92a922067d7b4a42ff"
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/tutorial.md",
+      "sha256": "5c59eb55378cb95c7fe820e9e53f3788d023ddbdeaf995c2b42e81033c050609"
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/technical.md",
+      "sha256": "08aaa89732221be39776cf5be42948dcd4899212b14ca634af21e10e03f25547"
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/critical.md",
+      "sha256": "ea27d4cdbc66d705c409b56f52a064f2c87ec44e7580087fe7b72a4aac819006"
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/intent.md",
+      "sha256": "befe4d040fcf7d861e22d7992731235672713e6cc45c40a29f0a780fcb6c8dbf"
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/artifacts.md",
+      "sha256": "85db0fd7328a990cfb23bbc0fb56b2391b13d5867cd5e95ca78ee1c44c516764"
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/blurb.md",
+      "sha256": "93327d1927d04163b47d7718a4396ddff3f2248b5fc10380b9fc3a3584566834"
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/summary.md",
+      "sha256": "1b485b034cdfc366cbe487f91bb905bee36d41469ec020b7b1944768a1c8f316"
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/field_notes.md",
+      "sha256": "f5a2ea68693dbb26d4df0e25683bb92a8bf9f9f9a969064675461362adc581b3"
+    },
+    {
+      "path": "commons/maps/Primitives_Portals/map_data.json",
+      "sha256": "f2d43bc8fbb60b339ada1a58ff42fbe0df934676df37880509e65d4700f87efc"
+    },
+    {
+      "path": "commons/data/artifact_roles.json",
+      "sha256": "ec46655ac47d45f99259fda39cefcc6fb3607d4f1644e88218534ac8bfe11101"
+    },
+    {
+      "path": "commons/data/spine_artifact_order.json",
+      "sha256": "72bce58bf100d3e460e97867ffc0af2c61dd4b98f67e988ff845a3df8f819ea7"
+    }
+  ],
+  "runtime": [
+    {
+      "path": "commons/primitives/combines/combine_portals.gd",
+      "sha256": "f9095aeaf71868381eff961f4e652e99f13b2be3e7aa540304fbb628ac90e2b0"
+    },
+    {
+      "path": "commons/primitives/combines/combine_portals.tscn",
+      "sha256": "66010b4c071e02ec86723f632efbd2f2a939dee1238c86662b348754862272f5"
+    },
+    {
+      "path": "commons/primitives/combines/achilles_tortoise.gd",
+      "sha256": "9eb63d9049f7ec462aee0dd5ef6334e9da545fc42a8c6fadd4e5b3f13a867dba"
+    },
+    {
+      "path": "commons/primitives/combines/achilles_tortoise.tscn",
+      "sha256": "ae0814ab3e34663ac71ea886bfd7011358ebf51d5472da3538a88e4ef3766b99"
+    },
+    {
+      "path": "commons/ui/limit_experiment_panel.gd",
+      "sha256": "45e012905b943a9fdb7ae0a39469fcafeb08586bfd0c0a8be998df574d6266eb"
+    }
+  ]
+}

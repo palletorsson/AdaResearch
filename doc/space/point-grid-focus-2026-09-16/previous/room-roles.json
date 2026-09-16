@@ -1,0 +1,50 @@
+{
+  "roles": {
+    "grab_sphere_point_snap": {
+      "role": "primary",
+      "group": "kept-and-discarded-position"
+    },
+    "room_grammar": "primary",
+    "floating_sphere_field": "primary",
+    "modulor_man_demo": "secondary",
+    "player_trace": {
+      "role": "primary",
+      "group": "kept-and-discarded-position"
+    },
+    "grid_lines": "primary",
+    "simulation_grid": "primary",
+    "plan_vitrine": "primary"
+  },
+  "groups": [
+    {
+      "id": "kept-and-discarded-position",
+      "title": "Movement and the positions kept",
+      "role": "primary"
+    }
+  ],
+  "order": {
+    "primary": [
+      "@kept-and-discarded-position",
+      "grid_lines",
+      "floating_sphere_field",
+      "room_grammar",
+      "plan_vitrine"
+    ],
+    "primary|kept-and-discarded-position": [
+      "grab_sphere_point_snap",
+      "player_trace"
+    ],
+    "secondary": [
+      "modulor_man_demo"
+    ],
+    "decoration": []
+  },
+  "positions": {
+    "primary": {
+      "grid_lines": [
+        1027.0,
+        79.0
+      ]
+    }
+  }
+}

@@ -1,108 +1,99 @@
-# Point Animated Cube
+# Follow a corner through the cube
 
-A cube moves through a tween. Keyframes define the targets; interpolation fills the between.
+The small experiment is this: move one vertex and find which surfaces must follow. This room builds on the triangle hall's three positions per face and the polyhedra hall's distinction between a visible boundary and a physical obstacle.
 
-Start with a still cube.
+## Begin with connections
 
-```gdscript
-var cube := MeshInstance3D.new()
-cube.mesh = BoxMesh.new()
-cube.position = Vector3.ZERO
-add_child(cube)
-```
+At `cube_lines`, follow the three edges meeting at one corner. The complete outline shows twelve edges. Faces are not needed for you to recognise the cube, although its wire outline has not closed a surface around an interior.
 
-A default BoxMesh at the origin. Side length 1, sitting on its own axis.
+The builder stores two kinds of information separately: where the vertices are, and which ones form edges or triangle patches. A list of positions by itself is not a surface.
 
-Define two keyframe positions.
+## Replay before editing
 
-```gdscript
-const START_POS := Vector3.ZERO
-const END_POS := Vector3(3, 1, 0)
-const DURATION := 2.0  # seconds
-```
+Both `animatedcubebuilder` placements have the discovery instrument. Keep one unchanged so you have a reference.
 
-The cube will travel from START_POS to END_POS over DURATION seconds.
+| Control | What it does here |
+| --- | --- |
+| REPLAY | Hides and reveals corners, edges and patches using the current vertex positions. |
+| PAUSE / RESUME | Stops or resumes this builder's assembly steps. Replay first if assembly has finished. |
+| RESTORE CUBE | Returns the eight initial corner positions and shows the completed cube. |
+| DIAGONALS | Shows or hides six face diagonals after assembly completes. |
 
-Create the tween.
+Replay the builder and pause when the shape becomes recognisable. Resume and let it finish. Corner handles can be picked up after completion; they are disabled during assembly. Release a held corner before using replay or restore.
 
-```gdscript
-var tween := create_tween()
-tween.tween_property(cube, "position", END_POS, DURATION)
-```
+The source constructs the hidden geometry at setup. Its timed steps change visibility. This is not the same operation as translating a finished cube across the room. Pausing this sequence does not stop the room clock or the neighbouring net.
 
-Godot's tween interpolates linearly between the current value and the target. One line replaces a hand-rolled animation loop.
+## Make the seam visible
 
-Change the easing.
+Find the face containing `v4`, `v5`, `v6` and `v7`. Before moving anything, trace its boundary and predict what will follow `v6`. Pull that corner a little out of the face's plane, leaving the others unchanged. Look for a crease, then use DIAGONALS to check it.
+
+The two triangle entries for that face are:
 
 ```gdscript
-tween.tween_property(cube, "position", END_POS, DURATION).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+[4, 5, 7]
+[5, 6, 7]
 ```
 
-Elastic transitions produce a bounce at the endpoint. Linear transitions move at constant speed. Each easing has a characteristic rhythm.
+The numbers are indices into the builder's vertex list. Both triangles use vertices 5 and 7, so that pair forms their common edge. Only the second triangle uses vertex 6. Moving it out of the original plane tilts that triangle while the other remains in place. Moving it only within the plane would not demonstrate this crease.
 
-Chain transformations.
+The update reads a changed handle position into the stored geometry:
 
 ```gdscript
-var tween := create_tween().set_parallel(false)
-tween.tween_property(cube, "position", END_POS, 2.0)
-tween.tween_property(cube, "rotation", Vector3(0, PI, 0), 1.0)
-tween.tween_property(cube, "scale", Vector3(2, 2, 2), 1.5)
+vertices[i] = handle_nodes[i].position / cube_size
 ```
 
-set_parallel(false) makes the steps sequential. Move, then rotate, then scale — six seconds total.
+`i` identifies the handle and its corresponding vertex. `position` is local to the builder; dividing by `cube_size` converts it back to the builder's stored coordinates. The edges and patches are rebuilt from those coordinates using the same connection lists.
 
-Run them in parallel.
+Release the handle. Predict what REPLAY will show, then test it. Predict what RESTORE CUBE will change, then test that. One repeats the presentation; the other restores the original coordinates.
 
-```gdscript
-var tween := create_tween().set_parallel(true)
-tween.tween_property(cube, "position", END_POS, 2.0)
-tween.tween_property(cube, "rotation", Vector3(0, PI, 0), 2.0)
-```
+## Compare a different operation
 
-With set_parallel(true), every tween_property starts at the same moment. The cube moves and rotates simultaneously.
+At `polyhedron_nets_cube`, follow one square as the net folds and unfolds. Each square remains rigid. The program changes hinge angles through `fold_progress`. The room has one net placement using the default cross configuration and `loop_fold:true`; the source's other net configurations are not additional displays here.
 
-Loop the animation.
+In your edited builder a corner moved relative to its neighbours. In the net, an entire face rotates around a hinge. Use this difference to explain why one square creased and the other stayed flat.
 
-```gdscript
-var tween := create_tween().set_loops()
-tween.tween_property(cube, "position", END_POS, 2.0)
-tween.tween_property(cube, "position", START_POS, 2.0)
-```
+The detailed timing, triangle counts and folding code are in the [technical chapter](/book?map=Point_Animatedcube&section=technical). More general position, rotation and scale experiments belong to the transformation sequence.
 
-set_loops() repeats indefinitely. The cube bounces between the two positions forever.
+## Recognise the room that carries you
 
-Read the current animation progress.
+After comparing the builder and the folding net, look at the museum floor and walls. Follow the box form from an exhibit into the surrounding structure. In the endless museum, floor slabs and wall blocks use scaled box meshes, with separate box-shaped collision geometry. The editable builder offers corner handles; the architecture participates in the movement of the visitor's body.
 
-```gdscript
-func animation_progress(tween: Tween) -> float:
-    return tween.get_total_elapsed_time() / tween.get_total_duration()
-```
+Compare a crate's planks and reinforcing strips with the builder's triangle pairs. Six geometric faces do not prescribe one mesh budget. A detailed box-shaped prefab can contain many pieces and many more triangles while remaining recognisable as a box.
 
-Progress runs from 0 to 1. Useful for triggering side effects at specific moments.
+This recognition belongs to the main walk. Composing new arrangements can develop later. For now, connect the object you are examining with the construction you are already inside. The [technical chapter](/book?map=Point_Animatedcube&section=technical) follows the shared box mesh and its separate colliders in the museum source.
 
-You can now animate a cube between keyframes with custom easing, chain or parallelise transforms, and loop the motion. Primitives_Ignorance will next introduce what a single cube cannot know.
+## Return visits
 
-Pause and resume an animation.
+These comparisons remain in the room. Choose one if it helps the question you are following; none is an additional requirement for finishing the main walk.
 
-```gdscript
-var active_tween: Tween
+### A world without composition yet
 
-func pause_animation() -> void:
-    active_tween.pause()
+Read the pallet's **A WORLD / WITHOUT / COMPOSITION**, the supply pile's **WITHOUT COMPOSITION / YET**, and the single crate's **YET**. Their arrangement already composes a scene. The admission concerns what we have learned to choose and examine so far.
 
-func resume_animation() -> void:
-    active_tween.play()
-```
+Compare the pallet, supply pile and two `station_crates` placements as arrangements. Which box seems accessible, protected, ready to move or forgotten? Identify the position, spacing or surrounding object that produces your reading. The box shape alone cannot account for all of it.
 
-A paused tween freezes at its current value. Resuming picks up where it left off.
+Compare a detailed crate with the bare builder. Both may be recognisable as boxes, but that resemblance does not require an identical mesh or triangle budget. The [technical chapter](/book?map=Point_Animatedcube&section=technical) counts the builder's particular representation; it does not assign that count to every crate.
 
-Adjust an active tween's target.
+### The glove between bodies
 
-```gdscript
-func redirect_tween(new_target: Vector3, remaining_time: float) -> void:
-    active_tween.stop()
-    active_tween = create_tween()
-    active_tween.tween_property(cube, "position", new_target, remaining_time)
-```
+The single-glove chamber offers a different encounter with an enclosure. A glove stands between an imagined worker and the contents. Compare the kind of access its design suggests with the exposed handles on the cube. This is a comparison of represented access; the glove is not an additional working sculpting control.
 
-Stopping the current tween and starting a new one retargets the animation mid-flight.
+### A shadow with a setting
+
+In `first_shadow`, compare the turning triangle with the thin line beside it. Then inspect `_build_line()` in its source. The line is a narrow cylinder, and its `cast_shadow` setting is explicitly OFF. The triangle's is ON.
+
+The missing line shadow therefore cannot establish that every line lacks a shadow because it has no area. This rendered line has thickness, and the program has disabled its shadow. The comparison exposes a setting as well as a shape. A later experiment could change that setting while keeping the same geometry; no switch for it is installed here.
+
+### The point returns through an instrument
+
+The dark glass of `first_phosphor` carries a green dot. Follow its repeating light and fading glow. The program changes material emission over time; this is a representation of a phosphor display, not an electron-beam simulation. What was added to make the point visible, and what does that addition let you notice?
+
+### Another neighbour list
+
+The nearby pyramid is configured `#base_sides:8`. Follow its apex connections and compare them with the three cube edges meeting at a corner. Its different pattern of neighbours provides a comparison for the builder, whose edits keep the old connections. The pyramid has no matching corner-editing instrument here.
+
+The floating sphere field remains decoration. Its presence need not become another compulsory lesson before the next room's investigation of the sphere.
+
+## For a second pass
+
+The existing instruments support deformation and comparison. They do not validate an enclosure, save a collection of altered forms or make the surface into walkable collision geometry. Keep those possible developments distinct from actions available now. A headset visit still needs to check reach and sightlines between the two builders and the net.

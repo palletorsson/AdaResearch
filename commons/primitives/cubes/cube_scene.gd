@@ -1,5 +1,6 @@
 extends Node3D
 class_name CubeScene
+const SolidFinish: GDScript = preload("res://commons/primitives/shared/solid_primitive_finish.gd")
 
 # @identity
 # essence: the reference unit. A 1 m magenta-wireframe cube that stands in 155 rooms as the thing every other size, every other transformation, every other body is read against. It is the ruler, not the exhibit.
@@ -19,7 +20,7 @@ class_name CubeScene
 ## changes nothing else.
 ##
 ## At the default (`grain = "solid"`) the script builds nothing, hides
-## nothing, and touches no property: the 155 existing placements render
+## nothing, and touches no property unless `solid_color` is explicitly supplied: the existing placements render
 ## exactly as they did before promotion. Every other value hides the shipped
 ## mesh and builds sibling meshes that reuse its material, so the family look
 ## is preserved while the MASS changes.
@@ -108,11 +109,15 @@ var _base_mesh: MeshInstance3D = null
 ## The material every built part wears — taken from the shipped mesh so the
 ## look is literally the same resource, not a copy that drifts.
 var _part_material: Material = null
+var _original_material: Material = null
+var _solid_color: String = ""
 
 
 # ── Lifecycle ─────────────────────────────────────────────────────────
 
 func _ready() -> void:
+	var shipped := _find_base_mesh()
+	if shipped != null: _original_material = shipped.material_override
 	_read_metadata_overrides()
 	_build_all()
 	_built = true
@@ -127,6 +132,7 @@ func _ready() -> void:
 ## so this returns without touching anything when nothing geometric moved.
 func apply_grid_config(config_data: Dictionary) -> void:
 	var before_grain: String = grain
+	var before_color: String = _solid_color
 
 	for k in config_data.keys():
 		set_meta("config_%s" % str(k), config_data[k])
@@ -136,7 +142,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		# Nothing exists yet; _ready() will build with the value just resolved.
 		return
 
-	if grain == before_grain:
+	if grain == before_grain and _solid_color == before_color:
 		# curation_station's {"emissive": false} lands here. Touch nothing,
 		# say nothing.
 		return
@@ -145,6 +151,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _read_metadata_overrides() -> void:
+	_solid_color = str(get_meta("config_solid_color", ""))
 	if has_meta("config_grain"):
 		grain = _pick_axis(str(get_meta("config_grain")), GRAINS, grain)
 
@@ -183,9 +190,14 @@ func _rebuild_now() -> void:
 # ── Build ─────────────────────────────────────────────────────────────
 
 func _build_all() -> void:
+	# Keep the shared scene material intact; pigment is an instance override.
+	if has_meta("config_solid_color"):
+		var shipped := _find_base_mesh()
+		if shipped != null:
+			shipped.material_override = SolidFinish.for_instance(self, _original_material)
 	if grain == GRAIN_SOLID:
-		# The pre-promotion look, to the byte. No child added, no property
-		# written, no node hidden. 155 rooms must not notice this script.
+		# No grain geometry is added or hidden. An explicit solid_color above
+		# may change this instance's finish; unconfigured cubes stay unchanged.
 		return
 
 	_base_mesh = _find_base_mesh()

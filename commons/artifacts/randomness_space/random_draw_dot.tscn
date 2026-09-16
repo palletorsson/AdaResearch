@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://commons/primitives/point/draw_dot.tscn" id="1"]
+[ext_resource type="Script" path="res://commons/artifacts/randomness_space/random_draw_dot.gd" id="2"]
+
+[node name="RandomDrawDot" instance=ExtResource("1")]
+script = ExtResource("2")

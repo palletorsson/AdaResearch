@@ -1,0 +1,6787 @@
+{
+  "_meta": {
+    "generated": "2026-09-12 15:55:35",
+    "generator": "tools/build_spine_artifact_order.py",
+    "rule": "first appearance walking the spine: sequence order -> map order -> the room's thread (ruled, else floor, else file)",
+    "sequences": 24,
+    "maps_read": 196,
+    "maps_missing": 0,
+    "artifacts": 966,
+    "ordered_by": {
+      "ruled": 947,
+      "floor": 15,
+      "file": 2
+    },
+    "primary": 282,
+    "unruled": 14,
+    "proceduralgeneration_route_updated": "2026-09-14; retained existing first appearances, reordered only this sequence",
+    "proceduralgeneration_encounters_updated": "2026-09-15; remaining five halls developed, preserved first-appearance order",
+    "point_one_route_updated": "2026-09-15; origin follows folding past; two secondary encounters; wireframe first encountered in Triangle",
+    "point_lines_trace_updated": "2026-09-15; first encountered beside walk this line",
+    "point_lines_workshop_updated": "2026-09-15; grabbable combination workshop added; existing first appearances retained"
+  },
+  "order": [
+    {
+      "lookup": "frame_counter_display",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "origin",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "the_invisible_point",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "code_evolution_screen",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "interactive_point_origin_force",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "coordinate_readout",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "CoordinateSystem3M",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "drag_point_target",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "street_talker",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grab_sphere_point_snap",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "you_are_here",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "3t",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fontana_puncture",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "floating_sphere_field",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "comment_box",
+      "sequence": "primitives",
+      "map": "Point_One",
+      "role": "decoration",
+      "by": "ruled"
+    },
+    {
+      "lookup": "line_demo",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "line",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "walk_this_line_marking",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "player_trace",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "do_not_cross_barrier",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "line_space_workshop",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grabbable_line",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "two_point_ruler",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "two_points_line",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "laser_measure",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "laser_exploding_sphere",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "parallel_lines",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "modulor_man_demo",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "line_sledgehammer",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "parallel_line_puzzle",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lightrod",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "wall_health_station",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "wall_abstract",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "axis_line",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "plus_line_puzzle",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "anamorphic_cross",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "klee_walking_point",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "perspective_lines",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "scale_lines",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "science_screen",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dark_sphere",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "decoration",
+      "by": "ruled"
+    },
+    {
+      "lookup": "health_cross",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "unruled",
+      "by": "floor"
+    },
+    {
+      "lookup": "sketch_monitor",
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "role": "unruled",
+      "by": "floor"
+    },
+    {
+      "lookup": "draw_dot",
+      "sequence": "primitives",
+      "map": "Point_Trace",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "draw_stick",
+      "sequence": "primitives",
+      "map": "Point_Trace",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "whiteboard",
+      "sequence": "primitives",
+      "map": "Point_Trace",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "hand_telemetry_diptych",
+      "sequence": "primitives",
+      "map": "Point_Trace",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "automatic_writing_desk",
+      "sequence": "primitives",
+      "map": "Point_Trace",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grid_lines",
+      "sequence": "primitives",
+      "map": "Point_Line_Grid",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "room_grammar",
+      "sequence": "primitives",
+      "map": "Point_Line_Grid",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "plan_vitrine",
+      "sequence": "primitives",
+      "map": "Point_Line_Grid",
+      "role": "unruled",
+      "by": "floor"
+    },
+    {
+      "lookup": "triangle_line_puzzle",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "draw_triangle_faces",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pythagorean_triangle_angles",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "silhouette_gate",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pink_triangle",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "quad_line_puzzle",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "quad",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "folded_strip",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "triangleprofiles",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fetish_portal",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "interactivetriangle",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "triangle",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "wireframe_threshold",
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grab_trihedron",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grab_tetrahedron",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pyramid_edit",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cube_scene",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "prism_block",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "concrete_barrier",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "street_sign",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "diamonds",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rock_spawner",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rock_scanner",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "path_watchdog",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "path_game_controller",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "becoming_catalyst",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "trafficcone",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "decoration",
+      "by": "floor"
+    },
+    {
+      "lookup": "if_not_exist_create",
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "role": "secondary",
+      "by": "floor"
+    },
+    {
+      "lookup": "cube_lines",
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "polyhedron_nets_cube",
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "animatedcubebuilder",
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "wooden_pallet",
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "hangar_supply_pile",
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "crate",
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "station_crates",
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "glove_box",
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "first_phosphor",
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "first_shadow",
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pyramid",
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sphere_low",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sphere_mid",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sphere_high",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sphere",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "budget_of_smoothness",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "platonic_grabbables",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "star_primitive",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "hole_with_cones",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "truncatedtetrahedron",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "capsule",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grab_octahedron",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "snap_octahedron_puzzle",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "roughrock",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "righttriangle",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "primitive_pillar",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "seven_words_choir",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cylinder_radials_rings",
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "combine_portals",
+      "sequence": "primitives",
+      "map": "Primitives_Portals",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "achilles_tortoise",
+      "sequence": "primitives",
+      "map": "Primitives_Portals",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "snap_pyramid_puzzle",
+      "sequence": "primitives",
+      "map": "Primitives_Melencolia",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pyramidlong",
+      "sequence": "primitives",
+      "map": "Primitives_Melencolia",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "durer_scene",
+      "sequence": "primitives",
+      "map": "Primitives_Melencolia",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "diamondtoruscollection",
+      "sequence": "primitives",
+      "map": "Primitives_Melencolia",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "code_display",
+      "sequence": "primitives",
+      "map": "Primitives_Melencolia",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bigframe",
+      "sequence": "primitives",
+      "map": "Primitives_Melencolia",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "eleven_dots",
+      "sequence": "primitives",
+      "map": "Primitives_Melencolia",
+      "role": "unruled",
+      "by": "floor"
+    },
+    {
+      "lookup": "pick_up_cube",
+      "sequence": "transformation",
+      "map": "Trans_Pre",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "y_translation_cube",
+      "sequence": "transformation",
+      "map": "Trans_Pre",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rotation_oscillation_cube",
+      "sequence": "transformation",
+      "map": "Trans_Pre",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "uniform_scale_marker",
+      "sequence": "transformation",
+      "map": "Trans_Pre",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "tc",
+      "sequence": "transformation",
+      "map": "Trans_Introduction",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sc",
+      "sequence": "transformation",
+      "map": "Trans_Introduction",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rc",
+      "sequence": "transformation",
+      "map": "Trans_Introduction",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "matrix_4x4_viewer",
+      "sequence": "transformation",
+      "map": "Trans_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "z_translation_cube",
+      "sequence": "transformation",
+      "map": "Trans_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "transform_composition",
+      "sequence": "transformation",
+      "map": "Trans_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rotation_gimbal",
+      "sequence": "transformation",
+      "map": "Trans_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "balance_puzzle",
+      "sequence": "transformation",
+      "map": "Trans_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "head_crab",
+      "sequence": "transformation",
+      "map": "Trans_Introduction",
+      "role": "decoration",
+      "by": "ruled"
+    },
+    {
+      "lookup": "x_translation_cube",
+      "sequence": "transformation",
+      "map": "Trans_Translation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "toruscylinder",
+      "sequence": "transformation",
+      "map": "Trans_Translation",
+      "role": "unruled",
+      "by": "file"
+    },
+    {
+      "lookup": "rotation_wall_crossings",
+      "sequence": "transformation",
+      "map": "Trans_Rotation",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rotation_array_compare",
+      "sequence": "transformation",
+      "map": "Trans_Rotation",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "boolean_tunnel",
+      "sequence": "transformation",
+      "map": "Trans_RotationSpectacle",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "carousel_cake",
+      "sequence": "transformation",
+      "map": "Trans_RotationSpectacle",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "scale_me",
+      "sequence": "transformation",
+      "map": "Trans_Scale",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "approach_wall",
+      "sequence": "transformation",
+      "map": "Trans_Body",
+      "role": "unruled",
+      "by": "floor"
+    },
+    {
+      "lookup": "carve_grid",
+      "sequence": "transformation",
+      "map": "Trans_Body",
+      "role": "unruled",
+      "by": "floor"
+    },
+    {
+      "lookup": "approach_scale",
+      "sequence": "transformation",
+      "map": "Trans_Body",
+      "role": "unruled",
+      "by": "floor"
+    },
+    {
+      "lookup": "pusher_block",
+      "sequence": "transformation",
+      "map": "Trans_Pit",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grower_block",
+      "sequence": "transformation",
+      "map": "Trans_Pit",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "free_ball_launcher",
+      "sequence": "transformation",
+      "map": "Trans_Pit",
+      "role": "unruled",
+      "by": "floor"
+    },
+    {
+      "lookup": "row_3_x",
+      "sequence": "array_tutorial",
+      "map": "Array",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grid_2d_4x4",
+      "sequence": "array_tutorial",
+      "map": "Array",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "xyz_coordinates",
+      "sequence": "array_tutorial",
+      "map": "Array",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "column_3_z",
+      "sequence": "array_tutorial",
+      "map": "Array",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "gridagent",
+      "sequence": "array_tutorial",
+      "map": "Array",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pulsar_visualizer",
+      "sequence": "array_tutorial",
+      "map": "Array",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grid_3d_4x4x4",
+      "sequence": "array_tutorial",
+      "map": "Array",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "step_sequencer",
+      "sequence": "array_tutorial",
+      "map": "Tutorial_Disco",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "standalone_disco",
+      "sequence": "array_tutorial",
+      "map": "Tutorial_Disco",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_modern_art_albers_homage_warm",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "crackpropagation_ca",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "csg_architecture_cavity",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_color_stacks_stack_triadic_primary",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_color_stacks_stack_monochrome_blue",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_color_stacks_stack_value_steps_warm",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_color_furniture_furniture_becker_utensilo_bauhaus",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_color_furniture_furniture_vignelli_metafora_primary",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_color_stacks_stack_simultaneous_contrast",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_color_stacks_stack_complementary_red_green",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_color_furniture_furniture_coco_pendant_warm",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "primitive_assembler",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "primitive_combo_puzzle",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_color_furniture_furniture_lamp_warm_glow",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_modern_art_kandinsky_bauhaus_triad",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_modern_art_rothko_chromatic_field",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_primitive_stack_ps01_bauhaus_totem_green",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dress_selector",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_modern_art_mondrian_de_stijl",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "constraint_sculptor",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "serial_principle",
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "role": "unruled",
+      "by": "floor"
+    },
+    {
+      "lookup": "flashlight_demo",
+      "sequence": "color",
+      "map": "Color_Flashlight",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "nail_color_controller",
+      "sequence": "color",
+      "map": "Color_Nails",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "hand_color_controller",
+      "sequence": "color",
+      "map": "Color_Nails",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "colorballs",
+      "sequence": "color",
+      "map": "Color_Nails",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "nail_salon",
+      "sequence": "color",
+      "map": "Color_Nails",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "brick_wall_factory",
+      "sequence": "color",
+      "map": "Color_Nails",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rainbow",
+      "sequence": "color",
+      "map": "Color_Rainbow",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "catalyst_pedestal",
+      "sequence": "color",
+      "map": "Color_Rainbow",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pillarcolorcollection",
+      "sequence": "color",
+      "map": "Color_Pillar",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "color_sets_overview",
+      "sequence": "color",
+      "map": "Color_Pillar",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "visual_color_mixing",
+      "sequence": "color",
+      "map": "Color_Pillar",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grab_rainbow_stick",
+      "sequence": "color",
+      "map": "Color_Pillar",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "SpectrumVisualizer",
+      "sequence": "color",
+      "map": "Color_Pillar",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "gridcolorizer",
+      "sequence": "color",
+      "map": "Color_Grid_Pallet",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "spectrum_forest",
+      "sequence": "color",
+      "map": "Color_Grid_Pallet",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ball_painting_demo",
+      "sequence": "color",
+      "map": "Color_Paint",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "albers_wall_gallery",
+      "sequence": "color",
+      "map": "Color_Paint",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "color_constellation_office",
+      "sequence": "color",
+      "map": "Color_Walls",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "color_space_navigator",
+      "sequence": "color",
+      "map": "Color_Walls",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "gradient_interpolator",
+      "sequence": "color",
+      "map": "Color_Walls",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rainbow_hallway",
+      "sequence": "color",
+      "map": "Color_Walls",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "subpixel_display",
+      "sequence": "color",
+      "map": "Color_Walls",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "proximity_spawner",
+      "sequence": "color",
+      "map": "Chamber_Color",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "catalyst_target",
+      "sequence": "color",
+      "map": "Chamber_Color",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_tile_4x4",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_tile_mirror",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_machine_a",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_machine_c",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_tile_herringbone",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_maker_station",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_mill",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_tile_plate",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_studio_plate",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "tiling_demo",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_machine_d",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_tile_brick",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "super_drag_mirror",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "drag_catwalk",
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grid_model",
+      "sequence": "tiling",
+      "map": "Tutorial_Pattern",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_tile_puzzle",
+      "sequence": "tiling",
+      "map": "Tutorial_Pattern",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "panel_bridge_loom",
+      "sequence": "tiling",
+      "map": "Tutorial_Pattern",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "script_runner",
+      "sequence": "tiling",
+      "map": "Tutorial_Pattern",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pulsar_compact",
+      "sequence": "tiling",
+      "map": "Tutorial_Pattern",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_tunnel_machine",
+      "sequence": "tiling",
+      "map": "Array_Patterns",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vr_tile_editor_mirror",
+      "sequence": "tiling",
+      "map": "Array_Patterns",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "facade_grammar_demo",
+      "sequence": "tiling",
+      "map": "Array_Patterns",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vr_tile_editor",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "wallpaper_cage",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "loom_alhambra_p6m",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "wall_pattern_gallery",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_loom",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "loom_escher_mirror",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mill_alhambra_p6m",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mill_persian_p4",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mill_escher_p4g",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "kaleidoscope",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_atlas_gallery",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pattern_artifact",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "tile_meander_floor",
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grid3d",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_01",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bar_array",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_01",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bar_array_bubble_sort",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_01",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sorting_algorithm_race",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_01",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "shelf",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_01",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "shelf_with_stickers",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_01",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "SimultaneousContrast",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "MetamerismLab",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "spherecolors",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "hue_carousel",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grabcolorcollection",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "color_mixing",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dark_side_prism",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "prism",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grab_stick_scanner",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "color_scanner",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grab_stick",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "two_roads",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "minimalglitch",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "textureglitch",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "coloredlines",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "RotatingLaser",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "glitchcolor",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "advancedglitch",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "colortrails",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "neon_garden",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "strobe_lasers",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "disco_lights",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "one_bulb_room",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "laser_turret",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fabric_shader_studio",
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "role": "primary",
+      "by": "floor"
+    },
+    {
+      "lookup": "tangent_slope_workbench",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "riemann_sum_workbench",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ftc_bridge",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "derivative_pair",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "integral_area",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "riemann_pump",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "gradient_descent_well",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "paper_regatta",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "partial_derivative_terrain",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "descent_marble_toy",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "riemann_pi",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "zeno_staircase",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "velocity_arrow",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "slope_tangent_demo",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "synthesis_stand",
+      "sequence": "change",
+      "map": "Change_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "flow_field_painter",
+      "sequence": "change",
+      "map": "Flow_Field",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_field_visualizer",
+      "sequence": "change",
+      "map": "Flow_Field",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_field_grid",
+      "sequence": "change",
+      "map": "Flow_Field",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "particle_flow_swarm",
+      "sequence": "change",
+      "map": "Flow_Field",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "noc_5_04_flow_field",
+      "sequence": "change",
+      "map": "Flow_Field",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grand_zoetrope",
+      "sequence": "change",
+      "map": "Flow_Field",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "VectorBasics",
+      "sequence": "forces",
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_normalize_demo",
+      "sequence": "forces",
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "route_vector",
+      "sequence": "forces",
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "length_lantern",
+      "sequence": "forces",
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "adder_board",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_projection_demo",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "2d_in_3d_vectors_vis",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "basis_vectors_rig",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "coordinate_system_switcher",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "VectorSubtraction",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_1_4_vector_multiplication_vr",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "stretch_bench",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_addition_demo",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_addition_xl",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_magnitude_demo",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_subtraction_demo",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_dot_product_xl",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_cross_product_xl",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_translation_demo",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dot_aligner",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "torque_crank",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "VectorTorque",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dot_product_projector",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "VectorWorkbench",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_add",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_projection_reflection_xl",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "projection_shadow",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "agreement_gauge",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "opening_pair",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "torque_demo",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "exercise_5_9_angle_between",
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_sub",
+      "sequence": "forces",
+      "map": "Vectors_Act2_VectorArithmetic",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_addition_walk",
+      "sequence": "forces",
+      "map": "Vectors_Act2_VectorArithmetic",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_2_3_gravity_scaled_by_mass_vr",
+      "sequence": "forces",
+      "map": "Vectors_Act2_VectorArithmetic",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_addition_xl_laser",
+      "sequence": "forces",
+      "map": "Vectors_Act2_VectorArithmetic",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_subtraction_xl_laser",
+      "sequence": "forces",
+      "map": "Vectors_Act2_VectorArithmetic",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "launch_arc",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ForceMagnitudeDemo",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "VectorForces",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "catapult",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "hl_turret_vectors",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "turret_boll_infoboard",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mortar_vector_siege",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "firework_burst",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "VectorThrowing",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "firework_launcher",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "return_launcher",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "human_catapult",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "force_pad",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "drag_lane",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "circle_train",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "slingshot_launcher",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "foresight_range",
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "VectorMotion",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "friction_ramp",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "normal_force_demo",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_drone",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bouncing_ball",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "trajectory_artifact",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_2_5_fluid_resistance_vr",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_3_3_pointing_in_the_direction_of_motion_vr",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "newton_cradle",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "combined_forces_demo",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "collision_crasher",
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "VectorFieldFlow",
+      "sequence": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "field_room",
+      "sequence": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "force_field_visualizer",
+      "sequence": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "force_fields",
+      "sequence": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "force_vortex",
+      "sequence": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "magnetic_simulation",
+      "sequence": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "particle_systems",
+      "sequence": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_field",
+      "sequence": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_fields",
+      "sequence": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "weather_vector_field",
+      "sequence": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bubble_blaster",
+      "sequence": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "drag_corridor",
+      "sequence": "forces",
+      "map": "Vectors_Act4a_KineticForces",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "force_mower",
+      "sequence": "forces",
+      "map": "Vectors_Act4a_KineticForces",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "centrifuge_ring",
+      "sequence": "forces",
+      "map": "Vectors_Act4a_KineticForces",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "wedge_slide",
+      "sequence": "forces",
+      "map": "Vectors_Act4a_KineticForces",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "orbit_walk",
+      "sequence": "forces",
+      "map": "Vectors_Act4a_KineticForces",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sisyphus_mower",
+      "sequence": "forces",
+      "map": "Vectors_Act4a_KineticForces",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "prop_carousel",
+      "sequence": "forces",
+      "map": "Vectors_Act4a_KineticForces",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "spring_tower",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pendulum_hall",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ChainSwing",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ConeTwistBag",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "calder_object_mobile",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "HingeCrank",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "SliderPress",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "coupled_pendulums",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "harmonic_motion_demo",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mass_spring_damper",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "slingshot_pull",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "spring_network",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "spring_system",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_joint_playground",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "work_energy_demo",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_6_4_windmill_vr",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "weather_vane",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "calder_mobile",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lever_balance",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "momentum_cradle",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bounce_well",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "surreal_kinetic_sculpture",
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "role": "decoration",
+      "by": "ruled"
+    },
+    {
+      "lookup": "phase_rod_array",
+      "sequence": "forces",
+      "map": "Change_Choreography",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "conveyor_backlog",
+      "sequence": "forces",
+      "map": "Change_Choreography",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "orbital_mechanics_demo",
+      "sequence": "forces",
+      "map": "VFM_07_Gravity",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "three_body_problem",
+      "sequence": "forces",
+      "map": "VFM_07_Gravity",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "nbody_simulation",
+      "sequence": "forces",
+      "map": "VFM_07_Gravity",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "forcedirected3d",
+      "sequence": "forces",
+      "map": "VFM_07_Gravity",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "exercise_1_8_solution_attraction_magnitude_vr",
+      "sequence": "forces",
+      "map": "VFM_07_Gravity",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_2_8_two_body_attraction_vr",
+      "sequence": "forces",
+      "map": "VFM_07_Gravity",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_2_9_n_body_attraction_vr",
+      "sequence": "forces",
+      "map": "VFM_07_Gravity",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "orbit_pair",
+      "sequence": "forces",
+      "map": "VFM_07_Gravity",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "gravity_well",
+      "sequence": "forces",
+      "map": "VFM_07_Gravity",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grid3d_force_directed",
+      "sequence": "forces",
+      "map": "VFM_07_Gravity",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "chaos_attractor",
+      "sequence": "forces",
+      "map": "VFM_07_Gravity",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "support_polygon_lab",
+      "sequence": "forces",
+      "map": "VFM_09_Legs",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "four_leg_critter",
+      "sequence": "forces",
+      "map": "VFM_09_Legs",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "one_leg",
+      "sequence": "forces",
+      "map": "VFM_09_Legs",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "two_leg_critter",
+      "sequence": "forces",
+      "map": "VFM_09_Legs",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "three_leg_critter",
+      "sequence": "forces",
+      "map": "VFM_09_Legs",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "five_leg_critter",
+      "sequence": "forces",
+      "map": "VFM_09_Legs",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "six_leg_critter",
+      "sequence": "forces",
+      "map": "VFM_09_Legs",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "octapod_ik",
+      "sequence": "forces",
+      "map": "VFM_09_Legs",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "arena_relation_lab",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "collision_carts",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "brake_skid",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "parlour_orbits",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "newtons_laws",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "paused_fountain",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "prop_mobile",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "prop_spigot",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "revolving_door",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "three_gravities",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "tug_of_war",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "umbrella_field",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "turret_targeting",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "reflection_hall",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_arena",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sentry_turret",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "momentum_collision",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_2_1_forces_vr",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "queer_cylinder_target",
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "role": "decoration",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vector_machine",
+      "sequence": "forces",
+      "map": "Vectors_Act5_ForceAsPlace",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "force_cube",
+      "sequence": "forces",
+      "map": "Vectors_Act5_ForceAsPlace",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "force_field_zone",
+      "sequence": "forces",
+      "map": "Vectors_Act5_ForceAsPlace",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "free_vector",
+      "sequence": "forces",
+      "map": "Vectors_Act5_ForceAsPlace",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "force_field",
+      "sequence": "forces",
+      "map": "Vectors_Act5_ForceAsPlace",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "invisible_hill",
+      "sequence": "forces",
+      "map": "Vectors_Act5_ForceAsPlace",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "descent_landscape_lab",
+      "sequence": "formfinding",
+      "map": "FormFinding_Descent",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "gradient_descent",
+      "sequence": "formfinding",
+      "map": "FormFinding_Descent",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "settling_tremble",
+      "sequence": "formfinding",
+      "map": "FormFinding_Descent",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cable_builder",
+      "sequence": "formfinding",
+      "map": "FormFinding_Catenary",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "catenoid",
+      "sequence": "formfinding",
+      "map": "FormFinding_Catenary",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "helicoid",
+      "sequence": "formfinding",
+      "map": "FormFinding_Catenary",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "laundry_line_cathedral",
+      "sequence": "formfinding",
+      "map": "FormFinding_Catenary",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "verlet_workbench",
+      "sequence": "formfinding",
+      "map": "FormFinding_Relaxation",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mass_spring_bench",
+      "sequence": "formfinding",
+      "map": "FormFinding_Relaxation",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "frozen_glass_vessel",
+      "sequence": "formfinding",
+      "map": "FormFinding_Relaxation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "tensegrity_triangle",
+      "sequence": "formfinding",
+      "map": "FormFinding_Equilibrium",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fractal_truss_tower",
+      "sequence": "formfinding",
+      "map": "FormFinding_Equilibrium",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "energy_landscape_bench",
+      "sequence": "formfinding",
+      "map": "FormFinding_Annealing",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "simulated_annealing",
+      "sequence": "formfinding",
+      "map": "FormFinding_Annealing",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "max_q_basin_room",
+      "sequence": "formfinding",
+      "map": "FormFinding_Annealing",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "impossible_end_table",
+      "sequence": "formfinding",
+      "map": "FormFinding_Annealing",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "gradient_descent_optimizer",
+      "sequence": "formfinding",
+      "map": "FormFinding_Forge",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "self_shaping_forge",
+      "sequence": "formfinding",
+      "map": "FormFinding_Forge",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "control_pendulum",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rotatescalecubes",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pickup_cube_static",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "transformation_cube",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rotating_cube",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "y_oscillation_cube",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rotating_cube_demo",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pickup_cube_transforming",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pickup_cube_rotating",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "oscillation_controlled_cube",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mario_cube_time_trace",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "SphericalHarmonics",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "PendulumWave",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Pendulum",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "WavePaintings",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Pendulum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "foucault_pendulum",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Pendulum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "draw_dot_time_domain",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Pendulum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "BigPipeSystem",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Pendulum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lab_table",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Pendulum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "seismograph",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Pendulum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "GlassRack",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Pendulum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "VRAudioMonitor",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Pendulum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sine_flow_tray",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Sine_Space",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sine_wall_corridor",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Sine_Space",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sine_wall_explanation",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Sine_Space",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sine_space",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Sine_Space",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "unit_circle_advanced",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Unit_Circle",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "SimpleOscillatingBridge",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Unit_Circle",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "OscillationCurve",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Unit_Circle",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "coupled_oscillator_lattice",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "kusama_sine",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "wave_propagation_3d",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "DualBallFMController",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "AudioContr",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "RackSineBasic",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "Rack303Acid",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "RackMoogBass",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "RackDX7Piano",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "audio_catalog_tablet",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "wave_interference_3d",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "harmonic_distance_table",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "chord_tension_spring",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "timbre_sculptor",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "MarioSoundController",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "MelodyChaser3D",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rack_room",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "role": "decoration",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bernini_columns",
+      "sequence": "wavefunctions",
+      "map": "Wavefunctions_Bernini",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ElphabaDress",
+      "sequence": "wavefunctions",
+      "map": "Wavefunctions_Bernini",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "vowel_sound_board",
+      "sequence": "wavefunctions",
+      "map": "Wavefunctions_Bernini",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "john_cage_tech_noir",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_John_Cage",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dual_display_test",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_John_Cage",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ruth_asawa_sculpture",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_John_Cage",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "resonating_metallophone",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_AirMusic",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "SystemsMusicTest",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_AirMusic",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "RackAmbientDrone",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_AirMusic",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "air_music_display_case",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_AirMusic",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sine_cylinder_staircase",
+      "sequence": "wavefunctions",
+      "map": "Wavefunctions_Sky_Stairs",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "math_objects",
+      "sequence": "wavefunctions",
+      "map": "Wavefunctions_Sky_Stairs",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "beat_frequency_demo",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_TrigWalkingPath",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sine_oscillation",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_TrigWalkingPath",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lissajous_curves",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_TrigWalkingPath",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "TrigWalkingPath",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_TrigWalkingPath",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "wave_interference",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_TrigWalkingPath",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "additive_wave_demo",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dna_specimen",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "holographicdisplay",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "electronicscales",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "biomagneticresonator",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "UnitCircleTrig",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "record_room",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "hallway_scene",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "samplevialrack",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "oscilloscope",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "double_helix_scene",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "spring_demo",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "SoundscapeRadioRack",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "petri_dish_worms",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "atmosphericmonitoring",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "chladni_plate",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "microscope",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "chemicalapparatus",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "multimeter",
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "seed_replay_demo",
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "slot_machine",
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "prng_crank_machine",
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "entropy_axiom",
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "2d_in_3d_randomness_vis",
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "entropy_jar",
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_butterflies",
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "clipboard",
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "digital_materiality_glitch",
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "catalyst_pickup",
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "trng_vs_prng",
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_number_book_page_1955",
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "shannon_entropy_meter",
+      "sequence": "randomness",
+      "map": "Random_Entropy",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "replay_casino",
+      "sequence": "randomness",
+      "map": "Random_Entropy",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "hardware_entropy_decay",
+      "sequence": "randomness",
+      "map": "Random_Entropy",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "remove_random",
+      "sequence": "randomness",
+      "map": "Random_Remove",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "hazards_demo",
+      "sequence": "randomness",
+      "map": "Random_Remove",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ten_print_maze_3d",
+      "sequence": "randomness",
+      "map": "Randomness_10_PRINT_Algorithm",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pickup_cube_placer",
+      "sequence": "randomness",
+      "map": "Randomness_10_PRINT_Algorithm",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "nature_system_demo",
+      "sequence": "randomness",
+      "map": "Randomness_10_PRINT_Algorithm",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dice_throw",
+      "sequence": "randomness",
+      "map": "Random_Cubes",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "coin_toss",
+      "sequence": "randomness",
+      "map": "Random_Cubes",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_object_spawner",
+      "sequence": "randomness",
+      "map": "Random_Cubes",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_edge_profile",
+      "sequence": "randomness",
+      "map": "Random_Cubes",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_decay_multimesh",
+      "sequence": "randomness",
+      "map": "Random_Rotate_Random_XYZ",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "Random_Rotate_Random_XYZ",
+      "sequence": "randomness",
+      "map": "Random_Rotate_Random_XYZ",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "RotateGridCubes",
+      "sequence": "randomness",
+      "map": "Random_Rotate_Random_XYZ",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_walk_terrarium",
+      "sequence": "randomness",
+      "map": "Random_Walk",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "catalyst_prompter_box",
+      "sequence": "randomness",
+      "map": "Random_Walk",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "catalyst_vent",
+      "sequence": "randomness",
+      "map": "Random_Walk",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_walk_collection",
+      "sequence": "randomness",
+      "map": "Random_Walk",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pixel_cloud",
+      "sequence": "randomness",
+      "map": "Random_Walk",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lab_room",
+      "sequence": "randomness",
+      "map": "Random_Walk",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_walk_128",
+      "sequence": "randomness",
+      "map": "Random_Walk",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_walk_leash",
+      "sequence": "randomness",
+      "map": "Random_Walk",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "distribution_sampler",
+      "sequence": "randomness",
+      "map": "Random_Gaussian",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "GaussianBlurShader",
+      "sequence": "randomness",
+      "map": "Random_Gaussian",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "GaussianPaintSplatter",
+      "sequence": "randomness",
+      "map": "Random_Gaussian",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "GaussianBlurCircle",
+      "sequence": "randomness",
+      "map": "Random_Gaussian",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_bell_curve",
+      "sequence": "randomness",
+      "map": "Random_Gaussian",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "distribution_comparator",
+      "sequence": "randomness",
+      "map": "Random_Gaussian",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "gaussian_random",
+      "sequence": "randomness",
+      "map": "Random_Gaussian",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "galton_board",
+      "sequence": "randomness",
+      "map": "Random_Gaussian",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mushrooms",
+      "sequence": "randomness",
+      "map": "Random_Mushrooms",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bubbles_random",
+      "sequence": "randomness",
+      "map": "Random_Mushrooms",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bubble_particles",
+      "sequence": "randomness",
+      "map": "Random_Mushrooms",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "reaction_diffusion_intro",
+      "sequence": "randomness",
+      "map": "Random_Mushrooms",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_number_book_page_collection",
+      "sequence": "randomness",
+      "map": "Random_Mushrooms",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "perlin_noise_bridge",
+      "sequence": "randomness",
+      "map": "Random_Space_Geometry",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "env_one",
+      "sequence": "randomness",
+      "map": "Random_Space_Geometry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "curl_noise_particles",
+      "sequence": "randomness",
+      "map": "Random_Space_Geometry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_transformations_geometric",
+      "sequence": "randomness",
+      "map": "Random_Space_Geometry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sculpt_one",
+      "sequence": "randomness",
+      "map": "Random_Space_Geometry",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "monte_carlo_dartboard",
+      "sequence": "randomness",
+      "map": "Randomness_Examples_of_Randomness",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pollock_painting_in_3d",
+      "sequence": "randomness",
+      "map": "Randomness_Examples_of_Randomness",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "extreme_randomness",
+      "sequence": "randomness",
+      "map": "Randomness_Examples_of_Randomness",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pipe_dream",
+      "sequence": "randomness",
+      "map": "Randomness_Examples_of_Randomness",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pheromone_terrain",
+      "sequence": "randomness",
+      "map": "Random_Pheromone",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "noise_mixer",
+      "sequence": "randomness",
+      "map": "Random_Space",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "worley_noise",
+      "sequence": "randomness",
+      "map": "Random_Space",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_space",
+      "sequence": "randomness",
+      "map": "Random_Space",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "r_c",
+      "sequence": "randomness",
+      "map": "Random_Game",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "miura_crawler",
+      "sequence": "randomness",
+      "map": "Random_Game",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "scissor_stalker",
+      "sequence": "randomness",
+      "map": "Random_Game",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "kaleidocycle_enemy",
+      "sequence": "randomness",
+      "map": "Random_Game",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "kresling_spire",
+      "sequence": "randomness",
+      "map": "Random_Game",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "armadillo_eggling",
+      "sequence": "randomness",
+      "map": "Random_Game",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "origami_droideka",
+      "sequence": "randomness",
+      "map": "Random_Game",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "monte_carlo",
+      "sequence": "randomness",
+      "map": "Random_Game",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cube_projectile_spawner",
+      "sequence": "randomness",
+      "map": "Random_Game",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "randompoints",
+      "sequence": "noise",
+      "map": "Random_Noise_Types",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "randompoint",
+      "sequence": "noise",
+      "map": "Random_Noise_Types",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "WhiteNoiseGallery",
+      "sequence": "noise",
+      "map": "Random_Noise_Types",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "NoiseColors3D",
+      "sequence": "noise",
+      "map": "Random_Noise_Types",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "MeltingBerniniScene",
+      "sequence": "noise",
+      "map": "Noise_Columns",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "noisetorus",
+      "sequence": "noise",
+      "map": "Noise_One",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "noiselayers",
+      "sequence": "noise",
+      "map": "Noise_One",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "perlin_terrain_sculptor",
+      "sequence": "noise",
+      "map": "Noise_Voxel",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "voxelnoise",
+      "sequence": "noise",
+      "map": "Noise_Voxel",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "shader_noise_space",
+      "sequence": "noise",
+      "map": "Noise_6_Wall",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "noisesphere",
+      "sequence": "noise",
+      "map": "Noise_Inside_Noise",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "noise_space",
+      "sequence": "noise",
+      "map": "Noise_Space_10",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "simplex_noise",
+      "sequence": "noise",
+      "map": "Noise_Perlin_Simplex",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "perlin_noise",
+      "sequence": "noise",
+      "map": "Noise_Perlin_Simplex",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "perlin_noise_terrain",
+      "sequence": "noise",
+      "map": "Noise_Perlin_Simplex",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "configurable_portal",
+      "sequence": "noise",
+      "map": "Noise_Perlin_Simplex",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ca_rule_explorer",
+      "sequence": "cellularautomata",
+      "map": "CA_Introduction",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "persian_rug",
+      "sequence": "cellularautomata",
+      "map": "CA_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grid_substrate_runner",
+      "sequence": "cellularautomata",
+      "map": "CA_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "langton_swarm",
+      "sequence": "cellularautomata",
+      "map": "CA_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "line_network_ca",
+      "sequence": "cellularautomata",
+      "map": "CA_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rule110_computer",
+      "sequence": "cellularautomata",
+      "map": "CA_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ca_showcase",
+      "sequence": "cellularautomata",
+      "map": "CA_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "structure_growth",
+      "sequence": "cellularautomata",
+      "map": "CA_ElementaryRules",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ca_bridge",
+      "sequence": "cellularautomata",
+      "map": "CA_GameOfLife",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ca_columns",
+      "sequence": "cellularautomata",
+      "map": "CA_GameOfLife",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mirrored_cellular_automata",
+      "sequence": "cellularautomata",
+      "map": "CA_GameOfLife",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "game_of_life_petri",
+      "sequence": "cellularautomata",
+      "map": "CA_BeyondBinary",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mold_network",
+      "sequence": "cellularautomata",
+      "map": "CA_BeyondBinary",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "hexagon_ca_vr",
+      "sequence": "cellularautomata",
+      "map": "CA_BeyondBinary",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ca_growth_network",
+      "sequence": "cellularautomata",
+      "map": "CA_BeyondBinary",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "decaying_bridge",
+      "sequence": "cellularautomata",
+      "map": "CA_ExpandingSpace",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ca_chair_test",
+      "sequence": "cellularautomata",
+      "map": "CA_ExpandingSpace",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cellular_automata_3d_tree",
+      "sequence": "cellularautomata",
+      "map": "CA_ExpandingSpace",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "crossway_ca",
+      "sequence": "cellularautomata",
+      "map": "CA_ExpandingSpace",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "the_clockmaker_of_rules",
+      "sequence": "cellularautomata",
+      "map": "CA_SoftRules",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lattice_gas_pump",
+      "sequence": "cellularautomata",
+      "map": "CA_SoftRules",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ca_sphere",
+      "sequence": "cellularautomata",
+      "map": "CA_SoftRules",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rd_artifact",
+      "sequence": "cellularautomata",
+      "map": "CA_SoftRules",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "crack_propagation_ca",
+      "sequence": "cellularautomata",
+      "map": "CA_SoftRules",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rule_30_110_gravity",
+      "sequence": "cellularautomata",
+      "map": "CA_SoftRules",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sierpinski_pyramid",
+      "sequence": "cellularautomata",
+      "map": "CA_AgentsCircuits",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "self_organization_ca",
+      "sequence": "cellularautomata",
+      "map": "CA_EdgeOfChaos",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ca_screen",
+      "sequence": "cellularautomata",
+      "map": "CA_EdgeOfChaos",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "disease_spread_ca",
+      "sequence": "cellularautomata",
+      "map": "CA_EdgeOfChaos",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "volumetric_fog_ca",
+      "sequence": "cellularautomata",
+      "map": "CA_EdgeOfChaos",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fractal_recursion_2",
+      "sequence": "fractals",
+      "map": "Fractal_Recursion",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_8_3_recursion_circles_vr",
+      "sequence": "fractals",
+      "map": "Fractal_Recursion",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "recursive_table",
+      "sequence": "fractals",
+      "map": "Fractal_Recursion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fibonacci_pagoda",
+      "sequence": "fractals",
+      "map": "Fractal_Recursion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cube_subdivision",
+      "sequence": "fractals",
+      "map": "Fractal_Recursion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "recursive_chair",
+      "sequence": "fractals",
+      "map": "Fractal_Recursion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cube_staircase",
+      "sequence": "fractals",
+      "map": "Fractal_Recursion",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "recursive_tree_2",
+      "sequence": "fractals",
+      "map": "Fractal_RecursiveTrees",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "recursive_tree",
+      "sequence": "fractals",
+      "map": "Fractal_RecursiveTrees",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "living_paper",
+      "sequence": "fractals",
+      "map": "Fractal_RecursiveTrees",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fractal_lsystem_tree",
+      "sequence": "fractals",
+      "map": "Fractal_RecursiveTrees",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "small_subdivision_cube",
+      "sequence": "fractals",
+      "map": "Fractal_RecursiveTrees",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "inverted_tree_cloud",
+      "sequence": "fractals",
+      "map": "Fractal_RecursiveTrees",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cube_desk",
+      "sequence": "fractals",
+      "map": "Fractal_RecursiveTrees",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fractal_scene",
+      "sequence": "fractals",
+      "map": "Fractal_RecursiveTrees",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mobius_world",
+      "sequence": "fractals",
+      "map": "Fractal_RecursiveTrees",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cantor_set",
+      "sequence": "fractals",
+      "map": "Fractal_CantorSet",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_8_4_cantor_pagoda_vr",
+      "sequence": "fractals",
+      "map": "Fractal_CantorSet",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fractal_clouds",
+      "sequence": "fractals",
+      "map": "Fractal_CantorSet",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "example_8_4_cantor_set_vr",
+      "sequence": "fractals",
+      "map": "Fractal_CantorSet",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "stochastic_tree_separated",
+      "sequence": "fractals",
+      "map": "Fractal_CantorSet",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fractal_koch_curve",
+      "sequence": "fractals",
+      "map": "Fractal_KochSierpinski",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sierpinski_triangle",
+      "sequence": "fractals",
+      "map": "Fractal_KochSierpinski",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "box_counting_dimension",
+      "sequence": "fractals",
+      "map": "Fractal_KochSierpinski",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cube_cabin",
+      "sequence": "fractals",
+      "map": "Fractal_KochSierpinski",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "recursion_observatory",
+      "sequence": "fractals",
+      "map": "Fractal_KochSierpinski",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "koch_curve_3d",
+      "sequence": "fractals",
+      "map": "Fractal_KochSierpinski",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cube_bookshelf",
+      "sequence": "fractals",
+      "map": "Fractal_KochSierpinski",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "menger_sponge",
+      "sequence": "fractals",
+      "map": "Fractal_MengerSponge",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "diffusion_limited_aggregation",
+      "sequence": "fractals",
+      "map": "Fractal_MengerSponge",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fibonacci_sequences",
+      "sequence": "fractals",
+      "map": "Fractal_GoldenSpiral",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "golden_rectangle",
+      "sequence": "fractals",
+      "map": "Fractal_GoldenSpiral",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "the_recursion_cabinet",
+      "sequence": "fractals",
+      "map": "Fractal_GoldenSpiral",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fibonacci_terrain",
+      "sequence": "fractals",
+      "map": "Fractal_GoldenSpiral",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "romanesco",
+      "sequence": "fractals",
+      "map": "Fractal_GoldenSpiral",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "julia_set",
+      "sequence": "fractals",
+      "map": "Fractal_JuliaSet",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "julia_set_explorer",
+      "sequence": "fractals",
+      "map": "Fractal_JuliaSet",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lyapunov_fractal",
+      "sequence": "fractals",
+      "map": "Fractal_JuliaSet",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mandelbrot_set",
+      "sequence": "fractals",
+      "map": "Fractal_MandelbrotSet",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mandelbrot_dive",
+      "sequence": "fractals",
+      "map": "Fractal_MandelbrotSet",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fractal_recursion_1",
+      "sequence": "fractals",
+      "map": "Fractal_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "koch_curve",
+      "sequence": "fractals",
+      "map": "Fractal_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "strange_attractors",
+      "sequence": "fractals",
+      "map": "Fractal_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fractal_procedure_gallery",
+      "sequence": "fractals",
+      "map": "Fractal_Synthesis",
+      "role": "decoration",
+      "by": "floor"
+    },
+    {
+      "lookup": "space_filling_curve_gallery",
+      "sequence": "fractals",
+      "map": "Fractal_CrossSequence",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cellular_automata_3d_stacked",
+      "sequence": "fractals",
+      "map": "Fractal_CrossSequence",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "Hilbert3D",
+      "sequence": "fractals",
+      "map": "Fractal_CrossSequence",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fractal_stochastic_tree",
+      "sequence": "fractals",
+      "map": "Fractal_CrossSequence",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lsystem_editor",
+      "sequence": "lsystems",
+      "map": "LSystems_Grammar_Lab",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mesh_grammar_lsystem_tree",
+      "sequence": "lsystems",
+      "map": "LSystems_Grammar_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grammar_provenance",
+      "sequence": "lsystems",
+      "map": "LSystems_Grammar_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lsystem_tree",
+      "sequence": "lsystems",
+      "map": "LSystems_Grammar_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fractal_lsystem_string",
+      "sequence": "lsystems",
+      "map": "LSystems_Grammar_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "city_bench",
+      "sequence": "lsystems",
+      "map": "LSystems_Grammar_Lab",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "parametric_lsystem",
+      "sequence": "lsystems",
+      "map": "LSystems_Growth",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ContextSensitiveTree",
+      "sequence": "lsystems",
+      "map": "LSystems_Growth",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "AnimatedTree",
+      "sequence": "lsystems",
+      "map": "LSystems_Growth",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "modulor_cypress",
+      "sequence": "lsystems",
+      "map": "LSystems_Growth",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "the_believing_turtle",
+      "sequence": "lsystems",
+      "map": "LSystems_Grammars_And_Curves",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ContextFreeGrammars",
+      "sequence": "lsystems",
+      "map": "LSystems_Grammars_And_Curves",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lindenmayer_tube_tree",
+      "sequence": "lsystems",
+      "map": "LSystems_Grammars_And_Curves",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lsystem_dungeon",
+      "sequence": "lsystems",
+      "map": "LSystems_Architecture",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mesh_grammar_petal_flower",
+      "sequence": "lsystems",
+      "map": "LSystems_Architecture",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dragon_room",
+      "sequence": "lsystems",
+      "map": "LSystems_Architecture",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "CityGenerator",
+      "sequence": "lsystems",
+      "map": "LSystems_Architecture",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grammar_seed",
+      "sequence": "lsystems",
+      "map": "LSystems_Architecture",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mesh_grammar_coral_fingers",
+      "sequence": "lsystems",
+      "map": "LSystems_Architecture",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ForestCompetition",
+      "sequence": "lsystems",
+      "map": "LSystems_Competition",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "branching_coral",
+      "sequence": "lsystems",
+      "map": "LSystems_Competition",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "genetic_tree_sculptor",
+      "sequence": "lsystems",
+      "map": "LSystems_Living",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "living_paper_fern",
+      "sequence": "lsystems",
+      "map": "LSystems_Living",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "living_paper_tree",
+      "sequence": "lsystems",
+      "map": "LSystems_Living",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "living_paper_dragon",
+      "sequence": "lsystems",
+      "map": "LSystems_Living",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ten_print_textile",
+      "sequence": "lsystems",
+      "map": "Assemblage_Same_Desire",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dragon_bench",
+      "sequence": "lsystems",
+      "map": "Assemblage_Same_Desire",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mamma_monster_gallery",
+      "sequence": "lsystems",
+      "map": "Assemblage_Same_Desire",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "godel_statement_plaque",
+      "sequence": "lsystems",
+      "map": "Assemblage_Same_Desire",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "incompleteness_scale",
+      "sequence": "lsystems",
+      "map": "Assemblage_Same_Desire",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "GeneticProgramming",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Genetic_Evolution",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "space_colonization_algorithm",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Space_Colonization",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "branching_growth_algorithm",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Branching_Growth",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "organic_space",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Branching_Growth",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pg_workshop_console",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Branching_Growth",
+      "role": "decoration",
+      "by": "ruled"
+    },
+    {
+      "lookup": "percolationnetwork_ca",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Percolation_Network",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "caverandomwalk",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Caves_Mazes",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "maze_generation",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Caves_Mazes",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "binary_space_partitioning",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Caves_Mazes",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cube_mound_scene",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Sculpted_Forms",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dome",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Sculpted_Forms",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "layered_membrane",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Sculpted_Forms",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mirror_cellular_texture_for_3d",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Mirrored_Patterns",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rhizomatic_maze_space",
+      "sequence": "proceduralgeneration",
+      "map": "PG_Mirrored_Patterns",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "jelly_cube",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "softmill",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "jelly_variants",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "radiolaria",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "soft_workshop_console",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "role": "decoration",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cloth_straps",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Cloth_Physics",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "softstopscene",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Cloth_Physics",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "revolving_joy_ride",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Carusell",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grab_long_stick",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Carusell",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "flex_cloth_pad",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Carusell",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "soft_mushroom",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Carusell",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "softbody_gallery_part2",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Obsticals",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "breathing_room",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Obsticals",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "flagdancer",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Obsticals",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rounded_softbody_test",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Playground_of_Joy",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "entropy_morphogenesis",
+      "sequence": "softbodies",
+      "map": "SoftBodies_Playground_of_Joy",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "turing_pattern_generator",
+      "sequence": "softbodies",
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mesh_grammar_detailed_bulge",
+      "sequence": "softbodies",
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "reaction_diffusion",
+      "sequence": "softbodies",
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "voxel_noise_demo",
+      "sequence": "isosurfaces",
+      "map": "ISO_Introduction",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fifteen_cases_demo",
+      "sequence": "isosurfaces",
+      "map": "ISO_LookupTable",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mc_cave",
+      "sequence": "isosurfaces",
+      "map": "ISO_LookupTable",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "metaball_world",
+      "sequence": "isosurfaces",
+      "map": "ISO_LookupTable",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "the_threshold_opinion",
+      "sequence": "isosurfaces",
+      "map": "ISO_LookupTable",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mc_shapes_gallery",
+      "sequence": "isosurfaces",
+      "map": "ISO_ShapesGallery",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mc_torus_sculpture",
+      "sequence": "isosurfaces",
+      "map": "ISO_ShapesGallery",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mc_sculpt_vr",
+      "sequence": "isosurfaces",
+      "map": "ISO_ShapesGallery",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "gyroid_demo",
+      "sequence": "isosurfaces",
+      "map": "ISO_ShapesGallery",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "GyroidDemo",
+      "sequence": "isosurfaces",
+      "map": "ISO_TorusGyroid",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fountain_demo",
+      "sequence": "isosurfaces",
+      "map": "ISO_Sculpting",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mc_flat_landscape",
+      "sequence": "isosurfaces",
+      "map": "ISO_FlatTerrain",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mc_overhang_landscape",
+      "sequence": "isosurfaces",
+      "map": "ISO_FlatTerrain",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mc_terrain_demo",
+      "sequence": "isosurfaces",
+      "map": "ISO_FlatTerrain",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rhizome_cave_system",
+      "sequence": "isosurfaces",
+      "map": "ISO_FlatTerrain",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "marchingcubes_portal_landscape",
+      "sequence": "isosurfaces",
+      "map": "ISO_PortalLandscape",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mc_inside_cave",
+      "sequence": "isosurfaces",
+      "map": "ISO_Caves",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rhizome_cave_demo",
+      "sequence": "isosurfaces",
+      "map": "ISO_Caves",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mc_portal_landscape",
+      "sequence": "isosurfaces",
+      "map": "ISO_Caves",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "raymarched_metaballs",
+      "sequence": "isosurfaces",
+      "map": "ISO_Caves",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "queer_marching_cave",
+      "sequence": "isosurfaces",
+      "map": "ISO_Caves",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "marchingcubes_cave",
+      "sequence": "isosurfaces",
+      "map": "ISO_CaveGeneration",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "marchingcave",
+      "sequence": "isosurfaces",
+      "map": "ISO_CaveGeneration",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "animated_noise_explorer",
+      "sequence": "isosurfaces",
+      "map": "ISO_AnimatedNoise",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mc_base",
+      "sequence": "isosurfaces",
+      "map": "ISO_AnimatedNoise",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "nakama_metaballs",
+      "sequence": "isosurfaces",
+      "map": "ISO_Metaballs",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "metaballs",
+      "sequence": "isosurfaces",
+      "map": "ISO_Metaballs",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "implicit_surface_modeling",
+      "sequence": "isosurfaces",
+      "map": "ISO_ImplicitModeling",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rhizome_inside",
+      "sequence": "isosurfaces",
+      "map": "ISO_RhizomeBody",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "csg_union_demo",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Verbs",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "csg_intersection_demo",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Verbs",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "csg_difference_demo",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Verbs",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "the_argument_of_solids",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Verbs",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "removal_room",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Gallery",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "subtraction_suite",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Gallery",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "coincident_face",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Gallery",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "csg_compose_workbench",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Works",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sdf_cavern_room",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Works",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "sphere_splitting_showcase",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Works",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "recursive_boolean_cube",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Works",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "boolean_burrow",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Works",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "booleanvariations",
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Works",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "PhysarumColony",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_PhysarumColony",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ant_agent",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_PhysarumColony",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "particle_swarm_optimization_legacy",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_PhysarumColony",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "FlowFieldMain",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_FlowFields",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "AntColonyV2",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_FlowFields",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ecosystem_simulation",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_FlowFields",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "flocking_controls",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "boid_flocking",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "boids_aquarium",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "boids_2d_in_3d",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "boid_manager",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ant_colony_optimization",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "physarum_colony",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "catalyst_foe",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fitness_landscape_politics",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "tick_flock",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "self_organizing_patterns",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ant_colony_v2",
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "non_teleological_evolution",
+      "sequence": "machinelearning",
+      "map": "ML_Evolution",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "evolved_creatures",
+      "sequence": "machinelearning",
+      "map": "ML_Evolution",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "gradient_descent_visualization",
+      "sequence": "machinelearning",
+      "map": "ML_Evolution",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "evolvingflowers",
+      "sequence": "machinelearning",
+      "map": "ML_Evolution",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "loss_function_comparator",
+      "sequence": "machinelearning",
+      "map": "ML_Gradient_Landscape",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pca_visualization",
+      "sequence": "machinelearning",
+      "map": "ML_Gradient_Landscape",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "enhanced_kmeans",
+      "sequence": "machinelearning",
+      "map": "ML_Classification",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "svm_visualization",
+      "sequence": "machinelearning",
+      "map": "ML_Classification",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_forest_visualization",
+      "sequence": "machinelearning",
+      "map": "ML_Classification",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "neural_network_visualization",
+      "sequence": "machinelearning",
+      "map": "ML_Neural_Networks",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "neural_networks_vr",
+      "sequence": "machinelearning",
+      "map": "ML_Neural_Networks",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fine_tuning_vr",
+      "sequence": "machinelearning",
+      "map": "ML_Neural_Networks",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "computer_vision_vr",
+      "sequence": "machinelearning",
+      "map": "ML_Perception",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "convolutional_neural_networks_cnns_vr",
+      "sequence": "machinelearning",
+      "map": "ML_Perception",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lstms_vr",
+      "sequence": "machinelearning",
+      "map": "ML_Sequence_Memory",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "transformers_vr",
+      "sequence": "machinelearning",
+      "map": "ML_Sequence_Memory",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "generative_adversarial_networks_gans_vr",
+      "sequence": "machinelearning",
+      "map": "ML_Generative",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "anomaly_detection",
+      "sequence": "machinelearning",
+      "map": "ML_Synthesis",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "joint_learn_walk",
+      "sequence": "machinelearning",
+      "map": "ML_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "explainable_ai_xai_vr",
+      "sequence": "machinelearning",
+      "map": "ML_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "two_travelers",
+      "sequence": "graphtheory",
+      "map": "GT_Foundations",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "graphspace",
+      "sequence": "graphtheory",
+      "map": "GT_Foundations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "graphspace3d",
+      "sequence": "graphtheory",
+      "map": "GT_Foundations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "KonigsbergBridge",
+      "sequence": "graphtheory",
+      "map": "GT_Foundations",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "force_directed_layout",
+      "sequence": "graphtheory",
+      "map": "GT_Layout",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "living_paper_bfs",
+      "sequence": "graphtheory",
+      "map": "GT_Layout",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "graph_basilica",
+      "sequence": "graphtheory",
+      "map": "GT_Layout",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "impatient_river",
+      "sequence": "graphtheory",
+      "map": "GT_Pathfinding",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "pathfinding3d",
+      "sequence": "graphtheory",
+      "map": "GT_Pathfinding",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "family_chandelier",
+      "sequence": "graphtheory",
+      "map": "GT_Pathfinding",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "living_paper_dfs_maze",
+      "sequence": "graphtheory",
+      "map": "GT_Pathfinding",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "salesman_knot",
+      "sequence": "graphtheory",
+      "map": "GT_Pathfinding",
+      "role": "unruled",
+      "by": "floor"
+    },
+    {
+      "lookup": "network_analysis",
+      "sequence": "graphtheory",
+      "map": "GT_Network_Analysis",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rhizomatic_structure",
+      "sequence": "graphtheory",
+      "map": "GT_Network_Analysis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "networkflow3d",
+      "sequence": "graphtheory",
+      "map": "GT_Network_Analysis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "tarjan_algorithm",
+      "sequence": "graphtheory",
+      "map": "GT_Connectivity",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "topological_sort",
+      "sequence": "graphtheory",
+      "map": "GT_Connectivity",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "kosaraju_algorithm",
+      "sequence": "graphtheory",
+      "map": "GT_Connectivity",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "mst_visualization",
+      "sequence": "graphtheory",
+      "map": "GT_Spanning_Trees",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "push_relabel_algorithm",
+      "sequence": "graphtheory",
+      "map": "GT_Flow",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grid3d_dfs",
+      "sequence": "graphtheory",
+      "map": "GT_Flow",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grid3d_prim",
+      "sequence": "graphtheory",
+      "map": "GT_Flow",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "karger_algorithm",
+      "sequence": "graphtheory",
+      "map": "GT_Flow",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "edmonds_algorithm",
+      "sequence": "graphtheory",
+      "map": "GT_Matching",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "euclid_postulates_plaque",
+      "sequence": "foundationscrisis",
+      "map": "Euclid_Parallel",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "angle_sum_triangle",
+      "sequence": "foundationscrisis",
+      "map": "Euclid_Parallel",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "triangle_curvature_workbench",
+      "sequence": "foundationscrisis",
+      "map": "NonEuclidean_Spaces",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "riemann_sphere",
+      "sequence": "foundationscrisis",
+      "map": "NonEuclidean_Spaces",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "curvature_slider",
+      "sequence": "foundationscrisis",
+      "map": "NonEuclidean_Spaces",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "elliptic_surface",
+      "sequence": "foundationscrisis",
+      "map": "NonEuclidean_Spaces",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "poincare_disk",
+      "sequence": "foundationscrisis",
+      "map": "NonEuclidean_Spaces",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "hyperbolic_surface",
+      "sequence": "foundationscrisis",
+      "map": "NonEuclidean_Spaces",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "russell_set_box",
+      "sequence": "foundationscrisis",
+      "map": "Russell_Paradox",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "barber_paradox",
+      "sequence": "foundationscrisis",
+      "map": "Russell_Paradox",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "self_membership_set",
+      "sequence": "foundationscrisis",
+      "map": "Russell_Paradox",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "liar_loop",
+      "sequence": "foundationscrisis",
+      "map": "Russell_Paradox",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "hilbert_hotel",
+      "sequence": "foundationscrisis",
+      "map": "Russell_Paradox",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "godel_sentence_machine",
+      "sequence": "foundationscrisis",
+      "map": "Godel_Incompleteness",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "provability_sorter",
+      "sequence": "foundationscrisis",
+      "map": "Godel_Incompleteness",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "negative_control_fixture",
+      "sequence": "foundationscrisis",
+      "map": "Godel_Incompleteness",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "critic_regress_stack",
+      "sequence": "foundationscrisis",
+      "map": "Godel_Incompleteness",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rice_verifier_booth",
+      "sequence": "foundationscrisis",
+      "map": "Godel_Incompleteness",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fluency_seam",
+      "sequence": "foundationscrisis",
+      "map": "Godel_Incompleteness",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "incompleteness_tower",
+      "sequence": "foundationscrisis",
+      "map": "Godel_Incompleteness",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "print_gallery_recursion",
+      "sequence": "foundationscrisis",
+      "map": "Godel_Incompleteness",
+      "role": "unruled",
+      "by": "file"
+    },
+    {
+      "lookup": "escher_staircase",
+      "sequence": "foundationscrisis",
+      "map": "Escher_Impossible",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "penrose_triangle",
+      "sequence": "foundationscrisis",
+      "map": "Escher_Impossible",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "magritte_pipe",
+      "sequence": "foundationscrisis",
+      "map": "Escher_Impossible",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "impossible_trident",
+      "sequence": "foundationscrisis",
+      "map": "Escher_Impossible",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "constructive_proof",
+      "sequence": "foundationscrisis",
+      "map": "Brouwer_Intuitionism",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "brouwer_choice_sequence",
+      "sequence": "foundationscrisis",
+      "map": "Brouwer_Intuitionism",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cantor_diagonal_workbench",
+      "sequence": "foundationscrisis",
+      "map": "Brouwer_Intuitionism",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "constructive_staircase",
+      "sequence": "foundationscrisis",
+      "map": "Brouwer_Intuitionism",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "excluded_middle_demo",
+      "sequence": "foundationscrisis",
+      "map": "Brouwer_Intuitionism",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "intractable_evidence",
+      "sequence": "foundationscrisis",
+      "map": "Brouwer_Intuitionism",
+      "role": "unruled",
+      "by": "floor"
+    },
+    {
+      "lookup": "both_true_gate",
+      "sequence": "foundationscrisis",
+      "map": "Florensky_Paraconsistent",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "florensky_sphere",
+      "sequence": "foundationscrisis",
+      "map": "Florensky_Paraconsistent",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "schrodinger_box",
+      "sequence": "foundationscrisis",
+      "map": "Florensky_Paraconsistent",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "superposition_display",
+      "sequence": "foundationscrisis",
+      "map": "Florensky_Paraconsistent",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "qfep_formula_3d",
+      "sequence": "foundationscrisis",
+      "map": "Crisis_Synthesis",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lambda_slider",
+      "sequence": "foundationscrisis",
+      "map": "Crisis_Synthesis",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "phi_slider",
+      "sequence": "foundationscrisis",
+      "map": "Crisis_Synthesis",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "goedel_atrium",
+      "sequence": "foundationscrisis",
+      "map": "Crisis_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "russell_paradox_workbench",
+      "sequence": "foundationscrisis",
+      "map": "Crisis_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bifurcation_diagram",
+      "sequence": "foundationscrisis",
+      "map": "Crisis_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "qfep_balance_workbench",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Introduction",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "tt",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grab_sphere_F",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grab_sphere_E",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grab_sphere_lambda",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Introduction",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "orange_and_apples",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Introduction",
+      "role": "unruled",
+      "by": "floor"
+    },
+    {
+      "lookup": "shannon_workbench",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_F_Term",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "snap_cube_puzzle",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_F_Term",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "snap_tetra_puzzle",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_F_Term",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "crystal_cluster",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_F_Term",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "entropy_fan",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_E_Term",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "microstate_counter",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_E_Term",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "possibility_space_cloud",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_E_Term",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "particle_chaos",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_E_Term",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "random_cubes",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_E_Term",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lambda_hall",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "qfep_chalkboard",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "edge_particles",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "chaos_particles",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "phase_cube",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bifurcation_walkway",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "dissolving_form",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "ordered_grid",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "complexity_pattern",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "crystal_formation",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "transforming_pattern",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Phi_Term",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rigid_sculpture",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Phi_Term",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "fluid_form",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Phi_Term",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "preserved_pattern",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Phi_Term",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "lambda_promenade",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Phi_Term",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "edge_of_chaos_unlocked",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Edge_Of_Chaos",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "emergence_zone",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Edge_Of_Chaos",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "turing_pattern",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Edge_Of_Chaos",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "edge_core",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Edge_Of_Chaos",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "reactive_particles",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Sandbox",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "qfep_reactor",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Sandbox",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "queer_morphology_specimen",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Synthesis",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "entropy_ceiling",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "entropy_meter",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grasp_cabinet",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "grab_sphere_phi",
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bias_from_inside",
+      "sequence": "postfoundationscrisis",
+      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "bias_visualizer",
+      "sequence": "postfoundationscrisis",
+      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "situated_readout",
+      "sequence": "postfoundationscrisis",
+      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "room_shape_demonstrator",
+      "sequence": "postfoundationscrisis",
+      "map": "CriticalAlgorithms_Applied_Ethics",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "excluded_class_visualizer",
+      "sequence": "postfoundationscrisis",
+      "map": "CriticalAlgorithms_Applied_Ethics",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "merge_conflict_visualizer",
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Paraconsistent_Engineering",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "cap_theorem_walk",
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Paraconsistent_Engineering",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rhizome_vault",
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Paraconsistent_Engineering",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "peer_production_tool",
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "the_fourth_limit",
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "wiki_fragment",
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "the_commons_table",
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "rhizome_grower",
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Rhizome_Network",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "MolecularDesigner",
+      "sequence": "postfoundationscrisis",
+      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "accountability_ledger",
+      "sequence": "postfoundationscrisis",
+      "map": "PostCrisis_Synthesis",
+      "role": "primary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "edge_ground_synthesis",
+      "sequence": "postfoundationscrisis",
+      "map": "PostCrisis_Synthesis",
+      "role": "secondary",
+      "by": "ruled"
+    },
+    {
+      "lookup": "the_confessing_body",
+      "sequence": "softbodies",
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "role": "secondary",
+      "by": "ruled"
+    }
+  ]
+}

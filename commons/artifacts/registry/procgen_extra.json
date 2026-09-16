@@ -57,7 +57,7 @@
 				"measured_footprint_cells": 9,
 				"footprint_source": "designed"
 			},
-			"qfep_connection": "f_order: the tunnel that paints itself \u2014 a subway-tiled walkway laid tile by tile from a pattern console at its mouth; ornament as a running program you can walk into while it executes.",
+			"qfep_connection": "f_order: the tunnel that paints itself — a subway-tiled walkway laid tile by tile from a pattern console at its mouth; ornament as a running program you can walk into while it executes.",
 			"measurements": {
 				"aabb_size": [
 					3.6,
@@ -154,7 +154,7 @@
 				"derived_at": "2026-04-29T09:39:46.214642Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Majority rule run five generations over random rock: solid survives with four neighbours, void turns solid at five. Only the rock gets instanced \u2014 the cave is never built, it is everywhere the multimesh declined to place a cube."
+			"qfep_connection": "Majority rule run five generations over random rock: solid survives with four neighbours, void turns solid at five. Only the rock gets instanced — the cave is never built, it is everywhere the multimesh declined to place a cube."
 		},
 		"GeneticProgramming": {
 			"dna": {
@@ -177,10 +177,10 @@
 			},
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Watch 3D creatures evolve generation by generation toward a fitness goal no individual understands. Population grid displays organisms with fitness labels. Auto-evolve ticks on a timer or step manually. Creatures converge on similar body plans despite random initialization \u2014 convergent evolution from pure math. Evolution does not design \u2014 it accumulates accidents that happen to survive.",
-			"qfep_connection": "phi-dE \u2014 the rate of evolutionary change. Each generation is a dE step. Fitness is the selection pressure (phi) that amplifies some mutations and kills others. Lambda emerges as the mutation rate: too low and evolution stalls, too high and it melts.",
+			"description": "Watch 3D creatures evolve generation by generation toward a fitness goal no individual understands. Population grid displays organisms with fitness labels. Auto-evolve ticks on a timer or step manually. Creatures converge on similar body plans despite random initialization — convergent evolution from pure math. Evolution does not design — it accumulates accidents that happen to survive.",
+			"qfep_connection": "phi-dE — the rate of evolutionary change. Each generation is a dE step. Fitness is the selection pressure (phi) that amplifies some mutations and kills others. Lambda emerges as the mutation rate: too low and evolution stalls, too high and it melts.",
 			"gamwell_reference": "Constraint satisfaction, evolutionary computation, genetic algorithms",
-			"capacity": "WATCH evolution accumulate accidents that happen to survive \u2014 design without a designer",
+			"capacity": "WATCH evolution accumulate accidents that happen to survive — design without a designer",
 			"interactions": [
 				"auto-evolve on timer",
 				"manual step one generation",
@@ -278,20 +278,20 @@
 		},
 		"GyroidDemo": {
 			"dna": {
-			 "axes": {
-			 "intrusion": [
-			 "melted",
-			 "formula",
-			 "eroded",
-			 "drifting"
-			 ],
-			 "period": [
-			 "pair",
-			 "sheet",
-			 "lattice",
-			 "weave"
-			 ]
-			 }
+				"axes": {
+					"intrusion": [
+						"melted",
+						"formula",
+						"eroded",
+						"drifting"
+					],
+					"period": [
+						"pair",
+						"sheet",
+						"lattice",
+						"weave"
+					]
+				}
 			},
 			"category": "unknown",
 			"complexity": "beginner",
@@ -398,12 +398,12 @@
 				"derived_at": "2026-04-29T09:39:46.214642Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A surface nobody modeled: the gyroid's implicit equation marched into triangles by a compute shader, dividing space into two labyrinths that never touch. If the GPU declines, the fallback is a sphere \u2014 an admission that without the equation there is no shape to fall back on."
+			"qfep_connection": "A surface nobody modeled: the gyroid's implicit equation marched into triangles by a compute shader, dividing space into two labyrinths that never touch. If the GPU declines, the fallback is a sphere — an admission that without the equation there is no shape to fall back on."
 		},
 		"SierpinskiPyramid": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "pyramid(depth) = 5 * pyramid(depth-1) \u2014 top + four corners, recursively",
+			"description": "pyramid(depth) = 5 * pyramid(depth-1) — top + four corners, recursively",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -590,7 +590,7 @@
 				"derived_at": "2026-04-29T09:39:46.214642Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Socket-grammar collapse where the Rainbow_Dance_Floor's weight of 6 outbids the plain Floor's 5: the tile library is a constitution, and one number legislates what kind of room is statistically likely to exist. Joy doesn't emerge from constraint propagation \u2014 it has to be given majority weight before the dice are allowed to find it."
+			"qfep_connection": "Socket-grammar collapse where the Rainbow_Dance_Floor's weight of 6 outbids the plain Floor's 5: the tile library is a constitution, and one number legislates what kind of room is statistically likely to exist. Joy doesn't emerge from constraint propagation — it has to be given majority weight before the dice are allowed to find it."
 		},
 		"WFCCav": {
 			"category": "unknown",
@@ -659,7 +659,7 @@
 				"max_dimension_m": 60.0,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			},
-			"qfep_connection": "Twenty hand-written tile types \u2014 tunnels, corners, T-junctions, stalactites \u2014 each with a dictionary declaring which directions it will speak to. The 'organic' cavern is adjacency bureaucracy: nature specified as a plumbing catalogue, then rolled until the paperwork is consistent."
+			"qfep_connection": "Twenty hand-written tile types — tunnels, corners, T-junctions, stalactites — each with a dictionary declaring which directions it will speak to. The 'organic' cavern is adjacency bureaucracy: nature specified as a plumbing catalogue, then rolled until the paperwork is consistent."
 		},
 		"WFCSculptureGenerator": {
 			"category": "unknown",
@@ -731,7 +731,7 @@
 				"max_dimension_m": 7.72,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			},
-			"qfep_connection": "Every cell knows its distance to center and to surface before any collapse, and the voxel weights bend to that geography \u2014 so the 'discovered' sculpture is a CORE_SOLID-to-SURFACE_POROUS gradient decided ahead of the randomness. hollow_intensity is the honest export: a slider for how much absence the form is permitted to contain."
+			"qfep_connection": "Every cell knows its distance to center and to surface before any collapse, and the voxel weights bend to that geography — so the 'discovered' sculpture is a CORE_SOLID-to-SURFACE_POROUS gradient decided ahead of the randomness. hollow_intensity is the honest export: a slider for how much absence the form is permitted to contain."
 		},
 		"animalpatterns": {
 			"category": "unknown",
@@ -1037,7 +1037,7 @@
 		"botanical_flower": {
 			"category": "procedural",
 			"complexity": "beginner",
-			"description": "Standalone procedural flower \u2014 configurable petal count, length, width, curve, stem height, color hue, leaf count, and symmetry. A lightweight wrapper around the BotanicalFlower generator for map placement without VR controls.",
+			"description": "Standalone procedural flower — configurable petal count, length, width, curve, stem height, color hue, leaf count, and symmetry. A lightweight wrapper around the BotanicalFlower generator for map placement without VR controls.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -1179,7 +1179,7 @@
 			"sequence": "fractals",
 			"interaction": "observe_interact",
 			"artifact_type": "demonstration",
-			"qfep_connection": "Fractal dimension measures the complexity of a boundary \u2014 the self-similar structure at every scale.",
+			"qfep_connection": "Fractal dimension measures the complexity of a boundary — the self-similar structure at every scale.",
 			"description": "Interactive box-counting dimension measurement on a Sierpinski triangle with log-log plot",
 			"scene_path": "res://algorithms/fractals/box_counting_dimension/box_counting_dimension.tscn",
 			"tags": [
@@ -1338,7 +1338,7 @@
 				"max_dimension_m": 6.0,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			},
-			"qfep_connection": "Growth as a rule iterated \u2014 a tip that splits, angles, and splits again, each branch a smaller copy of the decision that made it. The engine behind the organic_space beside it: structure accumulating from a repeated local choice, the procedural chapter's handshake with the fractal one next door.",
+			"qfep_connection": "Growth as a rule iterated — a tip that splits, angles, and splits again, each branch a smaller copy of the decision that made it. The engine behind the organic_space beside it: structure accumulating from a repeated local choice, the procedural chapter's handshake with the fractal one next door.",
 			"footprint_measured": [
 				4,
 				1,
@@ -1348,7 +1348,7 @@
 		"branching_growth_algorithm_continued": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Continuous-growth variant \u2014 adds aging, energy decay, four growth phases, and attractor regeneration so the colonization runs as an ongoing ecosystem rather than a one-shot reach",
+			"description": "Continuous-growth variant — adds aging, energy decay, four growth phases, and attractor regeneration so the colonization runs as an ongoing ecosystem rather than a one-shot reach",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -1530,7 +1530,7 @@
 		"cantor_set": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "cantor(bar) = [bar.left_third, bar.right_third], remove middle third, repeat. Measure \u2192 0.",
+			"description": "cantor(bar) = [bar.left_third, bar.right_third], remove middle third, repeat. Measure → 0.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -1771,12 +1771,12 @@
 				"derived_at": "2026-04-29T09:39:46.214642Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Inside Cave, Flat Landscape, Torus Sculpture, Dense Caves \u2014 five presets that are only parking spots in one continuous parameter space, and the sliders let you drive between them. The miniature proves the categories were never in the noise, only in where someone stopped scrolling."
+			"qfep_connection": "Inside Cave, Flat Landscape, Torus Sculpture, Dense Caves — five presets that are only parking spots in one continuous parameter space, and the sliders let you drive between them. The miniature proves the categories were never in the noise, only in where someone stopped scrolling."
 		},
 		"cave_generator": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "Cellular automaton cave generation with flood-fill connectivity \u00e2\u20ac\u201d classic roguelike technique. 64x64 grid initialized with random walls, smoothed by CA rules (5+ neighbors = wall), then flood-filled to keep only the largest connected region. Entrance and exit markers placed at region extremes.",
+			"description": "Cellular automaton cave generation with flood-fill connectivity â€” classic roguelike technique. 64x64 grid initialized with random walls, smoothed by CA rules (5+ neighbors = wall), then flood-filled to keep only the largest connected region. Entrance and exit markers placed at region extremes.",
 			"dev_themes": [
 				"biology",
 				"generation",
@@ -1881,7 +1881,7 @@
 		"caverandomwalk": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "N walkers carve air from solid voxel grid \u2014 biased random walk inward, then upward level by level",
+			"description": "N walkers carve air from solid voxel grid — biased random walk inward, then upward level by level",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -1991,7 +1991,7 @@
 				"derived_at": "2026-04-29T09:39:46.214642Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A cave dug by a random walk \u2014 a wanderer eating rock as it drifts, and the tunnel it leaves behind is the cave. The chapter's most direct marriage of the randomness thread and the space one: chance given a chisel, and the negative of its stagger becomes a place you can stand."
+			"qfep_connection": "A cave dug by a random walk — a wanderer eating rock as it drifts, and the tunnel it leaves behind is the cave. The chapter's most direct marriage of the randomness thread and the space one: chance given a chisel, and the negative of its stagger becomes a place you can stand."
 		},
 		"color_pattern_mate_texture_for_3d": {
 			"category": "unknown",
@@ -2065,7 +2065,7 @@
 				"max_dimension_m": 0.67,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			},
-			"qfep_connection": "Random walks on an inner grid, doubled by a reflection rule, then bred: every tenth of a second the rows shift down and neighboring patterns mate into offspring. Ornament with a genetics \u2014 less a texture than a small population under glass."
+			"qfep_connection": "Random walks on an inner grid, doubled by a reflection rule, then bred: every tenth of a second the rows shift down and neighboring patterns mate into offspring. Ornament with a genetics — less a texture than a small population under glass."
 		},
 		"color_pattern_texture_for_3d": {
 			"category": "unknown",
@@ -2141,7 +2141,7 @@
 		"crackpropagation_ca": {
 			"category": "morphogenesis",
 			"complexity": "intermediate",
-			"description": "A cellular automaton that grows fracture networks from invisible stress. A 64x64 grid accumulates stress through diffusion and decay \u2014 when a cell crosses the crack threshold, it shatters and pushes stress outward. The result is realistic branching cracks that follow paths of least resistance, guided by direction bias that prevents zig-zag. You watch destruction emerge from accumulation: nothing visible happens until the threshold breaks, then cracks bloom explosively across the surface.",
+			"description": "A cellular automaton that grows fracture networks from invisible stress. A 64x64 grid accumulates stress through diffusion and decay — when a cell crosses the crack threshold, it shatters and pushes stress outward. The result is realistic branching cracks that follow paths of least resistance, guided by direction bias that prevents zig-zag. You watch destruction emerge from accumulation: nothing visible happens until the threshold breaks, then cracks bloom explosively across the surface.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -2180,7 +2180,7 @@
 				"procedural",
 				"emergence"
 			],
-			"qfep_connection": "Edge of chaos \u2014 the crack threshold is the critical lambda where order (intact material) meets entropy (shattered field). Below threshold: stability. Above: catastrophic branching. The propagation rate tunes how fast the phase transition sweeps through the grid.",
+			"qfep_connection": "Edge of chaos — the crack threshold is the critical lambda where order (intact material) meets entropy (shattered field). Below threshold: stability. Above: catastrophic branching. The propagation rate tunes how fast the phase transition sweeps through the grid.",
 			"gamwell_reference": "Fracture mechanics, cellular automata, stress propagation, percolation theory, crack branching patterns in nature",
 			"interactions": [
 				"watch cracks emerge from the center stress seed",
@@ -2553,7 +2553,7 @@
 				"max_dimension_m": 0.9,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			},
-			"qfep_connection": "Eleven scaled boxes arrive at 0.3-second intervals \u2014 seat, back, four legs, armrests \u2014 and nothing else happens. Watching the schedule makes furniture legible as ordered proportions; non-uniform scaling is the only carpentry."
+			"qfep_connection": "Eleven scaled boxes arrive at 0.3-second intervals — seat, back, four legs, armrests — and nothing else happens. Watching the schedule makes furniture legible as ordered proportions; non-uniform scaling is the only carpentry."
 		},
 		"cube_desk": {
 			"category": "unknown",
@@ -2678,7 +2678,7 @@
 			},
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Procedural mound built from stacked cubes \u2014 layered cellular logic deposits cubes where conditions permit, producing terrain that is both built and eroded.",
+			"description": "Procedural mound built from stacked cubes — layered cellular logic deposits cubes where conditions permit, producing terrain that is both built and eroded.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -2755,7 +2755,7 @@
 				"derived_at": "2026-04-29T09:39:46.214642Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A mound built by stacked cubes under cellular logic \u2014 deposit a cube where the local conditions say yes, and a landform accretes with no landscaper. The chapter's plainest proof: give a rule a place to look and a thing to drop, and terrain grows itself, one conditional at a time."
+			"qfep_connection": "A mound built by stacked cubes under cellular logic — deposit a cube where the local conditions say yes, and a landform accretes with no landscaper. The chapter's plainest proof: give a rule a place to look and a thing to drop, and terrain grows itself, one conditional at a time."
 		},
 		"cube_mound_scene_sphere": {
 			"category": "unknown",
@@ -3316,7 +3316,7 @@
 				"derived_at": "2026-04-29T09:39:46.214642Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Fifty leaf clusters, refractive droplets \u2014 then the reach: it instantiates its own sun and writes an Environment straight onto the viewport camera. A garden that annexes the weather; the dew never falls, but the morning light is compulsory."
+			"qfep_connection": "Fifty leaf clusters, refractive droplets — then the reach: it instantiates its own sun and writes an Environment straight onto the viewport camera. A garden that annexes the weather; the dew never falls, but the morning light is compulsory."
 		},
 		"diffusion_limited_aggregation": {
 			"category": "unknown",
@@ -4045,7 +4045,7 @@
 				"derived_at": "2026-04-29T09:39:46.214642Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Shiffman's branching rule carried into VR with exactly one degree of freedom handed to the body: a graspable angle between 10 and 60 degrees. Move it and the whole tree is deleted and re-derived \u2014 the angle is not an adjustment but the tree's entire genome."
+			"qfep_connection": "Shiffman's branching rule carried into VR with exactly one degree of freedom handed to the body: a graspable angle between 10 and 60 degrees. Move it and the whole tree is deleted and re-derived — the angle is not an adjustment but the tree's entire genome."
 		},
 		"fabrics": {
 			"category": "unknown",
@@ -4126,7 +4126,7 @@
 				"derived_at": "2026-04-29T09:39:46.214642Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Wallpaper, stone, terrain, tartan \u2014 one turbulence trick wearing different costumes across planes and boxes, the same shader reparametrized from wall covering to landscape. Cloth here is a claim made by three floats; materials are positions in parameter space, not substances."
+			"qfep_connection": "Wallpaper, stone, terrain, tartan — one turbulence trick wearing different costumes across planes and boxes, the same shader reparametrized from wall covering to landscape. Cloth here is a claim made by three floats; materials are positions in parameter space, not substances."
 		},
 		"fatwireframe": {
 			"category": "unknown",
@@ -4455,7 +4455,7 @@
 		"flower_lab": {
 			"category": "procedural",
 			"complexity": "beginner",
-			"description": "Interactive botanical laboratory \u00e2\u20ac\u201d VR sliders control petal count, length, width, curve, stem height, color hue, leaf count, and symmetry of a procedural BotanicalFlower. Randomize to discover unexpected morphologies, save presets to JSON. Teaches how parametric variation drives flower form.",
+			"description": "Interactive botanical laboratory â€” VR sliders control petal count, length, width, curve, stem height, color hue, leaf count, and symmetry of a procedural BotanicalFlower. Randomize to discover unexpected morphologies, save presets to JSON. Teaches how parametric variation drives flower form.",
 			"dev_themes": [
 				"education",
 				"generation",
@@ -5139,7 +5139,7 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The primitive laid bare: a shape calling itself, depth one, two, three \u2014 recursion slowed down until you can watch the stack breathe."
+			"qfep_connection": "The primitive laid bare: a shape calling itself, depth one, two, three — recursion slowed down until you can watch the stack breathe."
 		},
 		"fractal_recursion_2": {
 			"dna": {
@@ -5284,7 +5284,7 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The same breath at depth: multiple recursive levels interleaving until the pattern stops reading as repetition and starts reading as texture \u2014 the moment quantity of recursion becomes quality of surface."
+			"qfep_connection": "The same breath at depth: multiple recursive levels interleaving until the pattern stops reading as repetition and starts reading as texture — the moment quantity of recursion becomes quality of surface."
 		},
 		"fractal_recursion_circles": {
 			"category": "unknown",
@@ -5506,7 +5506,7 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Growth staged as re-execution: each animation level clears every branch and reruns the recursion one depth deeper. Nothing accumulates; the tree has no past, only a function called with a larger argument \u2014 development impersonated by recomputation."
+			"qfep_connection": "Growth staged as re-execution: each animation level clears every branch and reruns the recursion one depth deeper. Nothing accumulates; the tree has no past, only a function called with a larger argument — development impersonated by recomputation."
 		},
 		"fractal_scene": {
 			"category": "unknown",
@@ -5605,7 +5605,7 @@
 				"max_dimension_m": 2.56,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			},
-			"qfep_connection": "A composed fractal tableau \u2014 the chapter's specimens arranged as one scene, self-similarity as scenography."
+			"qfep_connection": "A composed fractal tableau — the chapter's specimens arranged as one scene, self-similarity as scenography."
 		},
 		"fractal_stochastic_tree": {
 			"category": "unknown",
@@ -5722,7 +5722,7 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The recursive tree with dice in its grammar: every branch angle and length drawn from a distribution. Same rule, different tree each run \u2014 the fractal chapter shaking hands with the randomness chapter, determinism loosened just enough to look alive."
+			"qfep_connection": "The recursive tree with dice in its grammar: every branch angle and length drawn from a distribution. Same rule, different tree each run — the fractal chapter shaking hands with the randomness chapter, determinism loosened just enough to look alive."
 		},
 		"genetic_programming": {
 			"dna": {
@@ -5742,7 +5742,7 @@
 			},
 			"category": "procedural",
 			"complexity": "advanced",
-			"description": "Genetic programming interface for evolving 3D shapes \u00e2\u20ac\u201d populations of genomes (Primitives, CSG Trees, Parametric, Voxel, L-Systems) undergo selection, crossover, and mutation toward fitness goals like target volume, height, and symmetry. Visualizes the entire population in a grid with real-time evolution.",
+			"description": "Genetic programming interface for evolving 3D shapes â€” populations of genomes (Primitives, CSG Trees, Parametric, Voxel, L-Systems) undergo selection, crossover, and mutation toward fitness goals like target volume, height, and symmetry. Visualizes the entire population in a grid with real-time evolution.",
 			"dev_themes": [
 				"biology",
 				"generation",
@@ -5900,7 +5900,7 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Three freestanding partitions \u2014 stand, panel, frosted-glass shader \u2014 the cubicle's minimal unit, tripled. Frost is order applied to sight alone: the panel stops no body, only detail, keeping the person beyond it present enough to be monitored and blurred enough to be denied \u2014 the office's actual proposal, adjacency without particulars."
+			"qfep_connection": "Three freestanding partitions — stand, panel, frosted-glass shader — the cubicle's minimal unit, tripled. Frost is order applied to sight alone: the panel stops no body, only detail, keeping the person beyond it present enough to be monitored and blurred enough to be denied — the office's actual proposal, adjacency without particulars."
 		},
 		"golden_rectangle": {
 			"category": "unknown",
@@ -6095,12 +6095,12 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Checkers, line grids, diagonal stripes, an Albers nod \u2014 modernism's flat pattern vocabulary redone as a few step functions and a UV scale per box. F_order at its cheapest: the shader supplies thresholds and the eye volunteers the loom."
+			"qfep_connection": "Checkers, line grids, diagonal stripes, an Albers nod — modernism's flat pattern vocabulary redone as a few step functions and a UV scale per box. F_order at its cheapest: the shader supplies thresholds and the eye volunteers the loom."
 		},
 		"ik_arm_demo": {
 			"category": "body",
 			"complexity": "intermediate",
-			"description": "Standalone TwoBoneIK3D arm demonstration \u2014 two procedural arms with animated targets tracing figure-8 patterns. Shows the same inverse kinematics solver used for VR body tracking.",
+			"description": "Standalone TwoBoneIK3D arm demonstration — two procedural arms with animated targets tracing figure-8 patterns. Shows the same inverse kinematics solver used for VR body tracking.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -6350,7 +6350,7 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The closing craft: modeling by writing functions \u2014 union as min, intersection as max, blending as soft algebra. Shape as sentence: say the field precisely enough and the surface is the proof."
+			"qfep_connection": "The closing craft: modeling by writing functions — union as min, intersection as max, blending as soft algebra. Shape as sentence: say the field precisely enough and the surface is the proof."
 		},
 		"inverted_tree_cloud": {
 			"dna": {
@@ -6575,7 +6575,7 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "One c, one temperament: where Mandelbrot maps the whole family, a Julia set is a single member's portrait \u2014 connected dust or lace depending on which c you chose. The pair teaches the deepest grammar in the chapter: parameter space and behavior space are different rooms, and beauty lives at their border."
+			"qfep_connection": "One c, one temperament: where Mandelbrot maps the whole family, a Julia set is a single member's portrait — connected dust or lace depending on which c you chose. The pair teaches the deepest grammar in the chapter: parameter space and behavior space are different rooms, and beauty lives at their border."
 		},
 		"koch_curve_1": {
 			"category": "unknown",
@@ -6929,7 +6929,7 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Surfaces accreted in layers, each draping over the last \u2014 sediment, skin, stratum. Form as history made visible: the membrane is a record of the order in which its rule fired, procedural generation wearing its own timeline."
+			"qfep_connection": "Surfaces accreted in layers, each draping over the last — sediment, skin, stratum. Form as history made visible: the membrane is a record of the order in which its rule fired, procedural generation wearing its own timeline."
 		},
 		"liquid_simulation": {
 			"category": "unknown",
@@ -7008,7 +7008,7 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Water, oil and honey diffuse while a floating label reports the Shannon entropy of the mix \u2014 but the normalising ceiling is hard-coded for two species at 50/50, so three liquids can overflow the scale built to measure them. Irreversibility, metered by an instrument that undercounts it."
+			"qfep_connection": "Water, oil and honey diffuse while a floating label reports the Shannon entropy of the mix — but the normalising ceiling is hard-coded for two species at 50/50, so three liquids can overflow the scale built to measure them. Irreversibility, metered by an instrument that undercounts it."
 		},
 		"mandelbrot_set": {
 			"dna": {
@@ -7131,7 +7131,7 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The world's most famous boundary: for each point c, iterate z squared plus c and ask if it stays home. The set is the atlas of every Julia set at once \u2014 an infinitely deep coastline grown from one line of arithmetic. The chapter's proof that the simplest sentence can contain a world that no one, including its discoverer, has finished visiting."
+			"qfep_connection": "The world's most famous boundary: for each point c, iterate z squared plus c and ask if it stays home. The set is the atlas of every Julia set at once — an infinitely deep coastline grown from one line of arithmetic. The chapter's proof that the simplest sentence can contain a world that no one, including its discoverer, has finished visiting."
 		},
 		"marching_cubes_cave_gallery": {
 			"category": "unknown",
@@ -7212,7 +7212,7 @@
 				"cluster_with": [],
 				"preferred_zone": "entry"
 			},
-			"qfep_connection": "Human, chair, house, bottle, cup, computer \u2014 six everyday nouns rewritten as signed-distance fields and pushed through one mesher at body scale. The levelling is the point: under the isosurface regime a person and their furniture are the same kind of object, the zero-set of a function."
+			"qfep_connection": "Human, chair, house, bottle, cup, computer — six everyday nouns rewritten as signed-distance fields and pushed through one mesher at body scale. The levelling is the point: under the isosurface regime a person and their furniture are the same kind of object, the zero-set of a function."
 		},
 		"marching_cubes_gallery": {
 			"category": "unknown",
@@ -7262,18 +7262,18 @@
 				"cluster_with": [],
 				"preferred_zone": "entry"
 			},
-			"qfep_connection": "Filed in the WFC sculpture folder, but the script it loads is the marching-cubes gallery, with trace_individual_elements splitting each result into connected components. A room whose name outlived its mechanism \u2014 what it actually stages is the mesher's habit of shedding islands, promoted here to curatorial method."
+			"qfep_connection": "Filed in the WFC sculpture folder, but the script it loads is the marching-cubes gallery, with trace_individual_elements splitting each result into connected components. A room whose name outlived its mechanism — what it actually stages is the mesher's habit of shedding islands, promoted here to curatorial method."
 		},
 		"marching_cubes_sculpt_vr": {
 			"dna": {
-			 "axes": {
-			 "hand": [
-			 "stack",
-			 "sweep",
-			 "dab",
-			 "heap"
-			 ]
-			 }
+				"axes": {
+					"hand": [
+						"stack",
+						"sweep",
+						"dab",
+						"heap"
+					]
+				}
 			},
 			"category": "unknown",
 			"complexity": "advanced",
@@ -7388,18 +7388,18 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Both triggers write density straight into a 64-cubed field and the isosurface chases your hands at frame rate; erase mode is the same brush with the sign reversed. The algorithm that elsewhere authors whole terrains is here demoted to rendering intent \u2014 matter and void as one channel a body can scribble in."
+			"qfep_connection": "Both triggers write density straight into a 64-cubed field and the isosurface chases your hands at frame rate; erase mode is the same brush with the sign reversed. The algorithm that elsewhere authors whole terrains is here demoted to rendering intent — matter and void as one channel a body can scribble in."
 		},
 		"marchingcave": {
 			"dna": {
-			 "axes": {
-			 "plumb": [
-			 "bedded",
-			 "overturned",
-			 "weightless",
-			 "steep"
-			 ]
-			 }
+				"axes": {
+					"plumb": [
+						"bedded",
+						"overturned",
+						"weightless",
+						"steep"
+					]
+				}
 			},
 			"category": "unknown",
 			"complexity": "beginner",
@@ -7495,47 +7495,47 @@
 				"max_dimension_m": 200.0,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			},
-			"qfep_connection": "A cave system marched at generation scale \u2014 the algorithm as land-maker, corridors and chambers emerging wherever the noise dips below the line."
+			"qfep_connection": "A cave system marched at generation scale — the algorithm as land-maker, corridors and chambers emerging wherever the noise dips below the line."
 		},
 		"marchingcubes_cave": {
 			"dna": {
-			 "value_typing": "`octaves` IS DECLARED AS JSON NUMBERS AND NOT AS THE STRINGS apply_dna_block DERIVED. The tool read them off the trailing `# 1 | 2 | 3 | 6` on the @export line (the trailing-comment branch, last in check_dna_declarations' value order) and wrote [\"1\", \"2\", \"3\", \"6\"], which would make the cave tokens the only scened entries in the corpus with string-numeric axis values, against ~35 numeric axes (noise_quarry.octaves, lsystem_dungeon.depth, star_primitive.points, mc_portal_landscape.num_portals) every one of which is spelled as numbers. THE DERIVATION CHAIN SURVIVES THE RETYPE, AND THIS WAS CHECKED RATHER THAN ASSUMED: apply_dna_block compares `{k: [str(x) for x in v]}` against what it derives, and str(1) == \"1\", so both `--refresh` and a fresh `--token=... --axes=plumb,octaves` report `already matches the code` and write nothing. check_dna_declarations takes the numeric branch either way and reports ok. WHAT THE RETYPE BUYS IS THE STANDPOINT PROBE, and nothing else. build_dna_gallery reaches cabinet_sweep over a command line, so a value makes the round trip str() -> coerce() -> int and THE GALLERY IS BIT-IDENTICAL EITHER WAY. probe_anamorphic.py does not: at line 103 it reads the registry directly and keeps only `isinstance(v, str)`, writing the survivors straight into the capture spec. Spelled as strings it would hand capture_config_sweep the String \"1\" for a typed `int` export, and four identical frames would be published as doc/reports/anamorphic_<token>.json - which is the file the critic's standpoint gate reads, so a false 'flat from all five standpoints' becomes a manufactured conviction. Spelled as numbers the probe keeps nothing and returns an obvious null. The two failure modes are asymmetric; this takes the loud one. A SEPARATE CONSEQUENCE OF THE SAME FILTER, worth reporting on its own: probe_anamorphic cannot clear an INERT? verdict on ANY numeric axis in the corpus, because isinstance(str) empties the value list for all ~35 of them. That is a gap in the gate, not in this artifact.",
-			 "fixture": {
-				"capture_fade_distance": 100000.0,
-			  "use_fallback": false,
-			  "continuous_update": false
-			 },
-			 "promoted": "2026-08-12",
-			 "stage": "2 - variation",
-			 "framing": 0.75,
-			 "axes": {
-			  "plumb": [
-			   "bedded",
-			   "overturned",
-			   "weightless",
-			   "steep"
-			  ],
-			  "octaves": [
-			   1,
-			   2,
-			   3,
-			   6
-			  ]
-			 },
-			 "default": "plumb=bedded AND octaves=6. SECOND REGISTRY NAME ON THE SAME SCENE. The axes, their values, their defaults and their mechanism are mc_cave's - one script, TerrainGenerator.gd, uid c2aji3u2bgmv8 - and are declared here so a map token under this name reaches the same family. Read mc_cave's entry for the full account of both axes, the Nyquist arithmetic, the shader contract and the standpoint caveat. Identical export counts across sibling tokens is the tell for a one-scene-many-names family, and when the shared vocabulary is honest the siblings measure ALIKE - which is itself the check on this pair.\n\nREACH MEASURED FOR THIS TOKEN: 2 placements, neither reaching apply_grid_config. A bare grid cell in ISO_CaveGeneration interactables[9][9] (no `#` config, no default_params on this entry, so merged_config is empty and _apply_artifact_config is never called) and a curation_station roster in Corridor_ISO_CaveGeneration interactables[5][12] (`#artifacts:marchingcave,marchingcubes_cave#layout:row`), which misses because curation_station.gd:381 asks `has_method` of the scriptless Node3D root. Note the company it keeps in that roster: `marchingcave` is the use_fallback scene and is deliberately NOT declared - see `family`.",
-			 "was": "See mc_cave. Zero @export of its own; apply_grid_config was a bare `pass`.",
-			 "note": "THE SEQUENCE'S TRUTH LINE, LITERALLY. 'Define a field, extract a surface. The boundary between inside and outside becomes geometry.' This script is the one place in the wave where the SAME field is shipped twice, once to be looked at and once to be stood inside, so an axis declared here has to mean something from both sides. You are OUTSIDE this one: the scene's camera sits at (-15, 35, 50) looking in, with a DirectionalLight3D and five torches, so the field reads as a block of rock with a top surface and a sky.\n\nplumb - WHICH WAY IS DOWN, AND WHETHER THERE IS A DOWN AT ALL. Everything this shader knows about gravity is one line, MarchingCubes.glsl:180: `density = -(worldPos.y+100)/300 + density`. It is the ONLY anisotropic term in the file; the six octaves above it are isotropic ridged noise, which on its own has no up. That one linear bias is what makes low regions solid and high regions air - from outside, the block's top surface and its sky; from inside, the floor you stand on. plumbScale multiplies it and nothing else. bedded (1.0) SHIPPED. overturned (-1.0) flips the sign: the same noise at the same threshold with inside and outside exchanged, rock overhead and nothing under your feet. weightless (0.0) DELETES the term and leaves pure ridged noise - an isotropic sponge with no floor, no ceiling and no sky, filling the sampled box to all six faces. steep (3.0) triples the gradient so the field swings 3.0 across the 300 m box instead of 1.0 and the solid retreats into the bottom third: a slab with a rough top, a crawl space. The four values are held IDENTICAL across all four declared tokens on purpose - it is one const on one script, and holding them identical is what makes the galleries comparable frame for frame.\n\noctaves - HOW MANY SCALES OF ROCK SURVIVE THE LATTICE, AND THIS IS THE AXIS THAT MAKES THE SIBLINGS SAY DIFFERENT THINGS. :168 opens `for (int i = 0; i < 6; i++)`; each pass halves the amplitude and doubles the frequency, with the weight feedback at :174 gating each octave by the previous one. The literal 6 is the rung. What makes it worth declaring is arithmetic the two scenes do not share. THIS token: noise_scale 13.5, chunk_scale 300.0, so samplePos = worldPos x 0.04500 and octave 0 has ~22 m features; the marching lattice samples at 300.0/64 = 4.688 m, so its Nyquist limit is 9.38 m. The six octaves measure 22.2, 11.1, 5.5, 2.8, 1.4, 0.7 m, which puts 2 of them above the limit and the rest below it. On the sibling the same six octaves land differently, and that is the finding: mc_cave resolves TWO scales of rock, mc_inside_cave resolves FOUR, from the same script, the same shader, the same rungs and the same threshold. The artifact you stand inside can resolve two more octaves than the one you look at. That is the inside/outside asymmetry as a number rather than as a description, and it is why the axis is declared on both rather than on one.\n\nTWO CORRECTIONS TO THE APPROVED DESIGN, both found by redoing its arithmetic. (1) The design said the inside scene resolves ONE more octave than the outside one; by the Nyquist figures above it is TWO (octaves 0-3 against octaves 0-1). (2) The design said the sub-limit octaves are 'COMPUTED AND THEN THROWN AWAY BY THE EXTRACTOR'. They are not thrown away, they ALIAS: content finer than the sampling cell still perturbs the corner values, which still moves where interpolateVerts puts the crossing. So the sub-limit rungs are predicted to be nearly degenerate, not exactly degenerate, and a small non-zero reading there is the expected result rather than a failed prediction.\n\nONE MORE THING WORTH RECORDING ABOUT THE FIELD ITSELF: :170 is `snoise(samplePos) * 2 - 1` before the ridged fold, not the plain `snoise` of the usual Lague construction, so the input to `1 - abs(noise)` spans about [-3, 1] rather than [-1, 1] and the fold is off-centre. The amplitude LADDER still halves exactly (1, 0.5, 0.25, 0.125, 0.0625, 0.03125), which is what the octave arithmetic above rests on, but the per-octave term is not bounded by 1 and the summed density is not bounded by 1.969. Any claim about an absolute density total should be read as about the ladder, not about the sum.",
-			 "declined": "REFUSED, `iso_level`, and the refusal is deliberate given that this wave promotes `threshold` on the torus. iso_level is the ONE export on which these two sibling scenes already disagree - 0.85 on marchingcubes_cave.tscn against 0.88 on marchingcubes_inside_cave.tscn - so an axis over it would say 'these two artifacts are one object at two thresholds', which is nearly irresistible. It is refused because on THIS shader the density carries a vertical gradient, so a constant offset to the threshold is a vertical translation of the rock/air horizon, which is the same horizon `plumb` moves: a bias of 0.15 is 45 m of horizon on a 300 m box, and plumb=steep moves it further. The two would measure each other at plumb=bedded and separate only at plumb=weightless - a conditional pair bought at the price of a confound. The torus pays gyroid_demo's bequest instead, because its field has no gradient term at all. REFUSED, the weight-gating literal 10 at :174 (`weight = max(0, min(1, noise * 10))`): it is the Lague trick that turns isotropic ridged fBm into connected tunnels and it is the closest thing in the file to an axis about whether the void is a passage or a sealed bubble - refused because at low values it also zeroes every octave after the first, so it conflates connectivity with detail and would be `octaves` wearing another name. REFUSED, `noise_offset` (a different arbitrary sample of the same field, and already fixed by the .tscn), `chunk_scale` and `center_position` (a size and a placement, both self-cancelling under an AABB-fitted camera), `continuous_update` (a rate, invisible in a still by law). REFUSED, `invert_faces`, AND THIS ONE IS A REPORTED DEFECT RATHER THAN A DECLINE. TerrainGeneratorBase:10 documents it as 'Flip triangle winding and normals (useful for objects vs caves)' and NEITHER cave scene sets it, so mc_inside_cave - the artifact whose entire premise is 'marching cubes cave seen from inside' - ships with the same winding as the landscapes, and TerrainMat.tres renders cull_back. Whichever way that winding points, the artifact named 'inside' made no different choice from the one named 'cave'. It is not an axis (two values, below the floor, and a winding order is a material-culling fact rather than a field property). It should be its own fix.",
-			 "predicted_degeneracy": "PREDICTED BEFORE ANY CAPTURE, in projected-area currency, computed by hand rather than by rasterising the scene. Read it as an order-of-magnitude claim the sweep can falsify, not as the critic's own hottest-5%-of-crop number. capture_config_sweep places its OWN camera at dist = radius / tan(FOV/2) * PAD * framing with FOV 34, PAD 1.9, YAW 0.62, PITCH -0.26, RES 760.\n\nCLOSEST PAIR ON plumb: bedded (1.0) vs steep (3.0), AT ABOUT 11% OF FRAME. Solid requires the ridged sum to exceed isoLevel + k(y+100)/300. At k=1 that is satisfied up to roughly y = +15 for a typical sum; at k=3 the same sum is exceeded only by about y = -60. The top of the mass drops roughly 75 m in a 300 m box shown at ~53% of frame height, and the newly-empty band is 75/300 x 53% = about 13% of frame height across the ~42% of frame width the body occupies - call it 11% once the silhouette's obliquity is taken off. The LARGEST pair should be bedded vs overturned, over 35%, since the mass moves from the bottom of the frame to the top.\n\nCLOSEST PAIR ON octaves, AND IT IS A PREDICTION THAT THE AXIS IS PARTLY DEGENERATE ON PURPOSE: 3 vs 6, UNDER 2%. The design named that pair too, but for the wrong reason and on the wrong scope. On this token only octaves 0-1 clear the 9.38 m Nyquist limit, so rungs 2, 3 and 6 differ ONLY in octaves that alias rather than resolve - the near-degeneracy is a three-way tie among {2, 3, 6}, not a single close pair, and 3-vs-6 is merely the member of it with the smallest amplitude difference (0.125 + 0.0625 + 0.03125 = 0.219 of the ladder's 1.969, gated down further by :174). The pair that MUST move is 1 vs 6: one octave is a smooth blobby cave with no wall texture at all, predicted over 25%.\n\nIF 3-vs-6 COMES BACK NEAR ZERO ON mc_cave AND ALIVE ON mc_inside_cave, THE AXIS HAS DONE ITS JOB AND MUST NOT BE FILED AS DEAD. The degeneracy IS the finding: it is the Nyquist limit of the extraction lattice showing up as a photograph. A dead reading on the sub-limit rungs of one token and a live one on the other is the result this axis was declared to produce.\n\nTHE RUNG THAT COULD GO WRONG IS 1, and the confound is stated rather than hidden. Dropping octaves 1-5 removes up to 0.969 of the amplitude ladder (much less after the weight gating), and against the 1/300 gradient every unit of removed sum is 300 m of horizon. So `1` will look both SMOOTHER and EMPTIER, and the two effects are not separable in a still - octaves is borrowing plumb's pixels at its bottom rung. If that dominates the tile, the low rung should come up to 2 rather than the axis being called confounded.",
-			 "framing_why": "0.75, identical to mc_cave's and for the same arithmetic - same scene, same box.",
-			 "fixture_why": "MINIMAL FIXTURE. Identical to mc_cave's: ungated synchronous _ready, seedless noise, pinned noise_offset, unread params.time. Same fallback-tunnel log check.\n\nFIXTURE, AND IT PINS THE HAZARD NAMED ABOVE RATHER THAN A SEED. {use_fallback: false, continuous_update: false} are both already the base class's defaults and neither cave .tscn overrides either, so the pin changes NOTHING about what any placement renders - it is written as a bool, straight onto the property before _ready, per the fixture-typing rule. What it buys is that the bench cannot silently take the _create_simple_cave_mesh() path and photograph the sine tunnel instead of the field, and cannot be handed a re-dispatching artifact mid-settle. The log check still stands as the real guarantee: valid only on 'Generation complete!', never on 'Creating fallback'.",
-			 "rebuild_guard": "apply_grid_config stamps each config key as config_<key> metadata, re-reads the two overrides, then compares _config_signature() - the shader's own input array, stringified at %.6f - against the signature captured at the end of _ready(). Equal means return; empty means _ready has not built yet and will read the metadata itself. Only a real change reaches _regenerate(), which re-runs run_compute / fetch_and_process_compute_data / create_mesh in _ready's order and re-captures the signature. INDEX 0 IS DELIBERATELY SKIPPED, and this is a real difference from TerrainGeneratorGyroid, which stringifies all eleven base floats. `time` is the first of the shared prefix and this subclass does NOT override _process, so the base's tick keeps advancing it for ~102 frames after spawn (12 wait-frames for GPU sync, then 90 for the mesh thread) until create_mesh sets _initial_generation_done and calls set_process(false). Including it would make the guard a CLOCK and every config call would read as a change. It cannot affect the mesh: params.time is declared in ParamsBuffer at :126 and referenced NOWHERE else in the file - grepped, not assumed. _owned IS EMPTY AND STAYS EMPTY. It is kept so the invariant is stated rather than assumed: create_mesh() rewrites array_mesh's single surface in place and the base's _create_collision() removes only the StaticBody3D it made itself, so this script creates no node it could free. A blanket free of children is what cost three scripts a pass in an earlier wave - GridInteractablesComponent attaches a _RotationTimer to the artifact after spawn. _regenerate() also returns early on use_fallback, on a null rendering_device, and on waiting_for_compute / waiting_for_meshthread: resubmitting under a dispatch already in flight is the crash release() documents, and that guard is load-bearing HERE in a way it is not on the gyroid, because this subclass keeps the base's _process and is still cycling when a config call could land.",
-			 "still_note": "Static. Same as mc_cave.",
-			 "kin": "`octaves` is SHARED, taken from noise_quarry (values [1,2,3,4]) and held also by noise_space and simplex_noise, where it asks the identical thing of a plain fBm sum. The name must BE the property name, because the sweep sets the property by name - the same constraint that forced queer_marching_cave to move a float off `resolution` before it could name an enum that. Declared here with the shipped 6 as the top rung rather than 4, so the family's [1,2,3,4] and this [1,2,3,6] can be read against each other with three rungs in common. If a count-of-scales axis measures alike on a cave and on a quarry, the family is honest. `plumb` is NEW and free across all 437 declared axis names in the corpus. `bed` is held by grid_3d_capture, `ground` by flashlight_demo and light_sphere, `law` by seven artifacts including force_field_zone, `datum` by slack_yard, `incline` by friction_ramp and normal_force_demo. `plumb` is chosen because a plumb line is the instrument that DEFINES down rather than one that measures it, which is the claim: this artifact's down is a term someone wrote, not a fact about the world it is in. NOT re-argued from wave 1: `resolution` is already spent twice in this sequence (queer_marching_cave, animated_noise_explorer) on how finely the field is SAMPLED. `octaves` is the neighbouring question - how much of the field there is to sample - and the two meet in the Nyquist arithmetic under `note`.",
-			 "shader_contract": "TWO trailing floats appended to MarchingCubes.glsl's ParamsBuffer after noiseOffsetZ, taking indices 11 and 12: `float plumbScale;` (was the implicit 1.0 on the y-gradient at :180) and `float octaves;` (was the literal 6 in the loop bound at :168, carried as a float because the whole buffer is floats and read back as int(params.octaves)). Count goes 11 -> 13 on BOTH sides. VERIFIED MECHANICALLY, not by eye: the ParamsBuffer field list was parsed out of the .glsl with comments stripped and compared index by index against TerrainGeneratorBase.get_params_array()'s eleven appends plus TerrainGenerator's two, and the same script confirmed that every `params.<field>` the shader reads is declared and that the shared eleven-field prefix is byte-for-byte the same list as in MarchingCubesFlat, OverhangTerrain, PortalTerrain, Torus, Fountain and Gyroid. GPU: time, noiseScale, isoLevel, numVoxelsPerAxis, scale, posX, posY, posZ, noiseOffsetX, noiseOffsetY, noiseOffsetZ, plumbScale, octaves. CPU: time, noise_scale, iso_level, float(num_voxels_per_axis), chunk_scale, center_position.x/.y/.z, noise_offset.x/.y/.z, _plumb_scale(), float(clampi(octaves, 1, 6)). chunk_scale is the GDScript name for the shader's `scale`. THE ORDER OF THE LAST TWO IS THE ENTIRE RISK SURFACE: swapping them makes plumb read 6.0 and octaves read 1, which produces a plausible mesh and no compile error. Only three lines of the .glsl changed - the two declarations, the loop bound, and the gradient statement. MarchingCubes.glsl is loaded by TerrainGenerator.gd and by nothing else. STALE-SHADER WARNING, WHICH THIS PASS COULD NOT ITSELF CLEAR: headless Godot does not reimport, so an edited .glsl does not reach a sweep until the orchestrator reimports. Wave 1 published sixteen byte-identical gyroid tiles and an INERT verdict on a correct axis for exactly this reason. If both axes come back at 0.00% on all four rungs, suspect the import before the design: check source_md5 in .godot/imported/*.md5 against the file hash, NOT mtime.",
-			 "crossed_wire": "REPORTED, NOT FIXED IN THIS PASS, and confirmed by reading both entries. The registry token `marchingcubes_portal_landscape` (procgen_extra.json) names res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn - the OVERHANG scene - while `mc_portal_landscape` (isosurfaces.json) names marchingcubes_portal_landscape.tscn. So the long-form name that reads like the portal artifact's sibling is bound to a different artifact, and the portal scene is reachable only through the short token. Not touched here: correcting the scene path would silently change what every existing placement of `marchingcubes_portal_landscape` renders. A SECOND DRIFT FOUND WHILE COUNTING PLACEMENTS, and it belongs to this entry's own family: mc_cave's registry `class_name` field reads TerrainGeneratorBase, not TerrainGenerator. It is the parent class, so it is not a wrong file, but it names the abstract base rather than the script the scene runs - the same shape of drift as mc_portal_landscape's class_name naming TerrainGeneratorPortals where the scene runs TerrainGeneratorUnifiedPortals.",
-			 "family": "ONE SCRIPT, THREE SCENES, SIX REGISTRY NAMES - a hidden family at SCRIPT level rather than at scene level, which is the first one this corpus has found. The five known before it (curation_station's booleans, the grab spheres, the pickup cubes, the synth racks, the translation cubes) all hide one level lower, at the scene. TerrainGenerator.gd is loaded by marchingcubes_cave.tscn (mc_cave, marchingcubes_cave), marchingcubes_inside_cave.tscn (mc_inside_cave, marchingcubes_inside_cave) and marchingcubes.tscn (mc_base, marchingcave), all three by the same script uid c2aji3u2bgmv8. THE AXES ARE DECLARED ON FOUR OF THE SIX, AND THE TWO OMISSIONS ARE DELIBERATE. marchingcubes.tscn sets use_fallback = true, so TerrainGeneratorBase._ready() returns at its line 65, MarchingCubes.glsl is never loaded, and what renders is _create_simple_cave_mesh()'s hand-written 200 m sine tunnel. Both axes are inert there BY CONSTRUCTION. The approved design listed mc_base and marchingcave under also_serves; declaring them would publish four identical pictures of that tunnel and earn a 0.00% verdict about the wrong artifact, which is precisely the false-INERT trap the standpoint gate exists to stop. So they are named here and left undeclared.",
-			 "placements": 2
+				"value_typing": "`octaves` IS DECLARED AS JSON NUMBERS AND NOT AS THE STRINGS apply_dna_block DERIVED. The tool read them off the trailing `# 1 | 2 | 3 | 6` on the @export line (the trailing-comment branch, last in check_dna_declarations' value order) and wrote [\"1\", \"2\", \"3\", \"6\"], which would make the cave tokens the only scened entries in the corpus with string-numeric axis values, against ~35 numeric axes (noise_quarry.octaves, lsystem_dungeon.depth, star_primitive.points, mc_portal_landscape.num_portals) every one of which is spelled as numbers. THE DERIVATION CHAIN SURVIVES THE RETYPE, AND THIS WAS CHECKED RATHER THAN ASSUMED: apply_dna_block compares `{k: [str(x) for x in v]}` against what it derives, and str(1) == \"1\", so both `--refresh` and a fresh `--token=... --axes=plumb,octaves` report `already matches the code` and write nothing. check_dna_declarations takes the numeric branch either way and reports ok. WHAT THE RETYPE BUYS IS THE STANDPOINT PROBE, and nothing else. build_dna_gallery reaches cabinet_sweep over a command line, so a value makes the round trip str() -> coerce() -> int and THE GALLERY IS BIT-IDENTICAL EITHER WAY. probe_anamorphic.py does not: at line 103 it reads the registry directly and keeps only `isinstance(v, str)`, writing the survivors straight into the capture spec. Spelled as strings it would hand capture_config_sweep the String \"1\" for a typed `int` export, and four identical frames would be published as doc/reports/anamorphic_<token>.json - which is the file the critic's standpoint gate reads, so a false 'flat from all five standpoints' becomes a manufactured conviction. Spelled as numbers the probe keeps nothing and returns an obvious null. The two failure modes are asymmetric; this takes the loud one. A SEPARATE CONSEQUENCE OF THE SAME FILTER, worth reporting on its own: probe_anamorphic cannot clear an INERT? verdict on ANY numeric axis in the corpus, because isinstance(str) empties the value list for all ~35 of them. That is a gap in the gate, not in this artifact.",
+				"fixture": {
+					"capture_fade_distance": 100000.0,
+					"use_fallback": false,
+					"continuous_update": false
+				},
+				"promoted": "2026-08-12",
+				"stage": "2 - variation",
+				"framing": 0.75,
+				"axes": {
+					"plumb": [
+						"bedded",
+						"overturned",
+						"weightless",
+						"steep"
+					],
+					"octaves": [
+						1,
+						2,
+						3,
+						6
+					]
+				},
+				"default": "plumb=bedded AND octaves=6. SECOND REGISTRY NAME ON THE SAME SCENE. The axes, their values, their defaults and their mechanism are mc_cave's - one script, TerrainGenerator.gd, uid c2aji3u2bgmv8 - and are declared here so a map token under this name reaches the same family. Read mc_cave's entry for the full account of both axes, the Nyquist arithmetic, the shader contract and the standpoint caveat. Identical export counts across sibling tokens is the tell for a one-scene-many-names family, and when the shared vocabulary is honest the siblings measure ALIKE - which is itself the check on this pair.\n\nREACH MEASURED FOR THIS TOKEN: 2 placements, neither reaching apply_grid_config. A bare grid cell in ISO_CaveGeneration interactables[9][9] (no `#` config, no default_params on this entry, so merged_config is empty and _apply_artifact_config is never called) and a curation_station roster in Corridor_ISO_CaveGeneration interactables[5][12] (`#artifacts:marchingcave,marchingcubes_cave#layout:row`), which misses because curation_station.gd:381 asks `has_method` of the scriptless Node3D root. Note the company it keeps in that roster: `marchingcave` is the use_fallback scene and is deliberately NOT declared - see `family`.",
+				"was": "See mc_cave. Zero @export of its own; apply_grid_config was a bare `pass`.",
+				"note": "THE SEQUENCE'S TRUTH LINE, LITERALLY. 'Define a field, extract a surface. The boundary between inside and outside becomes geometry.' This script is the one place in the wave where the SAME field is shipped twice, once to be looked at and once to be stood inside, so an axis declared here has to mean something from both sides. You are OUTSIDE this one: the scene's camera sits at (-15, 35, 50) looking in, with a DirectionalLight3D and five torches, so the field reads as a block of rock with a top surface and a sky.\n\nplumb - WHICH WAY IS DOWN, AND WHETHER THERE IS A DOWN AT ALL. Everything this shader knows about gravity is one line, MarchingCubes.glsl:180: `density = -(worldPos.y+100)/300 + density`. It is the ONLY anisotropic term in the file; the six octaves above it are isotropic ridged noise, which on its own has no up. That one linear bias is what makes low regions solid and high regions air - from outside, the block's top surface and its sky; from inside, the floor you stand on. plumbScale multiplies it and nothing else. bedded (1.0) SHIPPED. overturned (-1.0) flips the sign: the same noise at the same threshold with inside and outside exchanged, rock overhead and nothing under your feet. weightless (0.0) DELETES the term and leaves pure ridged noise - an isotropic sponge with no floor, no ceiling and no sky, filling the sampled box to all six faces. steep (3.0) triples the gradient so the field swings 3.0 across the 300 m box instead of 1.0 and the solid retreats into the bottom third: a slab with a rough top, a crawl space. The four values are held IDENTICAL across all four declared tokens on purpose - it is one const on one script, and holding them identical is what makes the galleries comparable frame for frame.\n\noctaves - HOW MANY SCALES OF ROCK SURVIVE THE LATTICE, AND THIS IS THE AXIS THAT MAKES THE SIBLINGS SAY DIFFERENT THINGS. :168 opens `for (int i = 0; i < 6; i++)`; each pass halves the amplitude and doubles the frequency, with the weight feedback at :174 gating each octave by the previous one. The literal 6 is the rung. What makes it worth declaring is arithmetic the two scenes do not share. THIS token: noise_scale 13.5, chunk_scale 300.0, so samplePos = worldPos x 0.04500 and octave 0 has ~22 m features; the marching lattice samples at 300.0/64 = 4.688 m, so its Nyquist limit is 9.38 m. The six octaves measure 22.2, 11.1, 5.5, 2.8, 1.4, 0.7 m, which puts 2 of them above the limit and the rest below it. On the sibling the same six octaves land differently, and that is the finding: mc_cave resolves TWO scales of rock, mc_inside_cave resolves FOUR, from the same script, the same shader, the same rungs and the same threshold. The artifact you stand inside can resolve two more octaves than the one you look at. That is the inside/outside asymmetry as a number rather than as a description, and it is why the axis is declared on both rather than on one.\n\nTWO CORRECTIONS TO THE APPROVED DESIGN, both found by redoing its arithmetic. (1) The design said the inside scene resolves ONE more octave than the outside one; by the Nyquist figures above it is TWO (octaves 0-3 against octaves 0-1). (2) The design said the sub-limit octaves are 'COMPUTED AND THEN THROWN AWAY BY THE EXTRACTOR'. They are not thrown away, they ALIAS: content finer than the sampling cell still perturbs the corner values, which still moves where interpolateVerts puts the crossing. So the sub-limit rungs are predicted to be nearly degenerate, not exactly degenerate, and a small non-zero reading there is the expected result rather than a failed prediction.\n\nONE MORE THING WORTH RECORDING ABOUT THE FIELD ITSELF: :170 is `snoise(samplePos) * 2 - 1` before the ridged fold, not the plain `snoise` of the usual Lague construction, so the input to `1 - abs(noise)` spans about [-3, 1] rather than [-1, 1] and the fold is off-centre. The amplitude LADDER still halves exactly (1, 0.5, 0.25, 0.125, 0.0625, 0.03125), which is what the octave arithmetic above rests on, but the per-octave term is not bounded by 1 and the summed density is not bounded by 1.969. Any claim about an absolute density total should be read as about the ladder, not about the sum.",
+				"declined": "REFUSED, `iso_level`, and the refusal is deliberate given that this wave promotes `threshold` on the torus. iso_level is the ONE export on which these two sibling scenes already disagree - 0.85 on marchingcubes_cave.tscn against 0.88 on marchingcubes_inside_cave.tscn - so an axis over it would say 'these two artifacts are one object at two thresholds', which is nearly irresistible. It is refused because on THIS shader the density carries a vertical gradient, so a constant offset to the threshold is a vertical translation of the rock/air horizon, which is the same horizon `plumb` moves: a bias of 0.15 is 45 m of horizon on a 300 m box, and plumb=steep moves it further. The two would measure each other at plumb=bedded and separate only at plumb=weightless - a conditional pair bought at the price of a confound. The torus pays gyroid_demo's bequest instead, because its field has no gradient term at all. REFUSED, the weight-gating literal 10 at :174 (`weight = max(0, min(1, noise * 10))`): it is the Lague trick that turns isotropic ridged fBm into connected tunnels and it is the closest thing in the file to an axis about whether the void is a passage or a sealed bubble - refused because at low values it also zeroes every octave after the first, so it conflates connectivity with detail and would be `octaves` wearing another name. REFUSED, `noise_offset` (a different arbitrary sample of the same field, and already fixed by the .tscn), `chunk_scale` and `center_position` (a size and a placement, both self-cancelling under an AABB-fitted camera), `continuous_update` (a rate, invisible in a still by law). REFUSED, `invert_faces`, AND THIS ONE IS A REPORTED DEFECT RATHER THAN A DECLINE. TerrainGeneratorBase:10 documents it as 'Flip triangle winding and normals (useful for objects vs caves)' and NEITHER cave scene sets it, so mc_inside_cave - the artifact whose entire premise is 'marching cubes cave seen from inside' - ships with the same winding as the landscapes, and TerrainMat.tres renders cull_back. Whichever way that winding points, the artifact named 'inside' made no different choice from the one named 'cave'. It is not an axis (two values, below the floor, and a winding order is a material-culling fact rather than a field property). It should be its own fix.",
+				"predicted_degeneracy": "PREDICTED BEFORE ANY CAPTURE, in projected-area currency, computed by hand rather than by rasterising the scene. Read it as an order-of-magnitude claim the sweep can falsify, not as the critic's own hottest-5%-of-crop number. capture_config_sweep places its OWN camera at dist = radius / tan(FOV/2) * PAD * framing with FOV 34, PAD 1.9, YAW 0.62, PITCH -0.26, RES 760.\n\nCLOSEST PAIR ON plumb: bedded (1.0) vs steep (3.0), AT ABOUT 11% OF FRAME. Solid requires the ridged sum to exceed isoLevel + k(y+100)/300. At k=1 that is satisfied up to roughly y = +15 for a typical sum; at k=3 the same sum is exceeded only by about y = -60. The top of the mass drops roughly 75 m in a 300 m box shown at ~53% of frame height, and the newly-empty band is 75/300 x 53% = about 13% of frame height across the ~42% of frame width the body occupies - call it 11% once the silhouette's obliquity is taken off. The LARGEST pair should be bedded vs overturned, over 35%, since the mass moves from the bottom of the frame to the top.\n\nCLOSEST PAIR ON octaves, AND IT IS A PREDICTION THAT THE AXIS IS PARTLY DEGENERATE ON PURPOSE: 3 vs 6, UNDER 2%. The design named that pair too, but for the wrong reason and on the wrong scope. On this token only octaves 0-1 clear the 9.38 m Nyquist limit, so rungs 2, 3 and 6 differ ONLY in octaves that alias rather than resolve - the near-degeneracy is a three-way tie among {2, 3, 6}, not a single close pair, and 3-vs-6 is merely the member of it with the smallest amplitude difference (0.125 + 0.0625 + 0.03125 = 0.219 of the ladder's 1.969, gated down further by :174). The pair that MUST move is 1 vs 6: one octave is a smooth blobby cave with no wall texture at all, predicted over 25%.\n\nIF 3-vs-6 COMES BACK NEAR ZERO ON mc_cave AND ALIVE ON mc_inside_cave, THE AXIS HAS DONE ITS JOB AND MUST NOT BE FILED AS DEAD. The degeneracy IS the finding: it is the Nyquist limit of the extraction lattice showing up as a photograph. A dead reading on the sub-limit rungs of one token and a live one on the other is the result this axis was declared to produce.\n\nTHE RUNG THAT COULD GO WRONG IS 1, and the confound is stated rather than hidden. Dropping octaves 1-5 removes up to 0.969 of the amplitude ladder (much less after the weight gating), and against the 1/300 gradient every unit of removed sum is 300 m of horizon. So `1` will look both SMOOTHER and EMPTIER, and the two effects are not separable in a still - octaves is borrowing plumb's pixels at its bottom rung. If that dominates the tile, the low rung should come up to 2 rather than the axis being called confounded.",
+				"framing_why": "0.75, identical to mc_cave's and for the same arithmetic - same scene, same box.",
+				"fixture_why": "MINIMAL FIXTURE. Identical to mc_cave's: ungated synchronous _ready, seedless noise, pinned noise_offset, unread params.time. Same fallback-tunnel log check.\n\nFIXTURE, AND IT PINS THE HAZARD NAMED ABOVE RATHER THAN A SEED. {use_fallback: false, continuous_update: false} are both already the base class's defaults and neither cave .tscn overrides either, so the pin changes NOTHING about what any placement renders - it is written as a bool, straight onto the property before _ready, per the fixture-typing rule. What it buys is that the bench cannot silently take the _create_simple_cave_mesh() path and photograph the sine tunnel instead of the field, and cannot be handed a re-dispatching artifact mid-settle. The log check still stands as the real guarantee: valid only on 'Generation complete!', never on 'Creating fallback'.",
+				"rebuild_guard": "apply_grid_config stamps each config key as config_<key> metadata, re-reads the two overrides, then compares _config_signature() - the shader's own input array, stringified at %.6f - against the signature captured at the end of _ready(). Equal means return; empty means _ready has not built yet and will read the metadata itself. Only a real change reaches _regenerate(), which re-runs run_compute / fetch_and_process_compute_data / create_mesh in _ready's order and re-captures the signature. INDEX 0 IS DELIBERATELY SKIPPED, and this is a real difference from TerrainGeneratorGyroid, which stringifies all eleven base floats. `time` is the first of the shared prefix and this subclass does NOT override _process, so the base's tick keeps advancing it for ~102 frames after spawn (12 wait-frames for GPU sync, then 90 for the mesh thread) until create_mesh sets _initial_generation_done and calls set_process(false). Including it would make the guard a CLOCK and every config call would read as a change. It cannot affect the mesh: params.time is declared in ParamsBuffer at :126 and referenced NOWHERE else in the file - grepped, not assumed. _owned IS EMPTY AND STAYS EMPTY. It is kept so the invariant is stated rather than assumed: create_mesh() rewrites array_mesh's single surface in place and the base's _create_collision() removes only the StaticBody3D it made itself, so this script creates no node it could free. A blanket free of children is what cost three scripts a pass in an earlier wave - GridInteractablesComponent attaches a _RotationTimer to the artifact after spawn. _regenerate() also returns early on use_fallback, on a null rendering_device, and on waiting_for_compute / waiting_for_meshthread: resubmitting under a dispatch already in flight is the crash release() documents, and that guard is load-bearing HERE in a way it is not on the gyroid, because this subclass keeps the base's _process and is still cycling when a config call could land.",
+				"still_note": "Static. Same as mc_cave.",
+				"kin": "`octaves` is SHARED, taken from noise_quarry (values [1,2,3,4]) and held also by noise_space and simplex_noise, where it asks the identical thing of a plain fBm sum. The name must BE the property name, because the sweep sets the property by name - the same constraint that forced queer_marching_cave to move a float off `resolution` before it could name an enum that. Declared here with the shipped 6 as the top rung rather than 4, so the family's [1,2,3,4] and this [1,2,3,6] can be read against each other with three rungs in common. If a count-of-scales axis measures alike on a cave and on a quarry, the family is honest. `plumb` is NEW and free across all 437 declared axis names in the corpus. `bed` is held by grid_3d_capture, `ground` by flashlight_demo and light_sphere, `law` by seven artifacts including force_field_zone, `datum` by slack_yard, `incline` by friction_ramp and normal_force_demo. `plumb` is chosen because a plumb line is the instrument that DEFINES down rather than one that measures it, which is the claim: this artifact's down is a term someone wrote, not a fact about the world it is in. NOT re-argued from wave 1: `resolution` is already spent twice in this sequence (queer_marching_cave, animated_noise_explorer) on how finely the field is SAMPLED. `octaves` is the neighbouring question - how much of the field there is to sample - and the two meet in the Nyquist arithmetic under `note`.",
+				"shader_contract": "TWO trailing floats appended to MarchingCubes.glsl's ParamsBuffer after noiseOffsetZ, taking indices 11 and 12: `float plumbScale;` (was the implicit 1.0 on the y-gradient at :180) and `float octaves;` (was the literal 6 in the loop bound at :168, carried as a float because the whole buffer is floats and read back as int(params.octaves)). Count goes 11 -> 13 on BOTH sides. VERIFIED MECHANICALLY, not by eye: the ParamsBuffer field list was parsed out of the .glsl with comments stripped and compared index by index against TerrainGeneratorBase.get_params_array()'s eleven appends plus TerrainGenerator's two, and the same script confirmed that every `params.<field>` the shader reads is declared and that the shared eleven-field prefix is byte-for-byte the same list as in MarchingCubesFlat, OverhangTerrain, PortalTerrain, Torus, Fountain and Gyroid. GPU: time, noiseScale, isoLevel, numVoxelsPerAxis, scale, posX, posY, posZ, noiseOffsetX, noiseOffsetY, noiseOffsetZ, plumbScale, octaves. CPU: time, noise_scale, iso_level, float(num_voxels_per_axis), chunk_scale, center_position.x/.y/.z, noise_offset.x/.y/.z, _plumb_scale(), float(clampi(octaves, 1, 6)). chunk_scale is the GDScript name for the shader's `scale`. THE ORDER OF THE LAST TWO IS THE ENTIRE RISK SURFACE: swapping them makes plumb read 6.0 and octaves read 1, which produces a plausible mesh and no compile error. Only three lines of the .glsl changed - the two declarations, the loop bound, and the gradient statement. MarchingCubes.glsl is loaded by TerrainGenerator.gd and by nothing else. STALE-SHADER WARNING, WHICH THIS PASS COULD NOT ITSELF CLEAR: headless Godot does not reimport, so an edited .glsl does not reach a sweep until the orchestrator reimports. Wave 1 published sixteen byte-identical gyroid tiles and an INERT verdict on a correct axis for exactly this reason. If both axes come back at 0.00% on all four rungs, suspect the import before the design: check source_md5 in .godot/imported/*.md5 against the file hash, NOT mtime.",
+				"crossed_wire": "REPORTED, NOT FIXED IN THIS PASS, and confirmed by reading both entries. The registry token `marchingcubes_portal_landscape` (procgen_extra.json) names res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn - the OVERHANG scene - while `mc_portal_landscape` (isosurfaces.json) names marchingcubes_portal_landscape.tscn. So the long-form name that reads like the portal artifact's sibling is bound to a different artifact, and the portal scene is reachable only through the short token. Not touched here: correcting the scene path would silently change what every existing placement of `marchingcubes_portal_landscape` renders. A SECOND DRIFT FOUND WHILE COUNTING PLACEMENTS, and it belongs to this entry's own family: mc_cave's registry `class_name` field reads TerrainGeneratorBase, not TerrainGenerator. It is the parent class, so it is not a wrong file, but it names the abstract base rather than the script the scene runs - the same shape of drift as mc_portal_landscape's class_name naming TerrainGeneratorPortals where the scene runs TerrainGeneratorUnifiedPortals.",
+				"family": "ONE SCRIPT, THREE SCENES, SIX REGISTRY NAMES - a hidden family at SCRIPT level rather than at scene level, which is the first one this corpus has found. The five known before it (curation_station's booleans, the grab spheres, the pickup cubes, the synth racks, the translation cubes) all hide one level lower, at the scene. TerrainGenerator.gd is loaded by marchingcubes_cave.tscn (mc_cave, marchingcubes_cave), marchingcubes_inside_cave.tscn (mc_inside_cave, marchingcubes_inside_cave) and marchingcubes.tscn (mc_base, marchingcave), all three by the same script uid c2aji3u2bgmv8. THE AXES ARE DECLARED ON FOUR OF THE SIX, AND THE TWO OMISSIONS ARE DELIBERATE. marchingcubes.tscn sets use_fallback = true, so TerrainGeneratorBase._ready() returns at its line 65, MarchingCubes.glsl is never loaded, and what renders is _create_simple_cave_mesh()'s hand-written 200 m sine tunnel. Both axes are inert there BY CONSTRUCTION. The approved design listed mc_base and marchingcave under also_serves; declaring them would publish four identical pictures of that tunnel and earn a 0.00% verdict about the wrong artifact, which is precisely the false-INERT trap the standpoint gate exists to stop. So they are named here and left undeclared.",
+				"placements": 2
 			},
 			"category": "unknown",
 			"complexity": "beginner",
@@ -7635,33 +7635,33 @@
 		},
 		"marchingcubes_flat_landscape": {
 			"dna": {
-			 "promoted": "2026-08-12",
-			 "stage": "2 - variation",
-			 "axes": {
-			 "interior": [
-			 "caverned",
-			 "none",
-			 "undercut",
-			 "warren"
-			 ]
-			 },
-			 "default": "interior=caverned, and it is a SHORT-CIRCUIT rather than a lookup: _cave_strength() returns the const SHIPPED_CAVE_STRENGTH = 0.4 the moment interior is `caverned` and never reaches the table at all. That const IS the literal that used to be written inline at MarchingCubesFlat.glsl:193 as `terrainDensity - (caveNoise * 0.4)`; it was moved out of the shader into a GDScript const and handed back through a uniform. GDScript's 0.4 is a float64 that PackedFloat32Array rounds to the nearest float32, and GLSL's 0.4 literal compiles to that same nearest float32 -- identical bit pattern -- so `caveNoise * params.caveStrength` multiplies the same value by the same value. THE ONE HONEST CAVEAT, stated rather than glossed, and it is gyroid_demo's caveat repeated because it is the same manoeuvre: a driver could contract `terrainDensity - caveNoise*0.4` and `terrainDensity - caveNoise*params.caveStrength` into different FMA shapes and differ in the last bit. Both are the same `a - b*c` expression, so there is no known compiler that does; the claim is 'the same floats travel the same expression', not 'the bytes are proven equal'.\n\nREACH MEASURED, and not one of the four placements passes a config key. Under mc_flat_landscape: the bare grid cell `mc_flat_landscape` in ISO_FlatTerrain, and curation_station rosters in Corridor_ISO_FlatTerrain (`#artifacts:mc_flat_landscape,mc_overhang_landscape,mc_terrain_demo#layout:row`) and Curation_Bay_isosurfaces_1. Under the sibling token marchingcubes_flat_landscape: `marchingcubes_flat_landscape:0:-2` in ProceduralGenerationMarchingcubesFlatLandscape -- a rotation and a y-offset, not a config key. NEITHER registry entry declares default_params and neither token carries a delegate, so merged_config is empty for all four and GridInteractablesComponent's `if not merged_config.is_empty()` gate means _apply_artifact_config never runs: no metadata is stamped and the guarded rebuild is unreachable from every map that exists. All four come out bit-identical.",
-			 "was": "74 lines, 60 of them a fallback plane nobody has ever seen -- a 200 m quad grid with two sin/cos hills, reached only when the local rendering device or the SPIR-V load fails. Zero @export of its own, an apply_grid_config whose whole body was `pass` (a method that existed only so the grid's has_method() check would find it), and one real argument sitting as a literal inside MarchingCubesFlat.glsl. The audit recorded the artifact as axis-less, which is true and is not the same as having no parameters.\n\nTHE SHADER BUILDS ITS DENSITY IN TWO HALVES THAT DISAGREE ABOUT WHAT KIND OF OBJECT THIS IS. `terrainDensity = (surfaceHeight - worldPos.y) / 30.0` at :189 is a HEIGHTFIELD: a function of x and z, a graph over the plane, single-valued in y everywhere, the one shape you do not need marching cubes for at all -- a quad grid draws it. Then `float density = terrainDensity - (caveNoise * 0.4);` at :193 subtracts four octaves of ridged 3D noise, and at that moment the surface stops being a graph. The whole difference between a plot and a level set is that one literal, in a sequence whose truth line is 'define a field, extract a surface'.",
-			 "note": "interior is SHARED, taken from csg_architecture_cavity (boolean_surfaces.json, rungs none|corner|court|room), where it asks whether a solid encloses a void you could occupy. Same question asked of a sampled field instead of a boolean solid, and the shared rung `none` means the same thing in both places -- no interior anywhere. Taking it rather than coining `hollowing` is the check as much as the economy: when a shared word is honest the siblings should measure ALIKE, so a landscape's cave and a wall's court clearing the 3% decoration floor at comparable numbers is itself evidence the word is doing one job. NOT `openwork` (csg_architecture_cavity's other axis, about holes in a face). NOT `resolution`, which this sequence already holds twice -- queer_marching_cave and animated_noise_explorer -- with a different question: how finely the field is SAMPLED, not how much of it is subtracted.\n\nEVERY RUNG WAS SIZED ON A FLOAT32 NUMPY REPLICA of evaluate() over the same 65^3 corner grid at the scene's own iso_level of 0.0, counting columns whose solid/air classification changes more than once down y -- which is exactly the question 'is this still a graph over the plane?' -- with triangle counts taken from the shader's own lengths[256] table:\n\n  rung       k     triangles   columns with an inside   enclosed air cells\n  none      0.0       12,824        0 of 4,225 (0.00%)                   0\n  undercut  0.3       14,996        8 of 4,225 (0.19%)                   9\n  caverned  0.4       16,382       50 of 4,225 (1.18%)                  68\n  warren    0.8       24,656      436 of 4,225 (10.32%)             1,157\n\nTHE MOST INTERESTING THING THIS PROMOTION FOUND is in the third row. The artifact that has stood in ISO_FlatTerrain all along is 98.8% HEIGHTFIELD -- it has an inside in one column in eighty-five. Nobody knew that, because until now there was nothing to compare it against. `none` is the comparison, and it is the picture nobody in this corpus has seen: the exact heightfield y = surfaceHeight, rolling hills from two snoise reads at :182-183 (amplitudes 15.0 and 5.0), smooth, single-sheeted, no overhang ANYWHERE (0 columns, measured, not assumed), marching cubes reduced to a function plotter. It is the negative half of the sequence's claim: here is what the algorithm looks like when it is not being used.\n\nTHE APPROVED DESIGN SAID undercut = 0.2 AND THE REPLICA FALSIFIED IT, which is the one place this promotion departs from its brief. At 0.2, ZERO of the 4,225 columns cross more than once and not one air cell is enclosed: 0.2 is a heightfield with its mass thinned, not an undercut. The design defined the rung as 'the first rung where the ground stops being single-valued in y', so declaring 0.2 would have put a word in the registry that the render does not contain -- the science_screen disease in a new costume, and one that no gate could catch because the enum would still match the code. Scanned: the property first appears at 0.25 (one column) and is robust by 0.30. The design's NUMBER and the design's DEFINITION were in conflict; the definition is what the axis argues, so the definition won. 0.30 also lifts the closest pair from a predicted 4.75% focus (under the critic's 6% twin bar) to 8.55%.\n\nwarren at 0.8 is void-dominated RELATIVE TO THE REST -- 10.3% of columns, an order of magnitude past the shipped rung, and the only value whose mesh AABB grows (126.6 m tall against 37-56 m) because its caves reach far below the surface band. Not yet floating islands; that needs k past 1.5, which is outside a ladder whose default has to sit inside it.\n\nTHE ARTIFACT NEXT DOOR ASKS A DIFFERENT QUESTION ON THE SAME SUBSTRATE, deliberately. ISO_FlatTerrain places mc_flat_landscape and mc_overhang_landscape in the same room. This shader has exactly ONE 3D term, so the only honest axis over it is HOW MUCH inside; the overhang shader has four, so its axis (`landform`) is WHICH TERMS. Neither had to be watered down to avoid the other.",
-			 "declined": "REFUSED, `iso_level`, and the refusal is inherited. It is real, it is the sequence's central question, and gyroid_demo's declined note explicitly bequeathed it to 'a sibling in this sequence that has no thickness term' -- which this is. It is refused HERE and paid on mc_torus_sculpture instead, because on THIS shader iso_level and interior fight for the same pixels: density = terrainDensity - caveNoise*k, so a constant offset to the threshold and a scale on the cave term both widen the same caves, and the rigid vertical translation that is the rest of iso_level's effect self-cancels under an AABB-fitted camera. The torus has no gradient term at all, so there the threshold is pure. REFUSED, the surface amplitudes 15.0 and 5.0 at :182-183: they are the relief of the heightfield, a magnitude on the half of the field this axis is not about, and the two would read as one axis with a loud rung. REFUSED, the octave count at :170 (`i < 4`): real, and promoted on the cave pair instead, where two sibling scenes resolve a different number of octaves and the axis therefore says something; here there is one scene and it would be a detail knob. REFUSED, `chunk_scale` and `center_position` -- an extent and a placement, both self-cancelling under a fitted camera. REFUSED, `continuous_update`: a RATE, invisible in a still by law, and here only a risk of photographing a half-built mesh. REFUSED, `invert_faces`: two values, below the floor, and it changes what the material culls rather than what the field is. REFUSED, a second axis of any kind -- this shader has one 3D term and one 2D term, and the 2D term is already spoken for by the paragraph above.",
-			 "fixture": {
-				"capture_fade_distance": 100000.0,
-			 "use_fallback": false,
-			 "continuous_update": false
-			 },
-			 "fixture_why": "Neither key is an axis and both are already the shipped default, so this is a GUARD rather than a pin. It is here because this artifact's silent failure mode ends in a published sheet that is a fact about the host machine rather than about the design: use_fallback true, or a local rendering device / SPIR-V load that fails on the capture host, drops straight into _create_simple_flat_mesh -- a 200 m quad grid with two sin/cos hills, computed entirely in GDScript, which does not read caveStrength or anything else the axis touches. Four frames of the same smooth plane, the axis measuring zero, and a verdict about the GPU. THE RUN IS ONLY VALID IF THE SWEEP LOG SHOWS `TerrainGeneratorFlat: Generation complete!` AND DOES NOT SHOW `Creating fallback flat landscape`. continuous_update true would keep re-dispatching under the settle. Both are written as real booleans, never as the strings `false`, because capture_config_sweep assigns fixture values straight onto the typed export before _ready and a typed bool rejects a String.",
-			 "framing": 0.45,
-			 "framing_why": "COMPUTED, then CHECKED against a render, because this subject is the letterbox case CLAUDE.md names by hand: 300 x 50 x 300 m is wide and flat, and fit-by-DIAGONAL frames the diagonal. Arithmetic first: with FOV 34 and PAD 1.9 the fitted frame height is 3.80 x radius x framing, and the box half-extents (150, 24.8, 150) project onto the sweep camera's up vector (yaw 0.62, pitch -0.26) as 150(0.144) + 24.8(0.966) + 150(0.200) = 75.6, so the subject is 151 m tall against a frame of 811 x framing -- 18.6% of frame height at framing 1.0. Then measured, by ray-marching the real density field through the sweep's own camera: the subject covers 12.0% of frame AREA at framing 1.0 and 54.2% at 0.45. Every predicted pair triples with it (none <-> caverned goes 6.50 -> 18.15 focus). 0.45 crops the far corners of a landscape, which is the right crop for a landscape. NO `layers = 0` ANCHOR, and that was checked rather than assumed: the mesh AABB is 300 x 300 in x and z at every rung and the fitted radius moves only from 212.96 (none) to 221.37 (warren), 3.9%, with the subject share holding between 53.8% and 54.9%. The camera does move -- warren's caves reach 126 m down against none's 37 m band, so the look-at centre travels 49 m in y -- but not enough to confound the pairs, and an anchor sized to the widest rung would change what GridInteractablesComponent._compute_local_aabb measures for all four placements to fix a problem that is not there.",
-			 "rebuild_guard": "apply_grid_config was a bare `pass`. It now stamps config into metadata, re-reads it, and returns unless a value the SHADER reads has actually changed. The signature is not a hand-listed tuple: it is get_params_array() itself, stringified, so if a value reaches the GPU it is in the signature and the guard cannot drift out of step with the build.\n\nWITH ONE DOCUMENTED EXCEPTION, and it is the difference between this subclass and TerrainGeneratorGyroid, which used the array whole. Gyroid overrides _process to `pass`, so its `time` is permanently 0.0 and its signature is stable. THIS subclass does not override _process, so `time` advances for the ~102 frames before the base calls set_process(false), and a signature including it would be a CLOCK -- every apply_grid_config arriving in that window would compare unequal and trigger a rebuild that changes nothing. Index 0 is skipped because `params.time` is declared in MarchingCubesFlat.glsl and referenced NOWHERE else in the file (grep returns exactly one hit, the declaration), so it cannot change the mesh. A fact checked in the shader, not an assumption about what `time` is for.\n\nOrdering is load-bearing and was read off the call site rather than assumed: GridInteractablesComponent stamps config metadata at line 1195 and calls add_child at 1220, so metadata always lands BEFORE _ready; _ready reads it, calls super._ready(), and records the signature, and the call_deferred('apply_grid_config') that follows finds the signature unchanged and returns. capture_config_sweep instead sets the export directly before add_child, which _read_metadata_overrides cannot clobber because it only writes when the matching meta key exists.\n\nThe rebuild path re-runs the same three calls _ready runs -- run_compute, fetch_and_process_compute_data, create_mesh -- and refuses to run at all while waiting_for_compute or waiting_for_meshthread is set, because resubmitting under an in-flight dispatch is the teardown segfault release() documents. Unlike the gyroid, this subclass's _process CAN hold that state for ~102 frames, so in that case _built_signature is deliberately left stale: the next call with the same config still compares unequal and retries rather than recording a rebuild that did not happen. NOTHING IS FREED BY THIS SCRIPT: it constructs no nodes at all, it keeps an _owned array that is empty by construction so a future edit has a free path to use, create_mesh rewrites array_mesh's single surface in place, and the base's _create_collision removes only the StaticBody3D it created itself. A blanket free of children is what cost three scripts a pass in the last wave -- GridInteractablesComponent attaches a _RotationTimer to a spawned artifact.",
-			 "still_note": "Static, but it needed CHECKING rather than asserting, because unlike TerrainGeneratorGyroid this subclass does NOT override _process. The base's loop therefore re-dispatches once, about 102 frames after _ready (12 for the GPU sync, 90 for the mesh thread), and then calls set_process(false). VERIFIED BY READING: `params.time` is declared in MarchingCubesFlat.glsl's ParamsBuffer and referenced nowhere else in the file, so the second dispatch computes a bit-identical field. The sweep's ~0.1 s settle photographs the first mesh, which _ready built synchronously, and the second would be the same picture if it ever arrived first. NO SEED IS NEEDED: snoise is the Ashima/stegu simplex function, a pure function of position with no seed and no time input, and the only thing that could move its sample point is noise_offset, which the .tscn fixes at (100, 50, 75) and nothing else sets. Four runs of a rung are the same mesh.\n\nTRIANGLE BUDGET, checked because the failure would be silent. TerrainGeneratorBase.process_mesh_data aborts to num_triangles = 0 above 500,000, which yields an empty mesh, which routes to the fallback plane, which measures as a dead axis. The heaviest rung is warren at 24,656 -- 4.9% of the cap. All four also stay under the 30,000 cutoff at which _create_collision skips the trimesh, so collision is built at every rung exactly as it is today; no rung changes what a player can walk on.\n\nTHE REPLICA HAD TO BE FLOAT32, AND THE REASON IS WORTH KEEPING because it will bite the next person who replicates one of these shaders. A float64 first pass disagreed with the shipped artifact by 3.7x on the mesh AABB. The cause is in the noise: `float n_ = 0.142857142857` is a TRUNCATED 1/7, and float32 rounds it to 0.14285715 -- just ABOVE 1/7 -- while float64 keeps it just below. `floor(j * ns.z)` and `floor(p * ns.z * ns.z)` therefore land on different integers for every p that is a multiple of 49, about 7% of gradient lookups, and each one picks the WRONG SIMPLEX GRADIENT. In float64 snoise ranged +-4.7 with std 0.687; in float32 it is the well-behaved +-0.96. THE VALIDATION, and it is why the numbers in dna.note and dna.predicted_degeneracy are quoted at all: the corrected replica puts the shipped rung's AABB centre at y = -9.38 against this entry's own measured -9.91, and its cell-quantised height at 56.25 m against the measured 49.62 -- inside one 4.6875 m voxel at each end, which is exactly the error a cell-quantised bound should have.",
-			 "predicted_degeneracy": "PREDICTED CLOSEST PAIR: `none` against `undercut`, at 8.55% focus / 2.11% frame, with `caverned` against `warren` the FARTHEST at 58.37% / 24.28%.\n\nTHE APPROVED DESIGN PREDICTED THE EXACT OPPOSITE -- caverned/warren closest, at about 5% of frame -- and named none/undercut as the pair it would be wrong about. It was wrong about it, and that is the whole value of having written it down.\n\nWHY THE DESIGN'S ARITHMETIC MISSED, which is the part worth keeping. It reasoned in METRES OF SURFACE DISPLACEMENT: k rises by 0.4, caveNoise is typically ~0.5, density converts to metres at the :189 gradient of 1/30, so ~6 m of movement. Measured, that model is right about the metres and useless about the picture. none -> undercut moves the top surface 6.66 m on average and undercut -> caverned only 1.89 m, yet they render 8.55% and 13.03% apart: the SMALLER displacement produces the LARGER change. What tracks the picture is added surface AREA, not vertical travel -- a cave mouth that opens adds silhouette where there was none, while a hillside that slides down 6 m looks like the same hillside. The triangle counts say it plainly (12,824 / 14,996 / 16,382 / 24,656), and warren, the only rung that adds eight thousand triangles, is the only rung that is far from everything.\n\nFULL PREDICTED TABLE, closest first. Computed by ray-marching the same float32 density field from the sweep's own standpoint (yaw 0.62, pitch -0.26, FOV 34, PAD 1.9, dna.framing 0.45) at the 160 x 160 the critic resizes to, Lambert-shaded. NO material, no lights rig, no marching-cubes interpolation, so these must not be quoted as bite numbers -- they answer only which pair is closest and whether this is a 3% axis or a 50% axis.\n\n  none     <-> undercut    8.55 focus /  2.11% frame\n  undercut <-> caverned   13.03        /  2.61%\n  none     <-> caverned   18.15        /  3.85%\n  none     <-> warren     54.85        / 24.45%\n  undercut <-> warren     55.75        / 23.92%\n  caverned <-> warren     58.37        / 24.28%\n\nSO THE PREDICTED SHAPE IS THREE CLOSE RUNGS AND ONE FAR ONE, and that is itself the prediction: anything paired with warren should land near 24% of frame and everything else between 2% and 4%. It is not a defect. The phenomenon is genuinely non-linear in k -- an inside appears at 0.25, is 1.2% of columns at the shipped 0.4 and 10.3% at 0.8 -- and an axis is allowed to be unevenly spaced when the thing it describes is, provided it says so with numbers.\n\nWHAT WOULD FALSIFY THIS. (a) If none <-> undercut comes back under 6% the critic will call it a twin, and the cause will be that a flat Lambert replica overstates how much a shallow cave mouth survives the 160 x 160 downsample; the repair is a higher `undercut`, not a dead axis. (b) If the ranking inverts and caverned <-> warren comes back closest after all, the replica is wrong about occlusion: it ray-marches a first hit with no shadowing, and warren's deep caves are exactly where a real key light would put black. (c) If ANY pair reads 0.00%, do not file it as INERT -- the shader did not reimport. Headless Godot never reimports a .glsl, and a stale compiled shader is this sequence's known way of publishing byte-identical tiles under a correct axis (gyroid_demo, sixteen of them). Check source_md5 in .godot/imported/*.md5 against the file hash, NOT the mtime, which gave seven false positives.\n\nAND ONE THING THAT SHOULD NOT MOVE AT ALL: the x and z extent. The mesh AABB is 300 x 300 in the horizontal plane at every rung, to the voxel, because the field is defined everywhere in the chunk and crosses the threshold out to every side face. If a pair's diff shows the silhouette's left or right edge moving, something is reaching chunk_scale that should not be.",
-			 "kin": "marchingcubes_flat_landscape, in procgen_extra.json, is THE SAME SCENE -- marchingcubes_flat_landscape.tscn -- and carries one map placement of its own (`marchingcubes_flat_landscape:0:-2` in ProceduralGenerationMarchingcubesFlatLandscape). The axis is declared on BOTH entries, derived from the same code by the same tool run twice, because a token nobody declares is a token the sweep cannot see. Named here rather than silently co-declared so the next pass copies it deliberately, having read this, instead of discovering the duplication from a diff.\n\nSEQUENCE-LEVEL, FOUND WHILE DOING THIS AND DELIBERATELY NOT FIXED HERE: the token `marchingcubes_portal_landscape` in procgen_extra.json resolves to Scenes/marchingcubes_overhang_landscape.tscn, while `mc_portal_landscape` in isosurfaces.json resolves to marchingcubes_portal_landscape.tscn. One of the two portal names is wired to the overhang scene. Repointing it changes what renders in every map that places it, which is not a change to smuggle inside a DNA promotion.",
-			 "placements": 4
+				"promoted": "2026-08-12",
+				"stage": "2 - variation",
+				"axes": {
+					"interior": [
+						"caverned",
+						"none",
+						"undercut",
+						"warren"
+					]
+				},
+				"default": "interior=caverned, and it is a SHORT-CIRCUIT rather than a lookup: _cave_strength() returns the const SHIPPED_CAVE_STRENGTH = 0.4 the moment interior is `caverned` and never reaches the table at all. That const IS the literal that used to be written inline at MarchingCubesFlat.glsl:193 as `terrainDensity - (caveNoise * 0.4)`; it was moved out of the shader into a GDScript const and handed back through a uniform. GDScript's 0.4 is a float64 that PackedFloat32Array rounds to the nearest float32, and GLSL's 0.4 literal compiles to that same nearest float32 -- identical bit pattern -- so `caveNoise * params.caveStrength` multiplies the same value by the same value. THE ONE HONEST CAVEAT, stated rather than glossed, and it is gyroid_demo's caveat repeated because it is the same manoeuvre: a driver could contract `terrainDensity - caveNoise*0.4` and `terrainDensity - caveNoise*params.caveStrength` into different FMA shapes and differ in the last bit. Both are the same `a - b*c` expression, so there is no known compiler that does; the claim is 'the same floats travel the same expression', not 'the bytes are proven equal'.\n\nREACH MEASURED, and not one of the four placements passes a config key. Under mc_flat_landscape: the bare grid cell `mc_flat_landscape` in ISO_FlatTerrain, and curation_station rosters in Corridor_ISO_FlatTerrain (`#artifacts:mc_flat_landscape,mc_overhang_landscape,mc_terrain_demo#layout:row`) and Curation_Bay_isosurfaces_1. Under the sibling token marchingcubes_flat_landscape: `marchingcubes_flat_landscape:0:-2` in ProceduralGenerationMarchingcubesFlatLandscape -- a rotation and a y-offset, not a config key. NEITHER registry entry declares default_params and neither token carries a delegate, so merged_config is empty for all four and GridInteractablesComponent's `if not merged_config.is_empty()` gate means _apply_artifact_config never runs: no metadata is stamped and the guarded rebuild is unreachable from every map that exists. All four come out bit-identical.",
+				"was": "74 lines, 60 of them a fallback plane nobody has ever seen -- a 200 m quad grid with two sin/cos hills, reached only when the local rendering device or the SPIR-V load fails. Zero @export of its own, an apply_grid_config whose whole body was `pass` (a method that existed only so the grid's has_method() check would find it), and one real argument sitting as a literal inside MarchingCubesFlat.glsl. The audit recorded the artifact as axis-less, which is true and is not the same as having no parameters.\n\nTHE SHADER BUILDS ITS DENSITY IN TWO HALVES THAT DISAGREE ABOUT WHAT KIND OF OBJECT THIS IS. `terrainDensity = (surfaceHeight - worldPos.y) / 30.0` at :189 is a HEIGHTFIELD: a function of x and z, a graph over the plane, single-valued in y everywhere, the one shape you do not need marching cubes for at all -- a quad grid draws it. Then `float density = terrainDensity - (caveNoise * 0.4);` at :193 subtracts four octaves of ridged 3D noise, and at that moment the surface stops being a graph. The whole difference between a plot and a level set is that one literal, in a sequence whose truth line is 'define a field, extract a surface'.",
+				"note": "interior is SHARED, taken from csg_architecture_cavity (boolean_surfaces.json, rungs none|corner|court|room), where it asks whether a solid encloses a void you could occupy. Same question asked of a sampled field instead of a boolean solid, and the shared rung `none` means the same thing in both places -- no interior anywhere. Taking it rather than coining `hollowing` is the check as much as the economy: when a shared word is honest the siblings should measure ALIKE, so a landscape's cave and a wall's court clearing the 3% decoration floor at comparable numbers is itself evidence the word is doing one job. NOT `openwork` (csg_architecture_cavity's other axis, about holes in a face). NOT `resolution`, which this sequence already holds twice -- queer_marching_cave and animated_noise_explorer -- with a different question: how finely the field is SAMPLED, not how much of it is subtracted.\n\nEVERY RUNG WAS SIZED ON A FLOAT32 NUMPY REPLICA of evaluate() over the same 65^3 corner grid at the scene's own iso_level of 0.0, counting columns whose solid/air classification changes more than once down y -- which is exactly the question 'is this still a graph over the plane?' -- with triangle counts taken from the shader's own lengths[256] table:\n\n  rung       k     triangles   columns with an inside   enclosed air cells\n  none      0.0       12,824        0 of 4,225 (0.00%)                   0\n  undercut  0.3       14,996        8 of 4,225 (0.19%)                   9\n  caverned  0.4       16,382       50 of 4,225 (1.18%)                  68\n  warren    0.8       24,656      436 of 4,225 (10.32%)             1,157\n\nTHE MOST INTERESTING THING THIS PROMOTION FOUND is in the third row. The artifact that has stood in ISO_FlatTerrain all along is 98.8% HEIGHTFIELD -- it has an inside in one column in eighty-five. Nobody knew that, because until now there was nothing to compare it against. `none` is the comparison, and it is the picture nobody in this corpus has seen: the exact heightfield y = surfaceHeight, rolling hills from two snoise reads at :182-183 (amplitudes 15.0 and 5.0), smooth, single-sheeted, no overhang ANYWHERE (0 columns, measured, not assumed), marching cubes reduced to a function plotter. It is the negative half of the sequence's claim: here is what the algorithm looks like when it is not being used.\n\nTHE APPROVED DESIGN SAID undercut = 0.2 AND THE REPLICA FALSIFIED IT, which is the one place this promotion departs from its brief. At 0.2, ZERO of the 4,225 columns cross more than once and not one air cell is enclosed: 0.2 is a heightfield with its mass thinned, not an undercut. The design defined the rung as 'the first rung where the ground stops being single-valued in y', so declaring 0.2 would have put a word in the registry that the render does not contain -- the science_screen disease in a new costume, and one that no gate could catch because the enum would still match the code. Scanned: the property first appears at 0.25 (one column) and is robust by 0.30. The design's NUMBER and the design's DEFINITION were in conflict; the definition is what the axis argues, so the definition won. 0.30 also lifts the closest pair from a predicted 4.75% focus (under the critic's 6% twin bar) to 8.55%.\n\nwarren at 0.8 is void-dominated RELATIVE TO THE REST -- 10.3% of columns, an order of magnitude past the shipped rung, and the only value whose mesh AABB grows (126.6 m tall against 37-56 m) because its caves reach far below the surface band. Not yet floating islands; that needs k past 1.5, which is outside a ladder whose default has to sit inside it.\n\nTHE ARTIFACT NEXT DOOR ASKS A DIFFERENT QUESTION ON THE SAME SUBSTRATE, deliberately. ISO_FlatTerrain places mc_flat_landscape and mc_overhang_landscape in the same room. This shader has exactly ONE 3D term, so the only honest axis over it is HOW MUCH inside; the overhang shader has four, so its axis (`landform`) is WHICH TERMS. Neither had to be watered down to avoid the other.",
+				"declined": "REFUSED, `iso_level`, and the refusal is inherited. It is real, it is the sequence's central question, and gyroid_demo's declined note explicitly bequeathed it to 'a sibling in this sequence that has no thickness term' -- which this is. It is refused HERE and paid on mc_torus_sculpture instead, because on THIS shader iso_level and interior fight for the same pixels: density = terrainDensity - caveNoise*k, so a constant offset to the threshold and a scale on the cave term both widen the same caves, and the rigid vertical translation that is the rest of iso_level's effect self-cancels under an AABB-fitted camera. The torus has no gradient term at all, so there the threshold is pure. REFUSED, the surface amplitudes 15.0 and 5.0 at :182-183: they are the relief of the heightfield, a magnitude on the half of the field this axis is not about, and the two would read as one axis with a loud rung. REFUSED, the octave count at :170 (`i < 4`): real, and promoted on the cave pair instead, where two sibling scenes resolve a different number of octaves and the axis therefore says something; here there is one scene and it would be a detail knob. REFUSED, `chunk_scale` and `center_position` -- an extent and a placement, both self-cancelling under a fitted camera. REFUSED, `continuous_update`: a RATE, invisible in a still by law, and here only a risk of photographing a half-built mesh. REFUSED, `invert_faces`: two values, below the floor, and it changes what the material culls rather than what the field is. REFUSED, a second axis of any kind -- this shader has one 3D term and one 2D term, and the 2D term is already spoken for by the paragraph above.",
+				"fixture": {
+					"capture_fade_distance": 100000.0,
+					"use_fallback": false,
+					"continuous_update": false
+				},
+				"fixture_why": "Neither key is an axis and both are already the shipped default, so this is a GUARD rather than a pin. It is here because this artifact's silent failure mode ends in a published sheet that is a fact about the host machine rather than about the design: use_fallback true, or a local rendering device / SPIR-V load that fails on the capture host, drops straight into _create_simple_flat_mesh -- a 200 m quad grid with two sin/cos hills, computed entirely in GDScript, which does not read caveStrength or anything else the axis touches. Four frames of the same smooth plane, the axis measuring zero, and a verdict about the GPU. THE RUN IS ONLY VALID IF THE SWEEP LOG SHOWS `TerrainGeneratorFlat: Generation complete!` AND DOES NOT SHOW `Creating fallback flat landscape`. continuous_update true would keep re-dispatching under the settle. Both are written as real booleans, never as the strings `false`, because capture_config_sweep assigns fixture values straight onto the typed export before _ready and a typed bool rejects a String.",
+				"framing": 0.45,
+				"framing_why": "COMPUTED, then CHECKED against a render, because this subject is the letterbox case CLAUDE.md names by hand: 300 x 50 x 300 m is wide and flat, and fit-by-DIAGONAL frames the diagonal. Arithmetic first: with FOV 34 and PAD 1.9 the fitted frame height is 3.80 x radius x framing, and the box half-extents (150, 24.8, 150) project onto the sweep camera's up vector (yaw 0.62, pitch -0.26) as 150(0.144) + 24.8(0.966) + 150(0.200) = 75.6, so the subject is 151 m tall against a frame of 811 x framing -- 18.6% of frame height at framing 1.0. Then measured, by ray-marching the real density field through the sweep's own camera: the subject covers 12.0% of frame AREA at framing 1.0 and 54.2% at 0.45. Every predicted pair triples with it (none <-> caverned goes 6.50 -> 18.15 focus). 0.45 crops the far corners of a landscape, which is the right crop for a landscape. NO `layers = 0` ANCHOR, and that was checked rather than assumed: the mesh AABB is 300 x 300 in x and z at every rung and the fitted radius moves only from 212.96 (none) to 221.37 (warren), 3.9%, with the subject share holding between 53.8% and 54.9%. The camera does move -- warren's caves reach 126 m down against none's 37 m band, so the look-at centre travels 49 m in y -- but not enough to confound the pairs, and an anchor sized to the widest rung would change what GridInteractablesComponent._compute_local_aabb measures for all four placements to fix a problem that is not there.",
+				"rebuild_guard": "apply_grid_config was a bare `pass`. It now stamps config into metadata, re-reads it, and returns unless a value the SHADER reads has actually changed. The signature is not a hand-listed tuple: it is get_params_array() itself, stringified, so if a value reaches the GPU it is in the signature and the guard cannot drift out of step with the build.\n\nWITH ONE DOCUMENTED EXCEPTION, and it is the difference between this subclass and TerrainGeneratorGyroid, which used the array whole. Gyroid overrides _process to `pass`, so its `time` is permanently 0.0 and its signature is stable. THIS subclass does not override _process, so `time` advances for the ~102 frames before the base calls set_process(false), and a signature including it would be a CLOCK -- every apply_grid_config arriving in that window would compare unequal and trigger a rebuild that changes nothing. Index 0 is skipped because `params.time` is declared in MarchingCubesFlat.glsl and referenced NOWHERE else in the file (grep returns exactly one hit, the declaration), so it cannot change the mesh. A fact checked in the shader, not an assumption about what `time` is for.\n\nOrdering is load-bearing and was read off the call site rather than assumed: GridInteractablesComponent stamps config metadata at line 1195 and calls add_child at 1220, so metadata always lands BEFORE _ready; _ready reads it, calls super._ready(), and records the signature, and the call_deferred('apply_grid_config') that follows finds the signature unchanged and returns. capture_config_sweep instead sets the export directly before add_child, which _read_metadata_overrides cannot clobber because it only writes when the matching meta key exists.\n\nThe rebuild path re-runs the same three calls _ready runs -- run_compute, fetch_and_process_compute_data, create_mesh -- and refuses to run at all while waiting_for_compute or waiting_for_meshthread is set, because resubmitting under an in-flight dispatch is the teardown segfault release() documents. Unlike the gyroid, this subclass's _process CAN hold that state for ~102 frames, so in that case _built_signature is deliberately left stale: the next call with the same config still compares unequal and retries rather than recording a rebuild that did not happen. NOTHING IS FREED BY THIS SCRIPT: it constructs no nodes at all, it keeps an _owned array that is empty by construction so a future edit has a free path to use, create_mesh rewrites array_mesh's single surface in place, and the base's _create_collision removes only the StaticBody3D it created itself. A blanket free of children is what cost three scripts a pass in the last wave -- GridInteractablesComponent attaches a _RotationTimer to a spawned artifact.",
+				"still_note": "Static, but it needed CHECKING rather than asserting, because unlike TerrainGeneratorGyroid this subclass does NOT override _process. The base's loop therefore re-dispatches once, about 102 frames after _ready (12 for the GPU sync, 90 for the mesh thread), and then calls set_process(false). VERIFIED BY READING: `params.time` is declared in MarchingCubesFlat.glsl's ParamsBuffer and referenced nowhere else in the file, so the second dispatch computes a bit-identical field. The sweep's ~0.1 s settle photographs the first mesh, which _ready built synchronously, and the second would be the same picture if it ever arrived first. NO SEED IS NEEDED: snoise is the Ashima/stegu simplex function, a pure function of position with no seed and no time input, and the only thing that could move its sample point is noise_offset, which the .tscn fixes at (100, 50, 75) and nothing else sets. Four runs of a rung are the same mesh.\n\nTRIANGLE BUDGET, checked because the failure would be silent. TerrainGeneratorBase.process_mesh_data aborts to num_triangles = 0 above 500,000, which yields an empty mesh, which routes to the fallback plane, which measures as a dead axis. The heaviest rung is warren at 24,656 -- 4.9% of the cap. All four also stay under the 30,000 cutoff at which _create_collision skips the trimesh, so collision is built at every rung exactly as it is today; no rung changes what a player can walk on.\n\nTHE REPLICA HAD TO BE FLOAT32, AND THE REASON IS WORTH KEEPING because it will bite the next person who replicates one of these shaders. A float64 first pass disagreed with the shipped artifact by 3.7x on the mesh AABB. The cause is in the noise: `float n_ = 0.142857142857` is a TRUNCATED 1/7, and float32 rounds it to 0.14285715 -- just ABOVE 1/7 -- while float64 keeps it just below. `floor(j * ns.z)` and `floor(p * ns.z * ns.z)` therefore land on different integers for every p that is a multiple of 49, about 7% of gradient lookups, and each one picks the WRONG SIMPLEX GRADIENT. In float64 snoise ranged +-4.7 with std 0.687; in float32 it is the well-behaved +-0.96. THE VALIDATION, and it is why the numbers in dna.note and dna.predicted_degeneracy are quoted at all: the corrected replica puts the shipped rung's AABB centre at y = -9.38 against this entry's own measured -9.91, and its cell-quantised height at 56.25 m against the measured 49.62 -- inside one 4.6875 m voxel at each end, which is exactly the error a cell-quantised bound should have.",
+				"predicted_degeneracy": "PREDICTED CLOSEST PAIR: `none` against `undercut`, at 8.55% focus / 2.11% frame, with `caverned` against `warren` the FARTHEST at 58.37% / 24.28%.\n\nTHE APPROVED DESIGN PREDICTED THE EXACT OPPOSITE -- caverned/warren closest, at about 5% of frame -- and named none/undercut as the pair it would be wrong about. It was wrong about it, and that is the whole value of having written it down.\n\nWHY THE DESIGN'S ARITHMETIC MISSED, which is the part worth keeping. It reasoned in METRES OF SURFACE DISPLACEMENT: k rises by 0.4, caveNoise is typically ~0.5, density converts to metres at the :189 gradient of 1/30, so ~6 m of movement. Measured, that model is right about the metres and useless about the picture. none -> undercut moves the top surface 6.66 m on average and undercut -> caverned only 1.89 m, yet they render 8.55% and 13.03% apart: the SMALLER displacement produces the LARGER change. What tracks the picture is added surface AREA, not vertical travel -- a cave mouth that opens adds silhouette where there was none, while a hillside that slides down 6 m looks like the same hillside. The triangle counts say it plainly (12,824 / 14,996 / 16,382 / 24,656), and warren, the only rung that adds eight thousand triangles, is the only rung that is far from everything.\n\nFULL PREDICTED TABLE, closest first. Computed by ray-marching the same float32 density field from the sweep's own standpoint (yaw 0.62, pitch -0.26, FOV 34, PAD 1.9, dna.framing 0.45) at the 160 x 160 the critic resizes to, Lambert-shaded. NO material, no lights rig, no marching-cubes interpolation, so these must not be quoted as bite numbers -- they answer only which pair is closest and whether this is a 3% axis or a 50% axis.\n\n  none     <-> undercut    8.55 focus /  2.11% frame\n  undercut <-> caverned   13.03        /  2.61%\n  none     <-> caverned   18.15        /  3.85%\n  none     <-> warren     54.85        / 24.45%\n  undercut <-> warren     55.75        / 23.92%\n  caverned <-> warren     58.37        / 24.28%\n\nSO THE PREDICTED SHAPE IS THREE CLOSE RUNGS AND ONE FAR ONE, and that is itself the prediction: anything paired with warren should land near 24% of frame and everything else between 2% and 4%. It is not a defect. The phenomenon is genuinely non-linear in k -- an inside appears at 0.25, is 1.2% of columns at the shipped 0.4 and 10.3% at 0.8 -- and an axis is allowed to be unevenly spaced when the thing it describes is, provided it says so with numbers.\n\nWHAT WOULD FALSIFY THIS. (a) If none <-> undercut comes back under 6% the critic will call it a twin, and the cause will be that a flat Lambert replica overstates how much a shallow cave mouth survives the 160 x 160 downsample; the repair is a higher `undercut`, not a dead axis. (b) If the ranking inverts and caverned <-> warren comes back closest after all, the replica is wrong about occlusion: it ray-marches a first hit with no shadowing, and warren's deep caves are exactly where a real key light would put black. (c) If ANY pair reads 0.00%, do not file it as INERT -- the shader did not reimport. Headless Godot never reimports a .glsl, and a stale compiled shader is this sequence's known way of publishing byte-identical tiles under a correct axis (gyroid_demo, sixteen of them). Check source_md5 in .godot/imported/*.md5 against the file hash, NOT the mtime, which gave seven false positives.\n\nAND ONE THING THAT SHOULD NOT MOVE AT ALL: the x and z extent. The mesh AABB is 300 x 300 in the horizontal plane at every rung, to the voxel, because the field is defined everywhere in the chunk and crosses the threshold out to every side face. If a pair's diff shows the silhouette's left or right edge moving, something is reaching chunk_scale that should not be.",
+				"kin": "marchingcubes_flat_landscape, in procgen_extra.json, is THE SAME SCENE -- marchingcubes_flat_landscape.tscn -- and carries one map placement of its own (`marchingcubes_flat_landscape:0:-2` in ProceduralGenerationMarchingcubesFlatLandscape). The axis is declared on BOTH entries, derived from the same code by the same tool run twice, because a token nobody declares is a token the sweep cannot see. Named here rather than silently co-declared so the next pass copies it deliberately, having read this, instead of discovering the duplication from a diff.\n\nSEQUENCE-LEVEL, FOUND WHILE DOING THIS AND DELIBERATELY NOT FIXED HERE: the token `marchingcubes_portal_landscape` in procgen_extra.json resolves to Scenes/marchingcubes_overhang_landscape.tscn, while `mc_portal_landscape` in isosurfaces.json resolves to marchingcubes_portal_landscape.tscn. One of the two portal names is wired to the overhang scene. Repointing it changes what renders in every map that places it, which is not a change to smuggle inside a DNA promotion.",
+				"placements": 4
 			},
 			"category": "unknown",
 			"complexity": "beginner",
@@ -7757,48 +7757,48 @@
 				"max_dimension_m": 300.0,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			},
-			"qfep_connection": "The threshold sits at 0.05 where the cave variant holds 0.88 \u2014 landscape and cavern are the same density field read at different iso-levels, ground and rock separated by one float. When the compute shader fails, sine-summed hills quietly stand in, and the ontology swap goes unnoticed."
+			"qfep_connection": "The threshold sits at 0.05 where the cave variant holds 0.88 — landscape and cavern are the same density field read at different iso-levels, ground and rock separated by one float. When the compute shader fails, sine-summed hills quietly stand in, and the ontology swap goes unnoticed."
 		},
 		"marchingcubes_inside_cave": {
 			"dna": {
-			 "value_typing": "`octaves` IS DECLARED AS JSON NUMBERS AND NOT AS THE STRINGS apply_dna_block DERIVED. The tool read them off the trailing `# 1 | 2 | 3 | 6` on the @export line (priority 5 in check_dna_declarations' value order) and wrote [\"1\", \"2\", \"3\", \"6\"], which made the four cave tokens the ONLY scened entries in this corpus with string-numeric axis values - against about 35 numeric axes (noise_quarry.octaves, lsystem_dungeon.depth, star_primitive.points, multiple_ring.count and the rest) every one of which is spelled as numbers. THE DERIVATION CHAIN SURVIVES THE RETYPE AND THIS WAS CHECKED RATHER THAN ASSUMED: apply_dna_block compares `{k: [str(x) for x in v]}` against what it derives, so both `--refresh` and a fresh `--token=mc_inside_cave --axes=plumb,octaves` report `already matches the code` and write nothing. WHAT THE RETYPE BUYS IS THE STANDPOINT PROBE, and nothing else. build_dna_gallery reaches cabinet_sweep over a command line, so a value makes the round trip str() -> coerce() -> int and THE GALLERY IS BIT-IDENTICAL EITHER WAY. probe_anamorphic.py does not: it reads the registry directly, keeps only `isinstance(v, str)`, and writes the value straight into the capture spec. Spelled as strings it would hand capture_config_sweep the String \"1\" for a typed `int` export, where _coerce warns `the tile is not a variant` and passes it through - four identical frames published as doc/reports/anamorphic_mc_inside_cave.json, which is the file the critic's standpoint gate reads, and a false `flat from all five standpoints` is a manufactured conviction. Spelled as numbers the probe keeps nothing, renders no pairs and returns an obvious null. The two failure modes are asymmetric - one can only fail loudly - so this takes the loud one. A SECOND, SEPARATE CONSEQUENCE, since it is the same filter: probe_anamorphic cannot clear an INERT? verdict on ANY numeric axis in the corpus, because the isinstance(str) filter empties the value list for all ~35 of them. That is a gap in the gate, not in this artifact. THE SIBLING PAIR mc_cave AND marchingcubes_cave STILL CARRY THE STRINGS and want the same one-line retype.",
-			 "fixture": {
-				"capture_fade_distance": 100000.0,
-			 	"use_fallback": false,
-			 	"continuous_update": false
-			 },
-			 "promoted": "2026-08-12",
-			 "stage": "2 - variation",
-			 "framing": 0.75,
-			 "axes": {
-			  "plumb": [
-			   "bedded",
-			   "overturned",
-			   "weightless",
-			   "steep"
-			  ],
-			  "octaves": [
-			   1,
-			   2,
-			   3,
-			   6
-			  ]
-			 },
-			 "default": "plumb=bedded AND octaves=6. SECOND REGISTRY NAME ON THE SAME SCENE. The axes, their values, their defaults and their mechanism are mc_inside_cave's - one script, TerrainGenerator.gd, uid c2aji3u2bgmv8 - and are declared here so a map token under this name reaches the same family. Read mc_inside_cave's entry for the full account of both axes, the Nyquist arithmetic, the shader contract and the standpoint caveat. Identical export counts across sibling tokens is the tell for a one-scene-many-names family, and when the shared vocabulary is honest the siblings measure ALIKE - which is itself the check on this pair.\n\nREACH MEASURED FOR THIS TOKEN: 1 placement, and it does not reach apply_grid_config. A bare grid cell in ProceduralGenerationMarchingCubesInsideCave interactables[6][5], no `#` config, no default_params on this entry, so merged_config is empty and GridInteractablesComponent's `if not merged_config.is_empty()` gate means the method is never called.",
-			 "was": "See mc_inside_cave. Zero @export of its own; apply_grid_config was a bare `pass`.",
-			 "note": "THE SEQUENCE'S TRUTH LINE, LITERALLY. 'Define a field, extract a surface. The boundary between inside and outside becomes geometry.' This script is the one place in the wave where the SAME field is shipped twice, once to be looked at and once to be stood inside, so an axis declared here has to mean something from both sides. You are INSIDE this one: the scene puts a Camera3D at (0, 5, 15) within the field with an OmniLight3D torch parented to it and no DirectionalLight3D anywhere, which is the actual reason it reads as an interior rather than as a block of rock.\n\nplumb - WHICH WAY IS DOWN, AND WHETHER THERE IS A DOWN AT ALL. Everything this shader knows about gravity is one line, MarchingCubes.glsl:180: `density = -(worldPos.y+100)/300 + density`. It is the ONLY anisotropic term in the file; the six octaves above it are isotropic ridged noise, which on its own has no up. That one linear bias is what makes low regions solid and high regions air - from outside, the block's top surface and its sky; from inside, the floor you stand on. plumbScale multiplies it and nothing else. bedded (1.0) SHIPPED. overturned (-1.0) flips the sign: the same noise at the same threshold with inside and outside exchanged, rock overhead and nothing under your feet. weightless (0.0) DELETES the term and leaves pure ridged noise - an isotropic sponge with no floor, no ceiling and no sky, filling the sampled box to all six faces. steep (3.0) triples the gradient so the field swings 3.0 across the 280 m box instead of 1.0 and the solid retreats into the bottom third: a slab with a rough top, a crawl space. The four values are held IDENTICAL across all four declared tokens on purpose - it is one const on one script, and holding them identical is what makes the galleries comparable frame for frame.\n\noctaves - HOW MANY SCALES OF ROCK SURVIVE THE LATTICE, AND THIS IS THE AXIS THAT MAKES THE SIBLINGS SAY DIFFERENT THINGS. :168 opens `for (int i = 0; i < 6; i++)`; each pass halves the amplitude and doubles the frequency, with the weight feedback at :174 gating each octave by the previous one. The literal 6 is the rung. What makes it worth declaring is arithmetic the two scenes do not share. THIS token: noise_scale 3.8, chunk_scale 280.0, so samplePos = worldPos x 0.01357 and octave 0 has ~74 m features; the marching lattice samples at 280.0/64 = 4.375 m, so its Nyquist limit is 8.75 m. The six octaves measure 73.7, 36.9, 18.4, 9.2, 4.6, 2.3 m, which puts 4 of them above the limit and the rest below it. On the sibling the same six octaves land differently, and that is the finding: mc_cave resolves TWO scales of rock, mc_inside_cave resolves FOUR, from the same script, the same shader, the same rungs and the same threshold. The artifact you stand inside can resolve two more octaves than the one you look at. That is the inside/outside asymmetry as a number rather than as a description, and it is why the axis is declared on both rather than on one.\n\nTWO CORRECTIONS TO THE APPROVED DESIGN, both found by redoing its arithmetic. (1) The design said the inside scene resolves ONE more octave than the outside one; by the Nyquist figures above it is TWO (octaves 0-3 against octaves 0-1). (2) The design said the sub-limit octaves are 'COMPUTED AND THEN THROWN AWAY BY THE EXTRACTOR'. They are not thrown away, they ALIAS: content finer than the sampling cell still perturbs the corner values, which still moves where interpolateVerts puts the crossing. So the sub-limit rungs are predicted to be nearly degenerate, not exactly degenerate, and a small non-zero reading there is the expected result rather than a failed prediction.\n\nONE MORE THING WORTH RECORDING ABOUT THE FIELD ITSELF: :170 is `snoise(samplePos) * 2 - 1` before the ridged fold, not the plain `snoise` of the usual Lague construction, so the input to `1 - abs(noise)` spans about [-3, 1] rather than [-1, 1] and the fold is off-centre. The amplitude LADDER still halves exactly (1, 0.5, 0.25, 0.125, 0.0625, 0.03125), which is what the octave arithmetic above rests on, but the per-octave term is not bounded by 1 and the summed density is not bounded by 1.969. Any claim about an absolute density total should be read as about the ladder, not about the sum.",
-			 "declined": "REFUSED, `iso_level`, and the refusal is deliberate given that this wave promotes `threshold` on the torus. iso_level is the ONE export on which these two sibling scenes already disagree - 0.85 on marchingcubes_cave.tscn against 0.88 on marchingcubes_inside_cave.tscn - so an axis over it would say 'these two artifacts are one object at two thresholds', which is nearly irresistible. It is refused because on THIS shader the density carries a vertical gradient, so a constant offset to the threshold is a vertical translation of the rock/air horizon, which is the same horizon `plumb` moves: a bias of 0.15 is 45 m of horizon on a 300 m box, and plumb=steep moves it further. The two would measure each other at plumb=bedded and separate only at plumb=weightless - a conditional pair bought at the price of a confound. The torus pays gyroid_demo's bequest instead, because its field has no gradient term at all. REFUSED, the weight-gating literal 10 at :174 (`weight = max(0, min(1, noise * 10))`): it is the Lague trick that turns isotropic ridged fBm into connected tunnels and it is the closest thing in the file to an axis about whether the void is a passage or a sealed bubble - refused because at low values it also zeroes every octave after the first, so it conflates connectivity with detail and would be `octaves` wearing another name. REFUSED, `noise_offset` (a different arbitrary sample of the same field, and already fixed by the .tscn), `chunk_scale` and `center_position` (a size and a placement, both self-cancelling under an AABB-fitted camera), `continuous_update` (a rate, invisible in a still by law). REFUSED, `invert_faces`, AND THIS ONE IS A REPORTED DEFECT RATHER THAN A DECLINE. TerrainGeneratorBase:10 documents it as 'Flip triangle winding and normals (useful for objects vs caves)' and NEITHER cave scene sets it, so mc_inside_cave - the artifact whose entire premise is 'marching cubes cave seen from inside' - ships with the same winding as the landscapes, and TerrainMat.tres renders cull_back. Whichever way that winding points, the artifact named 'inside' made no different choice from the one named 'cave'. It is not an axis (two values, below the floor, and a winding order is a material-culling fact rather than a field property). It should be its own fix.",
-			 "predicted_degeneracy": "PREDICTED BEFORE ANY CAPTURE, in projected-area currency, computed by hand rather than by rasterising the scene. Read it as an order-of-magnitude claim the sweep can falsify, not as the critic's own hottest-5%-of-crop number. capture_config_sweep places its OWN camera at dist = radius / tan(FOV/2) * PAD * framing with FOV 34, PAD 1.9, YAW 0.62, PITCH -0.26, RES 760.\n\nCLOSEST PAIR ON plumb: bedded (1.0) vs steep (3.0), AT ABOUT 11% OF FRAME. Solid requires the ridged sum to exceed isoLevel + k(y+100)/300. At k=1 that is satisfied up to roughly y = +15 for a typical sum; at k=3 the same sum is exceeded only by about y = -60. The top of the mass drops roughly 75 m in a 280 m box shown at ~53% of frame height, and the newly-empty band is 75/280 x 53% = about 13% of frame height across the ~42% of frame width the body occupies - call it 11% once the silhouette's obliquity is taken off. The LARGEST pair should be bedded vs overturned, over 35%, since the mass moves from the bottom of the frame to the top.\n\nCLOSEST PAIR ON octaves, AND IT IS A PREDICTION THAT THE AXIS IS PARTLY DEGENERATE ON PURPOSE: 3 vs 6, UNDER 2%. The design named that pair too, but for the wrong reason and on the wrong scope. On this token only octaves 0-3 clear the 8.75 m Nyquist limit, so rungs 2, 3 and 6 differ ONLY in octaves that alias rather than resolve - the near-degeneracy is a three-way tie among {2, 3, 6}, not a single close pair, and 3-vs-6 is merely the member of it with the smallest amplitude difference (0.125 + 0.0625 + 0.03125 = 0.219 of the ladder's 1.969, gated down further by :174). The pair that MUST move is 1 vs 6: one octave is a smooth blobby cave with no wall texture at all, predicted over 25%.\n\nIF 3-vs-6 COMES BACK NEAR ZERO ON mc_cave AND ALIVE ON mc_inside_cave, THE AXIS HAS DONE ITS JOB AND MUST NOT BE FILED AS DEAD. The degeneracy IS the finding: it is the Nyquist limit of the extraction lattice showing up as a photograph. A dead reading on the sub-limit rungs of one token and a live one on the other is the result this axis was declared to produce.\n\nTHE RUNG THAT COULD GO WRONG IS 1, and the confound is stated rather than hidden. Dropping octaves 1-5 removes up to 0.969 of the amplitude ladder (much less after the weight gating), and against the 1/300 gradient every unit of removed sum is 300 m of horizon. So `1` will look both SMOOTHER and EMPTIER, and the two effects are not separable in a still - octaves is borrowing plumb's pixels at its bottom rung. If that dominates the tile, the low rung should come up to 2 rather than the axis being called confounded.",
-			 "framing_why": "0.75, identical to mc_inside_cave's - same scene, same 280 m box.",
-			 "fixture_why": "NO FIXTURE. Identical to mc_inside_cave's. Same fallback-tunnel log check. INSTALLED AS WELL AS ARGUED (2026-08-12): this entry previously carried this paragraph and NO `fixture` key, so the guard it describes was prose only - cabinet_sweep.py reads `dna.fixture` and probe_anamorphic.py reads it again to render under the same conditions, and both were getting an empty dict. The dict is now present. It is honestly a WEAK guard and that is worth stating rather than overselling: use_fallback and continuous_update are both already false by export default and neither .tscn sets them, and a rendering device that fails on the capture host routes through init_compute() -> _create_fallback_mesh() without consulting use_fallback at all. So the dict cannot prevent the fallback sheet; only the log line can detect it. What the dict does buy is that the gallery and the standpoint probe apply the same config, which is the requirement probe_anamorphic's own header sets out.",
-			 "rebuild_guard": "apply_grid_config stamps each config key as config_<key> metadata, re-reads the two overrides, then compares _config_signature() - the shader's own input array, stringified at %.6f - against the signature captured at the end of _ready(). Equal means return; empty means _ready has not built yet and will read the metadata itself. Only a real change reaches _regenerate(), which re-runs run_compute / fetch_and_process_compute_data / create_mesh in _ready's order and re-captures the signature. INDEX 0 IS DELIBERATELY SKIPPED, and this is a real difference from TerrainGeneratorGyroid, which stringifies all eleven base floats. `time` is the first of the shared prefix and this subclass does NOT override _process, so the base's tick keeps advancing it for ~102 frames after spawn (12 wait-frames for GPU sync, then 90 for the mesh thread) until create_mesh sets _initial_generation_done and calls set_process(false). Including it would make the guard a CLOCK and every config call would read as a change. It cannot affect the mesh: params.time is declared in ParamsBuffer at :126 and referenced NOWHERE else in the file - grepped, not assumed. _owned IS EMPTY AND STAYS EMPTY. It is kept so the invariant is stated rather than assumed: create_mesh() rewrites array_mesh's single surface in place and the base's _create_collision() removes only the StaticBody3D it made itself, so this script creates no node it could free. A blanket free of children is what cost three scripts a pass in an earlier wave - GridInteractablesComponent attaches a _RotationTimer to the artifact after spawn. _regenerate() also returns early on use_fallback, on a null rendering_device, and on waiting_for_compute / waiting_for_meshthread: resubmitting under a dispatch already in flight is the crash release() documents, and that guard is load-bearing HERE in a way it is not on the gyroid, because this subclass keeps the base's _process and is still cycling when a config call could land.",
-			 "still_note": "Static. Same as mc_inside_cave.",
-			 "kin": "`octaves` is SHARED, taken from noise_quarry (values [1,2,3,4]) and held also by noise_space and simplex_noise, where it asks the identical thing of a plain fBm sum. The name must BE the property name, because the sweep sets the property by name - the same constraint that forced queer_marching_cave to move a float off `resolution` before it could name an enum that. Declared here with the shipped 6 as the top rung rather than 4, so the family's [1,2,3,4] and this [1,2,3,6] can be read against each other with three rungs in common. If a count-of-scales axis measures alike on a cave and on a quarry, the family is honest. `plumb` is NEW and free across all 437 declared axis names in the corpus. `bed` is held by grid_3d_capture, `ground` by flashlight_demo and light_sphere, `law` by seven artifacts including force_field_zone, `datum` by slack_yard, `incline` by friction_ramp and normal_force_demo. `plumb` is chosen because a plumb line is the instrument that DEFINES down rather than one that measures it, which is the claim: this artifact's down is a term someone wrote, not a fact about the world it is in. NOT re-argued from wave 1: `resolution` is already spent twice in this sequence (queer_marching_cave, animated_noise_explorer) on how finely the field is SAMPLED. `octaves` is the neighbouring question - how much of the field there is to sample - and the two meet in the Nyquist arithmetic under `note`.",
-			 "shader_contract": "TWO trailing floats appended to MarchingCubes.glsl's ParamsBuffer after noiseOffsetZ, taking indices 11 and 12: `float plumbScale;` (was the implicit 1.0 on the y-gradient at :180) and `float octaves;` (was the literal 6 in the loop bound at :168, carried as a float because the whole buffer is floats and read back as int(params.octaves)). Count goes 11 -> 13 on BOTH sides. VERIFIED MECHANICALLY, not by eye: the ParamsBuffer field list was parsed out of the .glsl with comments stripped and compared index by index against TerrainGeneratorBase.get_params_array()'s eleven appends plus TerrainGenerator's two, and the same script confirmed that every `params.<field>` the shader reads is declared and that the shared eleven-field prefix is byte-for-byte the same list as in MarchingCubesFlat, OverhangTerrain, PortalTerrain, Torus, Fountain and Gyroid. GPU: time, noiseScale, isoLevel, numVoxelsPerAxis, scale, posX, posY, posZ, noiseOffsetX, noiseOffsetY, noiseOffsetZ, plumbScale, octaves. CPU: time, noise_scale, iso_level, float(num_voxels_per_axis), chunk_scale, center_position.x/.y/.z, noise_offset.x/.y/.z, _plumb_scale(), float(clampi(octaves, 1, 6)). chunk_scale is the GDScript name for the shader's `scale`. THE ORDER OF THE LAST TWO IS THE ENTIRE RISK SURFACE: swapping them makes plumb read 6.0 and octaves read 1, which produces a plausible mesh and no compile error. Only three lines of the .glsl changed - the two declarations, the loop bound, and the gradient statement. MarchingCubes.glsl is loaded by TerrainGenerator.gd and by nothing else. STALE-SHADER WARNING, WHICH THIS PASS COULD NOT ITSELF CLEAR: headless Godot does not reimport, so an edited .glsl does not reach a sweep until the orchestrator reimports. Wave 1 published sixteen byte-identical gyroid tiles and an INERT verdict on a correct axis for exactly this reason. If both axes come back at 0.00% on all four rungs, suspect the import before the design: check source_md5 in .godot/imported/*.md5 against the file hash, NOT mtime.",
-			 "crossed_wire": "REPORTED, NOT FIXED IN THIS PASS, and confirmed by reading both entries. The registry token `marchingcubes_portal_landscape` (procgen_extra.json) names res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn - the OVERHANG scene - while `mc_portal_landscape` (isosurfaces.json) names marchingcubes_portal_landscape.tscn. So the long-form name that reads like the portal artifact's sibling is bound to a different artifact, and the portal scene is reachable only through the short token. Not touched here: correcting the scene path would silently change what every existing placement of `marchingcubes_portal_landscape` renders. A SECOND DRIFT FOUND WHILE COUNTING PLACEMENTS, and it belongs to this entry's own family: mc_cave's registry `class_name` field reads TerrainGeneratorBase, not TerrainGenerator. It is the parent class, so it is not a wrong file, but it names the abstract base rather than the script the scene runs - the same shape of drift as mc_portal_landscape's class_name naming TerrainGeneratorPortals where the scene runs TerrainGeneratorUnifiedPortals.",
-			 "family": "ONE SCRIPT, THREE SCENES, SIX REGISTRY NAMES - a hidden family at SCRIPT level rather than at scene level, which is the first one this corpus has found. The five known before it (curation_station's booleans, the grab spheres, the pickup cubes, the synth racks, the translation cubes) all hide one level lower, at the scene. TerrainGenerator.gd is loaded by marchingcubes_cave.tscn (mc_cave, marchingcubes_cave), marchingcubes_inside_cave.tscn (mc_inside_cave, marchingcubes_inside_cave) and marchingcubes.tscn (mc_base, marchingcave), all three by the same script uid c2aji3u2bgmv8. THE AXES ARE DECLARED ON FOUR OF THE SIX, AND THE TWO OMISSIONS ARE DELIBERATE. marchingcubes.tscn sets use_fallback = true, so TerrainGeneratorBase._ready() returns at its line 65, MarchingCubes.glsl is never loaded, and what renders is _create_simple_cave_mesh()'s hand-written 200 m sine tunnel. Both axes are inert there BY CONSTRUCTION. The approved design listed mc_base and marchingcave under also_serves; declaring them would publish four identical pictures of that tunnel and earn a 0.00% verdict about the wrong artifact, which is precisely the false-INERT trap the standpoint gate exists to stop. So they are named here and left undeclared.",
-			 "standpoint_caveat": "See mc_inside_cave: the sweep places its own AABB-fitted camera OUTSIDE the field and ignores the scene's interior Camera3D, so this artifact photographs as a block of rock and no still can carry the 'from inside' half of the plumb argument.",
-			 "placements": 1
+				"value_typing": "`octaves` IS DECLARED AS JSON NUMBERS AND NOT AS THE STRINGS apply_dna_block DERIVED. The tool read them off the trailing `# 1 | 2 | 3 | 6` on the @export line (priority 5 in check_dna_declarations' value order) and wrote [\"1\", \"2\", \"3\", \"6\"], which made the four cave tokens the ONLY scened entries in this corpus with string-numeric axis values - against about 35 numeric axes (noise_quarry.octaves, lsystem_dungeon.depth, star_primitive.points, multiple_ring.count and the rest) every one of which is spelled as numbers. THE DERIVATION CHAIN SURVIVES THE RETYPE AND THIS WAS CHECKED RATHER THAN ASSUMED: apply_dna_block compares `{k: [str(x) for x in v]}` against what it derives, so both `--refresh` and a fresh `--token=mc_inside_cave --axes=plumb,octaves` report `already matches the code` and write nothing. WHAT THE RETYPE BUYS IS THE STANDPOINT PROBE, and nothing else. build_dna_gallery reaches cabinet_sweep over a command line, so a value makes the round trip str() -> coerce() -> int and THE GALLERY IS BIT-IDENTICAL EITHER WAY. probe_anamorphic.py does not: it reads the registry directly, keeps only `isinstance(v, str)`, and writes the value straight into the capture spec. Spelled as strings it would hand capture_config_sweep the String \"1\" for a typed `int` export, where _coerce warns `the tile is not a variant` and passes it through - four identical frames published as doc/reports/anamorphic_mc_inside_cave.json, which is the file the critic's standpoint gate reads, and a false `flat from all five standpoints` is a manufactured conviction. Spelled as numbers the probe keeps nothing, renders no pairs and returns an obvious null. The two failure modes are asymmetric - one can only fail loudly - so this takes the loud one. A SECOND, SEPARATE CONSEQUENCE, since it is the same filter: probe_anamorphic cannot clear an INERT? verdict on ANY numeric axis in the corpus, because the isinstance(str) filter empties the value list for all ~35 of them. That is a gap in the gate, not in this artifact. THE SIBLING PAIR mc_cave AND marchingcubes_cave STILL CARRY THE STRINGS and want the same one-line retype.",
+				"fixture": {
+					"capture_fade_distance": 100000.0,
+					"use_fallback": false,
+					"continuous_update": false
+				},
+				"promoted": "2026-08-12",
+				"stage": "2 - variation",
+				"framing": 0.75,
+				"axes": {
+					"plumb": [
+						"bedded",
+						"overturned",
+						"weightless",
+						"steep"
+					],
+					"octaves": [
+						1,
+						2,
+						3,
+						6
+					]
+				},
+				"default": "plumb=bedded AND octaves=6. SECOND REGISTRY NAME ON THE SAME SCENE. The axes, their values, their defaults and their mechanism are mc_inside_cave's - one script, TerrainGenerator.gd, uid c2aji3u2bgmv8 - and are declared here so a map token under this name reaches the same family. Read mc_inside_cave's entry for the full account of both axes, the Nyquist arithmetic, the shader contract and the standpoint caveat. Identical export counts across sibling tokens is the tell for a one-scene-many-names family, and when the shared vocabulary is honest the siblings measure ALIKE - which is itself the check on this pair.\n\nREACH MEASURED FOR THIS TOKEN: 1 placement, and it does not reach apply_grid_config. A bare grid cell in ProceduralGenerationMarchingCubesInsideCave interactables[6][5], no `#` config, no default_params on this entry, so merged_config is empty and GridInteractablesComponent's `if not merged_config.is_empty()` gate means the method is never called.",
+				"was": "See mc_inside_cave. Zero @export of its own; apply_grid_config was a bare `pass`.",
+				"note": "THE SEQUENCE'S TRUTH LINE, LITERALLY. 'Define a field, extract a surface. The boundary between inside and outside becomes geometry.' This script is the one place in the wave where the SAME field is shipped twice, once to be looked at and once to be stood inside, so an axis declared here has to mean something from both sides. You are INSIDE this one: the scene puts a Camera3D at (0, 5, 15) within the field with an OmniLight3D torch parented to it and no DirectionalLight3D anywhere, which is the actual reason it reads as an interior rather than as a block of rock.\n\nplumb - WHICH WAY IS DOWN, AND WHETHER THERE IS A DOWN AT ALL. Everything this shader knows about gravity is one line, MarchingCubes.glsl:180: `density = -(worldPos.y+100)/300 + density`. It is the ONLY anisotropic term in the file; the six octaves above it are isotropic ridged noise, which on its own has no up. That one linear bias is what makes low regions solid and high regions air - from outside, the block's top surface and its sky; from inside, the floor you stand on. plumbScale multiplies it and nothing else. bedded (1.0) SHIPPED. overturned (-1.0) flips the sign: the same noise at the same threshold with inside and outside exchanged, rock overhead and nothing under your feet. weightless (0.0) DELETES the term and leaves pure ridged noise - an isotropic sponge with no floor, no ceiling and no sky, filling the sampled box to all six faces. steep (3.0) triples the gradient so the field swings 3.0 across the 280 m box instead of 1.0 and the solid retreats into the bottom third: a slab with a rough top, a crawl space. The four values are held IDENTICAL across all four declared tokens on purpose - it is one const on one script, and holding them identical is what makes the galleries comparable frame for frame.\n\noctaves - HOW MANY SCALES OF ROCK SURVIVE THE LATTICE, AND THIS IS THE AXIS THAT MAKES THE SIBLINGS SAY DIFFERENT THINGS. :168 opens `for (int i = 0; i < 6; i++)`; each pass halves the amplitude and doubles the frequency, with the weight feedback at :174 gating each octave by the previous one. The literal 6 is the rung. What makes it worth declaring is arithmetic the two scenes do not share. THIS token: noise_scale 3.8, chunk_scale 280.0, so samplePos = worldPos x 0.01357 and octave 0 has ~74 m features; the marching lattice samples at 280.0/64 = 4.375 m, so its Nyquist limit is 8.75 m. The six octaves measure 73.7, 36.9, 18.4, 9.2, 4.6, 2.3 m, which puts 4 of them above the limit and the rest below it. On the sibling the same six octaves land differently, and that is the finding: mc_cave resolves TWO scales of rock, mc_inside_cave resolves FOUR, from the same script, the same shader, the same rungs and the same threshold. The artifact you stand inside can resolve two more octaves than the one you look at. That is the inside/outside asymmetry as a number rather than as a description, and it is why the axis is declared on both rather than on one.\n\nTWO CORRECTIONS TO THE APPROVED DESIGN, both found by redoing its arithmetic. (1) The design said the inside scene resolves ONE more octave than the outside one; by the Nyquist figures above it is TWO (octaves 0-3 against octaves 0-1). (2) The design said the sub-limit octaves are 'COMPUTED AND THEN THROWN AWAY BY THE EXTRACTOR'. They are not thrown away, they ALIAS: content finer than the sampling cell still perturbs the corner values, which still moves where interpolateVerts puts the crossing. So the sub-limit rungs are predicted to be nearly degenerate, not exactly degenerate, and a small non-zero reading there is the expected result rather than a failed prediction.\n\nONE MORE THING WORTH RECORDING ABOUT THE FIELD ITSELF: :170 is `snoise(samplePos) * 2 - 1` before the ridged fold, not the plain `snoise` of the usual Lague construction, so the input to `1 - abs(noise)` spans about [-3, 1] rather than [-1, 1] and the fold is off-centre. The amplitude LADDER still halves exactly (1, 0.5, 0.25, 0.125, 0.0625, 0.03125), which is what the octave arithmetic above rests on, but the per-octave term is not bounded by 1 and the summed density is not bounded by 1.969. Any claim about an absolute density total should be read as about the ladder, not about the sum.",
+				"declined": "REFUSED, `iso_level`, and the refusal is deliberate given that this wave promotes `threshold` on the torus. iso_level is the ONE export on which these two sibling scenes already disagree - 0.85 on marchingcubes_cave.tscn against 0.88 on marchingcubes_inside_cave.tscn - so an axis over it would say 'these two artifacts are one object at two thresholds', which is nearly irresistible. It is refused because on THIS shader the density carries a vertical gradient, so a constant offset to the threshold is a vertical translation of the rock/air horizon, which is the same horizon `plumb` moves: a bias of 0.15 is 45 m of horizon on a 300 m box, and plumb=steep moves it further. The two would measure each other at plumb=bedded and separate only at plumb=weightless - a conditional pair bought at the price of a confound. The torus pays gyroid_demo's bequest instead, because its field has no gradient term at all. REFUSED, the weight-gating literal 10 at :174 (`weight = max(0, min(1, noise * 10))`): it is the Lague trick that turns isotropic ridged fBm into connected tunnels and it is the closest thing in the file to an axis about whether the void is a passage or a sealed bubble - refused because at low values it also zeroes every octave after the first, so it conflates connectivity with detail and would be `octaves` wearing another name. REFUSED, `noise_offset` (a different arbitrary sample of the same field, and already fixed by the .tscn), `chunk_scale` and `center_position` (a size and a placement, both self-cancelling under an AABB-fitted camera), `continuous_update` (a rate, invisible in a still by law). REFUSED, `invert_faces`, AND THIS ONE IS A REPORTED DEFECT RATHER THAN A DECLINE. TerrainGeneratorBase:10 documents it as 'Flip triangle winding and normals (useful for objects vs caves)' and NEITHER cave scene sets it, so mc_inside_cave - the artifact whose entire premise is 'marching cubes cave seen from inside' - ships with the same winding as the landscapes, and TerrainMat.tres renders cull_back. Whichever way that winding points, the artifact named 'inside' made no different choice from the one named 'cave'. It is not an axis (two values, below the floor, and a winding order is a material-culling fact rather than a field property). It should be its own fix.",
+				"predicted_degeneracy": "PREDICTED BEFORE ANY CAPTURE, in projected-area currency, computed by hand rather than by rasterising the scene. Read it as an order-of-magnitude claim the sweep can falsify, not as the critic's own hottest-5%-of-crop number. capture_config_sweep places its OWN camera at dist = radius / tan(FOV/2) * PAD * framing with FOV 34, PAD 1.9, YAW 0.62, PITCH -0.26, RES 760.\n\nCLOSEST PAIR ON plumb: bedded (1.0) vs steep (3.0), AT ABOUT 11% OF FRAME. Solid requires the ridged sum to exceed isoLevel + k(y+100)/300. At k=1 that is satisfied up to roughly y = +15 for a typical sum; at k=3 the same sum is exceeded only by about y = -60. The top of the mass drops roughly 75 m in a 280 m box shown at ~53% of frame height, and the newly-empty band is 75/280 x 53% = about 13% of frame height across the ~42% of frame width the body occupies - call it 11% once the silhouette's obliquity is taken off. The LARGEST pair should be bedded vs overturned, over 35%, since the mass moves from the bottom of the frame to the top.\n\nCLOSEST PAIR ON octaves, AND IT IS A PREDICTION THAT THE AXIS IS PARTLY DEGENERATE ON PURPOSE: 3 vs 6, UNDER 2%. The design named that pair too, but for the wrong reason and on the wrong scope. On this token only octaves 0-3 clear the 8.75 m Nyquist limit, so rungs 2, 3 and 6 differ ONLY in octaves that alias rather than resolve - the near-degeneracy is a three-way tie among {2, 3, 6}, not a single close pair, and 3-vs-6 is merely the member of it with the smallest amplitude difference (0.125 + 0.0625 + 0.03125 = 0.219 of the ladder's 1.969, gated down further by :174). The pair that MUST move is 1 vs 6: one octave is a smooth blobby cave with no wall texture at all, predicted over 25%.\n\nIF 3-vs-6 COMES BACK NEAR ZERO ON mc_cave AND ALIVE ON mc_inside_cave, THE AXIS HAS DONE ITS JOB AND MUST NOT BE FILED AS DEAD. The degeneracy IS the finding: it is the Nyquist limit of the extraction lattice showing up as a photograph. A dead reading on the sub-limit rungs of one token and a live one on the other is the result this axis was declared to produce.\n\nTHE RUNG THAT COULD GO WRONG IS 1, and the confound is stated rather than hidden. Dropping octaves 1-5 removes up to 0.969 of the amplitude ladder (much less after the weight gating), and against the 1/300 gradient every unit of removed sum is 300 m of horizon. So `1` will look both SMOOTHER and EMPTIER, and the two effects are not separable in a still - octaves is borrowing plumb's pixels at its bottom rung. If that dominates the tile, the low rung should come up to 2 rather than the axis being called confounded.",
+				"framing_why": "0.75, identical to mc_inside_cave's - same scene, same 280 m box.",
+				"fixture_why": "NO FIXTURE. Identical to mc_inside_cave's. Same fallback-tunnel log check. INSTALLED AS WELL AS ARGUED (2026-08-12): this entry previously carried this paragraph and NO `fixture` key, so the guard it describes was prose only - cabinet_sweep.py reads `dna.fixture` and probe_anamorphic.py reads it again to render under the same conditions, and both were getting an empty dict. The dict is now present. It is honestly a WEAK guard and that is worth stating rather than overselling: use_fallback and continuous_update are both already false by export default and neither .tscn sets them, and a rendering device that fails on the capture host routes through init_compute() -> _create_fallback_mesh() without consulting use_fallback at all. So the dict cannot prevent the fallback sheet; only the log line can detect it. What the dict does buy is that the gallery and the standpoint probe apply the same config, which is the requirement probe_anamorphic's own header sets out.",
+				"rebuild_guard": "apply_grid_config stamps each config key as config_<key> metadata, re-reads the two overrides, then compares _config_signature() - the shader's own input array, stringified at %.6f - against the signature captured at the end of _ready(). Equal means return; empty means _ready has not built yet and will read the metadata itself. Only a real change reaches _regenerate(), which re-runs run_compute / fetch_and_process_compute_data / create_mesh in _ready's order and re-captures the signature. INDEX 0 IS DELIBERATELY SKIPPED, and this is a real difference from TerrainGeneratorGyroid, which stringifies all eleven base floats. `time` is the first of the shared prefix and this subclass does NOT override _process, so the base's tick keeps advancing it for ~102 frames after spawn (12 wait-frames for GPU sync, then 90 for the mesh thread) until create_mesh sets _initial_generation_done and calls set_process(false). Including it would make the guard a CLOCK and every config call would read as a change. It cannot affect the mesh: params.time is declared in ParamsBuffer at :126 and referenced NOWHERE else in the file - grepped, not assumed. _owned IS EMPTY AND STAYS EMPTY. It is kept so the invariant is stated rather than assumed: create_mesh() rewrites array_mesh's single surface in place and the base's _create_collision() removes only the StaticBody3D it made itself, so this script creates no node it could free. A blanket free of children is what cost three scripts a pass in an earlier wave - GridInteractablesComponent attaches a _RotationTimer to the artifact after spawn. _regenerate() also returns early on use_fallback, on a null rendering_device, and on waiting_for_compute / waiting_for_meshthread: resubmitting under a dispatch already in flight is the crash release() documents, and that guard is load-bearing HERE in a way it is not on the gyroid, because this subclass keeps the base's _process and is still cycling when a config call could land.",
+				"still_note": "Static. Same as mc_inside_cave.",
+				"kin": "`octaves` is SHARED, taken from noise_quarry (values [1,2,3,4]) and held also by noise_space and simplex_noise, where it asks the identical thing of a plain fBm sum. The name must BE the property name, because the sweep sets the property by name - the same constraint that forced queer_marching_cave to move a float off `resolution` before it could name an enum that. Declared here with the shipped 6 as the top rung rather than 4, so the family's [1,2,3,4] and this [1,2,3,6] can be read against each other with three rungs in common. If a count-of-scales axis measures alike on a cave and on a quarry, the family is honest. `plumb` is NEW and free across all 437 declared axis names in the corpus. `bed` is held by grid_3d_capture, `ground` by flashlight_demo and light_sphere, `law` by seven artifacts including force_field_zone, `datum` by slack_yard, `incline` by friction_ramp and normal_force_demo. `plumb` is chosen because a plumb line is the instrument that DEFINES down rather than one that measures it, which is the claim: this artifact's down is a term someone wrote, not a fact about the world it is in. NOT re-argued from wave 1: `resolution` is already spent twice in this sequence (queer_marching_cave, animated_noise_explorer) on how finely the field is SAMPLED. `octaves` is the neighbouring question - how much of the field there is to sample - and the two meet in the Nyquist arithmetic under `note`.",
+				"shader_contract": "TWO trailing floats appended to MarchingCubes.glsl's ParamsBuffer after noiseOffsetZ, taking indices 11 and 12: `float plumbScale;` (was the implicit 1.0 on the y-gradient at :180) and `float octaves;` (was the literal 6 in the loop bound at :168, carried as a float because the whole buffer is floats and read back as int(params.octaves)). Count goes 11 -> 13 on BOTH sides. VERIFIED MECHANICALLY, not by eye: the ParamsBuffer field list was parsed out of the .glsl with comments stripped and compared index by index against TerrainGeneratorBase.get_params_array()'s eleven appends plus TerrainGenerator's two, and the same script confirmed that every `params.<field>` the shader reads is declared and that the shared eleven-field prefix is byte-for-byte the same list as in MarchingCubesFlat, OverhangTerrain, PortalTerrain, Torus, Fountain and Gyroid. GPU: time, noiseScale, isoLevel, numVoxelsPerAxis, scale, posX, posY, posZ, noiseOffsetX, noiseOffsetY, noiseOffsetZ, plumbScale, octaves. CPU: time, noise_scale, iso_level, float(num_voxels_per_axis), chunk_scale, center_position.x/.y/.z, noise_offset.x/.y/.z, _plumb_scale(), float(clampi(octaves, 1, 6)). chunk_scale is the GDScript name for the shader's `scale`. THE ORDER OF THE LAST TWO IS THE ENTIRE RISK SURFACE: swapping them makes plumb read 6.0 and octaves read 1, which produces a plausible mesh and no compile error. Only three lines of the .glsl changed - the two declarations, the loop bound, and the gradient statement. MarchingCubes.glsl is loaded by TerrainGenerator.gd and by nothing else. STALE-SHADER WARNING, WHICH THIS PASS COULD NOT ITSELF CLEAR: headless Godot does not reimport, so an edited .glsl does not reach a sweep until the orchestrator reimports. Wave 1 published sixteen byte-identical gyroid tiles and an INERT verdict on a correct axis for exactly this reason. If both axes come back at 0.00% on all four rungs, suspect the import before the design: check source_md5 in .godot/imported/*.md5 against the file hash, NOT mtime.",
+				"crossed_wire": "REPORTED, NOT FIXED IN THIS PASS, and confirmed by reading both entries. The registry token `marchingcubes_portal_landscape` (procgen_extra.json) names res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn - the OVERHANG scene - while `mc_portal_landscape` (isosurfaces.json) names marchingcubes_portal_landscape.tscn. So the long-form name that reads like the portal artifact's sibling is bound to a different artifact, and the portal scene is reachable only through the short token. Not touched here: correcting the scene path would silently change what every existing placement of `marchingcubes_portal_landscape` renders. A SECOND DRIFT FOUND WHILE COUNTING PLACEMENTS, and it belongs to this entry's own family: mc_cave's registry `class_name` field reads TerrainGeneratorBase, not TerrainGenerator. It is the parent class, so it is not a wrong file, but it names the abstract base rather than the script the scene runs - the same shape of drift as mc_portal_landscape's class_name naming TerrainGeneratorPortals where the scene runs TerrainGeneratorUnifiedPortals.",
+				"family": "ONE SCRIPT, THREE SCENES, SIX REGISTRY NAMES - a hidden family at SCRIPT level rather than at scene level, which is the first one this corpus has found. The five known before it (curation_station's booleans, the grab spheres, the pickup cubes, the synth racks, the translation cubes) all hide one level lower, at the scene. TerrainGenerator.gd is loaded by marchingcubes_cave.tscn (mc_cave, marchingcubes_cave), marchingcubes_inside_cave.tscn (mc_inside_cave, marchingcubes_inside_cave) and marchingcubes.tscn (mc_base, marchingcave), all three by the same script uid c2aji3u2bgmv8. THE AXES ARE DECLARED ON FOUR OF THE SIX, AND THE TWO OMISSIONS ARE DELIBERATE. marchingcubes.tscn sets use_fallback = true, so TerrainGeneratorBase._ready() returns at its line 65, MarchingCubes.glsl is never loaded, and what renders is _create_simple_cave_mesh()'s hand-written 200 m sine tunnel. Both axes are inert there BY CONSTRUCTION. The approved design listed mc_base and marchingcave under also_serves; declaring them would publish four identical pictures of that tunnel and earn a 0.00% verdict about the wrong artifact, which is precisely the false-INERT trap the standpoint gate exists to stop. So they are named here and left undeclared.",
+				"standpoint_caveat": "See mc_inside_cave: the sweep places its own AABB-fitted camera OUTSIDE the field and ignores the scene's interior Camera3D, so this artifact photographs as a block of rock and no still can carry the 'from inside' half of the plumb argument.",
+				"placements": 1
 			},
 			"category": "unknown",
 			"complexity": "beginner",
@@ -7894,19 +7894,19 @@
 				"max_dimension_m": 280.0,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			},
-			"qfep_connection": "The fallback tunnel manufactures interiority with a sign flip \u2014 every normal pointed inward \u2014 while the compute path earns it by raising the iso-level until void outnumbers rock. Being enclosed is something the mesh asserts, not somewhere you are."
+			"qfep_connection": "The fallback tunnel manufactures interiority with a sign flip — every normal pointed inward — while the compute path earns it by raising the iso-level until void outnumbers rock. Being enclosed is something the mesh asserts, not somewhere you are."
 		},
 		"marchingcubes_portal_landscape": {
 			"dna": {
-			 "axes": {
-			 "landform": [
-			 "compound",
-			 "hillside",
-			 "overhung",
-			 "quarried",
-			 "arched"
-			 ]
-			 }
+				"axes": {
+					"landform": [
+						"compound",
+						"hillside",
+						"overhung",
+						"quarried",
+						"arched"
+					]
+				}
 			},
 			"category": "unknown",
 			"complexity": "beginner",
@@ -8004,7 +8004,7 @@
 				"withheld": true,
 				"withheld_reason": "measurement withheld: the artifact simulates during the settle window and its AABB runs away (>500 m on one axis). Neither this run's value nor April's frozen-at-frame-2 value describes the body. Needs a stability-aware measure."
 			},
-			"qfep_connection": "A landscape with a portal, marched from a scalar field \u2014 threshold as terrain and doorway at once. The level-set that decides where stone becomes air also decides where a passage opens, so the same number that shapes the ground carves the way through it. The field as both floor and gate."
+			"qfep_connection": "A landscape with a portal, marched from a scalar field — threshold as terrain and doorway at once. The level-set that decides where stone becomes air also decides where a passage opens, so the same number that shapes the ground carves the way through it. The field as both floor and gate."
 		},
 		"marchingcubes_torus_sculpture": {
 			"dna": {
@@ -8026,7 +8026,7 @@
 					]
 				},
 				"fixture": {
-				"capture_fade_distance": 100000.0,
+					"capture_fade_distance": 100000.0,
 					"use_fallback": false,
 					"continuous_update": false
 				},
@@ -8130,7 +8130,7 @@
 				"max_dimension_m": 158.13,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			},
-			"qfep_connection": "The compute shader carves its torus out of a density field; the fallback just calls TorusMesh.new(). Same genus, opposite politics \u2014 one earns the hole, the other declares it."
+			"qfep_connection": "The compute shader carves its torus out of a density field; the fallback just calls TorusMesh.new(). Same genus, opposite politics — one earns the hole, the other declares it."
 		},
 		"maze_generation": {
 			"dna": {
@@ -8217,12 +8217,12 @@
 				"max_dimension_m": 30.0,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			},
-			"qfep_connection": "A walkable maze carved by recursive backtracking \u2014 the algorithm drills forward at random, and when it hits a dead end it reverses just far enough to try a new direction, until every cell has been visited exactly once. The result is a perfect maze, one path between any two points, and no designer ever saw the whole of it. Getting lost in a corridor no mind laid out."
+			"qfep_connection": "A walkable maze carved by recursive backtracking — the algorithm drills forward at random, and when it hits a dead end it reverses just far enough to try a new direction, until every cell has been visited exactly once. The result is a perfect maze, one path between any two points, and no designer ever saw the whole of it. Getting lost in a corridor no mind laid out."
 		},
 		"maze_generator": {
 			"category": "procedural",
 			"complexity": "beginner",
-			"description": "Procedural maze generation \u00e2\u20ac\u201d watch walls carve out paths through depth-first search, recursive backtracking, or randomized algorithms. Every maze is a spanning tree of a grid graph.",
+			"description": "Procedural maze generation â€” watch walls carve out paths through depth-first search, recursive backtracking, or randomized algorithms. Every maze is a spanning tree of a grid graph.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -8789,12 +8789,12 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Cellular automata run and then mirrored \u2014 local disorder folded across an axis into pattern with a spine. The room's demonstration that symmetry is cheap: take any grown texture, reflect it, and the eye reads intention where there was only a rule and a fold."
+			"qfep_connection": "Cellular automata run and then mirrored — local disorder folded across an axis into pattern with a spine. The room's demonstration that symmetry is cheap: take any grown texture, reflect it, and the eye reads intention where there was only a rule and a fold."
 		},
 		"modelsynthesis": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Model Synthesis (Merrell 2007) \u2014 3D voxel generation via overlap constraints from exemplar with coherence search",
+			"description": "Model Synthesis (Merrell 2007) — 3D voxel generation via overlap constraints from exemplar with coherence search",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -8955,12 +8955,12 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Breuer, Mies, Eames, Bertoia \u2014 a canon reduced to ten constructors instantiated in a circle, every chair rotated to face a center where no sitter ever arrives. Design history survives here exactly as far as it can be rewritten as a class hierarchy with a Label3D for provenance."
+			"qfep_connection": "Breuer, Mies, Eames, Bertoia — a canon reduced to ten constructors instantiated in a circle, every chair rotated to face a center where no sitter ever arrives. Design history survives here exactly as far as it can be rewritten as a class hierarchy with a Label3D for provenance."
 		},
 		"mushrooms": {
 			"category": "morphogenesis",
 			"complexity": "intermediate",
-			"description": "A procedural mushroom meadow grown from noise. FastNoiseLite drives a spatial Poisson process \u2014 mushrooms spawn where noise exceeds a density threshold, creating natural clearings and clusters. Five species templates produce variety; a glowing variant adds bioluminescent accents. Fairy rings self-organize as perfect circles of identical species within the random field. The ground itself is procedurally deformed, and ambient lighting creates a forest-floor atmosphere. Walk through and feel how randomness filtered through ecological rules produces something that looks alive.",
+			"description": "A procedural arrangement of template copies, noise-filtered candidates, explicit fairy rings and clusters. The optional specimen table exposes SHOW, KIND, SIZE, REGROW and NEW SEED; one seed controls the build and a related seed its ground. Optional edible mushrooms add pickup and a timed perception effect at the bed edges.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -8992,24 +8992,25 @@
 				"procedural",
 				"mushrooms",
 				"noise",
-				"poisson-process",
 				"fairy-ring",
 				"bioluminescence",
-				"ecology",
-				"growth",
 				"spatial",
-				"morphogenesis"
+				"morphogenesis",
+				"template-copies",
+				"seed-replay",
+				"specimen-table"
 			],
-			"qfep_connection": "E(S) entropy filtered through ecological form \u2014 noise is the raw entropy, density threshold is the filter, and species templates are the forms that entropy fills. Fairy rings are emergent order: lambda-tuning where structured patterns crystallize from random placement.",
+			"qfep_connection": "A bounded repertoire permits some differences and requires new construction rules for others. Unit scale preserves template differences; placement permissions differ between routines. This is a material comparison for QFEP inquiry, not a computed entropy or ecological model.",
 			"gamwell_reference": "Spatial Poisson processes, noise-driven procedural generation, fairy ring mycology, bioluminescent fungi, ecological niche theory",
 			"interactions": [
-				"walk through the procedural meadow",
-				"find fairy rings \u2014 perfect circles of identical species",
-				"spot glowing mushrooms in the undergrowth",
-				"notice how clearings form from noise thresholds"
+				"Under stand:specimen, SHOW follows copies of one template",
+				"KIND separates scattered, ring and cluster members from rejected candidates",
+				"SIZE removes per-instance scale variation while preserving the seeded draws",
+				"REGROW repeats construction; NEW SEED changes the current seed",
+				"Under edible:some or many, pick up the edible mushrooms at the bed margins"
 			],
 			"signals": [],
-			"capacity": "EXPLAIN how noise-driven spatial processes create naturalistic distributions and how fairy rings emerge as self-organized order within random fields.",
+			"capacity": "Explain which decisions create a population: template choice, transform variation, candidate filtering, explicit rings/clusters and separate interaction capabilities.",
 			"geometry_spec": {
 				"mesh_type": "hybrid",
 				"topology": "manifold_closed",
@@ -9319,7 +9320,7 @@
 		"penteract_double_projection": {
 			"category": "procedural",
 			"complexity": "advanced",
-			"description": "5D hypercube (penteract) projected twice \u00e2\u20ac\u201d from 5D to 4D to 3D. The shadow of a shadow of a higher-dimensional object, revealing structure invisible from any single viewpoint.",
+			"description": "5D hypercube (penteract) projected twice â€” from 5D to 4D to 3D. The shadow of a shadow of a higher-dimensional object, revealing structure invisible from any single viewpoint.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -9378,12 +9379,12 @@
 				1,
 				1.0
 			],
-			"qfep_connection": "Thirty-two vertices, an edge wherever two indices differ by one bit, then two flattenings in a row before anything is drawable. What orbits in front of you is a compression of a compression, recomputed every frame \u2014 the penteract never arrives, only its loss schedule."
+			"qfep_connection": "Thirty-two vertices, an edge wherever two indices differ by one bit, then two flattenings in a row before anything is drawable. What orbits in front of you is a compression of a compression, recomputed every frame — the penteract never arrives, only its loss schedule."
 		},
 		"percolationnetwork_ca": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "P(occupied) = threshold -> CA flow propagation from top to bottom \u2014 does the random lattice percolate?",
+			"description": "P(occupied) = threshold -> CA flow propagation from top to bottom — does the random lattice percolate?",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -9523,7 +9524,7 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Percolation: raise the density of open cells and, at one sharp threshold, disconnected pockets suddenly span the whole space \u2014 a path appears from edge to edge where an instant before there was none. The turn's physics: connectivity is not gradual, it is a phase change, and the procedural world snaps from rubble to network at a single critical value. Where forests burn, fluids seep, and rumors spread."
+			"qfep_connection": "Percolation: raise the density of open cells and, at one sharp threshold, disconnected pockets suddenly span the whole space — a path appears from edge to edge where an instant before there was none. The turn's physics: connectivity is not gradual, it is a phase change, and the procedural world snaps from rubble to network at a single critical value. Where forests burn, fluids seep, and rumors spread."
 		},
 		"poisson_disk_sampling_3d": {
 			"category": "unknown",
@@ -9630,7 +9631,7 @@
 			},
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "Turing pattern generation using reaction-diffusion systems \u00e2\u20ac\u201d the Gray-Scott model on a 2D grid producing spots, stripes, and labyrinthine patterns from two interacting chemicals.",
+			"description": "Turing pattern generation using reaction-diffusion systems â€” the Gray-Scott model on a 2D grid producing spots, stripes, and labyrinthine patterns from two interacting chemicals.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -9704,7 +9705,7 @@
 		"reaction_diffusion_vr": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "Turing reaction-diffusion patterns in VR \u00e2\u20ac\u201d two chemicals activating and inhibiting each other, producing spots, stripes, and labyrinthine patterns. The math behind animal markings.",
+			"description": "Turing reaction-diffusion patterns in VR â€” two chemicals activating and inhibiting each other, producing spots, stripes, and labyrinthine patterns. The math behind animal markings.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -10404,7 +10405,7 @@
 				"derived_at": "2026-04-29T09:39:46.215359Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A second recursive tree at different proportions \u2014 the same rule wearing another body, which is the chapter's definition of a family."
+			"qfep_connection": "A second recursive tree at different proportions — the same rule wearing another body, which is the chapter's definition of a family."
 		},
 		"romanesco": {
 			"category": "unknown",
@@ -10551,7 +10552,7 @@
 				},
 				"kin": "lsystem_dungeon.grammar (warren|spiral|branch|meander) and lsystem_dungeon.depth (1-4) ask exactly these two questions of the other top-down plan generator in the corpus, and both WORDS are taken from there unchanged - which production is run, and how many times. The VALUE lists are not shared and must not be: lsystem_dungeon rewrites a string and its four values name turtle topologies, while this file recursively divides a rectangle and its five name where the knife goes. Calling a BSP production 'meander' would make two artifacts look like siblings that measure alike when the only thing they share is that the result is a floor plan. space_filling_curve_gallery.depth names its rungs (sketch|sparse|standard|fine) because it samples one fixed curve; here, as in lsystem_dungeon, the honest unit is the cut itself, so the rungs are integers."
 			},
-			"description": "Shape grammar for architectural floor plans \u00e2\u20ac\u201d binary space partitioning recursively splits a rectangle into rooms, draws wall outlines, adds door gaps, and colors rooms by area. The algorithmic foundation behind roguelike dungeon generation.",
+			"description": "Shape grammar for architectural floor plans â€” binary space partitioning recursively splits a rectangle into rooms, draws wall outlines, adds door gaps, and colors rooms by area. The algorithmic foundation behind roguelike dungeon generation.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -10940,7 +10941,7 @@
 				"derived_at": "2026-04-29T09:39:46.215897Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Pools as nodes, tubes as commitments, a viscosity float doing the deciding: infrastructure without an engineer, after Physarum. But the network is sculpted, not grown \u2014 a still life of an optimization, holding the pose of intelligence the organism actually performs."
+			"qfep_connection": "Pools as nodes, tubes as commitments, a viscosity float doing the deciding: infrastructure without an engineer, after Physarum. But the network is sculpted, not grown — a still life of an optimization, holding the pose of intelligence the organism actually performs."
 		},
 		"space_colonization_algorithm": {
 			"dna": {
@@ -10960,7 +10961,7 @@
 			},
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Growth algorithm that builds branching structures by attracting tips toward a cloud of auxin-like markers \u2014 Runions-style space colonisation producing tree/coral/blood-vessel topologies.",
+			"description": "Growth algorithm that builds branching structures by attracting tips toward a cloud of auxin-like markers — Runions-style space colonisation producing tree/coral/blood-vessel topologies.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -11033,7 +11034,7 @@
 				"max_dimension_m": 10.0,
 				"measured_at": "2026-08-12T04:39:51.280397Z"
 			},
-			"qfep_connection": "The algorithm that grows a tree the way a tree grows: scatter invisible attractors (auxin, the growth hormone), and let branch tips crawl toward the nearest ones, consuming them as they arrive. No blueprint of the tree exists anywhere \u2014 the form is the negotiation between hungry tips and a cloud of demand. Venation, antlers, river deltas, lightning: all this one rule, met with different clouds."
+			"qfep_connection": "The algorithm that grows a tree the way a tree grows: scatter invisible attractors (auxin, the growth hormone), and let branch tips crawl toward the nearest ones, consuming them as they arrive. No blueprint of the tree exists anywhere — the form is the negotiation between hungry tips and a cloud of demand. Venation, antlers, river deltas, lightning: all this one rule, met with different clouds."
 		},
 		"spherenetwork": {
 			"category": "unknown",
@@ -11112,7 +11113,7 @@
 				"derived_at": "2026-04-29T09:39:46.215897Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Habitable space made purely by subtraction: CSG carves walkway bores out of solid spheres and the pipes between them, so everywhere you could stand is exactly where material was revoked. Architecture as negative accounting \u2014 the corridor is the deficit."
+			"qfep_connection": "Habitable space made purely by subtraction: CSG carves walkway bores out of solid spheres and the pipes between them, so everywhere you could stand is exactly where material was revoked. Architecture as negative accounting — the corridor is the deficit."
 		},
 		"stochastic_tree_separated": {
 			"category": "unknown",
@@ -11255,12 +11256,12 @@
 				"derived_at": "2026-04-29T09:39:46.215897Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The stochastic tree with its variation pulled apart for inspection \u2014 rule and randomness shown as separable ingredients, so the eye can credit each with what it actually contributes."
+			"qfep_connection": "The stochastic tree with its variation pulled apart for inspection — rule and randomness shown as separable ingredients, so the eye can credit each with what it actually contributes."
 		},
 		"terrain_erosion": {
 			"category": "procedural",
 			"complexity": "advanced",
-			"description": "Hydraulic erosion on a procedural heightmap \u00e2\u20ac\u201d layered sin-wave terrain eroded by 800 virtual water droplets flowing downhill, carrying and depositing sediment. ImmediateMesh surface colored by altitude: water, beach, grass, rock, snow.",
+			"description": "Hydraulic erosion on a procedural heightmap â€” layered sin-wave terrain eroded by 800 virtual water droplets flowing downhill, carrying and depositing sediment. ImmediateMesh surface colored by altitude: water, beach, grass, rock, snow.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -11358,7 +11359,7 @@
 				"derived_at": "2026-04-29T09:39:46.215897Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Eight hundred droplets rewrite a heightmap that admits, in its own comment, to being layered sines impersonating Perlin \u2014 and the RNG is pinned to seed 42, so every visitor inherits the identical island with the identical scars. Erosion as history, but a history that already happened, once, for everyone."
+			"qfep_connection": "Eight hundred droplets rewrite a heightmap that admits, in its own comment, to being layered sines impersonating Perlin — and the RNG is pinned to seed 42, so every visitor inherits the identical island with the identical scars. Erosion as history, but a history that already happened, once, for everyone."
 		},
 		"tessellating_portal_demo": {
 			"category": "unknown",
@@ -11521,12 +11522,12 @@
 				"derived_at": "2026-04-29T09:39:46.215897Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A tesseract can only visit 3-space unfolded, so the room is bricked from its nets \u2014 Dal\u00ed crosses rotated and offset like masonry, the center deliberately left hollow. You stand inside an absence framed by flattened higher dimension; the fourth axis appears only as the fold that never happens."
+			"qfep_connection": "A tesseract can only visit 3-space unfolded, so the room is bricked from its nets — Dalí crosses rotated and offset like masonry, the center deliberately left hollow. You stand inside an absence framed by flattened higher dimension; the fourth axis appears only as the fold that never happens."
 		},
 		"tesseract_tunnel": {
 			"category": "procedural",
 			"complexity": "advanced",
-			"description": "Fly through a tunnel of rotating tesseracts \u00e2\u20ac\u201d 4D hypercubes projected into 3D, their inner and outer cubes visible simultaneously. Experience the shadow of a higher dimension.",
+			"description": "Fly through a tunnel of rotating tesseracts â€” 4D hypercubes projected into 3D, their inner and outer cubes visible simultaneously. Experience the shadow of a higher dimension.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -12021,7 +12022,7 @@
 				"derived_at": "2026-04-29T09:39:46.215897Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The description still reads 'this is the test' while the scene grows the finished recursive tree. Scaffolding promoted to content without renaming: place the token in a map and a whole tree rises under a label that confesses it was never meant to stay \u2014 the registry's dark spot, walkable."
+			"qfep_connection": "The description still reads 'this is the test' while the scene grows the finished recursive tree. Scaffolding promoted to content without renaming: place the token in a map and a whole tree rises under a label that confesses it was never meant to stay — the registry's dark spot, walkable."
 		},
 		"test_scene_6": {
 			"category": "unknown",
@@ -12206,7 +12207,7 @@
 		"torso_estimation_vis": {
 			"category": "body",
 			"complexity": "intermediate",
-			"description": "3-point torso estimation demo \u2014 shows how head + two hand positions estimate torso orientation. Animated tracking points with visible shoulder computation and forward direction.",
+			"description": "3-point torso estimation demo — shows how head + two hand positions estimate torso orientation. Animated tracking points with visible shoulder computation and forward direction.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -12362,7 +12363,7 @@
 				"VR",
 				"morphogenesis"
 			],
-			"qfep_connection": "Pure phi \u2014 the rate of change IS the content. The forest exists only as a process of generation and removal. Stop walking and the forest freezes. The generation_distance parameter controls how far ahead reality extends.",
+			"qfep_connection": "Pure phi — the rate of change IS the content. The forest exists only as a process of generation and removal. Stop walking and the forest freezes. The generation_distance parameter controls how far ahead reality extends.",
 			"gamwell_reference": "Procedural world generation, infinite terrain, proximity-based LOD, parametric tree generation, spatial hashing",
 			"interactions": [
 				"walk forward to generate new trees ahead",
@@ -12494,7 +12495,7 @@
 				"derived_at": "2026-04-29T09:39:46.215897Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "One floor cut into four quadrants, each running a different fragment shader \u2014 quarter-arcs, diagonal split, dots, zigzag \u2014 with a sample solid hovering above wearing the same program. The quarter-arc corner states the Truchet bargain plainly: a single tile plus one orientation bit per cell is enough to produce unbounded corridor, pattern as the cheapest possible seed."
+			"qfep_connection": "One floor cut into four quadrants, each running a different fragment shader — quarter-arcs, diagonal split, dots, zigzag — with a sample solid hovering above wearing the same program. The quarter-arc corner states the Truchet bargain plainly: a single tile plus one orientation bit per cell is enough to produce unbounded corridor, pattern as the cheapest possible seed."
 		},
 		"voronoi_diagram_3d": {
 			"category": "unknown",
@@ -12770,7 +12771,7 @@
 		"water_flowers": {
 			"category": "physicssimulation",
 			"complexity": "intermediate",
-			"description": "Floating flowers on physically simulated Gerstner waves \u2014 buoyancy, wave alignment, and drift create a mesmerizing water garden. Configurable flower count, water size, wave strength, and drift speed.",
+			"description": "Floating flowers on physically simulated Gerstner waves — buoyancy, wave alignment, and drift create a mesmerizing water garden. Configurable flower count, water size, wave strength, and drift speed.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -12955,7 +12956,7 @@
 				"derived_at": "2026-04-29T09:39:46.215897Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Each cell wears its entropy as a floating number and its possible futures as mini-tiles, and collapse always picks on whoever has the fewest options left. Certainty spreads not by decree but by neighbors deleting each other's possibilities \u2014 constraint propagation slowed to watching speed."
+			"qfep_connection": "Each cell wears its entropy as a floating number and its possible futures as mini-tiles, and collapse always picks on whoever has the fewest options left. Certainty spreads not by decree but by neighbors deleting each other's possibilities — constraint propagation slowed to watching speed."
 		},
 		"waves": {
 			"category": "unknown",
@@ -13036,12 +13037,12 @@
 				"derived_at": "2026-04-29T09:39:46.215897Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Water as the sum of its tells: noise textures for swell, a normal map for glitter, Beer's-law fade for depth, edge foam for shore \u2014 four quads, none of them wet. Convincingness assembled from parts, each shader a different bet on which cue the body will believe."
+			"qfep_connection": "Water as the sum of its tells: noise textures for swell, a normal map for glitter, Beer's-law fade for depth, edge foam for shore — four quads, none of them wet. Convincingness assembled from parts, each shader a different bet on which cue the body will believe."
 		},
 		"wfc": {
 			"category": "procedural",
 			"complexity": "advanced",
-			"description": "Wave Function Collapse algorithm \u00e2\u20ac\u201d generating complex patterns from local adjacency constraints. Start with superposition of all possibilities, observe one tile, propagate constraints until the world resolves.",
+			"description": "Wave Function Collapse algorithm â€” generating complex patterns from local adjacency constraints. Start with superposition of all possibilities, observe one tile, propagate constraints until the world resolves.",
 			"dev_themes": [
 				"generation",
 				"procedural"
@@ -13111,7 +13112,7 @@
 				"derived_at": "2026-04-29T09:39:46.215897Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Every cell begins holding all tiles at once, and the world exists only as options are deleted \u2014 collapse leaves a single survivor and propagation prunes the neighbours. Compatibility is nothing deeper than one edge-string equalling another reversed: global coherence rented entirely from local string-matching."
+			"qfep_connection": "Every cell begins holding all tiles at once, and the world exists only as options are deleted — collapse leaves a single survivor and propagation prunes the neighbours. Compatibility is nothing deeper than one edge-string equalling another reversed: global coherence rented entirely from local string-matching."
 		},
 		"wfc_3d_demo": {
 			"category": "unknown",
@@ -13298,7 +13299,7 @@
 		"rd_coral_garden": {
 			"lookup_name": "rd_coral_garden",
 			"name": "Gray-Scott Coral Garden",
-			"description": "Walkable polyp forest grown from Gray-Scott reaction-diffusion. Two constants (F, K) \u2014 no designer placed the pillars, the rule did. Uses the commons/rd_grammar substrate from the DNA research loop.",
+			"description": "Walkable polyp forest grown from Gray-Scott reaction-diffusion. Two constants (F, K) — no designer placed the pillars, the rule did. Uses the commons/rd_grammar substrate from the DNA research loop.",
 			"scene": "res://commons/artifacts/rd_coral_garden/rd_coral_garden.tscn",
 			"category": "procedural",
 			"include_in_map_data": true,
@@ -13386,7 +13387,7 @@
 		"gray_scott_comparison": {
 			"lookup_name": "gray_scott_comparison",
 			"name": "Gray-Scott Comparison Garden",
-			"description": "Nine mini-gardens arranged 3\u00d73, each running the same reaction-diffusion equations with a different (F, K) preset. Walking between them teaches the thesis directly: same equations, different constants, different ecology. The pedagogical punchline of pattern formation.",
+			"description": "Nine mini-gardens arranged 3×3, each running the same reaction-diffusion equations with a different (F, K) preset. Walking between them teaches the thesis directly: same equations, different constants, different ecology. The pedagogical punchline of pattern formation.",
 			"scene": "res://commons/artifacts/gray_scott_comparison/gray_scott_comparison.tscn",
 			"category": "procedural",
 			"include_in_map_data": true,
@@ -13476,12 +13477,12 @@
 		"seed_orb": {
 			"name": "Seed Orb",
 			"lookup_name": "seed_orb",
-			"description": "The new \u03bb_edge affordance for proceduralgeneration. Player throws a glowing seed; where it lands, procedural growth happens around it. Terrain bumps, tile constraints, L-system-like branches. The seed is input, the world is output \u2014 an author isn't needed for a world.",
+			"description": "The new λ_edge affordance for proceduralgeneration. Player throws a glowing seed; where it lands, procedural growth happens around it. Terrain bumps, tile constraints, L-system-like branches. The seed is input, the world is output — an author isn't needed for a world.",
 			"scene": "res://algorithms/proceduralgeneration/affordance_demos/seed_orb.tscn",
 			"category": "procedural",
 			"sequence": "proceduralgeneration",
 			"artifact_type": "procedural",
-			"qfep_term": "\u03bb",
+			"qfep_term": "λ",
 			"capacity": "SEED a world",
 			"dev_themes": [
 				"proceduralgeneration",
@@ -13536,7 +13537,7 @@
 	},
 	"registry_info": {
 		"category": "proceduralgeneration",
-		"description": "Additional procedural generation artifacts \u00e2\u20ac\u201d wave function collapse, higher-dimensional polytopes, reaction diffusion, and maze generation. The constructive side of algorithms.",
+		"description": "Additional procedural generation artifacts â€” wave function collapse, higher-dimensional polytopes, reaction diffusion, and maze generation. The constructive side of algorithms.",
 		"name": "procgen_extra",
 		"theoretical_grounding": "Constraint satisfaction (WFC), higher-dimensional geometry (tesseracts, penteracts), Turing patterns, maze generation algorithms"
 	}

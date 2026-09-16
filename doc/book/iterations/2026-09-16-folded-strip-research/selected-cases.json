@@ -1,0 +1,2294 @@
+{
+  "schema_version": 1,
+  "baseline_source_sha256": "3d1fef0e7a0f4742da782175fa3878d3e4ef76698b95c33381828b44f8b5e180",
+  "baseline_export_sha256": "fe28a04ca6dca915a757cdab09f2a303f9e92ea141f115fe058003823b0bfc5a",
+  "generator_sha256": "3687364f6833510038edd010ae3eb707993750ebfdaa790dd67889bf768f32ba",
+  "geometry_source": "Production vertex_positions exported by Godot; candidates retain the same vertex indices and triangle graph.",
+  "measurement_winding": "Odd strip triangles reversed for coherent normals only; rendering still uses unchanged production update_mesh().",
+  "metric_definitions": {
+    "area": "0.5 times the cross-product length; a face is degenerate at or below 1e-10 square metres.",
+    "crease": "Angle between coherently oriented adjacent face normals: 0 degrees unfolded, 180 degrees folded back; degenerate neighbors skipped.",
+    "coplanarity": "Maximum vertex distance from the largest nondegenerate face plane; null if no such face exists. This is a reference-plane test, not a best-fit-plane estimate.",
+    "edge_drift": "Maximum absolute and relative length change among every unique mesh edge against the exported baseline.",
+    "extent": "Axis-aligned local-space bounding box; orientation-dependent and not a museum footprint.",
+    "intersections": "Contacts between ideal triangles with disjoint vertex-index sets; includes coplanar overlap and boundary contact. Shared-vertex pairs and degenerate triangles excluded.",
+    "intersection_tolerance": "Distance/barycentric tolerance 1e-8; area tolerance 1e-10 square metres; finite-precision heuristic, not a robust solid collision test."
+  },
+  "limitations": [
+    "Ideal triangle surfaces in artifact-local metres; not shell thickness, grab-handle clearance, collision bodies, or museum placement.",
+    "Intersection detector checks only triangle pairs with no shared vertex; adjacent/shared-vertex fold-through can be missed.",
+    "Coplanar overlap and boundary contact are reported; floating-point tolerances are not an exact geometric proof.",
+    "A geometry check does not establish visual quality, stability, walkability, VR comfort, or suitability for the book."
+  ],
+  "analytic_checks": [
+    {
+      "name": "unit square: two half-unit triangles",
+      "passed": true
+    },
+    {
+      "name": "strip winding corrected: flat crease zero",
+      "passed": true
+    },
+    {
+      "name": "flat square coplanar",
+      "passed": true
+    },
+    {
+      "name": "shared-edge pair excluded from disjoint checks",
+      "passed": true
+    },
+    {
+      "name": "one hinge gives 90-degree crease",
+      "passed": true
+    },
+    {
+      "name": "hinge preserves all five mesh edge lengths",
+      "passed": true
+    },
+    {
+      "name": "hinge preserves both triangle areas",
+      "passed": true
+    },
+    {
+      "name": "hinge vertices remain fixed",
+      "passed": true
+    },
+    {
+      "name": "noncoplanar crossing detected",
+      "passed": true
+    },
+    {
+      "name": "crossing symmetric",
+      "passed": true
+    },
+    {
+      "name": "coplanar containment detected",
+      "passed": true
+    },
+    {
+      "name": "coplanar reversed winding supported",
+      "passed": true
+    },
+    {
+      "name": "point-only coplanar contact retained",
+      "passed": true
+    },
+    {
+      "name": "coplanar separated triangles clear",
+      "passed": true
+    },
+    {
+      "name": "parallel separated planes clear",
+      "passed": true
+    },
+    {
+      "name": "degenerate faces explicitly listed",
+      "passed": true
+    },
+    {
+      "name": "degenerate crease undefined rather than zero",
+      "passed": true
+    },
+    {
+      "name": "fully degenerate reference plane undefined",
+      "passed": true
+    }
+  ],
+  "selection": {
+    "method": "Predetermined contrastive shortlist, not an aesthetic optimizer or ranking.",
+    "criteria": [
+      "Control: keep the exported production starting arrangement visible.",
+      "Isolate one actual crease before comparing repeated hinges.",
+      "Keep a crowding stress case: repeated hinge turns preserve lengths but can overlap; measured contacts stay visible.",
+      "Change the hinge schedule to paired signs without adding triangles.",
+      "Compare a broad curved silhouette with the edge-length-preserving hinge operations.",
+      "Expose rotation along the long direction and its measured edge-length cost.",
+      "Use the already familiar sine operation to make one rise and one fall.",
+      "Retain a visible failure: unchanged connectivity does not guarantee a surface with area."
+    ],
+    "selected_ids": [
+      "shipped",
+      "hinge-single-70",
+      "hinge-alternating-60",
+      "hinge-paired-40",
+      "bend-180",
+      "twist-360",
+      "wave-1-050",
+      "collapsed"
+    ],
+    "count_search_cases": 47,
+    "count_selected_cases": 8
+  },
+  "cases": [
+    {
+      "id": "shipped",
+      "title": "The shipped strip",
+      "family": "baseline",
+      "parameters": {},
+      "vertices": [
+        [
+          -2.0,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -1.8400000333786,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -1.67999994754791,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -1.51999998092651,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -1.36000001430511,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -1.20000004768372,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -1.03999996185303,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -0.879999995231628,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -0.720000028610229,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -0.560000002384186,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -0.400000005960464,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -0.239999994635582,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -0.0799999982118607,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          0.0799999982118607,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          0.239999994635582,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          0.400000005960464,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          0.560000002384186,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          0.720000028610229,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          0.879999995231628,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          1.03999996185303,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          1.20000004768372,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          1.36000001430511,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          1.51999998092651,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          1.67999994754791,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          1.8400000333786,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          2.0,
+          0.75,
+          -0.150000005960464
+        ]
+      ],
+      "metrics": {
+        "vertex_count": 26,
+        "triangle_count": 24,
+        "unique_edge_count": 49,
+        "min_triangle_area_m2": 0.07375634078876883,
+        "max_triangle_area_m2": 0.07375636826515555,
+        "total_triangle_area_m2": 1.7701525635998692,
+        "degenerate_triangles": [],
+        "max_crease_degrees": 1.2074182697257333e-06,
+        "mean_crease_degrees": 1.0499289301962898e-07,
+        "valid_crease_count": 23,
+        "reference_plane_triangle": 5,
+        "max_distance_to_reference_plane_m": 2.7755575615628914e-17,
+        "max_edge_length_drift_m": 0.0,
+        "max_edge_length_drift_ratio": 0.0,
+        "bbox_min_m": [
+          -2.0,
+          0.400000005960464,
+          -0.150000005960464
+        ],
+        "bbox_max_m": [
+          2.0,
+          0.75,
+          0.150000005960464
+        ],
+        "extent_m": [
+          4.0,
+          0.349999994039536,
+          0.300000011920928
+        ],
+        "disjoint_triangle_intersection_count": 0,
+        "disjoint_triangle_intersections": [],
+        "intersection_status": "no_disjoint_contact_detected",
+        "triangle_pairs_tested": 231,
+        "triangle_pairs_skipped": 45
+      },
+      "limitations": [
+        "Untouched exported production vertex positions; no claim that its starting geometry is pleated."
+      ],
+      "selection_reason": "Control: keep the exported production starting arrangement visible."
+    },
+    {
+      "id": "hinge-single-70",
+      "title": "One crease, 70 degrees",
+      "family": "hinge_single",
+      "parameters": {
+        "angle_degrees": 70,
+        "hinge_index": 11,
+        "operation": "downstream rigid rotations"
+      },
+      "vertices": [
+        [
+          -2.0,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -1.8400000333786,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -1.67999994754791,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -1.51999998092651,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -1.36000001430511,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -1.20000004768372,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -1.03999996185303,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -0.879999995231628,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -0.720000028610229,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -0.560000002384186,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -0.40000000596046403,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -0.23999999463558197,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -0.07999999821186066,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          0.07999999821186066,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          0.052084708888845144,
+          0.26464656107577716,
+          -0.10813381694992538
+        ],
+        [
+          0.2120847114632396,
+          0.6146465488124275,
+          -0.40813384089114546
+        ],
+        [
+          0.18416942214022447,
+          0.12929310988820442,
+          -0.3662676518806076
+        ],
+        [
+          0.3441694308652926,
+          0.47929309132196857,
+          -0.6662676878421211
+        ],
+        [
+          0.3162541292409298,
+          -0.006060334996482064,
+          -0.6244014747909961
+        ],
+        [
+          0.47625411336330525,
+          0.3439396716488249,
+          -0.9244014626713406
+        ],
+        [
+          0.44833886094433206,
+          -0.14141380509271523,
+          -0.882535345782562
+        ],
+        [
+          0.6083388450667024,
+          0.20858620155259688,
+          -1.1825353336628965
+        ],
+        [
+          0.5804235434423399,
+          -0.276767224765854,
+          -1.140669120611772
+        ],
+        [
+          0.7404235275647144,
+          0.07323278187945403,
+          -1.4406691084921144
+        ],
+        [
+          0.7125082751457412,
+          -0.41212069486208625,
+          -1.3988029916033358
+        ],
+        [
+          0.8725082592681155,
+          -0.062120688216778464,
+          -1.6988029794836779
+        ]
+      ],
+      "metrics": {
+        "vertex_count": 26,
+        "triangle_count": 24,
+        "unique_edge_count": 49,
+        "min_triangle_area_m2": 0.07375634078876876,
+        "max_triangle_area_m2": 0.0737563682651557,
+        "total_triangle_area_m2": 1.7701525635998687,
+        "degenerate_triangles": [],
+        "max_crease_degrees": 70.0,
+        "mean_crease_degrees": 3.043478514344831,
+        "valid_crease_count": 23,
+        "reference_plane_triangle": 18,
+        "max_distance_to_reference_plane_m": 1.704460036987029,
+        "max_edge_length_drift_m": 7.216449660063518e-16,
+        "max_edge_length_drift_ratio": 2.2551409892289066e-15,
+        "bbox_min_m": [
+          -2.0,
+          -0.41212069486208625,
+          -1.6988029794836779
+        ],
+        "bbox_max_m": [
+          0.8725082592681155,
+          0.75,
+          0.150000005960464
+        ],
+        "extent_m": [
+          2.8725082592681153,
+          1.1621206948620864,
+          1.848802985444142
+        ],
+        "disjoint_triangle_intersection_count": 0,
+        "disjoint_triangle_intersections": [],
+        "intersection_status": "no_disjoint_contact_detected",
+        "triangle_pairs_tested": 231,
+        "triangle_pairs_skipped": 45
+      },
+      "limitations": [
+        "Preserves triangle edge lengths; does not prevent surfaces passing through each other."
+      ],
+      "selection_reason": "Isolate one actual crease before comparing repeated hinges."
+    },
+    {
+      "id": "hinge-alternating-60",
+      "title": "Alternating hinge turns, 60 degrees",
+      "family": "hinge_alternating",
+      "parameters": {
+        "angle_degrees": 60,
+        "schedule": "alternating",
+        "operation": "downstream rigid rotations"
+      },
+      "vertices": [
+        [
+          -2.0,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -1.8400000333786,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -1.67999994754791,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -1.6627971321329824,
+          0.8827501494750015,
+          0.08103367810712186
+        ],
+        [
+          -1.803744585096562,
+          0.5470230913941803,
+          0.4058738700085518
+        ],
+        [
+          -1.977049357127254,
+          0.9128307347965278,
+          0.13338494120796876
+        ],
+        [
+          -2.0280399665710944,
+          0.4333147475273038,
+          0.2079798884083515
+        ],
+        [
+          -1.9112081712460252,
+          0.7568160915951863,
+          -0.13813743893380412
+        ],
+        [
+          -1.7308243903410991,
+          0.37423408003695224,
+          0.10515803639933896
+        ],
+        [
+          -1.6478777399832527,
+          0.8473978021792278,
+          0.019507837243423393
+        ],
+        [
+          -1.736396866634742,
+          0.5336356451096228,
+          0.3825748762922887
+        ],
+        [
+          -1.9173798040541405,
+          0.9333561666724217,
+          0.16910664069550033
+        ],
+        [
+          -2.029302736939023,
+          0.4694345150533977,
+          0.2708413942920322
+        ],
+        [
+          -1.9722762172552573,
+          0.7762939144188897,
+          -0.1042389796408488
+        ],
+        [
+          -1.7971956374664835,
+          0.3596863951292195,
+          0.07983971898546285
+        ],
+        [
+          -1.66031703514073,
+          0.8118081671638697,
+          -0.04243112006371687
+        ],
+        [
+          -1.6838023837419294,
+          0.5087671916989245,
+          0.3392947074960103
+        ],
+        [
+          -1.846691174809023,
+          0.9414035680311486,
+          0.1831120612404486
+        ],
+        [
+          -2.003608298545905,
+          0.5032156181052545,
+          0.3296328076109471
+        ],
+        [
+          -2.014507778239555,
+          0.8056597479511471,
+          -0.05313179624271469
+        ],
+        [
+          -1.8696622702327537,
+          0.3584284386275277,
+          0.07765033257079756
+        ],
+        [
+          -1.6983435048312465,
+          0.7810491973188775,
+          -0.09596293663270958
+        ],
+        [
+          -1.6534507910029512,
+          0.4759589288779711,
+          0.2821965067861576
+        ],
+        [
+          -1.7750495968618436,
+          0.9358268497489629,
+          0.17340671835652718
+        ],
+        [
+          -1.9546157453513908,
+          0.5298474650896463,
+          0.37598205741420226
+        ],
+        [
+          -2.031889042809567,
+          0.8407316360847308,
+          0.007906165750919875
+        ]
+      ],
+      "metrics": {
+        "vertex_count": 26,
+        "triangle_count": 24,
+        "unique_edge_count": 49,
+        "min_triangle_area_m2": 0.07375634078876858,
+        "max_triangle_area_m2": 0.07375636826515597,
+        "total_triangle_area_m2": 1.7701525635998707,
+        "degenerate_triangles": [],
+        "max_crease_degrees": 60.00000000000036,
+        "mean_crease_degrees": 60.00000000000001,
+        "valid_crease_count": 23,
+        "reference_plane_triangle": 18,
+        "max_distance_to_reference_plane_m": 0.3774812649325924,
+        "max_edge_length_drift_m": 1.7763568394002505e-15,
+        "max_edge_length_drift_ratio": 5.551116281178847e-15,
+        "bbox_min_m": [
+          -2.031889042809567,
+          0.3584284386275277,
+          -0.150000005960464
+        ],
+        "bbox_max_m": [
+          -1.6478777399832527,
+          0.9414035680311486,
+          0.4058738700085518
+        ],
+        "extent_m": [
+          0.38401130282631435,
+          0.5829751294036208,
+          0.5558738759690158
+        ],
+        "disjoint_triangle_intersection_count": 99,
+        "disjoint_triangle_intersections": [
+          {
+            "triangles": [
+              0,
+              6
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              0,
+              7
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              0,
+              8
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              0,
+              12
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              0,
+              13
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              0,
+              14
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              0,
+              18
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              0,
+              19
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              0,
+              20
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              1,
+              7
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              1,
+              8
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              1,
+              9
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              1,
+              13
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              1,
+              14
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              1,
+              15
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              1,
+              19
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              1,
+              20
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              1,
+              21
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              2,
+              8
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              2,
+              9
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              2,
+              10
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              2,
+              14
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              2,
+              15
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              2,
+              16
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              2,
+              20
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              2,
+              21
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              2,
+              22
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              3,
+              9
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              3,
+              10
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              3,
+              11
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              3,
+              15
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              3,
+              16
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              3,
+              17
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              3,
+              21
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              3,
+              22
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              3,
+              23
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              4,
+              10
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              4,
+              11
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              4,
+              12
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              4,
+              16
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              4,
+              17
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              4,
+              18
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              4,
+              22
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              4,
+              23
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              5,
+              11
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              5,
+              12
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              5,
+              13
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              5,
+              17
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              5,
+              18
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              5,
+              19
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              5,
+              23
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              6,
+              12
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              6,
+              13
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              6,
+              14
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              6,
+              18
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              6,
+              19
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              6,
+              20
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              7,
+              13
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              7,
+              14
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              7,
+              15
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              7,
+              19
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              7,
+              20
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              7,
+              21
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              8,
+              14
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              8,
+              15
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              8,
+              16
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              8,
+              20
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              8,
+              21
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              8,
+              22
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              9,
+              15
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              9,
+              16
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              9,
+              17
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              9,
+              21
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              9,
+              22
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              9,
+              23
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              10,
+              16
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              10,
+              17
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              10,
+              18
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              10,
+              22
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              10,
+              23
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              11,
+              17
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              11,
+              18
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              11,
+              19
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              11,
+              23
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              12,
+              18
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              12,
+              19
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              12,
+              20
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              13,
+              19
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              13,
+              20
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              13,
+              21
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              14,
+              20
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              14,
+              21
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              14,
+              22
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              15,
+              21
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              15,
+              22
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              15,
+              23
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              16,
+              22
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              16,
+              23
+            ],
+            "kind": "noncoplanar_intersection"
+          },
+          {
+            "triangles": [
+              17,
+              23
+            ],
+            "kind": "noncoplanar_intersection"
+          }
+        ],
+        "intersection_status": "contacts_detected",
+        "triangle_pairs_tested": 231,
+        "triangle_pairs_skipped": 45
+      },
+      "limitations": [
+        "Signs describe rotation about the ordered vertex-to-vertex hinge axes; they are not mountain/valley labels.",
+        "Preserves triangle edge lengths; extreme folds may overlap or pass through one another."
+      ],
+      "selection_reason": "Keep a crowding stress case: repeated hinge turns preserve lengths but can overlap; measured contacts stay visible."
+    },
+    {
+      "id": "hinge-paired-40",
+      "title": "Paired hinge turns, 40 degrees",
+      "family": "hinge_paired",
+      "parameters": {
+        "angle_degrees": 40,
+        "schedule": "paired",
+        "operation": "downstream rigid rotations"
+      },
+      "vertices": [
+        [
+          -2.0,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -1.8400000333786,
+          0.75,
+          -0.150000005960464
+        ],
+        [
+          -1.67999994754791,
+          0.400000005960464,
+          0.150000005960464
+        ],
+        [
+          -1.5868163549895775,
+          0.8588536338027202,
+          0.01263131013421595
+        ],
+        [
+          -1.363361465647594,
+          0.4406924478116091,
+          0.12799650097942086
+        ],
+        [
+          -1.3389519450794831,
+          0.8143916654646154,
+          -0.18481824024970367
+        ],
+        [
+          -1.0567365986732635,
+          0.5212224484511695,
+          0.08445177088150431
+        ],
+        [
+          -1.1016139592176966,
+          0.9862841181057731,
+          -0.05627370025900866
+        ],
+        [
+          -0.7665674795552662,
+          0.6398980937056972,
+          0.02028066516324388
+        ],
+        [
+          -0.8797888791902545,
+          1.0021837962440485,
+          -0.28636244298294333
+        ],
+        [
+          -0.49895010043316523,
+          0.7942261906142442,
+          -0.06316866911962327
+        ],
+        [
+          -0.6781368693454028,
+          1.230492534360752,
+          -0.18832371602161918
+        ],
+        [
+          -0.25950694667525864,
+          0.9809644135997582,
+          -0.16414300820528532
+        ],
+        [
+          -0.5008945967259862,
+          1.2976779254134905,
+          -0.4461439934401306
+        ],
+        [
+          -0.05326849226135341,
+          1.196189561615664,
+          -0.28052097435377116
+        ],
+        [
+          -0.35178561053290636,
+          1.5710643220704297,
+          -0.37247993627170695
+        ],
+        [
+          0.11543240242376143,
+          1.4353799763926607,
+          -0.4098575839055787
+        ],
+        [
+          -0.23394268786337702,
+          1.6761722890446171,
+          -0.6508059597605391
+        ],
+        [
+          0.24305147125697926,
+          1.6935104651902742,
+          -0.5494355887831748
+        ],
+        [
+          -0.1498415043163074,
+          1.9795293679016739,
+          -0.5933478801833947
+        ],
+        [
+          0.3269075893248762,
+          1.965158005971729,
+          -0.696322615505456
+        ],
+        [
+          -0.10124897510658938,
+          2.106026621051018,
+          -0.8832396610603392
+        ],
+        [
+          0.365238966609629,
+          2.244615393484534,
+          -0.8474326130415627
+        ],
+        [
+          -0.08918600435428492,
+          2.42174213211568,
+          -0.8324640952318335
+        ],
+        [
+          0.35724033817439327,
+          2.526011683788981,
+          -0.9995910282389818
+        ],
+        [
+          -0.11390597427497363,
+          2.5513073514263054,
+          -1.1240147951134327
+        ]
+      ],
+      "metrics": {
+        "vertex_count": 26,
+        "triangle_count": 24,
+        "unique_edge_count": 49,
+        "min_triangle_area_m2": 0.07375634078876882,
+        "max_triangle_area_m2": 0.07375636826515554,
+        "total_triangle_area_m2": 1.7701525635998683,
+        "degenerate_triangles": [],
+        "max_crease_degrees": 40.00000000000014,
+        "mean_crease_degrees": 39.99999999999995,
+        "valid_crease_count": 23,
+        "reference_plane_triangle": 5,
+        "max_distance_to_reference_plane_m": 1.2972064278815658,
+        "max_edge_length_drift_m": 1.4988010832439613e-15,
+        "max_edge_length_drift_ratio": 4.683752617410606e-15,
+        "bbox_min_m": [
+          -2.0,
+          0.400000005960464,
+          -1.1240147951134327
+        ],
+        "bbox_max_m": [
+          0.365238966609629,
+          2.5513073514263054,
+          0.150000005960464
+        ],
+        "extent_m": [
+          2.365238966609629,
+          2.1513073454658413,
+          1.2740148010738968
+        ],
+        "disjoint_triangle_intersection_count": 0,
+        "disjoint_triangle_intersections": [],
+        "intersection_status": "no_disjoint_contact_detected",
+        "triangle_pairs_tested": 231,
+        "triangle_pairs_skipped": 45
+      },
+      "limitations": [
+        "Signs describe rotation about the ordered vertex-to-vertex hinge axes; they are not mountain/valley labels.",
+        "Preserves triangle edge lengths; extreme folds may overlap or pass through one another."
+      ],
+      "selection_reason": "Change the hinge schedule to paired signs without adding triangles."
+    },
+    {
+      "id": "bend-180",
+      "title": "Bend through 180 degrees",
+      "family": "bend",
+      "parameters": {
+        "total_angle_degrees": 180,
+        "operation": "vertex deformation"
+      },
+      "vertices": [
+        [
+          -1.2732395447351623,
+          1.2286133451327501,
+          1.1167155134512452
+        ],
+        [
+          -1.2631996748101546,
+          1.4747605715505254,
+          0.6955539461828255
+        ],
+        [
+          -1.2332383700692573,
+          1.0225455542477575,
+          0.8763031043994159
+        ],
+        [
+          -1.183828182576396,
+          1.2735804127997428,
+          0.46084377429721296
+        ],
+        [
+          -1.1157483252389697,
+          0.8294258327349124,
+          0.6509967754242423
+        ],
+        [
+          -1.030072457628754,
+          1.091566663659536,
+          0.24849441235459804
+        ],
+        [
+          -0.9281516571908557,
+          0.661388463771284,
+          0.4549531894286829
+        ],
+        [
+          -0.8115934268367987,
+          0.9401557862213091,
+          0.07184839870421145
+        ],
+        [
+          -0.682235888652374,
+          0.5289919734028312,
+          0.30049062610042665
+        ],
+        [
+          -0.542119033507249,
+          0.8288615745156428,
+          -0.05799484091500916
+        ],
+        [
+          -0.39345266290212444,
+          0.4405552306225438,
+          0.19731443204702456
+        ],
+        [
+          -0.23858129440560485,
+          0.7646770196654528,
+          -0.13287681732278972
+        ],
+        [
+          -0.0799473707145765,
+          0.4016350850335379,
+          0.15190759810409665
+        ],
+        [
+          0.0799473707145765,
+          0.7516350790730739,
+          -0.1480924138168315
+        ],
+        [
+          0.23858129440560485,
+          0.4146770256259166,
+          0.16712319459813826
+        ],
+        [
+          0.39345266290212444,
+          0.79055522466208,
+          -0.10268557987390373
+        ],
+        [
+          0.542119033507249,
+          0.4788615804761068,
+          0.2420051710059189
+        ],
+        [
+          0.682235888652374,
+          0.8789919674423674,
+          0.0004906141794983332
+        ],
+        [
+          0.8115934268367987,
+          0.590155792181773,
+          0.3718484106251393
+        ],
+        [
+          0.9281516571908559,
+          1.0113884578108203,
+          0.15495317750775456
+        ],
+        [
+          1.030072457628754,
+          0.7415666696200003,
+          0.548494424275526
+        ],
+        [
+          1.1157483252389697,
+          1.1794258267744486,
+          0.35099676350331394
+        ],
+        [
+          1.183828182576396,
+          0.9235804187602069,
+          0.7608437862181409
+        ],
+        [
+          1.2332383700692573,
+          1.372545548287294,
+          0.5763030924784875
+        ],
+        [
+          1.2631996748101546,
+          1.1247605775109895,
+          0.9955539581037534
+        ],
+        [
+          1.2732395447351623,
+          1.5786133391722865,
+          0.8167155015303167
+        ]
+      ],
+      "metrics": {
+        "vertex_count": 26,
+        "triangle_count": 24,
+        "unique_edge_count": 49,
+        "min_triangle_area_m2": 0.07357982019460359,
+        "max_triangle_area_m2": 0.07357984748675317,
+        "total_triangle_area_m2": 1.765916066760583,
+        "degenerate_triangles": [],
+        "max_crease_degrees": 7.619621303429635,
+        "mean_crease_degrees": 7.619620131062189,
+        "valid_crease_count": 23,
+        "reference_plane_triangle": 18,
+        "max_distance_to_reference_plane_m": 2.190831817629224,
+        "max_edge_length_drift_m": 0.0008415419263996249,
+        "max_edge_length_drift_ratio": 0.0026298180889380136,
+        "bbox_min_m": [
+          -1.2732395447351623,
+          0.4016350850335379,
+          -0.1480924138168315
+        ],
+        "bbox_max_m": [
+          1.2732395447351623,
+          1.5786133391722865,
+          1.1167155134512452
+        ],
+        "extent_m": [
+          2.5464790894703246,
+          1.1769782541387486,
+          1.2648079272680768
+        ],
+        "disjoint_triangle_intersection_count": 0,
+        "disjoint_triangle_intersections": [],
+        "intersection_status": "no_disjoint_contact_detected",
+        "triangle_pairs_tested": 231,
+        "triangle_pairs_skipped": 45
+      },
+      "limitations": [
+        "Sampled cylindrical deformation, not rigid paper folding; straight mesh edges are chords and change length."
+      ],
+      "selection_reason": "Compare a broad curved silhouette with the edge-length-preserving hinge operations."
+    },
+    {
+      "id": "twist-360",
+      "title": "Twist through 360 degrees",
+      "family": "twist",
+      "parameters": {
+        "total_angle_degrees": 360,
+        "operation": "vertex deformation"
+      },
+      "vertices": [
+        [
+          -1.9999999999999996,
+          0.7500000000000006,
+          -0.1500000059604642
+        ],
+        [
+          -1.8400000333785995,
+          0.3681944734480201,
+          0.10176676127282087
+        ],
+        [
+          -1.6799999475479095,
+          0.8006167272469082,
+          -0.04713909710879993
+        ],
+        [
+          -1.5199999809265095,
+          0.3447484256975606,
+          -0.01045044993767627
+        ],
+        [
+          -1.3600000143051096,
+          0.7954188858766891,
+          0.06738335705303032
+        ],
+        [
+          -1.2000000476837196,
+          0.37826353777821153,
+          -0.12008232178331715
+        ],
+        [
+          -1.0399999618530296,
+          0.7356923490225427,
+          0.16523610582580472
+        ],
+        [
+          -0.8799999952316278,
+          0.4604486405081871,
+          -0.2000074651128206
+        ],
+        [
+          -0.7200000286102288,
+          0.6362127014747353,
+          0.22221162500661218
+        ],
+        [
+          -0.5600000023841858,
+          0.5709722074145321,
+          -0.23045341743601663
+        ],
+        [
+          -0.40000000596046387,
+          0.5215898248222702,
+          0.22421497187786754
+        ],
+        [
+          -0.23999999463558191,
+          0.6824922018608773,
+          -0.20388827314208596
+        ],
+        [
+          -0.0799999982118607,
+          0.4201799185090157,
+          0.1707505261760078
+        ],
+        [
+          0.0799999982118607,
+          0.7674200581788317,
+          -0.12688389615087456
+        ],
+        [
+          0.23999999463558191,
+          0.3570704362561999,
+          0.07504468463877836
+        ],
+        [
+          0.40000000596046387,
+          0.8047457661052506,
+          -0.01849013442787764
+        ],
+        [
+          0.5600000023841858,
+          0.34787381581180277,
+          -0.03922621377841236
+        ],
+        [
+          0.7200000286102288,
+          0.7852354367523772,
+          0.09447784466051343
+        ],
+        [
+          0.8799999952316278,
+          0.3948651789449486,
+          -0.14379306629610314
+        ],
+        [
+          1.0399999618530296,
+          0.7137156884925512,
+          0.18407324449225507
+        ],
+        [
+          1.2000000476837196,
+          0.4864195088999743,
+          -0.21278744515021436
+        ],
+        [
+          1.3600000143051096,
+          0.6078795041874773,
+          0.2281314076260016
+        ],
+        [
+          1.5199999809265095,
+          0.5998874337717661,
+          -0.229141040701256
+        ],
+        [
+          1.6799999475479095,
+          0.49390940834710206,
+          0.21575290544301717
+        ],
+        [
+          1.8400000333785995,
+          0.7071985786335044,
+          -0.18880820252389477
+        ],
+        [
+          1.9999999999999996,
+          0.40000000596046403,
+          0.15000000596046423
+        ]
+      ],
+      "metrics": {
+        "vertex_count": 26,
+        "triangle_count": 24,
+        "unique_edge_count": 49,
+        "min_triangle_area_m2": 0.07711589058375785,
+        "max_triangle_area_m2": 0.07711591833046966,
+        "total_triangle_area_m2": 1.8507817624641576,
+        "degenerate_triangles": [],
+        "max_crease_degrees": 41.869589580956244,
+        "mean_crease_degrees": 41.86958719699824,
+        "valid_crease_count": 23,
+        "reference_plane_triangle": 5,
+        "max_distance_to_reference_plane_m": 1.2418315387002155,
+        "max_edge_length_drift_m": 0.019915309390117097,
+        "max_edge_length_drift_ratio": 0.06223533259466938,
+        "bbox_min_m": [
+          -1.9999999999999996,
+          0.3447484256975606,
+          -0.23045341743601663
+        ],
+        "bbox_max_m": [
+          1.9999999999999996,
+          0.8047457661052506,
+          0.2281314076260016
+        ],
+        "extent_m": [
+          3.999999999999999,
+          0.45999734040769,
+          0.45858482506201825
+        ],
+        "disjoint_triangle_intersection_count": 0,
+        "disjoint_triangle_intersections": [],
+        "intersection_status": "no_disjoint_contact_detected",
+        "triangle_pairs_tested": 231,
+        "triangle_pairs_skipped": 45
+      },
+      "limitations": [
+        "Vertex rotation about the long axis; connected edge lengths and triangle areas can change."
+      ],
+      "selection_reason": "Expose rotation along the long direction and its measured edge-length cost."
+    },
+    {
+      "id": "wave-1-050",
+      "title": "1 wave(s), 0.5 m rise",
+      "family": "wave",
+      "parameters": {
+        "cycles": 1,
+        "amplitude_m": 0.5,
+        "operation": "vertex deformation"
+      },
+      "vertices": [
+        [
+          -1.9999999999999996,
+          0.4000000059604637,
+          0.15000000596046417
+        ],
+        [
+          -1.8400000333785995,
+          0.6690773972603852,
+          -0.24440970379738947
+        ],
+        [
+          -1.6799999475479095,
+          0.24323940971890035,
+          -0.03288734593951706
+        ],
+        [
+          -1.5199999809265095,
+          0.5272513099726824,
+          -0.4098734629069399
+        ],
+        [
+          -1.3600000143051096,
+          0.1252593357453216,
+          -0.1705307577618483
+        ],
+        [
+          -1.2000000476837196,
+          0.4405303091674398,
+          -0.5110479581030855
+        ],
+        [
+          -1.0399999618530296,
+          0.07524640143909511,
+          -0.2288791778068872
+        ],
+        [
+          -0.8799999952316278,
+          0.4303679554820159,
+          -0.5229040367297207
+        ],
+        [
+          -0.7200000286102288,
+          0.10557316999196087,
+          -0.19349794983700622
+        ],
+        [
+          -0.5600000023841858,
+          0.49927830525253664,
+          -0.44250863322786493
+        ],
+        [
+          -0.4000000059604639,
+          0.2087372114185373,
+          -0.0731399083382841
+        ],
+        [
+          -0.23999999463558191,
+          0.6302138570072116,
+          -0.28975049818559545
+        ],
+        [
+          -0.0799999982118607,
+          0.3592171119271495,
+          0.10241996562254121
+        ],
+        [
+          0.0799999982118607,
+          0.7907828940333144,
+          -0.10241996562254135
+        ],
+        [
+          0.23999999463558191,
+          0.5197861489532524,
+          0.2897504981855954
+        ],
+        [
+          0.4000000059604639,
+          0.9412627945419265,
+          0.07313990833828396
+        ],
+        [
+          0.5600000023841858,
+          0.6507217007079273,
+          0.4425086332278648
+        ],
+        [
+          0.7200000286102288,
+          1.044426835968503,
+          0.19349794983700613
+        ],
+        [
+          0.8799999952316278,
+          0.719632050478448,
+          0.5229040367297206
+        ],
+        [
+          1.0399999618530296,
+          1.0747536045213688,
+          0.22887917780688716
+        ],
+        [
+          1.2000000476837196,
+          0.7094696967930242,
+          0.5110479581030855
+        ],
+        [
+          1.3600000143051096,
+          1.0247406702151425,
+          0.17053075776184828
+        ],
+        [
+          1.5199999809265095,
+          0.6227486959877815,
+          0.4098734629069398
+        ],
+        [
+          1.6799999475479095,
+          0.9067605962415637,
+          0.03288734593951706
+        ],
+        [
+          1.8400000333785995,
+          0.4809226087000788,
+          0.24440970379738947
+        ],
+        [
+          1.9999999999999996,
+          0.7500000000000002,
+          -0.15000000596046417
+        ]
+      ],
+      "metrics": {
+        "vertex_count": 26,
+        "triangle_count": 24,
+        "unique_edge_count": 49,
+        "min_triangle_area_m2": 0.07388672327335662,
+        "max_triangle_area_m2": 0.09313480088840492,
+        "total_triangle_area_m2": 2.0039098458249023,
+        "degenerate_triangles": [],
+        "max_crease_degrees": 11.724637545406084,
+        "mean_crease_degrees": 6.928894069677233,
+        "valid_crease_count": 23,
+        "reference_plane_triangle": 12,
+        "max_distance_to_reference_plane_m": 1.2219814987314466,
+        "max_edge_length_drift_m": 0.08407319297934646,
+        "max_edge_length_drift_ratio": 0.26272873393290247,
+        "bbox_min_m": [
+          -1.9999999999999996,
+          0.07524640143909511,
+          -0.5229040367297207
+        ],
+        "bbox_max_m": [
+          1.9999999999999996,
+          1.0747536045213688,
+          0.5229040367297206
+        ],
+        "extent_m": [
+          3.999999999999999,
+          0.9995072030822737,
+          1.0458080734594413
+        ],
+        "disjoint_triangle_intersection_count": 0,
+        "disjoint_triangle_intersections": [],
+        "intersection_status": "no_disjoint_contact_detected",
+        "triangle_pairs_tested": 231,
+        "triangle_pairs_skipped": 45
+      },
+      "limitations": [
+        "Sine displacement of existing vertices; topology stays fixed while edge lengths change."
+      ],
+      "selection_reason": "Use the already familiar sine operation to make one rise and one fall."
+    },
+    {
+      "id": "collapsed",
+      "title": "A strip reduced to a line",
+      "family": "failure",
+      "parameters": {
+        "operation": "vertex deformation",
+        "intentional_failure": "all faces degenerate"
+      },
+      "vertices": [
+        [
+          -1.9999999999999996,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          -1.8400000333785995,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          -1.6799999475479095,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          -1.5199999809265095,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          -1.3600000143051096,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          -1.2000000476837196,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          -1.0399999618530296,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          -0.8799999952316278,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          -0.7200000286102288,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          -0.5600000023841858,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          -0.40000000596046387,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          -0.23999999463558194,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          -0.07999999821186067,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          0.07999999821186067,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          0.23999999463558194,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          0.40000000596046387,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          0.5600000023841858,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          0.7200000286102288,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          0.8799999952316278,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          1.0399999618530296,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          1.2000000476837196,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          1.3600000143051096,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          1.5199999809265095,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          1.6799999475479095,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          1.8400000333785995,
+          0.5750000029802321,
+          0.0
+        ],
+        [
+          1.9999999999999996,
+          0.5750000029802321,
+          0.0
+        ]
+      ],
+      "metrics": {
+        "vertex_count": 26,
+        "triangle_count": 24,
+        "unique_edge_count": 49,
+        "min_triangle_area_m2": 0.0,
+        "max_triangle_area_m2": 0.0,
+        "total_triangle_area_m2": 0.0,
+        "degenerate_triangles": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "max_crease_degrees": null,
+        "mean_crease_degrees": null,
+        "valid_crease_count": 0,
+        "reference_plane_triangle": null,
+        "max_distance_to_reference_plane_m": null,
+        "max_edge_length_drift_m": 0.32795494143782616,
+        "max_edge_length_drift_ratio": 0.672100917566807,
+        "bbox_min_m": [
+          -1.9999999999999996,
+          0.5750000029802321,
+          0.0
+        ],
+        "bbox_max_m": [
+          1.9999999999999996,
+          0.5750000029802321,
+          0.0
+        ],
+        "extent_m": [
+          3.999999999999999,
+          0.0,
+          0.0
+        ],
+        "disjoint_triangle_intersection_count": 0,
+        "disjoint_triangle_intersections": [],
+        "intersection_status": "not_evaluated_all_degenerate",
+        "triangle_pairs_tested": 0,
+        "triangle_pairs_skipped": 276
+      },
+      "limitations": [
+        "Intentional counterexample: every triangle has zero area. Normals and crease measurements are undefined."
+      ],
+      "selection_reason": "Retain a visible failure: unchanged connectivity does not guarantee a surface with area."
+    }
+  ]
+}

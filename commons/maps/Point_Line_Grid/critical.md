@@ -1,265 +1,47 @@
-# Point Line Grid - Critical Reflection
+# Point Line Grid — what a position is allowed to mean
 
-## The Grid as Cadastre
+Trace asked what a record can retain of a gesture. Grid asks what a repeatable address lets us do with that record. When should positions count as the same place, and for what purpose? The question begins with a small action: move while keeping the same coarse address. There is activity here that this particular record can afford to leave out.
 
-From grid_axioms: "The grid is computational space's cadastral map, partitioning continuity into indexed cells."
+Sharing an address can help two pieces meet, or let someone name a meeting point without pointing. It gives a chosen precision to an arrangement. The same interval that omits variation can make assembly less demanding. The critical question concerns what we make that agreement serve.
 
-**Cadastre**: From Latin *capitastrum* - a register for the poll tax. A cadastral system maps territory into parcels for purposes of taxation, ownership, and control.
+## Which part of you moved?
 
-The grid is not neutral geometry. It is **administrative technology** - the infrastructure that makes space legible to power.
+The VR walking recorder follows the headset horizontally and uses rig-origin height. Lean with your feet planted and its reference path can change. Crouch straight down and the chosen floor position stays put. The program has selected a point through which to describe you.
 
-## What the Grid Enables
+Neither response is, by itself, a failure. A projected head position can be useful for locating a visitor in a room. Calling its path a record of footsteps would ask it to support a claim it cannot make. The difference lies between the measurement and its proposed use.
 
-Consider what becomes possible once space is gridded:
+This is where a critical reading can become an implementation question. Would a learner need separate head and body paths to distinguish a lean from a step? Would that extra record serve this experiment? What would collecting it cost, and who would be able to read it? More information can help a chosen task without becoming an obligation to describe someone completely.
 
-**Property**
-- "This parcel is (x: 100-110, z: 200-210)"
-- Ownership requires bounded, indexed territory
-- The grid creates **addressable property**
+## The same address, differently lived
 
-**Taxation**
-- "Plot (23, 45) is assessed at $50,000"
-- Tax systems require enumerable units
-- The grid creates **countable value**
+The one-metre lattice gives nearby positions a shared representative. Within a rounding region, the coarse address can hold while the hand, head or body keeps moving. At the boundary, a small displacement can produce a one-metre change in the recorded coordinate. The rule is consistent; its consequences are uneven across a walk.
 
-**Surveillance**
-- "Subject detected at coordinate (12.4, 56.7)"
-- Tracking requires addressable positions
-- The grid creates **locatable bodies**
+One use of this interval would be to criticise the detail it loses. Another would be to find a comfortable range of movement while keeping an address steady. Crossing its edge can become a rhythm. A loop too small to survive as geometry can still be something someone wanted to do.
 
-**Logistics**
-- "Delivery to grid cell C4"
-- Routing requires indexed destinations
-- The grid creates **computable paths**
+Here the queer possibility belongs to changing what the operation is for. A rule introduced to regularise movement can become material for play, accompaniment or a refusal to optimise the route. The visitor need not discover an unencoded, supposedly authentic movement behind the apparatus. There are already differences to work with inside the encounter.
 
-**Targeting**
-- "Ordinance strike at coordinates..."
-- Violence requires precise addressing
-- The grid creates **calculable destruction**
+Nor does a record's omission establish freedom. A system that ignores an action might leave room for it, or might fail to recognise a need. The consequential question is what decisions will be made from that record, and whether the person supplying it can contest those decisions.
 
-The grid is the **precondition for administration**. Before the grid, space is continuous and illegible. After the grid, space is discrete and governable.
+## A gesture becomes a score
 
-## The Jefferson Grid: Colonial Geometry
+The grid display receives a released dot's list of positions. It recentres and enlarges them, colours one replay pink, then makes a green version by rounding in display space. The original pen's colour is absent from this store. So are the duration and purpose of the gesture.
 
-The U.S. Public Land Survey System (1785) divided western territories into perfect square-mile sections:
-- Township = 6 miles × 6 miles = 36 sections
-- Section = 1 mile × 1 mile = 640 acres
-- Homestead = 160 acres (quarter-section)
+Recognising your loop at another scale can be pleasurable. The transform also makes another use possible: a wrist-sized bend becomes a shape another body might follow. That possibility does not depend on pretending the display preserves the original distance. It depends on admitting the multiplier and negotiating what the transformed line might now ask of someone.
 
-This grid:
-- **Ignored indigenous territories** - No recognition of existing boundaries
-- **Ignored topography** - Straight lines regardless of terrain
-- **Enabled rapid distribution** - Land became abstract, transferable property
-- **Facilitated white settlement** - Grid made "empty" land claimable
+The source coordinates remain unchanged. This matters methodologically: a visual argument can change through rendering even when its input data stays fixed. The cased readout states source length, enlargement and display pitch so a reader can question that argument. A diagram is something made from data, with choices of emphasis and scale; its presence does not make those choices self-evident.
 
-Aerial view of the American Midwest reveals the grid as visible scar - section roads running perfectly north-south, east-west, regardless of watersheds or ecosystems.
+Even the instrument offers a partial reading. It pages through the latest source and summarises ten releases, while older replay meshes may remain. We have to choose between reading another page, following a line and continuing the lesson. The unread part does not stop existing when we turn away.
 
-The grid was **colonial technology** - it transformed contested, inhabited land into indexed, ownable property.
+## What holds you above the drawing
 
-## Quantization as Violence
+The museum places this lattice in a lowered basin beneath walkable glass. The source map's absent floor tiles no longer imply an unwalkable hole. The museum builder has added another structure. The lines provide a drawing; collision geometry provides support.
 
-The grid requires **quantization** - forcing continuous space into discrete cells.
+The distinction allows a precise version of the political question about grids. A coordinate can locate a parcel, a meeting point or a target. It does not itself establish ownership, permission or a right to act there. Those relations need further rules and institutions. A critical account should identify that additional work rather than attribute every possible consequence to rounding alone.
 
-```gdscript
-# Continuous position
-var actual_position = Vector3(2.7, 1.0, 4.3)
+The numbered plan lets us encounter that distinction underfoot. Its cell meshes mark twenty-five places, while a continuous collider supplies support across their edges. The visitor can walk diagonally. To confine movement to those addresses, the program would need another operation. The diagram and the body's permitted movement are related here through specific implementation choices.
 
-# Quantized to grid
-var grid_cell = Vector2i(2, 4)
+For the later QFEP rooms, carry the problem of choosing which variation a model must retain. This hall makes several thresholds available for comparison, but it does not calculate an entropy value or assign a numerical degree of freedom to the visitor. The differences observed here give later models something concrete to answer to.
 
-# Information lost
-# Where in cell (2, 4)? Northwest corner? Southeast? Center?
-# The grid doesn't care. Position 2.1, 2.5, 2.9 all become cell "2"
-```
+Before the next room, choose a movement worth repeating for a reason of your own. Decide what another person would need to know to join it. The grid can help you communicate a place; something else will have to communicate the invitation.
 
-Quantization is **lossy compression**. It discards:
-- **Gradual transitions** - Boundaries become hard edges
-- **Local irregularities** - Grid is uniform, ignoring terrain
-- **Intermediate positions** - Only cell centers are addressable
-- **Ambiguous zones** - A position cannot be "between" cells
-
-What happens to bodies that **don't fit the grid**?
-- Nomadic peoples whose territories cross grid lines
-- Ecosystems whose boundaries are gradients, not edges
-- Informal settlements that don't align to property parcels
-
-The grid insists: **Everything must fit into a cell.**
-
-## The Void in the Center
-
-Point_Line_Grid's architecture features a large central void - absent tiles where no platform exists.
-
-But the **grid_lines still cross through the void**.
-
-This reveals the grid's nature: It addresses **empty space**. The grid doesn't require anything to occupy a cell for that cell to have coordinates.
-
-```gdscript
-# The void has coordinates
-var void_cell = Vector2i(3, 3)
-var walkable = false  # Nothing there
-var addressable = true  # Still has a name
-```
-
-This is the grid's power and its problem:
-- **Power**: Can plan infrastructure in empty space, reserve locations, calculate distances across voids
-- **Problem**: Treats absence the same as presence - the grid cannot represent "illegibility"
-
-## Embodied Space vs. Indexed Space
-
-The map stages a tension:
-
-**Embodied Space** (where you can walk):
-- Perimeter walkway only
-- Must navigate around void
-- Body determines possible paths
-
-**Indexed Space** (where coordinates exist):
-- Grid spans entire area including void
-- Continuous coordinate field
-- Mathematics determines addressability
-
-Your VR position is always indexed as (x, y, z), but you cannot walk through the void. The grid **claims** the void as addressable space, even though your body cannot go there.
-
-This is how power operates: **Indexing space claims it as legible and governable**, regardless of whether it's occupied or accessible.
-
-## The Grid as Forgetting
-
-The grid has no memory of how it was imposed. Once established, it appears **natural** - as if space was always divided this way.
-
-Look at a city map with numbered streets and lettered avenues. This grid:
-- Was imposed at a specific historical moment
-- Replaced previous naming systems (creek names, indigenous names, informal paths)
-- Required surveyors, violence, and legal apparatus to establish
-- Now appears as "just how the city is organized"
-
-The grid **erases its own history**. It presents as objective, neutral infrastructure rather than political imposition.
-
-## What the Grid Cannot Hold
-
-By its nature, the grid excludes:
-
-**Continuous gradients**
-- Temperature gradually increasing
-- Soil fertility varying smoothly
-- Social networks with fuzzy boundaries
-
-**Overlapping claims**
-- Multiple groups using same space differently
-- Seasonal territories that shift
-- Contested zones with no clear owner
-
-**Illegible spaces**
-- Unmapped territories
-- Spaces that refuse indexing
-- Zones that evade coordination
-
-**Dynamic boundaries**
-- Rivers that change course
-- Coastlines that erode
-- Communities that grow and shrink
-
-The grid demands **stable, discrete, non-overlapping cells**. Reality is rarely this clean.
-
-## Queer Grids
-
-What would a queer grid look like?
-
-Perhaps:
-- **Variable cell sizes** - Important places get more resolution
-- **Overlapping coordinates** - Same location has multiple valid addresses
-- **Soft boundaries** - Zones that blend rather than abut
-- **Drifting origins** - The (0, 0) point moves with consensus
-- **Contestable indices** - Different groups name cells differently
-
-A queer grid would refuse the fantasy of **neutral, universal, objective coordinates**. It would insist that all addressing is **situated, political, provisional**.
-
-## The Grid and Surveillance
-
-Modern surveillance is grid-based:
-- GPS coordinates (latitude, longitude)
-- Cell tower triangulation
-- IP geolocation
-- CCTV grid coverage
-
-Surveillance requires **continuous addressability** - your position must always be expressible as coordinates.
-
-The grid enables tracking because it provides:
-- **Unique names** for every position (no ambiguity)
-- **Instant comparison** (distance calculations)
-- **Stored histories** (timestamped coordinate logs)
-- **Pattern detection** (anomalous movements)
-
-To resist surveillance is partly to **resist addressability** - to occupy space in ways that evade coordinate capture.
-
-## The Grid Knows Where You Are
-
-In VR, your headset reports position 90 times per second as (x, y, z).
-
-You never see these coordinates, but they're always being calculated:
-```gdscript
-func _process(delta):
-    var pos = $XRCamera3D.global_position
-    # This value is computed even if you don't use it
-    # The grid is always indexing your body
-```
-
-Your smooth, continuous movement through VR space is **always already quantized** to floating-point coordinates. The grid doesn't ask permission - it's the infrastructure that makes VR possible.
-
-This is **infrastructural capture**: The grid is so foundational that you cannot use the system without being indexed by it.
-
-## Grids Enable, Grids Constrain
-
-The critical question is not "Are grids bad?" but "**What does this particular grid enable, and what does it constrain?**"
-
-Grids enable:
-- Shared reference frames (collaboration)
-- Spatial queries (finding things)
-- Navigation (pathfinding)
-- Memory (storing positions)
-
-Grids constrain:
-- Movement patterns (aligned to cell boundaries)
-- Addressing options (only grid positions are nameable)
-- Organizational logic (everything must fit discrete cells)
-
-Different grids produce different politics:
-- **Coarse grid** (large cells) = Low resolution, fast computation, less precision
-- **Fine grid** (small cells) = High resolution, slow computation, more precision
-- **Adaptive grid** (variable size) = Priority-based resolution
-- **Multiple grids** (competing frameworks) = Contested space
-
-## The Map's Minimalism
-
-Point_Line_Grid is nearly empty:
-- One visualization (grid_lines)
-- One lighting element (dark_sphere)
-- Large void in center
-- Perimeter walkway only
-
-This minimalism says: **The grid is sufficient**. Once you have a coordinate system, everything else can be positioned relative to it.
-
-The emptiness reveals the grid's role as **pure infrastructure** - not a thing itself, but the precondition for things to have indexed locations.
-
-## Conclusion: Addressability as Political Technology
-
-Point_Line_Grid teaches that the grid is not mathematical truth - it is **organizational infrastructure** with political consequences.
-
-The grid makes space:
-- **Addressable** (everything has coordinates)
-- **Comparable** (distances can be calculated)
-- **Storable** (positions can be recorded)
-- **Governable** (locations can be regulated)
-
-These capabilities enable collaboration, navigation, and memory. They also enable taxation, surveillance, and control.
-
-The critical task is not to reject grids (we need them for spatial computation), but to ask:
-- **Who imposed this grid?**
-- **Whose movements does it optimize?**
-- **What does it make illegible?**
-- **Who benefits from this addressing system?**
-
-The grid is never neutral. Every coordinate system is a **political choice** about how to organize, measure, and govern space.
-
-When you see grid_lines overlay the world, you are witnessing the moment continuous space becomes **indexed territory** - addressable, calculable, and captured by the logic of discrete coordinates.
-
-The question is: **Can we build grids that acknowledge their own contingency?** Grids that admit they are imposed, not discovered? Grids that remain accountable to the bodies they index?
+[Return visits](detours.md) keep the room grammar, drifting spheres and body-scale reference available. [Earlier texts](../../../doc/space/point-grid-focus-2026-09-16/README.md) preserve the other routes through this question.

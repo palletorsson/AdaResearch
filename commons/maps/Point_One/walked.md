@@ -105,3 +105,7 @@ The vector, in Ada, comes with its Turing: the point is not just a Vector3, it i
 *(Palle: the sequence works and has been walked many times; note here what a
 next pass sharpens — a beat that lands soft in the body, a meet that reads
 unclear, an artifact whose feature the text over- or under-claims.)*
+
+## Field note — 2026-09-04
+
+Palle, walking the hall: the flickering of the counter is real, and the first numbers are slow, because the artifacts of the hall are still loading when the counter starts. The panel is honest about the load: a frame is as wide as the room makes it, and for the first seconds the room is being built.

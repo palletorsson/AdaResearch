@@ -5,7 +5,7 @@ extends Node3D
 # 10x10x40 grid = 4000 instances in a single draw call
 #
 # @identity
-# essence: S = -Σ p_i log p_i — Shannon entropy as spatial gradient
+# essence: increasing random displacement from a lattice; distinct from the Shannon meter
 # desire: walk along the z-axis and watch order dissolve into chaos before your eyes
 # critical_parameter: max_randomness — controls displacement amplitude at the chaos end
 # triggers: z-position of each sphere determines its entropy factor via exponential curve
@@ -63,6 +63,7 @@ var frame_root: Node3D
 # True once _ready has built. apply_grid_config must never rebuild before that,
 # and never when nothing changed - the 9 shipped placements must not be rebuilt
 # by this function merely existing.
+var square_room: bool = false
 var _built: bool = false
 var _rng := RandomNumberGenerator.new()
 
@@ -104,6 +105,7 @@ func create_multimesh() -> void:
 
 	# Create emissive material for visibility
 	var material = StandardMaterial3D.new()
+	material.vertex_color_use_as_albedo = true
 	material.emission_enabled = true
 	material.emission_energy_multiplier = 0.8
 	multimesh_instance.material_override = material
@@ -147,6 +149,10 @@ func generate_entropy_grid() -> void:
 				var base_x = (x - grid_size_x / 2.0) * base_spacing
 				var base_y = (y - grid_size_y / 2.0) * base_spacing
 				var base_z = z * base_spacing
+				if square_room:
+					base_x = (x - (grid_size_x - 1) / 2.0) * base_spacing
+					base_y = 2.0 + (y - (grid_size_y - 1) / 2.0) * base_spacing
+					base_z -= (grid_size_z - 1) * base_spacing / 2.0
 
 				# Randomness scales from 0 (perfect order) to max (chaos)
 				var randomness_amount = lerp(min_randomness, max_randomness, curved_entropy)
@@ -296,6 +302,10 @@ func apply_grid_config(config: Dictionary) -> void:
 	# has to have built once. A placement token naming none of these never
 	# reaches _rebuild, so the 9 shipped placements are unaffected.
 	var changed: bool = false
+	if str(config.get("square", "false")) in ["true", "1"] and not square_room:
+		square_room = true; changed = true
+		grid_size_x = 16; grid_size_z = 16; grid_size_y = 5
+		base_spacing = 0.45; point_radius = 0.035; bounds = "none"
 
 	if config.has("onset"):
 		var want_onset: String = str(config["onset"]).strip_edges().to_lower()

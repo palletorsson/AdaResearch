@@ -1,13 +1,13 @@
-﻿# FoldedStrip.gd - Creates an editable strip of triangles acting like folded paper
+﻿# FoldedStrip.gd - Editable triangle strip, with an optional animated folding study
 extends Node3D
 
 # @identity
-# essence: triangle_strip(24) — alternating-height vertices forming a pleated ribbon of connected faces
+# essence: triangle_strip(24) — 26 shared vertices start as one tilted, planar ribbon
 # desire: learner feels how topology (which vertices connect) differs from geometry (where vertices are)
-# critical_parameter: alternating high/low vertex heights — remove alternation and the pleat disappears
-# triggers: dragging any of the 24 vertex grab spheres — adjacent triangles deform because they share edges
+# critical_parameter: vertex positions — neighbours share an edge while their planes can diverge
+# triggers: dragging any of the 26 vertex grab spheres; study:1 opts this placement into an animated folding study
 # emerges: mesh topology as a constraint — shared edges mean vertices drag each other's neighbours
-# needs: [has 24 grabbable vertex handles [has], missing global fold-height or frequency slider]
+# needs: [has 26 grabbable vertex handles [has], optional folding study with manual interruption]
 # relationships: extends triangleprofiles into 3D; shows how strip topology enables organic forms
 # truth: topology (which vertices are connected) is more fundamental than geometry (where they sit)
 
@@ -25,7 +25,7 @@ var vertex_color: Color = Color(0.2, 0.8, 0.3, 1.0)
 ## Freeze behavior options
 @export var alter_freeze : bool = false
 
-## AXIS — HOW MUCH OF ITS OWN MAKING THE RIBBON ADMITS. The vertices never move: the same
+## AXIS — HOW MUCH OF ITS OWN MAKING THE RIBBON ADMITS. Changing facture keeps the same
 ## 26 points, the same 24 triangles, the same handles on the same corners. What changes is
 ## what the strip is willing to say it is. A primitive is met before any argument has been
 ## made, so this is the first argument it makes — whether a surface is a thing the world
@@ -34,20 +34,21 @@ var vertex_color: Color = Color(0.2, 0.8, 0.3, 1.0)
 ##   facet     the unit announced — one flat plane per triangle, adjacent triangles in
 ##             alternating colours, hard normals. You can count what it is made of.
 ##   cast      one colour, normals averaged across the shared edges. The triangles vanish
-##             and the pleat reads as a single sheet of folded material that was never
-##             assembled from anything.
+##             and the strip reads as one continuous sheet, even though its geometry
+##             still consists of the same triangles.
 ##   armature  the faces gone, only the edges standing as thin tubes. The topology alone —
 ##             which vertices are connected, which is the whole of what this artifact
 ##             claims is fundamental.
 ##   shell     every triangle given thickness, so the ribbon gains rims you can see
 ##             end-on. A surface has no thickness; a made thing does.
 ##
-## Shared word for word with [[triangleprofiles]], the same pleat wrapped on a square, so
+## Shared vocabulary with [[triangleprofiles]], a related surface wrapped on a square, so
 ## the two cannot stand in one room with one calling its triangles evidence and the other
 ## calling them nothing.
 ##
-## APPEARANCE ONLY. This is a grabbable, editable artifact: vertex_positions, the
-## DragPointSet handles and every drag path are identical under all four values.
+## Source vertex_positions, DragPointSet handles and drag paths stay the same
+## under all four values. Armature adds tubes; shell adds separate prisms, including
+## internal rims. Neither treatment creates a physical surface collider.
 @export var facture: String = "facet"
 const FACTURES: PackedStringArray = ["facet", "cast", "armature", "shell"]
 ## Rim depth for `shell`, in metres. Small against strip_length (4 m) — thick card, not a wall.
@@ -58,6 +59,8 @@ const WIRE_RADIUS := 0.012
 var strip_mesh: MeshInstance3D
 var drag_points: DragPointSet
 var vertex_positions: Array[Vector3] = []
+var fold_study: Node
+var _study_requested := false
 
 func _ready():
 	strip_mesh = MeshInstance3D.new()
@@ -67,9 +70,47 @@ func _ready():
 	_initialize_straight_strip()
 	_setup_drag_points()
 	update_mesh()
+	_sync_fold_study()
+
+## The animated study is placement-specific. Existing tokens retain manual editing.
+func apply_grid_config(config: Dictionary) -> void:
+	if config.has("facture"):
+		var requested := str(config["facture"]).strip_edges().to_lower()
+		requested = requested if FACTURES.has(requested) else "facet"
+		if requested != facture:
+			facture = requested
+			if is_instance_valid(strip_mesh):
+				update_mesh()
+	if config.has("study"):
+		var requested = config["study"]
+		if requested is bool or requested is int or requested is float:
+			_study_requested = bool(requested)
+		else:
+			_study_requested = str(requested).strip_edges().to_lower() in ["1", "true", "yes", "on"]
+	_sync_fold_study()
+
+func _sync_fold_study() -> void:
+	if not _study_requested:
+		if is_instance_valid(fold_study):
+			remove_child(fold_study)
+			fold_study.queue_free()
+			fold_study = null
+		return
+	if is_instance_valid(fold_study) or not is_inside_tree() or not is_instance_valid(drag_points):
+		return
+	# Ordinary manual strips do not need the study controller.
+	var study_script = load("res://commons/primitives/folded_strip/folded_strip_study.gd")
+	if study_script == null:
+		push_error("folded_strip: the requested folding study could not be loaded")
+		return
+	fold_study = study_script.new()
+	fold_study.name = "FoldStudy"
+	add_child(fold_study)
+	fold_study.call("setup", self)
+
 
 func _initialize_straight_strip():
-	# Create a straight strip along the X axis with alternating heights
+	# Both rows lie in one plane: their different heights tilt it, rather than fold it.
 	vertex_positions.clear()
 
 	var num_verts = num_triangles + 2
@@ -138,35 +179,30 @@ func update_mesh():
 		if i + 2 >= vertex_positions.size():
 			break
 			
-		var p0 = vertex_positions[i]
-		var p1 = vertex_positions[i+1]
-		var p2 = vertex_positions[i+2]
+		var triangle := _oriented_triangle(i)
 		
 		# Alternating colors: Main vs Alt
-		# Each fold (v0-v1-v2) is one triangle in the strip
+		# A consecutive triple is one triangle; a crease needs different planes.
 		var col = color_main
 		if i % 2 != 0:
 			col = color_alt
 			
-		if i % 2 == 0:
-			add_double_sided_triangle(st, p0, p1, p2, col)
-		else:
-			add_double_sided_triangle(st, p0, p1, p2, col)
+		add_double_sided_triangle(st, triangle[0], triangle[1], triangle[2], col)
 
 	strip_mesh.mesh = st.commit()
 
-	# FACTURE, appended LAST so everything above it is the legacy path byte for byte.
-	# "facet" falls through and the strip is exactly what it has always been; the other
-	# three replace what is DRAWN and nothing else.
+	# Other treatments read the same source positions and connectivity.
 	if facture != "facet":
 		_apply_facture()
 
 func add_double_sided_triangle(st: SurfaceTool, v1, v2, v3, color: Color):
+	# One coherent face. CULL_DISABLED displays both sides without coincident copies
+	# with opposing normals fighting for the same pixels.
 	var edge1 = v2 - v1
 	var edge2 = v3 - v1
-	var normal = edge1.cross(edge2).normalized()
+	# Godot uses clockwise front faces; agree with SurfaceTool.generate_normals().
+	var normal = -edge1.cross(edge2).normalized()
 	
-	# Front
 	st.set_color(color)
 	st.set_normal(normal)
 	st.set_uv(Vector2(0,0))
@@ -180,19 +216,6 @@ func add_double_sided_triangle(st: SurfaceTool, v1, v2, v3, color: Color):
 	st.set_uv(Vector2(0,1))
 	st.add_vertex(v3)
 	
-	# Back
-	st.set_color(color)
-	st.set_normal(-normal)
-	st.set_uv(Vector2(0,0))
-	st.add_vertex(v1)
-	st.set_color(color)
-	st.set_normal(-normal)
-	st.set_uv(Vector2(0,1))
-	st.add_vertex(v3)
-	st.set_color(color)
-	st.set_normal(-normal)
-	st.set_uv(Vector2(1,0))
-	st.add_vertex(v2)
 
 func apply_paper_material(mesh_instance: MeshInstance3D, color: Color):
 	var material = StandardMaterial3D.new()
@@ -215,15 +238,23 @@ func apply_paper_material(mesh_instance: MeshInstance3D, color: Color):
 		mesh_instance.material_override = material
 
 func reset_strip():
+	if is_instance_valid(fold_study):
+		var held: Dictionary = fold_study.get("held")
+		if not held.is_empty():
+			return
 	_initialize_straight_strip()
 	if drag_points:
 		drag_points.set_points_positions(vertex_positions)
 	update_mesh()
+	if is_instance_valid(fold_study):
+		fold_study.call("restart")
 
 func _on_point_moved(index: int, position: Vector3, meta: Dictionary) -> void:
+	if is_instance_valid(fold_study) and bool(fold_study.call("is_playing")):
+		return
 	var point_index: int = int(meta.get("point_index", index))
 	if point_index >= 0 and point_index < vertex_positions.size():
-		if vertex_positions[point_index] != position:
+		if vertex_positions[point_index].distance_squared_to(position) >= 0.000000000001:
 			vertex_positions[point_index] = position
 			update_mesh()
 
@@ -254,14 +285,14 @@ func _apply_facture() -> void:
 
 	match facture:
 		"cast":
-			# One colour, normals averaged over the shared edges. The creases the
-			# alternating colours were announcing stop being visible and the pleat
-			# becomes one sheet of material that was never assembled from anything.
+			# One colour and averaged normals on consistently oriented triangles.
+			# Smoothing changes the shading, not the strip's actual creases.
 			st.begin(Mesh.PRIMITIVE_TRIANGLES)
 			for i in range(num_triangles):
 				if i + 2 >= vertex_positions.size():
 					break
-				_tri(st, vertex_positions[i], vertex_positions[i + 1], vertex_positions[i + 2], color_main, false)
+				var triangle := _oriented_triangle(i)
+				_tri(st, triangle[0], triangle[1], triangle[2], color_main, false)
 			st.index()
 			st.generate_normals()
 		"armature":
@@ -280,12 +311,21 @@ func _apply_facture() -> void:
 				if i + 2 >= vertex_positions.size():
 					break
 				var col: Color = color_main if (i % 2) == 0 else color_alt
-				_prism(st, vertex_positions[i], vertex_positions[i + 1], vertex_positions[i + 2], SHELL_THICKNESS, col)
+				var triangle := _oriented_triangle(i)
+				_prism(st, triangle[0], triangle[1], triangle[2], SHELL_THICKNESS, col)
 		_:
 			return
 
 	strip_mesh.mesh = st.commit()
 	strip_mesh.material_override = mat
+
+
+## Successive triples in a triangle strip reverse winding. Swap the first two
+## corners on odd faces so normals agree across the planar starting surface.
+func _oriented_triangle(index: int) -> Array[Vector3]:
+	if index % 2 == 0:
+		return [vertex_positions[index], vertex_positions[index + 1], vertex_positions[index + 2]]
+	return [vertex_positions[index + 1], vertex_positions[index], vertex_positions[index + 2]]
 
 
 ## Every edge of the strip once — the rails (i,i+1) and the rungs (i,i+2) that make the
@@ -310,7 +350,8 @@ func _unique_edges() -> Array:
 ## One triangle. flat=true stamps the face normal on all three corners (hard edges);
 ## flat=false leaves normals unset so SurfaceTool.generate_normals() can average them.
 func _tri(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, col: Color, flat: bool) -> void:
-	var n: Vector3 = (b - a).cross(c - a).normalized()
+	# Match Godot's generated smooth normals; extrusion uses its own geometric normal.
+	var n: Vector3 = -(b - a).cross(c - a).normalized()
 	if flat:
 		st.set_normal(n)
 	st.set_color(col)

@@ -1,3 +1,9 @@
+> Historical document. See the 2026-09-16 intent, tutorial and inventory for the current room. Earlier claims that every segmented round body is a prism, or that failed half-turn symmetry makes a body unknowable, are retained here as development history rather than current teaching.
+
+## Capsule restored to the main encounter — Palle, 2026-09-16
+
+The five-segment capsule is central to the room's question: we cannot simply fold an assumed front around to the unseen back. Palle describes what appears between familiar forms as "transcendental inside restrictions". The revised book and primary order now include the existing capsule. Its radial spacing is equal; its odd count removes half-turn symmetry while retaining one-fifth-turn symmetry. The distinction makes the research question testable without losing the invitation to discover more within the constraint.
+
 # Primitives_Ignorance — field notes
 
 > Field notes hold what the wall text cannot carry. `final.md` is for the

@@ -1,0 +1,64 @@
+{
+  "artifacts": [
+    {
+      "bounds": {
+        "max": [
+          9.12780570983887,
+          1.27600002288818,
+          10.3190650939941
+        ],
+        "meshes": 292,
+        "min": [
+          2.66072726249695,
+          -0.5,
+          2.46167850494385
+        ]
+      },
+      "lookup": "mushrooms",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/Mushrooms",
+      "position": "(6.0, 0.0, 7.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          2.875,
+          1.68488788604736,
+          11.875
+        ],
+        "meshes": 20,
+        "min": [
+          1.12499988079071,
+          0.917533397674561,
+          10.125
+        ]
+      },
+      "lookup": "bubbles_random",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/BubbleParticles",
+      "position": "(2.0, 0.945737, 11.0)",
+      "yaw": -179.999984741211
+    }
+  ],
+  "failures": [],
+  "floor_checks": [
+    {
+      "cell": "(6.0, 0.0)",
+      "supported": true
+    },
+    {
+      "cell": "(6.0, 13.0)",
+      "supported": true
+    },
+    {
+      "cell": "(1.0, 7.0)",
+      "supported": true
+    },
+    {
+      "cell": "(11.0, 7.0)",
+      "supported": true
+    }
+  ],
+  "headset_verified": false,
+  "map": "Random_Mushrooms",
+  "origin": "(0.5, 0.0, 0.5)"
+}

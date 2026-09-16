@@ -1,83 +1,17 @@
-# Primitives Melencolia — Artifacts
-*Primitives: Points Build Worlds · F_order · 11 artifacts*
+# Primitives Melencolia — the geometric court, then the tools
 
-> Inspired by the Herzog August Bibliothek and Melencolia I, this scene embodies the limit point of geometric aspiration and existential constraint. Geometry has mastered shapes and measures, yet meaning, orientation, and closure remain unsettled. This map stages the melancholy of finitude—where knowing and not knowing interlock.
+Current encounter: 18 placements, 11 artifact types. The opening court restores the four corner pyramids, central spire and four small cubes from the earlier map (`86d423341`). The book's five primary artifact families follow this order.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+| Book order | Artifact | Placement and purpose |
+|---|---|---|
+| 1 | `pyramid` | Four pale blue spires, 2.4 metres tall on 0.6-metre square bases, at the first platform's corners: (3,3), (7,3), (3,7), (7,7). Recognise a repeated form from several positions. |
+| 2 | `pyramidlong` | Pink centre at (5,5): a 2.8-metre pyramid on a matching 0.8-metre cubical pedestal. Compare height and support with the same pyramid boundary connections. |
+| 3 | `cube_scene` | Four ochre cubes, each 0.8 metres across, in a cross around the centre. Read a composition made from familiar solids. |
+| 4 | `snap_pyramid_puzzle` | Beside the front of the court, (9,3). Connect five points; distinguish the detector's connection test from a geometric definition. |
+| 5 | `durer_scene` | On the second, higher platform, (5,15). Inspect selected tools after *Melencolia I* and test the magic square. |
 
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
+The first deck is one metre above the museum floor; a side wedge at (2,5) climbs onto it. The raised connection leads to the second wedge at (5,13) and the two-metre-high Dürer deck. The surrounding floor provides a route around both stages. These structures exist before puzzle completion.
 
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+Supporting studies remain: `prism_block`, two `bigframe` instances restored as the historical pair, `diamondtoruscollection`, `code_display`, and `eleven_dots`. `dark_sphere` remains decoration. Supporting works need not all become separate lessons in `final.md`.
 
-`dark_sphere`
-
-## pyramid
-![pyramid](/scene-catalog/pyramid.png)
-
-Procedural square-based pyramid primitive built via surface tool.
-
-`pyramid`
-
-## Snap Pyramid Puzzle
-![Snap Pyramid Puzzle](/scene-catalog/snap_pyramid_puzzle.png)
-
-Interactive puzzle where connecting 5 snap points forms a square pyramid that spawns a walkable prism.
-
-`snap_pyramid_puzzle`
-
-## Basic Cube Scene
-![Basic Cube Scene](/scene-catalog/cube_scene.png)
-
-TEST how cubes can split, snap, scale, and recombine while remaining the basic reference primitive.
-
-`cube_scene`
-
-## pyramidlong
-![pyramidlong](/scene-catalog/pyramidlong.png)
-
-Procedurally models a long rectangular pyramid primitive with computed faces and materials.
-
-`pyramidlong`
-
-## prism_block
-![prism_block](/scene-catalog/prism_block.png)
-
-COMPARE how a non-cubic primitive responds to rotation and scaling.
-
-`prism_block`
-
-## Floating Sphere Field
-![Floating Sphere Field](/scene-catalog/floating_sphere_field.png)
-
-A sparse field of soft glowing spheres drifting in the void on a single GPUParticles3D. The subtle successor to the Kusama dot-grid biome layer — presence-by-scarcity instead of overwhelming repetition. Ambient atmosphere for the void around the player.
-
-`floating_sphere_field`
-
-## bigframe
-![bigframe](/scene-catalog/bigframe.png)
-
-Hollow rectangular beam with configurable dimensions
-
-`bigframe`
-
-## diamondtoruscollection
-![diamondtoruscollection](/scene-catalog/diamondtoruscollection.png)
-
-Torus reference ring with hanging cylinders and colored diamonds.
-
-`diamondtoruscollection`
-
-## DÃ¼rer Melencolia Scene
-![DÃ¼rer Melencolia Scene](/scene-catalog/durer_scene.png)
-
-DÃ¼rer's Melencolia I elements: truncated rhombohedron polyhedron, magic square, compass, ladder, hourglass, bell, scales.
-
-`durer_scene`
-
-## Code Display
-![Code Display](/scene-catalog/code_display.png)
-
-Display system for showing code and text content
-
-`code_display`
+The manuscript and engraving are distinct references. The user-supplied manuscript image now guides the court's colours and proportions; its grey support remains the walkable museum platform. See [Solid Objects](https://publicdomainreview.org/collection/solid-objects/) for additional geometric studies. These metre dimensions adapt the drawing to the restored floor composition; they are not measurements inferred from its perspective.

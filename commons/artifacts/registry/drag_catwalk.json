@@ -1,0 +1,42 @@
+{
+  "artifacts": {
+    "drag_catwalk": {
+      "lookup_name": "drag_catwalk",
+      "name": "The Floor Is Yours — Drag Catwalk",
+      "scene": "res://commons/artifacts/drag_catwalk/drag_catwalk.tscn",
+      "description": "A level runway with four dressed walking agents. Performers walk a bounded two-lane circuit, turn, pose and yield to the visitor. Hold/Play pauses their local show; Swap Looks cycles the same four outfits worn by the player. Cosmetic agents never write player progression or appearance.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "category": "body",
+      "complexity": "beginner",
+      "map_sequences": [
+        "tiling"
+      ],
+      "footprint": [
+        8,
+        4,
+        14
+      ],
+      "size_group": "large",
+      "tags": [
+        "catwalk",
+        "runway",
+        "drag",
+        "agents",
+        "walking",
+        "outfit",
+        "performance"
+      ],
+      "parameters": {
+        "walk_speed": 0.65,
+        "running": true
+      },
+      "interactions": [
+        "Walk the runway alongside the performers",
+        "Hold or resume the show",
+        "Swap the agents' outfits"
+      ],
+      "qfep_connection": "A repeated route carries different silhouettes. Yielding makes room for another body within the same choreography, without treating that body as an enemy."
+    }
+  }
+}

@@ -700,21 +700,32 @@ func _tone_panel() -> void:
 		var mat: Material = m.material_override
 		if mat == null and m.mesh != null and m.get_surface_override_material_count() > 0:
 			mat = m.get_surface_override_material(0)
+		if mat == null and m.mesh != null and m.mesh.get_surface_count() > 0:
+			mat = m.mesh.surface_get_material(0)
 		if not (mat is StandardMaterial3D):
 			continue
 		var sm: StandardMaterial3D = mat
 		var lum: float = (sm.albedo_color.r + sm.albedo_color.g + sm.albedo_color.b) / 3.0
-		if lum < 0.75 or sm.albedo_texture != null:
+		if sm.albedo_texture != null:
+			var tag_mat: StandardMaterial3D = sm.duplicate()
+			tag_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			m.material_override = tag_mat
+			continue
+		if lum < 0.45 and not m.has_meta("ledger_dark_plate"):
 			continue
 		var tm: StandardMaterial3D = sm.duplicate()
-		tm.albedo_color = sm.albedo_color * 0.55
-		tm.albedo_color.a = 1.0
+		tm.albedo_color = Color(0.45, 0.46, 0.50) if m.find_parent("Btn_*") != null else Color(0.14, 0.14, 0.16)
 		tm.emission_energy_multiplier = 0.0
 		tm.roughness = 0.9
-		if m.material_override != null:
-			m.material_override = tm
-		else:
-			m.set_surface_override_material(0, tm)
+		tm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		m.material_override = tm
+		m.set_meta("ledger_dark_plate", true)
+	for node in _panel.find_children("*", "Label3D", true, false):
+		var label: Label3D = node
+		label.font_size = maxi(16, label.font_size)
+		label.outline_size = 3
+		label.outline_modulate = Color.BLACK
+		label.modulate = Color(0.95, 0.96, 1.0)
 
 
 func _symbol_color(index: int) -> Color:
@@ -793,7 +804,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 ## rebuild: it holds the ribbon's state, and the boards are lifted onto it again.
 func _rebuild_now() -> void:
 	for c in get_children():
-		if c == _staging_root:
+		if c == _staging_root or bool(c.get_meta("em_exhibit_stage", false)):
 			continue
 		remove_child(c)          # leaves the tree synchronously, no double render
 		c.queue_free()
@@ -841,7 +852,7 @@ func _apply_stand() -> void:
 ## anything already lifted (the boards _measure rebuilds are lifted there).
 func _lift_boards() -> void:
 	for c in get_children():
-		if c == _staging_root:
+		if c == _staging_root or bool(c.get_meta("em_exhibit_stage", false)):
 			continue
 		var n: Node3D = c as Node3D
 		if n != null and n.position.y < LIFT * 0.5:
@@ -1024,9 +1035,9 @@ func _build_ribbon() -> void:
 	_staging_root.add_child(_excerpt)
 	var ecap := Label3D.new()
 	ecap.name = "ExcerptCaption"
-	ecap.text = "the first forty · ×4 · as drawn"
+	ecap.text = "first forty · as drawn"
 	ecap.pixel_size = 0.0014
-	ecap.font_size = 18
+	ecap.font_size = 22
 	ecap.outline_size = 0
 	ecap.modulate = Color(0.86, 0.94, 1.0)
 	ecap.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -1101,8 +1112,10 @@ func _build_ledger_panel() -> void:
 	_panel.set_meta("em_local_instrument", true)
 	# on the desk's FRONT FACE, at hand height: the desk top is the ribbon's alone
 	_panel.position = Vector3(0.78, 0.74, DESK_Z + DESK_D * 0.5 + 0.012)
+	_panel.scale = Vector3.ONE * 1.4
 	_staging_root.add_child(_panel)
 	_tone_panel()
+	_tone_panel.call_deferred()
 	var actions := {"Btn_0": func(): toggle_sort(), "Btn_1": func(): toggle_contrast(), "Btn_2": func(): step_disclosure()}
 	for btn_name in actions.keys():
 		var btn: Node = _panel.find_child(btn_name, true, false)
@@ -1127,6 +1140,7 @@ func _build_readout() -> void:
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color(0.13, 0.13, 0.14)
 	mat.roughness = 0.75
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	var plate := MeshInstance3D.new()
 	plate.name = "Plate"
 	var box := BoxMesh.new()

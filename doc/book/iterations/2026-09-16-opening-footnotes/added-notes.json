@@ -1,0 +1,116 @@
+[
+  {
+    "file": "commons/maps/Point_One/final.md",
+    "id": "point-one-ahmed-reach",
+    "anchor": "What part of you has arrived at this address?",
+    "note": "Sara Ahmed, [*Queer Phenomenology: Orientations, Objects, Others*](https://www.dukeupress.edu/queer-phenomenology) (Duke University Press, 2006), introduction. Ada’s questions about orientation and reach draw on her account of bodies finding their bearings through relations with objects, spaces and others. Lines will make this conversation more explicit."
+  },
+  {
+    "file": "commons/maps/Point_One/final.md",
+    "id": "point-one-euclid",
+    "anchor": "A mathematical point specifies a location without extension.",
+    "note": "Euclid, [*Elements*, Book I, Definition 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html), defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart."
+  },
+  {
+    "file": "commons/maps/Point_One/final.md",
+    "id": "point-one-haraway",
+    "anchor": "Reading more digits cannot supply one that has been left unnamed.",
+    "note": "Donna Haraway, [“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”](https://doi.org/10.2307/3178066), *Feminist Studies* 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. Naming a coordinate frame is not equivalent to that epistemology. It gives this room a technical way to ask a related question: what must accompany a reading for someone else to understand its reference and limits?"
+  },
+  {
+    "file": "commons/maps/Point_Lines/final.md",
+    "id": "point-lines-euclid",
+    "anchor": "**two distinct points determine a straight line.**",
+    "note": "See Euclid, [*Elements*, Book I, Postulate 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/post1.html), on drawing a straight line between two points. The construction concerns the finite segment; extending it and treating it as an unbounded line are further steps. The postulate is a historical reference, not an account of the renderer or the barrier’s programmed response."
+  },
+  {
+    "file": "commons/maps/Point_Lines/final.md",
+    "id": "point-lines-ingold",
+    "anchor": "There is pleasure in following these associations, in finding how quickly a familiar mark acquires another use.",
+    "note": "Tim Ingold, [*Lines: A Brief History*](https://www.routledge.com/Lines-A-Brief-History/Ingold/p/book/9781138640399) (Routledge Classics edition, 2016), especially “Traces, Threads and Surfaces” and “Up, Across and Along.” Walking, drawing, weaving and connecting enter his inquiry as different practices of making lines. This helps us take the room’s proliferation seriously: a connector, a trace and a boundary need not perform the same work merely because we call each a line."
+  },
+  {
+    "file": "commons/maps/Point_Lines/final.md",
+    "id": "point-lines-ahmed-paths",
+    "anchor": "The instruction may still have changed how you moved.",
+    "note": "Sara Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology) (2006), 15–20, especially 16: repeated journeys make paths, while established paths help direct later journeys. Ada takes up this relation as an experiment. Its stripe is authored rather than worn into the ground, and its instruction does not score compliance. Being oriented by a line, evaluated against one and physically blocked by one remain different operations to investigate."
+  },
+  {
+    "file": "commons/maps/Point_Lines/final.md",
+    "id": "point-lines-ahmed-deviation",
+    "anchor": "That small sideways step is visible now.",
+    "note": "Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology), 20, considers how deviations can leave marks and generate other lines. This sampled drawing offers one specific record, not the whole history of the body’s deviation."
+  },
+  {
+    "file": "commons/maps/Point_Trace/final.md",
+    "id": "point-trace-klee",
+    "anchor": "Let the next line try to keep something of the passage.",
+    "note": "Paul Klee, [*Pedagogical Sketchbook*](https://openendedgroup.com/field2/assets/Klee_Paul_Pedagogical_Sketchbook_1960.pdf), translated by Sibyl Moholy-Nagy (1960 edition; German original 1925), opening section. Klee begins with an “active line on a walk” and a moving point. Ada makes the recording conditions part of that encounter: which point moves, when a position is accepted, and how retained positions become a line."
+  },
+  {
+    "file": "commons/maps/Point_Trace/final.md",
+    "id": "point-trace-sampling",
+    "anchor": "The connection between two samples has been drawn; it is not a measurement of everything your hand did between them.",
+    "note": "Claude E. Shannon, [“Communication in the Presence of Noise”](https://fab.cba.mit.edu/classes/S62.12/docs/Shannon_noise.pdf), *Proceedings of the IRE* 37, no. 1 (1949), 10–21, Theorem 1, gives a reconstruction result for band-limited signals sampled uniformly in time. It is a technical neighbour, not a guarantee for this trace: frame timing, a movement threshold and spatial rounding do not meet those assumptions. Joining retained positions with straight segments cannot by itself recover the intervening gesture."
+  },
+  {
+    "file": "commons/maps/Point_Trace/final.md",
+    "id": "point-trace-quantisation",
+    "anchor": "These are different choices.",
+    "note": "Godot’s [`snappedf`](https://docs.godotengine.org/en/4.6/classes/class_%40globalscope.html#class-globalscope-method-snappedf) returns the nearest multiple of a spacing. Here this quantises spatial components; it does not set a fixed temporal sampling rate. The separate movement gate determines whether to consider another reading. Changing either operation can alter the record, for different reasons."
+  },
+  {
+    "file": "commons/maps/Point_Trace/final.md",
+    "id": "point-trace-inscription",
+    "anchor": "The movement that made it has already passed.",
+    "note": "Sigmund Freud’s [“A Note upon the ‘Mystic Writing-Pad’”](https://web.english.upenn.edu/~cavitch/pdf-library/Freud_WritingPad.pdf) (1925) and Jacques Derrida’s “Freud and the Scene of Writing,” in [*Writing and Difference*](https://press.uchicago.edu/ucp/books/book/chicago/W/bo27619783.html), translated by Alan Bass (1978), open a neighbouring inquiry into inscription, retention and the relation between a mark and what is no longer present. A list of coordinates is not Derrida’s philosophical trace or a model of psychic memory. The connection here is a question to pursue, not an identity between these concepts."
+  },
+  {
+    "file": "commons/maps/Point_Line_Grid/final.md",
+    "id": "point-grid-bowker-star",
+    "anchor": "That can be useful: we may want two pieces to meet without having to place them by eye.",
+    "note": "Geoffrey C. Bowker and Susan Leigh Star, [*Sorting Things Out: Classification and Its Consequences*](https://mitpress.mit.edu/9780262024617/sorting-things-out/) (MIT Press, 1999), study classifications and standards as information infrastructure, including whose differences become visible or disappear within them. Rounding coordinates is not identical to classifying people. It supplies a small operational comparison: treating different inputs as equivalent can support coordination while leaving distinctions out. Its consequences depend on what we build with that equivalence."
+  },
+  {
+    "file": "commons/maps/Point_Line_Grid/final.md",
+    "id": "point-grid-ahmed-return",
+    "anchor": "A rule for making positions agree has also given us something to dance with.",
+    "note": "Return to Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology), introduction: bodily orientation involves relations of alignment and reach. Dancing with the interval is Ada’s proposed use of this rule, not a result already established by her argument."
+  },
+  {
+    "file": "commons/maps/Point_Line_Grid/final.md",
+    "id": "point-grid-scott",
+    "anchor": "Two indices can become an instruction for placing it.",
+    "note": "James C. Scott, [*Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed*](https://yalebooks.yale.edu/book/9780300252989/seeing-like-a-state/) (Yale University Press, 1998), chapter 1, examines practices of administrative legibility, including cadastral mapping. The connection here is narrow: a plan can make a placement describable to someone not standing beside it. This does not make every grid coercive or establish that a legible plan is sufficient for inhabiting the place."
+  },
+  {
+    "file": "commons/maps/Point_Line_Grid/final.md",
+    "id": "point-grid-lefebvre",
+    "anchor": "What lets a body reach it needs further work.",
+    "note": "Henri Lefebvre, [*The Production of Space*](https://www.wiley-vch.de/de?isbn=9780631181774&option=com_eshop&title=The+Production+of+Space&view=product), translated by Donald Nicholson-Smith (Blackwell, 1991; French original 1974), chapter 1, distinguishes spatial practice, representations of space and representational spaces. His account keeps planning, practical activity and lived meanings in relation. The vitrine enters that problem without reproducing the whole theory: addresses and a plan do not by themselves establish access, habits, belonging or a place’s meaning to its inhabitants."
+  },
+  {
+    "file": "commons/maps/Point_Triangle_Context/final.md",
+    "id": "point-triangle-winding",
+    "anchor": "The material permits a view from either side; the edge-on projection leaves little of the surface to show.",
+    "note": "For the rendering convention, see [Godot 4.6’s SurfaceTool documentation](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html): triangle front faces use clockwise winding. Vertex order, shading normals and the material’s culling setting have different jobs. The puzzle deliberately displays both sides. That choice changes visibility; it does not give the face thickness or a collider."
+  },
+  {
+    "file": "commons/maps/Point_Triangle_Context/final.md",
+    "id": "point-triangle-triangulation",
+    "anchor": "You could choose a better starting vertex where one exists, redraw a shape the fan handles, or keep this outline and ask for another filling algorithm.",
+    "note": "One available development route is Godot’s [`Geometry2D.triangulate_polygon`](https://docs.godotengine.org/en/4.6/classes/class_geometry2d.html#class-geometry2d-method-triangulate-polygon), which returns triangle indices for a 2D polygon and an empty result if triangulation fails. A planar 3D drawing would first need coordinates in its plane, followed by mapping the returned indices back to its vertices and handling winding. This room still uses its first-vertex fan; no alternate triangulator is installed by this note."
+  },
+  {
+    "file": "commons/maps/Point_Lines/encounter-reference.md",
+    "id": "point-lines-return-panofsky",
+    "anchor": "Walking past a monitor changes the visitor's view of that screen, not the private camera's view of the rods.",
+    "note": "Erwin Panofsky, [*Perspective as Symbolic Form*](https://www.jstor.org/stable/j.ctv1453m48), translated by Christopher S. Wood (Zone Books, 1991; original essay 1927), treats perspective as a historically formed representational system. The workshop gives us a specific distinction between camera projection and spatial arrangement. Haraway’s situated-knowledge argument, introduced in Point One, supplies a related epistemological question; neither author’s account is exhausted by naming a camera transform."
+  },
+  {
+    "file": "commons/maps/Point_Line_Grid/detours.md",
+    "id": "point-grid-return-modulor",
+    "anchor": "The figure offers a comparison with one represented body; it cannot stand for everyone's reach, width or movement.",
+    "note": "Le Corbusier’s *The Modulor* develops an anthropometric system of architectural proportion. See the [Fondation Le Corbusier’s account of the Modulor](https://www.fondationlecorbusier.fr/dossier-thematique/vocabulaire-corbuseen/). This is the reference behind the artifact’s name, not evidence that the represented figure covers the range of bodies who may use the museum. Proportion and actual accessibility need different checks."
+  }
+]

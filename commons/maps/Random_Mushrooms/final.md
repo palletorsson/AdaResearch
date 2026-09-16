@@ -1,52 +1,88 @@
-# The ring someone specified
+# Which differences were invited?
 
-Which parts of this population were allowed to vary?
+In the previous room the numbers gathered into bars. Here they have caps and stems. Which differences can this recipe make?
 
 <!-- @mushrooms -->
 
-A raised bed of mushrooms fills the middle of the hall, boarded round like a garden bed, and before it stands a table with six mushrooms on numbered discs under a stencil: SPECIMENS · ONE POPULATION. Stand at the table before you go round the bed. Disc 0 carries a tan cap, 1 a red cap with pale spots, 2 a flat brown one, 3 a tall white one, 4 a puffball, 5 a green stem whose cap glows. Now look past them into the bed and pick two mushrooms that seem related: the same cap, the same stem, one standing in a circle of its kind and one alone on the slope. Press SHOW until the plate names the template they share, and a magenta ring on the ground and a pin in the air mark every mushroom of that kind in the bed, and the same magenta ring lies round that template's disc on the table. Look at two ringed ones side by side. They differ in which way they face and in how big they are, and in nothing else. That is the first thing to hold on to, and it is a construction rather than a resemblance: six bodies are built once, and every mushroom in the bed is a copy of one of them.
+The glass enclosure around the bed makes a population into a place you can enter. Its front opening leaves room beside the specimen table; another opening is opposite. Begin at the compact console, then move among the mushrooms. The cage holds an experiment, not a claim that these bodies exhaust what a mushroom could be.
 
-```gdscript
-	for i in range(mushroom_variety):
-		var template = create_mushroom_template(i)
-		mushroom_types.append(template)
-```
+A bed fills the middle of the hall. Before it, six mushrooms stand on numbered discs. Look past the table and choose two in the bed that seem related. A cap bends out over a stem; another, smaller, repeats its proportions. Before pressing anything, decide what you are using to recognise their relation.
+
+Press SHOW. A magenta ring moves to the next disc, and rings with tall pins mark its copies in the bed. Keep pressing until the plate names the template you were following. There may be many copies, or none in this particular population. The table still gives the absent form a place.
+
+The discs run from 0 to 5: tan cap, red cap, flat brown cap, tall white mushroom, puffball, glowing cap. These are construction recipes rather than six biological species. Within this build, each recipe has become a template. A copy carries its template's details with it:
 
 ```gdscript
 		var mushroom = mushroom_types[type_index].duplicate()
-		mushroom.rotation_degrees.y = _rf() * 360
+		mushroom.name = "Mushroom_" + str(i)
+```
+
+Look at two marked copies again. Their positions, turning and scale can differ. Their material situation can differ too: a cap lit by a neighbour need not look like the same cap in shadow. SHOW names a construction relationship; it cannot make every appearance identical.
+
+Now press SIZE. The bed is rebuilt. Find your pair. Their places and orientations remain, but the extra scaling has gone. They have not all become the same physical size: a tall template remains tall beside a low one. The plate says “scale 1 · template sizes kept.” What did you think the button would remove?
+
+For a scattered mushroom, the scale had been chosen here:
+
+```gdscript
 		var scale_factor = _size(0.7 + _rf() * 0.6)  # 0.7 to 1.3
+		mushroom.scale = Vector3(scale_factor, scale_factor, scale_factor)
 ```
 
-Which of the six, which way it faces, how big: three draws per mushroom, and the copy is finished. The plate's first line names a five-digit seed. Press REGROW. The bed empties and grows again, and every mushroom comes back to its place with its kind, its facing, its size and the same ground under it, because every draw the build makes comes from one generator started at that number. `_rf()` is the only place a draw is made:
+And the switch decides what to do with that value:
 
 ```gdscript
-func _rf() -> float:
-	return _pop_rng.randf() if _pop_rng != null else randf()
+func _size(v: float) -> float:
+	return v if size_variation else 1.0
 ```
 
-Now press SIZE. The bed grows again under the same seed, and every mushroom stands at one size; nothing else has moved, because the size draws are still made and only their use is switched off. That is what one decision contributed on its own, and the plate says so: SIZE off · every mushroom at 1 · same seed. Press SIZE again and the sizes return. NEW SEED grows a population you have not seen, on ground you have not seen, and REGROW brings that one back.
+The draw still happens when the scale rule is off. Only its use changes. If the program skipped the draw, the following decisions would receive different numbers and our comparison would slip away. Press SIZE again. The earlier scales return.
 
-The plate's second line reads candidates 80 · accepted N · rejected M, with the two numbers summing to eighty. Press KIND until it says rejected, and grey marks appear on ground where nothing stands. Each is a place a mushroom was drawn for and refused. The gap you were about to call a clearing is a threshold on a noise field; the marks are the candidates whose noise fell under it:
+The seed on the plate makes this return possible under the same recipe. REGROW rebuilds the population and its ground. NEW SEED chooses a number different from the current one; it does not promise a number never used before. A new build can also change details inside a template, such as the puffball's bumps. Six available recipes do not mean six eternally identical objects.
+
+Press KIND until the plate says “scattered.” Count what it calls accepted and rejected. Together they account for eighty candidate positions. The total mushroom count can be larger: two other routines add bodies later. First look at the spaces between the scattered ones. Which gaps seem intentional?
+
+Continue to “rejected.” Grey markers appear at candidate positions that the placement rule refused. They were never mushrooms that died. At each proposed position, a noise field was consulted:
 
 ```gdscript
-	for _i in range(target_count):
-		var pos_x = _rf() * meadow_size - meadow_size / 2
-		var pos_z = _rf() * meadow_size - meadow_size / 2
 		var noise_val = noise.get_noise_2d(pos_x * 2, pos_z * 2)
+
+		# Skip if noise value is too low (creates natural clearings)
 		if noise_val < -0.3:
+			_rejected.append(Vector3(pos_x, get_ground_height(pos_x, pos_z), pos_z))
+			continue
 ```
 
-Press KIND again: green rings and pins on the members of the circle. The plate's third line counts them, rings 1 (n) — one ring at this bed's size, `int(meadow_size / 5)` — and the circle you picked your first mushroom from is not something the scattered mushrooms did. It is a separate instruction with a centre, a radius, one template for all its members and a count fixed by the radius, and it sets them down at equal angles:
+Even the source calls them “natural clearings.” The marks let us read what that phrase stands for here. A number crossed a threshold. In Gaussian, a value beyond the display was kept at its boundary. Here an unsuccessful candidate leaves a recorded position and no body.
+
+Keep pressing KIND until it says “rings.” Green marks pick out the members added by the circle routine. One circle is requested at this bed's six-metre size. Find its arc, then imagine the rest continuing beyond the boards. Its members were given equal angular intervals:
 
 ```gdscript
-	var radius = 1.0 + _rf() * 2.0
-	var count = int(radius * 8)
+	for i in range(count):
 		var angle = (2.0 * PI / count) * i
+		var pos_x = center_x + cos(angle) * radius
+		var pos_z = center_z + sin(angle) * radius
 ```
 
-When a ring runs past the bed's edge its outer members are skipped, and the number in the plate's brackets falls short of the request; the arc you can see is the part of a circle that fitted. The two clusters that follow on the next press of KIND have their own rule again, a centre, a spread and five to fourteen members thrown at random distances. Three procedures share one bed and one seed, and the bed does not say which of them put a mushroom where you find it. The rings and the plate do.
+The radius helps set the requested count. Positions outside the bed are skipped. The plate's bracket counts the members actually placed; it does not show the missing ones. A partial circle can carry the trace of two decisions: draw the ring, then admit only what fits.
+
+The next KIND is “clusters.” Two cluster routines choose their own centres, spreads and templates. Their members receive random angles and distances. They do not pass through the scattered candidates' noise test. Bodies from different routines can overlap. Nothing here negotiates for room.
+
+Walk round the west and south margins. Three larger red-capped mushrooms stand just inside the boards. They come from a separate pickable scene and are counted separately. A similar cap has acquired another capability. In the headset, hold one and bring it close to your face: its eating rule starts a visual effect with a ten-second hold and a fade in and out and the mushroom dissolves. The garden has offered a way to change the looking, as well as the thing looked at. The desktop carry lets you inspect it, but holds it beyond that eating distance.
+
+At the smaller arrival stage, wait for a silhouette. Another place is chosen from those still empty. Six arrivals fill it; the program does not keep producing bodies without somewhere to put them. Press REPLAY and watch the places return in the same order.
+
+Choose one figure and press DRESS. A hem widens, a collar appears, the pleats take another colour. Try again. How far can this wardrobe take the figure?
+
+Now press FORMS. Branches extend from the garment. Read the dress number: it has stayed. Switch FORMS back and the earlier dress returns. You did not need a luckier draw to find the branches. They needed another instruction. DRESS samples within the available recipe; FORMS switches between two recipes, one of which adds branches. Neither button changes the six places or the arrival order.[^chance-repertoire]
+
+These figures still turn towards you as flat images. Their new outlines give them no new way to walk, touch or refuse. A different appearance has not yet become a different permission. Which of those changes would you make next?
+
+Beyond the garden, three couture bodies stand together. All begin with the hare head and sheath garment. Their seeds are 41, 42 and 43. Look for differences in proportion, print and pose before pressing NEXT SEED. Three more individuals appear under the same two named constructions.
+
+Keep this trio and press GARMENT. The seeds stay while the sheath gives way to a crinoline, then quilting, bloom and fringe. The body generator receives another construction instruction. Some details may change with the construction too: a seed is not a promise that every branch of a program spends its draws in the same way. RESET restores the starting trio. The garment's possibilities were authored; chance finds individuals within them. Which possibility would you want to add to this wardrobe?
 
 <!-- @ -->
 
-Ask what else the six permitted shapes could become. Nothing in the rules says mushroom: the templates could be six of anything, the threshold could gate on any field, the ring could be any figure with a count. Nothing here feeds, spreads, competes or dies; the glowing one is a light under a cap, and the bed is an arrangement made once and made again on request. What was allowed to vary was decided rule by rule, which of six, which way, how big, where, and whether at all; what never varies is the six forms, the threshold and the ring's arithmetic. Try describing one patch without the words natural or artificial: say which draw you think made each thing you see, then press KIND and check. Three red-capped mushrooms of another kind stand a hand's reach inside the west and south boards; no rule of the bed made them, the plate counts them apart, and they can be picked up. In a headset, bring one to your face: it is eaten, and for ten seconds the hall looks otherwise. In the next room the draw stops arranging and starts deciding, and an outcome you cannot regrow is on the table.
+The sampled sizes never grow a seventh template between two others. That would need another rule. Yet these rules could carry other forms, other ranges, other permissions. Which difference would you add first, and what would have to change to let it exist? Keep that question for Random Game, where a draw enters an encounter and the body has to answer in time.
+
+[^chance-repertoire]: The “Randomness” chapter of *10 PRINT CHR$(205.5+RND(1)); : GOTO 10*, pp. 125–127, discusses chance operations in Cage, Kelly and Morellet: variation takes place within constructed parameters and arrangements. The distinction between sampling a wardrobe and changing its repertoire is this hall’s experiment, rather than a claim that chance abolishes authorship.

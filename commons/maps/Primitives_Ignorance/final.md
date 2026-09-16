@@ -1,128 +1,80 @@
-The words over Plato's door were *let no one ignorant of geometry enter here*.
-
-<!-- @3t -->
-
-This room puts them halfway down a hall you have already walked into, which is the joke and also the argument. You are not ignorant of geometry any more; you have built it from a point to a solid. What you are about to find out is what the building left out, and that ignorance is not a lack. It is a structure. A model keeps by omitting, and the omitted does not vanish. It stands around in here, on plinths.
-
-<!-- @ -->
-
-## What the menu offers first
-
-<!-- @cube_scene -->
-
-A cube. You know this one to the corner.
+You left a cube whose connections could outlast its name. Now try the name sphere. What are you accepting when you recognise something as round?
 
 <!-- @sphere -->
 
-And a sphere, which you do not, because there is no such thing in here. Look closely: thirty-two segments round, sixteen rings up, and every one of its faces is flat. The machine's sphere is a polyhedron that has agreed to be called round, and the menu has been calling it that since the first room.
+Begin with the ordinary sphere near the entrance. Look at it from a distance, then approach. Follow its silhouette against the room beyond it. Where does the outline give you something to inspect that the name had allowed you to pass over?
 
-<!-- @ -->
-
-## The ideal set
-
-```gdscript
-func regular_corner_defect(face_sides: int, faces_at_vertex: int) -> float:
-    var interior := 180.0 * (face_sides - 2) / face_sides
-    return 360.0 - interior * faces_at_vertex
-```
-
-<!-- @platonic_grabbables -->
-
-Five solids, three of each, on one table. They are the ideal because every face is the same, every corner is the same, and every one of them looks the same from anywhere you stand.
-
-Why five? Not because someone chose. Two rooms ago you learned that a corner must be missing something, and that a closed solid has 720 degrees of missing to spend. Ask for regular faces and the same number at every corner, and the arithmetic leaves exactly five ways to do it: three, four or five triangles at a corner, three squares, three pentagons. Six triangles lie flat. Four squares lie flat. Three hexagons lie flat. And 720 divided by what each corner is missing is how many corners the solid has: four, six, twelve, eight, twenty. The ideal set is not a list. It is a remainder.
-
-<!-- @grab_octahedron -->
-
-Six corners, twelve edges, eight faces. Now say the cube's numbers backwards: eight corners, twelve edges, six faces. The octahedron is the cube with its corners and faces exchanged, and the exchange is called duality. Put one inside the other and every corner of one points at a face of the other. Two of the five are one shape read two ways.
-
-<!-- @snap_octahedron_puzzle -->
-
-Join six points and you have made it yourself. What it spawns when it closes is a prism you can walk on, and that is the room's next argument standing up before the room has made it.
-
-<!-- @truncatedtetrahedron -->
-
-Cut the corners off the smallest one. Each corner becomes a triangle, four new faces, and the solid is no longer ideal. It belongs to a bigger family, the Archimedean, indexed by how deep the cut goes. The ideal set is one cut away from a family the menu never mentions.
-
-<!-- @ -->
-
-## Resolution produces form
-
-Walk on, and watch the sphere come apart in halves.
+The room carries an instruction: **Let no one ignorant of geometry enter here.** It recalls the motto traditionally associated with Plato's Academy.[^ignorance-inscription] Here we have entered with a little geometry. We will use it to inspect the limits of the forms that seemed to admit us.
 
 <!-- @sphere_high -->
 
-Thirty-two rings, thirty-two segments. Round, to the eye.
+Start with the first pair in the resolution display. One sphere wears lines along its triangle edges; the other has plain shading. Predict whether removing the lines also changes the sphere's outline. Walk around the pair and compare.
+
+The two meshes have the same vertex positions and triangle connections. The lines are an added overlay. They make a construction easier to follow without rebuilding its surface.
+
+Choose one place where the silhouette changes direction. Step back until that distinction becomes difficult to see, then approach again. Your distance changed. The mesh did not.
 
 <!-- @sphere_mid -->
 
-Sixteen. You can begin to count the facets.
+Continue to the middle pair. Inspect it from a comparable distance. Which distinctions are easier to find now? Compare the marked example with its plain neighbour before comparing it with the finer pair behind you.
+
+The finer pair uses sixteen rings and sixteen radial segments; this pair uses seven of each. Those two settings divide different directions of the surface. Changing them changes the positions and connections available for making it.
 
 <!-- @sphere_low -->
 
-Eight. It is not a rougher sphere. It is a different solid, one with eight-fold symmetry and no name in the menu, and the only thing that changed between the three plinths is an integer.
+At the coarsest pair, follow one flat patch toward its edge. Is this merely a sphere missing something, or is there a feature here you would choose to keep?
+
+Its construction uses one ring and ten radial segments. One direction is divided more often than in the middle example, the other much less. Resolution has a distribution. It does not arrive as a single quantity called detail.
+
+The script gives the two choices separate names:
 
 ```gdscript
-func prism_from_segments(n: int) -> Dictionary:
-    # a "round" body drawn with n sides is a prism: n side faces, two n-gon caps
-    return {"faces": n + 2, "vertices": 2 * n, "edges": 3 * n}
+sphere_mesh.radial_segments = segment_count
+sphere_mesh.rings = ring_count
 ```
 
-The machine has no circle. Every cylinder, every capsule, every sphere it has ever drawn is a number of segments, and at any finite number a round body is a prism: n side faces and two caps, and vertices minus edges plus faces is two, the way it always is. Lower the number far enough and the sphere is a prism with a name: triangular, square, hexagonal. Resolution is not detail laid on a form. It *is* the form, and the form was decided by whoever typed the integer.
+A mathematical sphere consists of points at a fixed distance from a centre. The mesh joins sampled positions with flat triangles. Adding triangles can improve that approximation; no finite collection of flat patches acquires the sphere's continuous curvature. Shading can soften their appearance while the polygonal outline remains.
 
-Keep that for the next room, where the number tries to go to infinity and does not arrive.
+This is where ignorance turns around. Plato distinguishes the drawn figure from the geometric object considered in thought. Here we turn our attention toward the constructed figure: what its polygons leave out, and what their particular arrangement makes available.[^ignorance-plato]
 
-<!-- @ -->
+The formula specifies a sphere. The mesh gives us one finite construction through which to encounter it. The ridge is available too. We can learn from its shape without requiring it to disappear into a smoother answer.
 
-## The one that refuses
+<!-- @budget_of_smoothness -->
 
-```gdscript
-func has_centre_of_symmetry(n: int) -> bool:
-    # rotate the regular n-gon by half a turn: does it land on itself?
-    for i in n:
-        var p := Vector2.RIGHT.rotated(TAU * i / n)
-        var back := -p
-        var hit := false
-        for j in n:
-            if back.distance_to(Vector2.RIGHT.rotated(TAU * j / n)) < 0.0001:
-                hit = true
-        if not hit:
-            return false
-    return true
-```
+Return to the counter by the inscription. Four numbered spheres turn at the same rate. Keep the counts hidden at first. Choose one for a distant background and one for someone to inspect close to their face. The spheres stay on their stands; you are choosing possible uses.
+
+Press **SHOW / HIDE COUNTS**. Did the numbers change your choice? Then press **SHOW / HIDE EDGES** and follow the lines toward a pole.
+
+Each tag gives two triangle counts. Even counting depends on what the instrument agrees to include.[^ignorance-counts]
+
+Hide the counts while keeping the edges visible, then try the reverse. What becomes easier to judge? Both controls alter what is shown while keeping the sphere meshes in place.
+
+A triangle count does not measure frame time or tell us which object deserves to exist. For your proposed use, name the distinction worth spending geometry on. You might spend more on a close silhouette, or keep a facet because it makes this body recognisable.
 
 <!-- @capsule -->
 
-A pill, turning. Five segments round, five rings up, and it is in every engine's menu under the plainest name there is.
+Before leaving, find the five-sided capsule. Let it turn. When a ridge faces you, picture the other side. Would the same ridge be waiting there? Follow the silhouette as another side comes into view.
 
-Watch it turn and watch what faces you. A vertex, then an edge, then a vertex. With an even number of segments the far side of a body is the near side turned half round, and you could draw the back from the front without walking there. With five you cannot. Turn it half round and it does not land on itself. An edge faces away where a vertex faced you, and the silhouette from behind is not the silhouette from the front. The back of this thing is genuinely unknown from here, which is the name of the room.
+Five segments divide the body around its long axis. Opposite a ridge is the middle of a facet. Half a turn does not bring this cross-section back onto itself. The divisions are evenly spaced, but their odd number interrupts that particular symmetry.[^ignorance-capsule]
 
-The five ideal solids are ideal because they are equal to themselves from everywhere. This one is a body the machine's own limit made unequal to itself, and it ships in the same menu, and nobody thought to call it anything. Hold on to that. The thing that refuses the ideal is not outside the set. It is in the standard kit, under the dullest name in it, and one integer away from the ones that comply.
+You cannot fold your understanding around this corner by simply repeating the front at the back. The shortcut fails. You have to follow another side, or learn the rule well enough to work it out. The object remains knowable; recognising a capsule was not yet knowing this one.
 
-<!-- @star_primitive -->
+Stay with what the five divisions produced. Between the familiar pill and its polygonal construction, a body appears that the name did not prepare you for. Its surprise is made within the restriction. What would you miss if you corrected it into the capsule you expected?
 
-The same fact, flat: five points. Turn it half round and it does not land on itself either. Odd is a way of not equalling yourself.
-
-<!-- @ -->
-
-## What resists
-
-<!-- @roughrock -->
-
-A solid whose corners were pushed off their ideal places. It is the remainder made into an object: everything the ideal set left out, standing on a plinth. What resists abstraction is not noise. It is signal.
-
-<!-- @righttriangle -->
-
-And the thing that does not resist, for contrast. Move it anywhere, turn it any way, and the right angle survives, the way it did three rooms ago. An invariant is what a model keeps. This room has been about what it drops.
-
-<!-- @hole_with_cones -->
-
-Three cones around nothing. There was a hole here, in the code, and it is no longer drawn; the cordon stayed. That is the room's emblem, and it is exact: a marker for the thing the model left out, standing where the thing was. Every primitive in this hall is three cones around something.
+This gives ignorance another direction: a limit in our expectation becomes somewhere to look. The same small set of instructions that confines the form can make more available than we first knew to ask of it.
 
 <!-- @ -->
 
-## What a primitive knows
+The five regular solids and the irregular rock remain around this experiment. Their symmetry and construction offer [return visits](/book?map=Primitives_Ignorance&section=tutorial). We do not need to settle every shape before leaving.
 
-The tutorial for this room is not about shapes at all. It is about objects that keep their own state and know nothing of the scene, that report some facts and hide others, that can learn and forget. That is what a primitive is in a machine: not the simplest thing but the most *enclosed*, an interface that shows you a sphere and keeps thirty-two integers behind it. Calling something primitive is a move, not a description.
+Carry a more specific question than whether the sphere is good enough: **enough to hold which distinction, for whom, at what distance?**
 
-The next room takes the integer this one kept turning down and turns it up instead, toward the circle, and finds out whether it ever gets there.
+The polygonal model has a limit; our first understanding of its possibilities has one too. The next room follows a finite sequence of round-looking objects toward a boundary none of its examples reaches.
+
+[^ignorance-inscription]: The Academy motto is a later tradition, not a securely documented inscription from Plato's lifetime. See [The Academy of Plato](https://mathshistory.st-andrews.ac.uk/Societies/Plato/), MacTutor History of Mathematics. The museum stages the familiar wording as an instruction whose authority we can question.
+
+[^ignorance-plato]: Plato, [Republic, Book VI](https://classics.mit.edu/Plato/republic.7.vi.html), Benjamin Jowett translation, the divided-line discussion: drawn figures serve reasoning about geometric objects rather than being its ultimate objects. Ada's reversal is methodological: stay with the implemented figure and investigate its limits and possibilities. This does not establish that Plato was unaware of imperfect drawings, or that geometry cannot describe curves.
+
+[^ignorance-counts]: Some generated triangle triples collapse at the poles. The counter distinguishes all submitted triples from those with measurable area in [Godot 4.6 SphereMesh](https://docs.godotengine.org/en/4.6/classes/class_spheremesh.html) arrays. “With area” excludes triangles below a local squared-cross-product tolerance of `1e-16`; it is a practical threshold. The [technical chapter](/book?map=Primitives_Ignorance&section=technical) records all four measured pairs of counts. Overlays and counter furniture are excluded. Analytic sphere descriptions and this finite polygonal rendering are different representations.
+
+[^ignorance-capsule]: The installed `capsule.tscn` uses a [CapsuleMesh](https://docs.godotengine.org/en/4.6/classes/class_capsulemesh.html) with five radial segments and five rings. Its regular pentagonal cross-section repeats after 72 degrees, but not after 180 degrees about the long axis. The absent half-turn symmetry does not make all symmetry disappear. The scene turns at 45 degrees per second. These are the authored mesh and spin settings, not controls available on the plinth.

@@ -8,6 +8,10 @@ extends Node3D
 @export var target_prediction: float = 0.5  # How much to lead the target
 @export var max_projectiles: int = 20
 @export var auto_start: bool = true
+## Optional museum controls and a footprint of the spawn region.
+@export_enum("none", "field") var stand: String = "none"
+var _field_readout: Label3D
+var _pulse_tween: Tween
 
 enum SpawnMode {
 	FORWARD,
@@ -56,8 +60,8 @@ const WARNING_VALUES: PackedStringArray = ["none", "stain", "cage", "beacon", "s
 @export_group("Determinism")
 ## Seed for the falling-field spawn scatter. -1 = randomize on every boot, which is what
 ## this spawner has always done and remains the default. Any value >= 0 makes the field
-## repeat exactly, so a capture, a regression shot or a bug report can be re-run and get
-## the same cubes in the same places.
+## repeat initial positions and velocities. ProjectileCube owns a separately randomized
+## jitter stream; this seed does not replay complete trajectories or collisions.
 @export var field_seed: int = -1
 ## Hold the idle animation still. Default false = the legacy behaviour: the emitter pulses
 ## between 1.0 and 1.2 scale on a looping tween and the warning plume emits, both of which
@@ -107,9 +111,15 @@ func _ready():
 	# the timer, the marker, the plume, the two audio players and the label are all
 	# exactly where they were. "none" falls through and adds nothing at all.
 	_build_warning()
+	if stand == "field":
+		call_deferred("_build_field_stand")
 
 func _setup_spawner():
 	"""Initialize the spawner components"""
+	# The shipped scene contains base AudioStream placeholders with no playback.
+	for audio in [spawn_sound, warning_sound]:
+		if audio != null and audio.stream != null and audio.stream.get_class() == "AudioStream":
+			audio.stream = null
 	# Create projectile scene if not set
 	if not projectile_scene:
 		projectile_scene = preload("res://commons/primitives/cubes/projectile_cube.tscn")
@@ -215,11 +225,14 @@ func _play_warning_effects():
 	if warning_particles:
 		warning_particles.emitting = true
 
-	if warning_sound:
+	if warning_sound and warning_sound.stream:
 		warning_sound.play()
 
 	# Pulsing animation
+	if _pulse_tween != null and _pulse_tween.is_valid():
+		_pulse_tween.kill()
 	var tween = create_tween()
+	_pulse_tween = tween
 	tween.set_loops()
 	tween.tween_property(mesh_instance, "scale", Vector3(1.2, 1.2, 1.2), 0.5)
 	tween.tween_property(mesh_instance, "scale", Vector3(1.0, 1.0, 1.0), 0.5)
@@ -239,7 +252,10 @@ func _stop_warning_effects():
 		warning_particles.emitting = false
 	
 	# Stop pulsing
+	if _pulse_tween != null and _pulse_tween.is_valid():
+		_pulse_tween.kill()
 	var tween = create_tween()
+	_pulse_tween = tween
 	tween.tween_property(mesh_instance, "scale", Vector3(1.0, 1.0, 1.0), 0.2)
 
 func _spawn_projectile():
@@ -336,6 +352,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 func configure(config_data: Dictionary) -> void:
 	if config_data.is_empty():
 		return
+	if config_data.has("stand"):
+		stand = "field" if str(config_data["stand"]) == "field" else "none"
+		if is_node_ready():
+			call_deferred("_build_field_stand")
 
 	if config_data.has("mode"):
 		var mode_value = str(config_data["mode"]).strip_edges().to_lower()
@@ -452,13 +472,19 @@ func _on_projectile_destroyed(projectile: Node3D):
 func set_spawn_interval(interval: float):
 	"""Change how often projectiles spawn"""
 	spawn_interval = interval
-	spawn_timer.wait_time = interval
+	if is_instance_valid(spawn_timer):
+		spawn_timer.wait_time = interval
 	print("CubeSpawner: Spawn interval set to %.1f seconds" % interval)
 
 func set_projectile_speed(speed: float):
 	"""Change projectile speed"""
 	projectile_speed = speed
 	print("CubeSpawner: Projectile speed set to %.1f" % speed)
+
+func _exit_tree() -> void:
+	# Projectiles use world transforms and are parented to the active scene.
+	# They must leave with their emitter when a museum hall is unloaded.
+	clear_all_projectiles()
 
 func clear_all_projectiles():
 	"""Remove all active projectiles"""
@@ -653,6 +679,77 @@ func _warn_emissive(c: Color, energy: float) -> StandardMaterial3D:
 	m.emission_energy_multiplier = energy
 	return m
 
+
+## A housed control at the east edge, outside the initial spawn region. The floor
+## lines mark where centres are drawn, not a fence against later projectile drift.
+func _build_field_stand() -> void:
+	if stand != "field" or has_node("FieldStand"):
+		return
+	var root := Node3D.new()
+	root.name = "FieldStand"
+	add_child(root)
+	root.top_level = true
+	root.global_position = global_position + field_center_offset
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.07, 0.09, 0.13)
+	var gold := StandardMaterial3D.new()
+	gold.albedo_color = Color(1.0, 0.64, 0.18)
+	gold.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	var half := field_size_meters * 0.5
+	_field_box(root, "West", Vector3(-half.x, 0.025, 0), Vector3(0.045, 0.025, field_size_meters.y), gold)
+	_field_box(root, "East", Vector3(half.x, 0.025, 0), Vector3(0.045, 0.025, field_size_meters.y), gold)
+	_field_box(root, "Near", Vector3(0, 0.025, -half.y), Vector3(field_size_meters.x, 0.025, 0.045), gold)
+	_field_box(root, "Far", Vector3(0, 0.025, half.y), Vector3(field_size_meters.x, 0.025, 0.045), gold)
+	var at := Vector3(half.x + 1.35, 0, -half.y + 1.0)
+	_field_box(root, "Foot", at + Vector3(0, 0.06, 0), Vector3(0.85, 0.12, 0.65), mat)
+	_field_box(root, "Plinth", at + Vector3(0, 0.45, 0), Vector3(0.52, 0.8, 0.40), mat)
+	_field_box(root, "ReadoutCase", at + Vector3(0, 1.30, 0.16), Vector3(1.5, 0.68, 0.10), mat)
+	_field_readout = Label3D.new()
+	_field_readout.name = "Readout"
+	_field_readout.position = at + Vector3(0, 1.30, 0.095)
+	_field_readout.rotation.y = PI
+	_field_readout.font_size = 28
+	_field_readout.pixel_size = 0.0016
+	_field_readout.outline_size = 4
+	root.add_child(_field_readout)
+	var rack: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = rack.create_panel("", [[{"type":"button", "label":"RUN / STOP"}, {"type":"button", "label":"CLEAR"}]], true)
+	panel.name = "Controls"
+	panel.set_meta("em_local_instrument", true)
+	panel.position = at + Vector3(0, 0.89, -0.28)
+	panel.rotation_degrees = Vector3(-34, 180, 0)
+	panel.scale = Vector3.ONE * 2.3
+	root.add_child(panel)
+	var run_button: Node = panel.find_child("Btn_0", true, false).get_node("InteractableAreaButton")
+	run_button.button_pressed.connect(func(_b):
+		if is_active: deactivate_spawner()
+		else: activate_spawner()
+		_update_field_readout())
+	var clear_button: Node = panel.find_child("Btn_1", true, false).get_node("InteractableAreaButton")
+	clear_button.button_pressed.connect(func(_b):
+		clear_all_projectiles()
+		_update_field_readout())
+	var refresh := Timer.new()
+	refresh.wait_time = 0.2
+	refresh.timeout.connect(_update_field_readout)
+	root.add_child(refresh)
+	refresh.start()
+	_update_field_readout()
+
+func _field_box(root: Node3D, title: String, at: Vector3, size: Vector3, mat: Material) -> void:
+	var mesh := MeshInstance3D.new()
+	mesh.name = title
+	var box := BoxMesh.new()
+	box.size = size
+	mesh.mesh = box
+	mesh.material_override = mat
+	mesh.position = at
+	root.add_child(mesh)
+
+func _update_field_readout() -> void:
+	if not is_instance_valid(_field_readout): return
+	_cleanup_projectiles()
+	_field_readout.text = "FALLING FIELD · %s\n%.1f × %.1f m · launch +%.1f m\nattempt every %.2f s · live %d / %d\nSTOP leaves flights · CLEAR removes\nLines mark starts; cubes can drift" % ["RUNNING" if is_active else "STOPPED", field_size_meters.x, field_size_meters.y, field_spawn_height, spawn_interval, active_projectiles.size(), max_projectiles]
 
 # Debug methods
 func _input(event):

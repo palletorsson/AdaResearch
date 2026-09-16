@@ -143,6 +143,7 @@ const STAT_TEST_COUNT := 4
 const ENTROPY_HISTORY_COUNT := 50
 
 func _ready() -> void:
+	_use_museum_lighting()
 	# The grid sets config_* metadata SYNCHRONOUSLY before add_child, so the meta
 	# read happens here, before any geometry exists.
 	_read_meta_overrides()
@@ -160,6 +161,19 @@ func _ready() -> void:
 	_apply_disclosure()
 	if stream_seed >= 0:
 		_prime_pinned()
+
+func _use_museum_lighting() -> void:
+	# This scene's sun belongs to its standalone demonstration. Inside the
+	# museum it would illuminate and cast shadow passes for the entire hall.
+	var ancestor := get_parent()
+	while ancestor != null:
+		if ancestor.has_meta("em_map"):
+			var demo_sun := get_node_or_null("DirectionalLight3D") as DirectionalLight3D
+			if demo_sun != null:
+				demo_sun.visible = false
+				demo_sun.shadow_enabled = false
+			return
+		ancestor = ancestor.get_parent()
 
 func _process(delta: float) -> void:
 	if _pinned:

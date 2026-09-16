@@ -1,0 +1,27 @@
+{
+  "date": "2026-09-16",
+  "page": "http://localhost:3003/research/possible-bodies/triangle-strip-research.html",
+  "analytic_checks_passed": 18,
+  "selected_cases": 8,
+  "captures": 64,
+  "render_invariant_failures": [],
+  "script_errors_final_render": 0,
+  "browser": {
+    "initial_page_loaded": true,
+    "horizontal_overflow": false,
+    "near_edge_toggle": true,
+    "fold_filter_count": 2,
+    "failure_filter_ids": [
+      "hinge-alternating-60",
+      "collapsed"
+    ],
+    "lightbox_loaded_correct_side_image": true,
+    "broken_loaded_images": [],
+    "console_warnings_and_errors": []
+  },
+  "notes": [
+    "Three pre-existing engine error types remain: shader cache write, root certificate store, unrecognized UID. No GDScript errors in final render.",
+    "Lazy offscreen images are verified by the gallery builder manifest/hash checks; browser checks concern loaded images.",
+    "No VR, interaction or museum collision testing performed."
+  ]
+}

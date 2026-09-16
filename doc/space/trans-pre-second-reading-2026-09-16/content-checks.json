@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "check": "Every authored placement, structure cell and utility preserved",
+      "pass": true
+    },
+    {
+      "check": "Artifact count reflects all thirteen current placements",
+      "pass": true
+    },
+    {
+      "check": "ada_run/em_plan.json: every other room preserved",
+      "pass": true
+    },
+    {
+      "check": "commons/data/museum/em_plan.json: every other room preserved",
+      "pass": true
+    },
+    {
+      "check": "Other maps preserved in roles",
+      "pass": true
+    },
+    {
+      "check": "Other maps preserved in order",
+      "pass": true
+    },
+    {
+      "check": "Group, position and global role metadata preserved",
+      "pass": true
+    },
+    {
+      "check": "Live book API serves revised Trans_Pre",
+      "pass": true
+    },
+    {
+      "check": "Book and necklace agree on pickup as primary",
+      "pass": true
+    },
+    {
+      "check": "Health crosses remain supporting artifacts",
+      "pass": true
+    },
+    {
+      "check": "Every book code line exists in pickup source",
+      "pass": true
+    },
+    {
+      "check": "Stale five-pickup instructions removed",
+      "pass": true
+    },
+    {
+      "check": "Book makes the scope of scale explicit",
+      "pass": true
+    }
+  ]
+}

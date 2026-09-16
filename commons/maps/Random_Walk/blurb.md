@@ -1,3 +1,3 @@
-A glass tank on a dark cabinet, five beads drifting inside it, one red and four dimmed so a single trail can be followed. The keypad says 2D, 3D, LEVY and RESET; a wing on the cabinet's side carries a plate that counts steps against the clock, names the trail kept and the seed, and states the glass rule, with ONE, ALL and NEW SEED beside it.
+# The trail is already elsewhere
 
-What matters: the walker carries a position and nothing else. Each step is a fixed length in a random direction, or under LEVY a heavy-tailed length capped at ten; the trail is the display's memory of the last two hundred positions, not the walker's. The glass folds an overshooting step back by the distance it overshot, so the walks stay bounded. A named seed makes RESET replay the same walk, and the same seed under another rule sends the same draws elsewhere.
+Follow a red bead until its turns begin to look like intentions. Change the rule, walk around a crossing, read what the glass and the clock have left out. Five bodies move; two hundred positions remain. What would the next step need to know to follow its own history?

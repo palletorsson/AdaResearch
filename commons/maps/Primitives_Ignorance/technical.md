@@ -1,243 +1,88 @@
-# 07 Ignorance
+# Sphere names, mesh counts and visible differences
 
-The gallery inscription appears before anything else: *Let no one ignorant of geometry enter here.* Plato wrote it above the Academy door. Here it floats at grid position (4,8), above a dark sphere that barely emits light. This is the entrance condition.
+Point_Animatedcube separated vertex positions from connectivity and presentation. This hall keeps those distinctions available while examining the sphere. Its primary encounters now follow the ordinary sphere near the entrance, the high, middle and low sphere pairs in their placed order, then a deliberate return to `budget_of_smoothness` at (5,9), followed by the five-segment capsule at (0,16). The other solids remain available as further comparisons.
 
-The inscription is a trap. If you believe you already know geometry, you will walk through this space misreading everything. The sphere LOD comparison will look like a display. The octahedron puzzle will look like a toy. The capsule will look like a pill. What this map actually asks is harder: can you encounter these objects as if for the first time, without the confidence that pre-empts discovery?
+## What the polygonal representation cannot retain
 
-In Point_Animatedcube you dragged corners of a mesh and watched the cube deform — direct mechanical contact with geometry, vertices as handles, edges as spring constraints. The geometry was responsive. Here the geometry is installed. You cannot break these objects. But you can misread them.
+An analytic sphere is defined by a fixed distance from its centre. The finite surface mesh connects sampled positions with planar triangles. That triangle surface cannot coincide everywhere with the exact curved boundary. This is a limitation of the chosen representation; it is not a claim that code or mathematics cannot specify a sphere analytically.
 
-## Resolution Is a Parameter, Not a Property
+Keep geometry, presentation and use distinct. Changing rings or radial segments changes the generated mesh. The inspection overlay changes how a fixed mesh is shown. Viewing distance and the observer's purpose change which of its features matter. The room's reference to Plato directs attention to those distinctions; its historical and interpretive sources are footnoted in final.md.
 
-The first thing you encounter at rows 11, 13, and 15 is three spheres: `sphere_high`, `sphere_mid`, `sphere_low`. They occupy the same position in the type taxonomy — all three are instances of `SphereMesh`. They differ only in their subdivision counts.
+## Two directions of subdivision
 
-```gdscript
-# sphere_high: 32 rings, 32 radial_segments
-var mesh_high = SphereMesh.new()
-mesh_high.radius = 0.3
-mesh_high.height = 0.6
-mesh_high.rings = 32
-mesh_high.radial_segments = 32
+First compare silhouettes from the same distance. The current default configurations are:
 
-# sphere_low: 8 rings, 8 radial_segments
-var mesh_low = SphereMesh.new()
-mesh_low.radius = 0.3
-mesh_low.height = 0.6
-mesh_low.rings = 8
-mesh_low.radial_segments = 8
-```
+| Artifact | Rings | Radial segments |
+|---|---:|---:|
+| sphere_low | 1 | 10 |
+| sphere_mid | 7 | 7 |
+| sphere_high | 16 | 16 |
 
-Walk around them. At reading distance `sphere_high` reads as smooth. `sphere_low` reads as a faceted polyhedron. They are the same mathematical object — the unit sphere — rendered at different computational costs. What you perceive as smoothness is a budget decision. Godot's renderer interpolates normals across triangle faces, which softens the seams, but the underlying tessellation is always visible at close range or in silhouette.
+All three use radius 0.5 and height 1.0. Their scripts expose other configuration choices, but this room retains the defaults above. Rings and radial segments divide different directions of the surface. Their distribution matters as well as their quantity.
 
-`radial_segments` divides the sphere longitudinally — the vertical slices. `rings` divides it latitudinally — the horizontal bands. Together they determine the triangle count: approximately `radial_segments × rings × 2` triangles per sphere. A `sphere_high` at 32×32 carries roughly 2000 triangles. A `sphere_low` at 8×8 carries roughly 128. The difference is visible. The cost is real.
+Each resolution is placed twice. The room adds `inspection:1` to both members and `inspection_edges:1` or `inspection_edges:0` to distinguish them. Their generated vertex and index arrays agree. The inspection mode supplies the same plain material to each pair and adds actual triangle-edge lines to one member.
 
-This matters beyond aesthetics. Every triangle is processed by the GPU per frame. A scene with a thousand `sphere_high` instances costs fifteen times more than the same scene with `sphere_low`. Real-time 3D is always a negotiation between fidelity and performance. The sphere that looks "right" is the one that spends triangles efficiently.
+The room-specific overlay is built from the mesh's index triples. It does not assume that `VERTEX_ID % 3` produces distinct barycentric coordinates for every indexed triangle; shared indices can violate that assumption. The shared inspection helper reads the indices explicitly. Existing non-inspection appearances remain available in other maps.
 
-The ignorance the map names here is the assumption that a smooth sphere is a primitive — something given, not constructed. It is not given. Someone chose 32. Someone else chose 8. That choice has consequences. Knowing geometry means knowing the choice was made.
+## Read the counter after choosing a use
 
-## The Capsule: A Cylinder Made Safe
+The counter generates four smaller spheres with radius 0.26 and height 0.52. Their radial segment settings are 4, 8, 16 and 64; rings are `maxi(seg / 2, 2)`. They share material and spin rate. Counts and overlays start hidden under `#discovery:1`.
 
-At x=7, rows 11–15, a capsule sits alongside the star and truncated tetrahedron. It looks unremarkable. `capsule_radials_rings.gd` reveals what it actually is:
+The two pointer/press buttons independently show or hide counts and edges. Revealing either leaves the original surface mesh resource unchanged. The spheres are fixed exhibits, not grabbable samples. Their stands raise them above the tilted labels.
+
+The counter has moved from column 1 to the clear central cell at column 5, row 9, retaining one placement. Its three-metre-wide counter previously extended toward the room's side boundary. The new placement faces the earlier rows. Actual museum stamping is checked; full-room approach still needs a headset walk.
+
+## Two triangle counts
+
+Read the buffers of each generated sphere:
 
 ```gdscript
-func _build_capsule() -> void:
-    var capsule_mesh = CapsuleMesh.new()
-    capsule_mesh.radius = radius
-    capsule_mesh.height = height
-    capsule_mesh.radial_segments = radial_segments
-    capsule_mesh.rings = rings
-
-    _mesh_instance = MeshInstance3D.new()
-    _mesh_instance.mesh = capsule_mesh
-    _mesh_instance.material_override = GridMaterialFactory.make(base_color)
-    add_child(_mesh_instance)
-    _create_collision()
+var arrays = mesh.surface_get_arrays(0)
+var triangle_entries = arrays[Mesh.ARRAY_INDEX].size() / 3
 ```
 
-The capsule is a cylinder with hemispherical caps. The caps are the engineered part. A pure cylinder has sharp circular edges at each end — edges where the surface normal is discontinuous. If you slide a physics body along a wall and it catches on the corner of a cylinder, that discontinuity is why. Hemispherical caps are differentiable at every point on their surface. No sharp edges. No discontinuous normals. Character controllers in physics engines slide over geometry without snagging because every contact point on their surface has a well-defined outward normal.
+This counts triangle entries, including collapsed entries at the poles. The helper also examines their positions:
 
 ```gdscript
-func _create_collision() -> void:
-    var static_body = StaticBody3D.new()
-    static_body.name = "CapsuleCollision"
-    add_child(static_body)
-
-    var collision = CollisionShape3D.new()
-    var shape = CapsuleShape3D.new()
-    shape.radius = radius
-    shape.height = height
-    collision.shape = shape
-    static_body.add_child(collision)
+if (b-a).cross(c-a).length_squared() < 1e-16:
+    continue
 ```
 
-`CapsuleShape3D` in Godot uses an analytical formulation — it computes exact distance to the capsule surface mathematically, not against triangle geometry. This makes capsule collision detection faster and more stable than mesh collision at comparable visual fidelity. The shape is designed around a use case: a body that needs to move without snagging. The form follows the function so completely that "capsule" has become a genre — the default shape for VR hands, character bodies, bullets in flight.
+The cross product is twice the triangle's oriented area vector. This squared-length tolerance excludes zero and tiny-area triangles in local coordinates. The label **with area** means triangles retained by that test, not a proof of exact nonzero area at arbitrary scale.
 
-The `#config` syntax in the map data configures this object at placement:
+| Segments | Rings | Triangle entries | Retained by area test |
+|---:|---:|---:|---:|
+| 4 | 2 | 24 | 16 |
+| 8 | 4 | 80 | 64 |
+| 16 | 8 | 288 | 256 |
+| 64 | 32 | 4,224 | 4,096 |
 
-```gdscript
-func _parse_config_string(config_str: String) -> void:
-    var parts = config_str.split(":")
-    if parts.size() >= 1 and parts[0].is_valid_int():
-        radial_segments = max(3, int(parts[0]))  # min 3: triangular cross-section
-    if parts.size() >= 2 and parts[1].is_valid_int():
-        rings = max(1, int(parts[1]))
-```
+These values were measured from meshes produced by the project's Godot 4.6 runtime. The previous formula `2 * segments * rings` matched the area-bearing count in these examples. It did not include the collapsed pole entries in the index buffer. The updated counter exposes both descriptions.
 
-`radial_segments = 3` produces a triangular prism with round caps. `radial_segments = 4` produces a square-capped capsule. The same mesh primitive becomes unrecognizable at low subdivisions. The capsule only "looks like a capsule" above roughly 8 segments.
+An overlay is built from the three edges of each retained triangle. Shared edges may be drawn twice. It is slightly enlarged by a factor of 1.002 to reduce coplanar flicker. Overlay geometry, stands, screens and the counter itself are excluded from the sphere counts.
 
-## The Torus: Two Circles, One Object
+## A count does not measure the whole frame
 
-`torus_radials_rings` at row 23 shares the configurable structure with the capsule — the same `#config` syntax, the same `apply_grid_config()` interface, the same logic of parameterized construction.
+The display inventories mesh geometry. It does not time the GPU, estimate headset frame rate or measure attention. Materials, screen coverage, lighting, shadows, batching and other running work affect performance too. Use the numbers to specify a design choice, then test its perceptual and runtime consequences separately.
 
-```gdscript
-func _build_torus() -> void:
-    var torus_mesh = TorusMesh.new()
-    torus_mesh.inner_radius = inner_radius
-    torus_mesh.outer_radius = outer_radius
-    torus_mesh.rings = rings
-    torus_mesh.ring_segments = ring_segments
+The low-resolution form may preserve the distinctive outline a visitor wants to recognise. The high-resolution form may be useful for a closer inspection. Neither judgment follows automatically from an integer or from the name sphere.
 
-    _mesh_instance = MeshInstance3D.new()
-    _mesh_instance.mesh = torus_mesh
-    _mesh_instance.name = "TorusMesh"
-    _mesh_instance.material_override = GridMaterialFactory.make(base_color, {
-        "wireframe_color": wireframe_color,
-        "wireframe_width": 2.5,
-        "wireframe_brightness": 3.0
-    })
-    add_child(_mesh_instance)
-```
+## Five segments: a particular symmetry fails
 
-`rings` divides the path — the main circle that the tube travels around. `ring_segments` divides the tube cross-section. A torus with `ring_segments = 4` has a square tube. With `ring_segments = 3`, a triangular one. The tube is itself a circle, parameterized independently of the outer path.
+The installed `commons/primitives/capsule/capsule.tscn` authors a CapsuleMesh with radius 0.25, height 1.0, five radial segments and five rings. The root script defaults to `facture = "cast"`, which leaves this mesh unchanged. The map has no facture override. Its child uses `commons/primitives/prismes/rotation.gd`, with angular speed `(0,45,0)` degrees per second.
 
-A point on the torus surface is specified by two angles: one for position along the main circle, one for position around the tube. The parameter space is a flat unit square with both pairs of opposite edges identified — wrap the top to the bottom and the left to the right. This topology has a name: genus-1 surface. You cannot flatten a torus into a plane without cutting it. You cannot flatten a sphere without tearing it either, but the reason is different. The sphere has no hole; the torus has exactly one.
+The straight middle has a regular pentagonal cross-section. Its equal angular intervals are 72 degrees. A 72-degree rotation preserves the cross-section's corners; a 180-degree rotation does not. Opposite a corner's radial direction is a side midpoint. The absent half-turn symmetry should not be described as total asymmetry or as an inability to infer the back from the full generative rule.
 
-```gdscript
-# Torus surface parameterization (for reference):
-# (θ, φ) → ((R + r·cos(φ))·cos(θ),
-#            (R + r·cos(φ))·sin(θ),
-#             r·sin(φ))
-# where R = outer_radius, r = inner_radius
-# θ ∈ [0, 2π]: position around the main circle
-# φ ∈ [0, 2π]: position around the tube
-```
+The capsule supplies a second limit: a familiar name or an assumed front/back correspondence does not specify the unseen side. The constraints generate an inspectable form between what "rounded pill" suggests and what these facets actually do. "Transcendental inside restrictions" is Palle's research formulation for exceeding an expectation within a generative system, not an additional property measured by the mesh API.
 
-At low `rings` and `ring_segments`, the wireframe overlay makes this parameterization visible — quads wrapping around two independent circular directions simultaneously. The next map, Primitives_Portals, extends this directly: a sequence of tori with increasing `ring_segments`, watching the discrete polygon count approach the ideal circle. That map asks what a limit is. This one asks what the parameterization is.
+A direct Godot mesh measurement is archived at `doc/space/ignorance-focus-2026-09-16/capsule-return/`. It extracts a ring from the actual authored mesh, tests the 72-degree and 180-degree rotations, and compares a six-segment copy as a control. This verifies cross-section geometry, not visual legibility in the room.
 
-## Platonic Solids: Constructed, Not Found
+## Sources and checks
 
-`platonic_grabbables` at (3,4) contains all five: tetrahedron, cube, octahedron, dodecahedron, icosahedron. Three grabbable copies of each. Plato believed these were the atoms of reality — fire is tetrahedra, earth is cubes, air is octahedra. The mysticism is instructive: it shows how desperately humans have wanted geometry to be fundamental, not constructed.
+- `commons/primitives/godotmeshes/sphere_low.gd`, `sphere_mid.gd`, `sphere_high.gd`
+- `commons/primitives/shared/mesh_inspection.gd`
+- `commons/artifacts/budget_of_smoothness/budget_of_smoothness.gd`
+- `commons/maps/Primitives_Ignorance/map_data.json`
+- `commons/testing/probe_ignorance_primary.gd`
 
-Grab the octahedron. The source is explicit about what it is:
-
-```gdscript
-func _octahedron_geometry() -> Dictionary:
-    var scale := octahedron_scale
-    var vertices: Array[Vector3] = [
-        Vector3(0, 0.5, 0) * scale * 2.0,   # top
-        Vector3(0, -0.5, 0) * scale * 2.0,  # bottom
-        Vector3(0.5, 0, 0) * scale * 2.0,   # right
-        Vector3(-0.5, 0, 0) * scale * 2.0,  # left
-        Vector3(0, 0, 0.5) * scale * 2.0,   # front
-        Vector3(0, 0, -0.5) * scale * 2.0   # back
-    ]
-    var faces: Array = [
-        [0, 4, 2], [0, 2, 5], [0, 5, 3], [0, 3, 4],
-        [1, 2, 4], [1, 5, 2], [1, 3, 5], [1, 4, 3]
-    ]
-```
-
-Six vertices. Eight faces. Each vertex sits at ±0.5 on exactly one axis. The octahedron is the set of all points where |x| + |y| + |z| = constant — the L1 unit ball, as opposed to the L2 unit ball (the round sphere, where x² + y² + z² = constant). This is the dual of the cube: take the cube's six face-centers and connect them, you get these six vertices. The cube has 6 faces and 8 vertices. The octahedron has 8 faces and 6 vertices. Face-vertex duality, exact.
-
-`grab_octahedron.gd` exposes this through interaction — pressing the controller button toggles between materials, making the 8-face structure legible against the wireframe grid. Pressing the button doesn't change what the object is. It changes what you can see. This is not a metaphor for epistemology. It is epistemology: the same structure, different representation, different understanding.
-
-## The Snap Octahedron Puzzle: Topology Through Assembly
-
-At (4,17), the `snap_octahedron_puzzle` asks you to do what the static display already shows — but actively. Six floating points must be placed at their target positions to complete the shape.
-
-```gdscript
-func _on_octahedron_formed(points: Array) -> void:
-    var our_points_count = 0
-    for point in points:
-        if point in snap_points:
-            our_points_count += 1
-
-    if our_points_count == 6:
-        _complete_puzzle()
-```
-
-The six target positions are the same six vertices from `_octahedron_geometry()`: ±1 on each axis. Assembling the octahedron by placing its vertices teaches the topology before the topology is named. You learn the shape through its construction, not its description. Walking to a grab_octahedron support block at (2,17) or (6,17), picking it up, carrying it to the target — these are epistemic acts. The position is already known to the system. The understanding comes from making it yourself.
-
-This is knowledge as contact, not code. The snap puzzle is not a test of whether you remember the vertex positions. It is the process through which you internalize them.
-
-## Truncation, Stars, and the Shape Vocabulary
-
-The `truncatedtetrahedron` at x=7 demonstrates a topological operation rather than a parameterization. A regular tetrahedron has 4 vertices. Cut each corner and you replace each vertex with a new triangular face:
-
-```gdscript
-var vertices = [
-    # Original tetrahedron vertices, pulled inward
-    Vector3(0.2, 0.2, 0.2),
-    Vector3(-0.2, -0.2, 0.2),
-    Vector3(-0.2, 0.2, -0.2),
-    Vector3(0.2, -0.2, -0.2),
-    # New vertices at each truncated corner
-    Vector3(0.1, 0.1, -0.1),
-    Vector3(-0.1, -0.1, -0.1),
-    Vector3(-0.1, 0.1, 0.1),
-    Vector3(0.1, -0.1, 0.1)
-]
-```
-
-Truncation is a functor: it maps solids to solids systematically. Every vertex becomes a face. The number of sides on the new face equals the original vertex valence. A tetrahedron, where every vertex meets 3 edges, produces triangular truncation faces. An octahedron, where every vertex meets 4 edges, produces square truncation faces. The Archimedean solids — the semi-regular polyhedra between the Platonic extremes — are mostly products of this and related operations. The taxonomy of shapes is small; the space of derived shapes is large.
-
-The `star_primitive` at the same row encodes a different lesson: non-convex geometry. A star cannot be defined as a convex hull of its vertices — the indentations require explicit face definitions. Any algorithm that assumes convexity will fail on a star. This is not a theoretical concern: collision detection, shadow casting, and boolean operations all have convex-optimized fast paths. The star is a reminder that convexity is a special case, not a default.
-
-## Repetition as Construction
-
-The `prism_block` strip at row 21 and the `diamonds` centerpiece at (4,25) demonstrate the same principle at different scales: repetition with incremental variation produces structural complexity from simple rules.
-
-The diamonds stack rotating octahedra — `unit_count` instances, each offset by `unit_height`, each rotated by `rotation_offset` from the previous. One object, one transformation, applied N times. The tower is a transformation sequence collapsed into a single artifact. You cannot separate "the diamond pattern" from "the repetition rule."
-
-```gdscript
-# The pattern diamonds.gd encodes:
-var unit_count: int        # how many
-var unit_size: float       # base scale
-var unit_height: float     # vertical offset per unit
-var rotation_offset: float # rotation increment per unit (degrees)
-```
-
-This is what procedural generation means at its simplest: one object, one transformation, applied N times. The L-system lesson later in the sequence will extend this to branching, context-sensitivity, and recursive depth. But the seed is already here: repetition with incremental variation produces visual complexity from simple rules.
-
-The `dark_sphere` at (4,8) marks inhabited space without asserting itself. It pulses:
-
-```gdscript
-func _process(delta: float) -> void:
-    _time_elapsed += delta
-    if _sphere_mesh:
-        _sphere_mesh.rotation.y += rotation_speed * delta
-    if _sphere_material:
-        var pulse_t := (sin(_time_elapsed * pulse_speed) + 1.0) * 0.5
-        _sphere_material.emission_energy_multiplier = lerpf(pulse_min, pulse_max, pulse_t)
-```
-
-Sinusoidal emission between 0.05 and 0.35, period controlled by `pulse_speed = 1.2`. Slow enough to read as breathing. Fast enough to register as alive. Some things in a space exist not to be used but to be sensed. The dark sphere is a mood, not a lesson. But the mood is part of the map's argument: not everything present is present for your use.
-
-## What Primitives Are
-
-The gallery inscription is not a credential check. It is a warning about smuggled certainties. Plato's geometry was deductive — it began with axioms and derived truths that could not be otherwise. Computational geometry begins with choices: how many triangles, which topology, what parameterization. These choices are not arbitrary, but they are not necessary either.
-
-A primitive, in computational terms, is not the simplest possible thing. It is a stable foundation for further construction — something whose behavior is well-understood and whose cost is predictable. `CapsuleMesh`, `SphereMesh`, `TorusMesh` are primitives not because they are elementary but because they are reliable. The choice of what counts as a primitive encodes assumptions about what matters: smooth normals matter for character controllers, so the capsule is primitive; topological genus matters for texture mapping, so the distinction between sphere and torus is primitive; resolution flexibility matters for level-of-detail systems, so the subdivision parameter is exposed.
-
-The Platonic solids persist because they encode something true about symmetry — not atoms of matter, but a complete classification of all possible face-regular convex polyhedra. There are exactly five. That finitude is remarkable. But knowing that fact is different from knowing the vertex arrays, the face indices, and the collision shapes that make each one computable.
-
-The next map, Primitives_Portals, will push on the torus specifically — watching discrete ring counts approach the ideal circle as a limit process. That map is about approximation and infinity. This one is the prerequisite: understanding that "smooth" and "round" are not properties of an object but properties of the parameterization you chose to apply to it.
-
----
-
-## Possible Artifacts
-
-**resolution_slider_sphere** — A sphere with a live integer slider for `radial_segments` and `rings`, showing in real-time how increasing both parameters transitions from a faceted solid to apparent smoothness. Would make explicit that resolution is a continuous parameter, not a categorical difference. The three static LOD spheres imply a before/after; the slider shows the continuous space between them.
-
-**dual_solid_visualizer** — Two objects side by side — a cube and its dual octahedron — with a visualization of the face-center-to-vertex correspondence: small spheres at cube face centers, lines connecting to octahedron vertices. Teaches duality as a structural relationship rather than a coincidence of vertex counts. Currently learners must infer this from holding the static objects; the visualization would make the mapping explicit.
-
-**truncation_slider** — A tetrahedron with a float parameter (0.0 = regular tetrahedron, 1.0 = fully truncated). The corners gradually become triangular faces as the parameter increases, the original faces become hexagons. Would make truncation legible as a continuous operation rather than a discrete replacement — bridging the static `truncatedtetrahedron` display to the procedural generation logic that underlies the Archimedean family.
+The probe exercises pointer events, reads actual mesh arrays, compares paired vertex/index buffers and stamps the configured counter through the museum loader. Full-room distances, hand reach and headset legibility remain to be checked. Primitives_Portals next develops the distinction between finite approximations and a mathematical limit.

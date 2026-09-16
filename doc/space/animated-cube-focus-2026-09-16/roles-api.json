@@ -1,0 +1,195 @@
+{
+  "map": "Point_Animatedcube",
+  "cards": [
+    {
+      "token": "cube_lines",
+      "row": 1,
+      "col": 2,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "cube-construction",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "animatedcubebuilder",
+      "row": 5,
+      "col": 5,
+      "count": 2,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "cube-construction",
+      "ruled": true,
+      "from_book": true
+    },
+    {
+      "token": "polyhedron_nets_cube",
+      "row": 10,
+      "col": 4,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "primary",
+      "group": "cube-construction",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "floating_sphere_field",
+      "row": 2,
+      "col": 2,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "decoration",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "wooden_pallet",
+      "row": 3,
+      "col": 5,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "boxes-example",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "hangar_supply_pile",
+      "row": 7,
+      "col": 5,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "boxes-example",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "crate",
+      "row": 9,
+      "col": 6,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "boxes-example",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "station_crates",
+      "row": 10,
+      "col": 1,
+      "count": 2,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "boxes-example",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "glove_box",
+      "row": 11,
+      "col": 2,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "boxes-example",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "first_phosphor",
+      "row": 12,
+      "col": 11,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "boxes-example",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "first_shadow",
+      "row": 3,
+      "col": 11,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "pyramid",
+      "row": 11,
+      "col": 8,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    }
+  ],
+  "groups": [
+    {
+      "id": "boxes-example",
+      "title": "Boxes Example",
+      "role": "secondary",
+      "count": 6
+    },
+    {
+      "id": "cube-construction",
+      "title": "Connections that survive a deformation",
+      "role": "primary",
+      "count": 3
+    }
+  ],
+  "notes": [],
+  "layout": {
+    "primary": [
+      {
+        "kind": "group",
+        "id": "cube-construction"
+      }
+    ],
+    "secondary": [
+      {
+        "kind": "group",
+        "id": "boxes-example"
+      },
+      {
+        "kind": "card",
+        "token": "first_shadow"
+      },
+      {
+        "kind": "card",
+        "token": "pyramid"
+      }
+    ],
+    "decoration": [
+      {
+        "kind": "card",
+        "token": "floating_sphere_field"
+      }
+    ]
+  },
+  "seq": "primitives",
+  "positions": {},
+  "ok": true
+}

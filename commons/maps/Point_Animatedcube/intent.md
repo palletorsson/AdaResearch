@@ -1,7 +1,19 @@
-Concept: The cube as manipulable quad-based enclosure — full volumetric closure achieved, but through flexible quads rather than rigid triangles. Drag corners to deform; agency operates within constraint.
-Sequence role: Eighth map. Completes the closure arc from triangle to trihedron to full enclosure. The cube is over-determined (quads flex where triangles would not), introducing deformation as interactive possibility. Prepares Primitives_Ignorance by establishing mastery that the next map will deliberately unsettle; follows Primitives_Polythedra.
-Technical angle: Cube construction from six quad faces, quad vs triangle mesh tradeoffs, interactive vertex dragging with constraints, animated assembly sequences, net-to-solid folding (polyhedron_nets_cube).
-Critical angle: Enclosure as both achievement and confinement. The cube as modernist container (the white cube, the box). Dragging corners reveals that apparent stability is maintained by convention, not necessity.
-Key artifacts: animatedcubebuilder as the primary interactive assembly tool; polyhedron_nets_cube for understanding the cube as unfolded net — the 2D pattern that becomes 3D volume.
+Concept: Positions can change while connections remain. Follow a cube outline, replay its assembly, then move one numbered corner out of a face's plane to discover the diagonal inside a seemingly flat square. Compare this deformation with a net whose rigid faces turn at hinges.
 
-Gap: No gap identified.
+Sequence role: Seventh of ten maps in primitives. Follows Primitives_Polythedra's encounter with closure, collision and use. Makes the triangle construction of a familiar cube experimentally visible. Prepares Primitives_Ignorance's question about what an engine's primitive names conceal.
+
+Primary order: cube_lines -> animatedcubebuilder -> polyhedron_nets_cube. All three artifact types remain primary. The two builders support an unchanged reference beside an altered example. All fourteen artifact placements remain in the room.
+
+Small lesson: Moving a vertex changes the geometry of every triangle that refers to it. It does not automatically change those references, preserve a cube, or produce a valid enclosure. Replay preserves the alteration; restore returns the original coordinates.
+
+Technical angle: Separate position and connection lists; eight corners, twelve cube edges, twelve triangle patches; the shared diagonal [5, 7] of [4, 5, 7] and [5, 6, 7]. Distinguish timed visibility, vertex deformation and hinge rotation. The side instrument provides replay, local assembly pause, restoration and a diagonal overlay; it does not offer a general transformation timeline.
+
+Critical angle: An assembly that began before arrival can be replayed without pretending to stop the whole room. A crease makes an earlier triangulation decision perceptible. Displacement is measurable; the value of an altered form is not decided by its displacement counter. Keep Palle's admission, "A world without composition yet," in the main text.
+
+Museum connection: Near the exit, turn from the primary objects to the floor, walls and cube-based prefabs. The museum's structure is itself an application of the box vocabulary. Recognising this belongs to the main walk even while composition remains a later subject. Distinguish geometric faces from triangle count, and related construction from identical mesh, collision or editing permissions. This is an observation of the existing architecture, not an additional artifact placement or a new primary card.
+
+Return visits: The tutorial retains the cartons and crate arrangements, glove box, shadow and phosphor comparisons, and the eight-sided pyramid. Detailed counting and implementation remain in technical.md. The critical essay remains a separate, longer inquiry.
+
+Focus guard: Keep the five-step encounter: outline, timed reveal, deform one corner, expose the shared diagonal, compare rigid-face folding. Exit through recognition of the museum's own box construction. Connectivity, triangulation and Euler's count have short source-linked footnotes; crossing, collapse and collision caveats remain available there and in the technical chapter. The main walk asks what changes while the connection lists remain, without prescribing when the visitor must stop calling the result a cube.
+
+Remaining: Full-room headset review of panel and handle reach, sightlines and the folding net. No saved deformation collection, enclosure validator or physical shelter behavior is claimed.

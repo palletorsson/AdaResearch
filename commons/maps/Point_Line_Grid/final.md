@@ -1,121 +1,80 @@
-You took the grid.
+Look for your bend. It may have grown.
 
-The other door led to the trace, the line made once, by a body, and never again. This one leads here, where the line is made again and again until the making stops mattering, and where your movement is handed back to you as the nearest positions you were allowed to have had.
+A drawing released in Trace can arrive here as a list of positions. Over the ruled field, a small movement has acquired another size. Keep it in view. We are going to give positions addresses, then ask what those addresses help us make.
 
-The last room ended on a question it could not answer for you: two losses, and which one you can live with. This room has decided. It lives with losing everything below a cell, and in exchange it keeps the address forever.
-
-<!-- @player_trace -->
-
-The recorder is at the door, the same instrument as before, a centimetre between points and a thousand and twenty-four of them before the oldest goes. But it is standing in a different room, and here it writes two lines from one walk.
-
-The faint one is where you were, every frame, unquantised. The bright one is the cell the grid gave each of those positions, one metre to a side, and it comes out as a staircase. The gap between the two lines is not an error in either. It is what was thrown away, made visible for once, and the room keeps both so you can see the discard beside the thing it was discarded from.
-
-`player_trace` writes your position into the cell it falls inside, not where it actually was.
-
-Read that twice. It is the whole of the argument, and everything below is the mechanism.
-
-<!-- @ -->
-
-## Divide, round, multiply
-
-```gdscript
-const CELL_SIZE := 0.5
-
-func world_to_cell(pos: Vector3) -> Vector3i:
-    return Vector3i(
-        int(round(pos.x / CELL_SIZE)),
-        int(round(pos.y / CELL_SIZE)),
-        int(round(pos.z / CELL_SIZE))
-    )
-```
-
-Three operations, and the middle one is the room. Divide by the cell, round, multiply back. That is quantisation entire, the same three steps that make pixels out of a photograph and samples out of a sound, and the only thing that changes from one medium to the next is the number you divide by.
-
-Notice where the loss happens. The trace lost at the sampling, and then its lines invented what lay between. Here the loss is at the *write*, and the write is idempotent: run it twice on the same position and nothing more is lost, because nothing is left to lose. Everything within a quarter of a metre of a node has become the node. And `round()` settles the tie the way the engine settles it, away from zero, so a body standing exactly halfway is pushed outward, away from the origin, by a rule nobody in the room wrote.
-
-The origin is still here. Cell `(0, 0, 0)` is its cell, and every other address is counted from it in whole steps. What the first room excavated, this room has made a lattice of.
-
-<!-- @grid_lines -->
-
-Five cells a side, one metre each, and the frame was here before you were. It does not even turn.
-
-Look at the middle of the room, where the floor is missing, and notice that the lines cross the hole anyway. Nothing is there, and it is addressed. That is the grid's confession, and it makes it out loud: a cell does not need an occupant to have a name. Once laid down, the lattice forgets it was laid down and presents itself as how space simply is, the way a surveyed section line comes to look like nature. The word for that register is *cadastral*, and it was invented for collecting tax.
-
-<!-- @ -->
-
-## It never forgets, and it never updates
-
-```gdscript
-var visited_cells: Dictionary = {}  # Vector3i -> timestamp
-
-func _process(_delta: float) -> void:
-    var cell := world_to_cell(learner.global_position)
-    if not cell in visited_cells:
-        visited_cells[cell] = Time.get_ticks_msec()
-        highlight_cell(cell)
-```
-
-Read the `if`. The trace dropped its oldest point for every new one and forgot from the far end, two hundred frames at a time. This forgets nothing, and it also learns nothing after first contact. Pace one cell for an hour and the record holds a single entry, stamped with the first millisecond you crossed into it. Re-entry does not overwrite.
-
-So the grid counts places and not time, and that is the loss it lives with: duration, entirely. The trace kept how long and lost what happened. The grid keeps *where*, once, forever, and cannot tell you whether you passed through or stayed.
+## Find somewhere to return
 
 <!-- @grab_sphere_point_snap -->
 
-Reach for it. While you hold it, it follows your hand. When you let go it jumps, to the nearest whole metre, and the jump is a small discontinuity you feel in the arm before you see it. That tug is the lesson in your muscles: your intention landed between two addresses, and the grid decided which.
+Pick up the snapping sphere. Move it slowly, watching its marker and the retained line. Try to move without adding a new place to the record. Then go far enough for another place to appear.
 
-The table beside it shows the transaction in two columns: where you measurably were, and the name that will stand for it. `(2.37, 0.0, -1.83)` becomes `(2, 0, -2)`. The decimals are not rounded off. They are erased, because that is what addressing requires.
+Trace already made choices about which positions to keep. Here, look at the table's other way of naming them. Beside the coordinates in metres are integer indices. With this tool's five-centimetre spacing, `0.15` metres along X has index `3`: three spacings from world zero. The same place has two names.
 
-It snaps at a metre where the tutorial's cell is half that, and the coarseness is the point. Half a metre you might not notice. A metre you feel.
+The calculation, reduced to one axis, is:
+
+```gdscript
+var index = roundi(pos.x / grid_size)
+var placed_x = index * grid_size
+```
+
+Divide by the spacing. Round to the nearest integer. Multiply back to get metres. At this spacing, `0.12` becomes `0.10`; `0.13` becomes `0.15`. One centimetre of movement can carry the record across a five-centimetre interval. Elsewhere, a larger movement can leave its address unchanged.
+
+Let go. The tool brings its marker onto the lattice. Pick it up and try to return to that address. You have some room to be imprecise and still arrive at the same result. That can be useful: we may want two pieces to meet without having to place them by eye.[^point-grid-bowker-star]
+
+The table gives another name to the retained position. It does not show the unrounded position beside it. We still need your movement to notice what this record leaves out.
+
+## Give the interval a rhythm
+
+<!-- @player_trace -->
+
+Now walk a small loop, then a wider diagonal. Look behind you. The walking recorder keeps a finer sampled reference and a path rounded to one-metre spacing in its own frame.
+
+Find a place where you can move while the coarse address holds. Slowly cross into another. Cross back. There is a rhythm in the jump, and room to move within the interval. A rule for making positions agree has also given us something to dance with.[^point-grid-ahmed-return]
+
+In VR, lean with your feet planted. The recorder can respond: it follows the headset horizontally, using the rig's origin for height. On desktop it follows the walking body. It must choose a point before it can draw a path called yours.
+
+The lines connect the positions it keeps. A diagonal can cut across ground you went around. Returning to an earlier address can add another turn to the record; the program keeps an order of visits, not just a collection of places visited once. An address lets us recognise a return. It does not tell us why we came back.
+
+## Let the drawing find another use
+
+<!-- @grid_lines -->
+
+Return to the ruled field. Find your bend in pink, then compare green. Is it still your bend at this size? If the field is empty, return to Trace, draw with a dot or stick until it retains at least two points, and let go. The whiteboard and walking recorder keep separate records.
+
+This display subtracts the centre of the received drawing's bounds and applies a scale:
+
+```gdscript
+mesh.surface_add_vertex((p - center) * final_scale)
+```
+
+Pink shows the drawing centred and scaled. Small drawings grow fivefold; larger ones receive a smaller multiplier to fit within five metres. Green rounds the displayed positions again, with six intervals per metre along each axis. The source positions listed in the panel stay unchanged.
+
+A turn made by your wrist might now suggest a route for your whole body. Is there a part you would want to follow? A record can become a score, but it needs another decision about what following means.
+
+## Give the address a floor
+
+<!-- @plan_vitrine -->
+
+Step onto the small plan in its glass enclosure. Count one row, then a column. Five by five: twenty-five one-metre cells. The printed indices run from zero to four.
+
+Find a cell using both numbers. Leave it and find it again. You can now describe where a cube might stand without pointing. Two indices can become an instruction for placing it.[^point-grid-scott]
+
+Cross a row, then cut diagonally. The drawn divisions do not stop you. A continuous collision surface supports the plan. Over the other basin, the museum supplies walkable glass; the replayed lines provide no floor of their own.
+
+An address can tell a program where to put something. What lets a body reach it needs further work.[^point-grid-lefebvre]
 
 <!-- @ -->
 
-## Comparable
+There are other movements and other plans here. We could keep following them. For now, carry this much: a shared address can help us repeat a placement, coordinate a meeting, begin a level. It cannot decide which of those things we should want.
 
-```gdscript
-func path_length_cells(path: Array) -> int:
-    return path.size() - 1  # edges between consecutive cells
-```
+The grid gives us a way to name a place and return to it together.
 
-How far becomes how many. Two different bodies take two different walks through the same cells, and the function returns the same integer for both, and now they can be laid side by side, replayed, diffed, learned from. This is the promise the last room made on this one's behalf, that a grid is how two movements are made comparable, and here it is delivered with the price in plain sight. The same number for different walks is the point. It is also exactly what was thrown away.
+Next, three points can close a boundary. What must we add before there is a face inside it?
 
-```gdscript
-func quantised_step(from: Vector3, to: Vector3) -> Array:
-    var current := world_to_cell(from)
-    var steps: Array = [current]
-    while current != world_to_cell(to):
-        var diff := world_to_cell(to) - current
-        if abs(diff.x) >= abs(diff.y) and abs(diff.x) >= abs(diff.z):
-            current.x += sign(diff.x)
-        elif abs(diff.y) >= abs(diff.z):
-            current.y += sign(diff.y)
-        else:
-            current.z += sign(diff.z)
-        steps.append(current)
-    return steps
-```
+[^point-grid-bowker-star]: Geoffrey C. Bowker and Susan Leigh Star, [*Sorting Things Out: Classification and Its Consequences*](https://mitpress.mit.edu/9780262024617/sorting-things-out/) (MIT Press, 1999), study classifications and standards as information infrastructure, including whose differences become visible or disappear within them. Rounding coordinates is not identical to classifying people. It supplies a small operational comparison: treating different inputs as equivalent can support coordination while leaving distinctions out. Its consequences depend on what we build with that equivalence.
 
-A diagonal cannot exist here. Each step moves one axis, the one with the most left to go, so your straight line comes back as a staircase. The staircase is not a rendering artefact. It is what the grid believes your path was. The word is *aliasing*: the grid is a sampling frequency, and you moved faster than it samples. Shrink the cells and the staircase leans toward your line. It never becomes it.
+[^point-grid-ahmed-return]: Return to Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology), introduction: bodily orientation involves relations of alignment and reach. Dancing with the interval is Ada’s proposed use of this rule, not a result already established by her argument.
 
-<!-- @floating_sphere_field -->
+[^point-grid-scott]: James C. Scott, [*Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed*](https://yalebooks.yale.edu/book/9780300252989/seeing-like-a-state/) (Yale University Press, 1998), chapter 1, examines practices of administrative legibility, including cadastral mapping. The connection here is narrow: a plan can make a placement describable to someone not standing beside it. This does not make every grid coercive or establish that a legible plan is sufficient for inhabiting the place.
 
-The field drifts through the addresses without taking any. Five by three by eight metres, bounded again, and the spheres in it have positions the grid never asks for.
-
-<!-- @3t -->
-
-**THE GRID / THE TRACE.** The plaque carries both names with a slash between them, because this room is one half of an answer and it knows it. Both are made of the same thing, two points and a decision about what to keep, and the slash is the decision.
-
-<!-- @room_grammar -->
-
-On the floor, a plan being dealt by a rule: a rectangle split, and split again, into rooms, with doors cut where the grammar allows. It is not this room's plan. But it is the same hand, the grid's logic turned on walls, a decision about which differences count taken about where you may stand at all.
-
-<!-- @ -->
-
-## Whose grid
-
-The room says the word out loud: quantisation is never neutral. A grid is a decision about which differences count and which fall below resolution, and once the decision is made, everything finer than a cell does not exist to the system. Not as a small value. As a fact. Foucault's disciplinary diagram is not a metaphor the room reaches for; it is the mechanism the room implements. The census, the timetable, the cell block, the pixel: each is a body made legible by being snapped to a frame it did not author. *Whose grid, and whose resolution* is the political question, and the room hands it to you as a tug in the arm rather than a slogan.
-
-And then it refuses to let you off with the critique. The snap that erases your sub-cell body is the same snap that lets two bodies' paths be laid side by side. The discipline is the condition of the comparison. Surveillance and science are one operation, and the room asks you to hold both in one gesture: the loss of the continuous self, and the birth of the shareable record.
-
-That doubled feeling, fit and misfit at once, is the thing to keep.
-
-The next room adds a third point, and three points do something two cannot. They close.
+[^point-grid-lefebvre]: Henri Lefebvre, [*The Production of Space*](https://www.wiley-vch.de/de?isbn=9780631181774&option=com_eshop&title=The+Production+of+Space&view=product), translated by Donald Nicholson-Smith (Blackwell, 1991; French original 1974), chapter 1, distinguishes spatial practice, representations of space and representational spaces. His account keeps planning, practical activity and lived meanings in relation. The vitrine enters that problem without reproducing the whole theory: addresses and a plan do not by themselves establish access, habits, belonging or a place’s meaning to its inhabitants.

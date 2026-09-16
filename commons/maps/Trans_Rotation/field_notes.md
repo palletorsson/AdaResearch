@@ -237,3 +237,48 @@ MeshInstance3D, hidden or not. It is built at the moment of the crossing now,
 so the cube seals its one cell; the registry's measured footprint (17) is stale
 by the same amount. The Spectacle's twelve stood exactly where placed, because
 its rows are thirteen wide.
+
+
+## 2026-09-09 — separate the two rotation arguments
+
+Replaced the mixed rotation hall with two primary studies: panel crossings on explicit x/y/z mounts, then individual cube rotation versus shared array rotation. The source map and all earlier markdown were copied to `doc/space/rotation-studies-2026-09-09/before` before editing. The grid remains fixed; a broad landing separates the courts.
+
+The actual GridSystem probe passes 25 checks. All three panels cross at ninety degrees and do not cross at zero; only the whole-array bay crosses at ninety. Centres and all grid instance transforms are checked. These are endpoint capsule tests, not a human VR review. The full museum capture is `ada_run/Trans_Rotation_build_up.png`; existing UID/certificate/logger errors remain in its log.
+
+The current book, tutorial and critical text describe these two experiments. Older notes below/above and `walked.md` describe the previous layout; they are historical evidence, not current learner verification. Next: walk both courts in VR, check label readability and whether the six-second hold allows an unhurried crossing.
+
+
+## 2026-09-09 — correction: middle pivots and a genuine 2D array
+
+User corrected the bottom-hinge and shared-parent interpretation. All three blades now turn about their middle and measure 8.4 x 2.4 x 0.2 m. X and Z pause at about 23.2 degrees and meet grid levels y=0 and y=3. The artifact's bank slabs were removed; source grid cells provide every static landing. The larger sweep has a four-metre-deep museum basin.
+
+The second study now has three 4-column by 10-row cube arrays (120 cubes), comparing x/y/z with fixed centres and a five-degree row increment along +z. Angles are static during the walk. The local-versus-parent prototype was copied to `doc/space/rotation-studies-2026-09-09/centre-pivot-revision/before`. Edge outlines and row-angle labels expose the individual cubes and the score.
+
+Actual GridSystem probe: 22 checks, zero failures. All blades reach their grid landings; all three zero-angle controls cross. With the 0-to-45-degree gradient, Y and Z complete the 23 m forward test. X stalls after 20.68 m near the final row. The probe distinguishes a stall from a time budget and allows height changes across rough ground. This establishes a straight-walking capsule result, not a universal block or human VR acceptance.
+
+Current book, supporting pages, registry and sequence now describe these two corrected arguments. Timing and alternative player routes need a VR walk. The two primary tokens remain stable, matching the book and necklace.
+
+
+### Same session — reverse the blades and strengthen all four array bands
+
+User requested the opposite blade direction, a fourth combined array and increased rotation throughout. The blade score now runs in the reversed sense while keeping its docking poses. The hall is 51 x 60, with four 4 x 10 bands and a ten-degree step (0 to 90). XYZ applies X(-), then Y(+), then Z(+), around each cube centre.
+
+With the ten-degree row increment, the straight-walking capsule stalls after about 9.22 m in XYZ, 10.90 m in X and 12.71 m in Z. Y completes the 23 m route. All four zero-angle controls complete it. These are measured paths, not proofs against jumping or lateral detours.
+
+23 actual-grid checks pass, plus 9 reversed-motion checks. The latter verify fixed middles, reversed edge travel and matching physical bounds on return to a crossing pose. Current captures show all four labelled bands and cube outlines. Registry, sequence, primary/book alignment and current manuscript reflect this revision. Human VR walking remains pending.
+
+
+### Basin fire
+
+Enabled `museum.simulation.fire` for Trans_Rotation at the user's request. The existing basin effect occupies only y=-4.0 to -3.4, leaving the centred blade sweep and cube arrays above it. The actual museum capture verified the fire volume at the basin base (`ada_run/rotation_fire_capture.log`).
+
+
+## Parked for return — spatial conditions for different lives
+
+Palle's direction: rotation opens a discussion of how different spatial arrangements can host different forms of existence. Mountain folds, an ordered office, concealment and long sightlines suggest different possibilities for moving, seeing and living. Later sine/noise rooms should develop this through their actual types, amplitudes, frequencies and bodily consequences.
+
+Keep this as an open research question rather than assigning an inherent politics to a shape. Smooth/striated space concerns organisation and use, not simply flat/rough surfaces. Reference: Deleuze and Guattari, *A Thousand Plateaus*, “The Smooth and the Striated,” pp. 478–479 and 500 (https://files.libcom.org/files/A%20Thousand%20Plateaus.pdf). “Topology entropy” is a working phrase here, not a measured mathematical topological entropy.
+
+Return question: **Where my movement fails, what other way of living becomes possible?** Compare reachable places, alternative routes, concealment, exposure and movement cost for different bodies. A creature's movement might reveal a habitat where the visitor initially encounters only obstruction. These are proposed investigations, not implemented creature behaviours.
+
+Current stopping point: `final.md` is a complete working draft for the two installed primary encounters: centred blades, then four 2D rotation bands. Keep its concrete discovery/code argument available while these wider questions mature. Human VR review remains pending. The next active sequence map is `Trans_RotationSpectacle`.

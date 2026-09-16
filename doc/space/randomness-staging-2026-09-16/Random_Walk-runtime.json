@@ -1,0 +1,121 @@
+{
+  "artifacts": [
+    {
+      "bounds": {
+        "max": [
+          2.9375,
+          0.193750008940697,
+          4.0
+        ],
+        "meshes": 533,
+        "min": [
+          1.0,
+          -0.0281249992549419,
+          2.3125
+        ]
+      },
+      "lookup": "random_walk_128",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomWalk128",
+      "position": "(2.0, 0.0, 3.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          8.09000015258789,
+          2.52999997138977,
+          3.08999991416931
+        ],
+        "meshes": 23,
+        "min": [
+          7.36999988555908,
+          0.00999999791383743,
+          2.73000001907349
+        ]
+      },
+      "lookup": "pixel_cloud",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/PixelCloud",
+      "position": "(8.0, 0.1, 3.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          5.77599954605103,
+          1.53000009059906,
+          6.34250020980835
+        ],
+        "meshes": 65,
+        "min": [
+          4.59999990463257,
+          0.0,
+          5.53200006484985
+        ]
+      },
+      "lookup": "random_walk_terrarium",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomWalkTerrarium",
+      "position": "(5.0, 0.0, 6.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          2.37467455863953,
+          0.904510617256165,
+          10.4273595809937
+        ],
+        "meshes": 12,
+        "min": [
+          1.60006213188171,
+          0.779999971389771,
+          9.91237640380859
+        ]
+      },
+      "lookup": "random_walk_collection",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomWalkCollection",
+      "position": "(2.0, 1.178302, 10.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          8.1899995803833,
+          1.54999995231628,
+          10.2027492523193
+        ],
+        "meshes": 97,
+        "min": [
+          7.41999959945679,
+          0.0,
+          9.71306037902832
+        ]
+      },
+      "lookup": "random_walk_leash",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomWalkLeash",
+      "position": "(8.0, 0.0, 10.0)",
+      "yaw": -179.999984741211
+    }
+  ],
+  "failures": [],
+  "floor_checks": [
+    {
+      "cell": "(5.0, 0.0)",
+      "supported": true
+    },
+    {
+      "cell": "(5.0, 12.0)",
+      "supported": true
+    },
+    {
+      "cell": "(1.0, 6.0)",
+      "supported": true
+    },
+    {
+      "cell": "(9.0, 6.0)",
+      "supported": true
+    }
+  ],
+  "headset_verified": false,
+  "map": "Random_Walk",
+  "origin": "(0.5, 0.0, 0.5)"
+}

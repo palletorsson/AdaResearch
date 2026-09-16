@@ -1,0 +1,143 @@
+{
+  "map": "Trans_Pre",
+  "cards": [
+    {
+      "token": "pick_up_cube",
+      "row": 2,
+      "col": 4,
+      "count": 8,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "",
+      "ruled": true,
+      "from_book": true
+    },
+    {
+      "token": "y_translation_cube",
+      "row": 5,
+      "col": 6,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "rotation_oscillation_cube",
+      "row": 8,
+      "col": 6,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "uniform_scale_marker",
+      "row": 11,
+      "col": 6,
+      "count": 1,
+      "shot": false,
+      "shot_src": "",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "health_cross",
+      "row": 18,
+      "col": 2,
+      "count": 2,
+      "shot": false,
+      "shot_src": "",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "3t",
+      "row": -1,
+      "col": -1,
+      "count": 5,
+      "shot": true,
+      "shot_src": "catalog",
+      "placement_source": "grid utility",
+      "runtime_token": "3t",
+      "utility_cells": [
+        {
+          "row": 2,
+          "col": 2,
+          "value": "3t:1 - cube"
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "value": "3t:2 - add rise and fall"
+        },
+        {
+          "row": 8,
+          "col": 2,
+          "value": "3t:3 - add turning"
+        },
+        {
+          "row": 11,
+          "col": 2,
+          "value": "3t:4 - add swelling"
+        },
+        {
+          "row": 12,
+          "col": 5,
+          "value": "3t:the same forms - a small level"
+        }
+      ],
+      "role": "decoration",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    }
+  ],
+  "groups": [],
+  "notes": [],
+  "layout": {
+    "primary": [
+      {
+        "kind": "card",
+        "token": "pick_up_cube"
+      }
+    ],
+    "secondary": [
+      {
+        "kind": "card",
+        "token": "y_translation_cube"
+      },
+      {
+        "kind": "card",
+        "token": "rotation_oscillation_cube"
+      },
+      {
+        "kind": "card",
+        "token": "uniform_scale_marker"
+      },
+      {
+        "kind": "card",
+        "token": "health_cross"
+      }
+    ],
+    "decoration": [
+      {
+        "kind": "card",
+        "token": "3t"
+      }
+    ]
+  },
+  "seq": "transformation",
+  "positions": {},
+  "ok": true
+}

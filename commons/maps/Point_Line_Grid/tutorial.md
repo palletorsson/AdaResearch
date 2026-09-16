@@ -1,94 +1,66 @@
-# Point Line Grid
+# Point_Line_Grid — from a retained position to an address
 
-Snap continuous motion to a grid. Memory becomes quantised.
+The dot in Point_Trace retained selected positions. This room gives positions integer addresses within a chosen grid and tests what we can do with them. Follow the four primary artifacts in [final.md](final.md); [technical.md](technical.md) provides the full source reference.
 
-Set the grid resolution.
+## 1. Metres and indices
 
-```gdscript
-const CELL_SIZE := 0.5
-
-func world_to_cell(pos: Vector3) -> Vector3i:
-    return Vector3i(
-        int(round(pos.x / CELL_SIZE)),
-        int(round(pos.y / CELL_SIZE)),
-        int(round(pos.z / CELL_SIZE))
-    )
-
-func cell_to_world(cell: Vector3i) -> Vector3:
-    return Vector3(cell) * CELL_SIZE
-```
-
-`round` snaps to the nearest cell. A cell size of 0.5 means the learner's position maps to a 50cm grid.
-
-Record cells visited.
+Pick up `grab_sphere_point_snap`, move, release, and read its table. Its scene sets `grid_size = 0.05` metres. The source rounds world X, Y and Z independently. On one axis, the operation can be written as:
 
 ```gdscript
-var visited_cells: Dictionary = {}  # Vector3i -> timestamp
-
-func _process(_delta: float) -> void:
-    var cell := world_to_cell(learner.global_position)
-    if not cell in visited_cells:
-        visited_cells[cell] = Time.get_ticks_msec()
-        highlight_cell(cell)
+var index = roundi(pos.x / grid_size)
+var placed_x = index * grid_size
 ```
 
-The dictionary records the first time each cell was entered. Re-entry doesn't overwrite.
+At this spacing, X = 0.12 gives index 2 and retained X = 0.10. X = 0.13 gives index 3 and retained X = 0.15. The integer counts intervals from world zero; multiplying by the spacing converts that index back to metres.
 
-Draw the grid as visible cells.
+Move within a rounding region, then cross its halfway boundary. Nearby input positions share an address. The table's two columns describe the retained output in different units; they do not compare raw and rounded measurements. A lattice address names a representative point. Do not confuse it with every possible scheme for numbering the areas enclosed by drawn lines.
+
+On release, the handle moves by the correction needed to align the sampled marker, preserving the marker's offset from the handle. The retained table stays visible. This release can append a repeated address, so its row count is not a count of distinct places.
+
+## 2. The chosen point and the ordered path
+
+Walk with `player_trace`. Desktop uses the active walking body; VR uses headset world X/Z and rig-origin world Y. The source then enters the recorder's local frame:
 
 ```gdscript
-func highlight_cell(cell: Vector3i) -> void:
-    var marker := MARKER_SCENE.instantiate()
-    marker.position = cell_to_world(cell)
-    marker.modulate = Color(1, 1, 0.3, 0.4)
-    add_child(marker)
+var local_point = to_local(current_global)
+local_point.y += trace_height_offset
+local_point.x = roundf(local_point.x / seam_grid) * seam_grid
+local_point.z = roundf(local_point.z / seam_grid) * seam_grid
 ```
 
-Each visited cell gets a semi-transparent marker. The markers together form a record of where the learner has been.
+The room sets `seam_grid` to one metre. A finer sampled reference accompanies the coarse path. Compare a small loop with a larger one, and in VR compare leaning with stepping. You are testing both the rounding and the choice of point being measured.
 
-Show the grid lines only where the learner has walked.
+The recorder suppresses consecutive repeated rounded positions but can return to a previous address later. It retains an ordered list, including time/speed data in this recorder, and draws direct segments between accepted positions. It does not compute a route along grid edges. Counting recorded segments does not measure distance in metres: their lengths can differ, and they can be diagonal.
+
+## 3. A copy is given another scale
+
+Release a Trace dot or stick with at least two retained positions. `TraceData` duplicates that list. The whiteboard image and walking path are separate; neither is this input.
+
+At `grid_lines`, find the released drawing. The display computes the source bounds' centre and a scale capped to keep the longest dimension within five metres:
 
 ```gdscript
-func draw_visited_lines() -> void:
-    var visited_list: Array = visited_cells.keys()
-    visited_list.sort_custom(func(a, b): return visited_cells[a] < visited_cells[b])
-    for i in range(visited_list.size() - 1):
-        var a: Vector3 = cell_to_world(visited_list[i])
-        var b: Vector3 = cell_to_world(visited_list[i + 1])
-        draw_line_segment(a, b)
+mesh.surface_add_vertex((p - center) * final_scale)
 ```
 
-Sort by visit time, then connect in order. The result is a polyline of the learner's quantised path.
+Pink uses this transformation. Green snaps those displayed positions to 1/6 metre on each display axis. The source list is unchanged. Its coordinates in the panel therefore need not match the displayed locations. The technical reference distinguishes the source frame, display pitch and the other grids in this room.
 
-Quantise continuous motion into discrete steps.
+## 4. Use two indices to arrange a plan
+
+The placed `plan_vitrine` contains `simulation_grid`. Its source makes five rows of five cell meshes. With the tile mesh and materials already prepared, this is the placement portion of the loop:
 
 ```gdscript
-func quantised_step(from: Vector3, to: Vector3) -> Array:
-    var from_cell := world_to_cell(from)
-    var to_cell := world_to_cell(to)
-    var steps: Array = [from_cell]
-    var current := from_cell
-    while current != to_cell:
-        var diff := to_cell - current
-        if abs(diff.x) >= abs(diff.y) and abs(diff.x) >= abs(diff.z):
-            current.x += sign(diff.x)
-        elif abs(diff.y) >= abs(diff.z):
-            current.y += sign(diff.y)
-        else:
-            current.z += sign(diff.z)
-        steps.append(current)
-    return steps
+for z in range(SIDE):
+    for x in range(SIDE):
+        var mesh := MeshInstance3D.new()
+        mesh.name = "Cell_%d_%d" % [x,z]
+        mesh.mesh = tile
+        mesh.material_override = light if (x+z)%2 == 0 else dark
+        mesh.position = Vector3(x-2, -0.024, z-2)
+        add_child(mesh)
 ```
 
-Bresenham-like stepping from one cell to the next. Each step advances along the axis of greatest remaining distance.
+`SIDE` is 5. Indices run from 0 through 4; subtracting 2 centres the plan. The small vertical offset places the tile surfaces just above the host floor to avoid flicker. These finite cell labels differ from the snapping tool's world-space lattice indices.
 
-Measure path length in cells.
+Find a cell by its two numbers, walk away and return. The divisions help describe placements without restricting walking to grid edges. A separately created five-by-five box collider supplies the continuous floor. The glass enclosure's panes have no colliders.
 
-```gdscript
-func path_length_cells(path: Array) -> int:
-    return path.size() - 1  # edges between consecutive cells
-```
-
-The grid converts continuous distance into a step count. Path length becomes a discrete integer.
-
-You can now snap world positions to a grid, record visited cells, and render the learner's quantised path. Point_Triangle will next close a path into a cycle, introducing the first polygon.
+Carry this distinction into Point_Triangle_Context: naming or connecting positions does not automatically produce a visible face or a supporting surface.

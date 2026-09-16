@@ -172,12 +172,13 @@ func get_point_meta(index: int) -> Dictionary:
 		return {}
 	return _points[index]["meta"]
 
-func _on_sphere_picked_up(index: int, pickable) -> void:
+# Signal arguments come first; Callable.bind appends the point index.
+func _on_sphere_picked_up(pickable, index: int) -> void:
 	if unfreeze_on_pickup and pickable and pickable.has_method("set_freeze_enabled"):
 		pickable.set_freeze_enabled(false)
 	point_picked_up.emit(index, pickable, _points[index]["meta"])
 
-func _on_sphere_dropped(index: int, pickable) -> void:
+func _on_sphere_dropped(pickable, index: int) -> void:
 	if freeze_on_drop and pickable and pickable.has_method("set_freeze_enabled"):
 		pickable.set_freeze_enabled(true)
 	point_dropped.emit(index, pickable, _points[index]["meta"])

@@ -1,0 +1,1045 @@
+{
+  "camera_width_m": 6.2,
+  "cases_sha256": "a5727dd58ddbb9d29c4f8d0e6cac6de25f49ed5232f7be2b556f5d220362064e",
+  "failures": [],
+  "handles_processing": false,
+  "handles_visible": false,
+  "headset_verified": false,
+  "ideal_surface_clearance_m": 0.04,
+  "image_size": [
+    960,
+    640
+  ],
+  "projection": "orthographic",
+  "renderer": "gl_compatibility",
+  "rows": [
+    {
+      "case_id": "shipped",
+      "geometry_unchanged": true,
+      "image": "renders/shipped-facet-oblique.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "c76ff093812a5537107bbe48c08e6934f3cee9cf33f447afad3314b134904456",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.310000002384186,
+        0.0
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "shipped",
+      "geometry_unchanged": true,
+      "image": "renders/shipped-facet-side.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "3b82bc2ba3582e0d4b854e5e4f381c1ab952700e7af17796dcf071715ab887d8",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.310000002384186,
+        0.0
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "shipped",
+      "geometry_unchanged": true,
+      "image": "renders/shipped-cast-oblique.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "864d677cb3797e278fdffd625adf3ae5de37363467ca96e2cbf9d3f3e025c551",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.310000002384186,
+        0.0
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "shipped",
+      "geometry_unchanged": true,
+      "image": "renders/shipped-cast-side.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "2fd46c9c594997991931038799cde0e2aaa85bb8f7b282f0dba67915b962edeb",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.310000002384186,
+        0.0
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "shipped",
+      "geometry_unchanged": true,
+      "image": "renders/shipped-armature-oblique.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "be072525b928286ee955157ffd7e1886f0c9360afa3b222426bb06125d56c6a7",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.310000002384186,
+        0.0
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "shipped",
+      "geometry_unchanged": true,
+      "image": "renders/shipped-armature-side.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "3f750cc2b428edce96529df3f2d5f79b7af1b665e1873ed4995d35a566986ce6",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.310000002384186,
+        0.0
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "shipped",
+      "geometry_unchanged": true,
+      "image": "renders/shipped-shell-oblique.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "054cd7076cfe929e36412a9f62d87f26f68b98f5e244fbbe789b57ebfc5fb2ed",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.310000002384186,
+        0.0
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "shipped",
+      "geometry_unchanged": true,
+      "image": "renders/shipped-shell-side.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "c600d4ae6e0378aabf4ee91fb520f3505c0a129fc718c2582cdb2b2c7e8a9b6b",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.310000002384186,
+        0.0
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-single-70",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-single-70-facet-oblique.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "c6dcdce25294317aa0c4bb5e9be8ea56e6044867b2fb6dd90746b9ecd78c462f",
+      "surface_count": 1,
+      "translation": [
+        0.563745856285095,
+        0.502120673656464,
+        0.774401485919952
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-single-70",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-single-70-facet-side.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "64eea08a25fead321c2bd55171f5922c09e4ae7891f05dae448e9664d5340535",
+      "surface_count": 1,
+      "translation": [
+        0.563745856285095,
+        0.502120673656464,
+        0.774401485919952
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-single-70",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-single-70-cast-oblique.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "69dae7ff1724abedce4180d7b7f70a50828619d7e61a4de3d6af77dfe8829cff",
+      "surface_count": 1,
+      "translation": [
+        0.563745856285095,
+        0.502120673656464,
+        0.774401485919952
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-single-70",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-single-70-cast-side.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "baf04a4b1354d121035e0cb6ae8e8df3cbb9c8b8328bc6981deec4ee502d1f43",
+      "surface_count": 1,
+      "translation": [
+        0.563745856285095,
+        0.502120673656464,
+        0.774401485919952
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-single-70",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-single-70-armature-oblique.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "5a8058a88a74357e3ffffb8072ce3112fd87f9e39efe3b4642c35d1b63be4a11",
+      "surface_count": 1,
+      "translation": [
+        0.563745856285095,
+        0.502120673656464,
+        0.774401485919952
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-single-70",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-single-70-armature-side.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "e504e341ad73ced3500c4c7fb46686fd0a143ef206d93d035d6c9a9d60a0d52c",
+      "surface_count": 1,
+      "translation": [
+        0.563745856285095,
+        0.502120673656464,
+        0.774401485919952
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-single-70",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-single-70-shell-oblique.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "263d30e0914fb1cd3703c833688ac3962292b122d08f082b46b78f2dbee1e4a9",
+      "surface_count": 1,
+      "translation": [
+        0.563745856285095,
+        0.502120673656464,
+        0.774401485919952
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-single-70",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-single-70-shell-side.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "c81137c7ef7b900d1c4122a2cd16db2023f5e5a30f31cb58fcd4285a9b05beba",
+      "surface_count": 1,
+      "translation": [
+        0.563745856285095,
+        0.502120673656464,
+        0.774401485919952
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-alternating-60",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-alternating-60-facet-oblique.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "2fc735846020700cf3c365daa90539ea65a51712767880af2eee14757cbefe12",
+      "surface_count": 1,
+      "translation": [
+        1.83988332748413,
+        -0.268428444862366,
+        -0.12793692946434
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-alternating-60",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-alternating-60-facet-side.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "955db49818658cc1e22dde530fb39a82b0ac9c2f15f6362b0cbe308a02bf32b7",
+      "surface_count": 1,
+      "translation": [
+        1.83988332748413,
+        -0.268428444862366,
+        -0.12793692946434
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-alternating-60",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-alternating-60-cast-oblique.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "cf80da4af8310fb25aeee1cbb4b42d43bb4b3e1c9fbca1b770310f8cdcd8d9e6",
+      "surface_count": 1,
+      "translation": [
+        1.83988332748413,
+        -0.268428444862366,
+        -0.12793692946434
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-alternating-60",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-alternating-60-cast-side.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "bdd95e8a90d2b698186ad98990d8e976067c11a9c343161f4c379cee850a3f3c",
+      "surface_count": 1,
+      "translation": [
+        1.83988332748413,
+        -0.268428444862366,
+        -0.12793692946434
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-alternating-60",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-alternating-60-armature-oblique.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "183a07e58c4c6e3b30d30cbce3607b41ed5ec87d0d94716a821faa51c1bb681d",
+      "surface_count": 1,
+      "translation": [
+        1.83988332748413,
+        -0.268428444862366,
+        -0.12793692946434
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-alternating-60",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-alternating-60-armature-side.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "b262ec56fdcc32d6a1f639929459f7bf4957903d8d296dfe95f60286dfb9bd3e",
+      "surface_count": 1,
+      "translation": [
+        1.83988332748413,
+        -0.268428444862366,
+        -0.12793692946434
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-alternating-60",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-alternating-60-shell-oblique.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "7e0cdf40337949efdbf1615e1a01c5d274cc0123b1b9f7bcce469d955478d4d4",
+      "surface_count": 1,
+      "translation": [
+        1.83988332748413,
+        -0.268428444862366,
+        -0.12793692946434
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-alternating-60",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-alternating-60-shell-side.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "910193631322093109d5ba7da6a1cbddcb2a1ec8c5f0d07b66c9e52882bfd384",
+      "surface_count": 1,
+      "translation": [
+        1.83988332748413,
+        -0.268428444862366,
+        -0.12793692946434
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-paired-40",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-paired-40-facet-oblique.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "f9329fe0fb5bd643996a2e3b25aad0d1467ecbba3a6e93d86d086d43b74d2f9a",
+      "surface_count": 1,
+      "translation": [
+        0.817380547523499,
+        -0.310000002384186,
+        0.48700749874115
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-paired-40",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-paired-40-facet-side.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "b19e48728c77694248e3428e2fbed8e31556f0ee87a01f3de350a13d15589b34",
+      "surface_count": 1,
+      "translation": [
+        0.817380547523499,
+        -0.310000002384186,
+        0.48700749874115
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-paired-40",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-paired-40-cast-oblique.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "8b8c8134e2f7d6a982637ccc48fa55093d64e50ed9d6ea4c6d969091a3b45dcb",
+      "surface_count": 1,
+      "translation": [
+        0.817380547523499,
+        -0.310000002384186,
+        0.48700749874115
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-paired-40",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-paired-40-cast-side.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "e0d1111c412a717711d3c6b8c919b21e7eb239d07c0b8eb24f068575853a4869",
+      "surface_count": 1,
+      "translation": [
+        0.817380547523499,
+        -0.310000002384186,
+        0.48700749874115
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-paired-40",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-paired-40-armature-oblique.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "88ab4b0a70e645bc560b224b3b4ddd725f46a525bbdb501050b757ca9ee7fa7b",
+      "surface_count": 1,
+      "translation": [
+        0.817380547523499,
+        -0.310000002384186,
+        0.48700749874115
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-paired-40",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-paired-40-armature-side.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "fa4f002ca57443e720e05925cb880751307fa18029d0be61934b4b81be8f88e0",
+      "surface_count": 1,
+      "translation": [
+        0.817380547523499,
+        -0.310000002384186,
+        0.48700749874115
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-paired-40",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-paired-40-shell-oblique.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "3cc620539f81cc4f847c866141acd6684bd0292c3a33edce901baa5c637a18ee",
+      "surface_count": 1,
+      "translation": [
+        0.817380547523499,
+        -0.310000002384186,
+        0.48700749874115
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "hinge-paired-40",
+      "geometry_unchanged": true,
+      "image": "renders/hinge-paired-40-shell-side.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "aae544cd46518fc54a0d13853bbea22a839008f824b549530cbd6f9500ac9da4",
+      "surface_count": 1,
+      "translation": [
+        0.817380547523499,
+        -0.310000002384186,
+        0.48700749874115
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "bend-180",
+      "geometry_unchanged": true,
+      "image": "renders/bend-180-facet-oblique.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "45307cf2d18608535c2433c6e0f0f91578032e916cdb776aa010057ec2727fcd",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.311635076999664,
+        -0.484311491250992
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "bend-180",
+      "geometry_unchanged": true,
+      "image": "renders/bend-180-facet-side.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "3ba68bee8d3001dcd132dba52add8a05e24bbc31a57814a5f7cf751fc3cfd5af",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.311635076999664,
+        -0.484311491250992
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "bend-180",
+      "geometry_unchanged": true,
+      "image": "renders/bend-180-cast-oblique.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "b94a0f5e4c6c0059010164ed614a0a0ca7b7bfd4f5696fdbe25cd3a600daeb60",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.311635076999664,
+        -0.484311491250992
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "bend-180",
+      "geometry_unchanged": true,
+      "image": "renders/bend-180-cast-side.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "0539529ef760acf57864db74a20a8302b6624490976d6707d3c6773ab351fa52",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.311635076999664,
+        -0.484311491250992
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "bend-180",
+      "geometry_unchanged": true,
+      "image": "renders/bend-180-armature-oblique.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "5fefa4fe85a606e05dd9807260e5ed876966630e202aafa93eef4808ccb746e5",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.311635076999664,
+        -0.484311491250992
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "bend-180",
+      "geometry_unchanged": true,
+      "image": "renders/bend-180-armature-side.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "d3bb30b188651a58a0dd7b4d68081d50df4cae53440b87f1f60f837c3d4f4423",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.311635076999664,
+        -0.484311491250992
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "bend-180",
+      "geometry_unchanged": true,
+      "image": "renders/bend-180-shell-oblique.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "43d19d627a74ebc3a5df07f3e2e45fc455cf30833824bc7a4c0a4e85debef9be",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.311635076999664,
+        -0.484311491250992
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "bend-180",
+      "geometry_unchanged": true,
+      "image": "renders/bend-180-shell-side.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "1ec36c41a7d4d55aeece2af1568d8767f5b0e2497e1047ccf0c516818306e2a2",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.311635076999664,
+        -0.484311491250992
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "twist-360",
+      "geometry_unchanged": true,
+      "image": "renders/twist-360-facet-oblique.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "be1923d69ddac667032c33b4bcdc1c52d0b303ad149541ec8f03540f6f8aa033",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.254748433828354,
+        0.00116099417209625
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "twist-360",
+      "geometry_unchanged": true,
+      "image": "renders/twist-360-facet-side.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "1429a45a745e8fce0bc5b3910e22912dc49b670c639f8a5eef5b1da80e2d4a6b",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.254748433828354,
+        0.00116099417209625
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "twist-360",
+      "geometry_unchanged": true,
+      "image": "renders/twist-360-cast-oblique.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "eb15fcb59514d9d7944816633657bb01c8cfb013bc7983756be14e79879e7e3f",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.254748433828354,
+        0.00116099417209625
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "twist-360",
+      "geometry_unchanged": true,
+      "image": "renders/twist-360-cast-side.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "2d2af0760246752ea4a86a05db8af194ac0c600fa1fe08a721590b16effd5da9",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.254748433828354,
+        0.00116099417209625
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "twist-360",
+      "geometry_unchanged": true,
+      "image": "renders/twist-360-armature-oblique.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "da037d0c71d639c408d1e36f67692dc2657bf975ff088207a12bc9e5fc02334f",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.254748433828354,
+        0.00116099417209625
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "twist-360",
+      "geometry_unchanged": true,
+      "image": "renders/twist-360-armature-side.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "3a1bb4e8fab5a2c3a02ab8d1c95acbcef5d14643f39acd0c0c0494a17eb919de",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.254748433828354,
+        0.00116099417209625
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "twist-360",
+      "geometry_unchanged": true,
+      "image": "renders/twist-360-shell-oblique.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "473c23924f348d323f4838d28a3feb26114cae649ddd8f2422988dcf5f1592df",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.254748433828354,
+        0.00116099417209625
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "twist-360",
+      "geometry_unchanged": true,
+      "image": "renders/twist-360-shell-side.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "320f4633dd2e3cdc1e92e79b5b50052be9a6bd53ca08b80290157c1eab8dbf97",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.254748433828354,
+        0.00116099417209625
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "wave-1-050",
+      "geometry_unchanged": true,
+      "image": "renders/wave-1-050-facet-oblique.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "0f697a280ccb4f6bc0d59d22209f998e366ff1acd33fc5187caf3ffb25e38164",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        0.0147535987198353,
+        0.0
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "wave-1-050",
+      "geometry_unchanged": true,
+      "image": "renders/wave-1-050-facet-side.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "32e5aea4ab98da590d1363648fbe314c798cb64ab62d54acd2011413d943c564",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        0.0147535987198353,
+        0.0
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "wave-1-050",
+      "geometry_unchanged": true,
+      "image": "renders/wave-1-050-cast-oblique.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "0a05fcfcaac8a531c26cc6b8cc4a1a04f8197528bdb35939e87d5b3aa42165d4",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        0.0147535987198353,
+        0.0
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "wave-1-050",
+      "geometry_unchanged": true,
+      "image": "renders/wave-1-050-cast-side.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "5c345989277c92c0154f6ae8d53088a65b29621a9ac3e2df0bd357f8a3785700",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        0.0147535987198353,
+        0.0
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "wave-1-050",
+      "geometry_unchanged": true,
+      "image": "renders/wave-1-050-armature-oblique.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "45b70d0f75028b336837e9970d7f5d5add420be218d75adeacc53ce34c5f7b4b",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        0.0147535987198353,
+        0.0
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "wave-1-050",
+      "geometry_unchanged": true,
+      "image": "renders/wave-1-050-armature-side.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "c699f36676c2e66664ebd21fcb2d9011d1ee5342e6c0c7e1e6e85e3b2a440dfa",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        0.0147535987198353,
+        0.0
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "wave-1-050",
+      "geometry_unchanged": true,
+      "image": "renders/wave-1-050-shell-oblique.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "70e29d379d612f2b5a52ebf45289cb11a9c0fa52fcd869939079f8a0ebcec176",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        0.0147535987198353,
+        0.0
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "wave-1-050",
+      "geometry_unchanged": true,
+      "image": "renders/wave-1-050-shell-side.png",
+      "mode": "shell",
+      "rendered_triangles": 192,
+      "sha256": "7bcdcfae8e4dde6df7e477b1fc5b39f7fb3f94a8e856b79ffca761a4cb6c9e2c",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        0.0147535987198353,
+        0.0
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "collapsed",
+      "geometry_unchanged": true,
+      "image": "renders/collapsed-facet-oblique.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "964d836f3734d6dec69c9dfd2655f3364de846d19d639a15c4d4ebcda752b3c3",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.484999984502792,
+        0.0
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "collapsed",
+      "geometry_unchanged": true,
+      "image": "renders/collapsed-facet-side.png",
+      "mode": "facet",
+      "rendered_triangles": 48,
+      "sha256": "fa697e92a5def8e4b1e531e72c6dd228999981f2c44148828823ff2cd76ba59f",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.484999984502792,
+        0.0
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "collapsed",
+      "geometry_unchanged": true,
+      "image": "renders/collapsed-cast-oblique.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "f3df5fac47ad91a44c1124cab8489f8b129594a4465050197b3d64b90c8185d0",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.484999984502792,
+        0.0
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "collapsed",
+      "geometry_unchanged": true,
+      "image": "renders/collapsed-cast-side.png",
+      "mode": "cast",
+      "rendered_triangles": 24,
+      "sha256": "fa697e92a5def8e4b1e531e72c6dd228999981f2c44148828823ff2cd76ba59f",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.484999984502792,
+        0.0
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "collapsed",
+      "geometry_unchanged": true,
+      "image": "renders/collapsed-armature-oblique.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "469656ba28e885237115f8b500b0466a3d4adb74996655924270755c170d55ad",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.484999984502792,
+        0.0
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "collapsed",
+      "geometry_unchanged": true,
+      "image": "renders/collapsed-armature-side.png",
+      "mode": "armature",
+      "rendered_triangles": 294,
+      "sha256": "7ce02874ad696fe6e068f7a96d7d1e4bb1ce7482aa867b18cf51862de7b26099",
+      "surface_count": 1,
+      "translation": [
+        0.0,
+        -0.484999984502792,
+        0.0
+      ],
+      "view": "side",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "collapsed",
+      "geometry_unchanged": true,
+      "image": "renders/collapsed-shell-oblique.png",
+      "mode": "shell",
+      "rendered_triangles": 0,
+      "sha256": "c2f88cf9b5396ee944e342e60443eb6dcd3d0c7ff4bc7164d7a71909d7a10f73",
+      "surface_count": 0,
+      "translation": [
+        0.0,
+        -0.484999984502792,
+        0.0
+      ],
+      "view": "oblique",
+      "weak_normals": 0
+    },
+    {
+      "case_id": "collapsed",
+      "geometry_unchanged": true,
+      "image": "renders/collapsed-shell-side.png",
+      "mode": "shell",
+      "rendered_triangles": 0,
+      "sha256": "fa697e92a5def8e4b1e531e72c6dd228999981f2c44148828823ff2cd76ba59f",
+      "surface_count": 0,
+      "translation": [
+        0.0,
+        -0.484999984502792,
+        0.0
+      ],
+      "view": "side",
+      "weak_normals": 0
+    }
+  ],
+  "scale": 1.0,
+  "source_sha256": "3d1fef0e7a0f4742da782175fa3878d3e4ef76698b95c33381828b44f8b5e180",
+  "source_unchanged": true,
+  "world": "isolated research stage, not museum"
+}

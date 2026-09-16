@@ -1,67 +1,34 @@
-# Point Line Grid - Map Summary
+# Point_Line_Grid — map summary
 
-## Overview
-Point Line Grid formalizes space into a system of addressability. After individual points, measured lines, and line networks, this map shows how a coordinate grid turns free space into indexed, computable territory. The focus shifts from geometric objects to the coordinate system as infrastructure.
+The question is what a repeatable address makes possible. Build on Point_Trace's already sampled position list: name a place, return to it, replay a gesture, specify an arrangement. The next hall is Point_Triangle_Context, where a closed boundary and a rendered face are distinguished.
 
-## Spatial Layout
-- **Dimensions**: 8x14 grid (compact rectangular space with south extension)
-- **Architecture**: Rectangular platform with large central void (rows 1-5, columns 2-6) plus a tapered south runway
-- **Border walkway**: Perimeter path around central emptiness
-- **Entry**: Type "I" - immersive spawn
+## Primary encounter order
 
-## Key Elements
+| Artifact | Discover through action | Carry forward |
+| --- | --- | --- |
+| `grab_sphere_point_snap` | Move, release, compare retained metres with lattice indices | Five-centimetre world spacing makes repeatable positions with tolerance around each representative. |
+| `player_trace` | Walk within one coarse address, cross its boundary, return | The one-metre local record keeps an order of visits; a chosen body point and direct segments shape what it describes. |
+| `grid_lines` | Recognise a released Trace drawing in pink and compare green | A copied list can acquire another scale and use; source and display frames differ. |
+| `plan_vitrine` | Find a cell by its two indices, leave and return | Twenty-five finite cells specify an arrangement; a separate collider supports walking across their edges. |
 
-### Primary Interactables
-- **grid_lines** (4,3) - Grid overlay visualization
-  - Makes coordinate system visible as geometry
-  - X and Z axes rendered as intersecting lines
-  - Demonstrates how space becomes indexed
-- **player_trace** (0,0) - Passive recorder of player locomotion through grid space
-- **grab_sphere_point_snap** (2,8) - Snapped point for comparing continuous movement with quantized placement
+## Current layout
 
-### Atmosphere and Context
-- **dark_sphere** (3,4) - Intimate lighting enclosure
-- **Floating text** (4,12) - "the_grid/the_trace" connection to Point_Trace
+The portable map is 20 columns by 15 rows, with an eastern extension containing the numbered plan. Its declared basin is one metre deep, with museum-supplied walkable glass above the replay field. A zero in the source structure is therefore insufficient evidence of an unwalkable hole in the assembled museum.
 
-### Utilities
-- **Teleporter** (4,8) - Exit to next map
-- **Annotation** (7,8) rotated -90 deg - Navigation marker
+All seven placements remain. The source grid coordinates below are column/row indices, not final museum world coordinates:
 
-## Atmosphere
-- **Background**: Sky blue [0.2, 0.3, 0.7]
-- **Lighting**: Cool ambient with warm directional (1.2 energy)
-- **Mood**: Contemplative and infrastructural
-- **Visibility**: Hidden tiles except corners
+| Artifact | Column, row | Role |
+| --- | --- | --- |
+| `grab_sphere_point_snap` | 3, 10 | Primary |
+| `player_trace` | 9, 1 | Primary |
+| `grid_lines` | 5, 5 | Primary |
+| `plan_vitrine` | 15, 7 | Primary |
+| `room_grammar` | 7, 13 | Secondary |
+| `floating_sphere_field` | 5, 10 | Secondary |
+| `modulor_man_demo` | 2, 13 | Secondary |
 
-## Learning Sequence
-1. Player spawns on the perimeter walkway.
-2. Encounters the large central void and south runway extension.
-3. Observes grid_lines as visible coordinate infrastructure.
-4. Generates movement history through player_trace while walking.
-5. Compares continuous locomotion with snapped placement via grab_sphere_point_snap.
-6. Recognizes that VR position is always grid-indexed.
-7. Exits with the grid understood as organizational technology, not discovered truth.
+The roles express teaching order, not a newly enforced walking route. The vitrine wraps `simulation_grid`; there is no separate eighth placement. Existing secondary encounters are described in [detours.md](detours.md).
 
-## Design Intent
-The central void makes the argument legible: the grid spans absence as confidently as presence. Embodied walkability and indexed space diverge. You can only walk certain tiles, but the coordinate system still names the void.
+## Reading and implementation
 
-## Focused Interactables
-Point_Line_Grid uses a constrained set of interactables to isolate one conceptual pair:
-- **grid_lines** as coordinate infrastructure
-- **player_trace** as embodied memory
-- **grab_sphere_point_snap** as quantization anchor
-
-This focused set emphasizes that indexing and trace are co-present: the grid captures motion without exhausting it.
-
-## The Grid/Trace Pairing
-- **Trace** preserves path and duration.
-- **Grid** enforces addressability and quantization.
-
-Together, they stage the core tension in digital embodiment: continuous bodies moving through discrete coordinate systems.
-
-## Connection to Sequence
-- **Position in primitives sequence**: 4/11
-- **Precedes**: Point_Triangle (first closure, bounded area)
-- **Follows**: Point_Trace (continuous gesture versus discrete grid)
-- **Establishes**: Coordinate systems, addressability, spatial indexing
-- **Critical theme**: Grid as political technology of organization
+[final.md](final.md) is the first passage. [tutorial.md](tutorial.md) follows its actual program; [technical.md](technical.md) distinguishes the grids, frames, buffers and colliders. [critical.md](critical.md) asks what decisions are made from a shared address. The earlier texts and historical layout descriptions are preserved in the [editorial archive](../../../doc/space/point-grid-focus-2026-09-16/README.md).

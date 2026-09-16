@@ -1,3 +1,5 @@
+> **Current encounter, 16 September 2026.** The geometric court now comes first, followed by the tableau after Dürer. `final.md` develops a particular reading: a correct construction need not finish an investigation, and aesthetic attention can sustain it. The earlier essay below remains research material. Its claims that geometry is exhausted or that the objects lack purpose should be read as provocations, not established conclusions about mathematics or Dürer's intention. The court and its connections are built before the puzzle succeeds.
+
 # Primitives Melencolia - Critical Reflection
 
 ## The Paralysis of Perfect Knowledge

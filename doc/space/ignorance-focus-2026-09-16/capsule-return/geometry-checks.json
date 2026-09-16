@@ -1,0 +1,24 @@
+{
+  "angular_gaps_degrees": [
+    71.9999951733934,
+    71.999998588488,
+    71.9999951733934,
+    72.0000054186771,
+    72.0000056460482
+  ],
+  "checks": {
+    "180-degree rotation does not preserve cross-section corners": true,
+    "72-degree rotation preserves cross-section corners": true,
+    "A ridge faces a side midpoint across the axis": true,
+    "Actual spin driver reaches half-turn after four seconds": true,
+    "Angular intervals are equal at 72 degrees": true,
+    "Authored mesh has five radial segments and five rings": true,
+    "Authored radius and height": true,
+    "Default facture retains authored geometry": true,
+    "Extracted cross-section has five distinct corners": true,
+    "Six-segment comparison passes the half-turn": true
+  },
+  "five_180_degree_error_m": 0.154508486390114,
+  "five_72_degree_error_m": 0.0000000333200098623365,
+  "six_180_degree_error_m": 0.0000000733797094198962
+}

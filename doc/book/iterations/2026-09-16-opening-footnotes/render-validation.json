@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "renderer": "Encyclopedia-installed ReactMarkdown + remark-gfm, server-side rendering",
+  "checks": [
+    {
+      "document": "commons/maps/Point_One/final.md",
+      "definitions": 4,
+      "references": 4,
+      "backlinks": 4,
+      "uniqueIds": true,
+      "missingTargets": [],
+      "rawMarkersRemaining": false,
+      "passed": true
+    },
+    {
+      "document": "commons/maps/Point_Lines/final.md",
+      "definitions": 4,
+      "references": 4,
+      "backlinks": 4,
+      "uniqueIds": true,
+      "missingTargets": [],
+      "rawMarkersRemaining": false,
+      "passed": true
+    },
+    {
+      "document": "commons/maps/Point_Trace/final.md",
+      "definitions": 4,
+      "references": 4,
+      "backlinks": 4,
+      "uniqueIds": true,
+      "missingTargets": [],
+      "rawMarkersRemaining": false,
+      "passed": true
+    },
+    {
+      "document": "commons/maps/Point_Line_Grid/final.md",
+      "definitions": 4,
+      "references": 4,
+      "backlinks": 4,
+      "uniqueIds": true,
+      "missingTargets": [],
+      "rawMarkersRemaining": false,
+      "passed": true
+    },
+    {
+      "document": "commons/maps/Point_Triangle_Context/final.md",
+      "definitions": 2,
+      "references": 2,
+      "backlinks": 2,
+      "uniqueIds": true,
+      "missingTargets": [],
+      "rawMarkersRemaining": false,
+      "passed": true
+    },
+    {
+      "document": "commons/maps/Point_Lines/encounter-reference.md",
+      "definitions": 1,
+      "references": 1,
+      "backlinks": 1,
+      "uniqueIds": true,
+      "missingTargets": [],
+      "rawMarkersRemaining": false,
+      "passed": true
+    },
+    {
+      "document": "commons/maps/Point_Line_Grid/detours.md",
+      "definitions": 1,
+      "references": 1,
+      "backlinks": 1,
+      "uniqueIds": true,
+      "missingTargets": [],
+      "rawMarkersRemaining": false,
+      "passed": true
+    },
+    {
+      "document": "Five-chapter reading",
+      "definitions": 18,
+      "references": 18,
+      "backlinks": 18,
+      "uniqueIds": true,
+      "missingTargets": [],
+      "rawMarkersRemaining": false,
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,1220 @@
+{
+  "checks": 303,
+  "failed": [],
+  "details": [
+    {
+      "passed": true,
+      "check": "Random_Definition: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: book anchors match primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: roles match inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: shipped and desktop plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: plan inventory"
+    },
+    {
+      "check": "seed_replay_demo/Btn_0 reachable from one mark: 0.563 m",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo/Btn_1 reachable from one mark: 0.540 m",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo/Btn_2 reachable from one mark: 0.563 m",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "seed_replay_demo: no missing or duplicated buttons after actions",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: all runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: every artifact instantiates"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: floor (6.0, 0.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: floor (6.0, 15.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: floor (1.0, 8.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: floor (11.0, 8.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: no script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: no automatic route repair"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: prng_crank_machine fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: slot_machine fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: seed_replay_demo fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: catalyst_pickup fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: trng_vs_prng fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: random_number_book_page_1955 fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: live book serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Definition: live inventory serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: book anchors match primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: roles match inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: shipped and desktop plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: plan inventory"
+    },
+    {
+      "check": "shannon_entropy_meter/Btn_0 reachable from one mark: 0.570 m",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter/Btn_1 reachable from one mark: 0.547 m",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter/Btn_2 reachable from one mark: 0.570 m",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "Entropy field has square plan",
+      "passed": true
+    },
+    {
+      "check": "Square field holds 16 x 5 x 16 points",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "shannon_entropy_meter: no missing or duplicated buttons after actions",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: all runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: every artifact instantiates"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: floor (8.0, 0.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: floor (8.0, 22.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: floor (1.0, 11.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: floor (15.0, 11.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: no script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: no automatic route repair"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: entropy_jar fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: shannon_entropy_meter fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: hardware_entropy_decay fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: entropy_axiom fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: live book serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Entropy: live inventory serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: book anchors match primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: roles match inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: shipped and desktop plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: plan inventory"
+    },
+    {
+      "check": "remove_random/Btn_0 reachable from one mark: 0.616 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_1 reachable from one mark: 0.573 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_2 reachable from one mark: 0.573 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_3 reachable from one mark: 0.616 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_3 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_4 reachable from one mark: 0.563 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_4 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_5 reachable from one mark: 0.540 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_5 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_6 reachable from one mark: 0.563 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_6 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_0 reachable from one mark: 0.553 m",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_1 reachable from one mark: 0.553 m",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "remove_random: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "remove_random: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "remove_random: no missing or duplicated buttons after actions",
+      "passed": true
+    },
+    {
+      "check": "Arena cells restored to museum floor height",
+      "passed": true
+    },
+    {
+      "check": "Entering removes one cell AND its collider",
+      "passed": true
+    },
+    {
+      "check": "Walking requests a second removal",
+      "passed": true
+    },
+    {
+      "check": "Removed cell has a real hole, not museum floor beneath it",
+      "passed": true
+    },
+    {
+      "check": "Replay restores every physical cell",
+      "passed": true
+    },
+    {
+      "check": "Replay repeats the first draw",
+      "passed": true
+    },
+    {
+      "check": "Reset cancels pending draw without losing support",
+      "passed": true
+    },
+    {
+      "check": "Twelve removals leave twelve gaps",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: all runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: every artifact instantiates"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: floor (8.0, 0.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: floor (8.0, 25.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: floor (1.0, 13.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: floor (15.0, 13.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: no script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: no automatic route repair"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: remove_random fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: random_removal_arena fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: live book serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Remove: live inventory serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: book anchors match primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: roles match inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: shipped and desktop plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: plan inventory"
+    },
+    {
+      "check": "random_walk_terrarium/Btn_0 reachable from one mark: 0.648 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_1 reachable from one mark: 0.593 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_2 reachable from one mark: 0.569 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_3 reachable from one mark: 0.570 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_3 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_0 reachable from one mark: 0.593 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_1 reachable from one mark: 0.648 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_2 reachable from one mark: 0.594 m",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "random_walk_terrarium: no missing or duplicated buttons after actions",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: all runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: every artifact instantiates"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: floor (9.0, 0.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: floor (9.0, 25.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: floor (1.0, 13.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: floor (17.0, 13.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: no script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: no automatic route repair"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: random_walk_collection fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: random_walk_terrarium fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: random_walk_leash fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: pixel_cloud fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: random_walk_128 fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: live book serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Walk: live inventory serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: book anchors match primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: roles match inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: shipped and desktop plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: plan inventory"
+    },
+    {
+      "check": "distribution_sampler/Btn_0 reachable from one mark: 0.655 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_1 reachable from one mark: 0.605 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_2 reachable from one mark: 0.575 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_3 reachable from one mark: 0.569 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_3 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_4 reachable from one mark: 0.567 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_4 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_0 reachable from one mark: 0.605 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_1 reachable from one mark: 0.655 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_2 reachable from one mark: 0.585 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_3 reachable from one mark: 0.636 m",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler/Btn_3 hand height",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "distribution_sampler: no missing or duplicated buttons after actions",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: all runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: every artifact instantiates"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: floor (5.0, 0.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: floor (5.0, 12.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: floor (1.0, 6.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: floor (9.0, 6.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: no script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: no automatic route repair"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: distribution_sampler fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: GaussianPaintSplatter fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: galton_board fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: distribution_comparator fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: live book serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Gaussian: live inventory serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: book anchors match primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: roles match inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: shipped and desktop plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: plan inventory"
+    },
+    {
+      "check": "mushrooms/Btn_0 reachable from one mark: 0.590 m",
+      "passed": true
+    },
+    {
+      "check": "mushrooms/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "mushrooms/Btn_1 reachable from one mark: 0.568 m",
+      "passed": true
+    },
+    {
+      "check": "mushrooms/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "mushrooms/Btn_2 reachable from one mark: 0.590 m",
+      "passed": true
+    },
+    {
+      "check": "mushrooms/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "mushrooms/Btn_3 reachable from one mark: 0.546 m",
+      "passed": true
+    },
+    {
+      "check": "mushrooms/Btn_3 hand height",
+      "passed": true
+    },
+    {
+      "check": "mushrooms/Btn_4 reachable from one mark: 0.546 m",
+      "passed": true
+    },
+    {
+      "check": "mushrooms/Btn_4 hand height",
+      "passed": true
+    },
+    {
+      "check": "mushrooms has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "mushrooms: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "mushrooms: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "mushrooms: no missing or duplicated buttons after actions",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: all runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: every artifact instantiates"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: floor (8.0, 0.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: floor (8.0, 19.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: floor (1.0, 10.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: floor (15.0, 10.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: no script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: no automatic route repair"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: bubbles_random fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: mushrooms fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: live book serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Mushrooms: live inventory serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: structure dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: utilities dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: interactables dimensions"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: book anchors match primary roles"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: roles match inventory"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: shipped and desktop plans agree"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: plan inventory"
+    },
+    {
+      "check": "r_c/Btn_0 reachable from one mark: 0.573 m",
+      "passed": true
+    },
+    {
+      "check": "r_c/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "r_c/Btn_1 reachable from one mark: 0.573 m",
+      "passed": true
+    },
+    {
+      "check": "r_c/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "r_c/Btn_2 reachable from one mark: 0.540 m",
+      "passed": true
+    },
+    {
+      "check": "r_c/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "r_c has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_0 reachable from one mark: 0.553 m",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_1 reachable from one mark: 0.553 m",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_0 reachable from one mark: 0.590 m",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_1 reachable from one mark: 0.568 m",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_2 reachable from one mark: 0.590 m",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_3 reachable from one mark: 0.546 m",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_3 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_4 reachable from one mark: 0.546 m",
+      "passed": true
+    },
+    {
+      "check": "random_doors/Btn_4 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_doors has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner/Btn_0 reachable from one mark: 0.553 m",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner/Btn_1 reachable from one mark: 0.553 m",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "r_c: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "r_c: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "r_c: no missing or duplicated buttons after actions",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "cube_projectile_spawner: no missing or duplicated buttons after actions",
+      "passed": true
+    },
+    {
+      "check": "Arena cells restored to museum floor height",
+      "passed": true
+    },
+    {
+      "check": "Entering removes one cell AND its collider",
+      "passed": true
+    },
+    {
+      "check": "Walking requests a second removal",
+      "passed": true
+    },
+    {
+      "check": "Removed cell has a real hole, not museum floor beneath it",
+      "passed": true
+    },
+    {
+      "check": "Replay restores every physical cell",
+      "passed": true
+    },
+    {
+      "check": "Replay repeats the first draw",
+      "passed": true
+    },
+    {
+      "check": "Reset cancels pending draw without losing support",
+      "passed": true
+    },
+    {
+      "check": "VR button opens the seeded safe passage and clears its collider",
+      "passed": true
+    },
+    {
+      "check": "Other door releases visible fire after its warning",
+      "passed": true
+    },
+    {
+      "check": "Fire jet has an active hazard volume",
+      "passed": true
+    },
+    {
+      "check": "Fire mesh and hurt volume reach 2.7 m",
+      "passed": true
+    },
+    {
+      "check": "Entering fire jet invokes museum death",
+      "passed": true
+    },
+    {
+      "check": "Museum respawn completes after fire",
+      "passed": true
+    },
+    {
+      "check": "Door replay preserves the seeded assignment",
+      "passed": true
+    },
+    {
+      "check": "Door replay closes all doors",
+      "passed": true
+    },
+    {
+      "check": "Replay cancels an in-flight door action",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: all runtime checks pass"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: every artifact instantiates"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: floor (9.0, 0.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: floor (9.0, 44.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: floor (1.0, 22.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: floor (17.0, 22.0)"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: no script errors"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: no automatic route repair"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: r_c fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: random_removal_arena fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: random_doors fits inside walls"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: live book serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Random_Game: live inventory serves revision"
+    },
+    {
+      "passed": true,
+      "check": "Only repeated work is the intentional removal-floor application in Game"
+    }
+  ],
+  "placements": 28,
+  "headset_verified": false
+}

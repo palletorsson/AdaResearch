@@ -1,0 +1,114 @@
+{
+  "checks": [
+    {
+      "check": "Grid pathfinder has no errors or warnings",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement pyramid at (3, 3)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement pyramid at (7, 3)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement snap_pyramid_puzzle at (9, 3)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement cube_scene at (5, 4)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement cube_scene at (4, 5)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement pyramidlong at (5, 5)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement cube_scene at (6, 5)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement cube_scene at (5, 6)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement prism_block at (9, 6)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement pyramid at (3, 7)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement pyramid at (7, 7)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement dark_sphere at (1, 9)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement bigframe at (2, 11)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement bigframe at (9, 11)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement diamondtoruscollection at (5, 14)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement durer_scene at (5, 15)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement code_display at (9, 16)",
+      "pass": true
+    },
+    {
+      "check": "Reachable placement eleven_dots at (9, 20)",
+      "pass": true
+    },
+    {
+      "check": "Every book artifact is primary, and every primary is in the book",
+      "pass": true
+    },
+    {
+      "check": "Book follows court before puzzle before Durer",
+      "pass": true
+    },
+    {
+      "check": "Book code is present in actual pyramid source",
+      "pass": true
+    },
+    {
+      "check": "All stated magic-square sums hold",
+      "pass": true
+    },
+    {
+      "check": "Live book API serves the new final.md",
+      "pass": true
+    },
+    {
+      "check": "Live necklace API lists all five primary families",
+      "pass": true
+    },
+    {
+      "check": "Exit is reachable from the explicit entrance",
+      "pass": true
+    }
+  ],
+  "count": 26,
+  "spawn_for_reachability": {
+    "row": 1,
+    "column": 6,
+    "basis": "Authored sp utility at the entrance, rather than the pathfinder centroid fallback."
+  }
+}

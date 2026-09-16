@@ -1,3 +1,5 @@
+> Historical document. See the 2026-09-16 intent, tutorial and inventory for the current room. Earlier claims that every segmented round body is a prism, or that failed half-turn symmetry makes a body unknowable, are retained here as development history rather than current teaching.
+
 # Primitives_Ignorance — walked
 
 > R-021, amended: the considered critical tutorial for a walked, working map.

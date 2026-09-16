@@ -49,6 +49,8 @@ var waiting_to_start: bool = false
 var original_y: float
 var time_passed: float = 0.0
 var carried_player: Node3D = null
+var _support_shape: CollisionShape3D
+var _support_bounds: AABB
 
 # Audio
 var movement_sound: AudioStreamPlayer3D
@@ -60,6 +62,10 @@ var detection_sound: AudioStreamPlayer3D
 @onready var static_body: StaticBody3D = $CubeBaseStaticBody3D/CubeBaseStaticBody3D
 
 func _ready() -> void:
+	# Carry before XRToolsPlayerBody (-100) performs its own physics step.
+	process_physics_priority = -110
+	_support_shape = static_body.get_node("CollisionShape3D")
+	_support_bounds = _support_shape.shape.get_debug_mesh().get_aabb()
 	# Store initial position
 	initial_position = global_position
 	original_y = global_position.y
@@ -183,7 +189,18 @@ func create_transport_sounds():
 	detection_stream.data = detection_data
 	detection_sound.stream = detection_stream
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	# A volume overlap alone is not support: the detector also reaches below
+	# and beside the cube. Recheck after a visitor steps/jumps onto its top.
+	if is_instance_valid(carried_player) and carried_player is XRToolsPlayerBody and not _supports_xr_rider(carried_player, false):
+		_on_detection_area_body_exited(carried_player)
+	if not is_instance_valid(carried_player):
+		carried_player = null
+	if carried_player == null and detection_area.monitoring:
+		for body in detection_area.get_overlapping_bodies():
+			if body is XRToolsPlayerBody and _supports_xr_rider(body):
+				_on_detection_area_body_entered(body)
+				break
 	time_passed += delta
 	
 	# Handle start delay timer
@@ -200,11 +217,14 @@ func _process(delta: float) -> void:
 		
 		if is_returning:
 			global_position = global_position.move_toward(initial_position, move_speed * delta)
+			if global_position.distance_to(initial_position) < 0.01:
+				global_position = initial_position
+			static_body.force_update_transform()
 			
 			# Move carried player with the cube
 			if carried_player and is_instance_valid(carried_player):
 				var movement_delta = global_position - previous_position
-				carried_player.global_position += movement_delta
+				_translate_rider(carried_player, movement_delta)
 			
 			# Check if reached initial position
 			if global_position.distance_to(initial_position) < 0.01:
@@ -218,11 +238,14 @@ func _process(delta: float) -> void:
 					start_transport()
 		else:
 			global_position = global_position.move_toward(target_position, move_speed * delta)
+			if global_position.distance_to(target_position) < 0.01:
+				global_position = target_position
+			static_body.force_update_transform()
 			
 			# Move carried player with the cube
 			if carried_player and is_instance_valid(carried_player):
 				var movement_delta = global_position - previous_position
-				carried_player.global_position += movement_delta
+				_translate_rider(carried_player, movement_delta)
 			
 			# Check if reached target position
 			if global_position.distance_to(target_position) < 0.01:
@@ -243,6 +266,42 @@ func _process(delta: float) -> void:
 	if not is_zero_approx(ride_rotation_degrees) or not is_equal_approx(ride_scale, 1.0):
 		_compose_ride()
 
+## XRTools keeps its body top-level and recentres it under the headset every
+## physics tick. Move both through its existing transform API, preserving the
+## room-scale offset. This is an incremental ride, never the destination pose.
+func _translate_rider(rider: Node3D, movement: Vector3) -> void:
+	if rider is XRToolsPlayerBody:
+		var pose: Transform3D = rider.global_transform
+		pose.origin += movement
+		_move_xr_rider(rider, pose)
+	else:
+		rider.global_position += movement
+
+
+func _move_xr_rider(rider: XRToolsPlayerBody, pose: Transform3D) -> void:
+	rider.teleport(pose)
+	# XRTools also estimates moving-ground velocity from the previous contact.
+	# Rebase ONLY this cube's contact: its motion was just applied in full.
+	# Otherwise ground friction would add the same movement a second time.
+	var ground: Node3D = rider.get("_previous_ground_node") as Node3D
+	if is_instance_valid(ground) and is_ancestor_of(ground):
+		rider.velocity -= rider.ground_velocity
+		rider.ground_velocity = Vector3.ZERO
+		rider.set("_previous_ground_global", ground.to_global(rider.get("_previous_ground_local")))
+
+
+func _supports_xr_rider(rider: XRToolsPlayerBody, boarding: bool = true) -> bool:
+	# The XR body origin is at the feet; the headset/origin may be displaced
+	# horizontally by room-scale walking. Compare feet with the real collider.
+	var bounds: AABB = _support_bounds
+	var feet: Vector3 = _support_shape.to_local(rider.global_position)
+	var rising: float = (rider.velocity - rider.ground_velocity).dot(rider.up_player)
+	return (not boarding or rising <= 0.25) \
+		and feet.y >= bounds.end.y - 0.06 and feet.y <= bounds.end.y + 0.16 \
+		and feet.x >= bounds.position.x - 0.08 and feet.x <= bounds.end.x + 0.08 \
+		and feet.z >= bounds.position.z - 0.08 and feet.z <= bounds.end.z + 0.08
+
+
 ## How far along the travel the cube stands: 0 at the start, 1 at the far end.
 func ride_progress() -> float:
 	return clampf(global_position.distance_to(initial_position) / maxf(absf(move_distance), 0.001), 0.0, 1.0)
@@ -256,6 +315,7 @@ func _compose_ride() -> void:
 		var dyaw: float = want - _ride_yaw
 		if absf(dyaw) > 1e-6:
 			rotation.y = _base_yaw + want
+			static_body.force_update_transform()
 			_ride_yaw = want
 			if rider != null:
 				_turn_rider(rider, dyaw)
@@ -271,6 +331,11 @@ func _compose_ride() -> void:
 ## heading in a variable it writes every frame, so that is turned too; the
 ## museum's walker keeps its heading in its owner's `_yaw`.
 func _turn_rider(rider: Node3D, dyaw: float) -> void:
+	if rider is XRToolsPlayerBody:
+		var turn := Basis(Vector3.UP, dyaw)
+		var motion := Transform3D(turn, global_position - turn * global_position)
+		_move_xr_rider(rider, motion * rider.global_transform)
+		return
 	var target: Node3D = rider
 	var parent: Node = rider.get_parent()
 	if parent is XROrigin3D:
@@ -337,9 +402,15 @@ func _is_player(body: Node3D) -> bool:
 	return body.is_in_group("player") or body.is_in_group("vr_player") or body.name.contains("Player") or body.is_in_group("player_body") or body.is_in_group("em_walker")
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
+	if body is XRToolsPlayerBody and not _supports_xr_rider(body):
+		return
 	if _is_player(body):
 		player_on_cube = true
 		carried_player = body
+		if body is XRToolsPlayerBody:
+			var jumped := _on_rider_jumped.bind(body)
+			if not body.player_jumped.is_connected(jumped):
+				body.player_jumped.connect(jumped)
 		detection_sound.play()
 		
 		start_transport()
@@ -348,6 +419,10 @@ func _on_detection_area_body_exited(body: Node3D) -> void:
 	if _is_player(body):
 		player_on_cube = false
 		if carried_player == body:
+			if body is XRToolsPlayerBody:
+				var jumped := _on_rider_jumped.bind(body)
+				if body.player_jumped.is_connected(jumped):
+					body.player_jumped.disconnect(jumped)
 			_restore_space()   # whoever steps off is put back to size
 			carried_player = null
 		
@@ -355,6 +430,12 @@ func _on_detection_area_body_exited(body: Node3D) -> void:
 		if waiting_to_start:
 			waiting_to_start = false
 			start_timer = 0.0
+
+func _on_rider_jumped(body: Node3D) -> void:
+	# A platform can push up a little when it stops descending. Release on
+	# the actual jump signal, rather than mistaking that correction for a jump.
+	_on_detection_area_body_exited(body)
+
 
 func start_transport():
 	"""Start the transport sequence"""

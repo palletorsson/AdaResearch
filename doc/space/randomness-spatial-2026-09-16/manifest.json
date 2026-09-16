@@ -1,0 +1,261 @@
+[
+  {
+    "map": "Random_Definition",
+    "size": {
+      "width": 13,
+      "depth": 16,
+      "max_height": 6
+    },
+    "hero": "seed_replay_demo",
+    "placements": [
+      {
+        "x": 6,
+        "z": 6,
+        "token": "seed_replay_demo:180#comparison:replicas#stand:table#controls:compact#control_front:1.0",
+        "lookup": "seed_replay_demo"
+      },
+      {
+        "x": 3,
+        "z": 4,
+        "token": "prng_crank_machine:180:0.62",
+        "lookup": "prng_crank_machine"
+      },
+      {
+        "x": 10,
+        "z": 4,
+        "token": "slot_machine:180",
+        "lookup": "slot_machine"
+      },
+      {
+        "x": 3,
+        "z": 12,
+        "token": "trng_vs_prng:180:1.12:0.1",
+        "lookup": "trng_vs_prng"
+      },
+      {
+        "x": 9,
+        "z": 12,
+        "token": "random_number_book_page_1955:0:2.7:0.8",
+        "lookup": "random_number_book_page_1955"
+      },
+      {
+        "x": 10,
+        "z": 8,
+        "token": "catalyst_pickup:180#sequence_name:randomness#label_text:RANDOMNESS CATALYST#orb_color:0.95,0.55,0.20#accent_color:0.95,0.55,0.20",
+        "lookup": "catalyst_pickup"
+      }
+    ],
+    "count": 6,
+    "purpose": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16."
+  },
+  {
+    "map": "Random_Entropy",
+    "size": {
+      "width": 17,
+      "depth": 23,
+      "max_height": 6
+    },
+    "hero": "shannon_entropy_meter",
+    "placements": [
+      {
+        "x": 8,
+        "z": 5,
+        "token": "shannon_entropy_meter:180#stand:ledger#disclosure:ledger#controls:compact#control_front:1.7",
+        "lookup": "shannon_entropy_meter"
+      },
+      {
+        "x": 3,
+        "z": 5,
+        "token": "entropy_jar:180",
+        "lookup": "entropy_jar"
+      },
+      {
+        "x": 3,
+        "z": 9,
+        "token": "hardware_entropy_decay:180:0.45:0.6",
+        "lookup": "hardware_entropy_decay"
+      },
+      {
+        "x": 8,
+        "z": 15,
+        "token": "entropy_axiom#square:true#glass_width:10#glass_depth:10#glass_height:4.5#glass_title:ORDER / DISPLACEMENT",
+        "lookup": "entropy_axiom"
+      },
+      {
+        "x": 13,
+        "z": 7,
+        "token": "random_butterflies:180",
+        "lookup": "random_butterflies"
+      }
+    ],
+    "count": 5,
+    "purpose": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16."
+  },
+  {
+    "map": "Random_Remove",
+    "size": {
+      "width": 17,
+      "depth": 26,
+      "max_height": 6
+    },
+    "hero": "remove_random",
+    "placements": [
+      {
+        "x": 8,
+        "z": 5,
+        "token": "remove_random:180#local_grid:true#controls:compact#control_front:1.15",
+        "lookup": "remove_random"
+      },
+      {
+        "x": 8,
+        "z": 17,
+        "token": "random_removal_arena:0:3#columns:9#rows:11#glass_width:11#glass_depth:13#glass_height:4.5#glass_title:WALK / REMOVE#glass_grid:false#controls:compact#control_front:-7.0#control_facing:-z",
+        "lookup": "random_removal_arena"
+      }
+    ],
+    "count": 2,
+    "purpose": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16."
+  },
+  {
+    "map": "Random_Walk",
+    "size": {
+      "width": 19,
+      "depth": 26,
+      "max_height": 6
+    },
+    "hero": "random_walk_terrarium",
+    "placements": [
+      {
+        "x": 9,
+        "z": 5,
+        "token": "random_walk_terrarium:180#stand:logbook#controls:compact#control_front:1.25",
+        "lookup": "random_walk_terrarium"
+      },
+      {
+        "x": 3,
+        "z": 5,
+        "token": "random_walk_collection:180#plinth:0.75#bench_bare_rack:1",
+        "lookup": "random_walk_collection"
+      },
+      {
+        "x": 15,
+        "z": 5,
+        "token": "random_walk_leash:180",
+        "lookup": "random_walk_leash"
+      },
+      {
+        "x": 9,
+        "z": 17,
+        "token": "random_walk_128:180#glass_width:12#glass_depth:12#glass_height:5#glass_title:WALK / RETAIN",
+        "lookup": "random_walk_128"
+      },
+      {
+        "x": 3,
+        "z": 9,
+        "token": "pixel_cloud:180:0.1:0.18#walk_seed:101",
+        "lookup": "pixel_cloud"
+      }
+    ],
+    "count": 5,
+    "purpose": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16."
+  },
+  {
+    "map": "Random_Gaussian",
+    "size": {
+      "width": 11,
+      "depth": 13,
+      "max_height": 6
+    },
+    "hero": "distribution_sampler",
+    "placements": [
+      {
+        "x": 5,
+        "z": 6,
+        "token": "distribution_sampler:180#stand:cabinet#controls:compact#control_front:1.05",
+        "lookup": "distribution_sampler"
+      },
+      {
+        "x": 2,
+        "z": 10,
+        "token": "galton_board:180:0.9:1.5",
+        "lookup": "galton_board"
+      },
+      {
+        "x": 8,
+        "z": 10,
+        "token": "distribution_comparator:180:0.83",
+        "lookup": "distribution_comparator"
+      },
+      {
+        "x": 2,
+        "z": 7,
+        "token": "GaussianPaintSplatter:180:1.5:0.65",
+        "lookup": "GaussianPaintSplatter"
+      }
+    ],
+    "count": 4,
+    "purpose": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16."
+  },
+  {
+    "map": "Random_Mushrooms",
+    "size": {
+      "width": 17,
+      "depth": 20,
+      "max_height": 6
+    },
+    "hero": "mushrooms",
+    "placements": [
+      {
+        "x": 8,
+        "z": 11,
+        "token": "mushrooms:180#stand:specimen#size:6#edible:some#glass_width:8#glass_depth:8#glass_height:4.5#glass_title:POPULATION / DIFFERENCE#glass_entry:4#controls:compact#control_front:5.1",
+        "lookup": "mushrooms"
+      },
+      {
+        "x": 3,
+        "z": 5,
+        "token": "bubbles_random:180:0.85:0.25#plinth:0.85",
+        "lookup": "bubbles_random"
+      }
+    ],
+    "count": 2,
+    "purpose": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16."
+  },
+  {
+    "map": "Random_Game",
+    "size": {
+      "width": 19,
+      "depth": 45,
+      "max_height": 9
+    },
+    "hero": "r_c",
+    "placements": [
+      {
+        "x": 9,
+        "z": 6,
+        "token": "r_c:0:3#stand:chasm#cue:advance#controls:compact#control_front:-2.6#control_facing:-z#control_height:1.38#control_floor:0.28#control_fixed:true",
+        "lookup": "r_c"
+      },
+      {
+        "x": 9,
+        "z": 17,
+        "token": "random_removal_arena:0:3#columns:9#rows:9#glass_width:11#glass_depth:11#glass_height:4.5#glass_title:THE SET UNDERFOOT#glass_grid:false#controls:compact#control_front:-6.0#control_facing:-z",
+        "lookup": "random_removal_arena"
+      },
+      {
+        "x": 9,
+        "z": 29,
+        "token": "random_doors#controls:compact#control_front:-4.0#control_facing:-z",
+        "lookup": "random_doors"
+      },
+      {
+        "x": 9,
+        "z": 37,
+        "token": "cube_projectile_spawner#mode:field#field_size:8x8#field_height:8#fall_min:1.6#fall_max:2.6#drift:0.25#jitter:0.25#jitter_interval:0.45#vertical_variation:0.2#spawn_interval:0.5#max_projectiles:24#stand:field#controls:compact#control_front:-5.0#control_facing:-z",
+        "lookup": "cube_projectile_spawner"
+      }
+    ],
+    "count": 4,
+    "purpose": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16."
+  }
+]

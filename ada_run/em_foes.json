@@ -1,0 +1,25 @@
+{
+	"_readme": "DERIVED, never edit: what _dress_foes did per hall, keyed chapter|pearl. grey = the chapter passed the grey rule; silhouettes = WORLD cells [x, z] the bodies were stood on; gun = the vestibule cell of the pink gun's plinth, or null.",
+	"at": "2026-09-16 20:58:43",
+	"halls": {
+		"noise|noise columns": {
+			"chapter": "noise",
+			"grey": false,
+			"gun": null,
+			"map": "Noise_Columns",
+			"pearl": "noise columns",
+			"seg": 1,
+			"silhouettes": []
+		},
+		"noise|random noise types": {
+			"chapter": "noise",
+			"grey": false,
+			"gun": null,
+			"map": "Random_Noise_Types",
+			"pearl": "random noise types",
+			"seg": 0,
+			"silhouettes": []
+		}
+	},
+	"schema": "adaresearch.em_foes.v1"
+}

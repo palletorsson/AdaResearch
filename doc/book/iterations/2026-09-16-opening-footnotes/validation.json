@@ -1,0 +1,98 @@
+{
+  "passed": true,
+  "checks": {
+    "commons/maps/Point_One/final.md_main_text_preserved": true,
+    "commons/maps/Point_One/final.md_archive_intact": true,
+    "commons/maps/Point_One/final.md_footnotes_resolve": true,
+    "commons/maps/Point_Lines/final.md_main_text_preserved": true,
+    "commons/maps/Point_Lines/final.md_archive_intact": true,
+    "commons/maps/Point_Lines/final.md_footnotes_resolve": true,
+    "commons/maps/Point_Trace/final.md_main_text_preserved": true,
+    "commons/maps/Point_Trace/final.md_archive_intact": true,
+    "commons/maps/Point_Trace/final.md_footnotes_resolve": true,
+    "commons/maps/Point_Line_Grid/final.md_main_text_preserved": true,
+    "commons/maps/Point_Line_Grid/final.md_archive_intact": true,
+    "commons/maps/Point_Line_Grid/final.md_footnotes_resolve": true,
+    "commons/maps/Point_Triangle_Context/final.md_main_text_preserved": true,
+    "commons/maps/Point_Triangle_Context/final.md_archive_intact": true,
+    "commons/maps/Point_Triangle_Context/final.md_footnotes_resolve": true,
+    "commons/maps/Point_Lines/encounter-reference.md_main_text_preserved": true,
+    "commons/maps/Point_Lines/encounter-reference.md_archive_intact": true,
+    "commons/maps/Point_Lines/encounter-reference.md_footnotes_resolve": true,
+    "commons/maps/Point_Line_Grid/detours.md_main_text_preserved": true,
+    "commons/maps/Point_Line_Grid/detours.md_archive_intact": true,
+    "commons/maps/Point_Line_Grid/detours.md_footnotes_resolve": true,
+    "commons/data/artifact_roles.json_unchanged": true,
+    "commons/maps/Point_One/map_data.json_unchanged": true,
+    "commons/maps/Point_Lines/map_data.json_unchanged": true,
+    "commons/maps/Point_Trace/map_data.json_unchanged": true,
+    "commons/maps/Point_Line_Grid/map_data.json_unchanged": true,
+    "commons/maps/Point_Triangle_Context/map_data.json_unchanged": true,
+    "five_live_book_texts_match": true
+  },
+  "documents": [
+    {
+      "file": "commons/maps/Point_One/final.md",
+      "added": 3,
+      "definitions": 4
+    },
+    {
+      "file": "commons/maps/Point_Lines/final.md",
+      "added": 4,
+      "definitions": 4
+    },
+    {
+      "file": "commons/maps/Point_Trace/final.md",
+      "added": 4,
+      "definitions": 4
+    },
+    {
+      "file": "commons/maps/Point_Line_Grid/final.md",
+      "added": 4,
+      "definitions": 4
+    },
+    {
+      "file": "commons/maps/Point_Triangle_Context/final.md",
+      "added": 2,
+      "definitions": 2
+    },
+    {
+      "file": "commons/maps/Point_Lines/encounter-reference.md",
+      "added": 1,
+      "definitions": 1
+    },
+    {
+      "file": "commons/maps/Point_Line_Grid/detours.md",
+      "added": 1,
+      "definitions": 1
+    }
+  ],
+  "added_footnotes": 19,
+  "live": [
+    {
+      "map": "Point_One",
+      "matches": true,
+      "new_notes_present": true
+    },
+    {
+      "map": "Point_Lines",
+      "matches": true,
+      "new_notes_present": true
+    },
+    {
+      "map": "Point_Trace",
+      "matches": true,
+      "new_notes_present": true
+    },
+    {
+      "map": "Point_Line_Grid",
+      "matches": true,
+      "new_notes_present": true
+    },
+    {
+      "map": "Point_Triangle_Context",
+      "matches": true,
+      "new_notes_present": true
+    }
+  ]
+}

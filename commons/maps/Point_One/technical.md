@@ -261,3 +261,7 @@ In the next map, Point_Line, two of these positions will be connected. The line 
 **distance_readout** — A persistent numerical label showing the live distance from the interactive point to origin: `d = sqrt(x² + y² + z²)`. The line shows the distance geometrically; a number would close the loop to the formula. The learner would see geometry and algebra correspond as the point moves. Currently only the line is shown; the formula is implied.
 
 **axis_projection_markers** — Small fixed spheres on each axis showing the (x, 0, 0), (0, y, 0), and (0, 0, z) projections of the held point's position, updating as it moves. The held point is the combination of three independent measurements; the projection markers would show each measurement as a separate object. This directly sets up the component decomposition that becomes essential in Point_Line, where direction vectors are built from axis-aligned components.
+
+## Encounter reference, 15 September 2026
+
+[Companion notes for the current book passage](encounter-reference.md) retain instrument settings, recording distinctions and code excerpts moved out of the main reading.

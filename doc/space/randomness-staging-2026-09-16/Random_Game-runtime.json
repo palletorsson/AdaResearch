@@ -1,0 +1,64 @@
+{
+  "artifacts": [
+    {
+      "bounds": {
+        "max": [
+          9.5,
+          1.32000017166138,
+          7.5
+        ],
+        "meshes": 41,
+        "min": [
+          4.49999952316284,
+          -1.15154361724854,
+          2.11368751525879
+        ]
+      },
+      "lookup": "r_c",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomCycleCube",
+      "position": "(7.0, -0.28, 5.0)",
+      "yaw": 0.0
+    },
+    {
+      "bounds": {
+        "max": [
+          13.1000003814697,
+          1.64000010490417,
+          17.0224990844727
+        ],
+        "meshes": 14,
+        "min": [
+          2.97749996185303,
+          -0.601968050003052,
+          8.97749996185303
+        ]
+      },
+      "lookup": "cube_projectile_spawner",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/CubeSpawner",
+      "position": "(7.0, 0.0, 13.0)",
+      "yaw": 0.0
+    }
+  ],
+  "failures": [],
+  "floor_checks": [
+    {
+      "cell": "(7.0, 0.0)",
+      "supported": true
+    },
+    {
+      "cell": "(7.0, 19.0)",
+      "supported": true
+    },
+    {
+      "cell": "(1.0, 10.0)",
+      "supported": true
+    },
+    {
+      "cell": "(13.0, 10.0)",
+      "supported": true
+    }
+  ],
+  "headset_verified": false,
+  "map": "Random_Game",
+  "origin": "(0.5, 0.0, 0.5)"
+}

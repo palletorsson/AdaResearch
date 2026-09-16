@@ -1,23 +1,13 @@
-Concept: The cube transformation primer. Before the chapter uses translation, rotation and scale to cross holes, each is shown as the plain difference between a cube and its copy: the same yellow block here and somewhere else, here and turned, here and larger, and then all three at once. Adding one difference at a time is the whole lesson.
-Sequence role: Opens the Transformation sequence, ahead of Trans_Introduction. Palle, 2026-09-05: "Some time ago I also explained translation and scale with the mario cube. By adding the difference: first the cube, then translation, then rotation, then scale. Something like Transformation_1 but improved, all stages." Transformation_1 was the 2025 repo's "Cube Transformation Primer" (a cube, a transformation cube, a rotating cube, a pick-up cube and the axioms card on one row); this room does the same with one object and every stage.
-Technical angle: The copies are one artifact placed with the map token's own fields - mario_cube (the cube), mario_cube at another cell (translation), mario_cube:45 (rotation about the upright), mario_cube:0:0:1.5 (uniform scale), mario_cube:45:1:1.5 (rotation, a translation along y, and scale in one token). The grid applies them as one Transform3D, which is what the axioms card names as the matrix.
-Critical angle: A transformation is a difference, not a motion. Nothing in this room moves; the difference is laid out in space between two copies, and the visitor walks the difference. The rainbow that stands up over a block when it is reached is the Mario cube's own essence, darkness becoming colour, and here every stage earns one.
-Key artifacts: mario_cube, nine of them, the unit and its copies; clipboard with transformation_axioms, the matrix said in words.
+# Trans_Pre — transformation basics in a Mario-style cube
 
-Gap: No gap identified.
+Palle's correction, 16 September 2026: this is a preliminary lesson. Show the movements that make up a familiar game pickup. The learner should be able to recognise and name translation, rotation and scale, then see them working together.
 
-## Rebuilt across levels, 2026-09-06
+Keep the cumulative order: still cube → up and down → add turning → add growing and shrinking. Use short code excerpts after observing each addition. Use linear interpolation (`lerp`) between two heights and two sizes. Sine belongs to the later wave lessons. Rotation adds a small turn each frame.
 
-Palle, pointing at the 2025 map `AdaResearch26/commons/maps/Trans_Translation`
-("Transformation_2 - Translation Route Field", an asymmetric multi-level
-platform network): *"for trans_pre I mean something like this."*
+The four pick_up_cube demonstrations remain at (4,2), (4,5), (4,8), (4,11), using motion still / slide / idle / all and hold:demo. The three secondary markers at (6,5), (6,8), (6,11) support recognition. They have independent timing and do not control the demonstrations. The only primary artifact family remains pick_up_cube.
 
-The room was a flat 9x14 corridor with the five stages on one floor. It is now
-11x21 on three levels - deck, a shelf a metre up, a summit two metres up - with
-an inner wall at 3 closing the first stage off, a wedge east onto the plinth
-that carries stage two's copy, wedges up to the summit and back down to the
-door. Height is not decoration here: stage two's difference is a vector with a
-metre of y in it and the ramp is the part of it you walk, and the rotation and
-scale pairs stay strictly level because their difference must be the only one.
-`museum.wall_height` is 4, so 2 and 3 are floors a metre and two metres up in
-both engines, and 4 is the wall.
+The small level applies the finished animation. Four collectible cubes occupy (4,16), (4,18), (4,19), (4,20); two health crosses remain supporting objects. The existing platform and wedge ramps are retained. Walking to a pickup is a simple way to try the game object.
+
+Questions about the player's body, passage, identity, reference frames and the difference between visual scale and detection size belong to later investigations. They should not become additional learning requirements here. The lesson's success is recognising the three basic operations in the animated cube.
+
+The previous, more elaborate reading is preserved under doc/space/trans-pre-basics-2026-09-16/before/. The follow-up revision uses `motion_curve:lerp` for all eight pickup instances and the scale marker, with continuous rotation on the turning marker. Their placement and roles stay the same. Other halls retain their existing motion defaults.

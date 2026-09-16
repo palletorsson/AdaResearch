@@ -40,6 +40,8 @@ var _current_angle: float = 0.0  # In radians
 
 
 func _ready():
+	if has_meta("config_mode"):
+		continuous_mode = str(get_meta("config_mode")) == "continuous"
 	_create_cube()
 	_create_arc_indicator()
 	_create_direction_arrow()
@@ -194,6 +196,7 @@ func _create_labels():
 	
 	# Mode indicator
 	var mode_label = Label3D.new()
+	mode_label.name = "ModeLabel"
 	mode_label.pixel_size = 0.001
 	mode_label.font_size = 36
 	mode_label.text = "CONTINUOUS" if continuous_mode else "OSCILLATING"
@@ -313,6 +316,10 @@ func _update_color_feedback():
 
 func set_mode(continuous: bool) -> void:
 	continuous_mode = continuous
+	var mode_label := get_node_or_null("ModeLabel") as Label3D
+	if mode_label != null:
+		mode_label.text = "CONTINUOUS" if continuous else "OSCILLATING"
+		mode_label.modulate = Color(0.8, 0.7, 0.6) if continuous else Color(0.6, 0.8, 0.7)
 	if _formula_label:
 		_formula_label.text = "θ += ω·dt" if continuous else "θ = A · sin(ωt)"
 	_update_arc_mesh()
@@ -372,4 +379,5 @@ func _exit_tree():
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	if config_data.has("mode"):
+		set_mode(str(config_data["mode"]) == "continuous")

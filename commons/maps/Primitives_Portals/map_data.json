@@ -1,7 +1,7 @@
 {
  "map_info": {
-  "description": "A toroidal portal sequence guided by increasing rings approaching pi, staging continuity as asymptotic relation rather than arrival. This map makes approximation and limit visible: discrete rings approximate the circle without ever reaching it. It foregrounds the tension between the countable and the infinite within computational geometry.",
-  "description_2": "2D Array Navigation - explore both X and Y axes in a grid structure",
+  "description": "A finite torus ladder and a halving track distinguish mesh refinement, a separately labelled polygon-perimeter comparison and staged approach to a limit. Visitors can reverse the refinement order, pause the markers and inspect the positive gap remaining at the final stage.",
+  "description_2": "Two primary encounters: selecting and reversing a portal progression, then comparing direct halving stages with eased autoplay.",
   "dimensions": {
    "width": 13,
    "depth": 35,
@@ -13,7 +13,12 @@
    "category": "tutorial",
    "difficulty": "beginner",
    "estimated_time": "3-4 minutes",
-   "learning_objectives": [ "Toroidal forms", "Circular approximation", "Continuity vs discretization", "Zeno's paradox — limits as asymptotic approach" ]
+   "learning_objectives": [
+	"Toroidal forms",
+	"Circular approximation",
+	"Continuity vs discretization",
+    "Zeno's paradox — limits as asymptotic approach"
+   ]
   },
   "name": "08 Portals",
   "title": "Circular Approximation and Limits",
@@ -47,9 +52,14 @@
   }
  },
  "documentation": {
-  "key_elements": [ "`combine_portals` rig at (3,4)", "`achilles_tortoise` at (5,5) — animated Zeno's paradox", "Mid-corridor `dark_sphere` enclosure at (3,18)", "Teleporter `t` at (4,33)" ],
+  "key_elements": [
+   "`combine_portals` rig at (3,4)",
+   "`achilles_tortoise` at (5,5) — animated Zeno's paradox",
+   "Mid-corridor `dark_sphere` enclosure at (3,18)",
+   "Teleporter `t` at (4,33)"
+  ],
   "layout": "7x35 longitudinal spine with narrowing walkway toward southern exit.",
-  "objective": "Experience circular approximation through toroidal portals; discrete rings approaching continuity.",
+  "objective": "Compare finite refinement with a mathematical limit, and choose a stopping rule tied to an intended use.",
   "summary": "Primitives_Portals - Toroidal Corridor"
  },
  "lighting": {
@@ -126,11 +136,11 @@
    [ "1", "0", "0", "1", "0", "0", "1", "1", "1", "1", "1", "1", "1" ],
    [ "1", "0", "0", "1", "0", "0", "1", "1", "1", "1", "1", "1", "1" ],
    [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-   [ "0", "0", "0", "1", "0", "1", "0", "1", "1", "1", "1", "1", "1" ],
-   [ "0", "0", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ]
+   [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
+   [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ]
   ],
   "utilities": [
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "sp", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
@@ -163,16 +173,16 @@
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "t", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "s", "", "", "", "", "", "", "" ]
+   [ "", "", "", "", " ", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "t", "s", "", "", "", "", "", "", "" ]
   ],
   "interactables": [
    [ "dark_sphere:0:-0.5", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "capsule", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "combine_portals:0:-0.2", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "achilles_tortoise:0:1", "", "", "", "", "", "", "" ],
+   [ "", "", "", "combine_portals:0:-0.2#discovery:1", "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "achilles_tortoise:0:1#discovery:1", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],

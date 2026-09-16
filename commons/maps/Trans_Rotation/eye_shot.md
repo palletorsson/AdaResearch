@@ -1,3 +1,5 @@
+> Historical account of the previous layout. The 2026-09-09 redesign is documented in `final.md`, `technical.md` and `field_notes.md`; human VR review of the two new studies is pending.
+
 # Eye shot — Trans_Rotation
 
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.

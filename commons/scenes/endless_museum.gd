@@ -1096,6 +1096,8 @@ var _vr_passage_frame: int = -1
 ## its exhibits.
 var _vr_current_node: Node3D = null
 var _vr_shell_building: bool = false
+var _portal_mode: bool = false       # --em-portals: opt-in, one resident VR hall
+var _portal_stream: Node3D = null
 var _vr_last_eye_z: float = 0.0
 # ── THE WAKE-UP RAMP (2026-08-20, Palle: "loading a grid map like Point_One
 # is shorter") ── Point_One pays the same engine and staging; what it skips
@@ -1781,6 +1783,8 @@ func _parse_args() -> void:
 			_autopilot = int(a.substr(15))
 		elif a == "--em-vr":
 			_force_vr = true
+		elif a == "--em-portals":
+			_portal_mode = true
 		elif a == "--em-cartridge-write":
 			_cartridge_write = true
 		elif a == "--em-cartridge":
@@ -2943,7 +2947,11 @@ func _plain_hands() -> void:
 		mgr.call("end_lease_now")
 
 ## A body the plan dealt that would put a tool on the hand: shown, not grabbed.
-func _plain_hands_disarm(node: Node3D, lookup: String) -> int:
+func _plain_hands_disarm(node: Variant, lookup: String) -> int:
+	# A portal can unload this artifact before the delayed hand check fires.
+	# Accept a Variant so a freed instance reaches the validity guard.
+	if not is_instance_valid(node):
+		return 0
 	if not _plain:
 		return 0
 	if not _layout_list("rig", "no_pickup", RIG_NO_PICKUP).has(lookup):
@@ -7953,6 +7961,8 @@ func _build_segment() -> void:
 			peek["open_roof"] = bool(mm.get("open_roof", peek.get("open_roof", false)))
 			if mm.has("gate"):
 				peek["gate"] = bool(mm["gate"])
+			if mm.has("gate_depth_rows"):
+				peek["gate_depth_rows"] = int(mm["gate_depth_rows"])
 			# A HALL MAY REFUSE A PROP BY NAME (2026-08-28, Palle: "try to find the
 			# props to remove them"). The dresser picks wall props from a rotation
 			# (em_props.gd: pick = i % 4) and there was no way for a map to say no
@@ -8023,6 +8033,24 @@ func _build_segment() -> void:
 				# grid: true — the REAL GridSystem stands in the basin; the
 				# museum builds no piers there (the grid stands its own towers)
 				peek["sim_grid"] = bool(simd.get("grid", false))
+				if bool(simd.get("staged", false)):
+					var stage_script = load("res://commons/scenes/em/em_simulation_stage.gd")
+					var stage_path := "user://maps/%s/map_data.json" % str(peek["map"])
+					if not FileAccess.file_exists(stage_path):
+						stage_path = "res://commons/maps/%s/map_data.json" % str(peek["map"])
+					var stage_doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(stage_path))
+					var stage: Dictionary = stage_script.plan(stage_doc)
+					peek["simulation_stage"] = stage
+					peek["tile"] = stage.tile
+					peek["heights"] = {}
+					peek["sim_margin"] = 0
+					peek["gate"] = false
+					peek["basin"] = {"depth": stage.depth, "glass": false, "fire": bool(simd.get("fire", false)),
+						"rects": [[stage.margin, stage.margin, stage.w-stage.margin*2, stage.d-stage.margin*2]]}
+					_cur_stages = []
+					_cur_gaps = []
+					_cur_ramps = []
+					_cur_utilities = []
 			elif peek.has("sim_margin"):
 				peek.erase("sim_margin")
 				peek.erase("sim_grid")
@@ -8035,7 +8063,7 @@ func _build_segment() -> void:
 			for c_v in (r_v as Array):
 				rr.append(str(c_v))
 			trows.append(rr)
-		tile = _open_bays(_widen_doors(trows), String(spec["key"]), next_seq)
+		tile = trows if peek.has("simulation_stage") else _open_bays(_widen_doors(trows), String(spec["key"]), next_seq)
 		# THE PASSAGES (2026-08-24, Palle: "each hall should have a starting
 		# passage and an ending passage so we can make the inevitable
 		# transformation"). An authored hall gets carved doors on BOTH edges
@@ -8191,6 +8219,8 @@ func _build_segment() -> void:
 	seg.set_meta("em_pearl", cur_pearl)
 	seg.set_meta("em_chapter", next_seq)
 	seg.set_meta("em_map", String(peek.get("map", "")) if String(peek.get("authored", "")) == "map" else "")
+	if peek.has("simulation_stage"):
+		seg.set_meta("em_simulation_stage", peek["simulation_stage"])
 	seg.set_meta("em_passage_start", passage_start)
 	seg.set_meta("em_passage_decl", passage_decl)
 	# one static body per segment carries every collision box — walls, podiums,
@@ -8941,6 +8971,11 @@ func _build_segment() -> void:
 				slots.append({"x": x, "y": z, "top": 0.4, "rank": 1})
 			elif c == "3s":
 				slots.append({"x": x, "y": z, "top": 0.8, "rank": 0})
+	if peek.has("simulation_stage"):
+		var stage_builder = load("res://commons/scenes/em/em_simulation_stage.gd")
+		var frame_result: Dictionary = stage_builder.build(seg, peek["simulation_stage"], float(VESTIBULE_H))
+		for cell: Vector2i in frame_result.walk_cells:
+			_walk_cells[Vector2i(cell.x, cell.y + VESTIBULE_H + zbase)] = true
 	if wr:
 		_stamp_wall_runs(seg, solid, wcells, wall_col, m_wall)
 	_stamp_stages(seg, solid, tile, zbase)
@@ -9092,8 +9127,12 @@ func _build_segment() -> void:
 	# grid's own cubes (tops flush with the deck, bottoms at -1.0) — a hall
 	# filled to the brim would swallow the simulation it exists to show
 	if basin_burns:
+		# Staged arenas keep fire at the basin's base, well below their rides.
+		var fire_top: float = -basin_depth + 0.6 if peek.has("simulation_stage") else (-1.25 if bool(peek.get("sim_grid", false)) else -0.25)
+		if peek.get("basin") is Dictionary and peek.basin.has("fire_top"):
+			fire_top = clampf(float(peek.basin.fire_top), -basin_depth + 0.2, -0.25)
 		_basin_fire(seg, basin_fire, basin_depth,
-			-1.25 if bool(peek.get("sim_grid", false)) else -0.25)
+			fire_top)
 	if not basin_cells.is_empty():
 		dress_tile = []
 		for dz in range(tile.size()):
@@ -9405,7 +9444,9 @@ func _build_segment() -> void:
 						dx1 = xi - 1
 					run0 = -1
 		var gate_layout: Dictionary = {
-			"depth_rows": int(_L("gate", "depth_rows", 4.0)),
+			# A recovered grid can reserve its whole interior for the lesson.
+			# Zero puts the gate in the existing boundary opening, without piers.
+			"depth_rows": int(peek.get("gate_depth_rows", _L("gate", "depth_rows", 4.0))),
 			"open_seconds": _L("gate", "open_seconds", 1.6),
 			"click_reach_m": _L("gate", "click_reach_m", 3.2),
 			"click_cone_rad": _L("gate", "click_cone_rad", 0.55)}
@@ -10806,8 +10847,30 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 	# floor plan"): a hall whose necklace was stamped on /transplant's bench
 	# builds FROM those beads — the bench IS the floor plan. Everything else
 	# about the transplant (no dealer, no guests, plinths, the walls) holds.
-	var hand_hall := _necklace_hand(chapter, String(entry.get("pearl", "")))
-	if bool(hand_hall.get("stamp", false)):
+	# A reviewed encounter can opt out of an older bench stamp without
+	# re-laying every other map-authored hall. The three pilots opt in; the
+	# remaining stamps keep their placement authority until reviewed.
+	var placement_decl: Variant = (doc_v as Dictionary).get("map_info", {}).get("museum", {})
+	var placement_museum: Dictionary = placement_decl if placement_decl is Dictionary else {}
+	var map_placements: bool = str(placement_museum.get("artifact_placement", "")) == "map"
+	# AN AUTHORED FLOOR CAN KEEP THE DEALT SCULPTURES OFF IT (2026-09-10). The
+	# grid-simulation lane below reads museum.sculpture_clear_rects; a map-
+	# authored hall can name them too. Observed in the first Waves/Chance/Noise
+	# probe runs: an ArtPlinth stood in the one-metre aisle between the two noise
+	# fields and another at the sine corridor's mouth, both on free walk cells.
+	# Same key, same inclusive source-grid cells (x0, z0, x1, z1); the rows are
+	# offset by the vestibule, which is where a map-authored body's cell sits in
+	# segment coordinates. GATED BY THE KEY: a map without it is byte-identical.
+	var clear_rects_auth: Array[Rect2] = []
+	for rect_v in placement_museum.get("sculpture_clear_rects", []):
+		if rect_v is Array and (rect_v as Array).size() == 4:
+			var low_a := Vector2(float(rect_v[0]) - 0.5, float(rect_v[1]) - 0.5 + float(VESTIBULE_H))
+			var high_a := Vector2(float(rect_v[2]) + 0.5, float(rect_v[3]) + 0.5 + float(VESTIBULE_H))
+			clear_rects_auth.append(Rect2(low_a, high_a - low_a))
+	if not clear_rects_auth.is_empty():
+		seg.set_meta("em_sculpture_clear_rects", clear_rects_auth)
+	var hand_hall: Dictionary = {} if map_placements else _necklace_hand(chapter, String(entry.get("pearl", "")))
+	if bool(hand_hall.get("stamp", false)) and not seg.has_meta("em_simulation_stage"):
 		return _stamp_necklace(seg, zbase, chapter, entry, hand_hall, doc_v, w, h)
 	# bead-grain stamps: each stamped bead CLAIMS one occurrence of its token
 	# in the map — that body builds at the bead's position instead of the
@@ -10864,7 +10927,22 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			# stamp budget, near enough a frame at 90 Hz.
 			gs.set("interactable_place_budget_ms", 8.0)
 			gs.position = Vector3(0.0, -gdepth, float(VESTIBULE_H))
+			if seg.has_meta("em_simulation_stage"):
+				var stage: Dictionary = seg.get_meta("em_simulation_stage")
+				# Grid cube centres are integers; museum floor cells start at integers.
+				# Half a cell aligns their outer edges without changing any grid-local coordinate.
+				gs.position += Vector3(float(stage.pad) + 0.5, 0, float(stage.pad) + 0.5)
+				gs.set_meta("em_source_map", map_name)
 			seg.add_child(gs)
+			# Authored performance floors must stay clear of automatically dealt
+			# sculptures. Rectangles use inclusive source-grid cell coordinates.
+			var sculpture_clear: Array[Rect2] = []
+			for rect_v in (mus_g as Dictionary).get("sculpture_clear_rects", []):
+				if rect_v is Array and rect_v.size() == 4:
+					var low := Vector2(float(rect_v[0]) - 0.5, float(rect_v[1]) - 0.5)
+					var high := Vector2(float(rect_v[2]) + 0.5, float(rect_v[3]) + 0.5)
+					sculpture_clear.append(Rect2(low + Vector2(gs.position.x, gs.position.z), high - low))
+			seg.set_meta("em_sculpture_clear_rects", sculpture_clear)
 			# THE DISARM WAITS FOR THE BUILD, NOT FOR A CLOCK (2026-08-26).
 			# _sim_grid_disarm takes the live teleporters and hazards out of an
 			# embedded grid - a teleporter switches maps, which severs the
@@ -10878,7 +10956,7 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			# with find_children and clearing monitoring twice is a no-op, so
 			# both may run.
 			if gs.has_signal("build_finished"):
-				gs.connect("build_finished", _sim_grid_ready.bind(gs, zbase), CONNECT_ONE_SHOT)
+				gs.connect("build_finished", _sim_grid_ready.bind(gs, zbase, true), CONNECT_ONE_SHOT)
 			if is_inside_tree():
 				get_tree().create_timer(2.5).timeout.connect(_sim_grid_ready.bind(gs, zbase))
 			print("[em-sim-grid] %s: the REAL grid builds the simulation (bare_world, player kept)" % map_name)
@@ -11164,6 +11242,14 @@ func _sim_grid_disarm(gs: Node3D) -> void:
 		if sp.contains("teleport") or sp.contains("danger") or sp.contains("reset_cube") or sp.contains("hazard"):
 			var areas: Array = [n] if n is Area3D else n.find_children("*", "Area3D", true, false)
 			for a_v in areas:
+				# The mounted chromatic lesson has visitor controls inside the
+				# otherwise disarmed catalyst. Keep only those controls interactive.
+				var control_parent: Node = a_v
+				var study_control := false
+				while control_parent != null and control_parent != gs:
+					if control_parent.name == "ChromaticStudy": study_control = true; break
+					control_parent = control_parent.get_parent()
+				if study_control: continue
 				(a_v as Area3D).monitoring = false
 				(a_v as Area3D).monitorable = false
 			disarmed += 1
@@ -11179,7 +11265,11 @@ func _sim_grid_disarm(gs: Node3D) -> void:
 ## hall as severed. Both are what the museum's own utility door already did
 ## for a cube it stamped itself. Runs from the build signal and from the
 ## backstop timer; every step is a no-op the second time.
-func _sim_grid_ready(gs: Node3D, zbase: int) -> void:
+func _sim_grid_ready(gs: Node3D, zbase: int, completed: bool = false) -> void:
+	if not is_instance_valid(gs):
+		return
+	if completed:
+		gs.set_meta("stage_grid_ready", true)
 	_sim_grid_disarm(gs)
 	_sim_grid_carry(gs, zbase)
 
@@ -13029,6 +13119,8 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	if not is_zero_approx(yaw_deg):
 		node.rotation_degrees.y = yaw_deg
 	seg.add_child(node)
+	# Exhibit staging is opt-in and does not scale the controls with the object.
+	load("res://commons/artifacts/randomness_space/museum_exhibit_stage.gd").install(node, plan_config)
 	# DRESS spin (2026-08-24, Palle: "trace slowly rotating in the middle"):
 	# #spin:DEG/S turns the body forever about its own y — a turntable for
 	# the piece, not a physics motion. After add_child (a tween needs a tree).
@@ -13078,7 +13170,11 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	# cap to `min(base + 0.10, cells - 0.06)` so the pedestal claims no cell the
 	# artifact's own AABB did not already claim — but that is the module's own
 	# arithmetic, and this line is the museum checking rather than believing it.
-	if bk.has("seal"):
+	if lookup == "force_field_zone" and str(plan_config.get("lesson", "")) == "force_as_place":
+		# This opt-in volume has no solid body. Its visual box must not seal
+		# the retained plank or make reach repair move it away from the pit.
+		_last_seal_cells = []
+	elif bk.has("seal"):
 		# the baked seal: exactly these cells, no measurement, no reach probe
 		_last_seal_cells = []
 		for c in bk["seal"]:
@@ -14219,6 +14315,11 @@ func _has_collider(root: Node3D) -> bool:
 	var stack: Array = [root]
 	while not stack.is_empty():
 		var n: Node = stack.pop_back()
+		# A side instrument's button shapes do not make its parent's entire
+		# footprint impassable (e.g. the 87 m portal ladder). This opt-in marker
+		# leaves their local physics intact and only scopes the footprint test.
+		if n.get_meta("em_local_instrument",false):
+			continue
 		if n is CollisionShape3D and (n as CollisionShape3D).shape != null:
 			return true
 		for c in n.get_children():
@@ -14278,6 +14379,13 @@ func _ledger_note(tok: String, node: Node3D, box: AABB, has_col: bool, cx: int, 
 		_ledger_save()
 	else:
 		_live_ledger[tok]["seen"] = int(prev.get("seen", 0)) + 1
+		# Collision can change without an extent growing. Do not keep a stale
+		# obstruction classification after a local instrument is identified.
+		if bool(prev.get("has_collider",false)) != has_col:
+			_live_ledger[tok]["has_collider"] = has_col
+			_live_ledger[tok]["walk_inside"] = not has_col
+			_live_dirty = true
+			_ledger_save()
 
 
 func _ledger_save() -> void:
@@ -14577,6 +14685,10 @@ func _sculpt_axis_deal(fig: String, key: String, index: int) -> Dictionary:
 func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _deal: Dictionary) -> void:
 	if seg == null or not is_instance_valid(seg):
 		return
+	# Curated rooms can reserve their floor for their authored encounters.
+	# Honour the same per-map exclusion as other automatically dealt furniture.
+	if (seg.get_meta("em_props_deny", []) as Array).has("dream_bodies"):
+		return
 	if _L("sculptures", "on", 1.0) <= 0.5 or not _bodies_on:
 		return
 	var lv: Variant = _live.get("dream_bodies", null)
@@ -14647,6 +14759,7 @@ func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _d
 		_stand_relief_async(seg, zbase, key, ch, pearl, body_seed, vest_w)
 		return
 	var pool: Array = []
+	var clear_rects: Array = seg.get_meta("em_sculpture_clear_rects", [])
 	for k_v in _walk_cells:
 		var k: Vector2i = k_v
 		if k.y < zbase + VESTIBULE_H + 2 or k.y >= zbase + VESTIBULE_H + h - 2:
@@ -14654,6 +14767,14 @@ func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _d
 		if k.x < 2 or k.x >= w - 2:
 			continue
 		if Vector2(float(k.x) + 0.5, float(k.y) + 0.5).distance_to(save) < clear_m:
+			continue
+		var clear_point := Vector2(float(k.x) + 0.5, float(k.y - zbase) + 0.5)
+		var reserved := false
+		for rect: Rect2 in clear_rects:
+			if rect.has_point(clear_point):
+				reserved = true
+				break
+		if reserved:
 			continue
 		pool.append(k)
 	pool.sort_custom(func(a: Vector2i, b: Vector2i) -> bool: return a.y < b.y or (a.y == b.y and a.x < b.x))
@@ -15436,6 +15557,11 @@ func _process(_delta: float) -> void:
 	# create_timer both reach for one.
 	if not is_inside_tree():
 		return
+	if _portal_stream != null and bool(_portal_stream.get("busy")):
+		if String(_portal_stream.get("phase")) == "artifacts":
+			_drain_cartridge_nodes()
+			_drain_stamps()
+		return
 	if Engine.is_editor_hint() or _studio:
 		return
 	# --em-die: kill the visitor on a timer, through the road a hazard uses.
@@ -15608,7 +15734,12 @@ func _process(_delta: float) -> void:
 	elif _cam == null:
 		return
 	var ez: float = _eye_pos().z
-	if _vr and VR_ONE_HALL and not _bake_mode:
+	if _vr and _portal_mode and not _bake_mode:
+		if _museum_ready and _portal_stream == null:
+			_portal_stream = load("res://commons/scenes/em/em_portal_stream.gd").new()
+			add_child(_portal_stream)
+			_portal_stream.call("configure", self)
+	elif _vr and VR_ONE_HALL and not _bake_mode:
 		_vr_single_map_stream(ez, _delta)
 	else:
 		# Desktop/proof streaming keeps its look-ahead window. VR deliberately
@@ -16172,9 +16303,12 @@ func _drain_stamps() -> void:
 	if _stamp_queue.is_empty():
 		return
 	var eye: Vector3 = _eye_pos()
+	var portal_loading: bool = _portal_stream != null and bool(_portal_stream.get("busy"))
+	if portal_loading:
+		eye = _portal_stream.call("loading_focus")
 	var t0 := Time.get_ticks_usec()
 	var built := 0
-	while not _stamp_queue.is_empty() and built < 8:
+	while not _stamp_queue.is_empty() and built < (1 if portal_loading else 8):
 		if built > 0 and float(Time.get_ticks_usec() - t0) > STAMP_BUDGET_MS * 1000.0:
 			break
 		var best := -1
@@ -16197,6 +16331,8 @@ func _drain_stamps() -> void:
 				best = qi
 			qi += 1
 		var horizon: float = INSTANTIATE_AHEAD_M
+		if portal_loading:
+			horizon = INF  # the headset is in the loading cell, away from this hall
 		if _dollhouse:
 			horizon = maxf(horizon, _doll_zoom * 1.8 + 16.0)
 		if best < 0 or best_d > horizon:
@@ -16226,6 +16362,8 @@ func _drain_stamps() -> void:
 			if not ok:
 				print("[em-stamp] deferred %s failed on drain: %s (the bake had placed it)" % [
 					String(item["lookup"]), _stamp_refusal])
+				if portal_loading:
+					_portal_stream.call("_fail", "An exhibit could not be placed: " + String(item["lookup"]))
 		# A HALL CAN BE SEVERED AFTER IT PASSED. carousel_cake drained long after
 		# its hall was certified and sealed the whole width of the round room, so
 		# a body that arrives late re-arms the hall's end-to-end test rather than
@@ -16290,6 +16428,14 @@ func _cull_artifacts() -> void:
 			continue
 		var p: Vector3 = r.get("p")
 		var d: float = Vector2(p.x - eye.x, p.z - eye.z).length()
+		# A room-sized artifact must stay present while the visitor is inside it,
+		# even when its placement anchor is more than the cull radius away.
+		if node.has_meta("em_visibility_bounds"):
+			var bounds: AABB = node.get_meta("em_visibility_bounds")
+			var local_eye := node.to_local(eye)
+			var nearest := Vector3(clampf(local_eye.x,bounds.position.x,bounds.end.x),local_eye.y,clampf(local_eye.z,bounds.position.z,bounds.end.z))
+			var world_nearest := node.to_global(nearest)
+			d = Vector2(world_nearest.x-eye.x,world_nearest.z-eye.z).length()
 		if node.visible:
 			if d > hide_m:
 				# SUSPEND WHAT YOU CANNOT SEE (2026-08-18). Hiding a body stops
@@ -16425,7 +16571,17 @@ func _physics_process(_delta: float) -> void:
 	if _dollhouse:
 		_doll_frame(_delta)
 		return
+	# A room can lend flight without changing the museum outside its envelope.
+	var flight_zone = preload("res://commons/movement/museum_flight_box.gd").at_point(get_tree(), _player.global_position)
+	if flight_zone != null:
+		_player.velocity = flight_zone.desktop_velocity(_cam.global_basis)
+		_vy = 0.0
+		_jump_pressed = false
+		_player.move_and_slide()
+		if _player.is_on_floor(): _last_ground = _player.position
+		return
 	# walk — as a body: move_and_slide lets the walls and podiums push back
+	var carry_incoming := _player.velocity
 	var dir := Vector3.ZERO
 	if Input.is_key_pressed(KEY_W):
 		dir -= _player.global_transform.basis.z
@@ -16466,7 +16622,23 @@ func _physics_process(_delta: float) -> void:
 	if not on_floor:
 		_vy -= JUMP_GRAVITY * _delta
 	_player.velocity.y = _vy
+	# Only explicitly enabled kinetic media affect ordinary desktop locomotion.
+	# The medium supplies a speed adapter, not an overwrite racing the controller.
+	for medium in get_tree().get_nodes_in_group("ada_kinetic_media"):
+		var factor: float = medium.walk_multiplier(_player.global_position)
+		_player.velocity.x *= factor
+		_player.velocity.z *= factor
+	var carry_zone = null
+	for zone in get_tree().get_nodes_in_group("ada_museum_carry"):
+		if carry_zone == null and zone._point_inside(_player.global_position): carry_zone = zone
+		else: zone.release_carry(_player)
+	if carry_zone != null:
+		_player.velocity = carry_zone.carry_velocity(_player, _delta, carry_incoming)
+		_vy = _player.velocity.y
 	_player.move_and_slide()
+	if carry_zone != null:
+		carry_zone.record_carry(_player)
+		_vy = _player.velocity.y
 	if _player.is_on_floor():
 		_last_ground = _player.position          # the last place that held us
 	_catch_if_fallen()

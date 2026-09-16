@@ -1,131 +1,82 @@
-# Random Mushrooms
+# Read a population by changing one rule
 
-A bed of mushrooms built from draws: six templates, eighty candidates gated by a noise field, a template, a facing and a size for each accepted one, then rings and clusters placed on purpose. Every line below is from `algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd`.
+Build on Random_Gaussian's distinction between a value and the account made from it. Here draws are assigned to construction tasks. Use the six-metre specimen bed and its five buttons; there is no mean/variance slider or live shape morphing control.
 
-Route every draw through one function.
+1. Choose two apparently related mushrooms. SHOW cycles template 0–5, marks that disc and its field copies. Zero copies is a possible observation. SHOW returns KIND to template selection.
+2. Press SIZE. Follow the same instances. Their positions, templates, groups, yaw and ground should remain; their transform scales become 1. Distinct templates retain distinct dimensions. Press again to restore the sampled scales.
+3. Press REGROW under the displayed seed. Compare specific instances, not only total count. NEW SEED changes the current seed; earlier numbers may recur.
+4. KIND cycles scattered → rings → clusters → rejected → template. Read the current label rather than assuming a fixed number of presses. Accepted plus rejected counts only the eighty scattered candidates. Ring and cluster members are added separately.
+5. Inspect the edible mushrooms from the west and south margins. Their pickable/eating behaviour belongs to a separate scene. Headset eating depends on holding one within 0.25 m of the active camera. Desktop carrying does not reach that distance by itself.
 
-```gdscript
-func _rf() -> float:
-	return _pop_rng.randf() if _pop_rng != null else randf()
-```
+## The scale comparison
 
-With `population_seed` at its default of −1 the private generator is null and the call falls through to the global `randf()`, the same call in the same order as before. Under a seed, `_pop_rng` makes every draw, and the ground's generator takes the seed plus one.
-
-```gdscript
-	if population_seed >= 0:
-		_pop_rng = RandomNumberGenerator.new()
-		_pop_rng.seed = population_seed
-		if ground_seed == 0:
-			ground_rng.seed = population_seed + 1
-```
-
-Build the six templates once.
+The scattered-body code evaluates the draw before calling `_size`:
 
 ```gdscript
-	for i in range(mushroom_variety):
-		var template = create_mushroom_template(i)
-		mushroom_types.append(template)
-```
-
-Five kinds by index, and a sixth if glowing mushrooms are on. The templates never enter the tree; the bed is made of their copies.
-
-Scatter candidates and let a noise field refuse some.
-
-```gdscript
-	for _i in range(target_count):
-		var pos_x = _rf() * meadow_size - meadow_size / 2
-		var pos_z = _rf() * meadow_size - meadow_size / 2
-		var noise_val = noise.get_noise_2d(pos_x * 2, pos_z * 2)
-		if noise_val < -0.3:
-			_rejected.append(Vector3(pos_x, get_ground_height(pos_x, pos_z), pos_z))
-			continue
-```
-
-`target_count` is `mushroom_count * mushroom_density`, eighty with the shipped values. A candidate whose noise falls under −0.3 is recorded and skipped; the rest become positions on the ground.
-
-Copy a template onto each accepted position.
-
-```gdscript
-		var type_index = _ri() % mushroom_types.size()
-		var mushroom = mushroom_types[type_index].duplicate()
-		mushroom.rotation_degrees.y = _rf() * 360
 		var scale_factor = _size(0.7 + _rf() * 0.6)  # 0.7 to 1.3
 		mushroom.scale = Vector3(scale_factor, scale_factor, scale_factor)
 ```
-
-Three draws per mushroom: which template, which facing, how big. `_size` returns the draw as it is, or 1 when the size rule is off; the draw is made either way, so the rest of the population does not shift.
 
 ```gdscript
 func _size(v: float) -> float:
 	return v if size_variation else 1.0
 ```
 
-Place a fairy ring on purpose.
+Taking the draw out would change subsequent generator state. Keeping it and replacing its use preserves the comparison. The ranges differ by construction routine: scattered 0.7–1.3, rings 0.8–1.2, clusters 0.5–1.2. These scale draws are uniform within their respective ranges; the room does not use Gaussian sizing.
+
+## More than one source of draws
 
 ```gdscript
-	var radius = 1.0 + _rf() * 2.0
-	var count = int(radius * 8)
-	for i in range(count):
-		var angle = (2.0 * PI / count) * i
-		var pos_x = center_x + cos(angle) * radius
-		var pos_z = center_z + sin(angle) * radius
+func _rf() -> float:
+	return _pop_rng.randf() if _pop_rng != null else randf()
+
+func _ri() -> int:
+	return _pop_rng.randi() if _pop_rng != null else randi()
 ```
 
-A centre, a radius, one template for the whole ring, a count set by the radius, and members at equal angles. A member outside the bed is skipped, so a ring at the edge is an arc.
+These helpers serve the templates, placement routines and ground cover. A separate `ground_rng` produces vertex heights, seeded by population seed + 1 unless an explicit ground seed overrides it. NEW SEED uses another temporary generator to choose a seed. `_rf` is not the file's only random call.
 
-Throw a cluster.
+## Candidate selection and explicit arrangement
 
 ```gdscript
-	var count = 5 + _ri() % 10
-	for _i in range(count):
+		var pos_x = _rf() * meadow_size - meadow_size / 2
+		var pos_z = _rf() * meadow_size - meadow_size / 2
+```
+
+These draw candidates in a square. A fixed-count sample filtered by a noise threshold is not a spatial Poisson point process. The `density` parameter multiplies the requested count; the computed `area` variable is unused, so it does not maintain a number per square metre as bed size changes.
+
+```gdscript
+	var ring_count = int(meadow_size / 5)
+```
+
+```gdscript
+	var cluster_count = int(meadow_size / 3)
+```
+
+Six metres gives one ring and two clusters. Their members are generated separately, rejected outside the square, and permitted to overlap existing bodies. The plate reports placed membership; requested ring/cluster counts are available in source inspection and the review data.
+
+```gdscript
 		var angle = _rf() * PI * 2
 		var distance = _rf() * cluster_size
 ```
 
-Five to fourteen members at random angles and distances from a centre, one template, sizes 0.5 to 1.2.
+Uniform radius is not uniform area: equal-width radial bands receive equal probability while outer bands contain more area. That choice can thicken a cluster near its centre without any attraction between mushrooms.
 
-Count what happened. Each mushroom carries its template and its kind as metadata, the rejected positions are kept, and every ring and cluster records what it requested and what it placed, so the specimen table's plate can print candidates, accepted, rejected, rings, clusters and templates, and its highlight can ring every instance of one template or one kind.
+## Carry the question forward
 
-Grow it again.
+Template selection is discrete, while scale and yaw vary numerically. SIZE does not interpolate between templates. A proposed future experiment could replace one discrete choice with a shape parameter, but it would need its own implementation and comparison. Random_Game takes the next step in the active route: sampled choices with consequences for an encounter.
 
-```gdscript
-func regrow() -> void:
-	for nm in ["MushroomField", "Ground", "Grass", "Rocks", "FallenLeaves"]:
-		var n: Node = get_node_or_null(nm)
-		if n != null:
-			remove_child(n)
-			n.queue_free()
-	mushrooms.clear()
-	_free_templates()
-	_seed_generators()
-	create_ground()
-	create_mushroom_templates()
-	generate_mushroom_field()
-```
 
-The same order as the first build, so under a seed every instance and the ground come back where they were. NEW SEED draws another five-digit seed first; SIZE sets `size_variation` and regrows under the seed you have.
+## Spatial staging — 16 September 2026
 
-Plant the edible ones last.
+The map keeps a reachable instrument alongside its spatial applications. `map_data.json` is authoritative for placements. `#controls:compact` gathers the existing Rack panels, preserving their callbacks, into an 80 cm console. `#glass_width` opts into an enclosure with open entrances; its grid marks are not floor colliders.
 
-```gdscript
-	var half: float = meadow_size * 0.5
-	for i in range(n):
-		var x: float
-		var z: float
-		if i % 2 == 0:
-			x = half - 0.32
-			z = -half + 0.5 + _rf() * (meadow_size - 1.0)
-		else:
-			z = -half + 0.32
-			x = -half + 0.5 + _rf() * (meadow_size - 1.0)
-```
+### Arrival stage
 
-The project's pickable `edible_mushroom`, planted after everything else so the population's draws are untouched, alternately at the local +x and −z kerbs — the margins a visitor walks. `edible` is `none` unless a token says `#edible:some` (three) or `#edible:many` (six).
+`silhouette_arrivals` samples six distinct places without replacement. AUTO waits a seeded 1.5–3.5 seconds between arrivals; ARRIVE advances manually. REPLAY clears the population and restores the placement/timing stream. DRESS changes a separate wardrobe seed, retaining occupied places. The figures use the existing silhouette generator plus sampled collars, hems and pleats. They are non-colliding billboard visitors, not autonomous walking agents. Appearance does not determine hostility. The compact console retains all five touch callbacks.
 
-Stage it in a map.
+FORMS toggles `repertoire` between 0 (tailored) and 1 (tailored plus branches). It retains both seeds, arrival RNG state and occupied slots. Branches are drawn after the original garment parameters are sampled, so adding that rule preserves the earlier choices. Switching back recovers the earlier texture. REPLAY retains dress and repertoire while restarting arrivals.
 
-```
-mushrooms:180#stand:specimen#size:6#edible:some
-```
+### DNA comparison
 
-`stand:specimen` raises the bed clear of the museum's floor, boards it, and stands the table with the six specimens, the plate and SHOW · KIND · SIZE / REGROW · NEW SEED at the bed's edge; `size` is the bed's side in metres; `seed` pins the population. Without the token's config the meadow builds exactly as it shipped: ten metres, the global stream, no table.
+Three dream_couture_beast instances use seeds 41,42,43 and head=hare. GARMENT cycles sheath, crinoline, quilted, bloom and fringe with seeds retained. NEXT SEED advances all by three. RESET restores the starting trio. Controls share the compact console.

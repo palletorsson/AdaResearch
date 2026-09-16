@@ -1,0 +1,121 @@
+{
+  "artifacts": [
+    {
+      "bounds": {
+        "max": [
+          2.19391989707947,
+          1.1800000667572,
+          4.19392013549805
+        ],
+        "meshes": 129,
+        "min": [
+          1.80608010292053,
+          -0.000499999150633812,
+          3.77135610580444
+        ]
+      },
+      "lookup": "entropy_jar",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/EntropyJar",
+      "position": "(2.0, 0.0, 4.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          12.4116144180298,
+          0.199741214513779,
+          4.08750152587891
+        ],
+        "meshes": 3,
+        "min": [
+          9.90823459625244,
+          -0.0946139767765999,
+          1.18280696868896
+        ]
+      },
+      "lookup": "random_butterflies",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/butterflies",
+      "position": "(10.0, 0.0, 4.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          7.15000009536743,
+          1.6599999666214,
+          6.0600004196167
+        ],
+        "meshes": 106,
+        "min": [
+          4.84999990463257,
+          0.0,
+          5.27695035934448
+        ]
+      },
+      "lookup": "shannon_entropy_meter",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/ShannonEntropyMeter",
+      "position": "(6.0, 0.0, 6.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          5.02200031280518,
+          1.55400013923645,
+          9.36061668395996
+        ],
+        "meshes": 100,
+        "min": [
+          0.947999715805054,
+          0.449999958276749,
+          8.63938331604004
+        ]
+      },
+      "lookup": "hardware_entropy_decay",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/HardwareEntropyDecay",
+      "position": "(3.0, 0.45, 9.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          10.7082996368408,
+          1.8183000087738,
+          11.033299446106
+        ],
+        "meshes": 13,
+        "min": [
+          9.38169956207275,
+          0.491700083017349,
+          7.45670032501221
+        ]
+      },
+      "lookup": "entropy_axiom",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/EntropyAxiomMultiMesh",
+      "position": "(10.0, 1.2, 11.0)",
+      "yaw": -179.999984741211
+    }
+  ],
+  "failures": [],
+  "floor_checks": [
+    {
+      "cell": "(6.0, 0.0)",
+      "supported": true
+    },
+    {
+      "cell": "(6.0, 12.0)",
+      "supported": true
+    },
+    {
+      "cell": "(1.0, 6.0)",
+      "supported": true
+    },
+    {
+      "cell": "(11.0, 6.0)",
+      "supported": true
+    }
+  ],
+  "headset_verified": false,
+  "map": "Random_Entropy",
+  "origin": "(0.5, 0.0, 0.5)"
+}

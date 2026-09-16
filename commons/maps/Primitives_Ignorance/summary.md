@@ -1,34 +1,27 @@
-# Primitives Ignorance - Map Summary
+# Primitives Ignorance — map summary
 
-## Overview
-Primitives_Ignorance is an extended gallery map that shifts from "primitive mastery" to "primitive limits." It stages many geometric families side by side so learners can compare regular solids, approximated curves, modular blocks, and hybrid forms.
+## The encounter
 
-## Spatial Layout
-- Dimensions: 9x27 grid.
-- Form: long runway with repeated plinth cadence and thematic stations.
-- Entry marker: annotation `an` and floating text `3t:Let_no_one_ignorant_of_geometry_enter_here` at row 8.
-- Exit: teleporter `t` at (4,23).
+The title turns the association of Plato, geometry and knowledge toward the limits of an implemented model. Recognise a sphere, inspect finer-to-coarser paired meshes, then choose a use before revealing its count. Then meet the five-segment capsule, whose opposite sides interrupt a familiar symmetry shortcut. Ask what a finite construction omits, and what it makes available beyond our expectation.
 
-## Key Elements
-- `platonic_grabbables` at (3,4) opens with direct manipulation of Platonic forms.
-- `dark_sphere` at (4,8) anchors attention at the inscription zone.
-- Resolution strip at rows 11, 13, 15: `sphere_high`, `sphere_mid`, `sphere_low` (x=3 and x=5).
-- Variant solids at x=7 across rows 11-15: `star_primitive`, `truncatedtetrahedron`, `capsule`.
-- Octahedron interaction cluster at row 17: `grab_octahedron` on both sides and `snap_octahedron_puzzle` in center.
-- Structural module rows: `prism_block` strip at row 21, radial ring forms at row 23, `diamonds` at (4,25).
+## Current room
 
-## Learning Flow
-1. Start at the inscription and read the map as a challenge to certainty.
-2. Interact with regular solids, then compare against altered/parametric variants.
-3. Observe how smoothness is approximated through sphere LOD changes.
-4. Use the octahedron station to connect abstraction with hands-on assembly.
-5. Finish at modular and radial forms before exiting.
+- Dimensions: 13 × 20 grid cells; maximum structure height value 3.
+- Twenty-six artifact placements; 21 distinct placed artifact types.
+- Ordinary sphere at (3,1); regular-solids collection at (6,4).
+- Academy-motto text at (4,9); interactive smoothness counter at (5,9), facing the earlier rows.
+- High pair at (3,11)/(5,11), middle at (3,13)/(5,13), low at (3,15)/(5,15).
+- Five-segment capsule at (0,16), on its existing 0.90-metre plinth, now primary.
+- Spawn at (5,0); exit at (5,19).
 
-## Design Intent
-The map uses scale and repetition to show that "primitive" is a chosen modeling language, not a complete ontology. The gallery format supports comparison, not a single canonical answer.
+Coordinates are grid indices. All placements and structure are retained. The main walk explicitly returns to the counter after the paired comparisons. Physical reach and the full headset route remain to be reviewed.
 
-## Sequence Context
-- Position in primitives sequence: 9/11.
-- Follows: `Point_Animatedcube`.
-- Precedes: `Primitives_Portals`.
-- Role: epistemic reset before transition out of core primitives.
+## Aligned primary sequence
+
+Six types, nine placements: ordinary sphere → high pair → middle pair → low pair → counter → capsule. The title of the sphere comparison group is "What the polygons cannot hold." Geometric changes between resolutions and presentation changes within each pair are kept separate.
+
+The remaining solids, further symmetry questions and other instruments remain in the room and in the optional tutorial studies. The complete inventory is in artifacts.md; detailed measured counts and their scope are in technical.md.
+
+## Spine context
+
+Eighth of ten maps in primitives. Follows Point_Animatedcube's distinction between connectivity, geometry and naming. Leads to Primitives_Portals and its finite approach toward a limit.

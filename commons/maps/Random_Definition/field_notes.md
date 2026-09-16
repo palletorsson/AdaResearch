@@ -54,3 +54,18 @@ Actual desktop input, recorded apart from the emitted signals: the project's des
 **2026-09-12 — the visual pass (Astra: "the small cream controller is washed out and its action names are much harder to read than the floating title").** The panel is scaled 1.5 for its labels, and a cased action line at its foot (a 0.50 × 0.075 m plate at the table's front edge, 55° to the eye) names the last action, the seed and whether the two grids agree cell for cell (`RANDOM · seed 454 · grids equal`; `+1 DRAW on · … · grids differ`). REPLAY, RANDOM and +1 DRAW each write it; the arrival draw writes RANDOM. Live: 29 checks / 0 failures.
 
 **2026-09-12, later — after Astra's review of the pass ("controls remain washed out: finish contrast, not just size").** The panel's material is contrasted in place: every bare plate on it with a pale albedo (the rack's cream faces and frames) is given a dark matte override, and every Label3D on it is set light with a six-pixel black outline and its font scaled 1.35 (the seed's caption under each grid: font 20, outline 5). The rack's button names — REPLAY, RANDOM, +1 DRAW and the SEED tag — are baked-text tags, black lettering baked into an off-white albedo texture: darkening those would erase the lettering, so they are kept pale on purpose and the probe counts them apart (four lettered tags, no bare pale plate, eleven dark). A second contrast pass runs a frame after the panel enters the tree for parts built on entering. Probe: no bare pale plate, dark plates ≥ 1, lettered tags ≥ 3, every label light with an outline of at least 4 and none under 16 px (smallest 22). Live: 32 checks / 0 failures. Astra's acceptance, the headset: pending.
+
+
+## 2026-09-12 — Astra continuation from Synthesis Lab
+
+The existing patch-and-replay encounter now has its supporting text aligned with the real instrument. All 15 placements, the east table and west cloud remain. The slider receiver used an obsolete panel path; it now updates the integer seed and synchronizes the handle after programmatic changes and rebuild. Local panel backing and lettered tags are unshaded; the action readout is larger and contrast passes no longer repeatedly enlarge fonts.
+
+Independent run 19:22:02–19:22:27 +02:00: 65 checks, zero assertion failures, exit 0. Exact colour bytes, independent RGB reconstruction, actual desktop drag/buttons and unload/rebuild pass. One ObjectDB/resource shutdown warning remains. Headset reach and small lettering await a later visit. The map changed only metadata after the run; its layers and museum settings are unchanged.
+
+The book keeps the discovery that one discarded draw reassigns RGB while cells and seed stay still. It now notices the continuous gesture selecting integer seeds, allows RANDOM to repeat and distinguishes waiting from advancing this local stream. Nine production excerpts checked. Primary, book anchor and hero remain seed_replay_demo.
+
+Illustrated review with actual captured colour values: /research/possible-bodies/random-definition.html. Full record: doc/space/random-definition-review-2026-09-12/README.md. Next: Random_Entropy, preserving its existing repairs while testing what a histogram loses when the arrangement changes.
+
+## 2026-09-16 — central hero and supporting studies
+
+Recover a seeded picture, then compare how other devices produce or retain a draw. Current placements and sizes are listed in artifacts.md. The staging manifest and desktop runtime evidence are in doc/space/randomness-staging-2026-09-16/. This pass supersedes older placement/count descriptions in these notes; tracked-hand reach, headset comfort and performance remain to be checked.

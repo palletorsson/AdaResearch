@@ -1,5 +1,6 @@
 # PyramidLong.gd - Long pyramid with rectangular base (6 faces total)
 extends Node3D
+const SolidFinish: GDScript = preload("res://commons/primitives/shared/solid_primitive_finish.gd")
 
 # @identity
 # essence: tall pyramid(rectangular base, height=2.8) — a stretched variant that teaches aspect ratio
@@ -50,8 +51,14 @@ var base_width: float = 0.8      # Width (X axis)
 var base_length: float = 0.8     # Length (Z axis) - square base
 
 var _mesh_instance: MeshInstance3D
+var pedestal_height: float = 0.0
+var _pedestal: StaticBody3D
 
 func _ready():
+	var config: Dictionary = {}
+	for key in ["stature", "apex_stance", "pedestal_height", "solid_color"]:
+		if has_meta("config_" + key): config[key] = get_meta("config_" + key)
+	apply_grid_config(config)
 	create_pyramid()
 
 func create_pyramid():
@@ -68,9 +75,27 @@ func create_pyramid():
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = st.commit()
 	mesh_instance.name = "PyramidLong"
+	mesh_instance.position.y = pedestal_height
 	apply_queer_material(mesh_instance, base_color)
 	add_child(mesh_instance)
 	_mesh_instance = mesh_instance
+	if pedestal_height > 0.0:
+		_pedestal = StaticBody3D.new()
+		_pedestal.name = "Pedestal"
+		_pedestal.position.y = pedestal_height * 0.5
+		var box := BoxMesh.new()
+		box.size = Vector3(base_width, pedestal_height, base_length)
+		var body_mesh := MeshInstance3D.new()
+		body_mesh.name = "PedestalMesh"
+		body_mesh.mesh = box
+		body_mesh.material_override = mesh_instance.material_override
+		_pedestal.add_child(body_mesh)
+		var shape := BoxShape3D.new()
+		shape.size = box.size
+		var collision := CollisionShape3D.new()
+		collision.shape = shape
+		_pedestal.add_child(collision)
+		add_child(_pedestal)
 
 func create_pyramid_vertices() -> Array:
 	var vertices = []
@@ -173,11 +198,20 @@ func apply_queer_material(mesh_instance: MeshInstance3D, color: Color):
 		standard_material.emission_enabled = true
 		standard_material.emission = color * 0.3
 		mesh_instance.material_override = standard_material
+	mesh_instance.material_override = SolidFinish.for_instance(self, mesh_instance.material_override)
 
 ## Grid config hook. Only rebuilds when a value actually changed AND _ready has
 ## already built once — an unguarded rebuild here breaks shipped placements.
 func apply_grid_config(config_data: Dictionary) -> void:
 	var rebuild: bool = false
+	if config_data.has("pedestal_height") and str(config_data["pedestal_height"]).is_valid_float():
+		var height: float = maxf(0.0, float(config_data["pedestal_height"]))
+		if not is_equal_approx(height, pedestal_height):
+			pedestal_height = height
+			rebuild = true
+	if config_data.has("solid_color"):
+		set_meta("config_solid_color", config_data["solid_color"])
+		rebuild = true
 	if config_data.has("stature"):
 		var wanted: String = str(config_data["stature"])
 		if wanted != stature:
@@ -192,6 +226,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		_rebuild_pyramid()
 
 func _rebuild_pyramid() -> void:
+	if is_instance_valid(_pedestal):
+		if _pedestal.get_parent() == self: remove_child(_pedestal)
+		_pedestal.queue_free()
+		_pedestal = null
 	if _mesh_instance:
 		if _mesh_instance.get_parent() == self:
 			remove_child(_mesh_instance)
@@ -201,15 +239,13 @@ func _rebuild_pyramid() -> void:
 
 func set_base_color(color: Color):
 	base_color = color
-	var mesh_instance = get_child(0) as MeshInstance3D
-	if mesh_instance:
-		apply_queer_material(mesh_instance, base_color)
+	if _mesh_instance:
+		apply_queer_material(_mesh_instance, base_color)
+		if is_instance_valid(_pedestal):
+			(_pedestal.get_node("PedestalMesh") as MeshInstance3D).material_override = _mesh_instance.material_override
 
 func set_pyramid_size(height: float, width: float, length: float):
 	pyramid_height = height
 	base_width = width
 	base_length = length
-	# Remove old pyramid and create new one
-	if get_child_count() > 0:
-		get_child(0).queue_free()
-	call_deferred("create_pyramid")
+	call_deferred("_rebuild_pyramid")

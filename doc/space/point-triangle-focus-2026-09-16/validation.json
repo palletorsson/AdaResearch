@@ -1,0 +1,47 @@
+{
+  "date": "2026-09-16",
+  "passed": true,
+  "checks": {
+    "archive_hashes_intact": true,
+    "all_role_data_unchanged": true,
+    "all_layers_unchanged": true,
+    "only_map_change_is_count": true,
+    "book_matches_primary_order": true,
+    "no_blank_artifact_markers": true,
+    "placement_count_matches": true,
+    "all_previous_cards_retained": true,
+    "historical_bodies_retained": true,
+    "eye_shot_unchanged": true,
+    "final.md_fences_balanced": true,
+    "intent.md_fences_balanced": true,
+    "blurb.md_fences_balanced": true,
+    "summary.md_fences_balanced": true,
+    "artifacts.md_fences_balanced": true,
+    "tutorial.md_fences_balanced": true,
+    "technical.md_fences_balanced": true,
+    "critical.md_fences_balanced": true,
+    "detours.md_fences_balanced": true,
+    "encounter-reference.md_fences_balanced": true,
+    "local_links_resolve": true,
+    "every_secondary_has_return_visit": true,
+    "primary_probe_passed": true,
+    "actual_fan_comparison_passed": true
+  },
+  "missing_links": [],
+  "local_links_checked": 60,
+  "book_words_before": 1648,
+  "book_words_after": 1001,
+  "primary_order": [
+    "triangle_line_puzzle",
+    "draw_triangle_faces"
+  ],
+  "cards_by_role": {
+    "primary": 2,
+    "secondary": 12,
+    "decoration": 1
+  },
+  "metadata_count_before": 17.0,
+  "metadata_count_after": 15.0,
+  "runtime_scope": "Actual endpoint and pointer events, supplied held positions, rotated translated scenes; headset usability unverified.",
+  "fan_scope": "One real scene, pointer-button restart, timed placement and emitted meshes with supplied hand positions; no human/headset trial. Area sums include overlaps, not union area."
+}

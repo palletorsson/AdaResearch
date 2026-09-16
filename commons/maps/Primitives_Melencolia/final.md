@@ -1,88 +1,81 @@
-She has every tool in the chapter and she is not using any of them.
-
-Dürer cut the engraving in 1514, and it has been argued over ever since, because everything in it is exact and nothing in it is explained. A winged figure sits with a compass in her hand and does not draw. Around her, on the floor and the wall and the table: a polyhedron, a sphere, a magic square, a ladder, an hourglass, a bell, a pair of scales. Read that list again. It is this chapter. Two points and a distance, the round thing made of sides, the lattice with numbers on it, the ordered walk, sampled time, and the corner cut into a solid. She has all of it, and she is sitting down.
-
-<!-- @durer_scene -->
-
-Here it is, built. Walk round it. The polyhedron at her feet is a cube with two opposite corners sliced off, and count it: twelve corners, eighteen edges, eight faces, and twelve minus eighteen plus eight is two, the number the chapter has been giving you since the corner room, once more, on the last solid you will meet. The compass is the second room. The hourglass is the trace, with sand for samples. The square on the wall is the grid with something written in every cell. This is not a picture of melancholy. It is a picture of mastery, and mastery is what she is melancholy *about*.
-
-<!-- @ -->
-
-## Every line is 34
-
-```gdscript
-func durer_square() -> Array:
-    return [[16, 3, 2, 13],
-            [5, 10, 11, 8],
-            [9, 6, 7, 12],
-            [4, 15, 14, 1]]
-```
-
-Sixteen lines through this square, and every one of them sums to 34. Four rows. Four columns. Both diagonals. The four corners. The centre four. Each of the four quarters. The bottom row reads four, fifteen, fourteen, one, and the middle two are the year it was cut. It uses every number from one to sixteen exactly once, so nothing is left over and nothing is missing.
-
-It is for nothing. You cannot build with it, measure with it, or walk on it. It is finite, exact and complete, and it does not do anything, and the mind that made it wanted it anyway, and so does yours, and that wanting is the second thing this room is about.
-
-The first is that you cannot leave.
-
-<!-- @ -->
-
-## Stuck
-
-```gdscript
-func go_anywhere(from: Vector3, by: Transform3D) -> Vector3:
-    return by * from
-```
-
-Every transformation of a position is a position. Read the function's last word: it returns a `Vector3`, and there is no function anywhere in this machine that takes a position and returns somewhere that is not one. Move, turn, scale, cut, fold, snap, sample, round: you have done all of it in this chapter, and every one of those operations lands you back in three floats. The universe you have built is closed under everything you can do in it. The polyhedron at her feet is the same cube you have been standing inside since the first room, with two corners gone.
-
-That is what the tools are for, and it is also what they are. A compass can draw any circle and cannot draw its way out of the plane. Whether you can leave is not a question the room will answer. Dürer did not, and he had the compass in his hand.
-
-<!-- @code_display -->
-
-The axioms, on a stand, in the room where they run out. Everything on that screen is true, and it is all there is, and reading it here is what the intent of this map calls making the system legible at the moment of its exhaustion. Nothing on it is wrong. That is the problem.
-
-<!-- @bigframe -->
-
-A frame, hollow, staging the whole scene as a picture. This is the moment the abstract becomes something to be *looked at*, and it is the hinge of the room. Once you are looking at geometry instead of using it, it has become an image, and an image can be wanted the way the square is wanted, for itself.
-
-<!-- @ -->
-
-## Refinement continues
+What keeps you looking after you know the form?
 
 <!-- @pyramid -->
 
-Four of the same pyramid, at four sizes. Half, four-fifths, one, two and a half. The same solid every time: five corners, eight edges, five faces, two. Scale is the one thing this chapter never touched, and here it is, changing nothing, four times.
+Four pale blue pyramids mark the corners of a raised square. Before going closer, try to hold the arrangement in mind. Where would you put a fifth?
+
+Walk around the court. One pyramid passes in front of another. A gap opens where two outlines seemed to meet. The objects have stayed still; your movement changes the picture. You have met this distinction before, but now the picture has become a place with room around it.
+
+Take the side ramp onto the platform. The four corners repeat a form you can describe: a square base, four triangular sides, one apex. Five vertices, eight edges, five faces. Knowing those counts helps you recognise the family. It leaves you free to notice something else.
 
 <!-- @pyramidlong -->
 
-And one stretched. Still five corners. Still two.
+The fifth pyramid is pink, taller, and stands in the centre on a matching block. Look back at a corner. Does the centre seem to organise the others, or have you made it important because it rises above them?
 
-<!-- @prism_block -->
+Its base is still square. Its apex is still a single point above it. The tall pyramid's source collects the base vertices and then adds that point:
 
-The triangular prism, for when a cube is too symmetrical to show the difference. Five faces, six corners, nine edges. Two.
+```gdscript
+vertices.append_array(ring)
+vertices.append(_apex_position(ring))
+```
 
-<!-- @diamondtoruscollection -->
+The same connections can carry a different height. In this version the pyramid's base is 0.8 metres wide and its apex rises 2.8 metres above that base. The pink block lifts the whole pyramid another 0.8 metres above the court. The script triangulates the square base into two faces for rendering; together with the four sides, that makes six triangles. We can explain how it is built without settling what its height does to the arrangement.
 
-A torus with diamonds hung from it, the chapter's vocabulary turned into a chandelier. Every primitive of the sequence, made ornamental. This is what happens when the tools are mastered and the question of what to build has not been answered: you make the same forms again, larger and smaller and stretched and decorated, and the count comes out two every time, and it is beautiful, and it is not building. It is the doodle of someone who could build anything.
+<!-- @cube_scene -->
 
-<!-- @ -->
+Four ochre cubes sit around the spire in a cross. Follow that cross with your eyes, then look toward the corner pyramids. A few familiar solids are becoming a court, a monument, perhaps a model of somewhere you would like to go. Which reading arrived first?
 
-## Build anyway
+The arrangement returns to the room's earlier floor plan. Its reference belongs to an anonymous sixteenth-century manuscript of geometric and perspective studies: solids drawn, combined and staged until a study begins to suggest an unfamiliar architecture.[^solids] Here the forms stand on a platform made from the same cube vocabulary as the museum floor. The support is already part of the picture.
+
+Imagine one cube placed outside the cross. Its construction would be unchanged; its relation to the court would be different. You do not need to build every possibility before leaving this one.
 
 <!-- @snap_pyramid_puzzle -->
 
-One thing in this room asks you to make something. Five points, and joining them forms a pyramid, and the pyramid, when it closes, spawns a prism you can stand on. It is the last act of the chapter and it is the only one that is an act.
+Beside the front of the court, five snap points offer a small construction. Connect four into a base cycle and join each to the fifth. Watch what the puzzle accepts.
 
-And read the detector, because it is honest about itself. It checks that the four base points make a cycle and that the fifth sits above them. It never checks that the base is square. Push the four points into a rhombus and the machine will accept it, name it a square pyramid, and build you the prism all the same. The tool has a limit and the limit is right there, and the prism it spawns is walkable anyway.
-
-Master the tools. Recognise their limits. Build anyway. That is the room's sentence, and the puzzle is the sentence with your hands in it.
+Its detector recognises those connections. It does not measure whether the base is square. Keep that distinction close: the program can complete its test while your question about the form remains open. The court was here before the test succeeded. Its place in the room has another history.
 
 <!-- @ -->
 
-## Might or might not
+## The tools are still here
 
-Two things are true at once here, and the room will not choose between them, because she did not.
+<!-- @durer_scene -->
 
-You are inside a mathematical universe that closes over everything you can do, and every exit you try returns three floats. And the abstract things in it, the square that sums for no reason, the solid that counts to two, are wanted for themselves, by a mind that has nothing to use them for. Whether that wanting is the way out or the thing itself, escape or truth, is the question the engraving has kept open for five hundred years, and this chapter ends inside it, sitting down, tools in hand.
+Follow the raised connection and the next ramp to the separate platform. The tableau gathers objects after Dürer's *Melencolia I*: a polyhedron, a sphere, a compass, a ladder, a numbered square. Find something you now know how to begin making. Then find something in the arrangement that this knowledge has not explained.
 
-The door behind you works. The next chapter is transformation, which is the one thing this chapter never did: it moves. Whether moving is leaving, you will have to walk through and see.
+You have spent a chapter assembling a vocabulary. Here it returns as a scene. The compass belongs among the tools of geometry, but lying beside the other objects it also asks about work: begun, interrupted, waiting. These are possibilities for reading the tableau, not a solution hidden inside it.[^durer]
+
+Go close to the numbered square. Choose a row and add it before reading further.
+
+```text
+16   3   2  13
+ 5  10  11   8
+ 9   6   7  12
+ 4  15  14   1
+```
+
+Try a column. Each row and column, and the two main diagonals, sums to 34. The 15 and 14 in the bottom row recall 1514, the year of the engraving. The numbers work.
+
+Stay a little longer. Has that correct answer finished what you came to look at?
+
+Perhaps the pleasure of the arrangement is enough for now. Perhaps its precision makes the interruption more palpable: these instruments can still measure, while the next action remains uncertain. We can read melancholy here without making geometry useless. We can also want the scene for the questions it keeps available.
+
+## Enough to continue
+
+The previous room left us approaching a curve with finite pieces. An exact mathematical description and a rendered body make different promises. More triangles can improve an approximation; they cannot decide what we should want to make with it.
+
+Dürer's engraving is itself a made thing. An accomplished image gives us an encounter with unfinished work. That matters here. Looking, arranging, imagining and taking pleasure in a form can keep an investigation moving while its purpose is unsettled. The aesthetic attention is already doing work.
+
+A few tools, and more possible constructions than we have time to pursue.[^sublime]
+
+Look back toward the five pyramids. They have become another picture from here. The objects stayed still while your viewpoint changed. In transformation, you can watch from one place as objects move, turn and scale. Choose one relation from this court—the repeated corners, the tall centre, the distance between the platforms—and ask what would survive such a change.
+
+We leave with enough to continue. There is still something here we have not finished looking at.
+
+<!-- @ -->
+
+[^solids]: Anonymous, sixteenth-century geometric and perspective manuscript, Herzog August Bibliothek, Cod. Guelf. 74.1 Aug. 2°. See [*Solid Objects*](https://publicdomainreview.org/collection/solid-objects/) and the [image selected for this room](https://pdimagearchive.org/images/4577a16c-d0e9-43d6-96fc-f125c47c6afe/). The court follows the drawing's blue corner spires, pink centre and ochre blocks within the earlier AdaResearch floor arrangement. Its dimensions are adapted for the museum. The manuscript is not attributed here to Dürer; its additional compound solids remain references for later studies.
+
+[^durer]: Albrecht Dürer, *Melencolia I* (1514), [Metropolitan Museum of Art](https://www.metmuseum.org/art/collection/search/360018). The museum describes several interpretations rather than a settled key. AdaResearch stages selected objects, not a complete or geometrically exact reconstruction of the engraving. Reading aesthetic attention as a way to continue is this book's proposal.
+
+[^sublime]: Kant's [*Critique of Judgement*](https://www.gutenberg.org/files/48433/48433-h/48433-h.htm), §§25–27, discusses the mathematical sublime through the distinction between apprehending parts and comprehending a whole; §49 describes aesthetic ideas as occasioning thought beyond what a determinate concept can exhaust. These offer a later vocabulary for this room's investigation: how a finite arrangement can keep attention moving among possibilities we have not yet specified.

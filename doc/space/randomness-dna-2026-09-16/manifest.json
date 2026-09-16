@@ -1,0 +1,92 @@
+[
+  {
+    "map": "Random_Definition",
+    "size": {
+      "width": 13,
+      "depth": 20,
+      "max_height": 6
+    },
+    "hero": "seed_replay_demo",
+    "placements": [
+      {
+        "x": 3,
+        "z": 4,
+        "token": "prng_crank_machine:180:0.62",
+        "lookup": "prng_crank_machine"
+      },
+      {
+        "x": 10,
+        "z": 4,
+        "token": "slot_machine:180",
+        "lookup": "slot_machine"
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "token": "seed_replay_demo:180#comparison:replicas#stand:table#controls:compact#control_front:1.0",
+        "lookup": "seed_replay_demo"
+      },
+      {
+        "x": 10,
+        "z": 8,
+        "token": "catalyst_pickup:180#sequence_name:randomness#label_text:RANDOMNESS CATALYST#orb_color:0.95,0.55,0.20#accent_color:0.95,0.55,0.20",
+        "lookup": "catalyst_pickup"
+      },
+      {
+        "x": 6,
+        "z": 11,
+        "token": "textile_comparison#controls:compact#control_front:-1.7#control_facing:-z",
+        "lookup": "textile_comparison"
+      },
+      {
+        "x": 3,
+        "z": 16,
+        "token": "trng_vs_prng:180:1.12:0.1",
+        "lookup": "trng_vs_prng"
+      },
+      {
+        "x": 9,
+        "z": 16,
+        "token": "random_number_book_page_1955:0:2.7:0.8",
+        "lookup": "random_number_book_page_1955"
+      }
+    ],
+    "count": 7
+  },
+  {
+    "map": "Random_Mushrooms",
+    "size": {
+      "width": 17,
+      "depth": 25,
+      "max_height": 6
+    },
+    "hero": "mushrooms",
+    "placements": [
+      {
+        "x": 13,
+        "z": 4,
+        "token": "silhouette_arrivals#controls:compact#control_front:-1.65#control_facing:-z",
+        "lookup": "silhouette_arrivals"
+      },
+      {
+        "x": 3,
+        "z": 5,
+        "token": "bubbles_random:180:0.85:0.25#plinth:0.85",
+        "lookup": "bubbles_random"
+      },
+      {
+        "x": 8,
+        "z": 11,
+        "token": "mushrooms:180#stand:specimen#size:6#edible:some#glass_width:8#glass_depth:8#glass_height:4.5#glass_title:POPULATION / DIFFERENCE#glass_entry:4#controls:compact#control_front:5.1",
+        "lookup": "mushrooms"
+      },
+      {
+        "x": 8,
+        "z": 20,
+        "token": "couture_comparison#controls:compact#control_front:-1.7#control_facing:-z",
+        "lookup": "couture_comparison"
+      }
+    ],
+    "count": 4
+  }
+]

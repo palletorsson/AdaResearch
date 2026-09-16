@@ -1,0 +1,304 @@
+{
+  "map": "Point_Triangle_Context",
+  "cards": [
+    {
+      "token": "triangle_line_puzzle",
+      "row": 2,
+      "col": 8,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "primary",
+      "group": "boundary-and-face",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "draw_triangle_faces",
+      "row": 13,
+      "col": 6,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "primary",
+      "group": "boundary-and-face",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "pythagorean_triangle_angles",
+      "row": 15,
+      "col": 10,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "silhouette_gate",
+      "row": 20,
+      "col": 10,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "pink_triangle",
+      "row": 7,
+      "col": 11,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "quad_line_puzzle",
+      "row": 26,
+      "col": 10,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "quad",
+      "row": 20,
+      "col": 2,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "folded_strip",
+      "row": 7,
+      "col": 2,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "triangleprofiles",
+      "row": 7,
+      "col": 6,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "science_screen",
+      "row": 17,
+      "col": 2,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "fetish_portal",
+      "row": 22,
+      "col": 6,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "interactivetriangle",
+      "row": 16,
+      "col": 2,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "triangle",
+      "row": 12,
+      "col": 11,
+      "count": 1,
+      "shot": true,
+      "shot_src": "multi",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "wireframe_threshold",
+      "row": 20,
+      "col": 6,
+      "count": 1,
+      "shot": false,
+      "shot_src": "",
+      "role": "secondary",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    },
+    {
+      "token": "3t",
+      "row": 24,
+      "col": 6,
+      "count": 1,
+      "shot": true,
+      "shot_src": "catalog",
+      "role": "decoration",
+      "group": "",
+      "ruled": true,
+      "from_book": false
+    }
+  ],
+  "groups": [
+    {
+      "id": "boundary-and-face",
+      "title": "Close a boundary, then inspect its fill",
+      "role": "primary",
+      "count": 2
+    }
+  ],
+  "notes": [],
+  "layout": {
+    "primary": [
+      {
+        "kind": "group",
+        "id": "boundary-and-face"
+      }
+    ],
+    "secondary": [
+      {
+        "kind": "card",
+        "token": "pythagorean_triangle_angles"
+      },
+      {
+        "kind": "card",
+        "token": "silhouette_gate"
+      },
+      {
+        "kind": "card",
+        "token": "pink_triangle"
+      },
+      {
+        "kind": "card",
+        "token": "quad_line_puzzle"
+      },
+      {
+        "kind": "card",
+        "token": "quad"
+      },
+      {
+        "kind": "card",
+        "token": "folded_strip"
+      },
+      {
+        "kind": "card",
+        "token": "triangleprofiles"
+      },
+      {
+        "kind": "card",
+        "token": "science_screen"
+      },
+      {
+        "kind": "card",
+        "token": "fetish_portal"
+      },
+      {
+        "kind": "card",
+        "token": "interactivetriangle"
+      },
+      {
+        "kind": "card",
+        "token": "triangle"
+      },
+      {
+        "kind": "card",
+        "token": "wireframe_threshold"
+      }
+    ],
+    "decoration": [
+      {
+        "kind": "card",
+        "token": "3t"
+      }
+    ]
+  },
+  "seq": "primitives",
+  "positions": {
+    "primary": {
+      "interactivetriangle": [
+        214.0,
+        74.0
+      ],
+      "draw_triangle_faces": [
+        336.0,
+        78.0
+      ],
+      "triangle": [
+        454.0,
+        81.0
+      ],
+      "pythagorean_triangle_angles": [
+        565.0,
+        83.0
+      ],
+      "quad_line_puzzle": [
+        1028.0,
+        80.0
+      ],
+      "silhouette_gate": [
+        792.0,
+        82.0
+      ],
+      "pink_triangle": [
+        911.0,
+        81.0
+      ],
+      "right_triangle_lines": [
+        679.0,
+        81.0
+      ],
+      "quad": [
+        1138.0,
+        76.0
+      ],
+      "triangleprofiles": [
+        1278.0,
+        86.0
+      ]
+    }
+  },
+  "ok": true
+}

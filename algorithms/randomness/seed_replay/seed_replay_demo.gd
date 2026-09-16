@@ -89,6 +89,36 @@ var _rng := RandomNumberGenerator.new()
 var _pick := RandomNumberGenerator.new()
 var _extra_on: bool = false
 var _built: bool = false
+var _syncing_seed_slider: bool = false
+var wall_display: bool = false
+var _number_display: Node3D
+
+## Raw prefix for inspection; its independent generator never consumes exhibit draws.
+func raw_prefix(column: int, count: int = 24) -> PackedFloat32Array:
+	var source := RandomNumberGenerator.new()
+	source.seed = int(_column_seeds()[column])
+	if _extra_on and column == _columns.size()-1:
+		for i in range(extra_draws): source.randf()
+	var values := PackedFloat32Array()
+	for i in range(count): values.append(source.randf())
+	return values
+
+func _draw_number_strips() -> void:
+	if not wall_display: return
+	if is_instance_valid(_number_display):
+		remove_child(_number_display); _number_display.queue_free()
+	_number_display = Node3D.new(); add_child(_number_display)
+	var stage = load("res://commons/artifacts/randomness_space/museum_exhibit_stage.gd")
+	for c in range(_columns.size()):
+		var values := raw_prefix(c)
+		var x0: float = -1.22 + c * 1.275
+		stage.box(_number_display,Vector3(x0+0.56,1.74,-0.10),Vector3(1.25,1.3,0.06),Color(0.045,0.065,0.08))
+		stage.box(_number_display,Vector3(x0+0.56,2.64,0),Vector3(1.2,0.38,0.035),Color(0.035,0.06,0.08))
+		for i in range(values.size()):
+			var h: float = 0.025 + values[i]*0.24
+			stage.box(_number_display,Vector3(x0+i*0.047,2.5+h*0.5,0.04),Vector3(0.033,h,0.025),Color(0.2,0.85,0.72))
+		var label: Label3D = stage.label(_number_display,"DRAWS 1–24" if not (_extra_on and c==_columns.size()-1) else "DRAWS %d–%d" % [extra_draws+1,extra_draws+24],Vector3(x0+0.55,2.89,0.06))
+		label.font_size=22; label.pixel_size=0.0015
 
 
 func _ready() -> void:
@@ -105,6 +135,7 @@ func _ready() -> void:
 	_build_label()
 	_build_panel()
 	_regenerate()
+	_sync_seed_slider()
 	_built = true
 
 var _lift: float = 0.0
@@ -165,6 +196,7 @@ func _rebuild_all() -> void:
 	_build_label()
 	_build_panel()
 	_regenerate()
+	_sync_seed_slider()
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -258,7 +290,7 @@ func _build_grid() -> void:
 			cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			cap.position = Vector3(
 				origin_x + (col_w - cube_size) * 0.5,
-				origin_y - 0.05,
+				origin_y - (0.11 if wall_display else 0.05),
 				0
 			)
 			add_child(cap)
@@ -297,6 +329,7 @@ func _regenerate() -> void:
 			(cap as Label3D).text = tag
 	if _seed_label:
 		_seed_label.text = _headline()
+	_draw_number_strips()
 	_note_action(_last_action)
 
 
@@ -313,6 +346,7 @@ func _rebuild_columns() -> void:
 	_columns.clear()
 	_build_grid()
 	_regenerate()
+	_sync_seed_slider()
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -323,11 +357,11 @@ func _build_label() -> void:
 	_seed_label = Label3D.new()
 	_seed_label.name = "SeedLabel"
 	_seed_label.text = "SEED: %d" % _current_seed
-	_seed_label.pixel_size = 0.002
+	_seed_label.pixel_size = 0.003 if wall_display else 0.002
 	_seed_label.font_size = 18
 	_seed_label.modulate = Color(0.9, 0.85, 0.5)
 	_seed_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_seed_label.position = Vector3(0, 0.68 + _lift, 0)
+	_seed_label.position = Vector3(0, 3.13 if wall_display else 0.68 + _lift, 0)
 	add_child(_seed_label)
 	# the visual pass of 12 September: the active action and seed on a cased line at the
 	# panel's foot, where the hand is — the title above the grids is large, the panel's own
@@ -335,11 +369,12 @@ func _build_label() -> void:
 	var plate := MeshInstance3D.new()
 	plate.name = "ActionPlate"
 	var pbox := BoxMesh.new()
-	pbox.size = Vector3(0.50, 0.075, 0.01)
+	pbox.size = Vector3(0.60, 0.085, 0.01)
 	plate.mesh = pbox
 	var pmat := StandardMaterial3D.new()
 	pmat.albedo_color = Color(0.12, 0.12, 0.14)
 	pmat.roughness = 0.85
+	pmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	plate.material_override = pmat
 	plate.position = Vector3(0, 0.035 + _lift, 0.30)
 	plate.rotation_degrees = Vector3(-55, 0, 0)
@@ -347,7 +382,7 @@ func _build_label() -> void:
 	_action_line = Label3D.new()
 	_action_line.name = "ActionLine"
 	_action_line.pixel_size = 0.0013
-	_action_line.font_size = 15
+	_action_line.font_size = 20
 	_action_line.outline_size = 0
 	_action_line.modulate = Color(0.86, 0.94, 1.0)
 	_action_line.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -406,6 +441,8 @@ func _build_panel() -> void:
 	# Seed slider (Param_0)
 	var seed_slider: Node = panel.find_child("Param_0", true, false)
 	if seed_slider and seed_slider.has_signal("slider_moved"):
+		seed_slider.set_range(0.0, 999.0)
+		seed_slider.set("decimal_places", 0)
 		seed_slider.slider_moved.connect(_on_seed_slider)
 
 	# Replay button (Btn_0)
@@ -431,21 +468,30 @@ func _build_panel() -> void:
 
 
 func _on_seed_slider(_value: float) -> void:
-	var slider: Node = get_node_or_null("SEED_REPLAY/Param_0")
+	if _syncing_seed_slider:
+		return
+	var slider: Node = get_node_or_null("Panel/Param_0")
 	if slider and slider.has_method("get_normalized_value"):
-		var norm: float = slider.get_normalized_value()
-		_current_seed = int(norm * 999.0)
+		var norm: float = clampf(slider.get_normalized_value(), 0.0, 1.0)
+		_current_seed = roundi(norm * 999.0)
 		_regenerate()
+		_note_action("SLIDER")
+
+
+## Keep a programmatic seed update from being mistaken for a visitor's gesture.
+func _sync_seed_slider() -> void:
+	var slider: Node = get_node_or_null("Panel/Param_0")
+	if slider and slider.has_method("set_normalized_value"):
+		_syncing_seed_slider = true
+		slider.set_normalized_value(clampf(float(_current_seed) / 999.0, 0.0, 1.0))
+		_syncing_seed_slider = false
 
 
 func _randomize_seed() -> void:
 	_current_seed = _pick.randi() % 1000
 	_regenerate()
 	_note_action("RANDOM")
-	# Update slider position to match (the panel is named "Panel" since 2026-09-10; find the slider by name)
-	var slider: Node = find_child("Param_0", true, false)
-	if slider and slider.has_method("set_normalized_value"):
-		slider.set_normalized_value(float(_current_seed) / 999.0)
+	_sync_seed_slider()
 
 
 ## The +1 DRAW button. Public so a probe can press what the visitor presses.
@@ -461,6 +507,23 @@ func current_seed() -> int:
 
 func extra_on() -> bool:
 	return _extra_on
+
+
+## Small, explicit visit state. The portal can unload the scene completely
+## while retaining the visitor's experiment and RANDOM's next local draw.
+func capture_museum_state() -> Dictionary:
+	return {"seed": _current_seed, "extra_on": _extra_on,
+		"pick_state": str(_pick.state), "last_action": _last_action}
+
+
+func restore_museum_state(saved: Dictionary) -> void:
+	_current_seed = int(saved.get("seed", seed_value))
+	_extra_on = bool(saved.get("extra_on", false))
+	if saved.has("pick_state"):
+		_pick.state = int(saved.pick_state)
+	_regenerate()
+	_sync_seed_slider()
+	_note_action(String(saved.get("last_action", "RETURN")))
 
 func column_count() -> int:
 	return _columns.size()
@@ -491,19 +554,30 @@ func _contrast_panel(p: Node3D) -> void:
 			continue
 		var sm: StandardMaterial3D = mat
 		var lum: float = (sm.albedo_color.r + sm.albedo_color.g + sm.albedo_color.b) / 3.0
-		if lum < 0.75 or sm.albedo_texture != null:
+		if sm.albedo_texture != null:
+			# Keep the baked black lettering on its pale tag; room light must not wash it out.
+			var tag_mat: StandardMaterial3D = sm.duplicate()
+			tag_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			m.material_override = tag_mat
+			continue
+		if lum < 0.75 and not m.has_meta("seed_dark_plate"):
 			continue
 		var dm: StandardMaterial3D = sm.duplicate()
 		dm.albedo_color = Color(0.14, 0.14, 0.16, 1.0)
 		dm.roughness = 0.85
 		dm.emission_energy_multiplier = 0.0
+		dm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		m.material_override = dm
+		m.set_meta("seed_dark_plate", true)
 	for l in p.find_children("*", "Label3D", true, false):
 		var lb: Label3D = l
 		lb.modulate = Color(0.95, 0.96, 1.0)
 		lb.outline_size = 6
 		lb.outline_modulate = Color(0, 0, 0, 1)
-		lb.font_size = int(round(lb.font_size * 1.35))
+		if not lb.has_meta("seed_contrast_font"):
+			lb.set_meta("seed_contrast_font", lb.font_size)
+		# Retain the previous two-pass size without multiplying it on later passes.
+		lb.font_size = roundi(roundf(float(lb.get_meta("seed_contrast_font")) * 1.35) * 1.35)
 
 func replay() -> void:
 	_regenerate()
@@ -521,6 +595,10 @@ func apply_grid_config(config: Dictionary) -> void:
 		return
 
 	var changed: bool = false
+	if config.has("display") and str(config["display"]) == "wall" and not wall_display:
+		wall_display = true
+		cube_size = 0.14; cube_gap = 0.015
+		changed = true
 
 	if config.has("comparison"):
 		var c: String = str(config["comparison"]).strip_edges().to_lower()

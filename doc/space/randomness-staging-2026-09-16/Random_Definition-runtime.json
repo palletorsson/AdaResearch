@@ -1,0 +1,140 @@
+{
+  "artifacts": [
+    {
+      "bounds": {
+        "max": [
+          2.25599980354309,
+          1.62600004673004,
+          4.17000007629395
+        ],
+        "meshes": 62,
+        "min": [
+          1.74400019645691,
+          0.0000000335276126861572,
+          3.71199989318848
+        ]
+      },
+      "lookup": "prng_crank_machine",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/PrngCrankMachine",
+      "position": "(2.0, 0.62, 4.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          8.28000068664551,
+          1.42900002002716,
+          4.1725001335144
+        ],
+        "meshes": 49,
+        "min": [
+          7.71999931335449,
+          0.0,
+          3.7020001411438
+        ]
+      },
+      "lookup": "slot_machine",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/SlotMachine",
+      "position": "(8.0, 0.0, 4.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          5.34000015258789,
+          1.46000003814697,
+          6.34000015258789
+        ],
+        "meshes": 157,
+        "min": [
+          4.65999984741211,
+          0.0,
+          5.65999984741211
+        ]
+      },
+      "lookup": "seed_replay_demo",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/SeedReplayDemo",
+      "position": "(5.0, 0.0, 6.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          8.19799995422363,
+          0.902276039123535,
+          7.19799995422363
+        ],
+        "meshes": 3,
+        "min": [
+          7.80200004577637,
+          0.0,
+          6.80200004577637
+        ]
+      },
+      "lookup": "catalyst_pickup",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/CatalystPickup",
+      "position": "(8.0, 0.0, 7.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          3.11999988555908,
+          1.92000007629395,
+          10.1930704116821
+        ],
+        "meshes": 25,
+        "min": [
+          0.900000095367432,
+          0.123951569199562,
+          9.80692958831787
+        ]
+      },
+      "lookup": "trng_vs_prng",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/TrngVsPrng",
+      "position": "(2.0, 1.12, 10.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          8.80000019073486,
+          2.70000004768372,
+          10.0
+        ],
+        "meshes": 1,
+        "min": [
+          7.19999980926514,
+          0.299999952316284,
+          10.0
+        ]
+      },
+      "lookup": "random_number_book_page_1955",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/randomNumberBookPage1955",
+      "position": "(8.0, 1.5, 10.0)",
+      "yaw": 0.0
+    }
+  ],
+  "failures": [],
+  "floor_checks": [
+    {
+      "cell": "(5.0, 0.0)",
+      "supported": true
+    },
+    {
+      "cell": "(5.0, 12.0)",
+      "supported": true
+    },
+    {
+      "cell": "(1.0, 6.0)",
+      "supported": true
+    },
+    {
+      "cell": "(9.0, 6.0)",
+      "supported": true
+    }
+  ],
+  "headset_verified": false,
+  "map": "Random_Definition",
+  "origin": "(0.5, 0.0, 0.5)"
+}

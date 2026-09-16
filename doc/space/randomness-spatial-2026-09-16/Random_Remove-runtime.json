@@ -1,0 +1,190 @@
+{
+  "artifacts": [
+    {
+      "bounds": {
+        "max": [
+          9.56001281738281,
+          1.33910286426544,
+          5.69999980926514
+        ],
+        "meshes": 111,
+        "min": [
+          7.30000019073486,
+          0.0,
+          3.22000002861023
+        ]
+      },
+      "lookup": "remove_random",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RandomRemovalAlgorithm",
+      "position": "(8.0, 0.0, 5.0)",
+      "yaw": -179.999984741211
+    },
+    {
+      "bounds": {
+        "max": [
+          13.5450000762939,
+          4.54500007629395,
+          23.6749992370605
+        ],
+        "meshes": 46,
+        "min": [
+          2.45499992370605,
+          -0.600000023841858,
+          9.36999988555908
+        ]
+      },
+      "lookup": "random_removal_arena",
+      "path": "/root/EndlessMuseum/Seg0_soane-cabinet-vista/RemovalArena",
+      "position": "(8.0, 0.0, 17.0)",
+      "yaw": 0.0
+    }
+  ],
+  "checks": [
+    {
+      "check": "remove_random/Btn_0 reachable from one mark: 0.616 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_1 reachable from one mark: 0.573 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_2 reachable from one mark: 0.573 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_2 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_3 reachable from one mark: 0.616 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_3 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_4 reachable from one mark: 0.563 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_4 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_5 reachable from one mark: 0.540 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_5 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_6 reachable from one mark: 0.563 m",
+      "passed": true
+    },
+    {
+      "check": "remove_random/Btn_6 hand height",
+      "passed": true
+    },
+    {
+      "check": "remove_random has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_0 reachable from one mark: 0.553 m",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_0 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_1 reachable from one mark: 0.553 m",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena/Btn_1 hand height",
+      "passed": true
+    },
+    {
+      "check": "random_removal_arena has touch buttons on its compact console",
+      "passed": true
+    },
+    {
+      "check": "remove_random: console survives every button action",
+      "passed": true
+    },
+    {
+      "check": "remove_random: controls stay at hand height after rebuilds",
+      "passed": true
+    },
+    {
+      "check": "remove_random: no missing or duplicated buttons after actions",
+      "passed": true
+    },
+    {
+      "check": "Arena cells restored to museum floor height",
+      "passed": true
+    },
+    {
+      "check": "Entering removes one cell AND its collider",
+      "passed": true
+    },
+    {
+      "check": "Walking requests a second removal",
+      "passed": true
+    },
+    {
+      "check": "Removed cell has a real hole, not museum floor beneath it",
+      "passed": true
+    },
+    {
+      "check": "Replay restores every physical cell",
+      "passed": true
+    },
+    {
+      "check": "Replay repeats the first draw",
+      "passed": true
+    },
+    {
+      "check": "Reset cancels pending draw without losing support",
+      "passed": true
+    },
+    {
+      "check": "Twelve removals leave twelve gaps",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "floor_checks": [
+    {
+      "cell": "(8.0, 0.0)",
+      "supported": true
+    },
+    {
+      "cell": "(8.0, 25.0)",
+      "supported": true
+    },
+    {
+      "cell": "(1.0, 13.0)",
+      "supported": true
+    },
+    {
+      "cell": "(15.0, 13.0)",
+      "supported": true
+    }
+  ],
+  "headset_verified": false,
+  "map": "Random_Remove",
+  "origin": "(0.5, 0.0, 0.5)"
+}

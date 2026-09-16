@@ -1,6 +1,13 @@
-Concept: Toroidal portal sequence where increasing rings approach pi — continuity staged as asymptotic relation rather than arrival. Discrete steps approximate the circle without reaching it. The tension between countable and infinite.
-Sequence role: Tenth map. After Ignorance's epistemic reset, Portals confronts the infinite directly. The torus is the first topologically non-trivial form in the sequence — a surface with a hole. Discrete rings chase a limit they cannot reach. Prepares Primitives_Melencolia by establishing the incompleteness that melancholy will inhabit; follows Primitives_Ignorance.
-Technical angle: Torus construction from ring sequences, discrete approximation of circular cross-sections, convergence and limit behavior, combining portal geometries, Zeno's paradox as computational metaphor (achilles_tortoise).
-Critical angle: Zeno's paradox and the crisis of the continuum — you can subdivide forever and never arrive. The portal as topological threshold: passage without closure. Pi as irrational, inexhaustible, structurally unreachable by finite means.
-Key artifacts: combine_portals for assembling the toroidal sequence; achilles_tortoise for dramatizing asymptotic approach; capsule as the closed form the torus punctures.
-Gap: A ring-count slider showing convergence toward circularity would make the pi-approximation theme interactive rather than static.
+Concept: Finite displays make approaching a limit available to perception without becoming the limit. A spatial torus ladder, a separate polygon-perimeter calculation and a halving track expose different meanings of getting closer.
+
+Sequence role: Follows Primitives_Ignorance's distinction between representation, counting and useful detail. Prepares Primitives_Melencolia by asking which stopping rule and purpose an exact construction should serve.
+
+Primary encounters: combine_portals and achilles_tortoise. Capsule remains a secondary comparison of surface topology and visible aperture.
+
+Interaction: The portal instrument selects and highlights one of twenty rings and reverses the resolution order while preserving positions. The polygon comparison is explicitly separate from portal geometry. The Achilles instrument starts held, offers direct stage stepping and eased autoplay, pauses in-flight movement, and holds its tenth stage until restart.
+
+Critical angle: A display can end while a mathematical question continues. Visual overlap differs from coordinate equality. The direction of refinement is authored. A local control must not silently classify an entire passage as blocked.
+
+Spatial boundary: Existing portal dimensions and 4.5-metre spacing remain; twenty origins span 85.5 metres and the live mesh depth is about 87.1 metres. Instrument buttons are excluded from whole-artifact obstruction classification, but a complete museum/headset route has not been verified.
+
+Remaining: Walk the whole ladder and check approach, control reach, distant selection legibility and the halving markers. A floating-point saturation experiment remains separate future work, not a claim of this ten-stage model.

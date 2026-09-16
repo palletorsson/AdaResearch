@@ -1,0 +1,31 @@
+{
+  "checks": 38,
+  "failures": [],
+  "invoice": [
+    {
+      "rings": 2,
+      "segments": 4,
+      "submitted": 24,
+      "surface_triangles": 16
+    },
+    {
+      "rings": 4,
+      "segments": 8,
+      "submitted": 80,
+      "surface_triangles": 64
+    },
+    {
+      "rings": 8,
+      "segments": 16,
+      "submitted": 288,
+      "surface_triangles": 256
+    },
+    {
+      "rings": 32,
+      "segments": 64,
+      "submitted": 4224,
+      "surface_triangles": 4096
+    }
+  ],
+  "scope": "Pointer events, actual mesh arrays and configured museum counter stamping; full-room/headset legibility and routes unverified."
+}

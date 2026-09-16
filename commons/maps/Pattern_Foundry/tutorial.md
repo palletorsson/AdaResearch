@@ -1,49 +1,15 @@
-# Four Machines, One Grid
+# From a mark to a receiving body
 
-Four ways to make a pattern, standing in a row. Each machine is a different function from cell coordinates to color — that is the entire secret of the hall.
+Begin with the two primary tile stations. Place an asymmetric pair of marks at `pattern_tile_4x4` and locate its repeated appearances. At `pattern_tile_mirror`, compare which copies reverse the pair. Keep source and operation separate.
 
-The loom thinks in threads — a cell shows warp or weft by a rule on its coordinates:
+At `pattern_machine_a`, use the specimen console's MARK button. Observe the same edit on the flat and curved sheets. Their surface dimensions and UV order match; their projected widths do not. Move to another viewpoint before attributing the visible compression to the pattern generator.
 
-```gdscript
-func weave(x: int, y: int) -> Color:
-    var over := (x + y * 2) % 4 < 2      # the tie-up: which thread is on top
-    return WARP_COLOR if over else WEFT_COLOR
-```
+The live sampling code in `recipe_study.gd` asks the selected wallpaper rule for a palette index at each pixel. The resulting image goes to both receiver materials. The display begins with CURVE selected. LINK / HOLD makes that receiver decline later images; pressing it again catches up. This is a whole-image exception, not independent editing of one repeated cell.
 
-Change the modulus and offset and you have twill, satin, plain weave — centuries of textile structure are small integer arithmetic on `(x, y)`.
+SAVE, edit, RESTORE tests the separation between a recipe and its momentary presentation. The source card, palette, group and short carpet history return, with the saved animation phase. The loom keeps running afterwards. The specimens show the current rule; the carpet also displays previous bands.
 
-The print head thinks in stamps — one motif, repeated by translation:
+The earlier four-machine comparison is preserved in `doc/space/pattern-recipe-2026-09-10/before/Pattern_Foundry/tutorial.md`. Its proposal to feed one motif into every machine was not an implemented interaction. The wall now supplies an architectural receiver: the same sampling scale extends along 4.8 metres of the existing inner wall. TARGET selects CURVE, WALL, FLAT, ALL FIVE, ARCHITECTURE, NORTH or EAST; LINK / HOLD acts on that scope. A mixed scope becomes live when linked. UNDO LINK can restore a held image after re-linking. MARK, SAVE and RESTORE always address the shared source. Whole-hall and garment adapters follow.
 
-```gdscript
-func stamp(x: int, y: int, motif: Array, w: int, h: int) -> Color:
-    return motif[(y % h) * w + (x % w)]   # tile the motif by wrapping
-```
+See `technical.md` for the actual recipe boundary and `final.md` for the book encounter.
 
-`%` is the whole technology of wallpaper: coordinates fold back into the motif's little rectangle, so one drawing covers an infinite wall.
-
-The mill thinks in symmetry — it draws one wedge and turns it:
-
-```gdscript
-func rotate_cell(x: int, y: int, cx: int, cy: int, times: int) -> Vector2i:
-    var p := Vector2i(x - cx, y - cy)
-    for i in times:
-        p = Vector2i(-p.y, p.x)           # 90° per turn
-    return p + Vector2i(cx, cy)
-
-func mill(x: int, y: int) -> Color:
-    var sector := wedge_of(x, y)          # which quarter am I in?
-    var src := rotate_cell(x, y, CX, CY, sector)
-    return base_pattern(src.x, src.y)     # everyone reads from wedge zero
-```
-
-Paint one quarter; symmetry manufactures the rest. The wallpaper groups from the pattern editors are exactly this with fancier turn-and-flip sets.
-
-The sequencer thinks in time — the same row over and over, but *when* becomes *where*:
-
-```gdscript
-func sequence(x: int, t: float) -> Color:
-    var playhead := int(t * 8.0) % WIDTH
-    return ACTIVE if x == playhead else pattern_row(x)
-```
-
-Try: feed all four machines the same 8×8 motif. Four materially different objects come out — cloth, wallpaper, rosette, rhythm — from one small grid of choices. The pattern was never the picture. It was the rule, and each machine is a different way of *performing* it.
+REPEAT SIZE now cycles 15, 30 and 60 centimetres per source-card span. The motif stays fixed; linked surfaces accept the changed spacing and held surfaces retain their earlier image and value. SAVE/RESTORE includes source spacing. The historical carpet keeps its own display spacing. ARCHITECTURE now groups WALL, NORTH and EAST: three existing inner-wall faces, with independent hold and group undo. OFFSET +5CM now advances surface sampling from 0 to 30 cm, with saved source state and independent held receivers. Next: an explicit held-hand input for this bounded offset.

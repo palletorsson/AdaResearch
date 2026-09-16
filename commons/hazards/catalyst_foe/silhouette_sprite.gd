@@ -32,6 +32,44 @@ static func make_texture(seed: int) -> ImageTexture:
 	return ImageTexture.create_from_image(make_image(seed))
 
 
+## Optional wardrobe: the legacy silhouette remains unchanged elsewhere.
+## Discrete collars, hems and pleats make a grammar of differences, not just jitter.
+static func make_dressed_image(seed: int, wardrobe_seed: int = 800, repertoire: int = 0) -> Image:
+	var img := make_image(seed)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = seed * 7919 + wardrobe_seed
+	var hem: float = rng.randf_range(0.32,0.65)
+	var length: float = rng.randf_range(0.18,0.32)
+	_trap(img,0.5,0.35,0.22,hem,length,0.9,0.015,0.0,1.0,rng)
+	if rng.randf() < 0.6:
+		_trap(img,0.5,0.23,0.65,0.22,0.13,0.95,0.01,0.0,1.0,rng)
+	var accent := Color.from_hsv(rng.randf(),0.42,0.94)
+	var pleats: int = rng.randi_range(3,8)
+	# Add a production rule, retaining the earlier draws for hem and colour.
+	# No wardrobe seed can produce these branches in the tailored repertoire.
+	if repertoire == 1:
+		for side in [-1.0,1.0]:
+			for level in range(3):
+				var cy: float = 0.32+level*0.11
+				var reach: float = rng.randf_range(0.18,0.28)
+				_limb(img,0.5+side*0.12,cy,side,1.1,reach,0.045,0.92,0.01,rng)
+				_ellipse(img,0.5+side*(0.12+sin(1.1)*reach),cy+cos(1.1)*reach,0.045,0.025,0.9,0.0,0.0,1.0,rng)
+	var src := img.duplicate() as Image
+	for y in range(H):
+		for x in range(W):
+			var c := src.get_pixel(x,y)
+			if c.a < 0.8: continue
+			var edge := false
+			for d in [Vector2i.LEFT,Vector2i.RIGHT,Vector2i.UP,Vector2i.DOWN]:
+				var q: Vector2i = Vector2i(x,y)+d
+				if q.x >= 0 and q.x < W and q.y >= 0 and q.y < H and src.get_pixel(q.x,q.y).a < 0.5: edge = true
+			if edge: img.set_pixel(x,y,Color(0.20,0.24,0.29,c.a))
+			elif y > H*0.28 and y < H*(0.35+length):
+				var fold: float = 0.72+0.28*absf(cos(float(x)*PI/pleats))
+				img.set_pixel(x,y,Color(accent.r*fold,accent.g*fold,accent.b*fold,c.a))
+	return img
+
+
 static func make_image(seed: int) -> Image:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
