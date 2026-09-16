@@ -17,6 +17,7 @@ Thinking paths that survive context death. Search: `python tools/flow_query.py <
 - [~] [Sequence Audit Playbook](sequence-audit.json) — Horizontal: score all sequences. Vertical: deep-dive on worst. Classify artifacts DORMANT→SCATTERED→REACHING→GROWING→LIVING.
 - [+] [Map Editing Pipeline](map-editing-pipeline.json) — DISCOVER (ada.py) → EDIT (web or JSON) → VALIDATE (pathfinder) → CAPTURE → REVIEW → BRIDGE (VR feedback) → ITERATE.
 - [+] [Map Pathfinder Validation](pathfinder-validation.json) — Run pathfinder check. Fails? Common: no spawn, unreachable artifact, teleporter not on void. Fix, re-run.
+- [~] [Attribute a Gate's Rows Before Repairing Them](gate-row-attribution.json) — Qualifier before count. The gate's own matcher before your own. Split committed / disk-only / pre-existing; repair only the committed; check what else shares the file first.
 - [?] [Build 2D Top-Down Map Editor](map-editor-plugin.json)
 - [?] [Map Studio Desktop](map-studio-desktop.json)
 

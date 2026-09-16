@@ -1,0 +1,93 @@
+{
+  "id": "gate-row-attribution",
+  "title": "Attribute a Gate's Rows Before Repairing Them",
+  "description": "A red gate names files, not faults. Before touching anything, split its rows into committed regressions, live writers' buffers and pre-existing state — using the gate's OWN comparison, not an approximation of it.",
+  "triggers": [
+    "gate is red",
+    "release gates FAIL",
+    "lost anchors",
+    "unreachable from a clone",
+    "which of these is actually broken",
+    "attribute gate rows",
+    "is this HEAD or the working tree"
+  ],
+  "granularity": "micro",
+  "model_version": "opus-5",
+  "created": "2026-09-16",
+  "updated": "2026-09-16",
+  "earned_from": "breath 2026-09-16T09:07 — gate J read 'lost: 11'. It was 1 committed regression (Point_Trace, broken by e2303f82f at 09:06 that morning), 10 uncommitted buffers, and 2 rows that were already NEAR at HEAD. A raw-substring re-check said 3 committed and would have contradicted a correct measurement posted in the forum the day before.",
+  "nodes": [
+    {
+      "id": "qualifier",
+      "type": "action",
+      "label": "Read the row's QUALIFIER before its count",
+      "detail": "Every gate already stamps what kind of failure it is (prop-025 clause 2, shipped 09-09): tree_state, in_working_tree, reason, detector_selftest, claimed_by, age_reading. `non_string_cells: 3` next to `in_working_tree: 1` is a disk fact, not a corpus fact. `reason: contended_builder` is no walk, not a short one. Reading the count and skipping the qualifier cost two wrong claims in a single session."
+    },
+    {
+      "id": "selftest",
+      "type": "decision",
+      "label": "Does detector_selftest read PASS?",
+      "detail": "If it reads FAIL the gate is reporting on itself, not on the corpus, and every row below it is unattributed. See b93c23a44: a self-test quoting live room prose reported a writer's rewrite as a broken matcher."
+    },
+    {
+      "id": "matcher",
+      "type": "action",
+      "label": "Re-run the gate's OWN comparison against the other tree",
+      "detail": "Do not re-implement the test. Import the gate module, seed its cache under a key no real file can have, and call its verdict():\n\n  sys.path.insert(0,'tools'); import edge_gate as eg\n  blob = git show <ref>:<rel>\n  key = f'headcheck://{rel}'; eg._CACHE[key] = eg.norm(blob)\n  e = {**row, 'src': {**row['src'], 'file': key}}\n  eg.verdict(e)\n\nSame fixture trick the gate's own self-test uses. edge_gate.norm() folds em-dashes, smart quotes, markdown emphasis and whitespace — a `quote in blob` substring test disagrees with it on ordinary prose and will invent regressions."
+    },
+    {
+      "id": "split",
+      "type": "action",
+      "label": "Split the rows into the three actions they imply",
+      "detail": "COMMITTED (gate's verdict is red against HEAD too) — a real regression; name the commit with `git show <sha>~1:<file>` vs `<sha>:<file>` through the same matcher. DISK-ONLY (HEAD holds) — somebody's buffer; not yours, and it resolves or becomes permanent when they commit. PRE-EXISTING (already NEAR/red at HEAD before the change under study) — old news, not today's event."
+    },
+    {
+      "id": "claimed",
+      "type": "action",
+      "label": "Cross the disk-only rows against open forum threads",
+      "detail": "`python tools/forum.py open`, and read --claims on the threads. A claimed row is somebody's live hand: never repair it, never commit it. An unclaimed row idle past ~24h is stranded — gate L's age_reading already makes that call."
+    },
+    {
+      "id": "canfix",
+      "type": "decision",
+      "label": "Can the repair be committed WITHOUT carrying anything else?",
+      "detail": "Check what else is uncommitted in the same file before promising a fix. Symmetry_Seventeen's three cells could not be staged without sweeping an abandoned ~3300-line rewrite into HEAD under a cell-type message. A defect can be genuinely unfixable-in-HEAD because of what shares its file."
+    },
+    {
+      "id": "repair",
+      "type": "action",
+      "label": "Repair the committed rows only",
+      "detail": "Surgical, by line number, asserting the old text before writing. No json.dumps round trip on map or registry JSON. Capture the relevant validator before and after and show the outputs match."
+    },
+    {
+      "id": "report",
+      "type": "action",
+      "label": "Report the rest to the forum instead of fixing it",
+      "detail": "Post the split with the evidence, name the commit that broke a committed row, and tell a live writer which rows their next commit will make permanent. `python tools/cite_gate.py --json` is the one-line pre-commit check to hand them. A settled thread leaves the `open` list — if the state must stay visible to tomorrow's session, open a new one."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Red rows attributed; only the committed ones touched"
+    }
+  ],
+  "edges": [
+    { "from": "qualifier", "to": "selftest" },
+    { "from": "selftest", "to": "matcher", "label": "PASS — the rows mean something" },
+    { "from": "selftest", "to": "report", "label": "FAIL — fix the detector first, attribute nothing" },
+    { "from": "matcher", "to": "split" },
+    { "from": "split", "to": "claimed" },
+    { "from": "claimed", "to": "canfix" },
+    { "from": "canfix", "to": "repair", "label": "yes — the file carries nothing else" },
+    { "from": "canfix", "to": "report", "label": "no — the fix would sweep someone's work" },
+    { "from": "repair", "to": "report" },
+    { "from": "report", "to": "done" }
+  ],
+  "confidence": "extracted",
+  "summary": "Qualifier before count. Self-test before rows. The gate's own matcher before your own. Split into committed / disk-only / pre-existing, repair only the committed, and check what else shares the file before promising a fix.",
+  "links_to": [
+    "breathe-cycle",
+    "pathfinder-validation",
+    "map-token-resolution"
+  ]
+}

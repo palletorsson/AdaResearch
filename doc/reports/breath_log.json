@@ -7249,6 +7249,67 @@
       "release_gates_before": "7/15; I detector_selftest FAIL",
       "release_gates_after": "7/15; I detector_selftest PASS (gate still FAIL on 9 working-tree LOST rows, all HELD at HEAD)",
       "duration_minutes": 30
+    },
+    {
+      "breath_id": "2026-09-16T09:07",
+      "mode": "full",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "gates_before": "7/15 enabled passing (A-E,G,H green; F,I,J,K,L,M,N,O red)",
+      "gates_after": "8/15 enabled passing (O moved FAIL->PASS on the WORKING TREE only — nothing committed; see discoveries)",
+      "gates_tree_stamp": "HEAD e2303f82f; working tree carries several other sessions' uncommitted work",
+      "items_attempted": [
+        "read-the-forum-and-the-gates-before-choosing-anything",
+        "gate-O-quote-symmetry-seventeens-three-integer-cells",
+        "attribute-gates-I-and-J-eleven-LOST-rows-against-HEAD",
+        "answer-the-standing-primitives-anchor-thread-with-todays-HEAD-break",
+        "verify-gate-F-contended-builder-before-treating-it-as-a-fault",
+        "correct-my-own-two-overstated-claims-in-writing"
+      ],
+      "items_succeeded": [
+        "read-the-forum-and-the-gates-before-choosing-anything",
+        "gate-O-quote-symmetry-seventeens-three-integer-cells",
+        "attribute-gates-I-and-J-eleven-LOST-rows-against-HEAD",
+        "answer-the-standing-primitives-anchor-thread-with-todays-HEAD-break",
+        "verify-gate-F-contended-builder-before-treating-it-as-a-fault",
+        "correct-my-own-two-overstated-claims-in-writing"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "I CHECKED SOMEONE ELSE'S MEASUREMENT WITH A CRUDER INSTRUMENT THAN THEIRS AND ALMOST PUBLISHED THE CONTRADICTION. Thread 260908-sq9zq's 09-15 reply said all nine lost book anchors HELD at HEAD. My first pass tested `quote in git_show_blob` as a raw substring and returned three broken in HEAD. The 09-15 reply was right and I was wrong: edge_gate.norm() folds em-dashes to hyphens, smart quotes to straight, strips markdown emphasis and collapses whitespace, and two of those quotes differ from their files by exactly that much. Re-ran by seeding edge_gate._CACHE with norm(blob) under a headcheck:// key and calling the gate's own verdict() — the same fixture trick b93c23a44 used — and the count came back 1, not 3. A GATE'S MATCHER IS PART OF ITS VERDICT: to re-check a gate's claim about another tree you must run the gate's comparison, not your own approximation of it.",
+        "THE EIGHT-DAY WARNING CAME TRUE THIS MORNING, AND ONLY ONE ROW OF ELEVEN IS THE FACT. Thread 260908-sq9zq has said three times since 09-08 that the primitives anchors are a DISK fault and HEAD is clean. Commit e2303f82f, today 09:06, made the first one permanent: Point_Trace/critical.md no longer carries the sentence the book quotes for mystic_writing_pad. Verified HELD at e2303f82f~1 and LOST at e2303f82f through verdict() on both sides. The other ten LOST rows still hold at HEAD and the two NEAR rows were already NEAR at HEAD, so gate J's `lost: 11` is three different stories — 1 committed regression, 10 live-or-stranded buffers, 2 pre-existing. The cause is structural, not careless: rooms are being rewritten and commons/data/book/primitives.json was last touched 09-01, so the book is not being walked with the prose.",
+        "A DEFECT CAN BE UNFIXABLE-IN-HEAD BECAUSE OF WHAT ELSE IS IN THE FILE, AND GATE O'S RED IS NOT A CORPUS FAULT. Symmetry_Seventeen's three integer cells are real and now corrected on disk, but all eight committed versions of that map back to 08-09 read 0 non-string cells — the ints are purely an abandoned 09-10 rewrite. Staging three characters would have carried that session's ~3300-line rewrite into HEAD under a cell-type message, so the repair ships as a working-tree edit plus a forum notice and NOTHING IS COMMITTED. I had already written 'the corpus is clean for the first time' in the forum before checking, and had to post a correction. The gate had said so all along, in `in_working_tree: 1` beside the count.",
+        "GATE F IS NOT BROKEN AND MUST NOT BE 'FIXED'. It reads FAIL with reason contended_builder because Palle's own editor holds the project (pid 43904, --editor --rendering-driver vulkan). The interlock is working exactly as designed. The tempting change — a third NOT-MEASURED verdict state in the battery — is new verdict vocabulary, which is the 2026-07-18 overfitting correction, and it would foreclose the discipline of serializing Godot rather than support it. Left alone deliberately.",
+        "MY OWN LEDGER WRITE REFORMATTED 14,494 LINES, AND THE CAUSE WAS TWO DEFAULTS, NOT ONE. json.dumps on breath_log / improvement_trajectory / skill_evolution_proposals is the registry round-trip trap of CLAUDE.md wearing a different hat, and the diff stat is the tell — 10,806 insertions for one appended entry. indent=1 was the obvious half; ensure_ascii=True was the half I would have shipped, because it escapes every literal em-dash in years of prose to a \\u2014 sequence and the file still parses and still reads correctly in a viewer. THE DISCIPLINE, now proven on all three: before writing, probe the round trip — json.dumps(json.loads(orig), indent=2, ensure_ascii=False) == orig — and only write if it is byte-identical. Two of the three passed. The third did not, because prop-050 was appended at indent 4 inside an indent-2 file, so ANY faithful whole-file rewrite reformats 27 lines that are not mine; that one was appended textually against a unique anchor instead. Final staged diff: 20 insertions and 0 deletions where the naive write had 10,806 and 10,631."
+      ],
+      "files_changed": [
+        "commons/maps/Symmetry_Seventeen/map_data.json (working tree only, 3 lines, NOT committed by design)",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/skill_evolution_proposals.json",
+        ".claude/flows/gate-row-attribution.json",
+        ".claude/flows/INDEX.md",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md"
+      ],
+      "forum": [
+        "answered 260908-sq9zq",
+        "answered+settled then corrected 260910-624zx",
+        "opened 260916-mqu1f"
+      ],
+      "duration_minutes": 50
     }
   ]
 }

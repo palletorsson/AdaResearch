@@ -1676,6 +1676,26 @@
             "2026-09-11T18:55"
         ],
         "reviewer_note": "Overrule me if you read clause 1 as a restatement of prop-047's 'a claim that content ships is a claim about HEAD'. The test I applied: both of tonight's subjects are tracked, committed, in HEAD and passing every reachability gate the battery owns, and both are still inert. If you would rather not grow the ledger, clause 2 is two small edits and needs no proposal at all -- apply it and close this."
+    },
+    {
+      "id": "prop-051",
+      "created": "2026-09-16T09:52:00+02:00",
+      "evidence_measured": "2026-09-16",
+      "skill": "ada-breather (R -- Read and T -- Test phases)",
+      "status": "proposed",
+      "evidence": "TWICE IN ONE BREATH I READ A GATE'S COUNT AND SKIPPED THE QUALIFIER PRINTED BESIDE IT, and both times the qualifier was the answer. (a) Gate O printed `non_string_cells: 3 | maps_affected: 1 | in_working_tree: 1`. I read the 3, called it a corpus defect, repaired it, and wrote a forum reply saying 'the corpus is clean for the first time' -- then found, on trying to stage it, that all eight committed versions of that map back to 08-09 hold 0 non-string cells. `in_working_tree: 1` had said so the whole time. I had to post a correction. (b) Gate J printed `lost: 11`. I re-checked the rows against HEAD with a raw `quote in blob` substring test and got 3 committed regressions, contradicting a CORRECT measurement posted in thread 260908-sq9zq the day before. edge_gate.norm() folds em-dashes, smart quotes, markdown emphasis and whitespace; re-run through the gate's own verdict() the true count is 1. This is the same shape as the standing DNA lesson in CLAUDE.md ('before you believe an INERT verdict, check the harness'), and as prop-025, whose clause 2 shipped these very qualifiers on 09-09 so nobody would have to do this forensics. They were printed, and a reader still read past them. The gates are not missing information; the SKILL is missing the instruction to read it.",
+      "proposed_change": "Two clauses, both skill-only -- no tool change, because the tools already emit everything needed.\n\n(1) READ PHASE -- A GATE ROW IS NOT READ UNTIL ITS QUALIFIER IS READ. For every failing gate, quote its qualifier fields (detector_selftest, tree_state, in_working_tree, reason, claimed_by, age_reading) in the work plan ALONGSIDE the count, and say which of three things the row is before proposing any action: a committed fact, somebody's uncommitted buffer, or the gate failing to measure at all. A row whose detector_selftest reads FAIL is unattributed and must not generate a work item. A row carrying `reason: contended_builder` is no measurement rather than a bad one -- gate F is correct and must be left alone when the resident editor holds the project.\n\n(2) TEST PHASE -- TO RE-CHECK A GATE'S CLAIM, RUN THE GATE'S OWN COMPARISON. Never re-implement a gate's matcher to verify or contradict it. Import the module, seed its cache under a key no real file can have, call its verdict() -- the fixture technique the gate's own self-test has used since b93c23a44. Recipe and worked example in the new flow .claude/flows/gate-row-attribution.json. Corollary worth stating in the skill: before promising a repair, check what ELSE is uncommitted in the file, because a three-character fix that cannot be staged without carrying a stranded 3300-line rewrite is not a fix the breath can land.",
+      "expected_improvement": "Directly prevents both of today's wrong claims. More importantly it prevents the expensive half: a breath that 'repairs' a disk-only row commits another session's work, which is the costliest failure mode recorded in this repo (the stash that swallowed 284 files; the commit that swept away a probe). Cost is a few lines of the skill and roughly one extra tool call per failing gate.",
+      "breath_refs": [
+        "2026-09-16T09:07",
+        "2026-09-15T09:04",
+        "2026-09-11T09:07"
+      ],
+      "related": [
+        "prop-025 (qualifiers shipped 09-09, and went unread)",
+        "prop-049 (cross rows against forum claims)"
+      ],
+      "reviewer_note": "Overrule me if you read this as prop-025 restated. The test I applied: prop-025 asked the TOOLS to print what tree a row is about, and they now do. This asks the READER to use it, which is a different actor and a different failure. The evidence that they are separate is that both of today's errors happened AFTER prop-025 clause 2 shipped, with the qualifier on screen. If you would rather not grow the ledger, clause 1 is four lines of SKILL.md -- apply it and close this."
     }
   ],
   "_evening_harvest_0823_note": "Level-3 threshold tested tonight and NOT met; no prop-036 written. The candidate pattern -- 'a breath's artifact is registered in a tracked file and left untracked' -- is prop-010 (now 6 occurrences) crossed with prop-028 (now 7). A new entry would restate two standing proposals and grow a ledger whose own measured stall is that it holds 35 entries at status 'proposed' and zero applied since prop-001 on 2026-04-20. The one genuinely new observation -- the schema cannot record a PARTIALLY applied proposal -- stands at 2 occurrences (prop-031 clause 1, prop-033 clause 1) and is recorded on prop-033 to wait for a third."
