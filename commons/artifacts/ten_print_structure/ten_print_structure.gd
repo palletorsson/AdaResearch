@@ -73,7 +73,8 @@ class_name TenPrintStructure
 ## tells only their colliders). Characters that arrive while a reload is pending are read with
 ## it. Readbacks (slabs_node, marker_node, get_cells) apply a pending reload first. The cell
 ## where the screen's NEXT character will land is marked with a bright tile. When linked, the
-## field takes the screen's grid (get_grid_dims); `cols` and `rows` shape the standalone field.
+## field takes the screen's columns and, when `rows` is smaller than the screen's, a WINDOW onto
+## its last `rows` rows (the newest under scroll); `cols` shapes only the standalone field.
 ##
 ## STANDALONE (no channel, or no screen found). The field is printed here from `seed` and
 ## `count`, with ten_print's pinned rule copied exactly: character i is forward when
@@ -102,6 +103,9 @@ signal unlinked()
 
 @export_enum("floor", "wall", "overhead") var form: String = "floor"
 @export_enum("off", "on") var solid: String = "off"
+## Where the plate stands: front (beyond the near edge, facing +Z), back, left, right, or none.
+## A WORD value (#plate:none): the key is not in CONFIG_PARAM_NAMES.
+@export_enum("front", "back", "left", "right", "none") var plate: String = "front"
 @export var channel: String = ""
 @export_range(1, 40) var cols: int = 20
 @export_range(1, 40) var rows: int = 20
@@ -110,6 +114,7 @@ signal unlinked()
 @export var count: int = 400
 
 const FORMS := ["floor", "wall", "overhead"]
+const PLATES := ["front", "back", "left", "right", "none"]
 const INTERFACE_GROUP := "ten_print_interface"
 ## A screen that joins its group, or changes its channel, calls interface_announced on this group.
 const LISTENER_GROUP := "ten_print_structure_listener"
@@ -143,6 +148,8 @@ var _built := false
 var _created: Array[Node] = []
 var _cols: int = 20
 var _rows: int = 20
+## Screen rows hidden above the window when a linked room shows only the screen's last rows.
+var _row_offset: int = 0
 ## What each cell should show: EMPTY, FORWARD or BACKWARD.
 var _cells := PackedByteArray()
 ## What the MultiMesh (and the colliders) show now. A write happens only where the two differ.
@@ -173,6 +180,7 @@ func _ready() -> void:
 	add_to_group(LISTENER_GROUP)
 	if not _built:
 		_normalise()
+		_row_offset = 0
 		_cols = cols
 		_rows = rows
 		_build_nodes()
@@ -195,6 +203,11 @@ func apply_grid_config(config: Dictionary) -> void:
 		var so: String = _word_of(config["solid"], ["off", "on"], solid)
 		if so != solid:
 			solid = so
+			rebuild = true
+	if config.has("plate"):
+		var pl: String = _word_of(config["plate"], PLATES, plate)
+		if pl != plate:
+			plate = pl
 			rebuild = true
 	if config.has("cols"):
 		var c: int = clampi(_int_of(config["cols"], cols), 1, MAX_SIDE)
@@ -243,6 +256,8 @@ func _normalise() -> void:
 		form = "floor"
 	if solid != "on":
 		solid = "off"
+	if not PLATES.has(plate):
+		plate = "front"
 
 
 ## Rebuild the nodes and repopulate from whatever feeds the field now.
@@ -251,6 +266,7 @@ func _rebuild() -> void:
 	if _link_state == "linked" and linked_interface() != null:
 		_load_from_interface(true)
 	else:
+		_row_offset = 0
 		_cols = cols
 		_rows = rows
 		_build_nodes()
@@ -368,15 +384,30 @@ func _build_nodes() -> void:
 	_marker.visible = false
 	_own(_marker)
 
-	var ts: Node3D = TEXT_SCREEN.new()
-	ts.name = "Plate"
-	ts.mode = 1                    # STAND: on a post at reading height
-	ts.width_m = PLATE_W
-	ts.title = PLATE_TITLE
-	ts.body = _plate_body()
-	ts.position = Vector3(w * 0.5, 0.0, d + PLATE_OUT)
-	_own(ts)
-	_plate = ts
+	_plate = null
+	if plate != "none":
+		var ts: Node3D = TEXT_SCREEN.new()
+		ts.name = "Plate"
+		ts.mode = 1                    # STAND: on a post at reading height
+		ts.width_m = PLATE_W
+		ts.title = PLATE_TITLE
+		ts.body = _plate_body()
+		# The whole stand turns as ONE node (frame and text together), so its text keeps facing
+		# the stand's own +Z; this is not the text-into-its-panel fault.
+		match plate:
+			"back":
+				ts.position = Vector3(w * 0.5, 0.0, -PLATE_OUT)
+				ts.rotation.y = PI
+			"left":
+				ts.position = Vector3(-PLATE_OUT, 0.0, d * 0.5)
+				ts.rotation.y = PI * 0.5
+			"right":
+				ts.position = Vector3(w + PLATE_OUT, 0.0, d * 0.5)
+				ts.rotation.y = -PI * 0.5
+			_:
+				ts.position = Vector3(w * 0.5, 0.0, d + PLATE_OUT)
+		_own(ts)
+		_plate = ts
 
 	if solid == "on":
 		_solid_body = StaticBody3D.new()
@@ -634,8 +665,15 @@ func _load_from_interface(force_nodes: bool) -> void:
 		return
 	var dims: Vector2i = _interface.call("get_grid_dims")
 	var want_c: int = clampi(dims.x, 1, MAX_SIDE)
-	var want_r: int = clampi(dims.y, 1, MAX_SIDE)
-	if force_nodes or want_c != _cols or want_r != _rows or _mm == null:
+	var screen_r: int = clampi(dims.y, 1, MAX_SIDE)
+	# The room takes the screen's columns and as many of its rows as `rows` allows: fewer rows
+	# is a window onto the screen's LAST rows (the newest under scroll), so a band of floor can
+	# follow a 20-row screen without laying all 20 rows.
+	var want_r: int = mini(screen_r, clampi(rows, 1, MAX_SIDE))
+	var offset: int = screen_r - want_r
+	var rebuild_needed: bool = force_nodes or want_c != _cols or want_r != _rows or offset != _row_offset or _mm == null
+	_row_offset = offset
+	if rebuild_needed:
 		_cols = want_c
 		_rows = want_r
 		_build_nodes()
@@ -654,6 +692,7 @@ func _read_field_into_cells() -> void:
 		if not (key is Vector2i):
 			continue
 		var cell: Vector2i = key
+		cell.y -= _row_offset
 		if cell.x < 0 or cell.y < 0 or cell.x >= _cols or cell.y >= _rows:
 			continue
 		_cells[cell.y * _cols + cell.x] = FORWARD if bool(field[key]) else BACKWARD
@@ -662,6 +701,7 @@ func _read_field_into_cells() -> void:
 func _ensure_standalone_content() -> void:
 	if not _built or _content == "standalone":
 		return
+	_row_offset = 0
 	_cols = cols
 	_rows = rows
 	_build_nodes()
@@ -671,7 +711,7 @@ func _ensure_standalone_content() -> void:
 func _on_cell_drawn(_draw_index: int, row: int, col: int, forward: bool) -> void:
 	if _reload_pending:
 		return                  # the queued reload reads this character from the screen
-	_set_cell(col, row, FORWARD if forward else BACKWARD)
+	_set_cell(col, row - _row_offset, FORWARD if forward else BACKWARD)
 	_update_marker()
 
 
@@ -727,6 +767,7 @@ func _update_marker() -> void:
 		_marker.visible = false
 		return
 	var nc: Vector2i = _interface.call("get_next_cell")
+	nc.y -= _row_offset
 	if nc.x < 0 or nc.y < 0 or nc.x >= _cols or nc.y >= _rows:
 		_marker.visible = false
 		return
@@ -739,6 +780,8 @@ func _update_marker() -> void:
 func link_state_line() -> String:
 	match _link_state:
 		"linked":
+			if _row_offset > 0:
+				return "printed by the screen with channel %s · its last %d rows of %d" % [channel, _rows, _rows + _row_offset]
 			return "printed by the screen with channel %s" % channel
 		"searching":
 			return "looking for the screen with channel %s" % channel
@@ -779,6 +822,11 @@ func linked_interface() -> Node:
 
 func get_dims() -> Vector2i:
 	return Vector2i(_cols, _rows)
+
+
+## Screen rows above the window (0 unless linked with fewer rows than the screen).
+func row_offset() -> int:
+	return _row_offset
 
 
 ## The field as this structure's own state holds it: Vector2i(col, row) -> true for forward.

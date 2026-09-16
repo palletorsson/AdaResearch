@@ -1,7 +1,9 @@
 extends SceneTree
 ## probe_ten_print_structure — ten_print as the INTERFACE, ten_print_structure as the room.
 ##
-##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_ten_print_structure.gd
+##   godot --path . --xr-mode off --script res://commons/testing/probe_ten_print_structure.gd
+##   (NO --headless: the dummy renderer keeps no MultiMesh data, so every slab reads back as
+##   identity and the readbacks collapse to one cell; found 2026-09-17)
 ##
 ## WHAT IS READ BACK, said before any result. The structure's slabs are read out of its
 ## MultiMesh (instance transform -> cell and diagonal), never out of its own cell array. The
@@ -723,6 +725,49 @@ func run() -> void:
 	sc.call("apply_grid_config", {"controls": true, "channel": true})
 	check(str(sc.get("controls")) == "none" and str(sc.get("channel")) == "" and sc.call("console_node") == null and not sc.is_in_group(GROUP),
 		"#controls and #channel refuse a bool (no console, no group)")
+
+	# ── 9. the window and the plate (lead's addition, 2026-09-17) ─────────────────
+	var hw: Node3D = hall("HallW", 320.0)
+	var screen_w: Node3D = make_screen(hw, {"seed": 1982, "count": 400, "when_full": "scroll"}, {"channel": "band"})
+	var room_w: Node3D = make_structure(hw, {"seed": 7, "count": 0}, {"channel": "band", "rows": 7, "plate": "none"}, false, Vector3(3.0, 0.0, 1.0))
+	await _frames(3)
+	var dims_w: Vector2i = room_w.call("get_dims")
+	var off_w: int = int(room_w.call("row_offset"))
+	check(str(room_w.call("link_state")) == "linked" and dims_w == Vector2i(20, 7) and off_w == 13,
+		"rows 7 linked to a 20-row screen: the room is 20 x 7, a window onto rows 13..19 (dims %s, offset %d)" % [str(dims_w), off_w])
+	var slabs_w: Dictionary = read_slabs(room_w)
+	var fw: Dictionary = field_of(screen_w)
+	var want_w: Dictionary = {}
+	for key in fw.keys():
+		var cw: Vector2i = key
+		if cw.y >= 13:
+			want_w[Vector2i(cw.x, cw.y - 13)] = fw[key]
+	var dw: String = diff_fields(slabs_w, want_w)
+	check(slabs_w.size() == 140 and dw == "", "its 140 slabs equal the screen's last seven rows shifted up by 13 (%s)" % dw)
+	var nc_w: Vector2i = screen_w.call("get_next_cell")
+	var marker_w: MeshInstance3D = marker_of(room_w)
+	var mz: float = marker_w.position.z if marker_w != null else -1.0
+	check(marker_w != null and marker_w.visible and nc_w.y == 19 and absf(mz - 3.25) < 0.001,
+		"the marker for the screen's next cell on row 19 stands on the window's row 6 (z %.3f)" % mz)
+	draw_to(screen_w, 401)
+	await _frames(2)
+	var slabs_w2: Dictionary = read_slabs(room_w)
+	var fw2: Dictionary = field_of(screen_w)
+	var want_w2: Dictionary = {}
+	for key2 in fw2.keys():
+		var cw2: Vector2i = key2
+		if cw2.y >= 13:
+			want_w2[Vector2i(cw2.x, cw2.y - 13)] = fw2[key2]
+	var dw2: String = diff_fields(slabs_w2, want_w2)
+	check(dw2 == "", "after one more character (a scroll at 400) the window still equals the screen's last seven rows (%s)" % dw2)
+	check(room_w.call("plate_node") == null, "plate:none builds no plate")
+	var room_p: Node3D = make_structure(hw, {"seed": 7, "count": 40}, {"plate": "left", "rows": 4, "cols": 6}, false, Vector3(30.0, 0.0, 1.0))
+	await _frames(1)
+	var plate_p: Node3D = room_p.call("plate_node") as Node3D
+	var lp: Vector3 = room_p.to_local(plate_p.global_position) if plate_p != null else Vector3.ZERO
+	var facing_x: float = plate_p.global_transform.basis.z.normalized().dot(Vector3(1, 0, 0)) if plate_p != null else 0.0
+	check(plate_p != null and absf(lp.x + 0.6) < 0.001 and absf(lp.z - 1.0) < 0.001 and facing_x > 0.999,
+		"plate:left stands 0.6 m off the left edge at mid-depth and faces +X into the field (x %.2f z %.2f)" % [lp.x, lp.z])
 
 	_finish()
 
