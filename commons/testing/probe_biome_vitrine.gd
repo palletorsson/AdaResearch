@@ -292,6 +292,38 @@ func _run() -> void:
 	var ch = await _cage("Chamber_Color", 7, {"size": "5"})
 	_check(ch.status_line().find("when:") >= 0, "Chamber_Color: what remains is when")
 
+	# 10. families and the STAGE rack
+	var fams := {}
+	for s in range(1, 31):
+		var v = VITRINE.new()
+		v.seed = s
+		v.size = 5
+		var score_d: Dictionary = v._layout_score()
+		fams[String(score_d["family"])] = true
+		v.free()
+	_check(fams.size() == 3, "thirty seeds reach all three families (%s)" % str(fams.keys()))
+	_check(rnd.family() in VITRINE.FAMILIES, "the state names the family (%s)" % rnd.family())
+	var nb: Dictionary = G.neighbours("Point_One")
+	_check(String(nb["prev"]) == "" and String(nb["next"]) == "Point_Lines", "walk: Point_One's neighbours")
+	_check(String(G.neighbours("Primitives_Melencolia")["next"]) == "Trans_Pre", "walk: Melencolia steps to Trans_Pre, not the ladder room")
+	_check(String(G.neighbours("randomness")["prev"]) == "wavefunctions" and String(G.neighbours("randomness")["next"]) == "noise", "walk: a wordless sequence is one stage")
+	var scrub = await _cage("Point_Lines", 7, {"size": "5", "controls": "panel"})
+	_check(scrub.get_node_or_null("StatusHolder/StagePanel") != null, "controls: the STAGE rack stands")
+	scrub.press_control("next")
+	await process_frame
+	await process_frame
+	_check(scrub.stage_key() == "Point_Trace", "STAGE + walks to Point_Trace (%s)" % scrub.stage_key())
+	_check(scrub._presence != null, "STAGE +: the rebuilt cage remembers")
+	scrub.press_control("prev")
+	await process_frame
+	scrub.press_control("prev")
+	await process_frame
+	await process_frame
+	_check(scrub.stage_key() == "Point_One" and scrub.free_points().size() == 1, "STAGE - twice: back to one point")
+	scrub.press_control("prev")
+	await process_frame
+	_check(scrub.stage_key() == "Point_One", "STAGE - at the start stays")
+
 	print("[probe_biome_vitrine] %d checks, %d failed" % [_checks, _fails])
 	quit(0 if _fails == 0 else 1)
 

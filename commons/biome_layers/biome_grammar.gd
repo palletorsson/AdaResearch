@@ -137,6 +137,44 @@ static func allows(cl: Dictionary, word: String) -> bool:
 	return false
 
 
+## The walk as stages: for every spine sequence, its halls that HAVE vocabulary entries
+## (in map_authored order), else the sequence key itself. A ladder room in map_authored
+## is not a lesson, so it is skipped; a sequence with no per-hall words is one stage.
+static func walk() -> Array[String]:
+	_load()
+	var out: Array[String] = []
+	var halls_v: Dictionary = _vocab.get("halls", {})
+	for seq in _spine:
+		var any := false
+		for m in _halls.get(seq, []):
+			if halls_v.has(String(m)):
+				out.append(String(m))
+				any = true
+		if not any:
+			out.append(seq)
+	return out
+
+
+## The stage before and after `stage` on the walk ("" at the ends). A sequence key is
+## the last stage of its sequence; a hall without words maps to its sequence's last stage.
+static func neighbours(stage: String) -> Dictionary:
+	var w: Array[String] = walk()
+	var key := stage.strip_edges()
+	var i: int = w.find(key)
+	if i < 0:
+		var pos: Dictionary = position_of(key)
+		if bool(pos["known"]):
+			var seq: String = String(pos["sequence"])
+			for j in range(w.size() - 1, -1, -1):
+				if w[j] == seq or String(position_of(w[j]).get("sequence", "")) == seq:
+					i = j
+					break
+	if i < 0:
+		return {"prev": "", "next": "", "index": -1, "count": w.size()}
+	return {"prev": w[i - 1] if i > 0 else "", "next": w[i + 1] if i + 1 < w.size() else "",
+		"index": i, "count": w.size()}
+
+
 ## The halls of a sequence in walk order (empty when unknown).
 static func halls_of(sequence: String) -> Array[String]:
 	_load()

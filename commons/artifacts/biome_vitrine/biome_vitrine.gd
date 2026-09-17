@@ -114,8 +114,15 @@ const PINK := Color(0.95, 0.25, 0.60)
 @export_enum("on", "off") var record: String = "on"
 ## Draw the presence grid as the floor's glow.
 @export_enum("on", "off") var glow: String = "on"
+## `panel`: a STAGE - / STAGE + rack under the screen — scrub the walk and watch the
+## same work grow or shrink, one hall at a time.
+@export_enum("none", "panel") var controls: String = "none"
+
+const RACK_TEMPLATES_PATH := "res://commons/audio/rack_templates/RackTemplates.gd"
+const PANEL_SCALE := 2.0
 
 static var _stages_cache: Dictionary = {}
+var _console: Node3D = null
 
 var _built: bool = false
 var _patch: Node3D = null
@@ -206,6 +213,8 @@ func apply_grid_config(config: Dictionary) -> void:
 		record = "on" if _flag(config["record"]) else "off"
 	if config.has("glow"):
 		glow = "on" if _flag(config["glow"]) else "off"
+	if config.has("controls"):
+		controls = "panel" if str(config["controls"]).strip_edges().to_lower() == "panel" else "none"
 	if config.has("duration"):
 		duration = clampf(_num_of(config["duration"], duration), 1.0, 600.0)
 	if config.has("intensity"):
@@ -303,6 +312,7 @@ func _rebuild() -> void:
 	_presence = null
 	_ground_mat = null
 	_status = null
+	_console = null
 	_garden = null
 	_line = null
 	_loop = null
@@ -368,8 +378,17 @@ func _build_ground() -> void:
 # ════════════════════════════════════════════════════════════════════════════
 
 ## Anchors from the SEED alone (never the stage), so every cage of one seed is the same
-## work: a dominant diagonal across the floor, its golden section as the focus, a
-## perpendicular axis through the centre. Everything later is placed on these.
+## work. Three families, the seed picks one:
+##   diagonal  a dominant diagonal across the floor, its golden section as the focus, a
+##             perpendicular axis; planes tilted along it (Lissitzky)
+##   vertical  a short axis and everything lifted — the work stands up, planes vertical,
+##             the beam high (a Proun tower)
+##   split     the floor divided at golden sections, axes parallel to the walls, planes
+##             nearly flat and low (Mondrian's fields)
+## Everything later is placed on these.
+const FAMILIES: Array[String] = ["diagonal", "vertical", "split"]
+
+
 func _layout_score() -> Dictionary:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash([seed, "score"])
@@ -377,24 +396,49 @@ func _layout_score() -> Dictionary:
 	var inner: float = float(size) * 0.5 - 0.5
 	var sx: float = 1.0 if rng.randf() < 0.5 else -1.0
 	var sz: float = 1.0 if rng.randf() < 0.5 else -1.0
-	var a := Vector3(-inner * 0.85 * sx, 0.0, -inner * 0.85 * sz)
-	var b := -a
+	var family: String = FAMILIES[rng.randi_range(0, FAMILIES.size() - 1)]
+	var a: Vector3
+	var b: Vector3
+	var lift := 1.0
+	var tilt0 := 62.0
+	var tilt1 := -50.0
+	match family:
+		"vertical":
+			a = Vector3(-inner * 0.45 * sx, 0.0, -inner * 0.45 * sz)
+			b = -a
+			lift = 1.45
+			tilt0 = 88.0
+			tilt1 = -86.0
+		"split":
+			a = Vector3(-inner * 0.85 * sx, 0.0, -inner * 0.236 * sz)
+			b = Vector3(inner * 0.85 * sx, 0.0, -inner * 0.236 * sz)
+			lift = 0.8
+			tilt0 = 12.0
+			tilt1 = -8.0
+		_:
+			a = Vector3(-inner * 0.85 * sx, 0.0, -inner * 0.85 * sz)
+			b = -a
 	var dir: Vector3 = (b - a).normalized()
 	var perp := Vector3(-dir.z, 0.0, dir.x)
 	return {"k": k, "inner": inner, "a": a, "b": b, "dir": dir, "perp": perp,
-		"yaw": atan2(dir.x, dir.z), "sx": sx, "sz": sz}
+		"yaw": atan2(dir.x, dir.z), "sx": sx, "sz": sz, "family": family,
+		"lift": lift, "tilt0": tilt0, "tilt1": tilt1}
 
 
 func _diag(t: float, y: float) -> Vector3:
 	var p: Vector3 = (_score["a"] as Vector3).lerp(_score["b"] as Vector3, t)
-	p.y = y
+	p.y = y * float(_score.get("lift", 1.0))
 	return p
 
 
 func _perp(u: float, y: float) -> Vector3:
 	var p: Vector3 = (_score["perp"] as Vector3) * (float(_score["inner"]) * u)
-	p.y = y
+	p.y = y * float(_score.get("lift", 1.0))
 	return p
+
+
+func family() -> String:
+	return String(_score.get("family", ""))
 
 
 func _k() -> float:
@@ -573,12 +617,12 @@ func _build_garden() -> void:
 		var p0: MeshInstance3D = _box(Vector3(1.6 * k, 1.1 * k, 0.03 * k), _col("plane", 0))
 		p0.name = "Plane_0"
 		p0.position = _diag(0.382, 1.5 * k)
-		p0.rotation = Vector3(deg_to_rad(62.0), yaw, 0.0)
+		p0.rotation = Vector3(deg_to_rad(float(_score.get("tilt0", 62.0))), yaw, 0.0)
 		faces.add_child(p0)
 		var p1: MeshInstance3D = _box(Vector3(1.2 * k, 0.8 * k, 0.03 * k), _col("plane", 1))
 		p1.name = "Plane_1"
 		p1.position = _perp(-0.6, 0.95 * k)
-		p1.rotation = Vector3(deg_to_rad(-50.0), yaw + PI * 0.5, 0.0)
+		p1.rotation = Vector3(deg_to_rad(float(_score.get("tilt1", -50.0))), yaw + PI * 0.5, 0.0)
 		faces.add_child(p1)
 		_grammar_counts["faces"] = 2
 
@@ -1082,6 +1126,52 @@ func _build_status() -> void:
 	ts.position = Vector3(half + 0.75, 0.0, half + 0.15)
 	holder.add_child(ts)
 	_status = ts
+	if controls == "panel":
+		_build_console(holder, Vector3(half + 0.75, 0.62, half + 0.15))
+
+
+## STAGE - / STAGE +: the rack idiom (RackTemplates, as ten_print's console), two buttons.
+## Pressing rebuilds the cage at the neighbouring stage of the walk (biome_grammar.walk).
+func _build_console(holder: Node3D, at: Vector3) -> void:
+	var rack: GDScript = load(RACK_TEMPLATES_PATH)
+	if rack == null:
+		return
+	var rows: Array = [[{"type": "button", "label": "STAGE -"}, {"type": "button", "label": "STAGE +"}]]
+	# a single space, never "": an empty title is an empty node name in older templates
+	var panel: Node3D = rack.create_panel(" ", rows)
+	if panel == null:
+		return
+	panel.name = "StagePanel"
+	var blank_title: Node = panel.get_node_or_null("Title")
+	if blank_title != null:
+		panel.remove_child(blank_title)
+		blank_title.free()
+	panel.set_meta("em_local_instrument", true)
+	panel.scale = Vector3.ONE * PANEL_SCALE
+	panel.position = at
+	panel.rotation_degrees = Vector3(-20.0, 0.0, 0.0)
+	holder.add_child(panel)
+	_console = panel
+	var keys := ["prev", "next"]
+	for i in range(keys.size()):
+		var btn: Node = panel.find_child("Btn_%d" % i, true, false)
+		if btn == null:
+			continue
+		var area: Node = btn.get_node_or_null("InteractableAreaButton")
+		if area != null and area.has_signal("button_pressed"):
+			var key: String = keys[i]
+			# button_pressed(button) carries ONE argument: a lambda that takes it
+			area.button_pressed.connect(func(_b): press_control(key))
+
+
+## The console's keys, also for probes: `prev` / `next` walk one stage; the cage rebuilds.
+func press_control(key: String) -> void:
+	var nb: Dictionary = Grammar.neighbours(_stage_key)
+	var target: String = String(nb.get(key, ""))
+	if target == "":
+		return
+	stage = target
+	_rebuild()
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -1241,7 +1331,8 @@ func get_state() -> Dictionary:
 	return {
 		"stage": _stage_key, "sequence": _sequence, "order": _stage_order,
 		"closure": {"made_of": _closure.get("made_of", []), "does": _closure.get("does", []), "knows": _closure.get("knows", [])},
-		"grey": _grey(), "grammar": _grammar_counts.duplicate(),
+		"grey": _grey(), "grammar": _grammar_counts.duplicate(), "family": family(),
+		"walk": Grammar.neighbours(_stage_key), "controls": controls,
 		"kingdoms": _kingdoms.duplicate(), "density": _density, "size": size, "seed": seed,
 		"where": _where.duplicate(), "seeds": _seed_counts.duplicate(), "cover": _cover_count,
 		"live": _spawner.get_population_count() if _spawner != null else 0,
