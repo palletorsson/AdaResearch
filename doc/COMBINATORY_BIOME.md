@@ -269,6 +269,24 @@ record `ada_run/biome_vitrines.json` is read by `/api/biome/vitrine` (`?stage=`,
 `?sequence=`) and shown at `/biome-vitrines` — the "queryable" half, first form. The
 GEN ◂ ▸ scrub still waits for the lineage log.
 
+**The lineage log and the dream** (built the same evening). §5 and §6 stand as written,
+with two changes learned in the building. The log is `ada_run/biome_lineage.jsonl`,
+append-only, one line per organism event — `cage`, `seeded`, `spawned`, `born`, `culled`,
+`generation` — each carrying session, run label, cage id, stage, seed, the breeder's seed,
+the fitness name and any granted word; the cage writes it itself. `EvolutionSystem` gained
+an optional `rng_seed` (0 = as before) and the cage seeds the global rng before a stepped
+generation, so a stepped or dream-run generation replays exactly; the clock-driven game
+is not seeded and is not claimed to replay. `tools/dream_biome.py` answers `report`,
+`stale`, `sufficient`, `reachable`, and `counterfactual --stage X --allow W`, which runs
+the cage twice headless (`commons/testing/run_biome_dream.gd`) — as recorded, and with the
+word granted on the token (`#allow:<word>`) — and prints the difference. The first dream:
+creatures granted at randomness, four generations — six founded, four born, ten alive,
+creature presence 1 % → 10 %, against a baseline with none. Two honesties kept: a seeded
+organism (a painted flower, a colony) stands until the cage is rebuilt and is never
+counted dead; and every empirical answer names the fitness it was measured under.
+The GEN + key on the rack makes a generation pass now; GEN − (scrubbing back through a
+recorded generation) is still open — it needs positions in the log, not only ids.
+
 **The dream room.** One per threshold — or the museum's night (`[em-night] the moon
 is the light… one circuit every 480 s` already exists in the endless museum). Three
 gardens stand side by side: *as grown*, *the sufficient subset only*, and *the
