@@ -16,8 +16,9 @@
 # emerges: the same seed paints the same cells at every stage — what changes between two
 #          cages is only what the stage lets those cells become
 # needs: cage [has]; painted patch [has]; live creatures + evolution [has]; presence floor
-#        [has]; record file [has]; query rack (STAGE / GEN scrub) [missing]; dream replay
-#        [missing]; fungus presence (the texture's alpha) invisible in emission [known]
+#        [has, its own shader: R tree green, G creature amber, B flower blue, A fungus
+#        violet]; record file [has]; query rack (STAGE / GEN scrub) [missing]; dream replay
+#        [missing]
 # relationships: mushrooms (the glass-case idiom in Random_Mushrooms); BiomeRingComponent
 #                (the ground cover, shared via ground_cover.gd); tier_terrarium (a case as an
 #                argument); doc/COMBINATORY_BIOME.md (the design)
@@ -39,6 +40,7 @@ const EvolutionClass := preload("res://algorithms/nature_system/systems/evolutio
 const PresenceClass := preload("res://algorithms/nature_system/systems/presence_grid.gd")
 const Stage := preload("res://commons/artifacts/randomness_space/museum_exhibit_stage.gd")
 const TEXT_SCREEN := preload("res://commons/ui/text_screen.gd")
+const FLOOR_SHADER := preload("res://commons/artifacts/biome_vitrine/vitrine_floor.gdshader")
 
 const STAGES_PATH := "res://commons/maps/soft_stages.json"
 const RECORD_RES := "res://ada_run/biome_vitrines.json"
@@ -78,6 +80,8 @@ const PRESENCE_RES := 64
 @export var intensity: float = -1.0
 ## Write the cage's state to ada_run/biome_vitrines.json (user:// when res:// refuses).
 @export_enum("on", "off") var record: String = "on"
+## Draw the presence grid as the floor's glow.
+@export_enum("on", "off") var glow: String = "on"
 
 static var _stages_cache: Dictionary = {}
 
@@ -85,7 +89,7 @@ var _built: bool = false
 var _patch: Node3D = null
 var _cage: Node3D = null
 var _ground: MeshInstance3D = null
-var _ground_mat: StandardMaterial3D = null
+var _ground_mat: ShaderMaterial = null
 var _dispatcher: Node3D = null
 var _spawner = null            # CritterSpawner
 var _mapper = null             # CritterTraitMapper
@@ -149,6 +153,8 @@ func apply_grid_config(config: Dictionary) -> void:
 		evolve = "on" if _flag(config["evolve"]) else "off"
 	if config.has("record"):
 		record = "on" if _flag(config["record"]) else "off"
+	if config.has("glow"):
+		glow = "on" if _flag(config["glow"]) else "off"
 	if config.has("duration"):
 		duration = clampf(_num_of(config["duration"], duration), 1.0, 600.0)
 	if config.has("intensity"):
@@ -173,8 +179,6 @@ func _process(delta: float) -> void:
 			for d in _static_deposits:
 				_presence.deposit(d["pos"], int(d["kingdom"]), float(d["strength"]) * 0.25, 0.7)
 		_presence.process(delta)
-		if _ground_mat != null:
-			_ground_mat.emission_texture = _presence.get_texture()
 	_status_timer += delta
 	if _status_timer >= 5.0:
 		_status_timer = 0.0
@@ -252,7 +256,14 @@ func _build_ground() -> void:
 	plane.subdivide_width = 8
 	plane.subdivide_depth = 8
 	_ground.mesh = plane
-	_ground_mat = GroundCover.earth_material(_density)
+	# a ShaderMaterial: the earth colour from the ring's recipe, the presence texture as the
+	# glow. hint_default_black keeps an unbound sampler black — a StandardMaterial3D's
+	# emission_texture sampled WHITE before its first bind and the floor photographed flat.
+	var earth: StandardMaterial3D = GroundCover.earth_material(_density)
+	_ground_mat = ShaderMaterial.new()
+	_ground_mat.shader = FLOOR_SHADER
+	_ground_mat.set_shader_parameter("earth", earth.albedo_color)
+	_ground_mat.set_shader_parameter("glow", 0.9 if _flag(glow) else 0.0)
 	_ground.material_override = _ground_mat
 	_ground.position = Vector3(0.0, 0.01, 0.0)
 	_patch.add_child(_ground)
@@ -428,10 +439,8 @@ func _build_presence() -> void:
 		_presence.deposit(d["pos"], int(d["kingdom"]), float(d["strength"]), 0.9)
 	_deposit_live()
 	if _ground_mat != null:
-		_ground_mat.emission_enabled = true
-		_ground_mat.emission = Color(1.0, 1.0, 1.0)
-		_ground_mat.emission_energy_multiplier = 0.9
-		_ground_mat.emission_texture = _presence.get_texture()
+		# one ImageTexture, updated in place every presence tick — bound once
+		_ground_mat.set_shader_parameter("presence", _presence.get_texture())
 
 
 func _deposit_live() -> void:
