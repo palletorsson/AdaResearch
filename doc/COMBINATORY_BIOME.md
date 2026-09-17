@@ -250,6 +250,13 @@ _Done 2026-09-17 (commits 48d88ce95, c303cef84): the cage artifact with evolutio
 floor and state file; the room `Biome_Cage` dealt as a randomness pearl; the ring's ground
 cover shared; probes 73/73 and 176/176. The steps below are what remains._
 
+0. **The colonnade knows a body by one cell.** `tools/em_map_halls.py` stamps the templates'
+   pier colonnade into every bare map-authored hall, "never on or beside a body" — but a
+   body is its token cell, so four piers stood inside the 8 × 8 cage. Today's fix is a
+   declaration (`map_info.museum.piers: false`, honoured by the tool, absent = as before);
+   the general fix is to keep piers off a body's registry footprint (`parameters.footprint`),
+   which needs the tool to read the registry. Any large case (tier_terrarium, the glass
+   arenas) has the same exposure.
 1. **Sync `soft_stages.json` to the spine** (add tiling, formfinding; move iso/boolean; keep the extras as off-spine stages) and add `operators` per stage from §3. Post to the forum first — the file is read by three managers.
 2. **Lineage log**: `EvolutionSystem` appends to `ada_run/biome_lineage.jsonl` with seed and fitness name. No behaviour change.
 3. **`tools/dream_biome.py`, read-only questions**: reachable, refused, stale, sufficient. Runs on the log alone.
