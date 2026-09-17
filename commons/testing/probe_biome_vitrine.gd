@@ -9,7 +9,9 @@ extends SceneTree
 ## bounds; the cage has six panes and no roof (four with the doorways off); the same seed
 ## paints the same cells and a different seed does not; apply_grid_config before the tree
 ## wins over the exports; the record file is written; presence covers the floor.
-## Nothing here reads a MultiMesh instance back, so --headless is fine.
+## Nothing here reads a MultiMesh instance back, so --headless is fine. The XR Tools compile
+## errors at boot (XRToolsUserSettings is an autoload a SceneTree probe cannot see) are the
+## probe lane's, not the cage's: the pickable still instantiates and answers pick_up.
 
 const VITRINE := preload("res://commons/artifacts/biome_vitrine/biome_vitrine.gd")
 const STAGES := "res://commons/maps/soft_stages.json"
@@ -48,9 +50,12 @@ func _run() -> void:
 	var grey = await _cage("primitives", 7, {})
 	_check(grey.stage_key() == "primitives", "grey: stage key")
 	_check(grey.get_state()["kingdoms"].is_empty(), "grey: no kingdoms")
-	var grey_seeds: int = _seed_total(grey)
-	_check(grey_seeds > 0, "grey: seeds painted from all kingdoms (%d)" % grey_seeds)
-	_check(_count_cubes(grey) == grey_seeds, "grey: every seed is a coloured cube (%d cubes, %d seeds)" % [_count_cubes(grey), grey_seeds])
+	# under the strict ladder `primitives` = the whole sequence learned: the grey garden, no kingdoms
+	_check(bool(grey.get_state()["grey"]), "grey: the primitives cage is the grey grammar")
+	_check(_seed_total(grey) == 0, "grey: nothing painted (%d seeds)" % _seed_total(grey))
+	_check(_count_cubes(grey) == 0, "grey: no coloured cubes (%d)" % _count_cubes(grey))
+	var gg: Dictionary = grey.get_state()["grammar"]
+	_check(int(gg.get("ornament", 0)) == 1 and int(gg.get("solids", 0)) > 0, "grey: the whole primitives garden stands (%s)" % str(gg))
 	# density 0.0 at primitives: a clinical floor, no ground cover at all
 	_check(int(grey.get_state()["cover"]) == 0, "grey: no ground cover at density 0 (%d)" % int(grey.get_state()["cover"]))
 	_check(grey.get_node_or_null("Patch/CoverFoliage_grass") == null, "grey: no grass cover")
@@ -81,8 +86,12 @@ func _run() -> void:
 	_check("creature" in ls["kingdoms"], "lsystems: creature kingdom")
 	var live0: int = int(ls["live"])
 	_check(live0 > 0 and live0 <= int(VITRINE.CAPS["creature"]), "lsystems: live creatures %d" % live0)
-	_check(bool(ls["evolving"]), "lsystems: evolving")
-	_check(lsys._evo != null and lsys._spawner != null, "lsystems: evolution wired")
+	# the strict ladder: creatures wander at L-systems, but nothing SELECTS before machinelearning
+	_check(not bool(ls["evolving"]), "lsystems: not evolving before machinelearning")
+	_check(lsys._evo != null and lsys._spawner != null, "lsystems: evolution wired, not running")
+	var ml = await _cage("machinelearning", 7, {})
+	_check(bool(ml.get_state()["evolving"]), "machinelearning: evolving")
+	_check("select" in ml.closure()["does"], "machinelearning: closure has select")
 	lsys._evo.evolve_step()
 	var ls2: Dictionary = lsys.get_state()
 	_check(int(ls2["generation"]) == 1, "lsystems: one generation stepped")
@@ -141,6 +150,85 @@ func _run() -> void:
 	# 7. readbacks
 	_check(rnd.status_line().begins_with("BIOME · RANDOMNESS"), "status line names the stage")
 	_check(rnd.is_in_group("biome_vitrine"), "in the query group")
+
+	# 8. the primitives ladder — the grey grammar, one word per hall
+	var G = load("res://commons/biome_layers/biome_grammar.gd")
+	var c1: Dictionary = G.closure("Point_One")
+	_check(str(c1["made_of"]) == str(["point"]) and str(c1["does"]) == str(["hand"]) and (c1["knows"] as Array).is_empty(), "closure Point_One = point / hand / —")
+	var c5: Dictionary = G.closure("Point_Triangle_Context")
+	_check(str(c5["made_of"]) == str(["point", "line", "lattice", "face"]), "closure after the triangle map: %s" % str(c5["made_of"]))
+	_check("trace" in c5["knows"], "closure after the triangle map knows trace")
+	var c10: Dictionary = G.closure("Primitives_Melencolia")
+	_check("ornament" in c10["made_of"] and "self_move" in c10["does"] and not ("colour" in c10["made_of"]), "closure at the end of primitives: no colour yet")
+	_check("colour" in G.closure("color")["made_of"] and "point" in G.closure("color")["made_of"], "closure at colour carries the primitives")
+	_check(not bool(G.position_of("No_Such_Hall")["known"]), "unknown hall is not known")
+	_check(int(G.position_of("Point_Lines")["hall"]) == 1 and int(G.position_of("Point_Lines")["spine"]) == 0, "Point_Lines is hall 1 of spine 0")
+
+	var one = await _cage("Point_One", 7, {"size": "5"})
+	_check(one.stage_key() == "Point_One", "Point_One: stage key")
+	_check(bool(one.get_state()["grey"]), "Point_One: grey grammar")
+	var pts: Array = one.free_points()
+	_check(pts.size() == 1, "Point_One: exactly one point (%d)" % pts.size())
+	_check(pts.size() == 1 and pts[0].has_method("pick_up") and pts[0] is RigidBody3D, "Point_One: the point is a pickable body")
+	_check(pts.size() == 1 and (pts[0] as RigidBody3D).freeze, "Point_One: the point stays where it is put")
+	_check(one.get_node_or_null("Patch/Garden/Line_0") == null, "Point_One: no line")
+	_check(one.get_node_or_null("Patch/Garden/Lattice") == null, "Point_One: no lattice")
+	_check(one._presence == null, "Point_One: the floor does not remember yet")
+	_check(one.get_node_or_null("Patch/Dispatcher") == null and one.get_node_or_null("Patch/CoverFoliage_grass") == null, "Point_One: no painted kingdoms, no cover")
+	_check(_all_grey(one), "Point_One: nothing has a colour")
+
+	var two = await _cage("Point_Lines", 7, {"size": "5"})
+	_check(two.free_points().size() == 2, "Point_Lines: two points")
+	_check(two.get_node_or_null("Patch/Garden/Line_0") != null, "Point_Lines: the line")
+	_check(two._presence == null, "Point_Lines: still no trace")
+	# move a point; the line follows
+	var p1: Node3D = two.free_points()[1]
+	p1.global_position = p1.global_position + Vector3(0.7, 0.0, 0.3)
+	await process_frame
+	var ln: MeshInstance3D = two.get_node("Patch/Garden/Line_0")
+	var mid: Vector3 = (two.free_points()[0].global_position + p1.global_position) * 0.5
+	_check(ln.global_position.distance_to(mid) < 0.05, "Point_Lines: the line follows the moved point")
+
+	var three = await _cage("Point_Trace", 7, {"size": "5"})
+	_check(three._presence != null, "Point_Trace: the floor remembers")
+	_check(is_equal_approx(float(three._ground_mat.get_shader_parameter("mono")), 1.0), "Point_Trace: it remembers in grey")
+	_check(float(three.presence_coverage()["creature"]) > 0.0, "Point_Trace: the points have left a mark")
+
+	var five = await _cage("Point_Triangle_Context", 7, {"size": "5"})
+	_check(five.get_node_or_null("Patch/Garden/Lattice") != null and five.get_node_or_null("Patch/Garden/LatticeLines") != null, "triangle map: the lattice stands")
+	_check(five.get_node_or_null("Patch/Garden/Faces") != null, "triangle map: faces")
+	_check(five.get_node_or_null("Patch/Garden/Solid_0") == null, "triangle map: no bodies yet")
+	_check(_all_grey(five), "triangle map: still no colour")
+
+	var six = await _cage("Primitives_Polythedra", 7, {"size": "5"})
+	_check(six.get_node_or_null("Patch/Garden/Solid_0") != null, "polyhedra: bodies")
+	_check(int(six.get_state()["grammar"]["movers"]) == 0, "polyhedra: nothing moves by itself yet")
+	var seven = await _cage("Point_Animatedcube", 7, {"size": "5"})
+	_check(int(seven.get_state()["grammar"]["movers"]) > 0, "animated cube: bodies move by themselves")
+	var eight = await _cage("Primitives_Ignorance", 7, {"size": "5"})
+	_check(eight.get_node_or_null("Patch/Garden/Sphere_0") != null, "ignorance: spheres")
+	var nine = await _cage("Primitives_Portals", 7, {"size": "5"})
+	_check(nine.get_node_or_null("Patch/Garden/Subdivided") != null, "portals: a divided body")
+	var ten = await _cage("Primitives_Melencolia", 7, {"size": "5"})
+	_check(ten.get_node_or_null("Patch/Garden/Ornament") != null, "melencolia: the ornament")
+	_check(_all_grey(ten), "end of primitives: still no colour")
+	_check(ten.status_line().find("beyond:") >= 0, "the screen says what lies beyond the text")
+
+	# `hall` reads the hall the cage stands in (museum em_map meta)
+	var seg := Node3D.new()
+	seg.set_meta("em_map", "Point_Lines")
+	seg.set_meta("em_chapter", "primitives")
+	_root.add_child(seg)
+	var h = VITRINE.new()
+	h.stage = "hall"
+	h.size = 5
+	h.position = Vector3(float(_slot) * 20.0, 0.0, 40.0)
+	_slot += 1
+	seg.add_child(h)
+	await process_frame
+	await process_frame
+	await process_frame
+	_check(h.stage_key() == "Point_Lines", "stage `hall` resolves the museum's em_map (%s)" % h.stage_key())
 
 	print("[probe_biome_vitrine] %d checks, %d failed" % [_checks, _fails])
 	quit(0 if _fails == 0 else 1)
@@ -210,6 +298,18 @@ func _has_roof(v) -> bool:
 			if sz.x > s - 0.2 and sz.z > s - 0.2 and sz.y < 0.1:
 				return true
 	return false
+
+
+## every material under the patch is grey: r == g == b within a hair
+func _all_grey(v) -> bool:
+	var ok := true
+	for n in v.get_node("Patch").find_children("*", "GeometryInstance3D", true, false):
+		var m: Material = (n as GeometryInstance3D).material_override
+		if m is StandardMaterial3D:
+			var c: Color = (m as StandardMaterial3D).albedo_color
+			if absf(c.r - c.g) > 0.02 or absf(c.g - c.b) > 0.02:
+				ok = false
+	return ok
 
 
 func _count_labels(v) -> int:
