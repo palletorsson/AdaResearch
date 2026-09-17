@@ -281,9 +281,9 @@ func _run() -> void:
 	_check(str(rb.get_state()["kingdoms"]) == str(["flower"]) and int(rb.get_state()["seeds"]["flower"]) > 0, "Color_Rainbow: the first flowers, dressed (%s)" % str(rb.get_state()["seeds"]))
 	var pi_ = await _cage("Color_Pillar", 7, {"size": "5"})
 	_check((pi_.get_node("Patch/Garden/LatticeLines") as MultiMeshInstance3D).multimesh.use_colors, "Color_Pillar: a gradient on the lattice")
+	_check(not _planes_differ(pi_), "Color_Pillar: the planes still share one colour")
 	var gp = await _cage("Color_Grid_Pallet", 7, {"size": "5"})
-	var fmat: Material = (gp.get_node("Patch/Garden/Faces") as MeshInstance3D).material_override
-	_check(fmat is StandardMaterial3D and (fmat as StandardMaterial3D).vertex_color_use_as_albedo, "Color_Grid_Pallet: every face has its address's colour")
+	_check(_planes_differ(gp), "Color_Grid_Pallet: every plane has its address's colour")
 	var pa = await _cage("Color_Paint", 7, {"size": "5"})
 	_check(is_equal_approx(float(pa._ground_mat.get_shader_parameter("mono")), 0.0), "Color_Paint: the floor remembers in colour")
 	var wa = await _cage("Color_Walls", 7, {"size": "5"})
@@ -360,6 +360,17 @@ func _has_roof(v) -> bool:
 			if sz.x > s - 0.2 and sz.z > s - 0.2 and sz.y < 0.1:
 				return true
 	return false
+
+
+## do the two planes of the composition wear different colours?
+func _planes_differ(v) -> bool:
+	var a: MeshInstance3D = v.get_node_or_null("Patch/Garden/Faces/Plane_0")
+	var b: MeshInstance3D = v.get_node_or_null("Patch/Garden/Faces/Plane_1")
+	if a == null or b == null:
+		return false
+	var ma: StandardMaterial3D = a.material_override
+	var mb: StandardMaterial3D = b.material_override
+	return not ma.albedo_color.is_equal_approx(mb.albedo_color)
 
 
 ## the alpha of the first glass pane (a box with a StaticBody3D child) in the cage

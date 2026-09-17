@@ -1,42 +1,47 @@
 # biome_vitrine.gd — a glass cage, open to the sky, holding the biome at one spine stage.
 #
 # @identity
-# essence: the nature system the grid lane builds AROUND a map, contained and gated by the
-#          ladder: a stage (a hall or a sequence) names a closure of what the biome may be
-#          made of, do and know (commons/data/biome_vocabulary.json via biome_grammar.gd).
-#          The garden is the grammar: a point you can move, then a line, a trace, a lattice,
-#          faces, bodies, self-motion, spheres, divisions, an ornament (primitives); then what
-#          those bodies may DO — be taken, run, translate, rotate, scale, measure, move a
-#          boundary (transformation); then colour — on the bodies, as light, on the hand, a
-#          palette and the first flower, a gradient, an address, a trace in colour, the glass
-#          itself (colour). A kingdom word (flower, fungus, tree, creature) opens the painted
-#          patch: the stage's seeds dispatched cell by cell through BiomePaintDispatcher.
-#          Creatures come through CritterSpawner and SELECT only once machinelearning is
-#          learned. A PresenceGrid remembers from Point_Trace on, grey until Color_Paint. A
-#          stand screen states the cage, its vocabulary, and what lies beyond what the hall
-#          wrote. The state goes to ada_run/biome_vitrines.json.
-# desire: to stand in a hall and see what the world is made of SO FAR — Palle, 2026-09-17:
-#         "the first biome might just be one point we can move"; "you arrive late"
-# critical_parameter: stage — a hall name (Point_One), a sequence key (randomness), or
-#                     `hall` for the hall the cage stands in; everything follows from it
-# triggers: apply_grid_config (#stage:Point_One#size:5#seed:7#evolve:on#duration:20);
-#           the generation timer; readbacks get_state / get_history / status_line / closure
-# emerges: the same seed paints the same cells at every stage — what changes between two
-#          cages is only what the stage lets those cells become
-# needs: cage [has]; grey grammar [has]; transformation motions [has]; colour words [has];
-#        painted patch [has]; live creatures [has]; selection from ML only [has]; presence
-#        floor [has, own shader]; record file [has]; query rack [missing]; dream replay [missing]
-# relationships: mushrooms (the glass-case idiom); BiomeRingComponent (ground cover shared
-#                via ground_cover.gd); grab_sphere_point_with_text (the grabbable idiom);
+# essence: a canvas with restricted tools. The stage (a hall or a sequence) names a closure
+#          of what the biome may be made of, do and know (commons/data/biome_vocabulary.json
+#          via biome_grammar.gd), and the cage holds ONE composition per seed — the same
+#          work at a later state in every later hall — drawn with the galleries' own
+#          alphabet and flat shading (primitive_stack.gd) at metre scale: a black sphere
+#          at the golden section of a diagonal (Point One, and you can move it), a second
+#          point and the rod between them, the floor's memory, a grid on the back pane,
+#          planes tilted along the diagonal, a black cube and a floating beam, a white
+#          sphere in the corner, a cube divided into twenty-seven, a bipyramid crown; then
+#          what the bodies may DO — be taken, run, a sliding disc, a turning arm with a
+#          sphere at its end, a pulsing sphere, a post the height of you, a white plane
+#          that sweeps and turns; then colour — Kandinsky's assignment (circle blue, square
+#          red, triangle yellow), lamps, the hand's own colour, the Bauhaus palette and the
+#          first flowers along the diagonal, the height ramp, an address per plane, the
+#          trace in colour, the glass itself. Kingdom words open the painted patch.
+#          Creatures SELECT only once machinelearning is learned. Nothing before the colour
+#          sequence has a hue: ink, chalk, slate, soot.
+# desire: a room that reads as abstract modern art made with what the halls so far have
+#         given — Malevich, Lissitzky's Prouns, LeWitt, Calder, Kandinsky, Albers — and
+#         that is, at Point One, one point you can move (Palle, 2026-09-17)
+# critical_parameter: stage — a hall name, a sequence key, or `hall`; and seed — one seed
+#                     is one composition, the halls are its states
+# triggers: apply_grid_config (#stage:Point_One#size:5#seed:7); the generation timer;
+#           readbacks get_state / get_history / status_line / closure
+# emerges: walk the ladder and the same diagonal, the same anchors, the same sphere are
+#          there in every cage; only what the hall allows has been added
+# needs: cage [has]; composition score [has]; transformation motions [has]; colour words
+#        [has]; painted patch along the diagonal [has]; live creatures [has]; presence floor
+#        [has]; record file [has]; query rack [missing]; dream replay [missing]
+# relationships: chroma_stack / color_dna_stack (the columns this borrows its alphabet,
+#                its Kandinsky colours and its flat shading from); primitive_stack (the
+#                substrate); grab_sphere_point_with_text (the grabbable idiom);
 #                biome_grammar (the gate); doc/COMBINATORY_BIOME.md (the design)
-# truth: a biome is not scenery around the lesson — it is the lesson so far, alive
+# truth: a biome is not scenery around the lesson — it is the lesson so far, composed
 #
 # Map tokens (words, or numbers whose keys are in CONFIG_PARAM_NAMES):
-#   biome_vitrine#stage:Point_One#size:5#seed:7            one grey point, movable
-#   biome_vitrine#stage:Trans_Rotation#size:5#seed:7       the garden, and a bar turning about one end
+#   biome_vitrine#stage:Point_One#size:5#seed:7            one black sphere, floating, yours
+#   biome_vitrine#stage:Trans_Rotation#size:5#seed:7       the work so far, and a turning arm
 #   biome_vitrine#stage:randomness#size:8#seed:7#evolve:on#duration:20
-#   #stage:hall reads the hall the cage stands in (museum em_map / em_chapter meta, or the
-#   grid's map name). #glow:off keeps the floor dark; #entry:off closes the doorways.
+#   #stage:hall reads the hall the cage stands in. #glow:off keeps the floor dark;
+#   #entry:off closes the doorways.
 extends Node3D
 class_name BiomeVitrine
 
@@ -53,6 +58,7 @@ const Stage := preload("res://commons/artifacts/randomness_space/museum_exhibit_
 const TEXT_SCREEN := preload("res://commons/ui/text_screen.gd")
 const FLOOR_SHADER := preload("res://commons/artifacts/biome_vitrine/vitrine_floor.gdshader")
 const PICKABLE := preload("res://addons/godot-xr-tools/objects/pickable.tscn")
+const PrimitiveStack := preload("res://commons/primitive_grammar/primitive_stack.gd")
 
 const STAGES_PATH := "res://commons/maps/soft_stages.json"
 const RECORD_RES := "res://ada_run/biome_vitrines.json"
@@ -68,12 +74,19 @@ const ENTRY_W := 2.2
 const COVER_PER_SQM := 3.0
 const COVER_CAP := 300
 const PRESENCE_RES := 64
-## The grey grammar's greys — no hue anywhere before the colour sequence.
-const GREY_POINT := 0.22
-const GREY_LINE := 0.35
-const GREY_FACE := 0.50
-const GREY_BODY := 0.58
 const BODY_HEIGHT_M := 1.65
+const PHI := 0.618
+
+## The greys — a Suprematist's four — and Kandinsky's assignment, as chroma_stack has it.
+## Exactly neutral: before the colour sequence nothing may carry a hue, not even a tint.
+const INK := Color(0.06, 0.06, 0.06)
+const CHALK := Color(0.92, 0.92, 0.92)
+const SLATE := Color(0.44, 0.44, 0.44)
+const SOOT := Color(0.23, 0.23, 0.23)
+const BLUE := Color(0.16, 0.36, 0.80)
+const RED := Color(0.80, 0.16, 0.16)
+const YELLOW := Color(0.92, 0.78, 0.18)
+const PINK := Color(0.95, 0.25, 0.60)
 
 ## The spine stage whose biome stands here: a soft_stages.json sequence key, a HALL
 ## name (Point_One … Chamber_Color and every other map_authored hall), or `hall` for
@@ -87,7 +100,7 @@ const BODY_HEIGHT_M := 1.65
 @export_range(3, 24) var size: int = 8
 ## Glass height in metres.
 @export var height: float = 3.0
-## Seeds the painting and the creatures' DNA; the same seed paints the same cells.
+## One seed is one composition; the halls are its states.
 @export var seed: int = 7
 ## Doorways in the two end walls.
 @export_enum("on", "off") var entry: String = "on"
@@ -137,15 +150,16 @@ var _presence_timer: float = 0.0
 var _static_timer: float = 0.0
 var _status_timer: float = 0.0
 var _record_where: String = ""
-# the garden (the grammar)
+# the composition
 var _garden: Node3D = null
+var _score: Dictionary = {}
 var _free_points: Array[Node3D] = []
 var _line: MeshInstance3D = null
 var _movers: Array[Node3D] = []
 var _mover_phase: Array[float] = []
 var _grammar_counts: Dictionary = {}
 var _time: float = 0.0
-var _hues: Array[float] = []
+var _palette: Array = []
 # transformation: the rule-driven bodies
 var _loop: Node3D = null
 var _carrier: Node3D = null
@@ -239,7 +253,6 @@ func _build() -> void:
 	var pos: Dictionary = _closure.get("position", {})
 	_sequence = String(pos.get("sequence", ""))
 	if not bool(pos.get("known", false)):
-		# an unknown word: try it as a sequence for the density, and say so
 		_sequence = _stage_key.to_lower()
 		push_warning("biome_vitrine: stage `%s` is neither a hall nor a sequence of the ladder — building a grey cage" % _stage_key)
 	var info: Dictionary = _stage_info(_sequence)
@@ -252,8 +265,9 @@ func _build() -> void:
 			_kingdoms.append(k)
 	_density = clampf(intensity if intensity >= 0.0 else float(info.get("density", 0.0)), 0.0, 1.0)
 	if not _kingdoms.is_empty() and _density <= 0.0:
-		_density = 0.1          # a kingdom has arrived but the sequence says barren: the first flower still stands
-	_hues = _palette()
+		_density = 0.1
+	_palette = PrimitiveStack.PALETTES.get("bauhaus", [])
+	_score = _layout_score()
 
 	_patch = Node3D.new()
 	_patch.name = "Patch"
@@ -274,7 +288,7 @@ func _build() -> void:
 	_build_cage()
 	_build_status()
 	_write_record()
-	print("[biome_vitrine] stage %s (%s, order %d) made of %s · does %s · knows %s — garden %s, seeds %s, live %d, cover %d, %s" % [
+	print("[biome_vitrine] stage %s (%s, order %d) made of %s · does %s · knows %s — %s, seeds %s, live %d, cover %d, %s" % [
 		_stage_key, _sequence, _stage_order, str(_closure.get("made_of", [])), str(_closure.get("does", [])),
 		str(_closure.get("knows", [])), str(_grammar_counts), str(_seed_counts), _live_cells.size(), _cover_count,
 		_record_where if _record_where != "" else "no record"])
@@ -325,31 +339,6 @@ func _allows(word: String) -> bool:
 	return Grammar.allows(_closure, word)
 
 
-## The stage's hues, seeded: one per body once `colour` is in the closure.
-func _palette() -> Array[float]:
-	var out: Array[float] = []
-	var rng := RandomNumberGenerator.new()
-	rng.seed = hash([seed, "palette"])
-	var base: float = rng.randf()
-	for i in range(12):
-		out.append(fmod(base + float(i) * 0.137 + rng.randf() * 0.04, 1.0))
-	return out
-
-
-func _hue(i: int) -> float:
-	return _hues[i % _hues.size()] if not _hues.is_empty() else 0.0
-
-
-func _body_mat(i: int, grey_value: float) -> StandardMaterial3D:
-	if _grey():
-		return _grey_mat(grey_value)
-	var m := StandardMaterial3D.new()
-	m.albedo_color = Color.from_hsv(_hue(i), 0.62, clampf(grey_value + 0.25, 0.4, 0.9))
-	m.roughness = 0.7
-	m.cull_mode = BaseMaterial3D.CULL_DISABLED
-	return m
-
-
 func _build_ground() -> void:
 	var s := float(size)
 	_ground = MeshInstance3D.new()
@@ -375,30 +364,113 @@ func _build_ground() -> void:
 
 
 # ════════════════════════════════════════════════════════════════════════════
-# THE GARDEN — the grammar, one word at a time
+# THE SCORE — one seed, one composition; the halls are its states
 # ════════════════════════════════════════════════════════════════════════════
 
-func _grey_mat(v: float) -> StandardMaterial3D:
-	var m := StandardMaterial3D.new()
-	m.albedo_color = Color(v, v, v)
-	m.roughness = 0.75
-	m.cull_mode = BaseMaterial3D.CULL_DISABLED
-	return m
+## Anchors from the SEED alone (never the stage), so every cage of one seed is the same
+## work: a dominant diagonal across the floor, its golden section as the focus, a
+## perpendicular axis through the centre. Everything later is placed on these.
+func _layout_score() -> Dictionary:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash([seed, "score"])
+	var k: float = float(size) / 5.0
+	var inner: float = float(size) * 0.5 - 0.5
+	var sx: float = 1.0 if rng.randf() < 0.5 else -1.0
+	var sz: float = 1.0 if rng.randf() < 0.5 else -1.0
+	var a := Vector3(-inner * 0.85 * sx, 0.0, -inner * 0.85 * sz)
+	var b := -a
+	var dir: Vector3 = (b - a).normalized()
+	var perp := Vector3(-dir.z, 0.0, dir.x)
+	return {"k": k, "inner": inner, "a": a, "b": b, "dir": dir, "perp": perp,
+		"yaw": atan2(dir.x, dir.z), "sx": sx, "sz": sz}
+
+
+func _diag(t: float, y: float) -> Vector3:
+	var p: Vector3 = (_score["a"] as Vector3).lerp(_score["b"] as Vector3, t)
+	p.y = y
+	return p
+
+
+func _perp(u: float, y: float) -> Vector3:
+	var p: Vector3 = (_score["perp"] as Vector3) * (float(_score["inner"]) * u)
+	p.y = y
+	return p
+
+
+func _k() -> float:
+	return float(_score.get("k", 1.0))
+
+
+## The galleries' shading: flat, roughness 0.3, two-sided.
+func _mat(c: Color) -> StandardMaterial3D:
+	return PrimitiveStack._shade_material(c, 0.0)
+
+
+## A primitive from the substrate's alphabet, in the galleries' shading.
+func _shape(shape: String, size_m: float, c: Color) -> MeshInstance3D:
+	var entry: Dictionary = PrimitiveStack._make_primitive(shape, size_m, c)
+	var mi: MeshInstance3D = entry["mesh"]
+	mi.material_override = _mat(c)
+	return mi
+
+
+func _box(size_v: Vector3, c: Color) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size_v
+	mi.mesh = bm
+	mi.material_override = _mat(c)
+	return mi
+
+
+## Colour by role and hall. Before `colour`: the four greys. `colour`: Kandinsky's
+## assignment on the bodies — circle blue, square red, triangle yellow — planes and the
+## grid stay grey. `palette`: the Bauhaus palette reaches planes, beam, grid and the
+## divided cube. `address`: each plane its own entry.
+func _col(role: String, index: int) -> Color:
+	var pal: Array = _palette
+	match role:
+		"point":
+			if _allows("dress"):
+				return PINK
+			return BLUE if _allows("colour") else INK
+		"point2":
+			return BLUE if _allows("colour") else SOOT
+		"rod":
+			return SOOT
+		"circle":
+			return BLUE if _allows("colour") else (CHALK if index % 2 == 0 else INK)
+		"square":
+			return RED if _allows("colour") else (INK if index % 2 == 0 else SLATE)
+		"triangle":
+			return YELLOW if _allows("colour") else CHALK
+		"plane":
+			if _allows("address") and not pal.is_empty():
+				return pal[(3 + index * 2) % pal.size()]
+			if _allows("palette") and not pal.is_empty():
+				return pal[3 % pal.size()]
+			return CHALK if index % 2 == 0 else SLATE
+		"field":
+			if _allows("palette") and not pal.is_empty():
+				return pal[(1 + index) % pal.size()]
+			return SLATE
+		"grid":
+			if _allows("palette") and not pal.is_empty():
+				return pal[1 % pal.size()]
+			return SOOT
+	return SLATE
 
 
 ## A body you can pick up and put down: the project's own grabbable (XR Tools pickable,
 ## collision layer 3, so the desktop crosshair's right-click carries it too). Frozen, so it
 ## stays where it is dropped — a point has a place, not a momentum.
-func _make_pickable(name: String, mesh: Mesh, shape: Shape3D, mat: Material, at: Vector3) -> Node3D:
+func _make_pickable(name: String, mi: MeshInstance3D, shape: Shape3D, at: Vector3) -> Node3D:
 	var p: Node3D = PICKABLE.instantiate()
 	p.name = name
 	var col := CollisionShape3D.new()
 	col.shape = shape
 	p.add_child(col)
-	var mi := MeshInstance3D.new()
 	mi.name = "Mesh"
-	mi.mesh = mesh
-	mi.material_override = mat
 	p.add_child(mi)
 	if p is RigidBody3D:
 		(p as RigidBody3D).freeze = true
@@ -409,353 +481,263 @@ func _make_pickable(name: String, mesh: Mesh, shape: Shape3D, mat: Material, at:
 	return p
 
 
-func _make_point(index: int, at: Vector3) -> Node3D:
+func _make_point(index: int, at: Vector3, size_m: float, c: Color) -> Node3D:
 	var sh := SphereShape3D.new()
-	sh.radius = 0.09
-	var sm := SphereMesh.new()
-	sm.radius = 0.06
-	sm.height = 0.12
-	sm.radial_segments = 12
-	sm.rings = 6
-	# `dress`: the point you act through takes a colour
-	var mat: Material = _grey_mat(GREY_POINT)
-	if _allows("dress"):
-		var m := StandardMaterial3D.new()
-		m.albedo_color = Color.from_hsv(_hue(9 + index), 0.75, 0.85)
-		m.roughness = 0.5
-		mat = m
-	return _make_pickable("FreePoint_%d" % index, sm, sh, mat, at)
+	sh.radius = size_m * 0.55
+	return _make_pickable("FreePoint_%d" % index, _shape("sphere", size_m, c), sh, at)
 
 
 func _build_garden() -> void:
 	_garden = Node3D.new()
 	_garden.name = "Garden"
 	_patch.add_child(_garden)
+	var k: float = _k()
+	var inner: float = float(_score["inner"])
+	var yaw: float = float(_score["yaw"])
 	var rng := RandomNumberGenerator.new()
-	rng.seed = hash([seed, _stage_key, "grey"])
-	var half: float = float(size) * 0.5
-	var inner: float = half - 0.6
+	rng.seed = hash([seed, "garden"])
 	_grammar_counts = {"points": 0, "lines": 0, "lattice": 0, "faces": 0, "solids": 0,
 		"spheres": 0, "divided": 0, "ornament": 0, "movers": 0, "rules": 0}
 
-	# point — one, at the centre, yours to move; a second one once a line can join them
-	var n_free: int = 2 if _allows("line") else 1
-	for i in range(n_free):
-		var at := Vector3(0.0, 0.07, 0.0) if i == 0 else Vector3(inner * 0.5, 0.07, -inner * 0.35)
-		_free_points.append(_make_point(i, at))
-	_grammar_counts["points"] = n_free
-
-	# line — between the two free points; follows them (see _tick_garden)
+	# ── point: one black sphere at the golden section of the diagonal, floating, yours ──
+	_free_points.append(_make_point(0, _diag(PHI, 1.25 * k), 0.30 * k, _col("point", 0)))
+	var n_free := 1
+	# ── line: a second point at the diagonal's foot, and the rod between them ──
 	if _allows("line"):
-		_line = MeshInstance3D.new()
+		_free_points.append(_make_point(1, _diag(0.15, 0.85 * k), 0.22 * k, _col("point2", 1)))
+		n_free = 2
+		_line = _box(Vector3(0.035 * k, 0.035 * k, 1.0), _col("rod", 0))
 		_line.name = "Line_0"
-		var bm := BoxMesh.new()
-		bm.size = Vector3(0.02, 0.02, 1.0)
-		_line.mesh = bm
-		_line.material_override = _grey_mat(GREY_LINE)
 		_garden.add_child(_line)
 		_grammar_counts["lines"] = 1
 		_fit_line()
+	_grammar_counts["points"] = n_free
 
-	# lattice — many points agreeing on a distance, lines to their neighbours
-	var n: int = maxi(size - 2, 2)
-	var step: float = 2.0 * inner / float(n)
+	# ── lattice: a grid of small cubes on the back pane, LeWitt's — with its lines ──
 	if _allows("lattice"):
-		var pts := MultiMesh.new()
-		pts.transform_format = MultiMesh.TRANSFORM_3D
-		var pm := SphereMesh.new()
-		pm.radius = 0.035
-		pm.height = 0.07
-		pm.radial_segments = 8
-		pm.rings = 4
-		pts.mesh = pm
-		pts.instance_count = n * n
-		var links := MultiMesh.new()
-		links.transform_format = MultiMesh.TRANSFORM_3D
-		links.use_colors = _allows("gradient")
-		var lm := BoxMesh.new()
-		lm.size = Vector3(0.012, 0.012, 1.0)
-		links.mesh = lm
-		links.instance_count = n * (n - 1) * 2
-		var li := 0
-		for iz in range(n):
-			for ix in range(n):
-				var at := Vector3(-inner + (float(ix) + 0.5) * step, 0.04, -inner + (float(iz) + 0.5) * step)
+		var cols := 5
+		var rows := 4
+		var sp: float = 0.42 * k
+		var back := Vector3(0.0, 1.55 * k, -inner + 0.22)
+		var cubes := MultiMesh.new()
+		cubes.transform_format = MultiMesh.TRANSFORM_3D
+		cubes.use_colors = _allows("gradient")
+		var cm := BoxMesh.new()
+		cm.size = Vector3(0.13 * k, 0.13 * k, 0.13 * k)
+		cubes.mesh = cm
+		cubes.instance_count = cols * rows
+		var rods := MultiMesh.new()
+		rods.transform_format = MultiMesh.TRANSFORM_3D
+		rods.use_colors = _allows("gradient")
+		var rm := BoxMesh.new()
+		rm.size = Vector3(1.0, 0.014 * k, 0.014 * k)
+		rods.mesh = rm
+		rods.instance_count = rows + cols
+		for iy in range(rows):
+			for ix in range(cols):
 				var t := Transform3D.IDENTITY
-				t.origin = at
-				pts.set_instance_transform(iz * n + ix, t)
-				# `gradient`: hue along x, saturation along z — a colour that knows where it is
-				var tint := Color.from_hsv(float(ix) / float(n), 0.25 + 0.7 * float(iz) / float(n), 0.85)
-				if ix + 1 < n:
-					var tl := Transform3D.IDENTITY.rotated(Vector3.UP, PI * 0.5).scaled(Vector3(1, 1, step))
-					tl.origin = at + Vector3(step * 0.5, 0.0, 0.0)
-					links.set_instance_transform(li, tl)
-					if links.use_colors:
-						links.set_instance_color(li, tint)
-					li += 1
-				if iz + 1 < n:
-					var tz := Transform3D.IDENTITY.scaled(Vector3(1, 1, step))
-					tz.origin = at + Vector3(0.0, 0.0, step * 0.5)
-					links.set_instance_transform(li, tz)
-					if links.use_colors:
-						links.set_instance_color(li, tint)
-					li += 1
-		var pmi := MultiMeshInstance3D.new()
-		pmi.name = "Lattice"
-		pmi.multimesh = pts
-		pmi.material_override = _grey_mat(GREY_POINT)
-		_garden.add_child(pmi)
-		var lmi := MultiMeshInstance3D.new()
-		lmi.name = "LatticeLines"
-		lmi.multimesh = links
-		if links.use_colors:
-			var vm := StandardMaterial3D.new()
-			vm.vertex_color_use_as_albedo = true
-			vm.roughness = 0.7
-			lmi.material_override = vm
-		else:
-			lmi.material_override = _grey_mat(GREY_LINE)
-		_garden.add_child(lmi)
-		_grammar_counts["lattice"] = n * n
+				t.origin = back + Vector3((float(ix) - float(cols - 1) * 0.5) * sp, (float(iy) - float(rows - 1) * 0.5) * sp, 0.0)
+				cubes.set_instance_transform(iy * cols + ix, t)
+				if cubes.use_colors:
+					cubes.set_instance_color(iy * cols + ix, _ramp(float(iy) / float(rows - 1)))
+		for iy in range(rows):
+			var th := Transform3D.IDENTITY.scaled(Vector3(float(cols - 1) * sp, 1.0, 1.0))
+			th.origin = back + Vector3(0.0, (float(iy) - float(rows - 1) * 0.5) * sp, 0.0)
+			rods.set_instance_transform(iy, th)
+			if rods.use_colors:
+				rods.set_instance_color(iy, _ramp(float(iy) / float(rows - 1)))
+		for ix in range(cols):
+			var tv := Transform3D.IDENTITY.rotated(Vector3.FORWARD, PI * 0.5).scaled(Vector3(1.0, float(rows - 1) * sp, 1.0))
+			tv = Transform3D(Basis(Vector3.FORWARD, PI * 0.5).scaled(Vector3(1.0, float(rows - 1) * sp, 1.0)), Vector3.ZERO)
+			tv.origin = back + Vector3((float(ix) - float(cols - 1) * 0.5) * sp, 0.0, 0.0)
+			rods.set_instance_transform(rows + ix, tv)
+			if rods.use_colors:
+				rods.set_instance_color(rows + ix, _ramp(0.5))
+		var cmi := MultiMeshInstance3D.new()
+		cmi.name = "Lattice"
+		cmi.multimesh = cubes
+		cmi.material_override = _vertex_or(_col("grid", 0), cubes.use_colors)
+		_garden.add_child(cmi)
+		var rmi := MultiMeshInstance3D.new()
+		rmi.name = "LatticeLines"
+		rmi.multimesh = rods
+		rmi.material_override = _vertex_or(SOOT, rods.use_colors)
+		_garden.add_child(rmi)
+		_grammar_counts["lattice"] = cols * rows
 
-	# face — three points close a boundary: grey triangles on some lattice cells.
-	# `address`: every cell's face takes its own colour (a colour stays where you put it).
+	# ── face: two planes tilted along the diagonal, Lissitzky's ──
 	if _allows("face"):
-		var st := SurfaceTool.new()
-		st.begin(Mesh.PRIMITIVE_TRIANGLES)
-		var faces := 0
-		var addressed: bool = _allows("address")
-		for iz in range(n - 1):
-			for ix in range(n - 1):
-				if rng.randf() > 0.35:
-					continue
-				var a := Vector3(-inner + (float(ix) + 0.5) * step, 0.05, -inner + (float(iz) + 0.5) * step)
-				var b := a + Vector3(step, 0.0, 0.0)
-				var c := a + Vector3(0.0, 0.0, step)
-				if addressed:
-					st.set_color(Color.from_hsv(fmod(float(ix * (n - 1) + iz) * 0.173, 1.0), 0.6, 0.8))
-				st.add_vertex(a)
-				st.add_vertex(b)
-				st.add_vertex(c)
-				faces += 1
-		if faces > 0:
-			st.generate_normals()
-			var fm := MeshInstance3D.new()
-			fm.name = "Faces"
-			fm.mesh = st.commit()
-			if addressed:
-				var am := StandardMaterial3D.new()
-				am.vertex_color_use_as_albedo = true
-				am.cull_mode = BaseMaterial3D.CULL_DISABLED
-				am.roughness = 0.7
-				fm.material_override = am
-			else:
-				fm.material_override = _grey_mat(GREY_FACE)
-			_garden.add_child(fm)
-		_grammar_counts["faces"] = faces
+		var faces := Node3D.new()
+		faces.name = "Faces"
+		_garden.add_child(faces)
+		var p0: MeshInstance3D = _box(Vector3(1.6 * k, 1.1 * k, 0.03 * k), _col("plane", 0))
+		p0.name = "Plane_0"
+		p0.position = _diag(0.382, 1.5 * k)
+		p0.rotation = Vector3(deg_to_rad(62.0), yaw, 0.0)
+		faces.add_child(p0)
+		var p1: MeshInstance3D = _box(Vector3(1.2 * k, 0.8 * k, 0.03 * k), _col("plane", 1))
+		p1.name = "Plane_1"
+		p1.position = _perp(-0.6, 0.95 * k)
+		p1.rotation = Vector3(deg_to_rad(-50.0), yaw + PI * 0.5, 0.0)
+		faces.add_child(p1)
+		_grammar_counts["faces"] = 2
 
-	# solid — faces meet and enclose: cubes, prisms, double pyramids.
-	# `pickup` (Trans_Pre): the bodies can be taken. `colour`: each body its hue.
+	# ── solid: a black cube on the floor at the diagonal's head, a beam floating off the axis ──
 	if _allows("solid"):
-		var n_solids: int = clampi(size / 2, 2, 5)
 		var pickup: bool = _allows("pickup")
-		for i in range(n_solids):
-			var mesh: Mesh
-			var shape: Shape3D
-			match i % 3:
-				0:
-					var bm2 := BoxMesh.new()
-					bm2.size = Vector3(0.45, 0.45, 0.45)
-					mesh = bm2
-					var bs := BoxShape3D.new()
-					bs.size = bm2.size
-					shape = bs
-				1:
-					var pr := PrismMesh.new()
-					pr.size = Vector3(0.5, 0.5, 0.5)
-					mesh = pr
-					var ps := BoxShape3D.new()
-					ps.size = Vector3(0.5, 0.5, 0.5)
-					shape = ps
-				_:
-					var cy := CylinderMesh.new()   # a four-sided pyramid: faces meeting at a point
-					cy.top_radius = 0.0
-					cy.bottom_radius = 0.32
-					cy.height = 0.5
-					cy.radial_segments = 4
-					mesh = cy
-					var cs := BoxShape3D.new()
-					cs.size = Vector3(0.45, 0.5, 0.45)
-					shape = cs
-			var at := Vector3(rng.randf_range(-inner + 0.4, inner - 0.4), 0.26, rng.randf_range(-inner + 0.4, inner - 0.4))
-			var body: Node3D
-			if pickup:
-				body = _make_pickable("Solid_%d" % i, mesh, shape, _body_mat(i, GREY_BODY), at)
-			else:
-				var mi := MeshInstance3D.new()
-				mi.name = "Solid_%d" % i
-				mi.mesh = mesh
-				mi.material_override = _body_mat(i, GREY_BODY)
-				mi.position = at
-				_garden.add_child(mi)
-				body = mi
-			body.rotation.y = rng.randf_range(0.0, TAU)
-			if _allows("self_move"):
-				_movers.append(body)
-				_mover_phase.append(rng.randf_range(0.0, TAU))
-		_grammar_counts["solids"] = n_solids
+		var cube_m: MeshInstance3D = _shape("cube", 0.7 * k, _col("square", 0))
+		var cube_at: Vector3 = _diag(0.85, 0.35 * k)
+		var cube: Node3D
+		if pickup:
+			var bs := BoxShape3D.new()
+			bs.size = Vector3.ONE * 0.7 * k
+			cube = _make_pickable("Solid_0", cube_m, bs, cube_at)
+		else:
+			cube_m.name = "Solid_0"
+			cube_m.position = cube_at
+			_garden.add_child(cube_m)
+			cube = cube_m
+		cube.rotation.y = yaw + deg_to_rad(15.0)
+		var beam_m: MeshInstance3D = _box(Vector3(1.4 * k, 0.3 * k, 0.3 * k), _col("field", 0))
+		var beam_at: Vector3 = _perp(0.55, 1.9 * k)
+		var beam: Node3D
+		if pickup:
+			var bb := BoxShape3D.new()
+			bb.size = Vector3(1.4 * k, 0.3 * k, 0.3 * k)
+			beam = _make_pickable("Solid_1", beam_m, bb, beam_at)
+		else:
+			beam_m.name = "Solid_1"
+			beam_m.position = beam_at
+			_garden.add_child(beam_m)
+			beam = beam_m
+		beam.rotation.y = yaw + deg_to_rad(30.0)
+		if _allows("self_move"):
+			_movers.append(beam)
+			_mover_phase.append(rng.randf_range(0.0, TAU))
+		_grammar_counts["solids"] = 2
 
-	# sphere — the name round: bodies accepted as round
+	# ── sphere: a white sphere at the diagonal's foot corner; a black one riding the beam ──
 	if _allows("sphere"):
-		for i in range(2):
-			var sp := MeshInstance3D.new()
-			sp.name = "Sphere_%d" % i
-			var sm2 := SphereMesh.new()
-			sm2.radius = 0.28
-			sm2.height = 0.56
-			sm2.radial_segments = 14
-			sm2.rings = 7
-			sp.mesh = sm2
-			sp.material_override = _body_mat(5 + i, GREY_BODY)
-			sp.position = Vector3(rng.randf_range(-inner + 0.4, inner - 0.4), 0.29,
-				rng.randf_range(-inner + 0.4, inner - 0.4))
-			_garden.add_child(sp)
+		var s0: MeshInstance3D = _shape("sphere", 0.9 * k, _col("circle", 0))
+		s0.name = "Sphere_0"
+		s0.position = _diag(0.0, 0.45 * k)
+		_garden.add_child(s0)
+		var s1: MeshInstance3D = _shape("sphere", 0.25 * k, _col("circle", 1))
+		s1.name = "Sphere_1"
+		var beam_n: Node3D = _garden.get_node_or_null("Solid_1")
+		if beam_n != null:
+			s1.position = Vector3(0.62 * k, 0.27 * k, 0.0)
+			beam_n.add_child(s1)
+		else:
+			s1.position = _perp(0.55, 2.2 * k)
+			_garden.add_child(s1)
 		_grammar_counts["spheres"] = 2
 
-	# subdivide — a division, then another: one body of twenty-seven parts
+	# ── subdivide: a cube divided into twenty-seven, hovering, LeWitt's open cube ──
 	if _allows("subdivide"):
 		var holder := Node3D.new()
 		holder.name = "Subdivided"
 		var mm := MultiMesh.new()
 		mm.transform_format = MultiMesh.TRANSFORM_3D
-		var cm := BoxMesh.new()
-		cm.size = Vector3(0.13, 0.13, 0.13)
-		mm.mesh = cm
+		var cm2 := BoxMesh.new()
+		cm2.size = Vector3.ONE * 0.12 * k
+		mm.mesh = cm2
 		mm.instance_count = 27
-		var k := 0
+		var j := 0
 		for ix in range(3):
 			for iy in range(3):
 				for iz in range(3):
 					var t := Transform3D.IDENTITY
-					t.origin = Vector3((float(ix) - 1.0) * 0.17, 0.09 + float(iy) * 0.17, (float(iz) - 1.0) * 0.17)
-					mm.set_instance_transform(k, t)
-					k += 1
+					t.origin = Vector3((float(ix) - 1.0) * 0.17 * k, (float(iy) - 1.0) * 0.17 * k, (float(iz) - 1.0) * 0.17 * k)
+					mm.set_instance_transform(j, t)
+					j += 1
 		var smi := MultiMeshInstance3D.new()
 		smi.multimesh = mm
-		smi.material_override = _body_mat(7, GREY_BODY)
+		smi.material_override = _mat(_col("field", 1))
 		holder.add_child(smi)
-		holder.position = Vector3(-inner * 0.6, 0.0, inner * 0.6)
+		holder.position = _perp(-0.3, 1.0 * k)
+		holder.rotation.y = yaw
 		_garden.add_child(holder)
 		_grammar_counts["divided"] = 27
 
-	# ornament — a form for looking: Dürer's truncated solid, standing still
+	# ── ornament: a bipyramid crown on the black cube — a form for looking ──
 	if _allows("ornament"):
-		var orn := MeshInstance3D.new()
+		var orn: MeshInstance3D = _shape("bipyramid", 0.6 * k, _col("triangle", 0))
 		orn.name = "Ornament"
-		var cy2 := CylinderMesh.new()
-		cy2.top_radius = 0.22
-		cy2.bottom_radius = 0.4
-		cy2.height = 0.7
-		cy2.radial_segments = 6
-		orn.mesh = cy2
-		orn.material_override = _body_mat(8, GREY_BODY + 0.08)
-		orn.position = Vector3(inner * 0.6, 0.36, inner * 0.6)
-		orn.rotation = Vector3(deg_to_rad(18.0), deg_to_rad(30.0), deg_to_rad(-12.0))
+		orn.position = _diag(0.85, 0.7 * k + 0.36 * k)
+		orn.rotation.y = yaw + deg_to_rad(15.0)
 		_garden.add_child(orn)
 		_grammar_counts["ornament"] = 1
 
 	# ── transformation: what the bodies may DO ───────────────────────────────────
 	var rules := 0
-	# `run` (Trans_Introduction): a cube that rises, turns and swells, left running
 	if _allows("run"):
-		var lp := MeshInstance3D.new()
+		var lp: MeshInstance3D = _shape("cube", 0.35 * k, _col("square", 1))
 		lp.name = "Loop"
-		var lb := BoxMesh.new()
-		lb.size = Vector3(0.3, 0.3, 0.3)
-		lp.mesh = lb
-		lp.material_override = _body_mat(3, GREY_BODY)
-		lp.position = Vector3(-inner * 0.55, 0.4, -inner * 0.55)
+		lp.position = _perp(0.85, 0.5 * k)
 		_garden.add_child(lp)
 		_loop = lp
 		rules += 1
-	# `translate` (Trans_Translation): a surface that carries, sliding through the space
 	if _allows("translate"):
-		var cr := MeshInstance3D.new()
+		var cr: MeshInstance3D = _shape("disc", 0.9 * k, _col("field", 2))
 		cr.name = "Carrier"
-		var cb := BoxMesh.new()
-		cb.size = Vector3(0.8, 0.08, 0.8)
-		cr.mesh = cb
-		cr.material_override = _body_mat(4, GREY_FACE)
-		cr.position = Vector3(inner * 0.55, 0.12, 0.0)
+		cr.position = _perp(0.0, 0.12 * k)
 		_garden.add_child(cr)
 		_carrier = cr
 		rules += 1
-	# `rotate` (Trans_Rotation): a bar attached at one end — follow the other
 	if _allows("rotate"):
 		var pivot := Node3D.new()
 		pivot.name = "Spoke"
-		pivot.position = Vector3(0.0, 0.6, inner * 0.55)
-		var post := MeshInstance3D.new()
-		var pc := CylinderMesh.new()
-		pc.top_radius = 0.03
-		pc.bottom_radius = 0.03
-		pc.height = 0.6
-		post.mesh = pc
-		post.material_override = _grey_mat(GREY_LINE)
-		post.position = Vector3(0.0, -0.3, 0.0)
+		pivot.position = _diag(0.6, 2.0 * k) + _perp(0.25, 0.0)
+		var post: MeshInstance3D = _box(Vector3(0.03 * k, 2.0 * k, 0.03 * k), SOOT)
+		post.position = Vector3(0.0, -1.0 * k, 0.0)
 		pivot.add_child(post)
-		var bar := MeshInstance3D.new()
+		var bar: MeshInstance3D = _box(Vector3(1.5 * k, 0.04 * k, 0.06 * k), _col("rod", 1))
 		bar.name = "Bar"
-		var bb := BoxMesh.new()
-		bb.size = Vector3(1.2, 0.05, 0.08)
-		bar.mesh = bb
-		bar.material_override = _body_mat(6, GREY_BODY)
-		bar.position = Vector3(0.6, 0.0, 0.0)
+		bar.position = Vector3(0.75 * k, 0.0, 0.0)
 		pivot.add_child(bar)
+		var tip: MeshInstance3D = _shape("sphere", 0.18 * k, _col("circle", 2))
+		tip.name = "Tip"
+		tip.position = Vector3(1.5 * k, 0.0, 0.0)
+		pivot.add_child(tip)
 		_garden.add_child(pivot)
 		_spoke = pivot
 		rules += 1
-	# `scale` (Trans_Scale): a body that swells and shrinks
 	if _allows("scale"):
-		var pu := MeshInstance3D.new()
+		var pu: MeshInstance3D = _shape("sphere", 0.4 * k, _col("circle", 3))
 		pu.name = "Pulse"
-		var pm2 := SphereMesh.new()
-		pm2.radius = 0.2
-		pm2.height = 0.4
-		pm2.radial_segments = 12
-		pm2.rings = 6
-		pu.mesh = pm2
-		pu.material_override = _body_mat(2, GREY_BODY)
-		pu.position = Vector3(-inner * 0.55, 0.35, inner * 0.2)
+		pu.position = _perp(0.8, 1.4 * k)
 		_garden.add_child(pu)
 		_pulse = pu
 		rules += 1
-	# `body` (Trans_Body): the measure, drawn — a post the height of you
 	if _allows("body"):
-		var bp := MeshInstance3D.new()
+		var bp: MeshInstance3D = _box(Vector3(0.05, BODY_HEIGHT_M, 0.05), INK)
 		bp.name = "BodyPost"
-		var bpc := CylinderMesh.new()
-		bpc.top_radius = 0.025
-		bpc.bottom_radius = 0.025
-		bpc.height = BODY_HEIGHT_M
-		bp.mesh = bpc
-		bp.material_override = _grey_mat(GREY_LINE)
-		bp.position = Vector3(inner * 0.75, BODY_HEIGHT_M * 0.5, -inner * 0.75)
+		bp.position = Vector3(inner * 0.75 * float(_score["sx"]), BODY_HEIGHT_M * 0.5, inner * 0.75 * float(_score["sz"]) * -1.0)
 		_garden.add_child(bp)
-	# `boundary_moves` (Trans_Pit): a wall that arrives; `compose`: it also turns
 	if _allows("boundary_moves"):
-		var bd := MeshInstance3D.new()
+		var bd: MeshInstance3D = _box(Vector3(1.6 * k, 1.8 * k, 0.04 * k), _col("plane", 2))
 		bd.name = "Boundary"
-		var wb := BoxMesh.new()
-		wb.size = Vector3(1.6, 1.4, 0.05)
-		bd.mesh = wb
-		bd.material_override = _body_mat(1, GREY_FACE)
-		bd.position = Vector3(0.0, 0.7, -inner * 0.2)
+		bd.position = _diag(0.5, 0.9 * k)
+		bd.rotation.y = yaw + PI * 0.5
 		_garden.add_child(bd)
 		_boundary = bd
 		rules += 1
 	_grammar_counts["rules"] = rules
 	_grammar_counts["movers"] = _movers.size()
+
+
+func _vertex_or(c: Color, use_vertex: bool) -> StandardMaterial3D:
+	var m: StandardMaterial3D = _mat(c)
+	if use_vertex:
+		m.vertex_color_use_as_albedo = true
+		m.albedo_color = Color.WHITE
+	return m
+
+
+## chroma_stack's height ramp: blue at the floor, orange at the top.
+func _ramp(t: float) -> Color:
+	return Color.from_hsv(lerpf(0.62, 0.08, clampf(t, 0.0, 1.0)), 0.75, 0.85)
 
 
 func _fit_line() -> void:
@@ -779,29 +761,29 @@ func _tick_garden(delta: float) -> void:
 	if _garden == null:
 		return
 	_fit_line()
+	var k: float = _k()
 	for i in range(_movers.size()):
 		var m: Node3D = _movers[i]
 		if not is_instance_valid(m):
 			continue
-		m.rotate_y(delta * 0.25)
-		m.position.y = 0.26 + 0.04 * sin(_time * 0.8 + _mover_phase[i])
-	var inner: float = float(size) * 0.5 - 0.6
+		m.rotate_y(delta * 0.18)
+		m.position.y = 1.9 * k + 0.06 * k * sin(_time * 0.7 + _mover_phase[i])
 	if _loop != null:
-		_loop.position.y = 0.4 + 0.25 * sin(_time * 0.9)
+		_loop.position.y = 0.5 * k + 0.3 * k * sin(_time * 0.9)
 		_loop.rotate_y(delta * 0.6)
 		var s: float = 1.0 + 0.25 * sin(_time * 0.6)
 		_loop.scale = Vector3(s, s, s)
 	if _carrier != null:
-		_carrier.position.z = inner * 0.6 * sin(_time * 0.45)
+		_carrier.position = _perp(0.55 * sin(_time * 0.45), 0.12 * k)
 	if _spoke != null:
-		_spoke.rotate_y(delta * 0.7)
+		_spoke.rotate_y(delta * 0.5)
 	if _pulse != null:
 		var ps: float = 1.0 + 0.45 * sin(_time * 1.1)
 		_pulse.scale = Vector3(ps, ps, ps)
 	if _boundary != null:
-		_boundary.position.x = inner * 0.7 * sin(_time * 0.3)
+		_boundary.position = _diag(0.5 + 0.32 * sin(_time * 0.3), 0.9 * k)
 		if _allows("compose"):
-			_boundary.rotation.y = 0.5 * sin(_time * 0.3)
+			_boundary.rotation.y = float(_score["yaw"]) + PI * 0.5 + 0.5 * sin(_time * 0.3)
 
 
 func _deposit_points() -> void:
@@ -815,44 +797,71 @@ func _deposit_points() -> void:
 ## `light` (Color_Flashlight): the colour is already there — pools from lamps
 func _build_lights() -> void:
 	var half: float = float(size) * 0.5
+	var cols: Array = [RED, BLUE, YELLOW]
 	for i in range(3):
 		var l := OmniLight3D.new()
 		l.name = "Lamp_%d" % i
-		l.light_color = Color.from_hsv(_hue(i), 0.85, 1.0)
-		l.light_energy = 2.2
+		l.light_color = cols[i]
+		l.light_energy = 2.4
 		l.omni_range = half * 0.9
 		l.omni_attenuation = 1.6
-		var ang: float = TAU * float(i) / 3.0
-		l.position = Vector3(cos(ang) * half * 0.45, 1.5, sin(ang) * half * 0.45)
+		var ang: float = TAU * float(i) / 3.0 + float(_score["yaw"])
+		l.position = Vector3(cos(ang) * half * 0.45, 1.6, sin(ang) * half * 0.45)
 		_patch.add_child(l)
 
 
 # ════════════════════════════════════════════════════════════════════════════
-# THE PAINTED PATCH — a kingdom word opens it
+# THE PAINTED PATCH — a kingdom word opens it; the seeds follow the diagonal
 # ════════════════════════════════════════════════════════════════════════════
 
-## Paint the patch: which cells hold a seed, of which kingdom, how strong — seeded, so the
-## same seed paints the same cells at every stage.
+## The cells nearest the composition's diagonal are seeded first, so the living things
+## stand along the same line as the work — a band, not a scatter. Seeded: the same seed
+## paints the same cells at every stage.
 func _paint() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash([seed, "paint"])
 	var prob: float = 0.12 + _density * 0.55
+	var want: int = clampi(int(round(float(size * size) * prob)), 1, size * size)
 	for k in KINGDOM_NAMES:
 		_seed_counts[k] = 0
 	_tiles.clear()
 	_seed_cells.clear()
+	var a: Vector3 = _score["a"]
+	var dir: Vector3 = _score["dir"]
+	var ranked: Array = []
+	for z in range(size):
+		for x in range(size):
+			var c := Vector3(float(x) - float(size) * 0.5 + 0.5, 0.0, float(z) - float(size) * 0.5 + 0.5)
+			var rel: Vector3 = c - a
+			var along: float = rel.dot(dir)
+			var off: float = (rel - dir * along).length()
+			ranked.append({"x": x, "z": z, "d": off + rng.randf() * 0.35})
+	ranked.sort_custom(func(p, q): return float(p["d"]) < float(q["d"]))
+	var chosen: Dictionary = {}
+	var i := 0
+	for r in ranked:
+		if chosen.size() >= want:
+			break
+		var kname: String = _kingdoms[i % _kingdoms.size()]
+		if int(_seed_counts[kname]) >= int(CAPS[kname]):
+			i += 1
+			if i > ranked.size() * 2:
+				break
+			continue
+		var inten: int = clampi(5 - int(float(r["d"]) * 1.6), 1, 5)
+		_seed_counts[kname] = int(_seed_counts[kname]) + 1
+		chosen[Vector2i(int(r["x"]), int(r["z"]))] = {"kingdom": kname, "intensity": inten}
+		i += 1
 	for z in range(size):
 		var row: Array = []
 		for x in range(size):
-			var tok := ""
-			if rng.randf() < prob:
-				var k: String = _kingdoms[rng.randi_range(0, _kingdoms.size() - 1)]
-				var inten: int = clampi(1 + int(rng.randf() * (1.0 + _density * 4.0)), 1, 5)
-				if int(_seed_counts[k]) < int(CAPS[k]):
-					_seed_counts[k] = int(_seed_counts[k]) + 1
-					tok = String(KINGDOM_LETTER[k]) + str(inten)
-					_seed_cells.append({"x": x, "z": z, "kingdom": k, "intensity": inten})
-			row.append(tok)
+			var key := Vector2i(x, z)
+			if chosen.has(key):
+				var e: Dictionary = chosen[key]
+				row.append(String(KINGDOM_LETTER[String(e["kingdom"])]) + str(int(e["intensity"])))
+				_seed_cells.append({"x": x, "z": z, "kingdom": String(e["kingdom"]), "intensity": int(e["intensity"])})
+			else:
+				row.append("")
 		_tiles.append(row)
 
 
@@ -880,8 +889,6 @@ func _dispatch_seeds() -> void:
 	_dispatcher = DISPATCHER.new()
 	_dispatcher.name = "Dispatcher"
 	_patch.add_child(_dispatcher)
-	# the closure's word outranks the dispatcher's per-sequence guard: hand it an order
-	# that unlocks every kingdom the closure allows
 	var order: int = _stage_order
 	for k in _kingdoms:
 		order = maxi(order, int(ConfigLoader.get_unlock_order(int(KINGDOM_ID[k]))))
@@ -894,7 +901,6 @@ func _dispatch_seeds() -> void:
 		"cube_size": 1.0,
 	}
 	_dispatcher.apply(ctx)
-	# what the floor remembers: every rendered seed deposits its kingdom
 	_static_deposits.clear()
 	for c in _seed_cells:
 		if live and String(c["kingdom"]) == "creature":
@@ -1004,7 +1010,6 @@ func _build_presence() -> void:
 	_deposit_live()
 	_deposit_points()
 	if _ground_mat != null:
-		# one ImageTexture, updated in place every presence tick — bound once
 		_ground_mat.set_shader_parameter("presence", _presence.get_texture())
 
 
@@ -1033,8 +1038,8 @@ func _build_cage() -> void:
 	var h := height
 	var half := s * 0.5
 	var glass := Color(0.38, 0.76, 0.83, 0.085)
-	if _allows("tinted_glass"):
-		var gc := Color.from_hsv(_hue(10), 0.55, 0.9)
+	if _allows("tinted_glass") and not _palette.is_empty():
+		var gc: Color = _palette[3 % _palette.size()]
 		glass = Color(gc.r, gc.g, gc.b, 0.16)
 	var steel := Color(0.12, 0.19, 0.24)
 	var trim := Color(0.97, 0.59, 0.27)
