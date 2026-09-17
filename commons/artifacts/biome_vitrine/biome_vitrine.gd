@@ -185,6 +185,16 @@ var _carrier: Node3D = null
 var _spoke: Node3D = null
 var _pulse: Node3D = null
 var _boundary: Node3D = null
+# randomness: the walk, the absence, the estimate
+var _walk_rng: RandomNumberGenerator = null
+var _walk_timer: float = 0.0
+var _walk_steps: int = 0
+var _absent: Node3D = null
+var _absent_rng: RandomNumberGenerator = null
+var _absent_timer: float = 0.0
+var _pi_estimate: float = 0.0
+var _darts_inside: int = 0
+var _darts_total: int = 0
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -281,9 +291,9 @@ func _build() -> void:
 		if word == "":
 			continue
 		var col: String = "does"
-		if word in ["colour", "light", "palette", "gradient", "tinted_glass", "point", "line", "lattice", "face", "solid", "sphere", "subdivide", "ornament", "sample", "field", "recurse", "implicit", "union", "subtract", "intersect", "connect", "repeat", "tile"] or word in KINGDOM_NAMES:
+		if word in ["colour", "light", "palette", "gradient", "tinted_glass", "point", "line", "lattice", "face", "solid", "sphere", "subdivide", "ornament", "sample", "field", "recurse", "implicit", "union", "subtract", "intersect", "connect", "repeat", "tile", "entropy", "ten_print", "ring", "drip", "dartboard", "pipe"] or word in KINGDOM_NAMES:
 			col = "made_of"
-		elif word in ["trace", "count", "index", "seed", "body", "address", "when", "fitness", "limit", "bias"]:
+		elif word in ["trace", "count", "index", "seed", "body", "address", "when", "fitness", "limit", "bias", "gaussian"]:
 			col = "knows"
 		if not (_closure[col] as Array).has(word):
 			(_closure[col] as Array).append(word)
@@ -349,6 +359,12 @@ func _rebuild() -> void:
 	_spoke = null
 	_pulse = null
 	_boundary = null
+	_absent = null
+	_walk_rng = null
+	_absent_rng = null
+	_walk_steps = 0
+	_darts_inside = 0
+	_darts_total = 0
 	_free_points.clear()
 	_movers.clear()
 	_mover_phase.clear()
@@ -586,7 +602,8 @@ func _build_garden() -> void:
 		_fit_line()
 	_grammar_counts["points"] = n_free
 
-	# ── lattice: a grid of small cubes on the back pane, LeWitt's — with its lines ──
+	# ── lattice: a grid of small cubes on the back pane, LeWitt's — with its lines.
+	# `remove` (Random_Remove): chance takes some cubes away; one stands outside the draw.
 	if _allows("lattice"):
 		var cols := 5
 		var rows := 4
@@ -599,6 +616,10 @@ func _build_garden() -> void:
 		cm.size = Vector3(0.13 * k, 0.13 * k, 0.13 * k)
 		cubes.mesh = cm
 		cubes.instance_count = cols * rows
+		var removed := 0
+		var protected: int = int(round(float(cols * rows) * PHI))
+		var rm_rng := RandomNumberGenerator.new()
+		rm_rng.seed = hash([seed, "remove"])
 		var rods := MultiMesh.new()
 		rods.transform_format = MultiMesh.TRANSFORM_3D
 		rods.use_colors = _allows("gradient")
@@ -610,9 +631,14 @@ func _build_garden() -> void:
 			for ix in range(cols):
 				var t := Transform3D.IDENTITY
 				t.origin = back + Vector3((float(ix) - float(cols - 1) * 0.5) * sp, (float(iy) - float(rows - 1) * 0.5) * sp, 0.0)
-				cubes.set_instance_transform(iy * cols + ix, t)
+				var idx: int = iy * cols + ix
+				if _allows("remove") and idx != protected and rm_rng.randf() < 0.3:
+					t = Transform3D(Basis().scaled(Vector3.ZERO), t.origin)
+					removed += 1
+				cubes.set_instance_transform(idx, t)
 				if cubes.use_colors:
-					cubes.set_instance_color(iy * cols + ix, _ramp(float(iy) / float(rows - 1)))
+					cubes.set_instance_color(idx, _ramp(float(iy) / float(rows - 1)))
+		_grammar_counts["removed"] = removed
 		for iy in range(rows):
 			var th := Transform3D.IDENTITY.scaled(Vector3(float(cols - 1) * sp, 1.0, 1.0))
 			th.origin = back + Vector3(0.0, (float(iy) - float(rows - 1) * 0.5) * sp, 0.0)
@@ -798,6 +824,222 @@ func _build_garden() -> void:
 		rules += 1
 	_grammar_counts["rules"] = rules
 	_grammar_counts["movers"] = _movers.size()
+	_build_chance(rng, k, inner, yaw)
+
+
+## ── randomness: what chance may change ─────────────────────────────────────────
+## Every element seeded from the cage's seed and its word, so the same seed draws the
+## same reel, the same maze, the same drips, the same darts; the walk and the absence
+## draw as time passes, from their own seeded streams.
+func _build_chance(rng: RandomNumberGenerator, k: float, inner: float, yaw: float) -> void:
+	var pal: Array = _palette
+	# `sample` (Random_Definition): a reel of five amounts the seed chose, on a rod
+	if _allows("sample"):
+		var reel := Node3D.new()
+		reel.name = "Reel"
+		var rr := RandomNumberGenerator.new()
+		rr.seed = hash([seed, "reel"])
+		var rod: MeshInstance3D = _box(Vector3(1.5 * k, 0.03 * k, 0.03 * k), SOOT)
+		reel.add_child(rod)
+		for i in range(5):
+			var c: Color = pal[rr.randi_range(0, pal.size() - 1)] if not pal.is_empty() and _allows("colour") else (CHALK if rr.randf() < 0.5 else INK)
+			var cube: MeshInstance3D = _shape("cube", 0.16 * k, c)
+			cube.position = Vector3((float(i) - 2.0) * 0.32 * k, 0.0, 0.0)
+			cube.rotation.y = rr.randf_range(0.0, TAU)
+			reel.add_child(cube)
+		reel.position = _perp(-0.85, 1.7 * k)
+		reel.rotation.y = yaw
+		_garden.add_child(reel)
+		_grammar_counts["reel"] = 5
+	# `entropy` (Random_Entropy): the grid again, its agreement withdrawn — on the side pane
+	if _allows("entropy"):
+		var er := RandomNumberGenerator.new()
+		er.seed = hash([seed, "entropy"])
+		var mm := MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		var cm := BoxMesh.new()
+		cm.size = Vector3.ONE * 0.13 * k
+		mm.mesh = cm
+		mm.instance_count = 20
+		var side := Vector3(-inner + 0.22, 1.55 * k, 0.0)
+		for i in range(20):
+			var t := Transform3D.IDENTITY.rotated(Vector3.UP, er.randf_range(0.0, TAU)).rotated(Vector3.RIGHT, er.randf_range(-0.6, 0.6))
+			t.origin = side + Vector3(0.0, (float(i / 5) - 1.5) * 0.42 * k + er.randf_range(-0.14, 0.14) * k, (float(i % 5) - 2.0) * 0.42 * k + er.randf_range(-0.14, 0.14) * k)
+			mm.set_instance_transform(i, t)
+		var emi := MultiMeshInstance3D.new()
+		emi.name = "Entropy"
+		emi.multimesh = mm
+		emi.material_override = _mat(_col("grid", 1))
+		_garden.add_child(emi)
+		_grammar_counts["entropy"] = 20
+	# `ten_print` (10 PRINT): a band of slabs across the floor, each its own coin — the maze
+	if _allows("ten_print"):
+		var tr := RandomNumberGenerator.new()
+		tr.seed = hash([seed, "ten_print"])
+		var cells: int = maxi(int(2.0 * inner / (0.4 * k)), 4)
+		var band := 3
+		var mm2 := MultiMesh.new()
+		mm2.transform_format = MultiMesh.TRANSFORM_3D
+		var sm := BoxMesh.new()
+		sm.size = Vector3(0.5 * k, 0.02 * k, 0.05 * k)
+		mm2.mesh = sm
+		mm2.instance_count = cells * band
+		var n := 0
+		for r in range(band):
+			for c in range(cells):
+				var along: float = -inner + (float(c) + 0.5) * (2.0 * inner / float(cells))
+				var across: float = (float(r) - float(band - 1) * 0.5) * 0.4 * k
+				var slash: bool = tr.randf() < 0.5
+				var t := Transform3D.IDENTITY.rotated(Vector3.UP, yaw + PI * 0.5 + (PI * 0.25 if slash else -PI * 0.25))
+				t.origin = (_score["dir"] as Vector3) * along + (_score["perp"] as Vector3) * (inner * 0.45 + across)
+				t.origin.y = 0.03
+				mm2.set_instance_transform(n, t)
+				n += 1
+		var tmi := MultiMeshInstance3D.new()
+		tmi.name = "TenPrint"
+		tmi.multimesh = mm2
+		tmi.material_override = _mat(INK)
+		_garden.add_child(tmi)
+		_grammar_counts["ten_print"] = n
+	# `walk` (Random_Walk): the point walks by itself, one step at a time — from build on
+	if _allows("walk"):
+		_walk_rng = RandomNumberGenerator.new()
+		_walk_rng.seed = hash([seed, "walk"])
+	# `drip` (the examples hall, Pollock): lines that start with a sampled direction and turn
+	# by small amounts, from a fixed palette, painted on the floor
+	if _allows("drip"):
+		var dr := RandomNumberGenerator.new()
+		dr.seed = hash([seed, "drip"])
+		var lines := 6
+		var segs := 14
+		var mm3 := MultiMesh.new()
+		mm3.transform_format = MultiMesh.TRANSFORM_3D
+		mm3.use_colors = true
+		var dm := BoxMesh.new()
+		dm.size = Vector3(1.0, 0.012 * k, 0.03 * k)
+		mm3.mesh = dm
+		mm3.instance_count = lines * segs
+		var j := 0
+		for l in range(lines):
+			var p := Vector3(dr.randf_range(-inner * 0.7, inner * 0.7), 0.025, dr.randf_range(-inner * 0.7, inner * 0.7))
+			var ang: float = dr.randf_range(0.0, TAU)
+			var c: Color = pal[dr.randi_range(0, pal.size() - 1)] if not pal.is_empty() else INK
+			for s in range(segs):
+				var step: float = dr.randf_range(0.18, 0.42) * k
+				ang += dr.randf_range(-0.7, 0.7)
+				var q := p + Vector3(cos(ang), 0.0, sin(ang)) * step
+				q.x = clampf(q.x, -inner + 0.2, inner - 0.2)
+				q.z = clampf(q.z, -inner + 0.2, inner - 0.2)
+				var d := q - p
+				var t := Transform3D(Basis(Vector3.UP, atan2(d.x, d.z) - PI * 0.5).scaled(Vector3(maxf(d.length(), 0.01), 1.0, 1.0)), (p + q) * 0.5)
+				mm3.set_instance_transform(j, t)
+				mm3.set_instance_color(j, c)
+				j += 1
+				p = q
+		var dmi := MultiMeshInstance3D.new()
+		dmi.name = "Drips"
+		dmi.multimesh = mm3
+		dmi.material_override = _vertex_or(CHALK, true)
+		_garden.add_child(dmi)
+		_grammar_counts["drips"] = j
+	# `dartboard` (the examples hall, Monte Carlo): a square with its circle, standing,
+	# forty darts sampled uniformly; the estimate reads 4 × inside / total
+	if _allows("dartboard"):
+		var board := Node3D.new()
+		board.name = "Dartboard"
+		var w: float = 1.1 * k
+		var square: MeshInstance3D = _box(Vector3(w, w, 0.03 * k), CHALK)
+		board.add_child(square)
+		var circle: MeshInstance3D = _shape("disc", w * 0.98, SLATE)
+		circle.rotation.x = PI * 0.5
+		circle.position.z = 0.02 * k
+		circle.scale.y = 0.4
+		board.add_child(circle)
+		var br := RandomNumberGenerator.new()
+		br.seed = hash([seed, "darts"])
+		_darts_inside = 0
+		_darts_total = 40
+		for i in range(_darts_total):
+			var ux: float = br.randf_range(-0.5, 0.5)
+			var uy: float = br.randf_range(-0.5, 0.5)
+			var inside: bool = ux * ux + uy * uy <= 0.25
+			if inside:
+				_darts_inside += 1
+			var dart: MeshInstance3D = _shape("sphere", 0.045 * k, Color(0.2, 0.75, 0.3) if inside else Color(0.85, 0.2, 0.2))
+			dart.position = Vector3(ux * w, uy * w, 0.045 * k)
+			board.add_child(dart)
+		_pi_estimate = 4.0 * float(_darts_inside) / float(_darts_total)
+		var post: MeshInstance3D = _box(Vector3(0.04 * k, 1.0 * k, 0.04 * k), SOOT)
+		post.position = Vector3(0.0, -0.5 * w - 0.5 * k, 0.0)
+		board.add_child(post)
+		board.position = _perp(-0.55, 1.05 * k + 0.5 * w)
+		board.rotation.y = yaw
+		_garden.add_child(board)
+		_grammar_counts["darts"] = _darts_total
+	# `pipe` (the examples hall): a bounded pipe growing through six axis directions,
+	# preferring straight runs, never reversing — a scribble in the volume
+	if _allows("pipe"):
+		var pr := RandomNumberGenerator.new()
+		pr.seed = hash([seed, "pipe"])
+		var dirs: Array[Vector3] = [Vector3.RIGHT, Vector3.LEFT, Vector3.UP, Vector3.DOWN, Vector3.FORWARD, Vector3.BACK]
+		var segs2 := 70
+		var step2: float = 0.3 * k
+		var pos: Vector3 = _diag(0.5, 1.2 * k)
+		var last := Vector3.ZERO
+		var mm4 := MultiMesh.new()
+		mm4.transform_format = MultiMesh.TRANSFORM_3D
+		var pm := CylinderMesh.new()
+		pm.top_radius = 0.035 * k
+		pm.bottom_radius = 0.035 * k
+		pm.height = step2
+		pm.radial_segments = 8
+		mm4.mesh = pm
+		mm4.instance_count = segs2
+		var placed := 0
+		for s in range(segs2):
+			var d: Vector3 = last
+			if last == Vector3.ZERO or pr.randf() > 0.55:
+				var tries := 0
+				while tries < 12:
+					var cand: Vector3 = dirs[pr.randi_range(0, 5)]
+					if cand != -last:
+						var nxt: Vector3 = pos + cand * step2
+						if absf(nxt.x) < inner - 0.3 and absf(nxt.z) < inner - 0.3 and nxt.y > 0.25 * k and nxt.y < height - 0.3:
+							d = cand
+							break
+					tries += 1
+				if tries >= 12:
+					break
+			var q: Vector3 = pos + d * step2
+			if absf(q.x) >= inner - 0.3 or absf(q.z) >= inner - 0.3 or q.y <= 0.25 * k or q.y >= height - 0.3:
+				last = Vector3.ZERO
+				continue
+			var basis := Basis()
+			if d.y == 0.0:
+				basis = Basis(Vector3.FORWARD if d.x != 0.0 else Vector3.RIGHT, PI * 0.5)
+			var t := Transform3D(basis, (pos + q) * 0.5)
+			mm4.set_instance_transform(placed, t)
+			placed += 1
+			pos = q
+			last = d
+		mm4.instance_count = maxi(placed, 1)
+		var pmi := MultiMeshInstance3D.new()
+		pmi.name = "Pipe"
+		pmi.multimesh = mm4
+		pmi.material_override = _mat(pal[2 % pal.size()] if not pal.is_empty() and _allows("colour") else SLATE)
+		_garden.add_child(pmi)
+		_grammar_counts["pipe"] = placed
+	# `absent` (Random_Game): a body that may not be there when you arrive — the beam's rider
+	if _allows("absent"):
+		_absent_rng = RandomNumberGenerator.new()
+		_absent_rng.seed = hash([seed, "absent"])
+		var rider: Node3D = _garden.get_node_or_null("Solid_1/Sphere_1")
+		if rider == null:
+			rider = _garden.get_node_or_null("Sphere_1")
+		if rider == null:
+			rider = _garden.get_node_or_null("Ornament")
+		_absent = rider
+		_absent_timer = _absent_rng.randf_range(2.0, 6.0)
 
 
 func _vertex_or(c: Color, use_vertex: bool) -> StandardMaterial3D:
@@ -857,6 +1099,29 @@ func _tick_garden(delta: float) -> void:
 		_boundary.position = _diag(0.5 + 0.32 * sin(_time * 0.3), 0.9 * k)
 		if _allows("compose"):
 			_boundary.rotation.y = float(_score["yaw"]) + PI * 0.5 + 0.5 * sin(_time * 0.3)
+	# `walk`: the point steps by itself, one of four directions, using nothing it remembers;
+	# a hand that holds it wins — the walk waits
+	if _walk_rng != null and not _free_points.is_empty():
+		_walk_timer += delta
+		if _walk_timer >= 0.5:
+			_walk_timer = 0.0
+			var p: Node3D = _free_points[0]
+			var held: bool = p.has_method("is_picked_up") and p.is_picked_up()
+			if is_instance_valid(p) and not held:
+				var inner: float = float(_score["inner"])
+				var dirs: Array[Vector3] = [Vector3.RIGHT, Vector3.LEFT, Vector3.FORWARD, Vector3.BACK]
+				var d: Vector3 = dirs[_walk_rng.randi_range(0, 3)] * 0.35 * k
+				var lp: Vector3 = _garden.to_local(p.global_position) + d
+				lp.x = clampf(lp.x, -inner + 0.3, inner - 0.3)
+				lp.z = clampf(lp.z, -inner + 0.3, inner - 0.3)
+				p.global_position = _garden.to_global(lp)
+				_walk_steps += 1
+	# `absent`: the rider blinks out and back on a schedule you cannot see
+	if _absent != null and is_instance_valid(_absent) and _absent_rng != null:
+		_absent_timer -= delta
+		if _absent_timer <= 0.0:
+			_absent.visible = not _absent.visible
+			_absent_timer = _absent_rng.randf_range(1.5, 5.0) if _absent.visible else _absent_rng.randf_range(0.8, 2.5)
 
 
 func _deposit_points() -> void:
@@ -889,7 +1154,9 @@ func _build_lights() -> void:
 
 ## The cells nearest the composition's diagonal are seeded first, so the living things
 ## stand along the same line as the work — a band, not a scatter. Seeded: the same seed
-## paints the same cells at every stage.
+## paints the same cells at every stage. `gaussian` (Random_Gaussian): the distance is
+## counted as a bell — cells drawn by a normal offset from the line, not nearest-first.
+## `ring` (Random_Mushrooms): fungus stands in a fairy ring around the work's foot.
 func _paint() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash([seed, "paint"])
@@ -901,6 +1168,9 @@ func _paint() -> void:
 	_seed_cells.clear()
 	var a: Vector3 = _score["a"]
 	var dir: Vector3 = _score["dir"]
+	var gaussian: bool = _allows("gaussian")
+	var ring_c: Vector3 = _diag(0.0, 0.0)
+	var ring_r: float = 1.6 * _k()
 	var ranked: Array = []
 	for z in range(size):
 		for x in range(size):
@@ -908,14 +1178,30 @@ func _paint() -> void:
 			var rel: Vector3 = c - a
 			var along: float = rel.dot(dir)
 			var off: float = (rel - dir * along).length()
-			ranked.append({"x": x, "z": z, "d": off + rng.randf() * 0.35})
+			var d: float
+			if gaussian:
+				# the count is a bell: a cell's rank is how unlikely its offset is under N(0, 1.1)
+				d = absf(off - absf(rng.randfn(0.0, 1.1))) + rng.randf() * 0.2
+			else:
+				d = off + rng.randf() * 0.35
+			var ring_d: float = absf((c - ring_c).length() - ring_r)
+			ranked.append({"x": x, "z": z, "d": d, "ring": ring_d})
 	ranked.sort_custom(func(p, q): return float(p["d"]) < float(q["d"]))
+	if _allows("ring") and "fungus" in _kingdoms:
+		# the fungus takes the ring first: cells on the ring, nearest the ring first
+		var on_ring: Array = ranked.filter(func(r): return float(r["ring"]) < 0.6)
+		on_ring.sort_custom(func(p, q): return float(p["ring"]) < float(q["ring"]))
+		var others: Array = ranked.filter(func(r): return float(r["ring"]) >= 0.6)
+		ranked = on_ring + others
 	var chosen: Dictionary = {}
 	var i := 0
+	var ring_first: bool = _allows("ring") and "fungus" in _kingdoms
 	for r in ranked:
 		if chosen.size() >= want:
 			break
 		var kname: String = _kingdoms[i % _kingdoms.size()]
+		if ring_first and float(r["ring"]) < 0.6 and int(_seed_counts["fungus"]) < int(CAPS["fungus"]):
+			kname = "fungus"
 		if int(_seed_counts[kname]) >= int(CAPS[kname]):
 			i += 1
 			if i > ranked.size() * 2:
@@ -1433,7 +1719,7 @@ func _status_body() -> String:
 		" ".join(does) if not does.is_empty() else "—",
 		" ".join(knows) if not knows.is_empty() else "—"]
 	var parts: Array[String] = []
-	for k in ["points", "lines", "lattice", "faces", "solids", "spheres", "divided", "ornament", "rules"]:
+	for k in ["points", "lines", "lattice", "removed", "faces", "solids", "spheres", "divided", "ornament", "rules", "reel", "entropy", "ten_print", "drips", "darts", "pipe"]:
 		if int(_grammar_counts.get(k, 0)) > 0:
 			parts.append("%d %s" % [int(_grammar_counts[k]), k])
 	var tail := "\n%s" % (" · ".join(parts) if not parts.is_empty() else "nothing yet")
@@ -1447,6 +1733,10 @@ func _status_body() -> String:
 			", ".join(seeds) if not seeds.is_empty() else "none", _cover_count, live, _gen, _births, _deaths]
 	if _allows("body"):
 		tail += "\nbody %.2f m · cage %.1f bodies" % [BODY_HEIGHT_M, float(size) / BODY_HEIGHT_M]
+	if _allows("dartboard") and _darts_total > 0:
+		tail += "\nπ ≈ 4 × %d / %d = %.3f" % [_darts_inside, _darts_total, _pi_estimate]
+	if _allows("walk"):
+		tail += "\nwalk: %d steps" % _walk_steps
 	if _allows("when"):
 		tail += "\nwhen: %d s standing" % int(_time)
 	var beyond: String = Grammar.beyond_of(_stage_key)

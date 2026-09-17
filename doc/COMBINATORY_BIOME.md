@@ -287,6 +287,27 @@ counted dead; and every empirical answer names the fitness it was measured under
 The GEN + key on the rack makes a generation pass now; GEN − (scrubbing back through a
 recorded generation) is still open — it needs positions in the log, not only ids.
 
+**The randomness ladder** (the same night, after Palle: take the examples hall as the
+teacher). The randomness sequence was one wordless stop — `sample`, `fungus`, `vary`,
+`seed` arriving together. It is nine halls now, each adding what chance may *touch* in a
+work that already has its colour: a **reel** of five amounts the seed chose
+(`Random_Definition`: `sample`, `seed`); the lattice again on the side pane with its
+agreement withdrawn (`Random_Entropy`: `entropy`); lattice cubes taken by a draw, one
+index protected from it (`Random_Remove`: `remove`); a floor band of slabs, each its own
+coin, that reads as a maze (`ten_print`); the free point stepping by itself every half
+second in one of four directions, the hand outranking the walk (`Random_Walk`: `walk`);
+the painting ranking its cells by a bell instead of nearest-first (`Random_Gaussian`:
+`gaussian` — the same seeds, counted differently); the first fungus, standing in a fairy
+ring around the work's foot (`Random_Mushrooms`: `fungus`, `ring`); then the examples
+hall's three moves — Pollock's **drips** as palette-coloured line runs on the floor, the
+Monte Carlo **dartboard** with forty darts and `π ≈ 4 × inside / total` on the screen, a
+six-axis **pipe** scribbling through the volume, never reversing; and last a rider that
+blinks out on a schedule you cannot see (`Random_Game`: `absent`). Every element is seeded
+from (seed, word), so the same cage draws the same reel, maze, drips and darts; the walk
+and the absence draw as time passes from their own streams. The examples hall's own lesson
+is the one the ladder inherits: chance chose the evidence, the rules chose what counted as
+evidence. `Biome_Ladder_Randomness` is the last randomness pearl (nine cages).
+
 **The dream room.** One per threshold — or the museum's night (`[em-night] the moon
 is the light… one circuit every 480 s` already exists in the endless museum). Three
 gardens stand side by side: *as grown*, *the sufficient subset only*, and *the

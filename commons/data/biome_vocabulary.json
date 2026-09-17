@@ -1,6 +1,6 @@
 {
 	"schema": "ada.biome_vocabulary.v1",
-	"description": "What the biome may be made of, do and know, hall by hall along the spine. Read by commons/biome_layers/biome_grammar.gd: a stage's closure is the union of every hall at or before it (order = curriculum_spine.json sequences, map_authored.json halls within a sequence) plus every sequence entry at or before its sequence. A word absent from the closure is not allowed in the cage. Three columns: made_of (geometry), does (time and behaviour), knows (record and readout). The visitor's hand is always allowed; the cage and its screen are furniture, not biome. `line` is the hall's own opening sentence, paraphrased; `beyond` is what the biome may say past what the hall wrote (Palle, 2026-09-17: 'you arrive late' — the biome as the opportunity to tell what is beyond what we wrote about). Design: doc/COMBINATORY_BIOME.md. Kingdom words (flower, fungus, tree, creature) are the arrival of a painted kingdom: flower with Color_Rainbow, fungus with randomness, tree and creature with lsystems. Per-hall entries exist for primitives, transformation and colour; the other sequences carry sequence-level words until their owners write the halls.",
+	"description": "What the biome may be made of, do and know, hall by hall along the spine. Read by commons/biome_layers/biome_grammar.gd: a stage's closure is the union of every hall at or before it (order = curriculum_spine.json sequences, map_authored.json halls within a sequence) plus every sequence entry at or before its sequence. A word absent from the closure is not allowed in the cage. Three columns: made_of (geometry), does (time and behaviour), knows (record and readout). The visitor's hand is always allowed; the cage and its screen are furniture, not biome. `line` is the hall's own opening sentence, paraphrased; `beyond` is what the biome may say past what the hall wrote (Palle, 2026-09-17: 'you arrive late' — the biome as the opportunity to tell what is beyond what we wrote about). Design: doc/COMBINATORY_BIOME.md. Kingdom words (flower, fungus, tree, creature) are the arrival of a painted kingdom: flower with Color_Rainbow, fungus with randomness, tree and creature with lsystems. Per-hall entries exist for primitives, transformation and colour; the other sequences carry sequence-level words until their owners write the halls. Randomness carries per-hall entries too (2026-09-17, after the examples hall: Pollock's drips, the Monte Carlo dartboard, the pipe, the particle study).",
 	"columns": [
 		"made_of",
 		"does",
@@ -247,6 +247,94 @@
 			],
 			"line": "A small instrument faces a crate in a frame. The aim is chosen; what remains is when.",
 			"beyond": "everything here has been counted, coloured and placed; the one thing not decided is the moment. Time is the last material in this chapter."
+		},
+		"Random_Definition": {
+			"made_of": [
+				"sample"
+			],
+			"does": [],
+			"knows": [
+				"seed"
+			],
+			"line": "A pattern that returns: five amounts bring a familiar curve back; choose a patch of colour you would not have put together.",
+			"beyond": "a draw you did not make was still a draw. The seed is the name for having been decided before you arrived; the reel shows the amounts it chose."
+		},
+		"Random_Entropy": {
+			"made_of": [
+				"entropy"
+			],
+			"does": [
+				"vary"
+			],
+			"knows": [],
+			"line": "What the gauge forgets: one discarded draw changed which values became neighbours.",
+			"beyond": "order is the grid; disorder is the same grid with its agreement withdrawn. The gauge counts the withdrawal and forgets which cube moved."
+		},
+		"Random_Remove": {
+			"made_of": [],
+			"does": [
+				"remove"
+			],
+			"knows": [],
+			"line": "The set before the choice: find a cube the process cannot choose.",
+			"beyond": "removal is a choice made among the present. One cube stands outside the draw, and that is the only reason it is certain."
+		},
+		"Randomness_10_PRINT_Algorithm": {
+			"made_of": [
+				"ten_print"
+			],
+			"does": [],
+			"knows": [],
+			"line": "When do independent marks begin to look like a maze?",
+			"beyond": "each slab took its own coin and knew nothing of its neighbour; the maze is yours, read across marks that never met."
+		},
+		"Random_Walk": {
+			"made_of": [],
+			"does": [
+				"walk"
+			],
+			"knows": [],
+			"line": "The trail is already elsewhere: what does a trail remember that its next step does not use?",
+			"beyond": "the point walks now, by itself, one step at a time, using nothing it remembers. The floor remembers for it; that is the difference between a walk and a trail."
+		},
+		"Random_Gaussian": {
+			"made_of": [],
+			"does": [],
+			"knows": [
+				"gaussian"
+			],
+			"line": "The shape we counted: what changes when the values stay where they are, but we count them differently?",
+			"beyond": "the seeds were always scattered; counting them by distance from the line makes a bell out of them. The bell is in the count, not in the ground."
+		},
+		"Random_Mushrooms": {
+			"made_of": [
+				"fungus",
+				"ring"
+			],
+			"does": [],
+			"knows": [],
+			"line": "Which differences were invited? In the previous room the numbers gathered into bars; here they have caps and stems.",
+			"beyond": "the first fungus stands in a ring because a ring is what a spore's chance looks like from above. A fairy ring is a distribution you can walk around."
+		},
+		"Randomness_Examples_of_Randomness": {
+			"made_of": [
+				"drip",
+				"dartboard",
+				"pipe"
+			],
+			"does": [],
+			"knows": [],
+			"line": "What chance may change: a painting on the floor, a dartboard, pipes, a particle study — in each, something decided what a random draw was allowed to touch.",
+			"beyond": "the drip followed a line rule and a palette; the darts fell in a square and were counted against a circle; the pipe turned where it was allowed. Chance chose the evidence; the rules chose what counted as evidence."
+		},
+		"Random_Game": {
+			"made_of": [],
+			"does": [
+				"absent"
+			],
+			"knows": [],
+			"line": "Told, or finding out: a draw helps decide whether a body will still be there when yours arrives.",
+			"beyond": "a body that may not be there is still part of the work. Absence on a schedule you cannot see is what a rule looks like from outside."
 		}
 	},
 	"sequences": {
@@ -313,16 +401,9 @@
 			"knows": []
 		},
 		"randomness": {
-			"made_of": [
-				"sample",
-				"fungus"
-			],
-			"does": [
-				"vary"
-			],
-			"knows": [
-				"seed"
-			]
+			"made_of": [],
+			"does": [],
+			"knows": []
 		},
 		"noise": {
 			"made_of": [
