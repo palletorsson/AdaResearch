@@ -1,0 +1,334 @@
+{
+ "at": "2026-09-17T22:35:48+0200",
+ "threshold": 24,
+ "seed": 7,
+ "families": [
+  "diagonal",
+  "vertical",
+  "split",
+  "kandinsky",
+  "malevich",
+  "klee",
+  "moholy"
+ ],
+ "per_hall": {
+  "Point_One": {
+   "mean": 0.0016,
+   "min": 0.0013,
+   "max": 0.0018,
+   "pairs": 21
+  },
+  "Point_Lines": {
+   "mean": 0.0043,
+   "min": 0.0035,
+   "max": 0.0057,
+   "pairs": 21
+  },
+  "Point_Trace": {
+   "mean": 0.011,
+   "min": 0.0082,
+   "max": 0.0136,
+   "pairs": 21
+  },
+  "Point_Line_Grid": {
+   "mean": 0.011,
+   "min": 0.0082,
+   "max": 0.0136,
+   "pairs": 21
+  },
+  "Point_Triangle_Context": {
+   "mean": 0.0429,
+   "min": 0.0268,
+   "max": 0.0532,
+   "pairs": 21
+  },
+  "Primitives_Polythedra": {
+   "mean": 0.0583,
+   "min": 0.0416,
+   "max": 0.0702,
+   "pairs": 21
+  },
+  "Point_Animatedcube": {
+   "mean": 0.0557,
+   "min": 0.0388,
+   "max": 0.0699,
+   "pairs": 21
+  },
+  "Primitives_Ignorance": {
+   "mean": 0.0658,
+   "min": 0.0439,
+   "max": 0.0811,
+   "pairs": 21
+  },
+  "Primitives_Portals": {
+   "mean": 0.0664,
+   "min": 0.0445,
+   "max": 0.0824,
+   "pairs": 21
+  },
+  "Primitives_Melencolia": {
+   "mean": 0.0671,
+   "min": 0.0447,
+   "max": 0.0834,
+   "pairs": 21
+  },
+  "Trans_Pre": {
+   "mean": 0.0673,
+   "min": 0.0455,
+   "max": 0.0832,
+   "pairs": 21
+  },
+  "Trans_Introduction": {
+   "mean": 0.0691,
+   "min": 0.0467,
+   "max": 0.0847,
+   "pairs": 21
+  },
+  "Trans_Translation": {
+   "mean": 0.0693,
+   "min": 0.0471,
+   "max": 0.0843,
+   "pairs": 21
+  },
+  "Trans_Rotation": {
+   "mean": 0.0707,
+   "min": 0.0493,
+   "max": 0.0843,
+   "pairs": 21
+  },
+  "Trans_Scale": {
+   "mean": 0.0731,
+   "min": 0.0517,
+   "max": 0.0866,
+   "pairs": 21
+  },
+  "Trans_Body": {
+   "mean": 0.0729,
+   "min": 0.0517,
+   "max": 0.0867,
+   "pairs": 21
+  },
+  "Trans_Pit": {
+   "mean": 0.0729,
+   "min": 0.0499,
+   "max": 0.0884,
+   "pairs": 21
+  },
+  "Color_Context_Placed": {
+   "mean": 0.0766,
+   "min": 0.0548,
+   "max": 0.0918,
+   "pairs": 21
+  },
+  "Color_Flashlight": {
+   "mean": 0.0792,
+   "min": 0.0587,
+   "max": 0.0955,
+   "pairs": 21
+  },
+  "Color_Nails": {
+   "mean": 0.0792,
+   "min": 0.0586,
+   "max": 0.0953,
+   "pairs": 21
+  },
+  "Color_Rainbow": {
+   "mean": 0.0854,
+   "min": 0.0612,
+   "max": 0.1111,
+   "pairs": 21
+  },
+  "Color_Pillar": {
+   "mean": 0.0856,
+   "min": 0.0613,
+   "max": 0.1114,
+   "pairs": 21
+  },
+  "Color_Grid_Pallet": {
+   "mean": 0.089,
+   "min": 0.0643,
+   "max": 0.1156,
+   "pairs": 21
+  },
+  "Color_Paint": {
+   "mean": 0.0903,
+   "min": 0.0661,
+   "max": 0.116,
+   "pairs": 21
+  },
+  "Color_Walls": {
+   "mean": 0.0891,
+   "min": 0.0616,
+   "max": 0.1158,
+   "pairs": 21
+  },
+  "Chamber_Color": {
+   "mean": 0.089,
+   "min": 0.0614,
+   "max": 0.1158,
+   "pairs": 21
+  },
+  "Random_Definition": {
+   "mean": 0.0965,
+   "min": 0.0693,
+   "max": 0.1222,
+   "pairs": 21
+  },
+  "Random_Entropy": {
+   "mean": 0.0964,
+   "min": 0.0688,
+   "max": 0.1219,
+   "pairs": 21
+  },
+  "Random_Remove": {
+   "mean": 0.0964,
+   "min": 0.0688,
+   "max": 0.1219,
+   "pairs": 21
+  },
+  "Randomness_10_PRINT_Algorithm": {
+   "mean": 0.0963,
+   "min": 0.0683,
+   "max": 0.1201,
+   "pairs": 21
+  },
+  "Random_Walk": {
+   "mean": 0.0966,
+   "min": 0.0691,
+   "max": 0.1201,
+   "pairs": 21
+  },
+  "Random_Gaussian": {
+   "mean": 0.1,
+   "min": 0.066,
+   "max": 0.1264,
+   "pairs": 21
+  },
+  "Random_Mushrooms": {
+   "mean": 0.1608,
+   "min": 0.1013,
+   "max": 0.2012,
+   "pairs": 21
+  },
+  "Randomness_Examples_of_Randomness": {
+   "mean": 0.1688,
+   "min": 0.1099,
+   "max": 0.1996,
+   "pairs": 21
+  },
+  "Random_Game": {
+   "mean": 0.1652,
+   "min": 0.1175,
+   "max": 0.2075,
+   "pairs": 21
+  }
+ },
+ "per_pair": {
+  "diagonal|vertical": {
+   "mean": 0.0652,
+   "min": 0.0017,
+   "halls": 35
+  },
+  "diagonal|split": {
+   "mean": 0.0834,
+   "min": 0.0013,
+   "halls": 35
+  },
+  "diagonal|kandinsky": {
+   "mean": 0.0607,
+   "min": 0.0017,
+   "halls": 35
+  },
+  "diagonal|malevich": {
+   "mean": 0.0679,
+   "min": 0.0017,
+   "halls": 35
+  },
+  "diagonal|klee": {
+   "mean": 0.0796,
+   "min": 0.0017,
+   "halls": 35
+  },
+  "diagonal|moholy": {
+   "mean": 0.074,
+   "min": 0.0017,
+   "halls": 35
+  },
+  "vertical|split": {
+   "mean": 0.0848,
+   "min": 0.0014,
+   "halls": 35
+  },
+  "vertical|kandinsky": {
+   "mean": 0.0771,
+   "min": 0.0018,
+   "halls": 35
+  },
+  "vertical|malevich": {
+   "mean": 0.0594,
+   "min": 0.0017,
+   "halls": 35
+  },
+  "vertical|klee": {
+   "mean": 0.0846,
+   "min": 0.0017,
+   "halls": 35
+  },
+  "vertical|moholy": {
+   "mean": 0.0732,
+   "min": 0.0017,
+   "halls": 35
+  },
+  "split|kandinsky": {
+   "mean": 0.0853,
+   "min": 0.0014,
+   "halls": 35
+  },
+  "split|malevich": {
+   "mean": 0.0843,
+   "min": 0.0013,
+   "halls": 35
+  },
+  "split|klee": {
+   "mean": 0.0862,
+   "min": 0.0013,
+   "halls": 35
+  },
+  "split|moholy": {
+   "mean": 0.0963,
+   "min": 0.0013,
+   "halls": 35
+  },
+  "kandinsky|malevich": {
+   "mean": 0.0699,
+   "min": 0.0017,
+   "halls": 35
+  },
+  "kandinsky|klee": {
+   "mean": 0.0798,
+   "min": 0.0017,
+   "halls": 35
+  },
+  "kandinsky|moholy": {
+   "mean": 0.0671,
+   "min": 0.0017,
+   "halls": 35
+  },
+  "malevich|klee": {
+   "mean": 0.0839,
+   "min": 0.0017,
+   "halls": 35
+  },
+  "malevich|moholy": {
+   "mean": 0.0793,
+   "min": 0.0016,
+   "halls": 35
+  },
+  "klee|moholy": {
+   "mean": 0.0898,
+   "min": 0.0016,
+   "halls": 35
+  }
+ },
+ "note": "fraction of pixels (190x190 downsample of the 760x760 tile) whose max channel moves more than the threshold between two families of the same hall and seed"
+}

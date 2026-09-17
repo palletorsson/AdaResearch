@@ -102,6 +102,12 @@ const PINK := Color(0.95, 0.25, 0.60)
 @export var height: float = 3.0
 ## One seed is one composition; the halls are its states.
 @export var seed: int = 7
+## The composition family the seed's work follows. `seed` lets the seed pick one of the three
+## built in (every hall that ships today composes so); a name pins it — the built-in three, or
+## a FILE family under commons/biome_layers/families/<name>.gd, four of them written by four
+## agents who never saw each other's (the auto-research fan-out, 2026-09-17); `any` lets the
+## seed pick among all seven.
+@export_enum("seed", "diagonal", "vertical", "split", "kandinsky", "malevich", "klee", "moholy", "any") var family: String = "seed"
 ## Doorways in the two end walls.
 @export_enum("on", "off") var entry: String = "on"
 ## Run EvolutionSystem on the live creatures (only once `select` is in the closure).
@@ -227,6 +233,8 @@ func apply_grid_config(config: Dictionary) -> void:
 		seed = _int_of(config["seed"], seed)
 	elif config.has("generation_seed"):
 		seed = _int_of(config["generation_seed"], seed)
+	if config.has("family"):
+		family = str(config["family"]).strip_edges().to_lower()
 	if config.has("entry"):
 		entry = "on" if _flag(config["entry"]) else "off"
 	if config.has("evolve"):
@@ -426,12 +434,38 @@ func _build_ground() -> void:
 ## work. Three families, the seed picks one:
 ##   diagonal  a dominant diagonal across the floor, its golden section as the focus, a
 ##             perpendicular axis; planes tilted along it (Lissitzky)
-##   vertical  a short axis and everything lifted — the work stands up, planes vertical,
-##             the beam high (a Proun tower)
+##   vertical  a short axis and everything lifted — the work stands up, the planes laid
+##             flat and high, the beam high (a Proun tower)
 ##   split     the floor divided at golden sections, axes parallel to the walls, planes
-##             nearly flat and low (Mondrian's fields)
+##             standing nearly upright and low (Mondrian's fields)
 ## Everything later is placed on these.
+##
+## TILT IS MEASURED, NOT NAMED (2026-09-17, the malevich agent): a plane is a box thin in
+## z, so at tilt 0 it stands upright and tilt 90 (rotation.x, Godot's YXZ order) lays it
+## flat. The numbers below were written the other way round in the two lines above and
+## shipped as they are — every hall that stands today composes with them — so the
+## descriptions were corrected, not the numbers. A file family reads the contract the
+## same way: tilt 0 upright, 90 flat.
 const FAMILIES: Array[String] = ["diagonal", "vertical", "split"]
+## The file families — one script each under FAMILY_DIR, written to the contract in the
+## README there: score() returns a/b/lift/tilt0/tilt1, path(t) is the spine (an arc, a
+## fan, a square spiral, a bent elbow), across(u) the cross axis, heading(t) the local yaw.
+const FILE_FAMILIES: Array[String] = ["kandinsky", "malevich", "klee", "moholy"]
+const FAMILY_DIR := "res://commons/biome_layers/families/"
+## The loaded file family (a GDScript with the four static functions), or null when the
+## composition is one of the three built in. Set by _layout_score().
+var _fam = null
+
+
+## A file family, loaded by path so the cage compiles with none of them present.
+static func _family_script(fam: String):
+	var p: String = FAMILY_DIR + fam + ".gd"
+	if not ResourceLoader.exists(p):
+		return null
+	var scr = load(p)
+	if scr == null or not (scr is GDScript):
+		return null
+	return scr
 
 
 func _layout_score() -> Dictionary:
@@ -441,13 +475,44 @@ func _layout_score() -> Dictionary:
 	var inner: float = float(size) * 0.5 - 0.5
 	var sx: float = 1.0 if rng.randf() < 0.5 else -1.0
 	var sz: float = 1.0 if rng.randf() < 0.5 else -1.0
-	var family: String = FAMILIES[rng.randi_range(0, FAMILIES.size() - 1)]
+	# the seed's own draw comes FIRST, so `seed` (the default) composes exactly as it did
+	# before the file families existed; a pinned name overrides it, `any` widens the draw
+	var fam: String = FAMILIES[rng.randi_range(0, FAMILIES.size() - 1)]
+	var pick: String = family.strip_edges().to_lower()
+	if pick == "any":
+		var all: Array[String] = FAMILIES.duplicate()
+		all.append_array(FILE_FAMILIES)
+		fam = all[rng.randi_range(0, all.size() - 1)]
+	elif pick != "" and pick != "seed":
+		fam = pick
+	_fam = null
+	if not (fam in FAMILIES):
+		_fam = _family_script(fam)
+		if _fam == null:
+			push_warning("biome_vitrine: family `%s` is neither built in nor a file under %s — the seed picks" % [fam, FAMILY_DIR])
+			fam = FAMILIES[rng.randi_range(0, FAMILIES.size() - 1)]
 	var a: Vector3
 	var b: Vector3
 	var lift := 1.0
 	var tilt0 := 62.0
 	var tilt1 := -50.0
-	match family:
+	var extra: Dictionary = {}
+	if _fam != null:
+		var sc: Variant = _fam.score(rng, inner, sx, sz)
+		if sc is Dictionary and (sc as Dictionary).has_all(["a", "b", "lift", "tilt0", "tilt1"]):
+			extra = sc
+			a = sc["a"]
+			b = sc["b"]
+			a.y = 0.0
+			b.y = 0.0
+			lift = clampf(float(sc["lift"]), 0.6, 1.8)
+			tilt0 = float(sc["tilt0"])
+			tilt1 = float(sc["tilt1"])
+		else:
+			push_warning("biome_vitrine: family `%s` returned no a/b/lift/tilt0/tilt1 — composing on the diagonal" % fam)
+			_fam = null
+			fam = "diagonal"
+	match fam if _fam == null else "":
 		"vertical":
 			a = Vector3(-inner * 0.45 * sx, 0.0, -inner * 0.45 * sz)
 			b = -a
@@ -460,29 +525,49 @@ func _layout_score() -> Dictionary:
 			lift = 0.8
 			tilt0 = 12.0
 			tilt1 = -8.0
+		"":
+			pass      # a file family, scored above
 		_:
 			a = Vector3(-inner * 0.85 * sx, 0.0, -inner * 0.85 * sz)
 			b = -a
 	var dir: Vector3 = (b - a).normalized()
 	var perp := Vector3(-dir.z, 0.0, dir.x)
-	return {"k": k, "inner": inner, "a": a, "b": b, "dir": dir, "perp": perp,
-		"yaw": atan2(dir.x, dir.z), "sx": sx, "sz": sz, "family": family,
-		"lift": lift, "tilt0": tilt0, "tilt1": tilt1}
+	var out: Dictionary = extra.duplicate()
+	out.merge({"k": k, "inner": inner, "a": a, "b": b, "dir": dir, "perp": perp,
+		"yaw": atan2(dir.x, dir.z), "sx": sx, "sz": sz, "family": fam,
+		"lift": lift, "tilt0": tilt0, "tilt1": tilt1}, true)
+	return out
 
 
 func _diag(t: float, y: float) -> Vector3:
-	var p: Vector3 = (_score["a"] as Vector3).lerp(_score["b"] as Vector3, t)
+	var p: Vector3
+	if _fam != null:
+		p = _fam.path(_score, t)
+	else:
+		p = (_score["a"] as Vector3).lerp(_score["b"] as Vector3, t)
 	p.y = y * float(_score.get("lift", 1.0))
 	return p
 
 
 func _perp(u: float, y: float) -> Vector3:
-	var p: Vector3 = (_score["perp"] as Vector3) * (float(_score["inner"]) * u)
+	var p: Vector3
+	if _fam != null:
+		p = _fam.across(_score, u)
+	else:
+		p = (_score["perp"] as Vector3) * (float(_score["inner"]) * u)
 	p.y = y * float(_score.get("lift", 1.0))
 	return p
 
 
-func family() -> String:
+## The heading an element takes at t along the spine: the work's one yaw for the straight
+## families, the local direction of travel for a file family whose spine bends or curves.
+func _yaw_at(t: float) -> float:
+	if _fam != null:
+		return float(_fam.heading(_score, t))
+	return float(_score["yaw"])
+
+
+func family_name() -> String:
 	return String(_score.get("family", ""))
 
 
@@ -672,12 +757,12 @@ func _build_garden() -> void:
 		var p0: MeshInstance3D = _box(Vector3(1.6 * k, 1.1 * k, 0.03 * k), _col("plane", 0))
 		p0.name = "Plane_0"
 		p0.position = _diag(0.382, 1.5 * k)
-		p0.rotation = Vector3(deg_to_rad(float(_score.get("tilt0", 62.0))), yaw, 0.0)
+		p0.rotation = Vector3(deg_to_rad(float(_score.get("tilt0", 62.0))), _yaw_at(0.382), 0.0)
 		faces.add_child(p0)
 		var p1: MeshInstance3D = _box(Vector3(1.2 * k, 0.8 * k, 0.03 * k), _col("plane", 1))
 		p1.name = "Plane_1"
 		p1.position = _perp(-0.6, 0.95 * k)
-		p1.rotation = Vector3(deg_to_rad(float(_score.get("tilt1", -50.0))), yaw + PI * 0.5, 0.0)
+		p1.rotation = Vector3(deg_to_rad(float(_score.get("tilt1", -50.0))), _yaw_at(0.5) + PI * 0.5, 0.0)
 		faces.add_child(p1)
 		_grammar_counts["faces"] = 2
 
@@ -696,7 +781,7 @@ func _build_garden() -> void:
 			cube_m.position = cube_at
 			_garden.add_child(cube_m)
 			cube = cube_m
-		cube.rotation.y = yaw + deg_to_rad(15.0)
+		cube.rotation.y = _yaw_at(0.85) + deg_to_rad(15.0)
 		var beam_m: MeshInstance3D = _box(Vector3(1.4 * k, 0.3 * k, 0.3 * k), _col("field", 0))
 		var beam_at: Vector3 = _perp(0.55, 1.9 * k)
 		var beam: Node3D
@@ -1098,7 +1183,7 @@ func _tick_garden(delta: float) -> void:
 	if _boundary != null:
 		_boundary.position = _diag(0.5 + 0.32 * sin(_time * 0.3), 0.9 * k)
 		if _allows("compose"):
-			_boundary.rotation.y = float(_score["yaw"]) + PI * 0.5 + 0.5 * sin(_time * 0.3)
+			_boundary.rotation.y = _yaw_at(0.5) + PI * 0.5 + 0.5 * sin(_time * 0.3)
 	# `walk`: the point steps by itself, one of four directions, using nothing it remembers;
 	# a hand that holds it wins — the walk waits
 	if _walk_rng != null and not _free_points.is_empty():
@@ -1169,6 +1254,11 @@ func _paint() -> void:
 	var a: Vector3 = _score["a"]
 	var dir: Vector3 = _score["dir"]
 	var gaussian: bool = _allows("gaussian")
+	# a file family's spine may bend or curve: rank by the nearest of 33 samples, not the chord
+	var spine: PackedVector3Array = PackedVector3Array()
+	if _fam != null:
+		for i in range(33):
+			spine.append(_diag(float(i) / 32.0, 0.0))
 	var ring_c: Vector3 = _diag(0.0, 0.0)
 	var ring_r: float = 1.6 * _k()
 	var ranked: Array = []
@@ -1176,8 +1266,11 @@ func _paint() -> void:
 		for x in range(size):
 			var c := Vector3(float(x) - float(size) * 0.5 + 0.5, 0.0, float(z) - float(size) * 0.5 + 0.5)
 			var rel: Vector3 = c - a
-			var along: float = rel.dot(dir)
-			var off: float = (rel - dir * along).length()
+			var off: float = (rel - dir * rel.dot(dir)).length()
+			if not spine.is_empty():
+				off = INF
+				for sp in spine:
+					off = minf(off, Vector2(c.x - sp.x, c.z - sp.z).length())
 			var d: float
 			if gaussian:
 				# the count is a bell: a cell's rank is how unlikely its offset is under N(0, 1.1)
@@ -1581,7 +1674,7 @@ func _log(row: Dictionary) -> void:
 ## At build: every painted organism and every live creature, once.
 func _log_build() -> void:
 	_log({"event": "cage", "closure": {"made_of": _closure.get("made_of", []), "does": _closure.get("does", []),
-		"knows": _closure.get("knows", [])}, "family": family(), "kingdoms": _kingdoms.duplicate(),
+		"knows": _closure.get("knows", [])}, "family": family_name(), "kingdoms": _kingdoms.duplicate(),
 		"density": _density, "size": size, "fitness_fn": "default", "rng_seed": hash([seed, _stage_key]),
 		"evolving": _evo_running})
 	for c in _seed_cells:
@@ -1787,7 +1880,7 @@ func get_state() -> Dictionary:
 	return {
 		"stage": _stage_key, "sequence": _sequence, "order": _stage_order,
 		"closure": {"made_of": _closure.get("made_of", []), "does": _closure.get("does", []), "knows": _closure.get("knows", [])},
-		"grey": _grey(), "grammar": _grammar_counts.duplicate(), "family": family(),
+		"grey": _grey(), "grammar": _grammar_counts.duplicate(), "family": family_name(),
 		"walk": Grammar.neighbours(_stage_key), "controls": controls, "allow": allow, "run": run,
 		"lineage": {"where": _lineage_where, "rows": _lineage_rows, "session": _session_id()},
 		"kingdoms": _kingdoms.duplicate(), "density": _density, "size": size, "seed": seed,

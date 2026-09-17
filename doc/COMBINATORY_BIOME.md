@@ -308,6 +308,31 @@ and the absence draw as time passes from their own streams. The examples hall's 
 is the one the ladder inherits: chance chose the evidence, the rules chose what counted as
 evidence. `Biome_Ladder_Randomness` is the last randomness pearl (nine cages).
 
+**The composition families, by fan-out** (the same night, after Palle: *can I get that
+spirit back?* — the auto-research spirit of the surreal lab, four agents each solving one
+device and a generator breeding specimens into a gallery). The cage's seed picked one of
+three families built into it — diagonal, vertical, split — and all three are a straight
+spine. Four agents were each handed one painting and the same contract
+(`commons/biome_layers/families/README.md`: `score` returns the two anchors, the lift and
+two tilts; `path(t)` is the spine, `across(u)` the cross axis, `heading(t)` the local yaw)
+and none could see the others'. They returned **kandinsky** (one Bézier bowing toward a
+focus set off centre, two ribs fanning from it), **malevich** (a flight axis twenty to
+thirty degrees off a wall, a drift growing as t² to one side, the cross axis sheared the
+other way), **klee** (a square spiral of three right-angled arms from a corner cell inward,
+every element on a cell) and **moholy** (a spine bent at its golden section, two bars at
+sixty degrees, built in the air) — each with a headless self-test of five to nine thousand
+checks. The cage grew a `family` knob (`#family:<name>`; `seed`, the default, composes
+today's halls exactly as before; `any` widens the seed's draw to all seven), loads a file
+family by path, and hands it the spine, the cross axis and the local heading; the paint
+ranks cells by the nearest of 33 spine samples, so the flowers follow a bent spine. Two of
+the four measured the same fact on their own: a plane tilt of 90 lays the plane flat, so
+the built-in families' descriptions were backwards — corrected in words, the shipped
+numbers untouched. Then `tools/generate_biome_gallery.py` rendered every family across
+every hall of the ladder at seed 7 and twelve seeds of the fullest state per family, kept
+the three least alike (farthest-first, named, the culls kept in the manifest), and
+published `/biome-gallery` with the DNA and the map token under every tile;
+`doc/reports/biome_family_bite.json` measures that the families differ. Probe 219/219.
+
 **The dream room.** One per threshold — or the museum's night (`[em-night] the moon
 is the light… one circuit every 480 s` already exists in the endless museum). Three
 gardens stand side by side: *as grown*, *the sufficient subset only*, and *the

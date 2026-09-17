@@ -302,7 +302,7 @@ func _run() -> void:
 		fams[String(score_d["family"])] = true
 		v.free()
 	_check(fams.size() == 3, "thirty seeds reach all three families (%s)" % str(fams.keys()))
-	_check(rnd.family() in VITRINE.FAMILIES, "the state names the family (%s)" % rnd.family())
+	_check(rnd.family_name() in VITRINE.FAMILIES, "the state names the family (%s)" % rnd.family_name())
 	var nb: Dictionary = G.neighbours("Point_One")
 	_check(String(nb["prev"]) == "" and String(nb["next"]) == "Point_Lines", "walk: Point_One's neighbours")
 	_check(String(G.neighbours("Primitives_Melencolia")["next"]) == "Trans_Pre", "walk: Melencolia steps to Trans_Pre, not the ladder room")
@@ -407,6 +407,35 @@ func _run() -> void:
 	var twin_r = await _cage("Randomness_Examples_of_Randomness", 7, {"size": "8"})
 	_check(str(twin_r.get_state()["grammar"]) == str(gx), "examples: the same seed draws the same drips, darts and pipe")
 
+	# 13. the composition families — three built in, four from files, one contract
+	var builtin: Array = ["diagonal", "vertical", "split"]
+	var fam_pts: Dictionary = {}
+	for fam in builtin + Array(VITRINE.FILE_FAMILIES):
+		var fc = await _cage("Random_Game", 7, {"size": "8", "family": fam})
+		_check(fc.family_name() == fam, "family %s: pinned by the token (got %s)" % [fam, fc.family_name()])
+		var from_file: bool = fam in VITRINE.FILE_FAMILIES
+		_check((fc._fam != null) == from_file, "family %s: %s" % [fam, "loaded from its file" if from_file else "built in"])
+		fam_pts[fam] = fc._free_points[0].position if not fc._free_points.is_empty() else Vector3(INF, INF, INF)
+		var cube: Node3D = fc.get_node_or_null("Patch/Garden/Solid_0")
+		_check(cube != null and absf(cube.position.x) <= 3.6 and absf(cube.position.z) <= 3.6, "family %s: the cube stands inside the 8 m cage" % fam)
+	var coincide := 0
+	for f1 in fam_pts:
+		for f2 in fam_pts:
+			if String(f1) < String(f2) and (fam_pts[f1] as Vector3).distance_to(fam_pts[f2] as Vector3) < 0.05:
+				coincide += 1
+	_check(coincide == 0, "families: seven families put the point in seven places (%d coincide)" % coincide)
+	var dflt = await _cage("Random_Game", 7, {"size": "8"})
+	_check(dflt.family_name() in builtin, "family seed (the default): the seed picks a built-in (%s)" % dflt.family_name())
+	var anyf = await _cage("Random_Game", 7, {"size": "8", "family": "any"})
+	_check(anyf.family_name() in builtin + Array(VITRINE.FILE_FAMILIES), "family any: one of the seven (%s)" % anyf.family_name())
+	var bad = await _cage("Random_Game", 7, {"size": "8", "family": "picasso"})
+	_check(bad.family_name() in builtin and bad._fam == null, "family picasso: no such file — a built-in stands in (%s)" % bad.family_name())
+	for fam in VITRINE.FILE_FAMILIES:
+		var small = await _cage("Random_Game", 7, {"size": "5", "family": fam})
+		var fp0: Vector3 = small._free_points[0].position
+		_check(absf(fp0.x) <= 2.05 and absf(fp0.z) <= 2.05, "family %s: the point stays inside the 5 m cage (%.2f, %.2f)" % [fam, fp0.x, fp0.z])
+		var ftwin = await _cage("Random_Game", 7, {"size": "5", "family": fam})
+		_check(ftwin._free_points[0].position.is_equal_approx(fp0), "family %s: the same seed composes the same" % fam)
 	print("[probe_biome_vitrine] %d checks, %d failed" % [_checks, _fails])
 	quit(0 if _fails == 0 else 1)
 
