@@ -241,6 +241,23 @@ lattice (Pillar), a colour per face's address (Grid_Pallet), the floor's memory 
 (Paint), tinted glass (Walls), and Chamber's `when`. Rooms `Biome_Ladder_Transformation`
 and `Biome_Ladder_Color` stand as the last pearls of their chapters. Probe 142/142.
 
+**The canvas** (8a213307e — Palle, on the first ladder: *"we lack the vividness of the DNA
+galleries … a biome is about the integration, it has to be cumulative … think like an
+artist that has a vocabulary; the room is a canvas with restricted tools, in the beginning
+it should look like abstract modern or contemporary art"*). The token-grid scatter was the
+wrong picture. The cage now holds **one composition per seed**: anchors the seed alone
+decides (a dominant diagonal across the floor, its golden section as the focus, a
+perpendicular axis), and every word places its element on those anchors, so a later hall
+is the same work at a later state. The alphabet and the flat shading are the galleries'
+own (`primitive_stack._make_primitive`, `_shade_material`), at metre scale; before colour,
+four exactly neutral greys (ink, chalk, slate, soot); colour is Kandinsky's assignment as
+`chroma_stack` has it (circle blue, square red, triangle yellow), then lamps, the hand's
+pink, the Bauhaus palette, the height ramp on the grid, an address per plane. The painted
+kingdoms are seeded *along the diagonal* — a band in the composition, not a scatter. The
+references are the ones the columns hall cites: Malevich, Lissitzky's Prouns, LeWitt,
+Calder, Kandinsky, Albers. Rule kept from the DNA programme: vividness is composition +
+scale + flat colour + a restricted alphabet; a grid of small tokens has none of the four.
+
 **The dream room.** One per threshold — or the museum's night (`[em-night] the moon
 is the light… one circuit every 480 s` already exists in the endless museum). Three
 gardens stand side by side: *as grown*, *the sufficient subset only*, and *the
