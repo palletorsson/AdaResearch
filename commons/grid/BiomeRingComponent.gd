@@ -27,6 +27,10 @@ const CritterSpawnerClass = preload("res://algorithms/nature_system/systems/spaw
 # Shared tree DNA/build (consolidation Phase 1). Preloaded const, not
 # global class_name, so it resolves on headless runs.
 const SpawnService = preload("res://commons/biome_layers/spawn_service.gd")
+# The ground-cover recipe (kingdom table, meshes, tints, plant + earth material) is
+# shared with commons/artifacts/biome_vitrine through ground_cover.gd. Same rule:
+# preloaded, so it resolves on headless runs.
+const GroundCover = preload("res://commons/biome_layers/ground_cover.gd")
 
 
 # ─────────────────────────────────────────────────────────────
@@ -53,12 +57,8 @@ var foliage_density_per_sqm: float = 3.0
 #  Foliage type mapping
 # ─────────────────────────────────────────────────────────────
 
-const KINGDOM_FOLIAGE: Dictionary = {
-	"flower": ["grass", "flower"],
-	"tree": ["grass", "tree", "bush"],
-	"fungus": ["mushroom", "fern"],
-	"creature": ["grass", "reed", "creature"],
-}
+# The table lives in ground_cover.gd; kept here by name for its readers.
+const KINGDOM_FOLIAGE: Dictionary = GroundCover.KINGDOM_FOLIAGE
 
 
 # ─────────────────────────────────────────────────────────────
@@ -189,15 +189,7 @@ func _build_ring_ground(grid_w: float, grid_d: float, grid_center: Vector3,
 
 
 func _create_earth_material(density: float) -> StandardMaterial3D:
-	var mat := StandardMaterial3D.new()
-	# Blend from grey (clinical) to warm brown (natural) based on density
-	mat.albedo_color = Color(
-		lerpf(0.3, 0.22, density),
-		lerpf(0.3, 0.2, density),
-		lerpf(0.32, 0.16, density)
-	)
-	mat.roughness = 0.85
-	return mat
+	return GroundCover.earth_material(density)
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -278,13 +270,8 @@ func fract(x: float) -> float:
 func _place_foliage(grid_w: float, grid_d: float, grid_center: Vector3,
 		kingdoms: Array, density: float) -> void:
 
-	# Determine which foliage types to use
-	var types: Array[String] = []
-	for kingdom in kingdoms:
-		var kingdom_types: Array = KINGDOM_FOLIAGE.get(str(kingdom), [])
-		for t in kingdom_types:
-			if t not in types:
-				types.append(t as String)
+	# Determine which foliage types to use (the table lives in ground_cover.gd)
+	var types: Array[String] = GroundCover.types_for_kingdoms(kingdoms)
 
 	# Gate by grammar — drop foliage whose required form_type is not yet unlocked.
 	# Before L-systems (seq 11), no trees or bushes. Before CA (seq 8), no mushrooms.
@@ -401,82 +388,15 @@ func _place_foliage(grid_w: float, grid_d: float, grid_center: Vector3,
 		mmi.multimesh = mm
 
 		# Material with subtle emission so plants glow slightly in dark VR
-		var mat := StandardMaterial3D.new()
-		mat.vertex_color_use_as_albedo = true
-		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
-		mat.emission_enabled = true
-		mat.emission = Color(0.1, 0.15, 0.05)
-		mat.emission_energy_multiplier = 0.3
-		mmi.material_override = mat
+		mmi.material_override = GroundCover.foliage_material()
 
 		add_child(mmi)
 		_foliage_instances.append(mmi)
 
 
 func _get_foliage_mesh(flora_type: String) -> Mesh:
-	# Simple meshes for each type — low-poly for VR budget
-	match flora_type:
-		"grass":
-			# Tall grass blade — billboard quad
-			var mesh := QuadMesh.new()
-			mesh.size = Vector2(0.12, 0.4)
-			mesh.center_offset = Vector3(0, 0.2, 0)
-			return mesh
-		"flower":
-			# Flower on stem — sphere cap on thin cylinder
-			# Use a sphere for the bloom (MultiMesh can't combine meshes)
-			var mesh := SphereMesh.new()
-			mesh.radius = 0.06
-			mesh.height = 0.12
-			mesh.radial_segments = 6
-			mesh.rings = 3
-			return mesh
-		"tree":
-			# Taller tree — tapered cylinder trunk with spherical canopy implied by scale
-			var mesh := CylinderMesh.new()
-			mesh.top_radius = 0.5
-			mesh.bottom_radius = 0.08
-			mesh.height = 2.5
-			mesh.radial_segments = 6
-			return mesh
-		"bush":
-			# Dense low bush
-			var mesh := SphereMesh.new()
-			mesh.radius = 0.35
-			mesh.height = 0.4
-			mesh.radial_segments = 6
-			mesh.rings = 3
-			return mesh
-		"mushroom":
-			# Toadstool cap shape
-			var mesh := CylinderMesh.new()
-			mesh.top_radius = 0.15
-			mesh.bottom_radius = 0.03
-			mesh.height = 0.18
-			mesh.radial_segments = 6
-			return mesh
-		"fern":
-			# Wide fern frond
-			var mesh := QuadMesh.new()
-			mesh.size = Vector2(0.35, 0.3)
-			mesh.center_offset = Vector3(0, 0.15, 0)
-			return mesh
-		"reed":
-			# Tall thin reed
-			var mesh := CylinderMesh.new()
-			mesh.top_radius = 0.008
-			mesh.bottom_radius = 0.015
-			mesh.height = 0.7
-			mesh.radial_segments = 3
-			return mesh
-		"creature":
-			# Static creature silhouette — low-poly body shape
-			var mesh := CapsuleMesh.new()
-			mesh.radius = 0.12
-			mesh.height = 0.35
-			return mesh
-		_:
-			return null
+	# Simple meshes for each type — low-poly for VR budget (ground_cover.gd)
+	return GroundCover.mesh_for(flora_type)
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -640,23 +560,5 @@ func _spawn_dna_organisms(grid_center: Vector3, kingdoms: Array, density: float)
 
 
 func _get_foliage_color(flora_type: String) -> Color:
-	match flora_type:
-		"grass":
-			return Color(0.25, 0.45, 0.15)
-		"flower":
-			return Color(_rng.randf_range(0.6, 1.0), _rng.randf_range(0.3, 0.7), _rng.randf_range(0.2, 0.5))
-		"tree":
-			return Color(0.2, 0.35, 0.12)
-		"bush":
-			return Color(0.18, 0.38, 0.1)
-		"mushroom":
-			return Color(0.6, 0.35, 0.2)
-		"fern":
-			return Color(0.15, 0.4, 0.1)
-		"reed":
-			return Color(0.35, 0.45, 0.2)
-		"creature":
-			# Warm earthy creatures — brown/orange tones
-			return Color(_rng.randf_range(0.4, 0.7), _rng.randf_range(0.25, 0.45), _rng.randf_range(0.1, 0.25))
-		_:
-			return Color(0.3, 0.4, 0.2)
+	# flower and creature draw from _rng, in the same order as before the split
+	return GroundCover.color_for(flora_type, _rng)

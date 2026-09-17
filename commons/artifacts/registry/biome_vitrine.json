@@ -1,0 +1,84 @@
+{
+	"artifacts": {
+		"biome_vitrine": {
+			"dna": {
+			 "axes": {
+			 "stage": [
+			 "hall",
+			 "primitives",
+			 "transformation",
+			 "array_tutorial",
+			 "color",
+			 "tiling",
+			 "change",
+			 "isosurfaces",
+			 "boolean_surfaces",
+			 "forces",
+			 "formfinding",
+			 "wavefunctions",
+			 "randomness",
+			 "noise",
+			 "cellularautomata",
+			 "fractals",
+			 "lsystems",
+			 "proceduralgeneration",
+			 "swarmintelligence",
+			 "softbodies",
+			 "machinelearning",
+			 "graphtheory",
+			 "foundationscrisis",
+			 "qfeplaboratory",
+			 "postfoundationscrisis",
+			 "mosaicanalysis",
+			 "biome_lab"
+			 ]
+			 }
+			},
+			"name": "Biome Vitrine",
+			"lookup_name": "biome_vitrine",
+			"description": "A glass cage, open to the sky, holding the biome at one spine stage. One word — stage — selects the kingdoms, the density and the unlock order from soft_stages.json; a square patch is painted with seeds and dispatched cell by cell through the same BiomePaintDispatcher the grid lane uses, so the cage shows what the world is made of SO FAR: kingdom-coloured cubes at primitives, the first flower at colour, fungus at randomness, live creatures at L-systems. The creatures evolve under EvolutionSystem; the floor remembers every organism on a presence grid drawn as its glow; a stand screen states the cage and its generations; the state is written to ada_run/biome_vitrines.json for the encyclopedia to query. Two doorways, no roof.",
+			"scene": "res://commons/artifacts/biome_vitrine/biome_vitrine.tscn",
+			"category": "biome",
+			"artifact_type": "installation",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "biome_lab",
+			"size_group": "large",
+			"tags": ["biome", "living", "kingdoms", "evolution", "stage", "glass", "cage", "presence", "spine", "exhibit"],
+			"dev_themes": [
+				"the world is made of what you have learned so far",
+				"one word, one stage, one garden",
+				"a history you can see on the floor",
+				"the same seed, a different world"
+			],
+			"interactions": [
+				"read the stand screen: the stage, its kingdoms, the seeds, the generation",
+				"walk in through the doorway and stand among the organisms of one stage",
+				"watch the floor glow where creatures have been and where the seeds stand",
+				"place two cages at two stages with the same seed and compare the same cells"
+			],
+			"capacity": "SEE that the biome is not scenery around the lesson but the lesson so far, alive — and that between two stages only what a seed is allowed to become changes",
+			"map_note": "Tokens: biome_vitrine#stage:randomness#size:8#seed:7#evolve:on#duration:20#entry:on#record:on. stage:hall reads the hall's chapter (museum) or the map's sequence (grid). size and height in metres; seed, duration and intensity are numbers (keys are in CONFIG_PARAM_NAMES); entry / evolve / record take on|off. Keep sculpture_clear_rects over the footprint in the museum — the panes carry colliders and seal it.",
+			"parameters": {
+				"footprint": [8, 3, 8]
+			},
+			"spatial_needs": {
+				"platform": "floor",
+				"footprint_cells": 8,
+				"clearance": {"front": 2, "back": 2, "left": 1, "right": 2},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": ["biome", "living", "kingdoms", "evolution"],
+				"preferred_zone": "exploration",
+				"footprint_source": "size export (cells = metres); default 8 x 8, glass 3 m, stand screen 0.75 m off the front-right post"
+			},
+			"dna": {
+				"fixture": {"stage": "randomness", "seed": 7, "evolve": "off", "record": "off"},
+				"note": "axes to be derived from the code with tools/apply_dna_block.py --token=biome_vitrine --axes=stage once the first captures stand; stage is the argued axis, size is mounting"
+			}
+		}
+	}
+}
