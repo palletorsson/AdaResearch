@@ -10,7 +10,7 @@ four agents who never saw each other's, to one contract (commons/biome_layers/fa
 This tool is the surreal-lab loop applied to the cage (tools/generate_surreal_lab_configs.py):
 breed specimens by DATA, render them all in ONE Godot boot through the DNA sweep rig
 (commons/testing/capture_config_sweep.gd), then publish a GalleryView manifest with the DNA
-under every tile. Two sections:
+under every tile, at /biome-families (/biome-gallery is the six-kingdoms catalog). Two sections:
 
   ladder   every family x every hall of the ladder x seed 7 — the same work growing seven
            ways, one tile per state. Nothing is culled here: the ladder IS the argument.
@@ -34,7 +34,7 @@ Usage (from the repo root; one Godot boot per section, serialised):
 
 Output:
   ada_run/biome_sweep/<section>/<label>.png            the frames (derived, not tracked)
-  ada_encyclopedia/public/biome-gallery/manifest.json  + <label>.png + <label>.json
+  ada_encyclopedia/public/biome-families/manifest.json + <label>.png + <label>.json
   doc/reports/biome_family_bite.json                   the family-difference measurement
 """
 from __future__ import annotations
@@ -51,7 +51,8 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 ENC = Path(r"C:\Users\palle\Documents\GitHub\ada_encyclopedia")
-GAL = ENC / "public" / "biome-gallery"
+SLUG = "biome-families"     # /biome-gallery is July's six-kingdoms catalog — a different page
+GAL = ENC / "public" / SLUG
 SWEEP = REPO / "ada_run" / "biome_sweep"
 GODOT = r"C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe"
 SCENE = "res://commons/artifacts/biome_vitrine/biome_vitrine.tscn"
@@ -364,13 +365,13 @@ def main() -> int:
         for k, v in weak:
             print(f"  least different pair {k}: {100 * v['mean']:.1f}% mean over {v['halls']} halls")
     print(f"published {len(entries)} tiles (+{len(culled)} culled) -> {GAL}")
-    print("page: http://127.0.0.1:3003/biome-gallery")
+    print(f"page: http://127.0.0.1:3003/{SLUG}")
     return 0
 
 
 def _entry(v, f, h, seed, hi, section, order, ref, line, w, src, subject):
-    e = {"id": v["label"], "image": f"/biome-gallery/{v['label']}.png",
-         "config": f"/biome-gallery/{v['label']}.json",
+    e = {"id": v["label"], "image": f"/{SLUG}/{v['label']}.png",
+         "config": f"/{SLUG}/{v['label']}.json",
          "subtitle": f, "family": f, "reference": ref, "line": line,
          "stage": h, "hall_index": hi, "seed": seed, "section": section, "order": order,
          "words": w, "token": token_of(f, h, seed), "scene": SCENE,

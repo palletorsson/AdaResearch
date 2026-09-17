@@ -330,7 +330,7 @@ the built-in families' descriptions were backwards — corrected in words, the s
 numbers untouched. Then `tools/generate_biome_gallery.py` rendered every family across
 every hall of the ladder at seed 7 and twelve seeds of the fullest state per family, kept
 the three least alike (farthest-first, named, the culls kept in the manifest), and
-published `/biome-gallery` with the DNA and the map token under every tile;
+published `/biome-families` with the DNA and the map token under every tile;
 `doc/reports/biome_family_bite.json` measures that the families differ. Probe 219/219.
 
 **The dream room.** One per threshold — or the museum's night (`[em-night] the moon
