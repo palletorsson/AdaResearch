@@ -1,63 +1,437 @@
 {
 	"schema": "ada.biome_vocabulary.v1",
-	"description": "What the biome may be made of, do and know, hall by hall along the spine. Read by commons/biome_layers/biome_grammar.gd: a stage's closure is the union of every hall at or before it (order = curriculum_spine.json sequences, map_authored.json halls within a sequence) plus every sequence entry at or before its sequence. A word absent from the closure is not allowed in the cage. Three columns: made_of (geometry), does (time and behaviour), knows (record and readout). The visitor's hand is always allowed; the cage and its screen are furniture, not biome. `line` is the hall's own opening sentence, paraphrased; `beyond` is what the biome may say past what the hall wrote (Palle, 2026-09-17: 'you arrive late' — the biome as the opportunity to tell what is beyond what we wrote about). Design: doc/COMBINATORY_BIOME.md.",
-	"columns": ["made_of", "does", "knows"],
+	"description": "What the biome may be made of, do and know, hall by hall along the spine. Read by commons/biome_layers/biome_grammar.gd: a stage's closure is the union of every hall at or before it (order = curriculum_spine.json sequences, map_authored.json halls within a sequence) plus every sequence entry at or before its sequence. A word absent from the closure is not allowed in the cage. Three columns: made_of (geometry), does (time and behaviour), knows (record and readout). The visitor's hand is always allowed; the cage and its screen are furniture, not biome. `line` is the hall's own opening sentence, paraphrased; `beyond` is what the biome may say past what the hall wrote (Palle, 2026-09-17: 'you arrive late' — the biome as the opportunity to tell what is beyond what we wrote about). Design: doc/COMBINATORY_BIOME.md. Kingdom words (flower, fungus, tree, creature) are the arrival of a painted kingdom: flower with Color_Rainbow, fungus with randomness, tree and creature with lsystems. Per-hall entries exist for primitives, transformation and colour; the other sequences carry sequence-level words until their owners write the halls.",
+	"columns": [
+		"made_of",
+		"does",
+		"knows"
+	],
 	"halls": {
-		"Point_One": {"made_of": ["point"], "does": ["hand"], "knows": [],
+		"Point_One": {
+			"made_of": [
+				"point"
+			],
+			"does": [
+				"hand"
+			],
+			"knows": [],
 			"line": "You arrive late. One point; you can move it.",
-			"beyond": "the point was here before you. It has a place and no size; moving it is the only thing you can do to it, and it does not remember being moved."},
-		"Point_Lines": {"made_of": ["line"], "does": ["walk_draws"], "knows": [],
+			"beyond": "the point was here before you. It has a place and no size; moving it is the only thing you can do to it, and it does not remember being moved."
+		},
+		"Point_Lines": {
+			"made_of": [
+				"line"
+			],
+			"does": [
+				"walk_draws"
+			],
+			"knows": [],
 			"line": "Two positions into relation; a line can be walked into being.",
-			"beyond": "a line has no thickness and no inside. What it divides it does not touch; move either end and it is already another line."},
-		"Point_Trace": {"made_of": [], "does": [], "knows": ["trace"],
+			"beyond": "a line has no thickness and no inside. What it divides it does not touch; move either end and it is already another line."
+		},
+		"Point_Trace": {
+			"made_of": [],
+			"does": [],
+			"knows": [
+				"trace"
+			],
 			"line": "Bring the detour: the floor remembers where the point has been, under a recording rule.",
-			"beyond": "a record is a choice of what to forget. This floor fades; a floor that did not would soon be one solid mark."},
-		"Point_Line_Grid": {"made_of": ["lattice"], "does": [], "knows": [],
+			"beyond": "a record is a choice of what to forget. This floor fades; a floor that did not would soon be one solid mark."
+		},
+		"Point_Line_Grid": {
+			"made_of": [
+				"lattice"
+			],
+			"does": [],
+			"knows": [],
 			"line": "Many points on a grid, lines to neighbours.",
-			"beyond": "a lattice is many points agreeing on a distance. Nothing in it is first, and the one you can move is the only one that can disagree."},
-		"Point_Triangle_Context": {"made_of": ["face"], "does": [], "knows": [],
+			"beyond": "a lattice is many points agreeing on a distance. Nothing in it is first, and the one you can move is the only one that can disagree."
+		},
+		"Point_Triangle_Context": {
+			"made_of": [
+				"face"
+			],
+			"does": [],
+			"knows": [],
 			"line": "Three points close a boundary: the first surface.",
-			"beyond": "a face has two sides and a boundary that is not part of it. Seen edge-on it is a line again; that is the machine's addition, not yours."},
-		"Primitives_Polythedra": {"made_of": ["solid"], "does": [], "knows": [],
+			"beyond": "a face has two sides and a boundary that is not part of it. Seen edge-on it is a line again; that is the machine's addition, not yours."
+		},
+		"Primitives_Polythedra": {
+			"made_of": [
+				"solid"
+			],
+			"does": [],
+			"knows": [],
 			"line": "Faces meet and enclose: the first bodies.",
-			"beyond": "an inside exists only once the faces agree. The body is the agreement; take one face away and there is no inside, only a room."},
-		"Point_Animatedcube": {"made_of": [], "does": ["self_move", "deform"], "knows": [],
+			"beyond": "an inside exists only once the faces agree. The body is the agreement; take one face away and there is no inside, only a room."
+		},
+		"Point_Animatedcube": {
+			"made_of": [],
+			"does": [
+				"self_move",
+				"deform"
+			],
+			"knows": [],
 			"line": "Take hold of a corner; what must stay for it to remain a cube — and things may now move by themselves.",
-			"beyond": "what moves by itself was already moving when you came in. You arrived late to that too; nothing here waits for a hand."},
-		"Primitives_Ignorance": {"made_of": ["sphere"], "does": [], "knows": [],
+			"beyond": "what moves by itself was already moving when you came in. You arrived late to that too; nothing here waits for a hand."
+		},
+		"Primitives_Ignorance": {
+			"made_of": [
+				"sphere"
+			],
+			"does": [],
+			"knows": [],
 			"line": "The name sphere: round bodies, accepted as round.",
-			"beyond": "round is a limit nothing here reaches. Every sphere is faces that stopped; the name is where you agreed to stop counting."},
-		"Primitives_Portals": {"made_of": ["subdivide"], "does": [], "knows": [],
+			"beyond": "round is a limit nothing here reaches. Every sphere is faces that stopped; the name is where you agreed to stop counting."
+		},
+		"Primitives_Portals": {
+			"made_of": [
+				"subdivide"
+			],
+			"does": [],
+			"knows": [],
 			"line": "Add a division, then another: bodies of many parts, resolution as a property.",
-			"beyond": "divide again and the parts outnumber your attention before they outnumber the cage. Resolution is a budget, and it is spent on you."},
-		"Primitives_Melencolia": {"made_of": ["ornament"], "does": [], "knows": [],
+			"beyond": "divide again and the parts outnumber your attention before they outnumber the cage. Resolution is a budget, and it is spent on you."
+		},
+		"Primitives_Melencolia": {
+			"made_of": [
+				"ornament"
+			],
+			"does": [],
+			"knows": [],
 			"line": "What keeps you looking after you know the form: a form for looking.",
-			"beyond": "a form can be kept after its use. Looking is not knowing; this one is here so the difference has somewhere to stand."}
+			"beyond": "a form can be kept after its use. Looking is not knowing; this one is here so the difference has somewhere to stand."
+		},
+		"Trans_Pre": {
+			"made_of": [],
+			"does": [
+				"pickup"
+			],
+			"knows": [],
+			"line": "We leave primitives with a cube, a wedge and a grid; now a cube you can take.",
+			"beyond": "a body you can take is still the body it was. Carrying is not a change to the thing; it is a change to where you are."
+		},
+		"Trans_Introduction": {
+			"made_of": [],
+			"does": [
+				"run"
+			],
+			"knows": [],
+			"line": "A cube learned to rise, turn and swell; you could leave those movements running.",
+			"beyond": "a movement left running does not need you. It was a rule before it was a motion, and the rule keeps time without a witness."
+		},
+		"Trans_Translation": {
+			"made_of": [],
+			"does": [
+				"translate"
+			],
+			"knows": [],
+			"line": "A moving surface carried you across; here it is the thread through a longer space.",
+			"beyond": "translation keeps every distance and every angle. What it changes is only where; nothing that rides it can tell it has moved."
+		},
+		"Trans_Rotation": {
+			"made_of": [],
+			"does": [
+				"rotate"
+			],
+			"knows": [],
+			"line": "A surface stays attached to its middle. Follow one end; where does the other end go?",
+			"beyond": "one point on a turning thing does not move. Everything else moves in proportion to its distance from that point; the far end is always late."
+		},
+		"Trans_Scale": {
+			"made_of": [],
+			"does": [
+				"scale"
+			],
+			"knows": [],
+			"line": "You tried the openings against the size of your body; here something waits to be taken.",
+			"beyond": "scaling keeps the shape and loses the size. A thing scaled to nothing is still that thing, and a thing scaled past the cage is too."
+		},
+		"Trans_Body": {
+			"made_of": [],
+			"does": [],
+			"knows": [
+				"body"
+			],
+			"line": "The corridor narrows, and then it stops.",
+			"beyond": "the measure was you all along. Every opening was sized against a body that was not drawn; the post here is that body, drawn."
+		},
+		"Trans_Pit": {
+			"made_of": [],
+			"does": [
+				"boundary_moves",
+				"compose"
+			],
+			"knows": [],
+			"line": "A wall can arrive on level ground. Wait beside its path, or step into the space it is about to occupy.",
+			"beyond": "a boundary is a thing that moves. Compose two motions and the path is neither; where the wall will be is a question, not a place."
+		},
+		"Color_Context_Placed": {
+			"made_of": [
+				"colour"
+			],
+			"does": [],
+			"knows": [],
+			"line": "Colour joins the primitives: block, sphere, wedge, in columns, nothing moving.",
+			"beyond": "colour arrived after every shape you know. It changes nothing a hand can find; the grey of the first cages was not an absence, it was the default."
+		},
+		"Color_Flashlight": {
+			"made_of": [
+				"light"
+			],
+			"does": [],
+			"knows": [],
+			"line": "The colour is already there when you arrive: pools meet on a pale surface. Which lamp is responsible?",
+			"beyond": "a pool of colour is a lamp's claim on the floor. Where two claims meet, the colour belongs to neither; the edge is the only honest place."
+		},
+		"Color_Nails": {
+			"made_of": [],
+			"does": [
+				"dress"
+			],
+			"knows": [],
+			"line": "What changes when a colour becomes part of the body you act through?",
+			"beyond": "the point you move is coloured now, and so, from the point's side, are you. A colour worn is an address others read."
+		},
+		"Color_Rainbow": {
+			"made_of": [
+				"palette",
+				"flower"
+			],
+			"does": [],
+			"knows": [],
+			"line": "The mushrooms are dressed for it: pearl collars, candy-coloured caps, stars beyond the arch.",
+			"beyond": "the first living thing arrives dressed. Nothing in it grew from the grey; it was let in because colour was, and a palette is a permission."
+		},
+		"Color_Pillar": {
+			"made_of": [
+				"gradient"
+			],
+			"does": [],
+			"knows": [],
+			"line": "The hue stays while saturation rises; walk across the line and the hue changes too. Two directions.",
+			"beyond": "a gradient is a colour that knows where it is. Read it in one direction and it is one thing; the field has as many stories as it has directions."
+		},
+		"Color_Grid_Pallet": {
+			"made_of": [],
+			"does": [],
+			"knows": [
+				"address"
+			],
+			"line": "Choose a square before you choose a colour: two numbers give its address.",
+			"beyond": "an address comes before a colour. The floor was addressable all along; naming a cell is what lets a colour stay where you put it."
+		},
+		"Color_Paint": {
+			"made_of": [],
+			"does": [
+				"paint"
+			],
+			"knows": [],
+			"line": "A coloured ball is already moving across the canvas; the pigment changes colour as it travels.",
+			"beyond": "the floor remembered in grey until now. A trace in colour is a record that also says when; the fade is the clock."
+		},
+		"Color_Walls": {
+			"made_of": [
+				"tinted_glass"
+			],
+			"does": [],
+			"knows": [],
+			"line": "A desk, a monitor, a chair; seven more places repeat. The glass has colour; the office has an order.",
+			"beyond": "the cage itself is not exempt. Colour reaches the furniture last, and the glass you looked through was never clear — only uncoloured."
+		},
+		"Chamber_Color": {
+			"made_of": [],
+			"does": [],
+			"knows": [
+				"when"
+			],
+			"line": "A small instrument faces a crate in a frame. The aim is chosen; what remains is when.",
+			"beyond": "everything here has been counted, coloured and placed; the one thing not decided is the moment. Time is the last material in this chapter."
+		}
 	},
 	"sequences": {
-		"primitives": {"made_of": [], "does": [], "knows": []},
-		"transformation": {"made_of": [], "does": ["translate", "rotate", "scale", "compose"], "knows": []},
-		"array_tutorial": {"made_of": ["repeat"], "does": [], "knows": ["count", "index"]},
-		"color": {"made_of": ["colour"], "does": [], "knows": []},
-		"tiling": {"made_of": ["tile"], "does": [], "knows": []},
-		"change": {"made_of": [], "does": ["rate"], "knows": []},
-		"forces": {"made_of": [], "does": ["push", "spring", "gravity"], "knows": []},
-		"formfinding": {"made_of": [], "does": ["relax"], "knows": []},
-		"wavefunctions": {"made_of": [], "does": ["oscillate"], "knows": []},
-		"randomness": {"made_of": ["sample"], "does": ["vary"], "knows": ["seed"]},
-		"noise": {"made_of": ["field"], "does": [], "knows": []},
-		"cellularautomata": {"made_of": [], "does": ["rule", "grow"], "knows": []},
-		"fractals": {"made_of": ["recurse"], "does": [], "knows": []},
-		"lsystems": {"made_of": [], "does": ["rewrite", "branch"], "knows": []},
-		"proceduralgeneration": {"made_of": [], "does": ["constrain"], "knows": []},
-		"softbodies": {"made_of": [], "does": ["deform_soft", "react_diffuse"], "knows": []},
-		"isosurfaces": {"made_of": ["implicit"], "does": [], "knows": []},
-		"boolean_surfaces": {"made_of": ["union", "subtract", "intersect"], "does": [], "knows": []},
-		"swarmintelligence": {"made_of": [], "does": ["flock"], "knows": []},
-		"machinelearning": {"made_of": [], "does": ["select", "learn"], "knows": ["fitness"]},
-		"graphtheory": {"made_of": ["connect"], "does": [], "knows": []},
-		"foundationscrisis": {"made_of": [], "does": [], "knows": ["limit"]},
-		"qfeplaboratory": {"made_of": [], "does": ["tune"], "knows": []},
-		"postfoundationscrisis": {"made_of": [], "does": [], "knows": ["bias"]}
+		"primitives": {
+			"made_of": [],
+			"does": [],
+			"knows": []
+		},
+		"transformation": {
+			"made_of": [],
+			"does": [],
+			"knows": []
+		},
+		"array_tutorial": {
+			"made_of": [
+				"repeat"
+			],
+			"does": [],
+			"knows": [
+				"count",
+				"index"
+			]
+		},
+		"color": {
+			"made_of": [],
+			"does": [],
+			"knows": []
+		},
+		"tiling": {
+			"made_of": [
+				"tile"
+			],
+			"does": [],
+			"knows": []
+		},
+		"change": {
+			"made_of": [],
+			"does": [
+				"rate"
+			],
+			"knows": []
+		},
+		"forces": {
+			"made_of": [],
+			"does": [
+				"push",
+				"spring",
+				"gravity"
+			],
+			"knows": []
+		},
+		"formfinding": {
+			"made_of": [],
+			"does": [
+				"relax"
+			],
+			"knows": []
+		},
+		"wavefunctions": {
+			"made_of": [],
+			"does": [
+				"oscillate"
+			],
+			"knows": []
+		},
+		"randomness": {
+			"made_of": [
+				"sample",
+				"fungus"
+			],
+			"does": [
+				"vary"
+			],
+			"knows": [
+				"seed"
+			]
+		},
+		"noise": {
+			"made_of": [
+				"field"
+			],
+			"does": [],
+			"knows": []
+		},
+		"cellularautomata": {
+			"made_of": [],
+			"does": [
+				"rule",
+				"grow"
+			],
+			"knows": []
+		},
+		"fractals": {
+			"made_of": [
+				"recurse"
+			],
+			"does": [],
+			"knows": []
+		},
+		"lsystems": {
+			"made_of": [
+				"tree",
+				"creature"
+			],
+			"does": [
+				"rewrite",
+				"branch"
+			],
+			"knows": []
+		},
+		"proceduralgeneration": {
+			"made_of": [],
+			"does": [
+				"constrain"
+			],
+			"knows": []
+		},
+		"softbodies": {
+			"made_of": [],
+			"does": [
+				"deform_soft",
+				"react_diffuse"
+			],
+			"knows": []
+		},
+		"isosurfaces": {
+			"made_of": [
+				"implicit"
+			],
+			"does": [],
+			"knows": []
+		},
+		"boolean_surfaces": {
+			"made_of": [
+				"union",
+				"subtract",
+				"intersect"
+			],
+			"does": [],
+			"knows": []
+		},
+		"swarmintelligence": {
+			"made_of": [],
+			"does": [
+				"flock"
+			],
+			"knows": []
+		},
+		"machinelearning": {
+			"made_of": [],
+			"does": [
+				"select",
+				"learn"
+			],
+			"knows": [
+				"fitness"
+			]
+		},
+		"graphtheory": {
+			"made_of": [
+				"connect"
+			],
+			"does": [],
+			"knows": []
+		},
+		"foundationscrisis": {
+			"made_of": [],
+			"does": [],
+			"knows": [
+				"limit"
+			]
+		},
+		"qfeplaboratory": {
+			"made_of": [],
+			"does": [
+				"tune"
+			],
+			"knows": []
+		},
+		"postfoundationscrisis": {
+			"made_of": [],
+			"does": [],
+			"knows": [
+				"bias"
+			]
+		}
 	}
 }

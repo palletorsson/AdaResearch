@@ -4,14 +4,17 @@
 # essence: the nature system the grid lane builds AROUND a map, contained and gated by the
 #          ladder: a stage (a hall or a sequence) names a closure of what the biome may be
 #          made of, do and know (commons/data/biome_vocabulary.json via biome_grammar.gd).
-#          Before colour the cage holds the grey grammar — one point you can move, then a
-#          line, a trace, a lattice, faces, bodies, self-motion, spheres, divisions, an
-#          ornament; from colour on the stage's kingdoms are painted at the stage's density
-#          and dispatched cell by cell through BiomePaintDispatcher. Creatures come through
-#          CritterSpawner; they SELECT only once machinelearning is learned. A PresenceGrid
-#          remembers every organism from Point_Trace on, grey until colour, and glows
-#          through the floor. A stand screen states the cage, its vocabulary, and what lies
-#          beyond what the hall wrote. The state goes to ada_run/biome_vitrines.json.
+#          The garden is the grammar: a point you can move, then a line, a trace, a lattice,
+#          faces, bodies, self-motion, spheres, divisions, an ornament (primitives); then what
+#          those bodies may DO — be taken, run, translate, rotate, scale, measure, move a
+#          boundary (transformation); then colour — on the bodies, as light, on the hand, a
+#          palette and the first flower, a gradient, an address, a trace in colour, the glass
+#          itself (colour). A kingdom word (flower, fungus, tree, creature) opens the painted
+#          patch: the stage's seeds dispatched cell by cell through BiomePaintDispatcher.
+#          Creatures come through CritterSpawner and SELECT only once machinelearning is
+#          learned. A PresenceGrid remembers from Point_Trace on, grey until Color_Paint. A
+#          stand screen states the cage, its vocabulary, and what lies beyond what the hall
+#          wrote. The state goes to ada_run/biome_vitrines.json.
 # desire: to stand in a hall and see what the world is made of SO FAR — Palle, 2026-09-17:
 #         "the first biome might just be one point we can move"; "you arrive late"
 # critical_parameter: stage — a hall name (Point_One), a sequence key (randomness), or
@@ -20,16 +23,17 @@
 #           the generation timer; readbacks get_state / get_history / status_line / closure
 # emerges: the same seed paints the same cells at every stage — what changes between two
 #          cages is only what the stage lets those cells become
-# needs: cage [has]; grey grammar [has]; painted patch [has]; live creatures [has]; selection
-#        from ML only [has]; presence floor [has, own shader]; record file [has]; query rack
-#        (STAGE / GEN scrub) [missing]; dream replay [missing]
+# needs: cage [has]; grey grammar [has]; transformation motions [has]; colour words [has];
+#        painted patch [has]; live creatures [has]; selection from ML only [has]; presence
+#        floor [has, own shader]; record file [has]; query rack [missing]; dream replay [missing]
 # relationships: mushrooms (the glass-case idiom); BiomeRingComponent (ground cover shared
-#                via ground_cover.gd); grab_sphere_point_with_text (the grabbable point idiom);
+#                via ground_cover.gd); grab_sphere_point_with_text (the grabbable idiom);
 #                biome_grammar (the gate); doc/COMBINATORY_BIOME.md (the design)
 # truth: a biome is not scenery around the lesson — it is the lesson so far, alive
 #
 # Map tokens (words, or numbers whose keys are in CONFIG_PARAM_NAMES):
 #   biome_vitrine#stage:Point_One#size:5#seed:7            one grey point, movable
+#   biome_vitrine#stage:Trans_Rotation#size:5#seed:7       the garden, and a bar turning about one end
 #   biome_vitrine#stage:randomness#size:8#seed:7#evolve:on#duration:20
 #   #stage:hall reads the hall the cage stands in (museum em_map / em_chapter meta, or the
 #   grid's map name). #glow:off keeps the floor dark; #entry:off closes the doorways.
@@ -69,11 +73,11 @@ const GREY_POINT := 0.22
 const GREY_LINE := 0.35
 const GREY_FACE := 0.50
 const GREY_BODY := 0.58
+const BODY_HEIGHT_M := 1.65
 
 ## The spine stage whose biome stands here: a soft_stages.json sequence key, a HALL
-## name (Point_One … Primitives_Melencolia and every other map_authored hall), or
-## `hall` for the hall the cage stands in. The enum lists the sequences; halls are
-## typed on the token.
+## name (Point_One … Chamber_Color and every other map_authored hall), or `hall` for
+## the hall the cage stands in. The enum lists the sequences; halls are typed on the token.
 @export_enum("hall", "primitives", "transformation", "array_tutorial", "color", "tiling",
 	"change", "isosurfaces", "boolean_surfaces", "forces", "formfinding", "wavefunctions",
 	"randomness", "noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration",
@@ -133,7 +137,7 @@ var _presence_timer: float = 0.0
 var _static_timer: float = 0.0
 var _status_timer: float = 0.0
 var _record_where: String = ""
-# the grey grammar
+# the garden (the grammar)
 var _garden: Node3D = null
 var _free_points: Array[Node3D] = []
 var _line: MeshInstance3D = null
@@ -141,6 +145,13 @@ var _movers: Array[Node3D] = []
 var _mover_phase: Array[float] = []
 var _grammar_counts: Dictionary = {}
 var _time: float = 0.0
+var _hues: Array[float] = []
+# transformation: the rule-driven bodies
+var _loop: Node3D = null
+var _carrier: Node3D = null
+var _spoke: Node3D = null
+var _pulse: Node3D = null
+var _boundary: Node3D = null
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -228,38 +239,44 @@ func _build() -> void:
 	var pos: Dictionary = _closure.get("position", {})
 	_sequence = String(pos.get("sequence", ""))
 	if not bool(pos.get("known", false)):
-		# an unknown word: try it as a sequence for the kingdoms, and say so
+		# an unknown word: try it as a sequence for the density, and say so
 		_sequence = _stage_key.to_lower()
 		push_warning("biome_vitrine: stage `%s` is neither a hall nor a sequence of the ladder — building a grey cage" % _stage_key)
 	var info: Dictionary = _stage_info(_sequence)
 	_stage_order = int(info.get("order", 0))
+	# the kingdoms are the closure's kingdom words — flower with the rainbow, fungus with
+	# randomness, tree and creature with L-systems — never soft_stages' per-sequence list
 	_kingdoms.clear()
-	for k in info.get("kingdoms", []):
-		if String(k) in KINGDOM_NAMES:
-			_kingdoms.append(String(k))
+	for k in KINGDOM_NAMES:
+		if _allows(k):
+			_kingdoms.append(k)
 	_density = clampf(intensity if intensity >= 0.0 else float(info.get("density", 0.0)), 0.0, 1.0)
+	if not _kingdoms.is_empty() and _density <= 0.0:
+		_density = 0.1          # a kingdom has arrived but the sequence says barren: the first flower still stands
+	_hues = _palette()
 
 	_patch = Node3D.new()
 	_patch.name = "Patch"
 	add_child(_patch)
 
 	_build_ground()
-	if _grey():
+	if _allows("point"):
 		_build_garden()
-	else:
+	if not _kingdoms.is_empty():
 		_paint()
 		_dispatch_seeds()
 		_spawn_live()
 		_scatter_cover()
 	if _allows("trace"):
 		_build_presence()
+	if _allows("light"):
+		_build_lights()
 	_build_cage()
 	_build_status()
 	_write_record()
-	print("[biome_vitrine] stage %s (%s, order %d) made of %s · does %s · knows %s — %s, %s" % [
+	print("[biome_vitrine] stage %s (%s, order %d) made of %s · does %s · knows %s — garden %s, seeds %s, live %d, cover %d, %s" % [
 		_stage_key, _sequence, _stage_order, str(_closure.get("made_of", [])), str(_closure.get("does", [])),
-		str(_closure.get("knows", [])),
-		("grey garden %s" % str(_grammar_counts)) if _grey() else ("seeds %s, live %d, cover %d" % [str(_seed_counts), _live_cells.size(), _cover_count]),
+		str(_closure.get("knows", [])), str(_grammar_counts), str(_seed_counts), _live_cells.size(), _cover_count,
 		_record_where if _record_where != "" else "no record"])
 
 
@@ -274,6 +291,11 @@ func _rebuild() -> void:
 	_status = null
 	_garden = null
 	_line = null
+	_loop = null
+	_carrier = null
+	_spoke = null
+	_pulse = null
+	_boundary = null
 	_free_points.clear()
 	_movers.clear()
 	_mover_phase.clear()
@@ -294,13 +316,38 @@ func _rebuild() -> void:
 	_build()
 
 
-## Before the colour sequence the cage holds the grey grammar, not painted kingdoms.
+## Grey until the colour sequence's first hall.
 func _grey() -> bool:
 	return not _allows("colour")
 
 
 func _allows(word: String) -> bool:
 	return Grammar.allows(_closure, word)
+
+
+## The stage's hues, seeded: one per body once `colour` is in the closure.
+func _palette() -> Array[float]:
+	var out: Array[float] = []
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash([seed, "palette"])
+	var base: float = rng.randf()
+	for i in range(12):
+		out.append(fmod(base + float(i) * 0.137 + rng.randf() * 0.04, 1.0))
+	return out
+
+
+func _hue(i: int) -> float:
+	return _hues[i % _hues.size()] if not _hues.is_empty() else 0.0
+
+
+func _body_mat(i: int, grey_value: float) -> StandardMaterial3D:
+	if _grey():
+		return _grey_mat(grey_value)
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color.from_hsv(_hue(i), 0.62, clampf(grey_value + 0.25, 0.4, 0.9))
+	m.roughness = 0.7
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	return m
 
 
 func _build_ground() -> void:
@@ -320,14 +367,15 @@ func _build_ground() -> void:
 	_ground_mat.shader = FLOOR_SHADER
 	_ground_mat.set_shader_parameter("earth", earth.albedo_color)
 	_ground_mat.set_shader_parameter("glow", 0.9 if _flag(glow) else 0.0)
-	_ground_mat.set_shader_parameter("mono", 1.0 if _grey() else 0.0)
+	# the floor remembers in grey until Color_Paint: a trace in colour is a record that says when
+	_ground_mat.set_shader_parameter("mono", 0.0 if _allows("paint") else 1.0)
 	_ground.material_override = _ground_mat
 	_ground.position = Vector3(0.0, 0.01, 0.0)
 	_patch.add_child(_ground)
 
 
 # ════════════════════════════════════════════════════════════════════════════
-# THE GREY GRAMMAR — sequences 1-3, one word at a time
+# THE GARDEN — the grammar, one word at a time
 # ════════════════════════════════════════════════════════════════════════════
 
 func _grey_mat(v: float) -> StandardMaterial3D:
@@ -338,25 +386,19 @@ func _grey_mat(v: float) -> StandardMaterial3D:
 	return m
 
 
-## A point you can pick up and put down: the project's own grabbable (XR Tools pickable,
+## A body you can pick up and put down: the project's own grabbable (XR Tools pickable,
 ## collision layer 3, so the desktop crosshair's right-click carries it too). Frozen, so it
 ## stays where it is dropped — a point has a place, not a momentum.
-func _make_point(index: int, at: Vector3) -> Node3D:
+func _make_pickable(name: String, mesh: Mesh, shape: Shape3D, mat: Material, at: Vector3) -> Node3D:
 	var p: Node3D = PICKABLE.instantiate()
-	p.name = "FreePoint_%d" % index
+	p.name = name
 	var col := CollisionShape3D.new()
-	var sh := SphereShape3D.new()
-	sh.radius = 0.09
-	col.shape = sh
+	col.shape = shape
 	p.add_child(col)
 	var mi := MeshInstance3D.new()
-	var sm := SphereMesh.new()
-	sm.radius = 0.06
-	sm.height = 0.12
-	sm.radial_segments = 12
-	sm.rings = 6
-	mi.mesh = sm
-	mi.material_override = _grey_mat(GREY_POINT)
+	mi.name = "Mesh"
+	mi.mesh = mesh
+	mi.material_override = mat
 	p.add_child(mi)
 	if p is RigidBody3D:
 		(p as RigidBody3D).freeze = true
@@ -365,6 +407,24 @@ func _make_point(index: int, at: Vector3) -> Node3D:
 	_garden.add_child(p)
 	p.position = at
 	return p
+
+
+func _make_point(index: int, at: Vector3) -> Node3D:
+	var sh := SphereShape3D.new()
+	sh.radius = 0.09
+	var sm := SphereMesh.new()
+	sm.radius = 0.06
+	sm.height = 0.12
+	sm.radial_segments = 12
+	sm.rings = 6
+	# `dress`: the point you act through takes a colour
+	var mat: Material = _grey_mat(GREY_POINT)
+	if _allows("dress"):
+		var m := StandardMaterial3D.new()
+		m.albedo_color = Color.from_hsv(_hue(9 + index), 0.75, 0.85)
+		m.roughness = 0.5
+		mat = m
+	return _make_pickable("FreePoint_%d" % index, sm, sh, mat, at)
 
 
 func _build_garden() -> void:
@@ -376,7 +436,7 @@ func _build_garden() -> void:
 	var half: float = float(size) * 0.5
 	var inner: float = half - 0.6
 	_grammar_counts = {"points": 0, "lines": 0, "lattice": 0, "faces": 0, "solids": 0,
-		"spheres": 0, "divided": 0, "ornament": 0, "movers": 0}
+		"spheres": 0, "divided": 0, "ornament": 0, "movers": 0, "rules": 0}
 
 	# point — one, at the centre, yours to move; a second one once a line can join them
 	var n_free: int = 2 if _allows("line") else 1
@@ -399,6 +459,7 @@ func _build_garden() -> void:
 
 	# lattice — many points agreeing on a distance, lines to their neighbours
 	var n: int = maxi(size - 2, 2)
+	var step: float = 2.0 * inner / float(n)
 	if _allows("lattice"):
 		var pts := MultiMesh.new()
 		pts.transform_format = MultiMesh.TRANSFORM_3D
@@ -411,6 +472,7 @@ func _build_garden() -> void:
 		pts.instance_count = n * n
 		var links := MultiMesh.new()
 		links.transform_format = MultiMesh.TRANSFORM_3D
+		links.use_colors = _allows("gradient")
 		var lm := BoxMesh.new()
 		lm.size = Vector3(0.012, 0.012, 1.0)
 		links.mesh = lm
@@ -418,21 +480,25 @@ func _build_garden() -> void:
 		var li := 0
 		for iz in range(n):
 			for ix in range(n):
-				var at := Vector3(-inner + (float(ix) + 0.5) * (2.0 * inner / float(n)), 0.04,
-					-inner + (float(iz) + 0.5) * (2.0 * inner / float(n)))
+				var at := Vector3(-inner + (float(ix) + 0.5) * step, 0.04, -inner + (float(iz) + 0.5) * step)
 				var t := Transform3D.IDENTITY
 				t.origin = at
 				pts.set_instance_transform(iz * n + ix, t)
-				var step: float = 2.0 * inner / float(n)
+				# `gradient`: hue along x, saturation along z — a colour that knows where it is
+				var tint := Color.from_hsv(float(ix) / float(n), 0.25 + 0.7 * float(iz) / float(n), 0.85)
 				if ix + 1 < n:
 					var tl := Transform3D.IDENTITY.rotated(Vector3.UP, PI * 0.5).scaled(Vector3(1, 1, step))
 					tl.origin = at + Vector3(step * 0.5, 0.0, 0.0)
 					links.set_instance_transform(li, tl)
+					if links.use_colors:
+						links.set_instance_color(li, tint)
 					li += 1
 				if iz + 1 < n:
 					var tz := Transform3D.IDENTITY.scaled(Vector3(1, 1, step))
 					tz.origin = at + Vector3(0.0, 0.0, step * 0.5)
 					links.set_instance_transform(li, tz)
+					if links.use_colors:
+						links.set_instance_color(li, tint)
 					li += 1
 		var pmi := MultiMeshInstance3D.new()
 		pmi.name = "Lattice"
@@ -442,16 +508,23 @@ func _build_garden() -> void:
 		var lmi := MultiMeshInstance3D.new()
 		lmi.name = "LatticeLines"
 		lmi.multimesh = links
-		lmi.material_override = _grey_mat(GREY_LINE)
+		if links.use_colors:
+			var vm := StandardMaterial3D.new()
+			vm.vertex_color_use_as_albedo = true
+			vm.roughness = 0.7
+			lmi.material_override = vm
+		else:
+			lmi.material_override = _grey_mat(GREY_LINE)
 		_garden.add_child(lmi)
 		_grammar_counts["lattice"] = n * n
 
-	# face — three points close a boundary: grey triangles on some lattice cells
+	# face — three points close a boundary: grey triangles on some lattice cells.
+	# `address`: every cell's face takes its own colour (a colour stays where you put it).
 	if _allows("face"):
 		var st := SurfaceTool.new()
 		st.begin(Mesh.PRIMITIVE_TRIANGLES)
 		var faces := 0
-		var step: float = 2.0 * inner / float(n)
+		var addressed: bool = _allows("address")
 		for iz in range(n - 1):
 			for ix in range(n - 1):
 				if rng.randf() > 0.35:
@@ -459,6 +532,8 @@ func _build_garden() -> void:
 				var a := Vector3(-inner + (float(ix) + 0.5) * step, 0.05, -inner + (float(iz) + 0.5) * step)
 				var b := a + Vector3(step, 0.0, 0.0)
 				var c := a + Vector3(0.0, 0.0, step)
+				if addressed:
+					st.set_color(Color.from_hsv(fmod(float(ix * (n - 1) + iz) * 0.173, 1.0), 0.6, 0.8))
 				st.add_vertex(a)
 				st.add_vertex(b)
 				st.add_vertex(c)
@@ -468,37 +543,63 @@ func _build_garden() -> void:
 			var fm := MeshInstance3D.new()
 			fm.name = "Faces"
 			fm.mesh = st.commit()
-			fm.material_override = _grey_mat(GREY_FACE)
+			if addressed:
+				var am := StandardMaterial3D.new()
+				am.vertex_color_use_as_albedo = true
+				am.cull_mode = BaseMaterial3D.CULL_DISABLED
+				am.roughness = 0.7
+				fm.material_override = am
+			else:
+				fm.material_override = _grey_mat(GREY_FACE)
 			_garden.add_child(fm)
 		_grammar_counts["faces"] = faces
 
-	# solid — faces meet and enclose: cubes, prisms, double pyramids
+	# solid — faces meet and enclose: cubes, prisms, double pyramids.
+	# `pickup` (Trans_Pre): the bodies can be taken. `colour`: each body its hue.
 	if _allows("solid"):
 		var n_solids: int = clampi(size / 2, 2, 5)
+		var pickup: bool = _allows("pickup")
 		for i in range(n_solids):
-			var body := MeshInstance3D.new()
-			body.name = "Solid_%d" % i
+			var mesh: Mesh
+			var shape: Shape3D
 			match i % 3:
 				0:
 					var bm2 := BoxMesh.new()
 					bm2.size = Vector3(0.45, 0.45, 0.45)
-					body.mesh = bm2
+					mesh = bm2
+					var bs := BoxShape3D.new()
+					bs.size = bm2.size
+					shape = bs
 				1:
 					var pr := PrismMesh.new()
 					pr.size = Vector3(0.5, 0.5, 0.5)
-					body.mesh = pr
+					mesh = pr
+					var ps := BoxShape3D.new()
+					ps.size = Vector3(0.5, 0.5, 0.5)
+					shape = ps
 				_:
 					var cy := CylinderMesh.new()   # a four-sided pyramid: faces meeting at a point
 					cy.top_radius = 0.0
 					cy.bottom_radius = 0.32
 					cy.height = 0.5
 					cy.radial_segments = 4
-					body.mesh = cy
-			body.material_override = _grey_mat(GREY_BODY)
-			body.position = Vector3(rng.randf_range(-inner + 0.4, inner - 0.4), 0.26,
-				rng.randf_range(-inner + 0.4, inner - 0.4))
+					mesh = cy
+					var cs := BoxShape3D.new()
+					cs.size = Vector3(0.45, 0.5, 0.45)
+					shape = cs
+			var at := Vector3(rng.randf_range(-inner + 0.4, inner - 0.4), 0.26, rng.randf_range(-inner + 0.4, inner - 0.4))
+			var body: Node3D
+			if pickup:
+				body = _make_pickable("Solid_%d" % i, mesh, shape, _body_mat(i, GREY_BODY), at)
+			else:
+				var mi := MeshInstance3D.new()
+				mi.name = "Solid_%d" % i
+				mi.mesh = mesh
+				mi.material_override = _body_mat(i, GREY_BODY)
+				mi.position = at
+				_garden.add_child(mi)
+				body = mi
 			body.rotation.y = rng.randf_range(0.0, TAU)
-			_garden.add_child(body)
 			if _allows("self_move"):
 				_movers.append(body)
 				_mover_phase.append(rng.randf_range(0.0, TAU))
@@ -515,7 +616,7 @@ func _build_garden() -> void:
 			sm2.radial_segments = 14
 			sm2.rings = 7
 			sp.mesh = sm2
-			sp.material_override = _grey_mat(GREY_BODY)
+			sp.material_override = _body_mat(5 + i, GREY_BODY)
 			sp.position = Vector3(rng.randf_range(-inner + 0.4, inner - 0.4), 0.29,
 				rng.randf_range(-inner + 0.4, inner - 0.4))
 			_garden.add_child(sp)
@@ -541,7 +642,7 @@ func _build_garden() -> void:
 					k += 1
 		var smi := MultiMeshInstance3D.new()
 		smi.multimesh = mm
-		smi.material_override = _grey_mat(GREY_BODY)
+		smi.material_override = _body_mat(7, GREY_BODY)
 		holder.add_child(smi)
 		holder.position = Vector3(-inner * 0.6, 0.0, inner * 0.6)
 		_garden.add_child(holder)
@@ -557,11 +658,103 @@ func _build_garden() -> void:
 		cy2.height = 0.7
 		cy2.radial_segments = 6
 		orn.mesh = cy2
-		orn.material_override = _grey_mat(GREY_BODY + 0.08)
+		orn.material_override = _body_mat(8, GREY_BODY + 0.08)
 		orn.position = Vector3(inner * 0.6, 0.36, inner * 0.6)
 		orn.rotation = Vector3(deg_to_rad(18.0), deg_to_rad(30.0), deg_to_rad(-12.0))
 		_garden.add_child(orn)
 		_grammar_counts["ornament"] = 1
+
+	# ── transformation: what the bodies may DO ───────────────────────────────────
+	var rules := 0
+	# `run` (Trans_Introduction): a cube that rises, turns and swells, left running
+	if _allows("run"):
+		var lp := MeshInstance3D.new()
+		lp.name = "Loop"
+		var lb := BoxMesh.new()
+		lb.size = Vector3(0.3, 0.3, 0.3)
+		lp.mesh = lb
+		lp.material_override = _body_mat(3, GREY_BODY)
+		lp.position = Vector3(-inner * 0.55, 0.4, -inner * 0.55)
+		_garden.add_child(lp)
+		_loop = lp
+		rules += 1
+	# `translate` (Trans_Translation): a surface that carries, sliding through the space
+	if _allows("translate"):
+		var cr := MeshInstance3D.new()
+		cr.name = "Carrier"
+		var cb := BoxMesh.new()
+		cb.size = Vector3(0.8, 0.08, 0.8)
+		cr.mesh = cb
+		cr.material_override = _body_mat(4, GREY_FACE)
+		cr.position = Vector3(inner * 0.55, 0.12, 0.0)
+		_garden.add_child(cr)
+		_carrier = cr
+		rules += 1
+	# `rotate` (Trans_Rotation): a bar attached at one end — follow the other
+	if _allows("rotate"):
+		var pivot := Node3D.new()
+		pivot.name = "Spoke"
+		pivot.position = Vector3(0.0, 0.6, inner * 0.55)
+		var post := MeshInstance3D.new()
+		var pc := CylinderMesh.new()
+		pc.top_radius = 0.03
+		pc.bottom_radius = 0.03
+		pc.height = 0.6
+		post.mesh = pc
+		post.material_override = _grey_mat(GREY_LINE)
+		post.position = Vector3(0.0, -0.3, 0.0)
+		pivot.add_child(post)
+		var bar := MeshInstance3D.new()
+		bar.name = "Bar"
+		var bb := BoxMesh.new()
+		bb.size = Vector3(1.2, 0.05, 0.08)
+		bar.mesh = bb
+		bar.material_override = _body_mat(6, GREY_BODY)
+		bar.position = Vector3(0.6, 0.0, 0.0)
+		pivot.add_child(bar)
+		_garden.add_child(pivot)
+		_spoke = pivot
+		rules += 1
+	# `scale` (Trans_Scale): a body that swells and shrinks
+	if _allows("scale"):
+		var pu := MeshInstance3D.new()
+		pu.name = "Pulse"
+		var pm2 := SphereMesh.new()
+		pm2.radius = 0.2
+		pm2.height = 0.4
+		pm2.radial_segments = 12
+		pm2.rings = 6
+		pu.mesh = pm2
+		pu.material_override = _body_mat(2, GREY_BODY)
+		pu.position = Vector3(-inner * 0.55, 0.35, inner * 0.2)
+		_garden.add_child(pu)
+		_pulse = pu
+		rules += 1
+	# `body` (Trans_Body): the measure, drawn — a post the height of you
+	if _allows("body"):
+		var bp := MeshInstance3D.new()
+		bp.name = "BodyPost"
+		var bpc := CylinderMesh.new()
+		bpc.top_radius = 0.025
+		bpc.bottom_radius = 0.025
+		bpc.height = BODY_HEIGHT_M
+		bp.mesh = bpc
+		bp.material_override = _grey_mat(GREY_LINE)
+		bp.position = Vector3(inner * 0.75, BODY_HEIGHT_M * 0.5, -inner * 0.75)
+		_garden.add_child(bp)
+	# `boundary_moves` (Trans_Pit): a wall that arrives; `compose`: it also turns
+	if _allows("boundary_moves"):
+		var bd := MeshInstance3D.new()
+		bd.name = "Boundary"
+		var wb := BoxMesh.new()
+		wb.size = Vector3(1.6, 1.4, 0.05)
+		bd.mesh = wb
+		bd.material_override = _body_mat(1, GREY_FACE)
+		bd.position = Vector3(0.0, 0.7, -inner * 0.2)
+		_garden.add_child(bd)
+		_boundary = bd
+		rules += 1
+	_grammar_counts["rules"] = rules
 	_grammar_counts["movers"] = _movers.size()
 
 
@@ -592,6 +785,23 @@ func _tick_garden(delta: float) -> void:
 			continue
 		m.rotate_y(delta * 0.25)
 		m.position.y = 0.26 + 0.04 * sin(_time * 0.8 + _mover_phase[i])
+	var inner: float = float(size) * 0.5 - 0.6
+	if _loop != null:
+		_loop.position.y = 0.4 + 0.25 * sin(_time * 0.9)
+		_loop.rotate_y(delta * 0.6)
+		var s: float = 1.0 + 0.25 * sin(_time * 0.6)
+		_loop.scale = Vector3(s, s, s)
+	if _carrier != null:
+		_carrier.position.z = inner * 0.6 * sin(_time * 0.45)
+	if _spoke != null:
+		_spoke.rotate_y(delta * 0.7)
+	if _pulse != null:
+		var ps: float = 1.0 + 0.45 * sin(_time * 1.1)
+		_pulse.scale = Vector3(ps, ps, ps)
+	if _boundary != null:
+		_boundary.position.x = inner * 0.7 * sin(_time * 0.3)
+		if _allows("compose"):
+			_boundary.rotation.y = 0.5 * sin(_time * 0.3)
 
 
 func _deposit_points() -> void:
@@ -602,20 +812,30 @@ func _deposit_points() -> void:
 			_presence.deposit(p.global_position, KINGDOM_ID["creature"], 0.35, 0.45)
 
 
+## `light` (Color_Flashlight): the colour is already there — pools from lamps
+func _build_lights() -> void:
+	var half: float = float(size) * 0.5
+	for i in range(3):
+		var l := OmniLight3D.new()
+		l.name = "Lamp_%d" % i
+		l.light_color = Color.from_hsv(_hue(i), 0.85, 1.0)
+		l.light_energy = 2.2
+		l.omni_range = half * 0.9
+		l.omni_attenuation = 1.6
+		var ang: float = TAU * float(i) / 3.0
+		l.position = Vector3(cos(ang) * half * 0.45, 1.5, sin(ang) * half * 0.45)
+		_patch.add_child(l)
+
+
 # ════════════════════════════════════════════════════════════════════════════
-# THE PAINTED PATCH — from colour on
+# THE PAINTED PATCH — a kingdom word opens it
 # ════════════════════════════════════════════════════════════════════════════
 
 ## Paint the patch: which cells hold a seed, of which kingdom, how strong — seeded, so the
-## same seed paints the same cells at every stage. A stage with kingdoms but no density
-## still gets a sparse painting: the dispatcher's unlock guard renders locked kingdoms as
-## kingdom-coloured cubes, the seeds of what is to come.
+## same seed paints the same cells at every stage.
 func _paint() -> void:
 	var rng := RandomNumberGenerator.new()
-	rng.seed = hash([seed, _sequence])
-	var paint_kingdoms: Array[String] = _kingdoms.duplicate()
-	if paint_kingdoms.is_empty():
-		paint_kingdoms = KINGDOM_NAMES.duplicate()
+	rng.seed = hash([seed, "paint"])
 	var prob: float = 0.12 + _density * 0.55
 	for k in KINGDOM_NAMES:
 		_seed_counts[k] = 0
@@ -626,7 +846,7 @@ func _paint() -> void:
 		for x in range(size):
 			var tok := ""
 			if rng.randf() < prob:
-				var k: String = paint_kingdoms[rng.randi_range(0, paint_kingdoms.size() - 1)]
+				var k: String = _kingdoms[rng.randi_range(0, _kingdoms.size() - 1)]
 				var inten: int = clampi(1 + int(rng.randf() * (1.0 + _density * 4.0)), 1, 5)
 				if int(_seed_counts[k]) < int(CAPS[k]):
 					_seed_counts[k] = int(_seed_counts[k]) + 1
@@ -637,12 +857,12 @@ func _paint() -> void:
 
 
 func _creature_unlocked() -> bool:
-	return "creature" in _kingdoms and _stage_order >= int(ConfigLoader.get_unlock_order(KINGDOM_ID["creature"]))
+	return "creature" in _kingdoms
 
 
 ## Every painted cell goes through the one dispatch law the grid uses (flower →
-## BotanicalFlower, fungus → mycelium / CA, tree → TreeMorphology DNA, locked kingdoms →
-## a coloured cube). Creature cells are held back when the stage has live creatures.
+## BotanicalFlower, fungus → mycelium / CA, tree → TreeMorphology DNA). The dispatcher's
+## own unlock guard reads soft_stages' order; the closure has already decided the kingdom.
 func _dispatch_seeds() -> void:
 	var tiles: Array = []
 	_live_cells.clear()
@@ -660,9 +880,14 @@ func _dispatch_seeds() -> void:
 	_dispatcher = DISPATCHER.new()
 	_dispatcher.name = "Dispatcher"
 	_patch.add_child(_dispatcher)
+	# the closure's word outranks the dispatcher's per-sequence guard: hand it an order
+	# that unlocks every kingdom the closure allows
+	var order: int = _stage_order
+	for k in _kingdoms:
+		order = maxi(order, int(ConfigLoader.get_unlock_order(int(KINGDOM_ID[k]))))
 	var ctx := {
 		"biome_paint": tiles,
-		"stage_order": _stage_order,
+		"stage_order": order,
 		"parent": _patch,
 		"grid_center": _patch.global_position + Vector3(0.0, -0.55, 0.0),
 		"grid_dims": Vector3i(size, 1, size),
@@ -799,6 +1024,7 @@ func _deposit_live() -> void:
 
 
 ## Glass on four sides, doorways in the two end walls, steel rails, no roof.
+## `tinted_glass` (Color_Walls): the cage itself is not exempt.
 func _build_cage() -> void:
 	_cage = Node3D.new()
 	_cage.name = "Cage"
@@ -807,6 +1033,9 @@ func _build_cage() -> void:
 	var h := height
 	var half := s * 0.5
 	var glass := Color(0.38, 0.76, 0.83, 0.085)
+	if _allows("tinted_glass"):
+		var gc := Color.from_hsv(_hue(10), 0.55, 0.9)
+		glass = Color(gc.r, gc.g, gc.b, 0.16)
 	var steel := Color(0.12, 0.19, 0.24)
 	var trim := Color(0.97, 0.59, 0.27)
 	for x in [-half, half]:
@@ -942,21 +1171,23 @@ func _status_body() -> String:
 		" ".join(made) if not made.is_empty() else "—",
 		" ".join(does) if not does.is_empty() else "—",
 		" ".join(knows) if not knows.is_empty() else "—"]
-	var tail := ""
-	if _grey():
-		var parts: Array[String] = []
-		for k in ["points", "lines", "lattice", "faces", "solids", "spheres", "divided", "ornament"]:
-			if int(_grammar_counts.get(k, 0)) > 0:
-				parts.append("%d %s" % [int(_grammar_counts[k]), k])
-		tail = "\n%s" % (" · ".join(parts) if not parts.is_empty() else "nothing yet")
-	else:
+	var parts: Array[String] = []
+	for k in ["points", "lines", "lattice", "faces", "solids", "spheres", "divided", "ornament", "rules"]:
+		if int(_grammar_counts.get(k, 0)) > 0:
+			parts.append("%d %s" % [int(_grammar_counts[k]), k])
+	var tail := "\n%s" % (" · ".join(parts) if not parts.is_empty() else "nothing yet")
+	if not _kingdoms.is_empty():
 		var live: int = _spawner.get_population_count() if _spawner != null else 0
 		var seeds: Array[String] = []
 		for k in KINGDOM_NAMES:
 			if int(_seed_counts.get(k, 0)) > 0:
 				seeds.append("%d %s" % [int(_seed_counts[k]), k])
-		tail = "\nseeds %s\ncover %d · live %d · gen %d · born %d · culled %d" % [
+		tail += "\nseeds %s\ncover %d · live %d · gen %d · born %d · culled %d" % [
 			", ".join(seeds) if not seeds.is_empty() else "none", _cover_count, live, _gen, _births, _deaths]
+	if _allows("body"):
+		tail += "\nbody %.2f m · cage %.1f bodies" % [BODY_HEIGHT_M, float(size) / BODY_HEIGHT_M]
+	if _allows("when"):
+		tail += "\nwhen: %d s standing" % int(_time)
 	var beyond: String = Grammar.beyond_of(_stage_key)
 	if beyond != "":
 		tail += "\n\nbeyond: %s" % beyond

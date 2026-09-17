@@ -71,7 +71,9 @@ func _run() -> void:
 
 	var rnd = await _cage("randomness", 7, {})
 	var rs: Dictionary = rnd.get_state()
-	_check(str(rs["kingdoms"]) == str(["flower", "tree", "fungus"]), "randomness: kingdoms")
+	# the closure's kingdom words: flower (with the rainbow) and fungus (with randomness); trees wait for L-systems
+	_check(str(rs["kingdoms"]) == str(["flower", "fungus"]), "randomness: kingdoms %s" % str(rs["kingdoms"]))
+	_check(int(rs["seeds"]["tree"]) == 0, "randomness: no trees before L-systems")
 	for k in ["tree", "flower", "fungus"]:
 		_check(int(rs["seeds"][k]) <= int(VITRINE.CAPS[k]), "randomness: %s within cap" % k)
 	_check(int(rs["seeds"]["creature"]) == 0, "randomness: no creature seeds")
@@ -230,6 +232,66 @@ func _run() -> void:
 	await process_frame
 	_check(h.stage_key() == "Point_Lines", "stage `hall` resolves the museum's em_map (%s)" % h.stage_key())
 
+	# 9. transformation and colour — what the bodies may DO, then colour
+	var cr: Dictionary = G.closure("Trans_Rotation")
+	_check("rotate" in cr["does"] and "translate" in cr["does"] and not ("scale" in cr["does"]), "closure Trans_Rotation: rotate and translate, not yet scale")
+	_check("pickup" in G.closure("Trans_Pre")["does"] and not ("pickup" in G.closure("Primitives_Melencolia")["does"]), "pickup arrives with Trans_Pre")
+	_check(not ("colour" in G.closure("Trans_Pit")["made_of"]), "no colour at the end of transformation")
+	var pre = await _cage("Trans_Pre", 7, {"size": "5"})
+	var s0: Node = pre.get_node_or_null("Patch/Garden/Solid_0")
+	_check(s0 != null and s0 is RigidBody3D and s0.has_method("pick_up"), "Trans_Pre: the bodies can be taken")
+	_check(_all_grey(pre), "Trans_Pre: still grey")
+	var intro = await _cage("Trans_Introduction", 7, {"size": "5"})
+	_check(intro.get_node_or_null("Patch/Garden/Loop") != null, "Trans_Introduction: a movement left running")
+	var tr = await _cage("Trans_Translation", 7, {"size": "5"})
+	var carrier: Node3D = tr.get_node("Patch/Garden/Carrier")
+	var z0: float = carrier.position.z
+	await process_frame
+	await process_frame
+	await process_frame
+	_check(not is_equal_approx(carrier.position.z, z0), "Trans_Translation: the carrier moves")
+	var ro = await _cage("Trans_Rotation", 7, {"size": "5"})
+	var spoke: Node3D = ro.get_node("Patch/Garden/Spoke")
+	var r0: float = spoke.rotation.y
+	await process_frame
+	await process_frame
+	_check(not is_equal_approx(spoke.rotation.y, r0), "Trans_Rotation: the spoke turns about one end")
+	_check(ro.get_node_or_null("Patch/Garden/Pulse") == null, "Trans_Rotation: nothing scales yet")
+	var sc = await _cage("Trans_Scale", 7, {"size": "5"})
+	_check(sc.get_node_or_null("Patch/Garden/Pulse") != null, "Trans_Scale: a body that swells and shrinks")
+	var bo = await _cage("Trans_Body", 7, {"size": "5"})
+	_check(bo.get_node_or_null("Patch/Garden/BodyPost") != null and bo.status_line().find("body 1.65") >= 0, "Trans_Body: the measure, drawn")
+	var pit = await _cage("Trans_Pit", 7, {"size": "5"})
+	_check(pit.get_node_or_null("Patch/Garden/Boundary") != null, "Trans_Pit: a boundary that moves")
+	_check(_all_grey(pit), "end of transformation: still no colour")
+	_check(int(pit.get_state()["grammar"]["rules"]) == 5, "end of transformation: five rules (%d)" % int(pit.get_state()["grammar"]["rules"]))
+
+	var cc = await _cage("Color_Context_Placed", 7, {"size": "5"})
+	_check(not _all_grey(cc), "Color_Context_Placed: the bodies have colour")
+	_check(cc.get_state()["kingdoms"].is_empty() and cc.get_node_or_null("Patch/Dispatcher") == null, "Color_Context_Placed: no living things yet")
+	var ll: MultiMeshInstance3D = cc.get_node("Patch/Garden/LatticeLines")
+	_check(not ll.multimesh.use_colors, "Color_Context_Placed: the lattice is still grey")
+	_check(is_equal_approx(float(cc._ground_mat.get_shader_parameter("mono")), 1.0), "Color_Context_Placed: the floor still remembers in grey")
+	var fl = await _cage("Color_Flashlight", 7, {"size": "5"})
+	_check(fl.get_node_or_null("Patch/Lamp_0") is OmniLight3D, "Color_Flashlight: lamps make pools")
+	var na = await _cage("Color_Nails", 7, {"size": "5"})
+	var pm: Material = (na.free_points()[0].get_node("Mesh") as MeshInstance3D).material_override
+	_check(pm is StandardMaterial3D and (pm as StandardMaterial3D).albedo_color.s > 0.5, "Color_Nails: the point you move is coloured")
+	var rb = await _cage("Color_Rainbow", 7, {"size": "5"})
+	_check(str(rb.get_state()["kingdoms"]) == str(["flower"]) and int(rb.get_state()["seeds"]["flower"]) > 0, "Color_Rainbow: the first flowers, dressed (%s)" % str(rb.get_state()["seeds"]))
+	var pi_ = await _cage("Color_Pillar", 7, {"size": "5"})
+	_check((pi_.get_node("Patch/Garden/LatticeLines") as MultiMeshInstance3D).multimesh.use_colors, "Color_Pillar: a gradient on the lattice")
+	var gp = await _cage("Color_Grid_Pallet", 7, {"size": "5"})
+	var fmat: Material = (gp.get_node("Patch/Garden/Faces") as MeshInstance3D).material_override
+	_check(fmat is StandardMaterial3D and (fmat as StandardMaterial3D).vertex_color_use_as_albedo, "Color_Grid_Pallet: every face has its address's colour")
+	var pa = await _cage("Color_Paint", 7, {"size": "5"})
+	_check(is_equal_approx(float(pa._ground_mat.get_shader_parameter("mono")), 0.0), "Color_Paint: the floor remembers in colour")
+	var wa = await _cage("Color_Walls", 7, {"size": "5"})
+	_check(_glass_alpha(wa) > 0.12, "Color_Walls: the glass has colour (alpha %.2f)" % _glass_alpha(wa))
+	_check(_glass_alpha(pa) < 0.12, "Color_Paint: the glass was still clear")
+	var ch = await _cage("Chamber_Color", 7, {"size": "5"})
+	_check(ch.status_line().find("when:") >= 0, "Chamber_Color: what remains is when")
+
 	print("[probe_biome_vitrine] %d checks, %d failed" % [_checks, _fails])
 	quit(0 if _fails == 0 else 1)
 
@@ -298,6 +360,16 @@ func _has_roof(v) -> bool:
 			if sz.x > s - 0.2 and sz.z > s - 0.2 and sz.y < 0.1:
 				return true
 	return false
+
+
+## the alpha of the first glass pane (a box with a StaticBody3D child) in the cage
+func _glass_alpha(v) -> float:
+	for c in v.get_node("Cage").get_children():
+		if c is MeshInstance3D and c.get_child_count() > 0 and c.get_child(0) is StaticBody3D:
+			var m: Material = (c as MeshInstance3D).material_override
+			if m is StandardMaterial3D:
+				return (m as StandardMaterial3D).albedo_color.a
+	return -1.0
 
 
 ## every material under the patch is grey: r == g == b within a hair
