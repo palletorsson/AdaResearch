@@ -1,0 +1,97 @@
+{
+	"artifacts": {
+		"chroma_stack": {
+			"dna": {
+				"axes": {
+					"rule": [
+						"one",
+						"by_shape",
+						"by_height",
+						"by_neighbour"
+					],
+					"stack": [
+						"bauhaus",
+						"turned",
+						"cut"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "rule=one vs rule=by_height at stack=bauhaus",
+					"predicted_focus_pct": 18.0,
+					"arithmetic": "one is a single ochre; by_height paints the five elements on a blue-to-orange ramp sampled at centre height / 4.4, so the third element (hue 0.371, near ochre's 0.104 only in value) and the top two differ most; the base and second element sit close to ochre in value, so the hottest 5% of pixels moves about 18% (a lower bound, one flat light, no shadows). Closest STACK pair: bauhaus vs cut at rule=one, only the sphere/dome vs wedge silhouettes differ, about a quarter of the subject."
+				}
+			},
+			"lookup_name": "chroma_stack",
+			"name": "Chroma Stack",
+			"class_name": "ChromaStack",
+			"scene": "res://commons/artifacts/chroma_stack/chroma_stack.tscn",
+			"category": "color",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"sequence": "color",
+			"description": "A pillar-sized totem of five stacked primitives - a 1.10 m base 0.60 m tall and four levels of 0.95 m, 4.40 m in all against the museum pillar's 4.00 - whose paint follows one of four rules, so the same solids ask four times what a colour is attached to. Two axes, both word-valued on the map token. rule (default one): one paints every element the same ochre, a coat that knows nothing about the form; by_shape paints the KIND after the questionnaire Kandinsky ran at the Bauhaus in 1923 - circle blue, square red, triangle yellow, with turned shapes grey-green - so two boxes at different heights share a colour and the sphere is blue wherever it stands; by_height samples a hue ramp at each element's centre height, blue at the floor to orange at 4.4 m, so the colour reads position and not shape; by_neighbour gives the base the ochre and every element above the complement of the one below, so it alternates ochre and slate blue - the chapter's colour with company. stack (default bauhaus) chooses the alphabet, bottom to top: bauhaus is cuboid, cube, sphere, block, dome (after Siedhoff-Buscher's Bauspiel); turned is cylinder, cylinder, torus, capsule, cone; cut is box, wedge, box, wedge, box. Shape KIND is what the rules read: sphere and dome are circle, box and cube are square, cone and wedge are triangle, cylinder, torus and capsule are turned. Every alphabet uses the same level heights, so under by_height the five hues are identical across the three stacks and a sweep of stack photographs shape and nothing else. A 0.90 m text plate on the +Z side at 1.20 m names the two words in force and states the rule in one sentence, held off the stack by a short dark mount, rebuilt on every rebuild. Built-in meshes only, no randomness, no emission, one roughness of 0.55 so only hue differs; the origin is the base so min y is 0; one box collider per element and one for the plate. Geometry: 1.10 m wide, 4.40 m tall, 1.13 m deep with the plate. Two places where the alphabet bent to the level grid, both deliberate: the bauhaus dome is a SphereMesh hemisphere stretched to the 0.95 m level (a true hemisphere at 0.85 m wide would be 0.425 m tall and the totem 3.9 m), and the torus stands on edge with its hole facing +Z so its level is also 0.95 m (flat, at this width, it could be at most 0.475 m tall). NOT COMPILED OR CAPTURED in the session that wrote it; every number here is arithmetic, not a render.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"footprint": [
+				2,
+				2,
+				5
+			],
+			"map_sequences": [
+				"color"
+			],
+			"tags": [
+				"color",
+				"colour",
+				"primitives",
+				"stack",
+				"totem",
+				"bauhaus",
+				"kandinsky",
+				"complement",
+				"hue_ramp",
+				"pillar",
+				"dna"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					5
+				],
+				"size_group": "large"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 3,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.1,
+					4.4,
+					1.13
+				],
+				"source": "procedural, arithmetic not a render: the base is 1.10 wide in X and Z and 0.60 tall, the four levels above are 0.95 each (0.60 + 4 x 0.95 = 4.40) and no element is wider than the base, so X is 1.10 and Y is 4.40 exactly. Z is the base's 1.10 plus what the plate stands proud of its +Z face: the text_screen node sits at z = 0.55 + 0.001 + 0.014 = 0.565 with its baked text at +0.004 and a few millimetres of panel, so the far face is near 0.575 and the extent from -0.55 is 1.125, written as 1.13. The plate mount and the standing torus (0.30 deep) are inside those bounds."
+			},
+			"interactions": [],
+			"dev_themes": [
+				"what a colour is attached to: the object, the kind, the place, or the neighbour",
+				"the same five solids under four rules, and nothing else moving",
+				"complement as relation: a colour with company"
+			],
+			"qfep_connection": "Color_Context_Placed's truth is that a colour value enters an encounter - a light, a surface, a position, a neighbour and a viewer. This stack holds the light, the surfaces and the viewer still and lets the rule decide which of the rest the colour answers to: under one it answers to nothing but the object, under by_shape to a name, under by_height to a place, under by_neighbour to the element beneath it. The meshes never change, and the second and fourth elements turn from ochre to slate blue without a vertex moving - the chapter's claim made as paint. A colour was never in the shape; it was in the relation the rule chose to read, which is what a context is.",
+			"note": "NEW 2026-09-17. Config keys: #rule:<one|by_shape|by_height|by_neighbour> and #stack:<bauhaus|turned|cut>. Both are word-valued, so neither key needs to sit in GridInteractablesComponent.CONFIG_PARAM_NAMES - only a #key:<number> on an unlisted key is eaten as the tutorial's rotation shorthand. An unknown word warns and falls back to the default. The museum stamps config_* metadata before _ready and the grid calls apply_grid_config after: the script reads the metadata in _ready, builds once, and apply_grid_config rebuilds only when one of the two words actually changes, so curation_station's blanket apply_grid_config({\"emissive\": false}) touches nothing. NO dna block written by hand - derive it with tools/apply_dna_block.py --token=chroma_stack --axes=rule,stack. Predicted degeneracy, arithmetic and a lower bound: the closest rule pair is one vs by_neighbour at stack bauhaus, where only the cube and the block change (ochre to slate blue), 0.90 + 0.81 of about 3.7 m^2 of front-projected subject, about 46%; the closest stack pair is bauhaus vs cut at rule one, which share the base and the level widths so only the silhouettes differ, roughly a quarter of the subject. A sweep that lands below these is broken, not subtle. The plate's title uses a middle dot (U+00B7) written as a \\u00b7 escape so the source stays ASCII; the baked typeface is Roboto, which carries the glyph. NOT COMPILED OR CAPTURED in the session that wrote it."
+		}
+	}
+}
