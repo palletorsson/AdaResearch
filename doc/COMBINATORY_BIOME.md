@@ -258,6 +258,17 @@ references are the ones the columns hall cites: Malevich, Lissitzky's Prouns, Le
 Calder, Kandinsky, Albers. Rule kept from the DNA programme: vividness is composition +
 scale + flat colour + a restricted alphabet; a grid of small tokens has none of the four.
 
+**Families, the rack, the reader** (c8834cd4c; encyclopedia 1 commit). The seed picks one
+of three anchor families — *diagonal*, *vertical* (a Proun tower: short axis, everything
+lifted, planes standing), *split* (Mondrian's fields: axes parallel to the walls at golden
+sections, planes flat and low) — so seeds differ while a seed's halls stay one work.
+`#controls:panel` puts a STAGE − / STAGE + rack under the screen; a press rebuilds the
+cage at the neighbouring stage of the walk (`biome_grammar.walk()`: the halls with words,
+in order, else the sequence as one stage), so a visitor scrubs the spine in place. The
+record `ada_run/biome_vitrines.json` is read by `/api/biome/vitrine` (`?stage=`,
+`?sequence=`) and shown at `/biome-vitrines` — the "queryable" half, first form. The
+GEN ◂ ▸ scrub still waits for the lineage log.
+
 **The dream room.** One per threshold — or the museum's night (`[em-night] the moon
 is the light… one circuit every 480 s` already exists in the endless museum). Three
 gardens stand side by side: *as grown*, *the sufficient subset only*, and *the
