@@ -229,6 +229,18 @@ visitor's hand is always allowed, and the cage and its screen are furniture, not
 The vocabulary's later-sequence entries are a first draft for each sequence's owner to
 rewrite; the gate only reads them.
 
+**Transformation and colour** (037bcb38d, the same afternoon). The grammar persists and
+gains what the bodies may *do*: Trans_Pre's cube you can take (the solids become
+pickables), Trans_Introduction's movement left running, a carrier that slides, a bar
+turning about one end, a body that pulses, a post the height of you, a wall that arrives
+and — once `compose` — turns. Colour reaches the bodies first (Color_Context_Placed),
+then lamps make pools (Flashlight), then the point you move takes a colour (Nails), then
+the first flowers with the rainbow (Rainbow — `flower` is a word now, and the painted
+patch opens on kingdom words, not on soft_stages' per-sequence list), a gradient on the
+lattice (Pillar), a colour per face's address (Grid_Pallet), the floor's memory in colour
+(Paint), tinted glass (Walls), and Chamber's `when`. Rooms `Biome_Ladder_Transformation`
+and `Biome_Ladder_Color` stand as the last pearls of their chapters. Probe 142/142.
+
 **The dream room.** One per threshold — or the museum's night (`[em-night] the moon
 is the light… one circuit every 480 s` already exists in the endless museum). Three
 gardens stand side by side: *as grown*, *the sufficient subset only*, and *the
