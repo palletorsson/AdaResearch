@@ -191,11 +191,25 @@ never a table.
 
 ## 7. The rooms
 
-**The ring.** Already gated by `soft_stages.json`; becomes gated by *operators*
-rather than flags. Walking sequence 1 you are surrounded by grey stick-and-vertex
-bodies; by 4 they have colour; by 10 they vary; by 12 they grow skins; by 14 they
-branch; by 16 they are flesh. The same family, thicker each threshold. This is
-"what the world is made of, subject by subject" as a place instead of a syllabus.
+**The cage** (built 2026-09-17 — `commons/artifacts/biome_vitrine`, Palle: *"a room with
+a glass large cage with an open ceiling"*). The biome was the ring *around* a grid map;
+the endless museum builds no ring. So the biome is contained instead: a glass cage in
+the middle of a room, four panes, two doorways, no roof, and inside it the stage's
+biome built by the **current implementation** — the patch is painted with the stage's
+kingdoms at the stage's density and every cell goes through `BiomePaintDispatcher` at
+that stage's order (locked kingdoms render as coloured cubes, the seeds of what is to
+come); live creatures come through `CritterSpawner` and evolve under `EvolutionSystem`;
+a `PresenceGrid` — written but gated off in the grid lane — remembers every organism and
+glows through the floor (tree green, creature amber, flower blue, fungus violet); a stand
+screen states the cage; the state is written to `ada_run/biome_vitrines.json`. One word,
+`stage`, moves it along the spine: coloured cubes at primitives, the first flower at
+colour, fungus at randomness, live creatures at L-systems. `commons/maps/Biome_Cage` is
+the first room, dealt in the museum as the randomness pearl *biome cage*; the ring's
+ground-cover recipe was extracted to `commons/biome_layers/ground_cover.gd` so cage and
+ring scatter the same plants (the ring is unchanged: `probe_ring_refactor.gd`, 176/176).
+
+**The ring, later.** Growing outwards from the cage is the ring code inverted (§7,
+"growing outwards" below); the ring's own gating by `soft_stages.json` stands as it is.
 
 **The dream room.** One per threshold — or the museum's night (`[em-night] the moon
 is the light… one circuit every 480 s` already exists in the endless museum). Three
@@ -224,13 +238,17 @@ thing to place*. That is the paper's second noun, held.
 
 | | |
 |---|---|
-| **exists** | `soft_stages.json` cumulative gating by stage; `CritterDNA` genes + parents + generation + mutations; `EvolutionSystem` tournament/crossover/mutation/cull with pluggable fitness and cross-kingdom hybrids; `morphology_router` kingdom dispatch; SDF combinators (`MORPHOLOGY_ENGINE.md`); `GeneticProgramming` tree genomes; the catalyst's 14 modes; the museum's night |
-| **missing** | operators per stage (typed); the tree layer of the genome in the biome; the lineage log; seeds in the record; `dream_biome.py`; the dream room; policy as a bracelet stone |
+| **exists** | `soft_stages.json` cumulative gating by stage; `CritterDNA` genes + parents + generation + mutations; `EvolutionSystem` tournament/crossover/mutation/cull with pluggable fitness and cross-kingdom hybrids; `morphology_router` kingdom dispatch; SDF combinators (`MORPHOLOGY_ENGINE.md`); `GeneticProgramming` tree genomes; the catalyst's 14 modes; the museum's night; **since 2026-09-17:** the cage (`biome_vitrine`, any stage by one word, evolution on, presence floor, state file `ada_run/biome_vitrines.json`), the room `Biome_Cage` dealt as a randomness pearl, `ground_cover.gd` shared by ring and cage, the `stage` DNA axis (27 values) |
+| **missing** | operators per stage (typed); the tree layer of the genome in the biome; the lineage log with seeds and fitness names; `dream_biome.py`; the cage's query rack (STAGE / GEN scrub) and an `/api/biome/vitrine` reader in the encyclopedia; the dream room; policy as a bracelet stone |
 | **wrong today** | `soft_stages.json` lags `curriculum_spine.json`: no `tiling` (spine 5), no `formfinding` (spine 8); `isosurfaces` and `boolean_surfaces` sit at 4.6/4.7 where the spine has them at 17/18; `mosaicanalysis`, `resourcemanagement`, `biome_lab` are stages with no spine slot. The ladder must be keyed to the spine's order, and the sync is the first commit |
 
 ---
 
 ## 9. Steps, smallest first
+
+_Done 2026-09-17 (commits 48d88ce95, c303cef84): the cage artifact with evolution, presence
+floor and state file; the room `Biome_Cage` dealt as a randomness pearl; the ring's ground
+cover shared; probes 73/73 and 176/176. The steps below are what remains._
 
 1. **Sync `soft_stages.json` to the spine** (add tiling, formfinding; move iso/boolean; keep the extras as off-spine stages) and add `operators` per stage from §3. Post to the forum first — the file is read by three managers.
 2. **Lineage log**: `EvolutionSystem` appends to `ada_run/biome_lineage.jsonl` with seed and fitness name. No behaviour change.
