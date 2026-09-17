@@ -16,9 +16,18 @@ class_name MaxQBasinRoom
 
 const SBShapes = preload("res://commons/soft_body/soft_body_shapes.gd")
 
-@export var floor_size: float = 7.0
-@export var dead_x: float = -2.0
-@export var alive_x: float = 2.0
+# The wells hang DOWN from a rim, but the grid auto-grounds every artifact by its lowest
+# vertex. Built with the rim at y=0 the room was lifted 2.25 m and its floor became a lid
+# floating over the hall's walls. So the rim stands on an open tank at deck_h — below a
+# standing eye, so you look down into both wells — and the whole body starts at y=0.
+@export var floor_size: float = 5.0
+@export var deck_h: float = 1.05
+@export var dead_x: float = -1.5
+@export var alive_x: float = 0.8
+@export var dead_depth: float = 0.95   # deep and narrow
+@export var alive_depth: float = 0.30  # shallow and wide (the original 2.2 : 0.7 ratio)
+@export var dead_rim: float = 0.7
+@export var alive_rim: float = 1.6
 @export var floor_col: Color = Color(0.12, 0.13, 0.16)
 @export var dead_col: Color = Color(0.40, 0.42, 0.50)
 @export var alive_col: Color = Color(0.50, 0.95, 0.65)
@@ -100,20 +109,30 @@ func _well_mesh(center: Vector3, rim_radius: float, depth: float, narrow: bool, 
 
 
 func _build() -> void:
-	# Room floor
-	add_child(_box(Vector3(0.0, -0.05, 0.0), Vector3(floor_size, 0.1, floor_size), _matte_mat(floor_col, 0.95, 0.1)))
+	# Open tank: four low walls, no lid, so the wells are seen from above.
+	var tank_mat := _matte_mat(floor_col, 0.95, 0.1)
+	var half: float = floor_size * 0.5
+	var wall_t: float = 0.06
+	for side in [-1.0, 1.0]:
+		add_child(_box(Vector3(0.0, deck_h * 0.5, side * half), Vector3(floor_size, deck_h, wall_t), tank_mat))
+		add_child(_box(Vector3(side * half, deck_h * 0.5, 0.0), Vector3(wall_t, deck_h, floor_size), tank_mat))
+
+	# Everything below hangs from the rim; the soft-body sim works in this frame.
+	var stage := Node3D.new()
+	stage.position = Vector3(0.0, deck_h, 0.0)
+	add_child(stage)
 
 	# DEAD well — deep and narrow.
 	var dead_c := Vector3(dead_x, 0.0, 0.0)
-	add_child(_well_mesh(dead_c, 0.9, 2.2, true, dead_col))
+	stage.add_child(_well_mesh(dead_c, dead_rim, dead_depth, true, dead_col))
 	# A single rigid frozen shape locked at the bottom — one cube, never moving.
-	add_child(_box(dead_c + Vector3(0.0, -2.0, 0.0), Vector3(0.5, 0.5, 0.5), _matte_mat(dead_col, 0.6, 0.4)))
-	add_child(_billboard_label("DEAD WELL\ndeep · narrow · one frozen shape", dead_c + Vector3(0.0, 1.4, 0.0), 18, Color(0.78, 0.80, 0.86)))
+	stage.add_child(_box(dead_c + Vector3(0.0, -dead_depth * 0.82, 0.0), Vector3(0.28, 0.28, 0.28), _matte_mat(dead_col, 0.6, 0.4)))
+	stage.add_child(_billboard_label("DEAD WELL\ndeep · narrow · one frozen shape", dead_c + Vector3(0.0, 1.0, 0.0), 18, Color(0.78, 0.80, 0.86)))
 
 	# ALIVE well — shallow and wide.
 	_alive_center = Vector3(alive_x, 0.0, 0.0)
-	add_child(_well_mesh(_alive_center, 2.2, 0.7, false, alive_col))
-	add_child(_billboard_label("ALIVE WELL\nshallow · wide · keeps re-finding", _alive_center + Vector3(0.0, 1.4, 0.0), 18, Color(0.70, 0.96, 0.78)))
+	stage.add_child(_well_mesh(_alive_center, alive_rim, alive_depth, false, alive_col))
+	stage.add_child(_billboard_label("ALIVE WELL\nshallow · wide · keeps re-finding", _alive_center + Vector3(0.0, 1.0, 0.0), 18, Color(0.70, 0.96, 0.78)))
 
 	# A soft body living in the alive well — live MultiMesh of particles.
 	var sim = SBShapes.make_jelly_grid(3, 3, 3, 0.22, 0.55)
@@ -121,7 +140,7 @@ func _build() -> void:
 	sim.damping = 0.97
 	sim.floor_y = -10.0
 	for i in sim.positions.size():
-		sim.positions[i] += _alive_center + Vector3(0.0, 1.0, 0.0)
+		sim.positions[i] += _alive_center + Vector3(0.0, 0.6, 0.0)
 		sim.prev_positions[i] = sim.positions[i]
 	_sim = sim
 	for _i in 60:
@@ -129,7 +148,7 @@ func _build() -> void:
 		_sim.step()
 
 	_live_holder = Node3D.new()
-	add_child(_live_holder)
+	stage.add_child(_live_holder)
 	var mmi := MultiMeshInstance3D.new()
 	var mm := MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
@@ -150,14 +169,14 @@ func _build() -> void:
 	_live_holder.add_child(mmi)
 	_refresh_live()
 
-	add_child(_billboard_label("MAX Q IS THE LIVELIEST MINIMUM, NOT THE DEEPEST", Vector3(0.0, 3.6, 0.0), 28, label_col))
+	add_child(_billboard_label("MAX Q IS THE LIVELIEST MINIMUM, NOT THE DEEPEST", Vector3(0.0, deck_h + 2.0, 0.0), 28, label_col))
 
 
 func _alive_floor_h(x: float, z: float) -> float:
 	# Wide shallow parabola centred on the alive well.
 	var d := Vector2(x - _alive_center.x, z - _alive_center.z)
-	var f: float = clampf(d.length() / 2.2, 0.0, 1.0)
-	return -0.7 * (f * f) + 0.11
+	var f: float = clampf(d.length() / alive_rim, 0.0, 1.0)
+	return -alive_depth * (f * f) + 0.11
 
 
 func _constrain_alive() -> void:

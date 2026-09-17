@@ -7350,6 +7350,57 @@
         "doc/reports/skill_evolution_proposals.json"
       ],
       "duration_minutes": 12
+    },
+    {
+      "breath_id": "2026-09-17T09:00",
+      "mode": "full",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "items_attempted": [
+        "read-forum-and-last-breath-before-choosing",
+        "capture-13-spine-maps-with-no-polish-captures",
+        "look-at-the-13-captures-as-a-contact-sheet",
+        "fix-max_q_basin_room-floating-lid-from-auto-ground",
+        "verify-fix-in-a-second-hall-plus-pathfinder"
+      ],
+      "items_succeeded": [
+        "read-forum-and-last-breath-before-choosing",
+        "capture-13-spine-maps-with-no-polish-captures",
+        "look-at-the-13-captures-as-a-contact-sheet",
+        "fix-max_q_basin_room-floating-lid-from-auto-ground",
+        "verify-fix-in-a-second-hall-plus-pathfinder"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "stage7_polish_before_after": {
+        "boolean_surfaces": "0->100",
+        "formfinding": "17->100",
+        "tiling": "57->100",
+        "color": "89->100",
+        "isosurfaces": "92->100"
+      },
+      "discoveries": [
+        "A POLISH CAPTURE IS WORTH ITS STAGE ONLY IF SOMEONE LOOKS AT IT. Thirteen maps were captured in 4.5 minutes, each 16-40 s under the watchdog, all exit 0, five PNGs each, grey std 38-57 (none blank). The stage-7 column went to 100% on five sequences from file existence alone. One contact sheet of the thirteen iso.png is what found the defect below; the scorer could not have.",
+        "AN ARTIFACT THAT DIGS BELOW ITS ORIGIN IS LIFTED BY EXACTLY ITS DIG. max_q_basin_room (created 2026-06-20, eight days after auto-ground became default) built its DEAD well to y=-2.25 beneath an opaque 7x7 m floor box at y=0. The grid's _auto_ground_artifact corrects by -min_y, so the room stood 2.25 m up with its floor as a lid over both wells, hanging past the hall's outer wall - in all 10 maps that place it, never once seen as authored. Fix is artifact-local: an open tank (no lid) of deck_h 1.05 m, wells hung from its rim at a 0.95 : 0.30 depth ratio (the original 2.2 : 0.7), base at y=0 so the correction is zero. The registry (auto_ground:false) was the wrong lever twice over: soft_bodies.json carries another session's 11,938-line uncommitted reformat, and a sunk well under opaque floor cubes is still invisible. Grep for the class: any _build that adds geometry at negative local y in a grounded artifact.",
+        "FOUR FORMFINDING ROOMS PHOTOGRAPH AS ONE ROOM. Catenary, Relaxation, Annealing and Forge share the same pillar scaffold and the same green science_screen on the same wall; on the contact sheet only the small furniture differs. Not acted on (a curatorial question, and f191f6112 was already about the screens saying the same thing) - recorded for whoever next holds formfinding."
+      ],
+      "files_changed": [
+        "commons/artifacts/max_q_basin_room/max_q_basin_room.gd",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "duration_minutes": 30
     }
   ]
 }
