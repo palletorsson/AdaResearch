@@ -211,6 +211,24 @@ ring scatter the same plants (the ring is unchanged: `probe_ring_refactor.gd`, 1
 **The ring, later.** Growing outwards from the cage is the ring code inverted (§7,
 "growing outwards" below); the ring's own gating by `soft_stages.json` stands as it is.
 
+**The ladder, strict** (built 2026-09-17, later the same day — Palle: *"the first biome
+might just be one point we can move… how strict can we be?"*). Strict, and computable.
+`commons/data/biome_vocabulary.json` gives every primitives hall its words in three
+columns — *made of* (point → line → lattice → face → solid → sphere → subdivide →
+ornament), *does* (hand from the first hall; self-motion from the animated cube; by rule
+from transformation; selection only from machinelearning), *knows* (the trace from
+Point_Trace; counts from arrays) — and every later sequence its words; each hall also
+carries its own `line` and a `beyond`, what the biome may say past what the hall wrote
+("you arrive late"). `commons/biome_layers/biome_grammar.gd` folds them into a cumulative
+closure along the walk (spine order, then `map_authored.json` order within a sequence).
+The cage reads a hall name, a sequence, or `hall`; before colour it builds the grey
+grammar — Point_One is one grey point you can pick up and put down — and from colour on
+the painted kingdoms. `commons/maps/Biome_Ladder_Primitives` shows the ten cages along
+an aisle as the last primitives pearl. Two exceptions keep it from being sterile: the
+visitor's hand is always allowed, and the cage and its screen are furniture, not biome.
+The vocabulary's later-sequence entries are a first draft for each sequence's owner to
+rewrite; the gate only reads them.
+
 **The dream room.** One per threshold — or the museum's night (`[em-night] the moon
 is the light… one circuit every 480 s` already exists in the endless museum). Three
 gardens stand side by side: *as grown*, *the sufficient subset only*, and *the
