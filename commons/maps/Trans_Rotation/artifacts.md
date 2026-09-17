@@ -1,15 +1,8 @@
-# Trans_Rotation — two primary encounters
+# Trans_Rotation — four primary encounters
 
-## Centre blades: bridge and climb
+1. **rotation_wall_crossings** at (19,11): three 8.4 m centre-mounted blades. Y crosses level banks; X/Z reach grid landings 3 m higher. The reversed rotation holds each crossing pose twelve seconds. Grid wedges return to the floor.
+2. **rotation_array_compare** at (19,25): four full-size 2 by 6 cube arrays. X/Y/Z/XYZ share eighteen-degree row increments and fixed centres. Aisles preserve a viewing and bypass route.
+3. **boolean_tunnel** at (19,42): five hollow segments, eighteen degrees per segment, fifteen metres of continuous-floor enclosure. Static spatial repetition.
+4. **carousel_cake**: cake, column, ziggurat, spindle and flare at 0.4 scale. All five share eight layers and the same angular speeds; profile changes radius, silhouette and rim speed.
 
-`rotation_wall_crossings` stages three 8.4 m blades turning about their middles. Y connects level banks; X and Z meet grid landings three metres higher. The crossing pose pauses for twelve seconds, followed by another half-turn. All static landings come from the map's structure layer.
-
-Source: `commons/artifacts/rotation_studies/wall_crossings.gd`.
-
-## Forward through a tilted 2D array
-
-`rotation_array_compare` contains four 4 by 10 cube arrays. X, Y, Z and XYZ bands receive the same row-angle progression from zero to ninety degrees. Cube centres stay fixed. Outlines expose individual cubes, and aisle labels expose row numbers and angles.
-
-Source: `commons/artifacts/rotation_studies/array_compare.gd`.
-
-These are the two book encounters in `final.md`, in this order. The preceding local-versus-parent prototype is preserved under `doc/space/rotation-studies-2026-09-09/centre-pivot-revision/before`.
+The former Trans_RotationSpectacle map remains on disk as a source. Its unique forms now belong to this hall; the repeated second cake is omitted. The before snapshot is `doc/space/transformation-refresh-2026-09-16/before`.

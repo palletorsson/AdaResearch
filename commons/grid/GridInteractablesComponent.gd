@@ -24,6 +24,9 @@ const CONFIG_PARAM_NAMES = [
 	"enable_gravity", "use_pride_colors", "make_rocks_static", "color_variation",
 	# Configurable portal / transform params
 	"rot_x", "rot_y", "rot_z", "pos_x", "pos_y", "pos_z",
+	# Rotation studies and gallery staging use numeric values, not tutorial yaw.
+	"band_spacing", "row_angle_step", "num_segments", "rotation_per_segment",
+	"segment_vertical_offset", "plinth",
 	"dest", "dest_x", "dest_y", "dest_z", "dest_map", "map", "spawn",
 	"label", "color1", "color2", "energy", "frame", "active", "cooldown", "mode", "sky",
 	# Path-and-block game params

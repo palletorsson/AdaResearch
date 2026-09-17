@@ -1,1 +1,1 @@
-The middle stays while one end rises and the other descends. Climb a turning blade to a higher grid landing, then walk into a 2D array whose angle increases with every row. When does the same forward movement cease to work?
+A blade turns around its middle and a way across arrives. Repeat the turn and a path becomes a ridge, an enclosure, a rhythm. The centre stays; what your body can do around it changes.

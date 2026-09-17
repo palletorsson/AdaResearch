@@ -2,19 +2,28 @@ extends Node3D
 ## Angle grows with row along +z; x/y/z and combined turns across four 2D bands.
 ## Cube centres stay fixed. No second floor underneath the array.
 const Parts = preload("res://commons/artifacts/rotation_studies/parts.gd")
-const ROWS := 10
-const COLUMNS := 4
 const SPACING := 2.0
 const EDGE := 2.04
+const BodyComparison = preload("res://commons/artifacts/rotation_studies/array_body_comparison.gd")
+@export var show_body_comparison := true
+@export_range(2, 10, 1) var rows := 10
+@export_range(2, 4, 1) var columns := 4
+@export_range(6.0, 12.0, 0.5) var band_spacing := 11.0
 @export_range(0.0,20.0,0.5) var row_angle_step := 10.0
 var bands: Array[Dictionary] = []
+var body_comparison: Node3D
 
 func _ready() -> void:
+	# The compact hall reduces the repetitions, never the walker's scale.
+	rows = clampi(int(get_meta("config_rows", rows)), 2, 10)
+	columns = clampi(int(get_meta("config_columns", columns)), 2, 4)
+	band_spacing = maxf(float(get_meta("config_band_spacing", band_spacing)), columns * SPACING + 3.0)
+	row_angle_step = clampf(float(get_meta("config_row_angle_step", row_angle_step)), 0.0, 20.0)
 	var specs := [
-		["X",-16.5,Vector3.RIGHT,-1.0,Color(0.78,0.43,0.30),"SLOPES ACROSS YOUR ROUTE"],
-		["Y",-5.5,Vector3.UP,1.0,Color(0.38,0.68,0.46),"TURN IN THE HORIZONTAL PLANE"],
-		["Z",5.5,Vector3.BACK,1.0,Color(0.38,0.55,0.78),"RIDGES ALONG YOUR ROUTE"],
-		["XYZ",16.5,Vector3.ZERO,1.0,Color(0.62,0.43,0.74),"COMBINED / X THEN Y THEN Z"]]
+		["X",-1.5*band_spacing,Vector3.RIGHT,-1.0,Color(0.78,0.43,0.30),"SLOPES ACROSS YOUR ROUTE"],
+		["Y",-0.5*band_spacing,Vector3.UP,1.0,Color(0.38,0.68,0.46),"TURN IN THE HORIZONTAL PLANE"],
+		["Z",0.5*band_spacing,Vector3.BACK,1.0,Color(0.38,0.55,0.78),"RIDGES ALONG YOUR ROUTE"],
+		["XYZ",1.5*band_spacing,Vector3.ZERO,1.0,Color(0.62,0.43,0.74),"COMBINED / X THEN Y THEN Z"]]
 	for spec in specs:
 		var band := Node3D.new()
 		band.name = spec[0]
@@ -22,13 +31,13 @@ func _ready() -> void:
 		add_child(band)
 		var cubes: Array[Node3D] = []
 		var row_labels: Array[Label3D] = []
-		for row in range(ROWS):
-			for column in range(COLUMNS):
-				var cube := Parts.box(band,"Cube_%02d_%02d" % [row,column],Vector3.ONE*EDGE,Vector3((column-1.5)*SPACING,-EDGE/2.0,0.5+row*SPACING),spec[4])
+		for row in range(rows):
+			for column in range(columns):
+				var cube := Parts.box(band,"Cube_%02d_%02d" % [row,column],Vector3.ONE*EDGE,Vector3((column-float(columns-1)/2.0)*SPACING,-EDGE/2.0,0.5+row*SPACING),spec[4])
 				cube.set_meta("row",row)
 				cube.set_meta("column",column)
 				cubes.append(cube)
-			var tag := Parts.label(band,"%02d / %.1f deg" % [row,row*row_angle_step],Vector3(4.55,0.025,0.5+row*SPACING),24)
+			var tag := Parts.label(band,"%02d / %.1f deg" % [row,row*row_angle_step],Vector3(columns*SPACING/2.0+0.55,0.025,0.5+row*SPACING),24)
 			tag.rotation_degrees = Vector3(-90,180,0)
 			row_labels.append(tag)
 		var heading := Parts.label(band,"",Vector3(0,1.5,-2.6),29)
@@ -37,14 +46,19 @@ func _ready() -> void:
 		band.add_child(edges)
 		bands.append({"id":spec[0],"node":band,"axis":spec[2],"sign":spec[3],"cubes":cubes,"label":heading,"row_labels":row_labels,"edges":edges,"title":spec[5]})
 	apply_gradient()
+	if show_body_comparison:
+		body_comparison = BodyComparison.new()
+		body_comparison.name = "BodyComparison"
+		add_child(body_comparison)
+		body_comparison.setup(self)
 
 func apply_gradient() -> void:
 	for band in bands:
 		for cube: Node3D in band.cubes:
 			var degrees := float(cube.get_meta("row"))*row_angle_step
 			cube.basis = rotation_for_band(band,degrees)
-		for row in range(ROWS): band.row_labels[row].text="%02d / %.1f deg" % [row,row*row_angle_step]
-		band.label.text="%s / 4 x 10 CUBES\n%s\nWALK +Z / 0 TO %.1f DEGREES" % [band.id,band.title,(ROWS-1)*row_angle_step]
+		for row in range(rows): band.row_labels[row].text="%02d / %.1f deg" % [row,row*row_angle_step]
+		band.label.text="%s / %d x %d CUBES\n%s\nWALK +Z / 0 TO %.1f DEGREES" % [band.id,columns,rows,band.title,(rows-1)*row_angle_step]
 		_draw_edges(band)
 
 func rotation_for_band(band: Dictionary, degrees: float) -> Basis:

@@ -1,6 +1,7 @@
-Concept: Rotation around a fixed middle can produce a bridge or climb. Repeated local rotations in a 2D array can shape different conditions for forward movement.
-Sequence role: Follows Trans_Translation and leads to Trans_RotationSpectacle. Keep the single-blade crossing and the tilted-array experiment separate, with a still landing between them.
-First court: rotation_wall_crossings. Three 8.4 m centre-mounted blades. Y swings between level grid banks. X and Z rotate as paddles, pausing at approximately 23.2 degrees to connect a ground bank to a grid landing 3 m higher. All static banks and bypass aisles come from map structure cells. No separate platform props.
-Second court: rotation_array_compare. Four four-column, ten-row arrays use x, y, z or a fixed x-then-y-then-z combination. Row angle increases from 0 to 90 degrees in 10-degree steps along +z. Centres are fixed, and the gradient is static during the walk. Individual cube edges remain visible.
-Critical angle: A solid's topology is preserved by rigid rotation; its orientation relative to a body, neighbouring surfaces and a direction of movement changes what can be traversed. The stopping point is contingent on movement, spacing and collision rules.
-Evidence: The capsule reaches all three blade landings and crosses flat controls for all array bands. The strengthened gradient adds a combined band and continues to ninety degrees; its route measurements are recorded in the current probe report. This is a straight-walking probe, not human VR acceptance or proof against jumping and detours.
+Concept: What a turn permits depends on its centre, axis, neighbours and the body trying to pass.
+Sequence role: Follows translation, absorbs the former rotation spectacle hall, and prepares scale through radius and rim speed.
+First court: Three full-size centre blades meet level or raised grid banks. Grid wedges return from the upper landings.
+Second court: Four 2 by 6 arrays retain full-size cubes and compare X, Y, Z and X-then-Y-then-Z. Eighteen-degree increments produce 0–90 degrees in six spatial samples. A shorter comparison preserves both dimensions of an array.
+Third court: Five hollow tunnel segments surround the walker; five compact carousel profiles distribute speed through time. Distinguish subtraction, orientation, accumulated angle and rate.
+Critical angle: Rotation preserves each solid's topology, but relationships among solids and body produce different passages. Neither maximum angle nor a striking silhouette alone explains traversability.
+Evidence: Current refresh probe measures instantiated geometry, capsule crossings, clear aisles and tunnel passage. Such checks support spatial review; they do not stand in for headset comfort or every way of moving.
