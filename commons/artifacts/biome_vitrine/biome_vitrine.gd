@@ -114,15 +114,27 @@ const PINK := Color(0.95, 0.25, 0.60)
 @export_enum("on", "off") var record: String = "on"
 ## Draw the presence grid as the floor's glow.
 @export_enum("on", "off") var glow: String = "on"
-## `panel`: a STAGE - / STAGE + rack under the screen — scrub the walk and watch the
-## same work grow or shrink, one hall at a time.
+## `panel`: a STAGE - / STAGE + / GEN + rack under the screen — scrub the walk and watch
+## the same work grow or shrink one hall at a time; GEN + makes a generation pass now.
 @export_enum("none", "panel") var controls: String = "none"
+## Extra vocabulary words granted to this cage beyond its stage's closure, comma-joined
+## (`#allow:branch`): the counterfactual — what would have grown had the word arrived
+## here. tools/dream_biome.py runs cages with it. Empty: the closure alone.
+@export var allow: String = ""
+## A label for the lineage log's `run` field (the dream tool names its runs).
+@export var run: String = ""
 
 const RACK_TEMPLATES_PATH := "res://commons/audio/rack_templates/RackTemplates.gd"
 const PANEL_SCALE := 2.0
+const LINEAGE_RES := "res://ada_run/biome_lineage.jsonl"
+const LINEAGE_USER := "user://biome_lineage.jsonl"
 
 static var _stages_cache: Dictionary = {}
+static var _session: String = ""
 var _console: Node3D = null
+var _lineage_where: String = ""
+var _lineage_rows: int = 0
+var _ids: int = 0
 
 var _built: bool = false
 var _patch: Node3D = null
@@ -215,6 +227,10 @@ func apply_grid_config(config: Dictionary) -> void:
 		glow = "on" if _flag(config["glow"]) else "off"
 	if config.has("controls"):
 		controls = "panel" if str(config["controls"]).strip_edges().to_lower() == "panel" else "none"
+	if config.has("allow"):
+		allow = str(config["allow"]).strip_edges()
+	if config.has("run"):
+		run = str(config["run"]).strip_edges()
 	if config.has("duration"):
 		duration = clampf(_num_of(config["duration"], duration), 1.0, 600.0)
 	if config.has("intensity"):
@@ -259,6 +275,18 @@ func _build() -> void:
 	_where = _resolve_where()
 	_stage_key = _resolve_stage()
 	_closure = Grammar.closure(_stage_key)
+	# the counterfactual: words granted beyond the closure, said so in the state and the log
+	for w in allow.split(","):
+		var word: String = w.strip_edges()
+		if word == "":
+			continue
+		var col: String = "does"
+		if word in ["colour", "light", "palette", "gradient", "tinted_glass", "point", "line", "lattice", "face", "solid", "sphere", "subdivide", "ornament", "sample", "field", "recurse", "implicit", "union", "subtract", "intersect", "connect", "repeat", "tile"] or word in KINGDOM_NAMES:
+			col = "made_of"
+		elif word in ["trace", "count", "index", "seed", "body", "address", "when", "fitness", "limit", "bias"]:
+			col = "knows"
+		if not (_closure[col] as Array).has(word):
+			(_closure[col] as Array).append(word)
 	var pos: Dictionary = _closure.get("position", {})
 	_sequence = String(pos.get("sequence", ""))
 	if not bool(pos.get("known", false)):
@@ -297,6 +325,7 @@ func _build() -> void:
 	_build_cage()
 	_build_status()
 	_write_record()
+	_log_build()
 	print("[biome_vitrine] stage %s (%s, order %d) made of %s · does %s · knows %s — %s, seeds %s, live %d, cover %d, %s" % [
 		_stage_key, _sequence, _stage_order, str(_closure.get("made_of", [])), str(_closure.get("does", [])),
 		str(_closure.get("knows", [])), str(_grammar_counts), str(_seed_counts), _live_cells.size(), _cover_count,
@@ -989,14 +1018,35 @@ func _spawn_live() -> void:
 	var n: int = _spawner.get_population_count()
 	_evo = EvolutionClass.new()
 	_evo.spawner = _spawner
-	_evo.target_population = maxi(n, 2)
+	# the target sits ABOVE the founding count, so a generation breeds (EvolutionSystem
+	# breeds toward the target and culls above it; target == population is a still pond)
+	_evo.target_population = mini(int(CAPS["creature"]) * 2, n + 4)
 	_evo.min_population = maxi(2, int(n / 2))
-	_evo.max_population = mini(int(CAPS["creature"]) * 2, maxi(n * 2, 4))
+	_evo.max_population = int(CAPS["creature"]) * 2
 	_evo.mating_radius = float(size)
+	# a seeded breeder, so the lineage log can be replayed: (cage seed, stage) per cage
+	if "rng_seed" in _evo:
+		_evo.rng_seed = hash([seed, _stage_key])
 	_evo.generation_complete.connect(_on_generation)
+	if _evo.has_signal("critter_born"):
+		_evo.critter_born.connect(_on_born)
+	if _evo.has_signal("critter_died"):
+		_evo.critter_died.connect(_on_died)
 	if _flag(evolve) and _allows("select"):
 		_evo.start(duration)
 		_evo_running = true
+
+
+## One generation now — the GEN + key, and the dream runner's step. Selection is only
+## learned at machinelearning, but a hand may force time to pass; the log says `forced`.
+func step_generation() -> void:
+	if _evo == null:
+		return
+	# CritterDNA.crossover / mutate draw from the GLOBAL rng: seed it per (cage, stage,
+	# generation) so a hand-stepped or dream-run generation replays exactly. The clock-driven
+	# path (EvolutionSystem.process) is not seeded here and stays as it was.
+	seed(hash([seed, _stage_key, _evo.current_generation + 1]))
+	_evo.evolve_step()
 
 
 ## Ground cover over the whole patch — the ring's recipe on a square instead of an annulus.
@@ -1136,7 +1186,7 @@ func _build_console(holder: Node3D, at: Vector3) -> void:
 	var rack: GDScript = load(RACK_TEMPLATES_PATH)
 	if rack == null:
 		return
-	var rows: Array = [[{"type": "button", "label": "STAGE -"}, {"type": "button", "label": "STAGE +"}]]
+	var rows: Array = [[{"type": "button", "label": "STAGE -"}, {"type": "button", "label": "STAGE +"}, {"type": "button", "label": "GEN +"}]]
 	# a single space, never "": an empty title is an empty node name in older templates
 	var panel: Node3D = rack.create_panel(" ", rows)
 	if panel == null:
@@ -1152,7 +1202,7 @@ func _build_console(holder: Node3D, at: Vector3) -> void:
 	panel.rotation_degrees = Vector3(-20.0, 0.0, 0.0)
 	holder.add_child(panel)
 	_console = panel
-	var keys := ["prev", "next"]
+	var keys := ["prev", "next", "gen"]
 	for i in range(keys.size()):
 		var btn: Node = panel.find_child("Btn_%d" % i, true, false)
 		if btn == null:
@@ -1164,14 +1214,129 @@ func _build_console(holder: Node3D, at: Vector3) -> void:
 			area.button_pressed.connect(func(_b): press_control(key))
 
 
-## The console's keys, also for probes: `prev` / `next` walk one stage; the cage rebuilds.
+## The console's keys, also for probes: `prev` / `next` walk one stage (the cage
+## rebuilds); `gen` makes one generation pass now.
 func press_control(key: String) -> void:
+	if key == "gen":
+		step_generation()
+		return
 	var nb: Dictionary = Grammar.neighbours(_stage_key)
 	var target: String = String(nb.get(key, ""))
 	if target == "":
 		return
 	stage = target
 	_rebuild()
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# THE LINEAGE LOG — ada_run/biome_lineage.jsonl, one line per organism event
+# ════════════════════════════════════════════════════════════════════════════
+# Append-only, derived (never edited). Every line carries the session, the run label, the
+# cage (stage, sequence, place, seed, allow), and the event: `seeded` (a painted organism
+# at build), `spawned` (a live creature at build), `born` (parents, the breeder's seed),
+# `culled` (cause), `generation` (population ids with fitness under the named fitness).
+# tools/dream_biome.py reads it: stale, sufficient, reachable, counterfactual.
+
+static func _session_id() -> String:
+	if _session == "":
+		_session = "%s-%04x" % [Time.get_datetime_string_from_system().replace(":", "").replace("-", "").replace("T", "-"), randi() % 65536]
+	return _session
+
+
+func _cage_id() -> String:
+	return _record_id()
+
+
+func _next_id() -> String:
+	_ids += 1
+	return "%s#%d" % [_cage_id(), _ids]
+
+
+func _entity_id(e: Node) -> String:
+	if e == null or not is_instance_valid(e):
+		return ""
+	if not e.has_meta("lineage_id"):
+		e.set_meta("lineage_id", _next_id())
+	return String(e.get_meta("lineage_id"))
+
+
+static func _dna_digest(dna) -> String:
+	if dna == null:
+		return ""
+	return "%08x" % (hash([snappedf(float(dna.body_type), 0.01), snappedf(float(dna.segments), 0.01),
+		snappedf(float(dna.symmetry), 0.01), snappedf(float(dna.scale), 0.001), snappedf(float(dna.mobility), 0.01),
+		snappedf(float(dna.fertility), 0.01), snappedf(float(dna.efficiency), 0.01),
+		dna.primary_color.to_html(false)]) & 0xFFFFFFFF)
+
+
+func _log(row: Dictionary) -> void:
+	row["session"] = _session_id()
+	row["run"] = run
+	row["cage"] = _cage_id()
+	row["stage"] = _stage_key
+	row["sequence"] = _sequence
+	row["seed"] = seed
+	if allow != "":
+		row["allow"] = allow
+	row["t"] = Time.get_datetime_string_from_system()
+	var line: String = JSON.stringify(row) + "\n"
+	for path in [LINEAGE_RES, LINEAGE_USER]:
+		var f := FileAccess.open(path, FileAccess.READ_WRITE) if FileAccess.file_exists(path) else FileAccess.open(path, FileAccess.WRITE)
+		if f != null:
+			f.seek_end()
+			f.store_string(line)
+			f.close()
+			_lineage_where = path
+			_lineage_rows += 1
+			return
+	_lineage_where = ""
+
+
+## At build: every painted organism and every live creature, once.
+func _log_build() -> void:
+	_log({"event": "cage", "closure": {"made_of": _closure.get("made_of", []), "does": _closure.get("does", []),
+		"knows": _closure.get("knows", [])}, "family": family(), "kingdoms": _kingdoms.duplicate(),
+		"density": _density, "size": size, "fitness_fn": "default", "rng_seed": hash([seed, _stage_key]),
+		"evolving": _evo_running})
+	for c in _seed_cells:
+		if _creature_unlocked() and String(c["kingdom"]) == "creature":
+			continue
+		_log({"event": "seeded", "id": _next_id(), "kingdom": String(c["kingdom"]),
+			"intensity": int(c["intensity"]), "cell": [int(c["x"]), int(c["z"])], "generation": 0, "parents": []})
+	if _spawner != null:
+		for e in _spawner.get_active_critters():
+			if is_instance_valid(e):
+				_log({"event": "spawned", "id": _entity_id(e), "kingdom": String(e.get_kingdom_name()),
+					"dna": _dna_digest(e.dna), "generation": 0, "parents": []})
+
+
+func _on_born(child, parent_a, parent_b) -> void:
+	var parents: Array = []
+	if parent_a != null and is_instance_valid(parent_a):
+		parents.append(_entity_id(parent_a))
+	if parent_b != null and is_instance_valid(parent_b):
+		parents.append(_entity_id(parent_b))
+	_log({"event": "born", "id": _entity_id(child), "kingdom": String(child.get_kingdom_name()) if child != null else "",
+		"dna": _dna_digest(child.dna) if child != null else "", "generation": _evo.current_generation if _evo != null else 0,
+		"parents": parents, "asexual": parents.size() < 2})
+
+
+func _on_died(entity, cause: String) -> void:
+	_log({"event": "culled", "id": _entity_id(entity), "kingdom": String(entity.get_kingdom_name()) if entity != null else "",
+		"generation": _evo.current_generation if _evo != null else 0, "cause": cause,
+		"fitness": float(_evo.get_fitness(entity)) if _evo != null and entity != null else 0.0})
+
+
+func _log_generation(gen: int, stats: Dictionary) -> void:
+	var pop: Array = []
+	if _spawner != null:
+		for e in _spawner.get_active_critters():
+			if is_instance_valid(e):
+				pop.append({"id": _entity_id(e), "kingdom": String(e.get_kingdom_name()),
+					"fitness": float(_evo.get_fitness(e)) if _evo != null else 0.0})
+	_log({"event": "generation", "generation": gen, "population": pop, "births": int(stats.get("births", 0)),
+		"deaths": int(stats.get("deaths", 0)), "asexual": int(stats.get("asexual_births", 0)),
+		"avg_fitness": float(stats.get("avg_fitness", 0.0)), "forced": not _evo_running})
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -1250,6 +1415,7 @@ func _on_generation(gen: int, stats: Dictionary) -> void:
 	_history.append(row)
 	if _history.size() > 200:
 		_history = _history.slice(-100)
+	_log_generation(gen, stats)
 	_refresh_status()
 	_write_record()
 
@@ -1332,7 +1498,8 @@ func get_state() -> Dictionary:
 		"stage": _stage_key, "sequence": _sequence, "order": _stage_order,
 		"closure": {"made_of": _closure.get("made_of", []), "does": _closure.get("does", []), "knows": _closure.get("knows", [])},
 		"grey": _grey(), "grammar": _grammar_counts.duplicate(), "family": family(),
-		"walk": Grammar.neighbours(_stage_key), "controls": controls,
+		"walk": Grammar.neighbours(_stage_key), "controls": controls, "allow": allow, "run": run,
+		"lineage": {"where": _lineage_where, "rows": _lineage_rows, "session": _session_id()},
 		"kingdoms": _kingdoms.duplicate(), "density": _density, "size": size, "seed": seed,
 		"where": _where.duplicate(), "seeds": _seed_counts.duplicate(), "cover": _cover_count,
 		"live": _spawner.get_population_count() if _spawner != null else 0,

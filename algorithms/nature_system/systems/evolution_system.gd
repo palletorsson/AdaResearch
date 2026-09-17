@@ -100,6 +100,13 @@ var asexual_mutation_rate: float = 0.12
 ## Enable debug output.
 var debug: bool = false
 
+## A seed for the breeding and rescue draws, so a generation can be REPLAYED from a
+## lineage log (biome_vitrine writes it): 0 keeps the original randomize(). Each draw
+## site seeds from (rng_seed, current_generation, a call counter), so two steps of the
+## same generation number still differ.
+var rng_seed: int = 0
+var _rng_calls: int = 0
+
 # ─────────────────────────────────────────────────────────────
 #  Runtime state
 # ─────────────────────────────────────────────────────────────
@@ -314,7 +321,11 @@ func _reproduce(ranked: Array[CritterEntity]) -> int:
 		return 0
 
 	var rng := RandomNumberGenerator.new()
-	rng.randomize()
+	if rng_seed != 0:
+		rng.seed = hash([rng_seed, current_generation, _rng_calls])
+		_rng_calls += 1
+	else:
+		rng.randomize()
 
 	# How many offspring to create this cycle
 	var current_pop: int = spawner.get_population_count()
@@ -382,7 +393,11 @@ func _asexual_rescue(ranked: Array[CritterEntity]) -> int:
 		return 0
 
 	var rng := RandomNumberGenerator.new()
-	rng.randomize()
+	if rng_seed != 0:
+		rng.seed = hash([rng_seed, current_generation, _rng_calls])
+		_rng_calls += 1
+	else:
+		rng.randomize()
 
 	var needed: int = min_population - spawner.get_population_count()
 	if needed <= 0:

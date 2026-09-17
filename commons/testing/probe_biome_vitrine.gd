@@ -324,6 +324,52 @@ func _run() -> void:
 	await process_frame
 	_check(scrub.stage_key() == "Point_One", "STAGE - at the start stays")
 
+	# 11. the lineage log, the counterfactual word, GEN +
+	var lin_before: int = _lineage_rows()
+	var dream = await _cage("lsystems", 7, {"size": "8", "run": "probe", "evolve": "off"})
+	var st0: Dictionary = dream.get_state()
+	_check(String(st0["lineage"]["where"]) != "", "lineage: the cage writes its log (%s)" % String(st0["lineage"]["where"]))
+	var rows_after_build: int = _lineage_rows()
+	_check(rows_after_build > lin_before, "lineage: build rows appended (%d)" % (rows_after_build - lin_before))
+	var mine: Array = _lineage_of(String(st0["lineage"]["session"]), "probe")
+	var ev := {}
+	for r in mine:
+		ev[String(r.get("event", ""))] = int(ev.get(String(r.get("event", "")), 0)) + 1
+	_check(int(ev.get("cage", 0)) >= 1 and int(ev.get("seeded", 0)) > 0 and int(ev.get("spawned", 0)) > 0, "lineage: cage, seeded and spawned rows (%s)" % str(ev))
+	dream.press_control("gen")
+	await process_frame
+	var st1: Dictionary = dream.get_state()
+	_check(int(st1["generation"]) == 1, "GEN +: one generation passed by hand")
+	mine = _lineage_of(String(st0["lineage"]["session"]), "probe")
+	ev = {}
+	for r in mine:
+		ev[String(r.get("event", ""))] = int(ev.get(String(r.get("event", "")), 0)) + 1
+	_check(int(ev.get("generation", 0)) == 1, "lineage: a generation row (forced)")
+	_check(int(ev.get("born", 0)) + int(ev.get("culled", 0)) > 0, "lineage: births or culls recorded (%s)" % str(ev))
+	var gen_rows: Array = mine.filter(func(r): return String(r.get("event", "")) == "generation")
+	_check(gen_rows.size() == 1 and bool(gen_rows[0].get("forced", false)), "lineage: the forced step says so")
+	var cage_row: Dictionary = mine.filter(func(r): return String(r.get("event", "")) == "cage")[0]
+	_check(int(cage_row.get("rng_seed", 0)) != 0 and String(cage_row.get("fitness_fn", "")) == "default", "lineage: the breeder's seed and the fitness name are recorded")
+	# the same seed replays: a second cage, same stage and seed, one step — same births by kingdom
+	var twin_d = await _cage("lsystems", 7, {"size": "8", "run": "probe-twin", "evolve": "off"})
+	twin_d.press_control("gen")
+	await process_frame
+	var b1: Dictionary = {}
+	var b2: Dictionary = {}
+	for r in _lineage_of(String(st0["lineage"]["session"]), "probe"):
+		if String(r.get("event", "")) == "born":
+			b1[String(r.get("kingdom", ""))] = int(b1.get(String(r.get("kingdom", "")), 0)) + 1
+	for r in _lineage_of(String(st0["lineage"]["session"]), "probe-twin"):
+		if String(r.get("event", "")) == "born":
+			b2[String(r.get("kingdom", ""))] = int(b2.get(String(r.get("kingdom", "")), 0)) + 1
+	_check(str(b1) == str(b2), "lineage: the same seed breeds the same kingdoms (%s vs %s)" % [str(b1), str(b2)])
+	# the counterfactual word
+	var cf = await _cage("Point_One", 7, {"size": "5", "allow": "line"})
+	_check(cf.free_points().size() == 2 and cf.get_node_or_null("Patch/Garden/Line_0") != null, "allow: Point_One granted `line` draws the line")
+	_check("line" in cf.closure()["made_of"] and cf.get_state()["allow"] == "line", "allow: the state says the word was granted")
+	var cf_rows: Array = _lineage_of(String(st0["lineage"]["session"]), "").filter(func(r): return String(r.get("stage", "")) == "Point_One" and String(r.get("allow", "")) == "line")
+	_check(cf_rows.size() >= 1, "allow: the log carries the granted word")
+
 	print("[probe_biome_vitrine] %d checks, %d failed" % [_checks, _fails])
 	quit(0 if _fails == 0 else 1)
 
@@ -392,6 +438,33 @@ func _has_roof(v) -> bool:
 			if sz.x > s - 0.2 and sz.z > s - 0.2 and sz.y < 0.1:
 				return true
 	return false
+
+
+## rows in the lineage log (res:// first, else user://)
+func _lineage_path() -> String:
+	for p in ["res://ada_run/biome_lineage.jsonl", "user://biome_lineage.jsonl"]:
+		if FileAccess.file_exists(p):
+			return p
+	return ""
+
+
+func _lineage_rows() -> int:
+	var p := _lineage_path()
+	if p == "":
+		return 0
+	return FileAccess.get_file_as_string(p).split("\n", false).size()
+
+
+func _lineage_of(session: String, run: String) -> Array:
+	var out: Array = []
+	var p := _lineage_path()
+	if p == "":
+		return out
+	for line in FileAccess.get_file_as_string(p).split("\n", false):
+		var v: Variant = JSON.parse_string(line)
+		if v is Dictionary and String((v as Dictionary).get("session", "")) == session and (run == "" or String((v as Dictionary).get("run", "")) == run):
+			out.append(v)
+	return out
 
 
 ## do the two planes of the composition wear different colours?
