@@ -7,7 +7,11 @@
 ## seed gives the same counts twice and a different seed does not; the record is written;
 ## a build stays under two seconds. Gen 1: the floor under the water cells is flat, the disc's
 ## top stands above the terrain at the basin centre and all round it at half the disc's
-## radius, the reeds' feet stand on the shore, and the ground carries paint layers.
+## radius, the reeds' feet stand on the shore, and the ground carries paint layers. Gen 2: the
+## tree nearest the water is at least as old as the farthest; every path mat's stored position
+## lies within 0.5 m of the segment basin centre -> trunk and inside the footprint; the last
+## mat of every path stands within 0.5 m of its trunk; a body stands at every stored path
+## position (the dispatcher read _pos); the ground carries at least four paint layers.
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_biome_object.gd
 extends SceneTree
@@ -120,6 +124,71 @@ func _run() -> void:
 							if img.get_pixel(px, py).a > 0.001:
 								painted_px += 1
 		_check(painted_px > 0, "%s: the paint texture carries the moisture (%d px covered)" % [lab, painted_px])
+		# gen 2 (a): succession — the tree nearest the water is at least as old as the farthest;
+		# nearest and farthest found here by _water_dist, not read off the sorted list
+		var near_t := Vector2i(-1, -1)
+		var far_t := Vector2i(-1, -1)
+		var near_d := 999.0
+		var far_d := -1.0
+		for t in o._trees:
+			var d: float = o._water_dist(t.x, t.y)
+			if d < near_d:
+				near_d = d
+				near_t = t
+			if d > far_d:
+				far_d = d
+				far_t = t
+		var near_i: int = int(o._cells[near_t]["inten"]) if o._cells.has(near_t) else -1
+		var far_i: int = int(o._cells[far_t]["inten"]) if o._cells.has(far_t) else 99
+		_check(o._trees.size() > 0 and near_i >= far_i, "%s: the shore tree is at least as old as the frontier tree (inten %d at %.1f m vs %d at %.1f m)" % [lab, near_i, near_d, far_i, far_d])
+		_check(o._trees.size() > 0 and o._trees[0] == near_t, "%s: _trees[0] is the shore tree" % lab)
+		# gen 2 (b): every path mat within 0.5 m of the segment basin centre -> trunk, inside the footprint
+		# gen 2 (c): the last mat of every path within 0.5 m of its trunk
+		var basin_w: Vector2 = o._basin_c - Vector2(float(o.size), float(o.size)) * 0.5
+		var on_line := true
+		var last_touch := true
+		var n_path := 0
+		var reached := 0
+		for t in o._paths.keys():
+			var path: Array = o._paths[t]
+			if path.is_empty():
+				continue
+			reached += 1
+			var trunk: Vector2 = o._pos[t]
+			for k in path:
+				var p: Vector2 = o._pos[k]
+				n_path += 1
+				var dseg: float = _seg_dist(p, basin_w, trunk)
+				if dseg > 0.5 + 0.001 or absf(p.x) > half or absf(p.y) > half:
+					if on_line:
+						print("    off the line: mat %s at (%.2f, %.2f), %.2f m from the segment to tree %s" % [str(k), p.x, p.y, dseg, str(t)])
+					on_line = false
+			var lp: Vector2 = o._pos[path.back()]
+			if lp.distance_to(trunk) > 0.5:
+				if last_touch:
+					print("    short of the trunk: last mat %.2f m from tree %s" % [lp.distance_to(trunk), str(t)])
+				last_touch = false
+		print("    [probe_biome_object] %s: paths reach %d of %d trees with %d mats" % [lab, reached, o._trees.size(), n_path])
+		_check(on_line, "%s: every path mat stands on the line inside the footprint (%d mats)" % [lab, n_path])
+		_check(reached == o._trees.size() and last_touch, "%s: every tree is reached and the last mat touches the trunk (%d of %d trees reached)" % [lab, reached, o._trees.size()])
+		_check(int(cnt["fungus_path"]) == n_path, "%s: the path count is the mats stored (%d vs %d)" % [lab, int(cnt["fungus_path"]), n_path])
+		# ... and the handoff: a body of the patch stands at every stored path position
+		var standing := true
+		for t in o._paths.keys():
+			for k in o._paths[t]:
+				var p: Vector2 = o._pos[k]
+				var found := false
+				for ch in o._patch.get_children():
+					if ch is Node3D and absf(ch.position.x - p.x) < 0.02 and absf(ch.position.z - p.y) < 0.02:
+						found = true
+						break
+				if not found:
+					if standing:
+						print("    no body at stored path position %s (%.2f, %.2f)" % [str(k), p.x, p.y])
+					standing = false
+		_check(standing, "%s: a body stands at every stored path position" % lab)
+		# gen 2 (d): four paint layers — dry, wet, shore, silt
+		_check(ground != null and (ground._paint_layers as Array).size() >= 4, "%s: the ground carries at least four paint layers (%d)" % [lab, (ground._paint_layers as Array).size() if ground != null else 0])
 	var ca: Dictionary = a.get_state()["counts"]
 	var cb: Dictionary = b.get_state()["counts"]
 	var cc: Dictionary = c.get_state()["counts"]
@@ -134,6 +203,15 @@ func _run() -> void:
 	_check(FileAccess.file_exists("res://ada_run/biome_rsi/state/%s.json" % a.label()), "the record is written")
 	print("[probe_biome_object] %d checks, %d failed" % [_checks, _fails])
 	quit(0 if _fails == 0 else 1)
+
+
+func _seg_dist(p: Vector2, a: Vector2, b: Vector2) -> float:
+	var ab: Vector2 = b - a
+	var l2: float = ab.length_squared()
+	if l2 < 0.000001:
+		return p.distance_to(a)
+	var t: float = clampf((p - a).dot(ab) / l2, 0.0, 1.0)
+	return p.distance_to(a + ab * t)
 
 
 func _grow(seed: int, moisture: float, relief: float, wildness: float):

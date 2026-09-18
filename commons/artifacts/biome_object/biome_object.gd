@@ -10,13 +10,20 @@ class_name BiomeObject
 ##
 ##   substrate   a height field with a basin: relief from noise, the basin dug where the seed
 ##               puts the water; a flat floor under the pool and a wet shelf round it as the
-##               shore (gen 1); the moisture PAINTED on as wet, dry and silt brush layers (gen 1)
+##               shore (gen 1); the moisture PAINTED on as brush layers (gen 1) — the WHOLE
+##               gradient, ochre wherever it is dry, moss wherever wet, a sand shore on the
+##               shelf, silt darkest at the middle of the pool (gen 2)
 ##   water       a pool in the basin (the old biome's own pool: disc, ripple rings, reeds), the
-##               disc lapping the shelf and the reeds standing on the shore (gen 1)
+##               disc lapping the shelf and the reeds standing on the shore (gen 1); one thin
+##               ring set toward the oldest tree — an edge, not a target (gen 2)
 ##   mineral     crystal clusters on the dry ridge
 ##   fungus      mycelium filaments on the wet rim of the pool, and a mycelium PATH from the
-##               pool out to every tree — the network that joins water to wood
-##   flora       trees on the mid-moist slope, flowers in the wet meadow, tiers by moisture
+##               pool out to every tree — the network that joins water to wood; sampled ON the
+##               line every 0.5 m, dry cells only, the last mat touching the trunk, finished at
+##               the water and still growing at the tip (gen 2)
+##   flora       trees on the mid-moist slope, flowers in the wet meadow, tiers by moisture;
+##               SUCCESSION from the water — the shore tree the oldest, the frontier tree a
+##               sapling (gen 2)
 ##   fauna       creatures beside the flowers and the fungus
 ##   cover       grass and stubble by moisture, on the surface, everywhere
 ##
@@ -36,10 +43,11 @@ const Dispatcher := preload("res://commons/biome_layers/biome_paint_dispatcher.g
 const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 
-const GENERATION := 1
+const GENERATION := 2
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
+	"gen 2: succession from the water (the trees ranked by distance to it, the shore tree inten 3-5 and the frontier tree a sapling), the mycelium path sampled on the line every 0.5 m from 0.85 m past the pool to 0.45 m short of the trunk, skipping flooded cells, gen 25 at the water and 10 at the tree; the ground painted with the whole gradient (ochre wherever dry, moss, a sand shore, silt by depth) and the pool's two glowing rings replaced by one thin ring set toward the oldest tree, the disc at alpha 0.72",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 const K_TREE := 0
@@ -64,9 +72,12 @@ var _max_h: float = 1.0
 var _water: Dictionary = {}          # Vector2i -> true
 var _basin_c: Vector2 = Vector2.ZERO
 var _basin_r: float = 2.0
+var _pool_r: float = 1.2             # gen 2: the water's radius (cells), read by the paint and the pool
 var _moist: PackedFloat32Array = PackedFloat32Array()
-var _cells: Dictionary = {}          # Vector2i -> {kingdom: String, inten: int, algo: String}
-var _trees: Array[Vector2i] = []
+var _cells: Dictionary = {}          # Vector2i -> {kingdom: String, inten: int, algo: String[, gen: String]}
+var _trees: Array[Vector2i] = []     # gen 2: sorted by distance to the water, the shore tree first
+var _pos: Dictionary = {}            # gen 2: Vector2i -> Vector2 world xz, the trunks and the path's mats
+var _paths: Dictionary = {}          # gen 2: Vector2i tree -> Array[Vector2i] path cells, water to trunk
 var _patch: Node3D
 var _dispatcher: Node3D
 var _counts: Dictionary = {}
@@ -159,19 +170,19 @@ func _terrain() -> void:
 	# gen 1: the basin is FILLED, not dug to a point: a flat floor under the water cells and a
 	# wet shelf one metre wide round them, rising 0.16 per metre. The shelf is the wet rim as
 	# geometry; its cells (h <= 0.18) fall out of the tree rule, so trees step back from the shore.
-	var pool_r: float = _basin_r * 0.62
+	_pool_r = _basin_r * 0.62
 	for z in range(size):
 		for x in range(size):
 			var d: float = Vector2(float(x) + 0.5, float(z) + 0.5).distance_to(_basin_c)
 			var w: float = clampf(1.0 - d / _basin_r, 0.0, 1.0)
 			w = w * w * (3.0 - 2.0 * w)
 			var h: float = _field[z * size + x] * (1.0 - w) * (0.75 + 0.25 * relief) + 0.08 * (1.0 - w)
-			if d < pool_r:
+			if d < _pool_r:
 				h = minf(h, 0.02)                          # flat floor under the water
-			elif d < pool_r + 1.0:
-				h = minf(h, 0.02 + 0.16 * (d - pool_r))    # the wet shelf, a shore
+			elif d < _pool_r + 1.0:
+				h = minf(h, 0.02 + 0.16 * (d - _pool_r))   # the wet shelf, a shore
 			_field[z * size + x] = h
-			if d < pool_r:
+			if d < _pool_r:
 				_water[Vector2i(x, z)] = true
 
 
@@ -212,6 +223,8 @@ func _ecology() -> void:
 	_moist.resize(size * size)
 	_cells.clear()
 	_trees.clear()
+	_pos.clear()
+	_paths.clear()
 	var reach: float = float(size) * (0.35 + 0.35 * moisture)
 	for z in range(size):
 		for x in range(size):
@@ -258,6 +271,22 @@ func _ecology() -> void:
 			_cells[c["key"]] = {"kingdom": "tree", "inten": inten, "algo": ""}
 			_trees.append(c["key"])
 			_counts["tree"] += 1
+	# gen 2: SUCCESSION from the water — the trees sorted by their distance to it, rank i of n
+	# setting the age: the shore tree inten 3-5, the frontier tree 1 (scale is 0.6 + 0.2·inten,
+	# so the shore tree is twice the sapling). The draw above stays so the rng stream the rim,
+	# meadow and creatures read is gen 1's; the rank overrides what it drew.
+	_trees.sort_custom(_nearer_water)
+	var n_ranked: int = _trees.size()
+	for i in range(n_ranked):
+		var t: Vector2i = _trees[i]
+		var rank: float = 1.0 - float(i) / float(maxi(1, n_ranked - 1))
+		_cells[t]["inten"] = clampi(int(round(1.0 + 4.0 * rank * (0.4 + 0.4 * wildness + 0.2 * moisture))), 1, 5)
+		# the trunk's ±0.3 jitter, drawn here from the per-cell rng _dispatch() used to draw it,
+		# so the path below can aim at the trunk and not at the cell
+		var trng := RandomNumberGenerator.new()
+		trng.seed = hash([seed, "cell", t.x, t.y])
+		var cw: Vector3 = _cell_world(t.x, t.y)
+		_pos[t] = Vector2(cw.x + trng.randf_range(-0.3, 0.3), cw.z + trng.randf_range(-0.3, 0.3))
 	# fungus: the wet rim of the pool
 	var rim: Array = []
 	for z in range(size):
@@ -276,22 +305,66 @@ func _ecology() -> void:
 		if _spaced(key, 1):
 			_cells[key] = {"kingdom": "fungus", "inten": clampi(2 + int(round(moisture * 2.0)), 1, 4), "algo": "mycelium"}
 			_counts["fungus"] += 1
-	# the mycelium PATH: from the pool rim out to every tree — a chain of cells along the line
+	# the mycelium PATH: from the pool rim out to every tree. gen 2: the web ON THE LINE — the
+	# line from the basin centre (world xz) to the TRUNK, sampled every 0.5 m from 0.85 m past
+	# the water to 0.45 m short of the bark, skipping water, occupied cells and flooded samples
+	# (the shelf under the water level); one mat per NEW cell, its position the sample itself
+	# (clamped 0.7 m inside the footprint, the mat's radius at inten 2 being 0.60 m), the LAST
+	# mat forced to 0.45 m from the trunk so it reaches 0.15 m past the bark. Each mat carries
+	# gen 25 at the water down to 10 at the tree (the dispatcher reads it into max_steps): the
+	# network finished at the water, 40 % grown at the tip — still growing outward.
+	var basin_w: Vector2 = _basin_c - Vector2(float(size), float(size)) * 0.5
+	var wl: float = _water_level()
+	var lim: float = float(size) * 0.5 - 0.7
 	for t in _trees:
-		var from := Vector2(_basin_c)
-		var to := Vector2(float(t.x) + 0.5, float(t.y) + 0.5)
-		var steps: int = int(ceil(from.distance_to(to)))
-		for i in range(1, steps):
-			var p: Vector2 = from.lerp(to, float(i) / float(steps))
-			var key := Vector2i(int(floor(p.x)), int(floor(p.y)))
-			if _water.has(key) or _cells.has(key) or key.x < 0 or key.y < 0 or key.x >= size or key.y >= size:
+		var trunk: Vector2 = _pos[t]
+		var span: float = trunk.distance_to(basin_w)
+		if span < 0.001:
+			continue
+		var dir: Vector2 = (trunk - basin_w) / span
+		var s0: float = _pool_r + 0.85
+		var s1: float = span - 0.45
+		var placed: Array = []
+		# a tree standing closer than 1.3 m to the water has no room for the ladder; it gets
+		# its one sample at the trunk end (the critic's range is empty there), at t = 0: nearer
+		# the water than any ladder's first rung
+		var s: float = s0 if s0 <= s1 else s1
+		while s <= s1 + 0.001:
+			var p: Vector2 = basin_w + dir * s
+			var tt: float = clampf((s - s0) / maxf(0.001, s1 - s0), 0.0, 1.0)
+			s += 0.5
+			var key := Vector2i(int(floor(p.x + float(size) * 0.5)), int(floor(p.y + float(size) * 0.5)))
+			if key.x < 0 or key.y < 0 or key.x >= size or key.y >= size:
 				continue
-			if _water_dist(key.x, key.y) < 0.9:
+			if _water.has(key) or _cells.has(key):
+				continue
+			if _h_at(p.x, p.y) < wl + 0.02:
 				continue
 			if _counts["fungus"] + _counts["fungus_path"] >= 16:
 				break
-			_cells[key] = {"kingdom": "fungus", "inten": 2, "algo": "mycelium"}
+			_cells[key] = {"kingdom": "fungus", "inten": 2, "algo": "mycelium",
+				"gen": str(int(round(lerpf(25.0, 10.0, tt))))}
+			_pos[key] = Vector2(clampf(p.x, -lim, lim), clampf(p.y, -lim, lim))
+			placed.append(key)
 			_counts["fungus_path"] += 1
+		if placed.is_empty() and _counts["fungus"] + _counts["fungus_path"] < 16:
+			# the SHORE tree's case (measured gen 2: the oldest tree was the one left unwebbed on
+			# two of three probe DNAs): its only sample, 0.45 m short of the trunk, lies in the
+			# tree's OWN cell, which is not new. The mat keeps that position and is keyed to the
+			# tree's nearest free neighbour — the cell is the mat's name, the sample its place.
+			var q: Vector2 = trunk - dir * 0.45
+			var nk: Vector2i = _free_neighbour(t, q)
+			if nk.x >= 0 and _h_at(q.x, q.y) >= wl + 0.02:
+				var tq: float = clampf((s1 - s0) / maxf(0.001, s1 - s0), 0.0, 1.0)
+				_cells[nk] = {"kingdom": "fungus", "inten": 2, "algo": "mycelium",
+					"gen": str(int(round(lerpf(25.0, 10.0, tq))))}
+				_pos[nk] = q
+				placed.append(nk)
+				_counts["fungus_path"] += 1
+		if not placed.is_empty():
+			# on the segment between two interior points, so inside the footprint without a clamp
+			_pos[placed.back()] = trunk - dir * 0.45
+		_paths[t] = placed
 	# flowers: the wet meadow, density by wildness
 	var meadow: Array = []
 	for z in range(size):
@@ -356,6 +429,16 @@ func _shuffle(arr: Array, rng: RandomNumberGenerator) -> void:
 		arr[j] = t
 
 
+## gen 2: the succession order — nearer the water first; a tie falls to the row-major index so
+## the order is a fact about the seed, not about the sort.
+func _nearer_water(p: Vector2i, q: Vector2i) -> bool:
+	var dp: float = _water_dist(p.x, p.y)
+	var dq: float = _water_dist(q.x, q.y)
+	if absf(dp - dq) < 0.0001:
+		return (p.y * size + p.x) < (q.y * size + q.x)
+	return dp < dq
+
+
 func _water_dist(x: int, z: int) -> float:
 	var best := 99.0
 	var p := Vector2(float(x), float(z))
@@ -370,6 +453,26 @@ func _spaced(key: Vector2i, r: int) -> bool:
 			if (dx != 0 or dz != 0) and _cells.has(key + Vector2i(dx, dz)):
 				return false
 	return true
+
+
+## gen 2: the free cell (in range, not water, not taken) among a cell's eight neighbours whose
+## centre is nearest to the world point q; (-1, -1) when none is free.
+func _free_neighbour(key: Vector2i, q: Vector2) -> Vector2i:
+	var best := Vector2i(-1, -1)
+	var best_d := 99.0
+	for dz in range(-1, 2):
+		for dx in range(-1, 2):
+			var nk: Vector2i = key + Vector2i(dx, dz)
+			if (dx == 0 and dz == 0) or nk.x < 0 or nk.y < 0 or nk.x >= size or nk.y >= size:
+				continue
+			if _water.has(nk) or _cells.has(nk):
+				continue
+			var cw: Vector3 = _cell_world(nk.x, nk.y)
+			var d: float = q.distance_to(Vector2(cw.x, cw.z))
+			if d < best_d:
+				best_d = d
+				best = nk
+	return best
 
 
 func _spaced_from(key: Vector2i, r: int, kingdom: String) -> bool:
@@ -392,29 +495,35 @@ func _ground() -> void:
 	_patch.add_child(g)
 
 
-## gen 1: the moisture painted onto the ground. Three "shader" brush layers, the shape the
+## gen 1: the moisture painted onto the ground as "shader" brush layers, the shape the
 ## substrate reads (element / mode / density / color / brush{w, d, cells[[x, z, v]]}), composed
-## into its paint texture: moss where the ground is wet, ochre where it is dry AND high, silt
-## under the water. The field that placed every organism becomes visible.
+## into its paint texture. gen 2: the WHOLE gradient, so six DNAs give six grounds — ochre
+## wherever the ground is dry (no height gate; the height only deepens it), moss from m 0.28
+## up, a sand SHORE on the shelf fading out over one metre, silt under the water darkest at the
+## middle. Painted dry, wet, shore, silt — each over the one before.
 func _moisture_paint() -> Array:
 	var wet: Array = []
 	var dry: Array = []
+	var shore: Array = []
 	var silt: Array = []
 	for z in range(size):
 		for x in range(size):
 			var i: int = z * size + x
 			var m: float = _moist[i]
-			var vw: float = clampf((m - 0.35) / 0.45, 0.0, 1.0)
+			var vw: float = clampf((m - 0.28) / 0.42, 0.0, 1.0)
 			if vw > 0.0:
 				wet.append([x, z, vw])
-			var vd: float = clampf((0.42 - m) / 0.3, 0.0, 1.0) * clampf((_field[i] - 0.5) / 0.3, 0.0, 1.0)
+			var vd: float = clampf((0.45 - m) / 0.35, 0.0, 1.0) * (0.55 + 0.45 * _field[i])
 			if vd > 0.0:
 				dry.append([x, z, vd])
+			var d_c: float = Vector2(float(x) + 0.5, float(z) + 0.5).distance_to(_basin_c)
 			if _water.has(Vector2i(x, z)):
-				silt.append([x, z, 1.0])
-	_counts["paint"] = wet.size() + dry.size() + silt.size()
-	return [_brush_layer([0.20, 0.34, 0.18], wet), _brush_layer([0.74, 0.66, 0.50], dry),
-		_brush_layer([0.16, 0.14, 0.11], silt)]
+				silt.append([x, z, 0.45 + 0.55 * (1.0 - d_c / _pool_r)])
+			elif d_c < _pool_r + 1.0:
+				shore.append([x, z, 0.8 * (1.0 - (d_c - _pool_r))])
+	_counts["paint"] = wet.size() + dry.size() + shore.size() + silt.size()
+	return [_brush_layer([0.74, 0.66, 0.50], dry), _brush_layer([0.20, 0.34, 0.18], wet),
+		_brush_layer([0.58, 0.54, 0.42], shore), _brush_layer([0.16, 0.14, 0.11], silt)]
 
 
 func _brush_layer(color: Array, cells: Array) -> Dictionary:
@@ -432,7 +541,7 @@ func _water_pool() -> void:
 	var c: Vector3 = Vector3(_basin_c.x - float(size) * 0.5, _water_level(), _basin_c.y - float(size) * 0.5)
 	holder.position = c
 	_patch.add_child(holder)
-	var r: float = _basin_r * 0.62 + 0.35   # gen 1: the disc laps the shelf
+	var r: float = _pool_r + 0.35   # gen 1: the disc laps the shelf
 	var disc := MeshInstance3D.new()
 	disc.name = "Disc"
 	var cm := CylinderMesh.new()
@@ -441,7 +550,7 @@ func _water_pool() -> void:
 	cm.height = 0.02
 	disc.mesh = cm
 	var wmat := StandardMaterial3D.new()
-	wmat.albedo_color = Color(0.18, 0.42, 0.66, 0.85)   # gen 1: water, not slate
+	wmat.albedo_color = Color(0.18, 0.42, 0.66, 0.72)   # gen 1: water, not slate; gen 2: the silt reads through
 	wmat.metallic = 0.25
 	wmat.roughness = 0.05
 	wmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -449,20 +558,28 @@ func _water_pool() -> void:
 	wmat.emission = Color(0.1, 0.3, 0.5) * 0.25
 	disc.material_override = wmat
 	holder.add_child(disc)
-	for k in range(2):
-		var ring := MeshInstance3D.new()
-		var tm := TorusMesh.new()
-		tm.inner_radius = r * (0.30 + 0.30 * float(k))
-		tm.outer_radius = r * (0.34 + 0.30 * float(k))
-		ring.mesh = tm
-		var rmat := StandardMaterial3D.new()
-		rmat.albedo_color = Color(0.5, 0.75, 0.9, 0.5)
-		rmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		rmat.emission_enabled = true
-		rmat.emission = Color(0.4, 0.7, 0.95) * 0.4
-		ring.material_override = rmat
-		ring.position = Vector3(0.0, 0.015, 0.0)
-		holder.add_child(ring)
+	# gen 2: ONE thin ring, no glow, set 0.3 r off the centre toward the oldest tree — the water
+	# shows an edge where it showed a target
+	var ring := MeshInstance3D.new()
+	ring.name = "Ring"
+	var tm := TorusMesh.new()
+	tm.inner_radius = r * 0.62
+	tm.outer_radius = r * 0.635
+	ring.mesh = tm
+	var rmat := StandardMaterial3D.new()
+	rmat.albedo_color = Color(0.5, 0.75, 0.9, 0.3)
+	rmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	ring.material_override = rmat
+	var off := Vector2.ZERO
+	if not _trees.is_empty():
+		var t0: Vector2i = _trees[0]
+		var cw0: Vector3 = _cell_world(t0.x, t0.y)
+		var trunk0: Vector2 = _pos[t0] if _pos.has(t0) else Vector2(cw0.x, cw0.z)
+		var to_tree: Vector2 = trunk0 - Vector2(c.x, c.z)
+		if to_tree.length() > 0.001:
+			off = to_tree.normalized() * (0.3 * r)
+	ring.position = Vector3(off.x, 0.015, off.y)
+	holder.add_child(ring)
 	var reeds: int = 3 + int(round(moisture * 5.0))
 	for i in range(reeds):
 		var reed := MeshInstance3D.new()
@@ -549,8 +666,13 @@ func _dispatch() -> void:
 		var rng := RandomNumberGenerator.new()
 		rng.seed = hash([seed, "cell", key.x, key.y])
 		var wp: Vector3 = _cell_world(key.x, key.y)
-		wp.x += rng.randf_range(-0.3, 0.3)
-		wp.z += rng.randf_range(-0.3, 0.3)
+		if _pos.has(key):
+			# gen 2: a trunk or a path mat stands where the ecology put it
+			wp.x = float(_pos[key].x)
+			wp.z = float(_pos[key].y)
+		else:
+			wp.x += rng.randf_range(-0.3, 0.3)
+			wp.z += rng.randf_range(-0.3, 0.3)
 		wp.y = _h_at(wp.x, wp.z)
 		# the dispatcher's builders place by GLOBAL position (a painted map cell's world_pos
 		# is global), so the surface point goes out in the patch's global frame
@@ -560,6 +682,9 @@ func _dispatch() -> void:
 			"density": 0.8 + 0.2 * moisture}
 		if String(c["algo"]) != "":
 			deposit["algo"] = String(c["algo"])
+		if c.has("gen"):
+			# gen 2: the path's growth — _spawn_mycelium reads "gen" into the colony's max_steps
+			deposit["gen"] = String(c["gen"])
 		_dispatcher.spawn_cell(deposit, 999, ctx, _patch)
 
 
