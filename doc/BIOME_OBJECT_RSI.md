@@ -79,6 +79,7 @@ the gradient; the critic had predicted the number could not see a strand on bark
 | 7 | db73c6e6d | (the gen-4 critic's plan, amended by the gen-6 critic) the water a target, the webs the brightest thing → the pool's disc a six-ring fan with vertex colours, dark centre to lighter rim, darkened under every canopy, built after the bodies; no ring; each web's light by its growth step, dim at the finished rim and bright at the tip on the bark; matte crystals | 0.985 / 0.724 (darker water on purpose), 2.7 % changed | kept |
 | 8 | 5a8145092 | Palle: grass and plant foliage as transparent images → the cover's grass, reeds, ferns, meadow plants and litter as alpha-cut cards on two crossed quads, one near-white tint per tuft for dryness and shade, images drawn by `tools/make_foliage_cards.py` and loaded by name at runtime; mushrooms keep their mesh | 0.995 / 0.777, 4.0 % changed | kept — the largest step in legibility since generation 1 |
 | 9 | e62f0ceee | Palle: can the cards be made procedurally → `foliage_cards.gd` draws the five cards in the engine at build time from the seed and the moisture (a disc brush along Bézier strokes, sin-profiled leaves), 4–10 ms a card, cached per kind, seed and moisture band; the PNG set stays behind `#foliage:files` | 1.000 / 0.777, 1.9 % changed | kept — the same picture from no files; the cards are DNA now |
+| 10 | uncommitted (Astra) | the ground ends as a thin sheet -> four schematic soil/rock bands and a closed underside follow the terrain edge; local moisture thickens the dark layer, mineral ground tints the surface strip; foliage and placement unchanged | 0.990 / 0.759, 13.0% changed including automatic camera refitting | kept on sight; 337 checks pass, one mesh / 864 triangles |
 
 The critic of generation 3 planned **4** (built) and **5** (built), then **6** the basin shows
 depth and the creatures face what they live by, **7** the plate's cut edge as a section. The
@@ -97,7 +98,7 @@ meadow's bonus on the lit side, then a slope-aspect term in the moisture); **9**
 the cut edge shows the strata; **9 or 10** inhabitants — a creature faces what it lives by, a
 worn track behind it. All critiques are in `ada_run/biome_rsi/`.
 
-Ten generations in one day (one of them another session's), every one kept on sight, none culled: the culling rule has
+Eleven generations in one day (one of them another session's), every one kept on sight, none culled: the culling rule has
 not yet been exercised, which is a fact about the critics' proposals being small and
 well-aimed, not about the rule.
 
@@ -149,3 +150,31 @@ performance remains untested. The local `/biome-rsi` gallery carries the new row
 The next candidate is water/canopy appearance and the brightness of the connecting mycelium.
 No generation 7 or museum integration was undertaken in this cycle. The 0–5 blog remains
 the historical account of the earlier morning; the lineage records this continuation.
+
+## 8. Generation 10 — the ground in section, 18 September 2026
+
+Palle requested the next cycle after the foliage work. The current parent was
+**generation 9**, with both file-backed and engine-drawn foliage already present.
+Generation 10 is kept: the landscape now has cut soil/rock sides and a sealed base
+beneath its unchanged terrain. The dark layer thickens with local moisture; the
+surface strip responds to mineral ground. It is a schematic section, not a soil
+or groundwater simulation.
+
+Astra performed sequential critique, build and review. All six images were
+inspected; all earlier non-timing counts and organism placements are preserved.
+337 probe checks passed, including closed-mesh boundaries, footprint, positive
+layer thickness, winding and determinism at sizes 4, 12 and 24. Cost: one mesh and
+material, 864 triangles at size 12, 14–19 ms construction in the rendered sweep.
+
+Integration-v1 falls from 1.000 to 0.990 and legibility-v1 from 0.777 to 0.759.
+The larger subject makes the unchanged water a smaller fraction of the image.
+The keep verdict is visual. The capture settings stayed fixed, but the rig's
+automatic bounding-box fit responds to added depth: pixel change includes camera
+reframing. The local gallery has the new row; headset performance remains untested.
+
+See [the parent critique](../ada_run/biome_rsi/gen_9/critique.md),
+[the review and limitations](../ada_run/biome_rsi/gen_10/review.md), and
+[the evidence](../ada_run/biome_rsi/gen_10/iteration-report.json).
+The first material draft is archived under `gen_10/attempt_1/`; the main lineage
+contains only the final generation-10 row. No commit or museum placement was made.
+The next candidate is the earlier directional-light/understory proposal.

@@ -468,6 +468,7 @@ func _run() -> void:
 		_check(min_3, "%s: every mineral cell is 3.0 cells from the water (%d minerals)" % [lab, n_cluster])
 	for o in [a, b, c, d4]:
 		_check_cover(o)
+		_check_section(o)
 	# gen 7: the pool's fan, the web's light, the spires' glow — and proof the two
 	# conditional checks bit somewhere
 	var any_over := false
@@ -488,6 +489,8 @@ func _run() -> void:
 	_check(str(_world_counts(twin.get_state()["counts"])) == str(ca), "the same seed grows the same counts")
 	_check(var_to_str(twin._cover_tufts) == var_to_str(a._cover_tufts), "cover group transforms and colours replay exactly at a translated instance")
 	_check(twin._basin_c == a._basin_c, "the same seed digs the basin in the same place")
+	_check(var_to_str(twin._section_columns) == var_to_str(a._section_columns), "section profiles replay at a translated instance")
+	_section_extremes()
 	var other = await _grow(8, 0.5, 0.5, 0.6)
 	_check(other._basin_c != a._basin_c or str(_world_counts(other.get_state()["counts"])) != str(ca), "a different seed grows a different world")
 	_check(FileAccess.file_exists("res://ada_run/biome_rsi/state/%s.json" % a.label()), "the record is written")
@@ -802,3 +805,102 @@ func _check_gen7(o) -> Dictionary:
 
 func _lum(c: Color) -> float:
 	return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b
+
+
+## Gen 10: inspect the actual section and top meshes together, not just the
+## construction plan. Weld positions for the boundary test; every edge must be
+## shared by exactly two triangles, including the corners and underside.
+func _check_section(o) -> void:
+	var section: MeshInstance3D = o._patch.get_node_or_null("Section")
+	var lab: String = o.label() + " size " + str(o.size)
+	_check(section != null and section.mesh is ArrayMesh, "%s: a section mesh" % lab)
+	if section == null or section.mesh == null:
+		return
+	var ground = o._patch.get_node("Ground")
+	var arrays: Array = section.mesh.surface_get_arrays(0)
+	var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var normals: PackedVector3Array = arrays[Mesh.ARRAY_NORMAL]
+	var colours: PackedColorArray = arrays[Mesh.ARRAY_COLOR]
+	var half: float = float(o.size) * 0.5
+	var inside := true
+	var clockwise := true
+	for v in vertices:
+		inside = inside and absf(v.x) <= half + 0.0001 and absf(v.z) <= half + 0.0001
+		inside = inside and v.y >= -0.4201 and v.y <= o._h_at(v.x, v.z) + 0.0001
+	for i in range(0, vertices.size(), 3):
+		var cross: Vector3 = (vertices[i + 1] - vertices[i]).cross(vertices[i + 2] - vertices[i])
+		clockwise = clockwise and cross.dot(normals[i]) < -0.000001
+	_check(inside, "%s: section stays below the existing surface and inside the footprint" % lab)
+	_check(clockwise, "%s: every triangle has area and faces outwards with Godot winding" % lab)
+	_check(vertices.size() / 3 == int(o._counts["section_triangles"]) and vertices.size() / 3 <= 1728,
+		"%s: bounded section triangle count (%d)" % [lab, vertices.size() / 3])
+	var edge_uses: Dictionary = {}
+	_mesh_edges(section.mesh, edge_uses)
+	_mesh_edges(ground.mesh_instance.mesh, edge_uses)
+	var open_edges := 0
+	for count in edge_uses.values():
+		if int(count) != 2:
+			open_edges += 1
+	_check(open_edges == 0, "%s: ground, four sides and base form one closed boundary (%d bad edges)" % [lab, open_edges])
+	var ordered := true
+	var moistest := -1.0
+	var driest := 2.0
+	var thickest_m := 0.0
+	var thinnest_m := 0.0
+	for col in o._section_columns:
+		var ys: PackedFloat32Array = col["levels"]
+		for j in range(4):
+			ordered = ordered and ys[j] > ys[j + 1]
+		var m: float = col["moisture"]
+		if m > moistest:
+			moistest = m
+			thickest_m = ys[1] - ys[2]
+		if m < driest:
+			driest = m
+			thinnest_m = ys[1] - ys[2]
+	_check(ordered, "%s: every soil layer has positive thickness" % lab)
+	_check(thickest_m >= thinnest_m - 0.00001 and (moistest - driest < 0.01 or thickest_m > thinnest_m),
+		"%s: wetter edge has thicker dark soil (%.3f vs %.3f m)" % [lab, thickest_m, thinnest_m])
+	var mat: StandardMaterial3D = section.material_override
+	_check(colours.size() == vertices.size() and mat.vertex_color_use_as_albedo and mat.vertex_color_is_srgb and not mat.emission_enabled,
+		"%s: all section vertices carry colour without extra light" % lab)
+	print("    [section] %s: %d triangles, %d non-manifold edges, %d ms" % [lab, vertices.size() / 3, open_edges, o._counts["ms_section"]])
+
+
+func _mesh_edges(mesh: ArrayMesh, edges: Dictionary) -> void:
+	var arr: Array = mesh.surface_get_arrays(0)
+	var vs: PackedVector3Array = arr[Mesh.ARRAY_VERTEX]
+	var indices: PackedInt32Array = arr[Mesh.ARRAY_INDEX] if arr[Mesh.ARRAY_INDEX] != null else PackedInt32Array()
+	var count: int = indices.size() if not indices.is_empty() else vs.size()
+	for i in range(0, count, 3):
+		var keys: Array[String] = []
+		for j in range(3):
+			var v: Vector3 = vs[indices[i + j]] if not indices.is_empty() else vs[i + j]
+			keys.append("%d,%d,%d" % [roundi(v.x * 10000.0), roundi(v.y * 10000.0), roundi(v.z * 10000.0)])
+		for j in range(3):
+			var a: String = keys[j]
+			var b: String = keys[(j + 1) % 3]
+			var key: String = a + "/" + b if a < b else b + "/" + a
+			edges[key] = int(edges.get(key, 0)) + 1
+
+
+## Cheap geometry fixtures: terrain plus section only, no organism builders.
+func _section_extremes() -> void:
+	for n in [4, 24]:
+		var o = OBJ.new()
+		o._built = true
+		o.record = "off"
+		o.size = n
+		o.relief = 1.0
+		_root.add_child(o)
+		o._patch = Node3D.new()
+		o.add_child(o._patch)
+		o._terrain()
+		o._moist.resize(n * n)
+		for z in range(n):
+			for x in range(n):
+				o._moist[z * n + x] = float(x) / float(n - 1)
+		o._ground()
+		o._section()
+		_check_section(o)
+		o.queue_free()

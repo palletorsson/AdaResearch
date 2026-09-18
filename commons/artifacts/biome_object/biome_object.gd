@@ -65,7 +65,7 @@ const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 const FoliageCards := preload("res://commons/biome_layers/foliage_cards.gd")
 
-const GENERATION := 9
+const GENERATION := 10
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
@@ -77,6 +77,7 @@ const CHANGELOG: Array[String] = [
 	"gen 7: water depth under the canopy, the web's light by its growth. The pool's disc is a 48-segment SurfaceTool fan, 6 rings deep (289 vertices, 528 tris — one ring cannot carry a profile), its vertex colours the albedo, no emission, roughness 0.08, metallic 0.3: centre (0.06, 0.20, 0.44, 0.92) to rim (0.24, 0.50, 0.68, 0.62) by u^1.5, every vertex's rgb × (1 − 0.45·vs), vs = max over trees of (1 − d/canopy)^0.6 with d the vertex's distance to the trunk — the ground's shade law — the alpha kept so the shaded water is darker, not thinner; the pool built AFTER _dispatch() (terrain, ecology, minerals, dispatch, pool, ground, cover) so vs reads the measured canopy — nothing between read the Pool node and the pool's rng is the seed's, so no draw moved. Each mycelium mat's MyceliumWeb material duplicated (mats share no instance) and its emission_energy_multiplier set to lerp(0.55, 0.22, t), t = (25 − gen)/15 — a rim mat carries no gen and reads 25 — the colour kept, the spores untouched. The cluster spires' emission col × 0.15 (was 0.5), roughness 0.35 (was 0.22); the scree untouched Amended before the render by the gen-6 critic: the ring dropped (the depth gradient is the edge) and the web's light reversed — dim (0.22) at the finished rim, bright (0.55) at the growing tip on the bark",
 	"gen 8: grass and plant foliage as transparent images (Palle) — the cover's grass, reeds, ferns, meadow plants and litter are alpha-cut cards on two crossed quads, images from commons/biome_layers/foliage/ (tools/make_foliage_cards.py draws the defaults, any same-named PNG replaces one) loaded at runtime, tinted near white by dryness and shade; mushrooms keep their mesh; a missing image falls back to the old mesh",
 	"gen 9: the foliage cards drawn IN the engine from the seed (Palle: can we make the foliage card procedurally?) — commons/biome_layers/foliage_cards.gd paints grass, reed, fern, plant and litter on an Image at build time with a disc brush along Bézier strokes and sin-profiled leaves; the seed shapes them, the moisture changes what grows (blade count and straw, cattail heads only when wet, fuller ferns and broader leaves when wet, redder litter when dry); cached per kind, seed and moisture band; `#foliage:files` keeps the PNG set",
+	"gen 10: the ground in section - four soil/rock bands and a sealed underside follow the existing terrain boundary exactly; a thicker dark organic layer reads the local moisture, the surface strip reads mineral ground; a schematic profile, not simulated geology; one mesh/material, 864 triangles at size 12, no changed organism placement or foliage",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 const K_TREE := 0
@@ -118,6 +119,7 @@ var _patch: Node3D
 var _dispatcher: Node3D
 var _counts: Dictionary = {}
 var _build_ms: int = 0
+var _section_columns: Array[Dictionary] = [] # the four cut faces: local positions, moisture, layer levels
 var _cover_tufts: Array[Dictionary] = [] # CPU placement plan: groups share type, colour and neighbours
 
 
@@ -172,6 +174,7 @@ func _build() -> void:
 	_dispatch()
 	_water_pool() # gen 7: after the bodies — the disc's shade reads the canopy _dispatch() measured
 	_ground()     # gen 4: after the bodies — the paint reads the canopy _dispatch() measured
+	_section()
 	_cover()
 	_build_ms = Time.get_ticks_msec() - t0
 	print("[biome_object] gen %d %s: water %d, mineral %d (scree %d), fungus %d (path %d), trees %d, flowers %d, creatures %d, cover %d, connections %d, paint %d — %d ms (tree %d, flower %d, fungus %d, creature %d)" % [
@@ -580,6 +583,89 @@ func _ground() -> void:
 	g.set_field(_field, size, size, _max_h)
 	g.set_paint_layers(_moisture_paint(), seed)
 	_patch.add_child(g)
+
+
+## The cut edge is a schematic soil profile, not a geological simulation. The
+## top stays exactly where it was; only the sides and underside are added.
+const SECTION_BASE_Y := -0.42
+
+
+func _section() -> void:
+	var started := Time.get_ticks_msec()
+	var ground = _patch.get_node("Ground")
+	var steps: int = ground.resolution # match the actual top mesh, including size 4's minimum
+	var half := float(size) * 0.5
+	var corners: Array[Vector2] = [Vector2(-half, -half), Vector2(half, -half),
+		Vector2(half, half), Vector2(-half, half)]
+	var normals: Array[Vector3] = [Vector3.FORWARD, Vector3.RIGHT, Vector3.BACK, Vector3.LEFT]
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	_section_columns.clear()
+	for edge in range(4):
+		var columns: Array[Dictionary] = []
+		for i in range(steps + 1):
+			var p: Vector2 = corners[edge].lerp(corners[(edge + 1) % 4], float(i) / float(steps))
+			var column := _section_column(p)
+			columns.append(column)
+			_section_columns.append(column)
+		for i in range(steps):
+			var a: Dictionary = columns[i]
+			var b: Dictionary = columns[i + 1]
+			for band in range(4):
+				var pa: Vector2 = a["at"]
+				var pb: Vector2 = b["at"]
+				var vertices: Array[Vector3] = [Vector3(pa.x, a["levels"][band], pa.y),
+					Vector3(pb.x, b["levels"][band], pb.y),
+					Vector3(pa.x, a["levels"][band + 1], pa.y),
+					Vector3(pb.x, b["levels"][band + 1], pb.y)]
+				# Godot's clockwise front faces; explicit outward normals keep each cut flat.
+				for ix in [0, 2, 1, 1, 2, 3]:
+					st.set_normal(normals[edge])
+					st.set_color(a["colours"][band] if ix % 2 == 0 else b["colours"][band])
+					st.add_vertex(vertices[ix])
+	# Seal the underside with the same perimeter subdivisions as the sides. This
+	# avoids T-junctions and keeps the closed boundary inspectable from below.
+	for edge in range(4):
+		for i in range(steps):
+			var a: Vector2 = corners[edge].lerp(corners[(edge + 1) % 4], float(i) / float(steps))
+			var b: Vector2 = corners[edge].lerp(corners[(edge + 1) % 4], float(i + 1) / float(steps))
+			for p in [Vector2.ZERO, b, a]:
+				st.set_normal(Vector3.DOWN)
+				st.set_color(Color(0.24, 0.25, 0.25))
+				st.add_vertex(Vector3(p.x, SECTION_BASE_Y, p.y))
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.vertex_color_is_srgb = true # these soil swatches are authored as display colours
+	mat.roughness = 0.94
+	var section := MeshInstance3D.new()
+	section.name = "Section"
+	section.mesh = st.commit()
+	section.material_override = mat
+	_patch.add_child(section)
+	_counts["section_triangles"] = steps * 4 * 9
+	_counts["ms_section"] = Time.get_ticks_msec() - started
+
+
+func _section_column(p: Vector2) -> Dictionary:
+	var half := float(size) * 0.5
+	var x := clampi(int(floor(p.x + half)), 0, size - 1)
+	var z := clampi(int(floor(p.y + half)), 0, size - 1)
+	var m: float = clampf(_moist[z * size + x], 0.0, 1.0)
+	var rock: float = clampf(float(_rock.get(Vector2i(x, z), 0.0)), 0.0, 1.0)
+	var top := _h_at(p.x, p.y)
+	var soil_bottom := top - 0.06
+	var humus_bottom := soil_bottom - (0.04 + 0.22 * m)
+	# The rock boundary rises with the terrain; enough subsoil remains even at
+	# the lowest shore. All bands remain ordered with the full moisture range.
+	var rock_top := minf(humus_bottom - 0.08, lerpf(SECTION_BASE_Y, top, 0.42))
+	var skin := Color(0.62, 0.55, 0.39).lerp(Color(0.25, 0.34, 0.16), m)
+	skin = skin.lerp(Color(0.56, 0.55, 0.50), rock)
+	var humus := Color(0.30, 0.23, 0.14).lerp(Color(0.13, 0.12, 0.09), m)
+	var subsoil := Color(0.53, 0.40, 0.26).lerp(Color(0.40, 0.32, 0.23), m)
+	var bedrock := Color(0.32, 0.34, 0.35).lerp(Color(0.42, 0.42, 0.40), rock)
+	return {"at": p, "moisture": m, "levels": PackedFloat32Array([
+		top, soil_bottom, humus_bottom, rock_top, SECTION_BASE_Y]),
+		"colours": PackedColorArray([skin, humus, subsoil, bedrock])}
 
 
 ## gen 1: the moisture painted onto the ground as "shader" brush layers, the shape the
