@@ -39,7 +39,9 @@ class_name BiomeObject
 ##   cover       grass and stubble by moisture, on the surface, everywhere; the understory
 ##               follows the canopy — ferns and toadstools under a tree, toadstools along the
 ##               web, the grass green where wet and straw where dry, bare where driest (gen 3);
-##               none within 0.8 m of a crystal cluster — bare rock (gen 5)
+##               none within 0.8 m of a crystal cluster — bare rock (gen 5); moisture-sized
+##               tufts, shore beds and litter inside the canopy; every member checks water,
+##               bare rock and its mesh footprint, capped at 864 cover instances (gen 6)
 ##
 ## Every organism is the old biome's builder, reached through BiomePaintDispatcher exactly as
 ## a painted map cell would reach it, only the CELL is chosen by moisture, height and slope
@@ -48,7 +50,8 @@ class_name BiomeObject
 ## RSI: this file carries its GENERATION and CHANGELOG; tools/biome_rsi.py renders the same
 ## six DNAs every generation, measures the tiles (integration-v1: kingdoms present +
 ## connections, named), records the lineage, and a critic proposes the next change. A
-## generation that measures worse is culled and the code returns to its parent.
+## critic records a kept/culled verdict after looking at matched images: named measures
+## can flag a regression but do not replace that judgment.
 ##
 ## Record: with record=on the build writes res://ada_run/biome_rsi/state/<label>.json — the
 ## counts the driver reads (organisms per kingdom, connections, cover, heights, build ms).
@@ -57,7 +60,7 @@ const Dispatcher := preload("res://commons/biome_layers/biome_paint_dispatcher.g
 const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 
-const GENERATION := 5
+const GENERATION := 6
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
@@ -65,6 +68,7 @@ const CHANGELOG: Array[String] = [
 	"gen 3: the bodies grown by the object — every node the dispatcher hands back scaled about its foot: a tree by k = (1.5 + 1.3·rank)(0.75 + 0.35·moisture), capped so the measured canopy (the merged branch mesh's AABB + 0.25·dna.scale) stays inside the footprint, a flower by 1.4 + 0.4·moisture, a creature 1.6, a mat 1.0; an edge cell scores 0.4 less in the tree draw; each kingdom's spawn timed into ms_<kingdom>. The understory follows the canopy: cover accepted at 0.06 + 0.94·m², ferns and toadstools under a canopy, toadstools within 0.7 m of a mat, grass lerped green to straw by dryness, scale (0.5 + 0.7·m)·1.4. The minerals leave the shore: 2.5 cells from the water, off the outer ring, a retry at h > 0.5, the spires scaled by height and dryness",
 	"gen 4: the canopy casts a layer — the ground built AFTER the bodies (terrain, ecology, pool, minerals, dispatch, ground, cover) so the paint reads the canopy _dispatch() measured; a fifth brush layer, shade [0.11, 0.17, 0.09], painted last: per dry-land cell v = max over trees of 0.85·(1 − d/canopy)^0.6, kept over 0.02; the meadow at the drip line — u the cell's distance to the nearest trunk over rs = 0.6·(0.6 + 0.2·inten)·k, no flower under u 0.85, the ring to 1.6 scoring 0.25 more (the jitter still drawn, so the creatures' stream holds); the succession clamped to inten 1..4, so no tree flips to the lod-3 flat-leaf species — the six canopies one species",
 	"gen 5: scree — the ridge comes down to the water. After each cluster's shard loop (its draws untouched) a second rng seeded from the cell lays 3 + round(4·relief) shards down the slope: down = −(height gradient at the cluster, ±0.5 m samples), toward the basin when |g| < 0.02 or when downhill leads away from it (measured: from the rim's ridge cells the bare gradient ran 11 of 16 trails off the plate and none to the water); shard i at p + down·(0.55 + 0.5i + 0.08i²), the trail ending at a water cell, the edge (the prism's half-diagonal 0.12·scale inside it), a flooded sample (h < wl + 0.02) or a rise (h over the trail's lowest point + 0.02); each a PrismMesh (0.09, randf(0.08, 0.2)·(1 − 0.6i/n), 0.09)·scale lying at rotation (0.6..1.3, 0..TAU, ±0.3), the crystal colour at emission ×0.2, added to the patch at the sample, its centre 0.3 h above the surface. A _rock map — 0.6 at the cluster, 0.3 on its eight neighbours, 0.35 per scree cell (max) — painted as a sixth layer, rock [0.56, 0.55, 0.50], after the silt and before the shade; the cover skips samples within 0.8 m of a cluster; the ridge is 3.0 cells from the water",
+	"gen 6: ground cover grows in moisture-sized tufts, reed beds at the shore and flat litter beneath the inner canopy; each member respects water, mineral ground and the footprint, the group has a private seeded rng, the budget is at most 864 instances; all other kingdom placement rules are unchanged",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 const K_TREE := 0
@@ -103,6 +107,7 @@ var _patch: Node3D
 var _dispatcher: Node3D
 var _counts: Dictionary = {}
 var _build_ms: int = 0
+var _cover_tufts: Array[Dictionary] = [] # CPU placement plan: groups share type, colour and neighbours
 
 
 func apply_grid_config(config: Dictionary) -> void:
@@ -904,91 +909,167 @@ func _dispatch() -> void:
 ## grass everywhere. gen 3: the understory FOLLOWS THE CANOPY and reads the gradient — accepted
 ## by m² so the driest ground is bare; ferns and toadstools under a tree's measured canopy,
 ## darker and smaller in its shade; toadstools within 0.7 m of a fungus mat; the grass lerped
-## green to straw by dryness, per blade.
+## green to straw by dryness. Gen 6 groups the samples: each tuft shares a colour and
+## species, has its own seeded member stream, and reads canopy/shore conditions. Each
+## member checks its own landing and mesh bounds; counts and the CPU plan remain inspectable.
 func _cover() -> void:
+	var started := Time.get_ticks_msec()
+	_cover_tufts.clear()
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash([seed, "cover"])
 	var want: int = clampi(int(round(float(size * size) * (1.2 + 2.6 * wildness) * (0.5 + 0.6 * moisture))), 40, 480)
-	var by_type: Dictionary = {}     # type -> [[Transform3D, Color], ...]
+	var budget := int(floor(float(want) * 1.8))
+	var by_type: Dictionary = {}
+	var meshes: Dictionary = {}
 	var placed := 0
 	var tries := 0
 	var green := Color(0.22, 0.42, 0.14)
 	var straw := Color(0.68, 0.60, 0.30)
-	while placed < want and tries < want * 4:
+	var half := float(size) * 0.5
+	while placed < budget and tries < want * 4:
 		tries += 1
-		var wx: float = rng.randf_range(-float(size) * 0.5 + 0.2, float(size) * 0.5 - 0.2)
-		var wz: float = rng.randf_range(-float(size) * 0.5 + 0.2, float(size) * 0.5 - 0.2)
-		var cx: int = clampi(int(floor(wx + float(size) * 0.5)), 0, size - 1)
-		var cz: int = clampi(int(floor(wz + float(size) * 0.5)), 0, size - 1)
-		var key := Vector2i(cx, cz)
-		if _water.has(key):
-			continue
-		# gen 5: bare rock — nothing grows within 0.8 m of a crystal cluster
-		var on_rock := false
-		for cp in _clusters:
-			if cp.distance_to(Vector2(wx, wz)) < 0.8:
-				on_rock = true
-				break
-		if on_rock:
-			continue
-		var m: float = _moist[cz * size + cx]
-		if rng.randf() > 0.06 + 0.94 * m * m:
-			continue
-		var d: float = _water_dist(cx, cz)
-		# dt to the nearest trunk and cr its scaled canopy radius; dw to the nearest fungus mat
+		var wx: float = rng.randf_range(-half + 0.2, half - 0.2)
+		var wz: float = rng.randf_range(-half + 0.2, half - 0.2)
 		var here := Vector2(wx, wz)
-		var dt: float = 99.0
-		var cr: float = 0.0
-		for t in _trees:
-			var dd: float = here.distance_to(_pos[t])
+		if not _cover_land(here):
+			continue
+		var cx: int = clampi(int(floor(wx + half)), 0, size - 1)
+		var cz: int = clampi(int(floor(wz + half)), 0, size - 1)
+		var m: float = _moist[cz * size + cx]
+		var d: float = _water_dist(cx, cz)
+		var acceptance: float = 0.06 + 0.94 * m * m
+		if d < 1.6:
+			acceptance = maxf(acceptance, 0.5)
+		if rng.randf() > acceptance:
+			continue
+		var dt := 99.0
+		var cr := 0.0
+		for tree in _trees:
+			var dd: float = here.distance_to(_pos[tree])
 			if dd < dt:
 				dt = dd
-				cr = float(_canopy.get(t, 0.0))
-		var dw: float = 99.0
+				cr = float(_canopy.get(tree, 0.0))
+		var dw := 99.0
 		for mp in _mats:
 			dw = minf(dw, here.distance_to(mp))
-		var t := "grass"
-		var r: float = rng.randf()
-		var shade := false
-		if d < 1.6 and r < 0.45:
-			t = "reed"
-		elif dt < cr:
-			t = "fern" if r < 0.6 else "mushroom"
-			shade = true
-		elif dw < 0.7 and r < 0.5:
-			t = "mushroom"
-		elif m > 0.45 and r < 0.55:
-			t = "flower"
-		if not by_type.has(t):
-			by_type[t] = []
+		var kind := "grass"
+		var choice: float = rng.randf()
+		var shaded := dt < cr
+		if cr > 0.0 and dt < cr * 0.35:
+			kind = "litter"
+		elif d < 1.6 and choice < 0.45:
+			kind = "reed"
+		elif shaded:
+			kind = "fern" if choice < 0.6 else "mushroom"
+		elif dw < 0.7 and choice < 0.5:
+			kind = "mushroom"
+		elif m > 0.45 and choice < 0.55:
+			kind = "flower"
 		var sc: float = (0.5 + 0.7 * m) * 1.4
-		var col: Color = Cover.color_for(t, rng)
-		if t == "grass":
+		var col: Color = Cover.color_for(kind, rng)
+		if kind == "grass":
 			var j: float = rng.randf_range(-0.04, 0.04)
 			col = green.lerp(straw, clampf(1.0 - 1.3 * m, 0.0, 1.0)) + Color(j, j, j, 0.0)
-		if shade:
+		if shaded:
 			sc *= 0.8
 			col = Color(col.r * 0.7, col.g * 0.7, col.b * 0.7, col.a)
-		var xf := Transform3D(Basis(Vector3.UP, rng.randf_range(0.0, TAU)).scaled(Vector3(sc, sc, sc)), Vector3(wx, _h_at(wx, wz), wz))
-		(by_type[t] as Array).append([xf, col])
-		placed += 1
-	for t in by_type.keys():
-		var items: Array = by_type[t]
+		if kind == "litter":
+			sc *= 0.6
+			col = Color(0.36, 0.30, 0.14)
+		var yaw: float = rng.randf_range(0.0, TAU)
+		# The group has its own stream: adding a member cannot consume the centre sampler.
+		var tuft_rng := RandomNumberGenerator.new()
+		tuft_rng.seed = hash([seed, "cover_tuft", tries])
+		var count := 2 + int(round(6.0 * m))
+		var radius := 0.15 + 0.30 * m
+		match kind:
+			"reed":
+				count = 4 + int(round(6.0 * m))
+				radius = 0.25 + 0.20 * m
+			"fern":
+				count = 2 + int(round(3.0 * m))
+			"mushroom":
+				count = tuft_rng.randi_range(1, 2)
+				radius = 0.18
+			"flower": count = 3 + int(round(4.0 * m))
+			"litter": count = 3 + int(round(3.0 * m))
+		if not meshes.has(kind):
+			meshes[kind] = Cover.mesh_for("fern" if kind == "litter" else kind)
+		var mesh: Mesh = meshes[kind]
+		var members: Array = []
+		for blade in count:
+			if placed >= budget:
+				break
+			var angle: float = tuft_rng.randf() * TAU
+			var rad: float = radius * sqrt(tuft_rng.randf())
+			var q: Vector2 = here + Vector2(cos(angle), sin(angle)) * rad
+			if not _cover_land(q):
+				continue
+			# A litter member must remain under an inner canopy, including at a tuft's edge.
+			if kind == "litter":
+				var under := false
+				for tree in _trees:
+					if q.distance_to(_pos[tree]) < float(_canopy.get(tree, 0.0)) * 0.35:
+						under = true
+						break
+				if not under:
+					continue
+			var scale_: float = sc * (1.0 - 0.4 * rad / radius) * tuft_rng.randf_range(0.85, 1.15)
+			var basis := Basis(Vector3.UP, yaw + angle)
+			if kind == "litter":
+				basis = basis * Basis(Vector3.RIGHT, -PI * 0.5)
+			basis = basis.scaled(Vector3.ONE * scale_)
+			var bounds: AABB = Transform3D(basis, Vector3.ZERO) * mesh.get_aabb()
+			if q.x + bounds.position.x < -half or q.x + bounds.end.x > half or q.y + bounds.position.z < -half or q.y + bounds.end.z > half:
+				continue
+			# All cover meshes sit by their foot; centred reed/cap meshes must not be half buried.
+			var xf := Transform3D(basis, Vector3(q.x, _h_at(q.x, q.y) - bounds.position.y + 0.012, q.y))
+			members.append([xf, col])
+			if not by_type.has(kind):
+				by_type[kind] = []
+			(by_type[kind] as Array).append([xf, col])
+			placed += 1
+		if not members.is_empty():
+			_cover_tufts.append({"type": kind, "centre": here, "moisture": m, "radius": radius, "members": members})
+	for kind in by_type.keys():
+		var items: Array = by_type[kind]
 		var mm := MultiMesh.new()
 		mm.transform_format = MultiMesh.TRANSFORM_3D
 		mm.use_colors = true
-		mm.mesh = Cover.mesh_for(String(t))
+		mm.mesh = meshes[kind]
 		mm.instance_count = items.size()
-		for i in range(items.size()):
+		for i in items.size():
 			mm.set_instance_transform(i, items[i][0])
 			mm.set_instance_color(i, items[i][1])
 		var mmi := MultiMeshInstance3D.new()
-		mmi.name = "Cover_%s" % String(t)
+		mmi.name = "Cover_%s" % String(kind)
 		mmi.multimesh = mm
 		mmi.material_override = Cover.foliage_material()
 		_patch.add_child(mmi)
 	_counts["cover"] = placed
+	_counts["cover_tufts"] = _cover_tufts.size()
+	_counts["cover_litter"] = (by_type.get("litter", []) as Array).size()
+	_counts["ms_cover"] = Time.get_ticks_msec() - started
 
+
+## Check every displaced tuft member: a dry centre does not guarantee dry neighbours.
+func _cover_land(p: Vector2) -> bool:
+	var half := float(size) * 0.5
+	if absf(p.x) > half - 0.02 or absf(p.y) > half - 0.02:
+		return false
+	var cx := int(floor(p.x + half))
+	var cz := int(floor(p.y + half))
+	var key := Vector2i(cx, cz)
+	if _water.has(key) or _moist[cz * size + cx] < 0.18:
+		return false
+	if not _water.is_empty() and _h_at(p.x, p.y) < _water_level() + 0.02:
+		return false
+	if float(_rock.get(key, 0.0)) >= 0.35:
+		return false
+	for cp in _clusters:
+		if cp.distance_to(p) < 0.8:
+			return false
+	return true
 
 # ── the record ────────────────────────────────────────────────────────────────
 func get_state() -> Dictionary:

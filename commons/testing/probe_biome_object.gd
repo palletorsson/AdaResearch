@@ -457,6 +457,8 @@ func _run() -> void:
 		_check(rock_at_cluster, "%s: rock is painted wherever a cluster stands (%d cells)" % [lab, rock_cells.size()])
 		# gen 5 (d): the ridge is 3.0 cells from the water
 		_check(min_3, "%s: every mineral cell is 3.0 cells from the water (%d minerals)" % [lab, n_cluster])
+	for o in [a, b, c, d4]:
+		_check_cover(o)
 	var ca: Dictionary = _world_counts(a.get_state()["counts"])
 	var cb: Dictionary = _world_counts(b.get_state()["counts"])
 	var cc: Dictionary = _world_counts(c.get_state()["counts"])
@@ -465,6 +467,7 @@ func _run() -> void:
 	_check(int(cc["mineral"]) >= int(cb["mineral"]), "higher relief grows at least as many crystals (%d vs %d)" % [int(cc["mineral"]), int(cb["mineral"])])
 	var twin = await _grow(7, 0.5, 0.5, 0.6)
 	_check(str(_world_counts(twin.get_state()["counts"])) == str(ca), "the same seed grows the same counts")
+	_check(var_to_str(twin._cover_tufts) == var_to_str(a._cover_tufts), "cover group transforms and colours replay exactly at a translated instance")
 	_check(twin._basin_c == a._basin_c, "the same seed digs the basin in the same place")
 	var other = await _grow(8, 0.5, 0.5, 0.6)
 	_check(other._basin_c != a._basin_c or str(_world_counts(other.get_state()["counts"])) != str(ca), "a different seed grows a different world")
@@ -504,3 +507,65 @@ func _grow(seed: int, moisture: float, relief: float, wildness: float):
 	await process_frame
 	await process_frame
 	return o
+
+
+## Generation 6: inspect the CPU plan that feeds the MultiMeshes. The headless dummy
+## renderer does not reliably read GPU transforms back; draw counts are checked separately.
+func _check_cover(o) -> void:
+	var lab: String = o.label()
+	var members := 0
+	var grouped := 0
+	var litter := 0
+	var in_bounds := true
+	var supported := true
+	var dry := true
+	var bare_rock := true
+	var inner_canopy := true
+	var coherent := true
+	var flat_litter := true
+	var half: float = float(o.size) * 0.5
+	for tuft: Dictionary in o._cover_tufts:
+		var kind: String = tuft.type
+		var mesh: Mesh = o.Cover.mesh_for("fern" if kind == "litter" else kind)
+		var group: Array = tuft.members
+		if group.size() > 1: grouped += 1
+		for member in group:
+			members += 1
+			var xf: Transform3D = member[0]
+			var p := Vector2(xf.origin.x, xf.origin.z)
+			var box: AABB = xf * mesh.get_aabb()
+			in_bounds = in_bounds and box.position.x >= -half - 0.001 and box.end.x <= half + 0.001 and box.position.z >= -half - 0.001 and box.end.z <= half + 0.001
+			coherent = coherent and p.distance_to(tuft.centre) <= float(tuft.radius) + 0.001 and member[1] == group[0][1]
+			supported = supported and absf(box.position.y - o._h_at(p.x, p.y)) <= 0.03
+			var cell := Vector2i(int(floor(p.x + half)), int(floor(p.y + half)))
+			dry = dry and not o._water.has(cell) and o._h_at(p.x, p.y) >= o._water_level() + 0.019
+			bare_rock = bare_rock and float(o._rock.get(cell, 0.0)) < 0.35
+			for cp in o._clusters:
+				bare_rock = bare_rock and p.distance_to(cp) >= 0.799
+			if kind == "litter":
+				litter += 1
+				var sheltered := false
+				for tree in o._trees:
+					if p.distance_to(o._pos[tree]) < float(o._canopy.get(tree, 0.0)) * 0.35 + 0.001:
+						sheltered = true
+				inner_canopy = inner_canopy and sheltered
+				flat_litter = flat_litter and absf(xf.basis.z.normalized().dot(Vector3.UP)) > 0.99
+	var rendered := 0
+	for child in o._patch.get_children():
+		if child is MultiMeshInstance3D and String(child.name).begins_with("Cover_"):
+			rendered += child.multimesh.instance_count
+	var counts: Dictionary = o.get_state().counts
+	_check(grouped > 0 and coherent, "%s: grouped cover shares a local centre and colour" % lab)
+	_check(members == rendered and members == int(counts.cover) and members <= 864, "%s: cover plan matches bounded draw count (%d)" % [lab, members])
+	_check(in_bounds and supported, "%s: cover mesh bounds inside plate, feet at sampled surface" % lab)
+	_check(dry and bare_rock, "%s: displaced members respect water, scree and crystal exclusions" % lab)
+	_check(inner_canopy and flat_litter and litter == int(counts.cover_litter), "%s: litter is flat under an inner canopy (%d pieces)" % [lab, litter])
+	if o.seed == 11:
+		_check(litter > 0, "wet-world inner canopy produces a visible litter layer")
+	# Exact fixture matches have generation-5 records: preserve every other kingdom count.
+	var parent := "res://ada_run/biome_rsi/gen_5/state_%s.json" % lab
+	if FileAccess.file_exists(parent):
+		var old: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(parent))
+		for key in ["water", "mineral", "scree", "fungus", "fungus_path", "tree", "flower", "creature", "connections", "paint"]:
+			_check(counts[key] == old.counts[key], "%s: parent %s count preserved" % [lab, key])
+	print("    [cover] %s: %d tufts, %d members, %d litter, %d ms" % [lab, o._cover_tufts.size(), members, litter, int(counts.ms_cover)])
