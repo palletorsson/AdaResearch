@@ -13,12 +13,17 @@ class_name BiomeObject
 ##               shore (gen 1); the moisture PAINTED on as brush layers (gen 1) — the WHOLE
 ##               gradient, ochre wherever it is dry, moss wherever wet, a sand shore on the
 ##               shelf, silt darkest at the middle of the pool (gen 2); the canopy's SHADE
-##               painted last, read off the measured canopy — dark moss at the trunk (gen 4)
+##               painted last, read off the measured canopy — dark moss at the trunk (gen 4);
+##               bare ROCK painted at every crystal cluster and under its scree (gen 5)
 ##   water       a pool in the basin (the old biome's own pool: disc, ripple rings, reeds), the
 ##               disc lapping the shelf and the reeds standing on the shore (gen 1); one thin
 ##               ring set toward the oldest tree — an edge, not a target (gen 2)
-##   mineral     crystal clusters on the dry ridge — 2.5 cells from the water and off the outer
-##               ring, the spires tallest where it is high and dry (gen 3)
+##   mineral     crystal clusters on the dry ridge — 3 cells from the water and off the outer
+##               ring, the spires tallest where it is high and dry (gen 3); SCREE from every
+##               cluster — small shards at growing intervals down the slope (the height
+##               gradient; the basin's way when it is flat or falls off the plate), stopping
+##               at the water, the edge or a rise: the ridge comes down to the water, the
+##               web's arrow reversed (gen 5)
 ##   fungus      mycelium filaments on the wet rim of the pool, and a mycelium PATH from the
 ##               pool out to every tree — the network that joins water to wood; sampled ON the
 ##               line every 0.5 m, dry cells only, the last mat touching the trunk, finished at
@@ -33,7 +38,8 @@ class_name BiomeObject
 ##   fauna       creatures beside the flowers and the fungus
 ##   cover       grass and stubble by moisture, on the surface, everywhere; the understory
 ##               follows the canopy — ferns and toadstools under a tree, toadstools along the
-##               web, the grass green where wet and straw where dry, bare where driest (gen 3)
+##               web, the grass green where wet and straw where dry, bare where driest (gen 3);
+##               none within 0.8 m of a crystal cluster — bare rock (gen 5)
 ##
 ## Every organism is the old biome's builder, reached through BiomePaintDispatcher exactly as
 ## a painted map cell would reach it, only the CELL is chosen by moisture, height and slope
@@ -51,13 +57,14 @@ const Dispatcher := preload("res://commons/biome_layers/biome_paint_dispatcher.g
 const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 
-const GENERATION := 4
+const GENERATION := 5
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
 	"gen 2: succession from the water (the trees ranked by distance to it, the shore tree inten 3-5 and the frontier tree a sapling), the mycelium path sampled on the line every 0.5 m from 0.85 m past the pool to 0.45 m short of the trunk, skipping flooded cells, gen 25 at the water and 10 at the tree; the ground painted with the whole gradient (ochre wherever dry, moss, a sand shore, silt by depth) and the pool's two glowing rings replaced by one thin ring set toward the oldest tree, the disc at alpha 0.72",
 	"gen 3: the bodies grown by the object — every node the dispatcher hands back scaled about its foot: a tree by k = (1.5 + 1.3·rank)(0.75 + 0.35·moisture), capped so the measured canopy (the merged branch mesh's AABB + 0.25·dna.scale) stays inside the footprint, a flower by 1.4 + 0.4·moisture, a creature 1.6, a mat 1.0; an edge cell scores 0.4 less in the tree draw; each kingdom's spawn timed into ms_<kingdom>. The understory follows the canopy: cover accepted at 0.06 + 0.94·m², ferns and toadstools under a canopy, toadstools within 0.7 m of a mat, grass lerped green to straw by dryness, scale (0.5 + 0.7·m)·1.4. The minerals leave the shore: 2.5 cells from the water, off the outer ring, a retry at h > 0.5, the spires scaled by height and dryness",
 	"gen 4: the canopy casts a layer — the ground built AFTER the bodies (terrain, ecology, pool, minerals, dispatch, ground, cover) so the paint reads the canopy _dispatch() measured; a fifth brush layer, shade [0.11, 0.17, 0.09], painted last: per dry-land cell v = max over trees of 0.85·(1 − d/canopy)^0.6, kept over 0.02; the meadow at the drip line — u the cell's distance to the nearest trunk over rs = 0.6·(0.6 + 0.2·inten)·k, no flower under u 0.85, the ring to 1.6 scoring 0.25 more (the jitter still drawn, so the creatures' stream holds); the succession clamped to inten 1..4, so no tree flips to the lod-3 flat-leaf species — the six canopies one species",
+	"gen 5: scree — the ridge comes down to the water. After each cluster's shard loop (its draws untouched) a second rng seeded from the cell lays 3 + round(4·relief) shards down the slope: down = −(height gradient at the cluster, ±0.5 m samples), toward the basin when |g| < 0.02 or when downhill leads away from it (measured: from the rim's ridge cells the bare gradient ran 11 of 16 trails off the plate and none to the water); shard i at p + down·(0.55 + 0.5i + 0.08i²), the trail ending at a water cell, the edge (the prism's half-diagonal 0.12·scale inside it), a flooded sample (h < wl + 0.02) or a rise (h over the trail's lowest point + 0.02); each a PrismMesh (0.09, randf(0.08, 0.2)·(1 − 0.6i/n), 0.09)·scale lying at rotation (0.6..1.3, 0..TAU, ±0.3), the crystal colour at emission ×0.2, added to the patch at the sample, its centre 0.3 h above the surface. A _rock map — 0.6 at the cluster, 0.3 on its eight neighbours, 0.35 per scree cell (max) — painted as a sixth layer, rock [0.56, 0.55, 0.50], after the silt and before the shade; the cover skips samples within 0.8 m of a cluster; the ridge is 3.0 cells from the water",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 const K_TREE := 0
@@ -90,6 +97,8 @@ var _pos: Dictionary = {}            # gen 2: Vector2i -> Vector2 world xz, the 
 var _paths: Dictionary = {}          # gen 2: Vector2i tree -> Array[Vector2i] path cells, water to trunk
 var _canopy: Dictionary = {}         # gen 3: Vector2i tree -> float, the SCALED canopy radius (m), measured at dispatch
 var _mats: Array[Vector2] = []       # gen 3: every fungus body's world xz as placed — the cover's "along the web"
+var _rock: Dictionary = {}           # gen 5: Vector2i -> float, bare rock at the clusters and under the scree — the paint reads it
+var _clusters: Array[Vector2] = []   # gen 5: every crystal holder's world xz — the cover keeps 0.8 m off
 var _patch: Node3D
 var _dispatcher: Node3D
 var _counts: Dictionary = {}
@@ -133,7 +142,7 @@ func label() -> String:
 func _build() -> void:
 	_built = true
 	var t0 := Time.get_ticks_msec()
-	_counts = {"water": 0, "mineral": 0, "fungus": 0, "fungus_path": 0, "tree": 0, "flower": 0,
+	_counts = {"water": 0, "mineral": 0, "scree": 0, "fungus": 0, "fungus_path": 0, "tree": 0, "flower": 0,
 		"creature": 0, "cover": 0, "connections": 0, "paint": 0,
 		"ms_tree": 0, "ms_flower": 0, "ms_fungus": 0, "ms_creature": 0}   # gen 3: the bill, by payer
 	_patch = Node3D.new()
@@ -147,8 +156,8 @@ func _build() -> void:
 	_ground()     # gen 4: after the bodies — the paint reads the canopy _dispatch() measured
 	_cover()
 	_build_ms = Time.get_ticks_msec() - t0
-	print("[biome_object] gen %d %s: water %d, mineral %d, fungus %d (path %d), trees %d, flowers %d, creatures %d, cover %d, connections %d, paint %d — %d ms (tree %d, flower %d, fungus %d, creature %d)" % [
-		GENERATION, label(), _counts["water"], _counts["mineral"], _counts["fungus"], _counts["fungus_path"],
+	print("[biome_object] gen %d %s: water %d, mineral %d (scree %d), fungus %d (path %d), trees %d, flowers %d, creatures %d, cover %d, connections %d, paint %d — %d ms (tree %d, flower %d, fungus %d, creature %d)" % [
+		GENERATION, label(), _counts["water"], _counts["mineral"], _counts["scree"], _counts["fungus"], _counts["fungus_path"],
 		_counts["tree"], _counts["flower"], _counts["creature"], _counts["cover"], _counts["connections"], _counts["paint"], _build_ms,
 		_counts["ms_tree"], _counts["ms_flower"], _counts["ms_fungus"], _counts["ms_creature"]])
 	if record == "on":
@@ -480,7 +489,8 @@ func _nearer_water(p: Vector2i, q: Vector2i) -> bool:
 
 
 ## gen 3: the ridge — the cells above h_min that are dry (m < 0.42), not water, at least 2.5
-## cells from any water cell and off the outer ring.
+## cells from any water cell and off the outer ring. gen 5: 3.0 cells — the scree needs the
+## slope between the cluster and the water to run down.
 func _ridge(h_min: float) -> Array:
 	var out: Array = []
 	for z in range(1, size - 1):
@@ -489,7 +499,7 @@ func _ridge(h_min: float) -> Array:
 			if _water.has(key):
 				continue
 			var h: float = _field[z * size + x]
-			if h > h_min and _moist[z * size + x] < 0.42 and _water_dist(x, z) >= 2.5:
+			if h > h_min and _moist[z * size + x] < 0.42 and _water_dist(x, z) >= 3.0:
 				out.append({"key": key, "h": h})
 	return out
 
@@ -559,7 +569,8 @@ func _ground() -> void:
 ## into its paint texture. gen 2: the WHOLE gradient, so six DNAs give six grounds — ochre
 ## wherever the ground is dry (no height gate; the height only deepens it), moss from m 0.28
 ## up, a sand SHORE on the shelf fading out over one metre, silt under the water darkest at the
-## middle. Painted dry, wet, shore, silt — each over the one before; gen 4: then the shade.
+## middle. Painted dry, wet, shore, silt — each over the one before; gen 5: then the rock,
+## bare stone at the clusters and under the scree; gen 4: then the shade, over everything.
 func _moisture_paint() -> Array:
 	var wet: Array = []
 	var dry: Array = []
@@ -599,10 +610,19 @@ func _moisture_paint() -> Array:
 				v = maxf(v, 0.85 * pow(clampf(1.0 - cc.distance_to(_pos[t]) / cr, 0.0, 1.0), 0.6))
 			if v > 0.02:
 				shade.append([x, z, v])
-	_counts["paint"] = wet.size() + dry.size() + shore.size() + silt.size() + shade.size()
+	# gen 5: the rock — _rock as _minerals() left it (0.6 at a cluster, 0.3 round it, 0.35 under
+	# the scree), walked row-major so the layer is a fact about the grid; painted after the
+	# silt and BEFORE the shade, so a cluster under a canopy is dark rock, not moss
+	var rock: Array = []
+	for z in range(size):
+		for x in range(size):
+			var rk := Vector2i(x, z)
+			if _rock.has(rk):
+				rock.append([x, z, float(_rock[rk])])
+	_counts["paint"] = wet.size() + dry.size() + shore.size() + silt.size() + rock.size() + shade.size()
 	return [_brush_layer([0.74, 0.66, 0.50], dry, "dry"), _brush_layer([0.20, 0.34, 0.18], wet, "wet"),
 		_brush_layer([0.58, 0.54, 0.42], shore, "shore"), _brush_layer([0.16, 0.14, 0.11], silt, "silt"),
-		_brush_layer([0.11, 0.17, 0.09], shade, "shade")]
+		_brush_layer([0.56, 0.55, 0.50], rock, "rock"), _brush_layer([0.11, 0.17, 0.09], shade, "shade")]
 
 
 ## gen 4: each layer carries a name — the probe's handle; the substrate reads past it.
@@ -683,7 +703,21 @@ func _water_pool() -> void:
 		holder.add_child(reed)
 
 
+## gen 5: after each cluster's shards, its SCREE — the ridge comes down to the water. The
+## cluster's rng is left as gen 3 drew it; the scree draws from a second rng seeded from the
+## cell. Down is the height gradient at the cluster (±0.5 m samples), the basin's direction
+## when the ground is flat there (|g| < 0.02) or falls away from it; n = 3 + round(4·relief) samples at
+## 0.55 + 0.5i + 0.08i² m along it, the trail ended by a water cell, the grid edge, a flooded
+## sample (under the water level) or a rise — the scree does not climb. Each shard is a small
+## prism lying on the surface, the crystal's colour at a fifth of its glow, an object mesh
+## like the spires, added to the patch at its world sample (the holder is yawed). The rock
+## map takes 0.6 at the cluster, 0.3 on its eight neighbours and 0.35 per scree cell.
 func _minerals() -> void:
+	_rock.clear()
+	_clusters.clear()
+	var wl: float = _water_level() if not _water.is_empty() else -99.0
+	var basin_w: Vector2 = _basin_c - Vector2(float(size), float(size)) * 0.5
+	var lim: float = float(size) * 0.5
 	for key in _cells.keys():
 		if String(_cells[key]["kingdom"]) != "mineral":
 			continue
@@ -721,6 +755,64 @@ func _minerals() -> void:
 			mi.position = Vector3(off.x, hgt * 0.5, off.y)
 			mi.rotation = Vector3(rng.randf_range(-0.42, 0.42), rng.randf_range(0.0, TAU), rng.randf_range(-0.42, 0.42))
 			holder.add_child(mi)
+		# gen 5: the rock under the cluster, then the scree down the slope
+		_clusters.append(Vector2(p.x, p.z))
+		_rock[key] = 0.6
+		for dz in range(-1, 2):
+			for dx in range(-1, 2):
+				var nk: Vector2i = key + Vector2i(dx, dz)
+				if nk == key or nk.x < 0 or nk.y < 0 or nk.x >= size or nk.y >= size or _water.has(nk):
+					continue
+				_rock[nk] = maxf(float(_rock.get(nk, 0.0)), 0.3)
+		var srng := RandomNumberGenerator.new()
+		srng.seed = hash([seed, "scree", key.x, key.y])
+		var g := Vector2(_h_at(p.x + 0.5, p.z) - _h_at(p.x - 0.5, p.z), _h_at(p.x, p.z + 0.5) - _h_at(p.x, p.z - 0.5))
+		var to_basin: Vector2 = (basin_w - Vector2(p.x, p.z)).normalized()
+		var down: Vector2 = -g.normalized() if g.length() >= 0.02 else to_basin
+		# measured on the six DNAs (gen 5's builder): the ridge's cells are the rim's high dry
+		# cells, and from 11 of 16 clusters the local downhill led OFF the plate — the critic's
+		# rule as written ran no trail to the water. So the basin's direction also stands in
+		# for a downhill that leads away from it; the rise stop below keeps the trail honest
+		# where the ground climbs toward the water (a cluster behind a crest gets no scree)
+		if down.dot(to_basin) <= 0.0:
+			down = to_basin
+		var n: int = 3 + int(round(4.0 * relief))
+		# the prism's half-diagonal at this scale: no shard's mesh past the footprint's edge
+		var margin: float = 0.12 * scale
+		var scol := Color(0.62, 0.70, 0.88)
+		var low_h: float = p.y   # the lowest surface the trail has reached
+		for i in range(n):
+			var q: Vector2 = Vector2(p.x, p.z) + down * (0.55 + 0.5 * float(i) + 0.08 * float(i * i))
+			if absf(q.x) > lim - margin or absf(q.y) > lim - margin:
+				break   # the grid edge
+			var qk := Vector2i(int(floor(q.x + lim)), int(floor(q.y + lim)))
+			if _water.has(qk):
+				break   # a water cell
+			var hq: float = _h_at(q.x, q.y)
+			if hq < wl + 0.02:
+				break   # a flooded sample — the shelf under the water
+			if hq > low_h + 0.02:
+				break   # a rise — scree runs down, never over a lip
+			var mi := MeshInstance3D.new()
+			mi.name = "Scree_%d_%d_%d" % [key.x, key.y, i]
+			var pm := PrismMesh.new()
+			var sh: float = srng.randf_range(0.08, 0.2) * (1.0 - 0.6 * float(i) / float(n))
+			pm.size = Vector3(0.09, sh, 0.09) * scale
+			mi.mesh = pm
+			var mat := StandardMaterial3D.new()
+			mat.albedo_color = scol
+			mat.metallic = 0.4
+			mat.roughness = 0.22
+			mat.emission_enabled = true
+			mat.emission = scol * 0.2
+			mi.material_override = mat
+			# lying on the surface: the centre 0.3 h up, so the lowest edge sinks a few cm in
+			mi.position = Vector3(q.x, hq + 0.3 * pm.size.y, q.y)
+			mi.rotation = Vector3(srng.randf_range(0.6, 1.3), srng.randf_range(0.0, TAU), srng.randf_range(-0.3, 0.3))
+			_patch.add_child(mi)
+			_rock[qk] = maxf(float(_rock.get(qk, 0.0)), 0.35)
+			_counts["scree"] += 1
+			low_h = minf(low_h, hq)
 
 
 ## The living kingdoms go through the old biome's dispatcher, one deposit per cell, each
@@ -830,6 +922,14 @@ func _cover() -> void:
 		var cz: int = clampi(int(floor(wz + float(size) * 0.5)), 0, size - 1)
 		var key := Vector2i(cx, cz)
 		if _water.has(key):
+			continue
+		# gen 5: bare rock — nothing grows within 0.8 m of a crystal cluster
+		var on_rock := false
+		for cp in _clusters:
+			if cp.distance_to(Vector2(wx, wz)) < 0.8:
+				on_rock = true
+				break
+		if on_rock:
 			continue
 		var m: float = _moist[cz * size + cx]
 		if rng.randf() > 0.06 + 0.94 * m * m:

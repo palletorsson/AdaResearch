@@ -22,6 +22,15 @@
 ## stands, every cell dry land at 0.02 < v <= 0.85 and the oldest trunk's own cell at v >= 0.5;
 ## no flower cell within 0.85 rs of any trunk (rs = 0.6·(0.6 + 0.2·inten)·k); in the wettest
 ## world at least one flower on the oldest tree's drip line (0.85..1.6 rs); no tree past inten 4.
+## Gen 5: every world with a mineral cell has scree shards, and each shard's surface height is
+## at or below its cluster's surface height + 0.05 (the scree runs DOWN); no shard stands on a
+## water cell or outside the footprint (its position and its mesh's AABB), and every shard
+## stands on the ground (its centre between the surface and one shard-height above it); the
+## scree count recorded is the shards standing; every trail heads toward the water's side (the
+## last shard's displacement from its cluster has a positive dot with the basin's direction —
+## the bare gradient rule fails this on 11 of 16 clusters); the ground carries a "rock" paint
+## layer before the shade with a painted cell at every cluster's cell; no mineral cell is
+## within 3.0 cells of a water cell.
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_biome_object.gd
 extends SceneTree
@@ -328,6 +337,126 @@ func _run() -> void:
 		if o == wettest:
 			_check(drip0 >= 1, "%s: the wettest world's oldest tree has flowers on its drip line (%d)" % [lab, drip0])
 		_check(inten_max <= 4, "%s: no tree past inten 4 (max %d)" % [lab, inten_max])
+		# gen 5 (a): the scree runs DOWN — every Scree_<x>_<z>_<i> mesh of the patch (an object
+		# mesh, like the spires) has a surface height at or below its cluster's + 0.05, the
+		# cluster read back as the Crystal_<x>_<z> holder; (b) no shard on a water cell or
+		# outside the footprint — its position and its mesh's AABB through its own transform —
+		# and each stands on the ground: its centre between the surface and one shard-height up
+		var n_scree := 0
+		var scree_down := true
+		var scree_off_water := true
+		var scree_in := true
+		var scree_on_ground := true
+		var scree_reach := 0.0
+		var worst_rise := -99.0
+		for ch in o._patch.get_children():
+			if not (ch is MeshInstance3D) or not String(ch.name).begins_with("Scree_"):
+				continue
+			n_scree += 1
+			var parts: PackedStringArray = String(ch.name).split("_")
+			var ck := Vector2i(int(parts[1]), int(parts[2]))
+			var holder: Node3D = o._patch.get_node_or_null("Crystal_%d_%d" % [ck.x, ck.y]) as Node3D
+			var sp: Vector3 = ch.position
+			var hs: float = o._h_at(sp.x, sp.z)
+			if holder == null:
+				if scree_down:
+					print("    scree %s has no cluster" % ch.name)
+				scree_down = false
+			else:
+				var hc: float = o._h_at(holder.position.x, holder.position.z)
+				worst_rise = maxf(worst_rise, hs - hc)
+				if hs > hc + 0.05:
+					if scree_down:
+						print("    scree climbs: %s on a surface at %.3f, its cluster's at %.3f" % [ch.name, hs, hc])
+					scree_down = false
+			var sk := Vector2i(int(floor(sp.x + float(o.size) * 0.5)), int(floor(sp.z + float(o.size) * 0.5)))
+			if o._water.has(sk):
+				if scree_off_water:
+					print("    scree on the water: %s at (%.2f, %.2f), cell %s" % [ch.name, sp.x, sp.z, str(sk)])
+				scree_off_water = false
+			var bb3: AABB = (ch as Node3D).transform * (ch as MeshInstance3D).mesh.get_aabb()
+			scree_reach = maxf(scree_reach, maxf(maxf(absf(bb3.position.x), absf(bb3.end.x)), maxf(absf(bb3.position.z), absf(bb3.end.z))))
+			if absf(sp.x) > half or absf(sp.z) > half or bb3.position.x < -half or bb3.end.x > half or bb3.position.z < -half or bb3.end.z > half:
+				if scree_in:
+					print("    scree out: %s spans x %.2f..%.2f z %.2f..%.2f" % [ch.name, bb3.position.x, bb3.end.x, bb3.position.z, bb3.end.z])
+				scree_in = false
+			var pmz: PrismMesh = (ch as MeshInstance3D).mesh as PrismMesh
+			var lift_max: float = pmz.size.y if pmz != null else 1.0
+			if sp.y < hs - 0.001 or sp.y > hs + lift_max + 0.001:
+				if scree_on_ground:
+					print("    scree off the ground: %s centre %.3f, surface %.3f" % [ch.name, sp.y, hs])
+				scree_on_ground = false
+		var n_cluster := 0
+		var min_3 := true
+		var toward_water := true
+		var n_trails := 0
+		for mk in o._cells.keys():
+			if String(o._cells[mk]["kingdom"]) != "mineral":
+				continue
+			n_cluster += 1
+			if o._water_dist(mk.x, mk.y) < 3.0:
+				if min_3:
+					print("    mineral %s at %.2f cells from the water" % [str(mk), o._water_dist(mk.x, mk.y)])
+				min_3 = false
+			# gen 5 (e): the trail heads toward the water's side — the LAST shard placed (the
+			# highest index), read back from the patch, displaced from its cluster with a positive
+			# dot on the basin's direction
+			var holder2: Node3D = o._patch.get_node_or_null("Crystal_%d_%d" % [mk.x, mk.y]) as Node3D
+			var last: Node3D = null
+			var last_i := -1
+			for ch in o._patch.get_children():
+				if ch is Node3D and String(ch.name).begins_with("Scree_%d_%d_" % [mk.x, mk.y]):
+					var si: int = int(String(ch.name).split("_")[3])
+					if si > last_i:
+						last_i = si
+						last = ch
+			if holder2 != null and last != null:
+				n_trails += 1
+				var pc := Vector2(holder2.position.x, holder2.position.z)
+				var tb: Vector2 = (basin_w - pc).normalized()
+				var run: Vector2 = Vector2(last.position.x, last.position.z) - pc
+				if run.dot(tb) <= 0.0:
+					if toward_water:
+						print("    scree from %s runs away from the water: (%.2f, %.2f) against basin (%.2f, %.2f)" % [str(mk), run.x, run.y, tb.x, tb.y])
+					toward_water = false
+		# gen 5 (c): the rock layer — named "rock", before the shade, a painted cell (v > 0) at
+		# every cluster's own cell
+		var rock: Dictionary = {}
+		var rock_idx := -1
+		var shade_idx := -1
+		for li in range(layers.size()):
+			if layers[li] is Dictionary:
+				var nm := String((layers[li] as Dictionary).get("name", ""))
+				if nm == "rock":
+					rock = layers[li]
+					rock_idx = li
+				elif nm == "shade":
+					shade_idx = li
+		var rock_cells: Array = ((rock["brush"] as Dictionary)["cells"] as Array) if rock.has("brush") else []
+		var rock_at_cluster := true
+		for mk in o._cells.keys():
+			if String(o._cells[mk]["kingdom"]) != "mineral":
+				continue
+			var found := false
+			for rc in rock_cells:
+				if int(rc[0]) == mk.x and int(rc[1]) == mk.y and float(rc[2]) > 0.0:
+					found = true
+					break
+			if not found:
+				if rock_at_cluster:
+					print("    no rock painted under the cluster at %s" % str(mk))
+				rock_at_cluster = false
+		print("    [probe_biome_object] %s: %d clusters, %d scree shards (reach %.2f m of %.2f, worst rise %.3f), %d rock cells" % [lab, n_cluster, n_scree, scree_reach, half, worst_rise, rock_cells.size()])
+		_check(n_cluster == 0 or n_scree > 0, "%s: a world with a mineral cell has scree (%d clusters, %d shards)" % [lab, n_cluster, n_scree])
+		_check(scree_down, "%s: every scree shard's surface is at or below its cluster's + 0.05 (worst rise %.3f)" % [lab, worst_rise])
+		_check(scree_off_water and scree_in, "%s: no scree shard on a water cell or outside the footprint (reach %.2f m of %.2f)" % [lab, scree_reach, half])
+		_check(scree_on_ground, "%s: every scree shard stands on the ground" % lab)
+		_check(int(cnt.get("scree", -1)) == n_scree, "%s: the scree count is the shards standing (%d vs %d)" % [lab, int(cnt.get("scree", -1)), n_scree])
+		_check(toward_water, "%s: every scree trail heads toward the water's side (%d trails)" % [lab, n_trails])
+		_check(not rock.is_empty() and shade_idx >= 0 and rock_idx < shade_idx, "%s: the ground carries a rock paint layer before the shade (rock at %d, shade at %d)" % [lab, rock_idx, shade_idx])
+		_check(rock_at_cluster, "%s: rock is painted wherever a cluster stands (%d cells)" % [lab, rock_cells.size()])
+		# gen 5 (d): the ridge is 3.0 cells from the water
+		_check(min_3, "%s: every mineral cell is 3.0 cells from the water (%d minerals)" % [lab, n_cluster])
 	var ca: Dictionary = _world_counts(a.get_state()["counts"])
 	var cb: Dictionary = _world_counts(b.get_state()["counts"])
 	var cc: Dictionary = _world_counts(c.get_state()["counts"])
