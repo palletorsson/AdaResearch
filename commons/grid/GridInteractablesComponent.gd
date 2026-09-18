@@ -14,6 +14,7 @@ static var _artifact_registry_cache_by_key: Dictionary = {}
 # Known config parameter names (NOT to be treated as tutorial shorthand)
 # These are artifact configuration keys that can have numeric values
 const CONFIG_PARAM_NAMES = [
+	"hits", # target hit threshold; never a tutorial rotation shorthand
 	"radial", "rings", "inner", "outer", "config", "height", "radius",
 	"width", "depth", "segments", "sides", "rows", "cols", "count",
 	"size", "scale", "speed", "delay", "duration", "intensity",
@@ -41,6 +42,8 @@ const CONFIG_PARAM_NAMES = [
 	"animate", "duration", "no_collision", "rotate_collision",
 	# Comment box (2026-09-05): its id, its output path, its prompt - `#box:3` must stay a value
 	"box", "out", "prompt",
+	# The biome object (2026-09-18): `#moisture:0.6#relief:0.35#wildness:0.8` — its DNA
+	"moisture", "relief", "wildness",
 	# Waves / randomness / noise pilots (2026-09-10): `#seed:20260910`, `#octaves:1`
 	# and `#offset:1` are values. `octaves` was already documented as a placement
 	# in SimplexNoise.gd's header and was being read as a rotation.
