@@ -9,8 +9,10 @@ class_name BiomeObject
 ## placed by ECOLOGY and CONNECTED —
 ##
 ##   substrate   a height field with a basin: relief from noise, the basin dug where the seed
-##               puts the water
-##   water       a pool in the basin (the old biome's own pool: disc, ripple rings, reeds)
+##               puts the water; a flat floor under the pool and a wet shelf round it as the
+##               shore (gen 1); the moisture PAINTED on as wet, dry and silt brush layers (gen 1)
+##   water       a pool in the basin (the old biome's own pool: disc, ripple rings, reeds), the
+##               disc lapping the shelf and the reeds standing on the shore (gen 1)
 ##   mineral     crystal clusters on the dry ridge
 ##   fungus      mycelium filaments on the wet rim of the pool, and a mycelium PATH from the
 ##               pool out to every tree — the network that joins water to wood
@@ -34,9 +36,10 @@ const Dispatcher := preload("res://commons/biome_layers/biome_paint_dispatcher.g
 const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 
-const GENERATION := 0
+const GENERATION := 1
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
+	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 const K_TREE := 0
@@ -108,7 +111,7 @@ func _build() -> void:
 	_built = true
 	var t0 := Time.get_ticks_msec()
 	_counts = {"water": 0, "mineral": 0, "fungus": 0, "fungus_path": 0, "tree": 0, "flower": 0,
-		"creature": 0, "cover": 0, "connections": 0}
+		"creature": 0, "cover": 0, "connections": 0, "paint": 0}
 	_patch = Node3D.new()
 	_patch.name = "Biome"
 	add_child(_patch)
@@ -120,9 +123,9 @@ func _build() -> void:
 	_dispatch()
 	_cover()
 	_build_ms = Time.get_ticks_msec() - t0
-	print("[biome_object] gen %d %s: water %d, mineral %d, fungus %d (path %d), trees %d, flowers %d, creatures %d, cover %d, connections %d — %d ms" % [
+	print("[biome_object] gen %d %s: water %d, mineral %d, fungus %d (path %d), trees %d, flowers %d, creatures %d, cover %d, connections %d, paint %d — %d ms" % [
 		GENERATION, label(), _counts["water"], _counts["mineral"], _counts["fungus"], _counts["fungus_path"],
-		_counts["tree"], _counts["flower"], _counts["creature"], _counts["cover"], _counts["connections"], _build_ms])
+		_counts["tree"], _counts["flower"], _counts["creature"], _counts["cover"], _counts["connections"], _counts["paint"], _build_ms])
 	if record == "on":
 		_write_state()
 
@@ -153,14 +156,22 @@ func _terrain() -> void:
 	for i in range(size * size):
 		_field[i] = (_field[i] - lo) / maxf(0.001, hi - lo)
 	_water.clear()
+	# gen 1: the basin is FILLED, not dug to a point: a flat floor under the water cells and a
+	# wet shelf one metre wide round them, rising 0.16 per metre. The shelf is the wet rim as
+	# geometry; its cells (h <= 0.18) fall out of the tree rule, so trees step back from the shore.
+	var pool_r: float = _basin_r * 0.62
 	for z in range(size):
 		for x in range(size):
 			var d: float = Vector2(float(x) + 0.5, float(z) + 0.5).distance_to(_basin_c)
 			var w: float = clampf(1.0 - d / _basin_r, 0.0, 1.0)
 			w = w * w * (3.0 - 2.0 * w)
 			var h: float = _field[z * size + x] * (1.0 - w) * (0.75 + 0.25 * relief) + 0.08 * (1.0 - w)
+			if d < pool_r:
+				h = minf(h, 0.02)                          # flat floor under the water
+			elif d < pool_r + 1.0:
+				h = minf(h, 0.02 + 0.16 * (d - pool_r))    # the wet shelf, a shore
 			_field[z * size + x] = h
-			if d < _basin_r * 0.62:
+			if d < pool_r:
 				_water[Vector2i(x, z)] = true
 
 
@@ -377,7 +388,38 @@ func _ground() -> void:
 	g.set_base_offset(0.0)
 	g.configure(size, size, 1.0, Vector3.ZERO)
 	g.set_field(_field, size, size, _max_h)
+	g.set_paint_layers(_moisture_paint(), seed)
 	_patch.add_child(g)
+
+
+## gen 1: the moisture painted onto the ground. Three "shader" brush layers, the shape the
+## substrate reads (element / mode / density / color / brush{w, d, cells[[x, z, v]]}), composed
+## into its paint texture: moss where the ground is wet, ochre where it is dry AND high, silt
+## under the water. The field that placed every organism becomes visible.
+func _moisture_paint() -> Array:
+	var wet: Array = []
+	var dry: Array = []
+	var silt: Array = []
+	for z in range(size):
+		for x in range(size):
+			var i: int = z * size + x
+			var m: float = _moist[i]
+			var vw: float = clampf((m - 0.35) / 0.45, 0.0, 1.0)
+			if vw > 0.0:
+				wet.append([x, z, vw])
+			var vd: float = clampf((0.42 - m) / 0.3, 0.0, 1.0) * clampf((_field[i] - 0.5) / 0.3, 0.0, 1.0)
+			if vd > 0.0:
+				dry.append([x, z, vd])
+			if _water.has(Vector2i(x, z)):
+				silt.append([x, z, 1.0])
+	_counts["paint"] = wet.size() + dry.size() + silt.size()
+	return [_brush_layer([0.20, 0.34, 0.18], wet), _brush_layer([0.74, 0.66, 0.50], dry),
+		_brush_layer([0.16, 0.14, 0.11], silt)]
+
+
+func _brush_layer(color: Array, cells: Array) -> Dictionary:
+	return {"element": "shader", "mode": "brush", "density": 1.0, "color": color,
+		"brush": {"w": size, "d": size, "cells": cells}}
 
 
 func _water_pool() -> void:
@@ -390,17 +432,18 @@ func _water_pool() -> void:
 	var c: Vector3 = Vector3(_basin_c.x - float(size) * 0.5, _water_level(), _basin_c.y - float(size) * 0.5)
 	holder.position = c
 	_patch.add_child(holder)
-	var r: float = _basin_r * 0.66
+	var r: float = _basin_r * 0.62 + 0.35   # gen 1: the disc laps the shelf
 	var disc := MeshInstance3D.new()
+	disc.name = "Disc"
 	var cm := CylinderMesh.new()
 	cm.top_radius = r
 	cm.bottom_radius = r
 	cm.height = 0.02
 	disc.mesh = cm
 	var wmat := StandardMaterial3D.new()
-	wmat.albedo_color = Color(0.16, 0.34, 0.62, 0.82)
-	wmat.metallic = 0.7
-	wmat.roughness = 0.08
+	wmat.albedo_color = Color(0.18, 0.42, 0.66, 0.85)   # gen 1: water, not slate
+	wmat.metallic = 0.25
+	wmat.roughness = 0.05
 	wmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	wmat.emission_enabled = true
 	wmat.emission = Color(0.1, 0.3, 0.5) * 0.25
@@ -421,8 +464,9 @@ func _water_pool() -> void:
 		ring.position = Vector3(0.0, 0.015, 0.0)
 		holder.add_child(ring)
 	var reeds: int = 3 + int(round(moisture * 5.0))
-	for _i in range(reeds):
+	for i in range(reeds):
 		var reed := MeshInstance3D.new()
+		reed.name = "Reed_%d" % i
 		var rc := CylinderMesh.new()
 		rc.top_radius = 0.012
 		rc.bottom_radius = 0.02
@@ -433,8 +477,11 @@ func _water_pool() -> void:
 		remat.albedo_color = Color(0.3, 0.5, 0.42)
 		reed.material_override = remat
 		var a: float = rng.randf_range(0.0, TAU)
-		var rr: float = r * rng.randf_range(0.8, 1.05)
-		reed.position = Vector3(cos(a) * rr, rh * 0.5 - 0.02, sin(a) * rr)
+		# gen 1: the reeds stand on the SHORE, past the water's edge, their feet on the shelf
+		var rr: float = r * rng.randf_range(0.95, 1.15)
+		var lx: float = cos(a) * rr
+		var lz: float = sin(a) * rr
+		reed.position = Vector3(lx, _h_at(c.x + lx, c.z + lz) - c.y + rh * 0.5, lz)
 		reed.rotation = Vector3(rng.randf_range(-0.12, 0.12), 0.0, rng.randf_range(-0.12, 0.12))
 		holder.add_child(reed)
 

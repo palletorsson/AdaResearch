@@ -5,7 +5,9 @@
 ## living cell is inside the footprint; the pool sits at the water level and the crystals
 ## on the surface; a wetter DNA grows more fungus and more cover than a drier one; the same
 ## seed gives the same counts twice and a different seed does not; the record is written;
-## a build stays under two seconds.
+## a build stays under two seconds. Gen 1: the floor under the water cells is flat, the disc's
+## top stands above the terrain at the basin centre and all round it at half the disc's
+## radius, the reeds' feet stand on the shore, and the ground carries paint layers.
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_biome_object.gd
 extends SceneTree
@@ -65,6 +67,59 @@ func _run() -> void:
 		_check(on_surface, "%s: crystals stand on the surface" % lab)
 		var pool: Node3D = o._patch.get_node_or_null("Pool")
 		_check(pool != null and absf(pool.position.y - o._water_level()) < 0.001, "%s: the pool sits at the water level" % lab)
+		# gen 1: a flat floor under every water cell
+		var floor_flat := true
+		for wk in o._water.keys():
+			if o._h_cell(wk.x, wk.y) > 0.02 * o._max_h + 0.0005:
+				floor_flat = false
+		_check(floor_flat, "%s: a flat floor under the water" % lab)
+		# gen 1: the disc's top at or above the terrain at the basin centre and at 0.5 r (8 bearings)
+		var disc: MeshInstance3D = (pool.get_node_or_null("Disc") as MeshInstance3D) if pool != null else null
+		var above := disc != null
+		if disc != null:
+			var cm: CylinderMesh = disc.mesh as CylinderMesh
+			var top: float = pool.position.y + disc.position.y + cm.height * 0.5
+			var half_r: float = cm.top_radius * 0.5
+			var worst: float = o._h_at(pool.position.x, pool.position.z)
+			for k in range(8):
+				var ang: float = TAU * float(k) / 8.0
+				worst = maxf(worst, o._h_at(pool.position.x + cos(ang) * half_r, pool.position.z + sin(ang) * half_r))
+			above = top >= worst
+			if not above:
+				print("    disc top %.3f under the terrain at %.3f" % [top, worst])
+		_check(above, "%s: the water stands above its floor at the centre and at half the disc" % lab)
+		# gen 1: the reeds' feet on the shore
+		var reeds_on_shore := true
+		var reeds_inside := true
+		if pool != null:
+			for rd in pool.get_children():
+				if String(rd.name).begins_with("Reed") and rd is MeshInstance3D:
+					var rcm: CylinderMesh = rd.mesh as CylinderMesh
+					var foot: float = pool.position.y + rd.position.y - rcm.height * 0.5
+					var ground_y: float = o._h_at(pool.position.x + rd.position.x, pool.position.z + rd.position.z)
+					if absf(foot - ground_y) > 0.02:
+						reeds_on_shore = false
+					if absf(pool.position.x + rd.position.x) > half or absf(pool.position.z + rd.position.z) > half:
+						reeds_inside = false
+		_check(reeds_on_shore, "%s: the reeds stand on the shore" % lab)
+		_check(reeds_inside, "%s: the reeds stand inside the footprint" % lab)
+		# gen 1: the moisture is painted on the ground
+		var ground = o._patch.get_node_or_null("Ground")
+		_check(ground != null and (ground._paint_layers as Array).size() > 0, "%s: the ground carries paint layers" % lab)
+		_check(int(cnt.get("paint", 0)) > 0, "%s: painted cells (%d)" % [lab, int(cnt.get("paint", 0))])
+		# ... and the paint reached the composed texture: count its covered pixels
+		var painted_px := -1
+		if ground != null and ground.mesh_instance != null and ground.mesh_instance.material_override is ShaderMaterial:
+			var tex = (ground.mesh_instance.material_override as ShaderMaterial).get_shader_parameter("paint_tex")
+			if tex is Texture2D:
+				var img: Image = (tex as Texture2D).get_image()
+				if img != null:
+					painted_px = 0
+					for py in range(img.get_height()):
+						for px in range(img.get_width()):
+							if img.get_pixel(px, py).a > 0.001:
+								painted_px += 1
+		_check(painted_px > 0, "%s: the paint texture carries the moisture (%d px covered)" % [lab, painted_px])
 	var ca: Dictionary = a.get_state()["counts"]
 	var cb: Dictionary = b.get_state()["counts"]
 	var cc: Dictionary = c.get_state()["counts"]

@@ -159,7 +159,20 @@ def _tile_measures(a):
             bins = int((hist > max(3, 0.01 * keep.sum())).sum())
     ys, xs = np.nonzero(sub)
     ratio = float((ys.max() - ys.min() + 1) / max(1, xs.max() - xs.min() + 1)) if len(ys) else 0.0
-    return {"subject_frac": round(frac, 4), "colour_bins": bins, "bbox_ratio": round(ratio, 3)}
+    # legibility-v1 (added after the gen-0 critique: integration-v1 saturates once every world
+    # has six layers, so the things the critic looks FOR get their own named numbers):
+    #   water_px   share of subject pixels that read blue (the pool is visible, not buried)
+    #   ground_var std of luminance over the subject (a ground that shows its moisture varies)
+    #   green_px   share of subject pixels that read green (the living cover)
+    water = green = 0.0
+    gvar = 0.0
+    if len(px) > 0:
+        r, g, b = px[:, 0].astype(float), px[:, 1].astype(float), px[:, 2].astype(float)
+        water = float(((b > r + 18) & (b > g + 8)).mean())
+        green = float(((g > r + 12) & (g > b + 12)).mean())
+        gvar = float((0.299 * r + 0.587 * g + 0.114 * b).std() / 255.0)
+    return {"subject_frac": round(frac, 4), "colour_bins": bins, "bbox_ratio": round(ratio, 3),
+            "water_px": round(water, 4), "green_px": round(green, 4), "ground_var": round(gvar, 4)}
 
 
 def measure(n: int, parent: int | None) -> dict:
@@ -187,10 +200,19 @@ def measure(n: int, parent: int | None) -> dict:
             row["tile"] = {"subject_frac": 0.0, "colour_bins": 0, "bbox_ratio": 0.0}
         row["integration_v1"] = round(0.40 * kp / 6.0 + 0.30 * min(1.0, conn / 6.0)
                                       + 0.30 * min(1.0, row["tile"]["colour_bins"] / 10.0), 4)
+        t = row["tile"]
+        # thresholds set ABOVE gen 0 (water 2.5 %, ground var 0.119, green ~0.2) so the number
+        # has room to move; a saturated floor measures nothing
+        row["legibility_v1"] = round(0.4 * min(1.0, t["water_px"] / 0.06) + 0.3 * min(1.0, t["ground_var"] / 0.18)
+                                     + 0.3 * min(1.0, t["green_px"] / 0.35), 4)
         rows[lab] = row
     vals = [r["integration_v1"] for r in rows.values()]
+    legs = [r["legibility_v1"] for r in rows.values()]
     summary = {"integration_v1_mean": round(sum(vals) / len(vals), 4) if vals else 0.0,
                "integration_v1_min": round(min(vals), 4) if vals else 0.0,
+               "legibility_v1_mean": round(sum(legs) / len(legs), 4) if legs else 0.0,
+               "water_px_mean": round(sum(r["tile"]["water_px"] for r in rows.values()) / len(rows), 4),
+               "ground_var_mean": round(sum(r["tile"]["ground_var"] for r in rows.values()) / len(rows), 4),
                "kingdoms_mean": round(sum(r["state"]["kingdoms_present"] for r in rows.values()) / len(rows), 2),
                "connections_mean": round(sum(r["state"]["connections"] for r in rows.values()) / len(rows), 2),
                "colour_bins_mean": round(sum(r["tile"]["colour_bins"] for r in rows.values()) / len(rows), 2),
@@ -202,6 +224,7 @@ def measure(n: int, parent: int | None) -> dict:
     res = {"gen": n, "parent": parent, "fitness": "integration-v1", "rows": rows, "summary": summary}
     (out / "measures.json").write_text(json.dumps(res, indent=1), encoding="utf-8")
     print(f"  [gen {n}] integration-v1 mean {summary['integration_v1_mean']:.3f} (min {summary['integration_v1_min']:.3f}) · "
+          f"legibility-v1 {summary['legibility_v1_mean']:.3f} (water {100 * summary['water_px_mean']:.1f}% of subject, ground var {summary['ground_var_mean']:.3f}) · "
           f"kingdoms {summary['kingdoms_mean']}/6 · connections {summary['connections_mean']} · hues {summary['colour_bins_mean']} · "
           f"subject {100 * summary['subject_mean']:.1f}% · build {summary['build_ms_max']} ms"
           + (f" · change vs gen {parent}: {100 * summary['change_vs_parent_mean']:.1f}%" if "change_vs_parent_mean" in summary else ""))
@@ -217,6 +240,7 @@ def compare(n: int, against: int) -> None:
         ia, ib = ra["integration_v1"], rb.get("integration_v1", 0.0)
         print(f"  {lab:<18} {ib:>10.3f} {ia:>10.3f} {ia - ib:+.3f}  {100 * ra.get('change_vs_parent', 0):.1f}%")
     sa, sb = a["summary"], b["summary"]
+    print(f"  legibility-v1 {sb.get('legibility_v1_mean', 0):.3f} -> {sa.get('legibility_v1_mean', 0):.3f}; water {100 * sb.get('water_px_mean', 0):.1f}% -> {100 * sa.get('water_px_mean', 0):.1f}%; ground var {sb.get('ground_var_mean', 0):.3f} -> {sa.get('ground_var_mean', 0):.3f}")
     print(f"  mean {sb['integration_v1_mean']:.3f} -> {sa['integration_v1_mean']:.3f} ({sa['integration_v1_mean'] - sb['integration_v1_mean']:+.3f}); "
           f"kingdoms {sb['kingdoms_mean']} -> {sa['kingdoms_mean']}; connections {sb['connections_mean']} -> {sa['connections_mean']}; "
           f"hues {sb['colour_bins_mean']} -> {sa['colour_bins_mean']}")
@@ -290,7 +314,7 @@ def publish() -> None:
                             "subtitle": f"gen {n}", "gen": n, "verdict": lr.get("verdict"), "order": order,
                             "notes": (f"gen {n} · seed {d[0]} · m {d[1]:.2f} r {d[2]:.2f} w {d[3]:.2f} · "
                                       f"integration {row['integration_v1']:.2f} · {st['kingdoms_present']}/6 layers · "
-                                      f"{st['connections']} connections · {row['tile']['colour_bins']} hues"
+                                      f"{st['connections']} connections · {row['tile']['colour_bins']} hues · legibility {row.get('legibility_v1', 0):.2f}"
                                       + (f" · {100 * row['change_vs_parent']:.0f}% changed" if "change_vs_parent" in row else "")
                                       + (f" · {lr.get('verdict')}" if lr.get("verdict") else ""))})
     means = []
