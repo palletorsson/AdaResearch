@@ -76,6 +76,7 @@ the gradient; the critic had predicted the number could not see a strand on bark
 | 4 | 54ac14bf3 | every layer reads the ground, none reads the layer above → the ground painted after the bodies so a shade layer reads the measured canopy; flowers kept out from under a canopy and favoured at its drip line; one species (intensity ≤ 4). The flower count had to be taken from the meadow before the canopies claim their floor (the builder flagged the loss) | 0.980 / 0.715, 1.7 % of pixels changed | kept — the smallest step, the first relation between layers |
 | 5 | d5e07122e | the minerals stood on the rim related to nothing → scree: a trail of 3–7 shards from every cluster down the slope toward the basin, a rock paint layer under clusters and trails, cover off the rock. The critic's gradient rule ran most trails off the plate; the builder extended the fallback (basin direction when the slope faces away) | 0.990 / 0.716, 2.9 % changed | kept; the loop paused here |
 | 6 | 629d0ee7f | **Astra's pass** (a second session, critic and builder as one agent): the cover is independent samples that never show they share a condition → cover in moisture-sized tufts sharing a centre, type and colour; reed beds at the shore; flat litter under the inner canopy; the driest ground bare; every member checked against water, shelf, scree, the crystal exclusion and the plate; private seeded streams; cap 864 | 0.975 / 0.733, 3.5 % changed | kept by Astra on sight; seen and agreed, committed by this session |
+| 7 | db73c6e6d | (the gen-4 critic's plan, amended by the gen-6 critic) the water a target, the webs the brightest thing → the pool's disc a six-ring fan with vertex colours, dark centre to lighter rim, darkened under every canopy, built after the bodies; no ring; each web's light by its growth step, dim at the finished rim and bright at the tip on the bark; matte crystals | 0.985 / 0.724 (darker water on purpose), 2.7 % changed | kept |
 
 The critic of generation 3 planned **4** (built) and **5** (built), then **6** the basin shows
 depth and the creatures face what they live by, **7** the plate's cut edge as a section. The
@@ -83,10 +84,18 @@ critic of generation 4, asked whether that path still held, moved the weakest th
 cover** — the largest layer (110–411 instances) on the largest surface (the ground is 80–87 %
 of every subject) is placed by a per-blade coin flip, one quad, one height, one colour, so the
 tiles read as a lit sand table with pins; and the webs outshine what they connect. Its path:
-**6** tufts — the cover reads its neighbours; **7** water depth under the canopy and the web's
-light by its growth; **8** the section. Both critiques are in `ada_run/biome_rsi/`.
+**6** tufts — the cover reads its neighbours (built by Astra); **7** water depth under the canopy
+and the web's light by its growth (built); **8** the section. The critic of generation 6 (an
+independent look at Astra's pass, which it kept for the same reasons) moved the weakest thing
+again: every relation is RADIAL — moisture, succession, reeds, shade, drip line, scree are all
+functions of distance to one point, so six worlds are six targets at six densities, and the one
+directional thing in the frame, the key light, is read by nothing. Its path: **8** aspect — the
+sun is a layer (the painted shade, ferns and mushrooms move to the displaced shadow centre, the
+meadow's bonus on the lit side, then a slope-aspect term in the moisture); **9** the section —
+the cut edge shows the strata; **9 or 10** inhabitants — a creature faces what it lives by, a
+worn track behind it. All critiques are in `ada_run/biome_rsi/`.
 
-Five generations in one morning, every one kept on sight, none culled: the culling rule has
+Eight generations in one day (one of them another session's), every one kept on sight, none culled: the culling rule has
 not yet been exercised, which is a fact about the critics' proposals being small and
 well-aimed, not about the rule.
 
