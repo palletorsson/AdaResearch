@@ -63,8 +63,9 @@ class_name BiomeObject
 const Dispatcher := preload("res://commons/biome_layers/biome_paint_dispatcher.gd")
 const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
+const FoliageCards := preload("res://commons/biome_layers/foliage_cards.gd")
 
-const GENERATION := 8
+const GENERATION := 9
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
@@ -75,6 +76,7 @@ const CHANGELOG: Array[String] = [
 	"gen 6: ground cover grows in moisture-sized tufts, reed beds at the shore and flat litter beneath the inner canopy; each member respects water, mineral ground and the footprint, the group has a private seeded rng, the budget is at most 864 instances; all other kingdom placement rules are unchanged",
 	"gen 7: water depth under the canopy, the web's light by its growth. The pool's disc is a 48-segment SurfaceTool fan, 6 rings deep (289 vertices, 528 tris — one ring cannot carry a profile), its vertex colours the albedo, no emission, roughness 0.08, metallic 0.3: centre (0.06, 0.20, 0.44, 0.92) to rim (0.24, 0.50, 0.68, 0.62) by u^1.5, every vertex's rgb × (1 − 0.45·vs), vs = max over trees of (1 − d/canopy)^0.6 with d the vertex's distance to the trunk — the ground's shade law — the alpha kept so the shaded water is darker, not thinner; the pool built AFTER _dispatch() (terrain, ecology, minerals, dispatch, pool, ground, cover) so vs reads the measured canopy — nothing between read the Pool node and the pool's rng is the seed's, so no draw moved. Each mycelium mat's MyceliumWeb material duplicated (mats share no instance) and its emission_energy_multiplier set to lerp(0.55, 0.22, t), t = (25 − gen)/15 — a rim mat carries no gen and reads 25 — the colour kept, the spores untouched. The cluster spires' emission col × 0.15 (was 0.5), roughness 0.35 (was 0.22); the scree untouched Amended before the render by the gen-6 critic: the ring dropped (the depth gradient is the edge) and the web's light reversed — dim (0.22) at the finished rim, bright (0.55) at the growing tip on the bark",
 	"gen 8: grass and plant foliage as transparent images (Palle) — the cover's grass, reeds, ferns, meadow plants and litter are alpha-cut cards on two crossed quads, images from commons/biome_layers/foliage/ (tools/make_foliage_cards.py draws the defaults, any same-named PNG replaces one) loaded at runtime, tinted near white by dryness and shade; mushrooms keep their mesh; a missing image falls back to the old mesh",
+	"gen 9: the foliage cards drawn IN the engine from the seed (Palle: can we make the foliage card procedurally?) — commons/biome_layers/foliage_cards.gd paints grass, reed, fern, plant and litter on an Image at build time with a disc brush along Bézier strokes and sin-profiled leaves; the seed shapes them, the moisture changes what grows (blade count and straw, cattail heads only when wet, fuller ferns and broader leaves when wet, redder litter when dry); cached per kind, seed and moisture band; `#foliage:files` keeps the PNG set",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 const K_TREE := 0
@@ -92,6 +94,9 @@ const K_FUNGUS := 3
 ## How much grows: tree count, flower density, creature count, cover.
 @export_range(0.0, 1.0) var wildness: float = 0.6
 @export_enum("on", "off") var record: String = "on"
+## The foliage cards: `drawn` (gen 9 — drawn in the engine from the seed and the moisture, no
+## files) or `files` (the PNGs in commons/biome_layers/foliage/, a hand-painted set).
+@export_enum("drawn", "files") var foliage: String = "drawn"
 
 var _built: bool = false
 var _field: PackedFloat32Array = PackedFloat32Array()   # per cell 0..1
@@ -129,6 +134,8 @@ func apply_grid_config(config: Dictionary) -> void:
 		wildness = clampf(float(str(config["wildness"]).to_float()), 0.0, 1.0)
 	if config.has("record"):
 		record = "off" if str(config["record"]).to_lower() in ["off", "0", "false"] else "on"
+	if config.has("foliage"):
+		foliage = "files" if str(config["foliage"]).to_lower() == "files" else "drawn"
 	if _built and is_inside_tree():
 		_rebuild()
 
@@ -1044,6 +1051,17 @@ static func _card_material(tex: Texture2D) -> StandardMaterial3D:
 	return m
 
 
+## The card image for a cover kind: drawn from this world's seed and moisture (gen 9), or the
+## PNG of that name when the knob says `files`; null for a kind without a card (mushrooms).
+func _card_for(kind: String) -> Texture2D:
+	if not CARD_KIND.has(kind):
+		return null
+	var card := String(CARD_KIND[kind])
+	if foliage == "files":
+		return _foliage_texture(card)
+	return FoliageCards.card(card, seed, moisture)
+
+
 ## The tint a card member carries: the image is already green, so the tint sits near white
 ## and only says dry (straw) or shaded; the old flat-colour tints would blacken it.
 static func _card_tint(kind: String, m: float, shaded: bool, rng: RandomNumberGenerator) -> Color:
@@ -1139,7 +1157,7 @@ func _cover() -> void:
 			"flower": count = 3 + int(round(4.0 * m))
 			"litter": count = 3 + int(round(3.0 * m))
 		if not meshes.has(kind):
-			var card_tex: Texture2D = _foliage_texture(String(CARD_KIND.get(kind, ""))) if CARD_KIND.has(kind) else null
+			var card_tex: Texture2D = _card_for(kind)
 			meshes[kind] = _crossed_card() if card_tex != null else Cover.mesh_for("fern" if kind == "litter" else kind)
 			cards[kind] = card_tex
 		var mesh: Mesh = meshes[kind]

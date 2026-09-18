@@ -520,6 +520,29 @@ func _run() -> void:
 			tallest = maxf(tallest, cxf.basis.y.length())
 	_check(on_ground, "wetc world: every grass card's foot is on the surface")
 	_check(tallest > 0.25 and tallest < 1.2, "wetc world: grass cards stand 0.25-1.2 m (tallest %.2f)" % tallest)
+	# gen 9: the cards drawn in the engine from the seed — painted, deterministic, seed- and
+	# moisture-sensitive, fast; a world's grass material carries the drawn image by default
+	# and the PNG when the knob says files
+	var FC = load("res://commons/biome_layers/foliage_cards.gd")
+	var t0c := Time.get_ticks_msec()
+	var g7: Image = FC.draw("grass", 7, 0.5)
+	var draw_ms: int = Time.get_ticks_msec() - t0c
+	_check(draw_ms < 200, "drawn grass card in %d ms" % draw_ms)
+	for card in ["grass", "reed", "fern", "plant", "litter"]:
+		var im: Image = FC.draw(card, 7, 0.5)
+		var cov: float = FC.coverage(im)
+		_check(cov > 0.03 and cov < 0.6, "drawn card %s: %.0f%% painted" % [card, cov * 100.0])
+	_check(FC.draw("grass", 7, 0.5).get_data() == g7.get_data(), "the same seed draws the same grass")
+	_check(FC.draw("grass", 8, 0.5).get_data() != g7.get_data(), "another seed draws another grass")
+	_check(FC.draw("grass", 7, 0.0).get_data() != FC.draw("grass", 7, 1.0).get_data(), "dry and wet draw different grass")
+	var drawn_w = await _grow(11, 0.85, 0.3, 0.7)
+	var dmmi: MultiMeshInstance3D = drawn_w._patch.get_node_or_null("Cover_grass")
+	var dtex: Texture2D = dmmi.material_override.albedo_texture if dmmi != null else null
+	_check(dtex is ImageTexture and dtex.get_width() == FC.SIZE, "wet world: the grass card is drawn (%s)" % (str(dtex.get_width()) if dtex != null else "none"))
+	var files_w = await _grow(11, 0.85, 0.3, 0.7, {"foliage": "files"})
+	var fmmi: MultiMeshInstance3D = files_w._patch.get_node_or_null("Cover_grass")
+	var ftex: Texture2D = fmmi.material_override.albedo_texture if fmmi != null else null
+	_check(ftex != null and ftex.get_width() == 512, "wet world with foliage:files: the grass card is the PNG")
 	print("[probe_biome_object] %d checks, %d failed" % [_checks, _fails])
 	quit(0 if _fails == 0 else 1)
 
@@ -543,12 +566,14 @@ func _seg_dist(p: Vector2, a: Vector2, b: Vector2) -> float:
 	return p.distance_to(a + ab * t)
 
 
-func _grow(seed: int, moisture: float, relief: float, wildness: float):
+func _grow(seed: int, moisture: float, relief: float, wildness: float, config: Dictionary = {}):
 	var o = OBJ.new()
 	o.seed = seed
 	o.moisture = moisture
 	o.relief = relief
 	o.wildness = wildness
+	if not config.is_empty():
+		o.apply_grid_config(config)
 	o.position = Vector3(float(_slot) * 30.0, 0.0, 0.0)
 	_slot += 1
 	_root.add_child(o)
