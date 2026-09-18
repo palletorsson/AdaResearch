@@ -12,7 +12,8 @@ class_name BiomeObject
 ##               puts the water; a flat floor under the pool and a wet shelf round it as the
 ##               shore (gen 1); the moisture PAINTED on as brush layers (gen 1) — the WHOLE
 ##               gradient, ochre wherever it is dry, moss wherever wet, a sand shore on the
-##               shelf, silt darkest at the middle of the pool (gen 2)
+##               shelf, silt darkest at the middle of the pool (gen 2); the canopy's SHADE
+##               painted last, read off the measured canopy — dark moss at the trunk (gen 4)
 ##   water       a pool in the basin (the old biome's own pool: disc, ripple rings, reeds), the
 ##               disc lapping the shelf and the reeds standing on the shore (gen 1); one thin
 ##               ring set toward the oldest tree — an edge, not a target (gen 2)
@@ -27,7 +28,8 @@ class_name BiomeObject
 ##               sapling (gen 2); the bodies GROWN by the object — every node the dispatcher
 ##               hands back is scaled: a tree by its rank and the moisture (the shore tree
 ##               ~5 m, capped so its measured canopy stays inside the footprint), a flower by
-##               the moisture, a creature 1.6x (gen 3)
+##               the moisture, a creature 1.6x (gen 3); every tree one species (inten 1-4) and
+##               the meadow at the DRIP LINE — no flower under a canopy, a ring round it (gen 4)
 ##   fauna       creatures beside the flowers and the fungus
 ##   cover       grass and stubble by moisture, on the surface, everywhere; the understory
 ##               follows the canopy — ferns and toadstools under a tree, toadstools along the
@@ -49,12 +51,13 @@ const Dispatcher := preload("res://commons/biome_layers/biome_paint_dispatcher.g
 const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 
-const GENERATION := 3
+const GENERATION := 4
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
 	"gen 2: succession from the water (the trees ranked by distance to it, the shore tree inten 3-5 and the frontier tree a sapling), the mycelium path sampled on the line every 0.5 m from 0.85 m past the pool to 0.45 m short of the trunk, skipping flooded cells, gen 25 at the water and 10 at the tree; the ground painted with the whole gradient (ochre wherever dry, moss, a sand shore, silt by depth) and the pool's two glowing rings replaced by one thin ring set toward the oldest tree, the disc at alpha 0.72",
 	"gen 3: the bodies grown by the object — every node the dispatcher hands back scaled about its foot: a tree by k = (1.5 + 1.3·rank)(0.75 + 0.35·moisture), capped so the measured canopy (the merged branch mesh's AABB + 0.25·dna.scale) stays inside the footprint, a flower by 1.4 + 0.4·moisture, a creature 1.6, a mat 1.0; an edge cell scores 0.4 less in the tree draw; each kingdom's spawn timed into ms_<kingdom>. The understory follows the canopy: cover accepted at 0.06 + 0.94·m², ferns and toadstools under a canopy, toadstools within 0.7 m of a mat, grass lerped green to straw by dryness, scale (0.5 + 0.7·m)·1.4. The minerals leave the shore: 2.5 cells from the water, off the outer ring, a retry at h > 0.5, the spires scaled by height and dryness",
+	"gen 4: the canopy casts a layer — the ground built AFTER the bodies (terrain, ecology, pool, minerals, dispatch, ground, cover) so the paint reads the canopy _dispatch() measured; a fifth brush layer, shade [0.11, 0.17, 0.09], painted last: per dry-land cell v = max over trees of 0.85·(1 − d/canopy)^0.6, kept over 0.02; the meadow at the drip line — u the cell's distance to the nearest trunk over rs = 0.6·(0.6 + 0.2·inten)·k, no flower under u 0.85, the ring to 1.6 scoring 0.25 more (the jitter still drawn, so the creatures' stream holds); the succession clamped to inten 1..4, so no tree flips to the lod-3 flat-leaf species — the six canopies one species",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 const K_TREE := 0
@@ -138,10 +141,10 @@ func _build() -> void:
 	add_child(_patch)
 	_terrain()
 	_ecology()
-	_ground()
 	_water_pool()
 	_minerals()
 	_dispatch()
+	_ground()     # gen 4: after the bodies — the paint reads the canopy _dispatch() measured
 	_cover()
 	_build_ms = Time.get_ticks_msec() - t0
 	print("[biome_object] gen %d %s: water %d, mineral %d, fungus %d (path %d), trees %d, flowers %d, creatures %d, cover %d, connections %d, paint %d — %d ms (tree %d, flower %d, fungus %d, creature %d)" % [
@@ -291,7 +294,8 @@ func _ecology() -> void:
 	for i in range(n_ranked):
 		var t: Vector2i = _trees[i]
 		var rank: float = 1.0 - float(i) / float(maxi(1, n_ranked - 1))
-		_cells[t]["inten"] = clampi(int(round(1.0 + 4.0 * rank * (0.4 + 0.4 * wildness + 0.2 * moisture))), 1, 5)
+		# gen 4: capped at 4 — inten 5 is lod 3 in _spawn_tree, the flat-leaf mesh; one species
+		_cells[t]["inten"] = clampi(int(round(1.0 + 4.0 * rank * (0.4 + 0.4 * wildness + 0.2 * moisture))), 1, 4)
 		# gen 3: the body's scale. The dispatcher's size knob stops at dna.scale 1.6 (~1.8 m); the
 		# object owns the node it gets back and grows it by rank and moisture — the shore tree
 		# 2.8x on wet ground, the frontier sapling 1.5x on dry. _dispatch() caps it at the footprint.
@@ -380,8 +384,19 @@ func _ecology() -> void:
 			# on the segment between two interior points, so inside the footprint without a clamp
 			_pos[placed.back()] = trunk - dir * 0.45
 		_paths[t] = placed
-	# flowers: the wet meadow, density by wildness
+	# flowers: the wet meadow, density by wildness. gen 4: the DRIP LINE — u is the cell centre's
+	# distance to the nearest trunk in units of that tree's rs = 0.6·(0.6 + 0.2·inten)·k (the
+	# dispatcher's canopy radius at the body's scale; the measured canopy is not known until
+	# _dispatch()): no flower under a canopy (u < 0.85), and the ring 0.85..1.6 scores 0.25 more
+	# — a meadow ringing the tree. The jitter is drawn before the skip, so the stream the
+	# creatures read is gen 3's.
+	var rs: Dictionary = {}
+	for t in _trees:
+		rs[t] = 0.6 * (0.6 + 0.2 * float(int(_cells[t]["inten"]))) * float(_cells[t]["k"])
 	var meadow: Array = []
+	# the count is a share of the WET MEADOW, not of what is left after the canopies take
+	# their floor — otherwise a shore tree costs the world its flowers (gen 4's builder)
+	var meadow_pool := 0
 	for z in range(size):
 		for x in range(size):
 			var key := Vector2i(x, z)
@@ -389,9 +404,19 @@ func _ecology() -> void:
 				continue
 			var m: float = _moist[z * size + x]
 			if m > 0.42 and _field[z * size + x] < 0.7:
-				meadow.append({"key": key, "m": m + rng.randf() * 0.1})
+				meadow_pool += 1
+				var score: float = m + rng.randf() * 0.1
+				var cwm: Vector3 = _cell_world(x, z)
+				var u := 99.0
+				for t in _trees:
+					u = minf(u, Vector2(cwm.x, cwm.z).distance_to(_pos[t]) / float(rs[t]))
+				if u < 0.85:
+					continue
+				if u <= 1.6:
+					score += 0.25
+				meadow.append({"key": key, "m": score})
 	meadow.sort_custom(func(p, q): return float(p["m"]) > float(q["m"]))
-	var n_fl: int = clampi(int(round(float(meadow.size()) * (0.25 + 0.5 * wildness))), 3, 24)
+	var n_fl: int = clampi(int(round(float(meadow_pool) * (0.25 + 0.5 * wildness))), 3, 24)
 	for f in meadow:
 		if _counts["flower"] >= n_fl:
 			break
@@ -515,6 +540,10 @@ func _spaced_from(key: Vector2i, r: int, kingdom: String) -> bool:
 
 
 # ── the bodies ────────────────────────────────────────────────────────────────
+## gen 4: built AFTER _dispatch() — the substrate composes its paint texture in its _ready()
+## (the add_child below), so the layers must be set before it enters the tree, and the shade
+## layer reads _canopy, which the dispatcher measures. Nothing before it reads the ground
+## node: the pool, the crystals and the dispatcher's builders place by _h_at / world_pos.
 func _ground() -> void:
 	var g = Ground.new()
 	g.name = "Ground"
@@ -530,7 +559,7 @@ func _ground() -> void:
 ## into its paint texture. gen 2: the WHOLE gradient, so six DNAs give six grounds — ochre
 ## wherever the ground is dry (no height gate; the height only deepens it), moss from m 0.28
 ## up, a sand SHORE on the shelf fading out over one metre, silt under the water darkest at the
-## middle. Painted dry, wet, shore, silt — each over the one before.
+## middle. Painted dry, wet, shore, silt — each over the one before; gen 4: then the shade.
 func _moisture_paint() -> Array:
 	var wet: Array = []
 	var dry: Array = []
@@ -551,13 +580,34 @@ func _moisture_paint() -> Array:
 				silt.append([x, z, 0.45 + 0.55 * (1.0 - d_c / _pool_r)])
 			elif d_c < _pool_r + 1.0:
 				shore.append([x, z, 0.8 * (1.0 - (d_c - _pool_r))])
-	_counts["paint"] = wet.size() + dry.size() + shore.size() + silt.size()
-	return [_brush_layer([0.74, 0.66, 0.50], dry), _brush_layer([0.20, 0.34, 0.18], wet),
-		_brush_layer([0.58, 0.54, 0.42], shore), _brush_layer([0.16, 0.14, 0.11], silt)]
+	# gen 4: the canopy casts a layer — per dry-land cell the strongest of the trees' shade by
+	# the MEASURED canopy (_canopy, filled in _dispatch(); the ground is built after it for
+	# this): v = 0.85·(1 − d / canopy)^0.6, kept over 0.02, painted LAST so it darkens whatever
+	# lies under it — moss, ochre or shore
+	var shade: Array = []
+	for z in range(size):
+		for x in range(size):
+			if _water.has(Vector2i(x, z)):
+				continue
+			var cw: Vector3 = _cell_world(x, z)
+			var cc := Vector2(cw.x, cw.z)
+			var v := 0.0
+			for t in _trees:
+				var cr: float = float(_canopy.get(t, 0.0))
+				if cr <= 0.001:
+					continue
+				v = maxf(v, 0.85 * pow(clampf(1.0 - cc.distance_to(_pos[t]) / cr, 0.0, 1.0), 0.6))
+			if v > 0.02:
+				shade.append([x, z, v])
+	_counts["paint"] = wet.size() + dry.size() + shore.size() + silt.size() + shade.size()
+	return [_brush_layer([0.74, 0.66, 0.50], dry, "dry"), _brush_layer([0.20, 0.34, 0.18], wet, "wet"),
+		_brush_layer([0.58, 0.54, 0.42], shore, "shore"), _brush_layer([0.16, 0.14, 0.11], silt, "silt"),
+		_brush_layer([0.11, 0.17, 0.09], shade, "shade")]
 
 
-func _brush_layer(color: Array, cells: Array) -> Dictionary:
-	return {"element": "shader", "mode": "brush", "density": 1.0, "color": color,
+## gen 4: each layer carries a name — the probe's handle; the substrate reads past it.
+func _brush_layer(color: Array, cells: Array, layer_name: String) -> Dictionary:
+	return {"element": "shader", "mode": "brush", "density": 1.0, "color": color, "name": layer_name,
 		"brush": {"w": size, "d": size, "cells": cells}}
 
 

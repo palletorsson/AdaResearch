@@ -17,6 +17,11 @@
 ## footprint, and so does every crystal shard; no mineral cell lies within 2.5 cells of a water
 ## cell or on the outer ring; the
 ## state records ms_tree / ms_flower / ms_fungus / ms_creature and their sum is under the build.
+## Gen 4 (a fourth DNA, s17_m60_r60_w90, joins: the one whose unclamped succession gives inten
+## 5): the ground's LAST paint layer is the shade, with at least one cell wherever a tree
+## stands, every cell dry land at 0.02 < v <= 0.85 and the oldest trunk's own cell at v >= 0.5;
+## no flower cell within 0.85 rs of any trunk (rs = 0.6·(0.6 + 0.2·inten)·k); in the wettest
+## world at least one flower on the oldest tree's drip line (0.85..1.6 rs); no tree past inten 4.
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_biome_object.gd
 extends SceneTree
@@ -47,7 +52,12 @@ func _run() -> void:
 	var a = await _grow(7, 0.5, 0.5, 0.6)
 	var b = await _grow(11, 0.85, 0.3, 0.7)
 	var c = await _grow(13, 0.25, 0.85, 0.4)
-	for o in [a, b, c]:
+	var d4 = await _grow(17, 0.6, 0.6, 0.9)
+	var wettest = a
+	for o in [b, c, d4]:
+		if float(o.moisture) > float(wettest.moisture):
+			wettest = o
+	for o in [a, b, c, d4]:
 		var st: Dictionary = o.get_state()
 		var cnt: Dictionary = st["counts"]
 		var lab := String(st["label"])
@@ -260,6 +270,64 @@ func _run() -> void:
 			else:
 				ms_sum += int(cnt[mkey])
 		_check(ms_all and ms_sum < int(st["build_ms"]), "%s: ms per kingdom recorded, sum %d under the build's %d" % [lab, ms_sum, int(st["build_ms"])])
+		# gen 4 (a): the canopy casts a layer — the ground's LAST paint layer is named "shade",
+		# with at least one cell wherever a tree stands, every cell dry land at 0.02 < v <= 0.85,
+		# and the oldest tree's own cell at v >= 0.5 (its trunk is at most 0.42 m off the centre)
+		var layers: Array = (ground._paint_layers as Array) if ground != null else []
+		var shade: Dictionary = {}
+		for ly in layers:
+			if ly is Dictionary and String((ly as Dictionary).get("name", "")) == "shade":
+				shade = ly
+		var shade_last: bool = not layers.is_empty() and layers.back() is Dictionary and String((layers.back() as Dictionary).get("name", "")) == "shade"
+		var shade_cells: Array = ((shade["brush"] as Dictionary)["cells"] as Array) if shade.has("brush") else []
+		var shade_ok := true
+		var v_trunk := 0.0
+		for sc2 in shade_cells:
+			var sk := Vector2i(int(sc2[0]), int(sc2[1]))
+			var sv: float = float(sc2[2])
+			if o._water.has(sk) or sv <= 0.02 or sv > 0.85 + 0.0001:
+				if shade_ok:
+					print("    shade cell %s v %.3f (water %s)" % [str(sk), sv, str(o._water.has(sk))])
+				shade_ok = false
+			if not o._trees.is_empty() and sk == o._trees[0]:
+				v_trunk = sv
+		_check(not shade.is_empty() and shade_last, "%s: the ground's last paint layer is the shade (%d layers)" % [lab, layers.size()])
+		_check(o._trees.is_empty() or shade_cells.size() >= 1, "%s: the shade has cells under the trees (%d cells)" % [lab, shade_cells.size()])
+		_check(shade_ok and (o._trees.is_empty() or v_trunk >= 0.5), "%s: every shade cell is dry land at 0.02 < v <= 0.85 and the oldest trunk's cell reads %.2f" % [lab, v_trunk])
+		# gen 4 (b): no flower within 0.85 rs of any trunk, rs = 0.6·(0.6 + 0.2·inten)·k — the
+		# meadow's drip line; (c) in the wettest world at least one flower on the oldest tree's
+		# drip line (0.85..1.6 rs); (d) no tree past inten 4 — one species of canopy
+		var under := 0
+		var drip0 := 0
+		var n_flower := 0
+		for fk in o._cells.keys():
+			if String(o._cells[fk]["kingdom"]) != "flower":
+				continue
+			n_flower += 1
+			var fc: Vector3 = o._cell_world(fk.x, fk.y)
+			var fp := Vector2(fc.x, fc.z)
+			var u := 99.0
+			for t in o._trees:
+				var rs: float = 0.6 * (0.6 + 0.2 * float(int(o._cells[t]["inten"]))) * float(o._cells[t].get("k", 1.0))
+				u = minf(u, fp.distance_to(o._pos[t]) / rs)
+			if u < 0.85:
+				if under == 0:
+					print("    flower %s at u %.2f rs of a trunk" % [str(fk), u])
+				under += 1
+			if not o._trees.is_empty():
+				var t0: Vector2i = o._trees[0]
+				var rs0: float = 0.6 * (0.6 + 0.2 * float(int(o._cells[t0]["inten"]))) * float(o._cells[t0].get("k", 1.0))
+				var u0: float = fp.distance_to(o._pos[t0]) / rs0
+				if u0 >= 0.85 and u0 <= 1.6:
+					drip0 += 1
+		var inten_max := 0
+		for t in o._trees:
+			inten_max = maxi(inten_max, int(o._cells[t]["inten"]))
+		print("    [probe_biome_object] %s: %d flowers, %d under a canopy (u < 0.85), %d on the oldest tree's drip line, %d shade cells, max tree inten %d" % [lab, n_flower, under, drip0, shade_cells.size(), inten_max])
+		_check(under == 0, "%s: no flower cell within 0.85 rs of a trunk (%d under)" % [lab, under])
+		if o == wettest:
+			_check(drip0 >= 1, "%s: the wettest world's oldest tree has flowers on its drip line (%d)" % [lab, drip0])
+		_check(inten_max <= 4, "%s: no tree past inten 4 (max %d)" % [lab, inten_max])
 	var ca: Dictionary = _world_counts(a.get_state()["counts"])
 	var cb: Dictionary = _world_counts(b.get_state()["counts"])
 	var cc: Dictionary = _world_counts(c.get_state()["counts"])
