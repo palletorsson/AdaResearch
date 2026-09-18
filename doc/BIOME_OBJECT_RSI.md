@@ -83,6 +83,7 @@ the gradient; the critic had predicted the number could not see a strand on bark
 | 11 | 60ccb2181 | (the gen-6 critic's plan) the key light, the one directional thing in the frame, was read by nothing → the sun as a constant of the object (read from the frozen rig), the painted shade, the understory and the pool's darkening moved to the displaced shadow centre, the drip-line bonus on the lit side, a slope-aspect term drying the sun-facing flank | 0.995 / 0.756, 15 % changed (layouts re-rolled) | kept |
 | 12 | c6cccddbf (Astra) | catalogue residents on shared ground: an independent community seed selects existing fungus DNA; up to six colonies fit clear ground near mycelium, with source/genes/footprint recorded | 0.990 / 0.748; 2.9% changed | kept; 16 colonies across six worlds, plus three communities on one fixed habitat |
 | 13 | 5a627787f | Palle: continue with the catalogue's plants and animals → through Astra's catalogue and contract, the nine flower species as resident families by habitat (identity from the community seed, size from the habitat, filling slots the habitat seed marks in the meadow so the count holds) and three creature body plans as gene overrides on the dispatcher's recipe, each body facing the nearest water or flower; two hidden nondeterminisms fixed | 0.990 / 0.743, 13 % changed | kept; the dry world shows the slot rule's flaw (a rock lurker by the pool) |
+| 14 | 636c4c822 | Palle: scale it down to primitives, morph it backwards → `stage` (the ladder's words gate every layer through `_amount(word)`, the cage's own closure; `full` is generation 13 byte for byte; Point One is a white plane and one black seed, 5 ms) and `phase` (the newest layer absent, growing, grown; the layout stays the seed's so the ladder is one world growing); `/biome-ladder`: one DNA at every stage and three halls at five phases | 0.990 / 0.743 (full unchanged) | kept |
 
 The critic of generation 3 planned **4** (built) and **5** (built), then **6** the basin shows
 depth and the creatures face what they live by, **7** the plate's cut edge as a section. The
@@ -101,7 +102,7 @@ meadow's bonus on the lit side, then a slope-aspect term in the moisture); **9**
 the cut edge shows the strata; **9 or 10** inhabitants — a creature faces what it lives by, a
 worn track behind it. All critiques are in `ada_run/biome_rsi/`.
 
-Fourteen generations in one day (three of them another session's), every one kept on sight, none culled: the culling rule has
+Fifteen generations in one day (three of them another session's), every one kept on sight, none culled: the culling rule has
 not yet been exercised, which is a fact about the critics' proposals being small and
 well-aimed, not about the rule.
 
@@ -125,6 +126,13 @@ lurker by the pool in the dry world). Its path: **14** the body sizes the slot; 
 face what they live by under one rule for natives and residents alike; **15** fruit on the old
 cords — the web ages. The next adapters Astra listed remain: shelf brackets on trunks, posed
 fungi, tree DNA variants in the tree slot, the colony's network kept distinct from its fruit.
+
+The ladder closes a loop the memo opened on its first page: the cage showed the biome as the
+states of one composition, the object now shows itself as the states of one world — a plane
+and a point at Point One, everything else arriving with the word that teaches it — and the
+phase runs any hall backwards to the hall before. Palle's RSI tree, from the Dream-RSI paper,
+is the next shape: the lineage has been a chain; generations 15–17 are three branches from 14,
+the critic of generation 12's three proposals built side by side, and the eye picks the trunk.
 
 ## 5. What was learned on the way
 
