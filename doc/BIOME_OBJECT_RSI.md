@@ -73,11 +73,21 @@ the gradient; the critic had predicted the number could not see a strand on bark
 | 1 | cb6f4cd88 | the water and the moisture placed everything and neither was visible (the pool 85–93 % underground) → a flat floor under the water, a wet shelf as shore, the disc lapping it, reeds on the shore; the moisture painted as wet/dry/silt brush layers | 0.965 / 0.724, water 2.5 → 7.9 % | kept |
 | 2 | 666bb44c3 | positions but no gradient, so no direction and no process → succession: trees sorted by distance to water and sized by rank; the mycelium path sampled every 0.5 m on the line, the last mat forced to touch the bark, growth steps 25 → 10 along it; the ground carrying the whole gradient (no height gate, a shore, silt by depth); one thin ring | 0.965 / 0.713 | kept on sight against flat numbers |
 | 3 | 4113be0ac | no vertical dimension: a map with pins → bodies scaled by rank and moisture (shore trees ×2.3–2.9, saplings ×1.3–1.6, capped by the measured canopy), understory under the canopies and along the mats, grass lerped green → straw by dryness, minerals off the shore, spires by height and dryness, per-kingdom spawn timing on record | 0.975 / 0.716, water 9.0 % | kept |
+| 4 | 54ac14bf3 | every layer reads the ground, none reads the layer above → the ground painted after the bodies so a shade layer reads the measured canopy; flowers kept out from under a canopy and favoured at its drip line; one species (intensity ≤ 4). The flower count had to be taken from the meadow before the canopies claim their floor (the builder flagged the loss) | 0.980 / 0.715, 1.7 % of pixels changed | kept — the smallest step, the first relation between layers |
+| 5 | d5e07122e | the minerals stood on the rim related to nothing → scree: a trail of 3–7 shards from every cluster down the slope toward the basin, a rock paint layer under clusters and trails, cover off the rock. The critic's gradient rule ran most trails off the plate; the builder extended the fallback (basin direction when the slope faces away) | 0.990 / 0.716, 2.9 % changed | kept; the loop paused here |
 
-The critic's path after generation 3: **4** the canopy casts a layer the ground reads (shade
-paint, flowers at the drip line, one species); **5** scree — the ridge comes down to the water,
-the web's arrow reversed; **6** the basin shows depth and the creatures face what they live by;
-**7** the plate's cut edge becomes a section, once there are strata to cut.
+The critic of generation 3 planned **4** (built) and **5** (built), then **6** the basin shows
+depth and the creatures face what they live by, **7** the plate's cut edge as a section. The
+critic of generation 4, asked whether that path still held, moved the weakest thing: **the
+cover** — the largest layer (110–411 instances) on the largest surface (the ground is 80–87 %
+of every subject) is placed by a per-blade coin flip, one quad, one height, one colour, so the
+tiles read as a lit sand table with pins; and the webs outshine what they connect. Its path:
+**6** tufts — the cover reads its neighbours; **7** water depth under the canopy and the web's
+light by its growth; **8** the section. Both critiques are in `ada_run/biome_rsi/`.
+
+Five generations in one morning, every one kept on sight, none culled: the culling rule has
+not yet been exercised, which is a fact about the critics' proposals being small and
+well-aimed, not about the rule.
 
 ## 5. What was learned on the way
 
