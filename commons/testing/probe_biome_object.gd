@@ -47,6 +47,15 @@
 ## often than not; the moisture carries the aspect term cell for cell and a sun-facing cell
 ## is drier than its lee twin. The gen-4 trunk-cell and gen-7 "under" readings follow the
 ## centre; gen 6's parent-count contract narrows to the water (gen 11 (b) re-rolls the rest).
+## Gen 13 (blooms and bodies as residents), on the wet world s11_m85_r30_w70: (a) resident
+## flowers stand, every species used is a BotanicalFlower PRESET and at least two appear;
+## (b) the bloom slots and the body slots are the same cells under community seeds 0 and 1
+## while the species differs in at least one bloom slot; (c) the flowers standing (the
+## dispatcher's + the residents') equal what residents:off builds — gen 12's count for the
+## same DNA — and so do the creature bodies; (d) every resident body faces its recorded
+## resource (facing · direction > 0.7) with its measured footprint inside the plate; (e) the
+## same seeds twice give identical resident records. Per world: a bloom stands at its slot's
+## own surface point at the habitat's size; a body's recorded footprint is its measured one.
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_biome_object.gd
 extends SceneTree
@@ -525,8 +534,10 @@ func _run() -> void:
 	_check(twin._basin_c == a._basin_c, "the same seed digs the basin in the same place")
 	_check(var_to_str(twin._section_columns) == var_to_str(a._section_columns), "section profiles replay at a translated instance")
 	_section_extremes()
+	if var_to_str(twin._residents) != var_to_str(a._residents):
+		_diff_records(a._residents, twin._residents, a.label())
 	_check(var_to_str(twin._residents) == var_to_str(a._residents), "resident DNA, placements and source records replay")
-	_check(_resident_shape(twin) == _resident_shape(a), "resident meshes and materials replay at a translated instance")
+	_check(_shape_same(_resident_shape(twin), _resident_shape(a)), "resident meshes and materials replay at a translated instance")
 	var community = await _grow(7, 0.5, 0.5, 0.6, {"community_seed": 1})
 	var bare = await _grow(7, 0.5, 0.5, 0.6, {"residents": "off", "record": "off"})
 	_check_community_change(a, community, bare)
@@ -562,6 +573,11 @@ func _run() -> void:
 			tallest = maxf(tallest, cxf.basis.y.length())
 	_check(on_ground, "wetc world: every grass card's foot is on the surface")
 	_check(tallest > 0.25 and tallest < 1.2, "wetc world: grass cards stand 0.25-1.2 m (tallest %.2f)" % tallest)
+	# gen 13: blooms and bodies as residents — the wet world under community 0 (b, and wetc as
+	# its twin), community 1, and with the residents layer off (gen 12's build of the same DNA)
+	var b1 = await _grow(11, 0.85, 0.3, 0.7, {"community_seed": 1})
+	var b_off = await _grow(11, 0.85, 0.3, 0.7, {"residents": "off", "record": "off"})
+	_check_gen13(b, wetc, b1, b_off)
 	# gen 9: the cards drawn in the engine from the seed — painted, deterministic, seed- and
 	# moisture-sensitive, fast; a world's grass material carries the drawn image by default
 	# and the PNG when the knob says files
@@ -1212,49 +1228,153 @@ func _section_extremes() -> void:
 		o.queue_free()
 
 
-## Gen 12: catalogue identity, occupied space and independent, repeatable DNA.
+## Gen 12: catalogue identity, occupied space and independent, repeatable DNA. Gen 13: the
+## records branch by artifact — a fungus colony as before; a bloom stands at its slot's own
+## surface point, a real PRESET, sized by the habitat (1.4 + 0.4·m about the dispatcher's
+## overall_scale on the cell's intensity); a body faces its recorded resource, its recorded
+## footprint is its measured one, and its slot is a creature cell of the habitat.
 func _check_residents(o) -> void:
 	var records: Array = o._residents
 	var lab: String = o.label()
-	_check(records.size() <= 6 and o._counts["residents"] == records.size(), "%s: bounded resident count" % lab)
+	var half: float = o.size * 0.5
+	var flower_script = load("res://commons/flora/botanical_flower.gd")
+	var presets: Dictionary = flower_script.PRESETS
+	var n_fungus := 0
+	var n_bloom := 0
+	var n_body := 0
+	var species: Dictionary = {}
+	var plans: Dictionary = {}
 	var sources_ok := true
 	var inside := true
 	var grounded := true
 	var connected := true
 	var clear_cover := true
+	var bloom_ok := true
+	var body_ok := true
+	var faces_ok := true
+	var worst_dot := 1.0
 	for resident in records:
-		sources_ok = sources_ok and FileAccess.file_exists(resident["preset"]) and resident["artifact"] == "living_fungus_fruit"
-		sources_ok = sources_ok and not (resident["dna"] as Dictionary).is_empty()
+		var artifact := String(resident["artifact"])
 		var holder: Node3D = o._patch.get_node(resident["node"])
 		var bb: AABB = holder.transform * o.Residents._bounds(holder)
-		var half: float = o.size * 0.5
-		inside = inside and bb.position.x > -half and bb.end.x < half and bb.position.z > -half and bb.end.z < half
+		var this_inside: bool = bb.position.x > -half and bb.end.x < half and bb.position.z > -half and bb.end.z < half
+		if not this_inside and inside:
+			print("    resident out: %s at (%.2f, %.2f) scale %.2f spans x %.2f..%.2f z %.2f..%.2f" % [resident["node"], holder.position.x, holder.position.z, holder.scale.x, bb.position.x, bb.end.x, bb.position.z, bb.end.z])
+		inside = inside and this_inside
 		var p := Vector2(holder.position.x, holder.position.z)
-		var net: Array = resident["network"]
-		var source := Vector2(net[0], net[1])
-		connected = connected and p.distance_to(source) <= 2.2001 and o._mats.has(source)
-		var stack: Array[Node] = [holder]
-		while not stack.is_empty():
-			var node: Node = stack.pop_back()
-			for child in node.get_children():
-				stack.append(child)
-			if node is MeshInstance3D and String(node.name) == "Stem":
-				var stem: CylinderMesh = node.mesh
-				var foot: Vector3 = o._patch.to_local(node.to_global(Vector3(0, -stem.height * 0.5, 0)))
-				grounded = grounded and absf(foot.y - o._h_at(foot.x, foot.z)) < 0.08
+		sources_ok = sources_ok and not (resident["dna"] as Dictionary).is_empty()
+		match artifact:
+			"living_fungus_fruit":
+				n_fungus += 1
+				sources_ok = sources_ok and FileAccess.file_exists(resident["preset"])
+				var net: Array = resident["network"]
+				var source := Vector2(net[0], net[1])
+				connected = connected and p.distance_to(source) <= 2.2001 and o._mats.has(source)
+				var stack: Array[Node] = [holder]
+				while not stack.is_empty():
+					var node: Node = stack.pop_back()
+					for child in node.get_children():
+						stack.append(child)
+					if node is MeshInstance3D and String(node.name) == "Stem":
+						var stem: CylinderMesh = node.mesh
+						var foot: Vector3 = o._patch.to_local(node.to_global(Vector3(0, -stem.height * 0.5, 0)))
+						grounded = grounded and absf(foot.y - o._h_at(foot.x, foot.z)) < 0.08
+			"living_flora_bloom":
+				n_bloom += 1
+				var sp := String(resident["preset"])
+				species[sp] = int(species.get(sp, 0)) + 1
+				var slot: Array = resident["slot"]
+				var sk := Vector2i(int(slot[0]), int(slot[1]))
+				var cell: Dictionary = o._cells.get(sk, {})
+				var is_flower_slot: bool = not cell.is_empty() and String(cell["kingdom"]) == "flower" and bool(cell.get("resident", false))
+				var at_slot: bool = p.distance_to(o._body_xz(sk)) < 0.001
+				var script_ok: bool = holder.get_script() != null and String(holder.get_script().resource_path).ends_with("botanical_flower.gd")
+				var foot_ok: bool = absf(holder.position.y - o._h_at(p.x, p.y)) < 0.001
+				var config: Dictionary = holder.get("config") if holder.get("config") is Dictionary else {}
+				var size_ok: bool = absf(holder.scale.x - (1.4 + 0.4 * float(o.moisture))) < 0.0001 and absf(float(config.get("overall_scale", -1.0)) - (1.5 + 0.2 * float(int(cell.get("inten", 0))))) < 0.0001
+				# a slot stands BLOOM_EDGE_M inside the plate, so the guard on the size never bit
+				var margin_ok: bool = half - maxf(absf(p.x), absf(p.y)) >= float(o.BLOOM_EDGE_M) - 0.0001 and not bool(resident.get("capped", true))
+				var this_ok: bool = presets.has(sp) and resident["family"] == sp and is_flower_slot and at_slot and script_ok and foot_ok and size_ok and margin_ok
+				if not this_ok and bloom_ok:
+					print("    bloom %s: preset %s in PRESETS %s, flower slot %s, at slot %s, script %s, foot %s, size %s, margin %s" % [resident["node"], sp, str(presets.has(sp)), str(is_flower_slot), str(at_slot), str(script_ok), str(foot_ok), str(size_ok), str(margin_ok)])
+				bloom_ok = bloom_ok and this_ok
+			"living_fauna_body":
+				n_body += 1
+				var fam := String(resident["family"])
+				plans[fam] = int(plans.get(fam, 0)) + 1
+				var slot: Array = resident["slot"]
+				var sk := Vector2i(int(slot[0]), int(slot[1]))
+				var cell: Dictionary = o._cells.get(sk, {})
+				var is_body_slot: bool = not cell.is_empty() and String(cell["kingdom"]) == "creature" and bool(cell.get("resident", false))
+				var at_slot: bool = p.distance_to(o._body_xz(sk)) < 0.001
+				var has_body: bool = holder.find_child("CreatureSDF", true, false) != null and holder.find_child("Body", true, false) is MeshInstance3D
+				# (d) the facing: the eyes look down local −Z, so the holder's −Z on the plate must
+				# point at the recorded resource — a water cell within 3 cells, else a flower cell
+				var faces: Dictionary = resident["faces"]
+				var target: Array = faces["at"]
+				var to_target := Vector2(float(target[0]) - p.x, float(target[1]) - p.y)
+				var fwd3: Vector3 = -holder.transform.basis.z
+				var fwd := Vector2(fwd3.x, fwd3.z).normalized()
+				var dot: float = fwd.dot(to_target.normalized()) if to_target.length() > 0.001 else 1.0
+				worst_dot = minf(worst_dot, dot)
+				var what := String(faces["what"])
+				var what_ok: bool = (what == "water" and o._water_dist(sk.x, sk.y) <= 3.0) or (what == "flower" and o._water_dist(sk.x, sk.y) > 3.0) or what == "mycelium"
+				if what == "water":
+					what_ok = what_ok and o._water.has(Vector2i(int(floor(float(target[0]) + half)), int(floor(float(target[1]) + half))))
+				elif what == "flower":
+					var fk := Vector2i(int(floor(float(target[0]) + half)), int(floor(float(target[1]) + half)))
+					what_ok = what_ok and o._cells.has(fk) and String(o._cells[fk]["kingdom"]) == "flower"
+				faces_ok = faces_ok and dot > 0.7 and what_ok
+				# the recorded footprint is the measured one (its xz box through the holder's transform)
+				var fp: Array = resident["footprint"]
+				var fp_ok: bool = absf(float(fp[0]) - bb.position.x) < 0.02 and absf(float(fp[1]) - bb.position.z) < 0.02 and absf(float(fp[2]) - bb.end.x) < 0.02 and absf(float(fp[3]) - bb.end.z) < 0.02
+				var placed: bool = String(resident.get("motion", "")).begins_with("placed body")
+				var this_ok: bool = is_body_slot and at_slot and has_body and fp_ok and placed
+				if not (this_ok and dot > 0.7 and what_ok) and body_ok and faces_ok:
+					print("    body %s: creature slot %s, at slot %s, body %s, footprint %s (%s vs %.2f..%.2f / %.2f..%.2f), placed %s; faces %s dot %.2f (what ok %s)" % [resident["node"], str(is_body_slot), str(at_slot), str(has_body), str(fp_ok), str(fp), bb.position.x, bb.end.x, bb.position.z, bb.end.z, str(placed), what, dot, str(what_ok)])
+				body_ok = body_ok and this_ok
 		for tuft in o._cover_tufts:
 			for member in tuft["members"]:
 				var at: Vector3 = member[0].origin
 				clear_cover = clear_cover and p.distance_to(Vector2(at.x, at.z)) >= float(resident["radius"]) - 0.0001
+	var on: bool = o.residents == "on"
+	_check(n_fungus <= 6 and o._counts["residents"] == records.size(), "%s: bounded resident count (%d colonies)" % [lab, n_fungus])
+	_check(n_fungus == int(o._counts["residents_fungus"]) and n_bloom == int(o._counts["residents_bloom"]) and n_body == int(o._counts["residents_body"]), "%s: the residents are counted by artifact (%d / %d / %d)" % [lab, n_fungus, n_bloom, n_body])
+	_check(not on or (n_bloom == int(o._counts["slots_bloom"]) and n_body == int(o._counts["slots_body"]) and n_body == int(o._counts["creature"])), "%s: every handed-over slot is filled — %d of %d bloom slots, %d of %d body slots (%d creature cells)" % [lab, n_bloom, int(o._counts["slots_bloom"]), n_body, int(o._counts["slots_body"]), int(o._counts["creature"])])
+	_check(not on or int(o._counts["slots_bloom"]) + int(o._counts["flower_dispatched"]) == int(o._counts["flower"]), "%s: the meadow is shared, not doubled — %d slots + %d dispatched = %d flower cells" % [lab, int(o._counts["slots_bloom"]), int(o._counts["flower_dispatched"]), int(o._counts["flower"])])
+	_check(not on or int(o._counts["creature_dispatched"]) == 0, "%s: the dispatcher built no creature beside the residents (%d)" % [lab, int(o._counts["creature_dispatched"])])
 	_check(sources_ok, "%s: resident records identify real catalogue presets and expressed DNA" % lab)
 	_check(inside, "%s: measured resident geometry stays inside the biome" % lab)
 	_check(grounded, "%s: each fruiting stem meets its own terrain height" % lab)
 	_check(connected, "%s: residents belong to an existing nearby mycelium site" % lab)
 	_check(clear_cover, "%s: every cover origin respects the resident clearings" % lab)
-	print("    [residents] %s: %d colonies, %d ms" % [lab, records.size(), o._counts["ms_residents"]])
+	_check(bloom_ok, "%s: every bloom is a PRESET species at its slot's surface point, sized by the habitat (%d blooms)" % [lab, n_bloom])
+	_check(body_ok, "%s: every body stands in a creature slot with its measured footprint recorded, a placed body (%d bodies)" % [lab, n_body])
+	_check(faces_ok, "%s: every body faces its recorded resource (worst dot %.2f)" % [lab, worst_dot])
+	print("    [residents] %s: %d colonies, %d blooms %s, %d bodies %s, %d ms (fungus %d, blooms %d, bodies %d)" % [lab, n_fungus, n_bloom, str(species), n_body, str(plans), o._counts["ms_residents"], int(o._counts.get("ms_residents_fungus", -1)), int(o._counts.get("ms_residents_bloom", -1)), int(o._counts.get("ms_residents_body", -1))])
 
 
-func _resident_shape(o) -> String:
+## Names the first resident record (index, key) that differs between two builds — the
+## determinism checks say only that something differs; this says what.
+func _diff_records(a: Array, b: Array, lab: String) -> void:
+	if a.size() != b.size():
+		print("    [diff] %s: %d records against %d" % [lab, a.size(), b.size()])
+		return
+	for i in range(a.size()):
+		var ra: Dictionary = a[i]
+		var rb: Dictionary = b[i]
+		for key in ra.keys():
+			if not rb.has(key) or var_to_str(ra[key]) != var_to_str(rb[key]):
+				print("    [diff] %s: record %d (%s) key %s: %s | %s" % [lab, i, String(ra.get("node", "?")), String(key), var_to_str(ra[key]).left(160), var_to_str(rb.get(key, null)).left(160)])
+				return
+	print("    [diff] %s: the records are identical" % lab)
+
+
+## Every resident's node names, local transforms, mesh vertices and skin parameters, in tree
+## order. gen 13: returned as data, compared by _shape_same — BotanicalFlower aims an umbel's
+## mounts with look_at through global_position, so two instances of one flower 120 m apart
+## differ in a mount's basis at ~1e-6, and var_to_str equality is not a fact about the body.
+func _resident_shape(o) -> Array:
 	var data: Array = []
 	for resident in o._residents:
 		var stack: Array[Node] = [o._patch.get_node(resident["node"])]
@@ -1263,12 +1383,130 @@ func _resident_shape(o) -> String:
 			for child in node.get_children():
 				stack.append(child)
 			if node is Node3D:
-				data.append([String(node.name), node.transform])
-			if node is MeshInstance3D:
+				# an unnamed node is "@Class@N" with a GLOBAL counter — creation order, not the
+				# body (botanical_flower.gd leaves its mesh nodes unnamed); compare its class
+				var nm := String(node.name)
+				if nm.begins_with("@"):
+					nm = node.get_class()
+				data.append([nm, node.transform])
+			if node is MeshInstance3D and node.mesh != null and node.mesh.get_surface_count() > 0:
 				data.append(node.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX])
 				if node.material_override is ShaderMaterial:
 					data.append(node.material_override.get_shader_parameter("primary_color"))
-	return var_to_str(data)
+					# gen 13: the mapper draws this from the global randi() when handed no seed
+					data.append(node.material_override.get_shader_parameter("pattern_rotation"))
+	return data
+
+
+## Two shapes are the same when every name matches, every transform matches to 1e-4 per
+## component (the address noise is ~1e-6; a community change moves things by centimetres),
+## every vertex array is equal and every skin parameter is equal.
+func _shape_same(a: Array, b: Array) -> bool:
+	if a.size() != b.size():
+		return false
+	for i in range(a.size()):
+		var x = a[i]
+		var y = b[i]
+		if x is Array and y is Array and x.size() == 2 and x[1] is Transform3D:
+			if String(x[0]) != String(y[0]) or not (y[1] is Transform3D):
+				return false
+			var tx: Transform3D = x[1]
+			var ty: Transform3D = y[1]
+			for c in range(3):
+				var db: Vector3 = (tx.basis[c] - ty.basis[c]).abs()
+				if db[db.max_axis_index()] > 0.0001:
+					return false
+			var d: Vector3 = (tx.origin - ty.origin).abs()
+			if d[d.max_axis_index()] > 0.0001:
+				return false
+		elif x is PackedVector3Array and y is PackedVector3Array:
+			if x != y:
+				return false
+		elif x is float and y is float:
+			if absf(x - y) > 0.0001:
+				return false
+		elif var_to_str(x) != var_to_str(y):
+			return false
+	return true
+
+
+## The bodies of one script standing anywhere under the patch — how many BotanicalFlowers,
+## how many CreatureSDF roots — whoever built them.
+func _count_bodies(o, script_suffix: String, node_name: String) -> int:
+	var n := 0
+	var stack: Array[Node] = [o._patch]
+	while not stack.is_empty():
+		var node: Node = stack.pop_back()
+		for child in node.get_children():
+			stack.append(child)
+		if script_suffix != "" and node.get_script() != null and String(node.get_script().resource_path).ends_with(script_suffix):
+			n += 1
+		elif node_name != "" and String(node.name) == node_name:
+			n += 1
+	return n
+
+
+## Gen 13 on the wet world: b and twin under community 0, b1 under community 1, off with the
+## residents layer off (gen 12's build of the same DNA).
+func _check_gen13(b, twin, b1, off) -> void:
+	var lab: String = b.label()
+	var flower_script = load("res://commons/flora/botanical_flower.gd")
+	var presets: Dictionary = flower_script.PRESETS
+	# (a) resident flowers, every species a PRESET, at least two species
+	var blooms: Array = []
+	var blooms1: Array = []
+	var bodies: Array = []
+	var bodies1: Array = []
+	for r in b._residents:
+		if String(r["artifact"]) == "living_flora_bloom":
+			blooms.append(r)
+		elif String(r["artifact"]) == "living_fauna_body":
+			bodies.append(r)
+	for r in b1._residents:
+		if String(r["artifact"]) == "living_flora_bloom":
+			blooms1.append(r)
+		elif String(r["artifact"]) == "living_fauna_body":
+			bodies1.append(r)
+	var species: Dictionary = {}
+	var all_presets := true
+	for r in blooms:
+		species[String(r["preset"])] = true
+		all_presets = all_presets and presets.has(String(r["preset"]))
+	_check(blooms.size() > 0 and all_presets, "%s: resident flowers stand and every species is a BotanicalFlower PRESET (%d blooms)" % [lab, blooms.size()])
+	_check(species.size() >= 2, "%s: at least two species among the resident flowers (%s)" % [lab, str(species.keys())])
+	# (b) the same slots under community 0 and 1, a different species in at least one
+	var same_slots: bool = blooms.size() == blooms1.size() and bodies.size() == bodies1.size()
+	var differ := 0
+	for i in range(mini(blooms.size(), blooms1.size())):
+		same_slots = same_slots and str(blooms[i]["slot"]) == str(blooms1[i]["slot"]) and str(blooms[i]["position"]) == str(blooms1[i]["position"]) and absf(float(blooms[i]["scale"]) - float(blooms1[i]["scale"])) < 0.0001 and absf(float(blooms[i]["overall_scale"]) - float(blooms1[i]["overall_scale"])) < 0.0001
+		if String(blooms[i]["preset"]) != String(blooms1[i]["preset"]):
+			differ += 1
+	var plans_differ := 0
+	for i in range(mini(bodies.size(), bodies1.size())):
+		same_slots = same_slots and str(bodies[i]["slot"]) == str(bodies1[i]["slot"]) and str(bodies[i]["faces"]) == str(bodies1[i]["faces"])
+		if String(bodies[i]["family"]) != String(bodies1[i]["family"]):
+			plans_differ += 1
+	_check(same_slots, "%s: community 1 keeps community 0's bloom and body slots, sizes and facings (%d blooms, %d bodies)" % [lab, blooms.size(), bodies.size()])
+	_check(differ >= 1, "%s: another community grows another species in at least one slot (%d of %d differ; %d body plans differ)" % [lab, differ, blooms.size(), plans_differ])
+	# (c) the flowers standing equal gen 12's count for the same DNA — the residents:off build
+	var fl_on: int = _count_bodies(b, "botanical_flower.gd", "")
+	var fl_off: int = _count_bodies(off, "botanical_flower.gd", "")
+	var cr_on: int = _count_bodies(b, "", "CreatureSDF")
+	var cr_off: int = _count_bodies(off, "", "CreatureSDF")
+	print("    [gen13] %s: %d BotanicalFlowers standing (%d dispatched + %d residents) against %d with residents off; %d creature bodies against %d; flower cells %d, creature cells %d" % [lab, fl_on, int(b._counts["flower_dispatched"]), blooms.size(), fl_off, cr_on, cr_off, int(b._counts["flower"]), int(b._counts["creature"])])
+	_check(fl_on == fl_off and fl_on == int(b._counts["flower"]) and int(b._counts["flower_dispatched"]) + blooms.size() == fl_on, "%s: the flowers standing equal gen 12's %d for the same DNA (%d dispatched + %d residents)" % [lab, fl_off, int(b._counts["flower_dispatched"]), blooms.size()])
+	_check(cr_on == cr_off and cr_on == int(b._counts["creature"]) and bodies.size() == cr_on, "%s: the creature bodies standing equal gen 12's %d — the animal count does not double" % [lab, cr_off])
+	_check(off._residents.is_empty() and int(off._counts["flower_dispatched"]) == int(off._counts["flower"]) and int(off._counts["creature_dispatched"]) == int(off._counts["creature"]), "%s: with the residents off the dispatcher builds every cell, as gen 12 did" % lab)
+	_check(var_to_str(off._cells) == var_to_str(b._cells) and var_to_str(b1._cells) == var_to_str(b._cells), "%s: the resident flags are a fact about the habitat seed — the same cells on, off and under community 1" % lab)
+	# (e) determinism: the same seeds twice give identical records
+	if var_to_str(twin._residents) != var_to_str(b._residents):
+		_diff_records(b._residents, twin._residents, lab)
+	_check(var_to_str(twin._residents) == var_to_str(b._residents), "%s: the same seeds twice give identical resident records (%d)" % [lab, b._residents.size()])
+	_check(_shape_same(_resident_shape(twin), _resident_shape(b)), "%s: the same seeds twice give identical resident geometry" % lab)
+	_check(not _shape_same(_resident_shape(b1), _resident_shape(b)), "%s: community 1 grows different resident geometry" % lab)
+	_check(var_to_str(b1._cover_tufts) == var_to_str(b._cover_tufts), "%s: community 1 keeps community 0's cover — the clearings are slot facts" % lab)
+	_check_residents(b1)
+	_check_residents(off)
 
 
 func _check_community_change(base, other, disabled) -> void:
@@ -1284,6 +1522,6 @@ func _check_community_change(base, other, disabled) -> void:
 		same_slots = same_slots and a[0] == b[0] and a[2] == b[2]
 	_check(same_slots, "community DNA does not move the slots in xz")
 	_check(var_to_str(base._cover_tufts) == var_to_str(other._cover_tufts), "community DNA keeps the same cover outside the fixed slots")
-	_check(_resident_shape(base) != _resident_shape(other), "different community DNA changes actual body geometry/material")
+	_check(not _shape_same(_resident_shape(base), _resident_shape(other)), "different community DNA changes actual body geometry/material")
 	_check(disabled._residents.is_empty(), "resident layer can be disabled to recover the parent habitat")
 	_check_residents(other)

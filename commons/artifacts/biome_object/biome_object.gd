@@ -72,7 +72,7 @@ const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 const FoliageCards := preload("res://commons/biome_layers/foliage_cards.gd")
 
-const GENERATION := 12
+const GENERATION := 13
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
@@ -87,6 +87,7 @@ const CHANGELOG: Array[String] = [
 	"gen 10: the ground in section - four soil/rock bands and a sealed underside follow the existing terrain boundary exactly; a thicker dark organic layer reads the local moisture, the surface strip reads mineral ground; a schematic profile, not simulated geology; one mesh/material, 864 triangles at size 12, no changed organism placement or foliage",
 	"gen 11: aspect — the sun is a layer (the gen-6 critic's proposal 1). The rig's key light is frozen at rotation (−42°, −35°): it travels along xz SUN_XZ = (0.574, −0.819) at 42° elevation, SUN_RUN = 1/tan 42° = 1.111 m of run per metre of height. (a) _dispatch() measures each tree's crown height _crown = 0.6·(merged branch top)·k (1.2·r·k without a mesh); a tree's shade centre is trunk + SUN_XZ·SUN_RUN·crown, and ONE law, _shade_at(p) = max over trees of (1 − |p − sc|/canopy)^0.6, now feeds the ground's shade layer (×0.85), the pool's vertex darkening (gen 7's, moved with it) and the cover's `shaded` (ferns and toadstools in the shadow, darker and smaller there); the litter keeps the trunk — leaves fall straight down; the meadow's drip-line bonus is +0.25 only on the LIT side of its nearest trunk ((cell − trunk)·SUN_XZ < 0), +0.05 on the shaded side. No new draw: (a) moved the paint, the understory and the meadow's side and left every other count. (b) the moisture loop takes an aspect term after its jitter draw: g = (h(x+1) − h(x−1), h(z+1) − h(z−1))·0.5 in metres, m −= 0.12·clamp(g·SUN_XZ/0.25, −1, 1) — the flank facing the sun dries, the lee holds — which re-rolls the layout by the seed (trees, meadow, rim, creatures, the ridge)",
 	"gen 12: catalogue residents share the ground but carry independent community DNA; up to six fruiting-fungus colonies use existing CritterDNA presets and FungusMorphology, choose moist gaps beside mycelium, respect an explicit footprint and clear cover beneath them; changing community_seed keeps terrain, water, trees and networks fixed; each resident records catalogue identity, preset, expressed genes, seed and habitat",
+	"gen 13: two more catalogue builders on Astra's contract, the object handing over slots it already owns instead of adding bodies. (a) living_flora_bloom — the nine BotanicalFlower species are families with designed habitat preferences (moisture, shade, the sun's side of the trunk); _ecology() marks every second or third meadow cell `resident` by a stride and phase drawn from the HABITAT seed (never the community's, never the ecology's stream), _dispatch() leaves those cells, and populate() stands a species there chosen by the community seed and the slot's habitat, the SIZE still the habitat's (the dispatcher's overall_scale on the cell's intensity, the moisture growth 1.4 + 0.4·m) — another community, another species, the same size; the meadow count is unchanged and the flag is a fact about the seed, so residents:off rebuilds gen 12 exactly. (b) living_fauna_body — every creature cell (1–4) is handed over, so the animal count does not double; three body plans (shore_grub: low, more rings, social, dark, drawn to the water; meadow_walker: taller, fewer rings, lighter, sun-side; rock_lurker: iridescent, metallic, coiled, drawn to the crystals) are CritterDNA gene overrides on the dispatcher's own walker recipe, built by CreatureSdfMorphology, each body's xz centred on its slot and TURNED to face what it lives by — the nearest water cell within 3 cells, else the nearest flower cell — rotation.y = atan2(−dx, −dz) since the eyes look down local −Z; the record carries `faces` and `footprint`. These are PLACED bodies: no movement, no simulation. Each slot's cover clearing is a fixed radius (0.32 m a bloom, 0.5 m a body), so the cover is the same under every community. Three facts learned building it: a bloom slot must stand BLOOM_EDGE_M = 1.0 m inside the plate (a crown imperial at overall_scale 2.5 × growth 1.74 measured 0.67 m of reach from an outer-ring slot 0.31 m off the edge); a body's bounds must be composed from LOCAL transforms (measured through inverse(root.global) × node.global, a twin standing 30 m along x recorded a reach 1.6e-6 m different — the record drifted with the address); and the SDF builder's skin must be re-created with the body seed (the mapper draws pattern_rotation from the global randi() when handed no seed)",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 ## gen 11: THE SUN. The capture rig's key light (commons/testing/capture_config_sweep.gd,
@@ -98,6 +99,10 @@ const STATE_DIR := "res://ada_run/biome_rsi/state"
 ## not carry one (the gen-6 critic: "do not replace it").
 const SUN_XZ := Vector2(0.574, -0.819)
 const SUN_RUN := 1.111   # 1 / tan 42°
+## gen 13: a meadow cell is a resident slot only when its body point stands this far inside
+## the plate — a bloom there may be any species at the habitat's size (measured: a crown
+## imperial at overall_scale 2.5 × growth 1.74 reaches 0.67 m; an iris's leaves ~0.9 m).
+const BLOOM_EDGE_M := 1.0
 const K_TREE := 0
 const K_CREATURE := 1
 const K_FLOWER := 2
@@ -193,7 +198,9 @@ func _build() -> void:
 	var t0 := Time.get_ticks_msec()
 	_counts = {"water": 0, "mineral": 0, "scree": 0, "fungus": 0, "fungus_path": 0, "tree": 0, "flower": 0,
 		"creature": 0, "cover": 0, "connections": 0, "paint": 0,
-		"ms_tree": 0, "ms_flower": 0, "ms_fungus": 0, "ms_creature": 0}   # gen 3: the bill, by payer
+		"ms_tree": 0, "ms_flower": 0, "ms_fungus": 0, "ms_creature": 0,   # gen 3: the bill, by payer
+		"slots_bloom": 0, "slots_body": 0, "flower_dispatched": 0, "creature_dispatched": 0,   # gen 13: the slots handed over, the bodies the dispatcher still built
+		"residents_fungus": 0, "residents_bloom": 0, "residents_body": 0}
 	_patch = Node3D.new()
 	_patch.name = "Biome"
 	add_child(_patch)
@@ -210,12 +217,20 @@ func _build() -> void:
 		_residents = Residents.populate(self, community_seed)
 	_counts["residents"] = _residents.size()
 	_counts["ms_residents"] = Time.get_ticks_msec() - residents_start
+	# gen 13: the residents by artifact — the count line's "flowers" and "creatures" stay the
+	# ecology's cells; a resident stands in a cell the dispatcher left, never beside its body
+	for r in _residents:
+		match String(r["artifact"]):
+			"living_fungus_fruit": _counts["residents_fungus"] += 1
+			"living_flora_bloom": _counts["residents_bloom"] += 1
+			"living_fauna_body": _counts["residents_body"] += 1
 	_cover()
 	_build_ms = Time.get_ticks_msec() - t0
-	print("[biome_object] gen %d %s: water %d, mineral %d (scree %d), fungus %d (path %d), trees %d, flowers %d, creatures %d, cover %d, connections %d, paint %d — %d ms (tree %d, flower %d, fungus %d, creature %d)" % [
+	print("[biome_object] gen %d %s: water %d, mineral %d (scree %d), fungus %d (path %d), trees %d, flowers %d, creatures %d, cover %d, connections %d, paint %d — %d ms (tree %d, flower %d, fungus %d, creature %d); residents %d (fungus %d, blooms %d of %d slots, bodies %d of %d slots) %d ms" % [
 		GENERATION, label(), _counts["water"], _counts["mineral"], _counts["scree"], _counts["fungus"], _counts["fungus_path"],
 		_counts["tree"], _counts["flower"], _counts["creature"], _counts["cover"], _counts["connections"], _counts["paint"], _build_ms,
-		_counts["ms_tree"], _counts["ms_flower"], _counts["ms_fungus"], _counts["ms_creature"]])
+		_counts["ms_tree"], _counts["ms_flower"], _counts["ms_fungus"], _counts["ms_creature"],
+		_counts["residents"], _counts["residents_fungus"], _counts["residents_bloom"], _counts["slots_bloom"], _counts["residents_body"], _counts["slots_body"], _counts["ms_residents"]])
 	if record == "on":
 		_write_state()
 
@@ -501,11 +516,34 @@ func _ecology() -> void:
 				meadow.append({"key": key, "m": score})
 	meadow.sort_custom(func(p, q): return float(p["m"]) > float(q["m"]))
 	var n_fl: int = clampi(int(round(float(meadow_pool) * (0.25 + 0.5 * wildness))), 3, 24)
+	# gen 13: the meadow's RESIDENT SLOTS — every `period`-th flower cell (2 or 3) from `phase`,
+	# in the order the meadow takes them, is handed to the residents layer: it stays a flower
+	# cell (the drip line, the creatures' "beside", the count and the connections all read
+	# it) but _dispatch() leaves it and populate() stands a catalogue species there. The
+	# stride is drawn from a rng of the HABITAT seed alone — not the community's, so the
+	# slots are the same under every community; not the ecology's, whose stream the
+	# creatures below still read, so no gen-12 draw moves
+	var srng := RandomNumberGenerator.new()
+	srng.seed = hash([seed, "bloom_slots"])
+	var period: int = srng.randi_range(2, 3)
+	var phase: int = srng.randi_range(0, period - 1)
+	var fi := 0
+	var half_w: float = float(size) * 0.5
 	for f in meadow:
 		if _counts["flower"] >= n_fl:
 			break
 		var inten: int = clampi(1 + int(round(float(f["m"]) * 4.5)), 1, 5)
 		_cells[f["key"]] = {"kingdom": "flower", "inten": inten, "algo": ""}
+		# only a cell whose body point (the jittered centre, _body_xz) stands BLOOM_EDGE_M
+		# inside the plate can be a slot: a resident may be any species at the habitat's size,
+		# and the largest preset at the largest size reaches ~0.9 m — the outer ring keeps the
+		# dispatcher's own flowers, which no rule measures
+		var bxz: Vector2 = _body_xz(f["key"])
+		if half_w - maxf(absf(bxz.x), absf(bxz.y)) >= BLOOM_EDGE_M:
+			if (fi + phase) % period == 0:
+				_cells[f["key"]]["resident"] = true
+				_counts["slots_bloom"] += 1
+			fi += 1
 		_counts["flower"] += 1
 	# creatures: beside the flowers and the fungus
 	var beside: Array = []
@@ -529,8 +567,12 @@ func _ecology() -> void:
 			break
 		# a creature lives BESIDE things, so the spacing is against other creatures only
 		if _spaced_from(key, 2, "creature"):
-			_cells[key] = {"kingdom": "creature", "inten": 2 + rng.randi_range(0, 1), "algo": ""}
+			# gen 13: EVERY creature cell is a resident slot — the body is the community's (a
+			# plan on the dispatcher's recipe), the cell, its intensity and its neighbours the
+			# habitat's; the dispatcher leaves it, so the animal count does not double
+			_cells[key] = {"kingdom": "creature", "inten": 2 + rng.randi_range(0, 1), "algo": "", "resident": true}
 			_counts["creature"] += 1
+			_counts["slots_body"] += 1
 	# connections: fungus cells with a tree or flower next to them — the network touches the wood
 	for key in _cells.keys():
 		if String(_cells[key]["kingdom"]) != "fungus":
@@ -622,6 +664,36 @@ func _spaced_from(key: Vector2i, r: int, kingdom: String) -> bool:
 			if (dx != 0 or dz != 0) and _cells.has(nk) and String(_cells[nk]["kingdom"]) == kingdom:
 				return false
 	return true
+
+
+## Where a cell's body stands, world xz: a trunk or a path mat where the ecology put it
+## (_pos), any other cell at its centre plus the ±0.3 m jitter drawn from the per-cell rng —
+## the two draws _dispatch() has always made. gen 13: one law, so a resident stands exactly
+## where the dispatcher would have stood the cell's own body.
+func _body_xz(key: Vector2i) -> Vector2:
+	if _pos.has(key):
+		return _pos[key] as Vector2
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash([seed, "cell", key.x, key.y])
+	var cw: Vector3 = _cell_world(key.x, key.y)
+	return Vector2(cw.x + rng.randf_range(-0.3, 0.3), cw.z + rng.randf_range(-0.3, 0.3))
+
+
+## gen 13: the meadow's side rule (gen 11) at any world xz — true when the point lies on the
+## SUN's side of its nearest trunk, nearest in that tree's own rs units as the meadow measures
+## it: (p − trunk)·SUN_XZ < 0, the light coming from −SUN_XZ. Open ground with no tree is lit.
+func _lit_side(at: Vector2) -> bool:
+	var u := 99.0
+	var ut := Vector2i(-1, -1)
+	for t in _trees:
+		var rs: float = 0.6 * (0.6 + 0.2 * float(int(_cells[t]["inten"]))) * float(_cells[t].get("k", 1.0))
+		var ud: float = at.distance_to(_pos[t]) / rs
+		if ud < u:
+			u = ud
+			ut = t
+	if ut.x < 0:
+		return true
+	return (at - (_pos[ut] as Vector2)).dot(SUN_XZ) < 0.0
 
 
 # ── the bodies ────────────────────────────────────────────────────────────────
@@ -1056,17 +1128,19 @@ func _dispatch() -> void:
 		var kname := String(c["kingdom"])
 		if not ids.has(kname):
 			continue
-		var rng := RandomNumberGenerator.new()
-		rng.seed = hash([seed, "cell", key.x, key.y])
-		var wp: Vector3 = _cell_world(key.x, key.y)
-		if _pos.has(key):
-			# gen 2: a trunk or a path mat stands where the ecology put it
-			wp.x = float(_pos[key].x)
-			wp.z = float(_pos[key].y)
-		else:
-			wp.x += rng.randf_range(-0.3, 0.3)
-			wp.z += rng.randf_range(-0.3, 0.3)
-		wp.y = _h_at(wp.x, wp.z)
+		# gen 13: a cell marked `resident` is the residents layer's while that layer is on —
+		# the dispatcher leaves it and populate() stands a catalogue body in the same place
+		# (_body_xz); with residents off every cell is built here, as gen 12 built it
+		if residents == "on" and bool(c.get("resident", false)):
+			continue
+		if kname == "flower":
+			_counts["flower_dispatched"] += 1
+		elif kname == "creature":
+			_counts["creature_dispatched"] += 1
+		# gen 2: a trunk or a path mat stands where the ecology put it; any other body at its
+		# cell's centre with the per-cell jitter (gen 13: _body_xz, one law with the residents)
+		var xz: Vector2 = _body_xz(key)
+		var wp := Vector3(xz.x, _h_at(xz.x, xz.y), xz.y)
 		# the dispatcher's builders place by GLOBAL position (a painted map cell's world_pos
 		# is global), so the surface point goes out in the patch's global frame
 		var deposit := {"x": key.x, "z": key.y, "kingdom": int(ids[kname]),

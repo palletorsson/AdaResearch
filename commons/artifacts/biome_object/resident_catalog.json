@@ -1,20 +1,46 @@
 {
-  "version": 1,
-  "note": "Designed habitat preferences for the biome, not botanical claims. The body recipes are existing catalogue DNA. Add a tested adapter and space budget before admitting another builder.",
+  "version": 2,
+  "note": "Designed habitat preferences for the biome, not botanical claims. The body recipes are existing catalogue DNA. Add a tested adapter and space budget before admitting another builder. A family's `moisture` and `shade` are Astra's fitness terms; `lit` (0 shade-side .. 1 sun-side of the nearest trunk) and `near` (\"water\" in cells / \"mineral\" in metres, `near_weight` at distance 0, nothing at 3) are gen 13's optional terms. gen 13's builders take slots the object already owns: flower_preset the meadow cells _ecology() marks resident (a stride from the habitat seed), creature_dna every creature cell.",
   "max_colonies": 6,
   "radius_m": 0.72,
+  "bloom_radius_m": 0.32,
+  "body_radius_m": 0.5,
   "families": [
     {"id": "button_dome", "artifact": "living_fungus_fruit", "builder": "fungus_dna", "preset_dir": "res://algorithms/nature_system/morphology/fungus_presets", "prefix": "fd", "variants": 12, "moisture": 0.68, "shade": 0.55, "role": "low fruiting bodies near the damp network"},
     {"id": "parasol_tall", "artifact": "living_fungus_fruit", "builder": "fungus_dna", "preset_dir": "res://algorithms/nature_system/morphology/fungus_presets", "prefix": "fd", "variants": 12, "moisture": 0.43, "shade": 0.0, "role": "tall stems in open gaps beside the network"},
     {"id": "fairy_ring", "artifact": "living_fungus_fruit", "builder": "fungus_dna", "preset_dir": "res://algorithms/nature_system/morphology/fungus_presets", "prefix": "fd", "variants": 12, "moisture": 0.55, "shade": 0.15, "role": "a group sharing one clear patch of ground"},
-    {"id": "alien_lumen", "artifact": "living_fungus_fruit", "builder": "fungus_dna", "preset_dir": "res://algorithms/nature_system/morphology/fungus_presets", "prefix": "fd", "variants": 12, "moisture": 0.76, "shade": 0.7, "role": "luminous caps in the moist understory"}
+    {"id": "alien_lumen", "artifact": "living_fungus_fruit", "builder": "fungus_dna", "preset_dir": "res://algorithms/nature_system/morphology/fungus_presets", "prefix": "fd", "variants": 12, "moisture": 0.76, "shade": 0.7, "role": "luminous caps in the moist understory"},
+
+    {"id": "iris", "artifact": "living_flora_bloom", "builder": "flower_preset", "preset": "iris", "moisture": 0.88, "shade": 0.05, "lit": 1.0, "role": "wet and lit, the shore's tall flag (stem 0.35)"},
+    {"id": "fritillaria", "artifact": "living_flora_bloom", "builder": "flower_preset", "preset": "fritillaria", "moisture": 0.82, "shade": 0.25, "lit": 0.5, "role": "wet, the shore either side of the light, hanging bells (stem 0.30)"},
+    {"id": "corydalis", "artifact": "living_flora_bloom", "builder": "flower_preset", "preset": "corydalis", "moisture": 0.62, "shade": 0.8, "lit": 0.0, "role": "the shade under the canopy, low and many-headed (stem 0.16)"},
+    {"id": "orchid", "artifact": "living_flora_bloom", "builder": "flower_preset", "preset": "orchid", "moisture": 0.68, "shade": 0.6, "lit": 0.0, "role": "the shade's edge, a spike of five (stem 0.25)"},
+    {"id": "allium", "artifact": "living_flora_bloom", "builder": "flower_preset", "preset": "allium", "moisture": 0.46, "shade": 0.0, "lit": 1.0, "role": "dry and sunny, a globe on a bare stem (stem 0.35)"},
+    {"id": "crown_imperial", "artifact": "living_flora_bloom", "builder": "flower_preset", "preset": "crown_imperial", "moisture": 0.5, "shade": 0.0, "lit": 1.0, "role": "dry and sunny, the tallest body in the meadow (stem 0.50)"},
+    {"id": "daisy", "artifact": "living_flora_bloom", "builder": "flower_preset", "preset": "daisy", "moisture": 0.56, "shade": 0.1, "lit": 0.7, "role": "the open meadow, low and white (stem 0.10)"},
+    {"id": "clover", "artifact": "living_flora_bloom", "builder": "flower_preset", "preset": "clover", "moisture": 0.6, "shade": 0.15, "lit": 0.5, "role": "the open meadow, lowest of all, either side of the light (stem 0.10)"},
+    {"id": "bluebell", "artifact": "living_flora_bloom", "builder": "flower_preset", "preset": "bluebell", "moisture": 0.66, "shade": 0.4, "lit": 0.5, "role": "mid moisture, mid shade, either side — the meadow's default (stem 0.22)"},
+
+    {"id": "shore_grub", "artifact": "living_fauna_body", "builder": "creature_dna", "preset": "creature_dna_from_seed", "moisture": 0.85, "shade": 0.35, "lit": 0.5, "near": "water", "near_weight": 0.45,
+     "body": {"segments_add": 2.0, "scale_mul": 0.9, "part_length_mul": 0.8, "part_width_mul": 1.2, "size": 0.9},
+     "genes": {"sociality": 0.9, "mobility": 0.3, "iridescence": 0.08, "metallic": 0.0, "roughness": 0.8, "part_curve": 0.2, "branch_angle": 20.0},
+     "tint": {"saturation": 0.55, "value": 0.45},
+     "role": "a low, dark, many-ringed body at the shore, one of a group, facing the water"},
+    {"id": "meadow_walker", "artifact": "living_fauna_body", "builder": "creature_dna", "preset": "creature_dna_from_seed", "moisture": 0.55, "shade": 0.05, "lit": 1.0,
+     "body": {"segments_add": -1.0, "scale_mul": 1.15, "part_length_mul": 1.3, "part_width_mul": 0.85, "size": 1.1},
+     "genes": {"sociality": 0.35, "mobility": 0.85, "iridescence": 0.15, "metallic": 0.0, "roughness": 0.5, "part_curve": 0.45, "branch_angle": 50.0},
+     "tint": {"saturation": 0.45, "value": 1.15},
+     "role": "a taller, lighter, few-ringed walker on the sunny side of the meadow, legs splayed, facing the flowers"},
+    {"id": "rock_lurker", "artifact": "living_fauna_body", "builder": "creature_dna", "preset": "creature_dna_from_seed", "moisture": 0.35, "shade": 0.25, "lit": 0.2, "near": "mineral", "near_weight": 0.6,
+     "body": {"segments_add": 0.0, "scale_mul": 1.0, "part_length_mul": 0.9, "part_width_mul": 1.05, "size": 1.0},
+     "genes": {"sociality": 0.2, "mobility": 0.2, "iridescence": 0.75, "metallic": 0.45, "roughness": 0.25, "part_curve": 0.65, "branch_angle": 25.0},
+     "tint": {"saturation": 0.8, "value": 0.7},
+     "role": "an iridescent, metallic body coiled near the crystals, drawn to the minerals"}
   ],
   "next_adapters": [
     {"artifact": "living_fungus_fruit", "family": "shelf_bracket", "needs": "A trunk attachment, rather than a free-standing ground slot."},
     {"artifact": "living_fungus_pose", "needs": "Pose-aware bounds and contacts; static deformation must not be presented as simulated physics."},
     {"artifact": "living_flora_tree", "needs": "DNA variants within the tree slot, with measured canopy/shadow and clearance updated."},
-    {"artifact": "living_flora_bloom", "needs": "Separate flower identity from size; replace existing meadow occupants within its budget."},
-    {"artifact": "living_fauna_body", "needs": "Body footprint and orientation toward a resource; movement needs its own simulation budget."},
     {"artifact": "living_fungus_colony", "needs": "Keep the connecting network's role distinct from its fruiting body or CA/SDF representation."}
   ]
 }
