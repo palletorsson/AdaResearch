@@ -78,6 +78,7 @@ the gradient; the critic had predicted the number could not see a strand on bark
 | 6 | 629d0ee7f | **Astra's pass** (a second session, critic and builder as one agent): the cover is independent samples that never show they share a condition → cover in moisture-sized tufts sharing a centre, type and colour; reed beds at the shore; flat litter under the inner canopy; the driest ground bare; every member checked against water, shelf, scree, the crystal exclusion and the plate; private seeded streams; cap 864 | 0.975 / 0.733, 3.5 % changed | kept by Astra on sight; seen and agreed, committed by this session |
 | 7 | db73c6e6d | (the gen-4 critic's plan, amended by the gen-6 critic) the water a target, the webs the brightest thing → the pool's disc a six-ring fan with vertex colours, dark centre to lighter rim, darkened under every canopy, built after the bodies; no ring; each web's light by its growth step, dim at the finished rim and bright at the tip on the bark; matte crystals | 0.985 / 0.724 (darker water on purpose), 2.7 % changed | kept |
 | 8 | 5a8145092 | Palle: grass and plant foliage as transparent images → the cover's grass, reeds, ferns, meadow plants and litter as alpha-cut cards on two crossed quads, one near-white tint per tuft for dryness and shade, images drawn by `tools/make_foliage_cards.py` and loaded by name at runtime; mushrooms keep their mesh | 0.995 / 0.777, 4.0 % changed | kept — the largest step in legibility since generation 1 |
+| 9 | e62f0ceee | Palle: can the cards be made procedurally → `foliage_cards.gd` draws the five cards in the engine at build time from the seed and the moisture (a disc brush along Bézier strokes, sin-profiled leaves), 4–10 ms a card, cached per kind, seed and moisture band; the PNG set stays behind `#foliage:files` | 1.000 / 0.777, 1.9 % changed | kept — the same picture from no files; the cards are DNA now |
 
 The critic of generation 3 planned **4** (built) and **5** (built), then **6** the basin shows
 depth and the creatures face what they live by, **7** the plate's cut edge as a section. The
@@ -96,7 +97,7 @@ meadow's bonus on the lit side, then a slope-aspect term in the moisture); **9**
 the cut edge shows the strata; **9 or 10** inhabitants — a creature faces what it lives by, a
 worn track behind it. All critiques are in `ada_run/biome_rsi/`.
 
-Nine generations in one day (one of them another session's), every one kept on sight, none culled: the culling rule has
+Ten generations in one day (one of them another session's), every one kept on sight, none culled: the culling rule has
 not yet been exercised, which is a fact about the critics' proposals being small and
 well-aimed, not about the rule.
 
