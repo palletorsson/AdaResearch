@@ -161,18 +161,33 @@ def _tile_measures(a):
     ratio = float((ys.max() - ys.min() + 1) / max(1, xs.max() - xs.min() + 1)) if len(ys) else 0.0
     # legibility-v1 (added after the gen-0 critique: integration-v1 saturates once every world
     # has six layers, so the things the critic looks FOR get their own named numbers):
-    #   water_px   share of subject pixels that read blue (the pool is visible, not buried)
+    #   water_px   share of subject pixels that read blue. NAMED BADLY AND KEPT ANYWAY: the test
+    #              is (b > r+18) & (b > g+8), and the crystal albedo (0.58, 0.66, 0.86) and the
+    #              scree's (0.62, 0.70, 0.88) both pass it, so this has counted the whole mineral
+    #              kingdom since generation 0. Measured 2026-09-18 over the stored tiles, the
+    #              share of it that is NOT pool: generation 0 100 %, generation 5 59 %,
+    #              generations 11/14/16 86 %. legibility-v1 reads it anyway, because rewriting a
+    #              measure after the fact would silently restate every row of the lineage; the
+    #              number stands as the record of what was actually measured.
+    #   pool_px    the conservative twin, (b > r*1.9) & (b > g+8). The ratio is shade-invariant
+    #              and the pool's own colours clear it (POOL_CENTRE b/r = 7.5, POOL_RIM 2.8)
+    #              while crystal (1.49) and scree (1.42) do not. It is a LOWER bound, not the
+    #              truth: the shallow rim blended over sand at alpha 0.62 reads (119, 154, 171)
+    #              and fails it too. The real pool share is bracketed by the pair — on the
+    #              generation-16 tiles, between 0.0102 and 0.0719.
     #   ground_var std of luminance over the subject (a ground that shows its moisture varies)
     #   green_px   share of subject pixels that read green (the living cover)
-    water = green = 0.0
+    water = green = pool = 0.0
     gvar = 0.0
     if len(px) > 0:
         r, g, b = px[:, 0].astype(float), px[:, 1].astype(float), px[:, 2].astype(float)
         water = float(((b > r + 18) & (b > g + 8)).mean())
+        pool = float(((b > r * 1.9) & (b > g + 8)).mean())   # the mineral-free lower bound
         green = float(((g > r + 12) & (g > b + 12)).mean())
         gvar = float((0.299 * r + 0.587 * g + 0.114 * b).std() / 255.0)
     return {"subject_frac": round(frac, 4), "colour_bins": bins, "bbox_ratio": round(ratio, 3),
-            "water_px": round(water, 4), "green_px": round(green, 4), "ground_var": round(gvar, 4)}
+            "water_px": round(water, 4), "pool_px": round(pool, 4),
+            "green_px": round(green, 4), "ground_var": round(gvar, 4)}
 
 
 def measure(n: int, parent: int | None) -> dict:
@@ -197,7 +212,8 @@ def measure(n: int, parent: int | None) -> dict:
                 import numpy as np
                 row["change_vs_parent"] = round(float((np.abs(a - b).max(axis=2) > DIFF_T).mean()), 4)
         else:
-            row["tile"] = {"subject_frac": 0.0, "colour_bins": 0, "bbox_ratio": 0.0}
+            row["tile"] = {"subject_frac": 0.0, "colour_bins": 0, "bbox_ratio": 0.0,
+                           "water_px": 0.0, "pool_px": 0.0, "green_px": 0.0, "ground_var": 0.0}
         row["integration_v1"] = round(0.40 * kp / 6.0 + 0.30 * min(1.0, conn / 6.0)
                                       + 0.30 * min(1.0, row["tile"]["colour_bins"] / 10.0), 4)
         t = row["tile"]
@@ -212,6 +228,7 @@ def measure(n: int, parent: int | None) -> dict:
                "integration_v1_min": round(min(vals), 4) if vals else 0.0,
                "legibility_v1_mean": round(sum(legs) / len(legs), 4) if legs else 0.0,
                "water_px_mean": round(sum(r["tile"]["water_px"] for r in rows.values()) / len(rows), 4),
+               "pool_px_mean": round(sum(r["tile"].get("pool_px", 0.0) for r in rows.values()) / len(rows), 4),
                "ground_var_mean": round(sum(r["tile"]["ground_var"] for r in rows.values()) / len(rows), 4),
                "kingdoms_mean": round(sum(r["state"]["kingdoms_present"] for r in rows.values()) / len(rows), 2),
                "connections_mean": round(sum(r["state"]["connections"] for r in rows.values()) / len(rows), 2),
@@ -224,7 +241,7 @@ def measure(n: int, parent: int | None) -> dict:
     res = {"gen": n, "parent": parent, "fitness": "integration-v1", "rows": rows, "summary": summary}
     (out / "measures.json").write_text(json.dumps(res, indent=1), encoding="utf-8")
     print(f"  [gen {n}] integration-v1 mean {summary['integration_v1_mean']:.3f} (min {summary['integration_v1_min']:.3f}) · "
-          f"legibility-v1 {summary['legibility_v1_mean']:.3f} (water {100 * summary['water_px_mean']:.1f}% of subject, ground var {summary['ground_var_mean']:.3f}) · "
+          f"legibility-v1 {summary['legibility_v1_mean']:.3f} (blue {100 * summary['water_px_mean']:.1f}% of subject, of which pool at least {100 * summary.get('pool_px_mean', 0.0):.1f}%, ground var {summary['ground_var_mean']:.3f}) · "
           f"kingdoms {summary['kingdoms_mean']}/6 · connections {summary['connections_mean']} · hues {summary['colour_bins_mean']} · "
           f"subject {100 * summary['subject_mean']:.1f}% · build {summary['build_ms_max']} ms"
           + (f" · change vs gen {parent}: {100 * summary['change_vs_parent_mean']:.1f}%" if "change_vs_parent_mean" in summary else ""))
@@ -240,7 +257,7 @@ def compare(n: int, against: int) -> None:
         ia, ib = ra["integration_v1"], rb.get("integration_v1", 0.0)
         print(f"  {lab:<18} {ib:>10.3f} {ia:>10.3f} {ia - ib:+.3f}  {100 * ra.get('change_vs_parent', 0):.1f}%")
     sa, sb = a["summary"], b["summary"]
-    print(f"  legibility-v1 {sb.get('legibility_v1_mean', 0):.3f} -> {sa.get('legibility_v1_mean', 0):.3f}; water {100 * sb.get('water_px_mean', 0):.1f}% -> {100 * sa.get('water_px_mean', 0):.1f}%; ground var {sb.get('ground_var_mean', 0):.3f} -> {sa.get('ground_var_mean', 0):.3f}")
+    print(f"  legibility-v1 {sb.get('legibility_v1_mean', 0):.3f} -> {sa.get('legibility_v1_mean', 0):.3f}; blue {100 * sb.get('water_px_mean', 0):.1f}% -> {100 * sa.get('water_px_mean', 0):.1f}% (pool at least {100 * sb.get('pool_px_mean', 0):.1f}% -> {100 * sa.get('pool_px_mean', 0):.1f}%); ground var {sb.get('ground_var_mean', 0):.3f} -> {sa.get('ground_var_mean', 0):.3f}")
     print(f"  mean {sb['integration_v1_mean']:.3f} -> {sa['integration_v1_mean']:.3f} ({sa['integration_v1_mean'] - sb['integration_v1_mean']:+.3f}); "
           f"kingdoms {sb['kingdoms_mean']} -> {sa['kingdoms_mean']}; connections {sb['connections_mean']} -> {sa['connections_mean']}; "
           f"hues {sb['colour_bins_mean']} -> {sa['colour_bins_mean']}")
