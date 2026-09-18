@@ -80,6 +80,7 @@ the gradient; the critic had predicted the number could not see a strand on bark
 | 8 | 5a8145092 | Palle: grass and plant foliage as transparent images → the cover's grass, reeds, ferns, meadow plants and litter as alpha-cut cards on two crossed quads, one near-white tint per tuft for dryness and shade, images drawn by `tools/make_foliage_cards.py` and loaded by name at runtime; mushrooms keep their mesh | 0.995 / 0.777, 4.0 % changed | kept — the largest step in legibility since generation 1 |
 | 9 | e62f0ceee | Palle: can the cards be made procedurally → `foliage_cards.gd` draws the five cards in the engine at build time from the seed and the moisture (a disc brush along Bézier strokes, sin-profiled leaves), 4–10 ms a card, cached per kind, seed and moisture band; the PNG set stays behind `#foliage:files` | 1.000 / 0.777, 1.9 % changed | kept — the same picture from no files; the cards are DNA now |
 | 10 | 347cb3c37 (Astra) | the ground ends as a thin sheet -> four schematic soil/rock bands and a closed underside follow the terrain edge; local moisture thickens the dark layer, mineral ground tints the surface strip; foliage and placement unchanged | 0.990 / 0.759, 13.0% changed including automatic camera refitting | kept on sight; 337 checks pass, one mesh / 864 triangles |
+| 11 | 60ccb2181 | (the gen-6 critic's plan) the key light, the one directional thing in the frame, was read by nothing → the sun as a constant of the object (read from the frozen rig), the painted shade, the understory and the pool's darkening moved to the displaced shadow centre, the drip-line bonus on the lit side, a slope-aspect term drying the sun-facing flank | 0.995 / 0.756, 15 % changed (layouts re-rolled) | kept |
 
 The critic of generation 3 planned **4** (built) and **5** (built), then **6** the basin shows
 depth and the creatures face what they live by, **7** the plate's cut edge as a section. The
@@ -98,9 +99,21 @@ meadow's bonus on the lit side, then a slope-aspect term in the moisture); **9**
 the cut edge shows the strata; **9 or 10** inhabitants — a creature faces what it lives by, a
 worn track behind it. All critiques are in `ada_run/biome_rsi/`.
 
-Eleven generations in one day (one of them another session's), every one kept on sight, none culled: the culling rule has
+Twelve generations in one day (two of them another session's), every one kept on sight, none culled: the culling rule has
 not yet been exercised, which is a fact about the critics' proposals being small and
 well-aimed, not about the rule.
+
+The critic of generation 10 (agreeing with Astra's keep: the ground is a body now, but a
+plinth rather than a cut — one layer cake on all six worlds, because the cut runs the perimeter
+where every world is driest and most alike) moved the weakest thing to the COMPOSITION: a target,
+the basin always in the middle 44 % of the plate, so nothing the process makes reaches the cut;
+and the creatures, placed but never turned. Its path: **12** the cut keeps a record (rock rising
+to two thirds of a dry cut, soil to the base of a wet one, rock to the skin under a crystal,
+the silt on the face of a water cell, the skin darkened in shade); **13** the basin may reach
+the edge (a third of seeds move the water to a side; the disc clamped as a D against the cut;
+a water face on the section); **13 or 14** inhabitants and the web ages (a creature turned to
+face the water or the nearest flower, a worn track behind it; finished cords brown like
+rhizomorphs, the growing tip white). It would not add a second pool, nor ripple the water.
 
 ## 5. What was learned on the way
 
