@@ -14,7 +14,10 @@ class_name BiomeObject
 ##               gradient, ochre wherever it is dry, moss wherever wet, a sand shore on the
 ##               shelf, silt darkest at the middle of the pool (gen 2); the canopy's SHADE
 ##               painted last, read off the measured canopy — dark moss at the trunk (gen 4);
-##               bare ROCK painted at every crystal cluster and under its scree (gen 5)
+##               bare ROCK painted at every crystal cluster and under its scree (gen 5); the
+##               shade painted where the rig's SUN throws it — the trunk carried along
+##               SUN_XZ by the crown's height — and a slope facing the sun drier than its
+##               lee at the same height and distance from the water (gen 11)
 ##   water       a pool in the basin (the old biome's own pool: disc, ripple rings, reeds), the
 ##               disc lapping the shelf and the reeds standing on the shore (gen 1); one thin
 ##               ring set toward the oldest tree — an edge, not a target (gen 2); the disc a
@@ -38,14 +41,17 @@ class_name BiomeObject
 ##               hands back is scaled: a tree by its rank and the moisture (the shore tree
 ##               ~5 m, capped so its measured canopy stays inside the footprint), a flower by
 ##               the moisture, a creature 1.6x (gen 3); every tree one species (inten 1-4) and
-##               the meadow at the DRIP LINE — no flower under a canopy, a ring round it (gen 4)
+##               the meadow at the DRIP LINE — no flower under a canopy, a ring round it (gen 4),
+##               the ring's bonus only on the LIT side of the trunk (gen 11)
 ##   fauna       creatures beside the flowers and the fungus
 ##   cover       grass and stubble by moisture, on the surface, everywhere; the understory
 ##               follows the canopy — ferns and toadstools under a tree, toadstools along the
 ##               web, the grass green where wet and straw where dry, bare where driest (gen 3);
 ##               none within 0.8 m of a crystal cluster — bare rock (gen 5); moisture-sized
 ##               tufts, shore beds and litter inside the canopy; every member checks water,
-##               bare rock and its mesh footprint, capped at 864 cover instances (gen 6)
+##               bare rock and its mesh footprint, capped at 864 cover instances (gen 6); the
+##               ferns and toadstools in the SHADOW, where the paint is, the litter still at
+##               the foot — leaves fall straight down (gen 11)
 ##
 ## Every organism is the old biome's builder, reached through BiomePaintDispatcher exactly as
 ## a painted map cell would reach it, only the CELL is chosen by moisture, height and slope
@@ -65,7 +71,7 @@ const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 const FoliageCards := preload("res://commons/biome_layers/foliage_cards.gd")
 
-const GENERATION := 10
+const GENERATION := 11
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
@@ -78,8 +84,18 @@ const CHANGELOG: Array[String] = [
 	"gen 8: grass and plant foliage as transparent images (Palle) — the cover's grass, reeds, ferns, meadow plants and litter are alpha-cut cards on two crossed quads, images from commons/biome_layers/foliage/ (tools/make_foliage_cards.py draws the defaults, any same-named PNG replaces one) loaded at runtime, tinted near white by dryness and shade; mushrooms keep their mesh; a missing image falls back to the old mesh",
 	"gen 9: the foliage cards drawn IN the engine from the seed (Palle: can we make the foliage card procedurally?) — commons/biome_layers/foliage_cards.gd paints grass, reed, fern, plant and litter on an Image at build time with a disc brush along Bézier strokes and sin-profiled leaves; the seed shapes them, the moisture changes what grows (blade count and straw, cattail heads only when wet, fuller ferns and broader leaves when wet, redder litter when dry); cached per kind, seed and moisture band; `#foliage:files` keeps the PNG set",
 	"gen 10: the ground in section - four soil/rock bands and a sealed underside follow the existing terrain boundary exactly; a thicker dark organic layer reads the local moisture, the surface strip reads mineral ground; a schematic profile, not simulated geology; one mesh/material, 864 triangles at size 12, no changed organism placement or foliage",
+	"gen 11: aspect — the sun is a layer (the gen-6 critic's proposal 1). The rig's key light is frozen at rotation (−42°, −35°): it travels along xz SUN_XZ = (0.574, −0.819) at 42° elevation, SUN_RUN = 1/tan 42° = 1.111 m of run per metre of height. (a) _dispatch() measures each tree's crown height _crown = 0.6·(merged branch top)·k (1.2·r·k without a mesh); a tree's shade centre is trunk + SUN_XZ·SUN_RUN·crown, and ONE law, _shade_at(p) = max over trees of (1 − |p − sc|/canopy)^0.6, now feeds the ground's shade layer (×0.85), the pool's vertex darkening (gen 7's, moved with it) and the cover's `shaded` (ferns and toadstools in the shadow, darker and smaller there); the litter keeps the trunk — leaves fall straight down; the meadow's drip-line bonus is +0.25 only on the LIT side of its nearest trunk ((cell − trunk)·SUN_XZ < 0), +0.05 on the shaded side. No new draw: (a) moved the paint, the understory and the meadow's side and left every other count. (b) the moisture loop takes an aspect term after its jitter draw: g = (h(x+1) − h(x−1), h(z+1) − h(z−1))·0.5 in metres, m −= 0.12·clamp(g·SUN_XZ/0.25, −1, 1) — the flank facing the sun dries, the lee holds — which re-rolls the layout by the seed (trees, meadow, rim, creatures, the ridge)",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
+## gen 11: THE SUN. The capture rig's key light (commons/testing/capture_config_sweep.gd,
+## _stage_default — frozen, it took every published tile): `key.rotation_degrees =
+## Vector3(-42, -35, 0)`, Godot's YXZ order, shining along local −Z, so in world it travels
+## along Y(−35°)·X(−42°)·(0, 0, −1) = (0.426, −0.669, −0.609): horizontally along xz
+## (0.574, −0.819), at 42° elevation. A point h above the ground throws its shadow
+## h / tan 42° = 1.111·h along SUN_XZ. The rig is frozen; the object READS the light, it does
+## not carry one (the gen-6 critic: "do not replace it").
+const SUN_XZ := Vector2(0.574, -0.819)
+const SUN_RUN := 1.111   # 1 / tan 42°
 const K_TREE := 0
 const K_CREATURE := 1
 const K_FLOWER := 2
@@ -112,6 +128,8 @@ var _trees: Array[Vector2i] = []     # gen 2: sorted by distance to the water, t
 var _pos: Dictionary = {}            # gen 2: Vector2i -> Vector2 world xz, the trunks and the path's mats
 var _paths: Dictionary = {}          # gen 2: Vector2i tree -> Array[Vector2i] path cells, water to trunk
 var _canopy: Dictionary = {}         # gen 3: Vector2i tree -> float, the SCALED canopy radius (m), measured at dispatch
+var _crown: Dictionary = {}          # gen 11: Vector2i tree -> float, the crown's height (m) at the body's scale — the shadow's run is SUN_RUN × this
+var _meadow_cand: Array = []         # gen 11: every meadow candidate past the canopy — {key, base, u, lit}; the probe replays the ring's rule on it
 var _mats: Array[Vector2] = []       # gen 3: every fungus body's world xz as placed — the cover's "along the web"
 var _rock: Dictionary = {}           # gen 5: Vector2i -> float, bare rock at the clusters and under the scree — the paint reads it
 var _clusters: Array[Vector2] = []   # gen 5: every crystal holder's world xz — the cover keeps 0.8 m off
@@ -275,6 +293,14 @@ func _ecology() -> void:
 			var d: float = _water_dist(x, z)
 			var h: float = _field[z * size + x]
 			var m: float = 0.25 * moisture + 0.75 * clampf(1.0 - d / reach, 0.0, 1.0) - 0.45 * h + rng.randf_range(-0.06, 0.06)
+			# gen 11 (b): ASPECT — the flank facing the sun dries, the lee holds. g is the height
+			# gradient in metres over ±1 cell (one-sided and halved at the plate's edge); a slope
+			# whose uphill runs along SUN_XZ faces the sun — the light comes from −SUN_XZ and
+			# falls on it — and loses up to 0.12, saturating at a 0.25 m/m grade; the lee gains
+			# the same. Taken AFTER the jitter draw, so the dice are gen 10's: the re-roll is the
+			# moisture's — the ridge, the trees, the meadow, the rim all read it
+			var g := Vector2(_h_cell(x + 1, z) - _h_cell(x - 1, z), _h_cell(x, z + 1) - _h_cell(x, z - 1)) * 0.5
+			m -= 0.12 * clampf(g.dot(SUN_XZ) / 0.25, -1.0, 1.0)
 			_moist[z * size + x] = clampf(m, 0.0, 1.0)
 	# minerals: the driest high cells, spaced. gen 3: 2.5 cells from the water and off the
 	# outer ring — no crystal in a pond or on the rim (measured gen 2: two crystals stood at
@@ -424,6 +450,7 @@ func _ecology() -> void:
 	for t in _trees:
 		rs[t] = 0.6 * (0.6 + 0.2 * float(int(_cells[t]["inten"]))) * float(_cells[t]["k"])
 	var meadow: Array = []
+	_meadow_cand.clear()
 	# the count is a share of the WET MEADOW, not of what is left after the canopies take
 	# their floor — otherwise a shore tree costs the world its flowers (gen 4's builder)
 	var meadow_pool := 0
@@ -435,15 +462,25 @@ func _ecology() -> void:
 			var m: float = _moist[z * size + x]
 			if m > 0.42 and _field[z * size + x] < 0.7:
 				meadow_pool += 1
-				var score: float = m + rng.randf() * 0.1
+				var base: float = m + rng.randf() * 0.1
 				var cwm: Vector3 = _cell_world(x, z)
 				var u := 99.0
+				var ut := Vector2i(-1, -1)   # gen 11: the tree the ring belongs to — its side decides the bonus
 				for t in _trees:
-					u = minf(u, Vector2(cwm.x, cwm.z).distance_to(_pos[t]) / float(rs[t]))
+					var ud: float = Vector2(cwm.x, cwm.z).distance_to(_pos[t]) / float(rs[t])
+					if ud < u:
+						u = ud
+						ut = t
 				if u < 0.85:
 					continue
+				# gen 11: the ring's +0.25 only on the LIT side of its trunk — the sun comes from
+				# −SUN_XZ, so the lit side is where (cell − trunk)·SUN_XZ < 0; the shaded side +0.05
+				var lit: bool = ut.x >= 0 and (Vector2(cwm.x, cwm.z) - (_pos[ut] as Vector2)).dot(SUN_XZ) < 0.0
+				var score: float = base
 				if u <= 1.6:
-					score += 0.25
+					score += 0.25 if lit else 0.05
+				# the candidate as scored, before the side's bonus — the probe replays both rules on it
+				_meadow_cand.append({"key": key, "base": base, "u": u, "lit": lit})
 				meadow.append({"key": key, "m": score})
 	meadow.sort_custom(func(p, q): return float(p["m"]) > float(q["m"]))
 	var n_fl: int = clampi(int(round(float(meadow_pool) * (0.25 + 0.5 * wildness))), 3, 24)
@@ -698,20 +735,15 @@ func _moisture_paint() -> Array:
 	# gen 4: the canopy casts a layer — per dry-land cell the strongest of the trees' shade by
 	# the MEASURED canopy (_canopy, filled in _dispatch(); the ground is built after it for
 	# this): v = 0.85·(1 − d / canopy)^0.6, kept over 0.02, painted LAST so it darkens whatever
-	# lies under it — moss, ochre or shore
+	# lies under it — moss, ochre or shore. gen 11: d is the distance to the SHADE CENTRE, the
+	# trunk carried along the sun (_shade_at) — the paint lies where the rendered shadow lies
 	var shade: Array = []
 	for z in range(size):
 		for x in range(size):
 			if _water.has(Vector2i(x, z)):
 				continue
 			var cw: Vector3 = _cell_world(x, z)
-			var cc := Vector2(cw.x, cw.z)
-			var v := 0.0
-			for t in _trees:
-				var cr: float = float(_canopy.get(t, 0.0))
-				if cr <= 0.001:
-					continue
-				v = maxf(v, 0.85 * pow(clampf(1.0 - cc.distance_to(_pos[t]) / cr, 0.0, 1.0), 0.6))
+			var v: float = 0.85 * _shade_at(Vector2(cw.x, cw.z))
 			if v > 0.02:
 				shade.append([x, z, v])
 	# gen 5: the rock — _rock as _minerals() left it (0.6 at a cluster, 0.3 round it, 0.35 under
@@ -733,6 +765,28 @@ func _moisture_paint() -> Array:
 func _brush_layer(color: Array, cells: Array, layer_name: String) -> Dictionary:
 	return {"element": "shader", "mode": "brush", "density": 1.0, "color": color, "name": layer_name,
 		"brush": {"w": size, "d": size, "cells": cells}}
+
+
+## gen 11: where a tree's shadow lands — the trunk carried along the sun by the crown's
+## height: sc = trunk + SUN_XZ · SUN_RUN · crown. Before _dispatch() has measured the crown
+## this is the trunk (the ecology's own rules read the trunk and the side, never the shadow).
+func _shade_centre(t: Vector2i) -> Vector2:
+	return (_pos[t] as Vector2) + SUN_XZ * SUN_RUN * float(_crown.get(t, 0.0))
+
+
+## gen 11: THE shade law, in one place — the strongest of the trees' shade at a world xz,
+## (1 − d/canopy)^0.6 with d the distance to the tree's SHADE CENTRE and canopy its measured
+## radius; 0 outside every shadow. The ground's shade layer paints 0.85× this, the pool's
+## disc darkens by 0.45× it (gen 7's law, moved with the centre), and the cover calls a sample
+## shaded where it is over 0 — so the ferns stand on the dark paint, not beside it.
+func _shade_at(at: Vector2) -> float:
+	var vs := 0.0
+	for t in _trees:
+		var cr: float = float(_canopy.get(t, 0.0))
+		if cr <= 0.001:
+			continue
+		vs = maxf(vs, pow(clampf(1.0 - at.distance_to(_shade_centre(t)) / cr, 0.0, 1.0), 0.6))
+	return vs
 
 
 const POOL_SEGMENTS := 48
@@ -839,17 +893,12 @@ func _pool_fan(r: float, centre: Vector2) -> ArrayMesh:
 
 ## gen 7: the water's colour at u (0 the centre, 1 the rim) and a world xz: POOL_CENTRE to
 ## POOL_RIM by u^1.5, then every channel × (1 − 0.45·vs), vs the strongest of the trees'
-## shade by the MEASURED canopy, (1 − d/canopy)^0.6 with d the distance to the trunk — the
-## law the ground's shade layer reads. The alpha is kept: shaded water is darker, not thinner.
+## shade by the MEASURED canopy, (1 − d/canopy)^0.6 — the law the ground's shade layer reads
+## (_shade_at; gen 11: d to the shade centre, so the water darkens under the shadow, not under
+## the trunk). The alpha is kept: shaded water is darker, not thinner.
 func _pool_colour(u: float, at: Vector2) -> Color:
 	var col: Color = POOL_CENTRE.lerp(POOL_RIM, pow(u, 1.5))
-	var vs := 0.0
-	for t in _trees:
-		var cr: float = float(_canopy.get(t, 0.0))
-		if cr <= 0.001:
-			continue
-		vs = maxf(vs, pow(clampf(1.0 - at.distance_to(_pos[t]) / cr, 0.0, 1.0), 0.6))
-	var f: float = 1.0 - 0.45 * vs
+	var f: float = 1.0 - 0.45 * _shade_at(at)
 	return Color(col.r * f, col.g * f, col.b * f, col.a)
 
 
@@ -981,6 +1030,7 @@ func _dispatch() -> void:
 	}
 	var ids := {"tree": K_TREE, "creature": K_CREATURE, "flower": K_FLOWER, "fungus": K_FUNGUS}
 	_canopy.clear()
+	_crown.clear()
 	_mats.clear()
 	var keys: Array = _cells.keys()
 	keys.sort_custom(func(a, b): return (a.y * size + a.x) < (b.y * size + b.x))
@@ -1032,13 +1082,18 @@ func _dispatch() -> void:
 				"tree":
 					k = float(c.get("k", 1.0))
 					var r: float = 0.6 * (0.6 + 0.2 * float(inten))
+					var top := -1.0   # gen 11: the merged branch mesh's top, root-local, unscaled
 					var mb: Node = n.find_child("MergedBranches", true, false)
 					if mb is MeshInstance3D and (mb as MeshInstance3D).mesh != null:
 						var bb: AABB = (mb as MeshInstance3D).mesh.get_aabb()
 						r = maxf(maxf(absf(bb.position.x), absf(bb.end.x)), maxf(absf(bb.position.z), absf(bb.end.z))) + 0.25 * (0.6 + 0.2 * float(inten))
+						top = bb.end.y
 					var edge: float = float(size) * 0.5 - maxf(absf(wp.x), absf(wp.z))
 					k = maxf(1.0, minf(k, (edge - 0.05) / r))
 					_canopy[key] = r * k
+					# gen 11: the crown's height at the body's scale — 0.6 of the branch top (the
+					# leaves' mass sits there), 1.2 r without a mesh; the shadow runs SUN_RUN × it
+					_crown[key] = (0.6 * top if top > 0.0 else 1.2 * r) * k
 				"flower":
 					k = 1.4 + 0.4 * moisture
 				"creature":
@@ -1191,6 +1246,7 @@ func _cover() -> void:
 			acceptance = maxf(acceptance, 0.5)
 		if rng.randf() > acceptance:
 			continue
+		# the nearest TRUNK: the litter's law — leaves fall straight down (gen 11 keeps it here)
 		var dt := 99.0
 		var cr := 0.0
 		for tree in _trees:
@@ -1203,7 +1259,10 @@ func _cover() -> void:
 			dw = minf(dw, here.distance_to(mp))
 		var kind := "grass"
 		var choice: float = rng.randf()
-		var shaded := dt < cr
+		# gen 11: shaded is a fact about the SHADOW, not the trunk — the same law the paint
+		# reads (_shade_at > 0: inside some tree's shadow disc), so the ferns and toadstools
+		# stand on the dark paint and the grass at the sunlit foot is grass
+		var shaded: bool = _shade_at(here) > 0.0
 		if cr > 0.0 and dt < cr * 0.35:
 			kind = "litter"
 		elif d < 1.6 and choice < 0.45:

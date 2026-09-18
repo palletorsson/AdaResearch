@@ -39,6 +39,14 @@
 ## 0.9 x the centre); every mycelium colony's MyceliumWeb glows at 0.2..0.6 and on a path of
 ## more than two mats the energies differ; every cluster spire's emission is at most 0.15 of
 ## its albedo per channel; at least one world exercised the canopy case and one the path case.
+## Gen 11 (the sun is a layer): SUN_XZ / SUN_RUN are the frozen rig's key light, read off a
+## DirectionalLight3D at its rotation and off the rig's source; every tree's shade centre lies
+## on the sun's far side of its trunk by 0.3 canopy radii and the shade LAYER's mass sits
+## there (a region the same under either law); the ferns and shaded toadstools cluster round
+## the shade centre, the litter stays at the foot; the ring flowers lie on the lit side more
+## often than not; the moisture carries the aspect term cell for cell and a sun-facing cell
+## is drier than its lee twin. The gen-4 trunk-cell and gen-7 "under" readings follow the
+## centre; gen 6's parent-count contract narrows to the water (gen 11 (b) re-rolls the rest).
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_biome_object.gd
 extends SceneTree
@@ -299,7 +307,14 @@ func _run() -> void:
 		var shade_last: bool = not layers.is_empty() and layers.back() is Dictionary and String((layers.back() as Dictionary).get("name", "")) == "shade"
 		var shade_cells: Array = ((shade["brush"] as Dictionary)["cells"] as Array) if shade.has("brush") else []
 		var shade_ok := true
+		# gen 11: the oldest tree's shade is centred at its SHADE CENTRE, not its trunk — the
+		# strongest painted cell within 0.75 m of that centre reads >= 0.5 (a cell centre is
+		# always within 0.71 m, and the shore tree's canopy is at least 1.35 m); a centre off
+		# the plate or on the water has no cell to read and is skipped, said so
 		var v_trunk := 0.0
+		var sc0: Vector2 = o._shade_centre(o._trees[0]) if not o._trees.is_empty() else Vector2.ZERO
+		var sc0_key := Vector2i(int(floor(sc0.x + half)), int(floor(sc0.y + half)))
+		var sc0_readable: bool = not o._trees.is_empty() and sc0_key.x >= 0 and sc0_key.y >= 0 and sc0_key.x < o.size and sc0_key.y < o.size and not o._water.has(sc0_key)
 		for sc2 in shade_cells:
 			var sk := Vector2i(int(sc2[0]), int(sc2[1]))
 			var sv: float = float(sc2[2])
@@ -307,11 +322,14 @@ func _run() -> void:
 				if shade_ok:
 					print("    shade cell %s v %.3f (water %s)" % [str(sk), sv, str(o._water.has(sk))])
 				shade_ok = false
-			if not o._trees.is_empty() and sk == o._trees[0]:
-				v_trunk = sv
+			var skc: Vector3 = o._cell_world(sk.x, sk.y)
+			if sc0_readable and Vector2(skc.x, skc.z).distance_to(sc0) <= 0.75:
+				v_trunk = maxf(v_trunk, sv)
+		if not sc0_readable:
+			print("    [gen11] %s: the oldest tree's shade centre (%.2f, %.2f) is off the plate or on the water — its centre cell is not read" % [lab, sc0.x, sc0.y])
 		_check(not shade.is_empty() and shade_last, "%s: the ground's last paint layer is the shade (%d layers)" % [lab, layers.size()])
 		_check(o._trees.is_empty() or shade_cells.size() >= 1, "%s: the shade has cells under the trees (%d cells)" % [lab, shade_cells.size()])
-		_check(shade_ok and (o._trees.is_empty() or v_trunk >= 0.5), "%s: every shade cell is dry land at 0.02 < v <= 0.85 and the oldest trunk's cell reads %.2f" % [lab, v_trunk])
+		_check(shade_ok and (not sc0_readable or v_trunk >= 0.5), "%s: every shade cell is dry land at 0.02 < v <= 0.85 and the oldest tree's shade-centre cell reads %.2f" % [lab, v_trunk])
 		# gen 4 (b): no flower within 0.85 rs of any trunk, rs = 0.6·(0.6 + 0.2·inten)·k — the
 		# meadow's drip line; (c) in the wettest world at least one flower on the oldest tree's
 		# drip line (0.85..1.6 rs); (d) no tree past inten 4 — one species of canopy
@@ -469,6 +487,21 @@ func _run() -> void:
 	for o in [a, b, c, d4]:
 		_check_cover(o)
 		_check_section(o)
+	# gen 11: the sun is a layer — the rig once, then every world; the ring-flower side and
+	# the twin pairs are aggregated so a world with two ring flowers cannot flip the verdict
+	_check_rig()
+	var g11 := {"ring_lit": 0, "ring_shaded": 0, "lit_new": 0, "lit_old": 0, "twin_pairs": 0, "twin_drier": 0, "twin_worlds": 0,
+		"fern_n": 0, "fern_dot": 0.0, "trees_tested": 0, "trees_skipped": 0}
+	for o in [a, b, c, d4]:
+		var r11: Dictionary = _check_gen11(o)
+		for k in r11.keys():
+			g11[k] = g11[k] + r11[k]
+	_check(int(g11["trees_tested"]) >= 4, "the shade layer's centroid was read for %d trees (%d skipped: shadow off the plate or on the water)" % [int(g11["trees_tested"]), int(g11["trees_skipped"])])
+	_check(int(g11["fern_n"]) >= 6 and float(g11["fern_dot"]) > 0.0, "over the worlds, %d ferns and shaded toadstools lie past their trunk along the sun (mean dot %.2f m)" % [int(g11["fern_n"]), float(g11["fern_dot"]) / maxf(1.0, float(g11["fern_n"]))])
+	print("    [gen11] over the worlds the ring flowers are %d lit / %d shaded; gen 4's symmetric ring would have put %d in the sun, gen 11's lit side puts %d" % [int(g11["ring_lit"]), int(g11["ring_shaded"]), int(g11["lit_old"]), int(g11["lit_new"])])
+	_check(int(g11["lit_new"]) > int(g11["lit_old"]), "over the worlds, the lit-side rule puts more ring flowers in the sun than the symmetric ring did (%d vs %d)" % [int(g11["lit_new"]), int(g11["lit_old"])])
+	_check(int(g11["twin_worlds"]) >= 1, "in at least one world a sun-facing cell is drier than its lee twin at the same height and water distance (%d worlds)" % int(g11["twin_worlds"]))
+	_check(int(g11["twin_pairs"]) >= 5 and float(g11["twin_drier"]) / maxf(1.0, float(g11["twin_pairs"])) >= 0.6, "over the worlds, the sun-facing twin is the drier one in at least 60%% of pairs (%d of %d)" % [int(g11["twin_drier"]), int(g11["twin_pairs"])])
 	# gen 7: the pool's fan, the web's light, the spires' glow — and proof the two
 	# conditional checks bit somewhere
 	var any_over := false
@@ -640,12 +673,20 @@ func _check_cover(o) -> void:
 	_check(inner_canopy and flat_litter and litter == int(counts.cover_litter), "%s: litter is flat under an inner canopy (%d pieces)" % [lab, litter])
 	if o.seed == 11:
 		_check(litter > 0, "wet-world inner canopy produces a visible litter layer")
-	# Exact fixture matches have generation-5 records: preserve every other kingdom count.
+	# Exact fixture matches have generation-5 records. gen 11 (a) moved the shade paint (the
+	# "paint" count) and nothing else; gen 11 (b), the aspect term, re-rolls the layout by the
+	# seed, so the contract narrows to the WATER — the terrain is untouched — and every other
+	# count is printed against the parent as the record of what the term re-rolled.
 	var parent := "res://ada_run/biome_rsi/gen_5/state_%s.json" % lab
 	if FileAccess.file_exists(parent):
 		var old: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(parent))
-		for key in ["water", "mineral", "scree", "fungus", "fungus_path", "tree", "flower", "creature", "connections", "paint"]:
+		for key in ["water"]:
 			_check(counts[key] == old.counts[key], "%s: parent %s count preserved" % [lab, key])
+		var rolled: Array = []
+		for key in ["mineral", "scree", "fungus", "fungus_path", "tree", "flower", "creature", "connections", "paint"]:
+			if counts[key] != old.counts[key]:
+				rolled.append("%s %d -> %d" % [key, int(old.counts[key]), int(counts[key])])
+		print("    [gen11] %s against the gen-5 record: %s" % [lab, ", ".join(rolled) if not rolled.is_empty() else "every count preserved"])
 	print("    [cover] %s: %d tufts, %d members, %d litter, %d ms" % [lab, o._cover_tufts.size(), members, litter, int(counts.ms_cover)])
 
 
@@ -711,7 +752,8 @@ func _check_gen7(o) -> Dictionary:
 			for t in o._trees:
 				var cr: float = float(o._canopy.get(t, 0.0))
 				if cr > 0.001:
-					vs = maxf(vs, pow(clampf(1.0 - at.distance_to(o._pos[t]) / cr, 0.0, 1.0), 0.6))
+					# gen 11: "under" is under the SHADOW — the canopy's centre carried along the sun
+					vs = maxf(vs, pow(clampf(1.0 - at.distance_to(o._shade_centre(t)) / cr, 0.0, 1.0), 0.6))
 			if vs <= 0.0:
 				continue
 			n_over += 1
@@ -805,6 +847,264 @@ func _check_gen7(o) -> Dictionary:
 
 func _lum(c: Color) -> float:
 	return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b
+
+
+## Gen 11 (0): the object's SUN_XZ / SUN_RUN are the frozen rig's key light. A
+## DirectionalLight3D shines along its local −Z; at the rig's rotation_degrees (−42, −35, 0)
+## its travel, read off the node's own basis, must run along SUN_XZ horizontally and SUN_RUN
+## metres per metre of fall — and the rig's source must still spell that rotation, so a
+## re-lit bench cannot leave the object reading a sun that is no longer there.
+func _check_rig() -> void:
+	var light := DirectionalLight3D.new()
+	light.rotation_degrees = Vector3(-42, -35, 0)
+	var dir: Vector3 = -light.transform.basis.z
+	light.free()
+	var xz := Vector2(dir.x, dir.z)
+	var run: float = xz.length() / maxf(0.001, absf(dir.y))
+	var sun_xz: Vector2 = OBJ.SUN_XZ
+	var sun_run: float = OBJ.SUN_RUN
+	print("    [gen11] the rig's key at (-42, -35) travels (%.3f, %.3f, %.3f): xz (%.3f, %.3f), run %.3f per metre of height; the object holds SUN_XZ (%.3f, %.3f), SUN_RUN %.3f" % [dir.x, dir.y, dir.z, xz.normalized().x, xz.normalized().y, run, sun_xz.x, sun_xz.y, sun_run])
+	_check(dir.y < 0.0 and xz.normalized().distance_to(sun_xz) < 0.002 and absf(run - sun_run) < 0.002 and absf(sun_xz.length() - 1.0) < 0.002, "SUN_XZ and SUN_RUN are the rig's key light at (-42, -35): xz (%.3f, %.3f) run %.3f" % [xz.normalized().x, xz.normalized().y, run])
+	var rig_src: String = FileAccess.get_file_as_string("res://commons/testing/capture_config_sweep.gd")
+	_check(rig_src.contains("key.rotation_degrees = Vector3(-42, -35, 0)"), "the frozen rig's source still spells the key at Vector3(-42, -35, 0)")
+
+
+## Gen 11, per world. (a) every tree's shade centre lies on the sun's far side of its trunk
+## by at least 0.3 × its canopy radius, and the shade LAYER's mass sits there: over the cells
+## within one canopy radius of the trunk OR of the centre — a region that is the same
+## whichever point the object painted round, so the object's own centre cannot bias it —
+## less any cell in another tree's region, the v-weighted centroid of the painted cells lies
+## past the trunk along SUN_XZ by at least 0.3 × the radius; a tree with fewer than two
+## painted cells in its region (its shadow off the plate or on the water) is skipped and
+## counted. (b) the ferns and the shaded toadstools cluster round the shade centre, not the
+## trunk: each tuft goes to the tree whose shade centre is nearest, and the mean of
+## (tuft − that trunk)·SUN_XZ is positive. (c) the litter stays at the foot: every piece
+## within 0.35 canopy of a trunk, its mean offset's dot under 0.35 × the mean canopy and
+## under the ferns'. (d) the ring flowers (0.85..1.6 rs of their nearest trunk) counted lit
+## ((cell − trunk)·SUN_XZ < 0) and shaded, aggregated by the caller. (e) the moisture is the
+## critic's formula cell for cell — base + the ecology rng's jitter − 0.12·clamp(g·SUN_XZ /
+## 0.25, −1, 1), g the ±1-cell height gradient in metres, replayed here from the seed — and
+## among twin pairs (same height ±0.03, same water distance ±0.25 cells, the flanks at
+## |g·SUN_XZ| >= 0.12) the sun-facing cell is the drier one, aggregated by the caller.
+func _check_gen11(o) -> Dictionary:
+	var lab: String = o.label()
+	var half: float = float(o.size) * 0.5
+	var sun: Vector2 = OBJ.SUN_XZ
+	var ground = o._patch.get_node_or_null("Ground")
+	var layers: Array = (ground._paint_layers as Array) if ground != null else []
+	var vmap: Dictionary = {}   # Vector2i -> painted shade v
+	for ly in layers:
+		if ly is Dictionary and String((ly as Dictionary).get("name", "")) == "shade":
+			for sc2 in ((ly as Dictionary)["brush"] as Dictionary)["cells"]:
+				vmap[Vector2i(int(sc2[0]), int(sc2[1]))] = float(sc2[2])
+	# (a)
+	var far_side := true
+	var mass_there := true
+	var tested := 0
+	var skipped := 0
+	var n_tree: int = o._trees.size()
+	for ti in range(n_tree):
+		var t: Vector2i = o._trees[ti]
+		var cr: float = float(o._canopy.get(t, 0.0))
+		var trunk: Vector2 = o._pos[t]
+		var sc: Vector2 = o._shade_centre(t)
+		var disp: float = (sc - trunk).dot(sun)
+		if cr <= 0.001 or disp < 0.3 * cr - 0.0001:
+			if far_side:
+				print("    [gen11] %s: tree %s shade centre %.2f m along the sun, canopy %.2f (needs %.2f)" % [lab, str(t), disp, cr, 0.3 * cr])
+			far_side = false
+		var sum_w := 0.0
+		var sum_p := Vector2.ZERO
+		var painted := 0
+		for z in range(o.size):
+			for x in range(o.size):
+				var ck := Vector2i(x, z)
+				var cw: Vector3 = o._cell_world(x, z)
+				var cc := Vector2(cw.x, cw.z)
+				if not (cc.distance_to(trunk) < cr or cc.distance_to(sc) < cr):
+					continue
+				var others := false
+				for uj in range(n_tree):
+					if uj == ti:
+						continue
+					var u: Vector2i = o._trees[uj]
+					var cu: float = float(o._canopy.get(u, 0.0))
+					if cc.distance_to(o._pos[u]) < cu or cc.distance_to(o._shade_centre(u)) < cu:
+						others = true
+						break
+				if others:
+					continue
+				var v: float = float(vmap.get(ck, 0.0))
+				if v > 0.0:
+					painted += 1
+					sum_w += v
+					sum_p += cc * v
+		if painted < 2:
+			skipped += 1
+			print("    [gen11] %s: tree %s has %d painted cell(s) of its own — centre (%.2f, %.2f), canopy %.2f — skipped" % [lab, str(t), painted, sc.x, sc.y, cr])
+			continue
+		tested += 1
+		var centroid: Vector2 = sum_p / sum_w
+		var along: float = (centroid - trunk).dot(sun)
+		if along < 0.3 * cr - 0.0001:
+			if mass_there:
+				print("    [gen11] %s: tree %s: the shade layer's centroid lies %.2f m along the sun from the trunk over %d cells, canopy %.2f (needs %.2f; the centre says %.2f)" % [lab, str(t), along, painted, cr, 0.3 * cr, disp])
+			mass_there = false
+	_check(n_tree > 0 and far_side, "%s: every tree's shade centre lies on the sun's far side of its trunk by 0.3 canopy radii (%d trees)" % [lab, n_tree])
+	_check(mass_there, "%s: the shade layer's mass lies past the trunk along the sun for every tree read (%d read, %d skipped)" % [lab, tested, skipped])
+	# (b) and (c): the cover plan — ferns and shaded toadstools by the shade centre, litter by the trunk
+	var fern_n := 0
+	var fern_dot := 0.0
+	var litter_n := 0
+	var litter_dot := 0.0
+	var litter_cr := 0.0
+	var litter_at_foot := true
+	for tuft: Dictionary in o._cover_tufts:
+		var kind: String = tuft.type
+		if kind == "fern" or kind == "mushroom" or kind == "litter":
+			for member in tuft.members:
+				var xf: Transform3D = member[0]
+				var p := Vector2(xf.origin.x, xf.origin.z)
+				if kind == "litter":
+					# the nearest TRUNK
+					var dt := 99.0
+					var ct := 0.0
+					var tt := Vector2i(-1, -1)
+					for t in o._trees:
+						var dd: float = p.distance_to(o._pos[t])
+						if dd < dt:
+							dt = dd
+							ct = float(o._canopy.get(t, 0.0))
+							tt = t
+					if tt.x < 0 or dt >= ct * 0.35 + 0.001:
+						litter_at_foot = false
+						continue
+					litter_n += 1
+					litter_dot += (p - (o._pos[tt] as Vector2)).dot(sun)
+					litter_cr += ct
+				else:
+					if float(o._shade_at(p)) <= 0.0:
+						continue   # a toadstool along the web, not one in the shade
+					# the nearest SHADE CENTRE names the tree; the offset is from its trunk
+					var ds := 99.0
+					var ts := Vector2i(-1, -1)
+					for t in o._trees:
+						var dd: float = p.distance_to(o._shade_centre(t))
+						if dd < ds:
+							ds = dd
+							ts = t
+					if ts.x < 0:
+						continue
+					fern_n += 1
+					fern_dot += (p - (o._pos[ts] as Vector2)).dot(sun)
+	var fern_mean: float = fern_dot / maxf(1.0, float(fern_n))
+	var litter_mean: float = litter_dot / maxf(1.0, float(litter_n))
+	var litter_cr_mean: float = litter_cr / maxf(1.0, float(litter_n))
+	if fern_n >= 3:
+		_check(fern_mean > 0.0, "%s: the ferns and shaded toadstools cluster past the trunk along the sun (%d, mean dot %.2f m)" % [lab, fern_n, fern_mean])
+	_check(litter_at_foot and (litter_n == 0 or absf(litter_mean) < 0.35 * litter_cr_mean), "%s: the litter stays at the trunk's foot (%d pieces, mean dot %.2f m against 0.35 x canopy %.2f)" % [lab, litter_n, litter_mean, 0.35 * litter_cr_mean])
+	if fern_n >= 3 and litter_n >= 3:
+		_check(litter_mean < fern_mean, "%s: the litter lies nearer the trunk along the sun than the ferns (%.2f vs %.2f m)" % [lab, litter_mean, fern_mean])
+	# (d) the ring flowers, lit and shaded — the literal split, read off the placed flowers
+	var ring_lit := 0
+	var ring_shaded := 0
+	var flowers: Dictionary = {}
+	for fk in o._cells.keys():
+		if String(o._cells[fk]["kingdom"]) != "flower":
+			continue
+		flowers[fk] = true
+		var fc: Vector3 = o._cell_world(fk.x, fk.y)
+		var fp := Vector2(fc.x, fc.z)
+		var u := 99.0
+		var ut := Vector2i(-1, -1)
+		for t in o._trees:
+			var rs: float = 0.6 * (0.6 + 0.2 * float(int(o._cells[t]["inten"]))) * float(o._cells[t].get("k", 1.0))
+			var ud: float = fp.distance_to(o._pos[t]) / rs
+			if ud < u:
+				u = ud
+				ut = t
+		if ut.x >= 0 and u >= 0.85 and u <= 1.6:
+			if (fp - (o._pos[ut] as Vector2)).dot(sun) < 0.0:
+				ring_lit += 1
+			else:
+				ring_shaded += 1
+	# ... and the rule's EFFECT: the object's meadow candidates (base score, u, side) replayed
+	# under gen 11's rule (+0.25 lit / +0.05 shaded on the ring) and gen 4's (+0.25 either
+	# side), the same number taken. The gen-11 replay must reproduce the flowers placed — the
+	# proof the record is the meadow's — and the lit side must hold at least as many ring
+	# flowers as under the old rule; the caller asks for strictly more over the worlds. (A lit
+	# MAJORITY is not what the numbers buy: across a shore tree's ring the moisture runs by
+	# up to ~0.5, the bonus by 0.2, and at wildness 0.9 seven candidates in ten flower anyway.)
+	var cand: Array = o._meadow_cand
+	var n_take: int = flowers.size()
+	var by_new: Array = []
+	var by_old: Array = []
+	for c in cand:
+		var ring: bool = float(c["u"]) <= 1.6
+		by_new.append({"key": c["key"], "s": float(c["base"]) + ((0.25 if bool(c["lit"]) else 0.05) if ring else 0.0), "ring": ring, "lit": bool(c["lit"])})
+		by_old.append({"key": c["key"], "s": float(c["base"]) + (0.25 if ring else 0.0), "ring": ring, "lit": bool(c["lit"])})
+	by_new.sort_custom(func(p, q): return float(p["s"]) > float(q["s"]))
+	by_old.sort_custom(func(p, q): return float(p["s"]) > float(q["s"]))
+	var replay_ok := by_new.size() >= n_take
+	var lit_new := 0
+	var lit_old := 0
+	for i in range(mini(n_take, by_new.size())):
+		if not flowers.has(by_new[i]["key"]):
+			replay_ok = false
+		if bool(by_new[i]["ring"]) and bool(by_new[i]["lit"]):
+			lit_new += 1
+	for i in range(mini(n_take, by_old.size())):
+		if bool(by_old[i]["ring"]) and bool(by_old[i]["lit"]):
+			lit_old += 1
+	_check(replay_ok and n_take > 0, "%s: the meadow record replays the flowers placed (%d of %d candidates)" % [lab, n_take, cand.size()])
+	_check(lit_new >= lit_old, "%s: the lit-side rule puts at least as many ring flowers in the sun as gen 4's symmetric ring (%d vs %d)" % [lab, lit_new, lit_old])
+	# (e) the aspect term: the moisture replayed from the seed, and the twins
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash([o.seed, "ecology"])
+	var reach: float = float(o.size) * (0.35 + 0.35 * float(o.moisture))
+	var exact := true
+	var worst_dm := 0.0
+	var aspect_cells := 0
+	var dots: PackedFloat32Array = PackedFloat32Array()
+	var wds: PackedFloat32Array = PackedFloat32Array()
+	for z in range(o.size):
+		for x in range(o.size):
+			var d: float = o._water_dist(x, z)
+			var h: float = float(o._field[z * o.size + x])
+			var base: float = 0.25 * float(o.moisture) + 0.75 * clampf(1.0 - d / reach, 0.0, 1.0) - 0.45 * h + rng.randf_range(-0.06, 0.06)
+			var g := Vector2(float(o._h_cell(x + 1, z)) - float(o._h_cell(x - 1, z)), float(o._h_cell(x, z + 1)) - float(o._h_cell(x, z - 1))) * 0.5
+			var dot: float = g.dot(sun)
+			dots.append(dot)
+			wds.append(d)
+			var asp: float = 0.12 * clampf(dot / 0.25, -1.0, 1.0)
+			if absf(asp) > 0.001:
+				aspect_cells += 1
+			var want: float = clampf(base - asp, 0.0, 1.0)
+			var dm: float = absf(float(o._moist[z * o.size + x]) - want)
+			worst_dm = maxf(worst_dm, dm)
+			if dm > 0.0001:
+				exact = false
+	_check(exact and aspect_cells > 0, "%s: the moisture is base + jitter − the aspect term, cell for cell (%d cells with a term, worst gap %.4f)" % [lab, aspect_cells, worst_dm])
+	var pairs := 0
+	var drier := 0
+	var n2: int = o.size * o.size
+	for i in range(n2):
+		var ki := Vector2i(i % o.size, i / o.size)
+		if o._water.has(ki) or dots[i] < 0.12:
+			continue
+		for j in range(n2):
+			var kj := Vector2i(j % o.size, j / o.size)
+			if o._water.has(kj) or dots[j] > -0.12:
+				continue
+			if absf(float(o._field[i]) - float(o._field[j])) > 0.03 or absf(wds[i] - wds[j]) > 0.25:
+				continue
+			pairs += 1
+			if float(o._moist[i]) < float(o._moist[j]):
+				drier += 1
+	print("    [gen11] %s: %d trees (%d read, %d skipped); %d ferns/shaded toadstools at mean dot %.2f m, %d litter at %.2f m; ring flowers %d lit / %d shaded (lit under gen 4's rule: %d); %d twin pairs, sun-facing drier in %d; %d cells carry an aspect term" % [lab, n_tree, tested, skipped, fern_n, fern_mean, litter_n, litter_mean, ring_lit, ring_shaded, lit_old, pairs, drier, aspect_cells])
+	return {"ring_lit": ring_lit, "ring_shaded": ring_shaded, "lit_new": lit_new, "lit_old": lit_old,
+		"twin_pairs": pairs, "twin_drier": drier, "twin_worlds": 1 if (pairs > 0 and drier * 2 > pairs) else 0,
+		"fern_n": fern_n, "fern_dot": fern_dot, "trees_tested": tested, "trees_skipped": skipped}
 
 
 ## Gen 10: inspect the actual section and top meshes together, not just the
