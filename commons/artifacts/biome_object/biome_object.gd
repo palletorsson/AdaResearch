@@ -65,14 +65,50 @@ class_name BiomeObject
 ##
 ## Record: with record=on the build writes res://ada_run/biome_rsi/state/<label>.json — the
 ## counts the driver reads (organisms per kingdom, connections, cover, heights, build ms).
+##
+## THE LADDER (gen 14, Palle: "can we scale it down to primitives? Flat ground, one seed, the
+## point? … can it morph backwards to the more primitive form we start out with?"). `stage`
+## names a hall of the spine (Point_One … Random_Game), a sequence key (noise, lsystems …) or
+## `full`; every layer above is gated by the stage's WORDS — the cumulative closure the biome
+## cage reads (commons/biome_layers/biome_grammar.gd over commons/data/biome_vocabulary.json)
+## — through _amount(word), and the layers arriving at the stage's own hall carry `phase`:
+##
+##   always      the ground plane, grey until colour
+##   point       Point_One             the seed: one black sphere over the basin centre
+##   line        Point_Lines           grey rods from the point toward every future trunk
+##   lattice     Point_Line_Grid       a faint cell grid on the surface, until colour
+##   face        Point_Triangle_Context the section — sides and underside
+##   solid       Primitives_Polythedra the crystals and their scree
+##   sphere      Primitives_Ignorance  the pool disc and the reeds, still on a flat plane
+##   subdivide   Primitives_Portals    the floor at its full resolution (16 quads before)
+##   ornament    Primitives_Melencolia the cover, grey stubble until colour
+##   translate   Trans_Translation     the rendered relief (the rules read the full relief)
+##   rotate      Trans_Rotation        the aspect term, the shade centre's run along the sun
+##   scale       Trans_Scale           the trees sized by rank (saplings before)
+##   colour      Color_Context_Placed  the wet/dry paint and every body's colour
+##   light       Color_Flashlight      the shade — paint, water and understory
+##   flower      Color_Rainbow         the meadow's flowers and the bloom slots
+##   paint       Color_Paint           shore, silt and rock
+##   sample      Random_Definition     jitter — bodies on cell centres, cover on a lattice before
+##   vary        Random_Entropy        tufts (single blades before)
+##   walk        Random_Walk           the creatures (lsystems' `creature` also grants them)
+##   fungus/ring Random_Mushrooms      the path mats / the rim mats; the rods go
+##   field       noise                 the terrain's noise term (a smooth basin before)
+##   tree        lsystems              the trees — late, after flowers and fungus, as in the cage
+##   select      machinelearning       the residents
+##
+## The layout is the seed's at every stage (Trans_Rotation excepted: the aspect term is the
+## moisture's, and gen 11 (b)'s re-roll walks in with the phase); the ladder gates what is
+## BUILT of it (_ladder()).
 
 const Residents := preload("res://commons/artifacts/biome_object/biome_residents.gd")
 const Dispatcher := preload("res://commons/biome_layers/biome_paint_dispatcher.gd")
 const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 const FoliageCards := preload("res://commons/biome_layers/foliage_cards.gd")
+const Grammar := preload("res://commons/biome_layers/biome_grammar.gd")   # gen 14: the ladder's closure
 
-const GENERATION := 13
+const GENERATION := 14
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
@@ -88,6 +124,7 @@ const CHANGELOG: Array[String] = [
 	"gen 11: aspect — the sun is a layer (the gen-6 critic's proposal 1). The rig's key light is frozen at rotation (−42°, −35°): it travels along xz SUN_XZ = (0.574, −0.819) at 42° elevation, SUN_RUN = 1/tan 42° = 1.111 m of run per metre of height. (a) _dispatch() measures each tree's crown height _crown = 0.6·(merged branch top)·k (1.2·r·k without a mesh); a tree's shade centre is trunk + SUN_XZ·SUN_RUN·crown, and ONE law, _shade_at(p) = max over trees of (1 − |p − sc|/canopy)^0.6, now feeds the ground's shade layer (×0.85), the pool's vertex darkening (gen 7's, moved with it) and the cover's `shaded` (ferns and toadstools in the shadow, darker and smaller there); the litter keeps the trunk — leaves fall straight down; the meadow's drip-line bonus is +0.25 only on the LIT side of its nearest trunk ((cell − trunk)·SUN_XZ < 0), +0.05 on the shaded side. No new draw: (a) moved the paint, the understory and the meadow's side and left every other count. (b) the moisture loop takes an aspect term after its jitter draw: g = (h(x+1) − h(x−1), h(z+1) − h(z−1))·0.5 in metres, m −= 0.12·clamp(g·SUN_XZ/0.25, −1, 1) — the flank facing the sun dries, the lee holds — which re-rolls the layout by the seed (trees, meadow, rim, creatures, the ridge)",
 	"gen 12: catalogue residents share the ground but carry independent community DNA; up to six fruiting-fungus colonies use existing CritterDNA presets and FungusMorphology, choose moist gaps beside mycelium, respect an explicit footprint and clear cover beneath them; changing community_seed keeps terrain, water, trees and networks fixed; each resident records catalogue identity, preset, expressed genes, seed and habitat",
 	"gen 13: two more catalogue builders on Astra's contract, the object handing over slots it already owns instead of adding bodies. (a) living_flora_bloom — the nine BotanicalFlower species are families with designed habitat preferences (moisture, shade, the sun's side of the trunk); _ecology() marks every second or third meadow cell `resident` by a stride and phase drawn from the HABITAT seed (never the community's, never the ecology's stream), _dispatch() leaves those cells, and populate() stands a species there chosen by the community seed and the slot's habitat, the SIZE still the habitat's (the dispatcher's overall_scale on the cell's intensity, the moisture growth 1.4 + 0.4·m) — another community, another species, the same size; the meadow count is unchanged and the flag is a fact about the seed, so residents:off rebuilds gen 12 exactly. (b) living_fauna_body — every creature cell (1–4) is handed over, so the animal count does not double; three body plans (shore_grub: low, more rings, social, dark, drawn to the water; meadow_walker: taller, fewer rings, lighter, sun-side; rock_lurker: iridescent, metallic, coiled, drawn to the crystals) are CritterDNA gene overrides on the dispatcher's own walker recipe, built by CreatureSdfMorphology, each body's xz centred on its slot and TURNED to face what it lives by — the nearest water cell within 3 cells, else the nearest flower cell — rotation.y = atan2(−dx, −dz) since the eyes look down local −Z; the record carries `faces` and `footprint`. These are PLACED bodies: no movement, no simulation. Each slot's cover clearing is a fixed radius (0.32 m a bloom, 0.5 m a body), so the cover is the same under every community. Three facts learned building it: a bloom slot must stand BLOOM_EDGE_M = 1.0 m inside the plate (a crown imperial at overall_scale 2.5 × growth 1.74 measured 0.67 m of reach from an outer-ring slot 0.31 m off the edge); a body's bounds must be composed from LOCAL transforms (measured through inverse(root.global) × node.global, a twin standing 30 m along x recorded a reach 1.6e-6 m different — the record drifted with the address); and the SDF builder's skin must be re-created with the body seed (the mapper draws pattern_rotation from the global randi() when handed no seed)",
+	"gen 14: the ladder — the object scaled down to primitives (Palle: 'flat ground, one seed, the point … can it morph backwards to the more primitive form we start out with?'). Two knobs: `stage` (`full`, the default — gen 13 byte for byte; else a hall name, a sequence key or anything BiomeGrammar.closure() accepts) and `phase` (0..1). Every layer is gated by the ladder's WORDS through one function, _amount(word): 0 when the stage's cumulative closure — the biome cage's — does not allow the word, `phase` when the word arrives at the stage's own hall (its made_of/does/knows, the sequence's entry on its first hall or when the stage is a sequence key), else 1; an amount of 0 is not built, one between 0 and 1 is built scaled. The layout is the seed's at every stage but one: the ecology reads the full-amplitude, full-noise field (_h_rule, _wl_rule, _amp), the trees' full rank k and full-jitter _pos, while the mesh and every body's foot read a rendered field (_field_render, _max_h = _amp x translate; the noise term mixed about its mean 0.5 by `field`), the built trunk mixes its k from the sapling's by `scale` and its stand from the cell centre by `sample`; the exception is Trans_Rotation, where the aspect term is the moisture's and gen 11 (b)'s re-roll walks in with the phase; _ladder() marks the cells a stage does not build `late` in the order the ecology took them (the shore tree first, the best meadow cell first, the rim and each path from the water out), the counts become the built counts, the resident slots are cut to `select` so a cut slot stands a dispatcher body. The words: point (Point_One) the seed — a 0.3 m black sphere 0.35 m over the basin centre, above the water once there is water, radius x phase; line (Point_Lines) thin grey rods on the surface from the point's foot toward every future trunk, 0.5 m segments ending 0.45 m short of it, length x phase, replaced by the mats when `fungus` arrives; lattice (Point_Line_Grid) a faint grey cell grid of ribbons following the surface, opacity x phase, removed by `colour`; face (Point_Triangle_Context) the section, its bands and base compressed toward the surface by phase; solid (Primitives_Polythedra) the crystals and their scree, scale x phase; sphere (Primitives_Ignorance) the pool disc and the reeds, radius and count x phase; subdivide (Primitives_Portals) the floor at the substrate's full resolution (two quads per cell), the 16-quad minimum before it, on at phase 0.5; ornament (Primitives_Melencolia) the cover, count x phase; translate (Trans_Translation) the rendered relief, amplitude x phase; rotate (Trans_Rotation) the aspect term and the shade centre's run, x phase; scale (Trans_Scale) the trees' rank sizes, lerp(sapling, k, phase); colour (Color_Context_Placed) the wet/dry paint x phase and every body's colour through _tint — the luminance grey before it, the foliage cards from it (grey stubble is the plain meshes); light (Color_Flashlight) the one shade law x phase — paint, water and understory follow; flower (Color_Rainbow) the meadow's first round(n x phase) cells and their bloom slots; paint (Color_Paint) shore, silt and rock x phase; sample (Random_Definition) the jitter of trunks, bodies and crystals x phase and the cover's samples travelling from a regular lattice toward their draws by a folded offset (spread at every phase); vary (Random_Entropy) tufts — count and radius x phase, one blade before; walk (Random_Walk) the creatures, first round(n x phase), lsystems' `creature` grants them too; fungus (Random_Mushrooms) the path mats, first round(len x phase) per path from the water, their growth steps x phase; ring (Random_Mushrooms) the rim mats; field (noise) the terrain's noise term; tree (lsystems) the trees, first round(n x phase) by succession; select (machinelearning) the residents — slots and fungus count x phase; absent, connect: recorded, no layer. Recorded under state.ladder (stage, phase, arrivals, amounts, layers, point/rods/lattice counts); the label carries _<stage>_p<phase x 100>",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 ## gen 11: THE SUN. The capture rig's key light (commons/testing/capture_config_sweep.gd,
@@ -124,6 +161,13 @@ const K_FUNGUS := 3
 ## The foliage cards: `drawn` (gen 9 — drawn in the engine from the seed and the moisture, no
 ## files) or `files` (the PNGs in commons/biome_layers/foliage/, a hand-painted set).
 @export_enum("drawn", "files") var foliage: String = "drawn"
+## gen 14: the ladder's stage — `full` (gen 13's world, byte for byte), a hall name
+## (Point_One … Random_Game), a sequence key (noise, lsystems, machinelearning …) or anything
+## BiomeGrammar.closure() accepts. Unknown: the plane alone, and a warning.
+@export var stage: String = "full"
+## gen 14: how far the layers ARRIVING at the stage's own hall have come — 0 is the previous
+## hall's world, 1 the stage's whole; a layer allowed earlier is whole, one not yet allowed absent.
+@export_range(0.0, 1.0) var phase: float = 1.0
 
 var _residents: Array[Dictionary] = []
 var _built: bool = false
@@ -150,6 +194,15 @@ var _counts: Dictionary = {}
 var _build_ms: int = 0
 var _section_columns: Array[Dictionary] = [] # the four cut faces: local positions, moisture, layer levels
 var _cover_tufts: Array[Dictionary] = [] # CPU placement plan: groups share type, colour and neighbours
+var _closure: Dictionary = {}        # gen 14: the stage's cumulative vocabulary (BiomeGrammar.closure); {} at full
+var _arrivals: Dictionary = {}       # gen 14: word -> true for the words arriving at the stage's own hall
+var _amt: Dictionary = {}            # gen 14: word -> amount, computed once per build; unread at full
+var _amp: float = 1.0                # gen 14: the RULES' amplitude, 0.5 + 1.7·relief (what _max_h was); _max_h is the rendered one
+var _field_render: PackedFloat32Array = PackedFloat32Array()   # gen 14: the field the MESH and the feet read; the rules read _field
+var _meadow_order: Array[Vector2i] = []    # gen 14: the flower cells in the meadow's order, best first — the ladder builds the first k
+var _creature_order: Array[Vector2i] = []  # gen 14: the creature cells as the shuffle took them
+var _rim_order: Array[Vector2i] = []       # gen 14: the rim mats as the shuffle took them
+var _ladder_counts: Dictionary = {}  # gen 14: point / rods / lattice — beside _counts, whose keys stay gen 13's
 
 
 func apply_grid_config(config: Dictionary) -> void:
@@ -171,6 +224,11 @@ func apply_grid_config(config: Dictionary) -> void:
 		record = "off" if str(config["record"]).to_lower() in ["off", "0", "false"] else "on"
 	if config.has("foliage"):
 		foliage = "files" if str(config["foliage"]).to_lower() == "files" else "drawn"
+	if config.has("stage"):
+		var s: String = str(config["stage"]).strip_edges()
+		stage = s if s != "" else "full"
+	if config.has("phase"):
+		phase = clampf(float(str(config["phase"]).to_float()), 0.0, 1.0)
 	if _built and is_inside_tree():
 		_rebuild()
 
@@ -190,7 +248,10 @@ func _rebuild() -> void:
 
 func label() -> String:
 	var base := "s%d_m%02d_r%02d_w%02d" % [seed, int(round(moisture * 100.0)), int(round(relief * 100.0)), int(round(wildness * 100.0))]
-	return base + ("_c%d" % community_seed if community_seed != 0 else "")
+	base += ("_c%d" % community_seed if community_seed != 0 else "")
+	if stage != "full":
+		base += "_%s_p%d" % [stage, int(round(phase * 100.0))]   # gen 14: the state file and the tile share a name
+	return base
 
 
 func _build() -> void:
@@ -201,20 +262,27 @@ func _build() -> void:
 		"ms_tree": 0, "ms_flower": 0, "ms_fungus": 0, "ms_creature": 0,   # gen 3: the bill, by payer
 		"slots_bloom": 0, "slots_body": 0, "flower_dispatched": 0, "creature_dispatched": 0,   # gen 13: the slots handed over, the bodies the dispatcher still built
 		"residents_fungus": 0, "residents_bloom": 0, "residents_body": 0}
+	_ladder_counts = {"point": 0, "rods": 0, "lattice": 0}
+	_closure_of_stage()   # gen 14: the words this stage allows and the words arriving at it
 	_patch = Node3D.new()
 	_patch.name = "Biome"
 	add_child(_patch)
 	_terrain()
 	_ecology()
+	_ladder()     # gen 14: what the stage builds of the layout — the late cells, the built counts, the slots
 	_minerals()
 	_dispatch()
 	_water_pool() # gen 7: after the bodies — the disc's shade reads the canopy _dispatch() measured
+	_point()      # gen 14: the seed, above the water once there is water
+	_rods()       # gen 14: the line — the path before the mycelium
 	_ground()     # gen 4: after the bodies — the paint reads the canopy _dispatch() measured
+	_lattice()    # gen 14: the cell grid on the surface, until colour
 	_section()
 	_residents.clear()
 	var residents_start := Time.get_ticks_msec()
-	if residents == "on":
+	if residents == "on" and _amount("select") > 0.0:
 		_residents = Residents.populate(self, community_seed)
+		_ladder_residents()   # gen 14: the fungus residents cut to the `select` amount
 	_counts["residents"] = _residents.size()
 	_counts["ms_residents"] = Time.get_ticks_msec() - residents_start
 	# gen 13: the residents by artifact — the count line's "flowers" and "creatures" stay the
@@ -235,6 +303,368 @@ func _build() -> void:
 		_write_state()
 
 
+# ── the ladder (gen 14): the stage's words gate every layer ─────────────────────
+## The words the object consults, in ladder order; the record carries each one's amount.
+const LADDER_WORDS: Array[String] = ["point", "line", "lattice", "face", "solid", "sphere", "subdivide",
+	"ornament", "translate", "rotate", "scale", "colour", "light", "flower", "paint", "sample", "vary",
+	"walk", "fungus", "ring", "absent", "field", "tree", "creature", "select", "connect"]
+const POINT_R := 0.15      # the seed: a 0.3 m sphere
+const POINT_LIFT := 0.35   # floating this far over the surface (or the water)
+static var _vocab_cache: Dictionary = {}
+
+
+## The stage's closure and the words that ARRIVE at it. At `full` nothing is read — every
+## amount is 1.0 and the world is gen 13's byte for byte. A hall's arrivals are its own entry
+## (plus the sequence's entry on the sequence's first hall, where the grammar merges it); a
+## sequence key's are the sequence's entry.
+func _closure_of_stage() -> void:
+	_closure = {}
+	_arrivals = {}
+	_amt = {}
+	if stage == "full":
+		return
+	_closure = Grammar.closure(stage)
+	var pos: Dictionary = _closure.get("position", {})
+	if not bool(pos.get("known", false)):
+		push_warning("biome_object: stage `%s` is neither a hall nor a sequence of the ladder — building the plane alone" % stage)
+		return
+	var vocab: Dictionary = _vocabulary()
+	var halls_v: Dictionary = vocab.get("halls", {})
+	var seqs_v: Dictionary = vocab.get("sequences", {})
+	var entries: Array = []
+	if bool(pos.get("is_hall", false)):
+		entries.append(halls_v.get(String(pos.get("map", "")), {}))
+		if int(pos.get("hall", -1)) == 0:
+			entries.append(seqs_v.get(String(pos.get("sequence", "")), {}))
+	else:
+		entries.append(seqs_v.get(String(pos.get("sequence", "")), {}))
+	for e in entries:
+		if not (e is Dictionary):
+			continue
+		for col in Grammar.COLUMNS:
+			var words: Variant = (e as Dictionary).get(col, [])
+			if words is Array:
+				for w in words:
+					_arrivals[String(w)] = true
+	for w in LADDER_WORDS:
+		_amt[w] = _amount_of(w)
+
+
+static func _vocabulary() -> Dictionary:
+	if _vocab_cache.is_empty():
+		var v: Variant = JSON.parse_string(FileAccess.get_file_as_string(Grammar.VOCAB_PATH))
+		_vocab_cache = v if v is Dictionary else {"halls": {}, "sequences": {}}
+	return _vocab_cache
+
+
+func _amount_of(word: String) -> float:
+	if not Grammar.allows(_closure, word):
+		return 0.0
+	if _arrivals.has(word):
+		return phase
+	return 1.0
+
+
+## THE gate: 0.0 when the stage does not allow the word — the layer is not built; `phase` when
+## the word arrives at this stage's own hall — the layer is built scaled by it; else 1.0.
+func _amount(word: String) -> float:
+	if stage == "full":
+		return 1.0
+	return float(_amt.get(word, 0.0))
+
+
+## v folded into [lo, hi) — the cover's samples, displaced by the phase, stay on the plate.
+static func _wrap(v: float, lo: float, hi: float) -> float:
+	return lo + fposmod(v - lo, hi - lo)
+
+
+## a at 0, b at 1 — and b ITSELF at 1: lerpf(a, b, 1.0) is a + (b − a), which is not b in
+## floating point, and `full` must be gen 13 byte for byte.
+static func _mix(a: float, b: float, t: float) -> float:
+	if t >= 1.0:
+		return b
+	if t <= 0.0:
+		return a
+	return lerpf(a, b, t)
+
+
+## A body's colour by the `colour` amount: the luminance grey (or the grey given) before
+## Color_Context_Placed, the colour from it, mixed by the phase between. At `full` untouched.
+func _tint(c: Color, grey: float = -1.0) -> Color:
+	var a: float = _amount("colour")
+	if a >= 1.0:
+		return c
+	var l: float = grey if grey >= 0.0 else 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b
+	var g := Color(l, l, l, c.a)
+	return g if a <= 0.0 else g.lerp(c, a)
+
+
+## What the stage BUILDS of the layout. The cells are the seed's (and the aspect term's) at
+## every stage; a kingdom whose word is short of 1 builds its first round(n × amount) bodies in
+## the order the ecology took them — the shore tree first, the best meadow cell first, the rim
+## and each path from the water out — and the rest are marked `late`, which _dispatch() leaves.
+## The counts become the built counts (the connections stay the layout's); the resident slots
+## are cut to the `select` amount, in the same orders, so every slot left stands a dispatcher
+## body. At `full` every amount is 1.0: nothing is marked, no count moves.
+func _ladder() -> void:
+	_counts["tree"] = _late(_trees, _amount("tree"))
+	_counts["flower"] = _late(_meadow_order, _amount("flower"))
+	_counts["creature"] = _late(_creature_order, maxf(_amount("walk"), _amount("creature")))
+	_counts["fungus"] = _late(_rim_order, _amount("ring"))
+	var a_path: float = _amount("fungus")
+	var built_path := 0
+	for t in _paths.keys():
+		built_path += _late(_paths[t], a_path)
+	_counts["fungus_path"] = built_path
+	if _amount("solid") <= 0.0:
+		_counts["mineral"] = 0
+	if _amount("sphere") <= 0.0:
+		_counts["water"] = 0
+	# the residents knob is not read here: with residents off the flags stay a fact about the
+	# seed (gen 13's contract) and _dispatch() builds every slot, as it always did
+	var a_sel: float = _amount("select")
+	_counts["slots_bloom"] = _cut_slots(_meadow_order, a_sel)
+	_counts["slots_body"] = _cut_slots(_creature_order, a_sel)
+
+
+## Marks the cells past round(n × amount) of `order` late; returns how many are built.
+func _late(order: Array, amount: float) -> int:
+	var n: int = order.size()
+	var keep: int = n if amount >= 1.0 else clampi(int(round(float(n) * amount)), 0, n)
+	for i in range(keep, n):
+		_cells[order[i]]["late"] = true
+	return keep
+
+
+## Keeps the first round(n × amount) resident slots of `order` (a late cell is never a slot);
+## returns how many stand.
+func _cut_slots(order: Array, amount: float) -> int:
+	var flagged: Array = []
+	for key in order:
+		if bool(_cells[key].get("resident", false)):
+			flagged.append(key)
+	var n: int = flagged.size()
+	var keep: int = n if amount >= 1.0 else clampi(int(round(float(n) * amount)), 0, n)
+	var standing := 0
+	for i in range(n):
+		if i >= keep or bool(_cells[flagged[i]].get("late", false)):
+			_cells[flagged[i]].erase("resident")
+		else:
+			standing += 1
+	return standing
+
+
+## The residents' count by the `select` phase: the bloom and body slots were cut in _ladder();
+## the fungus residents stand in gaps, not slots, so they are cut here to round(n × amount),
+## the last of them freed, before the cover reads the clearings.
+func _ladder_residents() -> void:
+	var a: float = _amount("select")
+	if a >= 1.0:
+		return
+	var n_fungus := 0
+	for r in _residents:
+		if String(r["artifact"]) == "living_fungus_fruit":
+			n_fungus += 1
+	var keep: int = clampi(int(round(float(n_fungus) * a)), 0, n_fungus)
+	var kept: Array[Dictionary] = []
+	var seen := 0
+	for r in _residents:
+		if String(r["artifact"]) == "living_fungus_fruit":
+			seen += 1
+			if seen > keep:
+				var n: Node = _patch.get_node_or_null(NodePath(String(r["node"])))
+				if n != null:
+					n.free()
+				continue
+		kept.append(r)
+	_residents = kept
+
+
+## The point — the seed: one black sphere at the basin centre, POINT_LIFT over the surface
+## (over the water once the pool stands), its radius by the phase. It stays in every later
+## STAGE — the last stage of the ladder is gen 13's world with the seed still in it — but not
+## at `full`, which is not a stage but the finished object: the RSI's six tiles, byte for byte.
+func _point() -> void:
+	if stage == "full":
+		return
+	var a: float = _amount("point")
+	if a <= 0.0:
+		return
+	var c: Vector2 = _basin_c - Vector2(float(size), float(size)) * 0.5
+	var y: float = _h_at(c.x, c.y)
+	if int(_counts.get("water", 0)) > 0:
+		y = maxf(y, _water_level())
+	var mi := MeshInstance3D.new()
+	mi.name = "Point"
+	var sm := SphereMesh.new()
+	sm.radius = POINT_R * a
+	sm.height = 2.0 * POINT_R * a
+	sm.radial_segments = 24
+	sm.rings = 12
+	mi.mesh = sm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.02, 0.02, 0.02)
+	mat.roughness = 0.55
+	mi.material_override = mat
+	mi.position = Vector3(c.x, y + POINT_LIFT, c.y)
+	_patch.add_child(mi)
+	_ladder_counts["point"] = 1
+
+
+## The line — the mycelium path before there is mycelium: thin grey rods on the surface from
+## the point's foot toward every future trunk, 0.5 m segments as the path is sampled, ending
+## 0.45 m short of the trunk (the trees are not there yet); their length by the phase. Gone
+## when `fungus` arrives — the mats stand on the same line.
+func _rods() -> void:
+	var a: float = _amount("line")
+	if a <= 0.0 or _amount("fungus") > 0.0:
+		return
+	var holder := Node3D.new()
+	holder.name = "Rods"
+	_patch.add_child(holder)
+	var basin_w: Vector2 = _basin_c - Vector2(float(size), float(size)) * 0.5
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.42, 0.42, 0.42)
+	mat.roughness = 0.9
+	var n := 0
+	for t in _trees:
+		var trunk: Vector2 = _pos[t]
+		var span: float = trunk.distance_to(basin_w)
+		if span < 0.5:
+			continue
+		var dir: Vector2 = (trunk - basin_w) / span
+		var reach: float = (span - 0.45) * a
+		var s := 0.0
+		while s < reach - 0.001:
+			var s2: float = minf(s + 0.5, reach)
+			var p0: Vector2 = basin_w + dir * s
+			var p1: Vector2 = basin_w + dir * s2
+			var v0 := Vector3(p0.x, _rod_y(p0), p0.y)
+			var v1 := Vector3(p1.x, _rod_y(p1), p1.y)
+			var seg := MeshInstance3D.new()
+			seg.name = "Rod_%d_%d_%d" % [t.x, t.y, n]
+			var bm := BoxMesh.new()
+			bm.size = Vector3(0.024, 0.024, v0.distance_to(v1))
+			seg.mesh = bm
+			seg.material_override = mat
+			seg.transform = Transform3D(Basis.looking_at(v1 - v0, Vector3.UP), (v0 + v1) * 0.5)
+			holder.add_child(seg)
+			n += 1
+			s = s2
+	_ladder_counts["rods"] = n
+
+
+func _rod_y(p: Vector2) -> float:
+	var y: float = _h_at(p.x, p.y)
+	if int(_counts.get("water", 0)) > 0:
+		y = maxf(y, _water_level())
+	return y + 0.04
+
+
+## The lattice — a faint grey cell grid on the plane: one ribbon per grid line, following the
+## surface (sampled every quarter metre, 2 cm over it), its opacity by the phase. Removed when
+## `colour` arrives — the paint takes the floor.
+func _lattice() -> void:
+	var a: float = _amount("lattice")
+	if a <= 0.0 or _amount("colour") > 0.0:
+		return
+	var half := float(size) * 0.5
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var steps: int = size * 4
+	var w := 0.012
+	for axis in range(2):
+		for i in range(size + 1):
+			var c: float = -half + float(i)
+			for j in range(steps):
+				var t0: float = -half + float(size) * float(j) / float(steps)
+				var t1: float = -half + float(size) * float(j + 1) / float(steps)
+				var quad: Array = []
+				for pair in [[t0, -w], [t0, w], [t1, w], [t1, -w]]:
+					var along: float = pair[0]
+					var off: float = pair[1]
+					var x: float = c + off if axis == 0 else along
+					var z: float = along if axis == 0 else c + off
+					quad.append(Vector3(x, _h_at(clampf(x, -half, half), clampf(z, -half, half)) + 0.02, z))
+				for ix in [0, 1, 2, 0, 2, 3]:
+					st.set_normal(Vector3.UP)
+					st.add_vertex(quad[ix])
+	var mi := MeshInstance3D.new()
+	mi.name = "Lattice"
+	mi.mesh = st.commit()
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.albedo_color = Color(0.25, 0.25, 0.25, 0.55 * a)
+	mi.material_override = mat
+	_patch.add_child(mi)
+	_ladder_counts["lattice"] = 2 * (size + 1)
+
+
+## The record's ladder block: the stage, the phase, the arriving words, every word's amount,
+## the layers standing and the primitives' counts.
+func _ladder_record() -> Dictionary:
+	var amounts := {}
+	for w in LADDER_WORDS:
+		amounts[w] = _amount(w)
+	var known: bool = stage == "full" or bool((_closure.get("position", {}) as Dictionary).get("known", false))
+	return {"stage": stage, "phase": phase, "known": known, "arrivals": _arrivals.keys(), "amounts": amounts,
+		"layers": _layers(), "counts": _ladder_counts.duplicate()}
+
+
+## The layers STANDING, by what was built (a word with nothing to show is not a layer): the
+## rods go when the mats come, the lattice when the colour does; everything else only grows
+## along the walk.
+func _layers() -> Array:
+	var out: Array = ["ground"]
+	if int(_ladder_counts.get("point", 0)) > 0:
+		out.append("point")
+	if int(_ladder_counts.get("rods", 0)) > 0:
+		out.append("rods")
+	if int(_ladder_counts.get("lattice", 0)) > 0:
+		out.append("lattice")
+	if int(_counts.get("section_triangles", 0)) > 0:
+		out.append("section")
+	if int(_counts.get("mineral", 0)) > 0:
+		out.append("crystals")
+	if int(_counts.get("water", 0)) > 0:
+		out.append("pool")
+	if _amount("subdivide") >= 0.5:
+		out.append("subdivided")
+	if int(_counts.get("cover", 0)) > 0:
+		out.append("cover")
+	if _max_h > 0.0:
+		out.append("relief")
+	if _amount("rotate") > 0.0:
+		out.append("aspect")
+	if _amount("scale") > 0.0:
+		out.append("ranked")
+	if _amount("colour") > 0.0:
+		out.append("colour")
+	if _amount("light") > 0.0:
+		out.append("shade")
+	if int(_counts.get("flower", 0)) > 0:
+		out.append("flowers")
+	if _amount("paint") > 0.0:
+		out.append("paint")
+	if _amount("sample") > 0.0:
+		out.append("jitter")
+	if _amount("vary") > 0.0:
+		out.append("tufts")
+	if int(_counts.get("creature", 0)) > 0:
+		out.append("creatures")
+	if int(_counts.get("fungus", 0)) + int(_counts.get("fungus_path", 0)) > 0:
+		out.append("mats")
+	if _amount("field") > 0.0:
+		out.append("noise")
+	if int(_counts.get("tree", 0)) > 0:
+		out.append("trees")
+	if int(_counts.get("residents", 0)) > 0:
+		out.append("residents")
+	return out
+
+
 # ── the ground: a height field with a basin ────────────────────────────────────
 func _terrain() -> void:
 	var rng := RandomNumberGenerator.new()
@@ -245,11 +675,13 @@ func _terrain() -> void:
 	noise.frequency = 0.13
 	noise.fractal_octaves = 3
 	noise.fractal_gain = 0.45
-	_max_h = 0.5 + 1.7 * relief
+	_amp = 0.5 + 1.7 * relief
+	_max_h = _amp * _amount("translate")   # gen 14: the RENDERED amplitude — 0 before Trans_Translation; the rules keep _amp
 	# the basin: where the seed puts the water, its reach grows with moisture
 	_basin_c = Vector2(rng.randf_range(0.28, 0.72) * float(size), rng.randf_range(0.28, 0.72) * float(size))
 	_basin_r = 1.4 + 2.2 * moisture + 0.15 * float(size) / 12.0
 	_field.resize(size * size)
+	_field_render.resize(size * size)
 	var lo := 9.0
 	var hi := -9.0
 	for z in range(size):
@@ -265,36 +697,66 @@ func _terrain() -> void:
 	# wet shelf one metre wide round them, rising 0.16 per metre. The shelf is the wet rim as
 	# geometry; its cells (h <= 0.18) fall out of the tree rule, so trees step back from the shore.
 	_pool_r = _basin_r * 0.62
+	var a_field: float = _amount("field")
 	for z in range(size):
 		for x in range(size):
 			var d: float = Vector2(float(x) + 0.5, float(z) + 0.5).distance_to(_basin_c)
 			var w: float = clampf(1.0 - d / _basin_r, 0.0, 1.0)
 			w = w * w * (3.0 - 2.0 * w)
-			var h: float = _field[z * size + x] * (1.0 - w) * (0.75 + 0.25 * relief) + 0.08 * (1.0 - w)
+			var n: float = _field[z * size + x]
+			var h: float = n * (1.0 - w) * (0.75 + 0.25 * relief) + 0.08 * (1.0 - w)
+			# gen 14: the MESH's field — the noise term taken about its mean 0.5 by the `field`
+			# amount, so before the noise sequence the plane carries the smoothstep basin alone,
+			# dug into a level plateau; the rules keep the full field
+			var hr: float = h if a_field >= 1.0 else _mix(0.5, n, a_field) * (1.0 - w) * (0.75 + 0.25 * relief) + 0.08 * (1.0 - w)
 			if d < _pool_r:
 				h = minf(h, 0.02)                          # flat floor under the water
+				hr = minf(hr, 0.02)
 			elif d < _pool_r + 1.0:
-				h = minf(h, 0.02 + 0.16 * (d - _pool_r))   # the wet shelf, a shore
+				var shelf: float = 0.02 + 0.16 * (d - _pool_r)   # the wet shelf, a shore
+				h = minf(h, shelf)
+				hr = minf(hr, shelf)
 			_field[z * size + x] = h
+			_field_render[z * size + x] = hr
 			if d < _pool_r:
 				_water[Vector2i(x, z)] = true
 
 
+## The RENDERED height of a cell — the mesh's field at the rendered amplitude. gen 14: the
+## rules read _h_rule_cell / _h_rule / _wl_rule instead, the full relief and noise, so the
+## layout is the seed's whatever the ladder shows; at `full` the two are one.
 func _h_cell(x: int, z: int) -> float:
-	return _field[clampi(z, 0, size - 1) * size + clampi(x, 0, size - 1)] * _max_h
+	return _field_render[clampi(z, 0, size - 1) * size + clampi(x, 0, size - 1)] * _max_h
 
 
-## Surface height at a world xz (bilinear over cell centres).
+func _h_rule_cell(x: int, z: int) -> float:
+	return _field[clampi(z, 0, size - 1) * size + clampi(x, 0, size - 1)] * _amp
+
+
+## Surface height at a world xz (bilinear over cell centres) — the rendered surface.
 func _h_at(wx: float, wz: float) -> float:
+	return _bilinear(wx, wz, false)
+
+
+## gen 14: the rules' surface — full amplitude, full noise.
+func _h_rule(wx: float, wz: float) -> float:
+	return _bilinear(wx, wz, true)
+
+
+func _bilinear(wx: float, wz: float, rule: bool) -> float:
 	var fx: float = wx + float(size) * 0.5 - 0.5
 	var fz: float = wz + float(size) * 0.5 - 0.5
 	var x0 := int(floor(fx))
 	var z0 := int(floor(fz))
 	var tx: float = fx - float(x0)
 	var tz: float = fz - float(z0)
-	var a: float = lerpf(_h_cell(x0, z0), _h_cell(x0 + 1, z0), tx)
-	var b: float = lerpf(_h_cell(x0, z0 + 1), _h_cell(x0 + 1, z0 + 1), tx)
+	var a: float = lerpf(_hc(x0, z0, rule), _hc(x0 + 1, z0, rule), tx)
+	var b: float = lerpf(_hc(x0, z0 + 1, rule), _hc(x0 + 1, z0 + 1, rule), tx)
 	return lerpf(a, b, tz)
+
+
+func _hc(x: int, z: int, rule: bool) -> float:
+	return _h_rule_cell(x, z) if rule else _h_cell(x, z)
 
 
 func _cell_world(x: int, z: int) -> Vector3:
@@ -310,6 +772,14 @@ func _water_level() -> float:
 	return lo + 0.08
 
 
+## gen 14: the rules' water level — over the full relief.
+func _wl_rule() -> float:
+	var lo := 9.0
+	for k in _water.keys():
+		lo = minf(lo, _h_rule_cell(k.x, k.y))
+	return lo + 0.08
+
+
 # ── the ecology: moisture, then the rules that place every kingdom ───────────────
 func _ecology() -> void:
 	var rng := RandomNumberGenerator.new()
@@ -319,6 +789,10 @@ func _ecology() -> void:
 	_trees.clear()
 	_pos.clear()
 	_paths.clear()
+	_meadow_order.clear()
+	_creature_order.clear()
+	_rim_order.clear()
+	var a_rotate: float = _amount("rotate")   # gen 14: the aspect term — the ONE ladder amount the layout reads
 	var reach: float = float(size) * (0.35 + 0.35 * moisture)
 	for z in range(size):
 		for x in range(size):
@@ -331,8 +805,9 @@ func _ecology() -> void:
 			# falls on it — and loses up to 0.12, saturating at a 0.25 m/m grade; the lee gains
 			# the same. Taken AFTER the jitter draw, so the dice are gen 10's: the re-roll is the
 			# moisture's — the ridge, the trees, the meadow, the rim all read it
-			var g := Vector2(_h_cell(x + 1, z) - _h_cell(x - 1, z), _h_cell(x, z + 1) - _h_cell(x, z - 1)) * 0.5
-			m -= 0.12 * clampf(g.dot(SUN_XZ) / 0.25, -1.0, 1.0)
+			# gen 14: read off the RULES' heights, × the `rotate` amount — none before Trans_Rotation
+			var g := Vector2(_h_rule_cell(x + 1, z) - _h_rule_cell(x - 1, z), _h_rule_cell(x, z + 1) - _h_rule_cell(x, z - 1)) * 0.5
+			m -= 0.12 * clampf(g.dot(SUN_XZ) / 0.25, -1.0, 1.0) * a_rotate
 			_moist[z * size + x] = clampf(m, 0.0, 1.0)
 	# minerals: the driest high cells, spaced. gen 3: 2.5 cells from the water and off the
 	# outer ring — no crystal in a pond or on the rim (measured gen 2: two crystals stood at
@@ -387,9 +862,13 @@ func _ecology() -> void:
 		# gen 3: the body's scale. The dispatcher's size knob stops at dna.scale 1.6 (~1.8 m); the
 		# object owns the node it gets back and grows it by rank and moisture — the shore tree
 		# 2.8x on wet ground, the frontier sapling 1.5x on dry. _dispatch() caps it at the footprint.
+		# gen 14: this k is the RULE's (the meadow's rs, the side rule read it) and stays gen 13's
+		# at every stage; the built trunk mixes it from the sapling's by `scale` in _dispatch()
 		_cells[t]["k"] = (1.5 + 1.3 * rank) * (0.75 + 0.35 * moisture)
 		# the trunk's ±0.3 jitter, drawn here from the per-cell rng _dispatch() used to draw it,
-		# so the path below can aim at the trunk and not at the cell
+		# so the path below can aim at the trunk and not at the cell. gen 14: the RULE position —
+		# the path, the meadow and the rods aim here; the built trunk stands at _body_xz, the
+		# jitter × `sample`
 		var trng := RandomNumberGenerator.new()
 		trng.seed = hash([seed, "cell", t.x, t.y])
 		var cw: Vector3 = _cell_world(t.x, t.y)
@@ -412,6 +891,7 @@ func _ecology() -> void:
 		if _spaced(key, 1):
 			_cells[key] = {"kingdom": "fungus", "inten": clampi(2 + int(round(moisture * 2.0)), 1, 4), "algo": "mycelium"}
 			_counts["fungus"] += 1
+			_rim_order.append(key)
 	# the mycelium PATH: from the pool rim out to every tree. gen 2: the web ON THE LINE — the
 	# line from the basin centre (world xz) to the TRUNK, sampled every 0.5 m from 0.85 m past
 	# the water to 0.45 m short of the bark, skipping water, occupied cells and flooded samples
@@ -421,7 +901,7 @@ func _ecology() -> void:
 	# gen 25 at the water down to 10 at the tree (the dispatcher reads it into max_steps): the
 	# network finished at the water, 40 % grown at the tip — still growing outward.
 	var basin_w: Vector2 = _basin_c - Vector2(float(size), float(size)) * 0.5
-	var wl: float = _water_level()
+	var wl: float = _wl_rule()   # gen 14: the rules' water level — the path is the seed's whatever is rendered
 	var lim: float = float(size) * 0.5 - 0.7
 	for t in _trees:
 		var trunk: Vector2 = _pos[t]
@@ -445,7 +925,7 @@ func _ecology() -> void:
 				continue
 			if _water.has(key) or _cells.has(key):
 				continue
-			if _h_at(p.x, p.y) < wl + 0.02:
+			if _h_rule(p.x, p.y) < wl + 0.02:
 				continue
 			if _counts["fungus"] + _counts["fungus_path"] >= 16:
 				break
@@ -461,7 +941,7 @@ func _ecology() -> void:
 			# tree's nearest free neighbour — the cell is the mat's name, the sample its place.
 			var q: Vector2 = trunk - dir * 0.45
 			var nk: Vector2i = _free_neighbour(t, q)
-			if nk.x >= 0 and _h_at(q.x, q.y) >= wl + 0.02:
+			if nk.x >= 0 and _h_rule(q.x, q.y) >= wl + 0.02:
 				var tq: float = clampf((s1 - s0) / maxf(0.001, s1 - s0), 0.0, 1.0)
 				_cells[nk] = {"kingdom": "fungus", "inten": 2, "algo": "mycelium",
 					"gen": str(int(round(lerpf(25.0, 10.0, tq))))}
@@ -534,6 +1014,7 @@ func _ecology() -> void:
 			break
 		var inten: int = clampi(1 + int(round(float(f["m"]) * 4.5)), 1, 5)
 		_cells[f["key"]] = {"kingdom": "flower", "inten": inten, "algo": ""}
+		_meadow_order.append(f["key"])
 		# only a cell whose body point (the jittered centre, _body_xz) stands BLOOM_EDGE_M
 		# inside the plate can be a slot: a resident may be any species at the habitat's size,
 		# and the largest preset at the largest size reaches ~0.9 m — the outer ring keeps the
@@ -573,6 +1054,7 @@ func _ecology() -> void:
 			_cells[key] = {"kingdom": "creature", "inten": 2 + rng.randi_range(0, 1), "algo": "", "resident": true}
 			_counts["creature"] += 1
 			_counts["slots_body"] += 1
+			_creature_order.append(key)
 	# connections: fungus cells with a tree or flower next to them — the network touches the wood
 	for key in _cells.keys():
 		if String(_cells[key]["kingdom"]) != "fungus":
@@ -671,12 +1153,18 @@ func _spaced_from(key: Vector2i, r: int, kingdom: String) -> bool:
 ## the two draws _dispatch() has always made. gen 13: one law, so a resident stands exactly
 ## where the dispatcher would have stood the cell's own body.
 func _body_xz(key: Vector2i) -> Vector2:
+	var a_sample: float = _amount("sample")   # gen 14: on the cell centre before Random_Definition
+	var cw: Vector3 = _cell_world(key.x, key.y)
 	if _pos.has(key):
-		return _pos[key] as Vector2
+		var p: Vector2 = _pos[key] as Vector2
+		# a trunk's rule position carries the full jitter; the built trunk walks out to it by the
+		# phase (returned AS IS at 1, so `full` is gen 13 to the bit); a path mat stands at its sample
+		if a_sample < 1.0 and _cells.has(key) and String(_cells[key]["kingdom"]) == "tree":
+			return Vector2(cw.x + (p.x - cw.x) * a_sample, cw.z + (p.y - cw.z) * a_sample)
+		return p
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash([seed, "cell", key.x, key.y])
-	var cw: Vector3 = _cell_world(key.x, key.y)
-	return Vector2(cw.x + rng.randf_range(-0.3, 0.3), cw.z + rng.randf_range(-0.3, 0.3))
+	return Vector2(cw.x + rng.randf_range(-0.3, 0.3) * a_sample, cw.z + rng.randf_range(-0.3, 0.3) * a_sample)
 
 
 ## gen 13: the meadow's side rule (gen 11) at any world xz — true when the point lies on the
@@ -706,9 +1194,17 @@ func _ground() -> void:
 	g.name = "Ground"
 	g.set_base_offset(0.0)
 	g.configure(size, size, 1.0, Vector3.ZERO)
-	g.set_field(_field, size, size, _max_h)
+	if _amount("subdivide") < 0.5:
+		g.resolution = 16   # gen 14: before Primitives_Portals the floor is the substrate's 16-quad minimum
+	g.set_field(_field_render, size, size, _max_h)   # gen 14: the rendered field — flat before Trans_Translation
 	g.set_paint_layers(_moisture_paint(), seed)
 	_patch.add_child(g)
+	if _amount("colour") < 1.0 and g.mesh_instance != null and g.mesh_instance.material_override is ShaderMaterial:
+		# gen 14: grey until Color_Context_Placed — the height bands as greys, mixed toward the earth by the phase
+		var sm: ShaderMaterial = g.mesh_instance.material_override
+		for band in [["color_low", Color(0.26, 0.22, 0.17), 0.40], ["color_mid", Color(0.34, 0.40, 0.26), 0.50], ["color_high", Color(0.62, 0.66, 0.52), 0.62]]:
+			var c: Color = _tint(band[1], float(band[2]))
+			sm.set_shader_parameter(String(band[0]), Vector3(c.r, c.g, c.b))
 
 
 ## The cut edge is a schematic soil profile, not a geological simulation. The
@@ -718,6 +1214,13 @@ const SECTION_BASE_Y := -0.42
 
 func _section() -> void:
 	var started := Time.get_ticks_msec()
+	var a_face: float = _amount("face")
+	if a_face <= 0.0:
+		# gen 14: before Point_Triangle_Context the ground is a sheet — no sides, no underside
+		_counts["section_triangles"] = 0
+		_counts["ms_section"] = 0
+		return
+	var base_y: float = SECTION_BASE_Y * a_face   # gen 14: the base rises toward the surface by the phase
 	var ground = _patch.get_node("Ground")
 	var steps: int = ground.resolution # match the actual top mesh, including size 4's minimum
 	var half := float(size) * 0.5
@@ -757,8 +1260,8 @@ func _section() -> void:
 			var b: Vector2 = corners[edge].lerp(corners[(edge + 1) % 4], float(i + 1) / float(steps))
 			for p in [Vector2.ZERO, b, a]:
 				st.set_normal(Vector3.DOWN)
-				st.set_color(Color(0.24, 0.25, 0.25))
-				st.add_vertex(Vector3(p.x, SECTION_BASE_Y, p.y))
+				st.set_color(_tint(Color(0.24, 0.25, 0.25)))
+				st.add_vertex(Vector3(p.x, base_y, p.y))
 	var mat := StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
 	mat.vertex_color_is_srgb = true # these soil swatches are authored as display colours
@@ -778,20 +1281,24 @@ func _section_column(p: Vector2) -> Dictionary:
 	var z := clampi(int(floor(p.y + half)), 0, size - 1)
 	var m: float = clampf(_moist[z * size + x], 0.0, 1.0)
 	var rock: float = clampf(float(_rock.get(Vector2i(x, z), 0.0)), 0.0, 1.0)
+	# gen 14: every band's thickness and the base × the `face` amount — the profile compressed
+	# toward the surface by the phase, still ordered; the colours grey until colour
+	var a: float = _amount("face")
 	var top := _h_at(p.x, p.y)
-	var soil_bottom := top - 0.06
-	var humus_bottom := soil_bottom - (0.04 + 0.22 * m)
+	var base: float = SECTION_BASE_Y * a
+	var soil_bottom := top - 0.06 * a
+	var humus_bottom := soil_bottom - (0.04 + 0.22 * m) * a
 	# The rock boundary rises with the terrain; enough subsoil remains even at
 	# the lowest shore. All bands remain ordered with the full moisture range.
-	var rock_top := minf(humus_bottom - 0.08, lerpf(SECTION_BASE_Y, top, 0.42))
+	var rock_top := minf(humus_bottom - 0.08 * a, lerpf(base, top, 0.42))
 	var skin := Color(0.62, 0.55, 0.39).lerp(Color(0.25, 0.34, 0.16), m)
 	skin = skin.lerp(Color(0.56, 0.55, 0.50), rock)
 	var humus := Color(0.30, 0.23, 0.14).lerp(Color(0.13, 0.12, 0.09), m)
 	var subsoil := Color(0.53, 0.40, 0.26).lerp(Color(0.40, 0.32, 0.23), m)
 	var bedrock := Color(0.32, 0.34, 0.35).lerp(Color(0.42, 0.42, 0.40), rock)
 	return {"at": p, "moisture": m, "levels": PackedFloat32Array([
-		top, soil_bottom, humus_bottom, rock_top, SECTION_BASE_Y]),
-		"colours": PackedColorArray([skin, humus, subsoil, bedrock])}
+		top, soil_bottom, humus_bottom, rock_top, base]),
+		"colours": PackedColorArray([_tint(skin), _tint(humus), _tint(subsoil), _tint(bedrock)])}
 
 
 ## gen 1: the moisture painted onto the ground as "shader" brush layers, the shape the
@@ -806,21 +1313,26 @@ func _moisture_paint() -> Array:
 	var dry: Array = []
 	var shore: Array = []
 	var silt: Array = []
+	# gen 14: the wet and dry layers arrive with `colour`, the shore, silt and rock with `paint`,
+	# the shade with `light` (through _shade_at) — each layer's values × its amount, a layer at 0 left out
+	var a_colour: float = _amount("colour")
+	var a_paint: float = _amount("paint")
+	var a_light: float = _amount("light")
 	for z in range(size):
 		for x in range(size):
 			var i: int = z * size + x
 			var m: float = _moist[i]
-			var vw: float = clampf((m - 0.28) / 0.42, 0.0, 1.0)
+			var vw: float = clampf((m - 0.28) / 0.42, 0.0, 1.0) * a_colour
 			if vw > 0.0:
 				wet.append([x, z, vw])
-			var vd: float = clampf((0.45 - m) / 0.35, 0.0, 1.0) * (0.55 + 0.45 * _field[i])
+			var vd: float = clampf((0.45 - m) / 0.35, 0.0, 1.0) * (0.55 + 0.45 * _field[i]) * a_colour
 			if vd > 0.0:
 				dry.append([x, z, vd])
 			var d_c: float = Vector2(float(x) + 0.5, float(z) + 0.5).distance_to(_basin_c)
 			if _water.has(Vector2i(x, z)):
-				silt.append([x, z, 0.45 + 0.55 * (1.0 - d_c / _pool_r)])
+				silt.append([x, z, (0.45 + 0.55 * (1.0 - d_c / _pool_r)) * a_paint])
 			elif d_c < _pool_r + 1.0:
-				shore.append([x, z, 0.8 * (1.0 - (d_c - _pool_r))])
+				shore.append([x, z, 0.8 * (1.0 - (d_c - _pool_r)) * a_paint])
 	# gen 4: the canopy casts a layer — per dry-land cell the strongest of the trees' shade by
 	# the MEASURED canopy (_canopy, filled in _dispatch(); the ground is built after it for
 	# this): v = 0.85·(1 − d / canopy)^0.6, kept over 0.02, painted LAST so it darkens whatever
@@ -843,11 +1355,22 @@ func _moisture_paint() -> Array:
 		for x in range(size):
 			var rk := Vector2i(x, z)
 			if _rock.has(rk):
-				rock.append([x, z, float(_rock[rk])])
-	_counts["paint"] = wet.size() + dry.size() + shore.size() + silt.size() + rock.size() + shade.size()
-	return [_brush_layer([0.74, 0.66, 0.50], dry, "dry"), _brush_layer([0.20, 0.34, 0.18], wet, "wet"),
-		_brush_layer([0.58, 0.54, 0.42], shore, "shore"), _brush_layer([0.16, 0.14, 0.11], silt, "silt"),
-		_brush_layer([0.56, 0.55, 0.50], rock, "rock"), _brush_layer([0.11, 0.17, 0.09], shade, "shade")]
+				rock.append([x, z, float(_rock[rk]) * a_paint])
+	var layers: Array = []
+	if a_colour > 0.0:
+		layers.append(_brush_layer([0.74, 0.66, 0.50], dry, "dry"))
+		layers.append(_brush_layer([0.20, 0.34, 0.18], wet, "wet"))
+	if a_paint > 0.0:
+		layers.append(_brush_layer([0.58, 0.54, 0.42], shore, "shore"))
+		layers.append(_brush_layer([0.16, 0.14, 0.11], silt, "silt"))
+		layers.append(_brush_layer([0.56, 0.55, 0.50], rock, "rock"))
+	if a_light > 0.0:
+		layers.append(_brush_layer([0.11, 0.17, 0.09], shade, "shade"))
+	var painted := 0
+	for ly in layers:
+		painted += ((ly["brush"] as Dictionary)["cells"] as Array).size()
+	_counts["paint"] = painted
+	return layers
 
 
 ## gen 4: each layer carries a name — the probe's handle; the substrate reads past it.
@@ -860,7 +1383,8 @@ func _brush_layer(color: Array, cells: Array, layer_name: String) -> Dictionary:
 ## height: sc = trunk + SUN_XZ · SUN_RUN · crown. Before _dispatch() has measured the crown
 ## this is the trunk (the ecology's own rules read the trunk and the side, never the shadow).
 func _shade_centre(t: Vector2i) -> Vector2:
-	return (_pos[t] as Vector2) + SUN_XZ * SUN_RUN * float(_crown.get(t, 0.0))
+	# gen 14: the run × the `rotate` amount — the shade sits at the trunk before Trans_Rotation
+	return (_pos[t] as Vector2) + SUN_XZ * SUN_RUN * float(_crown.get(t, 0.0)) * _amount("rotate")
 
 
 ## gen 11: THE shade law, in one place — the strongest of the trees' shade at a world xz,
@@ -875,7 +1399,7 @@ func _shade_at(at: Vector2) -> float:
 		if cr <= 0.001:
 			continue
 		vs = maxf(vs, pow(clampf(1.0 - at.distance_to(_shade_centre(t)) / cr, 0.0, 1.0), 0.6))
-	return vs
+	return vs * _amount("light")   # gen 14: the shade is the `light` layer — none before Color_Flashlight
 
 
 const POOL_SEGMENTS := 48
@@ -891,6 +1415,9 @@ const POOL_RIM := Color(0.24, 0.50, 0.68, 0.62)
 func _water_pool() -> void:
 	if _water.is_empty():
 		return
+	var a_sphere: float = _amount("sphere")
+	if a_sphere <= 0.0:
+		return   # gen 14: no sphere before Primitives_Ignorance — the basin stands dry
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash([seed, "pool"])
 	var holder := Node3D.new()
@@ -898,7 +1425,7 @@ func _water_pool() -> void:
 	var c: Vector3 = Vector3(_basin_c.x - float(size) * 0.5, _water_level(), _basin_c.y - float(size) * 0.5)
 	holder.position = c
 	_patch.add_child(holder)
-	var r: float = _pool_r + 0.35   # gen 1: the disc laps the shelf
+	var r: float = (_pool_r + 0.35) * a_sphere   # gen 1: the disc laps the shelf; gen 14: grown in by the phase
 	# gen 7: the disc is a vertex-coloured fan — deep at the middle, pale at the rim, darkened
 	# wherever a measured canopy hangs over it; no emission, the colour is the albedo. Its
 	# surface stands at 0.01 above the water level, where the cylinder's top stood.
@@ -915,7 +1442,7 @@ func _water_pool() -> void:
 	disc.material_override = wmat
 	holder.add_child(disc)
 	# gen 7 (the gen-6 critic): no ring — the depth gradient is the water's edge
-	var reeds: int = 3 + int(round(moisture * 5.0))
+	var reeds: int = int(round(float(3 + int(round(moisture * 5.0))) * a_sphere))   # gen 14: × the phase
 	for i in range(reeds):
 		var reed := MeshInstance3D.new()
 		reed.name = "Reed_%d" % i
@@ -926,7 +1453,7 @@ func _water_pool() -> void:
 		rc.height = rh
 		reed.mesh = rc
 		var remat := StandardMaterial3D.new()
-		remat.albedo_color = Color(0.3, 0.5, 0.42)
+		remat.albedo_color = _tint(Color(0.3, 0.5, 0.42))
 		reed.material_override = remat
 		var a: float = rng.randf_range(0.0, TAU)
 		# gen 1: the reeds stand on the SHORE, past the water's edge, their feet on the shelf
@@ -988,7 +1515,7 @@ func _pool_fan(r: float, centre: Vector2) -> ArrayMesh:
 func _pool_colour(u: float, at: Vector2) -> Color:
 	var col: Color = POOL_CENTRE.lerp(POOL_RIM, pow(u, 1.5))
 	var f: float = 1.0 - 0.45 * _shade_at(at)
-	return Color(col.r * f, col.g * f, col.b * f, col.a)
+	return _tint(Color(col.r * f, col.g * f, col.b * f, col.a))   # gen 14: grey water until colour
 
 
 ## gen 5: after each cluster's shards, its SCREE — the ridge comes down to the water. The
@@ -1003,7 +1530,11 @@ func _pool_colour(u: float, at: Vector2) -> Color:
 func _minerals() -> void:
 	_rock.clear()
 	_clusters.clear()
-	var wl: float = _water_level() if not _water.is_empty() else -99.0
+	var a_solid: float = _amount("solid")
+	if a_solid <= 0.0:
+		return   # gen 14: no solid before Primitives_Polythedra — no crystal, no scree, no rock
+	var a_sample: float = _amount("sample")
+	var wl: float = _wl_rule() if not _water.is_empty() else -99.0   # gen 14: the rules' level
 	var basin_w: Vector2 = _basin_c - Vector2(float(size), float(size)) * 0.5
 	var lim: float = float(size) * 0.5
 	for key in _cells.keys():
@@ -1014,8 +1545,8 @@ func _minerals() -> void:
 		var holder := Node3D.new()
 		holder.name = "Crystal_%d_%d" % [key.x, key.y]
 		var p: Vector3 = _cell_world(key.x, key.y)
-		p.x += rng.randf_range(-0.25, 0.25)
-		p.z += rng.randf_range(-0.25, 0.25)
+		p.x += rng.randf_range(-0.25, 0.25) * a_sample   # gen 14: on the cell centre before Random_Definition
+		p.z += rng.randf_range(-0.25, 0.25) * a_sample
 		p.y = _h_at(p.x, p.z)
 		holder.position = p
 		holder.rotation.y = rng.randf_range(0.0, TAU)
@@ -1023,6 +1554,7 @@ func _minerals() -> void:
 		var scale: float = (0.9 + 0.5 * relief) * 1.4
 		# gen 3: the spires by height and dryness — the dry world grows spires where it grows no canopy
 		scale *= (0.7 + 0.6 * _field[key.y * size + key.x]) * (1.0 + 0.8 * (1.0 - moisture))
+		scale *= a_solid   # gen 14: the crystals grow in with the phase
 		var shards: int = rng.randi_range(6, 9)
 		for _i in range(shards):
 			var mi := MeshInstance3D.new()
@@ -1031,7 +1563,7 @@ func _minerals() -> void:
 			pm.size = Vector3(0.11 * scale, hgt, 0.11 * scale)
 			mi.mesh = pm
 			var tint: float = rng.randf_range(-0.04, 0.14)
-			var col := Color(0.58 + tint, 0.66 + tint, 0.86 + tint * 0.4)
+			var col: Color = _tint(Color(0.58 + tint, 0.66 + tint, 0.86 + tint * 0.4))   # gen 14: grey until colour
 			var mat := StandardMaterial3D.new()
 			mat.albedo_color = col
 			mat.metallic = 0.4
@@ -1054,7 +1586,7 @@ func _minerals() -> void:
 				_rock[nk] = maxf(float(_rock.get(nk, 0.0)), 0.3)
 		var srng := RandomNumberGenerator.new()
 		srng.seed = hash([seed, "scree", key.x, key.y])
-		var g := Vector2(_h_at(p.x + 0.5, p.z) - _h_at(p.x - 0.5, p.z), _h_at(p.x, p.z + 0.5) - _h_at(p.x, p.z - 0.5))
+		var g := Vector2(_h_rule(p.x + 0.5, p.z) - _h_rule(p.x - 0.5, p.z), _h_rule(p.x, p.z + 0.5) - _h_rule(p.x, p.z - 0.5))   # gen 14: the rules' slope
 		var to_basin: Vector2 = (basin_w - Vector2(p.x, p.z)).normalized()
 		var down: Vector2 = -g.normalized() if g.length() >= 0.02 else to_basin
 		# measured on the six DNAs (gen 5's builder): the ridge's cells are the rim's high dry
@@ -1067,8 +1599,8 @@ func _minerals() -> void:
 		var n: int = 3 + int(round(4.0 * relief))
 		# the prism's half-diagonal at this scale: no shard's mesh past the footprint's edge
 		var margin: float = 0.12 * scale
-		var scol := Color(0.62, 0.70, 0.88)
-		var low_h: float = p.y   # the lowest surface the trail has reached
+		var scol: Color = _tint(Color(0.62, 0.70, 0.88))
+		var low_h: float = _h_rule(p.x, p.z)   # the lowest surface the trail has reached (gen 14: the rules' surface)
 		for i in range(n):
 			var q: Vector2 = Vector2(p.x, p.z) + down * (0.55 + 0.5 * float(i) + 0.08 * float(i * i))
 			if absf(q.x) > lim - margin or absf(q.y) > lim - margin:
@@ -1076,7 +1608,7 @@ func _minerals() -> void:
 			var qk := Vector2i(int(floor(q.x + lim)), int(floor(q.y + lim)))
 			if _water.has(qk):
 				break   # a water cell
-			var hq: float = _h_at(q.x, q.y)
+			var hq: float = _h_rule(q.x, q.y)   # gen 14: the rules' surface — the trail is the seed's
 			if hq < wl + 0.02:
 				break   # a flooded sample — the shelf under the water
 			if hq > low_h + 0.02:
@@ -1095,7 +1627,7 @@ func _minerals() -> void:
 			mat.emission = scol * 0.2
 			mi.material_override = mat
 			# lying on the surface: the centre 0.3 h up, so the lowest edge sinks a few cm in
-			mi.position = Vector3(q.x, hq + 0.3 * pm.size.y, q.y)
+			mi.position = Vector3(q.x, _h_at(q.x, q.y) + 0.3 * pm.size.y, q.y)   # gen 14: the rendered surface
 			mi.rotation = Vector3(srng.randf_range(0.6, 1.3), srng.randf_range(0.0, TAU), srng.randf_range(-0.3, 0.3))
 			_patch.add_child(mi)
 			_rock[qk] = maxf(float(_rock.get(qk, 0.0)), 0.35)
@@ -1123,15 +1655,21 @@ func _dispatch() -> void:
 	_mats.clear()
 	var keys: Array = _cells.keys()
 	keys.sort_custom(func(a, b): return (a.y * size + a.x) < (b.y * size + b.x))
+	var a_select: float = _amount("select")
+	var a_fungus: float = _amount("fungus")
+	var a_scale: float = _amount("scale")   # gen 14: the trees' rank sizes — every tree the sapling before Trans_Scale
 	for key in keys:
 		var c: Dictionary = _cells[key]
 		var kname := String(c["kingdom"])
 		if not ids.has(kname):
 			continue
+		# gen 14: a cell the stage has not reached (_ladder() marked it) is not built
+		if bool(c.get("late", false)):
+			continue
 		# gen 13: a cell marked `resident` is the residents layer's while that layer is on —
 		# the dispatcher leaves it and populate() stands a catalogue body in the same place
 		# (_body_xz); with residents off every cell is built here, as gen 12 built it
-		if residents == "on" and bool(c.get("resident", false)):
+		if residents == "on" and a_select > 0.0 and bool(c.get("resident", false)):
 			continue
 		if kname == "flower":
 			_counts["flower_dispatched"] += 1
@@ -1150,8 +1688,9 @@ func _dispatch() -> void:
 		if String(c["algo"]) != "":
 			deposit["algo"] = String(c["algo"])
 		if c.has("gen"):
-			# gen 2: the path's growth — _spawn_mycelium reads "gen" into the colony's max_steps
-			deposit["gen"] = String(c["gen"])
+			# gen 2: the path's growth — _spawn_mycelium reads "gen" into the colony's max_steps;
+			# gen 14: × the `fungus` amount — a half-grown network at half phase
+			deposit["gen"] = str(int(round(float(int(String(c["gen"]))) * a_fungus)))
 		# gen 3: each kingdom's spawn timed into ms_<kingdom> — the budget's bill, by payer
 		var before: int = _patch.get_child_count()
 		var t1: int = Time.get_ticks_msec()
@@ -1171,7 +1710,9 @@ func _dispatch() -> void:
 			var k: float = 1.0
 			match kname:
 				"tree":
-					k = float(c.get("k", 1.0))
+					# gen 14: the rule's k (rank and moisture) is what the tree grows TO; before
+					# Trans_Scale it stands at the sapling's (rank 0) and the phase walks it up
+					k = _mix(1.5 * (0.75 + 0.35 * moisture), float(c.get("k", 1.0)), a_scale)
 					var r: float = 0.6 * (0.6 + 0.2 * float(inten))
 					var top := -1.0   # gen 11: the merged branch mesh's top, root-local, unscaled
 					var mb: Node = n.find_child("MergedBranches", true, false)
@@ -1210,6 +1751,9 @@ func _web_light(n: Node, c: Dictionary) -> void:
 	var mat: Material = (web as MeshInstance3D).material_override.duplicate()
 	if mat is StandardMaterial3D:
 		(mat as StandardMaterial3D).emission_energy_multiplier = lerpf(0.22, 0.55, t)   # gen-6 critic: bright at the growing tip, dim at the finished rim
+		if _amount("colour") < 1.0:   # gen 14: grey until colour
+			(mat as StandardMaterial3D).albedo_color = _tint((mat as StandardMaterial3D).albedo_color)
+			(mat as StandardMaterial3D).emission = _tint((mat as StandardMaterial3D).emission)
 		(web as MeshInstance3D).material_override = mat
 
 
@@ -1309,9 +1853,22 @@ static func _card_tint(kind: String, m: float, shaded: bool, rng: RandomNumberGe
 func _cover() -> void:
 	var started := Time.get_ticks_msec()
 	_cover_tufts.clear()
+	var a_ornament: float = _amount("ornament")
+	if a_ornament <= 0.0:
+		# gen 14: no ornament before Primitives_Melencolia — bare ground
+		_counts["cover"] = 0
+		_counts["cover_cards"] = 0
+		_counts["cover_tufts"] = 0
+		_counts["cover_litter"] = 0
+		_counts["ms_cover"] = Time.get_ticks_msec() - started
+		return
+	var a_vary: float = _amount("vary")       # gen 14: tufts — one blade before Random_Entropy
+	var a_sample: float = _amount("sample")   # gen 14: the samples on a regular lattice before Random_Definition
+	var coloured: bool = _amount("colour") >= 1.0   # gen 14: the foliage cards from colour on; grey stubble (the plain meshes) before
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash([seed, "cover"])
 	var want: int = clampi(int(round(float(size * size) * (1.2 + 2.6 * wildness) * (0.5 + 0.6 * moisture))), 40, 480)
+	want = int(round(float(want) * a_ornament))   # gen 14: the count by the ornament's phase
 	var budget := int(floor(float(want) * 1.8))
 	var by_type: Dictionary = {}
 	var cards: Dictionary = {}       # kind -> Texture2D (a card) or null (the old mesh)
@@ -1325,6 +1882,21 @@ func _cover() -> void:
 		tries += 1
 		var wx: float = rng.randf_range(-half + 0.2, half - 0.2)
 		var wz: float = rng.randf_range(-half + 0.2, half - 0.2)
+		if a_sample < 1.0:
+			# gen 14: the draw above still taken, so the stream is the same; the sample stands on a
+			# regular lattice over the plate and travels toward the drawn point by the phase. The
+			# travel is the drawn point's offset from the lattice point FOLDED into the plate's
+			# width (fposmod), scaled by the phase and folded again: an offset independent of the
+			# lattice point, so the samples stay spread at every phase — a plain lerp of two spread
+			# points crowds the middle (measured 195 blades at phase 0.5 against 130 at 0 and 1);
+			# at phase 1 the sample is the drawn point itself
+			var n_lat: int = maxi(1, int(ceil(sqrt(float(want * 4)))))
+			var span: float = float(size) - 0.4
+			var pitch: float = span / float(n_lat)
+			var lx: float = -half + 0.2 + (float((tries - 1) % n_lat) + 0.5) * pitch
+			var lz: float = -half + 0.2 + (float(int(floor(float(tries - 1) / float(n_lat)))) + 0.5) * pitch
+			wx = _wrap(lx + fposmod(wx - lx, span) * a_sample, -half + 0.2, half - 0.2)
+			wz = _wrap(lz + fposmod(wz - lz, span) * a_sample, -half + 0.2, half - 0.2)
 		var here := Vector2(wx, wz)
 		if not _cover_land(here):
 			continue
@@ -1392,13 +1964,16 @@ func _cover() -> void:
 				radius = 0.18
 			"flower": count = 3 + int(round(4.0 * m))
 			"litter": count = 3 + int(round(3.0 * m))
+		# gen 14: before Random_Entropy a tuft is one blade at its centre; count and radius grow with the phase
+		count = maxi(1, int(round(float(count) * a_vary)))
+		radius *= a_vary
 		if not meshes.has(kind):
-			var card_tex: Texture2D = _card_for(kind)
+			var card_tex: Texture2D = _card_for(kind) if coloured else null
 			meshes[kind] = _crossed_card() if card_tex != null else Cover.mesh_for("fern" if kind == "litter" else kind)
 			cards[kind] = card_tex
 		var mesh: Mesh = meshes[kind]
 		# one tint per tuft (a group shares its colour, as gen 6 ruled): near white, dry or shaded
-		var tuft_tint: Color = _card_tint(kind, m, shaded, tuft_rng) if cards.get(kind) != null else col
+		var tuft_tint: Color = _card_tint(kind, m, shaded, tuft_rng) if cards.get(kind) != null else _tint(col)   # gen 14: grey stubble until colour
 		if cards.get(kind) != null and kind == "litter":
 			tuft_tint = Color(0.9, 0.86, 0.8)
 		var members: Array = []
@@ -1419,7 +1994,7 @@ func _cover() -> void:
 						break
 				if not under:
 					continue
-			var scale_: float = sc * (1.0 - 0.4 * rad / radius) * tuft_rng.randf_range(0.85, 1.15)
+			var scale_: float = sc * ((1.0 - 0.4 * rad / radius) if radius > 0.0 else 1.0) * tuft_rng.randf_range(0.85, 1.15)
 			if cards.get(kind) != null:
 				scale_ *= float(CARD_HEIGHT.get(kind, 0.5))
 			var basis := Basis(Vector3.UP, yaw + angle)
@@ -1478,7 +2053,7 @@ func _cover_land(p: Vector2) -> bool:
 	var key := Vector2i(cx, cz)
 	if _water.has(key) or _moist[cz * size + cx] < 0.18:
 		return false
-	if not _water.is_empty() and _h_at(p.x, p.y) < _water_level() + 0.02:
+	if not _water.is_empty() and _h_rule(p.x, p.y) < _wl_rule() + 0.02:   # gen 14: the rules' flood line
 		return false
 	if float(_rock.get(key, 0.0)) >= 0.35:
 		return false
@@ -1496,13 +2071,13 @@ func get_state() -> Dictionary:
 	var lo := 9.0
 	var hi := -9.0
 	for i in range(size * size):
-		lo = minf(lo, _field[i] * _max_h)
-		hi = maxf(hi, _field[i] * _max_h)
-	return {"generation": GENERATION, "label": label(),
+		lo = minf(lo, _field_render[i] * _max_h)   # gen 14: the rendered range — [0, 0] before Trans_Translation
+		hi = maxf(hi, _field_render[i] * _max_h)
+	return {"generation": GENERATION, "label": label(), "ladder": _ladder_record(),
 		"dna": {"seed": seed, "size": size, "moisture": moisture, "relief": relief, "wildness": wildness},
 		"community_dna": {"seed": community_seed, "enabled": residents},
 		"residents": _residents.duplicate(true),
-		"cells": kinds, "counts": _counts.duplicate(), "trees": _trees.size(),
+		"cells": kinds, "counts": _counts.duplicate(), "trees": int(_counts.get("tree", 0)),   # gen 14: the trees BUILT (the layout's at full)
 		"kingdoms_present": _present(), "height_range": [lo, hi], "water_level": _water_level(),
 		"organisms": _patch.get_child_count() if _patch != null else 0, "build_ms": _build_ms,
 		"changelog": CHANGELOG}

@@ -56,11 +56,31 @@
 ## resource (facing · direction > 0.7) with its measured footprint inside the plate; (e) the
 ## same seeds twice give identical resident records. Per world: a bloom stands at its slot's
 ## own surface point at the habitat's size; a body's recorded footprint is its measured one.
+## Gen 14 (the ladder — every layer gated by the stage's words, the arriving ones by the
+## phase): (a) `full` is gen 13 — the counts the gen-13 probe printed for s7 and s11
+## (2026-09-18, 474 checks green) are asserted on the two worlds already built, `full` builds
+## no seed, rods or lattice, and an explicit stage:full twin of s7 matches the default build in
+## every count, its organisms and its label; (b) Point_One is a flat grey 16-quad plane with one
+## black 0.3 m point 0.35 m over the basin centre and nothing else — no water, crystal, cover,
+## tree, flower, creature, resident, paint, section or lattice; (c) walked in
+## BiomeGrammar.walk() order at phase 1 (55 stages, the sequence keys noise, lsystems and
+## machinelearning among them) the layers standing only grow — the rods may go when the mats
+## come and the lattice when the colour does, nothing else may vanish — the built counts of
+## trees, flowers, creatures, mats and residents never fall, from Trans_Rotation on every
+## world's cells (kingdom, intensity, rank) are `full`'s — the layout is the seed's, only the
+## aspect term re-rolls it — and the last stage IS `full` plus the seed: the same cells, counts,
+## cover plan and resident records, one more organism; (d) a stage at phase 0 is the previous hall at phase 1
+## (Random_Walk 0 = Randomness_10_PRINT_Algorithm 1, Trans_Translation 0 = Trans_Introduction
+## 1) and Random_Gaussian, which adds no object word, is Random_Walk; Trans_Translation at
+## phase 0.5 renders half the height range of phase 1; both knobs travel through
+## apply_grid_config into the label; (e) three stages built twice give the same counts, cover
+## plan, section and cells.
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_biome_object.gd
 extends SceneTree
 
 const OBJ := preload("res://commons/artifacts/biome_object/biome_object.gd")
+const Grammar := preload("res://commons/biome_layers/biome_grammar.gd")   # gen 14: the walk
 
 var _checks := 0
 var _fails := 0
@@ -601,6 +621,9 @@ func _run() -> void:
 	var fmmi: MultiMeshInstance3D = files_w._patch.get_node_or_null("Cover_grass")
 	var ftex: Texture2D = fmmi.material_override.albedo_texture if fmmi != null else null
 	_check(ftex != null and ftex.get_width() == 512, "wet world with foliage:files: the grass card is the PNG")
+	# gen 14: the ladder — full is gen 13, Point_One is the plane and the seed, the walk only
+	# grows, phase 0 is the previous hall, three stages replay
+	await _check_gen14(a, b)
 	print("[probe_biome_object] %d checks, %d failed" % [_checks, _fails])
 	quit(0 if _fails == 0 else 1)
 
@@ -1507,6 +1530,182 @@ func _check_gen13(b, twin, b1, off) -> void:
 	_check(var_to_str(b1._cover_tufts) == var_to_str(b._cover_tufts), "%s: community 1 keeps community 0's cover — the clearings are slot facts" % lab)
 	_check_residents(b1)
 	_check_residents(off)
+
+
+## Gen 14: the ladder (see the header). `a` and `b` are the s7 and s11 worlds built at the
+## default stage; the gen-13 counts asserted on them are the ones the gen-13 probe printed.
+func _check_gen14(a, b) -> void:
+	# (a) full is gen 13
+	var g13 := {
+		"s7_m50_r50_w60": {"water": 8, "mineral": 3, "scree": 15, "fungus": 4, "fungus_path": 4, "tree": 4, "flower": 15, "creature": 3, "cover": 467, "connections": 25, "paint": 237, "residents": 12, "residents_fungus": 4, "residents_bloom": 5, "residents_body": 3},
+		"s11_m85_r30_w70": {"water": 14, "mineral": 2, "scree": 5, "fungus": 6, "fungus_path": 7, "tree": 5, "flower": 24, "creature": 3, "cover": 790, "connections": 34, "paint": 261, "residents": 12, "residents_fungus": 4, "residents_bloom": 5, "residents_body": 3},
+	}
+	for o in [a, b]:
+		var lab: String = o.label()
+		var st0: Dictionary = o.get_state()
+		var cnt: Dictionary = st0["counts"]
+		var want: Dictionary = g13.get(lab, {})
+		var off: Array = []
+		for k in want.keys():
+			if int(cnt.get(k, -1)) != int(want[k]):
+				off.append("%s %d (gen 13: %d)" % [k, int(cnt.get(k, -1)), int(want[k])])
+		_check(not want.is_empty() and off.is_empty(), "[gen14] %s at full carries gen 13's counts%s" % [lab, "" if off.is_empty() else " — " + ", ".join(off)])
+		_check(String(st0["ladder"]["stage"]) == "full" and o._patch.get_node_or_null("Point") == null and o._patch.get_node_or_null("Rods") == null and o._patch.get_node_or_null("Lattice") == null, "[gen14] %s: full builds no seed, rods or lattice — the RSI's tiles are gen 13's" % lab)
+	var full7 = await _grow(7, 0.5, 0.5, 0.6, {"stage": "full", "record": "off"})
+	var sa: Dictionary = a.get_state()
+	var sf: Dictionary = full7.get_state()
+	_check(str(_world_counts(sf["counts"])) == str(_world_counts(sa["counts"])) and int(sf["organisms"]) == int(sa["organisms"]) and full7.label() == a.label(), "[gen14] stage:full is the default build — counts, organisms and label (%s)" % full7.label())
+	full7.queue_free()
+	# (b) Point_One
+	var t0 := Time.get_ticks_msec()
+	var p1 = await _grow(7, 0.5, 0.5, 0.6, {"stage": "Point_One", "record": "off"})
+	var st1: Dictionary = p1.get_state()
+	var c1: Dictionary = st1["counts"]
+	var hr1: Array = st1["height_range"]
+	var nothing := true
+	for k in ["water", "mineral", "scree", "cover", "tree", "flower", "creature", "residents", "paint", "section_triangles", "fungus", "fungus_path"]:
+		nothing = nothing and int(c1.get(k, -1)) == 0
+	var point: MeshInstance3D = p1._patch.get_node_or_null("Point") as MeshInstance3D
+	var ground1 = p1._patch.get_node_or_null("Ground")
+	var mid = null
+	if ground1 != null and ground1.mesh_instance != null and ground1.mesh_instance.material_override is ShaderMaterial:
+		mid = ground1.mesh_instance.material_override.get_shader_parameter("color_mid")
+	var grey: bool = mid is Vector3 and absf(mid.x - mid.y) < 0.001 and absf(mid.y - mid.z) < 0.001
+	var basin_w: Vector2 = p1._basin_c - Vector2(float(p1.size), float(p1.size)) * 0.5
+	_check(absf(float(hr1[0])) < 0.0001 and absf(float(hr1[1])) < 0.0001, "[gen14] Point_One: a flat plane (height range %.4f..%.4f)" % [float(hr1[0]), float(hr1[1])])
+	_check(point != null and point.mesh is SphereMesh and absf((point.mesh as SphereMesh).radius - 0.15) < 0.0001 and absf(point.position.x - basin_w.x) < 0.001 and absf(point.position.z - basin_w.y) < 0.001 and absf(point.position.y - 0.35) < 0.001 and int(st1["ladder"]["counts"]["point"]) == 1, "[gen14] Point_One: one black 0.3 m point 0.35 m over the basin centre")
+	_check(nothing and (st1["kingdoms_present"] as Array).is_empty(), "[gen14] Point_One: no water, crystal, cover, tree, flower, creature, resident, paint or section")
+	var only := true
+	for ch in p1._patch.get_children():
+		if not (String(ch.name) in ["Ground", "Dispatcher", "Point"]):
+			only = false
+	_check(only and ground1 != null and grey and int(ground1.resolution) == 16, "[gen14] Point_One: the plane alone, grey, 16 quads across (mid band %s)" % str(mid))
+	_check(str(st1["ladder"]["layers"]) == str(["ground", "point"]) and p1.label() == "s7_m50_r50_w60_Point_One_p100", "[gen14] Point_One: layers %s, label %s" % [str(st1["ladder"]["layers"]), p1.label()])
+	print("    [gen14] Point_One built in %d ms (%d ms with the frames)" % [int(st1["build_ms"]), Time.get_ticks_msec() - t0])
+	p1.queue_free()
+	# (c) the walk
+	var walk: Array[String] = Grammar.walk()
+	for key in ["noise", "lsystems", "machinelearning"]:
+		_check(walk.has(key), "[gen14] the walk carries the sequence key %s" % key)
+	var prev_layers: Array = []
+	var prev_counts := {"tree": 0, "flower": 0, "creature": 0, "mats": 0, "residents": 0}
+	var prev_stage := ""
+	var grows := true
+	var never_falls := true
+	var walked := 0
+	var walk_ms := 0
+	var last = null
+	var full_cells: String = _layout_of(a)
+	var layout_same := true
+	var layout_read := 0
+	var past_rotation := false
+	for stg in walk:
+		var o = await _grow(7, 0.5, 0.5, 0.6, {"stage": stg, "record": "off"})
+		var st: Dictionary = o.get_state()
+		if stg == "Trans_Rotation":
+			past_rotation = true
+		if past_rotation:
+			layout_read += 1
+			if _layout_of(o) != full_cells:
+				if layout_same:
+					print("    [gen14] %s: the cells differ from full's" % stg)
+				layout_same = false
+		var lay: Array = st["ladder"]["layers"]
+		var cnt: Dictionary = st["counts"]
+		var now := {"tree": int(cnt["tree"]), "flower": int(cnt["flower"]), "creature": int(cnt["creature"]), "mats": int(cnt["fungus"]) + int(cnt["fungus_path"]), "residents": int(cnt["residents"])}
+		var lost: Array = []
+		for l in prev_layers:
+			if not lay.has(l):
+				if l == "rods" and lay.has("mats"):
+					continue
+				if l == "lattice" and lay.has("colour"):
+					continue
+				lost.append(l)
+		var added: Array = []
+		for l in lay:
+			if not prev_layers.has(l):
+				added.append(l)
+		if not lost.is_empty():
+			print("    [gen14] %s loses %s (after %s)" % [stg, str(lost), prev_stage])
+			grows = false
+		for k in now.keys():
+			if int(now[k]) < int(prev_counts[k]):
+				print("    [gen14] %s: %s falls %d -> %d (after %s)" % [stg, k, int(prev_counts[k]), int(now[k]), prev_stage])
+				never_falls = false
+		print("    [gen14] %-36s +%-40s trees %d flowers %d creatures %d mats %d residents %d  %d ms" % [stg, str(added), now["tree"], now["flower"], now["creature"], now["mats"], now["residents"], int(st["build_ms"])])
+		walk_ms += int(st["build_ms"])
+		prev_layers = lay
+		prev_counts = now
+		prev_stage = stg
+		walked += 1
+		if stg == walk.back():
+			last = o
+		else:
+			o.queue_free()
+	_check(walked == walk.size() and walked >= 50, "[gen14] the ladder walked, %d stages in %d ms of builds" % [walked, walk_ms])
+	_check(grows, "[gen14] along the walk the layers standing only grow (the rods go to the mats, the lattice to the colour)")
+	_check(never_falls, "[gen14] along the walk the trees, flowers, creatures, mats and residents never fall")
+	_check(layout_same and layout_read >= 40, "[gen14] from Trans_Rotation on the cells are full's — the layout is the seed's (%d stages read)" % layout_read)
+	_check(prev_layers.has("trees") and prev_layers.has("residents") and prev_layers.has("point") and int(prev_counts["tree"]) == 4 and int(prev_counts["residents"]) == 12, "[gen14] the last stage stands the whole world with the seed still in it (%s)" % str(prev_layers))
+	# the last stage IS full plus the seed: cells, counts, cover plan, residents; one more organism
+	var sl: Dictionary = last.get_state()
+	var sa2: Dictionary = a.get_state()
+	var same_last: bool = var_to_str(last._cells) == var_to_str(a._cells) and str(_world_counts(sl["counts"])) == str(_world_counts(sa2["counts"])) and var_to_str(last._cover_tufts) == var_to_str(a._cover_tufts) and var_to_str(last._residents) == var_to_str(a._residents) and var_to_str(last._section_columns) == var_to_str(a._section_columns)
+	_check(same_last and int(sl["organisms"]) == int(sa2["organisms"]) + 1, "[gen14] the last stage (%s) is full plus the seed — same cells, counts, cover plan, residents and section, %d organisms against %d" % [String(last.stage), int(sl["organisms"]), int(sa2["organisms"])])
+	last.queue_free()
+	# (d) phase 0 is the previous hall
+	await _check_prev("Random_Walk", "Randomness_10_PRINT_Algorithm")
+	await _check_prev("Trans_Translation", "Trans_Introduction")
+	var rw = await _grow(7, 0.5, 0.5, 0.6, {"stage": "Random_Walk", "record": "off"})
+	var rg = await _grow(7, 0.5, 0.5, 0.6, {"stage": "Random_Gaussian", "record": "off"})
+	_check(str(_world_counts(rw.get_state()["counts"])) == str(_world_counts(rg.get_state()["counts"])) and int(rw.get_state()["counts"]["creature"]) > 0, "[gen14] Random_Gaussian adds no object word: it is Random_Walk (%d creatures)" % int(rw.get_state()["counts"]["creature"]))
+	rw.queue_free()
+	rg.queue_free()
+	var th = await _grow(7, 0.5, 0.5, 0.6, {"stage": "Trans_Translation", "phase": 0.5, "record": "off"})
+	var tf = await _grow(7, 0.5, 0.5, 0.6, {"stage": "Trans_Translation", "phase": 1.0, "record": "off"})
+	var hh: Array = th.get_state()["height_range"]
+	var hf: Array = tf.get_state()["height_range"]
+	var span_h: float = float(hh[1]) - float(hh[0])
+	var span_f: float = float(hf[1]) - float(hf[0])
+	_check(span_f > 0.3 and absf(span_h / span_f - 0.5) < 0.01, "[gen14] Trans_Translation at phase 0.5 renders half the relief (%.3f of %.3f m)" % [span_h, span_f])
+	_check(th.label() == "s7_m50_r50_w60_Trans_Translation_p50" and absf(float(th.phase) - 0.5) < 0.0001 and String(th.stage) == "Trans_Translation", "[gen14] #stage:Trans_Translation#phase:0.5 lands in the knobs and the label (%s)" % th.label())
+	th.queue_free()
+	tf.queue_free()
+	# (e) determinism at three stages
+	for sp in [["Point_Lines", 1.0], ["Trans_Rotation", 0.5], ["Random_Mushrooms", 0.5]]:
+		var x = await _grow(7, 0.5, 0.5, 0.6, {"stage": sp[0], "phase": sp[1], "record": "off"})
+		var y = await _grow(7, 0.5, 0.5, 0.6, {"stage": sp[0], "phase": sp[1], "record": "off"})
+		var same: bool = str(_world_counts(x.get_state()["counts"])) == str(_world_counts(y.get_state()["counts"])) and var_to_str(x._cover_tufts) == var_to_str(y._cover_tufts) and var_to_str(x._section_columns) == var_to_str(y._section_columns) and var_to_str(x._cells) == var_to_str(y._cells) and str(x.get_state()["ladder"]["counts"]) == str(y.get_state()["ladder"]["counts"])
+		_check(same, "[gen14] %s at phase %.1f builds the same world twice" % [sp[0], float(sp[1])])
+		x.queue_free()
+		y.queue_free()
+
+
+## The layout as the rules laid it: every cell's kingdom, intensity and rank, row-major — the
+## `late` and `resident` marks left out, which are the ladder's and the residents' to set.
+func _layout_of(o) -> String:
+	var keys: Array = o._cells.keys()
+	keys.sort_custom(func(p, q): return (p.y * o.size + p.x) < (q.y * o.size + q.x))
+	var rows: Array = []
+	for k in keys:
+		var c: Dictionary = o._cells[k]
+		rows.append("%d,%d:%s:%d:%s:%.6f" % [k.x, k.y, String(c["kingdom"]), int(c["inten"]), String(c.get("gen", "")), float(c.get("k", 0.0))])
+	return "|".join(rows)
+
+
+## Gen 14 (d): a stage at phase 0 is the previous hall at phase 1 — the same counts, layers
+## and height range.
+func _check_prev(stg: String, prev: String) -> void:
+	var z = await _grow(7, 0.5, 0.5, 0.6, {"stage": stg, "phase": 0.0, "record": "off"})
+	var p = await _grow(7, 0.5, 0.5, 0.6, {"stage": prev, "phase": 1.0, "record": "off"})
+	var sz: Dictionary = z.get_state()
+	var sp: Dictionary = p.get_state()
+	var same: bool = str(_world_counts(sz["counts"])) == str(_world_counts(sp["counts"])) and str(sz["ladder"]["layers"]) == str(sp["ladder"]["layers"]) and str(sz["height_range"]) == str(sp["height_range"])
+	if not same:
+		print("    [gen14] %s at 0: %s | %s at 1: %s" % [stg, str(_world_counts(sz["counts"])), prev, str(_world_counts(sp["counts"]))])
+	_check(same, "[gen14] %s at phase 0 is %s at phase 1" % [stg, prev])
+	z.queue_free()
+	p.queue_free()
 
 
 func _check_community_change(base, other, disabled) -> void:
