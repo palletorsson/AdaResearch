@@ -1,0 +1,71 @@
+{
+ "artifacts": {
+  "biome_object": {
+   "dna": {
+    "fixture": {
+     "seed": 7,
+     "size": 12,
+     "moisture": 0.5,
+     "relief": 0.5,
+     "wildness": 0.6,
+     "record": "off"
+    },
+    "framing": 0.72,
+    "note": "the argued axes are moisture / relief / wildness (continuous, swept by tools/biome_rsi.py as six fixed DNAs per generation); seed is the individual, size is mounting"
+   },
+   "name": "Biome Object",
+   "lookup_name": "biome_object",
+   "description": "The biome as one object: a height field with a basin, water in the low, crystals on the dry ridge, mycelium on the pool's wet rim and running out to every tree, trees on the mid-moist slope, flowers in the wet meadow, creatures beside them, cover by moisture. Every living thing is the old biome's own builder reached through BiomePaintDispatcher; only the cells are chosen by ecology instead of by hand. Five numbers of DNA: seed, size, moisture, relief, wildness. Improved generation by generation by tools/biome_rsi.py (the lineage is in the code's CHANGELOG and ada_run/biome_rsi/lineage.jsonl).",
+   "scene": "res://commons/artifacts/biome_object/biome_object.tscn",
+   "category": "biome",
+   "artifact_type": "installation",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "sequence": "biome_lab",
+   "size_group": "large",
+   "tags": [
+    "biome",
+    "living",
+    "kingdoms",
+    "ecology",
+    "terrain",
+    "water",
+    "mycelium",
+    "rsi"
+   ],
+   "dev_themes": [
+    "everything is related in layers",
+    "the cell is chosen by moisture, not by hand",
+    "the network joins water to wood",
+    "better and better, on record"
+   ],
+   "interactions": [
+    "walk the ground: the pool in the low, the crystals on the ridge, the meadow between",
+    "follow the mycelium from the water to the trees",
+    "the same five numbers grow the same world"
+   ],
+   "capacity": 1,
+   "map_note": "biome_object:0#seed:7#size:12#moisture:0.5#relief:0.5#wildness:0.6 — a 12 x 12 m ground; give it a 14 x 14 clear rect",
+   "parameters": {
+    "seed": 7,
+    "size": 12,
+    "moisture": 0.5,
+    "relief": 0.5,
+    "wildness": 0.6,
+    "record": "on",
+    "footprint": [
+     12,
+     2,
+     12
+    ]
+   },
+   "spatial_needs": {
+    "footprint_cells": 12,
+    "height_m": 2.5,
+    "clearance_cells": 1,
+    "approach": "any side"
+   }
+  }
+ }
+}
