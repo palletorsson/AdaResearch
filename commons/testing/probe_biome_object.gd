@@ -31,6 +31,14 @@
 ## the bare gradient rule fails this on 11 of 16 clusters); the ground carries a "rock" paint
 ## layer before the shade with a painted cell at every cluster's cell; no mineral cell is
 ## within 3.0 cells of a water cell.
+## Gen 7: the pool's disc is an ArrayMesh fan of 48+ triangles, its vertex colours the albedo
+## (no emission, roughness 0.08, metallic 0.3), the centre's alpha 0.92 over the rim's 0.62,
+## built after the dispatcher; wherever a measured canopy reaches over the disc, at least one
+## vertex under it is darker than its ring's brightest vertex times 0.9 (the critic's "0.9 x
+## the centre colour" is unreachable: a rim vertex fully shaded, x0.55, is still brighter than
+## 0.9 x the centre); every mycelium colony's MyceliumWeb glows at 0.2..0.6 and on a path of
+## more than two mats the energies differ; every cluster spire's emission is at most 0.15 of
+## its albedo per channel; at least one world exercised the canopy case and one the path case.
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_biome_object.gd
 extends SceneTree
@@ -105,9 +113,10 @@ func _run() -> void:
 		var disc: MeshInstance3D = (pool.get_node_or_null("Disc") as MeshInstance3D) if pool != null else null
 		var above := disc != null
 		if disc != null:
-			var cm: CylinderMesh = disc.mesh as CylinderMesh
-			var top: float = pool.position.y + disc.position.y + cm.height * 0.5
-			var half_r: float = cm.top_radius * 0.5
+			# gen 7: the disc is an ArrayMesh fan — its top and radius read off the mesh's AABB
+			var dbb: AABB = disc.mesh.get_aabb()
+			var top: float = pool.position.y + disc.position.y + dbb.end.y
+			var half_r: float = dbb.size.x * 0.25
 			var worst: float = o._h_at(pool.position.x, pool.position.z)
 			for k in range(8):
 				var ang: float = TAU * float(k) / 8.0
@@ -459,6 +468,16 @@ func _run() -> void:
 		_check(min_3, "%s: every mineral cell is 3.0 cells from the water (%d minerals)" % [lab, n_cluster])
 	for o in [a, b, c, d4]:
 		_check_cover(o)
+	# gen 7: the pool's fan, the web's light, the spires' glow — and proof the two
+	# conditional checks bit somewhere
+	var any_over := false
+	var any_long := false
+	for o in [a, b, c, d4]:
+		var r7: Dictionary = _check_gen7(o)
+		any_over = any_over or bool(r7["over"])
+		any_long = any_long or bool(r7["long"])
+	_check(any_over, "a measured canopy reaches over the water in at least one world (the disc's shade was tested)")
+	_check(any_long, "a path of more than two mats stands in at least one world (the web's gradient was tested)")
 	var ca: Dictionary = _world_counts(a.get_state()["counts"])
 	var cb: Dictionary = _world_counts(b.get_state()["counts"])
 	var cc: Dictionary = _world_counts(c.get_state()["counts"])
@@ -569,3 +588,161 @@ func _check_cover(o) -> void:
 		for key in ["water", "mineral", "scree", "fungus", "fungus_path", "tree", "flower", "creature", "connections", "paint"]:
 			_check(counts[key] == old.counts[key], "%s: parent %s count preserved" % [lab, key])
 	print("    [cover] %s: %d tufts, %d members, %d litter, %d ms" % [lab, o._cover_tufts.size(), members, litter, int(counts.ms_cover)])
+
+
+## Generation 7. (a) the pool's disc is an ArrayMesh fan of 48+ triangles, its vertex colours
+## the albedo (no emission, roughness 0.08, metallic 0.3), the centre's alpha over the rim's,
+## the rim's brightest vertex the rim colour; the pool built AFTER the dispatcher (its child
+## index is greater) — what lets it read the canopy. (b) wherever a measured canopy reaches
+## over the disc — a vertex told "under" by _pos/_canopy — at least one vertex under it reads
+## darker than its RING's brightest vertex times 0.9: read off the vertex colours, the ring's
+## brightest being its unshaded colour, so the object's colour law is not replayed here.
+## (c) every mycelium colony (its script) has a MyceliumWeb whose material glows at 0.2..0.6,
+## and along every path of more than two mats the energies are not one value. (d) every
+## cluster spire's emission x energy is at most 0.15 of its albedo, per channel. Returns
+## {over, long}: whether (b) and (c) had anything to bite in this world.
+func _check_gen7(o) -> Dictionary:
+	var lab: String = o.label()
+	var pool: Node3D = o._patch.get_node_or_null("Pool")
+	var disc: MeshInstance3D = (pool.get_node_or_null("Disc") as MeshInstance3D) if pool != null else null
+	var mesh: ArrayMesh = (disc.mesh as ArrayMesh) if disc != null else null
+	var wmat: StandardMaterial3D = (disc.material_override as StandardMaterial3D) if disc != null else null
+	var tris := 0
+	var n_verts := 0
+	var centre := Color(0, 0, 0, 0)
+	var rim_bright := Color(0, 0, 0, 0)
+	var n_over := 0
+	var n_shaded := 0
+	var darkest := 1.0
+	var lum_dark := 9.0
+	var flipped := 0
+	if mesh != null and mesh.get_surface_count() > 0:
+		var arr: Array = mesh.surface_get_arrays(0)
+		var verts: PackedVector3Array = arr[Mesh.ARRAY_VERTEX]
+		var cols: PackedColorArray = arr[Mesh.ARRAY_COLOR] if arr[Mesh.ARRAY_COLOR] != null else PackedColorArray()
+		var idx: PackedInt32Array = arr[Mesh.ARRAY_INDEX] if arr[Mesh.ARRAY_INDEX] != null else PackedInt32Array()
+		tris = (idx.size() / 3) if idx.size() > 0 else (verts.size() / 3)
+		n_verts = mini(verts.size(), cols.size())
+		# the fan faces UP: Godot's front face is clockwise seen from the front, so every
+		# triangle's right-hand normal must point DOWN — an invisible disc is the one fault a
+		# headless probe cannot see, and this is its arithmetic
+		for k in range(0, idx.size() - 2, 3):
+			var nrm: Vector3 = (verts[idx[k + 1]] - verts[idx[k]]).cross(verts[idx[k + 2]] - verts[idx[k]])
+			if nrm.y >= 0.0:
+				flipped += 1
+		var r_max := 0.0
+		for i in range(n_verts):
+			r_max = maxf(r_max, Vector2(verts[i].x, verts[i].z).length())
+		var rings: int = int(o.POOL_RINGS)
+		# each ring's brightest colour — its unshaded vertices; a canopy cannot cover a whole ring
+		var ring_max: Array = []
+		for _r in range(rings + 1):
+			ring_max.append(Color(0, 0, 0, 0))
+		var ring_of: PackedInt32Array = PackedInt32Array()
+		for i in range(n_verts):
+			var ri: int = int(round(Vector2(verts[i].x, verts[i].z).length() / maxf(0.001, r_max) * float(rings)))
+			ring_of.append(ri)
+			var m: Color = ring_max[ri]
+			ring_max[ri] = Color(maxf(m.r, cols[i].r), maxf(m.g, cols[i].g), maxf(m.b, cols[i].b), maxf(m.a, cols[i].a))
+		centre = ring_max[0]
+		rim_bright = ring_max[rings]
+		for i in range(n_verts):
+			var at := Vector2(pool.position.x + verts[i].x, pool.position.z + verts[i].z)
+			var vs := 0.0
+			for t in o._trees:
+				var cr: float = float(o._canopy.get(t, 0.0))
+				if cr > 0.001:
+					vs = maxf(vs, pow(clampf(1.0 - at.distance_to(o._pos[t]) / cr, 0.0, 1.0), 0.6))
+			if vs <= 0.0:
+				continue
+			n_over += 1
+			var m2: Color = ring_max[ring_of[i]]
+			var f: float = maxf(maxf(cols[i].r / maxf(0.004, m2.r), cols[i].g / maxf(0.004, m2.g)), cols[i].b / maxf(0.004, m2.b))
+			darkest = minf(darkest, f)
+			if f <= 0.9 + 0.0001:
+				n_shaded += 1
+				lum_dark = minf(lum_dark, _lum(cols[i]))
+	var rim_is_rim: bool = absf(rim_bright.r - 0.24) < 0.01 and absf(rim_bright.g - 0.50) < 0.01 and absf(rim_bright.b - 0.68) < 0.01
+	_check(mesh != null and tris >= 48, "%s: the pool's disc is an ArrayMesh fan of 48+ triangles (%d)" % [lab, tris])
+	_check(tris > 0 and flipped == 0, "%s: every fan triangle winds clockwise seen from above — the water faces up (%d of %d flipped)" % [lab, flipped, tris])
+	_check(n_verts > 0 and centre.a > rim_bright.a and absf(centre.a - 0.92) < 0.01 and absf(rim_bright.a - 0.62) < 0.01 and rim_is_rim, "%s: the disc's vertex colours run from alpha %.2f at the centre to %.2f at the rim, the rim (%.2f, %.2f, %.2f)" % [lab, centre.a, rim_bright.a, rim_bright.r, rim_bright.g, rim_bright.b])
+	var mat_ok: bool = wmat != null and wmat.vertex_color_use_as_albedo and not wmat.emission_enabled and absf(wmat.roughness - 0.08) < 0.001 and absf(wmat.metallic - 0.3) < 0.001
+	_check(mat_ok, "%s: the water's colour is its vertex colour — no emission, roughness 0.08, metallic 0.3" % lab)
+	var dispatcher: Node = o._patch.get_node_or_null("Dispatcher")
+	_check(pool != null and dispatcher != null and pool.get_index() > dispatcher.get_index(), "%s: the pool is built after the dispatcher, so the disc can read the canopy" % lab)
+	print("    [gen7] %s: %d disc vertices, %d under a canopy, %d shaded past 0.9 (darkest x%.2f; darkest lum %.3f against 0.9 x centre lum %.3f)" % [lab, n_verts, n_over, n_shaded, darkest, lum_dark if lum_dark < 9.0 else -1.0, _lum(centre) * 0.9])
+	if n_over > 0:
+		_check(n_shaded >= 1, "%s: a disc vertex under the canopy is darker than its ring times 0.9 (%d shaded of %d under, darkest x%.2f)" % [lab, n_shaded, n_over, darkest])
+	# (c) the webs
+	var n_colony := 0
+	var n_web := 0
+	var web_ok := true
+	var e_lo := 9.0
+	var e_hi := -9.0
+	var energy_at: Array = []
+	for ch in o._patch.get_children():
+		if not (ch is Node3D) or ch.get_script() == null or not String(ch.get_script().resource_path).ends_with("mycelium_colony.gd"):
+			continue
+		n_colony += 1
+		var web: Node = ch.find_child("MyceliumWeb", true, false)
+		var wm: StandardMaterial3D = ((web as MeshInstance3D).material_override as StandardMaterial3D) if web is MeshInstance3D else null
+		if wm == null:
+			web_ok = false
+			continue
+		n_web += 1
+		var e: float = wm.emission_energy_multiplier
+		e_lo = minf(e_lo, e)
+		e_hi = maxf(e_hi, e)
+		if e < 0.2 or e > 0.6:
+			web_ok = false
+		energy_at.append([Vector2(ch.position.x, ch.position.z), e])
+	var n_mats: int = int(o._counts["fungus"]) + int(o._counts["fungus_path"])
+	_check(n_colony == n_mats and n_web == n_colony and web_ok, "%s: every mycelium mat's web glows at 0.2..0.6 (%d mats, %d colonies, %d webs, %.2f..%.2f)" % [lab, n_mats, n_colony, n_web, e_lo, e_hi])
+	var long_paths := 0
+	var graded := true
+	for t in o._paths.keys():
+		var path: Array = o._paths[t]
+		if path.size() <= 2:
+			continue
+		long_paths += 1
+		var es: Array = []
+		for k in path:
+			var p: Vector2 = o._pos[k]
+			for ea in energy_at:
+				if (ea[0] as Vector2).distance_to(p) < 0.02:
+					es.append(float(ea[1]))
+					break
+		var lo := 9.0
+		var hi := -9.0
+		for e2 in es:
+			lo = minf(lo, float(e2))
+			hi = maxf(hi, float(e2))
+		if es.size() != path.size() or hi - lo < 0.001:
+			if graded:
+				print("    path to %s: %d mats, %d energies read, %.2f..%.2f" % [str(t), path.size(), es.size(), lo, hi])
+			graded = false
+	if long_paths > 0:
+		_check(graded, "%s: along every path of more than two mats the web's light differs (%d paths)" % [lab, long_paths])
+	# (d) the spires
+	var n_spire := 0
+	var spire_dim := true
+	var worst := 0.0
+	for ch in o._patch.get_children():
+		if ch is Node3D and String(ch.name).begins_with("Crystal"):
+			for sh in ch.get_children():
+				if sh is MeshInstance3D and (sh as MeshInstance3D).material_override is StandardMaterial3D:
+					var sm: StandardMaterial3D = (sh as MeshInstance3D).material_override
+					n_spire += 1
+					var em: Color = (sm.emission * sm.emission_energy_multiplier) if sm.emission_enabled else Color(0, 0, 0)
+					for ci in range(3):
+						var ratio: float = em[ci] / maxf(0.001, sm.albedo_color[ci])
+						worst = maxf(worst, ratio)
+						if ratio > 0.15 + 0.001:
+							spire_dim = false
+	_check(n_spire > 0 and spire_dim, "%s: every cluster spire's emission is at most 0.15 of its albedo (%d spires, worst %.3f)" % [lab, n_spire, worst])
+	print("    [gen7] %s: %d webs at %.2f..%.2f on %d long paths; %d spires at emission/albedo %.3f" % [lab, n_web, e_lo, e_hi, long_paths, n_spire, worst])
+	return {"over": n_over > 0, "long": long_paths > 0}
+
+
+func _lum(c: Color) -> float:
+	return 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b

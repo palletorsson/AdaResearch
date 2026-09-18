@@ -17,17 +17,21 @@ class_name BiomeObject
 ##               bare ROCK painted at every crystal cluster and under its scree (gen 5)
 ##   water       a pool in the basin (the old biome's own pool: disc, ripple rings, reeds), the
 ##               disc lapping the shelf and the reeds standing on the shore (gen 1); one thin
-##               ring set toward the oldest tree — an edge, not a target (gen 2)
+##               ring set toward the oldest tree — an edge, not a target (gen 2); the disc a
+##               vertex-coloured fan, deep at the middle and pale at the rim, DARKENED under
+##               the measured canopy — built after the bodies so it can read it (gen 7)
 ##   mineral     crystal clusters on the dry ridge — 3 cells from the water and off the outer
 ##               ring, the spires tallest where it is high and dry (gen 3); SCREE from every
 ##               cluster — small shards at growing intervals down the slope (the height
 ##               gradient; the basin's way when it is flat or falls off the plate), stopping
 ##               at the water, the edge or a rise: the ridge comes down to the water, the
-##               web's arrow reversed (gen 5)
+##               web's arrow reversed (gen 5); the spires' glow cut to 0.15 of their colour and
+##               rougher — a mineral, not a lamp (gen 7)
 ##   fungus      mycelium filaments on the wet rim of the pool, and a mycelium PATH from the
 ##               pool out to every tree — the network that joins water to wood; sampled ON the
 ##               line every 0.5 m, dry cells only, the last mat touching the trunk, finished at
-##               the water and still growing at the tip (gen 2)
+##               the water and still growing at the tip (gen 2); the web's light by its growth
+##               — 0.55 at the water down to 0.22 at the tip (gen 7)
 ##   flora       trees on the mid-moist slope, flowers in the wet meadow, tiers by moisture;
 ##               SUCCESSION from the water — the shore tree the oldest, the frontier tree a
 ##               sapling (gen 2); the bodies GROWN by the object — every node the dispatcher
@@ -60,7 +64,7 @@ const Dispatcher := preload("res://commons/biome_layers/biome_paint_dispatcher.g
 const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 
-const GENERATION := 6
+const GENERATION := 7
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
@@ -69,6 +73,7 @@ const CHANGELOG: Array[String] = [
 	"gen 4: the canopy casts a layer — the ground built AFTER the bodies (terrain, ecology, pool, minerals, dispatch, ground, cover) so the paint reads the canopy _dispatch() measured; a fifth brush layer, shade [0.11, 0.17, 0.09], painted last: per dry-land cell v = max over trees of 0.85·(1 − d/canopy)^0.6, kept over 0.02; the meadow at the drip line — u the cell's distance to the nearest trunk over rs = 0.6·(0.6 + 0.2·inten)·k, no flower under u 0.85, the ring to 1.6 scoring 0.25 more (the jitter still drawn, so the creatures' stream holds); the succession clamped to inten 1..4, so no tree flips to the lod-3 flat-leaf species — the six canopies one species",
 	"gen 5: scree — the ridge comes down to the water. After each cluster's shard loop (its draws untouched) a second rng seeded from the cell lays 3 + round(4·relief) shards down the slope: down = −(height gradient at the cluster, ±0.5 m samples), toward the basin when |g| < 0.02 or when downhill leads away from it (measured: from the rim's ridge cells the bare gradient ran 11 of 16 trails off the plate and none to the water); shard i at p + down·(0.55 + 0.5i + 0.08i²), the trail ending at a water cell, the edge (the prism's half-diagonal 0.12·scale inside it), a flooded sample (h < wl + 0.02) or a rise (h over the trail's lowest point + 0.02); each a PrismMesh (0.09, randf(0.08, 0.2)·(1 − 0.6i/n), 0.09)·scale lying at rotation (0.6..1.3, 0..TAU, ±0.3), the crystal colour at emission ×0.2, added to the patch at the sample, its centre 0.3 h above the surface. A _rock map — 0.6 at the cluster, 0.3 on its eight neighbours, 0.35 per scree cell (max) — painted as a sixth layer, rock [0.56, 0.55, 0.50], after the silt and before the shade; the cover skips samples within 0.8 m of a cluster; the ridge is 3.0 cells from the water",
 	"gen 6: ground cover grows in moisture-sized tufts, reed beds at the shore and flat litter beneath the inner canopy; each member respects water, mineral ground and the footprint, the group has a private seeded rng, the budget is at most 864 instances; all other kingdom placement rules are unchanged",
+	"gen 7: water depth under the canopy, the web's light by its growth. The pool's disc is a 48-segment SurfaceTool fan, 6 rings deep (289 vertices, 528 tris — one ring cannot carry a profile), its vertex colours the albedo, no emission, roughness 0.08, metallic 0.3: centre (0.06, 0.20, 0.44, 0.92) to rim (0.24, 0.50, 0.68, 0.62) by u^1.5, every vertex's rgb × (1 − 0.45·vs), vs = max over trees of (1 − d/canopy)^0.6 with d the vertex's distance to the trunk — the ground's shade law — the alpha kept so the shaded water is darker, not thinner; the pool built AFTER _dispatch() (terrain, ecology, minerals, dispatch, pool, ground, cover) so vs reads the measured canopy — nothing between read the Pool node and the pool's rng is the seed's, so no draw moved. Each mycelium mat's MyceliumWeb material duplicated (mats share no instance) and its emission_energy_multiplier set to lerp(0.55, 0.22, t), t = (25 − gen)/15 — a rim mat carries no gen and reads 25 — the colour kept, the spores untouched. The cluster spires' emission col × 0.15 (was 0.5), roughness 0.35 (was 0.22); the scree untouched Amended before the render by the gen-6 critic: the ring dropped (the depth gradient is the edge) and the web's light reversed — dim (0.22) at the finished rim, bright (0.55) at the growing tip on the bark",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 const K_TREE := 0
@@ -155,9 +160,9 @@ func _build() -> void:
 	add_child(_patch)
 	_terrain()
 	_ecology()
-	_water_pool()
 	_minerals()
 	_dispatch()
+	_water_pool() # gen 7: after the bodies — the disc's shade reads the canopy _dispatch() measured
 	_ground()     # gen 4: after the bodies — the paint reads the canopy _dispatch() measured
 	_cover()
 	_build_ms = Time.get_ticks_msec() - t0
@@ -636,6 +641,16 @@ func _brush_layer(color: Array, cells: Array, layer_name: String) -> Dictionary:
 		"brush": {"w": size, "d": size, "cells": cells}}
 
 
+const POOL_SEGMENTS := 48
+const POOL_RINGS := 6
+const POOL_CENTRE := Color(0.06, 0.20, 0.44, 0.92)
+const POOL_RIM := Color(0.24, 0.50, 0.68, 0.62)
+
+
+## gen 7: built after _dispatch() — the disc's vertex colours read the measured canopy.
+## Nothing before the ground reads the Pool node (the minerals and the dispatcher's builders
+## place by _h_at / _water / _water_level()), and the pool's rng is seeded from the seed
+## alone, so the move changes no draw: the ring and the reeds stand where gen 6 stood them.
 func _water_pool() -> void:
 	if _water.is_empty():
 		return
@@ -647,44 +662,22 @@ func _water_pool() -> void:
 	holder.position = c
 	_patch.add_child(holder)
 	var r: float = _pool_r + 0.35   # gen 1: the disc laps the shelf
+	# gen 7: the disc is a vertex-coloured fan — deep at the middle, pale at the rim, darkened
+	# wherever a measured canopy hangs over it; no emission, the colour is the albedo. Its
+	# surface stands at 0.01 above the water level, where the cylinder's top stood.
 	var disc := MeshInstance3D.new()
 	disc.name = "Disc"
-	var cm := CylinderMesh.new()
-	cm.top_radius = r
-	cm.bottom_radius = r
-	cm.height = 0.02
-	disc.mesh = cm
+	disc.mesh = _pool_fan(r, Vector2(c.x, c.z))
+	disc.position = Vector3(0.0, 0.01, 0.0)
 	var wmat := StandardMaterial3D.new()
-	wmat.albedo_color = Color(0.18, 0.42, 0.66, 0.72)   # gen 1: water, not slate; gen 2: the silt reads through
-	wmat.metallic = 0.25
-	wmat.roughness = 0.05
+	wmat.vertex_color_use_as_albedo = true
+	wmat.albedo_color = Color.WHITE
+	wmat.metallic = 0.3
+	wmat.roughness = 0.08
 	wmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	wmat.emission_enabled = true
-	wmat.emission = Color(0.1, 0.3, 0.5) * 0.25
 	disc.material_override = wmat
 	holder.add_child(disc)
-	# gen 2: ONE thin ring, no glow, set 0.3 r off the centre toward the oldest tree — the water
-	# shows an edge where it showed a target
-	var ring := MeshInstance3D.new()
-	ring.name = "Ring"
-	var tm := TorusMesh.new()
-	tm.inner_radius = r * 0.62
-	tm.outer_radius = r * 0.635
-	ring.mesh = tm
-	var rmat := StandardMaterial3D.new()
-	rmat.albedo_color = Color(0.5, 0.75, 0.9, 0.3)
-	rmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	ring.material_override = rmat
-	var off := Vector2.ZERO
-	if not _trees.is_empty():
-		var t0: Vector2i = _trees[0]
-		var cw0: Vector3 = _cell_world(t0.x, t0.y)
-		var trunk0: Vector2 = _pos[t0] if _pos.has(t0) else Vector2(cw0.x, cw0.z)
-		var to_tree: Vector2 = trunk0 - Vector2(c.x, c.z)
-		if to_tree.length() > 0.001:
-			off = to_tree.normalized() * (0.3 * r)
-	ring.position = Vector3(off.x, 0.015, off.y)
-	holder.add_child(ring)
+	# gen 7 (the gen-6 critic): no ring — the depth gradient is the water's edge
 	var reeds: int = 3 + int(round(moisture * 5.0))
 	for i in range(reeds):
 		var reed := MeshInstance3D.new()
@@ -706,6 +699,64 @@ func _water_pool() -> void:
 		reed.position = Vector3(lx, _h_at(c.x + lx, c.z + lz) - c.y + rh * 0.5, lz)
 		reed.rotation = Vector3(rng.randf_range(-0.12, 0.12), 0.0, rng.randf_range(-0.12, 0.12))
 		holder.add_child(reed)
+
+
+## gen 7: the disc as a fan of POOL_SEGMENTS segments and POOL_RINGS rings about one centre
+## vertex, indexed, clockwise seen from above (Godot's front face), normals up, the colour
+## from _pool_colour. No rng: the fan is a fact about the basin and the canopy.
+func _pool_fan(r: float, centre: Vector2) -> ArrayMesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st.set_normal(Vector3.UP)
+	st.set_uv(Vector2(0.5, 0.5))
+	st.set_color(_pool_colour(0.0, centre))
+	st.add_vertex(Vector3.ZERO)
+	var ring_v: Array[int] = []   # ring -> its first vertex index
+	var idx := 1
+	for ring in range(1, POOL_RINGS + 1):
+		var u: float = float(ring) / float(POOL_RINGS)
+		ring_v.append(idx)
+		for s in range(POOL_SEGMENTS):
+			var a: float = TAU * float(s) / float(POOL_SEGMENTS)
+			var p := Vector2(cos(a), sin(a)) * (u * r)
+			st.set_normal(Vector3.UP)
+			st.set_uv(Vector2(0.5 + 0.5 * p.x / r, 0.5 + 0.5 * p.y / r))
+			st.set_color(_pool_colour(u, centre + p))
+			st.add_vertex(Vector3(p.x, 0.0, p.y))
+			idx += 1
+	for s in range(POOL_SEGMENTS):
+		var s1: int = (s + 1) % POOL_SEGMENTS
+		st.add_index(0)
+		st.add_index(ring_v[0] + s)
+		st.add_index(ring_v[0] + s1)
+	for ring in range(1, POOL_RINGS):
+		var inner: int = ring_v[ring - 1]
+		var outer: int = ring_v[ring]
+		for s in range(POOL_SEGMENTS):
+			var s1: int = (s + 1) % POOL_SEGMENTS
+			st.add_index(inner + s)
+			st.add_index(outer + s)
+			st.add_index(outer + s1)
+			st.add_index(inner + s)
+			st.add_index(outer + s1)
+			st.add_index(inner + s1)
+	return st.commit()
+
+
+## gen 7: the water's colour at u (0 the centre, 1 the rim) and a world xz: POOL_CENTRE to
+## POOL_RIM by u^1.5, then every channel × (1 − 0.45·vs), vs the strongest of the trees'
+## shade by the MEASURED canopy, (1 − d/canopy)^0.6 with d the distance to the trunk — the
+## law the ground's shade layer reads. The alpha is kept: shaded water is darker, not thinner.
+func _pool_colour(u: float, at: Vector2) -> Color:
+	var col: Color = POOL_CENTRE.lerp(POOL_RIM, pow(u, 1.5))
+	var vs := 0.0
+	for t in _trees:
+		var cr: float = float(_canopy.get(t, 0.0))
+		if cr <= 0.001:
+			continue
+		vs = maxf(vs, pow(clampf(1.0 - at.distance_to(_pos[t]) / cr, 0.0, 1.0), 0.6))
+	var f: float = 1.0 - 0.45 * vs
+	return Color(col.r * f, col.g * f, col.b * f, col.a)
 
 
 ## gen 5: after each cluster's shards, its SCREE — the ridge comes down to the water. The
@@ -752,9 +803,9 @@ func _minerals() -> void:
 			var mat := StandardMaterial3D.new()
 			mat.albedo_color = col
 			mat.metallic = 0.4
-			mat.roughness = 0.22
+			mat.roughness = 0.35   # gen 7: rougher (was 0.22) — a mineral, not a lamp
 			mat.emission_enabled = true
-			mat.emission = col * 0.5
+			mat.emission = col * 0.15   # gen 7: 0.15 of the colour (was 0.5); the scree keeps its 0.2
 			mi.material_override = mat
 			var off := Vector2(rng.randf_range(-0.17, 0.17), rng.randf_range(-0.17, 0.17)) * scale
 			mi.position = Vector3(off.x, hgt * 0.5, off.y)
@@ -901,7 +952,25 @@ func _dispatch() -> void:
 				"fungus":
 					k = 1.0
 					_mats.append(Vector2(wp.x, wp.z))
+					_web_light(n, c)
 			(n as Node3D).scale = Vector3.ONE * k
+
+
+## gen 7: the web's light by its growth — a mat at the water (gen 25, the network finished)
+## glows at 0.55, the tip at the tree (gen 10, still growing) at 0.22, lerped by
+## t = (25 − gen)/15; a rim mat carries no gen and reads as 25. The colony's MyceliumWeb
+## material (its own instance, cached per colony) is DUPLICATED before the edit, so no two
+## mats share one; the colour is kept — the cyan is the albedo's. The spores are not the
+## web and keep their light.
+func _web_light(n: Node, c: Dictionary) -> void:
+	var web: Node = n.find_child("MyceliumWeb", true, false)
+	if not (web is MeshInstance3D) or (web as MeshInstance3D).material_override == null:
+		return
+	var t: float = (25.0 - float(int(String(c.get("gen", "25"))))) / 15.0
+	var mat: Material = (web as MeshInstance3D).material_override.duplicate()
+	if mat is StandardMaterial3D:
+		(mat as StandardMaterial3D).emission_energy_multiplier = lerpf(0.22, 0.55, t)   # gen-6 critic: bright at the growing tip, dim at the finished rim
+		(web as MeshInstance3D).material_override = mat
 
 
 ## Cover by zone — the old ring's small covers (its "tree" type is a 2.5 m column and its
