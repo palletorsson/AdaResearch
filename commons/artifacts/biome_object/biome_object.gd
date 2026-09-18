@@ -78,18 +78,18 @@ class_name BiomeObject
 ##   line        Point_Lines           grey rods from the point toward every future trunk
 ##   lattice     Point_Line_Grid       a faint cell grid on the surface, until colour
 ##   face        Point_Triangle_Context the section — sides and underside
-##   solid       Primitives_Polythedra the crystals and their scree
+##   solid       Primitives_Polythedra one polyhedron per mineral cell - the stone, whole
 ##   sphere      Primitives_Ignorance  the pool disc and the reeds, still on a flat plane
-##   subdivide   Primitives_Portals    the floor at its full resolution (16 quads before)
+##   subdivide   Primitives_Portals    the floor at full resolution; the stone splits to shards
 ##   ornament    Primitives_Melencolia the cover, grey stubble until colour
-##   translate   Trans_Translation     the rendered relief (the rules read the full relief)
+##   translate   Trans_Translation     the rendered relief, and the scree that runs down it
 ##   rotate      Trans_Rotation        the aspect term, the shade centre's run along the sun
 ##   scale       Trans_Scale           the trees sized by rank (saplings before)
 ##   colour      Color_Context_Placed  the wet/dry paint and every body's colour
 ##   light       Color_Flashlight      the shade — paint, water and understory
 ##   flower      Color_Rainbow         the meadow's flowers and the bloom slots
 ##   paint       Color_Paint           shore, silt and rock
-##   sample      Random_Definition     jitter — bodies on cell centres, cover on a lattice before
+##   sample      Random_Definition     jitter — cell centres, a lattice, an unturned stone before
 ##   vary        Random_Entropy        tufts (single blades before)
 ##   walk        Random_Walk           the creatures (lsystems' `creature` also grants them)
 ##   fungus/ring Random_Mushrooms      the path mats / the rim mats; the rods go
@@ -108,7 +108,7 @@ const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 const FoliageCards := preload("res://commons/biome_layers/foliage_cards.gd")
 const Grammar := preload("res://commons/biome_layers/biome_grammar.gd")   # gen 14: the ladder's closure
 
-const GENERATION := 14
+const GENERATION := 16
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
@@ -125,6 +125,7 @@ const CHANGELOG: Array[String] = [
 	"gen 12: catalogue residents share the ground but carry independent community DNA; up to six fruiting-fungus colonies use existing CritterDNA presets and FungusMorphology, choose moist gaps beside mycelium, respect an explicit footprint and clear cover beneath them; changing community_seed keeps terrain, water, trees and networks fixed; each resident records catalogue identity, preset, expressed genes, seed and habitat",
 	"gen 13: two more catalogue builders on Astra's contract, the object handing over slots it already owns instead of adding bodies. (a) living_flora_bloom — the nine BotanicalFlower species are families with designed habitat preferences (moisture, shade, the sun's side of the trunk); _ecology() marks every second or third meadow cell `resident` by a stride and phase drawn from the HABITAT seed (never the community's, never the ecology's stream), _dispatch() leaves those cells, and populate() stands a species there chosen by the community seed and the slot's habitat, the SIZE still the habitat's (the dispatcher's overall_scale on the cell's intensity, the moisture growth 1.4 + 0.4·m) — another community, another species, the same size; the meadow count is unchanged and the flag is a fact about the seed, so residents:off rebuilds gen 12 exactly. (b) living_fauna_body — every creature cell (1–4) is handed over, so the animal count does not double; three body plans (shore_grub: low, more rings, social, dark, drawn to the water; meadow_walker: taller, fewer rings, lighter, sun-side; rock_lurker: iridescent, metallic, coiled, drawn to the crystals) are CritterDNA gene overrides on the dispatcher's own walker recipe, built by CreatureSdfMorphology, each body's xz centred on its slot and TURNED to face what it lives by — the nearest water cell within 3 cells, else the nearest flower cell — rotation.y = atan2(−dx, −dz) since the eyes look down local −Z; the record carries `faces` and `footprint`. These are PLACED bodies: no movement, no simulation. Each slot's cover clearing is a fixed radius (0.32 m a bloom, 0.5 m a body), so the cover is the same under every community. Three facts learned building it: a bloom slot must stand BLOOM_EDGE_M = 1.0 m inside the plate (a crown imperial at overall_scale 2.5 × growth 1.74 measured 0.67 m of reach from an outer-ring slot 0.31 m off the edge); a body's bounds must be composed from LOCAL transforms (measured through inverse(root.global) × node.global, a twin standing 30 m along x recorded a reach 1.6e-6 m different — the record drifted with the address); and the SDF builder's skin must be re-created with the body seed (the mapper draws pattern_rotation from the global randi() when handed no seed)",
 	"gen 14: the ladder — the object scaled down to primitives (Palle: 'flat ground, one seed, the point … can it morph backwards to the more primitive form we start out with?'). Two knobs: `stage` (`full`, the default — gen 13 byte for byte; else a hall name, a sequence key or anything BiomeGrammar.closure() accepts) and `phase` (0..1). Every layer is gated by the ladder's WORDS through one function, _amount(word): 0 when the stage's cumulative closure — the biome cage's — does not allow the word, `phase` when the word arrives at the stage's own hall (its made_of/does/knows, the sequence's entry on its first hall or when the stage is a sequence key), else 1; an amount of 0 is not built, one between 0 and 1 is built scaled. The layout is the seed's at every stage but one: the ecology reads the full-amplitude, full-noise field (_h_rule, _wl_rule, _amp), the trees' full rank k and full-jitter _pos, while the mesh and every body's foot read a rendered field (_field_render, _max_h = _amp x translate; the noise term mixed about its mean 0.5 by `field`), the built trunk mixes its k from the sapling's by `scale` and its stand from the cell centre by `sample`; the exception is Trans_Rotation, where the aspect term is the moisture's and gen 11 (b)'s re-roll walks in with the phase; _ladder() marks the cells a stage does not build `late` in the order the ecology took them (the shore tree first, the best meadow cell first, the rim and each path from the water out), the counts become the built counts, the resident slots are cut to `select` so a cut slot stands a dispatcher body. The words: point (Point_One) the seed — a 0.3 m black sphere 0.35 m over the basin centre, above the water once there is water, radius x phase; line (Point_Lines) thin grey rods on the surface from the point's foot toward every future trunk, 0.5 m segments ending 0.45 m short of it, length x phase, replaced by the mats when `fungus` arrives; lattice (Point_Line_Grid) a faint grey cell grid of ribbons following the surface, opacity x phase, removed by `colour`; face (Point_Triangle_Context) the section, its bands and base compressed toward the surface by phase; solid (Primitives_Polythedra) the crystals and their scree, scale x phase; sphere (Primitives_Ignorance) the pool disc and the reeds, radius and count x phase; subdivide (Primitives_Portals) the floor at the substrate's full resolution (two quads per cell), the 16-quad minimum before it, on at phase 0.5; ornament (Primitives_Melencolia) the cover, count x phase; translate (Trans_Translation) the rendered relief, amplitude x phase; rotate (Trans_Rotation) the aspect term and the shade centre's run, x phase; scale (Trans_Scale) the trees' rank sizes, lerp(sapling, k, phase); colour (Color_Context_Placed) the wet/dry paint x phase and every body's colour through _tint — the luminance grey before it, the foliage cards from it (grey stubble is the plain meshes); light (Color_Flashlight) the one shade law x phase — paint, water and understory follow; flower (Color_Rainbow) the meadow's first round(n x phase) cells and their bloom slots; paint (Color_Paint) shore, silt and rock x phase; sample (Random_Definition) the jitter of trunks, bodies and crystals x phase and the cover's samples travelling from a regular lattice toward their draws by a folded offset (spread at every phase); vary (Random_Entropy) tufts — count and radius x phase, one blade before; walk (Random_Walk) the creatures, first round(n x phase), lsystems' `creature` grants them too; fungus (Random_Mushrooms) the path mats, first round(len x phase) per path from the water, their growth steps x phase; ring (Random_Mushrooms) the rim mats; field (noise) the terrain's noise term; tree (lsystems) the trees, first round(n x phase) by succession; select (machinelearning) the residents — slots and fungus count x phase; absent, connect: recorded, no layer. Recorded under state.ladder (stage, phase, arrivals, amounts, layers, point/rods/lattice counts); the label carries _<stage>_p<phase x 100>",
+	"gen 16: the stones become primitives (Palle: 'that is very good, its a bit sublime, let the stones become a primitives'). The mineral kingdom was the one layer that still arrived whole: at Primitives_Polythedra a cluster of six to nine tilted prisms, with its scree already trailing down a ground that was still flat. It walks the ladder now, like everything else. `solid` (Primitives_Polythedra) stands ONE of the hall's own polyhedra per mineral cell — a cube, an octahedron (a SphereMesh at four radial segments and two rings) or a prism, by hash([seed, \"polyhedron\", cell]) — 0.52 x 0.72 x 0.52 m at the cluster's scale, square to the world. `subdivide` (Primitives_Portals) splits it: pieces = round(mix(1, shards, amount)), each piece's size mixed from the whole stone toward the shard's 0.11 m prism and its offset scaled by the amount, so the cluster grows OUT of the solid instead of replacing it. `translate` (Trans_Translation) is now what lets the scree run — no trail before the relief exists, and the trail's length x the amount — which also ends a gen 5 fiction: the scree used to run downhill on a plane that had no downhill. `sample` (Random_Definition) is the tilt: the holder's yaw, the pieces' offsets (from a regular ring of 0.12 x scale toward their drawn offsets) and the pieces' and the scree's rotations all mix from square/aligned (the scree lying at 0.95 rad, the mean of its draw) to their draws. `colour` keeps the grey through _tint as before. Every rng draw is taken at every amount and the surplus pieces are skipped AFTER drawing, so the pieces that stand are the same pieces at every phase and `full` is gen 14 to the byte. Counted as counts.stone_whole, the stones standing unsplit. The layer keeps the name \"crystals\" at every stage: gen 14's rule is that a stage's layers only GROW along the walk, and a name that changes at Primitives_Portals reads as a layer lost (the probe caught it)",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 ## gen 11: THE SUN. The capture rig's key light (commons/testing/capture_config_sweep.gd,
@@ -261,7 +262,8 @@ func _build() -> void:
 		"creature": 0, "cover": 0, "connections": 0, "paint": 0,
 		"ms_tree": 0, "ms_flower": 0, "ms_fungus": 0, "ms_creature": 0,   # gen 3: the bill, by payer
 		"slots_bloom": 0, "slots_body": 0, "flower_dispatched": 0, "creature_dispatched": 0,   # gen 13: the slots handed over, the bodies the dispatcher still built
-		"residents_fungus": 0, "residents_bloom": 0, "residents_body": 0}
+		"residents_fungus": 0, "residents_bloom": 0, "residents_body": 0,
+		"stone_whole": 0}   # gen 16: the stones standing as one polyhedron, unsplit
 	_ladder_counts = {"point": 0, "rods": 0, "lattice": 0}
 	_closure_of_stage()   # gen 14: the words this stage allows and the words arriving at it
 	_patch = Node3D.new()
@@ -1534,6 +1536,8 @@ func _minerals() -> void:
 	if a_solid <= 0.0:
 		return   # gen 14: no solid before Primitives_Polythedra — no crystal, no scree, no rock
 	var a_sample: float = _amount("sample")
+	var a_sub: float = _amount("subdivide")     # gen 16: the stone splits at Primitives_Portals
+	var a_tr: float = _amount("translate")      # gen 16: the scree runs only once there is a slope
 	var wl: float = _wl_rule() if not _water.is_empty() else -99.0   # gen 14: the rules' level
 	var basin_w: Vector2 = _basin_c - Vector2(float(size), float(size)) * 0.5
 	var lim: float = float(size) * 0.5
@@ -1549,20 +1553,34 @@ func _minerals() -> void:
 		p.z += rng.randf_range(-0.25, 0.25) * a_sample
 		p.y = _h_at(p.x, p.z)
 		holder.position = p
-		holder.rotation.y = rng.randf_range(0.0, TAU)
+		var yaw: float = rng.randf_range(0.0, TAU)
+		holder.rotation.y = _mix(0.0, yaw, a_sample)   # gen 16: square to the world until Random_Definition
 		_patch.add_child(holder)
 		var scale: float = (0.9 + 0.5 * relief) * 1.4
 		# gen 3: the spires by height and dryness — the dry world grows spires where it grows no canopy
 		scale *= (0.7 + 0.6 * _field[key.y * size + key.x]) * (1.0 + 0.8 * (1.0 - moisture))
 		scale *= a_solid   # gen 14: the crystals grow in with the phase
 		var shards: int = rng.randi_range(6, 9)
-		for _i in range(shards):
-			var mi := MeshInstance3D.new()
-			var pm := PrismMesh.new()
+		# gen 16: at Primitives_Polythedra the stone is ONE of the hall's polyhedra; at
+		# Primitives_Portals it splits — the pieces multiply, shrink from the whole stone toward
+		# the shard, and spread out of the centre; at Random_Definition they tilt off their ring.
+		var pieces: int = shards if a_sub >= 1.0 else maxi(1, int(round(_mix(1.0, float(shards), a_sub))))
+		var kind: int = posmod(hash([seed, "polyhedron", key.x, key.y]), 3)
+		var whole := Vector3(0.52, 0.72, 0.52) * scale
+		if pieces <= 1:
+			_counts["stone_whole"] += 1
+		for i in range(shards):
+			# every draw is taken at every amount and the surplus pieces skipped AFTER drawing, so the
+			# pieces that stand are the same pieces at every phase and `full` keeps gen 14's stream
 			var hgt: float = rng.randf_range(0.24, 0.62) * scale
-			pm.size = Vector3(0.11 * scale, hgt, 0.11 * scale)
-			mi.mesh = pm
 			var tint: float = rng.randf_range(-0.04, 0.14)
+			var off := Vector2(rng.randf_range(-0.17, 0.17), rng.randf_range(-0.17, 0.17)) * scale
+			var rx: float = rng.randf_range(-0.42, 0.42)
+			var ry: float = rng.randf_range(0.0, TAU)
+			var rz: float = rng.randf_range(-0.42, 0.42)
+			if i >= pieces:
+				continue   # gen 16: the stone has not split this far
+			var mi := MeshInstance3D.new()
 			var col: Color = _tint(Color(0.58 + tint, 0.66 + tint, 0.86 + tint * 0.4))   # gen 14: grey until colour
 			var mat := StandardMaterial3D.new()
 			mat.albedo_color = col
@@ -1571,9 +1589,19 @@ func _minerals() -> void:
 			mat.emission_enabled = true
 			mat.emission = col * 0.15   # gen 7: 0.15 of the colour (was 0.5); the scree keeps its 0.2
 			mi.material_override = mat
-			var off := Vector2(rng.randf_range(-0.17, 0.17), rng.randf_range(-0.17, 0.17)) * scale
-			mi.position = Vector3(off.x, hgt * 0.5, off.y)
-			mi.rotation = Vector3(rng.randf_range(-0.42, 0.42), rng.randf_range(0.0, TAU), rng.randf_range(-0.42, 0.42))
+			if pieces <= 1:
+				mi.name = "Stone_%d_%d" % [key.x, key.y]
+				mi.mesh = _polyhedron(kind, whole)
+				mi.position = Vector3(0.0, whole.y * 0.5, 0.0)
+			else:
+				var pm := PrismMesh.new()
+				pm.size = Vector3(_mix(whole.x, 0.11 * scale, a_sub), _mix(whole.y, hgt, a_sub), _mix(whole.z, 0.11 * scale, a_sub))
+				mi.mesh = pm
+				var ang: float = TAU * float(i) / float(pieces)
+				var reg := Vector2(cos(ang), sin(ang)) * 0.12 * scale   # the ring the pieces leave with `sample`
+				var o := Vector2(_mix(reg.x, off.x, a_sample), _mix(reg.y, off.y, a_sample)) * a_sub
+				mi.position = Vector3(o.x, pm.size.y * 0.5, o.y)
+				mi.rotation = Vector3(rx * a_sample, _mix(0.0, ry, a_sample), rz * a_sample)
 			holder.add_child(mi)
 		# gen 5: the rock under the cluster, then the scree down the slope
 		_clusters.append(Vector2(p.x, p.z))
@@ -1584,6 +1612,8 @@ func _minerals() -> void:
 				if nk == key or nk.x < 0 or nk.y < 0 or nk.x >= size or nk.y >= size or _water.has(nk):
 					continue
 				_rock[nk] = maxf(float(_rock.get(nk, 0.0)), 0.3)
+		if a_tr <= 0.0:
+			continue   # gen 16: no scree before Trans_Translation — a flat ground has no downhill
 		var srng := RandomNumberGenerator.new()
 		srng.seed = hash([seed, "scree", key.x, key.y])
 		var g := Vector2(_h_rule(p.x + 0.5, p.z) - _h_rule(p.x - 0.5, p.z), _h_rule(p.x, p.z + 0.5) - _h_rule(p.x, p.z - 0.5))   # gen 14: the rules' slope
@@ -1597,6 +1627,10 @@ func _minerals() -> void:
 		if down.dot(to_basin) <= 0.0:
 			down = to_basin
 		var n: int = 3 + int(round(4.0 * relief))
+		if a_tr < 1.0:
+			n = int(round(float(n) * a_tr))   # gen 16: the trail runs out with the phase
+			if n <= 0:
+				continue
 		# the prism's half-diagonal at this scale: no shard's mesh past the footprint's edge
 		var margin: float = 0.12 * scale
 		var scol: Color = _tint(Color(0.62, 0.70, 0.88))
@@ -1628,11 +1662,36 @@ func _minerals() -> void:
 			mi.material_override = mat
 			# lying on the surface: the centre 0.3 h up, so the lowest edge sinks a few cm in
 			mi.position = Vector3(q.x, _h_at(q.x, q.y) + 0.3 * pm.size.y, q.y)   # gen 14: the rendered surface
-			mi.rotation = Vector3(srng.randf_range(0.6, 1.3), srng.randf_range(0.0, TAU), srng.randf_range(-0.3, 0.3))
+			var tx: float = srng.randf_range(0.6, 1.3)
+			var ty: float = srng.randf_range(0.0, TAU)
+			var tz: float = srng.randf_range(-0.3, 0.3)
+			# gen 16: lying at 0.95 rad, the mean of its draw, and aligned, until Random_Definition
+			mi.rotation = Vector3(_mix(0.95, tx, a_sample), _mix(0.0, ty, a_sample), _mix(0.0, tz, a_sample))
 			_patch.add_child(mi)
 			_rock[qk] = maxf(float(_rock.get(qk, 0.0)), 0.35)
 			_counts["scree"] += 1
 			low_h = minf(low_h, hq)
+
+
+
+## gen 16: the stone's body while it is still one solid — one of the polyhedra hall's own,
+## by the cell: a cube, an octahedron (a sphere at four radial segments and two rings) or the
+## prism the shards are made of. Once the stone has split, every piece is a prism again.
+func _polyhedron(kind: int, sz: Vector3) -> Mesh:
+	if kind == 0:
+		var bm := BoxMesh.new()
+		bm.size = sz
+		return bm
+	if kind == 1:
+		var sm := SphereMesh.new()
+		sm.radius = sz.x * 0.5
+		sm.height = sz.y
+		sm.radial_segments = 4
+		sm.rings = 2
+		return sm
+	var pm := PrismMesh.new()
+	pm.size = sz
+	return pm
 
 
 ## The living kingdoms go through the old biome's dispatcher, one deposit per cell, each

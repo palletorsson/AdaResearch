@@ -1,6 +1,14 @@
 ## probe_biome_object.gd — the biome object builds every kingdom by ecology, on its own
 ## ground, the same for the same seed.
 ##
+## Gen 16: at full every mineral cell is a cluster of prisms and counts.stone_whole is 0, and the
+## machinelearning rung (every amount 1) reproduces full's crystals and scree to five decimals;
+## at Primitives_Polythedra every mineral cell is ONE polyhedron standing square with no scree;
+## at Primitives_Portals it has split into prisms, still with no scree (the layer keeps the
+## name crystals throughout - gen 14's rule is that layers only grow); the scree arrives at
+## Trans_Translation (none at its phase 0, some at phase 1); and no stone or shard is turned
+## before Random_Definition.
+##
 ## Checks: three DNAs build; each has water, mineral, fungus, flora, fauna and cover; every
 ## living cell is inside the footprint; the pool sits at the water level and the crystals
 ## on the surface; a wetter DNA grows more fungus and more cover than a drier one; the same
@@ -624,6 +632,7 @@ func _run() -> void:
 	# gen 14: the ladder — full is gen 13, Point_One is the plane and the seed, the walk only
 	# grows, phase 0 is the previous hall, three stages replay
 	await _check_gen14(a, b)
+	await _check_gen16(a)
 	print("[probe_biome_object] %d checks, %d failed" % [_checks, _fails])
 	quit(0 if _fails == 0 else 1)
 
@@ -1724,3 +1733,146 @@ func _check_community_change(base, other, disabled) -> void:
 	_check(not _shape_same(_resident_shape(base), _resident_shape(other)), "different community DNA changes actual body geometry/material")
 	_check(disabled._residents.is_empty(), "resident layer can be disabled to recover the parent habitat")
 	_check_residents(other)
+
+
+## gen 16: the stones become primitives. `full` is untouched (every piece a prism, nothing
+## whole, and the last rung reproduces it); the stone is one polyhedron at
+## Primitives_Polythedra, the cluster at Primitives_Portals, the scree waits for the slope at
+## Trans_Translation, and nothing is turned before Random_Definition.
+func _check_gen16(a) -> void:
+	var sa: Dictionary = a.get_state()
+	var ca: Dictionary = sa["counts"]
+	var full_shape: Array = _stone_shape(a)
+	_check(int(ca.get("stone_whole", -1)) == 0 and bool(full_shape[3]) and int(full_shape[1]) >= 6,
+		"[gen16] %s at full: %d pieces over %d clusters, every one a prism, none standing whole" % [a.label(), int(full_shape[1]), int(full_shape[0])])
+	_check(("crystals" in (sa["ladder"]["layers"] as Array)) and int((sa["counts"] as Dictionary).get("mineral", 0)) > 0,
+		"[gen16] %s at full: the crystal layer stands over %d mineral cells" % [a.label(), int((sa["counts"] as Dictionary).get("mineral", 0))])
+
+	# (a) the last rung is full: every amount 1, so the crystals and the scree must match exactly
+	var last = await _grow(7, 0.5, 0.5, 0.6, {"stage": "machinelearning", "record": "off"})
+	var sig_full: Array = _crystal_sig(a)
+	var sig_last: Array = _crystal_sig(last)
+	var first_off := ""
+	for i in range(mini(sig_full.size(), sig_last.size())):
+		if sig_full[i] != sig_last[i] and first_off == "":
+			first_off = "\n      full: %s\n      last: %s" % [sig_full[i], sig_last[i]]
+	_check(sig_full.size() == sig_last.size() and str(sig_full) == str(sig_last),
+		"[gen16] the machinelearning rung reproduces full's crystals and scree (%d rows vs %d)%s" % [sig_full.size(), sig_last.size(), first_off])
+	last.queue_free()
+
+	# (b) Primitives_Polythedra: ONE polyhedron per mineral cell, square, and no scree
+	var poly = await _grow(7, 0.5, 0.5, 0.6, {"stage": "Primitives_Polythedra", "record": "off"})
+	var sp: Dictionary = poly.get_state()
+	var cp: Dictionary = sp["counts"]
+	var shape: Array = _stone_shape(poly)
+	_check(int(cp.get("mineral", 0)) > 0 and int(cp.get("stone_whole", -1)) == int(cp.get("mineral", 0)) and int(shape[1]) == int(shape[0]) and int(shape[0]) == int(cp.get("mineral", 0)),
+		"[gen16] Primitives_Polythedra: one piece per mineral cell (%d pieces, %d clusters, %d minerals, %d whole)" % [int(shape[1]), int(shape[0]), int(cp.get("mineral", 0)), int(cp.get("stone_whole", -1))])
+	_check(bool(shape[4]) and int(shape[5]) == int(shape[0]),
+		"[gen16] Primitives_Polythedra: every piece is a polyhedron of the hall, named Stone_x_z (%d of %d)" % [int(shape[5]), int(shape[0])])
+	_check(int(cp.get("scree", -1)) == 0 and absf(float((sp["height_range"] as Array)[1])) < 0.0001,
+		"[gen16] Primitives_Polythedra: a flat plane sheds no scree (scree %d)" % int(cp.get("scree", -1)))
+	_check("crystals" in (sp["ladder"]["layers"] as Array),
+		"[gen16] Primitives_Polythedra: the layer keeps its name - a whole stone is a crystal layer that has not split")
+	poly.queue_free()
+
+	# (c) Primitives_Portals: the stone has split into prisms, and still no scree
+	var portals = await _grow(7, 0.5, 0.5, 0.6, {"stage": "Primitives_Portals", "record": "off"})
+	var spo: Dictionary = portals.get_state()
+	var cpo: Dictionary = spo["counts"]
+	var shape_p: Array = _stone_shape(portals)
+	_check(int(cpo.get("stone_whole", -1)) == 0 and int(shape_p[1]) > int(shape_p[0]) and bool(shape_p[3]),
+		"[gen16] Primitives_Portals: the stone has split (%d pieces over %d clusters, every one a prism)" % [int(shape_p[1]), int(shape_p[0])])
+	_check(int(cpo.get("scree", -1)) == 0,
+		"[gen16] Primitives_Portals: still no scree (%d)" % int(cpo.get("scree", -1)))
+	portals.queue_free()
+
+	# (d) Trans_Translation: the scree runs only once the relief does
+	var tr0 = await _grow(7, 0.5, 0.5, 0.6, {"stage": "Trans_Translation", "phase": 0.0, "record": "off"})
+	var tr1 = await _grow(7, 0.5, 0.5, 0.6, {"stage": "Trans_Translation", "record": "off"})
+	var c0: Dictionary = tr0.get_state()["counts"]
+	var c1: Dictionary = tr1.get_state()["counts"]
+	_check(int(c0.get("scree", -1)) == 0 and int(c1.get("scree", -1)) > 0,
+		"[gen16] Trans_Translation: no scree on the flat phase, %d shards on the full one" % int(c1.get("scree", -1)))
+	tr0.queue_free()
+
+	# (e) nothing is turned before Random_Definition
+	var square: Array = _stone_shape(tr1)
+	_check(float(square[2]) < 0.0001 and float(square[6]) < 0.0001,
+		"[gen16] before Random_Definition nothing is turned (widest piece tilt %.5f rad, widest holder yaw %.5f)" % [float(square[2]), float(square[6])])
+	var scree_flat := true
+	var worst := 0.0
+	for ch in tr1._patch.get_children():
+		if not (ch is MeshInstance3D) or not String(ch.name).begins_with("Scree_"):
+			continue
+		var r: Vector3 = (ch as MeshInstance3D).rotation
+		worst = maxf(worst, maxf(absf(r.x - 0.95), maxf(absf(r.y), absf(r.z))))
+		if worst > 0.0001:
+			scree_flat = false
+	_check(scree_flat, "[gen16] before Random_Definition every shard lies at 0.95 rad, aligned (worst %.5f)" % worst)
+	tr1.queue_free()
+	var defn = await _grow(7, 0.5, 0.5, 0.6, {"stage": "Random_Definition", "record": "off"})
+	var turned: Array = _stone_shape(defn)
+	_check(float(turned[2]) > 0.02 and float(turned[6]) > 0.02,
+		"[gen16] Random_Definition turns them (widest piece tilt %.3f rad, widest holder yaw %.3f)" % [float(turned[2]), float(turned[6])])
+	defn.queue_free()
+
+
+## [clusters, pieces, widest |piece tilt|, all prisms, all polyhedra, pieces named Stone_, widest |holder yaw|]
+func _stone_shape(o) -> Array:
+	var clusters := 0
+	var pieces := 0
+	var tilt := 0.0
+	var yaw := 0.0
+	var all_prisms := true
+	var all_poly := true
+	var named := 0
+	for ch in o._patch.get_children():
+		if not (ch is Node3D) or not String(ch.name).begins_with("Crystal"):
+			continue
+		clusters += 1
+		yaw = maxf(yaw, absf((ch as Node3D).rotation.y))
+		for g in (ch as Node3D).get_children():
+			if not (g is MeshInstance3D):
+				continue
+			var mi := g as MeshInstance3D
+			pieces += 1
+			tilt = maxf(tilt, maxf(absf(mi.rotation.x), absf(mi.rotation.z)))
+			if not (mi.mesh is PrismMesh):
+				all_prisms = false
+			if not (mi.mesh is PrismMesh or mi.mesh is BoxMesh or mi.mesh is SphereMesh):
+				all_poly = false
+			if String(mi.name).begins_with("Stone_"):
+				named += 1
+	return [clusters, pieces, tilt, all_prisms, all_poly, named, yaw]
+
+
+## Every crystal piece and every scree shard as sorted text, to five decimals - the net under
+## the gen 16 mixes: at amount 1 every one of them must land where gen 14 put it.
+func _crystal_sig(o) -> Array:
+	var out: Array = []
+	for ch in o._patch.get_children():
+		if ch is MeshInstance3D and String(ch.name).begins_with("Scree_"):
+			out.append("%s %s" % [String(ch.name), _mesh_row(ch as MeshInstance3D)])
+			continue
+		if not (ch is Node3D) or not String(ch.name).begins_with("Crystal"):
+			continue
+		var rows: Array = []
+		for g in (ch as Node3D).get_children():
+			if g is MeshInstance3D:
+				rows.append(_mesh_row(g as MeshInstance3D))
+		out.append("%s y%.5f %s" % [String(ch.name), (ch as Node3D).rotation.y, " ".join(rows)])
+	out.sort()
+	return out
+
+
+func _mesh_row(mi: MeshInstance3D) -> String:
+	var sz := Vector3.ZERO
+	if mi.mesh is PrismMesh:
+		sz = (mi.mesh as PrismMesh).size
+	elif mi.mesh is BoxMesh:
+		sz = (mi.mesh as BoxMesh).size
+	elif mi.mesh is SphereMesh:
+		sz = Vector3((mi.mesh as SphereMesh).radius, (mi.mesh as SphereMesh).height, 0.0)
+	return "[%s %.5f,%.5f,%.5f @%.5f,%.5f,%.5f r%.5f,%.5f,%.5f]" % [mi.mesh.get_class(), sz.x, sz.y, sz.z,
+		mi.position.x, mi.position.y, mi.position.z, mi.rotation.x, mi.rotation.y, mi.rotation.z]
+

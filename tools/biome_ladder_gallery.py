@@ -37,7 +37,7 @@ RUN = REPO / "ada_run" / "biome_ladder"
 VOCAB = REPO / "commons" / "data" / "biome_vocabulary.json"
 LATER = ["noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration", "softbodies",
          "swarmintelligence", "machinelearning", "graphtheory"]
-MORPH_HALLS = ["Trans_Translation", "Color_Rainbow", "Random_Mushrooms"]
+MORPH_HALLS = ["Primitives_Polythedra", "Primitives_Portals", "Trans_Translation", "Color_Rainbow", "Random_Mushrooms"]
 PHASES = [1.0, 0.75, 0.5, 0.25, 0.0]
 
 
@@ -124,7 +124,8 @@ def publish(d, gen: int) -> None:
                             "order": order, "notes": f"{hall.replace('_', ' ')} · phase {ph:.2f} · seed {d[0]}"})
     desc = ("The biome object scaled down to primitives and morphed back. Generation %d gave the object a stage — "
             "the ladder's words gate every layer, as in the glass cage: a flat plane and one point at Point One, a "
-            "line, a lattice, a face, solids, the pool, relief with translation, colour, flowers, chance, fungus, "
+            "line, a lattice, a face, one whole stone per mineral cell at the polyhedra hall and the cluster it "
+            "splits into at the portals, the pool, relief and the scree that runs down it, colour, flowers, chance, fungus, "
             "then noise, trees at L-systems, residents at machine learning — and a phase, the newest layer absent, "
             "growing, grown. The ladder strip is one DNA at every stage; the morph strips run a hall's phase from 1 "
             "to 0, the world un-growing to the hall before. Click a tile for its token." % gen)
