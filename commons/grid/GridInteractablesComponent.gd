@@ -14,7 +14,6 @@ static var _artifact_registry_cache_by_key: Dictionary = {}
 # Known config parameter names (NOT to be treated as tutorial shorthand)
 # These are artifact configuration keys that can have numeric values
 const CONFIG_PARAM_NAMES = [
-	"hits", # target hit threshold; never a tutorial rotation shorthand
 	"radial", "rings", "inner", "outer", "config", "height", "radius",
 	"width", "depth", "segments", "sides", "rows", "cols", "count",
 	"size", "scale", "speed", "delay", "duration", "intensity",
