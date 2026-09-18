@@ -75,6 +75,7 @@ the gradient; the critic had predicted the number could not see a strand on bark
 | 3 | 4113be0ac | no vertical dimension: a map with pins → bodies scaled by rank and moisture (shore trees ×2.3–2.9, saplings ×1.3–1.6, capped by the measured canopy), understory under the canopies and along the mats, grass lerped green → straw by dryness, minerals off the shore, spires by height and dryness, per-kingdom spawn timing on record | 0.975 / 0.716, water 9.0 % | kept |
 | 4 | 54ac14bf3 | every layer reads the ground, none reads the layer above → the ground painted after the bodies so a shade layer reads the measured canopy; flowers kept out from under a canopy and favoured at its drip line; one species (intensity ≤ 4). The flower count had to be taken from the meadow before the canopies claim their floor (the builder flagged the loss) | 0.980 / 0.715, 1.7 % of pixels changed | kept — the smallest step, the first relation between layers |
 | 5 | d5e07122e | the minerals stood on the rim related to nothing → scree: a trail of 3–7 shards from every cluster down the slope toward the basin, a rock paint layer under clusters and trails, cover off the rock. The critic's gradient rule ran most trails off the plate; the builder extended the fallback (basin direction when the slope faces away) | 0.990 / 0.716, 2.9 % changed | kept; the loop paused here |
+| 6 | 629d0ee7f | **Astra's pass** (a second session, critic and builder as one agent): the cover is independent samples that never show they share a condition → cover in moisture-sized tufts sharing a centre, type and colour; reed beds at the shore; flat litter under the inner canopy; the driest ground bare; every member checked against water, shelf, scree, the crystal exclusion and the plate; private seeded streams; cap 864 | 0.975 / 0.733, 3.5 % changed | kept by Astra on sight; seen and agreed, committed by this session |
 
 The critic of generation 3 planned **4** (built) and **5** (built), then **6** the basin shows
 depth and the creatures face what they live by, **7** the plate's cut edge as a section. The
@@ -112,3 +113,28 @@ Generations 4–7 as above. Then the integration Palle deferred: the object as a
 cage; the object's own `size` beyond 12 (the rules are in cells and metres and should scale);
 the creatures as live CritterEntities rather than static SDF bodies; and a second critic voice
 (a different model, or Palle) so the loop's taste is not one agent's.
+
+
+## 7. Generation 6 — one Astra cycle, 18 September 2026
+
+Palle requested one further cycle through the loop. Generation 6 is **kept** after inspection
+of all six matched parent/candidate images: cover now gathers into moisture-sized tufts,
+shore reed beds and flat litter beneath the inner measured canopy. Each displaced member
+checks water, rock and its mesh footprint. The cover budget is capped at 864 instances.
+
+The object and its probe changed; the six DNAs, cameras, shared cover meshes, measures and
+driver stayed fixed. This pass used sequential critic/builder roles by Astra, not two
+independent agents. See [the critique](../ada_run/biome_rsi/gen_5/critique.md) and
+[the full review](../ada_run/biome_rsi/gen_6/review.md), including per-world observations,
+source hashes, the initial failed sandbox render and the successful graphics retry.
+
+230 checks passed with zero failures; six images rendered with zero rejected parameters.
+All non-cover kingdom counts and connections were preserved. Integration-v1 fell from
+0.990 to 0.975 because of fewer hue bins; legibility-v1 rose from 0.716 to 0.733. The verdict
+keeps the clearer spatial grouping while recording the score loss. Extra cover is not free:
+291–788 instances, with cover construction taking 17–29 ms in this rendered sweep. Headset
+performance remains untested. The local `/biome-rsi` gallery carries the new row.
+
+The next candidate is water/canopy appearance and the brightness of the connecting mycelium.
+No generation 7 or museum integration was undertaken in this cycle. The 0–5 blog remains
+the historical account of the earlier morning; the lineage records this continuation.
