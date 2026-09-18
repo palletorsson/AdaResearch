@@ -82,6 +82,7 @@ the gradient; the critic had predicted the number could not see a strand on bark
 | 10 | 347cb3c37 (Astra) | the ground ends as a thin sheet -> four schematic soil/rock bands and a closed underside follow the terrain edge; local moisture thickens the dark layer, mineral ground tints the surface strip; foliage and placement unchanged | 0.990 / 0.759, 13.0% changed including automatic camera refitting | kept on sight; 337 checks pass, one mesh / 864 triangles |
 | 11 | 60ccb2181 | (the gen-6 critic's plan) the key light, the one directional thing in the frame, was read by nothing → the sun as a constant of the object (read from the frozen rig), the painted shade, the understory and the pool's darkening moved to the displaced shadow centre, the drip-line bonus on the lit side, a slope-aspect term drying the sun-facing flank | 0.995 / 0.756, 15 % changed (layouts re-rolled) | kept |
 | 12 | c6cccddbf (Astra) | catalogue residents on shared ground: an independent community seed selects existing fungus DNA; up to six colonies fit clear ground near mycelium, with source/genes/footprint recorded | 0.990 / 0.748; 2.9% changed | kept; 16 colonies across six worlds, plus three communities on one fixed habitat |
+| 13 | 5a627787f | Palle: continue with the catalogue's plants and animals → through Astra's catalogue and contract, the nine flower species as resident families by habitat (identity from the community seed, size from the habitat, filling slots the habitat seed marks in the meadow so the count holds) and three creature body plans as gene overrides on the dispatcher's recipe, each body facing the nearest water or flower; two hidden nondeterminisms fixed | 0.990 / 0.743, 13 % changed | kept; the dry world shows the slot rule's flaw (a rock lurker by the pool) |
 
 The critic of generation 3 planned **4** (built) and **5** (built), then **6** the basin shows
 depth and the creatures face what they live by, **7** the plate's cut edge as a section. The
@@ -100,7 +101,7 @@ meadow's bonus on the lit side, then a slope-aspect term in the moisture); **9**
 the cut edge shows the strata; **9 or 10** inhabitants — a creature faces what it lives by, a
 worn track behind it. All critiques are in `ada_run/biome_rsi/`.
 
-Thirteen generations in one day (two of them another session's), every one kept on sight, none culled: the culling rule has
+Fourteen generations in one day (three of them another session's), every one kept on sight, none culled: the culling rule has
 not yet been exercised, which is a fact about the critics' proposals being small and
 well-aimed, not about the rule.
 
@@ -115,6 +116,15 @@ the edge (a third of seeds move the water to a side; the disc clamped as a D aga
 a water face on the section); **13 or 14** inhabitants and the web ages (a creature turned to
 face the water or the nearest flower, a worn track behind it; finished cords brown like
 rhizomorphs, the growing tip white). It would not add a second pool, nor ripple the water.
+
+The critic of generation 12 (agreeing with Astra's keep) found the residents reading as props:
+same-size caps on bald, cover-cleared plates in full sun, beside the web rather than on it —
+because the SLOT sizes the body, admits only level open ground away from neighbours, and
+clears a plate; every family generation 13 admits walks through that door, and it did (a rock
+lurker by the pool in the dry world). Its path: **14** the body sizes the slot; inhabitants
+face what they live by under one rule for natives and residents alike; **15** fruit on the old
+cords — the web ages. The next adapters Astra listed remain: shelf brackets on trunks, posed
+fungi, tree DNA variants in the tree slot, the colony's network kept distinct from its fruit.
 
 ## 5. What was learned on the way
 
