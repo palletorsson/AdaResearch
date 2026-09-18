@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "note": "Designed habitat preferences for the biome, not botanical claims. The body recipes are existing catalogue DNA. Add a tested adapter and space budget before admitting another builder.",
+  "max_colonies": 6,
+  "radius_m": 0.72,
+  "families": [
+    {"id": "button_dome", "artifact": "living_fungus_fruit", "builder": "fungus_dna", "preset_dir": "res://algorithms/nature_system/morphology/fungus_presets", "prefix": "fd", "variants": 12, "moisture": 0.68, "shade": 0.55, "role": "low fruiting bodies near the damp network"},
+    {"id": "parasol_tall", "artifact": "living_fungus_fruit", "builder": "fungus_dna", "preset_dir": "res://algorithms/nature_system/morphology/fungus_presets", "prefix": "fd", "variants": 12, "moisture": 0.43, "shade": 0.0, "role": "tall stems in open gaps beside the network"},
+    {"id": "fairy_ring", "artifact": "living_fungus_fruit", "builder": "fungus_dna", "preset_dir": "res://algorithms/nature_system/morphology/fungus_presets", "prefix": "fd", "variants": 12, "moisture": 0.55, "shade": 0.15, "role": "a group sharing one clear patch of ground"},
+    {"id": "alien_lumen", "artifact": "living_fungus_fruit", "builder": "fungus_dna", "preset_dir": "res://algorithms/nature_system/morphology/fungus_presets", "prefix": "fd", "variants": 12, "moisture": 0.76, "shade": 0.7, "role": "luminous caps in the moist understory"}
+  ],
+  "next_adapters": [
+    {"artifact": "living_fungus_fruit", "family": "shelf_bracket", "needs": "A trunk attachment, rather than a free-standing ground slot."},
+    {"artifact": "living_fungus_pose", "needs": "Pose-aware bounds and contacts; static deformation must not be presented as simulated physics."},
+    {"artifact": "living_flora_tree", "needs": "DNA variants within the tree slot, with measured canopy/shadow and clearance updated."},
+    {"artifact": "living_flora_bloom", "needs": "Separate flower identity from size; replace existing meadow occupants within its budget."},
+    {"artifact": "living_fauna_body", "needs": "Body footprint and orientation toward a resource; movement needs its own simulation budget."},
+    {"artifact": "living_fungus_colony", "needs": "Keep the connecting network's role distinct from its fruiting body or CA/SDF representation."}
+  ]
+}

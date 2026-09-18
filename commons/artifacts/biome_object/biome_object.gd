@@ -66,12 +66,13 @@ class_name BiomeObject
 ## Record: with record=on the build writes res://ada_run/biome_rsi/state/<label>.json — the
 ## counts the driver reads (organisms per kingdom, connections, cover, heights, build ms).
 
+const Residents := preload("res://commons/artifacts/biome_object/biome_residents.gd")
 const Dispatcher := preload("res://commons/biome_layers/biome_paint_dispatcher.gd")
 const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 const FoliageCards := preload("res://commons/biome_layers/foliage_cards.gd")
 
-const GENERATION := 11
+const GENERATION := 12
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
@@ -85,6 +86,7 @@ const CHANGELOG: Array[String] = [
 	"gen 9: the foliage cards drawn IN the engine from the seed (Palle: can we make the foliage card procedurally?) — commons/biome_layers/foliage_cards.gd paints grass, reed, fern, plant and litter on an Image at build time with a disc brush along Bézier strokes and sin-profiled leaves; the seed shapes them, the moisture changes what grows (blade count and straw, cattail heads only when wet, fuller ferns and broader leaves when wet, redder litter when dry); cached per kind, seed and moisture band; `#foliage:files` keeps the PNG set",
 	"gen 10: the ground in section - four soil/rock bands and a sealed underside follow the existing terrain boundary exactly; a thicker dark organic layer reads the local moisture, the surface strip reads mineral ground; a schematic profile, not simulated geology; one mesh/material, 864 triangles at size 12, no changed organism placement or foliage",
 	"gen 11: aspect — the sun is a layer (the gen-6 critic's proposal 1). The rig's key light is frozen at rotation (−42°, −35°): it travels along xz SUN_XZ = (0.574, −0.819) at 42° elevation, SUN_RUN = 1/tan 42° = 1.111 m of run per metre of height. (a) _dispatch() measures each tree's crown height _crown = 0.6·(merged branch top)·k (1.2·r·k without a mesh); a tree's shade centre is trunk + SUN_XZ·SUN_RUN·crown, and ONE law, _shade_at(p) = max over trees of (1 − |p − sc|/canopy)^0.6, now feeds the ground's shade layer (×0.85), the pool's vertex darkening (gen 7's, moved with it) and the cover's `shaded` (ferns and toadstools in the shadow, darker and smaller there); the litter keeps the trunk — leaves fall straight down; the meadow's drip-line bonus is +0.25 only on the LIT side of its nearest trunk ((cell − trunk)·SUN_XZ < 0), +0.05 on the shaded side. No new draw: (a) moved the paint, the understory and the meadow's side and left every other count. (b) the moisture loop takes an aspect term after its jitter draw: g = (h(x+1) − h(x−1), h(z+1) − h(z−1))·0.5 in metres, m −= 0.12·clamp(g·SUN_XZ/0.25, −1, 1) — the flank facing the sun dries, the lee holds — which re-rolls the layout by the seed (trees, meadow, rim, creatures, the ridge)",
+	"gen 12: catalogue residents share the ground but carry independent community DNA; up to six fruiting-fungus colonies use existing CritterDNA presets and FungusMorphology, choose moist gaps beside mycelium, respect an explicit footprint and clear cover beneath them; changing community_seed keeps terrain, water, trees and networks fixed; each resident records catalogue identity, preset, expressed genes, seed and habitat",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 ## gen 11: THE SUN. The capture rig's key light (commons/testing/capture_config_sweep.gd,
@@ -102,6 +104,9 @@ const K_FLOWER := 2
 const K_FUNGUS := 3
 
 @export var seed: int = 7
+## Vary the catalogue bodies without rerolling the terrain or its established ecology.
+@export var community_seed: int = 0
+@export_enum("on", "off") var residents: String = "on"
 ## Cells across (one metre each).
 @export_range(4, 24) var size: int = 12
 ## How wet the ground is: the basin's reach, the meadow's extent, the cover's density.
@@ -115,6 +120,7 @@ const K_FUNGUS := 3
 ## files) or `files` (the PNGs in commons/biome_layers/foliage/, a hand-painted set).
 @export_enum("drawn", "files") var foliage: String = "drawn"
 
+var _residents: Array[Dictionary] = []
 var _built: bool = false
 var _field: PackedFloat32Array = PackedFloat32Array()   # per cell 0..1
 var _max_h: float = 1.0
@@ -142,6 +148,10 @@ var _cover_tufts: Array[Dictionary] = [] # CPU placement plan: groups share type
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if config.has("community_seed"):
+		community_seed = int(str(config["community_seed"]).to_int())
+	if config.has("residents"):
+		residents = "off" if str(config["residents"]).to_lower() in ["off", "0", "false"] else "on"
 	if config.has("seed"):
 		seed = int(str(config["seed"]).to_int())
 	if config.has("size"):
@@ -174,7 +184,8 @@ func _rebuild() -> void:
 
 
 func label() -> String:
-	return "s%d_m%02d_r%02d_w%02d" % [seed, int(round(moisture * 100.0)), int(round(relief * 100.0)), int(round(wildness * 100.0))]
+	var base := "s%d_m%02d_r%02d_w%02d" % [seed, int(round(moisture * 100.0)), int(round(relief * 100.0)), int(round(wildness * 100.0))]
+	return base + ("_c%d" % community_seed if community_seed != 0 else "")
 
 
 func _build() -> void:
@@ -193,6 +204,12 @@ func _build() -> void:
 	_water_pool() # gen 7: after the bodies — the disc's shade reads the canopy _dispatch() measured
 	_ground()     # gen 4: after the bodies — the paint reads the canopy _dispatch() measured
 	_section()
+	_residents.clear()
+	var residents_start := Time.get_ticks_msec()
+	if residents == "on":
+		_residents = Residents.populate(self, community_seed)
+	_counts["residents"] = _residents.size()
+	_counts["ms_residents"] = Time.get_ticks_msec() - residents_start
 	_cover()
 	_build_ms = Time.get_ticks_msec() - t0
 	print("[biome_object] gen %d %s: water %d, mineral %d (scree %d), fungus %d (path %d), trees %d, flowers %d, creatures %d, cover %d, connections %d, paint %d — %d ms (tree %d, flower %d, fungus %d, creature %d)" % [
@@ -1375,6 +1392,10 @@ func _cover() -> void:
 
 ## Check every displaced tuft member: a dry centre does not guarantee dry neighbours.
 func _cover_land(p: Vector2) -> bool:
+	for resident in _residents:
+		var at: Array = resident["position"]
+		if p.distance_to(Vector2(at[0], at[2])) < float(resident["radius"]):
+			return false
 	var half := float(size) * 0.5
 	if absf(p.x) > half - 0.02 or absf(p.y) > half - 0.02:
 		return false
@@ -1405,6 +1426,8 @@ func get_state() -> Dictionary:
 		hi = maxf(hi, _field[i] * _max_h)
 	return {"generation": GENERATION, "label": label(),
 		"dna": {"seed": seed, "size": size, "moisture": moisture, "relief": relief, "wildness": wildness},
+		"community_dna": {"seed": community_seed, "enabled": residents},
+		"residents": _residents.duplicate(true),
 		"cells": kinds, "counts": _counts.duplicate(), "trees": _trees.size(),
 		"kingdoms_present": _present(), "height_range": [lo, hi], "water_level": _water_level(),
 		"organisms": _patch.get_child_count() if _patch != null else 0, "build_ms": _build_ms,

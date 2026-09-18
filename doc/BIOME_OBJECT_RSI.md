@@ -81,6 +81,7 @@ the gradient; the critic had predicted the number could not see a strand on bark
 | 9 | e62f0ceee | Palle: can the cards be made procedurally → `foliage_cards.gd` draws the five cards in the engine at build time from the seed and the moisture (a disc brush along Bézier strokes, sin-profiled leaves), 4–10 ms a card, cached per kind, seed and moisture band; the PNG set stays behind `#foliage:files` | 1.000 / 0.777, 1.9 % changed | kept — the same picture from no files; the cards are DNA now |
 | 10 | 347cb3c37 (Astra) | the ground ends as a thin sheet -> four schematic soil/rock bands and a closed underside follow the terrain edge; local moisture thickens the dark layer, mineral ground tints the surface strip; foliage and placement unchanged | 0.990 / 0.759, 13.0% changed including automatic camera refitting | kept on sight; 337 checks pass, one mesh / 864 triangles |
 | 11 | 60ccb2181 | (the gen-6 critic's plan) the key light, the one directional thing in the frame, was read by nothing → the sun as a constant of the object (read from the frozen rig), the painted shade, the understory and the pool's darkening moved to the displaced shadow centre, the drip-line bonus on the lit side, a slope-aspect term drying the sun-facing flank | 0.995 / 0.756, 15 % changed (layouts re-rolled) | kept |
+| 12 | uncommitted (Astra) | catalogue residents on shared ground: an independent community seed selects existing fungus DNA; up to six colonies fit clear ground near mycelium, with source/genes/footprint recorded | 0.990 / 0.748; 2.9% changed | kept; 16 colonies across six worlds, plus three communities on one fixed habitat |
 
 The critic of generation 3 planned **4** (built) and **5** (built), then **6** the basin shows
 depth and the creatures face what they live by, **7** the plate's cut edge as a section. The
@@ -99,7 +100,7 @@ meadow's bonus on the lit side, then a slope-aspect term in the moisture); **9**
 the cut edge shows the strata; **9 or 10** inhabitants — a creature faces what it lives by, a
 worn track behind it. All critiques are in `ada_run/biome_rsi/`.
 
-Twelve generations in one day (two of them another session's), every one kept on sight, none culled: the culling rule has
+Thirteen generations in one day (two of them another session's), every one kept on sight, none culled: the culling rule has
 not yet been exercised, which is a fact about the critics' proposals being small and
 well-aimed, not about the rule.
 
@@ -191,3 +192,36 @@ See [the parent critique](../ada_run/biome_rsi/gen_9/critique.md),
 The first material draft is archived under `gen_10/attempt_1/`; the main lineage
 contains only the final generation-10 row. No commit or museum placement was made.
 The next candidate is the earlier directional-light/understory proposal.
+
+## 9. Generation 12 — catalogue bodies on one habitat
+
+Palle asked how other living catalogue artifacts can inhabit a shared base with
+different DNA. The current parent was generation 11 (directional light/shade).
+Generation 12 adds the first catalogue-resident adapter: existing fruiting fungus
+presets, CritterDNA and FungusMorphology, with a separate `community_seed`.
+
+Habitat DNA holds terrain and established ecology; community DNA selects body
+families and individuals. A resident must fit a reserved patch near mycelium,
+clear of water, minerals and established bodies. Moisture/shade preferences are
+authored rules. Each resident records catalogue identity, preset, expressed genes,
+seed, footprint and location. The common DNA vocabulary does not remove the need
+for builder-specific mounting: a shelf fungus needs a trunk, a tree needs a canopy
+budget, and a moving creature needs behaviour and movement space.
+
+The six reference habitats admitted 16 colonies (4, 5, 0, 3, 4, 0); two had no
+suitable clear patch. A separate four-view study compares the bare resident layer
+with community seeds 0, 1 and 2 on seed-7 terrain, using one camera fit. Four slots
+stay fixed while their bodies vary. Generation 12 is kept after reviewing all ten
+images, with 402 checks passing. Integration falls 0.995 to 0.990 and legibility
+0.756 to 0.748; this is a visual and structural gain, not a score claim. Resident
+construction takes 5–26 ms; these forms are static and headset cost is untested.
+
+Source: `commons/artifacts/biome_object/resident_catalog.json` and
+`biome_residents.gd`. The shared fungus builder gained an optional explicit seed
+so residents reproduce independently of instance IDs; old callers keep their
+existing behaviour. Other builders and the benchmark driver remain unchanged.
+
+Review: [generation 12](../ada_run/biome_rsi/gen_12/review.md).
+Local comparison: <http://127.0.0.1:3003/biome-rsi/residents.html>.
+Next: attachment or substitution rules for the other catalogue families, so
+crowded habitats can change their occupants without adding more density.

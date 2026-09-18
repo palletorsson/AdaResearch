@@ -487,6 +487,7 @@ func _run() -> void:
 	for o in [a, b, c, d4]:
 		_check_cover(o)
 		_check_section(o)
+		_check_residents(o)
 	# gen 11: the sun is a layer — the rig once, then every world; the ring-flower side and
 	# the twin pairs are aggregated so a world with two ring flowers cannot flip the verdict
 	_check_rig()
@@ -524,6 +525,11 @@ func _run() -> void:
 	_check(twin._basin_c == a._basin_c, "the same seed digs the basin in the same place")
 	_check(var_to_str(twin._section_columns) == var_to_str(a._section_columns), "section profiles replay at a translated instance")
 	_section_extremes()
+	_check(var_to_str(twin._residents) == var_to_str(a._residents), "resident DNA, placements and source records replay")
+	_check(_resident_shape(twin) == _resident_shape(a), "resident meshes and materials replay at a translated instance")
+	var community = await _grow(7, 0.5, 0.5, 0.6, {"community_seed": 1})
+	var bare = await _grow(7, 0.5, 0.5, 0.6, {"residents": "off", "record": "off"})
+	_check_community_change(a, community, bare)
 	var other = await _grow(8, 0.5, 0.5, 0.6)
 	_check(other._basin_c != a._basin_c or str(_world_counts(other.get_state()["counts"])) != str(ca), "a different seed grows a different world")
 	_check(FileAccess.file_exists("res://ada_run/biome_rsi/state/%s.json" % a.label()), "the record is written")
@@ -1204,3 +1210,80 @@ func _section_extremes() -> void:
 		o._section()
 		_check_section(o)
 		o.queue_free()
+
+
+## Gen 12: catalogue identity, occupied space and independent, repeatable DNA.
+func _check_residents(o) -> void:
+	var records: Array = o._residents
+	var lab: String = o.label()
+	_check(records.size() <= 6 and o._counts["residents"] == records.size(), "%s: bounded resident count" % lab)
+	var sources_ok := true
+	var inside := true
+	var grounded := true
+	var connected := true
+	var clear_cover := true
+	for resident in records:
+		sources_ok = sources_ok and FileAccess.file_exists(resident["preset"]) and resident["artifact"] == "living_fungus_fruit"
+		sources_ok = sources_ok and not (resident["dna"] as Dictionary).is_empty()
+		var holder: Node3D = o._patch.get_node(resident["node"])
+		var bb: AABB = holder.transform * o.Residents._bounds(holder)
+		var half: float = o.size * 0.5
+		inside = inside and bb.position.x > -half and bb.end.x < half and bb.position.z > -half and bb.end.z < half
+		var p := Vector2(holder.position.x, holder.position.z)
+		var net: Array = resident["network"]
+		var source := Vector2(net[0], net[1])
+		connected = connected and p.distance_to(source) <= 2.2001 and o._mats.has(source)
+		var stack: Array[Node] = [holder]
+		while not stack.is_empty():
+			var node: Node = stack.pop_back()
+			for child in node.get_children():
+				stack.append(child)
+			if node is MeshInstance3D and String(node.name) == "Stem":
+				var stem: CylinderMesh = node.mesh
+				var foot: Vector3 = o._patch.to_local(node.to_global(Vector3(0, -stem.height * 0.5, 0)))
+				grounded = grounded and absf(foot.y - o._h_at(foot.x, foot.z)) < 0.08
+		for tuft in o._cover_tufts:
+			for member in tuft["members"]:
+				var at: Vector3 = member[0].origin
+				clear_cover = clear_cover and p.distance_to(Vector2(at.x, at.z)) >= float(resident["radius"]) - 0.0001
+	_check(sources_ok, "%s: resident records identify real catalogue presets and expressed DNA" % lab)
+	_check(inside, "%s: measured resident geometry stays inside the biome" % lab)
+	_check(grounded, "%s: each fruiting stem meets its own terrain height" % lab)
+	_check(connected, "%s: residents belong to an existing nearby mycelium site" % lab)
+	_check(clear_cover, "%s: every cover origin respects the resident clearings" % lab)
+	print("    [residents] %s: %d colonies, %d ms" % [lab, records.size(), o._counts["ms_residents"]])
+
+
+func _resident_shape(o) -> String:
+	var data: Array = []
+	for resident in o._residents:
+		var stack: Array[Node] = [o._patch.get_node(resident["node"])]
+		while not stack.is_empty():
+			var node: Node = stack.pop_back()
+			for child in node.get_children():
+				stack.append(child)
+			if node is Node3D:
+				data.append([String(node.name), node.transform])
+			if node is MeshInstance3D:
+				data.append(node.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX])
+				if node.material_override is ShaderMaterial:
+					data.append(node.material_override.get_shader_parameter("primary_color"))
+	return var_to_str(data)
+
+
+func _check_community_change(base, other, disabled) -> void:
+	for o in [other, disabled]:
+		_check(o._field == base._field and o._moist == base._moist, "community changes preserve terrain and moisture")
+		_check(var_to_str(o._cells) == var_to_str(base._cells) and var_to_str(o._paths) == var_to_str(base._paths), "community changes preserve established organisms and network")
+		_check(var_to_str(o._section_columns) == var_to_str(base._section_columns), "community changes preserve ground section")
+	_check(base._residents.size() > 0 and other._residents.size() == base._residents.size(), "same ground provides the same resident slots")
+	var same_slots := true
+	for i in range(mini(base._residents.size(), other._residents.size())):
+		var a: Array = base._residents[i]["position"]
+		var b: Array = other._residents[i]["position"]
+		same_slots = same_slots and a[0] == b[0] and a[2] == b[2]
+	_check(same_slots, "community DNA does not move the slots in xz")
+	_check(var_to_str(base._cover_tufts) == var_to_str(other._cover_tufts), "community DNA keeps the same cover outside the fixed slots")
+	_check(_resident_shape(base) != _resident_shape(other), "different community DNA changes actual body geometry/material")
+	_check(disabled._residents.is_empty(), "resident layer can be disabled to recover the parent habitat")
+	_check_residents(other)
