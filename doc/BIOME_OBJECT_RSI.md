@@ -84,6 +84,8 @@ the gradient; the critic had predicted the number could not see a strand on bark
 | 12 | c6cccddbf (Astra) | catalogue residents on shared ground: an independent community seed selects existing fungus DNA; up to six colonies fit clear ground near mycelium, with source/genes/footprint recorded | 0.990 / 0.748; 2.9% changed | kept; 16 colonies across six worlds, plus three communities on one fixed habitat |
 | 13 | 5a627787f | Palle: continue with the catalogue's plants and animals → through Astra's catalogue and contract, the nine flower species as resident families by habitat (identity from the community seed, size from the habitat, filling slots the habitat seed marks in the meadow so the count holds) and three creature body plans as gene overrides on the dispatcher's recipe, each body facing the nearest water or flower; two hidden nondeterminisms fixed | 0.990 / 0.743, 13 % changed | kept; the dry world shows the slot rule's flaw (a rock lurker by the pool) |
 | 14 | 636c4c822 | Palle: scale it down to primitives, morph it backwards → `stage` (the ladder's words gate every layer through `_amount(word)`, the cage's own closure; `full` is generation 13 byte for byte; Point One is a white plane and one black seed, 5 ms) and `phase` (the newest layer absent, growing, grown; the layout stays the seed's so the ladder is one world growing); `/biome-ladder`: one DNA at every stage and three halls at five phases | 0.990 / 0.743 (full unchanged) | kept |
+| 15 | 92ca873a5, branch `biome/gen15-body-sizes-slot` | (the gen-12 critic's proposal 1) the SLOT sized the body, so every family walked through one door → per-family `radius_m`, `stand` and `height_m` in the resident catalogue, a 0.22 m lattice pass, the family chosen by fitness first and the room then measured for its own body (spacing r1 + r2 + 0.2), web families needing a cord within 0.45 m. Fungus residents s13 0 → 4, s17 3 → 6, s23 0 → 5. The builder's own warning: the smallest body wins the slots, 24 of 28 residents are parasols | 0.995 / 0.748, 3.9 % changed | **a branch**, not the trunk — held until its siblings (one facing rule, the web ages) are built and the eye picks |
+| 16 | 9ba8d42a9 | Palle: *"that is very good, its a bit sublime, let the stones become a primitives"* → the mineral kingdom was the last layer arriving whole, so it walks the ladder now: `solid` (Primitives_Polythedra) stands ONE of the hall's polyhedra per mineral cell (cube, octahedron or prism by the cell, 0.52 x 0.72 x 0.52 m, square to the world); `subdivide` (Primitives_Portals) splits it, the pieces multiplying from 1 to 6–9 while each shrinks from the whole stone toward the shard and spreads out of the centre; `translate` (Trans_Translation) is what lets the scree run, ending a generation-5 fiction where scree ran downhill on a plane with no downhill; `sample` (Random_Definition) is the tilt — yaw, offsets (off a regular ring) and every rotation mix from square to their draws | 0.990 / 0.744; at `full` every count and all 6 x organisms identical to generation 14, only timing fields differ | kept |
 
 The critic of generation 3 planned **4** (built) and **5** (built), then **6** the basin shows
 depth and the creatures face what they live by, **7** the plate's cut edge as a section. The
@@ -127,15 +129,24 @@ face what they live by under one rule for natives and residents alike; **15** fr
 cords — the web ages. The next adapters Astra listed remain: shelf brackets on trunks, posed
 fungi, tree DNA variants in the tree slot, the colony's network kept distinct from its fruit.
 
+Generation 16 is the first rung the ladder itself asked for. Writing the words down had shown the mineral kingdom skipping four of them: at Primitives_Polythedra, a hall whose whole subject is the polyhedron, the object stood a finished cluster of nine tilted prisms with its scree already trailing across a ground that was still perfectly flat. Nothing in the numbers could see it — at `full` the world is unchanged to the byte — and nothing but the stage strip would ever show it. The RSI tiles are all `full`, so a change like this is invisible in /biome-rsi by construction; its evidence is /biome-ladder.
+
 The ladder closes a loop the memo opened on its first page: the cage showed the biome as the
 states of one composition, the object now shows itself as the states of one world — a plane
 and a point at Point One, everything else arriving with the word that teaches it — and the
 phase runs any hall backwards to the hall before. Palle's RSI tree, from the Dream-RSI paper,
-is the next shape: the lineage has been a chain; generations 15–17 are three branches from 14,
-the critic of generation 12's three proposals built side by side, and the eye picks the trunk.
+is the next shape, and it has started. The lineage has been a chain; **15 is the first branch**
+(`biome/gen15-body-sizes-slot`, the body sizes the slot), and its two siblings — inhabitants face
+what they live by under one rule, and fruit on the old cords as the web ages — are **17** and **18**,
+the pointers `biome/gen16-one-facing-rule` and `biome/gen17-the-web-ages` now sitting at 14's commit
+and due to be renamed. **16 is a trunk step**, not a branch: Palle asked for the stones directly, it
+leaves `full` untouched, and holding it on a branch would have bought nothing. The numbers are the
+order the passes were made, not the shape of the tree — the verdict column carries the shape.
 
 ## 5. What was learned on the way
 
+- **The change measure has a floor of about 1 %.** Generation 16 leaves `full` identical — every structural count and every organism count matches generation 14 across all six worlds, only the `ms_*` timing fields differ — and the six tiles still measured 0.4 %, 0.9 %, 0.9 %, 1.3 %, 1.5 % and 1.8 % changed, mean 1.1 %. That is the renderer, not the object. So generation 4's 1.7 % and generation 9's 1.9 % were barely over the floor, and no future pass should read a change under ~2 % as evidence of anything. Measured 2026-09-18 on the only pair the corpus has where the geometry is provably identical.
+- **This repo's trunk is the branch `palm-scanner-door-entry`, not `main`.** `main` sits at 2026-05-06, 21,208 files behind, and does not contain `biome_object.gd` at all. A `git checkout main` from the biome work tries to delete four months of the project; it was refused here only because unrelated `ada_run/` files happened to be dirty. Forum thread 260918-gqqv8.
 - The dispatcher's builders set GLOBAL positions; an object that hands them local coordinates
   scatters its organisms 30 m away in the probe and nowhere in a single scene.
 - `Array.shuffle()` draws from Godot's global random; the same seed grew two different worlds.
