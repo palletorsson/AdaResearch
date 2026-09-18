@@ -29,7 +29,9 @@ class_name BiomeObject
 ##               gradient; the basin's way when it is flat or falls off the plate), stopping
 ##               at the water, the edge or a rise: the ridge comes down to the water, the
 ##               web's arrow reversed (gen 5); the spires' glow cut to 0.15 of their colour and
-##               rougher — a mineral, not a lamp (gen 7)
+##               rougher — a mineral, not a lamp (gen 7); the trail WALKING the fall line, the
+##               gradient re-read at every step and the lip it breaks on scaled to the
+##               terrain's own amplitude (gen 17)
 ##   fungus      mycelium filaments on the wet rim of the pool, and a mycelium PATH from the
 ##               pool out to every tree — the network that joins water to wood; sampled ON the
 ##               line every 0.5 m, dry cells only, the last mat touching the trunk, finished at
@@ -43,7 +45,10 @@ class_name BiomeObject
 ##               the moisture, a creature 1.6x (gen 3); every tree one species (inten 1-4) and
 ##               the meadow at the DRIP LINE — no flower under a canopy, a ring round it (gen 4),
 ##               the ring's bonus only on the LIT side of the trunk (gen 11)
-##   fauna       creatures beside the flowers and the fungus
+##   fauna       creatures beside the flowers and the fungus; and ONE more placed by the ROCK —
+##               at a cluster's scree foot, the neighbour cell the trail will take first, turned
+##               to face its own stone (gen 17). The first thing in the object a crystal places
+##               rather than forbids.
 ##   cover       grass and stubble by moisture, on the surface, everywhere; the understory
 ##               follows the canopy — ferns and toadstools under a tree, toadstools along the
 ##               web, the grass green where wet and straw where dry, bare where driest (gen 3);
@@ -108,7 +113,7 @@ const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 const FoliageCards := preload("res://commons/biome_layers/foliage_cards.gd")
 const Grammar := preload("res://commons/biome_layers/biome_grammar.gd")   # gen 14: the ladder's closure
 
-const GENERATION := 16
+const GENERATION := 17
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
@@ -126,6 +131,7 @@ const CHANGELOG: Array[String] = [
 	"gen 13: two more catalogue builders on Astra's contract, the object handing over slots it already owns instead of adding bodies. (a) living_flora_bloom — the nine BotanicalFlower species are families with designed habitat preferences (moisture, shade, the sun's side of the trunk); _ecology() marks every second or third meadow cell `resident` by a stride and phase drawn from the HABITAT seed (never the community's, never the ecology's stream), _dispatch() leaves those cells, and populate() stands a species there chosen by the community seed and the slot's habitat, the SIZE still the habitat's (the dispatcher's overall_scale on the cell's intensity, the moisture growth 1.4 + 0.4·m) — another community, another species, the same size; the meadow count is unchanged and the flag is a fact about the seed, so residents:off rebuilds gen 12 exactly. (b) living_fauna_body — every creature cell (1–4) is handed over, so the animal count does not double; three body plans (shore_grub: low, more rings, social, dark, drawn to the water; meadow_walker: taller, fewer rings, lighter, sun-side; rock_lurker: iridescent, metallic, coiled, drawn to the crystals) are CritterDNA gene overrides on the dispatcher's own walker recipe, built by CreatureSdfMorphology, each body's xz centred on its slot and TURNED to face what it lives by — the nearest water cell within 3 cells, else the nearest flower cell — rotation.y = atan2(−dx, −dz) since the eyes look down local −Z; the record carries `faces` and `footprint`. These are PLACED bodies: no movement, no simulation. Each slot's cover clearing is a fixed radius (0.32 m a bloom, 0.5 m a body), so the cover is the same under every community. Three facts learned building it: a bloom slot must stand BLOOM_EDGE_M = 1.0 m inside the plate (a crown imperial at overall_scale 2.5 × growth 1.74 measured 0.67 m of reach from an outer-ring slot 0.31 m off the edge); a body's bounds must be composed from LOCAL transforms (measured through inverse(root.global) × node.global, a twin standing 30 m along x recorded a reach 1.6e-6 m different — the record drifted with the address); and the SDF builder's skin must be re-created with the body seed (the mapper draws pattern_rotation from the global randi() when handed no seed)",
 	"gen 14: the ladder — the object scaled down to primitives (Palle: 'flat ground, one seed, the point … can it morph backwards to the more primitive form we start out with?'). Two knobs: `stage` (`full`, the default — gen 13 byte for byte; else a hall name, a sequence key or anything BiomeGrammar.closure() accepts) and `phase` (0..1). Every layer is gated by the ladder's WORDS through one function, _amount(word): 0 when the stage's cumulative closure — the biome cage's — does not allow the word, `phase` when the word arrives at the stage's own hall (its made_of/does/knows, the sequence's entry on its first hall or when the stage is a sequence key), else 1; an amount of 0 is not built, one between 0 and 1 is built scaled. The layout is the seed's at every stage but one: the ecology reads the full-amplitude, full-noise field (_h_rule, _wl_rule, _amp), the trees' full rank k and full-jitter _pos, while the mesh and every body's foot read a rendered field (_field_render, _max_h = _amp x translate; the noise term mixed about its mean 0.5 by `field`), the built trunk mixes its k from the sapling's by `scale` and its stand from the cell centre by `sample`; the exception is Trans_Rotation, where the aspect term is the moisture's and gen 11 (b)'s re-roll walks in with the phase; _ladder() marks the cells a stage does not build `late` in the order the ecology took them (the shore tree first, the best meadow cell first, the rim and each path from the water out), the counts become the built counts, the resident slots are cut to `select` so a cut slot stands a dispatcher body. The words: point (Point_One) the seed — a 0.3 m black sphere 0.35 m over the basin centre, above the water once there is water, radius x phase; line (Point_Lines) thin grey rods on the surface from the point's foot toward every future trunk, 0.5 m segments ending 0.45 m short of it, length x phase, replaced by the mats when `fungus` arrives; lattice (Point_Line_Grid) a faint grey cell grid of ribbons following the surface, opacity x phase, removed by `colour`; face (Point_Triangle_Context) the section, its bands and base compressed toward the surface by phase; solid (Primitives_Polythedra) the crystals and their scree, scale x phase; sphere (Primitives_Ignorance) the pool disc and the reeds, radius and count x phase; subdivide (Primitives_Portals) the floor at the substrate's full resolution (two quads per cell), the 16-quad minimum before it, on at phase 0.5; ornament (Primitives_Melencolia) the cover, count x phase; translate (Trans_Translation) the rendered relief, amplitude x phase; rotate (Trans_Rotation) the aspect term and the shade centre's run, x phase; scale (Trans_Scale) the trees' rank sizes, lerp(sapling, k, phase); colour (Color_Context_Placed) the wet/dry paint x phase and every body's colour through _tint — the luminance grey before it, the foliage cards from it (grey stubble is the plain meshes); light (Color_Flashlight) the one shade law x phase — paint, water and understory follow; flower (Color_Rainbow) the meadow's first round(n x phase) cells and their bloom slots; paint (Color_Paint) shore, silt and rock x phase; sample (Random_Definition) the jitter of trunks, bodies and crystals x phase and the cover's samples travelling from a regular lattice toward their draws by a folded offset (spread at every phase); vary (Random_Entropy) tufts — count and radius x phase, one blade before; walk (Random_Walk) the creatures, first round(n x phase), lsystems' `creature` grants them too; fungus (Random_Mushrooms) the path mats, first round(len x phase) per path from the water, their growth steps x phase; ring (Random_Mushrooms) the rim mats; field (noise) the terrain's noise term; tree (lsystems) the trees, first round(n x phase) by succession; select (machinelearning) the residents — slots and fungus count x phase; absent, connect: recorded, no layer. Recorded under state.ladder (stage, phase, arrivals, amounts, layers, point/rods/lattice counts); the label carries _<stage>_p<phase x 100>",
 	"gen 16: the stones become primitives (Palle: 'that is very good, its a bit sublime, let the stones become a primitives'). The mineral kingdom was the one layer that still arrived whole: at Primitives_Polythedra a cluster of six to nine tilted prisms, with its scree already trailing down a ground that was still flat. It walks the ladder now, like everything else. `solid` (Primitives_Polythedra) stands ONE of the hall's own polyhedra per mineral cell — a cube, an octahedron (a SphereMesh at four radial segments and two rings) or a prism, by hash([seed, \"polyhedron\", cell]) — 0.52 x 0.72 x 0.52 m at the cluster's scale, square to the world. `subdivide` (Primitives_Portals) splits it: pieces = round(mix(1, shards, amount)), each piece's size mixed from the whole stone toward the shard's 0.11 m prism and each standing on the smallest ring that keeps pieces of that width clear of one another, r = w / (2 sin(pi/n)), so the cluster grows OUT of the solid instead of replacing it. Scaling that ring by the amount instead was the first try and it collapsed a half-split stone's halves into each other: the morph read as one solid until the last frame, and a split nobody can see is not a split. `translate` (Trans_Translation) is now what lets the scree run — no trail before the relief exists, and the trail's length x the amount — which also ends a gen 5 fiction: the scree used to run downhill on a plane that had no downhill. `sample` (Random_Definition) is the tilt: the holder's yaw, the pieces' offsets (from a regular ring of 0.12 x scale toward their drawn offsets) and the pieces' and the scree's rotations all mix from square/aligned (the scree lying at 0.95 rad, the mean of its draw) to their draws. `colour` keeps the grey through _tint as before. Every rng draw is taken at every amount and the surplus pieces are skipped AFTER drawing, so the pieces that stand are the same pieces at every phase and `full` is gen 14 to the byte. Counted as counts.stone_whole, the stones standing unsplit. The layer keeps the name \"crystals\" at every stage: gen 14's rule is that a stage's layers only GROW along the walk, and a name that changes at Primitives_Portals reads as a layer lost (the probe caught it)",
+	"gen 17: the stone gets NEIGHBOURS (all three gen-16 critics, independently: the mineral kingdom is the one kingdom nothing is placed BY — _rock and _clusters are read in three places in 2174 lines and all three are prohibitions — and the one arrow the stone does send out, the scree, runs backwards to its own driver; critic 3: 'generation 16 gave the stone a biography and left it with no neighbours'). Three changes, this file, and the first pass since gen 14 that moves `full`. (a) THE SCREE WALKS THE FALL LINE, AND THE LIP SCALES WITH THE RELIEF. Gen 5 took ONE height gradient at the cluster and never read it again, so the trail was a straight RAY, and it broke at hq > low_h + 0.02 — a flat 2 cm lip against an amplitude that runs 0.5–2.2 m across the DNA range. `relief` therefore CANCELLED ITSELF: the knob that lengthens the trail (n = 3 + round(4·relief)) also roughens the ground whose first 2 cm rise ends it. Measured on the six RSI DNAs, delivered against budget, ranked by relief: s11 (0.30) 5/8, s19 (0.40) 8/10, s7 (0.50) 15/15, s17 (0.60) 15/15, s23 (0.75) 6/18, s13 (0.80) 3/18 — the two worlds with a real landform laying 33 % and 17 %, and on s13 all THREE trails died on a rise without reaching anything at all. Now: the gradient is re-read at the point the walk has reached; the step SCHEDULE is gen 5's, measured along the walk (0.55 first, then 0.42 + 0.16i, so shard i still lands 0.55 + 0.5i + 0.08i² from its stone); the lip is 0.015 × _amp — 0.0203 m at relief 0.50, the amplitude the 2 cm was tuned at, 0.0152 at 0.30 and 0.0279 at 0.80 — and it is measured against the PREVIOUS sample and against the cluster rather than against a running minimum; and where the fall line points away from the basin, gen 5's substitution of the basin's way is BLENDED with the descent instead of replacing it ((d + t)·t = d·t + 1 >= 0, so the trail always gains ground on the water). After, on the same six: 13/15, 5/8, 15/18, 13/15, 10/10, 18/18 — 52 shards of 84 became 74, and the mean delivered fraction over the relief >= 0.70 worlds went 0.250 -> 0.917 against the relief <= 0.50 worlds' 0.808 -> 0.831. The steep worlds now lay MORE of their trail than the flat ones, which is the whole point. THREE INTERMEDIATE RULES WERE BUILT AND MEASURED AND ARE THE REASON FOR THE FINAL ONE, each worse than what followed: the scaled lip on gen 5's running minimum alone left the inversion standing (0.361 against 0.758) because a walk that takes the steepest way down drives the minimum down with it, so the next undulation stands over it — a ray descends slowly and never had that problem, which is why gen 5's rule survived eleven generations; an ABSOLUTE no-climb (no shard above its cluster at all) was worse still (0.250 against 0.647, s7 15 -> 10) because the crystal's own ±0.25 m jitter leaves its reference height anywhere on a bilinear cell, so an honest first step downhill measured 18.6 mm ABOVE it; and gen 5's outright substitution of the basin's way, simply re-read at every step, turns the walk across the contour and killed 2 of 3 trails on s13 and 2 of 3 on s23 on a rise. counts.scree_stop counts ONE REASON PER TRAIL (full / water / flood / edge / rise), because delivered-against-budget cannot tell a trail that ARRIVED from one that gave up: the budget asks for 5.05 m of run at relief 0.75 on a 12 m plate whose basin is in the middle, so a steep trail can reach the water with shards still unspent. Gen 16 measured s7 {full 3}, s11 {flood 2}, s13 {rise 3}, s17 {full 3}, s19 {full 1, flood 1}, s23 {full 1, rise 2}; gen 17 measures s7 {full 2, edge 1}, s11 {flood 1, rise 1}, s13 {full 1, water 1, rise 1}, s17 {full 1, water 1, rise 1}, s19 {full 2}, s23 {full 3}. s11 is the one world that does not gain: 5 shards either way, one of its two trails trading an arrival at the flood shelf for a rise — honest on the flattest world in the set, whose lip tightens 24 %. (b) ONE CREATURE PLACED BY THE ROCK (critic 3's proposal 1). _minerals() runs after _ecology(), so neither _rock nor _clusters exists when the living cells are chosen — but the mineral CELLS do, and the scree's first step is a fact about the basin alone, so the foot can be read off the cells: over each cluster's eight neighbours the free, non-water, in-range one nearest the basin centre that a creature may also stand in, and among the clusters the one whose foot is WETTEST. A second pass with its own stream, hash([seed, \"rock_fauna\"]), so no draw above it moves and every other layout number is bit-identical; appended LAST to _creature_order so _late() cuts it first; counted as counts.creature_rock beside the bumped counts.creature. All six worlds gain exactly one body: creature 3 -> 4 on s7, s11, s19 and s23, 2 -> 3 on s13, 4 -> 5 on s17. The family then chooses itself — _habitat_at measures near_mineral ~1 m at a scree foot, where the corpus median was 4.80 m and 8 of 11 rock_lurkers got nothing at all from the term that names them. (c) THAT BODY TURNS TO ITS STONE. _faces() knows water, flowers and mats only, so 0 of 18 bodies across the six faced a crystal. It lives in biome_residents.gd, which this pass may not touch, so _rock_faces() makes the turn here: after the residents layer has stood the body its holder is re-aimed onto the nearest cluster and the record it wrote is corrected — `faces`, and the footprint, recomputed as the body's own box through the new yaw with the residents layer's own arithmetic, so the probe's 'the recorded footprint is the measured one' still bites. Nothing else moves: position and scale do not read the yaw, and the cover's clearing is a fixed radius about the slot. The meadow's bodies are left alone — a creature living by the water should face the water. FIVE PLACES WHERE THIS WENT AGAINST THE INSTRUCTIONS, and why. (1) The blend, above: keeping gen 5's two guards exactly and changing only the sampling and the lip was measured and left the inversion standing. (2) counts.scree_stop is an instrument nobody asked for; without it the remaining shortfall could not be told from the plate's size, and it is what proved gen 16's s13 had no arriving trail at all. (3) The rock's CELL exists at every stage, not only where `walk` and `solid` are above zero: creating it conditionally breaks gen 14's layout contract (the cells are the seed's at every stage, which the probe reads from Trans_Rotation on), so the cell is a fact about the seed and the LADDER decides whether it STANDS, through `late` — which is also what 'cut it first' means. (4) Its intensity is drawn from the new stream (2 + randi(0, 1), the meadow creature's own rule) rather than fixed at 2: a stream that never draws is not a stream, and the rock's body should be the same kind of body as the meadow's. (5) The foot falls back to the next neighbour round: testing the spacing only on the single nearest-to-basin neighbour, as written, left s11 — the wettest and most crowded of the six — with no rock body at all, both its clusters blocked, while a good foot stood one cell further round. The spacing test is folded into the ranking instead (scree_foot(), public so the probe replays the rule and not a copy of it)",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 ## gen 11: THE SUN. The capture rig's key light (commons/testing/capture_config_sweep.gd,
@@ -202,6 +208,7 @@ var _amp: float = 1.0                # gen 14: the RULES' amplitude, 0.5 + 1.7·
 var _field_render: PackedFloat32Array = PackedFloat32Array()   # gen 14: the field the MESH and the feet read; the rules read _field
 var _meadow_order: Array[Vector2i] = []    # gen 14: the flower cells in the meadow's order, best first — the ladder builds the first k
 var _creature_order: Array[Vector2i] = []  # gen 14: the creature cells as the shuffle took them
+var _rock_cell: Vector2i = Vector2i(-1, -1) # gen 17: the creature cell the ROCK placed, at a scree foot; (-1, -1) when there is none
 var _rim_order: Array[Vector2i] = []       # gen 14: the rim mats as the shuffle took them
 var _ladder_counts: Dictionary = {}  # gen 14: point / rods / lattice — beside _counts, whose keys stay gen 13's
 
@@ -263,7 +270,14 @@ func _build() -> void:
 		"ms_tree": 0, "ms_flower": 0, "ms_fungus": 0, "ms_creature": 0,   # gen 3: the bill, by payer
 		"slots_bloom": 0, "slots_body": 0, "flower_dispatched": 0, "creature_dispatched": 0,   # gen 13: the slots handed over, the bodies the dispatcher still built
 		"residents_fungus": 0, "residents_bloom": 0, "residents_body": 0,
-		"stone_whole": 0}   # gen 16: the stones standing as one polyhedron, unsplit
+		"stone_whole": 0,   # gen 16: the stones standing as one polyhedron, unsplit
+		"creature_rock": 0,   # gen 17: the body placed by the rock, standing — 0 or 1, counted inside `creature`
+		# gen 17: one reason per scree trail — `water`/`flood` and `edge` are ARRIVALS (the ridge
+		# came down to the water, or ran off the plate), `rise` is the only failure, `full` means
+		# the trail laid its whole budget. Without this, delivered-against-budget cannot tell a
+		# trail that got there from one that gave up.
+		"scree_stop": {"full": 0, "water": 0, "flood": 0, "edge": 0, "rise": 0}}
+	_rock_cell = Vector2i(-1, -1)
 	_ladder_counts = {"point": 0, "rods": 0, "lattice": 0}
 	_closure_of_stage()   # gen 14: the words this stage allows and the words arriving at it
 	_patch = Node3D.new()
@@ -285,6 +299,7 @@ func _build() -> void:
 	if residents == "on" and _amount("select") > 0.0:
 		_residents = Residents.populate(self, community_seed)
 		_ladder_residents()   # gen 14: the fungus residents cut to the `select` amount
+		_rock_faces()         # gen 17: the body the rock placed turns to its own cluster
 	_counts["residents"] = _residents.size()
 	_counts["ms_residents"] = Time.get_ticks_msec() - residents_start
 	# gen 13: the residents by artifact — the count line's "flowers" and "creatures" stay the
@@ -412,6 +427,17 @@ func _ladder() -> void:
 	_counts["tree"] = _late(_trees, _amount("tree"))
 	_counts["flower"] = _late(_meadow_order, _amount("flower"))
 	_counts["creature"] = _late(_creature_order, maxf(_amount("walk"), _amount("creature")))
+	# gen 17: the rock's body stands only where its stone stands. The cell is the seed's at
+	# every stage (gen 14's layout contract), so the gate is `late`, not the cell's existence:
+	# _late() above cuts it first because _rock_fauna() appended it last, and `solid` cuts it
+	# too — before Primitives_Polythedra there is no crystal to be placed by.
+	_counts["creature_rock"] = 0
+	if _rock_cell.x >= 0:
+		if _amount("solid") <= 0.0 and not bool(_cells[_rock_cell].get("late", false)):
+			_cells[_rock_cell]["late"] = true
+			_counts["creature"] -= 1
+		if not bool(_cells[_rock_cell].get("late", false)):
+			_counts["creature_rock"] = 1
 	_counts["fungus"] = _late(_rim_order, _amount("ring"))
 	var a_path: float = _amount("fungus")
 	var built_path := 0
@@ -1057,6 +1083,7 @@ func _ecology() -> void:
 			_counts["creature"] += 1
 			_counts["slots_body"] += 1
 			_creature_order.append(key)
+	_rock_fauna()
 	# connections: fungus cells with a tree or flower next to them — the network touches the wood
 	for key in _cells.keys():
 		if String(_cells[key]["kingdom"]) != "fungus":
@@ -1067,6 +1094,138 @@ func _ecology() -> void:
 				if nk != key and _cells.has(nk) and String(_cells[nk]["kingdom"]) in ["tree", "flower"]:
 					_counts["connections"] += 1
 	_counts["water"] = _water.size()
+
+
+## gen 17 (b): a cluster's scree FOOT — among its eight neighbours, the free, non-water,
+## in-range cell nearest the basin centre that a creature may also stand in. This is
+## _free_neighbour()'s rule with the spacing test folded into the ranking rather than applied
+## to its single winner: measured on s11_m80_r30_w70, the wettest and most crowded of the six,
+## the nearest neighbour of BOTH its clusters was inside two cells of a meadow creature, so
+## testing only the winner left that world with no rock body at all while a good foot stood
+## one cell further round. Public, so the probe replays this rule and not a copy of it.
+func scree_foot(key: Vector2i, basin_w: Vector2) -> Vector2i:
+	var best := Vector2i(-1, -1)
+	var best_d := 99.0
+	for dz in range(-1, 2):
+		for dx in range(-1, 2):
+			var nk: Vector2i = key + Vector2i(dx, dz)
+			if (dx == 0 and dz == 0) or nk.x < 0 or nk.y < 0 or nk.x >= size or nk.y >= size:
+				continue
+			if _water.has(nk) or _cells.has(nk) or not _spaced_from(nk, 2, "creature"):
+				continue
+			var cw: Vector3 = _cell_world(nk.x, nk.y)
+			var d: float = basin_w.distance_to(Vector2(cw.x, cw.z))
+			if d < best_d:
+				best_d = d
+				best = nk
+	return best
+
+
+## gen 17 (c): the body the rock placed TURNS TO ITS STONE. The residents layer's _faces()
+## knows water, flowers and mats only, so across the six worlds not one of eighteen bodies
+## faced a crystal — eleven of them rock_lurkers, "coiled near the crystals". That function
+## lives in biome_residents.gd, which this pass may not touch (two of the three gen-16 critics
+## put it in the NEXT pass for that reason), so the turn is made here, by the only part of the
+## object that knows which cell the rock chose: after the layer has stood the body, its holder
+## is re-aimed onto the nearest cluster and the record it wrote is corrected — `faces`, and the
+## footprint, which is the body's own box turned by the yaw (residents' own arithmetic, so the
+## probe's "the recorded footprint is the measured one" still bites). Nothing else moves: the
+## holder's position and scale do not read the yaw, and the cover's clearing is a fixed radius
+## about the slot. The meadow's bodies are left to _faces() — a meadow creature living by the
+## water should face the water.
+func _rock_faces() -> void:
+	if _rock_cell.x < 0 or _clusters.is_empty() or _counts["creature_rock"] < 1:
+		return
+	for i in range(_residents.size()):
+		var r: Dictionary = _residents[i]
+		if String(r.get("artifact", "")) != "living_fauna_body":
+			continue
+		var slot: Array = r.get("slot", [])
+		if slot.size() < 2 or int(slot[0]) != _rock_cell.x or int(slot[1]) != _rock_cell.y:
+			continue
+		var holder: Node3D = _patch.get_node_or_null(NodePath(String(r["node"]))) as Node3D
+		if holder == null:
+			return
+		var pos: Array = r["position"]
+		var xz := Vector2(float(pos[0]), float(pos[2]))
+		var at: Vector2 = _clusters[0]
+		var best: float = xz.distance_to(at)
+		for c in _clusters:
+			var d: float = xz.distance_to(c)
+			if d < best:
+				best = d
+				at = c
+		# the eyes look down local −Z, as in the residents layer
+		var yaw: float = atan2(-(at.x - xz.x), -(at.y - xz.y))
+		holder.rotation.y = yaw
+		var bounds: AABB = Residents._bounds(holder)   # the body's own box, the holder's transform left out
+		var k: float = float(r["scale"])
+		var basis := Basis(Vector3.UP, yaw)
+		var fx0 := 99.0
+		var fz0 := 99.0
+		var fx1 := -99.0
+		var fz1 := -99.0
+		for cx in [bounds.position.x, bounds.end.x]:
+			for cz in [bounds.position.z, bounds.end.z]:
+				var w: Vector3 = basis * Vector3(cx, 0.0, cz) * k
+				fx0 = minf(fx0, xz.x + w.x)
+				fx1 = maxf(fx1, xz.x + w.x)
+				fz0 = minf(fz0, xz.y + w.z)
+				fz1 = maxf(fz1, xz.y + w.z)
+		r["faces"] = {"what": "mineral", "at": [at.x, at.y], "distance": best, "yaw": yaw}
+		r["footprint"] = [fx0, fz0, fx1, fz1]
+		_residents[i] = r
+		return
+
+
+## gen 17 (b): ONE creature placed BY the rock — the mineral kingdom's first outgoing relation
+## that is not a prohibition. Until now nothing in the world was placed by a crystal: _rock and
+## _clusters are read in three places and all three are refusals (the paint's tint, the cover's
+## 0.8 m skirt, the scree cell the cover will not take), and the one arrow the stone did send
+## out — the scree — runs away from it.
+##
+## A SECOND PASS with its own stream (hash([seed, "rock_fauna"])), so not one draw of the loops
+## above moves and every other layout number stays bit-identical. _minerals() runs after
+## _ecology(), so neither _rock nor _clusters exists here — but the mineral CELLS do, and the
+## scree's first step is a fact about the basin alone, so the foot can be read off the cells:
+## over each cluster's eight neighbours the free, non-water, in-range one whose centre lies
+## nearest the basin centre (the way the trail will go), and among the clusters the one whose
+## foot is WETTEST; the meadow's own spacing test against other creatures still has to pass.
+## Appended LAST to _creature_order, so _late() cuts it first.
+##
+## Whether it STANDS is the ladder's, not this function's (_ladder()): the cell is a fact about
+## the seed at every stage — gen 14's contract, which the probe's layout check enforces — and
+## the ladder marks it late before `walk` and wherever `solid` has not arrived, because a body
+## placed by a stone that is not there yet is not placed by anything.
+func _rock_fauna() -> void:
+	_rock_cell = Vector2i(-1, -1)
+	if _counts["mineral"] < 1:
+		return
+	var rrng := RandomNumberGenerator.new()
+	rrng.seed = hash([seed, "rock_fauna"])
+	var basin_w: Vector2 = _basin_c - Vector2(float(size), float(size)) * 0.5
+	var foot := Vector2i(-1, -1)
+	var foot_m := -1.0
+	for key in _cells.keys():
+		if String(_cells[key]["kingdom"]) != "mineral":
+			continue
+		var nk: Vector2i = scree_foot(key, basin_w)
+		if nk.x < 0:
+			continue
+		var fm: float = _moist[nk.y * size + nk.x]
+		if fm > foot_m:
+			foot_m = fm
+			foot = nk
+	if foot.x < 0:
+		return   # every cluster's neighbours are taken, water, off the plate or beside a creature
+	# the intensity is the meadow creature's own rule, drawn from THIS stream — a stream that
+	# never draws is not a stream, and the rock's body should be the same kind of body as the
+	# meadow's, not a fixed smallest one
+	_cells[foot] = {"kingdom": "creature", "inten": 2 + rrng.randi_range(0, 1), "algo": "", "resident": true}
+	_counts["creature"] += 1
+	_counts["slots_body"] += 1
+	_creature_order.append(foot)
+	_rock_cell = foot
 
 
 ## Array.shuffle() draws from the GLOBAL random and would make the same seed grow two
@@ -1622,16 +1781,6 @@ func _minerals() -> void:
 			continue   # gen 16: no scree before Trans_Translation — a flat ground has no downhill
 		var srng := RandomNumberGenerator.new()
 		srng.seed = hash([seed, "scree", key.x, key.y])
-		var g := Vector2(_h_rule(p.x + 0.5, p.z) - _h_rule(p.x - 0.5, p.z), _h_rule(p.x, p.z + 0.5) - _h_rule(p.x, p.z - 0.5))   # gen 14: the rules' slope
-		var to_basin: Vector2 = (basin_w - Vector2(p.x, p.z)).normalized()
-		var down: Vector2 = -g.normalized() if g.length() >= 0.02 else to_basin
-		# measured on the six DNAs (gen 5's builder): the ridge's cells are the rim's high dry
-		# cells, and from 11 of 16 clusters the local downhill led OFF the plate — the critic's
-		# rule as written ran no trail to the water. So the basin's direction also stands in
-		# for a downhill that leads away from it; the rise stop below keeps the trail honest
-		# where the ground climbs toward the water (a cluster behind a crest gets no scree)
-		if down.dot(to_basin) <= 0.0:
-			down = to_basin
 		var n: int = 3 + int(round(4.0 * relief))
 		if a_tr < 1.0:
 			n = int(round(float(n) * a_tr))   # gen 16: the trail runs out with the phase
@@ -1640,19 +1789,74 @@ func _minerals() -> void:
 		# the prism's half-diagonal at this scale: no shard's mesh past the footprint's edge
 		var margin: float = 0.12 * scale
 		var scol: Color = _tint(Color(0.62, 0.70, 0.88))
-		var low_h: float = _h_rule(p.x, p.z)   # the lowest surface the trail has reached (gen 14: the rules' surface)
+		# gen 17 (a): the LIP scales with the ground the trail is running on. 0.015 × _amp is
+		# 0.0203 m at relief 0.5 — the amplitude gen 5's flat 2 cm was tuned at — 0.0152 m on
+		# the flattest DNA and 0.0279 m on the steepest. A fixed 2 cm is 1.5 % of one world's
+		# amplitude and 1.1 % of another's, so `relief` cancelled itself: the knob that
+		# LENGTHENS the trail also roughens the ground whose first 2 cm rise breaks it, and
+		# above relief ~0.7 the second term won (measured on the six: 15/15 and 15/15 on the
+		# two mid worlds against 3/18 and 6/18 on the two steepest).
+		var lip: float = 0.015 * _amp
+		# gen 17 (a), measured: the scaled lip against gen 5's RUNNING MINIMUM was not enough —
+		# 0.36 against 0.76 on the six, still inverted — and it took 15 → 11 off s17 and 5 → 3
+		# off s11 while it gave s13 3 → 7. The running minimum and the fall line are in tension:
+		# a walk that takes the steepest way down drives the minimum down with it, so the very
+		# next undulation stands over it and the trail dies. A ray descends slowly and never
+		# had that problem, which is why gen 5's rule survived eleven generations.
+		# So the two statements are separated. LOCALLY the ground must keep falling: a step may
+		# rise by at most one lip over the step before it. GLOBALLY the trail may never stand
+		# above the stone it fell from — an absolute no-climb, and 2 cm TIGHTER at the top than
+		# gen 5's `low_h + 0.02`, which let a trail end above its own cluster.
+		var h_start: float = _h_rule(p.x, p.z)
+		var h_prev: float = h_start
+		# gen 17 (a): the trail WALKS. Gen 5 took ONE gradient sample at the cluster and never
+		# read it again, so the trail was a straight RAY: on rough ground it left the fall line
+		# after a shard or two and stood on the next rise, which is what broke it. The step
+		# SCHEDULE is gen 5's — shard i at 0.55 + 0.5i + 0.08i² from the cluster — measured now
+		# ALONG the walk (the increment is 0.42 + 0.16i), so shard i lands the same distance out
+		# on whatever line the ground gives it.
+		var walk := Vector2(p.x, p.z)
+		# gen 17: WHY a trail ends. "delivered against budget" alone cannot tell a trail that
+		# arrived from one that failed: a trail stopped by the water has come down to the water,
+		# which is the whole point of the layer, while one stopped by a rise has not. The budget
+		# n = 3 + round(4·relief) asks for 5.05 m of run at relief 0.75 and 6.43 m at 1.0, on a
+		# 12 m plate whose basin is in the middle, so on a steep world the fraction is bounded by
+		# the plate before it is bounded by the rule. Counted per trail, one reason each.
+		var stop := "full"
 		for i in range(n):
-			var q: Vector2 = Vector2(p.x, p.z) + down * (0.55 + 0.5 * float(i) + 0.08 * float(i * i))
+			var gq := Vector2(_h_rule(walk.x + 0.5, walk.y) - _h_rule(walk.x - 0.5, walk.y), _h_rule(walk.x, walk.y + 0.5) - _h_rule(walk.x, walk.y - 0.5))
+			var to_basin: Vector2 = (basin_w - walk).normalized()
+			var down: Vector2 = -gq.normalized() if gq.length() >= 0.02 else to_basin
+			# measured on the six DNAs (gen 5's builder): the ridge's cells are the rim's high dry
+			# cells, and from 11 of 16 clusters the local downhill led OFF the plate — the critic's
+			# rule as written ran no trail to the water. So the basin's direction also stands in
+			# for a downhill that leads away from it. gen 17: read at every step now, off the
+			# point the walk has reached — and BLENDED, not replaced. Gen 5 could substitute the
+			# basin's way outright because it decided once and then flew straight; a walk that
+			# re-reads cannot, because the substitution turns it across the contour and the rise
+			# stop below kills it. Measured with the outright substitution at every step: 2 of 3
+			# trails on s13 and 2 of 3 on s23 — the two steepest worlds, the ones this pass is
+			# for — died on a rise. Half the fall line and half the water always gains ground on
+			# the basin ((d + t)·t = d·t + 1 >= 0) and gives up as little of the descent as that
+			# costs; the rise stop still ends a trail that has a crest between it and the water.
+			if down.dot(to_basin) <= 0.0:
+				var blend: Vector2 = down + to_basin
+				down = blend.normalized() if blend.length() > 0.001 else to_basin
+			var q: Vector2 = walk + down * (0.55 if i == 0 else 0.42 + 0.16 * float(i))
 			if absf(q.x) > lim - margin or absf(q.y) > lim - margin:
+				stop = "edge"
 				break   # the grid edge
 			var qk := Vector2i(int(floor(q.x + lim)), int(floor(q.y + lim)))
 			if _water.has(qk):
+				stop = "water"
 				break   # a water cell
 			var hq: float = _h_rule(q.x, q.y)   # gen 14: the rules' surface — the trail is the seed's
 			if hq < wl + 0.02:
+				stop = "flood"
 				break   # a flooded sample — the shelf under the water
-			if hq > low_h + 0.02:
-				break   # a rise — scree runs down, never over a lip
+			if hq > h_prev + lip or hq > h_start + lip:
+				stop = "rise"
+				break   # a rise — scree runs down, never over a lip, never back above its stone
 			var mi := MeshInstance3D.new()
 			mi.name = "Scree_%d_%d_%d" % [key.x, key.y, i]
 			var pm := PrismMesh.new()
@@ -1676,7 +1880,10 @@ func _minerals() -> void:
 			_patch.add_child(mi)
 			_rock[qk] = maxf(float(_rock.get(qk, 0.0)), 0.35)
 			_counts["scree"] += 1
-			low_h = minf(low_h, hq)
+			h_prev = hq
+			walk = q   # gen 17: the next fall line is read from here
+		var stops: Dictionary = _counts["scree_stop"]
+		stops[stop] = int(stops[stop]) + 1
 
 
 

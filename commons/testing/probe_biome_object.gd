@@ -633,6 +633,7 @@ func _run() -> void:
 	# grows, phase 0 is the previous hall, three stages replay
 	await _check_gen14(a, b)
 	await _check_gen16(a)
+	await _check_gen17()
 	print("[probe_biome_object] %d checks, %d failed" % [_checks, _fails])
 	quit(0 if _fails == 0 else 1)
 
@@ -1350,8 +1351,15 @@ func _check_residents(o) -> void:
 				var dot: float = fwd.dot(to_target.normalized()) if to_target.length() > 0.001 else 1.0
 				worst_dot = minf(worst_dot, dot)
 				var what := String(faces["what"])
-				var what_ok: bool = (what == "water" and o._water_dist(sk.x, sk.y) <= 3.0) or (what == "flower" and o._water_dist(sk.x, sk.y) > 3.0) or what == "mycelium"
-				if what == "water":
+				# gen 17: a fourth resource — the rock's own body faces its cluster, and only it
+				var what_ok: bool = (what == "water" and o._water_dist(sk.x, sk.y) <= 3.0) or (what == "flower" and o._water_dist(sk.x, sk.y) > 3.0) or what == "mycelium" or (what == "mineral" and sk == o._rock_cell)
+				if what == "mineral":
+					var on_cl := false
+					for cl in o._clusters:
+						if Vector2(float(target[0]), float(target[1])).distance_to(cl) < 0.001:
+							on_cl = true
+					what_ok = what_ok and on_cl
+				elif what == "water":
 					what_ok = what_ok and o._water.has(Vector2i(int(floor(float(target[0]) + half)), int(floor(float(target[1]) + half))))
 				elif what == "flower":
 					var fk := Vector2i(int(floor(float(target[0]) + half)), int(floor(float(target[1]) + half)))
@@ -1544,21 +1552,34 @@ func _check_gen13(b, twin, b1, off) -> void:
 ## Gen 14: the ladder (see the header). `a` and `b` are the s7 and s11 worlds built at the
 ## default stage; the gen-13 counts asserted on them are the ones the gen-13 probe printed.
 func _check_gen14(a, b) -> void:
-	# (a) full is gen 13
+	# (a) full is the shipped world, count for count. Gen 14 wrote gen 13's numbers here and gen
+	# 16 left every one of them standing; gen 17 is the first pass since that moves `full`, so
+	# the table is gen 17's, with the gen-13 value beside every number that changed and why:
+	#   scree      the trail follows the fall line now and breaks on a lip that scales with the
+	#              relief — s11, the flattest world in the probe's four, loses 5 -> 3
+	#   creature   + the one body the rock places at a scree foot (gen 17 b)
+	#   residents / residents_body   that body is a resident slot like every other creature cell
+	#   residents_fungus, cover, paint   s7's new body stands where a fruiting colony's gap was,
+	#              so one colony is displaced and its clearing goes back to the cover
+	var g17 := {
+		"s7_m50_r50_w60": {"water": 8, "mineral": 3, "scree": 13, "fungus": 4, "fungus_path": 4, "tree": 4, "flower": 15, "creature": 4, "cover": 572, "connections": 25, "paint": 235, "residents": 12, "residents_fungus": 3, "residents_bloom": 5, "residents_body": 4, "creature_rock": 1},
+		"s11_m85_r30_w70": {"water": 14, "mineral": 2, "scree": 4, "fungus": 6, "fungus_path": 7, "tree": 5, "flower": 24, "creature": 4, "cover": 790, "connections": 34, "paint": 260, "residents": 13, "residents_fungus": 4, "residents_bloom": 5, "residents_body": 4, "creature_rock": 1},
+	}
 	var g13 := {
-		"s7_m50_r50_w60": {"water": 8, "mineral": 3, "scree": 15, "fungus": 4, "fungus_path": 4, "tree": 4, "flower": 15, "creature": 3, "cover": 467, "connections": 25, "paint": 237, "residents": 12, "residents_fungus": 4, "residents_bloom": 5, "residents_body": 3},
-		"s11_m85_r30_w70": {"water": 14, "mineral": 2, "scree": 5, "fungus": 6, "fungus_path": 7, "tree": 5, "flower": 24, "creature": 3, "cover": 790, "connections": 34, "paint": 261, "residents": 12, "residents_fungus": 4, "residents_bloom": 5, "residents_body": 3},
+		"s7_m50_r50_w60": {"scree": 15, "creature": 3, "cover": 467, "paint": 237, "residents_fungus": 4, "residents_body": 3},
+		"s11_m85_r30_w70": {"scree": 5, "creature": 3, "paint": 261, "residents": 12, "residents_body": 3},
 	}
 	for o in [a, b]:
 		var lab: String = o.label()
 		var st0: Dictionary = o.get_state()
 		var cnt: Dictionary = st0["counts"]
-		var want: Dictionary = g13.get(lab, {})
+		var want: Dictionary = g17.get(lab, {})
+		var was: Dictionary = g13.get(lab, {})
 		var off: Array = []
 		for k in want.keys():
 			if int(cnt.get(k, -1)) != int(want[k]):
-				off.append("%s %d (gen 13: %d)" % [k, int(cnt.get(k, -1)), int(want[k])])
-		_check(not want.is_empty() and off.is_empty(), "[gen14] %s at full carries gen 13's counts%s" % [lab, "" if off.is_empty() else " — " + ", ".join(off)])
+				off.append("%s %d (gen 17: %d%s)" % [k, int(cnt.get(k, -1)), int(want[k]), "" if not was.has(k) else ", gen 13: %d" % int(was[k])])
+		_check(not want.is_empty() and off.is_empty(), "[gen14] %s at full carries gen 17's counts%s" % [lab, "" if off.is_empty() else " — " + ", ".join(off)])
 		_check(String(st0["ladder"]["stage"]) == "full" and o._patch.get_node_or_null("Point") == null and o._patch.get_node_or_null("Rods") == null and o._patch.get_node_or_null("Lattice") == null, "[gen14] %s: full builds no seed, rods or lattice — the RSI's tiles are gen 13's" % lab)
 	var full7 = await _grow(7, 0.5, 0.5, 0.6, {"stage": "full", "record": "off"})
 	var sa: Dictionary = a.get_state()
@@ -1655,7 +1676,10 @@ func _check_gen14(a, b) -> void:
 	_check(grows, "[gen14] along the walk the layers standing only grow (the rods go to the mats, the lattice to the colour)")
 	_check(never_falls, "[gen14] along the walk the trees, flowers, creatures, mats and residents never fall")
 	_check(layout_same and layout_read >= 40, "[gen14] from Trans_Rotation on the cells are full's — the layout is the seed's (%d stages read)" % layout_read)
-	_check(prev_layers.has("trees") and prev_layers.has("residents") and prev_layers.has("point") and int(prev_counts["tree"]) == 4 and int(prev_counts["residents"]) == 12, "[gen14] the last stage stands the whole world with the seed still in it (%s)" % str(prev_layers))
+	# gen 17: the resident count is read off the default build rather than written here as a
+	# literal — the next check pins the last stage to `full` exactly, so a second copy of the
+	# number only went stale (it did, the moment the rock placed a body)
+	_check(prev_layers.has("trees") and prev_layers.has("residents") and prev_layers.has("point") and int(prev_counts["tree"]) == 4 and int(prev_counts["residents"]) == int(a.get_state()["counts"]["residents"]) and int(prev_counts["residents"]) > 0, "[gen14] the last stage stands the whole world with the seed still in it (%s)" % str(prev_layers))
 	# the last stage IS full plus the seed: cells, counts, cover plan, residents; one more organism
 	var sl: Dictionary = last.get_state()
 	var sa2: Dictionary = a.get_state()
@@ -1875,4 +1899,175 @@ func _mesh_row(mi: MeshInstance3D) -> String:
 		sz = Vector3((mi.mesh as SphereMesh).radius, (mi.mesh as SphereMesh).height, 0.0)
 	return "[%s %.5f,%.5f,%.5f @%.5f,%.5f,%.5f r%.5f,%.5f,%.5f]" % [mi.mesh.get_class(), sz.x, sz.y, sz.z,
 		mi.position.x, mi.position.y, mi.position.z, mi.rotation.x, mi.rotation.y, mi.rotation.z]
+
+
+## Gen 17 — the mineral kingdom gets neighbours. Read on the RSI's OWN six DNAs, not the
+## probe's four, because the claim under test is a claim about that corpus.
+##
+## (a) THE SCREE FOLLOWS THE FALL LINE and the lip scales with the relief. Gen 16 took one
+##     gradient sample at the cluster, so the trail was a straight RAY, and broke it on a flat
+##     2 cm lip against an amplitude that runs 0.5-2.2 m: `relief` cancelled itself. Delivered
+##     against budget (mineral x (3 + round(4.relief))) on gen 16, ranked by relief: s11 (0.30)
+##     5/8, s19 (0.40) 8/10, s7 (0.50) 15/15, s17 (0.60) 15/15, s23 (0.75) 6/18, s13 (0.80)
+##     3/18. THE NEGATIVE TEST: the mean delivered fraction over the worlds at relief >= 0.70
+##     may not be below the mean over those at relief <= 0.50. On gen 16 that is 0.25 against
+##     0.81 — it FAILS, which is the whole finding. Beside it: every world delivers at least
+##     half its budget (gen 16: s13 at 0.17 and s23 at 0.33 fail), and no shard stands over its
+##     cluster by more than the lip the trail is allowed, 0.015 x _amp — the scale-relative
+##     form of gen 5's flat 0.05, and tighter than it on every DNA in the set.
+## (b) ONE BODY PLACED BY THE ROCK. counts.creature_rock is 1 exactly where a mineral cell
+##     stands (on gen 16 the key does not exist at all), the cell is a mineral cell's neighbour
+##     and last in the creature order, and a world with NO mineral cell gains none.
+## (c) THAT BODY FACES ITS STONE: faces.what == "mineral" — on gen 16, 0 of 18 bodies across
+##     these six faced a crystal — the target IS a cluster's xz, the holder's -Z points at it,
+##     and its habitat records a crystal within 2.2 m.
+func _check_gen17() -> void:
+	var dnas := [[7, 0.50, 0.50, 0.60], [11, 0.80, 0.30, 0.70], [13, 0.30, 0.80, 0.40],
+		[17, 0.60, 0.60, 0.90], [19, 0.45, 0.40, 0.50], [23, 0.70, 0.75, 0.80]]
+	var high := 0.0
+	var high_n := 0
+	var low := 0.0
+	var low_n := 0
+	var rows: Array = []
+	var rock_seen := 0
+	var faced := 0
+	for d in dnas:
+		var o = await _grow(int(d[0]), float(d[1]), float(d[2]), float(d[3]), {"size": 12, "record": "off"})
+		var lab: String = o.label()
+		var cnt: Dictionary = o.get_state()["counts"]
+		var n_min: int = int(cnt["mineral"])
+		var budget: int = n_min * (3 + int(round(4.0 * float(d[2]))))
+		var got: int = int(cnt["scree"])
+		var frac: float = float(got) / maxf(1.0, float(budget))
+		var stops: Dictionary = cnt.get("scree_stop", {})
+		rows.append("%s r%.2f %d/%d=%d%% %s" % [lab, float(d[2]), got, budget, int(round(frac * 100.0)), str(stops)])
+		_check(budget == 0 or float(got) >= 0.5 * float(budget), "[gen17] %s: the trail delivers at least half its budget (%d of %d)" % [lab, got, budget])
+		# and every world sends at least one FINISHED arrow. A single trail may still meet a real
+		# crest between its stone and the water and stop there — gen 5's own contract, "a cluster
+		# behind a crest gets no scree" — so `rise` is not forbidden; what is forbidden is a world
+		# where the mineral kingdom's every arrow gives up, which is what the two steepest worlds
+		# were (s13 laid 1 shard per cluster of a budget of 6).
+		var arrived: int = int(stops.get("full", 0)) + int(stops.get("water", 0)) + int(stops.get("flood", 0)) + int(stops.get("edge", 0))
+		_check(n_min == 0 or arrived >= 1, "[gen17] %s: at least one trail arrives — %d reach water, the edge or their whole budget, %d die on a rise %s" % [lab, arrived, int(stops.get("rise", 0)), str(stops)])
+		if float(d[2]) >= 0.7:
+			high += frac
+			high_n += 1
+		elif float(d[2]) <= 0.5:
+			low += frac
+			low_n += 1
+		# the descent, scale-relative: no shard may stand above its own cluster by more than the
+		# one lip the trail is allowed. Gen 5 allowed a flat 2 cm there and the gen-5 probe check
+		# allows 0.05, so this is the tighter statement on every DNA in the set (0.0152 m at
+		# relief 0.30, 0.0279 m at 0.80) and it is the new rule's own public promise. Asserting a
+		# flat zero instead was tried and is wrong: the crystal's own ±0.25 m jitter puts its
+		# reference height anywhere on a bilinear cell, so an honest first step downhill measured
+		# 0.0186 m ABOVE it on s7 — and forcing that to zero cost s7 15 shards of 15 to 10.
+		var lip: float = 0.015 * o._amp
+		var climbed := 0
+		var worst := -9.0
+		for ch in o._patch.get_children():
+			if not (ch is MeshInstance3D) or not String(ch.name).begins_with("Scree_"):
+				continue
+			var parts: PackedStringArray = String(ch.name).split("_")
+			var hold: Node3D = o._patch.get_node_or_null("Crystal_%s_%s" % [parts[1], parts[2]]) as Node3D
+			if hold == null:
+				continue
+			var rise: float = o._h_rule(ch.position.x, ch.position.z) - o._h_rule(hold.position.x, hold.position.z)
+			worst = maxf(worst, rise)
+			if rise > lip + 0.0001:
+				climbed += 1
+		_check(climbed == 0, "[gen17] %s: no shard stands above its cluster by more than the lip %.4f m (worst rise %.4f, %d climb)" % [lab, lip, worst, climbed])
+		# why a world got NO rock body: the rule replayed over its mineral cells. Only meaningful
+		# where none was placed — where one was, the cell it took is now in _cells and the replay
+		# would report its own foot as crowded.
+		if int(cnt.get("creature_rock", -1)) == 0 and n_min >= 1:
+			var feet: Array = []
+			for mk in o._cells.keys():
+				if String(o._cells[mk]["kingdom"]) != "mineral":
+					continue
+				var nk: Vector2i = o.scree_foot(mk, o._basin_c - Vector2(float(o.size), float(o.size)) * 0.5)
+				if nk.x < 0:
+					feet.append("%s: no foot — every neighbour taken, water, off the plate or beside a creature" % str(mk))
+				else:
+					feet.append("%s: foot %s m%.2f FREE" % [str(mk), str(nk), o._moist[nk.y * o.size + nk.x]])
+			print("    [gen17] %s has no rock body — the feet: %s" % [lab, "; ".join(feet)])
+		# (b) the body the rock placed
+		var rock: int = int(cnt.get("creature_rock", -1))
+		_check(rock == (1 if n_min >= 1 else 0), "[gen17] %s: counts.creature_rock is %d for %d mineral cells" % [lab, rock, n_min])
+		if rock == 1:
+			rock_seen += 1
+			var rk: Vector2i = o._rock_cell
+			var beside_rock := false
+			for dz in range(-1, 2):
+				for dx in range(-1, 2):
+					var nk: Vector2i = rk + Vector2i(dx, dz)
+					if (dx != 0 or dz != 0) and o._cells.has(nk) and String(o._cells[nk]["kingdom"]) == "mineral":
+						beside_rock = true
+			var order: Array = o._creature_order
+			_check(beside_rock and String(o._cells[rk]["kingdom"]) == "creature" and order.size() > 0 and order[order.size() - 1] == rk,
+				"[gen17] %s: the rock's creature cell %s is a mineral cell's neighbour and last in the creature order" % [lab, str(rk)])
+			# (c) and that body turns to its stone
+			var rec: Dictionary = {}
+			for r in o._residents:
+				var sl: Array = r.get("slot", [])
+				if String(r.get("artifact", "")) == "living_fauna_body" and sl.size() == 2 and int(sl[0]) == rk.x and int(sl[1]) == rk.y:
+					rec = r
+			var faces: Dictionary = rec.get("faces", {}) if not rec.is_empty() else {}
+			var what := String(faces.get("what", "none"))
+			var at: Array = faces.get("at", [99.0, 99.0])
+			var on_cluster := false
+			for cl in o._clusters:
+				if Vector2(float(at[0]), float(at[1])).distance_to(cl) < 0.001:
+					on_cluster = true
+			var dot := -9.0
+			var near_min := 99.0
+			var hold2: Node3D = o._patch.get_node_or_null(NodePath(String(rec.get("node", "-")))) as Node3D
+			if hold2 != null:
+				var pos: Array = rec["position"]
+				near_min = float(rec.get("near_mineral", 99.0))
+				var to_t := Vector2(float(at[0]) - float(pos[0]), float(at[1]) - float(pos[2]))
+				var fwd3: Vector3 = -hold2.transform.basis.z
+				dot = Vector2(fwd3.x, fwd3.z).normalized().dot(to_t.normalized()) if to_t.length() > 0.001 else 1.0
+			if what == "mineral":
+				faced += 1
+			_check(what == "mineral" and on_cluster and dot > 0.7 and near_min <= 2.2,
+				"[gen17] %s: the rock's body faces its own cluster (what %s, on a cluster %s, dot %.2f, crystal at %.2f m)" % [lab, what, str(on_cluster), dot, near_min])
+		o.queue_free()
+	print("    [gen17] scree delivered: %s" % " | ".join(rows))
+	var hm: float = high / maxf(1.0, float(high_n))
+	var lm: float = low / maxf(1.0, float(low_n))
+	print("    [gen17] mean delivered fraction: relief >= 0.70 %.3f (%d worlds), relief <= 0.50 %.3f (%d worlds)" % [hm, high_n, lm, low_n])
+	_check(high_n == 2 and low_n == 3 and hm >= lm,
+		"[gen17] relief no longer cancels itself: the steep worlds deliver %.2f against the flat worlds' %.2f (gen 16: 0.25 against 0.81)" % [hm, lm])
+	_check(rock_seen == 6 and faced == 6, "[gen17] all six RSI worlds stand a body placed by their rock and all six face it (%d placed, %d facing; gen 16: 0 of 18 bodies faced a crystal)" % [rock_seen, faced])
+	# the rule bites only where there IS rock: a world with no mineral cell gains no creature
+	var dry_ok := false
+	var tried: Array = []
+	for cand in [{"size": 6, "moisture": 0.95, "relief": 0.05}, {"size": 6, "moisture": 0.90, "relief": 0.20},
+			{"size": 5, "moisture": 0.95, "relief": 0.10}, {"size": 4, "moisture": 0.95, "relief": 0.10}]:
+		var cfg: Dictionary = cand.duplicate()
+		cfg["record"] = "off"
+		var o = await _grow(7, float(cand["moisture"]), float(cand["relief"]), 0.6, cfg)
+		var cnt: Dictionary = o.get_state()["counts"]
+		tried.append("size %d m%.2f: mineral %d, creature %d, rock %d" % [int(cand["size"]), float(cand["moisture"]), int(cnt["mineral"]), int(cnt["creature"]), int(cnt.get("creature_rock", -1))])
+		if int(cnt["mineral"]) == 0:
+			dry_ok = true
+			var beside_only := true
+			for key in o._cells.keys():
+				if String(o._cells[key]["kingdom"]) != "creature":
+					continue
+				var near := 0
+				for dz in range(-1, 2):
+					for dx in range(-1, 2):
+						var nk: Vector2i = key + Vector2i(dx, dz)
+						if o._cells.has(nk) and String(o._cells[nk]["kingdom"]) in ["flower", "fungus"]:
+							near += 1
+				beside_only = beside_only and near >= 2
+			_check(int(cnt.get("creature_rock", -1)) == 0 and o._rock_cell.x < 0 and beside_only,
+				"[gen17] a world with no mineral cell gains no rock body — every creature is still the meadow's (%d creatures)" % int(cnt["creature"]))
+			o.queue_free()
+			break
+		o.queue_free()
+	print("    [gen17] the no-mineral search: %s" % str(tried))
+	_check(dry_ok, "[gen17] a world with no mineral cell was reached (the negative case was actually exercised)")
 
