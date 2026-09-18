@@ -64,7 +64,7 @@ const Dispatcher := preload("res://commons/biome_layers/biome_paint_dispatcher.g
 const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 
-const GENERATION := 7
+const GENERATION := 8
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
@@ -74,6 +74,7 @@ const CHANGELOG: Array[String] = [
 	"gen 5: scree — the ridge comes down to the water. After each cluster's shard loop (its draws untouched) a second rng seeded from the cell lays 3 + round(4·relief) shards down the slope: down = −(height gradient at the cluster, ±0.5 m samples), toward the basin when |g| < 0.02 or when downhill leads away from it (measured: from the rim's ridge cells the bare gradient ran 11 of 16 trails off the plate and none to the water); shard i at p + down·(0.55 + 0.5i + 0.08i²), the trail ending at a water cell, the edge (the prism's half-diagonal 0.12·scale inside it), a flooded sample (h < wl + 0.02) or a rise (h over the trail's lowest point + 0.02); each a PrismMesh (0.09, randf(0.08, 0.2)·(1 − 0.6i/n), 0.09)·scale lying at rotation (0.6..1.3, 0..TAU, ±0.3), the crystal colour at emission ×0.2, added to the patch at the sample, its centre 0.3 h above the surface. A _rock map — 0.6 at the cluster, 0.3 on its eight neighbours, 0.35 per scree cell (max) — painted as a sixth layer, rock [0.56, 0.55, 0.50], after the silt and before the shade; the cover skips samples within 0.8 m of a cluster; the ridge is 3.0 cells from the water",
 	"gen 6: ground cover grows in moisture-sized tufts, reed beds at the shore and flat litter beneath the inner canopy; each member respects water, mineral ground and the footprint, the group has a private seeded rng, the budget is at most 864 instances; all other kingdom placement rules are unchanged",
 	"gen 7: water depth under the canopy, the web's light by its growth. The pool's disc is a 48-segment SurfaceTool fan, 6 rings deep (289 vertices, 528 tris — one ring cannot carry a profile), its vertex colours the albedo, no emission, roughness 0.08, metallic 0.3: centre (0.06, 0.20, 0.44, 0.92) to rim (0.24, 0.50, 0.68, 0.62) by u^1.5, every vertex's rgb × (1 − 0.45·vs), vs = max over trees of (1 − d/canopy)^0.6 with d the vertex's distance to the trunk — the ground's shade law — the alpha kept so the shaded water is darker, not thinner; the pool built AFTER _dispatch() (terrain, ecology, minerals, dispatch, pool, ground, cover) so vs reads the measured canopy — nothing between read the Pool node and the pool's rng is the seed's, so no draw moved. Each mycelium mat's MyceliumWeb material duplicated (mats share no instance) and its emission_energy_multiplier set to lerp(0.55, 0.22, t), t = (25 − gen)/15 — a rim mat carries no gen and reads 25 — the colour kept, the spores untouched. The cluster spires' emission col × 0.15 (was 0.5), roughness 0.35 (was 0.22); the scree untouched Amended before the render by the gen-6 critic: the ring dropped (the depth gradient is the edge) and the web's light reversed — dim (0.22) at the finished rim, bright (0.55) at the growing tip on the bark",
+	"gen 8: grass and plant foliage as transparent images (Palle) — the cover's grass, reeds, ferns, meadow plants and litter are alpha-cut cards on two crossed quads, images from commons/biome_layers/foliage/ (tools/make_foliage_cards.py draws the defaults, any same-named PNG replaces one) loaded at runtime, tinted near white by dryness and shade; mushrooms keep their mesh; a missing image falls back to the old mesh",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 const K_TREE := 0
@@ -981,6 +982,80 @@ func _web_light(n: Node, c: Dictionary) -> void:
 ## green to straw by dryness. Gen 6 groups the samples: each tuft shares a colour and
 ## species, has its own seeded member stream, and reads canopy/shore conditions. Each
 ## member checks its own landing and mesh bounds; counts and the CPU plan remain inspectable.
+## FOLIAGE CARDS (gen 8, Palle: "can we add grass and plant foliage? transparent image").
+## The cover's kinds are drawn as alpha-cut images on two crossed quads instead of a plain
+## quad, a cylinder and a sphere. The images are commons/biome_layers/foliage/<kind>.png
+## (tools/make_foliage_cards.py draws the defaults; any 512 x 512 RGBA PNG of the same name
+## replaces one), loaded at runtime by name so no import step and no editor is needed; a
+## missing image falls back to the old mesh for that kind. Card height in metres at scale 1:
+const FOLIAGE_DIR := "res://commons/biome_layers/foliage/"
+const CARD_KIND := {"grass": "grass", "reed": "reed", "fern": "fern", "flower": "plant", "litter": "litter"}
+const CARD_HEIGHT := {"grass": 0.42, "reed": 0.85, "fern": 0.50, "flower": 0.55, "litter": 0.45}
+static var _card_tex: Dictionary = {}
+static var _card_mesh: Mesh = null
+
+
+## The image for a kind, or null when the file is not there.
+static func _foliage_texture(card: String) -> Texture2D:
+	if _card_tex.has(card):
+		return _card_tex[card]
+	var path: String = FOLIAGE_DIR + card + ".png"
+	var tex: Texture2D = null
+	if FileAccess.file_exists(path):
+		var img := Image.new()
+		if img.load(ProjectSettings.globalize_path(path)) == OK:
+			img.generate_mipmaps()
+			tex = ImageTexture.create_from_image(img)
+	_card_tex[card] = tex
+	return tex
+
+
+## Two crossed unit quads, the foot at the origin, the top at y = 1, normals UP so both sides
+## light like the ground they stand on and no card is a dark backface.
+static func _crossed_card() -> Mesh:
+	if _card_mesh != null:
+		return _card_mesh
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for k in range(2):
+		var ax: Vector3 = Vector3.RIGHT if k == 0 else Vector3.BACK
+		var corners := [ax * -0.5, ax * 0.5, ax * 0.5 + Vector3.UP, ax * -0.5 + Vector3.UP]
+		var uvs := [Vector2(0, 1), Vector2(1, 1), Vector2(1, 0), Vector2(0, 0)]
+		var order := [0, 2, 1, 0, 3, 2]
+		for i in order:
+			st.set_normal(Vector3.UP)
+			st.set_uv(uvs[i])
+			st.add_vertex(corners[i])
+	_card_mesh = st.commit()
+	return _card_mesh
+
+
+static func _card_material(tex: Texture2D) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_texture = tex
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
+	m.alpha_scissor_threshold = 0.45
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	m.vertex_color_use_as_albedo = true
+	m.roughness = 0.95
+	m.metallic = 0.0
+	m.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
+	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+	return m
+
+
+## The tint a card member carries: the image is already green, so the tint sits near white
+## and only says dry (straw) or shaded; the old flat-colour tints would blacken it.
+static func _card_tint(kind: String, m: float, shaded: bool, rng: RandomNumberGenerator) -> Color:
+	var j: float = rng.randf_range(-0.05, 0.05)
+	var c := Color(0.96 + j, 0.98 + j, 0.92 + j)
+	if kind == "grass" or kind == "reed":
+		c = c.lerp(Color(1.0, 0.86, 0.55), clampf(1.0 - 1.4 * m, 0.0, 1.0))
+	if shaded:
+		c = Color(c.r * 0.72, c.g * 0.72, c.b * 0.72)
+	return c
+
+
 func _cover() -> void:
 	var started := Time.get_ticks_msec()
 	_cover_tufts.clear()
@@ -989,6 +1064,7 @@ func _cover() -> void:
 	var want: int = clampi(int(round(float(size * size) * (1.2 + 2.6 * wildness) * (0.5 + 0.6 * moisture))), 40, 480)
 	var budget := int(floor(float(want) * 1.8))
 	var by_type: Dictionary = {}
+	var cards: Dictionary = {}       # kind -> Texture2D (a card) or null (the old mesh)
 	var meshes: Dictionary = {}
 	var placed := 0
 	var tries := 0
@@ -1063,8 +1139,14 @@ func _cover() -> void:
 			"flower": count = 3 + int(round(4.0 * m))
 			"litter": count = 3 + int(round(3.0 * m))
 		if not meshes.has(kind):
-			meshes[kind] = Cover.mesh_for("fern" if kind == "litter" else kind)
+			var card_tex: Texture2D = _foliage_texture(String(CARD_KIND.get(kind, ""))) if CARD_KIND.has(kind) else null
+			meshes[kind] = _crossed_card() if card_tex != null else Cover.mesh_for("fern" if kind == "litter" else kind)
+			cards[kind] = card_tex
 		var mesh: Mesh = meshes[kind]
+		# one tint per tuft (a group shares its colour, as gen 6 ruled): near white, dry or shaded
+		var tuft_tint: Color = _card_tint(kind, m, shaded, tuft_rng) if cards.get(kind) != null else col
+		if cards.get(kind) != null and kind == "litter":
+			tuft_tint = Color(0.9, 0.86, 0.8)
 		var members: Array = []
 		for blade in count:
 			if placed >= budget:
@@ -1084,6 +1166,8 @@ func _cover() -> void:
 				if not under:
 					continue
 			var scale_: float = sc * (1.0 - 0.4 * rad / radius) * tuft_rng.randf_range(0.85, 1.15)
+			if cards.get(kind) != null:
+				scale_ *= float(CARD_HEIGHT.get(kind, 0.5))
 			var basis := Basis(Vector3.UP, yaw + angle)
 			if kind == "litter":
 				basis = basis * Basis(Vector3.RIGHT, -PI * 0.5)
@@ -1093,10 +1177,11 @@ func _cover() -> void:
 				continue
 			# All cover meshes sit by their foot; centred reed/cap meshes must not be half buried.
 			var xf := Transform3D(basis, Vector3(q.x, _h_at(q.x, q.y) - bounds.position.y + 0.012, q.y))
-			members.append([xf, col])
+			var mcol: Color = tuft_tint
+			members.append([xf, mcol])
 			if not by_type.has(kind):
 				by_type[kind] = []
-			(by_type[kind] as Array).append([xf, col])
+			(by_type[kind] as Array).append([xf, mcol])
 			placed += 1
 		if not members.is_empty():
 			_cover_tufts.append({"type": kind, "centre": here, "moisture": m, "radius": radius, "members": members})
@@ -1113,9 +1198,13 @@ func _cover() -> void:
 		var mmi := MultiMeshInstance3D.new()
 		mmi.name = "Cover_%s" % String(kind)
 		mmi.multimesh = mm
-		mmi.material_override = Cover.foliage_material()
+		mmi.material_override = _card_material(cards[kind]) if cards.get(kind) != null else Cover.foliage_material()
 		_patch.add_child(mmi)
 	_counts["cover"] = placed
+	_counts["cover_cards"] = 0
+	for kind in by_type.keys():
+		if cards.get(kind) != null:
+			_counts["cover_cards"] += (by_type[kind] as Array).size()
 	_counts["cover_tufts"] = _cover_tufts.size()
 	_counts["cover_litter"] = (by_type.get("litter", []) as Array).size()
 	_counts["ms_cover"] = Time.get_ticks_msec() - started

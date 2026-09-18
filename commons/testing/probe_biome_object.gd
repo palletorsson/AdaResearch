@@ -491,6 +491,35 @@ func _run() -> void:
 	var other = await _grow(8, 0.5, 0.5, 0.6)
 	_check(other._basin_c != a._basin_c or str(_world_counts(other.get_state()["counts"])) != str(ca), "a different seed grows a different world")
 	_check(FileAccess.file_exists("res://ada_run/biome_rsi/state/%s.json" % a.label()), "the record is written")
+	# gen 8: foliage cards — the images exist and load, the cover's card kinds use the crossed
+	# card with an alpha-scissor material, and a card member's foot stays on the surface
+	for card in ["grass", "reed", "fern", "plant", "litter"]:
+		var tex = OBJ._foliage_texture(card)
+		_check(tex != null and tex.get_width() == 512 and tex.get_height() == 512, "foliage card %s: a 512 x 512 image loads" % card)
+	var card_mesh_: Mesh = OBJ._crossed_card()
+	var card_box: AABB = card_mesh_.get_aabb()
+	_check(absf(card_box.position.y) < 0.001 and absf(card_box.end.y - 1.0) < 0.001, "the crossed card stands on its foot, one unit tall")
+	var wetc = await _grow(11, 0.85, 0.3, 0.7)
+	var grass_mmi: MultiMeshInstance3D = wetc._patch.get_node_or_null("Cover_grass")
+	_check(grass_mmi != null and grass_mmi.multimesh.mesh == card_mesh_, "wetc world: the grass cover is the crossed card")
+	var gmat = grass_mmi.material_override if grass_mmi != null else null
+	_check(gmat is StandardMaterial3D and gmat.transparency == BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR and gmat.albedo_texture != null and gmat.cull_mode == BaseMaterial3D.CULL_DISABLED, "wetc world: the grass material is an alpha-cut, double-sided image")
+	var reed_mmi: MultiMeshInstance3D = wetc._patch.get_node_or_null("Cover_reed")
+	_check(reed_mmi != null and reed_mmi.multimesh.mesh == card_mesh_, "wetc world: the reeds are cards")
+	var mush_mmi: MultiMeshInstance3D = wetc._patch.get_node_or_null("Cover_mushroom")
+	_check(mush_mmi == null or mush_mmi.multimesh.mesh != card_mesh_, "wetc world: the mushrooms keep their mesh")
+	var wstc: Dictionary = wetc.get_state()["counts"]
+	_check(int(wstc.get("cover_cards", 0)) > 100, "wetc world: %d card members" % int(wstc.get("cover_cards", 0)))
+	var on_ground := true
+	var tallest := 0.0
+	if grass_mmi != null:
+		for i in range(mini(grass_mmi.multimesh.instance_count, 200)):
+			var cxf: Transform3D = grass_mmi.multimesh.get_instance_transform(i)
+			if absf(cxf.origin.y - wetc._h_at(cxf.origin.x, cxf.origin.z) - 0.012) > 0.03:
+				on_ground = false
+			tallest = maxf(tallest, cxf.basis.y.length())
+	_check(on_ground, "wetc world: every grass card's foot is on the surface")
+	_check(tallest > 0.25 and tallest < 1.2, "wetc world: grass cards stand 0.25-1.2 m (tallest %.2f)" % tallest)
 	print("[probe_biome_object] %d checks, %d failed" % [_checks, _fails])
 	quit(0 if _fails == 0 else 1)
 
@@ -545,7 +574,9 @@ func _check_cover(o) -> void:
 	var half: float = float(o.size) * 0.5
 	for tuft: Dictionary in o._cover_tufts:
 		var kind: String = tuft.type
-		var mesh: Mesh = o.Cover.mesh_for("fern" if kind == "litter" else kind)
+		# gen 8: a kind may render as a foliage card; measure with the mesh the kind rendered with
+		var mmi_k: MultiMeshInstance3D = o._patch.get_node_or_null("Cover_" + kind)
+		var mesh: Mesh = mmi_k.multimesh.mesh if mmi_k != null else o.Cover.mesh_for("fern" if kind == "litter" else kind)
 		var group: Array = tuft.members
 		if group.size() > 1: grouped += 1
 		for member in group:
