@@ -11,7 +11,12 @@
 ## tree nearest the water is at least as old as the farthest; every path mat's stored position
 ## lies within 0.5 m of the segment basin centre -> trunk and inside the footprint; the last
 ## mat of every path stands within 0.5 m of its trunk; a body stands at every stored path
-## position (the dispatcher read _pos); the ground carries at least four paint layers.
+## position (the dispatcher read _pos); the ground carries at least four paint layers. Gen 3:
+## the tree nearest the water has a node scale >= the farthest tree's and >= 1.5; every tree's
+## scaled canopy (the AABB of its mesh children through the root's scale) stays inside the
+## footprint, and so does every crystal shard; no mineral cell lies within 2.5 cells of a water
+## cell or on the outer ring; the
+## state records ms_tree / ms_flower / ms_fungus / ms_creature and their sum is under the build.
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_biome_object.gd
 extends SceneTree
@@ -189,20 +194,96 @@ func _run() -> void:
 		_check(standing, "%s: a body stands at every stored path position" % lab)
 		# gen 2 (d): four paint layers — dry, wet, shore, silt
 		_check(ground != null and (ground._paint_layers as Array).size() >= 4, "%s: the ground carries at least four paint layers (%d)" % [lab, (ground._paint_layers as Array).size() if ground != null else 0])
-	var ca: Dictionary = a.get_state()["counts"]
-	var cb: Dictionary = b.get_state()["counts"]
-	var cc: Dictionary = c.get_state()["counts"]
+		# gen 3 (a): the shore tree is the biggest body — its NODE scale (after the footprint cap)
+		# is at least the frontier tree's and at least 1.5
+		var near_n: Node3D = o._patch.get_node_or_null("PaintedTree_%d_%d" % [near_t.x, near_t.y]) as Node3D
+		var far_n: Node3D = o._patch.get_node_or_null("PaintedTree_%d_%d" % [far_t.x, far_t.y]) as Node3D
+		var near_k: float = near_n.scale.x if near_n != null else -1.0
+		var far_k: float = far_n.scale.x if far_n != null else 99.0
+		_check(near_n != null and far_n != null and near_k >= far_k and near_k >= 1.5, "%s: the shore tree is scaled %.2f, the frontier tree %.2f (shore >= frontier, shore >= 1.5)" % [lab, near_k, far_k])
+		# gen 3 (b): every tree's scaled canopy inside the footprint — the AABB of each mesh child
+		# (the merged branches; the leaves are a MultiMesh, which reads back identity headless)
+		# carried into the patch frame through the root's transform, scale included
+		var canopy_in := true
+		var n_tree_nodes := 0
+		var widest := 0.0
+		for t in o._trees:
+			var tn: Node3D = o._patch.get_node_or_null("PaintedTree_%d_%d" % [t.x, t.y]) as Node3D
+			if tn == null:
+				canopy_in = false
+				continue
+			n_tree_nodes += 1
+			var stack: Array = [tn]
+			while not stack.is_empty():
+				var nd: Node = stack.pop_back()
+				for ch2 in nd.get_children():
+					stack.append(ch2)
+					if ch2 is MeshInstance3D and (ch2 as MeshInstance3D).mesh != null and not ch2.is_queued_for_deletion():
+						var rel: Transform3D = tn.global_transform.affine_inverse() * (ch2 as Node3D).global_transform
+						var bb: AABB = (tn.transform * rel) * (ch2 as MeshInstance3D).mesh.get_aabb()
+						widest = maxf(widest, maxf(maxf(absf(bb.position.x), absf(bb.end.x)), maxf(absf(bb.position.z), absf(bb.end.z))))
+						if bb.position.x < -half or bb.end.x > half or bb.position.z < -half or bb.end.z > half:
+							if canopy_in:
+								print("    canopy out: %s scale %.2f spans x %.2f..%.2f z %.2f..%.2f" % [tn.name, tn.scale.x, bb.position.x, bb.end.x, bb.position.z, bb.end.z])
+							canopy_in = false
+		print("    [probe_biome_object] %s: shore tree x%.2f, frontier tree x%.2f, widest canopy reach %.2f m of %.2f" % [lab, near_k, far_k, widest, half])
+		_check(canopy_in and n_tree_nodes == o._trees.size(), "%s: every scaled canopy stays inside the footprint (%d trees, widest reach %.2f m of %.2f)" % [lab, n_tree_nodes, widest, half])
+		# gen 3: the grown spires too — every shard's AABB, through its holder, inside the footprint
+		var shards_in := true
+		var shard_reach := 0.0
+		for ch in o._patch.get_children():
+			if ch is Node3D and String(ch.name).begins_with("Crystal"):
+				for sh in ch.get_children():
+					if sh is MeshInstance3D and (sh as MeshInstance3D).mesh != null:
+						var bb2: AABB = ((ch as Node3D).transform * (sh as Node3D).transform) * (sh as MeshInstance3D).mesh.get_aabb()
+						shard_reach = maxf(shard_reach, maxf(maxf(absf(bb2.position.x), absf(bb2.end.x)), maxf(absf(bb2.position.z), absf(bb2.end.z))))
+						if bb2.position.x < -half or bb2.end.x > half or bb2.position.z < -half or bb2.end.z > half:
+							if shards_in:
+								print("    shard out: %s spans x %.2f..%.2f z %.2f..%.2f" % [ch.name, bb2.position.x, bb2.end.x, bb2.position.z, bb2.end.z])
+							shards_in = false
+		_check(shards_in, "%s: every crystal shard stays inside the footprint (widest reach %.2f m of %.2f)" % [lab, shard_reach, half])
+		# gen 3 (c): no mineral cell within 2.5 cells of a water cell, none on the outer ring
+		var min_off := true
+		for mk in o._cells.keys():
+			if String(o._cells[mk]["kingdom"]) == "mineral":
+				if o._water_dist(mk.x, mk.y) < 2.5 or mk.x < 1 or mk.y < 1 or mk.x > o.size - 2 or mk.y > o.size - 2:
+					if min_off:
+						print("    mineral %s at %.2f cells from the water" % [str(mk), o._water_dist(mk.x, mk.y)])
+					min_off = false
+		_check(min_off, "%s: every mineral cell is 2.5 cells from the water and off the outer ring (%d minerals)" % [lab, int(cnt["mineral"])])
+		# gen 3 (d): the state records each kingdom's spawn time and their sum is under the build
+		var ms_sum: int = 0
+		var ms_all := true
+		for mkey in ["ms_tree", "ms_flower", "ms_fungus", "ms_creature"]:
+			if not cnt.has(mkey):
+				ms_all = false
+			else:
+				ms_sum += int(cnt[mkey])
+		_check(ms_all and ms_sum < int(st["build_ms"]), "%s: ms per kingdom recorded, sum %d under the build's %d" % [lab, ms_sum, int(st["build_ms"])])
+	var ca: Dictionary = _world_counts(a.get_state()["counts"])
+	var cb: Dictionary = _world_counts(b.get_state()["counts"])
+	var cc: Dictionary = _world_counts(c.get_state()["counts"])
 	_check(int(cb["fungus"]) >= int(cc["fungus"]), "wetter grows at least as much rim fungus (%d vs %d)" % [int(cb["fungus"]), int(cc["fungus"])])
 	_check(int(cb["cover"]) > int(cc["cover"]), "wetter grows more cover (%d vs %d)" % [int(cb["cover"]), int(cc["cover"])])
 	_check(int(cc["mineral"]) >= int(cb["mineral"]), "higher relief grows at least as many crystals (%d vs %d)" % [int(cc["mineral"]), int(cb["mineral"])])
 	var twin = await _grow(7, 0.5, 0.5, 0.6)
-	_check(str(twin.get_state()["counts"]) == str(ca), "the same seed grows the same counts")
+	_check(str(_world_counts(twin.get_state()["counts"])) == str(ca), "the same seed grows the same counts")
 	_check(twin._basin_c == a._basin_c, "the same seed digs the basin in the same place")
 	var other = await _grow(8, 0.5, 0.5, 0.6)
-	_check(other._basin_c != a._basin_c or str(other.get_state()["counts"]) != str(ca), "a different seed grows a different world")
+	_check(other._basin_c != a._basin_c or str(_world_counts(other.get_state()["counts"])) != str(ca), "a different seed grows a different world")
 	_check(FileAccess.file_exists("res://ada_run/biome_rsi/state/%s.json" % a.label()), "the record is written")
 	print("[probe_biome_object] %d checks, %d failed" % [_checks, _fails])
 	quit(0 if _fails == 0 else 1)
+
+
+## gen 3: the counts that describe the WORLD — the ms_<kingdom> timings are wall-clock and
+## differ between two builds of the same seed, so the determinism check leaves them out.
+func _world_counts(cnt: Dictionary) -> Dictionary:
+	var out := {}
+	for k in cnt.keys():
+		if not String(k).begins_with("ms_"):
+			out[k] = cnt[k]
+	return out
 
 
 func _seg_dist(p: Vector2, a: Vector2, b: Vector2) -> float:

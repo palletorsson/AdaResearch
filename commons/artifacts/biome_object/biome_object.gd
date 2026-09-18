@@ -16,16 +16,22 @@ class_name BiomeObject
 ##   water       a pool in the basin (the old biome's own pool: disc, ripple rings, reeds), the
 ##               disc lapping the shelf and the reeds standing on the shore (gen 1); one thin
 ##               ring set toward the oldest tree — an edge, not a target (gen 2)
-##   mineral     crystal clusters on the dry ridge
+##   mineral     crystal clusters on the dry ridge — 2.5 cells from the water and off the outer
+##               ring, the spires tallest where it is high and dry (gen 3)
 ##   fungus      mycelium filaments on the wet rim of the pool, and a mycelium PATH from the
 ##               pool out to every tree — the network that joins water to wood; sampled ON the
 ##               line every 0.5 m, dry cells only, the last mat touching the trunk, finished at
 ##               the water and still growing at the tip (gen 2)
 ##   flora       trees on the mid-moist slope, flowers in the wet meadow, tiers by moisture;
 ##               SUCCESSION from the water — the shore tree the oldest, the frontier tree a
-##               sapling (gen 2)
+##               sapling (gen 2); the bodies GROWN by the object — every node the dispatcher
+##               hands back is scaled: a tree by its rank and the moisture (the shore tree
+##               ~5 m, capped so its measured canopy stays inside the footprint), a flower by
+##               the moisture, a creature 1.6x (gen 3)
 ##   fauna       creatures beside the flowers and the fungus
-##   cover       grass and stubble by moisture, on the surface, everywhere
+##   cover       grass and stubble by moisture, on the surface, everywhere; the understory
+##               follows the canopy — ferns and toadstools under a tree, toadstools along the
+##               web, the grass green where wet and straw where dry, bare where driest (gen 3)
 ##
 ## Every organism is the old biome's builder, reached through BiomePaintDispatcher exactly as
 ## a painted map cell would reach it, only the CELL is chosen by moisture, height and slope
@@ -43,11 +49,12 @@ const Dispatcher := preload("res://commons/biome_layers/biome_paint_dispatcher.g
 const Ground := preload("res://commons/biome_layers/biome_ground_substrate.gd")
 const Cover := preload("res://commons/biome_layers/ground_cover.gd")
 
-const GENERATION := 2
+const GENERATION := 3
 const CHANGELOG: Array[String] = [
 	"gen 0: the object — basin terrain, pool, ridge crystals, rim mycelium + a mycelium path to every tree, slope trees, meadow flowers, creatures beside them, cover by moisture",
 	"gen 1: the basin filled (a flat floor under the water, a wet shelf as shore, the disc lapping the shelf, reeds on the shore, a bluer water material) and the moisture painted onto the ground as wet, dry and silt brush layers",
 	"gen 2: succession from the water (the trees ranked by distance to it, the shore tree inten 3-5 and the frontier tree a sapling), the mycelium path sampled on the line every 0.5 m from 0.85 m past the pool to 0.45 m short of the trunk, skipping flooded cells, gen 25 at the water and 10 at the tree; the ground painted with the whole gradient (ochre wherever dry, moss, a sand shore, silt by depth) and the pool's two glowing rings replaced by one thin ring set toward the oldest tree, the disc at alpha 0.72",
+	"gen 3: the bodies grown by the object — every node the dispatcher hands back scaled about its foot: a tree by k = (1.5 + 1.3·rank)(0.75 + 0.35·moisture), capped so the measured canopy (the merged branch mesh's AABB + 0.25·dna.scale) stays inside the footprint, a flower by 1.4 + 0.4·moisture, a creature 1.6, a mat 1.0; an edge cell scores 0.4 less in the tree draw; each kingdom's spawn timed into ms_<kingdom>. The understory follows the canopy: cover accepted at 0.06 + 0.94·m², ferns and toadstools under a canopy, toadstools within 0.7 m of a mat, grass lerped green to straw by dryness, scale (0.5 + 0.7·m)·1.4. The minerals leave the shore: 2.5 cells from the water, off the outer ring, a retry at h > 0.5, the spires scaled by height and dryness",
 ]
 const STATE_DIR := "res://ada_run/biome_rsi/state"
 const K_TREE := 0
@@ -78,6 +85,8 @@ var _cells: Dictionary = {}          # Vector2i -> {kingdom: String, inten: int,
 var _trees: Array[Vector2i] = []     # gen 2: sorted by distance to the water, the shore tree first
 var _pos: Dictionary = {}            # gen 2: Vector2i -> Vector2 world xz, the trunks and the path's mats
 var _paths: Dictionary = {}          # gen 2: Vector2i tree -> Array[Vector2i] path cells, water to trunk
+var _canopy: Dictionary = {}         # gen 3: Vector2i tree -> float, the SCALED canopy radius (m), measured at dispatch
+var _mats: Array[Vector2] = []       # gen 3: every fungus body's world xz as placed — the cover's "along the web"
 var _patch: Node3D
 var _dispatcher: Node3D
 var _counts: Dictionary = {}
@@ -122,7 +131,8 @@ func _build() -> void:
 	_built = true
 	var t0 := Time.get_ticks_msec()
 	_counts = {"water": 0, "mineral": 0, "fungus": 0, "fungus_path": 0, "tree": 0, "flower": 0,
-		"creature": 0, "cover": 0, "connections": 0, "paint": 0}
+		"creature": 0, "cover": 0, "connections": 0, "paint": 0,
+		"ms_tree": 0, "ms_flower": 0, "ms_fungus": 0, "ms_creature": 0}   # gen 3: the bill, by payer
 	_patch = Node3D.new()
 	_patch.name = "Biome"
 	add_child(_patch)
@@ -134,9 +144,10 @@ func _build() -> void:
 	_dispatch()
 	_cover()
 	_build_ms = Time.get_ticks_msec() - t0
-	print("[biome_object] gen %d %s: water %d, mineral %d, fungus %d (path %d), trees %d, flowers %d, creatures %d, cover %d, connections %d, paint %d — %d ms" % [
+	print("[biome_object] gen %d %s: water %d, mineral %d, fungus %d (path %d), trees %d, flowers %d, creatures %d, cover %d, connections %d, paint %d — %d ms (tree %d, flower %d, fungus %d, creature %d)" % [
 		GENERATION, label(), _counts["water"], _counts["mineral"], _counts["fungus"], _counts["fungus_path"],
-		_counts["tree"], _counts["flower"], _counts["creature"], _counts["cover"], _counts["connections"], _counts["paint"], _build_ms])
+		_counts["tree"], _counts["flower"], _counts["creature"], _counts["cover"], _counts["connections"], _counts["paint"], _build_ms,
+		_counts["ms_tree"], _counts["ms_flower"], _counts["ms_fungus"], _counts["ms_creature"]])
 	if record == "on":
 		_write_state()
 
@@ -232,16 +243,13 @@ func _ecology() -> void:
 			var h: float = _field[z * size + x]
 			var m: float = 0.25 * moisture + 0.75 * clampf(1.0 - d / reach, 0.0, 1.0) - 0.45 * h + rng.randf_range(-0.06, 0.06)
 			_moist[z * size + x] = clampf(m, 0.0, 1.0)
-	# minerals: the driest high cells, spaced
-	var ridge: Array = []
-	for z in range(size):
-		for x in range(size):
-			var key := Vector2i(x, z)
-			if _water.has(key):
-				continue
-			var h: float = _field[z * size + x]
-			if h > 0.62 and _moist[z * size + x] < 0.42:
-				ridge.append({"key": key, "h": h})
+	# minerals: the driest high cells, spaced. gen 3: 2.5 cells from the water and off the
+	# outer ring — no crystal in a pond or on the rim (measured gen 2: two crystals stood at
+	# s11's water's edge, a high cell two cells out passing because the height term pulled m
+	# under 0.42); a world with no cell over 0.62 retries at 0.5 so the mineral kingdom stays
+	var ridge: Array = _ridge(0.62)
+	if ridge.is_empty():
+		ridge = _ridge(0.5)
 	ridge.sort_custom(func(p, q): return float(p["h"]) > float(q["h"]))
 	var n_min: int = clampi(1 + int(round(relief * 3.0)), 1, 4)
 	for r in ridge:
@@ -260,7 +268,10 @@ func _ecology() -> void:
 			var m: float = _moist[z * size + x]
 			var h: float = _field[z * size + x]
 			if m > 0.32 and m < 0.78 and h > 0.18 and h < 0.8 and _water_dist(x, z) > 1.4:
-				cand.append({"key": key, "s": m * (1.0 - absf(h - 0.45)) + rng.randf() * 0.15})
+				# gen 3: an edge cell scores 0.4 less — a canopy there is capped at the footprint;
+				# the draw stays so the rng stream is gen 2's
+				var edge_pen: float = 0.4 if (x == 0 or z == 0 or x == size - 1 or z == size - 1) else 0.0
+				cand.append({"key": key, "s": m * (1.0 - absf(h - 0.45)) + rng.randf() * 0.15 - edge_pen})
 	cand.sort_custom(func(p, q): return float(p["s"]) > float(q["s"]))
 	var n_tree: int = clampi(2 + int(round(wildness * 4.0)), 1, 7)
 	for c in cand:
@@ -281,6 +292,10 @@ func _ecology() -> void:
 		var t: Vector2i = _trees[i]
 		var rank: float = 1.0 - float(i) / float(maxi(1, n_ranked - 1))
 		_cells[t]["inten"] = clampi(int(round(1.0 + 4.0 * rank * (0.4 + 0.4 * wildness + 0.2 * moisture))), 1, 5)
+		# gen 3: the body's scale. The dispatcher's size knob stops at dna.scale 1.6 (~1.8 m); the
+		# object owns the node it gets back and grows it by rank and moisture — the shore tree
+		# 2.8x on wet ground, the frontier sapling 1.5x on dry. _dispatch() caps it at the footprint.
+		_cells[t]["k"] = (1.5 + 1.3 * rank) * (0.75 + 0.35 * moisture)
 		# the trunk's ±0.3 jitter, drawn here from the per-cell rng _dispatch() used to draw it,
 		# so the path below can aim at the trunk and not at the cell
 		var trng := RandomNumberGenerator.new()
@@ -437,6 +452,21 @@ func _nearer_water(p: Vector2i, q: Vector2i) -> bool:
 	if absf(dp - dq) < 0.0001:
 		return (p.y * size + p.x) < (q.y * size + q.x)
 	return dp < dq
+
+
+## gen 3: the ridge — the cells above h_min that are dry (m < 0.42), not water, at least 2.5
+## cells from any water cell and off the outer ring.
+func _ridge(h_min: float) -> Array:
+	var out: Array = []
+	for z in range(1, size - 1):
+		for x in range(1, size - 1):
+			var key := Vector2i(x, z)
+			if _water.has(key):
+				continue
+			var h: float = _field[z * size + x]
+			if h > h_min and _moist[z * size + x] < 0.42 and _water_dist(x, z) >= 2.5:
+				out.append({"key": key, "h": h})
+	return out
 
 
 func _water_dist(x: int, z: int) -> float:
@@ -619,6 +649,8 @@ func _minerals() -> void:
 		holder.rotation.y = rng.randf_range(0.0, TAU)
 		_patch.add_child(holder)
 		var scale: float = (0.9 + 0.5 * relief) * 1.4
+		# gen 3: the spires by height and dryness — the dry world grows spires where it grows no canopy
+		scale *= (0.7 + 0.6 * _field[key.y * size + key.x]) * (1.0 + 0.8 * (1.0 - moisture))
 		var shards: int = rng.randi_range(6, 9)
 		for _i in range(shards):
 			var mi := MeshInstance3D.new()
@@ -656,6 +688,8 @@ func _dispatch() -> void:
 		"cube_size": 1.0,
 	}
 	var ids := {"tree": K_TREE, "creature": K_CREATURE, "flower": K_FLOWER, "fungus": K_FUNGUS}
+	_canopy.clear()
+	_mats.clear()
 	var keys: Array = _cells.keys()
 	keys.sort_custom(func(a, b): return (a.y * size + a.x) < (b.y * size + b.x))
 	for key in keys:
@@ -685,19 +719,59 @@ func _dispatch() -> void:
 		if c.has("gen"):
 			# gen 2: the path's growth — _spawn_mycelium reads "gen" into the colony's max_steps
 			deposit["gen"] = String(c["gen"])
+		# gen 3: each kingdom's spawn timed into ms_<kingdom> — the budget's bill, by payer
+		var before: int = _patch.get_child_count()
+		var t1: int = Time.get_ticks_msec()
 		_dispatcher.spawn_cell(deposit, 999, ctx, _patch)
+		_counts["ms_" + kname] += Time.get_ticks_msec() - t1
+		# gen 3: the object GROWS what it gets back. The root the dispatcher added stands with its
+		# foot at the surface point, so a scale about it keeps the foot. A tree by its succession
+		# rank and the moisture, capped so the measured canopy — the merged branch mesh's
+		# root-local AABB plus a leaf margin of 0.25·dna.scale — stays 0.05 m inside the
+		# footprint (floor 1.0: gen 2's size); a flower by the moisture; a creature 1.6x; a mat
+		# 1.0, the mats being sized to overlap on the line.
+		var inten: int = int(c["inten"])
+		for i in range(before, _patch.get_child_count()):
+			var n: Node = _patch.get_child(i)
+			if not (n is Node3D):
+				continue
+			var k: float = 1.0
+			match kname:
+				"tree":
+					k = float(c.get("k", 1.0))
+					var r: float = 0.6 * (0.6 + 0.2 * float(inten))
+					var mb: Node = n.find_child("MergedBranches", true, false)
+					if mb is MeshInstance3D and (mb as MeshInstance3D).mesh != null:
+						var bb: AABB = (mb as MeshInstance3D).mesh.get_aabb()
+						r = maxf(maxf(absf(bb.position.x), absf(bb.end.x)), maxf(absf(bb.position.z), absf(bb.end.z))) + 0.25 * (0.6 + 0.2 * float(inten))
+					var edge: float = float(size) * 0.5 - maxf(absf(wp.x), absf(wp.z))
+					k = maxf(1.0, minf(k, (edge - 0.05) / r))
+					_canopy[key] = r * k
+				"flower":
+					k = 1.4 + 0.4 * moisture
+				"creature":
+					k = 1.6
+				"fungus":
+					k = 1.0
+					_mats.append(Vector2(wp.x, wp.z))
+			(n as Node3D).scale = Vector3.ONE * k
 
 
 ## Cover by zone — the old ring's small covers (its "tree" type is a 2.5 m column and its
-## "bush" a 0.7 m ball; neither is cover). Reeds at the water's rim, ferns and toadstools in
-## the wet ground near the fungus, blooms in the meadow, grass by moisture everywhere.
+## "bush" a 0.7 m ball; neither is cover). Reeds at the water's rim, blooms in the meadow,
+## grass everywhere. gen 3: the understory FOLLOWS THE CANOPY and reads the gradient — accepted
+## by m² so the driest ground is bare; ferns and toadstools under a tree's measured canopy,
+## darker and smaller in its shade; toadstools within 0.7 m of a fungus mat; the grass lerped
+## green to straw by dryness, per blade.
 func _cover() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash([seed, "cover"])
 	var want: int = clampi(int(round(float(size * size) * (1.2 + 2.6 * wildness) * (0.5 + 0.6 * moisture))), 40, 480)
-	var by_type: Dictionary = {}
+	var by_type: Dictionary = {}     # type -> [[Transform3D, Color], ...]
 	var placed := 0
 	var tries := 0
+	var green := Color(0.22, 0.42, 0.14)
+	var straw := Color(0.68, 0.60, 0.30)
 	while placed < want and tries < want * 4:
 		tries += 1
 		var wx: float = rng.randf_range(-float(size) * 0.5 + 0.2, float(size) * 0.5 - 0.2)
@@ -708,34 +782,56 @@ func _cover() -> void:
 		if _water.has(key):
 			continue
 		var m: float = _moist[cz * size + cx]
-		if rng.randf() > 0.15 + 0.85 * m:
+		if rng.randf() > 0.06 + 0.94 * m * m:
 			continue
 		var d: float = _water_dist(cx, cz)
-		var near_fungus: bool = _cells.has(key) and String(_cells[key]["kingdom"]) == "fungus"
+		# dt to the nearest trunk and cr its scaled canopy radius; dw to the nearest fungus mat
+		var here := Vector2(wx, wz)
+		var dt: float = 99.0
+		var cr: float = 0.0
+		for t in _trees:
+			var dd: float = here.distance_to(_pos[t])
+			if dd < dt:
+				dt = dd
+				cr = float(_canopy.get(t, 0.0))
+		var dw: float = 99.0
+		for mp in _mats:
+			dw = minf(dw, here.distance_to(mp))
 		var t := "grass"
 		var r: float = rng.randf()
+		var shade := false
 		if d < 1.6 and r < 0.45:
 			t = "reed"
-		elif (near_fungus or m > 0.62) and r < 0.35:
-			t = "fern" if r < 0.2 else "mushroom"
+		elif dt < cr:
+			t = "fern" if r < 0.6 else "mushroom"
+			shade = true
+		elif dw < 0.7 and r < 0.5:
+			t = "mushroom"
 		elif m > 0.45 and r < 0.55:
 			t = "flower"
 		if not by_type.has(t):
 			by_type[t] = []
-		var sc: float = 0.6 + 0.5 * m
+		var sc: float = (0.5 + 0.7 * m) * 1.4
+		var col: Color = Cover.color_for(t, rng)
+		if t == "grass":
+			var j: float = rng.randf_range(-0.04, 0.04)
+			col = green.lerp(straw, clampf(1.0 - 1.3 * m, 0.0, 1.0)) + Color(j, j, j, 0.0)
+		if shade:
+			sc *= 0.8
+			col = Color(col.r * 0.7, col.g * 0.7, col.b * 0.7, col.a)
 		var xf := Transform3D(Basis(Vector3.UP, rng.randf_range(0.0, TAU)).scaled(Vector3(sc, sc, sc)), Vector3(wx, _h_at(wx, wz), wz))
-		(by_type[t] as Array).append(xf)
+		(by_type[t] as Array).append([xf, col])
 		placed += 1
 	for t in by_type.keys():
-		var xfs: Array = by_type[t]
+		var items: Array = by_type[t]
 		var mm := MultiMesh.new()
 		mm.transform_format = MultiMesh.TRANSFORM_3D
 		mm.use_colors = true
 		mm.mesh = Cover.mesh_for(String(t))
-		mm.instance_count = xfs.size()
-		for i in range(xfs.size()):
-			mm.set_instance_transform(i, xfs[i])
-			mm.set_instance_color(i, Cover.color_for(String(t), rng))
+		mm.instance_count = items.size()
+		for i in range(items.size()):
+			mm.set_instance_transform(i, items[i][0])
+			mm.set_instance_color(i, items[i][1])
 		var mmi := MultiMeshInstance3D.new()
 		mmi.name = "Cover_%s" % String(t)
 		mmi.multimesh = mm
