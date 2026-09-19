@@ -224,6 +224,9 @@ const HANG_MOUNT_W := 0.090   # visible mount margin around the field
 # A showing every N consecutive dressed faces (1 face = 1 m of run). Two metres
 # is the corpus pitch: closer and a 1.3 m landscape has no wall around it.
 const HANG_PITCH_FACES := 2
+## Rulings that say `remove` but not WHICH hall. Chapter-keyed, so enacting one deletes the
+## same index in every hall of that chapter; counted per dress and reported, never enacted.
+static var _unscoped_removes: int = 0
 # format cycle [width, height], in metres. Three formats, so a run of six reads
 # as a hang rather than as wallpaper — and the cycle is indexed off the run key,
 # not off randf(), so the same seed builds the same building.
@@ -524,9 +527,45 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	# metre offset. Frames are 4 per showing, mount and field 1 each — the
 	# three lists are index-aligned, so one offset moves all seven boxes.
 	var showing_rules: Array = opts.get("showing_rules", [])
+	var this_pearl := String(opts.get("pearl", ""))
+	_unscoped_removes = 0
+	var gone_x := Transform3D(Basis().scaled(Vector3.ZERO), Vector3.ZERO)
 	for rule_v in showing_rules:
 		var rule: Dictionary = rule_v
 		var si: int = int(rule.get("index", -1))
+		# A RULE MAY NAME ITS HALL (2026-09-19). Rulings are keyed by chapter, so one drag in
+		# one hall fired in every hall of that chapter — `primitives` has ten, and a single
+		# `index 6 offset [-2, 0, -1]` moved its showing off the wall in eight of them at once.
+		# Measured across the recorded halls: showings placed by the hang alone are on a wall
+		# 99 % of the time (90 of 91); showings carrying a ruling, 46 % (82 of 178). The hang
+		# is not what is broken; the hand path is. A rule that names a pearl now applies only
+		# there. A rule without one keeps the old chapter-wide reach, because which hall an
+		# existing ruling MEANT cannot be recovered — that is for the hand to say, not for
+		# this to guess.
+		if this_pearl != "" and String(rule.get("pearl", "")) != "" 				and String(rule.get("pearl", "")) != this_pearl:
+			continue
+		# REMOVE NOW REMOVES. The applier never read `remove`, and the ruling only ever freed
+		# the `em_showing` proxy, which this file documents as "a handle, not a body" — so 116
+		# cards sat at a removed index, still hanging wherever the drag had left them. Zeroing
+		# the mount, the field and the four frames is what _cull_showings_whole already does
+		# for a culled page, and the card builder skips a zero-scale mount, so the whole
+		# showing goes: work, frame, field and card.
+		# ...but ONLY for a rule that names its hall. Honoured chapter-wide it deleted 40
+		# showings across six halls in one bake, because those eight `remove` rows fire in all
+		# ten primitives halls. The hand pressed delete on eight works, not eighty. An
+		# unnamed `remove` therefore still does nothing, exactly as it has until now, and is
+		# counted below so the backlog is visible instead of silently enacted.
+		if bool(rule.get("remove", false)) and String(rule.get("pearl", "")) == "":
+			_unscoped_removes += 1
+			continue
+		if bool(rule.get("remove", false)) and si >= 0 and si < hang_mount_x.size():
+			hang_mount_x[si] = gone_x
+			hang_field_x[si] = gone_x
+			for k_rm in range(4):
+				var fi_rm: int = si * 4 + k_rm
+				if fi_rm < hang_frame_x.size():
+					hang_frame_x[fi_rm] = gone_x
+			continue
 		# THE HANG comes first: an absolute wall face, then any offset nudges
 		# it from there. A rule may carry either, or both.
 		var cell_a: Array = rule.get("cell", [])
