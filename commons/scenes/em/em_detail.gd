@@ -1192,7 +1192,23 @@ static func _hang_frame_mat() -> Material:
 
 const CARD_W := 0.14
 const CARD_H := 0.09
+const CARD_D := 0.006            # the card's thickness, out of the wall
 const CARD_DROP := 0.10          # below the mount's bottom edge
+
+
+## The three names in HANG_FORMATS' own order — the only place that cycle's
+## index becomes a word. "" when a mount is none of the three: a ruled retarget
+## rebuilds a box at whatever size the ruling asks for, and naming that one of
+## the three anyway would be exactly the guess the record exists to abolish.
+const HANG_FORMAT_NAMES := ["portrait", "landscape", "square"]
+static func _hang_format_name(wm: float, hm: float) -> String:
+	for i in range(mini(HANG_FORMATS.size(), HANG_FORMAT_NAMES.size())):
+		var f: Vector2 = HANG_FORMATS[i]
+		if absf(wm - f.x) <= 0.001 and absf(hm - f.y) <= 0.001:
+			return String(HANG_FORMAT_NAMES[i])
+	return ""
+
+
 static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> void:
 	var chapter := String(opts.get("chapter", ""))
 	var pearl := String(opts.get("pearl", ""))
@@ -1314,6 +1330,18 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 		roboto = load("res://commons/font/Roboto-VariableFont_wdth,wght.ttf")
 	for si in range(mounts.size()):
 		var t: Transform3D = mounts[si]
+		# A CULLED PAGE KEEPS ITS INDEX BUT MUST NOT KEEP ITS CARD. _cull_showings_whole
+		# replaces a culled showing's mount with a zero-scale transform at the origin —
+		# "drawn as nothing and holds its place in the array", in its own words — so that
+		# _hang_retarget's si * 4 + k arithmetic stays true. This loop built a full 0.14 x
+		# 0.09 card for that index anyway, and a zero-scale mount is invisible while a card
+		# is not: five real cards stood at the segment origin 0.1 m UNDER the floor with
+		# nothing above them (primitives · point one · 08 and · 18, point line grid · 08,
+		# point triangle context · 08, primitives polythedra · 15). That is exactly the
+		# complaint this work started from — Palle, 2026-09-19: wall items "sometimes in the
+		# air from old walls". No mount, no card.
+		if t.basis.get_scale().length_squared() < 1e-9:
+			continue
 		var wm: float = t.basis.get_scale().x if absf(t.basis.get_scale().x) > absf(t.basis.get_scale().z) else t.basis.get_scale().z
 		var hm: float = t.basis.get_scale().y
 		var along_x: bool = absf(t.basis.get_scale().x) > absf(t.basis.get_scale().z)
@@ -1327,7 +1355,7 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 		nrm = 1.0 if frac < 0.5 else -1.0                             # a small positive fraction means it sits on the +normal side
 		var card := MeshInstance3D.new()
 		var bm := BoxMesh.new()
-		bm.size = Vector3(CARD_W, CARD_H, 0.006) if along_x else Vector3(0.006, CARD_H, CARD_W)
+		bm.size = Vector3(CARD_W, CARD_H, CARD_D) if along_x else Vector3(CARD_D, CARD_H, CARD_W)
 		card.mesh = bm
 		card.material_override = card_mat
 		var u_off: float = wm * 0.5 - CARD_W * 0.5
@@ -1347,9 +1375,43 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 		# cards loose without being able to say what any of them was supposed to hang on.
 		# Written in the same spirit as the cell below: where it is known, not guessed at.
 		card.set_meta("em_showing_normal", Vector2(0.0, nrm) if along_x else Vector2(nrm, 0.0))
+		# 2026-09-19, Palle: "can we get the same size and text in web version". The card's
+		# own box, the mount it hangs under and the line it carries are all settled HERE and
+		# nowhere else — /museum-editor was drawing a made-up 0.62 x 0.42 blank because the
+		# ledger never said. Three metas, one per ledger field, so a card built before today
+		# comes back WITHOUT them rather than with an invention: same contract as the normal
+		# above, and a reader can tell "not recorded" from "recorded".
+		#
+		# `proud` is measured from the WALL PLANE, which is not what `0.003 - depth * 0.5`
+		# alone is. That expression is an offset from the MOUNT's centre, and the mount
+		# centre is itself depth * 0.5 off the wall, so the two halves cancel and the card's
+		# true standoff is the 3 mm — its back flush with the plane, its face CARD_D proud.
+		# The plane is recovered by rounding the mount's fixed coordinate back to its
+		# integer wall, which is exact for either sign of the normal (+0.009 and -0.009 both
+		# round home) where floor() is not. Computed, not written in, so a retarget that
+		# rebuilds a mount at another depth still reports its own number.
+		var wall_fixed: float = round(fixed_guess)
+		var card_fixed: float = pos.z if along_x else pos.x
+		card.set_meta("em_showing_card_geom", {
+			"w": snappedf(CARD_W, 0.0001), "h": snappedf(CARD_H, 0.0001),
+			"d": snappedf(CARD_D, 0.0001), "drop": snappedf(CARD_DROP, 0.0001),
+			"proud": snappedf(nrm * (card_fixed - wall_fixed), 0.0001)})
+		# the mount's metre size as BUILT, read back off its transform rather than off the
+		# format table — a ruled retarget can move a page onto another wall and the table
+		# would then describe a picture that is no longer there. The name comes back "" if
+		# the built size is none of the three.
+		card.set_meta("em_showing_mount", {
+			"w": snappedf(wm, 0.0001), "h": snappedf(hm, 0.0001),
+			"format": _hang_format_name(wm, hm)})
 		seg.add_child(card)
 		var lbl := Label3D.new()
 		lbl.text = "%02d" % (si + 1) + "\n" + (texts.get(si, "") if texts.has(si) else ("%s · %s" % [chapter, pearl] if pearl != "" else chapter)).left(28)
+		# the EXACT line this label was given, newline and all. One caveat a web reader
+		# needs: _number_places in endless_museum.gd rewrites the FIRST line to an
+		# inventory id (chapter:0007) later in the same build, after the ledger is
+		# written — so a walked card can show that id where this string shows "%02d".
+		# The second line, which is the one the text rule sets, is never touched.
+		card.set_meta("em_showing_text", lbl.text)
 		lbl.font_size = 40
 		lbl.pixel_size = 0.0009
 		lbl.modulate = Color(0.12, 0.11, 0.1)

@@ -9235,7 +9235,7 @@ func _build_segment() -> void:
 				# hand can refer to "primitives · lines · 07" and rule on it later
 				for ch_node in seg.get_children():
 					if ch_node.has_meta("em_showing_card"):
-						_showing_cards.append({"segment": dress_seg_no, "chapter": next_seq,   # captured at queue time — the dress may drain segments later
+						var card_row: Dictionary = {"segment": dress_seg_no, "chapter": next_seq,   # captured at queue time — the dress may drain segments later
 							"pearl": String(deal.get("pearl", "")) if deal is Dictionary else "",
 							"index": int(ch_node.get_meta("em_showing_card")) + 1,
 							"id": "%s · %s · %02d" % [next_seq, String(deal.get("pearl", "")) if deal is Dictionary else "-", int(ch_node.get_meta("em_showing_card")) + 1],
@@ -9259,7 +9259,21 @@ func _build_segment() -> void:
 							"normal": [int(_showing_normal(ch_node).x), int(_showing_normal(ch_node).y)],
 							"facing_deg": snappedf(rad_to_deg(atan2(_showing_normal(ch_node).x, _showing_normal(ch_node).y)), 0.1),
 							"backing_cell": [int(floor((ch_node as Node3D).global_position.x)) - int(_showing_normal(ch_node).x),
-								int(floor((ch_node as Node3D).global_position.z)) - zbase - VESTIBULE_H - int(_showing_normal(ch_node).y)]})
+								int(floor((ch_node as Node3D).global_position.z)) - zbase - VESTIBULE_H - int(_showing_normal(ch_node).y)]}
+						# THE SIZE AND THE LINE (2026-09-19, Palle: "can we get the same size
+						# and text in web version"). /museum-editor was drawing every card at
+						# a made-up 0.62 x 0.42 with nothing written on it, because the ledger
+						# never said what a card is or what it says. em_detail settles all three
+						# when it builds the card and leaves them on the node; this copies them
+						# across. Attached one at a time and only when the meta is there, so a
+						# card built before today comes back with NO card/mount/text field
+						# rather than an invented one — the same contract `normal` keeps, and
+						# the difference between "not recorded" and "recorded" stays readable.
+						for meta_key in [["em_showing_card_geom", "card"],
+								["em_showing_mount", "mount"], ["em_showing_text", "text"]]:
+							if ch_node.has_meta(meta_key[0]):
+								card_row[meta_key[1]] = ch_node.get_meta(meta_key[0])
+						_showing_cards.append(card_row)
 				_save_showing_cards()
 				# every showing proxy becomes an editor record of kind "showing"
 				if true:   # ALWAYS: showing records in both modes (the editor KEYS stay desktop-only)
