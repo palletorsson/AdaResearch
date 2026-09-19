@@ -1,0 +1,24 @@
+{
+ "_readme": [
+  "AUTHORED. Which halls an automatic layout pass may touch, and which bodies inside them it may not.",
+  "Keyed 'chapter|pearl', the same key ada_run/em_layout_walk.json uses.",
+  "",
+  "  mode: 'manual'  measured and reported, NEVER moved. This is the default, and it is also",
+  "                  the default for any hall not listed here at all. Locking is the resting",
+  "                  state: a pass can only ever touch halls someone opted in by hand.",
+  "  mode: 'auto'    a pass may move this hall's bodies.",
+  "  pinned: [...]   tokens inside an auto hall that you placed yourself. They stay put even",
+  "                  while the rest of the hall is automatic.",
+  "  note:           why. Write one for every hall you unlock, and for every pin.",
+  "",
+  "Locking hides nothing. Every hall is scored and drawn whatever its mode; the mode governs",
+  "what may be CHANGED, never what may be SEEN. Read the score with:",
+  "    python tools/em_layout_rsi.py check --verbose",
+  "    python tools/em_layout_rsi.py modes",
+  "",
+  "Nothing is unlocked yet. Palle (2026-09-19): 'I still want to be able to edit the positions.",
+  "I want halls to be locked and an unlocked switch between manual and automatic.'"
+ ],
+ "schema": 1,
+ "halls": {}
+}
