@@ -43,7 +43,8 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-WALK = REPO / "ada_run" / "em_layout_walk.json"          # the engine's own record — the ONLY source of positions
+WALK = REPO / "ada_run" / "em_layout_walk.json"
+CARDS = REPO / "ada_run" / "em_showing_cards.json"      # the WALL works — position and cell, no facing          # the engine's own record — the ONLY source of positions
 MODES = REPO / "commons" / "data" / "em_layout_modes.json"   # authored; absent hall == manual
 REGISTRY = REPO / "commons" / "artifacts" / "registry"
 OUT = REPO / "ada_run" / "em_layout_rsi"
@@ -91,6 +92,56 @@ def footprints() -> dict:
                 side = math.sqrt(float(cells)) * CELL_M
                 out[token] = side * 0.5
     return out
+
+
+# ── the wall cards ───────────────────────────────────────────────────────────────
+## A wall card records `cell` in its hall's own grid, so asking what is beside it needs no
+## arithmetic of ours — we index the engine's grid with the engine's index. The four-neighbour
+## test IS ours, though: a card with no not-floor neighbour is a CANDIDATE, not a conviction,
+## because the museum may legitimately mount one on something the grid does not mark solid.
+## Only the engine can settle that, by recording what each card actually mounted on.
+NOT_FLOOR = "#s"
+
+
+def cards_by_hall() -> dict:
+    d = load_json(CARDS, "the wall card record")
+    rows = (d or {}).get("cards") or []
+    out: dict = {}
+    for c in rows:
+        out.setdefault("%s|%s" % (c.get("chapter"), c.get("pearl")), []).append(c)
+    return out
+
+
+def grid_at(grid: list, cx: int, cz: int) -> str:
+    if 0 <= cz < len(grid) and 0 <= cx < len(grid[cz]):
+        return grid[cz][cx]
+    return ""
+
+
+def card_state(grid: list, c: dict) -> str:
+    """'off_grid', 'unmounted' (nothing to hang on), or 'mounted'."""
+    cell = c.get("cell") or []
+    if len(cell) < 2:
+        return "off_grid"
+    cx, cz = int(cell[0]), int(cell[1])
+    if not grid_at(grid, cx, cz):
+        return "off_grid"
+    for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+        if grid_at(grid, cx + dx, cz + dz) in NOT_FLOOR:
+            return "mounted"
+    return "unmounted"
+
+
+def score_cards(key: str, hall: dict, cards: list) -> dict:
+    grid = hall.get("cells") or []
+    tally = {"mounted": 0, "unmounted": 0, "off_grid": 0}
+    flagged = []
+    for c in cards:
+        st = card_state(grid, c)
+        tally[st] += 1
+        if st != "mounted":
+            flagged.append({"id": c.get("id"), "cell": c.get("cell"), "world": c.get("world"), "state": st})
+    return {"key": key, "cards": len(cards), "flagged": flagged, **tally}
 
 
 def modes() -> dict:
@@ -211,67 +262,96 @@ def check(verbose: bool) -> int:
 
 
 def draw() -> int:
-    """A top-down page per hall, in WORLD metres, coloured by defect. No cell mapping is used."""
+    """A TOP VIEW per hall: the museum's own cell grid, with its wall cards and artifacts on it.
+
+    Every mark is placed by a cell the engine recorded, never by arithmetic of ours, so this
+    page cannot drift from the museum the way a re-derived drawing would.
+    """
     walk = load_json(WALK, "the museum's own record")
     if walk is None:
         return 1
     halls = walk.get("halls") or {}
-    fp, table = footprints(), modes()
+    by_hall = cards_by_hall()
+    table = modes()
     OUT.mkdir(parents=True, exist_ok=True)
-    index = []
+    CS = 15                       # pixels per cell
+    FLOOR, SOLID, SEAL = "#2b3040", "#616a80", "#8a6a4a"
+    index, totals = [], {"mounted": 0, "unmounted": 0, "off_grid": 0}
     for key, hall in sorted(halls.items()):
-        r = score_hall(key, hall, fp, table)
-        bodies = [b for b in (hall.get("bodies") or []) if isinstance(b, dict) and b.get("world")]
-        if not bodies:
+        grid = hall.get("cells") or []
+        if not grid:
             continue
-        askew_tokens = {a["token"] for a in r["askew"]}
-        stacked_tokens = {s["a"] for s in r["stacked"]} | {s["b"] for s in r["stacked"]}
-        xs = [float(b["world"][0]) for b in bodies]
-        zs = [float(b["world"][2]) for b in bodies]
-        pad = 2.0
-        x0, x1 = min(xs) - pad, max(xs) + pad
-        z0, z1 = min(zs) - pad, max(zs) + pad
-        sc = 26.0
-        w, h = max(1.0, (x1 - x0)) * sc, max(1.0, (z1 - z0)) * sc
-        parts = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %.0f %.0f" width="%.0f" height="%.0f">'
-                 % (w, h + 34, w, h + 34),
+        cards = by_hall.get(key, [])
+        sc = score_cards(key, hall, cards)
+        for k in totals:
+            totals[k] += sc[k]
+        mode, pinned = mode_of(table, key)
+        cols = max(len(r) for r in grid)
+        w, h = cols * CS, len(grid) * CS
+        top = 46
+        parts = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" width="%d" height="%d">'
+                 % (w + 2, h + top + 10, w + 2, h + top + 10),
                  '<rect width="100%%" height="100%%" fill="#14161c"/>',
-                 '<text x="8" y="20" fill="#d8dbe4" font-family="monospace" font-size="13">%s &#183; %s &#183; %d bodies &#183; %d askew &#183; %d stacked</text>'
-                 % (key, r["mode"], r["bodies"], len(r["askew"]), len(r["stacked"]))]
-        for b in bodies:
-            bx = (float(b["world"][0]) - x0) * sc
-            bz = (float(b["world"][2]) - z0) * sc + 34
-            rad = max(4.0, fp.get(b.get("token"), 0.5) * float(b.get("scale", 1.0) or 1.0) * sc)
-            tok = b.get("token", "?")
-            if tok in stacked_tokens:
-                col, edge = "#e2603c", "#ff9a72"      # standing in something
-            elif tok in askew_tokens:
-                col, edge = "#d8b33c", "#ffe08a"      # not square to any wall
-            else:
-                col, edge = "#3f6d8e", "#7fb3d5"
-            if tok in r["pinned"]:
-                edge = "#ffffff"
-            parts.append('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s" fill-opacity="0.45" stroke="%s" stroke-width="1.2"/>'
-                         % (bx, bz, rad, col, edge))
-            ang = math.radians(float(b.get("rot", 0.0)))
-            parts.append('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="%s" stroke-width="1.6"/>'
-                         % (bx, bz, bx + math.sin(ang) * rad, bz - math.cos(ang) * rad, edge))
+                 '<text x="6" y="19" fill="#e6e9f2" font-family="monospace" font-size="14">%s</text>' % key,
+                 '<text x="6" y="36" fill="#9aa3b8" font-family="monospace" font-size="11">'
+                 '%s &#183; %d wall cards: <tspan fill="#6fbf73">%d mounted</tspan>, '
+                 '<tspan fill="#e2603c">%d with nothing beside them</tspan>, '
+                 '<tspan fill="#9aa3b8">%d off grid</tspan></text>'
+                 % (mode, sc["cards"], sc["mounted"], sc["unmounted"], sc["off_grid"])]
+        for z, row in enumerate(grid):
+            for x, ch in enumerate(row):
+                col = SOLID if ch == "#" else (SEAL if ch == "s" else FLOOR)
+                parts.append('<rect x="%d" y="%d" width="%d" height="%d" fill="%s" stroke="#1b1f29" stroke-width="0.5"/>'
+                             % (x * CS + 1, z * CS + top, CS, CS, col))
+                if ch == "p":
+                    parts.append('<circle cx="%.1f" cy="%.1f" r="2" fill="#c8b06a"/>'
+                                 % (x * CS + 1 + CS / 2, z * CS + top + CS / 2))
+        for b in (hall.get("bodies") or []):
+            tc = b.get("tile_cell") or []
+            if len(tc) < 2:
+                continue
+            cx, cy = int(tc[0]) * CS + 1 + CS / 2, int(tc[1]) * CS + top + CS / 2
+            parts.append('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="none" stroke="#7fb3d5" stroke-width="1.4"/>'
+                         % (cx, cy, CS * 0.34))
+        for c in cards:
+            cell = c.get("cell") or []
+            if len(cell) < 2:
+                continue
+            st = card_state(grid, c)
+            col = {"mounted": "#6fbf73", "unmounted": "#e2603c", "off_grid": "#9aa3b8"}[st]
+            cx, cy = int(cell[0]) * CS + 1, int(cell[1]) * CS + top
+            parts.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="%s" fill-opacity="0.85" stroke="#0b0d12" stroke-width="0.6"/>'
+                         % (cx + CS * 0.22, cy + CS * 0.22, CS * 0.56, CS * 0.56, col))
         parts.append("</svg>")
         name = key.replace("|", "__").replace("/", "_") + ".svg"
         (OUT / name).write_text("\n".join(parts), encoding="utf-8")
-        index.append((key, name, r))
+        index.append((key, name, sc, mode))
     rows = "\n".join(
-        '<li><a href="%s">%s</a> &#183; %s &#183; %d bodies, <b>%d askew</b>, <b>%d stacked</b></li>'
-        % (n, k, s["mode"], s["bodies"], len(s["askew"]), len(s["stacked"])) for k, n, s in index)
+        '<li><a href="%s">%s</a> &#183; %s &#183; %d cards, <b style="color:#6fbf73">%d</b> mounted, '
+        '<b style="color:#e2603c">%d</b> with nothing beside them, %d off grid</li>'
+        % (n, k, m, s["cards"], s["mounted"], s["unmounted"], s["off_grid"])
+        for k, n, s, m in sorted(index, key=lambda r: -r[2]["unmounted"]))
     (OUT / "index.html").write_text(
-        '<html><head><meta charset="utf-8"><title>museum layout</title>'
-        '<style>body{background:#14161c;color:#d8dbe4;font-family:monospace;padding:24px}'
-        'a{color:#7fb3d5}li{margin:3px 0}</style></head><body>'
-        '<h2>Museum layout, top down</h2>'
-        '<p>Blue square to a wall. Yellow not square. Orange standing in another body. '
-        'A white outline is a pinned body you placed by hand. The tick is the facing.</p>'
-        '<ul>%s</ul></body></html>' % rows, encoding="utf-8")
-    print("drew %d halls -> %s" % (len(index), OUT / "index.html"))
+        '<html><head><meta charset="utf-8"><title>museum top view</title>'
+        '<style>body{background:#14161c;color:#d8dbe4;font-family:monospace;padding:24px;max-width:1100px}'
+        'a{color:#7fb3d5}li{margin:4px 0}b{font-weight:600}</style></head><body>'
+        '<h2>The museum from above</h2>'
+        '<p>Each page is one hall as the museum itself recorded it: its own cell grid, its own cell '
+        'indices. Nothing here is re-derived.</p>'
+        '<p><b>Grey cells</b> are not floor, which is what a card can hang on. <b>Dark cells</b> are '
+        'floor. <b>Brown</b> is a cell sealed by a body. <b>Blue rings</b> are floor artifacts. '
+        '<b>Squares are the wall cards</b>: green has something solid beside it, '
+        '<span style="color:#e2603c">orange has floor on all four sides</span>, grey fell outside the grid.</p>'
+        '<p>The orange squares are candidates, not convictions. The four-neighbour test is ours, not the '
+        'museum\'s, and a card may legitimately mount on something the grid does not mark solid. Only the '
+        'engine can settle it, by recording what each card actually mounted on.</p>'
+        '<p><b>%d cards over %d halls: %d mounted, %d with nothing beside them, %d off grid.</b></p>'
+        '<ul>%s</ul></body></html>'
+        % (sum(totals.values()), len(index), totals["mounted"], totals["unmounted"], totals["off_grid"], rows),
+        encoding="utf-8")
+    print("wall cards over %d halls: %d mounted, %d with nothing beside them, %d off grid"
+          % (len(index), totals["mounted"], totals["unmounted"], totals["off_grid"]))
+    print("top view -> %s" % (OUT / "index.html"))
     return 0
 
 
