@@ -1233,6 +1233,40 @@ const CARD_W := 0.14
 const CARD_H := 0.09
 const CARD_D := 0.006            # the card's thickness, out of the wall
 const CARD_DROP := 0.10          # below the mount's bottom edge
+const CARD_PAD := 0.006          # quiet around the line, every side
+
+
+## FIT THE LINE TO THE CARD (2026-09-19, Palle: "fix the card label overflow").
+##
+## The card label was drawn at font_size 40 and pixel_size 0.0009, which is 0.036 m a line
+## and, for the 28 characters the text is cut to, about 0.50 m across a plate 0.14 m wide.
+## It overflowed its own card by 3.6x, and had since the card was made.
+##
+## This does NOT go through speak_fit_measured. That rule is the FIELD's — it subtracts
+## HANG_MOUNT_W (0.09) a side and floors the field at 0.12 m, so handed a 0.14 x 0.09 card it
+## would return a field LARGER than the card and fit the line to a box that does not exist.
+## Bending it to serve both would move the text on every wall in the museum to fix a plate.
+## A 1.3 m field and a 14 cm card are different problems; this is the second rule, not a copy
+## of the first, and both measure with the same Godot primitive.
+##
+## No shrink loop is needed. Measure the line once at a reference size, then choose the metres
+## per pixel that makes the larger dimension land exactly inside the card:
+##     pixel_size = min(fieldw / size_px.x, fieldh / size_px.y)
+## Exact, one measurement, and it cannot overshoot in either direction.
+static func card_fit(font: Font, text: String, ref_size: int = 40) -> Dictionary:
+	var fieldw: float = maxf(CARD_W - 2.0 * CARD_PAD, 0.02)
+	var fieldh: float = maxf(CARD_H - 2.0 * CARD_PAD, 0.02)
+	if font == null or text == "":
+		return {"font_size": ref_size, "pixel_size": 0.00025, "size_px": Vector2.ZERO,
+			"needs": Vector2.ZERO, "field": Vector2(fieldw, fieldh), "fits": false}
+	var size_px: Vector2 = font.get_multiline_string_size(
+		text, HORIZONTAL_ALIGNMENT_CENTER, -1.0, ref_size)
+	var ps: float = 0.00025
+	if size_px.x > 0.0 and size_px.y > 0.0:
+		ps = minf(fieldw / size_px.x, fieldh / size_px.y)
+	return {"font_size": ref_size, "pixel_size": ps, "size_px": size_px,
+		"needs": Vector2(size_px.x * ps, size_px.y * ps),
+		"field": Vector2(fieldw, fieldh), "fits": true}
 
 
 ## The three names in HANG_FORMATS' own order — the only place that cycle's
@@ -1451,8 +1485,18 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 		# written — so a walked card can show that id where this string shows "%02d".
 		# The second line, which is the one the text rule sets, is never touched.
 		card.set_meta("em_showing_text", lbl.text)
-		lbl.font_size = 40
-		lbl.pixel_size = 0.0009
+		# the line is fitted to the plate, not drawn at a size nobody checked against it
+		var lbl_font: Font = ThemeDB.fallback_font
+		var fit_card: Dictionary = card_fit(lbl_font, lbl.text)
+		# and the TYPE the line is drawn at, now that it is fitted rather than fixed, so a
+		# preview can set the same size instead of inventing one (2026-09-19)
+		card.set_meta("em_showing_type", {
+			"font_size": int(fit_card["font_size"]), "pixel_size": float(fit_card["pixel_size"]),
+			"w": float((fit_card["needs"] as Vector2).x), "h": float((fit_card["needs"] as Vector2).y),
+			"field_w": float((fit_card["field"] as Vector2).x),
+			"field_h": float((fit_card["field"] as Vector2).y)})
+		lbl.font_size = int(fit_card["font_size"])
+		lbl.pixel_size = float(fit_card["pixel_size"])
 		lbl.modulate = Color(0.12, 0.11, 0.1)
 		lbl.outline_size = 0
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

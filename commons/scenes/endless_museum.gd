@@ -9270,7 +9270,8 @@ func _build_segment() -> void:
 						# rather than an invented one — the same contract `normal` keeps, and
 						# the difference between "not recorded" and "recorded" stays readable.
 						for meta_key in [["em_showing_card_geom", "card"],
-								["em_showing_mount", "mount"], ["em_showing_text", "text"]]:
+								["em_showing_mount", "mount"], ["em_showing_text", "text"],
+								["em_showing_type", "type"]]:
 							if ch_node.has_meta(meta_key[0]):
 								card_row[meta_key[1]] = ch_node.get_meta(meta_key[0])
 						_showing_cards.append(card_row)
