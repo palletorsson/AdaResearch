@@ -227,6 +227,9 @@ const HANG_PITCH_FACES := 2
 ## Rulings that say `remove` but not WHICH hall. Chapter-keyed, so enacting one deletes the
 ## same index in every hall of that chapter; counted per dress and reported, never enacted.
 static var _unscoped_removes: int = 0
+## A ruling that would have put a showing's card under the floor, lifted back instead.
+const HANG_FLOOR_CLEAR := 0.06   # air under the card's bottom edge
+static var _floor_lifts: int = 0
 # format cycle [width, height], in metres. Three formats, so a run of six reads
 # as a hang rather than as wallpaper — and the cycle is indexed off the run key,
 # not off randf(), so the same seed builds the same building.
@@ -529,6 +532,7 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	var showing_rules: Array = opts.get("showing_rules", [])
 	var this_pearl := String(opts.get("pearl", ""))
 	_unscoped_removes = 0
+	_floor_lifts = 0
 	var gone_x := Transform3D(Basis().scaled(Vector3.ZERO), Vector3.ZERO)
 	for rule_v in showing_rules:
 		var rule: Dictionary = rule_v
@@ -577,6 +581,21 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 		if si < 0 or si >= hang_mount_x.size() or off_a.size() < 3:
 			continue
 		var off := Vector3(float(off_a[0]), float(off_a[1]), float(off_a[2]))
+		# A WALL WORK CANNOT HANG BELOW THE FLOOR (2026-09-19). One ruling — primitives,
+		# index 18, offset [2.0, -1.4, 2.0] — dragged its work 1.4 m down, and because
+		# rulings are keyed by chapter it did that in every primitives hall with at least
+		# nineteen showings: nine cards at y -0.2 to -0.4, under the floor, in nine halls,
+		# from one drag. That is Palle's "sometimes in the air from old walls" with the sign
+		# flipped, and it is not a question of what the hand meant: a picture below the floor
+		# is wrong however it got there. The offset is honoured in full and then the whole
+		# showing is lifted back so the CARD's bottom edge clears the floor — mount bottom
+		# minus CARD_DROP minus CARD_H, plus a little air.
+		var mt: Transform3D = hang_mount_x[si]
+		var mh: float = absf(mt.basis.get_scale().y)
+		var bottom: float = mt.origin.y + off.y - mh * 0.5 - CARD_DROP - CARD_H
+		if bottom < HANG_FLOOR_CLEAR:
+			off.y += HANG_FLOOR_CLEAR - bottom
+			_floor_lifts += 1
 		hang_mount_x[si] = (hang_mount_x[si] as Transform3D).translated(off)
 		hang_field_x[si] = (hang_field_x[si] as Transform3D).translated(off)
 		for k in range(4):
