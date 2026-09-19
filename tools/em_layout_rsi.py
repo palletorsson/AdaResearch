@@ -119,29 +119,42 @@ def grid_at(grid: list, cx: int, cz: int) -> str:
 
 
 def card_state(grid: list, c: dict) -> str:
-    """'off_grid', 'unmounted' (nothing to hang on), or 'mounted'."""
-    cell = c.get("cell") or []
-    if len(cell) < 2:
-        return "off_grid"
-    cx, cz = int(cell[0]), int(cell[1])
-    if not grid_at(grid, cx, cz):
-        return "off_grid"
-    for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-        if grid_at(grid, cx + dx, cz + dz) in NOT_FLOOR:
-            return "mounted"
-    return "unmounted"
+    """What the card is mounted on, by the ENGINE's own answer.
+
+    Before 2026-09-19 the museum recorded only a cell, so this asked whether any of four
+    neighbours was solid — our guess, not the museum's, and it could never say what a card was
+    supposed to hang on. The museum now writes `normal` and `backing_cell`: the cell one step
+    back along the card's own outward normal, which IS the wall it is proud of. A card from
+    before that change is 'unrecorded' and is NOT guessed at.
+    """
+    bc = c.get("backing_cell")
+    if not bc or len(bc) < 2:
+        return "unrecorded"
+    ch = grid_at(grid, int(bc[0]), int(bc[1]))
+    if not ch:
+        return "backing_off_grid"
+    return "mounted" if ch in NOT_FLOOR else "on_air"
+
+
+def backing_char(grid: list, c: dict) -> str:
+    bc = c.get("backing_cell") or []
+    return grid_at(grid, int(bc[0]), int(bc[1])) if len(bc) >= 2 else ""
 
 
 def score_cards(key: str, hall: dict, cards: list) -> dict:
     grid = hall.get("cells") or []
-    tally = {"mounted": 0, "unmounted": 0, "off_grid": 0}
-    flagged = []
+    tally = {"mounted": 0, "on_air": 0, "backing_off_grid": 0, "unrecorded": 0}
+    flagged, skew = [], []
     for c in cards:
         st = card_state(grid, c)
-        tally[st] += 1
-        if st != "mounted":
-            flagged.append({"id": c.get("id"), "cell": c.get("cell"), "world": c.get("world"), "state": st})
-    return {"key": key, "cards": len(cards), "flagged": flagged, **tally}
+        tally[st] = tally.get(st, 0) + 1
+        if st not in ("mounted", "unrecorded"):
+            flagged.append({"id": c.get("id"), "cell": c.get("cell"), "backing_cell": c.get("backing_cell"),
+                            "backing": backing_char(grid, c), "world": c.get("world"), "state": st})
+        f = c.get("facing_deg")
+        if f is not None and off_square(float(f)) > SQUARE_TOL_DEG:
+            skew.append({"id": c.get("id"), "facing_deg": f, "off_deg": round(off_square(float(f)), 2)})
+    return {"key": key, "cards": len(cards), "flagged": flagged, "skew": skew, **tally}
 
 
 def modes() -> dict:
@@ -276,7 +289,7 @@ def draw() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     CS = 15                       # pixels per cell
     FLOOR, SOLID, SEAL = "#2b3040", "#616a80", "#8a6a4a"
-    index, totals = [], {"mounted": 0, "unmounted": 0, "off_grid": 0}
+    index, totals = [], {"mounted": 0, "on_air": 0, "backing_off_grid": 0, "unrecorded": 0}
     for key, hall in sorted(halls.items()):
         grid = hall.get("cells") or []
         if not grid:
@@ -294,10 +307,10 @@ def draw() -> int:
                  '<rect width="100%%" height="100%%" fill="#14161c"/>',
                  '<text x="6" y="19" fill="#e6e9f2" font-family="monospace" font-size="14">%s</text>' % key,
                  '<text x="6" y="36" fill="#9aa3b8" font-family="monospace" font-size="11">'
-                 '%s &#183; %d wall cards: <tspan fill="#6fbf73">%d mounted</tspan>, '
-                 '<tspan fill="#e2603c">%d with nothing beside them</tspan>, '
-                 '<tspan fill="#9aa3b8">%d off grid</tspan></text>'
-                 % (mode, sc["cards"], sc["mounted"], sc["unmounted"], sc["off_grid"])]
+                 '%s &#183; %d wall cards: <tspan fill="#6fbf73">%d on a wall</tspan>, '
+                 '<tspan fill="#e2603c">%d backed by open floor</tspan>, '
+                 '<tspan fill="#9aa3b8">%d off grid, %d not yet re-recorded</tspan></text>'
+                 % (mode, sc["cards"], sc["mounted"], sc["on_air"], sc["backing_off_grid"], sc["unrecorded"])]
         for z, row in enumerate(grid):
             for x, ch in enumerate(row):
                 col = SOLID if ch == "#" else (SEAL if ch == "s" else FLOOR)
@@ -318,7 +331,8 @@ def draw() -> int:
             if len(cell) < 2:
                 continue
             st = card_state(grid, c)
-            col = {"mounted": "#6fbf73", "unmounted": "#e2603c", "off_grid": "#9aa3b8"}[st]
+            col = {"mounted": "#6fbf73", "on_air": "#e2603c",
+                   "backing_off_grid": "#9aa3b8", "unrecorded": "#4a5064"}[st]
             cx, cy = int(cell[0]) * CS + 1, int(cell[1]) * CS + top
             parts.append('<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="%s" fill-opacity="0.85" stroke="#0b0d12" stroke-width="0.6"/>'
                          % (cx + CS * 0.22, cy + CS * 0.22, CS * 0.56, CS * 0.56, col))
@@ -328,9 +342,9 @@ def draw() -> int:
         index.append((key, name, sc, mode))
     rows = "\n".join(
         '<li><a href="%s">%s</a> &#183; %s &#183; %d cards, <b style="color:#6fbf73">%d</b> mounted, '
-        '<b style="color:#e2603c">%d</b> with nothing beside them, %d off grid</li>'
-        % (n, k, m, s["cards"], s["mounted"], s["unmounted"], s["off_grid"])
-        for k, n, s, m in sorted(index, key=lambda r: -r[2]["unmounted"]))
+        '<b style="color:#e2603c">%d</b> backed by open floor, %d off grid, %d not re-recorded</li>'
+        % (n, k, m, s["cards"], s["mounted"], s["on_air"], s["backing_off_grid"], s["unrecorded"])
+        for k, n, s, m in sorted(index, key=lambda r: -r[2]["on_air"]))
     (OUT / "index.html").write_text(
         '<html><head><meta charset="utf-8"><title>museum top view</title>'
         '<style>body{background:#14161c;color:#d8dbe4;font-family:monospace;padding:24px;max-width:1100px}'
@@ -340,17 +354,22 @@ def draw() -> int:
         'indices. Nothing here is re-derived.</p>'
         '<p><b>Grey cells</b> are not floor, which is what a card can hang on. <b>Dark cells</b> are '
         'floor. <b>Brown</b> is a cell sealed by a body. <b>Blue rings</b> are floor artifacts. '
-        '<b>Squares are the wall cards</b>: green has something solid beside it, '
-        '<span style="color:#e2603c">orange has floor on all four sides</span>, grey fell outside the grid.</p>'
-        '<p>The orange squares are candidates, not convictions. The four-neighbour test is ours, not the '
-        'museum\'s, and a card may legitimately mount on something the grid does not mark solid. Only the '
-        'engine can settle it, by recording what each card actually mounted on.</p>'
-        '<p><b>%d cards over %d halls: %d mounted, %d with nothing beside them, %d off grid.</b></p>'
+        '<b>Squares are the wall cards</b>: green is mounted on a wall, '
+        '<span style="color:#e2603c">orange is backed by open floor</span>, grey backs onto a '
+        'cell outside the grid, and a dim square is a card written before the museum began '
+        'recording its mount.</p>'
+        '<p>Since 2026-09-19 the museum records each card&#39;s outward normal and the cell it is '
+        'proud of, so an orange square is the engine&#39;s OWN answer and not our guess: one step '
+        'back along that card&#39;s own normal is open floor. Cards from before that change are '
+        'not guessed at.</p>'
+        '<p><b>%d cards over %d halls: %d on a wall, %d backed by open floor, %d off grid, '
+        '%d not yet re-recorded.</b></p>'
         '<ul>%s</ul></body></html>'
-        % (sum(totals.values()), len(index), totals["mounted"], totals["unmounted"], totals["off_grid"], rows),
+        % (sum(totals.values()), len(index), totals["mounted"], totals["on_air"],
+           totals["backing_off_grid"], totals["unrecorded"], rows),
         encoding="utf-8")
-    print("wall cards over %d halls: %d mounted, %d with nothing beside them, %d off grid"
-          % (len(index), totals["mounted"], totals["unmounted"], totals["off_grid"]))
+    print("wall cards over %d halls: %d on a wall, %d backed by open floor, %d off grid, %d not re-recorded"
+          % (len(index), totals["mounted"], totals["on_air"], totals["backing_off_grid"], totals["unrecorded"]))
     print("top view -> %s" % (OUT / "index.html"))
     return 0
 

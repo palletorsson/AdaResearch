@@ -464,6 +464,17 @@ func _load_showing_cards() -> void:
 		(_cards_seen[k] as Array).append(c)
 
 
+## A showing card's outward normal, as em_detail left it on the node: (nx, nz), one of the
+## four axis directions. Zero when a card predates the meta — the record then carries a zero
+## normal and no backing cell rather than a guess, and a reader can tell the two apart.
+func _showing_normal(n: Node) -> Vector2:
+	if n.has_meta("em_showing_normal"):
+		var v: Variant = n.get_meta("em_showing_normal")
+		if v is Vector2:
+			return v
+	return Vector2.ZERO
+
+
 func _save_showing_cards() -> void:
 	_load_showing_cards()
 	# this run REPLACES the halls it built, and leaves every other hall standing
@@ -9236,7 +9247,19 @@ func _build_segment() -> void:
 							# the hall plan needs exactly that. Written where it is
 							# known rather than guessed at downstream.
 							"cell": [int(floor((ch_node as Node3D).global_position.x)),
-								int(floor((ch_node as Node3D).global_position.z)) - zbase - VESTIBULE_H]})
+								int(floor((ch_node as Node3D).global_position.z)) - zbase - VESTIBULE_H],
+							# THE FACING AND THE MOUNT (2026-09-19, Palle: "add the facing and
+							# mount data to the engine record"). em_detail knows the wall plane
+							# a card is proud of and which side it stands on; it leaves the
+							# outward normal on the node and this writes it down beside the
+							# cell, with the cell BEHIND the card — the one it is mounted on —
+							# taken by stepping one cell back along that normal. Same reason as
+							# the cell above: only the museum can say it, so it says it rather
+							# than leaving every reader to guess from the neighbours.
+							"normal": [int(_showing_normal(ch_node).x), int(_showing_normal(ch_node).y)],
+							"facing_deg": snappedf(rad_to_deg(atan2(_showing_normal(ch_node).x, _showing_normal(ch_node).y)), 0.1),
+							"backing_cell": [int(floor((ch_node as Node3D).global_position.x)) - int(_showing_normal(ch_node).x),
+								int(floor((ch_node as Node3D).global_position.z)) - zbase - VESTIBULE_H - int(_showing_normal(ch_node).y)]})
 				_save_showing_cards()
 				# every showing proxy becomes an editor record of kind "showing"
 				if true:   # ALWAYS: showing records in both modes (the editor KEYS stay desktop-only)

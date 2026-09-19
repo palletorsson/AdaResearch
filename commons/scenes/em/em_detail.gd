@@ -1339,6 +1339,14 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 		card.position = pos
 		card.name = "ShowingCard%d" % si
 		card.set_meta("em_showing_card", si)
+		# 2026-09-19, Palle: "add the facing and mount data to the engine record". A card's
+		# facing and the wall it is proud of are both KNOWN here and nowhere else: `along_x`
+		# says the mount runs along x, so its wall is a z plane and the card looks along z;
+		# `nrm` says which side of that plane it stands on. Downstream every reader had to
+		# guess, and the guess (is there a wall on ANY of four sides?) called 170 of 354
+		# cards loose without being able to say what any of them was supposed to hang on.
+		# Written in the same spirit as the cell below: where it is known, not guessed at.
+		card.set_meta("em_showing_normal", Vector2(0.0, nrm) if along_x else Vector2(nrm, 0.0))
 		seg.add_child(card)
 		var lbl := Label3D.new()
 		lbl.text = "%02d" % (si + 1) + "\n" + (texts.get(si, "") if texts.has(si) else ("%s · %s" % [chapter, pearl] if pearl != "" else chapter)).left(28)
