@@ -1,0 +1,12 @@
+# Signed contributions in recorded order
+
+The restored hall uses existing MarchingCubesSculptVR and TerrainGeneratorSculpt, with a local compact PAIR/ADD/ERASE/HOLD/RESET/RULE desk. The original2m volume remains unscaled. Lesson extraction level0 makes the isolated sphere radius equal to the nominal radius; other scene placements retain level.3. PAIR centres are .90/.65/.45m apart, two radii.30. Smooth-union k is chunk_scale*.06=.12. ADD/ERASE target(0,0,.22), radius.25. Both buttons set the active mode and record one stroke through the same _paint_at_position path as controller input. Controller world positions are transformed into the artifact volume; out-of-volume strokes are rejected.
+
+Repair: _paint_at_position no longer takes abs(effective_radius). The shader uses abs(radius) for the sphere and branches on a negative sign. Addition keeps the existing smooth union; subtraction uses max(dist,2*isoLevel-sphere_distance), which reduces to max(dist,-sphere_distance) at lesson level0. At the inherited level.3 the cut radius receives the same level offset as an isolated additive sphere. Operations are sequential; erasure is not deletion or undo. Positive-only histories preserve the original path.
+
+A verified raw GPU counter of zero now clears old surfaces and colliders rather than leaving a ghost sculpture. Safety-aborted oversized output cannot qualify as empty. edit_revision tracks add/clear operations. The local desk completes initial outstanding compute, disables continuous generation on this instance, and rebuilds on revision changes at most once per.15s in its frame loop. Explicit desk actions rebuild immediately. This coalesces controller updates; it is not a proven Quest frame budget. Controller interaction remains active, while the instance's global keyboard/random-click handler is disabled to avoid painting when clicking the desk. The legacy tall panel is hidden with collision disabled here.
+
+HOLD deep-copies mesh/material4m beside the live volume without collision. RESET and PAIR preserve it. Both original artifact instances and all14x10 historical structure cells remain; the fountain is secondary. Eight active museum halls now include Sculpting between TorusGyroid and FlatTerrain; all13 curriculum maps remain.
+
+Sources: res://commons/artifacts/timing_machines/iso_sculpt_workshop.gd; res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/MarchingCubesSculptVR.gd; Scripts/TerrainGeneratorSculpt.gd; Compute/MarchingCubesSculpt.glsl.
+
