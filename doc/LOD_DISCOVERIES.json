@@ -744,6 +744,12 @@
       "topic": "gate attribution",
       "insight": "A gate's count is not its verdict: read the qualifier (tree_state, in_working_tree, reason, detector_selftest) first, and re-check a gate's claim about another tree with the gate's OWN matcher, never a substring approximation of it",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-09-21T05:47:30.343218+00:00",
+      "topic": "pipeline polish",
+      "insight": "stage 7 polish = any png in APPDATA multi_shots/<Map>; machine-local, closed on all 24 on 2026-09-21 by capturing the 3 maps added in the 09-07 re-plait",
+      "lod": 3
     }
   ]
 }
