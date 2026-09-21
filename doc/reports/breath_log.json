@@ -7714,6 +7714,59 @@
         "doc/reports/improvement_trajectory.json"
       ],
       "duration_minutes": 12
+    },
+    {
+      "breath_id": "2026-09-21T09:12",
+      "mode": "full",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "gates_before": {
+        "N_unreachable": 131,
+        "H": "PASS"
+      },
+      "gates_after": {
+        "N_unreachable": 1,
+        "H": "PASS"
+      },
+      "items_attempted": [
+        "read-gate-suite-not-global-avg",
+        "cross-gate-N-rows-against-forum-claims",
+        "post-forum-heads-up-260921-9sktt",
+        "land-130-stranded-tools",
+        "verify-gates-N-and-H-and-sibling-imports"
+      ],
+      "items_succeeded": [
+        "read-gate-suite-not-global-avg",
+        "cross-gate-N-rows-against-forum-claims",
+        "post-forum-heads-up-260921-9sktt",
+        "land-130-stranded-tools",
+        "verify-gates-N-and-H-and-sibling-imports"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "GATE N HAD DRIFTED FROM 5 TO 131 SINCE IT WAS BUILT ON 09-08 AND NO BREATH READ IT. The census works; nobody was acting on it. 130 of 131 were idle 36-550h, unclaimed, py_compile clean, none gitignored, no sibling import onto an untracked module. One commit (297067d06) took N to 1; the remaining row is tools/em_shots.py, claimed in 260919-ce4xw and left alone. Same shape as yesterday's gate L landing: stranded work sits outside the repo because sessions end at the write, not the commit.",
+        "forum_claims.attribute() on a gate's convicted rows is the whole ownership check in one call - it found the one claim among 131 rows; a raw basename grep over open threads found 9 mentions, 8 of them to-do lists or past reports, not claims. Use attribute(), not the grep.",
+        "A SECOND morning breath ran today (07:40 and 09:12). Fine here because the two picked different gates, but the scheduler does not know one already ran."
+      ],
+      "files_changed": [
+        "130 files under tools/ (added)",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "commit": "297067d06",
+      "duration_minutes": 20
     }
   ]
 }
