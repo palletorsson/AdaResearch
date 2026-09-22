@@ -7767,6 +7767,104 @@
       ],
       "commit": "297067d06",
       "duration_minutes": 20
+    },
+    {
+      "breath_id": "2026-09-21T18:55",
+      "mode": "evolve-only",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "items_attempted": [
+        "read-todays-two-breaths-and-three-commits",
+        "check-cited-ledger-ids-exist-in-their-files",
+        "read-both-tasks-run-history",
+        "write-prop-053-for-real-and-reread-it-from-disk",
+        "re-verify-gate-O-repair-at-HEAD",
+        "update-trajectory-and-log"
+      ],
+      "items_succeeded": [
+        "read-todays-two-breaths-and-three-commits",
+        "check-cited-ledger-ids-exist-in-their-files",
+        "read-both-tasks-run-history",
+        "write-prop-053-for-real-and-reread-it-from-disk",
+        "re-verify-gate-O-repair-at-HEAD",
+        "update-trajectory-and-log"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "PROP-053 WAS A GHOST: CITED IN THREE LEDGERS, ABSENT FROM THE ONE IT NAMES. The 09-20T06:45 entry says 'Written up as prop-053' and lists skill_evolution_proposals.json in files_changed; breath_log (7), improvement_trajectory (1) and weekly_breath_report_2026-09-21 (4) cite it. The file's mtime was 2026-09-18 18:58, last id prop-052, and no commit adds the string. The proposal about lost ledger writes was itself lost, by omission. Written tonight from the 09-20 entry's own evidence plus today's instances, and re-read from disk after the write (53 proposals, one prop-053).",
+        "SIXTH CO-FIRING, AND THE FIRST DOUBLE MORNING. Run history: morning 05:43:20.0Z and evening 05:43:20.8Z today, an off-slot catch-up like the five measured 09-20; the catch-up evening left no breath_log entry. The morning task then ran AGAIN on slot at 07:11Z, so two full breaths (07:40, 09:12) read the same ledgers 1h28m apart. Harmless today only because they chose different gates. Both are evidence for prop-053.",
+        "RUN-HISTORY DURATION IS NOT EVIDENCE. last_activity_at gives the 09-18 evening run 6 seconds, yet a full 09-18T18:55 entry exists. No claim tonight rests on it; the 09-20 entry's 'waited on the mtime' account cannot be checked against it either.",
+        "TODAY'S WORK, VERIFIED AT HEAD 90830c50c: three commits, all the breather's. 158b23851 closed stage 7 on all 24 (three captures: Tutorial_Tiling_Floor, Tutorial_Tiling_Walls, Pattern_Disco); 297067d06 landed 130 stranded tools, gate N 131 -> 1. global_avg 6.083 for the nineteenth reading; stage 6 (headset walk) is the head on 23 of 24.",
+        "THE GATE-O REPAIR IS UNCOMMITTED FOR THE FOURTH EVENING. The five biome maps still differ from HEAD by the same structure-row diff (34/34, 34/34, 34/34, 28/28, 18/18) plus tools/map_to_spec.py 8/7. Unchanged, unclaimed, not lost. Evolve-only does not commit project files; a morning breath should, after a forum heads-up.",
+        "LEVEL 3: items_failed is empty for the last fifteen breaths, so no skill reaches 3+ same-reason failures in the log's own terms. prop-053 meets the bar on evidence outside the log (six co-firings, one double morning, one ghost write). LEVEL 2/1: ada-breather is the only dispatched skill, and its 100% is a participation count. No new flow; the useful move tonight was 'grep every cited ledger id against its file', which prop-053 clause 2 would make automatic."
+      ],
+      "files_changed": [
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/skill_evolution_proposals.json"
+      ],
+      "duration_minutes": 15
+    },
+    {
+      "breath_id": "2026-09-22T09:20",
+      "mode": "full",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "items_attempted": [
+        "read-gate-suite-not-global-avg",
+        "classify-gate-M-145-rows",
+        "compile-check-74-idle-scripts",
+        "post-forum-heads-up-260922-zhdio",
+        "land-idle-unclaimed-artifact-files"
+      ],
+      "items_succeeded": [
+        "read-gate-suite-not-global-avg",
+        "classify-gate-M-145-rows",
+        "compile-check-74-idle-scripts",
+        "post-forum-heads-up-260922-zhdio",
+        "land-idle-unclaimed-artifact-files"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "release_gates": {
+        "before": "8/15 pass (F,I,J,K,L,M,N red)",
+        "after": "8/15 pass; M 145 -> 68, rooms_affected 445 -> 126"
+      },
+      "discoveries": [
+        "GATE M HAD 145 ROWS AND NO BREATH HAD READ IT. Every one of the 145 existed on disk, untracked: the third instance of the stranded-work class after gate L (prose, 09-20) and gate N (tools, 09-21). Artifact scripts a HEAD registry declares, mostly *_lesson.gd / *_study.gd siblings preloaded by tracked scenes, so a clone loads the scene and breaks on the script. 77 landed in 6189aae90 (idle >36h, unclaimed, 74/74 scripts pass check_compile.gd in one boot). Rooms affected 445 -> 126.",
+        "31 .tres MATERIALS ARE IGNORED ON PURPOSE AND GATE M CONVICTS THEM ANYWAY. .gitignore:328 '*.tres' sits after the '!*.tres' force-include at :320 and wins; 6 .tres are tracked in the whole repo. Not force-added. Put to Palle in 260922-zhdio as a choice: drop line 328, or teach gate M an ignored .tres is absent on purpose. Until then M cannot go green.",
+        "A FILE LIST WRITTEN BY WINDOWS PYTHON AND READ BY BASH CARRIES \r. It made `git check-ignore --stdin` report nothing ignored (so the ignore problem was invisible in the classify step) and made `git add` reject a pathspec with a trailing '?'. tr -d '\r' before any mapfile. And git add over a list with ignored members still STAGES the rest before failing, so a chained && commit leaves 77 files staged in the shared index - check `git diff --cached` after every failed add.",
+        "37 HELD BACK are one live family: physical interface controls (joystick/angular/driver/*_reference/*_console) and molecular_framework Assembly*.gd, 15-36h old, sibling of tools/interface_inventory.py in gate N. Owner should land them together."
+      ],
+      "files_changed": [
+        "77 artifact files (6189aae90)",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "duration_minutes": 35
     }
   ]
 }
