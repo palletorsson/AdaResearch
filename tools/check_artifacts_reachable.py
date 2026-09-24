@@ -78,9 +78,19 @@ import json
 import re
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+try:
+    import forum_claims
+except ImportError:  # the gate must still run if the reader is absent
+    forum_claims = None
+
+# The same hold gate N uses: a file touched inside it is somebody's open buffer.
+HOLD_HOURS = 24.0
 
 REG_DIR = "commons/artifacts/registry"
 MAP_DIR = "commons/maps"
@@ -243,6 +253,53 @@ def disk_paths():
     return out
 
 
+def reading(unreachable, ignored, mtimes, now, hold_hours=HOLD_HOURS):
+    """Split the convicted rows by what could move them. A READING, not a verdict.
+
+    Three mornings running (2026-09-22..24) a breath re-derived this split by
+    hand before it could act: gate M read 145, then 68, then 31, then 34, and
+    each time the first half hour went on asking which rows were gitignored on
+    purpose (.gitignore:328 '*.tres', a decision put to Palle in 260922-zhdio),
+    which were an open buffer, and which were really stranded. Gates L and N
+    print that split; this one printed only the total.
+
+    -> {"ignored": [...], "live": [...], "stranded": [...]}, rows carrying
+    age_hours. `ignored` wins over age: an ignored file is absent from a clone
+    by a rule, whatever its age. The count, the exit code and the verdict do
+    not read this -- a number that moves when a file is touched is not a gate.
+    """
+    out = {"ignored": [], "live": [], "stranded": []}
+    hold = hold_hours * 3600.0
+    for u in unreachable:
+        age = now - mtimes.get(u["path"], now)
+        row = dict(u, age_hours=round(age / 3600.0, 1))
+        if u["path"] in ignored:
+            out["ignored"].append(row)
+        elif age < hold:
+            out["live"].append(row)
+        else:
+            out["stranded"].append(row)
+    return out
+
+
+def git_ignored(paths):
+    """The subset of `paths` .gitignore excludes.
+
+    Fed as BYTES. A trailing \\r makes check-ignore answer 'nothing ignored':
+    it hid this whole population on 09-22 (a file list a Windows writer made),
+    and on 09-24 it hid it again from the first draft of this function, which
+    passed a str with text=True -- Windows text-mode stdin writes every \\n as
+    \\r\\n. The live run read '0 gitignored' against `git check-ignore -v`
+    naming .gitignore:328 for all 31."""
+    if not paths:
+        return set()
+    out = subprocess.run(["git", "check-ignore", "--stdin"], cwd=ROOT,
+                         input=("\n".join(paths) + "\n").encode("utf-8"),
+                         capture_output=True)
+    text = out.stdout.decode("utf-8", errors="replace")
+    return {line.strip() for line in text.splitlines() if line.strip()}
+
+
 def read_file(rel):
     try:
         return (ROOT / rel).read_text(encoding="utf-8", errors="replace")
@@ -341,6 +398,22 @@ def selftest():
                   ur == [] and ab == []
                   and [v["path"] for v in ve] == ["addons/kit/thing.gd"]))
 
+    # 8. The reading. Ignored beats age; the 24 h hold splits live from
+    #    stranded; and it is a reading -- the unreachable list it was handed
+    #    is not shortened by it.
+    now = 1_000_000.0
+    rows = [{"token": "t", "registry": "r", "path": p}
+            for p in ("m/old.tres", "m/old.gd", "m/new.gd")]
+    split = reading(rows, ignored={"m/old.tres"},
+                    mtimes={"m/old.tres": now - 90 * 3600,
+                            "m/old.gd": now - 30 * 3600,
+                            "m/new.gd": now - 2 * 3600}, now=now)
+    cases.append(("reads ignored / live / stranded without dropping a row",
+                  [r["path"] for r in split["ignored"]] == ["m/old.tres"]
+                  and [r["path"] for r in split["stranded"]] == ["m/old.gd"]
+                  and [r["path"] for r in split["live"]] == ["m/new.gd"]
+                  and len(rows) == 3))
+
     bad = [name for name, ok in cases if not ok]
     for name, ok in cases:
         print("  %-52s %s" % (name, "ok" if ok else "FAIL"))
@@ -368,6 +441,32 @@ def main():
         for room in placed.get(u["token"], ())
     })
 
+    paths = [u["path"] for u in unreachable]
+    mtimes = {}
+    for rel in paths:
+        try:
+            mtimes[rel] = (ROOT / rel).stat().st_mtime
+        except OSError:
+            pass
+    split = reading(unreachable, git_ignored(paths), mtimes, time.time())
+    claimed = {}
+    if forum_claims is not None and paths:
+        try:
+            hits = forum_claims.attribute(paths, forum_claims.claims(forum_claims.load()))
+            claimed = {p: forum_claims.who(f) for p, f in hits.items() if f}
+        except Exception:  # a broken forum store must not break the gate
+            claimed = {}
+    for rows in split.values():
+        for r in rows:
+            if r["path"] in claimed:
+                r["claimed_by"] = claimed[r["path"]]
+    free = [r for r in split["stranded"] if "claimed_by" not in r]
+    floor = ("%d gitignored on purpose (a rule decides them, not a commit), "
+             "%d touched within %dh (somebody's open buffer), %d stranded "
+             "(%d of them claimed in the forum). Landable by an agent today: %d."
+             % (len(split["ignored"]), len(split["live"]), int(HOLD_HOURS),
+                len(split["stranded"]), len(split["stranded"]) - len(free), len(free)))
+
     report = {
         "registries_in_head": sum(1 for p in in_head
                                   if p.startswith(REG_DIR + "/") and p.endswith(".json")),
@@ -377,6 +476,13 @@ def main():
         "absent_from_every_tree": len(absent),
         "vendored_not_in_repo": len(vendored),
         "rooms_affected": len(unreachable_rooms),
+        "ignored_on_purpose": len(split["ignored"]),
+        "live_under_hold": len(split["live"]),
+        "stranded": len(split["stranded"]),
+        "claimed_in_the_forum": len(claimed),
+        "landable_today": len(free),
+        "floor_reading": floor,
+        "split": split,
         "unreachable": unreachable,
         "absent": absent,
         "rooms": unreachable_rooms,
@@ -388,8 +494,12 @@ def main():
         print("artifacts declared by a registry in HEAD : %d" % report["artifacts_declared"])
         print("files reached through them               : %d" % report["files_checked"])
         print("UNREACHABLE FROM A CLONE                 : %d" % report["unreachable_from_a_clone"])
-        for u in unreachable:
-            print("   %-34s %s" % (u["token"], u["path"]))
+        for kind in ("stranded", "live", "ignored"):
+            for u in split[kind]:
+                print("   %-34s %-8s %6.1fh  %s%s" % (
+                    u["token"], kind, u["age_hours"], u["path"],
+                    ("   <- " + u["claimed_by"]) if u.get("claimed_by") else ""))
+        print("  reading: %s" % floor)
         print("absent from every tree (gate B's)        : %d" % report["absent_from_every_tree"])
         for a in absent:
             print("   %-34s %s" % (a["token"], a["path"]))

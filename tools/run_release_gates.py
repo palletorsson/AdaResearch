@@ -901,6 +901,14 @@ def build_report(
                     # decision -- both printed so the numbers stay visible.
                     "absent_from_every_tree": int(reach.get("absent_from_every_tree", -1)),
                     "vendored_not_in_repo": int(reach.get("vendored_not_in_repo", -1)),
+                    # A reading, not the verdict: which convicted rows a rule
+                    # decides, which are an open buffer, which are landable.
+                    # Three breaths re-derived this by hand before acting.
+                    "ignored_on_purpose": int(reach.get("ignored_on_purpose", -1)),
+                    "live_under_24h": int(reach.get("live_under_hold", -1)),
+                    "stranded": int(reach.get("stranded", -1)),
+                    "landable_today": int(reach.get("landable_today", -1)),
+                    "floor_reading": reach.get("floor_reading", ""),
                 },
             }
         )

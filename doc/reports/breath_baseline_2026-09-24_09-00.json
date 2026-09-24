@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-09-24T09:00:00+02:00",
+  "phase": "baseline",
+  "pipeline_summary": {"global_avg": 6.083, "sequences": 24, "complete": 1, "head": "stage 6 vr_testing on 23 of 24"},
+  "heat_map_top_5": [["museum", 80], ["floor", 65], ["pipeline polish", 60], ["gate M", 60], ["release gates", 60]],
+  "garden_health": "not re-run; unchanged class since 09-21",
+  "release_gates": {
+    "PASS": ["A", "B", "C", "D", "E", "G", "H", "O"],
+    "FAIL": {
+      "F": "no_route at z 33.7 - em_autopilot.json written 0.1h before, a live museum session",
+      "I": "14 lost, all tracked-modified (live prose)",
+      "J": "14 lost",
+      "K": "12 ECHO rows, all in commons/data/book/*.json - Astra's per the 09-24 OWNERSHIP.md",
+      "L": "5 unreachable: 4 claimed in the forum, 1 (Array/technical.md) in a dir with live edits",
+      "M": "34 unreachable: 31 .tres gitignored at .gitignore:328, 3 .gd 19-22h old and unclaimed",
+      "N": "1: tools/em_shots.py, claimed by 260919-ce4xw"
+    }
+  }
+}
