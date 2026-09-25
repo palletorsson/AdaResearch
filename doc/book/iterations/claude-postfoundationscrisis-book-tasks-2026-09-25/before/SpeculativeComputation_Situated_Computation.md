@@ -6,8 +6,6 @@ What changes when the subject stays the same but the source of the judgement cha
 
 Begin with FOOTNOTE on the four inward-facing panels. Read the subject identifier on each. Keep it fixed in your comparison, then note the verdict, the confidence and the small address below. Look back at the first panel after reading the others: it has not become a different subject because another description is available.
 
-A small four-legged creature hunts among the readouts. When it reaches you it bites, and enough bites restart the hall. The panels do not direct it, and their confidence numbers do not describe its behaviour. Keep it in view while you read.
-
 SUBJECT #4729 appears as ORDERLY, CREATIVE, DANGEROUS or IRRELEVANT across the four positions. The associated percentages differ too. The room makes a judgement’s location visible instead of presenting one description as if it came from nowhere.
 
 The source makes the operation inspectable:
@@ -37,7 +35,7 @@ Choose DANGEROUS and ask what evidence would make that judgement accountable. Da
 
 For the room’s next experiment, each panel could reveal a distinct criterion and the observation it used. A visitor could then compare disagreement caused by different evidence with disagreement caused by different definitions. The current four views supply the scaffold for that comparison.
 
-The creature is still hunting. Keep the two encounters distinguishable: an assigned judgement on a screen, and a rule that acts on a body. What would we need to observe before calling either one dangerous?
+A small spider moves among the readouts. It can notice and follow you; its controller can bite. The panels do not direct this creature, and their confidence numbers do not describe its behaviour. For now, keep the two encounters distinguishable: an assigned judgement on a screen, and a rule that acts on a body. What would we need to observe before calling either one dangerous?
 
 <!-- @ -->
 

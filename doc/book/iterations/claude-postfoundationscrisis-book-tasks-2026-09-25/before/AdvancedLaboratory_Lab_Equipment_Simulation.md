@@ -1,7 +1,5 @@
 # Where a body is expected
 
-Where was this body's destination decided?
-
 <!-- @MolecularDesigner -->
 
 A hand waits at the end of an arm. Take it a little farther than an arm ought to reach. The elbow stays behind. The slender connection follows, becoming longer. Let go.
@@ -43,10 +41,6 @@ Now leave the joints where they are. Find the turquoise collar beside the left h
 
 The line that used to end at the hand now ends at the head. The body still has thirteen joints and twelve connections. Not one point needed to move.
 
-![The starting body, the connection rerouted to the head, and the elbow end brought to the hand](/book-review/doc/book/figures/postfoundationscrisis/rerouted-connection-three-states.png)
-
-*One connection, rerouted twice, drawn from the assembly file. Amber joints, straw lines; the changed line in the turquoise of the final hall. No joint moves in any of the three.*
-
 Follow the lines with your eyes. With this change to the starting body, you can go from the head through the torso and left shoulder, down to the elbow, and back to the head. A loop has appeared. The hand waits outside that circuit, with no line reaching it. It has not disappeared from the room. It has disappeared from the body's connected part.
 
 The program changes one entry:
@@ -73,8 +67,6 @@ The rhizome gave us passages through connections. Here a connection helps someth
 
 Eventually a joint meets the edge of its working space. There is still a room around this experiment, a limit someone supplied. The catalogue beside it has spare parts. This body cannot yet take one. Perhaps the next desire is another joint, another connection, more room. The useful question is which operation would let that desire take form.
 
-## Another body
-
 Another body waits over a dark mat. You recognise its head, shoulders, hands. Coral rings mark places your hand can take. Pull one wrist.
 
 This elbow comes with it.
@@ -91,16 +83,18 @@ Hang it up again with the small control on the stand. Try a foot. Try holding tw
 
 This body has been given a different set of permissions, too. Its joints turn more freely than yours. That freedom can produce a collapse you could not imitate. The model lets us try a body without making that body the measure of every other one.
 
-## The furniture
+A chair has legs too.
 
-A chair has legs too. Find the one held under fine lines. The supports keep its opening pose available long enough to recognise it. Take the coral ring on its back. The supports let go. Pull a little higher: the seat follows, and the legs swing into another arrangement. Release it. For a moment the chair looks as though it is trying to sit down.
+Find the one held under fine lines. The supports keep its opening pose available long enough to recognise it. Take the coral ring on its back. The supports let go. Pull a little higher: the seat follows, and the legs swing into another arrangement. Release it. For a moment the chair looks as though it is trying to sit down.
 
 The back, seat and four legs are still connected. Their joints have been allowed to turn where you may have expected them to stay fixed. The familiar parts have not been enough to preserve the familiar use.
 
-Across the passage, lift one leg of the table and watch the top. Its flatness survives; its promise of being level does not. The lamp beside it bends and goes on shining, its light following the bulb to the floor. Falling has not broken a circuit here, because that consequence was never included. Failure has to be specified too.
+Across the passage, lift one leg of the table. Watch what happens to the top. Its flatness survives; its promise of being level does not. What else would have to hold before you trusted this arrangement with something you did not want to spill?
+
+The lamp bends and goes on shining. Its light follows the bulb towards the floor. Falling has not broken a circuit here; that consequence was never included. Failure has to be specified too.
 
 Each stand can reassemble its object. Try taking a different part. The same rule for pulling can pass from a wrist to a chair back, from a foot to a table leg. The names offer different expectations before the movement begins. What is the connection actually obliged to keep?
 
 <!-- @ -->
 
-Leave the amber-jointed body a little unlike the one you found. A changed joint or connection in that workshop is kept for the final hall, where the body will stand beside the one it began with. You can leave the room and meet the difference again. What will have survived the journey?
+Leave the gold body a little unlike the one you found. A changed joint or connection in that workshop is kept for the final hall, where the body will stand beside the one it began with. You can leave the room and meet the difference again. What will have survived the journey?

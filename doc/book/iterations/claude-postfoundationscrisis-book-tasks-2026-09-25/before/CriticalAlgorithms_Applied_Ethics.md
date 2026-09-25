@@ -6,7 +6,7 @@ Who does this room make easiest to address?
 
 Begin with HEAD. One miniature room waits on the pedestal. Before anyone speaks, where does your eye place the speaker? Walk around the model and compare the large chair at the end with the smaller ones beside the table.
 
-Press CIRCLE. Choose one position and imagine speaking from it. Trace the distances to the others. Then press PAIR to see both plans together. The models become smaller so they fit beside each other; the panel stays where it is.
+Press CIRCLE. Choose one position and imagine speaking from it. Trace the distances to the others. Then press PAIR to see both plans together. The models become smaller so they fit beside each other; the panel stays where your hand left it.
 
 The long table gives one position a conspicuous role even while every chair has the same colour. Its six smaller accompanying chairs carry less visual weight. The other model places six equal chairs around a round table. The comparison changes more than an outline on the floor: it changes relative size, position and the implied relation between participants.
 

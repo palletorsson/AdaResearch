@@ -1,0 +1,17 @@
+--- before/SpeculativeComputation_Paraconsistent_Engineering.md
++++ after/SpeculativeComputation_Paraconsistent_Engineering.md
+@@ -26,7 +26,7 @@
+ 
+ Try a concrete disagreement. One report says a door is open; another says it is closed. Adding times may reconcile the reports. Adding the door’s identity may reveal that they concern different doors. Preserving provenance gives us ways to investigate before treating every difference as a contradiction about the same thing at the same time.
+ 
+-Formal paraconsistency concerns the inference rules themselves. In a paraconsistent logic, a contradiction need not license an arbitrary conclusion. It does not mean accepting every claim or abandoning the distinction between supported and unsupported inference. [Basu and Roy’s research paper starts from this failure of explosion when developing more general definitions.](https://arxiv.org/abs/2112.00357)
++Formal paraconsistency concerns the inference rules themselves. In a paraconsistent logic, a contradiction need not license an arbitrary conclusion. It does not mean accepting every claim or abandoning the distinction between supported and unsupported inference. Basu and Roy’s research paper starts from this failure of explosion when developing more general definitions.[^basu-roy]
+ 
+ The current junction is an analogy for retaining a conflict, not a demonstration of that formal property. The next useful addition would expose a small rule table: after entering both a proposition and its negation, which consequences remain available, and which unrelated conclusion still cannot be derived?
+ 
+@@ -35,3 +35,5 @@
+ <!-- @ -->
+ 
+ Situated computation takes up that provenance. Four panels will judge one subject differently, and their positions will become part of what the judgement tells you.
++
++[^basu-roy]: Sankha S. Basu and Sayantan Roy, "Negation-Free Definitions of Paraconsistency", arXiv:2112.00357 (2021).

@@ -26,7 +26,7 @@ Press FORK. Both branches regain their height and lean apart. If the marker is v
 
 Try a concrete disagreement. One report says a door is open; another says it is closed. Adding times may reconcile the reports. Adding the door’s identity may reveal that they concern different doors. Preserving provenance gives us ways to investigate before treating every difference as a contradiction about the same thing at the same time.
 
-Formal paraconsistency concerns the inference rules themselves. In a paraconsistent logic, a contradiction need not license an arbitrary conclusion. It does not mean accepting every claim or abandoning the distinction between supported and unsupported inference. Basu and Roy’s research paper starts from this failure of explosion when developing more general definitions.[^basu-roy]
+Formal paraconsistency concerns the inference rules themselves. In a paraconsistent logic, a contradiction need not license an arbitrary conclusion. It does not mean accepting every claim or abandoning the distinction between supported and unsupported inference. [Basu and Roy’s research paper starts from this failure of explosion when developing more general definitions.](https://arxiv.org/abs/2112.00357)
 
 The current junction is an analogy for retaining a conflict, not a demonstration of that formal property. The next useful addition would expose a small rule table: after entering both a proposition and its negation, which consequences remain available, and which unrelated conclusion still cannot be derived?
 
@@ -35,5 +35,3 @@ Return to RESOLVED and find the small name beside B. A label remains, but it tel
 <!-- @ -->
 
 Situated computation takes up that provenance. Four panels will judge one subject differently, and their positions will become part of what the judgement tells you.
-
-[^basu-roy]: Sankha S. Basu and Sayantan Roy, "Negation-Free Definitions of Paraconsistency", arXiv:2112.00357 (2021).

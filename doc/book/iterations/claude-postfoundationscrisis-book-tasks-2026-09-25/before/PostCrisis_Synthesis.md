@@ -1,7 +1,5 @@
 # The body that returned
 
-What will have survived the journey?
-
 <!-- @assembly_return -->
 
 Look for the hand you moved.
@@ -20,7 +18,7 @@ The hand has arrived. Your hand is missing.
 
 <!-- @accountability_ledger -->
 
-Come close enough to read the ledger. It names the Assembly Laboratory, gives the time of the last kept change, counts the joints displaced from their starting places, and says whether any of the twelve connections has been rerouted. Its account comes from the same record as the amber body. Waiting in front of it does not add another achievement.
+Come close enough to read the ledger. It names the Assembly Laboratory, gives the time of the last kept change, counts the joints displaced from their starting places, and distinguishes twelve connections from twelve unchanged connections. Its account comes from the same record as the amber body. Waiting in front of it does not add another achievement.
 
 After a changed joint is released, the program writes its record:
 

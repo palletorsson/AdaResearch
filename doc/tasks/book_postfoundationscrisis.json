@@ -149,9 +149,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SpeculativeComputation_Rhizome_Network"
       ],
@@ -166,7 +166,7 @@
       "proposal": "Move the rhizome_grower token from cell (4,2) to the south end beside the exit (for example (4,34), an open floor cell) and re-run the pathfinder; the reading order then matches the walk with no prose change. If the map must stay, reorder the chapter (grower region first) and rewrite the two bridging sentences ('That boundary is easier to see at this scale. Inside the cave, its equivalent was a wall.').",
       "evidence": "commons/maps/SpeculativeComputation_Rhizome_Network/map_data.json interactables: rhizome_grower at (4,2), rhizome_cave_demo at (15,18); utilities s (spawn) at (15,1), t at (15,35); structure is an open 31x37 floor with doors at rows 0 and 36. RhizomePassages.gd:9-10 (FIELD_ORIGIN z -15.75, 71 cells x 0.45 m, so the shell spans about 14 m either side of the cave cell) and :144 (portals cut at |z| >= 13.85, so the mouths sit near cells 4 and 32). The grower therefore stands north of the north mouth, next to the spawn.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: chapter reordered to the walk (grower first, cave second), bridging sentences rewritten; map token untouched.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -177,9 +177,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SpeculativeComputation_Situated_Computation"
       ],
@@ -194,7 +194,7 @@
       "proposal": "Move the spider paragraph up to follow the first paragraph, and say plainly what it does: 'A small four-legged creature hunts among the readouts; when it reaches you it bites, and enough bites restart the hall. Keep it in view while you read.' Keep the closing question ('What would we need to observe before calling either one dangerous?') where it is.",
       "evidence": "map_data.json interactables: head_crab:180#detection:14 at (7,5), spawn s at (5,1), open 10x10 floor. commons/hazards/head_crab/head_crab.gd:97-118 (can_bite true, contact_damage 18, lunge_damage 34, lunge_range 1.9, bite_range 0.72, bite_cooldown 0.95), :1274-1290 (chases any target inside detect_m and commits a lunge), :1151-1158 (damage falls through to GameManager.apply_health_damage).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: creature introduced after the first paragraph, plainly (hunts, bites, enough bites restart the hall); closing question kept.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -205,9 +205,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SpeculativeComputation_Collective_Knowledge"
       ],
@@ -222,7 +222,7 @@
       "proposal": "Either pass each station's angle into _tag and set tag.rotation.y so every pad faces outward from the table centre (then the sentences are true), or cut the two sentences and let 'Take a place at the rim, then walk to another' stand on the instruments themselves.",
       "evidence": "commons/artifacts/the_commons_table/the_commons_table.gd:48-55 (_tag: tag.position = at, no rotation), calls at :119, :146, :152, :165, :191, :215, :235, :252; commons/ui/text_screen.gd:110-117 (PAD mode reclines the screen about x only, facing the same way for every instance).",
       "review": "confirmed by a code checker (cited files only): the_commons_table.gd:48-55 _tag sets mode = 2, width_m and tag.position = at, never a rotation; all eight call sites (:119, :146, :152, :165, :191, :215, :235, :252) pass only a position. text_screen.gd:110-117 PAD mode rotates the holder about x only (-58 deg). Every card therefore faces the same way. final.md:42 carries the two sentences and the 'no position from which every account addresses you at once' conclusion.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the two cards-facing-away sentences cut; the code alternative (rotate tags outward) stays available.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -233,9 +233,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PostCrisis_Synthesis"
       ],
@@ -250,7 +250,7 @@
       "proposal": "Replace with: 'and says whether any of the twelve connections has been rerouted.'",
       "evidence": "commons/artifacts/accountability_ledger/accountability_ledger.gd:190 (\"12 connections retained\") and :191-192 (\"12 connections; %d rerouted\" when changed_connections(record) > 0).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: ledger fourth line now says whether any of the twelve connections has been rerouted.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -261,9 +261,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SpeculativeComputation_Collective_Knowledge"
       ],
@@ -278,7 +278,7 @@
       "proposal": "Recast: 'Read PARTICIPATIONS again after a VERSION. It can pass twelve, because it adds together each version's distinct sources. Call that number CONTRIBUTORS and a label has quietly turned repeated attendance into an expanding community. SOURCES counts distinct nodes in this version; EVER counts distinct nodes across versions.'",
       "evidence": "commons/artifacts/peer_production_tool/peer_production_tool.gd:422-423 (readout prints PARTICIPATIONS from _contributors, SOURCES from _version_sources, EVER from _ever_seen.size()); _contributors incremented at :227 and reset only in _build (:111), not in _clear_form (:164-177); _version_sources reset at :173. git log -S CONTRIBUTORS on the file returns only 7cb10a583.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: counting passage recast (PARTICIPATIONS can pass twelve; SOURCES; EVER).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -289,9 +289,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "AdvancedLaboratory_Lab_Equipment_Simulation"
       ],
@@ -306,7 +306,7 @@
       "proposal": "Add two plain sub-headings at 'Another body waits over a dark mat.' and 'A chair has legs too.', and fold the table and lamp into one paragraph that keeps 'Its flatness survives; its promise of being level does not' and 'Failure has to be specified too.'",
       "evidence": "Word counts: 1677 versus 448-1027 for the other seven halls. Five separate studies are built by algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd:544-552 (BodyWorkshop), :454-474 (auto-cycle), :575-583 (BodyRagdoll), :585-599 (Furniture_Chair, _Table, _Lamp).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: sub-headings Another body / The furniture; table and lamp folded into one paragraph keeping both sentences.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -317,9 +317,9 @@
       "effort": "half-day",
       "skill": "design",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "AdvancedLaboratory_Lab_Equipment_Simulation"
       ],
@@ -334,7 +334,7 @@
       "proposal": "Add one figure: the thirteen joints and twelve lines as the start body, then with the hand end of the elbow-hand line released at the head (loop, hand isolated), then with the elbow end released at the hand (hand joined to the head, loop gone), drawing the changed line in the turquoise the final hall uses.",
       "evidence": "assemblies.json:105-113 (the twelve bonds); AssemblyBodyStudy.gd:68 (only l_elb-l_hand is editable), :193 (pairs[bond_index].y = candidate), :195 (.x = candidate); assembly_return.gd:95-96 (a rerouted edge is drawn in Color(.12,.85,.8)). 25 of 196 spine chapters carry an image; none of this sequence's eight does.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: figure rerouted-connection-three-states.png drawn from assemblies.json (matplotlib), inserted after the loop paragraph.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -345,9 +345,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SpeculativeComputation_Paraconsistent_Engineering"
       ],
@@ -362,7 +362,7 @@
       "proposal": "Make the sentence plain prose and add a footnote: 'Sankha S. Basu and Sayantan Roy, \"Negation-Free Definitions of Paraconsistency\", arXiv:2112.00357 (2021).' The attribution is accurate: their abstract opens from paraconsistency as the failure of explosion and proposes negation-independent definitions.",
       "evidence": "arXiv abs page for 2112.00357: title 'Negation-Free Definitions of Paraconsistency', authors Sankha S. Basu and Sayantan Roy; abstract: 'Paraconsistency is commonly defined and/or characterized as the failure of a principle of explosion.' Compare the [^1] form in SpeculativeComputation_Rhizome_Network/final.md line 49.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: plain sentence + footnote [^basu-roy] (Basu and Roy 2021, arXiv:2112.00357).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -373,9 +373,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SpeculativeComputation_Collective_Knowledge"
       ],
@@ -390,7 +390,7 @@
       "proposal": "Rewrite the bridge: 'The rhizome hall lets you walk connections before it grows any: a composed set of passages you can enter and return through, then a small network that adds its own points. A shared result can have many contributors while its network still develops uneven centres.'",
       "evidence": "algorithms/spacetopology/marchingcubes/rhizome/RhizomePassages.gd:2-3 ('The graph is a composition, not evidence that a random growth rule found these routes'); the rhizome chapter: 'For this encounter, their junctions and heights have been composed ... It has not secretly designed this cave.'",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: bridge rewritten to the reordered rhizome hall (network grown before one is walked).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -401,9 +401,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "AdvancedLaboratory_Lab_Equipment_Simulation"
       ],
@@ -418,7 +418,7 @@
       "proposal": "In the lab's closing paragraph write 'Leave the amber-jointed body a little unlike the one you found', or introduce it once as amber where it first appears ('warm metal joints').",
       "evidence": "AssemblyBodyStudy.gd:50 (joints Color(.95,.57,.21)), :75 (rods Color(.85,.77,.57)); assembly_return.gd:7 (AMBER := Color(.95,.57,.21)), :17 (LAST KEPT POSE label in AMBER).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: \"the amber-jointed body\" in the closing line.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -429,9 +429,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SpeculativeComputation_Rhizome_Network"
       ],
@@ -446,7 +446,7 @@
       "proposal": "Add one question under each of the three titles, drawn from the sequence file's own verbs: rhizome 'Which connections can a body enter, and which can it only see?'; laboratory 'Where was this body's destination decided?'; synthesis 'What will have survived the journey?' (the last already appears in the lab's closing line).",
       "evidence": "final.md files: the bias, ethics, paraconsistent, situated and collective halls and QFEP_Synthesis each have a question as their first body line; rhizome, lab and synthesis do not. Corpus scan: 65 of 196 spine chapters carry the line, so it is a sequence device rather than a book rule. commons/maps/sequences/postfoundationscrisis.json artifact_groups rationale lines supply the questions ('Can a network grow without naming a root?', 'Where was this body's destination decided?').",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: opening questions under the rhizome, lab and synthesis titles.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -457,9 +457,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SpeculativeComputation_Rhizome_Network"
       ],
@@ -474,7 +474,7 @@
       "proposal": "Keep the citation and 'especially pp. 7-15' and cut the two sentences that follow.",
       "evidence": "SpeculativeComputation_Rhizome_Network/final.md line 49 (the footnote) against lines 27 and 29 of the body, which already state the limit.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the Deleuze and Guattari footnote ends at the page reference.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -485,9 +485,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CriticalAlgorithms_Applied_Ethics"
       ],
@@ -502,7 +502,7 @@
       "proposal": "Write 'the panel stays where it is' (or 'stays under your hand').",
       "evidence": "algorithms/postfoundationscrisis/room_shape_demonstrator.gd:402-415 (console created once at Vector3(0,1.02,1.18), not a pickable), :432 (_console.show() on every plan change).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: \"the panel stays where it is\".",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     }

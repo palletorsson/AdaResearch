@@ -1,19 +1,5 @@
 # Another way through
 
-Which connections can a body enter, and which can it only see?
-
-<!-- @rhizome_grower -->
-
-Near the way in, a small grower is already at work. A new point appears and reaches towards points already there. An older point can receive a relation it could not have anticipated. The newcomer cannot reach into its own future.
-
-Hold the growth and compare one link with three. The positions stay. Some of the ways between them disappear. You have changed no point's address, yet moving through the network would be a different undertaking.
-
-Here we can inspect the rule more closely. Each arrival chooses nearby earlier points. There is no declared root, but proximity and time still make some points more available than others. Removing a busy point asks a further question: which relations survive without it? The model can restore the point and its former links. Inventing a new connection would be another act.
-
-The ring does not spread with the shoots. The machine keeps finding new places inside a boundary it chose before the network began. Something is growing, but its territory has already been given.
-
-That boundary is easy to see at this scale. Inside the cave ahead, its equivalent will be a wall. We can enjoy what these rules make possible and still want to change where they stop.
-
 <!-- @rhizome_cave_demo -->
 
 From outside, you can follow several passages with your eyes. One rises across another. Openings disappear into the tangle. There seems to be a way through.
@@ -28,7 +14,7 @@ Above the lower passages, a longer route climbs and comes down elsewhere. From o
 
 The distinction has followed us from the drawn line. A crossing on a screen may conceal a difference in depth. The triangle gave a surface to the image; here the surface surrounds you, supports your feet and keeps two journeys apart. The engine must decide where it holds. Your body encounters that decision as a floor, a slope, a wall.
 
-These passages begin as connections between positions. For this encounter, their junctions and heights have been composed so that we can walk several returns, including the upper crossing. The small growing network you passed follows a different rule. It has not secretly designed this cave.
+These passages begin as connections between positions. For this encounter, their junctions and heights have been composed so that we can walk several returns, including the upper crossing. The small growing network nearby follows a different rule. It has not secretly designed this cave.
 
 To give a connection room, the cave calculation opens a volume around it. Where two such volumes meet, their interiors join. There must be no leftover wall sealing the junction. A small line of code performs this union:
 
@@ -44,8 +30,20 @@ Deleuze and Guattari give the rhizome multiple entryways and connections between
 
 There is pleasure in finding another way. There can also be shelter in the turn that takes you out of sight, or company at a junction where separate routes arrive. These possibilities give a connection more than one use. A space can be legible to a drawing and still hold something for the body to discover.
 
+<!-- @rhizome_grower -->
+
+The small grower offers a different kind of arrival. A new point appears and reaches towards points already there. An older point can receive a relation it could not have anticipated. The newcomer cannot reach into its own future.
+
+Hold the growth and compare one link with three. The positions stay. Some of the ways between them disappear. You have changed no point's address, yet moving through the network would be a different undertaking.
+
+Here we can inspect the rule more closely. Each arrival chooses nearby earlier points. There is no declared root, but proximity and time still make some points more available than others. Removing a busy point asks a further question: which relations survive without it? The model can restore the point and its former links. Inventing a new connection would be another act.
+
+The ring does not spread with the shoots. The machine keeps finding new places inside a boundary it chose before the network began. Something is growing, but its territory has already been given.
+
+That boundary is easier to see at this scale. Inside the cave, its equivalent was a wall. We can enjoy what these rules make possible and still want to change where they stop.
+
 <!-- @ -->
 
 The museum has an onward direction. You have just spent time returning, approaching from another side, making a route that was yours to choose. Carry that desire into the assembly laboratory. There, the available parts will ask what other body they could become.
 
-[^1]: Gilles Deleuze and Félix Guattari, *A Thousand Plateaus*, translated by Brian Massumi (University of Minnesota Press, 1987), “Introduction: Rhizome,” especially pp. 7–15.
+[^1]: Gilles Deleuze and Félix Guattari, *A Thousand Plateaus*, translated by Brian Massumi (University of Minnesota Press, 1987), “Introduction: Rhizome,” especially pp. 7–15. Connection, heterogeneity, rupture and a modifiable map extend beyond the shape of a branching object. The cave offers a material experiment in passages and returns; it does not make a network's complexity a guarantee of freedom.
