@@ -12,7 +12,7 @@ Choose one repeated element and compare its neighbours along the regular side. T
 
 In the project formula, lambda weights the contribution associated with entropy. On the introductory console, changing it altered an arithmetic balance. This hall instead provides a spatial analogy for that weighting. Its forms are built from their assigned positions across the spectrum; it does not measure the entropy of each structure and then discover where it belongs.
 
-The lit route is therefore a curatorial argument. Its chosen value is not a universal threshold at which life, creativity or queerness appears. A welcoming middle can be an evocative design without becoming a result established by physics. The board by the door has already chalked life at λ ≈ 0.4. Read it as the thesis this hall puts to the test, not as its result.
+The lit route is therefore a curatorial argument. Its chosen value is not a universal threshold at which life, creativity or queerness appears. A welcoming middle can be an evocative design without becoming a result established by physics.
 
 Try reversing the expected evaluation. Find something the repeated side offers that the dispersed side makes difficult: a landmark, a dependable interval, a place to compare small differences. Then find something the dispersed side permits that the regular side suppresses. Neither observation needs to erase the other.
 
@@ -22,7 +22,7 @@ Return to the small console at the entrance. Move LIT STRIP. The light slides ac
 
 Watch for disagreement. The bright strip may now point beneath a form instead of through the gap the architecture prepared. Light has made a recommendation, not cleared a passage. The rail moves between 0.20 and 0.80 to keep its strip inside the hall’s kerbs; even this power to recommend has been given a limit.
 
-There are two kinds of preference visible now: the one you can move, and the one already built into the rows. Moving the light does not erase the arrangement that made the first invitation convincing. Would another visitor choose differently after seeing your version first?
+There are two kinds of preference visible now: the one you can move, and the one already built into the rows. Changing the sign does not erase the arrangement that made the first invitation convincing. Would another visitor choose differently after seeing your version first?
 
 QFEP asks who may revise a model’s terms. Here you can change one of the room’s terms of persuasion. Its forms, its colours and the possibilities on the rail remain authored. What else would you need to change before this felt like your decision?
 

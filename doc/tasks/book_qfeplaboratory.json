@@ -151,9 +151,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Edge_Of_Chaos"
       ],
@@ -168,7 +168,7 @@
       "proposal": "Open the region with one locating sentence: 'The console is the pair of framed screens on the east side, under SAME START / SAME TIME; the rail nearer the door is a separate handle wired to nothing in this hall.' (Alternatively remove the dead #locked token and the rail from the map, but the sentence alone repairs the reader's experience.)",
       "evidence": "commons/maps/QFEP_Edge_Of_Chaos/map_data.json:702 'lambda_slider:0:0.5#locked:0.4' (row 2; spawn 's' at :409 row 1); commons/interfaces/qfep/lambda_slider.gd:574-576 ('#locked: ... nothing here'; apply_grid_config returns unless 'calibration'); lambda_slider.gd:195-196 joins group qfep_lambda_controllers; commons/interfaces/qfep/edge_core.gd:16 'VR lambda connection [missing]'; the study console is map_data.json:777 'edge_of_chaos_unlocked:270:0:1#comparison_study:on' with its own LAMBDA at commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd:471",
       "review": "confirmed by a code checker (cited files only): QFEP_Edge_Of_Chaos map: spawn 's' at (7,1), 'lambda_slider:0:0.5#locked:0.4' at (10,2) (three cells), 'edge_of_chaos_unlocked:270:0:1#comparison_study:on' at (13,6) on the east side. lambda_slider.gd:575-577 apply_grid_config returns unless 'calibration' (the header comment names #locked as doing 'nothing here'); :195-196 joins qfep_lambda_controllers. The only reader of that group is edge_of_chaos_orb.gd:196, which is not placed in this hall; edge_core.gd:28-30 says nothing in the repository calls its set_lambda. edge_of_chaos_unlocked.gd:468-471 titles its panel 'SAME START / SAME TIME' under comparison_study with its own LAMBDA row. final.md:7 opens with 'Keep SIM SPEED steady and move LAMBDA slowly'.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: locating sentence opens the region (the framed screens under SAME START / SAME TIME; the rail by the door drives nothing). Map token left as is.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -179,9 +179,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Lambda_Spectrum"
       ],
@@ -196,7 +196,7 @@
       "proposal": "Either add one sentence after the lit-route paragraph: 'The board by the door has already chalked life at λ ≈ 0.4. Read it as the thesis this hall puts to the test, not as its result.' Or, a map edit: pass the chalkboard a #lines: config (the artifact reads config_lines) that keeps the formula gloss and drops the fifth line.",
       "evidence": "commons/maps/QFEP_Lambda_Spectrum/map_data.json:1073 'qfep_chalkboard:180:0:1' (column 3 row 2; spawn column 8 row 1); commons/primitives/qfep_chalkboard/qfep_chalkboard.gd:19-26 default lines ending 'life at λ ≈ 0.4'; :15-19 config_lines / config_diagram metadata override",
       "review": "amended by a code checker (cited files only): map_data.json:1073 'qfep_chalkboard:180:0:1' at interactables (3,2); qfep_chalkboard.gd:19-26 default lines end 'life at λ ≈ 0.4', :15-19 has_meta('config_lines') / config_diagram override; final.md:15 has the quoted sentence and the chapter never mentions the board. Correction: the spawn 's' is at utilities (8,1), so the board is five cells west and one row in, not 'two cells from the spawn'. It is still in the entry register.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the chalkboard sentence after the lit-route paragraph (prose option).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -207,9 +207,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Synthesis"
       ],
@@ -224,7 +224,7 @@
       "proposal": "Retitle the five narrative 3t utilities in the chapter's vocabulary (leave F, E(S), λ, φ), or keep them and add one sentence: 'The floor still promises an imago and a return transformed. The plate promises less, and says what it measures.'",
       "evidence": "commons/maps/QFEP_Synthesis/map_data.json:391 '3t:EGG', :425 '3t:THE PLINTH OF BECOMING', :473 '3t:FORMULA UNFOLDS', :505 '3t:IMAGO', :521 '3t:RETURN TRANSFORMED'; commons/grid/UtilityRegistry.gd:92-97 ('3t' = text_display, TextMesh)",
       "review": "amended by a code checker (cited files only): QFEP_Synthesis map_data.json lines 391/425/473/505/521 are '3t:EGG', '3t:THE PLINTH OF BECOMING', '3t:FORMULA UNFOLDS', '3t:IMAGO', '3t:RETURN TRANSFORMED' in the utilities layer at (4,3),(6,5),(6,8),(6,10),(6,11). UtilityRegistry.gd:92-97 maps 3t to text_display / word_is.tscn (TextMesh). final.md:23 has the quoted sentence and never mentions egg/imago. Correction: the hall carries nine 3t labels, not five; the other four are F, E(S), λ, φ.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the floor promises an imago; the plate promises less (prose option; 3t utilities untouched).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -235,9 +235,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Lambda_Spectrum"
       ],
@@ -252,7 +252,7 @@
       "proposal": "Replace with 'Moving the light does not erase the arrangement that made the first invitation convincing.'",
       "evidence": "commons/maps/QFEP_Lambda_Spectrum/final.md:25; commons/artifacts/lambda_hall/lambda_hall.gd:181 slider 'LIT STRIP', :188 recommendation_position = lerpf(0.20, 0.80, ...) (an unsigned position)",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: \"Moving the light does not erase\".",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -263,9 +263,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Edge_Of_Chaos"
       ],
@@ -280,7 +280,7 @@
       "proposal": "Either cut the paragraph, or compress it to one sentence the visitor can hold: 'A previous version of this screen made its pattern partly by overshooting and clipping its values; that too was something code had made, answering a different question from the one the display claimed to ask.' Keep the last sentence's point: repairing the solver gives another way to investigate, not a self-explaining image.",
       "evidence": "commons/maps/QFEP_Edge_Of_Chaos/final.md:23; commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd:38 'Earlier capture variants used a different solver from the interactive mode', :314-315 'No concentration clipping: B may legitimately exceed 1 during a transient'",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the earlier-calculation paragraph compressed to one sentence plus the repair point.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -291,9 +291,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Phi_Term"
       ],
@@ -308,7 +308,7 @@
       "proposal": "Add a short paragraph before the closing line: 'On the way to the door, eight small bodies stand in a row with λ numbers on their plinths. That rail reviews the previous hall in miniature; it carries no φ control, and nothing on it hears the rail you have just moved.'",
       "evidence": "commons/maps/QFEP_Phi_Term/map_data.json:615 'lambda_promenade:0:0' (column 6 row 9; teleporter column 6 row 10; transforming_pattern :587 row 7); commons/interfaces/qfep/lambda_promenade.gd:10 (eight emblems in lambda order on one 4.34 m rail with the lambda number on each plinth), :131 readout 'numeral' default",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the lambda promenade paragraph before the closing line.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -319,9 +319,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Introduction"
       ],
@@ -336,7 +336,7 @@
       "proposal": "Extend the opening: 'In the previous room, the formula waited to be questioned. It hangs again at the back of this hall; on the console in front of it, it returns a number.'",
       "evidence": "commons/maps/Crisis_Synthesis/final.md:97; commons/maps/QFEP_Introduction/map_data.json:592 'qfep_formula_3d:180:1.5', :346 '3t:THE FORMULA'; commons/maps/QFEP_Introduction/final.md:3",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the opening extended - the formula hangs at the back of the hall.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -347,9 +347,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Phi_Term"
       ],
@@ -364,7 +364,7 @@
       "proposal": "Rewrite: 'The handle starts at zero, and nothing is released. Once you have moved it, bringing it back near zero only slows the release to a crawl; watch the speed rather than waiting for silence.' (Or, code: a dead band such as absf(phi) < 0.02 at phi_slider.gd:658, in which case the sentence can stay.)",
       "evidence": "commons/interfaces/qfep/phi_slider.gd:658 '_particles.emitting = not is_zero_approx(phi)'; :592-594 phi = (position / rail_length) * 2.0 - 1.0; :655-656 initial_velocity = absf(phi) * 0.20; commons/maps/QFEP_Phi_Term/map_data.json:540 '#sign_study:on#phi:0'",
       "review": "confirmed by a code checker (cited files only): phi_slider.gd:592-594 phi = (position / rail_length) * 2.0 - 1.0 on _on_slider_moved; :655-656 initial_velocity_min/max = absf(phi) * 0.20; :658 `_particles.emitting = not is_zero_approx(phi)` (epsilon-exact test, no dead band). QFEP_Phi_Term/map_data.json:540 `phi_slider:180:1.1:1#sign_study:on#phi:0`. final.md:7 carries the sentence.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: prose option - the handle starts at zero; near zero the release only crawls. No dead band added.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -375,9 +375,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Synthesis"
       ],
@@ -392,7 +392,7 @@
       "proposal": "Replace with: 'Breathing runs only while LAMBDA sits between 0.3 and 0.7, and within an amplitude the maker selected; outside that band the plate says STEADY whatever the button says.'",
       "evidence": "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd:729 mode = 'PULSE' if breathing_enabled and lambda > 0.3 and lambda < 0.7 else 'STEADY'; :748 the same gate in _update_pressure; :633 presets [0.1,-0.8], [0.5,0.0], [0.8,0.6]",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: breathing runs only between LAMBDA 0.3 and 0.7.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -403,9 +403,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_F_Term"
       ],
@@ -420,7 +420,7 @@
       "proposal": "Replace with 'The F of the formula asks a related but different question about a model's fit and prediction.'",
       "evidence": "commons/maps/QFEP_F_Term/final.md:15; commons/maps/QFEP_F_Term/map_data.json:443 shannon_workbench, :464 dark_sphere, :489 snap_octahedron_puzzle, :500 crystal_cluster (no F artifact in layers.interactables)",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: \"The F of the formula\".",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -431,9 +431,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Introduction"
       ],
@@ -448,7 +448,7 @@
       "proposal": "Add a footnote after 'free-energy contribution': Karl Friston, 'The free-energy principle: a unified brain theory?', Nature Reviews Neuroscience 11 (2010) 127-138, with one line saying the console's F is a 0-1 rail named after that quantity and computes none of it.",
       "evidence": "commons/maps/QFEP_Introduction/final.md:17; commons/maps/sequences/qfeplaboratory.json:99-100 key_figures 'Karl Friston'; commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd:724-725 'All four controls: 0 to 1' / 'Delta E = ... (fixed, not measured)'",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: Friston footnote [^friston] on the naming sentence.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -459,9 +459,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Edge_Of_Chaos"
       ],
@@ -476,7 +476,7 @@
       "proposal": "Add a footnote on 'feed, removal and diffusion coefficients': the Gray-Scott model; John E. Pearson, 'Complex Patterns in a Simple System', Science 261 (1993) 189-192; note that LAMBDA's path through feed and kill is authored here and is not a parameter of that model.",
       "evidence": "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd:305 'Map lambda to Gray-Scott feed/kill parameter space', :307-310 feed/kill/diffusion lerps; commons/maps/QFEP_Edge_Of_Chaos/final.md:9,13",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: Gray-Scott / Pearson footnote [^gray-scott].",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -487,9 +487,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Introduction"
       ],
@@ -504,7 +504,7 @@
       "proposal": "Open the paragraph at line 13 with the naming sentence from line 17 ('F names a modelling or free-energy contribution, E an entropy contribution, lambda their relative weighting, and phi the weighting attached to change.'), then give the arithmetic; leave line 17 to introduce the expression and the 'does not measure' caveat.",
       "evidence": "commons/maps/QFEP_Introduction/final.md:13 (arithmetic) and :17 (names); readout order at commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd:721-726 also prints the formula first",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the naming sentence now opens the arithmetic paragraph; the expression paragraph keeps the caveat.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -515,9 +515,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "QFEP_Edge_Of_Chaos"
       ],
@@ -532,7 +532,7 @@
       "proposal": "Replace with 'Fix it in words before you touch anything: which feature are you comparing, and over how much observed time?'",
       "evidence": "commons/maps/QFEP_Edge_Of_Chaos/final.md:15; the reader is the VR visitor (task brief); commons/maps/QFEP_Edge_Of_Chaos/map_data.json:699-777 lists no note-taking device among layers.interactables",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: \"Fix it in words before you touch anything\".",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     }

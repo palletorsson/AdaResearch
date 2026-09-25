@@ -1,0 +1,11 @@
+--- before/QFEP_F_Term.md
++++ after/QFEP_F_Term.md
+@@ -12,7 +12,7 @@
+ 
+ The workbench calculates binary Shannon entropy from the chosen probability: H(p) = −p log₂ p − (1−p) log₂(1−p). The grid is one finite sample of the specified source. H describes uncertainty under that source model; it is not a guarantee about the exact shortest encoding of this particular displayed grid.
+ 
+-The room’s F term asks a related but different question about a model’s fit and prediction. Predictability under an assumed distribution, a realised prediction error and variational free energy are not interchangeable quantities. The entropy readout computes the first of those. It gives us a precise starting observation without pretending its H readout is already a measurement of F.
++The F of the formula asks a related but different question about a model’s fit and prediction. Predictability under an assumed distribution, a realised prediction error and variational free energy are not interchangeable quantities. The entropy readout computes the first of those. It gives us a precise starting observation without pretending its H readout is already a measurement of F.
+ 
+ Press EXPECT 0. Each amber underline marks a bit that refuses that guess. Compare p near 0.1 with p near 0.9 again. The entropy returns to almost the same height, but the mistakes spread. The source is no more uncertain; this predictor is less suited to it.
+ 

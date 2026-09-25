@@ -1,6 +1,6 @@
 # Four controls, one result
 
-In the previous room, the formula waited to be questioned. It hangs again at the back of this hall; on the console in front of it, it returns a number.
+In the previous room, the formula waited to be questioned. Here it returns a number.
 
 Can two different arrangements of a model produce the same number?
 
@@ -10,11 +10,11 @@ Move one control on the workbench and watch both the numerical result and the sh
 
 Now try changing two controls to return the result towards the kept total. Look for two configurations that look different on the axes but give nearly the same number. The outline remembers what the total cannot.
 
-The console combines four adjustable quantities. F names a modelling or free-energy contribution,[^friston] E an entropy contribution, lambda their relative weighting, and phi the weighting attached to change. Its current calculation is F minus lambda times E, plus phi times a fixed change value of 0.3. Raising F raises the result. Raising E lowers it in proportion to lambda. Raising phi adds more of the fixed change contribution. When lambda is zero, moving E does not affect the total through that term.
+The console combines four adjustable quantities. Its current calculation is F minus lambda times E, plus phi times a fixed change value of 0.3. Raising F raises the result. Raising E lowers it in proportion to lambda. Raising phi adds more of the fixed change contribution. When lambda is zero, moving E does not affect the total through that term.
 
 Try the special case with lambda at zero before comparing more complicated settings. Watch what happens to the total when E changes, then give lambda a nonzero value and repeat. The contrast reveals a dependency: E’s contribution passes through another control. A slider can move through its full range without affecting one particular result when its weight is zero. That is a property of this calculation, not evidence that entropy is absent from every surrounding object.
 
-This is an operational introduction to the project’s QFEP expression, QFE = F − λE(S) + φΔE(S,t). The console lets you inspect that arithmetic. It does not measure these quantities from a living system, and its fixed change value is not an observed rate.
+This is an operational introduction to the project’s QFEP expression, QFE = F − λE(S) + φΔE(S,t). F names a modelling or free-energy contribution, E an entropy contribution, lambda their relative weighting, and phi the weighting attached to change. The console lets you inspect that arithmetic. It does not measure these quantities from a living system, and its fixed change value is not an observed rate.
 
 QFEP stands for **Queer Free Energy Principle**. Ada uses the name to ask something of a model as well as something through it: whose persistence does it support, which differences can it notice, and who may change its terms? In the project’s research documents, Q keeps those terms open to revision while protecting the capacities of what the model leaves out to live, act and answer back. More entropy is not, by itself, more freedom. A boundary can shelter a body; opening it can also expose that body to harm.[^qfep]
 
@@ -33,5 +33,3 @@ The next room starts with a smaller, computable question: what makes an outcome 
 [^qfep]: The project’s [QFEP development notes](../../../doc/research/qfep/README.md) and [Entropic morality](../../../doc/research/qfep/entropic-morality.md) develop this ethical commitment. It is a research proposal, not a moral law derived from entropy or a result established by this console.
 
 [^self-q]: [Project entry: The Self-Q](../../../doc/ENTRY.md#the-self-q-recursive-qfep) names the maker’s own history and the three questions used to examine a design decision.
-
-[^friston]: Karl Friston, "The free-energy principle: a unified brain theory?", *Nature Reviews Neuroscience* 11 (2010), 127–138. The console's F is a rail from zero to one named after that quantity; it computes none of it.

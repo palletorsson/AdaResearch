@@ -12,7 +12,7 @@ LAMBDA changes the mapping to stiffness and pressure. PHI changes damping and dr
 
 Watch a change settle over time rather than comparing only two instantaneous shapes. A shape can look similar at two moments while the continuing movement differs. Conversely, a temporarily different shape may return towards a familiar arrangement. The separate controls invite you to name these distinctions: resistance to deformation, persistence of motion, and the effects of pressure. Following one region of the specimen through several moments can make the comparison easier than watching every moving surface at once.
 
-The mapping is authored for this specimen. Stiffness decreases across the lambda range, pressure has a designed peak near the middle, and signed phi changes the damping and drag values. Breathing runs only while LAMBDA sits between 0.3 and 0.7, and within an amplitude the maker selected; outside that band the plate says STEADY whatever the button says. The plate shows what the body receives. It does not establish that nature uses the same numerical scale.
+The mapping is authored for this specimen. Stiffness decreases across the lambda range, pressure has a designed peak near the middle, and signed phi changes the damping and drag values. Breathing varies around that pressure baseline within an interval the maker selected. The plate shows what the body receives. It does not establish that nature uses the same numerical scale.
 
 Compare two combinations outside the named presets: relatively high stiffness with low damping, and relatively low stiffness with high damping. Which difference do you notice first? Avoid reducing both observations to one word such as rigid or fluid. Naming the distinct mechanical properties gives you a more useful account of what changed.
 
@@ -20,7 +20,7 @@ The name above the glass stays. Inside, the terms of holding together have chang
 
 The laboratory has now used its terms in several ways: arithmetic weights on a console, spatial analogies in a hall, and controls mapped to a body’s mechanics. Their shared vocabulary invites comparison, but the mappings need to remain explicit. Even PHI’s signed range here differs from its range on the introductory console.
 
-A responsive specimen is not an assay of queerness or a test for life. The floor still promises an imago and a return transformed; the plate promises less, and says what it measures. The question its name opens is what forms of continuity and variation a model makes available. A future observation could preserve a trace of deformation over time, letting different responses be compared beyond their immediately attractive appearance.
+A responsive specimen is not an assay of queerness or a test for life. The question its name opens is what forms of continuity and variation a model makes available. A future observation could preserve a trace of deformation over time, letting different responses be compared beyond their immediately attractive appearance.
 
 <!-- @ -->
 
