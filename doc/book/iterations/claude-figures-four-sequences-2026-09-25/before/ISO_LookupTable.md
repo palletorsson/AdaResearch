@@ -35,10 +35,6 @@ These are fifteen selected arrangements, including empty and full classification
 
 Between the fifteen cases and the rear pair stands one field in the dock, shown as a lattice of rods whose lengths are its values: the invisible standing in plain sight. Around it, five surfaces extracted from that one field at five thresholds, a fat blob, a lean one, a pinched pair, a thin shell, one broken into islands, and nothing in the field changed between them. MARGIN moved the values and held the cut; here the cut moves and the values are on show. Beside them the same threshold is sampled on a 4, an 8 and a 14 lattice, a brass rack holds the fifteen cases you have just read, and one pair of blobs is caught mid-merge at the crossing, seamless where no mesh operation could have joined them.
 
-![One field of three sources, contoured at five thresholds](/book-review/doc/book/figures/isosurfaces/one-field-five-thresholds.png)
-
-*The Opinion's argument in two dimensions: one field, the sum of three sources, cut at five numbers. At the lowest cut it is one body; at the highest it is 3 islands. Nothing in the field changed between the lines.*
-
 <!-- @ -->
 
 Next, the field will describe familiar objects. The triangle-making procedure stays the same while the description handed to it changes.

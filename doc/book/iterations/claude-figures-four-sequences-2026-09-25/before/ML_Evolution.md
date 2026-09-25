@@ -20,10 +20,6 @@ The ecosystem in the previous room combined local behaviour with balancing inter
 
 The fresh ground is finite. Four hundred cells, and the ground forgets only one of them every two seconds. Watched at the shipped start, the population fills its ceiling of a hundred and twenty within three seconds, the last fresh cell is crossed by ten, and from then on every lineage drains at the same rate: the hall is empty at thirty-six.[^novelty] There is a finish line after all. Nobody announced it, and no body can see it coming.
 
-![Bodies alive and fresh cells visited, over the first fifty seconds of the hall](/book-review/doc/book/figures/machinelearning/fresh-ground-runs-out.png)
-
-*The hall's first fifty seconds, measured with the artifact's own loop at sixty frames a second. The population reaches its ceiling of 120 within three seconds, the last fresh cell is crossed by ten, and the last body is gone at 35.8. The ground clears one cell every two seconds; nobody can live on that.*
-
 Imagine changing that rule so that revisiting a dependable place also provides energy. Which traits might become useful? That is a proposed comparison, not a control offered by the present encounter. It would test how much of the population’s story belongs to its environment.
 
 The flowers in this hall have a judge too, and the judge is a sentence: symmetry, long petals, a hue near purple, an angle near thirty degrees, each worth so many points. They evolve toward a taste someone wrote down. In 1997 Karl Sims let a museum's visitors be the judge, the fitness of an image being how long people stood in front of it. Ask which of the two this hall should run, and what each would breed out.[^sims]

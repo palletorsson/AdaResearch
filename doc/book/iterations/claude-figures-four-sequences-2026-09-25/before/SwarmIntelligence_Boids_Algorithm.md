@@ -26,10 +26,6 @@ Alignment is not consent, and cohesion is not a complete account of belonging. T
 
 Try letting separation win for a while. Instead of judging every dispersed flock as failed, ask what the extra distance lets you see. Then take the other two out instead, ALIGN and COH to nothing: the thirty avoid one another until no one is within sight, and each flies straight, a gas. Put them back and take SEP to nothing: they close on their middle and stay there, a clot. Cooperation alone and competition alone are both simple; the flock needs the disagreement. When you want to compare, return the slider rather than pressing RESET: the panel's RESET deals a fresh scatter, not the same one, while the tank's RESET deals the same scatter every time. Two buttons with one name, and only one of them gives you back your starting point. It gives you back the start and nothing after it. Run the tank twice from that scatter and time the schools: no two frames are the same length, a flock magnifies any difference it is given, and within five seconds the two runs have nothing in common. Lorenz found this in 1961 by retyping a number to three decimals instead of six.[^lorenz]
 
-![Two runs of the tank from one scatter: identical steps stay identical, frames of uneven length part within seconds](/book-review/doc/book/figures/swarmintelligence/tank-two-runs-part.png)
-
-*The measurement behind the sentence. From one seeded scatter, thirty fish were run twice: once with identical fixed steps, once with frames that differ in length by up to a fifth. The widest separation of the same fish after one step, a sixth of a second, one second, five seconds and twenty: two millimetres, seven, sixteen centimetres, over a metre, the width of the tank.*
-
 <!-- @ -->
 
 The next room broadens the model: an agent can have an internal state, and the environment can remember what it did.
