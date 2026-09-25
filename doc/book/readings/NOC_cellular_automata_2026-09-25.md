@@ -29,4 +29,6 @@ Read 25 September 2026 against the eight `final.md` of the `cellularautomata` se
 
 ## Tasks
 
-Eight tasks appended to `doc/tasks/book_cellularautomata.json` (`.026`–`.033`), source "Nature of Code ch. 7 reading, 25 Sept", shown on `/book-tasks` under cellularautomata. Not applied.
+Eight tasks appended to `doc/tasks/book_cellularautomata.json` (`.026`–`.033`), source "Nature of Code ch. 7 reading, 25 Sept", shown on `/book-tasks` under cellularautomata.
+
+**Applied 25 Sept** (Palle: "apply"): items 1–7 are in the eight chapters (folding tasks .002, .005, .009, .012) and the address study has a TRACE button; item 8 (the hall names) stays open as a sequence decision. Before/after, diffs, the probe readback and the decisions: `doc/book/iterations/claude-cellularautomata-noc-reading-2026-09-25/`.

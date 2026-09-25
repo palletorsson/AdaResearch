@@ -41,7 +41,7 @@ We have returned to the Life dish's two buffers. Their separation now changes wh
 
 Restore the full bridge and return to the visitor input. There is pleasure in architecture answering us, and a stranger pleasure when its answer interrupts the role we expected it to play. We can study that relation without deciding that a responsive surface must be alive. A fully depleted field with no healthy neighbours remains depleted. Withdrawal alone does not promise repair.
 
-At thirty simulated seconds this study holds. The museum continues. We leave with a more precise question than whether the path is living: which relations let it carry a body, recover, or become unavailable? Three of the four choices moved in this hall: a cell holds a fraction, the visitor's position is among what it consults, and the order of the loop decides when an answer counts.
+At thirty simulated seconds this study holds. The museum continues. We leave with a more precise question than whether the path is living: which relations let it carry a body, recover, or become unavailable?
 
 <!-- @ -->
 

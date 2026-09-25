@@ -16,16 +16,6 @@ var floor_view: MultiMeshInstance3D
 var receivers: Array[Node3D] = []
 var changed: int = 0
 var last_step_usec: int = 0
-## TRACE (2026-09-25, from the Nature of Code reading, Example 7.3): for one generation
-## after each step a cell that just stopped is shown in red and one that just began in
-## blue, on the dish and on the floor. The base solver keeps the old present in
-## _next_grid after its swap, so nothing is stored twice. Off by default: the shipped
-## look is untouched until the button is pressed.
-var trace: bool = false
-var born: int = 0
-var died: int = 0
-const BIRTH_COLOUR := Color("7fb4ff")
-const DEATH_COLOUR := Color("b5555f")
 
 func _ready() -> void:
 	work = get_parent()
@@ -58,10 +48,6 @@ func replay() -> void:
 		if preset == "MEET":
 			for y in [10,11]:
 				for x in [10,11]: work._grid[y][x] = true
-	# The old present equals the new one at a replay, so a trace shows no births here.
-	for y in range(SIZE):
-		for x in range(SIZE): work._next_grid[y][x] = work._grid[y][x]
-	born = 0;died = 0
 	work._update_display()
 	for receiver in receivers: receiver.reset_events()
 	_refresh(false)
@@ -75,15 +61,10 @@ func _advance() -> void:
 		running = false;_readout();return
 	var began: int = Time.get_ticks_usec()
 	work._advance()
-	changed = 0;born = 0;died = 0
+	changed = 0
 	# After the base solver swaps, next_grid is the old present.
 	for y in range(SIZE):
-		for x in range(SIZE):
-			var now: bool = work._grid[y][x]
-			var was: bool = work._next_grid[y][x]
-			changed += int(now != was)
-			born += int(now and not was)
-			died += int(was and not now)
+		for x in range(SIZE): changed += int(work._grid[y][x] != work._next_grid[y][x])
 	if work._generation == LIMIT: running = false
 	_refresh()
 	last_step_usec = Time.get_ticks_usec()-began
@@ -95,10 +76,6 @@ func toggle_run() -> void:
 func toggle_link() -> void:
 	linked = not linked
 	# Reconnecting a wire is not counted as a new birth at that address.
-	_refresh(false)
-
-func toggle_trace() -> void:
-	trace = not trace
 	_refresh(false)
 
 func _process(delta: float) -> void:
@@ -114,17 +91,7 @@ func _refresh(count_event: bool = true) -> void:
 	for y in range(SIZE):
 		for x in range(SIZE):
 			var on: bool = work._grid[y][x]
-			var floor_colour: Color = Color("90ebca") if on else Color("273e49")
-			if trace:
-				var was: bool = work._next_grid[y][x]
-				if on and not was: floor_colour = BIRTH_COLOUR
-				elif was and not on: floor_colour = DEATH_COLOUR
-				# The dish shows the same wake; the base display has already painted alive/dead.
-				var dish_colour: Color = work.alive_color if on else work.dead_color
-				if on and not was: dish_colour = BIRTH_COLOUR
-				elif was and not on: dish_colour = DEATH_COLOUR
-				work._multimesh.set_instance_color(y*work.grid_size+x,dish_colour)
-			floor_view.multimesh.set_instance_color(y*SIZE+x,floor_colour)
+			floor_view.multimesh.set_instance_color(y*SIZE+x,Color("90ebca") if on else Color("273e49"))
 	for receiver in receivers:
 		var site: Vector2i = receiver.site
 		var occupied: bool = work._grid[site.y][site.x]
@@ -134,12 +101,12 @@ func _refresh(count_event: bool = true) -> void:
 func _readout() -> void:
 	var status: String = "RUN" if running else "HELD"
 	if work._generation == LIMIT:status = "LIMIT / REPLAY"
-	reading.text = "A PATTERN TRAVELS\n%s / GEN %d / %s\nB3/S23 / 24 x 24 / WRAP\nPOP %d / CHANGED %d%s\nLAMPS %s" % [preset,work._generation,status,work._population,changed,(" / BORN %d DIED %d" % [born,died]) if trace else "","LINKED" if linked else "UNLINKED"]
+	reading.text = "A PATTERN TRAVELS\n%s / GEN %d / %s\nB3/S23 / 24 x 24 / WRAP\nPOP %d / CHANGED %d\nLAMPS %s" % [preset,work._generation,status,work._population,changed,"LINKED" if linked else "UNLINKED"]
 
 func readback() -> Dictionary:
 	var values: Array = []
 	for r in receivers:values.append({"site":[r.site.x,r.site.y],"occupied":r.occupied,"lit":r.light.light_energy>0,"onsets":r.rises,"position":str(r.position)})
-	return {"generation":work._generation,"population":work._population,"changed":changed,"born":born,"died":died,"trace":trace,"preset":preset,"running":running,"linked":linked,"cells":work._grid.duplicate(true),"receivers":values,"step_usec":last_step_usec}
+	return {"generation":work._generation,"population":work._population,"changed":changed,"preset":preset,"running":running,"linked":linked,"cells":work._grid.duplicate(true),"receivers":values,"step_usec":last_step_usec}
 
 func _build_floor() -> void:
 	# The coloured present is a finish on a continuous museum floor, not moving support.
@@ -194,10 +161,9 @@ func _build_furniture() -> void:
 	var rack: GDScript=load("res://commons/audio/rack_templates/RackTemplates.gd")
 	var buttons: Node3D=rack.create_panel("FOLLOW THE CELL / FOLLOW THE PATTERN",[
 		[{"type":"button","label":"STEP"},{"type":"button","label":"RUN"},{"type":"button","label":"REPLAY"}],
-		[{"type":"button","label":"GLIDER"},{"type":"button","label":"BLINKER"},{"type":"button","label":"MEET"},{"type":"button","label":"LINK"}],
-		[{"type":"button","label":"TRACE"}]],false)
+		[{"type":"button","label":"GLIDER"},{"type":"button","label":"BLINKER"},{"type":"button","label":"MEET"},{"type":"button","label":"LINK"}]],false)
 	buttons.name="AddressControls";buttons.scale=Vector3.ONE*2.0;console.add_child(buttons)
-	var callbacks: Array[Callable]=[step_once,toggle_run,replay,choose_glider,choose_blinker,choose_meeting,toggle_link,toggle_trace]
+	var callbacks: Array[Callable]=[step_once,toggle_run,replay,choose_glider,choose_blinker,choose_meeting,toggle_link]
 	for i in range(callbacks.size()):
 		var callback: Callable=callbacks[i]
 		buttons.find_child("Btn_%d"%i,true,false).get_node("InteractableAreaButton").button_pressed.connect(func(_b):callback.call())

@@ -1,0 +1,25 @@
+--- doc/book/iterations/claude-cellularautomata-noc-reading-2026-09-25/before/CA_AgentsCircuits.final.md	2026-09-25 08:27:30.603750700 +0200
++++ doc/book/iterations/claude-cellularautomata-noc-reading-2026-09-25/after/CA_AgentsCircuits.final.md	2026-09-25 08:34:02.974766900 +0200
+@@ -12,7 +12,7 @@
+ 
+ <!-- @sierpinski_pyramid -->
+ 
+-Now turn to the Sierpinski pyramid. Find a small pyramid and compare where its neighbours sit. Then step back and look for the same arrangement at the next scale. This construction repeats its arrangement recursively at half the spacing: four copies at the lower corners, one at the apex and one more directly above it, which lifts the top into a spire. The cubes do not shrink with the spacing, so neighbouring copies overlap. Its procedure begins with a shape and a copying arrangement, rather than a row whose next state must be calculated.
++Now turn to the Sierpinski pyramid. Find a small pyramid and compare where its neighbours sit. Then step back and look for the same arrangement at the next scale. This construction repeats its arrangement recursively at half the spacing: four copies at the lower corners, one at the apex and one more directly above it, which lifts the top into a spire. The cubes do not shrink with the spacing, so neighbouring copies overlap. Its procedure begins with a shape and a copying arrangement, rather than a row whose next state must be calculated. None of the four choices applies to it: the pyramid is not an automaton at all, which is the point of standing it here.
+ 
+ The resemblance is useful because it gives you a question to test. At which scales do gaps correspond? Which relations are altered by moving from a flat history to a volume? You need not force every visible feature into a match. A failed correspondence tells you where the analogy stops.
+ 
+@@ -20,8 +20,12 @@
+ 
+ Keep the pyramid fixed and press SEED at the desk. Two adjacent cells now begin the history. Build a few rows again. Where do the familiar triangular relations return, and do they ever overlap? Press SEED once more to return to the single cell. How much of the resemblance belonged to the rule, and how much to the beginning we gave it?
+ 
++Before leaving the desk, turn RULE until the plate reads 222 and step from the single seed. The triangle fills solid, reaches round the ring, and stops changing. Turn it to 190: stripes, every cell repeating the same short cycle. Press 30: no row can be read off the one before it by eye. Press 110: structures that persist and travel, meeting and breaking, with no way to say from the picture when the next will appear. Stephen Wolfram sorted the 256 rules into four such classes in 1984 — uniform, repeating, random, complex — and set the last apart as the one that behaves like the things around us.[^ca-classes] The plate captions 110 “Turing Complete”; carry that word to the hall called Edge of Chaos, ahead, where the border between the third class and the fourth is the whole question.
++
+ <!-- @ -->
+ 
+ We will return to the pyramid's way of making in Fractals. First, two almost matching volumes will let us follow one changed value through the same procedure. We have asked how similar appearances can be made differently. What happens when we keep the making the same and alter one small part of the beginning?
+ 
+-[^ca-resemblance]: An organised appearance alone does not demonstrate an agent, a circuit or a general-purpose computer. Such claims require an account of states, operations and the results they can produce. This comparison establishes a question about resemblance and procedure, not a proof of computational universality.
++[^ca-resemblance]: The explorer's plate captions Rule 90 “Sierpiński” and Rule 110 “Turing Complete”. This comparison earns the first word only as a question about resemblance. The second is a theorem rather than a caption: Matthew Cook proved in 2004 that Rule 110 can carry out any computation (“Universality in elementary cellular automata”, *Complex Systems* 15), by reading its persisting structures as signals and their collisions as logic — an account of states, operations and results that no organised appearance supplies on its own. The Rule 110 display in the first hall is where to begin asking for it.
++
++[^ca-classes]: Stephen Wolfram, “Universality and complexity in cellular automata”, *Physica D* 10 (1984).

@@ -10,7 +10,7 @@ The board waits in the left-hand corridor near the entrance. The newest row sits
 
 Press STEP. One generation arrives, and the previous row moves towards you. The pink mark stays at the same address. Its state may change. The plate now reads this new generation and predicts the one that could follow it. We have advanced the local machine; the rug has kept its own time.
 
-Begin with Rule 90 and the single seed.[^ca-wolfram] STEP once, then again. Follow one of the diagonal edges. Choose CELL to move the witness along the current row, and check a neighbourhood inside the pattern as well as one at its edge. Counting the green cells is tempting. Keep their order too: left, self, right.
+Begin with Rule 90 and the single seed. STEP once, then again. Follow one of the diagonal edges. Choose CELL to move the witness along the current row, and check a neighbourhood inside the pattern as well as one at its edge. Counting the green cells is tempting. Keep their order too: left, self, right.
 
 The explorer consults its rule through these actual lines:
 
@@ -62,7 +62,7 @@ The title invites an association with a textile tradition. These few operations 
 
 <!-- @line_network_ca -->
 
-Return to the board's corridor and follow it past the turmites painting a shared surface: Langton's ants, cells that move, each turning by the colour it stands on, flipping that colour and stepping off it.[^ca-langton] Further along, a small tangle of coloured lines waits above the floor. Approach it. Another set of lines arrives, then another. The figure unfolds over a few seconds, with time to keep an older connection in sight while new ones appear.
+Return to the board's corridor and follow it past the agents painting a shared surface. Further along, a small tangle of coloured lines waits above the floor. Approach it. Another set of lines arrives, then another. The figure unfolds over a few seconds, with time to keep an older connection in sight while new ones appear.
 
 You are watching a saved growth history. The same fixed frame holds its twenty stages, so a line already present stays where it was. Move around it and let one apparent knot separate into lines at different depths. Some space that looked full can open when your viewpoint changes.
 
@@ -78,8 +78,4 @@ We can begin to distinguish forms by the relations that sustain them. The board 
 
 Other works remain in the hall. The orb rests on the rug's edge, and a showcase waits at the end of the passage that runs on beyond the rug's room. Past the network, a Rule 110 display stands near the corridor's far end. Let them offer further directions without asking this first encounter to explain them all.
 
-For now, carry four choices: what a cell can hold, which neighbours it can consult, when its answer becomes available to others, and whether that answer is settled by the rule or by a draw. Every hall from here changes one or two of them and keeps the rest; that is all a variation is. Our next comparison, the structure-growth specimen, makes the neighbourhood three-dimensional and gives disappearance more than one state: the second choice and the first. What forms need a little longer to go away?
-
-[^ca-wolfram]: The numbered rules are Stephen Wolfram's elementary cellular automata: 256 of them, each named by its eight answers read as one byte, so that Rule 90 is 01011010 (“Statistical mechanics of cellular automata”, *Reviews of Modern Physics* 55, 1983; *A New Kind of Science*, 2002). The RULE slider on the board's panel runs through all 256. The lattice of cells updated by their neighbours is older: Stanisław Ulam and John von Neumann at Los Alamos in the 1940s, von Neumann's with twenty-nine states a cell and built to reproduce itself.
-
-[^ca-langton]: Christopher Langton, “Studying artificial life with cellular automata”, *Physica D* 22 (1986). The ant is the variation in which the cell that changes is the one a body stands on, and the neighbourhood is wherever the body goes next; the painters here are eight to sixteen of them on one surface, dealt at random each time the hall is built.
+For now, carry three choices: what a cell can hold, which neighbours it can consult, and when its answer becomes available to others. Our next comparison, the structure-growth specimen, makes the neighbourhood three-dimensional and gives disappearance more than one state. What forms need a little longer to go away?

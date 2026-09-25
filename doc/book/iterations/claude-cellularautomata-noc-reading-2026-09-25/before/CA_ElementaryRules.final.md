@@ -2,7 +2,7 @@
 
 How would you recognise a cell that has stopped being active but has not yet disappeared?
 
-The previous hall let three cells answer a question about the next row. Here the neighbourhood reaches behind what we can see. Two of the four choices change at once: a cell can hold three states, and it consults twenty-six neighbours instead of two. A small volume waits above the opening in the floor. Walk along its rim. Two marks that seemed to touch can separate as you move; another cell has been behind them all along.
+The previous hall let three cells answer a question about the next row. Here the neighbourhood reaches behind what we can see. A small volume waits above the opening in the floor. Walk along its rim. Two marks that seemed to touch can separate as you move; another cell has been behind them all along.
 
 <!-- @structure_growth -->
 
