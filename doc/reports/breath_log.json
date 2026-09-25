@@ -8010,6 +8010,51 @@
         "260922-zhdio"
       ],
       "duration_minutes": 40
+    },
+    {
+      "breath_id": "2026-09-25T09:00",
+      "mode": "full",
+      "baseline_avg": 6.083,
+      "post_avg": 6.083,
+      "delta": 0.0,
+      "items_attempted": [
+        "capture-LSystems_Shape_Grammars",
+        "read-gate-suite-not-global-avg",
+        "forum-heads-up-260925-aonoc",
+        "land-28-stranded-tools-gate-N",
+        "land-3-stranded-scripts-gate-M"
+      ],
+      "items_succeeded": [
+        "capture-LSystems_Shape_Grammars",
+        "read-gate-suite-not-global-avg",
+        "forum-heads-up-260925-aonoc",
+        "land-28-stranded-tools-gate-N",
+        "land-3-stranded-scripts-gate-M"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 5,
+          "succeeded": 5,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "LSYSTEMS POLISH 88% WAS ONE MISSING CAPTURE, AND IT WAS THE ONLY NON-HUMAN GAP IN THE WHOLE PIPELINE. LSystems_Shape_Grammars had no multi_shots dir; one watchdog-wrapped capture (21 s) took lsystems polish 88 -> 100. global_avg stays 6.083 because the scorer averages HEAD stages and 23 sequences sit at stage 6 (VR). Every other column is OK for all 24 spines: the pipeline's agent-closable surface is now empty, and only pull_vr_feedback.py (Quest on USB) can move the average.",
+        "GATE N REFILLED OVERNIGHT FROM ONE SESSION'S KIT. 28 of 29 rows were a primitives/transformation book-illustration kit (capture_*_plate.py + tools/captures/*.gd + tools/probes/*_illustrations.gd), idle 40-47h, named by no thread. Landed with 3 gate-M scripts in b19c80d5a after 7/7 py_compile + 24/24 check_compile in one boot. N 29 -> 1 (em_shots.py, claimed), M 37 -> 34 (31 gitignored .tres + 3 live), landable_today 3 -> 0. The stranded-work class recurs roughly every two days: book sessions write their probes and never commit them."
+      ],
+      "files_changed": [
+        "31 added files in b19c80d5a",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md"
+      ],
+      "duration_minutes": 20
     }
   ]
 }

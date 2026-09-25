@@ -1,11 +1,11 @@
 {
   "measurement": {
-    "measured_at": "2026-09-24T09:24:14+02:00",
+    "measured_at": "2026-09-25T09:21:09+02:00",
     "measured_by": "tools/run_release_gates.py",
-    "head": "cb391f67c70ee1e20f104ac269a36c4894f55522",
-    "head_subject": "chore(artifacts): 37 stranded artifact files land in the repo — gate M 68 → 31",
-    "tree_dirty": 1886,
-    "tree_untracked": 3321,
+    "head": "b19c80d5a306e6e6fef49255f026989ac6d968c4",
+    "head_subject": "chore(gates M,N): land 31 stranded files - 28 book-illustration tools + 3 registry-reached scripts",
+    "tree_dirty": 1938,
+    "tree_untracked": 3370,
     "tree_state_detector": "PASS"
   },
   "overall_pass": false,
@@ -21,7 +21,7 @@
     "validate_museum_templates": 0,
     "em_autopilot": 1,
     "check_map_tokens": 0,
-    "check_prose_reachable": 5,
+    "check_prose_reachable": 4,
     "check_artifacts_reachable": 34,
     "check_tools_reachable": 1,
     "check_cell_types": 0
@@ -34,7 +34,7 @@
       "metrics": {
         "missing_declared_maps": 0,
         "duplicate_entries_within_sequence": 0,
-        "undeclared_map_folders": 1867
+        "undeclared_map_folders": 1869
       },
       "enabled": true
     },
@@ -57,7 +57,7 @@
       "name": "Map Validation",
       "pass": true,
       "metrics": {
-        "grade_A": 2298,
+        "grade_A": 2301,
         "grade_B": 358,
         "grade_C": 151,
         "grade_F": 0,
@@ -128,10 +128,10 @@
       "pass": true,
       "metrics": {
         "detector_selftest": "PASS",
-        "maps_scanned": 195,
-        "maps_named": 195,
+        "maps_scanned": 196,
+        "maps_named": 196,
         "maps_without_data": "none",
-        "placements": 1477,
+        "placements": 1486,
         "unresolved_placements": 0,
         "unresolved_tokens": "",
         "malformed_empty_cells": 0
@@ -208,16 +208,16 @@
         "rooms_declared": 1017,
         "rooms_resolved": 937,
         "prose_files": 1461,
-        "prose_tracked": 1456,
-        "unreachable_from_a_clone": 5,
-        "stranded_words": 3855,
-        "age_reading": "3 touched within 24h (youngest 14.5h), 2 idle longer (oldest 258.2h). The second group is not live work.",
-        "claimed_in_the_forum": 4,
-        "claimed_reading": "4 of 5 claimed in writing by claude-opus-artifacts, fable-n6 -- leave those alone. The other 1 are nobody's: no open thread names them.",
-        "claimed_by": "commons/maps/Color_Context_Placed/field_notes.md -> claude-opus-artifacts (260909-onegs, 14.8d), claude-chroma (260917-q1h14, 7d), claude-chroma (260917-13jf7, 6.9d), commons/maps/Color_Context_Placed/final.md -> claude-opus-artifacts (260909-onegs, 14.8d), claude-chroma (260917-q1h14, 7d), claude-chroma (260917-13jf7, 6.9d), commons/maps/Noise_Inside_Noise/field_notes.md -> fable-n6 (260913-7k0zy, 11.1d), commons/maps/Noise_Inside_Noise/final.md -> fable-n6 (260913-7k0zy, 11.1d)",
-        "unreachable": "commons/maps/Array/technical.md, commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md, commons/maps/Noise_Inside_Noise/final.md, commons/maps/Noise_Inside_Noise/field_notes.md",
+        "prose_tracked": 1457,
+        "unreachable_from_a_clone": 4,
+        "stranded_words": 3122,
+        "age_reading": "2 touched within 24h (youngest 11.8h), 2 idle longer (oldest 282.1h). The second group is not live work.",
+        "claimed_in_the_forum": 3,
+        "claimed_reading": "3 of 4 claimed in writing by claude-opus-artifacts, fable-n6 -- leave those alone. The other 1 are nobody's: no open thread names them.",
+        "claimed_by": "commons/maps/Color_Context_Placed/field_notes.md -> claude-opus-artifacts (260909-onegs, 15.8d), claude-chroma (260917-q1h14, 8d), claude-chroma (260917-13jf7, 7.9d), commons/maps/Color_Context_Placed/final.md -> claude-opus-artifacts (260909-onegs, 15.8d), claude-chroma (260917-q1h14, 8d), claude-chroma (260917-13jf7, 7.9d), commons/maps/Noise_Inside_Noise/field_notes.md -> fable-n6 (260913-7k0zy, 12.1d)",
+        "unreachable": "commons/maps/Array/technical.md, commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md, commons/maps/Noise_Inside_Noise/field_notes.md",
         "declared_case_mismatch": "none",
-        "tree_state": "untracked 5  [untracked: commons/maps/Array/technical.md, commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md, commons/maps/Noise_Inside_Noise/final.md]"
+        "tree_state": "untracked 4  [untracked: commons/maps/Array/technical.md, commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md, commons/maps/Noise_Inside_Noise/field_notes.md]"
       },
       "enabled": true
     },
@@ -228,9 +228,9 @@
       "metrics": {
         "detector_selftest": "PASS",
         "artifacts_declared": 2886,
-        "files_checked": 6311,
+        "files_checked": 6314,
         "unreachable_from_a_clone": 34,
-        "rooms_affected": 64,
+        "rooms_affected": 61,
         "absent_from_every_tree": 81,
         "vendored_not_in_repo": 102,
         "ignored_on_purpose": 31,
@@ -248,12 +248,12 @@
       "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "tools_on_disk": 937,
-        "tools_tracked": 908,
+        "tools_on_disk": 938,
+        "tools_tracked": 937,
         "unreachable_from_a_clone": 1,
-        "live_uncommitted": 28,
+        "live_uncommitted": 0,
         "ignored_on_purpose": 0,
-        "stranded": "tools/em_shots.py (110h)",
+        "stranded": "tools/em_shots.py (134h)",
         "tree_state": "untracked 1  [untracked: tools/em_shots.py]"
       },
       "enabled": true
@@ -264,8 +264,8 @@
       "pass": true,
       "metrics": {
         "detector_selftest": "PASS",
-        "maps_scanned": 2805,
-        "cells_scanned": 3733105,
+        "maps_scanned": 2808,
+        "cells_scanned": 3750490,
         "non_string_cells": 0,
         "maps_affected": 0,
         "in_working_tree": 0,
@@ -278,19 +278,19 @@
   "raw": {
     "sequence_contract_summary": {
       "total_sequences": 82,
-      "declared_entries": 1043,
-      "declared_unique_maps": 1011,
-      "map_folders_with_data": 2805,
+      "declared_entries": 1044,
+      "declared_unique_maps": 1012,
+      "map_folders_with_data": 2808,
       "duplicate_entries_within_sequence": 0,
       "duplicates_across_sequences": 32,
       "missing_declared_maps": 0,
-      "undeclared_map_folders": 1867,
-      "undeclared_prefix_hints": 1066,
+      "undeclared_map_folders": 1869,
+      "undeclared_prefix_hints": 1065,
       "cross_sequence_prefix_hints": 432
     },
     "artifact_audit_summary": {
-      "total_entries": 3070,
-      "dict_entries": 3070,
+      "total_entries": 3082,
+      "dict_entries": 3082,
       "non_dict_entries": 0,
       "placeholder_entries": 0,
       "missing_scene_path": 0,
@@ -300,12 +300,12 @@
       "unresolved_scene_files": 0,
       "missing_include_in_map_data": 108,
       "missing_map_ready": 102,
-      "missing_map_sequences_field": 355,
+      "missing_map_sequences_field": 356,
       "empty_map_sequences": 839,
       "algorithm_without_curation": 5
     },
     "grade_counts": {
-      "A": 2298,
+      "A": 2301,
       "C": 151,
       "B": 358
     },
@@ -337,14 +337,14 @@
         "| Metric | Count |",
         "|---|---:|",
         "| `total_sequences` | 82 |",
-        "| `declared_entries` | 1043 |",
-        "| `declared_unique_maps` | 1011 |",
-        "| `map_folders_with_data` | 2805 |",
+        "| `declared_entries` | 1044 |",
+        "| `declared_unique_maps` | 1012 |",
+        "| `map_folders_with_data` | 2808 |",
         "| `duplicate_entries_within_sequence` | 0 |",
         "| `duplicates_across_sequences` | 32 |",
         "| `missing_declared_maps` | 0 |",
-        "| `undeclared_map_folders` | 1867 |",
-        "| `undeclared_prefix_hints` | 1066 |",
+        "| `undeclared_map_folders` | 1869 |",
+        "| `undeclared_prefix_hints` | 1065 |",
         "| `cross_sequence_prefix_hints` | 432 |",
         "",
         "### Interpretation Notes",
@@ -358,8 +358,8 @@
         "",
         "| Metric | Count |",
         "|---|---:|",
-        "| `total_entries` | 3070 |",
-        "| `dict_entries` | 3070 |",
+        "| `total_entries` | 3082 |",
+        "| `dict_entries` | 3082 |",
         "| `non_dict_entries` | 0 |",
         "| `placeholder_entries` | 0 |",
         "| `missing_scene_path` | 0 |",
@@ -369,7 +369,7 @@
         "| `unresolved_scene_files` | 0 |",
         "| `missing_include_in_map_data` | 108 |",
         "| `missing_map_ready` | 102 |",
-        "| `missing_map_sequences_field` | 355 |",
+        "| `missing_map_sequences_field` | 356 |",
         "| `empty_map_sequences` | 839 |",
         "| `algorithm_without_curation` | 5 |"
       ],
