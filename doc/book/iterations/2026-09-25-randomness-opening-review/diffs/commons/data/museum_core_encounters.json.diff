@@ -1,0 +1,57 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -7,11 +7,11 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Definition/final.md",
+-    "text_sha256": "a38185f6b49ae97663585972d8876ab1b06498470f5be8eec9933d9bf6d3d1c8",
++    "text_sha256": "e537494dcf22034c567fbe1646ade927f6b2552ad2e8d3eb83e53d540eb60da2",
+     "map_sha256": "9345ed71e5f76dbd341a4d6fef475d0a825518dedbc9ec6f94764952f2f4c411",
+     "learner_verified": false,
+     "verification_scope": "Fresh focused draw-stream/offset checks plus source and qualified historical evidence; no new full-hall or headset validation.",
+-    "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Definition/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-opening-review/DECISIONS.md"
+   },
+   "Random_Entropy": {
+     "primary_tokens": [
+@@ -23,11 +23,11 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Entropy/final.md",
+-    "text_sha256": "7ee078e1a76f9da1f2df98fc816578811b752cda1b8bc394dd5a6f3eab26bd8f",
+-    "map_sha256": "9f817f4684abe19efbe024f1cfbe1e50235de31cdcd98e8a2f671291f84531bd",
++    "text_sha256": "b8a76f2fe4f88090296f6b56683776c552fc74885ea8ac5fc33bc9cc5258a51a",
++    "map_sha256": "5762fa599a4ba8ef340e7001c0ce2a7f42c2da0b466b39dce546b02a3ff449e1",
+     "learner_verified": false,
+     "verification_scope": "Fresh exact categorical contrast-sample and sorting checks; retained spatial works source-reviewed. Secondary Jar display overclaims remain a development task.",
+-    "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Entropy/DECISIONS.md"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-opening-review/DECISIONS.md"
+   },
+   "Random_Remove": {
+     "primary_tokens": [
+@@ -39,7 +39,7 @@
+     "status": "source_checked_draft",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Remove/final.md",
+-    "text_sha256": "47c3a2edbab0ccc58aa9a9b3d24ed064a223f3af50d359ca2be0e222952dd432",
++    "text_sha256": "7451bc1c7f52a92ac4fc8601aafc8513fa40062b78ec415ea43146f20727cf44",
+     "map_sha256": "9e8b8dc0e54fb8cecb094b9c9a8d56692f1980c6223f45df26a71d0bf791bd64",
+     "learner_verified": false,
+     "pilot_action_id": "remove-bounded-candidates",
+@@ -48,7 +48,7 @@
+       "scope": "Recorded scene/runtime checks; headset, complete route and learner acceptance remain open."
+     },
+     "verification_scope": "Current source and historical bench/arena evidence; no new full removal-floor crossing or headset validation.",
+-    "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-24-sampling-hoppers/index.html"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-opening-review/DECISIONS.md"
+   },
+   "Randomness_10_PRINT_Algorithm": {
+     "primary_tokens": [
+@@ -64,6 +64,6 @@
+     "map_sha256": "e7f0e4932e6e51b69f39db052dd832110d08bccf2f7d6f3c7150b44c63e4b889",
+     "learner_verified": false,
+     "verification_scope": "Two headless gates. probe_ten_print_hall.gd (11 checks): floor linked on channel hall, 0 of 122 floor cells disagree with the screen, console line reads the book's line, SEMICOLON removes ';' and collapses the floor to one column and back, BIAS moves the constant (205.1 -> 0.87 forward, 205.9 -> 0.07), default coin breathes (0.70 / 0.29 forward over characters 0-269 / 270-399), next-cell tile visible, floor has no collider, upright maze has no collider and stands in the Y-Z plane. probe_ten_print_walkable.gd (museum lane): the slab block is kept verbatim, 12 solid slabs 2.40 m, same 12 coin results as the printer, 8 regions 7 open 1 sealed, every open region has exactly two mouths (no forks; four V bays, two corners, one way through), a way through, wrap-width comparison (3, 4, 6, 12 to a row), no museum seal severance, entry to exit reachable on the museum's own walk cells, a 0.5 m capsule walks the way through. No headset walk.",
+-    "local_review": "doc/book/iterations/2026-09-24-randomness-encounters-return/index.html#Randomness_10_PRINT_Algorithm"
++    "local_review": "doc/book/iterations/2026-09-25-randomness-opening-review/DECISIONS.md"
+   }
+ }

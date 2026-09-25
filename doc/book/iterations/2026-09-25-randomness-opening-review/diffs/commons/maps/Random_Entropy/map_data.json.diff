@@ -1,0 +1,19 @@
+--- before/commons/maps/Random_Entropy/map_data.json
++++ commons/maps/Random_Entropy/map_data.json
+@@ -27,6 +27,7 @@
+       "gate_depth_rows": 0,
+       "artifact_placement": "map",
+       "plinths": false,
++      "piers": false,
+       "props_deny": [
+         "dream_bodies"
+       ],
+@@ -1775,7 +1776,7 @@
+         " ",
+         " ",
+         " ",
+-        "entropy_ruin#controls:compact#control_front:-2.0#control_facing:-z",
++        "entropy_ruin#controls:compact#control_front:-2.0#control_facing:-z#autostart:false",
+         " ",
+         " ",
+         " ",

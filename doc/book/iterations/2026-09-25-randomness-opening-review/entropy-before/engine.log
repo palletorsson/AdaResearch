@@ -1,0 +1,405 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 595.71 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070
+
+ERROR: Unrecognized UID: "uid://rwex60pqapc".
+   at: get_id_path (core/io/resource_uid.cpp:208)
+  - Skipped file (no valid sequences dictionary): boolean_surfaces.beats.json
+  - Skipped file (no valid sequences dictionary): color.beats.json
+  - Skipped file (no valid sequences dictionary): foundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): isosurfaces.beats.json
+  - Skipped file (no valid sequences dictionary): noise.beats.json
+  - Skipped file (no valid sequences dictionary): postfoundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): primitives.beats.json
+  - Skipped file (no valid sequences dictionary): randomness.beats.json
+  - Skipped file (no valid sequences dictionary): sequence_index.json
+  - Skipped file (no valid sequences dictionary): softbodies.beats.json
+  - Skipped file (no valid sequences dictionary): transformation.beats.json
+  - Skipped file (no valid sequences dictionary): wavefunctions.beats.json
+MapProgressionManager: Loaded progress - 0 completed, 1 unlocked
+✅ Successfully loaded 66 ambient presets
+StuckDetector: Warning - could not find player body, will retry
+WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _deferred_init (res://commons/managers/NatureRenderer.gd:65)
+[endless_museum] floor joints: painted on the 3.0 m module, no geometry
+[em-plan] no --em-plan flag; using the scene's plan_file: res://ada_run/encounter_pilot/Random_Entropy/plan.json
+[endless_museum] the walk opens at chapter randomness (pool row 532 of 939) — Inspector start_chapter
+[em-plan] plan: res://ada_run/encounter_pilot/Random_Entropy/plan.json
+[em-plan] 24 chapter(s) arrive as a STRING of pearls — 199 pearl row(s), one segment each
+[em-plan] 17 museum(s), 24 chapter row(s) planned from res://ada_run/encounter_pilot/Random_Entropy/plan.json
+[em-edit] 90 hand override(s) loaded
+[em-bake] REPLAY — 187 pearl(s) baked 2026-09-24 09:13:59 from plan 2026-08-21T14:00:55; no body is measured for its seal
+WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _load_single_artifact_registry (res://commons/grid/GridInteractablesComponent.gd:338)
+       [1] _load_artifact_registries (res://commons/grid/GridInteractablesComponent.gd:259)
+       [2] warm_registry_cache (res://commons/grid/GridInteractablesComponent.gd:233)
+       [3] _warm_grid_catalogue (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:1623)
+       [4] _boot_museum (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:1452)
+WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _load_single_artifact_registry (res://commons/grid/GridInteractablesComponent.gd:338)
+       [1] _load_artifact_registries (res://commons/grid/GridInteractablesComponent.gd:259)
+       [2] warm_registry_cache (res://commons/grid/GridInteractablesComponent.gd:233)
+       [3] _warm_grid_catalogue (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:1623)
+       [4] _boot_museum (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:1452)
+GridInteractablesComponent: Validation warnings:
+  - Artifact 'aftermath_grove' missing lookup_name in res://commons/artifacts/registry/aftermath_grove.json (defaulted to key)
+  - Artifact 'ChengSimulationScaled' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/algorithms_misc.json
+  - Artifact 'FlowFieldMain' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/algorithms_misc.json
+  - Artifact 'KonigsbergBridge' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/algorithms_misc.json
+  - Artifact 'arrangement_yard' missing lookup_name in res://commons/artifacts/registry/arrangement_yard.json (defaulted to key)
+  - Artifact 'IndexVisualizer' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/arrays.json
+  - Artifact 'assembly_yard' missing lookup_name in res://commons/artifacts/registry/assembly_yard.json (defaulted to key)
+  - Artifact 'the_argument_of_solids' missing lookup_name in res://commons/artifacts/registry/boolean_surfaces.json (defaulted to key)
+  - Artifact '7_1_elementary_ca_vr' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/cellular_automata.json
+  - Artifact '7_2_game_of_life_vr' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/cellular_automata.json
+  - Artifact '7_3_game_of_life_oop_vr' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/cellular_automata.json
+  - Artifact '7_8_hexagon_ca_vr' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/cellular_automata.json
+  - Artifact 'CA_sphere' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/cellular_automata.json
+  - Artifact 'CellularAutomata3DStacked' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/cellular_automata.json
+  - Artifact 'CellularAutomata3DTree' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/cellular_automata.json
+  - Artifact 'CrosswayCA' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/cellular_automata.json
+  - Artifact 'the_frame_you_were_given' missing lookup_name in res://commons/artifacts/registry/change.json (defaulted to key)
+  - Artifact 'tangent_toboggan' missing lookup_name in res://commons/artifacts/registry/change.json (defaulted to key)
+  - Artifact 'staircase_to_curve' missing lookup_name in res://commons/artifacts/registry/change.json (defaulted to key)
+  - Artifact 'undo_door' missing lookup_name in res://commons/artifacts/registry/change.json (defaulted to key)
+  - Artifact 'MetamerismLab' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/color.json
+  - Artifact 'RotatingLaser' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/color.json
+  - Artifact 'SimultaneousContrast' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/color.json
+  - Artifact 'SpectrumVisualizer' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/color.json
+  - Artifact 'three_taps' missing lookup_name in res://commons/artifacts/registry/color.json (defaulted to key)
+  - Artifact 'the_dressing_room' missing lookup_name in res://commons/artifacts/registry/color.json (defaulted to key)
+  - Artifact 'complementary_couple' missing lookup_name in res://commons/artifacts/registry/color.json (defaulted to key)
+  - Artifact 'glitch_mirror' missing lookup_name in res://commons/artifacts/registry/color.json (defaulted to key)
+  - Artifact 'nail_bar' missing lookup_name in res://commons/artifacts/registry/color.json (defaulted to key)
+  - Artifact 'stained_curtain' missing lookup_name in res://commons/artifacts/registry/color.json (defaulted to key)
+  - Artifact 'albers_rugs' missing lookup_name in res://commons/artifacts/registry/color.json (defaulted to key)
+  - Artifact 'bottled_weather' missing lookup_name in res://commons/artifacts/registry/color.json (defaulted to key)
+  - Artifact 'chromatic_organ' missing lookup_name in res://commons/artifacts/registry/color.json (defaulted to key)
+  - Artifact '2d_in_3d_point_vis' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/commons_artifacts.json
+  - Artifact '2d_in_3d_vectors_vis' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/commons_artifacts.json
+  - Artifact 'AudioContr' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/commons_artifacts.json
+  - Artifact 'ConnectedTriangles' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/commons_artifacts.json
+  - Artifact 'HandheldInfoBoard' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/commons_artifacts.json
+  - Artifact 'VRBrush' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/commons_artifacts.json
+  - Artifact '3t' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/commons_artifacts.json
+  - Artifact 'component_court' missing lookup_name in res://commons/artifacts/registry/component_court.json (defaulted to key)
+  - Artifact 'MolecularDesigner' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/computational_biology.json
+  - Artifact 'depth_well' missing lookup_name in res://commons/artifacts/registry/depth_well.json (defaulted to key)
+  - Artifact 'where_the_machine_stops' missing lookup_name in res://commons/artifacts/registry/fractals.json (defaulted to key)
+  - Artifact 'frequency_shell' missing lookup_name in res://commons/artifacts/registry/frequency_shell.json (defaulted to key)
+  - Artifact 'fusion_ladder' missing lookup_name in res://commons/artifacts/registry/fusion_ladder.json (defaulted to key)
+  - Artifact 'family_chandelier' missing lookup_name in res://commons/artifacts/registry/graphtheory.json (defaulted to key)
+  - Artifact 'postman_of_paths' missing lookup_name in res://commons/artifacts/registry/graphtheory.json (defaulted to key)
+  - Artifact 'ouroboros_signals' missing lookup_name in res://commons/artifacts/registry/graphtheory.json (defaulted to key)
+  - Artifact 'wallflower_and_star' missing lookup_name in res://commons/artifacts/registry/graphtheory.json (defaulted to key)
+  - Artifact 'archipelago_wedding' missing lookup_name in res://commons/artifacts/registry/graphtheory.json (defaulted to key)
+  - Artifact 'two_travelers' missing lookup_name in res://commons/artifacts/registry/graphtheory.json (defaulted to key)
+  - Artifact 'impatient_river' missing lookup_name in res://commons/artifacts/registry/graphtheory.json (defaulted to key)
+  - Artifact 'the_tree_you_are_in' missing lookup_name in res://commons/artifacts/registry/graphtheory.json (defaulted to key)
+  - Artifact 'switchboard_constellation' missing lookup_name in res://commons/artifacts/registry/graphtheory.json (defaulted to key)
+  - Artifact 'habit_grove' missing lookup_name in res://commons/artifacts/registry/habit_grove.json (defaulted to key)
+  - Artifact 'handed_pair' missing lookup_name in res://commons/artifacts/registry/handed_pair.json (defaulted to key)
+  - Artifact 'interior_block' missing lookup_name in res://commons/artifacts/registry/interior_block.json (defaulted to key)
+  - Artifact 'intrusion_bench' missing lookup_name in res://commons/artifacts/registry/intrusion_bench.json (defaulted to key)
+  - Artifact 'the_threshold_opinion' missing lookup_name in res://commons/artifacts/registry/isosurfaces.json (defaulted to key)
+  - Duplicate artifact 'oscilloscope' found in res://commons/artifacts/registry/lab.json (overriding previous definition)
+  - Artifact 'living_fungus_fruit' missing lookup_name in res://commons/artifacts/registry/living.json (defaulted to key)
+  - Artifact 'living_fungus_fruit' missing scene in res://commons/artifacts/registry/living.json (using placeholder)
+  - Artifact 'living_fungus_pose' missing lookup_name in res://commons/artifacts/registry/living.json (defaulted to key)
+  - Artifact 'living_fungus_pose' missing scene in res://commons/artifacts/registry/living.json (using placeholder)
+  - Artifact 'living_fungus_colony' missing lookup_name in res://commons/artifacts/registry/living.json (defaulted to key)
+  - Artifact 'living_fungus_colony' missing scene in res://commons/artifacts/registry/living.json (using placeholder)
+  - Artifact 'living_flora_tree' missing lookup_name in res://commons/artifacts/registry/living.json (defaulted to key)
+  - Artifact 'living_flora_tree' missing scene in res://commons/artifacts/registry/living.json (using placeholder)
+  - Artifact 'living_flora_bloom' missing lookup_name in res://commons/artifacts/registry/living.json (defaulted to key)
+  - Artifact 'living_flora_bloom' missing scene in res://commons/artifacts/registry/living.json (using placeholder)
+  - Artifact 'living_fauna_body' missing lookup_name in res://commons/artifacts/registry/living.json (defaulted to key)
+  - Artifact 'living_fauna_body' missing scene in res://commons/artifacts/registry/living.json (using placeholder)
+  - Artifact 'living_ground_role' missing lookup_name in res://commons/artifacts/registry/living.json (defaulted to key)
+  - Artifact 'living_ground_role' missing scene in res://commons/artifacts/registry/living.json (using placeholder)
+  - Artifact 'ContextFreeGrammars' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/lsystems.json
+  - Artifact 'AnimatedTree' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/lsystems.json
+  - Artifact 'CityGenerator' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/lsystems.json
+  - Artifact 'ContextSensitiveTree' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/lsystems.json
+  - Artifact 'ForestCompetition' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/lsystems.json
+  - Artifact 'Hilbert3D' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/lsystems.json
+  - Artifact '9_1_ga_shakespeare_vr' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/machinelearning.json
+  - Artifact '9_2_smart_rockets_basic_vr' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/machinelearning.json
+  - Artifact '9_3_smart_rockets_vr' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/machinelearning.json
+  - Artifact '9_4_interactive_selection_vr' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/machinelearning.json
+  - Artifact '9_5_evolving_bloops_vr' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/machinelearning.json
+  - Artifact '9_6_ga_shakespeare_annotated_vr' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/machinelearning.json
+  - Artifact 'mounting_yard' missing lookup_name in res://commons/artifacts/registry/mounting_yard.json (defaulted to key)
+  - Artifact 'the_same_cloud' missing lookup_name in res://commons/artifacts/registry/noise.json (defaulted to key)
+  - Artifact 'octave_stack' missing lookup_name in res://commons/artifacts/registry/octave_stack.json (defaulted to key)
+  - Artifact 'order_matters' missing lookup_name in res://commons/artifacts/registry/order_matters.json (defaulted to key)
+  - Duplicate artifact 'mill_bauhaus_p4m' found in res://commons/artifacts/registry/pattern_mill.json (overriding previous definition)
+  - Duplicate artifact 'mill_alhambra_p6m' found in res://commons/artifacts/registry/pattern_mill.json (overriding previous definition)
+  - Artifact 'ChainSwing' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/physics_simulation.json
+  - Artifact 'CharacterRagdoll' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/physics_simulation.json
+  - Artifact 'ConeTwistBag' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/physics_simulation.json
+  - Artifact 'DrawbridgeHinge' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/physics_simulation.json
+  - Artifact 'GimbalStabilizer' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/physics_simulation.json
+  - Artifact 'HingeCrank' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/physics_simulation.json
+  - Artifact 'IKArm' missing lookup_name in res://commons/artifacts/registry/physics_simulation.json (defaulted to key)
+  - Artifact 'IKArm' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/physics_simulation.json
+  - Artifact 'PendulumPin' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/physics_simulation.json
+  - Artifact 'SliderPress' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/physics_simulation.json
+  - Artifact 'SpringSuspension' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/physics_simulation.json
+  - Duplicate artifact 'fluid_simulation' found in res://commons/artifacts/registry/physics_simulation.json (overriding previous definition)
+  - Artifact 'lifetime_curves' missing lookup_name in res://commons/artifacts/registry/physics_simulation.json (defaulted to key)
+  - Artifact 'particle_campfire' missing lookup_name in res://commons/artifacts/registry/physics_simulation.json (defaulted to key)
+  - Artifact 'simulation_instability' missing lookup_name in res://commons/artifacts/registry/physics_simulation.json (defaulted to key)
+  - Artifact 'sub_emitters' missing lookup_name in res://commons/artifacts/registry/physics_simulation.json (defaulted to key)
+  - Artifact 'plumb_room' missing lookup_name in res://commons/artifacts/registry/plumb_room.json (defaulted to key)
+  - Artifact 'the_fourth_limit' missing lookup_name in res://commons/artifacts/registry/postfoundationscrisis.json (defaulted to key)
+  - Artifact 'the_commons_table' missing lookup_name in res://commons/artifacts/registry/postfoundationscrisis.json (defaulted to key)
+  - Artifact 'PipeLayout' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/primitives.json
+  - Artifact 'SDFDrawTool' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/primitives.json
+  - Duplicate artifact 'grab_cube' found in res://commons/artifacts/registry/primitives.json (overriding previous definition)
+  - Duplicate artifact 'prism' found in res://commons/artifacts/registry/primitives.json (overriding previous definition)
+  - Duplicate artifact 'sliding_door' found in res://commons/artifacts/registry/primitives.json (overriding previous definition)
+  - Duplicate artifact 'living_paper' found in res://commons/artifacts/registry/primitives.json (overriding previous definition)
+  - Artifact 'cookie_press' missing lookup_name in res://commons/artifacts/registry/primitives.json (defaulted to key)
+  - Artifact 'first_shadow' missing lookup_name in res://commons/artifacts/registry/primitives.json (defaulted to key)
+  - Artifact 'seven_words_choir' missing lookup_name in res://commons/artifacts/registry/primitives.json (defaulted to key)
+  - Artifact 'backface_curtain' missing lookup_name in res://commons/artifacts/registry/primitives.json (defaulted to key)
+  - Artifact 'budget_of_smoothness' missing lookup_name in res://commons/artifacts/registry/primitives.json (defaulted to key)
+  - Artifact 'wireframe_confession' missing lookup_name in res://commons/artifacts/registry/primitives.json (defaulted to key)
+  - Artifact 'genesis_lathe' missing lookup_name in res://commons/artifacts/registry/primitives.json (defaulted to key)
+  - Artifact 'first_phosphor' missing lookup_name in res://commons/artifacts/registry/primitives.json (defaulted to key)
+  - Artifact 'the_absent_author' missing lookup_name in res://commons/artifacts/registry/procedural_generation.json (defaulted to key)
+  - Artifact 'CaveGenerator' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/procgen_extra.json
+  - Artifact 'GeneticProgramming' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/procgen_extra.json
+  - Artifact 'GyroidDemo' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/procgen_extra.json
+  - Artifact 'SierpinskiPyramid' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/procgen_extra.json
+  - Artifact 'WFC3DGenerator' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/procgen_extra.json
+  - Artifact 'WFCCav' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/procgen_extra.json
+  - Artifact 'WFCSculptureGenerator' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/procgen_extra.json
+  - Artifact 'parametric-mesh-gallery__cylinder_r16' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/promoted.json
+  - Artifact 'grab_sphere_F' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/qfep.json
+  - Artifact 'grab_sphere_E' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/qfep.json
+  - Artifact 'PipilottiRistWorld' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/qfep.json
+  - Artifact 'AnickaYiLab' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/qfep.json
+  - Artifact '2d_in_3d_randomness_vis' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/randomness.json
+  - Artifact 'GaussianBlurCircle' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/randomness.json
+  - Artifact 'GaussianBlurShader' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/randomness.json
+  - Artifact 'GaussianPaintSplatter' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/randomness.json
+  - Artifact 'MeltingBerniniScene' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/randomness.json
+  - Artifact 'NoiseColors3D' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/randomness.json
+  - Artifact 'RandomGaussianTexture' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/randomness.json
+  - Artifact 'Random_Rotate_Random_XYZ' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/randomness.json
+  - Artifact 'RotateGridCubes' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/randomness.json
+  - Artifact 'VoxelNoiseROIs' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/randomness.json
+  - Artifact 'WhiteNoiseGallery' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/randomness.json
+  - Duplicate artifact 'entropy_axiom' found in res://commons/artifacts/registry/randomness.json (overriding previous definition)
+  - Artifact 'randomize_cubes_over_Z' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/randomness.json
+  - Artifact 'replay_casino' missing lookup_name in res://commons/artifacts/registry/randomness.json (defaulted to key)
+  - Artifact 'readout_bench' missing lookup_name in res://commons/artifacts/registry/readout_bench.json (defaulted to key)
+  - Artifact 'regime_threshold' missing lookup_name in res://commons/artifacts/registry/regime_threshold.json (defaulted to key)
+  - Artifact 'residue_hall' missing lookup_name in res://commons/artifacts/registry/residue_hall.json (defaulted to key)
+  - Artifact 'sampling_bench' missing lookup_name in res://commons/artifacts/registry/sampling_bench.json (defaulted to key)
+  - Artifact 'Shader_Gallery' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/shaders.json
+  - Duplicate artifact 'shader_07_noise' found in res://commons/artifacts/registry/shaders.json (overriding previous definition)
+  - Duplicate artifact 'shader_08_cellularnoise' found in res://commons/artifacts/registry/shaders.json (overriding previous definition)
+  - Artifact 'gallery_marker_soft-body' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/softbodies.json
+  - Artifact 'the_confessing_body' missing lookup_name in res://commons/artifacts/registry/softbodies.json (defaulted to key)
+  - Duplicate artifact 'cloth_simulation' found in res://commons/artifacts/registry/soft_bodies.json (overriding previous definition)
+  - Artifact 'stencil_quarter' missing lookup_name in res://commons/artifacts/registry/stencil_quarter.json (defaulted to key)
+  - Artifact 'AntColonyV2' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/swarmintelligence.json
+  - Artifact 'PhysarumColony' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/swarmintelligence.json
+  - Artifact 'sleepwalking_bed' missing lookup_name in res://commons/artifacts/registry/transforms.json (defaulted to key)
+  - Artifact 'furniture_turntable' missing lookup_name in res://commons/artifacts/registry/transforms.json (defaulted to key)
+  - Artifact 'italic_bookcase' missing lookup_name in res://commons/artifacts/registry/transforms.json (defaulted to key)
+  - Artifact 'matrix_stamps' missing lookup_name in res://commons/artifacts/registry/transforms.json (defaulted to key)
+  - Artifact 'identity_lineup' missing lookup_name in res://commons/artifacts/registry/transforms.json (defaulted to key)
+  - Artifact 'the_choreography' missing lookup_name in res://commons/artifacts/registry/transforms.json (defaulted to key)
+  - Artifact 'CoordinateSystem3M' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'ForceMagnitudeDemo' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'VectorAddition' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'VectorBasics' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'VectorCrossProduct' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'VectorDotProduct' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'VectorFieldFlow' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'VectorForces' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'VectorMotion' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'VectorProjectionReflection' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'VectorSubtraction' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'VectorThrowing' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'VectorTorque' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Artifact 'VectorWorkbench' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/vectors.json
+  - Duplicate artifact 'turret_targeting' found in res://commons/artifacts/registry/vectors_demos.json (overriding previous definition)
+  - Artifact 'matryoshka_row' missing lookup_name in res://commons/artifacts/registry/vectors_demos.json (defaulted to key)
+  - Artifact 'origin_doormat' missing lookup_name in res://commons/artifacts/registry/vectors_demos.json (defaulted to key)
+  - Artifact 'orrery_of_forces' missing lookup_name in res://commons/artifacts/registry/vectors_demos.json (defaulted to key)
+  - Artifact 'BeatFrequencies' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'BigPipe' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'BigPipeSystem' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'BigPipe_CrossManifold' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'BigPipe_IndustrialBranch' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'BigPipe_LBend' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'BigPipe_Serpentine' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'BigPipe_StraightRun' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'BigPipe_TDistribution' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'BigPipe_VerticalBypass' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'CircleSpiral' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'ColoredLinesVR' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'DancingBody' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'DoublePendulum' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'DualBallFMController' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'ElphabaDemo' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'ElphabaDress' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'GlassRack' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'GlassRack_BranchingCondenser' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'GlassRack_BreakingBadCoffee' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'GlassRack_ComplexApparatus' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'GlassRack_DistillationRack' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'GlassRack_DistillationY' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'GlassRack_FractionalDistillation' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'GlassRack_RefluxApparatus' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'GlassRack_SbendManifold' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'GlassRack_SimpleTube' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'GlassRack_SpiralCondenser' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'GlassRack_SpiralTube' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'HarmonicBuilder' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'Lissajous3D' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'MarioSoundController' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'MelodyChaser3D' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'MelodySoundBoard' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'OscillatingWave' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'OscillationCurve' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'OscillationDriver' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'PendulumCircle' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'PendulumGrid3x3' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'PendulumWave' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'PhonemeCloud' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'Rack303Acid' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'Rack808Drums' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'RackAmbientDrone' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'RackDX7Piano' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'RackMario' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'RackMoogBass' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'RackSineBasic' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'SimpleOscillatingBridge' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'SoundBoxLong' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'SoundBoxShort' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'SoundscapeRadioRack' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'SphericalHarmonics' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'SplineCables' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'StaticCables' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'SystemsMusicTest' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'TrigWalkingPath' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'UnitCircleTrig' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'VRAudioMonitor' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'VitruvianMan' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'WavePaintings' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Artifact 'WaveRideScene' has non-standard lookup_name format (prefer snake_case) in res://commons/artifacts/registry/wavefunctions.json
+  - Duplicate artifact 'microscope' found in res://commons/artifacts/registry/wavefunctions.json (overriding previous definition)
+  - Duplicate artifact 'spring_network' found in res://commons/artifacts/registry/wavefunctions.json (overriding previous definition)
+  - Duplicate artifact 'rotatescalecubes' found in res://commons/artifacts/registry/wavefunctions.json (overriding previous definition)
+  - Duplicate artifact 'demo_singles' found in res://commons/artifacts/registry/wavefunctions.json (overriding previous definition)
+  - Duplicate artifact 'demo_passive' found in res://commons/artifacts/registry/wavefunctions.json (overriding previous definition)
+  - Duplicate artifact 'demo_compounds' found in res://commons/artifacts/registry/wavefunctions.json (overriding previous definition)
+  - Artifact 'two_costumes' missing lookup_name in res://commons/artifacts/registry/wavefunctions.json (defaulted to key)
+  - Artifact 'shadow_carousel' missing lookup_name in res://commons/artifacts/registry/wavefunctions.json (defaulted to key)
+  - Artifact 'bleacher_wave' missing lookup_name in res://commons/artifacts/registry/wavefunctions.json (defaulted to key)
+  - Artifact 'epicycle_desk' missing lookup_name in res://commons/artifacts/registry/wavefunctions.json (defaulted to key)
+  - Artifact 'aria_glass' missing lookup_name in res://commons/artifacts/registry/wavefunctions.json (defaulted to key)
+  - Artifact 'groove_lens' missing lookup_name in res://commons/artifacts/registry/wavefunctions.json (defaulted to key)
+  - Artifact 'unreliable_clock' missing lookup_name in res://commons/artifacts/registry/wavefunctions.json (defaulted to key)
+  - Duplicate artifact 'coshlea' found in res://commons/artifacts/registry/wavefunctions_extra.json (overriding previous definition)
+  - Artifact 'working_shown' missing lookup_name in res://commons/artifacts/registry/working_shown.json (defaulted to key)
+GridInteractablesComponent: ============================================
+GridInteractablesComponent: ✅ TOTAL: Loaded 3082 validated artifacts from 285 registries
+GridInteractablesComponent: Final registry size: 3062
+GridInteractablesComponent: ============================================
+[em-sim-grid] catalogue warmed at the door: 3062 artifacts in 471 ms - the first grid hall no longer pays it
+[endless_museum] the walk opens at randomness · random entropy (pearl 2/16, map Random_Entropy) — Inspector start_map
+[em_pool] 59 galleries, 3981 entries, 473 tokens -> 427 resolved (232 already spine leads), 195 GUESTS, 129 carrying a rendered axis value, 77 building fabric; dropped 11 not map_ready/on disk, 35 with no registry entry
+[em_pool]   in a registry but not dealable (no map_ready key, or scene gone): ["exhibit_furniture", "exhibit_podium", "exhibit_vitrine", "matryoshka_row", "order_matters", "origin_doormat", "snap_cube_puzzle", "snap_tetra_puzzle", "the_frame_you_were_given", "tt", "where_the_machine_stops"]
+[em_props] catalogue 80/87 live; placeable 19/19 live
+[em-costume] the walker is dressed — halls will hang their own trophies
+WARNING: Screen-space AA is only available when using the Forward+ or Mobile renderer.
+   at: viewport_set_screen_space_aa (servers/rendering/renderer_viewport.cpp:1400)
+   GDScript backtrace (most recent call first):
+       [0] _setup_antialiasing (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:2466)
+       [1] _setup_world (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:3628)
+       [2] _boot_museum (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:1479)
+WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.
+   at: environment_set_ssil (servers/rendering/storage/environment_storage.cpp:775)
+   GDScript backtrace (most recent call first):
+       [0] build (res://commons/scenes/em/em_environment.gd:609)
+       [1] install (res://commons/scenes/em/em_environment.gd:950)
+       [2] _setup_environment (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:3702)
+       [3] _setup_world (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:3629)
+       [4] _boot_museum (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:1479)
+WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.
+   at: environment_set_ssr (servers/rendering/storage/environment_storage.cpp:653)
+   GDScript backtrace (most recent call first):
+       [0] build (res://commons/scenes/em/em_environment.gd:627)
+       [1] install (res://commons/scenes/em/em_environment.gd:950)
+       [2] _setup_environment (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:3702)
+       [3] _setup_world (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:3629)
+       [4] _boot_museum (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:1479)
+WARNING: SDFGI is only available when using the Forward+ renderer.
+   at: environment_set_sdfgi (servers/rendering/storage/environment_storage.cpp:822)
+   GDScript backtrace (most recent call first):
+       [0] build (res://commons/scenes/em/em_environment.gd:652)
+       [1] install (res://commons/scenes/em/em_environment.gd:950)
+       [2] _setup_environment (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:3702)
+       [3] _setup_world (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:3629)
+       [4] _boot_museum (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:1479)
+WARNING: Volumetric fog is only available when using the Forward+ renderer.
+   at: environment_set_volumetric_fog (servers/rendering/storage/environment_storage.cpp:458)
+   GDScript backtrace (most recent call first):
+       [0] build (res://commons/scenes/em/em_environment.gd:760)
+       [1] install (res://commons/scenes/em/em_environment.gd:950)
+       [2] _setup_environment (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:3702)
+       [3] _setup_world (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:3629)
+       [4] _boot_museum (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:1479)
+WARNING: Auto-exposure is only available when using the Forward+ or Mobile renderer.
+   at: camera_attributes_set_auto_exposure (servers/rendering/storage/camera_attributes_storage.cpp:148)
+   GDScript backtrace (most recent call first):
+       [0] camera_attributes (res://commons/scenes/em/em_environment.gd:885)
+       [1] build (res://commons/scenes/em/em_environment.gd:821)
+       [2] install (res://commons/scenes/em/em_environment.gd:950)
+       [3] _setup_environment (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:3702)
+       [4] _setup_world (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:3629)
+       [5] _boot_museum (res://ada_run/encounter_pilot/Random_Entropy/museum_snapshot.gd:1479)
+[em_environment] tier=high | tonemap=AgX exposure=1.15 white=6.0 | ambient=0.20 | ssao=on(r0.55 i1.7 la0.10) | ssil=on(r4.0 i1.15) | ssr=on(64 steps) | sdfgi=on(0.2m/4casc e1.25 fb0.55 y50%) | glow=on(thr1.0 screen) | fog=on(0.0035) vfog=on(0.012) | dof=far 26m/+14m | autoexp=on(speed 0.28, ISO 40-380) | vignette=on(0.15) | sky=NIGHT starfield + moon (starmap_2020_no_figures_4k.jpg)
+[em-night] the moon is the light: energy 0.55, one circuit every 480 s at 38° altitude
+[em-rooms] randomness · random entropy: 0 room(s) — the hall is 34 rows of the template's 28
+[em-lobby] window ok (x 6..8) · built: window, view, counter, extinguisher, elevator, pallet, point_zero
+[em-bake] randomness · random entropy: the map moved since the bake — this hall is measured live, not replayed
+[em_plinths] sizes: 1934 measured artifacts; band 1.05–1.30 m, eye 1.65 m
+[em-scale] hardware_entropy_decay built at 0.60x
+[em-utility] REFUSED s at (8, 5) — not in the museum's allowed set (self-contained transport scenes only)
+[em-utility] REFUSED t at (8, 34) — a teleporter leaves the map; the museum is one endless map
+[em-pack] randomness · random entropy <- Random_Entropy: 6 verbatim + 0 slid of 6, 0 left behind, 0 plinth(s)
+[em-gate] the first passage stands alone: sealed door + palm scanner on the jamb — the next hall loads behind it
+[em-built] seg 0 (desktop) written: 1 segment(s), 8138 bytes, 2 file(s)
+[endless_museum] seg 0 = soane-cabinet-vista (Sir John Soane's Museum, 13 Lincoln's Inn Fields, London) in map Random_Entropy chapter=randomness placed 6/0 (0 leads, 0 relatives, 0 repeats, 0 guests) + 0 plinths + 0 props, z -4..34, lights 15
+[em-arrive] the walker comes in at (7.5, 4.0, 1.5) (was y 4.00 before the hall existed) — a 4.0 m fall onto the floor under it
+[costume] 0 extra limb(s), 8 slot(s), stage 0
+[transformation] PASS requested museum hall loaded
+[endless_museum]   fixtures: 5 benches
+[em-built] seg 0 (desktop) written: 1 segment(s), 25022 bytes, 2 file(s)
+[transformation] PASS ruin exists in the actual museum
+[transformation] PASS baseline starts without the visitor
+[transformation] PASS baseline has already dismantled its upper courses
+[transformation] PASS capture camera retained: ruin-unattended
+[transformation] PASS capture camera retained: ruin-waiting
+[transformation] PASS ONE STONE leaves 115 pieces in place and one displaced
+[transformation] PASS single stone lands with collision restored
+[transformation] PASS RESTORE returns all 116 stones and waits
+[transformation] PASS RESTORE repeats the first seeded choice
+[transformation] PASS RUN resumes the ruin
+[transformation] PASS capture camera retained: ruin-after-choices
+[transformation] PASS PAUSE holds the number displaced
+[transformation] PASS approach retains museum floor
+TRANSFORMATION ENCOUNTERS Random_Entropy 14/14

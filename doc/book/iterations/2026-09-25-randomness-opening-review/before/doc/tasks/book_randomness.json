@@ -220,9 +220,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "done",
-      "claimed_by": "codex",
-      "done_at": "2026-09-25",
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
       "map_refs": [
         "Randomness_10_PRINT_Algorithm"
       ],
@@ -237,12 +237,9 @@
       "proposal": "Commit the map edit and re-run `python tools/em_map_halls.py --apply` (post to the forum first: ada_run/em_plan.json is modified in the working tree, so another session may be writing it), then check that plans[65] carries `ten_print_structure … form:wall … count:12` and no science_screen.",
       "evidence": "`git status`: ` M commons/maps/Randomness_10_PRINT_Algorithm/map_data.json` (mtime 2026-09-24 14:30, last commit 19b44161f 2026-09-16); `git diff` adds `ten_print_structure:180#form:wall#size:1.1#cols:4#rows:3#solid:on#seed:1982#count:12#plate:none` at (11,8) and removes `science_screen:180:1.5#mode:grid`. ada_run/em_plan.json plans[65] (mtime 09-23 22:36) and commons/data/museum/em_plan.json plans[65] (mtime 09-24 16:07) both list science_screen [12,4] cfg {mode: grid} and a single ten_print_structure [12,13] cfg {form: floor}. The wall the chapter describes is real in code: ten_print_structure.gd:45–47 (2.4 m slabs, corridor = size/√2 minus the slab), :134–135 FORM_HEIGHT wall 2.4.",
       "review": "confirmed by a code checker (cited files only): git status: M commons/maps/Randomness_10_PRINT_Algorithm/map_data.json, last commit 19b44161f (2026-09-16). git diff adds 'ten_print_structure:180#form:wall#size:1.1#cols:4#rows:3#solid:on#seed:1982#count:12#plate:none' (now at cell (11,8)) and removes 'science_screen:180:1.5#mode:grid'. ada_run/em_plan.json plans[65] and commons/data/museum/em_plan.json plans[65] both still list science_screen [12,4] {mode: grid} and a single ten_print_structure [12,13] {form: floor}. ten_print_structure.gd:44-48 wall = 2.4 m slabs, corridor = size/sqrt2 minus the slab; :134-135 FORM_HEIGHT wall 2.4. final.md:55 'Now return to the taller slabs near the entrance.' (mtimes not re-checked).",
-      "notes": "Codex review — 25 September 2026\nThe saved plan is stale, but it is not the artifact list used at load. endless_museum.gd refreshes map-authored tiles and artifacts through _derive_map_row on each build. The actual native hall loads both structures: twelve solid wall slabs in a 4 by 3 field, 2.4 m high, and the seven-row floor linked to the printer. The placeholder science screen is absent. No whole-plan rewrite is needed. Native report: print/report.json (13 checks, exit 0). This is not a headset passage check.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-opening-review/index.html",
+      "notes": "",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24",
-      "triage": "comment",
-      "triaged_at": "2026-09-25",
-      "updated_at": "2026-09-25T07:39:10.057Z"
+      "created_at": "2026-09-24"
     },
     {
       "id": "book_randomness.003",
@@ -587,9 +584,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "done",
-      "claimed_by": "codex",
-      "done_at": "2026-09-25",
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
       "map_refs": [
         "Randomness_10_PRINT_Algorithm"
       ],
@@ -604,12 +601,9 @@
       "proposal": "Read both (doc/book/iterations/2026-09-24-claude-randomness-onwards/Randomness_10_PRINT_Algorithm/after.md against the live final.md) and choose; copying after.md back restores the checked text byte for byte.",
       "evidence": "HASHES.txt LIVE line in that folder; forum 260924-zgl38",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "Codex review — 25 September 2026\nRead the earlier checked after.md beside the current final.md. Keep the current chapter. It explicitly explains the breathing sine bias, that the displayed BASIC line omits it, how BIAS fixes the odds, and why a thirty-percent chance does not reserve exactly thirty cells. It retains the wall-width/crop comparison and the ant's different navigation. The review's claimed omissions no longer describe the current text. No rollback or extra arithmetic paragraph is needed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-opening-review/index.html",
+      "notes": "",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24",
-      "triage": "comment",
-      "triaged_at": "2026-09-25",
-      "updated_at": "2026-09-25T07:39:10.088Z"
+      "created_at": "2026-09-24"
     },
     {
       "id": "book_randomness.016",
@@ -647,7 +641,7 @@
       "skill": "edit",
       "depends_on": [],
       "status": "open",
-      "claimed_by": "codex",
+      "claimed_by": null,
       "done_at": null,
       "map_refs": [
         "Randomness_10_PRINT_Algorithm"
@@ -663,12 +657,9 @@
       "proposal": "Walk in, find the sealed room and the way through, and say whether the channel reads as a corridor or a squeeze.",
       "evidence": "probe_ten_print_walkable.gd; DECISIONS.md Limits",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "Codex review — 25 September 2026\nHeadset acceptance remains open. Native photographs now show the actual 2.4 m walls at eye height and from within their gaps; all twelve slab colliders exist. The supplied camera viewpoints do not establish that a tracked body can follow the channel or that it feels comfortable. Retain the requested walk and sealed-room check.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-opening-review/index.html",
+      "notes": "",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24",
-      "triage": "comment",
-      "triaged_at": "2026-09-25",
-      "updated_at": "2026-09-25T07:39:10.118Z"
+      "created_at": "2026-09-24"
     },
     {
       "id": "book_randomness.018",
@@ -789,9 +780,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "done",
-      "claimed_by": "codex",
-      "done_at": "2026-09-25",
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
       "map_refs": [
         "Random_Remove"
       ],
@@ -806,12 +797,9 @@
       "proposal": "Re-run the plan, then boot the hall and check the apron.",
       "evidence": "Random_Remove/map.diff; em_plan.json 'piers: template colonnade x20'",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "Codex review — 25 September 2026\nLoaded Random_Remove in the actual museum. Its runtime tile contains no interior template piers, the apron has floor support, and the authored piers:false is already present. The loader rereads the map, so the old colonnade note in the saved plan does not justify rewriting the full plan. The floor's thirteen checks completed in two runs, but both processes then failed at shutdown with Windows status 0xC0000005. The geometry observations are recorded; this is not a clean process or headset acceptance.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-opening-review/index.html",
+      "notes": "",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24",
-      "triage": "comment",
-      "triaged_at": "2026-09-25",
-      "updated_at": "2026-09-25T07:39:10.149Z"
+      "created_at": "2026-09-24"
     },
     {
       "id": "book_randomness.023",
@@ -821,7 +809,7 @@
       "skill": "edit",
       "depends_on": [],
       "status": "open",
-      "claimed_by": "codex",
+      "claimed_by": null,
       "done_at": null,
       "map_refs": [
         "Random_Remove"
@@ -837,12 +825,9 @@
       "proposal": "Enter the arena in the headset and watch the first cell go.",
       "evidence": "probe_removal_arena_vr.out.txt; removal_arena.diff",
       "review": "quote checked: verbatim in the chapter (script, no agent) · from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "Codex review — 25 September 2026\nHeadset walk remains open. A native run now uses the actual desktop museum body, positioned through the real Area3D: entry removes one cell and collider; another 0.7 local units of movement removes a second; standing still removes none; REPLAY restores 99 colliders. This strengthens the earlier stand-in tests without testing the XR branch. Both native floor runs completed 13 checks but ended with 0xC0000005 during shutdown, even after orderly probe-scene cleanup. Preserve that separate runtime follow-up; do not call this a clean engine run.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-opening-review/index.html",
+      "notes": "",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24",
-      "triage": "comment",
-      "triaged_at": "2026-09-25",
-      "updated_at": "2026-09-25T07:39:10.180Z"
+      "created_at": "2026-09-24"
     },
     {
       "id": "book_randomness.024",
@@ -851,9 +836,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "done",
-      "claimed_by": "codex",
-      "done_at": "2026-09-25",
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
       "map_refs": [
         "Random_Entropy"
       ],
@@ -868,12 +853,9 @@
       "proposal": "Decide piers:false for this map too, then re-run the plan.",
       "evidence": "em_plan.json 'piers: template colonnade x27'",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "Codex review — 25 September 2026\nExplicitly set piers:false in Random_Entropy to keep the template colonnade out of future derived plans. The actual pre-change hall already reread the source tile without those piers, and the revised native hall confirms no interior template wall cells. No artifact was removed or relocated and no live plan was regenerated.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-opening-review/index.html",
+      "notes": "",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24",
-      "triage": "fix",
-      "triaged_at": "2026-09-25",
-      "updated_at": "2026-09-25T07:39:10.210Z"
+      "created_at": "2026-09-24"
     },
     {
       "id": "book_randomness.025",
@@ -882,9 +864,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "done",
-      "claimed_by": "codex",
-      "done_at": "2026-09-25",
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
       "map_refs": [
         "Random_Entropy"
       ],
@@ -899,12 +881,9 @@
       "proposal": "An autostart:false option, as on the weathering wall; then remove the two sentences added in the hall's change 6.",
       "evidence": "Random_Entropy/DECISIONS.md change 6 and Limits",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "Codex review — 25 September 2026\nAdded autostart with the legacy true default; this hall opts into autostart:false. The ruin now waits intact and the chapter begins with choosing a joint before starting it. Sixteen native checks cover a paused arrival, ninety supplied seconds without collapse, ONE STONE, seeded RESTORE, RUN/PAUSE, retained stones/collision, and the unconfigured running default. Exit 0. One original native museum photograph enters final.md. The text's inventory/arrangement distinction and the separate weathering wall remain.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-opening-review/index.html",
+      "notes": "",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24",
-      "triage": "fix",
-      "triaged_at": "2026-09-25",
-      "updated_at": "2026-09-25T07:39:10.241Z"
+      "created_at": "2026-09-24"
     },
     {
       "id": "book_randomness.026",
@@ -1053,9 +1032,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "done",
-      "claimed_by": "codex",
-      "done_at": "2026-09-25",
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
       "map_refs": [
         "Randomness_10_PRINT_Algorithm"
       ],
@@ -1070,12 +1049,9 @@
       "proposal": "Apply the replacements in INTEGRATION.md section 2.",
       "evidence": "commons/context/clipboard/tutorial_text/ten_print_axioms.gd",
       "review": "quote NOT found in the chapter as written; check before acting (script) · from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "Codex review — 25 September 2026\nAlready fixed in the current shared ten_print_axioms.gd and its Markdown twin. They distinguish visitor collision from the ant's navigation, say several cells turn each second, explain independent draws versus neighbour rules, and no longer promise Noise as the next hall. Preserve this more general shared wording; the chapter supplies its specific return and next hall. No new shared clipboard change made.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-opening-review/index.html",
+      "notes": "",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24",
-      "triage": "comment",
-      "triaged_at": "2026-09-25",
-      "updated_at": "2026-09-25T07:39:10.273Z"
+      "created_at": "2026-09-24"
     },
     {
       "id": "book_randomness.032",
@@ -1085,7 +1061,7 @@
       "skill": "build",
       "depends_on": [],
       "status": "open",
-      "claimed_by": "codex",
+      "claimed_by": null,
       "done_at": null,
       "map_refs": [
         "Randomness_10_PRINT_Algorithm"
@@ -1101,12 +1077,9 @@
       "proposal": "Remove the screen token or give it a text mode; decide the four leftovers (INTEGRATION.md sections 3-4).",
       "evidence": "INTEGRATION.md sections 3 and 4",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "Codex review — 25 September 2026\nPartially resolved: the science-screen token is already absent from the map and the native hall confirms it is absent. The four other placements are retained pending a focused curation pass. The dark sphere remains a secondary remainder, not chapter evidence; no claim about it is added. Do not remove the other works merely because this reduced chapter does not mention them. Their contribution and the cube placer's possible spill beyond the room still need a deliberate placement decision. This record stays open for that remaining work.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-randomness-opening-review/index.html",
+      "notes": "",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24",
-      "triage": "comment",
-      "triaged_at": "2026-09-25",
-      "updated_at": "2026-09-25T07:39:10.304Z"
+      "created_at": "2026-09-24"
     },
     {
       "id": "book_randomness.033",

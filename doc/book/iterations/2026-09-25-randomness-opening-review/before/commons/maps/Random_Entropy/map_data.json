@@ -27,7 +27,6 @@
       "gate_depth_rows": 0,
       "artifact_placement": "map",
       "plinths": false,
-      "piers": false,
       "props_deny": [
         "dream_bodies"
       ],
@@ -39,7 +38,13 @@
           29
         ]
       ],
-      "open_roof": true
+      "open_roof": true,
+      "weathering_wall": {
+        "side": "west",
+        "start_z": 23,
+        "length": 6,
+        "seed": 79
+      }
     }
   },
   "utility_definitions": {
@@ -1770,7 +1775,7 @@
         " ",
         " ",
         " ",
-        "entropy_ruin#controls:compact#control_front:-2.0#control_facing:-z#autostart:false",
+        "entropy_ruin#controls:compact#control_front:-2.0#control_facing:-z",
         " ",
         " ",
         " ",

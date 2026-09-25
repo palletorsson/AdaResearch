@@ -1,0 +1,31 @@
+{
+  "room": "Random_Remove",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Random_Remove/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Random_Remove/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Random_Remove/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Random_Remove/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Random_Remove/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Random_Remove/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Random_Remove/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Random_Remove/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Random_Remove/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Random_Remove/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Random_Remove/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "750b8c87dd2b856ca091ba7c670513ec50daa3a73d3ae87e34f1324a2eb1c0eb",
+    "commons/maps/Random_Remove/map_data.json": "9e8b8dc0e54fb8cecb094b9c9a8d56692f1980c6223f45df26a71d0bf791bd64",
+    "doc/book/iterations/2026-09-25-randomness-opening-review/museum-probe.gd": "beb756a63c2c95f5a8479b7400c4e2e6e7f8903c702b187bbc824601045922d8",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "83c07b75bc02c997ab8ac2043f4ee791f9aaf772408410e9f38fd22e661a36b7",
+    "ada_run/encounter_pilot/Random_Remove/control.json": "fcb0e1d40ed2b693c295e5b91b2d6b8a0827c609517870898790f59b574474a8",
+    "ada_run/encounter_pilot/Random_Remove/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Random_Remove/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Random_Remove/em_bake.json": "499e9d02a9d384210fd8318da9901f9e8483bfa1ba0377e02503357bf761185a",
+    "commons/artifacts/registry/randomness.json": "a020472029479df1e99409a110e9920dc871632b38db997dddf23d1c6dcbf339",
+    "algorithms/randomness/remove_random.tscn": "b883fa85094bb378a7603baf86343cdea215c059d5726c29c11b7e236a6cb103",
+    "algorithms/randomness/RemoveRandom.gd": "ce8a1c20cf55ab68e30982dda448f1711785f0049522cb8acce5c7b7a0a609b2"
+  }
+}

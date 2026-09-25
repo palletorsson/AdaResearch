@@ -1,0 +1,788 @@
+{
+  "checks": [
+    {
+      "check": "Random_Definition: encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "Random_Definition: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "Random_Definition: chapter retained byte for byte",
+      "passed": true
+    },
+    {
+      "check": "Random_Definition: core hashes current",
+      "passed": true
+    },
+    {
+      "check": "Random_Definition: reader serves current canonical text",
+      "passed": true
+    },
+    {
+      "check": "Random_Definition: roles and verification status preserved",
+      "passed": true
+    },
+    {
+      "check": "Random_Entropy: encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "Random_Entropy: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "Random_Entropy: core hashes current",
+      "passed": true
+    },
+    {
+      "check": "Random_Entropy: reader serves current canonical text",
+      "passed": true
+    },
+    {
+      "check": "Random_Entropy: roles and verification status preserved",
+      "passed": true
+    },
+    {
+      "check": "Random_Remove: encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "Random_Remove: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "Random_Remove: chapter retained byte for byte",
+      "passed": true
+    },
+    {
+      "check": "Random_Remove: core hashes current",
+      "passed": true
+    },
+    {
+      "check": "Random_Remove: reader serves current canonical text",
+      "passed": true
+    },
+    {
+      "check": "Random_Remove: roles and verification status preserved",
+      "passed": true
+    },
+    {
+      "check": "Randomness_10_PRINT_Algorithm: encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "Randomness_10_PRINT_Algorithm: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "Randomness_10_PRINT_Algorithm: chapter retained byte for byte",
+      "passed": true
+    },
+    {
+      "check": "Randomness_10_PRINT_Algorithm: core hashes current",
+      "passed": true
+    },
+    {
+      "check": "Randomness_10_PRINT_Algorithm: reader serves current canonical text",
+      "passed": true
+    },
+    {
+      "check": "Randomness_10_PRINT_Algorithm: roles and verification status preserved",
+      "passed": true
+    },
+    {
+      "check": "Other current core records preserved",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Definition/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Definition/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Definition/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Definition/eye_shot.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Definition/field_notes.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Definition/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Definition/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Definition/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Definition/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Definition/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Definition/walked.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Definition/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Entropy/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Entropy/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Entropy/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Entropy/field_notes.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Entropy/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Entropy/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Entropy/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Entropy/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/encounter-notes.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/eye_shot.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/field_notes.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/walked.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Remove/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_10_PRINT_Algorithm/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_10_PRINT_Algorithm/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_10_PRINT_Algorithm/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_10_PRINT_Algorithm/encounter-notes.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_10_PRINT_Algorithm/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_10_PRINT_Algorithm/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_10_PRINT_Algorithm/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_10_PRINT_Algorithm/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_10_PRINT_Algorithm/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_10_PRINT_Algorithm/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Cubes/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Cubes/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Cubes/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Cubes/encounter-notes.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Cubes/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Cubes/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Cubes/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Cubes/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Cubes/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Cubes/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Rotate_Random_XYZ/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Rotate_Random_XYZ/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Rotate_Random_XYZ/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Rotate_Random_XYZ/eye_shot.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Rotate_Random_XYZ/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Rotate_Random_XYZ/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Rotate_Random_XYZ/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Rotate_Random_XYZ/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Rotate_Random_XYZ/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Rotate_Random_XYZ/walked.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Rotate_Random_XYZ/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Walk/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Walk/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Walk/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Walk/eye_shot.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Walk/field_notes.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Walk/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Walk/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Walk/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Walk/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Walk/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Walk/walked.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Walk/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Gaussian/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Gaussian/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Gaussian/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Gaussian/eye_shot.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Gaussian/field_notes.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Gaussian/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Gaussian/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Gaussian/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Gaussian/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Gaussian/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Gaussian/walked.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Gaussian/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Mushrooms/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Mushrooms/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Mushrooms/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Mushrooms/field_notes.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Mushrooms/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Mushrooms/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Mushrooms/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Mushrooms/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Mushrooms/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Mushrooms/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space_Geometry/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space_Geometry/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space_Geometry/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space_Geometry/eye_shot.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space_Geometry/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space_Geometry/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space_Geometry/landscape_research.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space_Geometry/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space_Geometry/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space_Geometry/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space_Geometry/walked.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space_Geometry/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_Examples_of_Randomness/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_Examples_of_Randomness/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_Examples_of_Randomness/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_Examples_of_Randomness/eye_shot.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_Examples_of_Randomness/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_Examples_of_Randomness/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_Examples_of_Randomness/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_Examples_of_Randomness/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_Examples_of_Randomness/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_Examples_of_Randomness/walked.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Randomness_Examples_of_Randomness/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Pheromone/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Pheromone/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Pheromone/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Pheromone/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Pheromone/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Pheromone/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Pheromone/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Pheromone/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Pheromone/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space/landscape_research.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Space/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Game/artifacts.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Game/blurb.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Game/critical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Game/field_notes.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Game/final.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Game/intent.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Game/summary.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Game/technical.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Game/tutorial.md: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/Random_Game/map_data.json: untouched",
+      "passed": true
+    },
+    {
+      "check": "commons/data/artifact_roles.json: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/sequences/randomness.json: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/data/book/randomness.json: unchanged",
+      "passed": true
+    },
+    {
+      "check": "ada_run/em_plan.json: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/data/museum/em_plan.json: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/context/clipboard/tutorial_text/ten_print_axioms.gd: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/context/clipboard/tutorial_text/ten_print_axioms.md: unchanged",
+      "passed": true
+    },
+    {
+      "check": "Map changes only declare piers:false and the ruin waiting mode",
+      "passed": true
+    },
+    {
+      "check": "entropy: all recorded encounter assertions passed",
+      "passed": true
+    },
+    {
+      "check": "entropy: process result accurately recorded",
+      "passed": true
+    },
+    {
+      "check": "entropy: no GDScript errors",
+      "passed": true
+    },
+    {
+      "check": "removal-cleanup: all recorded encounter assertions passed",
+      "passed": true
+    },
+    {
+      "check": "removal-cleanup: process result accurately recorded",
+      "passed": true
+    },
+    {
+      "check": "removal-cleanup: no GDScript errors",
+      "passed": true
+    },
+    {
+      "check": "print: all recorded encounter assertions passed",
+      "passed": true
+    },
+    {
+      "check": "print: process result accurately recorded",
+      "passed": true
+    },
+    {
+      "check": "print: no GDScript errors",
+      "passed": true
+    },
+    {
+      "check": "Book figure is the unchanged native museum PNG",
+      "passed": true
+    },
+    {
+      "check": "Figure served without alteration",
+      "passed": true
+    },
+    {
+      "check": "Current capture includes all fourteen current chapters",
+      "passed": true
+    },
+    {
+      "check": "Current capture hash correct",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "native_assertions": 42,
+  "native_processes_clean": false,
+  "limits": "Removal floor completes 13 assertions but crashes at shutdown in both runs. No headset, comfort, tracked hand, performance, or full route acceptance."
+}

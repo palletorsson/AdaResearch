@@ -1,0 +1,31 @@
+{
+  "entropy": {
+    "runner_exit_code": 0,
+    "godot_exit_code": 0,
+    "errors": [
+      "ERROR: Unrecognized UID: \"uid://rwex60pqapc\"."
+    ],
+    "limit": "UID/resource/renderer warnings retained; no headset claim"
+  },
+  "removal-cleanup": {
+    "runner_exit_code": -1,
+    "godot_exit_code": 3221225477,
+    "errors": [
+      "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+      "WARNING: ObjectDB instances leaked at exit (run with --verbose for details)."
+    ],
+    "limit": "Completed assertions, followed by unresolved native shutdown crash"
+  },
+  "print": {
+    "runner_exit_code": 0,
+    "godot_exit_code": 0,
+    "errors": [
+      "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+      "ERROR: Viewport Texture must be set to use it.",
+      "ERROR: Viewport Texture must be set to use it.",
+      "WARNING: ObjectDB instances leaked at exit (run with --verbose for details).",
+      "ERROR: 1 resources still in use at exit (run with --verbose for details)."
+    ],
+    "limit": "UID/resource/renderer warnings retained; no headset claim"
+  }
+}

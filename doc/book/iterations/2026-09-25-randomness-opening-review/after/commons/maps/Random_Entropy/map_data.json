@@ -39,7 +39,13 @@
           29
         ]
       ],
-      "open_roof": true
+      "open_roof": true,
+      "weathering_wall": {
+        "side": "west",
+        "start_z": 23,
+        "length": 6,
+        "seed": 79
+      }
     }
   },
   "utility_definitions": {

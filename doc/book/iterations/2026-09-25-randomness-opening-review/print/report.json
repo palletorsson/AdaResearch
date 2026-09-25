@@ -1,0 +1,329 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "both floor and wall print structures are loaded",
+      "passed": true
+    },
+    {
+      "name": "map's wall field replaces the stale screen",
+      "passed": true
+    },
+    {
+      "name": "wall has four columns and three rows",
+      "passed": true
+    },
+    {
+      "name": "all twelve wall slabs are printed",
+      "passed": true
+    },
+    {
+      "name": "each wall slab has a collision shape",
+      "passed": true
+    },
+    {
+      "name": "walls are 2.4 m high",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: printed-walls",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: inside-printed-walls",
+      "passed": true
+    },
+    {
+      "name": "floor field shows seven rows",
+      "passed": true
+    },
+    {
+      "name": "floor field receives the hall printer",
+      "passed": true
+    },
+    {
+      "name": "printed floor remains without collision",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: printed-floor",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "loaded_tile": [
+      [
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "1",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      [
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "4",
+        "4"
+      ],
+      [
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "1",
+        "1",
+        "4",
+        "4"
+      ]
+    ],
+    "wall": {
+      "cells": "{ (0, 0): false, (1, 0): true, (2, 0): false, (3, 0): false, (0, 1): true, (1, 1): true, (2, 1): false, (3, 1): true, (0, 2): false, (1, 2): true, (2, 2): true, (3, 2): false }",
+      "dimensions": "(4, 3)",
+      "position": [
+        11.5,
+        0.0,
+        8.5
+      ],
+      "slab_height": 2.4
+    }
+  },
+  "passed": true,
+  "room": "Randomness_10_PRINT_Algorithm",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}
