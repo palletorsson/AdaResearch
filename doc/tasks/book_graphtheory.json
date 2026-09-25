@@ -149,9 +149,9 @@
       "effort": "half-day",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "GT_Spanning_Trees"
       ],
@@ -166,7 +166,7 @@
       "proposal": "As proposed; cite algorithms_misc.json:5357 for the description claim.",
       "evidence": "algorithms/graphtheory/minimumspanningtree/mst_visualization.gd:861 (highlight_current_edge called), :873-878 (rejected branch; '#highlight_rejected_edge' commented out, no such function exists), :928-937 (mutates the edge material in place, no reset anywhere), :941-953 (green line added at the same from/to), :96 (rejected_edge_color export, unused). Registry commons/artifacts/registry/algorithms_misc.json:5343 description claims 'rejected cycle-forming edges glow red', which the code does not do.",
       "review": "amended by a code checker (cited files only): mst_visualization.gd:861 highlight_current_edge(edge); :873-878 rejected branch with `#highlight_rejected_edge` commented out and no such function; :928-937 sets albedo/emission in place, no restore; :941-953 create_mst_edge_visualization adds a second line; :96 rejected_edge_color declared, only occurrence. Registry: the token key is algorithms_misc.json:5343, the 'rejected cycle-forming edges glow red' description is at :5357.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the chapter says what the display does - the considered edge turns yellow, an accepted one gets a green line, a rejected one is left yellow and unmarked, so the tracing is the visitor's; 'yellow edge' replaces 'rejected edge' later; footnote [^red] cites algorithms_misc.json:5357 against the commented-out highlight_rejected_edge call.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -177,9 +177,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "GT_Network_Analysis"
       ],
@@ -194,7 +194,7 @@
       "proposal": "Rewrite paragraph 1 to name what is visible (size, colour, orbit speed, glow: 'the large red vertices orbit slowly and pulse harder') and paragraph 4's 'its readouts' to 'its two meters, which do not move', so the chapter's honest claim ('They are not all calculated from the displayed edges') is made against things the reader can find.",
       "evidence": "algorithms/graphtheory/network_analysis/NetworkAnalysis.gd:9 (identity: 'Label3D [missing]'), :130-139 (_process animates nodes, edges, particles, communities only), :133-134 (measures computed), :469-476 (getters only, no display); algorithms/graphtheory/network_analysis/network_analysis.tscn nodes NetworkMetrics/ClusteringMeter and ConnectivityMeter (static CSGBox3D + CSGSphere3D, no script), NetworkLabel (a 4 x 0.3 x 0.3 CSGBox3D). doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md, Network Analysis row: 'Its displayed measures still require implementation work'.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: paragraph 1 names size, colour, orbit and glow (large red slow and pulsing harder, small green faster and dimmer; NetworkAnalysis.gd:150-182, :436, :452); 'a size or a glow' for 'an animated number'; the two computed numbers follow a clock and are never shown; 'its two meters, a ball on a bar at either side, do not move'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -205,9 +205,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "GT_Pathfinding"
       ],
@@ -222,7 +222,7 @@
       "proposal": "Replace the three phrases with the spark's crossing: 'Watch where the spark goes on its next crossing'; 'compare the crossing you remember with the one it now makes'; 'the spark's hops are its calculated route, not a promise your own body can walk'. Mention the readout's stone count as the one number that changes.",
       "evidence": "commons/artifacts/impatient_river/impatient_river.gd:124-134 (_replan sets _route and the readout text only), :136-153 (_process moves the orb along _route), :111-120 (the spark is one sphere), :212-228 (plate and readout); commons/artifacts/impatient_river/impatient_river.tscn:5-6 (bare root with the script); commons/artifacts/_embodied/embodied_prop.gd has no route or line drawing.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the four phrases replaced with the spark's crossing and hops; the readout's stone count named; 'If the readout says NO ROUTE' (impatient_river.gd:133).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -250,7 +250,7 @@
       "proposal": "Give tarjan_algorithm (then mst_visualization and push_relabel) the lesson_controls push-button panel edmonds_algorithm already builds (RESET, RUN / PAUSE, STEP), gated by a #lesson_controls:on token on the map, so 'watch the moment' is something the visitor can cause, and add one clause to the chapter naming the button.",
       "evidence": "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd:145-146 (auto_start in _ready), :561-564 (algorithm_running = false at completion, no restart), :664-671 (_input: ui_accept / ui_cancel only), :19-20 (animation_speed 0.3); algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd:703-739 (_create_lesson_controls, VR push_button.tscn instances); mst_visualization.gd:1072-1093 (KEY_SPACE/KEY_R); push_relabel.gd:1051-1058. Map GT_Connectivity: tarjan_algorithm at (3,2), spawn at (11,8), about ten cells apart.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): a scene change (lesson_controls panel on tarjan_algorithm, then mst_visualization and push_relabel) - not done in this prose-only pass. edmonds_algorithm.gd:703-739 is the model; recommend one follow-up commit with a #lesson_controls:on map token, then add the clause naming the button.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -261,9 +261,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "GT_Layout"
       ],
@@ -278,7 +278,7 @@
       "proposal": "'Its positions are not fixed: connected vertices pull together as if on springs, every pair of vertices pushes apart, and damping...' (fold the sentence into the one that follows).",
       "evidence": "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd:10 (needs: slider_horizontal [missing]; push_button [missing]), :260-276 (_process integrates forces every frame), :440-461 (apply_grid_config reads graph, layout_seed, warmup_steps, time_scale only).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Its positions are not fixed: connected vertices pull together as if on springs, every pair of vertices pushes apart, and damping wears the motion down.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -289,9 +289,9 @@
       "effort": "1h",
       "skill": "design",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "GT_Matching"
       ],
@@ -306,7 +306,7 @@
       "proposal": "Place the two existing captures after paragraph 7 under one caption: 'Same ten points, same ten connections. Cycle first: three pairs, four waiting. Spokes first: five pairs.'",
       "evidence": "doc/book/iterations/2026-09-20-graphtheory-review/matching-cycle-first.png and matching-spokes-first.png (SUMMARY.md: 'two states of the revised artifact from the same museum camera'); grep '![' over commons/maps/*/final.md: 28 of 213 chapters carry figures, none under GT_*; edmonds_algorithm.gd:252-257 (cycle edges then spokes) and :671-675 (_set_scan_order) reproduce the 3-pair / 5-pair outcomes the chapter states.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: both captures copied to doc/book/figures/graphtheory/ and placed under one caption after the spokes-first paragraph (not the cycle-first one, so the prediction the chapter asks for is not answered by the second still before it is made).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -317,9 +317,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "GT_Layout"
       ],
@@ -334,7 +334,7 @@
       "proposal": "Add one sentence after the question: 'Count: every vertex in this graph has exactly three neighbours, so whatever looked central was the drawing's doing.'",
       "evidence": "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd:21-22 ('the 3-cube Q3 ... 3-regular and vertex-transitive'), :121-124 (twelve edges over eight nodes, each node in exactly three), :49 (node_count 8).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Count: every vertex in this graph has exactly three neighbours, so whatever looked central was the drawing's doing.' (Q3, ForceDirectedLayout.gd:121-124).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -345,9 +345,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "GT_Connectivity"
       ],
@@ -362,7 +362,7 @@
       "proposal": "Add: 'A vertex turns yellow when visited and orange when finished but still waiting on the stack; an edge that closes back onto a waiting vertex turns red, and that is the moment the low-link is lowered.'",
       "evidence": "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd:89-99 (vertex_color blue, visited_color orange, current_color yellow, back_edge_color red, cross_edge_color green), :579 (current), :595-603 (tree edge white; back edge red with low_link update; cross edge green), :628 (visited_color when not a root), :580 (disc shown only in the caption), :84-85 (show_discovery_time / show_low_link exports never read).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the sentence added after the low-link definition (tarjan_algorithm.gd:89-99, :595-603, :628).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -373,9 +373,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "GT_Flow"
       ],
@@ -390,7 +390,7 @@
       "proposal": "Add after the definition: 'The source shows a negative excess: it is the total it has sent out and will not receive back.'",
       "evidence": "algorithms/graphtheory/push_relabel/push_relabel.gd:891 (excess[source] -= flow), :1017-1022 (h: and e: labels written for every node, source included), :663-664 (source sphere is the green one).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The source shows a negative excess: it is the total it has sent out and will not receive back.' (push_relabel.gd:891, :1017-1022).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -401,9 +401,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "GT_Foundations"
       ],
@@ -418,7 +418,7 @@
       "proposal": "'One traveller, the hall calls it the tide, explores the nearest layer of neighbours before moving further out. The other, the diver, follows a branch deeper before returning to alternatives.'",
       "evidence": "commons/artifacts/two_travelers/two_travelers.gd:156-158 (readout text 'THE TIDE - BFS' / 'THE DIVER - DFS'), :169-170 (plate text naming both), :134-139 (the two alternate automatically).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'the hall calls it the tide' / 'the diver'. The same sentence stands in the edges-pilot candidate.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -429,9 +429,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "GT_Foundations (also GT_Layout, GT_Pathfinding, GT_Network_Analysis, GT_Spanning_Trees, GT_Flow)"
       ],
@@ -446,7 +446,7 @@
       "proposal": "Keep the proposal where it is the chapter's honest confession (Network Analysis, Flow); in Foundations, Layout, Pathfinding and Spanning Trees fold it into the exercise as a question the visitor can already ask ('Which destination would you make urgent, and under which rule does it wait longer?') or cut it.",
       "evidence": "commons/maps/GT_Foundations/final.md ¶7; GT_Layout/final.md ¶7 ('For a future comparison, hold the graph fixed'); GT_Pathfinding/final.md ¶7 ('A future extension could expose the search frontier'); GT_Network_Analysis/final.md ¶7 ('A stronger version of the room would calculate'); GT_Spanning_Trees/final.md ¶7 ('For a proposed extension'); GT_Flow/final.md ¶8 ('The next useful experiment would'). doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md, Matching row: 'Replace the proposed experiment with an encounter the visitor can perform.'",
       "review": "unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25 in Foundations (make one lamp urgent: under which traveller does it wait longer, by how many visits?), Layout (walk to the far side: still central?), Pathfinding (which stones did the search pass over?), Spanning Trees (one extra edge: which yellow one?). Kept as the honest confession in Network Analysis and Flow.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -474,7 +474,7 @@
       "proposal": "A push button built the way impatient_river builds one (impatient_river.gd:157-178), wired to reset_simulation(), plus one clause in the chapter: 'press to start it again from a new tangle'.",
       "evidence": "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd:78-82 (_ready: create once), :324-330 (damping 0.9 per frame), :408-426 (reset_simulation, never called), :10 (no button); commons/artifacts/impatient_river/impatient_river.gd:157-178 (a push button in twenty lines); map GT_Layout: force_directed_layout at (4,5), spawn at (9,10); doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md, Layout row.",
       "review": "amended by a code checker (cited files only): Holds in effect, two corrections. (1) reset_simulation() is not 'never called': ForceDirectedLayout.gd:440-461 apply_grid_config calls it (line 459) when a 'graph' or 'layout_seed' config key changes - but the GT_Layout token 'force_directed_layout:0:0:0.6' at (4,5) passes no config key (registry algorithms_misc.json:3440 says the same of all 9 placements), so it is unreachable from this hall, and there is still no button (:10 'push_button [missing]'). (2) The map has two spawn-like cells: 's' at (2,2) about 3-4 cells from the artifact, and 'sp' at (9,10) about 7 cells away; the 'seven cells' figure assumes 'sp' is the live spawn. Damping 0.9 per frame (:53, :330), warmup_steps default 0 (:40) and _ready creating once (:78-82) all check out; impatient_river.gd:157-178 builds the button as described.",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): a scene change (a push button wired to reset_simulation, built the way impatient_river.gd:157-178 builds one) - not done in this prose-only pass. Recommend doing it with .004 in one commit.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -485,9 +485,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "GT_Matching"
       ],
@@ -502,7 +502,7 @@
       "proposal": "Keep 'the display runs greedy matching; Edmonds' augmenting paths and blossom handling remain a further construction' and move the file-name clause to a footnote, or cut it.",
       "evidence": "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd:346 (info caption 'GREEDY MATCHING'), :14 ('the legacy resource name is retained'); commons/artifacts/registry/algorithms_misc.json:2884-2895 (name 'Greedy Matching: Order and Pairing').",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the file name moved to footnote [^name]; the prose keeps 'the display runs greedy matching; Edmonds' augmenting paths and blossom handling remain a further construction'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -513,9 +513,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "GT_Matching"
       ],
@@ -530,7 +530,7 @@
       "proposal": "'The next hall keeps five sentences on a plaque and colours one of them gold before you have read it; ask there, as here, whether a rule that is followed has been proved.'",
       "evidence": "commons/maps/Euclid_Parallel/final.md:1-9 (NEXT wraps modulo five), :37 ('the room has told you which postulate matters. The gold arrives ahead of the argument'); word counts 574 (GT_Matching) against 1,709 (Euclid_Parallel); GT chapters carry no headings, code or draw tags.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The next hall keeps five sentences on a plaque and colours one of them gold before you have read it. Ask there, as here, whether a rule that is followed has been proved: ...' (Euclid_Parallel section 2).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -558,7 +558,7 @@
       "proposal": "Decide Konigsberg's placement: a model on a plinth at a small scale (registry says player_position 'above'), or a hall-aware build. No scale >= 0.04 centred at (6,6) keeps the 50x30 river off the spine at x 5; overhead arches with the river under the floor need s >= 0.85, which does not fit 13x12. Then walk it from the seam (--em-map=GT_Foundations).",
       "evidence": "doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot/as_built_probe.txt; commons/testing/probe_gt_foundations_bodies.gd; algorithms/graphtheory/graphspace3d/konigsberg3d.gd:206-209,501-527,733",
       "review": "by hand: probe report + cited lines read in the pilot",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): needs Palle's placement decision for KonigsbergBridge (model on a plinth vs hall-aware build), then a walk from the seam. The edges-pilot candidate stays uninstalled until then.",
       "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot)",
       "created_at": "2026-09-24",
       "event": "collision",
@@ -590,7 +590,7 @@
       "proposal": "graphspace and graphspace3d are levels to walk, not exhibits to stand in a 13 m hall: give the stand a display scale (or a subject that fits), and either drop the two cities from this map or place them at a model scale on the islands. The chapter does not depend on them.",
       "evidence": "doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot/as_built_probe.txt; commons/testing/probe_gt_foundations_bodies.gd; commons/artifacts/synthesis/synthesis_stand.gd:105-132; algorithms/graphtheory/graphspace/graphspace.gd:51,126",
       "review": "by hand: probe report + cited lines read in the pilot",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): needs a decision on the synthesis stand's display scale and the two graph cities (drop or model scale). Not a prose task.",
       "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot)",
       "created_at": "2026-09-24",
       "event": "scale",
@@ -622,7 +622,7 @@
       "proposal": "Decide: keep (the candidate is written to it) or make one ride auto (tc:3:z:auto shuttles) / add a walkway from R back to the spine (e.g. cells (6,9),(7,9)) - then the Search paragraph changes from 'no way you can call' to the return ride.",
       "evidence": "commons/maps/GT_Foundations/map_data.json utilities (3,2),(9,5),(5,8); commons/scenes/mapobjects/transport_cube.gd:11,195-248,452",
       "review": "by hand: probe report + cited lines read in the pilot",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): keep / auto ride / walkway is a map decision; the candidate is written to 'keep'. Decide with .015.",
       "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot)",
       "created_at": "2026-09-24",
       "event": "threshold",
@@ -654,7 +654,7 @@
       "proposal": "After task .015 is decided, choose the word: 'water' if the river still runs under the walkways, 'nothing' if not.",
       "evidence": "doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot/as_built_probe.txt; commons/testing/probe_gt_foundations_bodies.gd; konigsberg3d.gd:470-473",
       "review": "by hand: probe report + cited lines read in the pilot",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): the word ('water' / 'nothing') follows .015.",
       "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot)",
       "created_at": "2026-09-24",
       "event": "occlusion",

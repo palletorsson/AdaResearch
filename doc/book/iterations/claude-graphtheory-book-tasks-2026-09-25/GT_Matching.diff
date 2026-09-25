@@ -1,0 +1,23 @@
+--- before/GT_Matching.md
++++ after/GT_Matching.md
+@@ -18,10 +18,18 @@
+ 
+ Press ORDER for SPOKES FIRST. The points stay where they were; every connection remains. The earlier pairings clear. Before running again, predict what will happen to the point you chose. This time five pairs form, one along each spoke. Nobody has gained a new connection. We changed which possibility was considered first.
+ 
+-RESET repeats the selected order. Switching back to CYCLE FIRST brings the gaps back too. Both scans obey the same rule about free endpoints. Their different results give us a reason to ask for a procedure that can reconsider its own choices. The artifact retains the source name `edmonds_algorithm`, but the display runs greedy matching; Edmonds’ augmenting paths and blossom handling remain a further construction. Our order switch starts another scan. It does not teach the first scan how to undo a pair.
++![Cycle first: the ring’s edges scanned before the spokes; three pairs, four outer points waiting.](/book-review/doc/book/figures/graphtheory/matching-cycle-first.png)
++
++![Spokes first: the same ten points and ten connections; five pairs, one along each spoke.](/book-review/doc/book/figures/graphtheory/matching-spokes-first.png)
++
++*Same ten points, same ten connections. Cycle first: three pairs, four waiting. Spokes first: five pairs. Two end states of one graph, from the same museum camera.*
++
++RESET repeats the selected order. Switching back to CYCLE FIRST brings the gaps back too. Both scans obey the same rule about free endpoints. Their different results give us a reason to ask for a procedure that can reconsider its own choices. The display runs greedy matching; Edmonds’ augmenting paths and blossom handling remain a further construction.[^name] Our order switch starts another scan. It does not teach the first scan how to undo a pair.
+ 
+ Matching also leaves the meaning of a good partnership outside its endpoint rule. Maximising a count cannot establish consent, suitability or fairness. Those questions require further conditions and a way for participants’ preferences to matter.
+ 
+ <!-- @ -->
+ 
+-The foundations sequence will question what a formal system can establish. Carry one distinction forward: a procedure meeting its local rule is not automatically a proof of its strongest advertised conclusion.
++The next hall keeps five sentences on a plaque and colours one of them gold before you have read it. Ask there, as here, whether a rule that is followed has been proved: a procedure meeting its local rule is not automatically a proof of its strongest advertised conclusion.
++
++[^name]: The caption on the display reads GREEDY MATCHING. The artifact keeps the name of the procedure it was built to become, edmonds_algorithm, in its files, and nowhere a visitor can see.
