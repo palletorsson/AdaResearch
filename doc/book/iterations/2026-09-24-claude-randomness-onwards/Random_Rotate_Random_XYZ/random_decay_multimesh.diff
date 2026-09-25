@@ -1,0 +1,57 @@
+diff --git a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Rotate_Random_XYZ/random_decay_multimesh.gd.before.txt b/algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd
+index 232b030c3..817459102 100644
+--- a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Rotate_Random_XYZ/random_decay_multimesh.gd.before.txt
++++ b/algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd
+@@ -521,3 +521,52 @@ func apply_grid_config(config: Dictionary) -> void:
+ 		_stack_fit = clampf(float(config.stack_fit), 2.0, 30.0)
+ 		if is_node_ready():
+ 			_fit_stacks()
++	if config.has("study"):
++		# the museum's bench stamp hands over only the first #key:value of a token,
++		# with the rest of the string still attached to the value: keep the word
++		_apply_study(str(config.get("study", "")).split("#")[0].strip_edges().to_lower())
++
++
++# ── THE ROTATION STUDY (2026-09-24, Random_Rotate_Random_XYZ) ────────────────
++# The shipped stacks cannot compare shapes: the cubes run at speed 0.3 and the
++# prisms at 0.1, so any difference between them is mostly the configured rate.
++# `#study:rotation` makes the comparison the hall's chapter used to propose:
++#   - both stacks run at the cube's rate, so per piece the rule is the same
++#     (each stack's kicks scale with its piece count, so every piece expects
++#     the same share);
++#   - drift, sinking and darkening are switched off, so only orientation changes;
++#   - the prisms are laid on their regular grid (the shipped snap rounds half-
++#     step positions and doubles one column when the count is even).
++# The random stream is untouched: the drift draws are still taken, only scaled
++# by zero, so a seeded run turns every piece exactly as the matched run would.
++# No seed is added. RESET still restores the arrangement, not the future.
++# The study is written for the museum's 10 m display: with no stack_fit of its
++# own it fits the stacks to 10 m, as the hall's placement did. The fit stays
++# implicit because a second key cannot be relied on: the grid lane reads
++# `#stack_fit:N` as the tutorial/rotation shorthand (it is not in
++# GridInteractablesComponent.CONFIG_PARAM_NAMES), and the museum's bench stamp
++# hands over only a token's first key.
++# A placement without the key is byte-identical to the shipped behaviour.
++func _apply_study(word: String) -> void:
++	if word != "rotation":
++		return
++	drift_strength = 0.0
++	sink_distance = 0.0
++	cube_color_decay_mix = 0.0
++	prism_color_decay_mix = 0.0
++	prism_decay_speed_scale = cube_decay_speed_scale
++	snap_to_grid_on_spawn = false
++	if _stack_fit <= 0.0:
++		_stack_fit = 10.0
++	if is_node_ready():
++		# configured after _ready (the grid lane defers the call): rebuild the
++		# stacks with the study's settings and start over from the arrangement.
++		# The old layers leave the tree NOW, not at frame end, because
++		# _fit_stacks finds its layers by name among the children.
++		for child in get_children():
++			if child is MultiMeshInstance3D and String(child.name).begins_with("DecayLayer_"):
++				remove_child(child)
++				child.queue_free()
++		_layers.clear()
++		_create_layers()
++		_decay_elapsed = 0.0

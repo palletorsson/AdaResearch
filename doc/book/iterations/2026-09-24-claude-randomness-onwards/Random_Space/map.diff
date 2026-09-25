@@ -1,0 +1,23 @@
+diff --git a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Space/map_data.before.json b/commons/maps/Random_Space/map_data.json
+index 79f266c60..122d90819 100644
+--- a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Space/map_data.before.json
++++ b/commons/maps/Random_Space/map_data.json
+@@ -24,7 +24,8 @@
+     },
+     "museum": {
+       "wall_height": 3,
+-      "gate_depth_rows": 0
++      "gate_depth_rows": 0,
++      "artifact_placement": "map"
+     }
+   },
+   "utility_definitions": {
+@@ -586,7 +587,7 @@
+         " ",
+         " ",
+         " ",
+-        "noise_mixer:0:-0.5",
++        "noise_mixer:0:-0.5#plinth:0.9",
+         " ",
+         " ",
+         " ",

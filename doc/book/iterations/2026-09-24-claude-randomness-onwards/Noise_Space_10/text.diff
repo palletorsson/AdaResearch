@@ -1,0 +1,52 @@
+diff --git "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_Space_10\\before.md" "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+index ee20e0aeb..0088dff38 100644
+--- "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_Space_10\\before.md"
++++ "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+@@ -2,7 +2,7 @@
+ 
+ <!-- @noise_space -->
+ 
+-Two pairs of pale posts face each other across the ground. A gold line joins them. The far opening looks close enough. Before entering, follow the line with your eyes. Where would you expect your pace to change?
++Two pairs of glowing turquoise posts face each other across the ground. A gold line joins them. The far opening looks close enough. Before entering, follow the line with your eyes. Where would you expect your pace to change?
+ 
+ The previous sphere surrounded us with a changing field while its floor stayed still. Here the answer reaches the ground itself. Take the ramp onto the dark margin. The instrument stands along its side, leaving the route open.
+ 
+@@ -10,9 +10,9 @@ At HEIGHT 0.25, try walking between the posts. A small dip can disappear from th
+ 
+ Return to the margin. Press HEIGHT until it reads 0.90 and look for the feature you just crossed. The posts have not moved. The field has not been drawn again from another seed. Try the same approach.
+ 
+-In the recorded desktop walk, the first crossing reached the far margin. At 0.90, the same forward input stopped partway across. That is an observation about one body, one approach and two settings. It leaves other ways through the terrain to be found. A line drawn across the ground has made a proposal; it has not given the body permission to follow it.
++In the recorded desktop walk, the first crossing reached the far margin. At 0.90, the same forward input, held for the same time, left the body partway across. That is an observation about one body, one approach and two settings. It leaves other ways through the terrain to be found. A line drawn across the ground has made a proposal; it has not given the body permission to follow it.
+ 
+-Press RESET from the margin. The lower terrain returns, with route A and the first sample selected. HEIGHT waits if a player body is still on the patch. We make the alteration from a place that remains steady enough to compare what changed.
++Press RESET from the margin. The lower terrain returns, with route A and the first sample selected. HEIGHT and RESET refuse while a player body is still on the patch: the press is dropped, not saved, and the readout asks you to return to the margin. We make the alteration from a place that remains steady enough to compare what changed.
+ 
+ The current height rule is short:
+ 
+@@ -38,9 +38,9 @@ The last three-quarters of a metre gradually withhold the noise's contribution.
+ 
+ Now choose ROUTE B. A gold line takes a longer way through the same patch. Nothing in the ground moves when the line changes. Follow it to the instrument, where the proposed route has become a section: distance across the plan runs horizontally, ground height vertically. SAMPLE moves a yellow witness along both the section and the terrain.
+ 
+-The display gives the length and steepest sampled stretch of each proposed route. At the lower setting, B is longer and includes a slightly steeper stretch. The detour has changed what the body would meet. It has not promised an easier passage.
++The display gives the length and steepest sampled stretch of whichever proposed route is selected. At the lower setting, B is longer and includes a slightly steeper stretch. The detour has changed what the body would meet. It has not promised an easier passage.
+ 
+-The section follows a line; your body has width. It can meet a slope beside the line, and its controller brings rules of its own. The recorded desktop body accepted floor angles up to forty-five degrees. Increasing HEIGHT took the steepest sampled stretch of route A from below that limit to above it.[^walk-measurements] That helps us ask why this walk stopped. It does not tell us that no body could pass.
++The section follows a line; your body has width. It can meet a slope beside the line, and its controller brings rules of its own. The recorded desktop body accepted floor angles up to forty-five degrees. Increasing HEIGHT took the steepest sampled stretch of route A from below that limit to above it.[^walk-measurements] That stretch is a descent, and the body got past it; the walk ended at the foot of the climb out of the hollow it leads into, where several sampled stretches also exceed the limit. That helps us ask why this walk fell short. It does not tell us that no body could pass.
+ 
+ Look down at the yellow witness. Its printed height belongs to the triangle under that point. The terrain is made from 81 by 81 sampled positions, spaced ten centimetres apart. Between those positions, triangles supply a surface. Sampling the noise again between the vertices can give a slightly different answer: the collider is the constructed mesh, not an infinitely detailed function.
+ 
+@@ -58,7 +58,7 @@ The crease that catches one body might shelter another. This instrument tests wa
+ 
+ <!-- @dark_sphere -->
+ 
+-The dark orb rests on the raised margin. Its pulse continues while you compare routes or return the terrain to its starting height. RESET has a local reach. It does not recover the time spent choosing a way across.
++The dark orb hovers beside the raised margin. Its pulse continues while you compare routes or return the terrain to its starting height. RESET has a local reach. It does not recover the time spent choosing a way across.
+ 
+ The margin, the terrain and the orb hold different relations to change. One offers a steady place to return to; one changes when its height multiplier changes; one keeps time. A shared computational world can let those differences coexist, provided we say where each operation acts.
+ 
+@@ -68,4 +68,4 @@ In Noise Perlin Simplex, the next comparison changes the generator. Bring the ha
+ 
+ [^walk-recipe]: The fixed recipe uses OpenSimplex2S, seed zero, four fBM octaves, gain 0.5 and lacunarity 2. Generator frequency is 0.1 and input coordinates are multiplied by five. HEIGHT changes the later multiplier.
+ 
+-[^walk-measurements]: The desktop record of 13 September 2026 measured routes A/B at approximately 8.13/10.40 metres for HEIGHT 0.25; their steepest sampled segments were about 24.18°/25.22°. Route A reached about 58.26° at HEIGHT 0.90. The tested controller used a 45° floor-angle limit. Forward input crossed at 0.25 and stopped partway at 0.90. A sampled line and one desktop trajectory do not establish every route or body's possibilities.
++[^walk-measurements]: The desktop record of 13 September 2026 measured routes A/B at approximately 8.13/10.40 metres for HEIGHT 0.25; their steepest sampled segments were about 24.18°/25.22°. Route A reached about 58.26° at HEIGHT 0.90. The tested controller used a 45° floor-angle limit. The same forward input, held for the same time, crossed at 0.25 and ended partway across at 0.90; the record keeps only each walk's start and end. A sampled line and one desktop trajectory do not establish every route or body's possibilities.

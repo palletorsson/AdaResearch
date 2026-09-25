@@ -46,6 +46,7 @@ enum CellState { INTACT = 0, STRESSED = 1, CRACKED = 2 }
 var crack_mesh: MeshInstance3D
 var crack_material: StandardMaterial3D
 var _mesh_dirty := true
+var _settled_frames := 0
 
 # 8-neighborhood offsets
 const N8 := [
@@ -77,6 +78,28 @@ func _process(_delta: float) -> void:
 	if _mesh_dirty:
 		_update_crack_mesh()
 		_mesh_dirty = false
+	# Once every interior cell has cracked at full stress, nothing drawn can change
+	# again: the mesh reads only cracked cells and their stress, and a cracked cell's
+	# neighbours push more stress than decay removes, so it stays clamped at 1.0. The
+	# step still re-marked never-drawn border cells, which kept `changed` true and
+	# rebuilt an identical mesh every frame (67 ms a frame on a desktop, measured
+	# 2026-09-24). Stop there; add_stress_point and reset_simulation start it again.
+	# Two settled frames in a row, not one: with non-default decay/propagation a cell
+	# that cracked on the first could still thin; the step is monotone and border
+	# stress never falls, so a second full-stress frame is a fixed point for any exports.
+	if _interior_settled():
+		_settled_frames += 1
+		if _settled_frames >= 2:
+			set_process(false)
+	else:
+		_settled_frames = 0
+
+func _interior_settled() -> bool:
+	for x in range(1, GRID_SIZE - 1):
+		for z in range(1, GRID_SIZE - 1):
+			if grid[x][z] != CellState.CRACKED or stress_grid[x][z] < 1.0:
+				return false
+	return true
 
 # ----------------- Setup -----------------
 func _init_arrays() -> void:
@@ -418,6 +441,8 @@ func reset_simulation() -> void:
 	_seed_weakness()
 	_add_initial_stress_center()
 	_mesh_dirty = true
+	_settled_frames = 0
+	set_process(true)
 
 func add_stress_point(world_pos: Vector3, amount: float = 1.0) -> void:
 	var gx := int(floor((world_pos.x / CELL_SIZE) + float(GRID_SIZE) * 0.5))
@@ -427,6 +452,8 @@ func add_stress_point(world_pos: Vector3, amount: float = 1.0) -> void:
 		if stress_grid[gx][gz] > CRACK_THRESHOLD:
 			grid[gx][gz] = CellState.STRESSED
 		_mesh_dirty = true
+		_settled_frames = 0
+		set_process(true)
 
 func get_stress_at(world_pos: Vector3) -> float:
 	var gx := int(floor((world_pos.x / CELL_SIZE) + float(GRID_SIZE) * 0.5))

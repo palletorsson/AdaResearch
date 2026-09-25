@@ -1,0 +1,29 @@
+diff --git "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_6_Wall\\before.md" "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+index 4f4e2fd3f..563e77d56 100644
+--- "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_6_Wall\\before.md"
++++ "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+@@ -6,13 +6,13 @@ There is a room inside the hall. Pink gathers in its corners. The little sphere
+ 
+ What would have to change for those folds to carry your feet?
+ 
+-Keep that question while you return to the panel. Four small windows show the same coordinates with one, two, four and six cloud terms. Press FREEZE. The room holds the moment you arrived at. Its colours and the small windows stop changing together. We can stay with a difference long enough to inspect it.
++Keep that question while you return to the panel. Four small windows show the same coordinates with one, two, four and six cloud terms. Press FREEZE. The room holds the moment of the press. Its colours and the small windows stop changing together. We can stay with a difference long enough to inspect it.
+ 
+ Press DRESS, then enter again. Grey has taken the place of pink. Something of the cloud remains, but its depth and atmosphere have changed. Follow the wall towards the door. The opening is still there. Your feet meet the same floor.
+ 
+ We have changed what the surface offers the eye. The wall's vertices and the shapes your body collides with have stayed put. This distinction is useful precisely because the surface can be so persuasive. You might still walk differently towards a dark patch, or hesitate before something that looks deep. What the player can physically cross and what the player imagines crossing need not arrive together.
+ 
+-At the panel, compare the first grey window with the second. A smaller variation has entered the same region. The fourth and sixth terms add finer disturbances. LAYERS carries each of those cumulative choices into the room; the four windows keep their separate counts so you can look back.
++At the panel, compare the first grey window with the second. A smaller variation has entered the same region. The four- and six-term windows add finer disturbances. LAYERS carries each of those cumulative choices into the room; the four windows keep their separate counts so you can look back.
+ 
+ Here is the loop doing that work:
+ 
+@@ -40,7 +40,7 @@ More terms can also make the grey window brighter. Every weighted magnitude is n
+         float bare = clamp(cloud_noise(uv * cloud_scale, time * time_scale) * term_gain, 0.0, 1.0);
+ ```
+ 
+-The comparison uses a gain of two. Values beyond the display range meet its limits. Two different sums can therefore become the same white. Grey is already an interpretation, with its own capacity to lose a difference. There is no final undressed picture waiting underneath every other picture.
++The comparison uses a gain of two, and the shader clamps anything above one. Any two sums of 0.5 or more would become the same white, although when the four windows were measured at one held moment, even their brightest pixel reached only about half-white. Grey is already an interpretation, with its own capacity to lose a difference. There is no final undressed picture waiting underneath every other picture.
+ 
+ Try BASIS while the moment stays held. Perlin, Value, Cellular and Simplex offer different constructions to the same accumulation. These are the implementations in this shader, with their own scaling constants. Watch what happens to a contour you had begun to recognise. Returning to Perlin restores this construction at the held coordinates. There is no seed button here; the shader's hash uses fixed constants.
+ 

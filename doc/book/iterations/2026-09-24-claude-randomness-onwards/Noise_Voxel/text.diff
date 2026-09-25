@@ -1,0 +1,43 @@
+diff --git "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_Voxel\\before.md" "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+index 2d9d051b4..c6c96894d 100644
+--- "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_Voxel\\before.md"
++++ "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+@@ -2,7 +2,7 @@
+ 
+ <!-- @perlin_terrain_sculptor -->
+ 
+-A green body waits on the bench, with little daylight between its blocks. The yellow cage names a cell, including when that cell contains nothing you can see. Across the room, a much larger body has the same irregular outline.
++A green body waits on the bench, with little daylight between its blocks. A translucent yellow box marks one cell, whether or not that cell holds a block. Deep inside the body, the blocks around it can hide the box until CUT opens the near half. Across the room, a much larger body has the same irregular outline, turned half round.
+ 
+ Leave SEED alone for a moment. Press THRESHOLD and watch the green body. Then watch the field value on the plate while you press again. Something has disappeared. Which number changed?
+ 
+@@ -36,9 +36,9 @@ Press CUT. Part of the model opens to your gaze. Now check the occupied count. I
+ 
+ The screen keeps a horizontal slice of that array. On the left, colours vary with the field after the height bias. On the right, each square receives the decision: occupied or empty. A small yellow frame marks the selected coordinate in both.
+ 
+-Press CELL at the bench. The cage visits another address and the screen takes its horizontal layer. Follow a dark square on the right into the coloured square at the same position on the left. There is still a value there. The decision has withheld a block.
++Press CELL at the bench. The box visits another address and the screen takes its horizontal layer. Follow a dark square on the right into the coloured square at the same position on the left. There is still a value there. The decision has withheld a block.
+ 
+-Return to THRESHOLD. The right-hand border shifts through a left-hand field that stays still. You can now see several different values receive the same answer. The binary mask cannot tell you how far a rejected value missed the line; the other display can.
++Return to THRESHOLD. The right-hand border shifts through a left-hand field that stays still. You can now see several different values receive the same answer. The binary mask cannot show how far a rejected value missed the line; the other display keeps that difference as a shade, darker the further below, though it prints no scale.
+ 
+ The screen reads the bench's stored decision and sets it beside the value from which that decision was made. One view can show a difference that the other has put on the same side of the line.[^voxel-screen]
+ 
+@@ -48,7 +48,7 @@ Now try SEED. The field changes, and the decision map changes with it. The coord
+ 
+ <!-- @voxelnoise -->
+ 
+-Walk towards the large blue volume with its pink edges. The bench lets you look down into the arrangement; here parts of it rise above your head. A recess that looked like a detail becomes somewhere you might want to approach.
++Walk towards the large blue volume with its pink edges. At the bench you look down on most of the arrangement, though its top layers reach just above eye level; here parts of it rise above your head. A recess that looked like a detail becomes somewhere you might want to approach.
+ 
+ Both works ask at the same 24 × 24 × 24 positions in the same Perlin field. Their cell spacing differs: four centimetres at the bench, twenty centimetres here. The model leaves a small gap around each visible block so its addresses remain legible. The large volume joins occupied neighbours and draws their exposed faces. Its surface also supplies the collision triangles.
+ 
+@@ -66,7 +66,7 @@ There is pleasure in a cavity before its usefulness is settled. Try looking from
+ 
+ <!-- @dark_sphere -->
+ 
+-The dark orb is still here, turning above its pool of light. Leave the threshold at one value and watch it for a while. The voxel body holds its arrangement. The orb continues to brighten and dim.
++The dark orb is still here, turning above its faint violet shadow. Leave the threshold at one value and watch it for a while. The voxel body holds its arrangement. The orb continues to brighten and dim.
+ 
+ ```gdscript
+ var pulse_t := (sin(_time_elapsed * pulse_speed) + 1.0) * 0.5

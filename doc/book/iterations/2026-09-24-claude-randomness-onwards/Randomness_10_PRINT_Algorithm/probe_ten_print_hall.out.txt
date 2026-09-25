@@ -1,0 +1,14 @@
+  ok    A the floor links to the printer and fills — 121 floor cells from a 381-cell screen
+  ok    B every floor ridge matches the character it came from — 0 of 121 cells disagree (window offset 13 rows)
+  ok    C the console reads the book's line — 10 PRINT CHR$(205.5+RND(1)); : GOTO 10
+  ok    D SEMICOLON removes the ; from the line — 10 PRINT CHR$(205.5+RND(1)) : GOTO 10
+  ok    D and the floor collapses to a single file — 20 columns before, 1 after; 7 ridges now, all in column [0]
+  ok    E SEMICOLON again brings the plane back — 20 columns
+  ok    F BIAS moves the famous constant — 10 PRINT CHR$(205.1+RND(1)); : GOTO 10
+  ok    F and the field leans with it — bias 0.9 -> 0.87 forward; bias 0.1 (10 PRINT CHR$(205.9+RND(1)); : GOTO 10) -> 0.07 forward
+  ok    G the default coin is not fair: it breathes — characters 0-269: 0.70 forward; 270-399: 0.29 forward; threshold 0.80 at 135, 0.20 at 405
+  ok    H a bright tile marks where the next character lands — next cell on screen (1, 19); marker visible
+  ok    I the ridges do not stop a body — solid body none, 0 collision shapes
+  ok    J the upright maze has no collider a body could meet — 0 collision shapes, 0 static bodies
+  ok    J and it stands upright: thin in x, broad in y and z — 102 meshes; extent x 0.60 m, y 10.00 m, z 10.00 m
+probe_ten_print_hall: ALL 13 CHECKS PASS (cases A-J)

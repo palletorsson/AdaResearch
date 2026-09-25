@@ -1,0 +1,31 @@
+diff --git "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_Columns\\before.md" "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+index 18880ae8f..6db0d0053 100644
+--- "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_Columns\\before.md"
++++ "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+@@ -12,7 +12,7 @@ FREEZE holds the columns' local clock. You can take time to walk around the shap
+ 
+ Try SPIN while the clock is held. The columns turn. A ridge slips out of sight and another arrives. The vertices of each shaft keep their local coordinates; their positions in the room change with the whole column. Transformation has returned as a way to inspect what we thought was deformation.
+ 
+-Stop SPIN and press MARBLE. The shaft loses its veining. The folds remain. The base and capital retain their own patterned materials. Look at the edge of the shaft, then at the surface inside that edge. A changing appearance has several places to happen, and a picture can encourage us to fold them together.
++Stop SPIN and press MARBLE. The shaft loses its veining. The folds remain. The base and capital retain their own patterned materials. Look at the edge of the shaft, then at the surface inside that edge. The veining was never fixed to the stone. Its pattern is sampled from each point's position relative to your eyes, so on a frozen shaft the veins slide as you walk around it, and under SPIN they stayed nearly in place while the folds turned through them. A changing appearance has several places to happen, and a picture can encourage us to fold them together.
+ 
+ Put the veining back if you prefer it. The pleasure of the surface need not end when we learn how it works.
+ 
+@@ -52,7 +52,7 @@ There is a smaller interruption inside the smooth movement. Each moving shaft is
+ 
+ <!-- @dark_sphere -->
+ 
+-Leave the columns frozen for a moment and turn to the dark orb. Its sheen shifts. Stay long enough to notice the pulse and the widening ring beneath it. The room has not stopped breathing just because one instrument has stopped counting.
++Leave the columns frozen for a moment and turn to the dark orb. Its sheen shifts. Stay long enough to notice the pulse, and the pool of shadow beneath it slowly deepening and fading. The room has not stopped breathing just because one instrument has stopped counting.
+ 
+ This body uses another local clock. Its script also contains a sine:
+ 
+@@ -60,7 +60,7 @@ This body uses another local clock. Its script also contains a sine:
+ var pulse_t := (sin(_time_elapsed * pulse_speed) + 1.0) * 0.5
+ ```
+ 
+-This time the value enters brightness and emission. It does not rebuild the sphere's mesh. The body also turns slowly, and the surrounding ring changes size and opacity. A single appearance gathers several operations that our earlier halls let us separate.
++This time the value enters brightness and emission. It does not rebuild the sphere's mesh. The body also turns slowly, and the pool beneath it pulses in opacity on a slower sine. A single appearance gathers several operations that our earlier halls let us separate.
+ 
+ The dark sphere was described as a neutral anchor. Looking for longer complicates that description. It is active, but its activity is easy to pass over beside the tall columns. The distinction between foreground and background is also a distribution of our attention.
+ 

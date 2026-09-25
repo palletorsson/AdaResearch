@@ -1,0 +1,28 @@
+=== line_network_ca ===
+
+1. SPEC
+  registry:    cellular_automata.json
+  label:       Line Network CA
+  category:    emergence
+  scene:       res://algorithms/cellularautomata/ca_showcase/LineNetworkCA.tscn
+  dev_themes:  biology, cellular_automata, computation, emergence
+  tags:        cellular_automata, emergence, graph
+  registry_seq:cellularautomata
+  qfep:        f_order: one-dimensional automata drawn as line networks — the space-time diagram standing up: each ...
+
+2. MAP-ADJACENT — 2 map(s) place this artifact
+  * CA_Introduction                          line_network_ca:0:0#size:2.0
+  * Ribbon_Cellularautoma_06                 line_network_ca
+
+3. SEQUENCE — 1 sequence(s) list this in artifact_groups
+  * cellularautomata
+      in CA_Introduction: line_network_ca
+
+4. CAPTURES — /artifact-in-map gallery
+  no captures yet  — run: batch_capture_via_api.ps1 -Artifacts line_network_ca
+
+5. SIEVE — 0 sieve pass(es) mention this
+  no sieve passes touching this lookup
+
+SUMMARY
+  spec: ok · maps: 2 · sequences: 1 · captures: 0 · sieves: 0

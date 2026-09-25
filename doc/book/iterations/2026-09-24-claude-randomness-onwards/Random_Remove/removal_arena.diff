@@ -1,0 +1,33 @@
+diff --git a/commons/artifacts/randomness_space/removal_arena.gd b/commons/artifacts/randomness_space/removal_arena.gd
+index 34282d79b..f0e89f44b 100644
+--- a/commons/artifacts/randomness_space/removal_arena.gd
++++ b/commons/artifacts/randomness_space/removal_arena.gd
+@@ -50,7 +50,9 @@ func _ready() -> void:
+ 	trigger.shape = shape; trigger.position.y = 1.25; zone.add_child(trigger); add_child(zone)
+ 	readout = Stage.label(self,"",Vector3(0,1.5,-rows/2.0-1.35),PI)
+ 	readout.font_size = 24; readout.pixel_size = 0.0015; readout.outline_size = 1
+-	Stage.box(self,readout.position+Vector3(0,0,0.016),Vector3(1.55,0.25,0.035),Color(0.07,0.13,0.17))
++	# the label faces -z (yaw PI); a 35 mm plate centred 16 mm behind it put its front
++	# face 1.5 mm IN FRONT of the text and hid the readout (2026-09-24): 20 mm clears it
++	Stage.box(self,readout.position+Vector3(0,0,0.02),Vector3(1.55,0.25,0.035),Color(0.07,0.13,0.17))
+ 	var panel := Rack.create_panel("FLOOR / WITHOUT REPLACEMENT",[[{"type":"button","label":"REPLAY"},{"type":"button","label":"NEW SEED"}]])
+ 	panel.position = Vector3(0,1.1,-rows/2.0-1.4); panel.rotation.y = PI; panel.scale = Vector3.ONE*2.2; add_child(panel)
+ 	panel.find_child("Btn_0",true,false).pressed.connect(reset_arena)
+@@ -73,7 +75,16 @@ func _physics_process(_delta: float) -> void:
+ 			walked = 0.0; remover.remove_one()
+ 
+ func is_player(body: Node) -> bool:
+-	return body == museum.get("_player") if museum != null else body.is_in_group("player")
++	if museum == null:
++		return body.is_in_group("player")
++	var walker = museum.get("_player")
++	if walker != null:
++		return body == walker
++	# The headset branch returns before the museum builds its desktop walker, so
++	# _player stays null, and comparing against it recognised nobody: in VR the
++	# floor removed nothing (2026-09-24). There the body is XR Tools' PlayerBody,
++	# in group player_body, as approach_wall and approach_scale read it.
++	return body.is_in_group("player_body") or body.is_in_group("vr_player")
+ 
+ func _removed(index: int) -> void:
+ 	colliders[index].set_deferred("disabled",true)

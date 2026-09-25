@@ -1,0 +1,16 @@
+PASS L1 default draws the shipped lines — 3 of 3 seeds identical, lines untransformed
+PASS L1 negative control: the comparison sees a network one generation short — seed 11: new after growth vs shipped after 19 steps differ=true
+PASS L2 stops after growth — 3 of 3 stopped; shipped still running in 3 of 3
+PASS L3 the shipped script draws nothing more — 3 of 3 seeds: shipped, 60 frames later, has the same number of lines
+COST line_network_ca per frame after growth: new 2 us, shipped 16160 us (mean of 3)
+PASS L4 #size:2.0 (the shipped token) puts every line end in a 2.0 m box above the floor — 5 of 5 above 0.30 m and centred, 5 of 5 with largest side 2.00 m, 5 of 5 uniform scale; shipped: 34% of line ends below the origin
+PASS L4b #size applied after growth, removed by a config without it, parsed by the grid tokenizer — 3 of 3 fitted when configured late, 3 of 3 back to the plain drawing, tokenizer config_data={ "size": "2.4" }
+PASS L5 dendrite_growth_ca keeps growing past 20 generations — running=true, lines 30 at frame 25 -> 705 at frame 65
+  crack seed 101: stopped at frame 75, 3844 cracked cells, 0 differ from the shipped script 120 frames later, resumed on add_stress_point=true
+  crack seed 202: stopped at frame 78, 3844 cracked cells, 0 differ from the shipped script 120 frames later, resumed on add_stress_point=true
+  crack seed 303: stopped at frame 79, 3844 cracked cells, 0 differ from the shipped script 120 frames later, resumed on add_stress_point=true
+PASS C1 the crack plate stops once settled (and C3 resumes on add_stress_point) — 3 of 3 stopped at frames [75, 78, 79]; the shipped script still stepping in 3 of 3
+PASS C2 the shipped script draws nothing different 120 frames later — 3 of 3 seeds: same cracked set and same stress on every cracked cell; mesh vertices read back in 3 of 3, identical in 3 of 3
+PASS C2 negative control: 20 frames before the stop the shipped mesh is different — 3 of 3 seeds
+COST crackpropagation_ca per frame after settling: new 0 us, shipped 72948 us (mean of 3)
+RESULT PASS (0 failed)

@@ -1,0 +1,53 @@
+diff --git a/doc/book/iterations/2026-09-24-claude-randomness-onwards/CA_Introduction/map_data.before.json b/commons/maps/CA_Introduction/map_data.json
+index 1f2d65121..8c7b5b40c 100644
+--- a/doc/book/iterations/2026-09-24-claude-randomness-onwards/CA_Introduction/map_data.before.json
++++ b/commons/maps/CA_Introduction/map_data.json
+@@ -21,6 +21,12 @@
+         "Structural CA",
+         "Complex patterns"
+       ]
++    },
++    "museum": {
++      "artifact_placement": "map",
++      "props_deny": [
++        "bench"
++      ]
+     }
+   },
+   "utility_definitions": {
+@@ -94,8 +100,8 @@
+         "1",
+         "4",
+         "4",
+-        "4",
+-        "4",
++        "1",
++        "1",
+         "4",
+         "1",
+         "1",
+@@ -718,7 +724,7 @@
+         "",
+         "",
+         "",
+-        "ca_rule_explorer:180:1.04#study:neighbours#rule:90#speed:4#plinth:0",
++        "ca_rule_explorer:270:1.04#study:neighbours#rule:90#speed:4#plinth:0",
+         "",
+         ""
+       ],
+@@ -831,7 +837,6 @@
+         "",
+         "",
+         "",
+-        "line_network_ca",
+         "",
+         "",
+         "",
+@@ -839,6 +844,7 @@
+         "",
+         "",
+         "",
++        "line_network_ca:0:0#size:2.0#study:arrival",
+         "",
+         ""
+       ],

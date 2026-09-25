@@ -1,0 +1,14 @@
+diff --git a/doc/book/iterations/2026-09-24-claude-randomness-onwards/CA_EdgeOfChaos/map_data.before.json b/commons/maps/CA_EdgeOfChaos/map_data.json
+index 4cdfe941d..a133b80fe 100644
+--- a/doc/book/iterations/2026-09-24-claude-randomness-onwards/CA_EdgeOfChaos/map_data.before.json
++++ b/commons/maps/CA_EdgeOfChaos/map_data.json
+@@ -37,7 +37,8 @@
+           17,
+           28
+         ]
+-      ]
++      ],
++      "piers": false
+     }
+   },
+   "utility_definitions": {

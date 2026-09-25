@@ -1,0 +1,31 @@
+diff --git "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_One\\before.md" "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+index 8eabb9779..9d026a741 100644
+--- "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_One\\before.md"
++++ "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+@@ -2,7 +2,7 @@
+ 
+ <!-- @noisetorus -->
+ 
+-Two rings rest above a bench. One wears its variation as small folds. The other keeps a round outline while colour travels across it. The columns behind us asked where change enters a body. Here the question becomes more intimate: could these two surfaces be receiving the same thing?
++Two rings hover above a bench. One wears its variation as small folds. The other keeps a round outline while colour travels across it. The columns behind us asked where change enters a body. Here the question becomes more intimate: could these two surfaces be receiving the same thing?
+ 
+ Watch a bright patch arrive. Then press FREEZE. The rings hold that moment; the museum carries on. Two pale markers indicate matching coordinates. SAMPLE moves them together around the rings. Before reading the plate, look for a place where the folded ring turns inward and its coloured neighbour goes dark.
+ 
+@@ -28,7 +28,7 @@ func relief_of(value: float) -> float:
+ 	return value * float(PAIR_AMPS[_amp_i])
+ ```
+ 
+-A multiplication is enough to change the force of an appearance. It is not a force calculation. In the vertex shader, the result moves each vertex along its normal, the direction facing away from the surface at that vertex. The two rings have no collision shapes. The bench supports the instrument; its pictured folds will not catch a falling object.
++A multiplication is enough to change the force of an appearance. It is not a force calculation. In the vertex shader, the same product, computed there again, moves each vertex along its normal, the direction facing away from the surface at that vertex. The two rings have no collision shapes. The bench supports the instrument; its pictured folds will not catch a falling object.
+ 
+ Now change FREQUENCY. Keep watching the same marker. The value itself may change. We have moved the coordinate at which the field is consulted.
+ 
+@@ -68,7 +68,7 @@ The weights are twelve, six and one-and-a-half. The names suggest a tidy progres
+ 
+ Each button isolates a contribution before the same further processing. The code calls that processing erosion. Look at what it actually does: in three passes, it lowers samples whose estimated slope exceeds a threshold. No water carries the removed amount elsewhere. The name lends the calculation a landscape story; the implementation gives us a more limited operation to examine.
+ 
+-Because the lowering happens after combination, the displayed SUM need not equal the displayed LOW, MIDDLE and HIGH added together. Combining, then modifying, can differ from modifying, then combining. Transformation taught us to ask about order. It matters here too.
++Because the lowering happens after combination, the displayed SUM need not equal the displayed LOW, MIDDLE and HIGH added together. Combining, then modifying, can differ from modifying, then combining. Transformation taught us to ask about order. Here the order is present in the arithmetic but not to the eye: on this model the gap is a matter of millimetres, against about half a metre of relief.
+ 
+ The model keeps 101 by 101 sample points. Its original 200-unit width is shown at one-fiftieth scale, four metres across. The terrain has a collision mesh made from its visible triangles, unlike the shader folds on the rings. That makes a different kind of surface available to the simulation, without making this basin a full-size hiking course.
+ 

@@ -1,0 +1,7 @@
+Concept: A driver needs a recipient. A periodic or field-derived scalar enters a shaft recipe; a sine elsewhere enters appearance; a construction setting selects one orb or six.
+Sequence role: Follow Random_Noise_Types' sample relations, height/colour mapping and temporal filters. Prepare Noise_One's use of one field as relief and colour.
+Primary works: MeltingBerniniScene, dark_sphere, synthesis_stand configured as dark_sphere/hush/swarm. Inspect all three; no count ceiling.
+Encounter: Observe the unnamed trio, locally freeze, separate whole-body rotation and shaft veining, then reveal. Observe the independent orb during that pause and compare its distributed relative.
+Critical inquiry: A held reference is already constructed. A recognisable column need not support weight. Material pleasure can coexist with inspection. A common code substrate permits both continuous parameters and categorical construction choices.
+Implementation limits: Scalar field sampling along time; no per-vertex 3D Perlin erosion, no terrain in this hall, no force-driven structural simulation, no proved inverse deformation or entropy measurement. Six orbiting parts are not steering agents.
+Retained possibilities: The original multi-column ring remains in the scene's non-trio mode. A shader/material laboratory, structural loads, and transitions between body constructions are possible later work, not current controls.

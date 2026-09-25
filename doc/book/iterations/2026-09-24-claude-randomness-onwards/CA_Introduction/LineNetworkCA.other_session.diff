@@ -1,0 +1,92 @@
+diff --git "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\CA_Introduction\\LineNetworkCA.gd.block.txt" b/algorithms/cellularautomata/ca_showcase/LineNetworkCA.gd
+index 1a98fbd91..3f20724ef 100644
+--- "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\CA_Introduction\\LineNetworkCA.gd.block.txt"
++++ b/algorithms/cellularautomata/ca_showcase/LineNetworkCA.gd
+@@ -41,6 +41,8 @@ var frontier: Array = [] # Array of Vector3i
+ var fit: float = 0.0
+ const FIT_FLOOR := 0.3
+ var _growth_over := false
++var _arrival_history: Node3D
++var _arrival_requested := false
+ 
+ func _ready() -> void:
+ 	super._ready()
+@@ -49,6 +51,15 @@ func _ready() -> void:
+ 	if multi_mesh_instance: multi_mesh_instance.visible = false
+ 	
+ 	setup_line_renderer()
++	if _arrival_requested:
++		_enable_arrival_history()
++
++func _enable_arrival_history() -> void:
++	if _arrival_history != null or mesh_instance_lines == null:
++		return
++	_arrival_history = preload("res://algorithms/cellularautomata/ca_showcase/line_network_history.gd").new()
++	add_child(_arrival_history)
++	_arrival_history.setup(self)
+ 
+ func initialize_grid() -> void:
+ 	_growth_over = false
+@@ -129,17 +140,32 @@ func update_visualization() -> void:
+ 	
+ 	var current_time = Time.get_ticks_msec() / 1000.0
+ 	
+-	for x in range(GRID_SIZE):
+-		for y in range(GRID_SIZE):
+-			for z in range(GRID_SIZE):
+-				if grid[x][y][z] > 0:
+-					var pos = Vector3i(x, y, z)
+-					if not cell_birth_times.has(pos):
+-						# New cell!
+-						cell_birth_times[pos] = current_time
+-						_find_parent_and_connect(pos)
++	if _arrival_history != null:
++		# This growth rule keeps every occupied cell in frontier. Keep the original
++		# x/y/z scan order without visiting the other 64^3 empty addresses.
++		var occupied: Array = frontier.duplicate()
++		occupied.sort_custom(func(a: Vector3i, b: Vector3i):
++			if a.x != b.x: return a.x < b.x
++			if a.y != b.y: return a.y < b.y
++			return a.z < b.z)
++		for pos: Vector3i in occupied:
++			if not cell_birth_times.has(pos):
++				cell_birth_times[pos] = current_time
++				_find_parent_and_connect(pos)
++	else:
++		for x in range(GRID_SIZE):
++			for y in range(GRID_SIZE):
++				for z in range(GRID_SIZE):
++					if grid[x][y][z] > 0:
++						var pos = Vector3i(x, y, z)
++						if not cell_birth_times.has(pos):
++							# New cell!
++							cell_birth_times[pos] = current_time
++							_find_parent_and_connect(pos)
+ 
+ 	_draw_lines()
++	if _arrival_history != null:
++		_arrival_history.capture(_growth_over)
+ 	# This class's growth has ended (update_simulation said so this frame), and this
+ 	# scan has seen every cell it produced; later scans find nothing new and redraw
+ 	# the same lines. Stop: the 64^3 scan cost ~15 ms a frame on a desktop
+@@ -200,7 +226,7 @@ func _draw_lines() -> void:
+ 		immediate_mesh.surface_add_vertex(p1)
+ 		immediate_mesh.surface_set_color(col)
+ 		immediate_mesh.surface_add_vertex(p2)
+-	
++
+ 	immediate_mesh.surface_end()
+ 	_fit_lines()
+ 
+@@ -234,5 +260,11 @@ func apply_grid_config(config: Dictionary) -> void:
+ 	# The museum calls this before _ready, the grid lane after; either way the fit
+ 	# is applied on the next draw, and at once if lines already exist. Every caller
+ 	# passes the whole config, so a config without `size` means no fit.
++	# Opt-in only: preserve ordinary placements and the dendrite subclass.
++	if config.has("study"):
++		_arrival_requested = str(config["study"]) == "arrival"
++		if _arrival_requested and is_node_ready():
++			_enable_arrival_history()
+ 	fit = maxf(0.0, float(str(config.get("size", "0"))))
+ 	_fit_lines()
++

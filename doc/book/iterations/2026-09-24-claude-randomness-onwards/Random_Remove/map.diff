@@ -1,0 +1,12 @@
+diff --git a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Remove/map_data.before.json b/commons/maps/Random_Remove/map_data.json
+index e0f6d5d7b..554607164 100644
+--- a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Remove/map_data.before.json
++++ b/commons/maps/Random_Remove/map_data.json
+@@ -27,6 +27,7 @@
+ 	  "gate_depth_rows": 0,
+ 	  "artifact_placement": "map",
+ 	  "plinths": false,
++	  "piers": false,
+ 	  "props_deny": [
+         "dream_bodies"
+ 	  ],

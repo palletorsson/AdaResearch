@@ -1,0 +1,28 @@
+=== crackpropagation_ca ===
+
+1. SPEC
+  registry:    procgen_extra.json
+  label:       crackpropagation_ca
+  category:    morphogenesis
+  scene:       res://algorithms/proceduralgeneration/growth_systems/crackpropagation_ca/crackpropagation_ca.tscn
+  dev_themes:  generation, procedural
+  tags:        cellular-automata, fracture, stress, crack, propagation, threshold, morphogenesis, growth, procedural, emergence
+  registry_seq:biological_growth
+  qfep:        Edge of chaos — the crack threshold is the critical lambda where order (intact material) meets entro...
+
+2. MAP-ADJACENT — 2 map(s) place this artifact
+  * BG_Crack_Propagation                     crackpropagation_ca:0:2
+  * CA_EdgeOfChaos                           crackpropagation_ca:0:0.9:0.8#plinth:0
+
+3. SEQUENCE — 1 sequence(s) list this in artifact_groups
+  * biological_growth
+      in BG_Crack_Propagation: crackpropagation_ca
+
+4. CAPTURES — /artifact-in-map gallery
+  no captures yet  — run: batch_capture_via_api.ps1 -Artifacts crackpropagation_ca
+
+5. SIEVE — 0 sieve pass(es) mention this
+  no sieve passes touching this lookup
+
+SUMMARY
+  spec: ok · maps: 2 · sequences: 1 · captures: 0 · sieves: 0

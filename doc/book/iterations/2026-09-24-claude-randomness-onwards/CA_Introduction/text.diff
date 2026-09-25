@@ -1,0 +1,58 @@
+diff --git "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\CA_Introduction\\before.md" "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+index fbecb19e0..dc386c157 100644
+--- "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\CA_Introduction\\before.md"
++++ "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+@@ -1,12 +1,12 @@
+ # What will the next row do?
+ 
+-The rug is already changing. Across the room, a small board holds one green cell and waits. Two ways of making a pattern occupy the same hall. Begin with the one that has left you time to answer.
++The rug is already changing. On the other side of the dividing wall, a board holds one green cell and waits. Two ways of making a pattern occupy the same hall. Begin with the one that has left you time to answer.
+ 
+ We have carried noise a long way: across a sheet, into a volume, around the body and under a foot. A little variation can satisfy the first wish for something organic. Its ease is part of its power. It can also make that first answer so familiar that other possible forms remain in its shadow. Keep the pleasure of the blob. Bring an unfinished question with it.
+ 
+ <!-- @ca_rule_explorer -->
+ 
+-Find the board near the entrance side of the hall. The newest row sits along its far edge; the rest of the board is room for a past. Three small marks pick out a cell and its two neighbours. Read their states on the side plate, but leave NEXT for a moment. What would you make from these three?
++Find the board on your left as you come in, a few steps into the corridor on that side, near its outer wall. The newest row sits along its far edge; the rest of the board is room for a past. Three small marks pick out a cell and its two neighbours. Read their states on the side plate, but leave NEXT for a moment. What would you make from these three?
+ 
+ Press STEP. One generation arrives, and the previous row moves towards you. The pink mark stays at the same address. Its state may change. The plate now reads this new generation and predicts the one that could follow it. We have advanced the local machine; the rug has kept its own time.
+ 
+@@ -38,7 +38,7 @@ for i in range(cells_x):
+ _current_row = new_row
+ ```
+ 
+-All the questions go to the old row. An answer written at the left cannot slip into the question being asked at the right. This installation makes that separation part of its rule. A different update order would be another experiment to specify.
++All the questions go to the old row. An answer written at the left cannot slip into the question being asked at the right. This installation builds that separation into its update step, the same under every rule number. A different update order would be another experiment to specify.
+ 
+ Press SEED. Two adjacent cells now occupy the starting row. The rule has stayed where you left it. Advance again and compare what happens where their consequences meet. Changing the beginning explores something that changing the rule alone could leave unseen. RST returns to the selected beginning and clears the visible history.
+ 
+@@ -46,7 +46,7 @@ Keep stepping until a pattern reaches the boundary. The witness can cross it too
+ 
+ <!-- @persian_rug -->
+ 
+-Now approach the rug. A detail in one quarter has partners across the cloth. Find them before naming the symmetry. The pink border and golden interior are another division to follow. Both can change, but they do not consult identical conditions.
++Now return towards the entrance, go through the opening on the other side of the dividing wall, and approach the rug. A detail in one quarter has partners across the cloth. Find them before naming the symmetry. The pink border and golden interior are another division to follow. Both can change, but they do not consult identical conditions.
+ 
+ This work has a two-dimensional grid, several states and two sets of local rules. The border and interior decide differently when activity begins, continues or fades. After calculating a generation, the program also mirrors one quarter into the others. In `_enforce_quadrant`, one value is written into three reflected positions (comments between these assignments are omitted):
+ 
+@@ -62,16 +62,16 @@ The title invites an association with a textile tradition. These few operations
+ 
+ <!-- @line_network_ca -->
+ 
+-Further along, the line network gives the cell another body. Occupied positions are joined by coloured segments. Move around it and let one apparent knot separate into lines at different depths. Some space that looked full can open when your viewpoint changes.
++Go back out through the opening, cross the entrance to the board's corridor, and follow it past the agents painting a shared surface. Further along, the line network gives the cell another body. Occupied positions are joined by thin coloured lines, drawn as a tangle in the air above the floor. Move around it and let one apparent knot separate into lines at different depths. Some space that looked full can open when your viewpoint changes.
+ 
+-Its growth begins with a random walk. During a bounded burst of updates, occupied frontier positions may add a nearby cell. The drawing then chooses a recorded neighbour to connect to each newly encountered position. There is a detail worth keeping: the parent in the drawing is selected during the scan. The line does not prove which earlier cell caused the birth.
++Its growth begins with a random walk. During a bounded burst of updates, occupied frontier positions may add a nearby cell. The drawing then connects each newly encountered position to one of its neighbours, if any neighbour has already been recorded. There is a detail worth keeping: the parent in the drawing is selected during the scan. The line does not prove which earlier cell caused the birth.
+ 
+-This is another construction of an organic form. Chance proposes an addition; stored occupancy constrains where it can occur; the renderer supplies connections and colour. The work may already have finished its twenty growth updates when you reach it. A still network can be the consequence of that programmed limit. Stillness alone cannot tell us that growth exhausted every possibility.
++This is another construction of an organic form. Chance proposes an addition; stored occupancy constrains where it can occur; the renderer supplies connections and colour. The work has already finished its twenty growth updates by the time you reach it. A still network can be the consequence of that programmed limit. Stillness alone cannot tell us that growth exhausted every possibility.
+ 
+ We can begin to distinguish forms by the relations that sustain them. The board keeps a row and repeatedly rewrites it. The rug combines local activity with an imposed symmetry. The network retains occupied positions and draws a selected account of their connections. Their resemblance to living things can invite us closer; the code gives us further differences to explore.
+ 
+ <!-- @ -->
+ 
+-The other works remain in the room: agents painting a shared surface, a Rule 110 display, the showcase and the orb. Let them offer further directions without asking this first encounter to explain them all.
++Other works remain in the hall. The orb rests on the rug's edge, and a showcase waits at the end of the passage that runs on beyond the rug's room. Past the network, a Rule 110 display stands near the corridor's far end. Let them offer further directions without asking this first encounter to explain them all.
+ 
+ For now, carry three choices: what a cell can hold, which neighbours it can consult, and when its answer becomes available to others. Our next comparison, the structure-growth specimen, makes the neighbourhood three-dimensional and gives disappearance more than one state. What forms need a little longer to go away?

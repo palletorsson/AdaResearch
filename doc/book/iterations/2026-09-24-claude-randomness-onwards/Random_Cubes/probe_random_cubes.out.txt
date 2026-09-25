@@ -1,0 +1,20 @@
+  ok    A the reward rain falls over the table — rain centre 0.03 m from the table now; shipped script 126.48 m
+  ok    A negative control: the shipped script missed the table — 126.5 m
+  ok    F a die at rest on its felt is read, face 6 as it lay — rolls 1, face 6; the resting die still hops 2.6 mm per tick, sleeping false
+  ok    F negative control: the shipped die never read it — rolls 0 after 2.5 s at rest
+  ok    G thrown dice are read, as the face on top, at 60 Hz — 16 of 16 read, 16 as the face on top; shipped script read 2
+  ok    G and at 90 Hz — 16 of 16 read, 16 as the face on top; shipped script read 15 (at the headset rate it mostly worked)
+  ok    G negative control: at 60 Hz the shipped die read almost none — 2 of 16
+  ok    I the rain never moves the die it rewards — 12 of 12 dice still on the felt, showing the face read, 4 s after the rain
+       info: with the balls moved back to layer 1 after spawning, 2 of 12 dice undisturbed
+  ok    H the rain comes to rest on or around the table, not through it — 64 of 64 above the floor after 2.5 s, 37 on the felt; shipped 3 above, 0 on the felt
+  ok    B a desktop drop gives the die a reading — rolls recorded 1, face 6; shipped script recorded 0
+  ok    B negative control: the shipped die recorded nothing — 0
+  ok    C a held coin is not counted in the hand — 0 counted while held
+  ok    C one throw adds exactly one to the tally — tally after landing 1
+  ok    C negative control: the shipped coin counted it while it was still in the hand — held 1, after landing 1
+  ok    D each coin names a desktop hook
+  ok    D a desktop-dropped coin falls and is read once — counted while carried 0; tally after landing 1; frozen after drop false
+  ok    E origin builds the launch gauges and a release writes them — gauges built; drop 1.33 m, spin 25.0 rad/s
+  ok    E the default rung builds no gauges (other maps unchanged)
+probe_random_cubes: ALL CHECKS PASS

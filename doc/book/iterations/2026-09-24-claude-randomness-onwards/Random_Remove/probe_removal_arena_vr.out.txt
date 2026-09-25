@@ -1,0 +1,5 @@
+PASS V a headset PlayerBody starts the removals — new=true; shipped=false (the shipped arena ignored it)
+PASS D the desktop walker still starts them — new=true shipped=true
+PASS S with a walker present, another player_body does not — new=false
+PASS R the readout plate sits behind its label — plate front face 0.0025 m behind the label (shipped: -0.0015, i.e. in front)
+RESULT PASS (0 failed)

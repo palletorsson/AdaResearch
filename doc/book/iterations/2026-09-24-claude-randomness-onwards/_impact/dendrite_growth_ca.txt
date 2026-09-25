@@ -1,0 +1,24 @@
+=== dendrite_growth_ca ===
+
+1. SPEC
+  registry:    cellular_automata.json
+  label:       Dendrite Growth CA
+  category:    emergence
+  scene:       res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.tscn
+  dev_themes:  cellular_automata, computation, emergence
+  tags:        emergence
+  qfep:        Every successful branch is promoted to a growth center, so the frontier itself does the growing — th...
+
+2. MAP-ADJACENT — 1 map(s) place this artifact
+  * Gallery_CellularAutomata                 dendrite_growth_ca:0:-0.5
+
+3. SEQUENCE — 0 sequence(s) list this in artifact_groups
+
+4. CAPTURES — /artifact-in-map gallery
+  no captures yet  — run: batch_capture_via_api.ps1 -Artifacts dendrite_growth_ca
+
+5. SIEVE — 0 sieve pass(es) mention this
+  no sieve passes touching this lookup
+
+SUMMARY
+  spec: ok · maps: 1 · sequences: 0 · captures: 0 · sieves: 0

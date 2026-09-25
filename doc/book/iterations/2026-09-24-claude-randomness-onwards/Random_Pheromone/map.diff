@@ -1,0 +1,14 @@
+diff --git a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Pheromone/map_data.before.json b/commons/maps/Random_Pheromone/map_data.json
+index 6df200b40..9cc7ea324 100644
+--- a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Pheromone/map_data.before.json
++++ b/commons/maps/Random_Pheromone/map_data.json
+@@ -193,7 +193,8 @@
+           7,
+           7
+         ]
+-      ]
++      ],
++      "artifact_placement": "map"
+     }
+   },
+   "utility_definitions": {

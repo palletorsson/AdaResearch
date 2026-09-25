@@ -1,0 +1,23 @@
+=== random_removal_arena ===
+
+1. SPEC
+  registry:    randomness.json
+  label:       Walk to remove
+  category:    procedural
+  scene:       res://commons/artifacts/randomness_space/removal_arena.tscn
+  registry_seq:randomness
+
+2. MAP-ADJACENT — 2 map(s) place this artifact
+  * Random_Game                              random_removal_arena:0:3#columns:9#rows:9#glass_width:11#glass_depth:11#glass_height:4.5#glass_title:THE SET UNDERFOOT#glass_grid:false#controls:compact#control_front:-6.0#control_facing:-z
+  * Random_Remove                            random_removal_arena:0:3#columns:9#rows:11#glass_width:11#glass_depth:13#glass_height:4.5#glass_title:WALK / REMOVE#glass_grid:false#controls:compact#control_front:-7.0#control_facing:-z
+
+3. SEQUENCE — 0 sequence(s) list this in artifact_groups
+
+4. CAPTURES — /artifact-in-map gallery
+  no captures yet  — run: batch_capture_via_api.ps1 -Artifacts random_removal_arena
+
+5. SIEVE — 0 sieve pass(es) mention this
+  no sieve passes touching this lookup
+
+SUMMARY
+  spec: ok · maps: 2 · sequences: 0 · captures: 0 · sieves: 0

@@ -1,0 +1,37 @@
+=== coin_toss ===
+
+1. SPEC
+  registry:    randomness.json
+  label:       Coin Toss
+  category:    randomness
+  scene:       res://algorithms/randomness/coin_toss/coin_toss.tscn
+  dev_themes:  probability, randomness
+  tags:        coin, bernoulli, binary, probability, convergence, interactive, grab
+  registry_seq:randomness
+  qfep:        Bernoulli trial — the atom of probability. p = 0.5 as perfect symmetry.
+
+2. MAP-ADJACENT — 58 map(s) place this artifact
+  * Astar_T00                                coin_toss:0:-0.5
+  * Astar_T03                                coin_toss:0:-0.5
+  * Astar_T08                                coin_toss:0:-0.5
+  * Cabinet_Gallery                          coin_toss:0:0
+  * Grammar_florence                         coin_toss:0:-0.5
+  * Grammar_halflife                         coin_toss:0:-0.5
+  * Grammar_linear                           coin_toss:0:-0.5
+  * Grammar_metropolitan                     coin_toss:0:-0.5
+  * Grammar_vatican                          coin_toss:0:-0.5
+  * Grammar_venice                           coin_toss:0:-0.5
+  ... +48 more maps
+
+3. SEQUENCE — 1 sequence(s) list this in artifact_groups
+  * randomness
+      in Random_Cubes: coin_toss
+
+4. CAPTURES — /artifact-in-map gallery
+  no captures yet  — run: batch_capture_via_api.ps1 -Artifacts coin_toss
+
+5. SIEVE — 1 sieve pass(es) mention this
+  * doc/sieve_passes/2026-05-13T10-35-00_phase-e-entropy.md
+
+SUMMARY
+  spec: ok · maps: 58 · sequences: 1 · captures: 0 · sieves: 1

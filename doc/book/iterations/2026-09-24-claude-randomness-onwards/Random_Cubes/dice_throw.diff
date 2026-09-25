@@ -1,0 +1,136 @@
+diff --git a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Cubes/dice_throw.gd.before.txt b/algorithms/randomness/dice_throw/dice_throw.gd
+index 907c6208d..0c10a67b8 100644
+--- a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Cubes/dice_throw.gd.before.txt
++++ b/algorithms/randomness/dice_throw/dice_throw.gd
+@@ -9,7 +9,7 @@
+ # essence: six physical faces, an orientation readout and an empirical record; P(X=k)=1/6 is the comparison model
+ # desire: grab a die, throw it physically, and be showered with reward balls proportional to the result
+ # critical_parameter: balls_per_pip — multiplier that makes a 6 spectacular (96 balls) and a 1 humbling (16 balls)
+-# triggers: _on_dice_dropped() starts settle detection; velocity < 0.02 for 0.8s triggers _read_dice_result()
++# triggers: _on_dice_dropped() (or on_desktop_drop) starts settle detection; 0.8 s under 0.02 m/s, or 0.8 s with the same face on top (within about 18 degrees of up) at a steady height, triggers _read_dice_result()
+ # emerges: face counts and the running mean retain outcomes beyond one spectacular throw; convergence to 3.5 is not guaranteed by this apparatus
+ # needs: XRToolsPickable grab + throw [has]; pip rendering on 6 faces [has]; ball rain physics [has]
+ # relationships: contrasts with coin_toss (6 outcomes vs 2); feeds slot_machine (compound dice)
+@@ -188,12 +188,27 @@ func _process(delta: float) -> void:
+ 	if _is_rolling:
+ 		var vel := _dice_body.linear_velocity.length()
+ 		var ang_vel := _dice_body.angular_velocity.length()
+-
+-		if vel < 0.02 and ang_vel < 0.1:
+-			_settle_timer += delta
++		# THE BUZZ (measured 2026-09-24, probe_random_cubes.gd): at 60 Hz physics
++		# (desktop), on this felt with this bounce and gravity scale, a landed die
++		# hops a few millimetres every tick and rocks in place at about 5 rad/s with
++		# its top face within a few degrees of up, and never sleeps: the old test
++		# read 1-2 of 16-20 seeded throws. At 72 Hz about half were read, at 90 Hz
++		# (the headset) most. A die whose same face has stayed on top, near vertical,
++		# at a steady height for the window has settled for the purpose of reading
++		# it, at any rate. The physics is untouched; only the test for "settled"
++		# gained this second way to pass.
++		# A frozen die is held (XR pick-up, the desktop carry), never settled.
++		var held: bool = _dice_body.freeze
++		if held:
++			_still_armed = false
++		var still := false if held else _still_window(delta)
++		if not held and ((vel < 0.02 and ang_vel < 0.1) or still):
++			# clamped: one long frame (a streaming hitch) must not fill the window
++			_settle_timer += minf(delta, 0.05)
+ 			if _settle_timer > 0.8:  # Settled for 0.8 seconds
+ 				_is_rolling = false
+ 				_settle_timer = 0.0
++				_still_armed = false
+ 				_read_dice_result()
+ 		else:
+ 			_settle_timer = 0.0
+@@ -386,6 +401,9 @@ func _create_dice() -> void:
+ 		_dice_body.dropped.connect(_on_dice_dropped)
+ 	if _dice_body.has_signal("picked_up"):
+ 		_dice_body.picked_up.connect(_on_dice_picked_up)
++	# The desktop carry emits neither signal; it calls these hooks on the body's
++	# desktop_hook_target instead (DesktopInteractionPointer._grab_held/_drop_held).
++	_dice_body.set_meta("desktop_hook_target", self)
+ 
+ 	add_child(_dice_body)
+ 
+@@ -446,15 +464,58 @@ func _add_pips_to_dice() -> void:
+ 			_dice_body.add_child(create_pip.call(Vector3(x_sign * pip_offset, y_sign * pip_offset, -half)))
+ 
+ 
++const SETTLE_TOP_DOT := 0.95      # the top face within about 18 degrees of up
++const SETTLE_HEIGHT_M := 0.01     # and the centre held within 1 cm of height
++var _still_armed: bool = false
++var _still_face: int = -1
++var _still_y: float = 0.0
++
++
++## True while the same face has stayed on top, near vertical, at a steady height.
++## Rocking and turning that keep the top face within about 18 degrees of up are
++## ignored: they cannot change the reported face, and at 60 Hz a landed die on
++## this felt keeps rocking (measured 2026-09-24: about 5 rad/s about a mostly
++## horizontal axis, top face within 2.5-6 degrees of up, never sleeping).
++## Restarts the window whenever the top face, its tilt or the height changes.
++func _still_window(_delta: float) -> bool:
++	var xf: Transform3D = _dice_body.global_transform
++	var best_face := 0
++	var best_dot := -2.0
++	for i in range(6):
++		var d: float = (xf.basis * FACE_NORMALS[i]).normalized().dot(Vector3.UP)
++		if d > best_dot:
++			best_dot = d
++			best_face = i
++	var moved: bool = absf(xf.origin.y - _still_y) > SETTLE_HEIGHT_M
++	if not _still_armed or best_face != _still_face or best_dot < SETTLE_TOP_DOT or moved:
++		_still_armed = true
++		_still_face = best_face
++		_still_y = xf.origin.y
++		return false
++	return true
++
++
+ func _on_dice_dropped(_pickable) -> void:
+ 	_is_rolling = true
+ 	_settle_timer = 0.0
++	_still_armed = false
+ 
+ 
+ func _on_dice_picked_up(_pickable) -> void:
+ 	# Stop any settle sampling while the player is holding the die
+ 	_is_rolling = false
+ 	_settle_timer = 0.0
++	_still_armed = false
++
++
++## Desktop carry: the same handlers the XR signals reach. The carry lets go with
++## no velocity, so a desktop "throw" is a drop from the held orientation.
++func on_desktop_grab(_pointer) -> void:
++	_on_dice_picked_up(null)
++
++
++func on_desktop_drop(_pointer) -> void:
++	_on_dice_dropped(null)
+ 
+ 
+ # ═════════════════════════════════════════════════════════════════════════════
+@@ -490,10 +551,21 @@ func _read_dice_result() -> void:
+ 
+ 
+ func _spawn_reward_balls(count: int) -> void:
+-	var spawn_center := global_position + Vector3(0, ball_drop_height, 0)
++	# LOCAL, because the balls are this node's children (add_child below). Adding
++	# global_position here placed the rain at twice the table's offset from the
++	# origin: 3 m away in a grid hall, outside the hall altogether in the museum.
++	var spawn_center := Vector3(0, ball_drop_height, 0)
+ 
+ 	for i in range(count):
+ 		var ball := RigidBody3D.new()
++		# falling 3-4 m onto a 3 cm felt, a ball moves further than the felt is
++		# thick in one physics tick and passed straight through without this
++		ball.continuous_cd = true
++		# The rain must never move the die it rewards. Layer 6 (unnamed in
++		# project.godot); the balls scan the static world and each other only,
++		# and the die's mask does not scan layer 6.
++		ball.collision_layer = 1 << 5
++		ball.collision_mask = 1 | (1 << 5)
+ 		ball.mass = 0.02
+ 		ball.gravity_scale = 1.0
+ 		ball.linear_damp = 0.1

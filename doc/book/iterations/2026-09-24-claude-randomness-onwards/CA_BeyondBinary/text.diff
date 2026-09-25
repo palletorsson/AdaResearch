@@ -1,0 +1,22 @@
+diff --git "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\CA_BeyondBinary\\before.md" "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+index 23a4d04ac..40f04bb9c 100644
+--- "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\CA_BeyondBinary\\before.md"
++++ "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+@@ -2,7 +2,7 @@
+ 
+ <!-- @game_of_life_petri -->
+ 
+-Five pale cells wait in the dish. A larger version lies in the floor beyond it. Three lamps stand along its edge. They are dark.
++Five green cells wait in the dish. A larger version lies in the floor beyond it. Three lamps stand along its edge. They are dark.
+ 
+ Press STEP four times. The arrangement has changed at every step; now something about it has returned. Compare its position with one of the gold squares. What has travelled?
+ 
+@@ -34,7 +34,7 @@ receiver.receive(occupied, linked, count_event)
+ 
+ That address could have been connected to another object. Here it controls an opal lamp. The lamp does not recognise a glider: any occupied state at its assigned address will light it when connected. Nor does its light return an influence to the cells. We have made a small, one-way traffic between the simulation and the room. Its boundary is a decision we can inspect and change.
+ 
+-Choose MEET. The same glider begins with a four-cell block in its path. Predict which lamps will light. Advance, then compare with GLIDER. Each button prepares a fresh beginning, so the difference can be revisited. In this particular meeting, by generation 24 the field is empty. The rule has stayed the same; what the glider could continue to be depended on what it met.
++Press LINK again to reconnect the lamps. Choose MEET. The same glider begins with a four-cell block in its path. Predict which lamps will light. Advance, then compare with GLIDER. GLIDER, BLINKER and MEET each prepare a fresh beginning, so the difference can be revisited; LINK keeps whatever setting you last gave it. In this particular meeting, by generation 24 the field is empty. The rule has stayed the same; what the glider could continue to be depended on what it met.
+ 
+ There is pleasure in the travelling figure and in the room answering it. We need not turn that pleasure into proof of a living creature, or ask a fluid-looking body to stand for every possible difference. This body has particular conditions. Another encounter may interrupt it; another connection may let it do something we have not yet tried.
+ 

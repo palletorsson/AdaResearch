@@ -1,0 +1,30 @@
+=== noise_mixer ===
+
+1. SPEC
+  registry:    randomness.json
+  label:       Noise Mixer
+  category:    procedural
+  scene:       res://commons/artifacts/noise_mixer/noise_mixer.tscn
+  dev_themes:  music, probability, procedural, randomness
+  tags:        noise, fbm, fractal, octaves, lacunarity, persistence, procedural, floor_display
+  registry_seq:noise, randomness
+
+2. MAP-ADJACENT — 5 map(s) place this artifact
+  * Gallery_Randomness                       noise_mixer:0:-0.5
+  * Placed_Noise_09_Thoronet                 noise_mixer
+  * Random_Space                             noise_mixer:0:-0.5#plinth:0.9
+  * Ribbon_Noise_05                          noise_mixer
+  * Ribbon_Randomness_05                     noise_mixer:90
+
+3. SEQUENCE — 1 sequence(s) list this in artifact_groups
+  * randomness
+      in Random_Space: noise_mixer
+
+4. CAPTURES — /artifact-in-map gallery
+  no captures yet  — run: batch_capture_via_api.ps1 -Artifacts noise_mixer
+
+5. SIEVE — 0 sieve pass(es) mention this
+  no sieve passes touching this lookup
+
+SUMMARY
+  spec: ok · maps: 5 · sequences: 1 · captures: 0 · sieves: 0

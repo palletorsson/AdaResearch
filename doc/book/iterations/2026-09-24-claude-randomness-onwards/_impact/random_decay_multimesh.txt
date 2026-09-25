@@ -1,0 +1,28 @@
+=== random_decay_multimesh ===
+
+1. SPEC
+  registry:    randomness.json
+  label:       Random Decay MultiMesh
+  category:    emergence
+  scene:       res://algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn
+  dev_themes:  emergence, probability, randomness
+  tags:        2d, emergence, probability, procedural
+  registry_seq:randomness
+
+2. MAP-ADJACENT — 3 map(s) place this artifact
+  * Corridor_Random_Rotate_Random_XYZ        random_decay_multimesh
+  * Random_Rotate_Random_XYZ                 random_decay_multimesh#study:rotation
+  * Ribbon_Randomness_01                     random_decay_multimesh
+
+3. SEQUENCE — 1 sequence(s) list this in artifact_groups
+  * randomness
+      in Random_Rotate_Random_XYZ: random_decay_multimesh
+
+4. CAPTURES — /artifact-in-map gallery
+  no captures yet  — run: batch_capture_via_api.ps1 -Artifacts random_decay_multimesh
+
+5. SIEVE — 0 sieve pass(es) mention this
+  no sieve passes touching this lookup
+
+SUMMARY
+  spec: ok · maps: 3 · sequences: 1 · captures: 0 · sieves: 0

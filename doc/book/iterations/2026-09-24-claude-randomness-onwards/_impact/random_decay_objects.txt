@@ -1,0 +1,26 @@
+=== random_decay_objects ===
+
+1. SPEC
+  registry:    randomness.json
+  label:       Random Decay Objects
+  category:    emergence
+  scene:       res://algorithms/randomness/randomdecay/scenes/random_decay_objects.tscn
+  dev_themes:  emergence, probability, randomness
+  tags:        emergence, probability, procedural
+  registry_seq:randomness
+  qfep:        Decay runs only while your hand closes on the paper: each frame one random prism in the 9×9 grid pic...
+
+2. MAP-ADJACENT — 2 map(s) place this artifact
+  * Ribbon_Randomness_01                     random_decay_objects
+  * TestMap_Unused_17                        random_decay_objects:0:2
+
+3. SEQUENCE — 0 sequence(s) list this in artifact_groups
+
+4. CAPTURES — /artifact-in-map gallery
+  no captures yet  — run: batch_capture_via_api.ps1 -Artifacts random_decay_objects
+
+5. SIEVE — 0 sieve pass(es) mention this
+  no sieve passes touching this lookup
+
+SUMMARY
+  spec: ok · maps: 2 · sequences: 0 · captures: 0 · sieves: 0

@@ -1,0 +1,1 @@
+Two rings receive one field: folds on one, colour on the other. Freeze a moment, find a negative value, and change how colour reads it. Then inspect three contributions to the retained terrain basin while the dark orb keeps its own time.

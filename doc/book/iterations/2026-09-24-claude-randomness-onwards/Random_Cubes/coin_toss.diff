@@ -1,0 +1,122 @@
+diff --git a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Cubes/coin_toss.gd.before.txt b/algorithms/randomness/coin_toss/coin_toss.gd
+index aaf813edf..b6b939397 100644
+--- a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Cubes/coin_toss.gd.before.txt
++++ b/algorithms/randomness/coin_toss/coin_toss.gd
+@@ -183,6 +183,16 @@ func _process(_delta: float) -> void:
+ 		if state.get("settled", false):
+ 			continue
+ 
++		# A FROZEN coin is in the tray or in a hand. A held coin is frozen by the
++		# XR pickable (and by the desktop carry), so its velocity reads zero while
++		# the hand moves it: lifted 0.2 m it passed for "thrown", held still 0.6 s
++		# it passed for "settled", and it was counted in the hand, then counted
++		# again when it landed. Nothing frozen is read.
++		if coin.freeze:
++			state["settle_timer"] = 0.0
++			_coin_states[coin.get_instance_id()] = state
++			continue
++
+ 		var vel := coin.linear_velocity.length()
+ 		var ang := coin.angular_velocity.length()
+ 
+@@ -194,9 +204,15 @@ func _process(_delta: float) -> void:
+ 				_coin_states[coin.get_instance_id()] = state
+ 			continue
+ 
+-		# Settling check
+-		if vel < 0.03 and ang < 0.2:
+-			state["settle_timer"] = state.get("settle_timer", 0.0) + _delta
++		# Settling check. A coin landing off the felt pad can jitter in place and
++		# never sleep (measured on a plain floor, probe_random_cubes.gd: about 5
++		# degrees of wobble per tick while lying flat). So a coin lying within about
++		# 37 degrees of flat, face up or face down, whose face normal has held within
++		# 20 degrees and whose centre stayed within 1 cm of where the window began,
++		# counts as settled too. A coin rolling on its edge never passes. The physics
++		# is untouched. The timer is clamped so one long frame cannot fill it.
++		if (vel < 0.03 and ang < 0.2) or _coin_still(coin, state):
++			state["settle_timer"] = state.get("settle_timer", 0.0) + minf(_delta, 0.05)
+ 			if state["settle_timer"] > 0.6:
+ 				state["settled"] = true
+ 				_coin_states[coin.get_instance_id()] = state
+@@ -449,6 +465,7 @@ func _create_coin() -> RigidBody3D:
+ 			rb.picked_up.connect(_on_coin_picked_up.bind(rb))
+ 		if rb.has_signal("dropped"):
+ 			rb.dropped.connect(_on_coin_dropped.bind(rb))
++		rb.set_meta("desktop_hook_target", _DesktopCoinHook.new(self, rb))
+ 		return rb
+ 
+ 	# "H" pip on heads side
+@@ -479,10 +496,55 @@ func _create_coin() -> RigidBody3D:
+ 		rb.picked_up.connect(_on_coin_picked_up.bind(rb))
+ 	if rb.has_signal("dropped"):
+ 		rb.dropped.connect(_on_coin_dropped.bind(rb))
++	rb.set_meta("desktop_hook_target", _DesktopCoinHook.new(self, rb))
+ 
+ 	return rb
+ 
+ 
++## THE DESKTOP CARRY (DesktopInteractionPointer) emits neither picked_up nor dropped.
++## It calls on_desktop_grab / on_desktop_drop on the body's desktop_hook_target, and
++## on release it puts back the freeze the body had before the carry. A tray coin is
++## frozen, so without this hook a dropped coin would hang in the air, never read.
++## One small hook per coin, because the pointer passes itself, not the body.
++class _DesktopCoinHook extends RefCounted:
++	var _owner_ref: WeakRef
++	var _coin_ref: WeakRef
++
++	func _init(owner_node: Object, coin: RigidBody3D) -> void:
++		_owner_ref = weakref(owner_node)
++		_coin_ref = weakref(coin)
++
++	func on_desktop_grab(_pointer) -> void:
++		var o: Object = _owner_ref.get_ref()
++		var c: Object = _coin_ref.get_ref()
++		if o != null and c != null:
++			o.call("_on_coin_picked_up", null, c)
++
++	func on_desktop_drop(_pointer) -> void:
++		var o: Object = _owner_ref.get_ref()
++		var c: RigidBody3D = _coin_ref.get_ref() as RigidBody3D
++		if o == null or c == null:
++			return
++		c.freeze = false          # as the XR pickable's UNFROZEN release does
++		o.call("_on_coin_dropped", null, c)
++
++
++## The stillness window for one coin, kept in its state dictionary.
++func _coin_still(coin: RigidBody3D, state: Dictionary) -> bool:
++	var o: Vector3 = coin.global_position
++	var n: Vector3 = coin.global_transform.basis.y.normalized()
++	if not state.has("still_o"):
++		state["still_o"] = o
++		state["still_n"] = n
++		return false
++	var tipped: bool = absf(n.y) < 0.8
++	if o.distance_to(state["still_o"]) > 0.01 or n.angle_to(state["still_n"]) > 0.35 or tipped:
++		state["still_o"] = o
++		state["still_n"] = n
++		return false
++	return true
++
++
+ func _on_coin_picked_up(_pickable, coin: RigidBody3D) -> void:
+ 	if not is_instance_valid(coin):
+ 		return
+@@ -490,6 +552,8 @@ func _on_coin_picked_up(_pickable, coin: RigidBody3D) -> void:
+ 	state["settled"] = false
+ 	state["thrown"] = false
+ 	state["settle_timer"] = 0.0
++	state.erase("still_o")
++	state.erase("still_n")
+ 	_coin_states[coin.get_instance_id()] = state
+ 
+ 
+@@ -500,6 +564,8 @@ func _on_coin_dropped(_pickable, coin: RigidBody3D) -> void:
+ 	state["settled"] = false
+ 	state["thrown"] = true
+ 	state["settle_timer"] = 0.0
++	state.erase("still_o")
++	state.erase("still_n")
+ 	_coin_states[coin.get_instance_id()] = state
+ 	# disclosure:origin — write the initial conditions down. A pure read of state
+ 	# the engine already has: no velocity is set, no transform is touched, the coin

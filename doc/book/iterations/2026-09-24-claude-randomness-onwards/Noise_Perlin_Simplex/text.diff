@@ -1,0 +1,13 @@
+diff --git "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_Perlin_Simplex\\before.md" "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+index 8067bc45f..74b39219d 100644
+--- "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_Perlin_Simplex\\before.md"
++++ "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+@@ -45,7 +45,7 @@ Choose one comparison to keep in view: the turn of a ridge, the spacing of hollo
+ 
+ Now alter FREQ on just one side. Look back at the central plate. Alongside the different bases, it reports another difference: the scale at which the field is sampled. That one adjustment changes what you might have attributed to the basis. MATCH returns both generators to the declared settings. REPLAY on either side returns that side alone.
+ 
+-Press VIEW. Keep following the pink markers while the relief settles into two flat arrangements. The colour retains the sampled values. Nothing has been flattened inside the noise function; the display has stopped spending its answer on height.
++Press VIEW. Keep following the pink markers as the relief is levelled at once into two flat arrangements. The colour retains the sampled values, unless REGEN has left the Simplex side on a new seed: VIEW also returns that field to its declared seed. Nothing has been flattened inside the noise function; the display has stopped spending its answer on height.
+ 
+ The cubes remain at half-metre intervals. Their square arrangement is still present whichever basis produced the values. It would be easy to mistake the grid of the display for the lattice inside the calculation. VIEW gives us another way to notice that two decisions have been folded together.
+ 

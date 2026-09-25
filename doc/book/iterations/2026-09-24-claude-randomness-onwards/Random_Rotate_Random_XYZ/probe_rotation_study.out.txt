@@ -1,0 +1,9 @@
+  ok    A the default placement is unchanged — rates 0.30 / 0.10, colour 0.35 / 0.16, cube drift up to 0.148
+  ok    B study before _ready: rates matched, colour off, no drift, no sinking — rates 0.30 / 0.30, colour 0.00 / 0.00, drift 0.0000 / 0.0000, sink 0.00
+  ok    B and both stacks turn — mean turn 1.05 deg cubes, 1.03 deg prisms
+  ok    B2 the study alone fits the display and survives a trailing tail — stack_fit 10.0, drift 0.0000, rate 0.30
+  ok    C study after _ready: the same settings, two layers, both turn — 2 layer nodes; rates 0.30 / 0.30; drift 0.0000 / 0.0000; turn 1.05 / 1.03 deg
+  ok    D under the study the prisms stand in twelve evenly spaced columns — 12 distinct columns, even true
+  ok    D negative control: the shipped snap does not give twelve — 11 distinct columns as shipped
+  ok    E the study turns each cube exactly as the matched run does — largest difference 0.000000000 rad over 20 cubes
+probe_rotation_study: ALL CHECKS PASS

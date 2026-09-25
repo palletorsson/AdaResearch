@@ -1,0 +1,25 @@
+diff --git "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_Inside_Noise\\before.md" "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+index bf07f23fd..2ad68f776 100644
+--- "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\Noise_Inside_Noise\\before.md"
++++ "b/C:/Users/palle/AppData/Local/Temp/claude/C--Users-palle-Documents-GitHub-AdaResearch-46/8987ca3e-a19b-46d1-b00a-85888e1b0458/scratchpad\\_blk_final.md"
+@@ -6,7 +6,7 @@ Step through the opening into the sphere. Its colour curves above your head and
+ 
+ Two smaller spheres stand behind a tilted instrument within it. A yellow point marks the same direction on each body. Their colours seem related, but a patch on the left has acquired a different neighbourhood on the right.
+ 
+-Press ZERO. Stay with one patch while the two bodies come to agree. Then press WARP. Where did the difference enter?
++Press ZERO. Stay with one patch: the two bodies agree at once. Then press WARP. Where did the difference enter?
+ 
+ Look up. The surrounding sphere changes too. Your feet have stayed on the same circular floor; the wall has not moved closer. Yet a different patch now hangs above the place where you are standing. The operation reaches the room before we have named it.
+ 
+@@ -51,9 +51,9 @@ func radius_at(value: float) -> float:
+ 	return 0.94 + (0.16 * value if relief else 0.0)
+ ```
+ 
+-The base radius is 0.94 metres. In RELIEF, a signed sample changes it by up to 0.16 metres. A negative value can draw a point inward; a positive one can push it outward. Both spheres receive this rule. Their difference still comes from the addresses at which they read the base field.
++The base radius is 0.94 in the scene's own units; they are metres only at the work's authored size, and the museum may build the whole work smaller. In RELIEF, a signed sample changes it by up to 0.16, about a sixth of that radius. A negative value can draw a point inward; a positive one can push it outward. Both spheres receive this rule. Their difference still comes from the addresses at which they read the base field.
+ 
+-Press ZERO again, now in RELIEF. The two arrangements of vertices agree. Turn RELIEF off and keep WARP active. A changed colour arrangement survives on the round bodies. We have separated changing where to sample from changing what a sample does.
++Press ZERO again, now in RELIEF. The two arrangements of vertices agree. Press WARP, then turn RELIEF off. Both outlines return to round; a changed colour arrangement survives on the warped body. We have separated changing where to sample from changing what a sample does.
+ 
+ The enclosing sphere keeps its fixed wall, ceiling, floor and two openings through RELIEF. Only the two smaller bodies receive the radial change. Their surfaces have no collision; the room and plinths do. A value has changed one visible body while another body remains a steady place from which to compare it.
+ 

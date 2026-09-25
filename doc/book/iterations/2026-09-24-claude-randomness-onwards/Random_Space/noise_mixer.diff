@@ -1,0 +1,15 @@
+diff --git a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Space/noise_mixer.gd.before.txt b/commons/artifacts/noise_mixer/noise_mixer.gd
+index 6808ec608..35a704a57 100644
+--- a/doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Space/noise_mixer.gd.before.txt
++++ b/commons/artifacts/noise_mixer/noise_mixer.gd
+@@ -308,6 +308,10 @@ func _on_randomise(_b = null) -> void:
+ 
+ 
+ func _regenerate() -> void:
++	# The museum configures a body before _ready, when no material exists yet;
++	# _ready builds it and generates the picture with the settings already set.
++	if _material == null:
++		return
+ 	_generate_texture()
+ 	_update_info()
+ 

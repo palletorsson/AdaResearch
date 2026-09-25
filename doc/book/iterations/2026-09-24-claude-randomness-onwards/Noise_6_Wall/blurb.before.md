@@ -1,0 +1,1 @@
+A pink room waits inside the museum. Hold its current moment, compare one, two, four and six cloud terms, then change its dress. What has moved when the wall looks deeper but your feet meet the same floor?

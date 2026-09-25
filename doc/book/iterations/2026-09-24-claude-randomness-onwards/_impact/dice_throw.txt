@@ -1,0 +1,37 @@
+=== dice_throw ===
+
+1. SPEC
+  registry:    randomness.json
+  label:       Dice Throw
+  category:    randomness
+  scene:       res://algorithms/randomness/dice_throw/dice_throw.tscn
+  dev_themes:  probability, randomness
+  tags:        dice, uniform_distribution, expected_value, probability, physics, interactive, grab
+  registry_seq:randomness
+  qfep:        Equiprobability — each face equally likely. Fairness as geometric symmetry.
+
+2. MAP-ADJACENT — 22 map(s) place this artifact
+  * Astar_T00                                dice_throw:0:-0.5
+  * Astar_T03                                dice_throw:0:-0.5
+  * Astar_T08                                dice_throw:0:-0.5
+  * Cabinet_Gallery                          dice_throw:0:0
+  * Grammar_florence                         dice_throw:0:-0.5
+  * Grammar_halflife                         dice_throw:0:-0.5
+  * Grammar_linear                           dice_throw:0:-0.5
+  * Grammar_metropolitan                     dice_throw:0:-0.5
+  * Grammar_vatican                          dice_throw:0:-0.5
+  * Grammar_venice                           dice_throw:0:-0.5
+  ... +12 more maps
+
+3. SEQUENCE — 1 sequence(s) list this in artifact_groups
+  * randomness
+      in Random_Cubes: dice_throw
+
+4. CAPTURES — /artifact-in-map gallery
+  no captures yet  — run: batch_capture_via_api.ps1 -Artifacts dice_throw
+
+5. SIEVE — 1 sieve pass(es) mention this
+  * doc/sieve_passes/2026-05-13T10-35-00_phase-e-entropy.md
+
+SUMMARY
+  spec: ok · maps: 22 · sequences: 1 · captures: 0 · sieves: 1

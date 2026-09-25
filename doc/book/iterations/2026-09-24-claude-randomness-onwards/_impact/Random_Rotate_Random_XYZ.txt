@@ -1,0 +1,37 @@
+=== Random_Rotate_Random_XYZ ===
+
+1. SPEC
+  registry:    randomness.json
+  label:       Random Rotate XYZ
+  category:    primitives
+  scene:       res://algorithms/randomness/RandomRotateRandomXYZ/Random_Rotate_Random_XYZ.tscn
+  dev_themes:  probability, randomness
+  tags:        primitives, probability, procedural
+  registry_seq:randomness
+  qfep:        The room's namesake engine: grid cubes spun by three independent draws, one per axis. Orientation su...
+
+2. MAP-ADJACENT — 13 map(s) place this artifact
+  * Placed_Randomness_04_Mengoni             Random_Rotate_Random_XYZ
+  * Placed_Randomness_05_Mezquita            Random_Rotate_Random_XYZ
+  * Placed_Randomness_06_Castelvecchi        Random_Rotate_Random_XYZ
+  * Placed_Randomness_07_Castelvecchi        Random_Rotate_Random_XYZ
+  * Placed_Randomness_09_Castelvecchi        Random_Rotate_Random_XYZ
+  * Placed_Randomness_10_Grande              Random_Rotate_Random_XYZ
+  * Placed_Randomness_13_Uffizi              Random_Rotate_Random_XYZ
+  * Random_Rotate_Random_XYZ                 Random_Rotate_Random_XYZ
+  * Ribbon_Randomness_05                     Random_Rotate_Random_XYZ
+  * Room_Random_Rotate_Random_XYZ            Random_Rotate_Random_XYZ
+  ... +3 more maps
+
+3. SEQUENCE — 1 sequence(s) list this in artifact_groups
+  * randomness
+      in Random_Rotate_Random_XYZ: Random_Rotate_Random_XYZ
+
+4. CAPTURES — /artifact-in-map gallery
+  no captures yet  — run: batch_capture_via_api.ps1 -Artifacts Random_Rotate_Random_XYZ
+
+5. SIEVE — 0 sieve pass(es) mention this
+  no sieve passes touching this lookup
+
+SUMMARY
+  spec: ok · maps: 13 · sequences: 1 · captures: 0 · sieves: 0

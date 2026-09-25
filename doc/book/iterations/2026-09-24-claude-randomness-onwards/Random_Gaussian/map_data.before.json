@@ -1,0 +1,612 @@
+{
+  "map_info": {
+	"name": "Random Gaussian",
+	"title": "The shape we counted",
+	"lookup_name": "Random_Gaussian",
+	"description": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16.",
+	"version": "placed-simulated_annealing",
+	"format": "json",
+	"dimensions": {
+	  "width": 11,
+	  "depth": 13,
+	  "max_height": 6
+	},
+	"metadata": {
+	  "difficulty": "beginner",
+	  "category": "algorithms",
+	  "estimated_time": "5-7 minutes",
+	  "learning_objectives": [
+		"Compare GAUSS and UNIFORM using the same sample count and bins",
+		"Distinguish issued, airborne and landed samples",
+		"Rebin retained values and observe changing binned estimates",
+        "Separate edge-bin counts, clipped draws and ideal-model expectation"
+	  ]
+	},
+	"museum": {
+	  "wall_height": 5,
+	  "gate_depth_rows": 0,
+	  "artifact_placement": "map",
+	  "plinths": false,
+	  "props_deny": [
+        "dream_bodies"
+	  ],
+	  "sculpture_clear_rects": [
+		[
+		  1,
+		  1,
+		  9,
+		  11
+		]
+	  ],
+	  "open_roof": true
+	}
+  },
+  "utility_definitions": {
+	"t": {
+	  "type": "teleporter",
+	  "name": "Next Lesson",
+	  "description": "Continue to the next algorithm demonstration",
+	  "properties": {
+		"action": "next_in_sequence"
+	  }
+	},
+	"s": {
+	  "properties": {
+		"height": 5.5
+	  }
+	}
+  },
+  "lighting": {
+	"ambient_color": [
+	  0.4,
+	  0.4,
+	  0.5
+	],
+	"ambient_energy": 0.6,
+	"directional_light": {
+	  "enabled": true,
+	  "direction": [
+		-0.4,
+		-0.7,
+		-0.4
+	  ],
+	  "color": [
+		1,
+		0.9,
+		0.8
+	  ],
+	  "energy": 1.2
+	}
+  },
+  "settings": {
+	"cube_size": 1,
+	"gutter": 0.0,
+	"show_grid": true,
+	"enable_physics": true,
+	"auto_reveal_on_entry": false,
+	"initial_tile_visibility": "all",
+	"background": {
+	  "type": "sky",
+	  "color": [
+		0.2,
+		0.3,
+		0.7
+	  ]
+	}
+  },
+  "layers": {
+	"structure": [
+	  [
+		"w",
+		"w",
+		"w",
+		"w",
+		"1",
+		"1",
+		"1",
+		"w",
+		"w",
+		"w",
+        "w"
+	  ],
+	  [
+		"w",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+        "w"
+	  ],
+	  [
+		"w",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+        "w"
+	  ],
+	  [
+		"w",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+        "w"
+	  ],
+	  [
+		"w",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+        "w"
+	  ],
+	  [
+		"w",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+        "w"
+	  ],
+	  [
+		"w",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+        "w"
+	  ],
+	  [
+		"w",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+        "w"
+	  ],
+	  [
+		"w",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+        "w"
+	  ],
+	  [
+		"w",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+        "w"
+	  ],
+	  [
+		"w",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+        "w"
+	  ],
+	  [
+		"w",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+		"1",
+        "w"
+	  ],
+	  [
+		"w",
+		"w",
+		"w",
+		"w",
+		"1",
+		"1",
+		"1",
+		"w",
+		"w",
+		"w",
+        "w"
+	  ]
+	],
+	"utilities": [
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		"s",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		"t",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ]
+	],
+	"interactables": [
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		"distribution_sampler:180#stand:cabinet#controls:compact#control_front:1.05",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		"GaussianPaintSplatter:180:1.5:0.65",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		"galton_board:180:0.9:1.5",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		"distribution_comparator:180:0.83",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ],
+	  [
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+        " "
+	  ]
+	]
+  }
+}

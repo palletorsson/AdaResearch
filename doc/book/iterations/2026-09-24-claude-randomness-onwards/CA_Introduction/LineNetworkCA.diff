@@ -1,0 +1,91 @@
+diff --git "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\CA_Introduction\\LineNetworkCA.gd.before.txt" "b/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\CA_Introduction\\LineNetworkCA.gd.block.txt"
+index 3617c6fcb..1a98fbd91 100644
+--- "a/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\CA_Introduction\\LineNetworkCA.gd.before.txt"
++++ "b/C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-24-claude-randomness-onwards\\CA_Introduction\\LineNetworkCA.gd.block.txt"
+@@ -30,6 +30,18 @@ var cell_parents: Dictionary = {} # Vector3i -> Vector3i
+ 
+ var frontier: Array = [] # Array of Vector3i
+ 
++## #size:<metres> from a map token (`size` is a listed grid config name, so the grid
++## lane does not read the number as a tutorial rotation). The walk spreads the tangle
++## up to about 6 m either way around the node, and it is symmetric in y, so about half
++## of its line ends fall below the node's origin (2026-09-24: 49% over 300 replayed
++## seeds): a placement on a deck buries that half in the floor. With a size,
++## the drawn lines are scaled uniformly (the shape is kept) until the tangle's largest
++## side equals it, centred over the node with its lowest line FIT_FLOOR above the
++## origin. 0, the default, draws exactly as before.
++var fit: float = 0.0
++const FIT_FLOOR := 0.3
++var _growth_over := false
++
+ func _ready() -> void:
+ 	super._ready()
+ 	# Hide the default blocky mesh
+@@ -39,6 +51,7 @@ func _ready() -> void:
+ 	setup_line_renderer()
+ 
+ func initialize_grid() -> void:
++	_growth_over = false
+ 	grid = create_3d_grid()
+ 	frontier.clear()
+ 	
+@@ -64,6 +77,7 @@ func initialize_grid() -> void:
+ 
+ func update_simulation(_delta) -> void:
+ 	if iteration_count >= max_generations:
++		_growth_over = true
+ 		return
+ 
+ 	# Generic growth simulation
+@@ -126,6 +140,13 @@ func update_visualization() -> void:
+ 						_find_parent_and_connect(pos)
+ 
+ 	_draw_lines()
++	# This class's growth has ended (update_simulation said so this frame), and this
++	# scan has seen every cell it produced; later scans find nothing new and redraw
++	# the same lines. Stop: the 64^3 scan cost ~15 ms a frame on a desktop
++	# (2026-09-24) for as long as the hall stayed loaded. A subclass with its own
++	# growth rule (dendrite_growth_ca) never sets the flag and keeps running.
++	if _growth_over:
++		is_running = false
+ 
+ func _find_parent_and_connect(pos: Vector3i) -> void:
+ 	# Find a neighbor that is ALREADY in cell_birth_times (older than me)
+@@ -181,6 +202,27 @@ func _draw_lines() -> void:
+ 		immediate_mesh.surface_add_vertex(p2)
+ 	
+ 	immediate_mesh.surface_end()
++	_fit_lines()
++
++func _fit_lines() -> void:
++	if mesh_instance_lines == null:
++		return
++	if fit <= 0.0:
++		# a live config that removes the size puts the drawing back; a no-op by default
++		mesh_instance_lines.transform = Transform3D.IDENTITY
++		return
++	if connections.is_empty():
++		return
++	var lo := Vector3(INF, INF, INF)
++	var hi := Vector3(-INF, -INF, -INF)
++	for conn in connections:
++		lo = lo.min(conn[0]).min(conn[1])
++		hi = hi.max(conn[0]).max(conn[1])
++	var span := hi - lo
++	var s := fit / maxf(0.001, maxf(span.x, maxf(span.y, span.z)))
++	var mid := (lo + hi) * 0.5
++	mesh_instance_lines.scale = Vector3.ONE * s
++	mesh_instance_lines.position = Vector3(-mid.x * s, FIT_FLOOR - lo.y * s, -mid.z * s)
+ 
+ func _exit_tree() -> void:
+ 	for child in get_children():
+@@ -189,4 +231,8 @@ func _exit_tree() -> void:
+ 
+ 
+ func apply_grid_config(config: Dictionary) -> void:
+-	pass
++	# The museum calls this before _ready, the grid lane after; either way the fit
++	# is applied on the next draw, and at once if lines already exist. Every caller
++	# passes the whole config, so a config without `size` means no fit.
++	fit = maxf(0.0, float(str(config.get("size", "0"))))
++	_fit_lines()
