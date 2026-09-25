@@ -1,0 +1,20 @@
+{
+  "id": "basin_water",
+  "name": "Basin Water",
+  "category": "shaders",
+  "artifacts": {
+    "basin_water": {
+      "lookup_name": "basin_water",
+      "name": "Basin Water — a lid of moving water",
+      "scene": "res://commons/artifacts/basin_water/basin_water.tscn",
+      "description": "One plane over a museum basin, displaced in the vertex shader by three directional sines and a value noise and coloured by the angle it is seen from. Every vertex and pixel is recomputed from the clock on every frame; nothing is stored between frames, and the glass lid of the basin, not the water, is what carries the body. Token keys: width, depth (metres), amplitude, wavelength, speed, noise_amount, lift, calm:on.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": ["shaders"],
+      "footprint": [5, 1, 5],
+      "size_group": "large",
+      "interactions": ["Stand on the lid and watch the surface move under your feet", "Walk round the pool and watch the colour follow your angle", "Read the desk's amplitude against what the surface does"],
+      "qfep_connection": "A surface can answer light, position and time without keeping a memory or having a body; what carries the visitor is a different construction from what they are looking at."
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "sequences": {
+    "shaders": {
+      "name": "Shaders: What a Surface Answers To",
+      "truth": "A shader is a rule run for every pixel at once. It keeps no memory and has no body; what it answers to is light, position and time. The passage, the pillar hall and the basin are where the museum lets that show.",
+      "qfep_term": "λE(S)",
+      "qfep_connection": "The field of the noise sequence becomes a surface. Every pixel is computed from the same rule with different inputs, and nothing is kept between frames until a buffer gives the rule a past; the hall after this one gives the cell one. What a surface can answer to, and what carries the body that looks at it, are two constructions the sequence keeps apart.",
+      "formula": "colour = f(position, light, time), for every pixel, at once",
+      "description": "Six halls assembled from the Book of Shaders rooms and introduced through the architecture between rooms: a long passage where a rule runs for every pixel at once, a pillar hall where five materials answer light, a basin whose glass lid carries you over moving water, the floor of the tiling sequence returned as a per-pixel rule, five materials pushed past their intended range, and a rule given a memory through a buffer, which is where cellular automata begin.",
+      "layer": "E_entropy",
+      "prerequisites": [
+        "noise",
+        "wavefunctions"
+      ],
+      "unlocks": [
+        "cellularautomata"
+      ],
+      "difficulty": "intermediate",
+      "estimated_time": "30-40 minutes",
+      "learning_objectives": [
+        "Say what a fragment shader receives (position, light, time) and what it cannot keep (a memory) or be (a body)",
+        "Read a shaping function as a policy for where value goes, and a gradient as never neutral",
+        "Distinguish a material that answers light (leather, latex, oil slick) from a mesh that merely has a colour",
+        "Stand on a basin lid over moving water and tell the surface you look at from the construction that carries you",
+        "Recognise the tiling sequence’s floor as a per-pixel fold of space rather than a set of copies",
+        "Explain why a buffer turns a rule for every pixel into a rule with a past, and carry that into cellular automata"
+      ],
+      "content": [
+        "Shader_01_Shaping: A rule for every pixel at once - arrive through the passage; y = f(x) as a policy for where light goes",
+        "Shader_11_QueerRubber: The pillar hall: what a surface answers to - five materials under three coloured lights, between the piers the museum keeps here",
+        "Shader_09_FBM: The basin: water without a memory - the pool’s glass lid carries you; the water on it is recomputed from the clock on every frame",
+        "Shader_05_Patterns: The floor returned - fract() folds space; bricks, Truchet and Voronoi as one function",
+        "Shader_12_PinkExtravaganza: Past the intended range - every uniform cranked past taste; the water on this floor refracts wrong on purpose",
+        "Shader_10_ReactionDiffusion: A rule given a memory - reaction-diffusion in a buffer; the same rule run again on what it drew, which is where the next sequence starts"
+      ],
+      "maps": [
+        "Shader_01_Shaping",
+        "Shader_11_QueerRubber",
+        "Shader_09_FBM",
+        "Shader_05_Patterns",
+        "Shader_12_PinkExtravaganza",
+        "Shader_10_ReactionDiffusion"
+      ],
+      "deferred_maps": [
+        "Shader_02_Colors",
+        "Shader_03_Shapes",
+        "Shader_04_Matrices",
+        "Shader_06_Random",
+        "Shader_07_Noise",
+        "Shader_08_CellularNoise",
+        "Shader_Arch_Gallery"
+      ],
+      "deferred_reason": {
+        "Shader_02_Colors": "colour is sequence four’s; the hall stays on disk for the pattern-generation walk",
+        "Shader_03_Shapes": "kept for the pattern-generation walk; the six spine halls carry the argument",
+        "Shader_04_Matrices": "transformation is sequence two’s",
+        "Shader_06_Random": "randomness is sequence ten’s",
+        "Shader_07_Noise": "noise is sequence eleven’s; FBM carries the field here",
+        "Shader_08_CellularNoise": "Voronoi appears inside the patterns hall",
+        "Shader_Arch_Gallery": "a 65-row gallery, not a hall of the walk"
+      },
+      "algorithm_paths": [
+        "algorithms/shaders/book_of_shaders",
+        "algorithms/shaders/queer_materials",
+        "algorithms/shaders/buffer",
+        "commons/artifacts/basin_water"
+      ],
+      "return_to": "lab",
+      "lab_map": "Lab/map_data_post_shaders",
+      "unlock_requirements": [],
+      "completion_rewards": [
+        "surface_badge"
+      ],
+      "artifact_groups": [
+        {
+          "map": "Shader_01_Shaping",
+          "position": "intro",
+          "artifacts": [
+            "dark_sphere",
+            "library_rack",
+            "science_screen",
+            "shader_01_shaping"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "A rule for every pixel at once. Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+        },
+        {
+          "map": "Shader_11_QueerRubber",
+          "position": "exploration",
+          "artifacts": [
+            "dark_sphere",
+            "library_rack",
+            "shader_11_queerrubber"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "The pillar hall: what a surface answers to. Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+        },
+        {
+          "map": "Shader_09_FBM",
+          "position": "exploration",
+          "artifacts": [
+            "basin_water",
+            "dark_sphere",
+            "library_rack",
+            "shader_09_fbm"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "The basin: water without a memory. Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+        },
+        {
+          "map": "Shader_05_Patterns",
+          "position": "exploration",
+          "artifacts": [
+            "dark_sphere",
+            "library_rack",
+            "shader_05_patterns"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "The floor returned. Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+        },
+        {
+          "map": "Shader_12_PinkExtravaganza",
+          "position": "synthesis",
+          "artifacts": [
+            "dark_sphere",
+            "library_rack",
+            "shader_12_pinkextravaganza"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Past the intended range. Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+        },
+        {
+          "map": "Shader_10_ReactionDiffusion",
+          "position": "synthesis",
+          "artifacts": [
+            "dark_sphere",
+            "library_rack",
+            "shader_10_reactiondiffusion"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "A rule given a memory. Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+        }
+      ],
+      "local_review_history": [
+        {
+          "date": "2026-09-25",
+          "by": "claude-edges-pilot",
+          "note": "Sequence created on Palle’s word: a shader sequence introduced with the architecture of liminal spaces (pillar hallways, passages, basins). Assembled from the Book of Shaders halls of the non-spine pattern-generation sequence; museum blocks added; basin_water built for the basin hall."
+        }
+      ]
+    }
+  },
+  "world_phase": "transition",
+  "artifact_groups": []
+}

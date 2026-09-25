@@ -1,19 +1,19 @@
 {
  "_meta": {
-  "generated": "2026-09-16 21:00:33",
+  "generated": "2026-09-25 15:32:46",
   "generator": "tools/build_spine_artifact_order.py",
   "rule": "first appearance walking the spine: sequence order -> map order -> the room's thread (ruled, else floor, else file)",
-  "sequences": 24,
-  "maps_read": 193,
+  "sequences": 25,
+  "maps_read": 202,
   "maps_missing": 0,
-  "artifacts": 962,
+  "artifacts": 979,
   "ordered_by": {
-   "ruled": 935,
-   "floor": 25,
-   "file": 2
+   "ruled": 940,
+   "floor": 38,
+   "file": 1
   },
-  "primary": 283,
-  "unruled": 14
+  "primary": 321,
+  "unruled": 24
  },
  "order": [
   {
@@ -109,6 +109,13 @@
   },
   {
    "lookup": "floating_sphere_field",
+   "sequence": "primitives",
+   "map": "Point_One",
+   "role": "secondary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "SoundscapeRadioRack",
    "sequence": "primitives",
    "map": "Point_One",
    "role": "secondary",
@@ -353,6 +360,20 @@
    "by": "ruled"
   },
   {
+   "lookup": "head_trace_projection",
+   "sequence": "primitives",
+   "map": "Point_Trace",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "trace_short_memory",
+   "sequence": "primitives",
+   "map": "Point_Trace",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
    "lookup": "grid_lines",
    "sequence": "primitives",
    "map": "Point_Line_Grid",
@@ -375,6 +396,13 @@
   },
   {
    "lookup": "triangle_line_puzzle",
+   "sequence": "primitives",
+   "map": "Point_Triangle_Context",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "triangle_construction_plate",
    "sequence": "primitives",
    "map": "Point_Triangle_Context",
    "role": "primary",
@@ -473,6 +501,13 @@
   },
   {
    "lookup": "grab_tetrahedron",
+   "sequence": "primitives",
+   "map": "Primitives_Polythedra",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "polyhedra_boundary_plate",
    "sequence": "primitives",
    "map": "Primitives_Polythedra",
    "role": "primary",
@@ -578,6 +613,13 @@
   },
   {
    "lookup": "animatedcubebuilder",
+   "sequence": "primitives",
+   "map": "Point_Animatedcube",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "cube_diagonal_plate",
    "sequence": "primitives",
    "map": "Point_Animatedcube",
    "role": "primary",
@@ -885,6 +927,13 @@
    "by": "ruled"
   },
   {
+   "lookup": "adjustable_landing",
+   "sequence": "transformation",
+   "map": "Trans_Introduction",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
    "lookup": "matrix_4x4_viewer",
    "sequence": "transformation",
    "map": "Trans_Introduction",
@@ -920,10 +969,10 @@
    "by": "ruled"
   },
   {
-   "lookup": "head_crab",
+   "lookup": "translation_cube_demo",
    "sequence": "transformation",
-   "map": "Trans_Introduction",
-   "role": "decoration",
+   "map": "Trans_Translation",
+   "role": "primary",
    "by": "ruled"
   },
   {
@@ -937,8 +986,8 @@
    "lookup": "toruscylinder",
    "sequence": "transformation",
    "map": "Trans_Translation",
-   "role": "unruled",
-   "by": "file"
+   "role": "secondary",
+   "by": "ruled"
   },
   {
    "lookup": "rotation_wall_crossings",
@@ -955,16 +1004,30 @@
    "by": "ruled"
   },
   {
+   "lookup": "transform_composition_workbench",
+   "sequence": "transformation",
+   "map": "Trans_Rotation",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "axial_sweep",
+   "sequence": "transformation",
+   "map": "Trans_Rotation",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
    "lookup": "boolean_tunnel",
    "sequence": "transformation",
-   "map": "Trans_RotationSpectacle",
+   "map": "Trans_Rotation",
    "role": "primary",
    "by": "ruled"
   },
   {
    "lookup": "carousel_cake",
    "sequence": "transformation",
-   "map": "Trans_RotationSpectacle",
+   "map": "Trans_Rotation",
    "role": "primary",
    "by": "ruled"
   },
@@ -979,22 +1042,22 @@
    "lookup": "approach_wall",
    "sequence": "transformation",
    "map": "Trans_Body",
-   "role": "unruled",
-   "by": "floor"
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "carve_grid",
    "sequence": "transformation",
    "map": "Trans_Body",
-   "role": "unruled",
-   "by": "floor"
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "approach_scale",
    "sequence": "transformation",
    "map": "Trans_Body",
-   "role": "unruled",
-   "by": "floor"
+   "role": "primary",
+   "by": "ruled"
   },
   {
    "lookup": "pusher_block",
@@ -1011,11 +1074,18 @@
    "by": "ruled"
   },
   {
+   "lookup": "transformation_airlock",
+   "sequence": "transformation",
+   "map": "Trans_Pit",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
    "lookup": "free_ball_launcher",
    "sequence": "transformation",
    "map": "Trans_Pit",
-   "role": "unruled",
-   "by": "floor"
+   "role": "secondary",
+   "by": "ruled"
   },
   {
    "lookup": "row_3_x",
@@ -1032,10 +1102,17 @@
    "by": "ruled"
   },
   {
-   "lookup": "xyz_coordinates",
+   "lookup": "array_floor_writer",
    "sequence": "array_tutorial",
    "map": "Array",
-   "role": "secondary",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "molnar_cube_study",
+   "sequence": "array_tutorial",
+   "map": "Array",
+   "role": "primary",
    "by": "ruled"
   },
   {
@@ -1046,7 +1123,7 @@
    "by": "ruled"
   },
   {
-   "lookup": "gridagent",
+   "lookup": "xyz_coordinates",
    "sequence": "array_tutorial",
    "map": "Array",
    "role": "secondary",
@@ -1060,10 +1137,31 @@
    "by": "ruled"
   },
   {
-   "lookup": "grid_3d_4x4x4",
+   "lookup": "array_flight_lab",
    "sequence": "array_tutorial",
-   "map": "Array",
-   "role": "secondary",
+   "map": "Tutorial_3D",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "tiling_principles",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Tiling_Floor",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "wall_exception",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Tiling_Walls",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "disco_controls",
+   "sequence": "array_tutorial",
+   "map": "Tutorial_Disco",
+   "role": "primary",
    "by": "ruled"
   },
   {
@@ -1081,151 +1179,18 @@
    "by": "ruled"
   },
   {
-   "lookup": "dna_modern_art_albers_homage_warm",
+   "lookup": "chroma_stack",
    "sequence": "color",
    "map": "Color_Context_Placed",
    "role": "primary",
    "by": "ruled"
   },
   {
-   "lookup": "crackpropagation_ca",
+   "lookup": "color_dna_stack",
    "sequence": "color",
    "map": "Color_Context_Placed",
-   "role": "secondary",
+   "role": "primary",
    "by": "ruled"
-  },
-  {
-   "lookup": "csg_architecture_cavity",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_color_stacks_stack_triadic_primary",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_color_stacks_stack_monochrome_blue",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_color_stacks_stack_value_steps_warm",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_color_furniture_furniture_becker_utensilo_bauhaus",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_color_furniture_furniture_vignelli_metafora_primary",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_color_stacks_stack_simultaneous_contrast",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_color_stacks_stack_complementary_red_green",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_color_furniture_furniture_coco_pendant_warm",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "primitive_assembler",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "primitive_combo_puzzle",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_color_furniture_furniture_lamp_warm_glow",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_modern_art_kandinsky_bauhaus_triad",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_modern_art_rothko_chromatic_field",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_primitive_stack_ps01_bauhaus_totem_green",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dress_selector",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "dna_modern_art_mondrian_de_stijl",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "constraint_sculptor",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "serial_principle",
-   "sequence": "color",
-   "map": "Color_Context_Placed",
-   "role": "unruled",
-   "by": "floor"
   },
   {
    "lookup": "flashlight_demo",
@@ -1382,17 +1347,10 @@
    "by": "ruled"
   },
   {
-   "lookup": "proximity_spawner",
-   "sequence": "color",
-   "map": "Chamber_Color",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "catalyst_target",
-   "sequence": "color",
-   "map": "Chamber_Color",
-   "role": "secondary",
+   "lookup": "pattern_architecture",
+   "sequence": "tiling",
+   "map": "Pattern_Foundry",
+   "role": "primary",
    "by": "ruled"
   },
   {
@@ -1418,6 +1376,13 @@
   },
   {
    "lookup": "pattern_machine_c",
+   "sequence": "tiling",
+   "map": "Pattern_Foundry",
+   "role": "secondary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "pattern_studio_plate",
    "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "secondary",
@@ -1452,7 +1417,7 @@
    "by": "ruled"
   },
   {
-   "lookup": "pattern_studio_plate",
+   "lookup": "drag_catwalk",
    "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "secondary",
@@ -1487,18 +1452,11 @@
    "by": "ruled"
   },
   {
-   "lookup": "drag_catwalk",
+   "lookup": "wall_drawing_291",
    "sequence": "tiling",
    "map": "Pattern_Foundry",
    "role": "secondary",
    "by": "ruled"
-  },
-  {
-   "lookup": "wall_drawing_291",
-   "sequence": "tiling",
-   "map": "Pattern_Foundry",
-   "role": "unruled",
-   "by": "floor"
   },
   {
    "lookup": "grid_model",
@@ -1648,6 +1606,13 @@
    "by": "ruled"
   },
   {
+   "lookup": "grid_3d_4x4x4",
+   "sequence": "tiling",
+   "map": "Ribbon_Patterns_01",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
    "lookup": "grid3d",
    "sequence": "tiling",
    "map": "Ribbon_Patterns_01",
@@ -1774,17 +1739,10 @@
    "by": "ruled"
   },
   {
-   "lookup": "minimalglitch",
+   "lookup": "fabric_shader_studio",
    "sequence": "tiling",
    "map": "Ribbon_Patterns_03",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "textureglitch",
-   "sequence": "tiling",
-   "map": "Ribbon_Patterns_03",
-   "role": "secondary",
+   "role": "primary",
    "by": "ruled"
   },
   {
@@ -1796,6 +1754,20 @@
   },
   {
    "lookup": "RotatingLaser",
+   "sequence": "tiling",
+   "map": "Ribbon_Patterns_03",
+   "role": "secondary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "minimalglitch",
+   "sequence": "tiling",
+   "map": "Ribbon_Patterns_03",
+   "role": "secondary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "textureglitch",
    "sequence": "tiling",
    "map": "Ribbon_Patterns_03",
    "role": "secondary",
@@ -1856,13 +1828,6 @@
    "map": "Ribbon_Patterns_03",
    "role": "secondary",
    "by": "ruled"
-  },
-  {
-   "lookup": "fabric_shader_studio",
-   "sequence": "tiling",
-   "map": "Ribbon_Patterns_03",
-   "role": "primary",
-   "by": "floor"
   },
   {
    "lookup": "tangent_slope_workbench",
@@ -2785,8 +2750,8 @@
    "lookup": "parametric_pendulum_waves",
    "sequence": "forces",
    "map": "Change_Choreography",
-   "role": "unruled",
-   "by": "floor"
+   "role": "secondary",
+   "by": "ruled"
   },
   {
    "lookup": "orbital_mechanics_demo",
@@ -3048,6 +3013,13 @@
    "by": "ruled"
   },
   {
+   "lookup": "head_crab",
+   "sequence": "forces",
+   "map": "VFM_08_Arena",
+   "role": "secondary",
+   "by": "ruled"
+  },
+  {
    "lookup": "queer_cylinder_target",
    "sequence": "forces",
    "map": "VFM_08_Arena",
@@ -3125,6 +3097,13 @@
    "by": "ruled"
   },
   {
+   "lookup": "laundry_line_cathedral",
+   "sequence": "formfinding",
+   "map": "FormFinding_Catenary",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
    "lookup": "catenoid",
    "sequence": "formfinding",
    "map": "FormFinding_Catenary",
@@ -3133,13 +3112,6 @@
   },
   {
    "lookup": "helicoid",
-   "sequence": "formfinding",
-   "map": "FormFinding_Catenary",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "laundry_line_cathedral",
    "sequence": "formfinding",
    "map": "FormFinding_Catenary",
    "role": "secondary",
@@ -3163,7 +3135,7 @@
    "lookup": "frozen_glass_vessel",
    "sequence": "formfinding",
    "map": "FormFinding_Relaxation",
-   "role": "secondary",
+   "role": "primary",
    "by": "ruled"
   },
   {
@@ -3198,7 +3170,7 @@
    "lookup": "max_q_basin_room",
    "sequence": "formfinding",
    "map": "FormFinding_Annealing",
-   "role": "secondary",
+   "role": "primary",
    "by": "ruled"
   },
   {
@@ -3209,17 +3181,17 @@
    "by": "ruled"
   },
   {
-   "lookup": "gradient_descent_optimizer",
+   "lookup": "self_shaping_forge",
    "sequence": "formfinding",
    "map": "FormFinding_Forge",
    "role": "primary",
    "by": "ruled"
   },
   {
-   "lookup": "self_shaping_forge",
+   "lookup": "gradient_descent_optimizer",
    "sequence": "formfinding",
    "map": "FormFinding_Forge",
-   "role": "secondary",
+   "role": "primary",
    "by": "ruled"
   },
   {
@@ -3741,13 +3713,6 @@
    "by": "ruled"
   },
   {
-   "lookup": "SoundscapeRadioRack",
-   "sequence": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
    "lookup": "petri_dish_worms",
    "sequence": "wavefunctions",
    "map": "WaveFunctions_Synthesis_Lab",
@@ -3788,6 +3753,13 @@
    "map": "WaveFunctions_Synthesis_Lab",
    "role": "secondary",
    "by": "ruled"
+  },
+  {
+   "lookup": "ambient_patch",
+   "sequence": "wavefunctions",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "seed_replay_demo",
@@ -3895,6 +3867,13 @@
    "by": "ruled"
   },
   {
+   "lookup": "sampling_hoppers",
+   "sequence": "randomness",
+   "map": "Random_Remove",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
    "lookup": "ten_print_maze_3d",
    "sequence": "randomness",
    "map": "Randomness_10_PRINT_Algorithm",
@@ -3937,6 +3916,13 @@
    "by": "floor"
   },
   {
+   "lookup": "ten_print_structure",
+   "sequence": "randomness",
+   "map": "Randomness_10_PRINT_Algorithm",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
    "lookup": "dice_throw",
    "sequence": "randomness",
    "map": "Random_Cubes",
@@ -3963,6 +3949,20 @@
    "map": "Random_Cubes",
    "role": "secondary",
    "by": "ruled"
+  },
+  {
+   "lookup": "paired_dice_column",
+   "sequence": "randomness",
+   "map": "Random_Cubes",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "continuing_die",
+   "sequence": "randomness",
+   "map": "Random_Cubes",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "random_decay_multimesh",
@@ -4028,6 +4028,13 @@
    "by": "ruled"
   },
   {
+   "lookup": "random_position_rails",
+   "sequence": "randomness",
+   "map": "Random_Walk",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
    "lookup": "distribution_sampler",
    "sequence": "randomness",
    "map": "Random_Gaussian",
@@ -4063,21 +4070,21 @@
    "by": "ruled"
   },
   {
-   "lookup": "bubbles_random",
-   "sequence": "randomness",
-   "map": "Random_Mushrooms",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
    "lookup": "silhouette_arrivals",
    "sequence": "randomness",
    "map": "Random_Mushrooms",
-   "role": "secondary",
+   "role": "primary",
    "by": "ruled"
   },
   {
    "lookup": "couture_comparison",
+   "sequence": "randomness",
+   "map": "Random_Mushrooms",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "bubbles_random",
    "sequence": "randomness",
    "map": "Random_Mushrooms",
    "role": "secondary",
@@ -4119,6 +4126,13 @@
    "by": "ruled"
   },
   {
+   "lookup": "pollock_painting_in_3d",
+   "sequence": "randomness",
+   "map": "Randomness_Examples_of_Randomness",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
    "lookup": "monte_carlo_dartboard",
    "sequence": "randomness",
    "map": "Randomness_Examples_of_Randomness",
@@ -4126,24 +4140,17 @@
    "by": "ruled"
   },
   {
-   "lookup": "pollock_painting_in_3d",
+   "lookup": "pipe_dream",
    "sequence": "randomness",
    "map": "Randomness_Examples_of_Randomness",
-   "role": "secondary",
+   "role": "primary",
    "by": "ruled"
   },
   {
    "lookup": "extreme_randomness",
    "sequence": "randomness",
    "map": "Randomness_Examples_of_Randomness",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "pipe_dream",
-   "sequence": "randomness",
-   "map": "Randomness_Examples_of_Randomness",
-   "role": "secondary",
+   "role": "primary",
    "by": "ruled"
   },
   {
@@ -4203,6 +4210,13 @@
    "by": "ruled"
   },
   {
+   "lookup": "door_timing_trials",
+   "sequence": "randomness",
+   "map": "Random_Game",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
    "lookup": "randompoint",
    "sequence": "noise",
    "map": "Random_Noise_Types",
@@ -4229,6 +4243,13 @@
    "map": "Random_Noise_Types",
    "role": "primary",
    "by": "ruled"
+  },
+  {
+   "lookup": "related_weather",
+   "sequence": "noise",
+   "map": "Random_Noise_Types",
+   "role": "unruled",
+   "by": "floor"
   },
   {
    "lookup": "MeltingBerniniScene",
@@ -4315,6 +4336,62 @@
    "by": "ruled"
   },
   {
+   "lookup": "library_rack",
+   "sequence": "shaders",
+   "map": "Shader_01_Shaping",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "shader_01_shaping",
+   "sequence": "shaders",
+   "map": "Shader_01_Shaping",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "shader_11_queerrubber",
+   "sequence": "shaders",
+   "map": "Shader_11_QueerRubber",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "basin_water",
+   "sequence": "shaders",
+   "map": "Shader_09_FBM",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "shader_09_fbm",
+   "sequence": "shaders",
+   "map": "Shader_09_FBM",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "shader_05_patterns",
+   "sequence": "shaders",
+   "map": "Shader_05_Patterns",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "shader_12_pinkextravaganza",
+   "sequence": "shaders",
+   "map": "Shader_12_PinkExtravaganza",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "shader_10_reactiondiffusion",
+   "sequence": "shaders",
+   "map": "Shader_10_ReactionDiffusion",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
    "lookup": "ca_rule_explorer",
    "sequence": "cellularautomata",
    "map": "CA_Introduction",
@@ -4333,13 +4410,6 @@
    "sequence": "cellularautomata",
    "map": "CA_Introduction",
    "role": "primary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "grid_substrate_runner",
-   "sequence": "cellularautomata",
-   "map": "CA_Introduction",
-   "role": "secondary",
    "by": "ruled"
   },
   {
@@ -4540,6 +4610,13 @@
   },
   {
    "lookup": "volumetric_fog_ca",
+   "sequence": "cellularautomata",
+   "map": "CA_EdgeOfChaos",
+   "role": "secondary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "crackpropagation_ca",
    "sequence": "cellularautomata",
    "map": "CA_EdgeOfChaos",
    "role": "secondary",
@@ -5008,10 +5085,31 @@
    "by": "ruled"
   },
   {
+   "lookup": "form_grammar_family",
+   "sequence": "lsystems",
+   "map": "LSystems_Shape_Grammars",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
+   "lookup": "form_grammar_canopy",
+   "sequence": "lsystems",
+   "map": "LSystems_Shape_Grammars",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
    "lookup": "ten_print_textile",
    "sequence": "lsystems",
    "map": "Assemblage_Same_Desire",
    "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "grid_substrate_runner",
+   "sequence": "lsystems",
+   "map": "Assemblage_Same_Desire",
+   "role": "secondary",
    "by": "ruled"
   },
   {
@@ -5253,6 +5351,13 @@
    "by": "ruled"
   },
   {
+   "lookup": "gridagent",
+   "sequence": "softbodies",
+   "map": "SoftBodies_Playground_of_Joy",
+   "role": "secondary",
+   "by": "ruled"
+  },
+  {
    "lookup": "turing_pattern_generator",
    "sequence": "softbodies",
    "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
@@ -5435,6 +5540,13 @@
    "by": "ruled"
   },
   {
+   "lookup": "iso_portal_console",
+   "sequence": "isosurfaces",
+   "map": "ISO_PortalLandscape",
+   "role": "secondary",
+   "by": "floor"
+  },
+  {
    "lookup": "mc_inside_cave",
    "sequence": "isosurfaces",
    "map": "ISO_Caves",
@@ -5489,6 +5601,13 @@
    "map": "ISO_CaveGeneration",
    "role": "secondary",
    "by": "ruled"
+  },
+  {
+   "lookup": "iso_specimen_stage",
+   "sequence": "isosurfaces",
+   "map": "ISO_CaveGeneration",
+   "role": "secondary",
+   "by": "floor"
   },
   {
    "lookup": "animated_noise_explorer",
@@ -5596,6 +5715,13 @@
    "by": "ruled"
   },
   {
+   "lookup": "boolean_burrow",
+   "sequence": "boolean_surfaces",
+   "map": "Boolean_Works",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
    "lookup": "sdf_cavern_room",
    "sequence": "boolean_surfaces",
    "map": "Boolean_Works",
@@ -5617,7 +5743,7 @@
    "by": "ruled"
   },
   {
-   "lookup": "boolean_burrow",
+   "lookup": "csg_architecture_cavity",
    "sequence": "boolean_surfaces",
    "map": "Boolean_Works",
    "role": "secondary",
@@ -5677,13 +5803,6 @@
    "sequence": "swarmintelligence",
    "map": "SwarmIntelligence_Boids_Algorithm",
    "role": "primary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "boid_flocking",
-   "sequence": "swarmintelligence",
-   "map": "SwarmIntelligence_Boids_Algorithm",
-   "role": "secondary",
    "by": "ruled"
   },
   {
@@ -6075,7 +6194,7 @@
    "lookup": "angle_sum_triangle",
    "sequence": "foundationscrisis",
    "map": "Euclid_Parallel",
-   "role": "secondary",
+   "role": "primary",
    "by": "ruled"
   },
   {
@@ -6152,8 +6271,15 @@
    "lookup": "hilbert_hotel",
    "sequence": "foundationscrisis",
    "map": "Russell_Paradox",
-   "role": "secondary",
+   "role": "primary",
    "by": "ruled"
+  },
+  {
+   "lookup": "russell_paradox_workbench",
+   "sequence": "foundationscrisis",
+   "map": "Russell_Paradox",
+   "role": "primary",
+   "by": "floor"
   },
   {
    "lookup": "godel_sentence_machine",
@@ -6240,13 +6366,6 @@
    "by": "ruled"
   },
   {
-   "lookup": "constructive_proof",
-   "sequence": "foundationscrisis",
-   "map": "Brouwer_Intuitionism",
-   "role": "primary",
-   "by": "ruled"
-  },
-  {
    "lookup": "brouwer_choice_sequence",
    "sequence": "foundationscrisis",
    "map": "Brouwer_Intuitionism",
@@ -6254,7 +6373,21 @@
    "by": "ruled"
   },
   {
+   "lookup": "constructive_proof",
+   "sequence": "foundationscrisis",
+   "map": "Brouwer_Intuitionism",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
    "lookup": "cantor_diagonal_workbench",
+   "sequence": "foundationscrisis",
+   "map": "Brouwer_Intuitionism",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "excluded_middle_demo",
    "sequence": "foundationscrisis",
    "map": "Brouwer_Intuitionism",
    "role": "secondary",
@@ -6268,18 +6401,11 @@
    "by": "ruled"
   },
   {
-   "lookup": "excluded_middle_demo",
+   "lookup": "intractable_evidence",
    "sequence": "foundationscrisis",
    "map": "Brouwer_Intuitionism",
    "role": "secondary",
    "by": "ruled"
-  },
-  {
-   "lookup": "intractable_evidence",
-   "sequence": "foundationscrisis",
-   "map": "Brouwer_Intuitionism",
-   "role": "unruled",
-   "by": "floor"
   },
   {
    "lookup": "both_true_gate",
@@ -6331,24 +6457,17 @@
    "by": "ruled"
   },
   {
-   "lookup": "goedel_atrium",
-   "sequence": "foundationscrisis",
-   "map": "Crisis_Synthesis",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "russell_paradox_workbench",
-   "sequence": "foundationscrisis",
-   "map": "Crisis_Synthesis",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
    "lookup": "bifurcation_diagram",
    "sequence": "foundationscrisis",
    "map": "Crisis_Synthesis",
-   "role": "secondary",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "goedel_atrium",
+   "sequence": "foundationscrisis",
+   "map": "Crisis_Synthesis",
+   "role": "primary",
    "by": "ruled"
   },
   {
@@ -6390,8 +6509,8 @@
    "lookup": "orange_and_apples",
    "sequence": "qfeplaboratory",
    "map": "QFEP_Introduction",
-   "role": "unruled",
-   "by": "floor"
+   "role": "secondary",
+   "by": "ruled"
   },
   {
    "lookup": "shannon_workbench",
@@ -6401,14 +6520,7 @@
    "by": "ruled"
   },
   {
-   "lookup": "snap_cube_puzzle",
-   "sequence": "qfeplaboratory",
-   "map": "QFEP_F_Term",
-   "role": "secondary",
-   "by": "ruled"
-  },
-  {
-   "lookup": "snap_tetra_puzzle",
+   "lookup": "snap_tetrahedron_puzzle",
    "sequence": "qfeplaboratory",
    "map": "QFEP_F_Term",
    "role": "secondary",
@@ -6590,14 +6702,14 @@
    "by": "ruled"
   },
   {
-   "lookup": "reactive_particles",
+   "lookup": "qfep_reactor",
    "sequence": "qfeplaboratory",
    "map": "QFEP_Sandbox",
-   "role": "secondary",
+   "role": "primary",
    "by": "ruled"
   },
   {
-   "lookup": "qfep_reactor",
+   "lookup": "reactive_particles",
    "sequence": "qfeplaboratory",
    "map": "QFEP_Sandbox",
    "role": "secondary",
@@ -6733,6 +6845,13 @@
    "lookup": "MolecularDesigner",
    "sequence": "postfoundationscrisis",
    "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+   "role": "primary",
+   "by": "ruled"
+  },
+  {
+   "lookup": "assembly_return",
+   "sequence": "postfoundationscrisis",
+   "map": "PostCrisis_Synthesis",
    "role": "primary",
    "by": "ruled"
   },

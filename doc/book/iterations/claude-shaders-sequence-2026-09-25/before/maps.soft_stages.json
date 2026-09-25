@@ -432,42 +432,6 @@
         "comment": "Catalyst foe variant for the noise sequence."
       }
     },
-    "shaders": {
-      "order": 8.5,
-      "ecosystem": {
-        "allow_flags": [],
-        "nature_kingdoms": [
-          "flower",
-          "tree",
-          "fungus"
-        ],
-        "vegetation_density": 0.3,
-        "terrain_mode": "noise",
-        "ambient_preset": "environmental_entropy"
-      },
-      "hazards": {
-        "unlock_types": [],
-        "spawner_behavior": "active",
-        "personality_shift": {
-          "octapod_crawler": "wary"
-        },
-        "max_concurrent": 2
-      },
-      "capability": {
-        "capacity_level": 4,
-        "hand_verbs": [],
-        "catalyst_mode": null,
-        "movement_abilities": [
-          "teleport",
-          "climb"
-        ],
-        "catalyst_affordances": []
-      },
-      "enemies": {
-        "kind": "swarm",
-        "comment": "No foe of its own; the shader halls are for looking. Added 2026-09-25 with the sequence."
-      }
-    },
     "cellularautomata": {
       "order": 9,
       "ecosystem": {
