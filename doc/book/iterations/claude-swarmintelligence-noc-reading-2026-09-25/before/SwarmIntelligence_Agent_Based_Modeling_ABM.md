@@ -16,12 +16,10 @@ Next vary ANTS. The control replaces the population but leaves its field behind.
 
 The MODE control offers three behaviours within this model family. It does not turn the room into a language for inventing arbitrary agents. A useful comparison still begins by naming exactly which rule or condition has changed.
 
-An agent can be a convenient unit without being an adequate model of a person.[^braitenberg] These agents inherit the same limited sensory world, and the shared grid decides which traces can count. A simulation of people would need an argument for those omissions, not simply a change of labels from ants to citizens.
+An agent can be a convenient unit without being an adequate model of a person. These agents inherit the same limited sensory world, and the shared grid decides which traces can count. A simulation of people would need an argument for those omissions, not simply a change of labels from ants to citizens.
 
 As a proposed extension, give two groups different sensing capacities while keeping the environment shared. Would a path that looks equally available from above remain equally available from within each agent’s world?
 
 <!-- @ -->
 
 The next colony makes one relation particularly clear: information about home and food travels in different channels.
-
-[^braitenberg]: Valentino Braitenberg built the classic version of this warning in 1984: vehicles with two sensors and two motors, wired straight or crosswise, that any observer describes as fearful, aggressive or loving. He called it synthetic psychology, and noted that it is downhill to invent such a creature and uphill to analyse one; the attribution comes free with the watching. Reynolds's vehicles, and these ants, descend from his.

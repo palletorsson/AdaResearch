@@ -2,7 +2,7 @@
 
 <!-- @boid_manager -->
 
-Something is already through the room when you arrive. A hundred grey prisms, each about the length of an arm, moving at anything between a run and a sprint — through the walls, through the floor, through you. They came in through the wall: they were dealt into a box twenty metres wide inside a hall thirteen across, half the school began under the floor, and some of it is outside the hall now. Hold out your hand. Nothing turns. Not one prism changes its heading for a body, and none of them has ever met a wall. The only edge they answer to is a box fifty metres on a side, and they feel it only in its last five.[^containment]
+Something is already through the room when you arrive. A hundred grey prisms, each about the length of an arm, moving at anything between a run and a sprint — through the walls, through the floor, through you. They came in through the wall: they were dealt into a box twenty metres wide inside a hall thirteen across, half the school began under the floor, and some of it is outside the hall now. Hold out your hand. Nothing turns. Not one prism changes its heading for a body, and none of them has ever met a wall. The only edge they answer to is a box fifty metres on a side, and they feel it only in its last five.
 
 That is the encounter, and it is a refusal. Whatever holds this flock together, it is not the room and it is not you.
 
@@ -14,7 +14,7 @@ Find the boid with the yellow ring. Its three arrows are the three things it is 
 
 Now move one slider and leave the other two alone. SEP first. Watch the arrow at your ringed boid before you look for a change in the whole flock; a small local change is real even when the population stays recognisably flock-like throughout. Return the slider to where it was, then try ALIGN, then COH. One change at a time is what lets a local response be connected to the population's movement. Then keep the three weights where they are and move RADIUS. The same three requests, the same weights, and a different flock — because a different set of neighbours is now inside each boid's calculation. Before asking what the flock wants, ask who each agent is able to see.
 
-Here is the rule you have been watching. Each boid, on its own, looks at the neighbours inside its radius and adds up three requests, each multiplied by a weight.[^cost] It moves along the sum. A slider changes the weight of one request for everyone; it does not tell the flock anything. The large moving shape is what those many small calculations look like when they meet.
+Here is the rule you have been watching. Each boid, on its own, looks at the neighbours inside its radius and adds up three requests, each multiplied by a weight. It moves along the sum. A slider changes the weight of one request for everyone; it does not tell the flock anything. The large moving shape is what those many small calculations look like when they meet.
 
 Craig Reynolds set the three down in 1987 and called the agents boids: separation, alignment, cohesion.[^1] The name arrives late here on purpose. You have already watched all three disagree, and you have already seen that the same three words make a different animal when the radius changes.
 
@@ -24,16 +24,10 @@ Now ask where the rule ends, because in this hall it ends three different ways. 
 
 Alignment is not consent, and cohesion is not a complete account of belonging. These agents have no way to refuse a relation, remember harm or ask another agent for space. The model makes a few geometrical relationships legible because it omits many other kinds.
 
-Try letting separation win for a while. Instead of judging every dispersed flock as failed, ask what the extra distance lets you see. Then take the other two out instead, ALIGN and COH to nothing: the thirty avoid one another until no one is within sight, and each flies straight, a gas. Put them back and take SEP to nothing: they close on their middle and stay there, a clot. Cooperation alone and competition alone are both simple; the flock needs the disagreement. When you want to compare, return the slider rather than pressing RESET: the panel's RESET deals a fresh scatter, not the same one, while the tank's RESET deals the same scatter every time. Two buttons with one name, and only one of them gives you back your starting point. It gives you back the start and nothing after it. Run the tank twice from that scatter and time the schools: no two frames are the same length, a flock magnifies any difference it is given, and within five seconds the two runs have nothing in common. Lorenz found this in 1961 by retyping a number to three decimals instead of six.[^lorenz]
+Try letting separation win for a while. Instead of judging every dispersed flock as failed, ask what the extra distance lets you see. When you want to compare, return the slider rather than pressing RESET: the panel's RESET deals a fresh scatter, not the same one, while the tank's RESET deals the same scatter every time. Two buttons with one name, and only one of them gives you back your starting point.
 
 <!-- @ -->
 
 The next room broadens the model: an agent can have an internal state, and the environment can remember what it did.
 
-[^lorenz]: Measured with `commons/testing/probe_boids_tank_divergence.gd`: from one seeded scatter, two runs with identical fixed steps stay identical to the byte for twenty seconds, and two runs whose frames differ in length by up to a fifth part by two millimetres after one step, sixteen centimetres after one second and more than a metre, the width of the tank, after five. Edward Lorenz, "Deterministic Nonperiodic Flow" (1963), and the 1961 rerun typed to three decimals that led to it.
-
 [^1]: Craig W. Reynolds, "Flocks, Herds, and Schools: A Distributed Behavioral Model", *Computer Graphics* 21(4), SIGGRAPH 1987. The three rules and the word "boids" are his.
-
-[^containment]: The push begins at zero on the margin and reaches its full strength at the wall, so a boid meets the box gradually; Reynolds called this containment. *Nature of Code* builds it as a desire to move away from the wall that is switched off everywhere else, because a desire for zero speed would be a brake, not an absence.
-
-[^cost]: To know who is inside its radius, each boid measures its distance to every other, so a hundred boids make nearly ten thousand measurements a tick. The tank cheats honestly: it sorts its fish into cells and asks only the neighbouring cells. Flocks of thousands exist only that way.

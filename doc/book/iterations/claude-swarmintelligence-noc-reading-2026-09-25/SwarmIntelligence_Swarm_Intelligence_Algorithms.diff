@@ -1,0 +1,11 @@
+--- before/SwarmIntelligence_Swarm_Intelligence_Algorithms.md
++++ after/SwarmIntelligence_Swarm_Intelligence_Algorithms.md
+@@ -6,7 +6,7 @@
+ 
+ Choose either prey or predators and watch its count alongside its visible behaviour. Follow an encounter with food or another organism, then return to the population readout. A crowded scene can hide a falling population; a count can reveal a change that is difficult to follow one body at a time.
+ 
+-The organisms move, forage, encounter predators and reproduce. Traits can pass to offspring through a simplified combination and mutation process. These local events give you one explanation for changes in the population. Births, feeding and losses are happening at particular places, even when the readout reports only a total.
++The organisms move, forage, encounter predators and reproduce. Traits can pass to offspring through a simplified combination and mutation process. The traits are five numbers: a top speed, a turning limit, how far a body can see, and how much it wants to flee and to seek. Predator and prey steer by one rule, push on the difference between the velocity you want and the one you have, with the sign of the wanting reversed. Nothing selects the prey's numbers on purpose; the predators do it by eating. These local events give you one explanation for changes in the population. Births, feeding and losses are happening at particular places, even when the readout reports only a total.
+ 
+ Try alternating your scale of attention. Spend a short interval following an encounter, then a similar interval watching the count. The encounter offers a candidate cause; the count reports an aggregate consequence without identifying its cause. If you cannot connect the two confidently, preserve that uncertainty. A useful observation might be “the prey count recovered while I watched this region”, rather than “this particular birth saved the population”. The smaller statement keeps the evidence available for comparison.
+ 

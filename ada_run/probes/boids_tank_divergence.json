@@ -1,0 +1,31 @@
+{
+  "A_moved_max_m": 1.02259123325348,
+  "A_vs_B_by_checkpoint_max_sep_m": {
+    "0": 0.0,
+    "1": 0.0,
+    "10": 0.0,
+    "1200": 0.0,
+    "300": 0.0,
+    "60": 0.0
+  },
+  "A_vs_B_max_separation_m": 0.0,
+  "A_vs_B_mean_separation_m": 0.0,
+  "A_vs_C_by_checkpoint_max_sep_m": {
+    "0": 0.0,
+    "1": 0.00235150544904172,
+    "10": 0.00704260170459747,
+    "1200": 1.16703915596008,
+    "300": 1.11578333377838,
+    "60": 0.159243285655975
+  },
+  "A_vs_C_centroid_separation_m": 0.106319226324558,
+  "A_vs_C_max_separation_m": 1.16703915596008,
+  "A_vs_C_mean_separation_m": 0.650282207131386,
+  "boids": 30,
+  "date": "2026-09-25",
+  "dt": 0.0166666666666667,
+  "jitter": 0.2,
+  "probe": "boids_tank_divergence",
+  "steps": 1200,
+  "verdict": "30 boids, A moved up to 1.023 m over the run (a readback: zero here means nothing was simulated); same scatter at build: yes (max 0.000000 m); identical steps stay identical: yes (max 0.0000 m after 1200 steps; first parted at step never); jittered steps diverge from A: yes (mean 0.6503 m, max 1.1670 m)"
+}
