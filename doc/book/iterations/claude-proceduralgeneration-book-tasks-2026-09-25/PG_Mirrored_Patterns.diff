@@ -1,0 +1,21 @@
+--- before/PG_Mirrored_Patterns.md
++++ after/PG_Mirrored_Patterns.md
+@@ -23,7 +23,7 @@
+ 
+ <!-- @rhizomatic_maze_space -->
+ 
+-Now move your attention from the surface to the network beside it. NETWORK changes the connection policy over six fixed starting positions. The opening is a tree. Its unique connections give one connected component and no cycle. The next policy admits more nearby connections; the third severs connections across a central gap and separates the remaining pieces.
++Now move your attention from the surface to the network beside it. NETWORK changes the connection policy over six fixed starting positions. The opening is a tree. Its unique connections give one connected component and no cycle. The next policy, which the desk calls rhizome, lets every site join its three nearest neighbours; the third severs connections across a central gap and separates the remaining pieces.[^rhizome]
+ 
+ Watch the counts before deciding what the silhouette means. The desk reports distinct undirected connections, components and independent cycles. The generator may store an edge in both directions; those duplicate records do not create another physical route. For this finite undirected graph, the cycle count is `edges - nodes + components`.
+ 
+@@ -35,6 +35,8 @@
+ 
+ The pattern tunnel remains a bodily application in the collection. Its surface can be dressed while its supporting route persists. A reflected image does not by itself connect two rooms; a graph edge does not by itself guarantee that its tunnel has sufficient clearance. Geometry, connection and access can be composed, but they require their own checks.
+ 
+-Across this sequence, we have selected, guided, branched, connected, carved, sampled and copied. Each operation gives us something to build with and something more precise to question. What bodies are possible now? We can answer with a construction, try its limits, and carry the unresolved part into the next hall.
++Across this sequence, we have selected, guided, branched, connected, carved, sampled and copied. Each operation gives us something to build with and something more precise to question. What bodies are possible now? We can answer with a construction, try its limits, and carry the unresolved part into the next hall. In Soft Bodies, next, the record stays fixed while the positions move: a cube keeps every prescribed connection and still gives way. Ask what its support and collider must supply before believing the surface.
+ 
+ <!-- @ -->
++
++[^rhizome]: The rhizome is Gilles Deleuze and Félix Guattari’s figure, from *A Thousand Plateaus* (1980), defined against the tree: no root, any point joinable to any other. That opposition is why the opening here is a tree, and why the second policy is named for what a tree is not.

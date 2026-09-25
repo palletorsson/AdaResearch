@@ -1,0 +1,11 @@
+--- before/PG_Percolation_Network.md
++++ after/PG_Percolation_Network.md
+@@ -16,7 +16,7 @@
+ 
+ The update reads the old grid while writing another. An occupied site becomes flowing when a permitted neighbour carries flow. One press advances one generation; it does not instantly colour every reachable site. The source remains supplied. Flow values and state transitions have their own rules beyond the simpler question of whether a path exists.
+ 
+-Press LATTICE. The comparison expands into an 18 by 18 by 18 field, supplied from one z face. STEP lets you follow its spread. DENSITY restarts from the same seeded sequence of occupation draws at a different cutoff: 0.2, 0.4 or 0.6. A larger cutoff admits more sites. The readout counts sites reached and those reached on the opposite face. The desk permits 64 generations before another reset.
++Press LATTICE. The comparison expands into an 18 by 18 by 18 field, supplied along one whole side of the cube. STEP lets you follow its spread. DENSITY restarts from the same seeded sequence of occupation draws at a different cutoff: 0.2, 0.4 or 0.6. A larger cutoff admits more sites. The readout counts sites reached and those on the side facing the source. The desk permits 64 generations before another reset.
+ 
+ One such field cannot establish a universal critical threshold. Its seed, dimensions, boundary source and neighbourhood are part of the experiment. We can learn from a failed crossing without claiming that a whole kind of space has become impossible. Keep changing one condition at a time, and name the condition when you describe the result.
+ 

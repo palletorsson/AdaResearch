@@ -143,9 +143,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Caves_Mazes"
       ],
@@ -160,7 +160,7 @@
       "proposal": "Make the generator carry the claim: 'The generator's own record proves a route in its array: every cell was visited and only walls between visited cells were removed, so entrance and exit lie on one connected tree. Whether your shoulders and head clear every generated turn is a separate question; the museum aisle beside it lets you continue while that stays open.'",
       "evidence": "commons/maps/PG_Caves_Mazes/final.md:37; commons/maps/PG_Caves_Mazes/walked.md:1-3 ('Desktop encounter record', 'DesktopPlayer pointer input'); algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator_vr.gd:280-306 (_generation_step visits every cell, pops the stack, then _create_entrance_exit) and :335-344 (entrance at (1,0), exit at (maze_width-2, maze_height-1)). No other 'desktop' aside exists in the seven chapters (grep).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The generator's own record proves a route in its array: every cell was visited, and only walls between visited cells were removed, so entrance and exit lie on one connected tree. ...'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -171,9 +171,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Space_Colonization"
       ],
@@ -188,7 +188,7 @@
       "proposal": "'Thin threads run from the root to each point; the short gold stubs are their unit directions, one metre each; the white segment proposes the half-metre step.'",
       "evidence": "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/colonization_lesson.gd:112 (request rod site->point, material '896d80', radius 0.009), :113 (unit direction rod, gold 'f1d57b', radius 0.025), :109 (chosen site sphere, gold), :115-116 (step rod and endpoint, white 'f2fcff'); final.md:7.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Thin threads run from the root to each point: those are the requests. The short gold stubs at the root are their unit directions, one metre each; the white segment proposes the half-metre step.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -199,9 +199,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Branching_Growth"
       ],
@@ -216,7 +216,7 @@
       "proposal": "'Keep the organic space beside it in view.' (or 'the Organic Space work nearby').",
       "evidence": "commons/maps/PG_Branching_Growth/final.md:25; commons/artifacts/registry/alternative_geometries.json entry organic_space, name 'Organic Space'; commons/maps/PG_Branching_Growth/map_data.json interactables row 15 'organic_space:0:0:0.5'.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Keep the Organic Space work nearby in view.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -227,9 +227,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Mirrored_Patterns"
       ],
@@ -244,7 +244,7 @@
       "proposal": "Add one sentence: 'In Soft Bodies, next, the record stays fixed while the positions move: a cube keeps every prescribed connection and still gives way. Ask what its support and collider must supply before believing the surface.'",
       "evidence": "commons/maps/PG_Mirrored_Patterns/final.md:38; commons/maps/SoftBodies_Soft_Body_Deformation/final.md:17 ('The surface connectivity remains prescribed. Yielding is a new capability') and :25 ('the collider, support and pinned points belong to this body's conditions'); in-sequence closers naming the next hall: PG_Genetic_Evolution:42, PG_Space_Colonization:45, PG_Branching_Growth:27, PG_Percolation_Network:27, PG_Caves_Mazes:39, PG_Sculpted_Forms:41.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'In Soft Bodies, next, the record stays fixed while the positions move: a cube keeps every prescribed connection and still gives way. Ask what its support and collider must supply before believing the surface.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -255,9 +255,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Genetic_Evolution"
       ],
@@ -272,7 +272,7 @@
       "proposal": "Open with 'Each candidate has a genome: a list of primitive names and parameters. A builder reads that list to make the visible body. An evaluator reads it to produce a number. These readers can notice different things.' Then one bridge: 'The six-specimen family in Shape Grammars built without judging; the Forge's height test in Form Finding showed a result can hold and still fail a chosen criterion. Here a score decides which descriptions get another generation.'",
       "evidence": "commons/maps/PG_Genetic_Evolution/final.md:7; previous hall is Assemblage_Same_Desire (sequences/lsystems.json); commons/maps/LSystems_Shape_Grammars/final.md:7 ('The first six specimens form a family') and :61 (the Form Finding -> Genetic bridge already made there); commons/maps/FormFinding_Forge/final.md:9 ('asks for height as well as a period of sufficiently small movement. A low heap can therefore be stable and still fail its test').",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the paragraph leads with genome / builder / evaluator, then one bridge (Shape Grammars' six-specimen family, the Forge's height test in Form Finding).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -283,9 +283,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Genetic_Evolution"
       ],
@@ -300,7 +300,7 @@
       "proposal": "One sentence on the deck: 'The cased screen standing below the decks scans the older population display; it reads no score from this desk.' Or drop the science_screen token from row 22 of the map.",
       "evidence": "commons/maps/PG_Genetic_Evolution/map_data.json interactables row 22 'science_screen:180:1.5#mode:grid' inside the raised structure (rows 20-33, height-3 cells, wp ramps at rows 23/30/32); commons/maps/PG_Genetic_Evolution/walked.md ('The secondary science screen is retained, with its scoring integration still open'); commons/maps/sequences/proceduralgeneration.json artifact_groups rationale 'original grid screen retained as secondary'; commons/artifacts/science_screen/science_screen.gd:449-451 (generic 'grid' mode).",
       "review": "amended by a code checker (cited files only): The token and its neglect hold: PG_Genetic_Evolution interactables row 22 col 13 = science_screen:180:1.5#mode:grid; final.md has no 'screen' anywhere; walked.md:7 'The secondary science screen is retained, with its scoring integration still open'; proceduralgeneration.json:221 'original grid screen retained as secondary'; science_screen.gd:449-451 'grid' is the generic GRID VIEW mode. Correction on where it stands: structure row 22 col 13 is a height-1 floor cell inside the walled rear compound (wall ring rows 20-33), not one of the height-3 deck cells; the screen is lifted by its own 1.5 m y offset, beside the decks rather than on them.",
-      "notes": "",
+      "notes": "Applied 2026-09-25 (prose): 'A cased screen stands below the decks; it scans eight metres for a neighbour with a grid to give it, and this desk's scores are not one, so whatever it shows, it reads no score from here.' The token stays.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -311,9 +311,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Mirrored_Patterns"
       ],
@@ -328,7 +328,7 @@
       "proposal": "'The next policy, which the desk calls rhizome, lets every site join its three nearest neighbours' plus a footnote: the rhizome is Deleuze and Guattari's figure (A Thousand Plateaus, 1980), defined against the tree, which is why the opening is a tree.",
       "evidence": "commons/maps/PG_Mirrored_Patterns/final.md:26; commons/artifacts/timing_machines/pg_workshop.gd:300 (readout prints other.topology: 'tree', 'rhizome', 'severed') and :29 (RULES 'tree / rhizome / severed'); algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.gd:5, :19-22 ('Deleuze and Guattari define the rhizome AGAINST the tree', 'every seed reaches for its three nearest'); RhizomaticMazeGenerator.gd:62-63 (neighbours = 3), lesson branch_probability 1.0 at RhizomaticMazeSpace.gd:129.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'which the desk calls rhizome, lets every site join its three nearest neighbours' + [^rhizome] (Deleuze and Guattari, A Thousand Plateaus, 1980; why the opening is a tree).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -339,9 +339,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Sculpted_Forms"
       ],
@@ -356,7 +356,7 @@
       "proposal": "Change the lead-in to: 'The section view adds one more cutter, carrying the operation the four cores already have:' — or quote the test that finds the authored cores, `shape.operation == CSGShape3D.OPERATION_SUBTRACTION`.",
       "evidence": "commons/primitives/booleans/dome.gd:418-429 ('section' branch: cut.name = \"SectionCut\", cut.operation = CSGShape3D.OPERATION_SUBTRACTION at :425, built only for facture 'section'); :456-462 (_cut_children finds the authored operands by the same operation); :9 ('the authored CSGBox3D and its four subtraction children'); final.md:31-35.",
       "review": "confirmed by a code checker (cited files only): dome.gd has 'OPERATION_SUBTRACTION' at only two lines: :425 'cut.operation = CSGShape3D.OPERATION_SUBTRACTION' inside the 'section' branch (cut.name = \"SectionCut\", :418-429) and :462 the _cut_children test 'shape.operation == CSGShape3D.OPERATION_SUBTRACTION'. :9 names 'the authored CSGBox3D and its four subtraction children'. final.md:31-35 quotes the :425 line after 'The cores show the shapes that made the absence.' Map places 'dome' at (22,12).",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The section view adds one more cutter, carrying the operation the four cores already have:' before the excerpt.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -367,9 +367,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Sculpted_Forms"
       ],
@@ -384,7 +384,7 @@
       "proposal": "'The layered membrane remains nearby and makes a further contrast available: nested displaced surfaces can suggest thickness without being one filled solid.'",
       "evidence": "commons/maps/PG_Sculpted_Forms/final.md:39; algorithms/proceduralgeneration/hybrid_complex/layeredmembrane/layered_membrane.gd:106-135 (50 nested SurfaceTool cylinders with sin + Perlin displacement); git log for that directory shows no reader-visible repair (DNA promotion, identity, stubs, type annotations, README moves).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The layered membrane remains nearby and makes a further contrast available: ...'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -395,9 +395,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Percolation_Network"
       ],
@@ -412,7 +412,7 @@
       "proposal": "'supplied along one whole side of the cube. ... The readout counts sites reached and those on the side facing the source.'",
       "evidence": "commons/artifacts/timing_machines/pg_workshop.gd:143-145 (LATTICE seeds every grid[x][y][17] as SOURCE) and refresh() counting z==0 as 'on opposite face' (:287-295); algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd:16-17 (GRID_SIZE 18, CUBE_SIZE 0.5) and :401-405 (z is a horizontal axis, lattice centred on the artifact); final.md:19.",
       "review": "quote checked: first clause found, rest differs (script) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'supplied along one whole side of the cube'; 'those on the side facing the source'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -423,9 +423,9 @@
       "effort": "half-day",
       "skill": "design",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Space_Colonization"
       ],
@@ -440,7 +440,7 @@
       "proposal": "One captured still (or a line diagram) of the generation-zero decision, captioned with the arithmetic: unit directions (-0.55, 0.83, 0), (0.55, 0.83, 0), (0, 1, 0) sum to (0, 2.66, 0); normalised and scaled by 0.5 m the first child sits at (0, 0.5, 0).",
       "evidence": "grep '![' returns 0 in all seven PG final.md files; commons/maps/LSystems_Shape_Grammars/final.md:13,25,41 carry captioned stills; colonization_lesson.gd:34 (points (-2,3,0), (2,3,0), (0,5,0)), :18 (segment_length 0.5), :105-116 (the drawn decision); final.md:20-27.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: FIGURE - a line diagram of the generation-zero decision drawn with matplotlib from the study's numbers (doc/book/figures/proceduralgeneration/first-step-three-requests.png), placed after the arithmetic paragraph with the caption stating the sums; the child position asserted at (0, 0.5) in the generating script.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -468,7 +468,7 @@
       "proposal": "Set the two TITLES entries to 'A ROUTE NEEDS ROOM' and 'A REPEATED IMAGE, ANOTHER WAY THROUGH' (or retitle the two chapters to the plates).",
       "evidence": "commons/artifacts/timing_machines/pg_workshop.gd:23 (TITLES) and :107 (_build_compact_console(ids, TITLES[chapter])); matching plates: 'ONE NEAREST INVITATION', 'TOUCHING IS NOT ENOUGH', 'WHAT DID THE SAMPLE KEEP?' (same line), selection_lesson.gd:15 'WHAT DOES THE SCORE NOTICE?', colonization_lesson.gd:16 'WHICH POINTS GET A SAY?'; chapter headings at PG_Caves_Mazes/final.md:1 and PG_Mirrored_Patterns/final.md:1.",
       "review": "confirmed by a code checker (cited files only): pg_workshop.gd:23 TITLES has caves 'HOW IS A PASSAGE MADE?' and mirrored 'COPY AN IMAGE / CONNECT A PATH'; :107 _build_compact_console(ids,TITLES[chapter]). Headings: PG_Caves_Mazes '# A route needs room', PG_Mirrored_Patterns '# A repeated image, another way through'. The other five match their plates: PG_Branching_Growth 'One nearest invitation', PG_Percolation_Network 'Touching is not enough', PG_Sculpted_Forms 'What did the sample keep?', PG_Genetic_Evolution 'What does the score notice?' (selection_lesson.gd:15), PG_Space_Colonization 'Which points get a say?' (colonization_lesson.gd:16).",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): the TITLES dict lives in commons/artifacts/timing_machines/pg_workshop.gd, which is UNTRACKED in git (another writer's file); not touched. Retitling the two chapters to the plates is the alternative and an authorial call.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -479,9 +479,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Space_Colonization"
       ],
@@ -496,7 +496,7 @@
       "proposal": "'There is a restriction easy to miss under the name Space Colonization — the tree model of Runions, Lane and Prusinkiewicz (2007), from which this study takes its attraction points and its kill distance. Under TIPS, a growing end can produce one successor...'",
       "evidence": "commons/maps/PG_Space_Colonization/final.md:31 (the words 'space colonization' appear nowhere else in the chapter body); commons/artifacts/registry/procgen_extra.json space_colonization_algorithm description ('Runions-style space colonisation'); SpaceColonizationAlgorithm.gd:5-7 (essence; kill_distance).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'under the name Space Colonization, the tree model of Runions, Lane and Prusinkiewicz, from which this study takes its attraction points and its kill distance.[^runions]'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -507,9 +507,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "PG_Sculpted_Forms"
       ],
@@ -524,7 +524,7 @@
       "proposal": "'The program marks `ceil(cube_size / voxel_size)` cells in each direction around that address: two cells each way at the opening setting, a two-and-a-half-metre box around a one-metre cube.'",
       "evidence": "algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound.gd:245 (half_extent = int(ceil(cube_size / voxel_size))) and :246-251 (marks voxel_pos +/- half_extent); :77-80 (lesson: cube_size 1.0 default, voxel_size 0.5); final.md:17.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'two cells each way at the opening setting, a two-and-a-half-metre box around a one-metre cube'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     }

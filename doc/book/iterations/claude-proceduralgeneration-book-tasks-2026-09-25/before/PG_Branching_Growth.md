@@ -22,7 +22,7 @@ Press HOLD to keep a separate mesh witness, displayed at 0.4 scale beside the de
 
 The museum study caps the record count at 192. The counter includes coincident children. That limit tells us something about what this program spends, not how mature its tree has become. RULE reveals the operation after you have had a chance to follow it.
 
-Keep the Organic Space work nearby in view. It obtains an organic appearance through a different construction: geometric shells, tunnels and detail. A resemblance does not establish a common method. We are learning to ask what a form did to become available, rather than treating its appearance as its explanation.
+Keep the nearby organic_space in view. It obtains an organic appearance through a different construction: geometric shells, tunnels and detail. A resemblance does not establish a common method. We are learning to ask what a form did to become available, rather than treating its appearance as its explanation.
 
 Neither a parent record nor a drawn line has yet made a passage for us. In Percolation, next, we ask a narrower question first: under a stated rule of contact, what can reach what?
 

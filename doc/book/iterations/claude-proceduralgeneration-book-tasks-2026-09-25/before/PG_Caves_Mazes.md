@@ -34,7 +34,7 @@ FINISH completes the small nine-by-nine study. RESET restores its construction s
 
 The nearby binary-space-partitioning work remains another comparison: divide a region before deciding how its parts communicate. We need not erase it because today's first argument concerns two generators.
 
-The generator’s own record proves a route in its array: every cell was visited, and only walls between visited cells were removed, so entrance and exit lie on one connected tree. Whether your shoulders and head clear every generated turn is a separate question, and the museum aisle beside it lets you continue while that stays open.
+The desktop check follows open maze cells from entrance to exit. That proves a route in its array. Human VR clearance through every generated interior remains a separate review. The independent museum aisle lets us continue while keeping that distinction honest.
 
 In Sculpted Forms, we will reverse the direction of this encounter. Instead of asking a rule to carve space for a body, we will let bodies fall and ask another rule what surface it can record from them.
 
