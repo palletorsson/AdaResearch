@@ -18,7 +18,7 @@ The original diagonal alphabet gives its bar one of two rotations:
 bar.rotation.z = (PI * 0.25) if slash else (-PI * 0.25)
 ```
 
-PI radians is half a turn; a quarter of PI is forty-five degrees. The sign chooses which way the bar leans. The other alphabet uses zero and half of PI, producing a horizontal or vertical bar. The stored choice can pass through either interpretation. Its address in the array does not move. The textile is named for a one-line Commodore 64 program, `10 PRINT CHR$(205.5+RND(1)); : GOTO 10`, which printed exactly this coin-flip between two diagonals down the screen.[^tenprint]
+PI radians is half a turn; a quarter of PI is forty-five degrees. The sign chooses which way the bar leans. The other alphabet uses zero and half of PI, producing a horizontal or vertical bar. The stored choice can pass through either interpretation. Its address in the array does not move.
 
 The grammar rooms taught us to distinguish a sentence from the turtle that reads it. Here we hold a record of choices and give it another set of marks. A picture can change substantially while the decisions remain intact. That does not make its appearance incidental: the marks give us different relations to follow.
 
@@ -49,6 +49,4 @@ Stay with the rest of the room. The working loom computes which thread lies abov
 
 The plaque and tilted scale invite a question about formal limits. Their presence does not turn this textile into a proof of incompleteness. The room can bring practices into conversation while leaving their differences available for study. The same desire is a question we carry between them: what can this way of making open, and where must we learn another way?
 
-Next, generated forms will be compared using a numerical score. The cube family kept all six of its results, and here a path could matter because we chose to follow it. What changes when a program is asked to decide which result should continue?
-
-[^tenprint]: Nick Montfort and nine co-authors, *10 PRINT CHR$(205.5+RND(1)); : GOTO 10* (MIT Press, 2012), a book about that one line. The two diagonals are PETSCII characters 205 and 206; RND decides which.
+Next, generated forms will be compared using a numerical score. Until now a path could matter because we chose to follow it. What changes when a program is asked to decide which result should continue?

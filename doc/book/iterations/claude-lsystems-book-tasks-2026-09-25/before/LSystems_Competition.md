@@ -4,7 +4,7 @@
 
 Two stems wait above a tiled field. One is amber, one blue. Both begin with F, the same diameter and the same rule. Their colours let us follow them; colour gives neither a different appetite.
 
-Press STEP: A takes a turn. A small branch appears, and a square patch of soil drops. Press STEP again: B’s turn; the readout names who is next. Both have reached generation one. Look at what they took: A received 2.250, B 1.980. These are the model's resource values. We have not measured grams of food.
+Let A take a turn. A small branch appears, and a square patch of soil drops. Now let B take its turn. Both have reached generation one. Look at what they took: A received 2.250, B 1.980. These are the model's resource values. We have not measured grams of food.
 
 Is something wrong with B's instructions?
 

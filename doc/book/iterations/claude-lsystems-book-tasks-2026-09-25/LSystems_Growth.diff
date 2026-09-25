@@ -1,0 +1,22 @@
+--- before/LSystems_Growth.md
++++ after/LSystems_Growth.md
+@@ -10,11 +10,11 @@
+ F[+F]F[-F]F
+ ```
+ 
+-This tree's rule replaced one F with those eleven symbols. Its first F has drawn a line 0.8 metres long. The pale point marks the turtle's current position. What must it keep if it is to leave the trunk, make a branch, and find its way back?
++This tree's rule replaced one F with those eleven symbols. It is the first of a small family printed in Prusinkiewicz and Lindenmayer’s *The Algorithmic Beauty of Plants*; Competition’s rule and the readers in the hall after next come from the same page.[^abop] Its first F has drawn a line 0.8 metres long. The pale point marks the turtle's current position. What must it keep if it is to leave the trunk, make a branch, and find its way back?
+ 
+ Press STEP once. Nothing extends. The next symbol is `[`. The readout says SAVE; the stack count becomes one. The next length has changed from 0.800 to 0.576 metres, although the point has not moved. An operation has taken place without adding anything to the outline.
+ 
+-STEP again: `+` changes the direction. Another STEP reaches F, and the shorter branch appears. HOLD this reading. The pink point stays at the new tip.
++STEP again: `+` changes the direction. Another STEP reaches F, and the shorter branch appears. HOLD this reading. The held drawing keeps its pale point at the new tip.
+ 
+ Now comes `]`. Where will the live point go?
+ 
+@@ -59,3 +59,5 @@
+ <!-- @ -->
+ 
+ The animated tree, the obstacle-querying tree, the earlier L-system tree and the cypress remain beyond the desk. They approach growth through other operations. Carry this distinction forward: a sentence supplies instructions; an interpreter decides what they do. In the next hall, even forward may be read sideways.
++
++[^abop]: Przemyslaw Prusinkiewicz and Aristid Lindenmayer, *The Algorithmic Beauty of Plants* (Springer, 1990), figure 1.24: F[+F]F[−F]F is its (a), Competition’s F[+F]F[−F][F] its (b), and the believing turtle’s FF+[+F−F−F]−[−F+F+F] and Grammar Lab’s PLANT preset are its (c) and (f) with the turns mirrored.

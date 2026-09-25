@@ -29,7 +29,7 @@ A symbol without a replacement passes through as itself. The newly written lette
 
 Another pass through the resulting string gives it geometry. `F` and `G` advance the turtle and draw. `+` and `-` turn its heading. The turtle is a travelling state: position, direction and a sideways axis. A line does not tell us all of that state by looking like a line.
 
-Try RESET, then PRESET three times to reach PLANT. There is an `X`, and no line above the live plinth. We met an invisible point in the first hall, Point One. This absence has a different cause: `X` belongs to the rewriting rules, but this interpreter gives it no drawing action. Press NEXT. Drawing instructions appear around the `X` symbols. What was undrawn was still capable of contributing to the next sentence.
+Try RESET, then PRESET three times to reach PLANT. There is an `X`, and no line above the live plinth. We have encountered an invisible point before. This absence has a different cause: `X` belongs to the rewriting rules, but this interpreter gives it no drawing action. Press NEXT. Drawing instructions appear around the `X` symbols. What was undrawn was still capable of contributing to the next sentence.
 
 The brackets now matter. `[` saves the travelling state; `]` restores it. A branch can end without forcing every later segment to continue from its tip. The next hall will let length enter that inheritance too.
 
@@ -41,4 +41,4 @@ Seven presets give us places to begin. They do not exhaust the bodies that a gra
 
 <!-- @ -->
 
-The earlier trees, the string study, the city grammar and three trees grown from three traditions’ axioms remain beyond the desk; the last of these asks whose grammar a rule is. Their resemblance can invite a comparison without proving that they share its live sentence. Carry the bracket into the next room: what must a branch remember so that another branch can begin?
+The earlier trees, string study and city grammar remain beyond the desk. Their resemblance can invite a comparison without proving that they share its live sentence. Carry the bracket into the next room: what must a branch remember so that another branch can begin?

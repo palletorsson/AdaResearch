@@ -167,7 +167,7 @@
       "proposal": "Lower WIDTHS[0] in architecture_lesson.gd from 0.4 to 0.3 (or 0.25) and rewrite: 'Your body's collision capsule is forty centimetres across. A thirty-centimetre passage cannot admit it even though the line continues without a break', updating 'The clear width cycles through 2.2 metres, 0.4 metres' to match; then walk the narrow version in the headset before committing.",
       "evidence": "addons/godot-xr-tools/player/player_body.gd:60 (`@export var player_radius : float = 0.2`, no override in commons/scenes/base.tscn); commons/scenes/desktop_player.tscn:8-9 (`radius = 0.3`, `height = 1.8`); commons/artifacts/architecture_lesson/architecture_lesson.gd:5 (`const WIDTHS := [0.4, 1.4, 2.2]`) and :144-147 (walls sit outside the occupied cells, offset key.x*0.05 with thickness 0.1, so the clear gap is the full 0.4 m); chapter line 39.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): PROSE HALF APPLIED - the sentence now states the headset body (forty centimetres, the same as the gap) and makes the borderline its point. The code half (WIDTHS[0] 0.4 -> 0.3 in architecture_lesson.gd) wants a headset walk before commit, as the task says; then tighten the sentence to a clean refusal.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -178,9 +178,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "LSystems_Competition"
       ],
@@ -195,7 +195,7 @@
       "proposal": "Write 'Press STEP: A takes a turn. A small branch appears, and a square patch of soil drops. Press STEP again: B's turn' and, once, 'the readout names who is next'; later 'Take two turns' can stay as is once STEP has been named.",
       "evidence": "commons/artifacts/competition_lesson/competition_lesson.gd:23 (button list `[\"STEP\", \"ORDER\", \"SEASON\", \"SOIL\", \"RESET\", \"RULE\"]`), :44-51 (STEP calls model._grow_step() and reports 'A took ... / B took ...'), :111 (readout prints 'next A' or 'next B'); chapter lines 7 and 31.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Press STEP: A takes a turn. ... Press STEP again: B's turn; the readout names who is next.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -206,9 +206,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "LSystems_Architecture"
       ],
@@ -223,7 +223,7 @@
       "proposal": "Either add one sentence to the closing ('Beyond the seed study a floor hatch opens as you approach; lift its crystal and the grey pillar by the petal flower answers with three walking bodies, an encounter another chapter will read') or, if the encounter is not meant for this hall, remove the two tokens from rows 24 and 31 of the interactables layer.",
       "evidence": "commons/maps/LSystems_Architecture/map_data.json layers.interactables row 24 col 4 (`catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto`) and row 31 col 7 (`catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45`); commons/hazards/catalyst_foe/catalyst_vent.gd:30 (`require_catalyst_armed: bool = true`) and :200-216 (warmup starts only once armed, then emits one foe per interval up to wave_size); commons/artifacts/registry/hazards.json:1276 (prompter box: 'lid tips open ... when the player approaches') and :10677 (vent: 'emits CatalystFoe bodies on a timer'); chapter line 49.",
       "review": "confirmed by a code checker (cited files only): LSystems_Architecture interactables row 24 col 4 = catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto; row 31 col 7 = catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45. catalyst_vent.gd:30 require_catalyst_armed = true; :200-216 warmup ticks only once armed, first emission after start_delay_s, then one per emit_interval_s; :192 stops at wave_size. hazards.json:1281 prompter box 'lid tips open ... when the player approaches'; :10682 vent 'emits CatalystFoe bodies on a timer until wave_size is reached'. final.md:49 is the quoted closing with no mention of hatch or vent. Small addition: vent.gd:88-91 multiplies wave_size by the ecology stage's wave_mult when > 1, so 'three' is the floor, not a fixed count.",
-      "notes": "",
+      "notes": "Applied 2026-09-25 (prose option): 'Beyond the seed study a floor hatch opens as you approach and offers a crystal; lift it and, five seconds on, a vent nearby answers with three walking bodies, an encounter another chapter will read.' Tokens left in place.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -234,9 +234,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "LSystems_Living"
       ],
@@ -251,7 +251,7 @@
       "proposal": "Either name the hall meant, if one exists outside the spine, or drop the first two sentences and open the paragraph on the fact itself: 'Here a continuous control is translated into whole rewriting generations. Several distinct settings produce the same instruction.'",
       "evidence": "commons/maps/LSystems_Living/final.md:21; commons/maps/curriculum_spine.json spine.sequences 1-13 (primitives through fractals) map lists, none of whose final.md files match both 'trace' and 'hand'; the only file matching 'records a hand' in commons/maps/*/final.md is LSystems_Living itself.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the two callback sentences dropped; the paragraph opens 'Here a continuous control is translated into whole rewriting generations.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -262,9 +262,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "LSystems_Growth"
       ],
@@ -279,7 +279,7 @@
       "proposal": "Add one sentence where the sentence first appears: 'It is the first of a small family printed in Prusinkiewicz and Lindenmayer, The Algorithmic Beauty of Plants (1990), figure 1.24; Competition's rule and the three readers in the next hall come from the same page.'",
       "evidence": "commons/maps/sequences/lsystems.json:76 (key_texts names the book); grep 'Prusinkiewicz|Lindenmayer' across commons/maps/LSystems_*/final.md returns nothing; commons/artifacts/growth_lesson/growth_lesson.gd:38 and the Growth map token (`base_length:0.8#base_angle:40#...#length_decay:0.72`) for the sentence; algorithms/lsystems/Ecosystem/ForestCompetition.gd:314 (`lsys.add_rule(\"F\", \"F[+F]F[-F][F]\")`); commons/artifacts/the_believing_turtle/the_believing_turtle.gd:27 (`rule_f: String = \"FF+[+F-F-F]-[-F+F+F]\"`); commons/artifacts/lsystem_editor/lsystem_editor.gd:106 (Plant: `X -> F+[[X]-X]-F[-FX]+X`).",
       "review": "quote NOT found in the chapter as written; check before acting (script) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: one sentence at the sentence's first appearance plus [^abop] (ABOP figure 1.24: (a), (b), and (c)/(f) mirrored).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -290,9 +290,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Assemblage_Same_Desire"
       ],
@@ -307,7 +307,7 @@
       "proposal": "Add one sentence before or after the rotation excerpt: 'The textile is named for a one-line Commodore 64 program, 10 PRINT CHR$(205.5+RND(1)); : GOTO 10, which printed exactly this coin-flip between two diagonals down the screen (Montfort et al., 10 PRINT, 2012).'",
       "evidence": "commons/artifacts/ten_print_textile/ten_print_textile.gd:115 (`_billboard_label(\"10 PRINT textile\", ...)`) and :8 (lineage comment '10 PRINT as a Jacquard loom'); commons/artifacts/ten_print_textile/assemblage_lesson.gd:41-46 (stage_original moves that labelled textile behind the desk); grep -c '10 PRINT' commons/maps/Assemblage_Same_Desire/final.md returns 0.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the 10 PRINT line named after the rotation excerpt, with [^tenprint] (Montfort et al. 2012).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -318,9 +318,9 @@
       "effort": "half-day",
       "skill": "design",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "LSystems_Grammars_And_Curves"
       ],
@@ -335,7 +335,7 @@
       "proposal": "Capture the green reference and blue READ F readings at TREE (generation 2, 172 symbols / 64 segments each) from straight ahead with the x = y diagonal drawn through the origin, store it in a doc/book/iterations/<date>-believing-turtle/ folder like the form-grammar ones, and embed it after this paragraph with a one-line caption naming the counts.",
       "evidence": "commons/artifacts/interpreter_lesson/interpreter_lesson.gd:41 (readings at 25 degrees forward and 25 degrees sideways share sentence and 0.32 m stride) and :53-54 (TREE gives generation 2); commons/artifacts/the_believing_turtle/the_believing_turtle.gd:145-148 (the swap and the planar step); the served image route ada_encyclopedia/src/app/book-review/[[...path]]/route.ts:38 accepts doc/book/iterations/ paths, as used by LSystems_Shape_Grammars/final.md:13.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: FIGURE drawn from the rule with matplotlib (doc/book/figures/lsystems/believing-turtle-reflection.png): both readings at generation two, 172 symbols / 64 segments asserted, the reflection checked segment by segment; placed after the reflection paragraph with a caption naming the counts. A hall capture was not made.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -346,9 +346,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "LSystems_Grammar_Lab"
       ],
@@ -363,7 +363,7 @@
       "proposal": "Extend the sentence: 'The earlier trees, the string study, the city grammar and three trees grown from three traditions' axioms remain beyond the desk; the last of these asks whose grammar a rule is', keeping the caution that resemblance does not prove a shared live sentence.",
       "evidence": "commons/maps/LSystems_Grammar_Lab/map_data.json layers.interactables contains `grammar_provenance` alongside lsystem_tree, mesh_grammar_lsystem_tree, fractal_lsystem_string and city_bench; commons/artifacts/registry/lsystems.json:1156 (grammar_provenance description: 'Same engine, different axioms, different worlds. Asks: whose grammar?'); chapter line 44.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The earlier trees, the string study, the city grammar and three trees grown from three traditions' axioms remain beyond the desk; the last of these asks whose grammar a rule is.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -374,9 +374,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "LSystems_Living"
       ],
@@ -391,7 +391,7 @@
       "proposal": "Write 'On the side rack, drag Depth and Forks towards their upper limits and read the command count on the desk' so the instruction uses the control the hall provides for large moves.",
       "evidence": "commons/artifacts/genetic_tree_sculptor/living_lesson.gd:65-72 (LESS/MORE step the normalized value by 0.025) and :32-36 (the original slider rack repositioned beside the desk, labelled 'ALL EIGHT GENES / original sliders + RANDOM'); commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.gd:72-75 (segments range 2 to 10); algorithms/nature_system/morphology/tree_morphology.gd:34 (`LOD_MAX_BRANCHES := [30, 80, 200, 500]`); chapter line 40.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'On the side rack, drag Depth and Forks towards their upper limits and read the command count on the desk.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -402,9 +402,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "LSystems_Growth"
       ],
@@ -419,7 +419,7 @@
       "proposal": "Write 'HOLD this reading. The held drawing keeps its pale point at the new tip.'",
       "evidence": "commons/artifacts/growth_lesson/growth_lesson.gd:77-78 (marker material \"fff2c9\" for every view) and :84 (live tint \"70d5c2\", held tint \"edafd3\"); chapter line 17.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The held drawing keeps its pale point at the new tip.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -430,9 +430,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "LSystems_Grammar_Lab"
       ],
@@ -447,7 +447,7 @@
       "proposal": "Write 'We met an invisible point in the first hall, Point One. This absence has a different cause:'",
       "evidence": "commons/maps/Point_One/final.md contains 'invisible point' (the only other final.md in the corpus that does); commons/maps/curriculum_spine.json spine.sequences lists primitives first and lsystems fourteenth; chapter line 32.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'We met an invisible point in the first hall, Point One.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -458,9 +458,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Assemblage_Same_Desire"
       ],
@@ -475,7 +475,7 @@
       "proposal": "Write 'Next, generated forms will be compared using a numerical score. The cube family kept all six of its results, and here a path could matter because we chose to follow it. What changes when a program is asked to decide which result should continue?'",
       "evidence": "commons/maps/PG_Genetic_Evolution/final.md:7 ('The cube family let us compare ... We kept all six results.'); commons/maps/LSystems_Shape_Grammars/final.md:61 ('Later, Genetic Evolution will let a score choose among described bodies'); commons/maps/sequences/proceduralgeneration.json lists PG_Genetic_Evolution first; chapter line 52.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The cube family kept all six of its results, and here a path could matter because we chose to follow it.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -503,7 +503,7 @@
       "proposal": "Cut the recap sentence 'Earlier, extrusion connected a lifted face to the edges it left below, making side walls' and reduce the Form Finding / Genetic Evolution paragraph to one sentence ('Nothing here has been weighed or scored; that comes next'), keeping the Assemblage handover as it is.",
       "evidence": "Word counts of the eight chapters: 693, 795, 761, 727, 710, 818, 1220, 858; commons/maps/LSystems_Shape_Grammars/final.md:45 and :61; commons/maps/PG_Genetic_Evolution/final.md:7 restates the Form Finding point.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): commons/maps/LSystems_Shape_Grammars/final.md is UNTRACKED in git (24 Sept, another writer's, with figures under doc/book/iterations/2026-09-24-form-grammar-spine/). Make the two-sentence cut when its owner commits it.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -514,9 +514,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "LSystems_Architecture"
       ],
@@ -531,7 +531,7 @@
       "proposal": "Write 'PLAN removes the walls and lowers the footprints to a drawing you can walk across; RESET returns to the opening comparison.'",
       "evidence": "commons/artifacts/architecture_lesson/architecture_lesson.gd:57 (PLAN sets built = false), :89 (slabs drawn at 0.016 m thickness with solid = built, i.e. no collision in PLAN), :93 (build_boundaries only when built), :95-97 (centrelines drawn in every state); chapter line 45.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'PLAN removes the walls and lowers the footprints to a drawing you can walk across; RESET returns to the opening comparison.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     }
