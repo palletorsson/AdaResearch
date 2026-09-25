@@ -1,0 +1,17 @@
+--- before/ML_Gradient_Landscape.md
++++ after/ML_Gradient_Landscape.md
+@@ -10,7 +10,7 @@
+ 
+ Choose one candidate slope and intercept in your imagination and compare what the three surfaces would say about that same candidate. The candidate line is unchanged; only the rule assigning its height differs. This makes a useful distinction between moving within one landscape and comparing landscapes. An apparent hill on one surface is not a physical obstacle in the observations. It is a way the chosen error calculation rates a set of model parameters.
+ 
+-The squared-error surface punishes a large residual much more heavily than a small one. Huber loss is quadratic near zero and becomes linear for sufficiently large residuals. An unusual observation can therefore pull the two fitted lines differently. Raising OUTLIERS replaces more observations with fixed outlying values; it keeps the other observations and the outliers already introduced. Return the slider to an earlier setting and its sample returns too. We need something to hold still if we want to notice what a different judgement does.
++The squared-error surface punishes a large residual much more heavily than a small one.[^fitness-landscape] Huber loss is quadratic near zero and becomes linear for sufficiently large residuals. An unusual observation can therefore pull the two fitted lines differently. Raising OUTLIERS replaces more observations with fixed outlying values; it keeps the other observations and the outliers already introduced. Return the slider to an earlier setting and its sample returns too. We need something to hold still if we want to notice what a different judgement does.
+ 
+ The third surface has a deliberately wavy error rule: a sine term is added to a quadratic term. Its label uses the word “adversarial”, but this exhibit is not training a generative adversarial network. It offers a rougher landscape on which local downhill movement can encounter a different arrangement of rises and hollows.
+ 
+@@ -21,3 +21,5 @@
+ <!-- @ -->
+ 
+ The classification room will exchange a fitted line for groups. The same question remains: which differences does the chosen measure treat as important?
++
++[^fitness-landscape]: A loss surface is a fitness landscape read upside down: evolution climbs what a learner descends, and in both the shape decides how much one more correct answer is worth. *Nature of Code* puts it in a phrase: a score that grows with the square of the correct characters makes the 801st matter far more than the 800th. The particle swarm's plate and Form Finding's decoy basin are this object under other names.

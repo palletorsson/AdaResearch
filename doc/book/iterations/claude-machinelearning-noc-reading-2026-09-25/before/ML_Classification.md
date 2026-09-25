@@ -14,8 +14,6 @@ This is k-means clustering. The number of centres is chosen in advance; the proc
 
 The room sits in a classification sequence, but this encounter does not learn named classes from labelled examples. It groups observations by geometry. Calling a cluster a diagnosis, a personality or a social identity would add an interpretation that the distance calculation did not supply.
 
-Two works in this hall do learn from labelled examples. The one with the gold points draws a line between two classes as wide as the data allows, and the line depends only on the few points that touch it; the rest could be thrown away. The other grows a small forest of decision trees, each on a different sample of the same data, and lets them vote. Neither is the centres' geometry, and both were told the answers first.[^perceptron]
-
 Watch a point on the edge of a blob after most colours appear settled. A hard colour boundary reports one assignment and conceals how nearly the alternatives competed. The displayed total distance is also a particular readout; do not confuse it with a complete explanation of why every individual assignment is appropriate.
 
 Press DATASET to replace the blobs with RINGS. Four centres remain. Before stepping, follow a ring with your eye; then watch where its colour breaks. The grouping follows distance to a centre, which need not follow the form you were tracing.
@@ -25,5 +23,3 @@ Press DATASET again for BLOCK, a sample with no planted clusters. The procedure 
 <!-- @ -->
 
 The neural-network room introduces learned connections between layers. It will still need an account of what its training examples and error measure ask it to preserve.
-
-[^perceptron]: Rosenblatt's perceptron (1957) is the simplest of these, a line learned from labelled points; Minsky and Papert showed in 1969 that one line cannot separate an exclusive-or. A kernel is how a line becomes a curve, a hidden layer how a network does. The two works are svm_visualization and random_forest_visualization.

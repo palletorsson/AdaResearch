@@ -12,8 +12,6 @@ Compare two views of progress: a single connection becoming visually different, 
 
 This exhibit trains on a small, fixed set of four examples with four inputs and two desired outputs. It computes predictions, compares them with those targets, and uses the resulting error to adjust the weights. The backward calculation works out how changes to earlier weights contribute to changes in the final error. It does not send a little correct answer backwards through every wire.
 
-Each weight moves by a step: the error, times what came through that wire, times a learning rate. The rate is the same kind of knob as a boid's turning limit, how much of the difference between wanted and got is corrected at once. Too large and the network overshoots and rings; too small and it crawls. Here it is a tenth.
-
 The colour and strength of a connection help expose its sign and magnitude. A negative contribution is not a damaged connection, and a large weight is not a complete explanation of an output: the surrounding inputs, other connections and nonlinear transformations still matter. Follow the network as a calculation distributed across those relations.
 
 K-means moved centres according to assigned examples. This learner changes many connected parameters according to the error on its training examples. In both cases, apparent improvement depends on a task and a measure selected beforehand.

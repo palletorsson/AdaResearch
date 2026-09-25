@@ -1,0 +1,159 @@
+{
+  "cells_cleared_per_second_by_rule": 0.5,
+  "date": "2026-09-25",
+  "extinct_at_s": 35.8,
+  "final_population": 0,
+  "final_visited_fraction": 0.92,
+  "frames_drawn": 5747,
+  "frames_per_sim_second": 60.0,
+  "grid_cells": 400,
+  "min_population_after_peak": 0,
+  "mode": "windowed, --fixed-fps 60, artifact's own _process",
+  "peak_at_s": 2.4,
+  "peak_population": 120,
+  "probe": "novelty_finite",
+  "rows": [
+    {
+      "energy_total": 67.33,
+      "frames_drawn": 1,
+      "population": 30,
+      "t": 0.0,
+      "visited_fraction": 0.07
+    },
+    {
+      "energy_total": 276.18,
+      "frames_drawn": 301,
+      "population": 120,
+      "t": 5.0,
+      "visited_fraction": 0.9575
+    },
+    {
+      "energy_total": 201.68,
+      "frames_drawn": 600,
+      "population": 120,
+      "t": 10.0,
+      "visited_fraction": 1.0
+    },
+    {
+      "energy_total": 116.01,
+      "frames_drawn": 900,
+      "population": 110,
+      "t": 15.0,
+      "visited_fraction": 0.9975
+    },
+    {
+      "energy_total": 51.48,
+      "frames_drawn": 1200,
+      "population": 76,
+      "t": 20.0,
+      "visited_fraction": 1.0
+    },
+    {
+      "energy_total": 14.0,
+      "frames_drawn": 1501,
+      "population": 28,
+      "t": 25.0,
+      "visited_fraction": 0.995
+    },
+    {
+      "energy_total": 1.55,
+      "frames_drawn": 1801,
+      "population": 8,
+      "t": 30.0,
+      "visited_fraction": 0.99
+    },
+    {
+      "energy_total": 0.11,
+      "frames_drawn": 2101,
+      "population": 1,
+      "t": 35.0,
+      "visited_fraction": 0.9875
+    },
+    {
+      "energy_total": 0.0,
+      "frames_drawn": 2401,
+      "population": 0,
+      "t": 40.0,
+      "visited_fraction": 0.98
+    },
+    {
+      "energy_total": 0.0,
+      "frames_drawn": 2701,
+      "population": 0,
+      "t": 45.0,
+      "visited_fraction": 0.975
+    },
+    {
+      "energy_total": 0.0,
+      "frames_drawn": 3001,
+      "population": 0,
+      "t": 50.0,
+      "visited_fraction": 0.9675
+    },
+    {
+      "energy_total": 0.0,
+      "frames_drawn": 3301,
+      "population": 0,
+      "t": 55.0,
+      "visited_fraction": 0.9625
+    },
+    {
+      "energy_total": 0.0,
+      "frames_drawn": 3601,
+      "population": 0,
+      "t": 60.0,
+      "visited_fraction": 0.955
+    },
+    {
+      "energy_total": 0.0,
+      "frames_drawn": 3901,
+      "population": 0,
+      "t": 65.0,
+      "visited_fraction": 0.95
+    },
+    {
+      "energy_total": 0.0,
+      "frames_drawn": 4201,
+      "population": 0,
+      "t": 70.0,
+      "visited_fraction": 0.945
+    },
+    {
+      "energy_total": 0.0,
+      "frames_drawn": 4501,
+      "population": 0,
+      "t": 75.0,
+      "visited_fraction": 0.94
+    },
+    {
+      "energy_total": 0.0,
+      "frames_drawn": 4801,
+      "population": 0,
+      "t": 80.0,
+      "visited_fraction": 0.9375
+    },
+    {
+      "energy_total": 0.0,
+      "frames_drawn": 5101,
+      "population": 0,
+      "t": 85.0,
+      "visited_fraction": 0.9325
+    },
+    {
+      "energy_total": 0.0,
+      "frames_drawn": 5401,
+      "population": 0,
+      "t": 90.0,
+      "visited_fraction": 0.925
+    },
+    {
+      "energy_total": 0.0,
+      "frames_drawn": 5701,
+      "population": 0,
+      "t": 95.0,
+      "visited_fraction": 0.92
+    }
+  ],
+  "sim_seconds": 95.8,
+  "verdict": "extinct at t=36 s after a peak of 120 at t=2 s; the ground clears about 0.50 cells a second"
+}
