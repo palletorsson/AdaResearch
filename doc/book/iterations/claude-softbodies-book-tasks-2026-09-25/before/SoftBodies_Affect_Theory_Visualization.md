@@ -2,7 +2,7 @@
 
 <!-- @radiolaria -->
 
-The forms invite recognition before explanation. Spikes, rings and lattices suggest organisms, shells, pollen or something that might brush against skin.[^haeckel] Let that recognition arrive, then keep it beside the question of how these objects were made.
+The forms invite recognition before explanation. Spikes, rings and lattices suggest organisms, shells, pollen or something that might brush against skin. Let that recognition arrive, then keep it beside the question of how these objects were made.
 
 Stop ROTATION. Toggle EFFECTS to change the particles surrounding the forms. What still looks alive when these motions cease? COLOUR also rebuilds the geometry in this implementation; with the initial unpinned random seed, it can change more than colour. Press SEED to choose a repeatable construction before comparing palettes. SPIKES changes a probability in that recipe; it does not teach an organism to defend itself.
 
@@ -15,5 +15,3 @@ The gap is productive. Desire can travel ahead of an explanation; a strange body
 Radiolaria belongs here as an explicit contrast, not proof that static geometry is a soft-body simulation. Put a hand to a spike. Nothing yields and nothing stops you, because nothing here is simulated: the spike is a drawing, and a drawing and a physics can disagree without anyone being told. The jelly cube pushed back; this does not even notice. In the next hall, spatial differences will be maintained by exchanges in an evolving field. Biological resemblance and a model of morphogenesis will finally meet as different claims we can examine.
 
 <!-- @ -->
-
-[^haeckel]: Ernst Haeckel, *Kunstformen der Natur* (1899–1904), the Radiolaria plates. This generator’s families echo the geometric vocabulary of those drawings: a drawn vocabulary, not a measured organism. No parameter here is a property of a living radiolarian.

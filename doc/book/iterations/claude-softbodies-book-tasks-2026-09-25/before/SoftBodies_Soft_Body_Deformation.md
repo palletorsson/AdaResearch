@@ -18,7 +18,7 @@ These are parameters of Godot's soft-body solver. The program supplies a subdivi
 
 What holds the cube together is the skin. Every edge of its surface is a spring asked to keep its length, and there is nothing across the inside. Take PRESSURE to nothing and the cube shows you: a bag of triangles with no interior drapes over its pedestal like cloth. Pressure is what this engine offers in place of the internal struts a soft body would otherwise need.
 
-The last sequence made bodies by selecting, branching, carving, sampling and copying; before that we changed whole objects by translation, rotation and scale. Here, their constituent positions change relative to one another. The surface connectivity remains prescribed. Yielding is a new capability; tearing, growing a hole or exchanging a neighbour would require more code. A soft appearance does not announce every freedom a body possesses.
+We have already changed whole objects by translation, rotation and scale. Here, their constituent positions change relative to one another. The surface connectivity remains prescribed. Yielding is a new capability; tearing, growing a hole or exchanging a neighbour would require more code. A soft appearance does not announce every freedom a body possesses.
 
 <!-- @ -->
 

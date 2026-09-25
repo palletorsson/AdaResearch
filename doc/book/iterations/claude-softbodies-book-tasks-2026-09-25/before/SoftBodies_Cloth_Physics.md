@@ -44,7 +44,7 @@ When we call an object compliant, how much of that belongs to the object, and ho
 
 Four bodies stand nearby, already stopped. They are soft spheres kept from the earlier collection, not woven cloth, and each froze at a scheduled moment of a fall you were not here for.
 
-They are resting on a rail: the contact is a line rather than a plane, and each body has had to resolve a shape around it. Then press **LANDING**. It exchanges the thing underneath them and drops them again; the pan that arrives makes a different contact, two walls where there was one bar.
+**LANDING** exchanges the thing underneath them and drops them again. Watch one meet the rail: the contact is a line rather than a plane, and the body has to resolve a shape around it.
 
 Worth knowing before you read too much into any held shape: the stop raises damping and stiffness rather than recording the vertex positions, so what you are looking at is partly the solver's and not a destination the material was travelling toward.
 
@@ -52,6 +52,6 @@ Two questions leave this room together. What makes a body deform, and what makes
 
 On the way out the floor runs empty for a long time, and then a few cells stand higher than the rest and one is missing altogether — the fixed points of the room this hall used to be, left where they were when everything around them was moved.
 
-Carry the fixed edge into the next hall. There, the support itself moves, and the bodies hanging from it will know.
+Carry the fixed edge into the next hall. There, the support itself moves, and this time the cloth will know.
 
 <!-- @ -->

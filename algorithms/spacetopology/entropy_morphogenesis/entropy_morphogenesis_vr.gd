@@ -155,6 +155,11 @@ func _apply_level() -> void:
 			threshold_center = 0.60
 		"broken":
 			threshold_center = 0.95
+		"minimal":
+			# At build this writes nothing (a placement keeps its exported value); once
+			# built, the desk's LEVEL cycle returns here and the threshold must come back too.
+			if _built:
+				threshold_center = 0.0
 		_:
 			pass
 

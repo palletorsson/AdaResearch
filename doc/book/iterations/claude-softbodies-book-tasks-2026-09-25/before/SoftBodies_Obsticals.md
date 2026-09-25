@@ -4,7 +4,7 @@
 
 The walls swell. Find a position from which both their edges and their centres remain visible. Selected vertices stay pinned while the surfaces respond between them. Before entering, watch a complete pressure cycle.
 
-AMPLITUDE changes the range of pressure. RATE changes how quickly its driving phase advances. HOLD DRIVE holds that phase; it does not freeze the wall vertices. The soft solver can continue settling under the pressure it last received. STIFFNESS changes the walls’ resistance without touching the drive, so the same pressure meets a different material; RESET PHASE returns the drive to the start of its cycle.
+AMPLITUDE changes the range of pressure. RATE changes how quickly its driving phase advances. HOLD DRIVE holds that phase; it does not freeze the wall vertices. The soft solver can continue settling under the pressure it last received.
 
 ```gdscript
 var p = (sin(_time) + 1.0) * 0.5 * breath_amplitude
@@ -22,7 +22,7 @@ Calling it breathing is an invitation to bodily recognition. This room has no ne
 
 The nearby contact gallery keeps other combinations visible: soft bodies meet rigid obstructions. Look at one named cell before surveying the whole array. The specimen, its support and its settings constitute a particular test; their variety is not a single scale from hard to soft.
 
-The flag dancer remains as another encounter with a driven system. Together these objects begin to distribute softness across the room rather than confine it to one specimen. Yet the floor that carries you through this hall does not deform. A deforming wall and an onward route make different promises.
+The flag dancer remains as another encounter with a driven system. Together these objects begin to distribute softness across the room rather than confine it to one specimen. Yet the museum crossing still has independent support. A deforming wall and an onward route make different promises.
 
 Next we will hold and replay a contact experiment. A spectacle of differences becomes more useful when we can identify which differences were introduced.
 

@@ -157,9 +157,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Topology_Entropy_Morphogenesis"
       ],
@@ -174,7 +174,7 @@
       "proposal": "In soft_workshop.gd's LEVEL branch, set model.threshold_center = 0.0 before applying 'minimal' (or make _apply_level write 0.0 for 'minimal' only when _built is true), so the cycle closes and the readout moves on every press.",
       "evidence": "commons/artifacts/timing_machines/soft_workshop.gd:198 cycles [\"minimal\",\"thickened\",\"pinched\",\"broken\"] through apply_grid_config; algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.gd:150-159 _apply_level writes -0.60/0.60/0.95 for the other three and `_: pass` for minimal; :291-295 and :306-310 regenerate with the unchanged threshold_center; readout soft_workshop.gd:216 prints current_threshold.",
       "review": "confirmed by a code checker (cited files only): soft_workshop.gd:198 LEVEL cycles [\"minimal\",\"thickened\",\"pinched\",\"broken\"] via model.apply_grid_config; :216 morphogenesis readout prints model.current_threshold. entropy_morphogenesis_vr.gd:150-159 _apply_level writes -0.60/0.60/0.95 for thickened/pinched/broken and `_: pass` for minimal (header comment :148-149 says so explicitly); :291-295 accepts level when it differs, :306-310 calls _apply_level then _regenerate with threshold_center untouched. Returning to minimal from broken keeps 0.95.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: CODE - entropy_morphogenesis_vr.gd _apply_level writes threshold_center = 0.0 for 'minimal' when _built (the task's second option; the first touches soft_workshop.gd, which is untracked in git). Compile-checked.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -185,9 +185,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SoftBodies_Cloth_Physics"
       ],
@@ -202,7 +202,7 @@
       "proposal": "Reverse the two instructions: 'The spheres are resting on a rail: the contact is a line rather than a plane, and each body has had to resolve a shape around it. Then press LANDING. It exchanges the thing underneath them and drops them again; the pan that arrives makes a different contact.'",
       "evidence": "commons/maps/SoftBodies_Cloth_Physics/map_data.json interactables cell (18,12) `softstopscene#landing:rail`; commons/artifacts/timing_machines/soft_workshop.gd:139 cycles [\"floor\",\"pan\",\"rail\",\"cone\"] with _next starting from index 0, so the first press is pan; algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.gd:541-548 (rail is a bar) and :530-535 (pan is two walls); :622-638 _rebuild drops the bodies again.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the rail's line contact observed first, then LANDING; 'the pan that arrives makes a different contact, two walls where there was one bar'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -213,9 +213,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SoftBodies_Cloth_Physics"
       ],
@@ -230,7 +230,7 @@
       "proposal": "Change the last clause to 'and the bodies hanging from it will know', keeping 'Carry the fixed edge' so the cloth beside the ride remains the comparison the next chapter offers.",
       "evidence": "algorithms/softbodies/joyride/revolving_joy_ride.gd:4 ('PinJoint3D chains suspending SoftBody3D spheres') and :191-215 (SoftBody3D.new with a SphereMesh, top_level); commons/maps/SoftBodies_Carusell/final.md:19 'The cloth strips nearby retain a fixed support.'",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'and the bodies hanging from it will know'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -241,9 +241,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SoftBodies_Playground_of_Joy"
       ],
@@ -258,7 +258,7 @@
       "proposal": "Add one sentence before it: 'Put a hand into the body and hold the grip: the surface is pushed away from your hand, and the instrument shows it. SQUEEZE changes how hard that push is; its third setting turns it off.'",
       "evidence": "algorithms/softbodies/rounded_softbody.gd:15 (grip_click activates hand squeeze), :654-656 (_update_vr_hand reads grip_click), :678-690 (_apply_squeeze pushes vertices within _squeeze_radius 0.25 by _squeeze_strength), :586-587 (_on_squeeze_changed remaps 0..1 to 0..5); commons/artifacts/timing_machines/soft_workshop.gd:173 SQUEEZE sends [0.0,0.2,0.6] from index 1, so the presses give 1.0, 3.0, 0.0 against a default of 2.0.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Put a hand into the body and hold the grip: the surface is pushed away from your hand, and the instrument shows it. SQUEEZE changes how hard that push is; its third setting turns it off.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -269,9 +269,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SoftBodies_Obsticals"
       ],
@@ -286,7 +286,7 @@
       "proposal": "Replace the first sentence with 'Yet the floor that carries you through this hall does not deform.' and keep the second.",
       "evidence": "commons/maps/SoftBodies_Cloth_Physics/map_data.json map_info.metadata.design_notes 'separate the museum crossing from specimens'; commons/maps/SoftBodies_Soft_Body_Deformation/eye_shot.md 'independent museum circulation'; no definition in any of the nine final.md files (grep).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Yet the floor that carries you through this hall does not deform.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -297,9 +297,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SoftBodies_Obsticals"
       ],
@@ -314,7 +314,7 @@
       "proposal": "Add after HOLD DRIVE: 'STIFFNESS changes the walls' resistance without touching the drive, so the same pressure meets a different material; RESET PHASE returns the drive to the start of its cycle.'",
       "evidence": "commons/artifacts/timing_machines/soft_workshop.json:69-76 lists AMPLITUDE, RATE, HOLD DRIVE, STIFFNESS, RESET PHASE, RULE; commons/artifacts/timing_machines/soft_workshop.gd:156-158 STIFFNESS sets linear_stiffness [0.5,0.2,0.8] on both walls, :159 RESET PHASE sets _time = 0.0.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: STIFFNESS and RESET PHASE named after HOLD DRIVE.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -325,9 +325,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ProceduralGeneration_Reaction_Diffusion_Systems"
       ],
@@ -342,7 +342,7 @@
       "proposal": "Add [^1] after the sentence: Turing, 'The Chemical Basis of Morphogenesis' (Phil. Trans. R. Soc. B, 1952); Gray and Scott's autocatalytic scheme (1984); Pearson, 'Complex Patterns in a Simple System' (Science 261, 1993), whose feed/kill survey the presets follow; and one line saying the excerpt is Pearson's discretised form.",
       "evidence": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md has no footnote; footnote convention: 31 of 213 final.md files use [^1]: (grep); commons/artifacts/turing_pattern_generator/turing_pattern_generator.gd:439-441 (Gray-Scott update) and :420-425 (_apply_preset reads feed/kill from PRESETS).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: [^turing] with Turing 1952, Gray and Scott 1984, Pearson 1993, and the line that the excerpt is Pearson's discretised form.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -370,7 +370,7 @@
       "proposal": "A three-panel figure (sim_steps 40 / 200 / 400, gravity_x 0, same camera) placed after this paragraph, captioned with the step counts and the sentence 'These are numerical steps in a reconstruction, not seconds', following the corpus image convention under doc/book/iterations.",
       "evidence": "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd:204-211 (apply_grid_config frees every child and rebuilds), :40 sim_steps, :77-79 gravity and constraint_passes; commons/artifacts/timing_machines/soft_workshop.gd:175 DURATION cycles [200,40,400]; images: 0 of 9 softbodies chapters vs 28 of 213 final.md across the corpus (grep '!\\[').",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): needs a capture sweep of frozen_glass_vessel at sim_steps 40/200/400 with one camera; not run in this pass.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -381,9 +381,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SoftBodies_Soft_Body_Deformation"
       ],
@@ -398,7 +398,7 @@
       "proposal": "Prepend one sentence: 'The last sequence made bodies by selecting, branching, carving, sampling and copying; before that we changed whole objects by translation, rotation and scale. Here, their constituent positions change relative to one another.'",
       "evidence": "commons/maps/PG_Mirrored_Patterns/final.md:38 ('we have selected, guided, branched, connected, carved, sampled and copied... What bodies are possible now?... carry the unresolved part into the next hall'); commons/maps/SoftBodies_Soft_Body_Deformation/final.md:17 is the only backward reference.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The last sequence made bodies by selecting, branching, carving, sampling and copying; before that we changed whole objects by translation, rotation and scale.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -409,9 +409,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SoftBodies_Obsticals_Part2"
       ],
@@ -426,7 +426,7 @@
       "proposal": "Change to 'A name like “Super Soft” cannot substitute for that construction.'",
       "evidence": "algorithms/softbodies/softbody_test_gallery.gd:165-167 (Jelly, index 5), :458-465 (Part 1 = 0..12, Part 2 = 12..24), :317 (Super Soft, index 21), :243 (Slippery Collider, index 13); algorithms/softbodies/softbody_gallery_part2.tscn:7 gallery_part = 2; commons/maps/SoftBodies_Obsticals_Part2/map_data.json cell (9,10) carries no gallery_part override.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Super Soft' for 'Jelly'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -437,9 +437,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Topology_Entropy_Morphogenesis"
       ],
@@ -454,7 +454,7 @@
       "proposal": "Change to 'too narrow for your body.'",
       "evidence": "grep for player|desktop|mouse|click across the nine final.md files returns only commons/maps/Topology_Entropy_Morphogenesis/final.md:19; contrast commons/maps/SoftBodies_Playground_of_Joy/final.md:30 and commons/maps/SoftBodies_Obsticals/final.md:17.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'too narrow for your body'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -465,9 +465,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ProceduralGeneration_Reaction_Diffusion_Systems"
       ],
@@ -482,7 +482,7 @@
       "proposal": "Change to 'STEP performs one update; 100 STEPS performs a hundred, which makes the consequence easier to see while keeping the same rule.'",
       "evidence": "commons/artifacts/timing_machines/soft_workshop.json:145-146 lists STEP and 100 STEPS; commons/artifacts/timing_machines/soft_workshop.gd:186-191 runs _simulation_step() 1 or 100 times, yielding a frame every ten.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'STEP performs one update; 100 STEPS performs a hundred...'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -493,9 +493,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SoftBodies_Affect_Theory_Visualization"
       ],
@@ -510,7 +510,7 @@
       "proposal": "Add [^1]: Ernst Haeckel, Kunstformen der Natur (1899-1904), the Radiolaria plates, with one line stating that this generator's families echo those plates' geometric vocabulary and that no parameter here is a measured property of a living radiolarian.",
       "evidence": "commons/artifacts/registry/computational_biology.json entry radiolaria: 'Geometry so perfect it inspired Ernst Haeckel's Art Forms in Nature'; commons/maps/SoftBodies_Affect_Theory_Visualization/final.md has no footnote; algorithms/computationalbiology/radiolaria2/radiolaria.gd:26-28 the parameters the chapter cites.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: [^haeckel] on the recognition sentence.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -521,9 +521,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SoftBodies_Playground_of_Joy"
       ],
@@ -538,7 +538,7 @@
       "proposal": "Either add a clause naming it as a passing agent from an earlier sequence that this hall does not use, or, if it is inert without a grid to work on, decide whether the placement belongs here; the prose should match whichever the author chooses.",
       "evidence": "commons/maps/SoftBodies_Playground_of_Joy/map_data.json interactables cell (4,26) `gridagent`, utilities `wp` at (7,33) (11,34) (5,36) (12,37) (8,39); commons/maps/SoftBodies_Playground_of_Joy/artifacts.md:8 lists gridagent as secondary; commons/hazards/gridagent/grid_agent_base.gd:4-5 (wandering CharacterBody3D with NavigationAgent3D and thought_label), :72 current_grid from GridInterface.get_grid_at_position, :204/:222/:260 early returns when there is no grid.",
       "review": "confirmed by a code checker (cited files only): SoftBodies_Playground_of_Joy interactables (4,26) = 'gridagent'; utilities 'wp' at (7,33),(11,34),(5,36),(12,37),(8,39); artifacts.md:8 lists gridagent as secondary; registry hazards.json:4788 keys the token. grid_agent_base.gd:4-5 is a wandering CharacterBody3D with NavigationAgent3D, :60 thought_label: Label3D, :72 current_grid from GridInterface.get_grid_at_position, :204/:222/:260 fall back to WANDERING or return false when no grid. final.md:15 names only the branching study and field sculpture.",
-      "notes": "",
+      "notes": "Applied 2026-09-25 (prose): the agent named as one from an earlier sequence with nothing of its own to do here, in a sentence true whether it wanders or stands. The placement is left as is.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
