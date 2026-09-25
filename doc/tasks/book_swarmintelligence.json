@@ -143,9 +143,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_Particle_Swarm_Optimization"
       ],
@@ -160,7 +160,7 @@
       "proposal": "Change 'three' to 'four' and add a short paragraph after the NOVELTY passage: RIDGE scores perpendicular distance from the diagonal, so two particles far apart on the line score alike while one a hand's width off it scores as badly as one at the corner; 'Meritocratic' is the fourth invitation to argue. The closing line about displaying two conflicting scores can then name it.",
       "evidence": "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd:535 `_controls.choices = PackedStringArray([\"CONVERGE\", \"SPREAD\", \"NOVELTY\", \"RIDGE\"])`; :645-647 caption 'RIDGE — Meritocratic' / 'One narrow path counts.'; :421-423 fitness `-absf(pos.x - pos.z) * SQRT_HALF`; :49-52 doc comment on the 0.5 m band. The map places the token with no mandate key (commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/map_data.json:449), so all four buttons are live.",
       "review": "confirmed by a code checker (cited files only): fitness_landscape_politics.gd:535 choices CONVERGE/SPREAD/NOVELTY/RIDGE; :645-647 'RIDGE — Meritocratic' / 'One narrow path counts.'; :421-423 RIDGE returns -absf(pos.x - pos.z) * SQRT_HALF; :49-52 doc comment on the ~0.5 m diagonal band. Map line 449 places bare 'fitness_landscape_politics' with no mandate key. final.md:9 says 'three different questions' and names only Corporate, Ecological, Artistic.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'four questions', Meritocratic added to the labels, a RIDGE paragraph after the archive passage, the closing line names RIDGE beside SPREAD. NOTE: the score is graded by perpendicular distance, so 'a hand's width off scores as badly as the corner' is not what the code does; the chapter says 'scored by how far off the line it stands, never by where along it'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -171,9 +171,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_Agent_Based_Modeling_ABM"
       ],
@@ -188,7 +188,7 @@
       "proposal": "One map-token edit: `catalyst_foe:0:0#initial_state:curious` (the key the foe's apply_grid_config accepts) so it wanders without hunting; the vent can stay as it is, since it only fires once the visitor has taken the crystal. If the encounter is wanted, add one sentence to the chapter saying a foe shares the hall and what to do about it.",
       "evidence": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/map_data.json:431 `catalyst_foe`, :461 `catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto`, :373 `catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45`; commons/hazards/hazard_creature_base.gd:39 `var _personality: String = \"foe\"`, :28 `contact_damage: float = 15.0`, :56-57 `_can_chase`/`_can_damage = true`, :604-614 `_query_hazard_manager`; commons/managers/HazardManager.gd:54 `return _personalities.get(hazard_type, \"foe\")`; commons/maps/soft_stages.json:690ff swarmintelligence personality_shift names only miura_crawler, kaleidocycle_enemy, octapod_crawler; commons/hazards/catalyst_foe/catalyst_foe.gd:1929-1936 `if config.has(\"initial_state\")`; commons/hazards/catalyst_foe/catalyst_vent.gd:30 `require_catalyst_armed: bool = true`; commons/maps/sequences/swarmintelligence.json:53 deferred_reason.",
       "review": "confirmed by a code checker (cited files only): ABM map:431 'catalyst_foe' bare, :461 catalyst_vent with sequence:auto, :373 catalyst_prompter_box. hazard_creature_base.gd:39 _personality = \"foe\", :28 contact_damage 15.0, :56-57 chase/damage true; HazardManager.gd:54 defaults to 'foe'; soft_stages.json:710-713 swarmintelligence personality_shift names only miura_crawler, kaleidocycle_enemy, octapod_crawler. catalyst_foe.gd:1929-1936 accepts initial_state if in PERSONALITY_ARC (base :16-18: foe, wary, neutral, curious, friend) and sets _personality_seeded; its own _query_hazard_manager (:1941-1942) returns early when seeded, so 'curious' survives. catalyst_vent.gd:30 require_catalyst_armed = true. swarmintelligence.json:53 deferred_reason says the catalyst chambers left the walk. final.md:7 has the quote and never mentions a foe.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: MAP EDIT - catalyst_foe -> catalyst_foe:0:0#initial_state:curious in SwarmIntelligence_Agent_Based_Modeling_ABM/map_data.json (curious: _can_chase false, _can_damage false, contact_damage 0, orbits). Staged against HEAD; the tree's 20 Sept reindent stays uncommitted. Pathfinder run. Chapter unchanged.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -227,9 +227,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_PhysarumColony"
       ],
@@ -244,7 +244,7 @@
       "proposal": "One sentence opening the mechanism paragraph: 'The colony borrows its name from Physarum polycephalum, a slime mould that thickens the tubes it keeps using and lets the others go; here each simulated agent samples the field ahead and to either side...' Keep the caveat as it stands.",
       "evidence": "commons/maps/SwarmIntelligence_PhysarumColony/final.md:1-25 contains 'Physarum' only inside the anchor comment at :5; algorithms/swarmintelligence/physarum/PhysarumColony.gd:70 `CAPTION_FMT = \"PHYSARUM  %-8s\"` and :331; commons/maps/SwarmIntelligence_FlowFields/final.md:17 'Physarum's agents helped write the field'; algorithms/swarmintelligence/physarum/PhysarumAgent.gd:8 '(Jeff Jones Model)'.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The colony borrows its name from Physarum polycephalum, a slime mould that thickens the tubes it keeps using and lets the others go.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -255,9 +255,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_FlowFields"
       ],
@@ -272,7 +272,7 @@
       "proposal": "Rewrite the sentence: the piece can be placed with its arrows hidden and one scene held; this hall shows the arrows so the cause stays visible, and a second placement without them is the test. If a second 40 m field cannot fit the hall, that sentence is still the honest one; if it can, place `FlowFieldMain#scenario:u_wall#field_display:hidden` and let the chapter send the reader to it.",
       "evidence": "algorithms/pathfinding/flow_field/FlowFieldMain.gd:25 `@export_enum(\"tour\", \"open\", \"block\", \"u_wall\", \"zigzag\", \"wind\", \"noise\") var scenario`, :26 `@export_enum(\"arrows\", \"hidden\") var field_display`, :60 `visualizer.visible = (field_display != \"hidden\")`, :184-205 apply_grid_config reads both keys from a token; :56 `FlowGrid.new(40, 40, 1.0)` is a 40 m field in a 13x10 hall (map_data.json map_info.dimensions); the map places only `FlowFieldMain:90` (commons/maps/SwarmIntelligence_FlowFields/map_data.json:61).",
       "review": "confirmed by a code checker (cited files only): FlowFieldMain.gd:25 scenario enum incl. u_wall; :26 field_display enum arrows/hidden; :56 FlowGrid.new(40, 40, 1.0); :60 visualizer.visible = (field_display != \"hidden\"); :184-205 apply_grid_config reads both keys. SwarmIntelligence_FlowFields/map_data.json:61 places only FlowFieldMain:90 (plus AntColonyV2 and ecosystem_simulation elsewhere); map_info.dimensions 13x10. final.md:21 contains 'For a future version'. Whether a second 40 m field fits is a placement question the map cannot answer here.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the sentence rewritten - placeable with arrows hidden and one scene held; that placement is the test; this hall shows the arrows so the cause stays visible; the version without them is one token away and not yet placed. No second placement made (a 40 m field in a 13x10 hall).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -283,9 +283,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_Agent_Based_Modeling_ABM"
       ],
@@ -300,7 +300,7 @@
       "proposal": "One sentence: Colony is the foraging you have been watching; Communication lets an ant returning with good food send a ring out from the nest and lead one idle ant to the source in tandem; Multi-Source nudges foragers towards richer food and draws each source's quality as a ring around it.",
       "evidence": "algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd:48 `enum Mode { COLONY, COMMUNICATION, MULTI_SOURCE }`; :901-902 mode label text; :492-499 recruitment signal emitted in COMMUNICATION; :599-654 tandem pairs; :538-540 and :565-582 quality bias in MULTI_SOURCE; :774-789 quality ring drawn in MULTI_SOURCE.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: Colony / Communication / Multi-Source each given one sentence.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -339,9 +339,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_Particle_Swarm_Optimization"
       ],
@@ -356,7 +356,7 @@
       "proposal": "'...while continuing velocity, and a shared best just re-chosen under the new score, still influence where the next update carries the particle.' The later paragraph on re-scoring then reads as the same rule rather than a second one.",
       "evidence": "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd:617-623 `_switch_landscape` calls `_reset_memories()`; :494-501 `p[\"best_pos\"] = p[\"pos\"]` for every particle, then `_rescore_memories()`; :437 `p[\"vel\"] = inertia * p[\"vel\"] + cognitive + social`, where the cognitive term is zero when best_pos equals pos.",
       "review": "confirmed by a code checker (cited files only): _switch_landscape (:617-623) calls _reset_memories(); :494-501 sets p['best_pos'] = p['pos'] for every particle then _rescore_memories(); :437 vel = inertia*vel + cognitive + social, with cognitive = COGNITIVE_WEIGHT*r1*(best_pos - pos) = 0 at that instant. final.md:11 has the quoted sentence. Note the erasure is only of the personal bests; the shared best is re-chosen under the new score and velocity carries over, exactly as the proposal words it.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: '...continuing velocity, and a shared best just re-chosen under the new score, still influence...'; plus 'The button also resets every particle's own memory to where it stands, so what carries over from before is the motion, not the past.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -367,9 +367,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_FlowFields"
       ],
@@ -384,7 +384,7 @@
       "proposal": "Move it to the end of the cost-map paragraph and say where: 'At the target, and inside a wall or a sealed region the costs never reached, the arrow is zero and the agent wanders.'",
       "evidence": "algorithms/pathfinding/flow_field/FlowGrid.gd:114-116 unreachable cells -> `Vector2.ZERO`; :118-137 the target cell has no lower-cost neighbour so `best_dir` stays ZERO; :161-164 `vector_field.fill(v)` for wind; :146-159 a unit vector in every cell for noise; algorithms/pathfinding/flow_field/FlowAgent.gd:34-38 the wander branch on a zero vector.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the zero-direction sentence (with the wander and Reynolds sentences that depend on it) moved to the end of the cost-map paragraph: 'At the target, and inside a wall or a sealed region the costs never reached, the arrow is zero and the agent wanders.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -395,9 +395,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_FlowFields"
       ],
@@ -412,7 +412,7 @@
       "proposal": "One sentence before the handover: 'The sand at the side, where ants are already writing a field of their own, and the small box of prey and predators belong to later rooms; for now notice that neither has arrows.'",
       "evidence": "commons/maps/SwarmIntelligence_FlowFields/map_data.json:61 `AntColonyV2` at (9,4) beside `FlowFieldMain:90` at (6,4), :63 `ecosystem_simulation` at (1,6); algorithms/swarmintelligence/ants_v2/AntColonyV2.gd:95 `terrain_size = Vector2(50, 50)`; `python tools/artifact_roles.py --brief --map SwarmIntelligence_FlowFields` lists both as secondary; the chapter's only anchor is FlowFieldMain (final_tags: 1 tagged, 1 work).",
       "review": "confirmed by a code checker (cited files only): FlowFields map:61 'FlowFieldMain:90' at (6,4) and 'AntColonyV2' at (9,4); :63 'ecosystem_simulation' at (1,6); these are the hall's only three works. AntColonyV2.gd:95 terrain_size = Vector2(50, 50). artifact_roles --brief lists FlowFieldMain primary, AntColonyV2 and ecosystem_simulation secondary. final.md anchors only @FlowFieldMain (:5, plus an empty @ at :23), :25 has the quoted sentence, and no line mentions ants, the ecosystem or prey. (The 'chapters five and seven' ordinals were not checked; they are not in the evidence.)",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The sand at the side, where ants are already writing a field of their own, and the small box of prey and predators belong to later rooms; for now notice that neither has arrows.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -423,9 +423,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_Particle_Swarm_Optimization"
       ],
@@ -440,7 +440,7 @@
       "proposal": "Two sentences before the handover: the plate at the back runs a temperature over a field of spins; push NOISE up until order dissolves and back until it returns, and ask whether 'self-organising' named the rule or the temperature - the capstone's question a room early.",
       "evidence": "commons/maps/sequences/swarmintelligence.json:133-136 artifact_groups entry and rationale; commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/map_data.json:514 `self_organizing_patterns:0:1.8:0.35`; algorithms/emergentsystems/selforganizingpatterns/self_organization_principles.gd:19 three modes (stigmergy field, Ising phase transition, attractor basins), :24 '[has] VR slider for Noise (temperature) and Coupling; [has] mode cycle button and reset button'.",
       "review": "confirmed by a code checker (cited files only): swarmintelligence.json:133-136 artifact_groups lists self_organizing_patterns with rationale 'Self-organizing patterns show emergent structure'; SwarmIntelligence_Particle_Swarm_Optimization/map_data.json:514 `self_organizing_patterns:0:1.8:0.35`; self_organization_principles.gd:19 three modes incl. Ising phase transition, :24 '[has] VR slider for Noise (temperature) and Coupling; [has] mode cycle button and reset button'; registry entry algorithms_misc.json:7586. final.md:29 has the quote and no mention of self_organizing / self-organis except that sentence.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: one paragraph before the handover - press the plate's button once for the field of spins (default mode is STIGMERGY), NOISE as temperature, order dissolving and returning, the capstone's question a room early.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -451,9 +451,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_PhysarumColony"
       ],
@@ -468,7 +468,7 @@
       "proposal": "One clause ahead of the existing sentence: 'The previous hall cut one hollow for one body and asked whether it could be entered; here nothing is cut - five hundred agents rewrite the ground they move on. The cellular automata rooms asked how repeated local updates produce a pattern...'",
       "evidence": "commons/maps/Boolean_Works/final.md:136 closing handover; commons/maps/curriculum_spine.json spine.sequences order: cellularautomata 12, boolean_surfaces 18, swarmintelligence 19, machinelearning 20; commons/maps/ML_Evolution/final.md:17 as the model of a pickup; algorithms/swarmintelligence/physarum/PhysarumColony.gd:76 `num_agents: int = 500`.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The previous hall cut one hollow for one body and asked whether it could be entered; here nothing is cut, and five hundred agents rewrite the ground they move on.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -479,9 +479,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_Ant_Colony_Optimization"
       ],
@@ -496,7 +496,7 @@
       "proposal": "End the chapter on the paragraph before ('Which parts of the field preserve possibilities that are receiving less traffic? A route's visibility depends partly on its history of use.') and let Physarum hold the movable-anchor proposal for both colonies. Keep the deferrals that name a real absence: the ecosystem's care-off comparison and the swarm's two displayed scores.",
       "evidence": "Deferrals at commons/maps/SwarmIntelligence_PhysarumColony/final.md:19, SwarmIntelligence_FlowFields/final.md:21, SwarmIntelligence_Boids_Algorithm/final.md:19, SwarmIntelligence_Agent_Based_Modeling_ABM/final.md:21, SwarmIntelligence_Ant_Colony_Optimization/final.md:21, SwarmIntelligence_Particle_Swarm_Optimization/final.md:25, SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md:19; Physarum:19 'compare adaptation with the persistence of old traces' against ACO:21 'how quickly the colony would adapt and how strongly yesterday's route would persist'.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the deferral paragraph cut; the foraging-simulation caveat moved above the two-directions paragraph so the chapter ends on the history of use. Physarum keeps the movable-anchor proposal.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -535,9 +535,9 @@
       "effort": "1h",
       "skill": "ada-map-expert",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_Boids_Algorithm"
       ],
@@ -552,7 +552,7 @@
       "proposal": "Either (a) keep the refusal: delete the header line and the 'needs: [has] VR controller attract/repel' line in boid_manager.gd so the code stops promising it; or (b) find the controllers at runtime (XRController3D by group, as removal_arena.gd finds the body) and rewrite the candidate's first and Edge paragraphs to a hand the flock answers to.",
       "evidence": "algorithms/emergentsystems/boidflocking/boid_manager.gd:7,9,108-110,135-146,482-493; boid_manager.tscn (no *_path set)",
       "review": "by hand: every line cited was read in the pilot",
-      "notes": "",
+      "notes": "Applied 2026-09-25 (option a): the two identity lines in boid_manager.gd (triggers, needs) now say the controller NodePaths are never set in the scene and nothing turns for a body; comments only, compile-checked. The chapter's refusal stands.",
       "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-swarmintelligence-boids-edges-pilot)",
       "created_at": "2026-09-24",
       "triage": null,
@@ -584,7 +584,7 @@
       "proposal": "Decide: keep as the honest encounter (and note it in the artifact's registry blurb), or add a #fit / hall-sized box as LineNetworkCA got on 24 Sept - in which case rewrite the candidate's first paragraph.",
       "evidence": "algorithms/emergentsystems/boidflocking/boid_manager.gd:103,189-200; Boid.gd:1,26,138-152",
       "review": "by hand: every line cited was read in the pilot",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): recommend KEEP - the chapter is written to the flock through the walls and the encounter is honest. The registry blurb line is Palle's call; a #fit box would mean rewriting the chapter's first paragraph.",
       "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-swarmintelligence-boids-edges-pilot)",
       "created_at": "2026-09-24",
       "triage": null,
@@ -599,9 +599,9 @@
       "effort": "10min",
       "skill": "ada-map-expert",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "SwarmIntelligence_Boids_Algorithm"
       ],
@@ -616,7 +616,7 @@
       "proposal": "Drop the (2,2) cell or replace it with something that stands in the hall; boids_2d_in_3d already carries the reading panel.",
       "evidence": "algorithms/emergentsystems/boidflocking/boids_explained.tscn:40; commons/artifacts/registry/algorithms_misc.json boid_flocking; map cell (2,2)",
       "review": "by hand: every line cited was read in the pilot",
-      "notes": "",
+      "notes": "Applied 2026-09-25: MAP EDIT - the boid_flocking cell at (2,2) emptied in SwarmIntelligence_Boids_Algorithm/map_data.json (boids_explained.tscn's root is a CanvasLayer). Staged against HEAD; the tree's 14 Sept one-cell structure change stays uncommitted. Pathfinder run.",
       "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-swarmintelligence-boids-edges-pilot)",
       "created_at": "2026-09-24",
       "triage": null,

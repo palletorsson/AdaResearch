@@ -14,9 +14,11 @@ Each ant samples three nearby directions and turns according to the signals it e
 
 This coordination through a changed environment is called stigmergy. It lets individual acts affect later acts without requiring a central announcer. The previous room separated individual rules from the population picture; here the trail makes the connection between them visible.
 
+Compare the two food directions instead of assuming the most prominent path tells the whole story. Which connection currently receives more reinforcement? Which parts of the field preserve possibilities that are receiving less traffic? A route’s visibility depends partly on its history of use.
+
 This is a foraging simulation. Its title invites a connection to ant colony optimisation, but an attractive trail is not a proof that a shortest route or an optimal travelling-salesman tour has been found. Such a claim would require a specified problem, an objective and a comparison with alternatives.
 
-Compare the two food directions instead of assuming the most prominent path tells the whole story. Which connection currently receives more reinforcement? Which parts of the field preserve possibilities that are receiving less traffic? A route’s visibility depends partly on its history of use.
+Moving a food source would be a useful future interaction: a group could predict how quickly the colony would adapt and how strongly yesterday’s route would persist. For now, the placed scene offers fixed food directions to observe.
 
 <!-- @ -->
 

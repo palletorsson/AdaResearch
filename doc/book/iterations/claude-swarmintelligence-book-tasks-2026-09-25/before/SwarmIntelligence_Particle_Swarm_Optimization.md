@@ -6,9 +6,9 @@ When a swarm improves, who decided what better means?
 
 Watch the population under CONVERGE, then choose SPREAD. The button changes the score while the particles keep their positions and motion. Keep INERTIA steady and watch the turn. For a comparison from the same beginning, use RESET after selecting each objective: it restores the same scatter and velocities. Next try NOVELTY. Before reading these as success and failure, describe what each setting seems to reward.
 
-CONVERGE rewards movement towards the centre. SPREAD rewards distance from it; two particles can score equally well while crowding the same edge. NOVELTY rewards distance from positions retained in an archive. RIDGE, the fourth button, comes later. These are four different questions put to the same moving bodies. The labels Corporate, Ecological, Artistic and Meritocratic are invitations to argue about those questions, not properties proved by the equations.
+CONVERGE rewards movement towards the centre. SPREAD rewards distance from it; two particles can score equally well while crowding the same edge. NOVELTY rewards distance from positions retained in an archive. These are three different questions put to the same moving bodies. The labels Corporate, Ecological and Artistic are invitations to argue about those questions, not properties proved by the equations.
 
-Keep your attention on one region when you exchange CONVERGE for SPREAD. The region has not moved, but its value under the new objective has changed. Describe the difference as a change of reward before describing any particle as more capable. This also helps with a slow response: the visible position belongs to the current moment, while continuing velocity, and a shared best just re-chosen under the new score, still influence where the next update carries the particle. The button also resets every particle’s own memory to where it stands, so what carries over from before is the motion, not the past.
+Keep your attention on one region when you exchange CONVERGE for SPREAD. The region has not moved, but its value under the new objective has changed. Describe the difference as a change of reward before describing any particle as more capable. This also helps with a slow response: the visible position belongs to the current moment, while continuing velocity and remembered positions can still influence where the next update carries the particle.
 
 Each particle remembers a position that scored well for it. The swarm also retains a shared best position. A velocity update combines continuing motion with pulls towards those personal and shared memories, using varying random contributions. INERTIA changes how strongly the existing movement carries into the next update.
 
@@ -20,13 +20,9 @@ A remembered position must be scored again when the archive changes. Yesterday's
 
 The archive holds at most two hundred positions, sampled one at a time rather than recording every visit. When it fills, new entries replace the oldest. An apparently unexplored place can be unfamiliar to this record without being unfamiliar to the world. New relative to whom, and to how much of their past?
 
-Now press RIDGE. The plate goes dark except for a band about half a metre wide running corner to corner, and the score is the distance from that diagonal: a particle is scored by how far off the line it stands, never by where along it, so two particles at opposite ends of the line score alike and the rest of the plate counts for nothing. One narrow path counts, the label says, and calls it Meritocratic. It is the sharpest of the four questions, because it is the only one with a straight edge.
-
 Now change INERTIA within one objective. Ask whether overshooting is always wasteful. Motion that delays settling can also carry a particle beyond a region it would otherwise keep revisiting. The consequences depend on the landscape and on what the score values.
 
-An optimiser cannot settle a disagreement about what should be optimised. Rewarding dispersion here may be a productive alternative to rewarding concentration; it does not automatically make dispersion good in every social setting. A future comparison could display two of these scores together, RIDGE beside SPREAD, keeping the compromise visible instead of hiding it inside one number.
-
-One more work stands at the back, a plate with two sliders and a button. Press the button once and it becomes a field of spins under a temperature: push NOISE up until the order dissolves, and back down until it returns. Ask whether self-organising named the rule or the temperature. That is the capstone’s question, a room early.
+An optimiser cannot settle a disagreement about what should be optimised. Rewarding dispersion here may be a productive alternative to rewarding concentration; it does not automatically make dispersion good in every social setting. A future comparison could display two conflicting scores together, keeping the compromise visible instead of hiding it inside one number.
 
 <!-- @ -->
 

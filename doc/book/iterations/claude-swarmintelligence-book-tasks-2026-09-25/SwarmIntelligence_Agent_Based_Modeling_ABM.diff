@@ -1,0 +1,11 @@
+--- before/SwarmIntelligence_Agent_Based_Modeling_ABM.md
++++ after/SwarmIntelligence_Agent_Based_Modeling_ABM.md
+@@ -14,7 +14,7 @@
+ 
+ Next vary ANTS. The control replaces the population but leaves its field behind. The new ants arrive in a world marked by ants that are no longer there. Watch whether they pick up an old route. Then RESET: this time the marks disappear too. Replacing the travellers and erasing their history are two different acts. Compare fewer agents leaving more persistent marks with more agents leaving shorter-lived marks; similar pictures can have different histories.
+ 
+-The MODE control offers three behaviours within this model family. It does not turn the room into a language for inventing arbitrary agents. A useful comparison still begins by naming exactly which rule or condition has changed.
++The MODE control offers three behaviours within this model family. Colony is the foraging you have been watching. Communication lets an ant returning with good food send a ring out from the nest and lead one idle ant to the source in tandem. Multi-Source nudges foragers towards richer food and draws each source’s quality as a ring around it. It does not turn the room into a language for inventing arbitrary agents. A useful comparison still begins by naming exactly which rule or condition has changed.
+ 
+ An agent can be a convenient unit without being an adequate model of a person.[^braitenberg] These agents inherit the same limited sensory world, and the shared grid decides which traces can count. A simulation of people would need an argument for those omissions, not simply a change of labels from ants to citizens.
+ 
