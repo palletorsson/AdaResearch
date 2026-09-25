@@ -1,0 +1,31 @@
+--- before/ISO_Metaballs.md
++++ after/ISO_Metaballs.md
+@@ -7,9 +7,12 @@
+ At the desk, press EMPLACE. The same ten sources move from a column to a ring, a pair, a shell and a scatter. Then press KERNEL. The contribution of each source changes from inverse square to Wyvill, Gaussian or cone. Keep the source count fixed while you change the arrangement; keep the arrangement fixed while you change the falloff. That separation is the lesson.
+ 
+ ```gdscript
+-density(p) = sum(kernel(source_i, p))
+-surface = density(p) > iso_level
++# metaballgenerator.gd
++total_field += mb_sr2[m] / dist_sq
++if cv0 > iso_level: cube_index |= 1
+ ```
++
++Each source adds its strength times its radius squared over the square of the distance, and each corner above the level sets one bit of the case.
+ 
+ Press HOLD before making a change. The earlier boundary stays behind the live field, so a neck can be read as a relation rather than a special object. When a bridge pinches off, nothing has been cut from a mesh. A different set of samples simply crosses the same threshold in a different place.
+ 
+@@ -19,11 +22,11 @@
+ 
+ <!-- @nakama_metaballs -->
+ 
+-Nakama keeps the blob vocabulary but changes the implementation and the limits of the body. It is a comparison, not a third control on the desk.
++Nakama keeps the blob vocabulary but never extracts a surface: it pushes one sphere in and out by the field’s value, so the body can breathe but no neck can ever pinch off. That is the comparison, and it is not a third control on the desk.
+ 
+ <!-- @metaballs -->
+ 
+-The small rear specimen is the compact reminder: several influences can become one visible mass, but the threshold still decides where the body ends.
++At the back the same raymarched body stands again at full size, twelve metres of it. It is not a sum: the threshold that ends it is where the ray stops. What the small copy nearby let you walk round, this one lets you stand under.
+ 
+ <!-- @ -->
+ 

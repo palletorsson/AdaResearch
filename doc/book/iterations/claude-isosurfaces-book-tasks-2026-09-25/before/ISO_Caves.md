@@ -2,7 +2,7 @@
 
 <!-- @mc_portal_landscape -->
 
-A second portal landscape, not the one you left: that field had no rings; this one writes seven torus fields into the ground and joins them to the terrain as one surface. The portal landscape is a promise made by a boundary. From the approach it looks like terrain with openings: stone rises, a ring declares a passage, and the field has been asked to join the two. Walk its edge first. Does the opening meet the floor, or does the name “portal” ask you to supply a route the mesh has not made?
+The portal landscape is a promise made by a boundary. From the approach it looks like terrain with openings: stone rises, a ring declares a passage, and the field has been asked to join the two. Walk its edge first. Does the opening meet the floor, or does the name “portal” ask you to supply a route the mesh has not made?
 
 The generator carries a count and a burial choice:
 
@@ -23,7 +23,7 @@ density = ridged_noise(p) - plumbScale * (p.y + 100.0) / 300.0;
 
 `plumb` is a written vertical bias: bedded, overturned, weightless or steep. `octaves` decides how many scales of the ridged sum survive. The field is sampled at a level and extracted into triangles. It is not a cave because the label says so; it becomes an interior when the classified air has enough width, headroom and an entrance.
 
-Press HOLD before changing the field. The earlier view stays behind the live specimen as a memory of the surface. The terrain desk’s column could count several crossings; a count was never a body. Follow the wall, look back to the entrance, and test the route with your own clearance rather than with the most dramatic chamber in view.
+Press HOLD before changing the field. The earlier view stays behind the live specimen as a memory of the surface. A column can show several crossings, but a counter is not a body. Follow the wall, look back to the entrance, and test the route with your own clearance rather than with the most dramatic chamber in view.
 
 <!-- @queer_marching_cave -->
 

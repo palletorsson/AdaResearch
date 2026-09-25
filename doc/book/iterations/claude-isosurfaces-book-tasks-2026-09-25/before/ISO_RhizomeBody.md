@@ -16,7 +16,7 @@ The preceding room separated a visible field from collision geometry. Here the a
 
 Graph connectivity alone cannot certify access. Blending can merge features unexpectedly, a narrow passage can defeat an otherwise valid connection, and a collider can differ from what a view suggests. The loop you identify in the plan needs to be checked against the route available to a particular body.
 
-Before leaving, draw the graph you walked, junctions and passages, and mark the one passage you would narrow first. Which of the plan's connections would survive that on paper, and which could you no longer use? The plan beside a record of your route is the instrument this room does not have; your memory of the walk is the one it does.
+A useful extension would display the connection graph beside a record of a visitor's actual route. Keep the graph fixed while changing one passage width. Then ask which mathematical connections remained and which practical choices changed.
 
 <!-- @ -->
 

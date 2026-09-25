@@ -1,0 +1,25 @@
+--- before/ISO_PortalLandscape.md
++++ after/ISO_PortalLandscape.md
+@@ -4,20 +4,13 @@
+ 
+ How can an opening appear without an instruction that draws a doorway?
+ 
+-The landscape begins with hills. Come close enough to see their edges, then lower your viewpoint a little. The sheet has an underside. Choose a ridge you can recognise from both sides before pressing HOLD.
++The amber field from the last hall stands here alone, with a bay for a held copy. You pressed TERMS beside its neighbour; now walk it through all five names with nothing else in view. It begins as hills. Come close enough to see their edges, then lower your viewpoint a little. The sheet has an underside. Choose a ridge you can recognise from both sides before pressing HOLD.
+ 
+ An earlier surface remains in the neighbouring bay. Its scale, orientation and finish match the live one. Press TERMS once. Find your ridge again. Then press it a second time and look underneath. What has changed around the place you chose? The held hills give you somewhere to return with your eye.
+ 
+ The desk moves through hillside, overhung, quarried, arched and compound. Each step adds one weighted contribution to the same field. Coordinates, sampling and the selected level stay fixed. Keep following one place through those names. Some changes are small; a new word on the desk can arrive more dramatically than a new feature in the surface.
+ 
+-The landscape combines several terms in one density field. A base terrain term supplies an initial relation between ground and air. Other terms reduce density in ways intended to produce overhangs, caves and arches. An outcrop term adds material in selected regions. The extractor sees their combined value at each sample.
+-
+-```glsl
+-density = baseTerrain - overhangDensity - caveStrength
+-        - archStrength + outcropStrength;
+-```
+-
+-The additions and subtractions occur before the triangles exist. Each term has its own way of varying across space, including regions where its contribution is small or absent. A minus sign gives something permission to remove material; it does not decide what we will recognise in the result.
++The recipe was on the wall next door: a base terrain, three terms that take material away, one that adds it, summed before any triangle exists. What this second pass shows is the ladder entire. Each press adds one term to a field you can already read, and the held copy keeps the previous rung beside the live one, so the added term is the only difference in view. Each term has its own way of varying across space, including regions where its contribution is small or absent. A minus sign gives something permission to remove material; it does not decide what we will recognise in the result.
+ 
+ An opening can result where those contributions cross the threshold together. It need not exist as a separately modelled doorway. At the setting called “arched,” look for an arch. Shift your viewpoint to test whether a dark patch is a hole, a shadowed face or an overlap in projection. The word has given us an expectation. Where does the surface support it, and where are we supplying what we hoped to find?
+ 

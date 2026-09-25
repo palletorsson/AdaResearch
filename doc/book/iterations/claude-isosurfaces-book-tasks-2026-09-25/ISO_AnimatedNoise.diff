@@ -1,0 +1,11 @@
+--- before/ISO_AnimatedNoise.md
++++ after/ISO_AnimatedNoise.md
+@@ -16,7 +16,7 @@
+ 
+ The cave generation room compared different authored fields. This display changes where one field is sampled and lets you see successive representations. Apparent motion can come from replacement, even when no persistent object follows the path your eye invents.
+ 
+-A useful extension would freeze the offset and place this cell view beside the available edge-crossing markers. Those markers locate interpolated boundary positions without yet joining them into triangles. Compare both at the same resolution before asking what a finer sampling would improve.
++Before leaving, pick one cell that has just filled and say which of its eight corners crossed the level. The gold markers in the lookup hall located such crossings one edge at a time; this display draws the whole box instead. Both views at one resolution, with the offset frozen, would settle what a finer sampling improves.
+ 
+ <!-- @ -->
+ 

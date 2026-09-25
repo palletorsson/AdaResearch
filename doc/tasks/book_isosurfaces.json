@@ -184,9 +184,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_PortalLandscape"
       ],
@@ -201,7 +201,7 @@
       "proposal": "Open with the continuity: 'The amber field from the last hall stands here alone, with a bay for a held copy. You pressed TERMS beside its neighbour; now walk it through all five names with nothing else in view.' Cut the duplicated glsl block (keep it in FlatTerrain) and spend those lines on what the second pass shows.",
       "evidence": "commons/artifacts/registry/procgen_extra.json:7899 marchingcubes_portal_landscape.scene = res://.../marchingcubes_overhang_landscape.tscn, the same scene as isosurfaces.json:1479 mc_overhang_landscape; commons/artifacts/timing_machines/iso_portal_workshop.gd:3 TERMS is identical to iso_terrain_workshop.gd:4 TERMS and both call apply_grid_config({landform}); ISO_FlatTerrain/final.md:34-37 and ISO_PortalLandscape/final.md:15-18 quote the same MarchingCubesOverhangTerrain.glsl:255-259 block.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: opens on the continuity (the amber field from the last hall, alone, with a bay for a held copy; walk it through all five names); the duplicated glsl block cut and replaced with what the second pass shows.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -212,9 +212,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_Metaballs"
       ],
@@ -229,7 +229,7 @@
       "proposal": "Either add the scale to the token, `metaballs:0:2:0.2` in commons/maps/ISO_Metaballs/map_data.json row 28, so the rear body really is the compact one, or rewrite the sentence: 'At the back the same raymarched body stands at full size; the threshold that ends it is the ray's stopping distance, not a sum.'",
       "evidence": "ISO_Metaballs/map_data.json row 28 `metaballs:0:2` (3-part token, legacy rot:y with no scale: commons/grid/GridInteractablesComponent.gd:1533-1546) vs row 22 `raymarched_metaballs:0:0:0.2`; both resolve to implicitsurfacemodeling/metaballs/metaballs.tscn (procgen_extra.json:8449, isosurfaces.json:1980 kin note); metaballs.gd:115-116 BoxMesh 12 m; ada_run/em_bake.json segment 'isosurfaces|iso metaballs': raymarched_metaballs seals 4 cells, metaballs seals 0.",
       "review": "confirmed by a code checker (cited files only): ISO_Metaballs row 28 col: 'metaballs:0:2' (3 parts -> GridInteractablesComponent.gd:1534-1544 legacy rot:y_pos, no scale, so uniform_scale stays default; it is also lifted 2 m). Row 22: 'raymarched_metaballs:0:0:0.2' (4 parts, :1505-1526 -> uniform_scale 0.2). procgen_extra.json 'metaballs' (:8449, scene :8477) and isosurfaces.json 'raymarched_metaballs' (:1983) both resolve to implicitsurfacemodeling/metaballs/metaballs.tscn. metaballs.gd:113-116 BoxMesh 12 x 12 x 12. em_bake 'isosurfaces|iso metaballs': raymarched_metaballs seals 4 cells, metaballs seals 0. final.md:26 has the quoted sentence.",
-      "notes": "",
+      "notes": "Applied 2026-09-25 (prose option): 'At the back the same raymarched body stands again at full size, twelve metres of it. It is not a sum: the threshold that ends it is where the ray stops.' The map option (metaballs:0:2:0.2) is Palle's call; the map file carries another writer's uncommitted hunks.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -240,9 +240,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_CaveGeneration"
       ],
@@ -257,7 +257,7 @@
       "proposal": "Add one sentence: 'The striped tunnel beside it is a drawn stand-in, not an extraction; compare only the GPU cave with the enclosing cave you left.' Or swap `marchingcave:0:3:0.02` for a real field at a third setting and keep the sentence true.",
       "evidence": "commons/maps/ISO_CaveGeneration/map_data.json row 12 `marchingcave:0:3:0.02` and `marchingcubes_cave:0:3.1:0.02`; procgen_extra.json:7393 marchingcave.scene = marchingcubes.tscn whose Terrain node sets use_fallback = true; algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd:26-29 ('what renders is _create_simple_cave_mesh()'s hand-written 200 m sine tunnel') and :185-210; iso_specimen_stage.gd:20 targets; ISO_AnimatedNoise/map_data.json row 12 `mc_base:0:1.5:0.02`.",
       "review": "confirmed by a code checker (cited files only): ISO_CaveGeneration row 12: 'marchingcave:0:3:0.02', 'marchingcubes_cave:0:3.1:0.02'. procgen_extra.json marchingcave.scene = marchingcave/Scenes/marchingcubes.tscn; that tscn line 47 'use_fallback = true'. TerrainGenerator.gd:26-29 states the fallback renders _create_simple_cave_mesh()'s hand-written sine tunnel; :310 'if use_fallback or rendering_device == null'. iso_specimen_stage.gd:20 targets ['marchingcave','marchingcubes_cave']. ISO_AnimatedNoise row 12 'mc_base:0:1.5:0.02'; isosurfaces.json mc_base.scene is the same marchingcubes.tscn. final.md:11 has the quoted sentence. Side note: procgen_extra.json declares dna.axes.plumb on marchingcave although the code comment says it must not be declared.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The striped tunnel beside it is a drawn stand-in, not an extraction; compare only the GPU cave with the enclosing cave you left.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -268,9 +268,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_ImplicitModeling"
       ],
@@ -285,7 +285,7 @@
       "proposal": "After the opening question add: 'You have passed this body twice already. Here its joins are set wider: the smoothing constant is 2.6 where the earlier copies used 0.4, so look first at what a larger k does to a neck.' And compare with the raymarched copy in the metaball hall rather than 'the metaball specimen'.",
       "evidence": "ISO_ImplicitModeling/map_data.json row 10 `implicit_surface_modeling:0:3.2:1#fusion:necked`; metaballs.gd:96 FUSION_K necked 2.6, :17 blend_factor 0.4, :147-149 _blend(); registry kin note (three tokens, one scene); ISO_Caves/map_data.json row 37 `raymarched_metaballs:0:1:0.08`; ISO_Metaballs rows 22 and 28; ISO_Metaballs/final.md:18 already explains 'signed distance functions are blended while a ray advances'.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'You have passed this body three times already... the smoothing constant is 2.6 where the earlier copies used 0.4'; 'the raymarched copy in the metaball hall'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -313,7 +313,7 @@
       "proposal": "Walk it in the headset. If a 1.8 m body cannot enter, rewrite the region as looking INTO a cave ('lower your eye to its mouth') or give the enclosure paragraph to queer_marching_cave, which has a collider and a VR-scale cave_size, or add an entrance-scale instance of mc_inside_cave.",
       "evidence": "ISO_Caves/map_data.json row 14 `mc_inside_cave:0:0.05:0.02`; marchingcubes_inside_cave.tscn Terrain node chunk_scale = 280; TerrainGenerator.gd:20-24 (the Camera3D inside the field is why the scene reads as an interior); ada_run/em_bake.json 'isosurfaces|iso caves' mc_inside_cave seal []; ada_encyclopedia/captures/ada-run/iso-caves-review-2026-09-15/run.json headset_verified false; iso_cave_workshop.gd:40 has no PROBE unlike iso_gyroid_workshop.gd:103-122; QueerMarchingCave.gd:120 cave_size Vector3(10, 6, 10) 'VR scale' and QueerMarchingCave.tscn CaveCollision StaticBody3D.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): needs a headset walk (can a 1.8 m body enter mc_inside_cave at scale 0.02); the enclosure paragraph stands until then.\nLeft open 2026-09-25 (claude-edges-pilot): needs a headset walk (can a 1.8 m body enter mc_inside_cave at scale 0.02); the enclosure paragraph stands until then.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -324,9 +324,9 @@
       "effort": "half-day",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_LookupTable"
       ],
@@ -341,7 +341,7 @@
       "proposal": "Add `<!-- @the_threshold_opinion -->` after the fifteen-cases region with a short passage: from the rack (the same fifteen) to the five thresholds of ONE field and the 4/8/14 row, tied to the MARGIN lesson (values fixed, cut moved; here the cut fixed, the field's own values on show).",
       "evidence": "ISO_LookupTable/map_data.json row 20 `the_threshold_opinion` between fifteen_cases_demo (row 11) and mc_cave/metaball_world (rows 29-30); commons/artifacts/registry/isosurfaces.json:3065 description; commons/artifacts/the_threshold_opinion/the_threshold_opinion.gd (170 lines); tools/final_tags.py --map=ISO_LookupTable reports 1 tagged work.",
       "review": "confirmed by a code checker (cited files only): ISO_LookupTable/map_data.json: iso_lookup_console (row 3), fifteen_cases_demo (row 11), the_threshold_opinion at (row 20, col 12), mc_cave (29), metaball_world (30). isosurfaces.json:3065 the_threshold_opinion, description 'The isosurfaces SUPER OBJECT ... ONE field ... five surfaces ... five thresholds'. the_threshold_opinion.gd is 170 lines. final.md has one tag (<!-- @fifteen_cases_demo -->) and the sentence 'Keep that limit available for a later experiment.'; final_tags.py reports 3 regions, 1 tagged, 1 work.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: <!-- @the_threshold_opinion --> and a passage from the identity header and the code (rods, five thresholds, the 4/8/14 row per _build_resolution_row, the brass rack, the pair mid-merge), tied to MARGIN.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -352,9 +352,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_Caves"
       ],
@@ -369,7 +369,7 @@
       "proposal": "Open: 'A second portal landscape, not the one you left: that field had no rings; this one writes seven torus fields into the ground and joins them to the terrain as one surface.'",
       "evidence": "isosurfaces.json:621 mc_portal_landscape.scene = marchingcubes_portal_landscape.tscn using TerrainGeneratorUnifiedPortals.gd:10 ('a CSG union of a heightfield with seven torus SDFs') and :90 num_portals = 7; MarchingCubesPortalTerrain.glsl:233-240; versus procgen_extra.json:7899 marchingcubes_portal_landscape.scene = marchingcubes_overhang_landscape.tscn; ISO_PortalLandscape/final.md:26.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'A second portal landscape, not the one you left: that field had no rings; this one writes seven torus fields into the ground and joins them to the terrain as one surface.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -380,9 +380,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_Sculpting"
       ],
@@ -397,7 +397,7 @@
       "proposal": "'Move a controller into the framed volume and hold its trigger briefly.'",
       "evidence": "MarchingCubesSculptVR.gd:516-534 (trigger path), :541-575 (keyboard and mouse branches marked 'desktop testing'); iso_sculpt_workshop.gd:95 readout text.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'In VR,' dropped.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -408,9 +408,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_Sculpting"
       ],
@@ -425,7 +425,7 @@
       "proposal": "'A cut is a deposit with a negative radius; the sign travels into the field, where it turns the operation from a smooth union into a subtraction.'",
       "evidence": "MarchingCubesSculptVR.gd:67-69 (HISTORICAL AUDIT, repaired 2026-09-15); Compute/MarchingCubesSculpt.glsl:135-139 (`if (blob.w < 0.0)` then `max(dist, 2.0 * params.isoLevel - d)`) and :144 opSmoothUnion.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'A cut is a deposit with a negative radius; the sign travels into the field, where it turns the operation from a smooth union into a subtraction.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -436,9 +436,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_CaveGeneration"
       ],
@@ -453,7 +453,7 @@
       "proposal": "End instead with a task for this hall: choose one opening on the GPU cave and decide which of the three changed settings (noise scale 13.5 vs 3.8, level 0.85 vs 0.88, extent 300 vs 280) you would move first, and say what you expect it to do. Keep the extension to one clause; apply the same cut to the other three closings.",
       "evidence": "ISO_CaveGeneration/final.md:19; ISO_AnimatedNoise/final.md:19; ISO_ImplicitModeling/final.md:19; ISO_RhizomeBody/final.md:19; marchingcubes_cave.tscn Terrain (noise_scale 13.5, iso_level 0.85, chunk_scale 300) vs marchingcubes_inside_cave.tscn (3.8, 0.88, 280).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25 in CaveGeneration (which of the three changed settings would you move first, with the numbers), AnimatedNoise (which corner crossed), ImplicitModeling (a hand where the join looks solid) and RhizomeBody (draw the graph you walked); each keeps the instrument to one clause.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -464,9 +464,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_Caves"
       ],
@@ -481,7 +481,7 @@
       "proposal": "'The terrain desk's column could count several crossings; a count was never a body.'",
       "evidence": "iso_cave_workshop.gd:40 ids = PLUMB, OCTAVES, PORTALS, BURIAL, HOLD, RESET, RULE; COLUMN exists only in iso_terrain_workshop.gd:46 and :91-137.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The terrain desk's column could count several crossings; a count was never a body.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -492,9 +492,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_Metaballs"
       ],
@@ -509,7 +509,7 @@
       "proposal": "'Nakama keeps the blob vocabulary but never extracts a surface: it pushes one sphere in and out by the field's value, so the body can breathe but no neck can ever pinch off. That is the comparison.'",
       "evidence": "algorithms/proceduralgeneration/isosurfaces/metaballs/nakama_metaballs.gd header (create_metaball_proxy_mesh: SphereMesh radius 3.0, displacement (field_value - surface_threshold) * 0.2, 'genus is PINNED AT 0'); the scene loads by uid uid://bu7sjetta70wd despite the stale path in nakama_metaballs.tscn:3.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Nakama keeps the blob vocabulary but never extracts a surface: it pushes one sphere in and out by the field's value, so the body can breathe but no neck can ever pinch off.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -520,9 +520,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_LookupTable"
       ],
@@ -537,7 +537,7 @@
       "proposal": "'The triangle-making procedure stays the same while the description handed to it changes.'",
       "evidence": "ISO_LookupTable/final.md:36; the point it hands to is ISO_ShapesGallery/final.md:15 ('The same extraction apparatus samples them and builds the visible boundary').",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The triangle-making procedure stays the same while the description handed to it changes.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -548,9 +548,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ISO_Metaballs"
       ],
@@ -565,7 +565,7 @@
       "proposal": "Quote metaballgenerator.gd:485 `total_field += mb_sr2[m] / dist_sq` and :563 `if cv0 > iso_level: cube_index |= 1`, or drop the language tag and label the block as a summary.",
       "evidence": "algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballgenerator.gd:190 (`strength * radius * radius / dist_sq`), :485, :563-570; iso_metaball_workshop.gd:5 KERNELS begins at inverse_square; metaballworld.tscn MetaballGenerator metaball_count = 10, iso_level = 0.65.",
       "review": "confirmed by a code checker (cited files only): ISO_Metaballs/final.md:9-12 fences 'density(p) = sum(kernel(source_i, p)) / surface = density(p) > iso_level' as gdscript; neither line exists in metaballgenerator.gd. Real lines: :190 'return strength * radius * radius / dist_sq', :485 'total_field += mb_sr2[m] / dist_sq', :563 'if cv0 > iso_level: cube_index |= 1'. iso_metaball_workshop.gd:5 KERNELS starts at 'inverse_square'; metaballworld.tscn:40-41 iso_level = 0.65, metaball_count = 10.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: metaballgenerator.gd:485 and :563 quoted with a file header, plus one sentence reading them.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     }

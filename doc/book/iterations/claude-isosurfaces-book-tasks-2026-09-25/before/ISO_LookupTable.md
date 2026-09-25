@@ -29,12 +29,8 @@ OPERANDS hides the extracted sheets, leaving the cages and samples. SURFACE remo
 
 The labels expose another convention. The inherited arrangement number sets bits for high-valued corners. The extractor sets bits for values below 0.50. Those masks are complements: arrangement 1 has table mask 254. The positions and values agree; the two names count opposite classes. “Inside” has not arrived with an independent physical meaning.
 
-These are fifteen selected arrangements, including empty and full classifications, not a demonstrated exhaustive catalogue of distinct topologies. On alternating faces, corner classifications alone leave a connectivity question for the algorithm. This display shows the installed table’s choice; it does not compare every ambiguity-resolution strategy. Keep that limit in view; the next work in the hall is where the whole sequence is put on trial.
-
-<!-- @the_threshold_opinion -->
-
-Between the fifteen cases and the rear pair stands one field in the dock, shown as a lattice of rods whose lengths are its values: the invisible standing in plain sight. Around it, five surfaces extracted from that one field at five thresholds, a fat blob, a lean one, a pinched pair, a thin shell, one broken into islands, and nothing in the field changed between them. MARGIN moved the values and held the cut; here the cut moves and the values are on show. Beside them the same threshold is sampled on a 4, an 8 and a 14 lattice, a brass rack holds the fifteen cases you have just read, and one pair of blobs is caught mid-merge at the crossing, seamless where no mesh operation could have joined them.
+These are fifteen selected arrangements, including empty and full classifications, not a demonstrated exhaustive catalogue of distinct topologies. On alternating faces, corner classifications alone leave a connectivity question for the algorithm. This display shows the installed table’s choice; it does not compare every ambiguity-resolution strategy. Keep that limit available for a later experiment.
 
 <!-- @ -->
 
-Next, the field will describe familiar objects. The triangle-making procedure stays the same while the description handed to it changes.
+Next, the field will describe familiar objects. The triangle-making procedure can remain the same even when the description supplied to it changes between different shape descriptions.

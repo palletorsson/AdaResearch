@@ -1,0 +1,20 @@
+--- before/ISO_ImplicitModeling.md
++++ after/ISO_ImplicitModeling.md
+@@ -4,7 +4,7 @@
+ 
+ Must a surface exist as a triangle mesh before you can see it?
+ 
+-Move around the rounded, changing form and inspect a smooth join between lobes. Compare its silhouette with the metaball specimen in the preceding room. Both can look like a continuous body assembled from influences, but their images do not establish that the same calculation produced them.
++You have passed this body three times already, at the back of the cave hall and twice in the metaball hall. Here its joins are set wider: the smoothing constant is 2.6 where the earlier copies used 0.4, so look first at what a larger constant does to a neck. Move around the rounded, changing form and inspect a smooth join between lobes. Compare its silhouette with the raymarched copy in the metaball hall. Both can look like a continuous body assembled from influences, but their images do not establish that the same calculation produced them.
+ 
+ Keep one rounded join in view as you change position and watch the silhouette and shading change together. The image responds to the viewing direction, yet that alone cannot tell you whether a detailed collision surface exists there. Compare this observation with the earlier wireframe specimen, where small polygon boundaries supplied direct evidence of one representation. Here the smooth image leaves that representation question open until the rendering method is explained. Looking carefully can identify the evidence you have and the evidence a particular kind of display does not supply.
+ 
+@@ -16,7 +16,7 @@
+ 
+ The distinction has practical limits. The ray search stops after a bounded number of steps and distance, and its hit test has a finite tolerance. A visible boundary is also not automatically collision geometry. Seeing a smooth enclosure does not prove that another object, or your hand, can meet that enclosure physically.
+ 
+-A useful extension would show the same distance field through this shader and through a marching-cubes mesh at two resolutions. Compare silhouettes and the geometry available for contact, keeping the underlying description fixed.
++Before leaving, put your hand where a join looks most solid and notice that nothing meets it. The metaball desk’s extracted field would have given that join triangles, and with a collider, resistance. The same description shown both ways, side by side, is the comparison this room leaves you to make from memory.
+ 
+ <!-- @ -->
+ 
