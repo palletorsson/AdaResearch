@@ -30,10 +30,6 @@ Now the notes' claim. Every number pushed past its intended range. Read the scri
 
 There is one motion in this hall with a past. The objects bob. Not from the clock: each frame adds a small amount to each object's height, and the amounts add up, so an object's height is the sum of everything that has been added since the hall was built.[^bob] Add faster and it bobs further: at ninety frames a second the bob is nine centimetres, at seventy-two it is seven. A surface asked from the clock is the same in any headset. A bob added up frame by frame is the headset's. The only thing here that remembers is also the only thing here that depends on who is looking.
 
-<!-- @library_rack -->
-
-The rack, by the far door this time.
-
 <!-- @dark_sphere -->
 
 The dark sphere, pulsing purple, in a room where everything pulses pink. It is the one thing in the hall you could mistake for a lamp that is not trying to be one.

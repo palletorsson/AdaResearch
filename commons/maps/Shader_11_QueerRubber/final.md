@@ -36,9 +36,7 @@ Now the lamps. Pink on the left, blue on the right, purple above and behind, eac
 
 So, what a surface answers to. To the lamps: their direction, colour and distance, and no more. To you: the angle at which it turns from your eye, which is why the rims and the rainbow follow you round the room. To the clock: everything turns, and the ring's rainbow drifts, a tenth of a cycle a second.[^drift] To its own painted coordinate, if it has one. Not to the other four objects, which it cannot see. Not to its own past, of which it keeps none.
 
-<!-- @library_rack -->
-
-The rack by the entrance is the index you met in the first hall. Every material in this room is on it as one entry, one rule. None of the five carries a body of its own; the spheres, the ring, the capsule and the cube are shapes this hall lent them, on the map's instruction, and the map could lend them others.
+None of the five materials carries a body of its own. The spheres, the ring, the capsule and the cube are shapes this hall lent them, on the map's instruction, and the map could lend them others.
 
 <!-- @dark_sphere -->
 

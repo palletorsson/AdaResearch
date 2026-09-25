@@ -47,10 +47,6 @@ Press MODE again. Noise synthesis: noise layered at several scales, which the ba
 
 So the floor returned, and it has no parts. There are seams at every whole number of every square in this hall. Some are shown, as the tile's step in brightness and the brick's mortar. Some are agreed away, as Truchet's midpoints. Some are painted over, as Wang's averages. Some are smoothed, as the noise's zero slopes. None is a join between two things, because there are no two things: there is one rule, asked at every pixel, and a coordinate that was folded before the rule saw it.
 
-<!-- @library_rack -->
-
-The rack by the door, the same index.
-
 <!-- @dark_sphere -->
 
 The dark sphere stands in front of the squares. It has no seams because it is one mesh. Everything behind it has seams because it is one function.

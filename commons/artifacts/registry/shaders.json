@@ -16,7 +16,7 @@
 			],
 			"include_in_map_data": true,
 			"lookup_name": "Shader_Gallery",
-			"map_ready": true,
+			"map_ready": false,
 			"map_sequences": [
 				"patterngeneration"
 			],
@@ -97,7 +97,7 @@
 			],
 			"include_in_map_data": true,
 			"lookup_name": "alphahash",
-			"map_ready": true,
+			"map_ready": false,
 			"map_sequences": [
 				"unused"
 			],
@@ -422,7 +422,7 @@
 			],
 			"include_in_map_data": true,
 			"lookup_name": "buffergeometryparticles",
-			"map_ready": true,
+			"map_ready": false,
 			"map_sequences": [
 				"unused"
 			],
@@ -640,7 +640,7 @@
 			],
 			"include_in_map_data": true,
 			"lookup_name": "clippingplanes",
-			"map_ready": true,
+			"map_ready": false,
 			"map_sequences": [
 				"unused"
 			],
@@ -1002,7 +1002,7 @@
 			],
 			"include_in_map_data": true,
 			"lookup_name": "dynamiccubemap",
-			"map_ready": true,
+			"map_ready": false,
 			"map_sequences": [],
 			"name": "Dynamic Cube Map",
 			"parameters": {
@@ -1256,7 +1256,7 @@
 			],
 			"include_in_map_data": true,
 			"lookup_name": "flashlight_demo",
-			"map_ready": true,
+			"map_ready": false,
 			"map_sequences": [
 				"color"
 			],
@@ -1445,7 +1445,7 @@
 			],
 			"include_in_map_data": true,
 			"lookup_name": "materialstransmission",
-			"map_ready": true,
+			"map_ready": false,
 			"map_sequences": [],
 			"name": "Materials Transmission",
 			"parameters": {
@@ -1776,7 +1776,7 @@
 			],
 			"include_in_map_data": true,
 			"lookup_name": "postprocessing_bloom",
-			"map_ready": true,
+			"map_ready": false,
 			"map_sequences": [
 				"unused"
 			],
@@ -3582,7 +3582,7 @@
 			"lookup_name": "shader_bibliotek",
 			"map_ready": true,
 			"map_sequences": [
-				"shaders"
+				"patterngeneration"
 			],
 			"name": "Substrate Bibliotek",
 			"scene": "res://commons/artifacts/shader_bibliotek/shader_bibliotek.tscn",

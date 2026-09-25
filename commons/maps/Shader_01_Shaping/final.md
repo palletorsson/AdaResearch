@@ -53,10 +53,6 @@ The fourth square, EXPONENT, draws one curve from the bottom left corner to the 
 
 The fifth square draws all four on one graph, a red step, a cyan S, a green wave and an orange curve, and a white line that blends them. The green one keeps moving among the three that hold still. That is the whole hall in one square: four rules for turning a position into a value, and one clock.
 
-<!-- @library_rack -->
-
-A rack in the middle of the hall indexes the shader registry, forty entries.[^rack] The six halls of this sequence are on it, and six more that the museum does not walk you through. It is an index, not the objects. Every entry is a rule waiting for a surface.
-
 <!-- @dark_sphere -->
 
 The dark sphere pulses beside the desks. Its pulse is driven from the other side of the museum's machinery, by a script that runs once a frame on the processor and remembers where it was.[^sphere] Stand between it and the wave. One of them has a past.
@@ -74,8 +70,6 @@ The way out is a long one. The museum builds a crossing after every hall, a door
 [^leap]: The panel is `shaping_sin.gdshader`; the slider steps by 0.1. The phase is `TIME * phase_speed`, so a step of 0.1 taken t seconds into the clock's run moves the phase by 0.1 t radians: 0.08 of a wavelength at five seconds, 0.24 at fifteen, 0.46 at twenty-nine. Nothing about the leap is random. It is the clock's reading at the moment you moved.
 
 [^rollover]: `project.godot` sets `rendering/limits/time/time_rollover_secs` to 30, so the shader clock TIME runs from 0 to 30 and wraps; Godot's own default is 3600. At phase speed 1.0 the wrap moves the phase by 30 radians, 4.77 cycles, a leap of 0.23 of a wavelength; at 2.0 it is 0.45, at 0.5 it is 0.39. Only a speed whose product with 30 is a whole number of cycles would hide it, and the slider's steps do not land on one.
-
-[^rack]: `library_rack` with `collection:shaders` reads `commons/artifacts/registry/shaders.json`, forty entries when this chapter was written, and stands one instance of each on its shelves.
 
 [^sphere]: `dark_sphere.gd` drives its wobble and its emission pulse from `_process`, on the CPU, frame after frame, from values it keeps. The graphs keep nothing; they are functions of TIME.
 

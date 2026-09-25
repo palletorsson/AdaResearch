@@ -32,10 +32,6 @@ So even with its picture handed back, the square's own numbers would not give yo
 
 The right square looks grown. Frost, or a crystal, branching from the centre and bright at its tips. Move GROWTH and the branches reach further; move DENSITY and they thicken. Its label says DLA, which elsewhere in this museum names particles wandering at random until they touch something and stick, one at a time, an aggregate that is nothing but its history.[^dla] This square keeps no history. Its code says so in its second line: it "simulates the visual appearance" of that growth using noise. Each pixel measures its distance and angle from the centre, adds noise to both, and lights up if it falls inside a radius that GROWTH sets. Turn GROWTH down and up: the branches do not retreat and regrow, they are drawn shorter and longer. It is a picture of an aggregate, asked from a position and the clock, like everything else in this sequence. Between the two squares you have the sequence's whole edge in one glance: on the right, a memory imitated with no memory; on the left, a memory asked for and not supplied.
 
-<!-- @library_rack -->
-
-The rack by the door, the same forty entries, for the last time.
-
 <!-- @dark_sphere -->
 
 The dark sphere stands between the two squares. It pulses from a number it keeps, on the processor, as it has in every hall. It has been the one thing with a past all along, and it was placed here as furniture.

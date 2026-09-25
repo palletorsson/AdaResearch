@@ -66,10 +66,6 @@ fbm(p + warp * fbm(p + ...))
 
 Look at the fourth for a while. Marble, smoke, something geological. This is the nearest the sequence comes to a memory, and it is not one: the field reads itself inside a single frame, and the next frame reads itself again, from nothing. A rule fed its own output within the frame can make forms that look grown. A rule fed its own output from the previous frame is another thing entirely, and the last hall of the sequence stands in front of it.
 
-<!-- @library_rack -->
-
-The rack by the door: the same forty entries.
-
 <!-- @dark_sphere -->
 
 The dark sphere stands between the pool and the squares. It pulses from a number it keeps. Behind you the water moves from a number it reads; in front of you the noise drifts from the same number and leaps twice a minute.
