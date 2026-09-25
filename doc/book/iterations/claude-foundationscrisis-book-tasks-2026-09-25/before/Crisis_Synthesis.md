@@ -1,4 +1,4 @@
-A formula waits ahead. After all those difficulties with certainty, it is almost a relief to see an equals sign.
+A formula waits in the next room. After all those difficulties with certainty, it is almost a relief to see an equals sign.
 
 Come closer. What would you need to know before you could trust it?
 
@@ -40,7 +40,7 @@ Set `r` near 3.2. Follow the yellow column: two heights. Move toward 3.5. Now fo
 
 ```gdscript
 x = r * x * (1.0 - x)
-```
+``
 
 The same instruction, again. Change the parameter and the repetition takes another form.
 
@@ -80,7 +80,7 @@ At the returning Russell workbench, try membership both ways again. The unrestri
 
 <!-- @escher_staircase -->
 
-The plaque from Gödel's hall, a sentence about its own proof, returns beside the nested box and the staircase: an impossible membership demand, a convincing view of steps. Their likenesses invite us closer. Their differences keep the investigation open. No single dial measures these three difficulties.
+The plaque, the nested box and the staircase return as reminders. A sentence about proof, an impossible membership demand, a convincing view of steps: their likenesses invite us closer. Their differences keep the investigation open. No single dial measures these three difficulties.
 
 <!-- @florensky_sphere -->
 

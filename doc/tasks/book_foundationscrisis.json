@@ -149,9 +149,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Crisis_Synthesis"
       ],
@@ -166,7 +166,7 @@
       "proposal": "Change the two backticks on line 43 to three.",
       "evidence": "commons/maps/Crisis_Synthesis/final.md:41 opens ```gdscript and :43 is ``; grep '^`' finds fences only at lines 9, 11, 41, 43, so nothing later closes it.",
       "review": "unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the logistic-map fence closed with three backticks.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -177,9 +177,9 @@
       "effort": "half-day",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Godel_Incompleteness"
       ],
@@ -194,7 +194,7 @@
       "proposal": "Extend the chapter (and bring it to the arc's section format; its H1-plus-question template is unique in the sequence) with at least three anchored passages: @godel_statement_plaque where the visitor cycles its sentences; @incompleteness_tower on the existing paragraph about adding an unproved truth as a new axiom, which is that work's argument; @print_gallery_recursion as the bridge into Escher. Name the four verification works (rice booth, negative control, critic stack, fluency seam) in one paragraph on what checking can and cannot do.",
       "evidence": "commons/maps/Godel_Incompleteness/map_data.json interactables: negative_control_fixture (4,3), critic_regress_stack (10,3), godel_sentence_machine (7,4), rice_verifier_booth (3,5), print_gallery_recursion (10,5), synthesis_stand#subject:godel_statement_plaque#mode:hero (2,8), fluency_seam (11,9), godel_statement_plaque (4,10), provability_sorter (5,11), incompleteness_tower (9,11); final.md anchors only lines 5 and 15 (final_tags: 2 works tagged). commons/interfaces/foundations/godel_statement_plaque.gd:155-158 (the sentences); registry foundations_crisis.json incompleteness_tower: 'Add an axiom to close the gap and a new gap opens above'; Crisis_Synthesis/final.md:83.",
       "review": "confirmed by a code checker (cited files only): Map places exactly the ten cited works at the cited cells (negative_control_fixture (4,3) ... incompleteness_tower (9,11)). final.md has anchors only at :5 @godel_sentence_machine and :15 @provability_sorter (plus an empty '<!-- @ -->' at :23); :25 is 'Escher next changes the medium.' godel_statement_plaque.gd:158 holds 'This statement is unprovable within this system.'; foundations_crisis.json:409 has the tower line; Crisis_Synthesis/final.md:83 'The plaque ... return as reminders.'",
-      "notes": "",
+      "notes": "Applied 2026-09-25: Godel rewritten to the arc's section format with five headings; the plaque (nine sentences, flare from the fifth), the tower (the axiom-adding argument built), the print gallery (the bridge to Escher) and the four checking works (booth, gauge, critic stack, seam) anchored and described from their identity lines.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -205,9 +205,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Florensky_Paraconsistent"
       ],
@@ -222,7 +222,7 @@
       "proposal": "Say what the visitor meets: a box that stays sealed here, whose own label admits it opens only on a desk and would decide the result by a coin the program flips. Keep 'This is a scripted toy'; it lands harder on a box that will not open for you.",
       "evidence": "commons/artifacts/schrodinger_box/schrodinger_box.gd:340-342 (`func _input`: `if _xr_active: return`), :13 ('Tracked-hand opening is not implemented'), :259 (label 'Desktop click: random outcome'), :314 (`randf() > 0.5`); Florensky_Paraconsistent/final.md:58.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the box stays sealed here; its label admits it opens only on a desk and decides by a coin the program flips.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -233,9 +233,9 @@
       "effort": "1h",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Euclid_Parallel"
       ],
@@ -250,7 +250,7 @@
       "proposal": "As proposed, with the mechanism stated as: the map asked for a grid; the screen looked eight metres for anything with a grid_size and found nothing; it draws sixteen by sixteen dead cells.",
       "evidence": "commons/maps/Euclid_Parallel/map_data.json interactables (3,5) `science_screen:180:1.5#mode:grid`; commons/artifacts/science_screen/science_screen.gd:1589-1591 (`mode` -> `_set_explicit_mode`), :449-452 ('grid','ca','automata' -> `_generic_mode_name = \"grid\"`, `_label_name = \"GRID VIEW\"`), :460 (`_mode_locked = true`), :478-481 (`_deferred_first_scan` returns when locked; no scan), :2706-2760 (`_draw_grid_tracker`: `_tracking_generic` null -> cols = rows = 16, every cell 0); final.md:133-140.",
       "review": "amended by a code checker (cited files only): Map cell (row 5, col 3) = science_screen:180:1.5#mode:grid. science_screen.gd:1589-1591 mode -> _set_explicit_mode; :449-452 'grid' -> GRID VIEW; :460 _mode_locked = true; :478-481 returns when locked, but AFTER calling _connect_tracking_for_mode (:500), whose grid branch (:523-527) does a property search for a neighbour with `grid_size` within scan_radius 8.0 (:79). Neighbours are euclid_postulates_plaque, parallel_lines (scriptless tscn of line_static), angle_sum_triangle; none has grid_size, so _tracking_generic stays null and _draw_grid_tracker (:2719) draws 16x16 with every cell 0. final.md:133-140 quotes `_point_mode = true` as the fallback.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the map asked for a grid (#mode:grid); the screen found nothing with a grid to give it and drew sixteen by sixteen dead cells.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -261,9 +261,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "NonEuclidean_Spaces"
       ],
@@ -278,7 +278,7 @@
       "proposal": "Add `#witness:surface` to the map token (the code then builds the saddle / plane / dome patch and rebuilds it on every move); or, if the hall must stay as it is, change the sentence to 'changes its own readout'.",
       "evidence": "commons/artifacts/curvature_slider/curvature_slider.gd:60 (`@export_enum(\"number\", \"surface\", \"normals\") var witness: String = \"number\"`), :133-135 (`_create_specimen`: `if witness == \"number\": return`), :117-123 (`_label_text`); commons/maps/NonEuclidean_Spaces/map_data.json interactables (2,9) `curvature_slider:0:0.5`; final.md:48.",
       "review": "confirmed by a code checker (cited files only): curvature_slider.gd:60 witness defaults to 'number'; :133-135 _create_specimen returns before building any patch at that value; :117-123 the label reads 'CURVATURE: K = ...\\n(Hyperbolic|Elliptic|Flat/Euclidean)'; :254-257 apply_grid_config accepts a 'witness' key. NonEuclidean_Spaces interactables (2,9) is 'curvature_slider:0:0.5' with no #witness. final.md:48 says 'changes its own surface sketch'.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: MAP EDIT - #witness:surface added to the curvature_slider token in NonEuclidean_Spaces/map_data.json (pathfinder still OK); the sentence stands.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -289,9 +289,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Crisis_Synthesis"
       ],
@@ -306,7 +306,7 @@
       "proposal": "'A formula waits ahead.' or 'A formula waits in this room.'",
       "evidence": "commons/maps/Crisis_Synthesis/final.md:1; map_data.json utilities sp at (9,1), interactables qfep_formula_3d at (9,5); Florensky_Paraconsistent/final.md:72.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: \"A formula waits ahead.\"",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -317,9 +317,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Godel_Incompleteness"
       ],
@@ -334,7 +334,7 @@
       "proposal": "Either let the chapter read the floor (one sentence: the hall has already decided in capitals; walk over it and ask what the machine has shown), or replace 'SELF-REFERENCE IS THE EDGE' and 'TRUE - BUT UNDECIDABLE' in the utilities layer with the chapter's own distinctions.",
       "evidence": "commons/maps/Godel_Incompleteness/map_data.json utilities (7,2) '3t:EVERY FORMAL SYSTEM', (7,3) '3t:CAN NAME ITSELF', (7,6) '3t:G - I AM UNPROVABLE', (7,9) '3t:TRUE - BUT UNDECIDABLE', (7,12) '3t:SELF-REFERENCE IS THE EDGE'; Godel_Incompleteness/final.md:7; Russell_Paradox/final.md:42; Crisis_Synthesis/final.md:75.",
       "review": "confirmed by a code checker (cited files only): Godel_Incompleteness utilities: (7,2) '3t:EVERY FORMAL SYSTEM', (7,3) '3t:CAN NAME ITSELF', (7,6) '3t:G — I AM UNPROVABLE', (7,9) '3t:TRUE — BUT UNDECIDABLE', (7,12) '3t:SELF-REFERENCE IS THE EDGE' (em dashes in the map, hyphens in the task). final.md:7 has the quoted sentence; Russell_Paradox/final.md:42 says 'Self-reference is bad would teach us too little'; Crisis_Synthesis/final.md:75 'Looking back at oneself was never enough'.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the chapter reads the floor - walk over its verdict and ask the same of the machine. Utilities untouched.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -345,9 +345,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Brouwer_Intuitionism"
       ],
@@ -362,7 +362,7 @@
       "proposal": "'Back beside the choice bench, the sum over hypotheses brings another limit back from computation.'",
       "evidence": "commons/maps/Brouwer_Intuitionism/map_data.json interactables: brouwer_choice_sequence (6,3), intractable_evidence (9,4), angle_sum_triangle (9,11), parallel_lines (9,13); final.md:83-85.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: \"Back beside the choice bench, the sum over hypotheses...\"",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -373,9 +373,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "NonEuclidean_Spaces"
       ],
@@ -390,7 +390,7 @@
       "proposal": "'## The surfaces at the far end'.",
       "evidence": "commons/maps/NonEuclidean_Spaces/map_data.json interactables: triangle_curvature_workbench (11,2), hyperbolic_surface (2,12), elliptic_surface (4,11), curvature_slider (2,9); utilities sp (1,1), t (8,12); final.md:38.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: \"## The surfaces at the far end\".",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -401,9 +401,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Euclid_Parallel"
       ],
@@ -418,7 +418,7 @@
       "proposal": "'Imagine Line3 pushed out to 0.4: the gaps change, and the lines still never meet.'",
       "evidence": "commons/maps/Euclid_Parallel/final.md:74; commons/primitives/line/parallel_lines.tscn:14 (Line3 x = 0.305252).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: \"Imagine Line3 pushed out to 0.4\".",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -429,9 +429,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Crisis_Synthesis"
       ],
@@ -446,7 +446,7 @@
       "proposal": "Until the Godel chapter introduces it, introduce it here: 'A plaque you may have passed in Godel's hall, a sentence about its own proof, joins the nested box and the staircase.'",
       "evidence": "commons/maps/Crisis_Synthesis/final.md:77-83; commons/maps/Godel_Incompleteness/map_data.json (4,10) godel_statement_plaque and (2,8) synthesis_stand#subject:godel_statement_plaque#mode:hero; Godel_Incompleteness/final.md carries no @godel_statement_plaque anchor.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the plaque returns from Godel's hall, where the chapter now introduces it.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -457,9 +457,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Euclid_Parallel"
       ],
@@ -474,7 +474,7 @@
       "proposal": "Either say 'two halls' (and 'Keeping two halls byte-identical' at :99) or, since the chapter is quoting the file, attribute it: 'the file says three maps ship them; today two halls of the walk do'. Drop the count if in doubt and keep 'a reason about shipping, not about triangles'. The stale comment in angle_sum_triangle.gd:40/:150 is a separate code fix.",
       "evidence": "grep -l angle_sum_triangle commons/maps/*/map_data.json returns 10 files; spine halls among them: Euclid_Parallel (7,9) and Brouwer_Intuitionism (9,11); the rest are Corridor_Euclid_Parallel, Curation_Bay_foundationscrisis_0, Euclid_Parallel_composed, Placed_Foundationscrisi_05_Dia, Placed_Foundationscrisi_06_Teshima, Ribbon_Foundationscri_05, Spine_Foundationscrisi_Dia, test_batch_1; final.md:97 and :99.",
       "review": "amended by a code checker (cited files only): Count verified: 10 map files carry angle_sum_triangle; spine halls Euclid_Parallel (7,9) '180:1.2' and Brouwer_Intuitionism (9,11) '180:1.1'; the other eight are corridor/bay/composed/placed/ribbon/spine/test copies. final.md:97 'three placements', :99 'Keeping three maps'. BUT the number is not the chapter's invention: angle_sum_triangle.gd:40 and :150 say 'because three maps ship them'. The chapter transcribes the artifact's own stale comment.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the file says three maps ship the strings, today two halls of the walk do; \"those halls\".",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -485,9 +485,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "NonEuclidean_Spaces"
       ],
@@ -502,7 +502,7 @@
       "proposal": "Quote line 503 as it stands, with a `# triangle_curvature_workbench.gd` header like the Euclid excerpts; or drop the fence and keep the prose about tangents and the dot product.",
       "evidence": "commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.gd:503 (`return acos(clampf(_edge_tangent(v, u).dot(_edge_tangent(v, w)), -1.0, 1.0))`), :595-596 (`var t_u`, `var t_w`); final.md:19-24.",
       "review": "confirmed by a code checker (cited files only): triangle_curvature_workbench.gd:503 is exactly `return acos(clampf(_edge_tangent(v, u).dot(_edge_tangent(v, w)), -1.0, 1.0))`; :595-596 `var t_u`/`var t_w`; no `first`, `second`, `vertex` or `neighbour_a` anywhere in the file. NonEuclidean_Spaces/final.md:19-24 fences the three-line paraphrase.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the real line quoted with a file header in place of the paraphrase.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -513,9 +513,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Euclid_Parallel"
       ],
@@ -530,7 +530,7 @@
       "proposal": "'isosceles'.",
       "evidence": "commons/maps/Euclid_Parallel/final.md:93; the same spelling in commons/artifacts/angle_sum_triangle/angle_sum_triangle.gd:38 (a comment).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: isosceles.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     }

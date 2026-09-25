@@ -1,0 +1,57 @@
+--- before/Godel_Incompleteness.md
++++ after/Godel_Incompleteness.md
+@@ -1,10 +1,10 @@
+-# A truth outside the proof machine
++Does a machine failing to find a proof show that no proof exists?
+ 
+-Does a machine failing to find a proof show that no proof exists?
++## The machine that jams
+ 
+ <!-- @godel_sentence_machine -->
+ 
+-Follow the loop marked by G through one attempt. Watch the mechanism stop and its verdict appear. Before accepting the words “true but unprovable”, ask what the movement has shown you. Has it exhausted every possible proof, or has one illustrated attempt come to an end?
++Follow the loop marked by G through one attempt. Watch the mechanism stop and its verdict appear. Before accepting the words “true but unprovable”, ask what the movement has shown you. The floor has already decided, in capitals, from EVERY FORMAL SYSTEM to SELF-REFERENCE IS THE EDGE; walk over its verdict and ask the same question of the machine. Has it exhausted every possible proof, or has one illustrated attempt come to an end?
+ 
+ The machine is a timed sculpture of an argument, not a running proof search. Its jam cannot establish incompleteness by itself. That matters because a slow search, a broken search and a proof that no search can succeed are three different things.
+ 
+@@ -12,13 +12,40 @@
+ 
+ Gödel’s construction makes statements about proofs expressible within arithmetic itself. Under an effective axiomatisation with sufficient arithmetic, a sentence can be constructed that says, through this encoding, that it has no proof in the given theory. Assuming the theory is sound for the intended natural numbers, the sentence is true there and unprovable in that theory. The assumptions and the phrase “in that theory” are essential. [The École Polytechnique course chapter develops the encoding and fixed-point argument.](https://www.enseignement.polytechnique.fr/informatique/INF412/uploads/Main/chap10english-goodINF412ENGLISH.pdf)
+ 
++## The sentence that names itself
++
++<!-- @godel_statement_plaque -->
++
++At the plaque, press through its sentences. There are nine, each folding further back on itself: a plain claim first, then claims about claims, until the last asserts its own unprovability. From the fifth press the plaque flares; it has reached the part of the series that talks about itself. Read the last sentence twice. The second reading is the sentence speaking about the first. The plaque proves nothing about itself either. What it can show is the shape of the loop the machine across the hall was built to jam on.
++
+ <!-- @provability_sorter -->
+ 
+ Now follow a piece outside the sorter’s inner PROVABLE region but within its TRUE region. This nested picture assumes soundness: whatever the theory proves is true in the intended interpretation. The extra region represents the possibility of truths beyond its proofs. The drawing’s areas and piece counts do not measure how many truths lie outside; the pieces have illustrative destinations chosen in advance.
+ 
++## Adding the truth as an axiom
++
++<!-- @incompleteness_tower -->
++
+ Russell’s room challenged an unrestricted construction that produced a contradiction. Here the difficulty can remain even when we choose a sound arithmetic theory. Adding a particular unproved truth as a new axiom may enlarge what is provable, but it does not turn effective arithmetic into a final list of every truth.
+ 
++The tower is that paragraph built. One ringed platform per formal system; on each, the truth the system below could not prove, bolted on as a new axiom; above it, a new platform holding the sentence the enlarged system cannot prove. A pulse climbs it and finds the gap again on every level. Adding the sentence moves the gap up. It does not close it.
++
+ Try replacing G with a personal conviction. What is missing? You would need a defined formal language, axioms, proof rules and the mathematical argument. Incompleteness does not certify every unsupported belief, and it does not make careful proof pointless.
++
++## What checking can do
++
++<!-- @rice_verifier_booth -->
++<!-- @negative_control_fixture -->
++<!-- @critic_regress_stack -->
++<!-- @fluency_seam -->
++
++Four smaller works between the machine and the exit are about checking. A booth takes a question at its slot and answers it if the question is about a program’s text, and refuses it if the question is about what the program means: refused by theorem, not by a missing feature. A gauge earns its green light by first being made to go red; pull the lever that plants the fault and watch the needle swing, because a green light you have never seen fail is a claim about the instrument as much as about the world. A stack of critics, each lens pointed at what it can see, none at the dark mark on the floor: add a critic and the blind spot moves, and never goes. And a seam, where one smooth answer stands beside the same question run again, close enough that the gap cannot be talked away. Checking can catch the fault it was built to catch. It cannot certify its own ground, and none of these four claims to.
++
++## A picture of the room
++
++<!-- @print_gallery_recursion -->
++
++By the exit stands a framed picture on a low plinth. Its subject is the room it stands in, with the picture in it, and the picture in that. Follow the spiral inward and it reaches a gap where the drawing cannot close on itself. Escher left that centre blank in 1956 and put his signature in the blank; the hall keeps the gap. A construction that cannot close itself has two honest endings, hide the gap or show it, and this one shows it.
+ 
+ <!-- @ -->
+ 

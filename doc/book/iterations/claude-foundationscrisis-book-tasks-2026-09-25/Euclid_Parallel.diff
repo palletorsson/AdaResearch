@@ -1,0 +1,45 @@
+--- before/Euclid_Parallel.md
++++ after/Euclid_Parallel.md
+@@ -71,7 +71,7 @@
+ 
+ The parallelism survives. All three share a basis: extend the segments along those directions and their supporting lines do not meet. Each pair keeps a constant perpendicular separation. That does not require the gap between the first and second to equal the gap between the second and third. Uneven spacing breaks an evenly spaced pattern; it does not break parallelism. We have to decide which regularity we were looking for.
+ 
+-In the source, move Line3's offset out to 0.4 and count the gaps again. They change, and the lines still never meet. Spacing you can set by hand; parallelism comes from the shared basis.
++Imagine Line3 pushed out to 0.4: the gaps change, and the lines still never meet. Spacing you can set by hand; parallelism comes from the shared basis.
+ 
+ And nothing in the room says the word out loud: the scene's `Label3D` ships with `visible = false`.
+ 
+@@ -90,13 +90,13 @@
+ 	var sum_text = "60° + 60° + 60° = 180°"
+ ```
+ 
+-The shape those vertices make is isoceles, not equilateral. The file records its own measured corners: 53.1, 63.4, 63.4. Both triples sum to 180. The three sixties are shipped bytes, handed back rather than measured.
++The shape those vertices make is isosceles, not equilateral. The file records its own measured corners: 53.1, 63.4, 63.4. Both triples sum to 180. The three sixties are shipped bytes, handed back rather than measured.
+ 
+ So the sum is true and the parts are ornament. Three equal numbers describe a triangle you are not looking at. It is the plaque's move again in another material: one surface makes unlike things look alike — five postulates in a single row, three identical angles under one figure. What gets hidden is not a falsehood. It is a difference.
+ 
+-The file already knows better, in a function just above. `_angles()` reads each corner off the polyline it actually drew, and at any curved opening the labels print what was measured. At `flat` it prints the shipped strings, because three placements ship them.
++The file already knows better, in a function just above. `_angles()` reads each corner off the polyline it actually drew, and at any curved opening the labels print what was measured. At `flat` it prints the shipped strings; the file says three maps ship them, and today two halls of the walk do.
+ 
+-Keeping three maps byte-identical is a reason to print sixty. It is a reason about shipping, not about triangles. The geometry never asked for it.
++Keeping those halls byte-identical is a reason to print sixty. It is a reason about shipping, not about triangles. The geometry never asked for it.
+ 
+ ## 5 — Bowing a line is not enough
+ 
+@@ -130,14 +130,14 @@
+ <!-- @science_screen -->
+ <!-- ~artifacts#science-screen ~summary#p2 ~critical#the-state-of-exception -->
+ 
+-The screen scans eight metres for neighbours that answer `get_grid_data()` and paints their cells at 768 by 576. Neither script here defines that method. The plaque offers configuration and selection signals; the triangle offers `apply_grid_config` and two exports, `opening` and `size`. Nothing offers the one call the screen makes. So we open on the fallback:
++The screen scans eight metres for neighbours that answer `get_grid_data()` and paints their cells at 768 by 576. Neither script here defines that method. The plaque offers configuration and selection signals; the triangle offers `apply_grid_config` and two exports, `opening` and `size`. Nothing offers the one call the screen makes. And the map asked for a grid anyway: the screen's token carries `#mode:grid`. So it looked eight metres for anything with a grid to give it, found nothing, and drew what it was asked for with nothing behind it, sixteen by sixteen dead cells:
+ 
+ ```gdscript
+ # science_screen.gd
+ 	_point_mode = true
+ ```
+ 
+-The fallback is not a blank panel. It is a grid: white, square, right-angled, drawn before anything arrives to be drawn. The screen does not wait to learn what space it is in. It draws right angles whether or not anything is there, and right angles are this room's postulate in pixels.
++What it draws is not a blank panel. It is a grid: white, square, right-angled, drawn before anything arrives to be drawn. The screen does not wait to learn what space it is in. It draws right angles whether or not anything is there, and right angles are this room's postulate in pixels.
+ 
+ Test it. Cross the room and watch the picture — it does not change, because nothing here gives it anything to change into. And this file has been fooled by its own paperwork before: its axis block once declared value names that were never in its enum. The sweep set them, the artifact fell back to its default, and sixteen identical frames were published — sixteen pictures of the same screen, filed as four variants. Nothing failed loudly.
+ 

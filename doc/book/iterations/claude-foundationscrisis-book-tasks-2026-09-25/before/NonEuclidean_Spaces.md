@@ -17,8 +17,10 @@ The curved arc in the disk is not a detour through its geometry. It is the direc
 There are three settings, not a continuous dial for the curvature of the whole museum. Each rebuilds its own example triangle. We are comparing hosts; we have not carried an unchanged triangle between them.
 
 ```gdscript
-# triangle_curvature_workbench.gd — the angle at corner v between edges to u and w
-return acos(clampf(_edge_tangent(v, u).dot(_edge_tangent(v, w)), -1.0, 1.0))
+# The readout starts with the directions of the edges at a corner.
+var first = _edge_tangent(vertex, neighbour_a)
+var second = _edge_tangent(vertex, neighbour_b)
+var angle = acos(clampf(first.dot(second), -1.0, 1.0))
 ```
 
 The tangents are unit directions. Their dot product tells us the cosine of the angle between them. Do this at all three corners and add the results. On a sphere the directions lie in the corner's tangent plane; the disk model preserves angles, so we can measure them in its drawing.
@@ -33,7 +35,7 @@ The bench measures the angles. It does not independently measure that integral, 
 
 Flatness has become one of the available answers. You can return to it, but it no longer arrives alone.
 
-## The surfaces at the far end
+## The surfaces beside the bench
 
 <!-- @hyperbolic_surface -->
 <!-- @elliptic_surface -->

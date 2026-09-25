@@ -55,7 +55,7 @@ There is a desire here to inhabit something before its description has settled. 
 
 Two older works wait at the back: Schrödinger's box and a superposition display. Their resemblance to the sphere is useful precisely because it invites a shortcut.
 
-The box stays sealed here. Its own label admits it opens only on a desk, and that when it does the program decides the result by a coin it flips. This is a scripted toy, and a box that will not open for you says so more plainly than one that would: the program chooses what the opening would reveal.
+The box offers a sealed interior and, on a desktop click, a randomly chosen ALIVE or DEAD result. Its lid opens; after a short interval it resets. This is a scripted toy: the program chooses what the opening will reveal.
 
 Beside it, two forms fade against each other around the expression `|ψ⟩ = α|0⟩ + β|1⟩`. A slider changes the pace. Watch long enough: the display keeps cycling. It has no measurement operation, and the opacities it draws are not quantum amplitudes.
 

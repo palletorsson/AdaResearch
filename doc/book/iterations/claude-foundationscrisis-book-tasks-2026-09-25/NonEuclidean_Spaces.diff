@@ -1,0 +1,24 @@
+--- before/NonEuclidean_Spaces.md
++++ after/NonEuclidean_Spaces.md
+@@ -17,10 +17,8 @@
+ There are three settings, not a continuous dial for the curvature of the whole museum. Each rebuilds its own example triangle. We are comparing hosts; we have not carried an unchanged triangle between them.
+ 
+ ```gdscript
+-# The readout starts with the directions of the edges at a corner.
+-var first = _edge_tangent(vertex, neighbour_a)
+-var second = _edge_tangent(vertex, neighbour_b)
+-var angle = acos(clampf(first.dot(second), -1.0, 1.0))
++# triangle_curvature_workbench.gd — the angle at corner v between edges to u and w
++return acos(clampf(_edge_tangent(v, u).dot(_edge_tangent(v, w)), -1.0, 1.0))
+ ```
+ 
+ The tangents are unit directions. Their dot product tells us the cosine of the angle between them. Do this at all three corners and add the results. On a sphere the directions lie in the corner's tangent plane; the disk model preserves angles, so we can measure them in its drawing.
+@@ -35,7 +33,7 @@
+ 
+ Flatness has become one of the available answers. You can return to it, but it no longer arrives alone.
+ 
+-## The surfaces beside the bench
++## The surfaces at the far end
+ 
+ <!-- @hyperbolic_surface -->
+ <!-- @elliptic_surface -->

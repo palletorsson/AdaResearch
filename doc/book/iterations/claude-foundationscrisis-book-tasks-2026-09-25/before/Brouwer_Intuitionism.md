@@ -82,7 +82,7 @@ The triangle and parallel lines return from the earlier geometry. Someone has al
 
 <!-- @intractable_evidence -->
 
-Back beside the choice bench, the sum over hypotheses brings another limit back from computation. A procedure may be specified and still cost too much to run. That is a different difficulty from having no constructive proof. A formula on a panel cannot tell us, by its appearance alone, which difficulty we face.
+The nearby sum over hypotheses brings another limit back from computation. A procedure may be specified and still cost too much to run. That is a different difficulty from having no constructive proof. A formula on a panel cannot tell us, by its appearance alone, which difficulty we face.
 
 This room has not made the world obey your hand. It has made a small part wait for it. Carry that difference onward: what has been asserted, what has been produced, and what follows from the production?
 
