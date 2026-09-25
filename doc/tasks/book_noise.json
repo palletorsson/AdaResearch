@@ -1,0 +1,713 @@
+{
+  "goal_id": "book_noise",
+  "goal_title": "Book: Noise: Entropy with Memory — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in noise became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "noise",
+    "order": 11,
+    "phase": "E_entropy",
+    "title": "Noise: Entropy with Memory",
+    "chapters": [
+      "Random_Noise_Types",
+      "Noise_Columns",
+      "Noise_One",
+      "Noise_Voxel",
+      "Noise_6_Wall",
+      "Noise_Inside_Noise",
+      "Noise_Space_10",
+      "Noise_Perlin_Simplex",
+      "Lab_Path"
+    ],
+    "words": 10642,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "Random_Game (last of randomness, handover in)",
+      "Random_Noise_Types",
+      "Noise_Columns",
+      "Noise_One",
+      "Noise_Voxel",
+      "Noise_6_Wall",
+      "Noise_Inside_Noise",
+      "Noise_Space_10",
+      "Noise_Perlin_Simplex",
+      "Lab_Path",
+      "CA_Introduction (first of cellularautomata, handover out)"
+    ],
+    "reading": {
+      "arc": "The sequence begins where Randomness left off, with draws that do not consult their neighbours (a point clamped back onto a plane, a spacing rule that refuses candidates, ten thousand independent bar heights) and with sound filters that keep a previous value or subtract it, so that 'a neighbour has become a previous moment'. From the column hall on, every chapter asks the same question of a different body: what does a value become once it reaches a recipient? A phase for a column shaft, relief and colour on two rings, an added height with a collision mesh, a yes-or-no occupancy in a 24-cubed lattice, a weighted sum dressed as a wall, a borrowed address (domain warping), a ground that can refuse a foot, and finally a matched comparison of two generators. The synthesis hall ends by naming 'blob culture', the ease of the noise gesture as a habit that arrives before the next question, and a titleless corridor coda asks the reader to retell one encounter twice before cellular automata make a cell's next state depend on stored neighbours. Throughout, each control (FREEZE, RESET, MATCH, REPLAY) is introduced together with the edge of its reach, and the dark orb's own sine clock is the thing that lies outside every one of them.",
+      "holds": [
+        "The dark orb in every hall, running on its own sine clock (dark_sphere.gd:599-600), used each time as the outside of a local control: FREEZE, RESET and MATCH all stop short of it, so 'a return always has a scope'.",
+        "One question carried hall to hall and stated outright in Noise_Inside_Noise's send-off: which of coordinate, value, surface and body changed, and which body makes that difference matter. Noise_Space_10 and Noise_Perlin_Simplex both open by answering it.",
+        "Carried objects across the handovers: the zero that keeps reclaiming depth, the dark patch that REMAP recovers (carried into the threshold), the rejected value (carried into abs), the occupied volume (carried back into the cave question), the small sheet's swelling surface (carried into Lab_Path and into CA_Introduction's 'keep the pleasure of the blob').",
+        "The appearance/support distinction, checked in code each time: rings and comparison spheres with no collision, a basin, a voxel volume and a walk terrain whose visible mesh is also the collider. 'What the body can cross and what it imagines crossing need not arrive together.'",
+        "The name-versus-implementation habit: 'erosion' that carries nothing anywhere, colour-noise curves that are illustrations not measurements, an artifact called perlin_noise_terrain whose helper leaves the basis at OpenSimplex2S, a display grid that is not the lattice inside the calculation.",
+        "Short verbatim code excerpts as the anchor of every claim, followed by a plain reading of the line ('Read the last line again. There is room in the vector for a third number. The code keeps writing zero there.')."
+      ],
+      "hall_notes": [
+        {
+          "hall": "Random_Noise_Types",
+          "words": 1602,
+          "note": "Four works: the clamped point, the spaced cloud with its refused ghosts and exhausted budget, the field of ten thousand independent bars, and the five colour filters. The longest and densest hall of the sequence; the sound/image separation ('The sound is not a scan through these ten thousand heights') is its best passage, the RULE/Gaussian paragraph its hardest turn."
+        },
+        {
+          "hall": "Noise_Columns",
+          "words": 1336,
+          "note": "Three drivers (a held value, a sine, a seeded field) hand the same column recipe one number each; FREEZE, SPIN, MARBLE and REVEAL take deformation apart into transformation, material and rebuild budget. Reads clearly and warmly ('Put the veining back if you prefer it'); the synthesis-stand paragraph at the end is a detour into family/score vocabulary the reader has no handle for."
+        },
+        {
+          "hall": "Noise_One",
+          "words": 1316,
+          "note": "The ring pair (REMAP recovers what the clip folded together; AMPLITUDE and FREQUENCY separate the force of an appearance from the coordinate consulted; no y) and the layered basin (three authored ingredients, an 'erosion' that lowers without carrying, combine-then-modify versus modify-then-combine). The most careful hall; every number was verified against noiselayers.tscn and noisetorus.gd."
+        },
+        {
+          "hall": "Noise_Voxel",
+          "words": 1274,
+          "note": "One return statement decides occupancy; bias gives the field a downstairs; pieces and occupied counts have different rhythms; CUT hides without removing; the screen sets the value beside the decision; the large volume keeps the same 13,824 answers at five times the spacing. Reads as the sequence's clearest argument, with one misplaced pointer to 'the plate' that counts."
+        },
+        {
+          "hall": "Noise_6_Wall",
+          "words": 1083,
+          "note": "The room wears a cloud sum: FREEZE, DRESS, LAYERS and BASIS, the abs that lets both signs dress a surface, the weights 0.5/0.75/0.9375/0.9844, the gain clamp, the separate four-term detail loop, the UV seam at each wall piece. Tight and short; one unsourced measurement clause and one 'the player' break its address."
+        },
+        {
+          "hall": "Noise_Inside_Noise",
+          "words": 1199,
+          "note": "Domain warping read as two moments, make an address then ask the base field there; ZERO/WARP/SAMPLE/RELIEF separate changing where to sample from changing what a sample does; the enclosure at 65% shares the projection. The choreography (look up, look down, follow a line) is dense but the reader is always told where to look."
+        },
+        {
+          "hall": "Noise_Space_10",
+          "words": 1179,
+          "note": "The answer reaches the ground: HEIGHT, ROUTE, SAMPLE, RESET (refused while a body is on the patch), ground_at and edge_weight, the section versus a body with width, the cave a heightfield cannot hold. Strong hall weakened by a desktop walk record told in the main prose to a headset visitor."
+        },
+        {
+          "hall": "Noise_Perlin_Simplex",
+          "words": 1302,
+          "note": "A matched pair (same seed, octaves, frequency, gain; REPLAY, FREQ, SAMPLE, MATCH, VIEW, REGEN) and the small sheet whose timer visits another slice; closes on blob culture. The blob-culture pages are the sequence's landing; a bracketed docs URL and one sentence about REGEN trip the reader on the way there. Hands straight to Cellular Automata, skipping Lab_Path."
+        },
+        {
+          "hall": "Lab_Path",
+          "words": 351,
+          "note": "A coda with no title line: recall one encounter, tell it twice, 'Hold a seed. Change a threshold.', then the handover through stored state. Good pause, but the museum plan and the book both drop this hall, so the headset reader never meets it."
+        }
+      ],
+      "stumbles": [
+        "Random_Noise_Types: the RULE paragraph asks the reader to hold a Gaussian draw, a clamp to the frame, shells that 'may already be red before you touch anything' and a reference distance 'the generator never promised to preserve' in one breath, just before the hands-on moment of carrying a point into a shell.",
+        "Noise_Columns: 'The stand's plaque records a chosen variant and a score from a saved comparison' arrives with variant, score and family undefined; the plaque itself prints 'dark_sphere 35%' and the reader cannot tell what the number is a percentage of.",
+        "Noise_Voxel: 'The plate counts groups joined through cell faces' sits in the large volume's section, but the volume's only plate reads 'SAME 24 x 24 x 24 CELLS | FIVE TIMES THE MODEL'; the count is on the bench readout across the room.",
+        "Noise_Space_10: 'In the recorded desktop walk, the first crossing reached the far margin' interrupts the instruction to try the crossing with somebody else's desktop session; the visitor in the headset has just been asked to walk it themselves.",
+        "Noise_Perlin_Simplex: 'The seed stays where you left it, even after REGEN' reads as a contradiction, because REGEN is the button that draws a fresh seed; the sentence is about VIEW not restoring anything, but says so only by implication.",
+        "Noise_Perlin_Simplex: the sentence-fragment '[The engine's noise definitions](https://docs.godotengine.org/...)' is a bracketed URL in wall text; a headset visitor cannot follow it and it reads as a citation pasted into prose.",
+        "Noise_Perlin_Simplex to Lab_Path: 'In the next chapter, Cellular Automata' is followed, in the sequence's map order, by a chapter that is not Cellular Automata; the reader then gets a second send-off to the same place.",
+        "Lab_Path: the chapter opens without a heading, mid-thought ('What has followed you out of the room?'), unlike every other chapter in the sequence.",
+        "Noise_6_Wall: 'even their brightest pixel reached only about half-white' is the one measurement in the sequence with no date or method, in a hall that footnotes nothing while its neighbours footnote every number."
+      ],
+      "keep": [
+        {
+          "hall": "Random_Noise_Types",
+          "quote": "What looks like a flat existence takes repeated work to maintain. The engine has not forgotten a dimension. This small procedure keeps declining it."
+        },
+        {
+          "hall": "Random_Noise_Types",
+          "quote": "Our time for searching has ended before our question about space has been settled."
+        },
+        {
+          "hall": "Random_Noise_Types",
+          "quote": "We are not obliged to hear these as damaged signals. A hiss can be a material to approach, sustain, combine, or leave. The question of what a body may do includes what it may want to remain with."
+        },
+        {
+          "hall": "Noise_Columns",
+          "quote": "The fixed reference is itself a made body. We have chosen something to keep still so that another change can become legible."
+        },
+        {
+          "hall": "Noise_One",
+          "quote": "A different reading has made room for something that was already being computed."
+        },
+        {
+          "hall": "Noise_Voxel",
+          "quote": "There is pleasure in a cavity before its usefulness is settled."
+        },
+        {
+          "hall": "Noise_6_Wall",
+          "quote": "Grey is already an interpretation, with its own capacity to lose a difference. There is no final undressed picture waiting underneath every other picture."
+        },
+        {
+          "hall": "Noise_Perlin_Simplex",
+          "quote": "After several rooms, that usefulness can become a mental algorithmic wall. The familiar answer arrives before we have worked out the next question. Different bodies acquire a family resemblance. We can call this tendency blob culture and begin investigating it here, among our own objects."
+        }
+      ],
+      "handover_in": "Clean. Random_Game closes with 'Which decisions are already made, which are still to come, and what tells us the difference? In Noise Types we will carry that question between neighbouring places', and Random_Noise_Types opens by recalling the stones ('Their order of movement stayed intact; the drawn waits changed how long we had to cross') before narrowing to 'what can change at all'. The one soft spot: the promised 'neighbouring places' only arrive at the second bench (the spacing rule); the first work is about a discarded dimension, so a reader looking for the promised neighbour waits about five hundred words.",
+      "handover_out": "Strong in substance, doubled in form. Noise_Perlin_Simplex ends on blob culture and 'In the next chapter, Cellular Automata, a row waits for its first update... Bring the pleasure of the moving surface, and leave room for another form'; Lab_Path ends 'Bring one of your unfinished questions with you'; CA_Introduction opens 'We have carried noise a long way: across a sheet, into a volume, around the body and under a foot... Keep the pleasure of the blob. Bring an unfinished question with it', answering both. But Lab_Path is listed in noise.json's maps while ada_run/em_plan.json deals Noise_Perlin_Simplex straight into CA_Introduction and commons/data/book/noise.json marks the Lab_Path pearl drop:true, so the headset reader gets one coherent handover and never sees the coda, while a reader following the sequence file gets two send-offs and an untitled chapter between them.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_noise.001",
+      "title": "Take the desktop walk out of the crossing paragraph",
+      "spec": "[vr] Noise_Space_10\nQuote: “In the recorded desktop walk, the first crossing reached the far margin. [...] The recorded desktop body accepted floor angles up to forty-five degrees.”\nWhy: The visitor has just been told to try the crossing in the headset, and the chapter answers with somebody else's desktop session, twice in the main prose and again in the footnote. The number itself does not depend on desktop: the XR Tools body has the same 45-degree move_max_slope by default, so the attribution can go without changing the claim.\nDo: Rewrite line 13 as 'In one recorded walk, the first crossing reached the far margin' and line 43 as 'The walking body's controller accepts floor angles up to forty-five degrees'; keep the provenance (rig, 13 September 2026) only in [^walk-measurements]. Better still, re-walk route A at HEIGHT 0.90 in the headset and replace the record with that walk.\nEvidence: commons/maps/Noise_Space_10/final.md:13, :43, :71. HEIGHT values commons/context/walkgrids/noise_walk_study.gd:4; the refusal polls the player_body group :54-58, which holds the XROrigin3D (commons/scenes/grid.tscn:47), so the control works in the headset. Headset slope limit: addons/godot-xr-tools/overrides/ground_physics_settings.gd:48 (move_max_slope = 45.0).\nFile: commons/maps/Noise_Space_10/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Space_10"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Noise_Space_10",
+      "quote": "In the recorded desktop walk, the first crossing reached the far margin. [...] The recorded desktop body accepted floor angles up to forty-five degrees.",
+      "why": "The visitor has just been told to try the crossing in the headset, and the chapter answers with somebody else's desktop session, twice in the main prose and again in the footnote. The number itself does not depend on desktop: the XR Tools body has the same 45-degree move_max_slope by default, so the attribution can go without changing the claim.",
+      "proposal": "Rewrite line 13 as 'In one recorded walk, the first crossing reached the far margin' and line 43 as 'The walking body's controller accepts floor angles up to forty-five degrees'; keep the provenance (rig, 13 September 2026) only in [^walk-measurements]. Better still, re-walk route A at HEIGHT 0.90 in the headset and replace the record with that walk.",
+      "evidence": "commons/maps/Noise_Space_10/final.md:13, :43, :71. HEIGHT values commons/context/walkgrids/noise_walk_study.gd:4; the refusal polls the player_body group :54-58, which holds the XROrigin3D (commons/scenes/grid.tscn:47), so the control works in the headset. Headset slope limit: addons/godot-xr-tools/overrides/ground_physics_settings.gd:48 (move_max_slope = 45.0).",
+      "review": "quote checked: first clause found, rest differs (script) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.002",
+      "title": "Give the coda a title line",
+      "spec": "[structure] Lab_Path\nQuote: “What has followed you out of the room?”\nWhy: Every other chapter in the sequence opens with an H1 ('# Which rules keep acting?', '# What counts as the same'); this one begins with a bare line, so the reader arrives mid-thought and the tag tool lists the chapter's first region as untitled.\nDo: Make the first line the heading ('# What has followed you out of the room?') and let the recalled encounters ('A dark patch that returned with REMAP...') be the opening paragraph; or give it a sequence-style question of its own.\nEvidence: commons/maps/Lab_Path/final.md:1 has no '#'; compare commons/maps/Noise_Perlin_Simplex/final.md:1 and commons/maps/Random_Noise_Types/final.md:1. python tools/final_tags.py --map=Lab_Path prints the first region as '—  What has followed you out of the room?' where every other chapter prints '# ...'.\nFile: commons/maps/Lab_Path/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Lab_Path"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Lab_Path",
+      "quote": "What has followed you out of the room?",
+      "why": "Every other chapter in the sequence opens with an H1 ('# Which rules keep acting?', '# What counts as the same'); this one begins with a bare line, so the reader arrives mid-thought and the tag tool lists the chapter's first region as untitled.",
+      "proposal": "Make the first line the heading ('# What has followed you out of the room?') and let the recalled encounters ('A dark patch that returned with REMAP...') be the opening paragraph; or give it a sequence-style question of its own.",
+      "evidence": "commons/maps/Lab_Path/final.md:1 has no '#'; compare commons/maps/Noise_Perlin_Simplex/final.md:1 and commons/maps/Random_Noise_Types/final.md:1. python tools/final_tags.py --map=Lab_Path prints the first region as '—  What has followed you out of the room?' where every other chapter prints '# ...'.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.003",
+      "title": "Say what VIEW leaves alone without contradicting REGEN",
+      "spec": "[prose] Noise_Perlin_Simplex\nQuote: “The seed stays where you left it, even after REGEN; only the way a value occupies space has changed.”\nWhy: REGEN is the button that draws a fresh seed, so 'the seed stays... even after REGEN' reads as false until the reader works out that the sentence is about VIEW not restoring the declared seed. The chapter has just taught that MATCH and REPLAY do restore it, so the distinction matters.\nDo: Reword: 'VIEW does not touch the seed: a field you regenerated stays regenerated, and MATCH is what brings the declared one back; only the way a value occupies space has changed.'\nEvidence: commons/maps/Noise_Perlin_Simplex/final.md:48. REGEN draws a new seed: algorithms/randomness/simplexnoise/SimplexVisualizer.gd:137-139 (current_seed = randi()) and algorithms/randomness/perlinnoise/NoiseVisualizer.gd:172-174. VIEW 'changes the current samples' expression, without restoring a placement seed': algorithms/randomness/simplexnoise/pair_study.gd:58-62; MATCH restores both: pair_study.gd:68.\nFile: commons/maps/Noise_Perlin_Simplex/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Perlin_Simplex"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Noise_Perlin_Simplex",
+      "quote": "The seed stays where you left it, even after REGEN; only the way a value occupies space has changed.",
+      "why": "REGEN is the button that draws a fresh seed, so 'the seed stays... even after REGEN' reads as false until the reader works out that the sentence is about VIEW not restoring the declared seed. The chapter has just taught that MATCH and REPLAY do restore it, so the distinction matters.",
+      "proposal": "Reword: 'VIEW does not touch the seed: a field you regenerated stays regenerated, and MATCH is what brings the declared one back; only the way a value occupies space has changed.'",
+      "evidence": "commons/maps/Noise_Perlin_Simplex/final.md:48. REGEN draws a new seed: algorithms/randomness/simplexnoise/SimplexVisualizer.gd:137-139 (current_seed = randi()) and algorithms/randomness/perlinnoise/NoiseVisualizer.gd:172-174. VIEW 'changes the current samples' expression, without restoring a placement seed': algorithms/randomness/simplexnoise/pair_study.gd:58-62; MATCH restores both: pair_study.gd:68.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.004",
+      "title": "Point the piece count at the bench, not the volume",
+      "spec": "[prose] Noise_Voxel\nQuote: “The plate counts groups joined through cell faces. Stand beside the volume and ask what that count cannot tell you.”\nWhy: The sentence sits in the large volume's section, but the volume's only plate says 'SAME 24 x 24 x 24 CELLS | FIVE TIMES THE MODEL / Threshold changes the body; this frame stays.' The count ('N occupied | N pieces | largest N', 'connected is not walkable') is on the bench readout across the room, so the reader looks for a number that is not there.\nDo: Reword: 'Back at the bench, the plate counted groups joined through cell faces; the frame here carries no count. Stand beside the volume and ask what that count cannot tell you.'\nEvidence: commons/maps/Noise_Voxel/final.md:63. Count computed and printed at the bench: commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd:521-557 and :655-656. The volume's only label: algorithms/randomness/voxelnoise/voxelnoise.gd:388-389; no readout, pieces or count elsewhere in that file.\nFile: commons/maps/Noise_Voxel/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Voxel"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Noise_Voxel",
+      "quote": "The plate counts groups joined through cell faces. Stand beside the volume and ask what that count cannot tell you.",
+      "why": "The sentence sits in the large volume's section, but the volume's only plate says 'SAME 24 x 24 x 24 CELLS | FIVE TIMES THE MODEL / Threshold changes the body; this frame stays.' The count ('N occupied | N pieces | largest N', 'connected is not walkable') is on the bench readout across the room, so the reader looks for a number that is not there.",
+      "proposal": "Reword: 'Back at the bench, the plate counted groups joined through cell faces; the frame here carries no count. Stand beside the volume and ask what that count cannot tell you.'",
+      "evidence": "commons/maps/Noise_Voxel/final.md:63. Count computed and printed at the bench: commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd:521-557 and :655-656. The volume's only label: algorithms/randomness/voxelnoise/voxelnoise.gd:388-389; no readout, pieces or count elsewhere in that file.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.005",
+      "title": "Move the docs hyperlink out of the wall text",
+      "spec": "[vr] Noise_Perlin_Simplex\nQuote: “[The engine's noise definitions](https://docs.godotengine.org/en/4.6/classes/class_fastnoiselite.html#enumerations).”\nWhy: It is a sentence fragment consisting of a bracketed URL, in prose a headset visitor reads on a wall; it cannot be followed there and it breaks the paragraph's voice ('the call has not made that calculation disappear').\nDo: Delete the fragment and, if the reference is wanted, attach a footnote to the previous sentence: '[^engine-noise]: FastNoiseLite's enumerations in the Godot 4.6 class reference name TYPE_PERLIN and TYPE_SIMPLEX (OpenSimplex2).'\nEvidence: commons/maps/Noise_Perlin_Simplex/final.md:42. The chapter already uses the footnote convention elsewhere in the sequence (Noise_Voxel/final.md:84-86, Noise_Space_10/final.md:69-71).\nFile: commons/maps/Noise_Perlin_Simplex/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Perlin_Simplex"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Noise_Perlin_Simplex",
+      "quote": "[The engine's noise definitions](https://docs.godotengine.org/en/4.6/classes/class_fastnoiselite.html#enumerations).",
+      "why": "It is a sentence fragment consisting of a bracketed URL, in prose a headset visitor reads on a wall; it cannot be followed there and it breaks the paragraph's voice ('the call has not made that calculation disappear').",
+      "proposal": "Delete the fragment and, if the reference is wanted, attach a footnote to the previous sentence: '[^engine-noise]: FastNoiseLite's enumerations in the Godot 4.6 class reference name TYPE_PERLIN and TYPE_SIMPLEX (OpenSimplex2).'",
+      "evidence": "commons/maps/Noise_Perlin_Simplex/final.md:42. The chapter already uses the footnote convention elsewhere in the sequence (Noise_Voxel/final.md:84-86, Noise_Space_10/final.md:69-71).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.006",
+      "title": "Bring the sequence's own text up to the revised chapters",
+      "spec": "[prose] sequence file: commons/maps/sequences/noise.json\nQuote: “\"qfep_term\": \"Î»E(S)\" ... \"Noise_Columns: Noise Extruded to Terrain\", \"Noise_One: Coherent Noise Fundamentals\", \"Noise_Space_10: Noise Parameter Space\"”\nWhy: Any page that lists the sequence (the encyclopedia page you want per sequence, the lab plaque, /lines) prints this file. Its qfep_term, qfep_connection, formula and description carry UTF-8 read-as-cp1252 damage (λ became 'Î»', the dashes 'â€”', the times sign 'Ã—'), its description is the pre-revision voice ('the algorithms that make chaos usable'), and its per-hall content lines no longer describe the chapters (Noise_Columns is about three drivers on one recipe, Noise_Space_10 about a route a body may not be able to follow; Chamber_Noise is still listed in content though deferred). randomness.json was rewritten on 2026-09-19 to match its chapters; noise.json was not.\nDo: Repair the four damaged strings, then rewrite name, description and the ten content lines from the live chapter titles and closings (as randomness.json:4-5 and :26-40 were done), dropping the Chamber_Noise content line into deferred_reason only.\nEvidence: commons/maps/sequences/noise.json:6-9 (bytes c3 8e c2 bb where λ should be; c3 a2 e2 82 ac e2 80 9d where an em dash should be), :28-39 content lines, :37 Chamber_Noise, :51-59 deferred. Model: commons/maps/sequences/randomness.json:4-5, :26-40, :284-287 (local_review_history 2026-09-19). Chapter titles: Noise_Columns/final.md:1, Noise_Space_10/final.md:1.\nFile: commons/maps/sequence file: commons/maps/sequences/noise.json/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "sequence file: commons/maps/sequences/noise.json"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "sequence file: commons/maps/sequences/noise.json",
+      "quote": "\"qfep_term\": \"Î»E(S)\" ... \"Noise_Columns: Noise Extruded to Terrain\", \"Noise_One: Coherent Noise Fundamentals\", \"Noise_Space_10: Noise Parameter Space\"",
+      "why": "Any page that lists the sequence (the encyclopedia page you want per sequence, the lab plaque, /lines) prints this file. Its qfep_term, qfep_connection, formula and description carry UTF-8 read-as-cp1252 damage (λ became 'Î»', the dashes 'â€”', the times sign 'Ã—'), its description is the pre-revision voice ('the algorithms that make chaos usable'), and its per-hall content lines no longer describe the chapters (Noise_Columns is about three drivers on one recipe, Noise_Space_10 about a route a body may not be able to follow; Chamber_Noise is still listed in content though deferred). randomness.json was rewritten on 2026-09-19 to match its chapters; noise.json was not.",
+      "proposal": "Repair the four damaged strings, then rewrite name, description and the ten content lines from the live chapter titles and closings (as randomness.json:4-5 and :26-40 were done), dropping the Chamber_Noise content line into deferred_reason only.",
+      "evidence": "commons/maps/sequences/noise.json:6-9 (bytes c3 8e c2 bb where λ should be; c3 a2 e2 82 ac e2 80 9d where an em dash should be), :28-39 content lines, :37 Chamber_Noise, :51-59 deferred. Model: commons/maps/sequences/randomness.json:4-5, :26-40, :284-287 (local_review_history 2026-09-19). Chapter titles: Noise_Columns/final.md:1, Noise_Space_10/final.md:1.",
+      "review": "unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.007",
+      "title": "Decide whether Lab_Path is a chapter, then fix the double send-off",
+      "spec": "[handover] Noise_Perlin_Simplex\nQuote: “In the next chapter, Cellular Automata, a row waits for its first update.”\nWhy: In noise.json's map order the next chapter is Lab_Path, which then hands over to Cellular Automata again; but the museum plan deals Noise_Perlin_Simplex straight into CA_Introduction and the book marks the Lab_Path pearl drop:true, so the headset reader never meets the coda's best material ('Hold a seed. Change a threshold. Look at an edge after the veining is gone.'). One of the two readers is currently wrong-footed whichever way the sentence is left.\nDo: Either deal Lab_Path (a 5x5 room with one orb is a pause the museum could hold; then change this sentence to 'Beyond the corridor, in Cellular Automata,') or keep it dropped and fold its two strongest sentences ('Hold a seed...' and the two tellings) into this chapter's closing region, leaving Lab_Path a grid-lane-only file.\nEvidence: commons/maps/Noise_Perlin_Simplex/final.md:90; commons/maps/Lab_Path/final.md:13, :21-23; commons/maps/sequences/noise.json:40-50 (Lab_Path in maps); ada_run/em_plan.json noise halls run Random_Noise_Types ... Noise_Perlin_Simplex then CA_Introduction with no Lab_Path; commons/data/book/noise.json pearls: Lab_Path drop:true. The block's Lab_Path/DECISIONS.md names the same fork; this task is the reader-facing half of it.\nFile: commons/maps/Noise_Perlin_Simplex/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Perlin_Simplex"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "Noise_Perlin_Simplex",
+      "quote": "In the next chapter, Cellular Automata, a row waits for its first update.",
+      "why": "In noise.json's map order the next chapter is Lab_Path, which then hands over to Cellular Automata again; but the museum plan deals Noise_Perlin_Simplex straight into CA_Introduction and the book marks the Lab_Path pearl drop:true, so the headset reader never meets the coda's best material ('Hold a seed. Change a threshold. Look at an edge after the veining is gone.'). One of the two readers is currently wrong-footed whichever way the sentence is left.",
+      "proposal": "Either deal Lab_Path (a 5x5 room with one orb is a pause the museum could hold; then change this sentence to 'Beyond the corridor, in Cellular Automata,') or keep it dropped and fold its two strongest sentences ('Hold a seed...' and the two tellings) into this chapter's closing region, leaving Lab_Path a grid-lane-only file.",
+      "evidence": "commons/maps/Noise_Perlin_Simplex/final.md:90; commons/maps/Lab_Path/final.md:13, :21-23; commons/maps/sequences/noise.json:40-50 (Lab_Path in maps); ada_run/em_plan.json noise halls run Random_Noise_Types ... Noise_Perlin_Simplex then CA_Introduction with no Lab_Path; commons/data/book/noise.json pearls: Lab_Path drop:true. The block's Lab_Path/DECISIONS.md names the same fork; this task is the reader-facing half of it.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.008",
+      "title": "Give the stand's 35% a referent or cut it",
+      "spec": "[prose] Noise_Columns\nQuote: “The stand's plaque records a chosen variant and a score from a saved comparison. That score explains something about the selection procedure; it cannot decide what you should want from this body.”\nWhy: The plaque prints 'dark_sphere 35%' and nothing in the sequence says what the number measures; 'variant', 'score' and 'saved comparison' are DNA-programme words the reader has no handle for, so the paragraph reads as an aside from another project. The family/choice argument that follows ('We can name the choice without closing the family') is worth keeping and does not need the number.\nDo: Either add one clause naming the measure ('a score of how far this variant's photograph departs from the shipped orb, thirty-five percent here') or drop the score sentence and keep 'The stand chooses presence = hush and body = swarm before the scene builds' as the whole account of the selection.\nEvidence: commons/maps/Noise_Columns/final.md:73, :83. Plaque line: commons/artifacts/synthesis/synthesis_stand.gd:127-132 (subject + '%.0f%%' of score). Verdict: commons/data/dna_synthesis.json dark_sphere: verdict hero, hero {presence: hush, body: swarm}, score 0.3509 (the critic's focus metric).\nFile: commons/maps/Noise_Columns/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Columns"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Noise_Columns",
+      "quote": "The stand's plaque records a chosen variant and a score from a saved comparison. That score explains something about the selection procedure; it cannot decide what you should want from this body.",
+      "why": "The plaque prints 'dark_sphere 35%' and nothing in the sequence says what the number measures; 'variant', 'score' and 'saved comparison' are DNA-programme words the reader has no handle for, so the paragraph reads as an aside from another project. The family/choice argument that follows ('We can name the choice without closing the family') is worth keeping and does not need the number.",
+      "proposal": "Either add one clause naming the measure ('a score of how far this variant's photograph departs from the shipped orb, thirty-five percent here') or drop the score sentence and keep 'The stand chooses presence = hush and body = swarm before the scene builds' as the whole account of the selection.",
+      "evidence": "commons/maps/Noise_Columns/final.md:73, :83. Plaque line: commons/artifacts/synthesis/synthesis_stand.gd:127-132 (subject + '%.0f%%' of score). Verdict: commons/data/dna_synthesis.json dark_sphere: verdict hero, hero {presence: hush, body: swarm}, score 0.3509 (the critic's focus metric).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.009",
+      "title": "Source the half-white measurement",
+      "spec": "[footnote] Noise_6_Wall\nQuote: “although when the four windows were measured at one held moment, even their brightest pixel reached only about half-white.”\nWhy: It is the one measurement in the sequence with no date or method; Noise_Voxel and Noise_Space_10 footnote every such number, and in a chapter built on 'grey is already an interpretation' an unsourced pixel reading is the kind of claim the chapter teaches the reader to question.\nDo: Add a footnote naming when and how the four patches were read (date, gain of two, held moment), or cut the clause and keep 'Any two sums of 0.5 or more would become the same white.'\nEvidence: commons/maps/Noise_6_Wall/final.md:43. Gain and clamp: algorithms/randomness/shadernoisespace/noiseroom.gd:68 (PANEL_GAIN = 2.0) and WallNoiseShader.gdshader:170. Footnote convention: Noise_Voxel/final.md:84, Noise_Space_10/final.md:71.\nFile: commons/maps/Noise_6_Wall/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_6_Wall"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "Noise_6_Wall",
+      "quote": "although when the four windows were measured at one held moment, even their brightest pixel reached only about half-white.",
+      "why": "It is the one measurement in the sequence with no date or method; Noise_Voxel and Noise_Space_10 footnote every such number, and in a chapter built on 'grey is already an interpretation' an unsourced pixel reading is the kind of claim the chapter teaches the reader to question.",
+      "proposal": "Add a footnote naming when and how the four patches were read (date, gain of two, held moment), or cut the clause and keep 'Any two sums of 0.5 or more would become the same white.'",
+      "evidence": "commons/maps/Noise_6_Wall/final.md:43. Gain and clamp: algorithms/randomness/shadernoisespace/noiseroom.gd:68 (PANEL_GAIN = 2.0) and WallNoiseShader.gdshader:170. Footnote convention: Noise_Voxel/final.md:84, Noise_Space_10/final.md:71.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.010",
+      "title": "Drop 'desktop' from the piece-count footnote",
+      "spec": "[footnote] Noise_Voxel\nQuote: “In the recorded desktop comparison of 13 September 2026, seed 31415 produced 4, 15, 25, 21 and 32 face-connected pieces”\nWhy: The five counts are a computation over the lattice (a flood fill through cell faces), not a walk; nothing about them is desktop, and the word drags a test rig into a chapter the visitor reads in a headset.\nDo: Reword to 'In a recorded comparison of 13 September 2026, seed 31415 produced...'.\nEvidence: commons/maps/Noise_Voxel/final.md:84. The count is computed by commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd:521-557 (components joined through faces), seed from the map token commons/maps/Noise_Voxel/map_data.json interactables 'perlin_terrain_sculptor:180:1.35:1#stand:lattice#seed:31415'.\nFile: commons/maps/Noise_Voxel/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Voxel"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "Noise_Voxel",
+      "quote": "In the recorded desktop comparison of 13 September 2026, seed 31415 produced 4, 15, 25, 21 and 32 face-connected pieces",
+      "why": "The five counts are a computation over the lattice (a flood fill through cell faces), not a walk; nothing about them is desktop, and the word drags a test rig into a chapter the visitor reads in a headset.",
+      "proposal": "Reword to 'In a recorded comparison of 13 September 2026, seed 31415 produced...'.",
+      "evidence": "commons/maps/Noise_Voxel/final.md:84. The count is computed by commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd:521-557 (components joined through faces), seed from the map token commons/maps/Noise_Voxel/map_data.json interactables 'perlin_terrain_sculptor:180:1.35:1#stand:lattice#seed:31415'.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.011",
+      "title": "Address the visitor, not 'the player'",
+      "spec": "[prose] Noise_6_Wall\nQuote: “What the player can physically cross and what the player imagines crossing need not arrive together.”\nWhy: The paragraph otherwise speaks to 'your feet' and 'your body'; 'the player' is game-manual vocabulary and the reader loses the address the chapter has been using at exactly the sentence that carries its point.\nDo: Reword: 'What your body can cross and what it imagines crossing need not arrive together.'\nEvidence: commons/maps/Noise_6_Wall/final.md:13 ('Your feet meet the same floor' at :11, 'the shapes your body collides with' at :13).\nFile: commons/maps/Noise_6_Wall/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_6_Wall"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Noise_6_Wall",
+      "quote": "What the player can physically cross and what the player imagines crossing need not arrive together.",
+      "why": "The paragraph otherwise speaks to 'your feet' and 'your body'; 'the player' is game-manual vocabulary and the reader loses the address the chapter has been using at exactly the sentence that carries its point.",
+      "proposal": "Reword: 'What your body can cross and what it imagines crossing need not arrive together.'",
+      "evidence": "commons/maps/Noise_6_Wall/final.md:13 ('Your feet meet the same floor' at :11, 'the shapes your body collides with' at :13).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.012",
+      "title": "Say where the basin stands",
+      "spec": "[prose] Noise_One\nQuote: “The room's opening now holds a small violet terrain within a pale coordinate frame.”\nWhy: 'The room's opening' reads as a doorway; the basin is placed at the centre of the 13 by 11 grid, and the previous sentence has already named it 'the landscape basin', so the reader is briefly sent to look at the entrance.\nDo: Reword: 'The open floor at the room's centre now holds a small violet terrain within a pale coordinate frame.'\nEvidence: commons/maps/Noise_One/final.md:51. commons/maps/Noise_One/map_data.json interactables: noiselayers at row 5, column 5 of width 13, depth 11 (noisetorus at row 2, dark_sphere at row 8).\nFile: commons/maps/Noise_One/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_One"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Noise_One",
+      "quote": "The room's opening now holds a small violet terrain within a pale coordinate frame.",
+      "why": "'The room's opening' reads as a doorway; the basin is placed at the centre of the 13 by 11 grid, and the previous sentence has already named it 'the landscape basin', so the reader is briefly sent to look at the entrance.",
+      "proposal": "Reword: 'The open floor at the room's centre now holds a small violet terrain within a pale coordinate frame.'",
+      "evidence": "commons/maps/Noise_One/final.md:51. commons/maps/Noise_One/map_data.json interactables: noiselayers at row 5, column 5 of width 13, depth 11 (noisetorus at row 2, dark_sphere at row 8).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.013",
+      "title": "Decide which text stands: the block's checked chapter or the 14:20 rewrite",
+      "spec": "[prose] Noise_Perlin_Simplex\nWhy: Rewritten at 14:20 on 24 Sept after the block installed its audited version.\nDo: Compare Noise_Perlin_Simplex/after.md with the live final.md and choose.\nEvidence: Noise_Perlin_Simplex/HASHES.txt LIVE line; forum 260924-zgl38\nFile: commons/maps/Noise_Perlin_Simplex/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Perlin_Simplex"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Noise_Perlin_Simplex",
+      "quote": "",
+      "why": "Rewritten at 14:20 on 24 Sept after the block installed its audited version.",
+      "proposal": "Compare Noise_Perlin_Simplex/after.md with the live final.md and choose.",
+      "evidence": "Noise_Perlin_Simplex/HASHES.txt LIVE line; forum 260924-zgl38",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.014",
+      "title": "The museum does not build Lab_Path, and the book gives two handovers",
+      "spec": "[structure] Lab_Path\nWhy: The pearl is drop:true, so the museum skips the hall; Noise_Perlin_Simplex already hands over to Cellular Automata, so a reader meets two handovers.\nDo: Decide: a grid-lane pause only, or a hall in the museum.\nEvidence: commons/data/book/noise.json:193-197\nFile: commons/maps/Lab_Path/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Lab_Path"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Lab_Path",
+      "quote": "",
+      "why": "The pearl is drop:true, so the museum skips the hall; Noise_Perlin_Simplex already hands over to Cellular Automata, so a reader meets two handovers.",
+      "proposal": "Decide: a grid-lane pause only, or a hall in the museum.",
+      "evidence": "commons/data/book/noise.json:193-197",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.015",
+      "title": "Check whether the museum still shrinks the enclosure to 80%",
+      "spec": "[encounter] Noise_Inside_Noise\nWhy: The shrink is on record from one 13 Sept build, before a 14 Sept map edit; the chapter's sizes are relative to the radius and hold either way, but the walk-in matters.\nDo: Boot the hall and read the enclosure's scale; if it is shrunk, a floor_cells exemption for walk-in bodies.\nEvidence: Noise_Inside_Noise/DECISIONS.md Limits\nFile: commons/maps/Noise_Inside_Noise/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Inside_Noise"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Noise_Inside_Noise",
+      "quote": "",
+      "why": "The shrink is on record from one 13 Sept build, before a 14 Sept map edit; the chapter's sizes are relative to the radius and hold either way, but the walk-in matters.",
+      "proposal": "Boot the hall and read the enclosure's scale; if it is shrunk, a floor_cells exemption for walk-in bodies.",
+      "evidence": "Noise_Inside_Noise/DECISIONS.md Limits",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.016",
+      "title": "A cradle that reaches the tube, so the rings no longer hover",
+      "spec": "[encounter] Noise_One\nWhy: Nothing holds the rings up; the chapter now says 'hover'. A cradle at y 1.08 would let the word go back to being held up.\nDo: Build the cradle, then revert change 1.\nEvidence: Noise_One/DECISIONS.md change 1\nFile: commons/maps/Noise_One/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_One"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Noise_One",
+      "quote": "",
+      "why": "Nothing holds the rings up; the chapter now says 'hover'. A cradle at y 1.08 would let the word go back to being held up.",
+      "proposal": "Build the cradle, then revert change 1.",
+      "evidence": "Noise_One/DECISIONS.md change 1",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.017",
+      "title": "SimplexNoise: treat a readout-only change like Perlin does",
+      "spec": "[encounter] Noise_Perlin_Simplex\nWhy: The 'unless ...' clause exists because SimplexNoise.apply_grid_config re-applies the contract on a readout change; Perlin does not.\nDo: _update_noise_parameters() without _apply_contract() for readout-only changes; then remove the clause.\nEvidence: Noise_Perlin_Simplex/DECISIONS.md change 2\nFile: commons/maps/Noise_Perlin_Simplex/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Perlin_Simplex"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Noise_Perlin_Simplex",
+      "quote": "",
+      "why": "The 'unless ...' clause exists because SimplexNoise.apply_grid_config re-applies the contract on a readout change; Perlin does not.",
+      "proposal": "_update_noise_parameters() without _apply_contract() for readout-only changes; then remove the clause.",
+      "evidence": "Noise_Perlin_Simplex/DECISIONS.md change 2",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.018",
+      "title": "Place the volume at yaw 180 and move its label",
+      "spec": "[encounter] Noise_Voxel\nWhy: The chapter says the visitor turns half round because the volume faces away.\nDo: Map and label change; then remove 'turned half round' from the chapter.\nEvidence: Noise_Voxel/DECISIONS.md\nFile: commons/maps/Noise_Voxel/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Voxel"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Noise_Voxel",
+      "quote": "",
+      "why": "The chapter says the visitor turns half round because the volume faces away.",
+      "proposal": "Map and label change; then remove 'turned half round' from the chapter.",
+      "evidence": "Noise_Voxel/DECISIONS.md",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.019",
+      "title": "perlin_terrain_sculptor reads R/N and the arrow keys across the whole museum",
+      "spec": "[encounter] Noise_Voxel\nWhy: Desktop keys only (no keyboard in the headset), but R/N reseed and the arrows move the threshold off its ladder from any hall during a visual test.\nDo: Gate _input on the visitor being at the work.\nEvidence: perlin_terrain_sculptor._input\nFile: commons/maps/Noise_Voxel/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Voxel"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Noise_Voxel",
+      "quote": "",
+      "why": "Desktop keys only (no keyboard in the headset), but R/N reseed and the arrows move the threshold off its ladder from any hall during a visual test.",
+      "proposal": "Gate _input on the visitor being at the work.",
+      "evidence": "perlin_terrain_sculptor._input",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_noise.020",
+      "title": "Nothing in the chapter changed; the steep-stretch claim rests on one walk",
+      "spec": "[prose] Noise_Space_10\nWhy: The one recorded walk (one body, one approach) is what the hedges protect; a second walk would let them loosen.\nDo: Walk it again in the headset from the other approach.\nEvidence: Noise_Space_10/DECISIONS.md\nFile: commons/maps/Noise_Space_10/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Noise_Space_10"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Noise_Space_10",
+      "quote": "",
+      "why": "The one recorded walk (one body, one approach) is what the hedges protect; a second walk would let them loosen.",
+      "proposal": "Walk it again in the headset from the other approach.",
+      "evidence": "Noise_Space_10/DECISIONS.md",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    }
+  ]
+}

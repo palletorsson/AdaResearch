@@ -1,0 +1,510 @@
+{
+  "goal_id": "book_postfoundationscrisis",
+  "goal_title": "Book: Post-Crisis: Applied Limits — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in postfoundationscrisis became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "postfoundationscrisis",
+    "order": 24,
+    "phase": "synthesis",
+    "title": "Post-Crisis: Applied Limits",
+    "chapters": [
+      "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "CriticalAlgorithms_Applied_Ethics",
+      "SpeculativeComputation_Paraconsistent_Engineering",
+      "SpeculativeComputation_Situated_Computation",
+      "SpeculativeComputation_Collective_Knowledge",
+      "SpeculativeComputation_Rhizome_Network",
+      "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "PostCrisis_Synthesis"
+    ],
+    "words": 6691,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/QFEP_Synthesis/final.md (last chapter of qfeplaboratory, for the handover in)",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/CriticalAlgorithms_Applied_Ethics/final.md",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/SpeculativeComputation_Paraconsistent_Engineering/final.md",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/SpeculativeComputation_Situated_Computation/final.md",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/SpeculativeComputation_Collective_Knowledge/final.md",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/SpeculativeComputation_Rhizome_Network/final.md",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md",
+      "C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/PostCrisis_Synthesis/final.md (no next sequence: 24 of 24; its teleporter is t:lab)"
+    ],
+    "reading": {
+      "arc": "The sequence takes the museum's closing question, 'knowing the limits of formalisation, what do we build?', and answers it as a chain of design decisions the visitor can operate rather than admire: how much room a representation gives a distinction (bias), what a seating plan decides before anyone speaks (ethics), what a resolved disagreement deletes (paraconsistency), where a verdict is spoken from (situated), what a count of contributions hides and who may revise (collective), which connections a body can enter and which it can only see (rhizome), and how a body's pose and its neighbours can be changed by hand (laboratory). Each hall follows one rhythm: an instruction to press or move something, a short code excerpt introduced by 'The source makes the operation inspectable', a paragraph stating exactly what the exhibit does not establish, and a question to carry out. The visitor's own alteration in the laboratory is written to a pose record and stands again in the final hall beside the body it began from, where the ledger shows what the record kept and what it could not. The book closes by turning the question back on the maker (what would you want the record to keep next, which change do you still want to make) and by circling to the first hall's counter that was already running when we arrived.",
+      "holds": [
+        "The refrain 'The source makes the operation inspectable' with a verified excerpt in six of the eight halls, always followed by a sentence about what the code does not prove (a picture of a decision, not a proof; equal spacing, not equal opportunity).",
+        "A 'what this exhibit cannot establish' paragraph in every hall: authored positions not measured embeddings; supplied percentages not calibrated probabilities; a simulation of accretion not a live editor; composed passages not a grown network; authored targets not discovered destinations.",
+        "The carried object: the hand you moved. The laboratory's released pose crosses to the final hall through AssemblyPoseRecord, and the last line ('The clock is still running') returns to Point_One's counter.",
+        "Keeping the subject constant while the frame changes: same words, less room; same subject, four verdicts; same points, other connections; same hand, another neighbour.",
+        "Every hall ends by naming the next version it would want (a named model and documented measurement, observed sightlines, a small rule table, a criterion per panel, a browsable history, a new opening in the wall, another joint, the path of the hand), so the sequence's 'return with a change' is rehearsed seven times before the final hall asks for it.",
+        "Buttons in small caps as the prose's verbs (READ, PAIR, RESOLVED, COVER, DISPUTE, VERSION, HANG AGAIN): the visitor's operations are the chapter's paragraphs, and every named control exists on the artifact's console."
+      ],
+      "hall_notes": [
+        {
+          "hall": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+          "words": 448,
+          "note": "Opens the sequence on the COMPRESSION handle: two coloured word groups, one lerp, and the difference between being present and being tellable-apart. The tightest chapter in the sequence; every claim matches bias_from_inside.gd, and READ hands the reader the maker's own caveat ('Both groups were chosen')."
+        },
+        {
+          "hall": "CriticalAlgorithms_Applied_Ethics",
+          "words": 563,
+          "note": "Five seating plans on one console (HEAD, CIRCLE, PAIR, WATCH, VACANT) plus the COLOUR/NEUTRAL persuasion switch. Its cadence is press-then-think, close to a guided operation, but each press earns its thought and the refusal to let geometry stand in for participation is exact."
+        },
+        {
+          "hall": "SpeculativeComputation_Paraconsistent_Engineering",
+          "words": 536,
+          "note": "Four authored pictures of a disagreement; the RESOLVED stump ('look down for B') is the hall's best moment. The formal paragraph on explosion is honest about the limit of the analogy, but the one citation is a bare hyperlink a headset reader cannot follow."
+        },
+        {
+          "hall": "SpeculativeComputation_Situated_Computation",
+          "words": 620,
+          "note": "One subject, four verdicts, three ways of showing an address (FOOTNOTE, COVER, WITNESS). The 'dangerous to whom, under which circumstances' passage is the strongest accountability writing in the sequence. The spider is introduced in the last paragraph, after ten paragraphs that tell the reader to linger."
+        },
+        {
+          "hall": "SpeculativeComputation_Collective_Knowledge",
+          "words": 1027,
+          "note": "Two works: the helix workbench (FLOW, COLOUR, PIECE, DISPUTE, REVISE, VERSION) and the round table with no head. The counting passage is accurate to the readout but narrates a label change the reader never saw; the table's cards are described as turned toward different approaches, which the code does not build."
+        },
+        {
+          "hall": "SpeculativeComputation_Rhizome_Network",
+          "words": 891,
+          "note": "Cave first (the violet junction, the overcrossing you cannot turn at, the minf union that lets two volumes share an interior), grower second (one link or three, cut a busy point, the ring that does not spread). The best prose in the sequence, but the reading order is the reverse of the walk, and the opening question line is dropped."
+        },
+        {
+          "hall": "AdvancedLaboratory_Lab_Equipment_Simulation",
+          "words": 1677,
+          "note": "The longest hall by 650 words: a hand you can leave too far away, an inventory finding authored targets, one rerouteable connection that makes and unmakes a loop, a ragdoll that falls, and a chair, table and lamp that pull apart. Every mechanical claim matches the scripts; the reader carries thirteen joint names with no heading to rest on."
+        },
+        {
+          "hall": "PostCrisis_Synthesis",
+          "words": 929,
+          "note": "Two bodies (blue start, amber kept) and a ledger that reads the same record; the argument that the destination survives while the gesture does not is exact and moving ('The hand has arrived. Your hand is missing.'). Closes the book by circling to the first hall's counter; one ledger sentence is garbled."
+        }
+      ],
+      "stumbles": [
+        "SpeculativeComputation_Rhizome_Network: the chapter walks the cave and then 'the small grower', but the map puts the grower beside the spawn and the cave between spawn and exit, so a visitor following the text returns to the entrance and then says goodbye to the hall from its far end.",
+        "SpeculativeComputation_Situated_Computation: 'Stay with DANGEROUS. Read its 92%' is issued in a room where a biting spider notices the visitor from 14 m; the creature is only mentioned in the final paragraph.",
+        "SpeculativeComputation_Collective_Knowledge: 'some of those cards faced away' sends the reader looking for cards turned different ways; every station pad is built with position only and faces the same direction.",
+        "SpeculativeComputation_Collective_Knowledge: 'In the earlier display, a number labelled CONTRIBUTORS ... That number is now called PARTICIPATIONS' reads as a changelog; the reader has never seen an earlier display.",
+        "PostCrisis_Synthesis: 'distinguishes twelve connections from twelve unchanged connections' is not a sentence a reader can parse; the ledger prints 'retained' or 'N rerouted'.",
+        "AdvancedLaboratory_Lab_Equipment_Simulation: 1,677 words, five encounters and no heading; the head-torso-shoulder-elbow loop and its undoing ask the reader to hold thirteen names across two paragraphs.",
+        "AdvancedLaboratory_Lab_Equipment_Simulation to PostCrisis_Synthesis: 'the gold body' becomes 'an amber body' between the two halls for the same figure.",
+        "SpeculativeComputation_Paraconsistent_Engineering: the Basu and Roy citation is a hyperlink whose anchor is a whole sentence and whose paper is never named; there is nothing to click in a headset.",
+        "CriticalAlgorithms_Applied_Ethics: 'the panel stays where your hand left it' implies the visitor placed the console; it is fixed.",
+        "SpeculativeComputation_Rhizome_Network, AdvancedLaboratory_Lab_Equipment_Simulation, PostCrisis_Synthesis: the one-line question under the title that the first five halls (and QFEP_Synthesis before them) open with disappears for the last three."
+      ],
+      "keep": [
+        {
+          "hall": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+          "quote": "Presence in a representation is therefore different from being represented with useful distinctions."
+        },
+        {
+          "hall": "CriticalAlgorithms_Applied_Ethics",
+          "quote": "Equal spacing is what this loop guarantees. Equal opportunity to speak would require another kind of evidence."
+        },
+        {
+          "hall": "SpeculativeComputation_Paraconsistent_Engineering",
+          "quote": "Its useful first gesture is spatial: an unresolved relation can be represented without erasing the parts that made the relation difficult."
+        },
+        {
+          "hall": "SpeculativeComputation_Situated_Computation",
+          "quote": "A favourable word also needs criteria; situatedness is not a licence to stop checking an appealing claim."
+        },
+        {
+          "hall": "SpeculativeComputation_Collective_Knowledge",
+          "quote": "The table has no head. The classification still has an author."
+        },
+        {
+          "hall": "SpeculativeComputation_Rhizome_Network",
+          "quote": "We have not escaped geometry by drawing a network. We have acquired another place to work on it."
+        },
+        {
+          "hall": "AdvancedLaboratory_Lab_Equipment_Simulation",
+          "quote": "A body can look as though it is coming into being while it is coming into agreement with a description."
+        },
+        {
+          "hall": "PostCrisis_Synthesis",
+          "quote": "The hand has arrived. Your hand is missing."
+        }
+      ],
+      "handover_in": "Clean. QFEP_Synthesis ends with Self-Q ('After giving this body a name, a container and a range of responses ... Which part of the apparatus would we change next?') and then 'Post-crisis begins with representation itself. After learning to name a model's choices, ask whose distinctions those choices make clear and whose they compress.' The bias hall opens on exactly that: 'Which differences become difficult to recognise when a representation gives some words less room?' The sequence also answers the Self-Q question in its last hall ('Choose one alteration you still want to make'), so the promise is kept end to end.",
+      "handover_out": "There is no next sequence (24 of 24); the final hall's teleporter is t:lab and the sequence file says return_to: lab. The chapter closes the book rather than handing on: 'This is a place to turn around ... The clock is still running. There is something you wanted to make.' The clock is Point_One's frame counter ('The room's counter reads a total that began earlier'; Point_Lines: 'The clock in the first room was already running when we arrived'), so the ending deliberately loops to the first hall and leaves the request open. The only mismatch is internal to the arc: the lab's 'gold body' is the synthesis hall's 'amber body'.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_postfoundationscrisis.001",
+      "title": "Put the grower where the chapter meets it",
+      "spec": "[structure] SpeculativeComputation_Rhizome_Network\nQuote: “The small grower offers a different kind of arrival.”\nWhy: The chapter visits the cave first and the grower second, then says 'The museum has an onward direction', but the map places the grower beside the spawn at the north end and the cave between spawn and exit; a visitor following the text walks back to the entrance and then has to cross the cave again to leave.\nDo: Move the rhizome_grower token from cell (4,2) to the south end beside the exit (for example (4,34), an open floor cell) and re-run the pathfinder; the reading order then matches the walk with no prose change. If the map must stay, reorder the chapter (grower region first) and rewrite the two bridging sentences ('That boundary is easier to see at this scale. Inside the cave, its equivalent was a wall.').\nEvidence: commons/maps/SpeculativeComputation_Rhizome_Network/map_data.json interactables: rhizome_grower at (4,2), rhizome_cave_demo at (15,18); utilities s (spawn) at (15,1), t at (15,35); structure is an open 31x37 floor with doors at rows 0 and 36. RhizomePassages.gd:9-10 (FIELD_ORIGIN z -15.75, 71 cells x 0.45 m, so the shell spans about 14 m either side of the cave cell) and :144 (portals cut at |z| >= 13.85, so the mouths sit near cells 4 and 32). The grower therefore stands north of the north mouth, next to the spawn.\nFile: commons/maps/SpeculativeComputation_Rhizome_Network/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SpeculativeComputation_Rhizome_Network"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "SpeculativeComputation_Rhizome_Network",
+      "quote": "The small grower offers a different kind of arrival.",
+      "why": "The chapter visits the cave first and the grower second, then says 'The museum has an onward direction', but the map places the grower beside the spawn at the north end and the cave between spawn and exit; a visitor following the text walks back to the entrance and then has to cross the cave again to leave.",
+      "proposal": "Move the rhizome_grower token from cell (4,2) to the south end beside the exit (for example (4,34), an open floor cell) and re-run the pathfinder; the reading order then matches the walk with no prose change. If the map must stay, reorder the chapter (grower region first) and rewrite the two bridging sentences ('That boundary is easier to see at this scale. Inside the cave, its equivalent was a wall.').",
+      "evidence": "commons/maps/SpeculativeComputation_Rhizome_Network/map_data.json interactables: rhizome_grower at (4,2), rhizome_cave_demo at (15,18); utilities s (spawn) at (15,1), t at (15,35); structure is an open 31x37 floor with doors at rows 0 and 36. RhizomePassages.gd:9-10 (FIELD_ORIGIN z -15.75, 71 cells x 0.45 m, so the shell spans about 14 m either side of the cave cell) and :144 (portals cut at |z| >= 13.85, so the mouths sit near cells 4 and 32). The grower therefore stands north of the north mouth, next to the spawn.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_postfoundationscrisis.002",
+      "title": "Introduce the spider before the reading instructions",
+      "spec": "[structure] SpeculativeComputation_Situated_Computation\nQuote: “A small spider moves among the readouts. It can notice and follow you; its controller can bite.”\nWhy: The creature is placed four cells from the spawn with a 14 m detection range in a 10x10 room and bites for 18 (34 on a lunge) every 0.95 s, so a visitor obeying 'Stay with DANGEROUS. Read its 92%' is attacked before reaching the paragraph that mentions it; 'its controller' is also code-speak for a reader.\nDo: Move the spider paragraph up to follow the first paragraph, and say plainly what it does: 'A small four-legged creature hunts among the readouts; when it reaches you it bites, and enough bites restart the hall. Keep it in view while you read.' Keep the closing question ('What would we need to observe before calling either one dangerous?') where it is.\nEvidence: map_data.json interactables: head_crab:180#detection:14 at (7,5), spawn s at (5,1), open 10x10 floor. commons/hazards/head_crab/head_crab.gd:97-118 (can_bite true, contact_damage 18, lunge_damage 34, lunge_range 1.9, bite_range 0.72, bite_cooldown 0.95), :1274-1290 (chases any target inside detect_m and commits a lunge), :1151-1158 (damage falls through to GameManager.apply_health_damage).\nFile: commons/maps/SpeculativeComputation_Situated_Computation/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SpeculativeComputation_Situated_Computation"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "SpeculativeComputation_Situated_Computation",
+      "quote": "A small spider moves among the readouts. It can notice and follow you; its controller can bite.",
+      "why": "The creature is placed four cells from the spawn with a 14 m detection range in a 10x10 room and bites for 18 (34 on a lunge) every 0.95 s, so a visitor obeying 'Stay with DANGEROUS. Read its 92%' is attacked before reaching the paragraph that mentions it; 'its controller' is also code-speak for a reader.",
+      "proposal": "Move the spider paragraph up to follow the first paragraph, and say plainly what it does: 'A small four-legged creature hunts among the readouts; when it reaches you it bites, and enough bites restart the hall. Keep it in view while you read.' Keep the closing question ('What would we need to observe before calling either one dangerous?') where it is.",
+      "evidence": "map_data.json interactables: head_crab:180#detection:14 at (7,5), spawn s at (5,1), open 10x10 floor. commons/hazards/head_crab/head_crab.gd:97-118 (can_bite true, contact_damage 18, lunge_damage 34, lunge_range 1.9, bite_range 0.72, bite_cooldown 0.95), :1274-1290 (chases any target inside detect_m and commits a lunge), :1151-1158 (damage falls through to GameManager.apply_health_damage).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_postfoundationscrisis.003",
+      "title": "The station cards all face one way",
+      "spec": "[encounter] SpeculativeComputation_Collective_Knowledge\nQuote: “Each little instrument has its card turned towards a different approach. From where you first stood, some of those cards faced away.”\nWhy: _tag() sets only a position on each TextScreen pad and never a rotation, so the six station cards and the centre card all face the same direction; the reader is told to find cards turned away and cannot, and the conclusion 'There is no position from which every account addresses you at once' is untrue of the room as built.\nDo: Either pass each station's angle into _tag and set tag.rotation.y so every pad faces outward from the table centre (then the sentences are true), or cut the two sentences and let 'Take a place at the rim, then walk to another' stand on the instruments themselves.\nEvidence: commons/artifacts/the_commons_table/the_commons_table.gd:48-55 (_tag: tag.position = at, no rotation), calls at :119, :146, :152, :165, :191, :215, :235, :252; commons/ui/text_screen.gd:110-117 (PAD mode reclines the screen about x only, facing the same way for every instance).\nFile: commons/maps/SpeculativeComputation_Collective_Knowledge/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SpeculativeComputation_Collective_Knowledge"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "SpeculativeComputation_Collective_Knowledge",
+      "quote": "Each little instrument has its card turned towards a different approach. From where you first stood, some of those cards faced away.",
+      "why": "_tag() sets only a position on each TextScreen pad and never a rotation, so the six station cards and the centre card all face the same direction; the reader is told to find cards turned away and cannot, and the conclusion 'There is no position from which every account addresses you at once' is untrue of the room as built.",
+      "proposal": "Either pass each station's angle into _tag and set tag.rotation.y so every pad faces outward from the table centre (then the sentences are true), or cut the two sentences and let 'Take a place at the rim, then walk to another' stand on the instruments themselves.",
+      "evidence": "commons/artifacts/the_commons_table/the_commons_table.gd:48-55 (_tag: tag.position = at, no rotation), calls at :119, :146, :152, :165, :191, :215, :235, :252; commons/ui/text_screen.gd:110-117 (PAD mode reclines the screen about x only, facing the same way for every instance).",
+      "review": "confirmed by a code checker (cited files only): the_commons_table.gd:48-55 _tag sets mode = 2, width_m and tag.position = at, never a rotation; all eight call sites (:119, :146, :152, :165, :191, :215, :235, :252) pass only a position. text_screen.gd:110-117 PAD mode rotates the holder about x only (-58 deg). Every card therefore faces the same way. final.md:42 carries the two sentences and the 'no position from which every account addresses you at once' conclusion.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_postfoundationscrisis.004",
+      "title": "Say what the ledger's fourth line says",
+      "spec": "[prose] PostCrisis_Synthesis\nQuote: “and distinguishes twelve connections from twelve unchanged connections.”\nWhy: The sentence cannot be parsed, and the ledger does something simpler: its fourth line reads '12 connections retained', or '12 connections; N rerouted' when the collar was moved.\nDo: Replace with: 'and says whether any of the twelve connections has been rerouted.'\nEvidence: commons/artifacts/accountability_ledger/accountability_ledger.gd:190 (\"12 connections retained\") and :191-192 (\"12 connections; %d rerouted\" when changed_connections(record) > 0).\nFile: commons/maps/PostCrisis_Synthesis/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PostCrisis_Synthesis"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "PostCrisis_Synthesis",
+      "quote": "and distinguishes twelve connections from twelve unchanged connections.",
+      "why": "The sentence cannot be parsed, and the ledger does something simpler: its fourth line reads '12 connections retained', or '12 connections; N rerouted' when the collar was moved.",
+      "proposal": "Replace with: 'and says whether any of the twelve connections has been rerouted.'",
+      "evidence": "commons/artifacts/accountability_ledger/accountability_ledger.gd:190 (\"12 connections retained\") and :191-192 (\"12 connections; %d rerouted\" when changed_connections(record) > 0).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_postfoundationscrisis.005",
+      "title": "Drop the changelog voice from the counting passage",
+      "spec": "[prose] SpeculativeComputation_Collective_Knowledge\nQuote: “In the earlier display, a number labelled CONTRIBUTORS could therefore outgrow the twelve source positions. That number is now called PARTICIPATIONS.”\nWhy: The reader has never seen an 'earlier display' (the CONTRIBUTORS label exists only in the original commit), so 'is now called' narrates the author's revision history instead of the readout in front of the visitor; the good point underneath (a label can turn repeated attendance into an expanding community) survives in the present tense.\nDo: Recast: 'Read PARTICIPATIONS again after a VERSION. It can pass twelve, because it adds together each version's distinct sources. Call that number CONTRIBUTORS and a label has quietly turned repeated attendance into an expanding community. SOURCES counts distinct nodes in this version; EVER counts distinct nodes across versions.'\nEvidence: commons/artifacts/peer_production_tool/peer_production_tool.gd:422-423 (readout prints PARTICIPATIONS from _contributors, SOURCES from _version_sources, EVER from _ever_seen.size()); _contributors incremented at :227 and reset only in _build (:111), not in _clear_form (:164-177); _version_sources reset at :173. git log -S CONTRIBUTORS on the file returns only 7cb10a583.\nFile: commons/maps/SpeculativeComputation_Collective_Knowledge/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SpeculativeComputation_Collective_Knowledge"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "SpeculativeComputation_Collective_Knowledge",
+      "quote": "In the earlier display, a number labelled CONTRIBUTORS could therefore outgrow the twelve source positions. That number is now called PARTICIPATIONS.",
+      "why": "The reader has never seen an 'earlier display' (the CONTRIBUTORS label exists only in the original commit), so 'is now called' narrates the author's revision history instead of the readout in front of the visitor; the good point underneath (a label can turn repeated attendance into an expanding community) survives in the present tense.",
+      "proposal": "Recast: 'Read PARTICIPATIONS again after a VERSION. It can pass twelve, because it adds together each version's distinct sources. Call that number CONTRIBUTORS and a label has quietly turned repeated attendance into an expanding community. SOURCES counts distinct nodes in this version; EVER counts distinct nodes across versions.'",
+      "evidence": "commons/artifacts/peer_production_tool/peer_production_tool.gd:422-423 (readout prints PARTICIPATIONS from _contributors, SOURCES from _version_sources, EVER from _ever_seen.size()); _contributors incremented at :227 and reset only in _build (:111), not in _clear_form (:164-177); _version_sources reset at :173. git log -S CONTRIBUTORS on the file returns only 7cb10a583.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_postfoundationscrisis.006",
+      "title": "Give the longest hall two headings and a shorter furniture passage",
+      "spec": "[structure] AdvancedLaboratory_Lab_Equipment_Simulation\nQuote: “A chair has legs too.”\nWhy: At 1,677 words the chapter is 650 words longer than any other hall and moves through five encounters (workshop hand, inventory cycle, connection reroute, ragdoll, chair/table/lamp) with no heading; a reader loses the thread between the reroute argument and the falling bodies, and the table and lamp paragraphs restate what the chair already showed.\nDo: Add two plain sub-headings at 'Another body waits over a dark mat.' and 'A chair has legs too.', and fold the table and lamp into one paragraph that keeps 'Its flatness survives; its promise of being level does not' and 'Failure has to be specified too.'\nEvidence: Word counts: 1677 versus 448-1027 for the other seven halls. Five separate studies are built by algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd:544-552 (BodyWorkshop), :454-474 (auto-cycle), :575-583 (BodyRagdoll), :585-599 (Furniture_Chair, _Table, _Lamp).\nFile: commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "AdvancedLaboratory_Lab_Equipment_Simulation"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "quote": "A chair has legs too.",
+      "why": "At 1,677 words the chapter is 650 words longer than any other hall and moves through five encounters (workshop hand, inventory cycle, connection reroute, ragdoll, chair/table/lamp) with no heading; a reader loses the thread between the reroute argument and the falling bodies, and the table and lamp paragraphs restate what the chair already showed.",
+      "proposal": "Add two plain sub-headings at 'Another body waits over a dark mat.' and 'A chair has legs too.', and fold the table and lamp into one paragraph that keeps 'Its flatness survives; its promise of being level does not' and 'Failure has to be specified too.'",
+      "evidence": "Word counts: 1677 versus 448-1027 for the other seven halls. Five separate studies are built by algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd:544-552 (BodyWorkshop), :454-474 (auto-cycle), :575-583 (BodyRagdoll), :585-599 (Furniture_Chair, _Table, _Lamp).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_postfoundationscrisis.007",
+      "title": "A three-state drawing of the rerouted connection",
+      "spec": "[figure] AdvancedLaboratory_Lab_Equipment_Simulation\nQuote: “you can go from the head through the torso and left shoulder, down to the elbow, and back to the head. A loop has appeared.”\nWhy: The loop that appears and then opens is the hall's central argument, and it asks the reader to hold thirteen joint names and twelve lines across two paragraphs with no picture; a small graph drawn three times would let the reader see what 'nothing has been added, and no point has moved' means.\nDo: Add one figure: the thirteen joints and twelve lines as the start body, then with the hand end of the elbow-hand line released at the head (loop, hand isolated), then with the elbow end released at the hand (hand joined to the head, loop gone), drawing the changed line in the turquoise the final hall uses.\nEvidence: assemblies.json:105-113 (the twelve bonds); AssemblyBodyStudy.gd:68 (only l_elb-l_hand is editable), :193 (pairs[bond_index].y = candidate), :195 (.x = candidate); assembly_return.gd:95-96 (a rerouted edge is drawn in Color(.12,.85,.8)). 25 of 196 spine chapters carry an image; none of this sequence's eight does.\nFile: commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "AdvancedLaboratory_Lab_Equipment_Simulation"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "quote": "you can go from the head through the torso and left shoulder, down to the elbow, and back to the head. A loop has appeared.",
+      "why": "The loop that appears and then opens is the hall's central argument, and it asks the reader to hold thirteen joint names and twelve lines across two paragraphs with no picture; a small graph drawn three times would let the reader see what 'nothing has been added, and no point has moved' means.",
+      "proposal": "Add one figure: the thirteen joints and twelve lines as the start body, then with the hand end of the elbow-hand line released at the head (loop, hand isolated), then with the elbow end released at the hand (hand joined to the head, loop gone), drawing the changed line in the turquoise the final hall uses.",
+      "evidence": "assemblies.json:105-113 (the twelve bonds); AssemblyBodyStudy.gd:68 (only l_elb-l_hand is editable), :193 (pairs[bond_index].y = candidate), :195 (.x = candidate); assembly_return.gd:95-96 (a rerouted edge is drawn in Color(.12,.85,.8)). 25 of 196 spine chapters carry an image; none of this sequence's eight does.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_postfoundationscrisis.008",
+      "title": "Name the paper instead of linking a sentence",
+      "spec": "[footnote] SpeculativeComputation_Paraconsistent_Engineering\nQuote: “[Basu and Roy's research paper starts from this failure of explosion when developing more general definitions.](https://arxiv.org/abs/2112.00357)”\nWhy: A headset reader cannot click, and the paper is never named, so the attribution is unusable exactly where the chapter makes its one formal claim; the sequence's other citation (Deleuze and Guattari) uses a titled footnote.\nDo: Make the sentence plain prose and add a footnote: 'Sankha S. Basu and Sayantan Roy, \"Negation-Free Definitions of Paraconsistency\", arXiv:2112.00357 (2021).' The attribution is accurate: their abstract opens from paraconsistency as the failure of explosion and proposes negation-independent definitions.\nEvidence: arXiv abs page for 2112.00357: title 'Negation-Free Definitions of Paraconsistency', authors Sankha S. Basu and Sayantan Roy; abstract: 'Paraconsistency is commonly defined and/or characterized as the failure of a principle of explosion.' Compare the [^1] form in SpeculativeComputation_Rhizome_Network/final.md line 49.\nFile: commons/maps/SpeculativeComputation_Paraconsistent_Engineering/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SpeculativeComputation_Paraconsistent_Engineering"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "SpeculativeComputation_Paraconsistent_Engineering",
+      "quote": "[Basu and Roy's research paper starts from this failure of explosion when developing more general definitions.](https://arxiv.org/abs/2112.00357)",
+      "why": "A headset reader cannot click, and the paper is never named, so the attribution is unusable exactly where the chapter makes its one formal claim; the sequence's other citation (Deleuze and Guattari) uses a titled footnote.",
+      "proposal": "Make the sentence plain prose and add a footnote: 'Sankha S. Basu and Sayantan Roy, \"Negation-Free Definitions of Paraconsistency\", arXiv:2112.00357 (2021).' The attribution is accurate: their abstract opens from paraconsistency as the failure of explosion and proposes negation-independent definitions.",
+      "evidence": "arXiv abs page for 2112.00357: title 'Negation-Free Definitions of Paraconsistency', authors Sankha S. Basu and Sayantan Roy; abstract: 'Paraconsistency is commonly defined and/or characterized as the failure of a principle of explosion.' Compare the [^1] form in SpeculativeComputation_Rhizome_Network/final.md line 49.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_postfoundationscrisis.009",
+      "title": "Promise passages before growth",
+      "spec": "[handover] SpeculativeComputation_Collective_Knowledge\nQuote: “The rhizome will make the pattern of connection itself grow.”\nWhy: The next hall opens with a composed cave whose script and prose both insist it was not grown ('It has not secretly designed this cave'); the handover points at the grower, which the reader meets last (or, after the task above, near the exit).\nDo: Rewrite the bridge: 'The rhizome hall lets you walk connections before it grows any: a composed set of passages you can enter and return through, then a small network that adds its own points. A shared result can have many contributors while its network still develops uneven centres.'\nEvidence: algorithms/spacetopology/marchingcubes/rhizome/RhizomePassages.gd:2-3 ('The graph is a composition, not evidence that a random growth rule found these routes'); the rhizome chapter: 'For this encounter, their junctions and heights have been composed ... It has not secretly designed this cave.'\nFile: commons/maps/SpeculativeComputation_Collective_Knowledge/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SpeculativeComputation_Collective_Knowledge"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "SpeculativeComputation_Collective_Knowledge",
+      "quote": "The rhizome will make the pattern of connection itself grow.",
+      "why": "The next hall opens with a composed cave whose script and prose both insist it was not grown ('It has not secretly designed this cave'); the handover points at the grower, which the reader meets last (or, after the task above, near the exit).",
+      "proposal": "Rewrite the bridge: 'The rhizome hall lets you walk connections before it grows any: a composed set of passages you can enter and return through, then a small network that adds its own points. A shared result can have many contributors while its network still develops uneven centres.'",
+      "evidence": "algorithms/spacetopology/marchingcubes/rhizome/RhizomePassages.gd:2-3 ('The graph is a composition, not evidence that a random growth rule found these routes'); the rhizome chapter: 'For this encounter, their junctions and heights have been composed ... It has not secretly designed this cave.'",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_postfoundationscrisis.010",
+      "title": "One colour for the body that crosses halls",
+      "spec": "[handover] AdvancedLaboratory_Lab_Equipment_Simulation\nQuote: “Leave the gold body a little unlike the one you found.”\nWhy: The final hall calls the same figure 'an amber body' and labels it LAST KEPT POSE in amber; the workshop's joints are that same amber (its rods are gold), so a reader looking for 'the gold body' in the last hall finds none.\nDo: In the lab's closing paragraph write 'Leave the amber-jointed body a little unlike the one you found', or introduce it once as amber where it first appears ('warm metal joints').\nEvidence: AssemblyBodyStudy.gd:50 (joints Color(.95,.57,.21)), :75 (rods Color(.85,.77,.57)); assembly_return.gd:7 (AMBER := Color(.95,.57,.21)), :17 (LAST KEPT POSE label in AMBER).\nFile: commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "AdvancedLaboratory_Lab_Equipment_Simulation"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "quote": "Leave the gold body a little unlike the one you found.",
+      "why": "The final hall calls the same figure 'an amber body' and labels it LAST KEPT POSE in amber; the workshop's joints are that same amber (its rods are gold), so a reader looking for 'the gold body' in the last hall finds none.",
+      "proposal": "In the lab's closing paragraph write 'Leave the amber-jointed body a little unlike the one you found', or introduce it once as amber where it first appears ('warm metal joints').",
+      "evidence": "AssemblyBodyStudy.gd:50 (joints Color(.95,.57,.21)), :75 (rods Color(.85,.77,.57)); assembly_return.gd:7 (AMBER := Color(.95,.57,.21)), :17 (LAST KEPT POSE label in AMBER).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_postfoundationscrisis.011",
+      "title": "Restore the opening question in the last three halls",
+      "spec": "[structure] SpeculativeComputation_Rhizome_Network\nQuote: “# Another way through”\nWhy: The first five halls and the previous sequence's last hall open with a one-line question under the title, and the sequence description promises that each hall exposes a decision; the rhizome, laboratory and synthesis halls go straight from title to anchor, so the device the reader has learned to use as the hall's brief disappears where the halls are longest.\nDo: Add one question under each of the three titles, drawn from the sequence file's own verbs: rhizome 'Which connections can a body enter, and which can it only see?'; laboratory 'Where was this body's destination decided?'; synthesis 'What will have survived the journey?' (the last already appears in the lab's closing line).\nEvidence: final.md files: the bias, ethics, paraconsistent, situated and collective halls and QFEP_Synthesis each have a question as their first body line; rhizome, lab and synthesis do not. Corpus scan: 65 of 196 spine chapters carry the line, so it is a sequence device rather than a book rule. commons/maps/sequences/postfoundationscrisis.json artifact_groups rationale lines supply the questions ('Can a network grow without naming a root?', 'Where was this body's destination decided?').\nFile: commons/maps/SpeculativeComputation_Rhizome_Network/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SpeculativeComputation_Rhizome_Network"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "SpeculativeComputation_Rhizome_Network",
+      "quote": "# Another way through",
+      "why": "The first five halls and the previous sequence's last hall open with a one-line question under the title, and the sequence description promises that each hall exposes a decision; the rhizome, laboratory and synthesis halls go straight from title to anchor, so the device the reader has learned to use as the hall's brief disappears where the halls are longest.",
+      "proposal": "Add one question under each of the three titles, drawn from the sequence file's own verbs: rhizome 'Which connections can a body enter, and which can it only see?'; laboratory 'Where was this body's destination decided?'; synthesis 'What will have survived the journey?' (the last already appears in the lab's closing line).",
+      "evidence": "final.md files: the bias, ethics, paraconsistent, situated and collective halls and QFEP_Synthesis each have a question as their first body line; rhizome, lab and synthesis do not. Corpus scan: 65 of 196 spine chapters carry the line, so it is a sequence device rather than a book rule. commons/maps/sequences/postfoundationscrisis.json artifact_groups rationale lines supply the questions ('Can a network grow without naming a root?', 'Where was this body's destination decided?').",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_postfoundationscrisis.012",
+      "title": "End the Deleuze and Guattari note at the page reference",
+      "spec": "[footnote] SpeculativeComputation_Rhizome_Network\nQuote: “it does not make a network's complexity a guarantee of freedom.”\nWhy: The footnote's last two sentences argue with an objection nobody has raised, and the body already makes the point in its own voice ('We have not escaped geometry by drawing a network'); a defensive footnote weakens the one place the chapter cites a source.\nDo: Keep the citation and 'especially pp. 7-15' and cut the two sentences that follow.\nEvidence: SpeculativeComputation_Rhizome_Network/final.md line 49 (the footnote) against lines 27 and 29 of the body, which already state the limit.\nFile: commons/maps/SpeculativeComputation_Rhizome_Network/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SpeculativeComputation_Rhizome_Network"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "SpeculativeComputation_Rhizome_Network",
+      "quote": "it does not make a network's complexity a guarantee of freedom.",
+      "why": "The footnote's last two sentences argue with an objection nobody has raised, and the body already makes the point in its own voice ('We have not escaped geometry by drawing a network'); a defensive footnote weakens the one place the chapter cites a source.",
+      "proposal": "Keep the citation and 'especially pp. 7-15' and cut the two sentences that follow.",
+      "evidence": "SpeculativeComputation_Rhizome_Network/final.md line 49 (the footnote) against lines 27 and 29 of the body, which already state the limit.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_postfoundationscrisis.013",
+      "title": "The console does not move",
+      "spec": "[prose] CriticalAlgorithms_Applied_Ethics\nQuote: “the panel stays where your hand left it.”\nWhy: The phrase implies the visitor positioned the panel; the ARRANGE console is built once at a fixed position and only shown or hidden, so a reader may look for a way to move it.\nDo: Write 'the panel stays where it is' (or 'stays under your hand').\nEvidence: algorithms/postfoundationscrisis/room_shape_demonstrator.gd:402-415 (console created once at Vector3(0,1.02,1.18), not a pickable), :432 (_console.show() on every plan change).\nFile: commons/maps/CriticalAlgorithms_Applied_Ethics/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CriticalAlgorithms_Applied_Ethics"
+      ],
+      "sequence_refs": [
+        "postfoundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "CriticalAlgorithms_Applied_Ethics",
+      "quote": "the panel stays where your hand left it.",
+      "why": "The phrase implies the visitor positioned the panel; the ARRANGE console is built once at a fixed position and only shown or hidden, so a reader may look for a way to move it.",
+      "proposal": "Write 'the panel stays where it is' (or 'stays under your hand').",
+      "evidence": "algorithms/postfoundationscrisis/room_shape_demonstrator.gd:402-415 (console created once at Vector3(0,1.02,1.18), not a pickable), :432 (_console.show() on every plan change).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    }
+  ]
+}

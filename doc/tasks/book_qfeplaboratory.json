@@ -1,0 +1,540 @@
+{
+  "goal_id": "book_qfeplaboratory",
+  "goal_title": "Book: QFEP Laboratory: The Formula Made Interactive — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in qfeplaboratory became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "qfeplaboratory",
+    "order": 23,
+    "phase": "synthesis",
+    "title": "QFEP Laboratory: The Formula Made Interactive",
+    "chapters": [
+      "QFEP_Introduction",
+      "QFEP_F_Term",
+      "QFEP_E_Term",
+      "QFEP_Lambda_Spectrum",
+      "QFEP_Phi_Term",
+      "QFEP_Edge_Of_Chaos",
+      "QFEP_Sandbox",
+      "QFEP_Synthesis"
+    ],
+    "words": 4668,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "Crisis_Synthesis (last of foundationscrisis)",
+      "QFEP_Introduction",
+      "QFEP_F_Term",
+      "QFEP_E_Term",
+      "QFEP_Lambda_Spectrum",
+      "QFEP_Phi_Term",
+      "QFEP_Edge_Of_Chaos",
+      "QFEP_Sandbox",
+      "QFEP_Synthesis",
+      "CriticalAlgorithms_Algorithmic_Bias_Visualization (first of postfoundationscrisis)"
+    ],
+    "reading": {
+      "arc": "The sequence takes the formula the crisis synthesis left lit and makes it return a number, then takes that number apart term by term. A console where four rails give one total (Introduction) is followed by a bit grid that separates a source's uncertainty from a predictor's misses (F), a fan that counts endings and closures (E), a hall where a lambda value becomes a lit route the visitor can move (Lambda), a signed rail whose old moral labels appear only on request (Phi), a reaction-diffusion pair that separates the model from the way it is stepped (Edge of Chaos), a receiver that can be connected and cut (Sandbox), and a jar body whose stiffness, damping and pressure the two weights drive (Synthesis). Every hall runs the same discipline: do the operation, name what changed, then say what was supplied rather than measured, who wrote the mapping, and what the count, colour or route cannot decide. The Q of QFEP is carried as a question of revisability, who may change the terms, rather than as a claim, and the sequence closes by turning that question on the maker (Self-Q) and handing 'whose distinctions are compressed' to the post-crisis sequence.",
+      "holds": [
+        "The supplied-versus-measured refrain: every hall closes its operation with a limit stated in the same voice ('its fixed change value is not an observed rate', 'not quantities measured by this fan', 'a curatorial argument', 'visual feedback for its own value', 'Someone wrote this mapping', 'does not establish that nature uses the same numerical scale').",
+        "A chain of last-line handovers: each chapter's final sentence names the next hall's question (predictability, then counting alternatives, then invitation, then sign, then driving a pattern, then where control reaches, then what a body keeps, then compression).",
+        "Two carried controls, LAMBDA and PHI, reappear in five halls with their ranges explicitly compared, and the reader is trained on 'Read the rail as well as the letter' before trusting a symbol.",
+        "The 'you can do X; you cannot yet do Y' figure: reopen but not grow (E), move the light but not the rows (Lambda), hide the labels but carry them (Phi), connect and cut but not invent another response (Sandbox). Each apparatus's limit is stated as the next freedom.",
+        "Predict-before-reading instructions: guess before reading H, count leaves before the readout, describe persistence before naming a regime, name direction before magnitude.",
+        "Self-Q bookends: introduced in the first hall as the return of the question to the maker, closed in the last hall with 'Which part of the apparatus would we change next?'"
+      ],
+      "hall_notes": [
+        {
+          "hall": "QFEP_Introduction",
+          "words": 730,
+          "note": "The balance workbench: four 0-1 rails, KEEP outline, nearest-of-seven reference. Sets the sequence's method (two arrangements, one number; what the total lost) and introduces QFEP, Q and Self-Q with the two footnotes the whole sequence leans on. Densest chapter; the arithmetic paragraph arrives before the letters are named."
+        },
+        {
+          "hall": "QFEP_F_Term",
+          "words": 462,
+          "note": "The Shannon workbench: p rail, bit grid, EXPECT 0/1 with amber misses. Cleanly separates source uncertainty from a predictor's fit and ends on the sharpest line of the sequence about who has to change. Reads fast and true; 'the room's F term' is its one loose phrase."
+        },
+        {
+          "hall": "QFEP_E_Term",
+          "words": 656,
+          "note": "The entropy fan: CYCLE / ONE / OPEN / PRUNE, 81 leaves, 27 under 18 closures, nats versus bits. Counting is made physical, and the PRUNE / OPEN pair carries the ethical turn (reopening a route on a screen versus in a life) without preaching."
+        },
+        {
+          "hall": "QFEP_Lambda_Spectrum",
+          "words": 581,
+          "note": "The lambda hall: an authored spectrum made walkable, then the LIT STRIP console (0.20-0.80, RETURN) lets the visitor move the recommendation and watch the rows refuse to follow. 'Light has made a recommendation, not cleared a passage' is the hall's whole argument. One slip: 'Changing the sign' in a hall with no sign."
+        },
+        {
+          "hall": "QFEP_Phi_Term",
+          "words": 515,
+          "note": "The signed rail (particles up or down, EARLIER LABELS reveals RESIST / EMBRACE) and the transforming pattern that runs independently of PHI. Direction-then-magnitude is taught well; the lambda promenade on the way out is never mentioned, and the 'at zero' claim is only true at the start."
+        },
+        {
+          "hall": "QFEP_Edge_Of_Chaos",
+          "words": 610,
+          "note": "Two screens, same start and time, one at half the step (DT .3 / .15, HOLD / RUN, B difference). The chapter's distinction between model time, step size and SIM SPEED is exact and valuable. It trips on 'the earlier calculation' (a changelog the visitor never saw) and on a second, unwired LAMBDA rail by the door that it does not name."
+        },
+        {
+          "hall": "QFEP_Sandbox",
+          "words": 534,
+          "note": "Two handles, one receiver, CONNECT / CUT and REPEAT, a console that prints offered and used values. The cut-route memory ('It has not restored an innocent beginning') and 'Someone wrote this mapping' land. The neighbouring particle field is correctly described as not joined (its listener group is never populated)."
+        },
+        {
+          "hall": "QFEP_Synthesis",
+          "words": 580,
+          "note": "The morphology specimen: its own LAMBDA and PHI, PAIR A/B/C, PULSE / STEADY, a plate of stiffness, damping, drag and pressure. Separates imposed breathing from the body's own motion and closes the sequence with Self-Q and a clean hand to post-crisis. The floor's EGG / IMAGO / RETURN TRANSFORMED inscriptions contradict its refusal to read the jar as an assay of life."
+        }
+      ],
+      "stumbles": [
+        "QFEP_Edge_Of_Chaos: 'move LAMBDA slowly. Give the image time to respond' - the LAMBDA rail three cells from the spawn is a separate slider whose #locked:0.4 token does nothing (it moves freely and drives nothing in the hall); the console the chapter means is on the east side and is never located.",
+        "QFEP_Lambda_Spectrum: the chalkboard beside the entrance reads 'life at λ ≈ 0.4' while the chapter says the chosen value 'is not a universal threshold at which life, creativity or queerness appears'.",
+        "QFEP_Synthesis: the floor says EGG, THE PLINTH OF BECOMING, IMAGO, RETURN TRANSFORMED while the chapter says 'A responsive specimen is not an assay of queerness or a test for life'.",
+        "QFEP_Lambda_Spectrum: 'Changing the sign does not erase the arrangement' - there is no sign to change in this hall; sign is the next hall's word.",
+        "QFEP_Edge_Of_Chaos: 'The earlier calculation could produce a pattern largely through overshooting and clipping its values' - the visitor never saw an earlier calculation; the paragraph reads as a changelog.",
+        "QFEP_Phi_Term: a 4.34 m rail of eight bodies with lambda numerals stands between the transforming pattern and the exit, unmentioned in the hall that was introduced with 'Phi introduces time'.",
+        "QFEP_Phi_Term: 'At zero, no new particles are released' - true only for the configured start; a hand cannot return the continuous rail to exact zero, so after the first move the emitter never stops.",
+        "QFEP_F_Term: 'The room's F term asks a related but different question' - the room contains no F device; the visitor looks for one.",
+        "QFEP_Introduction: the previous chapter promised 'We will meet it again in the laboratory', and the lit formula does hang at the back of this hall, but the chapter never turns to it.",
+        "QFEP_Synthesis: 'Breathing varies around that pressure baseline within an interval the maker selected' - the reader is not told that breathing only runs while lambda sits between 0.3 and 0.7, so the plate's STEADY outside that band looks like a failed button.",
+        "QFEP_Edge_Of_Chaos: 'Keep a record in words' - a headset visitor has nothing to write on."
+      ],
+      "keep": [
+        {
+          "hall": "QFEP_Introduction",
+          "quote": "One number can summarise several contributions while concealing how they compensated for one another. Keeping the separate values visible prevents a convenient summary from becoming the whole account."
+        },
+        {
+          "hall": "QFEP_Introduction",
+          "quote": "A familiar symbol does not guarantee the same range. Read the rail as well as the letter."
+        },
+        {
+          "hall": "QFEP_F_Term",
+          "quote": "Here you can change the expectation with one button. Elsewhere a system might insist that the world change instead. Keep that difference with you."
+        },
+        {
+          "hall": "QFEP_E_Term",
+          "quote": "Outside this little machine, reopening a route may not restore the lives or histories lost when it closed. The ease of the button is part of the experiment's limit."
+        },
+        {
+          "hall": "QFEP_E_Term",
+          "quote": "Stay with the difference between more endings on a screen and more ways to live."
+        },
+        {
+          "hall": "QFEP_Lambda_Spectrum",
+          "quote": "Light has made a recommendation, not cleared a passage."
+        },
+        {
+          "hall": "QFEP_Sandbox",
+          "quote": "Disconnection has left a memory of your action. It has not restored an innocent beginning."
+        },
+        {
+          "hall": "QFEP_Synthesis",
+          "quote": "Steady pressure is something you have given it. Stillness would be something else."
+        }
+      ],
+      "handover_in": "Clean in voice and in claim. Crisis_Synthesis ends 'Leave the formula lit. We will meet it again in the laboratory, where particular implementations give its terms consequences' and 'An equals sign waits'; QFEP_Introduction opens 'In the previous room, the formula waited to be questioned. Here it returns a number.' Both keep the formula a research proposal rather than a law, and the crisis chapter's caution about ΔE needing a duration is honoured by the console's 'fixed change value is not an observed rate'. The one loose thread is physical: the formula the visitor was told to leave lit hangs again at the back of the introduction hall (qfep_formula_3d at map_data.json:592, floor label THE FORMULA at :346) and the chapter never acknowledges the reunion it promised.",
+      "handover_out": "Clean. QFEP_Synthesis ends 'Post-crisis begins with representation itself. After learning to name a model's choices, ask whose distinctions those choices make clear and whose they compress', and CriticalAlgorithms_Algorithmic_Bias_Visualization opens on exactly that: 'Which differences become difficult to recognise when a representation gives some words less room?' with a COMPRESSION handle. The Self-Q closing paragraph and the next hall's 'Both groups were chosen' share one question. Nothing to fix here.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_qfeplaboratory.001",
+      "title": "Locate the console; the LAMBDA rail by the door is not locked and drives nothing",
+      "spec": "[encounter] QFEP_Edge_Of_Chaos\nQuote: “Keep SIM SPEED steady and move LAMBDA slowly. Give the image time to respond before choosing another value.”\nWhy: The first LAMBDA a visitor meets is a plain lambda_slider three cells from the spawn; its #locked:0.4 token is ignored by the slider (apply_grid_config returns unless the key is 'calibration'), so it moves freely, broadcasts to a group nothing in this hall listens to, and the image never responds. The visitor concludes the chapter is lying.\nDo: Open the region with one locating sentence: 'The console is the pair of framed screens on the east side, under SAME START / SAME TIME; the rail nearer the door is a separate handle wired to nothing in this hall.' (Alternatively remove the dead #locked token and the rail from the map, but the sentence alone repairs the reader's experience.)\nEvidence: commons/maps/QFEP_Edge_Of_Chaos/map_data.json:702 'lambda_slider:0:0.5#locked:0.4' (row 2; spawn 's' at :409 row 1); commons/interfaces/qfep/lambda_slider.gd:574-576 ('#locked: ... nothing here'; apply_grid_config returns unless 'calibration'); lambda_slider.gd:195-196 joins group qfep_lambda_controllers; commons/interfaces/qfep/edge_core.gd:16 'VR lambda connection [missing]'; the study console is map_data.json:777 'edge_of_chaos_unlocked:270:0:1#comparison_study:on' with its own LAMBDA at commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd:471\nFile: commons/maps/QFEP_Edge_Of_Chaos/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Edge_Of_Chaos"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "QFEP_Edge_Of_Chaos",
+      "quote": "Keep SIM SPEED steady and move LAMBDA slowly. Give the image time to respond before choosing another value.",
+      "why": "The first LAMBDA a visitor meets is a plain lambda_slider three cells from the spawn; its #locked:0.4 token is ignored by the slider (apply_grid_config returns unless the key is 'calibration'), so it moves freely, broadcasts to a group nothing in this hall listens to, and the image never responds. The visitor concludes the chapter is lying.",
+      "proposal": "Open the region with one locating sentence: 'The console is the pair of framed screens on the east side, under SAME START / SAME TIME; the rail nearer the door is a separate handle wired to nothing in this hall.' (Alternatively remove the dead #locked token and the rail from the map, but the sentence alone repairs the reader's experience.)",
+      "evidence": "commons/maps/QFEP_Edge_Of_Chaos/map_data.json:702 'lambda_slider:0:0.5#locked:0.4' (row 2; spawn 's' at :409 row 1); commons/interfaces/qfep/lambda_slider.gd:574-576 ('#locked: ... nothing here'; apply_grid_config returns unless 'calibration'); lambda_slider.gd:195-196 joins group qfep_lambda_controllers; commons/interfaces/qfep/edge_core.gd:16 'VR lambda connection [missing]'; the study console is map_data.json:777 'edge_of_chaos_unlocked:270:0:1#comparison_study:on' with its own LAMBDA at commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd:471",
+      "review": "confirmed by a code checker (cited files only): QFEP_Edge_Of_Chaos map: spawn 's' at (7,1), 'lambda_slider:0:0.5#locked:0.4' at (10,2) (three cells), 'edge_of_chaos_unlocked:270:0:1#comparison_study:on' at (13,6) on the east side. lambda_slider.gd:575-577 apply_grid_config returns unless 'calibration' (the header comment names #locked as doing 'nothing here'); :195-196 joins qfep_lambda_controllers. The only reader of that group is edge_of_chaos_orb.gd:196, which is not placed in this hall; edge_core.gd:28-30 says nothing in the repository calls its set_lambda. edge_of_chaos_unlocked.gd:468-471 titles its panel 'SAME START / SAME TIME' under comparison_study with its own LAMBDA row. final.md:7 opens with 'Keep SIM SPEED steady and move LAMBDA slowly'.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.002",
+      "title": "The chalkboard at the entrance asserts 'life at λ ≈ 0.4'",
+      "spec": "[encounter] QFEP_Lambda_Spectrum\nQuote: “Its chosen value is not a universal threshold at which life, creativity or queerness appears.”\nWhy: The hall's own board, two cells from the spawn, has already written the claim the chapter spends a paragraph refusing; the reader meets the thesis as fact before the argument against it, and the chapter never mentions the board.\nDo: Either add one sentence after the lit-route paragraph: 'The board by the door has already chalked life at λ ≈ 0.4. Read it as the thesis this hall puts to the test, not as its result.' Or, a map edit: pass the chalkboard a #lines: config (the artifact reads config_lines) that keeps the formula gloss and drops the fifth line.\nEvidence: commons/maps/QFEP_Lambda_Spectrum/map_data.json:1073 'qfep_chalkboard:180:0:1' (column 3 row 2; spawn column 8 row 1); commons/primitives/qfep_chalkboard/qfep_chalkboard.gd:19-26 default lines ending 'life at λ ≈ 0.4'; :15-19 config_lines / config_diagram metadata override\nFile: commons/maps/QFEP_Lambda_Spectrum/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Lambda_Spectrum"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "QFEP_Lambda_Spectrum",
+      "quote": "Its chosen value is not a universal threshold at which life, creativity or queerness appears.",
+      "why": "The hall's own board, five cells from the spawn in the entry register, has already written the claim the chapter spends a paragraph refusing; the reader meets the thesis as fact before the argument against it, and the chapter never mentions the board.",
+      "proposal": "Either add one sentence after the lit-route paragraph: 'The board by the door has already chalked life at λ ≈ 0.4. Read it as the thesis this hall puts to the test, not as its result.' Or, a map edit: pass the chalkboard a #lines: config (the artifact reads config_lines) that keeps the formula gloss and drops the fifth line.",
+      "evidence": "commons/maps/QFEP_Lambda_Spectrum/map_data.json:1073 'qfep_chalkboard:180:0:1' (column 3 row 2; spawn column 8 row 1); commons/primitives/qfep_chalkboard/qfep_chalkboard.gd:19-26 default lines ending 'life at λ ≈ 0.4'; :15-19 config_lines / config_diagram metadata override",
+      "review": "amended by a code checker (cited files only): map_data.json:1073 'qfep_chalkboard:180:0:1' at interactables (3,2); qfep_chalkboard.gd:19-26 default lines end 'life at λ ≈ 0.4', :15-19 has_meta('config_lines') / config_diagram override; final.md:15 has the quoted sentence and the chapter never mentions the board. Correction: the spawn 's' is at utilities (8,1), so the board is five cells west and one row in, not 'two cells from the spawn'. It is still in the entry register.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.003",
+      "title": "Floor inscriptions tell a metamorphosis story the chapter refuses",
+      "spec": "[encounter] QFEP_Synthesis\nQuote: “A responsive specimen is not an assay of queerness or a test for life.”\nWhy: Five TextMesh labels on the hall floor read EGG, THE PLINTH OF BECOMING, FORMULA UNFOLDS, IMAGO, RETURN TRANSFORMED: an egg-to-imago narrative in the visitor's eyeline that contradicts the chapter's careful 'what forms of continuity and variation a model makes available'.\nDo: Retitle the five 3t utilities in the chapter's vocabulary (for example 'WHAT SHOULD THIS BODY KEEP?', 'STIFFNESS / PRESSURE', 'DAMPING / DRAG', 'PULSE / STEADY'), or keep them and add one sentence: 'The floor still promises an imago and a return transformed. The plate promises less, and says what it measures.'\nEvidence: commons/maps/QFEP_Synthesis/map_data.json:391 '3t:EGG', :425 '3t:THE PLINTH OF BECOMING', :473 '3t:FORMULA UNFOLDS', :505 '3t:IMAGO', :521 '3t:RETURN TRANSFORMED'; commons/grid/UtilityRegistry.gd:92-97 ('3t' = text_display, TextMesh)\nFile: commons/maps/QFEP_Synthesis/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Synthesis"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "QFEP_Synthesis",
+      "quote": "A responsive specimen is not an assay of queerness or a test for life.",
+      "why": "Five of the hall's nine TextMesh floor labels (the others are F, E(S), λ, φ) read EGG, THE PLINTH OF BECOMING, FORMULA UNFOLDS, IMAGO, RETURN TRANSFORMED: an egg-to-imago narrative in the visitor's eyeline that contradicts the chapter's 'what forms of continuity and variation a model makes available'.",
+      "proposal": "Retitle the five narrative 3t utilities in the chapter's vocabulary (leave F, E(S), λ, φ), or keep them and add one sentence: 'The floor still promises an imago and a return transformed. The plate promises less, and says what it measures.'",
+      "evidence": "commons/maps/QFEP_Synthesis/map_data.json:391 '3t:EGG', :425 '3t:THE PLINTH OF BECOMING', :473 '3t:FORMULA UNFOLDS', :505 '3t:IMAGO', :521 '3t:RETURN TRANSFORMED'; commons/grid/UtilityRegistry.gd:92-97 ('3t' = text_display, TextMesh)",
+      "review": "amended by a code checker (cited files only): QFEP_Synthesis map_data.json lines 391/425/473/505/521 are '3t:EGG', '3t:THE PLINTH OF BECOMING', '3t:FORMULA UNFOLDS', '3t:IMAGO', '3t:RETURN TRANSFORMED' in the utilities layer at (4,3),(6,5),(6,8),(6,10),(6,11). UtilityRegistry.gd:92-97 maps 3t to text_display / word_is.tscn (TextMesh). final.md:23 has the quoted sentence and never mentions egg/imago. Correction: the hall carries nine 3t labels, not five; the other four are F, E(S), λ, φ.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.004",
+      "title": "'Changing the sign' names a control this hall does not have",
+      "spec": "[prose] QFEP_Lambda_Spectrum\nQuote: “Changing the sign does not erase the arrangement that made the first invitation convincing.”\nWhy: The only control here is LIT STRIP, a position between 0.20 and 0.80; 'sign' is undefined in this hall and is precisely the next hall's term ('Giving change a sign'), so the reader either hunts for a signed rail or reads ahead wrongly.\nDo: Replace with 'Moving the light does not erase the arrangement that made the first invitation convincing.'\nEvidence: commons/maps/QFEP_Lambda_Spectrum/final.md:25; commons/artifacts/lambda_hall/lambda_hall.gd:181 slider 'LIT STRIP', :188 recommendation_position = lerpf(0.20, 0.80, ...) (an unsigned position)\nFile: commons/maps/QFEP_Lambda_Spectrum/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Lambda_Spectrum"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "QFEP_Lambda_Spectrum",
+      "quote": "Changing the sign does not erase the arrangement that made the first invitation convincing.",
+      "why": "The only control here is LIT STRIP, a position between 0.20 and 0.80; 'sign' is undefined in this hall and is precisely the next hall's term ('Giving change a sign'), so the reader either hunts for a signed rail or reads ahead wrongly.",
+      "proposal": "Replace with 'Moving the light does not erase the arrangement that made the first invitation convincing.'",
+      "evidence": "commons/maps/QFEP_Lambda_Spectrum/final.md:25; commons/artifacts/lambda_hall/lambda_hall.gd:181 slider 'LIT STRIP', :188 recommendation_position = lerpf(0.20, 0.80, ...) (an unsigned position)",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.005",
+      "title": "'The earlier calculation' is a changelog the visitor never saw",
+      "spec": "[prose] QFEP_Edge_Of_Chaos\nQuote: “The earlier calculation could produce a pattern largely through overshooting and clipping its values. That was still something code had made.”\nWhy: No earlier calculation has been shown in this hall or sequence; the paragraph is the artifact's development history (its old solver clipped B) leaking into reader prose, and a visitor cannot place 'Repairing the calculation'.\nDo: Either cut the paragraph, or compress it to one sentence the visitor can hold: 'A previous version of this screen made its pattern partly by overshooting and clipping its values; that too was something code had made, answering a different question from the one the display claimed to ask.' Keep the last sentence's point: repairing the solver gives another way to investigate, not a self-explaining image.\nEvidence: commons/maps/QFEP_Edge_Of_Chaos/final.md:23; commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd:38 'Earlier capture variants used a different solver from the interactive mode', :314-315 'No concentration clipping: B may legitimately exceed 1 during a transient'\nFile: commons/maps/QFEP_Edge_Of_Chaos/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Edge_Of_Chaos"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "QFEP_Edge_Of_Chaos",
+      "quote": "The earlier calculation could produce a pattern largely through overshooting and clipping its values. That was still something code had made.",
+      "why": "No earlier calculation has been shown in this hall or sequence; the paragraph is the artifact's development history (its old solver clipped B) leaking into reader prose, and a visitor cannot place 'Repairing the calculation'.",
+      "proposal": "Either cut the paragraph, or compress it to one sentence the visitor can hold: 'A previous version of this screen made its pattern partly by overshooting and clipping its values; that too was something code had made, answering a different question from the one the display claimed to ask.' Keep the last sentence's point: repairing the solver gives another way to investigate, not a self-explaining image.",
+      "evidence": "commons/maps/QFEP_Edge_Of_Chaos/final.md:23; commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd:38 'Earlier capture variants used a different solver from the interactive mode', :314-315 'No concentration clipping: B may legitimately exceed 1 during a transient'",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.006",
+      "title": "Place the lambda promenade the visitor must pass to leave",
+      "spec": "[prose] QFEP_Phi_Term\nQuote: “The next room provides a control connected to a changing pattern.”\nWhy: A 4.34 m rail of eight emblems with the lambda value etched on each plinth stands between the transforming pattern and the teleporter; in the hall introduced with 'Phi introduces time', an unexplained lambda line reads as the hall's subject and undoes the handover.\nDo: Add a short paragraph before the closing line: 'On the way to the door, eight small bodies stand in a row with λ numbers on their plinths. That rail reviews the previous hall in miniature; it carries no φ control, and nothing on it hears the rail you have just moved.'\nEvidence: commons/maps/QFEP_Phi_Term/map_data.json:615 'lambda_promenade:0:0' (column 6 row 9; teleporter column 6 row 10; transforming_pattern :587 row 7); commons/interfaces/qfep/lambda_promenade.gd:10 (eight emblems in lambda order on one 4.34 m rail with the lambda number on each plinth), :131 readout 'numeral' default\nFile: commons/maps/QFEP_Phi_Term/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Phi_Term"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "QFEP_Phi_Term",
+      "quote": "The next room provides a control connected to a changing pattern.",
+      "why": "A 4.34 m rail of eight emblems with the lambda value etched on each plinth stands between the transforming pattern and the teleporter; in the hall introduced with 'Phi introduces time', an unexplained lambda line reads as the hall's subject and undoes the handover.",
+      "proposal": "Add a short paragraph before the closing line: 'On the way to the door, eight small bodies stand in a row with λ numbers on their plinths. That rail reviews the previous hall in miniature; it carries no φ control, and nothing on it hears the rail you have just moved.'",
+      "evidence": "commons/maps/QFEP_Phi_Term/map_data.json:615 'lambda_promenade:0:0' (column 6 row 9; teleporter column 6 row 10; transforming_pattern :587 row 7); commons/interfaces/qfep/lambda_promenade.gd:10 (eight emblems in lambda order on one 4.34 m rail with the lambda number on each plinth), :131 readout 'numeral' default",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.007",
+      "title": "Meet the formula the previous chapter said we would meet again",
+      "spec": "[handover] QFEP_Introduction\nQuote: “In the previous room, the formula waited to be questioned. Here it returns a number.”\nWhy: Crisis_Synthesis closed with 'Leave the formula lit. We will meet it again in the laboratory'; the same qfep_formula_3d hangs at the back of this hall under a floor label THE FORMULA, and the chapter walks past the reunion it promised.\nDo: Extend the opening: 'In the previous room, the formula waited to be questioned. It hangs again at the back of this hall; on the console in front of it, it returns a number.'\nEvidence: commons/maps/Crisis_Synthesis/final.md:97; commons/maps/QFEP_Introduction/map_data.json:592 'qfep_formula_3d:180:1.5', :346 '3t:THE FORMULA'; commons/maps/QFEP_Introduction/final.md:3\nFile: commons/maps/QFEP_Introduction/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Introduction"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "QFEP_Introduction",
+      "quote": "In the previous room, the formula waited to be questioned. Here it returns a number.",
+      "why": "Crisis_Synthesis closed with 'Leave the formula lit. We will meet it again in the laboratory'; the same qfep_formula_3d hangs at the back of this hall under a floor label THE FORMULA, and the chapter walks past the reunion it promised.",
+      "proposal": "Extend the opening: 'In the previous room, the formula waited to be questioned. It hangs again at the back of this hall; on the console in front of it, it returns a number.'",
+      "evidence": "commons/maps/Crisis_Synthesis/final.md:97; commons/maps/QFEP_Introduction/map_data.json:592 'qfep_formula_3d:180:1.5', :346 '3t:THE FORMULA'; commons/maps/QFEP_Introduction/final.md:3",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.008",
+      "title": "'At zero, no new particles are released' holds only at the configured start",
+      "spec": "[code-claim] QFEP_Phi_Term\nQuote: “At zero, no new particles are released; those already in flight take a moment to disappear.”\nWhy: The emitter stops only when is_zero_approx(phi) is true; phi is (position / rail_length) * 2 - 1 from a continuous hand-moved rail, so after the first grab the visitor cannot return to exact zero and sees particles still leaving, only slower (speed = |phi| * 0.20 m/s). The sentence then reads as false.\nDo: Rewrite: 'The handle starts at zero, and nothing is released. Once you have moved it, bringing it back near zero only slows the release to a crawl; watch the speed rather than waiting for silence.' (Or, code: a dead band such as absf(phi) < 0.02 at phi_slider.gd:658, in which case the sentence can stay.)\nEvidence: commons/interfaces/qfep/phi_slider.gd:658 '_particles.emitting = not is_zero_approx(phi)'; :592-594 phi = (position / rail_length) * 2.0 - 1.0; :655-656 initial_velocity = absf(phi) * 0.20; commons/maps/QFEP_Phi_Term/map_data.json:540 '#sign_study:on#phi:0'\nFile: commons/maps/QFEP_Phi_Term/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Phi_Term"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "QFEP_Phi_Term",
+      "quote": "At zero, no new particles are released; those already in flight take a moment to disappear.",
+      "why": "The emitter stops only when is_zero_approx(phi) is true; phi is (position / rail_length) * 2 - 1 from a continuous hand-moved rail, so after the first grab the visitor cannot return to exact zero and sees particles still leaving, only slower (speed = |phi| * 0.20 m/s). The sentence then reads as false.",
+      "proposal": "Rewrite: 'The handle starts at zero, and nothing is released. Once you have moved it, bringing it back near zero only slows the release to a crawl; watch the speed rather than waiting for silence.' (Or, code: a dead band such as absf(phi) < 0.02 at phi_slider.gd:658, in which case the sentence can stay.)",
+      "evidence": "commons/interfaces/qfep/phi_slider.gd:658 '_particles.emitting = not is_zero_approx(phi)'; :592-594 phi = (position / rail_length) * 2.0 - 1.0; :655-656 initial_velocity = absf(phi) * 0.20; commons/maps/QFEP_Phi_Term/map_data.json:540 '#sign_study:on#phi:0'",
+      "review": "confirmed by a code checker (cited files only): phi_slider.gd:592-594 phi = (position / rail_length) * 2.0 - 1.0 on _on_slider_moved; :655-656 initial_velocity_min/max = absf(phi) * 0.20; :658 `_particles.emitting = not is_zero_approx(phi)` (epsilon-exact test, no dead band). QFEP_Phi_Term/map_data.json:540 `phi_slider:180:1.1:1#sign_study:on#phi:0`. final.md:7 carries the sentence.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.009",
+      "title": "Say that breathing only runs in the middle of the LAMBDA rail",
+      "spec": "[prose] QFEP_Synthesis\nQuote: “Breathing varies around that pressure baseline within an interval the maker selected.”\nWhy: The pulse is gated to 0.3 < lambda < 0.7: the plate reads STEADY at PAIR A or PAIR C whatever the PULSE / STEADY button says, and the chapter's later instruction to try 'relatively high stiffness' (low lambda) puts the reader exactly where the button appears dead. 'Interval' currently reads as an amplitude, not a lambda band.\nDo: Replace with: 'Breathing runs only while LAMBDA sits between 0.3 and 0.7, and within an amplitude the maker selected; outside that band the plate says STEADY whatever the button says.'\nEvidence: commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd:729 mode = 'PULSE' if breathing_enabled and lambda > 0.3 and lambda < 0.7 else 'STEADY'; :748 the same gate in _update_pressure; :633 presets [0.1,-0.8], [0.5,0.0], [0.8,0.6]\nFile: commons/maps/QFEP_Synthesis/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Synthesis"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "QFEP_Synthesis",
+      "quote": "Breathing varies around that pressure baseline within an interval the maker selected.",
+      "why": "The pulse is gated to 0.3 < lambda < 0.7: the plate reads STEADY at PAIR A or PAIR C whatever the PULSE / STEADY button says, and the chapter's later instruction to try 'relatively high stiffness' (low lambda) puts the reader exactly where the button appears dead. 'Interval' currently reads as an amplitude, not a lambda band.",
+      "proposal": "Replace with: 'Breathing runs only while LAMBDA sits between 0.3 and 0.7, and within an amplitude the maker selected; outside that band the plate says STEADY whatever the button says.'",
+      "evidence": "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd:729 mode = 'PULSE' if breathing_enabled and lambda > 0.3 and lambda < 0.7 else 'STEADY'; :748 the same gate in _update_pressure; :633 presets [0.1,-0.8], [0.5,0.0], [0.8,0.6]",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.010",
+      "title": "'The room's F term' sends the visitor looking for a device",
+      "spec": "[prose] QFEP_F_Term\nQuote: “The room's F term asks a related but different question about a model's fit and prediction.”\nWhy: The hall contains a Shannon workbench, a lambda rail, a screen, a dark sphere, two snap puzzles and a crystal cluster; nothing is an F term. The phrase makes the reader search the room for the thing the sentence is about.\nDo: Replace with 'The F of the formula asks a related but different question about a model's fit and prediction.'\nEvidence: commons/maps/QFEP_F_Term/final.md:15; commons/maps/QFEP_F_Term/map_data.json:443 shannon_workbench, :464 dark_sphere, :489 snap_octahedron_puzzle, :500 crystal_cluster (no F artifact in layers.interactables)\nFile: commons/maps/QFEP_F_Term/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_F_Term"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "QFEP_F_Term",
+      "quote": "The room's F term asks a related but different question about a model's fit and prediction.",
+      "why": "The hall contains a Shannon workbench, a lambda rail, a screen, a dark sphere, two snap puzzles and a crystal cluster; nothing is an F term. The phrase makes the reader search the room for the thing the sentence is about.",
+      "proposal": "Replace with 'The F of the formula asks a related but different question about a model's fit and prediction.'",
+      "evidence": "commons/maps/QFEP_F_Term/final.md:15; commons/maps/QFEP_F_Term/map_data.json:443 shannon_workbench, :464 dark_sphere, :489 snap_octahedron_puzzle, :500 crystal_cluster (no F artifact in layers.interactables)",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.011",
+      "title": "Attribute 'free energy' so the borrowed name can be checked",
+      "spec": "[footnote] QFEP_Introduction\nQuote: “F names a modelling or free-energy contribution, E an entropy contribution, lambda their relative weighting, and phi the weighting attached to change.”\nWhy: The sequence borrows 'Free Energy Principle' into its own name and lists Friston as a key figure, but no chapter tells the reader where the term comes from or that the project's F is a name, not Friston's quantity; a reader cannot look it up and cannot tell borrowing from claim.\nDo: Add a footnote after 'free-energy contribution': Karl Friston, 'The free-energy principle: a unified brain theory?', Nature Reviews Neuroscience 11 (2010) 127-138, with one line saying the console's F is a 0-1 rail named after that quantity and computes none of it.\nEvidence: commons/maps/QFEP_Introduction/final.md:17; commons/maps/sequences/qfeplaboratory.json:99-100 key_figures 'Karl Friston'; commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd:724-725 'All four controls: 0 to 1' / 'Delta E = ... (fixed, not measured)'\nFile: commons/maps/QFEP_Introduction/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Introduction"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "QFEP_Introduction",
+      "quote": "F names a modelling or free-energy contribution, E an entropy contribution, lambda their relative weighting, and phi the weighting attached to change.",
+      "why": "The sequence borrows 'Free Energy Principle' into its own name and lists Friston as a key figure, but no chapter tells the reader where the term comes from or that the project's F is a name, not Friston's quantity; a reader cannot look it up and cannot tell borrowing from claim.",
+      "proposal": "Add a footnote after 'free-energy contribution': Karl Friston, 'The free-energy principle: a unified brain theory?', Nature Reviews Neuroscience 11 (2010) 127-138, with one line saying the console's F is a 0-1 rail named after that quantity and computes none of it.",
+      "evidence": "commons/maps/QFEP_Introduction/final.md:17; commons/maps/sequences/qfeplaboratory.json:99-100 key_figures 'Karl Friston'; commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd:724-725 'All four controls: 0 to 1' / 'Delta E = ... (fixed, not measured)'",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.012",
+      "title": "Name the reaction-diffusion model the screen runs",
+      "spec": "[footnote] QFEP_Edge_Of_Chaos\nQuote: “The display updates two concentrations on a grid. Local reaction terms change their amounts, while diffusion exchanges concentration with neighbouring cells.”\nWhy: The code is a Gray-Scott system with an authored feed/kill route, and the chapter's 'feed, removal and diffusion coefficients' are its parameters; without the name the reader has nothing to search and cannot see that the pattern family is a known one and the lambda route is the artifact's own.\nDo: Add a footnote on 'feed, removal and diffusion coefficients': the Gray-Scott model; John E. Pearson, 'Complex Patterns in a Simple System', Science 261 (1993) 189-192; note that LAMBDA's path through feed and kill is authored here and is not a parameter of that model.\nEvidence: commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd:305 'Map lambda to Gray-Scott feed/kill parameter space', :307-310 feed/kill/diffusion lerps; commons/maps/QFEP_Edge_Of_Chaos/final.md:9,13\nFile: commons/maps/QFEP_Edge_Of_Chaos/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Edge_Of_Chaos"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "QFEP_Edge_Of_Chaos",
+      "quote": "The display updates two concentrations on a grid. Local reaction terms change their amounts, while diffusion exchanges concentration with neighbouring cells.",
+      "why": "The code is a Gray-Scott system with an authored feed/kill route, and the chapter's 'feed, removal and diffusion coefficients' are its parameters; without the name the reader has nothing to search and cannot see that the pattern family is a known one and the lambda route is the artifact's own.",
+      "proposal": "Add a footnote on 'feed, removal and diffusion coefficients': the Gray-Scott model; John E. Pearson, 'Complex Patterns in a Simple System', Science 261 (1993) 189-192; note that LAMBDA's path through feed and kill is authored here and is not a parameter of that model.",
+      "evidence": "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd:305 'Map lambda to Gray-Scott feed/kill parameter space', :307-310 feed/kill/diffusion lerps; commons/maps/QFEP_Edge_Of_Chaos/final.md:9,13",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.013",
+      "title": "Name the four letters before doing arithmetic with them",
+      "spec": "[structure] QFEP_Introduction\nQuote: “The console combines four adjustable quantities. Its current calculation is F minus lambda times E, plus phi times a fixed change value of 0.3.”\nWhy: The reader meets 'F minus lambda times E' two paragraphs before the sentence that says what F, E, lambda and phi are (line 17); the arithmetic reads as a manual because its terms are still letters. Moving the naming sentence up costs nothing and makes the special-case paragraph (lambda at zero) legible on first pass.\nDo: Open the paragraph at line 13 with the naming sentence from line 17 ('F names a modelling or free-energy contribution, E an entropy contribution, lambda their relative weighting, and phi the weighting attached to change.'), then give the arithmetic; leave line 17 to introduce the expression and the 'does not measure' caveat.\nEvidence: commons/maps/QFEP_Introduction/final.md:13 (arithmetic) and :17 (names); readout order at commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd:721-726 also prints the formula first\nFile: commons/maps/QFEP_Introduction/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Introduction"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "QFEP_Introduction",
+      "quote": "The console combines four adjustable quantities. Its current calculation is F minus lambda times E, plus phi times a fixed change value of 0.3.",
+      "why": "The reader meets 'F minus lambda times E' two paragraphs before the sentence that says what F, E, lambda and phi are (line 17); the arithmetic reads as a manual because its terms are still letters. Moving the naming sentence up costs nothing and makes the special-case paragraph (lambda at zero) legible on first pass.",
+      "proposal": "Open the paragraph at line 13 with the naming sentence from line 17 ('F names a modelling or free-energy contribution, E an entropy contribution, lambda their relative weighting, and phi the weighting attached to change.'), then give the arithmetic; leave line 17 to introduce the expression and the 'does not measure' caveat.",
+      "evidence": "commons/maps/QFEP_Introduction/final.md:13 (arithmetic) and :17 (names); readout order at commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd:721-726 also prints the formula first",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_qfeplaboratory.014",
+      "title": "'Keep a record in words' asks a headset visitor to write",
+      "spec": "[vr] QFEP_Edge_Of_Chaos\nQuote: “Keep a record in words: what feature are you comparing, and over how much observed time?”\nWhy: The reader is in a headset with two hands on a console; there is no surface to keep a record on, and an instruction that cannot be followed makes the next ones feel optional. The intent (fix the comparison before changing anything) survives without the record.\nDo: Replace with 'Fix it in words before you touch anything: which feature are you comparing, and over how much observed time?'\nEvidence: commons/maps/QFEP_Edge_Of_Chaos/final.md:15; the reader is the VR visitor (task brief); commons/maps/QFEP_Edge_Of_Chaos/map_data.json:699-777 lists no note-taking device among layers.interactables\nFile: commons/maps/QFEP_Edge_Of_Chaos/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Edge_Of_Chaos"
+      ],
+      "sequence_refs": [
+        "qfeplaboratory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "QFEP_Edge_Of_Chaos",
+      "quote": "Keep a record in words: what feature are you comparing, and over how much observed time?",
+      "why": "The reader is in a headset with two hands on a console; there is no surface to keep a record on, and an instruction that cannot be followed makes the next ones feel optional. The intent (fix the comparison before changing anything) survives without the record.",
+      "proposal": "Replace with 'Fix it in words before you touch anything: which feature are you comparing, and over how much observed time?'",
+      "evidence": "commons/maps/QFEP_Edge_Of_Chaos/final.md:15; the reader is the VR visitor (task brief); commons/maps/QFEP_Edge_Of_Chaos/map_data.json:699-777 lists no note-taking device among layers.interactables",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    }
+  ]
+}

@@ -1,0 +1,1466 @@
+{
+  "goal_id": "book_primitives",
+  "goal_title": "Book: Primitives: Points Build Worlds — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in primitives became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "primitives",
+    "order": 1,
+    "phase": "F_order",
+    "title": "Primitives: Points Build Worlds",
+    "chapters": [
+      "Point_One",
+      "Point_Lines",
+      "Point_Trace",
+      "Point_Line_Grid",
+      "Point_Triangle_Context",
+      "Primitives_Polythedra",
+      "Point_Animatedcube",
+      "Primitives_Ignorance",
+      "Primitives_Portals",
+      "Primitives_Melencolia"
+    ],
+    "words": 13522,
+    "read_at": "2026-09-24",
+    "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+    "chapters_read": [
+      "Point_One",
+      "Point_Lines",
+      "Point_Trace",
+      "Point_Line_Grid",
+      "Point_Triangle_Context",
+      "Primitives_Polythedra",
+      "Point_Animatedcube",
+      "Primitives_Ignorance",
+      "Primitives_Portals",
+      "Primitives_Melencolia"
+    ],
+    "reading": {
+      "arc": "The simplex built one point at a time and then taken apart: point, segment, triangle, tetrahedron; then what meshes do to those ideas: a cube whose connectivity outlasts its shape, a sphere whose resolution is a distribution rather than a quantity, a torus family that converges without arriving, and finally an arrangement (the pyramid court, Durer's tableau) where knowing how a form is made no longer finishes the looking. The sequence opens on a counter that started before you and closes on the same counter, much larger now: some of the number is yours, a fixed quantity of it never will be, and the number has no field for the difference.",
+      "holds": [
+        "Refrains repeated verbatim across the gap: 'Bring the detour.' closes Lines and opens Trace; 'Look for your bend. It may have grown.' closes Trace and opens Grid. Every one of the ten handovers matches its neighbour, and Melencolia names the next sequence.",
+        "The carried drawing: a line drawn in Trace travels to Grid (rescaled) and to Triangle, where it arrives 'made fillable' (six positions of hundreds, flattened, scaled). The pipeline's losses become the lesson.",
+        "Instruction versus enforcement: DO NOT CROSS (a collider the explosion removes), WALK THIS LINE (a stripe that scores nothing), the STOP sign with no collision body.",
+        "Seeing versus colliding: from 'Seeing it and being able to hold it are different things' to the trihedron whose rendering is open while its physics is closed, to the torus whose extra triangles give it no other hole.",
+        "What a display can show: %.2f in Point_One, 'Remember it when we reach Trace and Grid' in Lines, snappedf in Trace, roundi in Grid, a triangle counter that counts a construction without deciding whether it fills the intended region."
+      ],
+      "hall_notes": [
+        {
+          "hall": "Point_One",
+          "words": 2228,
+          "note": "Refuses to begin: the counter started before you, the origin is a chosen place, the invisible point exists in code before anything is drawn, the card rounds your hand out of the report, the target's tolerance ignores intention. Nine stations; the overture before the first heading is long."
+        },
+        {
+          "hall": "Point_Lines",
+          "words": 1134,
+          "note": "The exploding barrier ('Someone joined those events in code'), b - a, WALK THIS LINE and the walking recorder. 'Two points were enough to begin. They have not made the world small.'"
+        },
+        {
+          "hall": "Point_Trace",
+          "words": 1783,
+          "note": "The richest hall: the five-millimetre gate, dots that round to 10/40/80 mm ('Your wrist is negotiating with a spacing'), the stick, the head trace, the writing desk ('We have given waiting a length'), the amber point that forgets."
+        },
+        {
+          "hall": "Point_Line_Grid",
+          "words": 1245,
+          "note": "'The same place has two names.' Snapping, the walking recorder at one-metre spacing, the ruled field, the plan vitrine. Three heavy references on one hall."
+        },
+        {
+          "hall": "Point_Triangle_Context",
+          "words": 1191,
+          "note": "The best argument in the sequence: shift the start of a fan around a six-corner L and the fill reaches into the notch. 'The code kept its rule; the rule failed to keep your boundary.' Then: keep the overspill."
+        },
+        {
+          "hall": "Primitives_Polythedra",
+          "words": 1264,
+          "note": "Trihedron against tetrahedron; rendering open, physics closed; the pink corner cut into the room; wedges, barrier, STOP."
+        },
+        {
+          "hall": "Point_Animatedcube",
+          "words": 1042,
+          "note": "'What looks like construction is also an arrangement of when we are allowed to see.' Pull v6 and a square becomes two tilted triangles. The crates spell A WORLD WITHOUT COMPOSITION YET."
+        },
+        {
+          "hall": "Primitives_Ignorance",
+          "words": 1194,
+          "note": "The Academy motto reversed. Resolution has a distribution (16x16, 7x7, 1x10). The five-sided capsule: 'recognising a capsule was not yet knowing this one.'"
+        },
+        {
+          "hall": "Primitives_Portals",
+          "words": 1179,
+          "note": "Twenty tori, the unit polygon's perimeter, tolerance as a stopping criterion, REVERSE. Achilles at stage ten: 'His visible body is larger than the gap.' Nothing here is a portal."
+        },
+        {
+          "hall": "Primitives_Melencolia",
+          "words": 1262,
+          "note": "The court, the snap puzzle that completes its test while the question stays open, the magic square (the sums check), and the counter's return: the best paragraph in the ten chapters."
+        }
+      ],
+      "stumbles": [
+        "Point_One: 'Alice's rabbit is already ahead' and 'We are already Alice' with no introduction of Alice on page one.",
+        "Point_One: the format-cycling label ('One format leaves the body without a printed address') is the one instruction whose lesson is not stated.",
+        "Point_One: 'An earlier version confined the point to the arrows' span' is revision history inside the reader's prose.",
+        "Point_One: 'Watch for the falling balls' arrives before the balls are introduced.",
+        "Point_Lines and Point_Line_Grid: 'On desktop it follows the walker' and 'On desktop, follow the same addresses with your walk' are manual voice; the reader is in the headset.",
+        "Point_Line_Grid: 'If the field is empty, return to Trace, draw ... and let go' is troubleshooting inside the chapter.",
+        "Point_Triangle_Context: the L procedure is demanding on the page (flat, two equal arms, the guide's timing); the text names corners A-F while the tool shows numbers.",
+        "Primitives_Portals: the hall is called Portals and nothing in it is a portal; the footnote has to deny teleportation.",
+        "Primitives_Melencolia: 'Ten rooms ago' in the tenth room.",
+        "Across the sequence: the closing cadence ('It does not tell us where to stop', 'Geometry does not decide the use', 'It cannot decide which of those things we should want') recurs a dozen times; by Portals the reader can predict a section's last sentence."
+      ],
+      "keep": [
+        {
+          "hall": "Point_One",
+          "quote": "Its first number for you is not its first number."
+        },
+        {
+          "hall": "Point_One",
+          "quote": "The apparent stillness belongs to the report."
+        },
+        {
+          "hall": "Point_One",
+          "quote": "Your intention never enters this comparison."
+        },
+        {
+          "hall": "Point_Trace",
+          "quote": "Thirty-two positions are neither thirty-two seconds nor a fixed length of line."
+        },
+        {
+          "hall": "Point_Triangle_Context",
+          "quote": "The code kept its rule; the rule failed to keep your boundary."
+        },
+        {
+          "hall": "Primitives_Ignorance",
+          "quote": "enough to hold which distinction, for whom, at what distance?"
+        },
+        {
+          "hall": "Primitives_Portals",
+          "quote": "His visible body is larger than the gap."
+        },
+        {
+          "hall": "Primitives_Melencolia",
+          "quote": "The frames that passed before you had somewhere to stand did not become yours by being counted alongside the ones that followed. This number adds them together anyway. It has no field for the difference."
+        }
+      ],
+      "handover_in": "First sequence of the spine; no chapter before it. The book opens with an epigraph lifted from the chapter's own middle and \"You arrive late.\"",
+      "handover_out": "Melencolia closes \"In transformation, you can watch from one place as objects move, turn and scale\" and hands over a relation to test against change. Trans_Pre is next.",
+      "reading_errors": [
+        "Point_Line_Grid hall note ('carries two desktop asides and one wrong interval count') and the stumble 'the display snaps at a quarter metre': the interval count is not wrong. grid_lines.tscn:8 sets shadow_snap_subdivisions = 6 on the root node (overriding the .gd default of 4), the registry instantiates that scene, and the map token cannot change it; the green trace snaps at 1/6 m and the chapter's 'six intervals per metre' is correct.",
+        "'Ahmed's orientation the one theorist carried by name through five halls' footnotes': Ahmed appears in four halls' footnotes — Point_One (ahmed-reach), Point_Lines (ahmed-paths, ahmed-deviation), Point_Line_Grid (ahmed-return) and Primitives_Polythedra (polyhedra-ahmed); Trace, Triangle_Context, Animatedcube, Ignorance, Portals and Melencolia do not name her.",
+        "Minor: 'Seven recorders of one gesture' for Point_Trace is a count of rules, not recorders — the hall has six tagged instruments (draw_dot, draw_stick, head_trace_projection, automatic_writing_desk, whiteboard, trace_short_memory) and nine physical recorders (four dots, stick, head, desk, board, cord)."
+      ]
+    },
+    "dropped": [
+      {
+        "title": "Green rounds at four intervals per metre, not six",
+        "reason": "The premise 'no value in grid_lines.tscn' is false. commons/primitives/line/grid_lines.tscn:8 sets `shadow_snap_subdivisions = 6` on the root GridLines node, overriding the script default of 4 at grid_lines.gd:38. The registry entry for grid_lines (commons/artifacts/registry/primitives.json, block from :10274, \"scene\": \"res://commons/primitives/line/grid_lines.tscn\") instantiates that scene, and apply_grid_config (grid_lines.gd:51-59) reads only rotation_speed and trace_height, so the map token grid_lines:0:0#plinth:0#rotation_speed:0#panel:1 cannot change it. snap_step = cell_spacing / 6 = 0.1667 m (:172), and the panel prints 'Green: 0.1667 m snap in DISPLAY space' (:389). The chapter's 'six intervals per metre' is correct as written; a visitor counting green steps against the one-metre ruling finds six."
+      },
+      {
+        "title": "The desk accumulates _t, not _elapsed",
+        "reason": "The reader grepped the host script only. Point_Trace places the desk as automatic_writing_desk:0:0#recording:head_height#rows:5#write_speed:0.06#run_demo:0 (Point_Trace/map_data.json), and the chapter's section describes exactly that measured mode ('the height of your headset moves the mark'). In head_height mode automatic_writing_desk.gd:254-255 calls _measured_writer.advance(delta) and returns BEFORE `_t += delta` at :257, so `_t` never accumulates in this hall. The measured writer's clock is commons/primitives/automatic_writing_desk/measured_height_writer.gd:11 (`var _elapsed := 0.0`) and :62 (`_elapsed += delta` in _advance_clock, feeding pen position at :63-65 and the sample times at :120). The chapter quotes the one line that asks for the number in the mode the visitor meets; the identifier exists and is correct. Replacing it with `_t += delta` would make the chapter wrong."
+      },
+      {
+        "title": "Green rounds at four intervals per metre, not six",
+        "reason": "The premise 'no value in grid_lines.tscn' is false. commons/primitives/line/grid_lines.tscn:8 sets `shadow_snap_subdivisions = 6` on the root GridLines node, overriding the script default of 4 at grid_lines.gd:38. The registry entry for grid_lines (commons/artifacts/registry/primitives.json, block from :10274, \"scene\": \"res://commons/primitives/line/grid_lines.tscn\") instantiates that scene, and apply_grid_config (grid_lines.gd:51-59) reads only rotation_speed and trace_height, so the map token grid_lines:0:0#plinth:0#rotation_speed:0#panel:1 cannot change it. snap_step = cell_spacing / 6 = 0.1667 m (:172), and the panel prints 'Green: 0.1667 m snap in DISPLAY space' (:389). The chapter's 'six intervals per metre' is correct as written; a visitor counting green steps against the one-metre ruling finds six."
+      },
+      {
+        "title": "The desk accumulates _t, not _elapsed",
+        "reason": "The reader grepped the host script only. Point_Trace places the desk as automatic_writing_desk:0:0#recording:head_height#rows:5#write_speed:0.06#run_demo:0 (Point_Trace/map_data.json), and the chapter's section describes exactly that measured mode ('the height of your headset moves the mark'). In head_height mode automatic_writing_desk.gd:254-255 calls _measured_writer.advance(delta) and returns BEFORE `_t += delta` at :257, so `_t` never accumulates in this hall. The measured writer's clock is commons/primitives/automatic_writing_desk/measured_height_writer.gd:11 (`var _elapsed := 0.0`) and :62 (`_elapsed += delta` in _advance_clock, feeding pen position at :63-65 and the sample times at :120). The chapter quotes the one line that asks for the number in the mode the visitor meets; the identifier exists and is correct. Replacing it with `_t += delta` would make the chapter wrong."
+      },
+      {
+        "title": "Green rounds at four intervals per metre, not six",
+        "reason": "The premise 'no value in grid_lines.tscn' is false. commons/primitives/line/grid_lines.tscn:8 sets `shadow_snap_subdivisions = 6` on the root GridLines node, overriding the script default of 4 at grid_lines.gd:38. The registry entry for grid_lines (commons/artifacts/registry/primitives.json, block from :10274, \"scene\": \"res://commons/primitives/line/grid_lines.tscn\") instantiates that scene, and apply_grid_config (grid_lines.gd:51-59) reads only rotation_speed and trace_height, so the map token grid_lines:0:0#plinth:0#rotation_speed:0#panel:1 cannot change it. snap_step = cell_spacing / 6 = 0.1667 m (:172), and the panel prints 'Green: 0.1667 m snap in DISPLAY space' (:389). The chapter's 'six intervals per metre' is correct as written; a visitor counting green steps against the one-metre ruling finds six."
+      },
+      {
+        "title": "The desk accumulates _t, not _elapsed",
+        "reason": "The reader grepped the host script only. Point_Trace places the desk as automatic_writing_desk:0:0#recording:head_height#rows:5#write_speed:0.06#run_demo:0 (Point_Trace/map_data.json), and the chapter's section describes exactly that measured mode ('the height of your headset moves the mark'). In head_height mode automatic_writing_desk.gd:254-255 calls _measured_writer.advance(delta) and returns BEFORE `_t += delta` at :257, so `_t` never accumulates in this hall. The measured writer's clock is commons/primitives/automatic_writing_desk/measured_height_writer.gd:11 (`var _elapsed := 0.0`) and :62 (`_elapsed += delta` in _advance_clock, feeding pen position at :63-65 and the sample times at :120). The chapter quotes the one line that asks for the number in the mode the visitor meets; the identifier exists and is correct. Replacing it with `_t += delta` would make the chapter wrong."
+      },
+      {
+        "title": "Green rounds at four intervals per metre, not six",
+        "reason": "The premise 'no value in grid_lines.tscn' is false. commons/primitives/line/grid_lines.tscn:8 sets `shadow_snap_subdivisions = 6` on the root GridLines node, overriding the script default of 4 at grid_lines.gd:38. The registry entry for grid_lines (commons/artifacts/registry/primitives.json, block from :10274, \"scene\": \"res://commons/primitives/line/grid_lines.tscn\") instantiates that scene, and apply_grid_config (grid_lines.gd:51-59) reads only rotation_speed and trace_height, so the map token grid_lines:0:0#plinth:0#rotation_speed:0#panel:1 cannot change it. snap_step = cell_spacing / 6 = 0.1667 m (:172), and the panel prints 'Green: 0.1667 m snap in DISPLAY space' (:389). The chapter's 'six intervals per metre' is correct as written; a visitor counting green steps against the one-metre ruling finds six."
+      },
+      {
+        "title": "The desk accumulates _t, not _elapsed",
+        "reason": "The reader grepped the host script only. Point_Trace places the desk as automatic_writing_desk:0:0#recording:head_height#rows:5#write_speed:0.06#run_demo:0 (Point_Trace/map_data.json), and the chapter's section describes exactly that measured mode ('the height of your headset moves the mark'). In head_height mode automatic_writing_desk.gd:254-255 calls _measured_writer.advance(delta) and returns BEFORE `_t += delta` at :257, so `_t` never accumulates in this hall. The measured writer's clock is commons/primitives/automatic_writing_desk/measured_height_writer.gd:11 (`var _elapsed := 0.0`) and :62 (`_elapsed += delta` in _advance_clock, feeding pen position at :63-65 and the sample times at :120). The chapter quotes the one line that asks for the number in the mode the visitor meets; the identifier exists and is correct. Replacing it with `_t += delta` would make the chapter wrong."
+      },
+      {
+        "title": "Green rounds at four intervals per metre, not six",
+        "reason": "The premise 'no value in grid_lines.tscn' is false. commons/primitives/line/grid_lines.tscn:8 sets `shadow_snap_subdivisions = 6` on the root GridLines node, overriding the script default of 4 at grid_lines.gd:38. The registry entry for grid_lines (commons/artifacts/registry/primitives.json, block from :10274, \"scene\": \"res://commons/primitives/line/grid_lines.tscn\") instantiates that scene, and apply_grid_config (grid_lines.gd:51-59) reads only rotation_speed and trace_height, so the map token grid_lines:0:0#plinth:0#rotation_speed:0#panel:1 cannot change it. snap_step = cell_spacing / 6 = 0.1667 m (:172), and the panel prints 'Green: 0.1667 m snap in DISPLAY space' (:389). The chapter's 'six intervals per metre' is correct as written; a visitor counting green steps against the one-metre ruling finds six."
+      },
+      {
+        "title": "The desk accumulates _t, not _elapsed",
+        "reason": "The reader grepped the host script only. Point_Trace places the desk as automatic_writing_desk:0:0#recording:head_height#rows:5#write_speed:0.06#run_demo:0 (Point_Trace/map_data.json), and the chapter's section describes exactly that measured mode ('the height of your headset moves the mark'). In head_height mode automatic_writing_desk.gd:254-255 calls _measured_writer.advance(delta) and returns BEFORE `_t += delta` at :257, so `_t` never accumulates in this hall. The measured writer's clock is commons/primitives/automatic_writing_desk/measured_height_writer.gd:11 (`var _elapsed := 0.0`) and :62 (`_elapsed += delta` in _advance_clock, feeding pen position at :63-65 and the sample times at :120). The chapter quotes the one line that asks for the number in the mode the visitor meets; the identifier exists and is correct. Replacing it with `_t += delta` would make the chapter wrong."
+      }
+    ]
+  },
+  "tasks": [
+    {
+      "id": "book_primitives.001",
+      "title": "Shorten the overture before 'Somewhere to count from'",
+      "spec": "[structure] Point_One\nQuote: “We could turn back into the counter: how a digit gets its shape, how its glass is drawn, how the engine returns to _process.”\nWhy: Page one is 2,228 words and nine stations; about 900 words pass (the counter, the fog on the giants' shoulders, Sutherland 1968, 'who gets to decide', Alice) before any point is found. Every other hall is 1,000-1,300 words.\nDo: Move the Sutherland paragraph into its footnote or to the end of the folding-past section, and keep one of the two 'leave invitations unanswered' paragraphs.\nEvidence: commons/maps/Point_One/final.md lines 7-54; word counts of the ten chapters\nFile: commons/maps/Point_One/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "cancelled",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Point_One"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Point_One",
+      "quote": "We could turn back into the counter: how a digit gets its shape, how its glass is drawn, how the engine returns to _process.",
+      "why": "Page one is 2,228 words and nine stations; about 900 words pass (the counter, the fog on the giants' shoulders, Sutherland 1968, 'who gets to decide', Alice) before any point is found. Every other hall is 1,000-1,300 words.",
+      "proposal": "Move the Sutherland paragraph into its footnote or to the end of the folding-past section, and keep one of the two 'leave invitations unanswered' paragraphs.",
+      "evidence": "commons/maps/Point_One/final.md lines 7-54; word counts of the ten chapters",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nPreserve the author-developed arrival: borrowed time, inherited construction, giants in fog and the 1968 room have specific work here. Word count alone does not justify removing them. The concrete counter and its code already precede this overture. This pass clarifies local references without shortening the author’s argument; see also .035.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "skip",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:11.777Z"
+    },
+    {
+      "id": "book_primitives.002",
+      "title": "Introduce Alice before 'Alice's rabbit is already ahead'",
+      "spec": "[prose] Point_One\nQuote: “Alice's rabbit is already ahead.”\nWhy: Two Alice allusions ('We are already Alice') with no introduction on the first page; the reader has to supply the conceit.\nDo: One clause the first time ('like Alice after the rabbit'), or introduce Alice in a preface and leave these as they are.\nEvidence: final.md:54 and :106\nFile: commons/maps/Point_One/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_One"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_One",
+      "quote": "Alice's rabbit is already ahead.",
+      "why": "Two Alice allusions ('We are already Alice') with no introduction on the first page; the reader has to supply the conceit.",
+      "proposal": "One clause the first time ('like Alice after the rabbit'), or introduce Alice in a preface and leave these as they are.",
+      "evidence": "final.md:54 and :106",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nIntroduced the first allusion as “Like Alice after the White Rabbit …”, preserving the rabbit and the later return to Alice. No new preface or explanatory digression.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:13.823Z"
+    },
+    {
+      "id": "book_primitives.003",
+      "title": "Say what the format-cycling label teaches, or cut the instruction",
+      "spec": "[prose] Point_One\nQuote: “Put it down and pick it up again: its coordinate label changes format with each pickup. One format leaves the body without a printed address.”\nWhy: The only instruction in the chapter whose lesson is not stated. The code cycles four formats (decimal, integer, scientific, words).\nDo: Either say the point (one position, four spellings; one spells it in words) or drop the two sentences.\nEvidence: commons/primitives/point/interactive_point_origin.gd:8, :176, :428-, :544\nFile: commons/maps/Point_One/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_One"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_One",
+      "quote": "Put it down and pick it up again: its coordinate label changes format with each pickup. One format leaves the body without a printed address.",
+      "why": "The only instruction in the chapter whose lesson is not stated. The code cycles four formats (decimal, integer, scientific, words).",
+      "proposal": "Either say the point (one position, four spellings; one spells it in words) or drop the two sentences.",
+      "evidence": "commons/primitives/point/interactive_point_origin.gd:8, :176, :428-, :544",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nAdded what the label change makes available: a position can be written differently without moving it. Checked the executable match in interactive_point_origin.gd: plain coordinates, X/Y/Z labels, Vector3 spelling, and hidden label. The reviewer relied on an outdated source-header description of integer/scientific/word formats; those are not the current modes. Exact modes recorded in technical.md.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:15.865Z"
+    },
+    {
+      "id": "book_primitives.004",
+      "title": "Rework 'An earlier version confined the point to the arrows' span'",
+      "spec": "[prose] Point_One\nQuote: “An earlier version confined the point to the arrows' span. A drawing made to explain movement had also been deciding where movement could end. The frame now keeps describing the point outside that span.”\nWhy: Revision history inside the reader's prose; a first-time reader does not know which earlier version.\nDo: 'The drawn axis has a length; the coordinate system does not stop at its end. A drawing made to explain movement could easily have decided where movement ends.'\nEvidence: final.md:148\nFile: commons/maps/Point_One/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_One"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_One",
+      "quote": "An earlier version confined the point to the arrows' span. A drawing made to explain movement had also been deciding where movement could end. The frame now keeps describing the point outside that span.",
+      "why": "Revision history inside the reader's prose; a first-time reader does not know which earlier version.",
+      "proposal": "'The drawn axis has a length; the coordinate system does not stop at its end. A drawing made to explain movement could easily have decided where movement ends.'",
+      "evidence": "final.md:148",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nRemoved version history from the main reading while preserving the distinction between a finite drawn axis and positions beyond it. Earlier confinement is recorded in technical.md. Same correction resolves .033.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:17.907Z"
+    },
+    {
+      "id": "book_primitives.005",
+      "title": "Attribute 'var p := Vector3(1.0, 0.5, 0.0)' to the screen's example",
+      "spec": "[code-claim] Point_One\nQuote: “var p := Vector3(1.0, 0.5, 0.0)”\nWhy: No source has this line; the value is the screen's first excerpt, where it is 'var point_position := Vector3(1.0, 0.5, 0.0)'. The chapter renames it without saying so ('Three components again, now another position').\nDo: Say it is the screen's example ('The screen's example began with...') or use the identifier the screen uses.\nEvidence: commons/maps/Point_One/evolution.json:35; grep over commons/ and algorithms/ finds no `var p :=` line\nFile: commons/maps/Point_One/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_One"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "Point_One",
+      "quote": "var p := Vector3(1.0, 0.5, 0.0)",
+      "why": "No source has this line; the value is the screen's first excerpt, where it is 'var point_position := Vector3(1.0, 0.5, 0.0)'. The chapter renames it without saying so ('Three components again, now another position').",
+      "proposal": "Say it is the screen's example ('The screen's example began with...') or use the identifier the screen uses.",
+      "evidence": "commons/maps/Point_One/evolution.json:35; grep over commons/ and algorithms/ finds no `var p :=` line",
+      "review": "checker: the only excerpt in the ten chapters marked wrong; low severity",
+      "notes": "Codex review — 24 September 2026\nAttributed the example explicitly to the screen and restored its displayed identifier, point_position. The illustrative code is no longer presented as an unexplained var p source excerpt.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:19.948Z"
+    },
+    {
+      "id": "book_primitives.006",
+      "title": "@folding_past names no placed token; the frames are the lobby's window",
+      "spec": "[structure] Point_One\nQuote: “<!-- @folding_past -->”\nWhy: The tag grammar is token-only and final_tags treats the region as a work of the hall, but folding_past is not in map_data.json: the museum builds it in the lobby vestibule (endless_museum.gd:3077, LOBBY_PIECES) and the map's museum block only sizes the window. In a grid-lane load of Point_One there is no such window.\nDo: Decide whether the frames belong to this hall (place the token) or to the lobby (keep the region, and say in field notes that the window is museum furniture the chapter reads through).\nEvidence: commons/scenes/endless_museum.gd:3075-3077, :3149-3174; commons/maps/Point_One/map_data.json:43-52\nFile: commons/maps/Point_One/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_One"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Point_One",
+      "quote": "<!-- @folding_past -->",
+      "why": "The tag grammar is token-only and final_tags treats the region as a work of the hall, but folding_past is not in map_data.json: the museum builds it in the lobby vestibule (endless_museum.gd:3077, LOBBY_PIECES) and the map's museum block only sizes the window. In a grid-lane load of Point_One there is no such window.",
+      "proposal": "Decide whether the frames belong to this hall (place the token) or to the lobby (keep the region, and say in field notes that the window is museum furniture the chapter reads through).",
+      "evidence": "commons/scenes/endless_museum.gd:3075-3077, :3149-3174; commons/maps/Point_One/map_data.json:43-52",
+      "review": "",
+      "notes": "keep it like this since it read as one room\n\nCodex review — 24 September 2026\nKept as requested: entrance frames and Point One read as one arrival. Verified folding_past in endless_museum.gd LOBBY_PIECES and the existing technical companion. Added the explicit museum/grid scope there. The anchor and physical placement remain; no duplicate frame artifact was placed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:22.008Z"
+    },
+    {
+      "id": "book_primitives.007",
+      "title": "Name the Fontana puncture, or remove the second point embedded in it",
+      "spec": "[prose] Point_One\nQuote: “The dark point offers itself to your hands.”\nWhy: A slashed canvas with a second interactive point embedded in it stands at (12,11) and gets no sentence; the chapter speaks of one dark point. The embedded point has no coordinate_id, so the frame ignores it, but drag_point_target watches the whole ada_coordinate_point group, so the second point can bring the rain.\nDo: One sentence at the puncture (the same point, staged in a cut), or drop the embed so the hall has one point.\nEvidence: map_data.json (12,11) fontana_puncture#embed_artifact:interactive_point_origin_force; CoordinateSystem3M.gd:528; drag_point_target.gd:322\nFile: commons/maps/Point_One/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_One"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_One",
+      "quote": "The dark point offers itself to your hands.",
+      "why": "A slashed canvas with a second interactive point embedded in it stands at (12,11) and gets no sentence; the chapter speaks of one dark point. The embedded point has no coordinate_id, so the frame ignores it, but drag_point_target watches the whole ada_coordinate_point group, so the second point can bring the rain.",
+      "proposal": "One sentence at the puncture (the same point, staged in a cut), or drop the embed so the hall has one point.",
+      "evidence": "map_data.json (12,11) fontana_puncture#embed_artifact:interactive_point_origin_force; CoordinateSystem3M.gd:528; drag_point_target.gd:322",
+      "review": "",
+      "notes": "maybe we could use the fontana pucture as move this point there, or leave outof the text\n\nCodex review — 24 September 2026\nChose your “leave out of the text” option. Fontana and its embedded point stay as a secondary encounter. The named point_one_main continues to drive the cards/frame; the target still accepts eligible points, including the embedded one. Recorded this distinction in technical.md. No artifact was deleted, no invented single-point restriction was added, and a dedicated puncture/arrival encounter remains only an optional idea.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:24.050Z"
+    },
+    {
+      "id": "book_primitives.008",
+      "title": "Introduce the falling balls before 'Watch for the falling balls'",
+      "spec": "[prose] Point_One\nQuote: “Carry the point towards it without letting go. Watch for the falling balls.”\nWhy: The balls arrive unannounced; the next paragraph explains them. Fine in the headset, abrupt on the page.\nDo: 'Carry the point towards it without letting go, and watch what falls.'\nEvidence: final.md:154\nFile: commons/maps/Point_One/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_One"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_One",
+      "quote": "Carry the point towards it without letting go. Watch for the falling balls.",
+      "why": "The balls arrive unannounced; the next paragraph explains them. Fine in the headset, abrupt on the page.",
+      "proposal": "'Carry the point towards it without letting go, and watch what falls.'",
+      "evidence": "final.md:154",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nChanged the invitation to “Carry the point towards it without letting go, and watch what falls.” The existing following paragraph then introduces the falling balls through their arrival condition.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:26.099Z"
+    },
+    {
+      "id": "book_primitives.009",
+      "title": "'Lines on monitors seem to meet': the monitor draws parallel scan lines",
+      "spec": "[prose] Point_Lines\nQuote: “Lines on monitors seem to meet; a laser waits for something to stand in its way.”\nWhy: The one monitor (sketch_monitor) draws full-width horizontal lines that never meet; the converging lines in the hall are the three perspective_lines works.\nDo: 'Lines on the walls seem to meet' or name the perspective lines.\nEvidence: sketch_monitor.gd:40, :91-121; map_data.json perspective_lines x3\nFile: commons/maps/Point_Lines/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Lines"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_Lines",
+      "quote": "Lines on monitors seem to meet; a laser waits for something to stand in its way.",
+      "why": "The one monitor (sketch_monitor) draws full-width horizontal lines that never meet; the converging lines in the hall are the three perspective_lines works.",
+      "proposal": "'Lines on the walls seem to meet' or name the perspective lines.",
+      "evidence": "sketch_monitor.gd:40, :91-121; map_data.json perspective_lines x3",
+      "review": "checker: overstated, not false",
+      "notes": "there is a monitor with lines\n\nCodex review — 24 September 2026\nYour note is correct. Point_Lines places line_space_workshop at (16,16), with four live private-world camera studies (camera_study.gd and workshop source). They include crossings and displaced joins; sketch_monitor is a different secondary work. Replaced the ambiguous clause with “On the workshop’s four monitors, lines turn, cross and pull apart”. Preserved the monitors and documented the distinction in technical.md.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:28.155Z"
+    },
+    {
+      "id": "book_primitives.010",
+      "title": "Cut the desktop aside in the walking-recorder paragraph",
+      "spec": "[vr] Point_Lines\nQuote: “In VR, the X and Z come from the headset; the line is drawn near floor level. On desktop it follows the walker.”\nWhy: The reader is the headset visitor; desktop exists only for visual tests. The platform split is manual voice in the chapter.\nDo: 'The recorder follows your headset across the floor, drawing near floor level. A lean can change the drawing even when your feet stay put.' Keep the desktop note in technical.md.\nEvidence: final.md:66\nFile: commons/maps/Point_Lines/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Lines"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Point_Lines",
+      "quote": "In VR, the X and Z come from the headset; the line is drawn near floor level. On desktop it follows the walker.",
+      "why": "The reader is the headset visitor; desktop exists only for visual tests. The platform split is manual voice in the chapter.",
+      "proposal": "'The recorder follows your headset across the floor, drawing near floor level. A lean can change the drawing even when your feet stay put.' Keep the desktop note in technical.md.",
+      "evidence": "final.md:66",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nThe walking paragraph now stays with the headset reader and retains the lean consequence. The desktop fallback remains described in technical.md. Also resolves .030; no implementation or platform capability removed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:30.202Z"
+    },
+    {
+      "id": "book_primitives.011",
+      "title": "Cut the two desktop asides",
+      "spec": "[vr] Point_Line_Grid\nQuote: “On desktop it follows the walking body. / On desktop, follow the same addresses with your walk.”\nWhy: Two desktop sentences in one chapter; the reader is in the headset.\nDo: Delete both; keep the VR sentences as the description.\nEvidence: final.md:34 and :62\nFile: commons/maps/Point_Line_Grid/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Line_Grid"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Point_Line_Grid",
+      "quote": "On desktop it follows the walking body. / On desktop, follow the same addresses with your walk.",
+      "why": "Two desktop sentences in one chapter; the reader is in the headset.",
+      "proposal": "Delete both; keep the VR sentences as the description.",
+      "evidence": "final.md:34 and :62",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nRemoved the desktop clauses from the main walking/plan encounters; the companion explicitly preserves desktop walker behavior and the plan without controller pens. See .031 and .032.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:32.248Z"
+    },
+    {
+      "id": "book_primitives.012",
+      "title": "Say that the table shows only the last ten kept positions",
+      "spec": "[prose] Point_Line_Grid\nQuote: “Here the table names each kept position in metres and in whole-number steps from the origin.”\nWhy: The instrument prints the full count above ten rows (start_idx = size - 10). Trace said so for its own table; this chapter does not, and 'each kept position' promises the whole list.\nDo: '...names the last ten kept positions, as Trace's table did...'\nEvidence: commons/primitives/point/grab_sphere_point_snap.gd:318-332\nFile: commons/maps/Point_Line_Grid/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Line_Grid"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_Line_Grid",
+      "quote": "Here the table names each kept position in metres and in whole-number steps from the origin.",
+      "why": "The instrument prints the full count above ten rows (start_idx = size - 10). Trace said so for its own table; this chapter does not, and 'each kept position' promises the whole list.",
+      "proposal": "'...names the last ten kept positions, as Trace's table did...'",
+      "evidence": "commons/primitives/point/grab_sphere_point_snap.gd:318-332",
+      "review": "checker: overstated",
+      "notes": "Codex review — 24 September 2026\nThe table now explicitly shows the last ten kept positions. Verified the size-minus-ten window in grab_sphere_point_snap.gd; the retained record can be longer.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:34.297Z"
+    },
+    {
+      "id": "book_primitives.013",
+      "title": "Move the troubleshooting sentence into a footnote",
+      "spec": "[prose] Point_Line_Grid\nQuote: “If the field is empty, return to Trace, draw with a dot or stick until it retains at least two points, and let go. The whiteboard and walking recorder keep separate records.”\nWhy: Manual voice in the chapter. Triangle handles the same case gracefully in its carry footnote ('If nothing was released there... every corner below is yours to place by hand').\nDo: Footnote it the way Triangle does.\nEvidence: final.md:42; Point_Triangle_Context/final.md footnote point-triangle-carry\nFile: commons/maps/Point_Line_Grid/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Line_Grid"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_Line_Grid",
+      "quote": "If the field is empty, return to Trace, draw with a dot or stick until it retains at least two points, and let go. The whiteboard and walking recorder keep separate records.",
+      "why": "Manual voice in the chapter. Triangle handles the same case gracefully in its carry footnote ('If nothing was released there... every corner below is yours to place by hand').",
+      "proposal": "Footnote it the way Triangle does.",
+      "evidence": "final.md:42; Point_Triangle_Context/final.md footnote point-triangle-carry",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nMoved the empty-field/release instructions into a linked carry footnote. The reading stays with the received drawing; how to supply one remains available.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:36.341Z"
+    },
+    {
+      "id": "book_primitives.014",
+      "title": "'green corners': the carried corners render white at rest",
+      "spec": "[prose] Point_Triangle_Context\nQuote: “Something is already lying here, unclosed: green corners joined into an open path.”\nWhy: The carried corners are grab_sphere_point handles with no material set, so they render in Godot's default white; the pink glow appears only on pickup.\nDo: 'pale corners' or 'white corners'.\nEvidence: draw_triangle_faces.gd:58, :462-487; point_mesh.gd:37-40; grab_sphere.gd:11, :72-86\nFile: commons/maps/Point_Triangle_Context/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Triangle_Context"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_Triangle_Context",
+      "quote": "Something is already lying here, unclosed: green corners joined into an open path.",
+      "why": "The carried corners are grab_sphere_point handles with no material set, so they render in Godot's default white; the pink glow appears only on pickup.",
+      "proposal": "'pale corners' or 'white corners'.",
+      "evidence": "draw_triangle_faces.gd:58, :462-487; point_mesh.gd:37-40; grab_sphere.gd:11, :72-86",
+      "review": "checker: false",
+      "notes": "Codex review — 24 September 2026\nChanged green to pale corners. draw_triangle_faces creates editable grab_sphere_point handles without setting a green resting material; the source scene supplies an uncoloured sphere at rest. No claim of measured headset colour.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:38.385Z"
+    },
+    {
+      "id": "book_primitives.015",
+      "title": "'filled loops' is not what the panel prints",
+      "spec": "[prose] Point_Triangle_Context\nQuote: “The side instrument distinguishes filled loops from triangles.”\nWhy: The panel reads 'Loops: N | Triangles: N | Fill: on/off'; 'filled_loops' is only a state key.\nDo: 'The side instrument counts loops and triangles separately.'\nEvidence: triangle_experiment_panel.gd:158; draw_triangle_faces.gd:722\nFile: commons/maps/Point_Triangle_Context/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Triangle_Context"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_Triangle_Context",
+      "quote": "The side instrument distinguishes filled loops from triangles.",
+      "why": "The panel reads 'Loops: N | Triangles: N | Fill: on/off'; 'filled_loops' is only a state key.",
+      "proposal": "'The side instrument counts loops and triangles separately.'",
+      "evidence": "triangle_experiment_panel.gd:158; draw_triangle_faces.gd:722",
+      "review": "checker: overstated",
+      "notes": "Codex review — 24 September 2026\nThe passage now says the instrument counts loops and triangles separately, matching the actual panel wording. It no longer presents the internal filled_loops state key as the printed caption.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:40.434Z"
+    },
+    {
+      "id": "book_primitives.016",
+      "title": "The overspill is not guaranteed for every concave loop",
+      "spec": "[prose] Point_Triangle_Context\nQuote: “If your bend turned back on itself anywhere, the fill has just reached into somewhere your hand never went.”\nWhy: The fan performs no interior test, but a concave loop can fan cleanly from a suitable start (the six-corner L does from A), and the chapter concedes this at line 66.\nDo: '...the fill may have reached into somewhere your hand never went.'\nEvidence: draw_triangle_faces.gd:601-607; technical.md:54-56\nFile: commons/maps/Point_Triangle_Context/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Triangle_Context"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_Triangle_Context",
+      "quote": "If your bend turned back on itself anywhere, the fill has just reached into somewhere your hand never went.",
+      "why": "The fan performs no interior test, but a concave loop can fan cleanly from a suitable start (the six-corner L does from A), and the chapter concedes this at line 66.",
+      "proposal": "'...the fill may have reached into somewhere your hand never went.'",
+      "evidence": "draw_triangle_faces.gd:601-607; technical.md:54-56",
+      "review": "checker: overstated",
+      "notes": "Codex review — 24 September 2026\nChanged guaranteed overspill to “may” and asks the visitor to look beyond the boundary. The deliberately constructed L and SHIFT START comparison retain their stronger, specific claim.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:42.481Z"
+    },
+    {
+      "id": "book_primitives.017",
+      "title": "The grid lane misreads #discovery:1 as a rotation and builds no panel",
+      "spec": "[encounter] Point_Triangle_Context\nQuote: “Press SHOW / HIDE FILL on the small panel beside it.”\nWhy: 'discovery' is not in GridInteractablesComponent.CONFIG_PARAM_NAMES, so the grid loader reads '#discovery:1' through the tutorial shorthand: config_data['discovery'] = true (a bool) and a 1-degree yaw. str(true) != '1', so triangle_line_puzzle.gd:78 and draw_triangle_faces.gd:187 build no panel, and both works stand at 1 degree. The museum lane passes the key as a string and is fine.\nDo: Add 'discovery' to CONFIG_PARAM_NAMES (a grid-system change: additive, gated by the key; test with a grid load of the map), or spell the token #discovery:on and accept 'on' in both scripts.\nEvidence: commons/grid/GridInteractablesComponent.gd:16-92, :1681-1697; commons/artifacts/.../triangle_line_puzzle.gd:78; draw_triangle_faces.gd:187\nFile: commons/maps/Point_Triangle_Context/final.md",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Triangle_Context"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Point_Triangle_Context",
+      "quote": "Press SHOW / HIDE FILL on the small panel beside it.",
+      "why": "'discovery' is not in GridInteractablesComponent.CONFIG_PARAM_NAMES, so the grid loader reads '#discovery:1' through the tutorial shorthand: config_data['discovery'] = true (a bool) and a 1-degree yaw. str(true) != '1', so triangle_line_puzzle.gd:78 and draw_triangle_faces.gd:187 build no panel, and both works stand at 1 degree. The museum lane passes the key as a string and is fine.",
+      "proposal": "Add 'discovery' to CONFIG_PARAM_NAMES (a grid-system change: additive, gated by the key; test with a grid load of the map), or spell the token #discovery:on and accept 'on' in both scripts.",
+      "evidence": "commons/grid/GridInteractablesComponent.gd:16-92, :1681-1697; commons/artifacts/.../triangle_line_puzzle.gd:78; draw_triangle_faces.gd:187",
+      "review": "checker: loader divergence found while refuting the panel claims",
+      "notes": "Codex review — 24 September 2026\nAdded discovery to GridInteractablesComponent.CONFIG_PARAM_NAMES. A production-path regression probe loads both current Triangle tokens: before the fix it reproduces bool/yaw=1 and missing panels; after it retains authored yaw and creates both ExperimentPanels. Discovery-off parsing, other numeric config and tutorial shorthand also checked. This is loader/configuration plus artifact runtime verification, not a whole-room or headset test. All runtime assertions passed; the Godot process exits abnormally during shutdown (3221225477), recorded separately in runtime.log.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:44.536Z"
+    },
+    {
+      "id": "book_primitives.018",
+      "title": "Name or anchor the wall plate the figure is captured from",
+      "spec": "[figure] Point_Triangle_Context\nQuote: “![Three identical sets of points A, B and C...]”\nWhy: triangle_construction_plate stands at (9,5) and is the source of the embedded figure, but the chapter never names it as a work in the hall.\nDo: One sentence pointing at the plate, or an anchor for it.\nEvidence: map_data.json (9,5); artifacts.md\nFile: commons/maps/Point_Triangle_Context/final.md",
+      "effort": "10min",
+      "skill": "design",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Triangle_Context"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "Point_Triangle_Context",
+      "quote": "![Three identical sets of points A, B and C...]",
+      "why": "triangle_construction_plate stands at (9,5) and is the source of the embedded figure, but the chapter never names it as a work in the hall.",
+      "proposal": "One sentence pointing at the plate, or an anchor for it.",
+      "evidence": "map_data.json (9,5); artifacts.md",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nNamed the wall plate immediately before the figure and added its existing primary token marker. Restored the triangle puzzle marker afterward so the puzzle’s two-sided-face discussion stays associated with the puzzle. The plate already was primary; no role change.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:46.592Z"
+    },
+    {
+      "id": "book_primitives.019",
+      "title": "'the tetrahedron beside it' stands 3.6 m away; the cube is nearer",
+      "spec": "[prose] Primitives_Polythedra\nQuote: “Turn the tetrahedron beside it.”\nWhy: grab_trihedron is at (9,5), grab_tetrahedron at (6,7), about 3.6 m off; cube_scene at (8,7) is the nearer neighbour.\nDo: 'Turn the tetrahedron a few steps on' or move the token next to the trihedron.\nEvidence: map_data.json:1078, :1105, :1107\nFile: commons/maps/Primitives_Polythedra/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Primitives_Polythedra"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Primitives_Polythedra",
+      "quote": "Turn the tetrahedron beside it.",
+      "why": "grab_trihedron is at (9,5), grab_tetrahedron at (6,7), about 3.6 m off; cube_scene at (8,7) is the nearer neighbour.",
+      "proposal": "'Turn the tetrahedron a few steps on' or move the token next to the trihedron.",
+      "evidence": "map_data.json:1078, :1105, :1107",
+      "review": "checker: loose rather than false",
+      "notes": "Codex review — 24 September 2026\nChanged “beside it” to “a few steps on”, matching the separate tetrahedron placement while preserving the comparison with the open trihedron.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:48.643Z"
+    },
+    {
+      "id": "book_primitives.020",
+      "title": "'one blue arrow': the arrow is white on a blue disc",
+      "spec": "[prose] Primitives_Polythedra\nQuote: “Read one blue arrow, then look where it points.”\nWhy: The sign disc is blue (#sign_color), the arrow glyph is drawn in the default text colour, near white.\nDo: 'Read one arrow on its blue disc'.\nEvidence: street_sign.gd:38, :121-122, :280; map_data.json:1132, :1161, :1222, :1226\nFile: commons/maps/Primitives_Polythedra/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Primitives_Polythedra"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Primitives_Polythedra",
+      "quote": "Read one blue arrow, then look where it points.",
+      "why": "The sign disc is blue (#sign_color), the arrow glyph is drawn in the default text colour, near white.",
+      "proposal": "'Read one arrow on its blue disc'.",
+      "evidence": "street_sign.gd:38, :121-122, :280; map_data.json:1132, :1161, :1222, :1226",
+      "review": "checker: overstated",
+      "notes": "Codex review — 24 September 2026\nChanged the direction cue to “one arrow on its blue disc”, distinguishing the sign backing from the pale glyph.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:50.687Z"
+    },
+    {
+      "id": "book_primitives.021",
+      "title": "The pink corners exist only in the museum build",
+      "spec": "[vr] Primitives_Polythedra\nQuote: “Walk toward a pink corner. A triangular face meets you before the two walls do.”\nWhy: The corners are stamped by the museum (em_simplex_corners.gd) from map_info.museum.simplex_corners; a grid-lane load of this map has no reader for that key, so the section 'A corner makes room' describes the museum hall only.\nDo: If the headset build is the museum, nothing to do but say so in field notes; if the sequence is also played in the grid lane, give the corners a token or qualify the section.\nEvidence: commons/scenes/endless_museum.gd:9097-9105\nFile: commons/maps/Primitives_Polythedra/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Primitives_Polythedra"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Primitives_Polythedra",
+      "quote": "Walk toward a pink corner. A triangular face meets you before the two walls do.",
+      "why": "The corners are stamped by the museum (em_simplex_corners.gd) from map_info.museum.simplex_corners; a grid-lane load of this map has no reader for that key, so the section 'A corner makes room' describes the museum hall only.",
+      "proposal": "If the headset build is the museum, nothing to do but say so in field notes; if the sequence is also played in the grid lane, give the corners a token or qualify the section.",
+      "evidence": "commons/scenes/endless_museum.gd:9097-9105",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nThe chapter follows the endless museum build. Verified the simplex_corners construction path in endless_museum.gd; recorded explicitly in technical.md that these are museum architecture and do not appear in a grid-only load. Kept the bodily encounter and the architecture.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:52.733Z"
+    },
+    {
+      "id": "book_primitives.022",
+      "title": "'the game's movement controls' is manual voice",
+      "spec": "[prose] Primitives_Polythedra\nQuote: “Approach it through the game's movement controls.”\nWhy: The only sentence in the sequence that calls the museum a game and names its controls.\nDo: 'Walk up to it.'\nEvidence: final.md:59\nFile: commons/maps/Primitives_Polythedra/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Primitives_Polythedra"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Primitives_Polythedra",
+      "quote": "Approach it through the game's movement controls.",
+      "why": "The only sentence in the sequence that calls the museum a game and names its controls.",
+      "proposal": "'Walk up to it.'",
+      "evidence": "final.md:59",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nChanged “Approach it through the game’s movement controls” to “Walk up to it.” The following sentence still makes the loss of walking space explicit.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:54.782Z"
+    },
+    {
+      "id": "book_primitives.023",
+      "title": "The Achilles rail runs through the combine_portals instrument",
+      "spec": "[encounter] Primitives_Portals\nQuote: “Before pressing NEXT STEP, point to where you think Achilles will go.”\nWhy: Relative to the achilles root, the combine_portals panel stands at (+0.1, 0, -2.0) and the six-metre rail runs from 0 to -6 m through it; the instrument the chapter asks you to press stands on the track the chapter asks you to watch.\nDo: Move one of the two tokens a cell apart and re-read the two paragraphs from the new standing spot.\nEvidence: combine_portals.gd:286-287; map_data.json:184-185; em_plan.json rotation 0\nFile: commons/maps/Primitives_Portals/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Primitives_Portals"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Primitives_Portals",
+      "quote": "Before pressing NEXT STEP, point to where you think Achilles will go.",
+      "why": "Relative to the achilles root, the combine_portals panel stands at (+0.1, 0, -2.0) and the six-metre rail runs from 0 to -6 m through it; the instrument the chapter asks you to press stands on the track the chapter asks you to watch.",
+      "proposal": "Move one of the two tokens a cell apart and re-read the two paragraphs from the new standing spot.",
+      "evidence": "combine_portals.gd:286-287; map_data.json:184-185; em_plan.json rotation 0",
+      "review": "checker: inferred from coordinates, not walked",
+      "notes": "Codex review — 24 September 2026\nConfirmed the old source-map placement puts the six-metre rail through the real ring-panel rectangle. Moved only Achilles from (5,5) to (8,8), retaining yaw, height and length. New rail runs X=8, Z=8 to 2 over authored floor cells; the real panel intersection check is now clear and NEXT STEP still advances. Updated map note, artifacts.md and technical.md. Source-map/runtime geometry verified; no full-room/headset walkthrough and no active museum restart/bake replacement.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:56.827Z"
+    },
+    {
+      "id": "book_primitives.024",
+      "title": "Say why the hall is called Portals, or rename the family",
+      "spec": "[prose] Primitives_Portals\nQuote: “There are twenty members in this family.”\nWhy: Nothing in the hall is a portal and the footnote has to say the rings 'do not implement teleportation'.\nDo: One clause on the name (rings you look through, not pass through), or rename the token family.\nEvidence: final.md:7 and footnote portals-mesh\nFile: commons/maps/Primitives_Portals/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Primitives_Portals"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Primitives_Portals",
+      "quote": "There are twenty members in this family.",
+      "why": "Nothing in the hall is a portal and the footnote has to say the rings 'do not implement teleportation'.",
+      "proposal": "One clause on the name (rings you look through, not pass through), or rename the token family.",
+      "evidence": "final.md:7 and footnote portals-mesh",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nAdded a short naming cue: “These are portals for looking through: rings that frame the space beyond.” The existing companion retains the separate teleportation distinction.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:57:58.875Z"
+    },
+    {
+      "id": "book_primitives.025",
+      "title": "'Ten rooms ago' in the tenth room",
+      "spec": "[prose] Primitives_Melencolia\nQuote: “Ten rooms ago we said that its first number for you was not its first number.”\nWhy: Point_One is the first hall and this is the tenth: nine rooms ago.\nDo: 'Nine rooms ago', or 'At the start of this chapter'.\nEvidence: commons/maps/sequences/primitives.json maps[]\nFile: commons/maps/Primitives_Melencolia/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Primitives_Melencolia"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Primitives_Melencolia",
+      "quote": "Ten rooms ago we said that its first number for you was not its first number.",
+      "why": "Point_One is the first hall and this is the tenth: nine rooms ago.",
+      "proposal": "'Nine rooms ago', or 'At the start of this chapter'.",
+      "evidence": "commons/maps/sequences/primitives.json maps[]",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nChanged “Ten rooms ago” to “In the first room”, preserving the counter return without an incorrect inter-room count. Also resolves .037.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:00.928Z"
+    },
+    {
+      "id": "book_primitives.026",
+      "title": "Thin the closing cadence 'It does not tell us...'",
+      "spec": "[prose] whole sequence\nWhy: The shape 'X gives us Y. It does not decide Z' closes a dozen sections across ten halls ('Geometry does not decide the use', 'It does not tell us why we came back', 'It cannot decide which of those things we should want'); by Portals the reader can predict the last sentence.\nDo: Keep the three or four strongest, turn the rest into a question or a plain statement.",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "sequence",
+      "quote": "The limit gives the sequence a direction. It does not tell us where to stop.",
+      "why": "The shape 'X gives us Y. It does not decide Z' closes a dozen sections across ten halls ('Geometry does not decide the use', 'It does not tell us why we came back', 'It cannot decide which of those things we should want'); by Portals the reader can predict the last sentence.",
+      "proposal": "Keep the three or four strongest, turn the rest into a question or a plain statement.",
+      "evidence": "Point_Line_Grid:36, :72; Primitives_Polythedra:83; Primitives_Portals:61; Primitives_Ignorance:56",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nVaried two repeated closures in Grid: a return now leaves its reason with the visitor, and the chapter asks which use to take further. Kept the stronger geometry/use and limit/stopping distinctions in Polyhedra and Portals. Selective pacing change, not a sequence-wide formula.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:02.981Z"
+    },
+    {
+      "id": "book_primitives.027",
+      "title": "Hedge the references once, not in every note",
+      "spec": "[footnote] whole sequence\nWhy: Twenty-odd references, and nearly every footnote spends its second half disclaiming; scrupulous, but over ten halls it reads defensive.\nDo: One statement in a preface (every reference here is a neighbour, not an authority), then let the notes point.",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "sequence",
+      "quote": "Rounding coordinates is not identical to classifying people.",
+      "why": "Twenty-odd references, and nearly every footnote spends its second half disclaiming; scrupulous, but over ten halls it reads defensive.",
+      "proposal": "One statement in a preface (every reference here is a neighbour, not an authority), then let the notes point.",
+      "evidence": "footnotes in Point_One, Point_Lines, Point_Line_Grid, Point_Triangle_Context, Primitives_Polythedra, Primitives_Ignorance, Primitives_Portals",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nLightened three repeated disclaimers in Point One, Trace and Grid while retaining each reference and its specific question. Kept technical qualifications where they matter (e.g. Shannon’s uniform-time assumptions, collider scope and mathematical conditions). No blanket preface that erases differences between claims.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:05.026Z"
+    },
+    {
+      "id": "book_primitives.028",
+      "title": "Headings: 0 to 7 per chapter",
+      "spec": "[structure] whole sequence\nWhy: Point_One 3, Lines 0, Trace 7, Grid 4, Triangle 1, Polyhedra 2, Cube 0, Ignorance 0, Portals 0, Melencolia 3: the sequence changes shape every chapter.\nDo: Decide a rule (headings when a chapter has more than N stations, or none) and apply it.",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "cancelled",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "sequence",
+      "quote": "## Let the hand leave a line",
+      "why": "Point_One 3, Lines 0, Trace 7, Grid 4, Triangle 1, Polyhedra 2, Cube 0, Ignorance 0, Portals 0, Melencolia 3: the sequence changes shape every chapter.",
+      "proposal": "Decide a rule (headings when a chapter has more than N stations, or none) and apply it.",
+      "evidence": "grep -c \"^## \" over the ten final.md",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nRetain varied chapter structures. Headings help a reader revisit Trace’s several distinct recorders; the continuous Line and Cube encounters read without the same subdivisions. No demonstrated navigation problem requires uniform counts or a mechanical station threshold. Preserve the mature sequence’s pacing.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "skip",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:07.075Z"
+    },
+    {
+      "id": "book_primitives.029",
+      "title": "Move the six figures out of review folders",
+      "spec": "[figure] whole sequence\nWhy: Six chapters embed images from doc/book/iterations/2026-09-23-*/figures; they exist and /book-review serves them, but the book's illustrations live in review folders.\nDo: Move them to doc/book/figures/<hall>/ and update the six paths.",
+      "effort": "10min",
+      "skill": "design",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "sequence",
+      "quote": "/book-review/doc/book/iterations/2026-09-23-triangle-illustration/figures/triangle-construction.png",
+      "why": "Six chapters embed images from doc/book/iterations/2026-09-23-*/figures; they exist and /book-review serves them, but the book's illustrations live in review folders.",
+      "proposal": "Move them to doc/book/figures/<hall>/ and update the six paths.",
+      "evidence": "Point_Triangle_Context, Primitives_Polythedra, Point_Animatedcube, Primitives_Ignorance, Primitives_Portals, Primitives_Melencolia",
+      "review": "",
+      "notes": "Codex review — 24 September 2026\nCopied the six native figures to stable doc/book/figures/<hall>/ paths and updated canonical final.md references. Historical review copies remain so old pages keep working. SHA-256 provenance confirms byte-identical copies; publication commit remains tracked separately by .034. The encyclopedia review route now serves this precise figure directory with its existing extension and realpath containment checks; six PNG URLs and rejection of unrelated/traversal paths were verified.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:09.119Z"
+    },
+    {
+      "id": "book_primitives.030",
+      "title": "Cut the desktop aside from the walking recorder",
+      "spec": "[vr] Point_Lines\nQuote: “In VR, the X and Z come from the headset; the line is drawn near floor level. On desktop it follows the walker.”\nWhy: The reader is the headset visitor: 'In VR' frames their own case as an exception and 'On desktop' describes a mode they are not in. The lean sentence that follows is the real lesson and survives the cut.\nDo: Replace with: 'The X and Z come from the headset; the line is drawn near floor level. A lean can change the drawing even when your feet stay put.'\nEvidence: commons/primitives/point/player_trace.gd:231-243 (_tracked_position takes x and z from XRCamera3D and y from the rig origin); commons/maps/Point_Lines/final.md:66.\nFile: commons/maps/Point_Lines/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Lines"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Point_Lines",
+      "quote": "In VR, the X and Z come from the headset; the line is drawn near floor level. On desktop it follows the walker.",
+      "why": "The reader is the headset visitor: 'In VR' frames their own case as an exception and 'On desktop' describes a mode they are not in. The lean sentence that follows is the real lesson and survives the cut.",
+      "proposal": "Replace with: 'The X and Z come from the headset; the line is drawn near floor level. A lean can change the drawing even when your feet stay put.'",
+      "evidence": "commons/primitives/point/player_trace.gd:231-243 (_tracked_position takes x and z from XRCamera3D and y from the rig origin); commons/maps/Point_Lines/final.md:66.",
+      "review": "kept: Quote is exact at commons/maps/Point_Lines/final.md:66. player_trace.gd:231-244 takes x and z from the XRCamera3D and y from the rig origin, and the trail sits trace_height_offset = 0.05 m above it (:25, :409), so 'near floor level' survives the cut. Under the stated premise (the reader is the headset visitor) 'In VR' frames their own case as the exception and 'On desktop' describes the em_walker lane (:186-194) they are not in; the proposal keeps every true claim. Caveat only: the desktop lane is real, so if the book is also read at a desk the aside is not false — the cut rests on the premise, not on an error.",
+      "notes": "Codex review — 24 September 2026\nSame implemented correction as .010: headset-led main reading, desktop fallback in technical.md.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:11.171Z"
+    },
+    {
+      "id": "book_primitives.031",
+      "title": "Cut the desktop aside from the second walking recorder",
+      "spec": "[vr] Point_Line_Grid\nQuote: “In VR, lean with your feet planted. The recorder can respond: it follows the headset horizontally, using the rig's origin for height. On desktop it follows the walking body.”\nWhy: Same defect as in Lines, one hall later: a headset reader is told about the desktop walker. The instruction itself (lean with feet planted) is VR-native and should lead.\nDo: Replace with: 'Lean with your feet planted. The recorder can respond: it follows the headset horizontally and takes its height from the rig's origin.'\nEvidence: commons/primitives/point/player_trace.gd:231-243; map token player_trace:0:0.5#seam_grid:1.0#show_discarded:1 in commons/maps/Point_Line_Grid/map_data.json; final.md:34.\nFile: commons/maps/Point_Line_Grid/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Line_Grid"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Point_Line_Grid",
+      "quote": "In VR, lean with your feet planted. The recorder can respond: it follows the headset horizontally, using the rig's origin for height. On desktop it follows the walking body.",
+      "why": "Same defect as in Lines, one hall later: a headset reader is told about the desktop walker. The instruction itself (lean with feet planted) is VR-native and should lead.",
+      "proposal": "Replace with: 'Lean with your feet planted. The recorder can respond: it follows the headset horizontally and takes its height from the rig's origin.'",
+      "evidence": "commons/primitives/point/player_trace.gd:231-243; map token player_trace:0:0.5#seam_grid:1.0#show_discarded:1 in commons/maps/Point_Line_Grid/map_data.json; final.md:34.",
+      "review": "kept: Quote is exact at commons/maps/Point_Line_Grid/final.md:34. Same code (player_trace.gd:231-244) confirms headset x/z and rig-origin height; the map token player_trace:0:0.5#seam_grid:1.0#show_discarded:1 is at Point_Line_Grid/map_data.json:5 and is honoured by _seam_apply (:646-656). The proposal leads with the VR-native instruction and leaves 'It must choose a point before it can draw a path called yours.' intact.",
+      "notes": "Codex review — 24 September 2026\nSame implemented correction as .011: the lean leads, and the precise headset/rig-origin distinction and desktop fallback are retained in technical.md.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:13.220Z"
+    },
+    {
+      "id": "book_primitives.032",
+      "title": "Drop both desktop clauses from the plan vitrine",
+      "spec": "[vr] Point_Line_Grid\nQuote: “In VR, entering gives each hand a pen. […] On desktop, follow the same addresses with your walk.”\nWhy: Two desktop-facing clauses in one region: the first makes the pens sound conditional, the second is an instruction the headset visitor cannot follow because they already hold the pens. The code's desktop fallback is a visual-test convenience, not the reader's case.\nDo: Write 'Entering gives each hand a pen.' and delete the sentence 'On desktop, follow the same addresses with your walk.'\nEvidence: commons/artifacts/plan_vitrine/plan_vitrine.gd:13 ('desktop retains the glass plan without mounted pens'), :96-97 (left_ink cyan, right_ink amber); final.md:60 and :62.\nFile: commons/maps/Point_Line_Grid/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Line_Grid"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Point_Line_Grid",
+      "quote": "In VR, entering gives each hand a pen. […] On desktop, follow the same addresses with your walk.",
+      "why": "Two desktop-facing clauses in one region: the first makes the pens sound conditional, the second is an instruction the headset visitor cannot follow because they already hold the pens. The code's desktop fallback is a visual-test convenience, not the reader's case.",
+      "proposal": "Write 'Entering gives each hand a pen.' and delete the sentence 'On desktop, follow the same addresses with your walk.'",
+      "evidence": "commons/artifacts/plan_vitrine/plan_vitrine.gd:13 ('desktop retains the glass plan without mounted pens'), :96-97 (left_ink cyan, right_ink amber); final.md:60 and :62.",
+      "review": "kept: The two quoted sentences are exact at Point_Line_Grid/final.md:60 (first sentence) and :62 (last sentence). plan_vitrine.gd:13 says 'desktop retains the glass plan without mounted pens', and _arm() (:426-440) returns unless OpenXR is initialised and both controllers are active, so for the headset visitor 'Entering gives each hand a pen' is unconditional. :96-97 set left_ink cyan / right_ink amber; the map token #pen_pair:space_grid (map_data.json:11) matches the chapter's cyan-sampled / amber-to-cell-centre description (:453-462). Deleting the desktop instruction removes a step the pen-holding reader cannot take.",
+      "notes": "Codex review — 24 September 2026\nSame implemented correction as .011: the main reading follows the tracked-controller pen pair; the desktop plan behavior is preserved in technical.md.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:15.266Z"
+    },
+    {
+      "id": "book_primitives.033",
+      "title": "Remove the version history from the coordinate frame",
+      "spec": "[prose] Point_One\nQuote: “An earlier version confined the point to the arrows' span. A drawing made to explain movement had also been deciding where movement could end. The frame now keeps describing the point outside that span.”\nWhy: The visitor has no earlier version to compare with; the passage reads as a changelog. The middle sentence is the lesson and can stand without the history around it.\nDo: Replace the three sentences with: 'A drawing made to explain movement could also decide where movement may end. This frame keeps describing the point beyond the drawn span.'\nEvidence: algorithms/vectors/00_coordinates/CoordinateSystem3M.gd:110-112 (the clamp is 'CONFINE, now OFF by default' — the history the sentence narrates); final.md:148.\nFile: commons/maps/Point_One/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_One"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_One",
+      "quote": "An earlier version confined the point to the arrows' span. A drawing made to explain movement had also been deciding where movement could end. The frame now keeps describing the point outside that span.",
+      "why": "The visitor has no earlier version to compare with; the passage reads as a changelog. The middle sentence is the lesson and can stand without the history around it.",
+      "proposal": "Replace the three sentences with: 'A drawing made to explain movement could also decide where movement may end. This frame keeps describing the point beyond the drawn span.'",
+      "evidence": "algorithms/vectors/00_coordinates/CoordinateSystem3M.gd:110-112 (the clamp is 'CONFINE, now OFF by default' — the history the sentence narrates); final.md:148.",
+      "review": "kept: Quote is exact at commons/maps/Point_One/final.md:148. algorithms/vectors/00_coordinates/CoordinateSystem3M.gd:110-117 confirms the history ('CONFINE, now OFF by default', confine_point = false) — the sentence narrates a changelog the visitor cannot see. The proposed two sentences keep the lesson (a drawing that explains movement can decide where it ends; this frame describes the point beyond the drawn span) without the earlier-version reference. Clear prose defect, lenient keep.",
+      "notes": "Codex review — 24 September 2026\nSame implemented correction as .004: present encounter in final.md, confinement history in technical.md.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:17.311Z"
+    },
+    {
+      "id": "book_primitives.034",
+      "title": "Commit the six chapter figures",
+      "spec": "[figure] Point_Triangle_Context (also Polythedra, Animatedcube, Ignorance, Portals, Melencolia)\nQuote: “![Three identical sets of points A, B and C: points alone, connected boundary, and pink triangular face.](/book-review/doc/book/iterations/2026-09-23-triangle-illustration/figures/triangle-construction.png)”\nWhy: All six figure directories added on 2026-09-23 are untracked: they render today from the working tree, but no other checkout, export or clean tree can serve them, and a stray git clean removes the only copies. Six chapters would lose their only image.\nDo: git add the six figures/ subdirectories (doc/book/iterations/2026-09-23-{triangle-illustration,polyhedra-two-boundaries,cube-hidden-diagonal,sphere-visible-construction,portals-visible-limit,melencolia-one-arrangement}/figures, 1.7 MB) together with each iteration's notes, and commit; decide separately whether the ~50 MB of museum/ and before-museum/ screenshots belong in git or in ada_encyclopedia/captures/. Note in passing that some forty other doc/book/iterations directories since 2026-09-08 are also untracked; they are outside this sequence's scope.\nEvidence: git status --porcelain prints ?? for each of the six; git ls-files on each returns nothing; git check-ignore -q exits 1; du -sh: 3.7M, 4.5M, 4.4M, 4.3M, 26M, 12M; du -ch of the six figures/ dirs: 1.7M total; git ls-files doc/book/iterations | wc -l = 110 with 77 .png (2026-09-16-folded-strip-research 79 files).\nFile: commons/maps/Point_Triangle_Context (also Polythedra, Animatedcube, Ignorance, Portals, Melencolia)/final.md",
+      "effort": "10min",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Point_Triangle_Context (also Polythedra, Animatedcube, Ignorance, Portals, Melencolia)"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "Point_Triangle_Context (also Polythedra, Animatedcube, Ignorance, Portals, Melencolia)",
+      "quote": "![Three identical sets of points A, B and C: points alone, connected boundary, and pink triangular face.](/book-review/doc/book/iterations/2026-09-23-triangle-illustration/figures/triangle-construction.png)",
+      "why": "All six figure directories added on 2026-09-23 are untracked: they render today from the working tree, but no other checkout, export or clean tree can serve them, and a stray git clean removes the only copies. Six chapters would lose their only image.",
+      "proposal": "git add the six figures/ subdirectories (doc/book/iterations/2026-09-23-{triangle-illustration,polyhedra-two-boundaries,cube-hidden-diagonal,sphere-visible-construction,portals-visible-limit,melencolia-one-arrangement}/figures, 1.7 MB) together with each iteration's notes, and commit; decide separately whether the ~50 MB of museum/ and before-museum/ screenshots belong in git or in ada_encyclopedia/captures/. Note in passing that some forty other doc/book/iterations directories since 2026-09-08 are also untracked; they are outside this sequence's scope.",
+      "evidence": "git status --porcelain prints ?? for each of the six; git ls-files on each returns nothing; git check-ignore -q exits 1; du -sh: 3.7M, 4.5M, 4.4M, 4.3M, 26M, 12M; du -ch of the six figures/ dirs: 1.7M total; git ls-files doc/book/iterations | wc -l = 110 with 77 .png (2026-09-16-folded-strip-research 79 files).",
+      "review": "amended: Facts confirmed: all six directories print `??` in git status, `git ls-files` returns 0 tracked files for each, `git check-ignore` exits 1 (not ignored), the referenced PNGs exist (76-418 KB) and ada_encyclopedia/src/app/book-review/[[...path]]/route.ts exists. Precedent for committing iteration folders exists: 110 files including 77 PNGs are tracked under doc/book/iterations/2026-09-16-* and the .gdignore is tracked. But the proposal as worded would add ~55 MB: portals-visible-limit is 26 MB and melencolia-one-arrangement 12 MB, almost all of it museum/ and before-museum/ screenshots at 1.3-3.5 MB each, while the six figures/ subdirectories the chapters reference total 1.7 MB.",
+      "notes": "Codex review — 24 September 2026\nStable canonical figure copies and a provenance manifest are now prepared under doc/book/figures; .029 fixes the links. A publication commit remains outstanding. This shared working tree contains substantial earlier/concurrent work, and the reviewer’s proposed sweep of untracked iteration folders is not an appropriate scoped commit. Commit the reviewed manuscript/figure/source bundle together in the publication pass; no files staged or committed here.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:19.363Z"
+    },
+    {
+      "id": "book_primitives.035",
+      "title": "Reach the first point sooner",
+      "spec": "[structure] Point_One\nQuote: “We could turn back into the counter: how a digit gets its shape, how its glass is drawn, how the engine returns to `_process`. Any of those questions could take the rest of our time here.”\nWhy: Point_One runs 1930 body words, twice the sequence median (about 990), and the origin arrives after roughly 640 words, three of them paragraphs about deferring (the counter's glass, Sutherland 1968, Alice's rabbit). The chapter enacts the deferral it says it must make, and the reader's first act with a point is pushed past the point of the chapter's own promise.\nDo: Cut the Sutherland paragraph (:48) to one sentence, keeping the [^point-one-room-history] marker on that sentence; reduce :50 to 'To begin with the point, we have to leave some invitations unanswered.'; keep 'Alice's rabbit is already ahead.' (:54) as the last sentence ABOVE the `<!-- @origin -->` anchor rather than under the heading — `## Somewhere to count from` (:58) sits inside the origin's tagged region, so moving the sentence below the anchor moves it onto the wall that stands beside the origin artifact.\nEvidence: Word counts measured this session: Point_One total 2228 / body 1900; others total 1042-1783, body 806-1520; median body of the other nine 947; 606 words before the @origin anchor (final.md:56); heading at :58 follows the anchor; footnote [^point-one-room-history] at :187.\nFile: commons/maps/Point_One/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "cancelled",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Point_One"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Point_One",
+      "quote": "We could turn back into the counter: how a digit gets its shape, how its glass is drawn, how the engine returns to `_process`. Any of those questions could take the rest of our time here.",
+      "why": "Point_One runs 1930 body words, twice the sequence median (about 990), and the origin arrives after roughly 640 words, three of them paragraphs about deferring (the counter's glass, Sutherland 1968, Alice's rabbit). The chapter enacts the deferral it says it must make, and the reader's first act with a point is pushed past the point of the chapter's own promise.",
+      "proposal": "Cut the Sutherland paragraph (:48) to one sentence, keeping the [^point-one-room-history] marker on that sentence; reduce :50 to 'To begin with the point, we have to leave some invitations unanswered.'; keep 'Alice's rabbit is already ahead.' (:54) as the last sentence ABOVE the `<!-- @origin -->` anchor rather than under the heading — `## Somewhere to count from` (:58) sits inside the origin's tagged region, so moving the sentence below the anchor moves it onto the wall that stands beside the origin artifact.",
+      "evidence": "Word counts measured this session: Point_One total 2228 / body 1900; others total 1042-1783, body 806-1520; median body of the other nine 947; 606 words before the @origin anchor (final.md:56); heading at :58 follows the anchor; footnote [^point-one-room-history] at :187.",
+      "review": "amended: The numbers hold within a few percent under my own count (footnote definitions stripped, HTML comments removed): Point_One body 1900 words (1805 without code), the other nine 806-1520, median of the others 947, so Point_One is 2.0x the median; 606 words precede `<!-- @origin -->` at final.md:56. The reader's 1930/824-1541/990/640 are the same facts under a slightly different tokenizer. The proposal is coherent — [^point-one-room-history] at :187 already carries Sutherland, and :44-54 are three paragraphs of deferral — but two details need care, and the cut is editorial judgment rather than a defect: the opening deliberately enacts arriving late, and a visitor who reads the first line ('has already broken the promise of taking things one step at a time') may accept a slow arrival. The reader's case that the chapter spends three paragraphs answering the invitations it says it must leave unanswered is fair, so keep it at M with the amendments.",
+      "notes": "Codex review — 24 September 2026\nSame decision as .001: retain the author’s developed arrival, including the historical room and borrowed time. The rabbit is now introduced more clearly under .002. No word-count target imposed on the opening.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "skip",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:21.426Z"
+    },
+    {
+      "id": "book_primitives.036",
+      "title": "Give the quad one paragraph as the bridge to the cube",
+      "spec": "[prose] Point_Triangle_Context\nQuote: “Carry this distinction onward: closing a boundary, making a face and choosing how to show it are operations we can separate.”\nWhy: The map places quad_line_puzzle and quad, and the sequence file's rationale for this hall is 'quad decomposition. Transition from triangle to quad', yet the chapter never mentions them; the next chapter opens on a square face 'stored as two triples' with nothing prepared. A visitor who has just closed a quad and seen its diagonal meets the cube's hidden crease as a recognition instead of a surprise.\nDo: Before 'Next, faces meet at a corner' (:74), add a short tagged region — `<!-- @quad -->`, optionally preceded by `<!-- @quad_line_puzzle -->` — that closes four edges on the puzzle (a closed loop, no face), then turns to the two-coloured quad: drag one corner and watch which of the two triangles moves; name their shared edge as the diagonal the cube's flat square face will hide in the next room.\nEvidence: Point_Triangle_Context/map_data.json interactables rows 20 and 26; commons/maps/sequences/primitives.json:172; commons/primitives/line/puzzles/line_snap_puzzle_base.gd (no fill code); commons/primitives/line/puzzles/triangle_line_puzzle.gd:228-243 (discovery_face is triangle-only); commons/primitives/quad/quad.gd:1-23 (two triangle meshes, shared diagonal, draggable corners); Point_Animatedcube/final.md:23-30.\nFile: commons/maps/Point_Triangle_Context/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Triangle_Context"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_Triangle_Context",
+      "quote": "Carry this distinction onward: closing a boundary, making a face and choosing how to show it are operations we can separate.",
+      "why": "The map places quad_line_puzzle and quad, and the sequence file's rationale for this hall is 'quad decomposition. Transition from triangle to quad', yet the chapter never mentions them; the next chapter opens on a square face 'stored as two triples' with nothing prepared. A visitor who has just closed a quad and seen its diagonal meets the cube's hidden crease as a recognition instead of a surprise.",
+      "proposal": "Before 'Next, faces meet at a corner' (:74), add a short tagged region — `<!-- @quad -->`, optionally preceded by `<!-- @quad_line_puzzle -->` — that closes four edges on the puzzle (a closed loop, no face), then turns to the two-coloured quad: drag one corner and watch which of the two triangles moves; name their shared edge as the diagonal the cube's flat square face will hide in the next room.",
+      "evidence": "Point_Triangle_Context/map_data.json interactables rows 20 and 26; commons/maps/sequences/primitives.json:172; commons/primitives/line/puzzles/line_snap_puzzle_base.gd (no fill code); commons/primitives/line/puzzles/triangle_line_puzzle.gd:228-243 (discovery_face is triangle-only); commons/primitives/quad/quad.gd:1-23 (two triangle meshes, shared diagonal, draggable corners); Point_Animatedcube/final.md:23-30.",
+      "review": "amended: The gap is real: Point_Triangle_Context/map_data.json places quad:90:0#plinth:0.80#offset:0.00,1.00,0.00 (interactables row 20) and quad_line_puzzle:90:1 (row 26), both on the way to the exit teleporter (utilities row 29); primitives.json:172 gives the hall's rationale as 'quad decomposition. Transition from triangle to quad'; the chapter tags 2 of 16 placed works; Point_Animatedcube/final.md:23-30 opens on 'That face is stored as two triples' with nothing prepared. But the proposed mechanism is wrong: quad_line_puzzle has no fill. line_snap_puzzle_base.gd builds markers and lines only (no fill, no PRIMITIVE_TRIANGLES), and SHOW / HIDE FILL is triangle_line_puzzle's own discovery_face (:43, :228-243, gated by #discovery:1); closing four edges on the quad puzzle shows four locked green lines and nothing inside them. The diagonal the cube will hide is visible on the `quad` artifact instead: commons/primitives/quad/quad.gd:1-10 builds 'an editable quad split into two triangles with different colors' with four draggable vertex spheres (registry: 'divided into pink and black triangles').",
+      "notes": "Codex review — 24 September 2026\nAdded a brief comparison using the already placed four-edge puzzle and quad before leaving Triangle. It distinguishes closing an outline from a face, then moves an off-diagonal corner and an end of the shared diagonal. The production quad mesh probe confirms one triangle changes in the first case and both in the second. This prepares the later cube crease without removing the fan experiment or promoting every secondary work.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:23.487Z"
+    },
+    {
+      "id": "book_primitives.037",
+      "title": "Nine rooms ago, not ten",
+      "spec": "[prose] Primitives_Melencolia\nQuote: “Ten rooms ago we said that its first number for you was not its first number.”\nWhy: Melencolia is the tenth hall and Point_One the first, so nine rooms separate them. In the paragraph about a number that cannot say which frames are yours, the book's own count should be exact.\nDo: Change to 'Nine rooms ago' (or 'In the first room').\nEvidence: commons/maps/sequences/primitives.json:43-59 (maps: ten entries, Point_One first, Primitives_Melencolia tenth); final.md:75.\nFile: commons/maps/Primitives_Melencolia/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Primitives_Melencolia"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Primitives_Melencolia",
+      "quote": "Ten rooms ago we said that its first number for you was not its first number.",
+      "why": "Melencolia is the tenth hall and Point_One the first, so nine rooms separate them. In the paragraph about a number that cannot say which frames are yours, the book's own count should be exact.",
+      "proposal": "Change to 'Nine rooms ago' (or 'In the first room').",
+      "evidence": "commons/maps/sequences/primitives.json:43-59 (maps: ten entries, Point_One first, Primitives_Melencolia tenth); final.md:75.",
+      "review": "kept: commons/maps/sequences/primitives.json:43-59 lists ten maps with Point_One first and Primitives_Melencolia tenth; nine rooms separate them. Quote is exact at Primitives_Melencolia/final.md:75. 'In the first room' is the safer of the two fixes because it survives any future re-dealing of the sequence.",
+      "notes": "Codex review — 24 September 2026\nSame implemented correction as .025: “In the first room”.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:25.535Z"
+    },
+    {
+      "id": "book_primitives.038",
+      "title": "Keep the second person at the barrier",
+      "spec": "[prose] Point_Lines\nQuote: “The space looked open beneath the plank, but the player could not pass through it.”\nWhy: This is the only sentence in the sequence that calls the reader 'the player'; everywhere else the body is 'you', and the collider's whole point is that it stopped you, not a character.\nDo: Change to 'but you could not pass through it.'\nEvidence: commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.gd:238-250 (BarrierBody, a box from the floor to the bar); final.md:15.\nFile: commons/maps/Point_Lines/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Lines"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_Lines",
+      "quote": "The space looked open beneath the plank, but the player could not pass through it.",
+      "why": "This is the only sentence in the sequence that calls the reader 'the player'; everywhere else the body is 'you', and the collider's whole point is that it stopped you, not a character.",
+      "proposal": "Change to 'but you could not pass through it.'",
+      "evidence": "commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.gd:238-250 (BarrierBody, a box from the floor to the bar); final.md:15.",
+      "review": "kept: Quote is exact at commons/maps/Point_Lines/final.md:15, and a grep across all ten chapters finds 'the player' only there. do_not_cross_barrier.gd:243-259 builds BarrierBody as a box from the floor to bar height plus half the plank face (:246-250), so the collider stopped the visitor's own body. One-word fix.",
+      "notes": "Codex review — 24 September 2026\nChanged “the player” to “you” at the barrier, maintaining the reader’s embodied perspective.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:27.652Z"
+    },
+    {
+      "id": "book_primitives.039",
+      "title": "Make the sequence's content list match its ten halls",
+      "spec": "[structure] primitives.json (sequence file)\nQuote: “\"Point_Triangle: Three Points Close a Boundary\", […] \"Chamber_Primitives: Catalyst chamber — first mark. Receive the bracelet, fire at targets, meet the FOE.\"”\nWhy: content lists twelve entries but maps deals ten; the list is served raw by the sequences API and appended to by the spine-research promote route, so it is a ledger other tools write into, and it currently names a triangle hall and a chamber that are never dealt and describes Point_Triangle_Context as 'Triangles Applied' when the chapter is about closing versus filling.\nDo: Remove the Point_Triangle and Chamber_Primitives entries from content (or mark them as not dealt) and reword the Point_Triangle_Context line to 'Closing a boundary, adding a face'; optionally mark or remove the artifact_groups stanza for Point_Triangle (:144-157) in the same edit.\nEvidence: commons/maps/sequences/primitives.json:29-42 (content, 12 entries), :43-59 (maps, 10 entries), :144-157 (artifact_groups Point_Triangle); ada_encyclopedia/src/app/sequences/page.tsx:33,131,236 (renders maps, not content); ada_encyclopedia/src/app/api/spine-research/promote/route.ts:105-106 (appends to seq.content).\nFile: commons/maps/primitives.json (sequence file)/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "primitives.json (sequence file)"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "primitives.json (sequence file)",
+      "quote": "\"Point_Triangle: Three Points Close a Boundary\", […] \"Chamber_Primitives: Catalyst chamber — first mark. Receive the bracelet, fire at targets, meet the FOE.\"",
+      "why": "content lists twelve entries but maps deals ten; the list is served raw by the sequences API and appended to by the spine-research promote route, so it is a ledger other tools write into, and it currently names a triangle hall and a chamber that are never dealt and describes Point_Triangle_Context as 'Triangles Applied' when the chapter is about closing versus filling.",
+      "proposal": "Remove the Point_Triangle and Chamber_Primitives entries from content (or mark them as not dealt) and reword the Point_Triangle_Context line to 'Closing a boundary, adding a face'; optionally mark or remove the artifact_groups stanza for Point_Triangle (:144-157) in the same edit.",
+      "evidence": "commons/maps/sequences/primitives.json:29-42 (content, 12 entries), :43-59 (maps, 10 entries), :144-157 (artifact_groups Point_Triangle); ada_encyclopedia/src/app/sequences/page.tsx:33,131,236 (renders maps, not content); ada_encyclopedia/src/app/api/spine-research/promote/route.ts:105-106 (appends to seq.content).",
+      "review": "amended: The data mismatch is confirmed: content has 12 entries (primitives.json:29-42) against 10 maps (:43-59); Point_Triangle and Chamber_Primitives are not dealt, and Point_Triangle_Context/final.md:1-3 opens on closing a boundary, not 'Triangles Applied'. The why overstates where it shows: the encyclopedia's sequence page (ada_encyclopedia/src/app/sequences/page.tsx) renders maps and mapCount (:33, :131, :236) and nothing under src renders `content`; the only code touching it is api/spine-research/promote/route.ts:105-106, which appends variant lines to it. So it is a ledger that drifts (and is served raw by the API) rather than a displayed list — still worth reconciling, and the same orphan recurs in the artifact_groups stanza for Point_Triangle at :144-157.",
+      "notes": "Codex review — 24 September 2026\nThe sequence content list now matches its ten dealt maps, in order, and describes Triangle as “Closing a boundary, adding a face”. Removed only the two non-dealt content entries, not their maps or artifacts. The older Point_Triangle artifact-group metadata remains available as legacy curation material; it is not the maps[] routing list.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:29.723Z"
+    },
+    {
+      "id": "book_primitives.040",
+      "title": "One gesture through three recorders",
+      "spec": "[figure] Point_Trace\nQuote: “A gesture that one recorder can distinguish may need to become larger for another.”\nWhy: The hall argues visually — diagonals cutting across a grid of corners, a cord that unmakes itself — in words alone; it is the second-longest chapter and, with Point_One, Lines and Grid, one of four without a figure. One figure would let the reader see the three rules before their hand tests them.\nDo: A three-panel figure of the same drawn loop as kept by the plain dot (5 mm gate), the blue dot (80 mm grid) and the amber dot (32 positions), each panel captioned with its retained count; place it after the 'Another resolution, another gesture' section.\nEvidence: commons/primitives/point/draw_dot.tscn:9-10; Point_Trace/map_data.json tokens #resolution:10/40/80 with inks ff0000/00ff00/0000ff; commons/artifacts/trace_short_memory/trace_short_memory.tscn:30 (trail_max_points = 32); grep -c '![' over the ten chapters: 0 for Point_One, Point_Lines, Point_Trace, Point_Line_Grid, 1 for the other six.\nFile: commons/maps/Point_Trace/final.md",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Point_Trace"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "Point_Trace",
+      "quote": "A gesture that one recorder can distinguish may need to become larger for another.",
+      "why": "The hall argues visually — diagonals cutting across a grid of corners, a cord that unmakes itself — in words alone; it is the second-longest chapter and, with Point_One, Lines and Grid, one of four without a figure. One figure would let the reader see the three rules before their hand tests them.",
+      "proposal": "A three-panel figure of the same drawn loop as kept by the plain dot (5 mm gate), the blue dot (80 mm grid) and the amber dot (32 positions), each panel captioned with its retained count; place it after the 'Another resolution, another gesture' section.",
+      "evidence": "commons/primitives/point/draw_dot.tscn:9-10; Point_Trace/map_data.json tokens #resolution:10/40/80 with inks ff0000/00ff00/0000ff; commons/artifacts/trace_short_memory/trace_short_memory.tscn:30 (trail_max_points = 32); grep -c '![' over the ten chapters: 0 for Point_One, Point_Lines, Point_Trace, Point_Line_Grid, 1 for the other six.",
+      "review": "amended: Evidence confirmed: draw_dot.tscn:9-10 (trail_max_points = 4096, min_segment_distance = 0.005); Point_Trace tokens draw_dot…#resolution:10#ink:ff0000, #resolution:40#ink:00ff00, #resolution:80#ink:0000ff, so the blue dot is the 80 mm grid; trace_short_memory.tscn:30 trail_max_points = 32; no '![' in Point_Trace/final.md. The why's 'the only long one without an image' is wrong: Point_One (2228 words, the longest chapter) has no image either, nor do Point_Lines and Point_Line_Grid — four of ten chapters lack a figure, and the six that have one are exactly the six with 2026-09-23 iterations. The case stands on the hall's visual argument, not on uniqueness. Effort L is right: the figure needs either a Godot capture (not possible from this session) or a rasterised reconstruction of the three rules applied to one recorded loop.",
+      "notes": "Codex review — 24 September 2026\nWorth developing, not evidence that this prose is false. Keep as a separate native Godot illustration task: send the same measured gesture through the production plain, 80 mm and 32-position recorders; capture their resulting geometry and retained counts, with input/provenance recorded. Do not substitute an invented static drawing or assume the three counts. No new figure is claimed in this pass.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:31.769Z"
+    },
+    {
+      "id": "book_primitives.041",
+      "title": "Count the shelf: four pens and an eraser",
+      "spec": "[prose] Point_Trace\nQuote: “Four pens wait on the shelf beneath the whiteboard. These belong to the board.”\nWhy: The board builds five pickables — four inked pens and an eraser — so a visitor counting finds five objects and wonders which one the sentence left out.\nDo: Change to 'Four pens and an eraser wait on the shelf beneath the whiteboard.'\nEvidence: commons/artifacts/whiteboard/whiteboard_drawing.gd:35-41 (for i in range(5); name 'Eraser' if i == 4; resolutions 0/10/40/80/0 mm); final.md:103.\nFile: commons/maps/Point_Trace/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Point_Trace"
+      ],
+      "sequence_refs": [
+        "primitives"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Point_Trace",
+      "quote": "Four pens wait on the shelf beneath the whiteboard. These belong to the board.",
+      "why": "The board builds five pickables — four inked pens and an eraser — so a visitor counting finds five objects and wonders which one the sentence left out.",
+      "proposal": "Change to 'Four pens and an eraser wait on the shelf beneath the whiteboard.'",
+      "evidence": "commons/artifacts/whiteboard/whiteboard_drawing.gd:35-41 (for i in range(5); name 'Eraser' if i == 4; resolutions 0/10/40/80/0 mm); final.md:103.",
+      "review": "kept: Quote is exact at Point_Trace/final.md:103. The Point_Trace token is whiteboard:270:0#board_width:2.0#offset:0.46,0.95,0.00#pens:1#pen_shelf:1; whiteboard.gd:94-97 parse pen_shelf and pens, and :132-137 hand shelf_enabled = pen_shelf to whiteboard_drawing. whiteboard_drawing.gd:35-41 build five pickables (name 'Eraser' at i == 4, resolutions 0/10/40/80/0 mm), and with the shelf enabled every one of the five is docked on it (:95-99, _build_dock for eraser too). So the shelf holds four pens and an eraser; the sentence leaves one object out.",
+      "notes": "Codex review — 24 September 2026\nChanged the shelf inventory to “Four pens and an eraser”, matching the five pickables built by whiteboard_drawing.gd. The following red-pen action stays unchanged.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-primitives-review-comments/index.html",
+      "source": "hand reading (Claude) + 10 hall checkers + workflow reader/skeptic",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T17:58:33.833Z"
+    }
+  ]
+}

@@ -1,0 +1,666 @@
+{
+  "goal_id": "book_graphtheory",
+  "goal_title": "Book: Graph Theory: What Connections Permit — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in graphtheory became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "graphtheory",
+    "order": 21,
+    "phase": "relation",
+    "title": "Graph Theory: What Connections Permit",
+    "chapters": [
+      "GT_Foundations",
+      "GT_Layout",
+      "GT_Pathfinding",
+      "GT_Network_Analysis",
+      "GT_Connectivity",
+      "GT_Spanning_Trees",
+      "GT_Flow",
+      "GT_Matching"
+    ],
+    "words": 3506,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "GT_Foundations",
+      "GT_Layout",
+      "GT_Pathfinding",
+      "GT_Network_Analysis",
+      "GT_Connectivity",
+      "GT_Spanning_Trees",
+      "GT_Flow",
+      "GT_Matching",
+      "ML_Synthesis (last of machinelearning, for the handover in)",
+      "Euclid_Parallel (first of foundationscrisis, for the handover out)"
+    ],
+    "reading": {
+      "arc": "Eight halls ask one question each of the same kind of object, a set of vertices and permitted connections, and each hall changes the question rather than the object. It opens by separating the graph from the order in which it is visited (two travellers on one tree), then from the positions used to draw it (a spring layout), then shows a route re-found when a connection is withdrawn (a stone sinks). The middle halls turn to what can be measured and claimed: drawn prominence against counted degree, directed reachability and the return path, the cheapest connecting skeleton against each traveller's own trip. The last two halls carry the sequence's real argument: a locally valid step (a forward push, a greedy pair) can close off a better arrangement, and only a procedure that can undo its own choices recovers it. The whole runs on the sequence truth (the same connections host different journeys; what the representation leaves out cannot be recovered by rerouting) and hands Foundations Crisis the distinction that a rule met is not a conclusion proved.",
+      "holds": [
+        "The 'keep it in view' refrain: every hall opens with a short instruction to choose one element (a lamp, a vertex, a stone, an outer point) and hold it while the procedure runs, and the chapter then reads the procedure from that element's side rather than from the animation's confidence.",
+        "The carried object is the traveller's memory. The queue and stack of Foundations are picked up by name in Connectivity ('The stack you met with the two travellers now carries information about a question that remains open during the walk'), and the waiting branch of Foundations returns as the unmatched vertex of Matching.",
+        "Revision as the through-line of the second half: Pathfinding's replanning, Flow's missing reverse residual ('could some of what was sent earlier be taken back?'), Matching's 'Improving the first result requires undoing an accepted edge'. The exit lines chain it: 'Once again, an early acceptable choice may need to be undone.'",
+        "Representation before value: each hall ends by refusing to let its measure stand for worth. Waiting time behind a neat animation, 'an unsupported story about influence', ''Minimum' refers to that sum, not to every traveller's individual journey', 'Maximising a count cannot establish consent, suitability or fairness'.",
+        "One shape for eight chapters: a title, a one-line question, one anchored work, six or seven paragraphs at about 400 words, an exit line naming the next hall's question. The sameness is what makes the sequence feel like one voice; at length it is also a stumble (see the backlog paragraphs)."
+      ],
+      "hall_notes": [
+        {
+          "hall": "GT_Foundations",
+          "words": 405,
+          "note": "Breadth-first and depth-first on a fifteen-lamp tree that alternates by itself; the chapter moves from watching to naming (queue, stack) and closes on waiting time as the ordering rule's consequence. Reads cleanly, but the hall's own readout names the two travellers THE TIDE and THE DIVER and the chapter never does."
+        },
+        {
+          "hall": "GT_Layout",
+          "words": 407,
+          "note": "The connection-versus-coordinate distinction on an eight-vertex cube drawn by springs and repulsion; the exercise of naming an endpoint by its neighbours instead of by left/right is the sequence's best small task. 'Its positions are adjustable' invites a grab nothing answers, and the drawing settles once with no way to re-tangle it."
+        },
+        {
+          "hall": "GT_Pathfinding",
+          "words": 416,
+          "note": "A spark commutes across stepping stones on the engine's AStar3D; a push button sinks a stone on its route, three at most, the oldest resurfacing. The chapter's care about 'the graph the search can use' is exact; it trips by asking the reader to watch a displayed, highlighted, bright route that is only ever the spark's walk."
+        },
+        {
+          "hall": "GT_Network_Analysis",
+          "words": 404,
+          "note": "The one chapter that says openly the room cannot yet do what its title asks, and turns that into a method: count degree yourself against a display whose centralities are assigned. Honest and useful, but its first instruction sends the visitor to 'displayed network measures' that are two inert ball-on-bar meters with no number on them."
+        },
+        {
+          "hall": "GT_Connectivity",
+          "words": 412,
+          "note": "Strongly connected components by Tarjan's single pass; the advice to test a proposed component from more than one start and the 'one additional return connection' observation are strong teaching. It relies on watching the moment components are discharged together, and the run happens once, seconds after the hall builds, with no in-world restart."
+        },
+        {
+          "hall": "GT_Spanning_Trees",
+          "words": 404,
+          "note": "Kruskal on a ten-vertex euclidean graph, accept/reject read as a cycle check; the shift from 'cheap connection' to 'surviving a failure' is the sequence's clearest turn of question. The watch-the-next-edge exercise is undercut by the code: considered edges turn yellow and stay yellow whether they were accepted or rejected."
+        },
+        {
+          "hall": "GT_Flow",
+          "words": 484,
+          "note": "Forward-only push/relabel with capacity, flow, excess and height as four named quantities, and the BLOCKED end state made into the lesson rather than hidden. The most carefully revised chapter; the negative excess printed on the source sphere is the one readout its definitions do not cover."
+        },
+        {
+          "hall": "GT_Matching",
+          "words": 574,
+          "note": "The payoff: a five-cycle with five spokes, ORDER/STEP/RUN/RESET push buttons, three pairs versus five from the same connections, and every number checks against the scan order in the code. The longest and the best chapter; one sentence about the source file name is a developer's aside inside a visitor's room."
+        }
+      ],
+      "stumbles": [
+        "GT_Pathfinding: 'Watch the displayed route change', 'the newly highlighted one', 'a bright route is the spark's calculated route'. No route is drawn; there is the spark's hop-by-hop walk and a readout saying 'route: N stones'. The reader looks for a line and finds none.",
+        "GT_Network_Analysis: 'Then look at the displayed network measures. Ask which of those quantities you could independently check'. The scene's two meters never move and carry no number, and 'an animated number appears authoritative' describes nothing in the hall.",
+        "GT_Layout: 'Its positions are adjustable'. A headset visitor reaches for a vertex; the artifact takes no input at all.",
+        "GT_Layout: 'Keep those relationships in view while the drawing settles'. The layout settles once from the frame the hall builds, and a visitor walking the seven cells from the spawn may meet a drawing that has finished moving, with nothing to restart it.",
+        "GT_Connectivity, GT_Spanning_Trees, GT_Flow: 'Watch the moment several vertices receive one component colour', 'Watch the next edge considered by the display', 'Watch for a PUSH or RELABEL step' each describe a one-shot run whose only restart is a keyboard action. Matching's button panel is the model the other three lack.",
+        "GT_Spanning_Trees: a rejected edge is never marked and the current-edge yellow is never cleared, so after the first rejection 'the next edge considered' is one yellow line among several, and the green tree is drawn as a second line over yellow at the same coordinates.",
+        "GT_Foundations: 'One traveller... The other...' while the readout beside the lamps alternates THE TIDE - BFS and THE DIVER - DFS; the reader has to make the match unaided.",
+        "GT_Flow: the green source sphere reads a negative e: value while the chapter defines excess as 'more has arrived than has yet left'.",
+        "GT_Matching: 'The artifact retains the source name `edmonds_algorithm`'. The visitor sees GREEDY MATCHING on the caption and never a file name; a backticked token in reader prose.",
+        "Sequence-wide: six of eight chapters end on a 'future/proposed extension' paragraph, so the last movement before each exit is a promise about a room that does not exist, and the exits lose their push."
+      ],
+      "keep": [
+        {
+          "hall": "GT_Foundations",
+          "quote": "The waiting branch has not disappeared from the graph. It has changed position in the procedure’s pending work."
+        },
+        {
+          "hall": "GT_Foundations",
+          "quote": "A queue spreads attention across a frontier; a stack carries it into a branch."
+        },
+        {
+          "hall": "GT_Layout",
+          "quote": "If a claim about the network disappears when the drawing rotates or rearranges, ask whether the claim belonged to the graph or to its presentation."
+        },
+        {
+          "hall": "GT_Pathfinding",
+          "quote": "Search cannot use an option the representation never supplies."
+        },
+        {
+          "hall": "GT_Connectivity",
+          "quote": "A long and fragile return journey counts as a return journey under this definition."
+        },
+        {
+          "hall": "GT_Spanning_Trees",
+          "quote": "Redundancy changes meaning when the question changes from cheap connection to surviving a failure."
+        },
+        {
+          "hall": "GT_Flow",
+          "quote": "It leaves us with a question: could some of what was sent earlier be taken back?"
+        },
+        {
+          "hall": "GT_Matching",
+          "quote": "Nobody has gained a new connection. We changed which possibility was considered first."
+        }
+      ],
+      "handover_in": "ML_Synthesis exits: 'Graph theory will give us another representation of relations. Instead of asking how far points lie from a centre, we will ask which points are connected and what those connections permit.' GT_Foundations opens: 'Can two travellers obey the same connections and encounter the graph in different orders?' The words 'connections' and 'permit' carry straight across (the sequence is titled 'What Connections Permit'), and the machine-learning habit of separating the operation from its interpretation ('A detector's name cannot supply evidence that its flags are useful') is exactly the habit graph theory applies to 'important', 'minimum' and 'maximum'. Registers match: both chapters are about 400 words on the same template. Clean.",
+      "handover_out": "GT_Matching exits: 'The foundations sequence will question what a formal system can establish. Carry one distinction forward: a procedure meeting its local rule is not automatically a proof of its strongest advertised conclusion.' Euclid_Parallel opens on a plaque counter wrapping (`(current_postulate + 1) % 5`) and reaches 'A rule can feel inevitable long before we have established that it follows', so the thread (rule met is not conclusion proved) lands. The register breaks hard, though: Euclid_Parallel is 1,709 words against Matching's 574, seven numbered sections with headings, five gdscript excerpts, draw tags, a two-voice dialogue ('Fair — and let's say what the array does about it') and a source-editing aside ('In the source, move Line3's offset out to 0.4'). The visitor steps from eight uniform rooms into an annotated source reading. The GT exit line does its job; one concrete foothold (the plaque, the gold) would ease the jump, and the rest is the next sequence's to absorb.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_graphtheory.001",
+      "title": "Rejected edges are never marked; the yellow is never cleared",
+      "spec": "[encounter] GT_Spanning_Trees\nQuote: “Watch the next edge considered by the display. Before it is accepted or rejected, trace whether its two endpoints are already connected through accepted edges.”\nWhy: step_kruskal paints the considered edge yellow in place and never restores it; the rejected branch's highlight call is commented out and no red is ever applied, so after the first rejection the reader cannot tell 'the next edge considered' from earlier rejects, and the accepted tree is drawn as a second green line over a yellow one at identical coordinates. The chapter's alternating checks (rejected: trace the cycle; accepted: name the two groups) need three visible states and the hall shows one.\nDo: In step_kruskal, before highlighting the next edge restore the previous edge's colour, and colour a rejected edge with the existing rejected_edge_color export (which is declared and never used). Six lines in one function; then the hall shows what the chapter reads: yellow now, green kept, red refused.\nEvidence: algorithms/graphtheory/minimumspanningtree/mst_visualization.gd:861 (highlight_current_edge called), :873-878 (rejected branch; '#highlight_rejected_edge' commented out, no such function exists), :928-937 (mutates the edge material in place, no reset anywhere), :941-953 (green line added at the same from/to), :96 (rejected_edge_color export, unused). Registry commons/artifacts/registry/algorithms_misc.json:5343 description claims 'rejected cycle-forming edges glow red', which the code does not do.\nFile: commons/maps/GT_Spanning_Trees/final.md",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Spanning_Trees"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "GT_Spanning_Trees",
+      "quote": "Watch the next edge considered by the display. Before it is accepted or rejected, trace whether its two endpoints are already connected through accepted edges.",
+      "why": "Holds as stated; only the registry line cited for the description is off by 14 lines.",
+      "proposal": "As proposed; cite algorithms_misc.json:5357 for the description claim.",
+      "evidence": "algorithms/graphtheory/minimumspanningtree/mst_visualization.gd:861 (highlight_current_edge called), :873-878 (rejected branch; '#highlight_rejected_edge' commented out, no such function exists), :928-937 (mutates the edge material in place, no reset anywhere), :941-953 (green line added at the same from/to), :96 (rejected_edge_color export, unused). Registry commons/artifacts/registry/algorithms_misc.json:5343 description claims 'rejected cycle-forming edges glow red', which the code does not do.",
+      "review": "amended by a code checker (cited files only): mst_visualization.gd:861 highlight_current_edge(edge); :873-878 rejected branch with `#highlight_rejected_edge` commented out and no such function; :928-937 sets albedo/emission in place, no restore; :941-953 create_mst_edge_visualization adds a second line; :96 rejected_edge_color declared, only occurrence. Registry: the token key is algorithms_misc.json:5343, the 'rejected cycle-forming edges glow red' description is at :5357.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.002",
+      "title": "'Displayed network measures' points at meters that never move",
+      "spec": "[prose] GT_Network_Analysis\nQuote: “Then look at the displayed network measures. Ask which of those quantities you could independently check by following the connections.”\nWhy: NetworkAnalysis.gd builds no Label3D and contains no get_node call, so it never touches the scene's ClusteringMeter and ConnectivityMeter; the two numbers it computes (clustering_coefficient, connectivity_index) are exposed only through getters and never rendered. The visitor sees two static ball-on-bar meters, two green cubes and a dark bar where a title would be, and there is no 'quantity' to check and no 'animated number' (paragraph 3) to distrust.\nDo: Rewrite paragraph 1 to name what is visible (size, colour, orbit speed, glow: 'the large red vertices orbit slowly and pulse harder') and paragraph 4's 'its readouts' to 'its two meters, which do not move', so the chapter's honest claim ('They are not all calculated from the displayed edges') is made against things the reader can find.\nEvidence: algorithms/graphtheory/network_analysis/NetworkAnalysis.gd:9 (identity: 'Label3D [missing]'), :130-139 (_process animates nodes, edges, particles, communities only), :133-134 (measures computed), :469-476 (getters only, no display); algorithms/graphtheory/network_analysis/network_analysis.tscn nodes NetworkMetrics/ClusteringMeter and ConnectivityMeter (static CSGBox3D + CSGSphere3D, no script), NetworkLabel (a 4 x 0.3 x 0.3 CSGBox3D). doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md, Network Analysis row: 'Its displayed measures still require implementation work'.\nFile: commons/maps/GT_Network_Analysis/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Network_Analysis"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "GT_Network_Analysis",
+      "quote": "Then look at the displayed network measures. Ask which of those quantities you could independently check by following the connections.",
+      "why": "NetworkAnalysis.gd builds no Label3D and contains no get_node call, so it never touches the scene's ClusteringMeter and ConnectivityMeter; the two numbers it computes (clustering_coefficient, connectivity_index) are exposed only through getters and never rendered. The visitor sees two static ball-on-bar meters, two green cubes and a dark bar where a title would be, and there is no 'quantity' to check and no 'animated number' (paragraph 3) to distrust.",
+      "proposal": "Rewrite paragraph 1 to name what is visible (size, colour, orbit speed, glow: 'the large red vertices orbit slowly and pulse harder') and paragraph 4's 'its readouts' to 'its two meters, which do not move', so the chapter's honest claim ('They are not all calculated from the displayed edges') is made against things the reader can find.",
+      "evidence": "algorithms/graphtheory/network_analysis/NetworkAnalysis.gd:9 (identity: 'Label3D [missing]'), :130-139 (_process animates nodes, edges, particles, communities only), :133-134 (measures computed), :469-476 (getters only, no display); algorithms/graphtheory/network_analysis/network_analysis.tscn nodes NetworkMetrics/ClusteringMeter and ConnectivityMeter (static CSGBox3D + CSGSphere3D, no script), NetworkLabel (a 4 x 0.3 x 0.3 CSGBox3D). doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md, Network Analysis row: 'Its displayed measures still require implementation work'.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.003",
+      "title": "No route is displayed; only the spark walks it",
+      "spec": "[prose] GT_Pathfinding\nQuote: “Watch the displayed route change and see whether the spark can still reach the opposite bank.”\nWhy: impatient_river draws water, two banks, thirteen stones, one glowing orb and a text readout ('route: N stones'); _route is a PackedVector3Array the spark walks and is never rendered. 'Displayed route' (paragraph 1), 'the newly highlighted one' (paragraph 3) and 'a bright route' (paragraph 4) send the reader looking for a line that does not exist, in the hall whose whole point is what the representation does and does not supply.\nDo: Replace the three phrases with the spark's crossing: 'Watch where the spark goes on its next crossing'; 'compare the crossing you remember with the one it now makes'; 'the spark's hops are its calculated route, not a promise your own body can walk'. Mention the readout's stone count as the one number that changes.\nEvidence: commons/artifacts/impatient_river/impatient_river.gd:124-134 (_replan sets _route and the readout text only), :136-153 (_process moves the orb along _route), :111-120 (the spark is one sphere), :212-228 (plate and readout); commons/artifacts/impatient_river/impatient_river.tscn:5-6 (bare root with the script); commons/artifacts/_embodied/embodied_prop.gd has no route or line drawing.\nFile: commons/maps/GT_Pathfinding/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Pathfinding"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "GT_Pathfinding",
+      "quote": "Watch the displayed route change and see whether the spark can still reach the opposite bank.",
+      "why": "impatient_river draws water, two banks, thirteen stones, one glowing orb and a text readout ('route: N stones'); _route is a PackedVector3Array the spark walks and is never rendered. 'Displayed route' (paragraph 1), 'the newly highlighted one' (paragraph 3) and 'a bright route' (paragraph 4) send the reader looking for a line that does not exist, in the hall whose whole point is what the representation does and does not supply.",
+      "proposal": "Replace the three phrases with the spark's crossing: 'Watch where the spark goes on its next crossing'; 'compare the crossing you remember with the one it now makes'; 'the spark's hops are its calculated route, not a promise your own body can walk'. Mention the readout's stone count as the one number that changes.",
+      "evidence": "commons/artifacts/impatient_river/impatient_river.gd:124-134 (_replan sets _route and the readout text only), :136-153 (_process moves the orb along _route), :111-120 (the spark is one sphere), :212-228 (plate and readout); commons/artifacts/impatient_river/impatient_river.tscn:5-6 (bare root with the script); commons/artifacts/_embodied/embodied_prop.gd has no route or line drawing.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.004",
+      "title": "A one-shot run with no in-world restart",
+      "spec": "[vr] GT_Connectivity\nQuote: “Keep your proposed group in mind while the traversal assigns colours to completed components.”\nWhy: Tarjan auto-starts when the hall builds, steps every 0.3 s and stops at 'Complete!' with no loop; the only restart is the ui_accept action in _input, which a headset visitor cannot press. A visitor who arrives after the run sees a finished colouring and can follow neither this instruction nor 'Watch the moment several vertices receive one component colour'. The same one-shot pattern holds in GT_Spanning_Trees (SPACE/R keys) and GT_Flow (ui_accept); Matching's button panel is the model.\nDo: Give tarjan_algorithm (then mst_visualization and push_relabel) the lesson_controls push-button panel edmonds_algorithm already builds (RESET, RUN / PAUSE, STEP), gated by a #lesson_controls:on token on the map, so 'watch the moment' is something the visitor can cause, and add one clause to the chapter naming the button.\nEvidence: algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd:145-146 (auto_start in _ready), :561-564 (algorithm_running = false at completion, no restart), :664-671 (_input: ui_accept / ui_cancel only), :19-20 (animation_speed 0.3); algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd:703-739 (_create_lesson_controls, VR push_button.tscn instances); mst_visualization.gd:1072-1093 (KEY_SPACE/KEY_R); push_relabel.gd:1051-1058. Map GT_Connectivity: tarjan_algorithm at (3,2), spawn at (11,8), about ten cells apart.\nFile: commons/maps/GT_Connectivity/final.md",
+      "effort": "half-day",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Connectivity"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "GT_Connectivity",
+      "quote": "Keep your proposed group in mind while the traversal assigns colours to completed components.",
+      "why": "Tarjan auto-starts when the hall builds, steps every 0.3 s and stops at 'Complete!' with no loop; the only restart is the ui_accept action in _input, which a headset visitor cannot press. A visitor who arrives after the run sees a finished colouring and can follow neither this instruction nor 'Watch the moment several vertices receive one component colour'. The same one-shot pattern holds in GT_Spanning_Trees (SPACE/R keys) and GT_Flow (ui_accept); Matching's button panel is the model.",
+      "proposal": "Give tarjan_algorithm (then mst_visualization and push_relabel) the lesson_controls push-button panel edmonds_algorithm already builds (RESET, RUN / PAUSE, STEP), gated by a #lesson_controls:on token on the map, so 'watch the moment' is something the visitor can cause, and add one clause to the chapter naming the button.",
+      "evidence": "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd:145-146 (auto_start in _ready), :561-564 (algorithm_running = false at completion, no restart), :664-671 (_input: ui_accept / ui_cancel only), :19-20 (animation_speed 0.3); algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd:703-739 (_create_lesson_controls, VR push_button.tscn instances); mst_visualization.gd:1072-1093 (KEY_SPACE/KEY_R); push_relabel.gd:1051-1058. Map GT_Connectivity: tarjan_algorithm at (3,2), spawn at (11,8), about ten cells apart.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.005",
+      "title": "'Its positions are adjustable' promises a grab",
+      "spec": "[prose] GT_Layout\nQuote: “The default graph has eight vertices joined in a cube’s connection pattern. Its positions are adjustable.”\nWhy: The artifact accepts no input: the identity lists slider and push_button as missing, apply_grid_config reads only map-config keys, and positions are set by the force step each frame. A headset visitor reads 'adjustable' as 'by me' and reaches for a vertex that does not respond.\nDo: 'Its positions are not fixed: connected vertices pull together as if on springs, every pair of vertices pushes apart, and damping...' (fold the sentence into the one that follows).\nEvidence: algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd:10 (needs: slider_horizontal [missing]; push_button [missing]), :260-276 (_process integrates forces every frame), :440-461 (apply_grid_config reads graph, layout_seed, warmup_steps, time_scale only).\nFile: commons/maps/GT_Layout/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Layout"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "GT_Layout",
+      "quote": "The default graph has eight vertices joined in a cube’s connection pattern. Its positions are adjustable.",
+      "why": "The artifact accepts no input: the identity lists slider and push_button as missing, apply_grid_config reads only map-config keys, and positions are set by the force step each frame. A headset visitor reads 'adjustable' as 'by me' and reaches for a vertex that does not respond.",
+      "proposal": "'Its positions are not fixed: connected vertices pull together as if on springs, every pair of vertices pushes apart, and damping...' (fold the sentence into the one that follows).",
+      "evidence": "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd:10 (needs: slider_horizontal [missing]; push_button [missing]), :260-276 (_process integrates forces every frame), :440-461 (apply_grid_config reads graph, layout_seed, warmup_steps, time_scale only).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.006",
+      "title": "The two stills the chapter's numbers are asking for",
+      "spec": "[figure] GT_Matching\nQuote: “There are three pairs, with four outer points unpaired.”\nWhy: The chapter's argument is a comparison of two end states of one graph, and the 2026-09-20 review already photographed both from the same museum camera (cycle first, spokes first). Twenty-eight chapters in the book now carry figures and none of the eight graph-theory chapters does; a reader away from the headset has nothing to see at the sequence's payoff.\nDo: Place the two existing captures after paragraph 7 under one caption: 'Same ten points, same ten connections. Cycle first: three pairs, four waiting. Spokes first: five pairs.'\nEvidence: doc/book/iterations/2026-09-20-graphtheory-review/matching-cycle-first.png and matching-spokes-first.png (SUMMARY.md: 'two states of the revised artifact from the same museum camera'); grep '![' over commons/maps/*/final.md: 28 of 213 chapters carry figures, none under GT_*; edmonds_algorithm.gd:252-257 (cycle edges then spokes) and :671-675 (_set_scan_order) reproduce the 3-pair / 5-pair outcomes the chapter states.\nFile: commons/maps/GT_Matching/final.md",
+      "effort": "1h",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Matching"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "GT_Matching",
+      "quote": "There are three pairs, with four outer points unpaired.",
+      "why": "The chapter's argument is a comparison of two end states of one graph, and the 2026-09-20 review already photographed both from the same museum camera (cycle first, spokes first). Twenty-eight chapters in the book now carry figures and none of the eight graph-theory chapters does; a reader away from the headset has nothing to see at the sequence's payoff.",
+      "proposal": "Place the two existing captures after paragraph 7 under one caption: 'Same ten points, same ten connections. Cycle first: three pairs, four waiting. Spokes first: five pairs.'",
+      "evidence": "doc/book/iterations/2026-09-20-graphtheory-review/matching-cycle-first.png and matching-spokes-first.png (SUMMARY.md: 'two states of the revised artifact from the same museum camera'); grep '![' over commons/maps/*/final.md: 28 of 213 chapters carry figures, none under GT_*; edmonds_algorithm.gd:252-257 (cycle edges then spokes) and :671-675 (_set_scan_order) reproduce the 3-pair / 5-pair outcomes the chapter states.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.007",
+      "title": "Every vertex here has exactly three neighbours; say so",
+      "spec": "[prose] GT_Layout\nQuote: “Now find a vertex that looks central. Is it central in the arrangement, unusually well connected, or simply easy to see from where you stand?”\nWhy: The default graph is the 3-cube: 3-regular and vertex-transitive, so no vertex is better connected than any other. That is the chapter's thesis made checkable in one count, and the reader is left to discover or miss it.\nDo: Add one sentence after the question: 'Count: every vertex in this graph has exactly three neighbours, so whatever looked central was the drawing's doing.'\nEvidence: algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd:21-22 ('the 3-cube Q3 ... 3-regular and vertex-transitive'), :121-124 (twelve edges over eight nodes, each node in exactly three), :49 (node_count 8).\nFile: commons/maps/GT_Layout/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Layout"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "GT_Layout",
+      "quote": "Now find a vertex that looks central. Is it central in the arrangement, unusually well connected, or simply easy to see from where you stand?",
+      "why": "The default graph is the 3-cube: 3-regular and vertex-transitive, so no vertex is better connected than any other. That is the chapter's thesis made checkable in one count, and the reader is left to discover or miss it.",
+      "proposal": "Add one sentence after the question: 'Count: every vertex in this graph has exactly three neighbours, so whatever looked central was the drawing's doing.'",
+      "evidence": "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd:21-22 ('the 3-cube Q3 ... 3-regular and vertex-transitive'), :121-124 (twelve edges over eight nodes, each node in exactly three), :49 (node_count 8).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.008",
+      "title": "Name the colours the hall uses for the stack and the low-link",
+      "spec": "[prose] GT_Connectivity\nQuote: “Each newly visited vertex receives a discovery number and remains on a stack while its group is unresolved. Another value records how far back the current exploration can connect through the relevant routes.”\nWhy: The hall shows three vertex states (yellow: being visited; orange: finished but still waiting on the stack; component colour: resolved) and turns a cycle-closing edge red at the exact moment the low-link is lowered. The chapter's abstract 'another value' has a visible event and never points at it; discovery numbers appear only in the caption text, not on the vertices.\nDo: Add: 'A vertex turns yellow when visited and orange when finished but still waiting on the stack; an edge that closes back onto a waiting vertex turns red, and that is the moment the low-link is lowered.'\nEvidence: algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd:89-99 (vertex_color blue, visited_color orange, current_color yellow, back_edge_color red, cross_edge_color green), :579 (current), :595-603 (tree edge white; back edge red with low_link update; cross edge green), :628 (visited_color when not a root), :580 (disc shown only in the caption), :84-85 (show_discovery_time / show_low_link exports never read).\nFile: commons/maps/GT_Connectivity/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Connectivity"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "GT_Connectivity",
+      "quote": "Each newly visited vertex receives a discovery number and remains on a stack while its group is unresolved. Another value records how far back the current exploration can connect through the relevant routes.",
+      "why": "The hall shows three vertex states (yellow: being visited; orange: finished but still waiting on the stack; component colour: resolved) and turns a cycle-closing edge red at the exact moment the low-link is lowered. The chapter's abstract 'another value' has a visible event and never points at it; discovery numbers appear only in the caption text, not on the vertices.",
+      "proposal": "Add: 'A vertex turns yellow when visited and orange when finished but still waiting on the stack; an edge that closes back onto a waiting vertex turns red, and that is the moment the low-link is lowered.'",
+      "evidence": "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd:89-99 (vertex_color blue, visited_color orange, current_color yellow, back_edge_color red, cross_edge_color green), :579 (current), :595-603 (tree edge white; back edge red with low_link update; cross edge green), :628 (visited_color when not a root), :580 (disc shown only in the caption), :84-85 (show_discovery_time / show_low_link exports never read).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.009",
+      "title": "The source's negative excess",
+      "spec": "[prose] GT_Flow\nQuote: “Excess records a temporary imbalance at a vertex: more has arrived than has yet left.”\nWhy: initialize_preflow subtracts every saturated capacity from excess[source], and the same e: label is printed on the source sphere, so the first readout the visitor meets on the green sphere is a negative number the definition does not cover.\nDo: Add after the definition: 'The source shows a negative excess: it is the total it has sent out and will not receive back.'\nEvidence: algorithms/graphtheory/push_relabel/push_relabel.gd:891 (excess[source] -= flow), :1017-1022 (h: and e: labels written for every node, source included), :663-664 (source sphere is the green one).\nFile: commons/maps/GT_Flow/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Flow"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "GT_Flow",
+      "quote": "Excess records a temporary imbalance at a vertex: more has arrived than has yet left.",
+      "why": "initialize_preflow subtracts every saturated capacity from excess[source], and the same e: label is printed on the source sphere, so the first readout the visitor meets on the green sphere is a negative number the definition does not cover.",
+      "proposal": "Add after the definition: 'The source shows a negative excess: it is the total it has sent out and will not receive back.'",
+      "evidence": "algorithms/graphtheory/push_relabel/push_relabel.gd:891 (excess[source] -= flow), :1017-1022 (h: and e: labels written for every node, source included), :663-664 (source sphere is the green one).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.010",
+      "title": "Name the tide and the diver as the readout does",
+      "spec": "[prose] GT_Foundations\nQuote: “One traveller explores the nearest layer of neighbours before moving further out. The other follows a branch deeper before returning to alternatives.”\nWhy: The readout beside the lamps alternates 'THE TIDE - BFS' and 'THE DIVER - DFS' and the plate uses the same names; the chapter's 'one' and 'the other' make the reader do the matching, and the names are exactly the images the chapter later reaches for ('spreads attention across a frontier', 'carries it into a branch').\nDo: 'One traveller, the hall calls it the tide, explores the nearest layer of neighbours before moving further out. The other, the diver, follows a branch deeper before returning to alternatives.'\nEvidence: commons/artifacts/two_travelers/two_travelers.gd:156-158 (readout text 'THE TIDE - BFS' / 'THE DIVER - DFS'), :169-170 (plate text naming both), :134-139 (the two alternate automatically).\nFile: commons/maps/GT_Foundations/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Foundations"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "GT_Foundations",
+      "quote": "One traveller explores the nearest layer of neighbours before moving further out. The other follows a branch deeper before returning to alternatives.",
+      "why": "The readout beside the lamps alternates 'THE TIDE - BFS' and 'THE DIVER - DFS' and the plate uses the same names; the chapter's 'one' and 'the other' make the reader do the matching, and the names are exactly the images the chapter later reaches for ('spreads attention across a frontier', 'carries it into a branch').",
+      "proposal": "'One traveller, the hall calls it the tide, explores the nearest layer of neighbours before moving further out. The other, the diver, follows a branch deeper before returning to alternatives.'",
+      "evidence": "commons/artifacts/two_travelers/two_travelers.gd:156-158 (readout text 'THE TIDE - BFS' / 'THE DIVER - DFS'), :169-170 (plate text naming both), :134-139 (the two alternate automatically).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.011",
+      "title": "Six chapters close on a backlog paragraph",
+      "spec": "[structure] GT_Foundations (also GT_Layout, GT_Pathfinding, GT_Network_Analysis, GT_Spanning_Trees, GT_Flow)\nQuote: “A proposed extension could let the group choose one urgent destination and compare the waiting time under each rule.”\nWhy: The last movement before the exit is, six times in eight, a description of a room that does not exist ('A future extension could expose the search frontier', 'For a proposed extension, let a group spend the cost of one extra edge', 'The next useful experiment would expose a case'). The reader learns to discount the room that does exist, and the exit lines lose their push. Matching, which replaced its proposed experiment with one the visitor can perform, reads best for exactly this reason.\nDo: Keep the proposal where it is the chapter's honest confession (Network Analysis, Flow); in Foundations, Layout, Pathfinding and Spanning Trees fold it into the exercise as a question the visitor can already ask ('Which destination would you make urgent, and under which rule does it wait longer?') or cut it.\nEvidence: commons/maps/GT_Foundations/final.md ¶7; GT_Layout/final.md ¶7 ('For a future comparison, hold the graph fixed'); GT_Pathfinding/final.md ¶7 ('A future extension could expose the search frontier'); GT_Network_Analysis/final.md ¶7 ('A stronger version of the room would calculate'); GT_Spanning_Trees/final.md ¶7 ('For a proposed extension'); GT_Flow/final.md ¶8 ('The next useful experiment would'). doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md, Matching row: 'Replace the proposed experiment with an encounter the visitor can perform.'\nFile: commons/maps/GT_Foundations (also GT_Layout, GT_Pathfinding, GT_Network_Analysis, GT_Spanning_Trees, GT_Flow)/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Foundations (also GT_Layout, GT_Pathfinding, GT_Network_Analysis, GT_Spanning_Trees, GT_Flow)"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "GT_Foundations (also GT_Layout, GT_Pathfinding, GT_Network_Analysis, GT_Spanning_Trees, GT_Flow)",
+      "quote": "A proposed extension could let the group choose one urgent destination and compare the waiting time under each rule.",
+      "why": "The last movement before the exit is, six times in eight, a description of a room that does not exist ('A future extension could expose the search frontier', 'For a proposed extension, let a group spend the cost of one extra edge', 'The next useful experiment would expose a case'). The reader learns to discount the room that does exist, and the exit lines lose their push. Matching, which replaced its proposed experiment with one the visitor can perform, reads best for exactly this reason.",
+      "proposal": "Keep the proposal where it is the chapter's honest confession (Network Analysis, Flow); in Foundations, Layout, Pathfinding and Spanning Trees fold it into the exercise as a question the visitor can already ask ('Which destination would you make urgent, and under which rule does it wait longer?') or cut it.",
+      "evidence": "commons/maps/GT_Foundations/final.md ¶7; GT_Layout/final.md ¶7 ('For a future comparison, hold the graph fixed'); GT_Pathfinding/final.md ¶7 ('A future extension could expose the search frontier'); GT_Network_Analysis/final.md ¶7 ('A stronger version of the room would calculate'); GT_Spanning_Trees/final.md ¶7 ('For a proposed extension'); GT_Flow/final.md ¶8 ('The next useful experiment would'). doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md, Matching row: 'Replace the proposed experiment with an encounter the visitor can perform.'",
+      "review": "unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.012",
+      "title": "No way to re-tangle the drawing",
+      "spec": "[encounter] GT_Layout\nQuote: “Choose one vertex and identify two of its connected neighbours. Keep those relationships in view while the drawing settles.”\nWhy: The layout starts jittered and settles once from the frame the hall builds (velocity is damped by 0.9 every frame); the visitor spawns seven cells away and there is no control to start it again, so the chapter's first and third paragraphs may describe motion the visitor never sees. The 2026-09-20 review already named 'a repeatable SAME GRAPH / NEW START control' as the open task, and reset_simulation() exists in the script but is reachable from nowhere in the hall.\nDo: A push button built the way impatient_river builds one, wired to reset_simulation(), plus one clause in the chapter: 'press to start it again from a new tangle'.\nEvidence: algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd:78-82 (_ready: create once), :324-330 (damping 0.9 per frame), :408-426 (reset_simulation, never called), :10 (no button); commons/artifacts/impatient_river/impatient_river.gd:157-178 (a push button in twenty lines); map GT_Layout: force_directed_layout at (4,5), spawn at (9,10); doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md, Layout row.\nFile: commons/maps/GT_Layout/final.md",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Layout"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "GT_Layout",
+      "quote": "Choose one vertex and identify two of its connected neighbours. Keep those relationships in view while the drawing settles.",
+      "why": "The layout starts jittered and settles once from the frame the hall builds (velocity *= 0.9 every frame, warmup_steps 0); no control in the hall restarts it. reset_simulation() exists and is called from apply_grid_config on a graph/layout_seed change, but GT_Layout's token carries no config key, so nothing in this hall reaches it. The map has both an 's' (2,2) and an 'sp' (9,10) cell; from either the visitor may arrive after the drawing has settled.",
+      "proposal": "A push button built the way impatient_river builds one (impatient_river.gd:157-178), wired to reset_simulation(), plus one clause in the chapter: 'press to start it again from a new tangle'.",
+      "evidence": "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd:78-82 (_ready: create once), :324-330 (damping 0.9 per frame), :408-426 (reset_simulation, never called), :10 (no button); commons/artifacts/impatient_river/impatient_river.gd:157-178 (a push button in twenty lines); map GT_Layout: force_directed_layout at (4,5), spawn at (9,10); doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md, Layout row.",
+      "review": "amended by a code checker (cited files only): Holds in effect, two corrections. (1) reset_simulation() is not 'never called': ForceDirectedLayout.gd:440-461 apply_grid_config calls it (line 459) when a 'graph' or 'layout_seed' config key changes - but the GT_Layout token 'force_directed_layout:0:0:0.6' at (4,5) passes no config key (registry algorithms_misc.json:3440 says the same of all 9 placements), so it is unreachable from this hall, and there is still no button (:10 'push_button [missing]'). (2) The map has two spawn-like cells: 's' at (2,2) about 3-4 cells from the artifact, and 'sp' at (9,10) about 7 cells away; the 'seven cells' figure assumes 'sp' is the live spawn. Damping 0.9 per frame (:53, :330), warmup_steps default 0 (:40) and _ready creating once (:78-82) all check out; impatient_river.gd:157-178 builds the button as described.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.013",
+      "title": "The source-name sentence is a developer's aside",
+      "spec": "[footnote] GT_Matching\nQuote: “The artifact retains the source name `edmonds_algorithm`, but the display runs greedy matching; Edmonds’ augmenting paths and blossom handling remain a further construction.”\nWhy: The visitor sees the caption GREEDY MATCHING and a status plate, never a file name; a backticked token in reader prose is the manual leaking into the chapter. The honest content (this is greedy, not Edmonds) belongs; the file name does not.\nDo: Keep 'the display runs greedy matching; Edmonds' augmenting paths and blossom handling remain a further construction' and move the file-name clause to a footnote, or cut it.\nEvidence: algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd:346 (info caption 'GREEDY MATCHING'), :14 ('the legacy resource name is retained'); commons/artifacts/registry/algorithms_misc.json:2884-2895 (name 'Greedy Matching: Order and Pairing').\nFile: commons/maps/GT_Matching/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Matching"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "GT_Matching",
+      "quote": "The artifact retains the source name `edmonds_algorithm`, but the display runs greedy matching; Edmonds’ augmenting paths and blossom handling remain a further construction.",
+      "why": "The visitor sees the caption GREEDY MATCHING and a status plate, never a file name; a backticked token in reader prose is the manual leaking into the chapter. The honest content (this is greedy, not Edmonds) belongs; the file name does not.",
+      "proposal": "Keep 'the display runs greedy matching; Edmonds' augmenting paths and blossom handling remain a further construction' and move the file-name clause to a footnote, or cut it.",
+      "evidence": "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd:346 (info caption 'GREEDY MATCHING'), :14 ('the legacy resource name is retained'); commons/artifacts/registry/algorithms_misc.json:2884-2895 (name 'Greedy Matching: Order and Pairing').",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.014",
+      "title": "Give the exit one concrete foothold in the next room",
+      "spec": "[handover] GT_Matching\nQuote: “The foundations sequence will question what a formal system can establish.”\nWhy: The next chapter is 1,709 words of numbered sections, gdscript excerpts and a two-voice dialogue, and it opens on a plaque whose fifth sentence is coloured gold before it is read. The GT exit is abstract at the exact point the register changes; naming the plaque would let the reader carry 'a rule met is not a conclusion proved' straight onto the first thing they see.\nDo: 'The next hall keeps five sentences on a plaque and colours one of them gold before you have read it; ask there, as here, whether a rule that is followed has been proved.'\nEvidence: commons/maps/Euclid_Parallel/final.md:1-9 (NEXT wraps modulo five), :37 ('the room has told you which postulate matters. The gold arrives ahead of the argument'); word counts 574 (GT_Matching) against 1,709 (Euclid_Parallel); GT chapters carry no headings, code or draw tags.\nFile: commons/maps/GT_Matching/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Matching"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "GT_Matching",
+      "quote": "The foundations sequence will question what a formal system can establish.",
+      "why": "The next chapter is 1,709 words of numbered sections, gdscript excerpts and a two-voice dialogue, and it opens on a plaque whose fifth sentence is coloured gold before it is read. The GT exit is abstract at the exact point the register changes; naming the plaque would let the reader carry 'a rule met is not a conclusion proved' straight onto the first thing they see.",
+      "proposal": "'The next hall keeps five sentences on a plaque and colours one of them gold before you have read it; ask there, as here, whether a rule that is followed has been proved.'",
+      "evidence": "commons/maps/Euclid_Parallel/final.md:1-9 (NEXT wraps modulo five), :37 ('the room has told you which postulate matters. The gold arrives ahead of the argument'); word counts 574 (GT_Matching) against 1,709 (Euclid_Parallel); GT chapters carry no headings, code or draw tags.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_graphtheory.015",
+      "title": "Both doors of GT_Foundations are sealed by Konigsberg's solid landmasses at 0.6",
+      "spec": "KonigsbergBridge:0:0:0.6 at (6,6) puts Kneiphof (solid CSG cylinder r 2.4 m, y 0.90..1.50) across the north doorway x 3.6..8.4 / z -3.6..1.2 and Vorstadt across the south doorway z 10.8..15.6; seven solid bridge decks cross the hall at y 1.1..2.2, three of them in the north door at 1.35-1.74 m. The museum's walk map reads a 9-cell registry footprint and cannot see CSG collision. Nobody has walked the hall.\n\nProposal: Decide Konigsberg's placement: a model on a plinth at a small scale (registry says player_position 'above'), or a hall-aware build. No scale >= 0.04 centred at (6,6) keeps the 50x30 river off the spine at x 5; overhead arches with the river under the floor need s >= 0.85, which does not fit 13x12. Then walk it from the seam (--em-map=GT_Foundations).",
+      "effort": "half-day",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Foundations"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "Walk the hall from the seam in the museum (--em-map=GT_Foundations) and re-read the candidate paragraph the task names.",
+      "kind": "vr",
+      "hall": "GT_Foundations",
+      "quote": "",
+      "why": "KonigsbergBridge:0:0:0.6 at (6,6) puts Kneiphof (solid CSG cylinder r 2.4 m, y 0.90..1.50) across the north doorway x 3.6..8.4 / z -3.6..1.2 and Vorstadt across the south doorway z 10.8..15.6; seven solid bridge decks cross the hall at y 1.1..2.2, three of them in the north door at 1.35-1.74 m. The museum's walk map reads a 9-cell registry footprint and cannot see CSG collision. Nobody has walked the hall.",
+      "proposal": "Decide Konigsberg's placement: a model on a plinth at a small scale (registry says player_position 'above'), or a hall-aware build. No scale >= 0.04 centred at (6,6) keeps the 50x30 river off the spine at x 5; overhead arches with the river under the floor need s >= 0.85, which does not fit 13x12. Then walk it from the seam (--em-map=GT_Foundations).",
+      "evidence": "doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot/as_built_probe.txt; commons/testing/probe_gt_foundations_bodies.gd; algorithms/graphtheory/graphspace3d/konigsberg3d.gd:206-209,501-527,733",
+      "review": "by hand: probe report + cited lines read in the pilot",
+      "notes": "",
+      "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot)",
+      "created_at": "2026-09-24",
+      "event": "collision",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_graphtheory.016",
+      "title": "Three graph cities stand through the hall's walls; the synthesis stand's hero is a 94 m lattice",
+      "spec": "synthesis_stand#subject:graphspace#mode:hero at (5,1) pins the lattice variant at full size (94 x 94 m; _build_hero never scales): a solid portal frame stands on the spine at (5,1), Room_6's wall runs along x 6 across the north door, a second portal cuts the right column at (11,7). graphspace:0:0:0.6 at (2,2) puts Room_0's solid shell on the travellers' block around two_travelers. graphspace3d at (11,5) has 283 of 296 meshes outside the hall and a solid portal over the stub's end.\n\nProposal: graphspace and graphspace3d are levels to walk, not exhibits to stand in a 13 m hall: give the stand a display scale (or a subject that fits), and either drop the two cities from this map or place them at a model scale on the islands. The chapter does not depend on them.",
+      "effort": "half-day",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Foundations"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "Walk the hall from the seam in the museum (--em-map=GT_Foundations) and re-read the candidate paragraph the task names.",
+      "kind": "vr",
+      "hall": "GT_Foundations",
+      "quote": "",
+      "why": "synthesis_stand#subject:graphspace#mode:hero at (5,1) pins the lattice variant at full size (94 x 94 m; _build_hero never scales): a solid portal frame stands on the spine at (5,1), Room_6's wall runs along x 6 across the north door, a second portal cuts the right column at (11,7). graphspace:0:0:0.6 at (2,2) puts Room_0's solid shell on the travellers' block around two_travelers. graphspace3d at (11,5) has 283 of 296 meshes outside the hall and a solid portal over the stub's end.",
+      "proposal": "graphspace and graphspace3d are levels to walk, not exhibits to stand in a 13 m hall: give the stand a display scale (or a subject that fits), and either drop the two cities from this map or place them at a model scale on the islands. The chapter does not depend on them.",
+      "evidence": "doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot/as_built_probe.txt; commons/testing/probe_gt_foundations_bodies.gd; commons/artifacts/synthesis/synthesis_stand.gd:105-132; algorithms/graphtheory/graphspace/graphspace.gd:51,126",
+      "review": "by hand: probe report + cited lines read in the pilot",
+      "notes": "",
+      "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot)",
+      "created_at": "2026-09-24",
+      "event": "scale",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_graphtheory.017",
+      "title": "The rides board only at their parked end: the travellers' block has two ways in and none out",
+      "spec": "A transport cube's DetectionArea is a child of the cube (transport_cube.tscn:25), so tc:3:z at (9,5) and tc:3:x at (5,8) can be boarded only on the crossing row / the spine; a visitor who steps off on R cannot call either back, and the column x=11 dead-ends at (11,1). The candidate chapter makes this the Search beat (count the ways in) and tells the visitor the hole is the way out. It is also Connectivity's directed question arriving three halls early.\n\nProposal: Decide: keep (the candidate is written to it) or make one ride auto (tc:3:z:auto shuttles) / add a walkway from R back to the spine (e.g. cells (6,9),(7,9)) - then the Search paragraph changes from 'no way you can call' to the return ride.",
+      "effort": "1h",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Foundations"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "Walk the hall from the seam in the museum (--em-map=GT_Foundations) and re-read the candidate paragraph the task names.",
+      "kind": "encounter",
+      "hall": "GT_Foundations",
+      "quote": "You are now on a block with two ways in and no way you can call, because both cubes park on the far shore.",
+      "why": "A transport cube's DetectionArea is a child of the cube (transport_cube.tscn:25), so tc:3:z at (9,5) and tc:3:x at (5,8) can be boarded only on the crossing row / the spine; a visitor who steps off on R cannot call either back, and the column x=11 dead-ends at (11,1). The candidate chapter makes this the Search beat (count the ways in) and tells the visitor the hole is the way out. It is also Connectivity's directed question arriving three halls early.",
+      "proposal": "Decide: keep (the candidate is written to it) or make one ride auto (tc:3:z:auto shuttles) / add a walkway from R back to the spine (e.g. cells (6,9),(7,9)) - then the Search paragraph changes from 'no way you can call' to the return ride.",
+      "evidence": "commons/maps/GT_Foundations/map_data.json utilities (3,2),(9,5),(5,8); commons/scenes/mapobjects/transport_cube.gd:11,195-248,452",
+      "review": "by hand: probe report + cited lines read in the pilot",
+      "notes": "",
+      "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot)",
+      "created_at": "2026-09-24",
+      "event": "threshold",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_graphtheory.018",
+      "title": "The Pregel runs under the whole floor: through every hole you see the river",
+      "spec": "At scale 0.6 Konigsberg's river (CSGBox, no collision) spans x -9..21 / z -3..15 at y -0.75..-0.45: every hole in the floor graph looks down on water. The candidate says 'no floor at all' rather than 'water' so it survives a placement fix; if the model stays large, 'water' is the better sentence and a genuine encounter (the city's river under the hall's graph).\n\nProposal: After task .015 is decided, choose the word: 'water' if the river still runs under the walkways, 'nothing' if not.",
+      "effort": "10min",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "GT_Foundations"
+      ],
+      "sequence_refs": [
+        "graphtheory"
+      ],
+      "verification": "Walk the hall from the seam in the museum (--em-map=GT_Foundations) and re-read the candidate paragraph the task names.",
+      "kind": "encounter",
+      "hall": "GT_Foundations",
+      "quote": "below the walkway there is no floor at all",
+      "why": "At scale 0.6 Konigsberg's river (CSGBox, no collision) spans x -9..21 / z -3..15 at y -0.75..-0.45: every hole in the floor graph looks down on water. The candidate says 'no floor at all' rather than 'water' so it survives a placement fix; if the model stays large, 'water' is the better sentence and a genuine encounter (the city's river under the hall's graph).",
+      "proposal": "After task .015 is decided, choose the word: 'water' if the river still runs under the walkways, 'nothing' if not.",
+      "evidence": "doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot/as_built_probe.txt; commons/testing/probe_gt_foundations_bodies.gd; konigsberg3d.gd:470-473",
+      "review": "by hand: probe report + cited lines read in the pilot",
+      "notes": "",
+      "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-graphtheory-gt-foundations-edges-pilot)",
+      "created_at": "2026-09-24",
+      "event": "occlusion",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    }
+  ]
+}

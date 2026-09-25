@@ -1,0 +1,514 @@
+{
+  "goal_id": "book_forces",
+  "goal_title": "Book: Vectors & Forces: From Direction to Dynamics — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in forces became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "forces",
+    "order": 7,
+    "phase": "oscillation",
+    "title": "Vectors & Forces: From Direction to Dynamics",
+    "chapters": [
+      "Vectors_Act1_WhatAVectorIs",
+      "VFM_02_Operations",
+      "Vectors_Act2_VectorArithmetic",
+      "VFM_05_Launch",
+      "VFM_03_Motion",
+      "Vectors_Act3_FieldsAndMotion",
+      "Vectors_Act4a_KineticForces",
+      "Vectors_Act4b_Oscillation",
+      "Change_Choreography",
+      "VFM_07_Gravity",
+      "VFM_09_Legs",
+      "VFM_08_Arena",
+      "Vectors_Act5_ForceAsPlace"
+    ],
+    "words": 12270,
+    "read_at": "2026-09-24",
+    "source": "one reader + one skeptic (Claude workflow)",
+    "chapters_read": [
+      "Flow_Field (last hall of change, handover in)",
+      "Vectors_Act1_WhatAVectorIs",
+      "VFM_02_Operations",
+      "Vectors_Act2_VectorArithmetic",
+      "VFM_05_Launch",
+      "VFM_03_Motion",
+      "Vectors_Act3_FieldsAndMotion",
+      "Vectors_Act4a_KineticForces",
+      "Vectors_Act4b_Oscillation",
+      "Change_Choreography",
+      "VFM_07_Gravity",
+      "VFM_09_Legs",
+      "VFM_08_Arena",
+      "Vectors_Act5_ForceAsPlace",
+      "FormFinding_Descent (first hall of formfinding, handover out)"
+    ],
+    "reading": {
+      "arc": "Forces takes a vector from a portable difference between two pins to a rule that owns the visitor's own locomotion. The first three halls build the arithmetic (displacement, sum, gap, projection, cross product) as relations that describe and do not push; Launch and Motion admit time, first as a closed-form curve and then as a rigid body that keeps its velocity after the command ends; Fields and Kinetic Forces ask what a receiver does with a sampled arrow (replace or accumulate; drag, nominal work, a prescribed circle). Oscillation and Choreography show returning and shared clocks; Gravity, Legs and Arena move from a held centre to mutual attraction, from prescribed gait to contact and support, and to what an encounter shares; Force as Place finally lets the visitor enter the sentence, with a plank kept beside the crossing. The sequence's refrain is the truth line in forces.json: an arrow does not decide, its quantity, frame, receiver and retained state do. Every tagged work resolves to a scene and every map token carries the #lesson config the chapter describes, so the encounters are real; the defects are in the prose and the joins.",
+      "holds": [
+        "The receiver question, asked at every console: what does this vector measure, and what does the receiving body do with it (= versus +=, apply_central_force versus a prescribed path versus a controller handoff).",
+        "The retained state: something acquired earlier keeps crossing the room, from the one-second pulse in Motion to the spring crossing its line to the velocity carried into the field in Act5.",
+        "One console grammar throughout: PARTS then RULE, RESET semantics spelled out, the gold or amber perimeter that ends an observation rather than doing work, and 'the museum's clock is elsewhere'.",
+        "A carried vocabulary: amber A, pink B, cyan result; X across and F forward; a floor plan turned upright on the wall that never authorizes a climb.",
+        "Two kinds of body in every hall: the visitor walks through drawings while divided from them by collision layers, until Act5 admits the visitor as a receiver.",
+        "Each hall closes by naming the next and opens by recalling the last, which makes the one missing join (Choreography to Gravity) audible."
+      ],
+      "hall_notes": [
+        {
+          "hall": "Vectors_Act1_WhatAVectorIs",
+          "words": 705,
+          "note": "Two benches: a hand-sized arrow projected twice on the wall (SHORT, LONG, SHIFT, ZERO, PARTS), then the normaliser with its 0.001 threshold. Tight and clear about reuse coming from discarding; it ends by naming the next hall with its file ID."
+        },
+        {
+          "hall": "VFM_02_Operations",
+          "words": 751,
+          "note": "One machine, the adder board with a carriage, makes addition a journey: SWAP moves the corner, PATH removes it, CANCEL sends the cube out and back to a zero sum. The best-paced hall in the sequence; the zero-is-not-nothing turn lands."
+        },
+        {
+          "hall": "Vectors_Act2_VectorArithmetic",
+          "words": 1205,
+          "note": "Five works in a row (add pads, subtraction stage, aligner, projection wall, torque crank). Dense but disciplined; the projection station reading the subtraction station's live gap is the highlight, and the aligner and crank are honestly framed as diagrams with limits."
+        },
+        {
+          "hall": "VFM_05_Launch",
+          "words": 919,
+          "note": "A room-scale analytic projectile with the complementary launch in the lane behind you. Reads as an invitation to stand between two flights; the reset and resolution paragraphs near the end run long but every number checks."
+        },
+        {
+          "hall": "VFM_03_Motion",
+          "words": 1087,
+          "note": "The hinge of the sequence: a rigid body keeps velocity after a one-second pulse, COAST against BRAKE against DRAG, then the friction ramp's threshold. Careful about what the engine does and what the script does, and compares the two implementations without flattering either."
+        },
+        {
+          "hall": "Vectors_Act3_FieldsAndMotion",
+          "words": 935,
+          "note": "Cyan replaces velocity, pink accumulates; the same field, two receivers; SWIRL, UNIFORM, REVERSE. The clearest statement of the sequence's thesis; the step-and-sample paragraph near the end reads as a datasheet."
+        },
+        {
+          "hall": "Vectors_Act4a_KineticForces",
+          "words": 1166,
+          "note": "The drag corridor (three coefficients, one rule, a walk-through passage), the mower's signed work against path against cut grass, and the prescribed centrifuge. Strong on same look, different mechanism; carries the sequence's one desktop aside."
+        },
+        {
+          "hall": "Vectors_Act4b_Oscillation",
+          "words": 1028,
+          "note": "The spring cube crosses its line; DAMP names tied to mass and stiffness; what the grab discards. Thoughtful about the word restoring, defers the rest to Wavefunctions and points cleanly to the timing machines."
+        },
+        {
+          "hall": "Change_Choreography",
+          "words": 907,
+          "note": "Twenty rotors (offset, wave, drift) and a conveyor whose backlog is a physical heap. The most playful voice in the sequence; the only hall that ends without a pointer to the next."
+        },
+        {
+          "hall": "VFM_07_Gravity",
+          "words": 989,
+          "note": "A held source and a free satellite (REVERSE retraces), then mutual bodies, a third body and a nudged copy with an RMS readout. Precise about what the edge and the trail cannot prove; the opener reaches back to the spring rather than to the hall just left."
+        },
+        {
+          "hall": "VFM_09_Legs",
+          "words": 1004,
+          "note": "The support polygon lab (posts, hull, shifted load, release) set against seven prescribed walkers. The plate-versus-walker contrast is the sequence's best argument about permissions, and the width-of-a-foot paragraph is a small revelation."
+        },
+        {
+          "hall": "VFM_08_Arena",
+          "words": 1162,
+          "note": "A scoped crab choosing between a mushroom and a nominated visitor (you), a sight line, five meals to rooted; then the collision-carts diagram. Two halves of unequal weight, the second a console diagram after a live encounter."
+        },
+        {
+          "hall": "Vectors_Act5_ForceAsPlace",
+          "words": 1278,
+          "note": "Aim a local acceleration (with the idle yaw at the pole made visible), test it on a cube, then enter it; the plank stays. The hall where the visitor becomes a receiver; its field paragraph still describes the desktop walker."
+        }
+      ],
+      "stumbles": [
+        "Vectors_Act1_WhatAVectorIs: the closing pointer prints a file name: 'Next, in VFM_02_Operations, vectors meet.'",
+        "Change_Choreography: the only hall with no closing pointer; VFM_07_Gravity then opens 'The spring had an address to return to', reaching back two halls past the rods and the conveyor.",
+        "Vectors_Act4a_KineticForces: 'The same desktop movement command carries you progressively less quickly' addresses a visitor who has no desktop command in the headset.",
+        "Vectors_Act5_ForceAsPlace: 'Ordinary keyboard or stick steering' and 'the desktop walker returns horizontal movement' describe the test rig, not the visitor's body.",
+        "Vectors_Act5_ForceAsPlace: the only chapter without a title line after twelve titled halls; the first sentence reads as a heading and then continues as prose.",
+        "Vectors_Act5_ForceAsPlace: 'The last slider stops at fifteen' carries no unit, and 'becomes the most powerful control on the console' overstates what yaw does just off the pole.",
+        "VFM_02_Operations: 'Its body is possible within this particular translation between representations' leaves the reader unsure whose body and what is being permitted.",
+        "Flow_Field into Vectors_Act1: the previous sequence promises a push that ends while the cube keeps going; the bench that follows measures pins, and the push is four halls away.",
+        "Vectors_Act3_FieldsAndMotion (also Motion, Oscillation, Gravity): the closing limits paragraph, stall cap, sample count, frame exit, repeats in the same order each hall, and by the fourth reading it is a datasheet.",
+        "VFM_08_Arena: one H2 ('What the collision shares') for the second work and none for the first, so the heading reads as if it names the whole hall."
+      ],
+      "keep": [
+        {
+          "hall": "VFM_02_Operations",
+          "quote": "Zero has not meant that nothing happened."
+        },
+        {
+          "hall": "VFM_03_Motion",
+          "quote": "The command lasts one second. The cube keeps going."
+        },
+        {
+          "hall": "Vectors_Act3_FieldsAndMotion",
+          "quote": "An equals sign and a plus-equals sign give the same spatial rule different consequences."
+        },
+        {
+          "hall": "Vectors_Act4b_Oscillation",
+          "quote": "Here we have established a smaller thing to carry: a force can bring a body back without telling it to stop there."
+        },
+        {
+          "hall": "VFM_07_Gravity",
+          "quote": "A reference need not be occupied."
+        },
+        {
+          "hall": "VFM_09_Legs",
+          "quote": "Its empty-looking interior is full of decisions."
+        },
+        {
+          "hall": "VFM_08_Arena",
+          "quote": "How quickly might we have called this trust, taming, exhaustion, or friendship if the counter and the code had stayed hidden?"
+        },
+        {
+          "hall": "Vectors_Act5_ForceAsPlace",
+          "quote": "We have learned to look for the place where an instruction becomes a consequence."
+        }
+      ],
+      "handover_in": "Flow_Field closes 'In Forces, a push will end and a cube will keep going. Something it received earlier will still be crossing the room.' Vectors_Act1 opens with a recap ('given points addresses, transformed shapes, made patterns and followed changes through time') and the question 'Can something move without its vector changing?', then measures pins. The promise is kept, but only at VFM_03_Motion, hall 5 of 13; Act1 neither picks it up nor defers it, so the visitor arrives expecting motion and gets a bench. Loose, not broken.",
+      "handover_out": "Vectors_Act5 closes 'In the next sequence, Form Finding, that question reaches the shape of the world itself', and FormFinding_Descent opens 'The last room let a field carry you across a gap. You brought motion into it; the field changed that motion; something of the journey remained when you left', then states the break outright: 'This is already a departure from Forces. There is no stored velocity here.' A clean join. One note for the next sequence's own pass: Descent line 39, 'In the recorded desktop comparison', is a desktop aside in reader prose.",
+      "reading_errors": [
+        "Five hall word counts are stale because the chapters are under an uncommitted rewrite today: Vectors_Act1_WhatAVectorIs 705 -> 645 on disk (mtime 2026-09-24 16:00; HEAD 1234), VFM_02_Operations 751 -> 601 (15:57; HEAD 1450), Vectors_Act2_VectorArithmetic 1205 -> 961 (15:57; HEAD 1510), VFM_05_Launch 919 -> 722 (18:55; the reader's figure equals HEAD), VFM_03_Motion 1087 -> 943 (18:55; equals HEAD). The other eight counts match the files exactly.",
+        "Act1 note: 'it ends by naming the next hall with its file ID' is no longer true; the current last line is 'In the next room, two displacements meet. The question becomes where they can take us together.' with no map ID anywhere in the file.",
+        "Act4a note: 'carries the sequence's one desktop aside' is wrong; Vectors_Act5_ForceAsPlace carries two more (final.md:58 'keyboard or stick steering', :79 'the desktop walker'), which the summary's own Act5 note admits.",
+        "Holds: 'Two kinds of body in every hall ... until Act5 admits the visitor as a receiver' is off by one hall: Kinetic Forces already admits the visitor's stick request as a receiver through WALK (Act4a final.md:25-27; kinetic_walk_provider.gd:10-11; desktop twin endless_museum.gd:16808-16813). Act5 is the second such admission, the first that carries the body.",
+        "Holds: 'opens by recalling the last' overstates. VFM_05_Launch never recalls the arithmetic hall at all; Motion (:15 'In Launch we watched...'), Act3 (:19 'In Motion, a pulse ended...') and Act4b (:21 'The drag rule from the previous room') recall the previous hall mid-chapter, not at the opening; Gravity reaches back two halls, as the summary says. The closing half of the claim does hold: 12 of 13 endings name the next hall.",
+        "Holds: 'a floor plan turned upright on the wall that never authorizes a climb' quotes a sentence that no longer exists in VFM_02_Operations; the current :13 reads 'upward in the picture means forward on the stage' and no forces chapter contains 'authori'.",
+        "Holds: 'One console grammar throughout: PARTS then RULE' is not true of every console: Operations' bench is PATH/SWAP/CANCEL/GO/RULE with no PARTS (room_sum.gd:71; the chapter never mentions PARTS), Act1's bench has PARTS but no RULE, and the Act5 vector machine is three sliders with neither. The quoted phrase 'the museum's clock is elsewhere' appears in no forces chapter; the closest is Change_Choreography:55 'It does not rewind the museum's elapsed time.'",
+        "Task evidence misquotes two forward pointers: Vectors_Act2_VectorArithmetic/final.md has 92 lines and ends 'Ahead, in Launch, a vector will be given another job' (there is no line 94 and no 'The next hall in the current sequence is Launch'); VFM_05_Launch/final.md:57 reads 'Next, in Motion, the body will keep a velocity from one update to the next', not 'Next is Motion'."
+      ]
+    },
+    "dropped": [
+      {
+        "title": "File name printed as the next hall's name",
+        "reason": "The quoted sentence is not in the chapter. Vectors_Act1_WhatAVectorIs/final.md on disk (645 words, an uncommitted rewrite with mtime 2026-09-24 16:00; HEAD has 1234 words and the reader counted 705) contains no 'VFM_02_Operations' anywhere; its last line is 'In the next room, two displacements meet. The question becomes where they can take us together.' The defect was fixed by the live rewrite. The task's sibling evidence is also misquoted: Vectors_Act2_VectorArithmetic/final.md ends at line 92 ('Ahead, in Launch, a vector will be given another job') and VFM_05_Launch/final.md:57 reads 'Next, in Motion, the body will keep a velocity...'."
+      },
+      {
+        "title": "Opaque sentence after the height line",
+        "reason": "The quoted sentence is not in the chapter. VFM_02_Operations/final.md on disk is an uncommitted rewrite (mtime 2026-09-24 15:57; 601 words against the reader's 751 and HEAD's 1450) and contains no 'Its body is possible'. The passage now reads at :13 'The wall turns that floor into an upright plan; upward in the picture means forward on the stage', which already says plainly what the proposal wanted. The cited code is right (room_sum.gd:83-84 floor_point supplies the height) but there is nothing left to fix."
+      },
+      {
+        "title": "Lone H2 names half the hall",
+        "reason": "The facts hold (the H2 at :49 is the chapter's only heading after the H1; the console title 'WHO COUNTS AS A TARGET?' is at arena_relation_lab.gd:39), but the shape is the sequence's own convention, not a defect: VFM_02_Operations uses exactly the same H1-plus-one-mid-H2 layout ('## Coming home' at :31 marking its second half). The H1 'What makes an encounter?' already heads the crab half, and the italic question at :51 carries the pivot. Adding an H2 directly under the H1 with no text between would be the odder shape. Taste, not an improvement for the visitor."
+      }
+    ]
+  },
+  "tasks": [
+    {
+      "id": "book_forces.001",
+      "title": "Walk-through instruction leads with the desktop",
+      "spec": "[vr] Vectors_Act4a_KineticForces\nQuote: “The same desktop movement command carries you progressively less quickly. XR stick movement uses the same adaptation.”\nWhy: The reader is standing in the headset; the sentence makes the desktop the case and VR the footnote. The stick adaptation is real, so the fix is only which body the sentence addresses.\nDo: Replace the two quoted sentences with one: 'Your stick request carries you progressively less quickly.' Leave the existing 'Step outside the narrow passage and ordinary movement returns. The effect is optional; WALK begins off.' as it stands. Optionally, in a separate code edit, reorder the board line at kinetic_drag.gd:187 to 'WALK: XR stick / WASD, not tracked physical steps.'\nEvidence: commons/artifacts/drag_corridor/kinetic_walk_provider.gd:10-11; commons/artifacts/drag_corridor/kinetic_drag.gd:105-106 and :187; commons/scenes/endless_museum.gd:16808-16813 (desktop twin of the same adapter); Vectors_Act4a_KineticForces/final.md:25-27.\nFile: commons/maps/Vectors_Act4a_KineticForces/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Vectors_Act4a_KineticForces"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Vectors_Act4a_KineticForces",
+      "quote": "The same desktop movement command carries you progressively less quickly. XR stick movement uses the same adaptation.",
+      "why": "The reader is standing in the headset; the sentence makes the desktop the case and VR the footnote. The stick adaptation is real, so the fix is only which body the sentence addresses.",
+      "proposal": "Replace the two quoted sentences with one: 'Your stick request carries you progressively less quickly.' Leave the existing 'Step outside the narrow passage and ordinary movement returns. The effect is optional; WALK begins off.' as it stands. Optionally, in a separate code edit, reorder the board line at kinetic_drag.gd:187 to 'WALK: XR stick / WASD, not tracked physical steps.'",
+      "evidence": "commons/artifacts/drag_corridor/kinetic_walk_provider.gd:10-11; commons/artifacts/drag_corridor/kinetic_drag.gd:105-106 and :187; commons/scenes/endless_museum.gd:16808-16813 (desktop twin of the same adapter); Vectors_Act4a_KineticForces/final.md:25-27.",
+      "review": "amended: Quote is exact at Vectors_Act4a_KineticForces/final.md:25. Code confirmed: kinetic_walk_provider.gd:10-11 multiplies player_body.ground_control_velocity (the stick request) by walk_multiplier; kinetic_drag.gd:106 returns 1/(1+b) = 0.714/0.435/0.238 under the comment at :105; board text at :187. The desktop half of the sentence is also true (the desktop museum walker scales velocity.x/z by the same multiplier at commons/scenes/endless_museum.gd:16808-16813), so this is purely a matter of which body the sentence addresses, and the next paragraph (:27) already speaks to the headset. The reader's rewrite duplicates the sentence that already follows the quote ('Step outside the narrow passage and ordinary movement returns.'), so the edit should replace only the two quoted sentences.",
+      "notes": "Codex review — 25 September 2026\nReplaced the desktop-first sentence with the same movement of the stick carrying the visitor progressively less quickly. Kept the explicit distinction from physical tracked walking and from rigid-body drag. Existing WALK controls and three speed multipliers pass native checks; no human resistance or headset comfort claim.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:13:26.014Z"
+    },
+    {
+      "id": "book_forces.002",
+      "title": "'Keyboard' steering in the field paragraph",
+      "spec": "[vr] Vectors_Act5_ForceAsPlace\nQuote: “Ordinary keyboard or stick steering resumes when your feet leave the volume.”\nWhy: A headset visitor has no keyboard; the word marks the sentence as written for the test rig.\nDo: 'Ordinary stick steering resumes when your feet leave the volume.'\nEvidence: commons/artifacts/force_field_zone/field_carry_provider.gd:9-12: when no carry zone contains the body the provider calls release_carry and returns false, so XRTools' ordinary movement providers (the stick) resume; force_field_zone.gd:347-355 installs this provider only on an XRToolsPlayerBody.\nFile: commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Vectors_Act5_ForceAsPlace",
+      "quote": "Ordinary keyboard or stick steering resumes when your feet leave the volume.",
+      "why": "A headset visitor has no keyboard; the word marks the sentence as written for the test rig.",
+      "proposal": "'Ordinary stick steering resumes when your feet leave the volume.'",
+      "evidence": "commons/artifacts/force_field_zone/field_carry_provider.gd:9-12: when no carry zone contains the body the provider calls release_carry and returns false, so XRTools' ordinary movement providers (the stick) resume; force_field_zone.gd:347-355 installs this provider only on an XRToolsPlayerBody.",
+      "review": "kept: Quote is exact at Vectors_Act5_ForceAsPlace/final.md:58. field_carry_provider.gd:9-12 releases the carry and returns false when no zone contains the body, handing control back to XRTools' ordinary providers; force_field_zone.gd:347-355 installs the adapter only on an XRToolsPlayerBody. The desktop walker has its own keyboard path (endless_museum.gd:16814-16826), so 'keyboard' is not false, but the book's reader is in the headset and has no keyboard; dropping the word costs nothing.",
+      "notes": "Codex review — 25 September 2026\nRemoved keyboard language, but did not adopt the proposed immediate return of stick steering at the boundary. Leaving ends the field override; the default XR body also requires ground contact for stick control. That condition now appears in the chapter.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:13:26.042Z"
+    },
+    {
+      "id": "book_forces.003",
+      "title": "The far face is described for the desktop walker",
+      "spec": "[vr] Vectors_Act5_ForceAsPlace\nQuote: “At the far face, the desktop walker returns horizontal movement to its ordinary input controller and keeps its vertical velocity under ordinary gravity.”\nWhy: This names a receiver the headset visitor never runs, in the one hall whose point is that the visitor is a receiver. The VR carry provider simply steps back at the far face and the body's default providers and gravity take over, which is a seam the visitor can feel and the prose should describe.\nDo: Replace only the quoted sentence with: 'At the far face the carry receiver lets go: gravity returns to the body, whatever it was carrying continues until your feet find the floor, and then the stick steers again.' Keep the existing 'That seam can be felt as a change in how you travel.'\nEvidence: commons/artifacts/force_field_zone/field_carry_provider.gd:10-16; commons/artifacts/force_field_zone/force_field_zone.gd:329-336; addons/godot-xr-tools/player/player_body.gd:102, :343-356, :818-841, :909-912; commons/scenes/endless_museum.gd:16814-16826.\nFile: commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Vectors_Act5_ForceAsPlace",
+      "quote": "At the far face, the desktop walker returns horizontal movement to its ordinary input controller and keeps its vertical velocity under ordinary gravity.",
+      "why": "This names a receiver the headset visitor never runs, in the one hall whose point is that the visitor is a receiver. The VR carry provider simply steps back at the far face and the body's default providers and gravity take over, which is a seam the visitor can feel and the prose should describe.",
+      "proposal": "Replace only the quoted sentence with: 'At the far face the carry receiver lets go: gravity returns to the body, whatever it was carrying continues until your feet find the floor, and then the stick steers again.' Keep the existing 'That seam can be felt as a change in how you travel.'",
+      "evidence": "commons/artifacts/force_field_zone/field_carry_provider.gd:10-16; commons/artifacts/force_field_zone/force_field_zone.gd:329-336; addons/godot-xr-tools/player/player_body.gd:102, :343-356, :818-841, :909-912; commons/scenes/endless_museum.gd:16814-16826.",
+      "review": "amended: Quote is exact at :79 and the desktop sentence is accurate for the desktop rig (endless_museum.gd:16814-16826: outside a carry zone the horizontal velocity is the WASD request and _vy, set from the carried velocity at record_carry, continues under JUMP_GRAVITY). For the headset body the mechanism is confirmed but differs in one detail the reader's proposal glosses: when field_carry_provider.gd:10-12 stops being exclusive, player_body.gd:343-356 applies gravity, but the stick regains the horizontal velocity only through ground control, which is gated to on_ground by default (player_body.gd:102, :827-841, :909-912); while airborne past the far face the carried horizontal velocity simply continues. The reader's proposal also duplicates the sentence that already follows the quote ('That seam can be felt as a change in how you travel.').",
+      "notes": "Codex review — 25 September 2026\nReplaced the desktop-specific exit with the actual XR relation: the field yields, velocity is retained in the air under ordinary gravity, and stick steering becomes available at ground contact. A nontracked XRToolsPlayerBody fixture exercises the production provider and default ground-control gate. Its move_player supplies a contact result; this is not a tracked or collision-solver test.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:13:26.073Z"
+    },
+    {
+      "id": "book_forces.004",
+      "title": "No pointer from the timing machines to Gravity",
+      "spec": "[handover] Change_Choreography\nQuote: “Carry the distinction forward: a parameter can change a pattern, but the permissions of the body still need to be built.”\nWhy: This is the only hall in the sequence that ends without naming the next, and Gravity then opens by recalling the spring from two halls back, so the visitor leaves the conveyor with no bridge and arrives at a hall that seems not to know they were here.\nDo: Add one closing line after the quoted sentence, e.g. 'Next, gravity. The place the spring returned to acquires a body of its own, and we ask whether the centre may answer.' Gravity's opener can then stay as a deliberate reach-back.\nEvidence: commons/maps/sequences/forces.json orders Change_Choreography before VFM_07_Gravity; commons/maps/Change_Choreography/final.md:63 is the last line and carries no forward pointer; commons/maps/VFM_07_Gravity/final.md:5 opens 'The spring had an address to return to' (Vectors_Act4b_Oscillation).\nFile: commons/maps/Change_Choreography/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Change_Choreography"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "Change_Choreography",
+      "quote": "Carry the distinction forward: a parameter can change a pattern, but the permissions of the body still need to be built.",
+      "why": "This is the only hall in the sequence that ends without naming the next, and Gravity then opens by recalling the spring from two halls back, so the visitor leaves the conveyor with no bridge and arrives at a hall that seems not to know they were here.",
+      "proposal": "Add one closing line after the quoted sentence, e.g. 'Next, gravity. The place the spring returned to acquires a body of its own, and we ask whether the centre may answer.' Gravity's opener can then stay as a deliberate reach-back.",
+      "evidence": "commons/maps/sequences/forces.json orders Change_Choreography before VFM_07_Gravity; commons/maps/Change_Choreography/final.md:63 is the last line and carries no forward pointer; commons/maps/VFM_07_Gravity/final.md:5 opens 'The spring had an address to return to' (Vectors_Act4b_Oscillation).",
+      "review": "kept: Quote is exact and is the last line (Change_Choreography/final.md:63). I checked every ending in the sequence: the other twelve name the next hall (Act1:54, Operations:47, Act2:92, Launch:57, Motion:79, Act3:61, Act4a:81, Act4b:59, Gravity:60, Legs:59, Arena:69, Act5:93); Choreography alone does not. forces.json orders it at index 8 before VFM_07_Gravity at 9, and Gravity opens at :5 with 'The spring had an address to return to'. Change_Choreography appears in no other sequence file, so a pointer to Gravity cannot be wrong elsewhere. The proposed line matches Gravity's own opener ('Here the reference has acquired a body', :5) and its RULE question ('What happens if the thing we called the centre is allowed to answer?', :29). Choreography's file is not under the live rewrite (mtime 2026-09-11).",
+      "notes": "Codex review — 25 September 2026\nAdded a short bridge from Choreography to Gravity. The spring’s reference now acquires a body, and the question is whether that centre can respond. Kept Gravity’s deliberate return to the spring and the conveyor’s critical close.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:13:26.088Z"
+    },
+    {
+      "id": "book_forces.005",
+      "title": "Yaw overstated just off the pole",
+      "spec": "[prose] Vectors_Act5_ForceAsPlace\nQuote: “Lift the field off the floor by even a little and the same slider becomes the most powerful control on the console.”\nWhy: Both horizontal terms carry cos(pitch) (vector_machine.gd:96). For the first ~5.7 degrees of lift on either side of the pole the machine's own readout still reports 'YAW held ... idle' and draws the ghost (:109-111, :149-152, :163-164), and beyond that band a full yaw turn moves the field by at most 2*cos(pitch) of its magnitude, so yaw only dominates as the field nears horizontal. A visitor who tests 'by even a little' literally sees the readout call the slider idle.\nDo: 'Lift the field off the floor and the same slider begins to be heard; the nearer the field comes to horizontal, the more of the crossing it decides.'\nEvidence: commons/artifacts/vector_machine/vector_machine.gd:93-96, :105-111, :149-152, :157-164.\nFile: commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Vectors_Act5_ForceAsPlace",
+      "quote": "Lift the field off the floor by even a little and the same slider becomes the most powerful control on the console.",
+      "why": "Both horizontal terms carry cos(pitch) (vector_machine.gd:96). For the first ~5.7 degrees of lift on either side of the pole the machine's own readout still reports 'YAW held ... idle' and draws the ghost (:109-111, :149-152, :163-164), and beyond that band a full yaw turn moves the field by at most 2*cos(pitch) of its magnitude, so yaw only dominates as the field nears horizontal. A visitor who tests 'by even a little' literally sees the readout call the slider idle.",
+      "proposal": "'Lift the field off the floor and the same slider begins to be heard; the nearer the field comes to horizontal, the more of the crossing it decides.'",
+      "evidence": "commons/artifacts/vector_machine/vector_machine.gd:93-96, :105-111, :149-152, :157-164.",
+      "review": "amended: Quote exact at :13. Code confirmed: vector_machine.gd:96 multiplies both horizontal terms by cos(pitch); _yaw_idle at :109-111 is abs(cos(pitch)) < 0.1, i.e. pitch within about 5.7 degrees of either pole. The stronger fact the reader missed: while in that band the bench's own readout prints 'YAW held at N deg - idle while the field is vertical' (:163-164) and draws the ghost arrow (:149-152), so a visitor who lifts the field 'by even a little' sees the machine itself still call the slider idle. The sentence contradicts the instrument beside it. Proposal stands.",
+      "notes": "Codex review — 25 September 2026\nRemoved the claim that a tiny lift makes yaw the most powerful control. Described the growing horizontal component instead, and named the display’s small near-pole idle region. Native slider checks confirm both the unchanged vector at the pole and the held bearing, the idle band and full horizontal yaw.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:13:26.122Z"
+    },
+    {
+      "id": "book_forces.006",
+      "title": "The held cube's arrow does not disappear",
+      "spec": "[code-claim] Vectors_Act5_ForceAsPlace\nQuote: “Stop your hand. Its motion arrow should disappear;”\nWhy: In the force_as_place lesson the rest threshold is skipped (force_cube.gd:154) and the arrow is drawn for any sampled tip over 1 mm, i.e. hand speed over 2 mm/s (:193). The redraw deadband at :161 freezes the drawing rather than flickering it, and the shared _arrow builder clamps the head to a 5 cm minimum (embodied_prop.gd:106-112), so a not-quite-still hand leaves a fixed small cone inside the cube instead of nothing. The visitor who follows the instruction is told to expect a disappearance the code cannot deliver.\nDo: Either raise the lesson's vanish gate at force_cube.gd:193 from 0.001 to about 0.02 (the same 4 cm/s the redraw deadband at :161 already uses), which keeps the design intent and makes the sentence true, and check in a headset that a held controller sits under that; or soften the prose to 'Stop your hand. Its motion arrow shrinks to a stub; a body at rest need not invent a direction merely to remain a useful exhibit.'\nEvidence: commons/artifacts/force_cube/force_cube.gd:117, :151-157, :161, :193; commons/artifacts/_embodied/embodied_prop.gd:103-118.\nFile: commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+      "effort": "1h",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "Vectors_Act5_ForceAsPlace",
+      "quote": "Stop your hand. Its motion arrow should disappear;",
+      "why": "In the force_as_place lesson the rest threshold is skipped (force_cube.gd:154) and the arrow is drawn for any sampled tip over 1 mm, i.e. hand speed over 2 mm/s (:193). The redraw deadband at :161 freezes the drawing rather than flickering it, and the shared _arrow builder clamps the head to a 5 cm minimum (embodied_prop.gd:106-112), so a not-quite-still hand leaves a fixed small cone inside the cube instead of nothing. The visitor who follows the instruction is told to expect a disappearance the code cannot deliver.",
+      "proposal": "Either raise the lesson's vanish gate at force_cube.gd:193 from 0.001 to about 0.02 (the same 4 cm/s the redraw deadband at :161 already uses), which keeps the design intent and makes the sentence true, and check in a headset that a held controller sits under that; or soften the prose to 'Stop your hand. Its motion arrow shrinks to a stub; a body at rest need not invent a direction merely to remain a useful exhibit.'",
+      "evidence": "commons/artifacts/force_cube/force_cube.gd:117, :151-157, :161, :193; commons/artifacts/_embodied/embodied_prop.gd:103-118.",
+      "review": "amended: Quote exact at :33. Code facts confirmed: force_cube.gd:151-153 tip = (sampled velocity * 0.5).limit_length(2.6); :154 the 0.12 rest threshold is skipped when config_lesson == 'force_as_place', and :117 returns Vector3.ZERO as the resting vector for the lesson, so the design intent IS a vanishing arrow; :193 draws the arrow whenever |tip| > 0.001, i.e. sampled hand speed above 2 mm/s, which is below any controller's noise floor. Two things the reader did not see: _redraw at :161 only fires when the vector moves by >= 0.02 (4 cm/s), so at rest the drawing freezes at the last redraw rather than flickering; and embodied_prop.gd:106-112 clamps the arrow head to at least 5 cm long with a base radius of 2.6 x 0.03 = 7.8 cm, so a residual centimetre of 'arrow' renders as a fixed 5 cm cone near the cube's centre. Hand stillness is unmeasured here, so the residual's exact size stays plausible; the threshold that would have to be met is confirmed. The reader's code option (0.12 = 24 cm/s) is too coarse: it would blank the arrow for the slow deliberate hand the same paragraph asks for.",
+      "notes": "Codex review — 25 September 2026\nReproduced the old retained-arrow bug in the loaded hall: after 0.03 m/s, a supplied zero-motion step retained a roughly 0.015 m arrow. Added a lesson-only 0.02 m arrow threshold (0.04 m/s) before the redraw deadband, clearing collapsed component geometry as well. Low, zero, renewed and just-above-threshold movements pass; the legacy resting-vector mode remains. The text now identifies a threshold for displayed stillness instead of promising exact physical rest. Actual controller jitter and headset legibility remain to be assessed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:13:26.151Z"
+    },
+    {
+      "id": "book_forces.007",
+      "title": "Hold the promise Flow_Field made",
+      "spec": "[handover] Vectors_Act1_WhatAVectorIs\nQuote: “The point rooms gave us addresses; transformation let us move them. Here we can carry a relation from one place to another.”\nWhy: The visitor arrives from Flow_Field primed for a push that ends while the body keeps going; that is delivered four halls later, in Motion. Act1 recalls the point and transformation rooms but not the sequence just left, so the promise is neither kept nor deferred and the first bench reads as a change of subject.\nDo: After the quoted sentences at :11 add one deferring line, e.g. 'The push that ends while its body keeps going is still four halls away. First, the arrow itself.' Re-read the file first: it is mid-rewrite.\nEvidence: commons/maps/curriculum_spine.json spine.sequences (change, forces); commons/maps/sequences/change.json (Flow_Field last of 2); commons/maps/Flow_Field/final.md:57; commons/maps/VFM_03_Motion/final.md:7; commons/maps/Vectors_Act1_WhatAVectorIs/final.md:11 (working tree, uncommitted).\nFile: commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Vectors_Act1_WhatAVectorIs"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "Vectors_Act1_WhatAVectorIs",
+      "quote": "The point rooms gave us addresses; transformation let us move them. Here we can carry a relation from one place to another.",
+      "why": "The visitor arrives from Flow_Field primed for a push that ends while the body keeps going; that is delivered four halls later, in Motion. Act1 recalls the point and transformation rooms but not the sequence just left, so the promise is neither kept nor deferred and the first bench reads as a change of subject.",
+      "proposal": "After the quoted sentences at :11 add one deferring line, e.g. 'The push that ends while its body keeps going is still four halls away. First, the arrow itself.' Re-read the file first: it is mid-rewrite.",
+      "evidence": "commons/maps/curriculum_spine.json spine.sequences (change, forces); commons/maps/sequences/change.json (Flow_Field last of 2); commons/maps/Flow_Field/final.md:57; commons/maps/VFM_03_Motion/final.md:7; commons/maps/Vectors_Act1_WhatAVectorIs/final.md:11 (working tree, uncommitted).",
+      "review": "amended: The quoted sentence no longer exists: Vectors_Act1_WhatAVectorIs/final.md is under an uncommitted rewrite (mtime 2026-09-24 16:00; 645 words on disk against the reader's 705 and HEAD's 1234). The join defect itself survives the rewrite: curriculum_spine.json orders change immediately before forces, change.json's last map is Flow_Field, Flow_Field/final.md:57 promises 'In Forces, a push will end and a cube will keep going', that push arrives at VFM_03_Motion/final.md:7, and the current Act1 text mentions neither a push nor the hall just left (its recall at :11 reaches back to the point and transformation rooms). Re-anchored to the current text; the writer must re-read the file before applying, since it is being edited today.",
+      "notes": "Codex review — 25 September 2026\nThe preceding Change pass already deferred the push to Later in Forces. Added the particles in the last room to the opening’s recall of points and transformations. Kept the encounter’s immediate start with pins and the arrow; no four-hall itinerary inserted.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:13:26.182Z"
+    },
+    {
+      "id": "book_forces.008",
+      "title": "'Stops at fifteen' has no unit",
+      "spec": "[prose] Vectors_Act5_ForceAsPlace\nQuote: “The last slider stops at fifteen.”\nWhy: Fifteen what: the readout on the bench says metres per second squared, and the reader has just been told the two angles become a direction and magnitude gives it a size.\nDo: 'The last slider stops at fifteen metres per second squared.'\nEvidence: commons/artifacts/vector_machine/vector_machine.gd:20 force_max = 15.0; vector_machine.gd:165 the lesson readout appends 'm/s² / this hall only'; force_field_zone.gd:217 'LOCAL ACCELERATION ... m/s²'.\nFile: commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Vectors_Act5_ForceAsPlace",
+      "quote": "The last slider stops at fifteen.",
+      "why": "Fifteen what: the readout on the bench says metres per second squared, and the reader has just been told the two angles become a direction and magnitude gives it a size.",
+      "proposal": "'The last slider stops at fifteen metres per second squared.'",
+      "evidence": "commons/artifacts/vector_machine/vector_machine.gd:20 force_max = 15.0; vector_machine.gd:165 the lesson readout appends 'm/s² / this hall only'; force_field_zone.gd:217 'LOCAL ACCELERATION ... m/s²'.",
+      "review": "kept: Quote exact at :27. vector_machine.gd:20 force_max = 15.0; the lesson readout appends 'm/s2 / this hall only' (:165); force_field_zone.gd:217 prints 'LOCAL ACCELERATION ... m/s2'. The chapter last gave a unit at :11 ('9.8 metres per second squared'), sixteen lines and two code blocks earlier; supplying it again where the ceiling is named is a clear, cheap prose fix.",
+      "notes": "Codex review — 25 September 2026\nNamed the acceleration limit as fifteen metres per second squared. The loaded machine and readout confirm the value and units. No change to the slider or field.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:13:26.213Z"
+    },
+    {
+      "id": "book_forces.009",
+      "title": "Name the softening",
+      "spec": "[footnote] VFM_07_Gravity\nQuote: “The quarter-metre softening keeps close encounters finite by changing the attraction near coincidence.”\nWhy: The technique has a name a reader can look up, Plummer softening, and the source names it in its own comment; without the word the visitor who wants to follow this up has nothing to search for.\nDo: 'Return to EPS * EPS. The quarter-metre softening (the source calls it Plummer softening) keeps close encounters finite by changing the attraction near coincidence.'\nEvidence: commons/artifacts/orbital_mechanics_demo/gravity_relations.gd:4, :97; commons/maps/VFM_07_Gravity/final.md:56.\nFile: commons/maps/VFM_07_Gravity/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "VFM_07_Gravity"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "VFM_07_Gravity",
+      "quote": "The quarter-metre softening keeps close encounters finite by changing the attraction near coincidence.",
+      "why": "The technique has a name a reader can look up, Plummer softening, and the source names it in its own comment; without the word the visitor who wants to follow this up has nothing to search for.",
+      "proposal": "'Return to EPS * EPS. The quarter-metre softening (the source calls it Plummer softening) keeps close encounters finite by changing the attraction near coincidence.'",
+      "evidence": "commons/artifacts/orbital_mechanics_demo/gravity_relations.gd:4, :97; commons/maps/VFM_07_Gravity/final.md:56.",
+      "review": "amended: Quote exact at VFM_07_Gravity/final.md:56. gravity_relations.gd:4 'const EPS := 0.25 # metres, Plummer softening' and :97 pow(arm.length_squared() + EPS * EPS, 1.5) confirmed. The chapter already quotes the EPS line and sends the reader back to it ('Return to EPS * EPS'), so naming what the source calls it is a fair, searchable handle rather than added theory. The reader's inline phrasing ('The quarter-metre softening, Plummer's, in the source's own words, keeps...') is clumsy; a parenthesis does it.",
+      "notes": "Codex review — 25 September 2026\nNamed Plummer softening at the existing EPS explanation and added a short linked footnote. The project source declares EPS = 0.25 metres and uses the softened inverse-cube factor. The galpy Plummer potential documentation supplies a primary implementation reference without burdening the encounter with another derivation.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:13:26.243Z"
+    },
+    {
+      "id": "book_forces.010",
+      "title": "The one untitled chapter in the sequence",
+      "spec": "[structure] Vectors_Act5_ForceAsPlace\nQuote: “A hole in the floor, and two ways over it. One of them somebody built. The other one you have to set.”\nWhy: After twelve titled halls the first line reads as a heading and then keeps going as prose; the corpus does allow untitled openings, so this is a within-sequence inconsistency, worth fixing only because it is the closing hall.\nDo: Add an H1 above the opening line, e.g. '# Where an instruction becomes a consequence', lifted from the chapter's own last paragraph, so the first sentence reads as the epigraph it is.\nEvidence: python tools/final_tags.py --map=Vectors_Act5_ForceAsPlace lists the first region untitled; the other twelve forces chapters open with an H1 (e.g. commons/maps/VFM_09_Legs/final.md:1 '# What lets a body stand?'); twenty-plus chapters elsewhere in commons/maps/*/final.md also open without an H1, so the convention tolerates both.\nFile: commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Vectors_Act5_ForceAsPlace",
+      "quote": "A hole in the floor, and two ways over it. One of them somebody built. The other one you have to set.",
+      "why": "After twelve titled halls the first line reads as a heading and then keeps going as prose; the corpus does allow untitled openings, so this is a within-sequence inconsistency, worth fixing only because it is the closing hall.",
+      "proposal": "Add an H1 above the opening line, e.g. '# Where an instruction becomes a consequence', lifted from the chapter's own last paragraph, so the first sentence reads as the epigraph it is.",
+      "evidence": "python tools/final_tags.py --map=Vectors_Act5_ForceAsPlace lists the first region untitled; the other twelve forces chapters open with an H1 (e.g. commons/maps/VFM_09_Legs/final.md:1 '# What lets a body stand?'); twenty-plus chapters elsewhere in commons/maps/*/final.md also open without an H1, so the convention tolerates both.",
+      "review": "kept: Confirmed: Vectors_Act5_ForceAsPlace/final.md:1 is prose, and the other twelve forces chapters open with an H1 (checked all thirteen first lines). The corpus does tolerate it (52 of the final.md files have no H1 at all), and nothing downstream breaks: build_manuscript.py:441 titles each room '#### <map name>' and prints the regions' bodies, and the book pearl in commons/data/book/forces.json carries no title field, so this is a within-sequence consistency choice rather than a functional defect. It is still worth doing for the closing hall: the proposed title is lifted from the chapter's own last paragraph (:93) and matches the sequence's title pattern ('When the push ends', 'What lets a body stand?'). One correction to the evidence: final_tags.py does not say 'untitled'; it prints a dash for the first region because it carries no artifact tag.",
+      "notes": "Codex review — 25 September 2026\nAdded What carries you across? above the closing hall. Kept its opening hole, two routes, plank, local field and difference between receivers.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-forces-review-comments/index.html",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:13:26.274Z"
+    }
+  ]
+}

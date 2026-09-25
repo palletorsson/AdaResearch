@@ -1,0 +1,538 @@
+{
+  "goal_id": "book_foundationscrisis",
+  "goal_title": "Book: Foundations Crisis: The Limits of Formalization — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in foundationscrisis became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "foundationscrisis",
+    "order": 22,
+    "phase": "synthesis",
+    "title": "Foundations Crisis: The Limits of Formalization",
+    "chapters": [
+      "Euclid_Parallel",
+      "NonEuclidean_Spaces",
+      "Russell_Paradox",
+      "Godel_Incompleteness",
+      "Escher_Impossible",
+      "Brouwer_Intuitionism",
+      "Florensky_Paraconsistent",
+      "Crisis_Synthesis"
+    ],
+    "words": 8586,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "GT_Matching (last of graphtheory)",
+      "Euclid_Parallel",
+      "NonEuclidean_Spaces",
+      "Russell_Paradox",
+      "Godel_Incompleteness",
+      "Escher_Impossible",
+      "Brouwer_Intuitionism",
+      "Florensky_Paraconsistent",
+      "Crisis_Synthesis",
+      "QFEP_Introduction (first of qfeplaboratory)"
+    ],
+    "reading": {
+      "arc": "Foundations Crisis walks one habit through seven materials and then turns it on the project itself: find the instrument, read what it actually measures, and name the gap between that and its caption. Euclid's hall plants the method in a plaque whose gold arrives before the argument and a triangle that prints sixties it never measured; NonEuclid changes the host and makes 180 degrees one answer among three; Russell withdraws the permission to collect everything; Godel separates a stopped search from a proof that no search can succeed. Escher moves the question into where you stand, Brouwer into what you have made versus what you assert about every continuation, Florensky into what follows when reports conflict and who still gets through. Crisis_Synthesis brings in the QFEP formula as a sentence with handles and applies the sequence's habit to it (colour on a rail is a proposal, a total can hide its compensations) before handing the lit formula to the laboratory. The stance is consistent and rare: every apparatus is described as smaller than its claim, and the prose treats that as the lesson rather than an apology.",
+      "holds": [
+        "The refrain 'what did this number depend on?': each hall ends on an instrument that measures less than its caption (three sixties, a stopped prover arm, a move counter, a flickering lamp, complementary opacities, a finite orbit sample), and the prose names the shortfall every time instead of hiding it.",
+        "Carried works, all confirmed in the map layers: the triangle (Euclid -> NonEuclid -> Brouwer), the parallel lines (Euclid -> Brouwer), the postulates plaque (Euclid -> Russell), and in Synthesis the Russell workbench, the set box, the staircase, the sphere and the Godel plaque return.",
+        "The distinction handed in from GT_Matching (a procedure meeting its local rule is not a proof of its strongest advertised conclusion) recurs as the prover that jams, the prefix that proves nothing about every continuation, the diagonal that displays no completed infinity, the counter that 'does not prove chaos'.",
+        "The small verbatim excerpt as the whole of an apparatus: `% 5`, two Booleans, `terms.append(value)`, `_d[i] = 1 - _list[i][i]`, `x = r * x * (1.0 - x)`, each used the same way: this is all it does.",
+        "Closings on the body and the floor: 'The floor has not moved. Your account of it has.'; 'You are allowed to leave it.'; 'It has made a small part wait for it.'",
+        "Each last paragraph names the next hall's question, so the reader crosses every threshold knowing what to ask."
+      ],
+      "hall_notes": [
+        {
+          "hall": "Euclid_Parallel",
+          "words": 1709,
+          "note": "Seven numbered sections read the build: the plaque's `% 5` loop and its gold branch, three unevenly spaced lines, a triangle labelled 60/60/60 that measures 53.1/63.4/63.4, a screen drawing a grid before anything arrives. Reads as a code-reading essay addressed to a walker, the longest chapter in the arc, and the one whose register slips most between 'Walk between the columns' and 'In the source, move Line3'."
+        },
+        {
+          "hall": "NonEuclidean_Spaces",
+          "words": 1059,
+          "note": "The bench's HOST slider (PLANE / SPHERE / DISK) rebuilds a triangle per host and asks its corners; Gauss-Bonnet is named and held at arm's length ('one changing display is not a proof'). Reads cleanly and ends on the sequence's best closing line; the side works are described faithfully except the curvature slider, which ships as a number readout, not a surface sketch."
+        },
+        {
+          "hall": "Russell_Paradox",
+          "words": 1022,
+          "note": "IN / OUT at cell 5, then 'within U' at cell 6; the box, braces, barber, liar and hotel are sorted into contradiction versus offended expectation. The argument is precise and the two-Boolean excerpt is the code; the floor texts (IF IT DOES / IT DOESN'T) go unmentioned but do no harm."
+        },
+        {
+          "hall": "Godel_Incompleteness",
+          "words": 443,
+          "note": "A stopped prover arm and a sorter with a gold gap; the prose is careful (three kinds of failed search, soundness named) but anchors two of ten placed works, wears a different template (H1, question line, no sections, inline link) and is a third the length of its neighbours. The floor slogans say what the chapter asks the reader not to say yet."
+        },
+        {
+          "hall": "Escher_Impossible",
+          "words": 898,
+          "note": "STEP around a tabletop model whose console adds up ascent and descent; FORM cycles five constructions (RETURN SIDE, CLOSING DROP, OPEN RUN, SCAFFOLD, TILTED TREADS); then the green bead at the Penrose beams and the trident's two-into-three. Every control, name and number checks against escher_staircase_study.gd; the most physically grounded hall in the arc."
+        },
+        {
+          "hall": "Brouwer_Intuitionism",
+          "words": 1119,
+          "note": "'Wait before touching anything': two buttons append to a prefix the program has not stored ahead; excluded middle as a reading slider; the sqrt2^sqrt2 case split; Cantor's finite diagonal; a timed staircase for contrast. Faithful to code (256 / 10 / 32 bits, blue and amber beads); the one slip is 'nearby' for a work at the other end of the hall."
+        },
+        {
+          "hall": "Florensky_Paraconsistent",
+          "words": 1033,
+          "note": "Walk through a closed leaf; three buttons hold P and not-P without the alarm following; the sphere keeps A and not-A; the two quantum toys at the back are refused as certificates. Strong on non-explosion versus dialetheism; the Schrodinger paragraph is written from a desk."
+        },
+        {
+          "hall": "Crisis_Synthesis",
+          "words": 1303,
+          "note": "The formula with three reading buttons and two disputed rails; the logistic map under its own r; the atrium's 1:10 model; five returning works; a closing turn to whose possibilities an arrangement sustains. As source it is the arc's best synthesis; as rendered, an unclosed code fence swallows its second half and all three footnotes."
+        }
+      ],
+      "stumbles": [
+        "Crisis_Synthesis: the code fence at line 43 is two backticks, so everything after `x = r * x * (1.0 - x)` (atrium, returning works, closing section, three footnotes) renders as one monospace block.",
+        "Godel_Incompleteness: 443 words for a hall of ten works; eight pass without a sentence, and the floor under the visitor says 'SELF-REFERENCE IS THE EDGE' three rooms after Russell called that lesson too thin.",
+        "Euclid_Parallel section 6: 'So we open on the fallback: `_point_mode = true`' describes a scan this map never runs; the token `#mode:grid` sets GRID VIEW explicitly and the screen draws sixteen by sixteen empty cells.",
+        "Florensky_Paraconsistent: 'on a desktop click, a randomly chosen ALIVE or DEAD result' is a desktop aside; in the headset the box's input handler returns and the lid never opens.",
+        "Crisis_Synthesis: the first sentence, 'A formula waits in the next room', is read while standing four cells from the formula.",
+        "NonEuclidean_Spaces: 'changes its own surface sketch' for a slider placed without a witness token, which builds no surface; and the heading 'The surfaces beside the bench' for works at the far end of the hall.",
+        "Brouwer_Intuitionism: 'The nearby sum over hypotheses' after the triangle and lines at the back, for a work standing beside the choice bench at the front.",
+        "Euclid_Parallel: 'In the source, move Line3's offset out to 0.4' asks a visitor to edit a scene file; 'three placements ship them' counts corridor and test copies; 'isoceles'.",
+        "Crisis_Synthesis: 'The plaque, the nested box and the staircase return as reminders', but the Godel plaque was never introduced, so for the reader it appears here for the first time."
+      ],
+      "keep": [
+        {
+          "hall": "Euclid_Parallel",
+          "quote": "Count once more: five postulates, three lines, one triangle, one screen, two rows of pillars. Every number is true. Not one of them is necessary."
+        },
+        {
+          "hall": "NonEuclidean_Spaces",
+          "quote": "For now, return the slider to PLANE. The floor has not moved. Your account of it has."
+        },
+        {
+          "hall": "Russell_Paradox",
+          "quote": "The arrows turn around the same disc. Your hand has somewhere to go; the proposed set does not."
+        },
+        {
+          "hall": "Godel_Incompleteness",
+          "quote": "That matters because a slow search, a broken search and a proof that no search can succeed are three different things."
+        },
+        {
+          "hall": "Escher_Impossible",
+          "quote": "The mark offers a place from which to believe the image. You are allowed to leave it. What else becomes convincing only when we remain in the assigned place?"
+        },
+        {
+          "hall": "Brouwer_Intuitionism",
+          "quote": "This room has not made the world obey your hand. It has made a small part wait for it."
+        },
+        {
+          "hall": "Florensky_Paraconsistent",
+          "quote": "The visible assertion \"closed\" has no authority to stop you. Someone had to make that decision. A system can preserve conflicting descriptions and still have to decide who gets through."
+        },
+        {
+          "hall": "Crisis_Synthesis",
+          "quote": "The earlier rooms have not proved it. An equals sign can gather a desire before we know how to measure it."
+        }
+      ],
+      "handover_in": "GT_Matching ends by naming the foundations sequence and handing over one distinction: a procedure meeting its local rule is not automatically a proof of its strongest advertised conclusion. Euclid_Parallel never repeats the phrase, but its whole method is that distinction applied (the plaque's gold branch, the triangle's shipped sixties, the screen's grid before data) and its last lines answer it directly ('Every number is true. Not one of them is necessary'). The join is clean if implicit; the only friction is register: the reader leaves a 574-word hall with one control and enters a 1709-word hall with seven code excerpts and instructions that sometimes address an editor rather than a walker.",
+      "handover_out": "Crisis_Synthesis ends 'Leave the formula lit. We will meet it again in the laboratory, where particular implementations give its terms consequences', and QFEP_Introduction opens 'In the previous room, the formula waited to be questioned. Here it returns a number'. A clean pass; QFEP_Introduction even corrects an expectation Crisis sets ('Move phi through zero') by noting its own phi rail is nonnegative. Two wrinkles on the Crisis side: its opening line 'A formula waits in the next room' belongs to Florensky's exit, not this hall's entrance, and its unclosed code fence means the reader arrives at the laboratory having read the synthesis's second half as monospace.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_foundationscrisis.001",
+      "title": "Close the logistic-map code fence",
+      "spec": "[structure] Crisis_Synthesis\nQuote: “``”\nWhy: Line 43 closes the fence opened at line 41 with two backticks; a closing fence must be at least as long as the opening one, so lines 44-105 (the atrium, the five returning works, the closing section and all three footnotes, about 800 words) render as one monospace block.\nDo: Change the two backticks on line 43 to three.\nEvidence: commons/maps/Crisis_Synthesis/final.md:41 opens ```gdscript and :43 is ``; grep '^`' finds fences only at lines 9, 11, 41, 43, so nothing later closes it.\nFile: commons/maps/Crisis_Synthesis/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Crisis_Synthesis"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Crisis_Synthesis",
+      "quote": "``",
+      "why": "Line 43 closes the fence opened at line 41 with two backticks; a closing fence must be at least as long as the opening one, so lines 44-105 (the atrium, the five returning works, the closing section and all three footnotes, about 800 words) render as one monospace block.",
+      "proposal": "Change the two backticks on line 43 to three.",
+      "evidence": "commons/maps/Crisis_Synthesis/final.md:41 opens ```gdscript and :43 is ``; grep '^`' finds fences only at lines 9, 11, 41, 43, so nothing later closes it.",
+      "review": "unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.002",
+      "title": "Walk the eight works the chapter passes in silence",
+      "spec": "[encounter] Godel_Incompleteness\nQuote: “Escher next changes the medium.”\nWhy: The map places ten works and the chapter anchors two; the visitor stands beside a plaque reading 'This statement is unprovable within this system', a tower where each added axiom opens a new gap, Escher's Print Gallery and four verification pieces, and the book says nothing. Crisis_Synthesis later calls the plaque a returning reminder the reader never met.\nDo: Extend the chapter (and bring it to the arc's section format; its H1-plus-question template is unique in the sequence) with at least three anchored passages: @godel_statement_plaque where the visitor cycles its sentences; @incompleteness_tower on the existing paragraph about adding an unproved truth as a new axiom, which is that work's argument; @print_gallery_recursion as the bridge into Escher. Name the four verification works (rice booth, negative control, critic stack, fluency seam) in one paragraph on what checking can and cannot do.\nEvidence: commons/maps/Godel_Incompleteness/map_data.json interactables: negative_control_fixture (4,3), critic_regress_stack (10,3), godel_sentence_machine (7,4), rice_verifier_booth (3,5), print_gallery_recursion (10,5), synthesis_stand#subject:godel_statement_plaque#mode:hero (2,8), fluency_seam (11,9), godel_statement_plaque (4,10), provability_sorter (5,11), incompleteness_tower (9,11); final.md anchors only lines 5 and 15 (final_tags: 2 works tagged). commons/interfaces/foundations/godel_statement_plaque.gd:155-158 (the sentences); registry foundations_crisis.json incompleteness_tower: 'Add an axiom to close the gap and a new gap opens above'; Crisis_Synthesis/final.md:83.\nFile: commons/maps/Godel_Incompleteness/final.md",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Godel_Incompleteness"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Godel_Incompleteness",
+      "quote": "Escher next changes the medium.",
+      "why": "The map places ten works and the chapter anchors two; the visitor stands beside a plaque reading 'This statement is unprovable within this system', a tower where each added axiom opens a new gap, Escher's Print Gallery and four verification pieces, and the book says nothing. Crisis_Synthesis later calls the plaque a returning reminder the reader never met.",
+      "proposal": "Extend the chapter (and bring it to the arc's section format; its H1-plus-question template is unique in the sequence) with at least three anchored passages: @godel_statement_plaque where the visitor cycles its sentences; @incompleteness_tower on the existing paragraph about adding an unproved truth as a new axiom, which is that work's argument; @print_gallery_recursion as the bridge into Escher. Name the four verification works (rice booth, negative control, critic stack, fluency seam) in one paragraph on what checking can and cannot do.",
+      "evidence": "commons/maps/Godel_Incompleteness/map_data.json interactables: negative_control_fixture (4,3), critic_regress_stack (10,3), godel_sentence_machine (7,4), rice_verifier_booth (3,5), print_gallery_recursion (10,5), synthesis_stand#subject:godel_statement_plaque#mode:hero (2,8), fluency_seam (11,9), godel_statement_plaque (4,10), provability_sorter (5,11), incompleteness_tower (9,11); final.md anchors only lines 5 and 15 (final_tags: 2 works tagged). commons/interfaces/foundations/godel_statement_plaque.gd:155-158 (the sentences); registry foundations_crisis.json incompleteness_tower: 'Add an axiom to close the gap and a new gap opens above'; Crisis_Synthesis/final.md:83.",
+      "review": "confirmed by a code checker (cited files only): Map places exactly the ten cited works at the cited cells (negative_control_fixture (4,3) ... incompleteness_tower (9,11)). final.md has anchors only at :5 @godel_sentence_machine and :15 @provability_sorter (plus an empty '<!-- @ -->' at :23); :25 is 'Escher next changes the medium.' godel_statement_plaque.gd:158 holds 'This statement is unprovable within this system.'; foundations_crisis.json:409 has the tower line; Crisis_Synthesis/final.md:83 'The plaque ... return as reminders.'",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.003",
+      "title": "Rewrite the Schrodinger box for a visitor who cannot open it",
+      "spec": "[vr] Florensky_Paraconsistent\nQuote: “The box offers a sealed interior and, on a desktop click, a randomly chosen ALIVE or DEAD result. Its lid opens; after a short interval it resets.”\nWhy: In the headset the box never opens: `_input` returns whenever XR is active and the script states tracked-hand opening is not implemented; the visitor reads a label saying 'Desktop click: random outcome'. The sentence is a desktop aside in reader prose and narrates an event the reader will not see.\nDo: Say what the visitor meets: a box that stays sealed here, whose own label admits it opens only on a desk and would decide the result by a coin the program flips. Keep 'This is a scripted toy'; it lands harder on a box that will not open for you.\nEvidence: commons/artifacts/schrodinger_box/schrodinger_box.gd:340-342 (`func _input`: `if _xr_active: return`), :13 ('Tracked-hand opening is not implemented'), :259 (label 'Desktop click: random outcome'), :314 (`randf() > 0.5`); Florensky_Paraconsistent/final.md:58.\nFile: commons/maps/Florensky_Paraconsistent/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Florensky_Paraconsistent"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Florensky_Paraconsistent",
+      "quote": "The box offers a sealed interior and, on a desktop click, a randomly chosen ALIVE or DEAD result. Its lid opens; after a short interval it resets.",
+      "why": "In the headset the box never opens: `_input` returns whenever XR is active and the script states tracked-hand opening is not implemented; the visitor reads a label saying 'Desktop click: random outcome'. The sentence is a desktop aside in reader prose and narrates an event the reader will not see.",
+      "proposal": "Say what the visitor meets: a box that stays sealed here, whose own label admits it opens only on a desk and would decide the result by a coin the program flips. Keep 'This is a scripted toy'; it lands harder on a box that will not open for you.",
+      "evidence": "commons/artifacts/schrodinger_box/schrodinger_box.gd:340-342 (`func _input`: `if _xr_active: return`), :13 ('Tracked-hand opening is not implemented'), :259 (label 'Desktop click: random outcome'), :314 (`randf() > 0.5`); Florensky_Paraconsistent/final.md:58.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.004",
+      "title": "The screen did not fall back to a grid; the map asked for one",
+      "spec": "[code-claim] Euclid_Parallel\nQuote: “So we open on the fallback: `_point_mode = true`”\nWhy: The map places `science_screen:180:1.5#mode:grid`; 'grid' is a recognised explicit mode (GRID VIEW, 'cell state heatmap'), the mode is locked, and the scan the chapter describes returns before it starts. What the visitor sees is a sixteen-by-sixteen heatmap of empty cells for a cellular automaton this hall does not contain; the quoted line and mechanism are the wrong ones.\nDo: Rewrite section 6's mechanism around the map token: the room asked the screen for a heatmap of cell states and the screen draws sixteen by sixteen dead cells because nothing here has cells. That is the chapter's own thesis, a declaration outrunning its code, for the third time in one room; 'Cross the room and watch the picture' still holds.\nEvidence: commons/maps/Euclid_Parallel/map_data.json interactables (3,5) `science_screen:180:1.5#mode:grid`; commons/artifacts/science_screen/science_screen.gd:1589-1591 (`mode` -> `_set_explicit_mode`), :449-452 ('grid','ca','automata' -> `_generic_mode_name = \"grid\"`, `_label_name = \"GRID VIEW\"`), :460 (`_mode_locked = true`), :478-481 (`_deferred_first_scan` returns when locked; no scan), :2706-2760 (`_draw_grid_tracker`: `_tracking_generic` null -> cols = rows = 16, every cell 0); final.md:133-140.\nFile: commons/maps/Euclid_Parallel/final.md",
+      "effort": "1h",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Euclid_Parallel"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "Euclid_Parallel",
+      "quote": "So we open on the fallback: `_point_mode = true`",
+      "why": "The quoted mechanism is wrong as the task says; the correction is that the screen does not skip scanning entirely: it runs a targeted search for a `grid_size` neighbour (not get_grid_data, which the chapter also misnames) and finds none.",
+      "proposal": "As proposed, with the mechanism stated as: the map asked for a grid; the screen looked eight metres for anything with a grid_size and found nothing; it draws sixteen by sixteen dead cells.",
+      "evidence": "commons/maps/Euclid_Parallel/map_data.json interactables (3,5) `science_screen:180:1.5#mode:grid`; commons/artifacts/science_screen/science_screen.gd:1589-1591 (`mode` -> `_set_explicit_mode`), :449-452 ('grid','ca','automata' -> `_generic_mode_name = \"grid\"`, `_label_name = \"GRID VIEW\"`), :460 (`_mode_locked = true`), :478-481 (`_deferred_first_scan` returns when locked; no scan), :2706-2760 (`_draw_grid_tracker`: `_tracking_generic` null -> cols = rows = 16, every cell 0); final.md:133-140.",
+      "review": "amended by a code checker (cited files only): Map cell (row 5, col 3) = science_screen:180:1.5#mode:grid. science_screen.gd:1589-1591 mode -> _set_explicit_mode; :449-452 'grid' -> GRID VIEW; :460 _mode_locked = true; :478-481 returns when locked, but AFTER calling _connect_tracking_for_mode (:500), whose grid branch (:523-527) does a property search for a neighbour with `grid_size` within scan_radius 8.0 (:79). Neighbours are euclid_postulates_plaque, parallel_lines (scriptless tscn of line_static), angle_sum_triangle; none has grid_size, so _tracking_generic stays null and _draw_grid_tracker (:2719) draws 16x16 with every cell 0. final.md:133-140 quotes `_point_mode = true` as the fallback.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.005",
+      "title": "Give the curvature slider the surface the chapter says it has",
+      "spec": "[encounter] NonEuclidean_Spaces\nQuote: “The separate curvature slider changes its own surface sketch.”\nWhy: Placed as `curvature_slider:0:0.5` with no `witness` token, the slider ships at witness = number and builds no patch at all; the visitor moves a handle and a readout says 'CURVATURE: K = ... (Hyperbolic)'. The paragraph's point, that an available gesture promises more authority than it has, needs a gesture that visibly bends something.\nDo: Add `#witness:surface` to the map token (the code then builds the saddle / plane / dome patch and rebuilds it on every move); or, if the hall must stay as it is, change the sentence to 'changes its own readout'.\nEvidence: commons/artifacts/curvature_slider/curvature_slider.gd:60 (`@export_enum(\"number\", \"surface\", \"normals\") var witness: String = \"number\"`), :133-135 (`_create_specimen`: `if witness == \"number\": return`), :117-123 (`_label_text`); commons/maps/NonEuclidean_Spaces/map_data.json interactables (2,9) `curvature_slider:0:0.5`; final.md:48.\nFile: commons/maps/NonEuclidean_Spaces/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "NonEuclidean_Spaces"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "NonEuclidean_Spaces",
+      "quote": "The separate curvature slider changes its own surface sketch.",
+      "why": "Placed as `curvature_slider:0:0.5` with no `witness` token, the slider ships at witness = number and builds no patch at all; the visitor moves a handle and a readout says 'CURVATURE: K = ... (Hyperbolic)'. The paragraph's point, that an available gesture promises more authority than it has, needs a gesture that visibly bends something.",
+      "proposal": "Add `#witness:surface` to the map token (the code then builds the saddle / plane / dome patch and rebuilds it on every move); or, if the hall must stay as it is, change the sentence to 'changes its own readout'.",
+      "evidence": "commons/artifacts/curvature_slider/curvature_slider.gd:60 (`@export_enum(\"number\", \"surface\", \"normals\") var witness: String = \"number\"`), :133-135 (`_create_specimen`: `if witness == \"number\": return`), :117-123 (`_label_text`); commons/maps/NonEuclidean_Spaces/map_data.json interactables (2,9) `curvature_slider:0:0.5`; final.md:48.",
+      "review": "confirmed by a code checker (cited files only): curvature_slider.gd:60 witness defaults to 'number'; :133-135 _create_specimen returns before building any patch at that value; :117-123 the label reads 'CURVATURE: K = ...\\n(Hyperbolic|Elliptic|Flat/Euclidean)'; :254-257 apply_grid_config accepts a 'witness' key. NonEuclidean_Spaces interactables (2,9) is 'curvature_slider:0:0.5' with no #witness. final.md:48 says 'changes its own surface sketch'.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.006",
+      "title": "The formula is in this room, not the next",
+      "spec": "[prose] Crisis_Synthesis\nQuote: “A formula waits in the next room.”\nWhy: The reader has just crossed from Florensky, whose last paragraph already said 'The next room brings these different responses together'; the formula stands four cells ahead of the spawn in this hall. The first sentence puts it on the wrong side of the door.\nDo: 'A formula waits ahead.' or 'A formula waits in this room.'\nEvidence: commons/maps/Crisis_Synthesis/final.md:1; map_data.json utilities sp at (9,1), interactables qfep_formula_3d at (9,5); Florensky_Paraconsistent/final.md:72.\nFile: commons/maps/Crisis_Synthesis/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Crisis_Synthesis"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Crisis_Synthesis",
+      "quote": "A formula waits in the next room.",
+      "why": "The reader has just crossed from Florensky, whose last paragraph already said 'The next room brings these different responses together'; the formula stands four cells ahead of the spawn in this hall. The first sentence puts it on the wrong side of the door.",
+      "proposal": "'A formula waits ahead.' or 'A formula waits in this room.'",
+      "evidence": "commons/maps/Crisis_Synthesis/final.md:1; map_data.json utilities sp at (9,1), interactables qfep_formula_3d at (9,5); Florensky_Paraconsistent/final.md:72.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.007",
+      "title": "The floor contradicts the chapter",
+      "spec": "[encounter] Godel_Incompleteness\nQuote: “Before accepting the words \"true but unprovable\", ask what the movement has shown you.”\nWhy: Five floor texts in the utilities layer shout the slogans the chapter asks the reader to hold back from ('TRUE - BUT UNDECIDABLE', 'G - I AM UNPROVABLE') and 'SELF-REFERENCE IS THE EDGE', which Russell's chapter just called too thin a lesson and Crisis_Synthesis denies again. The visitor reads the floor first.\nDo: Either let the chapter read the floor (one sentence: the hall has already decided in capitals; walk over it and ask what the machine has shown), or replace 'SELF-REFERENCE IS THE EDGE' and 'TRUE - BUT UNDECIDABLE' in the utilities layer with the chapter's own distinctions.\nEvidence: commons/maps/Godel_Incompleteness/map_data.json utilities (7,2) '3t:EVERY FORMAL SYSTEM', (7,3) '3t:CAN NAME ITSELF', (7,6) '3t:G - I AM UNPROVABLE', (7,9) '3t:TRUE - BUT UNDECIDABLE', (7,12) '3t:SELF-REFERENCE IS THE EDGE'; Godel_Incompleteness/final.md:7; Russell_Paradox/final.md:42; Crisis_Synthesis/final.md:75.\nFile: commons/maps/Godel_Incompleteness/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Godel_Incompleteness"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Godel_Incompleteness",
+      "quote": "Before accepting the words \"true but unprovable\", ask what the movement has shown you.",
+      "why": "Five floor texts in the utilities layer shout the slogans the chapter asks the reader to hold back from ('TRUE - BUT UNDECIDABLE', 'G - I AM UNPROVABLE') and 'SELF-REFERENCE IS THE EDGE', which Russell's chapter just called too thin a lesson and Crisis_Synthesis denies again. The visitor reads the floor first.",
+      "proposal": "Either let the chapter read the floor (one sentence: the hall has already decided in capitals; walk over it and ask what the machine has shown), or replace 'SELF-REFERENCE IS THE EDGE' and 'TRUE - BUT UNDECIDABLE' in the utilities layer with the chapter's own distinctions.",
+      "evidence": "commons/maps/Godel_Incompleteness/map_data.json utilities (7,2) '3t:EVERY FORMAL SYSTEM', (7,3) '3t:CAN NAME ITSELF', (7,6) '3t:G - I AM UNPROVABLE', (7,9) '3t:TRUE - BUT UNDECIDABLE', (7,12) '3t:SELF-REFERENCE IS THE EDGE'; Godel_Incompleteness/final.md:7; Russell_Paradox/final.md:42; Crisis_Synthesis/final.md:75.",
+      "review": "confirmed by a code checker (cited files only): Godel_Incompleteness utilities: (7,2) '3t:EVERY FORMAL SYSTEM', (7,3) '3t:CAN NAME ITSELF', (7,6) '3t:G — I AM UNPROVABLE', (7,9) '3t:TRUE — BUT UNDECIDABLE', (7,12) '3t:SELF-REFERENCE IS THE EDGE' (em dashes in the map, hyphens in the task). final.md:7 has the quoted sentence; Russell_Paradox/final.md:42 says 'Self-reference is bad would teach us too little'; Crisis_Synthesis/final.md:75 'Looking back at oneself was never enough'.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.008",
+      "title": "The sum over hypotheses is not nearby",
+      "spec": "[prose] Brouwer_Intuitionism\nQuote: “The nearby sum over hypotheses brings another limit back from computation.”\nWhy: The sentence arrives after the triangle and lines at the back of the hall (rows 11 and 13); intractable_evidence stands beside the choice bench at the front (row 4). A visitor who looks around for it at the back finds nothing.\nDo: 'Back beside the choice bench, the sum over hypotheses brings another limit back from computation.'\nEvidence: commons/maps/Brouwer_Intuitionism/map_data.json interactables: brouwer_choice_sequence (6,3), intractable_evidence (9,4), angle_sum_triangle (9,11), parallel_lines (9,13); final.md:83-85.\nFile: commons/maps/Brouwer_Intuitionism/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Brouwer_Intuitionism"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Brouwer_Intuitionism",
+      "quote": "The nearby sum over hypotheses brings another limit back from computation.",
+      "why": "The sentence arrives after the triangle and lines at the back of the hall (rows 11 and 13); intractable_evidence stands beside the choice bench at the front (row 4). A visitor who looks around for it at the back finds nothing.",
+      "proposal": "'Back beside the choice bench, the sum over hypotheses brings another limit back from computation.'",
+      "evidence": "commons/maps/Brouwer_Intuitionism/map_data.json interactables: brouwer_choice_sequence (6,3), intractable_evidence (9,4), angle_sum_triangle (9,11), parallel_lines (9,13); final.md:83-85.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.009",
+      "title": "The surfaces are not beside the bench",
+      "spec": "[structure] NonEuclidean_Spaces\nQuote: “## The surfaces beside the bench”\nWhy: The bench stands at (11,2) by the entrance; the saddle, dome and slider stand at (2,12), (4,11) and (2,9), at the far end by the exit. The heading sends the visitor's eyes the wrong way.\nDo: '## The surfaces at the far end'.\nEvidence: commons/maps/NonEuclidean_Spaces/map_data.json interactables: triangle_curvature_workbench (11,2), hyperbolic_surface (2,12), elliptic_surface (4,11), curvature_slider (2,9); utilities sp (1,1), t (8,12); final.md:38.\nFile: commons/maps/NonEuclidean_Spaces/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "NonEuclidean_Spaces"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "NonEuclidean_Spaces",
+      "quote": "## The surfaces beside the bench",
+      "why": "The bench stands at (11,2) by the entrance; the saddle, dome and slider stand at (2,12), (4,11) and (2,9), at the far end by the exit. The heading sends the visitor's eyes the wrong way.",
+      "proposal": "'## The surfaces at the far end'.",
+      "evidence": "commons/maps/NonEuclidean_Spaces/map_data.json interactables: triangle_curvature_workbench (11,2), hyperbolic_surface (2,12), elliptic_surface (4,11), curvature_slider (2,9); utilities sp (1,1), t (8,12); final.md:38.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.010",
+      "title": "An instruction the headset cannot follow",
+      "spec": "[vr] Euclid_Parallel\nQuote: “In the source, move Line3's offset out to 0.4 and count the gaps again.”\nWhy: The chapter otherwise addresses a walker ('Walk between the columns', 'press GOLD', 'Cross the room'); this sentence asks the reader to edit a scene file. A visitor cannot, and the point (spacing set by hand, parallelism from the shared basis) does not need them to.\nDo: 'Imagine Line3 pushed out to 0.4: the gaps change, and the lines still never meet.'\nEvidence: commons/maps/Euclid_Parallel/final.md:74; commons/primitives/line/parallel_lines.tscn:14 (Line3 x = 0.305252).\nFile: commons/maps/Euclid_Parallel/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Euclid_Parallel"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Euclid_Parallel",
+      "quote": "In the source, move Line3's offset out to 0.4 and count the gaps again.",
+      "why": "The chapter otherwise addresses a walker ('Walk between the columns', 'press GOLD', 'Cross the room'); this sentence asks the reader to edit a scene file. A visitor cannot, and the point (spacing set by hand, parallelism from the shared basis) does not need them to.",
+      "proposal": "'Imagine Line3 pushed out to 0.4: the gaps change, and the lines still never meet.'",
+      "evidence": "commons/maps/Euclid_Parallel/final.md:74; commons/primitives/line/parallel_lines.tscn:14 (Line3 x = 0.305252).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.011",
+      "title": "A plaque cannot return before it has appeared",
+      "spec": "[handover] Crisis_Synthesis\nQuote: “The plaque, the nested box and the staircase return as reminders. A sentence about proof, an impossible membership demand, a convincing view of steps”\nWhy: The Godel plaque stands in Godel's hall twice (once as a synthesis-stand hero) but the Godel chapter never mentions it, so for the reader this is its first appearance; the sentence claims a memory the reader does not have. Moot if the Godel chapter is extended.\nDo: Until the Godel chapter introduces it, introduce it here: 'A plaque you may have passed in Godel's hall, a sentence about its own proof, joins the nested box and the staircase.'\nEvidence: commons/maps/Crisis_Synthesis/final.md:77-83; commons/maps/Godel_Incompleteness/map_data.json (4,10) godel_statement_plaque and (2,8) synthesis_stand#subject:godel_statement_plaque#mode:hero; Godel_Incompleteness/final.md carries no @godel_statement_plaque anchor.\nFile: commons/maps/Crisis_Synthesis/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Crisis_Synthesis"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "Crisis_Synthesis",
+      "quote": "The plaque, the nested box and the staircase return as reminders. A sentence about proof, an impossible membership demand, a convincing view of steps",
+      "why": "The Godel plaque stands in Godel's hall twice (once as a synthesis-stand hero) but the Godel chapter never mentions it, so for the reader this is its first appearance; the sentence claims a memory the reader does not have. Moot if the Godel chapter is extended.",
+      "proposal": "Until the Godel chapter introduces it, introduce it here: 'A plaque you may have passed in Godel's hall, a sentence about its own proof, joins the nested box and the staircase.'",
+      "evidence": "commons/maps/Crisis_Synthesis/final.md:77-83; commons/maps/Godel_Incompleteness/map_data.json (4,10) godel_statement_plaque and (2,8) synthesis_stand#subject:godel_statement_plaque#mode:hero; Godel_Incompleteness/final.md carries no @godel_statement_plaque anchor.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.012",
+      "title": "'Three placements' is not the museum's number",
+      "spec": "[code-claim] Euclid_Parallel\nQuote: “At `flat` it prints the shipped strings, because three placements ship them.”\nWhy: The shipping argument rests on a count. In the spine the triangle stands in two halls, Euclid_Parallel and Brouwer_Intuitionism; the other eight files carrying the token are corridor, curation-bay, ribbon, composed and test copies. The reader is asked to accept a reason on a number that is neither theirs nor current.\nDo: Say 'two halls' (and 'Keeping two halls byte-identical' two paragraphs down), or drop the count and keep 'a reason about shipping, not about triangles'.\nEvidence: grep -l angle_sum_triangle commons/maps/*/map_data.json returns 10 files; spine halls among them: Euclid_Parallel (7,9) and Brouwer_Intuitionism (9,11); the rest are Corridor_Euclid_Parallel, Curation_Bay_foundationscrisis_0, Euclid_Parallel_composed, Placed_Foundationscrisi_05_Dia, Placed_Foundationscrisi_06_Teshima, Ribbon_Foundationscri_05, Spine_Foundationscrisi_Dia, test_batch_1; final.md:97 and :99.\nFile: commons/maps/Euclid_Parallel/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Euclid_Parallel"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "Euclid_Parallel",
+      "quote": "At `flat` it prints the shipped strings, because three placements ship them.",
+      "why": "The chapter's 'three' is the code's own comment (angle_sum_triangle.gd:40, :150), which has drifted: in the spine the triangle stands in two halls, Euclid_Parallel and Brouwer_Intuitionism; the other eight files carrying the token are corridor, curation-bay, ribbon, composed and test copies. The reader is handed a count that is neither theirs nor current, and the file's comment is wrong in the same way.",
+      "proposal": "Either say 'two halls' (and 'Keeping two halls byte-identical' at :99) or, since the chapter is quoting the file, attribute it: 'the file says three maps ship them; today two halls of the walk do'. Drop the count if in doubt and keep 'a reason about shipping, not about triangles'. The stale comment in angle_sum_triangle.gd:40/:150 is a separate code fix.",
+      "evidence": "grep -l angle_sum_triangle commons/maps/*/map_data.json returns 10 files; spine halls among them: Euclid_Parallel (7,9) and Brouwer_Intuitionism (9,11); the rest are Corridor_Euclid_Parallel, Curation_Bay_foundationscrisis_0, Euclid_Parallel_composed, Placed_Foundationscrisi_05_Dia, Placed_Foundationscrisi_06_Teshima, Ribbon_Foundationscri_05, Spine_Foundationscrisi_Dia, test_batch_1; final.md:97 and :99.",
+      "review": "amended by a code checker (cited files only): Count verified: 10 map files carry angle_sum_triangle; spine halls Euclid_Parallel (7,9) '180:1.2' and Brouwer_Intuitionism (9,11) '180:1.1'; the other eight are corridor/bay/composed/placed/ribbon/spine/test copies. final.md:97 'three placements', :99 'Keeping three maps'. BUT the number is not the chapter's invention: angle_sum_triangle.gd:40 and :150 say 'because three maps ship them'. The chapter transcribes the artifact's own stale comment.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.013",
+      "title": "The angle excerpt is a paraphrase wearing a code fence",
+      "spec": "[code-claim] NonEuclidean_Spaces\nQuote: “var first = _edge_tangent(vertex, neighbour_a)”\nWhy: The bench's script has no `first`, `second`, `vertex` or `neighbour_a`; the angle is one line, `acos(clampf(_edge_tangent(v, u).dot(_edge_tangent(v, w)), -1.0, 1.0))`. Every other excerpt in the sequence is verbatim, and this one is introduced as what the readout does.\nDo: Quote line 503 as it stands, with a `# triangle_curvature_workbench.gd` header like the Euclid excerpts; or drop the fence and keep the prose about tangents and the dot product.\nEvidence: commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.gd:503 (`return acos(clampf(_edge_tangent(v, u).dot(_edge_tangent(v, w)), -1.0, 1.0))`), :595-596 (`var t_u`, `var t_w`); final.md:19-24.\nFile: commons/maps/NonEuclidean_Spaces/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "NonEuclidean_Spaces"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "NonEuclidean_Spaces",
+      "quote": "var first = _edge_tangent(vertex, neighbour_a)",
+      "why": "The bench's script has no `first`, `second`, `vertex` or `neighbour_a`; the angle is one line, `acos(clampf(_edge_tangent(v, u).dot(_edge_tangent(v, w)), -1.0, 1.0))`. Every other excerpt in the sequence is verbatim, and this one is introduced as what the readout does.",
+      "proposal": "Quote line 503 as it stands, with a `# triangle_curvature_workbench.gd` header like the Euclid excerpts; or drop the fence and keep the prose about tangents and the dot product.",
+      "evidence": "commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.gd:503 (`return acos(clampf(_edge_tangent(v, u).dot(_edge_tangent(v, w)), -1.0, 1.0))`), :595-596 (`var t_u`, `var t_w`); final.md:19-24.",
+      "review": "confirmed by a code checker (cited files only): triangle_curvature_workbench.gd:503 is exactly `return acos(clampf(_edge_tangent(v, u).dot(_edge_tangent(v, w)), -1.0, 1.0))`; :595-596 `var t_u`/`var t_w`; no `first`, `second`, `vertex` or `neighbour_a` anywhere in the file. NonEuclidean_Spaces/final.md:19-24 fences the three-line paraphrase.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_foundationscrisis.014",
+      "title": "isoceles",
+      "spec": "[prose] Euclid_Parallel\nQuote: “The shape those vertices make is isoceles, not equilateral.”\nWhy: A misspelling in reader prose, inherited from the script's own comment, on the sentence that is the hinge of the section.\nDo: 'isosceles'.\nEvidence: commons/maps/Euclid_Parallel/final.md:93; the same spelling in commons/artifacts/angle_sum_triangle/angle_sum_triangle.gd:38 (a comment).\nFile: commons/maps/Euclid_Parallel/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Euclid_Parallel"
+      ],
+      "sequence_refs": [
+        "foundationscrisis"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Euclid_Parallel",
+      "quote": "The shape those vertices make is isoceles, not equilateral.",
+      "why": "A misspelling in reader prose, inherited from the script's own comment, on the sentence that is the hinge of the section.",
+      "proposal": "'isosceles'.",
+      "evidence": "commons/maps/Euclid_Parallel/final.md:93; the same spelling in commons/artifacts/angle_sum_triangle/angle_sum_triangle.gd:38 (a comment).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    }
+  ]
+}

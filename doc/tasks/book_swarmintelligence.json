@@ -1,0 +1,628 @@
+{
+  "goal_id": "book_swarmintelligence",
+  "goal_title": "Book: Swarm Intelligence: Where Coordination Lives — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in swarmintelligence became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "swarmintelligence",
+    "order": 19,
+    "phase": "lambda_edge",
+    "title": "Swarm Intelligence: Where Coordination Lives",
+    "chapters": [
+      "SwarmIntelligence_PhysarumColony",
+      "SwarmIntelligence_FlowFields",
+      "SwarmIntelligence_Boids_Algorithm",
+      "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "SwarmIntelligence_Ant_Colony_Optimization",
+      "SwarmIntelligence_Particle_Swarm_Optimization",
+      "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+    ],
+    "words": 3249,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "SwarmIntelligence_PhysarumColony",
+      "SwarmIntelligence_FlowFields",
+      "SwarmIntelligence_Boids_Algorithm",
+      "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "SwarmIntelligence_Ant_Colony_Optimization",
+      "SwarmIntelligence_Particle_Swarm_Optimization",
+      "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "Boolean_Works (last of boolean_surfaces, for the handover in)",
+      "ML_Evolution (first of machinelearning, for the handover out)"
+    ],
+    "reading": {
+      "arc": "The sequence asks one question seven ways: when many bodies move together, what supplied the coordination? Physarum puts the memory in the ground; Flow Fields hands the ground a set of directions from outside; Boids removes the ground and makes neighbours the moving reference; the ABM hall gives agents state and a field that forgets at a rate the visitor sets; the ant colony splits the trail into a home channel and a food channel; the particle swarm moves memory inside the agent as a scored position; and the ecosystem adds a caretaker at population scale whose interventions are printed beside the box. Every chapter follows the same shape - watch one thing, the mechanism in plain words, what the picture cannot prove, a deferred experiment, a one-line handover - and every caveat re-says the sequence truth, that collective movement does not identify its cause. The arc lands cleanly on machine learning: inherited traits, environmental reward, and the rules that keep the experiment running.",
+      "holds": [
+        "The refrain 'who or what supplied this': a field written versus a field given (Physarum/FlowFields), remembered visits versus remembered evaluations (ants/PSO), local events versus a caretaker (ecosystem) - each chapter re-asks the sequence truth in its own terms.",
+        "A one-line handover closing every chapter that names the next room's change of source: supplied direction -> neighbours -> internal state and a remembering environment -> two channels -> scored memory -> quieter rules that keep a system alive.",
+        "The 'watch the fading route, not the strong one' device: Physarum's abandoned path, FlowFields' surprising arrow, ABM's persistence versus width, ACO's less-reinforced food direction, PSO's place that was bright and is no longer.",
+        "Explicit back-references that chain the halls: FlowFields names Physarum; ACO names 'the previous room'; PSO names 'the ant colony's traces'; the capstone recaps 'A flock followed neighbours; ants read traces; particles pursued remembered scores.'",
+        "Repeatable beginnings as a method: RESET restores the same food, qualities and headings in the ant hall, and the same scatter and velocities in the swarm hall, so 'change one thing' can mean something.",
+        "One identical skeleton per chapter: H1, a one-line question, a single anchored work, eight to ten short paragraphs of roughly 400-570 words, a deferred experiment, the handover."
+      ],
+      "hall_notes": [
+        {
+          "hall": "SwarmIntelligence_PhysarumColony",
+          "words": 409,
+          "note": "Opens on environmental memory: follow one bright connection through the twenty-second carousel of anchor layouts, then a junction, then the route that is fading. Reads as a patient watching instruction with the mechanism (sense ahead and to the sides, deposit, spread, decay, anchors emitting) given once in plain words; the organism the colony is named after is never named in the text."
+        },
+        {
+          "hall": "SwarmIntelligence_FlowFields",
+          "words": 422,
+          "note": "The supplied field: predict an agent's turn from its arrow through the ten-second tour that ends parked in noise, with two small checks (same patch, different histories; near arrows, opposite directions). The cost-map paragraph and 'a field can give a direction without giving a destination' are the sequence's clearest mechanism prose; the closing 'future version' defers an axis the code already has."
+        },
+        {
+          "hall": "SwarmIntelligence_Boids_Algorithm",
+          "words": 419,
+          "note": "One slider at a time on the highlighted boid's three arrows, then RADIUS with the weights held; the turn to 'who can each agent perceive' and 'alignment is not consent' carry the critical weight. It addresses one of the hall's five flocks and never mentions the other four."
+        },
+        {
+          "hall": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+          "words": 460,
+          "note": "The most experimental chapter: RESET as a repeatable beginning, EVAPORATE as how fast the ground forgets, ANTS as replacing the population while leaving its field, then RESET again to erase the marks. Reads well as a protocol; the map's catalyst foe, vent and prompter box are absent from the text, and the three MODE behaviours are counted but not named."
+        },
+        {
+          "hall": "SwarmIntelligence_Ant_Colony_Optimization",
+          "words": 425,
+          "note": "Two channels: outward ants seek food and leave home, returning ants the reverse; a destination is a state change rather than a bright place. Names stigmergy, refuses the optimisation claim the map title invites, and is the cleanest self-contained chapter of the seven."
+        },
+        {
+          "hall": "SwarmIntelligence_Particle_Swarm_Optimization",
+          "words": 572,
+          "note": "The longest chapter: CONVERGE, SPREAD and NOVELTY as three scores put to the same bodies, the archive of two hundred, re-scoring memories, inertia. The strongest argument in the sequence ('Best is a relation between a position and an objective'), but the console's fourth button is missing from the text and the length shows in the second half."
+        },
+        {
+          "hall": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+          "words": 500,
+          "note": "The capstone: alternate scale between one encounter and the count, then read the POPULATION SUPPORT record beside the box and look back at the organisms. Recaps the sequence in one line, lands the truth - name the support before calling a thing self-organising - and hands over to machine learning without strain."
+        }
+      ],
+      "stumbles": [
+        "SwarmIntelligence_PhysarumColony: 'a biological name does not make these simulated agents an experimental account of an organism' - but no biological name has been given; the reader has only the in-world caption PHYSARUM and the next chapter's 'Physarum's agents' as if it had been introduced.",
+        "SwarmIntelligence_PhysarumColony: 'The earlier emergence rooms asked how repeated local updates produce a pattern' reaches back to cellular automata, seven sequences earlier, while the reader has just left Boolean Works carrying 'the question of accommodation' that nothing here picks up.",
+        "SwarmIntelligence_FlowFields: 'Where the direction is zero, the agents have a wandering behaviour' sits in the wind-and-noise paragraph, but wind and noise fill every cell; the zero vector belongs to the target cell and to sealed cells in the route-finding scenes.",
+        "SwarmIntelligence_FlowFields: 'For a future version, hiding the arrows while holding the scene fixed...' - the artifact already has a field_display:hidden axis and a pinnable scenario, so the sequence's sharpest test of its own thesis is deferred rather than staged.",
+        "SwarmIntelligence_FlowFields: the 50 m ant terrain and the ecosystem box - the primary works of chapters five and seven - stand three cells from the field, unmentioned, and are met again later as if new.",
+        "SwarmIntelligence_Boids_Algorithm: the hall has five flocks and a science screen; the chapter serves one. The flock that parts around the controller hand is the only place in the sequence where the visitor's body is a neighbour, and it is never mentioned. RESET here deals a fresh unseeded scatter, unlike the two seeded resets the reader is taught to rely on next.",
+        "SwarmIntelligence_Agent_Based_Modeling_ABM: 'Watch the colony long enough to recognise a trail' is written for an undisturbed hall, but the map places a catalyst_foe with the base 'foe' personality (chases, 15 contact damage), a vent, and a prompter box that opens two cells from the spawn.",
+        "SwarmIntelligence_Particle_Swarm_Optimization: 'These are three different questions put to the same moving bodies' - the console the visitor stands at has four buttons; RIDGE ('Meritocratic - One narrow path counts') is never mentioned.",
+        "SwarmIntelligence_Particle_Swarm_Optimization: 'continuing velocity and remembered positions can still influence where the next update carries the particle' - a landscape switch resets every remembered best to the present position, so only the velocity is carried across the switch the reader is told to watch.",
+        "Sequence-wide: all seven chapters end on a deferred experiment ('a proposal for this room's development', 'for a future version', 'a future experiment', 'a proposed extension', 'a useful future interaction', 'a future comparison' twice); by the fifth the book reads as a backlog, and the ACO deferral repeats Physarum's almost word for word."
+      ],
+      "keep": [
+        {
+          "hall": "SwarmIntelligence_PhysarumColony",
+          "quote": "There is no little map hidden inside the moving dots. Information persists outside them, in a medium that changes what later movements are likely to do."
+        },
+        {
+          "hall": "SwarmIntelligence_FlowFields",
+          "quote": "A field can give a direction without giving a destination."
+        },
+        {
+          "hall": "SwarmIntelligence_FlowFields",
+          "quote": "Shared navigation can reproduce those decisions very efficiently. Efficiency alone cannot tell us whether every traveller can use the permitted route."
+        },
+        {
+          "hall": "SwarmIntelligence_Boids_Algorithm",
+          "quote": "Alignment is not consent, and cohesion is not a complete account of belonging. These agents have no way to refuse a relation, remember harm or ask another agent for space."
+        },
+        {
+          "hall": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+          "quote": "Replacing the travellers and erasing their history are two different acts."
+        },
+        {
+          "hall": "SwarmIntelligence_Ant_Colony_Optimization",
+          "quote": "A destination is more than a bright place to reach: arriving there changes what information that ant will seek and leave on the next stretch."
+        },
+        {
+          "hall": "SwarmIntelligence_Particle_Swarm_Optimization",
+          "quote": "Yesterday's high score cannot simply win against today's distances: the question has changed under it. The particle retains a place, but its claim to be best has to be renewed."
+        },
+        {
+          "hall": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+          "quote": "That comparison need not make intervention shameful. Care, repair and replenishment can be necessary. The question is whether they remain visible when someone describes the result as autonomous."
+        }
+      ],
+      "handover_in": "Boolean_Works ends: 'In Swarm Intelligence, many bodies will follow local rules at once. Their movements will make relations that no single body can supply. Carry the question of accommodation with you: what space becomes possible among them?' Physarum opens 'Can a path remember where to grow when no individual carries a map?' The 'many bodies, local rules' promise is kept in substance by five hundred agents, but 'accommodation' is never picked up, and the chapter's only backward look is to 'the earlier emergence rooms' (cellular automata, spine position 12) rather than to the hall the reader just left (boolean_surfaces, 18). Serviceable, not stitched.",
+      "handover_out": "The capstone ends: 'Machine learning begins by asking what changes across generations. Carry this distinction with you: inherited traits, environmental rewards and the rules that keep an experiment running all shape what can survive.' ML_Evolution answers it directly in its mechanism paragraph - 'The ecosystem in the previous room combined local behaviour with balancing interventions. Here the lesson is to look carefully at the apparently ordinary rule that pays for survival' - and its title 'Survival without a finish line' is the same distinction one room on. This is the strongest seam in the sequence.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_swarmintelligence.001",
+      "title": "Account for the console's fourth button, RIDGE",
+      "spec": "[encounter] SwarmIntelligence_Particle_Swarm_Optimization\nQuote: “These are three different questions put to the same moving bodies. The labels Corporate, Ecological and Artistic are invitations to argue about those questions”\nWhy: The physical console the visitor stands at offers four choices; the fourth, RIDGE (labelled 'Meritocratic - One narrow path counts'), is never mentioned, so a reader who presses it has left the chapter. It is also the sharpest case of the chapter's own point: one diagonal counts and everything else is dark.\nDo: Change 'three' to 'four' and add a short paragraph after the NOVELTY passage: RIDGE scores perpendicular distance from the diagonal, so two particles far apart on the line score alike while one a hand's width off it scores as badly as one at the corner; 'Meritocratic' is the fourth invitation to argue. The closing line about displaying two conflicting scores can then name it.\nEvidence: commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd:535 `_controls.choices = PackedStringArray([\"CONVERGE\", \"SPREAD\", \"NOVELTY\", \"RIDGE\"])`; :645-647 caption 'RIDGE — Meritocratic' / 'One narrow path counts.'; :421-423 fitness `-absf(pos.x - pos.z) * SQRT_HALF`; :49-52 doc comment on the 0.5 m band. The map places the token with no mandate key (commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/map_data.json:449), so all four buttons are live.\nFile: commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Particle_Swarm_Optimization"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "quote": "These are three different questions put to the same moving bodies. The labels Corporate, Ecological and Artistic are invitations to argue about those questions",
+      "why": "The physical console the visitor stands at offers four choices; the fourth, RIDGE (labelled 'Meritocratic - One narrow path counts'), is never mentioned, so a reader who presses it has left the chapter. It is also the sharpest case of the chapter's own point: one diagonal counts and everything else is dark.",
+      "proposal": "Change 'three' to 'four' and add a short paragraph after the NOVELTY passage: RIDGE scores perpendicular distance from the diagonal, so two particles far apart on the line score alike while one a hand's width off it scores as badly as one at the corner; 'Meritocratic' is the fourth invitation to argue. The closing line about displaying two conflicting scores can then name it.",
+      "evidence": "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd:535 `_controls.choices = PackedStringArray([\"CONVERGE\", \"SPREAD\", \"NOVELTY\", \"RIDGE\"])`; :645-647 caption 'RIDGE — Meritocratic' / 'One narrow path counts.'; :421-423 fitness `-absf(pos.x - pos.z) * SQRT_HALF`; :49-52 doc comment on the 0.5 m band. The map places the token with no mandate key (commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/map_data.json:449), so all four buttons are live.",
+      "review": "confirmed by a code checker (cited files only): fitness_landscape_politics.gd:535 choices CONVERGE/SPREAD/NOVELTY/RIDGE; :645-647 'RIDGE — Meritocratic' / 'One narrow path counts.'; :421-423 RIDGE returns -absf(pos.x - pos.z) * SQRT_HALF; :49-52 doc comment on the ~0.5 m diagonal band. Map line 449 places bare 'fitness_landscape_politics' with no mandate key. final.md:9 says 'three different questions' and names only Corporate, Ecological, Artistic.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.002",
+      "title": "Calm or name the catalyst foe placed in the ant hall",
+      "spec": "[encounter] SwarmIntelligence_Agent_Based_Modeling_ABM\nQuote: “Watch the colony long enough to recognise a trail. Use RESET and watch the beginning again.”\nWhy: The hall places a catalyst_foe beside the visitor's route and a vent; with no personality entry for it in the swarm stage the creature keeps the base default 'foe' (chases, 15 contact damage), so the standing-and-watching protocol the whole chapter is built on can be interrupted by something the text never mentions. The sequence file itself says the catalyst chambers left the walk.\nDo: One map-token edit: `catalyst_foe:0:0#initial_state:curious` (the key the foe's apply_grid_config accepts) so it wanders without hunting; the vent can stay as it is, since it only fires once the visitor has taken the crystal. If the encounter is wanted, add one sentence to the chapter saying a foe shares the hall and what to do about it.\nEvidence: commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/map_data.json:431 `catalyst_foe`, :461 `catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto`, :373 `catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45`; commons/hazards/hazard_creature_base.gd:39 `var _personality: String = \"foe\"`, :28 `contact_damage: float = 15.0`, :56-57 `_can_chase`/`_can_damage = true`, :604-614 `_query_hazard_manager`; commons/managers/HazardManager.gd:54 `return _personalities.get(hazard_type, \"foe\")`; commons/maps/soft_stages.json:690ff swarmintelligence personality_shift names only miura_crawler, kaleidocycle_enemy, octapod_crawler; commons/hazards/catalyst_foe/catalyst_foe.gd:1929-1936 `if config.has(\"initial_state\")`; commons/hazards/catalyst_foe/catalyst_vent.gd:30 `require_catalyst_armed: bool = true`; commons/maps/sequences/swarmintelligence.json:53 deferred_reason.\nFile: commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Agent_Based_Modeling_ABM"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "quote": "Watch the colony long enough to recognise a trail. Use RESET and watch the beginning again.",
+      "why": "The hall places a catalyst_foe beside the visitor's route and a vent; with no personality entry for it in the swarm stage the creature keeps the base default 'foe' (chases, 15 contact damage), so the standing-and-watching protocol the whole chapter is built on can be interrupted by something the text never mentions. The sequence file itself says the catalyst chambers left the walk.",
+      "proposal": "One map-token edit: `catalyst_foe:0:0#initial_state:curious` (the key the foe's apply_grid_config accepts) so it wanders without hunting; the vent can stay as it is, since it only fires once the visitor has taken the crystal. If the encounter is wanted, add one sentence to the chapter saying a foe shares the hall and what to do about it.",
+      "evidence": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/map_data.json:431 `catalyst_foe`, :461 `catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto`, :373 `catalyst_prompter_box:0:0#emergence:vent#sequence:auto#lease_s:45`; commons/hazards/hazard_creature_base.gd:39 `var _personality: String = \"foe\"`, :28 `contact_damage: float = 15.0`, :56-57 `_can_chase`/`_can_damage = true`, :604-614 `_query_hazard_manager`; commons/managers/HazardManager.gd:54 `return _personalities.get(hazard_type, \"foe\")`; commons/maps/soft_stages.json:690ff swarmintelligence personality_shift names only miura_crawler, kaleidocycle_enemy, octapod_crawler; commons/hazards/catalyst_foe/catalyst_foe.gd:1929-1936 `if config.has(\"initial_state\")`; commons/hazards/catalyst_foe/catalyst_vent.gd:30 `require_catalyst_armed: bool = true`; commons/maps/sequences/swarmintelligence.json:53 deferred_reason.",
+      "review": "confirmed by a code checker (cited files only): ABM map:431 'catalyst_foe' bare, :461 catalyst_vent with sequence:auto, :373 catalyst_prompter_box. hazard_creature_base.gd:39 _personality = \"foe\", :28 contact_damage 15.0, :56-57 chase/damage true; HazardManager.gd:54 defaults to 'foe'; soft_stages.json:710-713 swarmintelligence personality_shift names only miura_crawler, kaleidocycle_enemy, octapod_crawler. catalyst_foe.gd:1929-1936 accepts initial_state if in PERSONALITY_ARC (base :16-18: foe, wary, neutral, curious, friend) and sets _personality_seeded; its own _query_hazard_manager (:1941-1942) returns early when seeded, so 'curious' survives. catalyst_vent.gd:30 require_catalyst_armed = true. swarmintelligence.json:53 deferred_reason says the catalyst chambers left the walk. final.md:7 has the quote and never mentions a foe.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.003",
+      "title": "Give the hall's other four flocks one paragraph",
+      "spec": "[structure] SwarmIntelligence_Boids_Algorithm\nQuote: “Find the highlighted boid and its coloured arrows. Keep the other controls steady while moving SEP.”\nWhy: The chapter serves one work; the visitor turns round to four more flocks (a glass aquarium with the same three sliders, a flock that parts around the controller hand, a flat projection, a documentation panel) and a science screen, none mentioned. The aquarium is the sequence's one ready-made sibling check - same vocabulary, do both flocks answer SEP alike? - and the hand-flock is the only place in the sequence where the visitor's body is a neighbour.\nDo: Add a paragraph before the handover: the aquarium runs the same three rules behind glass with its own SEP, ALIGN and COH - set both alike and compare; at the open flock, hold the trigger and let your hand become a neighbour the rules must route around. Name the panel and the flat projection in a clause so they are not a mystery.\nEvidence: commons/maps/SwarmIntelligence_Boids_Algorithm/map_data.json:65 `boid_flocking` and `science_screen:180:1.5#mode:scatter`, :69 `boids_aquarium`, :71 `boids_2d_in_3d:90` and `boid_manager`, :72 `flocking_controls`; commons/artifacts/boids_aquarium/boids_aquarium.gd:13 '[has] VR sliders for separation, alignment, cohesion; [has] reset push button'; algorithms/emergentsystems/boidflocking/boid_manager.gd:9 '[has] VR controller attract/repel via trigger'; algorithms/emergentsystems/boidflocking/boids_documentation_ui.gd:4 documentation panel; commons/maps/sequences/swarmintelligence.json:107 rationale 'Four implementations of Reynolds' separation, alignment, cohesion'.\nFile: commons/maps/SwarmIntelligence_Boids_Algorithm/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "SwarmIntelligence_Boids_Algorithm"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "SwarmIntelligence_Boids_Algorithm",
+      "quote": "Find the highlighted boid and its coloured arrows. Keep the other controls steady while moving SEP.",
+      "why": "The chapter serves one work; the visitor turns round to four more flocks (a glass aquarium with the same three sliders, a flock that parts around the controller hand, a flat projection, a documentation panel) and a science screen, none mentioned. The aquarium is the sequence's one ready-made sibling check - same vocabulary, do both flocks answer SEP alike? - and the hand-flock is the only place in the sequence where the visitor's body is a neighbour.",
+      "proposal": "Add a paragraph before the handover: the aquarium runs the same three rules behind glass with its own SEP, ALIGN and COH - set both alike and compare; at the open flock, hold the trigger and let your hand become a neighbour the rules must route around. Name the panel and the flat projection in a clause so they are not a mystery.",
+      "evidence": "commons/maps/SwarmIntelligence_Boids_Algorithm/map_data.json:65 `boid_flocking` and `science_screen:180:1.5#mode:scatter`, :69 `boids_aquarium`, :71 `boids_2d_in_3d:90` and `boid_manager`, :72 `flocking_controls`; commons/artifacts/boids_aquarium/boids_aquarium.gd:13 '[has] VR sliders for separation, alignment, cohesion; [has] reset push button'; algorithms/emergentsystems/boidflocking/boid_manager.gd:9 '[has] VR controller attract/repel via trigger'; algorithms/emergentsystems/boidflocking/boids_documentation_ui.gd:4 documentation panel; commons/maps/sequences/swarmintelligence.json:107 rationale 'Four implementations of Reynolds' separation, alignment, cohesion'.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": " Installed 2026-09-24 via the edges pilot (doc/book/iterations/claude-swarmintelligence-boids-edges-pilot).",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.004",
+      "title": "Name the organism the colony is named after",
+      "spec": "[prose] SwarmIntelligence_PhysarumColony\nQuote: “a biological name does not make these simulated agents an experimental account of an organism.”\nWhy: The chapter never gives the name; the reader has only the in-world caption ('PHYSARUM  triad') and the H1 'Remembering in the ground', and the next chapter then says 'Physarum's agents' as if introduced. The caveat about the biological name has nothing to attach to.\nDo: One sentence opening the mechanism paragraph: 'The colony borrows its name from Physarum polycephalum, a slime mould that thickens the tubes it keeps using and lets the others go; here each simulated agent samples the field ahead and to either side...' Keep the caveat as it stands.\nEvidence: commons/maps/SwarmIntelligence_PhysarumColony/final.md:1-25 contains 'Physarum' only inside the anchor comment at :5; algorithms/swarmintelligence/physarum/PhysarumColony.gd:70 `CAPTION_FMT = \"PHYSARUM  %-8s\"` and :331; commons/maps/SwarmIntelligence_FlowFields/final.md:17 'Physarum's agents helped write the field'; algorithms/swarmintelligence/physarum/PhysarumAgent.gd:8 '(Jeff Jones Model)'.\nFile: commons/maps/SwarmIntelligence_PhysarumColony/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_PhysarumColony"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "SwarmIntelligence_PhysarumColony",
+      "quote": "a biological name does not make these simulated agents an experimental account of an organism.",
+      "why": "The chapter never gives the name; the reader has only the in-world caption ('PHYSARUM  triad') and the H1 'Remembering in the ground', and the next chapter then says 'Physarum's agents' as if introduced. The caveat about the biological name has nothing to attach to.",
+      "proposal": "One sentence opening the mechanism paragraph: 'The colony borrows its name from Physarum polycephalum, a slime mould that thickens the tubes it keeps using and lets the others go; here each simulated agent samples the field ahead and to either side...' Keep the caveat as it stands.",
+      "evidence": "commons/maps/SwarmIntelligence_PhysarumColony/final.md:1-25 contains 'Physarum' only inside the anchor comment at :5; algorithms/swarmintelligence/physarum/PhysarumColony.gd:70 `CAPTION_FMT = \"PHYSARUM  %-8s\"` and :331; commons/maps/SwarmIntelligence_FlowFields/final.md:17 'Physarum's agents helped write the field'; algorithms/swarmintelligence/physarum/PhysarumAgent.gd:8 '(Jeff Jones Model)'.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.005",
+      "title": "The hidden-arrows comparison is not a future version",
+      "spec": "[code-claim] SwarmIntelligence_FlowFields\nQuote: “For a future version, hiding the arrows while holding the scene fixed would test how easily we mistake shared infrastructure for spontaneous agreement.”\nWhy: The artifact already carries both halves of that experiment as map-addressable axes: `scenario` pins one scene and `field_display: hidden` removes the arrows. The chapter defers the sequence's sharpest test of its own thesis when a token could stage it.\nDo: Rewrite the sentence: the piece can be placed with its arrows hidden and one scene held; this hall shows the arrows so the cause stays visible, and a second placement without them is the test. If a second 40 m field cannot fit the hall, that sentence is still the honest one; if it can, place `FlowFieldMain#scenario:u_wall#field_display:hidden` and let the chapter send the reader to it.\nEvidence: algorithms/pathfinding/flow_field/FlowFieldMain.gd:25 `@export_enum(\"tour\", \"open\", \"block\", \"u_wall\", \"zigzag\", \"wind\", \"noise\") var scenario`, :26 `@export_enum(\"arrows\", \"hidden\") var field_display`, :60 `visualizer.visible = (field_display != \"hidden\")`, :184-205 apply_grid_config reads both keys from a token; :56 `FlowGrid.new(40, 40, 1.0)` is a 40 m field in a 13x10 hall (map_data.json map_info.dimensions); the map places only `FlowFieldMain:90` (commons/maps/SwarmIntelligence_FlowFields/map_data.json:61).\nFile: commons/maps/SwarmIntelligence_FlowFields/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_FlowFields"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "SwarmIntelligence_FlowFields",
+      "quote": "For a future version, hiding the arrows while holding the scene fixed would test how easily we mistake shared infrastructure for spontaneous agreement.",
+      "why": "The artifact already carries both halves of that experiment as map-addressable axes: `scenario` pins one scene and `field_display: hidden` removes the arrows. The chapter defers the sequence's sharpest test of its own thesis when a token could stage it.",
+      "proposal": "Rewrite the sentence: the piece can be placed with its arrows hidden and one scene held; this hall shows the arrows so the cause stays visible, and a second placement without them is the test. If a second 40 m field cannot fit the hall, that sentence is still the honest one; if it can, place `FlowFieldMain#scenario:u_wall#field_display:hidden` and let the chapter send the reader to it.",
+      "evidence": "algorithms/pathfinding/flow_field/FlowFieldMain.gd:25 `@export_enum(\"tour\", \"open\", \"block\", \"u_wall\", \"zigzag\", \"wind\", \"noise\") var scenario`, :26 `@export_enum(\"arrows\", \"hidden\") var field_display`, :60 `visualizer.visible = (field_display != \"hidden\")`, :184-205 apply_grid_config reads both keys from a token; :56 `FlowGrid.new(40, 40, 1.0)` is a 40 m field in a 13x10 hall (map_data.json map_info.dimensions); the map places only `FlowFieldMain:90` (commons/maps/SwarmIntelligence_FlowFields/map_data.json:61).",
+      "review": "confirmed by a code checker (cited files only): FlowFieldMain.gd:25 scenario enum incl. u_wall; :26 field_display enum arrows/hidden; :56 FlowGrid.new(40, 40, 1.0); :60 visualizer.visible = (field_display != \"hidden\"); :184-205 apply_grid_config reads both keys. SwarmIntelligence_FlowFields/map_data.json:61 places only FlowFieldMain:90 (plus AntColonyV2 and ecosystem_simulation elsewhere); map_info.dimensions 13x10. final.md:21 contains 'For a future version'. Whether a second 40 m field fits is a placement question the map cannot answer here.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.006",
+      "title": "Say what the three MODE behaviours are",
+      "spec": "[prose] SwarmIntelligence_Agent_Based_Modeling_ABM\nQuote: “The MODE control offers three behaviours within this model family. It does not turn the room into a language for inventing arbitrary agents.”\nWhy: The reader is told the count and the caveat but not the behaviours, so pressing MODE is a guess; the label reads 'Mode: Colony / Communication / Multi-Source' and each changes what is drawn. The chapter's own rule - 'begin by naming exactly which rule or condition has changed' - goes unfollowed for its own control.\nDo: One sentence: Colony is the foraging you have been watching; Communication lets an ant returning with good food send a ring out from the nest and lead one idle ant to the source in tandem; Multi-Source nudges foragers towards richer food and draws each source's quality as a ring around it.\nEvidence: algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd:48 `enum Mode { COLONY, COMMUNICATION, MULTI_SOURCE }`; :901-902 mode label text; :492-499 recruitment signal emitted in COMMUNICATION; :599-654 tandem pairs; :538-540 and :565-582 quality bias in MULTI_SOURCE; :774-789 quality ring drawn in MULTI_SOURCE.\nFile: commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Agent_Based_Modeling_ABM"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "quote": "The MODE control offers three behaviours within this model family. It does not turn the room into a language for inventing arbitrary agents.",
+      "why": "The reader is told the count and the caveat but not the behaviours, so pressing MODE is a guess; the label reads 'Mode: Colony / Communication / Multi-Source' and each changes what is drawn. The chapter's own rule - 'begin by naming exactly which rule or condition has changed' - goes unfollowed for its own control.",
+      "proposal": "One sentence: Colony is the foraging you have been watching; Communication lets an ant returning with good food send a ring out from the nest and lead one idle ant to the source in tandem; Multi-Source nudges foragers towards richer food and draws each source's quality as a ring around it.",
+      "evidence": "algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd:48 `enum Mode { COLONY, COMMUNICATION, MULTI_SOURCE }`; :901-902 mode label text; :492-499 recruitment signal emitted in COMMUNICATION; :599-654 tandem pairs; :538-540 and :565-582 quality bias in MULTI_SOURCE; :774-789 quality ring drawn in MULTI_SOURCE.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.007",
+      "title": "Say that this flock's RESET deals a new scatter",
+      "spec": "[code-claim] SwarmIntelligence_Boids_Algorithm\nQuote: “Return to a comparable setting, then try ALIGN or COH. One change at a time makes it easier to connect a local response with the population's movement.”\nWhy: The ant colony and the swarm both restore the same beginning on RESET, and the sequence's learning objective is 'a repeatable starting state'; this panel's RESET respawns the boids from the unseeded global generator, so a visitor who applies the habit here compares two different flocks and credits the slider.\nDo: Add a clause: 'the panel's RESET deals a fresh scatter rather than the same one, so compare by returning the slider, not by resetting' - or seed `_spawn_boids` from a constant as the other two artifacts do, and let the sentence stand.\nEvidence: commons/artifacts/flocking_controls/flocking_controls.gd:352-358 ResetButton -> `_spawn_boids()`, :405-416 positions and velocities from `randf_range`/`randf` with no seeded generator; contrast algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd:420-421 `_rng.seed = lesson_seed` and commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd:375 `_rng.seed = RNG_SEED`; commons/maps/sequences/swarmintelligence.json:26 'Change evaporation from a repeatable starting state'.\nFile: commons/maps/SwarmIntelligence_Boids_Algorithm/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "SwarmIntelligence_Boids_Algorithm"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "SwarmIntelligence_Boids_Algorithm",
+      "quote": "Return to a comparable setting, then try ALIGN or COH. One change at a time makes it easier to connect a local response with the population's movement.",
+      "why": "The ant colony and the swarm both restore the same beginning on RESET, and the sequence's learning objective is 'a repeatable starting state'; this panel's RESET respawns the boids from the unseeded global generator, so a visitor who applies the habit here compares two different flocks and credits the slider.",
+      "proposal": "Add a clause: 'the panel's RESET deals a fresh scatter rather than the same one, so compare by returning the slider, not by resetting' - or seed `_spawn_boids` from a constant as the other two artifacts do, and let the sentence stand.",
+      "evidence": "commons/artifacts/flocking_controls/flocking_controls.gd:352-358 ResetButton -> `_spawn_boids()`, :405-416 positions and velocities from `randf_range`/`randf` with no seeded generator; contrast algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd:420-421 `_rng.seed = lesson_seed` and commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd:375 `_rng.seed = RNG_SEED`; commons/maps/sequences/swarmintelligence.json:26 'Change evaporation from a repeatable starting state'.",
+      "review": "confirmed by a code checker (cited files only): flocking_controls.gd:352-358 wires ResetButton's button_pressed to _spawn_boids(); :405-416 draws positions with randf_range and velocities with randf, and the file contains no seed or RandomNumberGenerator. AntColonyOptimization.gd:420-421 '_rng.seed = lesson_seed' on reset; fitness_landscape_politics.gd:375 '_rng.seed = RNG_SEED'. swarmintelligence.json:26 'Change evaporation from a repeatable starting state'. flocking_controls sits at (10,9) in the Boids hall; final.md:7 has the quoted sentence.",
+      "notes": " Installed 2026-09-24 via the edges pilot (doc/book/iterations/claude-swarmintelligence-boids-edges-pilot).",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.008",
+      "title": "After a switch, the memories are the present, not the past",
+      "spec": "[code-claim] SwarmIntelligence_Particle_Swarm_Optimization\nQuote: “the visible position belongs to the current moment, while continuing velocity and remembered positions can still influence where the next update carries the particle.”\nWhy: Pressing a landscape button resets every particle's remembered best to where it stands now and re-chooses the shared best under the new score, so at the moment the reader is told to watch the turn, the only thing carried from before is velocity. The sentence credits a memory the code has just erased.\nDo: '...while continuing velocity, and a shared best just re-chosen under the new score, still influence where the next update carries the particle.' The later paragraph on re-scoring then reads as the same rule rather than a second one.\nEvidence: commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd:617-623 `_switch_landscape` calls `_reset_memories()`; :494-501 `p[\"best_pos\"] = p[\"pos\"]` for every particle, then `_rescore_memories()`; :437 `p[\"vel\"] = inertia * p[\"vel\"] + cognitive + social`, where the cognitive term is zero when best_pos equals pos.\nFile: commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Particle_Swarm_Optimization"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "quote": "the visible position belongs to the current moment, while continuing velocity and remembered positions can still influence where the next update carries the particle.",
+      "why": "Pressing a landscape button resets every particle's remembered best to where it stands now and re-chooses the shared best under the new score, so at the moment the reader is told to watch the turn, the only thing carried from before is velocity. The sentence credits a memory the code has just erased.",
+      "proposal": "'...while continuing velocity, and a shared best just re-chosen under the new score, still influence where the next update carries the particle.' The later paragraph on re-scoring then reads as the same rule rather than a second one.",
+      "evidence": "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd:617-623 `_switch_landscape` calls `_reset_memories()`; :494-501 `p[\"best_pos\"] = p[\"pos\"]` for every particle, then `_rescore_memories()`; :437 `p[\"vel\"] = inertia * p[\"vel\"] + cognitive + social`, where the cognitive term is zero when best_pos equals pos.",
+      "review": "confirmed by a code checker (cited files only): _switch_landscape (:617-623) calls _reset_memories(); :494-501 sets p['best_pos'] = p['pos'] for every particle then _rescore_memories(); :437 vel = inertia*vel + cognitive + social, with cognitive = COGNITIVE_WEIGHT*r1*(best_pos - pos) = 0 at that instant. final.md:11 has the quoted sentence. Note the erasure is only of the personal bests; the shared best is re-chosen under the new score and velocity carries over, exactly as the proposal words it.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.009",
+      "title": "Move the zero-direction sentence to the scenes where zero occurs",
+      "spec": "[prose] SwarmIntelligence_FlowFields\nQuote: “Where the direction is zero, the agents have a wandering behaviour rather than a magical knowledge of where to go.”\nWhy: It sits in the wind-and-noise paragraph, but those fields put a unit vector in every cell; a zero vector occurs only at the target cell and inside blocked or sealed cells of the route-finding scenes, so the reader looks for wandering in the wrong scene.\nDo: Move it to the end of the cost-map paragraph and say where: 'At the target, and inside a wall or a sealed region the costs never reached, the arrow is zero and the agent wanders.'\nEvidence: algorithms/pathfinding/flow_field/FlowGrid.gd:114-116 unreachable cells -> `Vector2.ZERO`; :118-137 the target cell has no lower-cost neighbour so `best_dir` stays ZERO; :161-164 `vector_field.fill(v)` for wind; :146-159 a unit vector in every cell for noise; algorithms/pathfinding/flow_field/FlowAgent.gd:34-38 the wander branch on a zero vector.\nFile: commons/maps/SwarmIntelligence_FlowFields/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_FlowFields"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "SwarmIntelligence_FlowFields",
+      "quote": "Where the direction is zero, the agents have a wandering behaviour rather than a magical knowledge of where to go.",
+      "why": "It sits in the wind-and-noise paragraph, but those fields put a unit vector in every cell; a zero vector occurs only at the target cell and inside blocked or sealed cells of the route-finding scenes, so the reader looks for wandering in the wrong scene.",
+      "proposal": "Move it to the end of the cost-map paragraph and say where: 'At the target, and inside a wall or a sealed region the costs never reached, the arrow is zero and the agent wanders.'",
+      "evidence": "algorithms/pathfinding/flow_field/FlowGrid.gd:114-116 unreachable cells -> `Vector2.ZERO`; :118-137 the target cell has no lower-cost neighbour so `best_dir` stays ZERO; :161-164 `vector_field.fill(v)` for wind; :146-159 a unit vector in every cell for noise; algorithms/pathfinding/flow_field/FlowAgent.gd:34-38 the wander branch on a zero vector.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.010",
+      "title": "Acknowledge the ant terrain and the ecosystem standing in this hall",
+      "spec": "[encounter] SwarmIntelligence_FlowFields\nQuote: “Boids will remove that supplied direction and let nearby agents become one another's moving reference.”\nWhy: The hall also places the 50 m ant terrain and the small ecosystem box - the primary works of chapters five and seven - a few cells from the field; the reader meets both unannounced in chapter two and again as 'new' later. A line spent on them turns an accident into a preview.\nDo: One sentence before the handover: 'The sand at the side, where ants are already writing a field of their own, and the small box of prey and predators belong to later rooms; for now notice that neither has arrows.'\nEvidence: commons/maps/SwarmIntelligence_FlowFields/map_data.json:61 `AntColonyV2` at (9,4) beside `FlowFieldMain:90` at (6,4), :63 `ecosystem_simulation` at (1,6); algorithms/swarmintelligence/ants_v2/AntColonyV2.gd:95 `terrain_size = Vector2(50, 50)`; `python tools/artifact_roles.py --brief --map SwarmIntelligence_FlowFields` lists both as secondary; the chapter's only anchor is FlowFieldMain (final_tags: 1 tagged, 1 work).\nFile: commons/maps/SwarmIntelligence_FlowFields/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_FlowFields"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "SwarmIntelligence_FlowFields",
+      "quote": "Boids will remove that supplied direction and let nearby agents become one another's moving reference.",
+      "why": "The hall also places the 50 m ant terrain and the small ecosystem box - the primary works of chapters five and seven - a few cells from the field; the reader meets both unannounced in chapter two and again as 'new' later. A line spent on them turns an accident into a preview.",
+      "proposal": "One sentence before the handover: 'The sand at the side, where ants are already writing a field of their own, and the small box of prey and predators belong to later rooms; for now notice that neither has arrows.'",
+      "evidence": "commons/maps/SwarmIntelligence_FlowFields/map_data.json:61 `AntColonyV2` at (9,4) beside `FlowFieldMain:90` at (6,4), :63 `ecosystem_simulation` at (1,6); algorithms/swarmintelligence/ants_v2/AntColonyV2.gd:95 `terrain_size = Vector2(50, 50)`; `python tools/artifact_roles.py --brief --map SwarmIntelligence_FlowFields` lists both as secondary; the chapter's only anchor is FlowFieldMain (final_tags: 1 tagged, 1 work).",
+      "review": "confirmed by a code checker (cited files only): FlowFields map:61 'FlowFieldMain:90' at (6,4) and 'AntColonyV2' at (9,4); :63 'ecosystem_simulation' at (1,6); these are the hall's only three works. AntColonyV2.gd:95 terrain_size = Vector2(50, 50). artifact_roles --brief lists FlowFieldMain primary, AntColonyV2 and ecosystem_simulation secondary. final.md anchors only @FlowFieldMain (:5, plus an empty @ at :23), :25 has the quoted sentence, and no line mentions ants, the ecosystem or prey. (The 'chapters five and seven' ordinals were not checked; they are not in the evidence.)",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.011",
+      "title": "Serve the self-organizing-patterns plate the sequence promises",
+      "spec": "[encounter] SwarmIntelligence_Particle_Swarm_Optimization\nQuote: “The capstone turns from declared objectives to quieter rules that keep an apparently self-organising system alive.”\nWhy: The sequence file names self_organizing_patterns as this hall's second work ('Self-organizing patterns show emergent structure') and the map places it with Noise and Coupling sliders and a mode button; the chapter never mentions it, so the sequence's only phase transition stands unserved behind the swarm.\nDo: Two sentences before the handover: the plate at the back runs a temperature over a field of spins; push NOISE up until order dissolves and back until it returns, and ask whether 'self-organising' named the rule or the temperature - the capstone's question a room early.\nEvidence: commons/maps/sequences/swarmintelligence.json:133-136 artifact_groups entry and rationale; commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/map_data.json:514 `self_organizing_patterns:0:1.8:0.35`; algorithms/emergentsystems/selforganizingpatterns/self_organization_principles.gd:19 three modes (stigmergy field, Ising phase transition, attractor basins), :24 '[has] VR slider for Noise (temperature) and Coupling; [has] mode cycle button and reset button'.\nFile: commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Particle_Swarm_Optimization"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "quote": "The capstone turns from declared objectives to quieter rules that keep an apparently self-organising system alive.",
+      "why": "The sequence file names self_organizing_patterns as this hall's second work ('Self-organizing patterns show emergent structure') and the map places it with Noise and Coupling sliders and a mode button; the chapter never mentions it, so the sequence's only phase transition stands unserved behind the swarm.",
+      "proposal": "Two sentences before the handover: the plate at the back runs a temperature over a field of spins; push NOISE up until order dissolves and back until it returns, and ask whether 'self-organising' named the rule or the temperature - the capstone's question a room early.",
+      "evidence": "commons/maps/sequences/swarmintelligence.json:133-136 artifact_groups entry and rationale; commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/map_data.json:514 `self_organizing_patterns:0:1.8:0.35`; algorithms/emergentsystems/selforganizingpatterns/self_organization_principles.gd:19 three modes (stigmergy field, Ising phase transition, attractor basins), :24 '[has] VR slider for Noise (temperature) and Coupling; [has] mode cycle button and reset button'.",
+      "review": "confirmed by a code checker (cited files only): swarmintelligence.json:133-136 artifact_groups lists self_organizing_patterns with rationale 'Self-organizing patterns show emergent structure'; SwarmIntelligence_Particle_Swarm_Optimization/map_data.json:514 `self_organizing_patterns:0:1.8:0.35`; self_organization_principles.gd:19 three modes incl. Ising phase transition, :24 '[has] VR slider for Noise (temperature) and Coupling; [has] mode cycle button and reset button'; registry entry algorithms_misc.json:7586. final.md:29 has the quote and no mention of self_organizing / self-organis except that sentence.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.012",
+      "title": "Pick up the Boolean hall's question on arrival",
+      "spec": "[handover] SwarmIntelligence_PhysarumColony\nQuote: “The earlier emergence rooms asked how repeated local updates produce a pattern. Here that pattern becomes an input to subsequent updates.”\nWhy: The reader arrives from Boolean Works carrying 'the question of accommodation... what space becomes possible among them?'; the chapter reaches back seven sequences to cellular automata and says nothing about the hall just left, so the handover lands on no one. The sequence's own exit does this well - ML_Evolution names the ecosystem in its first mechanism paragraph.\nDo: One clause ahead of the existing sentence: 'The previous hall cut one hollow for one body and asked whether it could be entered; here nothing is cut - five hundred agents rewrite the ground they move on. The cellular automata rooms asked how repeated local updates produce a pattern...'\nEvidence: commons/maps/Boolean_Works/final.md:136 closing handover; commons/maps/curriculum_spine.json spine.sequences order: cellularautomata 12, boolean_surfaces 18, swarmintelligence 19, machinelearning 20; commons/maps/ML_Evolution/final.md:17 as the model of a pickup; algorithms/swarmintelligence/physarum/PhysarumColony.gd:76 `num_agents: int = 500`.\nFile: commons/maps/SwarmIntelligence_PhysarumColony/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_PhysarumColony"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "SwarmIntelligence_PhysarumColony",
+      "quote": "The earlier emergence rooms asked how repeated local updates produce a pattern. Here that pattern becomes an input to subsequent updates.",
+      "why": "The reader arrives from Boolean Works carrying 'the question of accommodation... what space becomes possible among them?'; the chapter reaches back seven sequences to cellular automata and says nothing about the hall just left, so the handover lands on no one. The sequence's own exit does this well - ML_Evolution names the ecosystem in its first mechanism paragraph.",
+      "proposal": "One clause ahead of the existing sentence: 'The previous hall cut one hollow for one body and asked whether it could be entered; here nothing is cut - five hundred agents rewrite the ground they move on. The cellular automata rooms asked how repeated local updates produce a pattern...'",
+      "evidence": "commons/maps/Boolean_Works/final.md:136 closing handover; commons/maps/curriculum_spine.json spine.sequences order: cellularautomata 12, boolean_surfaces 18, swarmintelligence 19, machinelearning 20; commons/maps/ML_Evolution/final.md:17 as the model of a pickup; algorithms/swarmintelligence/physarum/PhysarumColony.gd:76 `num_agents: int = 500`.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.013",
+      "title": "Cut the fifth 'future interaction' in a row",
+      "spec": "[structure] SwarmIntelligence_Ant_Colony_Optimization\nQuote: “Moving a food source would be a useful future interaction: a group could predict how quickly the colony would adapt and how strongly yesterday's route would persist. For now, the placed scene offers fixed food directions to observe.”\nWhy: Every one of the seven chapters ends on a deferred experiment; by the fifth the book reads as a backlog, and this one repeats Physarum's movable-anchor proposal almost word for word (adaptation versus the persistence of old traces). The reader loses the sense that any hall is finished.\nDo: End the chapter on the paragraph before ('Which parts of the field preserve possibilities that are receiving less traffic? A route's visibility depends partly on its history of use.') and let Physarum hold the movable-anchor proposal for both colonies. Keep the deferrals that name a real absence: the ecosystem's care-off comparison and the swarm's two displayed scores.\nEvidence: Deferrals at commons/maps/SwarmIntelligence_PhysarumColony/final.md:19, SwarmIntelligence_FlowFields/final.md:21, SwarmIntelligence_Boids_Algorithm/final.md:19, SwarmIntelligence_Agent_Based_Modeling_ABM/final.md:21, SwarmIntelligence_Ant_Colony_Optimization/final.md:21, SwarmIntelligence_Particle_Swarm_Optimization/final.md:25, SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md:19; Physarum:19 'compare adaptation with the persistence of old traces' against ACO:21 'how quickly the colony would adapt and how strongly yesterday's route would persist'.\nFile: commons/maps/SwarmIntelligence_Ant_Colony_Optimization/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Ant_Colony_Optimization"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "SwarmIntelligence_Ant_Colony_Optimization",
+      "quote": "Moving a food source would be a useful future interaction: a group could predict how quickly the colony would adapt and how strongly yesterday's route would persist. For now, the placed scene offers fixed food directions to observe.",
+      "why": "Every one of the seven chapters ends on a deferred experiment; by the fifth the book reads as a backlog, and this one repeats Physarum's movable-anchor proposal almost word for word (adaptation versus the persistence of old traces). The reader loses the sense that any hall is finished.",
+      "proposal": "End the chapter on the paragraph before ('Which parts of the field preserve possibilities that are receiving less traffic? A route's visibility depends partly on its history of use.') and let Physarum hold the movable-anchor proposal for both colonies. Keep the deferrals that name a real absence: the ecosystem's care-off comparison and the swarm's two displayed scores.",
+      "evidence": "Deferrals at commons/maps/SwarmIntelligence_PhysarumColony/final.md:19, SwarmIntelligence_FlowFields/final.md:21, SwarmIntelligence_Boids_Algorithm/final.md:19, SwarmIntelligence_Agent_Based_Modeling_ABM/final.md:21, SwarmIntelligence_Ant_Colony_Optimization/final.md:21, SwarmIntelligence_Particle_Swarm_Optimization/final.md:25, SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md:19; Physarum:19 'compare adaptation with the persistence of old traces' against ACO:21 'how quickly the colony would adapt and how strongly yesterday's route would persist'.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.014",
+      "title": "Attribute the three rules to Reynolds once",
+      "spec": "[footnote] SwarmIntelligence_Boids_Algorithm\nQuote: “The red arrow shows separation, the attempt to avoid crowding nearby agents. The blue arrow shows alignment with nearby headings. The green arrow shows cohesion towards the local group's centre.”\nWhy: The sequence file, the hall's blurb and two of the hall's own artifacts name Craig Reynolds (1987); the chapter is the one surface the reader actually reads and it does not, so the three rules arrive as if the museum invented them. Other chapters in the book carry footnotes, so the form exists.\nDo: A footnote on 'separation': Craig Reynolds, 'Flocks, Herds, and Schools: A Distributed Behavioral Model', SIGGRAPH 1987 - the three rules under the names he gave them.\nEvidence: commons/maps/sequences/swarmintelligence.json:34 \"Reynolds' flocking\"; commons/artifacts/boids_aquarium/boids_aquarium.gd:8 'Reynolds (1987) in a 1m cube'; algorithms/emergentsystems/boidflocking/boids_documentation_ui.gd:4 \"Reynolds' 1987 boids algorithm\"; commons/maps/SwarmIntelligence_Boids_Algorithm/blurb.md:3; footnote syntax present in 8 final.md files, e.g. commons/maps/Point_One/final.md.\nFile: commons/maps/SwarmIntelligence_Boids_Algorithm/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "SwarmIntelligence_Boids_Algorithm"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "SwarmIntelligence_Boids_Algorithm",
+      "quote": "The red arrow shows separation, the attempt to avoid crowding nearby agents. The blue arrow shows alignment with nearby headings. The green arrow shows cohesion towards the local group's centre.",
+      "why": "The sequence file, the hall's blurb and two of the hall's own artifacts name Craig Reynolds (1987); the chapter is the one surface the reader actually reads and it does not, so the three rules arrive as if the museum invented them. Other chapters in the book carry footnotes, so the form exists.",
+      "proposal": "A footnote on 'separation': Craig Reynolds, 'Flocks, Herds, and Schools: A Distributed Behavioral Model', SIGGRAPH 1987 - the three rules under the names he gave them.",
+      "evidence": "commons/maps/sequences/swarmintelligence.json:34 \"Reynolds' flocking\"; commons/artifacts/boids_aquarium/boids_aquarium.gd:8 'Reynolds (1987) in a 1m cube'; algorithms/emergentsystems/boidflocking/boids_documentation_ui.gd:4 \"Reynolds' 1987 boids algorithm\"; commons/maps/SwarmIntelligence_Boids_Algorithm/blurb.md:3; footnote syntax present in 8 final.md files, e.g. commons/maps/Point_One/final.md.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": " Installed 2026-09-24 via the edges pilot (doc/book/iterations/claude-swarmintelligence-boids-edges-pilot).",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_swarmintelligence.015",
+      "title": "Decide the dead hand: wire the open flock's controllers or drop the header promise",
+      "spec": "boid_manager.gd's header promises 'left trigger attracts boids toward controller; right trigger repels', but vr_player_path / left_controller_path / right_controller_path are NodePaths never set in boid_manager.tscn, so every placed copy has null controllers and _process_controller_interaction never finds a hand. The candidate chapter makes the refusal its encounter; the code's own comment says the opposite.\n\nProposal: Either (a) keep the refusal: delete the header line and the 'needs: [has] VR controller attract/repel' line in boid_manager.gd so the code stops promising it; or (b) find the controllers at runtime (XRController3D by group, as removal_arena.gd finds the body) and rewrite the candidate's first and Edge paragraphs to a hand the flock answers to.",
+      "effort": "1h",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Boids_Algorithm"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Chapter and code agree: re-read the cited lines, then the candidate paragraph they ground.",
+      "kind": "encounter",
+      "hall": "SwarmIntelligence_Boids_Algorithm",
+      "quote": "Hold out your hand. Nothing turns.",
+      "why": "boid_manager.gd's header promises 'left trigger attracts boids toward controller; right trigger repels', but vr_player_path / left_controller_path / right_controller_path are NodePaths never set in boid_manager.tscn, so every placed copy has null controllers and _process_controller_interaction never finds a hand. The candidate chapter makes the refusal its encounter; the code's own comment says the opposite.",
+      "proposal": "Either (a) keep the refusal: delete the header line and the 'needs: [has] VR controller attract/repel' line in boid_manager.gd so the code stops promising it; or (b) find the controllers at runtime (XRController3D by group, as removal_arena.gd finds the body) and rewrite the candidate's first and Edge paragraphs to a hand the flock answers to.",
+      "evidence": "algorithms/emergentsystems/boidflocking/boid_manager.gd:7,9,108-110,135-146,482-493; boid_manager.tscn (no *_path set)",
+      "review": "by hand: every line cited was read in the pilot",
+      "notes": "",
+      "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-swarmintelligence-boids-edges-pilot)",
+      "created_at": "2026-09-24",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "proximity"
+    },
+    {
+      "id": "book_swarmintelligence.016",
+      "title": "The open flock is dealt through the hall's walls and floor",
+      "spec": "spawn_area_size (20,10,20) centred at floor level in a 13x13 hall; boundary_size (50,30,50) with the push only in the last 5 m; Boid extends Node3D with no collider. The candidate chapter uses this as the encounter ('the room is not in the rule'). If the flock is ever fitted to its hall the paragraph goes false.\n\nProposal: Decide: keep as the honest encounter (and note it in the artifact's registry blurb), or add a #fit / hall-sized box as LineNetworkCA got on 24 Sept - in which case rewrite the candidate's first paragraph.",
+      "effort": "1h",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Boids_Algorithm"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Chapter and code agree: re-read the cited lines, then the candidate paragraph they ground.",
+      "kind": "encounter",
+      "hall": "SwarmIntelligence_Boids_Algorithm",
+      "quote": "half the school began under the floor, and some of it is outside the hall now",
+      "why": "spawn_area_size (20,10,20) centred at floor level in a 13x13 hall; boundary_size (50,30,50) with the push only in the last 5 m; Boid extends Node3D with no collider. The candidate chapter uses this as the encounter ('the room is not in the rule'). If the flock is ever fitted to its hall the paragraph goes false.",
+      "proposal": "Decide: keep as the honest encounter (and note it in the artifact's registry blurb), or add a #fit / hall-sized box as LineNetworkCA got on 24 Sept - in which case rewrite the candidate's first paragraph.",
+      "evidence": "algorithms/emergentsystems/boidflocking/boid_manager.gd:103,189-200; Boid.gd:1,26,138-152",
+      "review": "by hand: every line cited was read in the pilot",
+      "notes": "",
+      "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-swarmintelligence-boids-edges-pilot)",
+      "created_at": "2026-09-24",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "leak"
+    },
+    {
+      "id": "book_swarmintelligence.017",
+      "title": "boid_flocking at (2,2) is a CanvasLayer overlay the headset cannot show",
+      "spec": "boid_flocking resolves to boids_explained.tscn whose root is a CanvasLayer (BoidsDocumentationUI). A screen-space UI does not exist in the VR world and covers the desktop view; the same UI already stands in 3D as boids_2d_in_3d at (2,8).\n\nProposal: Drop the (2,2) cell or replace it with something that stands in the hall; boids_2d_in_3d already carries the reading panel.",
+      "effort": "10min",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Boids_Algorithm"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Chapter and code agree: re-read the cited lines, then the candidate paragraph they ground.",
+      "kind": "vr",
+      "hall": "SwarmIntelligence_Boids_Algorithm",
+      "quote": "",
+      "why": "boid_flocking resolves to boids_explained.tscn whose root is a CanvasLayer (BoidsDocumentationUI). A screen-space UI does not exist in the VR world and covers the desktop view; the same UI already stands in 3D as boids_2d_in_3d at (2,8).",
+      "proposal": "Drop the (2,2) cell or replace it with something that stands in the hall; boids_2d_in_3d already carries the reading panel.",
+      "evidence": "algorithms/emergentsystems/boidflocking/boids_explained.tscn:40; commons/artifacts/registry/algorithms_misc.json boid_flocking; map cell (2,2)",
+      "review": "by hand: every line cited was read in the pilot",
+      "notes": "",
+      "source": "the edges pilot of 24 Sept (doc/book/iterations/claude-swarmintelligence-boids-edges-pilot)",
+      "created_at": "2026-09-24",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "occlusion"
+    }
+  ]
+}

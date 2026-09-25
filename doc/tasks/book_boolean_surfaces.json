@@ -1,0 +1,504 @@
+{
+  "goal_id": "book_boolean_surfaces",
+  "goal_title": "Book: Boolean Surfaces: CSG as Composition — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in boolean_surfaces became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "boolean_surfaces",
+    "order": 18,
+    "phase": "F_order",
+    "title": "Boolean Surfaces: CSG as Composition",
+    "chapters": [
+      "Boolean_Verbs",
+      "Boolean_Gallery",
+      "Boolean_Works"
+    ],
+    "words": 3972,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "ISO_RhizomeBody",
+      "Boolean_Verbs",
+      "Boolean_Gallery",
+      "Boolean_Works",
+      "SwarmIntelligence_PhysarumColony"
+    ],
+    "reading": {
+      "arc": "Three halls, each a step in scale. Verbs puts the three CSG operations on one box-and-sphere pair in one line down a hall, and plants the sequence's real subject in its second section: a region has an inside in the calculation but 'has not acquired the power to stop your body'. Gallery shows six families at every value of one named setting (24 placements, the only spine hall that places variants at all) and argues that the shipped default is an authored choice with neighbours. Works makes the negative big enough to promise architecture and lets exactly one work, the level-floored burrow, keep the promise with a collider; the wall, the SDF cavern, the rack and the workbench each offer an image of an interior or an action that the implementation withholds. The closing sections read the whole hall as a lesson in overpromising signs, then hand the question of accommodation to Swarm Intelligence. Every code excerpt and number in the three chapters checks against source; the weaknesses are in what the museum actually builds (pier colonnade, overlapping shells, works facing away, a wrong-handed instruction) and in a Works chapter that at 1710 words carries process notes a headset visitor cannot use. No bake or build record exists for any of the three halls in ada_run, so nobody has yet walked them in the museum.",
+      "holds": [
+        "The box and the sphere: the same operand pair from the first bay through the workbench, the subtraction suite, the argument bench and the difference row.",
+        "The refrain 'inside in the calculation, no power to stop your body' (Verbs) answered by `stock.use_collision = walkable and spoil == \"rock\"` (Works, burrow) and closed by 'The shape of the cut and the rule for contact have to work together'.",
+        "The amber-and-blue coincident-face diagram, met in the Gallery and returning 'at the back wall' of Works to say what a picture can and cannot settle.",
+        "Defaults as authored choices: the Gallery's 'default becomes powerful when it is the only version we ever meet', which then bites (or fails to) when Works meets the workbench, the wall and the rack at their defaults.",
+        "One or two lines of source per work as captions, all verified: OPERATION_UNION (csg_union_demo.gd:313), the `in_b` lattice test (csg_intersection_demo.gd:341), OPERATION_SUBTRACTION + material_override (csg_difference_demo.gd:236-245), `if zeros >= 2: continue` (recursive_boolean_cube.gd:118), the cylinder carver (boolean_burrow.gd:272-275), `d = maxf(d, -_sd_sphere(p, c, r))` (sdf_cavern_room.gd:77), `col = color_a if (i % 2 == 0) else color_b` (coincident_face.gd:257).",
+        "A forward reference closing each chapter, each of which the next hall keeps (separated union in the Gallery; the negative getting large in Works; local rules in Swarm)."
+      ],
+      "hall_notes": [
+        {
+          "hall": "Boolean_Verbs",
+          "words": 917,
+          "note": "Walks the three verbs on one line (map cells (6,4), (6,12), (6,19)) and closes at the argument bench (4,22); prose is precise and every claim checks (48-cubed lattice, three decimals, forfeit:numeral plate under a body lifted 0.5, sills at rows 9 and 16 that the museum builds as 1 m raised floors under wall_height 3). Two things the visitor meets that the text does not: the template colonnade the plan stamps into this bare hall (piers on the centre line at rows 7, 15, 23 and two inside the bench chamber), and the six further stations of the bench itself (tree, seam, debt, architecture)."
+        },
+        {
+          "hall": "Boolean_Gallery",
+          "words": 1178,
+          "note": "The strongest chapter as argument: each row is read as a walkable register and the default-first order is named as a catalogue convention. All 24 tokens resolve and the row order matches the walk (difference, union, intersection, breach, coincident, removal). As an encounter it is the weakest: row 23's four 5.35 m removal rooms stand at a 2 m pitch and row 15's middle benches sit in the aisle, every fronted work faces the far wall, and the colonnade stamps piers into two shells. CLAUDE.md's line that only Artist_Readymades places non-default values is stale; this hall places 24."
+        },
+        {
+          "hall": "Boolean_Works",
+          "words": 1710,
+          "note": "Nine works in the tall hall (wall_height 5, piers off, artifact_placement map). The burrow section is the sequence's payoff and reads exactly to the code (eleven carvers, cylinders, -0.02 to 2.28 m, collision only on rock). The chapter is four times the length of its neighbours; two passages read as backlog ('a specific possibility to develop', 'a precise unfinished task'), one sentence leaks the DNA-sweep measurement ('the museum's earlier image comparisons'), and the one bodily instruction sends the visitor to the wrong end of an 11 m block."
+        }
+      ],
+      "stumbles": [
+        "Boolean_Verbs: the opening promises three objects on one line with nothing 'hiding it from the next', but the plan tile (ada_run/em_plan.json plans[137]) carries stamped piers at (6,7), (6,15), (6,23) on that line, plus (2,23) and (6,23) inside the bench's 4.8 x 2.5 m chamber slab.",
+        "Boolean_Verbs: the bench section names three results, A - B / B - A and a caption; the object also builds 'the tree', 'the seam' (born edges), 'the debt' (baked) and 'architecture' (a block minus rooms minus doors), and the last two are the exact foreshadowing of the next two halls.",
+        "Boolean_Gallery: row 23 places four removal rooms (SHELL_W 5.35 m) at cols 4, 6, 10, 12 so adjacent shells overlap by 3.35 m and the inner pair straddles the aisle; row 15 places two 2.88 m subtraction suites at cols 7 and 9, both in the aisle. Neither has collision, so the visitor walks through pilasters and lecterns.",
+        "Boolean_Gallery: the coincident-face plates, the suites' slate boards and the removal rooms all face +z (rotation 0) while the visitor arrives travelling +z, so three rows are first met from behind: a backing slab, a board, a wall.",
+        "Boolean_Gallery: with no museum block the colonnade rule stamps piers at (2,23) and (14,23), inside the two outer removal-room shells.",
+        "Boolean_Works: 'the opening on its left side' — the seeded walk starts at the block's -X face (boolean_burrow.gd:161) and the TRY THE OPENING label hangs there (line 141); rows map to +z (GridInteractablesComponent.gd:1125), so for the arriving visitor that face is on the right.",
+        "Boolean_Works: 'The museum's earlier image comparisons scarcely registered the addition of returning walls' is the DNA sweep's 4.372% (boolean_burrow.gd:64-68), a fact about a capture rig, not about anything the headset visitor can see.",
+        "Boolean_Works: two development notes in reader prose ('The unplaced recipe leaves a specific possibility to develop', 'That makes a precise unfinished task') and 1710 words against ~420 in each neighbour.",
+        "Boolean_Works: sphere_splitting_showcase.tscn ships a shadow-casting DirectionalLight3D and a WorldEnvironment (lines 8-12), so the hall's light changes when the piece streams in; the registry already names this as an unrepaired finding.",
+        "Handover out: Works ends 'Carry the question of accommodation with you'; SwarmIntelligence_PhysarumColony opens on memory in the ground and looks back to 'the earlier emergence rooms', never to hollows or bodies."
+      ],
+      "keep": [
+        {
+          "hall": "Boolean_Verbs",
+          "quote": "The region still has an inside and an outside in the calculation; it has not acquired the power to stop your body. Keep that difference with you when the objects become architecture."
+        },
+        {
+          "hall": "Boolean_Verbs",
+          "quote": "Being connected and being smooth are different accomplishments."
+        },
+        {
+          "hall": "Boolean_Verbs",
+          "quote": "Absence has been given a surface."
+        },
+        {
+          "hall": "Boolean_Gallery",
+          "quote": "A default becomes powerful when it is the only version we ever meet. This row gives it neighbours."
+        },
+        {
+          "hall": "Boolean_Gallery",
+          "quote": "A picture of a failure and an instance of that failure do different work. We can want the clarity of one without mistaking it for the other."
+        },
+        {
+          "hall": "Boolean_Works",
+          "quote": "The shape of the cut and the rule for contact have to work together. A collider can enforce an opening too small to enter. A generous hollow without collision can make the wall beside it equally passable."
+        },
+        {
+          "hall": "Boolean_Works",
+          "quote": "An equation over its head has supplied a room sooner than the construction has supplied an inside."
+        },
+        {
+          "hall": "Boolean_Works",
+          "quote": "The large hollow may make us want another passage; wanting it does not yet give it a floor."
+        }
+      ],
+      "handover_in": "Clean. ISO_RhizomeBody closes with 'The next room names operations such as union, intersection and difference' and Verbs delivers exactly that on its first line; Verbs' union section reaches back ('Earlier, distance fields let a parameter round the meeting between forms. Here there is no smoothing band.'), and the rhizome's 'a connection has to fit a body' is the seed the burrow harvests two halls later. The only seam is formal: both neighbours open with an H1 and a question, the boolean chapters open on body text.",
+      "handover_out": "Loose. Works names Swarm Intelligence, states its premise correctly (many bodies, local rules) and ends on 'what space becomes possible among them?'; Physarum answers a different question (can a path remember where to grow) and cites the emergence rooms of sequence 12 as its precedent. Nothing contradicts, but the carried question is set down unanswered; one sentence in Works' last paragraph aimed at the trail field would close it.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_boolean_surfaces.001",
+      "title": "Re-space the removal-room and subtraction-suite rows",
+      "spec": "[encounter] Boolean_Gallery\nQuote: “Twenty-four objects in six rows. ... Two wait on each side of the aisle.”\nWhy: removal_room is SHELL_W = PITCH*3 + FIN_W = 5.35 m wide, placed at cols 4, 6, 10, 12 in row 23, so adjacent shells interpenetrate by 3.35 m and the copies at 6 and 10 both cover the aisle at col 8; subtraction_suite (2.88 m) sits at cols 7 and 9 in row 15, overlapping and both in the aisle. Neither script has a collider, so the visitor walks through pilasters and lecterns instead of meeting four works.\nDo: Give the wide works a pitch their bodies fit: subtraction_suite at cols 2, 5, 11, 14 like the rows above; the four removal rooms two per row (cols 4 and 12 span x 1.3-6.7 and 9.3-14.7, aisle clear) across rows 23 and 27, then `python tools/em_map_halls.py --apply`. The chapter's 'two on each side' stays true.\nEvidence: commons/maps/Boolean_Gallery/map_data.json layers.interactables rows 15 and 23; commons/artifacts/removal_room/removal_room.gd:255 (PITCH 1.75), :274 (SHELL_W 5.35); commons/artifacts/registry/removal_room.json measurements.aabb_size [5.41, 1.64, 1.145]; commons/artifacts/registry/subtraction_suite.json measurements.aabb_size [2.88, 1.58, 1.0]; no use_collision/StaticBody in either script; commons/grid/GridInteractablesComponent.gd:1125 (cell x -> world x)\nFile: commons/maps/Boolean_Gallery/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Gallery"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Boolean_Gallery",
+      "quote": "Twenty-four objects in six rows. ... Two wait on each side of the aisle.",
+      "why": "Holds as stated: 5.35 m shells 2 m apart overlap by 3.35 m and the copies at 6 and 10 cover col 8; two 2.88 m suites 2 m apart overlap and straddle the aisle; nothing has a collider.",
+      "proposal": "As proposed, but moving two removal rooms to row 27 turns the chapter's 'Twenty-four objects in six rows' into seven rows; either change that count or keep all four in row 23 at cols 1 and 15 (x -1.7..3.7 / 12.3..17.7 exceed the 17-wide floor), so the row-27 split plus a rewrite of 'six rows' is the honest version.",
+      "evidence": "commons/maps/Boolean_Gallery/map_data.json layers.interactables rows 15 and 23; commons/artifacts/removal_room/removal_room.gd:255 (PITCH 1.75), :274 (SHELL_W 5.35); commons/artifacts/registry/removal_room.json measurements.aabb_size [5.41, 1.64, 1.145]; commons/artifacts/registry/subtraction_suite.json measurements.aabb_size [2.88, 1.58, 1.0]; no use_collision/StaticBody in either script; commons/grid/GridInteractablesComponent.gd:1125 (cell x -> world x)",
+      "review": "amended by a code checker (cited files only): Map row 23 = removal_room at cols 4,6,10,12; row 15 = subtraction_suite at cols 2,7,9,14 (Boolean_Gallery/map_data.json, width 17 so the aisle is col 8). removal_room.gd:255 PITCH 1.75, :249 N_REG 3, :274 SHELL_W = 5.35; registry aabb [5.41,1.64,1.145] (note: 'computed_from_geometry', not a Godot measurement) and subtraction_suite [2.88,1.58,1.0] measured. No collision/StaticBody in either .gd or .tscn. GridInteractablesComponent.gd:1125 world x = x*total_size. Row 27 is empty in the map (depth 32).",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.002",
+      "title": "Refuse the pier colonnade in the Verbs hall",
+      "spec": "[encounter] Boolean_Verbs\nQuote: “Three objects on one line down the middle of the room. The floor rises to either side twice on the way, giving each object a bay without hiding it from the next.”\nWhy: The hall is a bare map without museum.piers:false, so em_map_halls.py stamps the template colonnade (rows 3,7,11..., cols 2,6,10, skipping only a 3x3 around each token cell): the plan tile carries 1 m full-height piers at (6,7), (6,15), (6,23) on the very line the three objects stand on, and at (2,23) and (6,23) inside the_argument_of_solids's 4.8 x 2.5 m chamber slab. The opening sentence is false in the museum.\nDo: Add `\"piers\": false` to Boolean_Verbs map_info.museum (beside wall_height 3, as Boolean_Works already does) and re-run `python tools/em_map_halls.py --apply`.\nEvidence: tools/em_map_halls.py:278, :438-456; ada_run/em_plan.json plans[137].tile rows 7, 15, 23 (`4141114111414`); commons/artifacts/the_argument_of_solids/the_argument_of_solids.gd:86 (slab 4.8 x 0.1 x 2.5 at the origin) with the token at cell (4,22); commons/maps/Boolean_Works/map_data.json map_info.museum.piers false\nFile: commons/maps/Boolean_Verbs/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Verbs"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Boolean_Verbs",
+      "quote": "Three objects on one line down the middle of the room. The floor rises to either side twice on the way, giving each object a bay without hiding it from the next.",
+      "why": "The hall is a bare map without museum.piers:false, so em_map_halls.py stamps the template colonnade (rows 3,7,11..., cols 2,6,10, skipping only a 3x3 around each token cell): the plan tile carries 1 m full-height piers at (6,7), (6,15), (6,23) on the very line the three objects stand on, and at (2,23) and (6,23) inside the_argument_of_solids's 4.8 x 2.5 m chamber slab. The opening sentence is false in the museum.",
+      "proposal": "Add `\"piers\": false` to Boolean_Verbs map_info.museum (beside wall_height 3, as Boolean_Works already does) and re-run `python tools/em_map_halls.py --apply`.",
+      "evidence": "tools/em_map_halls.py:278, :438-456; ada_run/em_plan.json plans[137].tile rows 7, 15, 23 (`4141114111414`); commons/artifacts/the_argument_of_solids/the_argument_of_solids.gd:86 (slab 4.8 x 0.1 x 2.5 at the origin) with the token at cell (4,22); commons/maps/Boolean_Works/map_data.json map_info.museum.piers false",
+      "review": "confirmed by a code checker (cited files only): Boolean_Verbs map_info.museum is {wall_height:3, gate_depth_rows:0} with no piers key; em_map_halls.py:278 reads piers default True and :438-456 stamps rows 3,7,11,... cols 2,6,10 skipping only a 3x3 around token cells. ada_run/em_plan.json plans[137] (Boolean_Verbs) carries dressing 'piers: template colonnade x15 (bare map)' and rows 7/15/23 read 4141114111414, i.e. piers at (6,7),(6,15),(6,23) on col 6 where csg_union_demo (6,4), csg_intersection_demo (6,12), csg_difference_demo (6,19) stand, and (2,23),(6,23) beside the_argument_of_solids at (4,22) whose _build_chamber slabs 4.8 x 0.1 x 2.5 at the origin (.gd:86). Boolean_Works already sets piers:false. Caveat: em_plan.json is a derived cache, but the code path and the map_info reproduce it.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.003",
+      "title": "Refuse the colonnade in the Gallery",
+      "spec": "[encounter] Boolean_Gallery\nQuote: “The final family places three accounts of a removal beside one another.”\nWhy: The Gallery has no museum block, so the same rule stamps piers at (2,23) and (14,23), inside the two outer removal-room shells (col 4's shell spans x 1.3-6.7, col 12's 9.3-14.7), and four more at row 27. The 'three accounts beside one another' are met with a white slab standing in the first register.\nDo: Add `\"museum\": {\"piers\": false}` to Boolean_Gallery map_info and re-apply; do this together with the re-spacing so one apply covers both.\nEvidence: ada_run/em_plan.json plans[138].tile rows 23 (`4141A1A111A1A1414`) and 27; tools/em_map_halls.py:441-456; commons/artifacts/registry/removal_room.json measurements.aabb_size; memory feedback_colonnade_knows_a_body_by_one_cell\nFile: commons/maps/Boolean_Gallery/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Gallery"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Boolean_Gallery",
+      "quote": "The final family places three accounts of a removal beside one another.",
+      "why": "The Gallery has no museum block, so the same rule stamps piers at (2,23) and (14,23), inside the two outer removal-room shells (col 4's shell spans x 1.3-6.7, col 12's 9.3-14.7), and four more at row 27. The 'three accounts beside one another' are met with a white slab standing in the first register.",
+      "proposal": "Add `\"museum\": {\"piers\": false}` to Boolean_Gallery map_info and re-apply; do this together with the re-spacing so one apply covers both.",
+      "evidence": "ada_run/em_plan.json plans[138].tile rows 23 (`4141A1A111A1A1414`) and 27; tools/em_map_halls.py:441-456; commons/artifacts/registry/removal_room.json measurements.aabb_size; memory feedback_colonnade_knows_a_body_by_one_cell",
+      "review": "confirmed by a code checker (cited files only): em_plan plans[138] tile row 23 = piers at cols 2 and 14, row 27 at cols 2/6/10/14 (dressing 'piers: template colonnade x6 (bare map)'). Boolean_Gallery map_info has no 'museum' key. em_map_halls.py:441-456 stamps on the 4-beat unless (c,r) is within one cell of a body cell, so (2,23) two cells from the removal_room at (4,23) is stamped. removal_room aabb_size 5.41 m -> col 4 spans x 1.3-6.7, col 12 spans 9.3-14.7; both piers land inside a shell. Side note outside this task: the map places FOUR removal_rooms (cross/gasket/third/figure at cols 4,6,10,12) while final.md:85 says 'three accounts'; and the col-4 and col-6 shells (1.3-6.7 vs 3.3-8.7) overlap each other, which is the re-spacing the proposal mentions.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.004",
+      "title": "The burrow's opening is on the visitor's right",
+      "spec": "[vr] Boolean_Works\nQuote: “Go around the stone block to the opening on its left side.”\nWhy: The seeded walk starts at the block's -X face (`pos = Vector3(-half.x + inset, ...)`) and the TRY THE OPENING label hangs at -block_size.x*0.5 - 0.15; map rows become +z, so a visitor who has walked from the entrance to row 22 faces +z and has -X on the right. 'Left' sends them 5.5 m to the wrong end and along the solid back face.\nDo: Rewrite as a body instruction that cannot be mirrored: 'Go around the stone block; the opening is on the end to your right as you arrive, under the sign TRY THE OPENING.'\nEvidence: commons/artifacts/boolean_burrow/boolean_burrow.gd:141 (label at -block_size.x*0.5 - 0.15), :161 (walk starts at -half.x + inset); commons/grid/GridInteractablesComponent.gd:1125 (z = row * total_size); commons/maps/Boolean_Works/map_data.json spawn (8,1), burrow (8,22) rotation 0; plan row rotation 0\nFile: commons/maps/Boolean_Works/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Works"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Boolean_Works",
+      "quote": "Go around the stone block to the opening on its left side.",
+      "why": "The seeded walk starts at the block's -X face (`pos = Vector3(-half.x + inset, ...)`) and the TRY THE OPENING label hangs at -block_size.x*0.5 - 0.15; map rows become +z, so a visitor who has walked from the entrance to row 22 faces +z and has -X on the right. 'Left' sends them 5.5 m to the wrong end and along the solid back face.",
+      "proposal": "Rewrite as a body instruction that cannot be mirrored: 'Go around the stone block; the opening is on the end to your right as you arrive, under the sign TRY THE OPENING.'",
+      "evidence": "commons/artifacts/boolean_burrow/boolean_burrow.gd:141 (label at -block_size.x*0.5 - 0.15), :161 (walk starts at -half.x + inset); commons/grid/GridInteractablesComponent.gd:1125 (z = row * total_size); commons/maps/Boolean_Works/map_data.json spawn (8,1), burrow (8,22) rotation 0; plan row rotation 0",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.005",
+      "title": "Name the seam and the building on the argument bench",
+      "spec": "[prose] Boolean_Verbs\nQuote: “At the end of the hall, a bench brings the three results close enough to compare without walking between bays. Beside them stand two different remainders.”\nWhy: the_argument_of_solids builds nine stations: contested ground, three verdicts, A - B / B - A, 'the tree' ((box + lug) - bore), 'the seam' (two boxes face-to-face, a marked born edge: 'edges born that neither solid had'), 'the debt' (the same argument baked), 'architecture' ('a block, minus the rooms, minus the doors') and a plaque. The chapter names three of them; the seam and the building are exactly the forward references to the Gallery's coincident face and to the Works hall, and the visitor is standing in front of both.\nDo: After 'Its order decides whose region may remain and whose will do the cutting', add a short paragraph: the seam plate (a cut invents edges neither solid had; the next hall holds this still in amber and blue) and the last vitrine (a block minus the places you can stand, which is where the hall after next begins). Let the closing sentence point at the building rather than at 'several versions' alone.\nEvidence: commons/artifacts/the_argument_of_solids/the_argument_of_solids.gd:156-179 (_build_tree), :181-198 (_build_seam), :200-211 (_build_debt), :213-239 (_build_architecture), :250-251 (plaque: 'the last vitrine is a building, which is a block minus the places you can stand')\nFile: commons/maps/Boolean_Verbs/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Verbs"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Boolean_Verbs",
+      "quote": "At the end of the hall, a bench brings the three results close enough to compare without walking between bays. Beside them stand two different remainders.",
+      "why": "the_argument_of_solids builds nine stations: contested ground, three verdicts, A - B / B - A, 'the tree' ((box + lug) - bore), 'the seam' (two boxes face-to-face, a marked born edge: 'edges born that neither solid had'), 'the debt' (the same argument baked), 'architecture' ('a block, minus the rooms, minus the doors') and a plaque. The chapter names three of them; the seam and the building are exactly the forward references to the Gallery's coincident face and to the Works hall, and the visitor is standing in front of both.",
+      "proposal": "After 'Its order decides whose region may remain and whose will do the cutting', add a short paragraph: the seam plate (a cut invents edges neither solid had; the next hall holds this still in amber and blue) and the last vitrine (a block minus the places you can stand, which is where the hall after next begins). Let the closing sentence point at the building rather than at 'several versions' alone.",
+      "evidence": "commons/artifacts/the_argument_of_solids/the_argument_of_solids.gd:156-179 (_build_tree), :181-198 (_build_seam), :200-211 (_build_debt), :213-239 (_build_architecture), :250-251 (plaque: 'the last vitrine is a building, which is a block minus the places you can stand')",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.006",
+      "title": "Turn the fronted works toward the arriving visitor",
+      "spec": "[vr] Boolean_Gallery\nQuote: “Cross back to the first object with what the others have shown you. Its silence has changed.”\nWhy: coincident_face draws its marks and tags at z +0.02 in front of a backing at z -0.016, the subtraction suite's slate board stands at z -0.30 behind the solid, and the removal room's registers front at z +0.50 with its wall at the back; all are placed at rotation 0, so they face +z, away from a visitor who enters at row 1 and walks +z. Three of the six rows are first met from behind. The author's own Verbs placement (`csg_intersection_demo:180:0.5`) shows the convention for facing the entrance.\nDo: Rotate the three fronted rows 180 (`coincident_face:180:0#separation:...`, `subtraction_suite:180:0#breach:...`, `removal_room:180:0#subtraction:...`), and the coincident_face at (13,39) in Boolean_Works, which currently faces the back wall; re-apply.\nEvidence: algorithms/booleansurfaces/coincident_face/coincident_face.gd:274 (backing at z -0.016), :340 (tags at z +0.02); commons/artifacts/subtraction_suite/subtraction_suite.gd (board.position z -0.30 in _build_operator); commons/artifacts/registry/removal_room.json measurements.source ('cornice back -0.645 ... CELL front +0.50'); commons/grid/GridUtilitiesComponent.gd:366 (row -> +z); commons/maps/Boolean_Verbs/map_data.json (6,12) `csg_intersection_demo:180:0.5#forfeit:numeral`\nFile: commons/maps/Boolean_Gallery/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Gallery"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Boolean_Gallery",
+      "quote": "Cross back to the first object with what the others have shown you. Its silence has changed.",
+      "why": "coincident_face draws its marks and tags at z +0.02 in front of a backing at z -0.016, the subtraction suite's slate board stands at z -0.30 behind the solid, and the removal room's registers front at z +0.50 with its wall at the back; all are placed at rotation 0, so they face +z, away from a visitor who enters at row 1 and walks +z. Three of the six rows are first met from behind. The author's own Verbs placement (`csg_intersection_demo:180:0.5`) shows the convention for facing the entrance.",
+      "proposal": "Rotate the three fronted rows 180 (`coincident_face:180:0#separation:...`, `subtraction_suite:180:0#breach:...`, `removal_room:180:0#subtraction:...`), and the coincident_face at (13,39) in Boolean_Works, which currently faces the back wall; re-apply.",
+      "evidence": "algorithms/booleansurfaces/coincident_face/coincident_face.gd:274 (backing at z -0.016), :340 (tags at z +0.02); commons/artifacts/subtraction_suite/subtraction_suite.gd (board.position z -0.30 in _build_operator); commons/artifacts/registry/removal_room.json measurements.source ('cornice back -0.645 ... CELL front +0.50'); commons/grid/GridUtilitiesComponent.gd:366 (row -> +z); commons/maps/Boolean_Verbs/map_data.json (6,12) `csg_intersection_demo:180:0.5#forfeit:numeral`",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.007",
+      "title": "Replace the sweep-measurement aside",
+      "spec": "[prose] Boolean_Works\nQuote: “The museum's earlier image comparisons scarcely registered the addition of returning walls: from outside, little appeared to change.”\nWhy: This is the DNA capture rig's 4.372% figure for csg_architecture_cavity's interior axis, a fact about a camera standing outside the object; a headset visitor has no access to 'the museum's earlier image comparisons' and the sentence reads as a note to the maker.\nDo: Say what the visitor can test: 'From outside, a wall with returning walls looks much like a wall without them; the inside only shows itself to a body that goes round.'\nEvidence: commons/artifacts/boolean_burrow/boolean_burrow.gd:64-68 (the 4.372% measurement); commons/artifacts/registry/boolean_burrow.json dna.predicted_degeneracy.note\nFile: commons/maps/Boolean_Works/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Works"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Boolean_Works",
+      "quote": "The museum's earlier image comparisons scarcely registered the addition of returning walls: from outside, little appeared to change.",
+      "why": "This is the DNA capture rig's 4.372% figure for csg_architecture_cavity's interior axis, a fact about a camera standing outside the object; a headset visitor has no access to 'the museum's earlier image comparisons' and the sentence reads as a note to the maker.",
+      "proposal": "Say what the visitor can test: 'From outside, a wall with returning walls looks much like a wall without them; the inside only shows itself to a body that goes round.'",
+      "evidence": "commons/artifacts/boolean_burrow/boolean_burrow.gd:64-68 (the 4.372% measurement); commons/artifacts/registry/boolean_burrow.json dna.predicted_degeneracy.note",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.008",
+      "title": "Aim the last paragraph at the trail field",
+      "spec": "[handover] Boolean_Works\nQuote: “Carry the question of accommodation with you: what space becomes possible among them?”\nWhy: SwarmIntelligence_PhysarumColony opens on 'Can a path remember where to grow when no individual carries a map?', cites 'the earlier emergence rooms' as its precedent and never mentions hollows, clearance or a body; the question Works asks the visitor to carry is set down at the door.\nDo: Tune the closing sentences to what the next hall delivers: 'In the next hall many small bodies lay a trace in the ground and follow it. The question moves from what a hollow permits one body to what a shared ground permits many.'\nEvidence: commons/maps/SwarmIntelligence_PhysarumColony/final.md lines 3, 13-15 ('This is environmental memory... The earlier emergence rooms'); commons/maps/Boolean_Works/final.md line 136\nFile: commons/maps/Boolean_Works/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Works"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "Boolean_Works",
+      "quote": "Carry the question of accommodation with you: what space becomes possible among them?",
+      "why": "SwarmIntelligence_PhysarumColony opens on 'Can a path remember where to grow when no individual carries a map?', cites 'the earlier emergence rooms' as its precedent and never mentions hollows, clearance or a body; the question Works asks the visitor to carry is set down at the door.",
+      "proposal": "Tune the closing sentences to what the next hall delivers: 'In the next hall many small bodies lay a trace in the ground and follow it. The question moves from what a hollow permits one body to what a shared ground permits many.'",
+      "evidence": "commons/maps/SwarmIntelligence_PhysarumColony/final.md lines 3, 13-15 ('This is environmental memory... The earlier emergence rooms'); commons/maps/Boolean_Works/final.md line 136",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.009",
+      "title": "Place the workbench at algebra:complete",
+      "spec": "[encounter] Boolean_Works\nQuote: “The current table shows the three simpler results. The unplaced recipe leaves a specific possibility to develop”\nWhy: csg_compose_workbench declares algebra = triad | ordered | complete | atoms and `complete` builds the symmetric difference (A ∪ B) − (A ∩ B) as a fifth bench, but the map places the bare token, so a visitor who has just walked a gallery arguing that defaults are choices is told about a recipe the hall keeps off the table.\nDo: Change the token to `csg_compose_workbench:0:0#algebra:complete` and rewrite the paragraph around the fifth solid (composed from the verbs, not added to them), keeping the sentence that the visitor still cannot pick up or compose.\nEvidence: algorithms/boolean_surfaces/csg_compose_workbench.gd:47 (complete adds the symmetric difference), :85-89 (ALGEBRAS, export default triad), :244 (\"complete\" branch); commons/maps/Boolean_Works/map_data.json row 3 col 4 bare token; commons/artifacts/registry/boolean_surfaces.json csg_compose_workbench.dna.note\nFile: commons/maps/Boolean_Works/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Works"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Boolean_Works",
+      "quote": "The current table shows the three simpler results. The unplaced recipe leaves a specific possibility to develop",
+      "why": "csg_compose_workbench declares algebra = triad | ordered | complete | atoms and `complete` builds the symmetric difference (A ∪ B) − (A ∩ B) as a fifth bench, but the map places the bare token, so a visitor who has just walked a gallery arguing that defaults are choices is told about a recipe the hall keeps off the table.",
+      "proposal": "Change the token to `csg_compose_workbench:0:0#algebra:complete` and rewrite the paragraph around the fifth solid (composed from the verbs, not added to them), keeping the sentence that the visitor still cannot pick up or compose.",
+      "evidence": "algorithms/boolean_surfaces/csg_compose_workbench.gd:47 (complete adds the symmetric difference), :85-89 (ALGEBRAS, export default triad), :244 (\"complete\" branch); commons/maps/Boolean_Works/map_data.json row 3 col 4 bare token; commons/artifacts/registry/boolean_surfaces.json csg_compose_workbench.dna.note",
+      "review": "confirmed by a code checker (cited files only): csg_compose_workbench.gd:47 comment 'complete adds the symmetric difference'; :85-89 ALGEBRAS + export default 'triad'; :244 the 'complete' branch returns [u,n,d,r,x]. Map Boolean_Works interactables row 3 col 4 is the bare token 'csg_compose_workbench'. Registry dna.axes.algebra lists complete. The key is honoured: :146-147 reads meta config_algebra, so '#algebra:complete' reaches the code. final.md:17 carries the quoted sentence.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.010",
+      "title": "Drop the backlog voice in two passages",
+      "spec": "[prose] Boolean_Works\nQuote: “That makes a precise unfinished task. If handling became possible, we could turn one result away from its neighbours, carry it to another comparison, and bring it back.”\nWhy: This and the workbench's 'a specific possibility to develop' address the maker's to-do list rather than the visitor's encounter; with nine works the chapter runs to 1710 words against about 420 for each neighbour, and these are the words the visitor cannot use.\nDo: Keep the observation in each ('an appearance has offered an action that the implementation withholds') and cut the task framing, about 120 words across the two sections.\nEvidence: commons/maps/Boolean_Works/final.md lines 17 and 120-122; word counts: Boolean_Works 1710, ISO_RhizomeBody 423, SwarmIntelligence_PhysarumColony 409 (prose, code and anchors excluded)\nFile: commons/maps/Boolean_Works/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Works"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Boolean_Works",
+      "quote": "That makes a precise unfinished task. If handling became possible, we could turn one result away from its neighbours, carry it to another comparison, and bring it back.",
+      "why": "This and the workbench's 'a specific possibility to develop' address the maker's to-do list rather than the visitor's encounter; with nine works the chapter runs to 1710 words against about 420 for each neighbour, and these are the words the visitor cannot use.",
+      "proposal": "Keep the observation in each ('an appearance has offered an action that the implementation withholds') and cut the task framing, about 120 words across the two sections.",
+      "evidence": "commons/maps/Boolean_Works/final.md lines 17 and 120-122; word counts: Boolean_Works 1710, ISO_RhizomeBody 423, SwarmIntelligence_PhysarumColony 409 (prose, code and anchors excluded)",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.011",
+      "title": "Strip the showcase's own sun and environment",
+      "spec": "[encounter] Boolean_Works\nQuote: “Five spherical bodies and balls to throw recall the earlier force encounters.”\nWhy: sphere_splitting_showcase.tscn carries a DirectionalLight3D with shadow_enabled and a WorldEnvironment. A directional light is scene-wide, so while this hall is streamed in the whole museum gets a second shadow-casting sun; the registry names it as a separate, unrepaired finding.\nDo: Remove the two nodes from the .tscn (the grid and the museum both light their halls) or parent them under a node the museum lane frees; the four forces maps that place the token get their light from their own halls too.\nEvidence: algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.tscn:8-12; commons/artifacts/registry/vectors.json sphere_splitting_showcase.dna.harness_note ('SEPARATE FINDING, not repaired here: this token is a full test SCENE - it carries its own DirectionalLight3D, WorldEnvironment')\nFile: commons/maps/Boolean_Works/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Works"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Boolean_Works",
+      "quote": "Five spherical bodies and balls to throw recall the earlier force encounters.",
+      "why": "The scene-wide shadow-casting DirectionalLight3D is real and the grid does not strip it; the WorldEnvironment is an empty node (no environment resource) so it does not add a second environment, only a stray node.",
+      "proposal": "Remove the DirectionalLight3D (the live fault) and the empty WorldEnvironment node from the .tscn; note six placements, not four, all lit by their own halls.",
+      "evidence": "algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.tscn:8-12; commons/artifacts/registry/vectors.json sphere_splitting_showcase.dna.harness_note ('SEPARATE FINDING, not repaired here: this token is a full test SCENE - it carries its own DirectionalLight3D, WorldEnvironment')",
+      "review": "amended by a code checker (cited files only): sphere_splitting_showcase.tscn:8-10 DirectionalLight3D with shadow_enabled = true; :12 WorldEnvironment node, but load_steps=2 with no Environment resource: the WorldEnvironment carries a null environment and overrides nothing. GridInteractablesComponent._suppress_embedded_chrome (:1114-1122) hides only CanvasLayer and Camera3D, so the light survives placement. vectors.json harness_note quoted correctly. The token is placed in six maps (Boolean_Works, Corridor_ForcesArena, Curation_Bay_forces_6, ForcesArena, Forces_Destruct, Ribbon_Forces_04), not four.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.012",
+      "title": "Give the three chapters their titles",
+      "spec": "[structure] Boolean_Verbs\nQuote: “Three objects on one line down the middle of the room.”\nWhy: Both neighbouring chapters and 148 of 196 spine chapters open with an H1; these three open on body text, and the titles already exist in each map_info.\nDo: Add `# The Three Verbs` to Boolean_Verbs/final.md, `# Where the Variants Stand` to Boolean_Gallery/final.md and `# When the Negative Gets Big` to Boolean_Works/final.md.\nEvidence: commons/maps/ISO_RhizomeBody/final.md:1, commons/maps/SwarmIntelligence_PhysarumColony/final.md:1 (H1 openings); map_info.title in the three map_data.json files; H1 count measured over the 24 spine sequences' final.md files\nFile: commons/maps/Boolean_Verbs/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Verbs"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Boolean_Verbs",
+      "quote": "Three objects on one line down the middle of the room.",
+      "why": "Both neighbouring chapters and 148 of 196 spine chapters open with an H1; these three open on body text, and the titles already exist in each map_info.",
+      "proposal": "Add `# The Three Verbs` to Boolean_Verbs/final.md, `# Where the Variants Stand` to Boolean_Gallery/final.md and `# When the Negative Gets Big` to Boolean_Works/final.md.",
+      "evidence": "commons/maps/ISO_RhizomeBody/final.md:1, commons/maps/SwarmIntelligence_PhysarumColony/final.md:1 (H1 openings); map_info.title in the three map_data.json files; H1 count measured over the 24 spine sequences' final.md files",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.013",
+      "title": "Eleven blank signs show the primitives sentence",
+      "spec": "[encounter] Boolean_Verbs\nQuote: “The floor rises to either side twice on the way, giving each object a bay”\nWhy: The utilities layer carries bare `3t` cells (three in Verbs at col 1, six in Gallery, two in Works) with no message; a bare 3t renders DEFAULT_TEXT_DISPLAY, 'A POINT IS ENTROPY THAT HAS COOLED INTO MEMORY.' The museum ignores utility text, so this only bites in the grid/desktop visual-test lane, where each bay would open with a sentence from sequence 1.\nDo: Give each sign its bay's word (e.g. `3t:A_UNION_B`, `3t:A_INTERSECTION_B`, `3t:A_MINUS_B`) or delete the cells.\nEvidence: commons/grid/GridUtilitiesComponent.gd:10 (DEFAULT_TEXT_DISPLAY), :964-966; commons/maps/Boolean_Verbs/map_data.json utilities (1,3), (1,11), (1,18); Boolean_Gallery utilities col 1 rows 2, 6, 10, 14, 18, 22; Boolean_Works utilities (1,2), (1,7); commons/scenes/mapobjects/word_is.gd:9 ('The grid has three ways to write text and the museum sees NONE of them')\nFile: commons/maps/Boolean_Verbs/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Verbs"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Boolean_Verbs",
+      "quote": "The floor rises to either side twice on the way, giving each object a bay",
+      "why": "The utilities layer carries bare `3t` cells (three in Verbs at col 1, six in Gallery, two in Works) with no message; a bare 3t renders DEFAULT_TEXT_DISPLAY, 'A POINT IS ENTROPY THAT HAS COOLED INTO MEMORY.' The museum ignores utility text, so this only bites in the grid/desktop visual-test lane, where each bay would open with a sentence from sequence 1.",
+      "proposal": "Give each sign its bay's word (e.g. `3t:A_UNION_B`, `3t:A_INTERSECTION_B`, `3t:A_MINUS_B`) or delete the cells.",
+      "evidence": "commons/grid/GridUtilitiesComponent.gd:10 (DEFAULT_TEXT_DISPLAY), :964-966; commons/maps/Boolean_Verbs/map_data.json utilities (1,3), (1,11), (1,18); Boolean_Gallery utilities col 1 rows 2, 6, 10, 14, 18, 22; Boolean_Works utilities (1,2), (1,7); commons/scenes/mapobjects/word_is.gd:9 ('The grid has three ways to write text and the museum sees NONE of them')",
+      "review": "confirmed by a code checker (cited files only): Verbs utilities: bare '3t' at (1,3),(1,11),(1,18); Gallery col 1 rows 2,6,10,14,18,22; Works (1,2),(1,7) - eleven in total, none with a message. GridUtilitiesComponent.gd:10 DEFAULT_TEXT_DISPLAY = 'A POINT IS ENTROPY THAT HAS COOLED INTO MEMORY.' and :964-966 returns it when parameters are empty. word_is.gd:9 confirms the museum never reads layers.utilities, so this bites only in the grid/desktop lane.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_boolean_surfaces.014",
+      "title": "Verify that the rack keeps its places",
+      "spec": "[code-claim] Boolean_Works\nQuote: “For now, we move around it while its objects keep their places.”\nWhy: Each of the 75 combinations is wrapped in a grab_cube whose collision is replaced by a 2 x 2 x 2 m BoxShape3D, at 0.4 m spacing, on an unfrozen RigidBody3D (freeze_mode kinematic, gravity 0, damping 5): 75 overlapping 2 m boxes are resolved by the physics engine pushing bodies apart, and the visitor's body pushes them too. Unverifiable here without Godot, but if true the sentence is false and the rack scatters.\nDo: Walk it in the headset; if the rack drifts, set `freeze = true` on the wrapper (the mode is already kinematic) or size the collision box to the object (scale_factor 0.1).\nEvidence: algorithms/primitives/booleans/booleanvariations.gd:4-5 (grid 3x5x5, spacing 0.4), :580-586 (RigidBody settings, 'Don't freeze completely'), :606-609 (BoxShape3D 2.0 m), :613-632 (XRToolsPickable script replaced, so no pickup, as the chapter says)\nFile: commons/maps/Boolean_Works/final.md",
+      "effort": "half-day",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Boolean_Works"
+      ],
+      "sequence_refs": [
+        "boolean_surfaces"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "Boolean_Works",
+      "quote": "For now, we move around it while its objects keep their places.",
+      "why": "Each of the 75 combinations is wrapped in a grab_cube whose collision is replaced by a 2 x 2 x 2 m BoxShape3D, at 0.4 m spacing, on an unfrozen RigidBody3D (freeze_mode kinematic, gravity 0, damping 5): 75 overlapping 2 m boxes are resolved by the physics engine pushing bodies apart, and the visitor's body pushes them too. Unverifiable here without Godot, but if true the sentence is false and the rack scatters.",
+      "proposal": "Walk it in the headset; if the rack drifts, set `freeze = true` on the wrapper (the mode is already kinematic) or size the collision box to the object (scale_factor 0.1).",
+      "evidence": "algorithms/primitives/booleans/booleanvariations.gd:4-5 (grid 3x5x5, spacing 0.4), :580-586 (RigidBody settings, 'Don't freeze completely'), :606-609 (BoxShape3D 2.0 m), :613-632 (XRToolsPickable script replaced, so no pickup, as the chapter says)",
+      "review": "unverifiable by a code checker (cited files only): Every code fact holds: grid 3x5x5 at spacing 0.4 (:4-5); wrapper gravity 0, damp 5, freeze_mode KINEMATIC but freeze never set (:580-586); BoxShape3D 2.0 m (:606-609); XRToolsPickable script replaced by a stability script (:613-632). Two additions: grab_cube inherits pickable.tscn with collision_layer 4 and collision_mask 196615 (bit 4 included), so the wrappers DO collide with one another; and only the CSG combiner is scaled by 0.1 (:112), the 2 m collision box on the wrapper is unscaled. Whether the physics actually scatters the rack in the running scene still needs a walk.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    }
+  ]
+}

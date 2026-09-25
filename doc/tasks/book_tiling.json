@@ -1,0 +1,518 @@
+{
+  "goal_id": "book_tiling",
+  "goal_title": "Book: Patterns: Dress the Architecture — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in tiling became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "tiling",
+    "order": 5,
+    "phase": "F_order",
+    "title": "Patterns: Dress the Architecture",
+    "chapters": [
+      "Pattern_Disco",
+      "Pattern_Foundry",
+      "Tutorial_Pattern",
+      "Array_Patterns",
+      "Symmetry_Seventeen",
+      "Ribbon_Patterns_01",
+      "Ribbon_Patterns_02",
+      "Ribbon_Patterns_03"
+    ],
+    "words": 7179,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "Color_Walls (last of color)",
+      "Pattern_Disco",
+      "Pattern_Foundry",
+      "Tutorial_Pattern",
+      "Array_Patterns",
+      "Symmetry_Seventeen",
+      "Ribbon_Patterns_01",
+      "Ribbon_Patterns_02",
+      "Ribbon_Patterns_03",
+      "Change_Intro (first of change)"
+    ],
+    "reading": {
+      "arc": "The sequence takes one small fixed mark (a red bend, a blue corner, an ochre interruption in a 4x4 array) and walks it through eight halls, each time holding one of three things still (the source, the copying rule, the receiving surface) and changing another. The returning disco separates an arrangement from its palette and from the clock that reads it; the Foundry lets a small source dress walls and floors and shows what it means to hold a receiver apart from its source; Tutorial and Array keep the motif and change the relation between copies, then give the address a surface, a unit and a corner. Symmetry_Seventeen compares translation, reflection and glide on the same mark and bounds what the wallpaper classification can claim. The three Ribbon annexes give the mark an inside, a carrier with shading, and finally a garment: the visitor saves a fabric recipe and wears it into the runway and the next sequence. Read as a book it is one long demonstration that a pattern is a relation between a source, a rule and a body, not an image.",
+      "holds": [
+        "One mark, six halls: the identical SEED array [[1,0,0,2],[1,0,0,0],[1,1,3,0],[0,0,0,0]] with the palette e7dfce/b32719/263f80/c09933 is hard-coded in fixed_motif_lesson.gd:3, tunnel_address_lesson.gd:3, symmetry_compare_lesson.gd:3, layer_pattern_lesson.gd:3-4, carrier_comparison.gd:3-4 and fabric_recipe.gd:3-5, so the reader really does follow the same red bend from Tutorial_Pattern to their own skirt.",
+        "The hold/link refrain: PLAY / HOLD on the disco, LIVE / HOLD and LINK / HOLD in the Foundry, HOLD at the symmetry console, held-versus-live panels everywhere. A held image is the sequence's instrument for making a comparison possible, and each chapter says what holding does and does not do.",
+        "The address vocabulary and its one-line entry points: `column % 4`, `tile_size - 1 - tx`, `(x + y) % 4`, `UV * vec2(repeats, 2.0)`. Every chapter shows the exact place where the lookup changes and insists the stored cells did not.",
+        "Visible change versus collision, stated in the Foundry ('These images add no collision'), the tunnel ('No wall has opened'), and the studio ('The collision still refuses you'), which sets up the body question the sequence ends on.",
+        "A shared console grammar (tilted mount, push buttons, UNDO and RESET, a status label) and a shared chapter shape: open on a question, close by naming the next hall and the question it will ask."
+      ],
+      "hall_notes": [
+        {
+          "hall": "Pattern_Disco",
+          "words": 460,
+          "note": "Reopens the array_tutorial disco with a COLOUR control and separates arrangement, palette and clock; the sequencer's own clock is allowed to disagree with the floor's. Short, quick and true to disco_controls.gd except that the PATTERN button cycles five arrangements, not the four the text counts."
+        },
+        {
+          "hall": "Pattern_Foundry",
+          "words": 2067,
+          "note": "A source decision reaches the architecture (DRESS THE ARCHITECTURE), then the loom's two specimens, link/hold, repeat size, offset, wall receivers, and a studio in the annex that can take over a wall and a curved room; every control and number checks against recipe_study.gd and studio_surface_controls.gd. It is three chapters long and its announced 'third pass' sits after 25 lines of return-visit experiments."
+        },
+        {
+          "hall": "Tutorial_Pattern",
+          "words": 706,
+          "note": "Keeps the sixteen painted cells fixed and compares P1 and PM on two framed panels and the floor; the shader excerpt and the FLIP X line are verbatim from wallpaper_tile.gdshader and pattern_maker_station.gd. The cleanest teaching chapter in the sequence."
+        },
+        {
+          "hall": "Array_Patterns",
+          "words": 739,
+          "note": "The addressed tunnel on its raised platform: COL +, FACE, CELL SIZE and GRID are all real (tunnel_address_lesson.gd), the wrapping and the 3.6 x 3.2 metre passage are exact, and the corner where two faces restart their counting is the chapter's best move. The brick stagger works as a coda."
+        },
+        {
+          "hall": "Symmetry_Seventeen",
+          "words": 689,
+          "note": "Translation, reflection and glide on one asymmetric mark, held beside live; the PG excerpt is wallpaper_groups.gd:214-219 verbatim, and the cage bounds the classification honestly. It narrates two of the hall's fourteen works and never points at the ones that carry the hall's name."
+        },
+        {
+          "hall": "Ribbon_Patterns_01",
+          "words": 702,
+          "note": "The mark gains a height index: SLICE / ALL and REPEAT / SHIFT with the sample() lookup shown as it runs (layer_pattern_lesson.gd:77-79). The closing 'what bodies are possible here' paragraph is the sequence's most speculative and earns it. Nine other array works stand in the hall unmentioned."
+        },
+        {
+          "hall": "Ribbon_Patterns_02",
+          "words": 720,
+          "note": "Two bounded studies, context and carrier, with the shading gain quoted exactly from carrier_comparison.gdshader:13; the closing 'dressing becomes a question for the program' is where the sequence turns. One control leaves the visitor looking at blank panels without being told why, and one paragraph discusses an artifact name the hall never shows."
+        },
+        {
+          "hall": "Ribbon_Patterns_03",
+          "words": 1096,
+          "note": "Studio to skirt to mirror to runway; the twelve buttons, the Skirt mesh lookup and all three shader lines match fabric_shader_studio.gd, super_drag_outfit.gd and fabric.gdshader. The strongest ending in the sequence, and the hall's far end holds a turret that fires at the visitor."
+        }
+      ],
+      "stumbles": [
+        "Ribbon_Patterns_03: the chapter ends calmly on the performers, but the exit end of the hall holds laser_turret (23,45), which targets the player at 80 damage per second within 30 metres; a headset visitor walking to Change_Intro is bitten and dies (laser_turret.gd:13-26, 279-287, 438-441; GameManager.gd:440-448).",
+        "Pattern_Foundry: 'Take this room in three passes' and 'the following experiments ask what a saved source remembers' are followed immediately by those experiments; the third pass (the studio) arrives 27 lines later with no marker, so a first-visit reader has no way to skip to it.",
+        "Pattern_Disco: 'two values, four arrangements, four palettes' — the fifth press of PATTERN shows SUPER TRIANGLE, which the chapter never mentions (disco_controls.gd:4).",
+        "Ribbon_Patterns_02: pressing SURROUNDS sets both backgrounds to the same unshaded 0.5 grey as the targets, so both squares and the connector vanish; the text says only 'give both targets the same grey background' (carrier_comparison.gd:65, 92, 101).",
+        "Symmetry_Seventeen: the visitor stands among wall_pattern_gallery (all 17 groups as shaders), loom_alhambra_p6m, mill_escher_p4g, mill_persian_p4, loom_escher_mirror, the kaleidoscope, the meander floor and the pattern atlas, and the chapter names none of them.",
+        "Ribbon_Patterns_01: a second 3D lattice (grid3d at (6,17)) stands further into the hall than the narrated volume (7,4); nothing in the text tells the visitor which is the study.",
+        "Tutorial_Pattern: the visitor crosses a main room holding ten unmentioned works, including three p4m plates showing a rule the chapter has not introduced, before finding the 'opening into the side bay' (x17, y10-12).",
+        "Ribbon_Patterns_03 to Change_Intro: the hand-off promises 'how quickly' and 'a clock', and Change_Intro answers with a rate per position and says outright that the slider does not give a velocity.",
+        "Ribbon_Patterns_02: 'The archived name of this artifact is MetamerismLab' — the hall's labels read SAME RECIPE / DIFFERENT CARRIER, PLANE / 4 m WIDE and CURVE / 4 m ALONG ARC; the reader is asked to care about a token they never see.",
+        "Sequence-wide: none of the eight chapters carries a title or a figure, while Color_Walls before it has both (an H1 and three images) and Change_Intro after it has an H1; in the book's contents the tiling chapters show as first sentences."
+      ],
+      "keep": [
+        {
+          "hall": "Pattern_Disco",
+          "quote": "Can an invitation to move be felt without a force being applied?"
+        },
+        {
+          "hall": "Pattern_Foundry",
+          "quote": "It was easy to treat the wall as background while looking at the machine. Now the background participates in the same decision."
+        },
+        {
+          "hall": "Pattern_Foundry",
+          "quote": "Returning to an appearance need not undo the process that brought you there."
+        },
+        {
+          "hall": "Tutorial_Pattern",
+          "quote": "A repeating system can make room for an unexpected mark while giving that mark a schedule."
+        },
+        {
+          "hall": "Array_Patterns",
+          "quote": "A room does not owe the pattern an integer number of repeats."
+        },
+        {
+          "hall": "Symmetry_Seventeen",
+          "quote": "The selected button names a construction; it does not prove that the finished image has exactly that symmetry group."
+        },
+        {
+          "hall": "Ribbon_Patterns_01",
+          "quote": "Pale does not mean absent."
+        },
+        {
+          "hall": "Ribbon_Patterns_03",
+          "quote": "A visible opening has made a promise that the movement system does not keep."
+        }
+      ],
+      "handover_in": "Tight. Color_Walls closes 'Ahead, the disco floor returns in colour. Keep its arrangement and change its palette. Does the same pattern still invite the same movement?' and Pattern_Disco opens 'Do you recognise the floor in its new colours?', then answers the movement question directly ('Its passage does not push your body'). The only seam is formal: Color_Walls carries an H1 title and three figures, Pattern_Disco carries neither, so the reader crosses from a titled, illustrated chapter into a bare one.",
+      "handover_out": "Loose on one point. Ribbon_Patterns_03 promises 'how much is changing, and how quickly, here? ... A clock might do more than ease a new hem into place. What happens when the change itself keeps going?' and 'The fabric can come with us.' Change_Intro opens on a slope between two readings of a curve, says at line 34 that 'The independent variable here is position' and that moving the slider 'does not turn the displayed rate into a velocity', and never mentions the fabric or a clock. Its only thread back is 'We have learned to ask what belongs at an address: a point, a colour, a piece of a pattern' (line 11), which does honour the sequence. The promise of time is what does not land.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_tiling.001",
+      "title": "Disarm the turret on the exit route (or write it in)",
+      "spec": "[encounter] Ribbon_Patterns_03\nQuote: “The performers have been moving while we worked. In **Change_Intro**, we will ask a question that a saved appearance cannot answer”\nWhy: The map places laser_turret at (23,45) in a 31 x 49 hall whose exit is at the far row; the turret checks the player first, finds the XRCamera3D under xr_origin, and fires 80 damage per second at anything within 30 metres, routed through GameManager.apply_health_damage into the museum's walker_bitten counter, which kills on the third bite. A headset visitor leaving the runway for Change_Intro is shot from a station the chapter never mentions; the desktop walker is not in the player group, so desktop tests cannot show this.\nDo: Add an apply_grid_config to laser_turret.gd that reads target_player (and detection_range), and change the token in Ribbon_Patterns_03/map_data.json row 45 to laser_turret#target_player:false#pin:1#plinth:0 so it hunts balls only. If the encounter is wanted, the alternative is to write the turret into the last region of the chapter and give the visitor the route; silence is the one option that does not work.\nEvidence: commons/maps/Ribbon_Patterns_03/map_data.json interactables row 45 col 23 'laser_turret#pin:1#plinth:0'; commons/artifacts/registry/vectors.json -> res://commons/artifacts/turret_targeting/laser_turret.tscn (root carries the script, .tscn:5-6); commons/artifacts/turret_targeting/laser_turret.gd:13 detection_range 30.0, :15 damage_per_second 80.0, :26 target_player true, :279-287 player scored first, :312-317 XRCamera3D under 'xr_origin', :438-441 GameManager.apply_health_damage; commons/managers/GameManager.gd:440-458 walker_bitten path; no apply_grid_config in laser_turret.gd (0 matches); ada_run/em_plan.json plans[197] authored 'map' (the map IS the hall); ada_run/em_layout_walk.json halls['tiling|ribbon patterns 03'] h 52, passage 3.\nFile: commons/maps/Ribbon_Patterns_03/final.md",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Ribbon_Patterns_03"
+      ],
+      "sequence_refs": [
+        "tiling"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "Ribbon_Patterns_03",
+      "quote": "The performers have been moving while we worked. In **Change_Intro**, we will ask a question that a saved appearance cannot answer",
+      "why": "The map places laser_turret at (23,45) in a 31 x 49 hall whose exit is at row 46; the scene ships detection_range 25 m (laser_turret.tscn:8 overrides the script's 30), target_player true, and fires 80 damage per second at the XRCamera3D under xr_origin, routed through GameManager.apply_health_damage into the museum's walker_bitten counter, which kills on the third bite. A headset visitor leaving the runway for Change_Intro passes within range of a station the chapter never mentions; the desktop walker is not in the player group, so desktop tests cannot show this.",
+      "proposal": "Add an apply_grid_config to laser_turret.gd that reads target_player (and detection_range), and change the token in Ribbon_Patterns_03/map_data.json row 45 to laser_turret#target_player:false#pin:1#plinth:0 so it hunts balls only. If the encounter is wanted, write the turret into the last region of the chapter and give the visitor the route; silence is the one option that does not work.",
+      "evidence": "commons/maps/Ribbon_Patterns_03/map_data.json interactables row 45 col 23 'laser_turret#pin:1#plinth:0'; commons/artifacts/registry/vectors.json -> res://commons/artifacts/turret_targeting/laser_turret.tscn (root carries the script, .tscn:5-6); commons/artifacts/turret_targeting/laser_turret.gd:13 detection_range 30.0, :15 damage_per_second 80.0, :26 target_player true, :279-287 player scored first, :312-317 XRCamera3D under 'xr_origin', :438-441 GameManager.apply_health_damage; commons/managers/GameManager.gd:440-458 walker_bitten path; no apply_grid_config in laser_turret.gd (0 matches); ada_run/em_plan.json plans[197] authored 'map' (the map IS the hall); ada_run/em_layout_walk.json halls['tiling|ribbon patterns 03'] h 52, passage 3.",
+      "review": "amended by a code checker (cited files only): Everything checks except the range: the placed scene laser_turret.tscn:8 overrides detection_range to 25.0 (the .gd:13 default of 30.0 is not what stands in the hall). Ribbon_Patterns_03 is 31 x 49, spawn 's' at (15,2), exit 't' at (15,46), interactables row 45 col 23 = 'laser_turret#pin:1#plinth:0' (about 8 cells from the exit, inside 25 m). .tscn:5-6 root carries the script; .gd:15 damage_per_second 80, :26 target_player true, :279-287 player scored first, :312-317 XRCamera3D under 'xr_origin', :438-441 GameManager.apply_health_damage; GameManager.gd:440-458 routes to em_lethal walker_bitten ('kills on the third bite'); 0 apply_grid_config matches in laser_turret.gd. em_plan plans[197] authored 'map'; em_layout_walk 'tiling|ribbon patterns 03' h 52, passage 3, laser_turret at tile [23,45].",
+      "notes": "Codex review — 24 September 2026\nAdded placement-specific target_player configuration to the existing turret. Ribbon_Patterns_03 opts out; other placements retain their default. Native checks confirm the loaded setting, ball selection and release of a supplied XR target lock. This desktop runner has no tracked player; an explicit xr_origin/XRCamera3D fixture exercises the production resolver. No damage or headset traversal claim. The original failed desktop-resolver expectation is retained in turret-desktop-first/.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T20:26:25.476Z"
+    },
+    {
+      "id": "book_tiling.002",
+      "title": "Put the studio pass before the return-visit experiments",
+      "spec": "[structure] Pattern_Foundry\nQuote: “For a first visit, link the curve again and continue to the studio in the runway annex, where the third pass begins. When you return to the loom, the following experiments ask what a saved source remembers”\nWhy: The chapter announces three passes at line 5 and sends the first-time reader to the studio at line 55, but the studio paragraphs sit at lines 84-90, after the SAVE/RESTORE, wall, repeat-size, offset, NORTH/EAST and ARCHITECTURE experiments (lines 57-81). A reader who obeys the text cannot find the third pass, and one who reads on meets 25 lines they were told to skip. At 2067 words the chapter is three times any other in the sequence.\nDo: Move the four studio paragraphs (lines 84-90, 'Take the passage into the runway annex...' through '...even though its supports stayed where they were?') to directly follow line 55, then introduce the remaining loom experiments with one line such as 'On a return visit, the loom has more to show.' so the walking order and the reading order agree.\nEvidence: commons/maps/Pattern_Foundry/final.md lines 5, 55, 57-81, 84-90; the annex layout matches the text (map_data.json structure: wall column at x24 rows 2-28, opening at rows 29-31, inner doorway at x29-31 row 18; pattern_studio_plate#room:curved at (30,11)); studio_surface_controls.gd:102-110 appends ROOM WALL / ROOM FLOOR / ROOM when the curved room exists.\nFile: commons/maps/Pattern_Foundry/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Pattern_Foundry"
+      ],
+      "sequence_refs": [
+        "tiling"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Pattern_Foundry",
+      "quote": "For a first visit, link the curve again and continue to the studio in the runway annex, where the third pass begins. When you return to the loom, the following experiments ask what a saved source remembers",
+      "why": "The chapter announces three passes at line 5 and sends the first-time reader to the studio at line 55, but the studio paragraphs sit at lines 84-90, after the SAVE/RESTORE, wall, repeat-size, offset, NORTH/EAST and ARCHITECTURE experiments (lines 57-81). A reader who obeys the text cannot find the third pass, and one who reads on meets 25 lines they were told to skip. At 2067 words the chapter is three times any other in the sequence.",
+      "proposal": "Move the four studio paragraphs (lines 84-90, 'Take the passage into the runway annex...' through '...even though its supports stayed where they were?') to directly follow line 55, then introduce the remaining loom experiments with one line such as 'On a return visit, the loom has more to show.' so the walking order and the reading order agree.",
+      "evidence": "commons/maps/Pattern_Foundry/final.md lines 5, 55, 57-81, 84-90; the annex layout matches the text (map_data.json structure: wall column at x24 rows 2-28, opening at rows 29-31, inner doorway at x29-31 row 18; pattern_studio_plate#room:curved at (30,11)); studio_surface_controls.gd:102-110 appends ROOM WALL / ROOM FLOOR / ROOM when the curved room exists.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Codex review — 24 September 2026\nMoved the four studio paragraphs intact to the announced third pass, before the loom’s longer experiments. Added an On a return visit heading. Kept the experiments and the critical closing; no artifact or substantial passage removed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T20:26:27.520Z"
+    },
+    {
+      "id": "book_tiling.003",
+      "title": "Promise what Change_Intro actually delivers",
+      "spec": "[handover] Ribbon_Patterns_03\nQuote: “how much is changing, and how quickly, here? The fabric can come with us. A clock might do more than ease a new hem into place. What happens when the change itself keeps going?”\nWhy: Change_Intro reads a value at one address and another nearby and states that position, not time, is the independent variable ('Moving your hand quickly over the slider does not turn the displayed rate into a velocity'); it never mentions the fabric or a clock. The reader arrives braced for time and gets a slope.\nDo: Rewrite the closing sentences to promise a reading at one address and another a little further along: for example 'In Change_Intro we ask what a value does between one address and the next, and how far apart two readings may be before they disagree.' Keep 'The fabric can come with us' only if Change_Intro gains a sentence that notices it; otherwise drop the clock.\nEvidence: commons/maps/Ribbon_Patterns_03/final.md line 61; commons/maps/Change_Intro/final.md lines 7-13 (two readings of a curve), 34 ('The independent variable here is position'), 11 (the only reference back to colour and pattern).\nFile: commons/maps/Ribbon_Patterns_03/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Ribbon_Patterns_03"
+      ],
+      "sequence_refs": [
+        "tiling"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "Ribbon_Patterns_03",
+      "quote": "how much is changing, and how quickly, here? The fabric can come with us. A clock might do more than ease a new hem into place. What happens when the change itself keeps going?",
+      "why": "Change_Intro reads a value at one address and another nearby and states that position, not time, is the independent variable ('Moving your hand quickly over the slider does not turn the displayed rate into a velocity'); it never mentions the fabric or a clock. The reader arrives braced for time and gets a slope.",
+      "proposal": "Rewrite the closing sentences to promise a reading at one address and another a little further along: for example 'In Change_Intro we ask what a value does between one address and the next, and how far apart two readings may be before they disagree.' Keep 'The fabric can come with us' only if Change_Intro gains a sentence that notices it; otherwise drop the clock.",
+      "evidence": "commons/maps/Ribbon_Patterns_03/final.md line 61; commons/maps/Change_Intro/final.md lines 7-13 (two readings of a curve), 34 ('The independent variable here is position'), 11 (the only reference back to colour and pattern).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Codex review — 24 September 2026\nThe ending now leads to the actual static curve and two spatial readings in Change_Intro. Removed the premature promise about a clock and velocity while retaining the sequence’s movement from addressed appearance to change.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T20:26:29.565Z"
+    },
+    {
+      "id": "book_tiling.004",
+      "title": "Count the fifth pattern",
+      "spec": "[code-claim] Pattern_Disco\nQuote: “It is a deliberately limited instrument: two values, four arrangements, four palettes.”\nWhy: PATTERNS holds five entries, CHECKER, ROWS, DIAGONALS, SNAKE and SUPER TRIANGLE, and cycle_pattern wraps over all five, so a visitor who presses PATTERN a fifth time meets a triangle surface with its own readout that the chapter has not prepared them for. The 'four pairs' of palettes is correct.\nDo: Either change the sentence to 'two values, five arrangements, four palettes' and add one clause on the fifth ('a fifth press swaps the tiles for a triangle surface that carries the same two tones'), or list the triangle beside the checker, row, bands and snake in the second paragraph.\nEvidence: commons/artifacts/regularity/disco_controls.gd:4 PATTERNS := [\"CHECKER\", \"ROWS\", \"DIAGONALS\", \"SNAKE\", \"SUPER TRIANGLE\"], :5 TRIANGLE_MODE := 4, :89 pattern = (pattern+1)%PATTERNS.size(), :132 readout 'SUPER TRIANGLE / ...'; :7 PALETTES has four pairs; commons/maps/Pattern_Disco/final.md line 15.\nFile: commons/maps/Pattern_Disco/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Pattern_Disco"
+      ],
+      "sequence_refs": [
+        "tiling"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "Pattern_Disco",
+      "quote": "It is a deliberately limited instrument: two values, four arrangements, four palettes.",
+      "why": "PATTERNS holds five entries, CHECKER, ROWS, DIAGONALS, SNAKE and SUPER TRIANGLE, and cycle_pattern wraps over all five, so a visitor who presses PATTERN a fifth time meets a triangle surface with its own readout that the chapter has not prepared them for. The 'four pairs' of palettes is correct.",
+      "proposal": "Either change the sentence to 'two values, five arrangements, four palettes' and add one clause on the fifth ('a fifth press swaps the tiles for a triangle surface that carries the same two tones'), or list the triangle beside the checker, row, bands and snake in the second paragraph.",
+      "evidence": "commons/artifacts/regularity/disco_controls.gd:4 PATTERNS := [\"CHECKER\", \"ROWS\", \"DIAGONALS\", \"SNAKE\", \"SUPER TRIANGLE\"], :5 TRIANGLE_MODE := 4, :89 pattern = (pattern+1)%PATTERNS.size(), :132 readout 'SUPER TRIANGLE / ...'; :7 PALETTES has four pairs; commons/maps/Pattern_Disco/final.md line 15.",
+      "review": "confirmed by a code checker (cited files only): disco_controls.gd:4 PATTERNS has five entries ending 'SUPER TRIANGLE', :5 TRIANGLE_MODE := 4, :88 pattern = (pattern+1)%PATTERNS.size(), :132 readout 'SUPER TRIANGLE / ...', :7 PALETTES has four pairs. Pattern_Disco places disco_controls#mode:colour at (9,4) (registry -> disco_controls.tscn with this script), so the fifth press is live in the hall. final.md:15 'two values, four arrangements, four palettes'.",
+      "notes": "Codex review — 24 September 2026\nCorrected four to five pattern modes and brought SUPER TRIANGLE into the encounter. The opening comparison now chooses CHECKER, and the binary code excerpt is explicitly scoped to square-cell patterns. Added the distinct triangle shader and its unchanged floor support; correcting only the number would have left that distinction missing.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T20:26:31.608Z"
+    },
+    {
+      "id": "book_tiling.005",
+      "title": "Say that the squares vanish under SURROUNDS",
+      "spec": "[prose] Ribbon_Patterns_02\nQuote: “Press **SURROUNDS** to give both targets the same grey background.”\nWhy: SURROUNDS sets both backgrounds to Color(0.5,0.5,0.5), the exact unshaded grey of the two targets and the connector, so the squares disappear into their panels. A visitor who is not told this sees two blank panels and assumes the exhibit broke, when the vanishing is the point: equal values on an equal surround have nothing left to differ by.\nDo: Add one sentence after the quoted one: 'The squares disappear. On an equal surround, two equal values have nothing left to differ by; the exhibit has not broken.'\nEvidence: algorithms/color/carrier_comparison.gd:65 targets Color(0.5,0.5,0.5); :92 neutral backgrounds Color(0.5,0.5,0.5); :66 bridge same grey; :101 all boxes SHADING_MODE_UNSHADED; commons/maps/Ribbon_Patterns_02/final.md line 11.\nFile: commons/maps/Ribbon_Patterns_02/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Ribbon_Patterns_02"
+      ],
+      "sequence_refs": [
+        "tiling"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Ribbon_Patterns_02",
+      "quote": "Press **SURROUNDS** to give both targets the same grey background.",
+      "why": "SURROUNDS sets both backgrounds to Color(0.5,0.5,0.5), the exact unshaded grey of the two targets and the connector, so the squares disappear into their panels. A visitor who is not told this sees two blank panels and assumes the exhibit broke, when the vanishing is the point: equal values on an equal surround have nothing left to differ by.",
+      "proposal": "Add one sentence after the quoted one: 'The squares disappear. On an equal surround, two equal values have nothing left to differ by; the exhibit has not broken.'",
+      "evidence": "algorithms/color/carrier_comparison.gd:65 targets Color(0.5,0.5,0.5); :92 neutral backgrounds Color(0.5,0.5,0.5); :66 bridge same grey; :101 all boxes SHADING_MODE_UNSHADED; commons/maps/Ribbon_Patterns_02/final.md line 11.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Codex review — 24 September 2026\nExplained that equal surrounds make the target faces almost disappear. Native museum photographs retain faint raised edges, so the prose deliberately does not promise total disappearance. Added an exact before/after pair from the same camera; surrounding animated works remain active.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T20:26:33.655Z"
+    },
+    {
+      "id": "book_tiling.006",
+      "title": "Point the visitor at the seventeen the hall holds",
+      "spec": "[prose] Symmetry_Seventeen\nQuote: “The three comparisons at the console are an entrance into that subject, not a demonstration of the completeness of the list.”\nWhy: The hall named for seventeen groups contains wall_pattern_gallery (all 17 groups as GPU shaders on the wall cubes), three machines named for their groups (loom_alhambra_p6m, mill_escher_p4g, mill_persian_p4), loom_escher_mirror, the kaleidoscope, the meander floor and the pattern atlas with nineteen named traditions, and the chapter names none of them. The reader is told the list exists and is left standing in front of it unaware; the atlas even makes the chapter's own closing argument (the makers, not the groups, are what a garment asks about).\nDo: After the cage paragraph add one paragraph: send the visitor to the wall gallery to see the seventeen as shaders on the grid, to the loom and mills whose names carry a group (Alhambra p6m, Escher p4g, Persian p4) so a name meets a machine, and to the atlas plates where each pattern names its makers, keeping the caution that a tradition is not reduced to its group.\nEvidence: commons/maps/Symmetry_Seventeen/map_data.json interactables: wall_pattern_gallery (8,6), loom_alhambra_p6m (14,5), mill_alhambra_p6m (14,9), mill_escher_p4g (11,13), mill_persian_p4 (5,13), loom_escher_mirror (6,7), kaleidoscope (13,17), tile_meander_floor (14,21), pattern_atlas_gallery (8,18); commons/artifacts/registry/shaders.json wall_pattern_gallery 'all 17 wallpaper groups as GPU shaders'; commons/artifacts/pattern_atlas_gallery/pattern_atlas_gallery.gd:55-73 (nineteen plates with makers), :45-49 (the gallery does not know the groups and argues against classification-first reading); tools/final_tags.py --map=Symmetry_Seventeen: 2 tagged works of 14.\nFile: commons/maps/Symmetry_Seventeen/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Symmetry_Seventeen"
+      ],
+      "sequence_refs": [
+        "tiling"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Symmetry_Seventeen",
+      "quote": "The three comparisons at the console are an entrance into that subject, not a demonstration of the completeness of the list.",
+      "why": "The hall named for seventeen groups contains wall_pattern_gallery (all 17 groups as GPU shaders on the wall cubes), three machines named for their groups (loom_alhambra_p6m, mill_escher_p4g, mill_persian_p4), loom_escher_mirror, the kaleidoscope, the meander floor and the pattern atlas with nineteen named traditions, and the chapter names none of them. The reader is told the list exists and is left standing in front of it unaware; the atlas even makes the chapter's own closing argument (the makers, not the groups, are what a garment asks about).",
+      "proposal": "After the cage paragraph add one paragraph: send the visitor to the wall gallery to see the seventeen as shaders on the grid, to the loom and mills whose names carry a group (Alhambra p6m, Escher p4g, Persian p4) so a name meets a machine, and to the atlas plates where each pattern names its makers, keeping the caution that a tradition is not reduced to its group.",
+      "evidence": "commons/maps/Symmetry_Seventeen/map_data.json interactables: wall_pattern_gallery (8,6), loom_alhambra_p6m (14,5), mill_alhambra_p6m (14,9), mill_escher_p4g (11,13), mill_persian_p4 (5,13), loom_escher_mirror (6,7), kaleidoscope (13,17), tile_meander_floor (14,21), pattern_atlas_gallery (8,18); commons/artifacts/registry/shaders.json wall_pattern_gallery 'all 17 wallpaper groups as GPU shaders'; commons/artifacts/pattern_atlas_gallery/pattern_atlas_gallery.gd:55-73 (nineteen plates with makers), :45-49 (the gallery does not know the groups and argues against classification-first reading); tools/final_tags.py --map=Symmetry_Seventeen: 2 tagged works of 14.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Codex review — 24 September 2026\nInvited the reader to compare existing looms, mills, architectural patterns and credited atlas plates. Amended the review’s claim that the gallery displays all seventeen: this loaded hall configured ten distinct group IDs, 0–9. The source has seventeen available rules; a finite installation is not a completeness proof. Makers and histories remain irreducible to symmetry classification.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T20:26:35.714Z"
+    },
+    {
+      "id": "book_tiling.007",
+      "title": "A still of held P1 beside live PG",
+      "spec": "[figure] Symmetry_Seventeen\nQuote: “Try to describe the difference before pressing **HOLD**. This saves the current image on the left.”\nWhy: Comparing reflection with glide reflection while holding the source fixed is the sequence's second learning objective, and the chapter asks the reader to describe a difference they cannot see on the page. None of the eight tiling chapters carries an image, while Color_Walls before it carries three; this is the one place a single still (the held P1 panel at left, the live PG panel at right, the same corner colour marked on both) would let a reader answer the question before pressing anything.\nDo: Capture the two framed panels of the symmetry console with the seed mark, held on P1 and live on PG, and add it after the PG code block with a caption on the order of 'Held P1 on the left, live PG on the right. The reflected copy has also slipped by two source rows.'\nEvidence: commons/primitives/arrays/symmetry_compare_lesson.gd:49-51 (held panel at x=-1.75, live at x=+1.75), :54 (hold_sample called on P1 at start), :87-90; grep '![' over the eight chapters returns 0 for each; commons/maps/Color_Walls/final.md has 3 figures; commons/maps/sequences/tiling.json learning_objectives[1].\nFile: commons/maps/Symmetry_Seventeen/final.md",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Symmetry_Seventeen"
+      ],
+      "sequence_refs": [
+        "tiling"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "Symmetry_Seventeen",
+      "quote": "Try to describe the difference before pressing **HOLD**. This saves the current image on the left.",
+      "why": "Comparing reflection with glide reflection while holding the source fixed is the sequence's second learning objective, and the chapter asks the reader to describe a difference they cannot see on the page. None of the eight tiling chapters carries an image, while Color_Walls before it carries three; this is the one place a single still (the held P1 panel at left, the live PG panel at right, the same corner colour marked on both) would let a reader answer the question before pressing anything.",
+      "proposal": "Capture the two framed panels of the symmetry console with the seed mark, held on P1 and live on PG, and add it after the PG code block with a caption on the order of 'Held P1 on the left, live PG on the right. The reflected copy has also slipped by two source rows.'",
+      "evidence": "commons/primitives/arrays/symmetry_compare_lesson.gd:49-51 (held panel at x=-1.75, live at x=+1.75), :54 (hold_sample called on P1 at start), :87-90; grep '![' over the eight chapters returns 0 for each; commons/maps/Color_Walls/final.md has 3 figures; commons/maps/sequences/tiling.json learning_objectives[1].",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Codex review — 24 September 2026\nAdded an unmodified native photograph of held P1 beside live PG, including the console and surrounding museum. Real button-signal checks preserve the seed and held pixels while changing the live image. The caption identifies reflection and the two-source-row shift.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T20:26:37.757Z"
+    },
+    {
+      "id": "book_tiling.008",
+      "title": "Place the annex works and the second lattice",
+      "spec": "[prose] Ribbon_Patterns_01\nQuote: “Begin with the low array. Sixteen cubes hold the same arrangement of four colours you have met in the pattern lessons.”\nWhy: The hall holds nine unmentioned array works from the consolidated annex (bar arrays, a bubble sort, a sorting race, shelves, xyz axes) and a second 3D lattice, grid3d at (6,17), further along than the narrated volume at (7,4). A visitor told to 'begin with the low array' and then 'press LAYER +' can walk to the wrong lattice; the console that drives the study belongs to the 4x4x4 volume beside the flat grid.\nDo: Add one sentence to the opening: 'The two grids nearest the entrance are this study; the shelves, bars and sorting race further along belong to the array annex and keep their own lessons.' The same sentence pattern would serve Ribbon_Patterns_02 (the colour annex) and _03 (the light annex).\nEvidence: commons/maps/Ribbon_Patterns_01/map_data.json interactables: grid_2d_4x4 (2,4), grid_3d_4x4x4#lesson:layer_pattern (7,4), grid3d (6,17), bar_array (18,17), bar_array_bubble_sort (6,20), sorting_algorithm_race (18,20), shelf (5,22), shelf_with_stickers (19,22), xyz_coordinates (5,12), column_3_z (18,4), row_3_x (18,11); algorithms/arrays/layer_pattern_lesson.gd:48 (console mounted on the volume) and :29 (pairs with grid_2d_4x4 in the same hall); commons/maps/sequences/tiling.json ribbon_consolidation.\nFile: commons/maps/Ribbon_Patterns_01/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Ribbon_Patterns_01"
+      ],
+      "sequence_refs": [
+        "tiling"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Ribbon_Patterns_01",
+      "quote": "Begin with the low array. Sixteen cubes hold the same arrangement of four colours you have met in the pattern lessons.",
+      "why": "The hall holds nine unmentioned array works from the consolidated annex (bar arrays, a bubble sort, a sorting race, shelves, xyz axes) and a second 3D lattice, grid3d at (6,17), further along than the narrated volume at (7,4). A visitor told to 'begin with the low array' and then 'press LAYER +' can walk to the wrong lattice; the console that drives the study belongs to the 4x4x4 volume beside the flat grid.",
+      "proposal": "Add one sentence to the opening: 'The two grids nearest the entrance are this study; the shelves, bars and sorting race further along belong to the array annex and keep their own lessons.' The same sentence pattern would serve Ribbon_Patterns_02 (the colour annex) and _03 (the light annex).",
+      "evidence": "commons/maps/Ribbon_Patterns_01/map_data.json interactables: grid_2d_4x4 (2,4), grid_3d_4x4x4#lesson:layer_pattern (7,4), grid3d (6,17), bar_array (18,17), bar_array_bubble_sort (6,20), sorting_algorithm_race (18,20), shelf (5,22), shelf_with_stickers (19,22), xyz_coordinates (5,12), column_3_z (18,4), row_3_x (18,11); algorithms/arrays/layer_pattern_lesson.gd:48 (console mounted on the volume) and :29 (pairs with grid_2d_4x4 in the same hall); commons/maps/sequences/tiling.json ribbon_consolidation.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Codex review — 24 September 2026\nLocated the paired study at the entrance, with the low array as the starting point. Named the bars, shelves and sorting race further along as optional returns to arrays; retained all existing artifacts and their roles.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T20:26:39.805Z"
+    },
+    {
+      "id": "book_tiling.009",
+      "title": "Cut the archived-name paragraph",
+      "spec": "[footnote] Ribbon_Patterns_02\nQuote: “The archived name of this artifact is MetamerismLab. Its earlier wave display assigned the same RGB yellow to both results without computing spectra.”\nWhy: The visitor never meets the name: the station's labels read SAME RECIPE / DIFFERENT CARRIER, PLANE / 4 m WIDE and CURVE / 4 m ALONG ARC. The paragraph is the author defending a token against its old scene, which is true (the old lab paints both results the same yellow) but is a maintenance note, not something the reader can use; it interrupts the run from the shading model to the sleeve.\nDo: Delete the paragraph, or reduce it to one clause folded into the previous one: 'Keeping the model small lets us follow exactly where the difference enters, which is more than a name like metamerism would do.'\nEvidence: commons/maps/Ribbon_Patterns_02/final.md line 37; algorithms/color/carrier_comparison.gd:31 (title label), :59-60 (specimen labels); algorithms/color/metamerism_lab/MetamerismLab.gd:32 and :39 (both results Color(1,1,0)); map token 'MetamerismLab:0#pin:1#plinth:0#lesson:carrier' swaps the scene for carrier_comparison.gd (MetamerismLab.gd:126-146).\nFile: commons/maps/Ribbon_Patterns_02/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Ribbon_Patterns_02"
+      ],
+      "sequence_refs": [
+        "tiling"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "Ribbon_Patterns_02",
+      "quote": "The archived name of this artifact is MetamerismLab. Its earlier wave display assigned the same RGB yellow to both results without computing spectra.",
+      "why": "The visitor never meets the name: the station's labels read SAME RECIPE / DIFFERENT CARRIER, PLANE / 4 m WIDE and CURVE / 4 m ALONG ARC. The paragraph is the author defending a token against its old scene, which is true (the old lab paints both results the same yellow) but is a maintenance note, not something the reader can use; it interrupts the run from the shading model to the sleeve.",
+      "proposal": "Delete the paragraph, or reduce it to one clause folded into the previous one: 'Keeping the model small lets us follow exactly where the difference enters, which is more than a name like metamerism would do.'",
+      "evidence": "commons/maps/Ribbon_Patterns_02/final.md line 37; algorithms/color/carrier_comparison.gd:31 (title label), :59-60 (specimen labels); algorithms/color/metamerism_lab/MetamerismLab.gd:32 and :39 (both results Color(1,1,0)); map token 'MetamerismLab:0#pin:1#plinth:0#lesson:carrier' swaps the scene for carrier_comparison.gd (MetamerismLab.gd:126-146).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Codex review — 24 September 2026\nRemoved the internal MetamerismLab naming history from final.md. The source and model limits remain in the chapter; the prior critical/technical documents and original manuscript remain intact in the baseline.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T20:26:41.869Z"
+    },
+    {
+      "id": "book_tiling.010",
+      "title": "Locate the side bay and account for the main room",
+      "spec": "[prose] Tutorial_Pattern\nQuote: “Here, take the opening into the side bay. Two framed fields flank an editor.”\nWhy: The station is inside a walled bay (x18-26, y6-16) entered through a three-cell opening at x17, y10-12, and the visitor reaches it across a main room holding ten other works, including three pattern_tile_plate#p4m plates that show a fourfold mirror rule before the chapter has introduced anything beyond P1 and PM. A one-line map and a one-line dismissal spare the reader the question 'is this the exhibit?' at every plate.\nDo: Expand the sentence to: 'Cross the main room, past the plates that run richer rules than we need yet, to the opening in its east wall; the side bay beyond holds two framed fields flanking an editor.'\nEvidence: commons/maps/Tutorial_Pattern/map_data.json structure rows 5-17 (wall ring at x17 and x27, opening at x17 rows 10-12); interactables: pattern_maker_station#lesson:fixed_motif (22,9), pattern_tile_plate#p4m at (6,8), (8,8), (10,8), pattern_studio_plate (11,7), panel_bridge_loom (11,12), script_runner (7,13), pulsar_compact (10,14), grid_model (8,6), pattern_tile_puzzle (9,11), pattern_tile_mirror (8,10); commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd:44-50 (two frames at x=-1.95 and +1.95).\nFile: commons/maps/Tutorial_Pattern/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Tutorial_Pattern"
+      ],
+      "sequence_refs": [
+        "tiling"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Tutorial_Pattern",
+      "quote": "Here, take the opening into the side bay. Two framed fields flank an editor.",
+      "why": "The station is inside a walled bay (x18-26, y6-16) entered through a three-cell opening at x17, y10-12, and the visitor reaches it across a main room holding ten other works, including three pattern_tile_plate#p4m plates that show a fourfold mirror rule before the chapter has introduced anything beyond P1 and PM. A one-line map and a one-line dismissal spare the reader the question 'is this the exhibit?' at every plate.",
+      "proposal": "Expand the sentence to: 'Cross the main room, past the plates that run richer rules than we need yet, to the opening in its east wall; the side bay beyond holds two framed fields flanking an editor.'",
+      "evidence": "commons/maps/Tutorial_Pattern/map_data.json structure rows 5-17 (wall ring at x17 and x27, opening at x17 rows 10-12); interactables: pattern_maker_station#lesson:fixed_motif (22,9), pattern_tile_plate#p4m at (6,8), (8,8), (10,8), pattern_studio_plate (11,7), panel_bridge_loom (11,12), script_runner (7,13), pulsar_compact (10,14), grid_model (8,6), pattern_tile_puzzle (9,11), pattern_tile_mirror (8,10); commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd:44-50 (two frames at x=-1.95 and +1.95).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Codex review — 24 September 2026\nLocated the editor’s bay beyond the patterned plates through the east-wall opening, consistent with the authored map. This is orientation from the existing layout, not a new headset navigation claim.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T20:26:43.917Z"
+    },
+    {
+      "id": "book_tiling.011",
+      "title": "Name the mirror's controls and the walking dress",
+      "spec": "[prose] Ribbon_Patterns_03\nQuote: “Change your look at the mirror. The skirt keeps the recipe.”\nWhy: The mirror's console is titled SUPER DRAG / YOUR BODY and offers PREVIOUS, NEXT and WALK DRESS; the chapter names none of them, and WALK DRESS is the one case where the sentence is false: it returns the walking costume, which has no Skirt mesh, so the recipe stays saved in the wardrobe but nothing wears it. A visitor who presses the third button sees their fabric disappear and has been told it would keep.\nDo: Change to: 'Press NEXT or PREVIOUS at the mirror to change your look. The skirt keeps the recipe. WALK DRESS returns the costume the walk gave you, which has no skirt to carry it; the recipe waits in the wardrobe until you choose a look again.'\nEvidence: commons/artifacts/super_drag_mirror/super_drag_mirror.gd:94 (title), :100-106 (PREVIOUS / NEXT / WALK DRESS; restore_walk_dress calls choose_outfit(\"\")); commons/player/costume_wardrobe.gd:73-76 (choose_outfit re-applies skirt_fabric only when drag_outfit is valid), :198-202; commons/player/super_drag_outfit.gd:151-158 (only a mesh named Skirt receives the recipe); commons/maps/Ribbon_Patterns_03/final.md line 47.\nFile: commons/maps/Ribbon_Patterns_03/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Ribbon_Patterns_03"
+      ],
+      "sequence_refs": [
+        "tiling"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Ribbon_Patterns_03",
+      "quote": "Change your look at the mirror. The skirt keeps the recipe.",
+      "why": "The mirror's console is titled SUPER DRAG / YOUR BODY and offers PREVIOUS, NEXT and WALK DRESS; the chapter names none of them, and WALK DRESS is the one case where the sentence is false: it returns the walking costume, which has no Skirt mesh, so the recipe stays saved in the wardrobe but nothing wears it. A visitor who presses the third button sees their fabric disappear and has been told it would keep.",
+      "proposal": "Change to: 'Press NEXT or PREVIOUS at the mirror to change your look. The skirt keeps the recipe. WALK DRESS returns the costume the walk gave you, which has no skirt to carry it; the recipe waits in the wardrobe until you choose a look again.'",
+      "evidence": "commons/artifacts/super_drag_mirror/super_drag_mirror.gd:94 (title), :100-106 (PREVIOUS / NEXT / WALK DRESS; restore_walk_dress calls choose_outfit(\"\")); commons/player/costume_wardrobe.gd:73-76 (choose_outfit re-applies skirt_fabric only when drag_outfit is valid), :198-202; commons/player/super_drag_outfit.gd:151-158 (only a mesh named Skirt receives the recipe); commons/maps/Ribbon_Patterns_03/final.md line 47.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Codex review — 24 September 2026\nNamed NEXT, PREVIOUS and WALK DRESS. Clarified that the walking costume does not display the saved skirt fabric and that the wardrobe retains it for a skirted look. Checked the mirror → wardrobe → outfit path; no new costume interaction was implemented or headset-tested.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T20:26:45.966Z"
+    },
+    {
+      "id": "book_tiling.012",
+      "title": "Give the eight chapters titles, as both neighbours have",
+      "spec": "[structure] Pattern_Disco\nQuote: “Do you recognise the floor in its new colours?”\nWhy: None of the eight tiling chapters opens with an H1; seven of eight color chapters and both change chapters do, and 148 of the 196 spine chapters carry one. In the book's contents and wall texts the tiling chapters therefore show as their first sentence while the chapters on either side show a title, which reads as a gap rather than a style. (primitives, transformation and array_tutorial also open without titles, so if the early-book question-opening is deliberate, the fix runs the other way and belongs to color.)\nDo: Add a one-line H1 above the opening question of each of the eight chapters in the neighbours' manner (Pattern_Disco: '# The same floor, another palette'; Pattern_Foundry: '# One decision, many surfaces'; and so on), keeping the question as the first sentence.\nEvidence: First lines of commons/maps/{Pattern_Disco,Pattern_Foundry,Tutorial_Pattern,Array_Patterns,Symmetry_Seventeen,Ribbon_Patterns_01,Ribbon_Patterns_02,Ribbon_Patterns_03}/final.md (no '# '); commons/maps/Color_Walls/final.md:1 '# The view has partitions'; commons/maps/Change_Intro/final.md:1 '# Change and accumulation'; survey over commons/maps/curriculum_spine.json spine.sequences: 148 chapters with H1, 48 without, of which 30 are primitives, transformation, array_tutorial and tiling.\nFile: commons/maps/Pattern_Disco/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-24",
+      "map_refs": [
+        "Pattern_Disco"
+      ],
+      "sequence_refs": [
+        "tiling"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Pattern_Disco",
+      "quote": "Do you recognise the floor in its new colours?",
+      "why": "None of the eight tiling chapters opens with an H1; seven of eight color chapters and both change chapters do, and 148 of the 196 spine chapters carry one. In the book's contents and wall texts the tiling chapters therefore show as their first sentence while the chapters on either side show a title, which reads as a gap rather than a style. (primitives, transformation and array_tutorial also open without titles, so if the early-book question-opening is deliberate, the fix runs the other way and belongs to color.)",
+      "proposal": "Add a one-line H1 above the opening question of each of the eight chapters in the neighbours' manner (Pattern_Disco: '# The same floor, another palette'; Pattern_Foundry: '# One decision, many surfaces'; and so on), keeping the question as the first sentence.",
+      "evidence": "First lines of commons/maps/{Pattern_Disco,Pattern_Foundry,Tutorial_Pattern,Array_Patterns,Symmetry_Seventeen,Ribbon_Patterns_01,Ribbon_Patterns_02,Ribbon_Patterns_03}/final.md (no '# '); commons/maps/Color_Walls/final.md:1 '# The view has partitions'; commons/maps/Change_Intro/final.md:1 '# Change and accumulation'; survey over commons/maps/curriculum_spine.json spine.sequences: 148 chapters with H1, 48 without, of which 30 are primitives, transformation, array_tutorial and tiling.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Codex review — 24 September 2026\nGave all eight chapters a title. Promoted the final chapter’s existing opening question to its heading rather than repeating it. Mature chapter bodies and all code excerpts are preserved except for the targeted changes listed here.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-24-tiling-review-comments/index.html",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-24",
+      "updated_at": "2026-09-24T20:26:48.018Z"
+    }
+  ]
+}
