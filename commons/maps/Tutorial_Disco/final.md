@@ -1,3 +1,5 @@
+# A grid with a clock
+
 How can an arrangement that sits still make a rhythm?
 
 You have seen slots hold values and a motif repeat across floors and walls. Here the floor is black and white again, but its arrangement moves. Begin by stopping one of its clocks.

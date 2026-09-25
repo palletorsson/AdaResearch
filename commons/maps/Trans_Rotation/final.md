@@ -1,3 +1,5 @@
+# Rotation: crossings, arrays and inhabited repetition
+
 The transport cube carried you without needing to turn. Here, a surface stays attached to its middle. Follow one end. Where does the other end go?
 
 <!-- @rotation_wall_crossings -->

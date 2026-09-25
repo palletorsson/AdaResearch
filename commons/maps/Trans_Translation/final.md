@@ -1,3 +1,5 @@
+# Translation: seven journeys
+
 Translation changes nothing about a thing except where it is. That is why a void can be crossed by it, and why a path can be kept as nothing but a list of positions.
 
 This hall has holes in its floor, and every one of them is the trace of a translation. Three slots run away from you, each exactly as wide and as long as the cube that travels it, and the cube is the only way across: the first carries you straight, the second turns you a quarter on the way, the third grows the space around you by a third and gives it back on the return. One slot runs sideways. Three holes stand in the front of a raised floor with a lift in each, and you enter them by dropping in and leave them on top. One slot runs down through that floor, a cube sliding forward and down at once. The whole room is displacement made into infrastructure, and the emptiness is the drawing of it. Nothing here is reshaped by being moved, which is not the same as nothing turning: the cubes you collect spin on the spot, and two of the rides turn you with them.

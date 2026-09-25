@@ -1,3 +1,5 @@
+# The far bank is already there
+
 A transformation is defined by what it refuses to change.
 
 Melencolia left you with a solid that would not move. This is the room where the primitives finally do, and there are exactly three ways they can: a thing can go somewhere else, it can turn, or it can grow. The chapter's whole question is asked in the first hall and answered in the last: when everything changes, what stays the same? Each of the three moves has a different answer, and each is named for the one thing it gives up.

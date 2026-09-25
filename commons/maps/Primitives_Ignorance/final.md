@@ -1,3 +1,5 @@
+# Limits of Geometric Knowledge
+
 You left a cube whose connections could outlast its name. Now try the name sphere. What are you accepting when you recognise something as round?
 
 <!-- @sphere -->

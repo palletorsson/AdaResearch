@@ -1,3 +1,5 @@
+# Trihedra and First Solids
+
 The face you made in the last room could be seen from either side. Now let faces meet. When do they begin to enclose something?
 
 <!-- @grab_trihedron -->

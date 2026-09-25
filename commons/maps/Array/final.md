@@ -1,3 +1,5 @@
+# The same cube, counted
+
 What remains at an address after its occupant has gone?
 
 This is the cube we met at the beginning of Transformation. There, one body acquired movement, orientation and scale. Here it has company. We have made copies, placed them apart, and given each a number. What can we do with many that we could not do with one?

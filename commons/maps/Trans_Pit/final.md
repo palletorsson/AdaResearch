@@ -1,3 +1,5 @@
+# The Moving Boundary
+
 The neutrality of a transformation is only available from outside the space it acts on. Inside it, move and turn are ways of being removed, and the pit is the constant.
 
 Three rooms in a row, one per transformation, and fire in all of them. Everything the chapter did to objects, this hall does to you. A block translates, and it crosses the ground you are standing on. A slab turns, and the way through is somewhere else.

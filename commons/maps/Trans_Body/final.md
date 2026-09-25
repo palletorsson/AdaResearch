@@ -1,3 +1,5 @@
+# The Body
+
 The corridor narrows, and then it stops.
 
 <!-- @approach_wall -->

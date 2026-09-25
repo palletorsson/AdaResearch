@@ -1,3 +1,5 @@
+# A door, at last
+
 There is no size, only size relative to something else: scaling the object and scaling yourself are one operation seen from two sides, and proportion is what survives it.
 
 Translation changed position. Rotation changed direction. Scale is the last freedom in the matrix, and it is the strange one, because it is the only transformation you cannot see from inside. Double everything, including your ruler, and nothing has happened. Size is not a property a thing has. It is a comparison, and this hall is a room full of things to compare.

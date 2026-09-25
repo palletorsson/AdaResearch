@@ -1,3 +1,5 @@
+# Closing a boundary, adding a face
+
 Three points can close a boundary. What must the machine add before there is a face to look at?
 
 You have connected endpoints, recorded a path and given positions addresses you can return to. Now bring three edges together. Something can close without becoming a surface.

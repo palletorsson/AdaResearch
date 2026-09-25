@@ -1,3 +1,5 @@
+# Circular Approximation and Limits
+
 The previous room asked when a finite model was enough to hold a distinction. Here we make that question move. Add a division, then another. **What would count as arriving?**
 
 <!-- @combine_portals -->
