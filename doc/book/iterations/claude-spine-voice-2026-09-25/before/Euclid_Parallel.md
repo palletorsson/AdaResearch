@@ -1,5 +1,3 @@
-# The Fifth Postulate
-
 Press NEXT on the plaque five times and you arrive back at the first postulate. The counter wraps:
 
 ```gdscript
@@ -10,12 +8,12 @@ func next_postulate():
 
 Five presses, five postulates, one closed loop. Four of them fit on two short lines. The fifth needs four lines and a parenthesis. Before measuring anything, we have agreed to begin here. The room gives us flat coordinates; the plaque gives us sentences about what can be done in them. Walk between the columns. How much of that agreement already feels like the world?
 
-## The five, stored as text
+## 1 — The five, stored as text
 
 <!-- @euclid_postulates_plaque -->
 <!-- ~tutorial#p2 ~tutorial#p4 ~critical#the-rule-that-could-not-be-proven -->
 
-Start where the build starts. The tutorial keeps the five postulates as strings in a constant array: text, not logic, so a plinth can show them without a parser. The shipped plaque makes the same choice, and bakes its own line breaks in:
+Let's start where the build starts. The tutorial keeps the five postulates as strings in a constant array — text, not logic, so a plinth can show them without a parser. The shipped plaque makes the same choice, and bakes its own line breaks in:
 
 ```gdscript
 # euclid_postulates_plaque.gd
@@ -27,18 +25,18 @@ Read those two as sentences. The fourth states an equality and stops. The fifth 
 
 The difference is not length. The first four hand you permissions: what a hand with a straightedge may do. The fifth tells you what will happen once your hand has done it. It is a rule shaped like a forecast, and a forecast asks to be checked. For centuries, attempts to derive the fifth from the others failed. A rule can feel inevitable long before we have established that it follows.
 
-The array says the same in its own way. The fifth is the only entry carrying a blank line inside itself.
+Fair — and let's say what the array does about it. The fifth is the only entry carrying a blank line inside itself.
 
 It uses that blank line to introduce itself. Nothing else on the plaque has to.
 
-## Marked before anyone argues
+## 2 — Marked before anyone argues
 
 <!-- @euclid_postulates_plaque -->
 <!-- ~tutorial#p10 ~tutorial#p11 ~critical#performativity-of-the-obvious -->
 
 Before you have read a word, the room has told you which postulate matters. The gold arrives ahead of the argument.
 
-The line that does it can be pointed at. The tutorial tints the fifth plinth and scales it by 1.2; the shipped plaque runs the same move as a branch:
+It does, and we can point at the line that does it. The tutorial tints the fifth plinth and scales it by 1.2; the shipped plaque runs the same move as a branch:
 
 ```gdscript
 # euclid_postulates_plaque.gd
@@ -56,7 +54,7 @@ Repetition is how obviousness gets made — every grid, every Cartesian axis, ev
 
 Now press GOLD. It switches `highlight_fifth` off: the fifth reads in the same warm grey as the rest, and `parallel_highlighted` never fires — the branch that shouted was the branch that coloured. `postulate_selected` still emits at index four, the way it does at every other. Cycle again and ask whether the fifth still feels like the odd one.
 
-## Three lines that never meet
+## 3 — Three lines that never meet
 
 <!-- @parallel_lines -->
 <!-- ~tutorial#p13 ~tutorial#p14 ~artifacts#parallel-lines ~critical#the-state-of-exception -->
@@ -69,7 +67,7 @@ The tutorial draws five lines at `y := -2.0 + i * 1.0` — even spacing, one uni
 transform = Transform3D(0.258819, 0, 0.965926, 0.965926, 0, -0.258819, 0, 1, 0, -0.0648265, 0, 0)
 ```
 
-Count the gaps. Line2 sits at 0.204004, Line3 at 0.305252. The first gap is about 0.27, the second about 0.10. The registry calls this artifact three line modules arranged to visualize equidistant lines. The transforms are not equidistant.
+Let's count the gaps. Line2 sits at 0.204004, Line3 at 0.305252. The first gap is about 0.27, the second about 0.10. The registry calls this artifact three line modules arranged to visualize equidistant lines. The transforms are not equidistant.
 
 The parallelism survives. All three share a basis: extend the segments along those directions and their supporting lines do not meet. Each pair keeps a constant perpendicular separation. That does not require the gap between the first and second to equal the gap between the second and third. Uneven spacing breaks an evenly spaced pattern; it does not break parallelism. We have to decide which regularity we were looking for.
 
@@ -79,12 +77,12 @@ And nothing in the room says the word out loud: the scene's `Label3D` ships with
 
 So you supply it. You look at three lines, name them parallel, and the naming arrives as sight.
 
-## The triangle that says sixty
+## 4 — The triangle that says sixty
 
 <!-- @angle_sum_triangle -->
 <!-- ~summary#p3 ~blurb#p3 ~critical#what-the-axiom-conceals -->
 
-The triangle's three corners are literals — apex at `size * 0.5`, base corners at `-size * 0.4` and `size * 0.4`. Then the labels are handed their text:
+The triangle's three corners are literals — apex at `size * 0.5`, base corners at `-size * 0.4` and `size * 0.4`. Then we hand the labels their text:
 
 ```gdscript
 # angle_sum_triangle.gd
@@ -100,12 +98,12 @@ The file already knows better, in a function just above. `_angles()` reads each 
 
 Keeping those halls byte-identical is a reason to print sixty. It is a reason about shipping, not about triangles. The geometry never asked for it.
 
-## Bowing a line is not enough
+## 5 — Bowing a line is not enough
 
 <!-- @angle_sum_triangle -->
 <!-- ~tutorial#p16 ~tutorial#p17 ~critical#performativity-of-the-obvious -->
 
-Measure how far the other spaces sit from this floor. The tutorial toggles the fifth and a second preview fractures. The shipped artifact has three named settings:
+Let's measure how far the other spaces sit from this floor. The tutorial toggles the fifth and a second preview fractures. The shipped artifact has three named settings:
 
 ```gdscript
 # angle_sum_triangle.gd
@@ -127,7 +125,7 @@ But the drawing still lies in one flat plane. Curved sides can make a triangle-s
 
 This is a useful limit to meet before the next room. A name can promise a world; a bend can make the promise look convincing. What else must change for a line to count as straight there?
 
-## A screen with nothing to flatten
+## 6 — A screen with nothing to flatten
 
 <!-- @science_screen -->
 <!-- ~artifacts#science-screen ~summary#p2 ~critical#the-state-of-exception -->
@@ -141,16 +139,16 @@ The screen scans eight metres for neighbours that answer `get_grid_data()` and p
 
 What it draws is not a blank panel. It is a grid: white, square, right-angled, drawn before anything arrives to be drawn. The screen does not wait to learn what space it is in. It draws right angles whether or not anything is there, and right angles are this room's postulate in pixels.
 
-Test it. Cross the room and watch the picture: it does not change, because nothing here gives it anything to change into.
+Test it. Cross the room and watch the picture — it does not change, because nothing here gives it anything to change into. And this file has been fooled by its own paperwork before: its axis block once declared value names that were never in its enum. The sweep set them, the artifact fell back to its default, and sixteen identical frames were published — sixteen pictures of the same screen, filed as four variants. Nothing failed loudly.
 
-A declaration outrunning its code: the token asked for a grid, and the grid arrived as a white picture rather than an error, which is how such things usually arrive.
+A declaration outrunning its code, twice in one room. Here it arrives as a white grid rather than an error, which is how such things usually arrive.
 
-## What the spec asked for and what stands here
+## 7 — What the spec asked for and what stands here
 
 <!-- @angle_sum_triangle -->
 <!-- ~intent#p1 ~tutorial#p19 ~walked#what-it-opens ~summary#p4 ~blurb#p2 ~critical#the-state-of-exception -->
 
-The tutorial closes with a scroll — 300 BCE Euclid, 1733 Saccheri, 1829 Lobachevsky, 1832 Bolyai, 1854 Riemann — and a door that unlocks after two seconds of reading. The spec asked for two interactive demos that let you drag the lines. Neither is placed.
+The tutorial closes with a scroll — 300 BCE Euclid, 1733 Saccheri, 1829 Lobachevsky, 1832 Bolyai, 1854 Riemann — and a door that unlocks after two seconds of reading. The spec asked for two interactive demos, `parallel_line_demo` and `euclid_parallel_demo`, that let you drag the lines. Neither is placed.
 
 The plaque now lets you cycle the sentences and remove their gold emphasis. The lines and triangle remain comparisons to look at; they do not yet offer a handhold for changing their geometry. A control for reading is not a control for bending space.
 

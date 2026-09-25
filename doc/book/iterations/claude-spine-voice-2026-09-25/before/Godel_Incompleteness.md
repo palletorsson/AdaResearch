@@ -1,5 +1,3 @@
-# True But Unprovable
-
 Does a machine failing to find a proof show that no proof exists?
 
 ## The machine that jams

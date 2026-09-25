@@ -1,5 +1,3 @@
-# What can the model let us do?
-
 A formula waits ahead. After all those difficulties with certainty, it is almost a relief to see an equals sign.
 
 Come closer. What would you need to know before you could trust it?

@@ -1,5 +1,3 @@
-# Curvature as Choice
-
 The triangle has followed us. Three corners again, but this time the number underneath is waiting on the shape.
 
 <!-- @triangle_curvature_workbench -->

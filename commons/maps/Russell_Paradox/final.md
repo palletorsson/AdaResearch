@@ -1,3 +1,5 @@
+# The Self-Containing Set
+
 Four objects arranged as a cross, with a box at the centre, and every one of them is the same sentence said in a different material.
 
 The last two rooms were about a choice: an axiom is a decision, and the decision has a dial. Both crises were survivable, because in both cases you could pick a value and carry on. This room is where that stops working. Nothing here is waiting for you to choose. The trouble is in the shape of the rule itself, and no setting fixes it.

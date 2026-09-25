@@ -1,5 +1,3 @@
-# Only What You Can Construct
-
 Wait before touching anything.
 
 The game keeps running. The row does not grow. For once, the clock is not the author of the next term.

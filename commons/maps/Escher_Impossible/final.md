@@ -1,3 +1,5 @@
+# Locally Valid, Globally Impossible
+
 A staircase that goes up on all four sides and comes back to where it started.
 
 Check any corner of it. The riser is a sensible height, the tread is level, the joint between this flight and the next is square. Check the next corner and the same is true. Walk the whole loop checking as you go, approve every junction individually, and you will arrive back at the step you began on having climbed the entire way. Nothing you inspected was wrong. The object cannot exist.
