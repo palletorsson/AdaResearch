@@ -18,8 +18,6 @@ body.apply_central_force(-COEFFICIENTS[i] * body.linear_velocity)
 
 A minus sign makes the force oppose velocity. The coefficient has units of kilograms per second; multiplied by metres per second, it gives newtons. The three values are 0.4, 1.3 and 3.2. They are chosen for this comparison, not measured properties of air, water or honey.
 
-This is the linear rule: double the speed, double the resistance. Air at any speed you can throw a cube resists with the square of the speed instead, a law whose coefficient carries kilograms per metre; this corridor does not model it, which is one more reason the strips are names.
-
 The opening mass is one kilogram. Increase **MASS** to two, then FIRE again. The same resistance now changes velocity more slowly. The force at a given speed has not doubled to match the body. Dividing by the greater mass produces a smaller acceleration.
 
 MASS cycles through one, two and four kilograms, returning the probes to their starting positions and holding them there. FIRE begins another equal-speed comparison. A strip keeps its own coefficient throughout the flight, even when its cube passes through the glass boundary of the walking passage. The glass divides another kind of encounter.

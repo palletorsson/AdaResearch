@@ -40,10 +40,6 @@ positions[i] += velocities[i] * STEP
 
 An equals sign and a plus-equals sign give the same spatial rule different consequences. The second meets a velocity already there; the first supplies a new velocity each time. Once the bodies separate, each also asks the field from a different place.
 
-Of the three quantities in the update, only two remember. Acceleration is made new at every step from whatever is pushing now; velocity and position carry the steps before. That is why a force can end and its consequence continue.
-
-Hold on to the difference between the two receivers. In Randomness, the beads in a glass tank will replace their velocity with a new draw at every step, and jitter; a body that adds its draws to what it already has, as pink does, glides. The same rule, received two ways.
-
 The samples begin without units. Cyan interprets one field unit as one metre per second. Pink interprets it as one metre per second squared. The receiver gives the number its physical meaning. A bare arrow cannot tell us whether it names a direction, a velocity, an acceleration or a force.
 
 The centre has become somewhere to approach for one body and somewhere to cross for the other. Pink's persistence may look like reluctance to follow. We can locate it in a velocity the program allows to continue. Both ways of moving have been made possible by a rule.

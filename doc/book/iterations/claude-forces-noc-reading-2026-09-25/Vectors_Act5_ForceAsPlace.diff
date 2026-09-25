@@ -1,0 +1,11 @@
+--- before/Vectors_Act5_ForceAsPlace.md
++++ after/Vectors_Act5_ForceAsPlace.md
+@@ -73,6 +73,8 @@
+ 
+ The missing division matters. This field gives an acceleration directly. It never divides a force by the receiver's mass. A one-kilogram body and a four-kilogram body receive the same velocity increment. They can still meet different contacts or have different damping. Equal instruction does not promise equal journeys.
+ 
++Gravity arrives at the same place by a different route: its pull grows with the mass it pulls, and the division by that same mass cancels the growth, which is why Galileo's two balls reached the ground together. This field skips the multiplication and the division at once.
++
+ The visitor's controller carries its velocity through a separate receiver:
+ 
+ ```gdscript

@@ -8,7 +8,7 @@ Now **SHIFT** moves both pins sideways together. The small arrow has gone somewh
 
 We can see the movement and the lack of change at once. The wall has been asked for the difference between the pins. Both addresses have changed by the same amount, so their difference has not.
 
-The point rooms gave us addresses; transformation let us move them. The particles in the last room followed directions. Here we can carry a relation from one place to another. *This far, this way* can begin somewhere else.[^stick-chart]
+The point rooms gave us addresses; transformation let us move them. The particles in the last room followed directions. Here we can carry a relation from one place to another. *This far, this way* can begin somewhere else.
 
 **PARTS** brings out the coloured component legs and their numbers. The calculation is short:
 
@@ -52,5 +52,3 @@ Near zero, the companion has no length to draw. The code treats any input length
 At the first bench, the same difference could begin elsewhere. At the second, different lengths could share a direction. These are two ways of finding something in common without making the inputs identical.
 
 In the next room, two displacements meet. The question becomes where they can take us together.
-
-[^stick-chart]: Before the arrow there was the frond. The navigators of the Marshall Islands tied the directions of ocean swells and the positions of islands into lattices of coconut-frond midribs and shells, the mattang, meddo and rebbelib stick charts: an instrument of *this far, this way*, memorised before a voyage and left ashore. *Nature of Code* opens its chapter on vectors with one.

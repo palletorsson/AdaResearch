@@ -1,0 +1,11 @@
+--- before/Vectors_Act4a_KineticForces.md
++++ after/Vectors_Act4a_KineticForces.md
+@@ -17,6 +17,8 @@
+ ```
+ 
+ A minus sign makes the force oppose velocity. The coefficient has units of kilograms per second; multiplied by metres per second, it gives newtons. The three values are 0.4, 1.3 and 3.2. They are chosen for this comparison, not measured properties of air, water or honey.
++
++This is the linear rule: double the speed, double the resistance. Air at any speed you can throw a cube resists with the square of the speed instead, a law whose coefficient carries kilograms per metre; this corridor does not model it, which is one more reason the strips are names.
+ 
+ The opening mass is one kilogram. Increase **MASS** to two, then FIRE again. The same resistance now changes velocity more slowly. The force at a given speed has not doubled to match the body. Dividing by the greater mass produces a smaller acceleration.
+ 

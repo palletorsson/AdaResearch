@@ -8,8 +8,6 @@ The command lasts one second. The cube keeps going.
 
 There is time to look back at the button. It has finished its small contribution. Something of that contribution is still crossing the room.
 
-That is the first of Newton's laws, and the opposite of what was taught for two thousand years before him: nothing is needed to keep a body going. What is needed is a force to change it.[^newton]
-
 **COAST** does not stop it. **BRAKE** slows it. Two controls that might sound like ways of ending movement have asked different things of the body.
 
 Reset and begin again. This time, press COAST before the push has finished. The cube leaves with less speed. Cutting the command short changes how much motion it acquires; it does not take back what has already accumulated.
@@ -20,7 +18,7 @@ With **PARTS** visible, cyan gives velocity and amber gives the force requested 
 
 ## What the body brings
 
-The opening cube has a mass of one kilogram. The push requests two newtons for one second. Before a boundary intervenes, its velocity changes by about two metres per second. Acceleration equals force divided by mass; it changes velocity for as long as it acts. That is the second law, as a division.
+The opening cube has a mass of one kilogram. The push requests two newtons for one second. Before a boundary intervenes, its velocity changes by about two metres per second. Acceleration equals force divided by mass; it changes velocity for as long as it acts.
 
 **MASS** resets the run and lets us try the same pulse with two kilograms. The velocity change is halved. The cube looks the same size. A property that matters to its response was not something its silhouette could tell us.
 
@@ -34,7 +32,7 @@ body.apply_central_force(global_basis * local_force)
 
 The multiplication turns the room's local direction into a world direction. The engine integrates the response. This call neither sets a destination nor replaces velocity with the new arrow.
 
-BRAKE also applies a force, directed against the current velocity. It weakens near rest to avoid sending the cube back the other way. Without that weakening, one step of braking could carry a slow cube through rest and out the other side, and it would set off backwards under a force that only ever opposed its motion. A resistance cannot do that; a step can. The spring hall will meet the same step from the other side. Stopping takes an intervention and time. **RESET** can erase the velocity immediately because resetting an experiment has been granted a different power.
+BRAKE also applies a force, directed against the current velocity. It weakens near rest to avoid sending the cube back the other way. Stopping takes an intervention and time. **RESET** can erase the velocity immediately because resetting an experiment has been granted a different power.
 
 With **DRAG** enabled, COAST leaves the cube slowing. The command has ended, but the damping has not. With DRAG off, this chamber removes gravity and linear damping. Continued movement becomes available under those particular conditions.
 
@@ -79,5 +77,3 @@ This small ramp exposes a threshold while abbreviating the motion around it. One
 <!-- @ -->
 
 Ahead, the influences will depend on where the body arrives. A field waits across the room; a moving body reaches each part with a velocity of its own.
-
-[^newton]: Isaac Newton, *Philosophiae Naturalis Principia Mathematica* (1687), the three laws of motion. The rule it replaced is Aristotle's, in the *Physics*: a body in forced motion stops when the force stops. The third law is switched off, and back on, two halls ahead in Gravity.

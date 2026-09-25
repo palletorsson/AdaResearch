@@ -1,0 +1,11 @@
+--- before/VFM_09_Legs.md
++++ after/VFM_09_Legs.md
+@@ -16,7 +16,7 @@
+ 
+ The corners belong to the little squares at the tops of the posts. Their convex hull is the smallest convex outline enclosing them. With the load initially level, gravity vertical and the supports horizontal, the position of the projected mass centre tells us whether these upward contact forces can balance its weight without a tipping moment. Inside gives room to distribute the support. Outside asks the posts to provide something they cannot: a downward pull from a place where there is no fastening.
+ 
+-SHIFT changes the rigid body's custom centre of mass. Its silhouette remains the same. The gold mark moves because the simulation has changed where its ten kilograms are represented as acting. A body can become different without acquiring a different outline.
++SHIFT changes the rigid body's custom centre of mass. Its silhouette remains the same. The gold mark moves because the simulation has changed where its load of ten kilograms is represented as acting. The kilograms are the mass; what the posts answer is their weight, the force those kilograms make under gravity. A body can become different without acquiring a different outline.
+ 
+ This is a deliberately sparse body: one rigid plate, a chosen inertia tensor, one mass centre. The fixed inertia stays the same across SHIFT. We are isolating a change of load position, not rebuilding a detailed internal distribution of matter. Its empty-looking interior is full of decisions.
+ 

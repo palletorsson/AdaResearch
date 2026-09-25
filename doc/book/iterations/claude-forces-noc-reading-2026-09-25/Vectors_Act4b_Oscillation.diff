@@ -1,0 +1,16 @@
+--- before/Vectors_Act4b_Oscillation.md
++++ after/Vectors_Act4b_Oscillation.md
+@@ -50,10 +50,12 @@
+ 
+ There are further limits. A long computer stall advances at most a quarter of a model second on the next update. If an intervention sends the cube outside the observation frame, beyond 2.25 metres of displacement, FRAME EXIT holds its outgoing state. No imaginary collision is supplied to make the frame seem like a wall. And the finite update can introduce numerical error even when damping is off. The recurring movement is something to examine, not a promise of perfect repetition.
+ 
+-Other balances, springs and pendulums remain farther into this hall. A similar swing may be prescribed directly from time; the older tall pendulum does exactly that. Looking alike does not establish the same mechanism. The question follows you from one apparatus to the next.
++Other balances, springs and pendulums remain farther into this hall. Among them hang two mobiles after Alexander Calder, who made the first in 1931: every arm balanced so that weight times distance is equal on both sides, the crank you turned two halls ago hung up and at rest. One carries painted discs; the other the museum's own objects.[^calder] A similar swing may be prescribed directly from time; the older tall pendulum does exactly that. Looking alike does not establish the same mechanism. The question follows you from one apparatus to the next.
+ 
+ <!-- @ -->
+ 
+ We will return to oscillation in Wavefunctions. There a pendulum leaves a history we can walk beside, and returning motion becomes material for sampling, phase, spatial patterns and sound. Here we have established a smaller thing to carry: a force can bring a body back without telling it to stop there.
+ 
+ Next, the timing machines. What happens when several returning movements share a clock, or begin to fall out of step?
++
++[^calder]: Alexander Calder made his first mobiles in 1931; the name was Marcel Duchamp's. The two here are calder_mobile and calder_object_mobile: each disc's mass is its area times a three-millimetre sheet times the density of aluminium, and each arm's pivot is placed where the two moments cancel, weight times distance on either side. They do not move. The balance is arithmetic, as the Equilibrium hall in Form Finding says at length.
