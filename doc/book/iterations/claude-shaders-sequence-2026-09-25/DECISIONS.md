@@ -24,3 +24,29 @@ All six carry `artifact_placement: map` so the museum places what the maps place
 **Disclosure.** `curriculum_spine.json` was already modified in the tree when found (754 lines against HEAD, another writer's, uncommitted); the insertion was made on top of that copy and the file lands whole. `spine_artifact_order.json` is generated and lands as regenerated.
 
 **Not done here, on purpose.** The two seams (Lab_Path's closing, CA_Introduction's opening) are the other writer's live files; the museum plan (`ada_run/em_plan.json`) and the book JSON for the chapter are derived and get regenerated after the chapters exist; the chapters themselves are the next commit.
+
+## Corrections, the same afternoon
+
+The first commit's museum blocks were written from a memory of the vocabulary. Read against the engine (`commons/scenes/endless_museum.gd`) and the plan tool (`tools/em_map_halls.py`):
+
+- **`wall_height` is the museum's floor threshold, not a wall height.** A structure value between 1 and it is floor (v - 1) m up. With `wall_height: 5` the finale hall's height-5 walls would have been read as platforms four metres up. Removed from both halls that carried it.
+- **`piers` is real, but it lives in the plan tool.** `normalize_row` stamps the template colonnade (a pier every fourth row from the third and every fourth column from the second, never on or beside a body) into any bare hall of eight rows or more, unless the map says `piers: false`. Kept: five halls refuse it, the pillar hall keeps it. Its count is a fact of the dealt plan, not of the map.
+- **`passage.depth` is real** (the crossing's rows, default 7 with a seam, clamped 1..40); `kind` is now explicit (`chicane`, the default). A chicane's middle rows open the whole span between the two doors, so a fourteen-row crossing whose doors sit at opposite corners is a room, not a corridor. Palle's own words for the default: "like a service corridor".
+- **The pool moved.** `rects [[1,2,5,5]]` put it under the display row (the four FBM displays span world x 2.3..10.7 at z 5.5, panels at 6.7). Now `[[3,1,7,3]]`: a 7 x 3 m pool across the hall in front of the displays, the water token at (6,2) with `width:7 depth:3`; every pool cell is floor in the structure layer.
+- **The water floated 3 cm ABOVE the lid.** The artifact's origin is the lid (the pool floor is at -depth, as `composition_twins` has it). `lift` now defaults to -0.35: the mean surface 35 cm under the glass, and the crests, measured at 10.8 cm from a port of the shader, never reach it.
+- **The clock wraps every 30 s** (`rendering/limits/time/time_rollover_secs=30.0` in project.godot). Any phase written as `TIME * w` leaps at the wrap unless `w * 30` is a whole number of cycles. The first hall's sine panel leaps for exactly that reason, twice a minute, at the default speed by about a quarter wavelength; so do the FBM displays, the oil slick's rainbow and the finale's throb. The basin water now rounds every wave to whole cycles per rollover and drifts its noise round a circle once per rollover, and hands the rollover in from the project setting, so the wrap is invisible on it. The chapter uses the contrast.
+- **The sixth hall does not have a memory.** `reaction_diffusion.gdshader` reads `prev_texture`, and `shader_10_reactiondiffusion.gd` never binds it: the rule runs once on the default texture every frame. If that default is white (A = B = 1), the rule gives A = 0, B = 1 and the panel is a flat green. The DLA beside it is noise shaped to look grown (`dla_visual.gdshader`: "Simulates the visual appearance"). The title is now a question the hall can actually pose; giving the panel a real buffer (two SubViewports handing each other their last frame) is left as an open task.
+- **Titles are questions**, in the register of the neighbours ("Which rules keep acting?", "What will the next row do?").
+
+## Evidence, the same afternoon (captures)
+
+- **basin_water, artifact capture.** First run: PNGs of 13–27 KB and, in `user://logs/godot.log`, `SHADER ERROR: Redefinition of 'TAU'. Shader compilation failed.` Godot's shader language predefines TAU, PI and E; the compile gate (`check_compile.gd`) parses GDScript only, so a .gdshader is compiled at first render and reports only there. The `const` was removed; the recapture (rc 0) wrote no shader error and PNGs of 100–375 KB: the water renders (`proof/basin_water_top_close.png`, `proof/basin_water_front_close.png`).
+- **Shader_10_ReactionDiffusion, map capture.** The reaction-diffusion square is a flat green edge to edge, as computed from the unbound `prev_texture` (`proof/shader_10_front.png`); the DLA square beside it is cyan frost. The chapter states it as a fact.
+- **Shader_09_FBM, map capture.** The four displays and desks stand; the pool is museum-side and does not appear in a plain map load, as expected. The water's place in the museum is proved by the artifact capture and the engine's basin rule, not by a museum walk, which is still to do.
+- **The reaction-diffusion port** (`doc/book/figures/shaders/what-the-rule-would-do.png`): at the shader's diffusion rates (0.16, 0.08) a ten-cell seed on 256 x 256 sits at 0.2 % of the field from 200 to 12,000 frames; at 1.0 and 0.5 the same feed and kill grow coral to 30.1 % at 6,000 frames. A white start fed back goes red in ~100 frames. So the missing buffer would need faster diffusion too; noted in the chapter for whoever builds it.
+
+## Left open
+
+- The two seams (Lab_Path's closing line, CA_Introduction's opening) are the other writer's live files; the new chapters' own first and last lines were written to meet them as they stand.
+- The buffer for the reaction-diffusion square (two SubViewports handing each other their last frame), with diffusion rates that spread.
+- A museum walk of the six halls (desktop lane), the dealt plan's pier count for the pillar hall, and VR.

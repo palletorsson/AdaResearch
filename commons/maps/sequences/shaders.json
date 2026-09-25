@@ -26,12 +26,12 @@
         "Explain why a buffer turns a rule for every pixel into a rule with a past, and carry that into cellular automata"
       ],
       "content": [
-        "Shader_01_Shaping: A rule for every pixel at once - arrive through the passage; y = f(x) as a policy for where light goes",
-        "Shader_11_QueerRubber: The pillar hall: what a surface answers to - five materials under three coloured lights, between the piers the museum keeps here",
-        "Shader_09_FBM: The basin: water without a memory - the pool’s glass lid carries you; the water on it is recomputed from the clock on every frame",
-        "Shader_05_Patterns: The floor returned - fract() folds space; bricks, Truchet and Voronoi as one function",
-        "Shader_12_PinkExtravaganza: Past the intended range - every uniform cranked past taste; the water on this floor refracts wrong on purpose",
-        "Shader_10_ReactionDiffusion: A rule given a memory - reaction-diffusion in a buffer; the same rule run again on what it drew, which is where the next sequence starts"
+        "Shader_01_Shaping: Why does the wave jump? - arrive from the noise halls; four graphs that hold still and one that moves by itself; the exit crossing is declared fourteen rows deep",
+        "Shader_11_QueerRubber: What does a surface answer to? - five materials rotating under three coloured lamps, in the one hall of the sequence that keeps the museum's pier colonnade",
+        "Shader_09_FBM: What carries you over the water? - a 7 x 3 pool under a glass lid in front of the four noise displays; the water on it is recomputed from the clock on every frame, and written so the clock's wrap is invisible",
+        "Shader_05_Patterns: Where are the seams? - fract() folds space; tiles, Truchet arcs, bricks, Wang tiles and Voronoi from one fold",
+        "Shader_12_PinkExtravaganza: Which of these is the lamp? - five self-lit materials under three pink lamps and a water plane on the floor; no slider is set, the excess is in the defaults",
+        "Shader_10_ReactionDiffusion: Where is the last frame? - a reaction-diffusion rule that asks for its previous frame and is never handed one, beside a DLA that only looks grown; the seam into cellular automata"
       ],
       "maps": [
         "Shader_01_Shaping",
@@ -82,7 +82,7 @@
             "shader_01_shaping"
           ],
           "size_budget": "compact_only",
-          "rationale": "A rule for every pixel at once. Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+          "rationale": "Why does the wave jump? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
         },
         {
           "map": "Shader_11_QueerRubber",
@@ -93,7 +93,7 @@
             "shader_11_queerrubber"
           ],
           "size_budget": "compact_only",
-          "rationale": "The pillar hall: what a surface answers to. Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+          "rationale": "What does a surface answer to? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
         },
         {
           "map": "Shader_09_FBM",
@@ -105,7 +105,7 @@
             "shader_09_fbm"
           ],
           "size_budget": "compact_only",
-          "rationale": "The basin: water without a memory. Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+          "rationale": "What carries you over the water? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
         },
         {
           "map": "Shader_05_Patterns",
@@ -116,7 +116,7 @@
             "shader_05_patterns"
           ],
           "size_budget": "compact_only",
-          "rationale": "The floor returned. Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+          "rationale": "Where are the seams? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
         },
         {
           "map": "Shader_12_PinkExtravaganza",
@@ -127,7 +127,7 @@
             "shader_12_pinkextravaganza"
           ],
           "size_budget": "compact_only",
-          "rationale": "Past the intended range. Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+          "rationale": "Which of these is the lamp? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
         },
         {
           "map": "Shader_10_ReactionDiffusion",
@@ -138,7 +138,7 @@
             "shader_10_reactiondiffusion"
           ],
           "size_budget": "compact_only",
-          "rationale": "A rule given a memory. Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+          "rationale": "Where is the last frame? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
         }
       ],
       "local_review_history": [
