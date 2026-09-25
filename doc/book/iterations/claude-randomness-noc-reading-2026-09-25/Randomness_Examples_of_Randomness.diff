@@ -1,0 +1,17 @@
+--- doc/book/iterations/claude-randomness-noc-reading-2026-09-25/before/Randomness_Examples_of_Randomness.final.md	2026-09-25 08:44:42.708987100 +0200
++++ doc/book/iterations/claude-randomness-noc-reading-2026-09-25/after/Randomness_Examples_of_Randomness.final.md	2026-09-25 08:48:27.998427800 +0200
+@@ -18,7 +18,7 @@
+ 
+ An inside point increases both the inside count and the total. An outside point increases the outside count and the total; the inside count stays where it was. Before requesting another point, predict what each possibility would do to the estimate. Check with THROW, and explain the change from the counters before looking at the distance from pi.
+ 
+-The circle is inscribed in a square. When points are sampled uniformly across that square, the fraction landing inside estimates the fraction of area occupied by the circle. Multiplying that fraction by four gives the displayed estimate of pi:
++The circle is inscribed in a square. When points are sampled uniformly across that square, the fraction landing inside estimates the fraction of area occupied by the circle. Estimating by sampling is what the name on this bench, Monte Carlo, has meant since 1949.[^monte-carlo] Multiplying that fraction by four gives the displayed estimate of pi:
+ 
+ `estimate = 4 × inside / total`
+ 
+@@ -55,3 +55,5 @@
+ Look back toward the painting. In one work, chance chose marks; in another, samples to count. It chose permitted directions for the pipe and different kinds of variation within the particle study. In every case something decided what a random choice was permitted to change.
+ 
+ Carry that question into the pheromone terrain. The pipe did not remember which places it had passed; the next walkers will leave a signal that can enter a later decision. What changes when a visit helps recruit another visit? Random Game still waits ahead, where such distinctions will become questions of support and timing.
++
++[^monte-carlo]: Nicholas Metropolis and Stanisław Ulam, “The Monte Carlo method”, *Journal of the American Statistical Association* 44 (1949): use random samples to estimate a quantity, here an area. The name is the casino's; Metropolis said it was chosen for an uncle of Ulam's who borrowed money from relatives to gamble there. The mushrooms' rejected candidates are its other classic form, accept–reject.

@@ -66,7 +66,7 @@ Stop before the set is empty. Keep this interrupted pattern for a moment. Perhap
 
 Beside the board, two glass cases hold the same eight numbered blocks. Each has a handle. Pull the one on the left. A block comes forward, leaves a small copy in the row below, and travels back into its place. Pull the one on the right. Its block stays out. Behind it, the numbered slot is empty.
 
-Try to get the same number again. On the left you can wait for it; nothing promises how long. On the right, the number you have just drawn is no longer available. An absence has become part of the next choice. The chance of pulling the number you just pulled is one in eight on the left and none on the right; after seven pulls the right-hand case has one answer left, and the left still has eight.
+Try to get the same number again. On the left you can wait for it; nothing promises how long. On the right, the number you have just drawn is no longer available. An absence has become part of the next choice.
 
 The left-hand case returns its member before allowing another draw. All eight remain eligible. The right-hand case loses a candidate each time: eight, seven, six. Stop with one block left. Can you name the next result before pulling? Seven earlier choices have left only one answer. Which number survives to that moment still depends on their order.
 

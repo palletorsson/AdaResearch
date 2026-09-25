@@ -245,12 +245,6 @@ const CAB_H: float = 0.95            # the cabinet top: the display stands on it
 const CAB_FACE: float = 0.16         # the front face (local +z); the display's back panel is at -0.01
 const SHOULDER_Y: float = 0.70
 const BIN_CHOICES: PackedInt32Array = [10, 30, 60]
-## WIDTH (2026-09-25, from the Nature of Code reading, Exercise 0.4): the standard
-## deviation the GAUSS law draws with, as a button, so "two draws in three within one
-## deviation" is a thing the histogram can show changing rather than a number on a
-## plate. Cycles 0.08 / 0.15 / 0.25 and clears as CLEAR does, so the pale expected
-## counts, the orange curve and the readout's law line follow. 0.15 is what shipped.
-const WIDTH_CHOICES: PackedFloat32Array = [0.08, 0.15, 0.25]
 var _stand_root: Node3D
 var _stand_panel: Node3D
 var _readout: Label3D
@@ -934,14 +928,13 @@ func _build_cabinet() -> void:
 		_stand_panel = RackTpl.create_panel("", [
 			[{"type": "button", "label": "BATCH"}, {"type": "button", "label": "PAUSE"}],
 			[{"type": "button", "label": "NEW SEED"}, {"type": "button", "label": "BINS"}],
-			[{"type": "button", "label": "WIDTH"}],
 		], true)
 		_stand_panel.name = "StandPanel"
 		_stand_panel.set_meta("em_local_instrument", true)
 		_stand_panel.position = Vector3(0.55, SHOULDER_Y + 0.055, CAB_FACE + 0.076)
 		_stand_panel.rotation_degrees = Vector3(-32, 0, 0)
 		_stand_root.add_child(_stand_panel)
-		var actions := {"Btn_0": func(): batch(batch_size), "Btn_1": func(): set_running(not auto_sample), "Btn_2": func(): new_seed(), "Btn_3": func(): cycle_bins(), "Btn_4": func(): cycle_width()}
+		var actions := {"Btn_0": func(): batch(batch_size), "Btn_1": func(): set_running(not auto_sample), "Btn_2": func(): new_seed(), "Btn_3": func(): cycle_bins()}
 		for btn_name in actions.keys():
 			var btn: Node = _stand_panel.find_child(btn_name, true, false)
 			if btn == null:
@@ -1113,25 +1106,6 @@ func set_bins(n: int) -> void:
 func cycle_bins() -> void:
 	var i: int = BIN_CHOICES.find(num_bins)
 	set_bins(BIN_CHOICES[(i + 1) % BIN_CHOICES.size()] if i >= 0 else BIN_CHOICES[0])
-
-
-## The GAUSS law's standard deviation by hand: the next of WIDTH_CHOICES, then the
-## same clear CLEAR performs, so the sample restarts under its named seed at the new
-## width and every model reading (curve, pale counts, law line) is recomputed from it.
-func set_width(value: float) -> void:
-	gaussian_std = clampf(value, 0.01, 0.5)
-	_clear_samples()
-	if _ghost_mm != null:
-		_build_ghosts()
-	_update_readout()
-
-
-func cycle_width() -> void:
-	var i: int = -1
-	for k in range(WIDTH_CHOICES.size()):
-		if is_equal_approx(WIDTH_CHOICES[k], gaussian_std):
-			i = k
-	set_width(WIDTH_CHOICES[(i + 1) % WIDTH_CHOICES.size()] if i >= 0 else WIDTH_CHOICES[0])
 
 
 func _law_line() -> String:

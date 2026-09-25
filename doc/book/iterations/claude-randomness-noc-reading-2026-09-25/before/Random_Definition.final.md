@@ -50,7 +50,7 @@ The three textile panels offer another comparison. Each begins with seed 41. Dia
 
 <!-- @random_number_book_page_1955 -->
 
-Near the far end of the room, a page of five-digit numbers takes its look from a book of random digits printed in 1955, a table anyone could open at the same line and read the same digits again.[^rand-1955] This page keeps the look and not the return. About once a second each column takes a new number at the top and lets its lowest one fall away; the numbers come from the game's shared generator, with no seed set for them in this room, and the page keeps no record of a number once it has gone.
+Near the far end of the room, a page of five-digit numbers takes its look from a book of random digits printed in 1955, a table anyone could open at the same line and read the same digits again. This page keeps the look and not the return. About once a second each column takes a new number at the top and lets its lowest one fall away; the numbers come from the game's shared generator, with no seed set for them in this room, and the page keeps no record of a number once it has gone.
 
 <!-- @prng_crank_machine -->
 
@@ -59,5 +59,3 @@ The crank machine near the entrance, a few steps to one side of the replay conso
 <!-- @ -->
 
 The next room gathers a sequence into a histogram and an entropy reading. Carry one small patch with you. We are about to ask what a number can retain of an arrangement that was worth looking at.
-
-[^rand-1955]: *A Million Random Digits with 100,000 Normal Deviates* (RAND Corporation, 1955), the last of the printed tables: its digits were made in 1947 by an electronic roulette wheel, and the tables went out of use once a machine could make a number faster than a reader could look one up. Opening the book at a given line is what a seed does. Robert Coveyou's line from 1969 belongs beside it: the generation of random numbers is too important to be left to chance.

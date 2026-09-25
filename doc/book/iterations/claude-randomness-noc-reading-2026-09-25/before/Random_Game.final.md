@@ -115,7 +115,7 @@ Two draws choose x and z in an eight-metre square. Height is fixed at eight metr
 
 Another draw gives an initial downward speed between 1.6 and 2.6 metres per second. Small sideways velocities and later changes let the bodies drift. The projectile carries its own generator. A seed that repeats its launch position does not, by itself, repeat those later changes or its collisions.
 
-The crossing drew a duration. This machine draws positions and velocities on a regular launch clock. Both are called random, but the word cannot tell you where to look. A clock that fires every half-second, or one that fires every tenth of a second with a one-in-five chance, would launch the same number of cubes an hour and make a different room to stand in; the podium's drawn delays, ahead, are the second kind. Keep track of which encounter supplied your evidence: a sampled wait at the crossing, or a sampled launch in the field.
+The crossing drew a duration. This machine draws positions and velocities on a regular launch clock. Both are called random, but the word cannot tell you where to look. Keep track of which encounter supplied your evidence: a sampled wait at the crossing, or a sampled launch in the field.
 
 At the last podium, wait for a small wooden cube. It drops from three metres above the floor onto a two-metre-square surface. Another arrives at the other position. The positions alternate; after the first one-second wait, each new delay is drawn between 0.3 and 1.3 seconds. The places are dependable while the rhythm is not.
 

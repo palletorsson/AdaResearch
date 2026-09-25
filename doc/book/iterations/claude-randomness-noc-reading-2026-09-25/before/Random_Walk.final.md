@@ -18,7 +18,7 @@ Earlier, a draw chose a cube from an eligible set. The last room let perturbatio
 
 The proposed step is 0.015 metres long. Its y component is zero. The code has room for three coordinates and has declined to change one. That flatness is a decision made each time the function returns.
 
-In 3D two draws choose a direction on a sphere; the proposed length stays the same. LONG STEP draws a length too; the code calls the mode a Lévy flight.[^levy] Try it, then return to 3D. Look for what the longer movements do to the tangle, and for how much less often a bead returns to a patch it has already worn. The cabinet is using this particular rule:
+In 3D two draws choose a direction on a sphere; the proposed length stays the same. LONG STEP draws a length too. Try it, then return to 3D. Look for what the longer movements do to the tangle. The cabinet is using this particular rule:
 
 ```gdscript
 			var u = _rand()
@@ -27,7 +27,7 @@ In 3D two draws choose a direction on a sphere; the proposed length stays the sa
 			return direction * levy_step
 ```
 
-The offset is 0.01, the exponent −0.5, the cap ten. Every length is drawn along this curve; there is no separate switch for a spectacular leap. The largest permitted proposal is 0.15 metres. Even this mode's long reach has an edge. A rare long step is what a walker takes to leave a well-trodden patch: the rule a forager might use, and the remedy for what the field beyond the basin will show you.
+The offset is 0.01, the exponent −0.5, the cap ten. Every length is drawn along this curve; there is no separate switch for a spectacular leap. The largest permitted proposal is 0.15 metres. Even this mode's long reach has an edge.
 
 Look near the glass. A bead approaches, turns, stays inside. There is no test for whether it wants to return. First the code proposes a position; then the enclosure changes it:
 
@@ -72,7 +72,7 @@ Two rails stretch beside the tank. Each carries a block. Slide the white marker 
 
 The blue block can cross almost the whole rail. The pink one stays near where it was. Follow a few turns. Try another guess. What does knowing the last position give you?
 
-Both receive the same new number, drawn between minus one and one. Blue uses it to choose a place along the rail. Pink uses it to propose a step of at most forty centimetres from its current place. The small addition carries a past into the next move. A walk needs somewhere to start. The pink block is the coin you tossed two rooms ago, given a beam to walk on.
+Both receive the same new number, drawn between minus one and one. Blue uses it to choose a place along the rail. Pink uses it to propose a step of at most forty centimetres from its current place. The small addition carries a past into the next move. A walk needs somewhere to start.
 
 At the rail ends, an outward step folds back, as it did at the terrarium glass. These bodies have not been offered an endless line. Their twelve most recent landing pairs collect below, newest at the top. Older marks disappear while the pink block keeps the position those movements helped it reach. Erase the record and that next step can still be taken.
 
@@ -103,10 +103,8 @@ CLEAR / REPLAY restores the random seed and clears the trail. The random steps c
 
 Cross the bridge over the narrow basin and enter the larger glass frame. The gallery and the experiment remain at the same level; the gap distinguishes their floors. Its ten-metre field keeps another account of a walk: a visited cell rises. Four possible directions are enough to change the ground. The working lattice has thirty-two cells on each side, despite the older name `random_walk_128`.
 
-Look at a high place. It records repeated visits; it was not selected as a destination. A walker that keeps returning is oversampling, and this ground is a count of it; the terrarium's long steps are one way out. A small rule has become a spatial obstacle through what the surface retained. Compare this ground with the trails in the instrument. Both keep something of movement, and neither keeps everything. The surrounding glass names a boundary of the experiment; the openings let you pass through or watch from outside.
+Look at a high place. It records repeated visits; it was not selected as a destination. A small rule has become a spatial obstacle through what the surface retained. Compare this ground with the trails in the instrument. Both keep something of movement, and neither keeps everything. The surrounding glass names a boundary of the experiment; the openings let you pass through or watch from outside.
 
 <!-- @ -->
 
 Stay with a shape you had begun to read as a creature. What would its next step need to know for that reading to become a capability? The missing relation is an invitation to make another rule. For now, we leave with a path whose history exceeds both its current position and the drawing we can still see. In Random Gaussian, we gather draws in another way and ask what shape appears when we count where they land.
-
-[^levy]: After Paul Lévy, whose distributions have the heavy tail this rule draws from; the phrase “Lévy flight” is Benoît Mandelbrot's (*The Fractal Geometry of Nature*, 1982). Proposed as a foraging strategy for animals that must leave a depleted patch (Viswanathan and others, 1996), and argued about since. This cabinet makes no claim for the beads, only the rule.

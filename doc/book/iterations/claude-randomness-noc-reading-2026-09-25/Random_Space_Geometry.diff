@@ -1,0 +1,17 @@
+--- doc/book/iterations/claude-randomness-noc-reading-2026-09-25/before/Random_Space_Geometry.final.md	2026-09-25 08:44:42.784161300 +0200
++++ doc/book/iterations/claude-randomness-noc-reading-2026-09-25/after/Random_Space_Geometry.final.md	2026-09-25 08:48:28.705790700 +0200
+@@ -10,7 +10,7 @@
+ 
+ Choose three adjacent columns on each side and describe their relative heights: rising, falling, or turning between the two. Move one position along and repeat. You are examining a local relationship rather than asking which grid contains the single tallest column. At a lower frequency, follow how far a broad feature extends on the coherent side; at a higher setting, repeat along the same row. If a small region happens to look similar on both sides, examine a longer stretch before declaring the procedures equivalent. Independent draws can produce a chance run of similar heights, while a coherent field can still contain differences between nearby samples.
+ 
+-Independent samples supply each white-noise height separately. Perlin noise supplies related values at nearby positions through a spatial construction. Those local relationships make broader features possible. The two grids use comparable height displays, but they do not draw from identical distributions merely because their values fit within similar bounds.
++Independent samples supply each white-noise height separately. Perlin noise supplies related values at nearby positions through a spatial construction.[^perlin] Those local relationships make broader features possible. The two grids use comparable height displays, but they do not draw from identical distributions merely because their values fit within similar bounds.
+ 
+ The seed makes each construction repeatable under the same settings. Frequency changes how rapidly the coherent field varies across the sampled positions. You are changing a rule about relationships in space, rather than choosing every column individually.
+ 
+@@ -19,3 +19,5 @@
+ <!-- @ -->
+ 
+ One productive discipline is to keep withholding the landscape reading, despite the subtitle and the palette, and describe only local differences. Both grids already share one height scale and one colour ramp, so differences in local spread can be read directly; the panel offers no other palette, so setting the landscape aside is left to you. Now look at the shapes scattered around the hall: each one's position was drawn on its own, uniformly inside a box, and the links between them join pairs picked at random, near or far; distance decides only what kind of link is drawn. In the next room, the dartboard uses random samples for estimation: where they land will matter, because its numerical answer depends on how the sampling rule covers the square. Each of its darts, from THROW, from AUTO or already on the board when you arrive, is placed by the same kind of draw as those shapes and the WHITE NOISE heights, uniform and with no neighbour consulted: do such draws cover a square evenly, or do they leave clumps and gaps?
++
++[^perlin]: Ken Perlin's gradient noise, from “An image synthesizer” (SIGGRAPH, 1985), begun on the film *Tron* in 1983 and given an Academy Award for technical achievement in 1997; he added simplex noise in 2001. This bench computes the 1985 kind through Godot's FastNoiseLite. Not every noise called Perlin is one: the mixer in Random Space is a sum of sines, and says so.

@@ -52,9 +52,7 @@ Continue to “rejected.” Grey markers appear at candidate positions that the 
 			continue
 ```
 
-The 2 in that line, with the field's own frequency of one half, decides how far apart two candidates are in the field's coordinates, and so how wide a clearing can be: about a metre here. In Random Space Geometry, that number is a slider.
-
-Even the source calls them “natural clearings.” The marks let us read what that phrase stands for here. A number crossed a threshold. This is the accept–reject method: propose a position, test it, keep it or throw it away.[^accept-reject] The beads in the last hall took the other road, a formula that needs no rejection. In Gaussian, a value beyond the display was kept at its boundary. Here an unsuccessful candidate leaves a recorded position and no body.
+Even the source calls them “natural clearings.” The marks let us read what that phrase stands for here. A number crossed a threshold. In Gaussian, a value beyond the display was kept at its boundary. Here an unsuccessful candidate leaves a recorded position and no body.
 
 Keep pressing KIND until it says “rings.” Green marks pick out the members added by the circle routine. One circle is requested at this bed's six-metre size. Find it. Usually only an arc fits; imagine the rest continuing beyond the boards. Its members were given equal angular intervals:
 
@@ -96,5 +94,3 @@ Keep this trio and press GARMENT. The seeds stay while the sheath gives way to a
 The sampled sizes never grow a seventh template between two others. That would need another rule. Yet these rules could carry other forms, other ranges, other permissions. Which difference would you add first, and what would have to change to let it exist? Carry that question through the cage interlude. Then, in Random Space Geometry, compare values chosen independently with values related across neighbouring positions. The bed has already shown you both: each height of its jagged ground was drawn on its own, and its clearings came from a noise field in which nearby positions receive related values. What changes when difference acquires a neighbourhood?
 
 [^chance-repertoire]: The “Randomness” chapter of *10 PRINT CHR$(205.5+RND(1)); : GOTO 10*, pp. 125–127, discusses chance operations in Cage, Kelly and Morellet: variation takes place within constructed parameters and arrangements. The distinction between sampling a wardrobe and changing its repertoire is this hall’s experiment, rather than a claim that chance abolishes authorship.
-
-[^accept-reject]: The accept–reject method — draw, then test the draw against a rule or a second draw, and keep only what qualifies — is the oldest of the Monte Carlo methods; the dartboard in the gallery ahead carries that name for a reason its chapter gives.

@@ -1,0 +1,7 @@
+[probe] cabinet stood: stand panel found | Btn_4 (WIDTH) found | start sigma 0.15 | seed 20260925
+[probe] press 0: sigma 0.15 | cleared before batch: true | landed 600 | within 1 sigma 0.707 | within 2 sigma 0.945 | law line 'GAUSS · μ 0.50 σ 0.15 · Box-Muller' | tallest expected bar 52.8 | clipped 0 | PASS
+[probe] press 1: sigma 0.25 | cleared before batch: true | landed 600 | within 1 sigma 0.705 | within 2 sigma 1.000 | law line 'GAUSS · μ 0.50 σ 0.25 · Box-Muller' | tallest expected bar 31.8 | clipped 32 | PASS
+[probe] press 2: sigma 0.08 | cleared before batch: true | landed 600 | within 1 sigma 0.705 | within 2 sigma 0.947 | law line 'GAUSS · μ 0.50 σ 0.08 · Box-Muller' | tallest expected bar 96.9 | clipped 0 | PASS
+[probe] press 3: sigma 0.15 | cleared before batch: true | landed 600 | within 1 sigma 0.705 | within 2 sigma 0.947 | law line 'GAUSS · μ 0.50 σ 0.15 · Box-Muller' | tallest expected bar 52.8 | clipped 0 | PASS
+[probe] widths cycled back to 0.15 (expect 0.15 after 3 presses from 0.15: 0.25, 0.08, 0.15) | PASS
+[probe] ALL PASS

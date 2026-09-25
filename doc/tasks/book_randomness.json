@@ -528,9 +528,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Random_Definition"
       ],
@@ -545,7 +545,7 @@
       "proposal": "Add a footnote: RAND Corporation, A Million Random Digits with 100,000 Normal Deviates (Free Press, 1955), with one line on how its tables were used (open at a page, start at a column, read down) and that the page here keeps the look and not the return.",
       "evidence": "commons/maps/Random_Definition/final.md line 53; algorithms/randomness/randomnumbergeneration/scripts/random_number_book_page_1995.gd:82 `cascade_speed = 1.0` rows per second, :102 `page_seed = -1` (global generator, matching \"no seed set for them in this room\"), :267 `side_number` 100–999.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Folded into the RAND footnote in Random_Definition (A Million Random Digits with 100,000 Normal Deviates, 1955). (doc/book/iterations/claude-randomness-noc-reading-2026-09-25)",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -1136,6 +1136,317 @@
       "notes": "",
       "source": "the block handback of 24 Sept",
       "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_randomness.035",
+      "title": "Name the 1955 book of random digits (and give the hall Coveyou's line)",
+      "spec": "NOC opens on it: A Million Random Digits with 100,000 Normal Deviates (RAND Corporation, 1955; the digits generated in 1947 by an electronic roulette wheel), the last of the printed tables, retired when machines could make numbers faster than a reader could look them up. The chapter already says the true thing - a table anyone could open at the same line - without the name (task .013 asks for it).\n\nProposal: A footnote at the page: the title, RAND 1955, the roulette wheel of 1947, and that opening the book at a line is what a seed does. Coveyou's 'The generation of random numbers is too important to be left to chance' (1969) belongs in the same note.",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Random_Definition"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "Random_Definition",
+      "quote": "a page of five-digit numbers takes its look from a book of random digits printed in 1955",
+      "why": "NOC opens on it: A Million Random Digits with 100,000 Normal Deviates (RAND Corporation, 1955; the digits generated in 1947 by an electronic roulette wheel), the last of the printed tables, retired when machines could make numbers faster than a reader could look them up. The chapter already says the true thing - a table anyone could open at the same line - without the name (task .013 asks for it).",
+      "proposal": "A footnote at the page: the title, RAND 1955, the roulette wheel of 1947, and that opening the book at a line is what a seed does. Coveyou's 'The generation of random numbers is too important to be left to chance' (1969) belongs in the same note.",
+      "evidence": "commons/maps/Random_Definition/final.md (@random_number_book_page_1955); natureofcode.com/random/ opening; task book_randomness.013",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "Footnote at the 1955 page: RAND 1955, the roulette wheel of 1947, a line as a seed, Coveyou. (doc/book/iterations/claude-randomness-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 0 reading, 25 Sept (doc/book/readings/NOC_randomness_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_randomness.036",
+      "title": "The coin ribbon is a random walk waiting to happen - link the coin console to the rail",
+      "spec": "NOC's first image is a coin on a balance beam: heads a step forward, tails a step back. Ada keeps thirty tosses in order on the coin console and stands the one-dimensional walker two halls later (the pink block on its rail), and neither chapter points at the other.\n\nProposal: At the ribbon: 'Read the ribbon as steps, heads forward and tails back. Where would a walker be now, and how far has it been?' At the rail in Random_Walk: 'The pink block is the coin you tossed two rooms ago, given a beam to walk on.'",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Random_Cubes"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "Random_Cubes (and Random_Walk)",
+      "quote": "Here the last thirty outcomes remain in order.",
+      "why": "NOC's first image is a coin on a balance beam: heads a step forward, tails a step back. Ada keeps thirty tosses in order on the coin console and stands the one-dimensional walker two halls later (the pink block on its rail), and neither chapter points at the other.",
+      "proposal": "At the ribbon: 'Read the ribbon as steps, heads forward and tails back. Where would a walker be now, and how far has it been?' At the rail in Random_Walk: 'The pink block is the coin you tossed two rooms ago, given a beam to walk on.'",
+      "evidence": "commons/maps/Random_Cubes/final.md (@coin_toss); commons/maps/Random_Walk/final.md (@random_position_rails); natureofcode.com/random/ 'Random Walks'",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "Coin ribbon read as steps in Random_Cubes; the rail's pink block named as the coin two rooms back in Random_Walk. (doc/book/iterations/claude-randomness-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 0 reading, 25 Sept (doc/book/readings/NOC_randomness_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_randomness.037",
+      "title": "Oversampling has a picture in the hall, and LONG STEP is its remedy - say Levy",
+      "spec": "NOC: random walkers revisit positions (oversampling), so a forager takes a rare long step - the Levy flight. The 128 field raises a cell for every revisit and the terrarium's LONG STEP is a power-law step the code calls WalkMode.LEVY_FLIGHT (LEVY_OFFSET 0.01, LEVY_EXPONENT -0.5, LEVY_STEP_CAP 10); the chapter describes the rule and never names it or says what it is for.\n\nProposal: At the 128 field: 'A walker that revisits is oversampling; the ground here is a count of it.' At LONG STEP: 'the code calls this a Levy flight: a rare long step that leaves a well-trodden patch, the rule a forager might use.' Footnote: Paul Levy; the name 'Levy flight' is Mandelbrot's (The Fractal Geometry of Nature, 1982); proposed as a foraging strategy by Viswanathan et al. (1996) and argued about since.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Random_Walk"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "Random_Walk",
+      "quote": "Look at a high place. It records repeated visits; it was not selected as a destination.",
+      "why": "NOC: random walkers revisit positions (oversampling), so a forager takes a rare long step - the Levy flight. The 128 field raises a cell for every revisit and the terrarium's LONG STEP is a power-law step the code calls WalkMode.LEVY_FLIGHT (LEVY_OFFSET 0.01, LEVY_EXPONENT -0.5, LEVY_STEP_CAP 10); the chapter describes the rule and never names it or says what it is for.",
+      "proposal": "At the 128 field: 'A walker that revisits is oversampling; the ground here is a count of it.' At LONG STEP: 'the code calls this a Levy flight: a rare long step that leaves a well-trodden patch, the rule a forager might use.' Footnote: Paul Levy; the name 'Levy flight' is Mandelbrot's (The Fractal Geometry of Nature, 1982); proposed as a foraging strategy by Viswanathan et al. (1996) and argued about since.",
+      "evidence": "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd:33-35,72,581-595; commons/maps/Random_Walk/final.md; natureofcode.com/random/ 'A Custom Distribution of Random Numbers'",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "LONG STEP named as the code's Levy flight with footnote; the 128 field's high places named as oversampling. (doc/book/iterations/claude-randomness-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 0 reading, 25 Sept (doc/book/readings/NOC_randomness_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_randomness.038",
+      "title": "Say what a standard deviation means: two in three within one, nineteen in twenty within two - and the splatter's two in five is the same rule on a plane",
+      "spec": "NOC's rule of thumb (68 / 95 / 99.7 percent within one, two, three deviations) is absent from the sequence. The splatter's 'about two draws in five' discarded within one deviation is the two-dimensional version of the same rule (safe_zone_radius equals stddev; a disc, not an interval; 1 - e^-1/2 = 0.39) and the chapter does not say so.\n\nProposal: At the sampler: 'Two draws in three land within 0.15 of the middle, nineteen in twenty within 0.30; the rare ones make the tails.' At the splatter: 'On a line that hole would swallow two draws in three; on a plane, where it is a disc, two in five.'",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Random_Gaussian"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "Random_Gaussian",
+      "quote": "The mean is 0.5; the standard deviation is 0.15.",
+      "why": "NOC's rule of thumb (68 / 95 / 99.7 percent within one, two, three deviations) is absent from the sequence. The splatter's 'about two draws in five' discarded within one deviation is the two-dimensional version of the same rule (safe_zone_radius equals stddev; a disc, not an interval; 1 - e^-1/2 = 0.39) and the chapter does not say so.",
+      "proposal": "At the sampler: 'Two draws in three land within 0.15 of the middle, nineteen in twenty within 0.30; the rare ones make the tails.' At the splatter: 'On a line that hole would swallow two draws in three; on a plane, where it is a disc, two in five.'",
+      "evidence": "commons/artifacts/distribution_sampler (gaussian_mean 0.5, gaussian_std 0.15 per the chapter); algorithms/randomness/distributions/gaussian/GaussianPaintSplatter.gd:17,19,45 (stddev 80, safe_zone_radius 80, distance test); natureofcode.com/random/ 'A Normal Distribution of Random Numbers'",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "Two in three / nineteen in twenty at the sampler; the splatter's two in five as the disc version. Probe: 0.705 / 0.947 on 600 draws. (doc/book/iterations/claude-randomness-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 0 reading, 25 Sept (doc/book/readings/NOC_randomness_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_randomness.039",
+      "title": "Name accept-reject at the rejected candidates and Monte Carlo at the dartboard",
+      "spec": "NOC names the method the grey markers show - propose a value, test it with a second draw or a rule, keep or throw away - as the accept-reject algorithm, 'a type of Monte Carlo method (named for the Monte Carlo Casino)'. The dartboard hall never says why it is called Monte Carlo.\n\nProposal: Mushrooms: 'This is the accept-reject method: propose, test, keep or discard; the beads in the last hall took the other road, a formula that needs no rejection.' Examples, footnote at 'Monte Carlo': Metropolis and Ulam, 'The Monte Carlo method' (1949); the name is the casino's, after the uncle Ulam said borrowed money to gamble there.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Random_Mushrooms"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "Random_Mushrooms (and Randomness_Examples_of_Randomness)",
+      "quote": "A number crossed a threshold.",
+      "why": "NOC names the method the grey markers show - propose a value, test it with a second draw or a rule, keep or throw away - as the accept-reject algorithm, 'a type of Monte Carlo method (named for the Monte Carlo Casino)'. The dartboard hall never says why it is called Monte Carlo.",
+      "proposal": "Mushrooms: 'This is the accept-reject method: propose, test, keep or discard; the beads in the last hall took the other road, a formula that needs no rejection.' Examples, footnote at 'Monte Carlo': Metropolis and Ulam, 'The Monte Carlo method' (1949); the name is the casino's, after the uncle Ulam said borrowed money to gamble there.",
+      "evidence": "commons/maps/Random_Mushrooms/final.md (rejected candidates); commons/maps/Randomness_Examples_of_Randomness/final.md (@monte_carlo_dartboard); natureofcode.com/random/ Example 0.5",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "Accept-reject named at the mushrooms' rejected candidates (footnote); Monte Carlo footnote at the dartboard (Metropolis & Ulam 1949). (doc/book/iterations/claude-randomness-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 0 reading, 25 Sept (doc/book/readings/NOC_randomness_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_randomness.040",
+      "title": "Same average, different feel: a half-second clock or a chance every tenth of a second",
+      "spec": "NOC: a new walker every 100 frames or a 1 percent chance per frame - the same rate on average, and the second 'feels more dynamic and unpredictable'. The hall stands both (the spawner's exact half-second launch clock; the podium's drawn delays) and stops short of the equivalence.\n\nProposal: After the quoted sentence: 'A clock that fires every half-second, or one that fires every tenth of a second with a one-in-five chance, would launch the same number of cubes an hour and make a different room to stand in; the podium's drawn delays are the second kind.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Random_Game"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "Random_Game",
+      "quote": "Both are called random, but the word cannot tell you where to look.",
+      "why": "NOC: a new walker every 100 frames or a 1 percent chance per frame - the same rate on average, and the second 'feels more dynamic and unpredictable'. The hall stands both (the spawner's exact half-second launch clock; the podium's drawn delays) and stops short of the equivalence.",
+      "proposal": "After the quoted sentence: 'A clock that fires every half-second, or one that fires every tenth of a second with a one-in-five chance, would launch the same number of cubes an hour and make a different room to stand in; the podium's drawn delays are the second kind.'",
+      "evidence": "commons/maps/Random_Game/final.md (@cube_projectile_spawner); natureofcode.com/random/ 'Probability and Nonuniform Distributions'",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "The half-second clock vs one-in-five-every-tenth equivalence added after \"the word cannot tell you where to look\". (doc/book/iterations/claude-randomness-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 0 reading, 25 Sept (doc/book/readings/NOC_randomness_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_randomness.041",
+      "title": "The hidden frequency knob in the bed: noise sampled at twice the coordinates on a field of frequency one half",
+      "spec": "NOC's increment lesson: sample noise 0.01 apart, not 1, or the smooth field turns to grit. The clearings come from noise.get_noise_2d(pos_x * 2, pos_z * 2) on a FastNoiseLite field with frequency 0.5 (mushrooms.gd:650-662): features on the order of a metre. That factor is the FREQUENCY slider the reader meets in Random_Space_Geometry, fixed here by hand and unmentioned.\n\nProposal: After the code: 'The 2 and the field's own frequency of one half decide how far apart two candidates are in the field's coordinates, and so how wide a clearing can be - about a metre here. Two rooms on, that number is a slider.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Random_Mushrooms"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "Random_Mushrooms",
+      "quote": "At each proposed position, a noise field was consulted:",
+      "why": "NOC's increment lesson: sample noise 0.01 apart, not 1, or the smooth field turns to grit. The clearings come from noise.get_noise_2d(pos_x * 2, pos_z * 2) on a FastNoiseLite field with frequency 0.5 (mushrooms.gd:650-662): features on the order of a metre. That factor is the FREQUENCY slider the reader meets in Random_Space_Geometry, fixed here by hand and unmentioned.",
+      "proposal": "After the code: 'The 2 and the field's own frequency of one half decide how far apart two candidates are in the field's coordinates, and so how wide a clearing can be - about a metre here. Two rooms on, that number is a slider.'",
+      "evidence": "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd:650-662; natureofcode.com/random/ 'Two-Dimensional Noise'",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "The noise factor and frequency named as the clearing-width knob; \"in Random Space Geometry that number is a slider\". (doc/book/iterations/claude-randomness-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 0 reading, 25 Sept (doc/book/readings/NOC_randomness_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_randomness.042",
+      "title": "Perlin, dated - and this side really is Perlin",
+      "spec": "NOC dates the noise (Ken Perlin's Tron work, 1983; the paper 'An image synthesizer', SIGGRAPH 1985; an Academy Award for it in 1997; simplex noise in 2001) and confesses that p5's noise() is value noise, not Perlin. Ada's PERLIN side is FastNoiseLite.TYPE_PERLIN - gradient noise after the 1985 paper (perlin_noise_bridge.gd:47-48) - and the sequence says nothing about where the name comes from.\n\nProposal: A footnote at the first 'Perlin': the date and the paper, the Academy Award, that this bench computes the gradient noise of that paper through Godot's FastNoiseLite, and that the mixer two rooms on is not Perlin but a sum of sines, as its chapter says.",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Random_Space_Geometry"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "Random_Space_Geometry",
+      "quote": "Perlin noise supplies related values at nearby positions through a spatial construction.",
+      "why": "NOC dates the noise (Ken Perlin's Tron work, 1983; the paper 'An image synthesizer', SIGGRAPH 1985; an Academy Award for it in 1997; simplex noise in 2001) and confesses that p5's noise() is value noise, not Perlin. Ada's PERLIN side is FastNoiseLite.TYPE_PERLIN - gradient noise after the 1985 paper (perlin_noise_bridge.gd:47-48) - and the sequence says nothing about where the name comes from.",
+      "proposal": "A footnote at the first 'Perlin': the date and the paper, the Academy Award, that this bench computes the gradient noise of that paper through Godot's FastNoiseLite, and that the mixer two rooms on is not Perlin but a sum of sines, as its chapter says.",
+      "evidence": "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd:10,47-48; commons/maps/Random_Space/final.md ('the base is made from several sine expressions'); natureofcode.com/random/ 'A Smoother Approach with Perlin Noise'",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "Perlin footnote (1983/1985/1997/2001; FastNoiseLite gradient Perlin; the mixer is sines). (doc/book/iterations/claude-randomness-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 0 reading, 25 Sept (doc/book/readings/NOC_randomness_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_randomness.043",
+      "title": "With and without replacement, with the arithmetic (NOC Exercise 0.2)",
+      "spec": "NOC's exercise - two aces in a row, reshuffled or not - is the hoppers. The chapter has the mechanism and no number.\n\nProposal: After the quoted sentence: 'The chance of pulling the number you just pulled is one in eight on the left and none on the right; after seven pulls the right-hand case has one answer left and the left still has eight.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Random_Remove"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "Random_Remove",
+      "quote": "Try to get the same number again. On the left you can wait for it; nothing promises how long.",
+      "why": "NOC's exercise - two aces in a row, reshuffled or not - is the hoppers. The chapter has the mechanism and no number.",
+      "proposal": "After the quoted sentence: 'The chance of pulling the number you just pulled is one in eight on the left and none on the right; after seven pulls the right-hand case has one answer left and the left still has eight.'",
+      "evidence": "commons/maps/Random_Remove/final.md (@sampling_hoppers, eight blocks); natureofcode.com/random/ Exercise 0.2",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "Hoppers arithmetic: one in eight vs none; one answer left vs eight. (doc/book/iterations/claude-randomness-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 0 reading, 25 Sept (doc/book/readings/NOC_randomness_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_randomness.044",
+      "title": "A sigma control on the sampler, so the 'two in three' sentence can be tested (NOC Exercise 0.4)",
+      "spec": "NOC's exercise asks for a slider on the standard deviation. distribution_sampler carries gaussian_std as a variable and offers no control for it, so the deviation is a number on a plate rather than a thing the histogram can show changing.\n\nProposal: A WIDTH button cycling 0.08 / 0.15 / 0.25 (reseeding as CLEAR does), with the pale expected bars following; then the chapter can say 'press WIDTH and watch two in three stay inside a narrower or wider band'.",
+      "effort": "1h",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Random_Gaussian"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "encounter",
+      "hall": "Random_Gaussian",
+      "quote": "The mean is 0.5; the standard deviation is 0.15.",
+      "why": "NOC's exercise asks for a slider on the standard deviation. distribution_sampler carries gaussian_std as a variable and offers no control for it, so the deviation is a number on a plate rather than a thing the histogram can show changing.",
+      "proposal": "A WIDTH button cycling 0.08 / 0.15 / 0.25 (reseeding as CLEAR does), with the pale expected bars following; then the chapter can say 'press WIDTH and watch two in three stay inside a narrower or wider band'.",
+      "evidence": "commons/artifacts/distribution_sampler/distribution_sampler.gd (gaussian_std; panel buttons UNIFORM/GAUSS/POISSON/EXPON/CLEAR/BATCH/PAUSE/NEW SEED/BINS); natureofcode.com/random/ Exercise 0.4",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "WIDTH button on the sampler cabinet (0.08/0.15/0.25, clears like CLEAR); probe_sampler_width.gd ALL PASS; chapter tells the visitor to press it. (doc/book/iterations/claude-randomness-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 0 reading, 25 Sept (doc/book/readings/NOC_randomness_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "scale"
     }
   ]
 }
