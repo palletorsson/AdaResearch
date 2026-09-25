@@ -1,4 +1,4 @@
-# How many times can *again* happen?
+How many times can *again* happen?
 
 <!-- @fractal_recursion_2 -->
 
@@ -22,7 +22,7 @@ if d <= 0 or size < TERM_MIN_SIZE:
 
 `TERM_MIN_SIZE` is one centimetre. This desk also caps the requested depth at seven. Those are different limits: a chosen number of calls and a chosen minimum size. Neither is the same as the smallest detail your eye can distinguish in the helmet.
 
-Seven levels produce seven squares. One call makes one further call. Each square is a smaller copy of the one around it, and that is the first half of what the word *fractal* names: a shape whose parts are reduced copies of the whole.[^1] The second half is that the copying does not run out at any scale you can reach. A straight line is also made of smaller lines, and nobody calls it a fractal; the word begins where a shape keeps its detail however close you come. We could also write this particular descent as a loop. Seeing a square inside another square does not tell us which program made it. We had to look behind the image.
+Seven levels produce seven squares. One call makes one further call. We could also write this particular descent as a loop. Seeing a square inside another square does not tell us which program made it. We had to look behind the image.
 
 <!-- @example_8_3_recursion_circles_vr -->
 
@@ -63,5 +63,3 @@ This artifact carries “recursive” in its name, but its construction runs thr
 The table, staircase, pagoda and other works remain beyond the desks, a collection to return to with these distinctions in hand. We do not have to make every object evidence for the same claim.
 
 A rule, a stopping condition, a choice of where to continue: we can now separate them. In the next hall the call branches. What does a tree inherit from the branch before it, and where can it differ?
-
-[^1]: Benoît Mandelbrot coined *fractal* from the Latin *fractus*, broken, in *Les objets fractals* (1975); the definition is his, from *The Fractal Geometry of Nature* (1982). The square desk and the ring desk are carried into the headset from Daniel Shiffman's Examples 8.2 and 8.3 in *The Nature of Code* (natureofcode.com), as several desks in this sequence are.

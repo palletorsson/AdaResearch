@@ -1,0 +1,21 @@
+--- doc/book/iterations/claude-fractals-noc-reading-2026-09-25/before/Fractal_CantorSet.final.md	2026-09-25 07:53:02.030724300 +0200
++++ doc/book/iterations/claude-fractals-noc-reading-2026-09-25/after/Fractal_CantorSet.final.md	2026-09-25 08:04:02.161946200 +0200
+@@ -29,7 +29,7 @@
+ 
+ The count rises as the retained length falls. Neither number tells us how much work the renderer is doing. With history visible, it draws every earlier row as well. At five cuts that means sixty-three solid bars, before we count the ghosts, the desk or the rest of the room.
+ 
+-The screen stops at five. Its smallest pieces still have width, height and depth. The mathematical construction asks us to continue without a last cut. Its limiting set has zero total length and uncountably many points. We have not displayed that limit. We have made a finite instrument for approaching its rule.
++The screen stops at five. Its smallest pieces still have width, height and depth. The mathematical construction asks us to continue without a last cut.[^1] Its limiting set has zero total length and uncountably many points. We have not displayed that limit. We have made a finite instrument for approaching its rule.
+ 
+ From here the gaps can look generous. Carry that impression up the ramp.
+ 
+@@ -53,4 +53,8 @@
+ 
+ <!-- @ -->
+ 
+-The smaller Cantor drawing, the three trees, the cloud and the dark sphere remain around the experiment. Their kinds of repetition do not have to resolve into one shape. Further on, Koch will put a detour into a line; Sierpinski will carry removal into a triangle. We have learned to lose length while multiplying pieces. What happens when the next rule makes the boundary grow instead?
++At the far end of the hall, three trees stand in a row. They are one rule, three times. Each is grown by a call that makes its children and then calls itself on each of them, the self-call of the first hall, with every fork's angle and length drawn by chance; near the trunk each fork makes three, further out two. Once grown, the branches push apart level by level until they have found room. No seed is kept. The hall builds three different trees each time it is built, and none of them can be asked for again. Every desk in this sequence returns the same object when you press RESET; these trees never do, and “the same tree” stops meaning anything you could check.
++
++The smaller Cantor drawing, the cloud and the dark sphere remain around the experiment as well. Their kinds of repetition do not have to resolve into one shape. Further on, Koch will put a detour into a line; Sierpinski will carry removal into a triangle. We have learned to lose length while multiplying pieces. What happens when the next rule makes the boundary grow instead?
++
++[^1]: Georg Cantor published the set in 1883, in the fifth of his papers “Über unendliche, lineare Punktmannichfaltigkeiten” (*Mathematische Annalen* 21); Henry J. S. Smith had described the same construction nine years earlier. The pagoda is built on Daniel Shiffman's Example 8.4 in *The Nature of Code*.

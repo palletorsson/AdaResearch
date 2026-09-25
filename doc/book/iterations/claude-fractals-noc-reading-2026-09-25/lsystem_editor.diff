@@ -1,0 +1,116 @@
+--- doc/book/iterations/claude-fractals-noc-reading-2026-09-25/before/lsystem_editor.gd	2026-09-25 07:53:02.228159800 +0200
++++ doc/book/iterations/claude-fractals-noc-reading-2026-09-25/after/lsystem_editor.gd	2026-09-25 08:04:03.703040300 +0200
+@@ -4,13 +4,13 @@
+ #
+ # @identity
+ # essence: axiom → rules → string → turtle(F, +, -, [, ]) → line geometry — the full L-system pipeline interactively
+-# desire: To be played with — slide between Koch, Sierpinski, Dragon, Plant, Bush, Fern, and Binary Tree in real time
+-# critical_parameter: preset (0-6) — seven fundamentally different grammars, each a different visual universe
++# desire: To be played with — slide between Koch, Sierpinski, Dragon, Plant, Bush, Fern, Binary Tree and Cantor in real time
++# critical_parameter: preset (0-7) — eight fundamentally different grammars, each a different visual universe
+ # triggers: Changing angle while keeping rules → same grammar, different geometry; generation slider → growth stages
+ # emerges: The insight that one renderer + different rules = infinite variety — grammar IS the design tool
+ # needs: VR preset slider [has], generation slider [has], angle slider [has], Label3D [has]
+ # relationships: Central to LSystems_Grammar_Lab. Feeds into lsystem_tree (fixed vs interactive). Pairs with fractal_lsystem_string.
+-# truth: Seven presets, one turtle — the grammar is the artist.
++# truth: Eight presets, one turtle — the grammar is the artist.
+ 
+ extends Node3D
+ 
+@@ -33,7 +33,7 @@
+ ## as "5", was rejected by the typed int property, and silently rendered as Plant.
+ ##
+ ##   grammar  which rewriting system is on the plinth
+-##            koch · sierpinski · dragon · plant · bush · fern · binary_tree
++##            koch · sierpinski · dragon · plant · bush · fern · binary_tree · cantor
+ ##   depth    how many rewrites are shown before the turtle draws
+ ##            0 (the grammar's own depth) · 2 · 3 · 4 · 6
+ ##
+@@ -72,17 +72,17 @@
+ 		_sync_gen_slider()
+ 
+ ## Current preset
+-@export_enum("Koch Curve", "Sierpinski", "Dragon Curve", "Plant", "Bush", "Fern", "Binary Tree", "Custom") var preset: int = 3:
+-	set(value):
+-		preset = clampi(value, 0, 7)
+-		if not _batching:
+-			_apply_preset()
+-			_sync_preset_slider()
++@export_enum("Koch Curve", "Sierpinski", "Dragon Curve", "Plant", "Bush", "Fern", "Binary Tree", "Cantor", "Custom") var preset: int = 3:
++	set(value):
++		preset = clampi(value, 0, 8)
++		if not _batching:
++			_apply_preset()
++			_sync_preset_slider()
+ 
+ ## DNA axis: which rewriting system is on the plinth. The names the seven presets
+ ## always had, made reachable — a map token is a string, so the integer could not
+ ## be addressed from map_data.json at all.
+-@export_enum("koch", "sierpinski", "dragon", "plant", "bush", "fern", "binary_tree") var grammar: String = "plant"
++@export_enum("koch", "sierpinski", "dragon", "plant", "bush", "fern", "binary_tree", "cantor") var grammar: String = "plant"
+ 
+ ## DNA axis: how many rewrites the turtle draws. 0 means "the grammar's own
+ ## depth", which is what every preset has always used — the shipped behaviour.
+@@ -97,8 +97,14 @@
+ 	"bush": 4,
+ 	"fern": 5,
+ 	"binary_tree": 6,
++	"cantor": 7,
+ }
+ 
++## Cantor (2026-09-25, from the Nature of Code reading): the interval the fractals
++## sequence cuts five times, as two letters and two rules. F draws a step, f walks
++## one without drawing; F -> FfF, f -> fff. After n rewrites the sentence holds
++## 2^n drawn pieces in 3^n steps — the n-th row of the Cantor desk, in order,
++## before any turtle has moved. No turns, so the angle is idle.
+ const PRESETS = {
+ 	0: ["F", {"F": "F+F-F-F+F"}, 90.0, 4, "Koch Curve"],
+ 	1: ["F-G-G", {"F": "F-G+F+G-F", "G": "GG"}, 120.0, 5, "Sierpinski"],
+@@ -107,6 +113,7 @@
+ 	4: ["F", {"F": "FF+[+F-F-F]-[-F+F+F]"}, 22.5, 4, "Bush"],
+ 	5: ["X", {"X": "F-[[X]+X]+F[+FX]-X", "F": "FF"}, 25.0, 5, "Fern"],
+ 	6: ["F", {"F": "G[+F]-F", "G": "GG"}, 45.0, 6, "Binary Tree"],
++	7: ["F", {"F": "FfF", "f": "fff"}, 0.0, 5, "Cantor"],
+ }
+ 
+ var _rules: Dictionary = {}
+@@ -179,7 +186,7 @@
+ func _create_vr_controls():
+ 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+ 	_control_panel = RackTpl.create_panel("L-SYSTEM", [
+-		[{"type": "slider_h", "label": "PRESET", "default": float(preset) / 6.0}],
++		[{"type": "slider_h", "label": "PRESET", "default": float(preset) / 7.0}],
+ 		[
+ 			{"type": "slider_h", "label": "GEN", "default": float(generations) / 10.0},
+ 			{"type": "slider_h", "label": "ANGLE", "default": (angle_degrees - 5.0) / 175.0},
+@@ -202,7 +209,7 @@
+ 
+ func _sync_preset_slider():
+ 	if _preset_slider and _preset_slider.has_method("set_normalized_value"):
+-		_preset_slider.set_normalized_value(float(preset) / 6.0)
++		_preset_slider.set_normalized_value(float(preset) / 7.0)
+ 
+ func _sync_gen_slider():
+ 	if _gen_slider and _gen_slider.has_method("set_normalized_value"):
+@@ -215,7 +222,7 @@
+ func _on_preset_slider_moved(_position):
+ 	if _preset_slider and _preset_slider.has_method("get_normalized_value"):
+ 		var norm = _preset_slider.get_normalized_value()
+-		var new_preset = int(norm * 6.99)
++		var new_preset = int(norm * 7.99)
+ 		if new_preset != preset:
+ 			preset = new_preset
+ 
+@@ -403,9 +410,9 @@
+ 				angle_degrees = maxf(5.0, angle_degrees - 5.0)
+ 
+ func set_rules(new_axiom: String, new_rules: Dictionary, new_angle: float = 25.0, new_generations: int = 4):
+-	_batching = true
+-	preset = 7
+-	axiom = new_axiom
++	_batching = true
++	preset = 7
++	axiom = new_axiom
+ 	_rules = new_rules.duplicate()
+ 	angle_degrees = new_angle
+ 	generations = new_generations

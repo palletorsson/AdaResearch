@@ -1,0 +1,6 @@
+[probe] cantor -> preset 7 'Cantor' | F=32 len=243 gens=5 angle=5.0 | line vertices 64 | label 'Cantor' | PASS
+[probe]   sentence: FfFfffFfFfffffffffFfFfffFfFfffffffffffffffffffffffffffFfFfffFfFfffffffffFfFfffFfFfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffFfFfffFfFfffffffffFfFfffFfFfffffffffffffffffffffffffffFfFfffFfFfffffffffFfFfffFfF
+[probe] koch -> preset 0 'Koch Curve' | F=625 len=1249 gens=4 angle=90.0 | line vertices 1250 | label 'Koch Curve' | PASS
+[probe] cantor#depth:3 -> preset 7 'Cantor' | F=8 len=27 gens=3 angle=5.0 | line vertices 16 | label 'Cantor' | PASS
+[probe]   sentence: FfFfffFfFfffffffffFfFfffFfF
+[probe] done

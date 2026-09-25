@@ -28,7 +28,7 @@ The second line hands the next fork its beginning. A vector, a multiplication an
 
 Press FORKS at the fourth generation. Three descendants now leave each tip. The display rises from thirty-one to one hundred and twenty-one segments. This change adds connections to the branching graph; turning or lengthening its existing edges did not. A visible crossing of two branches still does not join them in the program.
 
-RESET returns to the trunk and the original settings. This specimen uses no random variation. Repeat the same choices and the same branches return. Now press GROW once more and say, before it happens, which branch comes next. Every tip at once: this desk keeps its unfinished tips in a queue and advances all of them a generation at a time. A function that called itself would have grown the same tree in another order, one branch to its last twig before turning back for the rest, and the finished drawing would not show which order made it. The surrounding museum continues while the tree waits.
+RESET returns to the trunk and the original settings. This specimen uses no random variation. Repeat the same choices and the same branches return. Growth here is a queue of instructions, advanced one generation at a time. The surrounding museum continues while the tree waits.
 
 There is no light to seek, no root taking water, no neighbour whose shade changes the next fork. The branches are visible meshes; they do not offer the player's body a climbable support. Their outline invites a promise that their implementation has not made. What would we have to add for one of these forks to become shelter?
 
@@ -41,8 +41,6 @@ Press STRATA. Colour separates three branching levels from the trunk. Follow a r
 This tree does use random choices, from the seed shown on its desk. The choices vary its branches within a fixed construction rule. A seed can repeat an arrangement; it cannot tell us which arrangements the rule never permits. Even the blunt boxes can persuade us to call it organic. We can enjoy that recognition and still ask what it has made too easy to recognise.
 
 <!-- @ -->
-
-Three trees in this hall choose their next fork three ways. The growing tree takes a number: the same turn and the same ratio at every tip, so it is the same tree every time. The red block tree takes a seed: the choices vary inside a fixed rule, and the seed can repeat them. The third, further in and smaller, takes a sentence. It is grown from a grammar, a short string rewritten four times, one rewrite every second and a half, then read as steps and turns; its angle control bends every turn in the sentence at once. Look at the three and ask which one looks like a tree to you. Then notice that the answer is not evidence about trees. A number, a seed and a sentence have each supplied a way of choosing, and none of them has met soil, light or wind.
 
 Further in, the downward trees, the mesh fractal, the desk and the small subdivision cubes keep other possibilities in view. They need not all answer the same question. The old enclosure remains a detour around something we cannot see from every position. We have more procedures to learn before resemblance becomes our only way to choose a body.
 

@@ -16,13 +16,13 @@ var d := start + dir * (2.0 * len / 3.0)
 var c := mid_point + perpendicular * height
 ```
 
-The next list joins `start → b → c → d → end`. Four segments, each a third of the old length. The next call receives these segments as its beginning. In the cellular automata halls every cell wrote its next state into a separate array before the arrays were swapped; this list is that swap, with segments for cells, and in the next sequence it will be a sentence. Each of the 256 pieces at the fourth step is a separate object in that list; nothing here has yet asked one of them to move. A multiplication of four thirds can be followed with the eye.
+The next list joins `start → b → c → d → end`. Four segments, each a third of the old length. The next call receives these segments as its beginning. A multiplication of four thirds can be followed with the eye.
 
 Try TURN. The detours go to the other side. The count and path length survive the reversal. They have not told us everything about the shape.
 
 RESET, then FORM. A triangle closes the starting line into a boundary. NEXT sends its peaks outward; TURN folds them inward. There is an inside to negotiate now. An instruction about direction has become a decision about where an enclosure extends.
 
-Our machine stops at four replacements. The familiar Koch limit follows the standard construction indefinitely; its boundary has unbounded length while enclosing a bounded area.[^1] This desk has finite segments drawn with thickness. We can learn the rule that approaches the limit without pretending the headset contains it. From Trace we still carry a question: how much of the next detail could this encounter distinguish?
+Our machine stops at four replacements. The familiar Koch limit follows the standard construction indefinitely; its boundary has unbounded length while enclosing a bounded area. This desk has finite segments drawn with thickness. We can learn the rule that approaches the limit without pretending the headset contains it. From Trace we still carry a question: how much of the next detail could this encounter distinguish?
 
 <!-- @sierpinski_triangle -->
 
@@ -66,7 +66,7 @@ The key gives this cell an address. Writing it again does not create another occ
 
 RANGE reveals a plot and fits the three coarsest measurements. Press it again for the three finest, then for all six. The reported slope moves while the point cloud stays put. Which value would you have called the triangle's dimension if only one had been shown?
 
-The ideal Sierpinski triangle has dimension `log(3) / log(2)`, about 1.585.[^2] This instrument fits a finite sample at six box sizes. The number it returns depends on those choices; it is evidence from a procedure, with a range beyond which we have not tested it. RESET reproduces the same sample so the comparison can begin again.
+The ideal Sierpinski triangle has dimension `log(3) / log(2)`, about 1.585. This instrument fits a finite sample at six box sizes. The number it returns depends on those choices; it is evidence from a procedure, with a range beyond which we have not tested it. RESET reproduces the same sample so the comparison can begin again.
 
 The unoccupied cells tell us where this reading found no points. They have no authority over what may exist. The question becomes sharper when a model is used to decide what the world should retain: what happens to what it did not count? Here we can start with the smaller act: change the grid, look again, and leave room for an answer the first reading could not hold.
 
@@ -87,7 +87,3 @@ The discrepancy could have disappeared in a correction. Instead it has become a 
 Around these instruments, the earlier collection remains: assembled cubes, a bent Koch arch, recursive specimens and the dark sphere on the old raised cell. There is more to inspect than the route can finish.
 
 In the next hall, removal enters a volume. We will approach the Menger sponge with a body that can fly. Which of its openings will become somewhere we can go?
-
-[^1]: Helge von Koch, “Sur une courbe continue sans tangente, obtenue par une construction géométrique élémentaire”, *Arkiv för matematik, astronomi och fysik* 1 (1904). The replacement on this desk is carried from Daniel Shiffman's Example 8.5 in *The Nature of Code*.
-
-[^2]: Wacław Sierpiński, “Sur une courbe dont tout point est un point de ramification”, *Comptes rendus de l'Académie des sciences* 160 (1915).

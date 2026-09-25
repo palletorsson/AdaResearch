@@ -4,7 +4,7 @@
 
 Two towers wait at the beginning of the row. Each carries a one. Before asking the machine for another, give it a number yourself. What could follow two equal beginnings?
 
-Press NEXT. Two appears. Another press brings three. Stay with the numbers for a few steps: one, one, two, three, five. The next tower is already implied by a relation you can test.[^1] Add the preceding pair, then ask the machine to make its next term.
+Press NEXT. Two appears. Another press brings three. Stay with the numbers for a few steps: one, one, two, three, five. The next tower is already implied by a relation you can test. Add the preceding pair, then ask the machine to make its next term.
 
 The row grows, but its heights are suspicious. Eight has not become a tower eight times as high as one. Fifty-five, at the end of this ten-term display, still fits comfortably below the wall. Something has happened between the number and the body that stands for it.
 
@@ -67,5 +67,3 @@ The sponge made room by discarding material. This rectangle keeps the pieces tog
 In the retained room beyond, the recursive cabinet, growing terrain, Romanesco, aggregation study and sphere remain. The Romanesco's cones inherit positions and turns from their parent cones. Its botanical appearance is a construction to inspect, not proof that a plant follows this code. The terrain and aggregation have their own updates. Let their differences interrupt the temptation to call everything here the same pattern.
 
 Next we gather the procedures. Before naming a desired shape, try saying what one step would receive, retain, change and pass on. The next capability will give those instructions a grammar.
-
-[^1]: The numbers are Leonardo of Pisa's, from the rabbit problem in *Liber abaci* (1202), and older than his name for them: Virahanka and Hemachandra had counted the same series for Sanskrit metres centuries before. The ratio the towers approach is Euclid's “extreme and mean ratio”; “golden” is a nineteenth-century word for it.
