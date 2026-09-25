@@ -18,6 +18,20 @@ var materials: Array[ShaderMaterial] = []
 var objects: Array[MeshInstance3D] = []
 var rotation_speeds: Array[float] = []
 
+# MAP TOKENS (2026-09-25, Palle: "stages large spheres and cubes then spaces"), e.g.
+#   shader_12_pinkextravaganza:0:0#bodies:1.5#shapes:sphere,torus,cube,plane,sphere_big#stage:0.35#water:12
+#   bodies  multiplies the three flanking bodies' scale (the big sphere keeps its own; it floats)
+#   shapes  mesh kinds in order: sphere | cube | torus | capsule | plane | sphere_big
+#   stage   a round podium under each flanking body, metres (0 = none); bodies then SIT on it
+#   water   the floor water's side in metres, centred on the anchor (the script's own is 8 m at z + 2)
+# A token without these keys builds exactly as before.
+var _cfg_bodies: float = 1.0
+var _cfg_shapes: PackedStringArray = PackedStringArray()
+var _cfg_stage: float = 0.0
+var _cfg_water: float = 0.0
+var _cfg_v2: bool = false
+var _built: bool = false
+
 var material_defs := [
 	{
 		"shader": "res://algorithms/shaders/queer_collection_2/melted_candy.gdshader",
@@ -64,6 +78,7 @@ var material_defs := [
 
 func _ready() -> void:
 	_build_finale_scene()
+	_built = true
 
 
 func _build_finale_scene() -> void:
@@ -95,9 +110,12 @@ func _build_finale_scene() -> void:
 
 		var mesh_inst := MeshInstance3D.new()
 		mesh_inst.name = "Object_%d" % i
-		var s := float(def["scale"])
-
-		match def["mesh"]:
+		var kind: String = str(def["mesh"])
+		if i < _cfg_shapes.size() and _cfg_shapes[i] != "":
+			kind = _cfg_shapes[i]
+		var s := float(def["scale"]) * (1.0 if kind in ["sphere_big", "plane"] else _cfg_bodies)
+		var half_h: float = 0.6 * s
+		match kind:
 			"sphere":
 				var sphere := SphereMesh.new()
 				sphere.radius = 0.6 * s
@@ -105,6 +123,11 @@ func _build_finale_scene() -> void:
 				sphere.radial_segments = 64
 				sphere.rings = 32
 				mesh_inst.mesh = sphere
+			"cube":
+				var box := BoxMesh.new()
+				box.size = Vector3(1.0, 1.0, 1.0) * s
+				mesh_inst.mesh = box
+				half_h = 0.5 * s
 			"sphere_big":
 				var sphere := SphereMesh.new()
 				sphere.radius = 0.8 * s
@@ -112,6 +135,7 @@ func _build_finale_scene() -> void:
 				sphere.radial_segments = 48
 				sphere.rings = 24
 				mesh_inst.mesh = sphere
+				half_h = 0.8 * s
 			"torus":
 				var torus := TorusMesh.new()
 				torus.inner_radius = 0.3 * s
@@ -119,14 +143,18 @@ func _build_finale_scene() -> void:
 				torus.rings = 64
 				torus.ring_segments = 32
 				mesh_inst.mesh = torus
+				half_h = 0.2 * s
 			"capsule":
 				var capsule := CapsuleMesh.new()
 				capsule.radius = 0.45 * s
 				capsule.height = 1.4 * s
 				mesh_inst.mesh = capsule
+				half_h = 0.7 * s
 			"plane":
 				var plane := PlaneMesh.new()
-				plane.size = Vector2(4.0 * s, 4.0 * s)
+				var wsz: float = _cfg_water if _cfg_water > 0.0 else 4.0 * s
+				plane.size = Vector2(wsz, wsz)
+				half_h = 0.0
 				plane.subdivide_width = 24
 				plane.subdivide_depth = 24
 				mesh_inst.mesh = plane
@@ -134,11 +162,17 @@ func _build_finale_scene() -> void:
 		var mat := ShaderMaterial.new()
 		mat.shader = load(def["shader"])
 		mesh_inst.material_override = mat
+		if _cfg_v2 and kind == "plane" and _cfg_water > 0.0:
+			pos = Vector3(0.0, 0.1, 0.0)
+		elif _cfg_v2 and kind != "sphere_big":
+			pos.y = _cfg_stage + half_h
 		mesh_inst.position = pos
 		add_child(mesh_inst)
 		objects.append(mesh_inst)
 		materials.append(mat)
 		rotation_speeds.append(def["rotation_speed"])
+		if _cfg_stage > 0.0 and kind not in ["plane", "sphere_big"]:
+			_add_stage(Vector3(pos.x, 0.0, pos.z), maxf(0.6, 0.75 * s), _cfg_stage)
 
 		# Dramatic labels with billboard
 		var title := Label3D.new()
@@ -184,4 +218,52 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	var v2 := false
+	if config.has("bodies"):
+		_cfg_bodies = clampf(float(str(config["bodies"])), 0.2, 6.0)
+		v2 = true
+	if config.has("shapes"):
+		_cfg_shapes = PackedStringArray()
+		for part in str(config["shapes"]).split(","):
+			_cfg_shapes.append(part.strip_edges().to_lower())
+		v2 = true
+	if config.has("stage"):
+		_cfg_stage = clampf(float(str(config["stage"])), 0.0, 3.0)
+		v2 = true
+	if config.has("water"):
+		_cfg_water = clampf(float(str(config["water"])), 0.0, 40.0)
+		v2 = true
+	if not v2:
+		return
+	_cfg_v2 = true
+	if _built:
+		_rebuild()
+
+
+## A low round stage under a body (visual only: the museum's walk map cannot see an
+## artifact's own colliders, so a stage that blocked would block in silence).
+func _add_stage(at: Vector3, radius: float, height: float) -> void:
+	var podium := MeshInstance3D.new()
+	podium.name = "Stage_%d" % get_child_count()
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = radius
+	cyl.bottom_radius = radius
+	cyl.height = height
+	cyl.radial_segments = 48
+	podium.mesh = cyl
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color(0.16, 0.16, 0.19)
+	m.roughness = 0.9
+	podium.material_override = m
+	podium.position = Vector3(at.x, height * 0.5, at.z)
+	add_child(podium)
+
+
+func _rebuild() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+	objects.clear()
+	materials.clear()
+	rotation_speeds.clear()
+	_build_finale_scene()

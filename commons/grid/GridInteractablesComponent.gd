@@ -166,6 +166,9 @@ const CONFIG_PARAM_NAMES = [
 	# also stops the shorthand rewriting those tokens' yaw, which for a cube and
 	# for a stone whose axis comes from the word #axis: changes nothing functional.
 	"min", "max", "distance", "pause",
+	# shaders sequence (2026-09-25): shader_11/12 bodies on stages, basin_water; each read by its apply_grid_config
+	"bodies", "shapes", "stage", "layout", "gap", "arc", "water",
+	"wavelength", "noise_amount", "lift", "calm",
 	# generic
 	"no_collider",
 ]

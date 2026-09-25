@@ -76,7 +76,7 @@ The dark sphere stands between the pool and the squares. It pulses from a number
 
 <!-- @ -->
 
-Next, a floor. Take the glass with you: the thing you walked on was not the thing you looked at.
+Next, a room that is all surface. Take the glass with you: the thing you walked on was not the thing you looked at.
 
 [^basin]: `map_info.museum.basin` on this map is `{"depth": 1.2, "glass": true, "rects": [[3, 1, 7, 3]]}`: cells x 3..9, z 1..3. The museum (`endless_museum.gd`) sinks each cell in the rect: a pool floor slab a basin-depth down, side walls where the pool meets ground, and a glass lid 6 cm thick with its top flush with the deck. The water is `basin_water:0:0#width:7#depth:3` at cell (6, 2), the rect's centre; the artifact's origin is the lid and the plane sits at `lift` = -0.35 m.
 

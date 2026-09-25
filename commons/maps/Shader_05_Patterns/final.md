@@ -1,6 +1,6 @@
 # Where are the seams?
 
-A floor, again. You have met tilings before, whole halls of them, and there a pattern was a thing with parts: pieces, and the joins between them. This hall has four dark squares, a desk under each, and a tilted panel at the left end with two buttons, MODE and RESET. Leave the buttons. Go to the first square.
+The long crossing ends at a floor, again. You have met tilings before, whole halls of them, and there a pattern was a thing with parts: pieces, and the joins between them. This hall hangs four dark squares along its wall, pictures again, with a desk under each and a tilted panel at the left end with two buttons, MODE and RESET. Leave the buttons. Go to the first square.
 
 <!-- @shader_05_patterns -->
 
@@ -43,7 +43,7 @@ They agree because each side paints its edge as the average of its own colour an
 
 The two Voronoi squares have no tiles to fold. Each pixel asks which of a scatter of points is nearest and colours itself by that, or by the difference between the nearest and the second nearest, which is zero exactly on the borders, so that the second of them is a picture of nothing but seams. The points still live in folded cells, one per cell, jittered. The seams you see are not those cells' edges but the borders the points make between themselves.
 
-Press MODE again. Noise synthesis: the layered noise of the basin hall, a Worley variant, a domain warp. No seams anywhere, and yet the noise is built on the same fold, a lattice of whole numbers with a random value at each corner. The seams are hidden by the interpolation between corners, whose slope was chosen to be zero at every corner, so that the surface passes over each fold without a crease.[^smooth]
+Press MODE again. Noise synthesis: noise layered at several scales, which the basin hall will take further, a Worley variant, a domain warp. No seams anywhere, and yet the noise is built on the same fold, a lattice of whole numbers with a random value at each corner. The seams are hidden by the interpolation between corners, whose slope was chosen to be zero at every corner, so that the surface passes over each fold without a crease.[^smooth]
 
 So the floor returned, and it has no parts. There are seams at every whole number of every square in this hall. Some are shown, as the tile's step in brightness and the brick's mortar. Some are agreed away, as Truchet's midpoints. Some are painted over, as Wang's averages. Some are smoothed, as the noise's zero slopes. None is a join between two things, because there are no two things: there is one rule, asked at every pixel, and a coordinate that was folded before the rule saw it.
 
@@ -57,7 +57,7 @@ The dark sphere stands in front of the squares. It has no seams because it is on
 
 <!-- @ -->
 
-Press RESET if you have lost the defaults. The next hall has no desks at all. Take the painted seam with you, the one that agreed only because both sides averaged.
+Press RESET if you have lost the defaults. The next hall has no desks at all, and nothing on its walls: the pictures end here, and bodies begin. Take the painted seam with you, the one that agreed only because both sides averaged.
 
 [^tint]: `patterns_tile.gdshader`: `tile_color = shape_color * (0.7 + 0.3 * fract(sin(dot(tile_id, vec2(12.9898, 78.233))) * 43758.5453))`, where `tile_id = floor(uv)` is the whole part the fold discarded. The animation is `1.0 + animate * 0.3 * sin(TIME + tile_id.x * 1.3 + tile_id.y * 0.7)`, and it leaps at the clock's wrap like the first hall's wave.
 

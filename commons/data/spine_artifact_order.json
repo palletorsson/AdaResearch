@@ -1,6 +1,6 @@
 {
  "_meta": {
-  "generated": "2026-09-25 15:32:46",
+  "generated": "2026-09-25 16:15:10",
   "generator": "tools/build_spine_artifact_order.py",
   "rule": "first appearance walking the spine: sequence order -> map order -> the room's thread (ruled, else floor, else file)",
   "sequences": 25,
@@ -4336,6 +4336,13 @@
    "by": "ruled"
   },
   {
+   "lookup": "shader_01_shaping",
+   "sequence": "shaders",
+   "map": "Shader_01_Shaping",
+   "role": "unruled",
+   "by": "floor"
+  },
+  {
    "lookup": "library_rack",
    "sequence": "shaders",
    "map": "Shader_01_Shaping",
@@ -4343,9 +4350,9 @@
    "by": "floor"
   },
   {
-   "lookup": "shader_01_shaping",
+   "lookup": "shader_05_patterns",
    "sequence": "shaders",
-   "map": "Shader_01_Shaping",
+   "map": "Shader_05_Patterns",
    "role": "unruled",
    "by": "floor"
   },
@@ -4367,13 +4374,6 @@
    "lookup": "shader_09_fbm",
    "sequence": "shaders",
    "map": "Shader_09_FBM",
-   "role": "unruled",
-   "by": "floor"
-  },
-  {
-   "lookup": "shader_05_patterns",
-   "sequence": "shaders",
-   "map": "Shader_05_Patterns",
    "role": "unruled",
    "by": "floor"
   },

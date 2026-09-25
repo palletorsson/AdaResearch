@@ -1,0 +1,461 @@
+{
+ "coverage": {
+  "behind_camera": 0,
+  "blind": "This standpoint was composed to see what was dealt, not to survey the hall. Of the 27 bodies the museum stamped in this hall — plinths are not among them, see `inventory` — this frame holds 14 and misses 13: 0 behind the camera, 7 outside the frame, 6 in the frame but behind something solid, every one of them named under `missing`. Of the 4 of those the museum calls artifacts, this frame holds 3. 81 of the hall's 136 floor cells can be seen AT THE FLOOR from here (60%): 35 are in the frame but under something, 20 are outside the frame. At 0.90 m, the height a body stands on rather than the floor it stands on, it is 83 of 136 — the two differ because anything knee-high shadows the floor beside it, and `cells.hidden_by` names what stopped each ray and at what height. Measured over the hall's OWN floor, the cells a body seals included, because the walk map has those subtracted already and cannot be asked what is on top of them. The hall itself covers 100% of this frame, rasterised from its own meshes; any larger figure quoted elsewhere is the bounding BOX, which is not the hall. Every number in this sentence is counted off the `held` and `missing` lists beside it — held is placed minus missing — so the prose cannot drift from the data it describes.",
+  "bodies_placed": 27,
+  "by_kind": {
+   "artifact": {
+    "held": 3,
+    "missing": 1,
+    "placed": 4
+   },
+   "furniture": {
+    "held": 2,
+    "missing": 7,
+    "placed": 9
+   },
+   "prop": {
+    "held": 0,
+    "missing": 3,
+    "placed": 3
+   },
+   "showing": {
+    "held": 9,
+    "missing": 2,
+    "placed": 11
+   }
+  },
+  "by_reason": {
+   "in the frustum, behind something solid": 6,
+   "outside the frustum": 7
+  },
+  "cells": {
+   "hall_floor": 136,
+   "hall_seen": 0.596,
+   "hidden_by": {
+    "Collision, stopped at 2.0 m": 1,
+    "Collision, stopped at 4.5 m": 32,
+    "dark_sphere, stopped at 1.0 m": 1,
+    "station_plinth, stopped at 0.5 m": 1
+   },
+   "in_frame": 116,
+   "outside_frame": 20,
+   "pool_excluded": 10,
+   "sample_y": 0.1,
+   "sample_y_head": 0.9,
+   "sealed_or_taken": 41,
+   "source": "the segment's own tile (every cell that is not void \"0\" and not wall \"4…\"), unioned with the deck laid outside it (_walk_cells) and with every cell the museum took back out of the walk map (_walk_erased, which is how a cell a body SEALS stays in the denominator). Pool cells (10, the box refuses them too) and cells outside the framed box are subtracted. `visible` is the ray to the FLOOR at 0.10 m; `visible_at_head_height` is the same ray to 0.90 m, which a cutaway flatters.",
+   "under_something": 35,
+   "visible": 81,
+   "visible_at_head_height": 83,
+   "walkable_now": 95
+  },
+  "frame_fill": {
+   "bins": [
+    300,
+    200
+   ],
+   "capped": false,
+   "hall_pct": 100.0,
+   "meshes": 8297,
+   "method": "the segment's OWN meshes (MultiMesh instances included), each box projected through the live camera with unproject_position, convex-hulled and rasterised into a 300 x 200 bin grid over the frame. A LOWER BOUND: a mesh with a corner behind the camera is unprojectable and counted rather than drawn, and only this hall's subtree is walked. Compare with `hall_fills` at the top of this file, which measures the BOX against the frame and is the larger number for that reason.",
+   "unprojectable": 0
+  },
+  "held": [
+   {
+    "inv": "",
+    "kind": "artifact",
+    "token": "library_rack",
+    "world": [
+     3.0,
+     2.3,
+     1.98
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "artifact",
+    "token": "dark_sphere",
+    "world": [
+     6.5,
+     0.49,
+     4.5
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "artifact",
+    "token": "shader_09_fbm",
+    "world": [
+     6.5,
+     1.43,
+     6.13
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "showing",
+    "token": "showing",
+    "world": [
+     2.0,
+     1.58,
+     8.99
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "showing",
+    "token": "showing",
+    "world": [
+     9.0,
+     1.58,
+     11.99
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "showing",
+    "token": "showing",
+    "world": [
+     11.0,
+     1.58,
+     1.01
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "showing",
+    "token": "showing",
+    "world": [
+     1.01,
+     1.58,
+     3.0
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "showing",
+    "token": "showing",
+    "world": [
+     10.99,
+     1.58,
+     11.0
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "showing",
+    "token": "showing",
+    "world": [
+     12.99,
+     1.58,
+     2.0
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "showing",
+    "token": "showing",
+    "world": [
+     9.01,
+     1.58,
+     10.0
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "showing",
+    "token": "showing",
+    "world": [
+     4.0,
+     1.58,
+     8.99
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "showing",
+    "token": "showing",
+    "world": [
+     1.01,
+     1.58,
+     5.0
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "furniture",
+    "token": "ceiling_vent",
+    "world": [
+     3.5,
+     4.67,
+     6.23
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "furniture",
+    "token": "dream_bodies",
+    "world": [
+     10.5,
+     1.26,
+     2.5
+    ]
+   }
+  ],
+  "hidden_behind_geometry": 6,
+  "in_frame": 14,
+  "inventory": {
+   "counted": "every body in _edit_records under this segment, by kind",
+   "kinds": {
+    "artifact": 4,
+    "furniture": 9,
+    "prop": 3,
+    "showing": 11
+   },
+   "not_counted": {
+
+   },
+   "not_counted_n": 0,
+   "tokens": [
+    "artifact:basin_water",
+    "artifact:dark_sphere",
+    "artifact:library_rack",
+    "artifact:shader_09_fbm",
+    "furniture:ceiling_vent",
+    "furniture:dream_bodies",
+    "furniture:lobby:counter",
+    "furniture:lobby:elevator",
+    "furniture:lobby:extinguisher",
+    "furniture:lobby:pallet",
+    "furniture:lobby:point_zero",
+    "furniture:lobby:view",
+    "furniture:lobby:window",
+    "prop:electrical_panel",
+    "prop:exit_sign",
+    "prop:wall_clock",
+    "showing:showing",
+    "showing:showing",
+    "showing:showing",
+    "showing:showing",
+    "showing:showing",
+    "showing:showing",
+    "showing:showing",
+    "showing:showing",
+    "showing:showing",
+    "showing:showing",
+    "showing:showing"
+   ],
+   "why": "plinths are excluded from every number in this block — a plinth is the dress of the body standing on it, and counting both reports one work twice. An inventory that includes them will agree with this one on nothing but luck, so compare `tokens` with `tokens`, never total with total."
+  },
+  "method": "bodies and floor cells are the museum's OWN records (_edit_records, the segment tile, _walk_cells and _walk_erased), not an estimate; in-frame is the placed camera's frustum planes; occlusion is a physics ray (parallel to forward for an orthographic camera, which has no single viewpoint). in_frame is ALREADY net of occlusion — do not subtract hidden_behind_geometry from it, and every count here is tallied from `held` and `missing` in one place so the prose and the lists cannot disagree. The ray's own blind spot: a mesh with no collider cannot occlude it, and museum wall works and every piece of em_detail's dressing have none by contract — so a work flat on a wall never hides anything here, can itself be called visible behind a collider-less pier, and a cornice standing above a cut wall costs this measure nothing while still being in the picture. Look at the PNG before quoting it.",
+  "missing": [
+   {
+    "inv": "",
+    "kind": "furniture",
+    "token": "lobby:window",
+    "why": "outside the frustum",
+    "world": [
+     7.5,
+     1.7,
+     -3.49
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "furniture",
+    "token": "lobby:view",
+    "why": "outside the frustum",
+    "world": [
+     7.5,
+     1.7,
+     -2.0
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "furniture",
+    "token": "lobby:counter",
+    "why": "outside the frustum",
+    "world": [
+     11.0,
+     1.6,
+     -2.99
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "furniture",
+    "token": "lobby:extinguisher",
+    "why": "in the frustum, behind something solid",
+    "world": [
+     1.12,
+     0.41,
+     -1.37
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "furniture",
+    "token": "lobby:elevator",
+    "why": "in the frustum, behind something solid",
+    "world": [
+     15.94,
+     1.19,
+     -1.8
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "furniture",
+    "token": "lobby:pallet",
+    "why": "in the frustum, behind something solid",
+    "world": [
+     15.1,
+     0.57,
+     -1.8
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "furniture",
+    "token": "lobby:point_zero",
+    "why": "outside the frustum",
+    "world": [
+     0.25,
+     -0.05,
+     -3.75
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "artifact",
+    "token": "basin_water",
+    "why": "in the frustum, behind something solid",
+    "world": [
+     6.5,
+     -1.55,
+     2.5
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "showing",
+    "token": "showing",
+    "why": "in the frustum, behind something solid",
+    "world": [
+     7.0,
+     1.58,
+     11.01
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "showing",
+    "token": "showing",
+    "why": "in the frustum, behind something solid",
+    "world": [
+     6.01,
+     1.58,
+     12.0
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "prop",
+    "token": "exit_sign",
+    "why": "outside the frustum",
+    "world": [
+     7.0,
+     3.52,
+     -1.05
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "prop",
+    "token": "wall_clock",
+    "why": "outside the frustum",
+    "world": [
+     1.02,
+     2.25,
+     -3.5
+    ]
+   },
+   {
+    "inv": "",
+    "kind": "prop",
+    "token": "electrical_panel",
+    "why": "outside the frustum",
+    "world": [
+     1.05,
+     1.47,
+     -2.53
+    ]
+   }
+  ],
+  "occluded_estimate": 0.257,
+  "outside_frustum": 7,
+  "total": 27,
+  "walls": {
+   "built_at_m": 4.5,
+   "cut_for_this_shot": false,
+   "museum_m": 4.5,
+   "works_left_at_true_height": false
+  }
+ },
+ "fov": 70.0,
+ "hall": {
+  "chapter": "shaders",
+  "h": 13,
+  "map": "Shader_09_FBM",
+  "pearl": "shader 09 fbm",
+  "span": 17,
+  "w": 14
+ },
+ "hall_box": {
+  "annex_cells_excluded": 5,
+  "annex_reached_x": -3.0,
+  "content_x": [
+   0.0,
+   15.0
+  ],
+  "pool_cells_excluded": 10,
+  "room_x0": -1.0,
+  "x": [
+   -1.0,
+   16.0
+  ],
+  "y": [
+   -3.9,
+   8.5
+  ],
+  "y0_from": "library_rack",
+  "y1_from": "library_rack",
+  "z": [
+   -4.0,
+   13.0
+  ]
+ },
+ "keep_aspect": "width",
+ "looks_at": [
+  9.5,
+  7.622,
+  5.675
+ ],
+ "pitch_deg": -89.0,
+ "png": "user://em_proof_shaders_basin.png",
+ "position": [
+  9.5,
+  17.62,
+  5.5
+ ],
+ "projection": "perspective",
+ "view": "composed",
+ "viewport": [
+  1800,
+  1200
+ ],
+ "walls_built_at": 4.5,
+ "yaw_deg": 180.0
+}

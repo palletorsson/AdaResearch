@@ -27,17 +27,17 @@
       ],
       "content": [
         "Shader_01_Shaping: Why does the wave jump? - arrive from the noise halls; four graphs that hold still and one that moves by itself; the exit crossing is declared fourteen rows deep",
+        "Shader_05_Patterns: Where are the seams? - fract() folds space; tiles, Truchet arcs, bricks, Wang tiles and Voronoi from one fold",
         "Shader_11_QueerRubber: What does a surface answer to? - five materials rotating under three coloured lamps, in the one hall of the sequence that keeps the museum's pier colonnade",
         "Shader_09_FBM: What carries you over the water? - a 7 x 3 pool under a glass lid in front of the four noise displays; the water on it is recomputed from the clock on every frame, and written so the clock's wrap is invisible",
-        "Shader_05_Patterns: Where are the seams? - fract() folds space; tiles, Truchet arcs, bricks, Wang tiles and Voronoi from one fold",
         "Shader_12_PinkExtravaganza: Which of these is the lamp? - five self-lit materials under three pink lamps and a water plane on the floor; no slider is set, the excess is in the defaults",
         "Shader_10_ReactionDiffusion: Where is the last frame? - a reaction-diffusion rule that asks for its previous frame and is never handed one, beside a DLA that only looks grown; the seam into cellular automata"
       ],
       "maps": [
         "Shader_01_Shaping",
+        "Shader_05_Patterns",
         "Shader_11_QueerRubber",
         "Shader_09_FBM",
-        "Shader_05_Patterns",
         "Shader_12_PinkExtravaganza",
         "Shader_10_ReactionDiffusion"
       ],
@@ -85,6 +85,17 @@
           "rationale": "Why does the wave jump? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
         },
         {
+          "map": "Shader_05_Patterns",
+          "position": "exploration",
+          "artifacts": [
+            "dark_sphere",
+            "library_rack",
+            "shader_05_patterns"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Where are the seams? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+        },
+        {
           "map": "Shader_11_QueerRubber",
           "position": "exploration",
           "artifacts": [
@@ -106,17 +117,6 @@
           ],
           "size_budget": "compact_only",
           "rationale": "What carries you over the water? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
-        },
-        {
-          "map": "Shader_05_Patterns",
-          "position": "exploration",
-          "artifacts": [
-            "dark_sphere",
-            "library_rack",
-            "shader_05_patterns"
-          ],
-          "size_budget": "compact_only",
-          "rationale": "Where are the seams? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
         },
         {
           "map": "Shader_12_PinkExtravaganza",
@@ -146,6 +146,11 @@
           "date": "2026-09-25",
           "by": "claude-edges-pilot",
           "note": "Sequence created on Palle’s word: a shader sequence introduced with the architecture of liminal spaces (pillar hallways, passages, basins). Assembled from the Book of Shaders halls of the non-spine pattern-generation sequence; museum blocks added; basin_water built for the basin hall."
+        },
+        {
+          "date": "2026-09-25",
+          "by": "claude-edges-pilot",
+          "note": "Palle: 'the first examples can go as images on the walls I think and then stages large spheres and cubes then spaces'. Reordered: images (01 shaping, 05 patterns) -> bodies on stages (11) -> spaces (09 basin, 12 pink) -> the seam (10). The picture racks of 01 and 05 stand against the north wall; 11 and 12 take scale/shapes/stage tokens."
         }
       ]
     }

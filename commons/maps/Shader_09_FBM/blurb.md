@@ -1,5 +1,3 @@
-One octave of noise is static. Layer it — half the amplitude, double the frequency, repeat — and terrain appears. FBM is accumulation. Each pass adds detail at a smaller scale, the way coastlines reveal more jaggedness the closer you look. The sum of simple disorder, structured by ratio.
+# What carries you over the water?
 
-Ridged multifractal folds the noise back on itself — absolute value creates sharp creases, mountain ridges, lightning. Turbulence does the same without direction. Domain warping feeds the output back as input coordinates, bending space through its own texture. The procedural engine eating its own tail.
-
-Every cloud, every procedural landscape, every organic surface in games runs on this. Not one noise function but many, stacked in self-similar layers. Scale is a parameter. Complexity emerges from repetition at different resolutions — the same operation, applied again, producing something irreducibly new.
+A pool under a glass lid, its water recomputed from the clock on every frame and written so the clock's wrap never shows. The glass holds you; the water is a picture beneath a floor.

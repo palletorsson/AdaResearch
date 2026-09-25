@@ -1,10 +1,10 @@
 # Why does the wave jump?
 
-Your question can wait at the door. Five dark squares stand in a row across the hall, each with a desk in front of it, and one of the five is already moving with nobody at its desk. Begin with one that holds still.
+Your question can wait at the door. Five dark squares hang in a row along the wall, pictures two metres on a side, each with a desk in front of it, and one of the five is already moving with nobody at its desk. Begin with one that holds still.
 
 <!-- @shader_01_shaping -->
 
-The first square is a graph: two metres on a side, a faint grid every quarter, one white line. Its desk carries a single slider, THRESHOLD, and one line of text. Leave the text for now.
+The first square is a graph: a faint grid every quarter, one white line. Its desk carries a single slider, THRESHOLD, and one line of text. Leave the text for now.
 
 Drag the slider to the right. The white line runs along the bottom of the square, climbs in one vertical stroke, and runs along the top. The stroke follows your hand. Watch both halves of the line while it moves. Neither arrives first. The right-hand part of the square is a shade lighter than the left, and that band moves as one piece with the stroke.
 
@@ -55,13 +55,15 @@ The fifth square draws all four on one graph, a red step, a cyan S, a green wave
 
 <!-- @library_rack -->
 
-A rack beside the desks indexes the shader registry, forty entries.[^rack] The six halls of this sequence are on it, and six more that the museum does not walk you through. It is an index, not the objects. Every entry is a rule waiting for a surface.
+A rack in the middle of the hall indexes the shader registry, forty entries.[^rack] The six halls of this sequence are on it, and six more that the museum does not walk you through. It is an index, not the objects. Every entry is a rule waiting for a surface.
 
 <!-- @dark_sphere -->
 
 The dark sphere pulses beside the desks. Its pulse is driven from the other side of the museum's machinery, by a script that runs once a frame on the processor and remembers where it was.[^sphere] Stand between it and the wave. One of them has a past.
 
 You came from halls where noise was made and then kept: a column of values, a voxel field, a wall. Nothing in this hall is kept. The graphs are asked, every frame, from nothing, and all they are asked with is a position, a few numbers from the desks, and the clock.
+
+Everything in this hall is also flat, and hangs on a wall. The sequence begins with pictures. Two halls on it moves to bodies, and after that to rooms.
 
 <!-- @ -->
 
