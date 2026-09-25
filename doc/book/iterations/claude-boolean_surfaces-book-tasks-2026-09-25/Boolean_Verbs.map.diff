@@ -1,0 +1,12 @@
+--- HEAD:Boolean_Verbs
++++ staged:Boolean_Verbs
+@@ -6,6 +6,9 @@
+   "description": "The three boolean verbs in one hall, on the same two operands, separated by sills you step over rather than walls you cannot see past. Union deletes the skins where two solids met and re-derives one; intersection keeps only what both claim, and returns nothing when they claim nothing together; difference leaves a cavity wall that belongs to neither input. Each is only legible beside the others, which is why they are no longer in three rooms.",
+   "version": "1.0",
+   "format": "json",
++  "museum": {
++   "piers": false
++  },
+   "dimensions": {
+    "width": 13,
+    "depth": 26,

@@ -1,5 +1,3 @@
-# When the Negative Gets Big
-
 The room gets taller here. A workbench, a catalogue rack, a wall with a door cut through it, a block of rock with a hollow inside. These are the Boolean operations at the size where they begin to promise architecture. When the negative gets big enough to stand in, can you stand in it?
 
 Do not answer from the doorway. Several objects offer an image of an interior. One asks you to enter it. The difference is worth finding with your body before naming it.
@@ -8,15 +6,15 @@ Do not answer from the doorway. Several objects offer an image of an interior. O
 
 <!-- @csg_compose_workbench -->
 
-Five solids turn slowly above a table. Union, intersection, subtraction, subtraction the other way round, and a fifth with a longer label: the verbs have become a small collection. Their rotation offers each result from another side while the recipe stays fixed.
+Three solids turn slowly above a table. Union, intersection, subtraction: the verbs have become a small collection. Their rotation offers each result from another side while the recipe stays fixed.
 
-The workbench suggests a place to take hold of something and change it. In this version, the five presets keep their distance from that possibility. They turn, but you cannot pick them up or build another expression here. Your eye can follow their contours further than your hand can carry them.
+The workbench suggests a place to take hold of something and change it. In this version, the three presets keep their distance from that possibility. They turn, but you cannot pick them up or build another expression here. Your eye can follow their contours further than your hand can carry them.
 
-The fifth solid is the one the bench in the first hall said the verbs could make without a new name. Its label is its recipe, the parts belonging to either operand with the overlap removed:
+There is already more in the algebra than this table shows. Its source includes a recipe for keeping the parts belonging to either operand while removing the overlap:
 
 `(A ∪ B) − (A ∩ B)`
 
-This is symmetric difference. It composes the familiar verbs instead of adding a new primitive operation; the engine has no button for it, and the table has a solid. Walk round it. From outside it is the union again, because what the recipe removed was the shared region, and the shared region was inside. A solid can carry a hollow it never shows. The table lets us inspect the answers someone else arranged, and one of them is an answer the list of verbs does not name.
+This is symmetric difference. It composes the familiar verbs instead of adding a new primitive operation. The current table shows the three simpler results. The unplaced recipe leaves a specific possibility to develop: a workbench where combining operations becomes something the visitor can do. For now, the table lets us inspect the answers someone else arranged.
 
 ## A cut changes its company
 
@@ -73,7 +71,7 @@ The failed promise is worth keeping in view. We can understand the operation, re
 
 <!-- @boolean_burrow -->
 
-Go around the stone block; the opening is on the end to your right as you arrive, under the sign TRY THE OPENING. Try the solid wall first, then the gap. The wall stops you. At the opening, the museum floor continues into a low, turning hollow. Follow it far enough to lose the view you had from outside. Then turn and find your way back.
+Go around the stone block to the opening on its left side. Try the solid wall first, then the gap. The wall stops you. At the opening, the museum floor continues into a low, turning hollow. Follow it far enough to lose the view you had from outside. Then turn and find your way back.
 
 Eleven overlapping cuts follow a seeded walk through the block. In the original construction they were spherical. The hollows belonged to one connected arrangement, yet a walking body could stall at a raised lip between them. Two regions can meet without providing the floor that a particular body needs.
 
@@ -119,7 +117,9 @@ Look back toward the burrow. Related operations have produced two different rela
 
 <!-- @booleanvariations -->
 
-The rack gathers seventy-five small combinations in a three-dimensional array. A handleable scale and repeated frames suggest a collection you could take apart in your hands. The rack's objects do not take a hand. Here too, an appearance has offered an action that the implementation withholds, so the collection keeps the order someone gave it, and we move around it while its objects keep their places.
+The rack gathers seventy-five small combinations in a three-dimensional array. A handleable scale and repeated frames suggest a collection you could take apart in your hands. The current rack's objects do not retain the normal pickup behavior. Here too, an appearance has offered an action that the implementation withholds.
+
+That makes a precise unfinished task. If handling became possible, we could turn one result away from its neighbours, carry it to another comparison, and bring it back. The collection would acquire another order through a visitor's attention. For now, we move around it while its objects keep their places.
 
 ## What the picture can settle
 
@@ -127,10 +127,10 @@ The rack gathers seventy-five small combinations in a three-dimensional array. A
 
 The amber-and-blue diagram returns at the back wall. It gives a stable image to a competition between surfaces. In the gallery, we could compare its account with the mechanism drawing the stripes. Here it stands among objects whose accounts also need another kind of evidence.
 
-An outside photograph can show an entrance. It cannot establish the route a particular body will find beyond it. From outside, a wall with returning walls looks much like a wall without them; the inside only shows itself to a body that goes round. A visitor might instead find somewhere to be out of sight.
+An outside photograph can show an entrance. It cannot establish the route a particular body will find beyond it. The museum's earlier image comparisons scarcely registered the addition of returning walls: from outside, little appeared to change. A visitor might instead find somewhere to be out of sight.
 
 In the burrow, the cutters kept their centres while a changed profile made a walk possible. The old description, *connected*, remained true. We had to ask what connection would mean for the body arriving there.
 
 Keep the signs that overpromise in view. They tell us where the desire for a room arrived before its floor, contact rules or entrance. The next construction can take that desire seriously. Sometimes a different cut lets the body arrive too.
 
-In the next hall many small bodies lay a trace in the ground and follow it. The question moves from what a hollow permits one body to what a shared ground permits many.
+In Swarm Intelligence, many bodies will follow local rules at once. Their movements will make relations that no single body can supply. Carry the question of accommodation with you: what space becomes possible among them?

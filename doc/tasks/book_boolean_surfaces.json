@@ -132,7 +132,7 @@
       "proposal": "As proposed, but moving two removal rooms to row 27 turns the chapter's 'Twenty-four objects in six rows' into seven rows; either change that count or keep all four in row 23 at cols 1 and 15 (x -1.7..3.7 / 12.3..17.7 exceed the 17-wide floor), so the row-27 split plus a rewrite of 'six rows' is the honest version.",
       "evidence": "commons/maps/Boolean_Gallery/map_data.json layers.interactables rows 15 and 23; commons/artifacts/removal_room/removal_room.gd:255 (PITCH 1.75), :274 (SHELL_W 5.35); commons/artifacts/registry/removal_room.json measurements.aabb_size [5.41, 1.64, 1.145]; commons/artifacts/registry/subtraction_suite.json measurements.aabb_size [2.88, 1.58, 1.0]; no use_collision/StaticBody in either script; commons/grid/GridInteractablesComponent.gd:1125 (cell x -> world x)",
       "review": "amended by a code checker (cited files only): Map row 23 = removal_room at cols 4,6,10,12; row 15 = subtraction_suite at cols 2,7,9,14 (Boolean_Gallery/map_data.json, width 17 so the aisle is col 8). removal_room.gd:255 PITCH 1.75, :249 N_REG 3, :274 SHELL_W = 5.35; registry aabb [5.41,1.64,1.145] (note: 'computed_from_geometry', not a Godot measurement) and subtraction_suite [2.88,1.58,1.0] measured. No collision/StaticBody in either .gd or .tscn. GridInteractablesComponent.gd:1125 world x = x*total_size. Row 27 is empty in the map (depth 32).",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): a layout decision (row 27 or not; 'six rows' vs 'seven'); not made in this pass.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -143,9 +143,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Boolean_Verbs"
       ],
@@ -160,7 +160,7 @@
       "proposal": "Add `\"piers\": false` to Boolean_Verbs map_info.museum (beside wall_height 3, as Boolean_Works already does) and re-run `python tools/em_map_halls.py --apply`.",
       "evidence": "tools/em_map_halls.py:278, :438-456; ada_run/em_plan.json plans[137].tile rows 7, 15, 23 (`4141114111414`); commons/artifacts/the_argument_of_solids/the_argument_of_solids.gd:86 (slab 4.8 x 0.1 x 2.5 at the origin) with the token at cell (4,22); commons/maps/Boolean_Works/map_data.json map_info.museum.piers false",
       "review": "confirmed by a code checker (cited files only): Boolean_Verbs map_info.museum is {wall_height:3, gate_depth_rows:0} with no piers key; em_map_halls.py:278 reads piers default True and :438-456 stamps rows 3,7,11,... cols 2,6,10 skipping only a 3x3 around token cells. ada_run/em_plan.json plans[137] (Boolean_Verbs) carries dressing 'piers: template colonnade x15 (bare map)' and rows 7/15/23 read 4141114111414, i.e. piers at (6,7),(6,15),(6,23) on col 6 where csg_union_demo (6,4), csg_intersection_demo (6,12), csg_difference_demo (6,19) stand, and (2,23),(6,23) beside the_argument_of_solids at (4,22) whose _build_chamber slabs 4.8 x 0.1 x 2.5 at the origin (.gd:86). Boolean_Works already sets piers:false. Caveat: em_plan.json is a derived cache, but the code path and the map_info reproduce it.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: MAP EDIT - \"piers\": false added to Boolean_Verbs map_info.museum (tree + a blob staged against HEAD, whose copy had no museum block; the tree's 20 Sept reindent stays uncommitted). em_map_halls.py --apply NOT run (the plan is derived); run it to restamp.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -171,9 +171,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Boolean_Gallery"
       ],
@@ -188,7 +188,7 @@
       "proposal": "Add `\"museum\": {\"piers\": false}` to Boolean_Gallery map_info and re-apply; do this together with the re-spacing so one apply covers both.",
       "evidence": "ada_run/em_plan.json plans[138].tile rows 23 (`4141A1A111A1A1414`) and 27; tools/em_map_halls.py:441-456; commons/artifacts/registry/removal_room.json measurements.aabb_size; memory feedback_colonnade_knows_a_body_by_one_cell",
       "review": "confirmed by a code checker (cited files only): em_plan plans[138] tile row 23 = piers at cols 2 and 14, row 27 at cols 2/6/10/14 (dressing 'piers: template colonnade x6 (bare map)'). Boolean_Gallery map_info has no 'museum' key. em_map_halls.py:441-456 stamps on the 4-beat unless (c,r) is within one cell of a body cell, so (2,23) two cells from the removal_room at (4,23) is stamped. removal_room aabb_size 5.41 m -> col 4 spans x 1.3-6.7, col 12 spans 9.3-14.7; both piers land inside a shell. Side note outside this task: the map places FOUR removal_rooms (cross/gasket/third/figure at cols 4,6,10,12) while final.md:85 says 'three accounts'; and the col-4 and col-6 shells (1.3-6.7 vs 3.3-8.7) overlap each other, which is the re-spacing the proposal mentions.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: MAP EDIT - \"museum\": {\"piers\": false} added to Boolean_Gallery map_info. em_map_halls.py --apply NOT run; run it to restamp.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -199,9 +199,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Boolean_Works"
       ],
@@ -216,7 +216,7 @@
       "proposal": "Rewrite as a body instruction that cannot be mirrored: 'Go around the stone block; the opening is on the end to your right as you arrive, under the sign TRY THE OPENING.'",
       "evidence": "commons/artifacts/boolean_burrow/boolean_burrow.gd:141 (label at -block_size.x*0.5 - 0.15), :161 (walk starts at -half.x + inset); commons/grid/GridInteractablesComponent.gd:1125 (z = row * total_size); commons/maps/Boolean_Works/map_data.json spawn (8,1), burrow (8,22) rotation 0; plan row rotation 0",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Go around the stone block; the opening is on the end to your right as you arrive, under the sign TRY THE OPENING.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -227,9 +227,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Boolean_Verbs"
       ],
@@ -244,7 +244,7 @@
       "proposal": "After 'Its order decides whose region may remain and whose will do the cutting', add a short paragraph: the seam plate (a cut invents edges neither solid had; the next hall holds this still in amber and blue) and the last vitrine (a block minus the places you can stand, which is where the hall after next begins). Let the closing sentence point at the building rather than at 'several versions' alone.",
       "evidence": "commons/artifacts/the_argument_of_solids/the_argument_of_solids.gd:156-179 (_build_tree), :181-198 (_build_seam), :200-211 (_build_debt), :213-239 (_build_architecture), :250-251 (plaque: 'the last vitrine is a building, which is a block minus the places you can stand')",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: a paragraph on the seam plate (edges neither solid had; the next hall's amber and blue) and the building vitrine (a block minus the places you can stand; the hall after next); the closing sentence points at the building.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -272,7 +272,7 @@
       "proposal": "Rotate the three fronted rows 180 (`coincident_face:180:0#separation:...`, `subtraction_suite:180:0#breach:...`, `removal_room:180:0#subtraction:...`), and the coincident_face at (13,39) in Boolean_Works, which currently faces the back wall; re-apply.",
       "evidence": "algorithms/booleansurfaces/coincident_face/coincident_face.gd:274 (backing at z -0.016), :340 (tags at z +0.02); commons/artifacts/subtraction_suite/subtraction_suite.gd (board.position z -0.30 in _build_operator); commons/artifacts/registry/removal_room.json measurements.source ('cornice back -0.645 ... CELL front +0.50'); commons/grid/GridUtilitiesComponent.gd:366 (row -> +z); commons/maps/Boolean_Verbs/map_data.json (6,12) `csg_intersection_demo:180:0.5#forfeit:numeral`",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): rotating three fronted rows and the Works coincident_face by 180 wants a headset look before it is made; the evidence is strong (backing z -0.016, tags +0.02, the author's own :180 on csg_intersection_demo).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -283,9 +283,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Boolean_Works"
       ],
@@ -300,7 +300,7 @@
       "proposal": "Say what the visitor can test: 'From outside, a wall with returning walls looks much like a wall without them; the inside only shows itself to a body that goes round.'",
       "evidence": "commons/artifacts/boolean_burrow/boolean_burrow.gd:64-68 (the 4.372% measurement); commons/artifacts/registry/boolean_burrow.json dna.predicted_degeneracy.note",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'From outside, a wall with returning walls looks much like a wall without them; the inside only shows itself to a body that goes round.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -311,9 +311,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Boolean_Works"
       ],
@@ -328,7 +328,7 @@
       "proposal": "Tune the closing sentences to what the next hall delivers: 'In the next hall many small bodies lay a trace in the ground and follow it. The question moves from what a hollow permits one body to what a shared ground permits many.'",
       "evidence": "commons/maps/SwarmIntelligence_PhysarumColony/final.md lines 3, 13-15 ('This is environmental memory... The earlier emergence rooms'); commons/maps/Boolean_Works/final.md line 136",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'In the next hall many small bodies lay a trace in the ground and follow it. The question moves from what a hollow permits one body to what a shared ground permits many.' Physarum's opening (edited today) picks it up.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -339,9 +339,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Boolean_Works"
       ],
@@ -356,7 +356,7 @@
       "proposal": "Change the token to `csg_compose_workbench:0:0#algebra:complete` and rewrite the paragraph around the fifth solid (composed from the verbs, not added to them), keeping the sentence that the visitor still cannot pick up or compose.",
       "evidence": "algorithms/boolean_surfaces/csg_compose_workbench.gd:47 (complete adds the symmetric difference), :85-89 (ALGEBRAS, export default triad), :244 (\"complete\" branch); commons/maps/Boolean_Works/map_data.json row 3 col 4 bare token; commons/artifacts/registry/boolean_surfaces.json csg_compose_workbench.dna.note",
       "review": "confirmed by a code checker (cited files only): csg_compose_workbench.gd:47 comment 'complete adds the symmetric difference'; :85-89 ALGEBRAS + export default 'triad'; :244 the 'complete' branch returns [u,n,d,r,x]. Map Boolean_Works interactables row 3 col 4 is the bare token 'csg_compose_workbench'. Registry dna.axes.algebra lists complete. The key is honoured: :146-147 reads meta config_algebra, so '#algebra:complete' reaches the code. final.md:17 carries the quoted sentence.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: MAP EDIT - csg_compose_workbench -> csg_compose_workbench:0:0#algebra:complete (tree + blob against HEAD; the tree's 20 Sept reindent stays uncommitted). Chapter rewritten around the fifth solid: five presets; from outside it is the union again because the removed region was inside.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -367,9 +367,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Boolean_Works"
       ],
@@ -384,7 +384,7 @@
       "proposal": "Keep the observation in each ('an appearance has offered an action that the implementation withholds') and cut the task framing, about 120 words across the two sections.",
       "evidence": "commons/maps/Boolean_Works/final.md lines 17 and 120-122; word counts: Boolean_Works 1710, ISO_RhizomeBody 423, SwarmIntelligence_PhysarumColony 409 (prose, code and anchors excluded)",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the task framing cut from the workbench and rack passages (the workbench passage rewritten with .009); the observation kept.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -412,7 +412,7 @@
       "proposal": "Remove the DirectionalLight3D (the live fault) and the empty WorldEnvironment node from the .tscn; note six placements, not four, all lit by their own halls.",
       "evidence": "algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.tscn:8-12; commons/artifacts/registry/vectors.json sphere_splitting_showcase.dna.harness_note ('SEPARATE FINDING, not repaired here: this token is a full test SCENE - it carries its own DirectionalLight3D, WorldEnvironment')",
       "review": "amended by a code checker (cited files only): sphere_splitting_showcase.tscn:8-10 DirectionalLight3D with shadow_enabled = true; :12 WorldEnvironment node, but load_steps=2 with no Environment resource: the WorldEnvironment carries a null environment and overrides nothing. GridInteractablesComponent._suppress_embedded_chrome (:1114-1122) hides only CanvasLayer and Camera3D, so the light survives placement. vectors.json harness_note quoted correctly. The token is placed in six maps (Boolean_Works, Corridor_ForcesArena, Curation_Bay_forces_6, ForcesArena, Forces_Destruct, Ribbon_Forces_04), not four.",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): a scene change (DirectionalLight3D + empty WorldEnvironment in sphere_splitting_showcase.tscn) that changes the lighting of six halls; its own commit.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -423,9 +423,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Boolean_Verbs"
       ],
@@ -440,7 +440,7 @@
       "proposal": "Add `# The Three Verbs` to Boolean_Verbs/final.md, `# Where the Variants Stand` to Boolean_Gallery/final.md and `# When the Negative Gets Big` to Boolean_Works/final.md.",
       "evidence": "commons/maps/ISO_RhizomeBody/final.md:1, commons/maps/SwarmIntelligence_PhysarumColony/final.md:1 (H1 openings); map_info.title in the three map_data.json files; H1 count measured over the 24 spine sequences' final.md files",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: '# The Three Verbs', '# Where the Variants Stand', '# When the Negative Gets Big'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -468,7 +468,7 @@
       "proposal": "Give each sign its bay's word (e.g. `3t:A_UNION_B`, `3t:A_INTERSECTION_B`, `3t:A_MINUS_B`) or delete the cells.",
       "evidence": "commons/grid/GridUtilitiesComponent.gd:10 (DEFAULT_TEXT_DISPLAY), :964-966; commons/maps/Boolean_Verbs/map_data.json utilities (1,3), (1,11), (1,18); Boolean_Gallery utilities col 1 rows 2, 6, 10, 14, 18, 22; Boolean_Works utilities (1,2), (1,7); commons/scenes/mapobjects/word_is.gd:9 ('The grid has three ways to write text and the museum sees NONE of them')",
       "review": "confirmed by a code checker (cited files only): Verbs utilities: bare '3t' at (1,3),(1,11),(1,18); Gallery col 1 rows 2,6,10,14,18,22; Works (1,2),(1,7) - eleven in total, none with a message. GridUtilitiesComponent.gd:10 DEFAULT_TEXT_DISPLAY = 'A POINT IS ENTROPY THAT HAS COOLED INTO MEMORY.' and :964-966 returns it when parameters are empty. word_is.gd:9 confirms the museum never reads layers.utilities, so this bites only in the grid/desktop lane.",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): eleven bare 3t cells; the words are a design choice (3t:A_UNION_B, 3t:A_INTERSECTION_B, 3t:A_MINUS_B suggested); grid/desktop lane only.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -496,7 +496,7 @@
       "proposal": "Walk it in the headset; if the rack drifts, set `freeze = true` on the wrapper (the mode is already kinematic) or size the collision box to the object (scale_factor 0.1).",
       "evidence": "algorithms/primitives/booleans/booleanvariations.gd:4-5 (grid 3x5x5, spacing 0.4), :580-586 (RigidBody settings, 'Don't freeze completely'), :606-609 (BoxShape3D 2.0 m), :613-632 (XRToolsPickable script replaced, so no pickup, as the chapter says)",
       "review": "unverifiable by a code checker (cited files only): Every code fact holds: grid 3x5x5 at spacing 0.4 (:4-5); wrapper gravity 0, damp 5, freeze_mode KINEMATIC but freeze never set (:580-586); BoxShape3D 2.0 m (:606-609); XRToolsPickable script replaced by a stability script (:613-632). Two additions: grab_cube inherits pickable.tscn with collision_layer 4 and collision_mask 196615 (bit 4 included), so the wrappers DO collide with one another; and only the CSG combiner is scaled by 0.1 (:112), the 2 m collision box on the wrapper is unscaled. Whether the physics actually scatters the rack in the running scene still needs a walk.",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): needs a Godot run or a headset walk to see whether the rack drifts; the sentence stands as written.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     }
