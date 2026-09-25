@@ -59,4 +59,4 @@ That is the chapter's argument at its most literal. Nobody drew the amphora. Som
 
 Next: a balance written into the relations between parts. How can we tell an encoded equilibrium from a form that has physically found one?
 
-[^verlet]: Loup Verlet, [“Computer Experiments on Classical Fluids. I”](https://journals.aps.org/pr/abstract/10.1103/PhysRev.159.98) (1967). The bench adds distance-constraint corrections to its position update; those corrections and their pass budget are part of this implementation. The corrections are younger than the integrator: Thomas Jakobsen, "Advanced Character Physics" (2001), is where game cloth and ragdolls learned to satisfy their distances by relaxation, pass after pass, and this bench's pass budget descends from it.
+[^verlet]: Loup Verlet, [“Computer Experiments on Classical Fluids. I”](https://journals.aps.org/pr/abstract/10.1103/PhysRev.159.98) (1967). The bench adds distance-constraint corrections to its position update; those corrections and their pass budget are part of this implementation.

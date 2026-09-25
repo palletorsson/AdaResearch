@@ -20,7 +20,7 @@ var keep: bool = top and (mode == 0 or (mode == 1 and absf(absf(verts[i].x) - xm
 sb.set_point_pinned(i, keep)
 ```
 
-`verts` is the strip's own rest geometry, in its own coordinates. `ymax` is the highest value in it. A point is held if its height matches that top to within a hundredth of a metre — eight points of the hundred and twelve in each strip. The hundred and twelve are tied by the edges of the strip's own triangles: to the neighbour across, the neighbour below, and one neighbour on the diagonal. That third tie is why a strip can swing without shearing into a parallelogram; a net of squares would. The frame is not consulted, because the frame is not a party to the arrangement. It was built for you.
+`verts` is the strip's own rest geometry, in its own coordinates. `ymax` is the highest value in it. A point is held if its height matches that top to within a hundredth of a metre — eight points of the hundred and twelve in each strip. The frame is not consulted, because the frame is not a party to the arrangement. It was built for you.
 
 A convincing support does not prove how a simulation is attached to it. You have just taken the support away and watched the attachment survive it.
 

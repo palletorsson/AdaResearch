@@ -704,9 +704,9 @@
       "effort": "10min",
       "skill": "ada-humanizer",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Relaxation"
       ],
@@ -721,7 +721,7 @@
       "proposal": "Extend the [^verlet] footnote: 'The corrections are younger than the integrator: Thomas Jakobsen, \"Advanced Character Physics\" (2001), is where game cloth and ragdolls learned to satisfy their distances by relaxation, pass after pass, and this bench's pass budget descends from it.'",
       "evidence": "commons/maps/FormFinding_Relaxation/final.md ([^verlet]); commons/artifacts/verlet_workbench/verlet_workbench.gd:7-13; natureofcode.com/physics-libraries/ 'A Brief Interlude: Integration Methods' (Jakobsen)",
       "review": "by hand: NOC ch. 6 read in full; cited files read",
-      "notes": "",
+      "notes": "Applied 2026-09-25: Jakobsen (2001) added to the [^verlet] footnote (Relaxation).",
       "source": "Nature of Code ch. 6 reading, 25 Sept (doc/book/readings/NOC_softbodies_2026-09-25.md)",
       "created_at": "2026-09-25",
       "triage": null,
@@ -736,9 +736,9 @@
       "effort": "10min",
       "skill": "ada-humanizer",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Catenary"
       ],
@@ -753,7 +753,7 @@
       "proposal": "After the quoted sentence: 'The bench in the next hall could supply it: a row of its particles hung from two points, corrected toward their rest lengths pass after pass, would settle into this curve without being told cosh. That is the difference this room has been drawing - a curve evaluated, and a curve arrived at.'",
       "evidence": "commons/maps/FormFinding_Catenary/final.md; commons/maps/FormFinding_Relaxation/final.md; commons/artifacts/verlet_workbench/verlet_workbench.gd; natureofcode.com/physics-libraries/ Example 6.12 'Soft Swinging Pendulum'",
       "review": "by hand: NOC ch. 6 read in full; cited files read",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the bench next door could hang the chain the cable only draws, after \"constructed from chosen formulas\" (Catenary).",
       "source": "Nature of Code ch. 6 reading, 25 Sept (doc/book/readings/NOC_softbodies_2026-09-25.md)",
       "created_at": "2026-09-25",
       "triage": null,

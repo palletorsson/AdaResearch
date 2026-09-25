@@ -16,10 +16,8 @@ The gallery applies each named cell's settings on top of these defaults. Optiona
 
 HOLD pins the current vertices. RELEASE restores the pins recorded before that hold. Neither action retrieves an untouched original body. GROUP opens another set of encounters; the study disables automatic respawning and ongoing deflation so that bodies do not multiply while you are trying to inspect one.
 
-The most interesting result may be an awkward fold that a smooth rendering would conceal. Hold it and move around it. Ask which part is an effect of contact, which part comes from the triangulation, and which part depends on the solver's finite effort.[^effort] Those are invitations to further experiments, not conclusions available from a single silhouette.
+The most interesting result may be an awkward fold that a smooth rendering would conceal. Hold it and move around it. Ask which part is an effect of contact, which part comes from the triangulation, and which part depends on the solver's finite effort. Those are invitations to further experiments, not conclusions available from a single silhouette.
 
 The array is useful because it holds differences near each other. It becomes misleading if proximity is mistaken for a controlled comparison. The next hall turns that problem toward time: when we keep a shape, what have we selected from the event?
 
 <!-- @ -->
-
-[^effort]: Five passes over every spring, every physics tick, for every body in this sequence. The bench in Form Finding put that count on a dial and read the error it leaves: at one pass the worst spring in a cloth was a third off its length; at four, a tenth.

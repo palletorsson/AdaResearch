@@ -18,8 +18,6 @@ The branching study and field sculpture remain nearby, so the new capability can
 
 <!-- @frozen_glass_vessel -->
 
-You have met this vessel before. In Form Finding it stood beside the cloth bench as a fossil of forces, two hundred steps of the bench's own solver. Here it has grown two controls, and the question has moved from what a budget leaves to what a chosen duration keeps.
-
 The glass vessel has already stopped. Its program begins with a sphere, pins an upper region and runs a custom soft-body simulation for a chosen number of steps. It then builds a surface from the resulting positions.
 
 ```gdscript

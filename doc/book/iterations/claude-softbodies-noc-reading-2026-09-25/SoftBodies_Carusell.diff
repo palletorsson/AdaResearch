@@ -1,0 +1,11 @@
+--- before/SoftBodies_Carusell.md
++++ after/SoftBodies_Carusell.md
+@@ -2,7 +2,7 @@
+ 
+ <!-- @revolving_joy_ride -->
+ 
+-Stand where you can see the hub and the hanging bodies together. The ring turns because its angle is advanced by the program. The joints and deforming bodies respond to a support whose motion has already been prescribed.
++Stand where you can see the hub and the hanging bodies together. The ring turns because its angle is advanced by the program. The joints and deforming bodies respond to a support whose motion has already been prescribed. The joints are hinges: pins of no length that let each link swing about a point on the one above it. The hub is different in kind. It is a body the solver may not push: its angle is written each step, and nothing the hanging bodies do reaches it. So the teardrops report the ride, and the ride never reports them.
+ 
+ Lower the SPEED. Then REVERSE it. Do the bodies immediately take up the new arrangement? STOP sets the angular rate to zero, but it does not erase velocity, gravity or contact. The support can stop commanding a new angle while its consequences continue.
+ 

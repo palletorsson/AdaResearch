@@ -55,8 +55,6 @@ The screen has no compatible live measurement from these objects. Its scanner ne
 
 A real chain can move, overshoot and settle after an end is displaced. A film has a history too. The equilibrium equation describes a possible settled condition; it does not erase the time needed to reach it. In this room that time is absent for another reason: the laundry curves and surface meshes are constructed from chosen formulas.
 
-The bench in the next hall could supply it: a row of its particles hung from two points, corrected toward their rest lengths pass after pass, would settle into this curve without being told `cosh`. That is the difference this room has been drawing, a curve evaluated and a curve arrived at.
-
 This is still a powerful way to make form. The boundary, the formula, the sampling and the drawing each decide something. The calculus of variations asks what makes a shape stationary under allowed changes. Our objects let us approach that question, and also ask which changes their code has allowed us to make.
 
 Next: what happens when the solving has to be done in steps after all, by a machine with a frame budget.
