@@ -22,7 +22,7 @@ Try TURN. The detours go to the other side. The count and path length survive th
 
 RESET, then FORM. A triangle closes the starting line into a boundary. NEXT sends its peaks outward; TURN folds them inward. There is an inside to negotiate now. An instruction about direction has become a decision about where an enclosure extends.
 
-Our machine stops at four replacements. The familiar Koch limit follows the standard construction indefinitely; its boundary has unbounded length while enclosing a bounded area.[^1] This desk has finite segments drawn with thickness. We can learn the rule that approaches the limit without pretending the headset contains it. From the trace hall in the first sequence we still carry a question: how much of the next detail could this encounter distinguish?
+Our machine stops at four replacements. The familiar Koch limit follows the standard construction indefinitely; its boundary has unbounded length while enclosing a bounded area.[^1] This desk has finite segments drawn with thickness. We can learn the rule that approaches the limit without pretending the headset contains it. From Trace we still carry a question: how much of the next detail could this encounter distinguish?
 
 <!-- @sierpinski_triangle -->
 
@@ -59,8 +59,7 @@ Here is the counting decision:
 ```gdscript
 var ix := int(shifted.x / box_size)
 var iz := int(shifted.z / box_size)
-var key := ix * 10000 + iz
-occupied[key] = true
+occupied[ix * 10000 + iz] = true
 ```
 
 The key gives this cell an address. Writing it again does not create another occupied cell. Arrays and grids have returned as a measuring instrument.

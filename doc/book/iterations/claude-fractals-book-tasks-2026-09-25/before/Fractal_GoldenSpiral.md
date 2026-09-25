@@ -26,18 +26,16 @@ fibonacci_numbers.append(next_fib)
 The display receives a value and gives it a height:
 
 ```gdscript
-var h: float=0.05*n if linear else 0.5*log(float(n))+0.5
+var h = 0.05 * value
+# or
+var h = 0.5 * log(float(value)) + 0.5
 ```
 
-HEIGHT flips `linear`; the recurrence above never sees it. There are two decisions here. We can change the representation without changing the relation it represents. We can also lose sight of a small value without removing it from the sequence. The label and the alternative view let us find that difference again.
+There are two decisions here. We can change the representation without changing the relation it represents. We can also lose sight of a small value without removing it from the sequence. The label and the alternative view let us find that difference again.
 
 Walk around the desk and continue beside the supported displays. The earlier examples remain: seed points, stacked scales, shell-like chambers, a helix and a branching diagram. They are held still here so their arrangements can be inspected. Read one of their small plates. The seed pattern uses an index to choose a radius and an angle. The branching diagram uses a remainder after division to choose how many children to make. These are further rules.
 
 The helix is especially useful to look at twice. Its radius grows by phi over a full turn. A curve usually called a golden spiral grows by phi over a quarter turn. A familiar colour and a persuasive title would not make those constructions identical. The plate names what this source actually draws.
-
-![Plan view of the hall's helix, a golden spiral from the same start, and the rectangle's chain of quarter circles](/book-review/doc/book/figures/fractals/helix-against-golden-spiral.png)
-
-*Left: one full turn from the same start. The hall’s helix grows by phi over the whole turn; a golden spiral grows by phi over each quarter. Right: the rectangle’s arcs, quarter circles of fixed radius, one per square. The hall draws the first and the third; the second exists nowhere in the room.*
 
 The pleasure of recognition can come before the inspection. A shell! A seed head! We can enjoy that resemblance and still ask which operations supplied it. The two ones did not contain instructions to make a flower. We added a way for numbers to take positions, turns and sizes.
 
@@ -68,6 +66,6 @@ The sponge made room by discarding material. This rectangle keeps the pieces tog
 
 In the retained room beyond, the recursive cabinet, growing terrain, Romanesco, aggregation study and sphere remain. The Romanesco's cones inherit positions and turns from their parent cones. Its botanical appearance is a construction to inspect, not proof that a plant follows this code. The terrain and aggregation have their own updates. Let their differences interrupt the temptation to call everything here the same pattern.
 
-Next we gather the procedures. Before naming a desired shape, try saying what one step would receive, retain, change and pass on. After the synthesis hall, a grammar laboratory will give those instructions letters and a reader.
+Next we gather the procedures. Before naming a desired shape, try saying what one step would receive, retain, change and pass on. The next capability will give those instructions a grammar.
 
 [^1]: The numbers are Leonardo of Pisa's, from the rabbit problem in *Liber abaci* (1202), and older than his name for them: Virahanka and Hemachandra had counted the same series for Sanskrit metres centuries before. The ratio the towers approach is Euclid's “extreme and mean ratio”; “golden” is a nineteenth-century word for it.

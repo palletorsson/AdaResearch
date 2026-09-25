@@ -143,9 +143,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Fractal_MengerSponge"
       ],
@@ -160,7 +160,7 @@
       "proposal": "Keep only the headset sentence, in the chapter's own voice: 'Tilt the left controller towards where you want to go and push its stick; let go and you hover. Flight belongs to this enclosure. Descend to either ground doorway when you want to walk again.'",
       "evidence": "commons/movement/museum_flight_provider.gd:22-26 (VR flight reads the left controller's basis and its 'primary' stick; neutral input hovers); commons/movement/museum_flight_box.gd:35-39 (desktop keys are a separate desktop_velocity path) and :105 (the sign already prints both bindings); commons/maps/Fractal_MengerSponge/final.md:27.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Tilt the left controller towards where you want to go and push its stick; let go and you hover. Flight belongs to this enclosure. Descend to either ground doorway when you want to walk again.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -171,9 +171,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Fractal_MengerSponge"
       ],
@@ -188,7 +188,7 @@
       "proposal": "Replace with the body the sponge actually collides with: 'The body the sponge collides with is a capsule 0.4 metres wide whose height follows your head. Flying does not shrink it, and it does not make a retained cube permeable; whether a crouch admits you to a one-metre opening is something to try, not to assume.' Then either test the crouch in the headset or soften 'a smaller, visibly connected opening that refuses this capsule' (line 35) to match.",
       "evidence": "addons/godot-xr-tools/player/player_body.gd:60-69 (player_radius 0.2, player_height_min 0.6, player_height_max 2.5); no player_height_min/max override anywhere under commons/ (grep); commons/artifacts/menger_lesson/menger_lesson.gd:101 (smallest axial opening 9/3^n = 1.0 m at two cuts); commons/movement/museum_flight_provider.gd:26 moves the XRToolsPlayerBody itself; commons/maps/Fractal_MengerSponge/final.md:31,35.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The body the sponge collides with is a capsule forty centimetres wide whose height follows your head. Flying does not shrink it ... whether a crouch admits you to a one-metre opening is something to try, not to assume.' Line 35 softened to 'a standing capsule cannot enter'. The crouch itself not tested.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -255,9 +255,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Fractal_Recursion"
       ],
@@ -272,7 +272,7 @@
       "proposal": "'We met this gap in the first sequence, at the trace hall, where a drawn line kept only the positions its spacing could tell apart: what is stored, what is drawn, and what a body can use do not share a resolution.'",
       "evidence": "commons/maps/sequences/primitives.json:48,120 (Point_Trace is a primitives hall); commons/maps/Point_Trace/final.md:29-41 ('Another resolution, another gesture'; a 0.08 m snap sends different readings to the same address); commons/maps/Fractal_Recursion/final.md:35.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'We met this gap in the first sequence, at the trace hall, where a drawn line kept only the positions its spacing could tell apart: ...'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -283,9 +283,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_EdgeOfChaos"
       ],
@@ -300,7 +300,7 @@
       "proposal": "'The next hall changes the instruction: instead of waiting for local exchanges to assemble a larger resemblance, a procedure explicitly asks for another instance of itself.' (drop the token; the sentence already says what the hall is)",
       "evidence": "commons/maps/CA_EdgeOfChaos/final.md:44; commons/maps/Fractal_Recursion/map_data.json map_info.title 'How many times can again happen?'; the six fractal handovers (e.g. Fractal_RecursiveTrees/final.md:47 'Next comes Cantor') name halls by subject.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The next hall, the first of Fractals, changes the instruction.' (CA_EdgeOfChaos/final.md, committed with the fractals pass; the wording is book_cellularautomata.003's, so that task is satisfied by the same edit).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -311,9 +311,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Fractal_Recursion"
       ],
@@ -328,7 +328,7 @@
       "proposal": "'Press PACKING until the readout says dust. At depth five the fifth ring's requested radius, 2 m times 0.25 four times over, is about eight millimetres, below the source's one-centimetre cutoff, and a whole level is lost.'",
       "evidence": "commons/artifacts/recursion_lesson/recursion_lesson.gd:21 (keys MORE, LESS, PACKING, TURN, BEGIN, RULE) and :153-155 (PACKING cycles the four values); algorithms/fractals/example_8_3_recursion_circles_vr.gd:70 (PACKING_R dust 0.25), :87 (start radius 2.0) and :191 ('if level <= 0 or radius < 0.01: return'); commons/maps/Fractal_Recursion/final.md:33.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Press PACKING until the readout says dust, then ask for depth five: the fifth ring's requested radius, two metres times 0.25 four times over, is about eight millimetres, below the source's one-centimetre cutoff, and a whole level is lost.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -339,9 +339,9 @@
       "effort": "half-day",
       "skill": "design",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Fractal_GoldenSpiral"
       ],
@@ -356,7 +356,7 @@
       "proposal": "One figure after this paragraph: plan view of the hall's helix (r = 0.1 phi^(theta/2pi)), a true golden spiral from the same start (r proportional to phi^(2 theta/pi)) over one turn, and the rectangle's quarter-circle chain as a third line; caption names which of the three the hall actually draws.",
       "evidence": "algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd:114-121 ('current_radius = radius * pow(golden_ratio, angle / (2 * PI))'); algorithms/fractals/golden_rectangle/golden_rectangle.gd:362-388 (quarter-circle arcs); commons/maps/Fractal_GoldenSpiral/map_data.json interactables list holds no other spiral work; 28 spine chapters carry images, 0 of the fractal chapters (grep '![').",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: FIGURE drawn with matplotlib (doc/book/figures/fractals/helix-against-golden-spiral.png): helix r = 0.1 phi^(theta/2pi) and golden spiral r = 0.1 phi^(2 theta/pi) over one turn, plus the Fibonacci quarter-circle chain; end radii and arc chaining asserted; caption names which the hall draws.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -367,9 +367,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Fractal_KochSierpinski"
       ],
@@ -384,7 +384,7 @@
       "proposal": "'From the trace hall in the first sequence we still carry a question: how much of the next detail could this encounter distinguish?' (same wording as the Fractal_Recursion fix)",
       "evidence": "commons/maps/Fractal_KochSierpinski/final.md:25 versus commons/maps/Fractal_Recursion/final.md:35; commons/maps/sequences/primitives.json:48 (Point_Trace).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'From the trace hall in the first sequence we still carry a question: ...'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -395,9 +395,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Fractal_Synthesis"
       ],
@@ -412,7 +412,7 @@
       "proposal": "'ENDS marks the joint where the trunk hands off and every deepest recorded block.'",
       "evidence": "algorithms/fractals/recursive_tree/recursive_tree.gd:48-49 (apparatus: 'a mark at the fork the trunk hands off to and at every terminal') and :573-582 (AFT_JOINT at trunk_height plus AFT_TERMINAL at deepest tips); commons/artifacts/recursive_tree_lesson/recursive_tree_lesson.gd:72 (ENDS maps to 'apparatus'); commons/maps/Fractal_RecursiveTrees/final.md:39; commons/maps/Fractal_Synthesis/final.md:31.",
       "review": "confirmed by a code checker (cited files only): recursive_tree.gd:573-582 'apparatus' builds marks = [{at: (0, trunk_height - trunk_width/2, 0), c: AFT_JOINT}] plus one AFT_TERMINAL per box at the deepest depth; :48-49 documents it as 'a mark at the fork the trunk hands off to and at every terminal'. recursive_tree_lesson.gd:72 maps ENDS -> 'apparatus'. Fractal_Synthesis/final.md:31 says only 'at the deepest recorded blocks'; Fractal_RecursiveTrees/final.md:39 says 'at the handover and terminal branches'.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'ENDS marks the joint where the trunk hands off and every deepest recorded block.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -423,9 +423,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Fractal_KochSierpinski"
       ],
@@ -440,7 +440,7 @@
       "proposal": "Replace the three-line excerpt with the four source lines: var ix := int(shifted.x / box_size) / var iz := int(shifted.z / box_size) / var key := ix * 10000 + iz / occupied[key] = true.",
       "evidence": "algorithms/fractals/box_counting_dimension/box_counting_dimension.gd:299-302 (the counting path); the merged form appears only in the longhand cover at :557 and stores a Vector2i, not true; commons/maps/Fractal_KochSierpinski/final.md:59-65.",
       "review": "confirmed by a code checker (cited files only): box_counting_dimension.gd:299-302: var ix / var iz / var key := ix * 10000 + iz / occupied[key] = true. The merged form occupied[ix * 10000 + iz] appears only at :557 in the longhand cover and stores Vector2i(ix, iz). Fractal_KochSierpinski/final.md:59-65 prints the three-line merged excerpt followed by 'The key gives this cell an address.'",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the four source lines quoted (var key := ix * 10000 + iz / occupied[key] = true).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -451,9 +451,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Fractal_GoldenSpiral"
       ],
@@ -468,7 +468,7 @@
       "proposal": "Replace the paraphrase with the lesson's line as written and add: 'HEIGHT flips linear; the recurrence above never sees it.'",
       "evidence": "commons/artifacts/golden_mapping_lesson/golden_mapping_lesson.gd:65 (the line) and :97 (HEIGHT toggles linear); algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd:58 (the artifact's own 'var height = log(number) * 0.5 + 0.5'); commons/maps/Fractal_GoldenSpiral/final.md:28-32.",
       "review": "confirmed by a code checker (cited files only): golden_mapping_lesson.gd:65 is exactly 'var h: float=0.05*n if linear else 0.5*log(float(n))+0.5'; :97 '\"HEIGHT\":linear=not linear;_numbers()'. FibonacciSequences.gd:58 'var height = log(number) * 0.5 + 0.5'. final.md:28-32 shows the two paraphrased lines 'var h = 0.05 * value / # or / var h = 0.5 * log(float(value)) + 0.5', neither in source.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the lesson's line quoted as written; 'HEIGHT flips `linear`; the recurrence above never sees it.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -479,9 +479,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Fractal_GoldenSpiral"
       ],
@@ -496,7 +496,7 @@
       "proposal": "'After the synthesis hall, a grammar laboratory will give those instructions letters and a reader.'",
       "evidence": "commons/maps/sequences/fractals.json maps order (Fractal_GoldenSpiral, Fractal_Synthesis, then the lsystems sequence); commons/maps/LSystems_Grammar_Lab/final.md:15 ('We brought a construction out of the fractal halls'); commons/maps/Fractal_GoldenSpiral/final.md:69.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'After the synthesis hall, a grammar laboratory will give those instructions letters and a reader.'",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -754,9 +754,9 @@
       "effort": "1h",
       "skill": "ada-humanizer",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Fractal_Synthesis"
       ],
@@ -771,7 +771,7 @@
       "proposal": "Check the flora builder (algorithms/nature_system, BiomeRingComponent) for what fractal_flora actually grows; then one paragraph: the trees around this hall were grown by a rule too - which of the desks' rules, and what did it inherit that the desks do not show (a seed per plant? light? the ring's own clock?).",
       "evidence": "commons/maps/soft_stages.json 'fractals'; algorithms/nature_system/; natureofcode.com/fractals/ 'The Ecosystem Project'",
       "review": "by hand: NOC chapter read in full; cited files read",
-      "notes": "NOT applied: the endless museum does not stand the biome ring (no BiomeRingComponent in endless_museum.gd; the ring is a GridSystem component, grid lane only), so a museum visitor never walks past the flora. Decide whether the museum should grow the fractals stage before the chapter mentions it. The nature tree IS recursive (TreeGrowthComponent._grow_branch, depth from dna.segments).",
+      "notes": "Applied 2026-09-25: checked - fractal_flora is read by no .gd (ripgrep); the ring's trees come from TreeMorphology (CritterDNA -> L-system via utils/lsystem.gd -> 3D turtle; generations, branches per fork, angle, taper from genes). One paragraph in Fractal_Synthesis before the handover says the ring's rule is the next sequence's grammar, not the desks', with a body per plant.",
       "source": "Nature of Code ch. 8 reading, 25 Sept (doc/book/readings/NOC_fractals_2026-09-25.md)",
       "created_at": "2026-09-25",
       "triage": null,
