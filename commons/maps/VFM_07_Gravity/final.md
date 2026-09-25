@@ -51,7 +51,7 @@ NUDGE prepares a second beginning. Only the last body's X coordinate changes, by
 
 Watch a corresponding pair, then read the displayed difference. It combines the distances between corresponding bodies as a root mean square. In the checked three-body run, three centimetres added to one initial coordinate gave about 7.6 centimetres of this paired difference after four seconds. Reset and compare again. This is a measured departure under specified conditions. A tangled trail alone would not establish chaos, and this short comparison does not establish an exponential rate of separation.
 
-The pair on the first floor had a path that can be written down; the triple does not, and has not since Poincaré showed in 1890 that none can be. That is not the same as saying it has no order: three equal masses can chase one another for ever round a figure-eight, found in 2000.[^three-body] Behind these floors, a sculpture does the same sum for every pair of many bodies, as many pairs as there are bodies squared, which is why simulations of galaxies do not.
+The pair on the first floor had a path that can be written down; the triple does not, and has not since Poincaré showed in 1890 that none can be. That is not the same as saying it has no order: three equal masses can chase one another for ever round a figure-eight, found in 1993 and proved in 2000.[^three-body] Behind these floors, a sculpture does the same sum for every pair of many bodies, as many pairs as there are bodies squared, which is why simulations of galaxies do not.
 
 There are two white crosses now. Moving that one initial coordinate also moved its copy's centre of mass. We did not secretly recentre it. Even an experiment about difference has to decide which differences it will retain.
 
