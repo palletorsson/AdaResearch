@@ -1,0 +1,37 @@
+# What the swarm chapters can learn from *Nature of Code* ch. 5
+
+Read 25 September 2026 against the seven `final.md` of the `swarmintelligence` sequence (3,714 words; Boids is the 24 Sept edges rewrite): PhysarumColony 415 · FlowFields 428 · Boids_Algorithm 890 · Agent_Based_Modeling_ABM 466 · Ant_Colony_Optimization 431 · Particle_Swarm_Optimization 578 · Swarm_Intelligence_Algorithms 506. Source: https://natureofcode.com/autonomous-agents/ (Daniel Shiffman, 2nd ed., ch. 5 "Autonomous Agents", about 18,000 words: Braitenberg and Reynolds, steering = desired − velocity, seek/flee/pursue/arrive/wander, stay-within-walls, flow fields, the dot product and path following, complex systems, separation, combining behaviours, flocking, bin-lattice and quadtree, the Ecosystem Project). Code read: `Boid.gd`, `boid_manager.gd`, `flocking_controls.gd`, `boids_aquarium.gd`, `FlowFieldMain.gd`, `FlowAgent.gd`, `FlowGrid.gd`, `Creature.gd`, `ecosystem.gd`. No agents.
+
+## Where Ada is ahead
+
+NOC's chapter is one class, Vehicle, given desires one at a time until 120 of them flock on a canvas that wraps at its edges without a word said about the wrapping. Ada's seven halls are seven different answers to the sequence's own question, where coordination lives:
+
+- **Three edges, named.** Boids' tank ceiling five centimetres below a rim that is not there, the panel's seam where a boid loses its neighbours without either moving, the open flock's box four times wider than the hall. NOC's flock calls `this.borders()` in its run method and never says what a border does to a neighbourhood.
+- **Field versus agent.** Physarum's agents write the field they then sense; FlowFields' agents receive one prepared for them; the ants' two channels (home trail, food trail) name stigmergy. NOC has flow fields and mentions ants only through Resnick.
+- **The objective is a button.** PSO's CONVERGE/SPREAD/NOVELTY: "best is a relation between a position and an objective." NOC has no optimisation chapter until ch. 9, and there the fitness function is given.
+- **The caretaker is on the record.** Swarm_Intelligence_Algorithms' POPULATION SUPPORT plate counts the prey and predators supplied from outside. NOC's Ecosystem Project never mentions what keeps a simulated ecosystem from dying in the first minute.
+- **Alignment is not consent.** "These agents have no way to refuse a relation, remember harm or ask another agent for space." NOC's vehicles have hopes and dreams and fears, by assertion.
+- **Small things:** the noise field maps noise to ±2 turns (`FlowGrid.gd:158`), so it has none of the leftward lean NOC confesses for its 0..2π mapping; the open flock's three rules are Reynolds's formula to the letter, with `max_force` (`Boid.gd:99-118`); the tank already runs NOC's bin-lattice optimisation as a spatial hash.
+
+## What to learn (ten items)
+
+1. **The steering formula, where the code runs it.** `FlowAgent.gd:28` is `velocity.lerp(desired × speed, 20·dt)`, which is `v + a·(desired − v)`: Reynolds's steering force with a gain and no cap. The FlowFields chapter says the agent "steers towards" the arrow and never says what steering is. NOC's whole conceptual leap is in that subtraction: a force that knows the body's own velocity. "A celestial body doesn't know it is experiencing gravity, whereas a cheetah chasing its prey knows it's chasing." After the forces sequence's `=` versus `+=`, this is the third receiver: push on the difference.
+2. **The wander at zero cells is a fresh random direction every frame.** `FlowAgent.gd:35-38` ("buzz around target") draws a new unit vector each frame. Reynolds's wander seeks a point moving on a circle held ahead of the vehicle — "random steering which has some long-term order" — and NOC quotes him against exactly the per-frame version. Say which one the hall runs and why the agents buzz at the target; the Randomness terrarium will show the contrast again.
+3. **Containment, named.** The open flock's five-metre margin (`Boid.gd:138-150`, a push ramping from zero at the margin to `boundary_force` at the wall) is Reynolds's containment behaviour and NOC's Example 5.3 "stay within walls", whose lesson is why the desired velocity is null away from the wall: a desire for zero speed would be a brake.
+4. **Competition and cooperation, as two more slider experiments.** NOC: alignment and cohesion cooperate, separation competes; "try taking out just the cooperation or just the competition, and you'll see how the system loses its complexity." The chapter has separation winning; it lacks ALIGN and COH to zero (a gas) and SEP to zero (a clot).
+5. **The same scatter is not the same flock.** The tank's RESET deals the same scatter every time (`DEPOSIT_SEED = 1987`), then advances in `_process(delta)`. NOC's nonlinearity paragraph (Lorenz, 1961, 0.506 for 0.506127) is the footnote the chapter's "gives you back your starting point" needs: the start is all that returns. Predicted, to be measured.
+6. **The cost of seeing.** `Boid.gd:77-98` measures every boid against every other: a hundred boids, 9,900 distances a tick. The tank sorts its fish into cells (`boids_aquarium.gd:242, 766`), NOC's bin-lattice (Reynolds 2000), the reason flocks of thousands exist. Gravity's rear sculptures got the same footnote (book_forces.016); the population size is set by this arithmetic.
+7. **Braitenberg.** ABM's "An agent can be a convenient unit without being an adequate model of a person" is Braitenberg's Vehicles (1984): two sensors, two motors, and observers who see fear and love; "uphill analysis, downhill invention." Reynolds's vehicles descend from his; NOC says so. The sequence's warnings about labels (Corporate/Ecological/Artistic, ants to citizens) have a classic source, unnamed.
+8. **What the ecosystem inherits.** `Creature.gd` DNA is five numbers — top speed, turning limit, perception, flee weight, seek weight — and `seek()` is NOC's Vehicle to the letter; `flee` is seek with the sign reversed (NOC Exercise 5.1); `ecosystem.gd`'s own header: "predation IS the selection pressure." The chapter says "traits" and never which. Machine learning, next, opens on what changes across generations; this is its first example and it should be legible.
+9. **Two feedbacks.** Physarum's "Repetition strengthens a route… decay prevents every previous visit remaining equally important" is positive and negative feedback running against each other; NOC lists feedback among the qualities of complex systems. One sentence.
+10. **Path finding is not path following.** NOC insists on the distinction; the hall does both (costs flooded from a target in the route scenes; wind and noise with no target) and the chapter separates them without the names. The hidden-arrows comparison (task .005) will need them: a field computed from a destination carries the destination.
+
+## Not to learn
+
+- The mouse as the universal target; `heading()`; the p5 efficiency tricks (lookup tables, object pooling).
+- Flake's fourth rule, "view" (move laterally away from a boid that blocks the view): an extension, not a lesson.
+- The Ecosystem Project's nested flocks and steering-driven creatures: that is the biome's programme, not the book's.
+
+## Tasks
+
+Ten tasks appended to `doc/tasks/book_swarmintelligence.json` (`.018`–`.027`), source "Nature of Code ch. 5 reading, 25 Sept", shown on `/book-tasks` under swarmintelligence. Not applied. Open decisions .015–.017 (the dead hand, the leaking flock, the CanvasLayer overlay) are untouched.

@@ -178,9 +178,9 @@
       "effort": "half-day",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "WaveFunctions_Unit_Circle"
       ],
@@ -195,9 +195,12 @@
       "proposal": "Code: in _process, keep calling _update_rotator_and_indicators() after `finished` (advance `angle` modulo TAU, stop only the plank building) so the point and rods keep turning while the bridge stays complete. If the freeze is wanted instead, open the chapter on the finished figure, turn the four-position exercise into reading the completed steps, and soften Sine_Space's 'a graph grows beside it'.",
       "evidence": "algorithms/wavefunctions/unit_circle/UnitCircle.gd:85-86 (`if finished: return` runs before _update_rotator_and_indicators()), :106 (`finished = true` at the last sample), :29 rotation_speed 0.8 rad/s and :41 num_cycles 2 (4*pi/0.8 = 15.7 s); no button or panel in the file, only _rebuild_bridge via apply_grid_config (:385); commons/maps/WaveFunctions_Unit_Circle/map_data.json token `unit_circle_advanced:-90:-0.1` sets no buildup; commons/maps/WaveFunctions_Sine_Space/final.md:75.",
       "review": "confirmed by a code checker (cited files only): UnitCircle.gd:85-86 '_process: if finished: return' precedes the :93 call to _update_rotator_and_indicators(); :106 'finished = true' once built_index reaches samples_per_cycle*num_cycles-1, which happens when angle reaches TAU*num_cycles (:89-98); :29 rotation_speed 0.8, :41 num_cycles 2, so 4π/0.8 = 15.7 s. finished is only reset in _rebuild_bridge (:238), reached via apply_grid_config (:385); no button/signal/input handler in the file. Map token at (1,1) 'unit_circle_advanced:-90:-0.1' (registry scene unit_circle.tscn) sets no buildup. Sine_Space/final.md:75 'a graph grows beside it'; Unit_Circle/final.md:7 has the quote and the 'If the drawing has already finished' hedge; wavefunctions.json:312 calls Unit_Circle the sequence's hinge.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nKept the finite graph and made continued circle/projection motion an explicit map option. Other placements retain the old held default. Native museum inspection also exposed the lower semicircle below the floor; raised this placement by 1.7 m and moved it from (1,1) to the empty cell (1,2), clear of the entrance wall. All 400 local step transforms stay unchanged through ongoing motion. The chapter and preceding handoff now distinguish the retained graph from its continuing source.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.397Z"
     },
     {
       "id": "book_wavefunctions.002",
@@ -206,9 +209,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "WaveFunctions_Pendulum"
       ],
@@ -223,9 +226,12 @@
       "proposal": "Move the counting paragraph after 'Press COARSE' (or say 'press COARSE first and count that swing: about fifteen marks'), and keep the FINE gap discussion (16.7 to 33.3 ms) where it is.",
       "evidence": "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd:36-38 (length 2.0, initial_angle 45, damping 0), :54-55 (fine_interval 0.025, coarse_interval 0.2), :411-412 small-angle period 2*pi*sqrt(2/9.8) = 2.84 s (about 2.95 s at 45 degrees); PendulumWave.tscn sets no overrides.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nMoved mark counting after COARSE, when roughly fifteen marks rather than about 118 occupy a full swing. Retained the FINE timing mismatch and the trade between detail and recorded duration.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.430Z"
     },
     {
       "id": "book_wavefunctions.003",
@@ -234,9 +240,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "WaveFunctions_3D_Wave_Propagation"
       ],
@@ -251,9 +257,12 @@
       "proposal": "Write 'press the button captioned SINE; its caption turns to PULSE' and, for the second switch, 'press COUPLED; it now reads INDEPENDENT'.",
       "evidence": "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd:359-360 (ids COUPLING, DRIVE, RESET), :426-427 (`_comparison_labels.COUPLING.text = mode`, `.DRIVE.text = excitation_mode.to_upper()`), :81 `_coupled := true`.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nNamed the captions visible before pressing: SINE becomes PULSE, COUPLED becomes INDEPENDENT, and pressing INDEPENDENT restores COUPLED. Verified real button signals and the same pulse with and without coupling in the museum.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.452Z"
     },
     {
       "id": "book_wavefunctions.004",
@@ -262,9 +271,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Wavefunctions_Sky_Stairs"
       ],
@@ -279,9 +288,12 @@
       "proposal": "Replace with what the visitor can do: 'From the floor you can inspect the sequence and compare the accessible parts; whether the whole spiral would carry a body is not something this view can settle.'",
       "evidence": "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd:12 ('full ascent/headroom/headset comfort [unverified]'); commons/maps/Wavefunctions_Sky_Stairs/map_data.json structure rows 10-12, x=4-7 at height 8 with `sine_cylinder_staircase:0:-2.5` at z=10,x=5; sine_cylinder_staircase.tscn WAVE_AMPLITUDE 0.45 (the breathing radius the chapter describes is real).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nReplaced the maker-facing walking-check note with a concrete distinction: following the spiral from the floor does not establish that a body can complete it. Full ascent and headset comfort remain unverified, recorded here rather than as a production instruction in the chapter.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.470Z"
     },
     {
       "id": "book_wavefunctions.005",
@@ -290,9 +302,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "Wavefunctions_Bernini"
       ],
@@ -307,9 +319,12 @@
       "proposal": "One sentence: the phrase belongs to the vowel board on the wall, not to the shafts; the columns' own sound is a soft chord whose volume follows their rotation.",
       "evidence": "commons/maps/Wavefunctions_Bernini/map_data.json interactables `vowel_sound_board:180:3#say:right here, right now#repeat:true`; algorithms/speech/phoneme_cloud/vowel_sound_board.gd:149-167 (`say` loop `while not is_ambient_enabled: await play_word(...); await create_timer(repeat_interval)`), :66 repeat_interval 3.0; algorithms/wavefunctions/berninicolumns/BerniniColumns.gd:125-137 and :152-179 (AudioStreamGenerator sawtooth, `sample *= 0.1 * rotation_speed`).",
       "review": "amended by a code checker (cited files only): Wavefunctions_Bernini/map_data.json interactables: (12,7) `vowel_sound_board:180:3#say:right here, right now#repeat:true`, bernini_columns at (6,7). vowel_sound_board.gd:66 repeat_interval 3.0; :149-167 `say` sets is_ambient_enabled=false, strips punctuation and spaces, then `while not is_ambient_enabled: await play_word(cleaned); await create_timer(repeat_interval)`. BerniniColumns.gd:125-137 AudioStreamGenerator autoplay; :164-179 an 8-note D-major chord: sawtooth-ish wave then `wave = abs(wave) * 2.0 - 1.0` ('Soften it to triangle'), `sample *= 0.1 * rotation_speed`. final.md:17 has the quoted sentence. That the voice is the 'loudest' sound in the hall needs a walk.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nRestored the separate wall voice attempting “right here, right now”. Distinguished it from the column hum whose level follows rotation speed. The loop pauses three seconds after a phrase; the review’s claim of a phrase every three seconds was too exact. No recorded listening test claimed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.494Z"
     },
     {
       "id": "book_wavefunctions.006",
@@ -318,9 +333,9 @@
       "effort": "half-day",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "WaveFunctions_Synthesis_Lab"
       ],
@@ -335,9 +350,12 @@
       "proposal": "Cut the room passage to its three moves (RECORD, NEXT PASS, HEAR ORIGINAL; about 300 words), keep both footnotes, and spend the saved space on the bench's coda (repeating a recipe against repeating an instant); or promote the room to its own H2 pair with a real return. Either way say that ENTER ROOM leaves the hall and BACK TO HALL brings you back.",
       "evidence": "commons/maps/WaveFunctions_Synthesis_Lab/final.md lines 62-94 (the @ambient_patch region), 1,690 words total; commons/maps/sequences/wavefunctions.json:33 and :47 (objective and content line for the hall); commons/artifacts/ambient_patch/ambient_patch.gd:132-134 and ambient_room_travel.gd:3-4, :6-16 (load_scene / change_scene_to_file to room_memory.tscn, MUSEUM const for the way back); commons/artifacts/ambient_patch/room_memory.gd:146 (BACK TO HALL), :90-99 (ExitDoor).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nKept the substantial Lucier encounter, gave the bench and return their own headings, and stated that ENTER ROOM leaves the hall. The longer return compares feedback with calculating a sum afresh. HOLD/BASELINE/fifth-slider signals reproduce restoration at a held phase; BASELINE does not rewind time. Travel wiring was inspected, not an end-to-end scene-return or microphone acceptance test.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.541Z"
     },
     {
       "id": "book_wavefunctions.007",
@@ -346,9 +364,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "WaveFunctions_Effect_Sound"
       ],
@@ -363,9 +381,12 @@
       "proposal": "Either 'Two rooms on, in AirMusic, a strike will ...' or drop the AirMusic sentence and end on Bernini's question.",
       "evidence": "commons/maps/sequences/wavefunctions.json:55-58 (maps order); commons/maps/Wavefunctions_Bernini/final.md:21 (hands to chance); commons/maps/WaveFunctions_John_Cage/final.md:21 (hands to Air Music).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nRemoved the premature AirMusic handoff. Effect Sound now leads directly into Bernini, as the sequence does.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.566Z"
     },
     {
       "id": "book_wavefunctions.008",
@@ -374,9 +395,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "WaveFunctions_Sine_Space"
       ],
@@ -391,9 +412,12 @@
       "proposal": "'Enter at the mouth where the panel stands, the end nearest the tray' and 'the small case beside the tray's desk'; in Pendulum, 'the walkway across from the sampler panel'; in Synthesis, 'the bench with the dark board above it'.",
       "evidence": "commons/grid/UtilityRegistry.gd:45-50 (`s` spawn optional; absent, the player is placed at the centroid of floor cells) and :64-70 (`sp` = score cube); commons/maps/WaveFunctions_Sine_Space/map_data.json utilities carry `sp` at z=7,x=1 and no `s`; algorithms/wavefunctions/sine_wall/SineWallCorridor.gd:46-47 (panel beside the -Z mouth) with the token `sine_wall_corridor:90` at z=10,x=6 and the tray at z=4,x=3; algorithms/wavefunctions/oscillation_driver/PendulumWave.gd:266-271 (panel faces the walkway; the 180-degree token makes it the east one).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nReplaced compass-only orientation with visible cues: sampler panel and drum, tray and corridor mouth, case beside tray, dark board above the synthesis bench. No new compass convention introduced.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.591Z"
     },
     {
       "id": "book_wavefunctions.009",
@@ -402,9 +426,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "WaveFunctions_AirMusic"
       ],
@@ -419,9 +443,12 @@
       "proposal": "'with a fade over its last tenth of a second'.",
       "evidence": "algorithms/wavefunctions/resonance/ResonatingBar.gd:37 (`const FADE_S = 0.1  # the last tenth of a second eases out`), :133-134 (`if t > seconds - FADE_S: envelope *= (seconds - t) / FADE_S`), :119-120 (duration = decay_time * 2.5 = 7.5 s).",
       "review": "confirmed by a code checker (cited files only): ResonatingBar.gd:37 FADE_S = 0.1 ('the last tenth of a second eases out'); :133-134 applies the ease only when t > seconds - FADE_S; :14 decay_time 3.0 and :119-120 _sound_seconds = decay_time * 2.5 = 7.5 s. final.md:48 'a short fade in its final tenth' reads as 0.75 s; the code fades 0.1 s.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nSpecified that the final fade lasts one tenth of a second, rather than leaving “final tenth” open to a fraction-of-duration reading.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.617Z"
     },
     {
       "id": "book_wavefunctions.010",
@@ -430,9 +457,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "WaveFunctions_TrigWalkingPath"
       ],
@@ -447,9 +474,12 @@
       "proposal": "One coda sentence: the two stepped rows behind the display are a sampled sine and cosine a body can stand on, a quarter turn apart, the provision Sky Stairs asked for, without making them a second primary.",
       "evidence": "commons/maps/WaveFunctions_TrigWalkingPath/map_data.json interactables `TrigWalkingPath:0:-0.1`; algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.gd:14-16 ('two finite rows of collidable steps', 'VR locomotion [has], step collision [has]'), :112-133 (StaticBody3D + CollisionShape3D per step); commons/maps/WaveFunctions_TrigWalkingPath/intent.md ('The secondary TrigWalkingPath remains in the room'); commons/maps/Wavefunctions_Sky_Stairs/final.md:21.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nReturned the existing paired red/blue steps to the chapter as a brief supporting encounter: quarter-turn separation becomes a question about support. Kept the beat display primary. The step source has colliders and the placed scene enables escalator motion; no full route or headset traversal claimed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.643Z"
     },
     {
       "id": "book_wavefunctions.011",
@@ -458,9 +488,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "WaveFunctions_Effect_Sound"
       ],
@@ -475,9 +505,12 @@
       "proposal": "'At the far end of the hall, past the racks, two balls sit in separate cages above desks.'",
       "evidence": "commons/maps/WaveFunctions_Effect_Sound/map_data.json: `s` at z=1,x=2; `DualBallFMController:180#stand:desks#evidence:longhand` at z=11,x=8; 28 interactable cells; commons/maps/Random_Definition/final.md:53 and :57 for the house style.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nLocated the two-ball sound rig past the racks near the far end of the hall before giving the first listening instruction.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.664Z"
     },
     {
       "id": "book_wavefunctions.012",
@@ -486,9 +519,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "WaveFunctions_Sine_Space"
       ],
@@ -503,9 +536,12 @@
       "proposal": "'This control steps the height range through three values (0.12, 0.30, 0.55 m) while keeping the samples' positions across the tray.'",
       "evidence": "commons/artifacts/sine_flow_tray/sine_flow_tray.gd:8 (`RELIEFS := [0.12, 0.30, 0.55]`), :11 (relief_index starts at 1), :147 (`relief_index = (relief_index+1)%RELIEFS.size()`).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nExplained RELIEF as a cycle through three height ranges. From the middle setting it steepens, then becomes shallower than on arrival; it does not increase indefinitely. Positions across the tray remain fixed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.682Z"
     },
     {
       "id": "book_wavefunctions.013",
@@ -514,9 +550,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "WaveFunctions_Synthesis_Lab"
       ],
@@ -531,9 +567,374 @@
       "proposal": "'Lucier's stutter is part of the voice the room receives, not a fault the passes correct; less intelligible describes the room's work, not the speaker.'",
       "evidence": "commons/maps/WaveFunctions_Synthesis_Lab/final.md:101 (footnote synthesis-lucier).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nClarified the Lucier footnote: the stutter belongs to the voice received by the room, rather than being a defect the process is presumed to correct. Both references retained.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-wavefunctions-review-comments/index.html",
       "source": "one reader (skeptic pending)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T07:16:13.702Z"
+    },
+    {
+      "id": "book_wavefunctions.014",
+      "title": "Sixty ticks a second is the desk; the headset samples at its display rate",
+      "spec": "XR Tools sets Engine.physics_ticks_per_second from the headset's refresh rate when XR starts (addons/godot-xr-tools/xr/start_xr.gd:326, physics_rate_multiplier 1), so the museum's primary venue ticks 72 or 90 times a second; the desk and every headless probe tick the project's 60. The mechanism holds in both - FINE's 25 ms request lands between ticks and the gaps alternate between two neighbouring counts - but 16.7/33.3 ms are the desk's pair (90 Hz: 22.2 and 33.3; 72 Hz: 13.9 and 27.8). PendulumWave.gd's own comment says 'At the shipped 60 ticks this never runs'. NOC is frank that its unit of time is the frame; this chapter should be frank about which frame.\n\nProposal: 'The recorder works on the physics clock: sixty ticks a second at a desk, and in a headset as many as the display draws, seventy-two or ninety. Its request falls between ticks either way, so the gaps alternate between two neighbouring tick counts - at sixty, 16.7 and 33.3 milliseconds.' Verification: probe_wcn_pendulum.gd already switches the tick rate (to 30) to test the bounded clock; add a 90 Hz run and read the actual gap pair off the record.",
+      "effort": "1h",
+      "skill": "ada-code-guide",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "WaveFunctions_Pendulum"
+      ],
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "code-claim",
+      "hall": "WaveFunctions_Pendulum",
+      "quote": "The recorder works on a physics clock ticking sixty times per second. Its request falls between ticks, so the gaps alternate between one tick and two.",
+      "why": "XR Tools sets Engine.physics_ticks_per_second from the headset's refresh rate when XR starts (addons/godot-xr-tools/xr/start_xr.gd:326, physics_rate_multiplier 1), so the museum's primary venue ticks 72 or 90 times a second; the desk and every headless probe tick the project's 60. The mechanism holds in both - FINE's 25 ms request lands between ticks and the gaps alternate between two neighbouring counts - but 16.7/33.3 ms are the desk's pair (90 Hz: 22.2 and 33.3; 72 Hz: 13.9 and 27.8). PendulumWave.gd's own comment says 'At the shipped 60 ticks this never runs'. NOC is frank that its unit of time is the frame; this chapter should be frank about which frame.",
+      "proposal": "'The recorder works on the physics clock: sixty ticks a second at a desk, and in a headset as many as the display draws, seventy-two or ninety. Its request falls between ticks either way, so the gaps alternate between two neighbouring tick counts - at sixty, 16.7 and 33.3 milliseconds.' Verification: probe_wcn_pendulum.gd already switches the tick rate (to 30) to test the bounded clock; add a 90 Hz run and read the actual gap pair off the record.",
+      "evidence": "commons/maps/WaveFunctions_Pendulum/final.md; addons/godot-xr-tools/xr/start_xr.gd:323-328; algorithms/wavefunctions/oscillation_driver/PendulumWave.gd:284-311 (sampler on _physics_process, the bounded-clock comment); commons/testing/probe_wcn_pendulum.gd:299-306; memory feedback_settle_tests_depend_on_physics_rate (a die read 15/16 at 90 Hz, 2/16 at 60); natureofcode.com/oscillation/ 'Properties of Oscillation' (period measured in frames)",
+      "review": "by hand: NOC ch. 3 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 3 reading, 25 Sept (doc/book/readings/NOC_wavefunctions_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T07:16:13.397Z",
+      "stale": false,
+      "event": "trace"
+    },
+    {
+      "id": "book_wavefunctions.015",
+      "title": "The damping line is the textbook trick, and the free swing dies sooner in the headset",
+      "spec": "control_pendulum.gd's shipped 'free' regime returns the raw constant damping = 0.995 as a PER-PHYSICS-TICK multiplier (line 334-336, kept 'bit identical ... including its frame-rate dependence' when the four other regimes got exp(-2*zeta*omega0*dt)). Per second the angular velocity keeps 0.995^60 = 0.740 at a desk and 0.995^90 = 0.637 in a 90 Hz headset: the same release loses height noticeably faster in the museum's primary venue. _predict() integrates at the machine's own dt with the same multiplier, so the curve agrees with the live swing on each machine and the two machines disagree with each other. NOC calls exactly this line a damping 'trick ... rather than model the resistance forces'.\n\nProposal: Two options, Palle's call. (a) Prose, after the quoted sentence: 'The damping line is the trick every textbook sketch uses: multiply the velocity by a number just under one, once a tick. It is not air. It is a decision about how long this room wants a swing to last - and a headset ticks ninety times a second where a desk ticks sixty, so the same release dies sooner there.' (b) Code: make the free regime rate-independent (multiplier = pow(damping, delta * 60.0)), which changes a shipped default in every Intro placement and needs the two-rate settle gate. Either way, verify with two boots (60 and 90 Hz) reading amplitude at t = 6 s.",
+      "effort": "2h",
+      "skill": "ada-code-guide",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "WaveFunctions_Intro"
+      ],
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "code-claim",
+      "hall": "WaveFunctions_Intro",
+      "quote": "The angle supplies a restoring acceleration. Acceleration changes velocity; damping reduces it; velocity changes the angle.",
+      "why": "control_pendulum.gd's shipped 'free' regime returns the raw constant damping = 0.995 as a PER-PHYSICS-TICK multiplier (line 334-336, kept 'bit identical ... including its frame-rate dependence' when the four other regimes got exp(-2*zeta*omega0*dt)). Per second the angular velocity keeps 0.995^60 = 0.740 at a desk and 0.995^90 = 0.637 in a 90 Hz headset: the same release loses height noticeably faster in the museum's primary venue. _predict() integrates at the machine's own dt with the same multiplier, so the curve agrees with the live swing on each machine and the two machines disagree with each other. NOC calls exactly this line a damping 'trick ... rather than model the resistance forces'.",
+      "proposal": "Two options, Palle's call. (a) Prose, after the quoted sentence: 'The damping line is the trick every textbook sketch uses: multiply the velocity by a number just under one, once a tick. It is not air. It is a decision about how long this room wants a swing to last - and a headset ticks ninety times a second where a desk ticks sixty, so the same release dies sooner there.' (b) Code: make the free regime rate-independent (multiplier = pow(damping, delta * 60.0)), which changes a shipped default in every Intro placement and needs the two-rate settle gate. Either way, verify with two boots (60 and 90 Hz) reading amplitude at t = 6 s.",
+      "evidence": "commons/maps/WaveFunctions_Intro/final.md; commons/artifacts/control_pendulum/control_pendulum.gd:75 (damping 0.995), 315-336 (_zeta, _damping_multiplier), 374, 599-608 (_predict at 1/physics rate); addons/godot-xr-tools/xr/start_xr.gd:326; natureofcode.com/oscillation/ 'The Pendulum' (this.angleVelocity *= 0.99)",
+      "review": "by hand: NOC ch. 3 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 3 reading, 25 Sept (doc/book/readings/NOC_wavefunctions_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T07:16:13.397Z",
+      "stale": false,
+      "event": "failure"
+    },
+    {
+      "id": "book_wavefunctions.016",
+      "title": "Name the wagon-wheel effect at STROBE",
+      "spec": "STROBE samples at the pendulum's own measured period, so the marks stop moving: that is temporal aliasing, the wagon-wheel effect NOC names in its angular-motion section ('appears to be rotating more slowly or even in the opposite direction because of the large changes between each frame'). The chapter performs the effect and the reader is left without the name or the familiar case (film cameras made stagecoach wheels turn backwards for a century).\n\nProposal: After the quoted sentences: 'Film cameras did this to wagon wheels for a century: a wheel whose spokes advance by one spoke-spacing between frames photographs as still, and by a little less as turning backwards. STROBE is that fault chosen on purpose.'[fn] Footnote: the wagon-wheel effect is temporal aliasing; any sampler misses what returns between its samples, and a sampler timed to the return misses all of it (Nyquist-Shannon, 1949). NOC ch. 3, 'Angular Motion', names it in passing.",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "WaveFunctions_Pendulum"
+      ],
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "WaveFunctions_Pendulum",
+      "quote": "This can become an instrument for finding repetition. It can also make repetition look like stillness.",
+      "why": "STROBE samples at the pendulum's own measured period, so the marks stop moving: that is temporal aliasing, the wagon-wheel effect NOC names in its angular-motion section ('appears to be rotating more slowly or even in the opposite direction because of the large changes between each frame'). The chapter performs the effect and the reader is left without the name or the familiar case (film cameras made stagecoach wheels turn backwards for a century).",
+      "proposal": "After the quoted sentences: 'Film cameras did this to wagon wheels for a century: a wheel whose spokes advance by one spoke-spacing between frames photographs as still, and by a little less as turning backwards. STROBE is that fault chosen on purpose.'[fn] Footnote: the wagon-wheel effect is temporal aliasing; any sampler misses what returns between its samples, and a sampler timed to the return misses all of it (Nyquist-Shannon, 1949). NOC ch. 3, 'Angular Motion', names it in passing.",
+      "evidence": "commons/maps/WaveFunctions_Pendulum/final.md; algorithms/wavefunctions/oscillation_driver/PendulumWave.gd:316-327 (_measure_period sets sample_interval = _period_measured under strobe); natureofcode.com/oscillation/ Example 3.2 commentary",
+      "review": "by hand: NOC ch. 3 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 3 reading, 25 Sept (doc/book/readings/NOC_wavefunctions_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T07:16:13.397Z",
+      "stale": false,
+      "event": "repetition"
+    },
+    {
+      "id": "book_wavefunctions.017",
+      "title": "Name the wavelength: a period turned into a length, in the record and along the passage",
+      "spec": "NOC: when a wave is drawn across space 'the term period shifts its meaning from representing time to describing the width ... the spatial period of a wave is wavelength'. Pendulum does the shift physically - a 2 m line has a small-angle period of 2.84 s, and at 0.6 m/s one swing leaves 1.7 m of record - and Sine_Space says 'The fundamental makes 4.5 cycles over seven metres' (1.56 m each) and calls the count a frequency. Neither hall says the word for a return measured along a direction.\n\nProposal: Pendulum, after the quoted sentence: 'One swing on this length of line takes about two and four-fifths seconds; at 0.6 metres a second it leaves about 1.7 metres of record. A period has become a length - a wavelength, the word for a return measured along a direction instead of along time.' Sine_Space, after '4.5 cycles over seven metres': 'a wavelength of about a metre and a half; the two higher terms are shorter, and a body walking the passage meets each fold at its own spacing.'",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_Sine_Space"
+      ],
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "WaveFunctions_Pendulum (also WaveFunctions_Sine_Space)",
+      "quote": "We can walk beside a duration because a direction has been given another job.",
+      "why": "NOC: when a wave is drawn across space 'the term period shifts its meaning from representing time to describing the width ... the spatial period of a wave is wavelength'. Pendulum does the shift physically - a 2 m line has a small-angle period of 2.84 s, and at 0.6 m/s one swing leaves 1.7 m of record - and Sine_Space says 'The fundamental makes 4.5 cycles over seven metres' (1.56 m each) and calls the count a frequency. Neither hall says the word for a return measured along a direction.",
+      "proposal": "Pendulum, after the quoted sentence: 'One swing on this length of line takes about two and four-fifths seconds; at 0.6 metres a second it leaves about 1.7 metres of record. A period has become a length - a wavelength, the word for a return measured along a direction instead of along time.' Sine_Space, after '4.5 cycles over seven metres': 'a wavelength of about a metre and a half; the two higher terms are shorter, and a body walking the passage meets each fold at its own spacing.'",
+      "evidence": "commons/maps/WaveFunctions_Pendulum/final.md; algorithms/wavefunctions/oscillation_driver/PendulumWave.gd:36-44 (length 2.0, gravity 9.8, time_speed 0.6), 411-412 (small_angle_period = TAU*sqrt(length/gravity) = 2.839 s); commons/maps/WaveFunctions_Sine_Space/final.md; natureofcode.com/oscillation/ 'Waves'",
+      "review": "by hand: NOC ch. 3 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 3 reading, 25 Sept (doc/book/readings/NOC_wavefunctions_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T07:16:13.397Z",
+      "stale": false,
+      "event": "transformation"
+    },
+    {
+      "id": "book_wavefunctions.018",
+      "title": "Hooke's law is what the lattice runs, and what the small-angle approximation turns the pendulum into",
+      "spec": "Both influences are forces in proportion to a displacement - Robert Hooke's 1660 'ut tensio, sic vis', NOC's spring section - and the law is never named in twelve halls. The Intro says 'the small-angle approximation in which length, with gravity fixed, sets the period' without saying what the approximation does: it replaces sin(theta) by theta, which makes the pendulum's rule linear in the displacement, i.e. a Hooke oscillator, the rule every sphere of the lattice runs. spring_demo (F = -kx on a bench, with a regime axis: ringing, critical, overdamped) stands in the Synthesis Lab unmentioned.\n\nProposal: Intro, after 'The actual restoring rule still contains sin(_angle)': 'The approximation replaces the sine by the angle itself, so that the pull grows in step with the displacement. That simpler rule has a name, Hooke's, and it is the one the lattice three rooms on will run in every sphere.' 3D_Wave, after the quoted sentences: 'Both influences follow one law: a force in proportion to how far something has been moved from where it rests - Robert Hooke's \"as the extension, so the force\" of 1660.'[fn] Footnote: Hooke, Lectures de Potentia Restitutiva (1678), announced as an anagram in 1660; a spring alone, with a knob for how it dies, stands on a bench in the Synthesis Lab.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "WaveFunctions_3D_Wave_Propagation",
+        "WaveFunctions_Intro"
+      ],
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "WaveFunctions_3D_Wave_Propagation (also WaveFunctions_Intro)",
+      "quote": "Each oscillator has its own restoring influence towards an equilibrium and a damping term that resists its velocity. Coupling adds another influence: a neighbour displaced differently contributes a force.",
+      "why": "Both influences are forces in proportion to a displacement - Robert Hooke's 1660 'ut tensio, sic vis', NOC's spring section - and the law is never named in twelve halls. The Intro says 'the small-angle approximation in which length, with gravity fixed, sets the period' without saying what the approximation does: it replaces sin(theta) by theta, which makes the pendulum's rule linear in the displacement, i.e. a Hooke oscillator, the rule every sphere of the lattice runs. spring_demo (F = -kx on a bench, with a regime axis: ringing, critical, overdamped) stands in the Synthesis Lab unmentioned.",
+      "proposal": "Intro, after 'The actual restoring rule still contains sin(_angle)': 'The approximation replaces the sine by the angle itself, so that the pull grows in step with the displacement. That simpler rule has a name, Hooke's, and it is the one the lattice three rooms on will run in every sphere.' 3D_Wave, after the quoted sentences: 'Both influences follow one law: a force in proportion to how far something has been moved from where it rests - Robert Hooke's \"as the extension, so the force\" of 1660.'[fn] Footnote: Hooke, Lectures de Potentia Restitutiva (1678), announced as an anagram in 1660; a spring alone, with a knob for how it dies, stands on a bench in the Synthesis Lab.",
+      "evidence": "commons/maps/WaveFunctions_3D_Wave_Propagation/final.md; commons/maps/WaveFunctions_Intro/final.md; commons/artifacts/spring_demo/spring_demo.gd:1-20 (F = -kx, regime axis, c_crit = 2*sqrt(km)); commons/maps/WaveFunctions_Synthesis_Lab/map_data.json (spring_demo placed); natureofcode.com/oscillation/ 'Spring Forces'",
+      "review": "by hand: NOC ch. 3 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 3 reading, 25 Sept (doc/book/readings/NOC_wavefunctions_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T07:16:13.397Z",
+      "stale": false
+    },
+    {
+      "id": "book_wavefunctions.019",
+      "title": "One number loses the half; the second rod restores it (atan2)",
+      "spec": "NOC's cleanest small lesson: atan(3/-4) and atan(-3/4) are both -37 degrees, so a ratio alone returns the same angle for a direction and its opposite, and atan2 takes the two numbers separately to keep them apart. The hall already has the second projection rod on the floor; the chapter names the loss and not the recovery standing beside it.\n\nProposal: After the quoted sentences: 'The other rod does recover it. Height and sideways offset together fix the point on the circle; that is why a program that needs an angle from a direction is given both numbers rather than their ratio - a ratio returns the same answer for a direction and its opposite, and every graphics library carries a two-argument arctangent to tell them apart.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "WaveFunctions_Unit_Circle"
+      ],
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "WaveFunctions_Unit_Circle",
+      "quote": "Knowing the height therefore does not recover the whole angular position. The missing distinction matters whenever a cyclic process is described by one measured value.",
+      "why": "NOC's cleanest small lesson: atan(3/-4) and atan(-3/4) are both -37 degrees, so a ratio alone returns the same angle for a direction and its opposite, and atan2 takes the two numbers separately to keep them apart. The hall already has the second projection rod on the floor; the chapter names the loss and not the recovery standing beside it.",
+      "proposal": "After the quoted sentences: 'The other rod does recover it. Height and sideways offset together fix the point on the circle; that is why a program that needs an angle from a direction is given both numbers rather than their ratio - a ratio returns the same answer for a direction and its opposite, and every graphics library carries a two-argument arctangent to tell them apart.'",
+      "evidence": "commons/maps/WaveFunctions_Unit_Circle/final.md; algorithms/wavefunctions/unit_circle/UnitCircle.gd:168-169 (x = cos, y = sin, both rods); natureofcode.com/oscillation/ 'Pointing in the Direction of Movement' (Figure 3.8, Example 3.3)",
+      "review": "by hand: NOC ch. 3 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 3 reading, 25 Sept (doc/book/readings/NOC_wavefunctions_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T07:16:13.397Z",
+      "stale": false
+    },
+    {
+      "id": "book_wavefunctions.020",
+      "title": "Name the radian at the rim: the angle is the distance the point has travelled",
+      "spec": "Twelve halls never say what unit the angle is in; the Sine_Space slider is 'half a turn' and the code says TAU. NOC defines the radian as arc length over radius, which on the unit circle means the angle IS the distance the point has walked along the rim - 6.28 for a turn. UnitCircle.gd draws the point on a radius of 1.0 and stretches each cycle of the graph to 14 m (wave_length 28.0 for num_cycles 2), so the graph's axis is the rim unrolled, not to scale.\n\nProposal: After the quoted sentence: 'And the angle has a unit this room can show. On a circle of radius one, the angle is the distance the point has travelled along the rim: a little over six metres for a whole turn. The graph stretches that turn to fourteen, so its axis is the rim unrolled, though not to scale.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "WaveFunctions_Unit_Circle"
+      ],
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "WaveFunctions_Unit_Circle",
+      "quote": "For a circle of unit radius, those coordinate values are sine and cosine.",
+      "why": "Twelve halls never say what unit the angle is in; the Sine_Space slider is 'half a turn' and the code says TAU. NOC defines the radian as arc length over radius, which on the unit circle means the angle IS the distance the point has walked along the rim - 6.28 for a turn. UnitCircle.gd draws the point on a radius of 1.0 and stretches each cycle of the graph to 14 m (wave_length 28.0 for num_cycles 2), so the graph's axis is the rim unrolled, not to scale.",
+      "proposal": "After the quoted sentence: 'And the angle has a unit this room can show. On a circle of radius one, the angle is the distance the point has travelled along the rim: a little over six metres for a whole turn. The graph stretches that turn to fourteen, so its axis is the rim unrolled, though not to scale.'",
+      "evidence": "algorithms/wavefunctions/unit_circle/UnitCircle.gd:30 (radius 1.0), 43 (num_cycles 2), 46 (wave_length 28.0), 94 (total_angle = TAU * num_cycles); natureofcode.com/oscillation/ 'Angles' (Figure 3.3)",
+      "review": "by hand: NOC ch. 3 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 3 reading, 25 Sept (doc/book/readings/NOC_wavefunctions_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T07:16:13.397Z",
+      "stale": false,
+      "event": "scale"
+    },
+    {
+      "id": "book_wavefunctions.021",
+      "title": "Frequency and period in one breath: 440 returns a second is 2.3 milliseconds each",
+      "spec": "Period is measured in Intro and Pendulum, hertz appears here and in AirMusic, and the sequence never joins them; NOC states the identity plainly ('frequency is the inverse of the period'). The scope above the rig shows exactly two carrier periods (SCOPE_PERIODS = 2.0), which at 440 Hz is 4.5 ms of the note - a number the chapter can use to say how little of a sound the window holds.\n\nProposal: After the quoted sentence: 'Four hundred and forty returns a second is one return every 2.3 thousandths of a second; the two carrier periods on the scope are under five thousandths of a second of the note. The plate in the pendulum hall measured a period and let you divide by it; hertz is that division done the other way round.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "WaveFunctions_Effect_Sound"
+      ],
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "WaveFunctions_Effect_Sound",
+      "quote": "BASELINE is a chosen reference too: a 440-hertz carrier, an attack and a decay, index zero.",
+      "why": "Period is measured in Intro and Pendulum, hertz appears here and in AirMusic, and the sequence never joins them; NOC states the identity plainly ('frequency is the inverse of the period'). The scope above the rig shows exactly two carrier periods (SCOPE_PERIODS = 2.0), which at 440 Hz is 4.5 ms of the note - a number the chapter can use to say how little of a sound the window holds.",
+      "proposal": "After the quoted sentence: 'Four hundred and forty returns a second is one return every 2.3 thousandths of a second; the two carrier periods on the scope are under five thousandths of a second of the note. The plate in the pendulum hall measured a period and let you divide by it; hertz is that division done the other way round.'",
+      "evidence": "commons/maps/WaveFunctions_Effect_Sound/final.md; algorithms/wavefunctions/mariocontrol/DualBallFMController.gd:131-136 (SCOPE_SAMPLES 1200, SCOPE_PERIODS 2.0); natureofcode.com/oscillation/ 'Properties of Oscillation' (frequency = 1/period)",
+      "review": "by hand: NOC ch. 3 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 3 reading, 25 Sept (doc/book/readings/NOC_wavefunctions_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T07:16:13.397Z",
+      "stale": false
+    },
+    {
+      "id": "book_wavefunctions.022",
+      "title": "Name the Lissajous figure: the other way to combine two oscillations",
+      "spec": "lissajous_curves stands in this hall (and again in the Synthesis Lab) and neither chapter mentions it. NOC's Oscillator class - a vector of two angles with two angular velocities - is a Lissajous figure without the name. The beat display adds A and B on one row; the figure puts one oscillation across and one up. Its ratios are 1:1 (a diagonal; at a quarter-turn phase the circle - the Unit_Circle point drawn by its own two projections), 2:1, 3:2, 5:4 and 1:phi, 'the one value that does NOT close' (the artifact's own truth line: the ratio decides whether the curve closes or wanders forever).\n\nProposal: One coda paragraph after the quoted sentence: 'The glowing figure across the hall combines two oscillations the other way: one across, one up, instead of both on one row. A ratio of one to one draws the circle you followed two rooms ago, sine against cosine; three to two, a knot that closes; one to the golden ratio, a curve that never returns to its start however long you wait. The rows made a slow pulse from a pair; the same pair set at right angles makes a shape.'",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "WaveFunctions_TrigWalkingPath"
+      ],
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "WaveFunctions_TrigWalkingPath",
+      "quote": "Elsewhere in the hall, the paired red and blue steps give sine and cosine another body.",
+      "why": "lissajous_curves stands in this hall (and again in the Synthesis Lab) and neither chapter mentions it. NOC's Oscillator class - a vector of two angles with two angular velocities - is a Lissajous figure without the name. The beat display adds A and B on one row; the figure puts one oscillation across and one up. Its ratios are 1:1 (a diagonal; at a quarter-turn phase the circle - the Unit_Circle point drawn by its own two projections), 2:1, 3:2, 5:4 and 1:phi, 'the one value that does NOT close' (the artifact's own truth line: the ratio decides whether the curve closes or wanders forever).",
+      "proposal": "One coda paragraph after the quoted sentence: 'The glowing figure across the hall combines two oscillations the other way: one across, one up, instead of both on one row. A ratio of one to one draws the circle you followed two rooms ago, sine against cosine; three to two, a knot that closes; one to the golden ratio, a curve that never returns to its start however long you wait. The rows made a slow pulse from a pair; the same pair set at right angles makes a shape.'",
+      "evidence": "commons/maps/WaveFunctions_TrigWalkingPath/map_data.json (lissajous_curves placed); commons/maps/WaveFunctions_Synthesis_Lab/map_data.json (placed again); algorithms/wavefunctions/lissajous_curves/lissajous_curves.gd:4-17, 49, 86 (RATIOS), 362-392 (presets); natureofcode.com/oscillation/ Example 3.7 'Oscillator Objects'",
+      "review": "by hand: NOC ch. 3 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 3 reading, 25 Sept (doc/book/readings/NOC_wavefunctions_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T07:16:13.397Z",
+      "stale": false,
+      "event": "repetition"
+    },
+    {
+      "id": "book_wavefunctions.023",
+      "title": "The hall's other two pendulums: one turns its paper, one cannot be replayed",
+      "spec": "The chapter says the bob 'has only swung in one plane'; across the hall foucault_pendulum keeps its plane while the program turns the paper under it - Foucault's 1851 proof that the room turns, which no museum floor does, so the code turns the canvas at earth_rotation_rate 0.05 rad/s x sin(45 deg): one turn in three minutes, about 700 times faster than the Earth would at that latitude (Paris: just under 32 hours). WavePaintings is NOC's Exercise 3.15 built: three double pendulums, the middle bob grabbable, painting traces its own header calls unrepeatable. Both stand in the hall unmentioned, in the chapter about what a record keeps.\n\nProposal: After the drum sentence: 'Across the hall a pendulum draws a rosette because the paper under it turns while its plane does not. In Paris in 1851 that turning was the Earth's, and the pendulum was the proof; here no floor turns, so the program turns the paper, in three minutes instead of a day and a half.[fn] And three pendulums hung from pendulums paint on wet canvases: their rule is as fixed as this one's, and no second release will paint the same picture.' Footnote: Foucault, Pantheon, 1851; the plane's turning rate is the Earth's times the sine of the latitude, 0.05 rad/s x sin 45 deg in foucault_pendulum.gd, against 7.29e-5 rad/s for the Earth.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "WaveFunctions_Pendulum"
+      ],
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "WaveFunctions_Pendulum",
+      "quote": "These recorders ask different questions of what passes them.",
+      "why": "The chapter says the bob 'has only swung in one plane'; across the hall foucault_pendulum keeps its plane while the program turns the paper under it - Foucault's 1851 proof that the room turns, which no museum floor does, so the code turns the canvas at earth_rotation_rate 0.05 rad/s x sin(45 deg): one turn in three minutes, about 700 times faster than the Earth would at that latitude (Paris: just under 32 hours). WavePaintings is NOC's Exercise 3.15 built: three double pendulums, the middle bob grabbable, painting traces its own header calls unrepeatable. Both stand in the hall unmentioned, in the chapter about what a record keeps.",
+      "proposal": "After the drum sentence: 'Across the hall a pendulum draws a rosette because the paper under it turns while its plane does not. In Paris in 1851 that turning was the Earth's, and the pendulum was the proof; here no floor turns, so the program turns the paper, in three minutes instead of a day and a half.[fn] And three pendulums hung from pendulums paint on wet canvases: their rule is as fixed as this one's, and no second release will paint the same picture.' Footnote: Foucault, Pantheon, 1851; the plane's turning rate is the Earth's times the sine of the latitude, 0.05 rad/s x sin 45 deg in foucault_pendulum.gd, against 7.29e-5 rad/s for the Earth.",
+      "evidence": "commons/maps/WaveFunctions_Pendulum/map_data.json (foucault_pendulum, WavePaintings placed); commons/artifacts/foucault_pendulum/foucault_pendulum.gd:2-20, 43-46 (earth_rotation_rate 0.05, latitude 45), 124-125 (swing plane fixed in the inertial frame); algorithms/wavefunctions/oscillation_driver/WavePaintings.gd:1-16; natureofcode.com/oscillation/ Exercise 3.15",
+      "review": "by hand: NOC ch. 3 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 3 reading, 25 Sept (doc/book/readings/NOC_wavefunctions_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T07:16:13.397Z",
+      "stale": false,
+      "event": "trace"
+    },
+    {
+      "id": "book_wavefunctions.024",
+      "title": "Push the bob and watch which cube changes: a clock is not a state",
+      "spec": "NOC sets a sine-scripted bob (Exercise 3.7) against a force-driven one ('that kind of one-line solution won't do if what you really want is a bob ... that responds to other forces'). The Intro has both bodies and describes them at rest: y_oscillation_cube is A*sin(2*pi*f*t) from time alone; oscillation_controlled_cube connects to control_pendulum's oscillation_updated signal. A push tells them apart, and the chapter's own question ('how much of the hand gets through?') has a second answer standing beside the first.\n\nProposal: After the quoted sentence: 'Give the bob a push and look at the cubes. The one that listens changes with your hand; the clocked one does not, because nothing you do enters its rule - it has a time, not a state. Two returns that look alike from the doorway answer a push differently.' Verify in the desktop lane that the mario cube visibly follows a disturbed swing (its label reads Controlled by pendulum).",
+      "effort": "30min",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "WaveFunctions_Intro"
+      ],
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "encounter",
+      "hall": "WaveFunctions_Intro",
+      "quote": "A clock prescribes one cube's bobbing; a steady rotation brings another back to its orientation; a third listens to this pendulum's signal.",
+      "why": "NOC sets a sine-scripted bob (Exercise 3.7) against a force-driven one ('that kind of one-line solution won't do if what you really want is a bob ... that responds to other forces'). The Intro has both bodies and describes them at rest: y_oscillation_cube is A*sin(2*pi*f*t) from time alone; oscillation_controlled_cube connects to control_pendulum's oscillation_updated signal. A push tells them apart, and the chapter's own question ('how much of the hand gets through?') has a second answer standing beside the first.",
+      "proposal": "After the quoted sentence: 'Give the bob a push and look at the cubes. The one that listens changes with your hand; the clocked one does not, because nothing you do enters its rule - it has a time, not a state. Two returns that look alike from the doorway answer a push differently.' Verify in the desktop lane that the mario cube visibly follows a disturbed swing (its label reads Controlled by pendulum).",
+      "evidence": "commons/maps/WaveFunctions_Intro/final.md; commons/maps/WaveFunctions_Intro/map_data.json (y_oscillation_cube, oscillation_controlled_cube placed); commons/artifacts/y_oscillation_cube/y_oscillation_cube.gd:3-20, 66; commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.gd:139-153, 182; natureofcode.com/oscillation/ Exercise 3.7 and 'Spring Forces'",
+      "review": "by hand: NOC ch. 3 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 3 reading, 25 Sept (doc/book/readings/NOC_wavefunctions_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T07:16:13.397Z",
+      "stale": false,
+      "event": "collision"
     }
   ]
 }

@@ -541,6 +541,259 @@
       "notes": "",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_softbodies.015",
+      "title": "STIFFNESS is a fraction between nought and one, and the solver's effort is a pass count the panel does not show",
+      "spec": "Godot's SoftBody3D.linear_stiffness is bounded 0..1 ('higher values will result in a stiffer body, while lower values will increase the body's ability to bend'), the same 0..1 'stiffness' NOC's Matter.js constraints carry ('1 being fully rigid and 0 being completely soft', default 0.7): how much of each spring's error the solver corrects per pass, not a material modulus. jelly_cube.gd:193, cloth_straps.gd:360 and breathing_room.gd:85 all set simulation_precision = 5, the number of correction passes per physics tick, which no panel shows. Form Finding's Relaxation bench put exactly that knob on a panel (PASSES: nudged 1, worked 4, pressed 8, held 12) and showed a cloth stiffen with the count alone; the soft-body halls never say the engine's solver is the same kind of procedure.\n\nProposal: After the quoted sentences: 'STIFFNESS is a number between nought and one: how much of each spring's disagreement the solver corrects each time it looks. It is not a property of a material. It is an instruction to a procedure that looks five times a tick, and the bench in Form Finding showed you that the count alone can stiffen a cloth. A soft body in this engine is a set of distances being corrected, never solved.'[fn] Footnote: Godot SoftBody3D, linear_stiffness (0..1) and simulation_precision (default 5); the room did not write the solver.",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Soft_Body_Deformation"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "SoftBodies_Soft_Body_Deformation",
+      "quote": "Try STIFFNESS, then change DAMPING separately. The first changes resistance to deformation; the second damps motion.",
+      "why": "Godot's SoftBody3D.linear_stiffness is bounded 0..1 ('higher values will result in a stiffer body, while lower values will increase the body's ability to bend'), the same 0..1 'stiffness' NOC's Matter.js constraints carry ('1 being fully rigid and 0 being completely soft', default 0.7): how much of each spring's error the solver corrects per pass, not a material modulus. jelly_cube.gd:193, cloth_straps.gd:360 and breathing_room.gd:85 all set simulation_precision = 5, the number of correction passes per physics tick, which no panel shows. Form Finding's Relaxation bench put exactly that knob on a panel (PASSES: nudged 1, worked 4, pressed 8, held 12) and showed a cloth stiffen with the count alone; the soft-body halls never say the engine's solver is the same kind of procedure.",
+      "proposal": "After the quoted sentences: 'STIFFNESS is a number between nought and one: how much of each spring's disagreement the solver corrects each time it looks. It is not a property of a material. It is an instruction to a procedure that looks five times a tick, and the bench in Form Finding showed you that the count alone can stiffen a cloth. A soft body in this engine is a set of distances being corrected, never solved.'[fn] Footnote: Godot SoftBody3D, linear_stiffness (0..1) and simulation_precision (default 5); the room did not write the solver.",
+      "evidence": "commons/artifacts/jelly_cube/jelly_cube.gd:74-79, 193; algorithms/softbodies/cloth_straps/cloth_straps.gd:360; algorithms/softbodies/advanced_concepts/breathing_room.gd:81-85; commons/artifacts/verlet_workbench/verlet_workbench.gd:9-26; commons/maps/FormFinding_Relaxation/final.md (PASSES); natureofcode.com/physics-libraries/ 'Distance Constraints' (stiffness 0..1), 'A Brief Interlude: Integration Methods'; docs.godotengine.org class SoftBody3D",
+      "review": "by hand: NOC ch. 6 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 6 reading, 25 Sept (doc/book/readings/NOC_softbodies_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_softbodies.016",
+      "title": "What holds the cube together: the edges of its skin, and pressure where the inside should be",
+      "spec": "The SoftBody3D's springs are the edges of the subdivided BoxMesh (jelly_cube.gd:186-190): the surface only, nothing across the interior. NOC's soft-body character makes the lesson explicit: connections only around the perimeter 'would instantly collapse onto itself. This is where additional internal springs come into play.' Godot's answer is pressure instead of struts - pressure_coefficient, default 1.0 here - and the artifact's own header says what happens without it: 'at low pressure it drapes over the pedestal like cloth' (line 12). The hall's title question has this answer and the chapter does not give it.\n\nProposal: After the quoted sentences: 'What holds them is the skin. Every edge of the cube's surface is a spring asked to keep its length, and there is nothing across the inside. Take PRESSURE to nothing and the cube shows you: a bag of triangles with no interior drapes over its pedestal like cloth. Pressure is what this engine offers in place of the internal struts a soft body would otherwise need.' Verification: desktop lane, PRESSURE to 0, watch the drape.",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Soft_Body_Deformation"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "SoftBodies_Soft_Body_Deformation",
+      "quote": "The cube gives way. Yet it does not become a collection of loose triangles. Something continues to hold its parts in relation.",
+      "why": "The SoftBody3D's springs are the edges of the subdivided BoxMesh (jelly_cube.gd:186-190): the surface only, nothing across the interior. NOC's soft-body character makes the lesson explicit: connections only around the perimeter 'would instantly collapse onto itself. This is where additional internal springs come into play.' Godot's answer is pressure instead of struts - pressure_coefficient, default 1.0 here - and the artifact's own header says what happens without it: 'at low pressure it drapes over the pedestal like cloth' (line 12). The hall's title question has this answer and the chapter does not give it.",
+      "proposal": "After the quoted sentences: 'What holds them is the skin. Every edge of the cube's surface is a spring asked to keep its length, and there is nothing across the inside. Take PRESSURE to nothing and the cube shows you: a bag of triangles with no interior drapes over its pedestal like cloth. Pressure is what this engine offers in place of the internal struts a soft body would otherwise need.' Verification: desktop lane, PRESSURE to 0, watch the drape.",
+      "evidence": "commons/artifacts/jelly_cube/jelly_cube.gd:10-12, 90-95, 186-193; natureofcode.com/physics-libraries/ 'A Soft-Body Character' (Figure 6.17, internal springs)",
+      "review": "by hand: NOC ch. 6 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 6 reading, 25 Sept (doc/book/readings/NOC_softbodies_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "threshold"
+    },
+    {
+      "id": "book_softbodies.017",
+      "title": "The hand is the body that teleports",
+      "spec": "NOC's mouse-constraint argument: assign a body's position and 'Matter.js no longer knows how to compute the physics properly' - so tie a string instead; Toxiclibs locks a particle, moves it, unlocks it. A tracked hand is a position written every frame, the one body in the room the solver cannot push. The jelly cube meets it as a collider (jelly_cube.gd:200-201, collision_mask 'include hand layers'; 350 'handled by physics collision'); the rounded body in Playground meets it as a push within 25 cm on grip (rounded_softbody.gd:136-141, _squeeze_radius 0.25, _squeeze_strength 2.0). Neither can move the hand. Task .004 asks how a hand squeezes; this says what a hand is to a solver.\n\nProposal: After the quoted sentences: 'Your hand is the one body in this room the solver cannot argue with. Its position is written every frame from the tracking, and the cube meets it as a collider that never yields; the rounded body two halls on will meet it as a push within a hand's reach instead, and neither will ever move the hand. An engine that is handed a position instead of a force has to treat it as law, and every soft thing here is arranged around that law.'",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Soft_Body_Deformation",
+        "SoftBodies_Playground_of_Joy"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "SoftBodies_Soft_Body_Deformation (links SoftBodies_Playground_of_Joy)",
+      "quote": "RESET restores the opening coefficients. It does not put every vertex back where it was before you arrived.",
+      "why": "NOC's mouse-constraint argument: assign a body's position and 'Matter.js no longer knows how to compute the physics properly' - so tie a string instead; Toxiclibs locks a particle, moves it, unlocks it. A tracked hand is a position written every frame, the one body in the room the solver cannot push. The jelly cube meets it as a collider (jelly_cube.gd:200-201, collision_mask 'include hand layers'; 350 'handled by physics collision'); the rounded body in Playground meets it as a push within 25 cm on grip (rounded_softbody.gd:136-141, _squeeze_radius 0.25, _squeeze_strength 2.0). Neither can move the hand. Task .004 asks how a hand squeezes; this says what a hand is to a solver.",
+      "proposal": "After the quoted sentences: 'Your hand is the one body in this room the solver cannot argue with. Its position is written every frame from the tracking, and the cube meets it as a collider that never yields; the rounded body two halls on will meet it as a push within a hand's reach instead, and neither will ever move the hand. An engine that is handed a position instead of a force has to treat it as law, and every soft thing here is arranged around that law.'",
+      "evidence": "commons/artifacts/jelly_cube/jelly_cube.gd:9-11, 200-201, 350; algorithms/softbodies/rounded_softbody.gd:13-15, 136-141; natureofcode.com/physics-libraries/ 'Mouse Constraints', 'Springs' (lock/unlock)",
+      "review": "by hand: NOC ch. 6 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 6 reading, 25 Sept (doc/book/readings/NOC_softbodies_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "collision"
+    },
+    {
+      "id": "book_softbodies.018",
+      "title": "Name the hinge, and the hub that nothing can push back",
+      "spec": "revolving_joy_ride.gd: the hub is a RigidBody3D with freeze = true in kinematic mode (99-103) and rotation.y += ride_speed * delta each physics step (291-293); each link hangs on a pair of PinJoint3D (140-153), NOC's revolute constraint ('a regular Constraint of length 0... the bodies can rotate around a common anchor point'). NOC's warning about assigned positions applies from the support's side: a kinematic hub is moved by assignment and pushed back by nothing, which is why the teardrops report the ride and the ride never reports the teardrops. The chapter has the fact ('prescribed') and neither the name of the joint nor the asymmetry.\n\nProposal: After the quoted sentences: 'The joints are hinges: pins of no length that let each link swing about a point on the one above it. The hub is different in kind. It is a body the solver may not push: its angle is written each step, and nothing the hanging bodies do reaches it. So the teardrops report the ride, and the ride never reports them.'",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Carusell"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "SoftBodies_Carusell",
+      "quote": "The ring turns because its angle is advanced by the program. The joints and deforming bodies respond to a support whose motion has already been prescribed.",
+      "why": "revolving_joy_ride.gd: the hub is a RigidBody3D with freeze = true in kinematic mode (99-103) and rotation.y += ride_speed * delta each physics step (291-293); each link hangs on a pair of PinJoint3D (140-153), NOC's revolute constraint ('a regular Constraint of length 0... the bodies can rotate around a common anchor point'). NOC's warning about assigned positions applies from the support's side: a kinematic hub is moved by assignment and pushed back by nothing, which is why the teardrops report the ride and the ride never reports the teardrops. The chapter has the fact ('prescribed') and neither the name of the joint nor the asymmetry.",
+      "proposal": "After the quoted sentences: 'The joints are hinges: pins of no length that let each link swing about a point on the one above it. The hub is different in kind. It is a body the solver may not push: its angle is written each step, and nothing the hanging bodies do reaches it. So the teardrops report the ride, and the ride never reports them.'",
+      "evidence": "algorithms/softbodies/joyride/revolving_joy_ride.gd:4-7, 15, 99-103, 140-153, 291-293; natureofcode.com/physics-libraries/ 'Revolute Constraints', 'Mouse Constraints'",
+      "review": "by hand: NOC ch. 6 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 6 reading, 25 Sept (doc/book/readings/NOC_softbodies_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "transformation"
+    },
+    {
+      "id": "book_softbodies.019",
+      "title": "Say what ties the hundred and twelve points: across, down, and one diagonal",
+      "spec": "cloth_straps.gd:351-354 builds each strip as a PlaneMesh subdivided 6 across and 12 down (8 x 14 = 112 vertices), and a SoftBody3D's springs are the mesh's triangle edges: to the neighbour across, the neighbour below, and one neighbour on the diagonal of each cell. NOC's cloth exercise ties 'each particle with its vertical and horizontal neighbors' only; the diagonal is why a strip can swing without shearing into a parallelogram. The chapter counts the points and never says what ties them.\n\nProposal: After the quoted sentence: 'The hundred and twelve are tied by the edges of the strip's own triangles: to the neighbour across, the neighbour below, and one neighbour on the diagonal. That third tie is why a strip can swing without shearing into a parallelogram; a net of squares would.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Cloth_Physics"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "SoftBodies_Cloth_Physics",
+      "quote": "A point is held if its height matches that top to within a hundredth of a metre - eight points of the hundred and twelve in each strip.",
+      "why": "cloth_straps.gd:351-354 builds each strip as a PlaneMesh subdivided 6 across and 12 down (8 x 14 = 112 vertices), and a SoftBody3D's springs are the mesh's triangle edges: to the neighbour across, the neighbour below, and one neighbour on the diagonal of each cell. NOC's cloth exercise ties 'each particle with its vertical and horizontal neighbors' only; the diagonal is why a strip can swing without shearing into a parallelogram. The chapter counts the points and never says what ties them.",
+      "proposal": "After the quoted sentence: 'The hundred and twelve are tied by the edges of the strip's own triangles: to the neighbour across, the neighbour below, and one neighbour on the diagonal. That third tie is why a strip can swing without shearing into a parallelogram; a net of squares would.'",
+      "evidence": "algorithms/softbodies/cloth_straps/cloth_straps.gd:351-360; natureofcode.com/physics-libraries/ Exercise 6.10",
+      "review": "by hand: NOC ch. 6 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 6 reading, 25 Sept (doc/book/readings/NOC_softbodies_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_softbodies.020",
+      "title": "The vessel returns from Form Finding; say so",
+      "spec": "frozen_glass_vessel stands in FormFinding_Relaxation (spine index 7), where the chapter spent three hundred words on it as 'a fossil of forces' and named its solver as the cloth bench's (commons/soft_body/soft_body_sim.gd, constraint_passes = 5, two hundred steps). Playground_of_Joy (index 15) meets it as a stranger eight sequences later, with two new controls.\n\nProposal: Before the quoted sentences: 'You have met this vessel before. In Form Finding it stood beside the cloth bench as a fossil of forces, two hundred steps of the bench's own solver. Here it has grown two controls, and the question has moved from what a budget leaves to what a chosen duration keeps.'",
+      "effort": "10min",
+      "skill": "ada-sequence-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Playground_of_Joy"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "handover",
+      "hall": "SoftBodies_Playground_of_Joy",
+      "quote": "The glass vessel has already stopped. Its program begins with a sphere, pins an upper region and runs a custom soft-body simulation for a chosen number of steps.",
+      "why": "frozen_glass_vessel stands in FormFinding_Relaxation (spine index 7), where the chapter spent three hundred words on it as 'a fossil of forces' and named its solver as the cloth bench's (commons/soft_body/soft_body_sim.gd, constraint_passes = 5, two hundred steps). Playground_of_Joy (index 15) meets it as a stranger eight sequences later, with two new controls.",
+      "proposal": "Before the quoted sentences: 'You have met this vessel before. In Form Finding it stood beside the cloth bench as a fossil of forces, two hundred steps of the bench's own solver. Here it has grown two controls, and the question has moved from what a budget leaves to what a chosen duration keeps.'",
+      "evidence": "commons/maps/FormFinding_Relaxation/final.md; commons/maps/FormFinding_Relaxation/map_data.json and commons/maps/SoftBodies_Playground_of_Joy/map_data.json (frozen_glass_vessel placed in both); commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd:25, 73-79",
+      "review": "by hand: NOC ch. 6 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 6 reading, 25 Sept (doc/book/readings/NOC_softbodies_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_softbodies.021",
+      "title": "Put a hand to a spike: a drawing and a physics can disagree without anyone being told",
+      "spec": "radiolaria.gd builds no collision shape and no SoftBody3D, so in the museum the forms are venues: a hand and a body pass through them. NOC's version of the lesson is the lollipop drawn at the wrong centre: 'you won't get an error... your sketch will look odd... the world you're seeing won't be aligned with the world as Matter.js understands it.' The chapter argues the contrast in words; the hall can perform it in one gesture, against the jelly cube that pushed back.\n\nProposal: After the quoted sentence: 'Put a hand to a spike. Nothing yields and nothing stops you, because nothing here is simulated: the spike is a drawing, and a drawing and a physics can disagree without anyone being told. The jelly cube pushed back; this does not even notice.' Verification: desktop lane, walk into a radiolarian; confirm no collider is added by the museum lane.",
+      "effort": "30min",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Affect_Theory_Visualization"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "encounter",
+      "hall": "SoftBodies_Affect_Theory_Visualization",
+      "quote": "Radiolaria belongs here as an explicit contrast, not proof that static geometry is a soft-body simulation.",
+      "why": "radiolaria.gd builds no collision shape and no SoftBody3D, so in the museum the forms are venues: a hand and a body pass through them. NOC's version of the lesson is the lollipop drawn at the wrong centre: 'you won't get an error... your sketch will look odd... the world you're seeing won't be aligned with the world as Matter.js understands it.' The chapter argues the contrast in words; the hall can perform it in one gesture, against the jelly cube that pushed back.",
+      "proposal": "After the quoted sentence: 'Put a hand to a spike. Nothing yields and nothing stops you, because nothing here is simulated: the spike is a drawing, and a drawing and a physics can disagree without anyone being told. The jelly cube pushed back; this does not even notice.' Verification: desktop lane, walk into a radiolarian; confirm no collider is added by the museum lane.",
+      "evidence": "algorithms/computationalbiology/radiolaria/radiolaria.gd (no StaticBody3D, CollisionShape3D or SoftBody3D); memory feedback_museum_venue_vs_collider (a museum body with no collider is a venue); natureofcode.com/physics-libraries/ Figure 6.9 and the paragraph before it",
+      "review": "by hand: NOC ch. 6 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 6 reading, 25 Sept (doc/book/readings/NOC_softbodies_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "collision"
+    },
+    {
+      "id": "book_softbodies.022",
+      "title": "Name the solver's finite effort: five passes a tick",
+      "spec": "The 'finite effort' has a number: simulation_precision, the passes the soft-body solver makes over its distance constraints each physics tick, set to 5 in every soft body in this sequence (jelly_cube.gd:193, cloth_straps.gd:360, breathing_room.gd:85) and never shown. Form Finding's Relaxation bench measured what the count does (MEAN 1.4% and WORST 34% spring error at one pass; 0.36% and 8.9% at four). NOC's integration interlude is the reader's only other clue that a solver has a budget.\n\nProposal: Footnote at 'the solver's finite effort': 'Five passes over every spring, every physics tick, for every body in this sequence. The bench in Form Finding put that count on a dial and read the error it leaves: at one pass the worst spring in a cloth was a third off its length; at four, a tenth.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SoftBodies_Obsticals_Part2"
+      ],
+      "sequence_refs": [
+        "softbodies"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "SoftBodies_Obsticals_Part2",
+      "quote": "Ask which part is an effect of contact, which part comes from the triangulation, and which part depends on the solver's finite effort.",
+      "why": "The 'finite effort' has a number: simulation_precision, the passes the soft-body solver makes over its distance constraints each physics tick, set to 5 in every soft body in this sequence (jelly_cube.gd:193, cloth_straps.gd:360, breathing_room.gd:85) and never shown. Form Finding's Relaxation bench measured what the count does (MEAN 1.4% and WORST 34% spring error at one pass; 0.36% and 8.9% at four). NOC's integration interlude is the reader's only other clue that a solver has a budget.",
+      "proposal": "Footnote at 'the solver's finite effort': 'Five passes over every spring, every physics tick, for every body in this sequence. The bench in Form Finding put that count on a dial and read the error it leaves: at one pass the worst spring in a cloth was a third off its length; at four, a tenth.'",
+      "evidence": "commons/artifacts/jelly_cube/jelly_cube.gd:193; algorithms/softbodies/cloth_straps/cloth_straps.gd:360; algorithms/softbodies/advanced_concepts/breathing_room.gd:85; commons/maps/FormFinding_Relaxation/final.md (MEAN/WORST at 420 steps)",
+      "review": "by hand: NOC ch. 6 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 6 reading, 25 Sept (doc/book/readings/NOC_softbodies_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
     }
   ]
 }

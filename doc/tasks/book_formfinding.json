@@ -142,9 +142,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Relaxation"
       ],
@@ -159,9 +159,12 @@
       "proposal": "Decide which vessel ships. If the closed skin stays (registry and label already say so), rewrite: \"It has a collider and no mouth: your hand and body stop at its wall, and the inside you can see through the glass is not a place you can enter.\" If the walkable vessel is the intent, revert the FrozenSkin block and the registry line instead. Commit whichever wins so chapter, code and registry agree.",
       "evidence": "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd:168-178 (StaticBody3D \"FrozenSkin\", create_trimesh_shape, backface_collision = true), :185 label \"closed skin / held after simulation\", :1 header \"A collidable frozen skin\"; git show HEAD: same file :1 \"Walkable vessel\", no StaticBody/collision; HEAD soft_bodies.json:2232 \"Walkable glass vessel\"; working tree soft_bodies.json:2240 \"carries matching two-sided surface collision\"; git show HEAD:commons/maps/FormFinding_Relaxation/final.md:36 \"it has no collider at all, and you will walk through the glass\"; frozen_glass_vessel.tscn root node carries the script.",
       "review": "amended: Code claim confirmed: working-tree frozen_glass_vessel.gd:168-178 builds StaticBody3D \"FrozenSkin\" (collision_layer 1) with am.create_trimesh_shape() and backface_collision = true; label :185 reads \"closed skin / held after simulation\"; soft_bodies.json:2240 says \"carries matching two-sided surface collision\". None of it exists at HEAD (git show HEAD: header \"Walkable vessel\", no StaticBody/collision anywhere; HEAD registry :2232 \"Walkable glass vessel\"). The tscn root carries the script, so the body is real in a map. One correction to the why: the chapter is ALSO uncommitted, and HEAD's Relaxation final.md:36 already said \"it has no collider at all, and you will walk through the glass\" — the claim was true of HEAD's code, and the working tree rewrote the sentence and added the collider in the same uncommitted wave. The contradiction is between two uncommitted files, not HEAD versus tree.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nKept the existing two-sided vessel collider. Replaced the obsolete walk-through claim with the difference between transparency and entry. Native collision-shape and ray-query checks pass; no tracked-hand or headset traversal claimed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.424Z"
     },
     {
       "id": "book_formfinding.015",
@@ -170,9 +173,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Forge"
       ],
@@ -187,9 +190,12 @@
       "proposal": "Add an anchored paragraph (<!-- @self_shaping_forge -->) between the puzzle and the optimiser, in the register of Annealing's end-table paragraph: 180 studs drift from a random cloud to a body written in advance; the bar and the percentage follow a clock that peaks about every eight seconds; nothing is measured; the machine stages the descent whose whole claim is that it cannot be staged. Settle whether it is hero or secondary in the same change.",
       "evidence": "commons/maps/FormFinding_Forge/map_data.json (interactables (5,3) self_shaping_forge, (9,5) balance_puzzle, (4,7) gradient_descent_optimizer; utilities spawn (2,2)); commons/artifacts/self_shaping_forge/self_shaping_forge.gd:15 (N = 180), :112 (banner), :160-162 (readout \"MAX Q\" at _q >= 0.92), :170-171 (Q = smoothstep of sin(t·TAU·0.13)), :156 (raw.lerp(target, q)), :115-140 (targets authored); commons/data/book/formfinding.json pearls[6].hero = \"self_shaping_forge\"; python tools/artifact_roles.py --brief --seq formfinding lists it under FormFinding_Forge secondary.",
       "review": "amended: Encounter confirmed: FormFinding_Forge/map_data.json places self_shaping_forge at (5,3), spawn at (2,2) (three columns and one row away; balance_puzzle (9,5), gradient_descent_optimizer (4,7), science_screen (10,7)). self_shaping_forge.gd:112 banner \"SELF-SHAPING FORGE — DESCENT TOWARD MAX Q\"; :160-162 readout prints \"MAX Q\" once _q >= 0.92; :170-171 _q = smoothstep(0.1, 0.9, sin(_t*TAU*0.13)*0.5+0.5) (period 1/0.13 ≈ 7.7 s); :156 p = raw.lerp(target, q); :115-140 targets authored as head/torso/two limbs; :15 N = 180. commons/data/book/formfinding.json pearls[6].hero = \"self_shaping_forge\". The chapter contains no mention or anchor. One clause of the why is wrong: \"the neighbouring optimiser\" does have a neighbour on the page — its paragraph follows the balance_puzzle section — so drop that clause. Worth one added line: tools/artifact_roles.py lists the forge as secondary while the book calls it the hero.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nDuplicate of .002, addressed by the forge encounter and primary promotion. Original record retained.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.826Z"
     },
     {
       "id": "book_formfinding.003",
@@ -198,9 +204,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Descent"
       ],
@@ -215,9 +221,12 @@
       "proposal": "A short anchored \"Comparisons\" passage after \"The surface we agreed to search\", one sentence each: the marble (velocity, damping, a kick every five seconds, a swaying bowl); the terrain station (the same finite-difference descent on seeded Perlin ground with its own threshold and a 160-step budget); the well (marbles that fall, settle, pulse and begin again — a portrait, not an instrument); the tremble inset (a sampled curve with fixed seeded offsets magnified eight times, and its plaque says so). Close with the one-line science_screen coda the other four halls use.",
       "evidence": "commons/maps/FormFinding_Descent/map_data.json interactables (10,17) settling_tremble, (5,19) descent_marble_toy, (9,21) gradient_descent, (4,23) gradient_descent_well, (10,23) science_screen; utilities spawn (2,18), t (11,25); commons/artifacts/descent_marble_toy/descent_marble_toy.gd:136-137 (accel, 0.985 damping), :143-145 (kick every 5 s), :149-150 (sway); algorithms/formfinding/settling_tremble/settling_tremble.gd:42, :46 (in-world labels), :67 (mag 8.0); algorithms/machinelearning/gradientdescent/GradientDescentDemo.gd:32 (noise_seed), :43 (max_steps 160), :76 (TYPE_PERLIN); commons/artifacts/registry/formfinding.json:9, machinelearning.json:3637, self_portrait.json:56; commons/data/book/formfinding.json pearls[0].hero = \"gradient_descent_well\"; tools/artifact_roles.py --brief --seq formfinding.",
       "review": "amended: Encounter confirmed: FormFinding_Descent/map_data.json interactables (6,8) descent_landscape_lab, (10,17) settling_tremble, (5,19) descent_marble_toy#plinth:1.1, (9,21) gradient_descent:0:0.8:0.14, (4,23) gradient_descent_well, (10,23) science_screen; spawn (2,18), teleporter (11,25) — the five stand between spawn and exit. descent_marble_toy.gd:136-137 accel and 0.985 damping, :143-145 a random kick when fmod(_t, 5.0) < delta, :149-150 the bowl sways; registry formfinding.json:9 settling_tremble \"runs no relaxation solver\"; machinelearning.json:3637 gradient_descent \"seeded Perlin terrain\" (GradientDescentDemo.gd:76 TYPE_PERLIN, :32 noise_seed, :43 max_steps 160); self_portrait.json:56 the well; book pearls[0].hero = gradient_descent_well; artifact_roles lists the five as secondary \"retained as comparisons\". The chapter names only the marble toy (:65). One correction: the tremble inset is not silent in-world — settling_tremble.gd:42 tags it \"analytic catenary / fixed offsets\" and :46 prints \"seeded offsets within +/- epsilon, not solver output / fixed points / magnified differences / no motion\" — so the passage should echo the object's own plaque rather than correct a misreading. Also Descent is the only hall whose map places a science_screen without the coda the other four chapters carry.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nAdded anchored comparisons for the marble, Perlin terrain, glowing well, fixed-offset inset and screen. They retain supporting roles. Rejected the outdated portrait-only reading of the well: its current implementation computes loss for its first marble, verified in the loaded hall. It combines slope and momentum, then restarts without learning model parameters.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.485Z"
     },
     {
       "id": "book_formfinding.004",
@@ -226,9 +235,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Relaxation"
       ],
@@ -243,9 +252,12 @@
       "proposal": "\"Switch WIND off; the cloth restarts from its sixty preliminary steps (RESET does the same without changing a setting). When the step count reads 420, about six seconds later, one pass leaves a mean error of about 1.4% and a worst spring error of about 34%; four passes bring those to about 0.36% and 8.9%.\" (Keep the three-decimal figures if you prefer; the readout shows two.)",
       "evidence": "commons/maps/FormFinding_Relaxation/map_data.json interactables (6,2) verlet_workbench:90#comparison:true; commons/artifacts/verlet_workbench/verlet_workbench.gd:101 (still = false), :307 (wind_enabled = not still), :445 (gust while wind_enabled), :70 and :442-447 (fixed 1/60 s steps), :239-241 (settle_steps run, simulation_steps = settle_steps), :332-334 (readout prints step, MEAN |error| %.2f, WORST |error| %.2f), :409-421 (act: WIND and RESET both call _make_sim); doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md:28.",
       "review": "amended: Confirmed: the Relaxation map places verlet_workbench:90#comparison:true, so the controls exist; verlet_workbench.gd:101 still = false and :307 wind_enabled = not still puts WIND on by default; :445 applies the gust while wind_enabled; :70 COMPARISON_STEP = 1/60 and :442-447 step at that fixed rate (360 steps ≈ 6 s at any frame rate); :241 simulation_steps = settle_steps (60) after the preliminary run, so the readout's \"step\" counts the 60 and reads 420 at the quoted moment; :332-334 prints step, MEAN |error| and WORST |error| with two decimals. SUMMARY.md:28 holds the figures. Two refinements to the proposal: act() at :414-416 falls through to _make_sim() for WIND as well as RESET, so switching WIND off already restarts the run and RESET is optional; and the readout will show 1.41% / 34.28%, so say \"about\".",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nMade the cloth comparison reproducible: WIND off, step count 420 after each restart, rounded error values. Production simulation reproduced mean/worst errors of 1.40894%/34.27612% at one pass and 0.35918%/8.93552% at four. The distinction between mean and worst remains the argument.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.516Z"
     },
     {
       "id": "book_formfinding.005",
@@ -254,9 +266,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Descent"
       ],
@@ -271,9 +283,12 @@
       "proposal": "\"Recorded once with these settings, the first run finishes near −0.304 and the second near 0.295.\"",
       "evidence": "commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd:8 (STARTS), :31-32 (the two-valley cost), :121 (readout prints cost); doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md:20 (−0.3042573523 / 0.2954961030 recorded from the same primary and map).",
       "review": "kept: Confirmed: descent_landscape_lab.gd:8 STARTS, :31-32 the two costs, :121 the readout prints \"cost %.4f\"; defaults rate_index 1 (0.7) and tolerance_index 0 (0.01) match the chapter's instruction; SUMMARY.md:20 records −0.3042573523 and 0.2954961030 from the same primary and map and calls it historical evidence, not a headset visit. The word \"desktop\" is provenance for the makers; for a headset visitor \"Recorded once with these settings\" says the same thing about the same readout. Clear prose improvement, S.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nRemoved desktop-specific wording. Actual STEP and START signals reproduce approximately -0.304 and 0.295 at the two small-slope endpoints.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.547Z"
     },
     {
       "id": "book_formfinding.006",
@@ -282,9 +297,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Forge"
       ],
@@ -299,9 +314,12 @@
       "proposal": "One paragraph before the handover that adds the sixth operation to Annealing's five — a detector that counts height and stillness — and says in the visitor's terms what the six halls shared: each object stopped where a rule, a budget, a boundary or an author said it could, and none of those stops was found on the surface.",
       "evidence": "Word counts this session: Forge 543, the others 911–1051; commons/maps/FormFinding_Annealing/final.md:53 (the five-operation list); commons/maps/sequences/formfinding.json:6 (the sequence truth).",
       "review": "kept: Structure confirmed: wc -w gives Forge 552 against 966–1104 for the other five (the task's 543 / 911–1051 is a different counting method; the ratio holds). Annealing final.md:53 lists five operations (slope, drafted cable, formula surface, finite relaxation, mobile), the sequence truth in commons/maps/sequences/formfinding.json is \"An accepted endpoint depends on the model and its stopping rule\", and Forge's last two paragraphs (:25-27) go straight from the puzzle instruction to the oscillation handover with no gathering. A landing paragraph that adds the sixth operation (the detector's height-plus-stillness rule, balance_puzzle) is a genuine improvement for a visitor leaving the sequence, not a taste. Complementary to task 1, not overlapping.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nAdded a short return through the sequence: drawn cable, evaluated curve, finite relaxation, encoded balance, annealing permission and authored forge. Kept the useful low stack the puzzle refuses and the handoff to oscillation.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.579Z"
     },
     {
       "id": "book_formfinding.007",
@@ -310,9 +328,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Equilibrium"
       ],
@@ -327,9 +345,12 @@
       "proposal": "End the sentence at \"this is frozen sculpture.\" If the breath is worth keeping, make it the visitor's: \"Any breath that seems to move it is yours.\"",
       "evidence": "commons/artifacts/calder_mobile/calder_mobile.gd defines no _process or _physics_process (whole file, 247 lines) and neither does its base commons/artifacts/_embodied/embodied_prop.gd; the breath claim lives in commons/maps/FormFinding_Equilibrium/walked.md (\"lets the whole thing turn on a breath\").",
       "review": "kept: Confirmed: calder_mobile.gd (246 lines, not 247) defines no _process or _physics_process; its only motion-related code freezes RigidBody3D children (:224-226, freeze = true) and the has_method branch at :227 is a no-op pass; the base commons/artifacts/_embodied/embodied_prop.gd extends Node3D with no process loop; the breath claim is walked.md:12 (\"lets the whole thing turn on a breath\"), a file the visitor never sees. Ending at \"this is frozen sculpture.\" removes an editorial aside. Clear prose defect, S.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nRemoved the aside about older notes from the mobile passage. Kept the difference between encoded lever balance and a live physical response.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.612Z"
     },
     {
       "id": "book_formfinding.008",
@@ -338,9 +359,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Relaxation"
       ],
@@ -355,9 +376,12 @@
       "proposal": "\"Press PASSES until the readout says nudged, one pass; then once more for worked, four.\"",
       "evidence": "commons/artifacts/verlet_workbench/verlet_workbench.gd:74 (default \"worked\" = 4 passes), :409-413 (options [1, 4, 8, 12], next = find + 1), :332 (readout prints the word and the count).",
       "review": "kept: Confirmed: the map token verlet_workbench:90#comparison:true sets no relaxation, so verlet_workbench.gd:74 default \"worked\" = 4 applies; act() :409-413 uses options [1, 4, 8, 12] with next = find + 1, so from 4 the presses give 8, 12, 1, 4; :332 prints \"%d passes\" and the word. A visitor following \"Try one pass, then four\" literally compares 8 with 12. The proposal (\"Press PASSES until the readout says nudged, one pass; then once more for worked, four\") is exactly what the readout prints. S.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nNamed the PASSES cycle from the shipped four-pass state: eight, twelve, one; the following press returns to four. Real button signals and reset counts pass.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.640Z"
     },
     {
       "id": "book_formfinding.016",
@@ -366,9 +390,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Catenary"
       ],
@@ -383,9 +407,12 @@
       "proposal": "Cut the sentence, or: \"Nothing in this room performs it, so do not count it as seen.\"",
       "evidence": "commons/primitives/parametric/catenoid.gd:25-86 and commons/primitives/parametric/helicoid.gd:24-84 each build one mesh in _ready and contain no deformation between the two surfaces; commons/maps/FormFinding_Equilibrium/final.md:52 for the sibling sentence.",
       "review": "kept: Confirmed: catenoid.gd:21-86 and helicoid.gd:20-84 each build one mesh in _ready (both extend XRToolsPickable) and contain no deformation between the surfaces; Equilibrium final.md:52 carries the sibling \"Those encounters are still to be built.\" The preceding sentence already states nothing in the room performs it, so the \"to build\" sentence is the makers' backlog leaking into the visitor's page. Cut or the offered rewrite; S.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nDuplicate of .009, addressed by the Catenary and Equilibrium wording. Original record retained.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.843Z"
     },
     {
       "id": "book_formfinding.010",
@@ -394,9 +421,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Equilibrium"
       ],
@@ -411,9 +438,12 @@
       "proposal": "Open the section with the return: \"The hanging models we met at the laundry lines offered another way to approach this problem...\" and keep the footnote as a repeat citation (its Equilibrium gloss can stay).",
       "evidence": "commons/maps/FormFinding_Catenary/final.md:17 and :60 (Gaudí, the inversion, [^hanging-model] Huerta 2006 with a laundry-specific gloss); commons/maps/FormFinding_Equilibrium/final.md:50 and :58 (same citation, different gloss).",
       "review": "amended: Confirmed: Catenary final.md:17 introduces Gaudí, the inversion and [^hanging-model]; :60 is the Huerta 2006 footnote. Equilibrium :50 re-explains the same inversion from scratch with the same footnote key, :58 the same citation. One evidence correction: the two footnote glosses differ (Catenary: \"on hanging models, graphical methods and equilibrium design. The inversion is conditional...\"; Equilibrium: \"The physical equilibrium method is a reference for these digital models, not a claim...\"), so it is the same citation, not the same footnote text. The returning phrase is an improvement: the book should remember what it told the reader two halls ago.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nReturned to the hanging models already encountered at the laundry lines instead of introducing Gaudi again. Kept the existing reference and its conditions on loads and supports.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.685Z"
     },
     {
       "id": "book_formfinding.011",
@@ -422,9 +452,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Descent"
       ],
@@ -439,9 +469,12 @@
       "proposal": "\"On the opening bowl, the cost is a quarter of the sum of x squared and z squared.\"",
       "evidence": "commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd:31 (`return 0.25 * p.length_squared()`); :124-125 (PARTS and RULE board text; no cost formula printed).",
       "review": "amended: Confirmed: descent_landscape_lab.gd:31 `return 0.25 * p.length_squared()` — a quarter of (x² + z²), a round bowl — while \"one quarter of x squared plus z squared\" reads as x²/4 + z². One correction to the why: the RULE board does not print the cost formula (:125 prints \"p_next = p - rate * gradient(p)\", \"SMALL SLOPE is a tolerance...\", \"Cost is authored; height = 0.40 + 0.22 * cost\"), so a visitor cannot check it against the board; only the source disagrees with the sentence. The rewrite is unambiguous and costs nothing.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nCorrected the cost formula to a quarter of the sum of x squared and z squared. Native evaluation at (2,3) gives 3.25.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.717Z"
     },
     {
       "id": "book_formfinding.012",
@@ -450,9 +483,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Relaxation"
       ],
@@ -467,9 +500,12 @@
       "proposal": "\"...and the amphora is what those choices left.\"",
       "evidence": "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd:33-40 (the four exports the sentence names: pin_top_fraction, preinflate, stiffness, sim_steps).",
       "review": "kept: Confirmed: frozen_glass_vessel.gd:33 pin_top_fraction, :34 preinflate, :35 stiffness, :40 sim_steps are the four choices the sentence names, and \"the amphora is what those choose\" is a grammatical slip (choices do not choose) at the sentence the whole fossil argument lands on. \"what those choices left\" fixes it. S.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nCorrected the slip to: the amphora is what those choices left.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.749Z"
     },
     {
       "id": "book_formfinding.017",
@@ -478,9 +514,9 @@
       "effort": "10min",
       "skill": "design",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Annealing"
       ],
@@ -495,9 +531,12 @@
       "proposal": "Embed doc/book/iterations/2026-09-19-formfinding-review/search/standing/Annealing/q-deep-side.png (the 1.7 m camera; the accepted/ copy of the same name was shot from 0.85 m) after this paragraph, using the Color_Pillar embed convention, with the caption: \"The deep well from its outside edge at standing eye height; the cube at the bottom does not move.\"",
       "evidence": "doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md:26 (links search/standing/Annealing/q-deep-side.png); search/AUDIT.md:67 and :70 (world y = 1.7); search/standing/Annealing/q-deep-side-camera.json position (5.1, 1.7, 3.5) versus search/accepted/Annealing/q-deep-side-camera.json position (5.1, 0.85, 3.5); search/final/Annealing/ contains no q-deep-side.png; commons/artifacts/max_q_basin_room/max_q_basin_room.gd:95 (normals.append(Vector3.UP)), :139 (static cube); commons/maps/Color_Pillar/final.md:9-11 (embed convention).",
       "review": "amended: Confirmed with one path correction. SUMMARY.md:26 links search/standing/Annealing/q-deep-side.png and search/AUDIT.md:67,70 say both Q detail cameras use world y = 1.7; that file's camera json is position (5.1, 1.7, 3.5), and the PNG shows the DEEP / NARROW label, the steep well and the cube at its bottom. The task's path search/accepted/Annealing/q-deep-side.png exists but its camera json is (5.1, 0.85, 3.5) — half eye height — and search/final/Annealing/ has no q-deep-side.png at all. max_q_basin_room.gd:95 normals.append(Vector3.UP) confirmed; :139 the cube \"never moving\". No chapter in the sequence carries an image (grep '![' = 0 in all six); Color_Pillar final.md:9-11 shows the convention (image line under /book-review/doc/book/iterations/..., italic caption). Embedding one existing PNG with the convention is S, not M.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nDuplicate figure request covered by .013. Fresh standing capture from the loaded museum replaces the proposed older isolated-stage photograph. Original record retained.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.872Z"
     },
     {
       "id": "book_formfinding.018",
@@ -506,9 +545,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Catenary"
       ],
@@ -523,9 +562,12 @@
       "proposal": "Give each of the four a one-line \"# \" title above its opening sentence (for example \"# Drawn, evaluated, settled\", \"# A fossil of forces\", \"# Balanced by arithmetic\", \"# Low enough to hold\"), leaving the opening sentences as they are.",
       "evidence": "commons/maps/FormFinding_Descent/final.md:1 and commons/maps/FormFinding_Forge/final.md:1 (headings); Catenary, Relaxation, Equilibrium and Annealing final.md:1 (none); scan of every map listed by curriculum_spine.json this session: 148 chapters open with \"# \", 48 do not.",
       "review": "kept: Count verified this session over the 196 maps listed by curriculum_spine.json's 24 sequences: 148 final.md files open with \"# \", 48 do not, and the formfinding halls without a title are exactly FormFinding_Catenary, FormFinding_Relaxation, FormFinding_Equilibrium and FormFinding_Annealing; Descent (:1 \"# Where does downhill take you?\") and Forge (:1 \"# A shape that counts\") have one. The claim is hedged to renderings that show titles, and a sequence whose ends are titled and whose middle is not is a real inconsistency for the reader whichever surface they use. The suggested titles are offered as examples; S.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nDuplicate of .014, covered by four distinct titles. Original record retained.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.904Z"
     },
     {
       "id": "book_formfinding.002",
@@ -534,9 +576,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Forge"
       ],
@@ -551,10 +593,13 @@
       "proposal": "Add an anchored paragraph (<!-- @self_shaping_forge -->) between the puzzle and the optimiser, in the register of Annealing's end-table paragraph: 180 studs drift from a random cloud to a body written in advance; the bar and the percentage follow a clock that peaks about every eight seconds; nothing is measured; the machine stages the descent whose whole claim is that it cannot be staged. Keep it consistent with the wall note already in commons/data/book/formfinding.json pearls[6].lines[0].note, which says the same thing in one line.",
       "evidence": "commons/maps/FormFinding_Forge/map_data.json:95 (self_shaping_forge at col 5, row 3), :80 (spawn col 2, row 2); ada_run/em_bake.json segments[\"formfinding|formfinding forge\"].placed (self_shaping_forge cell [5,7], balance_puzzle [9,9], gradient_descent_optimizer [4,11], science_screen [10,11]); ada_run/em_layout_walk.json halls[\"formfinding|formfinding forge\"].cells (door at row 4 cols 6-8, seal 's' at row 7 col 6); commons/artifacts/self_shaping_forge/self_shaping_forge.gd:15 (N = 180), :23 (cycle_rate 0.13), :112, :115-140, :156, :160-162, :170-171; commons/data/book/formfinding.json pearls[6].hero and pearls[6].lines[0].note; tools/artifact_roles.py --brief --seq formfinding (Forge secondary: self_shaping_forge, science_screen).",
       "review": "amended: Encounter confirmed by map, bake and walk grid, not just the map: the forge stands first past the museum's north door. Amended the why to admit the wall note exists (the visitor is not wordless, the chapter is) and to add the museum evidence.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nRestored self_shaping_forge to the chapter and promoted this existing placement to a third primary encounter. Its 180 points approach authored targets while its percentage follows a roughly 7.7-second clock. The passage keeps the beauty of gathering while asking what is recognised as a body.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
       "created_at": "2026-09-24",
-      "stale": true
+      "stale": true,
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.454Z"
     },
     {
       "id": "book_formfinding.009",
@@ -563,9 +608,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Catenary"
       ],
@@ -580,10 +625,13 @@
       "proposal": "Catenary :44: cut the sentence, or \"Nothing in this room performs it, so do not count it as seen.\" Equilibrium :52: replace \"Those encounters are still to be built.\" with \"None of those experiments stands in this room.\"",
       "evidence": "commons/primitives/parametric/catenoid.gd:21-25, :25-86 (one mesh, no process); commons/primitives/parametric/helicoid.gd:20-24, :24-84; commons/maps/FormFinding_Catenary/final.md:44; commons/maps/FormFinding_Equilibrium/final.md:52.",
       "review": "amended: Prose defect confirmed; amended only to fix the sibling sentence in the same pass since the task already names it.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nCut the maker-facing to-do sentence from Catenary. Equilibrium now says its proposed load experiments are absent from this room. The invitations remain without pretending these encounters were seen.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
       "created_at": "2026-09-24",
-      "stale": true
+      "stale": true,
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.671Z"
     },
     {
       "id": "book_formfinding.013",
@@ -592,9 +640,9 @@
       "effort": "10min",
       "skill": "design",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Annealing"
       ],
@@ -609,10 +657,13 @@
       "proposal": "Embed doc/book/iterations/2026-09-19-formfinding-review/search/standing/Annealing/q-deep-side.png after this paragraph using the Color_Pillar convention (image line plus italic caption), caption: \"The deep well from its outside edge at standing eye height; the cube at the bottom does not move.\" Commit the PNG with it. Rank it after the VR fix: replace the UP normals at max_q_basin_room.gd:95 with normals computed from the well's profile (or generate_normals on the SurfaceTool), so the depth the paragraph asks the visitor to compare is visible in the headset.",
       "evidence": "commons/artifacts/max_q_basin_room/max_q_basin_room.gd:85-95 (normals.append(Vector3.UP)); doc/book/iterations/2026-09-19-formfinding-review/SUMMARY.md:26 (links search/standing/Annealing/q-deep-side.png); ls search/accepted/Annealing/ and search/standing/Annealing/ (q-deep-side.png present, 1,430,477 bytes) vs search/final/Annealing/ (absent); git status: ?? doc/book/iterations/2026-09-19-formfinding-review/ and ?? doc/book/iterations/2026-09-23-pillar-colour-between/; commons/maps/Color_Pillar/final.md:9-11 (embed convention); commons/data/book/formfinding.json pearls (wall lines carry no images).",
       "review": "amended: Kept as a figure task but corrected: wrong path in the evidence, untracked source, and no benefit to the headset visitor on its own; paired with the normals fix that would give the headset the same depth.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nReplaced UP normals with normals derived from neighbouring rings of each well. Native position/index hashes, dimensions and transforms are unchanged. Materials, receiver dynamics and reveal controls remain. Added a fresh unmodified standing photograph inside the actual museum. This changes in-game shading too; no headset perception acceptance claimed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
       "created_at": "2026-09-24",
-      "stale": true
+      "stale": true,
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.781Z"
     },
     {
       "id": "book_formfinding.014",
@@ -621,9 +672,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "FormFinding_Catenary"
       ],
@@ -638,10 +689,77 @@
       "proposal": "Give each of the four a one-line \"# \" title that does not repeat one of its own section headings, for example \"# Drawn, evaluated, settled\" (Catenary), \"# What a budget leaves\" (Relaxation), \"# Where forces cancel\" (Equilibrium), \"# Willing to get worse\" (Annealing), leaving the opening sentences as they are.",
       "evidence": "Scan this session over commons/maps/curriculum_spine.json sequences -> commons/maps/sequences/*.json maps -> commons/maps/<Map>/final.md first non-blank line: 148 with \"# \", 48 without, 14 missing; commons/maps/FormFinding_Descent/final.md:1, FormFinding_Forge/final.md:1; FormFinding_Relaxation/final.md:48, FormFinding_Equilibrium/final.md:5, FormFinding_Annealing/final.md:51 (existing H2s); map_data.json \"title\" for Relaxation and Annealing (bare lookup names).",
       "review": "amended: Fact confirmed, proposal repaired (duplicate headings) and scoped: a web-rendering nicety with no headset effect.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nAdded distinct titles to the four middle chapters without repeating their section headings. Reader-facing change; museum wall cards retained.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-formfinding-review-comments/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
       "created_at": "2026-09-24",
-      "stale": true
+      "stale": true,
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T06:45:19.811Z"
+    },
+    {
+      "id": "book_formfinding.019",
+      "title": "Jakobsen beside Verlet: the corrections are younger than the integrator",
+      "spec": "The chapter credits the position update to Verlet and the pass-by-pass corrections to 'this implementation'. The corrections are Thomas Jakobsen's: 'Advanced Character Physics' (Game Developers Conference, 2001), which NOC calls the paper 'from which just about every Verlet computer graphics simulation is derived', and where cloth and ragdolls learned to satisfy their distances by relaxation. The existing verlet footnote is the place.\n\nProposal: Extend the [^verlet] footnote: 'The corrections are younger than the integrator: Thomas Jakobsen, \"Advanced Character Physics\" (2001), is where game cloth and ragdolls learned to satisfy their distances by relaxation, pass after pass, and this bench's pass budget descends from it.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Relaxation"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "FormFinding_Relaxation",
+      "quote": "In the position update used by Loup Verlet in 1967, where a point is going is implied by where it just was: keep two positions, and their difference carries the motion.",
+      "why": "The chapter credits the position update to Verlet and the pass-by-pass corrections to 'this implementation'. The corrections are Thomas Jakobsen's: 'Advanced Character Physics' (Game Developers Conference, 2001), which NOC calls the paper 'from which just about every Verlet computer graphics simulation is derived', and where cloth and ragdolls learned to satisfy their distances by relaxation. The existing verlet footnote is the place.",
+      "proposal": "Extend the [^verlet] footnote: 'The corrections are younger than the integrator: Thomas Jakobsen, \"Advanced Character Physics\" (2001), is where game cloth and ragdolls learned to satisfy their distances by relaxation, pass after pass, and this bench's pass budget descends from it.'",
+      "evidence": "commons/maps/FormFinding_Relaxation/final.md ([^verlet]); commons/artifacts/verlet_workbench/verlet_workbench.gd:7-13; natureofcode.com/physics-libraries/ 'A Brief Interlude: Integration Methods' (Jakobsen)",
+      "review": "by hand: NOC ch. 6 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 6 reading, 25 Sept (doc/book/readings/NOC_softbodies_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T06:45:19.424Z",
+      "stale": false
+    },
+    {
+      "id": "book_formfinding.020",
+      "title": "The bench next door could hang the chain the cable only draws",
+      "spec": "NOC's Example 6.12 hangs a bob from a string of particles and springs; a row of the Relaxation bench's particles hung from two points would settle, by correction toward their rest lengths, toward the curve the laundry lines evaluate, without ever being told cosh. The chapter's forward link ('Next: what happens when the solving has to be done in steps') points at the bench without saying that the solver next door could find this room's curve, which is the room's whole distinction: drawn, evaluated, settled.\n\nProposal: After the quoted sentence: 'The bench in the next hall could supply it: a row of its particles hung from two points, corrected toward their rest lengths pass after pass, would settle into this curve without being told cosh. That is the difference this room has been drawing - a curve evaluated, and a curve arrived at.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "FormFinding_Catenary"
+      ],
+      "sequence_refs": [
+        "formfinding"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "FormFinding_Catenary",
+      "quote": "In this room that time is absent for another reason: the laundry curves and surface meshes are constructed from chosen formulas.",
+      "why": "NOC's Example 6.12 hangs a bob from a string of particles and springs; a row of the Relaxation bench's particles hung from two points would settle, by correction toward their rest lengths, toward the curve the laundry lines evaluate, without ever being told cosh. The chapter's forward link ('Next: what happens when the solving has to be done in steps') points at the bench without saying that the solver next door could find this room's curve, which is the room's whole distinction: drawn, evaluated, settled.",
+      "proposal": "After the quoted sentence: 'The bench in the next hall could supply it: a row of its particles hung from two points, corrected toward their rest lengths pass after pass, would settle into this curve without being told cosh. That is the difference this room has been drawing - a curve evaluated, and a curve arrived at.'",
+      "evidence": "commons/maps/FormFinding_Catenary/final.md; commons/maps/FormFinding_Relaxation/final.md; commons/artifacts/verlet_workbench/verlet_workbench.gd; natureofcode.com/physics-libraries/ Example 6.12 'Soft Swinging Pendulum'",
+      "review": "by hand: NOC ch. 6 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 6 reading, 25 Sept (doc/book/readings/NOC_softbodies_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T06:45:19.424Z",
+      "stale": false
     }
   ]
 }

@@ -509,6 +509,262 @@
       "triage": "fix",
       "triaged_at": "2026-09-25",
       "updated_at": "2026-09-25T06:13:26.274Z"
+    },
+    {
+      "id": "book_forces.011",
+      "title": "Name Newton's three laws where the halls perform them: the push that keeps going, MASS, and mutual = false",
+      "spec": "VFM_03's opening is the first law, and its title 'When the push ends' refutes Aristotle's two-thousand-year rule that a moving body needs a force to keep moving; MASS halving the velocity change is the second; Gravity's mutual = false is the third law switched off by one boolean and restored at the three-body floor ('an equal and opposite force on its partner'). NOC states all three (its version of the third - forces occur in pairs, on different objects, the truck on ice, the roller skates - is the cleanest around). Thirteen halls, and neither Newton nor Aristotle is named.\n\nProposal: Motion: after the cube keeps going, 'That is the first of Newton's laws, and the opposite of what was taught for two thousand years before him: nothing is needed to keep it going. What is needed is a force to change it.'[fn] At MASS: 'the second law, as a division.' Gravity: at mutual = false, 'the third law - every pull is paired with an equal pull the other way - has been switched off by that one word'; at the three-body floor, 'switched back on'. Footnote: Isaac Newton, Philosophiae Naturalis Principia Mathematica (1687), the three laws of motion; Aristotle, Physics, on forced motion.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "VFM_03_Motion"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "VFM_03_Motion (also VFM_07_Gravity)",
+      "quote": "The command lasts one second. The cube keeps going.",
+      "why": "VFM_03's opening is the first law, and its title 'When the push ends' refutes Aristotle's two-thousand-year rule that a moving body needs a force to keep moving; MASS halving the velocity change is the second; Gravity's mutual = false is the third law switched off by one boolean and restored at the three-body floor ('an equal and opposite force on its partner'). NOC states all three (its version of the third - forces occur in pairs, on different objects, the truck on ice, the roller skates - is the cleanest around). Thirteen halls, and neither Newton nor Aristotle is named.",
+      "proposal": "Motion: after the cube keeps going, 'That is the first of Newton's laws, and the opposite of what was taught for two thousand years before him: nothing is needed to keep it going. What is needed is a force to change it.'[fn] At MASS: 'the second law, as a division.' Gravity: at mutual = false, 'the third law - every pull is paired with an equal pull the other way - has been switched off by that one word'; at the three-body floor, 'switched back on'. Footnote: Isaac Newton, Philosophiae Naturalis Principia Mathematica (1687), the three laws of motion; Aristotle, Physics, on forced motion.",
+      "evidence": "commons/maps/VFM_03_Motion/final.md; commons/maps/VFM_07_Gravity/final.md (mutual, 'an equal and opposite force'); natureofcode.com/forces/ 'Forces and Newton's Laws of Motion'",
+      "review": "by hand: NOC chapters read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 1-2 reading, 25 Sept (doc/book/readings/NOC_forces_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T06:13:26.014Z",
+      "stale": false
+    },
+    {
+      "id": "book_forces.012",
+      "title": "Say which quantities remember: acceleration has no memory, velocity and position do",
+      "spec": "NOC's central programming lesson: forces accumulate into acceleration, which is cleared every step, or the wind adds onto itself; velocity and position carry the past. Motion says 'the command has ended, but the damping has not' and Act3 shows accumulation; neither says which quantities remember, in a sequence built on what records keep.\n\nProposal: After the quoted sentence: 'Of the three quantities in the update, only two remember. Acceleration is made new at every step from whatever is pushing now; velocity and position carry the steps before. That is why a force can end and its consequence continue.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Vectors_Act3_FieldsAndMotion"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "Vectors_Act3_FieldsAndMotion (also VFM_03_Motion)",
+      "quote": "The second meets a velocity already there; the first supplies a new velocity each time.",
+      "why": "NOC's central programming lesson: forces accumulate into acceleration, which is cleared every step, or the wind adds onto itself; velocity and position carry the past. Motion says 'the command has ended, but the damping has not' and Act3 shows accumulation; neither says which quantities remember, in a sequence built on what records keep.",
+      "proposal": "After the quoted sentence: 'Of the three quantities in the update, only two remember. Acceleration is made new at every step from whatever is pushing now; velocity and position carry the steps before. That is why a force can end and its consequence continue.'",
+      "evidence": "commons/maps/Vectors_Act3_FieldsAndMotion/final.md (the = and += rules); natureofcode.com/forces/ 'Force Accumulation'",
+      "review": "by hand: NOC chapters read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 1-2 reading, 25 Sept (doc/book/readings/NOC_forces_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T06:13:26.014Z",
+      "stale": false
+    },
+    {
+      "id": "book_forces.013",
+      "title": "Galileo and the missing division; weight is what acts, mass is what is counted",
+      "spec": "The field's skipped division is why all bodies fall alike - Galileo's two balls (1589, by legend) - and Gravity's pair_force / masses[i] shows the mass cancelling; the sequence says neither. Weight versus mass is never distinguished: Legs says 'ten kilograms are represented as acting', and kilograms are the mass; what acts on the posts is weight, a force.\n\nProposal: Act5: after the quoted sentence, 'That is what gravity does too: its pull grows with the mass it pulls, and the division by the same mass cancels the growth, so Galileo's two balls reached the ground together. This field skips the multiplication and the division at once.' Legs: 'ten kilograms' -> 'a load of ten kilograms, whose weight - the force those kilograms make under gravity - is what the posts answer'.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Vectors_Act5_ForceAsPlace"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "Vectors_Act5_ForceAsPlace (also VFM_09_Legs)",
+      "quote": "A one-kilogram body and a four-kilogram body receive the same velocity increment.",
+      "why": "The field's skipped division is why all bodies fall alike - Galileo's two balls (1589, by legend) - and Gravity's pair_force / masses[i] shows the mass cancelling; the sequence says neither. Weight versus mass is never distinguished: Legs says 'ten kilograms are represented as acting', and kilograms are the mass; what acts on the posts is weight, a force.",
+      "proposal": "Act5: after the quoted sentence, 'That is what gravity does too: its pull grows with the mass it pulls, and the division by the same mass cancels the growth, so Galileo's two balls reached the ground together. This field skips the multiplication and the division at once.' Legs: 'ten kilograms' -> 'a load of ten kilograms, whose weight - the force those kilograms make under gravity - is what the posts answer'.",
+      "evidence": "commons/maps/Vectors_Act5_ForceAsPlace/final.md; commons/maps/VFM_07_Gravity/final.md (pair_force / masses[i]); commons/maps/VFM_09_Legs/final.md; natureofcode.com/forces/ Example 2.3, 'Weight vs. Mass'",
+      "review": "by hand: NOC chapters read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 1-2 reading, 25 Sept (doc/book/readings/NOC_forces_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T06:13:26.014Z",
+      "stale": false
+    },
+    {
+      "id": "book_forces.014",
+      "title": "Say that the corridor's drag is the linear law, and that air at speed resists with the square",
+      "spec": "The corridor's -c * v is the linear rule; NOC's is the quadratic one, half rho v-squared A Cd, which is what air at speed does (its coefficient in kg/m). The chapter already says the media are named rather than simulated; it does not say which law it runs or that another law exists.\n\nProposal: After the quoted sentence: 'This is the linear rule: double the speed, double the resistance. Air at any speed you can throw a cube resists with the square of the speed, a law whose coefficient carries kilograms per metre instead; this corridor does not model it, which is one more reason the strips are names.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Vectors_Act4a_KineticForces"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "Vectors_Act4a_KineticForces",
+      "quote": "The coefficient has units of kilograms per second; multiplied by metres per second, it gives newtons.",
+      "why": "The corridor's -c * v is the linear rule; NOC's is the quadratic one, half rho v-squared A Cd, which is what air at speed does (its coefficient in kg/m). The chapter already says the media are named rather than simulated; it does not say which law it runs or that another law exists.",
+      "proposal": "After the quoted sentence: 'This is the linear rule: double the speed, double the resistance. Air at any speed you can throw a cube resists with the square of the speed, a law whose coefficient carries kilograms per metre instead; this corridor does not model it, which is one more reason the strips are names.'",
+      "evidence": "commons/maps/Vectors_Act4a_KineticForces/final.md; natureofcode.com/forces/ 'Air and Fluid Resistance'",
+      "review": "by hand: NOC chapters read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 1-2 reading, 25 Sept (doc/book/readings/NOC_forces_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T06:13:26.014Z",
+      "stale": false
+    },
+    {
+      "id": "book_forces.015",
+      "title": "Why BRAKE weakens near rest: a whole step of resistance can push a body through rest and back",
+      "spec": "NOC's Exercise 2.8 gives the reason the guard exists: a resistance applied across a whole step can carry a body through rest and out the other side, which no real drag does - the fault is the step's, not the brake's. Oscillation already says 'the finite update can introduce numerical error'; the two sentences should meet.\n\nProposal: After the quoted sentence: 'Without that weakening, one step of braking could carry a slow cube through rest and out the other side, and it would set off backwards under a force that only ever opposed its motion. A resistance cannot do that; a step can. The spring hall will meet the same step from the other side.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "VFM_03_Motion"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "VFM_03_Motion",
+      "quote": "It weakens near rest to avoid sending the cube back the other way.",
+      "why": "NOC's Exercise 2.8 gives the reason the guard exists: a resistance applied across a whole step can carry a body through rest and out the other side, which no real drag does - the fault is the step's, not the brake's. Oscillation already says 'the finite update can introduce numerical error'; the two sentences should meet.",
+      "proposal": "After the quoted sentence: 'Without that weakening, one step of braking could carry a slow cube through rest and out the other side, and it would set off backwards under a force that only ever opposed its motion. A resistance cannot do that; a step can. The spring hall will meet the same step from the other side.'",
+      "evidence": "commons/maps/VFM_03_Motion/final.md; commons/maps/Vectors_Act4b_Oscillation/final.md ('the finite update can introduce numerical error'); natureofcode.com/forces/ Exercise 2.8",
+      "review": "by hand: NOC chapters read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 1-2 reading, 25 Sept (doc/book/readings/NOC_forces_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T06:13:26.014Z",
+      "stale": false
+    },
+    {
+      "id": "book_forces.016",
+      "title": "Two bodies are solved and three are not - say so, count the pairs in the rear sculptures, and footnote the figure-eight",
+      "spec": "The chapter never says the pair's orbit has a closed form and the triple has none (Poincare, 1890), nor that the rear works - nbody_simulation, example_2_9_n_body_attraction_vr, gravity_well, chaos_attractor, none of them mentioned - do every pair, n-squared of them (NOC: Barnes-Hut is the way out). The chapter's honest caution about chaos has an edge waiting: periodic three-body orbits exist (Moore 1993; Chenciner and Montgomery's figure-eight, 2000), so no general solution is not no order.\n\nProposal: After NUDGE: 'The pair on the first floor had a path that can be written down; the triple does not, and has not since Poincare showed in 1890 that none can be. That is not the same as saying it has no order: three equal masses can chase one another for ever round a figure-eight, found in 2000.'[fn] Then the rear: 'behind these floors, a sculpture does the same sum for every pair of many bodies - as many pairs as bodies squared, which is why simulations of galaxies do not.'",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "VFM_07_Gravity"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "VFM_07_Gravity",
+      "quote": "A tangled trail alone would not establish chaos, and this short comparison does not establish an exponential rate of separation.",
+      "why": "The chapter never says the pair's orbit has a closed form and the triple has none (Poincare, 1890), nor that the rear works - nbody_simulation, example_2_9_n_body_attraction_vr, gravity_well, chaos_attractor, none of them mentioned - do every pair, n-squared of them (NOC: Barnes-Hut is the way out). The chapter's honest caution about chaos has an edge waiting: periodic three-body orbits exist (Moore 1993; Chenciner and Montgomery's figure-eight, 2000), so no general solution is not no order.",
+      "proposal": "After NUDGE: 'The pair on the first floor had a path that can be written down; the triple does not, and has not since Poincare showed in 1890 that none can be. That is not the same as saying it has no order: three equal masses can chase one another for ever round a figure-eight, found in 2000.'[fn] Then the rear: 'behind these floors, a sculpture does the same sum for every pair of many bodies - as many pairs as bodies squared, which is why simulations of galaxies do not.'",
+      "evidence": "commons/maps/VFM_07_Gravity/final.md; commons/maps/VFM_07_Gravity/map_data.json (nbody_simulation, example_2_9_n_body_attraction_vr, gravity_well, chaos_attractor placed); natureofcode.com/forces/ 'The n-Body Problem', Exercise 2.14",
+      "review": "by hand: NOC chapters read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 1-2 reading, 25 Sept (doc/book/readings/NOC_forces_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T06:13:26.014Z",
+      "stale": false
+    },
+    {
+      "id": "book_forces.017",
+      "title": "Name Calder at the mobile (the torque crank hung up as sculpture) and the Marshall Islands stick chart at 'this far, this way'",
+      "spec": "NOC's Forces chapter opens on Calder's mobiles; Act4b places calder_mobile and calder_object_mobile - the registry says tau = w*d at every arm, disc masses from area, thickness and aluminium density - and gives them six words. The mobile is Act2's torque crank hung up. NOC's Vectors chapter opens on the Marshall Islands stick charts, swell directions tied into a frame of fronds: a vector instrument older than the arrow, and this sequence's Ba-ila.\n\nProposal: Act4b: 'Among the balances further in hang two mobiles after Alexander Calder, who made the first in 1931: every arm balanced so that weight times distance is equal on both sides - the crank you turned two halls ago, hung up and at rest. One carries painted discs; the other the museum's own objects.'[fn] Act1, at 'This far, this way': a footnote on the rebbelib and mattang charts of the Marshall Islands, coconut-frond frames that tied the directions of ocean swells and the shells of islands into one instrument, read by navigators who did not draw arrows.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Vectors_Act4b_Oscillation"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "Vectors_Act4b_Oscillation (also Vectors_Act1_WhatAVectorIs)",
+      "quote": "Other balances, springs and pendulums remain farther into this hall.",
+      "why": "NOC's Forces chapter opens on Calder's mobiles; Act4b places calder_mobile and calder_object_mobile - the registry says tau = w*d at every arm, disc masses from area, thickness and aluminium density - and gives them six words. The mobile is Act2's torque crank hung up. NOC's Vectors chapter opens on the Marshall Islands stick charts, swell directions tied into a frame of fronds: a vector instrument older than the arrow, and this sequence's Ba-ila.",
+      "proposal": "Act4b: 'Among the balances further in hang two mobiles after Alexander Calder, who made the first in 1931: every arm balanced so that weight times distance is equal on both sides - the crank you turned two halls ago, hung up and at rest. One carries painted discs; the other the museum's own objects.'[fn] Act1, at 'This far, this way': a footnote on the rebbelib and mattang charts of the Marshall Islands, coconut-frond frames that tied the directions of ocean swells and the shells of islands into one instrument, read by navigators who did not draw arrows.",
+      "evidence": "commons/maps/Vectors_Act4b_Oscillation/map_data.json (calder_mobile, calder_object_mobile); commons/artifacts/calder_mobile/calder_mobile.gd; natureofcode.com/forces/ and /vectors/ openers",
+      "review": "by hand: NOC chapters read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 1-2 reading, 25 Sept (doc/book/readings/NOC_forces_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T06:13:26.014Z",
+      "stale": false
+    },
+    {
+      "id": "book_forces.018",
+      "title": "A forward link: random acceleration is a walker with continuity - the terrarium's beads replace their velocity",
+      "spec": "NOC: randomising the acceleration rather than the velocity gives 'a kind of continuity and fluidity that the original random walker lacked'. Act3 has the mechanism (+=); Random_Walk, three sequences on, has the replaced-velocity walker; nothing joins them.\n\nProposal: After the pink rule: 'Hold on to the difference. In Randomness, the beads in a glass tank will replace their velocity with a new draw at every step, and jitter; a body that adds its draws to what it already has, as pink does, glides. The same rule, received two ways.'",
+      "effort": "10min",
+      "skill": "ada-sequence-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Vectors_Act3_FieldsAndMotion"
+      ],
+      "sequence_refs": [
+        "forces"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "handover",
+      "hall": "Vectors_Act3_FieldsAndMotion",
+      "quote": "Pink adds a contribution over one model step:",
+      "why": "NOC: randomising the acceleration rather than the velocity gives 'a kind of continuity and fluidity that the original random walker lacked'. Act3 has the mechanism (+=); Random_Walk, three sequences on, has the replaced-velocity walker; nothing joins them.",
+      "proposal": "After the pink rule: 'Hold on to the difference. In Randomness, the beads in a glass tank will replace their velocity with a new draw at every step, and jitter; a body that adds its draws to what it already has, as pink does, glides. The same rule, received two ways.'",
+      "evidence": "commons/maps/Vectors_Act3_FieldsAndMotion/final.md; commons/maps/Random_Walk/final.md (the terrarium); natureofcode.com/vectors/ Example 1.9",
+      "review": "by hand: NOC chapters read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 1-2 reading, 25 Sept (doc/book/readings/NOC_forces_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "updated_at": "2026-09-25T06:13:26.014Z",
+      "stale": false
     }
   ]
 }

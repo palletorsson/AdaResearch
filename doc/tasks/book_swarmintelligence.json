@@ -623,6 +623,321 @@
       "triaged_at": null,
       "stale": false,
       "event": "occlusion"
+    },
+    {
+      "id": "book_swarmintelligence.018",
+      "title": "Name the steering formula where the code runs it: push on the difference",
+      "spec": "FlowAgent.gd:28 is velocity = velocity.lerp(desired_dir * speed, steers_force * delta), and lerp(v, d, a) is v + a*(d - v): Reynolds's steering force, desired minus velocity, with a gain of 20 per second and no force cap. The open flock (Boid.gd:99-118) and the ecosystem's creatures (Creature.gd:70-73) run the same subtraction with a max_force. NOC's whole conceptual leap is in it: 'a celestial body doesn't know it is experiencing gravity, whereas a cheetah chasing its prey knows it's chasing'; the force is 'a manifestation of the current velocity's error'. After the forces sequence's = versus += this is the third receiver, and the chapter says 'steers towards' without saying what steering is.\n\nProposal: After the quoted sentence: 'Steering has a precise meaning here. The agent compares the direction it has read with the velocity it already has, and pushes on the difference. A pull like gravity never asks how a body is moving; this rule asks first, and the answer is in the push. That comparison, made inside the mover, is what the word agent adds to the word particle.'",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_FlowFields"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "SwarmIntelligence_FlowFields",
+      "quote": "Each moving agent reads the direction at its present position and steers towards it.",
+      "why": "FlowAgent.gd:28 is velocity = velocity.lerp(desired_dir * speed, steers_force * delta), and lerp(v, d, a) is v + a*(d - v): Reynolds's steering force, desired minus velocity, with a gain of 20 per second and no force cap. The open flock (Boid.gd:99-118) and the ecosystem's creatures (Creature.gd:70-73) run the same subtraction with a max_force. NOC's whole conceptual leap is in it: 'a celestial body doesn't know it is experiencing gravity, whereas a cheetah chasing its prey knows it's chasing'; the force is 'a manifestation of the current velocity's error'. After the forces sequence's = versus += this is the third receiver, and the chapter says 'steers towards' without saying what steering is.",
+      "proposal": "After the quoted sentence: 'Steering has a precise meaning here. The agent compares the direction it has read with the velocity it already has, and pushes on the difference. A pull like gravity never asks how a body is moving; this rule asks first, and the answer is in the push. That comparison, made inside the mover, is what the word agent adds to the word particle.'",
+      "evidence": "algorithms/pathfinding/flow_field/FlowAgent.gd:23-28; algorithms/emergentsystems/boidflocking/Boid.gd:99-118; algorithms/emergentsystems/ecosystemsimulation/Creature.gd:70-73; natureofcode.com/autonomous-agents/ 'The Steering Force', 'The Arrive Behavior'",
+      "review": "by hand: NOC ch. 5 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 5 reading, 25 Sept (doc/book/readings/NOC_swarmintelligence_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_swarmintelligence.019",
+      "title": "The wander at zero cells is a new random direction every frame, not Reynolds's wander",
+      "spec": "FlowAgent.gd:35-38 draws a fresh random unit vector every frame at a zero-length cell (the target, a wall) and lerps toward it at gain 2; the code comment says 'buzz around target'. Reynolds's wander (NOC Exercise 5.4) seeks a point that moves randomly on a circle held ahead of the vehicle, so each frame's direction is related to the last - 'random steering which has some long-term order' - and NOC quotes him against exactly the per-frame version ('more interesting motion than simply generating a random steering direction each frame'). Randomness has the same contrast as an instrument (Random_Walk's terrarium; book_forces.018).\n\nProposal: After the quoted sentence: 'That wandering is a new random direction every frame, smoothed a little by the same steering, which is why an agent at the target buzzes rather than roams. Reynolds's own wanderers keep most of yesterday's heading and add a little chance to it; the beads in the Randomness terrarium will show the difference between the two again.' Verification: the code lines; optionally watch the target cell in the desktop lane for the buzz.",
+      "effort": "30min",
+      "skill": "ada-code-guide",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_FlowFields"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "code-claim",
+      "hall": "SwarmIntelligence_FlowFields",
+      "quote": "Where the direction is zero, the agents have a wandering behaviour rather than a magical knowledge of where to go.",
+      "why": "FlowAgent.gd:35-38 draws a fresh random unit vector every frame at a zero-length cell (the target, a wall) and lerps toward it at gain 2; the code comment says 'buzz around target'. Reynolds's wander (NOC Exercise 5.4) seeks a point that moves randomly on a circle held ahead of the vehicle, so each frame's direction is related to the last - 'random steering which has some long-term order' - and NOC quotes him against exactly the per-frame version ('more interesting motion than simply generating a random steering direction each frame'). Randomness has the same contrast as an instrument (Random_Walk's terrarium; book_forces.018).",
+      "proposal": "After the quoted sentence: 'That wandering is a new random direction every frame, smoothed a little by the same steering, which is why an agent at the target buzzes rather than roams. Reynolds's own wanderers keep most of yesterday's heading and add a little chance to it; the beads in the Randomness terrarium will show the difference between the two again.' Verification: the code lines; optionally watch the target cell in the desktop lane for the buzz.",
+      "evidence": "algorithms/pathfinding/flow_field/FlowAgent.gd:35-38; natureofcode.com/autonomous-agents/ 'Your Own Behaviors' (Reynolds on wandering)",
+      "review": "by hand: NOC ch. 5 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 5 reading, 25 Sept (doc/book/readings/NOC_swarmintelligence_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "threshold"
+    },
+    {
+      "id": "book_swarmintelligence.020",
+      "title": "Name the containment rule at the five-metre margin",
+      "spec": "Boid.gd:138-150: inside a five-metre margin a push grows linearly from zero at the margin to boundary_force (5) at the wall, per axis. That is Reynolds's containment behaviour; NOC's Example 5.3 'stay within walls' builds it as a desired velocity pointing away from the wall and leaves the desire NULL elsewhere, with the reason spelled out: a desire for zero velocity would be a brake. Ada's ramped push never brakes either. The chapter has the fact and neither the name nor the lineage.\n\nProposal: Footnote at the quoted sentence: 'The push begins at zero on the margin and reaches its full strength at the wall, so a boid meets the box gradually; Reynolds called this containment. Nature of Code builds it as a desire to move away from the wall that is switched off everywhere else, because a desire for zero speed would be a brake, not an absence.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Boids_Algorithm"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "SwarmIntelligence_Boids_Algorithm",
+      "quote": "The only edge they answer to is a box fifty metres on a side, and they feel it only in its last five.",
+      "why": "Boid.gd:138-150: inside a five-metre margin a push grows linearly from zero at the margin to boundary_force (5) at the wall, per axis. That is Reynolds's containment behaviour; NOC's Example 5.3 'stay within walls' builds it as a desired velocity pointing away from the wall and leaves the desire NULL elsewhere, with the reason spelled out: a desire for zero velocity would be a brake. Ada's ramped push never brakes either. The chapter has the fact and neither the name nor the lineage.",
+      "proposal": "Footnote at the quoted sentence: 'The push begins at zero on the margin and reaches its full strength at the wall, so a boid meets the box gradually; Reynolds called this containment. Nature of Code builds it as a desire to move away from the wall that is switched off everywhere else, because a desire for zero speed would be a brake, not an absence.'",
+      "evidence": "algorithms/emergentsystems/boidflocking/Boid.gd:25-27, 138-150; natureofcode.com/autonomous-agents/ Example 5.3; Reynolds, 'Steering Behaviors for Autonomous Characters' (1999), containment",
+      "review": "by hand: NOC ch. 5 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 5 reading, 25 Sept (doc/book/readings/NOC_swarmintelligence_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_swarmintelligence.021",
+      "title": "Take out the cooperation, then the competition",
+      "spec": "NOC's complex-systems section: alignment and cohesion cooperate, separation competes; 'try taking out just the cooperation or just the competition, and you'll see how the system loses its complexity.' The panel has the three sliders and the chapter has one of the three experiments. With ALIGN and COH at zero the thirty avoid one another until nobody is inside twenty centimetres and each flies straight (a gas); with SEP at zero they close on their centre and stay (a clot, the code's 0.001 m guard the only thing between them; flocking_controls.gd:452-475).\n\nProposal: After the quoted sentence: 'Then take the other two out instead, ALIGN and COH to nothing: the thirty avoid one another until no one is within sight, and each flies straight - a gas. Put them back and take SEP to nothing: they close on their middle and stay there - a clot. Cooperation alone and competition alone are both simple; the flock needs the disagreement.' Verification: desktop lane, the panel flock, both settings.",
+      "effort": "30min",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Boids_Algorithm"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "encounter",
+      "hall": "SwarmIntelligence_Boids_Algorithm",
+      "quote": "Try letting separation win for a while.",
+      "why": "NOC's complex-systems section: alignment and cohesion cooperate, separation competes; 'try taking out just the cooperation or just the competition, and you'll see how the system loses its complexity.' The panel has the three sliders and the chapter has one of the three experiments. With ALIGN and COH at zero the thirty avoid one another until nobody is inside twenty centimetres and each flies straight (a gas); with SEP at zero they close on their centre and stay (a clot, the code's 0.001 m guard the only thing between them; flocking_controls.gd:452-475).",
+      "proposal": "After the quoted sentence: 'Then take the other two out instead, ALIGN and COH to nothing: the thirty avoid one another until no one is within sight, and each flies straight - a gas. Put them back and take SEP to nothing: they close on their middle and stay there - a clot. Cooperation alone and competition alone are both simple; the flock needs the disagreement.' Verification: desktop lane, the panel flock, both settings.",
+      "evidence": "commons/artifacts/flocking_controls/flocking_controls.gd:438-497; commons/maps/SwarmIntelligence_Boids_Algorithm/final.md; natureofcode.com/autonomous-agents/ 'Complex Systems' (competition and cooperation)",
+      "review": "by hand: NOC ch. 5 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 5 reading, 25 Sept (doc/book/readings/NOC_swarmintelligence_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "proximity"
+    },
+    {
+      "id": "book_swarmintelligence.022",
+      "title": "The same scatter is not the same flock",
+      "spec": "boids_aquarium.gd seeds every draw from DEPOSIT_SEED 1987, so the tank's RESET deals the same scatter every time - verified - and then advances in _process(delta) with each frame's own length. A flock is a nonlinear system, so two runs from one scatter part within seconds. NOC's nonlinearity paragraph (Lorenz, 1961, typing 0.506 for 0.506127) is the footnote the chapter's promise needs: the start is all that returns. This is a PREDICTION; measure it before installing.\n\nProposal: After the quoted sentence: 'It gives you back the start and nothing after it. Run the tank twice from that scatter, twenty seconds each, and look where the school is: not in the same place, because no two frames were the same length and a flock magnifies any difference it is given. Lorenz found this in 1961 by retyping a number to three decimals instead of six.'[fn] Verification: a probe that runs the tank twice with jittered delta (and once with a fixed delta as control) and reports the centroid separation at 20 s; install only if the jittered pair diverges and the fixed pair does not.",
+      "effort": "1h",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Boids_Algorithm"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "encounter",
+      "hall": "SwarmIntelligence_Boids_Algorithm",
+      "quote": "Two buttons with one name, and only one of them gives you back your starting point.",
+      "why": "boids_aquarium.gd seeds every draw from DEPOSIT_SEED 1987, so the tank's RESET deals the same scatter every time - verified - and then advances in _process(delta) with each frame's own length. A flock is a nonlinear system, so two runs from one scatter part within seconds. NOC's nonlinearity paragraph (Lorenz, 1961, typing 0.506 for 0.506127) is the footnote the chapter's promise needs: the start is all that returns. This is a PREDICTION; measure it before installing.",
+      "proposal": "After the quoted sentence: 'It gives you back the start and nothing after it. Run the tank twice from that scatter, twenty seconds each, and look where the school is: not in the same place, because no two frames were the same length and a flock magnifies any difference it is given. Lorenz found this in 1961 by retyping a number to three decimals instead of six.'[fn] Verification: a probe that runs the tank twice with jittered delta (and once with a fixed delta as control) and reports the centroid separation at 20 s; install only if the jittered pair diverges and the fixed pair does not.",
+      "evidence": "commons/artifacts/boids_aquarium/boids_aquarium.gd:153-157 (seeds), 611, 753-757 (_process(delta)); natureofcode.com/autonomous-agents/ 'Complex Systems' (nonlinearity, Lorenz)",
+      "review": "by hand: NOC ch. 5 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 5 reading, 25 Sept (doc/book/readings/NOC_swarmintelligence_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "repetition"
+    },
+    {
+      "id": "book_swarmintelligence.023",
+      "title": "The cost of seeing: everyone measures everyone",
+      "spec": "Boid.gd:77-98 loops over every other boid to find who is inside the radius: a hundred boids make 9,900 distance measurements a tick; the panel's thirty make 870. The tank sorts its fish into cells and asks only the neighbouring cells (boids_aquarium.gd:242-243, 766: a spatial hash), which is NOC's bin-lattice subdivision (Reynolds 2000) and the reason flocks of thousands are possible. Gravity's rear sculptures received the same footnote (book_forces.016). The population size is set by this arithmetic, and the chapter should say so once.\n\nProposal: Footnote at the quoted sentence: 'To know who is inside its radius, each boid measures its distance to every other, so a hundred boids make nearly ten thousand measurements a tick. The tank cheats honestly: it sorts its fish into cells and asks only the neighbouring cells. Flocks of thousands exist only that way.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Boids_Algorithm"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "SwarmIntelligence_Boids_Algorithm",
+      "quote": "Each boid, on its own, looks at the neighbours inside its radius and adds up three requests, each multiplied by a weight.",
+      "why": "Boid.gd:77-98 loops over every other boid to find who is inside the radius: a hundred boids make 9,900 distance measurements a tick; the panel's thirty make 870. The tank sorts its fish into cells and asks only the neighbouring cells (boids_aquarium.gd:242-243, 766: a spatial hash), which is NOC's bin-lattice subdivision (Reynolds 2000) and the reason flocks of thousands are possible. Gravity's rear sculptures received the same footnote (book_forces.016). The population size is set by this arithmetic, and the chapter should say so once.",
+      "proposal": "Footnote at the quoted sentence: 'To know who is inside its radius, each boid measures its distance to every other, so a hundred boids make nearly ten thousand measurements a tick. The tank cheats honestly: it sorts its fish into cells and asks only the neighbouring cells. Flocks of thousands exist only that way.'",
+      "evidence": "algorithms/emergentsystems/boidflocking/Boid.gd:77-98; commons/artifacts/boids_aquarium/boids_aquarium.gd:8, 242-243, 766; natureofcode.com/autonomous-agents/ 'Algorithmic Efficiency', 'Spatial Subdivisions'",
+      "review": "by hand: NOC ch. 5 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 5 reading, 25 Sept (doc/book/readings/NOC_swarmintelligence_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "scale"
+    },
+    {
+      "id": "book_swarmintelligence.024",
+      "title": "Braitenberg at 'an adequate model of a person'",
+      "spec": "Valentino Braitenberg, Vehicles: Experiments in Synthetic Psychology (1984): vehicles with two sensors and two motors, wired straight or crosswise, that observers describe as fearful, aggressive or loving; his 'law of uphill analysis and downhill invention' says the attribution comes free with the watching. Reynolds took his vehicles from Braitenberg and NOC says so; the sequence's repeated warning about labels (PSO's Corporate/Ecological/Artistic, ants to citizens, a biological name) is Braitenberg's point with its classic source unnamed.\n\nProposal: Footnote: 'Valentino Braitenberg built the classic version of this warning in 1984: vehicles with two sensors and two motors, wired straight or crosswise, that any observer describes as fearful, aggressive or loving. He called it synthetic psychology, and noted that it is downhill to invent such a creature and uphill to analyse one - the attribution comes free with the watching. Reynolds's vehicles, and these ants, descend from his.'",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Agent_Based_Modeling_ABM"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "quote": "An agent can be a convenient unit without being an adequate model of a person.",
+      "why": "Valentino Braitenberg, Vehicles: Experiments in Synthetic Psychology (1984): vehicles with two sensors and two motors, wired straight or crosswise, that observers describe as fearful, aggressive or loving; his 'law of uphill analysis and downhill invention' says the attribution comes free with the watching. Reynolds took his vehicles from Braitenberg and NOC says so; the sequence's repeated warning about labels (PSO's Corporate/Ecological/Artistic, ants to citizens, a biological name) is Braitenberg's point with its classic source unnamed.",
+      "proposal": "Footnote: 'Valentino Braitenberg built the classic version of this warning in 1984: vehicles with two sensors and two motors, wired straight or crosswise, that any observer describes as fearful, aggressive or loving. He called it synthetic psychology, and noted that it is downhill to invent such a creature and uphill to analyse one - the attribution comes free with the watching. Reynolds's vehicles, and these ants, descend from his.'",
+      "evidence": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md; commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md (the labels); natureofcode.com/autonomous-agents/ 'Why Vehicles?'",
+      "review": "by hand: NOC ch. 5 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 5 reading, 25 Sept (doc/book/readings/NOC_swarmintelligence_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_swarmintelligence.025",
+      "title": "Say what the ecosystem inherits: five numbers, and one steering rule with its sign reversed",
+      "spec": "Creature.gd's DNA is five numbers: max_speed, max_force, perception_radius, flee_weight, seek_weight. seek() is NOC's Vehicle to the letter (desired minus velocity, limited by max_force); prey.flee(predator) is seek with the sign reversed (NOC Exercise 5.1), weighted by the inherited flee_weight. ecosystem.gd's own header: 'prey develop faster flee_weight and higher perception_radius over generations without explicit selection pressure - predation IS the selection pressure'. The chapter says 'traits' and never which; the next sequence opens on what changes across generations and this is its first legible example.\n\nProposal: After the quoted sentences: 'The traits are five numbers: a top speed, a turning limit, how far a body can see, and how much it wants to flee and to seek. Predator and prey steer by one rule - push on the difference between the velocity you want and the one you have - with the sign of the wanting reversed. Nothing selects the prey's numbers on purpose; the predators do it by eating.'",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "quote": "The organisms move, forage, encounter predators and reproduce. Traits can pass to offspring through a simplified combination and mutation process.",
+      "why": "Creature.gd's DNA is five numbers: max_speed, max_force, perception_radius, flee_weight, seek_weight. seek() is NOC's Vehicle to the letter (desired minus velocity, limited by max_force); prey.flee(predator) is seek with the sign reversed (NOC Exercise 5.1), weighted by the inherited flee_weight. ecosystem.gd's own header: 'prey develop faster flee_weight and higher perception_radius over generations without explicit selection pressure - predation IS the selection pressure'. The chapter says 'traits' and never which; the next sequence opens on what changes across generations and this is its first legible example.",
+      "proposal": "After the quoted sentences: 'The traits are five numbers: a top speed, a turning limit, how far a body can see, and how much it wants to flee and to seek. Predator and prey steer by one rule - push on the difference between the velocity you want and the one you have - with the sign of the wanting reversed. Nothing selects the prey's numbers on purpose; the predators do it by eating.'",
+      "evidence": "algorithms/emergentsystems/ecosystemsimulation/Creature.gd:5-6, 22-40, 61-73; algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd:6-8, 332-340; natureofcode.com/autonomous-agents/ Exercise 5.1, 'The Ecosystem Project'",
+      "review": "by hand: NOC ch. 5 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 5 reading, 25 Sept (doc/book/readings/NOC_swarmintelligence_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "transformation"
+    },
+    {
+      "id": "book_swarmintelligence.026",
+      "title": "Name the two feedbacks",
+      "spec": "NOC lists feedback among the qualities of complex systems: output fed back to influence behaviour, positively or negatively. The colony runs both directions at once - deposit feeds the next deposit, decay feeds on everything - and the chapter describes them without the word. A visible network is where the two have agreed for a while.\n\nProposal: After the quoted sentence: 'Those are two feedbacks running against each other: deposit feeds the next deposit, and decay feeds on everything. A visible network is where they have agreed for a while.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_PhysarumColony"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "SwarmIntelligence_PhysarumColony",
+      "quote": "Repetition strengthens a route; spreading broadens it; decay prevents every previous visit remaining equally important forever.",
+      "why": "NOC lists feedback among the qualities of complex systems: output fed back to influence behaviour, positively or negatively. The colony runs both directions at once - deposit feeds the next deposit, decay feeds on everything - and the chapter describes them without the word. A visible network is where the two have agreed for a while.",
+      "proposal": "After the quoted sentence: 'Those are two feedbacks running against each other: deposit feeds the next deposit, and decay feeds on everything. A visible network is where they have agreed for a while.'",
+      "evidence": "commons/maps/SwarmIntelligence_PhysarumColony/final.md; natureofcode.com/autonomous-agents/ 'Complex Systems' (feedback)",
+      "review": "by hand: NOC ch. 5 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 5 reading, 25 Sept (doc/book/readings/NOC_swarmintelligence_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_swarmintelligence.027",
+      "title": "Path finding is not path following",
+      "spec": "NOC insists on the distinction: path FOLLOWING keeps to a route that exists; pathFINDING solves for one. The hall does both - the route scenes flood costs outward from a target (FlowGrid.calculate_flow_field) and the wind and noise scenes have no target at all (generate_linear_field, generate_noise_field) - and the chapter separates them without the names. The hidden-arrows comparison (task .005) will need them: a field computed from a destination carries the destination; a wind does not.\n\nProposal: After the quoted sentence: 'The route scenes are path finding: the field is a solved problem, flooded outward from a destination. The wind and noise scenes are field following, with no problem solved at all. The agents behave the same in both; only the field knows which it is.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "SwarmIntelligence_FlowFields"
+      ],
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "SwarmIntelligence_FlowFields",
+      "quote": "A field can give a direction without giving a destination.",
+      "why": "NOC insists on the distinction: path FOLLOWING keeps to a route that exists; pathFINDING solves for one. The hall does both - the route scenes flood costs outward from a target (FlowGrid.calculate_flow_field) and the wind and noise scenes have no target at all (generate_linear_field, generate_noise_field) - and the chapter separates them without the names. The hidden-arrows comparison (task .005) will need them: a field computed from a destination carries the destination; a wind does not.",
+      "proposal": "After the quoted sentence: 'The route scenes are path finding: the field is a solved problem, flooded outward from a destination. The wind and noise scenes are field following, with no problem solved at all. The agents behave the same in both; only the field knows which it is.'",
+      "evidence": "algorithms/pathfinding/flow_field/FlowFieldMain.gd:99-148; algorithms/pathfinding/flow_field/FlowGrid.gd:100-160; natureofcode.com/autonomous-agents/ 'Path Following' (opening paragraph), 'Flow Fields'",
+      "review": "by hand: NOC ch. 5 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 5 reading, 25 Sept (doc/book/readings/NOC_swarmintelligence_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
     }
   ]
 }

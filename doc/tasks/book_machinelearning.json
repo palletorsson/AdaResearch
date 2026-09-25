@@ -534,6 +534,224 @@
       "notes": "",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_machinelearning.015",
+      "title": "Name the population with a judge standing beside the one without",
+      "spec": "evolved_creatures is placed in this hall and never mentioned: a fitness per creature, tournament selection, crossover seven times in ten and otherwise a clone with mutation (evolved_creatures.gd:20-25, 147-184), a generation every thirty seconds - about ten in a five-minute visit. That is Nature of Code's textbook genetic algorithm (Holland 1975: fitness function, mating pool, crossover, mutation), the very thing the chapter's non-teleological bodies argue against. Two populations, one hall, and the chapter names one.\n\nProposal: After the quoted sentence: 'Beside these bodies stands a population that does have a judge. Every thirty seconds a score is taken, the higher scorers are picked in small tournaments, and their numbers are crossed to make children, seven times in ten, or copied with a small change the rest of the time. In the time you stand here about ten generations pass. Watch what each population loses: one its unlucky, the other its unscored.'[fn] Footnote: John Holland, Adaptation in Natural and Artificial Systems (1975); the steps as Nature of Code lays them out.",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Evolution"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "ML_Evolution",
+      "quote": "There is no final shape on a pedestal that every descendant is trying to become.",
+      "why": "evolved_creatures is placed in this hall and never mentioned: a fitness per creature, tournament selection, crossover seven times in ten and otherwise a clone with mutation (evolved_creatures.gd:20-25, 147-184), a generation every thirty seconds - about ten in a five-minute visit. That is Nature of Code's textbook genetic algorithm (Holland 1975: fitness function, mating pool, crossover, mutation), the very thing the chapter's non-teleological bodies argue against. Two populations, one hall, and the chapter names one.",
+      "proposal": "After the quoted sentence: 'Beside these bodies stands a population that does have a judge. Every thirty seconds a score is taken, the higher scorers are picked in small tournaments, and their numbers are crossed to make children, seven times in ten, or copied with a small change the rest of the time. In the time you stand here about ten generations pass. Watch what each population loses: one its unlucky, the other its unscored.'[fn] Footnote: John Holland, Adaptation in Natural and Artificial Systems (1975); the steps as Nature of Code lays them out.",
+      "evidence": "commons/maps/ML_Evolution/map_data.json (evolved_creatures placed); algorithms/machinelearning/evolutionaryalgorithms2/scripts/evolved_creatures.gd:4-25, 147-199; natureofcode.com/genetic-algorithms/ 'How Genetic Algorithms Work'",
+      "review": "by hand: NOC ch. 9, 10 and 11 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 9-11 reading, 25 Sept (doc/book/readings/NOC_machinelearning_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_machinelearning.016",
+      "title": "Novelty is finite: the hall has a finish line nobody announced (predicted, to be measured)",
+      "spec": "non_teleological_evolution.gd keeps a 20 x 20 boolean grid over a two-metre world (grid_resolution 20, world_size 2.0; _visited_grid, 119, 210-224) and the only writes to it are its initialisation and a fill; a cell visited once stays visited. The whole world therefore holds 400 x 0.8 = 320 energy of fresh ground, ever, against energy_decay 0.15 a second per body and reproduction_threshold 3.0. Nature of Code's bloop world persists because food respawns and the dead become food (Example 9.5, 'adds new food when necessary'); this economy is a fuse. PREDICTION: the population rises while ground is fresh, then declines to zero once the visited fraction nears one, on a timescale set by the bodies' speeds (0.1-0.4 m/s) and the cell size (10 cm). Measure before writing: a probe logging visited fraction and population against time, twice, from the shipped seed. If a clearing exists that this reading missed, the task becomes: say how the ground forgets.\n\nProposal: If the prediction holds, after the quoted sentence: 'The fresh ground is finite. Four hundred cells, and a cell visited once stays visited: when the last is crossed, no energy enters this world again and every lineage drains at the same rate. The hall has a finish line after all. Nobody announced it, and no body can see it coming.' If it fails, one sentence on how the ground forgets, with the number.",
+      "effort": "2h",
+      "skill": "ada-code-guide",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Evolution"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "code-claim",
+      "hall": "ML_Evolution",
+      "quote": "Rewarding visits to new cells makes movement into unfamiliar territory consequential before anyone announces an objective called exploration.",
+      "why": "non_teleological_evolution.gd keeps a 20 x 20 boolean grid over a two-metre world (grid_resolution 20, world_size 2.0; _visited_grid, 119, 210-224) and the only writes to it are its initialisation and a fill; a cell visited once stays visited. The whole world therefore holds 400 x 0.8 = 320 energy of fresh ground, ever, against energy_decay 0.15 a second per body and reproduction_threshold 3.0. Nature of Code's bloop world persists because food respawns and the dead become food (Example 9.5, 'adds new food when necessary'); this economy is a fuse. PREDICTION: the population rises while ground is fresh, then declines to zero once the visited fraction nears one, on a timescale set by the bodies' speeds (0.1-0.4 m/s) and the cell size (10 cm). Measure before writing: a probe logging visited fraction and population against time, twice, from the shipped seed. If a clearing exists that this reading missed, the task becomes: say how the ground forgets.",
+      "proposal": "If the prediction holds, after the quoted sentence: 'The fresh ground is finite. Four hundred cells, and a cell visited once stays visited: when the last is crossed, no energy enters this world again and every lineage drains at the same rate. The hall has a finish line after all. Nobody announced it, and no body can see it coming.' If it fails, one sentence on how the ground forgets, with the number.",
+      "evidence": "algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.gd:2-3, 44-51, 119, 210-224, 284-290; natureofcode.com/genetic-algorithms/ 'Ecosystem Simulation' (Example 9.5); natureofcode.com/neuroevolution/ Example 11.6 (food shrinks and respawns)",
+      "review": "by hand: NOC ch. 9, 10 and 11 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 9-11 reading, 25 Sept (doc/book/readings/NOC_machinelearning_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "threshold"
+    },
+    {
+      "id": "book_machinelearning.017",
+      "title": "The flowers evolve toward a written taste; in Sims's museum the visitors were the judge",
+      "spec": "evolvingflowers stands in this hall unmentioned, and its calculate_fitness (789-810) is a taste written as arithmetic: symmetry worth 15, a hue near purple-pink 20, petal length 10, saturation 10, an angle near thirty degrees 10, L-system depth 8, branches up to twenty; the elite survive and a generation passes every eight seconds. Nature of Code's interactive selection is the museum's alternative: Karl Sims's Galapagos (NTT InterCommunication Center, Tokyo, 1997) assigned an image's fitness by how long visitors stood in front of its screen. The objective is already in full view in this hall, before the next one, and the chapter's handover says otherwise.\n\nProposal: Before the quoted sentences: 'The flowers in this hall have a judge, and the judge is a sentence: symmetry, long petals, a hue near purple, an angle near thirty degrees, each worth so many points. They evolve toward a taste someone wrote down. In 1997 Karl Sims let a museum's visitors be the judge, the fitness of an image being how long people stood in front of it. Ask which of the two this hall should run, and what each would breed out.'[fn] Footnote: Karl Sims, Galapagos (1997); Nature of Code ch. 9, 'Interactive Selection'.",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Evolution"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "ML_Evolution",
+      "quote": "The gradient landscape next puts an objective in full view. Instead of inheriting a reward through survival, a moving point will be told exactly how its position is scored.",
+      "why": "evolvingflowers stands in this hall unmentioned, and its calculate_fitness (789-810) is a taste written as arithmetic: symmetry worth 15, a hue near purple-pink 20, petal length 10, saturation 10, an angle near thirty degrees 10, L-system depth 8, branches up to twenty; the elite survive and a generation passes every eight seconds. Nature of Code's interactive selection is the museum's alternative: Karl Sims's Galapagos (NTT InterCommunication Center, Tokyo, 1997) assigned an image's fitness by how long visitors stood in front of its screen. The objective is already in full view in this hall, before the next one, and the chapter's handover says otherwise.",
+      "proposal": "Before the quoted sentences: 'The flowers in this hall have a judge, and the judge is a sentence: symmetry, long petals, a hue near purple, an angle near thirty degrees, each worth so many points. They evolve toward a taste someone wrote down. In 1997 Karl Sims let a museum's visitors be the judge, the fitness of an image being how long people stood in front of it. Ask which of the two this hall should run, and what each would breed out.'[fn] Footnote: Karl Sims, Galapagos (1997); Nature of Code ch. 9, 'Interactive Selection'.",
+      "evidence": "commons/maps/ML_Evolution/map_data.json (evolvingflowers placed); algorithms/machinelearning/evolvingflowers/evolvingflowers.gd:4-11, 54-58, 789-810; natureofcode.com/genetic-algorithms/ 'Interactive Selection'",
+      "review": "by hand: NOC ch. 9, 10 and 11 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 9-11 reading, 25 Sept (doc/book/readings/NOC_machinelearning_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_machinelearning.018",
+      "title": "Name the learning rate as the network's max force",
+      "spec": "neural_network_visualization.gd calls learning_rate (0.1) its critical parameter, 'the step size that makes the difference between convergence and oscillation', and the chapter never mentions the step. Nature of Code ties the perceptron's rule - error = desired minus guess, delta weight = error x input x learning constant - to Reynolds's steering formula and the learning constant to the maximum force: 'a high learning constant... increases the risk of overshooting'. This is the third time the book's reader meets push on the difference: the forces sequence's +=, the swarm's steering (task swarmintelligence.018), and now learning.\n\nProposal: After the quoted sentences: 'Each weight moves by a step: the error, times what came through that wire, times a learning rate. The rate is the same kind of knob as a boid's turning limit - how much of the difference between wanted and got is corrected at once. Too large and the network overshoots and rings; too small and it crawls. Here it is a tenth.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Neural_Networks"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "ML_Neural_Networks",
+      "quote": "The backward calculation works out how changes to earlier weights contribute to changes in the final error. It does not send a little correct answer backwards through every wire.",
+      "why": "neural_network_visualization.gd calls learning_rate (0.1) its critical parameter, 'the step size that makes the difference between convergence and oscillation', and the chapter never mentions the step. Nature of Code ties the perceptron's rule - error = desired minus guess, delta weight = error x input x learning constant - to Reynolds's steering formula and the learning constant to the maximum force: 'a high learning constant... increases the risk of overshooting'. This is the third time the book's reader meets push on the difference: the forces sequence's +=, the swarm's steering (task swarmintelligence.018), and now learning.",
+      "proposal": "After the quoted sentences: 'Each weight moves by a step: the error, times what came through that wire, times a learning rate. The rate is the same kind of knob as a boid's turning limit - how much of the difference between wanted and got is corrected at once. Too large and the network overshoots and rings; too small and it crawls. Here it is a tenth.'",
+      "evidence": "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd:17-31; natureofcode.com/neural-networks/ 'The Perceptron Code' (the learning constant and the maximum force)",
+      "review": "by hand: NOC ch. 9, 10 and 11 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 9-11 reading, 25 Sept (doc/book/readings/NOC_machinelearning_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_machinelearning.019",
+      "title": "Name the two silent classifiers: the line drawn as wide as it can be, and the forest that votes",
+      "spec": "svm_visualization (maximum margin, support vectors in gold, kernels linear/polynomial/RBF/sigmoid, a C parameter; 50 positive and 50 negative samples) and random_forest_visualization (five trees on bootstrap samples, voting) stand in the hall unmentioned, and both DO learn named classes from labelled examples - the contrast the chapter draws against k-means, staged and unnamed. Nature of Code's perceptron is the simplest of them, a line learned from labelled points, which cannot separate XOR; that limit is why the kernel and the hidden layer exist.\n\nProposal: After the quoted sentences: 'Two works in this hall do learn from labelled examples. The one with the gold points draws a line between two classes as wide as the data allows, and the line depends only on the few points that touch it; the rest could be thrown away. The other grows a small forest of decision trees, each on a different sample of the same data, and lets them vote. Neither is the centres' geometry, and both were told the answers first.'[fn] Footnote: Rosenblatt's perceptron (1957) is a line learned from labelled points; Minsky and Papert showed in 1969 that one line cannot separate XOR; a kernel is how a line becomes a curve, a hidden layer how a network does.",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Classification"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "ML_Classification",
+      "quote": "The room sits in a classification sequence, but this encounter does not learn named classes from labelled examples. It groups observations by geometry.",
+      "why": "svm_visualization (maximum margin, support vectors in gold, kernels linear/polynomial/RBF/sigmoid, a C parameter; 50 positive and 50 negative samples) and random_forest_visualization (five trees on bootstrap samples, voting) stand in the hall unmentioned, and both DO learn named classes from labelled examples - the contrast the chapter draws against k-means, staged and unnamed. Nature of Code's perceptron is the simplest of them, a line learned from labelled points, which cannot separate XOR; that limit is why the kernel and the hidden layer exist.",
+      "proposal": "After the quoted sentences: 'Two works in this hall do learn from labelled examples. The one with the gold points draws a line between two classes as wide as the data allows, and the line depends only on the few points that touch it; the rest could be thrown away. The other grows a small forest of decision trees, each on a different sample of the same data, and lets them vote. Neither is the centres' geometry, and both were told the answers first.'[fn] Footnote: Rosenblatt's perceptron (1957) is a line learned from labelled points; Minsky and Papert showed in 1969 that one line cannot separate XOR; a kernel is how a line becomes a curve, a hidden layer how a network does.",
+      "evidence": "commons/maps/ML_Classification/map_data.json (svm_visualization, random_forest_visualization placed); algorithms/machinelearning/supportvectormachine/svm_visualization.gd:4-11, 31-47; algorithms/machinelearning/randomforest/random_forest_visualization.gd:4-11, 117-121; natureofcode.com/neural-networks/ 'Simple Pattern Recognition Using a Perceptron', 'Putting the Network in Neural Network'",
+      "review": "by hand: NOC ch. 9, 10 and 11 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 9-11 reading, 25 Sept (doc/book/readings/NOC_machinelearning_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_machinelearning.020",
+      "title": "The walker that learns from a reward, and the four measures the sequence has met",
+      "spec": "joint_learn_walk stands in this hall unmentioned: tabular Q-learning over joint torques, a reward (distance travelled) every tenth of a second, exploration decaying from 0.3 (joint_learn_walk.gd:4-35). Nature of Code ch. 11 opens on reinforcement learning - feedback per decision - and chooses neuroevolution, where fitness is cumulative and applied once at selection; that is the difference between this creature and the bodies of the first hall. The sequence's truth asks what measures the change; its closing hall can list the measures it has met.\n\nProposal: After the quoted sentence: 'It has also met four different measures. The network changed by a teacher's answers; the centres by geometry alone; the bodies in the first hall by whether they went on; and the creature in this hall, teaching itself to walk from a reward every tenth of a second, by feedback on each decision rather than on a life. One word, learning, and four accounts of what did the measuring.'",
+      "effort": "30min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Synthesis"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "ML_Synthesis",
+      "quote": "The machine-learning sequence has repeatedly separated the operation from the interpretation: a cluster from a named class, an edge from an object, and a training curve from demonstrated generalisation.",
+      "why": "joint_learn_walk stands in this hall unmentioned: tabular Q-learning over joint torques, a reward (distance travelled) every tenth of a second, exploration decaying from 0.3 (joint_learn_walk.gd:4-35). Nature of Code ch. 11 opens on reinforcement learning - feedback per decision - and chooses neuroevolution, where fitness is cumulative and applied once at selection; that is the difference between this creature and the bodies of the first hall. The sequence's truth asks what measures the change; its closing hall can list the measures it has met.",
+      "proposal": "After the quoted sentence: 'It has also met four different measures. The network changed by a teacher's answers; the centres by geometry alone; the bodies in the first hall by whether they went on; and the creature in this hall, teaching itself to walk from a reward every tenth of a second, by feedback on each decision rather than on a life. One word, learning, and four accounts of what did the measuring.'",
+      "evidence": "commons/maps/ML_Synthesis/map_data.json (joint_learn_walk placed); algorithms/machinelearning/reinforcementlearning/joint_learn_walk.gd:4-35; natureofcode.com/neuroevolution/ 'Reinforcement Learning', 'Selection: Flappy Bird Fitness'",
+      "review": "by hand: NOC ch. 9, 10 and 11 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 9-11 reading, 25 Sept (doc/book/readings/NOC_machinelearning_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_machinelearning.021",
+      "title": "A loss surface is a fitness landscape read upside down",
+      "spec": "Nature of Code's paragraph on the shape of a fitness function (linear, squared, exponential: the 801st correct character must be worth more than the 800th, or the population does not feel it) is this hall's argument from the other side. The hall's word is on the door of two other halls that walk one - the particle swarm's fitness_landscape_politics and Form Finding's decoy basin - and the link is not made.\n\nProposal: Footnote at the quoted sentence: 'A loss surface is a fitness landscape read upside down: evolution climbs what a learner descends, and in both the shape decides how much one more correct answer is worth. Nature of Code puts it in a phrase: a score that grows with the square of the correct characters makes the 801st matter far more than the 800th. The particle swarm's plate and Form Finding's decoy basin are this object under other names.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "ML_Gradient_Landscape"
+      ],
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "ML_Gradient_Landscape",
+      "quote": "The squared-error surface punishes a large residual much more heavily than a small one.",
+      "why": "Nature of Code's paragraph on the shape of a fitness function (linear, squared, exponential: the 801st correct character must be worth more than the 800th, or the population does not feel it) is this hall's argument from the other side. The hall's word is on the door of two other halls that walk one - the particle swarm's fitness_landscape_politics and Form Finding's decoy basin - and the link is not made.",
+      "proposal": "Footnote at the quoted sentence: 'A loss surface is a fitness landscape read upside down: evolution climbs what a learner descends, and in both the shape decides how much one more correct answer is worth. Nature of Code puts it in a phrase: a score that grows with the square of the correct characters makes the 801st matter far more than the 800th. The particle swarm's plate and Form Finding's decoy basin are this object under other names.'",
+      "evidence": "commons/maps/ML_Gradient_Landscape/final.md; commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md; commons/maps/FormFinding_Annealing/final.md; natureofcode.com/genetic-algorithms/ 'Key 2: The Fitness Function'",
+      "review": "by hand: NOC ch. 9, 10 and 11 read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 9-11 reading, 25 Sept (doc/book/readings/NOC_machinelearning_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
     }
   ]
 }
