@@ -21,7 +21,7 @@ _angular_velocity *= _damping_multiplier(delta)
 _angle += _angular_velocity * delta
 ```
 
-The angle supplies a restoring acceleration. Acceleration changes velocity; damping reduces it; velocity changes the angle. The damping line is the trick every textbook sketch uses: multiply the velocity by a number just under one, once a tick. It is not air. It is a decision about how long this room wants a swing to last, and a headset ticks ninety times a second where a desk ticks sixty, so the same release dies sooner there: measured, a swing keeps about half its width after six seconds at a desk and under a third at the headset's rate. At the next step, the new angle enters the first line. Read down, then return to the top. The repetition in the code makes a return in the room without listing the positions the bob must visit.
+The angle supplies a restoring acceleration. Acceleration changes velocity; damping reduces it; velocity changes the angle. At the next step, the new angle enters the first line. Read down, then return to the top. The repetition in the code makes a return in the room without listing the positions the bob must visit.
 
 Now release it from the other side. Try giving it a small movement as you let go, then releasing it as nearly still as you can. The hand can supply speed as well as a starting position. But how much of the hand gets through?
 
@@ -34,14 +34,12 @@ _angular_velocity = tangent_velocity / pendulum_length
 
 The dot product keeps the part along that tangent. A sideways flourish can occupy your hand and contribute little to this number. The constraint makes the pendulum manageable: one angle, one angular velocity. It also gives you something to play against. Try two different gestures that leave a similar swing. Their resemblance belongs to what this body accepts from them.
 
-Behind the bob, a curve predicts six seconds from a standard starting angle. Make a larger release and compare it with that curve. The prediction did not watch your hand. It began with another condition. A wide swing also presses against the small-angle approximation in which length, with gravity fixed, sets the period. The actual restoring rule still contains `sin(_angle)`. The approximation replaces the sine by the angle itself, so that the pull grows in step with the displacement. That simpler rule has a name, Hooke's, and it is the one the lattice three rooms on will run in every sphere. Give several complete swings time to pass before deciding how their rhythm differs.
+Behind the bob, a curve predicts six seconds from a standard starting angle. Make a larger release and compare it with that curve. The prediction did not watch your hand. It began with another condition. A wide swing also presses against the small-angle approximation in which length, with gravity fixed, sets the period. The actual restoring rule still contains `sin(_angle)`. Give several complete swings time to pass before deciding how their rhythm differs.
 
 There are several beginnings here: the engine's, the counter's, the prediction's, the moment you let go. They do not have to coincide for the experiment to work.
 
 <!-- @ -->
 
 The nearby cubes return by other means. A clock prescribes one cube's bobbing; a steady rotation brings another back to its orientation; a third listens to this pendulum's signal. Similar repetitions can be made by different arrangements of state and time.
-
-Give the bob a push and look at the cubes. The one that listens changes with your hand; the clocked one does not, because nothing you do enters its rule: it has a time, not a state. Two returns that look alike from the doorway answer a push differently.
 
 Our counter can tell us that the bob crossed the middle. It cannot show the gesture that started this particular swing. We leave with a number that has kept something, and a reason to want more than a number. In the next room the past takes up space.

@@ -34,7 +34,7 @@ A longer `mod_decay` keeps the phase disturbance present for more of the note. T
 
 Try the orange ball's left-to-right direction last. It changes the ratio between the oscillators' frequencies. Keep a reference and compare. Listen for a relation you want to return to, even if it refuses the name of an instrument you know. A setting that would spoil one imitation may be the beginning of another sound.
 
-BASELINE is a chosen reference too: a 440-hertz carrier, an attack and a decay, index zero. Four hundred and forty returns a second is one return every 2.3 thousandths of a second; the two carrier periods on the scope are under five thousandths of a second of the note. The plate in the pendulum hall measured a period and let you divide by it; hertz is that division done the other way round. The generator still applies its `tanh` shaping and gain to the output. Calling this the beginning makes a comparison possible; it does not uncover a sound before all decisions.
+BASELINE is a chosen reference too: a 440-hertz carrier, an attack and a decay, index zero. The generator still applies its `tanh` shaping and gain to the output. Calling this the beginning makes a comparison possible; it does not uncover a sound before all decisions.
 
 HOLD can keep a note without knowing what you liked about it. COMPARE gives that decision back to your ear. The rig reports changed parameters, but there is no field in its list for the difference that made you want to listen again.
 

@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-25",
+  "probe": "wave_tick_rate",
+  "rates": {
+    "60": {
+      "record": {
+        "gaps_ms_histogram": {
+          "16.7": 59,
+          "33.3": 59
+        },
+        "rate": 60,
+        "requested_ms": 25.0,
+        "samples": 119,
+        "tick_ms": 16.6666666666667
+      },
+      "swing": {
+        "amplitude_kept_over_run": 0.450696395792219,
+        "damping_per_tick": 0.995,
+        "peak_first_second": 0.292050853370988,
+        "peak_last_second": 0.131626267002346,
+        "predicted_velocity_kept_per_second": 0.740260957696705,
+        "rate": 60,
+        "regime": "free",
+        "start_angle": 0.296010178549521
+      }
+    },
+    "90": {
+      "record": {
+        "gaps_ms_histogram": {
+          "22.2": 90,
+          "33.3": 29
+        },
+        "rate": 90,
+        "requested_ms": 25.0,
+        "samples": 120,
+        "tick_ms": 11.1111111111111
+      },
+      "swing": {
+        "amplitude_kept_over_run": 0.294192107058932,
+        "damping_per_tick": 0.995,
+        "peak_first_second": 0.296459961267269,
+        "peak_last_second": 0.0872161806638271,
+        "predicted_velocity_kept_per_second": 0.636908825893879,
+        "rate": 90,
+        "regime": "free",
+        "start_angle": 0.298225324974675
+      }
+    }
+  },
+  "verdict_014": "gap histograms: 60 Hz {\"16.7\":59,\"33.3\":59} | 90 Hz {\"22.2\":90,\"33.3\":29}",
+  "verdict_015": "swing keeps 0.451 of its amplitude over 6 s at 60 Hz and 0.294 at 90 Hz; DIES SOONER at 90 Hz as predicted"
+}

@@ -56,7 +56,7 @@ var x_pos: float = base_x - side * displacement
 offset += base_amplitude * amp_multiplier * amp_mul * sin((base_frequency * freq_multiplier * freq_mul) * z_norm * PI + phase_shift + phase_layer)
 ```
 
-Read the terms through what you just changed. Amplitude multiplies the depth of a fold. Frequency sets how many returns fit along the passage. Phase changes where in the return a wall stands. The fundamental makes 4.5 cycles over seven metres, a wavelength of about a metre and a half; two higher spatial frequencies add the smaller ripples, each with a shorter wavelength of its own, and a body walking the passage meets every fold at its own spacing. All receive the running phase, but their different wavelengths make the layers drift at different speeds.
+Read the terms through what you just changed. Amplitude multiplies the depth of a fold. Frequency sets how many returns fit along the passage. Phase changes where in the return a wall stands. The fundamental makes 4.5 cycles over seven metres; two higher spatial frequencies add the smaller ripples. All receive the running phase, but their different wavelengths make the layers drift at different speeds.
 
 Return PHASE to half a turn and inspect a bend. The number still says two metres. Notice its name: `x-gap`. It compares the two walls at matching positions along the passage, across local X. The shortest way between curved surfaces need not follow that direction. We have made a constant width by deciding how to measure it. Which width would matter to a body trying to get through?
 

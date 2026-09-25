@@ -1,0 +1,15 @@
+--- before/WaveFunctions_Unit_Circle.md
++++ after/WaveFunctions_Unit_Circle.md
+@@ -12,9 +12,11 @@
+ 
+ Pick four reference positions around the circle: right, top, left and bottom. At each, compare the point's horizontal and vertical offsets from the centre. At the top and bottom, the horizontal offset returns to its middle while the vertical offset reaches opposite extremes. At the sides, those roles exchange. Use that sequence to predict a quarter of the adjacent graph before following it. Then start your reading from a different reference position. You have changed where you begin describing the cycle without changing its order. A beginning is needed to label the progression, even though the circle itself has no privileged first point.
+ 
+-For a circle of unit radius, those coordinate values are sine and cosine. The adjacent graph gives angle progression a new axis and uses one changing coordinate as height. It unfolds a relationship already present in the circular motion. The graph is not the path the point takes across the floor; its horizontal direction has a different meaning from the circle's horizontal coordinate.
++For a circle of unit radius, those coordinate values are sine and cosine. And the angle has a unit this room can show. On a circle of radius one, the angle is the distance the point has travelled along the rim, measured in radii: a little over six for a whole turn. The graph stretches that turn to fourteen radii, so its axis is the rim unrolled, though not to scale. The adjacent graph gives angle progression a new axis and uses one changing coordinate as height. It unfolds a relationship already present in the circular motion. The graph is not the path the point takes across the floor; its horizontal direction has a different meaning from the circle's horizontal coordinate.
+ 
+ Find a height that appears twice in a cycle. One occurrence belongs to a rising part and the other to a falling part. Knowing the height therefore does not recover the whole angular position. The missing distinction matters whenever a cyclic process is described by one measured value.
++
++The other rod does recover it. Height and sideways offset together fix the point on the circle; that is why a program that needs an angle from a direction is given both numbers rather than their ratio. A ratio returns the same answer for a direction and its opposite, and every graphics library carries a two-argument arctangent to tell them apart.
+ 
+ The displayed construction is finite. It adds sampled steps until its allotted cycles are complete. The point returns to the top; no new step arrives. Those kept positions let you count and compare, but the spaces between them remain. Resembling a bridge does not, by itself, make this graph a route for your body.
+ 
