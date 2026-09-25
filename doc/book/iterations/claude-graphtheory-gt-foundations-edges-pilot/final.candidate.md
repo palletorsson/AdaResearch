@@ -1,0 +1,33 @@
+# Two travellers, one graph
+
+Can two travellers obey the same connections and encounter the graph in different orders?
+
+The floor of this hall is one cell wide. It runs from the door straight ahead, and on either side of it there is nothing you can stand on. Look down past its edge: below the walkway there is no floor at all. Further in, the walkway forks into a crossing row, widens into a block, narrows again and reaches the far door. Off to the sides stand islands of floor, and cubes are parked on three of the shores. You are already walking a graph. The walkways are its edges, the places where they meet or end are its vertices, and the holes are the connections that were never made.
+
+Take the crossing row to the left. It ends. One cell of nothing separates its end from the island at the top of the hall, and the island's cube is parked on the island's side, not yours. Step into the gap and you are set down at the door again. Nothing stopped you: the graph has simply never had an edge here. A walkway that ends is not a flaw in the drawing. It is a fact about what connects to what, and the drawing can do nothing about it.
+
+Go back to the fork and take the crossing row the other way. At its end a cube waits. Step on, and after a moment it carries you across two cells of nothing to the block where the lamps are; it waits there, and if you are still aboard it carries you back. Step off instead. You are now on a block with two ways in and no way you can call, because both cubes park on the far shore. The only walkway from here runs up the right-hand wall and ends. So count, as you go, how many ways each place has: the island has one, the stub has one, the top of the column has one, the fork has four. Those numbers are the whole of what a graph knows about a place.
+
+<!-- @two_travelers -->
+
+The lamps on this block are a graph of fifteen places on branching connections, and two travellers take turns visiting it. The readout beside them names each in turn. THE TIDE floods the nearest lamps first, then the next ring out, then the next: light rises in level waves. THE DIVER commits to one branch, follows it to its last lamp, comes back and takes the next: a single bright thread worming through the tree. Choose a lamp several connections from the root and predict whether it lights early or late. Watch one traveller, then hold the same lamp in mind as the other begins.
+
+The lamps and their connections are the same for both. What differs is what each traveller does with the places it has seen but not yet visited. The tide keeps them in a queue: whatever was discovered first is visited first, so attention spreads across a whole frontier before it goes deeper. The diver keeps them in a stack: whatever was discovered last is visited next, so attention is carried down a branch while the other branches wait. A waiting branch has not left the graph. It has changed position in the traveller's memory, and that memory turns out to matter as much as the connections in front of it.
+
+Here is the rule you have been walking and watching. A graph is only a set of places and a set of connections between pairs of them. It says nothing about distance, shape or size; the width of a walkway and the length of a cube's crossing are properties of this hall, not of the graph. Two halls built with the same connections are the same graph, however they are built. And a traversal is an itinerary laid over that graph by a procedure, not by the graph: the same fifteen lamps carry two orders because two memories are visiting them.
+
+The words for these, now that you have used them, are vertex and edge, breadth-first and depth-first. Breadth-first search is the tide, distance-order, a queue. Depth-first search is the diver, commitment-order, a stack. Return to your chosen lamp and count connections from the root: under the tide its layer is that count, while the diver can reach a deep lamp while a shallow branch still waits.
+
+<!-- @KonigsbergBridge -->
+
+The first graph anyone drew was a city. Königsberg, 1736: four landmasses on the river Pregel, seven bridges between them, and a question the citizens had been asking for years — could you walk the town crossing every bridge exactly once? Leonhard Euler answered it without leaving his desk.[^1] The model in this hall keeps his count. Every landmass is lit red, because every one of them has an odd number of bridges: five, three, three, three. A walk that crosses each bridge once must leave every landmass it enters, except where it starts and where it stops, so at most two places may have an odd number of ways. Four is too many. There is no such walk, and no route through the streets will ever find one. The yellow plate above the model says it in one sentence.
+
+Now bring that back to the floor. You counted the ways in: the island, the stub and the column's top each have one. That is already three odd places, and the rule allows two. This hall cannot be walked with every walkway used exactly once either, and nobody built it to obey Euler. The rule was never about Königsberg. It is about what an odd number of connections does to any walker, in any hall, and it holds for the one you are standing in.
+
+Neither traveller's order is a complete account of which lamp matters most, and the graph itself has no opinion. If the lamps stood for people awaiting attention, the ordering rule would have consequences beyond its neat animation: a procedure that eventually reaches everyone can still make some wait much longer. Pick one lamp and make it urgent. Under which traveller does it wait longer, and by how many visits?
+
+<!-- @ -->
+
+The next room lets the drawing itself move. Keep the graph's connections separate from the positions used to display them.
+
+[^1]: Leonhard Euler, "Solutio problematis ad geometriam situs pertinentis", *Commentarii academiae scientiarum imperialis Petropolitanae* 8 (1741), 128–140, presented in 1736. The odd-degree argument is his; the word "graph" came a century later.

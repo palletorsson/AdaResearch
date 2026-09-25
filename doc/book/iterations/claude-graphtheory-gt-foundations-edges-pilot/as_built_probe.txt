@@ -1,0 +1,211 @@
+
+[probe] ===== KonigsbergBridge at cell (6, 6) scale 0.60: 91 meshes, 12 Label3D
+[probe]   merged AABB x -9.0..21.0  y -0.8..13.4  z -3.6..15.6  (hall interior x 0.5..12.5, z 0.5..11.5, floor y 0)
+[probe]   mesh centres inside the hall footprint: 39, outside: 52
+[probe]   directionallight3d < konigsberg3d          x    4.3..   7.7  y 10.59..13.41  z    4.3..   7.7
+[probe]   pregelriver < konigsberg3d                 x   -9.0..  21.0  y -0.75..-0.45  z   -3.0..  15.0
+[probe]   landmass_altstadt < konigsberg3d [csg coll x   -5.4..  -0.6  y  0.90.. 1.50  z    3.6..   8.4
+[probe]   landmass_löbenicht < konigsberg3d [csg col x   12.6..  17.4  y  0.90.. 1.50  z    3.6..   8.4
+[probe]   landmass_kneiphof < konigsberg3d [csg coll x    3.6..   8.4  y  0.90.. 1.50  z   -3.6..   1.2
+[probe]   landmass_vorstadt < konigsberg3d [csg coll x    3.6..   8.4  y  0.90.. 1.50  z   10.8..  15.6
+[probe]   bridgesegment_krämer-brücke_0 < konigsberg x   -3.4..  -1.9  y  1.11.. 1.52  z    4.9..   6.5
+[probe]   bridgesegment_krämer-brücke_1 < konigsberg x   -2.6..  -1.1  y  1.35.. 1.74  z    4.3..   5.9
+[probe]   bridgesegment_krämer-brücke_2 < konigsberg x   -1.9..  -0.4  y  1.56.. 1.92  z    3.7..   5.3
+[probe]   bridgesegment_krämer-brücke_3 < konigsberg x   -1.1..   0.4  y  1.75.. 2.07  z    3.1..   4.7
+[probe]   bridgesegment_krämer-brücke_4 < konigsberg x   -0.4..   1.1  y  1.89.. 2.16  z    2.5..   4.1
+[probe]   bridgesegment_krämer-brücke_5 < konigsberg x    0.4..   1.9  y  1.98.. 2.19  z    1.9..   3.5
+[probe]   bridgesegment_krämer-brücke_6 < konigsberg x    1.1..   2.6  y  1.98.. 2.19  z    1.3..   2.9
+[probe]   bridgesegment_krämer-brücke_7 < konigsberg x    1.9..   3.4  y  1.89.. 2.16  z    0.7..   2.3
+[probe]   bridgesegment_krämer-brücke_8 < konigsberg x    2.6..   4.1  y  1.75.. 2.07  z    0.1..   1.7
+[probe]   bridgesegment_krämer-brücke_9 < konigsberg x    3.4..   4.9  y  1.56.. 1.92  z   -0.5..   1.1
+[probe]   bridgesegment_krämer-brücke_10 < konigsber x    4.1..   5.6  y  1.35.. 1.74  z   -1.1..   0.5
+[probe]   bridgesegment_krämer-brücke_11 < konigsber x    4.9..   6.4  y  1.11.. 1.52  z   -1.7..  -0.1
+[probe]   bridgesegment_schmieden-brücke_0 < konigsb x   -3.4..  -1.9  y  1.11.. 1.52  z    4.9..   6.5
+[probe]   bridgesegment_schmieden-brücke_1 < konigsb x   -2.6..  -1.1  y  1.35.. 1.74  z    4.3..   5.9
+[probe]   bridgesegment_schmieden-brücke_2 < konigsb x   -1.9..  -0.4  y  1.56.. 1.92  z    3.7..   5.3
+[probe]   bridgesegment_schmieden-brücke_3 < konigsb x   -1.1..   0.4  y  1.75.. 2.07  z    3.1..   4.7
+[probe]   bridgesegment_schmieden-brücke_4 < konigsb x   -0.4..   1.1  y  1.89.. 2.16  z    2.5..   4.1
+[probe]   bridgesegment_schmieden-brücke_5 < konigsb x    0.4..   1.9  y  1.98.. 2.19  z    1.9..   3.5
+[probe]   bridgesegment_schmieden-brücke_6 < konigsb x    1.1..   2.6  y  1.98.. 2.19  z    1.3..   2.9
+[probe]   bridgesegment_schmieden-brücke_7 < konigsb x    1.9..   3.4  y  1.89.. 2.16  z    0.7..   2.3
+[probe]   bridgesegment_schmieden-brücke_8 < konigsb x    2.6..   4.1  y  1.75.. 2.07  z    0.1..   1.7
+[probe]   bridgesegment_schmieden-brücke_9 < konigsb x    3.4..   4.9  y  1.56.. 1.92  z   -0.5..   1.1
+[probe]   bridgesegment_schmieden-brücke_10 < konigs x    4.1..   5.6  y  1.35.. 1.74  z   -1.1..   0.5
+[probe]   bridgesegment_schmieden-brücke_11 < konigs x    4.9..   6.4  y  1.11.. 1.52  z   -1.7..  -0.1
+[probe]   bridgesegment_holz-brücke_0 < konigsberg3d x   -3.4..  -1.9  y  1.11.. 1.52  z    5.5..   7.1
+[probe]   bridgesegment_holz-brücke_1 < konigsberg3d x   -2.6..  -1.1  y  1.35.. 1.74  z    6.1..   7.7
+[probe]   bridgesegment_holz-brücke_2 < konigsberg3d x   -1.9..  -0.4  y  1.56.. 1.92  z    6.7..   8.3
+[probe]   bridgesegment_holz-brücke_3 < konigsberg3d x   -1.1..   0.4  y  1.75.. 2.07  z    7.3..   8.9
+[probe]   bridgesegment_holz-brücke_4 < konigsberg3d x   -0.4..   1.1  y  1.89.. 2.16  z    7.9..   9.5
+[probe]   bridgesegment_holz-brücke_5 < konigsberg3d x    0.4..   1.9  y  1.98.. 2.19  z    8.5..  10.1
+[probe]   bridgesegment_holz-brücke_6 < konigsberg3d x    1.1..   2.6  y  1.98.. 2.19  z    9.1..  10.7
+[probe]   bridgesegment_holz-brücke_7 < konigsberg3d x    1.9..   3.4  y  1.89.. 2.16  z    9.7..  11.3
+[probe]   bridgesegment_holz-brücke_8 < konigsberg3d x    2.6..   4.1  y  1.75.. 2.07  z   10.3..  11.9
+[probe]   bridgesegment_holz-brücke_9 < konigsberg3d x    3.4..   4.9  y  1.56.. 1.92  z   10.9..  12.5
+[probe]   bridgesegment_holz-brücke_10 < konigsberg3 x    4.1..   5.6  y  1.35.. 1.74  z   11.5..  13.1
+[probe]   bridgesegment_holz-brücke_11 < konigsberg3 x    4.9..   6.4  y  1.11.. 1.52  z   12.1..  13.7
+[probe]   bridgesegment_hohe brücke_0 < konigsberg3d x   -3.4..  -1.9  y  1.11.. 1.52  z    5.5..   7.1
+[probe]   bridgesegment_hohe brücke_1 < konigsberg3d x   -2.6..  -1.1  y  1.35.. 1.74  z    6.1..   7.7
+[probe]   bridgesegment_hohe brücke_2 < konigsberg3d x   -1.9..  -0.4  y  1.56.. 1.92  z    6.7..   8.3
+[probe]   bridgesegment_hohe brücke_3 < konigsberg3d x   -1.1..   0.4  y  1.75.. 2.07  z    7.3..   8.9
+[probe]   bridgesegment_hohe brücke_4 < konigsberg3d x   -0.4..   1.1  y  1.89.. 2.16  z    7.9..   9.5
+[probe]   bridgesegment_hohe brücke_5 < konigsberg3d x    0.4..   1.9  y  1.98.. 2.19  z    8.5..  10.1
+[probe]   bridgesegment_hohe brücke_6 < konigsberg3d x    1.1..   2.6  y  1.98.. 2.19  z    9.1..  10.7
+[probe]   bridgesegment_hohe brücke_7 < konigsberg3d x    1.9..   3.4  y  1.89.. 2.16  z    9.7..  11.3
+[probe]   bridgesegment_hohe brücke_8 < konigsberg3d x    2.6..   4.1  y  1.75.. 2.07  z   10.3..  11.9
+[probe]   bridgesegment_hohe brücke_9 < konigsberg3d x    3.4..   4.9  y  1.56.. 1.92  z   10.9..  12.5
+[probe]   bridgesegment_hohe brücke_10 < konigsberg3 x    4.1..   5.6  y  1.35.. 1.74  z   11.5..  13.1
+[probe]   bridgesegment_hohe brücke_11 < konigsberg3 x    4.9..   6.4  y  1.11.. 1.52  z   12.1..  13.7
+[probe]   bridgesegment_grüne brücke_0 < konigsberg3 x   -3.0..  -1.5  y  1.11.. 1.52  z    5.4..   6.6
+[probe]   bridgesegment_grüne brücke_1 < konigsberg3 x   -1.5..   0.0  y  1.34.. 1.74  z    5.4..   6.6
+[probe]   bridgesegment_grüne brücke_2 < konigsberg3 x   -0.0..   1.5  y  1.56.. 1.93  z    5.4..   6.6
+[probe]   bridgesegment_grüne brücke_3 < konigsberg3 x    1.5..   3.0  y  1.75.. 2.07  z    5.4..   6.6
+[probe]   bridgesegment_grüne brücke_4 < konigsberg3 x    3.0..   4.5  y  1.89.. 2.16  z    5.4..   6.6
+[probe]   bridgesegment_grüne brücke_5 < konigsberg3 x    4.5..   6.0  y  1.98.. 2.19  z    5.4..   6.6
+[probe]   bridgesegment_grüne brücke_6 < konigsberg3 x    6.0..   7.5  y  1.98.. 2.19  z    5.4..   6.6
+[probe]   bridgesegment_grüne brücke_7 < konigsberg3 x    7.5..   9.0  y  1.89.. 2.16  z    5.4..   6.6
+[probe]   bridgesegment_grüne brücke_8 < konigsberg3 x    9.0..  10.5  y  1.75.. 2.07  z    5.4..   6.6
+[probe]   bridgesegment_grüne brücke_9 < konigsberg3 x   10.5..  12.0  y  1.56.. 1.93  z    5.4..   6.6
+[probe]   bridgesegment_grüne brücke_10 < konigsberg x   12.0..  13.5  y  1.34.. 1.74  z    5.4..   6.6
+[probe]   bridgesegment_grüne brücke_11 < konigsberg x   13.5..  15.0  y  1.11.. 1.52  z    5.4..   6.6
+[probe]   bridgesegment_köttel-brücke_0 < konigsberg x   13.9..  15.4  y  1.11.. 1.52  z    4.9..   6.5
+[probe]   bridgesegment_köttel-brücke_1 < konigsberg x   13.1..  14.6  y  1.35.. 1.74  z    4.3..   5.9
+[probe]   bridgesegment_köttel-brücke_2 < konigsberg x   12.4..  13.9  y  1.56.. 1.92  z    3.7..   5.3
+[probe]   bridgesegment_köttel-brücke_3 < konigsberg x   11.6..  13.1  y  1.75.. 2.07  z    3.1..   4.7
+[probe]   bridgesegment_köttel-brücke_4 < konigsberg x   10.9..  12.4  y  1.89.. 2.16  z    2.5..   4.1
+[probe]   bridgesegment_köttel-brücke_5 < konigsberg x   10.1..  11.6  y  1.98.. 2.19  z    1.9..   3.5
+[probe]   bridgesegment_köttel-brücke_6 < konigsberg x    9.4..  10.9  y  1.98.. 2.19  z    1.3..   2.9
+[probe]   bridgesegment_köttel-brücke_7 < konigsberg x    8.6..  10.1  y  1.89.. 2.16  z    0.7..   2.3
+[probe]   bridgesegment_köttel-brücke_8 < konigsberg x    7.9..   9.4  y  1.75.. 2.07  z    0.1..   1.7
+[probe]   bridgesegment_köttel-brücke_9 < konigsberg x    7.1..   8.6  y  1.56.. 1.92  z   -0.5..   1.1
+[probe]   bridgesegment_köttel-brücke_10 < konigsber x    6.4..   7.9  y  1.35.. 1.74  z   -1.1..   0.5
+[probe]   bridgesegment_köttel-brücke_11 < konigsber x    5.6..   7.1  y  1.11.. 1.52  z   -1.7..  -0.1
+[probe]   bridgesegment_honig-brücke_0 < konigsberg3 x   13.9..  15.4  y  1.11.. 1.52  z    5.5..   7.1
+[probe]   bridgesegment_honig-brücke_1 < konigsberg3 x   13.1..  14.6  y  1.35.. 1.74  z    6.1..   7.7
+[probe]   bridgesegment_honig-brücke_2 < konigsberg3 x   12.4..  13.9  y  1.56.. 1.92  z    6.7..   8.3
+[probe]   bridgesegment_honig-brücke_3 < konigsberg3 x   11.6..  13.1  y  1.75.. 2.07  z    7.3..   8.9
+[probe]   bridgesegment_honig-brücke_4 < konigsberg3 x   10.9..  12.4  y  1.89.. 2.16  z    7.9..   9.5
+[probe]   bridgesegment_honig-brücke_5 < konigsberg3 x   10.1..  11.6  y  1.98.. 2.19  z    8.5..  10.1
+[probe]   bridgesegment_honig-brücke_6 < konigsberg3 x    9.4..  10.9  y  1.98.. 2.19  z    9.1..  10.7
+[probe]   bridgesegment_honig-brücke_7 < konigsberg3 x    8.6..  10.1  y  1.89.. 2.16  z    9.7..  11.3
+[probe]   bridgesegment_honig-brücke_8 < konigsberg3 x    7.9..   9.4  y  1.75.. 2.07  z   10.3..  11.9
+[probe]   bridgesegment_honig-brücke_9 < konigsberg3 x    7.1..   8.6  y  1.56.. 1.92  z   10.9..  12.5
+[probe]   bridgesegment_honig-brücke_10 < konigsberg x    6.4..   7.9  y  1.35.. 1.74  z   11.5..  13.1
+[probe]   bridgesegment_honig-brücke_11 < konigsberg x    5.6..   7.1  y  1.11.. 1.52  z   12.1..  13.7
+[probe]   label Degree: 5                          at (-4.5, 2.52, 6.0) font 32 billboard 1
+[probe]   label Degree: 3                          at (16.5, 2.52, 6.0) font 32 billboard 1
+[probe]   label Degree: 3                          at (4.5, 2.52, -1.2) font 32 billboard 1
+[probe]   label Degree: 3                          at (7.5, 2.52, 13.2) font 32 billboard 1
+[probe]   label Krämer-Brücke                      at (1.3, 2.70, 2.2) font 24 billboard 1
+[probe]   label Schmieden-Brücke                   at (1.7, 2.70, 2.6) font 24 billboard 1
+[probe]   label Holz-Brücke                        at (1.7, 2.70, 9.4) font 24 billboard 1
+[probe]   label Hohe Brücke                        at (1.3, 2.70, 9.8) font 24 billboard 1
+[probe]   label Grüne Brücke                       at (6.0, 2.70, 6.0) font 24 billboard 1
+[probe]   label Köttel-Brücke                      at (10.5, 2.70, 2.4) font 24 billboard 1
+[probe]   label Honig-Brücke                       at (10.5, 2.70, 9.6) font 24 billboard 1
+[probe]   label Euler's Theorem:                   at (6.0, 3.24, 6.0) font 28 billboard 1
+[probe]   StaticBody3D/CollisionShape3D under the body: 0
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Krä x  -1.1..  0.4  y  1.75.. 2.07  z   3.1..  4.7 -> cells x -1..0 z 3..5
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Krä x  -0.4..  1.1  y  1.89.. 2.16  z   2.5..  4.1 -> cells x 0..1 z 3..4
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Krä x   0.4..  1.9  y  1.98.. 2.19  z   1.9..  3.5 -> cells x 0..2 z 2..3
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Krä x   1.1..  2.6  y  1.98.. 2.19  z   1.3..  2.9 -> cells x 1..3 z 1..3
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Krä x   1.9..  3.4  y  1.89.. 2.16  z   0.7..  2.3 -> cells x 2..3 z 1..2
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Krä x   2.6..  4.1  y  1.75.. 2.07  z   0.1..  1.7 -> cells x 3..4 z 0..2
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Krä x   3.4..  4.9  y  1.56.. 1.92  z  -0.5..  1.1 -> cells x 3..5 z 0..1
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Krä x   4.1..  5.6  y  1.35.. 1.74  z  -1.1..  0.5 -> cells x 4..6 z -1..0
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Sch x  -1.1..  0.4  y  1.75.. 2.07  z   3.1..  4.7 -> cells x -1..0 z 3..5
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Sch x  -0.4..  1.1  y  1.89.. 2.16  z   2.5..  4.1 -> cells x 0..1 z 3..4
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Sch x   0.4..  1.9  y  1.98.. 2.19  z   1.9..  3.5 -> cells x 0..2 z 2..3
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Sch x   1.1..  2.6  y  1.98.. 2.19  z   1.3..  2.9 -> cells x 1..3 z 1..3
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Sch x   1.9..  3.4  y  1.89.. 2.16  z   0.7..  2.3 -> cells x 2..3 z 1..2
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Sch x   2.6..  4.1  y  1.75.. 2.07  z   0.1..  1.7 -> cells x 3..4 z 0..2
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Sch x   3.4..  4.9  y  1.56.. 1.92  z  -0.5..  1.1 -> cells x 3..5 z 0..1
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Sch x   4.1..  5.6  y  1.35.. 1.74  z  -1.1..  0.5 -> cells x 4..6 z -1..0
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hol x  -1.1..  0.4  y  1.75.. 2.07  z   7.3..  8.9 -> cells x -1..0 z 7..9
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hol x  -0.4..  1.1  y  1.89.. 2.16  z   7.9..  9.5 -> cells x 0..1 z 8..9
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hol x   0.4..  1.9  y  1.98.. 2.19  z   8.5.. 10.1 -> cells x 0..2 z 9..10
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hol x   1.1..  2.6  y  1.98.. 2.19  z   9.1.. 10.7 -> cells x 1..3 z 9..11
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hol x   1.9..  3.4  y  1.89.. 2.16  z   9.7.. 11.3 -> cells x 2..3 z 10..11
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hol x   2.6..  4.1  y  1.75.. 2.07  z  10.3.. 11.9 -> cells x 3..4 z 10..12
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hol x   3.4..  4.9  y  1.56.. 1.92  z  10.9.. 12.5 -> cells x 3..5 z 11..12
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hol x   4.1..  5.6  y  1.35.. 1.74  z  11.5.. 13.1 -> cells x 4..6 z 12..13
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hoh x  -1.1..  0.4  y  1.75.. 2.07  z   7.3..  8.9 -> cells x -1..0 z 7..9
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hoh x  -0.4..  1.1  y  1.89.. 2.16  z   7.9..  9.5 -> cells x 0..1 z 8..9
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hoh x   0.4..  1.9  y  1.98.. 2.19  z   8.5.. 10.1 -> cells x 0..2 z 9..10
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hoh x   1.1..  2.6  y  1.98.. 2.19  z   9.1.. 10.7 -> cells x 1..3 z 9..11
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hoh x   1.9..  3.4  y  1.89.. 2.16  z   9.7.. 11.3 -> cells x 2..3 z 10..11
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hoh x   2.6..  4.1  y  1.75.. 2.07  z  10.3.. 11.9 -> cells x 3..4 z 10..12
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hoh x   3.4..  4.9  y  1.56.. 1.92  z  10.9.. 12.5 -> cells x 3..5 z 11..12
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hoh x   4.1..  5.6  y  1.35.. 1.74  z  11.5.. 13.1 -> cells x 4..6 z 12..13
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Grü x  -0.0..  1.5  y  1.56.. 1.93  z   5.4..  6.6 -> cells x 0..2 z 5..7
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Grü x   1.5..  3.0  y  1.75.. 2.07  z   5.4..  6.6 -> cells x 1..3 z 5..7
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Grü x   3.0..  4.5  y  1.89.. 2.16  z   5.4..  6.6 -> cells x 3..5 z 5..7
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Grü x   4.5..  6.0  y  1.98.. 2.19  z   5.4..  6.6 -> cells x 4..6 z 5..7
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Grü x   6.0..  7.5  y  1.98.. 2.19  z   5.4..  6.6 -> cells x 6..8 z 5..7
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Grü x   7.5..  9.0  y  1.89.. 2.16  z   5.4..  6.6 -> cells x 7..9 z 5..7
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Grü x   9.0.. 10.5  y  1.75.. 2.07  z   5.4..  6.6 -> cells x 9..11 z 5..7
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Grü x  10.5.. 12.0  y  1.56.. 1.93  z   5.4..  6.6 -> cells x 10..12 z 5..7
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Grü x  12.0.. 13.5  y  1.34.. 1.74  z   5.4..  6.6 -> cells x 12..14 z 5..7
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Köt x  12.4.. 13.9  y  1.56.. 1.92  z   3.7..  5.3 -> cells x 12..14 z 4..5
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Köt x  11.6.. 13.1  y  1.75.. 2.07  z   3.1..  4.7 -> cells x 12..13 z 3..5
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Köt x  10.9.. 12.4  y  1.89.. 2.16  z   2.5..  4.1 -> cells x 11..12 z 3..4
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Köt x  10.1.. 11.6  y  1.98.. 2.19  z   1.9..  3.5 -> cells x 10..12 z 2..3
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Köt x   9.4.. 10.9  y  1.98.. 2.19  z   1.3..  2.9 -> cells x 9..11 z 1..3
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Köt x   8.6.. 10.1  y  1.89.. 2.16  z   0.7..  2.3 -> cells x 9..10 z 1..2
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Köt x   7.9..  9.4  y  1.75.. 2.07  z   0.1..  1.7 -> cells x 8..9 z 0..2
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Köt x   7.1..  8.6  y  1.56.. 1.92  z  -0.5..  1.1 -> cells x 7..9 z 0..1
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Köt x   6.4..  7.9  y  1.35.. 1.74  z  -1.1..  0.5 -> cells x 6..8 z -1..0
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hon x  12.4.. 13.9  y  1.56.. 1.92  z   6.7..  8.3 -> cells x 12..14 z 7..8
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hon x  11.6.. 13.1  y  1.75.. 2.07  z   7.3..  8.9 -> cells x 12..13 z 7..9
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hon x  10.9.. 12.4  y  1.89.. 2.16  z   7.9..  9.5 -> cells x 11..12 z 8..9
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hon x  10.1.. 11.6  y  1.98.. 2.19  z   8.5.. 10.1 -> cells x 10..12 z 9..10
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hon x   9.4.. 10.9  y  1.98.. 2.19  z   9.1.. 10.7 -> cells x 9..11 z 9..11
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hon x   8.6.. 10.1  y  1.89.. 2.16  z   9.7.. 11.3 -> cells x 9..10 z 10..11
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hon x   7.9..  9.4  y  1.75.. 2.07  z  10.3.. 11.9 -> cells x 8..9 z 10..12
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hon x   7.1..  8.6  y  1.56.. 1.92  z  10.9.. 12.5 -> cells x 7..9 z 11..12
+[probe]   SOLID in/at the hall: Konigsberg3D/BridgeSegment_Hon x   6.4..  7.9  y  1.35.. 1.74  z  11.5.. 13.1 -> cells x 6..8 z 12..13
+
+[probe] ===== graphspace at cell (2, 2) scale 0.60: 184 meshes, 0 Label3D
+[probe]   merged AABB x -26.5..33.9  y -3.9..6.1  z -26.7..30.5  (hall interior x 0.5..12.5, z 0.5..11.5, floor y 0)
+[probe]   mesh centres inside the hall footprint: 16, outside: 168
+[probe]   StaticBody3D/CollisionShape3D under the body: 13
+[probe]   SOLID in/at the hall: Room_0/Shell                   x   6.6.. 12.0  y -0.90.. 2.10  z   7.3.. 12.1 -> cells x 7..12 z 7..12
+[probe]   SOLID in/at the hall: Graphspace/Bridge_0_3          x  -2.3..  9.7  y -0.04.. 0.04  z   5.6.. 10.0 -> cells x -2..10 z 6..10
+[probe]   SOLID in/at the hall: Portal_0_3/CollisionShape3D    x   3.4..  4.0  y -0.78.. 0.78  z   7.3..  8.3 -> cells x 3..4 z 7..8
+[probe]   SOLID in/at the hall: Graphspace/Bridge_0_2          x   9.2.. 11.1  y -0.04.. 0.04  z  -5.3..  9.7 -> cells x 9..11 z -5..10
+[probe]   SOLID in/at the hall: Portal_0_2/CollisionShape3D    x   9.7.. 10.6  y -0.78.. 0.78  z   2.0..  2.4 -> cells x 10..11 z 2..2
+
+[probe] ===== graphspace3d at cell (11, 5) scale 1.00: 296 meshes, 0 Label3D
+[probe]   merged AABB x -26.0..44.5  y -8.7..21.3  z -41.7..55.7  (hall interior x 0.5..12.5, z 0.5..11.5, floor y 0)
+[probe]   mesh centres inside the hall footprint: 13, outside: 283
+[probe]   StaticBody3D/CollisionShape3D under the body: 17
+[probe]   SOLID in/at the hall: GraphSpace3D/BridgeSegment_0_3 x   3.5..  6.1  y  5.24.. 6.16  z   9.7.. 13.8 -> cells x 3..6 z 10..14
+[probe]   SOLID in/at the hall: GraphSpace3D/BridgeSegment_0_3 x   2.4..  4.9  y  4.23.. 5.39  z   6.0.. 10.2 -> cells x 2..5 z 6..10
+[probe]   SOLID in/at the hall: GraphSpace3D/BridgeSegment_0_3 x   1.2..  3.8  y  2.97.. 4.37  z   2.3..  6.5 -> cells x 1..4 z 2..6
+[probe]   SOLID in/at the hall: GraphSpace3D/BridgeSegment_0_3 x   0.1..  2.7  y  1.45.. 3.11  z  -1.3..  2.8 -> cells x 0..3 z -1..3
+[probe]   SOLID in/at the hall: Portal_0_3/CollisionShape3D    x   2.1..  4.0  y  0.97.. 3.64  z   5.4..  7.1 -> cells x 2..4 z 5..7
+[probe]   SOLID in/at the hall: GraphSpace3D/BridgeSegment_6_9 x   9.3.. 14.0  y -4.72..-3.93  z   3.2..  5.7 -> cells x 9..14 z 3..6
+[probe]   SOLID in/at the hall: GraphSpace3D/BridgeSegment_6_9 x   5.0..  9.7  y -4.08..-3.53  z   2.1..  4.6 -> cells x 5..10 z 2..5
+[probe]   SOLID in/at the hall: GraphSpace3D/BridgeSegment_6_9 x   0.7..  5.4  y -3.68..-3.39  z   1.0..  3.5 -> cells x 1..5 z 1..4
+[probe]   SOLID in/at the hall: Portal_6_9/CollisionShape3D    x   0.4..  1.4  y -6.77..-4.16  z   0.9..  2.6 -> cells x 0..1 z 1..3
+
+[probe] ===== two_travelers at cell (10, 9) scale 1.00: 45 meshes, 0 Label3D
+[probe]   merged AABB x 8.0..11.9  y 0.2..2.6  z 8.8..10.0  (hall interior x 0.5..12.5, z 0.5..11.5, floor y 0)
+[probe]   mesh centres inside the hall footprint: 45, outside: 0
+[probe]   StaticBody3D/CollisionShape3D under the body: 0
+
+[probe] ===== synthesis_stand(graphspace hero) at cell (5, 1) scale 1.00: 404 meshes, 0 Label3D
+[probe]   merged AABB x -41.8..51.8  y -3.1..6.9  z -45.8..48.0  (hall interior x 0.5..12.5, z 0.5..11.5, floor y 0)
+[probe]   mesh centres inside the hall footprint: 40, outside: 364
+[probe]   StaticBody3D/CollisionShape3D under the body: 34
+[probe]   SOLID in/at the hall: Room_6/Shell                   x   6.0.. 15.0  y -1.44.. 3.56  z  -3.0..  5.0 -> cells x 6..15 z -3..5
+[probe]   SOLID in/at the hall: Graphspace/Bridge_5_6          x  -1.0.. 11.0  y  0.00.. 0.12  z   0.4..  1.6 -> cells x -1..11 z 0..2
+[probe]   SOLID in/at the hall: Portal_5_6/CollisionShape3D    x   4.7..  5.3  y -1.24.. 1.36  z   0.2..  1.8 -> cells x 5..5 z 0..2
+[probe]   SOLID in/at the hall: Graphspace/Bridge_6_10         x  10.4.. 11.6  y  0.00.. 0.12  z   1.0.. 13.0 -> cells x 10..12 z 1..13
+[probe]   SOLID in/at the hall: Portal_6_10/CollisionShape3D   x  10.2.. 11.8  y -1.24.. 1.36  z   6.7..  7.3 -> cells x 10..12 z 7..7
+[probe]   SOLID in/at the hall: Room_6/Shell                   x   6.0.. 15.0  y -1.44.. 3.56  z  -3.0..  5.0 -> cells x 6..15 z -3..5
+[probe]   SOLID in/at the hall: @Node3D@106/Bridge_5_6         x  -1.0.. 11.0  y  0.00.. 0.12  z   0.4..  1.6 -> cells x -1..11 z 0..2
+[probe]   SOLID in/at the hall: Portal_5_6/CollisionShape3D    x   4.7..  5.3  y -1.24.. 1.36  z   0.2..  1.8 -> cells x 5..5 z 0..2
+[probe]   SOLID in/at the hall: @Node3D@106/Bridge_6_10        x  10.4.. 11.6  y  0.00.. 0.12  z   1.0.. 13.0 -> cells x 10..12 z 1..13
+[probe]   SOLID in/at the hall: Portal_6_10/CollisionShape3D   x  10.2.. 11.8  y -1.24.. 1.36  z   6.7..  7.3 -> cells x 10..12 z 7..7
+[probe] done
