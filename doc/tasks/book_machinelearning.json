@@ -150,9 +150,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ML_Sequence_Memory"
       ],
@@ -167,7 +167,7 @@
       "proposal": "Rewrite the two runs as pale-then-pale (h = +0.375, slab 34 cm up) and dark-then-pale (h = +0.125, slab 11 cm up): same last token, same 0.25 gap, both visible; the 'drops past where it started' line goes and the band paragraph is untouched. Alternative if you prefer the drama of a drop: one code line in LSTMs_VR.gd putting the rail's zero at mid-post (and moving the band with it), effort L.",
       "evidence": "algorithms/machinelearning/LSTMs/LSTMs_VR.gd:577-578 `_rail.position.y = clamp(hidden_out, -2.0, 2.0) * 0.9`; post at y = 0 (:632-634); the step (:718-723); gates rest at local y = 2.0 m (:169,:175,:184,:193) which _gate_value (:487-489) reads as 0.5; floor markers at y = 0 (:162) so the artifact base is the floor, and commons/grid/GridInteractablesComponent.gd:2128-2160 only shifts the AABB minimum to 0. Arithmetic: pale,dark -> c = -0.25, h = -0.125; dark,dark -> c = -0.75, h = -0.375; pale,pale -> h = +0.375; dark,pale -> h = +0.125.",
       "review": "confirmed by a code checker (cited files only): LSTMs_VR.gd:577-578 '_rail.position.y = clamp(hidden_out,-2,2)*0.9'; post at y=0 (:634), stem 0..4 m; rail knob is a 0.09 m box. Gates: container at cell_size/2 (=1.5, :18 cell_size 3.0) + local 0.5 = 2.0; _gate_value (:487-489) gives (2.0-1.0)/2 = 0.5; gate bodies have gravity_scale 0 (:204) so they stay there. recurrent_step (:718-723) confirms the arithmetic: pale,dark h=-0.125; dark,dark h=-0.375 (final.md:24 already states these), i.e. -11 cm and -34 cm. Map token 'lstms_vr:0:0:1#recurrent:on' has y_offset 0; GridInteractablesComponent 2128ff only lifts a negative AABB min at spawn. final.md:15 has the quoted sentence.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: histories flipped to pale-pale (h = 0.375) and dark-pale (h = 0.125); same last token, same 0.25 gap, both slab positions above the floor; 'drops past where it started' removed; band paragraph untouched.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -178,9 +178,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ML_Sequence_Memory"
       ],
@@ -195,7 +195,7 @@
       "proposal": "Insert one sentence before the second run, using the reset the code already contains: put the forget sphere on the floor, carry any token through once (c becomes 0 x c + i x x, then leaves with the token), lift it back to half height, then run the two dark tokens. Say the same before 'run both histories again' later in the chapter.",
       "evidence": "LSTMs_VR.gd:728-733 recurrent_reset(), called only from run_history (:737-743); _poll_tokens steps on every entry (:552-564); the code's own note on resetting by hand (:726-727). From c = -0.25: dark -> c = -0.625, dark -> c = -0.8125, h = -0.406.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the clearing step written between the histories from the code's own reset (LSTMs_VR.gd:726-727): forget AND input spheres on the floor, one token through, c = 0. NOTE the task's 'forget sphere alone' leaves c = i*x, not 0. The later 'run both histories again' has f = 0 and needs no clearing; the chapter says so.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -223,7 +223,7 @@
       "proposal": "Add an in-hall push button (the loss comparator already instantiates commons/interactables/push_button.tscn) wired to reset_network(), with a Label3D 'TRAIN AGAIN'; or, cheaper, make _run_training_batch loop by resetting current_epoch at 1000. Then add one clause to the chapter telling the visitor the button exists.",
       "evidence": "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd:38 training_iterations = 1000; :612-620 timer wait_time 0.05 / training_speed; :622-633 stops and frees the timer at 1000; :259-265 KEY_R and KEY_T only; :911-933 apply_grid_config accepts only topology, presentation, emissive so no map token can extend it; commons/maps/ML_Neural_Networks/map_data.json token `neural_network_visualization:0:0:0.6`.",
       "review": "confirmed by a code checker (cited files only): neural_network_visualization.gd:38 training_iterations = 1000; :37 auto_train = true and :220-221 start_training() in _ready; :612-620 timer wait_time 0.05 / training_speed; :622-633 stops and frees the timer at 1000; :259-265 only KEY_R (reset_network) and KEY_T; :911-933 apply_grid_config reads only topology, presentation, emissive. Map places neural_network_visualization:0:0:0.6 at (3,2) with no desk. loss_function_comparator.gd:642 loads push_button.tscn. reset_network (:880-891) rebuilds and restarts when auto_train, so a button wired to it would work.",
-      "notes": "",
+      "notes": "Left open 2026-09-25 (claude-edges-pilot): the prose half applied - the chapter now says training runs about fifty seconds from the hall's build and nothing restarts it. The button (push_button.tscn wired to reset_network) or the loop at 1000 is a scene change for a follow-up commit; then replace that sentence with the clause naming the button.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -234,9 +234,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ML_Sequence_Memory"
       ],
@@ -251,7 +251,7 @@
       "proposal": "Replace with the real mapping in one sentence: 'anything at waist height or lower reads nought, three metres up reads one, and where the spheres hang, two metres, is one half' — or change the code datum to the floor (y / 2.0) and move the spheres' rest to one metre, effort L, which also makes one reachable.",
       "evidence": "LSTMs_VR.gd:487-489 `return clamp((y - 1.0) / 2.0, 0.0, 1.0)` with y = to_local(body.global_position).y when recurrent; gate rest positions (:169 container at cell_size/2 = 1.5, :175/:184/:193 +0.5) = 2.0 m; floor at local y = 0 (:162).",
       "review": "confirmed by a code checker (cited files only): LSTMs_VR.gd:487-489 _gate_value returns clamp((y - 1.0) / 2.0, 0, 1) with y = to_local(...).y when recurrent; cell_size = 3.0 (:18), gates_container at y = cell_size/2 = 1.5 (:169) and each gate sphere at +0.5 (:175, :184, :193) -> rest height 2.0 m = value 0.5; floor markers at y = 0 (:162). So 0 up to 1 m, 1 only at 3 m. final.md:7 says 'nought at the floor and one above your head'.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'nought anywhere below a metre, one only at three metres, where no hand goes, and where the three hang, two metres up, one half' (lstms_vr placed at scale 1, so world metres).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -262,9 +262,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ML_Sequence_Memory"
       ],
@@ -279,7 +279,7 @@
       "proposal": "One sentence after the slab first moves: 'Above the post a readout prints the step, the retained term f*c, the admitted term i*x, and c and h to three decimals.' Then: 'the gap in c is exactly twice the forget gate times the input gate; the slab shows that gap scaled by the exposing gate.' Replace the gdscript block with the panel's own line, c = f*c + i*x and h = o*c, and change 'to six decimals' to 'to every decimal the readout prints'.",
       "evidence": "LSTMs_VR.gd:580-582 readout format `%+.3f` for retain, admit, c, h; :694 readout at y = 4.3; :705-709 the panel text 'c = f*c + i*x    h = o*c'; :719-722 the source uses forget_gate_activation / input_gate_activation / output_gate_activation, not the chapter's forget / input_gate / output. Gap arithmetic: c differs by 2*i = 1.0 after step one, f*1.0 = 0.5 after step two; h differs by o*0.5 = 0.25 (matches -0.125 vs -0.375).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the readout named (step, f*c, i*x, c and h to three decimals); the panel's line c = f*c + i*x  h = o*c replaces the gdscript block; gap in c (2*f*i = 0.5) distinguished from the gap on the post (o * that = 0.25); 'to every decimal the readout prints'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -290,9 +290,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ML_Perception"
       ],
@@ -307,7 +307,7 @@
       "proposal": "Change the two label strings to describe what stands there ('INPUT IMAGE / 16 x 16, fixed' and 'FILTER KERNELS / Sobel X, Sobel Y, Gaussian, Sharpen'), and while there fix the 'Learn ed representations' typo on the feature panel; or, if the labels must stay, add one chapter sentence warning that the signs describe an interaction the room does not yet have.",
       "evidence": "algorithms/machinelearning/computer_vision/ComputerVision_VR.gd:240 and :290 label texts; :257-279 pixels are MeshInstance3D only; :311-369 filter RigidBody3D never given a script; addons/godot-xr-tools/functions/function_pickup.gd:293-295 rejects any target without pick_up; set_pixel_value (:879-883) and apply_filter (:875-877) have no callers in algorithms/, commons/ or addons/ (grep); :778 'Learn ed representations'.",
       "review": "confirmed by a code checker (cited files only): ML_Perception row 3 places computer_vision_vr:0:0:0.6 -> machinelearning.json:1283 ComputerVision_VR.tscn. ComputerVision_VR.gd:240 'INPUT IMAGE\\nPaint pixels with hand'; :290 'FILTER TOOLKIT\\nGrab to apply'; :257 _create_pixel returns a bare MeshInstance3D; :311-369 _create_filter_object builds a RigidBody3D + CollisionShape3D and never calls set_script; function_pickup.gd:293-295 returns unless target.has_method('pick_up'); :875-877 apply_filter ignores filter_name; :879-883 set_pixel_value; a grep over algorithms/, commons/, addons/ finds no caller of either (only unrelated private _apply_filter methods elsewhere); :778 'Learn ed representations'. final.md:17 carries the quoted sentence.",
-      "notes": "",
+      "notes": "Applied 2026-09-25 (prose option): the two signs named and disowned in the chapter. The label strings (ComputerVision_VR.gd:240, :290) and the 'Learn ed' typo (:778) remain a two-line code follow-up.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -318,9 +318,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ML_Gradient_Landscape"
       ],
@@ -335,7 +335,7 @@
       "proposal": "Add a Label3D 'RESET' above the button in _create_controls, the way enhanced_kmeans labels its four lesson buttons; or, if the code is off limits, write 'the unlabelled button beside the slider resets the run' in the chapter.",
       "evidence": "algorithms/machinelearning/loss_function_comparator/loss_function_comparator.gd:642-647 instantiates and connects the button with no label; :632-635 the slider gets 'Outliers'; commons/interactables/push_button.tscn node list (:62-112) contains no Label3D; algorithms/machinelearning/kmeansclustering/enhanced_kmeans.gd:1526-1536 shows the labelled pattern.",
       "review": "confirmed by a code checker (cited files only): loss_function_comparator.gd:632-635 labels the slider 'Outliers'; :642-647 instantiates push_button.tscn, positions it and connects pressed, no label. push_button.tscn nodes (:62-112) contain no Label3D, and its script push_button.gd creates none. enhanced_kmeans.gd:1526-1536 adds a Label3D per button. Map ML_Gradient_Landscape places 'loss_function_comparator:0:0:1.2#plinth:1.0' at (6,8); final.md:7 says 'RESET lets you watch the same beginning again.'",
-      "notes": "",
+      "notes": "Applied 2026-09-25 (prose option): 'The unlabelled button beside the slider is the reset; press it to watch the same beginning again.' A Label3D above the button remains a code follow-up.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -346,9 +346,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ML_Synthesis"
       ],
@@ -363,7 +363,7 @@
       "proposal": "Add one sentence: 'The pale disc on the floor is a rough marker at the average spread, not the boundary; the real boundary is a diamond in standardised units, which is why some raised points sit inside the disc.' Or draw the true L1 boundary in code (effort L).",
       "evidence": "algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd:198-201 score = |z_x| + |z_y|; :221-234 threshold_visual scaled (r, 0.05, r) with r = ((std.x + std.y) * 0.5) * threshold; anomaly_detection.tscn:21 and :44-47 ThresholdVisual is a CylinderMesh.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the disc sentence added after the addition sentence.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -374,9 +374,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ML_Perception"
       ],
@@ -391,7 +391,7 @@
       "proposal": "Rewrite as: 'A small outline crawls over the input image one cell at a time; find the same cell in the edge image beside it and compare the two when the outline sits on a boundary rather than a uniform patch.' Then soften 'The moving window helps you connect a local neighbourhood with a local calculation' to 'marks the neighbourhood whose calculation you can read off the edge image'.",
       "evidence": "ComputerVision_VR.gd:194-198 steps every 2 s; :841-848 _step_convolution; :821-830 the outline moves over the input canvas at x = -8; edge canvas at x = -2 (:375); edge_map computed once (:225) and only re-read (:813-819).",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the outline sentence rewritten to send the eye to the matching cell of the edge image; 'marks the neighbourhood whose calculation you can read off the edge image'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -402,9 +402,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ML_Generative"
       ],
@@ -419,7 +419,7 @@
       "proposal": "Move one sentence to the end of the first paragraph: 'Nothing here trains: the two losses on the panel are scripted curves, and the motion is a diagram of an exchange, not evidence of it.' Keep paragraph five as the specification of the missing experiment.",
       "evidence": "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd:453 title text; :469-471 metrics text 'Scripted loss ... No models trained'; :66-73 losses driven by a clock.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'Nothing here trains: ...' at the end of paragraph one; paragraph five refers back to the panel and keeps the 'cannot provide evidence' sentence; paragraph six unchanged.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -430,9 +430,9 @@
       "effort": "10min",
       "skill": "verify",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ML_Synthesis"
       ],
@@ -447,7 +447,7 @@
       "proposal": "Strip the [b] tags from the mode string in AnomalyDetection.gd and anomaly_detection.tscn (two lines), and change 'In the default view' to 'In this room' so the chapter does not promise a switch that is not there.",
       "evidence": "AnomalyDetection.gd:255 `\"[b]Mode:[/b] %s\"`; anomaly_detection.tscn:59-63 ModeLabel is type Label3D with the same text; cycle_detection_mode (:152-158) has no caller; apply_grid_config (:302-303) is pass; the file's own @identity (:9) lists 'VR controls for mode cycling [missing]'.",
       "review": "confirmed by a code checker (cited files only): AnomalyDetection.gd:255 `\"[b]Mode:[/b] %s\"`; anomaly_detection.tscn:59-63 ModeLabel type Label3D, text \"[b]Mode:[/b] Z-Score\"; :302-303 apply_grid_config is pass; :9 needs line 'VR controls for mode cycling [missing]'. cycle_detection_mode (:152-158) has no code caller; the only other mention is inside a BBCode text string in anomaly_detection_tutorial.gd:19. ML_Synthesis/final.md:7 'Read the active detection mode.' and :9 'In the default view'. Map places anomaly_detection:0:2:0.6.",
-      "notes": "",
+      "notes": "Applied 2026-09-25: CODE - [b] tags stripped in AnomalyDetection.gd:255 and anomaly_detection.tscn:63 (compile-checked, one boot); 'In this room' for 'In the default view'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -458,9 +458,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ML_Classification"
       ],
@@ -475,7 +475,7 @@
       "proposal": "Change to 'The room is called Classification, but this encounter does not learn named classes from labelled examples.'",
       "evidence": "commons/maps/sequences/machinelearning.json:4 sequence name; :41 map ML_Classification; no other hall in the sequence uses 'sequence' for a room.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: 'The room is called Classification, but ...'.",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -486,9 +486,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "ML_Evolution"
       ],
@@ -503,7 +503,7 @@
       "proposal": "Add: 'The plate above the field counts births and deaths; watch Born and Died tick while you look for the body that changed them.' Optionally open paragraph two with the plate's own line 'No fitness function. No goal. Just drift.' as the claim the room is about to test.",
       "evidence": "algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.gd:603-605 stats text; :405 the sign text; :289 body radius 0.02-0.05 m; :538 child offset within 0.05 m; commons/maps/ML_Evolution/map_data.json token `non_teleological_evolution:0:2:0.6`.",
       "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: the plate sentence added; paragraph two opens on the sign's line (no fitness function, no goal, just drift).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },
@@ -514,9 +514,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "claude-edges-pilot",
+      "done_at": "2026-09-25",
       "map_refs": [
         "machinelearning (sequence file)"
       ],
@@ -531,7 +531,7 @@
       "proposal": "Rewrite the three lines: description 'diagrams of memory' -> 'a hand-set memory cell', content line -> 'set three gates by hand and predict what survives the next token', objective -> 'Predict a linear memory cell's output from hand-set gates; read the adversarial diagram without mistaking animation for trained state'.",
       "evidence": "commons/maps/sequences/machinelearning.json:8 description, :25 objective, :34 content line; algorithms/machinelearning/LSTMs/LSTMs_VR.gd:33-49 the recurrence and its date; ada_encyclopedia/src/app/sequences/page.tsx:220-221 renders seq.description.",
       "review": "unreviewed: the skeptic has not run for this sequence yet",
-      "notes": "",
+      "notes": "Applied 2026-09-25: description, objective and the ML_Sequence_Memory content line rewritten in commons/maps/sequences/machinelearning.json (raw-text edit, formatting untouched, JSON re-parsed).",
       "source": "one reader (skeptic pending)",
       "created_at": "2026-09-24"
     },

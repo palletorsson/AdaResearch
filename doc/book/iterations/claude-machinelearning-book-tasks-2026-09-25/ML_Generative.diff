@@ -1,0 +1,20 @@
+--- before/ML_Generative.md
++++ after/ML_Generative.md
+@@ -4,7 +4,7 @@
+ 
+ <!-- @generative_adversarial_networks_gans_vr -->
+ 
+-Move between the generator and discriminator regions and follow the indicated exchange. First identify where a candidate is supposed to originate. Then trace where a judgement would return. Before watching the scores, say which part would need to change if the critic became better at distinguishing generated examples.
++Move between the generator and discriminator regions and follow the indicated exchange. First identify where a candidate is supposed to originate. Then trace where a judgement would return. Before watching the scores, say which part would need to change if the critic became better at distinguishing generated examples. Nothing here trains: the two losses on the panel are scripted curves, and the motion is a diagram of an exchange, not evidence of it.
+ 
+ The two roles depend on one another. A generator attempts to produce candidates that a discriminator will accept as resembling the reference data. The discriminator attempts to distinguish the sources of the examples it receives. Improving one role can change the problem faced by the other, so the learning environment is partly made by another learner.
+ 
+@@ -12,7 +12,7 @@
+ 
+ That relationship differs from descending a fixed surface. In the loss-landscape room, the scoring rule stayed in place while a point moved. Here the intended training process changes the evaluator as well as the evaluated model. A low score needs interpretation in relation to both participants and the examples they have seen.
+ 
+-This room currently illustrates those roles through animated zones, particles and progress displays. Its displayed losses are prescribed curves over time; no generator and discriminator are actually trained by the exhibit. The motion can help you remember the proposed exchange, but it cannot provide evidence that the generated candidates have improved.
++The panel said so on arrival, and it bears repeating here, where the diagram is most persuasive: no generator and no discriminator are trained by the exhibit. The motion can help you remember the proposed exchange. It cannot provide evidence that the generated candidates have improved.
+ 
+ Use that boundary to specify the experiment the room still needs: show a changing candidate, the discriminator’s response and the reference example involved in an actual update. Repeating one convincing candidate would then become distinguishable from producing a varied set. A beautiful average or a falling score alone would not settle the difference.
+ 

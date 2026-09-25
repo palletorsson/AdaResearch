@@ -1,0 +1,11 @@
+--- before/ML_Classification.md
++++ after/ML_Classification.md
+@@ -12,7 +12,7 @@
+ 
+ This is k-means clustering. The number of centres is chosen in advance; the procedure searches for an arrangement of those centres using distance. The default display starts with four centres, while the generated sample contains three broad blobs and some noise. It is a useful reason to look closely instead of assuming the chosen number reveals the data’s natural categories.
+ 
+-The room sits in a classification sequence, but this encounter does not learn named classes from labelled examples. It groups observations by geometry. Calling a cluster a diagnosis, a personality or a social identity would add an interpretation that the distance calculation did not supply.
++The room is called Classification, but this encounter does not learn named classes from labelled examples. It groups observations by geometry. Calling a cluster a diagnosis, a personality or a social identity would add an interpretation that the distance calculation did not supply.
+ 
+ Two works in this hall do learn from labelled examples. The one with the gold points draws a line between two classes as wide as the data allows, and the line depends only on the few points that touch it; the rest could be thrown away. The other grows a small forest of decision trees, each on a different sample of the same data, and lets them vote. Neither is the centres' geometry, and both were told the answers first.[^perceptron]
+ 

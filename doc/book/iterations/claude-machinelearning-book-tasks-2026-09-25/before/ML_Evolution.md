@@ -4,9 +4,9 @@ If no judge ranks these bodies, does that mean nothing selects between them?
 
 <!-- @non_teleological_evolution -->
 
-Choose a moving body and watch where it travels. Compare a body covering fresh territory with one remaining near places already visited. Stay long enough to notice a new body appear or an existing one disappear, then compare that event with the population’s continuing motion. The plate under the title counts births and deaths; watch Born and Died tick while you look for the body that changed them.
+Choose a moving body and watch where it travels. Compare a body covering fresh territory with one remaining near places already visited. Stay long enough to notice a new body appear or an existing one disappear, then compare that event with the population’s continuing motion.
 
-A sign under the title says it for the room: no fitness function, no goal, just drift. The simulation lets bodies gain energy by visiting new cells. Energy also drains with time. A body with enough energy can reproduce, dividing its available energy and giving its offspring slightly altered traits such as size, speed and colour. There is no final shape on a pedestal that every descendant is trying to become.
+The simulation lets bodies gain energy by visiting new cells. Energy also drains with time. A body with enough energy can reproduce, dividing its available energy and giving its offspring slightly altered traits such as size, speed and colour. There is no final shape on a pedestal that every descendant is trying to become.
 
 Beside these bodies stands a population that does have a judge. Every thirty seconds a score is taken, the higher scorers are picked in small tournaments, and their numbers are crossed to make children, seven times in ten, or copied with a small change the rest of the time. In the time you stand here about ten generations pass. Watch what each population loses: one its unlucky, the other its unscored.[^holland]
 

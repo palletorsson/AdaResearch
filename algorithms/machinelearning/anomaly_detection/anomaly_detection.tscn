@@ -60,7 +60,7 @@ text = "Anomaly Detection Sandbox"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 billboard = 1
 modulate = Color(0.85, 0.95, 1, 1)
-text = "[b]Mode:[/b] Z-Score"
+text = "Mode: Z-Score"
 font_size = 26
 
 [node name="SummaryLabel" type="Label3D" parent="StatsLabels"]

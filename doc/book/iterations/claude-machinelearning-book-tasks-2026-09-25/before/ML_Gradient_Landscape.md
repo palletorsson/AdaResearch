@@ -4,7 +4,7 @@ Can the same observations lead a learner downhill in different directions?
 
 <!-- @loss_function_comparator -->
 
-Find the moving point on each of the three landscapes. Each landscape scores a straight-line fit to the same set of observations. Keep OUTLIERS low for a first comparison, then raise it. The three points return to their starting places. The unlabelled button beside the slider is the reset; press it to watch the same beginning again. Look for a difference between the responses rather than asking which point arrives first.
+Find the moving point on each of the three landscapes. Each landscape scores a straight-line fit to the same set of observations. Keep OUTLIERS low for a first comparison, then raise it. The three points return to their starting places. RESET lets you watch the same beginning again. Look for a difference between the responses rather than asking which point arrives first.
 
 The two horizontal coordinates represent the line’s slope and intercept. Height represents the error assigned to that candidate line. Moving across the surface therefore changes the proposed model, while moving down means improving the score under that particular definition of error.
 

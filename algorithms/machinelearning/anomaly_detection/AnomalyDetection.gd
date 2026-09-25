@@ -252,7 +252,7 @@ func _update_labels(anomaly_count: int, scores: Array, threshold: float) -> void
 		title_label.text = "Anomaly Detection Sandbox"
 
 	if mode_label:
-		mode_label.text = "[b]Mode:[/b] %s" % _mode_name()
+		mode_label.text = "Mode: %s" % _mode_name()
 
 	if summary_label:
 		var total = max(1, _samples.size())
