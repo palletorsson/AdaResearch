@@ -1,0 +1,2126 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "46"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				3.07999992370605,
+				0.00749999983236194,
+				3.07999992370605
+			],
+			"bounds_size": [
+				0.840000152587891,
+				0.949253261089325,
+				0.840000152587891
+			],
+			"cell": [
+				3,
+				3
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.0,
+				3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dark_sphere"
+		},
+		{
+			"bounds_position": [
+				1.60102033615112,
+				0.0,
+				0.300841808319092
+			],
+			"bounds_size": [
+				9.79795837402344,
+				6.5,
+				9.99831581115723
+			],
+			"cell": [
+				6,
+				5
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "WarpStudy/Controls/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.94839978218079,
+						1.10176777839661,
+						4.01463556289673
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WarpStudy/Controls/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.94839978218079,
+						1.10176777839661,
+						4.01463556289673
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WarpStudy/Controls/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.81159996986389,
+						1.10176777839661,
+						4.01463556289673
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WarpStudy/Controls/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.81159996986389,
+						1.10176777839661,
+						4.01463556289673
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WarpStudy/Controls/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.94839978218079,
+						0.976086974143982,
+						3.93610143661499
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WarpStudy/Controls/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.94839978218079,
+						0.976086974143982,
+						3.93610143661499
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WarpStudy/Controls/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.81159996986389,
+						0.976086974143982,
+						3.93610143661499
+					]
+				},
+				{
+					"disabled": false,
+					"path": "WarpStudy/Controls/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.81159996986389,
+						0.976086974143982,
+						3.93610143661499
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "Instrument",
+					"position": [
+						8.69999980926514,
+						0.622220754623413,
+						3.37190771102905
+					],
+					"text": "WARP 0.80 | SKIN | sample 1/5 | static until you act\np (-1.800, +2.400)  →  q (-1.977, +2.467)\nN(p) -0.8294  |  N(q) -0.6632  |  q = p + warp × offset\nYellow: same place on the body. Pink: borrowed address on the left."
+				},
+				{
+					"parent": "Controls",
+					"position": [
+						3.87999987602234,
+						1.16622340679169,
+						4.09792852401733
+					],
+					"text": ""
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "noisesphere"
+		},
+		{
+			"bounds_position": [
+				7.85999965667725,
+				0.0,
+				0.295000016689301
+			],
+			"bounds_size": [
+				3.28000068664551,
+				3.41199994087219,
+				0.409999966621399
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						9.5,
+						3.61999988555908,
+						1.10000002384186
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						9.5,
+						3.1800000667572,
+						1.10000002384186
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						9.5,
+						3.61999988555908,
+						-0.100000023841858
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						9.5,
+						3.1800000667572,
+						-0.100000023841858
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				9.5,
+				0.0,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:noise inside noise"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				1.58000004291534,
+				13.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				1.58000004291534,
+				15.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.58000004291534,
+				15.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.00899982452393,
+				1.58000004291534,
+				15.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				8.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				10.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				6.27500009536743,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				9.94576930999756,
+				0.419999986886978,
+				11.8281288146973
+			],
+			"bounds_size": [
+				1.11744213104248,
+				1.43600106239319,
+				1.31036949157715
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.5,
+				0.419999986886978,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				203.090576171875,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"checks": [
+		{
+			"name": "retained sphere study and supporting orb",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "ring exists, remains hollow and carries no collision",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "original enclosing surface size retained",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "inside control approach has floor support",
+			"passed": true,
+			"value": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			]
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_3",
+			"passed": true,
+			"value": {
+				"button": "Btn_3",
+				"button_position": [
+					3.81159996986389,
+					0.962796628475189,
+					3.95737051963806
+				],
+				"clear_to_button": true,
+				"distance": 1.03804039955139,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_3/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "ZERO preserves selected direction and ring mesh",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "ZERO agrees at all plate samples",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_0",
+			"passed": true,
+			"value": {
+				"button": "Btn_0",
+				"button_position": [
+					3.94839978218079,
+					1.08847737312317,
+					4.03590440750122
+				],
+				"clear_to_button": true,
+				"distance": 1.00713801383972,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_0/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "WARP changes surrounding colour without moving ring",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_0",
+			"passed": true,
+			"value": {
+				"button": "Btn_0",
+				"button_position": [
+					3.94839978218079,
+					1.08847737312317,
+					4.03590440750122
+				],
+				"clear_to_button": true,
+				"distance": 1.00713801383972,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_0/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "return to .8 recovers original enclosing data",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "same selected direction at enclosure 0",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "open ring stays just inside shell 0",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "ring projection is the instrument address 0",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "SAMPLE does not rebuild or change field surfaces 0",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_1",
+			"passed": true,
+			"value": {
+				"button": "Btn_1",
+				"button_position": [
+					3.81159996986389,
+					1.08847737312317,
+					4.03590440750122
+				],
+				"clear_to_button": true,
+				"distance": 1.01048159599304,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_1/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "same selected direction at enclosure 1",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "open ring stays just inside shell 1",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "ring projection is the instrument address 1",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "SAMPLE does not rebuild or change field surfaces 1",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_3",
+			"passed": true,
+			"value": {
+				"button": "Btn_3",
+				"button_position": [
+					3.81159996986389,
+					0.962796628475189,
+					3.95737051963806
+				],
+				"clear_to_button": true,
+				"distance": 1.03804039955139,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_3/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_0",
+			"passed": true,
+			"value": {
+				"button": "Btn_0",
+				"button_position": [
+					3.94839978218079,
+					1.08847737312317,
+					4.03590440750122
+				],
+				"clear_to_button": true,
+				"distance": 1.00713801383972,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_0/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_0",
+			"passed": true,
+			"value": {
+				"button": "Btn_0",
+				"button_position": [
+					3.94839978218079,
+					1.08847737312317,
+					4.03590440750122
+				],
+				"clear_to_button": true,
+				"distance": 1.00713801383972,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_0/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "selected overhead ring never moves during WARP",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_1",
+			"passed": true,
+			"value": {
+				"button": "Btn_1",
+				"button_position": [
+					3.81159996986389,
+					1.08847737312317,
+					4.03590440750122
+				],
+				"clear_to_button": true,
+				"distance": 1.01048159599304,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_1/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "same selected direction at enclosure 2",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "open ring stays just inside shell 2",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "ring projection is the instrument address 2",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "SAMPLE does not rebuild or change field surfaces 2",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_1",
+			"passed": true,
+			"value": {
+				"button": "Btn_1",
+				"button_position": [
+					3.81159996986389,
+					1.08847737312317,
+					4.03590440750122
+				],
+				"clear_to_button": true,
+				"distance": 1.01048159599304,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_1/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "same selected direction at enclosure 3",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "open ring stays just inside shell 3",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "ring projection is the instrument address 3",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "SAMPLE does not rebuild or change field surfaces 3",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_1",
+			"passed": true,
+			"value": {
+				"button": "Btn_1",
+				"button_position": [
+					3.81159996986389,
+					1.08847737312317,
+					4.03590440750122
+				],
+				"clear_to_button": true,
+				"distance": 1.01048159599304,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_1/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "same selected direction at enclosure 4",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "open ring stays just inside shell 4",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "ring projection is the instrument address 4",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "SAMPLE does not rebuild or change field surfaces 4",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_1",
+			"passed": true,
+			"value": {
+				"button": "Btn_1",
+				"button_position": [
+					3.81159996986389,
+					1.08847737312317,
+					4.03590440750122
+				],
+				"clear_to_button": true,
+				"distance": 1.01048159599304,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_1/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "five SAMPLE presses return to first direction",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_2",
+			"passed": true,
+			"value": {
+				"button": "Btn_2",
+				"button_position": [
+					3.94839978218079,
+					0.962796628475189,
+					3.95737051963806
+				],
+				"clear_to_button": true,
+				"distance": 1.03478586673737,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_2/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "RELIEF changes small pair while enclosure and witness stay put",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "actual museum mouse ray operates Btn_2",
+			"passed": true,
+			"value": {
+				"button": "Btn_2",
+				"button_position": [
+					3.94839978218079,
+					0.962796628475189,
+					3.95737051963806
+				],
+				"clear_to_button": true,
+				"distance": 1.03478586673737,
+				"emissions": 1,
+				"eye": [
+					3.90465664863586,
+					1.71678280830383,
+					3.25
+				],
+				"feet": [
+					3.90000009536743,
+					0.0600336380302906,
+					3.25
+				],
+				"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_2/Button",
+				"hover_matches": true
+			}
+		},
+		{
+			"name": "collision unchanged through every control",
+			"passed": true,
+			"value": null
+		},
+		{
+			"name": "control clicks stayed at one supported spot",
+			"passed": true,
+			"value": null
+		}
+	],
+	"collections": [],
+	"desktop_input": [
+		{
+			"button": "Btn_3",
+			"button_position": [
+				3.81159996986389,
+				0.962796628475189,
+				3.95737051963806
+			],
+			"clear_to_button": true,
+			"distance": 1.03804039955139,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_3/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_0",
+			"button_position": [
+				3.94839978218079,
+				1.08847737312317,
+				4.03590440750122
+			],
+			"clear_to_button": true,
+			"distance": 1.00713801383972,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_0/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_0",
+			"button_position": [
+				3.94839978218079,
+				1.08847737312317,
+				4.03590440750122
+			],
+			"clear_to_button": true,
+			"distance": 1.00713801383972,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_0/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_1",
+			"button_position": [
+				3.81159996986389,
+				1.08847737312317,
+				4.03590440750122
+			],
+			"clear_to_button": true,
+			"distance": 1.01048159599304,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_1/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_3",
+			"button_position": [
+				3.81159996986389,
+				0.962796628475189,
+				3.95737051963806
+			],
+			"clear_to_button": true,
+			"distance": 1.03804039955139,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_3/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_0",
+			"button_position": [
+				3.94839978218079,
+				1.08847737312317,
+				4.03590440750122
+			],
+			"clear_to_button": true,
+			"distance": 1.00713801383972,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_0/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_0",
+			"button_position": [
+				3.94839978218079,
+				1.08847737312317,
+				4.03590440750122
+			],
+			"clear_to_button": true,
+			"distance": 1.00713801383972,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_0/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_1",
+			"button_position": [
+				3.81159996986389,
+				1.08847737312317,
+				4.03590440750122
+			],
+			"clear_to_button": true,
+			"distance": 1.01048159599304,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_1/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_1",
+			"button_position": [
+				3.81159996986389,
+				1.08847737312317,
+				4.03590440750122
+			],
+			"clear_to_button": true,
+			"distance": 1.01048159599304,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_1/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_1",
+			"button_position": [
+				3.81159996986389,
+				1.08847737312317,
+				4.03590440750122
+			],
+			"clear_to_button": true,
+			"distance": 1.01048159599304,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_1/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_1",
+			"button_position": [
+				3.81159996986389,
+				1.08847737312317,
+				4.03590440750122
+			],
+			"clear_to_button": true,
+			"distance": 1.01048159599304,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_1/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_2",
+			"button_position": [
+				3.94839978218079,
+				0.962796628475189,
+				3.95737051963806
+			],
+			"clear_to_button": true,
+			"distance": 1.03478586673737,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_2/Button",
+			"hover_matches": true
+		},
+		{
+			"button": "Btn_2",
+			"button_position": [
+				3.94839978218079,
+				0.962796628475189,
+				3.95737051963806
+			],
+			"clear_to_button": true,
+			"distance": 1.03478586673737,
+			"emissions": 1,
+			"eye": [
+				3.90465664863586,
+				1.71678280830383,
+				3.25
+			],
+			"feet": [
+				3.90000009536743,
+				0.0600336380302906,
+				3.25
+			],
+			"geometry_blocker": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Noisetorus/WarpStudy/Controls/Btn_2/Button",
+			"hover_matches": true
+		}
+	],
+	"failures": [],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"rays": [
+		{
+			"collider": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "east outside approach",
+			"top": 0.000000379979610443115
+		},
+		{
+			"collider": "/root/MuseumProbeHost/EndlessMuseum/Seg0_kanazawa-room-matrix/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "west outside approach",
+			"top": 0.000000379979610443115
+		}
+	],
+	"room": "Noise_Inside_Noise",
+	"scope": "Actual museum in a private snapshot; synthetic mouse events through its DesktopHand pointer, controlled camera aim, existing CharacterBody and collision for sampled routes. No tracked-hand/headset, learner or Quest acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/Noise_Inside_Noise/instrument.png",
+		"res://ada_run/encounter_pilot/Noise_Inside_Noise/overhead.png",
+		"res://ada_run/encounter_pilot/Noise_Inside_Noise/overhead-zero.png",
+		"res://ada_run/encounter_pilot/Noise_Inside_Noise/ring-zero.png",
+		"res://ada_run/encounter_pilot/Noise_Inside_Noise/ring-warp.png",
+		"res://ada_run/encounter_pilot/Noise_Inside_Noise/doorway.png"
+	],
+	"study_position": [
+		6.5,
+		0.0,
+		5.5
+	],
+	"study_scale": [
+		1.0,
+		1.0,
+		1.0
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": [
+		{
+			"end": [
+				10.0755834579468,
+				0.0605966970324516,
+				5.30000019073486
+			],
+			"passed": true,
+			"tag": "east threshold into sphere",
+			"target": [
+				10.0,
+				0.07,
+				5.3
+			]
+		},
+		{
+			"end": [
+				9.43664073944092,
+				0.0602343752980232,
+				4.83053350448608
+			],
+			"passed": true,
+			"tag": "clear east plinth",
+			"target": [
+				9.4,
+				0.07,
+				4.8
+			]
+		},
+		{
+			"end": [
+				3.96665191650391,
+				0.0602343752980232,
+				4.80000019073486
+			],
+			"passed": true,
+			"tag": "between instrument and small spheres",
+			"target": [
+				3.9,
+				0.07,
+				4.8
+			]
+		},
+		{
+			"end": [
+				2.86666774749756,
+				0.0602343752980232,
+				4.80000019073486
+			],
+			"passed": true,
+			"tag": "around control rack west edge",
+			"target": [
+				2.8,
+				0.07,
+				4.8
+			]
+		},
+		{
+			"end": [
+				2.79999995231628,
+				0.0602343752980232,
+				3.30000162124634
+			],
+			"passed": true,
+			"tag": "past control rack",
+			"target": [
+				2.8,
+				0.07,
+				3.25
+			]
+		},
+		{
+			"end": [
+				3.83333230018616,
+				0.0602343752980232,
+				3.25
+			],
+			"passed": true,
+			"tag": "approach buttons from open side",
+			"target": [
+				3.9,
+				0.07,
+				3.25
+			]
+		},
+		{
+			"end": [
+				2.86666774749756,
+				0.0602343752980232,
+				3.25
+			],
+			"passed": true,
+			"tag": "leave buttons along open side",
+			"target": [
+				2.8,
+				0.07,
+				3.25
+			]
+		},
+		{
+			"end": [
+				2.79999995231628,
+				0.0602343752980232,
+				4.74999856948853
+			],
+			"passed": true,
+			"tag": "return past rack",
+			"target": [
+				2.8,
+				0.07,
+				4.8
+			]
+		},
+		{
+			"end": [
+				3.83333230018616,
+				0.0602343752980232,
+				4.80000019073486
+			],
+			"passed": true,
+			"tag": "return to room crossing",
+			"target": [
+				3.9,
+				0.07,
+				4.8
+			]
+		},
+		{
+			"end": [
+				3.05498123168945,
+				0.0602343752980232,
+				5.26945543289185
+			],
+			"passed": true,
+			"tag": "clear west plinth",
+			"target": [
+				3.0,
+				0.07,
+				5.3
+			]
+		},
+		{
+			"end": [
+				1.2657378911972,
+				0.000175777822732925,
+				5.30000019073486
+			],
+			"passed": true,
+			"tag": "leave opposite sphere opening",
+			"target": [
+				1.2,
+				0.07,
+				5.3
+			]
+		},
+		{
+			"end": [
+				6.5,
+				0.0602343752980232,
+				2.4333324432373
+			],
+			"passed": true,
+			"tag": "approach comparison windows",
+			"target": [
+				6.5,
+				0.07,
+				2.5
+			]
+		}
+	],
+	"witnesses": [
+		{
+			"angular_radii": [
+				0.0359975789801967,
+				0.0449999140755358
+			],
+			"centre": [
+				9.48499965667725,
+				1.5,
+				1.31999969482422
+			],
+			"direction": [
+				-0.600000023841858,
+				0.0,
+				0.800000011920929
+			],
+			"radial_error": 0.000000381469726917771,
+			"selected": {
+				"d": [
+					-0.221083730459213,
+					0.0837555825710297
+				],
+				"direct": -0.829428315162659,
+				"p": [
+					-1.80000007152557,
+					2.40000009536743
+				],
+				"q": [
+					-1.9768670797348,
+					2.4670045375824
+				],
+				"relief": false,
+				"sample": 0,
+				"strength": 0.8,
+				"warped": -0.663244485855103
+			}
+		},
+		{
+			"angular_radii": [
+				0.0359975789801967,
+				0.0449999140755358
+			],
+			"centre": [
+				6.49999952316284,
+				4.4850001335144,
+				1.32000017166138
+			],
+			"direction": [
+				0.0,
+				0.600000023841858,
+				0.800000011920929
+			],
+			"radial_error": 0.000000572204589488479,
+			"selected": {
+				"d": [
+					-0.063192680478096,
+					-0.104054480791092
+				],
+				"direct": -0.279854416847229,
+				"p": [
+					0.0,
+					2.40000009536743
+				],
+				"q": [
+					-0.0505541451275349,
+					2.3167564868927
+				],
+				"relief": false,
+				"sample": 1,
+				"strength": 0.8,
+				"warped": -0.177799940109253
+			}
+		},
+		{
+			"angular_radii": [
+				0.0359975789801967,
+				0.0449999140755358
+			],
+			"centre": [
+				3.51499938964844,
+				1.5,
+				1.32000064849854
+			],
+			"direction": [
+				0.600000023841858,
+				0.0,
+				0.800000011920929
+			],
+			"radial_error": 0.000000381469726917771,
+			"selected": {
+				"d": [
+					0.184598460793495,
+					-0.266552478075027
+				],
+				"direct": -0.787870526313782,
+				"p": [
+					1.80000007152557,
+					2.40000009536743
+				],
+				"q": [
+					1.94767880439758,
+					2.18675804138184
+				],
+				"relief": false,
+				"sample": 2,
+				"strength": 0.8,
+				"warped": -0.531820178031921
+			}
+		},
+		{
+			"angular_radii": [
+				0.0359975789801967,
+				0.0450012390533731
+			],
+			"centre": [
+				4.50999975204468,
+				5.48000001907349,
+				3.07511258125305
+			],
+			"direction": [
+				0.400000005960464,
+				0.800000011920929,
+				0.447213590145111
+			],
+			"radial_error": 0.000000381469726917771,
+			"selected": {
+				"d": [
+					0.158158734440804,
+					0.365271985530853
+				],
+				"direct": 0.519621431827545,
+				"p": [
+					1.20000004768372,
+					1.34164071083069
+				],
+				"q": [
+					1.32652699947357,
+					1.63385832309723
+				],
+				"relief": false,
+				"sample": 3,
+				"strength": 0.8,
+				"warped": 0.475955963134766
+			}
+		},
+		{
+			"angular_radii": [
+				0.0359975789801967,
+				0.0450012390533731
+			],
+			"centre": [
+				8.48999977111816,
+				5.48000001907349,
+				3.07511210441589
+			],
+			"direction": [
+				-0.400000005960464,
+				0.800000011920929,
+				0.447213590145111
+			],
+			"radial_error": 0.000000381469726917771,
+			"selected": {
+				"d": [
+					0.102784506976604,
+					0.272195160388947
+				],
+				"direct": 0.657100200653076,
+				"p": [
+					-1.20000004768372,
+					1.34164071083069
+				],
+				"q": [
+					-1.11777245998383,
+					1.5593968629837
+				],
+				"relief": false,
+				"sample": 4,
+				"strength": 0.8,
+				"warped": 0.797257542610168
+			}
+		}
+	]
+}

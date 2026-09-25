@@ -1,0 +1,7 @@
+# Two primary works
+
+`noisesphere:180#stand:warp` at (6,5): the original sphere becomes the direct member of a matched pair in a bounded 7.2 × 5.6 m stage. A ten-metre spherical enclosure now surrounds that stage and its visitor, with two 2.5 m-high side openings and a continuous circular floor. The enclosing colour field follows WARP and retains fixed geometry/collision through RELIEF. Its unshaded display uses gain .65. The pair uses an explicit CPU Value sampler and two Perlin offset fields. A low tilted instrument shows direct and warped images, a coordinate grid and a cased numerical witness. WARP, SAMPLE, RELIEF and ZERO are local controls. The original large dome resource and shader are preserved for stand:none.
+
+`dark_sphere` remains at (3,3). Its independent sine-driven pulse and rotation remain unchanged; the new study floor supplies support below this part of the hall. The orb is a second primary because its continuously varying material keeps time-based change available beside a comparison that stays still between actions.
+
+The original map has two tokens, and both remain. The extra comparison sphere, plates and grid are parts of noisesphere's optional study, not additional map tokens. The book order is noisesphere, dark_sphere.

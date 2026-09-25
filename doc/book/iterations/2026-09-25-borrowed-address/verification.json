@@ -1,0 +1,160 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "preserved commons/maps/Noise_Inside_Noise/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/maps/sequences/noise.json",
+      "passed": true
+    },
+    {
+      "name": "preserved algorithms/randomness/noisesphere/noisesphere.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved algorithms/randomness/noisesphere/noisesphere.tscn",
+      "passed": true
+    },
+    {
+      "name": "shared sampler and all original controls preserved",
+      "passed": true
+    },
+    {
+      "name": "primary role and other hall metadata preserved",
+      "passed": true
+    },
+    {
+      "name": "current hash final.md",
+      "passed": true
+    },
+    {
+      "name": "current hash map_data.json",
+      "passed": true
+    },
+    {
+      "name": "all original mathematical excerpts retained",
+      "passed": true
+    },
+    {
+      "name": "encounter anchors and order retained",
+      "passed": true
+    },
+    {
+      "name": "orb return and closing retained",
+      "passed": true
+    },
+    {
+      "name": "projection and finite sampling argument retained",
+      "passed": true
+    },
+    {
+      "name": "vertex shader excerpt is actual implementation",
+      "passed": true
+    },
+    {
+      "name": "current notes keep dark orb supporting",
+      "passed": true
+    },
+    {
+      "name": "passing native run museum-runtime.json",
+      "passed": true
+    },
+    {
+      "name": "passing native run before-view/museum-runtime.json",
+      "passed": true
+    },
+    {
+      "name": "65 focused native assertions",
+      "passed": true
+    },
+    {
+      "name": "body route: east threshold into sphere",
+      "passed": true
+    },
+    {
+      "name": "body route: clear east plinth",
+      "passed": true
+    },
+    {
+      "name": "body route: between instrument and small spheres",
+      "passed": true
+    },
+    {
+      "name": "body route: around control rack west edge",
+      "passed": true
+    },
+    {
+      "name": "body route: past control rack",
+      "passed": true
+    },
+    {
+      "name": "body route: approach buttons from open side",
+      "passed": true
+    },
+    {
+      "name": "body route: leave buttons along open side",
+      "passed": true
+    },
+    {
+      "name": "body route: return past rack",
+      "passed": true
+    },
+    {
+      "name": "body route: return to room crossing",
+      "passed": true
+    },
+    {
+      "name": "body route: clear west plinth",
+      "passed": true
+    },
+    {
+      "name": "body route: leave opposite sphere opening",
+      "passed": true
+    },
+    {
+      "name": "body route: approach comparison windows",
+      "passed": true
+    },
+    {
+      "name": "floor ray: east outside approach",
+      "passed": true
+    },
+    {
+      "name": "floor ray: west outside approach",
+      "passed": true
+    },
+    {
+      "name": "15 synthetic clicks through actual museum pointer",
+      "passed": true
+    },
+    {
+      "name": "no script or shader compile errors",
+      "passed": true
+    },
+    {
+      "name": "book photograph is unmodified native capture",
+      "passed": true
+    }
+  ],
+  "engine_warnings": [
+    "ERROR: Unrecognized UID: \"uid://rwex60pqapc\".",
+    "WARNING: NatureRenderer: No WorldEnvironment found \u2014 fog/sky disabled.",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/machinelearning_extra.json",
+    "WARNING: GridInteractablesComponent: No artifacts found in JSON file: res://commons/artifacts/registry/substrate_vectors.json",
+    "WARNING: Screen-space ambient occlusion (SSAO) is only available when using the Forward+ or Compatibility renderers.",
+    "WARNING: Screen-space indirect lighting (SSIL) is only available when using the Forward+ renderer.",
+    "WARNING: Screen-space reflections (SSR) are only available when using the Forward+ renderer.",
+    "WARNING: SDFGI is only available when using the Forward+ renderer.",
+    "WARNING: Volumetric fog is only available when using the Forward+ renderer.",
+    "WARNING: [em-art] noise|noise inside noise: panton_pop took 135 ms to build \u2014 that is a dropped frame in the hall"
+  ],
+  "other_core_records_changed_concurrently": [
+    "Random_Definition",
+    "Random_Entropy",
+    "Random_Remove",
+    "Randomness_10_PRINT_Algorithm"
+  ],
+  "scope": "Actual private museum; true vertex shader with shared CPU noise samples, matching collision. Synthetic mouse through DesktopHand, camera smoothing paused, sampled CharacterBody routes. No tracked-headset/learner/Quest acceptance."
+}

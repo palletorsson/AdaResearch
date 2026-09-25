@@ -1,0 +1,191 @@
+{
+  "shots": [],
+  "rays": [
+    {
+      "tag": "east outside approach",
+      "x": 11.7,
+      "z": 5.3,
+      "top": 0,
+      "tolerance": 0.15,
+      "from_y": 0.8
+    },
+    {
+      "tag": "west outside approach",
+      "x": 1.2,
+      "z": 5.3,
+      "top": 0,
+      "tolerance": 0.15,
+      "from_y": 0.8
+    }
+  ],
+  "walks": [
+    {
+      "from": [
+        11.7,
+        0.07,
+        5.3
+      ],
+      "to": [
+        10,
+        0.07,
+        5.3
+      ],
+      "tag": "east threshold into sphere",
+      "seconds": 3
+    },
+    {
+      "from": [
+        10,
+        0.07,
+        5.3
+      ],
+      "to": [
+        9.4,
+        0.07,
+        4.8
+      ],
+      "tag": "clear east plinth",
+      "seconds": 2
+    },
+    {
+      "from": [
+        9.4,
+        0.07,
+        4.8
+      ],
+      "to": [
+        3.9,
+        0.07,
+        4.8
+      ],
+      "tag": "between instrument and small spheres",
+      "seconds": 4
+    },
+    {
+      "from": [
+        3.9,
+        0.07,
+        4.8
+      ],
+      "to": [
+        2.8,
+        0.07,
+        4.8
+      ],
+      "tag": "around control rack west edge",
+      "seconds": 2
+    },
+    {
+      "from": [
+        2.8,
+        0.07,
+        4.8
+      ],
+      "to": [
+        2.8,
+        0.07,
+        3.25
+      ],
+      "tag": "past control rack",
+      "seconds": 2
+    },
+    {
+      "from": [
+        2.8,
+        0.07,
+        3.25
+      ],
+      "to": [
+        3.9,
+        0.07,
+        3.25
+      ],
+      "tag": "approach buttons from open side",
+      "seconds": 2
+    },
+    {
+      "from": [
+        3.9,
+        0.07,
+        3.25
+      ],
+      "to": [
+        2.8,
+        0.07,
+        3.25
+      ],
+      "tag": "leave buttons along open side",
+      "seconds": 2
+    },
+    {
+      "from": [
+        2.8,
+        0.07,
+        3.25
+      ],
+      "to": [
+        2.8,
+        0.07,
+        4.8
+      ],
+      "tag": "return past rack",
+      "seconds": 2
+    },
+    {
+      "from": [
+        2.8,
+        0.07,
+        4.8
+      ],
+      "to": [
+        3.9,
+        0.07,
+        4.8
+      ],
+      "tag": "return to room crossing",
+      "seconds": 2
+    },
+    {
+      "from": [
+        3.9,
+        0.07,
+        4.8
+      ],
+      "to": [
+        3.0,
+        0.07,
+        5.3
+      ],
+      "tag": "clear west plinth",
+      "seconds": 2
+    },
+    {
+      "from": [
+        3.0,
+        0.07,
+        5.3
+      ],
+      "to": [
+        1.2,
+        0.07,
+        5.3
+      ],
+      "tag": "leave opposite sphere opening",
+      "seconds": 3
+    },
+    {
+      "from": [
+        6.5,
+        0.07,
+        1.5
+      ],
+      "to": [
+        6.5,
+        0.07,
+        2.5
+      ],
+      "tag": "approach comparison windows",
+      "seconds": 2
+    }
+  ]
+}

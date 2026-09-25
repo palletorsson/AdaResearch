@@ -1,0 +1,101 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/before-view/instrument.png",
+      "status": 200,
+      "bytes": 1703698,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/changes.diff",
+      "status": 200,
+      "bytes": 46728,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/figure-provenance.json",
+      "status": 200,
+      "bytes": 502,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/index.html",
+      "status": 200,
+      "bytes": 6714,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/instrument.png",
+      "status": 200,
+      "bytes": 1796712,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/museum-log.txt",
+      "status": 200,
+      "bytes": 47443,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/museum-runtime.json",
+      "status": 200,
+      "bytes": 41838,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/relief-fixture-diagnostic/museum-runtime.json",
+      "status": 200,
+      "bytes": 41665,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/relief-patch.png",
+      "status": 200,
+      "bytes": 1586692,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/skin-patch.png",
+      "status": 200,
+      "bytes": 1530656,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/source-manifest.json",
+      "status": 200,
+      "bytes": 3975,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/text-diff.html",
+      "status": 200,
+      "bytes": 52586,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/verification.json",
+      "status": 200,
+      "bytes": 4764,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/iterations/2026-09-25-borrowed-address/vertex-room.png",
+      "status": 200,
+      "bytes": 1796871,
+      "byte_identical": true
+    },
+    {
+      "url": "http://localhost:3003/compose/sources?map=Noise_Inside_Noise&doc=final",
+      "status": 200,
+      "bytes": 32094,
+      "byte_identical": null
+    },
+    {
+      "url": "http://localhost:3003/book-review/doc/book/figures/Noise_Inside_Noise/vertex-relief.png",
+      "status": 200,
+      "bytes": 1796871,
+      "byte_identical": true
+    }
+  ]
+}

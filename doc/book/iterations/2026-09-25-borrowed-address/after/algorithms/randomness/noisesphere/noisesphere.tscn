@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://drtnpf40jq4pn"]
+
+[ext_resource type="Shader" uid="uid://7hapaspktawr" path="res://commons/resourses/shaders/noisePlanet2.gdshader" id="1_mkyck"]
+[ext_resource type="Script" path="res://algorithms/randomness/noisesphere/noisesphere.gd" id="2_nsphr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hsvs3"]
+render_priority = 0
+shader = ExtResource("1_mkyck")
+shader_parameter/noise_scale = 48.39
+shader_parameter/height_multiplier = 0.2
+shader_parameter/noise_speed = 0.05
+shader_parameter/elongation_factor = 1.0
+shader_parameter/hue_shift_speed = 0.05
+
+[sub_resource type="SphereMesh" id="SphereMesh_bhbqq"]
+lightmap_size_hint = Vector2i(17, 17)
+flip_faces = true
+radial_segments = 128
+rings = 64
+is_hemisphere = false
+
+[node name="Noisetorus" type="Node3D"]
+script = ExtResource("2_nsphr")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.07367, 29.9808, 0, -29.9808, -1.07367, 0, 0, 0, 30, -17.7262, 0.852951, 0.073)
+material_override = SubResource("ShaderMaterial_hsvs3")
+mesh = SubResource("SphereMesh_bhbqq")

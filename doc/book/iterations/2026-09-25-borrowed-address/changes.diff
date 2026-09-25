@@ -1,0 +1,399 @@
+--- before/algorithms/randomness/noisesphere/enclosing_sphere.gd
++++ after/algorithms/randomness/noisesphere/enclosing_sphere.gd
+@@ -1,15 +1,23 @@
+ extends Node3D
+ ## The warped field becomes the visitor's surrounding surface. Its support and
+-## collision stay fixed: RELIEF gives the small comparison bodies another use.
++## collision follow the same sampled relief. Floor and doorway edges stay pinned.
+ const RADIUS := 5.0
+ const CENTRE := Vector3(0, 1.5, 0.2)
+ const FLOOR_Y := 0.06
+ const DOOR_TOP := 2.5
+ const DOOR_HALF_ANGLE := 0.24
+ const DISPLAY_GAIN := 0.65
++const RELIEF_DEPTH := 0.8
+ var surface: MeshInstance3D
+ var directions := PackedVector3Array()
+ var revision: int = 0
++var sample_ring: MeshInstance3D
++var sample_direction := Vector3.ZERO
++const WITNESS_INSET := 0.025
++var _witness_strength: float = -1.0
++var _witness_relief: bool = false
++var _wall_shape: ConcavePolygonShape3D
++var displaced_vertices := PackedVector3Array()
+ 
+ func build(study: Node3D) -> void:
+ 	name = "EnclosingSphere"
+@@ -63,10 +71,10 @@
+ 			directions.append_array(PackedVector3Array([p, r, q, q, r, s]))
+ 	surface = MeshInstance3D.new()
+ 	surface.name = "InnerSurface"
+-	var material := StandardMaterial3D.new()
+-	material.vertex_color_use_as_albedo = true
+-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+-	material.cull_mode = BaseMaterial3D.CULL_DISABLED
++	var material := ShaderMaterial.new()
++	material.shader = load("res://algorithms/randomness/noisesphere/enclosing_relief.gdshader")
++	material.set_shader_parameter("sphere_centre", CENTRE)
++	surface.custom_aabb = AABB(CENTRE - Vector3.ONE * (RADIUS + RELIEF_DEPTH), Vector3.ONE * 2.0 * (RADIUS + RELIEF_DEPTH))
+ 	surface.material_override = material
+ 	surface.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+ 	add_child(surface)
+@@ -74,9 +82,10 @@
+ 	var wall := StaticBody3D.new()
+ 	wall.name = "ShellCollision"
+ 	var wall_shape := CollisionShape3D.new()
+-	var shell_shape: ConcavePolygonShape3D = surface.mesh.create_trimesh_shape()
+-	shell_shape.backface_collision = true
+-	wall_shape.shape = shell_shape
++	_wall_shape = ConcavePolygonShape3D.new()
++	_wall_shape.set_faces(displaced_vertices)
++	_wall_shape.backface_collision = true
++	wall_shape.shape = _wall_shape
+ 	wall.add_child(wall_shape)
+ 	add_child(wall)
+ 
+@@ -86,16 +95,80 @@
+ func refresh(study: Node3D) -> void:
+ 	var vertices := PackedVector3Array()
+ 	var colours := PackedColorArray()
++	var samples := PackedVector2Array()
++	displaced_vertices.clear()
++	var depth: float = RELIEF_DEPTH if study.relief else 0.0
+ 	for d in directions:
+ 		vertices.append(CENTRE + d * RADIUS)
+ 		var value: float = study.value_at(Vector2(d.x, d.z) * 3.0, study.strength())
++		var weight: float = relief_weight(d)
++		samples.append(Vector2(value, weight))
++		displaced_vertices.append(CENTRE + d * (RADIUS + value * weight * depth))
+ 		var c: Color = study.colour(value)
+ 		colours.append(Color(c.r * DISPLAY_GAIN, c.g * DISPLAY_GAIN, c.b * DISPLAY_GAIN))
+ 	var arrays: Array = []
+ 	arrays.resize(Mesh.ARRAY_MAX)
+ 	arrays[Mesh.ARRAY_VERTEX] = vertices
+ 	arrays[Mesh.ARRAY_COLOR] = colours
++	arrays[Mesh.ARRAY_TEX_UV] = samples
+ 	var mesh := ArrayMesh.new()
+ 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+ 	surface.mesh = mesh
++	surface.material_override.set_shader_parameter("relief_depth", depth)
++	if _wall_shape != null: _wall_shape.set_faces(displaced_vertices)
+ 	revision += 1
++
++
++## One destination on the surrounding body, matching the small yellow witnesses.
++## The direction still names the same destination. In RELIEF, its radial position
++## follows the displaced surface; in SKIN, WARP changes colour without moving it.
++func select_direction(selected_direction: Vector3, study: Node3D) -> void:
++	var d := selected_direction.normalized()
++	if sample_ring != null and sample_direction.is_equal_approx(d) and _witness_relief == study.relief:
++		if not study.relief or is_equal_approx(_witness_strength, study.strength()): return
++	_witness_relief = study.relief
++	_witness_strength = study.strength()
++	sample_direction = d
++	if sample_ring == null:
++		sample_ring = MeshInstance3D.new()
++		sample_ring.name = "SelectedDirection"
++		var mat := StandardMaterial3D.new()
++		mat.albedo_color = Color(1.0, 0.9, 0.25)
++		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
++		sample_ring.material_override = mat
++		sample_ring.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
++		add_child(sample_ring)
++	# An open band follows the inside surface; the sampled patch remains visible.
++	var tangent := d.cross(Vector3.UP if absf(d.y) < 0.99 else Vector3.RIGHT).normalized()
++	var bitangent := d.cross(tangent).normalized()
++	var vertices := PackedVector3Array()
++	for i in range(48):
++		var corners: Array[Vector3] = []
++		for angle in [TAU * i / 48.0, TAU * (i + 1) / 48.0]:
++			var around: Vector3 = tangent * cos(angle) + bitangent * sin(angle)
++			for radius in [0.036, 0.045]:
++				var ring_direction: Vector3 = d * cos(radius) + around * sin(radius)
++				corners.append(CENTRE + ring_direction * (radius_at(ring_direction, study) - WITNESS_INSET))
++		vertices.append_array(PackedVector3Array([corners[0], corners[1], corners[2], corners[2], corners[1], corners[3]]))
++	var data: Array = []
++	data.resize(Mesh.ARRAY_MAX)
++	data[Mesh.ARRAY_VERTEX] = vertices
++	var mesh := ArrayMesh.new()
++	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, data)
++	sample_ring.mesh = mesh
++
++
++## Keep the floor seam and both real doorway boundaries fixed. The fade is a
++## spatial constraint, not another noise field; the rest of the surface can bulge.
++func relief_weight(d: Vector3) -> float:
++	var y: float = CENTRE.y + d.y * RADIUS
++	var floor_fade: float = smoothstep(FLOOR_Y, FLOOR_Y + 0.5, y)
++	var angle: float = atan2(absf(d.z), absf(d.x))
++	var away_from_jamb: float = smoothstep(DOOR_HALF_ANGLE, DOOR_HALF_ANGLE + 0.16, angle)
++	var above_lintel: float = smoothstep(DOOR_TOP, DOOR_TOP + 0.55, y)
++	return floor_fade * maxf(away_from_jamb, above_lintel)
++
++func radius_at(d: Vector3, study: Node3D) -> float:
++	var value: float = study.value_at(Vector2(d.x, d.z) * 3.0, study.strength())
++	return RADIUS + value * relief_weight(d) * (RELIEF_DEPTH if study.relief else 0.0)
+--- before/algorithms/randomness/noisesphere/warp_study.gd
++++ after/algorithms/randomness/noisesphere/warp_study.gd
+@@ -9,7 +9,7 @@
+ const PROBES := [Vector3(-0.6,0,0.8),Vector3(0,0.6,0.8),Vector3(0.6,0,0.8),Vector3(0.4,0.8,0.4472136),Vector3(-0.4,0.8,0.4472136)]
+ var strength_index: int = 2
+ var sample_index: int = 0
+-var relief: bool = false
++var relief: bool = true
+ var base := FastNoiseLite.new()
+ var warp_x := FastNoiseLite.new()
+ var warp_z := FastNoiseLite.new()
+@@ -151,6 +151,7 @@
+ 		var direction: Vector3=PROBES[sample_index].normalized()
+ 		var v: float=rec.direct if i==0 else rec.warped
+ 		markers[i].position=spheres[i].position+direction*(radius_at(v)+0.045)
++	if enclosure != null: enclosure.select_direction(PROBES[sample_index], self)
+ 	_readout.text="WARP %.2f | %s | sample %d/5 | static until you act\n" % [strength(),"RELIEF" if relief else "SKIN",sample_index+1]
+ 	_readout.text+="p (%+.3f, %+.3f)  →  q (%+.3f, %+.3f)\n" % [p.x,p.y,q.x,q.y]
+ 	_readout.text+="N(p) %+.4f  |  N(q) %+.4f  |  q = p + warp × offset\n" % [rec.direct,rec.warped]
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -6,8 +6,8 @@
+   "status": "source_checked_draft",
+   "sequence": "noise",
+   "text_path": "commons/maps/Noise_Inside_Noise/final.md",
+-  "text_sha256": "121a5664f996a2b354607119716f77a646fa99dfc6f5ba88b311cdca0e79f6ba",
++  "text_sha256": "9b013ef1b961316b3ee74c12e6f9c2d3e3d315f48efbcd47e176140bb625730e",
+   "map_sha256": "f1a082ed07da35e4f417f22d05443dc8bbb33fe08b7ccc86f98c9245fbbfddcf",
+   "learner_verified": false,
+-  "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Noise_Inside_Noise/DECISIONS.md"
++  "local_review": "doc/book/iterations/2026-09-25-borrowed-address/index.html"
+ }
+--- before/commons/maps/Noise_Inside_Noise/artifacts.md
++++ after/commons/maps/Noise_Inside_Noise/artifacts.md
+@@ -1,7 +1,7 @@
+-# Two primary works
++# One primary encounter and a supporting comparison
+ 
+-`noisesphere:180#stand:warp` at (6,5): the original sphere becomes the direct member of a matched pair in a bounded 7.2 × 5.6 m stage. A ten-metre spherical enclosure now surrounds that stage and its visitor, with two 2.5 m-high side openings and a continuous circular floor. The enclosing colour field follows WARP and retains fixed geometry/collision through RELIEF. Its unshaded display uses gain .65. The pair uses an explicit CPU Value sampler and two Perlin offset fields. A low tilted instrument shows direct and warped images, a coordinate grid and a cased numerical witness. WARP, SAMPLE, RELIEF and ZERO are local controls. The original large dome resource and shader are preserved for stand:none.
++`noisesphere:180#stand:warp` at (6,5): the original sphere becomes the direct member of a matched pair in a bounded 7.2 × 5.6 m stage. A ten-metre spherical enclosure now surrounds that stage and its visitor, with two 2.5 m-high side openings and a continuous circular floor. The enclosing colour field follows WARP. RELIEF starts enabled: a vertex shader displaces the wall and ceiling by signed samples with depth .8 m, and collision follows the same vertices. The floor and doorway edges stay pinned. The lit display uses colour gain .65 and mild emission. The pair uses an explicit CPU Value sampler and two Perlin offset fields. A low tilted instrument shows direct and warped images, a coordinate grid and a cased numerical witness. WARP, SAMPLE, RELIEF and ZERO are local controls. A hollow yellow ring on the inside surface shares SAMPLE with the two small points and leaves the selected patch visible. Its direction stays fixed through WARP/RELIEF; its radius follows relief. The original large dome resource and shader are preserved for stand:none.
+ 
+-`dark_sphere` remains at (3,3). Its independent sine-driven pulse and rotation remain unchanged; the new study floor supplies support below this part of the hall. The orb is a second primary because its continuously varying material keeps time-based change available beside a comparison that stays still between actions.
++`dark_sphere` remains at (3,3). Its independent sine-driven pulse and rotation remain unchanged; the new study floor supplies support below this part of the hall. The orb remains supporting; its continuously varying material keeps time-based change available beside a comparison that stays still between actions.
+ 
+ The original map has two tokens, and both remain. The extra comparison sphere, plates and grid are parts of noisesphere's optional study, not additional map tokens. The book order is noisesphere, dark_sphere.
+--- before/commons/maps/Noise_Inside_Noise/critical.md
++++ after/commons/maps/Noise_Inside_Noise/critical.md
+@@ -10,8 +10,8 @@
+ 
+ There is pleasure in a recognisable patch acquiring another neighbourhood. A contour can become vein-like, crowded or difficult to name as the amount changes. The unfamiliar does not have to become a threat before it matters. Nor does increasing irregularity automatically increase freedom. A maker may want a quiet patch, a sharp gathering, a repeated motif or an awkward seam. Knowing where to intervene makes that desire more specific.
+ 
+-RELIEF introduces another consequence. The same values now alter mesh radii. Input-coordinate displacement and output geometry can be separated, although both may produce a writhing appearance. Neither deforms the player collision here. The enclosure supplies a fixed wall, ceiling and floor while the small comparison bodies remain without collision. Colour changes around the visitor; the openings remain available. Possible bodies depend on which part of the simulation receives the result: the material, the mesh, the collider, an agent's steering rule. The shared computational medium makes transfers possible, but each transfer still needs an implementation.
++RELIEF introduces another consequence. The same values now alter mesh radii. Input-coordinate displacement and output geometry can be separated, although both may produce a writhing appearance. The enclosing wall now takes on vertex-shader relief, with collision following the same displaced surface. The small comparison bodies remain without collision. We pin the floor and doorway edges so a changing room continues to admit the visitor. That exception belongs to the form as much as the noise does: a rule about which parts may change, made for a particular body. Possible bodies depend on which part of the simulation receives the result: the material, the mesh, the collider, an agent's steering rule. The shared computational medium makes transfers possible, but each transfer still needs an implementation.
+ 
+ The sampled coordinate grid prevents the final image from becoming the only account of itself. We retain an address and an operation beside the result. That record is also selective: a finite grid can miss a fold between its lines, and the sphere's two-coordinate projection identifies directions that differ in y. The remainder is not a secret original hidden behind the work. It is a difference another question, representation or body may make relevant.
+ 
+-The study stays still between actions while the familiar orb continues to pulse. Time remains in the room without being required to explain this operation. We can spend a little of it following an address before moving towards the next terrain, where a value may become something that carries or obstructs us.
++The study stays still between actions while the familiar orb continues to pulse. Time remains in the room without being required to explain this operation. We can spend a little of it following an address before moving towards the next terrain, where the value may become the ground beneath us.
+--- before/commons/maps/Noise_Inside_Noise/field_notes.md
++++ after/commons/maps/Noise_Inside_Noise/field_notes.md
+@@ -19,3 +19,14 @@
+ Accepted run: PID 4868, 2026-09-13T15:11:53+02:00 to 2026-09-13T15:12:22+02:00, 52 checks, no failures. Both openings pass head-height rays, the wall and ceiling stop rays from inside, and the desktop body enters one opening and leaves through the other. The actual control approach lies inside the sphere. All 37,248 encoded vertex colours match the shared sample and declared gain, with zero error after 8-bit encoding. The original 42 comparisons continue to pass. Source fingerprints and original saved necklace hand unchanged. No map cells or utilities changed in this correction.
+ 
+ The chapter now opens with entering the sphere. Supporting prose, primary description, review images and plan reflect that encounter. Previous tabletop-only work is archived under doc/space/inside-enclosure-2026-09-13. The enclosing mesh is cut at the circular floor; it is a spherical room with a level walking surface, not a closed sphere that traps the player. Headset comfort, reach, legibility and Quest performance remain deferred.
++
++
++## 2026-09-25 — The enclosing body receives relief
++
++The initial selected-direction ring is retained, but the author's correction changes the encounter: immersion must also use a vertex shader. The enclosing sphere now starts in RELIEF. The same CPU field supplies colour and signed vertex displacement; the GPU performs radial movement up to .8 m, and the collider receives matching displaced vertices. Floor and doorway edges stay pinned. The existing RELIEF button returns the pair and room to their round supports. WARP changes sampling coordinates; SAMPLE changes the selected direction. The hollow ring follows relief without changing that direction. No new control or autonomous clock.
++
++The chapter now starts with the surrounding relief, removes it to inspect colour and address, then returns the values to spatial form. Original mathematical excerpts, projection discussion, independent orb and sequence close remain. noisesphere stays primary and dark_sphere supporting; earlier two-primary and fixed-shell statements above are historical. Map cells, placements, sequence and legacy default sphere are unchanged.
++
++Native private-museum run: 65 assertions, 15 synthetic desktop-pointer clicks, 12 sampled CharacterBody routes and two ground rays pass. Both doors pass rays at three heights. GPU capture agrees with a temporary CPU-displaced reference (mean RGB error 0.0000099 over 4096 pixels); collision vertices agree with the shader expression to under 0.000001 m. The .8 warp setting samples relief from -0.774 to +0.797 m. This is configuration-based relief, not a continuously moving collider.
++
++Diagnostics are retained. A first route met the real button rack and was rerouted around it. The first relief fixture used an unsupported PackedVector3Array method and a floor ray above the deformed roof; both probe issues were corrected without changing production geometry. The final process exits zero with no script/shader error. Existing engine warnings remain in the log. Native screenshots and exact revisions: doc/book/iterations/2026-09-25-borrowed-address/index.html. Headset reach, comfort, learner acceptance and Quest performance remain open; no live bake/save replaced.
+--- before/commons/maps/Noise_Inside_Noise/final.md
++++ after/commons/maps/Noise_Inside_Noise/final.md
+@@ -2,19 +2,23 @@
+ 
+ <!-- @noisesphere -->
+ 
+-Step through the opening into the sphere. Its colour curves above your head and returns towards the floor behind you. The museum is still visible through the other opening. A pattern that could have been held at a distance has become the inside of where you stand.
++Step through the opening into the sphere. A hollow opens above you; beside it, the wall swells towards the room. Colour follows these changes in depth. The floor stays level beneath your feet, and the museum is still visible through the other opening. A pattern that could have been held at a distance has become the inside of where you stand.
+ 
+ Two smaller spheres stand behind a tilted instrument within it. A yellow point marks the same direction on each body. Their colours seem related, but a patch on the left has acquired a different neighbourhood on the right.
+ 
+-Press ZERO. Stay with one patch: the two bodies agree at once. Then press WARP. Where did the difference enter?
++Press RELIEF once. The two small bodies become round, and the room draws back into a sphere. Colour remains. This is SKIN mode.
+ 
+-Look up. The surrounding sphere changes too. Your feet have stayed on the same circular floor; the wall has not moved closer. Yet a different patch now hangs above the place where you are standing. The operation reaches the room before we have named it.
++Now press ZERO. Stay with one patch: the two small bodies agree at once. Then press WARP. Where did the difference enter?
++
++Turn away from the pair and find the hollow yellow ring on the enclosing sphere. It marks the same direction as the two small yellow points. Return to WARP, then find the ring again. The field changes inside its rim, but the rim has not moved. The place stays; what it receives comes from another address.
++
++Your feet have stayed on the same circular floor; the wall has not moved closer. A different patch can now meet you at the same place. The operation reaches the room before we have named it.
+ 
+ The outlines remain round in SKIN mode. The yellow points have stayed where they were. We have not enlarged a sphere or chosen a new colour range. Something changed before the value reached the surface.
+ 
+ Look down at the two square images. They read the field across the same coordinate window. Yellow marks the same address, `p`, in both. On the left, a second, pink point names an address nearby. The right-hand image borrows its answer from there.
+ 
+-The little grid beside the images keeps both versions of the coordinates visible: cyan for where we began, pink for where the warp sends us. The yellow line follows the selected address between them. Try SAMPLE. Follow another line before deciding what the whole picture is doing.
++The little grid beside the images keeps both versions of the coordinates visible: cyan for where we began, pink for where the warp sends us. The yellow line follows the selected address between them. Try SAMPLE. The two points and the large ring select another direction together. Follow another line, then look back towards the enclosing surface before deciding what the whole picture is doing.
+ 
+ ```gdscript
+ func address_at(p: Vector2, amount: float) -> Vector2:
+@@ -44,22 +48,35 @@
+ 
+ Look for a narrow streak you like. At one amount it might resemble a vein; at another it might lose that resemblance. Neither outcome has to be the successful one. A procedure can make something unfamiliar that you want to stay near. Knowing the amount and the sampling rule gives you a way to return to it, and a way to ask for a difference more precise than “make it more organic.”
+ 
+-Now press RELIEF. Keep the warp amount where it is. The square images stay the same, but the values have gained another job on the spheres:
++Now press RELIEF again. Keep the warp amount where it is. The square images stay the same, but the values have gained another job. On the two small spheres:
+ 
+ ```gdscript
+ func radius_at(value: float) -> float:
+ 	return 0.94 + (0.16 * value if relief else 0.0)
+ ```
+ 
+-The base radius is 0.94 in the scene's own units; they are metres only at the work's authored size, and the museum may build the whole work smaller. In RELIEF, a signed sample changes it by up to 0.16, about a sixth of that radius. A negative value can draw a point inward; a positive one can push it outward. Both spheres receive this rule. Their difference still comes from the addresses at which they read the base field.
++The small spheres have a base radius of 0.94 metres at this placement. In RELIEF, a signed sample changes it by up to 0.16, about a sixth of that radius. A negative value can draw a point inward; a positive one can push it outward. Both spheres receive this rule. Their difference still comes from the addresses at which they read the base field.
+ 
+-Press ZERO again, now in RELIEF. The two arrangements of vertices agree. Press WARP, then turn RELIEF off. Both outlines return to round; a changed colour arrangement survives on the warped body. We have separated changing where to sample from changing what a sample does.
++Look up. The enclosing body receives the values too, through a vertex shader:
+ 
+-The enclosing sphere keeps its fixed wall, ceiling, floor and two openings through RELIEF. Only the two smaller bodies receive the radial change. Their surfaces have no collision; the room and plinths do. A value has changed one visible body while another body remains a steady place from which to compare it.
++```glsl
++vec3 direction = normalize(VERTEX - sphere_centre);
++VERTEX += direction * UV.x * UV.y * relief_depth;
++```
++
++Each vertex has a direction from the centre. `UV.x` carries the sampled noise value; `UV.y` carries a weight that fades the change near the floor and openings. `relief_depth` allows up to 0.8 metres of displacement. One hollow recedes; another part of the wall comes towards you. The yellow ring follows that changing surface while still naming the same direction.
++
++![Inside the enclosing sphere with vertex relief enabled](/book-review/doc/book/figures/Noise_Inside_Noise/vertex-relief.png)
++
++*The small body and the room receive the same field. Its values now give the enclosing surface depth.*
++
++Press ZERO again, now in RELIEF. The two small arrangements of vertices agree. The room keeps its relief, now drawn from the unwarped field: zero warp does not mean a flat value. Press WARP, then turn RELIEF off. The small bodies and the enclosure return to round; the changed colour arrangement survives. We have separated changing where to sample from changing what a sample does.
++
++The small comparison bodies have no collision. The enclosing wall does, and its collision follows the displaced surface. The floor and doorway edges stay fixed. We have written an exception into the surface so the changing body will still admit ours. The limit is available to inspection: follow a bulge down towards the floor and watch it settle into the unchanged seam.
+ 
+ Walk to the side and follow a patch around a sphere. This instrument uses the x and z components of a direction on the sphere, multiplied by three, as its two field coordinates. It leaves the y component out. Upper and lower directions can therefore ask at the same address. The field has not discovered a natural way to inhabit a sphere; we have supplied a projection.
+ 
+-The enclosure uses that same projection and the warped field. Its colours are dimmed to sixty-five percent and drawn without the lighting that falls across the smaller bodies. Follow a patch overhead, then look back at the instrument. They share a calculation, but scale, lighting and the part of the surface available to your eyes affect how you meet it.
++The enclosure uses that same projection and the warped field. Its colours are dimmed to sixty-five percent before lighting falls across the displaced faces; a little self-emission keeps the darker patches visible. Follow a patch overhead, then look back at the instrument. They share a calculation, but scale, lighting and the part of the surface available to your eyes affect how you meet it.
+ 
+ There is another small difference between the square and the curved body. The image samples a 96 by 96 grid. The small sphere receives colour and relief at mesh vertices, and the renderer interpolates between them. The printed value names a calculation at the selected address; a coloured patch is a finite rendering of many such calculations. Zooming closer can reveal the agreement's conditions.
+ 
+--- before/commons/maps/Noise_Inside_Noise/intent.md
++++ after/commons/maps/Noise_Inside_Noise/intent.md
+@@ -1,9 +1,9 @@
+ # Noise Inside Noise — where did the difference enter?
+ 
+-After Noise_6_Wall's accumulated cloud terms, distinguish changing an address from changing the value's eventual use. Enter through a visible difference, return to zero, follow p to q, then apply the same output as relief. The coordinate witness is necessary because an irregular image alone cannot establish domain warping.
++After Noise_6_Wall's accumulated cloud terms, distinguish changing an address from changing the value's eventual use. Arrive inside relief, switch to SKIN, return to zero, follow p to q, then return the same output to spatial relief. The coordinate witness is necessary because an irregular image alone cannot establish domain warping.
+ 
+-Retain noisesphere and dark_sphere as primary works. The optional warp stage encloses the visitor inside a ten-metre noise sphere. It keeps the original sphere as one member of a smaller matched pair, with instruments inside the enclosure. Two opposing openings, a circular floor and fixed wall collision make this an enterable space. The surrounding field follows WARP; RELIEF affects the small pair only. Preserve every original structure cell and utility, including the recovered exit landing; add an east boundary and an approach in the museum. The large legacy dome remains available in other configurations.
++Retain noisesphere as the primary encounter and dark_sphere as a supporting comparison, including its short book return. The optional warp stage encloses the visitor inside a ten-metre noise sphere. It keeps the original sphere as one member of a smaller matched pair, with instruments inside the enclosure. Two opposing openings and a circular floor make this an enterable space. The surrounding field follows WARP; RELIEF deforms both the small pair and the enclosing surface. The room uses a vertex shader and matching collision; its floor and doorway edges stay pinned. Relief starts enabled. A hollow yellow ring marks the selected direction on the enclosing surface, linking the instrument to a place the visitor can find in the room. SAMPLE selects a direction. In SKIN, WARP changes the field while the ring stays put; in RELIEF, its radius follows the changed wall while the selected direction remains. Preserve every original structure cell and utility, including the recovered exit landing; add an east boundary and an approach in the museum. The large legacy dome remains available in other configurations.
+ 
+ Critical opening: a receiver can stay in place while the source address changes. A shared base field offers a reproducible comparison, not a pristine original. A projection omits one component of the sphere direction. Field warping, mesh displacement and collision are distinct operations with different consequences for possible bodies.
+ 
+-This instrument is static between actions. It has WARP, SAMPLE, RELIEF and ZERO; no freeze, speed or seed control is implied. Noise_Space_10 is the next development target. Further iteration depth, animated warps, editable field seeds and collision deformation are proposals.
++This instrument is static between actions. It has WARP, SAMPLE, RELIEF and ZERO; no freeze, speed or seed control is implied. Noise_Space_10 is the next development target. Further iteration depth, animated warps and editable field seeds remain proposals. Matching enclosing-surface collision is now implemented.
+--- before/commons/maps/Noise_Inside_Noise/summary.md
++++ after/commons/maps/Noise_Inside_Noise/summary.md
+@@ -1,9 +1,9 @@
+ # Borrow an address
+ 
+-Noise_Inside_Noise develops the existing noisesphere into an opt-in coordinate study, retaining the independent dark_sphere. A ten-metre enclosing sphere surrounds the visitor and the comparison instrument. Its two opposing side openings lead onto a continuous circular floor. A matched pair of smaller spheres, two sampled image plates, a direct/displaced coordinate grid and the enclosing surface share one explicit sampler. WARP selects 0, .35, .8 or 1.4; ZERO returns immediately to direct sampling; SAMPLE selects a witness; RELIEF separately converts the same values into radial mesh displacement.
++Noise_Inside_Noise develops the existing noisesphere into an opt-in coordinate study, retaining the independent dark_sphere. A ten-metre enclosing sphere surrounds the visitor and the comparison instrument. Its two opposing side openings lead onto a continuous circular floor. A matched pair of smaller spheres, two sampled image plates, a direct/displaced coordinate grid and the enclosing surface share one explicit sampler. WARP selects 0, .35, .8 or 1.4; ZERO returns immediately to direct sampling; SAMPLE selects the small witnesses and a matching hollow ring on the enclosing sphere; RELIEF separately converts the same values into radial mesh displacement.
+ 
+ The base is single-octave FastNoiseLite Value noise (seed 4, frequency 1.2). Two single-octave Perlin fields (seeds 19 and 47, frequency .45) provide the coordinate displacement. The result is N(p + amount × displacement(p)). All comparison state is static between actions. The two sphere geometries remain identical in SKIN mode, and zero warp restores identical field samples and relief geometry.
+ 
+-The instrument stands inside the sphere on a continuous circular floor connected to the museum aprons. The spherical wall and ceiling have fixed collision, with two real openings. WARP changes the enclosing colour field; RELIEF changes only the two small bodies. The enclosure displays colours at gain .65 without lighting. All original structure cells and utilities remain; an added east boundary contains the stage, and museum-only floor declarations bridge the approach and exit threshold. One new ground row wraps around the preserved exit wall. The sphere's legacy scene and shader remain available when stand:warp is absent. This stage uses a new explicit CPU sampler, not the original dome shader's field realization.
++The instrument stands inside the sphere on a continuous circular floor connected to the museum aprons. The spherical wall and ceiling begin in vertex-shader relief, with collision matching their displaced geometry. Two real openings and the floor seam stay fixed. WARP changes the field used for both colour and relief; RELIEF switches the pair and the enclosing room between round support and displaced surfaces. The enclosure displays colours at gain .65 with lighting from displaced faces and mild emission. All original structure cells and utilities remain; an added east boundary contains the stage, and museum-only floor declarations bridge the approach and exit threshold. One new ground row wraps around the preserved exit wall. The sphere's legacy scene and shader remain available when stand:warp is absent. This stage uses a new explicit CPU sampler, not the original dome shader's field realization.
+ 
+-Two primary book passages: noisesphere, then dark_sphere. The hall is reconnected after Noise_6_Wall in the museum plan, matching its already declared place in the book sequence. Noise_Space_10 is the next hall to develop; its museum connection remains part of that later pass.
++The primary encounter is noisesphere; the book also retains its brief supporting return to dark_sphere. The hall is reconnected after Noise_6_Wall in the museum plan, matching its already declared place in the book sequence. Noise_Space_10 is the next hall to develop; its museum connection remains part of that later pass.
+--- before/commons/maps/Noise_Inside_Noise/technical.md
++++ after/commons/maps/Noise_Inside_Noise/technical.md
+@@ -8,7 +8,7 @@
+ 
+ displacement_at(p) returns Vector2(warp_x(p), warp_z(p)). address_at(p, amount) returns p + amount × displacement_at(p). value_at samples the base at that displaced address. Strength is in the input coordinate system; it is not a physical displacement of the display. Distinct seeds select distinct realizations but do not prove probabilistic independence. There is one warp pass, no recursive loop and no automatic time input.
+ 
+-The four strength presets are 0, .35, .8 and 1.4. At zero, q=p exactly and the direct baseline is recovered. WARP changes strength only, ZERO returns it to zero, SAMPLE changes the selected witness only, and RELIEF changes the output mapping only. Each control is local to this study. No group broadcast retunes another hall.
++The four strength presets are 0, .35, .8 and 1.4. Arrival uses .8 with RELIEF enabled. At zero, q=p exactly and the direct baseline is recovered. WARP changes strength only, ZERO returns it to zero, SAMPLE changes the selected witness only, and RELIEF changes the output mapping only. Each control is local to this study. No group broadcast retunes another hall.
+ 
+ ## The visible record
+ 
+@@ -26,11 +26,17 @@
+ 
+ ## Place and reach
+ 
+-The optional stage provides a 7.2 × 5.6 m floor with two plinths and a low, tilted cased instrument. The floor surface is .06 m above the hall's base floor. A narrow museum-only apron passes beside the stage and reconnects the original ramp approach. An added east boundary brings the cropped hall to its declared 13 m width. Every pre-existing structure cell and utility is retained; the original exit landing remains. One new ground row wraps around its adjacent wall to reach the museum exit. The small sphere surfaces themselves have no collision, and neither warp nor relief changes the stage's collision shapes.
++The optional stage provides a 7.2 × 5.6 m floor with two plinths and a low, tilted cased instrument. The floor surface is .06 m above the hall's base floor. A narrow museum-only apron passes beside the stage and reconnects the original ramp approach. An added east boundary brings the cropped hall to its declared 13 m width. Every pre-existing structure cell and utility is retained; the original exit landing remains. One new ground row wraps around its adjacent wall to reach the museum exit. The small sphere surfaces themselves have no collision. Neither warp nor relief changes the stage floor, plinths or instrument collision; the enclosing shell has separate, now-deformed collision.
+ 
+-The EnclosingSphere node adds a spherical wall and ceiling of radius 5 m, centred locally at (0,1.5,.2). The surface begins at floor y=.06; a cylindrical floor reaches that exact spherical intersection, radius approximately 4.788 m. Two opposite openings centred on the x axis span angular half-width .24 radians and extend from the floor to y=2.5, providing about 2.28 m clear width at floor height. Portal edges are explicit angular boundaries in the generated mesh, and those faces are also absent from its fixed, two-sided concave collision. The circular floor has matching cylinder collision.
++The EnclosingSphere node adds a spherical wall and ceiling of radius 5 m, centred locally at (0,1.5,.2). The surface begins at floor y=.06; a cylindrical floor reaches that exact spherical intersection, radius approximately 4.788 m. Two opposite openings centred on the x axis span angular half-width .24 radians and extend from the floor to y=2.5, providing about 2.28 m clear width at floor height. Portal edges are explicit angular boundaries in the generated mesh, and those faces are also absent from its two-sided concave collision, which follows the displaced vertices. The circular floor has matching cylinder collision.
+ 
+-The enclosure contains 37,248 triangle vertices. Each direction's x/z × 3 feeds the same warped sampler as the small sphere. Colours are multiplied by .65 and drawn unshaded on both sides, so interior visibility does not depend on outside lighting. ArrayMesh encodes the colour channels as 8-bit UNORM: readback is compared with that encoding rather than the input float. WARP refreshes colours without moving the enclosing vertices; RELIEF leaves both its colours and vertices unchanged. The original small-pair comparison and the dark orb are inside this larger room. There is no new autonomous animation or shader clock.
++The enclosure contains 37,248 triangle vertices. Each direction's x/z × 3 feeds the same warped CPU sampler as the small sphere. The base mesh stays spherical. UV.x carries the signed sample; UV.y carries a spatial weight. enclosing_relief.gdshader applies VERTEX += normalize(VERTEX - sphere_centre) × UV.x × UV.y × relief_depth. The depth uniform is .8 m in RELIEF and zero in SKIN. This is real GPU vertex displacement from CPU-generated field samples, not an independent GPU noise realization.
++
++The weight fades from zero at the floor seam over .5 m. Around each doorway it fades out towards the jamb and lintel, using angular and height margins of .16 radians and .55 m. Matching CPU positions are supplied to the concave collider after each configuration change. Floor and doorway boundaries remain fixed. The custom render AABB includes the full possible ±.8 m displacement. There is no autonomous animation or shader clock.
++
++Colours retain gain .65 and ArrayMesh's 8-bit UNORM encoding. The shader derives face normals from displaced fragment positions, faces them towards the viewer, and adds emission at .12 times the colour. Both SKIN and RELIEF use this same lighting. See [Godot 4.6 spatial shader reference](https://docs.godotengine.org/en/4.6/tutorials/shaders/shader_reference/spatial_shader.html) for vertex and fragment coordinate spaces. The original small-pair comparison and supporting orb remain inside the room.
++
++The selected direction now has an enclosing-surface witness. `select_direction` makes an open yellow band 25 mm inside the sampled support: radius 4.975 m in SKIN, following each ring vertex's displaced radius in RELIEF. Its angular radii are .036 and .045 radians (roughly 36–45 cm across), with 48 quads / 288 triangle vertices, unshaded and two-sided. It has no collision. Its empty centre names the selected direction; it does not substitute an exact colour swatch for the interpolated surface. The same `PROBES[sample_index]` supplies all three spherical witnesses. WARP and RELIEF retain this direction. In SKIN, WARP/ZERO leave the ring mesh unchanged; in RELIEF, its radial drawing follows the new samples. SAMPLE rebuilds only the witness drawing and existing coordinate plot, retaining the field images, sphere meshes and collider.
+ 
+ The original book sequence named this hall, while the active map-authored museum plan skipped it. Its reviewed row is reconnected after Noise_6_Wall. Noise_Space_10 remains the next development target and has not been silently inserted by this pass.
+ 
+@@ -38,4 +44,4 @@
+ 
+ A deterministic map need not be invertible. Composition does not guarantee information preservation, and a 2D coordinate cannot in general be recovered from a single scalar value. Conversely, a small coordinate warp is not automatically noninvertible. The present controls and sampled witness let us inspect a particular mapping without calling every curved line a topological tear or assigning an entropy value to its appearance.
+ 
+-Rendered-run evidence is recorded in doc/space/inside-review-2026-09-13. Headset reach, comfort, legibility and Quest performance remain unverified. The separate dark orb retains its original sine-driven pulse and clock.
++Earlier rendered-run evidence is recorded in doc/space/inside-review-2026-09-13. Current native shader/collision, synthetic desktop pointer, door-ray and sampled walking evidence is in doc/book/iterations/2026-09-25-borrowed-address. Headset reach, comfort, legibility and Quest performance remain unverified. The separate dark orb retains its original sine-driven pulse and clock.
+--- before/commons/maps/Noise_Inside_Noise/tutorial.md
++++ after/commons/maps/Noise_Inside_Noise/tutorial.md
+@@ -1,12 +1,12 @@
+ # Noise Inside Noise — find the borrowed address
+ 
+-1. Enter through a side opening and stand inside the noise sphere. Look overhead, then compare the two smaller spheres in SKIN mode and press ZERO. The two sampled fields agree while the same palette and round support remain.
+-2. Press WARP. Look up as the enclosing field changes while the room stays in place. Follow the yellow point on each body and image. It still names p. The pink point on the left names q, the address from which the right-hand display obtains its answer.
+-3. Compare the cyan original grid and pink displaced grid. The selected yellow line follows p to q. SAMPLE chooses another witness without rebuilding or changing the fields.
++1. Enter through a side opening and stand inside the noise sphere. Look at the relief overhead, then press RELIEF once to enter SKIN mode. Compare the now-round smaller spheres and press ZERO. The two sampled fields agree while the same palette and round support remain.
++2. Press WARP. Look up as the enclosing field changes while the room stays in place. Find the hollow yellow ring on the enclosing surface, then follow the yellow point on each small body and image. It still names p. The pink point on the left names q, the address from which the right-hand display obtains its answer.
++3. Compare the cyan original grid and pink displaced grid. The selected yellow line follows p to q. SAMPLE chooses another witness, including the hollow ring on the enclosing surface, without rebuilding or changing the field images or sphere meshes. In SKIN the ring stays put through WARP and ZERO. In RELIEF its radius follows the changed surface while its direction remains the same. Its open centre lets you inspect the field it marks.
+ 4. Read address_at and value_at in final.md: q = p + amount × displacement(p), then evaluate base at q. The offset uses two components from fixed Perlin fields; the base is a fixed Value field.
+ 5. Cycle WARP through 0, .35, .8 and 1.4. The numbers measure displacement in field-coordinate units, not metres walked by the player. ZERO is a direct return, not a random reseed.
+-6. Press RELIEF while retaining the warp amount. The plate images keep their values. Both small sphere meshes now use radius .94 + .16 × value metres. This is a separate, post-sampling application. The enclosing sphere's geometry and collision stay fixed.
+-7. Press ZERO in RELIEF and compare the two silhouettes. Then return to SKIN and change WARP again. Input-coordinate displacement and output mesh displacement can be varied separately.
++6. Press RELIEF while retaining the warp amount. The plate images keep their values. Both small sphere meshes now use radius .94 + .16 × value metres. This is a separate, post-sampling application. The enclosing sphere uses a vertex shader to change radius by up to .8 m, weighted to pin floor and doorway edges; its collision follows the same displaced vertices.
++7. Press ZERO in RELIEF and compare the two silhouettes. The room keeps relief sampled from the unwarped field. Then return to SKIN and change WARP again. Input-coordinate displacement and output mesh displacement can be varied separately.
+ 8. Walk around the pair. Sphere direction x and z supply the 2D coordinates; y is omitted. Look for the resulting relationship between upper and lower parts. A coordinate chart is part of the work.
+ 9. Watch the dark orb. The study has no automatic clock, while the orb continues. The comparison remains available without claiming that the game has paused.
+ 
+--- /dev/null
++++ after/algorithms/randomness/noisesphere/enclosing_relief.gdshader
+@@ -0,0 +1,25 @@
++shader_type spatial;
++render_mode cull_disabled;
++
++// The same CPU field supplies the pair, plates and room. UV carries its signed
++// sample and the floor/door pinning weight; this vertex stage turns that sample
++// into radial form. Collision uses the same expression at the same vertices.
++uniform vec3 sphere_centre = vec3(0.0, 1.5, 0.2);
++uniform float relief_depth = 0.8;
++
++void vertex() {
++    vec3 direction = normalize(VERTEX - sphere_centre);
++    VERTEX += direction * UV.x * UV.y * relief_depth;
++}
++
++void fragment() {
++    // Read the orientation of the displaced triangles, including their inside.
++    vec3 face = cross(dFdx(VERTEX), dFdy(VERTEX));
++    if (length(face) > 0.000001) {
++        face = normalize(face);
++        NORMAL = dot(face, VIEW) < 0.0 ? -face : face;
++    }
++    ALBEDO = COLOR.rgb;
++    EMISSION = COLOR.rgb * 0.12;
++    ROUGHNESS = 0.85;
++}
