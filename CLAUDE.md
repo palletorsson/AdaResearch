@@ -124,6 +124,14 @@ Run from repo root:
 
 Auto-research findings: hybrid wins constraint score (deterministic, +0.04 mean on real maps); humanoid_walker wins walkability on real maps (perfect detour ratio + encounter order); simulated_annealing wins combined when compute budget allows. `place.py` picks the right one per map automatically. See `/blog/2026-05-15-no-base-algorithm-wins`.
 
+### Playing (2026-09-26 — the python walker has eyes and hands)
+| Tool | Command | Purpose |
+|------|---------|---------|
+| **Agent (plan)** | `python tools/vr_agent.py <Map> --dry-run` | Tour over the pathfinder's graph: spawn → each work's approach cell → teleporter, drawn on the map |
+| **Agent (play)** | `python tools/vr_link.py --agent=<Map>` | Drives the ghost in the live game: walk, `look`, `interact`; report in `ada_run/vr_agent_<Map>.md`. `--exit` takes the teleporter (moves the person) |
+| **Bridge probe** | `godot --headless --path . --xr-mode off --script res://commons/testing/probe_vr_link_agent.gd` | The game side of scan/look/interact on a bench |
+See `doc/VR_AGENT.md`. Tests: `python tools/test_vr_agent.py` (fake game, no Godot).
+
 ### Content & Identity
 | Tool | Command | Purpose |
 |------|---------|---------|

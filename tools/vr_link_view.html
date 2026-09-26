@@ -81,6 +81,8 @@
     <div class="hint">drag to orbit · wheel to zoom</div>
     <div class="bar">
       <button onclick="walker()">send walker into VR</button>
+      <button onclick="agent()">agent: play the room</button>
+      <button onclick="agent(true)">agent: plan only</button>
       <button onclick="cmd({cmd:'walker_stop'})">clear walker</button>
       <button onclick="cmd({cmd:'ping'})">ping</button>
     </div>
@@ -195,6 +197,23 @@ async function walker() {
   const placed = d.decisions.filter(x => x.action === "place");
   log(`walker: ${d.steps} steps, ${placed.length} placements`, "cmd");
   placed.forEach(p => log(`   place ${p.artifact} @ cell ${p.cell} score ${p.score}`, "cmd"));
+}
+
+// THE AGENT PLAYS (2026-09-26). Plans on the PC over map_pathfinder's graph,
+// then walks, looks and interacts leg by leg; its narration arrives on this
+// same event stream as log lines. The path it will take is drawn like the
+// walker's. plan-only draws without touching the game.
+async function agent(dryRun) {
+  log(dryRun ? "agent: planning..." : "agent: playing the room...", "cmd");
+  const r = await fetch("/agent", {method:"POST", headers:{"Content-Type":"application/json"},
+                                   body: JSON.stringify({map: mapName, dry_run: !!dryRun})});
+  const d = await r.json();
+  if (d.error) { log("agent: " + d.error, "cmd"); return; }
+  walkPath = d.decisions.filter(x => x.action === "move").map(x => x.world);
+  const looks = d.decisions.filter(x => x.action === "look");
+  log(`agent: ${d.legs ?? (d.plan ? d.plan.legs.length : 0)} legs, ${d.steps} steps, ${looks.length} works`, "cmd");
+  looks.forEach(p => log(`   look ${p.artifact} @ cell ${p.cell}`, "cmd"));
+  (d.plan && d.plan.skipped || []).forEach(s => log(`   skip ${s.token}: ${s.reason}`, "cmd"));
 }
 
 // ── geometry helpers ─────────────────────────────────────────────────────────

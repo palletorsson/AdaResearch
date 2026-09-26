@@ -26,10 +26,24 @@ all: user:// on the Quest is on the Quest. This is the first one that crosses.
     python tools/vr_link.py                      # serve; open localhost:8772
     python tools/vr_link.py --arm                # also arm the headset, then serve
     python tools/vr_link.py --walker=Point_Tests # send a walk into VR and serve
+    python tools/vr_link.py --agent=Point_One    # PLAY the room: path, look, interact
     python tools/vr_link.py --calibrate          # which cell-to-world rule is true?
 
 The browser page at :8772 shows the three views asked for — 3D, top-down, and
 text — and can send the player somewhere by clicking the top-down map.
+
+THE AGENT (2026-09-26, Palle: "can we make that agent look at the artifact, use
+path finding and interact with the artifacts?"). `--walker` replays a placement
+trace; `--agent` plays. tools/vr_agent.py plans a tour over map_pathfinder's
+graph — spawn, each artifact's approach cell by shortest path, the teleporter —
+and drives the ghost leg by leg: walk (the game converts the cells with its own
+grid and answers `walker_done`), `look` (the ghost turns, a ray from its eye
+says whether the work is in view), `interact` (the game climbs DesktopPlayer's
+ladder and says which rung it took). The report lands in ada_run/. The same
+tour starts from the browser page ("agent: play the room") or from POST /agent,
+and a separate process can run it against this server with
+`python tools/vr_agent.py <Map>`. The teleporter is never taken unless --exit
+is given: it would move the person in the headset.
 """
 
 from __future__ import annotations
@@ -56,6 +70,8 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
         pass
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "tools") not in sys.path:
+    sys.path.insert(0, str(ROOT / "tools"))
 GAME_PORT = 8771
 WEB_PORT = 8772
 PKG = "com.example.adaresearchzeroone"
@@ -113,6 +129,19 @@ class Link:
                 c.q.put_nowait(d)
             except queue.Full:
                 pass
+
+    ## A subscriber is a browser tab or an agent: the same fan-out. The agent
+    ## subscribes for the length of one tour and unsubscribes after.
+    def subscribe(self, maxsize: int = 2000) -> queue.Queue:
+        q: queue.Queue = queue.Queue(maxsize=maxsize)
+        with self.lock:
+            self.subs.append(q)
+        return q
+
+    def unsubscribe(self, q: queue.Queue) -> None:
+        with self.lock:
+            if q in self.subs:
+                self.subs.remove(q)
 
     # fan out one event to every open browser
     def publish(self, ev: dict) -> None:
@@ -536,6 +565,8 @@ def walker_path(map_name: str, seed: int = 0) -> tuple[list, list]:
 # ─────────────────────────────────────────────────────────────────────────────
 
 VIEW = ROOT / "tools" / "vr_link_view.html"
+AGENT_LOCK = threading.Lock()
+AGENT_STATE: dict = {"running": False, "map": ""}
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -615,6 +646,10 @@ class Handler(BaseHTTPRequestHandler):
             self._json({"ok": True})
             return
 
+        if u.path == "/agent":
+            self.agent(body)
+            return
+
         if u.path == "/walker":
             name = body.get("map") or (LINK.pose.get("map") if LINK.pose else "")
             try:
@@ -630,6 +665,62 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         self._json({"error": "unknown endpoint"}, 404)
+
+    ## POST /agent {map, dry_run, interact, exit, speed, dwell, limit}
+    ## Plans on the PC, then plays in a thread over a QueueWire on LINK. One
+    ## tour at a time: a second while one runs is refused, not queued — two
+    ## agents driving one ghost is the stash-swallows-284-files shape.
+    def agent(self, body: dict) -> None:
+        import vr_agent  # noqa: E402  (tools/ is on sys.path — see walker_path)
+        name = body.get("map") or (LINK.pose.get("map") if LINK.pose else "")
+        if not name:
+            self._json({"error": "no map: none given and the game has not sent a pose"}, 400)
+            return
+        limit = body.get("limit")
+        tour, _g = vr_agent.plan_map(name, int(limit) if limit else None)
+        if tour is None:
+            if body.get("dry_run"):
+                self._json({"error": f"no map_data.json for '{name}' (a hall? the live "
+                            "agent falls back to a scan)"}, 400)
+                return
+        if body.get("dry_run"):
+            self._json({"ok": True, "plan": vr_agent.tour_dict(tour),
+                        "decisions": vr_agent.tour_decisions(tour),
+                        "steps": sum(l.cost for l in tour.legs)})
+            return
+        if not LINK.connected:
+            self._json({"error": "no game attached"}, 409)
+            return
+        with AGENT_LOCK:
+            if AGENT_STATE.get("running"):
+                self._json({"error": "an agent tour is already running on '%s'"
+                            % AGENT_STATE.get("map")}, 409)
+                return
+            AGENT_STATE["running"] = True
+            AGENT_STATE["map"] = name
+
+        def go() -> None:
+            wire = vr_agent.QueueWire(LINK)
+            try:
+                vr_agent.run(name, wire,
+                             interact=bool(body.get("interact", True)),
+                             exit_=bool(body.get("exit", False)),
+                             speed=float(body.get("speed", 1.4)),
+                             dwell=float(body.get("dwell", 2.0)),
+                             limit=int(limit) if limit else None)
+            except Exception as e:  # a bug in the agent must not kill the server
+                LINK.note(f"agent: crashed: {e!r}")
+            finally:
+                wire.close()
+                with AGENT_LOCK:
+                    AGENT_STATE["running"] = False
+
+        threading.Thread(target=go, daemon=True).start()
+        LINK.note(f"agent: playing '{name}' — {len(tour.legs) if tour else 0} legs planned")
+        self._json({"ok": True, "legs": len(tour.legs) if tour else 0,
+                    "decisions": vr_agent.tour_decisions(tour) if tour else [],
+                    "steps": sum(l.cost for l in tour.legs) if tour else 0,
+                    "plan": vr_agent.tour_dict(tour) if tour else None})
 
     def sse(self) -> None:
         """Server-sent events. One-way push is all the views need, and the reply
@@ -724,6 +815,15 @@ def main() -> int:
                     help="why is the headset not showing up? checks build age, arming, tunnel")
     ap.add_argument("--walker", metavar="MAP",
                     help="send the humanoid_walker's path into VR on startup")
+    ap.add_argument("--agent", metavar="MAP", nargs="?", const="",
+                    help="play the room: path finding, look, interact (tools/vr_agent.py); "
+                         "no MAP = whatever map the game is in")
+    ap.add_argument("--dry-run", action="store_true", help="with --agent: print the plan, no game")
+    ap.add_argument("--no-interact", action="store_true", help="with --agent: look, do not touch")
+    ap.add_argument("--exit", action="store_true",
+                    help="with --agent: take the teleporter at the end (moves the person)")
+    ap.add_argument("--limit", type=int, default=None, help="with --agent: first N artifacts")
+    ap.add_argument("--dwell", type=float, default=2.0, help="with --agent: seconds per work")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--speed", type=float, default=1.4, help="walker m/s")
     ap.add_argument("--calibrate", action="store_true",
@@ -733,6 +833,18 @@ def main() -> int:
 
     if args.headset:
         return headset_doctor()
+
+    if args.agent is not None and args.dry_run:
+        import vr_agent  # noqa: E402
+        if not args.agent:
+            print("--dry-run needs a map name: --agent=<Map>")
+            return 2
+        tour, g = vr_agent.plan_map(args.agent, args.limit)
+        if tour is None:
+            print(f"no map_data.json for '{args.agent}'")
+            return 1
+        print(vr_agent.plan_text(tour))
+        return 0
 
     if args.disarm:
         disarm_headset()
@@ -758,6 +870,23 @@ def main() -> int:
 
     if args.calibrate:
         return calibrate()
+
+    if args.agent is not None:
+        import vr_agent  # noqa: E402
+        print("[vr-link] waiting for the game before starting the agent...")
+        t0 = time.time()
+        while time.time() - t0 < 120 and not LINK.connected:
+            time.sleep(0.25)
+        if not LINK.connected:
+            print("[vr-link] no game in 120 s — start the game with --vr-link (desktop) or "
+                  "armed (headset), then run again")
+            return 1
+        wire = vr_agent.QueueWire(LINK)
+        try:
+            vr_agent.run(args.agent, wire, interact=not args.no_interact, exit_=args.exit,
+                         speed=args.speed, dwell=args.dwell, limit=args.limit)
+        finally:
+            wire.close()
 
     if args.walker:
         print(f"[vr-link] waiting for the game before sending the walker...")

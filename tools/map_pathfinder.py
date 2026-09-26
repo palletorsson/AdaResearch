@@ -671,20 +671,28 @@ class MapGraph:
         return HAZARD_EXTRA_COST if pos in self.hazard_cost_cells else 0.0
 
     def bfs_path(
-        self, target: tuple[int, int]
+        self, target: tuple[int, int],
+        start: Optional[tuple[int, int]] = None,
     ) -> Optional[list[tuple[int, int]]]:
-        """Least-cost path from spawn to target (uniform-cost search).
+        """Least-cost path from `start` (default: spawn) to target.
 
         Each step costs 1.0 plus a hazard penalty for edges into non-lethal
         hazard cells (h:fire etc.), so paths prefer hazard-free detours.
         Without hazards this degenerates to BFS shortest path.
         Returns path list or None.
+
+        `start` (2026-09-26): the python walker's tour is spawn -> artifact ->
+        artifact -> teleporter, and every leg after the first begins where the
+        last one ended. Taking the start here keeps the step relation in ONE
+        place — tools/vr_agent.py never restates neighbors(). Omitted, it is
+        the spawn, exactly as before.
         """
-        if self.spawn == target:
-            return [self.spawn]
+        origin = self.spawn if start is None else start
+        if origin == target:
+            return [origin]
         parent: dict[tuple[int, int], tuple[int, int]] = {}
-        dist: dict[tuple[int, int], float] = {self.spawn: 0.0}
-        heap: list[tuple[float, tuple[int, int]]] = [(0.0, self.spawn)]
+        dist: dict[tuple[int, int], float] = {origin: 0.0}
+        heap: list[tuple[float, tuple[int, int]]] = [(0.0, origin)]
         while heap:
             d, pos = heapq.heappop(heap)
             if d > dist.get(pos, float("inf")):
