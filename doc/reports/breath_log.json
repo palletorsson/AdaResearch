@@ -8055,6 +8055,51 @@
         "doc/reports/RELEASE_GATES.md"
       ],
       "duration_minutes": 20
+    },
+    {
+      "breath_id": "2026-09-27T09:10",
+      "mode": "full",
+      "baseline_avg": 6.08,
+      "post_avg": 6.08,
+      "delta": 0.0,
+      "items_attempted": [
+        "capture-Point_Zero",
+        "read-gate-suite-not-global-avg",
+        "forum-heads-up-260927-q2b2j",
+        "land-15-stranded-scripts-gate-M"
+      ],
+      "items_succeeded": [
+        "capture-Point_Zero",
+        "read-gate-suite-not-global-avg",
+        "forum-heads-up-260927-q2b2j",
+        "land-15-stranded-scripts-gate-M"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 4,
+          "succeeded": 4,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "GLOBAL_AVG 6.083 -> 6.080 IS A DENOMINATOR, NOT A REGRESSION. The shaders sequence joined the spine at order 12 on 09-25 and scores at stage 6 like the rest: (24*6 + 8)/25 = 6.080 against (23*6 + 8)/24 = 6.083. Any breath comparing today against 09-25 must say so, or it will read as a loss.",
+        "THE PIPELINE'S AGENT-CLOSABLE SURFACE REFILLED BY ONE ROOM. Point_Zero joined primitives with no multi_shots dir, so primitives polish read 91% (10/11). One watchdog-wrapped capture (21 s, 5 PNGs, room renders with frame counter and teleporter) took it to 100%. Same shape as LSystems_Shape_Grammars on 09-25: a map added to a sequence is never captured by whoever adds it.",
+        "GATE M REFILLED WITH THE 09-24 RANDOMNESS->NOISE->CA BLOCK'S SIBLING SCRIPTS. 15 stranded, 0 claimed, idle 41-67h; the block released its hall claims on 09-24 12:23 and said 'nothing committed'. 14/14 .gd pass check_compile.gd in one boot (read the result from user://logs/godot.log: the non-console v4.6 exe prints nothing to the shell). Landed with noise_arch.gdshader after heads-up 260927-q2b2j. Parents (LineNetworkCA.gd, scenes, maps, final.md) deliberately left with their owners.",
+        "A GREP OVER user://logs HANGS THE BASH TOOL past 120 s (git-bash + ls -t on a large logs dir); Select-String on the single godot.log in PowerShell returns instantly."
+      ],
+      "files_changed": [
+        "algorithms/... 15 gate-M scripts (see commit)",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md"
+      ],
+      "duration_minutes": 20
     }
   ]
 }
