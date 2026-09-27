@@ -83,6 +83,7 @@
       <button onclick="walker()">send walker into VR</button>
       <button onclick="agent()">agent: play the room</button>
       <button onclick="agent(true)">agent: plan only</button>
+      <button id="narr" onclick="narrate()">narrate halls: off</button>
       <button onclick="cmd({cmd:'walker_stop'})">clear walker</button>
       <button onclick="cmd({cmd:'ping'})">ping</button>
     </div>
@@ -215,6 +216,21 @@ async function agent(dryRun) {
   looks.forEach(p => log(`   look ${p.artifact} @ cell ${p.cell}`, "cmd"));
   (d.plan && d.plan.skipped || []).forEach(s => log(`   skip ${s.token}: ${s.reason}`, "cmd"));
 }
+
+// THE HALL READS ITSELF (2026-09-27). Toggle the PC-side narrator: each hall
+// the headset settles in has its final.md read out of the PC's speakers, a
+// pre-rendered ada_run/voice/<Map>/*.mp3 first, the OS voice otherwise.
+let narrOn = false;
+async function narrate() {
+  const r = await fetch("/narrate", {method:"POST", headers:{"Content-Type":"application/json"},
+                                     body: JSON.stringify({on: !narrOn})});
+  const d = await r.json();
+  narrOn = !!d.on;
+  $("narr").textContent = "narrate halls: " + (narrOn ? "on" : "off");
+}
+fetch("/narrate").then(r => r.json()).then(d => {
+  narrOn = !!d.on; $("narr").textContent = "narrate halls: " + (narrOn ? "on" : "off");
+}).catch(() => {});
 
 // ── geometry helpers ─────────────────────────────────────────────────────────
 function total() { return mapData ? (mapData.cube + mapData.gutter) : 1; }

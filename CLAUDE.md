@@ -130,7 +130,8 @@ Auto-research findings: hybrid wins constraint score (deterministic, +0.04 mean 
 | **Agent (plan)** | `python tools/vr_agent.py <Map> --dry-run` | Tour over the pathfinder's graph: spawn → each work's approach cell → teleporter, drawn on the map |
 | **Agent (play)** | `python tools/vr_link.py --agent=<Map>` | Drives the ghost in the live game: walk, `look`, `interact`; report in `ada_run/vr_agent_<Map>.md`. `--exit` takes the teleporter (moves the person) |
 | **Bridge probe** | `godot --headless --path . --xr-mode off --script res://commons/testing/probe_vr_link_agent.gd` | The game side of scan/look/interact on a bench |
-See `doc/VR_AGENT.md`. Tests: `python tools/test_vr_agent.py` (fake game, no Godot).
+| **Narrator** | `python tools/vr_link.py --narrate` | Reads each hall's `final.md` aloud on the PC as the headset enters it (essay, then notes). `vr_narrator.py --text <Map>` shows the words, `--render --seq <id>` pre-renders audio |
+See `doc/VR_AGENT.md` and `doc/VR_NARRATOR.md`. Tests: `python tools/test_vr_agent.py`, `python tools/test_vr_narrator.py` (no Godot, no voice).
 
 ### Content & Identity
 | Tool | Command | Purpose |
