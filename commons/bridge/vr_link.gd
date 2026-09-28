@@ -123,6 +123,8 @@ var _seq := 0
 ## would walk the scene root 20 times a second for an answer that changes once
 ## per map load.
 var _museum_node: Node = null
+## A miss is not retried before this tick (see _museum).
+var _museum_miss_until_ms: int = 0
 
 ## The ghost the python walker drives. Built on first use, never before.
 var _ghost: Node3D = null
@@ -327,10 +329,56 @@ func _museum() -> Node:
 	if cur.get("_segments") != null:
 		_museum_node = cur
 		return cur
-	for c in cur.get_children():
-		if c.get("_segments") != null:
-			_museum_node = c
-			return c
+	# THE SHIPPED LANE (2026-09-28, the first headset test): the app boots menu ->
+	# staging -> museum, and the museum is THREE levels below current_scene:
+	# VRStaging / Scene / Base / Museum. XRToolsStaging adds the loaded scene
+	# under its $Scene holder and keeps it as `current_scene`; for
+	# endless_museum_staged.tscn that is a scene base named "Base", and the
+	# museum script sits on its child "Museum". The loop that was here looked one
+	# level down only, so the pose named the map "VRStaging", carried no hall,
+	# and the narrator had nothing to read. The desktop lane (endless_museum.tscn
+	# as the scene) never showed it.
+	#
+	# Breadth-first from the staged scene, then from the scene root: bounded in
+	# depth and in nodes, and a miss is not retried for a second, because out of
+	# the museum (the lab, a grid map with thousands of cubes) this would
+	# otherwise walk the tree on every pose, twenty times a second.
+	var now_ms: int = Time.get_ticks_msec()
+	if now_ms < _museum_miss_until_ms:
+		return null
+	var roots: Array = []
+	var staged: Variant = cur.get("current_scene")
+	if staged is Node and is_instance_valid(staged):
+		roots.append(staged)
+	roots.append(cur)
+	for r in roots:
+		var found: Node = _find_museum(r as Node, 3, 400)
+		if found != null:
+			_museum_node = found
+			_museum_miss_until_ms = 0
+			return found
+	_museum_miss_until_ms = now_ms + 1000
+	return null
+
+
+## Breadth-first: the node carrying the museum's `_segments`, at most `max_depth`
+## levels below `root` and after at most `budget` nodes.
+func _find_museum(root: Node, max_depth: int, budget: int) -> Node:
+	var frontier: Array = [root]
+	var depth: int = 0
+	var seen: int = 0
+	while not frontier.is_empty() and depth <= max_depth:
+		var next: Array = []
+		for n_v in frontier:
+			var n: Node = n_v
+			if n.get("_segments") != null:
+				return n
+			seen += 1
+			if seen >= budget:
+				return null
+			next.append_array(n.get_children())
+		frontier = next
+		depth += 1
 	return null
 
 
