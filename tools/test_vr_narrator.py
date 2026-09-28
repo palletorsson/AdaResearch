@@ -30,6 +30,22 @@ def check(cond: bool, what: str) -> None:
         FAILS.append(what)
 
 
+def spoken(map_name: str) -> list[str]:
+    """What the narrator is expected to say for a map: its chapters' texts.
+    Derived from the file each time, because the book keeps changing — the
+    2026-09-25 merge gave Point_One an H1, and five checks that remembered
+    'Point One.' as its first words broke."""
+    return [c.text for c in vn.chapters_for(map_name)]
+
+
+def preview_of(map_name: str, n: int) -> list[str]:
+    out = []
+    for t in spoken(map_name):
+        w = t.split()
+        out.append(" ".join(w[:n]) + " …" if len(w) > n else t)
+    return out
+
+
 def test_text_point_one() -> None:
     print("text: Point_One")
     chs = vn.chapters_for("Point_One")
@@ -41,8 +57,14 @@ def test_text_point_one() -> None:
         check(bad not in body.text, "no %r left in the body" % bad)
     check(vn.CODE_CUE in body.text, "code listings are announced, not spelled")
     check("Engine dot get process frames" in body.text, "inline code is read as words")
-    check(body.text.startswith("Point One."), "a body without an H1 is introduced by the map's name")
-    check(notes.text.count("Note ") == 4, "four notes, numbered")
+    src = (vn.MAPS / "Point_One" / "final.md").read_text(encoding="utf-8")
+    h1 = next((l[2:].strip() for l in src.splitlines() if l.startswith("# ")), "")
+    check(body.title == (h1 or "Point One"), "the chapter title is the essay's H1 when it has one: %r" % body.title)
+    check(body.text.startswith(body.title), "the body opens with its title")
+    check(notes.title.startswith(body.title) and notes.text.startswith("Notes for %s." % body.title),
+          "the notes chapter is named after the essay")
+    n_defs = sum(1 for l in src.splitlines() if l.startswith("[^") and "]:" in l)
+    check(notes.text.count("Note ") == n_defs and n_defs > 0, "one note per footnote definition (%d)" % n_defs)
     check("Note 1. Heidegger" in notes.text and "Note 4. Donna Haraway" in notes.text,
           "notes numbered by first mention in the body")
     check("Being and Time, §29" in notes.text and "beyng.com" not in notes.text, "links become their text")
@@ -59,7 +81,19 @@ def test_text_headed_and_plain() -> None:
     check("Somewhere to start." in chs[0].text, "an H2 is read as a sentence")
     check(not chs[0].text.startswith("Random Walk"), "a titled body is not introduced by the map name")
     tp = vn.chapters_for("Trans_Pre")
-    check(len(tp) == 1 and tp[0].kind == "body", "no footnotes: one chapter")
+    tp_src = (vn.MAPS / "Trans_Pre" / "final.md").read_text(encoding="utf-8")
+    tp_notes = sum(1 for l in tp_src.splitlines() if l.startswith("[^") and "]:" in l)
+    check(len(tp) == (2 if tp_notes else 1), "Trans_Pre: %d chapter(s) for %d footnote(s)" % (len(tp), tp_notes))
+    maps_keep = vn.MAPS
+    try:
+        vn.MAPS = Path(tempfile.mkdtemp())
+        (vn.MAPS / "Untitled_Map").mkdir()
+        (vn.MAPS / "Untitled_Map" / "final.md").write_text("No heading here.\n\nSecond paragraph.\n", encoding="utf-8")
+        un = vn.chapters_for("Untitled_Map")
+        check(len(un) == 1 and un[0].title == "Untitled Map" and un[0].text.startswith("Untitled Map.\n\nNo heading here."),
+              "a body without an H1 is introduced by the map's name")
+    finally:
+        vn.MAPS = maps_keep
     check(vn.chapters_for("No_Such_Map_Xyz") == [], "no final.md: nothing to read")
     title, body, notes = vn.clean_markdown("# T\n\nSee [x](http://a) and *this* and __that__ `a_b()`.\n\n"
                                           "> quoted\n\n- item one\n\n<b>tag</b>\n\n[^n]: note [y](u)\n\nRef[^n].")
@@ -101,8 +135,7 @@ def test_narrator_settle_and_switch() -> None:
     feed(n, Clock.pose("Point_One"), 0.3)
     n.wait(5)
     check(len(sp.spoken) == 2, "held: Point_One's two chapters are spoken (%d)" % len(sp.spoken))
-    check(sp.spoken[0].startswith("Point One.") and sp.spoken[1].startswith("Notes for Point One."),
-          "essay, then notes")
+    check(sp.spoken == spoken("Point_One"), "essay, then notes — word for word what the file yields")
     check(("map", "Point_One") in n.heard, "…and the hall is marked heard")
     before = len(sp.spoken)
     feed(n, Clock.pose("Trans_Pre"), 0.1)     # a threshold crossed and re-crossed
@@ -111,7 +144,8 @@ def test_narrator_settle_and_switch() -> None:
     check(len(sp.spoken) == before, "a flicker into the next hall reads nothing")
     feed(n, Clock.pose("Trans_Pre"), 0.35)
     n.wait(5)
-    check(len(sp.spoken) == before + 1 and sp.spoken[-1].startswith("Trans Pre."), "the next hall, held, is read")
+    check(len(sp.spoken) == before + len(spoken("Trans_Pre")) and sp.spoken[before] == spoken("Trans_Pre")[0],
+          "the next hall, held, is read")
     check(any("left Point_One" in m for m in logs), "leaving a hall is logged")
     feed(n, Clock.pose("Point_One"), 0.35)
     n.wait(2)
@@ -122,7 +156,8 @@ def test_narrator_settle_and_switch() -> None:
     feed(n2, Clock.pose("Trans_Pre"), 0.35); n2.wait(5)
     feed(n2, Clock.pose("Point_One"), 0.35); n2.wait(5)
     feed(n2, Clock.pose("Trans_Pre"), 0.35); n2.wait(5)
-    check(len(n2.speaker.spoken) == 4, "--repeat reads it again (%d)" % len(n2.speaker.spoken))
+    expect = 2 * len(spoken("Trans_Pre")) + len(spoken("Point_One"))
+    check(len(n2.speaker.spoken) == expect, "--repeat reads it again (%d of %d)" % (len(n2.speaker.spoken), expect))
 
 
 def test_narrator_interrupt() -> None:
@@ -136,8 +171,8 @@ def test_narrator_interrupt() -> None:
     feed(n, Clock.pose("Trans_Pre"), 0.35)
     time.sleep(0.3)
     check(sp.procs[0].killed, "the essay's process was terminated")
-    check(len(sp.spoken) == 2 and sp.spoken[-1].startswith("Trans Pre."), "the next hall started")
-    check(not any(s.startswith("Notes for Point One") for s in sp.spoken), "Point_One's notes were never begun")
+    check(len(sp.spoken) == 2 and sp.spoken[-1] == spoken("Trans_Pre")[0], "the next hall started")
+    check(not any(s == spoken("Point_One")[1] for s in sp.spoken), "Point_One's notes were never begun")
     check(("map", "Point_One") not in n.heard, "an interrupted hall is not marked heard (it will be read again)")
     n.stop()
     time.sleep(0.2)
@@ -150,11 +185,12 @@ def test_narrator_museum_and_audio() -> None:
     n = vn.Narrator(sp, voice_dir=Path(tempfile.mkdtemp()), settle=0.2, gap=0.0, log=lambda m: None)
     feed(n, Clock.pose(pearl="point", hall_map="Point_One", index=3), 0.35); n.wait(5)
     k1 = len(sp.spoken)
+    check(k1 == len(spoken("Point_One")), "the first hall was read in full")
     feed(n, Clock.pose(vestibule=True), 0.35)       # the vestibule: a hall record, no pearl
     check(n.current == ("hall", "point", "Point_One", 3) and len(sp.spoken) == k1,
           "between halls the reading is kept, nothing new starts")
     feed(n, Clock.pose(pearl="point again", hall_map="Point_One", index=9), 0.35); n.wait(5)
-    check(len(sp.spoken) == k1 + 2, "a second hall of the same map is a second reading")
+    check(len(sp.spoken) == 2 * k1, "a second hall of the same map is a second reading")
     check(vn.hall_key({"map": "X"}) == ("map", "X") and vn.hall_key({"hall": {"pearl": ""}}) is None
           and vn.hall_key({}) is None, "hall_key: map outside the museum, None between halls")
 
@@ -194,9 +230,9 @@ def test_preview_and_mute() -> None:
     n = vn.Narrator(sp, voice_dir=Path(tempfile.mkdtemp()), settle=0.2, gap=0.0, preview=40,
                     log=lambda m: None)
     feed(n, Clock.pose("Point_One"), 0.35); n.wait(5)
-    check(len(sp.spoken) == 2 and all(len(t.split()) <= 41 for t in sp.spoken),
+    check(sp.spoken == preview_of("Point_One", 40),
           "preview speaks the first 40 words of each chapter (%s)" % [len(t.split()) for t in sp.spoken])
-    check(sp.spoken[0].startswith("Point One.") and sp.spoken[0].endswith("…"), "…and marks the cut")
+    check(all(t.endswith("…") for t in sp.spoken), "…and marks the cut")
     logs: list[str] = []
     m = vn.make_speaker(mute=True, log=logs.append)
     check(isinstance(m, vn.MuteSpeaker) and m.name == "mute", "make_speaker(mute=True) is the mute speaker")
