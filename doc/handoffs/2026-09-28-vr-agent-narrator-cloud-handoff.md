@@ -92,3 +92,11 @@ the page, or run `python tools/vr_narrator.py --listen` beside it.
 On a fresh clone two autoloads fail: `project.godot` names them by `uid://` and `*.uid` files are
 gitignored, so a new checkout cannot resolve them. Palle's machine has the files. Worth a look
 before anyone else clones.
+
+## Taken over on the PC (2026-09-28, 14:45, claude-edges-pilot)
+
+- **The class collision is clear on this checkout.** `check_global_classes.py --name SciFiLoFiSoundscape`: 2685 classes in 2741 scanned scripts, no duplicate, no untracked declaration, no stale cache row; the class cache holds only `res://commons/audio/systems/SciFiLoFiSoundscape.gd`. The review snapshot has its `.gdignore`, `android/build` and `.claude/worktrees` have theirs, and Godot skips dot-folders anyway. The six other copies on disk are all under `.claude/worktrees/`. The editor open on this root (PID 42352, started before the marker was written) may still show the old error until it rescans or restarts; nothing else is left to purge, and `--purge-cache` was not run with the editor open.
+- **The Windows voice works.** `vr_narrator.py --say Point_One --preview 40` spoke both chapters through SAPI (rc 0).
+- **The whole PC-side chain works.** `vr_link.py --narrate` is running (pid 40192, ports 8771/8772, `adb reverse tcp:8771` set). A headless museum run with `--vr-link` standing in Shader_09_FBM connected at 18 Hz, and after the 1.2 s settle the page logged `narrator: reading Shader_09_FBM [shader 09 fbm #0]: What carries you over the water? (1109 words), ... notes (344 words)`; the reading was cut through `POST /narrate {"on": false}` and the toggle re-armed.
+- **The headset side is still unverified, for one reason only: the Quest was asleep** (`dumpsys power`: `mWakefulness=Asleep`) with the app as its resumed activity, installed 13:44, armed, build newer than `vr_link.gd`. The app re-dials every 2 s (`RETRY_S`), so putting the headset on is the whole remaining step: the page at `localhost:8772` should show the pose within seconds and the hall read after 1.2 s.
+- Not touched: the agent (`--agent`), the bench probe, the export.
