@@ -24,6 +24,11 @@ This tool answers both from the disk Godot sees, not from git:
   * declared scripts git does not track (a stray copy is untracked, or ignored);
   * the class cache, entry by entry: path missing, path differing in case from
     the file on disk, or a name whose cached path is not where it is declared;
+  * a script under doc/ that Godot scans at all — a review snapshot
+    (…/before/commons__audio__systems__SciFiLoFiSoundscape.gd was the one that
+    hid the class on 2026-09-28) belongs behind a `.gdignore`, tracked or not.
+    `--fix` writes that `.gdignore` beside the snapshot (the folder holding the
+    before/ or after/ dir, else the script's own) and says so;
   * every literal res:// reference in scripts and scenes whose spelling differs
     from the disk in CASE. Windows resolves it, so the file registers under the
     disk's spelling and parses under the reference's — the two paths the
@@ -35,6 +40,7 @@ Exit code = number of findings, so it gates.
   python tools/check_global_classes.py            # the report
   python tools/check_global_classes.py --json     # for tools
   python tools/check_global_classes.py --name SciFiLoFiSoundscape   # one name
+  python tools/check_global_classes.py --fix      # .gdignore every stray snapshot, then rescan in Godot
 """
 from __future__ import annotations
 
@@ -164,10 +170,52 @@ def references(root: Path) -> dict[str, list[str]]:
     return out
 
 
-def report(root: Path, only: str | None = None) -> dict:
+#: where a .gd is evidence, never game code. doc/ as a whole cannot take a
+#: .gdignore — ProjectDashboardOverlay reads res://doc/reports/*.json and an
+#: ignored folder is left out of the export — so the marker goes beside the
+#: snapshot instead.
+STRAY_ROOTS = ("doc",)
+SNAPSHOT_DIRS = {"before", "after", "snapshot", "snapshots"}
+
+
+def gdignore_home(root: Path, script: Path) -> Path:
+    """Where the .gdignore for a stray script goes: the folder holding its
+    before/after dir when there is one, else the script's own folder."""
+    rel = script.relative_to(root)
+    parts = rel.parts
+    for i, part in enumerate(parts[:-1]):
+        if part.lower() in SNAPSHOT_DIRS and i > 0:
+            return root.joinpath(*parts[:i])
+    return script.parent
+
+
+def report(root: Path, only: str | None = None, fix: bool = False) -> dict:
     names, inner = declared(root)
     git_gd = tracked(root)
     findings: list[dict] = []
+
+    written: list[str] = []
+    for p in godot_walk(root):
+        rel = p.relative_to(root)
+        if rel.parts[0] not in STRAY_ROOTS:
+            continue
+        res = "res://" + rel.as_posix()
+        if only:
+            src = p.read_text(encoding="utf-8", errors="replace")
+            m = CLASS_RE.search(strip_comments(src))
+            if not m or m.group(1) != only:
+                continue
+        home = gdignore_home(root, p)
+        f = {"kind": "stray_script", "path": res, "tracked": bool(git_gd and res in git_gd),
+             "gdignore": "res://" + home.relative_to(root).as_posix() + "/.gdignore"}
+        if fix:
+            marker = home / ".gdignore"
+            if not marker.exists():
+                marker.write_text("# evidence snapshot, not game code — Godot must not scan it "
+                                  "(tools/check_global_classes.py --fix)\n", encoding="utf-8")
+                written.append(f["gdignore"])
+            f["fixed"] = True
+        findings.append(f)
 
     for name, paths in sorted(names.items()):
         if only and name != only:
@@ -219,7 +267,8 @@ def report(root: Path, only: str | None = None) -> dict:
                              "declared_at": names[name]})
     return {"scanned": sum(len(v) for v in names.values()), "classes": len(names),
             "cache_rows": len(cache_rows), "cache": str(CACHE) if CACHE.exists() else None,
-            "references": len(refs), "references_missing": mis, "findings": findings}
+            "references": len(refs), "references_missing": mis, "findings": findings,
+            "gdignore_written": written}
 
 
 def main() -> int:
@@ -227,8 +276,10 @@ def main() -> int:
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--name", default=None, help="only this class name")
     ap.add_argument("--root", default=str(ROOT))
+    ap.add_argument("--fix", action="store_true",
+                    help="write a .gdignore beside every stray snapshot script, so Godot stops scanning it")
     args = ap.parse_args()
-    r = report(Path(args.root), args.name)
+    r = report(Path(args.root), args.name, fix=args.fix)
     if args.json:
         print(json.dumps(r, indent=1))
         return len(r["findings"])
@@ -243,7 +294,11 @@ def main() -> int:
         return 0
     for f in r["findings"]:
         k = f["kind"]
-        if k == "duplicate":
+        if k == "stray_script":
+            print("\nSTRAY      %s is a script Godot scans inside doc/%s\n           -> %s%s" % (
+                f["path"], "" if f["tracked"] else " (not tracked by git)", f["gdignore"],
+                "   written" if f.get("fixed") else "   (--fix writes it)"))
+        elif k == "duplicate":
             print("\nDUPLICATE  class_name %s is declared %d times:" % (f["class"], len(f["paths"])))
             for p in f["paths"]:
                 print("    %s%s" % (p, "   <- not tracked by git" if p in f["untracked"] else ""))
@@ -267,9 +322,12 @@ def main() -> int:
         elif k == "cache_path_elsewhere":
             print("\nELSEWHERE  the class cache maps %s to %s, but it is declared at %s" % (
                 f["class"], f["cached"], ", ".join(f["declared_at"])))
-    print("\n%d finding(s). A stale or mis-cased cache row: close the editor, delete the .godot "
-          "folder, reopen. A duplicate: rename or delete one. A mis-cased reference: spell it as "
-          "the disk does — the Quest will not find it otherwise." % len(r["findings"]))
+    if r["gdignore_written"]:
+        print("\nwrote %d .gdignore file(s); in Godot: Project > Reload Current Project, or restart" % len(r["gdignore_written"]))
+    print("\n%d finding(s). A stray snapshot: --fix, or delete the folder. A stale or mis-cased cache row: "
+          "close the editor, delete the .godot folder, reopen. A duplicate: rename or delete one. "
+          "A mis-cased reference: spell it as the disk does — the Quest will not find it otherwise."
+          % len(r["findings"]))
     return len(r["findings"])
 
 

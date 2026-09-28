@@ -111,7 +111,7 @@ Run from repo root:
 | **Verify Sequence** | `python tools/verify_sequence.py <seq_id>` | Full sequence validation |
 | **Workbench** | `python tools/spine_map_workbench.py status` | Sequence contracts, scaffolding |
 | **Release Gates** | `python tools/run_release_gates.py --max-grade-c -1 --gate-toggles doc/reports/RELEASE_GATES_TOGGLES.json` | Launch-quality checks |
-| **Global classes** | `python tools/check_global_classes.py [--name X]` | `Class "X" hides a global script class`: which two scripts declare it, or which class-cache row is stale or mis-cased. Walks the disk as Godot does (dot-dirs and `.gdignore` folders skipped, git ignored), exit = findings |
+| **Global classes** | `python tools/check_global_classes.py [--name X] [--fix]` | `Class "X" hides a global script class`: which two scripts declare it, a snapshot under `doc/` Godot scans (`--fix` puts a `.gdignore` beside it), a stale or mis-cased class-cache row, a `res://` path spelled unlike the disk. Walks the disk as Godot does (dot-dirs and `.gdignore` folders skipped, git ignored), exit = findings |
 
 ### Placement (2026-05-15 — auto-research output)
 | Tool | Command | Purpose |
@@ -550,6 +550,14 @@ half-built artifact and reports an identical mesh count for every value.
 - **Check the .tscn root carries the script.** `GridInteractablesComponent` sets `config_*`
   metadata and calls `apply_grid_config` on the ROOT; a scriptless root with logic on a child
   makes the axis declared but unreachable from any map token.
+- **A copy of a script under `doc/` is a second declaration of its class.** Godot scans every
+  folder without a `.gdignore`, tracked or not: a review snapshot at
+  `doc/reports/interfaces-2026-09-21/radio-console/before/commons__audio__systems__SciFiLoFiSoundscape.gd`
+  made the live class "hide a global script class" and the audio indicator fail to load
+  (2026-09-28). `doc/` as a whole cannot be ignored — the dashboard overlay reads
+  `res://doc/reports/*.json` and an ignored folder leaves the export — so every snapshot
+  folder carries its own `.gdignore`, as `doc/book/iterations/` and `doc/space/*/` do.
+  `python tools/check_global_classes.py --fix` writes the missing ones.
 - **Check the file is tracked.** A promotion once landed 270 lines inside a gitignored addon;
   the declaration would have shipped for code not in the repo, and the gate cannot see it
   because it reads the working tree.
