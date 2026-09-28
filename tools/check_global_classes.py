@@ -23,7 +23,12 @@ This tool answers both from the disk Godot sees, not from git:
   * names declared more than once, with every path;
   * declared scripts git does not track (a stray copy is untracked, or ignored);
   * the class cache, entry by entry: path missing, path differing in case from
-    the file on disk, or a name whose cached path is not where it is declared.
+    the file on disk, or a name whose cached path is not where it is declared;
+  * every literal res:// reference in scripts and scenes whose spelling differs
+    from the disk in CASE. Windows resolves it, so the file registers under the
+    disk's spelling and parses under the reference's — the two paths the
+    analyzer compares — and the Quest, case-sensitive, does not resolve it at
+    all.
 
 Exit code = number of findings, so it gates.
 
@@ -44,12 +49,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / ".godot" / "global_script_class_cache.cfg"
 CLASS_RE = re.compile(r"^\s*class_name\s+([A-Za-z_][A-Za-z0-9_]*)", re.M)
+REF_RE = re.compile(r'res://[^"\'\s()]+?\.(?:gd|tscn|tres|gdshader|shader)\b')
+REF_EXT = (".gd", ".tscn", ".tres")
 INNER_RE = re.compile(r"^[ \t]+class\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?:extends[^:]*)?:", re.M)
 
 
-def godot_walk(root: Path):
-    """Every .gd file Godot's EditorFileSystem would scan: no dot-dirs, no
-    dot-files, no folder with a .gdignore in it (and nothing beneath one)."""
+def godot_walk(root: Path, exts: tuple = (".gd",)):
+    """Every file of these kinds Godot's EditorFileSystem would scan: no
+    dot-dirs, no dot-files, no folder with a .gdignore in it (and nothing
+    beneath one). Extensions compare case-blind, as the scan does."""
     for dirpath, dirnames, filenames in os.walk(root):
         d = Path(dirpath)
         if (d / ".gdignore").exists() and d != root:
@@ -57,7 +65,7 @@ def godot_walk(root: Path):
             continue
         dirnames[:] = sorted(x for x in dirnames if not x.startswith("."))
         for f in sorted(filenames):
-            if f.startswith(".") or not f.endswith(".gd"):
+            if f.startswith(".") or not f.lower().endswith(exts):
                 continue
             yield d / f
 
@@ -111,6 +119,20 @@ def read_cache(path: Path) -> list[dict]:
     return rows
 
 
+_LISTING: dict[Path, dict[str, str]] = {}
+
+
+def _entries(d: Path) -> dict[str, str]:
+    e = _LISTING.get(d)
+    if e is None:
+        try:
+            e = {x.lower(): x for x in os.listdir(d)}
+        except OSError:
+            e = {}
+        _LISTING[d] = e
+    return e
+
+
 def real_case_path(root: Path, res: str) -> str | None:
     """The path as the disk spells it, walking one component at a time, or
     None when it does not exist. On a case-insensitive disk (Windows) the file
@@ -119,16 +141,27 @@ def real_case_path(root: Path, res: str) -> str | None:
     cur = root
     spelled = []
     for part in parts:
-        try:
-            entries = {e.lower(): e for e in os.listdir(cur)}
-        except OSError:
-            return None
-        hit = entries.get(part.lower())
+        hit = _entries(cur).get(part.lower())
         if hit is None:
             return None
         spelled.append(hit)
         cur = cur / hit
     return "res://" + "/".join(spelled)
+
+
+def references(root: Path) -> dict[str, list[str]]:
+    """Every literal res:// path to a script, scene, resource or shader in the
+    scripts and scenes Godot scans: path -> the files that write it so."""
+    out: dict[str, list[str]] = {}
+    for p in godot_walk(root, REF_EXT):
+        try:
+            src = p.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        me = "res://" + p.relative_to(root).as_posix()
+        for m in set(REF_RE.findall(src)):
+            out.setdefault(m, []).append(me)
+    return out
 
 
 def report(root: Path, only: str | None = None) -> dict:
@@ -156,6 +189,20 @@ def report(root: Path, only: str | None = None) -> dict:
             if stray and len(paths) == 1:
                 findings.append({"kind": "untracked_declaration", "class": name, "paths": stray})
 
+    refs = references(root)
+    mis = 0
+    for ref, users in sorted(refs.items()):
+        spelled = real_case_path(root, ref)
+        if spelled is None:
+            mis += 1
+            continue
+        if spelled != ref:
+            if only and not (ref.endswith(".gd") and only in names and ref in names[only]
+                             or spelled in names.get(only, [])):
+                continue
+            findings.append({"kind": "reference_case", "written": ref, "on_disk": spelled,
+                             "by": users[:8], "users": len(users)})
+
     cache_rows = read_cache(CACHE)
     for row in cache_rows:
         name, cpath = row["class"], row["path"]
@@ -172,7 +219,7 @@ def report(root: Path, only: str | None = None) -> dict:
                              "declared_at": names[name]})
     return {"scanned": sum(len(v) for v in names.values()), "classes": len(names),
             "cache_rows": len(cache_rows), "cache": str(CACHE) if CACHE.exists() else None,
-            "findings": findings}
+            "references": len(refs), "references_missing": mis, "findings": findings}
 
 
 def main() -> int:
@@ -188,6 +235,8 @@ def main() -> int:
     print("global classes: %d declared in %d scripts Godot scans%s" % (
         r["classes"], r["scanned"],
         "; cache: %d rows" % r["cache_rows"] if r["cache"] else "; no .godot/ class cache here"))
+    print("res:// references: %d distinct paths to scripts/scenes/resources checked against the disk's "
+          "spelling (%d point at nothing — not this tool's question)" % (r["references"], r["references_missing"]))
     if not r["findings"]:
         print("no duplicate class_name, no untracked declaration, no stale cache row"
               + (" — for %s" % args.name if args.name else ""))
@@ -211,11 +260,16 @@ def main() -> int:
         elif k == "cache_path_case":
             print("\nCASE       the class cache spells %s as %s but the disk has %s" % (
                 f["class"], f["cached"], f["on_disk"]))
+        elif k == "reference_case":
+            print("\nCASE       %s is written as\n             %s\n           but the disk spells it\n             %s\n           by %s%s" % (
+                f["written"].rsplit("/", 1)[-1], f["written"], f["on_disk"], ", ".join(f["by"]),
+                " (+%d more)" % (f["users"] - len(f["by"])) if f["users"] > len(f["by"]) else ""))
         elif k == "cache_path_elsewhere":
             print("\nELSEWHERE  the class cache maps %s to %s, but it is declared at %s" % (
                 f["class"], f["cached"], ", ".join(f["declared_at"])))
-    print("\n%d finding(s). A stale or mis-cased cache row: close the editor, delete "
-          ".godot/global_script_class_cache.cfg, reopen. A duplicate: rename or delete one." % len(r["findings"]))
+    print("\n%d finding(s). A stale or mis-cased cache row: close the editor, delete the .godot "
+          "folder, reopen. A duplicate: rename or delete one. A mis-cased reference: spell it as "
+          "the disk does — the Quest will not find it otherwise." % len(r["findings"]))
     return len(r["findings"])
 
 

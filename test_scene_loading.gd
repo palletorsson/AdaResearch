@@ -6,9 +6,9 @@ func _ready():
 	print("Testing scene loading...")
 	
 	var failing_scenes = [
-		"res://algorithms/MachineLearning/ensemble_methods/ensemble_methods.tscn",
-		"res://algorithms/MachineLearning/explainable_AI_XAI/explainable_AI_XAI.tscn", 
-		"res://algorithms/MachineLearning/feature_engineering/feature_engineering.tscn"
+		"res://algorithms/machinelearning/ensemble_methods/ensemble_methods.tscn",
+		"res://algorithms/machinelearning/explainable_AI_XAI/explainable_AI_XAI.tscn", 
+		"res://algorithms/machinelearning/feature_engineering/feature_engineering.tscn"
 	]
 	
 	for scene_path in failing_scenes:
