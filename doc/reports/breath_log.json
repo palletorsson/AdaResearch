@@ -8100,6 +8100,54 @@
         "doc/reports/RELEASE_GATES.md"
       ],
       "duration_minutes": 20
+    },
+    {
+      "breath_id": "2026-09-28T09:10",
+      "mode": "full",
+      "baseline_avg": 6.08,
+      "post_avg": 6.08,
+      "delta": 0.0,
+      "items_attempted": [
+        "read-gate-suite-not-global-avg",
+        "diff-gates-against-yesterday",
+        "gate-F-refuses-a-stale-verdict",
+        "forum-answer-260908-sq9zq-melencolia",
+        "classify-L-rows-as-live-blocks"
+      ],
+      "items_succeeded": [
+        "read-gate-suite-not-global-avg",
+        "diff-gates-against-yesterday",
+        "gate-F-refuses-a-stale-verdict",
+        "forum-answer-260908-sq9zq-melencolia",
+        "classify-L-rows-as-live-blocks"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 5,
+          "succeeded": 5,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "GATE F HAD BEEN READING YESTERDAY'S WALK AS TODAY'S. The 09-28 baseline printed F as 'no_route, frontier_z 60, walked 31.2 s', the same numbers as 09-27, but ada_run/em_autopilot.json was dated 2026-09-27 09:15:08 and no Godot log was written today. The runner took pass/fail from em_autopilot.py's exit code (1) and every metric from whatever verdict file happened to be on disk. It keeps no copy of the tool's output, so why the tool exited 1 without writing is unrecoverable. read_fresh_verdict() now refuses a file older than the run and says 'stale_verdict (file written <ts>)'. The tool's last three lines ride along as autopilot_says. Negative test: a day-old file is rejected, a fresh one is read, a missing one is named.",
+        "THE FIX CRASHED THE RUNNER ONCE, AND THE CRASH IS THE LIKELY CAUSE OF THE ORIGINAL ONE. em_autopilot.py prints an em dash in cp1252 (0x97). run_cmd decodes utf-8 with errors=replace, so it becomes U+FFFD, and printing U+FFFD to a cp1252 console raises UnicodeEncodeError. autopilot_says is ASCII-folded now. The same console trap showed up reading improvement_trajectory.json ('→'). Any gate that echoes child output onto a Windows console needs the same fold.",
+        "WITH THE STALE READ GONE, F SAYS contended_builder. Godot's editor (pid 41356) had held the project since 09:06:16. That's a fact about the morning, not about the corridor: nobody has walked the museum since 09-27 09:15, and the last honest walk's frontier was z=60 at SoftBodies-era cells sealed by line_demo.",
+        "I/J 15 -> 16 IS PRIMITIVES_MELENCOLIA, and it's a disagreement, not just a missing string. The 09-27 10:00-10:12 rewrite cut critical.md's old essay, which carried the durer_scene anchor 'technically complete and existentially insufficient'. The new header calls that reading a provocation. The book note still asserts it. Answered on 260908-sq9zq, and neither the room nor the book was touched.",
+        "L's 3 'nobody's' rows are not stranded. Array/technical.md belongs to a block whose final.md was edited 09-27 19:46 and whose map_data places molnar_cube_study, which HEAD does not have. Point_Zero/final.md + intent.md sit beside 5 tracked-modified siblings, including map_data. Landing the prose alone would commit a description of an uncommitted room. Gate L counts files; the unit here is the room."
+      ],
+      "files_changed": [
+        "tools/run_release_gates.py",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "duration_minutes": 35
     }
   ]
 }

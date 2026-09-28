@@ -13,6 +13,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -270,6 +271,25 @@ def run_cmd(cmd: list[str], env: dict[str, str] | None = None) -> tuple[int, str
     )
     out = (proc.stdout or "") + (proc.stderr or "")
     return proc.returncode, out
+
+
+def read_fresh_verdict(path: Path, t0: float) -> tuple[dict[str, Any], str]:
+    """(verdict, "") if `path` was written at or after t0, else ({}, why not).
+
+    A verdict file outlives the run that wrote it. Read unconditionally, a run
+    that died before writing inherits the previous run's numbers and they print
+    as today's. Two seconds of slack for filesystem mtime granularity.
+    """
+    if not path.exists():
+        return {}, "no_verdict"
+    mtime = path.stat().st_mtime
+    if mtime < t0 - 2.0:
+        stamp = datetime.datetime.fromtimestamp(mtime).isoformat(timespec="seconds")
+        return {}, f"stale_verdict (file written {stamp}, before this run)"
+    try:
+        return json.loads(path.read_text(encoding="utf-8")), ""
+    except json.JSONDecodeError:
+        return {}, "unreadable_verdict"
 
 
 def parse_lab_audit_output(text: str) -> dict[str, Any]:
@@ -534,14 +554,21 @@ def build_report(
         # so a contended run reports `reason: contended_builder` with every
         # corridor field at -1. A -1 row here is NOT a short walk; it is no walk.
         # Read `reason` before reading `frontier_z`.
+        #
+        # And a verdict this run did not write is not this run's. On 2026-09-28
+        # the tool exited 1 without touching the file, and the row republished
+        # 09-27's `no_route, frontier_z 60` as the morning's measurement; the
+        # gate keeps no copy of the tool's output, so why it exited was lost
+        # too. The file must postdate the run to be read, and the tool's last
+        # lines ride along in `autopilot_says`.
+        walk_t0 = time.time()
         rc_walk, out_walk = run_cmd([sys.executable, "tools/em_autopilot.py"])
-        walk_verdict: dict[str, Any] = {}
         walk_verdict_path = REPO / "ada_run" / "em_autopilot.json"
-        if walk_verdict_path.exists():
-            try:
-                walk_verdict = json.loads(walk_verdict_path.read_text(encoding="utf-8"))
-            except json.JSONDecodeError:
-                walk_verdict = {}
+        walk_verdict, walk_stale = read_fresh_verdict(walk_verdict_path, walk_t0)
+        # ASCII only: the child prints cp1252 (its em dash arrives here as
+        # U+FFFD), and U+FFFD printed to a cp1252 console kills this runner.
+        walk_says = " | ".join(ln.strip() for ln in out_walk.strip().splitlines()[-3:])[:400]
+        walk_says = walk_says.replace("�", "-").encode("ascii", "replace").decode("ascii")
         gates.append(
             {
                 "id": "F",
@@ -560,7 +587,8 @@ def build_report(
                     # walk map, not an expensive one.
                     "stall_events": int(walk_verdict.get("stall_events", -1)),
                     "frontier_z": int(walk_verdict.get("frontier_z", -1)),
-                    "reason": str(walk_verdict.get("reason", "")),
+                    "reason": walk_stale or str(walk_verdict.get("reason", "")),
+                    "autopilot_says": walk_says or "(no output)",
                 },
             }
         )

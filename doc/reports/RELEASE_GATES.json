@@ -1,11 +1,11 @@
 {
   "measurement": {
-    "measured_at": "2026-09-27T09:16:25+02:00",
+    "measured_at": "2026-09-28T09:31:32+02:00",
     "measured_by": "tools/run_release_gates.py",
-    "head": "9dee68553c3a4a60fb4bebcb4b51ac49458a90bc",
-    "head_subject": "fix(shaders): the halls photograph - effect demos out of the museum's guest pool, the index racks out of the six halls",
-    "tree_dirty": 1939,
-    "tree_untracked": 3598,
+    "head": "05b94a776e3de66337c85e41a59e17fec25941f6",
+    "head_subject": "breath(2026-09-27): Point_Zero captured, 15 stranded gate-M scripts landed",
+    "tree_dirty": 1959,
+    "tree_untracked": 3605,
     "tree_state_detector": "PASS"
   },
   "overall_pass": false,
@@ -19,10 +19,10 @@
     "validate_map_all": 0,
     "audit_lab_chain": 0,
     "validate_museum_templates": 0,
-    "em_autopilot": 1,
+    "em_autopilot": 3,
     "check_map_tokens": 0,
     "check_prose_reachable": 5,
-    "check_artifacts_reachable": 46,
+    "check_artifacts_reachable": 31,
     "check_tools_reachable": 1,
     "check_cell_types": 0
   },
@@ -110,14 +110,15 @@
       "name": "Museum Walkthrough (autopilot)",
       "pass": false,
       "metrics": {
-        "museums": 3,
-        "z_reached": 60.2,
-        "goal_z": 103.0,
-        "walked_s": 31.2,
-        "cells_unlearned": 0,
-        "stall_events": 8,
-        "frontier_z": 60,
-        "reason": "no_route",
+        "museums": -1,
+        "z_reached": -1.0,
+        "goal_z": -1.0,
+        "walked_s": -1.0,
+        "cells_unlearned": -1,
+        "stall_events": -1,
+        "frontier_z": -1,
+        "reason": "contended_builder",
+        "autopilot_says": "autopilot: REFUSED - 1 Godot instance(s) already hold this project (detector=psutil). A second boot either dies on the user:// lock or walks a tree the resident session is still saving into, and its verdict then reads as a fact about the corridor. | pid 41356: C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46 --editor --rendering-driver vulkan",
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
@@ -157,12 +158,12 @@
       "metrics": {
         "detector_selftest": "PASS",
         "edges": 145,
-        "held": 121,
+        "held": 120,
         "near": 3,
-        "lost": 15,
+        "lost": 16,
         "ungrounded": 6,
-        "lost_rooms": "Point_Trace, Point_Line_Grid, Point_Triangle_Context, Primitives_Polythedra, Point_Animatedcube, Primitives_Ignorance, Primitives_Portals, Array_Patterns, Color_Flashlight, Chamber_Color, Vectors_Act1_WhatAVectorIs, FormFinding_Catenary, FormFinding_Equilibrium, CA_AgentsCircuits, SoftBodies_Playground_of_Joy",
-        "tree_state": "tracked-clean 1 | tracked-modified 14  [tracked-modified: Point_Trace, Point_Line_Grid, Point_Triangle_Context, Primitives_Polythedra]"
+        "lost_rooms": "Point_Trace, Point_Line_Grid, Point_Triangle_Context, Primitives_Polythedra, Point_Animatedcube, Primitives_Ignorance, Primitives_Portals, Primitives_Melencolia, Array_Patterns, Color_Flashlight, Chamber_Color, Vectors_Act1_WhatAVectorIs, FormFinding_Catenary, FormFinding_Equilibrium, CA_AgentsCircuits, SoftBodies_Playground_of_Joy",
+        "tree_state": "tracked-clean 1 | tracked-modified 15  [tracked-modified: Point_Trace, Point_Line_Grid, Point_Triangle_Context, Primitives_Polythedra]"
       },
       "enabled": true
     },
@@ -172,9 +173,9 @@
       "pass": false,
       "metrics": {
         "citations": 94,
-        "held": 76,
+        "held": 75,
         "near": 2,
-        "lost": 15,
+        "lost": 16,
         "elsewhere": 1,
         "no_such_work": 0,
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
@@ -210,11 +211,11 @@
         "prose_files": 1469,
         "prose_tracked": 1464,
         "unreachable_from_a_clone": 5,
-        "stranded_words": 3896,
-        "age_reading": "2 touched within 24h (youngest 17.6h), 3 idle longer (oldest 86.3h). The second group is not live work.",
+        "stranded_words": 4046,
+        "age_reading": "2 touched within 24h (youngest 0.3h), 3 idle longer (oldest 84.5h). The second group is not live work.",
         "claimed_in_the_forum": 2,
         "claimed_reading": "2 of 5 claimed in writing by claude-opus-artifacts -- leave those alone. The other 3 are nobody's: no open thread names them.",
-        "claimed_by": "commons/maps/Color_Context_Placed/field_notes.md -> claude-opus-artifacts (260909-onegs, 17.8d), claude-chroma (260917-q1h14, 10d), claude-chroma (260917-13jf7, 9.9d), commons/maps/Color_Context_Placed/final.md -> claude-opus-artifacts (260909-onegs, 17.8d), claude-chroma (260917-q1h14, 10d), claude-chroma (260917-13jf7, 9.9d)",
+        "claimed_by": "commons/maps/Color_Context_Placed/field_notes.md -> claude-opus-artifacts (260909-onegs, 18.8d), claude-chroma (260917-q1h14, 11d), claude-chroma (260917-13jf7, 10.9d), commons/maps/Color_Context_Placed/final.md -> claude-opus-artifacts (260909-onegs, 18.8d), claude-chroma (260917-q1h14, 11d), claude-chroma (260917-13jf7, 10.9d)",
         "unreachable": "commons/maps/Array/technical.md, commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md, commons/maps/Point_Zero/final.md, commons/maps/Point_Zero/intent.md",
         "declared_case_mismatch": "none",
         "tree_state": "untracked 5  [untracked: commons/maps/Array/technical.md, commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md, commons/maps/Point_Zero/final.md]"
@@ -229,15 +230,15 @@
         "detector_selftest": "PASS",
         "artifacts_declared": 2887,
         "files_checked": 6330,
-        "unreachable_from_a_clone": 46,
-        "rooms_affected": 92,
+        "unreachable_from_a_clone": 31,
+        "rooms_affected": 58,
         "absent_from_every_tree": 81,
         "vendored_not_in_repo": 102,
         "ignored_on_purpose": 31,
         "live_under_24h": 0,
-        "stranded": 15,
-        "landable_today": 15,
-        "floor_reading": "31 gitignored on purpose (a rule decides them, not a commit), 0 touched within 24h (somebody's open buffer), 15 stranded (0 of them claimed in the forum). Landable by an agent today: 15.",
+        "stranded": 0,
+        "landable_today": 0,
+        "floor_reading": "31 gitignored on purpose (a rule decides them, not a commit), 0 touched within 24h (somebody's open buffer), 0 stranded (0 of them claimed in the forum). Landable by an agent today: 0.",
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
@@ -248,12 +249,12 @@
       "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "tools_on_disk": 938,
+        "tools_on_disk": 940,
         "tools_tracked": 937,
         "unreachable_from_a_clone": 1,
-        "live_uncommitted": 0,
+        "live_uncommitted": 2,
         "ignored_on_purpose": 0,
-        "stranded": "tools/em_shots.py (182h)",
+        "stranded": "tools/em_shots.py (206h)",
         "tree_state": "untracked 1  [untracked: tools/em_shots.py]"
       },
       "enabled": true
@@ -265,7 +266,7 @@
       "metrics": {
         "detector_selftest": "PASS",
         "maps_scanned": 2808,
-        "cells_scanned": 3756292,
+        "cells_scanned": 3756526,
         "non_string_cells": 0,
         "maps_affected": 0,
         "in_working_tree": 0,
