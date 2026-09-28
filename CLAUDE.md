@@ -111,6 +111,7 @@ Run from repo root:
 | **Verify Sequence** | `python tools/verify_sequence.py <seq_id>` | Full sequence validation |
 | **Workbench** | `python tools/spine_map_workbench.py status` | Sequence contracts, scaffolding |
 | **Release Gates** | `python tools/run_release_gates.py --max-grade-c -1 --gate-toggles doc/reports/RELEASE_GATES_TOGGLES.json` | Launch-quality checks |
+| **Global classes** | `python tools/check_global_classes.py [--name X]` | `Class "X" hides a global script class`: which two scripts declare it, or which class-cache row is stale or mis-cased. Walks the disk as Godot does (dot-dirs and `.gdignore` folders skipped, git ignored), exit = findings |
 
 ### Placement (2026-05-15 — auto-research output)
 | Tool | Command | Purpose |

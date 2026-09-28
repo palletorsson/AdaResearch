@@ -1,4 +1,8 @@
-class_name CartridgeFibonacci
+# CartridgeFibonacciBars, not CartridgeFibonacci: the grid2d substrate has a
+# cartridge_fibonacci.gd of its own under that name, and two scripts declaring one
+# class_name make Godot refuse the second ("hides a global script class") —
+# which broke the export on 2026-09-28. python tools/check_global_classes.py gates it.
+class_name CartridgeFibonacciBars
 extends BarArrayCartridge
 
 ## Fibonacci Sequence — each bar = F(n), growing exponentially.
