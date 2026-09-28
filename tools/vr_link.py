@@ -26,10 +26,34 @@ all: user:// on the Quest is on the Quest. This is the first one that crosses.
     python tools/vr_link.py                      # serve; open localhost:8772
     python tools/vr_link.py --arm                # also arm the headset, then serve
     python tools/vr_link.py --walker=Point_Tests # send a walk into VR and serve
+    python tools/vr_link.py --agent=Point_One    # PLAY the room: path, look, interact
+    python tools/vr_link.py --narrate            # READ each hall's final.md as you enter it
     python tools/vr_link.py --calibrate          # which cell-to-world rule is true?
 
 The browser page at :8772 shows the three views asked for — 3D, top-down, and
 text — and can send the player somewhere by clicking the top-down map.
+
+THE AGENT (2026-09-26, Palle: "can we make that agent look at the artifact, use
+path finding and interact with the artifacts?"). `--walker` replays a placement
+trace; `--agent` plays. tools/vr_agent.py plans a tour over map_pathfinder's
+graph — spawn, each artifact's approach cell by shortest path, the teleporter —
+and drives the ghost leg by leg: walk (the game converts the cells with its own
+grid and answers `walker_done`), `look` (the ghost turns, a ray from its eye
+says whether the work is in view), `interact` (the game climbs DesktopPlayer's
+ladder and says which rung it took). The report lands in ada_run/. The same
+tour starts from the browser page ("agent: play the room") or from POST /agent,
+and a separate process can run it against this server with
+`python tools/vr_agent.py <Map>`. The teleporter is never taken unless --exit
+is given: it would move the person in the headset.
+
+THE NARRATOR (2026-09-27, Palle: "trigger the text of the final.md as text to
+speech or mp3 audio file with adb on the desktop when we move around in VR").
+`--narrate` hands every pose to tools/vr_narrator.py: when the pose names a
+new hall (the museum's {pearl, map, index}, or the map outside it) and holds
+it for a moment, the PC reads that map's final.md aloud — a pre-rendered
+ada_run/voice/<Map>/*.mp3 if there is one, else the OS voice — body first,
+then the notes as a second chapter. A hall change stops the reading and starts
+the next. The browser page's "narrate halls" toggle does the same at runtime.
 """
 
 from __future__ import annotations
@@ -56,6 +80,8 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
         pass
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "tools") not in sys.path:
+    sys.path.insert(0, str(ROOT / "tools"))
 GAME_PORT = 8771
 WEB_PORT = 8772
 PKG = "com.example.adaresearchzeroone"
@@ -114,6 +140,19 @@ class Link:
             except queue.Full:
                 pass
 
+    ## A subscriber is a browser tab or an agent: the same fan-out. The agent
+    ## subscribes for the length of one tour and unsubscribes after.
+    def subscribe(self, maxsize: int = 2000) -> queue.Queue:
+        q: queue.Queue = queue.Queue(maxsize=maxsize)
+        with self.lock:
+            self.subs.append(q)
+        return q
+
+    def unsubscribe(self, q: queue.Queue) -> None:
+        with self.lock:
+            if q in self.subs:
+                self.subs.remove(q)
+
     # fan out one event to every open browser
     def publish(self, ev: dict) -> None:
         with self.lock:
@@ -142,6 +181,11 @@ class Link:
                 self.rate = (len(self._stamps) - 1) / span if span > 0 else 0.0
         self.publish(d)
         self.to_viewers(d)
+        if NARRATOR is not None:
+            try:
+                NARRATOR.on_pose(d)
+            except Exception as e:  # a reading that fails must not stop the poses
+                self.note(f"narrator: {e!r}")
 
     def send(self, cmd: dict) -> None:
         self.out.put(cmd)
@@ -390,13 +434,19 @@ def headset_doctor() -> int:
           "  (debuggable)" if debuggable else "  (NOT debuggable — --arm will fail)"))
 
     # Is the build older than the code it would need? git first, mtime as a
-    # fallback so this still answers in a dirty tree.
+    # fallback so this still answers in a dirty tree. TWO dates matter now:
+    # the link's birth (the pose stream — all the narrator needs) and the
+    # latest change to vr_link.gd (scan/look/interact — what the agent needs).
     src = ROOT / "commons" / "bridge" / "vr_link.gd"
     code_when = ""
+    born_when = ""
     try:
         p = subprocess.run(["git", "log", "-1", "--format=%ai", "--", str(src)],
                            cwd=str(ROOT), capture_output=True, text=True, timeout=10)
         code_when = p.stdout.strip()
+        p = subprocess.run(["git", "log", "--diff-filter=A", "--format=%ai", "--", str(src)],
+                           cwd=str(ROOT), capture_output=True, text=True, timeout=10)
+        born_when = p.stdout.strip().splitlines()[-1] if p.stdout.strip() else ""
     except Exception:
         pass
     if not code_when and src.exists():
@@ -404,14 +454,21 @@ def headset_doctor() -> int:
                                   time.localtime(src.stat().st_mtime))
     if installed and code_when:
         stale = installed[:19] < code_when[:19]
-        print("  vr_link.gd     %s" % code_when[:19])
-        if stale:
+        has_link = (installed[:19] >= born_when[:19]) if born_when else not stale
+        print("  vr_link.gd     latest %s%s" % (code_when[:19],
+              ("  (link since %s)" % born_when[:10]) if born_when else ""))
+        if not has_link:
             ok = False
-            print("  BUILD          STALE — the headset is running code from before VR Link.")
+            print("  BUILD          STALE — the headset is running code from before VR Link:")
+            print("                 no pose stream, so neither the narrator nor the agent.")
             print("                 push_map_to_quest.ps1 ships map LAYOUT only; a new")
             print("                 autoload needs a full export + install.")
+        elif stale:
+            print("  BUILD          has the link (poses: --narrate works) but predates the")
+            print("                 latest vr_link.gd: no scan/look/interact, so --agent")
+            print("                 cannot see or touch. Export + install for that.")
         else:
-            print("  BUILD          newer than vr_link.gd — the autoload should be present")
+            print("  BUILD          newer than vr_link.gd — poses, scan, look, interact all present")
 
     rc, out = adb("shell", f"run-as {PKG} ls files/vr_link.on", quiet=True)
     armed = rc == 0 and "vr_link.on" in out and "No such file" not in out
@@ -536,6 +593,33 @@ def walker_path(map_name: str, seed: int = 0) -> tuple[list, list]:
 # ─────────────────────────────────────────────────────────────────────────────
 
 VIEW = ROOT / "tools" / "vr_link_view.html"
+AGENT_LOCK = threading.Lock()
+AGENT_STATE: dict = {"running": False, "map": ""}
+## The hall reader, built on --narrate or the first POST /narrate {on:true}.
+NARRATOR = None
+NARRATOR_OPTS: dict = {}
+
+
+def ensure_narrator(**opts):
+    """One narrator for the server's life. Options given the first time (or on
+    the command line) stick; a later toggle only turns it on or off."""
+    global NARRATOR
+    import vr_narrator  # noqa: E402
+    if NARRATOR is None:
+        o = dict(NARRATOR_OPTS)
+        o.update({k: v for k, v in opts.items() if v is not None})
+        log = lambda m: LINK.note("narrator: " + m)  # noqa: E731
+        speaker = vr_narrator.make_speaker(int(o.get("rate", 0)), str(o.get("voice", "")),
+                                           mute=bool(o.get("mute", False)), log=log)
+        NARRATOR = vr_narrator.Narrator(
+            speaker, voice_dir=o.get("voice_dir"), notes=bool(o.get("notes", True)),
+            settle=float(o.get("settle", 1.2)), repeat=bool(o.get("repeat", False)),
+            read_code=bool(o.get("read_code", False)), log=log,
+            enabled=bool(o.get("enabled", True)), preview=int(o.get("preview", 0) or 0))
+        LINK.note("narrator ready (%s voice; audio from %s%s)" % (
+            speaker.name, NARRATOR.voice_dir,
+            "; preview %d words" % NARRATOR.preview if NARRATOR.preview else ""))
+    return NARRATOR
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -577,6 +661,11 @@ class Handler(BaseHTTPRequestHandler):
                             "log": list(LINK.log)[-60:]})
             return
 
+        if u.path == "/narrate":
+            self._json(NARRATOR.state() if NARRATOR is not None else {"on": False, "current": None,
+                                                                       "heard": []})
+            return
+
         if u.path == "/map":
             name = (q.get("name") or [""])[0]
             md = load_map(name)
@@ -615,6 +704,21 @@ class Handler(BaseHTTPRequestHandler):
             self._json({"ok": True})
             return
 
+        if u.path == "/agent":
+            self.agent(body)
+            return
+
+        if u.path == "/narrate":
+            on = bool(body.get("on", True))
+            n = ensure_narrator(voice_dir=body.get("voice_dir"), notes=body.get("notes"),
+                                repeat=body.get("repeat"), rate=body.get("rate"), voice=body.get("voice"))
+            n.enabled = on
+            if not on:
+                n.stop()
+            LINK.note("narrator %s" % ("on — a new hall will be read" if on else "off"))
+            self._json(n.state())
+            return
+
         if u.path == "/walker":
             name = body.get("map") or (LINK.pose.get("map") if LINK.pose else "")
             try:
@@ -630,6 +734,62 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         self._json({"error": "unknown endpoint"}, 404)
+
+    ## POST /agent {map, dry_run, interact, exit, speed, dwell, limit}
+    ## Plans on the PC, then plays in a thread over a QueueWire on LINK. One
+    ## tour at a time: a second while one runs is refused, not queued — two
+    ## agents driving one ghost is the stash-swallows-284-files shape.
+    def agent(self, body: dict) -> None:
+        import vr_agent  # noqa: E402  (tools/ is on sys.path — see walker_path)
+        name = body.get("map") or (LINK.pose.get("map") if LINK.pose else "")
+        if not name:
+            self._json({"error": "no map: none given and the game has not sent a pose"}, 400)
+            return
+        limit = body.get("limit")
+        tour, _g = vr_agent.plan_map(name, int(limit) if limit else None)
+        if tour is None:
+            if body.get("dry_run"):
+                self._json({"error": f"no map_data.json for '{name}' (a hall? the live "
+                            "agent falls back to a scan)"}, 400)
+                return
+        if body.get("dry_run"):
+            self._json({"ok": True, "plan": vr_agent.tour_dict(tour),
+                        "decisions": vr_agent.tour_decisions(tour),
+                        "steps": sum(l.cost for l in tour.legs)})
+            return
+        if not LINK.connected:
+            self._json({"error": "no game attached"}, 409)
+            return
+        with AGENT_LOCK:
+            if AGENT_STATE.get("running"):
+                self._json({"error": "an agent tour is already running on '%s'"
+                            % AGENT_STATE.get("map")}, 409)
+                return
+            AGENT_STATE["running"] = True
+            AGENT_STATE["map"] = name
+
+        def go() -> None:
+            wire = vr_agent.QueueWire(LINK)
+            try:
+                vr_agent.run(name, wire,
+                             interact=bool(body.get("interact", True)),
+                             exit_=bool(body.get("exit", False)),
+                             speed=float(body.get("speed", 1.4)),
+                             dwell=float(body.get("dwell", 2.0)),
+                             limit=int(limit) if limit else None)
+            except Exception as e:  # a bug in the agent must not kill the server
+                LINK.note(f"agent: crashed: {e!r}")
+            finally:
+                wire.close()
+                with AGENT_LOCK:
+                    AGENT_STATE["running"] = False
+
+        threading.Thread(target=go, daemon=True).start()
+        LINK.note(f"agent: playing '{name}' — {len(tour.legs) if tour else 0} legs planned")
+        self._json({"ok": True, "legs": len(tour.legs) if tour else 0,
+                    "decisions": vr_agent.tour_decisions(tour) if tour else [],
+                    "steps": sum(l.cost for l in tour.legs) if tour else 0,
+                    "plan": vr_agent.tour_dict(tour) if tour else None})
 
     def sse(self) -> None:
         """Server-sent events. One-way push is all the views need, and the reply
@@ -724,6 +884,26 @@ def main() -> int:
                     help="why is the headset not showing up? checks build age, arming, tunnel")
     ap.add_argument("--walker", metavar="MAP",
                     help="send the humanoid_walker's path into VR on startup")
+    ap.add_argument("--agent", metavar="MAP", nargs="?", const="",
+                    help="play the room: path finding, look, interact (tools/vr_agent.py); "
+                         "no MAP = whatever map the game is in")
+    ap.add_argument("--dry-run", action="store_true", help="with --agent: print the plan, no game")
+    ap.add_argument("--no-interact", action="store_true", help="with --agent: look, do not touch")
+    ap.add_argument("--exit", action="store_true",
+                    help="with --agent: take the teleporter at the end (moves the person)")
+    ap.add_argument("--limit", type=int, default=None, help="with --agent: first N artifacts")
+    ap.add_argument("--dwell", type=float, default=2.0, help="with --agent: seconds per work")
+    ap.add_argument("--narrate", action="store_true",
+                    help="read each hall's final.md aloud on the PC as the player enters it (tools/vr_narrator.py)")
+    ap.add_argument("--voice-dir", default=None, help="with --narrate: pre-rendered audio (ada_run/voice)")
+    ap.add_argument("--voice", default="", help="with --narrate: the OS voice to use (vr_narrator.py --voices)")
+    ap.add_argument("--rate", type=int, default=0, help="with --narrate: speech rate -10..10")
+    ap.add_argument("--no-notes", action="store_true", help="with --narrate: skip the notes chapter")
+    ap.add_argument("--repeat", action="store_true", help="with --narrate: read a hall again on re-entry")
+    ap.add_argument("--preview", type=int, default=0, metavar="N",
+                    help="with --narrate: only the first N words of each chapter (a test walk)")
+    ap.add_argument("--mute", action="store_true",
+                    help="with --narrate: log which hall would be read, say nothing (proves the trigger)")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--speed", type=float, default=1.4, help="walker m/s")
     ap.add_argument("--calibrate", action="store_true",
@@ -733,6 +913,18 @@ def main() -> int:
 
     if args.headset:
         return headset_doctor()
+
+    if args.agent is not None and args.dry_run:
+        import vr_agent  # noqa: E402
+        if not args.agent:
+            print("--dry-run needs a map name: --agent=<Map>")
+            return 2
+        tour, g = vr_agent.plan_map(args.agent, args.limit)
+        if tour is None:
+            print(f"no map_data.json for '{args.agent}'")
+            return 1
+        print(vr_agent.plan_text(tour))
+        return 0
 
     if args.disarm:
         disarm_headset()
@@ -749,6 +941,12 @@ def main() -> int:
         print("  Then: python tools/vr_link.py\n")
         return 0 if ok_arm else 1
 
+    NARRATOR_OPTS.update({"voice_dir": args.voice_dir, "voice": args.voice, "rate": args.rate,
+                          "notes": not args.no_notes, "repeat": args.repeat,
+                          "preview": args.preview, "mute": args.mute})
+    if args.narrate:
+        ensure_narrator()
+
     threading.Thread(target=game_server, args=(LINK,), daemon=True).start()
 
     httpd = ThreadingHTTPServer(("127.0.0.1", WEB_PORT), Handler)
@@ -758,6 +956,23 @@ def main() -> int:
 
     if args.calibrate:
         return calibrate()
+
+    if args.agent is not None:
+        import vr_agent  # noqa: E402
+        print("[vr-link] waiting for the game before starting the agent...")
+        t0 = time.time()
+        while time.time() - t0 < 120 and not LINK.connected:
+            time.sleep(0.25)
+        if not LINK.connected:
+            print("[vr-link] no game in 120 s — start the game with --vr-link (desktop) or "
+                  "armed (headset), then run again")
+            return 1
+        wire = vr_agent.QueueWire(LINK)
+        try:
+            vr_agent.run(args.agent, wire, interact=not args.no_interact, exit_=args.exit,
+                         speed=args.speed, dwell=args.dwell, limit=args.limit)
+        finally:
+            wire.close()
 
     if args.walker:
         print(f"[vr-link] waiting for the game before sending the walker...")

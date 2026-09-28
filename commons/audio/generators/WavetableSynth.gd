@@ -1,5 +1,9 @@
 extends Node
-class_name WavetableSynth
+# WavetableSynthNode, not WavetableSynth: that name belongs to the original in
+# algorithms/proceduralaudio/space_dystopia/, which SciFiSynth.gd constructs by class.
+# Two declarations of one class_name make Godot refuse the second ("hides a global
+# script class"). python tools/check_global_classes.py gates it.
+class_name WavetableSynthNode
 
 # Wavetable Synth Node Wrapper
 # Manages a WavetableGenerator instance and handles Note On/Off logic.
