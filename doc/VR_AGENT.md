@@ -92,6 +92,16 @@ Game → PC, by `k`: `pose` (20 Hz), `log`, `pong`, `scene`, `seen`, `acted`, `g
   takes the teleporter. Run it with the headless line in its header. *It was written in a
   container without Godot and has not yet been run.*
 
+## On the Quest
+
+The bridge's new commands live in the APK, so the agent needs a build made after
+2026-09-26; `python tools/vr_link.py --headset` says whether the installed one has them
+("poses, scan, look, interact all present"). Export with the `adaresearchonexy` preset,
+`adb install -r`, `python tools/vr_link.py --arm`, restart the app, then
+`python tools/vr_link.py --agent` with no map name: it plays the map the headset is in, and
+the ghost walks that world in front of you. In a museum hall there is no map to path on, so
+it walks the scan in z order and says so.
+
 ## Known edges
 
 - **The museum.** A hall has no `map_data.json` the engine will vouch for, so there is no

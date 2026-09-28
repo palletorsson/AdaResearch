@@ -434,13 +434,19 @@ def headset_doctor() -> int:
           "  (debuggable)" if debuggable else "  (NOT debuggable — --arm will fail)"))
 
     # Is the build older than the code it would need? git first, mtime as a
-    # fallback so this still answers in a dirty tree.
+    # fallback so this still answers in a dirty tree. TWO dates matter now:
+    # the link's birth (the pose stream — all the narrator needs) and the
+    # latest change to vr_link.gd (scan/look/interact — what the agent needs).
     src = ROOT / "commons" / "bridge" / "vr_link.gd"
     code_when = ""
+    born_when = ""
     try:
         p = subprocess.run(["git", "log", "-1", "--format=%ai", "--", str(src)],
                            cwd=str(ROOT), capture_output=True, text=True, timeout=10)
         code_when = p.stdout.strip()
+        p = subprocess.run(["git", "log", "--diff-filter=A", "--format=%ai", "--", str(src)],
+                           cwd=str(ROOT), capture_output=True, text=True, timeout=10)
+        born_when = p.stdout.strip().splitlines()[-1] if p.stdout.strip() else ""
     except Exception:
         pass
     if not code_when and src.exists():
@@ -448,14 +454,21 @@ def headset_doctor() -> int:
                                   time.localtime(src.stat().st_mtime))
     if installed and code_when:
         stale = installed[:19] < code_when[:19]
-        print("  vr_link.gd     %s" % code_when[:19])
-        if stale:
+        has_link = (installed[:19] >= born_when[:19]) if born_when else not stale
+        print("  vr_link.gd     latest %s%s" % (code_when[:19],
+              ("  (link since %s)" % born_when[:10]) if born_when else ""))
+        if not has_link:
             ok = False
-            print("  BUILD          STALE — the headset is running code from before VR Link.")
+            print("  BUILD          STALE — the headset is running code from before VR Link:")
+            print("                 no pose stream, so neither the narrator nor the agent.")
             print("                 push_map_to_quest.ps1 ships map LAYOUT only; a new")
             print("                 autoload needs a full export + install.")
+        elif stale:
+            print("  BUILD          has the link (poses: --narrate works) but predates the")
+            print("                 latest vr_link.gd: no scan/look/interact, so --agent")
+            print("                 cannot see or touch. Export + install for that.")
         else:
-            print("  BUILD          newer than vr_link.gd — the autoload should be present")
+            print("  BUILD          newer than vr_link.gd — poses, scan, look, interact all present")
 
     rc, out = adb("shell", f"run-as {PKG} ls files/vr_link.on", quiet=True)
     armed = rc == 0 and "vr_link.on" in out and "No such file" not in out
@@ -595,13 +608,17 @@ def ensure_narrator(**opts):
     if NARRATOR is None:
         o = dict(NARRATOR_OPTS)
         o.update({k: v for k, v in opts.items() if v is not None})
-        speaker = vr_narrator.make_speaker(int(o.get("rate", 0)), str(o.get("voice", "")))
+        log = lambda m: LINK.note("narrator: " + m)  # noqa: E731
+        speaker = vr_narrator.make_speaker(int(o.get("rate", 0)), str(o.get("voice", "")),
+                                           mute=bool(o.get("mute", False)), log=log)
         NARRATOR = vr_narrator.Narrator(
             speaker, voice_dir=o.get("voice_dir"), notes=bool(o.get("notes", True)),
             settle=float(o.get("settle", 1.2)), repeat=bool(o.get("repeat", False)),
-            read_code=bool(o.get("read_code", False)), log=lambda m: LINK.note("narrator: " + m),
-            enabled=bool(o.get("enabled", True)))
-        LINK.note("narrator ready (%s voice; audio from %s)" % (speaker.name, NARRATOR.voice_dir))
+            read_code=bool(o.get("read_code", False)), log=log,
+            enabled=bool(o.get("enabled", True)), preview=int(o.get("preview", 0) or 0))
+        LINK.note("narrator ready (%s voice; audio from %s%s)" % (
+            speaker.name, NARRATOR.voice_dir,
+            "; preview %d words" % NARRATOR.preview if NARRATOR.preview else ""))
     return NARRATOR
 
 
@@ -883,6 +900,10 @@ def main() -> int:
     ap.add_argument("--rate", type=int, default=0, help="with --narrate: speech rate -10..10")
     ap.add_argument("--no-notes", action="store_true", help="with --narrate: skip the notes chapter")
     ap.add_argument("--repeat", action="store_true", help="with --narrate: read a hall again on re-entry")
+    ap.add_argument("--preview", type=int, default=0, metavar="N",
+                    help="with --narrate: only the first N words of each chapter (a test walk)")
+    ap.add_argument("--mute", action="store_true",
+                    help="with --narrate: log which hall would be read, say nothing (proves the trigger)")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--speed", type=float, default=1.4, help="walker m/s")
     ap.add_argument("--calibrate", action="store_true",
@@ -921,7 +942,8 @@ def main() -> int:
         return 0 if ok_arm else 1
 
     NARRATOR_OPTS.update({"voice_dir": args.voice_dir, "voice": args.voice, "rate": args.rate,
-                          "notes": not args.no_notes, "repeat": args.repeat})
+                          "notes": not args.no_notes, "repeat": args.repeat,
+                          "preview": args.preview, "mute": args.mute})
     if args.narrate:
         ensure_narrator()
 

@@ -188,6 +188,24 @@ def test_narrator_museum_and_audio() -> None:
     check(st["on"] and "Point_One" in st["heard"] and st["speaker"] == "null", "state() reports: %s" % st)
 
 
+def test_preview_and_mute() -> None:
+    print("narrator: --preview and --mute")
+    sp = vn.NullSpeaker()
+    n = vn.Narrator(sp, voice_dir=Path(tempfile.mkdtemp()), settle=0.2, gap=0.0, preview=40,
+                    log=lambda m: None)
+    feed(n, Clock.pose("Point_One"), 0.35); n.wait(5)
+    check(len(sp.spoken) == 2 and all(len(t.split()) <= 41 for t in sp.spoken),
+          "preview speaks the first 40 words of each chapter (%s)" % [len(t.split()) for t in sp.spoken])
+    check(sp.spoken[0].startswith("Point One.") and sp.spoken[0].endswith("…"), "…and marks the cut")
+    logs: list[str] = []
+    m = vn.make_speaker(mute=True, log=logs.append)
+    check(isinstance(m, vn.MuteSpeaker) and m.name == "mute", "make_speaker(mute=True) is the mute speaker")
+    n2 = vn.Narrator(m, voice_dir=Path(tempfile.mkdtemp()), settle=0.2, gap=0.0, log=logs.append)
+    feed(n2, Clock.pose("Trans_Pre"), 0.35); n2.wait(5)
+    check(any("would speak" in l for l in logs) and any("finished Trans_Pre" in l for l in logs),
+          "mute logs what it would have said and finishes at once")
+
+
 def test_render() -> None:
     print("render: files and a manifest")
     out = Path(tempfile.mkdtemp())
@@ -209,6 +227,7 @@ def main() -> int:
     test_narrator_settle_and_switch()
     test_narrator_interrupt()
     test_narrator_museum_and_audio()
+    test_preview_and_mute()
     test_render()
     print()
     if FAILS:

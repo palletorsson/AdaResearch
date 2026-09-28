@@ -65,6 +65,35 @@ The game side needed nothing: the pose already carried the hall. The in-game `tt
 (`commons/scenes/mapobjects/tts_speaker.gd`, `DisplayServer.tts_speak`) is a separate,
 headset-side path and is untouched.
 
+## Testing on the Quest
+
+The narrator needs only the pose, and every build since the link was born (2026-08-31)
+sends it once armed — so the narrator can be tested on the APK already installed. The agent's
+`scan`, `look` and `interact` are new bridge commands and need the current build.
+
+```
+python tools/vr_link.py --headset          # attached? armed? which link features does the build carry?
+python tools/vr_link.py --arm              # once per install; then restart the app on the headset
+python tools/vr_link.py --narrate --mute   # 1. the trigger: the log names each hall as you enter it
+python tools/vr_link.py --narrate --preview 40   # 2. the voice, forty words per chapter
+python tools/vr_link.py --narrate          # 3. the whole essay and its notes
+```
+
+Watch `localhost:8772`: "reading Point_One [point #3]: Point One (1752 words), Point One —
+notes (240 words)" appears when the headset has stood in the hall for 1.2 s, and "left" when
+you walk on. The PC's speakers carry the voice; the headset hears nothing of it.
+
+For the agent on the Quest: export and install the current build (the preset is
+`adaresearchonexy`), `--arm` again, then `python tools/vr_link.py --agent` with no map name —
+it plays whatever the headset is standing in. The ghost walks in the headset's own world, so
+you can watch it from inside.
+
+```
+godot --headless --path . --export-debug "adaresearchonexy" <out.apk>
+adb install -r <out.apk>
+python tools/vr_link.py --arm
+```
+
 ## Not done here
 
 The Windows, macOS and Linux speakers were written in a container with none of the three

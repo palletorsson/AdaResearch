@@ -37,6 +37,15 @@ vestibules, where the pose names no pearl) the current reading carries on.
   python tools/vr_narrator.py --render Point_One    # WAV (+ mp3 if ffmpeg) into ada_run/voice/
   python tools/vr_narrator.py --render --seq primitives
   python tools/vr_narrator.py --voices              # which voices this PC has
+  python tools/vr_narrator.py --say Point_One --preview 40   # the first 40 words of each chapter
+  python tools/vr_link.py --narrate --mute          # log which hall would be read, say nothing
+
+TESTING ON THE QUEST. The narrator needs only the pose, which every build since
+the link (2026-08-31) sends once armed — no new APK for this. --mute proves the
+trigger (the browser log names each hall as you enter it) before the voice is
+turned on; --preview keeps a test walk from committing you to twelve minutes of
+Point_One per hall. `python tools/vr_link.py --headset` says whether the
+installed build is armed and which of the link's features it carries.
 
 The browser page (localhost:8772) has a "narrate halls" toggle that does the
 same without restarting the server.
@@ -499,7 +508,27 @@ class NullSpeaker(Speaker):
         return True
 
 
-def make_speaker(rate: int = 0, voice: str = "") -> Speaker:
+class MuteSpeaker(NullSpeaker):
+    """--mute: the trigger without the voice. Each chapter is logged as it
+    would have been spoken; the fake process finishes at once."""
+    name = "mute"
+
+    def __init__(self, log=None) -> None:
+        super().__init__(hold=False)
+        self.log = log or (lambda m: print("[narrator] " + m))
+
+    def speak(self, text: str):
+        self.log("  (mute) would speak %d words: %s…" % (len(text.split()), " ".join(text.split()[:12])))
+        return super().speak(text)
+
+    def play(self, path: Path):
+        self.log("  (mute) would play %s" % Path(path).name)
+        return super().play(path)
+
+
+def make_speaker(rate: int = 0, voice: str = "", mute: bool = False, log=None) -> Speaker:
+    if mute:
+        return MuteSpeaker(log)
     s = platform.system()
     if s == "Windows":
         return WindowsSpeaker(rate, voice)
@@ -542,8 +571,10 @@ def key_label(key: tuple) -> str:
 class Narrator:
     def __init__(self, speaker: Speaker, voice_dir: Optional[Path] = None, notes: bool = True,
                  settle: float = 1.2, repeat: bool = False, read_code: bool = False,
-                 log=None, enabled: bool = True, gap: float = 0.8) -> None:
+                 log=None, enabled: bool = True, gap: float = 0.8, preview: int = 0) -> None:
         self.speaker = speaker
+        #: > 0: only the first N words of each chapter are spoken — a test walk
+        self.preview = int(preview or 0)
         self.voice_dir = Path(voice_dir) if voice_dir else VOICE_DIR
         self.notes = notes
         self.settle = settle
@@ -600,7 +631,7 @@ class Narrator:
         if not playlist:
             self.log("%s — no final.md and no audio to read" % key_label(key))
             return
-        self.log("reading %s: %s" % (key_label(key), ", ".join(
+        self.log("reading %s%s: %s" % (key_label(key), " (preview)" if self.preview else "", ", ".join(
             "%s (%d words)" % (it["title"], it["words"]) if it["kind"] != "file" else Path(it["path"]).name
             for it in playlist)))
         t = threading.Thread(target=self._run, args=(gen, key, playlist), daemon=True)
@@ -611,8 +642,14 @@ class Narrator:
         files = find_audio(map_name, self.voice_dir)
         if files:
             return [{"kind": "file", "path": str(p), "title": p.stem, "words": 0} for p in files]
-        return [{"kind": ch.kind, "text": ch.text, "title": ch.title, "words": ch.words}
-                for ch in chapters_for(map_name, notes=self.notes, read_code=self.read_code)]
+        out = []
+        for ch in chapters_for(map_name, notes=self.notes, read_code=self.read_code):
+            text, words = ch.text, ch.words
+            if self.preview > 0 and words > self.preview:
+                text = " ".join(text.split()[:self.preview]) + " …"
+                words = self.preview
+            out.append({"kind": ch.kind, "text": text, "title": ch.title, "words": words})
+        return out
 
     def _run(self, gen: int, key: tuple, playlist: list[dict]) -> None:
         finished = True
@@ -769,6 +806,9 @@ def main() -> int:
     ap.add_argument("--repeat", action="store_true", help="read a hall again on re-entry")
     ap.add_argument("--settle", type=float, default=1.2)
     ap.add_argument("--no-mp3", action="store_true", help="with --render: WAV only")
+    ap.add_argument("--preview", type=int, default=0, metavar="N",
+                    help="speak only the first N words of each chapter (a test walk)")
+    ap.add_argument("--mute", action="store_true", help="log what would be read; say nothing")
     ap.add_argument("--port", type=int, default=WEB_PORT)
     args = ap.parse_args()
 
@@ -783,7 +823,7 @@ def main() -> int:
             print()
         return 0
 
-    speaker = make_speaker(args.rate, args.voice)
+    speaker = make_speaker(args.rate, args.voice, mute=args.mute)
     if args.voices:
         for v in speaker.voices():
             print(v)
@@ -806,7 +846,9 @@ def main() -> int:
         return 0
 
     narrator = Narrator(speaker, voice_dir=args.voice_dir, notes=not args.no_notes, settle=args.settle,
-                        repeat=args.repeat, read_code=args.read_code)
+                        repeat=args.repeat, read_code=args.read_code, preview=args.preview)
+    if args.mute:
+        speaker.log = narrator.log
     if args.say:
         narrator.begin(("map", args.say))
         try:
