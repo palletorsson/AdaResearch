@@ -160,6 +160,58 @@ def adjacent(a, b) -> bool:
     return abs(a[0] - b[0]) + abs(a[1] - b[1]) == 1
 
 
+def test_reverse_tick() -> None:
+    """The tunnel keeper (vr_link.reverse_tick): a USB session that reset takes the
+    adb reverse rule with it, and the server must put it back, but only when no
+    game is connected and only when the rule is really gone (2026-09-28)."""
+    import vr_link
+    calls: list = []
+    state = {"device": True, "listed": True, "set_rc": 0}
+
+    def fake_adb(*args, quiet=False):
+        calls.append(args)
+        if args[:2] == ("reverse", "--list"):
+            return 0, ("UsbFfs tcp:%d tcp:%d" % (vr_link.GAME_PORT, vr_link.GAME_PORT)) if state["listed"] else ""
+        if args[:1] == ("reverse",):
+            return state["set_rc"], ""
+        return 0, ""
+
+    class FakeLink:
+        def __init__(self):
+            self.connected = False
+            self.notes: list = []
+
+        def note(self, msg):
+            self.notes.append(msg)
+
+    real_adb, real_dev = vr_link.adb, vr_link.device_present
+    vr_link.adb = fake_adb
+    vr_link.device_present = lambda: state["device"]
+    try:
+        link = FakeLink()
+        link.connected = True
+        check(vr_link.reverse_tick(link) == "connected" and not calls,
+              "reverse_tick: a connected game is left alone, no adb call")
+        link.connected = False
+        state["device"] = False
+        check(vr_link.reverse_tick(link) == "no-device", "reverse_tick: no headset attached, nothing to do")
+        state["device"] = True
+        calls.clear()
+        check(vr_link.reverse_tick(link) == "present" and len(calls) == 1 and not link.notes,
+              "reverse_tick: the rule is there, it only looks, and says nothing")
+        state["listed"] = False
+        calls.clear()
+        r = vr_link.reverse_tick(link)
+        check(r == "reset" and ("reverse", "tcp:%d" % vr_link.GAME_PORT, "tcp:%d" % vr_link.GAME_PORT) in calls,
+              "reverse_tick: the rule is gone, it is set again")
+        check(len(link.notes) == 1 and "set again" in link.notes[0], "reverse_tick: one line on the page when it acts")
+        state["set_rc"] = 1
+        check(vr_link.reverse_tick(link) == "failed" and len(link.notes) == 1,
+              "reverse_tick: a refused adb reverse is reported as failed, not as reset")
+    finally:
+        vr_link.adb, vr_link.device_present = real_adb, real_dev
+
+
 def test_plan_is_a_walk() -> None:
     print("plan: Point_One")
     tour, g = va.plan_map("Point_One")
@@ -441,6 +493,7 @@ def main() -> int:
     test_walled_off_is_reported()
     test_plan_from_scene()
     test_describe()
+    test_reverse_tick()
     test_play_in_process()
     test_play_aborts_without_scene()
     test_play_over_sockets()

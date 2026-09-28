@@ -371,6 +371,38 @@ def setup_reverse() -> bool:
     return False
 
 
+def keep_reverse(link: "Link", every_s: float = 10.0) -> None:
+    """THE TUNNEL DOES NOT SURVIVE A SLEEP (2026-09-28, the first headset test of
+    the narrator). adb reverse rules belong to the USB session, and a Quest that
+    sleeps, or an `adb install -r`, ends that session: twice in one afternoon the
+    rule was simply gone, the headset dialled 127.0.0.1:8771 into nothing, and
+    the page sat at "waiting for the game" with the app running. It was set once,
+    at startup, and nothing ever set it again.
+
+    So while no game is connected, look every `every_s` seconds and put the rule
+    back if it is missing. Quiet when all is well; one line on the page when it
+    had to act. A connected game is left alone: the rule is plainly there."""
+    while True:
+        time.sleep(every_s)
+        reverse_tick(link)
+
+
+def reverse_tick(link: "Link") -> str:
+    """One look at the tunnel (see keep_reverse). Returns what it found or did:
+    connected · no-device · present · reset · failed."""
+    if link.connected:
+        return "connected"
+    if not device_present():
+        return "no-device"
+    rc, out = adb("reverse", "--list", quiet=True)
+    if rc == 0 and f"tcp:{GAME_PORT}" in out:
+        return "present"
+    if adb("reverse", f"tcp:{GAME_PORT}", f"tcp:{GAME_PORT}", quiet=True)[0] == 0:
+        link.note(f"adb reverse tcp:{GAME_PORT} set again — the headset's USB session had reset")
+        return "reset"
+    return "failed"
+
+
 def arm_headset() -> bool:
     """Drop user://vr_link.on into the app's private dir so the link arms.
 
@@ -948,6 +980,8 @@ def main() -> int:
         ensure_narrator()
 
     threading.Thread(target=game_server, args=(LINK,), daemon=True).start()
+    if not args.no_adb:
+        threading.Thread(target=keep_reverse, args=(LINK,), daemon=True).start()
 
     httpd = ThreadingHTTPServer(("127.0.0.1", WEB_PORT), Handler)
     httpd.daemon_threads = True
