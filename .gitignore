@@ -447,3 +447,6 @@ doc/reports/**/*.webp
 doc/reports/**/*.gif
 doc/reports/**/*.png.import
 doc/reports/**/*.jpg.import
+
+# Local Claude checkouts are worktrees, not distributable submodules.
+/.claude/worktrees/
