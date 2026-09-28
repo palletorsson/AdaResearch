@@ -41,6 +41,17 @@ Exit code = number of findings, so it gates.
   python tools/check_global_classes.py --json     # for tools
   python tools/check_global_classes.py --name SciFiLoFiSoundscape   # one name
   python tools/check_global_classes.py --fix      # .gdignore every stray snapshot, then rescan in Godot
+  python tools/check_global_classes.py --fix --purge-cache   # …and drop Godot's class + filesystem
+                                                  # caches (editor CLOSED), so the next start
+                                                  # cannot inherit the old registration
+
+A .gdignore added to a folder the editor has already catalogued is not always
+honoured by the change-scan on the next start: the catalogued files stay, the
+class stays registered from the ignored path, and the error survives a
+"Reload Current Project" (2026-09-28, the SciFiLoFiSoundscape snapshot did).
+--purge-cache deletes .godot/global_script_class_cache.cfg and the
+.godot/editor/filesystem_cache* files — nothing else — so Godot rebuilds both
+from the disk as it is now. It is a cache; the import cache is untouched.
 """
 from __future__ import annotations
 
@@ -54,6 +65,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / ".godot" / "global_script_class_cache.cfg"
+FS_CACHE_DIR = ROOT / ".godot" / "editor"
 CLASS_RE = re.compile(r"^\s*class_name\s+([A-Za-z_][A-Za-z0-9_]*)", re.M)
 REF_RE = re.compile(r'res://[^"\'\s()]+?\.(?:gd|tscn|tres|gdshader|shader)\b')
 REF_EXT = (".gd", ".tscn", ".tres")
@@ -278,8 +290,21 @@ def main() -> int:
     ap.add_argument("--root", default=str(ROOT))
     ap.add_argument("--fix", action="store_true",
                     help="write a .gdignore beside every stray snapshot script, so Godot stops scanning it")
+    ap.add_argument("--purge-cache", action="store_true",
+                    help="delete .godot/global_script_class_cache.cfg and .godot/editor/filesystem_cache* "
+                         "(close the editor first) so the next start rebuilds both from the disk")
     args = ap.parse_args()
     r = report(Path(args.root), args.name, fix=args.fix)
+    if args.purge_cache:
+        gone = []
+        for c in [CACHE] + (sorted(FS_CACHE_DIR.glob("filesystem_cache*")) if FS_CACHE_DIR.is_dir() else []):
+            if c.exists():
+                try:
+                    c.unlink()
+                    gone.append(str(c.relative_to(ROOT)))
+                except OSError as e:
+                    print("could not delete %s: %s (is the editor open?)" % (c, e))
+        r["cache_purged"] = gone
     if args.json:
         print(json.dumps(r, indent=1))
         return len(r["findings"])
@@ -324,6 +349,9 @@ def main() -> int:
                 f["class"], f["cached"], ", ".join(f["declared_at"])))
     if r["gdignore_written"]:
         print("\nwrote %d .gdignore file(s); in Godot: Project > Reload Current Project, or restart" % len(r["gdignore_written"]))
+    if r.get("cache_purged") is not None:
+        print("\npurged %d cache file(s): %s — start Godot; it rebuilds them from the disk as it is now"
+              % (len(r["cache_purged"]), ", ".join(r["cache_purged"]) or "none were present"))
     print("\n%d finding(s). A stray snapshot: --fix, or delete the folder. A stale or mis-cased cache row: "
           "close the editor, delete the .godot folder, reopen. A duplicate: rename or delete one. "
           "A mis-cased reference: spell it as the disk does — the Quest will not find it otherwise."
