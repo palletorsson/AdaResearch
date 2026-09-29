@@ -123,8 +123,14 @@ def _metric_subjects(metrics: dict[str, Any]) -> list[str]:
         # claimed_* name the same paths `unreachable` already names, wrapped in
         # prose about who said so; reading them again would double every row
         # in the tree-state attribution.
+        # lost_rooms is the human-readable twin of lost_files. A room resolves
+        # to its directory, whose dirtiest member decides, so a dirty
+        # map_data.json convicted a clean critical.md: on 2026-09-29 gate I read
+        # "tracked-modified 15" while five of its anchor files were clean at
+        # HEAD, lost since 7a5773d04, and every breath since 09-24 had waved
+        # the whole row off as somebody's live prose.
         if key in {"detector_selftest", "reason", "open_not_counted",
-                   "age_reading", "claimed_reading", "claimed_by"}:
+                   "age_reading", "claimed_reading", "claimed_by", "lost_rooms"}:
             continue
         for raw in value.split(","):
             token = _SUBJECT_TRAILER.sub("", raw.strip()).strip()
@@ -132,6 +138,15 @@ def _metric_subjects(metrics: dict[str, Any]) -> list[str]:
                 continue
             subjects.append(token)
     return subjects
+
+
+def _edge_anchor_file(row: dict[str, Any]) -> str:
+    """The file a LOST edge row names: edge_gate says "<path> no longer says it".
+
+    Falls back to the room name, which still resolves (coarsely) to its dir.
+    """
+    head = str(row.get("why", "")).split(" ", 1)[0]
+    return head if "/" in head else str(row.get("map", ""))
 
 
 def classify_subjects(subjects: list[str], tracked: set[str], changed: dict[str, str]) -> dict[str, Any]:
@@ -724,6 +739,10 @@ def build_report(
                     "ungrounded": int(edge.get("UNGROUNDED", -1)),
                     "lost_rooms": ", ".join(
                         r.get("map", "") for r in (edge.get("lost") or [])) or "none",
+                    # the anchor FILE each lost edge was read out of -- what the
+                    # tree-state column asks git about (see _metric_subjects)
+                    "lost_files": ", ".join(
+                        _edge_anchor_file(r) for r in (edge.get("lost") or [])) or "none",
                 },
             }
         )

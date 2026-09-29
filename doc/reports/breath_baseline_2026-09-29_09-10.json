@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-09-29T09:10:00+02:00",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "global_avg": 6.08,
+    "sequences": 25,
+    "complete": 1,
+    "heads": {
+      "stage 6 vr_testing": 24,
+      "complete": 1
+    }
+  },
+  "heat_map_top_5": [
+    [
+      "museum",
+      80
+    ],
+    [
+      "shader",
+      75
+    ],
+    [
+      "capture",
+      65
+    ],
+    [
+      "release gates",
+      60
+    ],
+    [
+      "stranded-work",
+      60
+    ]
+  ],
+  "garden_health": {
+    "note": "isosurfaces DORMANT 9/46 voiced; @identity not a current practice, not acted on"
+  },
+  "release_gates": {
+    "overall": "FAIL 9/15",
+    "pass": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "G",
+      "H",
+      "N",
+      "O"
+    ],
+    "fail": {
+      "F": "contended_builder (Godot editor pid 29948 since 07:45)",
+      "I": "16 lost edge anchors - tree_state 'tracked-modified 15' (mis-attributed by room)",
+      "J": "16 lost citations",
+      "K": "18 echo (book, Astra's)",
+      "L": "5 unreachable prose / 3,894 words (Point_Zero live 07:54 today, 2 claimed)",
+      "M": "40 unreachable: 31 ignored on purpose, 9 live <24h, landable 0"
+    }
+  },
+  "vs_2026_09_28": {
+    "N": "FAIL->PASS (em_shots.py landed by its owner)",
+    "M": "31->40, the 9 new are live <24h",
+    "L": "4,046->3,894 stranded words"
+  }
+}

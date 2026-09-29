@@ -8148,6 +8148,94 @@
         "doc/reports/improvement_trajectory.json"
       ],
       "duration_minutes": 35
+    },
+    {
+      "breath_id": "2026-09-29T04:50",
+      "mode": "evolve-only",
+      "baseline_avg": 6.08,
+      "post_avg": 6.08,
+      "delta": 0.0,
+      "items_attempted": [
+        "harvest-2026-09-28-breath",
+        "audit-evening-runs-since-0921",
+        "prop-053-addendum"
+      ],
+      "items_succeeded": [
+        "harvest-2026-09-28-breath",
+        "audit-evening-runs-since-0921",
+        "prop-053-addendum"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE EVENING HALF HAS WRITTEN NOTHING SINCE 2026-09-21T18:55. Scheduler record: 09-23 'succeeded' in 7 s, 09-24 failed (session limit), 09-25 failed (ENOTFOUND), 09-26 'succeeded' in 4.5 s, 09-27 and 09-28 no on-slot run, 09-29 02:46Z this catch-up. Six evenings, zero ledger rows.",
+        "BOTH 'SUCCEEDED' NO-OPS DIED ON THE SAME CALL. The transcripts of 09-23 (local_ba593ca3) and 09-26 (local_ad29b4ab) both end with the agent calling mcp__scheduled-tasks__list_scheduled_tasks to see whether the morning fired, then nothing: no reply, no write, status 'succeeded'. Two of two. This run asked the same question with list_task_runs(taskId) instead and kept going. Not yet proof the call kills a scheduled run, but the next evening should avoid list_scheduled_tasks and see if the pattern breaks.",
+        "The morning half is healthy: runs 09-23, 24, 25, 27, 28 each logged a full breath, all items succeeded, no failures. 09-26 has no morning run in the history at all (machine off, no catch-up).",
+        "No skill failure pattern reaches 3 in the last 5 breaths: items_failed is empty in all of them. No new proposal. The evening no-op evidence goes onto prop-053 (the loop's two halves and its lost ledger writes) as an addendum.",
+        "Pipeline flat at 6.080 (24 of 25 at stage 6, VR). Yesterday afternoon the first headset test over VR Link happened (f6cdc27cf, da6262bbf), but ada_run/desktop_feedback.md is still dated 09-07 and pull_vr_feedback.py has not been run since, so stage 6 cannot have moved."
+      ],
+      "files_changed": [
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/skill_evolution_proposals.json"
+      ],
+      "duration_minutes": 10,
+      "note": "Off-slot catch-up for the 2026-09-28 evening slot (started 2026-09-29 02:46Z). No morning run co-fired."
+    },
+    {
+      "breath_id": "2026-09-29T09:10",
+      "mode": "full",
+      "baseline_avg": 6.08,
+      "post_avg": 6.08,
+      "delta": 0.0,
+      "items_attempted": [
+        "read-gate-suite-not-global-avg",
+        "diff-gates-against-yesterday",
+        "gate-I-tree-state-by-anchor-file",
+        "forum-260929-hnbzo-five-committed-lost-anchors"
+      ],
+      "items_succeeded": [
+        "read-gate-suite-not-global-avg",
+        "diff-gates-against-yesterday",
+        "gate-I-tree-state-by-anchor-file",
+        "forum-260929-hnbzo-five-committed-lost-anchors"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 4,
+          "succeeded": 4,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "GATE I'S TREE_STATE HAD BEEN MIS-ATTRIBUTING BY ROOM. It resolved each LOST row's bare room name to commons/maps/<Room>/, where the dirtiest member decides, so a dirty map_data.json convicted a clean critical.md: 'tracked-modified 15'. Asked per anchor FILE the row is 'tracked-clean 5 | tracked-modified 11'. Every breath since 09-24 dismissed gate I as live prose on the strength of that column. Fixed in run_release_gates.py (lost_files metric, lost_rooms display-only); negative case 7b in test_gate_tree_state.py fails on the old skip set.",
+        "THE FIVE CLEAN LOST ANCHORS ARE ALL ONE COMMIT: 7a5773d04 (09-16, 'Advance museum teaching...') rewrote five primitives critical.md files into the operational-inquiry voice. Each quote was verbatim in 7a5773d04^. Two of the edges now contradict their room (Polythedra: 'geometry without remainder' vs 'Regularity does not remove remainders'; Triangle: rigidity reading moved to doc/space/.../previous/). That is the gate doing its job - the curriculum moved - and a rewrite of the edge, not a re-anchor. Handed to the book's owner in forum 260929-hnbzo.",
+        "THE 11 LIVE LOST ANCHORS SHARE ONE MTIME, 2026-09-28 12:01:44, with Array/technical.md and Color_Context_Placed/final.md - a single batch write (checkout/restore-shaped), not eleven sessions typing.",
+        "Nothing landable today: Point_Zero prose written 07:54 this morning, Godot editor has held the project since 07:45 (gate F refuses correctly), M's 9 new rows are <24h."
+      ],
+      "files_changed": [
+        "tools/run_release_gates.py",
+        "tools/test_gate_tree_state.py",
+        "doc/reports/breath_baseline_2026-09-29_09-10.json",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "duration_minutes": 30
     }
   ]
 }

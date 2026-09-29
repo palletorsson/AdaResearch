@@ -120,6 +120,26 @@ def main() -> int:
     )
     check("only real subjects are mined", subs, ["fixture/a.py", "fixture/b.py"])
 
+    # 7b. THE 2026-09-29 SHAPE. Gate I names rooms AND anchor files. The room
+    #     is display only: resolved to its directory it lets a dirty
+    #     map_data.json convict a clean critical.md.
+    subs = rrg._metric_subjects(
+        {"lost_rooms": "Point_Line_Grid", "lost_files": "commons/maps/Point_Line_Grid/critical.md"}
+    )
+    check("gate I is attributed by anchor file, not room", subs,
+          ["commons/maps/Point_Line_Grid/critical.md"])
+    v = classify(
+        subs,
+        tracked={"commons/maps/Point_Line_Grid/critical.md", "commons/maps/Point_Line_Grid/map_data.json"},
+        changed={"commons/maps/Point_Line_Grid/map_data.json": " M"},
+    )
+    check("a lost anchor in a clean file reads tracked-clean", v.get("tracked_clean"), 1)
+    check("edge row -> anchor file",
+          rrg._edge_anchor_file({"map": "X", "why": "commons/maps/X/critical.md no longer says it"}),
+          "commons/maps/X/critical.md")
+    check("edge row with no path falls back to the room",
+          rrg._edge_anchor_file({"map": "X", "why": "no anchor recorded"}), "X")
+
     # 8. A gate that names nothing must say so rather than read clean.
     v = classify([], tracked=set(), changed={})
     check("a gate with no named rows reports 0 subjects", v, {"subjects": 0})
