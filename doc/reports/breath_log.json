@@ -8236,6 +8236,48 @@
         "doc/reports/improvement_trajectory.json"
       ],
       "duration_minutes": 30
+    },
+    {
+      "breath_id": "2026-09-29T18:55",
+      "mode": "evolve-only",
+      "baseline_avg": 6.08,
+      "post_avg": 6.08,
+      "delta": 0.0,
+      "items_attempted": [
+        "harvest-2026-09-29-morning-breath",
+        "recompute-ada-breather-cumulative",
+        "test-list_scheduled_tasks-hypothesis"
+      ],
+      "items_succeeded": [
+        "harvest-2026-09-29-morning-breath",
+        "recompute-ada-breather-cumulative",
+        "test-list_scheduled_tasks-hypothesis"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "ON-SLOT EVENING RUN WROTE ITS ROW. It never called list_scheduled_tasks. One data point against the 04:50 hypothesis that the call kills a scheduled run (0921-0928: two of two silent 'succeeded' runs ended on that call). Not proof; two more clean evenings without the call would make it a rule worth putting in prop-053.",
+        "The morning's gate-I repair is COMMITTED (d5976833c, 09:18), the only commit today. Unlike the 09-18 gate-O gain, it did not stay in the working tree.",
+        "Forum 260929-hnbzo (the five committed LOST anchors, handed to the book's owner) has 0 replies at evening. Gate I's clean five stay open until the book owner rewrites the edges; Polythedra and Triangle need rewrites, not re-anchors.",
+        "ada-breather cumulative in improvement_trajectory had been frozen since 09-05 with success_rate 0.012, a mis-assigned field. Recomputed from the log: 132 calls, 132 succeeded, 0 failed across 143 breaths.",
+        "No failures in the last 5 breaths (09-25 to 09-29 evening), so no pattern reaches 3 and no new proposal. Pipeline flat at 6.080. desktop_feedback.md is still dated 09-07, so stage 6 cannot move until pull_vr_feedback.py runs with the Quest on USB."
+      ],
+      "files_changed": [
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "duration_minutes": 8,
+      "note": "On-slot evening harvest. The 04:50 row was the off-slot catch-up for 09-28."
     }
   ]
 }
