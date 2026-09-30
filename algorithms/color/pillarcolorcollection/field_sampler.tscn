@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://commons/primitives/panels/DigitalPaper/grab_paper.tscn" id="1"]
+[ext_resource type="Script" path="res://algorithms/color/pillarcolorcollection/field_sampler.gd" id="2"]
+[node name="FieldSampler" instance=ExtResource("1")]
+script = ExtResource("2")
+snap_to_grid = false
+enable_rotation_snap = false
+release_mode = 1
+ranged_grab_method = 1
