@@ -16290,6 +16290,31 @@
    ],
    "map_ready": true,
    "include_in_map_data": true
+  },
+  "line_relations_gallery": {
+   "lookup_name": "line_relations_gallery",
+   "name": "Four views of a line",
+   "scene": "res://commons/artifacts/line_relations_gallery/line_relations_gallery.tscn",
+   "category": "primitives",
+   "complexity": "beginner",
+   "description": "Four open sightlines through grabbable plus/cross, parallels, upright/horizon and grid studies. Segment skins include stick, plank, luminous mesh, ruler and beam. Seven increasing planks lean along one wall. Parallel floor lines and ceiling edges frame perspective; a suspended line aligns with an edge from the entrance. A floor mark meets the actual hall wall.",
+   "map_ready": true,
+   "include_in_map_data": true,
+   "map_sequences": [
+    "primitives"
+   ],
+   "footprint": [
+    25.1,
+    4.8,
+    27
+   ],
+   "tags": [
+    "line",
+    "relationship",
+    "pickup",
+    "representation",
+    "spatial"
+   ]
   }
  },
  "registry_info": {

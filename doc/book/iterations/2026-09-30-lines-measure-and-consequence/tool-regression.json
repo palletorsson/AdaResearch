@@ -1,0 +1,369 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "new entrance black box is live in museum",
+      "passed": true
+    },
+    {
+      "name": "room keeps metre scale",
+      "passed": true
+    },
+    {
+      "name": "black box floor footprint is 4 by 4 metres",
+      "passed": true
+    },
+    {
+      "name": "line uses existing line implementation",
+      "passed": true
+    },
+    {
+      "name": "north entrance is open",
+      "passed": true
+    },
+    {
+      "name": "east passage is open",
+      "passed": true
+    },
+    {
+      "name": "back wall is solid",
+      "passed": true
+    },
+    {
+      "name": "museum navigation keeps interior route at (-0.5, 0.0, -1.5)",
+      "passed": true
+    },
+    {
+      "name": "museum navigation keeps interior route at (-0.5, 0.0, -0.5)",
+      "passed": true
+    },
+    {
+      "name": "museum navigation keeps interior route at (0.5, 0.0, -0.5)",
+      "passed": true
+    },
+    {
+      "name": "museum navigation keeps interior route at (1.5, 0.0, -0.5)",
+      "passed": true
+    },
+    {
+      "name": "floor supports route at (-0.5, 0.0, -2.2)",
+      "passed": true
+    },
+    {
+      "name": "floor supports route at (-0.5, 0.0, -1.0)",
+      "passed": true
+    },
+    {
+      "name": "floor supports route at (0.0, 0.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "floor supports route at (2.1, 0.0, -0.5)",
+      "passed": true
+    },
+    {
+      "name": "initial line measures 1.60 m",
+      "passed": true
+    },
+    {
+      "name": "new line is smooth and resistance-free",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entrance-line",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: black-box-passage",
+      "passed": true
+    },
+    {
+      "name": "production grab moves the endpoint",
+      "passed": true
+    },
+    {
+      "name": "line follows moved endpoint",
+      "passed": true
+    },
+    {
+      "name": "wall readout follows moved span",
+      "passed": true
+    },
+    {
+      "name": "reset does not steal a held endpoint",
+      "passed": true
+    },
+    {
+      "name": "release leaves endpoint where placed",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: line-length-changed",
+      "passed": true
+    },
+    {
+      "name": "vertical segment stays aligned",
+      "passed": true
+    },
+    {
+      "name": "coincident endpoints hide zero-length segment",
+      "passed": true
+    },
+    {
+      "name": "pointer reset returns both endpoints",
+      "passed": true
+    },
+    {
+      "name": "reset restores visible span and readout",
+      "passed": true
+    },
+    {
+      "name": "near-hand reset uses same operation",
+      "passed": true
+    },
+    {
+      "name": "line demonstration still present",
+      "passed": true
+    },
+    {
+      "name": "black-box line has a shared component",
+      "passed": true
+    },
+    {
+      "name": "room shell is outside the reaction scope",
+      "passed": true
+    },
+    {
+      "name": "all attached components have visible hit surfaces",
+      "passed": true
+    },
+    {
+      "name": "gallery rods react separately",
+      "passed": true
+    },
+    {
+      "name": "actual tool ray finds the line surface",
+      "passed": true
+    },
+    {
+      "name": "tool-only collider does not support or obstruct the player",
+      "passed": true
+    },
+    {
+      "name": "physical catalyst projectile reaches the component",
+      "passed": true
+    },
+    {
+      "name": "catalyst colours without breaking",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: catalyst-colour",
+      "passed": true
+    },
+    {
+      "name": "pink gun fire colours the same study",
+      "passed": true
+    },
+    {
+      "name": "transformation catalyst mode reaches shared receiver",
+      "passed": true
+    },
+    {
+      "name": "transformation mode leaves hit shape at authored size",
+      "passed": true
+    },
+    {
+      "name": "primitives catalyst mode reaches shared receiver",
+      "passed": true
+    },
+    {
+      "name": "primitives mode leaves hit shape at authored size",
+      "passed": true
+    },
+    {
+      "name": "existing laser and hammer remain",
+      "passed": true
+    },
+    {
+      "name": "unattended laser cannot burn new studies",
+      "passed": true
+    },
+    {
+      "name": "laser has its original grab body",
+      "passed": true
+    },
+    {
+      "name": "laser requires dwell",
+      "passed": true
+    },
+    {
+      "name": "wielded laser breaks after dwell",
+      "passed": true
+    },
+    {
+      "name": "broken endpoints lose collision",
+      "passed": true
+    },
+    {
+      "name": "black room and reset survive",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: line-broken",
+      "passed": true
+    },
+    {
+      "name": "line rebuilds automatically after eight seconds",
+      "passed": true
+    },
+    {
+      "name": "line calculation resumes after rebuild",
+      "passed": true
+    },
+    {
+      "name": "melee strike 1 chips without erasing",
+      "passed": true
+    },
+    {
+      "name": "melee strike 2 chips without erasing",
+      "passed": true
+    },
+    {
+      "name": "three hammer hits break a rebuilt study",
+      "passed": true
+    },
+    {
+      "name": "rebuildable study not blacklisted by hammer",
+      "passed": true
+    },
+    {
+      "name": "restored original endpoints can still be grabbed",
+      "passed": true
+    },
+    {
+      "name": "actual pickup moves endpoint after rebuild",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: line-restored",
+      "passed": true
+    },
+    {
+      "name": "installing twice creates no duplicate",
+      "passed": true
+    },
+    {
+      "name": "unconfigured objects keep native behaviour",
+      "passed": true
+    },
+    {
+      "name": "existing barrier participates",
+      "passed": true
+    },
+    {
+      "name": "native barrier trigger keeps a rebuildable scene and emits its signal",
+      "passed": true
+    },
+    {
+      "name": "rebuild waits while player occupies the returning collider",
+      "passed": true
+    },
+    {
+      "name": "rebuild resumes when the player leaves",
+      "passed": true
+    },
+    {
+      "name": "ordinary grid config attaches the component",
+      "passed": true
+    },
+    {
+      "name": "removing component restores surviving target and removes proxies",
+      "passed": true
+    },
+    {
+      "name": "legacy projectile receiver still receives its native callback",
+      "passed": true
+    },
+    {
+      "name": "all tool paths completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "changed_length_m": 2.02652382850647,
+    "empty_components": [],
+    "gun_aim": {
+      "direction": [
+        0.0000000874227765734759,
+        0.0,
+        1.0
+      ],
+      "muzzle": [
+        3.0,
+        1.25,
+        2.30000019073486
+      ],
+      "target": [
+        3.0,
+        1.25,
+        3.79999995231628
+      ]
+    },
+    "gun_impact": {
+      "at": [
+        3.0,
+        1.25,
+        3.15463590621948
+      ],
+      "body": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/LineBlackBox/LineStudy/Segment/ToolHitSurface"
+    },
+    "new_room_bounds": [
+      4,
+      3.24,
+      4
+    ],
+    "reaction_components": 117,
+    "reset_state": {
+      "a": [
+        -0.799999952316284,
+        1.25,
+        0.25
+      ],
+      "b": [
+        0.799999952316284,
+        1.25,
+        0.25
+      ],
+      "cached": "1.60 m",
+      "distance": 1.59999990463257,
+      "height": 1.59999990463257,
+      "readout": "1.60 m",
+      "visible": true
+    },
+    "room_in_hall": [
+      3.0,
+      0.0,
+      7.0
+    ],
+    "room_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "room_world": [
+      3.0,
+      0.0,
+      3.0
+    ],
+    "surface_count": 458,
+    "tool_paths_completed": true
+  },
+  "passed": true,
+  "room": "Point_Lines",
+  "scope": "Native museum render: actual base, pink-gun and two catalyst-mode projectile collisions; laser dwell and hammer dispatch; timed rebuild, occupancy delay, pickup after rebuild, component removal, ordinary grid config and legacy callback. Includes the earlier line/entrance checks. No headset or Quest performance trial."
+}

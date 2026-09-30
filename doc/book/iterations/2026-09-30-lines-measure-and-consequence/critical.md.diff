@@ -1,0 +1,11 @@
+--- before/commons/maps/Point_Lines/critical.md
++++ after/commons/maps/Point_Lines/critical.md
+@@ -2,7 +2,7 @@
+ 
+ ## From Sequence to Network
+ 
+-Point_Line showed a single measured relation: two points, one distance.
++The current Point_Lines hall begins with a single measured relation in the black box: two points, one distance.
+ 
+ Point_Lines introduces **multiplicity**: many lines, many relations, many intersections.
+ 

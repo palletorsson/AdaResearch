@@ -248,7 +248,7 @@ func _physics_process(delta: float) -> void:
 	# Bit 21 is the laser's layer — the same set of things the beam can reach —
 	# plus bit 1 for ordinary world bodies. Areas as well as bodies, because a
 	# wall showing has NO COLLIDER by contract and would otherwise be unhittable.
-	q.collision_mask = 1048576 | 1
+	q.collision_mask = 1048576 | 1 | (1 << 23)
 	q.collide_with_areas = true
 	q.collide_with_bodies = true
 	q.exclude = [get_rid()]
@@ -294,6 +294,15 @@ func _physics_process(delta: float) -> void:
 ## and an artifact that has to expose its own colliders to be hittable is an
 ## artifact that has to know it might be hit.
 func _try_break(node: Node, from: Vector3) -> bool:
+	var reaction: Node = load("res://commons/interactables/artifact_reactions/router.gd").receiver(node)
+	if reaction != null:
+		if reaction.target == self or reaction.target.is_ancestor_of(self): return false
+		if bool(reaction.call("react", &"melee", from)):
+			# A rebuilt study can be struck again; never add it to the old
+			# one-shot blacklist used by permanently destroyed objects.
+			_landed(reaction.target, false)
+			return true
+		return false
 	var n: Node = node
 	while n != null:
 		if n == self or n.is_ancestor_of(self):

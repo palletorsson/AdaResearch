@@ -1,0 +1,22 @@
+--- before/commons/primitives/snappoint/demos/line_demo.gd
++++ after/commons/primitives/snappoint/demos/line_demo.gd
+@@ -139,8 +139,8 @@
+ 	_screen.mode = 0                                  # TextScreen.Mode.SCREEN
+ 	_screen.width_m = display_width_m
+ 	_screen.title = "A LINE"
+-	_screen.body = "Two points. Drag either one.
+-What is between them is the line."
++	_screen.body = "CAN YOU CONNECT THE DOTS?
++Bring one point near the other. Let go."
+ 	_screen.position = Vector3(0, display_height_m, display_z_m)
+ 	add_child(_screen)
+ 	_hang_it()
+@@ -278,6 +278,8 @@
+ 	return nearest
+ 
+ func _on_connection_broken(_point_a, _point_b) -> void:
++	# A rebuilt barrier must be openable by the same encounter again.
++	_solved = false
+ 	# Show instruction display again if connection is broken
+ 	if logic_display:
+ 		logic_display.visible = true

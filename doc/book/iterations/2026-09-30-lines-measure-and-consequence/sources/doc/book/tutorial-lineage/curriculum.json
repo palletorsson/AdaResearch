@@ -1,0 +1,1629 @@
+{
+  "schema_version": 1,
+  "title": "What the student can carry",
+  "scope": "Active book and museum spine; auxiliary sequences indexed as extensions only.",
+  "nodes": [
+    {
+      "id": "base",
+      "sequence": "preparation",
+      "label": "A place to run",
+      "requires": [],
+      "kind": "borrow",
+      "learn": "Open, edit, run and stop a supplied scene.",
+      "make": "Change a greeting in the prepared room.",
+      "transfer": "Change a different property and find the result.",
+      "borrow": "Camera, floor, light and editor setup.",
+      "status": "proposed",
+      "halls": []
+    },
+    {
+      "id": "xr",
+      "sequence": "preparation",
+      "label": "A body and a hand",
+      "requires": [
+        "base"
+      ],
+      "kind": "borrow",
+      "learn": "Use a prepared XR player and controller pickup route.",
+      "make": "A scene in which a supplied object can be held.",
+      "transfer": "Take another prepared object in the same scene.",
+      "borrow": "XR Tools, controller bindings and Quest deployment; portable starter pending.",
+      "status": "proposed",
+      "halls": []
+    },
+    {
+      "id": "loop",
+      "sequence": "primitives",
+      "label": "Begin once, continue",
+      "requires": [
+        "base"
+      ],
+      "kind": "build",
+      "learn": "Initialise, retain a value and update it.",
+      "make": "A greeting and a changing count.",
+      "transfer": "Change the increment without changing the display machinery.",
+      "borrow": "Prepared labels; engine scheduling.",
+      "status": "proposed",
+      "halls": [
+        "Point_Zero"
+      ]
+    },
+    {
+      "id": "point",
+      "sequence": "primitives",
+      "label": "Give a position a body",
+      "requires": [
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Separate a position, its visible surface, collision and illumination.",
+      "make": "A point whose appearance and physical boundary can differ.",
+      "transfer": "Change the sphere radius while keeping the boundary, or the reverse.",
+      "borrow": "Sphere construction; supplied light and switch. Coordinate reading and pickup follow in their own hall.",
+      "status": "proposed",
+      "halls": [
+        "Point_One"
+      ]
+    },
+    {
+      "id": "coordinates",
+      "sequence": "primitives",
+      "label": "Hold a point, name its reference",
+      "requires": [
+        "point",
+        "xr"
+      ],
+      "kind": "build",
+      "learn": "Use the supplied pickup; read and set X, Y and Z; distinguish local and world positions.",
+      "make": "Two independently positioned markers, ready to become endpoints.",
+      "transfer": "Move one marker in a translated parent; explain why the world address changes.",
+      "borrow": "Production XR pickable, guides and cards. Portable XR starter is still pending.",
+      "status": "proposed",
+      "halls": [
+        "Point_Coordinates"
+      ]
+    },
+    {
+      "id": "line",
+      "sequence": "primitives",
+      "label": "Connect and measure",
+      "requires": [
+        "coordinates",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Relate two positions in one reference frame; measure separation.",
+      "make": "A segment that follows two movable endpoints.",
+      "transfer": "Connect two different objects and preserve its measurement.",
+      "borrow": "Prepared A/B markers, segment.gd cylinder renderer and readout. XR hold remains supplied by the museum.",
+      "status": "desktop-tested",
+      "halls": [
+        "Point_Lines"
+      ]
+    },
+    {
+      "id": "trace",
+      "sequence": "primitives",
+      "label": "Keep movement",
+      "requires": [
+        "line",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Introduce an ordered list and a condition for retaining a sample.",
+      "make": "A path made from selected positions.",
+      "transfer": "Record a different moving point and compare what is lost.",
+      "borrow": "Input receiver and line-strip rendering.",
+      "status": "proposed",
+      "halls": [
+        "Point_Trace"
+      ]
+    },
+    {
+      "id": "grid",
+      "sequence": "primitives",
+      "label": "Choose an address",
+      "requires": [
+        "trace"
+      ],
+      "kind": "compare",
+      "learn": "Separate a measured position from a snapped address.",
+      "make": "A retained path and a snapped comparison.",
+      "transfer": "Change spacing while preserving the original trace.",
+      "borrow": "Grid drawing and readouts.",
+      "status": "proposed",
+      "halls": [
+        "Point_Line_Grid"
+      ]
+    },
+    {
+      "id": "face",
+      "sequence": "primitives",
+      "label": "Close edges, give a face",
+      "requires": [
+        "line"
+      ],
+      "kind": "build",
+      "learn": "Close three edges between non-collinear points, then add a face and read its vertex order. Snapping and the carried trace return as further comparisons, not requirements for the first face.",
+      "make": "An editable triangular surface with a visible boundary.",
+      "transfer": "Move a corner; compare a collapsed triangle with a filled one.",
+      "borrow": "Mesh display; the first face needs neither a grid nor the six-corner fan experiment.",
+      "status": "proposed",
+      "halls": [
+        "Point_Triangle_Context"
+      ]
+    },
+    {
+      "id": "enclosure",
+      "sequence": "primitives",
+      "label": "Let faces enclose a region",
+      "requires": [
+        "face"
+      ],
+      "kind": "build",
+      "learn": "Join triangular faces into an open corner; add the missing base to close a tetrahedral surface. Separate enclosure from collision and entry.",
+      "make": "An open and a closed surface using the same four non-coplanar positions.",
+      "transfer": "Remove a different face; compare the visible opening with the supplied convex collision hull.",
+      "borrow": "Preview, face renderer and collision comparison. A single triangle was already a mesh.",
+      "status": "proposed",
+      "halls": [
+        "Primitives_Polythedra"
+      ]
+    },
+    {
+      "id": "mesh",
+      "sequence": "primitives",
+      "label": "Keep connections, move a corner",
+      "requires": [
+        "enclosure"
+      ],
+      "kind": "build",
+      "learn": "Keep the triangle indices while changing vertex positions; locate the shared diagonal inside a square-looking cube face.",
+      "make": "A cube whose corner can move while its face connections remain.",
+      "transfer": "Change a different corner and predict which faces follow; compare with a rigidly folding net.",
+      "borrow": "Prepared cube indices and the face renderer already used for the enclosure.",
+      "status": "proposed",
+      "halls": [
+        "Point_Animatedcube"
+      ]
+    },
+    {
+      "id": "instances",
+      "sequence": "primitives",
+      "label": "Reuse a made object",
+      "requires": [
+        "mesh"
+      ],
+      "kind": "build",
+      "learn": "Distinguish a mesh resource, a reusable scene and its placed instances. Arrange familiar parts without rebuilding them.",
+      "make": "An arrangement of two instances of a supplied box scene.",
+      "transfer": "Move one instance while keeping the other in place; then compare changing a shared resource.",
+      "borrow": "Box scene, material and pickup component; explain whether edited resources are shared.",
+      "status": "proposed",
+      "halls": [
+        "Point_Animatedcube"
+      ]
+    },
+    {
+      "id": "primitive",
+      "sequence": "primitives",
+      "label": "Inspect the prepared form",
+      "requires": [
+        "mesh"
+      ],
+      "kind": "compare",
+      "learn": "Configure a generated mesh; distinguish a fixed polyhedron from a polygonal approximation of a curved surface.",
+      "make": "A configurable sphere, capsule or ring.",
+      "transfer": "Hold size constant while changing its construction density.",
+      "borrow": "Godot primitive classes and renderer.",
+      "status": "proposed",
+      "halls": [
+        "Primitives_Ignorance"
+      ]
+    },
+    {
+      "id": "refinement",
+      "sequence": "primitives",
+      "label": "Choose where to stop",
+      "requires": [
+        "primitive",
+        "line"
+      ],
+      "kind": "compare",
+      "learn": "Follow a subdivision rule and compare a finite approximation with a mathematical limit. A tolerance and the last displayed example have different meanings.",
+      "make": "A polygon comparison with a chosen side count and perimeter gap.",
+      "transfer": "Choose a positive tolerance; find a member that meets it without claiming exact equality.",
+      "borrow": "Circle reference, display and subdivision helper; numerical error analysis can wait.",
+      "status": "proposed",
+      "halls": [
+        "Primitives_Portals"
+      ]
+    },
+    {
+      "id": "geometry_return",
+      "sequence": "primitives",
+      "label": "What geometry promises",
+      "requires": [
+        "refinement",
+        "instances"
+      ],
+      "kind": "reflect",
+      "learn": "Recognise familiar operations in an authored arrangement.",
+      "make": "An arrangement whose geometry can be questioned.",
+      "transfer": "Change one relation while preserving a recognisable reference.",
+      "borrow": "Historical context and existing sculptures.",
+      "status": "proposed",
+      "halls": [
+        "Primitives_Melencolia"
+      ]
+    },
+    {
+      "id": "transform",
+      "sequence": "transformation",
+      "label": "Give a form a changing pose",
+      "requires": [
+        "mesh",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Translate a familiar object; distinguish assignment, interpolation and carrying.",
+      "make": "A moving object with a chosen start and destination.",
+      "transfer": "Move another object along the same route with different timing.",
+      "borrow": "Pickup base, player transport and safe reset.",
+      "status": "proposed",
+      "halls": [
+        "Trans_Pre",
+        "Trans_Introduction",
+        "Trans_Translation"
+      ]
+    },
+    {
+      "id": "rotation",
+      "sequence": "transformation",
+      "label": "Turn around a reference",
+      "requires": [
+        "transform"
+      ],
+      "kind": "build",
+      "learn": "Choose a pivot and axis; compare orientation and swept space.",
+      "make": "A rotating form with an observable return.",
+      "transfer": "Move the pivot while keeping the angular change.",
+      "borrow": "Quaternion and collision machinery until required.",
+      "status": "proposed",
+      "halls": [
+        "Trans_Rotation"
+      ]
+    },
+    {
+      "id": "scale",
+      "sequence": "transformation",
+      "label": "Scale meets a body",
+      "requires": [
+        "transform"
+      ],
+      "kind": "compare",
+      "learn": "Change size relative to a reference and a receiving body.",
+      "make": "A size comparison that changes possible passage.",
+      "transfer": "Change the receiver instead of repeating the same enlargement.",
+      "borrow": "Player scaling infrastructure and safe reset.",
+      "status": "proposed",
+      "halls": [
+        "Trans_Scale"
+      ]
+    },
+    {
+      "id": "threshold",
+      "sequence": "transformation",
+      "label": "A changing boundary",
+      "requires": [
+        "rotation",
+        "scale"
+      ],
+      "kind": "compare",
+      "learn": "Combine transforms, proximity and timing; distinguish restoration from memory.",
+      "make": "A boundary that changes what can pass.",
+      "transfer": "Give the same transform a different trigger or return rule.",
+      "borrow": "Detection, door and reset components.",
+      "status": "proposed",
+      "halls": [
+        "Trans_Body",
+        "Trans_Pit"
+      ]
+    },
+    {
+      "id": "array",
+      "sequence": "array_tutorial",
+      "label": "Keep many addresses",
+      "requires": [
+        "transform",
+        "trace"
+      ],
+      "kind": "build",
+      "learn": "Introduce indexing and loops explicitly; distinguish an address from its occupant.",
+      "make": "A row, plane and volume of independently addressable instances.",
+      "transfer": "Remove an occupant without moving the other addresses.",
+      "borrow": "Instancing helper and flight enclosure.",
+      "status": "proposed",
+      "halls": [
+        "Array",
+        "Tutorial_3D"
+      ]
+    },
+    {
+      "id": "tile",
+      "sequence": "array_tutorial",
+      "label": "A local rule covers a surface",
+      "requires": [
+        "array",
+        "rotation"
+      ],
+      "kind": "build",
+      "learn": "Map a small motif by index; change a rule and one exception separately.",
+      "make": "A small tile study and a larger receiving surface.",
+      "transfer": "Move the same rule from floor to wall.",
+      "borrow": "Tile geometry and display controls.",
+      "status": "proposed",
+      "halls": [
+        "Tutorial_Tiling_Floor",
+        "Tutorial_Tiling_Walls"
+      ]
+    },
+    {
+      "id": "clock_pattern",
+      "sequence": "array_tutorial",
+      "label": "Give a pattern time",
+      "requires": [
+        "tile",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Separate stored pattern, step index and playback clock.",
+      "make": "A monochrome floor with a repeatable temporal pattern.",
+      "transfer": "Change timing without changing the stored pattern.",
+      "borrow": "Contact input and sound playback.",
+      "status": "proposed",
+      "halls": [
+        "Tutorial_Disco"
+      ]
+    },
+    {
+      "id": "colour",
+      "sequence": "color",
+      "label": "Add an attribute",
+      "requires": [
+        "array",
+        "primitive",
+        "transform"
+      ],
+      "kind": "build",
+      "learn": "Attach colour to existing construction without changing its geometry.",
+      "make": "An arrangement whose parts carry chosen colours.",
+      "transfer": "Keep poses fixed while regrouping by colour.",
+      "borrow": "Materials and neutral scene lighting.",
+      "status": "proposed",
+      "halls": [
+        "Color_Context_Placed"
+      ]
+    },
+    {
+      "id": "light",
+      "sequence": "color",
+      "label": "A colour between things",
+      "requires": [
+        "colour"
+      ],
+      "kind": "compare",
+      "learn": "Distinguish surface colour, illumination and appearance.",
+      "make": "A white receiver under a changeable light.",
+      "transfer": "Change the receiver while keeping the light.",
+      "borrow": "Renderer, exposure and material setup.",
+      "status": "proposed",
+      "halls": [
+        "Color_Flashlight"
+      ]
+    },
+    {
+      "id": "colour_space",
+      "sequence": "color",
+      "label": "Navigate a colour choice",
+      "requires": [
+        "colour",
+        "point",
+        "array"
+      ],
+      "kind": "build",
+      "learn": "Map a gesture or address to channels; distinguish RGB from HSV.",
+      "make": "A palette that selects and recalls a colour.",
+      "transfer": "Give the same input range a different channel mapping.",
+      "borrow": "Hand receiver and prepared palette display.",
+      "status": "proposed",
+      "halls": [
+        "Color_Nails",
+        "Color_Rainbow",
+        "Color_Pillar",
+        "Color_Grid_Pallet"
+      ]
+    },
+    {
+      "id": "inscription",
+      "sequence": "color",
+      "label": "Leave colour somewhere",
+      "requires": [
+        "colour_space",
+        "trace"
+      ],
+      "kind": "compare",
+      "learn": "Separate input, surface contact, persistent mark and visual access.",
+      "make": "A supplied painting surface that retains a chosen mark.",
+      "transfer": "Change the receiving surface and ask what can still be reached.",
+      "borrow": "Spray, texture storage and transparency implementation.",
+      "status": "proposed",
+      "halls": [
+        "Color_Paint",
+        "Color_Walls"
+      ]
+    },
+    {
+      "id": "pattern",
+      "sequence": "tiling",
+      "label": "Author a source, repeat it",
+      "requires": [
+        "tile",
+        "colour_space",
+        "inscription"
+      ],
+      "kind": "build",
+      "learn": "Separate source motif, palette, index rule and output surface.",
+      "make": "A pattern made from an authored motif.",
+      "transfer": "Change only the source, then only its repetition rule.",
+      "borrow": "Pattern editor and output preview.",
+      "status": "proposed",
+      "halls": [
+        "Pattern_Disco",
+        "Pattern_Foundry",
+        "Tutorial_Pattern",
+        "Array_Patterns"
+      ]
+    },
+    {
+      "id": "symmetry",
+      "sequence": "tiling",
+      "label": "Transform the repetition",
+      "requires": [
+        "pattern",
+        "rotation"
+      ],
+      "kind": "compare",
+      "learn": "Compose translations, reflections and glides; follow an address across a repeat.",
+      "make": "A controlled comparison of pattern families.",
+      "transfer": "Retain the motif while changing the symmetry rule.",
+      "borrow": "Symmetry catalogue, ribbon mesh and viewing controls.",
+      "status": "proposed",
+      "halls": [
+        "Symmetry_Seventeen",
+        "Ribbon_Patterns_01",
+        "Ribbon_Patterns_02",
+        "Ribbon_Patterns_03"
+      ]
+    },
+    {
+      "id": "rate",
+      "sequence": "change",
+      "label": "Compare change, accumulate",
+      "requires": [
+        "line",
+        "trace",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Define an independent variable, difference quotient and finite accumulation.",
+      "make": "A small slope and accumulated-area study.",
+      "transfer": "Change the sampling interval and compare its effect.",
+      "borrow": "Plotting and prepared function receiver.",
+      "status": "proposed",
+      "halls": [
+        "Change_Intro"
+      ]
+    },
+    {
+      "id": "field",
+      "sequence": "change",
+      "label": "A rule at every position",
+      "requires": [
+        "rate",
+        "array"
+      ],
+      "kind": "build",
+      "learn": "Read a vector-valued rule at a position and define how a receiver uses it.",
+      "make": "A path following samples of a field.",
+      "transfer": "Feed the same field to another receiving rule.",
+      "borrow": "Field display and particle drawing.",
+      "status": "proposed",
+      "halls": [
+        "Flow_Field"
+      ]
+    },
+    {
+      "id": "vector",
+      "sequence": "forces",
+      "label": "Combine contributions",
+      "requires": [
+        "line",
+        "field"
+      ],
+      "kind": "build",
+      "learn": "Add and subtract displacements; introduce projection when needed.",
+      "make": "An endpoint composed from named contributions.",
+      "transfer": "Translate the construction without changing its vector relation.",
+      "borrow": "Arrow rendering and coordinate guides.",
+      "status": "proposed",
+      "halls": [
+        "Vectors_Act1_WhatAVectorIs",
+        "VFM_02_Operations",
+        "Vectors_Act2_VectorArithmetic"
+      ]
+    },
+    {
+      "id": "motion",
+      "sequence": "forces",
+      "label": "Let state carry motion",
+      "requires": [
+        "vector",
+        "rate",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Separate position, velocity and acceleration; identify the time step.",
+      "make": "A moving body whose previous velocity matters.",
+      "transfer": "Apply equal commands to bodies with different stored velocities.",
+      "borrow": "Physics engine or a clearly identified integration helper.",
+      "status": "proposed",
+      "halls": [
+        "VFM_05_Launch",
+        "VFM_03_Motion"
+      ]
+    },
+    {
+      "id": "force",
+      "sequence": "forces",
+      "label": "A law and its receiver",
+      "requires": [
+        "motion",
+        "field"
+      ],
+      "kind": "compare",
+      "learn": "Relate force, restoring response, drag, mass and support to a particular receiver.",
+      "make": "A small force study with a held reference condition.",
+      "transfer": "Apply one field to two differently configured bodies.",
+      "borrow": "Collision solver, contact and support instruments.",
+      "status": "proposed",
+      "halls": [
+        "Vectors_Act3_FieldsAndMotion",
+        "Vectors_Act4a_KineticForces",
+        "Vectors_Act4b_Oscillation",
+        "Change_Choreography",
+        "VFM_07_Gravity",
+        "VFM_09_Legs",
+        "VFM_08_Arena",
+        "Vectors_Act5_ForceAsPlace"
+      ]
+    },
+    {
+      "id": "descent",
+      "sequence": "formfinding",
+      "label": "Follow a criterion",
+      "requires": [
+        "rate",
+        "vector"
+      ],
+      "kind": "build",
+      "learn": "Define a cost, estimate a slope and choose a step.",
+      "make": "A descent that can reach different local endings.",
+      "transfer": "Keep the cost while changing the start or step size.",
+      "borrow": "Landscape display; derivative helper only if explained.",
+      "status": "proposed",
+      "halls": [
+        "FormFinding_Descent"
+      ]
+    },
+    {
+      "id": "constraint",
+      "sequence": "formfinding",
+      "label": "Let relations hold a form",
+      "requires": [
+        "force",
+        "mesh",
+        "descent"
+      ],
+      "kind": "build",
+      "learn": "Introduce anchors, rest lengths and iterative relaxation.",
+      "make": "A hanging or relaxed form whose boundary can be edited.",
+      "transfer": "Move an anchor instead of specifying the final shape.",
+      "borrow": "Solver and stable time step.",
+      "status": "proposed",
+      "halls": [
+        "FormFinding_Catenary",
+        "FormFinding_Relaxation",
+        "FormFinding_Equilibrium"
+      ]
+    },
+    {
+      "id": "search_cost",
+      "sequence": "formfinding",
+      "label": "Permit another ending",
+      "requires": [
+        "descent",
+        "constraint"
+      ],
+      "kind": "compare",
+      "learn": "Compare greedy descent with an explicitly supplied random proposal.",
+      "make": "A search whose acceptance rule can be changed.",
+      "transfer": "Keep the proposal stream while changing the criterion.",
+      "borrow": "Seeded proposals before the full Randomness lesson.",
+      "status": "proposed",
+      "halls": [
+        "FormFinding_Annealing",
+        "FormFinding_Forge"
+      ]
+    },
+    {
+      "id": "oscillation",
+      "sequence": "wavefunctions",
+      "label": "A phase gives a return",
+      "requires": [
+        "rotation",
+        "force",
+        "trace"
+      ],
+      "kind": "build",
+      "learn": "Relate a phase and amplitude to position; compare prescribed motion and dynamics.",
+      "make": "A repeated movement and its recorded projection.",
+      "transfer": "Change phase independently of amplitude or rate.",
+      "borrow": "Trigonometric function and drawing helpers.",
+      "status": "proposed",
+      "halls": [
+        "WaveFunctions_Intro",
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_Sine_Space",
+        "WaveFunctions_Unit_Circle"
+      ]
+    },
+    {
+      "id": "wave",
+      "sequence": "wavefunctions",
+      "label": "Send and combine a wave",
+      "requires": [
+        "oscillation",
+        "field"
+      ],
+      "kind": "build",
+      "learn": "Use position and time in a wave rule; add contributions or modulate a parameter.",
+      "make": "A wave field or displaced column.",
+      "transfer": "Use the same values for a different receiver.",
+      "borrow": "Surface construction and audio buffer when needed.",
+      "status": "proposed",
+      "halls": [
+        "WaveFunctions_3D_Wave_Propagation",
+        "WaveFunctions_Effect_Sound",
+        "Wavefunctions_Bernini"
+      ]
+    },
+    {
+      "id": "sound",
+      "sequence": "wavefunctions",
+      "label": "An event gives sound a beginning",
+      "requires": [
+        "wave",
+        "loop"
+      ],
+      "kind": "compare",
+      "learn": "Separate sampled signal, trigger, envelope and captured silence.",
+      "make": "A prepared voice with controllable onset and duration.",
+      "transfer": "Trigger the same voice twice and compare independent state.",
+      "borrow": "Audio device, buffers and microphone permissions.",
+      "status": "proposed",
+      "halls": [
+        "WaveFunctions_John_Cage",
+        "WaveFunctions_AirMusic",
+        "Wavefunctions_Sky_Stairs"
+      ]
+    },
+    {
+      "id": "synthesis",
+      "sequence": "wavefunctions",
+      "label": "Many components, one result",
+      "requires": [
+        "wave",
+        "sound",
+        "array"
+      ],
+      "kind": "build",
+      "learn": "Sum known components while keeping their amounts and shared phase.",
+      "make": "A small additive instrument.",
+      "transfer": "Remove one component and locate its consequence.",
+      "borrow": "Signal display and audio output.",
+      "status": "proposed",
+      "halls": [
+        "WaveFunctions_TrigWalkingPath",
+        "WaveFunctions_Synthesis_Lab"
+      ]
+    },
+    {
+      "id": "random",
+      "sequence": "randomness",
+      "label": "Keep a procedure, vary a draw",
+      "requires": [
+        "array",
+        "transform",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Introduce seed, sample and eligibility; use a draw in an existing operation.",
+      "make": "A repeatable random arrangement or walk.",
+      "transfer": "Keep the draws while changing how they are interpreted.",
+      "borrow": "Random generator implementation.",
+      "status": "proposed",
+      "halls": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Remove",
+        "Randomness_10_PRINT_Algorithm",
+        "Random_Cubes",
+        "Random_Rotate_Random_XYZ",
+        "Random_Walk"
+      ]
+    },
+    {
+      "id": "distribution",
+      "sequence": "randomness",
+      "label": "A sample has an account",
+      "requires": [
+        "random",
+        "trace",
+        "field"
+      ],
+      "kind": "compare",
+      "learn": "Distinguish distribution, sample, boundary and record; follow a draw into a consequence.",
+      "make": "A sampled population and its histogram or path.",
+      "transfer": "Change the admissible set without changing the sampling method.",
+      "borrow": "Histogram, trail display and game receiver.",
+      "status": "proposed",
+      "halls": [
+        "Random_Gaussian",
+        "Random_Mushrooms",
+        "Random_Space_Geometry",
+        "Randomness_Examples_of_Randomness",
+        "Random_Pheromone",
+        "Random_Space",
+        "Random_Game"
+      ]
+    },
+    {
+      "id": "noise",
+      "sequence": "noise",
+      "label": "Sample a related field",
+      "requires": [
+        "random",
+        "field",
+        "wave"
+      ],
+      "kind": "build",
+      "learn": "Distinguish independent draws from spatially related samples; scale the input domain.",
+      "make": "A field mapped to height or colour.",
+      "transfer": "Feed the same sample values into another mapping.",
+      "borrow": "Noise algorithm implementation and mesh receiver.",
+      "status": "proposed",
+      "halls": [
+        "Random_Noise_Types",
+        "Noise_Columns",
+        "Noise_One",
+        "Noise_Voxel",
+        "Noise_6_Wall",
+        "Noise_Inside_Noise"
+      ]
+    },
+    {
+      "id": "field_body",
+      "sequence": "noise",
+      "label": "A field becomes support",
+      "requires": [
+        "noise",
+        "mesh",
+        "threshold"
+      ],
+      "kind": "compare",
+      "learn": "Separate a scalar value, a threshold, a visible surface and a collider.",
+      "make": "A terrain comparison with explicit support.",
+      "transfer": "Keep the field while changing height or passage threshold.",
+      "borrow": "Terrain meshing and safe walking support.",
+      "status": "proposed",
+      "halls": [
+        "Noise_Space_10",
+        "Noise_Perlin_Simplex",
+        "Lab_Path"
+      ]
+    },
+    {
+      "id": "shader",
+      "sequence": "shaders",
+      "label": "A rule for a surface sample",
+      "requires": [
+        "noise",
+        "colour",
+        "pattern"
+      ],
+      "kind": "build",
+      "learn": "Introduce shader input coordinates and output colour before complex effects.",
+      "make": "A small material with a controllable pattern.",
+      "transfer": "Apply the same rule to a second mesh.",
+      "borrow": "ShaderMaterial setup and rendering pipeline.",
+      "status": "proposed",
+      "halls": [
+        "Shader_01_Shaping",
+        "Shader_05_Patterns"
+      ]
+    },
+    {
+      "id": "shader_body",
+      "sequence": "shaders",
+      "label": "Displace, layer, remember",
+      "requires": [
+        "shader",
+        "mesh",
+        "wave"
+      ],
+      "kind": "compare",
+      "learn": "Distinguish vertex displacement, layered fields and persistent texture state.",
+      "make": "A material study whose visible and physical boundaries can differ.",
+      "transfer": "Keep geometry fixed while changing the shading rule.",
+      "borrow": "Collision remains separate; reaction-diffusion feedback supplied before CA.",
+      "status": "proposed",
+      "halls": [
+        "Shader_11_QueerRubber",
+        "Shader_09_FBM",
+        "Shader_12_PinkExtravaganza",
+        "Shader_10_ReactionDiffusion"
+      ]
+    },
+    {
+      "id": "cell",
+      "sequence": "cellularautomata",
+      "label": "A local rule remembers",
+      "requires": [
+        "array",
+        "loop",
+        "pattern"
+      ],
+      "kind": "build",
+      "learn": "Introduce neighbours, discrete state and separate current/next buffers.",
+      "make": "A small grid that steps one generation at a time.",
+      "transfer": "Change one neighbourhood rule and inspect the global pattern.",
+      "borrow": "Display and neighbour-boundary policy made explicit.",
+      "status": "proposed",
+      "halls": [
+        "CA_Introduction",
+        "CA_ElementaryRules",
+        "CA_GameOfLife",
+        "CA_BeyondBinary"
+      ]
+    },
+    {
+      "id": "cell_field",
+      "sequence": "cellularautomata",
+      "label": "Change what a state can be",
+      "requires": [
+        "cell",
+        "field",
+        "distribution"
+      ],
+      "kind": "compare",
+      "learn": "Extend binary state to graded values; compare inputs and paired histories.",
+      "make": "A local update with a readable difference between two runs.",
+      "transfer": "Keep the initial state while changing one coupling.",
+      "borrow": "Display; graded-field and multi-state examples.",
+      "status": "proposed",
+      "halls": [
+        "CA_ExpandingSpace",
+        "CA_SoftRules",
+        "CA_AgentsCircuits",
+        "CA_EdgeOfChaos"
+      ]
+    },
+    {
+      "id": "recursion",
+      "sequence": "fractals",
+      "label": "Replace a part with a rule",
+      "requires": [
+        "mesh",
+        "transform",
+        "array"
+      ],
+      "kind": "build",
+      "learn": "Introduce a terminating recursive step and a depth budget.",
+      "make": "A bounded recursively constructed curve or volume.",
+      "transfer": "Keep endpoints while replacing what lies between them.",
+      "borrow": "Mesh batching and safe geometry budget.",
+      "status": "proposed",
+      "halls": [
+        "Fractal_Recursion",
+        "Fractal_RecursiveTrees",
+        "Fractal_CantorSet",
+        "Fractal_KochSierpinski",
+        "Fractal_MengerSponge",
+        "Fractal_GoldenSpiral",
+        "Fractal_Synthesis"
+      ]
+    },
+    {
+      "id": "grammar",
+      "sequence": "lsystems",
+      "label": "Rewrite, then interpret",
+      "requires": [
+        "recursion",
+        "line",
+        "rotation"
+      ],
+      "kind": "build",
+      "learn": "Separate a symbol sequence from its geometric reading; introduce a state stack.",
+      "make": "A rewritten sentence read by a moving point.",
+      "transfer": "Read the same sentence with another angle or interpretation.",
+      "borrow": "Turtle drawing and stack preview.",
+      "status": "proposed",
+      "halls": [
+        "LSystems_Grammar_Lab",
+        "LSystems_Growth",
+        "LSystems_Grammars_And_Curves"
+      ]
+    },
+    {
+      "id": "grammar_space",
+      "sequence": "lsystems",
+      "label": "A rule becomes a place",
+      "requires": [
+        "grammar",
+        "mesh",
+        "threshold"
+      ],
+      "kind": "compare",
+      "learn": "Carry a grammar into width, support, competition and face operations.",
+      "make": "An architectural or form-grammar variant.",
+      "transfer": "Preserve the rule while changing which faces or resources qualify.",
+      "borrow": "Generation budgets and full-scale support.",
+      "status": "proposed",
+      "halls": [
+        "LSystems_Architecture",
+        "LSystems_Competition",
+        "LSystems_Living",
+        "LSystems_Shape_Grammars",
+        "Assemblage_Same_Desire"
+      ]
+    },
+    {
+      "id": "selection",
+      "sequence": "proceduralgeneration",
+      "label": "Build, score, choose",
+      "requires": [
+        "grammar_space",
+        "random",
+        "descent"
+      ],
+      "kind": "build",
+      "learn": "Separate a genome, its constructed body and the criterion that selects it.",
+      "make": "A small population with inspectable selection.",
+      "transfer": "Use another score on the same candidates.",
+      "borrow": "Population display and mutation source.",
+      "status": "proposed",
+      "halls": [
+        "PG_Genetic_Evolution"
+      ]
+    },
+    {
+      "id": "growth",
+      "sequence": "proceduralgeneration",
+      "label": "A connection needs room",
+      "requires": [
+        "grammar_space",
+        "field_body",
+        "distribution"
+      ],
+      "kind": "build",
+      "learn": "Choose a local growth/connection rule; distinguish connectivity from bodily clearance.",
+      "make": "A growing network and a carved route.",
+      "transfer": "Change eligibility or width while keeping the initial points.",
+      "borrow": "Neighbour search and carving/meshing; graph vocabulary returns later.",
+      "status": "proposed",
+      "halls": [
+        "PG_Space_Colonization",
+        "PG_Branching_Growth",
+        "PG_Percolation_Network",
+        "PG_Caves_Mazes",
+        "PG_Sculpted_Forms",
+        "PG_Mirrored_Patterns"
+      ]
+    },
+    {
+      "id": "soft",
+      "sequence": "softbodies",
+      "label": "Keep a body in relation",
+      "requires": [
+        "constraint",
+        "mesh",
+        "force"
+      ],
+      "kind": "compare",
+      "learn": "Vary pins, pressure and constitutive settings independently of presentation.",
+      "make": "A supplied deformable body with an authored boundary condition.",
+      "transfer": "Change an attachment rather than its visible form.",
+      "borrow": "Soft-body solver, stable mesh and collision setup.",
+      "status": "proposed",
+      "halls": [
+        "SoftBodies_Soft_Body_Deformation",
+        "SoftBodies_Cloth_Physics",
+        "SoftBodies_Carusell",
+        "SoftBodies_Obsticals",
+        "SoftBodies_Obsticals_Part2",
+        "SoftBodies_Playground_of_Joy",
+        "SoftBodies_Affect_Theory_Visualization"
+      ]
+    },
+    {
+      "id": "reaction",
+      "sequence": "softbodies",
+      "label": "Two fields change each other",
+      "requires": [
+        "cell_field",
+        "noise",
+        "rate"
+      ],
+      "kind": "build",
+      "learn": "Separate local reaction, diffusion, update step and display.",
+      "make": "A small two-field update with controllable coupling.",
+      "transfer": "Hold the start and change one response term.",
+      "borrow": "Field storage and surface extraction where used.",
+      "status": "proposed",
+      "halls": [
+        "ProceduralGeneration_Reaction_Diffusion_Systems",
+        "Topology_Entropy_Morphogenesis"
+      ]
+    },
+    {
+      "id": "iso",
+      "sequence": "isosurfaces",
+      "label": "Extract a boundary",
+      "requires": [
+        "field_body",
+        "face",
+        "array"
+      ],
+      "kind": "build",
+      "learn": "Sample a scalar field; choose a level; interpolate crossings before assembling faces.",
+      "make": "A small sampled volume with an inspectable surface.",
+      "transfer": "Change threshold without changing the source field.",
+      "borrow": "Marching-cubes case table and mesh plumbing.",
+      "status": "proposed",
+      "halls": [
+        "ISO_Introduction",
+        "ISO_LookupTable",
+        "ISO_ShapesGallery",
+        "ISO_TorusGyroid"
+      ]
+    },
+    {
+      "id": "implicit",
+      "sequence": "isosurfaces",
+      "label": "Compose the condition",
+      "requires": [
+        "iso",
+        "noise",
+        "trace"
+      ],
+      "kind": "compare",
+      "learn": "Edit contributions and domains; distinguish a height map from a volume.",
+      "make": "A cavity, terrain or joined field surface.",
+      "transfer": "Keep the extractor and replace the field.",
+      "borrow": "Meshing, collision and rebuild scheduling.",
+      "status": "proposed",
+      "halls": [
+        "ISO_Sculpting",
+        "ISO_FlatTerrain",
+        "ISO_PortalLandscape",
+        "ISO_Caves",
+        "ISO_CaveGeneration",
+        "ISO_AnimatedNoise",
+        "ISO_Metaballs",
+        "ISO_ImplicitModeling",
+        "ISO_RhizomeBody"
+      ]
+    },
+    {
+      "id": "boolean",
+      "sequence": "boolean_surfaces",
+      "label": "Make room by subtraction",
+      "requires": [
+        "mesh",
+        "scale"
+      ],
+      "kind": "build",
+      "learn": "Define union, intersection and ordered difference of solids.",
+      "make": "A cavity or room whose operands can be repositioned.",
+      "transfer": "Swap operand order, then scale the resulting negative space.",
+      "borrow": "CSG engine; does not require implementing marching cubes.",
+      "status": "proposed",
+      "halls": [
+        "Boolean_Verbs",
+        "Boolean_Gallery",
+        "Boolean_Works"
+      ]
+    },
+    {
+      "id": "agent",
+      "sequence": "swarmintelligence",
+      "label": "A local view of others",
+      "requires": [
+        "motion",
+        "field",
+        "random",
+        "cell"
+      ],
+      "kind": "build",
+      "learn": "Give an agent state, a sensing neighbourhood and an update policy.",
+      "make": "A small group responding to neighbours or a shared trail.",
+      "transfer": "Change perception while keeping the response rule.",
+      "borrow": "Neighbour lookup and trail diffusion.",
+      "status": "proposed",
+      "halls": [
+        "SwarmIntelligence_PhysarumColony",
+        "SwarmIntelligence_FlowFields",
+        "SwarmIntelligence_Boids_Algorithm",
+        "SwarmIntelligence_Agent_Based_Modeling_ABM"
+      ]
+    },
+    {
+      "id": "collective_search",
+      "sequence": "swarmintelligence",
+      "label": "Remember and compare routes",
+      "requires": [
+        "agent",
+        "descent",
+        "growth"
+      ],
+      "kind": "compare",
+      "learn": "Separate personal memory, shared signal and optimisation criterion.",
+      "make": "A route or position search with inspectable memory.",
+      "transfer": "Keep the candidates while changing who can share a result.",
+      "borrow": "Graph storage before its formal chapter.",
+      "status": "proposed",
+      "halls": [
+        "SwarmIntelligence_Ant_Colony_Optimization",
+        "SwarmIntelligence_Particle_Swarm_Optimization",
+        "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+      ]
+    },
+    {
+      "id": "learning",
+      "sequence": "machinelearning",
+      "label": "Choose what improvement means",
+      "requires": [
+        "selection",
+        "descent",
+        "distribution"
+      ],
+      "kind": "build",
+      "learn": "Define data, features, labels and an objective; distinguish clustering from classification.",
+      "make": "A small classifier or optimiser with a visible criterion.",
+      "transfer": "Change labels or the cost while preserving the observations.",
+      "borrow": "Dataset display and training helpers.",
+      "status": "proposed",
+      "halls": [
+        "ML_Evolution",
+        "ML_Gradient_Landscape",
+        "ML_Classification"
+      ]
+    },
+    {
+      "id": "network",
+      "sequence": "machinelearning",
+      "label": "Compose a learned mapping",
+      "requires": [
+        "learning",
+        "vector",
+        "array"
+      ],
+      "kind": "build",
+      "learn": "Use a supplied layer, then inspect one weighted sum, bias and activation.",
+      "make": "A small mapping with editable weights.",
+      "transfer": "Compare a single unit with a layered response.",
+      "borrow": "Network first as a supplied component; single-unit inspection follows.",
+      "status": "proposed",
+      "halls": [
+        "ML_Neural_Networks",
+        "ML_Perception"
+      ]
+    },
+    {
+      "id": "learned_memory",
+      "sequence": "machinelearning",
+      "label": "A mapping retains or generates",
+      "requires": [
+        "network",
+        "trace",
+        "random"
+      ],
+      "kind": "compare",
+      "learn": "Distinguish hidden state, generated sample and learned parameters.",
+      "make": "A prepared model whose state or input can be changed separately.",
+      "transfer": "Reset state without replacing weights.",
+      "borrow": "Trained models and training machinery; not a one-chapter GAN implementation.",
+      "status": "proposed",
+      "halls": [
+        "ML_Sequence_Memory",
+        "ML_Generative",
+        "ML_Synthesis"
+      ]
+    },
+    {
+      "id": "graph",
+      "sequence": "graphtheory",
+      "label": "Name the relations",
+      "requires": [
+        "line",
+        "array",
+        "force"
+      ],
+      "kind": "build",
+      "learn": "Separate node identity, edge relation and drawing position.",
+      "make": "An explicit graph with an independent layout.",
+      "transfer": "Move the drawing without changing the adjacency.",
+      "borrow": "Layout solver; returns to earlier networks.",
+      "status": "proposed",
+      "halls": [
+        "GT_Foundations",
+        "GT_Layout"
+      ]
+    },
+    {
+      "id": "path",
+      "sequence": "graphtheory",
+      "label": "Choose a route or allocation",
+      "requires": [
+        "graph",
+        "growth",
+        "collective_search"
+      ],
+      "kind": "build",
+      "learn": "Introduce queues/stacks when used; compare reachability, cost, capacity and matching.",
+      "make": "A small path or allocation experiment.",
+      "transfer": "Keep the graph and change the question asked of it.",
+      "borrow": "Algorithm implementations beyond the first taught traversal.",
+      "status": "proposed",
+      "halls": [
+        "GT_Pathfinding",
+        "GT_Network_Analysis",
+        "GT_Connectivity",
+        "GT_Spanning_Trees",
+        "GT_Flow",
+        "GT_Matching"
+      ]
+    },
+    {
+      "id": "assumption",
+      "sequence": "foundationscrisis",
+      "label": "A model has conditions",
+      "requires": [
+        "geometry_return",
+        "rotation",
+        "graph"
+      ],
+      "kind": "reflect",
+      "learn": "Identify a geometric assumption and a changed interpretation.",
+      "make": "A controlled comparison of models.",
+      "transfer": "Hold an observation while changing the model's premise.",
+      "borrow": "Geometry renderers; no theorem proved by the display.",
+      "status": "proposed",
+      "halls": [
+        "Euclid_Parallel",
+        "NonEuclidean_Spaces"
+      ]
+    },
+    {
+      "id": "limit",
+      "sequence": "foundationscrisis",
+      "label": "A claim and its warrant",
+      "requires": [
+        "assumption",
+        "cell",
+        "recursion",
+        "path"
+      ],
+      "kind": "reflect",
+      "learn": "Distinguish construction, consistency, proof, projection and toy demonstration.",
+      "make": "A small explicit rule system with declared limits.",
+      "transfer": "Find a claim the demonstration cannot establish.",
+      "borrow": "Formal results require their own arguments; no forced coding quota.",
+      "status": "proposed",
+      "halls": [
+        "Russell_Paradox",
+        "Godel_Incompleteness",
+        "Escher_Impossible",
+        "Brouwer_Intuitionism",
+        "Florensky_Paraconsistent",
+        "Crisis_Synthesis"
+      ]
+    },
+    {
+      "id": "proxy",
+      "sequence": "qfeplaboratory",
+      "label": "Read what a measure measures",
+      "requires": [
+        "limit",
+        "distribution",
+        "descent",
+        "cell_field"
+      ],
+      "kind": "reflect",
+      "learn": "Give each project term a stated operational measure and scope.",
+      "make": "A comparison of order, variation and response under declared rules.",
+      "transfer": "Replace one proxy while keeping the physical arrangement.",
+      "borrow": "QFEP as the project's research framing; entropy and spread are not interchangeable.",
+      "status": "proposed",
+      "halls": [
+        "QFEP_Introduction",
+        "QFEP_F_Term",
+        "QFEP_E_Term",
+        "QFEP_Lambda_Spectrum",
+        "QFEP_Phi_Term",
+        "QFEP_Edge_Of_Chaos"
+      ]
+    },
+    {
+      "id": "coupling",
+      "sequence": "qfeplaboratory",
+      "label": "Connect an intervention",
+      "requires": [
+        "proxy",
+        "field",
+        "soft"
+      ],
+      "kind": "compare",
+      "learn": "Distinguish a control value, a connection and the receiver's used value.",
+      "make": "An intervention that can be connected, cut and compared.",
+      "transfer": "Cut a route without assuming its previous effect is undone.",
+      "borrow": "Receiver models and UI; verify each coupling.",
+      "status": "proposed",
+      "halls": [
+        "QFEP_Sandbox",
+        "QFEP_Synthesis"
+      ]
+    },
+    {
+      "id": "situation",
+      "sequence": "postfoundationscrisis",
+      "label": "Keep the source with the judgement",
+      "requires": [
+        "coupling",
+        "learning",
+        "graph",
+        "inscription"
+      ],
+      "kind": "reflect",
+      "learn": "Retain provenance, competing requirements and contributors rather than only a verdict.",
+      "make": "An arrangement that exposes who or what its rule admits.",
+      "transfer": "Change a rule while keeping the excluded case visible.",
+      "borrow": "Authored scenarios and provenance display.",
+      "status": "proposed",
+      "halls": [
+        "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+        "CriticalAlgorithms_Applied_Ethics",
+        "SpeculativeComputation_Paraconsistent_Engineering",
+        "SpeculativeComputation_Situated_Computation",
+        "SpeculativeComputation_Collective_Knowledge"
+      ]
+    },
+    {
+      "id": "assembly",
+      "sequence": "postfoundationscrisis",
+      "label": "Make a work answer back",
+      "requires": [
+        "situation",
+        "growth",
+        "boolean",
+        "constraint"
+      ],
+      "kind": "reflect",
+      "learn": "Combine routes, assemblies and records into a situated work.",
+      "make": "A first independent work built from selected earlier capabilities.",
+      "transfer": "Name one promise, test it bodily, and revise the responsible operation.",
+      "borrow": "Only the infrastructure the chosen work needs.",
+      "status": "proposed",
+      "halls": [
+        "SpeculativeComputation_Rhizome_Network",
+        "AdvancedLaboratory_Lab_Equipment_Simulation",
+        "PostCrisis_Synthesis"
+      ]
+    }
+  ],
+  "sequence_questions": {
+    "primitives": "What must we add before a position can be seen, connected, kept, enclosed and used again; what does each addition allow or leave out?",
+    "transformation": "What remains the same, and whose passage changes when the form moves?",
+    "array_tutorial": "Does removing an occupant erase its address or change what a body can stand on?",
+    "color": "Which part of a colour belongs to a surface, a light, a receiver or a social permission?",
+    "tiling": "How does one local choice become the order surrounding us?",
+    "change": "Which interval makes a change visible, and what does accumulation retain?",
+    "forces": "A force acts on which body, with which memory and resistance?",
+    "formfinding": "Who chose the criterion under which this form appears to have found its place?",
+    "wavefunctions": "Is the return prescribed, physically produced, recorded or only apparently the same?",
+    "randomness": "Who chooses the set within which chance is allowed to operate?",
+    "noise": "What changes when a field value becomes colour, height or support?",
+    "shaders": "What can an appearance promise that the body of the room does not provide?",
+    "cellularautomata": "What global consequence follows from this local neighbourhood and update?",
+    "fractals": "Which finite budget gives this apparent infinity its body?",
+    "lsystems": "What does a rule say, and what does its interpreter allow it to become?",
+    "proceduralgeneration": "What counts as a desirable body or a connected, usable route?",
+    "softbodies": "What holds a deforming body together, and which attachments are allowed to change?",
+    "isosurfaces": "Which samples and threshold are enough to declare a boundary?",
+    "boolean_surfaces": "When does taking something away make room for another body?",
+    "swarmintelligence": "Whose local information contributes to the apparent collective decision?",
+    "machinelearning": "What has been named a feature, a label or an improvement?",
+    "graphtheory": "Which relation survives when the picture is rearranged?",
+    "foundationscrisis": "What does this model let us claim, and what cannot follow from this demonstration?",
+    "qfeplaboratory": "What exactly does the instrument measure, and where does the interpretation exceed it?",
+    "postfoundationscrisis": "Can the work keep its conditions, exclusions and possible revisions available to others?"
+  },
+  "issues": [
+    {
+      "id": "pickup",
+      "title": "Deliver the held point",
+      "nodes": [
+        "xr",
+        "coordinates",
+        "line"
+      ],
+      "severity": "next",
+      "evidence": [
+        "commons/maps/Point_Coordinates/tutorial.md",
+        "doc/book/studies/point-coordinates/README.md"
+      ],
+      "finding": "Point Coordinates follows the corridor, but its download has no player or pickup rig.",
+      "action": "Supply and test a reduced XR starter; teach object-side pickup, then reuse the same point in Line."
+    },
+    {
+      "id": "line-grid",
+      "title": "One connection before 64 points",
+      "nodes": [
+        "line",
+        "array"
+      ],
+      "severity": "resolved",
+      "evidence": [
+        "commons/maps/Point_Lines/tutorial.md",
+        "doc/book/studies/point-lines/verification.json"
+      ],
+      "finding": "Replaced the grid-first lesson with two known positions, subtraction, length and a supplied renderer. A standalone Godot project passed 22 geometry/readout checks.",
+      "action": "Keep the portable study aligned with tutorial.md. A self-contained XR starter remains a separate Coordinates task."
+    },
+    {
+      "id": "trace-list",
+      "title": "Introduce the record before its machinery",
+      "nodes": [
+        "trace",
+        "array"
+      ],
+      "severity": "next",
+      "evidence": [
+        "commons/maps/Point_Trace/tutorial.md"
+      ],
+      "finding": "Trace opens with a source excerpt containing recording gates, shaping and list operations.",
+      "action": "Teach a tiny ordered list and one retention condition first. Reuse Line distance; borrow rendering."
+    },
+    {
+      "id": "triangle-route",
+      "title": "Triangle edges are a step inside the active hall",
+      "nodes": [
+        "face"
+      ],
+      "severity": "resolved-scope",
+      "evidence": [
+        "commons/maps/sequences/primitives.json",
+        "commons/maps/Point_Triangle_Context/tutorial.md"
+      ],
+      "finding": "Point_Triangle is not in the active primitives map list. The current Point_Triangle_Context tutorial already moves from edges to face.",
+      "action": "Keep both conceptual steps in Point_Triangle_Context. Do not add or reorder maps merely to draw this tree."
+    },
+    {
+      "id": "annealing",
+      "title": "A random proposal arrives before Randomness",
+      "nodes": [
+        "search_cost",
+        "random"
+      ],
+      "severity": "bridge",
+      "evidence": [
+        "commons/maps/FormFinding_Annealing/tutorial.md"
+      ],
+      "finding": "Annealing uses random proposals before the dedicated Randomness sequence.",
+      "action": "Supply a named repeatable proposal stream here; return to its seed and distribution later."
+    },
+    {
+      "id": "shader-memory",
+      "title": "Feedback arrives before its full local-rule lesson",
+      "nodes": [
+        "shader_body",
+        "cell",
+        "reaction"
+      ],
+      "severity": "bridge",
+      "evidence": [
+        "commons/maps/sequences/shaders.json",
+        "commons/maps/Shader_10_ReactionDiffusion/final.md"
+      ],
+      "finding": "The Shader sequence contains a reaction-diffusion encounter before CA and the later Soft Bodies return.",
+      "action": "Use a supplied feedback texture now; teach the two-field update later. Distinguish a return from a repeated lesson."
+    },
+    {
+      "id": "network-zoom",
+      "title": "Whole network, then one unit",
+      "nodes": [
+        "network"
+      ],
+      "severity": "bridge",
+      "evidence": [
+        "commons/maps/sequences/machinelearning.json",
+        "commons/maps/ML_Perception/intent.md"
+      ],
+      "finding": "Neural Networks precedes Perception deliberately; the latter is a zoom into a single unit.",
+      "action": "Name the supplied network interface first. Teach its unit when the route zooms in; do not automatically reorder."
+    },
+    {
+      "id": "graph-return",
+      "title": "Networks before Graph Theory",
+      "nodes": [
+        "growth",
+        "collective_search",
+        "graph",
+        "path"
+      ],
+      "severity": "bridge",
+      "evidence": [
+        "commons/maps/PG_Percolation_Network/tutorial.md",
+        "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/tutorial.md",
+        "commons/maps/GT_Foundations/tutorial.md"
+      ],
+      "finding": "Growth and swarm examples already need adjacency and paths before the formal Graph Theory sequence.",
+      "action": "Introduce the smallest useful connection record where first needed; Graph Theory later generalises it."
+    },
+    {
+      "id": "qfep-drift",
+      "title": "Tutorial and current technical account disagree",
+      "nodes": [
+        "proxy"
+      ],
+      "severity": "source-conflict",
+      "evidence": [
+        "commons/maps/QFEP_E_Term/tutorial.md",
+        "commons/maps/QFEP_E_Term/technical.md"
+      ],
+      "finding": "The tutorial describes position spread, while the current technical account counts equal-weight branch endings and reports ln(N).",
+      "action": "Reconcile the learner lesson against the current encounter. Never silently call spread Shannon entropy or treat a project proxy as universal."
+    },
+    {
+      "id": "ca-labels",
+      "title": "Follow the encounter, not the old map name",
+      "nodes": [
+        "cell",
+        "cell_field"
+      ],
+      "severity": "source-check",
+      "evidence": [
+        "commons/maps/CA_GameOfLife/tutorial.md",
+        "commons/maps/CA_BeyondBinary/tutorial.md"
+      ],
+      "finding": "The current CA_GameOfLife tutorial follows retained rows and histories; the explicit Life dish occurs in CA_BeyondBinary.",
+      "action": "Use the source encounter titles in the atlas; verify the intended teaching step before changing names or order."
+    }
+  ],
+  "priority": [
+    "pickup",
+    "line-grid",
+    "trace-list"
+  ]
+}

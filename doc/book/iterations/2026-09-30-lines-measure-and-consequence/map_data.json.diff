@@ -1,0 +1,73 @@
+--- before/commons/maps/Point_Lines/map_data.json
++++ after/commons/maps/Point_Lines/map_data.json
+@@ -30,12 +30,12 @@
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "science_screen#reactive:break#rebuild:8", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "anamorphic_cross:90:0#reactive:break#rebuild:8", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-			[" ", "wall_abstract:0:1.6#work:cube_wire#reactive:break#rebuild:8", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "health_cross", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "wall_abstract:0:1.6#work:divide_diagonal#reactive:break#rebuild:8", " "],
+-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+-			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "anamorphic_cross:0:0#plinth:0#pin:1#passage:1#bar_len_m:2.5#cross_height_m:1.2#damage_per_tick:14#tick_interval:0.6#reactive:break#rebuild:8", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++			[" ", "wall_abstract:0:1.6#work:cube_wire#reactive:break#rebuild:8", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "health_cross:0:0#plinth:0#pin:1#passage:1#arm_m:0.8#hover_m:1.2#boost:21#take_below:1#respawn:8#color:bdebdc", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "wall_abstract:0:1.6#work:divide_diagonal#reactive:break#rebuild:8", " "],
++			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "anamorphic_cross:0:0#plinth:0#pin:1#passage:1#bar_len_m:2.5#cross_height_m:1.2#damage_per_tick:14#tick_interval:0.6#reactive:break#rebuild:8", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "health_cross:0:0#plinth:0#pin:1#passage:1#arm_m:0.8#hover_m:1.2#boost:21#take_below:1#respawn:8#color:bdebdc", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "anamorphic_cross:0:0#plinth:0#pin:1#passage:1#bar_len_m:2.5#cross_height_m:1.2#damage_per_tick:14#tick_interval:0.6#reactive:break#rebuild:8", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
++			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "health_cross:0:0#plinth:0#pin:1#passage:1#arm_m:0.8#hover_m:1.2#boost:21#take_below:1#respawn:8#color:bdebdc", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", "line_space_workshop:180:0#plinth:0#pin:1#reactive:break#rebuild:8", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+ 			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+ 		],
+@@ -166,7 +166,7 @@
+ 		"format": "json",
+ 		"lookup_name": "Point_Lines",
+ 		"metadata": {
+-			"n_artifacts": 41,
++			"n_artifacts": 45,
+ 			"source": "editor"
+ 		},
+ 		"name": "Point_Lines",
+@@ -181,14 +181,16 @@
+ 			"piers": false,
+ 			"plinths": false,
+ 			"gate": false,
+-			"props_deny": ["bench", "wall_clock", "electrical_panel", "floor_grate", "dream_bodies",
+-				"ceiling_vent",
+-				"cable_tray"]
++			"props_deny": ["bench", "wall_clock", "electrical_panel", "floor_grate", "dream_bodies", "ceiling_vent", "cable_tray"]
+ 		}
+ 	},
+ 	"settings": {
+ 		"background": {
+-			"color": [0.08, 0.1, 0.18],
++			"color": [
++				0.08,
++				0.1,
++				0.18
++			],
+ 			"type": "sky"
+ 		},
+ 		"cube_size": 1.0,
+@@ -201,7 +203,7 @@
+ 	},
+ 	"subtitles": {
+ 		"crossing": "Two lines cross — the X marks intersection. Parallel lines organize direction.",
+-		"opening": "A line connects two points. Carry one point to the other and watch the line arrive.",
++		"opening": "Take one end of the line. What changes when its length stays the same?",
+ 		"projection": "Then: perspective, scale, the grid. Lines become measure.",
+ 		"violence": "Measure becomes pleasure. Measure is also violence — what does not fit the grid is remainder, error, erased."
+ 	},
+@@ -219,9 +221,9 @@
+ 		}
+ 	},
+ 	"documentation": {
+-		"summary": "Make a line, walk a line, then change its body and relations.",
+-		"layout": "The authored x=1..4, z=1..4 entrance bay is a 4 m black room, with a north entrance and an east passage. Original entry and Walk this line at z=7; the hall opens at z=9 into four sightlines centred at x=5.5,10.5,15.5,20.5. A floor line reaches the east wall at z=31.2 and climbs it; the exit remains separately accessible.",
+-		"encounters": ["black room: two held endpoints and changing length", "two points and barrier", "endpoint line and metre", "Walk this line with player trace", "plus and X", "parallel planks and measures", "vertical beams and luminous horizon", "planar grid and depth", "Follow this line into the wall"],
++		"summary": "Measure a segment, connect two points to open a barrier, walk a straight instruction, rearrange lines, then pass through harm and recovery.",
++		"layout": "Keep the authored 27 by 37 plan: black box at (2,2), connect-the-dots at (8,2), barrier at (11,2), basin stripe at (9,7), open four-view gallery at (13,17). The exit corridor occupies x=11..13, z=28..35. Six stations at x=12, z=29..34 alternate X damage and + recovery; exit (12,36).",
++		"encounters": ["black box: vary a segment and read its length", "connect the dots: connection opens the barrier", "walk this line: compare stripe and player trace", "four views: plus/X, parallels, verticals and grid/depth", "held laser: measure, dwell, break, wait for return", "follow this line into the wall", "exit: X hurts, + heals, three pairs"],
+ 		"parked_placements": "doc/book/iterations/2026-09-26-lines-four-views/parked-placements.json"
+ 	}
+ }

@@ -1,0 +1,46 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "barrier has shared reaction",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: barrier-before",
+      "passed": true
+    },
+    {
+      "name": "barrier root is hidden",
+      "passed": true
+    },
+    {
+      "name": "all barrier colliders disabled",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: barrier-broken",
+      "passed": true
+    },
+    {
+      "name": "desktop pickup recognised by laser",
+      "passed": false
+    }
+  ],
+  "failures": [
+    "desktop pickup recognised by laser"
+  ],
+  "observations": {
+    "barrier": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/DoNotCrossBarrier",
+    "laser_world": [
+      0.170000001788139,
+      -0.150000005960464,
+      -0.340000003576279
+    ],
+    "reactions": 115,
+    "remaining_barrier_colliders": []
+  },
+  "passed": false
+}

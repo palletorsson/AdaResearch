@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3]
+
+[sub_resource type="StandardMaterial3D" id="FloorMaterial"]
+albedo_color = Color(0.24, 0.25, 0.27, 1)
+roughness = 0.9
+
+[sub_resource type="PlaneMesh" id="FloorMesh"]
+material = SubResource("FloorMaterial")
+size = Vector2(8, 5)
+
+[sub_resource type="BoxShape3D" id="FloorCollision"]
+size = Vector3(8, 0.1, 5)
+
+[sub_resource type="Environment" id="Environment"]
+background_mode = 1
+background_color = Color(0.12, 0.13, 0.16, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.85, 0.89, 1, 1)
+ambient_light_energy = 0.65
+tonemap_mode = 2
+
+[sub_resource type="GDScript" id="HelloScript"]
+script/source = "extends Label3D\n\nfunc _ready() -> void:\n    if visible:\n        print(text)\n"
+
+[node name="Base" type="Node3D"]
+
+[node name="Welcome" type="Label3D" parent="."]
+position = Vector3(0, 1.25, 0)
+pixel_size = 0.004
+font_size = 64
+text = "Hello, world."
+outline_size = 0
+script = SubResource("HelloScript")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("FloorMesh")
+
+[node name="FloorBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorBody"]
+position = Vector3(0, -0.05, 0)
+shape = SubResource("FloorCollision")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(0, 2.0, 4.7)
+rotation = Vector3(-0.18, 0, 0)
+current = true
+fov = 48.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+rotation = Vector3(-0.65, -0.5, 0)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment")

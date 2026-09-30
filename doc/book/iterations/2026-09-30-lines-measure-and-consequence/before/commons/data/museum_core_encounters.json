@@ -1,0 +1,2911 @@
+{
+  "_meta": {
+    "date": "2026-09-08",
+    "policy": "One or a few primary teaching objects for new chapters; preserve developed prose and meaningful comparisons. No placement removal in the manuscript pass. Source inspection supports prose, not human or runtime acceptance.",
+    "note": "An editorial core selects what carries the first reading; supporting objects and existing prose remain. Source-checked drafts require actual museum and learner checks."
+  },
+  "rooms": {
+    "Point_One": {
+      "primary_tokens": [
+        "point_absent",
+        "point_visible",
+        "point_solid",
+        "point_sun_switch",
+        "point_pedestal"
+      ],
+      "reason": "Separate appearance, collision and light. Pickup and references continue in their own hall.",
+      "status": "revised_native_desktop_checked",
+      "sequence": "primitives",
+      "text_path": "commons/maps/Point_One/final.md",
+      "text_sha256": "0e373caae433f14d85ebc34ea4dc22dba99e5706f4b155b15961f0d710c0cb61",
+      "map_sha256": "17a3e80761dd117fb64008cf3c615bd37043c69d830900347ffb9b8e012bb791",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-29-point-and-coordinates/index.html"
+    },
+    "Point_Lines": {
+      "primary_tokens": [
+        "line_demo",
+        "do_not_cross_barrier",
+        "line",
+        "walk_this_line_marking",
+        "player_trace",
+        "line_relations_gallery"
+      ],
+      "reason": "Connection and walking lead to four rearrangeable views. Segment skins make representation tangible; the floor mark then meets a wall.",
+      "status": "revised_native_desktop_checked",
+      "sequence": "primitives",
+      "text_path": "commons/maps/Point_Lines/final.md",
+      "text_sha256": "b9cc54e6497766876510b0e53296257e729d489f28a7c5edb9d7fde1b1b52bd4",
+      "map_sha256": "0d0e8316a5a8a67e7e1c8a252fdf76e294a2496c689addeb658f44e8ef92f25b",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-26-lines-perspective-refined/index.html"
+    },
+    "Point_Trace": {
+      "primary_tokens": [
+        "draw_dot",
+        "draw_stick",
+        "head_trace_projection",
+        "automatic_writing_desk",
+        "whiteboard",
+        "trace_short_memory",
+        "trace_ball_ramp"
+      ],
+      "reason": "The first walk follows the held point, displaced stick tip, head path and floor projection, measured height against time at the writing desk, whiteboard contact and a short-memory companion. Hand telemetry remains secondary; generated defaults are distinguished from measured input. The released black ball adds a path shaped by gravity and contact after the hand lets go.",
+      "status": "encounter_extended",
+      "sequence": "primitives",
+      "text_path": "commons/maps/Point_Trace/final.md",
+      "text_sha256": "6f18920fb10e3c58c40af81c081f05d92f17cd07c3cd5c9aa240c784fe1bb6e4",
+      "map_sha256": "91753fcebdc13e603216819ceaa8d2e1fea13225d59e82123f75ef5fc0114536",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-28-trace-other-futures/index.html"
+    },
+    "Point_Line_Grid": {
+      "primary_tokens": [
+        "grab_sphere_point_snap",
+        "player_trace",
+        "grid_lines",
+        "plan_vitrine"
+      ],
+      "reason": "Follow held and walking addresses, replay a released trace, then enter the five-by-five plan. Its VR pens compare sampled movement with local floor addresses while retaining height.",
+      "status": "existing_text_retained",
+      "sequence": "primitives",
+      "text_path": "commons/maps/Point_Line_Grid/final.md",
+      "text_sha256": "75399a2057a8966c144eebc2c23670f3ff6f2cf9533ee70d06a98f5745163a54",
+      "map_sha256": "bbfbfe6df30991997a87e1d2f5648dfb2e7b5682b23235a8ad1a4a1f0660116a",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-primitives-breathing-room/index.html#reading-Point_Line_Grid"
+    },
+    "Point_Triangle_Context": {
+      "primary_tokens": [
+        "triangle_line_puzzle",
+        "triangle_construction_plate",
+        "draw_triangle_faces",
+        "triangle_live_twin"
+      ],
+      "reason": "Close a boundary and reveal its face; draw an L and shift the fan start to observe overspill without moving the boundary. The precise construction remains in the technical companion. A live 3.3x twin shares the creator vertices and fan; white faces and black edges make changes readable at both scales.",
+      "status": "encounter_extended",
+      "sequence": "primitives",
+      "text_path": "commons/maps/Point_Triangle_Context/final.md",
+      "text_sha256": "87c446dcceb4c7c73fcf9b6cd88241f68ad74e9161a016aba841478c8a831422",
+      "map_sha256": "1835ac12071f56c12aa0c17ca4c63ec6dd185f25c6e7cb93adc9d61b761ef6f2",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-triangle-book-and-room/index.html#reading"
+    },
+    "Primitives_Polythedra": {
+      "primary_tokens": [
+        "grab_trihedron",
+        "grab_tetrahedron",
+        "polyhedra_boundary_plate",
+        "prism_block",
+        "concrete_barrier",
+        "street_sign"
+      ],
+      "reason": "From open corner to enclosed tetrahedron, then compare a prism, a barrier, a slope and signs through the movements they permit or suggest. Other forms remain secondary.",
+      "status": "implemented_component_verified",
+      "sequence": "primitives",
+      "text_path": "commons/maps/Primitives_Polythedra/final.md",
+      "text_sha256": "0fb816feeb652c101e979705e8e8877088bc2ebde6f9939be76e8553fb6ad52b",
+      "map_sha256": "a8f6d88b3693af029a4e0f4673c41d168bd6bfc1e8f43d555950d8a3a119af30",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-tasks/review?seq=primitives&map=Primitives_Polythedra"
+    },
+    "Point_Animatedcube": {
+      "primary_tokens": [
+        "cube_lines",
+        "animatedcubebuilder",
+        "cube_diagonal_plate",
+        "polyhedron_nets_cube",
+        "prefab_box_library"
+      ],
+      "reason": "Follow outline, editable assembly and hinged net, then take real prefab copies from a shelf and compose another arrangement. Carry the crease and the inherited box vocabulary onward.",
+      "status": "implemented_component_verified",
+      "sequence": "primitives",
+      "text_path": "commons/maps/Point_Animatedcube/final.md",
+      "text_sha256": "98c5ef7db7c16cf0c88630028f0aa04c187ecd09204f9cdcf8837cbcf3187e95",
+      "map_sha256": "c996803960562b533e6c7ac6269897c91964c3044fca623ffa69a61ce67b636f",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-26-cube-prefab-library/index.html"
+    },
+    "Primitives_Ignorance": {
+      "primary_tokens": [
+        "sphere",
+        "geometry_courtyard",
+        "sphere_high",
+        "sphere_mid",
+        "sphere_low",
+        "sphere_resolution_atlas",
+        "budget_of_smoothness",
+        "capsule_reliquary",
+        "primitive_mesh_library"
+      ],
+      "reason": "Recognise a sphere, hold five regular solids in a colonnade of changing cylinder resolution, compare independent sphere subdivisions, linger before the five-segment capsule, and inspect further mesh families supplied by the engine. Older studies remain in the side alcove.",
+      "status": "implemented_component_verified",
+      "sequence": "primitives",
+      "text_path": "commons/maps/Primitives_Ignorance/final.md",
+      "text_sha256": "88faabf776471ead31fb38c5b43e1c5e512c21cc2797f5a697d12e08ad160ce0",
+      "map_sha256": "c315b5f30075c6939faf1e0790a02982ebd9675f6da11ec628aef3d5e24f43d6",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-ignorance-courtyard/index.html"
+    },
+    "Primitives_Portals": {
+      "primary_tokens": [
+        "combine_portals",
+        "achilles_tortoise"
+      ],
+      "reason": "Two primary encounters distinguish a reversible finite mesh progression and a controllable halving demonstration. Readouts keep portal geometry, planar perimeter and live marker gaps separate.",
+      "status": "implemented_component_verified",
+      "sequence": "primitives",
+      "text_path": "commons/maps/Primitives_Portals/final.md",
+      "text_sha256": "94ccbbec6637218aeaf2eb1912be276df4f5fc50d567520a5ecfd7820d1ff7ad",
+      "map_sha256": "361ea85006f73673447b111225801be17a8bc83ac327e4a3471c7922bc4e60ff",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-primitives-breathing-room/index.html#reading-Primitives_Portals"
+    },
+    "Primitives_Melencolia": {
+      "primary_tokens": [
+        "pyramid",
+        "pyramidlong",
+        "cube_scene",
+        "snap_pyramid_puzzle",
+        "durer_scene",
+        "frame_counter_display"
+      ],
+      "reason": "Recognise the court, then meet those forms among figures and tools after Dürer. Geometric desire links exact construction to unsettled purposes; the engine counter returns before Transformation.",
+      "status": "encounter_and_text_revised",
+      "sequence": "primitives",
+      "text_path": "commons/maps/Primitives_Melencolia/final.md",
+      "text_sha256": "ff2c98ad9a95e62991127f785d6cdaf0aa1b789250a60ac3ad18bf677a2570e8",
+      "map_sha256": "02bb9039233f3c317a839f716bc4f64bce4df10aca08e74d35105a54dad47fce",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-melencolia-geometric-desire/index.html"
+    },
+    "Trans_Pre": {
+      "primary_tokens": [
+        "pick_up_cube"
+      ],
+      "reason": "Carry Melencolia's question about what survives into the still collectible cube, then add vertical movement, turning and uniform scale before the small pickup level.",
+      "status": "draft",
+      "sequence": "transformation",
+      "text_path": "commons/maps/Trans_Pre/final.md",
+      "text_sha256": "e3bcffbc61715384b1670357844f0c44d8b74c1f976e2769083aa5f60e17d3ce",
+      "map_sha256": "ba4d4c1dc5320263f2b0250bdffc3b184ced341202063c0e5ac23b2f626e0767",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-transformation-invitation/index.html#reading"
+    },
+    "Trans_Introduction": {
+      "primary_tokens": [
+        "tc",
+        "sc",
+        "rc",
+        "adjustable_landing"
+      ],
+      "reason": "Compare translation, scaling and rotation as crossings, without the head crab. Move the far bank while the plank keeps its motion: what makes the crossing possible?",
+      "status": "draft",
+      "sequence": "transformation",
+      "text_path": "commons/maps/Trans_Introduction/final.md",
+      "text_sha256": "b7b1bc4143cd18e11641e41b03df325c191649acc8e9391f3435a88d4dde5d43",
+      "map_sha256": "71681d5b579be0a60badaf9d9801c0dc17e0bb0bcbfb9700fbe24a00bf57a78d",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-crossings-fire-and-fit/index.html",
+      "review_scope": "35/35 isolated production-museum checks: fire coverage, bridge edge fit, capsule crossing both directions, slider/reset and actual desktop fire death/reset. Native screenshots inspected. Headset and learner acceptance remain open; engine reports an ObjectDB leak warning on shutdown."
+    },
+    "Trans_Translation": {
+      "primary_tokens": [
+        "tc",
+        "pick_up_cube",
+        "translation_cube_demo"
+      ],
+      "reason": "Thirteen pickups sit on seven carrier routes through x, y and z. Two exit mechanisms share a destination but permit different journeys; the turning torus anticipates rotation.",
+      "status": "draft",
+      "sequence": "transformation",
+      "text_path": "commons/maps/Trans_Translation/final.md",
+      "text_sha256": "ff9d5754996fc1089cceb6733a5ec329b2f8a081306a0aa40744736c749b9a33",
+      "map_sha256": "91dd759ce20b305412aa2836729176cc877bb587843017c913478bb713489d08",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-translation-journey-and-permission/index.html#reading"
+    },
+    "Trans_AxisDecomposition": {
+      "primary_tokens": [
+        "translation_cube_demo",
+        "x_translation_cube",
+        "z_translation_cube"
+      ],
+      "reason": "One decomposition display and the paired axis examples make the comparison explicit.",
+      "status": "existing_text_retained",
+      "sequence": "transformation",
+      "text_path": "commons/maps/Trans_AxisDecomposition/final.md",
+      "text_sha256": "dcbdee7bdb4d77428ae78a309db565f0358eb0b6b05c484675688c4eb68dd70a",
+      "map_sha256": "5dcd08ae5e1530cb0a1bc3dbe381f1474dcdc4ce6cd04db0149681cc0265d979",
+      "learner_verified": false
+    },
+    "Trans_Rotation": {
+      "primary_tokens": [
+        "rotation_wall_crossings",
+        "rotation_array_compare",
+        "transform_composition_workbench",
+        "axial_sweep",
+        "boolean_tunnel",
+        "carousel_cake"
+      ],
+      "reason": "Crossings, marked rotation arrays, a restored comparison of operation order, axial sweep, hollow tunnel and five carousel profiles. Compare a preserved shape with its marked orientation and the passages a body can use.",
+      "status": "draft",
+      "sequence": "transformation",
+      "text_path": "commons/maps/Trans_Rotation/final.md",
+      "text_sha256": "72f59244fe71efdac3fb3afe15fed0b727e7680b5a1c1bfc24b32483ccddb332",
+      "map_sha256": "3a18a836fdc11e7511c79b64b4914e4971d7a0e8cc3ab8203656b3a274fdf774",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-rotation-follow-a-turn/index.html#reading"
+    },
+    "Trans_RotationSpectacle": {
+      "primary_tokens": [
+        "boolean_tunnel",
+        "carousel_cake"
+      ],
+      "reason": "Museum exhibition gallery: central boolean tunnel and six carousel instances, three on either side, showing five profiles under one speed rule.",
+      "status": "draft",
+      "sequence": "transformation",
+      "text_path": "commons/maps/Trans_RotationSpectacle/final.md",
+      "text_sha256": "8719d21090293385a6477c4d2eaa808caf94ab4aa4491928a8e68ab17a4ef253",
+      "map_sha256": "6700b7f3909a11661e9d3f8eafc787298bf1b72c4bf2623881180f40768a6510",
+      "learner_verified": false
+    },
+    "Trans_Scale": {
+      "primary_tokens": [
+        "scale_me"
+      ],
+      "reason": "Take the bottle: the room changes to four times its size in one update, then your body is relocated onto the table. Descend and compare the enlarged doorway with a fixed museum frame.",
+      "status": "draft",
+      "sequence": "transformation",
+      "text_path": "commons/maps/Trans_Scale/final.md",
+      "text_sha256": "c81cb57ec6335739973a0a1b4c78bbfbf9e4fd4b68a95812f638dc256b0389e3",
+      "map_sha256": "0746e3b72d6d51cbd893e65b22adb3c6d071869ab81fa3d90981f3b31a1fe008",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-scale-and-body-passage/index.html#reading-scale"
+    },
+    "Trans_Pit": {
+      "primary_tokens": [
+        "pusher_block",
+        "rc",
+        "grower_block",
+        "transformation_airlock"
+      ],
+      "reason": "Timed pushers, rotating slabs and synchronised growers change access on level ground. At the exit, two armoured door leaves combine translation, rotation and scale into a passage that opens on approach.",
+      "status": "draft",
+      "sequence": "transformation",
+      "text_path": "commons/maps/Trans_Pit/final.md",
+      "text_sha256": "40d1fe70daf701072794aa80abac624f97fdbb61a7684a69dd7241fc1583d167",
+      "map_sha256": "2f600e428f43903b2d59f86cfbd9ec03a4412b4cbb6ad36599b87383fa4db162",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-boundary-makes-room/index.html#reading"
+    },
+    "Array": {
+      "primary_tokens": [
+        "row_3_x",
+        "grid_2d_4x4",
+        "array_floor_writer",
+        "molnar_cube_study"
+      ],
+      "reason": "Row and grid introduce indexed occupancy; the changing floor gives a write a bodily consequence; the Molnár-inspired transparent cube study varies transforms at fixed sites before the full-scale third-index hall.",
+      "status": "source_checked_draft",
+      "sequence": "array_tutorial",
+      "text_path": "commons/maps/Array/final.md",
+      "text_sha256": "65c7f52d3fe627ac484a92d27a2cb281ab40f89d1fdf675bed3926b5f9a3206b",
+      "map_sha256": "7b989857e1da6f9f93c0dc2ebf9171298eb2f76bae8df24e25650ddc712c57f6",
+      "learner_verified": false,
+      "pilot_action_id": "array-addresses-persist",
+      "runtime_check": {
+        "evidence": "doc/book/iterations/2026-09-23-array-molnar-volume/report.json",
+        "scope": "38 focused checks for the new study: production museum placement, supplied pointer controls, deterministic transforms, fixed indices, bounded geometry and an actual-body circuit around the plinth. Not a full hall or headset/learner test.",
+        "earlier_evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md"
+      },
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-array-a-place-kept/index.html#reading",
+      "floor_runtime_check": {
+        "evidence": "doc/book/iterations/2026-09-24-arrays-review-comments/floor/report.json",
+        "scope": "25 controlled native checks: live grid writes, once-per-state pacing, protected cells and existing Molnár pad and existing Molnár pad, pause/resume, support removal, actual-body descent and occupancy-aware restoration. Not a headset traverse, recovery/comfort or learner test."
+      }
+    },
+    "Tutorial_Single": {
+      "primary_tokens": [
+        "pick_up_cube"
+      ],
+      "reason": "What is the smallest action this world can recognise?",
+      "status": "source_checked_draft",
+      "sequence": "array_tutorial",
+      "text_path": "commons/maps/Tutorial_Single/final.md",
+      "text_sha256": "c70bc260d6ad9269ee03dd24c325bd2baf5a15c9893a79633a23c0a3280c2d4c",
+      "map_sha256": "d0bf3f596abad38c52360c18fd86cce04ddd4d14c7debe125268872b08ebed83",
+      "learner_verified": false,
+      "pilot_action_id": "single-contact-once",
+      "runtime_check": {
+        "evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md",
+        "scope": "Recorded scene/runtime checks; headset, complete route and learner acceptance remain open."
+      }
+    },
+    "Tutorial_Disco": {
+      "primary_tokens": [
+        "disco_controls",
+        "step_sequencer",
+        "standalone_disco"
+      ],
+      "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+      "status": "source_checked_draft",
+      "sequence": "array_tutorial",
+      "text_path": "commons/maps/Tutorial_Disco/final.md",
+      "text_sha256": "580d7e5b0d5177778743e7553ed6c3d0482ce54d40e6d4c81e9d3390f64890d5",
+      "map_sha256": "b41df70d842fc31f5d67b9ff116c2c53dc4a1e8c4d6de30814cff1cc011de075",
+      "learner_verified": false,
+      "pilot_action_id": "disco-stored-step-trace",
+      "runtime_check": {
+        "evidence": "doc/book/iterations/2026-09-28-disco-a-rule-in-time/report.json",
+        "scope": "60 checks in the isolated production museum: supplied pointer/UI events, fixed tile transforms, independent score and visual clocks, note events, ordinary-controller walks, checker return and held fractional triangle pose. Fresh eye-height native captures. Audio muted; no listening-quality, headset or learner claim."
+      },
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-disco-a-rule-in-time/index.html#reading"
+    },
+    "Color_Context_Placed": {
+      "primary_tokens": [
+        "chroma_stack",
+        "color_dna_stack"
+      ],
+      "reason": "Primitives, transformations and arrays are the pedagogical preconditions for colour: compare reproducible assignments, then follow the scientific and associative questions opened by richer stacks and gallery studies.",
+      "status": "draft",
+      "sequence": "color",
+      "text_path": "commons/maps/Color_Context_Placed/final.md",
+      "text_sha256": "3626b4aff206091dd8b7ff5326508459a5513a6756bb6ffc2a5f25fa1c7e9e22",
+      "map_sha256": "245287308f12494d7e3df1fed6578046c2a616304007b861498d7dd7cf71bdc6",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-colour-another-order/index.html#reading"
+    },
+    "Color_Nails": {
+      "primary_tokens": [
+        "nail_color_controller",
+        "hand_color_controller"
+      ],
+      "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+      "status": "draft",
+      "sequence": "color",
+      "text_path": "commons/maps/Color_Nails/final.md",
+      "text_sha256": "227dd0299c9386774b4593bce2ca02e10e62f020a19757941f36ef1962389208",
+      "map_sha256": "5e51c030c5df630affe069e1160089cd44196b546bbc2b6a7043386cd3d0efec",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-28-nails-colour-and-permission/index.html"
+    },
+    "Color_Pillar": {
+      "primary_tokens": [
+        "pillarcolorcollection",
+        "color_sets_overview"
+      ],
+      "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+      "status": "draft",
+      "sequence": "color",
+      "text_path": "commons/maps/Color_Pillar/final.md",
+      "text_sha256": "c6aa32e8905dad3780321b0d8f70b5ea9356d77236b743c06eb81d3b273472c6",
+      "map_sha256": "02d6e14dca7e1be71b2d60f42e5de8e4addc84e8db312b908ddb04966af49d16",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-28-pillar-colour-ceiling/index.html"
+    },
+    "Color_Walls": {
+      "primary_tokens": [
+        "color_constellation_office",
+        "color_space_navigator",
+        "gradient_interpolator"
+      ],
+      "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+      "status": "draft",
+      "sequence": "color",
+      "text_path": "commons/maps/Color_Walls/final.md",
+      "text_sha256": "042927e1e46acad6ea3183f1f565ded4b1b4e63a76ae6d4eab376b4097e64cbc",
+      "map_sha256": "cc8fc41cdafb354118c05c6b62864efb829fd2dc2d13891dda66ff33512b2aff",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-walls-a-view-from-inside/index.html"
+    },
+    "Pattern_Foundry": {
+      "primary_tokens": [
+        "pattern_architecture",
+        "pattern_tile_4x4",
+        "pattern_tile_mirror",
+        "pattern_machine_a"
+      ],
+      "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+      "status": "source_checked_draft",
+      "sequence": "tiling",
+      "text_path": "commons/maps/Pattern_Foundry/final.md",
+      "text_sha256": "7f2c0efaa50505edb75c5d53c9ae6d7611119468e749f5574e38387662d499cb",
+      "map_sha256": "e4aed04049a9ad9a2d70cfa77e3a35bc0959ebfec33dcae507f4a0a220357b57",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-28-foundry-a-mark-in-the-room/index.html#reading"
+    },
+    "Tutorial_Pattern": {
+      "primary_tokens": [
+        "pattern_maker_station"
+      ],
+      "reason": "What stays the same when you change the rule but keep the motif?",
+      "status": "source_checked_draft",
+      "sequence": "tiling",
+      "text_path": "commons/maps/Tutorial_Pattern/final.md",
+      "text_sha256": "6bc8163b46ff43d54a1b1ade2f9bc1fbce69542212d1e990274f4625ab495f03",
+      "map_sha256": "45c0b9105cabc993d1daec3364097ea20a1878480722f50760e739f9afc09c3c",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-28-pattern-a-facing-return/index.html#reading"
+    },
+    "Array_Patterns": {
+      "primary_tokens": [
+        "pattern_tunnel_machine",
+        "pattern_tile_brick"
+      ],
+      "reason": "When does repetition become an environment rather than a picture?",
+      "status": "source_checked_draft",
+      "sequence": "tiling",
+      "text_path": "commons/maps/Array_Patterns/final.md",
+      "text_sha256": "33966c7f2b3842b9b9f5eb060fa3c1427f4001affdf8aa9a67a37192764b5e84",
+      "map_sha256": "3b3fe75974df6f020a3c0f107b1cdd695c8c5fe1636bad611a6f7c11200e1e01",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Array_Patterns"
+    },
+    "Symmetry_Seventeen": {
+      "primary_tokens": [
+        "vr_tile_editor",
+        "wallpaper_cage"
+      ],
+      "reason": "What assumptions make a catalogue of symmetries finite?",
+      "status": "source_checked_draft",
+      "sequence": "tiling",
+      "text_path": "commons/maps/Symmetry_Seventeen/final.md",
+      "text_sha256": "421b083cb03b5ef4c264092f9adabf6afea93d6c46608e4d6673185a85ef77ea",
+      "map_sha256": "633e1bafa47c7b3a42d5a051745ea4f2cf713d84d64f5c4a666c0467636c1cae",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Symmetry_Seventeen"
+    },
+    "Change_Intro": {
+      "sequence": "change",
+      "primary_tokens": [
+        "tangent_slope_workbench",
+        "riemann_sum_workbench",
+        "ftc_bridge"
+      ],
+      "status": "desktop_verified_headset_pending",
+      "learner_verified": false,
+      "reason": "Finite rate, held contributions and requested endpoint comparison; two bench moves support the manuscript order.",
+      "map_sha256": "439a660dc472362f025d063a6878ded4b07ef083e44c76faa10c4c5701f5a055",
+      "text_path": "commons/maps/Change_Intro/final.md",
+      "text_sha256": "603a98e70b26c070df203cbe77324bf203ec24313f12593d8e7ca673d5833873",
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-25-change-review-comments/index.html#Change_Intro"
+    },
+    "Flow_Field": {
+      "sequence": "change",
+      "primary_tokens": [
+        "flow_field_painter"
+      ],
+      "status": "desktop_verified_headset_pending",
+      "learner_verified": false,
+      "reason": "Sample direction at the current position, then let the update choose the next address. Status and controls are exposed without changing the particle rule.",
+      "map_sha256": "7b6fa11161c119c8489adcf20c0af24a01cc6b6986b1ef99767752d0c637de11",
+      "text_path": "commons/maps/Flow_Field/final.md",
+      "text_sha256": "fdb785529330954c28f55e95165fc6152eba8cce048dbb58db796fde5fd2ee29",
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-25-change-review-comments/index.html#Flow_Field"
+    },
+    "Vectors_Act1_WhatAVectorIs": {
+      "primary_tokens": [
+        "VectorBasics",
+        "vector_normalize_demo"
+      ],
+      "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "forces",
+      "text_path": "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+      "text_sha256": "c2a0c0128fef0c09ba844188ce54df1122c0a4a7a7846a511dc693a08d343332",
+      "map_sha256": "04d80db61a70e28945a021154a53591a2170e694d26402e0b88a59d99fb5a1e4",
+      "learner_verified": false,
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-25-forces-review-comments/index.html#Vectors_Act1_WhatAVectorIs",
+      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+    },
+    "VFM_02_Operations": {
+      "primary_tokens": [
+        "adder_board"
+      ],
+      "reason": "Two displacements feed one sum in wall, floor and carriage; compare endpoint with travelled distance.",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "forces",
+      "text_path": "commons/maps/VFM_02_Operations/final.md",
+      "text_sha256": "06b431a956fc2407115ffff3432b8e1b282983cb0be4bb30a7f82b8499d7da1d",
+      "map_sha256": "cdccdc152925176e55cdefcdc7297a2e1fb97ad7fc656b203c08076042fb852b",
+      "learner_verified": false,
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-24-forces-relations/index.html#reading-VFM_02_Operations",
+      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+    },
+    "Vectors_Act2_VectorArithmetic": {
+      "primary_tokens": [
+        "vector_add",
+        "vector_sub",
+        "dot_aligner",
+        "projection_shadow",
+        "torque_crank"
+      ],
+      "reason": "Five primary comparisons retained; new subtraction and projection share one live gap and expose its remainder.",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "forces",
+      "text_path": "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+      "text_sha256": "99e94eb254e4904782736aae875727b93f961f0c76bba2e85c8b8eea74dd97c5",
+      "map_sha256": "b3e5c4aba545332ab0340fb6402a10a9f86dc10f92473bcebc7377231ea803e5",
+      "learner_verified": false,
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-24-forces-relations/index.html#reading-Vectors_Act2_VectorArithmetic",
+      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+    },
+    "VFM_05_Launch": {
+      "primary_tokens": [
+        "launch_arc"
+      ],
+      "reason": "Stand between full-scale complementary flights; compare range, time and continuing gravity before revealing equations.",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "forces",
+      "text_path": "commons/maps/VFM_05_Launch/final.md",
+      "text_sha256": "b8c2e03ed1ee3c8b4e63fe3647056c65d03cacc4658e84591c32ef4ede4f22dd",
+      "map_sha256": "cf891a2af0ff03f26ad57a75a512c618d77f2993ea0573e8f9cc1b5e9fa7b813",
+      "learner_verified": false,
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-24-launch-and-motion/index.html#reading-VFM_05_Launch",
+      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+    },
+    "VFM_03_Motion": {
+      "primary_tokens": [
+        "VectorMotion",
+        "friction_ramp"
+      ],
+      "reason": "A finite push leaves a velocity; compare gradual braking with the ramp model's static transition.",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "forces",
+      "text_path": "commons/maps/VFM_03_Motion/final.md",
+      "text_sha256": "91ed4001f3f1bed04880b53b8888708830ea596a84e723441a2f4fa78c49218d",
+      "map_sha256": "eee92d1694c855c91bb21f41927cc60540338ebc08f50d2fb8ccb7a55d0214aa",
+      "learner_verified": false,
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-24-launch-and-motion/index.html#reading-VFM_03_Motion",
+      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+    },
+    "Vectors_Act3_FieldsAndMotion": {
+      "primary_tokens": [
+        "VectorFieldFlow"
+      ],
+      "reason": "Two receiver rules sample the same field: setting velocity approaches the sink, accumulating acceleration overshoots.",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "forces",
+      "text_path": "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+      "text_sha256": "663d0c61acf446f3cff5155dba73876f43a32f13678f2ae82d8778fa1e0f342e",
+      "map_sha256": "4fb97e5871633d9804c6d883333ea611427094e0db9fc22d129a5e9db16c360b",
+      "learner_verified": false,
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-24-field-and-receiver/index.html#reading-Vectors_Act3_FieldsAndMotion",
+      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+    },
+    "Vectors_Act4a_KineticForces": {
+      "primary_tokens": [
+        "drag_corridor",
+        "force_mower",
+        "centrifuge_ring"
+      ],
+      "reason": "Applied drag, signed nominal work and required circular acceleration have different receivers and histories.",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "forces",
+      "text_path": "commons/maps/Vectors_Act4a_KineticForces/final.md",
+      "text_sha256": "7ededcffc026b25c007d60a7649f121502365b406b11e7c0774207ce897a0cd6",
+      "map_sha256": "583fb38c809f12396b5f4a0d109ff30c1e8ed7e6c9015009642e02d4443b9a4e",
+      "learner_verified": false,
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-25-forces-review-comments/index.html#Vectors_Act4a_KineticForces",
+      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+    },
+    "Vectors_Act4b_Oscillation": {
+      "primary_tokens": [
+        "spring_tower"
+      ],
+      "reason": "One integrated restoring-force encounter, with the force budget shared by the body and wall; later Wavefunctions develops rhythm and records.",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "forces",
+      "text_path": "commons/maps/Vectors_Act4b_Oscillation/final.md",
+      "text_sha256": "dcb13eabab91ba35a0de3d52cd293dd61d276ac6070130d77da7cf7a0bb93cd0",
+      "map_sha256": "8f461aab3551f8b563dc87109a08c98ddee5f8cca5b209042d3c0cf1b164a1c4",
+      "learner_verified": false,
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
+      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+    },
+    "VFM_07_Gravity": {
+      "primary_tokens": [
+        "orbital_mechanics_demo",
+        "three_body_problem"
+      ],
+      "reason": "A held source becomes a mutual relation, then a third body changes the earlier pair. Shared softened law and controlled paired beginnings.",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "forces",
+      "text_path": "commons/maps/VFM_07_Gravity/final.md",
+      "text_sha256": "6480238f3089a940a6321af670f7c766a867737dc3fc839d3dd95e855434740b",
+      "map_sha256": "1b6dd1d66b47c1bad6787426a6a721e28c1b9a78c1a55f3e095bcb12607483d6",
+      "learner_verified": false,
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-25-forces-review-comments/index.html#VFM_07_Gravity",
+      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+    },
+    "VFM_09_Legs": {
+      "primary_tokens": [
+        "support_polygon_lab",
+        "four_leg_critter"
+      ],
+      "reason": "Physical support and tipping beside a retained procedural walker: geometry, contact and authored movement become distinguishable.",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "forces",
+      "text_path": "commons/maps/VFM_09_Legs/final.md",
+      "text_sha256": "cf1c2f5112ca51a2d82126f5e83c24c508a39e760ce0db60bbd0dcdc02674018",
+      "map_sha256": "089240b597a97326f7e94d570f920531129347a5c74e2be60560ffadbfb4f9ec",
+      "learner_verified": false,
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
+      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+    },
+    "VFM_08_Arena": {
+      "primary_tokens": [
+        "arena_relation_lab",
+        "collision_carts"
+      ],
+      "reason": "A scoped creature makes selection and retained feeding state inspectable; the existing collision passage distinguishes controller actions from conservation constraints.",
+      "status": "behavior_checks_passed_teardown_failure",
+      "sequence": "forces",
+      "text_path": "commons/maps/VFM_08_Arena/final.md",
+      "text_sha256": "0b474626dc1121778ac9837c9b76ee44d1ea52501bb19ce34de3be59e8753cea",
+      "map_sha256": "bc39731e6147e74c51a0a23d0437248c8e41ee222430d5a505b01e7ca2a2525b",
+      "learner_verified": false,
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-19-forces-review/SUMMARY.md",
+      "review_scope": "49 behavioral/inventory/approach checks completed; headless engine teardown hangs or crashes. Not a clean runtime-suite pass."
+    },
+    "Vectors_Act5_ForceAsPlace": {
+      "primary_tokens": [
+        "vector_machine",
+        "force_cube",
+        "force_field_zone"
+      ],
+      "reason": "Aim, observe a probe, then compare a visitor receiver; all supporting exhibits retained.",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "forces",
+      "text_path": "commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+      "text_sha256": "f3a4d7d435d58203a96caea14bcb720288e3642410e1b7c780c2503610bf2161",
+      "map_sha256": "037918d58315c4fe0e8746cd3dc035851b87f8555a5d701c8d4940595f0075f4",
+      "learner_verified": false,
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-25-forces-review-comments/index.html#Vectors_Act5_ForceAsPlace",
+      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+    },
+    "FormFinding_Descent": {
+      "primary_tokens": [
+        "descent_landscape_lab"
+      ],
+      "reason": "Predict a local step; compare starts and stopping conditions. Preserve the verified manuscript and its five retained comparisons.",
+      "sequence": "formfinding",
+      "status": "desktop_verified_headset_pending",
+      "learner_verified": false,
+      "map_sha256": "e8075f3e1abb677ee419781b3df93eb3efde199a1b4064c7e58bf322e68b9a3f",
+      "text_sha256": "001ccbe611d8c3a5fc14c32127329bb9fbaba3c0a332e0c066f1299739f59be3",
+      "local_review": "doc/book/iterations/2026-09-25-formfinding-review-comments/index.html#FormFinding_Descent",
+      "verification_scope": "Historical 36-check museum run with unchanged primary/map/text/source fingerprints; current static-diagram label repair checked separately."
+    },
+    "FormFinding_Catenary": {
+      "primary_tokens": [
+        "cable_builder",
+        "laundry_line_cathedral",
+        "catenoid"
+      ],
+      "reason": "Move a drafted cable, compare an analytic washing line, then lift the generated surface. Distinguish a constructed form from a physical solve.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "formfinding",
+      "text_path": "commons/maps/FormFinding_Catenary/final.md",
+      "text_sha256": "f7b8ad49fc6db7b5ec5da2f311139fb67b5574660aa304241a972800786b484f",
+      "map_sha256": "8ad12a2910e30a4537a5d401cc43e636f31adeb39e5e90ff0f267e6c29339756",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-formfinding-review-comments/index.html#FormFinding_Catenary",
+      "verification_scope": "Bounded source, behavior and museum checks for the documented repairs; no complete headset visit or learner validation."
+    },
+    "FormFinding_Relaxation": {
+      "primary_tokens": [
+        "verlet_workbench",
+        "mass_spring_bench",
+        "frozen_glass_vessel"
+      ],
+      "reason": "Control passes and wind; compare average/local errors, then inspect finite histories kept as lattice and vessel.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "formfinding",
+      "text_path": "commons/maps/FormFinding_Relaxation/final.md",
+      "text_sha256": "5d2a2518176fea3bb280917f6c8d7d8d06d2c0df1a584f3822b9b16f6944bc12",
+      "map_sha256": "e8f61c07b352c3d810beb326defbcb7d35aec34be72ffb0014a13c6d76afd625",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-formfinding-review-comments/index.html#FormFinding_Relaxation",
+      "verification_scope": "Bounded source, behavior and museum checks for the documented repairs; no complete headset visit or learner validation."
+    },
+    "FormFinding_Equilibrium": {
+      "primary_tokens": [
+        "calder_mobile",
+        "tensegrity_triangle"
+      ],
+      "reason": "Read the lever arithmetic and inspect the omissions of a static balance model; compare a prescribed pulse and recursive bracing.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "formfinding",
+      "text_path": "commons/maps/FormFinding_Equilibrium/final.md",
+      "text_sha256": "d5253a28a4060b9585909d15c092e9df444aa2b9fe5d78638225488269b04f1b",
+      "map_sha256": "6e3d2ce7c6b493f50d9b2eb201b2e1bbadf6db4e7e5a90521a226590a447a372",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-formfinding-review-comments/index.html#FormFinding_Equilibrium",
+      "verification_scope": "Bounded source, behavior and museum checks for the documented repairs; no complete headset visit or learner validation."
+    },
+    "FormFinding_Annealing": {
+      "primary_tokens": [
+        "energy_landscape_bench",
+        "simulated_annealing",
+        "max_q_basin_room"
+      ],
+      "reason": "Compare local settling, uphill acceptance and a separate hop; observe two differently driven basins before revealing their Q proposition.",
+      "status": "desktop_checked_native_teardown_unresolved",
+      "sequence": "formfinding",
+      "text_path": "commons/maps/FormFinding_Annealing/final.md",
+      "text_sha256": "c090a2395b79370f5fd40d0ff34f5c4e9344798d11a287035fa7e268d5742b6d",
+      "map_sha256": "dc537606fed8ef042ca5e77257f9007c385c3e169dc79e71699dfa275ce0dab2",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-formfinding-review-comments/index.html#FormFinding_Annealing",
+      "verification_scope": "Documented behavior and museum placement checks; isolated Annealing/Q behavior checks complete but native teardown crashes. This is not a clean overall runtime pass. Headset and learner validation remain open."
+    },
+    "FormFinding_Forge": {
+      "primary_tokens": [
+        "balance_puzzle",
+        "self_shaping_forge",
+        "gradient_descent_optimizer"
+      ],
+      "reason": "Compare a height-and-stability success rule, an authored body gathered by a clock, and local optimizer histories; distinguish recognition, destination and stopping conditions.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "formfinding",
+      "text_path": "commons/maps/FormFinding_Forge/final.md",
+      "text_sha256": "5bc0dcae07ffd7654926d0f25b8d41bd1d36a2612efe2d6a72b39f848187355a",
+      "map_sha256": "27cbb81b1ced002536b58ebe83866c637a14ddd6137eb1b7a25e0290a1693078",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-formfinding-review-comments/index.html#FormFinding_Forge",
+      "verification_scope": "Bounded source, behavior and museum checks for the documented repairs; no complete headset visit or learner validation."
+    },
+    "WaveFunctions_Intro": {
+      "primary_tokens": [
+        "control_pendulum"
+      ],
+      "reason": "Compare two returns to one position by their velocity; retain the prescribed and driven-motion companions.",
+      "status": "source_checked_draft",
+      "sequence": "wavefunctions",
+      "text_path": "commons/maps/WaveFunctions_Intro/final.md",
+      "text_sha256": "a4cfd70349d87286032d53620ddae87752d902acc02531881262e47960546f9e",
+      "map_sha256": "680e2fe5414db351be215d9f3020efc3882875cce1cd2ad8e8a5798b50b5889c",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+      "verification_scope": "Current source and historical 58-check desktop evidence; no full historical source fingerprint or new headset run."
+    },
+    "WaveFunctions_Pendulum": {
+      "primary_tokens": [
+        "PendulumWave"
+      ],
+      "reason": "Compare a movement with the finite, timestamped history that its sampler keeps.",
+      "status": "source_checked_draft",
+      "sequence": "wavefunctions",
+      "text_path": "commons/maps/WaveFunctions_Pendulum/final.md",
+      "text_sha256": "99396653ee8e56f8b20b826b65cf4125dca2d236953991bc5cd1daeaa9aca8fc",
+      "map_sha256": "3c0d2b3a9fa8d91010771b9bf8ce353a5dd955866a4c01f0785d0e07d5dec483",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+      "verification_scope": "Current source and historical 81-check desktop evidence; no full historical source fingerprint or new headset run."
+    },
+    "WaveFunctions_Sine_Space": {
+      "primary_tokens": [
+        "sine_flow_tray",
+        "sine_wall_corridor"
+      ],
+      "reason": "Try body size and relief, then distinguish moving visual walls from collision support.",
+      "status": "source_checked_draft",
+      "sequence": "wavefunctions",
+      "text_path": "commons/maps/WaveFunctions_Sine_Space/final.md",
+      "text_sha256": "5c03c2f4a9fa302819b20627664c30ce24ab7e2c6c2e14d5405ebb77b413c74f",
+      "map_sha256": "6dbc4c8c5d6ad0cd3085127748f4f1e3c5b1acebbf66f0cadd51b4ca75655b24",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+      "verification_scope": "Current source; dated tray source/scene/probe/registry match earlier evidence, but whole-room configuration does not. Corridor evidence is historical."
+    },
+    "WaveFunctions_Unit_Circle": {
+      "primary_tokens": [
+        "unit_circle_advanced"
+      ],
+      "reason": "Predict a turning point’s coordinate graph after meeting sine-shaped space; keep its rods attached under placement.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "wavefunctions",
+      "text_path": "commons/maps/WaveFunctions_Unit_Circle/final.md",
+      "text_sha256": "98989d61e16f87d5f0648518e26f72afb6357bb1cd705f9b7c064b10d657e4da",
+      "map_sha256": "8b47b658ed8f4d42c36ad011a892be5fc88f329fcf01167dc95b7770bc30e746",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+      "verification_scope": "Fresh isolated local/world transform regression: 102 checks; saved original fails 51. No complete museum walkthrough."
+    },
+    "WaveFunctions_3D_Wave_Propagation": {
+      "primary_tokens": [
+        "coupled_oscillator_lattice"
+      ],
+      "reason": "Compare the same reset and forcing with links present and absent; follow a neighbour before explaining transmission.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "wavefunctions",
+      "text_path": "commons/maps/WaveFunctions_3D_Wave_Propagation/final.md",
+      "text_sha256": "82cc3d1fe29e60746ced8b46e14a217c1f9a1d369ac51a48320327dc633d2ed0",
+      "map_sha256": "73af4041bae391cc4899e3ab5f89c3df0f6dfbda23f2a769d49952584cf6b3da",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+      "verification_scope": "Fresh isolated comparison controls and bounded actual-museum placement/capture checks; see middle/AUDIT.md for reach limits."
+    },
+    "WaveFunctions_Effect_Sound": {
+      "primary_tokens": [
+        "DualBallFMController"
+      ],
+      "reason": "Keep a listening reference while moving the two parameter bodies; read the implemented phase modulation.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "wavefunctions",
+      "text_path": "commons/maps/WaveFunctions_Effect_Sound/final.md",
+      "text_sha256": "44391cd902daf249ca029de6cca263b7252ece3f8c13f8cea1388f15ffaece0c",
+      "map_sha256": "5e4a7ddf98a33a47be1a6ccd5df21047c41aa51dfc4a3090478b890dff507d6b",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+      "verification_scope": "Current DSP source and bounded actual-museum label capture; no new complete listening or headset session."
+    },
+    "Wavefunctions_Bernini": {
+      "primary_tokens": [
+        "bernini_columns"
+      ],
+      "reason": "Compare variation through height with rotation through time and with your own movement around a shaft.",
+      "status": "source_checked_draft",
+      "sequence": "wavefunctions",
+      "text_path": "commons/maps/Wavefunctions_Bernini/final.md",
+      "text_sha256": "29d793cc377198087ab432679a610ea0df38c8b5e6e5fba24f8510633f215279",
+      "map_sha256": "0f0a80debf5acab39b20774e08e5381fd50a710374250bb0ccb1d595264e38a4",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+      "verification_scope": "Current mesh/audio source and restored route contract; no new runtime or headset validation of this encounter."
+    },
+    "WaveFunctions_John_Cage": {
+      "primary_tokens": [
+        "john_cage_tech_noir"
+      ],
+      "reason": "Listen for what chance changes within the prepared vocabulary and what remains authored.",
+      "status": "source_checked_draft",
+      "sequence": "wavefunctions",
+      "text_path": "commons/maps/WaveFunctions_John_Cage/final.md",
+      "text_sha256": "16a16df2bd92561ab237bd1e14d59e2c5ddfa36c6d28d325389686271ee323f4",
+      "map_sha256": "90d7f96b761ece598766e46a21b23df9d8bed3553fb4c7a9676a2e11695f6289",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+      "verification_scope": "Current scheduling/audio source and restored route contract; no new listening or headset validation."
+    },
+    "WaveFunctions_AirMusic": {
+      "primary_tokens": [
+        "resonating_metallophone"
+      ],
+      "reason": "Strike, wait and restrike; compare a decaying voice with the sampled sum of independent bars.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "wavefunctions",
+      "text_path": "commons/maps/WaveFunctions_AirMusic/final.md",
+      "text_sha256": "d8361d44cf392c1aad70c89ef149a547a8e614337514b0b71ab881e7288b98f6",
+      "map_sha256": "39f9a3d2b5d77acff58191d97b27e702110113603f4adf1ac7cb162637a6c619",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+      "verification_scope": "Fresh isolated PCM, per-bar retrigger and sample-sum checks; no full museum listening or headset session."
+    },
+    "Wavefunctions_Sky_Stairs": {
+      "primary_tokens": [
+        "sine_cylinder_staircase"
+      ],
+      "reason": "Inspect what a sampled curve needs to host a body; distinguish treads, membranes and a tested ascent.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "wavefunctions",
+      "text_path": "commons/maps/Wavefunctions_Sky_Stairs/final.md",
+      "text_sha256": "58549b1b4ace5e614fd34e36ef5e9c9879927f7f75dabdd5681f84829d99f079",
+      "map_sha256": "c16d46c87ed0559749a674c0279ba6192f0c7194ace1cc155599049f75b73ab3",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+      "verification_scope": "Fresh isolated geometry/collider checks and restored route contract; complete ascent and headset comfort remain untested."
+    },
+    "WaveFunctions_TrigWalkingPath": {
+      "primary_tokens": [
+        "beat_frequency_demo"
+      ],
+      "reason": "Follow either input before reading their slower beat envelope; retain the finite moving path as a different construction.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "wavefunctions",
+      "text_path": "commons/maps/WaveFunctions_TrigWalkingPath/final.md",
+      "text_sha256": "510161ace1a8bfb170f2a3a373e1010ca925a1a265d4e419759a25dc708a70f3",
+      "map_sha256": "759a87fe9f020d38eb887f70833464db06b3a046edc24b0b913cfa9ba12f270f",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+      "verification_scope": "Fresh isolated beat algebra and finite path/collider checks; no complete physical traversal or headset session."
+    },
+    "WaveFunctions_Synthesis_Lab": {
+      "primary_tokens": [
+        "additive_wave_demo"
+      ],
+      "reason": "Compare one harmonic with the arrival sum before receiving its recipe name; keep all coefficients visible.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "wavefunctions",
+      "text_path": "commons/maps/WaveFunctions_Synthesis_Lab/final.md",
+      "text_sha256": "6f844d746042cbcb3e2a38d7d9808f68e9eda705a258d394fa7579bfcf69ff6f",
+      "map_sha256": "1b870d524612436e943ae5d2b997389d207bda8a58c21a90b0b7c65b075370b9",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+      "verification_scope": "Fresh focused controls and actual-museum pointer/reveal/capture checks at standing eye height; no headset or learner validation."
+    },
+    "Random_Definition": {
+      "primary_tokens": [
+        "seed_replay_demo"
+      ],
+      "reason": "Replay a seeded procedure, then discard one draw and notice what assigning it to a colour changes.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Definition/final.md",
+      "text_sha256": "e537494dcf22034c567fbe1646ade927f6b2552ad2e8d3eb83e53d540eb60da2",
+      "map_sha256": "9345ed71e5f76dbd341a4d6fef475d0a825518dedbc9ec6f94764952f2f4c411",
+      "learner_verified": false,
+      "verification_scope": "Fresh focused draw-stream/offset checks plus source and qualified historical evidence; no new full-hall or headset validation.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-opening-review/DECISIONS.md"
+    },
+    "Random_Entropy": {
+      "primary_tokens": [
+        "shannon_entropy_meter",
+        "entropy_axiom",
+        "entropy_ruin"
+      ],
+      "reason": "Sort a sample without changing its shares or marginal entropy; retain the spatial counterexamples.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Entropy/final.md",
+      "text_sha256": "b8a76f2fe4f88090296f6b56683776c552fc74885ea8ac5fc33bc9cc5258a51a",
+      "map_sha256": "5762fa599a4ba8ef340e7001c0ce2a7f42c2da0b466b39dce546b02a3ff449e1",
+      "learner_verified": false,
+      "verification_scope": "Fresh exact categorical contrast-sample and sorting checks; retained spatial works source-reviewed. Secondary Jar display overclaims remain a development task.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-opening-review/DECISIONS.md"
+    },
+    "Random_Remove": {
+      "primary_tokens": [
+        "remove_random",
+        "sampling_hoppers",
+        "random_removal_arena"
+      ],
+      "reason": "The board exposes eligibility; paired cases show what returning a member changes; the floor joins removal to bodily support.",
+      "status": "source_checked_draft",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Remove/final.md",
+      "text_sha256": "7451bc1c7f52a92ac4fc8601aafc8513fa40062b78ec415ea43146f20727cf44",
+      "map_sha256": "9e8b8dc0e54fb8cecb094b9c9a8d56692f1980c6223f45df26a71d0bf791bd64",
+      "learner_verified": false,
+      "pilot_action_id": "remove-bounded-candidates",
+      "runtime_check": {
+        "evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md",
+        "scope": "Recorded scene/runtime checks; headset, complete route and learner acceptance remain open."
+      },
+      "verification_scope": "Current source and historical bench/arena evidence; no new full removal-floor crossing or headset validation.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-opening-review/DECISIONS.md"
+    },
+    "Randomness_10_PRINT_Algorithm": {
+      "primary_tokens": [
+        "ten_print",
+        "composition_stochastique",
+        "ten_print_structure"
+      ],
+      "reason": "Take one line of BASIC apart at its coin (205.5) and its semicolon, see the same stream laid on the floor, then walk into twelve of its characters stood up as solid walls to find whether they left a way through.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Randomness_10_PRINT_Algorithm/final.md",
+      "text_sha256": "80847f8b2c793f113fadf9b7f1791da0aeb55642f18e160281a480cc8cfc184b",
+      "map_sha256": "e7f0e4932e6e51b69f39db052dd832110d08bccf2f7d6f3c7150b44c63e4b889",
+      "learner_verified": false,
+      "verification_scope": "Two headless gates. probe_ten_print_hall.gd (11 checks): floor linked on channel hall, 0 of 122 floor cells disagree with the screen, console line reads the book's line, SEMICOLON removes ';' and collapses the floor to one column and back, BIAS moves the constant (205.1 -> 0.87 forward, 205.9 -> 0.07), default coin breathes (0.70 / 0.29 forward over characters 0-269 / 270-399), next-cell tile visible, floor has no collider, upright maze has no collider and stands in the Y-Z plane. probe_ten_print_walkable.gd (museum lane): the slab block is kept verbatim, 12 solid slabs 2.40 m, same 12 coin results as the printer, 8 regions 7 open 1 sealed, every open region has exactly two mouths (no forks; four V bays, two corners, one way through), a way through, wrap-width comparison (3, 4, 6, 12 to a row), no museum seal severance, entry to exit reachable on the museum's own walk cells, a 0.5 m capsule walks the way through. No headset walk.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-opening-review/DECISIONS.md"
+    },
+    "Random_Cubes": {
+      "primary_tokens": [
+        "dice_throw",
+        "paired_dice_column",
+        "continuing_die",
+        "coin_toss",
+        "random_object_spawner",
+        "random_edge_profile"
+      ],
+      "reason": "A physical face becomes reward, part of a sum or permission to continue. Coin, heap and bounded field retain other consequences.",
+      "status": "source_checked_draft",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Cubes/final.md",
+      "text_sha256": "d83c7d9f2ae33674898bdf6e6667ba32eebffcba4c79f075157d1328bd65d28f",
+      "map_sha256": "3be60c2a723e240748a0684e98b0a58c414619d96f0e7459ebc7c050678f83f7",
+      "learner_verified": false,
+      "verification_scope": "probe_random_cubes.gd, each case against the shipped script: reward rain now over the table (0.03 m, was 126.5 m); a die resting on its felt is read; sixteen seeded throws read correctly at 60 and 90 Hz (shipped: 2 and 15); the rain never moves the die (own collision layer) and lands on the felt instead of tunnelling; a desktop drop is read; a held coin is not counted in the hand (was); one throw adds one; a desktop coin is read once on landing; #disclosure:origin builds and fills SPIN/DROP/TILT. No headset throw. Paired-dice addition: 29 isolated native checks cover controlled physical drops, held/pending/fresh-pair handling, transformed recovery and bounded history; full museum placement/access results are kept in the local review. Continuing-die checks and isolated museum evidence: doc/book/iterations/2026-09-24-continuing-die/; controlled physical faces, fresh-release ownership, continuation, closure and explicit unfinished cap. No headset or fairness claim.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-turns-and-trails/DECISIONS.md"
+    },
+    "Random_Rotate_Random_XYZ": {
+      "primary_tokens": [
+        "random_decay_multimesh"
+      ],
+      "reason": "Watch two stacks of one size turn under one rule at one rate, with drift, sinking and darkening switched off; name what still differs; restore the arrangement without replaying its future.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Rotate_Random_XYZ/final.md",
+      "text_sha256": "dd886638e09496e2e7f21af471d78d58e9882ee36cddc9d0819475ab5b7c023d",
+      "map_sha256": "bfc9655588c6eb6879e37dce4e0e5f7d106cf14cc0524208e4701099df98de0e",
+      "learner_verified": false,
+      "verification_scope": "probe_rotation_study.gd: default placement unchanged; #study:rotation matches rates (0.3/0.3), removes drift, sinking and colour, lays the prisms on 12 even columns (shipped: 11), fits the display to 10 m alone, and turns each cube exactly as a matched run does (0.000000000 rad). Map placement keeps the whole display inside the hall. No headset walk.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-turns-and-trails/DECISIONS.md"
+    },
+    "Random_Walk": {
+      "primary_tokens": [
+        "random_walk_terrarium",
+        "random_position_rails",
+        "random_draw_dot",
+        "random_walk_128"
+      ],
+      "reason": "Compare a retained trail, fresh destinations, accumulated steps, a hand-carried origin and a ground that retains visits.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Walk/final.md",
+      "text_sha256": "4eb597de71413b34bafa9734aac4d0d4d07cd7fe18158726c05be7240f3ac0b9",
+      "map_sha256": "d9724f0258e6b2c45c164336682e61266129481fb84079cf7527030beb8ab541",
+      "learner_verified": false,
+      "verification_scope": "Production rail controls, shared draw, revealed targets, matched easing, bounded record, replay and museum placement. Headset pending; see dated evidence.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-turns-and-trails/DECISIONS.md"
+    },
+    "Random_Gaussian": {
+      "primary_tokens": [
+        "distribution_sampler"
+      ],
+      "reason": "Hold a stored sample while changing its bins; distinguish procedure, clipping and empirical distribution.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Gaussian/final.md",
+      "text_sha256": "22b1decebfcd8446d76aaf5ceb8ce6f087ead81630db35e00e450c34a7bdb10e",
+      "map_sha256": "5dea9ef055d240b53289822c8bbb9df15211131e62185eee2542716b0f1319ca",
+      "learner_verified": false,
+      "verification_scope": "Fresh focused rebinning of a retained sample; no complete museum or headset visit.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-turns-and-trails/DECISIONS.md"
+    },
+    "Random_Mushrooms": {
+      "primary_tokens": [
+        "mushrooms",
+        "silhouette_arrivals",
+        "couture_comparison"
+      ],
+      "reason": "Move from sampled specimens to an arrival wardrobe to changed garment construction; all three existing works carry the book.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Mushrooms/final.md",
+      "text_sha256": "4dd782143a1fe5953230da9837a3eae0370b86fc8a680db4426e799a2f7da904",
+      "map_sha256": "7b331ea18775e648a74b0f574c7bbcc7bd2fbf142a697005b43bd13f74e40cde",
+      "learner_verified": false,
+      "verification_scope": "Fresh wardrobe/replay/construction checks and bounded actual-museum staging/approach checks. No eating effect or headset validation.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/DECISIONS.md"
+    },
+    "Random_Space_Geometry": {
+      "primary_tokens": [
+        "perlin_noise_bridge"
+      ],
+      "reason": "Compare independently assigned heights with correlated neighbours without turning resemblance into a geological explanation.",
+      "status": "source_checked_draft",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Space_Geometry/final.md",
+      "text_sha256": "a1c6b125423fb29314b40c675295bb9a1441c62152430c192581d9873b4b9643",
+      "map_sha256": "674104d67894c18a2652cbbf9433e09ca9778593ec95e030111e95a556897f60",
+      "learner_verified": false,
+      "verification_scope": "Current source and restored navigation contract. Five companions lie beyond the source structure rectangle; museum derivation retains them, but their support and approaches need a dedicated physical check.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/DECISIONS.md"
+    },
+    "Randomness_Examples_of_Randomness": {
+      "primary_tokens": [
+        "pollock_painting_in_3d",
+        "monte_carlo_dartboard",
+        "pipe_dream",
+        "extreme_randomness"
+      ],
+      "reason": "Give chance distinct jobs in a brush, a tally, a bounded pipe and a fixed particle population.",
+      "status": "source_checked_draft",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Randomness_Examples_of_Randomness/final.md",
+      "text_sha256": "1696c987d0c44693128c4a3da594bedfdabbf32bbe518f9d73cb08c49cb45062",
+      "map_sha256": "3fbc176ab65e1bb7abea9b69bc3b64d09b29bd751345b780edfc43d2035bd554",
+      "learner_verified": false,
+      "verification_scope": "Source audit of retained procedures and narrow display correction; no new full gallery learning or listening validation.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/DECISIONS.md"
+    },
+    "Random_Pheromone": {
+      "primary_tokens": [
+        "pheromone_terrain"
+      ],
+      "reason": "Step the same seeded starts under attraction and avoidance; follow current markers and distinguish scent from accumulated height.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Pheromone/final.md",
+      "text_sha256": "2883c0f7873b95d086b79ae5b8d36785464c3a9cc0093047e35de45250aca293",
+      "map_sha256": "2283ff15d3743a64c70a477b58f524f40f6d74dd52ac635a38e0405958f91901",
+      "learner_verified": false,
+      "verification_scope": "Fresh deterministic-step/reset/law comparison and actual-museum display/controls tests; rendered display scale differs from simulation-domain coordinates. No headset or full terrain traversal claim.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/DECISIONS.md"
+    },
+    "Random_Space": {
+      "primary_tokens": [
+        "noise_mixer"
+      ],
+      "reason": "Read a finite layered sine-based field and its normalization, then compare retained alternative representations.",
+      "status": "source_checked_draft",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Space/final.md",
+      "text_sha256": "32e210aa458267293f7f9ba477c43cd87f608f13c82913237126140776f3303c",
+      "map_sha256": "abad6b726a282b7e6197fcbde396e42e71dcfaf9dab5161e31556722670b4360",
+      "learner_verified": false,
+      "verification_scope": "Current source and restored route. The adjacent Pheromone capture emitted a 77-cell route warning in this streamed hall; investigate it in a dedicated physical traversal. No complete museum interaction or headset claim.",
+      "local_review": "doc/book/iterations/2026-09-25-random-floor-relief/DECISIONS.md"
+    },
+    "Random_Game": {
+      "primary_tokens": [
+        "r_c",
+        "random_removal_arena",
+        "random_doors",
+        "door_timing_trials",
+        "cube_projectile_spawner"
+      ],
+      "reason": "Waits, removal, hidden assignment and matched decision/disclosure passages make distinct uncertainty visible through support, fire and walking distance.",
+      "status": "source_checked_draft",
+      "sequence": "randomness",
+      "text_path": "commons/maps/Random_Game/final.md",
+      "text_sha256": "5a3220a1f42de10c868851eaaaedb0fca9cc38cb18a7338027e18e14b84cc6a3",
+      "map_sha256": "d1326e9ca7aa334bdf4921369db6ec249f18805afb755e46ead4005bd176e833",
+      "learner_verified": false,
+      "verification_scope": "Door timing addition: 64 native control/state/collision checks; actual museum player plate entry, direct and detour walks, reset refusal and sampled gallery bypasses. No headset/learner or whole-hall hazard/performance acceptance. Earlier encounter evidence retained in previous reviews.",
+      "local_review": "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/DECISIONS.md"
+    },
+    "Random_Noise_Types": {
+      "primary_tokens": [
+        "randompoint",
+        "randompoints",
+        "WhiteNoiseGallery",
+        "NoiseColors3D",
+        "related_weather"
+      ],
+      "reason": "Constraint can act on position, admission, temporal state or the view. Preserve all four established studies and add the embodied temporal comparison.",
+      "status": "source_checked_draft",
+      "sequence": "noise",
+      "text_path": "commons/maps/Random_Noise_Types/final.md",
+      "text_sha256": "8803d33377d99f2a21f6a333af79aa1ea9ab3a87fe65e7b5412313852d3f27dd",
+      "map_sha256": "79186d10ba18849d79d880ba012b3babeebdcfbc9ec150c24d389f880465dd37",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-noise-opening-review/DECISIONS.md",
+      "verification_scope": "Related-weather addition: 44 native control/state/glass checks, 65,536 raw production samples and independent filter/PSD checks; actual museum controls, sight views, six sampled aisles/exit walks and two floor rays. Existing studies retained. No headset, group-use, learner or Quest acceptance."
+    },
+    "Noise_Columns": {
+      "primary_tokens": [
+        "MeltingBerniniScene",
+        "dark_sphere",
+        "synthesis_stand"
+      ],
+      "reason": "Compare a driver entering a shaft, a surface and a constructed family. Preserve the three authored encounters; no general promotion of dark spheres.",
+      "status": "source_checked_draft",
+      "sequence": "noise",
+      "text_path": "commons/maps/Noise_Columns/final.md",
+      "text_sha256": "bb9fe286f9131ea0a6a7f08f7ccea2811f98582053663a09ea660c3e6ca7161f",
+      "map_sha256": "06b174a5ef314896bf53620930252de9b58544b4e1faaa384866aae6c230ce1f",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-noise-opening-review/DECISIONS.md"
+    },
+    "Noise_One": {
+      "primary_tokens": [
+        "noisetorus"
+      ],
+      "reason": "Is a restless surface changing its underlying shape or only how that shape is expressed?",
+      "status": "source_checked_draft",
+      "sequence": "noise",
+      "text_path": "commons/maps/Noise_One/final.md",
+      "text_sha256": "1bd277b1a0ba9fe21a47359fd5d41f50869dc26c0764c66bc886f0d84e4519f7",
+      "map_sha256": "8d0139114af3ea7792163ec81f7605d33b60aec5f1e87fe1bee4ffb4dc21e886",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-noise-opening-review/DECISIONS.md"
+    },
+    "Noise_Voxel": {
+      "primary_tokens": [
+        "perlin_terrain_sculptor",
+        "voxelnoise"
+      ],
+      "reason": "Can you remove matter without changing the field that decides where it could appear?",
+      "status": "source_checked_draft",
+      "sequence": "noise",
+      "text_path": "commons/maps/Noise_Voxel/final.md",
+      "text_sha256": "dc8f550559908ce1ff20d5db64b4b9e1696dffca87a572367a1f5f3ed04b3ea7",
+      "map_sha256": "5866488ac9299a5e1f318a3e8cf839b42c255de43b0f40e44448e0a4f2514db3",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-noise-opening-review/DECISIONS.md"
+    },
+    "Noise_6_Wall": {
+      "primary_tokens": [
+        "shader_noise_space"
+      ],
+      "reason": "What changes when the field surrounds you instead of sitting on a bench?",
+      "status": "source_checked_draft",
+      "sequence": "noise",
+      "text_path": "commons/maps/Noise_6_Wall/final.md",
+      "text_sha256": "c6d38115b88b3a935dc8f5affbc530c58037a0b4009128402819990434a93314",
+      "map_sha256": "2e0b4e845e66fd2a5ce44319544ca268af800d84e06f5b40cabfa9fb1f9b1cad",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-noise-surface-and-body/DECISIONS.md"
+    },
+    "Noise_Inside_Noise": {
+      "primary_tokens": [
+        "noisesphere"
+      ],
+      "reason": "Does placing noise on a sphere mean one noise is being fed into another?",
+      "status": "source_checked_draft",
+      "sequence": "noise",
+      "text_path": "commons/maps/Noise_Inside_Noise/final.md",
+      "text_sha256": "9b013ef1b961316b3ee74c12e6f9c2d3e3d315f48efbcd47e176140bb625730e",
+      "map_sha256": "f1a082ed07da35e4f417f22d05443dc8bbb33fe08b7ccc86f98c9245fbbfddcf",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-noise-surface-and-body/DECISIONS.md"
+    },
+    "Noise_Space_10": {
+      "primary_tokens": [
+        "noise_space"
+      ],
+      "reason": "When a field becomes ground, which variations become a route?",
+      "status": "source_checked_draft",
+      "sequence": "noise",
+      "text_path": "commons/maps/Noise_Space_10/final.md",
+      "text_sha256": "d2e0d17f183e85df1c957890ea7f8532e76d3cc022ab5beacef0e537783b9b75",
+      "map_sha256": "0c3d80cd8890d2f4335cdd5c9ba4c77ec75b9a4528646e3753a7c07c188b335e",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-noise-surface-and-body/DECISIONS.md"
+    },
+    "Noise_Perlin_Simplex": {
+      "primary_tokens": [
+        "simplex_noise",
+        "perlin_noise"
+      ],
+      "reason": "What would make two noise surfaces a fair comparison?",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "noise",
+      "text_path": "commons/maps/Noise_Perlin_Simplex/final.md",
+      "text_sha256": "7ce7a016fd13b1125829e36ffe3482a879fd8ce80b5be6ebd642cd320bbccccd",
+      "map_sha256": "8deab0d6e8907b0ac25d9d968cb38dbe93f61b2b01086eb5e3f530fec4e0d894",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-noise-ending-review/DECISIONS.md",
+      "verification_scope": "Native authored museum: 44 checks and nine real mouse-ray clicks; paired arches sample existing generators, use vertex displacement with matching collision, preserve fields through VIEW, follow SAMPLE/MATCH/REGEN/FREQ and hold occupied geometry. Supplied CharacterBody walks through both; wall rays hit from inside. Native GPU/CPU reference mean RGB difference 0.000011514. No tracked headset, comfort, learner or Quest acceptance."
+    },
+    "Lab_Path": {
+      "primary_tokens": [
+        "dark_sphere"
+      ],
+      "reason": "What can you carry out of a sequence when the busy demonstrations are gone?",
+      "status": "source_checked_draft",
+      "sequence": "noise",
+      "text_path": "commons/maps/Lab_Path/final.md",
+      "text_sha256": "29ff7776d6c0d5e96ac673f8503a774e7122d17bacbbce2faaa1fd065d1416e3",
+      "map_sha256": "6a4416ae1d01c33b84024b8d63bf06c8e262d034f796013751d10266f8a84b11",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-noise-ending-review/DECISIONS.md"
+    },
+    "CA_Introduction": {
+      "primary_tokens": [
+        "ca_rule_explorer",
+        "persian_rug",
+        "line_network_ca"
+      ],
+      "reason": "A held row, a mirrored rug, and twenty recorded stages of a line network distinguish local rules, imposed symmetry and the history a drawing keeps.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "cellularautomata",
+      "text_path": "commons/maps/CA_Introduction/final.md",
+      "text_sha256": "5b77303f769f1358f11681a02fc62a779aec9d94b0a33d35992fc18976209652",
+      "map_sha256": "156c1d5e3ff9f725c00f3dfebf195fa41092d74c451cd453fc5dc269c29181c0",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-ca-opening-review/DECISIONS.md",
+      "verification_scope": "Native authored museum: 45 checks, seven actual mouse-ray clicks. Same 32-cell row and 24-row history drive an overhead ring; colours, missing-history visibility, wrap witnesses, STEP/SEED/RUN/RST/preset, bounded history and legacy opt-in verified. Explorer moved one cell clear of entrance collision; actual museum body passes beneath ring. Supplied desktop inputs, no tracked headset/Quest/learner acceptance."
+    },
+    "CA_ElementaryRules": {
+      "primary_tokens": [
+        "structure_growth"
+      ],
+      "reason": "Follow one real cell through active, fading and empty: an enlarged neighbourhood distinguishes presence, participation and availability.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "cellularautomata",
+      "text_path": "commons/maps/CA_ElementaryRules/final.md",
+      "text_sha256": "3ac68607502e812159df9df2b16c267cfb22d41cceeb81d9f921c7a16485670f",
+      "map_sha256": "2969207f9b2ab673fc4996efd6688300d9af9fed7344fc8eda2a14af2b7269bf",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-ca-opening-review/DECISIONS.md",
+      "verification_scope": "Native authored museum: 49 checks, eight actual desktop mouse-ray clicks, exact 27-state and colour correspondence, whole-volume replay, budget, opt-in and supplied walking body through open gaps. Full update 153.009 ms remains unoptimised. No tracked headset, Quest, whole-route or learner acceptance."
+    },
+    "CA_GameOfLife": {
+      "primary_tokens": [
+        "ca_bridge"
+      ],
+      "reason": "Walk through a retained Rule 30 history: one row appears as a desk record, physical support and a lattice; returning does not undo what followed.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "cellularautomata",
+      "text_path": "commons/maps/CA_GameOfLife/final.md",
+      "text_sha256": "e11e83ea0ad14f973a7ef1fcb290d5771516368e55eca0275b38be3757a10b50",
+      "map_sha256": "816d544e9d27b6f9ba37650dc1e04a8361eb78b4f95c07e8c49fd3857a57514f",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-ca-opening-review/DECISIONS.md",
+      "verification_scope": "Native authored museum: 37 checks, seven actual desktop mouse-ray clicks, forward/backward CharacterBody walk, unchanged history/colours/collision, shared witnesses, RUN independence, 24-row budget and opt-in compatibility. Supplied player_body group convention checked, no tracked headset/Quest/whole-gallery/learner acceptance."
+    },
+    "CA_BeyondBinary": {
+      "primary_tokens": [
+        "game_of_life_petri"
+      ],
+      "reason": "A travelling Life pattern visits fixed addresses on a body-scale floor; lamps respond while empty and occupied places continue to support the visitor.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "cellularautomata",
+      "text_path": "commons/maps/CA_BeyondBinary/final.md",
+      "text_sha256": "41573fe59637a6bfbd262621821bd892f4268b1dbbef84f05184ddd794b6efe3",
+      "map_sha256": "9f2ceb7e813246c0ed98edcc542ef71199f87989449eb27b076a8c05a74d4fb1",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-ca-opening-review/DECISIONS.md",
+      "verification_scope": "Native museum: 41 checks, 14 actual desktop pointer events, glider/TRACE/LINK/onsets, actual supplied-body approach and support at empty/occupied A, four floor-corner rays, legacy floor and retained hex state dimensions. Hex compact table clears its prior overlap. No tracked-headset/Quest/full-gallery/learner acceptance."
+    },
+    "CA_ExpandingSpace": {
+      "primary_tokens": [
+        "decaying_bridge"
+      ],
+      "reason": "One cell can be colour on the wall and support beneath a body; what changes when the observer enters its rule?",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "cellularautomata",
+      "text_path": "commons/maps/CA_ExpandingSpace/final.md",
+      "text_sha256": "0361646240ad39adedd194b6dacaadca80eabe0c3fdfdecb4f75084c28a6c4ac",
+      "map_sha256": "1580ee6bc3100cd09d980cab2fff66683de3c4e0a744bcf9c8a15c4e881115f2",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-ca-body-and-exchange-review/index.html",
+      "verification_scope": "49 native assertions, eight real mouse-ray events; body approach, loss of support, basin recovery and margin. Controlled inputs/explicit steps; no headset, Quest, full-gallery or learner acceptance."
+    },
+    "CA_SoftRules": {
+      "primary_tokens": [
+        "the_clockmaker_of_rules"
+      ],
+      "reason": "A body supplies a seed to two fields; exchange can carry it beyond its edge and also let its centre disperse.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "cellularautomata",
+      "text_path": "commons/maps/CA_SoftRules/final.md",
+      "text_sha256": "bc0ff833f4afa116eb01ce97fae75428861241c46016809d8c198cf064e152bf",
+      "map_sha256": "4677078f70184b01dc6ac8b445ddbd7661a2487f546843f27fa2c85b32394384",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-ca-body-and-exchange-review/index.html",
+      "verification_scope": "49 native assertions, eight real mouse-ray events, body entry/exit/return/bypass and matched no-entry comparison. Controlled desktop inputs; no headset, Quest, continuous gameplay, full-gallery or learner acceptance."
+    },
+    "CA_AgentsCircuits": {
+      "primary_tokens": [
+        "ca_rule_explorer",
+        "sierpinski_pyramid"
+      ],
+      "reason": "Compare a local rule history underfoot with a fixed recursive volume: resembling gaps need not offer the same support or follow the same procedure.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "cellularautomata",
+      "text_path": "commons/maps/CA_AgentsCircuits/final.md",
+      "text_sha256": "93df32909e0aa682ebc1f6ecd98476c41bad60d47ef6f6a018ff1f8780fc7d01",
+      "map_sha256": "b19e0c539480dc96bd63ac90e1806221eb9dda5c4edb10636d10095e89874d09",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-ca-ending-review/index.html",
+      "verification_scope": "33 native assertions and nine real mouse-ray events; independent Rule 90 parity, exact shared history/reset/scroll, preserved pyramid transforms and controlled CharacterBody routes. No headset, Quest performance, continuous gameplay or learner acceptance."
+    },
+    "CA_EdgeOfChaos": {
+      "primary_tokens": [
+        "self_organization_ca"
+      ],
+      "reason": "Walking can hide a difference from the selected section without removing it from the field; compare this with what storage actually discards.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "cellularautomata",
+      "text_path": "commons/maps/CA_EdgeOfChaos/final.md",
+      "text_sha256": "06edfd34c32da48ff1e98c795cb397c463f1a2f08aff304235fde63f476d63ca",
+      "map_sha256": "d05902f79ee723de2d21e2ec0cd7e70bbb896e6b6df5368d337b220df0150972",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-ca-ending-review/index.html",
+      "verification_scope": "75 native assertions, twelve real mouse-ray events and controlled body traversal of all eleven spatial slices. Paired model, state, update clock, display mapping and storage comparison checked. No headset, Quest performance, continuous gameplay, full secondary-gallery or learner acceptance."
+    },
+    "Fractal_Recursion": {
+      "primary_tokens": [
+        "fractal_recursion_2",
+        "example_8_3_recursion_circles_vr"
+      ],
+      "reason": "One self-call and four self-calls remain the teaching core. The original square terms also become floor-standing doorframes; the standing body meets a limit before the function does. All ten authored works and supporting manuscript encounters remain.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "fractals",
+      "text_path": "commons/maps/Fractal_Recursion/final.md",
+      "text_sha256": "e6d979fec00453bedd24f51cd8ad5eb2522abe8dbfd1efd5d973327ec449db5c",
+      "map_sha256": "3e6c7b90da06eda135ddfc61cef8e8e620440a9b636518ead1b84241c573859e",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-recursion-thresholds/index.html",
+      "verification_scope": "Native museum: actual mouse-ray controls, term correspondence, size cutoff, standing-body passage and collision, side bypass and unconfigured lesson. No human headset, Quest profiling, continuous gameplay or learner acceptance."
+    },
+    "Fractal_RecursiveTrees": {
+      "primary_tokens": [
+        "recursive_tree_2",
+        "recursive_tree"
+      ],
+      "reason": "Follow inherited direction and length in a growing specimen and its enlarged solid canopy; compare the seeded block tree. The growing tree joins the red tree as primary because it already leads the manuscript and now carries the bodily encounter. All twelve authored placements remain.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "fractals",
+      "text_path": "commons/maps/Fractal_RecursiveTrees/final.md",
+      "text_sha256": "4ce0a0c583d721e06542044370726ca677d2a52cdcdface902b3e1924a649a7d",
+      "map_sha256": "f41480d87d8e1ea751c5208a6514ff07269f635de4c04426cbe0ea708a40e505",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-tree-canopy/index.html",
+      "verification_scope": "Native geometry and controls: actual mouse rays, exact shared meshes/transforms, eighteen parameter bounds, standing trunk collision and default under-branch passage. No human headset, Quest profiling, all-parameter traversal, climbing, structural-engineering or learner acceptance."
+    },
+    "Fractal_CantorSet": {
+      "primary_tokens": [
+        "cantor_set"
+      ],
+      "reason": "Can repeated removal produce more pieces while leaving less material?",
+      "status": "source_checked_draft",
+      "sequence": "fractals",
+      "text_path": "commons/maps/Fractal_CantorSet/final.md",
+      "text_sha256": "2ab27ab791162903797b1e023f4b7489531a67486098fc626b78aad2f97bbfe9",
+      "map_sha256": "ec0d652b81be4d68435630b1b7106dbdb9489c431e5561d971cdcdc0335b6560",
+      "learner_verified": false
+    },
+    "Fractal_KochSierpinski": {
+      "primary_tokens": [
+        "fractal_koch_curve",
+        "sierpinski_triangle",
+        "box_counting_dimension",
+        "sierpinski_pyramid"
+      ],
+      "reason": "Follow a boundary, inspect removal, question a finite measurement, then compare one additional recursive call in the existing cube pyramid. Retain the surrounding collection.",
+      "status": "encounter_revision_draft",
+      "sequence": "fractals",
+      "text_path": "commons/maps/Fractal_KochSierpinski/final.md",
+      "text_sha256": "1402539b26acabc3d9efe24f178ef751710ff8379f33b68135d0387536f68c1f",
+      "map_sha256": "d5d285961902af0cb289d4266a43eb1239b837ee597df6ad223e5cbe3112d5e7",
+      "learner_verified": false
+    },
+    "Fractal_MengerSponge": {
+      "primary_tokens": [
+        "menger_sponge"
+      ],
+      "reason": "Can a repeated cut increase visible intricacy while reducing volume?",
+      "status": "source_checked_draft",
+      "sequence": "fractals",
+      "text_path": "commons/maps/Fractal_MengerSponge/final.md",
+      "text_sha256": "420fe45ee3965e2bc24c6a5a6c405d511d9f7705f65f4f118cd603de412a33e2",
+      "map_sha256": "7b924f9c6d7c9c9993ae56f7853ecb9a000fb6f0b5539616856ee3e5e35b6947",
+      "learner_verified": false
+    },
+    "Fractal_GoldenSpiral": {
+      "primary_tokens": [
+        "fibonacci_sequences"
+      ],
+      "reason": "Which part of a growing pattern comes from addition, and which part comes from its drawing?",
+      "status": "source_checked_draft",
+      "sequence": "fractals",
+      "text_path": "commons/maps/Fractal_GoldenSpiral/final.md",
+      "text_sha256": "b6f7e668445d48a9bc0cce946923731c16f0ecc22e3153dfdc81e9014e79eee3",
+      "map_sha256": "04329816b28e9c849ae537b290ce39b69577d75ef8574233ab5ba73910b1a997",
+      "learner_verified": false
+    },
+    "Fractal_JuliaSet": {
+      "primary_tokens": [
+        "julia_set",
+        "julia_set_explorer"
+      ],
+      "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+      "status": "existing_text_retained",
+      "sequence": "fractals",
+      "text_path": "commons/maps/Fractal_JuliaSet/final.md",
+      "text_sha256": "e9cea40ffeff63270be9693db50983d8faa74d9da314a47f89f707f39b033ee1",
+      "map_sha256": "c3d28a755331bcf791a9aea32e6d18a453ddf190d046c60556024be67e27843f",
+      "learner_verified": false
+    },
+    "Fractal_MandelbrotSet": {
+      "primary_tokens": [
+        "mandelbrot_set",
+        "mandelbrot_dive"
+      ],
+      "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+      "status": "existing_text_retained",
+      "sequence": "fractals",
+      "text_path": "commons/maps/Fractal_MandelbrotSet/final.md",
+      "text_sha256": "b9836c0dd2b9e545d2dc7559e2101b00a0ac6b39acdc2e28e313fdd36c69c287",
+      "map_sha256": "672ca8dc41d35c8f86c36ae10cfe12ed46f3ac302139da3214538677c66af18d",
+      "learner_verified": false
+    },
+    "Fractal_Synthesis": {
+      "primary_tokens": [
+        "cantor_set",
+        "recursive_tree"
+      ],
+      "reason": "What makes two very different objects examples of recursion?",
+      "status": "source_checked_draft",
+      "sequence": "fractals",
+      "text_path": "commons/maps/Fractal_Synthesis/final.md",
+      "text_sha256": "1d06c23a574ee28ae4fa4dff6ecf9a983ad4fed2e8b27e6d9afcbd0560136726",
+      "map_sha256": "23ddd63b1df980b035b4b8cbdc846cf246af59a47f464417f7d7523c2159a7ea",
+      "learner_verified": false
+    },
+    "Fractal_CrossSequence": {
+      "primary_tokens": [
+        "space_filling_curve_gallery"
+      ],
+      "reason": "How can a line visit a region without becoming a sheet?",
+      "status": "source_checked_draft",
+      "sequence": "fractals",
+      "text_path": "commons/maps/Fractal_CrossSequence/final.md",
+      "text_sha256": "e48d6996d5c349b606ce5e301b055524d308662eca5a2e82e3548802f28234c6",
+      "map_sha256": "ee9a0a0d3483183ca2efd07beed478bf305f013cdbee62d2eae6668e2665c555",
+      "learner_verified": false
+    },
+    "LSystems_Grammar_Lab": {
+      "primary_tokens": [
+        "lsystem_editor"
+      ],
+      "reason": "Can the same instructions draw a different plant?",
+      "status": "source_checked_draft",
+      "sequence": "lsystems",
+      "text_path": "commons/maps/LSystems_Grammar_Lab/final.md",
+      "text_sha256": "a8e9293ff77b78217098effde68db9386f8758350c9a6d5dfbc6e526f5fabfa4",
+      "map_sha256": "3e1851f1c02fbb4ec1292951c3a369539a64138b8a040cf7b75715f05eb2d533",
+      "learner_verified": false
+    },
+    "LSystems_Growth": {
+      "primary_tokens": [
+        "parametric_lsystem"
+      ],
+      "reason": "How can descendants inherit a direction while becoming shorter?",
+      "status": "source_checked_draft",
+      "sequence": "lsystems",
+      "text_path": "commons/maps/LSystems_Growth/final.md",
+      "text_sha256": "42d327c800320c2887f20671442c843bb862bec6b61c21a3be00b022159b94a9",
+      "map_sha256": "c83f86b2520a716095d227e2d81515c5233080d000f781bcf540073f9004153c",
+      "learner_verified": false
+    },
+    "LSystems_Grammars_And_Curves": {
+      "primary_tokens": [
+        "the_believing_turtle"
+      ],
+      "reason": "Does an instruction contain its own meaning?",
+      "status": "source_checked_draft",
+      "sequence": "lsystems",
+      "text_path": "commons/maps/LSystems_Grammars_And_Curves/final.md",
+      "text_sha256": "98fecdd9e5365db11f2f384fdc44469dd4ca6a73b0d5bc3c40c9b7dfe8464b00",
+      "map_sha256": "ac6af238417ca09493df76153d06042fc3a7b18872f0f2f6d793712c7f8bc071",
+      "learner_verified": false
+    },
+    "LSystems_Architecture": {
+      "primary_tokens": [
+        "lsystem_dungeon"
+      ],
+      "reason": "What changes when a grammar makes corridors instead of branches?",
+      "status": "source_checked_draft",
+      "sequence": "lsystems",
+      "text_path": "commons/maps/LSystems_Architecture/final.md",
+      "text_sha256": "cdbf268cd1bcf7ee1e6ab14cb5bd5d5c332eb48e9b7eaf80018d143f1d622fc3",
+      "map_sha256": "5c7926cdae57ce8fa0b94a1f34f4517e80830aaca9554505d8a4ce25d1dd64cb",
+      "learner_verified": false
+    },
+    "LSystems_Competition": {
+      "primary_tokens": [
+        "ForestCompetition"
+      ],
+      "reason": "Can identical kinds of growth meet different futures because they share a resource?",
+      "status": "source_checked_draft",
+      "sequence": "lsystems",
+      "text_path": "commons/maps/LSystems_Competition/final.md",
+      "text_sha256": "032878015b56568ea881936b7a8de0e9e8656f489b86d7bb0b40deb9117430a1",
+      "map_sha256": "330fae9dc2707bb0030c45c0e14cbed079c72f05a0298df44233e90b4c5776cb",
+      "learner_verified": false
+    },
+    "LSystems_Living": {
+      "primary_tokens": [
+        "genetic_tree_sculptor"
+      ],
+      "reason": "When you change a tree, which choices are yours and which were built into the tool?",
+      "status": "source_checked_draft",
+      "sequence": "lsystems",
+      "text_path": "commons/maps/LSystems_Living/final.md",
+      "text_sha256": "f62a9e9f3f184ea0b9e1862cfee83ebf826de7ca05f5f336d8ec6c612d67b934",
+      "map_sha256": "939c10391f2c625e7542d1eb852c4eb430de781aef2cb267630a895a05c14a75",
+      "learner_verified": false
+    },
+    "Assemblage_Same_Desire": {
+      "primary_tokens": [
+        "ten_print_textile"
+      ],
+      "reason": "How much of a pattern belongs to the rule, and how much to the marks it chooses?",
+      "status": "source_checked_draft",
+      "sequence": "lsystems",
+      "text_path": "commons/maps/Assemblage_Same_Desire/final.md",
+      "text_sha256": "92e6decfaf65c8317db002af6f69bbe084d462dec4d33c563b08c6cfff9aad0a",
+      "map_sha256": "8c3635c77bbe7481d42594043c475e9e637c6e193f269e4b650b38e52975cb0f",
+      "learner_verified": false
+    },
+    "PG_Genetic_Evolution": {
+      "primary_tokens": [
+        "GeneticProgramming"
+      ],
+      "reason": "What would you choose to keep, and what does the scoring rule choose?",
+      "status": "source_checked_draft",
+      "sequence": "proceduralgeneration",
+      "text_path": "commons/maps/PG_Genetic_Evolution/final.md",
+      "text_sha256": "66822a68900b786c6ac0283ceb3f2d05f6056d8fe3de8ae6badc3726d59732ab",
+      "map_sha256": "0a233bfdbf5912b511d4bb2c21108e44ac1d23a6e2691b6472f91737d18c1f31",
+      "learner_verified": false
+    },
+    "PG_Space_Colonization": {
+      "primary_tokens": [
+        "space_colonization_algorithm"
+      ],
+      "reason": "Can a branch find a shape that is described only by points it has not reached?",
+      "status": "source_checked_draft",
+      "sequence": "proceduralgeneration",
+      "text_path": "commons/maps/PG_Space_Colonization/final.md",
+      "text_sha256": "5f4e213cab5e35c262b8b173c9442ba7eed46bade01d12c1e1a1060beb1bb7dd",
+      "map_sha256": "be6b4464714b8a357bef287d0e08e3ffcc55ee7438eccf8b248f1bfae1792133",
+      "learner_verified": false
+    },
+    "PG_Percolation_Network": {
+      "primary_tokens": [
+        "percolationnetwork_ca"
+      ],
+      "reason": "When does local contact become a route across a whole field?",
+      "status": "source_checked_draft",
+      "sequence": "proceduralgeneration",
+      "text_path": "commons/maps/PG_Percolation_Network/final.md",
+      "text_sha256": "548a1e1faa3e84e3c14e8cda095076f18fec258260b291cbd52b0d7e43a07dbb",
+      "map_sha256": "c40b5fd9183c9fa68ee5c0226f9537660f7b91742896be116e022e92d1d8db39",
+      "learner_verified": false
+    },
+    "PG_Branching_Growth": {
+      "primary_tokens": [
+        "branching_growth_algorithm"
+      ],
+      "reason": "How does a branch decide which direction to try next?",
+      "status": "source_checked_draft",
+      "sequence": "proceduralgeneration",
+      "text_path": "commons/maps/PG_Branching_Growth/final.md",
+      "text_sha256": "c753b91ce75bb1db51159c4c5916afcf83cd8bd931d571234bcec4e364e36887",
+      "map_sha256": "fd64cdf10263ee50bfaea4f5de75c16b521c61a6f7c5762ab3bac9121cd7a0f0",
+      "learner_verified": false
+    },
+    "PG_Caves_Mazes": {
+      "primary_tokens": [
+        "caverandomwalk",
+        "maze_generation"
+      ],
+      "reason": "Compare carving a bodily void with removing walls and remembering alternatives in a maze.",
+      "status": "source_checked_draft",
+      "sequence": "proceduralgeneration",
+      "text_path": "commons/maps/PG_Caves_Mazes/final.md",
+      "text_sha256": "7fb954ffaf4e794a82e93af17b4787006ebeb55e25fbf505f60c5ddbdb2c56db",
+      "map_sha256": "dbb352a20ee6f204cddf6baada4ae9915f6e678420b618ceb3193e144a16bee8",
+      "learner_verified": false
+    },
+    "PG_Sculpted_Forms": {
+      "primary_tokens": [
+        "cube_mound_scene",
+        "dome"
+      ],
+      "reason": "Compare sampling fallen bodies with cutting a volume: what does each operation preserve or remove?",
+      "status": "source_checked_draft",
+      "sequence": "proceduralgeneration",
+      "text_path": "commons/maps/PG_Sculpted_Forms/final.md",
+      "text_sha256": "d1af4deef551f49f2dd38f0722289daa5f44206fb1b540158a7110e194094ba4",
+      "map_sha256": "9e65ea01e18cbef300217fb945e31d13d7c97e9a1838eb11f10846b61f89ee72",
+      "learner_verified": false
+    },
+    "PG_Mirrored_Patterns": {
+      "primary_tokens": [
+        "mirror_cellular_texture_for_3d",
+        "rhizomatic_maze_space"
+      ],
+      "reason": "Distinguish copying an image from connecting places, and a visible tunnel from a traversable one.",
+      "status": "source_checked_draft",
+      "sequence": "proceduralgeneration",
+      "text_path": "commons/maps/PG_Mirrored_Patterns/final.md",
+      "text_sha256": "ce6659a7d7185c18688370169ba7ee6ffdd4f3ecf318c321dbac2f00c6574287",
+      "map_sha256": "d7d92481b4d7fe37387fdc0e560a7a711e9b81b31f7c26f58305ff9e653bcb72",
+      "learner_verified": false
+    },
+    "SoftBodies_Soft_Body_Deformation": {
+      "primary_tokens": [
+        "jelly_cube",
+        "softmill"
+      ],
+      "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+      "status": "existing_text_retained",
+      "sequence": "softbodies",
+      "text_path": "commons/maps/SoftBodies_Soft_Body_Deformation/final.md",
+      "text_sha256": "5a35904add3daf117066b7902ff2302315a7089bb7043b85d1fbd0a609373d49",
+      "map_sha256": "9e247170d19013d6baaa74c993b229c74ed50da700d0cb273f64cb2b1785db8c",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-softbodies-opening-review/index.html"
+    },
+    "SoftBodies_Carusell": {
+      "primary_tokens": [
+        "revolving_joy_ride",
+        "cloth_straps"
+      ],
+      "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+      "status": "existing_text_retained",
+      "sequence": "softbodies",
+      "text_path": "commons/maps/SoftBodies_Carusell/final.md",
+      "text_sha256": "78eca03cbd8e7ea20e5f618acb81bb727f22e4c96e072172238abfeb40c7de45",
+      "map_sha256": "5986f24ba050be7843688380388dab7d3a2a0e4130e35dcffa4700ccc6d0cf49",
+      "learner_verified": false
+    },
+    "SoftBodies_Obsticals": {
+      "primary_tokens": [
+        "softbody_gallery_part2",
+        "breathing_room"
+      ],
+      "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+      "status": "existing_text_retained",
+      "sequence": "softbodies",
+      "text_path": "commons/maps/SoftBodies_Obsticals/final.md",
+      "text_sha256": "d5aea5882f048a89371051022a72b0703a1dab8a7da16db1ea06dcf42f9310b4",
+      "map_sha256": "a2d048ef5768f3b224e0a7cac118541d27631cb6b352c4962269296ec38011f0",
+      "learner_verified": false
+    },
+    "SoftBodies_Obsticals_Part2": {
+      "primary_tokens": [
+        "softbody_gallery_part2"
+      ],
+      "reason": "Does softness belong only to the falling body?",
+      "status": "source_checked_draft",
+      "sequence": "softbodies",
+      "text_path": "commons/maps/SoftBodies_Obsticals_Part2/final.md",
+      "text_sha256": "565668e968e6574a2dd542bb3dbbd88a4a1d952dea039f6741399d6e55a7ad59",
+      "map_sha256": "79d1fd31f219018c660f399b64d9e6d88439a0b3c77b255df6ca1e7ce358d2b0",
+      "learner_verified": false
+    },
+    "SoftBodies_Cloth_Physics": {
+      "primary_tokens": [
+        "softstopscene"
+      ],
+      "reason": "If a body stops changing, has it reached equilibrium or has somebody stopped the experiment?",
+      "status": "source_checked_draft",
+      "sequence": "softbodies",
+      "text_path": "commons/maps/SoftBodies_Cloth_Physics/final.md",
+      "text_sha256": "a3b39e3efea7eed1012612785f856cc891ac7d29da82fb632e7e6afb207e0680",
+      "map_sha256": "d8d4941cc4f169a32eb6f438fa091bbc5dcbf01bc856010c4be40a1b0094ee7a",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-25-softbodies-opening-review/index.html"
+    },
+    "SoftBodies_Playground_of_Joy": {
+      "primary_tokens": [
+        "rounded_softbody_test",
+        "frozen_glass_vessel"
+      ],
+      "reason": "Compare reading a body, intervening through pressure feedback, and keeping a frozen surface that can meet another body.",
+      "status": "source_checked_draft",
+      "sequence": "softbodies",
+      "text_path": "commons/maps/SoftBodies_Playground_of_Joy/final.md",
+      "text_sha256": "399c8707f0267597fa874d0b297aa089f49d63c282e7a27e045923d3db71d05a",
+      "map_sha256": "9ef29f8ada073a4e4d5d287e31099f23214323a89864cff3051df4a8696a40ab",
+      "learner_verified": false
+    },
+    "SoftBodies_Affect_Theory_Visualization": {
+      "primary_tokens": [
+        "radiolaria"
+      ],
+      "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+      "status": "existing_text_retained",
+      "sequence": "softbodies",
+      "text_path": "commons/maps/SoftBodies_Affect_Theory_Visualization/final.md",
+      "text_sha256": "fd04fa2da02d505dfd26a38abe7cc457fe4ead54065cb01bfb759db0a4b1527d",
+      "map_sha256": "433fd53d2da92b96fe8256dc43847f0a6cbf4b01f5ce2aa06d00aa659ae2d465",
+      "learner_verified": false
+    },
+    "ProceduralGeneration_Reaction_Diffusion_Systems": {
+      "primary_tokens": [
+        "turing_pattern_generator"
+      ],
+      "reason": "Can a pattern form without anybody drawing its outline?",
+      "status": "source_checked_draft",
+      "sequence": "softbodies",
+      "text_path": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md",
+      "text_sha256": "4ad2a94edba3463e46a25bedf042a97ecf56248245bdd8b2f3ba2c3cf7b3c48b",
+      "map_sha256": "6b1c31227d9fc039eed8867660a5591b8b28964215a9920bf3598441eab20f45",
+      "learner_verified": false
+    },
+    "Topology_Entropy_Morphogenesis": {
+      "primary_tokens": [
+        "entropy_morphogenesis"
+      ],
+      "reason": "Which openings connect inside a surface that seems to fold through itself?",
+      "status": "source_checked_draft",
+      "sequence": "softbodies",
+      "text_path": "commons/maps/Topology_Entropy_Morphogenesis/final.md",
+      "text_sha256": "f4c7f84a5be30767d79a81fa112ea5954e5070773135bbd15fb1af84dfeba949",
+      "map_sha256": "58a7cfa16f02fd3aaa8b20ba20a83b4afc534416b05802b3cc1561d3860a4b10",
+      "learner_verified": false
+    },
+    "ISO_Introduction": {
+      "primary_tokens": [
+        "voxel_noise_demo"
+      ],
+      "reason": "Where does the surface come from if nobody drew its outline?",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_Introduction/final.md",
+      "text_sha256": "d48ae5da1f74a9787d5361f06555611edd0e86b52f32fcc7c25b98ef016523cf",
+      "map_sha256": "f104e5fc1bad3d72c5d606414d06c74adde2a693354547a37078a8590d94a104",
+      "learner_verified": false
+    },
+    "ISO_LookupTable": {
+      "primary_tokens": [
+        "fifteen_cases_demo"
+      ],
+      "reason": "What can eight corner samples tell you about the space between them?",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_LookupTable/final.md",
+      "text_sha256": "7656ab164789ac128e57747e1b9f4ef86b88796e042662be77cb71593a8c1e28",
+      "map_sha256": "a55e788d3a9b0a091838eb908955b222bce446fdb54b057e4fe6e7c7cb9d6f3c",
+      "learner_verified": false
+    },
+    "ISO_ShapesGallery": {
+      "primary_tokens": [
+        "mc_shapes_gallery"
+      ],
+      "reason": "Can the same surface-making procedure describe a chair and a cup?",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_ShapesGallery/final.md",
+      "text_sha256": "e4f158a2c5264923af8f55c4f22eab28a9160814786fdc04eb85ffc21a29b321",
+      "map_sha256": "d43b39ead4a257c2c324d430060e9764f1304bf62147270fcc4dceea95ed65b4",
+      "learner_verified": false
+    },
+    "ISO_TorusGyroid": {
+      "primary_tokens": [
+        "GyroidDemo"
+      ],
+      "reason": "Does a repeating surface have to be a pile of repeating objects?",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_TorusGyroid/final.md",
+      "text_sha256": "ea3976b3fc9139f9fa157fe55a2304fe6a0399dfd134045a39531c315341b67b",
+      "map_sha256": "06d173abd83b69a4d854d1812f2f4a4ab35a8f5dd0de5636d4bffa1d39882801",
+      "learner_verified": false
+    },
+    "ISO_Sculpting": {
+      "primary_tokens": [
+        "mc_sculpt_vr"
+      ],
+      "reason": "When two deposits meet, where is their seam?",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_Sculpting/final.md",
+      "text_sha256": "3f11c6f315742e3dde2813d224830c9175771462723eba7ab2ce94754194fb84",
+      "map_sha256": "9f274a93563ba0941f62808fd37d55ca3b3a235531bb6c94f65ce07946c9952d",
+      "learner_verified": false
+    },
+    "ISO_FlatTerrain": {
+      "primary_tokens": [
+        "mc_flat_landscape"
+      ],
+      "reason": "Can a landscape have two surfaces above the same place?",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_FlatTerrain/final.md",
+      "text_sha256": "71ba407e9a483ad6b92d9297806ffcb478d1ba68f8afde223c007fb858a884b3",
+      "map_sha256": "7400fc95c1d4f735f0f69bcc1e669daa1980f6344ff8d64de69ff02a40893e1a",
+      "learner_verified": false
+    },
+    "ISO_PortalLandscape": {
+      "primary_tokens": [
+        "marchingcubes_portal_landscape"
+      ],
+      "reason": "Follow a boundary while adding field terms; retain an earlier surface at matching scale and orientation.",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_PortalLandscape/final.md",
+      "text_sha256": "c4fc47c785f97893d1b0efb98bfee9445c76f908bc292204d7d8aabc501cdc7b",
+      "map_sha256": "f0edc2d0577009079ed42c83e163e516e05c62b974aa4d2cde0c772b452f1c1e",
+      "learner_verified": false
+    },
+    "ISO_Caves": {
+      "primary_tokens": [
+        "mc_inside_cave"
+      ],
+      "reason": "What changes when a surface surrounds your viewpoint?",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_Caves/final.md",
+      "text_sha256": "c8fa3b2d81c103b611f7484e61b2fa8964f7847c0cb37e267b7a04f92b9be2dd",
+      "map_sha256": "99ecb45061987ae113c476f468eebfa56c1b657ea0eefb01ba35153e92ac859c",
+      "learner_verified": false
+    },
+    "ISO_CaveGeneration": {
+      "primary_tokens": [
+        "marchingcubes_cave"
+      ],
+      "reason": "Who designed a corridor when nobody placed its walls one by one?",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_CaveGeneration/final.md",
+      "text_sha256": "71d94dd8759c7d5f2a75789c40244b27f37148cc895b87e4015e730909c82e3f",
+      "map_sha256": "177809119495b9569562772080b15c48d175985ee7c8b4f506c23d28d4caea09",
+      "learner_verified": false
+    },
+    "ISO_AnimatedNoise": {
+      "primary_tokens": [
+        "animated_noise_explorer"
+      ],
+      "reason": "Are these blocks moving, or are different blocks being drawn?",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_AnimatedNoise/final.md",
+      "text_sha256": "bbbdbecab0a0f5d32963beced4a914f7f0cfb0deaa9061f93b37c8ef03b2057e",
+      "map_sha256": "849e35bedaf01949595b8fb59cdc82677d47ce5c8577b3b8cb7d641f734b526d",
+      "learner_verified": false
+    },
+    "ISO_Metaballs": {
+      "primary_tokens": [
+        "metaball_world"
+      ],
+      "reason": "Can two sources make one body?",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_Metaballs/final.md",
+      "text_sha256": "8793abfa5d6a987b4550aabc04f5aed1dd8bdbcc91ce10887edc3ec12f5d7980",
+      "map_sha256": "81b89b4cda59c8e57877bd331ed7184821a543e00fbe346d0e4fee85097a953d",
+      "learner_verified": false
+    },
+    "ISO_ImplicitModeling": {
+      "primary_tokens": [
+        "implicit_surface_modeling"
+      ],
+      "reason": "Must a visible surface already exist as a triangle mesh?",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_ImplicitModeling/final.md",
+      "text_sha256": "62ff4147f00f0b832f2c4e81a13698efb1df5e603283a301ca1cc4ddbb953cd0",
+      "map_sha256": "dcb59152a1fd03fd9d99a925d9d67094eb3b2908b69887cd843daacc9b6fd4f7",
+      "learner_verified": false
+    },
+    "ISO_RhizomeBody": {
+      "primary_tokens": [
+        "rhizome_inside"
+      ],
+      "reason": "Can you return by a route different from the one you arrived along?",
+      "status": "source_checked_draft",
+      "sequence": "isosurfaces",
+      "text_path": "commons/maps/ISO_RhizomeBody/final.md",
+      "text_sha256": "4e92761846c77a2bbae6e6e0635c7c06243f369d74cd982725859867f781e624",
+      "map_sha256": "c2b705176a1a78b66dcada1720a1f7d49c01572c01b76cffbf284e3b4d842566",
+      "learner_verified": false
+    },
+    "Boolean_Verbs": {
+      "primary_tokens": [
+        "csg_union_demo",
+        "csg_intersection_demo",
+        "csg_difference_demo"
+      ],
+      "reason": "The three Boolean verbs require their three parallel examples; the comparison is the core.",
+      "status": "existing_text_retained",
+      "sequence": "boolean_surfaces",
+      "text_path": "commons/maps/Boolean_Verbs/final.md",
+      "text_sha256": "0c7a2fc001acff479a368659abc683805a20b9b747e0229c86bf59667b515420",
+      "map_sha256": "ddfd202d9353c8f4797866a201b3ce90f831982f1e040395c631237a770163ba",
+      "learner_verified": false
+    },
+    "Boolean_Gallery": {
+      "primary_tokens": [
+        "csg_difference_demo",
+        "removal_room"
+      ],
+      "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+      "status": "existing_text_retained",
+      "sequence": "boolean_surfaces",
+      "text_path": "commons/maps/Boolean_Gallery/final.md",
+      "text_sha256": "082e50a1d9172c61c1dbc4e3fbcc59e226753919b177c4855fe0c7de2801f07f",
+      "map_sha256": "e69fff77aab674f969e50b3b3e91a940fac751c5785ab486797448566696384b",
+      "learner_verified": false
+    },
+    "Boolean_Works": {
+      "primary_tokens": [
+        "csg_compose_workbench",
+        "boolean_burrow",
+        "sdf_cavern_room"
+      ],
+      "reason": "Compare the offered workbench, an entered Boolean hollow, and the raised SDF cavern model. The level cutter profile makes the existing burrow a bodily counterexample; outer visibility, collision and clearance remain distinct.",
+      "status": "existing_text_retained",
+      "sequence": "boolean_surfaces",
+      "text_path": "commons/maps/Boolean_Works/final.md",
+      "text_sha256": "0a93c72ef8f9a212b210ca6602379c30543a98d46540389398f3b5201888977b",
+      "map_sha256": "8d57779cd3e89c1cfe52c0a58c142418f557bbb9f8f421de1d0d333f004b7e3b",
+      "learner_verified": false
+    },
+    "SwarmIntelligence_PhysarumColony": {
+      "primary_tokens": [
+        "PhysarumColony"
+      ],
+      "reason": "Can a path remember which way to grow when no individual holds the whole network?",
+      "status": "source_checked_draft",
+      "sequence": "swarmintelligence",
+      "text_path": "commons/maps/SwarmIntelligence_PhysarumColony/final.md",
+      "text_sha256": "2a527b6831544109fd080fbcee3dfd9b70f975bc5de68d6d905ac7bd2083ec60",
+      "map_sha256": "d4607abede73ff790b84de3cee3be4aec05fa9135f99ca4961c6a8c4c8b4293a",
+      "learner_verified": false
+    },
+    "SwarmIntelligence_FlowFields": {
+      "primary_tokens": [
+        "FlowFieldMain"
+      ],
+      "reason": "If many agents turn together, must they be watching one another?",
+      "status": "source_checked_draft",
+      "sequence": "swarmintelligence",
+      "text_path": "commons/maps/SwarmIntelligence_FlowFields/final.md",
+      "text_sha256": "30e9e9ed291ea280b0a5f220e6b6eeeba0a140016e39ec1a4143538af6af947b",
+      "map_sha256": "f08856ffdcc333eb3b1f9360e6bf1e582584cc05874462514fb7c6fda04a8ed7",
+      "learner_verified": false
+    },
+    "SwarmIntelligence_Boids_Algorithm": {
+      "primary_tokens": [
+        "flocking_controls"
+      ],
+      "reason": "Which local relationship is making this flock hold together?",
+      "status": "source_checked_draft",
+      "sequence": "swarmintelligence",
+      "text_path": "commons/maps/SwarmIntelligence_Boids_Algorithm/final.md",
+      "text_sha256": "ef27362697ecd55e5d7a7db50cfd6ae5ae59a669c7d0047ac2a33fc7fe7a9360",
+      "map_sha256": "327d3d8b9c65bdc1fe2ca1ff8cf790dcfc1a15599eda8ae0c81a9b0d966acc8a",
+      "learner_verified": false
+    },
+    "SwarmIntelligence_Agent_Based_Modeling_ABM": {
+      "primary_tokens": [
+        "ant_colony_optimization"
+      ],
+      "reason": "How much of a collective result changes when one rule changes?",
+      "status": "source_checked_draft",
+      "sequence": "swarmintelligence",
+      "text_path": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md",
+      "text_sha256": "b7031718a41831287a763aa687dba8bec5dd61da75e04767d742bf7e58e1fe24",
+      "map_sha256": "73dc5ba85867ca8595bec504d52d1fadbf49685718712f40e252a93828712b16",
+      "learner_verified": false
+    },
+    "SwarmIntelligence_Ant_Colony_Optimization": {
+      "primary_tokens": [
+        "AntColonyV2"
+      ],
+      "reason": "How can an ant leave useful directions without carrying a map?",
+      "status": "source_checked_draft",
+      "sequence": "swarmintelligence",
+      "text_path": "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/final.md",
+      "text_sha256": "d26e1d5319847d4442e2703636bafaa8fed4985d642837109e3d0302ccbb3ceb",
+      "map_sha256": "6cfd5c3e42ce5b97d0cce8df362daf94e3f43a826bc657fe3980c47f1eecaedd",
+      "learner_verified": false
+    },
+    "SwarmIntelligence_Particle_Swarm_Optimization": {
+      "primary_tokens": [
+        "fitness_landscape_politics"
+      ],
+      "reason": "When a swarm improves, who decided what better means?",
+      "status": "source_checked_draft",
+      "sequence": "swarmintelligence",
+      "text_path": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md",
+      "text_sha256": "34d5a3a45b67b455749c7b5b71c48574ee5f22017384140864a318db0668d661",
+      "map_sha256": "1c954975dd9ad4ecfd77ea1d9fc05b4043cc287ef261c966fc70d2a2a48f5e5b",
+      "learner_verified": false
+    },
+    "SwarmIntelligence_Swarm_Intelligence_Algorithms": {
+      "primary_tokens": [
+        "ecosystem_simulation"
+      ],
+      "reason": "If this small ecosystem persists, which rules are helping it persist?",
+      "status": "source_checked_draft",
+      "sequence": "swarmintelligence",
+      "text_path": "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md",
+      "text_sha256": "02e61f9fcd25b8e7a9ea0a1a22859e7ff74dd8d80169eca47e5f38651a87cd22",
+      "map_sha256": "c64aefef5c8f4d9146b0cbd653c7d9b8a7d51a4307df7239040e1b07f4fd4152",
+      "learner_verified": false
+    },
+    "ML_Evolution": {
+      "primary_tokens": [
+        "non_teleological_evolution"
+      ],
+      "reason": "Can a population change without a single specimen being named the best?",
+      "status": "source_checked_draft",
+      "sequence": "machinelearning",
+      "text_path": "commons/maps/ML_Evolution/final.md",
+      "text_sha256": "1982cda825c0419b4f97e389dff9e3311d6d44d8f9e08d585b437c3b7c879ccc",
+      "map_sha256": "3ae0b8de6deb75ca9b6a7532d006fd5d8bed1b5cc94041285d75b1e83e643819",
+      "learner_verified": false
+    },
+    "ML_Gradient_Landscape": {
+      "primary_tokens": [
+        "loss_function_comparator"
+      ],
+      "reason": "Will the same observations lead to the same best fit when error is measured differently?",
+      "status": "source_checked_draft",
+      "sequence": "machinelearning",
+      "text_path": "commons/maps/ML_Gradient_Landscape/final.md",
+      "text_sha256": "ed84263a9f05ede2ba4eceb76b5cb3d48be415e5613c2327fcac66ff801783a4",
+      "map_sha256": "57e0c8ac92a313a55557e5bfaf8a316db059f492dde7cb0899f36c3bda923644",
+      "learner_verified": false
+    },
+    "ML_Classification": {
+      "primary_tokens": [
+        "enhanced_kmeans"
+      ],
+      "reason": "When points share a colour, has a group been discovered or assigned?",
+      "status": "source_checked_draft",
+      "sequence": "machinelearning",
+      "text_path": "commons/maps/ML_Classification/final.md",
+      "text_sha256": "25f3ab7ebbd273cbfa724dc759f156e0e8d477887983247f2e004afb7b3f148d",
+      "map_sha256": "1ce3af5d3f3a5f910f7c7ceac7ce34cabb865d482e2faa73b3a451ebf77d2a55",
+      "learner_verified": false
+    },
+    "ML_Neural_Networks": {
+      "primary_tokens": [
+        "neural_network_visualization"
+      ],
+      "reason": "What changes in a network when its answers become closer to the examples?",
+      "status": "source_checked_draft",
+      "sequence": "machinelearning",
+      "text_path": "commons/maps/ML_Neural_Networks/final.md",
+      "text_sha256": "654ee502f50169df70ab30f1e754bf0708dbe9efafe93435ec2e7903d5a5d70c",
+      "map_sha256": "f53ef04a9d45ee3611f217ad149168eb413cbd545ef554ce9313b2cd0079c86e",
+      "learner_verified": false
+    },
+    "ML_Perception": {
+      "primary_tokens": [
+        "computer_vision_vr"
+      ],
+      "reason": "Which parts of this display were computed from pixels, and which were supplied as names?",
+      "status": "source_checked_draft",
+      "sequence": "machinelearning",
+      "text_path": "commons/maps/ML_Perception/final.md",
+      "text_sha256": "686ca6d3b2791614b6a686f946a81ff17d692372c9350ac364c6dc678a7a0b12",
+      "map_sha256": "c26b2dce33c03d7b51e646f5fb77697bf8629c5f41d77c38c4833f1a2611d841",
+      "learner_verified": false
+    },
+    "ML_Sequence_Memory": {
+      "primary_tokens": [
+        "lstms_vr"
+      ],
+      "reason": "What would a memory need to keep, admit and reveal separately?",
+      "status": "source_checked_draft",
+      "sequence": "machinelearning",
+      "text_path": "commons/maps/ML_Sequence_Memory/final.md",
+      "text_sha256": "971490b3dfe4fcd40ca80aae3250d71630e53fd3639b2006ee622737cf3ce5f0",
+      "map_sha256": "d4e4672f22f418a7093910cc3b090c17eefa8765c0109d1ca569006cdad813c7",
+      "learner_verified": false
+    },
+    "ML_Generative": {
+      "primary_tokens": [
+        "generative_adversarial_networks_gans_vr"
+      ],
+      "reason": "Who judges a generated example, and how could that judgement change its maker?",
+      "status": "source_checked_draft",
+      "sequence": "machinelearning",
+      "text_path": "commons/maps/ML_Generative/final.md",
+      "text_sha256": "923305fd32806ca72863e89059b90461b449d5f46a46ac1c8a03eb93b78d81e1",
+      "map_sha256": "e781c86ea2a4d30395a03e4b890714b35f47bcc0975d39e81ab84de77585f0ea",
+      "learner_verified": false
+    },
+    "ML_Synthesis": {
+      "primary_tokens": [
+        "anomaly_detection"
+      ],
+      "reason": "Is a point unusual by itself, or unusual under a particular measuringrule?",
+      "status": "source_checked_draft",
+      "sequence": "machinelearning",
+      "text_path": "commons/maps/ML_Synthesis/final.md",
+      "text_sha256": "aa7d3958ace196298215d1f9e7fd01f05e64a6696e22bc9df23860d40c21dc19",
+      "map_sha256": "48f0db148d05c6158c7b65abe88eb9a7b79249e2e435541484114a3159f8bffc",
+      "learner_verified": false
+    },
+    "GT_Foundations": {
+      "primary_tokens": [
+        "two_travelers"
+      ],
+      "reason": "Does a graph already contain the order in which we should visit it?",
+      "status": "source_checked_draft",
+      "sequence": "graphtheory",
+      "text_path": "commons/maps/GT_Foundations/final.md",
+      "text_sha256": "7e7e883c45e3c3d7f250584cef53e65d99c25e0d3ccdb928f70e02dd3be18dfc",
+      "map_sha256": "760a28e902eead601a237d86ecc0dd0154daa4d61ba8586b429e7457e3e4423a",
+      "learner_verified": false
+    },
+    "GT_Layout": {
+      "primary_tokens": [
+        "force_directed_layout"
+      ],
+      "reason": "Can the picture change while the graph stays the same?",
+      "status": "source_checked_draft",
+      "sequence": "graphtheory",
+      "text_path": "commons/maps/GT_Layout/final.md",
+      "text_sha256": "d611d7eebda2f9e71cf4b2b56f38f1df5adf47bcc4381975983ec359e406659e",
+      "map_sha256": "a864ab420b06e3131b09c72c0aa260367ce8066a07503907b38f0b973d798e56",
+      "learner_verified": false
+    },
+    "GT_Pathfinding": {
+      "primary_tokens": [
+        "impatient_river"
+      ],
+      "reason": "What happens to the shortest route when a stone disappears?",
+      "status": "source_checked_draft",
+      "sequence": "graphtheory",
+      "text_path": "commons/maps/GT_Pathfinding/final.md",
+      "text_sha256": "be4cae950e37a4c187602ef3eda78a94746419501008ff005a2b2f9e8f903d28",
+      "map_sha256": "fca0d2d0f6a2dbd01729e31fe8a51fdb2fedfd377c8493a80eea15db7e40ac53",
+      "learner_verified": false
+    },
+    "GT_Network_Analysis": {
+      "primary_tokens": [
+        "network_analysis"
+      ],
+      "reason": "Is the biggest node the one whose connections matter most?",
+      "status": "source_checked_draft",
+      "sequence": "graphtheory",
+      "text_path": "commons/maps/GT_Network_Analysis/final.md",
+      "text_sha256": "67b9122dbc9cdfb22ffcf7655c553923055ff433749ff58b4b0d1cf5e7263936",
+      "map_sha256": "9eea3efc21c4815e882742b2a75f2c99e5d98ffbe223840397f36ef070b7a1c9",
+      "learner_verified": false
+    },
+    "GT_Connectivity": {
+      "primary_tokens": [
+        "tarjan_algorithm"
+      ],
+      "reason": "If you can reach another node, can you get back?",
+      "status": "source_checked_draft",
+      "sequence": "graphtheory",
+      "text_path": "commons/maps/GT_Connectivity/final.md",
+      "text_sha256": "e657d9ac21123ee3f42f0bb4742c7d3db1864212e56fbe50f03ba26b579c7812",
+      "map_sha256": "c8c5dc314572376ba918caa06b56b9a3f661ed771c40a9e6767fc31e6aedde88",
+      "learner_verified": false
+    },
+    "GT_Spanning_Trees": {
+      "primary_tokens": [
+        "mst_visualization"
+      ],
+      "reason": "Which connections can be removed while keeping everyone connected?",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "graphtheory",
+      "text_path": "commons/maps/GT_Spanning_Trees/final.md",
+      "text_sha256": "22a212a47d918e95e32e9a259b8d155312604bf6bac3367105536775c1181434",
+      "map_sha256": "c69792390dffc6fcbe42614c5bc734bcaaed4b31d733afdfeadadcea396b2f87",
+      "learner_verified": false,
+      "verification_scope": "Controlled model checks and actual museum placement/approach probes; no headset or learner verification.",
+      "evidence_path": "doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md"
+    },
+    "GT_Flow": {
+      "primary_tokens": [
+        "push_relabel_algorithm"
+      ],
+      "reason": "When a junction receives more than it can send onward, where does the excess go?",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "graphtheory",
+      "text_path": "commons/maps/GT_Flow/final.md",
+      "text_sha256": "49b283200b822805c3de9679022b52a8b0e1d285bfd525df5d464358639dc722",
+      "map_sha256": "6e67bddf8d078bd85a11df867cff8714d842bf57d232c4c6dc02a9e750bb3fc8",
+      "learner_verified": false,
+      "verification_scope": "Controlled model checks and actual museum placement/approach probes; no headset or learner verification.",
+      "evidence_path": "doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md"
+    },
+    "GT_Matching": {
+      "primary_tokens": [
+        "edmonds_algorithm"
+      ],
+      "reason": "Can an early pairing prevent a larger set of pairings later?",
+      "status": "desktop_verified_headset_pending",
+      "sequence": "graphtheory",
+      "text_path": "commons/maps/GT_Matching/final.md",
+      "text_sha256": "11caaf7de55d7cf80f39040859824ddddb6681efdbcbe73b9844f212dd21f055",
+      "map_sha256": "80742e73d65564546ddaecb40c506701227a3cbe80fadb36edfb55e62212de90",
+      "learner_verified": false,
+      "verification_scope": "Controlled model checks and actual museum placement/approach probes; no headset or learner verification.",
+      "evidence_path": "doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md"
+    },
+    "Euclid_Parallel": {
+      "primary_tokens": [
+        "euclid_postulates_plaque",
+        "parallel_lines",
+        "angle_sum_triangle"
+      ],
+      "reason": "Restore the colonnade and physical plaque controls; the printed triangle supplies the comparison with measured angles in the next hall.",
+      "status": "encounter_and_text_revised",
+      "sequence": "foundationscrisis",
+      "text_path": "commons/maps/Euclid_Parallel/final.md",
+      "text_sha256": "87c13bab12199615a1588a95ec3581c8fd55429577c6ecb4293689a201d35d1d",
+      "map_sha256": "776e0e50bc6ffa44b94c256f4cecd4427d1302737ba090132a45107f7478b1c9",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-foundations-opening-review/SUMMARY.md"
+    },
+    "NonEuclidean_Spaces": {
+      "primary_tokens": [
+        "triangle_curvature_workbench",
+        "riemann_sphere"
+      ],
+      "reason": "Keep all six exhibits; make the three host models measurable and distinguish the disk boundary from the Riemann sphere point at infinity.",
+      "status": "encounter_and_text_revised",
+      "sequence": "foundationscrisis",
+      "text_path": "commons/maps/NonEuclidean_Spaces/final.md",
+      "text_sha256": "e0bed73e6f14d5e4b619fecbd470c89bbe806c5c7007635b90a6fb03f6e7e6bc",
+      "map_sha256": "bcc4492bbbcc662009521a38332e7a9587fc11a02111c9b5be61c02fccdfe336",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-foundations-opening-review/SUMMARY.md"
+    },
+    "Russell_Paradox": {
+      "primary_tokens": [
+        "russell_paradox_workbench",
+        "russell_set_box",
+        "barber_paradox",
+        "hilbert_hotel"
+      ],
+      "reason": "Test unrestricted membership, then finite separation. Preserve the box and barber; promote the hotel as a resolved counterexample to contradiction.",
+      "status": "encounter_and_text_revised",
+      "sequence": "foundationscrisis",
+      "text_path": "commons/maps/Russell_Paradox/final.md",
+      "text_sha256": "bad532693a66f66d0aa1747fbdfe0a7b6b0731053e59ff457aa98090dc599862",
+      "map_sha256": "a1440c8e7212afa61c581823cd690c1824f4cac61e78ba7483f7a1b455f00f24",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-russell-godel-review/SUMMARY.md"
+    },
+    "Godel_Incompleteness": {
+      "primary_tokens": [
+        "godel_sentence_machine",
+        "provability_sorter"
+      ],
+      "reason": "Preserve the mature chapter; label its two primary machines as illustrations and state the limits of their evidence.",
+      "status": "text_preserved_exhibit_labels_revised",
+      "sequence": "foundationscrisis",
+      "text_path": "commons/maps/Godel_Incompleteness/final.md",
+      "text_sha256": "5b0be4a63f7de2c246cf04c4a888a9d412abc183dc6b15b882ecab5842a39b6c",
+      "map_sha256": "4a05e4ba8ed43dfc2e8023b9a1a795f35f1cfe2de9756a233600c1900b6e645e",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-russell-godel-review/SUMMARY.md"
+    },
+    "Escher_Impossible": {
+      "primary_tokens": [
+        "escher_staircase",
+        "penrose_triangle"
+      ],
+      "reason": "Follow actual tread heights, then move the viewer to separate apparent connection from spatial connection. Preserve the trident and pipe as supporting comparisons.",
+      "status": "encounter_and_text_revised",
+      "sequence": "foundationscrisis",
+      "text_path": "commons/maps/Escher_Impossible/final.md",
+      "text_sha256": "5917b1dee57969c3396ba40cdc0caa93bfb6733afd2425b915f0e7c9c9aafa5a",
+      "map_sha256": "47c00aaf1b736ae70e832fdcc3fe9a368773f974a06d207e7edaea08ee9d0d1d",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-escher-review/SUMMARY.md"
+    },
+    "Brouwer_Intuitionism": {
+      "primary_tokens": [
+        "brouwer_choice_sequence",
+        "constructive_proof",
+        "cantor_diagonal_workbench"
+      ],
+      "reason": "Choose a finite prefix, identify a witness, then construct one by a diagonal rule. Promote the existing Cantor bench; keep the other five families as distinct comparisons.",
+      "status": "encounter_and_text_revised",
+      "sequence": "foundationscrisis",
+      "text_path": "commons/maps/Brouwer_Intuitionism/final.md",
+      "text_sha256": "7e23e07f5e97f40e8b896f1456cd767a62002078c4f0f24907063a2cbbfc8f18",
+      "map_sha256": "1575f4a9c810766df740c7e64a812339cb50cd952b6e21f93edd2c73ec5b964e",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-brouwer-review/SUMMARY.md"
+    },
+    "Florensky_Paraconsistent": {
+      "primary_tokens": [
+        "both_true_gate",
+        "florensky_sphere"
+      ],
+      "reason": "Change independent conflicting reports at a walkable threshold, then keep both readings on the sphere. Retain both quantum visual toys as distinct comparisons; neither implements logical contradiction.",
+      "status": "encounter_and_text_revised",
+      "sequence": "foundationscrisis",
+      "text_path": "commons/maps/Florensky_Paraconsistent/final.md",
+      "text_sha256": "fa2d47534ba20a06686de2c939d4245a2bd54b57dd55764782e88fd6908c6273",
+      "map_sha256": "2f797faada42cb27b9684ca855a75d92d4b0eaaa5a42e2544176e0023defbc94",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-florensky-review/SUMMARY.md"
+    },
+    "Crisis_Synthesis": {
+      "primary_tokens": [
+        "qfep_formula_3d",
+        "lambda_slider",
+        "phi_slider",
+        "bifurcation_diagram",
+        "goedel_atrium",
+        "russell_paradox_workbench"
+      ],
+      "reason": "Read and question the research formula; compare an independently controlled recurrence, enter a finite self-description, and return to the membership test. All ten families retained, with four smaller reminders secondary.",
+      "status": "encounter_and_text_revised",
+      "sequence": "foundationscrisis",
+      "text_path": "commons/maps/Crisis_Synthesis/final.md",
+      "text_sha256": "910b31de0967d87f80c337ae976520876b2f415dc239a848e5f03440a36c57a0",
+      "map_sha256": "9794f645122ce4b32925d49c8d7e91ef594996b7bdf5965020a24c9562554372",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-crisis-synthesis-review/SUMMARY.md"
+    },
+    "QFEP_Introduction": {
+      "primary_tokens": [
+        "qfep_balance_workbench"
+      ],
+      "reason": "Keep one outline and total, then find another arrangement with the same total. Test the zero-weight case; distinguish supplied quantities and authored reference names from measurements.",
+      "status": "encounter_and_text_revised",
+      "sequence": "qfeplaboratory",
+      "text_path": "commons/maps/QFEP_Introduction/final.md",
+      "text_sha256": "db14dc091ae5ed7ddeefd6411a80fccf9c24cf47b302b5607b94b6ee214f54b9",
+      "map_sha256": "166b488f070c5d64b60e5975e0ecd2de7c35f628b2b09fc3dc7b967c121df193",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-qfep-introduction-review/SUMMARY.md"
+    },
+    "QFEP_F_Term": {
+      "primary_tokens": [
+        "shannon_workbench"
+      ],
+      "reason": "Compare equal source entropy with unequal predictor error, then change EXPECT 0/1 while keeping the observed bits fixed.",
+      "status": "encounter_and_text_revised",
+      "sequence": "qfeplaboratory",
+      "text_path": "commons/maps/QFEP_F_Term/final.md",
+      "text_sha256": "0c383fda53506972a64a21091bd2dd813ba677c96300a7269d898951b389fd1d",
+      "map_sha256": "65f67e5ae9b64adef862e82e5818d6ae28aba989f711339e051e1eafc00d79a9",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-qfep-f-term-review/SUMMARY.md"
+    },
+    "QFEP_E_Term": {
+      "primary_tokens": [
+        "entropy_fan"
+      ],
+      "reason": "Count equally weighted endings; prune and reopen the fan, then ask who may revise its authored alternatives.",
+      "status": "encounter_and_text_revised",
+      "sequence": "qfeplaboratory",
+      "text_path": "commons/maps/QFEP_E_Term/final.md",
+      "text_sha256": "393e31577e7e91038a65e3777d0f00ced09b6f47b47754eab531f0d42f538cce",
+      "map_sha256": "3e8de1983acf2f2fa2d8156d6f9e04ec703c971c03976e386567b14ef053098a",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-qfep-e-term-review/SUMMARY.md"
+    },
+    "QFEP_Lambda_Spectrum": {
+      "primary_tokens": [
+        "lambda_hall"
+      ],
+      "reason": "Move the lit recommendation while keeping the authored spectrum and its animation independent; compare the invitation with the arrangement it inherits.",
+      "status": "encounter_and_text_revised",
+      "sequence": "qfeplaboratory",
+      "text_path": "commons/maps/QFEP_Lambda_Spectrum/final.md",
+      "text_sha256": "ccb0679010939a220c1587db5b8382a1552bf376b3bcce3910e80cd81a2b7b50",
+      "map_sha256": "320b6c8a9388f8ec4f6938f5cfef3100b244c01b5c9eeb13ae86f700719de473",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-qfep-lambda-review/SUMMARY.md"
+    },
+    "QFEP_Phi_Term": {
+      "primary_tokens": [
+        "phi_slider",
+        "transforming_pattern"
+      ],
+      "reason": "Compare sign and magnitude before revealing an interpretation; the neighbouring pattern keeps its independent rhythm.",
+      "status": "encounter_and_text_revised",
+      "sequence": "qfeplaboratory",
+      "text_path": "commons/maps/QFEP_Phi_Term/final.md",
+      "text_sha256": "e4ca8afdd0a9cf4ba4151b725f57f16a8d82cff3c983c58b036c4bb4c21fa020",
+      "map_sha256": "82f88e7c64cfce23802526a453d6904b1e45425e0bb678fd98616dfe162a45ee",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-qfep-phi-review/SUMMARY.md"
+    },
+    "QFEP_Edge_Of_Chaos": {
+      "primary_tokens": [
+        "edge_of_chaos_unlocked"
+      ],
+      "reason": "Compare the same starting field at equal model time with two numerical timesteps; choose a feature before naming a regime.",
+      "status": "encounter_and_text_revised",
+      "sequence": "qfeplaboratory",
+      "text_path": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+      "text_sha256": "a3985167c07b9cd5d29b587862ce48579f5af8a9887ede492180b2b96c15af79",
+      "map_sha256": "211e9c5ab59ec333a121ba6181153fe4d6e36244510fa9c20c58162c60f85b3d",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-qfep-edge-review/SUMMARY.md"
+    },
+    "QFEP_Sandbox": {
+      "primary_tokens": [
+        "lambda_slider",
+        "phi_slider",
+        "qfep_reactor"
+      ],
+      "reason": "Make, interrupt and repeat a local connection; compare a handle value with one receiver input and response.",
+      "status": "encounter_and_text_revised",
+      "sequence": "qfeplaboratory",
+      "text_path": "commons/maps/QFEP_Sandbox/final.md",
+      "text_sha256": "f17a66f424511f91e663fc63e66cb098d450be50db975ddef9a2be240f9ab14b",
+      "map_sha256": "e5fbc64e6cba06d618c41d49177a47b818af624f5da4de3eae54a18a0b901c4e",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-qfep-sandbox-review/SUMMARY.md"
+    },
+    "QFEP_Synthesis": {
+      "primary_tokens": [
+        "queer_morphology_specimen"
+      ],
+      "reason": "Separate stiffness, pressure and dissipation in one existing specimen; stop imposed pressure modulation while physics continues.",
+      "status": "encounter_and_text_revised",
+      "sequence": "qfeplaboratory",
+      "text_path": "commons/maps/QFEP_Synthesis/final.md",
+      "text_sha256": "2d03b5a9d94511171ace3d3a1bef79c0a841ee42af107e6d226fbb45eb7c8d66",
+      "map_sha256": "79e8681536268206c1455bdc9d3b90e1a13e07e3f795e087f7714be956050eae",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-qfep-synthesis-review/SUMMARY.md"
+    },
+    "CriticalAlgorithms_Algorithmic_Bias_Visualization": {
+      "primary_tokens": [
+        "bias_from_inside"
+      ],
+      "reason": "Compare the same labels under spatial compression with fixed materials; separate moving the geometry from moving the observer.",
+      "status": "encounter_and_text_revised",
+      "sequence": "postfoundationscrisis",
+      "text_path": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md",
+      "text_sha256": "093673aa8e91abac1d3377deeafe9f374e381376d5a9f3ae36d0afa105d9230b",
+      "map_sha256": "66443d2ec736b74234faf73dc21809220e003145a2dc02f4428fca7f9d3422f2",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-postcrisis-bias-review/SUMMARY.md"
+    },
+    "CriticalAlgorithms_Applied_Ethics": {
+      "primary_tokens": [
+        "room_shape_demonstrator"
+      ],
+      "reason": "Inspect one seating plan before comparison; change only the palette and ask which judgement remains.",
+      "status": "encounter_and_text_revised",
+      "sequence": "postfoundationscrisis",
+      "text_path": "commons/maps/CriticalAlgorithms_Applied_Ethics/final.md",
+      "text_sha256": "a21c1ba28bcceebb00ceb85b0593f428468546510620f66da8d3ad21904d91a0",
+      "map_sha256": "eff7832f0c653f8c56988a585fcbbbb75d7095003b2628543ebee7beb6f76e16",
+      "learner_verified": false,
+      "review_evidence": "doc/book/iterations/2026-09-20-applied-ethics-review/SUMMARY.md"
+    },
+    "SpeculativeComputation_Paraconsistent_Engineering": {
+      "primary_tokens": [
+        "merge_conflict_visualizer"
+      ],
+      "reason": "Must one account disappear before two accounts can share a system?",
+      "status": "encounter_and_text_revised",
+      "sequence": "postfoundationscrisis",
+      "text_path": "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/final.md",
+      "text_sha256": "6f17ad5de578ea301b99302ace43625708a87c68dec27fbe8a5515f0fd12a6ce",
+      "map_sha256": "fad7cf1b3590090e3373b1c29f58ab4143c0b8a91b62f0ba03b8d8af9ed4eaa2",
+      "learner_verified": false,
+      "review_report": "doc/book/iterations/2026-09-20-paraconsistent-review/SUMMARY.md"
+    },
+    "SpeculativeComputation_Situated_Computation": {
+      "primary_tokens": [
+        "situated_readout"
+      ],
+      "reason": "What changes when the subject stays the same but the source of the verdict changes?",
+      "status": "encounter_and_text_revised",
+      "sequence": "postfoundationscrisis",
+      "text_path": "commons/maps/SpeculativeComputation_Situated_Computation/final.md",
+      "text_sha256": "b67942a03543302b29bd1dd46aec209a8739e2d9aac95586ccfed0f5c2ca7a5f",
+      "map_sha256": "8e6a1d9f29e514dac817c0f260a8805962103a6b637a4c1fda4f52e0a2d51ca5",
+      "learner_verified": false,
+      "review_report": "doc/book/iterations/2026-09-20-situated-review/SUMMARY.md"
+    },
+    "SpeculativeComputation_Collective_Knowledge": {
+      "primary_tokens": [
+        "peer_production_tool",
+        "the_commons_table"
+      ],
+      "reason": "Follow a contribution into one form, then walk around a table whose empty centre leaves its rules at the rim.",
+      "status": "encounter_and_text_revised",
+      "sequence": "postfoundationscrisis",
+      "text_path": "commons/maps/SpeculativeComputation_Collective_Knowledge/final.md",
+      "text_sha256": "0a137b9cf19083ef109f9160de1a0f729b0d07d5e9ff8a6646734082c7b10298",
+      "map_sha256": "4a6755e961919de6141186d461b24d1edf7275c11541e52ae169511818aa19bb",
+      "learner_verified": false,
+      "review_report": "doc/book/iterations/2026-09-21-commons-restoration/SUMMARY.md"
+    },
+    "SpeculativeComputation_Rhizome_Network": {
+      "primary_tokens": [
+        "rhizome_cave_demo",
+        "rhizome_grower"
+      ],
+      "reason": "Walk circuits and an upper crossing, then compare the companion grower. A visible connection and a bodily passage are different constructions.",
+      "status": "runtime_checked_draft",
+      "sequence": "postfoundationscrisis",
+      "text_path": "commons/maps/SpeculativeComputation_Rhizome_Network/final.md",
+      "text_sha256": "f42f62a21c9911d6960547b6e34cab08449f0c50b371a258ea1c5421778de0d2",
+      "map_sha256": "ac1d53d1303a3374ec067e692db2dab518452e3731a50430c1d18002ea49a857",
+      "learner_verified": false,
+      "review_report": "doc/book/iterations/2026-09-21-rhizome-immersion/SUMMARY.md"
+    },
+    "AdvancedLaboratory_Lab_Equipment_Simulation": {
+      "primary_tokens": [
+        "MolecularDesigner"
+      ],
+      "reason": "Change a position or neighbour in the gold body; feel a pull travel through the ragdoll, chair, table and lamp. Which connections preserve a recognisable use?",
+      "status": "runtime_checked_draft",
+      "sequence": "postfoundationscrisis",
+      "text_path": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md",
+      "text_sha256": "cb738551a7af5788c5184a80c8fb2f8adbe140270311d86f8310d1bef75ce0f1",
+      "map_sha256": "d085ba8e400c19e9478bb69a0647779aae6153aac30f340272965e93e7a7c73e",
+      "learner_verified": false,
+      "review_report": "doc/book/iterations/2026-09-21-assembly-furniture/SUMMARY.md"
+    },
+    "PostCrisis_Synthesis": {
+      "primary_tokens": [
+        "assembly_return",
+        "accountability_ledger"
+      ],
+      "reason": "Look for the hand you moved. What survived the journey?",
+      "status": "runtime_checked_draft",
+      "sequence": "postfoundationscrisis",
+      "text_path": "commons/maps/PostCrisis_Synthesis/final.md",
+      "text_sha256": "b02e73877e4ae3693882dfa2caca40044bbd6bd3378eb1da21eaf867b4fb484d",
+      "map_sha256": "8f8aac1598f2f28023d44664dc1d9f2aa60c4abb6ce7f4aff8935b8669e8090d",
+      "learner_verified": false,
+      "review_report": "doc/book/iterations/2026-09-21-assembly-belonging/SUMMARY.md"
+    },
+    "Color_Grid_Pallet": {
+      "primary_tokens": [
+        "gridcolorizer"
+      ],
+      "sequence": "color",
+      "status": "draft",
+      "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+      "map_sha256": "9b5b3e58b5f31d7550cf223f26b911de6f90d4f055b31345c48af231792450e0",
+      "learner_verified": false,
+      "text_path": "commons/maps/Color_Grid_Pallet/final.md",
+      "text_sha256": "d0f6450eec39f30f119c0e613729dc3e5047dd6f47c07b63260f0f03783b7bc8",
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-paint-spray-cans/index.html#handoff"
+    },
+    "Color_Rainbow": {
+      "primary_tokens": [
+        "rainbow"
+      ],
+      "sequence": "color",
+      "status": "draft",
+      "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+      "map_sha256": "a7e26310de601a500d6c75adfac7b1d2e524c3e3b12c8243a3708ad84e160d8b",
+      "learner_verified": false,
+      "text_path": "commons/maps/Color_Rainbow/final.md",
+      "text_sha256": "77dbc7243fa7f6f351dfe770b031e008463980004015cb0c4f3e3e08b7956557",
+      "local_review": "doc/book/iterations/2026-09-28-rainbow-walk-and-sparks/index.html"
+    },
+    "Chamber_Color": {
+      "primary_tokens": [
+        "becoming_catalyst"
+      ],
+      "sequence": "color",
+      "status": "source_checked_draft",
+      "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+      "map_sha256": "829b52138e3f558099a96dab614853e0ce6b55ef8ba9a816e65766459b832cef",
+      "learner_verified": false,
+      "text_path": "commons/maps/Chamber_Color/final.md",
+      "text_sha256": "353ab910c7292a2a9a79f42a23d9e9e1c55d5efb25bc733d357c63d75e4b4953"
+    },
+    "Color_Paint": {
+      "primary_tokens": [
+        "ball_painting_demo",
+        "albers_wall_gallery"
+      ],
+      "sequence": "color",
+      "status": "draft",
+      "reason": "Historical configuration recovered with perimeter walls; selected colour encounters restored as the primary thread.",
+      "map_sha256": "f55bf811435f74f72bee98a7c198bce8fa649581b241f9204a8da351b902da16",
+      "learner_verified": false,
+      "text_path": "commons/maps/Color_Paint/final.md",
+      "text_sha256": "edff4b9dba229c9b05da869930311d6bd569ed683d2f7e7579b13de93bd999c9",
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-paint-aerosol-and-runs/index.html"
+    },
+    "Color_Flashlight": {
+      "primary_tokens": [
+        "flashlight_demo",
+        "colour_light_rooms"
+      ],
+      "sequence": "color",
+      "status": "draft",
+      "reason": "Move a constant-colour lamp, then enter a fixed white room whose light changes; layered ceiling openings add the moving viewpoint.",
+      "map_sha256": "6d06792d1ec94afd7476c3059855394841b8e8cf490e462e3a7a2f559948affe",
+      "learner_verified": false,
+      "text_path": "commons/maps/Color_Flashlight/final.md",
+      "text_sha256": "d9780492496f45031e3732370f98defcfa2c0f968a09e3299736227a7d2099fc",
+      "local_review": "doc/book/iterations/2026-09-28-white-room-and-apertures/index.html"
+    },
+    "Ribbon_Patterns_01": {
+      "sequence": "tiling",
+      "status": "text_pending",
+      "primary_tokens": [
+        "grid_2d_4x4",
+        "grid_3d_4x4x4"
+      ],
+      "reason": "Consolidated ribbon collection; primary encounters selected provisionally.",
+      "learner_verified": false,
+      "map_sha256": "db587570b0f260889c87664c6cc664ee5efa5e8e0fd0593e9bf4e1c4fc9362cf",
+      "text_sha256": "aa0cb6505f1fdc68983aa2e3b243b59a299d7ada2551e99d1a3acfab4b6f949e",
+      "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Ribbon_Patterns_01"
+    },
+    "Ribbon_Patterns_02": {
+      "sequence": "tiling",
+      "status": "text_pending",
+      "primary_tokens": [
+        "SimultaneousContrast",
+        "MetamerismLab"
+      ],
+      "reason": "Consolidated ribbon collection; primary encounters selected provisionally.",
+      "learner_verified": false,
+      "map_sha256": "1e803ac63f9f8ff1eb66bdb9b8bed069cfcc3be7e2a311c9dc0a08a07446dda9",
+      "text_sha256": "c64ef238cddf350cf9c3207dc7e04df9a6f16899722a7453837b7ace8fb0b4af",
+      "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Ribbon_Patterns_02"
+    },
+    "Ribbon_Patterns_03": {
+      "sequence": "tiling",
+      "status": "existing_text_retained",
+      "primary_tokens": [
+        "fabric_shader_studio",
+        "super_drag_mirror",
+        "drag_catwalk"
+      ],
+      "reason": "Current manuscript and placed roles follow fabric source editing, deliberate saved-recipe wear, live mirror comparison and a shared recipe on four runway bodies. Legacy glitch and light works remain secondary; headset and learner verification remain pending.",
+      "learner_verified": false,
+      "map_sha256": "3513f6784e72cc7b4f73cf38e5e1aea64a7da63eb3cffe3a2338af030db7f9b2",
+      "text_path": "commons/maps/Ribbon_Patterns_03/final.md",
+      "text_sha256": "940c27a3b4056c863e7ffb2e561331aa1e7dd65b292a2bd4cf7664ca49fb19e4",
+      "local_review": "doc/book/iterations/2026-09-24-tiling-review-comments/index.html#Ribbon_Patterns_03"
+    },
+    "Change_Choreography": {
+      "sequence": "forces",
+      "primary_tokens": [
+        "phase_rod_array",
+        "conveyor_backlog"
+      ],
+      "status": "desktop_verified_headset_pending",
+      "learner_verified": false,
+      "reason": "Fixed phase difference, relative frequency drift and mismatched throughput are distinct inspectable relations.",
+      "map_sha256": "58077f5ba8da918fd400bf1d359a31170b2e76842404937bca47d3b8f30c5609",
+      "text_path": "commons/maps/Change_Choreography/final.md",
+      "text_sha256": "477ec78075f4a11bddadcde93803684cd4620f3f2e8f825f09ef403632dbf3b5",
+      "hash_method": "SHA-256 of raw file bytes",
+      "local_review": "doc/book/iterations/2026-09-25-forces-review-comments/index.html#Change_Choreography",
+      "review_scope": "Source-aware thirteen-hall review; see per-hall reports for executed checks and headset limits."
+    },
+    "Trans_Body": {
+      "primary_tokens": [
+        "approach_wall",
+        "carve_grid",
+        "approach_scale"
+      ],
+      "reason": "Approach turns slats and shrinks blocks; contact cuts an open-topped trench in a low lattice. Step clear to see reversible openings return; the cut remains.",
+      "status": "draft",
+      "sequence": "transformation",
+      "text_path": "commons/maps/Trans_Body/final.md",
+      "text_sha256": "fb5f0c695a85aa20bf90e8064596e4448c89168deb9018cebd9bdd6eb20f7c98",
+      "map_sha256": "19bddcd6ff6efec677215c81e4e6dcf7222a731dce00e5479ec97e5ed4371fa5",
+      "learner_verified": false,
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-scale-and-body-passage/index.html#reading-body"
+    },
+    "Tutorial_3D": {
+      "primary_tokens": [
+        "array_flight_lab"
+      ],
+      "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+      "status": "source_checked_draft",
+      "sequence": "array_tutorial",
+      "text_path": "commons/maps/Tutorial_3D/final.md",
+      "text_sha256": "266cef6442787f98dc65e5c9db2b6e7efa25030a824d92f199e27ea438f10aed",
+      "map_sha256": "be5c9daee7c3bd35be2c592b21cb6ae582f94343542122f68757ad99865844fd",
+      "learner_verified": false,
+      "runtime_check": {
+        "evidence": "doc/book/iterations/2026-09-23-array-entered-address/report.json",
+        "scope": "31 focused checks: real pointer selection and supplied key-input flight/collection/hover/return through the production museum controller. Figures use selected camera poses. Headset comfort and learner acceptance remain open."
+      },
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-array-room-between/index.html#reading"
+    },
+    "Tutorial_Tiling_Floor": {
+      "primary_tokens": [
+        "tiling_principles"
+      ],
+      "reason": "A reversible 4x4 rule study connects one changed instruction to a 16x16 floor field, then six fixed comparisons distinguish placement rules.",
+      "status": "encounter_revision_draft",
+      "sequence": "array_tutorial",
+      "text_path": "commons/maps/Tutorial_Tiling_Floor/final.md",
+      "text_sha256": "dbae51c3653ff8cb3ca73a7f21bef0f7eb9fbd1eae3d17855a37f05acd2f123a",
+      "map_sha256": "85b0ac706bf6d27e2e1453435731db873c12dbf61530cd858033d34c9568bbe6",
+      "learner_verified": false,
+      "runtime_check": {
+        "evidence": "doc/book/iterations/2026-09-28-tiling-rule-study/floor-report.json",
+        "scope": "Isolated production museum: supplied physical-button pointer events, 48 original raster states compared byte-for-byte, exact 4x4-to-16x16 rule consistency, native eye-height captures, sampled floor support and unchanged reference-field transforms. Wall chart shares one texture at five sizes. No headset or learner claim."
+      },
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-tiling-rule-study/index.html#reading-floor"
+    },
+    "Tutorial_Tiling_Walls": {
+      "primary_tokens": [
+        "tiling_principles",
+        "wall_exception"
+      ],
+      "reason": "The 4x4 pattern returns as an eye chart at five sizes, followed by six wall fields and a hinged enclosure: reading a rule and crossing a boundary are different encounters.",
+      "status": "encounter_revision_draft",
+      "sequence": "array_tutorial",
+      "text_path": "commons/maps/Tutorial_Tiling_Walls/final.md",
+      "text_sha256": "6a559e56ca13cfc622a6484e8a121a1bf3def85ae2bf2252f38c620e8e404a8e",
+      "map_sha256": "ae691694a72dd0f559a06b3d8829188e4aef3a5a968fee13f4c47e270e212dfb",
+      "learner_verified": false,
+      "runtime_check": {
+        "evidence": "doc/book/iterations/2026-09-28-tiling-rule-study/wall-report.json",
+        "scope": "Isolated production museum: supplied physical-button pointer events, 48 original raster states compared byte-for-byte, exact 4x4-to-16x16 rule consistency, native eye-height captures, sampled floor support and unchanged reference-field transforms. Wall chart shares one texture at five sizes. No headset or learner claim."
+      },
+      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-28-tiling-rule-study/index.html#reading-wall"
+    },
+    "Pattern_Disco": {
+      "primary_tokens": [
+        "disco_controls",
+        "standalone_disco",
+        "step_sequencer"
+      ],
+      "reason": "Book order follows the placed encounters; new dimensional and monochrome steps precede Color, with a controlled return to colour afterward.",
+      "status": "source_checked_draft",
+      "sequence": "tiling",
+      "text_path": "commons/maps/Pattern_Disco/final.md",
+      "text_sha256": "2709b2bf527be6a4534f730b92212e9c86e2e6d361eb08a86e1ab07233ec3987",
+      "map_sha256": "970cd722d675738af9331b4678eba9d4a9164ed9125451d3ba9fbd10bbfb0ade",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-28-disco-colour-in-step/index.html"
+    },
+    "LSystems_Shape_Grammars": {
+      "primary_tokens": [
+        "form_grammar_family",
+        "form_grammar_canopy"
+      ],
+      "reason": "Read a cube family, add a curved-strip operation, then walk beneath the same surface at another scale. Separate saved parameters, operations, supports and bodily access.",
+      "status": "desktop_checked_headset_pending",
+      "sequence": "lsystems",
+      "text_path": "commons/maps/LSystems_Shape_Grammars/final.md",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-24-form-grammar-canopy/index.html",
+      "text_sha256": "d595d6c53e8785b12c6c4990f9cf04283e9610f61957c61c393f058a120b5bcb",
+      "map_sha256": "9f66cbfb8a2994adcd0bf60556ea3920c2706a7cdfa008d09efb0730aa0d584c",
+      "verification_scope": "66 isolated native checks, including 20 route segments, exact shared local geometry, uniform scale, two-sided surface collision and supports. Full museum-loader, tracked-headset, Quest and learner checks pending."
+    },
+    "Point_Zero": {
+      "primary_tokens": [
+        "arrival_shaft",
+        "frame_counter_display",
+        "folding_past",
+        "origin"
+      ],
+      "reason": "Fall into a running room; folding, inherited work and chosen origin carry the first chapter. The removable you is retained.",
+      "status": "revised_native_desktop_checked",
+      "sequence": "primitives",
+      "text_path": "commons/maps/Point_Zero/final.md",
+      "text_sha256": "97102decd65a945a77a31126c743cb59076b6d18fbc501d4742b8a144a636d9b",
+      "map_sha256": "d2f98d008182a20def5cdb8d109325d12dc7d4c03a1a15438d4ca69f6954a181",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-30-point-zero-room-to-read/index.html"
+    },
+    "Point_Coordinates": {
+      "sequence": "primitives",
+      "primary_tokens": [
+        "point_held",
+        "coordinate_readout",
+        "CoordinateSystem3M",
+        "drag_point_target"
+      ],
+      "reason": "Begin with the held point; follow its addresses and let different arrivals meet one target.",
+      "status": "revised_native_desktop_checked",
+      "text_path": "commons/maps/Point_Coordinates/final.md",
+      "text_sha256": "ad03f65e623ef168007081479549716e13cdd4c941974774cf6c67539cf39779",
+      "map_sha256": "ce123e1f5460f7c2258df3b4f371d6611ff4b8cc4b090248b3d984347ec82d16",
+      "learner_verified": false,
+      "local_review": "doc/book/iterations/2026-09-29-point-and-coordinates/index.html"
+    }
+  }
+}

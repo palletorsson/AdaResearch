@@ -1,0 +1,36 @@
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -24,21 +24,25 @@
+     },
+     "Point_Lines": {
+       "primary_tokens": [
++        "line_black_box",
+         "line_demo",
+         "do_not_cross_barrier",
+-        "line",
++        "redline",
+         "walk_this_line_marking",
+         "player_trace",
+-        "line_relations_gallery"
+-      ],
+-      "reason": "Connection and walking lead to four rearrangeable views. Segment skins make representation tangible; the floor mark then meets a wall.",
++        "line_relations_gallery",
++        "laser_measure",
++        "anamorphic_cross",
++        "health_cross"
++      ],
++      "reason": "Measure in the black box; connect for passage; walk and compare a trace; rearrange bodies of lines; measure and break; cross alternating harm and recovery.",
+       "status": "revised_native_desktop_checked",
+       "sequence": "primitives",
+       "text_path": "commons/maps/Point_Lines/final.md",
+-      "text_sha256": "b9cc54e6497766876510b0e53296257e729d489f28a7c5edb9d7fde1b1b52bd4",
+-      "map_sha256": "0d0e8316a5a8a67e7e1c8a252fdf76e294a2496c689addeb658f44e8ef92f25b",
+-      "learner_verified": false,
+-      "local_review": "doc/book/iterations/2026-09-26-lines-perspective-refined/index.html"
++      "text_sha256": "37b92f233c6a884e06f7fd911bf14c2002726133229f59b918cfe3fec13bf3d4",
++      "map_sha256": "3d8f5785467b76c938d3a5c2bbf8965cef799372f88918e79feed13f8e431d54",
++      "learner_verified": false,
++      "local_review": "doc/book/iterations/2026-09-30-lines-measure-and-consequence/index.html"
+     },
+     "Point_Trace": {
+       "primary_tokens": [

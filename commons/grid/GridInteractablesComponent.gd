@@ -1793,6 +1793,8 @@ func _apply_artifact_config(artifact_object: Node, config_data: Dictionary, look
 		var meta_key = "config_%s" % sanitized_key
 		artifact_object.set_meta(meta_key, config_value)
 	
+	if config_data.has("reactive"):
+		load("res://commons/interactables/artifact_reactions/router.gd").attach.call_deferred(artifact_object, config_data.duplicate(true))
 	# Try to call a configuration method on the artifact if it exists
 	# This allows artifacts to handle their own configuration logic
 	# IMPORTANT: duplicate() the dictionary since call_deferred holds a reference

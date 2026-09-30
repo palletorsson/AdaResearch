@@ -110,6 +110,11 @@ func _ready() -> void:
 ## else that finds this artifact and means it. Returns false if it is already
 ## broken, so one barrier is one event and a second swing is not a second break.
 func strike(from: Vector3 = Vector3.ZERO, by: Node = null) -> bool:
+	var reaction: Node = load("res://commons/interactables/artifact_reactions/router.gd").receiver(self)
+	if reaction != null:
+		var accepted: bool = reaction.call("react", &"melee", from if from != Vector3.ZERO else global_position + Vector3.UP, Color("e4aa91"))
+		if accepted and not reaction.is_destroyed: hit.emit(reaction.health)
+		return accepted
 	if _broken or not _built:
 		return false
 
@@ -162,6 +167,10 @@ func strike(from: Vector3 = Vector3.ZERO, by: Node = null) -> bool:
 ## can also take this down. Same target, two instruments — which is the claim the
 ## room makes in words three paragraphs earlier.
 func trigger_explosion() -> void:
+	var reaction: Node = load("res://commons/interactables/artifact_reactions/router.gd").receiver(self)
+	if reaction != null:
+		reaction.call("react", &"laser", global_position + Vector3.UP, Color("e4aa91"))
+		return
 	## Takes it DOWN, not down a notch. This returns void, so a caller cannot
 	## read an hp count back -- which is exactly why it must not leave the
 	## barrier standing at 2 of 3 with no way to say so. Adding hit_points put
@@ -172,11 +181,20 @@ func trigger_explosion() -> void:
 
 
 func is_broken() -> bool:
+	var reaction: Node = load("res://commons/interactables/artifact_reactions/router.gd").receiver(self)
+	if reaction != null: return reaction.is_destroyed
 	return _broken
 
 
 func hit_points_left() -> int:
+	var reaction: Node = load("res://commons/interactables/artifact_reactions/router.gd").receiver(self)
+	if reaction != null: return reaction.health
 	return _hp
+
+
+func artifact_reaction_attached(reaction: Node) -> void:
+	# Keep the original break notification when this hall opts into restoration.
+	reaction.broken.connect(func(): broken.emit(null))
 
 
 func apply_grid_config(config_data: Dictionary) -> void:

@@ -39,6 +39,7 @@ signal projectile_expired()
 func _ready() -> void:
 	# Physics setup
 	contact_monitor = true
+	continuous_cd = true # Fast shots must still meet thin lines between physics ticks.
 	max_contacts_reported = 4
 	body_entered.connect(_on_body_entered)
 	collision_layer = 16    # Hazard layer
@@ -46,7 +47,7 @@ func _ready() -> void:
 	# MultiMesh world cubes — including layer 1 caused projectiles to hit
 	# floor/wall cubes before reaching the foe (which lives in the open
 	# air at chest height). Targets + foes are all on layer 2.
-	collision_mask = 2
+	collision_mask = 2 | (1 << 23) # Explicitly opted-in artifact tool surfaces.
 	gravity_scale = 0.0     # Override per-mode
 
 	_build_visual()
@@ -104,6 +105,10 @@ func _on_hit(body: Node3D) -> void:
 ## guarantees every catalyst mode converts foes/targets, even if the mode's
 ## subclass overrides _on_hit for visual flair (which most of them do).
 func _dispatch_transformation(body: Node3D) -> void:
+	var reaction: Node = load("res://commons/interactables/artifact_reactions/router.gd").receiver(body)
+	if reaction != null:
+		reaction.call("react", &"catalyst", global_position, color_primary, 1.0, StringName(_infer_mode_id()))
+		return
 	if body.has_method("hit_by_catalyst_mode"):
 		body.hit_by_catalyst_mode(color_primary, _infer_mode_id())
 	elif body.has_method("hit_by_projectile"):
@@ -163,7 +168,12 @@ func _on_body_entered(body: Node3D) -> void:
 	# skip it by overriding _on_hit for their own visuals.
 	_dispatch_transformation(body)
 	_dispatch_biome_reaction()
-	_on_hit(body)
+	if load("res://commons/interactables/artifact_reactions/router.gd").receiver(body) != null:
+		# The shared receiver owns this response. A mode must not shrink/shake
+		# only its invisible hit proxy or bypass the receiver's restore clock.
+		projectile_hit.emit(body, global_position)
+	else:
+		_on_hit(body)
 	_impact_effect()
 	_cleanup()
 

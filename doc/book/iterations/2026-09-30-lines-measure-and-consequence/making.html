@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Two ends, one relation</title><style>*{box-sizing:border-box}body{margin:0;background:#f5f1eb;color:#29252b;font:19px/1.75 Georgia,serif}main{max-width:1220px;margin:auto;padding:50px 28px}header{border-bottom:1px solid #cfc6bd;padding-bottom:28px}h1{font-weight:400;font-size:clamp(2.6rem,5vw,4.4rem);line-height:1.1}h2{font-weight:400;font-size:2rem;line-height:1.3;margin-top:1.6em}nav{display:flex;gap:24px;flex-wrap:wrap;font:15px/1.6 system-ui}a{color:#8c365c;text-underline-offset:4px}article{max-width:750px;margin:54px auto}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.pair article{font-size:16px;min-width:0}.pair h1{font-size:2rem}img{width:100%;display:block}figure{margin:32px 0}figcaption,.note,footer{font:14px/1.6 system-ui;color:#625560}.eyebrow{font:12px/1.4 system-ui;letter-spacing:.14em;text-transform:uppercase;color:#8c365c}pre{overflow:auto;background:#24232a;color:#f9ece5;padding:22px;font:14px/1.6 Consolas,monospace}code{font-size:.85em}pre code{font-size:inherit}details{border-top:1px solid #cfc6bd;padding:20px 0}summary{cursor:pointer}.footnote{font-size:.83em}footer{border-top:1px solid #cfc6bd;padding:25px 0}@media(max-width:780px){.pair{display:block}main{padding:24px 18px}pre{font-size:12px}}</style></head><body><main><header><p class="eyebrow">Point Lines · 30 September 2026</p><h1>Two ends, one relation</h1><nav><a href="index.html#museum">Museum</a><a href="reading.html#reading">Read the chapter</a><a href="making.html#making">Make a line</a><a href="index.html#changes">Changes</a><a href="point-lines-study.zip" download>Download study</a><a href="/compose/sources?map=Point_Lines&amp;doc=final">Live manuscript</a></nav></header><article id="making"><h1>Point Lines — keep two ends in relation</h1>
+<p>In the black box, take one endpoint. The other stays where it is. Between them, the pale segment turns and changes length. The number on the wall follows.</p>
+<p>Coordinates gave us two positions in the same frame. Here we use them together. Day Zero has already supplied the running project; Point One supplied the visible markers. The new work is a relation between their positions.</p>
+<h2>Two positions, one distance</h2>
+<p>Open the supplied <a href="/book-review/doc/book/studies/point-lines/README.md">line study</a>. It contains A, B, a thin cylinder and a readout. This is a small desktop construction study. The museum keeps the XR pickup we borrowed in Coordinates; this download does not include that player.</p>
+<p>In <code>line.gd</code>, A starts at <code>(-0.75, 1.12, 0.0)</code> and B at <code>(0.75, 1.12, 0.0)</code>. Their height and depth agree. Only X differs.</p>
+<pre><code class="language-gdscript">var displacement := b - a
+var distance := displacement.length()
+</code></pre>
+<p>Subtract the start from the end: the displacement is <code>(1.5, 0, 0)</code>. Its length is <code>1.5</code>. We use one scene unit as one metre. Change B's X to <code>0.25</code>. The distance becomes one metre. You have changed one endpoint; the line and readout agree without editing either of them.</p>
+<h2>Turn without lengthening</h2>
+<p>Keep A at its original position. Give B the position <code>Vector3(-0.75, 2.62, 0.0)</code>. The segment now stands upright. Its length is still 1.5 metres. Return B to its first position, then change its Z component instead. You have moved out of the first plane.</p>
+<p>Reverse the subtraction to <code>a - b</code>. The direction reverses; the length does not. A distance alone cannot tell us which end we chose as the start.</p>
+<h2>Read again as the endpoints move</h2>
+<p>Here is the complete lesson script in the download:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+func _ready() -&gt; void:
+    $A.position = Vector3(-0.75, 1.12, 0.0)
+    $B.position = Vector3(0.75, 1.12, 0.0)
+
+func _process(_delta: float) -&gt; void:
+    var a: Vector3 = $A.position
+    var b: Vector3 = $B.position
+    var displacement := b - a
+    var distance := displacement.length()
+    $Segment.show_between(a, b)
+    $Readout.text = &quot;%.2f m&quot; % distance
+</code></pre>
+<p><code>_ready()</code> places the two markers once. <code>_process()</code> reads their positions again each frame. While running in the editor, use the Remote scene tree to change B's position: both the segment and the number follow. This borrows the editor as our moving hand. In the museum, the grab system moves the endpoint instead. The relation needs the positions, whichever tool changes them.</p>
+<p><code>show_between()</code> is our supplied drawing helper, in <code>segment.gd</code>. It places the cylinder halfway between A and B, gives it their distance as its height, then turns its long axis towards B. Its thickness is a choice made for visibility. If both ends coincide, the helper hides the cylinder rather than trying to point it in an undefined direction. Its rotation code can stay borrowed for now.</p>
+<p><code>%.2f</code> rounds the readout to two decimal places. The underlying positions keep more precision. A hand can move without changing the displayed number.</p>
+<h2>A connection can do something else</h2>
+<p>The next museum encounter asks <strong>CAN YOU CONNECT THE DOTS?</strong> Bring the points close and release. Their connection draws a line and breaks the nearby <strong>DO NOT CROSS</strong> barrier. The passage opens because an additional instruction connects those events. Distance alone cannot decide whether you are allowed through.</p>
+<p>The hammer and laser use the same reversible break response. The laser reads the first body its ray reaches; holding its beam on a study for 1.2 seconds breaks that study. Eight seconds later it returns. We leave that pickup, collision and reset machinery in the supplied museum. Implementing it is not a prerequisite for making our first segment.</p>
+<h2>What have the two ends left out?</h2>
+<p>Walk the black stripe, then take a detour. Compare the recorded trail with the straight line. The same starting and ending positions give the same displacement, however you travel between them. Our script replaces its reading every frame. It keeps no journey.</p>
+<p>In the open room, two lines can make a plus or a cross; moving one away from the other reveals the depth hidden by the first view. In the exit corridor, those signs have been given different consequences: × damages, + restores. Their meanings are attachments to their geometry.</p>
+<p>Keep the two positions, subtraction, length and the supplied segment renderer. In Trace, we will begin keeping the positions in between.</p></article><footer>Native museum: 87 checks passed. Portable lesson: 22 checks passed. Existing shared-tool regression: 73 checks passed. Real museum screenshots; no headset or learner trial. One pre-existing unrecognised resource UID warning remains in the museum log.<br><a href="report.json">Museum checks</a> · <a href="lesson-verification.json">Lesson checks</a> · <a href="source-versions.json">Frozen sources</a></footer></main></body></html>

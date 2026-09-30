@@ -1,0 +1,434 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "barrier has shared reaction",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: barrier-before",
+      "passed": true
+    },
+    {
+      "name": "barrier root is hidden",
+      "passed": true
+    },
+    {
+      "name": "all barrier colliders disabled",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: barrier-broken",
+      "passed": true
+    },
+    {
+      "name": "reconnecting opens a restored barrier again",
+      "passed": true
+    },
+    {
+      "name": "barrier waits for layer-1 museum visitor",
+      "passed": true
+    },
+    {
+      "name": "barrier returns after visitor clears it",
+      "passed": true
+    },
+    {
+      "name": "desktop pickup recognised by laser",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: line-room",
+      "passed": true
+    },
+    {
+      "name": "real laser ray hits a grabbable rod",
+      "passed": true
+    },
+    {
+      "name": "held desktop beam destroys whole rod",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rod-broken",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: plus_horizontal",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: plus_vertical",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: cross_a",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: cross_b",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: rail_a",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: rail_b",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: measure_a",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: measure_b",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: upright_a",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: upright_b",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: horizon",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: grid_horizontal_0",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: grid_vertical_0",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: grid_horizontal_1",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: grid_vertical_1",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: grid_horizontal_2",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: grid_vertical_2",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: depth_a",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: depth_b",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: depth_cross",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: wall_plank_1",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: wall_plank_2",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: wall_plank_3",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: wall_plank_4",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: wall_plank_5",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: wall_plank_6",
+      "passed": true
+    },
+    {
+      "name": "held ray breaks gallery rod: wall_plank_7",
+      "passed": true
+    },
+    {
+      "name": "dropping laser clears wield state",
+      "passed": true
+    },
+    {
+      "name": "parked laser cannot erase rod",
+      "passed": true
+    },
+    {
+      "name": "XR pickup still recognised",
+      "passed": true
+    },
+    {
+      "name": "XR held ray destroys same study",
+      "passed": true
+    },
+    {
+      "name": "three X and three + gates placed",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: corridor",
+      "passed": true
+    },
+    {
+      "name": "X 0 damages actual museum Walker",
+      "passed": true
+    },
+    {
+      "name": "+ 0 restores health",
+      "passed": true
+    },
+    {
+      "name": "+ 0 produces sound and burst",
+      "passed": true
+    },
+    {
+      "name": "X 1 damages actual museum Walker",
+      "passed": true
+    },
+    {
+      "name": "+ 1 restores health",
+      "passed": true
+    },
+    {
+      "name": "+ 1 produces sound and burst",
+      "passed": true
+    },
+    {
+      "name": "X 2 damages actual museum Walker",
+      "passed": true
+    },
+    {
+      "name": "+ 2 restores health",
+      "passed": true
+    },
+    {
+      "name": "+ 2 produces sound and burst",
+      "passed": true
+    },
+    {
+      "name": "new entrance black box is live in museum",
+      "passed": true
+    },
+    {
+      "name": "room keeps metre scale",
+      "passed": true
+    },
+    {
+      "name": "black box floor footprint is 4 by 4 metres",
+      "passed": true
+    },
+    {
+      "name": "line uses existing line implementation",
+      "passed": true
+    },
+    {
+      "name": "north entrance is open",
+      "passed": true
+    },
+    {
+      "name": "east passage is open",
+      "passed": true
+    },
+    {
+      "name": "back wall is solid",
+      "passed": true
+    },
+    {
+      "name": "museum navigation keeps interior route at (-0.5, 0.0, -1.5)",
+      "passed": true
+    },
+    {
+      "name": "museum navigation keeps interior route at (-0.5, 0.0, -0.5)",
+      "passed": true
+    },
+    {
+      "name": "museum navigation keeps interior route at (0.5, 0.0, -0.5)",
+      "passed": true
+    },
+    {
+      "name": "museum navigation keeps interior route at (1.5, 0.0, -0.5)",
+      "passed": true
+    },
+    {
+      "name": "floor supports route at (-0.5, 0.0, -2.2)",
+      "passed": true
+    },
+    {
+      "name": "floor supports route at (-0.5, 0.0, -1.0)",
+      "passed": true
+    },
+    {
+      "name": "floor supports route at (0.0, 0.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "floor supports route at (2.1, 0.0, -0.5)",
+      "passed": true
+    },
+    {
+      "name": "initial line measures 1.60 m",
+      "passed": true
+    },
+    {
+      "name": "new line is smooth and resistance-free",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entrance-line",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: black-box-passage",
+      "passed": true
+    },
+    {
+      "name": "production grab moves the endpoint",
+      "passed": true
+    },
+    {
+      "name": "line follows moved endpoint",
+      "passed": true
+    },
+    {
+      "name": "wall readout follows moved span",
+      "passed": true
+    },
+    {
+      "name": "reset does not steal a held endpoint",
+      "passed": true
+    },
+    {
+      "name": "release leaves endpoint where placed",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: line-length-changed",
+      "passed": true
+    },
+    {
+      "name": "vertical segment stays aligned",
+      "passed": true
+    },
+    {
+      "name": "coincident endpoints hide zero-length segment",
+      "passed": true
+    },
+    {
+      "name": "pointer reset returns both endpoints",
+      "passed": true
+    },
+    {
+      "name": "reset restores visible span and readout",
+      "passed": true
+    },
+    {
+      "name": "near-hand reset uses same operation",
+      "passed": true
+    },
+    {
+      "name": "line demonstration still present",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "barrier": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/DoNotCrossBarrier",
+    "changed_length_m": 2.02652382850647,
+    "health_pairs": [
+      [
+        97.4355813333333,
+        100.0
+      ],
+      [
+        97.0333333333333,
+        100.0
+      ],
+      [
+        97.0333333333333,
+        100.0
+      ]
+    ],
+    "laser_world": [
+      0.170000001788139,
+      -0.150000005960464,
+      -0.339999914169312
+    ],
+    "new_room_bounds": [
+      4,
+      3.24,
+      4
+    ],
+    "reactions": 117,
+    "remaining_barrier_colliders": [],
+    "reset_state": {
+      "a": [
+        -0.799999952316284,
+        1.25,
+        0.25
+      ],
+      "b": [
+        0.799999952316284,
+        1.25,
+        0.25
+      ],
+      "cached": "1.60 m",
+      "distance": 1.59999990463257,
+      "height": 1.59999990463257,
+      "readout": "1.60 m",
+      "visible": true
+    },
+    "rod_ray": {
+      "burns": true,
+      "centre": [
+        6.15000009536743,
+        1.35000002384186,
+        17.5
+      ],
+      "collider": "plus_horizontal:<RigidBody3D#493401152003>",
+      "collider_path": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/LineRelationsGallery/plus_horizontal",
+      "ray_origin": [
+        6.15000009536743,
+        1.35000002384186,
+        17.8999996185303
+      ],
+      "surface": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/LineRelationsGallery/plus_horizontal/Skin/ToolHitSurface",
+      "wanted": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/LineRelationsGallery/plus_horizontal",
+      "wielded": true
+    },
+    "room_in_hall": [
+      3.0,
+      0.0,
+      7.0
+    ],
+    "room_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "room_world": [
+      3.0,
+      0.0,
+      3.0
+    ]
+  },
+  "passed": true
+}

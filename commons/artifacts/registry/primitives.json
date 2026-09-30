@@ -26604,6 +26604,30 @@
 				"sketch",
 				"2d-in-3d"
 			]
+		},
+		"line_black_box": {
+			"lookup_name": "line_black_box",
+			"name": "Two points / one line",
+			"scene": "res://commons/artifacts/line_black_box/line_black_box.tscn",
+			"description": "A four by four metre dark entrance room. Two held endpoints change a luminous segment's length and direction; a wall readout measures the span. North entrance and east passage match Point_Lines.",
+			"category": "primitives",
+			"complexity": "beginner",
+			"map_sequences": [
+				"primitives"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"footprint": [
+				4,
+				3.24,
+				4
+			],
+			"interactions": [
+				"Grab either endpoint to change the line's length and direction.",
+				"Release to leave the endpoint in place.",
+				"Press the wall reset to return both unheld endpoints."
+			],
+			"qfep_connection": "A connection persists while its endpoints change. Length follows the relation between positions; the visible rod gives that relation a body."
 		}
 	},
 	"registry_info": {

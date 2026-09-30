@@ -1,0 +1,25 @@
+{
+  "http": {
+    "index.html": 200,
+    "reading.html": 200,
+    "making.html": 200,
+    "corridor.png": 200,
+    "point-lines-study.zip": 200
+  },
+  "anchors": {
+    "index.html": true,
+    "reading.html": true,
+    "making.html": true
+  },
+  "complete_code_matches": true,
+  "zip_contents": [
+    "point-lines/base.tscn",
+    "point-lines/line.gd",
+    "point-lines/line.tscn",
+    "point-lines/project.godot",
+    "point-lines/README.md",
+    "point-lines/segment.gd",
+    "point-lines/TUTORIAL.md",
+    "point-lines/verify.gd"
+  ]
+}

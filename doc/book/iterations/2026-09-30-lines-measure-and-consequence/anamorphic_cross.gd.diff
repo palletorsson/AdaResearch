@@ -1,0 +1,66 @@
+--- before/commons/artifacts/anamorphic_cross/anamorphic_cross.gd
++++ after/commons/artifacts/anamorphic_cross/anamorphic_cross.gd
+@@ -33,6 +33,29 @@
+ 
+ const DangerZoneScript = preload("res://commons/hazards/DangerZone.gd")
+ 
++class PassageZone extends "res://commons/hazards/DangerZone.gd":
++	func _setup_collision() -> void:
++		super._setup_collision()
++		collision_mask |= 1 # museum Walker, alongside the layer-20 XR body
++	func _is_player(body: Node3D) -> bool:
++		if body.is_in_group("em_walker"): return true
++		var parent: Node = body.get_parent()
++		while parent != null:
++			if parent is XROrigin3D: return true
++			parent = parent.get_parent()
++		return super._is_player(body)
++	func _deal_damage(amount: float) -> void:
++		if _neutralized: return
++		var gm := get_node_or_null("/root/GameManager")
++		# The museum's generic damage route turns every hit into a 33-point
++		# creature bite with a shared cooldown. These gates own their own ticks.
++		if gm != null and gm.has_method("apply_bite_damage"):
++			gm.apply_bite_damage(amount)
++		elif gm != null and gm.has_method("apply_health_damage"):
++			gm.apply_health_damage(amount)
++		if flash_on_damage: _flash_screen(Color.RED)
++		damage_dealt.emit(amount,danger_type)
++
+ @export var bar_len_m: float = 3.4
+ @export var bar_thick_m: float = 0.16
+ @export var cross_height_m: float = 1.6
+@@ -44,6 +67,7 @@
+ ## Health per tick while you stand in it, and how often a tick comes.
+ @export var damage_per_tick: float = 7.0
+ @export var tick_interval: float = 0.45
++@export var passage: bool = false
+ 
+ signal entered()
+ signal left()
+@@ -57,6 +81,8 @@
+ 
+ 
+ func apply_grid_config(config_data: Dictionary) -> void:
++	if config_data.has("passage"):
++		passage = str(config_data.passage).to_lower() in ["1","true","yes"]
+ 	if config_data.has("bar_len_m"):
+ 		bar_len_m = float(config_data["bar_len_m"])
+ 	if config_data.has("cross_height_m"):
+@@ -81,7 +107,7 @@
+ 	_strokes.append(_stroke(45.0, -depth_gap_m * 0.5))
+ 	_strokes.append(_stroke(-45.0, depth_gap_m * 0.5))
+ 
+-	var dz = DangerZoneScript.new()
++	var dz = PassageZone.new() if passage else DangerZoneScript.new()
+ 	dz.name = "DangerZone"
+ 	dz.damage_per_tick = damage_per_tick
+ 	dz.tick_interval = tick_interval
+@@ -92,6 +118,7 @@
+ 	# danger where the cross IS, which is most of a corridor's width.
+ 	box.size = Vector3(bar_len_m * 0.72, bar_len_m * 0.72,
+ 			maxf(0.6, depth_gap_m + 0.7))
++	if passage: box.size = Vector3(2.8,2.1,0.42)
+ 	col.shape = box
+ 	dz.add_child(col)
+ 	dz.position = Vector3(0, cross_height_m, 0)

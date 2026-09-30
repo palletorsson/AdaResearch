@@ -23,7 +23,11 @@ def main():
     parser.add_argument('--sequence', default='array_tutorial')
     parser.add_argument('--render', action='store_true')
     parser.add_argument('--spec', type=Path)
+    parser.add_argument('--probe', type=Path, default=ROOT / 'tools/probes/museum_encounter.gd')
     args = parser.parse_args()
+    probe = args.probe.resolve()
+    if not probe.is_file() or not probe.is_relative_to(ROOT):
+        parser.error('probe must be an existing script within the project')
     if not re.fullmatch(r'[A-Za-z0-9_]+', args.room):
         parser.error('room must be a map folder name')
     run = ROOT / 'ada_run/encounter_pilot' / args.room
@@ -74,7 +78,7 @@ def main():
                 'scope': 'Live museum code; only output paths replaced. Headset and learner checks remain open.',
                 'sources': {}}
     for path in [source_path, ROOT / f'commons/maps/{args.room}/map_data.json',
-                 ROOT / 'tools/probes/museum_encounter.gd', ROOT / 'tools/run_encounter_probe.py',
+                 probe, ROOT / 'tools/run_encounter_probe.py',
                  ROOT / 'ada_run/em_plan.json', run / 'control.json', run / 'necklace_hand.json',
                  run / 'em_overrides.json', run / 'em_bake.json']:
         if not path.exists():
@@ -91,7 +95,7 @@ def main():
     (run / 'source_manifest.json').write_text(json.dumps(manifest, indent=2), encoding='utf-8')
     engine = os.environ.get('GODOT_EXE', 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe')
     command = [engine, '--path', str(ROOT), '--xr-mode', 'off', '--log-file', str(run / 'engine.log'),
-               '--script', 'res://tools/probes/museum_encounter.gd']
+               '--script', 'res://' + probe.relative_to(ROOT).as_posix()]
     command += ['--no-window', '--rendering-method', 'gl_compatibility'] if args.render else ['--headless']
     command += ['--', prefix + 'spec.json']
     with (run / 'stdout.log').open('w', encoding='utf-8') as log:

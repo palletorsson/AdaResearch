@@ -1,0 +1,65 @@
+--- before/commons/artifacts/health_cross/health_cross.gd
++++ after/commons/artifacts/health_cross/health_cross.gd
+@@ -66,6 +66,9 @@
+ @export var hover_m: float = 0.34
+ @export var bob_m: float = 0.05
+ @export var spin_deg_s: float = 42.0
++## Hall-sized, front-facing recovery gates opt in; ordinary pickups retain scale.
++@export var passage: bool = false
++var _feedback: Node3D
+ 
+ signal taken(delivered: float)
+ signal respawned()
+@@ -96,6 +99,8 @@
+ 
+ 
+ func apply_grid_config(config_data: Dictionary) -> void:
++	if config_data.has("passage"):
++		passage = str(config_data.passage).to_lower() in ["1","true","yes"]
+ 	if config_data.has("boost"):
+ 		boost = float(config_data["boost"])
+ 	if config_data.has("respawn"):
+@@ -157,12 +162,16 @@
+ 	_area.collision_mask = PLAYER_LAYER | WALKER_LAYER
+ 	var col := CollisionShape3D.new()
+ 	var box := BoxShape3D.new()
+-	box.size = Vector3(0.9, 1.6, 0.9)
++	box.size = Vector3(2.8, 2.1, 0.42) if passage else Vector3(0.9, 1.6, 0.9)
+ 	col.shape = box
+ 	col.position.y = 0.8
+ 	_area.add_child(col)
+ 	add_child(_area)
+ 	_area.body_entered.connect(_on_body_entered)
++	if passage:
++		_feedback = Node3D.new()
++		_feedback.set_script(preload("res://commons/artifacts/health_cross/recovery_feedback.gd"))
++		add_child(_feedback)
+ 
+ 
+ func _process(delta: float) -> void:
+@@ -175,7 +184,7 @@
+ 		return
+ 	if _body != null and is_instance_valid(_body):
+ 		_body.position.y = hover_m + sin(_t * 2.1) * bob_m
+-		_body.rotation_degrees.y = _t * spin_deg_s
++		_body.rotation_degrees.y = 0.0 if passage else _t * spin_deg_s
+ 
+ 	# the refusal, dimming and recovering, landing exactly back on rest
+ 	if _pulse > 0.0 and _mat != null:
+@@ -257,6 +266,7 @@
+ ## placement starts giving health where it did not, and no cross vanishes in a
+ ## case where it previously stayed: it is available MORE often, not less.
+ func _take(announce: bool = true) -> float:
++	if _spent: return 0.0
+ 	var hp := _health_node()
+ 	if hp == null or not (hp.has_method("get_health") and hp.has_method("set_health")):
+ 		if not _warned:
+@@ -289,6 +299,8 @@
+ 	_cool = respawn_s
+ 	if _body != null and is_instance_valid(_body):
+ 		_body.visible = false
++	if passage and is_instance_valid(_feedback):
++		_feedback.play_at(Vector3(0,hover_m,0),cross_color)
+ 	taken.emit(delivered)
+ 	print("health_cross: gave %.1f (asked %.1f)" % [delivered, boost])
+ 	return delivered

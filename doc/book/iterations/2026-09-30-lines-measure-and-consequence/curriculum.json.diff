@@ -1,0 +1,32 @@
+--- before/doc/book/tutorial-lineage/curriculum.json
++++ after/doc/book/tutorial-lineage/curriculum.json
+@@ -95,8 +95,8 @@
+       "learn": "Relate two positions in one reference frame; measure separation.",
+       "make": "A segment that follows two movable endpoints.",
+       "transfer": "Connect two different objects and preserve its measurement.",
+-      "borrow": "Line rendering and labels, with inputs explained.",
+-      "status": "proposed",
++      "borrow": "Prepared A/B markers, segment.gd cylinder renderer and readout. XR hold remains supplied by the museum.",
++      "status": "desktop-tested",
+       "halls": [
+         "Point_Lines"
+       ]
+@@ -1493,12 +1493,13 @@
+         "line",
+         "array"
+       ],
+-      "severity": "next",
++      "severity": "resolved",
+       "evidence": [
+-        "commons/maps/Point_Lines/tutorial.md"
+-      ],
+-      "finding": "The Line tutorial opens with an 8-by-8 grid, nested arrays and helper calls before the first connection.",
+-      "action": "Make one measurable segment from the two Point Coordinates endpoints. Introduce loops with a later need."
++        "commons/maps/Point_Lines/tutorial.md",
++        "doc/book/studies/point-lines/verification.json"
++      ],
++      "finding": "Replaced the grid-first lesson with two known positions, subtraction, length and a supplied renderer. A standalone Godot project passed 22 geometry/readout checks.",
++      "action": "Keep the portable study aligned with tutorial.md. A self-contained XR starter remains a separate Coordinates task."
+     },
+     {
+       "id": "trace-list",

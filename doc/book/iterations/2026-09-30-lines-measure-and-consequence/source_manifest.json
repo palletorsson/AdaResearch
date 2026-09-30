@@ -1,0 +1,28 @@
+{
+  "room": "Point_Lines",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Point_Lines/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Point_Lines/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Point_Lines/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Point_Lines/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Point_Lines/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Point_Lines/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Point_Lines/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Point_Lines/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Point_Lines/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Point_Lines/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Point_Lines/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "7f63e8e49a0cc8277da929620bfedafd6e764408d40b313e8c28ef6b37d4bcd6",
+    "commons/maps/Point_Lines/map_data.json": "3d8f5785467b76c938d3a5c2bbf8965cef799372f88918e79feed13f8e431d54",
+    "doc/book/iterations/2026-09-30-lines-measure-and-consequence/probe.gd": "d91e0d9819537d40d030065caff3677de3ccf0fea3d30ecd78b40cfea516c33f",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "4a2739314297b6218f427bb23914fa963ef0a14d9fc936af22723892194cb60e",
+    "ada_run/encounter_pilot/Point_Lines/control.json": "43c3258dd50a93961e6a88e3032dc4c5eb0d969a107240aab721be31a1853272",
+    "ada_run/encounter_pilot/Point_Lines/necklace_hand.json": "b38336e283e054b864b39d689cb4d4efcd8e14710e781dde385bf30faa304d01",
+    "ada_run/encounter_pilot/Point_Lines/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Point_Lines/em_bake.json": "3e21ee417d76fdd304099d7152ccd56ca62942bada8688c6fc171f55c31cb1cf"
+  }
+}

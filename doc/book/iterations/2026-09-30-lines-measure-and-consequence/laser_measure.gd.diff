@@ -1,0 +1,43 @@
+--- before/commons/primitives/laser_measure/laser_measure.gd
++++ after/commons/primitives/laser_measure/laser_measure.gd
+@@ -173,8 +173,19 @@
+ var is_measuring: bool = false
+ var _killed: bool = false
+ var _damage_timer: float = 0.0
++var _desktop_held := false
+ 
+ func _ready():
++	# Desktop carrying does not call XR Tools pick_up(). Route its existing
++	# carry/drop hooks to the instrument, which lives inside the pickable body.
++	get_parent().set_meta("desktop_hook_target", self)
++	# The museum configures the packed scene root; this child owns the ray.
++	var config := {}
++	for source in [get_parent(), self]:
++		for key in source.get_meta_list():
++			if str(key).begins_with("config_"):
++				config[str(key).trim_prefix("config_")] = source.get_meta(key)
++	apply_grid_config(config)
+ 	setup_raycast()
+ 	if build_body_in_code:
+ 		setup_body_geometry()    # cylinder handle + copper guard, laser-sword style
+@@ -823,11 +834,20 @@
+ 	print("laser_measure: burned through %s" % target.name)
+ 
+ func _reaction_is_wielded() -> bool:
++	if _desktop_held: return true
+ 	var holder: Node = self
+ 	while holder != null:
+ 		if holder.has_method("is_picked_up"): return bool(holder.call("is_picked_up"))
+ 		holder = holder.get_parent()
+ 	return false
++
++func on_desktop_grab(_pointer: Node) -> void:
++	_desktop_held = true
++
++func on_desktop_drop(_pointer: Node) -> void:
++	_desktop_held = false
++	_burn_target = null
++	_burn_t = 0.0
+ 
+ 
+ func apply_grid_config(config_data: Dictionary) -> void:

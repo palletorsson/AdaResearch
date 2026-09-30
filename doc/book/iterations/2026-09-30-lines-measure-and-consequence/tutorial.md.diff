@@ -1,0 +1,166 @@
+--- before/commons/maps/Point_Lines/tutorial.md
++++ after/commons/maps/Point_Lines/tutorial.md
+@@ -1,124 +1,64 @@
+-# Point Lines
++# Point Lines — keep two ends in relation
+ 
+-Build a grid of points. Connect each to its grid neighbours.
++In the black box, take one endpoint. The other stays where it is. Between them, the pale segment turns and changes length. The number on the wall follows.
+ 
+-Declare the grid dimensions.
++Coordinates gave us two positions in the same frame. Here we use them together. Day Zero has already supplied the running project; Point One supplied the visible markers. The new work is a relation between their positions.
+ 
+-```gdscript
+-const GRID_SIZE := Vector2i(8, 8)
+-const SPACING := 1.0
+-```
++## Two positions, one distance
+ 
+-An 8-by-8 grid with unit spacing gives 64 points and 112 edges.
++Open the supplied [line study](../../../doc/book/studies/point-lines/README.md). It contains A, B, a thin cylinder and a readout. This is a small desktop construction study. The museum keeps the XR pickup we borrowed in Coordinates; this download does not include that player.
+ 
+-Spawn the points.
+-
+-```gdscript
+-var points: Array = []  # 2D array of Node3D
+-
+-func spawn_grid() -> void:
+-    for y in GRID_SIZE.y:
+-        var row: Array = []
+-        for x in GRID_SIZE.x:
+-            var p := spawn_point_at(Vector3(x, 0, y) * SPACING)
+-            row.append(p)
+-        points.append(row)
+-```
+-
+-Each point is a small mesh at a grid coordinate. The 2D array `points[y][x]` holds them by row.
+-
+-Separate the four things two points give you.
++In `line.gd`, A starts at `(-0.75, 1.12, 0.0)` and B at `(0.75, 1.12, 0.0)`. Their height and depth agree. Only X differs.
+ 
+ ```gdscript
+ var displacement := b - a
+ var distance := displacement.length()
+-var direction := displacement.normalized()
+ ```
+ 
+-Four different objects, not four names for one. Two points determine an infinite line — keeping only what lies between them is a decision, and the result is a **segment**. `b - a` is a **displacement**: a size and a way round. `.length()` discards the way round and returns a **distance**, a single number with no direction. `.normalized()` discards the number and returns a **direction**. Neither result can be turned back into the segment on its own.
++Subtract the start from the end: the displacement is `(1.5, 0, 0)`. Its length is `1.5`. We use one scene unit as one metre. Change B's X to `0.25`. The distance becomes one metre. You have changed one endpoint; the line and readout agree without editing either of them.
+ 
+-Connect horizontal neighbours.
++## Turn without lengthening
++
++Keep A at its original position. Give B the position `Vector3(-0.75, 2.62, 0.0)`. The segment now stands upright. Its length is still 1.5 metres. Return B to its first position, then change its Z component instead. You have moved out of the first plane.
++
++Reverse the subtraction to `a - b`. The direction reverses; the length does not. A distance alone cannot tell us which end we chose as the start.
++
++## Read again as the endpoints move
++
++Here is the complete lesson script in the download:
+ 
+ ```gdscript
+-func connect_horizontal() -> void:
+-    for y in GRID_SIZE.y:
+-        for x in range(GRID_SIZE.x - 1):
+-            draw_line(points[y][x].position, points[y][x + 1].position)
++extends Node3D
++
++func _ready() -> void:
++    $A.position = Vector3(-0.75, 1.12, 0.0)
++    $B.position = Vector3(0.75, 1.12, 0.0)
++
++func _process(_delta: float) -> void:
++    var a: Vector3 = $A.position
++    var b: Vector3 = $B.position
++    var displacement := b - a
++    var distance := displacement.length()
++    $Segment.show_between(a, b)
++    $Readout.text = "%.2f m" % distance
+ ```
+ 
+-`x - 1` so the inner loop stops before the last column. Each iteration draws the edge between column x and column x+1.
++`_ready()` places the two markers once. `_process()` reads their positions again each frame. While running in the editor, use the Remote scene tree to change B's position: both the segment and the number follow. This borrows the editor as our moving hand. In the museum, the grab system moves the endpoint instead. The relation needs the positions, whichever tool changes them.
+ 
+-Connect vertical neighbours.
++`show_between()` is our supplied drawing helper, in `segment.gd`. It places the cylinder halfway between A and B, gives it their distance as its height, then turns its long axis towards B. Its thickness is a choice made for visibility. If both ends coincide, the helper hides the cylinder rather than trying to point it in an undefined direction. Its rotation code can stay borrowed for now.
+ 
+-```gdscript
+-func connect_vertical() -> void:
+-    for y in range(GRID_SIZE.y - 1):
+-        for x in GRID_SIZE.x:
+-            draw_line(points[y][x].position, points[y + 1][x].position)
+-```
++`%.2f` rounds the readout to two decimal places. The underlying positions keep more precision. A hand can move without changing the displayed number.
+ 
+-Same pattern for the other axis. After both passes, every interior point has four edges; corner points have two; edge points have three.
++## A connection can do something else
+ 
+-Move a point and update its lines.
++The next museum encounter asks **CAN YOU CONNECT THE DOTS?** Bring the points close and release. Their connection draws a line and breaks the nearby **DO NOT CROSS** barrier. The passage opens because an additional instruction connects those events. Distance alone cannot decide whether you are allowed through.
+ 
+-```gdscript
+-func move_point(coords: Vector2i, new_pos: Vector3) -> void:
+-    points[coords.y][coords.x].position = new_pos
+-    redraw_edges_touching(coords)
+-```
++The hammer and laser use the same reversible break response. The laser reads the first body its ray reaches; holding its beam on a study for 1.2 seconds breaks that study. Eight seconds later it returns. We leave that pickup, collision and reset machinery in the supplied museum. Implementing it is not a prerequisite for making our first segment.
+ 
+-The grid is no longer rectangular once a point moves. The adjacency structure persists.
++## What have the two ends left out?
+ 
+-Add diagonal connections.
++Walk the black stripe, then take a detour. Compare the recorded trail with the straight line. The same starting and ending positions give the same displacement, however you travel between them. Our script replaces its reading every frame. It keeps no journey.
+ 
+-```gdscript
+-func connect_diagonal() -> void:
+-    for y in range(GRID_SIZE.y - 1):
+-        for x in range(GRID_SIZE.x - 1):
+-            draw_line(points[y][x].position, points[y + 1][x + 1].position)
+-```
++In the open room, two lines can make a plus or a cross; moving one away from the other reveals the depth hidden by the first view. In the exit corridor, those signs have been given different consequences: × damages, + restores. Their meanings are attachments to their geometry.
+ 
+-Diagonals add 49 edges to the 112 horizontal and vertical ones. The grid becomes a triangulation.
+-
+-Count the graph's vertices and edges.
+-
+-```gdscript
+-func graph_stats() -> Dictionary:
+-    var V: int = GRID_SIZE.x * GRID_SIZE.y
+-    var E: int = (GRID_SIZE.x - 1) * GRID_SIZE.y + (GRID_SIZE.y - 1) * GRID_SIZE.x
+-    return {"vertices": V, "edges": E}
+-```
+-
+-V = 64, E = 112 for horizontal plus vertical. Euler's formula V - E + F = 2 (for planar graphs) lets you check the face count without enumerating.
+-
+-You can now build a grid of points and connect them by adjacency. Point_Trace will next turn the learner's motion into a line that persists.
+-
+-Find a point's closest grid neighbour.
+-
+-```gdscript
+-func closest_grid_neighbour(p: Vector3) -> Vector2i:
+-    var best := Vector2i(0, 0)
+-    var best_dist: float = INF
+-    for y in GRID_SIZE.y:
+-        for x in GRID_SIZE.x:
+-            var d: float = p.distance_to(points[y][x].position)
+-            if d < best_dist:
+-                best_dist = d; best = Vector2i(x, y)
+-    return best
+-```
+-
+-Brute-force O(W·H) search. For larger grids, spatial indexing accelerates this to O(log).
+-
+-Query the degree of a grid vertex.
+-
+-```gdscript
+-func vertex_degree(coords: Vector2i) -> int:
+-    var degree := 0
+-    if coords.x > 0: degree += 1
+-    if coords.x < GRID_SIZE.x - 1: degree += 1
+-    if coords.y > 0: degree += 1
+-    if coords.y < GRID_SIZE.y - 1: degree += 1
+-    return degree
+-```
+-
+-Interior vertices have degree 4. Edge vertices have 3. Corner vertices have 2.
++Keep the two positions, subtraction, length and the supplied segment renderer. In Trace, we will begin keeping the positions in between.

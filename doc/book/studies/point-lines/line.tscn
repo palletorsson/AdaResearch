@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://base.tscn" id="Base"]
+[ext_resource type="Script" path="res://line.gd" id="Lesson"]
+[ext_resource type="Script" path="res://segment.gd" id="Renderer"]
+
+[sub_resource type="StandardMaterial3D" id="Pale"]
+albedo_color = Color(0.94,0.92,0.88,1)
+roughness = 0.6
+
+[sub_resource type="SphereMesh" id="Point"]
+radius = 0.075
+height = 0.15
+material = SubResource("Pale")
+
+[sub_resource type="CylinderMesh" id="Line"]
+top_radius = 0.012
+bottom_radius = 0.012
+radial_segments = 24
+material = SubResource("Pale")
+
+[node name="LineStudy" instance=ExtResource("Base")]
+script = ExtResource("Lesson")
+
+[node name="Welcome" parent="." index="0"]
+visible = false
+
+[node name="A" type="MeshInstance3D" parent="."]
+mesh = SubResource("Point")
+
+[node name="B" type="MeshInstance3D" parent="."]
+mesh = SubResource("Point")
+
+[node name="Segment" type="MeshInstance3D" parent="."]
+script = ExtResource("Renderer")
+mesh = SubResource("Line")
+
+[node name="Readout" type="Label3D" parent="."]
+position = Vector3(0,1.75,0)
+font_size = 64
+pixel_size = 0.004
+text = "1.50 m"

@@ -12980,6 +12980,8 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	# to return to, the beam bites. A map that says #lethal:0 still wins.
 	if lookup == "laser_measure" and not plan_config.has("lethal"):
 		_arm_laser(node)
+	if plan_config.has("reactive"):
+		load("res://commons/interactables/artifact_reactions/router.gd").attach.call_deferred(node, plan_config.duplicate(true))
 	# A graph branch can be a configured artifact (the five curated synthesis
 	# works are the first users). Match GridInteractablesComponent's handoff:
 	# metadata is present before _ready, and apply_grid_config is called while the
