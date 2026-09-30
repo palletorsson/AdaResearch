@@ -8278,6 +8278,50 @@
       ],
       "duration_minutes": 8,
       "note": "On-slot evening harvest. The 04:50 row was the off-slot catch-up for 09-28."
+    },
+    {
+      "breath_id": "2026-09-30T07:40",
+      "mode": "full",
+      "baseline_avg": 6.08,
+      "post_avg": 6.08,
+      "delta": 0.0,
+      "gates_before": "8/15 committed (09-29) -> 9/15 at baseline (F autopilot now passes)",
+      "gates_after": "9/15; M unreachable 44->35 (stranded 13->4), N 8->4",
+      "items_attempted": [
+        "gate-M-land-9-stranded-artifact-files",
+        "gate-N-land-4-stranded-probes",
+        "forum-260930-h914x-heads-up"
+      ],
+      "items_succeeded": [
+        "gate-M-land-9-stranded-artifact-files",
+        "gate-N-land-4-stranded-probes",
+        "forum-260930-h914x-heads-up"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 3,
+          "succeeded": 3,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "GATE M'S 'UNREACHABLE FROM A CLONE' CAN CONVICT A FILE HEAD NEVER NAMES. None of today's 9 stranded artifact files is referenced by any file in HEAD (git grep HEAD: empty); only the MODIFIED, uncommitted callers (rainbow_celebration.gd, pillarcolorcollection.gd, paper_draw_surface.gd, brush_layer.gd, ball_spawner.gd, ball_painting_automation.gd) reach them. So a clone of HEAD was never broken - the gate walks the working tree from HEAD's registry tokens. Landing the additions is still worth doing (it protects new work from a checkout/restore like the 09-28 batch write), but it does not make the owner's feature land; the callers stay theirs.",
+        "Godot .uid sidecars are gitignored in this repo; `git add` of an untracked .gd + its .uid aborts the whole add. Add the sources alone.",
+        "Gate F (museum autopilot) flipped FAIL -> PASS between the 09-29 committed report and this morning without a breath touching it."
+      ],
+      "files_changed": [
+        "13 added (commit chore(gates M,N))",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "duration_minutes": 20
     }
   ]
 }
