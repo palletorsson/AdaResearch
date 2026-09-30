@@ -1,0 +1,273 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Point Zero · room to read</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:#f5f1e9;color:#2c2a2c;font:19px/1.78 Georgia,serif}
+main{max-width:1120px;margin:auto;padding:52px 26px 90px}header{padding-bottom:32px;border-bottom:1px solid #d5cfc5}
+h1,h2{font-weight:400;line-height:1.2}header h1{font-size:clamp(40px,6vw,68px);max-width:900px}h2{font-size:29px}
+a{color:#874964;text-underline-offset:4px}nav{display:flex;flex-wrap:wrap;gap:12px 24px}
+.eyebrow,nav,summary,footer{font:13px/1.6 system-ui,sans-serif}.eyebrow{color:#6d6269;letter-spacing:.05em}
+header p{max-width:760px}article{max-width:740px;margin:65px auto}article h1{font-size:36px}p{margin:0 0 23px}
+pre{background:#e9e3db;padding:20px;overflow:auto;line-height:1.55}code{font:.86em Consolas,monospace}pre code{font-size:14px}
+.footnote{font-size:15px;overflow-wrap:anywhere}.footnote p{margin-bottom:14px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:34px;font-size:16px;margin-top:28px}.pair>div{min-width:0}.pair h1{font-size:25px}
+details{border-top:1px solid #d5cfc5;padding:22px 0}summary{cursor:pointer;font-size:16px}footer{border-top:1px solid #d5cfc5;padding-top:20px;margin-top:50px}
+:focus-visible{outline:3px solid #874964;outline-offset:4px}@media(max-width:760px){main{padding:30px 20px}.pair{grid-template-columns:1fr}}
+@media print{nav,details,footer,#decisions{display:none}body{background:white;font-size:12pt}main{padding:0}}
+</style></head><body><main>
+<header><p class="eyebrow">ADA RESEARCH · POINT ZERO · 30 SEPTEMBER 2026</p><h1>Let the word come away<br>from its sentence.</h1>
+<p>A focused edit of the opening: less repeated explanation around the images, more room between the steps of the counter.</p>
+<p class="eyebrow">Main prose: 740 → 655 words, excluding headings, notes and code.</p>
+<nav><a href="#reading">Read Point Zero</a><a href="#preface">Borrowing in the preface</a><a href="#changes">Before / after</a><a href="/compose/sources?map=Point_Zero&amp;doc=final">Read and comment on current source</a></nav></header>
+<article id="reading"><h1>Point Zero — You arrive late</h1>
+<p>… You arrive late.<sup id="reading-fnref:1"><a class="footnote-ref" href="#reading-fn:1">1</a></sup></p>
+<!-- @arrival_shaft -->
+<p>You fall through a dark shaft into a lit room. In front of you, a number is running. Like Alice, you have entered before you know what kind of place this is. The floor catches you; the number goes on.</p>
+<!-- @frame_counter_display -->
+<p>Its first number for you is not its first number.</p>
+<p>You can stand in a room you did not build. Someone has made that possible. Their work gives us somewhere to begin and brings decisions with it. We inherit possibilities before we know their conditions.</p>
+<p>Let it run while you look around. When you return to the number, it has moved on.</p>
+<p>Where does the next one come from?</p>
+<p>A small counter can begin here:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var _count := 0
+
+func _process(delta: float) -&gt; void:
+    _count += 1
+</code></pre>
+<p>Godot repeatedly calls <code>_process</code>. Each call adds one to <code>_count</code>: one, then two, then three.</p>
+<p>The line <code>var _count := 0</code> gives the counter its starting value. It sits outside <code>_process</code>, so the repeated calls do not set the count back to zero. Each call begins with the value the previous one left behind.</p>
+<p><code>delta</code> supplies this update's time interval, in seconds. Our counter ignores it. A hundred calls add a hundred, however long they took. The number keeps how many, leaving how long unanswered.</p>
+<p>Our example starts its own count. The panel reads the engine's count, which began earlier:</p>
+<pre><code class="language-gdscript">var frames: int = int(Engine.get_process_frames())
+</code></pre>
+<p><code>Engine.get_process_frames()</code> counts process frames since the engine started. The panel displays that total, including frames from before the panel existed, before you found the number.</p>
+<p>We begin with a number that includes something we did not witness.</p>
+<p>The view of this room has to be drawn again while you are in it. Turn your head and another view is drawn. That is the demand of real time here: the program must keep answering a body that has already moved. The counter gives this continuing work a visible trace. It does not count the years it took to make the room possible.</p>
+<p>We have read the line that asks for that number. Much of the code making it readable remains unopened. We are standing on the shoulders of giants, in fog.</p>
+<!-- @folding_past -->
+<p>Through the entrance window, rectangular frames recede within frames. They keep folding while you look elsewhere. There is a temptation to follow them back to a first frame, a place from which everything here might be explained in order.</p>
+<p>Ten frames, scaled and moved through a repeating cycle, make this depth. They hold no record of your arrival. A few repeated shapes can invite a journey far beyond their repeating cycle.</p>
+<p>We could stay with the counter: how a digit gets its shape, how its glass is drawn. We would also like time to pick something up. The code we leave unread keeps working while our attention moves elsewhere. Who gets to decide which questions can wait?</p>
+<!-- @origin -->
+<h2>Somewhere to count from</h2>
+<p>We cannot follow everything back to its beginning. But we can choose somewhere to count from.</p>
+<p>Find the black sphere with its pink glow and wireframe cube. Its label says “Point zero”. Zero has been given a place in this room too. This zero is a reference in space, not the first moment of the running clock.</p>
+<pre><code class="language-gdscript">var origin := Vector3.ZERO
+</code></pre>
+<p><code>Vector3.ZERO</code> is shorthand for three zeroes: <code>(0, 0, 0)</code>. Used as a position, it names the origin of a coordinate system. From there we can measure where something else is. Nothing in those three zeroes explains why this place was chosen.</p>
+<p>Nearby, three words are printed on the floor: “<del>you</del> are here.” The first is struck through.</p>
+<p>Take hold of the crossed-out <em>you</em>. It lifts. Carry it a few steps away. The rest of the sentence stays on the floor, still saying <em>are here</em> to the room.</p>
+<p>Set the word down somewhere else and look back at what is left behind.</p>
+<p>What part of you has arrived here?<sup id="reading-fnref:point-one-ahmed-reach"><a class="footnote-ref" href="#reading-fn:point-one-ahmed-reach">2</a></sup></p>
+<!-- @ -->
+<p>We have chosen a place to count from. In the next corridor, a label is waiting for something to appear above it.</p>
+<p>Point one.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="reading-fn:1">
+<p>Heidegger’s <em>thrownness</em> names finding ourselves already delivered into an existence we did not choose—not simply arriving after the clock started. Here, the room offers a small encounter with that condition. Genesis, first light: we look for a beginning. But is this the world beginning, or our first glimpse of something already underway? See <a href="https://www.beyng.com/pages/en/BeingandTimeMR/BeingandTimeMR.174.html"><em>Being and Time</em>, §29</a>. <a class="footnote-backref" href="#reading-fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="reading-fn:point-one-ahmed-reach">
+<p>Sara Ahmed, <a href="https://www.dukeupress.edu/queer-phenomenology"><em>Queer Phenomenology: Orientations, Objects, Others</em></a> (Duke University Press, 2006), introduction. Ada’s questions about orientation and reach draw on her account of bodies finding their bearings through relations with objects, spaces and others. Lines will make this conversation more explicit. <a class="footnote-backref" href="#reading-fnref:point-one-ahmed-reach" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div></article>
+<article id="preface"><p class="eyebrow">THE RELOCATED QUESTION · PREFACE</p>
+<p>Even “Hello, world” needs somewhere to happen. Before the first room, we give the work of preparation its own time: Day Zero. Downloading an engine, opening a project, making a change appear—these are part of learning to arrive. We begin with a supplied environment and, in the museum, a player whose construction we have not yet learned. That borrowed work lets us turn our attention towards the point. It also gives the point a world in which to matter.</p>
+<p>What are we forced to borrow for now, and what must we understand to make the work our own?</p>
+<p><a href="/book-review/doc/book/preface.md">Read the full current preface</a></p></article>
+<article id="decisions"><h1>Point Zero — room to read</h1>
+<p>30 September 2026. Applied to canonical final.md and preface.md.</p>
+<ul>
+<li>Keep the fall, Alice, counter, ten folding frames, origin and carried word. Keep the line about the first number, which returns in Melencolia.</li>
+<li>Remove the second announcement that the room is already running.</li>
+<li>Preserve the author's inherited-work paragraph. Move its final borrowing question into the preface, immediately after the supplied environment and player have been named.</li>
+<li>Separate repeated calls from retained state. Keep every code excerpt, the distinction between counting calls and elapsed time, and the distinction between a local count and the engine total.</li>
+<li>Let the giants and fog stand without explaining their meaning again.</li>
+<li>Describe the folding frames as a repeating construction rather than implying that their program stores a journey.</li>
+<li>Let carrying the crossed-out you open the question. Remove the general conclusion about the purpose of an address. Retain the Ahmed note.</li>
+</ul>
+<p>Museum arrangements, artifact implementations and tutorials were not changed. This is an editorial pass; no new runtime or headset claim. The exact originals and supplied feedback are preserved here.</p></article>
+<section id="changes"><h2>Original and revised</h2><details><summary>point-zero — original beside revised</summary><div class="pair"><div><p class="eyebrow">Before</p><h1>Point Zero — You arrive late</h1>
+<p>… You arrive late.<sup id="point-zero-old-fnref:1"><a class="footnote-ref" href="#point-zero-old-fn:1">1</a></sup></p>
+<!-- @arrival_shaft -->
+<p>You fall through a dark shaft into a lit room. In front of you, a number is running. Like Alice, you have entered before you know what kind of place you have entered. The floor catches you; the number goes on.</p>
+<!-- @frame_counter_display -->
+<p>The number is already changing. Its first number for you is not its first number. While you find somewhere to stand, the room continues with whatever it was doing before you arrived.</p>
+<p>You can stand in a room you did not build. Someone has made that possible. Their work gives us somewhere to begin, and brings decisions with it. We inherit possibilities before we know their conditions. What are we forced to borrow for now, and what must we understand to make the work our own?</p>
+<p>Let it run while you look around. When you return to the number, it has moved on.</p>
+<p>Where does the next one come from?</p>
+<p>A small counter can begin here:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var _count := 0
+
+func _process(delta: float) -&gt; void:
+    _count += 1
+</code></pre>
+<p>Godot repeatedly calls <code>_process</code>. Each call runs <code>_count += 1</code>, adding one to the stored number: one, then two, then three. The starting value, <code>0</code>, is set outside the function, so each call keeps what the previous one left behind.</p>
+<p><code>delta</code> supplies this update's time interval, in seconds. Our counter ignores it. A hundred calls add a hundred, however long they took. The number keeps how many, leaving how long unanswered.</p>
+<p>That example has its own count. The room's counter reads a total that began earlier:</p>
+<pre><code class="language-gdscript">var frames: int = int(Engine.get_process_frames())
+</code></pre>
+<p><code>Engine.get_process_frames()</code> counts process frames since the engine started. The panel displays that total, including frames from before the panel existed, before you found the number.</p>
+<p>We begin with a number that includes something we did not witness.</p>
+<p>The view of this room has to be drawn again while you are in it. Turn your head and another view is drawn. That is the demand of real time here: the program must keep answering a body that has already moved. The counter gives this continuing work a visible trace. It does not count the years it took to make the room possible.</p>
+<p>We have read the line that asks for that number. Much of the code making it readable remains unopened. It is like standing on the shoulders of giants in fog: other people's work has brought us here, but height alone does not give us a clear view.</p>
+<!-- @folding_past -->
+<p>Through the entrance window, rectangular frames recede within frames. They keep folding while you look elsewhere. There is a temptation to follow them back to a first frame, a place from which everything here might be explained in order.</p>
+<p>Ten frames, scaled and moved through a repeating cycle, make this depth. They hold no record of the route you took to arrive here. A few repeated shapes can invite a much longer journey than the one their program keeps.</p>
+<p>We could stay with the counter: how a digit gets its shape, how its glass is drawn. We would also like time to pick something up. The code we leave unread keeps working while our attention moves elsewhere. Who gets to decide which questions can wait?</p>
+<!-- @origin -->
+<h2>Somewhere to count from</h2>
+<p>We cannot follow everything back to its beginning. But we can choose somewhere to count from.</p>
+<p>Find the black sphere with its pink glow and wireframe cube. Its label says “Point zero”. Zero has been given a place in this room too. This zero is a reference in space, not the first moment of the running clock.</p>
+<pre><code class="language-gdscript">var origin := Vector3.ZERO
+</code></pre>
+<p><code>Vector3.ZERO</code> is shorthand for three zeroes: <code>(0, 0, 0)</code>. Used as a position, it names the origin of a coordinate system. From there we can measure where something else is. Nothing in those three zeroes explains why this place was chosen.</p>
+<p>Nearby, three words are printed on the floor: “<del>you</del> are here.” The first is struck through.</p>
+<p>Take hold of the struck word. It lifts. The crossed-out “you” comes away as a thing you can carry, and the rest of the sentence stays exactly where it was printed, still saying <em>are here</em> to the room. Set it down somewhere else and look back at what is left behind.</p>
+<p>The location remained legible without its visitor. That is not a trick of this decal; it is what an address is for. What part of you has arrived at this one?<sup id="point-zero-old-fnref:point-one-ahmed-reach"><a class="footnote-ref" href="#point-zero-old-fn:point-one-ahmed-reach">2</a></sup></p>
+<!-- @ -->
+<p>We have chosen a place to count from. In the next corridor, a label is waiting for something to appear above it.</p>
+<p>Point one.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="point-zero-old-fn:1">
+<p>Heidegger’s <em>thrownness</em> names finding ourselves already delivered into an existence we did not choose—not simply arriving after the clock started. Here, the room offers a small encounter with that condition. Genesis, first light: we look for a beginning. But is this the world beginning, or our first glimpse of something already underway? See <a href="https://www.beyng.com/pages/en/BeingandTimeMR/BeingandTimeMR.174.html"><em>Being and Time</em>, §29</a>. <a class="footnote-backref" href="#point-zero-old-fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="point-zero-old-fn:point-one-ahmed-reach">
+<p>Sara Ahmed, <a href="https://www.dukeupress.edu/queer-phenomenology"><em>Queer Phenomenology: Orientations, Objects, Others</em></a> (Duke University Press, 2006), introduction. Ada’s questions about orientation and reach draw on her account of bodies finding their bearings through relations with objects, spaces and others. Lines will make this conversation more explicit. <a class="footnote-backref" href="#point-zero-old-fnref:point-one-ahmed-reach" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div></div><div><p class="eyebrow">Revised</p><h1>Point Zero — You arrive late</h1>
+<p>… You arrive late.<sup id="point-zero-new-fnref:1"><a class="footnote-ref" href="#point-zero-new-fn:1">1</a></sup></p>
+<!-- @arrival_shaft -->
+<p>You fall through a dark shaft into a lit room. In front of you, a number is running. Like Alice, you have entered before you know what kind of place this is. The floor catches you; the number goes on.</p>
+<!-- @frame_counter_display -->
+<p>Its first number for you is not its first number.</p>
+<p>You can stand in a room you did not build. Someone has made that possible. Their work gives us somewhere to begin and brings decisions with it. We inherit possibilities before we know their conditions.</p>
+<p>Let it run while you look around. When you return to the number, it has moved on.</p>
+<p>Where does the next one come from?</p>
+<p>A small counter can begin here:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var _count := 0
+
+func _process(delta: float) -&gt; void:
+    _count += 1
+</code></pre>
+<p>Godot repeatedly calls <code>_process</code>. Each call adds one to <code>_count</code>: one, then two, then three.</p>
+<p>The line <code>var _count := 0</code> gives the counter its starting value. It sits outside <code>_process</code>, so the repeated calls do not set the count back to zero. Each call begins with the value the previous one left behind.</p>
+<p><code>delta</code> supplies this update's time interval, in seconds. Our counter ignores it. A hundred calls add a hundred, however long they took. The number keeps how many, leaving how long unanswered.</p>
+<p>Our example starts its own count. The panel reads the engine's count, which began earlier:</p>
+<pre><code class="language-gdscript">var frames: int = int(Engine.get_process_frames())
+</code></pre>
+<p><code>Engine.get_process_frames()</code> counts process frames since the engine started. The panel displays that total, including frames from before the panel existed, before you found the number.</p>
+<p>We begin with a number that includes something we did not witness.</p>
+<p>The view of this room has to be drawn again while you are in it. Turn your head and another view is drawn. That is the demand of real time here: the program must keep answering a body that has already moved. The counter gives this continuing work a visible trace. It does not count the years it took to make the room possible.</p>
+<p>We have read the line that asks for that number. Much of the code making it readable remains unopened. We are standing on the shoulders of giants, in fog.</p>
+<!-- @folding_past -->
+<p>Through the entrance window, rectangular frames recede within frames. They keep folding while you look elsewhere. There is a temptation to follow them back to a first frame, a place from which everything here might be explained in order.</p>
+<p>Ten frames, scaled and moved through a repeating cycle, make this depth. They hold no record of your arrival. A few repeated shapes can invite a journey far beyond their repeating cycle.</p>
+<p>We could stay with the counter: how a digit gets its shape, how its glass is drawn. We would also like time to pick something up. The code we leave unread keeps working while our attention moves elsewhere. Who gets to decide which questions can wait?</p>
+<!-- @origin -->
+<h2>Somewhere to count from</h2>
+<p>We cannot follow everything back to its beginning. But we can choose somewhere to count from.</p>
+<p>Find the black sphere with its pink glow and wireframe cube. Its label says “Point zero”. Zero has been given a place in this room too. This zero is a reference in space, not the first moment of the running clock.</p>
+<pre><code class="language-gdscript">var origin := Vector3.ZERO
+</code></pre>
+<p><code>Vector3.ZERO</code> is shorthand for three zeroes: <code>(0, 0, 0)</code>. Used as a position, it names the origin of a coordinate system. From there we can measure where something else is. Nothing in those three zeroes explains why this place was chosen.</p>
+<p>Nearby, three words are printed on the floor: “<del>you</del> are here.” The first is struck through.</p>
+<p>Take hold of the crossed-out <em>you</em>. It lifts. Carry it a few steps away. The rest of the sentence stays on the floor, still saying <em>are here</em> to the room.</p>
+<p>Set the word down somewhere else and look back at what is left behind.</p>
+<p>What part of you has arrived here?<sup id="point-zero-new-fnref:point-one-ahmed-reach"><a class="footnote-ref" href="#point-zero-new-fn:point-one-ahmed-reach">2</a></sup></p>
+<!-- @ -->
+<p>We have chosen a place to count from. In the next corridor, a label is waiting for something to appear above it.</p>
+<p>Point one.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="point-zero-new-fn:1">
+<p>Heidegger’s <em>thrownness</em> names finding ourselves already delivered into an existence we did not choose—not simply arriving after the clock started. Here, the room offers a small encounter with that condition. Genesis, first light: we look for a beginning. But is this the world beginning, or our first glimpse of something already underway? See <a href="https://www.beyng.com/pages/en/BeingandTimeMR/BeingandTimeMR.174.html"><em>Being and Time</em>, §29</a>. <a class="footnote-backref" href="#point-zero-new-fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="point-zero-new-fn:point-one-ahmed-reach">
+<p>Sara Ahmed, <a href="https://www.dukeupress.edu/queer-phenomenology"><em>Queer Phenomenology: Orientations, Objects, Others</em></a> (Duke University Press, 2006), introduction. Ada’s questions about orientation and reach draw on her account of bodies finding their bearings through relations with objects, spaces and others. Lines will make this conversation more explicit. <a class="footnote-backref" href="#point-zero-new-fnref:point-one-ahmed-reach" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div></div></div><p><a href="point-zero.diff">Exact text diff</a></p></details><details><summary>preface — original beside revised</summary><div class="pair"><div><p class="eyebrow">Before</p><h1>Before the first point</h1>
+<p><em>Preface · working draft, revised 29 September 2026</em></p>
+<p>We arrive after the light.</p>
+<p>Someone has already taught this machine how to make a point visible. The counter has advanced. We move a hand, and work that took generations answers. A small gesture can contain an immense inheritance.<sup id="preface-old-fnref:preface-room-history"><a class="footnote-ref" href="#preface-old-fn:preface-room-history">1</a></sup></p>
+<p>We cannot unfold all of it before beginning. We choose one operation, follow it for a while, and leave other doors unopened. What looks like the beginning is the place where we have decided to pay attention.</p>
+<p>Even “Hello, world” needs somewhere to happen. Before the first room, we give the work of preparation its own time: Day Zero. Downloading an engine, opening a project, making a change appear—these are part of learning to arrive. We begin with a supplied environment and, in the museum, a player whose construction we have not yet learned. That borrowed work lets us turn our attention towards the point. It also gives the point a world in which to matter.</p>
+<p>What bodies are possible with the tools we have? The question follows us through this book. We begin by attending to a position, a line, a few ways to give something a surface. Later we can make a field, a branching structure, a body that responds to its neighbours. Each addition changes what we can imagine building. It also brings decisions we may only notice when something refuses to behave as we expected.</p>
+<p>Ada Research is a museum built to investigate those decisions. Its exhibits include the room around them: the floor that carries us, a wall that interrupts a route, the rules through which another body approaches. Learning to construct an object gives us a way to look again at the conditions in which we encounter it. Eventually we can ask the same questions of the museum itself.</p>
+<p>I want to know how programming can help us make worlds we do not yet know how to inhabit. There is pleasure in that desire: dressing a body, following an improbable passage, wanting to touch a form before understanding it. There is also work. A shape has to be represented, a movement calculated, a surface made visible. The computer has finite time. So do we. We follow a path because we cannot pursue every possibility at once.</p>
+<p>While we learn to use these tools, they are being revised. With AI, I feel the change in what we can attempt together. A question in the manuscript can become code, a room we enter, and a reason to rewrite the question. We can carry an idea through these forms while it is still unsettled.</p>
+<p>Work accumulates; what becomes possible can arrive as a leap. A change in how we write code reaches into how we make a room, then into what we can learn by being there. One capacity becomes a tool for another. This spillover is part of the exhilaration: the next opening may change the work we thought we were doing. It also changes what we need to learn. How much of our time can go into catching up? When do we get time to play?</p>
+<p>We arrive among systems we did not choose, and find our bearings while their possibilities are changing. I sometimes feel knowledge gathering around us, exerting a new gravitational pull. An answer arrives beside a question, with code we can run and another direction to follow. The ease of following gives that answer weight before we have understood whose assumptions it carries. We need ways to test it, turn it, make something else of it. Learning includes finding a position from which to do that.</p>
+<p>Like Alice after the White Rabbit, we want to see what happens next. The reward can be a possibility we could not have imagined asking for. The risk includes the time, energy and labour we commit before we can judge it. Where does that desire become a death drive, an insistence on continuing that makes the cost harder to see? We can ask this from inside the pleasure of making. It is one reason to keep the work open to interruption.</p>
+<p>First light, or the light at the end of a tunnel? An opening can draw us forward before we know where it leads. We begin this book in that light.</p>
+<p>This book is for artists, students, programmers, and curious readers who want to understand how code gives a world its possibilities. It begins with small operations and carries them forward. A line can become a record of movement; the record can be given another size or another use. The tutorial supplies something to hold on to while the questions change. A short piece of code can make a consequence legible enough for someone else to test, alter, or disagree with it.</p>
+<p>Whenever possible, an encounter comes before its explanation. Try something. Look at what happened. Predict what a small change might do. Then open the part of the program that bears on the question. Other code will remain unread for now. Naming what we borrow helps us return to it later; pretending to begin without it would make the first lesson impossible.</p>
+<p>The writing moves between the gesture and the instruction, between what happened and what the program can account for. Sometimes an apparent mistake opens a use we had not considered. Sometimes a dependable restriction gives us room to act. We will need both kinds of encounter. There should be opportunities to keep a form we like, repeat an operation, refuse an invitation, or find another way through.</p>
+<p>A tool's intended use is one arrangement of its capacities. A microwave enters a makeshift laboratory; a camera sold for games becomes part of a 3D scanner.<sup id="preface-old-fnref:preface-other-uses"><a class="footnote-ref" href="#preface-old-fn:preface-other-uses">2</a></sup> Their earlier lives remain legible in the new work. To tinker is to follow a connection that the product's name did not teach us to expect. The museum asks this of its own tools too: what else can a point follow, a trace carry, a surface become?</p>
+<p>Queer desire enters this inquiry through the bodies, pleasures, and relations we want to make possible, and through the expectations we are willing to trouble. Drag, ornament, awkwardness, comedy, and the digital grotesque belong among its materials. A strange appearance can draw us closer. Understanding how it was made gives that interest somewhere further to go. We can ask whose movement a rule accommodates, what it asks a body to become, and who can change the terms.</p>
+<p>The book and the museum offer two approaches to this work. In the museum, distance, reach, and duration enter the lesson through your own actions. On the page, code and illustrations let us hold a comparison still and return to it. The written account must give a reader enough to follow the operation away from the headset. A description of an encounter and a person's experience of it can differ; that difference belongs to the continuing research.</p>
+<p>Footnotes open further paths into technical and intellectual sources. Follow them when an encounter gives you a reason. The main journey carries its own explanations, while the notes keep room for questions that would otherwise take us away from the object too soon.</p>
+<p>Towards the end, the project names a developing framework: the Queer Free Energy Principle, or QFEP. Its central concern here is how models can remain open to revision while the lives and possibilities they leave out retain the means to act and answer back. The afterword returns to this proposal with the encounters behind us. It asks what they let us claim, where they complicate the argument, and what remains to be tried. The reader can reach that discussion with questions of their own.</p>
+<p>Our route is one arrangement of attention. Other objects stand beside it; other histories could change its order. What matters is that following it gives us enough understanding to begin making such changes, together or alone.</p>
+<p><a href="/book-review/doc/book/day-zero.md">Day Zero — Hello, world</a> is the practical chapter of this preface. It prepares the working environment once. The making passages that follow assume we can already open, change and run the supplied project.</p>
+<p>We have to begin somewhere. The first room is already running.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="preface-old-fn:preface-room-history">
+<p>In 1968, Ivan E. Sutherland's experimental head-mounted display put its viewer inside a room drawn in wireframe. Turning the head changed the view; walls, ceiling and floor were already part of the experiment. See Ivan E. Sutherland, <a href="https://doi.org/10.1145/1476589.1476686">“A Head-Mounted Three Dimensional Display”</a> (1968), especially “Results”; <a href="https://archive.aec.at/media/assets/636b23b07bfd1b4f1d1154827ac9d9ab.pdf">accessible paper</a>. The wireframe room and response to head movement are described there. The acknowledgments name a collective effort, and the funding note names ARPA, the Office of Naval Research and Bell Telephone Laboratories. This is one historical encounter with these problems, not a claim that the museum follows a single line of descent. <a class="footnote-backref" href="#preface-old-fnref:preface-room-history" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="preface-old-fn:preface-other-uses">
+<p>The <a href="https://www.pina.si/wp-content/uploads/2024/07/DIVEin_Manual_EN.pdf">DIVE IN manual</a>, §2.3.1, includes household appliances among equipment for DIY microbiology. Izadi and colleagues' <a href="https://www.microsoft.com/en-us/research/publication/kinectfusion-real-time-3d-reconstruction-and-interaction-using-a-moving-depth-camera/">KinectFusion</a> (2011) reconstructs surfaces from a moving Kinect depth camera. These examples concern equipment entering another practice; the laboratory remains an arrangement of tools, materials and knowledge. <a class="footnote-backref" href="#preface-old-fnref:preface-other-uses" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div></div><div><p class="eyebrow">Revised</p><h1>Before the first point</h1>
+<p><em>Preface · working draft, revised 30 September 2026</em></p>
+<p>We arrive after the light.</p>
+<p>Someone has already taught this machine how to make a point visible. The counter has advanced. We move a hand, and work that took generations answers. A small gesture can contain an immense inheritance.<sup id="preface-new-fnref:preface-room-history"><a class="footnote-ref" href="#preface-new-fn:preface-room-history">1</a></sup></p>
+<p>We cannot unfold all of it before beginning. We choose one operation, follow it for a while, and leave other doors unopened. What looks like the beginning is the place where we have decided to pay attention.</p>
+<p>Even “Hello, world” needs somewhere to happen. Before the first room, we give the work of preparation its own time: Day Zero. Downloading an engine, opening a project, making a change appear—these are part of learning to arrive. We begin with a supplied environment and, in the museum, a player whose construction we have not yet learned. That borrowed work lets us turn our attention towards the point. It also gives the point a world in which to matter.</p>
+<p>What are we forced to borrow for now, and what must we understand to make the work our own?</p>
+<p>What bodies are possible with the tools we have? The question follows us through this book. We begin by attending to a position, a line, a few ways to give something a surface. Later we can make a field, a branching structure, a body that responds to its neighbours. Each addition changes what we can imagine building. It also brings decisions we may only notice when something refuses to behave as we expected.</p>
+<p>Ada Research is a museum built to investigate those decisions. Its exhibits include the room around them: the floor that carries us, a wall that interrupts a route, the rules through which another body approaches. Learning to construct an object gives us a way to look again at the conditions in which we encounter it. Eventually we can ask the same questions of the museum itself.</p>
+<p>I want to know how programming can help us make worlds we do not yet know how to inhabit. There is pleasure in that desire: dressing a body, following an improbable passage, wanting to touch a form before understanding it. There is also work. A shape has to be represented, a movement calculated, a surface made visible. The computer has finite time. So do we. We follow a path because we cannot pursue every possibility at once.</p>
+<p>While we learn to use these tools, they are being revised. With AI, I feel the change in what we can attempt together. A question in the manuscript can become code, a room we enter, and a reason to rewrite the question. We can carry an idea through these forms while it is still unsettled.</p>
+<p>Work accumulates; what becomes possible can arrive as a leap. A change in how we write code reaches into how we make a room, then into what we can learn by being there. One capacity becomes a tool for another. This spillover is part of the exhilaration: the next opening may change the work we thought we were doing. It also changes what we need to learn. How much of our time can go into catching up? When do we get time to play?</p>
+<p>We arrive among systems we did not choose, and find our bearings while their possibilities are changing. I sometimes feel knowledge gathering around us, exerting a new gravitational pull. An answer arrives beside a question, with code we can run and another direction to follow. The ease of following gives that answer weight before we have understood whose assumptions it carries. We need ways to test it, turn it, make something else of it. Learning includes finding a position from which to do that.</p>
+<p>Like Alice after the White Rabbit, we want to see what happens next. The reward can be a possibility we could not have imagined asking for. The risk includes the time, energy and labour we commit before we can judge it. Where does that desire become a death drive, an insistence on continuing that makes the cost harder to see? We can ask this from inside the pleasure of making. It is one reason to keep the work open to interruption.</p>
+<p>First light, or the light at the end of a tunnel? An opening can draw us forward before we know where it leads. We begin this book in that light.</p>
+<p>This book is for artists, students, programmers, and curious readers who want to understand how code gives a world its possibilities. It begins with small operations and carries them forward. A line can become a record of movement; the record can be given another size or another use. The tutorial supplies something to hold on to while the questions change. A short piece of code can make a consequence legible enough for someone else to test, alter, or disagree with it.</p>
+<p>Whenever possible, an encounter comes before its explanation. Try something. Look at what happened. Predict what a small change might do. Then open the part of the program that bears on the question. Other code will remain unread for now. Naming what we borrow helps us return to it later; pretending to begin without it would make the first lesson impossible.</p>
+<p>The writing moves between the gesture and the instruction, between what happened and what the program can account for. Sometimes an apparent mistake opens a use we had not considered. Sometimes a dependable restriction gives us room to act. We will need both kinds of encounter. There should be opportunities to keep a form we like, repeat an operation, refuse an invitation, or find another way through.</p>
+<p>A tool's intended use is one arrangement of its capacities. A microwave enters a makeshift laboratory; a camera sold for games becomes part of a 3D scanner.<sup id="preface-new-fnref:preface-other-uses"><a class="footnote-ref" href="#preface-new-fn:preface-other-uses">2</a></sup> Their earlier lives remain legible in the new work. To tinker is to follow a connection that the product's name did not teach us to expect. The museum asks this of its own tools too: what else can a point follow, a trace carry, a surface become?</p>
+<p>Queer desire enters this inquiry through the bodies, pleasures, and relations we want to make possible, and through the expectations we are willing to trouble. Drag, ornament, awkwardness, comedy, and the digital grotesque belong among its materials. A strange appearance can draw us closer. Understanding how it was made gives that interest somewhere further to go. We can ask whose movement a rule accommodates, what it asks a body to become, and who can change the terms.</p>
+<p>The book and the museum offer two approaches to this work. In the museum, distance, reach, and duration enter the lesson through your own actions. On the page, code and illustrations let us hold a comparison still and return to it. The written account must give a reader enough to follow the operation away from the headset. A description of an encounter and a person's experience of it can differ; that difference belongs to the continuing research.</p>
+<p>Footnotes open further paths into technical and intellectual sources. Follow them when an encounter gives you a reason. The main journey carries its own explanations, while the notes keep room for questions that would otherwise take us away from the object too soon.</p>
+<p>Towards the end, the project names a developing framework: the Queer Free Energy Principle, or QFEP. Its central concern here is how models can remain open to revision while the lives and possibilities they leave out retain the means to act and answer back. The afterword returns to this proposal with the encounters behind us. It asks what they let us claim, where they complicate the argument, and what remains to be tried. The reader can reach that discussion with questions of their own.</p>
+<p>Our route is one arrangement of attention. Other objects stand beside it; other histories could change its order. What matters is that following it gives us enough understanding to begin making such changes, together or alone.</p>
+<p><a href="/book-review/doc/book/day-zero.md">Day Zero — Hello, world</a> is the practical chapter of this preface. It prepares the working environment once. The making passages that follow assume we can already open, change and run the supplied project.</p>
+<p>We have to begin somewhere. The first room is already running.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="preface-new-fn:preface-room-history">
+<p>In 1968, Ivan E. Sutherland's experimental head-mounted display put its viewer inside a room drawn in wireframe. Turning the head changed the view; walls, ceiling and floor were already part of the experiment. See Ivan E. Sutherland, <a href="https://doi.org/10.1145/1476589.1476686">“A Head-Mounted Three Dimensional Display”</a> (1968), especially “Results”; <a href="https://archive.aec.at/media/assets/636b23b07bfd1b4f1d1154827ac9d9ab.pdf">accessible paper</a>. The wireframe room and response to head movement are described there. The acknowledgments name a collective effort, and the funding note names ARPA, the Office of Naval Research and Bell Telephone Laboratories. This is one historical encounter with these problems, not a claim that the museum follows a single line of descent. <a class="footnote-backref" href="#preface-new-fnref:preface-room-history" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="preface-new-fn:preface-other-uses">
+<p>The <a href="https://www.pina.si/wp-content/uploads/2024/07/DIVEin_Manual_EN.pdf">DIVE IN manual</a>, §2.3.1, includes household appliances among equipment for DIY microbiology. Izadi and colleagues' <a href="https://www.microsoft.com/en-us/research/publication/kinectfusion-real-time-3d-reconstruction-and-interaction-using-a-moving-depth-camera/">KinectFusion</a> (2011) reconstructs surfaces from a moving Kinect depth camera. These examples concern equipment entering another practice; the laboratory remains an arrangement of tools, materials and knowledge. <a class="footnote-backref" href="#preface-new-fnref:preface-other-uses" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div></div></div><p><a href="preface.diff">Exact text diff</a></p></details></section>
+<footer>Promoted to the canonical manuscripts. This page preserves the 30 September reading; the comment link opens the latest source. <a href="verification.json">Publication checks</a> · <a href="/book-review/doc/book/captures/primitives/primitives-book.md">Current Primitives capture</a></footer>
+</main></body></html>

@@ -1,0 +1,159 @@
+**I would change the places where the prose explains an image twice, rather than remove the images or the technical work.** The fall, Alice, the counter, the folding frames and the movable “you” all belong. They give us different ways of encountering a beginning we did not choose.
+
+Here are the changes I would make, in order.
+
+## 1. Opening: remove the repeated announcement that the room is running
+
+Your first paragraph already establishes continuing activity very well:
+
+> “The floor catches you; the number goes on.”
+
+The next paragraph announces it again with “The number is already changing” and “the room continues with whatever it was doing before you arrived.”
+
+I would reduce that opening to:
+
+> You fall through a dark shaft into a lit room. In front of you, a number is running. Like Alice, you have entered before you know what kind of place this is. The floor catches you; the number goes on.
+>
+> Its first number for you is not its first number.
+
+This keeps the strange sentence but gives it less competition. I would retain that sentence in particular because Melencolia later returns to it explicitly: it is part of the sequence’s construction, not merely an opening flourish. :chatgpt-content-reference{index="0"}
+
+## 2. Inherited work: let the statement stand before adding another question
+
+I would keep:
+
+> You can stand in a room you did not build. Someone has made that possible. Their work gives us somewhere to begin and brings decisions with it. We inherit possibilities before we know their conditions.
+
+Then go directly to:
+
+> Let it run while you look around. When you return to the number, it has moved on.
+>
+> Where does the next one come from?
+
+I would move this question out of the opening paragraph:
+
+> “What are we forced to borrow for now, and what must we understand to make the work our own?”
+
+It is an important question about dependence and authorship. But the reader is being asked to consider it before learning what, specifically, they are borrowing.
+
+Later, you already have:
+
+> “Who gets to decide which questions can wait?”
+
+That concerns something slightly different: authority over attention. **I would keep that later question**, where the choice between inspecting the counter and picking something up has become concrete. The broader borrowing question can remain in the preface or the research account; the first encounter does not need to formulate both.
+
+## 3. After the first code block: separate repetition from retained state
+
+Your explanation currently places two ideas in one paragraph: the engine repeats the call, and the variable survives between calls.
+
+I would write:
+
+> Godot repeatedly calls `_process`. Each call adds one to `_count`: one, then two, then three.
+>
+> The line `var _count := 0` gives the counter its starting value. It sits outside `_process`, so the repeated calls do not set the count back to zero. Each call begins with the value the previous one left behind.
+
+This is slightly longer, but easier to follow. It lets the reader understand **what repeats** before understanding **what is kept**.
+
+I would leave the following paragraph almost exactly as it is:
+
+> `delta` supplies this update’s time interval, in seconds. Our counter ignores it. A hundred calls add a hundred, however long they took. The number keeps how many, leaving how long unanswered.
+
+Here the last sentence earns its compression because the preceding sentences have already explained it.
+
+I would also make the transition to the actual panel a little more direct:
+
+**Current:**
+> That example has its own count. The room’s counter reads a total that began earlier:
+
+**Proposed:**
+> Our example starts its own count. The panel reads the engine’s count, which began earlier:
+
+The distinction becomes clear before the second code sample appears.
+
+## 4. Real time and the fog: keep the change of scale, shorten the explanation of the metaphor
+
+I would protect:
+
+> “The program must keep answering a body that has already moved.”
+
+This adds something the preceding paragraphs have not established: the running process is not only counting in isolation; it participates in an encounter with a moving body.
+
+I would shorten the following paragraph to:
+
+> We have read the line that asks for that number. Much of the code making it readable remains unopened. We are standing on the shoulders of giants, in fog.
+
+I would remove:
+
+> “other people’s work has brought us here, but height alone does not give us a clear view.”
+
+Not because it is wrong, but because it explains the image immediately after giving it to us. The inheritance has already been established. **Let the fog remain an image for a moment.**
+
+## 5. Folding frames: clarify the difference between an invitation and a record
+
+I like the temptation to follow the frames back to a first frame. I would keep that whole paragraph.
+
+The sentence I would change is:
+
+> “A few repeated shapes can invite a much longer journey than the one their program keeps.”
+
+“Ke​eps” makes me pause. Does the program store a journey, even though the preceding sentence says it keeps no record of our arrival? You intend a distinction between the small construction and the depth it invites us to imagine, but the wording briefly confuses that with stored history.
+
+I would write:
+
+> Ten frames, scaled and moved through a repeating cycle, make this depth. They hold no record of your arrival. A few repeated shapes can invite a journey far beyond their repeating cycle.
+
+The imagined journey remains available without making the program sound as though it stores a shorter version of it.
+
+I would then keep:
+
+> We could stay with the counter: how a digit gets its shape, how its glass is drawn. We would also like time to pick something up. The code we leave unread keeps working while our attention moves elsewhere. Who gets to decide which questions can wait?
+
+The modest desire to pick something up matters here. It gives leaving the explanation unfinished a reason other than ignorance or impatience.
+
+## 6. The origin: leave this transition alone
+
+I would keep:
+
+> We cannot follow everything back to its beginning. But we can choose somewhere to count from.
+
+And:
+
+> Nothing in those three zeroes explains why this place was chosen.
+
+These sentences do different work. The first moves us from searching for an absolute beginning to choosing a usable reference. The second leaves the choice of that reference open to inquiry.
+
+The distinction between the clock’s beginning and the spatial origin is also clear. I would not add more coordinate-system explanation here; Point Coordinates has room for that.
+
+## 7. The carried “you”: remove the conclusion about what an address is for
+
+**This is the most important change I would make.**
+
+The interaction is unusual and evocative. But this paragraph narrows it too quickly:
+
+> “The location remained legible without its visitor. That is not a trick of this decal; it is what an address is for.”
+
+The action concerns a movable word, an unfinished sentence and the person being addressed. It does not have to resolve into a general statement about addresses.
+
+I would let the ending read:
+
+> Nearby, three words are printed on the floor: “you are here.” The first is struck through.
+>
+> Take hold of the crossed-out *you*. It lifts. Carry it a few steps away. The rest of the sentence stays on the floor, still saying *are here* to the room.
+>
+> Set the word down somewhere else and look back at what is left behind.
+>
+> What part of you has arrived here?
+>
+> We have chosen a place to count from. In the next corridor, a label is waiting for something to appear above it.
+>
+> Point one.
+
+Changing “at this one” to “here” also removes the need to resolve a pronoun back to “address.”
+
+Your private writing note is particularly relevant at this point: **“The visitor need not convert each delight into a proposition.”** The carried word is precisely an encounter that benefits from that freedom. :chatgpt-content-reference{index="1"}
+
+---
+
+The biggest improvement would come from **less explanation immediately after the strongest images**, not from making the whole chapter plainer. Let the floor catch us, let the fog obscure something, and let the word come away from its sentence.
+
+The code can remain exact. The encounter does not always need a concluding explanation.

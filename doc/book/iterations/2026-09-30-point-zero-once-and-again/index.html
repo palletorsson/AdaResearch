@@ -1,0 +1,181 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point Zero · once, or repeatedly?</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:#f5f1e9;color:#2c2a2c;font:19px/1.78 Georgia,serif}
+main{max-width:1120px;margin:auto;padding:52px 26px 90px}header{padding-bottom:32px;border-bottom:1px solid #d5cfc5}
+h1,h2{font-weight:400;line-height:1.2}header h1{font-size:clamp(40px,6vw,68px);max-width:900px}h2{font-size:29px}
+a{color:#874964;text-underline-offset:4px}nav{display:flex;flex-wrap:wrap;gap:12px 24px}
+.eyebrow,nav,summary,footer{font:13px/1.6 system-ui,sans-serif}.eyebrow{color:#6d6269;letter-spacing:.05em}
+header p{max-width:760px}article{max-width:740px;margin:65px auto}article h1{font-size:36px}p{margin:0 0 23px}
+pre{background:#e9e3db;padding:20px;overflow:auto;line-height:1.55}code{font:.86em Consolas,monospace}pre code{font-size:14px}
+.footnote{font-size:15px;overflow-wrap:anywhere}.footnote p{margin-bottom:14px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:34px;font-size:16px;margin-top:28px}.pair>div{min-width:0}.pair h1{font-size:25px}
+details{border-top:1px solid #d5cfc5;padding:22px 0}summary{cursor:pointer;font-size:16px}footer{border-top:1px solid #d5cfc5;padding-top:20px;margin-top:50px}
+:focus-visible{outline:3px solid #874964;outline-offset:4px}@media(max-width:760px){main{padding:30px 20px}.pair{grid-template-columns:1fr}}
+@media print{nav,details,footer,#decisions{display:none}body{background:white;font-size:12pt}main{padding:0}}
+</style></head><body><main><header><p class="eyebrow">POINT ZERO · MAKING · 30 SEPTEMBER 2026</p><h1>Once, or repeatedly?</h1><p>The encounter begins with a world already running. Here we change when an instruction runs.</p><nav><a href="reading.html#reading">Read the encounter</a><a href="index.html#making">Make the counter</a><a href="point-zero-study.zip" download>Download the study</a><a href="/compose/sources?map=Point_Zero&amp;doc=tutorial">Current tutorial source</a></nav></header><article id="making"><h1>Point Zero — Hello, world. We are here.</h1>
+<p>Day Zero gave us somewhere to run a project. Now we will make an instruction happen when our scene is ready, and another keep happening while it runs.</p>
+<p>Open <a href="point-zero/README.md">the Point Zero study project</a>, then open <code>hello_world.gd</code>. This study builds on Day Zero's prepared scene and supplies two text displays named <code>Greeting</code> and <code>Counter</code>. In <code>hello_world.tscn</code>, the script is attached to the root node named <code>HelloWorld</code>; both displays are its children. The script contains the finished counter. Replace its contents with the short greeting below.</p>
+<p>We borrow the displays, floor, light and camera. Here we are attending to when something happens.</p>
+<h2>Say hello</h2>
+<pre><code class="language-gdscript">extends Node3D
+
+func _ready():
+    $Greeting.text = "Hello, world."
+</code></pre>
+<p>Run it. “Hello, world.” appears above the floor.</p>
+<p>A node is one part of a Godot scene. <code>extends Node3D</code> says that this script adds behaviour to a 3D node.</p>
+<p><code>func</code> introduces a function: a named group of instructions. The colon begins its body; the indented line belongs inside it.</p>
+<p><code>_ready()</code> has a particular meaning to Godot. It is called when this node and its children have entered the scene tree and are ready. In this study, that is where our greeting is set. It is not called again on every frame.</p>
+<p><code>$Greeting</code> finds the supplied child named <code>Greeting</code>. Its <code>text</code> property holds the words it displays. The equals sign assigns our quoted text to that property. We are changing an existing display, not constructing its letters.</p>
+<p>Change the words and run again. You have chosen what this arrival says.</p>
+<p>Our node becoming ready does not mean that the world has just begun. The engine has already been working to bring it here.</p>
+<h2>Let a number continue</h2>
+<p>Replace the script with this complete version:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var count := 0
+
+func _ready():
+    $Greeting.text = "Hello, world."
+
+func _process(_delta):
+    count += 1
+    $Counter.text = str(count)
+</code></pre>
+<p>The greeting stays. Beneath it, a number keeps changing.</p>
+<p><code>var count := 0</code> creates a variable named <code>count</code> and gives it the starting value zero. The variable stores the number we will change. With <code>:=</code>, Godot infers the type from the starting value: here, an integer, or whole number.</p>
+<p>The declaration sits outside the functions, so <code>count</code> belongs to this node and keeps its value between function calls.</p>
+<p>Godot calls <code>_process</code> on each process frame while processing is enabled. <code>count += 1</code> adds one to the value already there. <code>str(count)</code> turns that number into text, which we give to the supplied <code>Counter</code> display.</p>
+<p>Each call begins with what the previous call left behind. The number can continue while our attention goes somewhere else.</p>
+<p>Godot also supplies the elapsed time for that update, in seconds. We receive it as <code>_delta</code>. The leading underscore says we are deliberately leaving this input unused. Our script counts calls; it does not measure seconds. A hundred updates add a hundred, however long they took.</p>
+<h2>Once, or repeatedly?</h2>
+<p>Move the two indented lines from <code>_process</code> into <code>_ready</code>, beneath the greeting. Remove the now-empty <code>_process</code> function. The script becomes:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var count := 0
+
+func _ready():
+    $Greeting.text = "Hello, world."
+    count += 1
+    $Counter.text = str(count)
+</code></pre>
+<p>Run it. The number reaches one and stays there. The engine continues running; our counting instruction now happens only when this node becomes ready.</p>
+<p>Restore the version with both functions. Change <code>count += 1</code> to <code>count += 2</code>. The display advances two at a time. You have changed what happens on each call, without choosing when those calls arrive. Return it to one when you finish.</p>
+<h2>Whose beginning?</h2>
+<p>Our small count begins with this node. Restarting the study creates a fresh instance and begins its count again.</p>
+<p>The museum's panel asks for <code>Engine.get_process_frames()</code> instead: the engine's process-frame total since startup. That total can include work done before the panel entered the room. Our exercise and the museum panel can therefore show different numbers without either being broken. Their beginnings differ.</p>
+<p>To compare the numbers, we need to know what each one counts and when that count started.</p>
+<p>In Point One, we will return to <code>_ready()</code> to place a marker. We will recognise the moment in which that instruction runs, and can give our attention to its new material: a position.</p></article><article><h1>Once, or repeatedly?</h1>
+<p>30 September 2026. Applied the four useful tutorial clarifications from the supplied feedback.</p>
+<ul>
+<li>Name the separate Point Zero study and the actual HelloWorld root, with Greeting and Counter as its children. The Day Zero Welcome label remains hidden in this scene.</li>
+<li>Introduce a node as one part of a scene and explain extends Node3D as adding behaviour to a 3D node. Keep the explanation of function indentation.</li>
+<li>Name count as a variable that stores the changing number; distinguish its initial integer type from its persistence between calls.</li>
+<li>End the comparison with what each number counts and when it started.</li>
+</ul>
+<p>Keep all three complete code examples and the experiment that moves the update from _process to _ready. The supplied code, scene and museum are unchanged. Keep the revised encounter manuscript intact: it can attend to late arrival while this companion teaches the operation.</p>
+<p>The claimed http://../../../ link and outer backtick wrappers were not present in the actual source. Repository-relative links remain in the canonical tutorial; the downloadable copy uses its local README. The new review resolves that link to the packaged README.</p>
+<p>The download contains the updated tutorial and README alongside unchanged executable files. Publication and archive checks are recorded here; no new runtime or learner test was needed for the prose-only changes.</p></article><details id="changes"><summary>Original beside revised</summary><div class="pair"><div><p class="eyebrow">Before</p><h1>Point Zero — Hello, world. We are here.</h1>
+<p>Day Zero gave us somewhere to run a project. Now we will make an instruction happen when our scene is ready, and another keep happening while it runs.</p>
+<p>Open <code>hello_world.gd</code> in <a href="point-zero/README.md">the Point Zero study</a>. The project uses the same <code>base.tscn</code>, with two supplied text displays named <code>Greeting</code> and <code>Counter</code>. The download contains the finished counter. Begin by replacing its script with the short greeting below.</p>
+<p>We borrow the displays, floor, light and camera. Here we are attending to when something happens.</p>
+<h2>Say hello</h2>
+<pre><code class="language-gdscript">extends Node3D
+
+func _ready():
+    $Greeting.text = "Hello, world."
+</code></pre>
+<p>Run it. “Hello, world.” appears above the floor.</p>
+<p><code>extends Node3D</code> lets this script belong to the supplied 3D scene. <code>func</code> introduces a function: a named group of instructions. The colon begins its body; the indented line belongs inside it.</p>
+<p><code>_ready()</code> has a particular meaning to Godot. It is called when this node and its children have entered the scene tree and are ready. In this study, that is where our greeting is set. It is not called again on every frame.</p>
+<p><code>$Greeting</code> finds the supplied child named <code>Greeting</code>. Its <code>text</code> property holds the words it displays. The equals sign assigns our quoted text to that property. We are changing an existing display, not constructing its letters.</p>
+<p>Change the words and run again. You have chosen what this arrival says.</p>
+<p>Our node becoming ready does not mean that the world has just begun. The engine has already been working to bring it here.</p>
+<h2>Let a number continue</h2>
+<p>Replace the script with this complete version:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var count := 0
+
+func _ready():
+    $Greeting.text = "Hello, world."
+
+func _process(_delta):
+    count += 1
+    $Counter.text = str(count)
+</code></pre>
+<p>The greeting stays. Beneath it, a number keeps changing.</p>
+<p><code>var count := 0</code> gives a value a name and begins it at zero. <code>:=</code> lets Godot infer its type from that value: an integer, a whole number. This line sits outside the functions, so the scene node keeps <code>count</code> between their calls.</p>
+<p>Godot calls <code>_process</code> on each process frame while processing is enabled. <code>count += 1</code> adds one to the value already there. <code>str(count)</code> turns that number into text, which we give to the supplied <code>Counter</code> display.</p>
+<p>Each call begins with what the previous call left behind. The number can continue while our attention goes somewhere else.</p>
+<p>Godot also supplies the elapsed time for that update, in seconds. We receive it as <code>_delta</code>. The leading underscore says we are deliberately leaving this input unused. Our script counts calls; it does not measure seconds. A hundred updates add a hundred, however long they took.</p>
+<h2>Once, or repeatedly?</h2>
+<p>Move the two indented lines from <code>_process</code> into <code>_ready</code>, beneath the greeting. Remove the now-empty <code>_process</code> function. The script becomes:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var count := 0
+
+func _ready():
+    $Greeting.text = "Hello, world."
+    count += 1
+    $Counter.text = str(count)
+</code></pre>
+<p>Run it. The number reaches one and stays there. The engine continues running; our counting instruction now happens only when this node becomes ready.</p>
+<p>Restore the version with both functions. Change <code>count += 1</code> to <code>count += 2</code>. The display advances two at a time. You have changed what happens on each call, without choosing when those calls arrive. Return it to one when you finish.</p>
+<h2>Whose beginning?</h2>
+<p>Our small count begins with this node. Restarting the study creates a fresh instance and begins its count again.</p>
+<p>The museum's panel asks for <code>Engine.get_process_frames()</code> instead: the engine's process-frame total since startup. That total can include work done before the panel entered the room. Our exercise and the museum panel can therefore show different numbers without either being broken. Their beginnings differ.</p>
+<p>A zero does not tell us where its counting began. We have to know what is being counted and when that count was started.</p>
+<p>In Point One, we will return to <code>_ready()</code> to place a marker. We will recognise the moment in which that instruction runs, and can give our attention to its new material: a position.</p></div><div><p class="eyebrow">Revised</p><h1>Point Zero — Hello, world. We are here.</h1>
+<p>Day Zero gave us somewhere to run a project. Now we will make an instruction happen when our scene is ready, and another keep happening while it runs.</p>
+<p>Open <a href="point-zero/README.md">the Point Zero study project</a>, then open <code>hello_world.gd</code>. This study builds on Day Zero's prepared scene and supplies two text displays named <code>Greeting</code> and <code>Counter</code>. In <code>hello_world.tscn</code>, the script is attached to the root node named <code>HelloWorld</code>; both displays are its children. The script contains the finished counter. Replace its contents with the short greeting below.</p>
+<p>We borrow the displays, floor, light and camera. Here we are attending to when something happens.</p>
+<h2>Say hello</h2>
+<pre><code class="language-gdscript">extends Node3D
+
+func _ready():
+    $Greeting.text = "Hello, world."
+</code></pre>
+<p>Run it. “Hello, world.” appears above the floor.</p>
+<p>A node is one part of a Godot scene. <code>extends Node3D</code> says that this script adds behaviour to a 3D node.</p>
+<p><code>func</code> introduces a function: a named group of instructions. The colon begins its body; the indented line belongs inside it.</p>
+<p><code>_ready()</code> has a particular meaning to Godot. It is called when this node and its children have entered the scene tree and are ready. In this study, that is where our greeting is set. It is not called again on every frame.</p>
+<p><code>$Greeting</code> finds the supplied child named <code>Greeting</code>. Its <code>text</code> property holds the words it displays. The equals sign assigns our quoted text to that property. We are changing an existing display, not constructing its letters.</p>
+<p>Change the words and run again. You have chosen what this arrival says.</p>
+<p>Our node becoming ready does not mean that the world has just begun. The engine has already been working to bring it here.</p>
+<h2>Let a number continue</h2>
+<p>Replace the script with this complete version:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var count := 0
+
+func _ready():
+    $Greeting.text = "Hello, world."
+
+func _process(_delta):
+    count += 1
+    $Counter.text = str(count)
+</code></pre>
+<p>The greeting stays. Beneath it, a number keeps changing.</p>
+<p><code>var count := 0</code> creates a variable named <code>count</code> and gives it the starting value zero. The variable stores the number we will change. With <code>:=</code>, Godot infers the type from the starting value: here, an integer, or whole number.</p>
+<p>The declaration sits outside the functions, so <code>count</code> belongs to this node and keeps its value between function calls.</p>
+<p>Godot calls <code>_process</code> on each process frame while processing is enabled. <code>count += 1</code> adds one to the value already there. <code>str(count)</code> turns that number into text, which we give to the supplied <code>Counter</code> display.</p>
+<p>Each call begins with what the previous call left behind. The number can continue while our attention goes somewhere else.</p>
+<p>Godot also supplies the elapsed time for that update, in seconds. We receive it as <code>_delta</code>. The leading underscore says we are deliberately leaving this input unused. Our script counts calls; it does not measure seconds. A hundred updates add a hundred, however long they took.</p>
+<h2>Once, or repeatedly?</h2>
+<p>Move the two indented lines from <code>_process</code> into <code>_ready</code>, beneath the greeting. Remove the now-empty <code>_process</code> function. The script becomes:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var count := 0
+
+func _ready():
+    $Greeting.text = "Hello, world."
+    count += 1
+    $Counter.text = str(count)
+</code></pre>
+<p>Run it. The number reaches one and stays there. The engine continues running; our counting instruction now happens only when this node becomes ready.</p>
+<p>Restore the version with both functions. Change <code>count += 1</code> to <code>count += 2</code>. The display advances two at a time. You have changed what happens on each call, without choosing when those calls arrive. Return it to one when you finish.</p>
+<h2>Whose beginning?</h2>
+<p>Our small count begins with this node. Restarting the study creates a fresh instance and begins its count again.</p>
+<p>The museum's panel asks for <code>Engine.get_process_frames()</code> instead: the engine's process-frame total since startup. That total can include work done before the panel entered the room. Our exercise and the museum panel can therefore show different numbers without either being broken. Their beginnings differ.</p>
+<p>To compare the numbers, we need to know what each one counts and when that count started.</p>
+<p>In Point One, we will return to <code>_ready()</code> to place a marker. We will recognise the moment in which that instruction runs, and can give our attention to its new material: a position.</p></div></div><p><a href="changes.diff">Exact changes</a></p></details><footer><a href="verification.json">Publication checks</a> · <a href="reading.html#reading">Return to the encounter</a></footer></main></body></html>

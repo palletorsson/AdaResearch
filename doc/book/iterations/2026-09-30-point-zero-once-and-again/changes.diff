@@ -1,0 +1,102 @@
+--- before/commons/maps/Point_Zero/intent.md
++++ after/commons/maps/Point_Zero/intent.md
+@@ -14,3 +14,7 @@
+ The first tutorial now introduces _ready(), _process() and a retained integer through a small hello-world counter. It receives but does not use _delta, and distinguishes process calls from elapsed seconds. Moving the update between the functions tests the difference. The actual museum count starts with the engine; the reduced study starts with its own node.
+ 
+ Arrival, the counter, folding frames and the chosen origin remain poetic and critical encounters. Their full renderers, animation machinery and input systems are outside this first exercise. Point One inherits the readiness function and named values, and distinguishes a position from its appearance and physical boundary. Point Coordinates then teaches components, reference frames and pickup. The main encounter manuscript is unchanged in this tutorial pass.
++
++## Encounter and making — 30 September 2026
++
++The encounter follows a world already running: its number began before the visitor arrived. The tutorial lets the student change when an instruction runs. Keep the small counter and engine-total line in the encounter; teach syntax, indentation, variables and the comparison between callbacks in the tutorial. Keep all three complete tutorial versions so a beginner can compare them. Alice, the fog and the carried word belong to the encounter and need not be repeated in the making lesson.
+--- before/commons/maps/Point_Zero/tutorial.md
++++ after/commons/maps/Point_Zero/tutorial.md
+@@ -2,7 +2,7 @@
+ 
+ Day Zero gave us somewhere to run a project. Now we will make an instruction happen when our scene is ready, and another keep happening while it runs.
+ 
+-Open `hello_world.gd` in [the Point Zero study](../../../doc/book/studies/point-zero/README.md). The project uses the same `base.tscn`, with two supplied text displays named `Greeting` and `Counter`. The download contains the finished counter. Begin by replacing its script with the short greeting below.
++Open [the Point Zero study project](../../../doc/book/studies/point-zero/README.md), then open `hello_world.gd`. This study builds on Day Zero's prepared scene and supplies two text displays named `Greeting` and `Counter`. In `hello_world.tscn`, the script is attached to the root node named `HelloWorld`; both displays are its children. The script contains the finished counter. Replace its contents with the short greeting below.
+ 
+ We borrow the displays, floor, light and camera. Here we are attending to when something happens.
+ 
+@@ -17,7 +17,9 @@
+ 
+ Run it. “Hello, world.” appears above the floor.
+ 
+-`extends Node3D` lets this script belong to the supplied 3D scene. `func` introduces a function: a named group of instructions. The colon begins its body; the indented line belongs inside it.
++A node is one part of a Godot scene. `extends Node3D` says that this script adds behaviour to a 3D node.
++
++`func` introduces a function: a named group of instructions. The colon begins its body; the indented line belongs inside it.
+ 
+ `_ready()` has a particular meaning to Godot. It is called when this node and its children have entered the scene tree and are ready. In this study, that is where our greeting is set. It is not called again on every frame.
+ 
+@@ -46,7 +48,9 @@
+ 
+ The greeting stays. Beneath it, a number keeps changing.
+ 
+-`var count := 0` gives a value a name and begins it at zero. `:=` lets Godot infer its type from that value: an integer, a whole number. This line sits outside the functions, so the scene node keeps `count` between their calls.
++`var count := 0` creates a variable named `count` and gives it the starting value zero. The variable stores the number we will change. With `:=`, Godot infers the type from the starting value: here, an integer, or whole number.
++
++The declaration sits outside the functions, so `count` belongs to this node and keeps its value between function calls.
+ 
+ Godot calls `_process` on each process frame while processing is enabled. `count += 1` adds one to the value already there. `str(count)` turns that number into text, which we give to the supplied `Counter` display.
+ 
+@@ -79,6 +83,6 @@
+ 
+ The museum's panel asks for `Engine.get_process_frames()` instead: the engine's process-frame total since startup. That total can include work done before the panel entered the room. Our exercise and the museum panel can therefore show different numbers without either being broken. Their beginnings differ.
+ 
+-A zero does not tell us where its counting began. We have to know what is being counted and when that count was started.
++To compare the numbers, we need to know what each one counts and when that count started.
+ 
+ In Point One, we will return to `_ready()` to place a marker. We will recognise the moment in which that instruction runs, and can give our attention to its new material: a position.
+--- before/doc/book/studies/point-zero/README.md
++++ after/doc/book/studies/point-zero/README.md
+@@ -1,6 +1,6 @@
+ # Point Zero — Hello, world
+ 
+-A Godot 4.6 Standard project following Day Zero. The main scene is hello_world.tscn and the learner script is hello_world.gd. Setup and running are assumed; TUTORIAL.md introduces the code.
++A Godot 4.6 Standard study project following Day Zero. Open this study's project.godot. Its main scene is hello_world.tscn; the learner script hello_world.gd is attached to the HelloWorld root node. Greeting and Counter are its child text displays. Setup and running are assumed; TUTORIAL.md introduces the code.
+ 
+ The download starts with the completed running counter. The tutorial first reduces it to a greeting in _ready(), then introduces a retained count and _process(). Moving the update into _ready() makes the number stay at one; changing the increment changes the sequence.
+ 
+--- before/doc/book/studies/point-zero/TUTORIAL.md
++++ after/doc/book/studies/point-zero/TUTORIAL.md
+@@ -2,7 +2,7 @@
+ 
+ Day Zero gave us somewhere to run a project. Now we will make an instruction happen when our scene is ready, and another keep happening while it runs.
+ 
+-Open `hello_world.gd` in [the Point Zero study](README.md). The project uses the same `base.tscn`, with two supplied text displays named `Greeting` and `Counter`. The download contains the finished counter. Begin by replacing its script with the short greeting below.
++Open [the Point Zero study project](README.md), then open `hello_world.gd`. This study builds on Day Zero's prepared scene and supplies two text displays named `Greeting` and `Counter`. In `hello_world.tscn`, the script is attached to the root node named `HelloWorld`; both displays are its children. The script contains the finished counter. Replace its contents with the short greeting below.
+ 
+ We borrow the displays, floor, light and camera. Here we are attending to when something happens.
+ 
+@@ -17,7 +17,9 @@
+ 
+ Run it. “Hello, world.” appears above the floor.
+ 
+-`extends Node3D` lets this script belong to the supplied 3D scene. `func` introduces a function: a named group of instructions. The colon begins its body; the indented line belongs inside it.
++A node is one part of a Godot scene. `extends Node3D` says that this script adds behaviour to a 3D node.
++
++`func` introduces a function: a named group of instructions. The colon begins its body; the indented line belongs inside it.
+ 
+ `_ready()` has a particular meaning to Godot. It is called when this node and its children have entered the scene tree and are ready. In this study, that is where our greeting is set. It is not called again on every frame.
+ 
+@@ -46,7 +48,9 @@
+ 
+ The greeting stays. Beneath it, a number keeps changing.
+ 
+-`var count := 0` gives a value a name and begins it at zero. `:=` lets Godot infer its type from that value: an integer, a whole number. This line sits outside the functions, so the scene node keeps `count` between their calls.
++`var count := 0` creates a variable named `count` and gives it the starting value zero. The variable stores the number we will change. With `:=`, Godot infers the type from the starting value: here, an integer, or whole number.
++
++The declaration sits outside the functions, so `count` belongs to this node and keeps its value between function calls.
+ 
+ Godot calls `_process` on each process frame while processing is enabled. `count += 1` adds one to the value already there. `str(count)` turns that number into text, which we give to the supplied `Counter` display.
+ 
+@@ -79,6 +83,6 @@
+ 
+ The museum's panel asks for `Engine.get_process_frames()` instead: the engine's process-frame total since startup. That total can include work done before the panel entered the room. Our exercise and the museum panel can therefore show different numbers without either being broken. Their beginnings differ.
+ 
+-A zero does not tell us where its counting began. We have to know what is being counted and when that count was started.
++To compare the numbers, we need to know what each one counts and when that count started.
+ 
+ In Point One, we will return to `_ready()` to place a marker. We will recognise the moment in which that instruction runs, and can give our attention to its new material: a position.

@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point Zero · you arrive late</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:#f5f1e9;color:#2c2a2c;font:19px/1.78 Georgia,serif}
+main{max-width:1120px;margin:auto;padding:52px 26px 90px}header{padding-bottom:32px;border-bottom:1px solid #d5cfc5}
+h1,h2{font-weight:400;line-height:1.2}header h1{font-size:clamp(40px,6vw,68px);max-width:900px}h2{font-size:29px}
+a{color:#874964;text-underline-offset:4px}nav{display:flex;flex-wrap:wrap;gap:12px 24px}
+.eyebrow,nav,summary,footer{font:13px/1.6 system-ui,sans-serif}.eyebrow{color:#6d6269;letter-spacing:.05em}
+header p{max-width:760px}article{max-width:740px;margin:65px auto}article h1{font-size:36px}p{margin:0 0 23px}
+pre{background:#e9e3db;padding:20px;overflow:auto;line-height:1.55}code{font:.86em Consolas,monospace}pre code{font-size:14px}
+.footnote{font-size:15px;overflow-wrap:anywhere}.footnote p{margin-bottom:14px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:34px;font-size:16px;margin-top:28px}.pair>div{min-width:0}.pair h1{font-size:25px}
+details{border-top:1px solid #d5cfc5;padding:22px 0}summary{cursor:pointer;font-size:16px}footer{border-top:1px solid #d5cfc5;padding-top:20px;margin-top:50px}
+:focus-visible{outline:3px solid #874964;outline-offset:4px}@media(max-width:760px){main{padding:30px 20px}.pair{grid-template-columns:1fr}}
+@media print{nav,details,footer,#decisions{display:none}body{background:white;font-size:12pt}main{padding:0}}
+</style></head><body><main><header><p class="eyebrow">POINT ZERO · ENCOUNTER</p><nav><a href="reading.html#reading">Read the encounter</a><a href="index.html#making">Make the counter</a><a href="point-zero-study.zip" download>Download the study</a><a href="/compose/sources?map=Point_Zero&amp;doc=tutorial">Current tutorial source</a></nav></header><article id="reading"><h1>Point Zero — You arrive late</h1>
+<p>… You arrive late.<sup id="reading-fnref:1"><a class="footnote-ref" href="#reading-fn:1">1</a></sup></p>
+<!-- @arrival_shaft -->
+<p>You fall through a dark shaft into a lit room. In front of you, a number is running. Like Alice, you have entered before you know what kind of place this is. The floor catches you; the number goes on.</p>
+<!-- @frame_counter_display -->
+<p>Its first number for you is not its first number.</p>
+<p>You can stand in a room you did not build. Someone has made that possible. Their work gives us somewhere to begin and brings decisions with it. We inherit possibilities before we know their conditions.</p>
+<p>Let it run while you look around. When you return to the number, it has moved on.</p>
+<p>Where does the next one come from?</p>
+<p>A small counter can begin here:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var _count := 0
+
+func _process(delta: float) -&gt; void:
+    _count += 1
+</code></pre>
+<p>Godot repeatedly calls <code>_process</code>. Each call adds one to <code>_count</code>: one, then two, then three.</p>
+<p>The line <code>var _count := 0</code> gives the counter its starting value. It sits outside <code>_process</code>, so the repeated calls do not set the count back to zero. Each call begins with the value the previous one left behind.</p>
+<p><code>delta</code> supplies this update's time interval, in seconds. Our counter ignores it. A hundred calls add a hundred, however long they took. The number keeps how many, leaving how long unanswered.</p>
+<p>Our example starts its own count. The panel reads the engine's count, which began earlier:</p>
+<pre><code class="language-gdscript">var frames: int = int(Engine.get_process_frames())
+</code></pre>
+<p><code>Engine.get_process_frames()</code> counts process frames since the engine started. The panel displays that total, including frames from before the panel existed, before you found the number.</p>
+<p>We begin with a number that includes something we did not witness.</p>
+<p>The view of this room has to be drawn again while you are in it. Turn your head and another view is drawn. That is the demand of real time here: the program must keep answering a body that has already moved. The counter gives this continuing work a visible trace. It does not count the years it took to make the room possible.</p>
+<p>We have read the line that asks for that number. Much of the code making it readable remains unopened. We are standing on the shoulders of giants, in fog.</p>
+<!-- @folding_past -->
+<p>Through the entrance window, rectangular frames recede within frames. They keep folding while you look elsewhere. There is a temptation to follow them back to a first frame, a place from which everything here might be explained in order.</p>
+<p>Ten frames, scaled and moved through a repeating cycle, make this depth. They hold no record of your arrival. A few repeated shapes can invite a journey far beyond their repeating cycle.</p>
+<p>We could stay with the counter: how a digit gets its shape, how its glass is drawn. We would also like time to pick something up. The code we leave unread keeps working while our attention moves elsewhere. Who gets to decide which questions can wait?</p>
+<!-- @origin -->
+<h2>Somewhere to count from</h2>
+<p>We cannot follow everything back to its beginning. But we can choose somewhere to count from.</p>
+<p>Find the black sphere with its pink glow and wireframe cube. Its label says “Point zero”. Zero has been given a place in this room too. This zero is a reference in space, not the first moment of the running clock.</p>
+<pre><code class="language-gdscript">var origin := Vector3.ZERO
+</code></pre>
+<p><code>Vector3.ZERO</code> is shorthand for three zeroes: <code>(0, 0, 0)</code>. Used as a position, it names the origin of a coordinate system. From there we can measure where something else is. Nothing in those three zeroes explains why this place was chosen.</p>
+<p>Nearby, three words are printed on the floor: “<del>you</del> are here.” The first is struck through.</p>
+<p>Take hold of the crossed-out <em>you</em>. It lifts. Carry it a few steps away. The rest of the sentence stays on the floor, still saying <em>are here</em> to the room.</p>
+<p>Set the word down somewhere else and look back at what is left behind.</p>
+<p>What part of you has arrived here?<sup id="reading-fnref:point-one-ahmed-reach"><a class="footnote-ref" href="#reading-fn:point-one-ahmed-reach">2</a></sup></p>
+<!-- @ -->
+<p>We have chosen a place to count from. In the next corridor, a label is waiting for something to appear above it.</p>
+<p>Point one.</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="reading-fn:1">
+<p>Heidegger’s <em>thrownness</em> names finding ourselves already delivered into an existence we did not choose—not simply arriving after the clock started. Here, the room offers a small encounter with that condition. Genesis, first light: we look for a beginning. But is this the world beginning, or our first glimpse of something already underway? See <a href="https://www.beyng.com/pages/en/BeingandTimeMR/BeingandTimeMR.174.html"><em>Being and Time</em>, §29</a>. <a class="footnote-backref" href="#reading-fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="reading-fn:point-one-ahmed-reach">
+<p>Sara Ahmed, <a href="https://www.dukeupress.edu/queer-phenomenology"><em>Queer Phenomenology: Orientations, Objects, Others</em></a> (Duke University Press, 2006), introduction. Ada’s questions about orientation and reach draw on her account of bodies finding their bearings through relations with objects, spaces and others. Lines will make this conversation more explicit. <a class="footnote-backref" href="#reading-fnref:point-one-ahmed-reach" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div></article><footer><a href="index.html#making">Make a greeting and a counter</a></footer></main></body></html>

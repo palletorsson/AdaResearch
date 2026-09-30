@@ -1,0 +1,117 @@
+**This clarifies what the two texts can do for each other.** The scene lets the reader encounter a world already running. The tutorial lets them change when an instruction runs. They return to the same counter, but they do not have to tell the same story.
+
+That separation is already part of the reading proof’s stated arrangement: the continuous encounters and the making lessons are related but distinct. :chatgpt-content-reference{index="0"}
+
+I would keep this tutorial’s structure. Its clearest achievement is that **“once or repeatedly?” becomes something the learner changes, rather than just a distinction they are told to remember.**
+
+## What works particularly well
+
+The progression is manageable: make words appear, make a number continue, move the counting instructions, then change the increment.
+
+The strongest section is **“Once, or repeatedly?”** You keep the instructions themselves and change where they run. The number reaching one gives the learner something definite to explain. This use of `_ready()` and `_process()` agrees with Godot’s documented lifecycle and processing behaviour. :chatgpt-content-reference{index="1"}
+
+I would also keep all three complete code examples. Although they repeat several lines, they make the successive versions easy to compare. I would not replace the third example with only “move these lines” and expect a beginner to reconstruct the finished script.
+
+The reflective sentences work here because they stay close to the exercise:
+
+> “Each call begins with what the previous call left behind.”
+
+> “Their beginnings differ.”
+
+These do not make the tutorial unnecessarily literary. They help explain its subject. You do not need to strip out the voice to make the instructions accessible.
+
+## The small changes I would make
+
+### 1. Make the transition from Day Zero to this download unambiguous
+
+The current opening says:
+
+> “The project uses the same `base.tscn`…”
+
+A beginner could reasonably understand that as an instruction to continue in their existing Day Zero download. However, Day Zero currently refers to a display named `Welcome`, while this lesson expects `Greeting` and `Counter`. :chatgpt-content-reference{index="2"}
+
+I would name the new study first and explain that it supplies the required displays:
+
+> Open the Point Zero study project, then open `hello_world.gd`. This study builds on Day Zero’s prepared scene and supplies two text displays named `Greeting` and `Counter`. Its script contains the finished counter. Replace the script’s contents with the short greeting below.
+
+That is proposed wording based on your description; I have not inspected the study download. The instructions should also identify which node has `hello_world.gd` attached, unless that is immediately apparent when the study opens.
+
+Keep this sentence:
+
+> “We borrow the displays, floor, light and camera. Here we are attending to when something happens.”
+
+It sets the lesson’s scope without apologising for not constructing everything.
+
+### 2. Give “node” a small foothold, and make `extends` more precise
+
+Your first explanation says:
+
+> “`extends Node3D` lets this script belong to the supplied 3D scene.”
+
+I would change it to:
+
+> A node is one part of a Godot scene. `extends Node3D` says that this script adds behaviour to a 3D node.
+
+That is enough for this lesson. It introduces the noun used throughout the explanation without starting a separate lesson on scene architecture. Godot describes nodes as its scene building blocks, while `extends` specifies the class the script inherits from. :chatgpt-content-reference{index="3"}
+
+Your explanation of `func`, the colon and indentation can then stay. **Here indentation is worth explicitly teaching.** In the reading chapter it could be distracting detail; in this tutorial, the learner is about to move indented instructions between functions.
+
+### 3. Name the variable directly
+
+This sentence is slightly abstract for a first lesson:
+
+> “`var count := 0` gives a value a name and begins it at zero.”
+
+I would use:
+
+> `var count := 0` creates a variable named `count` and gives it the starting value zero. The variable stores the number we will change. With `:=`, Godot infers the type from the starting value: here, an integer, or whole number.
+>
+> The declaration sits outside the functions, so `count` belongs to this node and keeps its value between function calls.
+
+This makes the mutable thing explicit. GDScript supports that distinction between an instance’s member variables and variables declared inside functions, as well as type inference through `:=`. :chatgpt-content-reference{index="4"}
+
+I would then keep your later sentence:
+
+> “Each call begins with what the previous call left behind.”
+
+The first passage explains storage; the second gives that storage a temporal consequence. That is a useful return.
+
+### 4. Simplify the final generalisation
+
+You write:
+
+> “A zero does not tell us where its counting began.”
+
+I understand the connection to Point Zero, but the wording makes the reader do another interpretive turn just after a clear explanation.
+
+You already have the stronger, simpler sentence:
+
+> “Their beginnings differ.”
+
+I would follow it with:
+
+> To compare the numbers, we need to know what each one counts and when that count started.
+
+Then keep the transition to Point One.
+
+The distinction itself is sound: `Engine.get_process_frames()` reports the engine’s process-frame total since startup, rather than the count maintained by your particular variable. :chatgpt-content-reference{index="5"}
+
+## What this changes about editing the scene text
+
+**The scene no longer has to carry a full beginner’s explanation of the syntax.** This tutorial supplies a place for `func`, indentation, assignment, type inference and the practical comparison between callbacks.
+
+That does not mean removing all code from the scene. The small counter and the engine-total line still help the reader understand what the visible number is doing. But I would let the scene explain their consequence briefly, without trying to teach every element needed to reproduce them.
+
+The division could be:
+
+**In the scene:** the number keeps going while you look elsewhere; its history began before your encounter with it.
+
+**In the tutorial:** you move an instruction between functions and discover that the continuing engine does not make every instruction repeat.
+
+Neither text needs to reproduce the other in full.
+
+There is also no need to move Alice, the fog or the carried *you* into the tutorial. They belong to the experience of that room. Conversely, the tutorial should not be shortened simply because its explanations would be too instructional in the scene.
+
+One small production correction: the study link currently starts with `http://../../../`. It should be a correctly resolved repository-relative link, without `http://`, or a published download address. The code should also appear in ordinary fenced blocks rather than retaining the extra outer backtick wrappers shown in the paste.
+
+**This is a useful companion because it gives the reader a small operation they can genuinely take over.** The scene can remain more spacious knowing that there is a separate place to learn how to make the counter continue—or stop at one.

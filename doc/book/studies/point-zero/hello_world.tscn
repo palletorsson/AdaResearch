@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://base.tscn" id="Base"]
+[ext_resource type="Script" path="res://hello_world.gd" id="CounterScript"]
+
+[node name="HelloWorld" instance=ExtResource("Base")]
+script = ExtResource("CounterScript")
+
+[node name="Welcome" parent="." index="0"]
+visible = false
+
+[node name="Greeting" type="Label3D" parent="."]
+position = Vector3(0, 1.62, 0)
+pixel_size = 0.003
+font_size = 64
+outline_size = 0
+text = ""
+
+[node name="Counter" type="Label3D" parent="."]
+position = Vector3(0, 0.98, 0)
+pixel_size = 0.003
+font_size = 72
+modulate = Color(0.63, 0.88, 0.69, 1)
+outline_size = 0
+text = ""
