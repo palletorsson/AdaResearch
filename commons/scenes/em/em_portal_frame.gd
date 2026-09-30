@@ -1,68 +1,95 @@
 extends RefCounted
-## A light, opaque architectural threshold. No extra lights, particles,
-## screen textures or per-frame animation: the space beyond remains visible.
+## Museum plaster and a pink curtain. The curtain is one inexpensive surface,
+## not a second camera rendering a hall that has not loaded yet.
 
-static func build(frame: Node3D, title: String, direction: int) -> void:
-	# Local +Z is the approach side. The room's forward direction is +Z.
+static func build(frame: Node3D, title: String, direction: int, wall_material: Material = null, floor_material: Material = null) -> void:
+	# Local +Z is the approach side. Navigation may turn this frame towards
+	# the clear approach to an authored t marker after it is built.
 	frame.rotation.y = PI if direction > 0 else 0.0
-	var accent := Color(0.38, 0.86, 0.75) if direction > 0 else Color(0.69, 0.57, 0.91)
-	var shell := _material(Color(0.10,0.13,0.15),0.65,0.45)
-	var enamel := _material(Color(0.65,0.64,0.57),0.25,0.42)
-	var bevel := _material(Color(0.36,0.36,0.32),0.65,0.35)
-	var recess := _material(Color(0.065,0.085,0.10),0.25,0.7)
-	var light := _material(accent,0,0.6,true)
-	var floor_mat := _material(Color(0.12,0.16,0.18),0.15,0.85)
-	var lettering := Color(0.96,0.93,0.82)
-	# The safe landing anchor is 5 cm above the measured floor; extend the
-	# jambs down to that floor while keeping the inlay just above its surface.
-	var outer: Array[Vector2] = [Vector2(-1.05,-0.05),Vector2(-1.05,2.50),Vector2(-0.83,2.72),Vector2(0.83,2.72),Vector2(1.05,2.50),Vector2(1.05,-0.05)]
-	var face: Array[Vector2] = [Vector2(-1.02,-0.05),Vector2(-1.02,2.48),Vector2(-0.81,2.68),Vector2(0.81,2.68),Vector2(1.02,2.48),Vector2(1.02,-0.05)]
-	var inset: Array[Vector2] = [Vector2(-0.90,-0.05),Vector2(-0.90,2.23),Vector2(-0.75,2.38),Vector2(0.75,2.38),Vector2(0.90,2.23),Vector2(0.90,-0.05)]
-	var opening: Array[Vector2] = [Vector2(-0.86,-0.05),Vector2(-0.86,2.21),Vector2(-0.73,2.34),Vector2(0.73,2.34),Vector2(0.86,2.21),Vector2(0.86,-0.05)]
-	var seam: Array[Vector2] = [Vector2(-0.878,-0.05),Vector2(-0.878,2.22),Vector2(-0.74,2.357),Vector2(0.74,2.357),Vector2(0.878,2.22),Vector2(0.878,-0.05)]
-	# Extruded sides and a back face give the frame weight from oblique angles.
-	var st := _surface()
-	_band(st,outer,opening,-0.14,-0.14)
-	_band(st,outer,outer,-0.14,0.10)
-	_band(st,opening,opening,-0.14,0.045)
-	_mesh(frame,st,shell,"FrameShell")
-	st = _surface()
-	_band(st,outer,face,0.10,0.17)
-	_band(st,inset,opening,0.17,0.045)
-	_mesh(frame,st,bevel,"ChamferedEdges")
-	st = _surface()
-	_band(st,face,inset,0.17,0.17)
-	_mesh(frame,st,enamel,"EnamelFace")
-	st = _surface()
-	_band(st,seam,opening,0.10,0.10)
-	_mesh(frame,st,light,"RecessedLight")
-	# Collision stays on the jambs and lintel. Nothing spans the walking floor.
+	var accent := Color(1.0, 0.025, 0.34)
+	var plaster := wall_material if wall_material != null else _material(Color(0.885,0.875,0.85),0,0.92)
+	# A plain rectangular plaster reveal, continuous with the hall palette.
+	# The safe anchor is 5 cm above the floor; the threshold stays flush.
 	var body := StaticBody3D.new()
 	body.name = "FrameCollision"
 	frame.add_child(body)
 	for x: float in [-0.955,0.955]:
-		_collider(body,Vector3(0.19,2.32,0.31),Vector3(x,1.11,0.015))
-	_collider(body,Vector3(1.82,0.34,0.31),Vector3(0,2.55,0.015))
-	for side: int in [-1,1]:
-		var shoulder := _collider(body,Vector3(0.20,0.31,0.31),Vector3(side*0.89,2.35,0.015))
-		shoulder.rotation.z = side*PI/4.0
-	# The name belongs to the architecture rather than floating above it.
-	_box(frame,Vector3(1.57,0.285,0.035),Vector3(0,2.535,0.19),recess,"DestinationPlaque")
+		var size := Vector3(0.19,2.39,0.30)
+		var centre := Vector3(x,1.145,0)
+		_box(frame,size,centre,plaster,"PlasterJamb")
+		_collider(body,size,centre)
+	var lintel_size := Vector3(2.1,0.36,0.30)
+	var lintel_centre := Vector3(0,2.52,0)
+	_box(frame,lintel_size,lintel_centre,plaster,"PlasterLintel")
+	_collider(body,lintel_size,lintel_centre)
+	# One opaque, animated curtain hides the unloaded world. No collider,
+	# second camera, lamps or particles are needed for the crossing.
+	var st := _surface()
+	_quad(st,Vector3(-0.86,-0.045,-0.10),Vector3(0.86,-0.045,-0.10),Vector3(0.86,2.34,-0.10),Vector3(-0.86,2.34,-0.10))
+	var veil := ShaderMaterial.new()
+	veil.shader = load("res://commons/scenes/em/em_portal_veil.gdshader")
+	veil.set_shader_parameter("accent", Vector3(accent.r,accent.g,accent.b))
+	_mesh(frame,st,veil,"PortalVeil")
 	var destination := title.replace("_"," ").strip_edges()
-	var pixel := minf(0.00225,1.44/maxf(1.0,destination.length()*32.0))
-	_text(frame,destination,Vector3(0,2.50,0.213),64,pixel,lettering)
-	_text(frame,"NEXT HALL" if direction > 0 else "PREVIOUS HALL",Vector3(0,2.625,0.213),40,0.0018,accent)
-	# A flush dark threshold with a thin border and three small walking arrows.
-	_box(frame,Vector3(1.72,0.012,1.15),Vector3(0,-0.04,0.33),floor_mat,"ThresholdInlay")
-	st = _surface()
-	for side: int in [-1,1]:
-		_floor_quad(st,side*0.78-0.01,side*0.78+0.01,-0.18,0.85)
-	_floor_quad(st,-0.78,0.78,0.83,0.85)
-	for z: float in [0.22,0.43,0.64]:
-		# Point towards the opening (local -Z), away from the approach side.
-		_quad(st,Vector3(-0.16,-0.032,z+0.08),Vector3(0,-0.032,z-0.015),Vector3(0,-0.032,z+0.02),Vector3(-0.16,-0.032,z+0.115))
-		_quad(st,Vector3(0,-0.032,z-0.015),Vector3(0.16,-0.032,z+0.08),Vector3(0.16,-0.032,z+0.115),Vector3(0,-0.032,z+0.02))
-	_mesh(frame,st,light,"WalkingInlay")
+	var pixel := minf(0.0019,1.65/maxf(1.0,destination.length()*32.0))
+	_text(frame,destination,Vector3(0,2.48,0.157),64,pixel,Color(0.13,0.12,0.14))
+	_text(frame,"NEXT HALL" if direction > 0 else "PREVIOUS HALL",Vector3(0,2.61,0.157),32,0.0017,Color(0.36,0.32,0.35))
+	build_landing(frame, accent, floor_material)
+
+static func build_landing(frame: Node3D, _accent: Color, floor_material: Material = null) -> void:
+	# Anchor is 5 cm above the measured floor. A 28 cm solid slab reaches
+	# under the doorway and 2.15 m into the room, flush with the existing deck.
+	# Local +Z is always the hall side, including the return doorway.
+	var size := Vector3(2.2,0.28,3.0)
+	var centre := Vector3(0,-0.19,0.65)
+	var body := StaticBody3D.new()
+	body.name = "LandingCollision"
+	frame.add_child(body)
+	_collider(body,size,centre)
+	var stone := floor_material if floor_material != null else _material(Color(0.30,0.29,0.28),0,0.88)
+	_box(frame,size,centre,stone,"LandingSlab")
+	# A thin cap avoids z fighting at the join with the existing gallery deck.
+	_box(frame,Vector3(2.18,0.008,2.98),Vector3(0,-0.046,0.65),stone,"LandingSurface")
+
+static func build_entry_room(frame: Node3D, title: String, wall_material: Material = null, floor_material: Material = null) -> void:
+	# Enclose the supported landing outside the boundary spawn. The pink
+	# return curtain stays behind; a roofed link opens into the first cell.
+	var body := StaticBody3D.new()
+	body.name = "EntryRoomCollision"
+	frame.add_child(body)
+	var plaster := wall_material if wall_material != null else _material(Color(0.885,0.875,0.85),0,0.92)
+	var stone := floor_material if floor_material != null else _material(Color(0.30,0.29,0.28),0,0.88)
+	var pieces: Array = [
+		[Vector3(0.12,2.75,3.06),Vector3(-1.16,1.325,0.65),"EntryLeftWall"],
+		[Vector3(0.12,2.75,3.06),Vector3(1.16,1.325,0.65),"EntryRightWall"],
+		[Vector3(2.44,2.75,0.12),Vector3(0,1.325,-0.82),"EntryBackWall"],
+		[Vector3(2.44,0.12,3.12),Vector3(0,2.76,0.65),"EntryCeiling"],
+		# Full-height front wall around a 1.12 m clear doorway.
+		[Vector3(0.60,2.75,0.12),Vector3(-0.86,1.325,2.12),"EntryFrontLeft"],
+		[Vector3(0.60,2.75,0.12),Vector3(0.86,1.325,2.12),"EntryFrontRight"],
+		[Vector3(1.12,0.40,0.12),Vector3(0,2.50,2.12),"EntryDoorLintel"],
+		[Vector3(0.12,2.75,1.48),Vector3(-0.62,1.325,2.86),"EntryLinkLeft"],
+		[Vector3(0.12,2.75,1.48),Vector3(0.62,1.325,2.86),"EntryLinkRight"],
+		[Vector3(1.36,0.12,1.48),Vector3(0,2.76,2.86),"EntryLinkCeiling"],
+	]
+	for piece: Array in pieces:
+		_collider(body,piece[0],piece[1])
+		_box(frame,piece[0],piece[1],plaster,piece[2])
+	var link_size := Vector3(1.12,0.28,1.55)
+	var link_centre := Vector3(0,-0.19,2.775)
+	_collider(body,link_size,link_centre)
+	_box(frame,link_size,link_centre,stone,"EntryLink")
+	# A diffuse ceiling fitting adds no dynamic light or shadow pass.
+	_box(frame,Vector3(1.10,0.012,1.0),Vector3(0,2.694,0.70),
+		_material(Color(0.96,0.88,0.83),0,0.9,true),"EntryCeilingPanel")
+	var sign := Node3D.new()
+	sign.name = "EntryHallLabel"
+	frame.add_child(sign)
+	sign.position = Vector3(0,2.49,2.052)
+	sign.rotation.y = PI
+	var destination := title.replace("_"," ").strip_edges()
+	var pixel := minf(0.0015,1.0/maxf(1.0,destination.length()*22.0))
+	_text(sign,destination,Vector3.ZERO,44,pixel,Color(0.16,0.14,0.16))
 
 static func _material(color: Color, metallic: float, roughness: float, luminous := false) -> StandardMaterial3D:
 	var mat := StandardMaterial3D.new()
@@ -85,13 +112,6 @@ static func _surface() -> SurfaceTool:
 static func _quad(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, d: Vector3) -> void:
 	for v: Vector3 in [a,b,c,a,c,d]:
 		st.add_vertex(v)
-
-static func _band(st: SurfaceTool, a: Array[Vector2], b: Array[Vector2], za: float, zb: float) -> void:
-	for i in range(a.size()-1):
-		_quad(st,Vector3(a[i].x,a[i].y,za),Vector3(a[i+1].x,a[i+1].y,za),Vector3(b[i+1].x,b[i+1].y,zb),Vector3(b[i].x,b[i].y,zb))
-
-static func _floor_quad(st: SurfaceTool, x0: float, x1: float, z0: float, z1: float) -> void:
-	_quad(st,Vector3(x0,-0.032,z0),Vector3(x1,-0.032,z0),Vector3(x1,-0.032,z1),Vector3(x0,-0.032,z1))
 
 static func _mesh(parent: Node3D, st: SurfaceTool, material: Material, mesh_name: String) -> MeshInstance3D:
 	st.generate_normals()

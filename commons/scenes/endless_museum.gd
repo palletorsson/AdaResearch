@@ -1107,7 +1107,7 @@ var _vr_passage_frame: int = -1
 ## its exhibits.
 var _vr_current_node: Node3D = null
 var _vr_shell_building: bool = false
-var _portal_mode: bool = false       # --em-portals: opt-in, one resident VR hall
+var _portal_mode: bool = true        # one resident hall; --em-corridors restores the continuous authoring view
 var _portal_stream: Node3D = null
 var _vr_last_eye_z: float = 0.0
 # ── THE WAKE-UP RAMP (2026-08-20, Palle: "loading a grid map like Point_One
@@ -1311,6 +1311,11 @@ func _ready() -> void:
 		_boot_entry = int(bce_n.get("museum_entries"))
 	_boot_ms["entry"] = _boot_entry
 	_parse_args()
+	# Survey/bake tools still need the continuous museum; play uses portals.
+	if _shot_path != "" or _bake_mode or _studio or _autopilot > 0 or _test_collision:
+		_portal_mode = false
+	if _portal_mode:
+		_cartridge_read_enabled = false  # older cartridges include corridor geometry
 	_vr = _is_vr()
 	# NIGHT, resolved once and before anything reads it. _L falls back to
 	# em_layout.json, which is where the switch lives — this is a property of the
@@ -1426,6 +1431,11 @@ func _boot_museum() -> void:
 	if _vr and not _headless:
 		await get_tree().process_frame
 	_setup_world()
+	if _portal_mode and not _dollhouse:
+		_portal_stream = load("res://commons/scenes/em/em_portal_stream.gd").new()
+		add_child(_portal_stream)
+		_portal_stream.call("configure", self, true)
+		await _portal_stream.call("prepare_initial_arrival")
 	_boot_ms["world_ready"] = Time.get_ticks_msec() - _boot_t0
 	# THE RESCUE POINT (2026-08-18). The StuckDetector autoload rays from the
 	# rig it found first (the staging rig, parked in a wall of the museum), calls
@@ -1451,7 +1461,7 @@ func _boot_museum() -> void:
 		else:
 			_build_segment()
 	_boot_ms["segment0_built"] = Time.get_ticks_msec() - _boot_t0
-	if _shot_path == "" and not _studio and not _vr:
+	if _shot_path == "" and not _studio and not _vr and not _portal_mode:
 		_lazy_pending = 1
 	# VR starts with one complete hall. As soon as it is ready, the streaming
 	# tick grows lightweight neighbour shells around it; only this first/current
@@ -1460,16 +1470,21 @@ func _boot_museum() -> void:
 		VR_ONE_HALL = true
 		MIN_SEGMENTS = 3
 		_lazy_pending = 0
+	if _portal_mode:
+		MIN_SEGMENTS = 1
+		_lazy_pending = 0
 	_museum_core_ready = true
-	# the headset is thrown in like the walker — deferred because the rig is
-	# staging's, not ours, and may not exist for another frame or thirty
-	if _vr:
-		_vr_drop_in()
-	else:
-		_walker_drop_in()
+	# Portal navigation owns arrival after collision is ready. Point Zero's
+	# authored drop and any saved viewpoint are applied at that same handoff.
+	if _portal_stream == null:
+		if _vr:
+			_vr_drop_in()
+		else:
+			_walker_drop_in()
 	if _edit_mode:
 		_arm_editor()
-	_follow_resume()
+	if _portal_stream == null:
+		_follow_resume()
 	# the number the whole set-deal pass exists to move: v1 stamped at most 8
 	# objects per segment for every one of the twenty-six buildings.
 	var segs_built: int = int(_deal_stats.get("segments", 0))
@@ -1796,6 +1811,8 @@ func _parse_args() -> void:
 			_force_vr = true
 		elif a == "--em-portals":
 			_portal_mode = true
+		elif a == "--em-corridors":
+			_portal_mode = false
 		elif a == "--em-cartridge-write":
 			_cartridge_write = true
 		elif a == "--em-cartridge":
@@ -2841,6 +2858,20 @@ func _is_vr() -> bool:
 ## cached one stops being current, and printed once when it changes.
 var _vr_eye_name: String = ""
 func _vr_eye() -> Camera3D:
+	# Staging keeps its loading rig current until scene_loaded. The museum's
+	# own sibling rig already exists; arrivals must never move the loading rig.
+	var ancestor := get_parent()
+	while ancestor != null and ancestor != get_tree().root:
+		var owned := ancestor.get_node_or_null("XROrigin3D") as XROrigin3D
+		if owned != null:
+			if is_instance_valid(_vr_cam) and owned.is_ancestor_of(_vr_cam):
+				return _vr_cam
+			var owned_cameras: Array = []
+			_collect_of_type(owned, "XRCamera3D", owned_cameras)
+			if not owned_cameras.is_empty():
+				_vr_cam = owned_cameras[0]
+				return _vr_cam
+		ancestor = ancestor.get_parent()
 	if _vr_cam != null and is_instance_valid(_vr_cam):
 		var o: Node = _vr_cam.get_parent()
 		while o != null and not (o is XROrigin3D):
@@ -9604,12 +9635,22 @@ func _load_plan() -> void:
 	# chapters were ruled into carries four rows, and the dealer picks by the
 	# chapter it is about to deal instead of receiving whoever won the building
 	# first. v1 files simply have no `plans` array and resolve as before.
+	var deferred_by_sequence: Dictionary = {}
 	var rows: Variant = (parsed as Dictionary).get("plans", [])
 	if rows is Array:
 		for r in (rows as Array):
 			if r is Dictionary:
 				var mk := String((r as Dictionary).get("museum", ""))
 				var sq := String((r as Dictionary).get("sequence", ""))
+				# Keep deferred recipes for direct visits, but omit them from portal journeys.
+				if _portal_mode and sq != "":
+					if not deferred_by_sequence.has(sq):
+						var path := "res://commons/maps/sequences/%s.json" % sq
+						var seq_data: Variant = JSON.parse_string(FileAccess.get_file_as_string(path)) if FileAccess.file_exists(path) else {}
+						var seq: Dictionary = seq_data.get("sequences", {}).get(sq, {}) if seq_data is Dictionary else {}
+						deferred_by_sequence[sq] = seq.get("deferred_maps", [])
+					if String(r.get("map", "")) != start_map and String(r.get("map", "")) in deferred_by_sequence[sq]:
+						continue
 				if mk != "" and sq != "":
 					if (r as Dictionary).has("pearl"):
 						var pk := "%s|%s" % [mk, sq]
@@ -10996,7 +11037,12 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			if gs.has_signal("build_finished"):
 				gs.connect("build_finished", _sim_grid_ready.bind(gs, zbase, true), CONNECT_ONE_SHOT)
 			if is_inside_tree():
-				get_tree().create_timer(2.5).timeout.connect(_sim_grid_ready.bind(gs, zbase))
+				# A portal may unload this hall before the fallback fires.
+				# Do not pass a freed grid to the typed callback.
+				var grid_ref: WeakRef = weakref(gs)
+				get_tree().create_timer(2.5).timeout.connect(func() -> void:
+					var live_grid := grid_ref.get_ref() as Node3D
+					if is_instance_valid(live_grid): _sim_grid_ready(live_grid, zbase))
 			print("[em-sim-grid] %s: the REAL grid builds the simulation (bare_world, player kept)" % map_name)
 			return {"pearl": String(entry.get("pearl", "")), "placed": 0, "packed": true,
 				"offered": 0, "interior": 0, "grid_embed": true}
@@ -15597,7 +15643,8 @@ func _process(_delta: float) -> void:
 	# create_timer both reach for one.
 	if not is_inside_tree():
 		return
-	if _portal_stream != null and bool(_portal_stream.get("busy")):
+	# Initial loading still needs the ordinary queue and readiness loop.
+	if _portal_stream != null and bool(_portal_stream.get("busy")) and String(_portal_stream.get("phase")) != "boot":
 		if String(_portal_stream.get("phase")) == "artifacts":
 			_drain_cartridge_nodes()
 			_drain_stamps()
@@ -15774,7 +15821,7 @@ func _process(_delta: float) -> void:
 	elif _cam == null:
 		return
 	var ez: float = _eye_pos().z
-	if _vr and _portal_mode and not _bake_mode:
+	if _portal_mode and not _bake_mode:
 		if _museum_ready and _portal_stream == null:
 			_portal_stream = load("res://commons/scenes/em/em_portal_stream.gd").new()
 			add_child(_portal_stream)
@@ -16577,6 +16624,10 @@ func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	if _player == null or _shot_path != "":
+		return
+	if _portal_stream != null and bool(_portal_stream.get("busy")):
+		_player.velocity = Vector3.ZERO
+		_vy = 0.0
 		return
 	if _test_collision:
 		_run_collision_test()
@@ -22553,6 +22604,9 @@ func _derive_map_row(map_name: String) -> Dictionary:
 ## there. The first walk after a change has no memory and falls back to the old
 ## chicane; the walk after it is seamed. That is the same shape as the bake.
 func _authored_passages(tile_in: Array, decl: Dictionary = {}, next_first: Array = []) -> Array:
+	if _portal_mode:
+		next_first = []  # no neighbouring architecture or service corridor
+		decl = {"kind": "none", "width": decl.get("width", 3)}
 	var tile: Array = []
 	for row in tile_in:
 		tile.append((row as Array).duplicate())
@@ -23294,6 +23348,7 @@ func _walker_drop_in() -> void:
 
 
 func _vr_drop_in() -> void:
+	# Legacy continuous-museum entry. Portal mode uses em_portal_stream instead.
 	# EVERY LAUNCH, not only a lobby with a drop_hole (2026-09-06). The gate used
 	# to be the lobby's, because the only thing this did was put the visitor on
 	# the roof — so a sequence card opening at `color` placed no headset at all

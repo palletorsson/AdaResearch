@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://em_staged_menu"]
+[gd_scene load_steps=4 format=3 uid="uid://em_staged_menu"]
 
 ; THE MUSEUM, REACHED FROM THE SHIPPED GAME LOOP.
 ;
@@ -10,15 +10,19 @@
 ; XR Tools scene_base), so the staging system, loading screen, and fade all
 ; treat the museum like any other destination.
 ;
-; The origin override spawns the player at the desktop walker's spawn cell
-; (7.5, 0, 1.5), turned 180° to face into the museum along +z.
+; The origin override supplies the initial forward orientation. The portal
+; coordinator places the actual XR body after the landing floor is ready;
+; the scene base below prevents staging from recentering that body twice.
 ;
 ; Reached from: MainMenu3D sequence picker, the "Endless Museum" card.
 
 [ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_base"]
 [ext_resource type="Script" path="res://commons/scenes/em/em_staged_museum.gd" id="2_museum"]
 
+[ext_resource type="Script" path="res://commons/scenes/em/em_portal_scene_base.gd" id="3_portal_base"]
+
 [node name="Base" instance=ExtResource("1_base")]
+script = ExtResource("3_portal_base")
 
 [node name="XROrigin3D" parent="." index="2"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.5, 0.1, 1.5)

@@ -60,6 +60,11 @@ func _ready():
 	_find_player_node()
 
 func _physics_process(delta):
+	# Portal halls own arrival/recovery. Their loading cell and wide halls are
+	# outside a grid map's origin-centred bounds; resetting here teleports the
+	# visitor back to an obsolete spawn while the destination is still loading.
+	if get_tree().get_first_node_in_group("museum_portal_navigation") != null:
+		return
 	if not active:
 		return
 
