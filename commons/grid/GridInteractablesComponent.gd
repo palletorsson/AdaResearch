@@ -16,6 +16,14 @@ static var _artifact_registry_cache_by_key: Dictionary = {}
 const CONFIG_PARAM_NAMES = [
 	"radial", "rings", "inner", "outer", "config", "height", "radius",
 	"width", "depth", "segments", "sides", "rows", "cols", "count",
+	# DNA axes whose values are numbers (2026-10-01). Unlisted, `#key:8` is read as tutorial
+	# shorthand: the artifact is handed `true` and turned 8 degrees, while the museum keeps the
+	# value. pyramid#base_sides:8 built a tetrahedron here and an octagon there, and
+	# ca_rule_explorer#rule:90 was turned to 90 over its own 180. Gate: probe_numeric_axis_keys.gd.
+	"base_sides", "analogy_type", "axis_index", "bay_span", "capacity", "channel", "coherence",
+	"community_seed", "defaults_applied", "force_count", "max_bands", "metaball_count", "num_portals",
+	"odds", "perspective_blend", "points", "poor_samples", "preview_hours", "removed", "reveal",
+	"ring_segments", "rock_seed", "rule", "start_depth", "step_count", "steps", "truncation", "waist_radius",
 	"size", "scale", "speed", "delay", "duration", "intensity",
 	"number_of_rocks", "container_height", "spawn_area_x", "spawn_area_y", "spawn_area_z",
 	"rock_size_min", "rock_size_max", "deformation_min", "deformation_max",
