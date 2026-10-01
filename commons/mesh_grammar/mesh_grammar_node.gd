@@ -6,6 +6,7 @@ extends Node3D
 class_name MeshGrammarNode
 
 const GridMaterialFactory = preload("res://commons/primitives/shared/grid_material_factory.gd")
+const MeshGrammarPresets = preload("res://commons/mesh_grammar/mesh_grammar_presets.gd")
 
 @export_group("Seed")
 @export_enum("cube", "icosahedron", "sphere", "disk", "flower_disk", "custom") var seed_type: String = "icosahedron"
@@ -15,6 +16,18 @@ const GridMaterialFactory = preload("res://commons/primitives/shared/grid_materi
 @export var generations: int = 2
 @export var max_faces: int = 10000
 @export var auto_generate: bool = true
+
+@export_group("Preset")
+## Names one recipe in MeshGrammarPresets (the id is the registry name without its
+## `mesh_grammar_` prefix: "extruded_spire", "lsystem_tree", ...). EMPTY — the
+## default, and what every caller that builds its own rules leaves it at — changes
+## nothing: no table is read and this node behaves as it always did.
+## Non-empty: the recipe sets seed, seed scale, colour and generations and adds its
+## rules before the first generate(). One scene per name lives in presets/, so a
+## registry `scene` line is all a lane needs to read — the grid, the museum and the
+## capture bench all read that line the same way, and none of them agrees with the
+## others about `default_params`.
+@export var preset: String = ""
 
 @export_group("Animation")
 @export var animate: bool = false
@@ -41,6 +54,11 @@ var grammar: MeshGrammar = null
 # Internal
 var _mesh_instance: MeshInstance3D = null
 var _material: Material = null
+## The preset whose rules are in the grammar right now. Guards a second arrival of
+## the same name (the grid hands a config over twice) from adding every rule twice.
+var _applied_preset: String = ""
+## A name no recipe carries, already warned about.
+var _refused_preset: String = ""
 
 # ---------------------------------------------------------------------------
 # Lifecycle
@@ -48,6 +66,7 @@ var _material: Material = null
 
 func _ready() -> void:
 	_ensure_grammar()
+	_apply_preset()          # no-op while `preset` is empty
 	_setup_material()
 	_mesh_instance = MeshInstance3D.new()
 	_mesh_instance.name = "GrammarMesh"
@@ -98,8 +117,29 @@ func clear_rules() -> void:
 	_ensure_grammar()
 	grammar.clear_rules()
 
+## Take everything a recipe dictionary names: seed, seed scale, colour, generations,
+## and its rules, in order. The ONE place a {"seed","color","rules","generations"}
+## dictionary becomes a node — the demo gallery calls it for each of its twenty
+## specimens and `preset` calls it for one. Call before the node enters the tree
+## (or call generate() afterwards); it does not clear rules already present.
+func apply_spec(spec: Dictionary) -> void:
+	seed_type = spec.get("seed", "icosahedron")
+	seed_scale = float(spec.get("seed_scale", MeshGrammarPresets.SEED_SCALE))
+	base_color = spec.get("color", Color(0.6, 0.7, 0.8))
+	generations = spec.get("generations", 1)
+	for rule in MeshGrammarPresets.rules_for(spec):
+		add_rule(rule)
+
 ## Configure from a dictionary (for map/grid system integration).
 func configure(config: Dictionary) -> void:
+	# PRESET FIRST, so the keys below can still override what the recipe set
+	# (#preset:spike_ball#color:... keeps the colour the token asked for).
+	# Absent key: this block does not run and nothing below it has changed.
+	if config.has("preset"):
+		_ensure_grammar()
+		preset = str(config["preset"])
+		_apply_preset()
+		_setup_material()
 	if config.has("seed"):
 		seed_type = str(config["seed"])
 	if config.has("seed_scale"):
@@ -134,6 +174,12 @@ func configure(config: Dictionary) -> void:
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	configure(config_data)
+	# The endless museum hands config over BEFORE the node enters the tree (the grid
+	# defers it until after). Out of the tree there is no grammar yet and nothing to
+	# show: generate() here used to die on a null grammar, and with a preset it would
+	# build the whole body twice. _ready() builds once, with the values just set.
+	if not is_node_ready():
+		return
 	generate()
 
 # ---------------------------------------------------------------------------
@@ -144,6 +190,24 @@ func _ensure_grammar() -> void:
 	if grammar == null:
 		grammar = MeshGrammar.new()
 		grammar.max_faces = max_faces
+
+## Load the recipe `preset` names into this node. Empty name: nothing happens.
+## A name no recipe carries is said out loud and leaves the node as it was — it
+## does NOT fall back to some other recipe, so a typo shows as the bare seed plus
+## a warning rather than as a confident wrong body.
+func _apply_preset() -> void:
+	var want: String = preset.strip_edges().to_lower()
+	if want == "" or want == _applied_preset or want == _refused_preset:
+		return
+	var spec: Dictionary = MeshGrammarPresets.spec(want)
+	if spec.is_empty():
+		_refused_preset = want          # say it once, not on every handoff
+		push_warning("[MeshGrammarNode] no preset named '%s' — building the bare seed. Known: %s" % [
+			preset, ", ".join(MeshGrammarPresets.ids())])
+		return
+	_applied_preset = want
+	clear_rules()            # a preset replaces the rule list, it does not append to it
+	apply_spec(spec)
 
 func _create_seed() -> void:
 	var mesh_data: MeshData

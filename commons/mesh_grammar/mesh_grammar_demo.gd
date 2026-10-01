@@ -4,6 +4,7 @@
 extends Node3D
 
 const GridMaterialFactory = preload("res://commons/primitives/shared/grid_material_factory.gd")
+const MeshGrammarPresets = preload("res://commons/mesh_grammar/mesh_grammar_presets.gd")
 
 @export var spacing: float = 1.2
 @export var object_height: float = 0.8
@@ -45,7 +46,7 @@ const GridMaterialFactory = preload("res://commons/primitives/shared/grid_materi
 const TAXONOMIES: PackedStringArray = ["table", "ladder", "stack", "heap"]
 
 # AXIS 2 — HOW MUCH OF THE GRAMMAR IS PUT UP. Derived, not invented: the twenty
-# recipes below are already grouped by the source's own row headers, four at a
+# recipes (in MeshGrammarPresets) are grouped by the source's own row headers, four at a
 # time, and each header names a CLASS OF OPERATION — topology, organic, compound,
 # decoration, bridge. That grouping has always been load-bearing (it is why the
 # gallery is four columns wide) and has never been reachable from a map.
@@ -221,245 +222,11 @@ func _create_gallery() -> void:
 	_gallery_root.name = "Gallery"
 	add_child(_gallery_root)
 
-	var all_specs: Array[Dictionary] = []
-
-	# --- Row 1: Basic operations ---
-
-	# 1. Plain icosahedron (seed reference)
-	all_specs.append({
-		"name": "Seed Icosahedron",
-		"seed": "icosahedron",
-		"color": Color(0.5, 0.6, 0.7),
-		"rules": [],
-		"generations": 0
-	})
-
-	# 2. Extruded spire
-	all_specs.append({
-		"name": "Extruded Spire",
-		"seed": "icosahedron",
-		"color": Color(0.9, 0.5, 0.2),
-		"rules": [
-			{"op": "extrude", "selector": "up", "params": {"distance": 0.3, "scale": 0.7}},
-			{"op": "extrude", "selector": "tag:extruded_top", "params": {"distance": 0.25, "scale": 0.6}},
-		],
-		"generations": 1
-	})
-
-	# 3. Inset pattern
-	all_specs.append({
-		"name": "Inset Pattern",
-		"seed": "icosahedron",
-		"color": Color(0.3, 0.8, 0.5),
-		"rules": [
-			{"op": "inset", "selector": "all", "params": {"amount": 0.35}},
-		],
-		"generations": 1
-	})
-
-	# 4. Subdivided sphere
-	all_specs.append({
-		"name": "Subdivided",
-		"seed": "icosahedron",
-		"color": Color(0.4, 0.5, 0.9),
-		"rules": [
-			{"op": "split", "selector": "all", "params": {"pattern": "midpoint"}},
-		],
-		"generations": 1
-	})
-
-	# --- Row 2: Organic forms ---
-
-	# 5. Nodule sphere (ceramic photo 1)
-	all_specs.append({
-		"name": "Nodule Sphere",
-		"seed": "sphere",
-		"color": Color(0.6, 0.65, 0.8),
-		"rules": [
-			{"op": "bulge", "selector": "random:0.12", "params": {"height": 0.15, "ring_depth": 2, "smoothing": 0.5}},
-		],
-		"generations": 1
-	})
-
-	# 6. Coral fingers (ceramic photos 2-3)
-	all_specs.append({
-		"name": "Coral Fingers",
-		"seed": "sphere",
-		"color": Color(0.55, 0.65, 0.85),
-		"rules": [
-			{"op": "tube_branch", "selector": "up_random", "params": {"length": 0.3, "curve_amount": 0.05, "segments": 5, "rings": 3}},
-		],
-		"generations": 1
-	})
-
-	# 7. Crumpled vessel (ceramic photo 4)
-	all_specs.append({
-		"name": "Crumpled Form",
-		"seed": "sphere",
-		"color": Color(0.9, 0.85, 0.7),
-		"rules": [
-			{"op": "noise", "selector": "up", "params": {"amplitude": 0.15, "frequency": 3.0, "direction": "normal"}},
-		],
-		"generations": 1
-	})
-
-	# 8. Budding sphere with openings (ceramic photo 5)
-	all_specs.append({
-		"name": "Budding Sphere",
-		"seed": "sphere",
-		"color": Color(0.85, 0.8, 0.75),
-		"rules": [
-			{"op": "extrude", "selector": "random:0.1", "params": {"distance": 0.2, "scale": 0.8}},
-			{"op": "delete", "selector": "tag:extruded_top", "params": {}},
-		],
-		"generations": 1
-	})
-
-	# --- Row 3: Compound forms ---
-
-	# 9. Multi-generation coral
-	all_specs.append({
-		"name": "Branching Coral",
-		"seed": "icosahedron",
-		"color": Color(0.9, 0.4, 0.5),
-		"rules": [
-			{"op": "tube_branch", "selector": "up_random", "params": {"length": 0.2, "curve_amount": 0.08, "segments": 5, "rings": 3, "tip_tag": "branch_tip"}},
-			{"op": "tube_branch", "selector": "tag:branch_tip", "params": {"length": 0.15, "curve_amount": 0.1, "segments": 4, "rings": 2, "tip_tag": "branch_tip"}},
-		],
-		"generations": 2
-	})
-
-	# 10. Inset + extrude (architectural)
-	all_specs.append({
-		"name": "Inset Towers",
-		"seed": "cube",
-		"color": Color(0.8, 0.6, 0.3),
-		"rules": [
-			{"op": "inset", "selector": "up", "params": {"amount": 0.3}},
-			{"op": "extrude", "selector": "tag:inset", "params": {"distance": 0.4, "scale": 0.7}},
-		],
-		"generations": 1
-	})
-
-	# 11. Split + bulge (organic detail)
-	all_specs.append({
-		"name": "Detailed Bulge",
-		"seed": "icosahedron",
-		"color": Color(0.7, 0.5, 0.8),
-		"rules": [
-			{"op": "split", "selector": "all", "params": {"pattern": "midpoint"}},
-			{"op": "bulge", "selector": "random:0.08", "params": {"height": 0.1, "ring_depth": 1, "smoothing": 0.6}},
-		],
-		"generations": 1
-	})
-
-	# 12. Full noise crumple
-	all_specs.append({
-		"name": "Noise Sculpture",
-		"seed": "sphere",
-		"color": Color(0.3, 0.7, 0.6),
-		"rules": [
-			{"op": "noise", "selector": "all", "params": {"amplitude": 0.2, "frequency": 2.0, "direction": "radial", "noise_type": "cellular"}},
-		],
-		"generations": 1
-	})
-
-	# --- Row 4: Decoration operations ---
-
-	# 13. Petal flower — petals radiating from upward faces
-	all_specs.append({
-		"name": "Petal Flower",
-		"seed": "icosahedron",
-		"color": Color(0.95, 0.5, 0.6),
-		"rules": [
-			{"op": "petal_splay", "selector": "up", "params": {"count": 6, "length": 0.25, "width": 0.12, "curl": 0.4, "tilt": 0.4, "segments": 5}},
-		],
-		"generations": 1
-	})
-
-	# 14. Scale armor — overlapping pointed scales
-	all_specs.append({
-		"name": "Scale Armor",
-		"seed": "sphere",
-		"color": Color(0.4, 0.7, 0.45),
-		"rules": [
-			{"op": "split", "selector": "all", "params": {"pattern": "midpoint"}},
-			{"op": "scale_tile", "selector": "all", "params": {"scale_length": 0.08, "scale_width": 0.06, "tilt_degrees": 35.0, "pointed": true}},
-		],
-		"generations": 1
-	})
-
-	# 15. Riveted sphere — edge beads along boundary
-	all_specs.append({
-		"name": "Riveted Sphere",
-		"seed": "sphere",
-		"color": Color(0.8, 0.65, 0.4),
-		"rules": [
-			{"op": "extrude", "selector": "random:0.15", "params": {"distance": 0.15, "scale": 0.75}},
-			{"op": "delete", "selector": "tag:extruded_top", "params": {}},
-			{"op": "edge_decorate", "selector": "all", "params": {"shape": "sphere", "size": 0.02, "spacing": 0.06, "boundary_only": true}},
-		],
-		"generations": 1
-	})
-
-	# 16. Scatter nodules — scattered sub-meshes across surface
-	all_specs.append({
-		"name": "Barnacle Sphere",
-		"seed": "sphere",
-		"color": Color(0.6, 0.75, 0.8),
-		"rules": [
-			{"op": "scatter", "selector": "all", "params": {"shape": "sphere", "density": 0.3, "min_size": 0.015, "max_size": 0.04}},
-		],
-		"generations": 1
-	})
-
-	# --- Row 5: Bridge operations + compound forms ---
-
-	# 17. L-system tree — fractal branching from upward faces
-	all_specs.append({
-		"name": "L-System Tree",
-		"seed": "icosahedron",
-		"color": Color(0.45, 0.7, 0.35),
-		"rules": [
-			{"op": "lsystem_branch", "selector": "up", "params": {"preset": "bush", "lsystem_generations": 2, "step_length": 0.1, "start_radius": 0.02, "angle_degrees": 25.0, "max_branches": 30}},
-		],
-		"generations": 1
-	})
-
-	# 18. CA growth — cellular automata tags faces, then extrude alive
-	all_specs.append({
-		"name": "CA Growth",
-		"seed": "sphere",
-		"color": Color(0.7, 0.4, 0.8),
-		"rules": [
-			{"op": "cellular", "selector": "all", "params": {"rule": "coral", "ca_steps": 4, "initial_density": 0.25, "seed_value": 42}},
-			{"op": "extrude", "selector": "tag:ca_alive", "params": {"distance": 0.1, "scale": 0.85}},
-		],
-		"generations": 1
-	})
-
-	# 19. Spike scatter — spiky sub-meshes across surface
-	all_specs.append({
-		"name": "Spike Ball",
-		"seed": "icosahedron",
-		"color": Color(0.85, 0.35, 0.3),
-		"rules": [
-			{"op": "scatter", "selector": "all", "params": {"shape": "spike", "density": 0.6, "min_size": 0.06, "max_size": 0.12, "align_to_normal": true}},
-		],
-		"generations": 1
-	})
-
-	# 20. Petal rosette on bulge — compound decoration
-	all_specs.append({
-		"name": "Blooming Bulge",
-		"seed": "sphere",
-		"color": Color(0.9, 0.75, 0.5),
-		"rules": [
-			{"op": "bulge", "selector": "random:0.08", "params": {"height": 0.12, "ring_depth": 1, "smoothing": 0.5}},
-			{"op": "petal_splay", "selector": "tag:bulge_tip", "params": {"count": 5, "length": 0.15, "width": 0.08, "curl": 0.5, "tilt": 0.5, "segments": 4}},
-		],
-		"generations": 1
-	})
+	# The twenty recipes live in MeshGrammarPresets now — one table, read here and by
+	# MeshGrammarNode's `preset` export (which is how a placed mesh_grammar_<name>
+	# builds the same body this gallery shows). Same order, same names, same colours;
+	# the row headers that the `chapter` axis reads off the index are kept there.
+	var all_specs: Array[Dictionary] = MeshGrammarPresets.specs()
 
 	# CHAPTER — which of the source's five row-headers is on the table. `all` keeps
 	# every member in source order, so the loop below sees exactly the array it always
@@ -505,7 +272,7 @@ func _create_gallery() -> void:
 # ---------------------------------------------------------------------------
 
 ## The class a specimen belongs to, read off its position in the source array. The
-## row headers above group these four at a time and always have; this reads that
+## row headers in MeshGrammarPresets group these four at a time and always have; this reads that
 ## grouping rather than restating it, so a recipe added under a header joins its
 ## chapter without a second list to keep in step.
 func _chapter_of(index: int) -> String:
@@ -567,90 +334,10 @@ func _index_hash(n: int) -> float:
 # ---------------------------------------------------------------------------
 func _build_specimen(spec: Dictionary) -> MeshGrammarNode:
 	var node := MeshGrammarNode.new()
-	node.seed_type = spec.get("seed", "icosahedron")
-	node.seed_scale = 0.35
-	node.base_color = spec.get("color", Color(0.6, 0.7, 0.8))
-	node.generations = spec.get("generations", 1)
+	# Seed, seed scale, colour, generations and rules, all before the node enters
+	# the tree. apply_spec() is the same call a `preset` scene makes, and the rule
+	# builder it uses (MeshGrammarPresets.create_rule / parse_selector) is the one
+	# that used to live at the bottom of this file.
+	node.apply_spec(spec)
 	node.auto_generate = true  # Generate in _ready() after entering tree
-
-	# Parse and add rules before adding to tree
-	var rule_defs: Array = spec.get("rules", [])
-	for rdef in rule_defs:
-		var rule := _create_rule(rdef)
-		if rule:
-			node.add_rule(rule)
-
 	return node
-
-func _create_rule(rdef: Dictionary) -> MeshRule:
-	var op: String = rdef.get("op", "")
-	var selector_str: String = rdef.get("selector", "all")
-	var rule_params: Dictionary = rdef.get("params", {})
-
-	var sel := _parse_selector(selector_str)
-
-	match op:
-		# --- Topology ops ---
-		"extrude":
-			return ExtrudeFaceOp.new(sel, rule_params)
-		"bulge":
-			return BulgeOp.new(sel, rule_params)
-		"tube_branch":
-			return TubeBranchOp.new(sel, rule_params)
-		"inset":
-			return InsetFaceOp.new(sel, rule_params)
-		"split":
-			return SplitFaceOp.new(sel, rule_params)
-		"delete":
-			return DeleteFaceOp.new(sel, rule_params)
-		"noise":
-			return NoiseDisplaceOp.new(sel, rule_params)
-		"scale":
-			return ScaleFaceOp.new(sel, rule_params)
-		"rotate":
-			return RotateFaceOp.new(sel, rule_params)
-		"scallop":
-			return ScallopEdgeOp.new(sel, rule_params)
-		# --- Decoration ops ---
-		"petal_splay":
-			return PetalSplayOp.new(sel, rule_params)
-		"scale_tile":
-			return ScaleTileOp.new(sel, rule_params)
-		"edge_decorate":
-			return EdgeDecorateOp.new(sel, rule_params)
-		"scatter":
-			return SurfaceScatterOp.new(sel, rule_params)
-		# --- Bridge ops ---
-		"lsystem_branch":
-			return LSystemBranchOp.new(sel, rule_params)
-		"cellular":
-			return CellularSurfaceOp.new(sel, rule_params)
-	return null
-
-func _parse_selector(s: String) -> MeshSelector:
-	match s:
-		"all":
-			return MeshSelector.all_faces()
-		"up":
-			return MeshSelector.by_normal_direction(Vector3.UP, 60.0)
-		"down":
-			return MeshSelector.by_normal_direction(Vector3.DOWN, 60.0)
-		"up_random":
-			return MeshSelector.by_normal_direction(Vector3.UP, 60.0).and_also(
-				MeshSelector.by_random(0.25))
-		"boundary":
-			return MeshSelector.by_boundary()
-		_:
-			# Parse "random:0.3", "tag:something", "depth:0-3"
-			if s.begins_with("random:"):
-				var prob := float(s.substr(7))
-				return MeshSelector.by_random(prob)
-			elif s.begins_with("tag:"):
-				var tag := s.substr(4)
-				return MeshSelector.by_tag(tag)
-			elif s.begins_with("depth:"):
-				var parts := s.substr(6).split("-")
-				var min_d := int(parts[0])
-				var max_d: int = int(parts[1]) if parts.size() > 1 else -1
-				return MeshSelector.by_depth(min_d, max_d)
-	return MeshSelector.all_faces()

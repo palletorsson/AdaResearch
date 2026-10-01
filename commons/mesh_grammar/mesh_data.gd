@@ -639,27 +639,44 @@ static func create_icosahedron(size: float = 1.0) -> MeshData:
 
 static func create_sphere(radius: float = 1.0, rings: int = 12, segments: int = 16) -> MeshData:
 	var md := MeshData.new()
-	# Generate sphere vertices
-	for i in range(rings + 1):
+	# ONE vertex at each pole and `segments` on every ring between them, so the sphere
+	# is a closed surface: every edge has two faces. Until 2026-10-01 each ring carried
+	# segments + 1 vertices (the last a copy of the first) and each pole one vertex per
+	# column, so the mesh had a seam down one side and an open fan at both poles — 88
+	# edges with one face each on a body that looks closed. EdgeDecorateOp beaded
+	# that seam as a boundary, and a bulge or a cellular rule stopped at it.
+	md.vertices.append(Vector3(0.0, radius, 0.0))
+	for i in range(1, rings):
 		var phi: float = PI * float(i) / float(rings)
-		for j in range(segments + 1):
+		for j in range(segments):
 			var theta: float = TAU * float(j) / float(segments)
-			var x := radius * sin(phi) * cos(theta)
-			var y := radius * cos(phi)
-			var z := radius * sin(phi) * sin(theta)
-			md.vertices.append(Vector3(x, y, z))
+			md.vertices.append(Vector3(radius * sin(phi) * cos(theta), radius * cos(phi), radius * sin(phi) * sin(theta)))
+	md.vertices.append(Vector3(0.0, -radius, 0.0))
+	var south: int = md.vertices.size() - 1
+	# Ring i, column j -> vertex index. Ring 0 and ring `rings` are the poles.
+	var at := func(i: int, j: int) -> int:
+		if i <= 0:
+			return 0
+		if i >= rings:
+			return south
+		return 1 + (i - 1) * segments + (j % segments)
 
-	# Generate faces
+	# Faces, in the same order as before (ring by ring, column by column, 2 per cell,
+	# 1 at the poles) so a seeded selector picks the same faces. Wound so that
+	# get_face_normal() points AWAY from the centre, as create_cube and
+	# create_icosahedron are: the old order pointed all 352 normals at the centre,
+	# every op that works along the normal (extrude, bulge, tube_branch, scale_tile)
+	# grew INTO a sphere seed, and the "up" selector picked its underside.
 	for i in range(rings):
 		for j in range(segments):
-			var cols := segments + 1
-			var curr := i * cols + j
-			var next_row := curr + cols
-			# Skip degenerate triangles at poles
+			var curr: int = at.call(i, j)
+			var curr_next: int = at.call(i, j + 1)
+			var below: int = at.call(i + 1, j)
+			var below_next: int = at.call(i + 1, j + 1)
 			if i > 0:
-				md.faces.append(PackedInt32Array([curr, next_row, curr + 1]))
+				md.faces.append(PackedInt32Array([curr, curr_next, below]))
 			if i < rings - 1:
-				md.faces.append(PackedInt32Array([curr + 1, next_row, next_row + 1]))
+				md.faces.append(PackedInt32Array([curr_next, below_next, below]))
 
 	md._init_metadata()
 	return md
