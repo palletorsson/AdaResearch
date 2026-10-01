@@ -1,0 +1,2744 @@
+{
+ "id": "c3_form_code",
+ "anchor": "Casey Reas, Chandler McWilliams and LUST, Form+Code in Design, Art, and Architecture (Princeton Architectural Press, 2010 [mem]; 176 pp. [V]). Its themes Repeat, Transform, Parameterize, Visualize, Simulate, each with two code examples (Embedded Iteration, Recursive Tree; Transcoded Landscape, Slit-Scan; Chair, Wave; Displaying Data, Superformula; Particles, Diffusion-Limited Aggregation) [V formandcode.com, fetched 2026-10-01], opened by 'What is Code?' and 'Form and Computers' [mem]. Applied to 3D bodies in Godot 4.6.",
+ "title": "Form+Code for Bodies: repeat, transform, parameterize, visualize, simulate",
+ "thesis": "This course is ordered by what code does to form, not by the order of Ada's halls. First you learn what code is and make single bodies: a point, a line, a room you can stand in with the headset on. Then you REPEAT a body (a trace, a grid, a tile, disorder in the grid, a tree that repeats inside itself), TRANSFORM it (a pivot, a scale, an easing, time laid into space, a function turned into ground), PARAMETERIZE it (a class, a family in the Inspector, a budget you measure, genes saved as files), VISUALIZE what cannot be seen (a value as colour, a noise field, a shader, an implicit surface, a graph, a judgment), and finally SIMULATE it (forces, aggregation, balance, rules, soft bodies, swarms, navigation, learning) until the model meets what it cannot hold. Each verb needs the ones before it: disorder is invisible without a grid, a transform means most when there are many bodies, an argument about a family needs a class, and a simulation needs all of these. The Ada halls carry each step or are visited as field trips. Where this order leaves the spine's order the chapter says why, and where a topic comes back (chance, colour, recursion, graphs) it is a named return. In every chapter you build a body in code, vary it along one axis, write down before rendering which two variants will look most alike, and defend one sentence with the picture. Then you ask what the approximation owes or hides, and you take the body out of the lab into a place where a body meets it.",
+ "parts": [
+  {
+   "id": "p1_code_form",
+   "title": "Code and Form (What is code? Form and computers)",
+   "promise": "You can make a single body in code, give it a collider that is a separate decision, place it by coordinates, relate two bodies with a function, bring in a scanned body, and stand among them in the headset from a build you exported."
+  },
+  {
+   "id": "p2_repeat",
+   "title": "Repeat",
+   "promise": "You can make many bodies from one: a kept walk, a lattice, an authored surface, a tiled floor, a seeded disorder and a recursive tree, and you know that each repetition is decided by a gap, a rule, a seed or a stop."
+  },
+  {
+   "id": "p3_transform",
+   "title": "Transform",
+   "promise": "You can turn a body (pivots, scale, easing) and transcode one thing into another (time into space, a function into ground), and you have opened the player body itself as one transform among others."
+  },
+  {
+   "id": "p4_parameterize",
+   "title": "Parameterize (an addition to the spine, declared)",
+   "promise": "You can write a body as a class whose exported fields make a family, sweep one axis into a comparison sheet, measure what each value costs, test a claim, and save a body as a file that returns."
+  },
+  {
+   "id": "p5_visualize",
+   "title": "Visualize",
+   "promise": "You can make an invisible value visible (colour, a noise field, a per-pixel shader, an implicit surface, a graph, a classifier) and say what each picture hides."
+  },
+  {
+   "id": "p6_simulate",
+   "title": "Simulate",
+   "promise": "You can let bodies be made by processes (forces, aggregation, balance, rules, soft deformation, collectives, navigation, learning), assemble a small complete game, and end with a hall that argues and knows the limits of its own model."
+  }
+ ],
+ "tracks": [
+  {
+   "id": "short",
+   "title": "Three weeks: one family of bodies (Queer 3D World format)",
+   "length": "3 weeks, 15 days; week 1 Code and Form in the headset (ch 1, 3, 4, 5, 6); week 2 Repeat, Transform and Parameterize (ch 8, 11, 13, 18, 19, 23); week 3 from day 11 is the mini project, with ch36 as a guest critique session on day 13 and the showing on day 15",
+   "chapters": [
+    "c3_01_day_zero",
+    "c3_03_point_one",
+    "c3_04_point_coordinates",
+    "c3_05_point_lines",
+    "c3_06_synthesis_collage",
+    "c3_08_many_bodies",
+    "c3_11_chance_in_the_grid",
+    "c3_13_pivot_order",
+    "c3_18_single_class",
+    "c3_19_export_family",
+    "c3_23_noise_field",
+    "c3_36_critical_simulation"
+   ],
+   "mini_project": "A PARAMETRIC BODY (prompts from Levin & Brain: Virtual Creature, Parametric Object, Extrapolated Body, Personal Prosthetic). One class with one exported axis and 3-5 values; a prediction written before rendering of which two will look most alike; the comparison still; one claim sentence; a debt comment in the code; the body placed in the class's shared hall where a visitor can stand on it, walk through it, carry it or become it; shown in the headset on the last day. Supplied and named because the short track skips their chapters: the base room with the desktop walker and the XR rig (commons/scenes/vr_staging.tscn); the Point Zero kit's _ready/_process template (ch2); the SKETCH helper point(p), line(a, b), box(p, size) and a Trace recorder (ch7); make_fan() returning an ArrayMesh (ch9); a MultiMesh floor builder (ch10); a heightfield-to-mesh-and-collider builder for the noise terrain (ch17); an Area3D trigger with its signal wired (ch15); a sweep_sheet scene that lays out five instances with labels [to be written for the course; Ada's build_dna_gallery.py is the adult version]; a scan-to-glb route (phone photogrammetry or Tilt Brush, then Blender). In the short track ch36 is a guest critique session, so its code (files, shaders, raycasts) is shown, not written."
+  },
+  {
+   "id": "long",
+   "title": "One year: the whole ladder (Palle's one-year course for professional artists)",
+   "length": "About two terms of 15-16 weeks. Term 1: parts 1-4 (ch 1-21), with a pause week after each part and the midterm family sheet at ch21. Term 2: parts 5-6 (ch 22-37), with the final project planned at ch35 and shown at ch37.",
+   "chapters": [
+    "c3_01_day_zero",
+    "c3_02_point_zero",
+    "c3_03_point_one",
+    "c3_04_point_coordinates",
+    "c3_05_point_lines",
+    "c3_06_synthesis_collage",
+    "c3_07_trace",
+    "c3_08_many_bodies",
+    "c3_09_surface",
+    "c3_10_tiling",
+    "c3_11_chance_in_the_grid",
+    "c3_12_recursive_tree",
+    "c3_13_pivot_order",
+    "c3_14_scale_room_body",
+    "c3_15_easing",
+    "c3_16_slit_scan",
+    "c3_17_transcoded_landscape",
+    "c3_18_single_class",
+    "c3_19_export_family",
+    "c3_20_budget",
+    "c3_21_genes_as_files",
+    "c3_22_value_to_colour",
+    "c3_23_noise_field",
+    "c3_24_shader",
+    "c3_25_implicit_bodies",
+    "c3_26_graph_relation",
+    "c3_27_judgment",
+    "c3_28_forces",
+    "c3_29_aggregation",
+    "c3_30_balance_game",
+    "c3_31_rules_that_grow",
+    "c3_32_soft_bodies",
+    "c3_33_swarms",
+    "c3_34_navigate",
+    "c3_35_bodies_that_learn",
+    "c3_36_critical_simulation",
+    "c3_37_synthesis_museum"
+   ],
+   "mini_project": "Midterm at ch21: the hall's family saved as files and shown as a sheet that a classmate can load and breed. Final at ch37: the student's hall in the class's endless museum (a family, its prediction, its comparison sheet, its claim, a debt comment in the code, a final.md), walked in the headset from an exported build."
+  }
+ ],
+ "chapters": [
+  {
+   "id": "c3_01_day_zero",
+   "n": 1,
+   "part": "p1_code_form",
+   "title": "What is code? An instruction someone else performs (Day Zero)",
+   "spine": [
+    "primitives"
+   ],
+   "halls": [
+    {
+     "map": "Point_Zero",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "statements",
+    "output",
+    "errors"
+   ],
+   "code_returns": [],
+   "body": "The base room rebuilt from an empty scene (floor, camera, light, WorldEnvironment) plus a Label3D that prints its own text. Unplugged first: a written instruction for one body ('a cube, 1 m, one corner on the floor's centre') carried out on paper by a partner, as in a LeWitt wall drawing.",
+   "argument": {
+    "axis": "how precise the written instruction is",
+    "values": [
+     "one word",
+     "one sentence",
+     "numbered steps",
+     "numbered steps with units and a fixed origin"
+    ],
+    "predict": "The two numbered versions will look most alike across partners, because numbers and an origin take away the drafter's guesses; 'one word' and 'one sentence' will differ most from partner to partner.",
+    "claim": "The less an instruction fixes, the more the performer's body decides the form."
+   },
+   "debt": "GDScript's keywords are English, so the language already has a default speaker (the FLOW-MATIC case in Marino's Critical Code Studies), and the engine's defaults (grey, one sun at a fixed angle) are choices nobody told you about. Planted bug: a missing colon. Read the message: code can be valid and still not be what you meant (Montfort).",
+   "place": "Stand in the empty base room on desktop. The floor is the first body you meet: Kandinsky's basic plane as a subject, not a given.",
+   "godot": [
+    "Project Manager import; Run Project (F5) against Run Current Scene (F6)",
+    "Scene dock and Inspector: change a property and see it in the running scene",
+    "print() to the Output panel",
+    "Debugger > Errors: read the line number and the message"
+   ],
+   "lineage": {
+    "processing": "Handbook Structure 1 (code elements); Learning Processing ch2 (the editor, errors)",
+    "noc": "Below NoC's entry level (NoC assumes a semester of this)",
+    "application_wp": "None directly; Illich and Freire from the application (open the tool, reflect and act)",
+    "klee": "Before the point: the empty plane the point will walk on",
+    "reference": "Form+Code 'What is Code?' [mem]; LeWitt 'Paragraphs on Conceptual Art' (1967) and the wall drawings; Levin & Brain 'Computing without a Computer'"
+   },
+   "departure": null,
+   "project_step": "Start your hall: a folder, a base scene, and a written instruction for the body you want to have made by the end.",
+   "tracks": [
+    "short",
+    "long"
+   ]
+  },
+  {
+   "id": "c3_02_point_zero",
+   "n": 2,
+   "part": "p1_code_form",
+   "title": "Point Zero: the engine calls you",
+   "spine": [
+    "primitives"
+   ],
+   "halls": [
+    {
+     "map": "Point_Zero",
+     "role": "carrier"
+    }
+   ],
+   "code_new": [
+    "variables",
+    "lifecycle",
+    "delta"
+   ],
+   "code_returns": [
+    "statements",
+    "output",
+    "errors"
+   ],
+   "body": "Two columns at the hall's entrance. One grows by a fixed amount every frame, the other by delta (seconds). The kit's greeting is set once in _ready(); the counts change in _process().",
+   "argument": {
+    "axis": "frame rate the scene runs at (--fixed-fps)",
+    "values": [
+     "30",
+     "60",
+     "90",
+     "120"
+    ],
+    "predict": "After five seconds the four delta-grown columns will be identical, so any two of them are the closest pair. The frame-grown columns will differ in proportion, and 90 and 120 will look most alike of those.",
+    "claim": "Only a body grown by delta is the same body on every machine: a headset at 90 Hz and a laptop at 60 Hz grow two different frame-bodies."
+   },
+   "debt": "A frame is not a second, and the device decides how many there are, so the headset's refresh rate becomes part of the body. Headless runs draw no frames at all (a documented Ada trap), so a rule that counts frames behaves differently there.",
+   "place": "Walk around the two columns; in the headset they grow at 72 or 90 Hz and you see which one keeps time.",
+   "godot": [
+    "func _ready() runs once; func _process(delta) runs every frame",
+    "var and := ; a member variable keeps its value between calls",
+    "Engine.get_process_frames() beside an accumulated delta",
+    "Label3D.text with str() and % formatting"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch3 (setup/draw) and ch4 (variables); Handbook 'Structure 2: Continuous' arrives early because Godot calls your code",
+    "noc": "NoC Intro assumes frame-based animation; delta is the part it leaves implicit",
+    "application_wp": "None",
+    "klee": "The point before it walks: potential energy",
+    "reference": "Form+Code 'Form and Computers' (the computer as a machine that repeats in time) [mem]; GDQuest Learn GDScript lessons 10-11 (game loop, delta)"
+   },
+   "departure": null,
+   "project_step": "Put a counter at your hall's entrance that shows seconds, not frames.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_03_point_one",
+   "n": 3,
+   "part": "p1_code_form",
+   "title": "Point One: a body is a node plus a mesh, and a collider that is not the mesh",
+   "spine": [
+    "primitives"
+   ],
+   "halls": [
+    {
+     "map": "Point_One",
+     "role": "carrier"
+    },
+    {
+     "map": "Primitives_Ignorance",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "calling",
+    "meshes",
+    "collision"
+   ],
+   "code_returns": [
+    "variables",
+    "lifecycle",
+    "errors"
+   ],
+   "body": "A point built in _ready() from MeshInstance3D.new() and SphereMesh.new(), added with add_child(), then given a StaticBody3D and a CollisionShape3D whose radius is set apart from what you see.",
+   "argument": {
+    "axis": "collider radius as a fraction of the visible radius (still taken with Debug > Visible Collision Shapes on and the supplied walker standing on top)",
+    "values": [
+     "none (ghost)",
+     "0.5x",
+     "1x",
+     "2x"
+    ],
+    "predict": "0.5x and 1x will look most alike, because in the plain render all four spheres are identical; only the walker's feet (sunk in at 0.5x, touching at 1x, floating at 2x, absent for the ghost) separate them.",
+    "claim": "In Godot what a body looks like and what it holds are two separate decisions."
+   },
+   "debt": "The primitive mesh is a default body with its own resolution (64 segments, 32 rings): a sphere on screen is a polyhedron somebody chose. Gaboury's chapter on the Utah teapot asks which bodies are default and who made them standard.",
+   "place": "Stand on it: the supplied walker steps onto the solid point and falls through the ghost.",
+   "godot": [
+    "MeshInstance3D.new(), SphereMesh.new(), add_child()",
+    "StaticBody3D + CollisionShape3D + SphereShape3D",
+    "Debug > Visible Collision Shapes",
+    "the Remote scene tree while running"
+   ],
+   "lineage": {
+    "processing": "Handbook Shape 1 (coordinates, primitives); Learning Processing ch1 (a creature from primitives)",
+    "noc": "None",
+    "application_wp": "Polycount against smooth deformation (application l.89), first glimpsed",
+    "klee": "I.1 the point as origin of the active line",
+    "reference": "Form+Code 'Form and Computers' (the primitive as the machine's first vocabulary) [mem]; Gaboury, Image Objects ch3 (the Utah teapot)"
+   },
+   "departure": null,
+   "project_step": "Put one solid and one ghost body in your hall and label which is which.",
+   "tracks": [
+    "short",
+    "long"
+   ]
+  },
+  {
+   "id": "c3_04_point_coordinates",
+   "n": 4,
+   "part": "p1_code_form",
+   "title": "Point Coordinates: where is a body? Position, parent, pickup",
+   "spine": [
+    "primitives"
+   ],
+   "halls": [
+    {
+     "map": "Point_Coordinates",
+     "role": "carrier"
+    },
+    {
+     "map": "Trans_Introduction",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "vectors",
+    "properties",
+    "transforms"
+   ],
+   "code_returns": [
+    "calling",
+    "meshes",
+    "variables"
+   ],
+   "body": "A point with a child point: change the parent's X, Y and Z and read position against global_position; the child is a satellite body that keeps its relation.",
+   "argument": {
+    "axis": "parent offset, with the child's local position fixed (still over the floor grid)",
+    "values": [
+     "(0,0,0)",
+     "(1,0,0)",
+     "(1,1,0)",
+     "(1,1,1)"
+    ],
+    "predict": "The parent-child pair will look identical in all four stills (the same gap and angle), so any two are the closest pair; only the floor grid shows that both moved.",
+    "claim": "A child keeps its relation, not its place."
+   },
+   "debt": "A coordinate system is a choice: Y up, right-handed, metres, and an origin that is privileged. Far from the origin floats lose precision and bodies jitter (the Critical Engineering Manifesto's exploit: walk far out and watch).",
+   "place": "Carry it: pick up the point with the supplied hand (XR or desktop) and drop it on a target. Pickup belongs to this chapter (TUTORIAL_LINEAGE ruling).",
+   "godot": [
+    "Vector3 and its x, y, z",
+    "position against global_position",
+    "parent and child transforms in the scene tree",
+    "the supplied pickup (XRToolsPickable or the desktop hand), used, not yet opened"
+   ],
+   "lineage": {
+    "processing": "processing.org 'Coordinate System and Shapes'; Learning Processing ch1",
+    "noc": "NoC 1.1 vectors as positions",
+    "application_wp": "Vectors as a basic concept (application l.9)",
+    "klee": "II the space box; the vertical axis that shifts with the viewer",
+    "reference": "LeWitt's location drawings (corner, midpoint, centre) as a coordinate system before Vector3"
+   },
+   "departure": null,
+   "project_step": "Place three bodies in your hall at coordinates you wrote down before you ran the scene.",
+   "tracks": [
+    "short",
+    "long"
+   ]
+  },
+  {
+   "id": "c3_05_point_lines",
+   "n": 5,
+   "part": "p1_code_form",
+   "title": "Point Lines: a relation between two bodies",
+   "spine": [
+    "primitives"
+   ],
+   "halls": [
+    {
+     "map": "Point_Lines",
+     "role": "carrier"
+    },
+    {
+     "map": "Vectors_Act1_WhatAVectorIs",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "expressions",
+    "functions",
+    "parameters"
+   ],
+   "code_returns": [
+    "vectors",
+    "properties",
+    "transforms",
+    "meshes"
+   ],
+   "body": "A line between two carried points, drawn with the supplied SKETCH helper line(a, b); the student writes thickness_for(a, b) that returns a thickness from b - a and its length, so three lines of 0.5, 1 and 2 m carry an argument.",
+   "argument": {
+    "axis": "exponent p in thickness = 0.05 * length^p (three lines of 0.5, 1 and 2 m in each variant)",
+    "values": [
+     "-1",
+     "0",
+     "1",
+     "2"
+    ],
+    "predict": "p = -1 and p = 1 will use about the same total ink and so look closest in weight, but read in opposite directions; p = 2 is the outlier, with its long line five times thicker than at p = 0.",
+    "claim": "A line's thickness is an argument about distance: one exponent turns the same three relations into strain or attraction."
+   },
+   "debt": "A line does not exist in 3D. Godot has no line(): it is a stretched box, or a one-pixel strip the headset draws with no thickness. The SKETCH helper hides that, so open it at the end of the chapter. Chun's 'sourcery' applies here: reading the helper's code still leaves the GPU hidden.",
+   "place": "Walk through it: bring the two endpoints close and the barrier line breaks (Point Lines' do_not_cross_barrier). The line is a threshold for the body.",
+   "godot": [
+    "b - a, length(), distance_to()",
+    "func thickness_for(a: Vector3, b: Vector3)",
+    "the supplied SKETCH helper line(a, b) (segment.gd show_between), opened last",
+    "Label3D readout of the distance"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch7 (functions); processing.org PVector",
+    "noc": "NoC 1.2-1.5 (vector subtraction, magnitude)",
+    "application_wp": "Vectors (application l.9)",
+    "klee": "I.1-I.4 the active, medial and passive line",
+    "reference": "DBN 'Line' then 'Lines' (singular before plural); Kandinsky, Point and Line to Plane"
+   },
+   "departure": null,
+   "project_step": "Draw the first relation in your hall: two bodies joined by a line whose thickness makes an argument.",
+   "tracks": [
+    "short",
+    "long"
+   ]
+  },
+  {
+   "id": "c3_06_synthesis_collage",
+   "n": 6,
+   "part": "p1_code_form",
+   "title": "Synthesis 1: a collage room, where a scanned body meets coded bodies, in the headset",
+   "spine": [
+    "primitives"
+   ],
+   "halls": [
+    {
+     "map": "Primitives_Melencolia",
+     "role": "field trip"
+    },
+    {
+     "map": "Point_One",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "import_assets",
+    "xr",
+    "export_build"
+   ],
+   "code_returns": [
+    "meshes",
+    "collision",
+    "transforms",
+    "functions"
+   ],
+   "body": "A scanned body (phone photogrammetry, Tilt Brush or Blender) imported as glTF, with a collider generated for it, standing among the coded point, line and sphere.",
+   "argument": {
+    "axis": "decimation of the scanned mesh (share of triangles kept)",
+    "values": [
+     "100%",
+     "25%",
+     "5%",
+     "1%"
+    ],
+    "predict": "100% and 25% will look most alike at 2 m, because the eye stops counting triangles past a density; at 1% the scan turns into a faceted polyhedron that looks coded.",
+    "claim": "Below some polycount a scanned body starts to look procedural: the line between found and made is a triangle budget."
+   },
+   "debt": "A scan is not a copy: it fills holes, smooths, and bakes the light into its texture. Scanners fail on hair, dark skin, glass and moving bodies, which is a body politics (Queer 3D's 'bias'; Blas's Facial Weaponization Suite). The Quest's 72/90 Hz budget makes the 100% scan unaffordable.",
+   "place": "Become it: enter your room in the headset through the supplied XR rig and stand beside the scan at 1:1 scale. A classmate walks it from your exported build.",
+   "godot": [
+    "drag a .glb into the FileSystem dock; import settings (scale, generate collision)",
+    "MeshInstance3D.create_trimesh_collision()",
+    "swap the desktop walker for the supplied XR rig (Godot XR Tools; commons/scenes/vr_staging.tscn)",
+    "Project > Export: a desktop build, and the Android/Quest preset (Day Zero describes the headset route; Ada has not yet verified it)"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Synthesis 1: Form and Code'",
+    "noc": "None",
+    "application_wp": "VR as the medium (the application's premise); open-source sharing (Illich)",
+    "klee": "I.11 genesis: building stone on stone against carving away",
+    "reference": "Queer 3D World 2024 week 1 (scanning, Tilt Brush, export to Blender); Hannah Hoch's collage; Anthropy's Twine book (share in chapter 1)"
+   },
+   "departure": null,
+   "project_step": "Checkpoint 1: your hall holds one found body and three made bodies, and a classmate has walked it from your build.",
+   "tracks": [
+    "short",
+    "long"
+   ]
+  },
+  {
+   "id": "c3_07_trace",
+   "n": 7,
+   "part": "p2_repeat",
+   "title": "Point Trace: repeat in time, the walk kept",
+   "spine": [
+    "primitives"
+   ],
+   "halls": [
+    {
+     "map": "Point_Trace",
+     "role": "carrier"
+    },
+    {
+     "map": "Point_Lines",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "arrays",
+    "conditions",
+    "booleans"
+   ],
+   "code_returns": [
+    "lifecycle",
+    "functions",
+    "vectors",
+    "expressions"
+   ],
+   "body": "A trace body: a carried point's positions kept in a list (the list comes before append), with a new sample taken only past a distance gate (the condition comes before the threshold), drawn as a strip by the supplied ImmediateMesh helper.",
+   "argument": {
+    "axis": "distance gate for taking a sample (the same recorded walk replayed)",
+    "values": [
+     "0.01 m",
+     "0.05 m",
+     "0.2 m",
+     "0.5 m"
+    ],
+    "predict": "0.01 and 0.05 will look most alike (both read as a smooth curve); at 0.5 the gesture becomes a polygon with visible corners.",
+    "claim": "The gate decides whether a kept walk reads as a gesture or as a polyline: memory has a resolution."
+   },
+   "debt": "A record is a sampling: whatever happens between samples is lost, and ch2's frame rate decides how often you sample. A list that only grows needs a cap (pop_front), so the body also has to decide what it forgets.",
+   "place": "Walk it: record your own walk through the hall and leave the trace as a body others can follow.",
+   "godot": [
+    "Array[Vector3], append(), size(), pop_front()",
+    "if pos.distance_to(last) > gate",
+    "a bool recording flag toggled by a supplied input action",
+    "ImmediateMesh LINE_STRIP (supplied here, written at ch9)"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch5 (conditionals) and ch9 (arrays: the mouse history)",
+    "noc": "NoC 0's walker trail, previewed",
+    "application_wp": "None",
+    "klee": "I.1 'an active line on a walk'",
+    "reference": "Form+Code 'Repeat' (repetition in time) [mem]; Klee, Pedagogical Sketchbook I.1"
+   },
+   "departure": null,
+   "project_step": "Record the route you want visitors to take through your hall and keep it as a faint trace.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_08_many_bodies",
+   "n": 8,
+   "part": "p2_repeat",
+   "title": "Embedded iteration: many bodies in a row, a grid, a lattice",
+   "spine": [
+    "primitives",
+    "array_tutorial"
+   ],
+   "halls": [
+    {
+     "map": "Point_Line_Grid",
+     "role": "carrier"
+    },
+    {
+     "map": "Array",
+     "role": "carrier"
+    },
+    {
+     "map": "Tutorial_3D",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "loops",
+    "nested_loops",
+    "materials"
+   ],
+   "code_returns": [
+    "arrays",
+    "conditions",
+    "calling",
+    "meshes",
+    "collision"
+   ],
+   "body": "A 5x5 grid and then a 4x4x4 lattice of boxes built with nested loops, the materials alternating by (x + z) % 2 (Klee's chessboard).",
+   "argument": {
+    "axis": "gap between cells as a fraction of the cell size",
+    "values": [
+     "0",
+     "0.1",
+     "0.5",
+     "1.0",
+     "3.0"
+    ],
+    "predict": "0 and 0.1 will look most alike, since both read as one mass; by 1.0 the lattice reads as many separate bodies.",
+    "claim": "Whether a repetition is one body or many is decided by the gap, not by the count."
+   },
+   "debt": "Every cube is its own node, mesh and draw call: 64 of them cost nothing, 64,000 stall the headset (paid off at ch10 with a MultiMesh). The grid is also the order (Klee's 'purely repetitive and therefore structural') that chance will disturb at ch11. It is a norm, not neutral ground.",
+   "place": "Stand on it: the lattice floor with a collider per cell. At a gap of 1.0 it becomes stepping stones; at 3.0 it cannot be walked.",
+   "godot": [
+    "for i in range(n)",
+    "nested for x / for z / for y",
+    "StandardMaterial3D.new(), albedo_color, material_override",
+    "a make_box(pos, size) helper that only adds (return comes in ch9)"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch6 (loops, nested grid); Handbook 'Control 2: Repetition'",
+    "noc": "None",
+    "application_wp": "None",
+    "klee": "I.5-I.6 structure as repetition; the chessboard",
+    "reference": "Form+Code 'Repeat: Embedded Iteration' [V code example]; DBN 'Dot' then 'Dots'; Molnar's molnar_cube_study in the Array hall"
+   },
+   "departure": "array_tutorial (spine 3) comes before transformation (spine 2). Form+Code puts Repeat before Transform, and in this course a transform means most once there are many bodies to transform: ch13 rotates this lattice. Position and the parent transform are not delayed; they were met at ch4, where Godot needs them.",
+   "project_step": "Build the floor or one wall of your hall as a lattice whose gap you chose and can defend.",
+   "tracks": [
+    "short",
+    "long"
+   ]
+  },
+  {
+   "id": "c3_09_surface",
+   "n": 9,
+   "part": "p2_repeat",
+   "title": "A triangle is a list: the first authored surface",
+   "spine": [
+    "primitives"
+   ],
+   "halls": [
+    {
+     "map": "Point_Triangle_Context",
+     "role": "carrier"
+    },
+    {
+     "map": "Primitives_Polythedra",
+     "role": "carrier"
+    },
+    {
+     "map": "Point_Animatedcube",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "surface_tool",
+    "normals",
+    "return"
+   ],
+   "code_returns": [
+    "arrays",
+    "loops",
+    "collision",
+    "functions"
+   ],
+   "body": "A fan body, the triangles repeated around a centre: make_fan(n, radius, height) returns an ArrayMesh built with SurfaceTool, and a ConvexPolygonShape3D is made from the same points.",
+   "argument": {
+    "axis": "how the normals are made (an 8-sided fan, same vertices)",
+    "values": [
+     "none",
+     "flat (one per face)",
+     "smooth (generate_normals)",
+     "inverted winding"
+    ],
+    "predict": "'none' and 'inverted' will look most alike from outside (both dark or missing); flat and smooth differ most at 8 sides and would converge at 64.",
+    "claim": "Light reads a surface through its normals, not its vertices: the same eight triangles become a crystal, a cone or a hole."
+   },
+   "debt": "Godot winds front faces clockwise, and when the winding is wrong the body is invisible from outside: a hole. Smooth shading lies about polycount, since the 'smooth' cone is 8 facets pretending, which is the first form of the application's polycount question. The convex hull fills in the open corner, so the collider lies too.",
+   "place": "Stand on it: the walker can stand on your surface only because the collider came from the same points. Watch where the hull differs.",
+   "godot": [
+    "SurfaceTool.begin(Mesh.PRIMITIVE_TRIANGLES), add_vertex(), generate_normals(), commit()",
+    "func make_fan(n: int) -> ArrayMesh",
+    "ConvexPolygonShape3D.points from the same PackedVector3Array",
+    "cull_mode and winding order"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch14 (vertex shapes); Handbook 'Shape 2: Vertices'; PShape",
+    "noc": "None",
+    "application_wp": "Polycount against smooth deformation (l.89); 'queer meshes' (WP2)",
+    "klee": "I.4 medial lines whose figures read as planes",
+    "reference": "Form+Code 'Form and Computers' [mem]; Catlike Coding 'Procedural Meshes: Creating a Mesh'; Godot docs 'Using the SurfaceTool'"
+   },
+   "departure": null,
+   "project_step": "Replace one primitive in your hall with a surface you listed vertex by vertex.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_10_tiling",
+   "n": 10,
+   "part": "p2_repeat",
+   "title": "Tiling: the tile and its rule (regularity)",
+   "spine": [
+    "array_tutorial",
+    "tiling"
+   ],
+   "halls": [
+    {
+     "map": "Tutorial_Tiling_Floor",
+     "role": "carrier"
+    },
+    {
+     "map": "Symmetry_Seventeen",
+     "role": "carrier"
+    },
+    {
+     "map": "Tutorial_Disco",
+     "role": "carrier"
+    },
+    {
+     "map": "Pattern_Foundry",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "uv",
+    "multimesh",
+    "audio"
+   ],
+   "code_returns": [
+    "nested_loops",
+    "materials",
+    "conditions",
+    "delta"
+   ],
+   "body": "A floor: one 4x4 tile made pixel by pixel as an Image, repeated by a symmetry rule over a MultiMesh carpet. The disco version recolours by (x + z + phase) % 2 on a delta clock and plays a generated tone on each step.",
+   "argument": {
+    "axis": "repeat rule (wallpaper operation) applied to the same 4x4 tile",
+    "values": [
+     "p1 translate",
+     "pm mirror",
+     "pg glide",
+     "p2 half-turn",
+     "p4 quarter-turn"
+    ],
+    "predict": "pm and pg will look most alike: both reflect, and the glide only shifts alternate rows by half a tile.",
+    "claim": "The rule, not the tile, decides what a floor says: the same 16 pixels read as a stripe, a zigzag or a pinwheel."
+   },
+   "debt": "Regularity is the order that randomness needs (10 PRINT's chapter order puts Regularity before Randomness). The grid is also a norm the floor imposes on bodies (lanes). A MultiMesh has no per-tile collision, so what you see is not what you walk on.",
+   "place": "Dance on it: the disco floor under your feet, where the step sequencer's pattern is the floor's rhythm.",
+   "godot": [
+    "Image.create(), set_pixel(), ImageTexture",
+    "UV repeat (uv1_scale) with nearest filtering",
+    "MultiMeshInstance3D with use_colors and set_instance_color()",
+    "AudioStreamWAV filled from a sample loop; AudioStreamPlayer3D"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Image 1', 'Color 1'; processing.org '2D Arrays'",
+    "noc": "None",
+    "application_wp": "WP1 sound experiments, moved early with the disco floor",
+    "klee": "I.5 rhythm as repetition; I.7 proportion",
+    "reference": "Form+Code 'Repeat' [mem]; Recreating the Past, 'Pattern' (Riley, Albers); 10 PRINT ch30 'Regularity'"
+   },
+   "departure": "tiling (spine 5) comes before color (spine 4) and transformation (spine 2), because Form+Code's Repeat gathers every kind of repetition before any transform. Colour as a system returns under Visualize (ch22). Audio arrives early because the application lists sound experiments as a Basic Element (WP1) and the disco floor is the spine's earliest generated tone.",
+   "project_step": "Tile one surface of your hall with a rule you can name (p1, pm, pg, p2, p4) and let it keep time.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_11_chance_in_the_grid",
+   "n": 11,
+   "part": "p2_repeat",
+   "title": "Chance 1: disorder in the grid",
+   "spine": [
+    "randomness",
+    "array_tutorial"
+   ],
+   "halls": [
+    {
+     "map": "Array",
+     "role": "carrier"
+    },
+    {
+     "map": "Randomness_10_PRINT_Algorithm",
+     "role": "carrier"
+    },
+    {
+     "map": "Random_Definition",
+     "role": "carrier"
+    },
+    {
+     "map": "Random_Remove",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "random",
+    "seeds",
+    "ai_assist"
+   ],
+   "code_returns": [
+    "nested_loops",
+    "multimesh",
+    "collision",
+    "functions",
+    "materials"
+   ],
+   "body": "A Schotter lattice (Nees 1968): rows of cubes whose random rotation and displacement grow row by row. Then a 10 PRINT floor-maze whose walls are one of two diagonals per cell.",
+   "argument": {
+    "axis": "disorder amount (molnar_cube_study's 'amount')",
+    "values": [
+     "0",
+     "0.1",
+     "0.25",
+     "0.5",
+     "1.0"
+    ],
+    "predict": "0.5 and 1.0 will look most alike: past a threshold the eye stops reading the grid, and any further disorder reads simply as 'random'.",
+    "claim": "Disorder is visible only against an order that can still be read: chance needs the grid."
+   },
+   "debt": "Pseudo-randomness: the same seed gives the same 'chance' (Random_Definition, 'a pattern that returns'), because the RNG is a deterministic function. Whose chance is it? Nake's Hommage a Paul Klee (1965) used random numbers in place of intuition. AI debt: ask an AI for the Schotter ramp, state what must change (the ramp), what must not (row 0 under seed 1968), and which still would prove it wrong, then check with the seed replay.",
+   "place": "Walk through it: the 10 PRINT maze has a collider per wall and can be walked. In the Schotter floor the bottom rows cannot be walked, so the body finds where order ends.",
+   "godot": [
+    "RandomNumberGenerator, randf_range(), randi() % 2",
+    "rng.seed = 1968 to replay; randomize() for a new layout",
+    "the supplied maze walls (MultiMesh + a BoxShape3D per cell)",
+    "ai_assist protocol: brief; 'must change / must not change / proof it is wrong'; read the diff before running it"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch4 (random() as a value); Handbook 'Math 4: Random'",
+    "noc": "NoC 0 Randomness (first met here; returns at ch29)",
+    "application_wp": "WP1 randomness, moved to where the application puts it",
+    "klee": "None: Klee has no chance; Nake (1965) adds it to Klee's 'Hauptweg und Nebenwege'",
+    "reference": "Form+Code 'Repeat' [mem]; 10 PRINT ch40 'Randomness'; Nees, Schotter (1968); Molnar, (Des)Ordres (1974); Recreating the Past, 'Chaos and Order'"
+   },
+   "departure": "randomness is spine 10; here it is chapter 11 of 37, straight after the grid and the tile instead of after forces and waves. Three reasons: the 2023 application lists randomness as a Basic Element (WP1), Palle's Queer 3D foundation list starts with it, and 10 PRINT argues that regularity must come just before randomness so the disorder has something to disturb. The spine's randomness sequence (walks, distributions, entropy) returns at ch29.",
+   "project_step": "Put one disorder ramp in your hall with a fixed seed, so every visitor sees the same one, and write the seed on the wall.",
+   "tracks": [
+    "short",
+    "long"
+   ]
+  },
+  {
+   "id": "c3_12_recursive_tree",
+   "n": 12,
+   "part": "p2_repeat",
+   "title": "Recursive tree: repeat inside itself",
+   "spine": [
+    "fractals"
+   ],
+   "halls": [
+    {
+     "map": "Fractal_Recursion",
+     "role": "carrier"
+    },
+    {
+     "map": "Fractal_RecursiveTrees",
+     "role": "carrier"
+    },
+    {
+     "map": "FormFinding_Equilibrium",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "recursion",
+    "debugging"
+   ],
+   "code_returns": [
+    "functions",
+    "parameters",
+    "return",
+    "transforms",
+    "random",
+    "seeds"
+   ],
+   "body": "A tree: branch(pos, dir, length, depth) calls itself twice with shorter lengths, and each branch is thinner than the one before (Munari's rule).",
+   "argument": {
+    "axis": "depth limit",
+    "values": [
+     "1",
+     "3",
+     "5",
+     "7",
+     "9"
+    ],
+    "predict": "7 and 9 will look most alike: past depth about 7 the new twigs are too small to see from 2 m, though the tip count goes from 128 to 512.",
+    "claim": "A recursive body is finished by its stop rule, not by its growth rule: depth beyond perception is pure cost."
+   },
+   "debt": "Recursion must always be controlled (Queer 3D). Remove the base case and read the stack overflow: that is the chapter's planted bug. The invisible twigs still cost nodes, so count them in the debugger. Munari's 'mad branch': add one exception to the rule and see that the family still reads.",
+   "place": "Walk under it: a tree at 1:1 in the hall with a collider on the trunk only, so the canopy is a ghost.",
+   "godot": [
+    "a function that calls itself with depth - 1",
+    "the base case: if depth == 0: return",
+    "Debugger: breakpoint, step, the Stack Trace panel, the stack overflow message",
+    "Monitors: object and node count"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Shape 3: Parameters, Recursion'; Learning Processing ch13",
+    "noc": "NoC 8 Fractals, moved early",
+    "application_wp": "WP2 fractal subdivision (early visit)",
+    "klee": "I.11 propagation and growth (the plant)",
+    "reference": "Form+Code 'Repeat: Recursive Tree' [V code example; the anchor files recursion under Repeat]; Munari, Drawing a Tree (1978); Kawaguchi's growth model"
+   },
+   "departure": "fractals (spine 14) are met here, eleven sequences early, because the anchor files the recursive tree under Repeat and Palle's Queer 3D foundation asks about for-loops and recursion in the same breath. The fractals sequence stays whole as returns: Fractal_KochSierpinski is a field trip from ch31, and FormFinding_Equilibrium's recursive mobile returns at ch30.",
+   "project_step": "Checkpoint 2 (end of Repeat): your hall has a lattice, a tiled surface, a seeded disorder and one recursive body. Take four stills and write what repeats in each.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_13_pivot_order",
+   "n": 13,
+   "part": "p3_transform",
+   "title": "Pivot and order: a body of joints",
+   "spine": [
+    "transformation"
+   ],
+   "halls": [
+    {
+     "map": "Trans_Rotation",
+     "role": "carrier"
+    },
+    {
+     "map": "Trans_Body",
+     "role": "carrier"
+    },
+    {
+     "map": "Trans_Introduction",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "basis",
+    "composition",
+    "instancing"
+   ],
+   "code_returns": [
+    "transforms",
+    "loops",
+    "vectors",
+    "nested_loops"
+   ],
+   "body": "A limb: one scene (a bone mesh under a pivot node) instanced three times as a chain of upper arm, forearm and hand (Klee's bone, tendon and muscle), each joint turning about its own pivot. Then the ch8 lattice with each cell rotated by its index (Mohr's Cubic Limit).",
+   "argument": {
+    "axis": "pivot position along each limb segment (same joint angles)",
+    "values": [
+     "at the start",
+     "a quarter along",
+     "the middle",
+     "at the end"
+    ],
+    "predict": "'start' and 'a quarter along' will look most alike, because the long lever dominates the pose; 'at the end' folds the chain into a different body.",
+    "claim": "The same rotation makes a different body depending on where the pivot sits: a joint is a decision about where a body may bend."
+   },
+   "debt": "Euler angles lie: rotation order matters (Y then X is not X then Y) and gimbal lock is real. The Basis is the truth; the three numbers in the Inspector are an approximation of it. A skeleton imposes an anatomy, so queer the joint: put one where no anatomy has it.",
+   "place": "Become it: attach the chain to your XR hand (or the desktop hand) so your arm grows an extra joint, an extrapolated body.",
+   "godot": [
+    "Basis, rotate_object_local(), look_at()",
+    "limb.tscn instanced with PackedScene.instantiate()",
+    "composition: skin (mesh) separate from pivot (Node3D), GDQuest's skin/controller split",
+    "transform.basis * vector"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch14 (pushMatrix/popMatrix become child nodes); Handbook 'Transform 1-2'",
+    "noc": "NoC 3 angular motion, previewed",
+    "application_wp": "None",
+    "klee": "I.9-I.10 bone, ligament, tendon and muscle as passive, medial, active",
+    "reference": "Form+Code 'Transform' [mem]; Mohr, Cubic Limit; Levin & Brain, 'Personal Prosthetic' and 'Extrapolated Body'"
+   },
+   "departure": "transformation is spine 2 but arrives after Repeat: the anchor's order is Repeat then Transform, and this chapter transforms the lattice (ch8) and the tree (ch12). Position and the parent transform were not delayed: they came at ch4, where Godot needs them.",
+   "project_step": "Give your hall one jointed body whose pivots you placed on purpose.",
+   "tracks": [
+    "short",
+    "long"
+   ]
+  },
+  {
+   "id": "c3_14_scale_room_body",
+   "n": 14,
+   "part": "p3_transform",
+   "title": "Scale: the room or the body?",
+   "spine": [
+    "transformation"
+   ],
+   "halls": [
+    {
+     "map": "Trans_Scale",
+     "role": "carrier"
+    },
+    {
+     "map": "Trans_Pit",
+     "role": "carrier"
+    },
+    {
+     "map": "Tutorial_3D",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "player",
+    "input",
+    "camera"
+   ],
+   "code_returns": [
+    "transforms",
+    "collision",
+    "composition",
+    "conditions"
+   ],
+   "body": "The player body opened: the supplied walker's CharacterBody3D, capsule, camera and input map read line by line. Then scale the room by 4, or scale the body by a quarter, and test which doors the fixed capsule fits through.",
+   "argument": {
+    "axis": "room scale with the body fixed (still: the capsule in front of the same door)",
+    "values": [
+     "0.25",
+     "0.5",
+     "1",
+     "2",
+     "4"
+    ],
+    "predict": "0.25 and 0.5 will look most alike: the capsule cannot pass either door and both read as a dollhouse. From 1 upward the door reads as a door.",
+    "claim": "A room's size can only be read against a body: scale is a relation, not a property."
+   },
+   "debt": "The default body: a 1.8 m capsule with eyes at about 1.6 m. Montfort's 'Critique My Starter Programs', turned on Godot's own starter player, asks who the default user is. Headset height and IPD are defaults too (Bagnall's hardware chapter in Queer Game Studies). The camera is an eye the engine places for you.",
+   "place": "Become it: play at a quarter scale and at 4x. In the headset, XROrigin3D world_scale changes how your own body reads.",
+   "godot": [
+    "CharacterBody3D, velocity, move_and_slide(), is_on_floor()",
+    "Input Map actions, Input.get_vector()",
+    "Camera3D as a child of the body; mouse look; XRCamera3D",
+    "XROrigin3D.world_scale against node scale"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch3 (interaction: mouse and keys)",
+    "noc": "None",
+    "application_wp": "VR presence (the application's premise)",
+    "klee": "II.18 'the tightrope walker is the scale'",
+    "reference": "Form+Code 'Transform' [mem]; Montfort, Exploratory Programming ch7; GDQuest 3D module 7 (skin against controller)"
+   },
+   "departure": "Part of the transformation block (ch13-15), which sits after Repeat; see ch13.",
+   "project_step": "Decide your hall's scale against the supplied body, and put in one door only a smaller body can pass.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_15_easing",
+   "n": 15,
+   "part": "p3_transform",
+   "title": "Easing: between two states",
+   "spine": [
+    "transformation"
+   ],
+   "halls": [
+    {
+     "map": "Trans_Pre",
+     "role": "carrier"
+    },
+    {
+     "map": "Trans_Introduction",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "interpolation",
+    "areas",
+    "signals"
+   ],
+   "code_returns": [
+    "lifecycle",
+    "delta",
+    "transforms",
+    "player"
+   ],
+   "body": "A pickup body that bobs and spins, and when the player enters its Area3D it eases towards the player and shrinks away: the Mario pickup in four stages.",
+   "argument": {
+    "axis": "easing curve over the same two positions (a multiple-exposure still at 10 equal time steps)",
+    "values": [
+     "linear",
+     "ease-in",
+     "ease-out",
+     "ease-in-out",
+     "elastic"
+    ],
+    "predict": "ease-in and ease-in-out will look most alike, because both bunch their exposures at the start; elastic overshoots and is the outlier.",
+    "claim": "An easing curve is a character: the same two positions become a lunge, a hesitation or a spring."
+   },
+   "debt": "A tween is time bent by a stock formula (Penner's easings [mem]): 'natural' motion is a canned curve that everyone's games share. A signal separates the part that detects from the part that acts; the Area3D does not know what the pickup means.",
+   "place": "It comes to you: walking into the Area3D makes the body come. In XR you reach for it.",
+   "godot": [
+    "lerp(), Vector3.move_toward(), create_tween().tween_property() with set_trans()/set_ease()",
+    "Area3D + CollisionShape3D, the body_entered signal",
+    "connect() and your own signal collected(value)",
+    "queue_free() after the tween"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Math 2: Curves' (norm, lerp, map)",
+    "noc": "None",
+    "application_wp": "None",
+    "klee": "IV.33 kinetic energy: the top begins to move",
+    "reference": "Form+Code 'Transform' [mem]"
+   },
+   "departure": "Part of the transformation block after Repeat; see ch13.",
+   "project_step": "Make one body in your hall react to a visitor's arrival with an easing you chose.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_16_slit_scan",
+   "n": 16,
+   "part": "p3_transform",
+   "title": "Slit-scan: the pendulum's time laid into space (pendulum, circle, spiral)",
+   "spine": [
+    "wavefunctions"
+   ],
+   "halls": [
+    {
+     "map": "WaveFunctions_Pendulum",
+     "role": "carrier"
+    },
+    {
+     "map": "WaveFunctions_Unit_Circle",
+     "role": "carrier"
+    },
+    {
+     "map": "Wavefunctions_Bernini",
+     "role": "field trip"
+    },
+    {
+     "map": "WaveFunctions_Effect_Sound",
+     "role": "field trip"
+    },
+    {
+     "map": "WaveFunctions_Synthesis_Lab",
+     "role": "encounter"
+    },
+    {
+     "map": "Fractal_GoldenSpiral",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "trig",
+    "queues"
+   ],
+   "code_returns": [
+    "lifecycle",
+    "delta",
+    "multimesh",
+    "audio",
+    "arrays"
+   ],
+   "body": "A pendulum bob whose positions go into a bounded queue every physics tick and are laid out along an axis, a slit-scan body in space. Then (cos t, sin t) as a runner on a circle, and a radius that grows with t to give a spiral column (Bernini).",
+   "argument": {
+    "axis": "radius growth per turn",
+    "values": [
+     "-0.2",
+     "-0.05",
+     "0",
+     "0.05",
+     "0.2"
+    ],
+    "predict": "-0.05 and 0.05 will look most alike (two near-circles that drift in opposite directions); -0.2 closes to a point and 0.2 opens into a coil.",
+    "claim": "One number turns a circle into a spiral of life or of death: Klee's pendulum becomes a direction."
+   },
+   "debt": "sin and cos are computed approximations, and physics ticks sample time: change physics_ticks_per_second and see the steps in the slit-scan. A queue forgets its oldest sample. Additive waves (Synthesis_Lab) are the Fourier idea from WP2, met here as an encounter only.",
+   "place": "Walk through it: at room scale the slit-scan body is a corridor along the pendulum's past. Wavefunctions_Sky_Stairs is a trig body you can climb.",
+   "godot": [
+    "sin(), cos(), TAU, wrapf()",
+    "_physics_process with an accumulator; physics_ticks_per_second",
+    "a queue: push_back() and pop_front() on a capped Array",
+    "a MultiMesh of N marks updated from the queue; a pitch from position (AudioStreamPlayer3D)"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Math 3: Trigonometry'",
+    "noc": "NoC 3 Oscillation, before forces here",
+    "application_wp": "WP1 sine curves and resonance; Fibonacci (Fractal_GoldenSpiral, encounter); Fourier (encounter)",
+    "klee": "IV.33-IV.37 pendulum, then circle, then the expanding and contracting spiral",
+    "reference": "Form+Code 'Transform: Slit-Scan' [V code example]; Whitney, 'Animation and Harmony' (Recreating the Past, week 2)"
+   },
+   "departure": "wavefunctions (spine 9) comes before forces (7) and formfinding (8). Form+Code files time-into-space (slit-scan) under Transform, and Klee derives circle and spiral from the pendulum without any forces: the sine is a transform of time. The pendulum returns at ch28 as an integrated spring (Vectors_Act4b_Oscillation).",
+   "project_step": "Lay one motion from your hall out in space as a slit-scan body.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_17_transcoded_landscape",
+   "n": 17,
+   "part": "p3_transform",
+   "title": "Transcoded landscape: a function becomes ground",
+   "spine": [
+    "change",
+    "wavefunctions"
+   ],
+   "halls": [
+    {
+     "map": "Change_Intro",
+     "role": "carrier"
+    },
+    {
+     "map": "WaveFunctions_Sine_Space",
+     "role": "carrier"
+    },
+    {
+     "map": "Wavefunctions_Sky_Stairs",
+     "role": "field trip"
+    },
+    {
+     "map": "Noise_Space_10",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "packed_arrays",
+    "physics_bodies"
+   ],
+   "code_returns": [
+    "surface_tool",
+    "normals",
+    "trig",
+    "nested_loops",
+    "collision",
+    "return"
+   ],
+   "body": "A heightfield h(x, z) = A sin(kx) cos(kz) sampled on a grid into a PackedVector3Array, turned into a mesh with SurfaceTool and a collider with create_trimesh_shape(), with RigidBody3D spheres dropped onto it.",
+   "argument": {
+    "axis": "grid resolution (samples per metre) over the same function",
+    "values": [
+     "2",
+     "4",
+     "8",
+     "16",
+     "32"
+    ],
+    "predict": "16 and 32 will look most alike; at 2 the wave is aliased into a different, slower landscape and the spheres settle in different valleys.",
+    "claim": "Below a sampling rate the ground is a different body: the function stays the same, the landscape does not."
+   },
+   "debt": "Sampling debt: a fine wave sampled coarsely becomes another wave (aliasing, moire). The mesh and the collider are two approximations that have to agree; the ball rolls on the trimesh, not on the formula.",
+   "place": "Stand on it and roll on it: walk the landscape and watch the spheres gather in the valleys you made.",
+   "godot": [
+    "PackedVector3Array vertices, PackedInt32Array indices",
+    "SurfaceTool from a grid; generate_normals()",
+    "ArrayMesh.create_trimesh_shape() in a StaticBody3D",
+    "RigidBody3D spheres: mass, bounce"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Shape 2: Vertices'; P3D beginShape(TRIANGLE_STRIP)",
+    "noc": "None",
+    "application_wp": "WP1 sine curves",
+    "klee": "III the gravitational curve: the rolling ball traces a trajectory on your ground",
+    "reference": "Form+Code 'Transform: Transcoded Landscape' [V code example]; Catlike Coding 'Mathematical Surfaces'"
+   },
+   "departure": "change (spine 6) comes after wavefunctions (9), and both come before forces (7): a plotted function is a transform of numbers into ground, which is the anchor's Transform. Flow_Field, the other change hall, waits for noise (ch23), because it samples a noise field that does not exist yet.",
+   "project_step": "Checkpoint 3 (end of Transform): your hall has a ground made from a function; a visitor can walk it and a ball can roll on it.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_18_single_class",
+   "n": 18,
+   "part": "p4_parameterize",
+   "title": "Describe a body in a single class",
+   "spine": [
+    "primitives"
+   ],
+   "halls": [
+    {
+     "map": "Primitives_Melencolia",
+     "role": "carrier"
+    },
+    {
+     "map": "Primitives_Ignorance",
+     "role": "carrier"
+    },
+    {
+     "map": "Color_Context_Placed",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "classes",
+    "methods",
+    "types"
+   ],
+   "code_returns": [
+    "functions",
+    "parameters",
+    "return",
+    "surface_tool",
+    "loops",
+    "trig"
+   ],
+   "body": "class_name Pyramid extends MeshInstance3D, with typed fields base_sides, radius, height and a build() method that makes the mesh: the base ring with sin and cos in a loop, so base_sides = 3 gives a tetrahedron (Ada's pyramid.gd).",
+   "argument": {
+    "axis": "base_sides",
+    "values": [
+     "3",
+     "4",
+     "6",
+     "12",
+     "48"
+    ],
+    "predict": "12 and 48 will look most alike: past about a dozen sides a pyramid reads as a cone.",
+    "claim": "A class's fields decide which bodies are possible: base_sides makes pyramid and cone one family, and no value of it makes a sphere."
+   },
+   "debt": "The modelling choice is the critique (the CCSWG prompt 'describe war in a single class', turned to a body). What your class cannot express (a body with no apex, or two apexes) and what its types forbid (an int cannot have 3.5 sides) are borders. Write them in a comment.",
+   "place": "Stand on it: the pyramids as seats and steps. Which of them can you stand on top of?",
+   "godot": [
+    "class_name and extends",
+    "func build() -> void as a method; self",
+    "typed fields: var base_sides: int = 4",
+    "static typing warnings in the editor"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch8 (objects: Zoog becomes a class)",
+    "noc": "NoC 0-1: the Walker and Mover classes",
+    "application_wp": "None",
+    "klee": "I.7 divisional proportion",
+    "reference": "Form+Code 'Parameterize' [V theme]; CCSWG 2024 teaching thread ('describe war in a single class'); Durer, Melencolia I (the hall's precedent)"
+   },
+   "departure": "Parameterize has no spine sequence; this whole part is an addition, declared as one. It returns to primitives halls (Melencolia, Ignorance) because their works are already families (pyramid base_sides, sphere tessellation), and 74% of Ada's scripts are built this way.",
+   "project_step": "Rewrite the body you care most about in your hall as one class, with the fewest fields that still make it.",
+   "tracks": [
+    "short",
+    "long"
+   ]
+  },
+  {
+   "id": "c3_19_export_family",
+   "n": 19,
+   "part": "p4_parameterize",
+   "title": "@export: the family in the Inspector",
+   "spine": [
+    "primitives",
+    "color",
+    "softbodies",
+    "isosurfaces"
+   ],
+   "halls": [
+    {
+     "map": "Color_Context_Placed",
+     "role": "carrier"
+    },
+    {
+     "map": "Topology_Entropy_Morphogenesis",
+     "role": "carrier"
+    },
+    {
+     "map": "ISO_LookupTable",
+     "role": "field trip"
+    },
+    {
+     "map": "Primitives_Melencolia",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "export",
+    "setters",
+    "tool_scripts"
+   ],
+   "code_returns": [
+    "classes",
+    "methods",
+    "types",
+    "instancing"
+   ],
+   "body": "The Pyramid class with @export_range fields, setters that rebuild on change, and @tool so the family changes live in the editor. Then a sweep scene: five instances side by side with one field stepped, the comparison sheet as a scene.",
+   "argument": {
+    "axis": "apex offset as a fraction of the base radius (Ada's apex_stance axis)",
+    "values": [
+     "0",
+     "0.25",
+     "0.5",
+     "1.0",
+     "2.0"
+    ],
+    "predict": "0 and 0.25 will look most alike (both upright pyramids); past 1.0 the apex leaves the base and the body leans, first an oblique pyramid and then a blade.",
+    "claim": "One exported field can carry a body across a category of form: from monument to lean-to."
+   },
+   "debt": "The Inspector slider hides what each value costs and what it breaks. Defaults are sacred: an Ada artifact can have hundreds of live placements, so changing a default silently changes every hall it stands in. A setter that rebuilds on every change can stall the editor.",
+   "place": "Carry it: a supplied in-world slider changes the family while you hold the body.",
+   "godot": [
+    "@export, @export_range, @export_enum",
+    "a setter: set(value): x = value; _rebuild()",
+    "@tool and Engine.is_editor_hint()",
+    "a sweep scene of five labelled instances"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Shape 3: Parameters'",
+    "noc": "None",
+    "application_wp": "None directly (the application's families are its DNA)",
+    "klee": "I.7 linear variation",
+    "reference": "Form+Code 'Parameterize: Chair' [V code example]; Generative Design's numbered variant series; Albers: fix the material, vary one thing"
+   },
+   "departure": "Parameterize is an addition (see ch18). Topology_Entropy_Morphogenesis (spine 17) and ISO_LookupTable (18) are visited early only for their setter and @tool patterns; both return in full at ch32 and ch25.",
+   "project_step": "Turn your hall's main body into a family with one exported axis and hang the five-variant sheet at the entrance.",
+   "tracks": [
+    "short",
+    "long"
+   ]
+  },
+  {
+   "id": "c3_20_budget",
+   "n": 20,
+   "part": "p4_parameterize",
+   "title": "The budget: polycount measured, a claim tested",
+   "spine": [
+    "primitives",
+    "formfinding"
+   ],
+   "halls": [
+    {
+     "map": "Primitives_Portals",
+     "role": "carrier"
+    },
+    {
+     "map": "Primitives_Ignorance",
+     "role": "carrier"
+    },
+    {
+     "map": "FormFinding_Catenary",
+     "role": "carrier"
+    }
+   ],
+   "code_new": [
+    "testing",
+    "profiling"
+   ],
+   "code_returns": [
+    "export",
+    "loops",
+    "surface_tool",
+    "uv",
+    "functions"
+   ],
+   "body": "A parametric surface, the catenoid (u, v) -> point, with exported u_steps and v_steps; a torus ring whose segments double while its gap to the true circle is printed and asserted.",
+   "argument": {
+    "axis": "u_steps of the catenoid",
+    "values": [
+     "6",
+     "12",
+     "24",
+     "48",
+     "96"
+    ],
+    "predict": "48 and 96 will look most alike at 2 m, while the Profiler shows 96 costing about four times as much to draw; the prediction is also written as a test: gap_to_circle(n) < 0.01 for n >= 48.",
+    "claim": "A parametric surface has a step count below which it is a different body and above which it is only cost: the test finds the first, the profiler the second."
+   },
+   "debt": "Polycount against smooth deformation (application l.89): 'smooth' is a budget decision, and in a headset at 72/90 Hz every triangle is drawn once per eye. A green test is a fact about the question you asked, not about the body.",
+   "place": "Stand in it: the catenoid as a neck you walk through at room scale (collider from the mesh). The headset's frame time is the debt you feel: stutter makes people sick, so comfort is not polish.",
+   "godot": [
+    "assert() in a headless check (godot --headless --script)",
+    "Profiler and Monitors: frame time, draw calls, primitives",
+    "Time.get_ticks_usec() around a build",
+    "a surface from (u, v) with UVs"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Development 2: Iteration, Debugging'",
+    "noc": "None",
+    "application_wp": "Polycount (l.89); the headset's frame rate",
+    "klee": "None",
+    "reference": "Form+Code 'Parameterize: Wave' [V code example]; Catlike Coding 'Measuring Performance'; Primitives_Portals 'Circular Approximation and Limits'"
+   },
+   "departure": "formfinding (spine 8) is visited early for one surface: the catenoid is a parametric (u, v) body, and the anchor's Parameterize is where it belongs. Form found by force returns at ch30.",
+   "project_step": "Measure your hall's frame time in the headset and cut the one body that costs most without changing what it argues.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_21_genes_as_files",
+   "n": 21,
+   "part": "p4_parameterize",
+   "title": "Genes as files: a family saved, a body recalled",
+   "spine": [
+    "proceduralgeneration",
+    "randomness",
+    "tiling"
+   ],
+   "halls": [
+    {
+     "map": "PG_Genetic_Evolution",
+     "role": "carrier"
+    },
+    {
+     "map": "Random_Definition",
+     "role": "carrier"
+    },
+    {
+     "map": "Pattern_Foundry",
+     "role": "field trip"
+    },
+    {
+     "map": "LSystems_Living",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "dictionaries",
+    "resources",
+    "save_load"
+   ],
+   "code_returns": [
+    "classes",
+    "export",
+    "random",
+    "seeds",
+    "instancing"
+   ],
+   "body": "A creature genome as a custom Resource (segments, limb_count, limb_angle, colour, seed) and a builder that turns it into primitive-mesh parts. The chosen specimen is saved as .tres or to user:// and returns after a restart.",
+   "argument": {
+    "axis": "the limb_count gene",
+    "values": [
+     "0",
+     "2",
+     "4",
+     "6",
+     "12"
+    ],
+    "predict": "6 and 12 will look most alike from above: past about six limbs the body reads as radial, a star or a flower, not as an animal.",
+    "claim": "A genome draws a border between kinds: somewhere between 4 and 6 limbs, a creature becomes a flower."
+   },
+   "debt": "A saved body is a frozen choice. The genome decides which creatures are possible and which can never be born, and that is the dark spot of the encoding. Resources are shared by default, so two bodies can secretly share one gene; duplicate(true) is the fix.",
+   "place": "Carry it: the specimen is a pickable object that survives leaving and re-entering the hall, a museum specimen.",
+   "godot": [
+    "Dictionary literals and lookups (a body as a recipe)",
+    "class_name Genome extends Resource with @export fields; ResourceSaver.save(), load()",
+    "a save and load round trip in user://",
+    "resource.duplicate(true) against a shared resource"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch18 (data)",
+    "noc": "NoC 9 genotype and phenotype, previewed",
+    "application_wp": "WP3 evolutionary algorithms, previewed",
+    "klee": "None",
+    "reference": "Form+Code 'Parameterize' (the parametric chair as a recipe) [mem]; Levin & Brain 'Virtual Creature'; Sims, Evolved Virtual Creatures (1994) [mem]"
+   },
+   "departure": "proceduralgeneration (spine 16) is visited early for its genome-as-file pattern, which is where Parameterize ends: a family becomes data that can be saved, shared and bred. Evolution itself returns at ch35.",
+   "project_step": "Midterm (long track): save your hall's family as files, show the sheet, and let a classmate load and breed one specimen.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_22_value_to_colour",
+   "n": 22,
+   "part": "p5_visualize",
+   "title": "Value to colour: the chroma stack",
+   "spine": [
+    "color"
+   ],
+   "halls": [
+    {
+     "map": "Color_Context_Placed",
+     "role": "carrier"
+    },
+    {
+     "map": "Color_Rainbow",
+     "role": "carrier"
+    },
+    {
+     "map": "Color_Walls",
+     "role": "carrier"
+    },
+    {
+     "map": "Color_Pillar",
+     "role": "field trip"
+    },
+    {
+     "map": "Color_Nails",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "ui",
+    "strings"
+   ],
+   "code_returns": [
+    "materials",
+    "interpolation",
+    "dictionaries",
+    "export",
+    "signals"
+   ],
+   "body": "A stack of blocks coloured by a rule (chroma_stack's rule), an arch of N bands coloured by Color.from_hsv(i / N), and one grey block that is moved across five grounds. A 3D slider sets N; labels show each colour's hex string.",
+   "argument": {
+    "axis": "ground colour behind one fixed grey block (Albers)",
+    "values": [
+     "black",
+     "dark blue",
+     "mid grey",
+     "yellow",
+     "white"
+    ],
+    "predict": "Black and dark blue will make the grey look most alike (both push it lighter); yellow and white push it darker, and yellow also tints it violet.",
+    "claim": "A colour value is not a colour: the same material reads as two colours on two grounds."
+   },
+   "debt": "RGB is a device model, not perception (sRGB, gamma, the headset's panel). A hex code names a number, not what anyone sees. ROYGBIV is Newton's seven bands, chosen to match the musical scale [mem], so even the rainbow is a convention.",
+   "place": "Walk through it: the rainbow arch as a gate. In VR the Albers wall changes as you move, so the same body looks different depending on where you stand.",
+   "godot": [
+    "Color.from_hsv(), Color.lerp(), to_html()",
+    "string formatting with % and Label3D",
+    "a Control slider in a SubViewport on a 3D panel (or the supplied 3D slider)",
+    "lerp_rgb against lerp_hsv over one strip of boxes"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Color 1-2'; processing.org 'Color'",
+    "noc": "None",
+    "application_wp": "WP3 shading algorithms (colour as the first shading)",
+    "klee": "IV.40-IV.43 colour as energy; the colour circle where the arrow becomes superfluous",
+    "reference": "Form+Code 'Visualize: Displaying Data' [V code example]; Albers, Interaction of Color ('1 colour appears as 2'); Recreating the Past (Riley, Albers)"
+   },
+   "departure": "color is spine 4; here it opens Visualize at chapter 22, after materials were used as values (ch8) and tiles as images (ch10). Klee ends his book in colour, and Form+Code treats colour mapping as visualizing a value, so colour as a system comes when there are values worth mapping. All the spine's colour halls that carry code are visited here.",
+   "project_step": "Give your hall a colour rule that encodes one value (height, age, distance) and test it on two grounds.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_23_noise_field",
+   "n": 23,
+   "part": "p5_visualize",
+   "title": "Noise: a field you cannot see",
+   "spine": [
+    "noise",
+    "change",
+    "randomness"
+   ],
+   "halls": [
+    {
+     "map": "Noise_Perlin_Simplex",
+     "role": "carrier"
+    },
+    {
+     "map": "Noise_Space_10",
+     "role": "carrier"
+    },
+    {
+     "map": "Noise_Columns",
+     "role": "field trip"
+    },
+    {
+     "map": "Flow_Field",
+     "role": "field trip"
+    },
+    {
+     "map": "Random_Space_Geometry",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "noise"
+   ],
+   "code_returns": [
+    "random",
+    "seeds",
+    "packed_arrays",
+    "surface_tool",
+    "collision",
+    "export"
+   ],
+   "body": "The ch17 landscape with the sine replaced by FastNoiseLite: a walkable terrain whose generator, frequency and octaves are exported.",
+   "argument": {
+    "axis": "noise generator (same seed, frequency and octaves)",
+    "values": [
+     "simplex",
+     "perlin",
+     "value",
+     "cellular"
+    ],
+    "predict": "simplex and perlin will look most alike (both smooth blobs); cellular is the outlier, with cells and ridges.",
+    "claim": "The blob look belongs to the generator, not to the ground: change the noise type and a landscape changes species."
+   },
+   "debt": "The blob aesthetic (Queer 3D): noise is deterministic chance on a lattice, and Perlin's gradient grid shows through as axis-aligned artefacts. Read Palle's 'overflow rate' comparison (Perlin 45, random 635, Voronoi 0, sine 3284) as a debt table. Noise_Space_10 stops its octaves at 4, with a comment saying why; read that comment as a confession in the Climategate sense.",
+   "place": "Stand on it: walk the terrain; cross the Random_Space_Geometry bridge whose planks move with the seed.",
+   "godot": [
+    "FastNoiseLite: noise_type, frequency, fractal_octaves, seed",
+    "get_noise_2d(x, z) inside the heightfield loop",
+    "refuse to rebuild while the player stands on it",
+    "an ImageTexture from the noise for a quick look"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch13 (noise())",
+    "noc": "NoC 0, the Perlin noise section",
+    "application_wp": "WP1 Perlin noise; Voronoi via TYPE_CELLULAR; WP2 flow fields (Flow_Field field trip)",
+    "klee": "None",
+    "reference": "Form+Code 'Visualize' (a hidden field made visible) [the anchor does not name noise; our placement]; Book of Shaders ch11; Catlike Coding 'Pseudorandom Noise'"
+   },
+   "departure": "noise (spine 11) is taught after colour and far from its randomness partner (ch11): here noise is the visualization of a field you cannot see rather than a sequel to randomness. Flow_Field (spine 6) is visited now that noise exists, not at its spine place.",
+   "project_step": "Grow one surface of your hall from noise and name the generator on a label.",
+   "tracks": [
+    "short",
+    "long"
+   ]
+  },
+  {
+   "id": "c3_24_shader",
+   "n": 24,
+   "part": "p5_visualize",
+   "title": "A shader draws every pixel at once",
+   "spine": [
+    "shaders",
+    "tiling"
+   ],
+   "halls": [
+    {
+     "map": "Shader_01_Shaping",
+     "role": "carrier"
+    },
+    {
+     "map": "Tutorial_Pattern",
+     "role": "carrier"
+    },
+    {
+     "map": "Shader_09_FBM",
+     "role": "carrier"
+    },
+    {
+     "map": "Shader_05_Patterns",
+     "role": "field trip"
+    },
+    {
+     "map": "Shader_11_QueerRubber",
+     "role": "field trip"
+    },
+    {
+     "map": "Shader_10_ReactionDiffusion",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "shaders",
+    "uniforms"
+   ],
+   "code_returns": [
+    "uv",
+    "noise",
+    "materials",
+    "export",
+    "tool_scripts"
+   ],
+   "body": "A surface shaded by a function of UV (step and smoothstep bands), then a vertex shader that displaces a subdivided plane with fBm: the queer rubber body.",
+   "argument": {
+    "axis": "fBm octaves (uniform int layers)",
+    "values": [
+     "1",
+     "2",
+     "3",
+     "4",
+     "6"
+    ],
+    "predict": "4 and 6 will look most alike: each octave adds half the amplitude at twice the frequency, so after 4 the new detail falls below a pixel at 2 m.",
+    "claim": "Detail has diminishing returns the eye can predict: most of a fractal surface's character is in its first three octaves."
+   },
+   "debt": "What you see is not what holds you. Vertex displacement moves the picture, not the collider (Shader_09_FBM's glass slab: visible deformation, unchanged collision). Gaboury's frame-buffer chapter: a shader is a picture machine, not a body.",
+   "place": "Walk on it: step onto the displaced rubber floor and feel that it is flat, the gap between seen and held.",
+   "godot": [
+    "shader_type spatial; fragment() with UV, TIME, step(), smoothstep()",
+    "uniform float frequency : hint_range(...); set_shader_parameter() from GDScript",
+    "vertex(): VERTEX += NORMAL * h",
+    "ShaderMaterial on a PlaneMesh with subdivisions"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Render Techniques' extension / PShader",
+    "noc": "None",
+    "application_wp": "WP3 shading algorithms; WP2 'queer meshes and textures'; reaction-diffusion (encounter)",
+    "klee": "IV colour as energy",
+    "reference": "Form+Code 'Visualize: Superformula' (a formula made visible) [V code example]; Book of Shaders ch5-13; Gaboury, Image Objects ch2"
+   },
+   "departure": "shaders (spine 12) follows noise (11) as in the spine. Tiling is revisited on purpose: Shader_05_Patterns tiles in UV what ch10 tiled with a MultiMesh, a 'port' in 10 PRINT's sense.",
+   "project_step": "Port one body of your hall into a shader and write down what the port lost (its collider).",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_25_implicit_bodies",
+   "n": 25,
+   "part": "p5_visualize",
+   "title": "Implicit bodies: the hidden field as a surface",
+   "spine": [
+    "isosurfaces",
+    "boolean_surfaces"
+   ],
+   "halls": [
+    {
+     "map": "ISO_Introduction",
+     "role": "carrier"
+    },
+    {
+     "map": "ISO_LookupTable",
+     "role": "carrier"
+    },
+    {
+     "map": "ISO_Metaballs",
+     "role": "carrier"
+    },
+    {
+     "map": "Boolean_Verbs",
+     "role": "carrier"
+    },
+    {
+     "map": "ISO_TorusGyroid",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "raycasts"
+   ],
+   "code_returns": [
+    "noise",
+    "packed_arrays",
+    "surface_tool",
+    "normals",
+    "collision",
+    "player"
+   ],
+   "body": "A density field of two balls (metaballs), sampled into a grid and extracted by a supplied marching-cubes function into a mesh with a trimesh collider. Beside it, the same body built with a CSG union.",
+   "argument": {
+    "axis": "fusion: the distance between two sources (the shared ISO/Boolean vocabulary)",
+    "values": [
+     "distinct",
+     "necked",
+     "lobed",
+     "single"
+    ],
+    "predict": "lobed and single will look most alike from 3 m; 'necked' is the value where two bodies become one.",
+    "claim": "A neck is where two bodies become one: the threshold, not the sources, decides how many bodies there are."
+   },
+   "debt": "The lookup table is a code-critique station (after Marino's chapter on Kittler's raytracer): read and annotate 30 of its lines, because someone decided the ambiguous cases. The smooth-minimum blend radius is where the blob aesthetic comes from (Quilez). A ray that crosses one column three times finds an overhang no heightfield could make: the implicit body escapes the landscape's rule.",
+   "place": "Walk through it: an implicit tunnel (ISO_TorusGyroid). A shape cast answers whether a capsule the size of the player fits the opening before you try it.",
+   "godot": [
+    "density(p); sampling a 3D grid into a PackedFloat32Array",
+    "the supplied marching_cubes(field, threshold) -> ArrayMesh (the table is read, not written)",
+    "PhysicsRayQueryParameters3D and intersect_ray(); ShapeCast3D with a capsule",
+    "CSGCombiner3D union, intersection, subtraction with use_collision"
+   ],
+   "lineage": {
+    "processing": "None",
+    "noc": "None",
+    "application_wp": "WP2 'queer meshes' (blob, fusion); topology (l.89)",
+    "klee": "I.11 building up against carving away (union against difference)",
+    "reference": "Form+Code 'Visualize' (the invisible made visible) [our placement]; Marino, Critical Code Studies ch6 (Kittler's code); Lague, Coding Adventure: Marching Cubes; Quilez, smooth minimum"
+   },
+   "departure": "isosurfaces and boolean_surfaces (spine 18-19) come before the simulation sequences (13-20), because an implicit body is the most literal case of Visualize: a surface drawn where an invisible field crosses a threshold. The simulations follow in Simulate.",
+   "project_step": "Carve one space of your hall as an implicit body and prove a visitor fits through it.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_26_graph_relation",
+   "n": 26,
+   "part": "p5_visualize",
+   "title": "Visualize a relation: a graph laid out and searched",
+   "spine": [
+    "graphtheory"
+   ],
+   "halls": [
+    {
+     "map": "GT_Foundations",
+     "role": "carrier"
+    },
+    {
+     "map": "GT_Network_Analysis",
+     "role": "carrier"
+    },
+    {
+     "map": "GT_Layout",
+     "role": "field trip"
+    },
+    {
+     "map": "GT_Spanning_Trees",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "graphs",
+    "search",
+    "await"
+   ],
+   "code_returns": [
+    "dictionaries",
+    "classes",
+    "materials",
+    "recursion",
+    "queues"
+   ],
+   "body": "A graph as a Dictionary of adjacency lists, drawn as spheres and edge lines, with BFS and DFS replayed as timed light over the same graph.",
+   "argument": {
+    "axis": "layout rule for the same graph",
+    "values": [
+     "circle",
+     "grid",
+     "random (seeded)",
+     "by BFS depth (tree)",
+     "force-directed (supplied)"
+    ],
+    "predict": "circle and random will look most alike for a dense graph, both a hairball; the BFS tree and force-directed differ most, since one ranks and the other clusters.",
+    "claim": "The same relations drawn five ways say five different things: a layout is an argument about which relations matter."
+   },
+   "debt": "A layout is not the graph. Network defaults make like cluster with like (Chun's homophily, Discriminating Data [mem]), and centrality colour ranks bodies by a formula someone chose.",
+   "place": "Walk it: the graph at room scale; walk the BFS order. The spanning-tree maze is a place.",
+   "godot": [
+    "a Dictionary of Arrays as adjacency",
+    "BFS with a queue, DFS with recursion",
+    "await get_tree().create_timer(0.2).timeout to replay a search",
+    "a RefCounted Graph (data) separate from the Node3D renderer"
+   ],
+   "lineage": {
+    "processing": "None",
+    "noc": "None",
+    "application_wp": "WP3 graph theory ('How do we navigate an auto-generated world?')",
+    "klee": "None",
+    "reference": "Form+Code 'Visualize: Displaying Data' [V code example]; Code Societies, 'Building Nets for Floating Data' [V session title]; Chun, Discriminating Data [mem]"
+   },
+   "departure": "graphtheory is spine 22 but comes here, before the simulation sequences: Form+Code's Visualize is where relations become pictures, and the 2023 application puts graph theory in WP3 with world building. The graph returns at ch34, where a body must walk one.",
+   "project_step": "Draw your hall's route network as a graph and colour the node every route passes through.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_27_judgment",
+   "n": 27,
+   "part": "p5_visualize",
+   "title": "Visualize a judgment: classification and its bias",
+   "spine": [
+    "machinelearning",
+    "postfoundationscrisis"
+   ],
+   "halls": [
+    {
+     "map": "ML_Classification",
+     "role": "carrier"
+    },
+    {
+     "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+     "role": "carrier"
+    },
+    {
+     "map": "ML_Perception",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "sorting",
+    "json"
+   ],
+   "code_returns": [
+    "dictionaries",
+    "arrays",
+    "uv",
+    "save_load",
+    "ui",
+    "materials"
+   ],
+   "body": "A floor painted by a k-nearest-neighbour classifier: labelled sample bodies stand on it, and every floor pixel takes the colour of the majority of its k nearest samples (sorted by distance).",
+   "argument": {
+    "axis": "k (neighbours consulted)",
+    "values": [
+     "1",
+     "3",
+     "7",
+     "15",
+     "31"
+    ],
+    "predict": "15 and 31 will look most alike: the boundary is smooth and the lone minority sample's island has been swallowed; k = 1 keeps every outlier.",
+    "claim": "Smoothing a judgment erases its minorities: as k grows, the lone sample's region disappears."
+   },
+   "debt": "Machine-learning models are always biased (Queer 3D). k is a politics of neighbourhood, and the labelled data is the dark spot: whoever labelled the samples decided the floor. Collect and label your own tiny dataset of bodies first (Feminist Data Set).",
+   "place": "Stand on it: walk onto the floor and become a sample, so your position is classified; the bias hall's perspective blend lets you see a cluster from inside.",
+   "godot": [
+    "Array.sort_custom() by distance",
+    "an Image written per pixel, an ImageTexture on a floor quad",
+    "JSON.stringify() and JSON.parse_string() to save the labelled samples",
+    "a Button to add a sample of the other class"
+   ],
+   "lineage": {
+    "processing": "None",
+    "noc": "NoC 10 classification, previewed",
+    "application_wp": "WP3 neural networks (preview); Queer 3D's 'models are always biased'",
+    "klee": "None",
+    "reference": "Form+Code 'Visualize' [our placement]; Sinders, Feminist Data Set; Queer 3D World 2024, the debt layer"
+   },
+   "departure": "machinelearning (21) and postfoundationscrisis (25) are visited early for one judgment made visible: a classifier is a picture before it is a learner, and bias belongs beside the other pictures that hide their choices. Learning returns at ch35, and the critical halls at ch36.",
+   "project_step": "Classify something in your hall (routes, kinds of body) and show what the smoothing erased.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_28_forces",
+   "n": 28,
+   "part": "p6_simulate",
+   "title": "Forces: your own integrator",
+   "spine": [
+    "forces"
+   ],
+   "halls": [
+    {
+     "map": "Vectors_Act3_FieldsAndMotion",
+     "role": "carrier"
+    },
+    {
+     "map": "VFM_03_Motion",
+     "role": "carrier"
+    },
+    {
+     "map": "Vectors_Act4b_Oscillation",
+     "role": "carrier"
+    },
+    {
+     "map": "Vectors_Act5_ForceAsPlace",
+     "role": "carrier"
+    },
+    {
+     "map": "VFM_05_Launch",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "forces",
+    "integration"
+   ],
+   "code_returns": [
+    "vectors",
+    "physics_bodies",
+    "areas",
+    "delta",
+    "classes",
+    "trig"
+   ],
+   "body": "A Mover class with position, velocity and acceleration: apply_force() accumulates and a fixed-step integrator moves it. Then the same mover as a RigidBody3D with apply_central_force(), then an Area3D that replaces gravity.",
+   "argument": {
+    "axis": "integration step on a damped spring (trail still)",
+    "values": [
+     "1/15 s",
+     "1/30 s",
+     "1/60 s",
+     "1/120 s",
+     "1/240 s"
+    ],
+    "predict": "1/120 and 1/240 will look most alike; at 1/15 explicit Euler gains energy and the trail spirals outward instead of settling.",
+    "claim": "An integrator is a physics of its own: a coarse step invents energy, and the trail is the method's signature."
+   },
+   "debt": "Engine physics is an approximation you did not write: sleeping, tunnelling at speed, settling that depends on the tick rate (an Ada die read 15/16 at 90 Hz and 2/16 at 60 Hz). Explicit Euler invents energy.",
+   "place": "Become it: step into the force-field zone (its law axis: gravity, flow ...) and let it carry your body across a chasm (Vectors_Act5_ForceAsPlace).",
+   "godot": [
+    "velocity += acceleration * dt; position += velocity * dt (semi-implicit Euler)",
+    "a fixed-step accumulator in _physics_process",
+    "RigidBody3D.apply_central_force(), mass, linear_damp",
+    "Area3D gravity_space_override"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Simulate 2: Physics'",
+    "noc": "NoC 1-3 (Vectors, Forces, Oscillation)",
+    "application_wp": "Vectors (l.9); WP4 chaos, previewed (sensitivity to the step)",
+    "klee": "III the gravitational curve (bullet, stone, meteor)",
+    "reference": "Form+Code 'Simulate: Particles' [V code example]; NoC ch2 'Forces'"
+   },
+   "departure": "forces (spine 7) comes at chapter 28, much later than its spine place, because the anchor puts Simulate last and because an integrator the student writes needs classes (ch18), packed arrays (ch17) and the pendulum's trig (ch16). Vector arithmetic was met at ch4-5, where the spine's forces halls first use it.",
+   "project_step": "Make one place in your hall where forces differ, and let a visitor's body feel it.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_29_aggregation",
+   "n": 29,
+   "part": "p6_simulate",
+   "title": "Particles and aggregation: many short lives build one body",
+   "spine": [
+    "randomness",
+    "proceduralgeneration",
+    "softbodies"
+   ],
+   "halls": [
+    {
+     "map": "Random_Walk",
+     "role": "carrier"
+    },
+    {
+     "map": "Random_Gaussian",
+     "role": "carrier"
+    },
+    {
+     "map": "PG_Sculpted_Forms",
+     "role": "carrier"
+    },
+    {
+     "map": "SoftBodies_Affect_Theory_Visualization",
+     "role": "field trip"
+    },
+    {
+     "map": "Random_Game",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "particles",
+    "lifetime"
+   ],
+   "code_returns": [
+    "random",
+    "seeds",
+    "forces",
+    "integration",
+    "multimesh",
+    "surface_tool"
+   ],
+   "body": "Diffusion-limited aggregation: random walkers are released, wander, and freeze when they touch the growing cluster; the frozen walkers are skinned into one mesh. Beside it, a GPUParticles3D emitter shows what short lives look like when nothing is kept.",
+   "argument": {
+    "axis": "stickiness (probability of freezing on contact)",
+    "values": [
+     "1.0",
+     "0.5",
+     "0.2",
+     "0.05"
+    ],
+    "predict": "0.2 and 0.05 will look most alike (both dense coral); 1.0 gives the thin, branching fern.",
+    "claim": "Stickiness trades branching for mass: the less a walker commits, the more solid the body it builds."
+   },
+   "debt": "A particle's life is a design parameter (lifetime, emission shape). GPU particles are pictures, not bodies: they collide with nothing but a heightfield or SDF. DLA is slow because every walker is a random walk, which is the cost of chance. Compare randfn() with a hand-written Box-Muller.",
+   "place": "Walk around it: the coral grows over minutes in your hall, and a visitor's hand can seed it (touch makes a sticky point).",
+   "godot": [
+    "an Array of walkers: spawn, age, remove_at(), queue_free()",
+    "GPUParticles3D: amount, lifetime, ParticleProcessMaterial, emission shape",
+    "randfn() against Box-Muller",
+    "freeze and skin: SurfaceTool over the frozen positions"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Simulate 1: Biology'",
+    "noc": "NoC 0 random walks (return); NoC 4 Particle Systems",
+    "application_wp": "WP1 particle systems; WP1 randomness (return)",
+    "klee": "None",
+    "reference": "Form+Code 'Simulate: Diffusion-Limited Aggregation' [V code example]; Levin & Brain 'Unpredictability' (drunk walk)"
+   },
+   "departure": "A declared return to randomness (spine 10): the walks and distributions the spine teaches in its randomness sequence come back as the engine of a body, after chance was first met in the grid (ch11). Particle systems, which WP1 lists and no spine hall teaches, get their home here.",
+   "project_step": "Grow one body in your hall by aggregation. Fix the seed so it grows the same for everyone, or don't, and say why.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_30_balance_game",
+   "n": 30,
+   "part": "p6_simulate",
+   "title": "Balance: form found by force, and a first complete game",
+   "spine": [
+    "formfinding"
+   ],
+   "halls": [
+    {
+     "map": "FormFinding_Forge",
+     "role": "carrier"
+    },
+    {
+     "map": "FormFinding_Equilibrium",
+     "role": "carrier"
+    },
+    {
+     "map": "FormFinding_Relaxation",
+     "role": "field trip"
+    },
+    {
+     "map": "VFM_09_Legs",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "state_machines",
+    "groups"
+   ],
+   "code_returns": [
+    "physics_bodies",
+    "signals",
+    "recursion",
+    "seeds",
+    "save_load",
+    "audio",
+    "ui",
+    "player",
+    "export_build"
+   ],
+   "body": "A stack of grabbed RigidBody3D stones that must settle, and a recursive Calder mobile whose pivots are solved and then hung for real with joints.",
+   "argument": {
+    "axis": "top stone's centre-of-mass offset as a fraction of its half-width (still after 3 s)",
+    "values": [
+     "0",
+     "0.25",
+     "0.45",
+     "0.55",
+     "0.8"
+    ],
+    "predict": "0.45 and 0.55 will look most alike before release and split after it: one holds, one topples. 0 and 0.25 stay alike.",
+    "claim": "Balance is invisible until it fails: the tipping point is at the edge of the support, not where the eye expects it."
+   },
+   "debt": "Physics decides 'settled' by a threshold (sleep), so the game's judgment is a number. The solved mobile balances in the solver but not always in the engine: two models of one body disagree.",
+   "place": "Carry it: stack the stones with your hands (XR grab); the tightrope walker is the scale. The whole loop runs: menu, play, win (stones settled), score saved, replay, exported as a build.",
+   "godot": [
+    "enum State { BUILDING, SETTLING, SOLVED, FAILED } with match",
+    "add_to_group('stones'); get_tree().get_nodes_in_group()",
+    "RigidBody3D.sleeping or a linear_velocity threshold for 'settled'",
+    "the small complete game: UI score, AudioStreamPlayer, best score saved to user://, export"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch10 (algorithms: a small game taken apart)",
+    "noc": "NoC 6 Physics Libraries",
+    "application_wp": "None",
+    "klee": "II disturbed and corrected balance, stacked toppling stones; III 'to stand despite all possibilities to fall'",
+    "reference": "Form+Code 'Simulate' [mem]; Moholy-Nagy's balance studies; Calder; Squash the Creeps parts 7-8 (game states, score, replay)"
+   },
+   "departure": "formfinding (spine 8) follows forces (ch28) as in the spine, but late overall; see ch28. It is also where the small complete game is assembled, because a balance puzzle has a natural win state and needs no enemies.",
+   "project_step": "Give your hall a goal: a state it can be put into, recognized, saved and replayed.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_31_rules_that_grow",
+   "n": 31,
+   "part": "p6_simulate",
+   "title": "Rules that grow: automata and grammars",
+   "spine": [
+    "cellularautomata",
+    "lsystems",
+    "fractals"
+   ],
+   "halls": [
+    {
+     "map": "CA_Introduction",
+     "role": "carrier"
+    },
+    {
+     "map": "CA_GameOfLife",
+     "role": "carrier"
+    },
+    {
+     "map": "LSystems_Grammar_Lab",
+     "role": "carrier"
+    },
+    {
+     "map": "LSystems_Growth",
+     "role": "carrier"
+    },
+    {
+     "map": "Fractal_KochSierpinski",
+     "role": "field trip"
+    },
+    {
+     "map": "CA_AgentsCircuits",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "buffers",
+    "stacks"
+   ],
+   "code_returns": [
+    "arrays",
+    "strings",
+    "dictionaries",
+    "recursion",
+    "multimesh",
+    "collision"
+   ],
+   "body": "A 1D automaton whose history is stacked into a walkable bridge (each live cell a floor tile), and an L-system turtle whose [ and ] push and pop a stack of {pos, dir} to grow a plant.",
+   "argument": {
+    "axis": "elementary rule number",
+    "values": [
+     "30",
+     "90",
+     "110",
+     "184",
+     "250"
+    ],
+    "predict": "30 and 110 will look most alike at a glance (both irregular, triangle-filled histories), though 30 is chaotic and 110 is structured; 90 (Sierpinski) and 250 are the most regular.",
+    "claim": "Two neighbours and one number decide a world: a rule becomes visible only as the history it grows."
+   },
+   "debt": "Synchronous update is a fiction kept up by a double buffer; update in place and the body changes (CA_ExpandingSpace compares the two). A grammar grows exponentially and has to be capped with a symbol budget, so recursion must be controlled again.",
+   "place": "Walk on it: the CA bridge whose gaps are the rule's holes, which you can fall through.",
+   "godot": [
+    "two arrays (current, next) and a swap: double buffering",
+    "an Array used as a stack: push_back() / pop_back() of a Dictionary state",
+    "string rewriting: for c in s: out += rules.get(c, c)",
+    "history as a MultiMesh; one merged collider"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Simulate 1: Biology' [mem]",
+    "noc": "NoC 7 Cellular Automata; NoC 8 L-systems",
+    "application_wp": "WP2 L-systems, cellular automata",
+    "klee": "I.11 propagation",
+    "reference": "Form+Code 'Simulate' (Conway's Life) [mem]; Munari's 'mad branch'"
+   },
+   "departure": "A declared return: fractals (recursion at ch12) come back as rules (Rule 90's Sierpinski in CA_AgentsCircuits). cellularautomata and lsystems are taught together because both apply a rule to a whole state at once.",
+   "project_step": "Let one body in your hall be grown by a rule you can write in one line.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_32_soft_bodies",
+   "n": 32,
+   "part": "p6_simulate",
+   "title": "Soft bodies: polycount against deformation",
+   "spine": [
+    "softbodies"
+   ],
+   "halls": [
+    {
+     "map": "SoftBodies_Soft_Body_Deformation",
+     "role": "carrier"
+    },
+    {
+     "map": "SoftBodies_Cloth_Physics",
+     "role": "carrier"
+    },
+    {
+     "map": "SoftBodies_Playground_of_Joy",
+     "role": "field trip"
+    },
+    {
+     "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+     "role": "field trip"
+    },
+    {
+     "map": "Topology_Entropy_Morphogenesis",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "timers"
+   ],
+   "code_returns": [
+    "physics_bodies",
+    "export",
+    "profiling",
+    "setters",
+    "signals"
+   ],
+   "body": "A SoftBody3D jelly made from a subdivided box, pinned at two points, with stiffness and pressure exported; a cloth whose pins are released by a Timer.",
+   "argument": {
+    "axis": "subdivisions of the jelly (still taken while it is struck)",
+    "values": [
+     "1",
+     "2",
+     "4",
+     "8",
+     "16"
+    ],
+    "predict": "8 and 16 will look most alike at rest and when struck; 1 and 2 dent as rigid facets, because only enough vertices can bend smoothly.",
+    "claim": "A body can only deform as smoothly as its polycount allows: the application's topology question in one still."
+   },
+   "debt": "Polycount against smooth deformation, the application's own phrase. The solver's stiffness is not a material (rubber is a number). A soft body costs per vertex, so the headset frame budget comes back.",
+   "place": "Touch it: press the jelly with your hand (XR), walk through hanging cloth, play in the Playground of Joy.",
+   "godot": [
+    "SoftBody3D from a subdivided BoxMesh: simulation_precision, pressure_coefficient",
+    "set_point_pinned()",
+    "a Timer node: one_shot, the timeout signal",
+    "frame time per subdivision in the Profiler"
+   ],
+   "lineage": {
+    "processing": "None",
+    "noc": "NoC 6 soft bodies (toxiclibs); a course week, no book chapter",
+    "application_wp": "WP2 soft body simulation (cloth, liquids, rubber); polycount (l.89); Turing's morphogenesis (reaction-diffusion field trip)",
+    "klee": "I.9 bone, tendon, muscle: soft tissue",
+    "reference": "Form+Code 'Simulate' [mem]; Bellmer and Bourgeois as lineage for deformable bodies (Queer 3D)"
+   },
+   "departure": "Back in spine order (softbodies 17 after lsystems 15). It only looks like a step back because ch25-27 visited isosurfaces, graphs and classification early, and those departures are declared there.",
+   "project_step": "Give your hall one body that deforms when touched, at the polycount your frame budget allows.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_33_swarms",
+   "n": 33,
+   "part": "p6_simulate",
+   "title": "Collective bodies: flocks and swarms",
+   "spine": [
+    "swarmintelligence"
+   ],
+   "halls": [
+    {
+     "map": "SwarmIntelligence_Boids_Algorithm",
+     "role": "carrier"
+    },
+    {
+     "map": "SwarmIntelligence_PhysarumColony",
+     "role": "carrier"
+    },
+    {
+     "map": "Random_Pheromone",
+     "role": "field trip"
+    },
+    {
+     "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "inheritance"
+   ],
+   "code_returns": [
+    "classes",
+    "forces",
+    "multimesh",
+    "profiling",
+    "groups",
+    "state_machines",
+    "dictionaries"
+   ],
+   "body": "A flock: an Agent base class with steer(); Boid and Ant extend it and override perceive(); all drawn as one MultiMesh.",
+   "argument": {
+    "axis": "separation weight",
+    "values": [
+     "0",
+     "0.5",
+     "1.5",
+     "3",
+     "10"
+    ],
+    "predict": "0 and 0.5 will look most alike (a clump); at 10 the flock becomes a lattice of lonely birds.",
+    "claim": "Separation alone decides whether many bodies read as one: a flock's shape is a negotiation of weights."
+   },
+   "debt": "Emergence is authored: someone chose the weights. Inheritance fixes a family tree of agents, so the base class decides what every agent can perceive. A swarm model of people is a politics.",
+   "place": "Walk among them: your body is an obstacle or a leader, the player as a boid.",
+   "godot": [
+    "class_name Agent; extends Agent; override a method; super()",
+    "neighbour search with a spatial hash (a Dictionary of cells)",
+    "a MultiMeshInstance3D updated every frame",
+    "Profiler: nodes against MultiMesh at 30, 300 and 3000 agents"
+   ],
+   "lineage": {
+    "processing": "Learning Processing ch22 (inheritance)",
+    "noc": "NoC 5 Autonomous Agents (flocking)",
+    "application_wp": "WP4 swarm intelligence",
+    "klee": "None",
+    "reference": "Form+Code 'Simulate' [mem]; Reynolds, Boids (1987) [mem]"
+   },
+   "departure": "Back in spine order (swarmintelligence 20 after softbodies 17); the apparent inversion comes from the declared early visits at ch25-27.",
+   "project_step": "Let a population live in your hall and decide what it does when a visitor arrives.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_34_navigate",
+   "n": 34,
+   "part": "p6_simulate",
+   "title": "Navigate a generated world",
+   "spine": [
+    "proceduralgeneration",
+    "graphtheory",
+    "lsystems"
+   ],
+   "halls": [
+    {
+     "map": "PG_Caves_Mazes",
+     "role": "carrier"
+    },
+    {
+     "map": "GT_Pathfinding",
+     "role": "carrier"
+    },
+    {
+     "map": "GT_Spanning_Trees",
+     "role": "field trip"
+    },
+    {
+     "map": "LSystems_Architecture",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "navigation"
+   ],
+   "code_returns": [
+    "graphs",
+    "search",
+    "random",
+    "seeds",
+    "player",
+    "collision",
+    "stacks",
+    "await"
+   ],
+   "body": "A maze carved by a seeded depth-first backtracker (a stack) or by Kruskal, given walls and a baked NavigationMesh; a NavigationAgent3D with the player's radius finds a route.",
+   "argument": {
+    "axis": "maze algorithm on the same grid",
+    "values": [
+     "DFS backtracker",
+     "Kruskal",
+     "Prim",
+     "random-walk cave",
+     "10 PRINT (from ch11)"
+    ],
+    "predict": "Kruskal and Prim will look most alike (short dead ends, an even texture); the DFS backtracker gives long corridors and is the outlier.",
+    "claim": "A maze algorithm has a handwriting: the same grid carved by two methods gives two different walks."
+   },
+   "debt": "A route in the array is not a route for a body: a path can exist in the graph and not for a capsule of radius 0.4 (the Ada walk map cannot see CSG collision). Navigation assumes a default body (radius, height, step), so who fits?",
+   "place": "Walk it: get lost in your own generated maze; the agent shows the way it thinks a body goes.",
+   "godot": [
+    "NavigationRegion3D, bake_navigation_mesh(), NavigationAgent3D",
+    "AStar3D or AStarGrid2D",
+    "agent_radius equal to the player capsule",
+    "maze generation spread over frames with await"
+   ],
+   "lineage": {
+    "processing": "None",
+    "noc": "NoC 5 path following",
+    "application_wp": "WP3 'How do we navigate an auto-generated world?'; procedural generation; graph theory",
+    "klee": "None",
+    "reference": "Form+Code 'Simulate' [our placement]; 10 PRINT ch65 'Maze Walker in BASIC'"
+   },
+   "departure": "graphtheory (22) returns here beside proceduralgeneration (16): a declared return from ch26, where graphs were drawn, to now, where a body must walk one.",
+   "project_step": "Generate part of your hall and prove the supplied body can always reach the exit.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_35_bodies_that_learn",
+   "n": 35,
+   "part": "p6_simulate",
+   "title": "Bodies that learn",
+   "spine": [
+    "machinelearning"
+   ],
+   "halls": [
+    {
+     "map": "ML_Evolution",
+     "role": "carrier"
+    },
+    {
+     "map": "ML_Neural_Networks",
+     "role": "carrier"
+    },
+    {
+     "map": "ML_Gradient_Landscape",
+     "role": "carrier"
+    },
+    {
+     "map": "PG_Genetic_Evolution",
+     "role": "encounter"
+    }
+   ],
+   "code_new": [
+    "threads"
+   ],
+   "code_returns": [
+    "resources",
+    "random",
+    "seeds",
+    "surface_tool",
+    "classes",
+    "profiling",
+    "timers",
+    "multimesh"
+   ],
+   "body": "A population of genome creatures (from ch21) that reproduce on energy with no fitness function, beside one bred by a fitness function; a tiny network whose weights are drawn as cylinder thickness while it trains on a worker thread.",
+   "argument": {
+    "axis": "selection pressure",
+    "values": [
+     "none (energy only)",
+     "weak",
+     "medium",
+     "strong",
+     "single champion"
+    ],
+    "predict": "strong and single champion will look most alike after 50 generations (a monoculture); 'none' keeps the most kinds.",
+    "claim": "A fitness function is a norm: the stronger the selection, the fewer bodies remain possible."
+   },
+   "debt": "A fitness function decides which bodies deserve to live. Training data and loss are the dark spot. A worker task must be waited on before it is released (an Ada trap), and in the headset the frame must never stall.",
+   "place": "Walk among them: the evolving population lives in your hall. If a visitor's gaze becomes the fitness function (look at a creature and it breeds), argue whether that is fair.",
+   "godot": [
+    "WorkerThreadPool.add_task() and wait_for_task_completion(); Thread",
+    "call_deferred() to hand results to the scene (the main-thread rule)",
+    "crossover and mutation over Resources",
+    "Timer-driven training batches"
+   ],
+   "lineage": {
+    "processing": "None",
+    "noc": "NoC 9 Evolutionary Computing, 10 Neural Networks, 11 Neuroevolution",
+    "application_wp": "WP3 neural networks and evolutionary algorithms; WP4 algorithmic life and AI; Turing's B-type machines",
+    "klee": "None",
+    "reference": "Form+Code 'Simulate' [mem]; Sims, Evolved Virtual Creatures [mem]"
+   },
+   "departure": "A declared return: machinelearning (21) was first met at ch27 as a picture (a classifier); here it comes back as learning, in spine order after swarms (20).",
+   "project_step": "Plan your final project now, two chapters before the end (Aesthetic Programming's flowchart unit): a one-page flowchart of your hall and its argument.",
+   "tracks": [
+    "long"
+   ]
+  },
+  {
+   "id": "c3_36_critical_simulation",
+   "n": 36,
+   "part": "p6_simulate",
+   "title": "Critical simulation: what the model cannot hold",
+   "spine": [
+    "foundationscrisis",
+    "qfeplaboratory",
+    "postfoundationscrisis"
+   ],
+   "halls": [
+    {
+     "map": "Godel_Incompleteness",
+     "role": "carrier"
+    },
+    {
+     "map": "NonEuclidean_Spaces",
+     "role": "carrier"
+    },
+    {
+     "map": "PostCrisis_Synthesis",
+     "role": "carrier"
+    },
+    {
+     "map": "Escher_Impossible",
+     "role": "field trip"
+    },
+    {
+     "map": "QFEP_Edge_Of_Chaos",
+     "role": "field trip"
+    },
+    {
+     "map": "CriticalAlgorithms_Applied_Ethics",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [
+    "files"
+   ],
+   "code_returns": [
+    "raycasts",
+    "shaders",
+    "uniforms",
+    "camera",
+    "signals",
+    "save_load",
+    "json",
+    "testing"
+   ],
+   "body": "A non-Euclidean triangle whose angle sum is set by a curvature uniform, beside an impossible body (Penrose triangle, Escher staircase) that is whole from one camera position only; a signal fires when you are aligned.",
+   "argument": {
+    "axis": "curvature of the triangle's space",
+    "values": [
+     "-1",
+     "-0.3",
+     "0",
+     "0.3",
+     "1"
+    ],
+    "predict": "-0.3, 0 and 0.3 will look most alike on a small triangle: curvature only shows at scale.",
+    "claim": "Space bends only at a scale: a small enough triangle is always Euclidean, which is why the flat assumption goes unnoticed."
+   },
+   "debt": "The model's limits become content: 'not found within budget' is not 'unprovable' (Godel, the halting problem); an impossible object is possible from one viewpoint only (the camera as the condition of truth); the sightline check asks who the room's shape excludes. Chun's sourcery again: open code still hides.",
+   "place": "Become it: walk the impossible staircase. The museum reads back a record you left in an earlier hall, state that survives the hall.",
+   "godot": [
+    "FileAccess read and write in user:// across scene changes",
+    "get_viewport().get_camera_3d() alignment test and a signal",
+    "a per-frame step budget for an unbounded search",
+    "curvature as a vertex-shader uniform; collision stays flat"
+   ],
+   "lineage": {
+    "processing": "None",
+    "noc": "None",
+    "application_wp": "WP4 non-Euclidean spaces, chaos; paradox, infinity and entropy (2022 prototype)",
+    "klee": "None",
+    "reference": "Code Societies, 'Critical Simulation' (Nora Khan) [V session title]; Form+Code has no chapter here: an Ada addition; Queer 3D ontology layer ('impossible possible space')"
+   },
+   "departure": null,
+   "project_step": "Write your hall's final.md: the argument, the prediction you got wrong, and what the model cannot hold.",
+   "tracks": [
+    "short",
+    "long"
+   ]
+  },
+  {
+   "id": "c3_37_synthesis_museum",
+   "n": 37,
+   "part": "p6_simulate",
+   "title": "Synthesis: your hall in the endless museum",
+   "spine": [
+    "qfeplaboratory",
+    "postfoundationscrisis"
+   ],
+   "halls": [
+    {
+     "map": "QFEP_Sandbox",
+     "role": "carrier"
+    },
+    {
+     "map": "QFEP_Synthesis",
+     "role": "carrier"
+    },
+    {
+     "map": "Crisis_Synthesis",
+     "role": "field trip"
+    },
+    {
+     "map": "SpeculativeComputation_Rhizome_Network",
+     "role": "field trip"
+    }
+   ],
+   "code_new": [],
+   "code_returns": [
+    "export_build",
+    "xr",
+    "import_assets",
+    "ai_assist",
+    "save_load",
+    "audio",
+    "ui",
+    "player",
+    "profiling",
+    "testing",
+    "export"
+   ],
+   "body": "The student's own hall: one family of bodies with one axis, placed where a body meets it, beside the class's other halls.",
+   "argument": {
+    "axis": "the student's own family axis (one exported field of their hall's main body)",
+    "values": [
+     "value A",
+     "value B",
+     "value C",
+     "value D"
+    ],
+    "predict": "Written and dated before the final render: which two will look most alike and why. Graded on the reasoning, not on being right; a prediction the render contradicts is worth the most.",
+    "claim": "One sentence the comparison sheet supports."
+   },
+   "debt": "A debt comment in the student's own code (after Marino's Climategate chapter [mem]) saying what the approximation owes, and one post in the class's code-critique thread (a snippet, its context, one question).",
+   "place": "The hall joins the class's endless museum and is walked in the headset by the class.",
+   "godot": [
+    "a Quest build and a desktop build",
+    "frame time at 72/90 Hz",
+    "a headless test of the family's claim",
+    "a ReadMe beside the code in Git"
+   ],
+   "lineage": {
+    "processing": "Handbook 'Synthesis 4'",
+    "noc": "NoC's Ecosystem Project (creatures for a museum exhibit)",
+    "application_wp": "All four work packages as a menu",
+    "klee": "The book as a whole: element to energy",
+    "reference": "Form+Code (the essay plus precedent gallery per theme, as the model for the final.md); Aesthetic Programming's final project (artifact plus ReadMe)"
+   },
+   "departure": null,
+   "project_step": "Final project shown to the class: the hall, the sheet, the claim, the debt comment.",
+   "tracks": [
+    "long"
+   ]
+  }
+ ],
+ "learned_from": [
+  "Form+Code (the anchor) [V themes and code examples]: name the parts by what code does to form, not by language feature. Repeat before Transform (the opposite of spine 2-3); recursion filed under Repeat; Parameterize as its own verb, which Ada's spine lacks although 74% of its scripts are built that way. Each theme has an essay and a precedent gallery, the model for each chapter's lineage and for the final.md. The anchor has no exercises, no skill ladder and no critique, so the course had to add all three.",
+  "Processing Handbook, 1st ed. [V]: a Synthesis checkpoint closes each part (ch6, ch12, ch17, ch21, ch37), and there are two tables of contents: the course's reading order and a by-spine index (in the markdown), so a departure shows as a jump in spine numbers. Static before continuous is kept only partly, because Godot calls your code from Point Zero on.",
+  "10 PRINT [V contents]: Regularity comes before Randomness, so chance sits straight after the grid and the tile (ch11), not at spine place 10. 'Ports' become declared returns (the tile ported to a shader at ch24), and 'Maze Walker' becomes a place (ch34).",
+  "Code as Creative Medium [V/agg]: Unpredictability after iteration and conditionals; named body prompts for the short-track mini project (Virtual Creature, Parametric Object, Extrapolated Body, Personal Prosthetic); short exercises (CODE) kept apart from open assignments (BODY plus ARGUMENT); 'Computing without a Computer' as Day Zero.",
+  "Aesthetic Programming [V]: a critical theme tied to each piece of syntax with no separate theory track, which is how DEBT sits inside each chapter; pause weeks in the long track; the final project planned two units before the end (ch35); the ReadMe beside the code in Git (ch37).",
+  "Critical Code Studies (Marino) and CCSWG [V]: the lookup table as a code-critique station modelled on Kittler's raytracer (ch25); a confessing debt comment in the student's own code (Climategate [mem]); 'describe a body in a single class' (ch18); write first, then read the debt; the forum-style critique thread (ch37).",
+  "Montfort, Exploratory Programming [V]: errors on day one ('valid and intentional are different', ch1); 'Critique My Starter Programs' turned on Godot's own capsule player (ch14).",
+  "Recreating the Past (SFPC) [V]: recreate a precedent (Nees's Schotter, Molnar, 10 PRINT, Durer's Melencolia) as the baseline for the ARGUMENT, with the difference as the DEBT; its close in Body and then Glitch/Deformation mirrors this course's close in soft bodies and critical simulation.",
+  "Code Societies (SFPC, 3 weeks) [V]: the short track's length and guest-session rhythm; 'Critical Simulation' as the model for ch36, the Ada addition Form+Code lacks.",
+  "Klee, Pedagogical Sketchbook [V via the braid's OCR read]: pendulum, circle, spiral is one derivation (ch16, under Transform); balance and falling (ch30); Part I's bone, tendon and muscle (ch13); the book ends in colour, which supports colour late as a system (ch22).",
+  "Albers, Interaction of Color [V]: fix the material and vary one thing (the family); 'one colour appears as two' as ch22's argument.",
+  "Gaboury, Image Objects [V contents]: the default body (ch3, ch14), the frame buffer (ch24) and object orientation (ch18) as chapter-grain debt readings.",
+  "The Nature of Code [V]: a cumulative chapter-end project that is literally a museum exhibit of creatures, which is why project_step always adds to the student's hall; the NoC order is kept inside Simulate (forces, particles, physics libraries, CA, fractals-as-rules, agents, evolution, networks).",
+  "GDQuest [V]: use before make (the SKETCH helper, the walker, the pickup are used first and opened later) and the skin/controller split (ch13), which is what lets the desktop body be swapped for the XR body.",
+  "Chun, Programmed Visions [V contents]: 'sourcery' is named at the first supplied helper that gets opened (ch5) and again at ch36, so the course does not claim that reading code reveals everything.",
+  "What no comparable course had and Ada supplies: a written, falsifiable prediction of the closest pair before every render (after dna.predicted_degeneracy), and the BODY and PLACE strands in 3D and VR. All the canon courses are 2D and web-first."
+ ]
+}

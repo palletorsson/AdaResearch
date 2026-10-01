@@ -1,0 +1,202 @@
+{
+  "checks": [
+    {
+      "name": "action move_left exists, bound to A, Left",
+      "passed": true
+    },
+    {
+      "name": "action move_right exists, bound to D, Right",
+      "passed": true
+    },
+    {
+      "name": "action move_forward exists, bound to W, Up",
+      "passed": true
+    },
+    {
+      "name": "action move_backward exists, bound to S, Down",
+      "passed": true
+    },
+    {
+      "name": "action pause exists, bound to Space",
+      "passed": true
+    },
+    {
+      "name": "line.tscn still runs on its own: readout 1.50 m",
+      "passed": true
+    },
+    {
+      "name": "the list starts empty",
+      "passed": true
+    },
+    {
+      "name": "Lines' A, Segment and Readout are inherited; B carries mover.gd",
+      "passed": true
+    },
+    {
+      "name": "the first frame keeps B's starting position",
+      "passed": true
+    },
+    {
+      "name": "holding still adds nothing (30 live frames)",
+      "passed": true
+    },
+    {
+      "name": "holding move_right moves B over live frames",
+      "passed": true
+    },
+    {
+      "name": "gate 0 keeps one position per frame, standing still (20 frames, 20 kept)",
+      "passed": true
+    },
+    {
+      "name": "move_right held for 0.5 s moves B by (0.6, 0.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "move_left held for 0.5 s moves B by (-0.6, 0.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "move_forward held for 0.5 s moves B by (0.0, 0.0, -0.6)",
+      "passed": true
+    },
+    {
+      "name": "move_backward held for 0.5 s moves B by (0.0, 0.0, 0.6)",
+      "passed": true
+    },
+    {
+      "name": "nothing held: B stays",
+      "passed": true
+    },
+    {
+      "name": "a diagonal is no faster: 0.60 m in 0.5 s",
+      "passed": true
+    },
+    {
+      "name": "the area stops B at x = 2.4",
+      "passed": true
+    },
+    {
+      "name": "a D key event reaches B through move_right: +0.6 m",
+      "passed": true
+    },
+    {
+      "name": "move_right rebound to J in the Input Map: J moves B, D no longer does, mover.gd unchanged",
+      "passed": true
+    },
+    {
+      "name": "autopilot ticked: keys are ignored, B follows the figure-eight",
+      "passed": true
+    },
+    {
+      "name": "holding still adds nothing (31 calls, 1 kept)",
+      "passed": true
+    },
+    {
+      "name": "a move shorter than the gate (0.05 < 0.1) adds nothing",
+      "passed": true
+    },
+    {
+      "name": "the gate measures from the last KEPT position: 0.11 m adds one",
+      "passed": true
+    },
+    {
+      "name": "gate 0 keeps one position per call, standing still (20 calls)",
+      "passed": true
+    },
+    {
+      "name": "(p - last).length() and p.distance_to(last) agree (20 random pairs)",
+      "passed": true
+    },
+    {
+      "name": "capacity 32 holds after 40 positions were kept",
+      "passed": true
+    },
+    {
+      "name": "the oldest left first: 9th kept is now first, 40th is last",
+      "passed": true
+    },
+    {
+      "name": "one more pushes out exactly one, the oldest",
+      "passed": true
+    },
+    {
+      "name": "a straight path: route 2.423 == straight 2.423",
+      "passed": true
+    },
+    {
+      "name": "a corner: route 2.000 > straight 1.414",
+      "passed": true
+    },
+    {
+      "name": "there and back on one line: route 2.000, straight 0.000",
+      "passed": true
+    },
+    {
+      "name": "a random walk: route 13.286 >= straight 2.804",
+      "passed": true
+    },
+    {
+      "name": "empty list: route 0, straight 0",
+      "passed": true
+    },
+    {
+      "name": "one kept position: the strip draws nothing",
+      "passed": true
+    },
+    {
+      "name": "the strip receives the list: 6 vertices in order, one line strip",
+      "passed": true
+    },
+    {
+      "name": "the record label reports the list",
+      "passed": true
+    },
+    {
+      "name": "pause pressed: recording stops",
+      "passed": true
+    },
+    {
+      "name": "pause held into the next frame: still stopped (one toggle per press)",
+      "passed": true
+    },
+    {
+      "name": "while stopped, moving 1.8 m adds nothing",
+      "passed": true
+    },
+    {
+      "name": "pause pressed again: recording resumes and keeps B across the gap",
+      "passed": true
+    },
+    {
+      "name": "autopilot rests: still for 360 of 1260 steps, nothing kept while still",
+      "passed": true
+    },
+    {
+      "name": "autopilot stays inside the area",
+      "passed": true
+    },
+    {
+      "name": "autopilot: one full figure-eight keeps 79 positions, route 8.52 m (gate 0.1)",
+      "passed": true
+    },
+    {
+      "name": "a wider gate keeps fewer positions over the same loop (295 at 0.02, 79 at 0.1, 21 at 0.4)",
+      "passed": true
+    },
+    {
+      "name": "autopilot over 1.5 s of live frames: B moved, 14 kept",
+      "passed": true
+    }
+  ],
+  "godot": "4.6-stable (official)",
+  "measured": {
+    "loop_kept_gate_0.02": 295,
+    "loop_kept_gate_0.1": 79,
+    "loop_kept_gate_0.4": 21,
+    "loop_route_gate_0.02": 8.51,
+    "loop_route_gate_0.1": 8.52,
+    "loop_route_gate_0.4": 8.16
+  },
+  "passed": true
+}

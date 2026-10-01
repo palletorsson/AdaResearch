@@ -1,0 +1,705 @@
+{
+  "title": "The opening: from Day Zero to your own room",
+  "subtitle": "Nine stops through the first Godot lessons of Ada Research: run a project, give a point a body, place it, join two points, keep a trace, break things on purpose, check what you can do.",
+  "state": "Each runnable stop was run in Godot 4.6 on 2026-09-30. No stop has yet been tried with a learner or on a headset.",
+  "state_detail": "Ada working tree on branch palm-scanner-door-entry at HEAD 78ed7542a, 2026-09-30. Committed: the Point Zero and Point Lines kits and lessons. Untracked in git, so a fresh clone lacks them until they are committed: the Day Zero, Point One, Point Coordinates and Point Trace kits, the Point_Coordinates hall, and this course folder (opening.json and its pages). The page serves the kits from this working tree. Stop order and teacher fields come from doc/book/iterations/claude-godot-path-2026-09-30/godot_path.json (a proposed plan), corrected where the lessons as written differ from it.",
+  "intro": "doc/book/course/opening/INTRO.md",
+  "capabilities": {
+    "editor.project": "Open, import and save a Godot project",
+    "editor.scene_tree": "The Scene tree and the Inspector",
+    "editor.run_debug": "Run, stop, and read the Output panel",
+    "editor.viewport3d": "Move things in the 3D viewport (local and global gizmo)",
+    "gd.variables": "Variables, and member values that last between calls",
+    "gd.functions": "Functions: the engine's callbacks (_ready, _process)",
+    "gd.own_functions": "Your own functions: a value in (a parameter), a value back (return)",
+    "gd.export": "@export: a value editable in the Inspector",
+    "gd.lifecycle": "_ready() and _process(): when code runs",
+    "gd.strings": "Text, str() and number formatting",
+    "gd.conditions": "Conditions (if)",
+    "gd.arrays": "Arrays: an ordered list of values",
+    "gd.loops": "Loops (for) that do a job",
+    "gd.typing": "Static types (: float, -> float, Array[Vector3])",
+    "gd.errors": "Reading Godot's error messages and debugging",
+    "other:docs_lookup": "Looking things up in the class reference",
+    "scene.groups_paths": "Finding a node by its path ($Name)",
+    "scene.nodes_resources": "Nodes and resources (a mesh is a resource on a node)",
+    "scene.new_scene": "A new scene from an empty root",
+    "scene.instancing": "Instancing one scene inside another",
+    "mesh.primitive": "Primitive meshes (SphereMesh, CylinderMesh)",
+    "phys.bodies": "Physics bodies (StaticBody3D)",
+    "phys.shapes_layers": "Collision shapes (layers and masks come later)",
+    "space.vector3": "Vector3: positions, displacements, lengths",
+    "space.transform": "Local and global position: a point in its parent's frame",
+    "input.actions": "Named input actions (Project Settings > Input Map)",
+    "xr.interaction": "Holding a thing in XR (XR Tools pickup)",
+    "light.env": "Lights and the environment"
+  },
+  "stops": [
+    {
+      "id": "day_zero",
+      "n": 0,
+      "kind": "workshop",
+      "title": "Day Zero: a place to run, and the headset route",
+      "hall": null,
+      "sequence": "preface",
+      "makes": "You open a small Godot project, change its greeting in the Inspector, run it, and keep a clean copy.",
+      "lesson": "doc/book/day-zero.md",
+      "hall_reading": null,
+      "kit": "doc/book/studies/day-zero",
+      "main_scene": "base.tscn",
+      "image": "/course/day-zero.png",
+      "status": "runnable",
+      "status_note": "The desktop part runs in Godot 4.6. The headset route is written, but has not been tried in this edition.",
+      "verified": {
+        "native": null,
+        "learner": null,
+        "headset": null
+      },
+      "route": "desktop+xr",
+      "teacher": {
+        "why_here": "Day Zero is front matter, not a hall. It sets up a place to run before any lesson needs one, and it sets up the headset route before a lesson asks for it. The course uses Godot 4.6 Standard with GDScript; C#/.NET is named as outside the course.",
+        "status_detail": "The Quest route is prose and has not been verified in this edition (day-zero.md says so). Chapter and kit are untracked in git. Smoke run of a kit copy, Godot 4.6 headless, 2026-09-30: prints \"Hello, world.\" with no errors (not a kit verification record).",
+        "new": [
+          {
+            "id": "editor.project",
+            "depth": "understand"
+          },
+          {
+            "id": "editor.scene_tree",
+            "depth": "use"
+          },
+          {
+            "id": "editor.run_debug",
+            "depth": "use"
+          }
+        ],
+        "returns": [],
+        "borrows": [
+          {
+            "part": "base.tscn: floor, camera, DirectionalLight3D, WorldEnvironment, Welcome Label3D",
+            "depth": "use"
+          },
+          {
+            "part": "the Ada course project's XR staging (commons/scenes/vr_staging.tscn), XR Tools player and pickup, Quest export preset",
+            "depth": "use"
+          },
+          {
+            "part": "Android toolchain: export templates, JDK, Android SDK, headset developer mode",
+            "depth": "use"
+          }
+        ],
+        "check": "The greeting you typed appears in the running scene and in the Output panel. On the headset route, the supplied player responds on the device.",
+        "contrast": "With a second scene open, F6 runs that scene, while F5 runs the main scene named in project.godot.",
+        "carries": "A kit copy that runs, and (xr route) the course project running on a headset.",
+        "learner_room": "None yet. The learner now has two working places: a copy of the day-zero kit, and the Ada course project for held and walked encounters. Their own project, my_room, begins at W02."
+      }
+    },
+    {
+      "id": "Point_Zero",
+      "n": 1,
+      "kind": "hall",
+      "title": "Point Zero: begin once, continue",
+      "hall": "Point_Zero",
+      "sequence": "primitives",
+      "makes": "You set a greeting once in _ready() and keep a count that rises every frame in _process().",
+      "lesson": "commons/maps/Point_Zero/tutorial.md",
+      "hall_reading": null,
+      "kit": "doc/book/studies/point-zero",
+      "main_scene": "hello_world.tscn",
+      "image": "/course/point-zero.png",
+      "status": "runnable",
+      "status_note": "Runs in Godot 4.6.",
+      "verified": {
+        "native": null,
+        "learner": null,
+        "headset": null
+      },
+      "route": "desktop",
+      "teacher": {
+        "why_here": "The first hall. Before a point can have a body or a position, the learner needs to know when code runs: once at the start, or again every frame. A count that rises makes the difference visible.",
+        "status_detail": "Kit and lesson are committed. The kit's README says the tutorial code and its variations were verified natively; the kit keeps no verification record. Smoke run of a kit copy, Godot 4.6 headless, 2026-09-30: greeting set, counter at 4 after 4 frames, no errors. The kit indents with spaces; point-lines and point-trace indent with tabs.",
+        "new": [
+          {
+            "id": "gd.variables",
+            "depth": "use"
+          },
+          {
+            "id": "gd.functions",
+            "depth": "use"
+          },
+          {
+            "id": "gd.lifecycle",
+            "depth": "use"
+          },
+          {
+            "id": "gd.strings",
+            "depth": "use"
+          },
+          {
+            "id": "scene.groups_paths",
+            "depth": "use"
+          }
+        ],
+        "returns": [
+          {
+            "id": "editor.run_debug",
+            "depth": null
+          }
+        ],
+        "borrows": [
+          {
+            "part": "Label3D displays already placed (the type is not named in the tutorial)",
+            "depth": "use"
+          },
+          {
+            "part": "engine scheduling",
+            "depth": "use"
+          },
+          {
+            "part": "'extends Node3D' as a first line",
+            "depth": "use"
+          }
+        ],
+        "check": "The count rises every frame, and the greeting is set once.",
+        "contrast": "Move the counting into _ready(), and the count stops at one.",
+        "carries": "A member variable that keeps its value between calls; setup in _ready() and repeated work in _process(); a child found with $Greeting.",
+        "learner_room": "Change one more property of a supplied display from _ready() and say when it happens."
+      }
+    },
+    {
+      "id": "Point_One",
+      "n": 2,
+      "kind": "hall",
+      "title": "Point One: a position with a surface and a boundary",
+      "hall": "Point_One",
+      "sequence": "primitives",
+      "makes": "You build a point from a node and a mesh resource, then give it a collider whose size you set apart from what you see.",
+      "lesson": "commons/maps/Point_One/tutorial.md",
+      "hall_reading": null,
+      "kit": "doc/book/studies/point-one",
+      "main_scene": "study.tscn",
+      "image": "/course/point-one.png",
+      "image_caption": "The study 3.3 seconds into its 4.5-second sweep: two feelers have crossed their stations, and the third has stopped at the solid sphere.",
+      "status": "runnable",
+      "status_note": "Runs in Godot 4.6.",
+      "verified": {
+        "native": null,
+        "learner": null,
+        "headset": null
+      },
+      "route": "desktop",
+      "teacher": {
+        "why_here": "A position alone is invisible and cannot be touched. This hall separates the three things a point can have: a position, a visible surface, and a boundary that stops other bodies. Layers and masks wait for Trans_Translation.",
+        "status_detail": "Runnable in the working tree. The kit is untracked and the lesson rewrite is uncommitted; the committed tutorial is an older fragment page. Smoke run of a kit copy, Godot 4.6 headless, 2026-09-30: 30 frames, no errors. The checkpoint's open task was tried once in a copy of this kit: a recorder carried from Trace follows ContactProbe/SolidProbe (4 kept per sweep at gate 0.1, then a straight piece back to the start when the sweep repeats).",
+        "new": [
+          {
+            "id": "scene.nodes_resources",
+            "depth": "use"
+          },
+          {
+            "id": "mesh.primitive",
+            "depth": "understand"
+          },
+          {
+            "id": "phys.bodies",
+            "depth": "use"
+          },
+          {
+            "id": "phys.shapes_layers",
+            "depth": "use"
+          }
+        ],
+        "returns": [
+          {
+            "id": "editor.run_debug",
+            "depth": null
+          },
+          {
+            "id": "gd.lifecycle",
+            "depth": null
+          }
+        ],
+        "borrows": [
+          {
+            "part": "contact_probe.gd feelers: move_and_collide, raw Space/R keys via _unhandled_key_input (UNTRACKED)",
+            "depth": "use"
+          },
+          {
+            "part": "point_sun_switch.gd removable sun (UNTRACKED)",
+            "depth": "use"
+          },
+          {
+            "part": "study.tscn stations and labels",
+            "depth": "use"
+          }
+        ],
+        "check": "With the collision radius smaller than the visible radius, the feeler sinks into the white sphere before it reports \"stopped\".",
+        "contrast": "With equal radii, the feeler stops at the surface.",
+        "carries": "A point recipe in which the visible surface and the collider are two separate decisions.",
+        "learner_room": "Arrange three points with one name and different boundaries (STUDENT_TOOLBOX l.43): which can be passed through, which must be walked around?"
+      }
+    },
+    {
+      "id": "Point_Coordinates",
+      "n": 3,
+      "kind": "hall",
+      "title": "Point Coordinates: hold a point, name its reference",
+      "hall": "Point_Coordinates",
+      "sequence": "primitives",
+      "makes": "You change a point's X, Y and Z, move its parent, and compare position with global_position; on the xr route you hold the point and make a second one holdable.",
+      "lesson": "commons/maps/Point_Coordinates/tutorial.md",
+      "hall_reading": null,
+      "notes": [
+        {
+          "at": null,
+          "text": "**Desktop route: skip the first section, *Borrow a working hold*, and start at *Change one component*.** The first section happens in the Ada course project, with its XR player and the pickable `point_held.tscn`; the desktop study does not include them. There, to *instance* a scene is to place a saved scene inside another as a single node. W02 does it from the start."
+        }
+      ],
+      "kit": "doc/book/studies/point-coordinates",
+      "main_scene": "coordinates.tscn",
+      "image": "/course/point-coordinates.png",
+      "status": "runnable",
+      "status_note": "The desktop study runs in Godot 4.6. The headset part needs the Ada course project and its XR player.",
+      "verified": {
+        "native": null,
+        "learner": null,
+        "headset": null
+      },
+      "route": "desktop+xr",
+      "teacher": {
+        "why_here": "Pickup belongs to this hall by ruling: the learner makes their own point holdable here, then gives a second point the same capability. The desktop half names the reference every position is measured against, which Lines needs before it joins two points.",
+        "status_detail": "The pickup step needs the Ada course project with XR Tools on disk (gitignored) and point_held.tscn (untracked); a portable XR starter is still to be supplied. Hall, lesson and kit are untracked. The lesson opens with the headset part although the desktop route comes first; the note above tells desktop learners where to start (the lesson file belongs to the hall and was not edited from the course). The kit ships verify.gd but no record of a run; run on a copy, Godot 4.6 headless, 2026-09-30: 6 of 6 checks passed (desktop coordinates only). No lesson in the opening uses the 3D viewport's move gizmo, so it is not counted here.",
+        "new": [
+          {
+            "id": "xr.interaction",
+            "depth": "use"
+          },
+          {
+            "id": "space.vector3",
+            "depth": "use"
+          },
+          {
+            "id": "space.transform",
+            "depth": "use"
+          }
+        ],
+        "returns": [
+          {
+            "id": "editor.scene_tree",
+            "depth": null
+          },
+          {
+            "id": "editor.run_debug",
+            "depth": null
+          },
+          {
+            "id": "phys.shapes_layers",
+            "depth": null
+          }
+        ],
+        "borrows": [
+          {
+            "part": "the course project's XR staging, controllers and XRToolsFunctionPickup",
+            "depth": "use"
+          },
+          {
+            "part": "point_held.tscn, the pickable point (UNTRACKED)",
+            "depth": "understand"
+          },
+          {
+            "part": "distance arrow, RGB guides, WORLD/LOCAL cards",
+            "depth": "use"
+          }
+        ],
+        "check": "Desktop: move the root, and global_position changes while position stays the same. Headset route: the held point follows the hand and stays where it is released, and your second instance can be held too.",
+        "contrast": "Move the point itself, and both readings change.",
+        "carries": "Two named positions in a stated frame, and (xr route) a point the learner can hold and a second one they made holdable.",
+        "learner_room": "Name two of your points A and B in one shared frame, ready to be joined (TUTORIAL_LINEAGE l.20)."
+      }
+    },
+    {
+      "id": "Point_Lines",
+      "n": 4,
+      "kind": "hall",
+      "title": "Point Lines: connect and measure",
+      "hall": "Point_Lines",
+      "sequence": "primitives",
+      "makes": "You join A and B, compute b - a and its length, and show the distance as text while either end moves.",
+      "lesson": "commons/maps/Point_Lines/tutorial.md",
+      "hall_reading": null,
+      "notes": [
+        {
+          "at": "Two positions, one distance",
+          "text": "The kit's `line.gd` is indented with tabs, and the code on this page uses spaces. Godot accepts either, but not both in one file. A line pasted with spaces into `line.gd` stops the whole script with `Parse Error: Used space character for indentation instead of tab as used before in the file.`, and the study runs without it: A and B sit at the middle of the floor. Indent with the Tab key instead."
+        },
+        {
+          "at": "Turn without lengthening",
+          "text": "Reversing the subtraction changes nothing you can see. `segment.gd` does its own subtraction from A and B, and the length is the same either way. To see the direction reverse, add `print(displacement)` on the line under `var displacement := b - a`. The Output panel fills with `(1.5, 0.0, 0.0)`, one line per frame. Change `b - a` to `a - b`, and it prints `(-1.5, 0.0, 0.0)`, while the segment and the readout stay as they were. Put back `b - a` and remove the print."
+        },
+        {
+          "at": "Read again as the endpoints move",
+          "text": "To use the Remote scene tree: run the study from the editor, then click **Remote** at the top of the Scene dock. Open the tree under `root`, select `B`, and change its **Position** in the Inspector. The segment and the number follow. **Local** returns to the saved scene. *(editor: these clicks are described, not watched)*"
+        }
+      ],
+      "kit": "doc/book/studies/point-lines",
+      "main_scene": "line.tscn",
+      "image": "/course/point-lines.png",
+      "status": "runnable",
+      "status_note": "Runs in Godot 4.6. The notes above the lesson fill three gaps we found in it.",
+      "verified": {
+        "native": "verification.json in the kit, written 2026-09-30 15:31 by verify.gd in Godot 4.6: 22 of 22 checks passed (length, midpoint, axis and readout for five positions of B; coincident endpoints hide the segment; moving apart restores it).",
+        "learner": null,
+        "headset": null
+      },
+      "route": "desktop",
+      "teacher": {
+        "why_here": "Distance belongs to the line, not to Coordinates. With two named points in one frame, the learner can subtract them and read the length. The plan put the first if and the first function the learner writes here, as a distance_between(a, b) variation; the lesson as written has neither, so both arrive at Trace.",
+        "status_detail": "Kit and lesson committed 2026-09-30 (5a74c6e30); the lesson and kit were not edited from the course. The older verify.log (15:30) records a parse error in verify.gd that the later run no longer has. The three notes were run in a copy of the kit in Godot 4.6 on 2026-09-30: print(displacement) gives (1.5, 0.0, 0.0), and (-1.5, 0.0, 0.0) after the reversal, with the readout at 1.50 m and the segment unchanged both times; a space-indented line gives the quoted parse error at line 9 and the script does not load. The Remote tree clicks were not watched. The plan's distance_between(a, b) variation has not been written or run.",
+        "new": [],
+        "returns": [
+          {
+            "id": "space.vector3",
+            "depth": "understand"
+          },
+          {
+            "id": "gd.variables",
+            "depth": "understand"
+          },
+          {
+            "id": "gd.lifecycle",
+            "depth": null
+          },
+          {
+            "id": "gd.strings",
+            "depth": "understand"
+          },
+          {
+            "id": "gd.functions",
+            "depth": null
+          },
+          {
+            "id": "editor.run_debug",
+            "depth": null
+          }
+        ],
+        "borrows": [
+          {
+            "part": "segment.gd show_between(a, b): midpoint, CylinderMesh height, orientation (its rotation code stays borrowed)",
+            "depth": "understand"
+          }
+        ],
+        "check": "The readout follows the length of b - a wherever B goes: 1.50 m at the start, 1.00 m with B's X at 0.25, still 1.50 m with B straight above A. Reversed to a - b, print(displacement) shows (-1.5, 0.0, 0.0) where it showed (1.5, 0.0, 0.0), and the readout does not change.",
+        "contrast": "Put A and B at the same position: the readout shows 0.00 m and the supplied helper hides the segment, instead of pointing it in an undefined direction.",
+        "carries": "Two named positions, their subtraction and its length, and the supplied segment helper. Trace reuses all of them.",
+        "learner_room": "Connect two different objects with your segment variant and read their distance."
+      }
+    },
+    {
+      "id": "Point_Trace",
+      "n": 5,
+      "kind": "hall",
+      "title": "Point Trace: let positions remain",
+      "hall": "Point_Trace",
+      "sequence": "primitives",
+      "makes": "You move the point with named input actions and keep its positions in a typed list, with a gate, a capacity, a function of your own and a pause.",
+      "lesson": "doc/book/studies/point-trace/TUTORIAL.md",
+      "hall_reading": "commons/maps/Point_Trace/final.md",
+      "hall_reading_note": "This is the hall's own text, and its owner is still revising it. It describes an amber point near the exit with room for thirty-two positions; that point is not placed in the hall at present.",
+      "kit": "doc/book/studies/point-trace",
+      "main_scene": "trace.tscn",
+      "image": "/course/point-trace.png",
+      "image_caption": "The finished study with Autopilot ticked on B, 6 seconds in: 32 positions kept, and the oldest already leaving. The kit opens with Autopilot off, so B waits for the keys.",
+      "status": "runnable",
+      "status_note": "Runs in Godot 4.6. Two sessions: the lesson marks where the first one ends.",
+      "verified": {
+        "native": "2026-09-30 Godot 4.6 headless: verify.gd 47/47; every tutorial step run",
+        "learner": null,
+        "headset": null
+      },
+      "route": "desktop",
+      "teacher": {
+        "why_here": "Trace is the first collection, and it carries the first if and the first functions the learner writes, because Lines did not. The rulings ask for the list before append, and the condition before the distance threshold, so the order here is list, append, condition, gate. A summed path length answers the question Lines left open: the same start and end give the same displacement, however you travel. The load is heavy for a beginner, so the lesson is two sessions, split after the strip is drawn.",
+        "status_detail": "verify.gd on a clean copy of the kit, 2026-09-30, after the lesson rewrite: 47 of 47 checks (the kit's verification.json and verify.log). Every step of TUTORIAL.md was then run from the kit's starting state as its own file, tab-indented as the page shows it: the messages quoted (two ERRORs for append(\"here\"), Out of bounds at the swapped condition, the missing pause action, both indentation errors) and the numbers (11 or 12 kept after one second of D at 30, 60, 120 and 144 fps; corner 1.97 and 1.41; out and back 1.92 and 0.00; 32 kept holding 3.58 m; keep(a) keeps 1; the recorder moved to A keeps 11). Editor clicks (Input Map, clearing a script, dragging it onto A) are marked (editor) and were not watched. The hall's final.md, shown under In the museum, is another session's uncommitted work; it still describes the amber trace_short_memory point, which map_data.json does not place (PRIMITIVES_LINEAGE asks that it not be described as installed). The hall's tutorial.md, which quotes draw_dot.gd with a 5 mm gate, is not shown here.",
+        "new": [
+          {
+            "id": "input.actions",
+            "depth": "use"
+          },
+          {
+            "id": "gd.export",
+            "depth": "use"
+          },
+          {
+            "id": "gd.arrays",
+            "depth": "use"
+          },
+          {
+            "id": "gd.conditions",
+            "depth": "use"
+          },
+          {
+            "id": "gd.loops",
+            "depth": "use"
+          },
+          {
+            "id": "gd.own_functions",
+            "depth": "use"
+          },
+          {
+            "id": "gd.typing",
+            "depth": "use"
+          }
+        ],
+        "returns": [
+          {
+            "id": "space.vector3",
+            "depth": "understand"
+          },
+          {
+            "id": "gd.variables",
+            "depth": "understand"
+          },
+          {
+            "id": "gd.strings",
+            "depth": "understand"
+          },
+          {
+            "id": "gd.lifecycle",
+            "depth": null
+          }
+        ],
+        "borrows": [
+          {
+            "part": "mover.gd (supplied): Input.get_vector over named actions, @export values, an autopilot figure-eight",
+            "depth": "understand"
+          },
+          {
+            "part": "trace_strip.gd (supplied), contract draw(points); opened at Point_Triangle_Context",
+            "depth": "use"
+          }
+        ],
+        "check": "Standing still adds nothing. Moving adds about one position for every ten centimetres. The route is never shorter than the straight distance, and equal only along a straight line. After 32 positions, the oldest leave as new ones arrive. Space stops the recording and starts it again.",
+        "contrast": "With a gate of 0, the count climbs while B stands still: one position per frame, so the list grows with the frame rate.",
+        "carries": "An ordered, capped Array[Vector3], the learner's gate, a summed path length, keep(p), and named input actions that later stops trigger (REPLAY, RESTORE, the door target). In the museum, TraceData carries the released pen list into Grid and Triangle.",
+        "learner_room": "Choose what your recorder keeps: a gate, a capacity, and one thing it deliberately loses."
+      }
+    },
+    {
+      "id": "W01_break_it_on_purpose",
+      "n": 6,
+      "kind": "workshop",
+      "title": "Break it on purpose, then look it up",
+      "hall": "Point_Trace",
+      "sequence": "primitives",
+      "makes": "You break scripts that work, predict each error, read Godot's exact message, fix it, and look a method up in the class reference.",
+      "lesson": "doc/book/course/opening/W01_break_it_on_purpose.md",
+      "hall_reading": null,
+      "kit": null,
+      "main_scene": null,
+      "image": null,
+      "status": "runnable",
+      "status_note": "Every message on this page comes from a Godot 4.6 run. The editor's panels are described, not watched.",
+      "verified": {
+        "native": "2026-09-30 Godot 4.6, headless and with the command-line debugger (-d) driven through each stop: every case run in a fresh copy of the point-zero, point-lines or point-trace kit, every quoted message, warning, debugger stop and backtrace reproduced.",
+        "learner": null,
+        "headset": null
+      },
+      "route": "desktop",
+      "teacher": {
+        "why_here": "Debugging should come in through small constructions the learner already owns, not wait for an appendix. By Trace the learner has met paths, types, lists and a function that calls another, so each has a loud failure worth reading. The project's own common failures are quiet, so the loud cases come first, and the quiet ones close the workshop.",
+        "status_detail": "Rewritten 2026-09-30: every case starts from a fresh kit copy; runtime cases lead with the debugger stop; the list faults moved into a point-trace copy (a wrong literal, the empty-list guard removed, pop_back for pop_front). Debugger behaviour was measured with Godot's command-line debugger, which attaches as the editor's does, by sending continue and bt through a pipe: a SCRIPT ERROR in _process stops again after each continue; one in _ready does not; ERROR lines never stop the game. Warnings (unused variable, narrowing conversion) print only with a debugger attached. The editor's Debugger panel, script editor and Search Help were not watched.",
+        "new": [
+          {
+            "id": "gd.errors",
+            "depth": "use"
+          },
+          {
+            "id": "other:docs_lookup",
+            "depth": "use"
+          }
+        ],
+        "returns": [
+          {
+            "id": "editor.run_debug",
+            "depth": "understand"
+          },
+          {
+            "id": "scene.groups_paths",
+            "depth": null
+          },
+          {
+            "id": "space.vector3",
+            "depth": null
+          },
+          {
+            "id": "gd.typing",
+            "depth": "understand"
+          },
+          {
+            "id": "gd.arrays",
+            "depth": null
+          },
+          {
+            "id": "gd.own_functions",
+            "depth": null
+          }
+        ],
+        "borrows": [],
+        "check": "Each message you predicted appears, and names a line at or near the fault. Parse errors appear before the scene runs. A SCRIPT ERROR stops its function and, from the editor, pauses the game at its line; an ERROR is printed and the game goes on.",
+        "contrast": "A fault with no error, such as a readout that shows the wrong number, is found by watching a value. Sometimes a warning points at it first; pop_back in the recorder leaves none.",
+        "carries": "A debugging habit that starts from a prediction, the difference between an error, a warning and silence, and the class reference as the first place to look.",
+        "learner_room": "Plant one fault of your own in a copy of your study, give it to someone, and time how long they take to find it."
+      }
+    },
+    {
+      "id": "CP1_opening",
+      "n": 7,
+      "kind": "checkpoint",
+      "title": "Checkpoint: the opening studies (its own session)",
+      "hall": "Point_Trace",
+      "sequence": "primitives",
+      "makes": "You show what the opening taught without the lessons open, and carry your recorder into another study with no new helper.",
+      "lesson": "doc/book/course/opening/CP1_opening.md",
+      "hall_reading": null,
+      "kit": null,
+      "main_scene": null,
+      "image": null,
+      "status": "draft",
+      "status_note": "A checkpoint session, not a lesson. Its open task has been tried once, in a copy of the Point One study.",
+      "verified": {
+        "native": null,
+        "learner": null,
+        "headset": null
+      },
+      "route": "desktop+xr",
+      "teacher": {
+        "why_here": "The kit chain ends here. After this the learner leaves the kits and starts a project of their own (W02), so this is the last point where the opening can be checked in the materials it was taught in.",
+        "status_detail": "Rebuilt 2026-09-30 from the lessons as written: item 2 asks about keep(p) and route_length(), which the learner wrote in Trace; the self-check lists only what the lessons teach (no viewport gizmo, no if before Trace). The open task names its project (a point-one copy), the feeler's place in the Remote tree, and the editor steps it needs, marked (editor). One run of the task in Godot 4.6: a root script made from trace.gd, with Strip and Record nodes added, follows ContactProbe/SolidProbe and keeps 4 positions per sweep at gate 0.1, then draws a straight piece back when the sweep repeats. The plan's own open task, changing what happens at capacity, is the variation step of item 7.",
+        "new": [],
+        "returns": [
+          {
+            "id": "gd.lifecycle",
+            "depth": "use"
+          },
+          {
+            "id": "gd.conditions",
+            "depth": "use"
+          },
+          {
+            "id": "gd.own_functions",
+            "depth": "use"
+          },
+          {
+            "id": "input.actions",
+            "depth": "use"
+          },
+          {
+            "id": "scene.groups_paths",
+            "depth": "use"
+          },
+          {
+            "id": "gd.errors",
+            "depth": "use"
+          },
+          {
+            "id": "other:docs_lookup",
+            "depth": "use"
+          },
+          {
+            "id": "xr.interaction",
+            "depth": "use"
+          },
+          {
+            "id": "gd.arrays",
+            "depth": "use"
+          }
+        ],
+        "borrows": [],
+        "check": "With the lessons closed: a script you wrote runs once and again; you explain keep(p) and route_length(); you move the point by named actions and find them in project.godot; you find a node by its path and in the Remote tree; you find a planted fault from its message; and your recorder draws the trace of something it was not written for, with no new helper.",
+        "contrast": "The open task has no reference answer. What counts is your choice, and what you say it loses.",
+        "carries": "A dated copy of the learner's study folders, which W02 carries into my_room.",
+        "learner_room": "Record the trace of a different moving object with the recorder you already have, in another study and without writing a new helper, and say what the trace keeps and loses."
+      }
+    },
+    {
+      "id": "W02_scene_from_nothing",
+      "n": 8,
+      "kind": "preview",
+      "title": "Next: my_room, a scene from nothing",
+      "hall": "Point_Line_Grid",
+      "sequence": "primitives",
+      "makes": "You start my_room from an empty project and carry your own point, segment and recorder into a scene you built.",
+      "lesson": "doc/book/course/opening/W02_preview.md",
+      "hall_reading": null,
+      "kit": null,
+      "main_scene": null,
+      "image": null,
+      "status": "planned",
+      "status_note": "Planned, not written. Shown here so the opening's end is visible.",
+      "verified": {
+        "native": null,
+        "learner": null,
+        "headset": null
+      },
+      "route": "desktop",
+      "teacher": {
+        "why_here": "The kit chain closes at the checkpoint. From here the learner needs a project of their own. Building it by carrying the opening's own parts keeps the ruling that each start inherits the preceding result.",
+        "status_detail": "Its contrast (the editor's preview light) has not been run.",
+        "new": [
+          {
+            "id": "scene.new_scene",
+            "depth": "understand"
+          },
+          {
+            "id": "scene.instancing",
+            "depth": "use"
+          },
+          {
+            "id": "light.env",
+            "depth": "use"
+          }
+        ],
+        "returns": [
+          {
+            "id": "editor.viewport3d",
+            "depth": "understand"
+          },
+          {
+            "id": "editor.scene_tree",
+            "depth": "understand"
+          },
+          {
+            "id": "scene.nodes_resources",
+            "depth": null
+          },
+          {
+            "id": "mesh.primitive",
+            "depth": null
+          },
+          {
+            "id": "phys.bodies",
+            "depth": null
+          },
+          {
+            "id": "phys.shapes_layers",
+            "depth": null
+          },
+          {
+            "id": "editor.project",
+            "depth": null
+          }
+        ],
+        "borrows": [
+          {
+            "part": "Camera3D copied from base.tscn",
+            "depth": "use"
+          }
+        ],
+        "check": "The run shows the floor lit by the learner's own light, and the carried recorder works as it did in the kit.",
+        "contrast": "Delete the light: the editor's view may still look lit, because the editor adds a preview light of its own, while the running floor goes dark. This has not been run yet.",
+        "carries": "A project the learner made, a folder rule (rooms/ for scenes, shared/ for reused parts), a saved scene with instances, and one light the learner placed.",
+        "learner_room": "Put your A, B, segment and recorder into room.tscn so that the opening's result is visible in a project you made (TUTORIAL_LINEAGE l.11)."
+      }
+    }
+  ]
+}
