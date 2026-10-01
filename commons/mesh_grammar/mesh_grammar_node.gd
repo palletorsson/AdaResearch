@@ -9,7 +9,11 @@ const GridMaterialFactory = preload("res://commons/primitives/shared/grid_materi
 const MeshGrammarPresets = preload("res://commons/mesh_grammar/mesh_grammar_presets.gd")
 
 @export_group("Seed")
-@export_enum("cube", "icosahedron", "sphere", "disk", "flower_disk", "custom") var seed_type: String = "icosahedron"
+@export_enum("cube", "icosahedron", "sphere", "disk", "flower_disk", "lathe", "custom") var seed_type: String = "icosahedron"
+## For the "lathe" seed: Vector2(radius, height) points, top to bottom, in units of
+## seed_scale. Empty gives a plain bell. seed_segments a multiple of 3 marks the cells.
+@export var seed_profile: PackedVector2Array = PackedVector2Array()
+@export var seed_segments: int = 36
 @export var seed_scale: float = 0.5
 
 @export_group("Grammar")
@@ -122,8 +126,25 @@ func clear_rules() -> void:
 ## dictionary becomes a node — the demo gallery calls it for each of its twenty
 ## specimens and `preset` calls it for one. Call before the node enters the tree
 ## (or call generate() afterwards); it does not clear rules already present.
+## [[radius, height], ...] or Vector2s -> a profile. Anything else is skipped.
+func _profile_from(value: Variant) -> PackedVector2Array:
+	var out := PackedVector2Array()
+	if value is PackedVector2Array:
+		return value
+	if value is Array:
+		for point in value:
+			if point is Vector2:
+				out.append(point)
+			elif point is Array and (point as Array).size() >= 2:
+				out.append(Vector2(float(point[0]), float(point[1])))
+	return out
+
 func apply_spec(spec: Dictionary) -> void:
 	seed_type = spec.get("seed", "icosahedron")
+	if spec.has("profile"):
+		seed_profile = _profile_from(spec["profile"])
+	if spec.has("seed_segments"):
+		seed_segments = int(spec["seed_segments"])
 	seed_scale = float(spec.get("seed_scale", MeshGrammarPresets.SEED_SCALE))
 	base_color = spec.get("color", Color(0.6, 0.7, 0.8))
 	generations = spec.get("generations", 1)
@@ -142,6 +163,10 @@ func configure(config: Dictionary) -> void:
 		_setup_material()
 	if config.has("seed"):
 		seed_type = str(config["seed"])
+	if config.has("profile"):
+		seed_profile = _profile_from(config["profile"])
+	if config.has("seed_segments"):
+		seed_segments = int(config["seed_segments"])
 	if config.has("seed_scale"):
 		seed_scale = float(config["seed_scale"])
 	if config.has("generations"):
@@ -218,6 +243,14 @@ func _create_seed() -> void:
 			mesh_data = MeshData.create_sphere(seed_scale, 12, 16)
 		"icosahedron":
 			mesh_data = MeshData.create_icosahedron(seed_scale)
+		"lathe":
+			var scaled := PackedVector2Array()
+			var source: PackedVector2Array = seed_profile
+			if source.is_empty():
+				source = PackedVector2Array([Vector2(0.0, 1.0), Vector2(0.45, 0.6), Vector2(0.85, 0.0), Vector2(1.0, -0.7), Vector2(0.8, -1.0)])
+			for point in source:
+				scaled.append(point * seed_scale)
+			mesh_data = MeshData.create_lathe(scaled, seed_segments)
 		"disk":
 			mesh_data = MeshData.create_disk(seed_scale, 24)
 		"flower_disk":

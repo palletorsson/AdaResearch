@@ -1,0 +1,82 @@
+{
+	"_comment": "Radiolarian shells made by rule. One entry so far: cyrtoid_by_rule, the remake of Haeckel's plate 31 (Cyrtoidea) that opens the Godot course. Kin elsewhere: `haeckel` in lab.json (struts over a surface of revolution) and `radiolaria` in computational_biology.json (CSG).",
+	"artifacts": {
+		"cyrtoid_by_rule": {
+			"dna": {
+					"promoted": "2026-10-01",
+					"stage": "2 - variation",
+					"axes": {
+						"form": [
+							"helmet",
+							"ovoid",
+							"fringed_dome",
+							"flask",
+							"tripod",
+							"great_dome"
+						],
+						"stage": [
+							"bristled",
+							"profile",
+							"turned",
+							"pored",
+							"footed"
+						]
+					},
+					"default": "form=helmet, stage=bristled: the whole list of rules on the helmet. A new artifact; there are no earlier placements to protect.",
+					"note": "stage is the argument: each value stops the list of rules one rule earlier (profile, turned, pored, footed, bristled), so a row of five is the body's own recipe, and the step from turned to pored is where a vase becomes a skeleton. form is the family: six bodies of Haeckel's plate as one class with other numbers. Both are visible in a still; nothing here is a rate. The bristles are seeded per form, and the feet and needles are straight, so two builds of one value are the same body.",
+					"framing": 0.37,
+					"framing_why": "The needles and feet reach well past the shell, and a box fitted to them leaves the shell small in the frame.",
+					"measured": "SWEPT 2026-10-01, all 30 variants (6 forms x 5 stages), framing 0.37, the shell on 11.8% of the frame. Share of the frame that changes between two tiles (threshold 10% of full scale per pixel):\n\nSTAGE at helmet: profile -> turned 8.84%, turned -> pored 2.92%, pored -> footed 0.69%, footed -> bristled 4.26%. The closest pair is pored <-> footed, as predicted. The predicted 0.3% assumed a scale of 270 px per metre at framing 0.7; the first sweep, at that framing, showed the shell on 3.6% of the frame and measured 0.21%, under the prediction. The cause was the scale I assumed, about three times too large, not the artifact: at framing 0.37 the same pair is 0.69%.\n\nFORM at bristled: the closest pair is fringed_dome <-> tripod at 7.30%, not helmet <-> great_dome as predicted (13.29%, eleventh of fifteen). The prediction counted overlap of like shapes; the measure is led by size, and the two smallest shells are the closest. The farthest pair is ovoid <-> great_dome, 17.05%.\n\nWHERE A STAGE DOES ALMOST NOTHING: pored -> footed is 0.21% for the ovoid and 0.17% for the flask. Those bodies have no lip to speak of, and the foot rule has little to branch from. On those two forms `footed` is close to a repeat of `pored`.\n\nCritic (focus measure): form 87.07%, stage 78.44%, both bite.",
+					"predicted_degeneracy": "PREDICTED BEFORE THE SWEEP, 2026-10-01, by arithmetic on the recipe. The unit is the share of the frame that changes between two tiles, not the critic's focus measure, and no rasteriser was written, so read it as a floor. Scale assumed: 760 px frame, framing 0.7, about 270 px per metre at the subject.\n\nSTAGE, at form=helmet. THE CLOSEST PAIR IS pored <-> footed, AT ABOUT 0.3% OF FRAME: the foot rule adds three feet, each 0.62 units long (0.37 m at height 1.2, 100 px) with a 30 mm root tapering to a point (8 px wide on average), 800 px2 each, and about 0.7 of them is clear of the shell: 3 x 800 x 0.7 = 1,680 px2 of 577,600. footed <-> bristled comes next at about 1.0%: the bristle rule branches 6% of about 3,000 bar triangles, 180 needles of 0.23 m (62 px) and 1.6 px average width, 63 px2 each after foreshortening, half of them over the shell or each other. profile <-> turned and turned <-> pored change most of the subject and are far from either.\n\nFORM, at stage=bristled. Every pair differs in the lattice itself, so no pair is close: inside the overlap of two shells about half the pixels change. THE CLOSEST PAIR IS helmet <-> great_dome, AT ABOUT 2.5% OF FRAME: the same bell with a wider mouth, 24 segments for 36, teeth for feet and longer bristles; 0.5 of the helmet's 0.6 square units of silhouette plus 0.25 of difference at the edge, 0.55 units2 x 0.36 x 270 x 270 = 14,400 px2.\n\nWhat would make this wrong: the capture's own scale (the bristles and feet inflate the box the camera fits), and the needles, which are one or two pixels wide and may vanish or bloom under antialiasing."
+				},
+			"name": "Cyrtoid, by rule",
+			"lookup_name": "cyrtoid_by_rule",
+			"class_name": "CyrtoidByRule",
+			"description": "One radiolarian shell after Haeckel's plate 31 (Kunstformen der Natur, 1904), made by five rules in a row: a profile, the profile turned round its axis, pores opened cell by cell, feet and teeth branched from the lip, bristles branched from a few bars. `stage` stops the list one rule earlier; `form` is the same list with other numbers.",
+			"scene": "res://commons/artifacts/cyrtoid_by_rule/cyrtoid_by_rule.tscn",
+			"category": "substrate",
+			"artifact_type": "sculpture",
+			"sequence": "primitives",
+			"tags": [
+				"substrate",
+				"mesh_grammar",
+				"radiolaria",
+				"haeckel",
+				"lathe",
+				"lattice",
+				"course"
+			],
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"tiling",
+				"proceduralgeneration"
+			],
+			"dev_themes": [
+				"grammar",
+				"mesh",
+				"procedural",
+				"morphogenesis"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			},
+			"qfep_connection": "A body read as a sentence of operations. Haeckel drew the forms, D'Arcy Thompson asked what forces and transformations relate them, Turing asked whether a rule could grow them; this one is made by construction, the middle of those three, and says so."
+		}
+	}
+}

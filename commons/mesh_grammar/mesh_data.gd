@@ -681,6 +681,67 @@ static func create_sphere(radius: float = 1.0, rings: int = 12, segments: int = 
 	md._init_metadata()
 	return md
 
+## A profile turned round the Y axis: a vase, a bell, a flask.
+## `profile` is a list of Vector2(radius, height). A point with radius 0 is a pole
+## (one vertex); a profile that ends at a radius above 0 ends in an open mouth.
+## Alternate rings are turned by half a step, so the wall is a lattice of near-equal
+## triangles, six round every vertex. With `segments` a multiple of 3, every third
+## wall vertex is tagged "centre": each wall triangle then has exactly one centre,
+## and the six triangles round a centre are one cell (see CellInsetOp).
+## Wound outward, like the other seeds, whichever way the profile runs.
+static func create_lathe(profile: PackedVector2Array, segments: int = 36) -> MeshData:
+	var md := MeshData.new()
+	if profile.size() < 2 or segments < 3:
+		md._init_metadata()
+		return md
+	# The winding below is outward for a profile that runs from the top down.
+	var pts := PackedVector2Array(profile)
+	if pts[0].y < pts[pts.size() - 1].y:
+		pts.reverse()
+	var first := PackedInt32Array()
+	var pole: Array[bool] = []
+	var centres := PackedInt32Array()
+	var mark_cells: bool = segments % 3 == 0
+	for i in range(pts.size()):
+		var p: Vector2 = pts[i]
+		first.append(md.vertices.size())
+		if p.x <= 0.00001:
+			pole.append(true)
+			md.vertices.append(Vector3(0.0, p.y, 0.0))
+			continue
+		pole.append(false)
+		var shift: float = 0.5 if i % 2 == 1 else 0.0
+		for j in range(segments):
+			var theta: float = TAU * (float(j) + shift) / float(segments)
+			# Three colours on the staggered lattice; colour 0 is a cell centre.
+			if mark_cells and posmod(j - (i >> 1) - i, 3) == 0:
+				centres.append(md.vertices.size())
+			md.vertices.append(Vector3(p.x * cos(theta), p.y, p.x * sin(theta)))
+
+	for i in range(pts.size() - 1):
+		if pole[i] and pole[i + 1]:
+			continue
+		for j in range(segments):
+			var a: int = first[i] if pole[i] else first[i] + j
+			var b: int = first[i] if pole[i] else first[i] + (j + 1) % segments
+			var c: int = first[i + 1] if pole[i + 1] else first[i + 1] + j
+			var d: int = first[i + 1] if pole[i + 1] else first[i + 1] + (j + 1) % segments
+			if pole[i]:
+				md.faces.append(PackedInt32Array([b, d, c]))
+			elif pole[i + 1]:
+				md.faces.append(PackedInt32Array([a, b, c]))
+			elif i % 2 == 0:
+				md.faces.append(PackedInt32Array([a, b, c]))
+				md.faces.append(PackedInt32Array([b, d, c]))
+			else:
+				md.faces.append(PackedInt32Array([a, b, d]))
+				md.faces.append(PackedInt32Array([a, d, c]))
+
+	md._init_metadata()
+	for v in centres:
+		md.vertex_tags[v] = PackedStringArray(["centre"])
+	return md
+
 ## Flat disk in the XZ plane — fan-triangulated from a centre vertex.
 ## Ideal seed for flower morphology: paired with tag_by_grammar's
 ## concentric flower bands and a top-down camera, this produces a

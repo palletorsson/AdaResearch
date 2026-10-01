@@ -37,6 +37,9 @@ const SEED_SCALE: float = 0.35
 ## threshold; the op's default, which other callers rely on, is not changed.
 const SPHERE_MIN_AREA: float = 0.0005
 
+## Preloaded: the op has no class_name (see its header).
+const CellInsetOp = preload("res://commons/mesh_grammar/operations/cell_inset_op.gd")
+
 
 ## The recipes, in the demo's order. Four per row; the row headers are the demo's
 ## `chapter` axis (topology, organic, compound, decoration, bridge) and it reads the
@@ -363,6 +366,8 @@ static func create_rule(rdef: Dictionary) -> MeshRule:
 			return TubeBranchOp.new(sel, rule_params)
 		"inset":
 			return InsetFaceOp.new(sel, rule_params)
+		"cell_inset":
+			return CellInsetOp.new(sel, rule_params)
 		"split":
 			return SplitFaceOp.new(sel, rule_params)
 		"delete":

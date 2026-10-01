@@ -37,6 +37,7 @@ const ScaleTileOp   = preload("res://commons/mesh_grammar/operations/scale_tile_
 const EdgeDecorateOp = preload("res://commons/mesh_grammar/operations/edge_decorate_op.gd")
 const SurfaceScatterOp = preload("res://commons/mesh_grammar/operations/surface_scatter_op.gd")
 const SmoothSubdivideOp = preload("res://commons/mesh_grammar/operations/smooth_subdivide_op.gd")
+const CellInsetOp = preload("res://commons/mesh_grammar/operations/cell_inset_op.gd")
 
 @export var config_path: String = ""
 @export var vr_preview: bool = true   # cap generations for fast in-VR loads
@@ -83,7 +84,7 @@ func _build() -> void:
 	var seed_type: String = "cube"
 	if seed_val is String:
 		seed_type = str(seed_val)
-		if not seed_type in ["cube", "sphere", "icosahedron"]:
+		if not seed_type in ["cube", "sphere", "icosahedron", "lathe"]:
 			seed_type = "cube"
 	# Otherwise (Dictionary seed) keep cube — DNA bridge support is a TODO.
 
@@ -97,6 +98,9 @@ func _build() -> void:
 	mg_node.generations = int(cfg.get("generations", 2))
 	mg_node.auto_generate = false
 	mg_node.base_color = Color(0.82, 0.76, 0.6)
+	# A lathe seed needs its profile: [[radius, height], ...], top to bottom.
+	if seed_type == "lathe" and mg_node.has_method("configure"):
+		mg_node.configure({"profile": cfg.get("profile", []), "seed_segments": int(cfg.get("seed_segments", 36))})
 	if cfg.has("material") or cfg.has("roughness") or cfg.has("metallic"):
 		if mg_node.has_method("configure"):
 			mg_node.configure(cfg)
@@ -130,6 +134,7 @@ func _build_rule(rdef: Dictionary):
 		"bulge":            return BulgeOp.new(sel, params)
 		"tube_branch":      return TubeBranchOp.new(sel, params)
 		"inset":            return InsetFaceOp.new(sel, params)
+		"cell_inset":       return CellInsetOp.new(sel, params)
 		"split":            return SplitFaceOp.new(sel, params)
 		"delete":           return DeleteFaceOp.new(sel, params)
 		"noise":            return NoiseDisplaceOp.new(sel, params)
