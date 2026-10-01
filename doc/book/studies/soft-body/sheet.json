@@ -1,0 +1,255 @@
+{
+  "godot": "4.6-stable (official)",
+  "godots": {
+    "1": {
+      "below_taut_cm": 22.7,
+      "covers_pct": 21.09,
+      "linear_stiffness": 0.5,
+      "lowest_point_m": 0.573
+    },
+    "16": {
+      "below_taut_cm": 2.92,
+      "covers_pct": 20.05,
+      "linear_stiffness": 0.5,
+      "lowest_point_m": 0.7708
+    },
+    "4": {
+      "below_taut_cm": 9.93,
+      "covers_pct": 20.42,
+      "linear_stiffness": 0.5,
+      "lowest_point_m": 0.7007
+    },
+    "64": {
+      "below_taut_cm": 0.48,
+      "covers_pct": 19.93,
+      "linear_stiffness": 0.5,
+      "lowest_point_m": 0.7952
+    }
+  },
+  "how": "each cloth alone in the studio, 1.2 m square, 11 by 11 points, hung by its two top corners at 2 m, seen from the front, 3.2 m from the point (0, 1.05, 0); ours after 1200 steps of 1/60 s made by sheet.gd, the soft body of Godot after 600 steps of the engine; below_taut_cm is how far the lowest point is below 0.8 m",
+  "ours": {
+    "1": {
+      "below_taut_cm": 68.38,
+      "covers_pct": 14.72,
+      "longest_link_pct_of_its_length": 284.7,
+      "lowest_point_after_600_steps_m": 0.1166,
+      "lowest_point_m": 0.1162,
+      "mean_link_error_pct": 12.57,
+      "ms_a_step": 0.184
+    },
+    "16": {
+      "below_taut_cm": 23.97,
+      "covers_pct": 17.58,
+      "longest_link_pct_of_its_length": 118.1,
+      "lowest_point_after_600_steps_m": 0.5603,
+      "lowest_point_m": 0.5603,
+      "mean_link_error_pct": 0.96,
+      "ms_a_step": 2.232
+    },
+    "4": {
+      "below_taut_cm": 37.36,
+      "covers_pct": 15.88,
+      "longest_link_pct_of_its_length": 144.4,
+      "lowest_point_after_600_steps_m": 0.4263,
+      "lowest_point_m": 0.4264,
+      "mean_link_error_pct": 3.43,
+      "ms_a_step": 0.606
+    },
+    "64": {
+      "below_taut_cm": 15.35,
+      "covers_pct": 19.0,
+      "longest_link_pct_of_its_length": 107.9,
+      "lowest_point_after_600_steps_m": 0.6465,
+      "lowest_point_m": 0.6465,
+      "mean_link_error_pct": 0.28,
+      "ms_a_step": 8.886
+    }
+  },
+  "pairs_godots": {
+    "closest": "16 vs 64",
+    "farthest": "1 vs 64",
+    "pairs": {
+      "1 vs 16": {
+        "differ_pct": 6.03,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 6.03,
+        "outline_px": 30.77
+      },
+      "1 vs 4": {
+        "differ_pct": 3.91,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 3.91,
+        "outline_px": 19.95
+      },
+      "1 vs 64": {
+        "differ_pct": 6.86,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 6.85,
+        "outline_px": 35.01
+      },
+      "16 vs 64": {
+        "differ_pct": 0.86,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 0.86,
+        "outline_px": 4.51
+      },
+      "4 vs 16": {
+        "differ_pct": 2.19,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 2.19,
+        "outline_px": 11.37
+      },
+      "4 vs 64": {
+        "differ_pct": 3.04,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 3.04,
+        "outline_px": 15.77
+      }
+    }
+  },
+  "pairs_ours": {
+    "closest": "16 vs 64",
+    "farthest": "1 vs 64",
+    "pairs": {
+      "1 vs 16": {
+        "differ_pct": 10.93,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 10.93,
+        "outline_px": 61.17
+      },
+      "1 vs 4": {
+        "differ_pct": 7.1,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 7.1,
+        "outline_px": 41.77
+      },
+      "1 vs 64": {
+        "differ_pct": 13.79,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 13.79,
+        "outline_px": 74.19
+      },
+      "16 vs 64": {
+        "differ_pct": 3.02,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 3.02,
+        "outline_px": 16.27
+      },
+      "4 vs 16": {
+        "differ_pct": 4.07,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 4.07,
+        "outline_px": 22.75
+      },
+      "4 vs 64": {
+        "differ_pct": 7.08,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 7.08,
+        "outline_px": 38.08
+      }
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "sheet_png": {
+    "bytes": 21564,
+    "height": 536,
+    "width": 1292
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "changed_most": "6 a walker in it",
+    "counts": [
+      {
+        "lowest_point_m": 0.263,
+        "passes": 0,
+        "pinned": 0
+      },
+      {
+        "lowest_point_m": -0.0178,
+        "passes": 0,
+        "pinned": 2
+      },
+      {
+        "lowest_point_m": 0.1162,
+        "passes": 1,
+        "pinned": 2
+      },
+      {
+        "lowest_point_m": 0.5603,
+        "passes": 16,
+        "pinned": 2
+      },
+      {
+        "longest_link_pct_of_its_length": 170.5,
+        "lowest_point_m": 0.7767,
+        "passes": 16,
+        "pinned": 2
+      },
+      {
+        "lowest_point_m": 0.642,
+        "passes": 16,
+        "pinned": 2,
+        "pushed_out_of_its_plane_m": 0.27
+      },
+      {
+        "lowest_point_m": 0.0097,
+        "particles_above_0.1_m": 106,
+        "passes": 16,
+        "pinned": 1,
+        "their_farthest_from_the_line_under_the_hand_m": 0.01
+      }
+    ],
+    "png": {
+      "bytes": 26722,
+      "height": 266,
+      "width": 2264
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 a sheet of particles"
+      },
+      {
+        "differs_from_step_before_pct": 3.58,
+        "step": "2 two are pinned"
+      },
+      {
+        "differs_from_step_before_pct": 6.19,
+        "step": "3 links: 1 pass a step"
+      },
+      {
+        "differs_from_step_before_pct": 5.1,
+        "step": "4 16 passes a step"
+      },
+      {
+        "differs_from_step_before_pct": 4.88,
+        "step": "5 carried by a corner"
+      },
+      {
+        "differs_from_step_before_pct": 11.41,
+        "step": "6 a walker in it"
+      },
+      {
+        "differs_from_step_before_pct": 9.99,
+        "step": "7 the nail is pulled"
+      }
+    ]
+  }
+}

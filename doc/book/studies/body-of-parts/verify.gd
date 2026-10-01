@@ -8,6 +8,8 @@ extends SceneTree
 ## claim (where the parts are at rest and after a turn, worked out by hand), the
 ## steps of the process strip, and that the earlier studies still run now that
 ## their branches are instances of the part scenes.
+## The last checks before the sheet's are of the guest in guests/: the body this
+## chapter hands to the room, which has to stand on its own.
 ## One ERROR is printed on purpose: the planted mistake. The line before it says so.
 
 var checks := []
@@ -26,6 +28,21 @@ const TOE := Vector3(0, -0.13, 0.9)             # the toe, seen from the limb's 
 const RADIUS := 0.1                             # the marble's radius
 const TILE := Vector2i(320, 240)
 const GUTTER := 4
+const CheckGuest := preload("res://check_guest.gd")
+const GUEST := "res://guests/body-of-parts/"    # the body this chapter hands to the room
+const PLACE := 0.8                              # half the width of a place in the room
+
+## Godot hands every message to a Logger. This one keeps the errors while the guest runs.
+class Catcher extends Logger:
+	var errors: Array[String] = []
+	var lock := Mutex.new()   # messages can come from other threads
+
+	func _log_error(_function: String, file: String, line: int, code: String, rationale: String, _editor_notify: bool, error_type: int, _script_backtraces: Array[ScriptBacktrace]) -> void:
+		if error_type == ERROR_TYPE_WARNING:
+			return
+		lock.lock()
+		errors.append("%s (%s:%d)" % [rationale if rationale != "" else code, file, line])
+		lock.unlock()
 
 func _initialize() -> void: run.call_deferred()
 
@@ -194,6 +211,76 @@ func press(action: String, study: Node) -> void:
 	Input.action_press(action)
 	study._process(0)
 	Input.action_release(action)
+	await process_frame
+
+## The box around every mesh of a body, in the room.
+func box_of(body: Node3D) -> AABB:
+	var box := AABB()
+	var first := true
+	var meshes: Array[Node] = body.find_children("*", "MeshInstance3D", true, false)
+	meshes.append(body)
+	for node in meshes:
+		var mesh_node := node as MeshInstance3D
+		if mesh_node == null or mesh_node.mesh == null:
+			continue
+		var own: AABB = mesh_node.global_transform * mesh_node.mesh.get_aabb()
+		box = own if first else box.merge(own)
+		first = false
+	return box
+
+## Lowest point on the ground, and inside the dark square of a place.
+func on_a_place(box: AABB) -> bool:
+	return (absf(box.position.y) < 0.001 and box.position.x >= -PLACE and box.position.z >= -PLACE
+		and box.end.x <= PLACE and box.end.z <= PLACE)
+
+## The guest: the one body this chapter hands to the room. The room copies its
+## folder alone, so it has to load, run and stand on its own.
+func guest_checks() -> void:
+	var scene: Resource = load(GUEST + "body-of-parts.tscn")
+	var guest: Node = null
+	if scene is PackedScene and (scene as PackedScene).can_instantiate():
+		guest = (scene as PackedScene).instantiate()
+	check("the guest scene loads: guests/body-of-parts/body-of-parts.tscn, and its first node is a Node3D", guest is Node3D)
+	var needs := CheckGuest.outside(GUEST)
+	check("the guest names nothing outside its folder: %s" % [needs], needs.is_empty())
+	var declared := CheckGuest.class_names(GUEST)
+	check("the guest declares no class_name: %s" % [declared], declared.is_empty())
+	if not guest is Node3D:
+		check("the guest runs two frames and Godot logs no error (it did not load)", false)
+		return
+	var catcher := Catcher.new()
+	OS.add_logger(catcher)
+	root.add_child(guest)
+	await frames(2)
+	OS.remove_logger(catcher)
+	check("the guest runs two frames and Godot logs no error: %s" % [catcher.errors], catcher.errors.is_empty())
+	guest.set_process(false)
+	var colours := {}
+	var from_folder := true
+	for pivot: Node3D in guest.pivots:
+		var whole: Node3D = pivot.get_child(0)
+		from_folder = from_folder and whole.scene_file_path.begins_with(GUEST)
+		colours[str(whole.name)] = (whole as MeshInstance3D).material_override.albedo_color.to_html(false)
+	var bars := 0
+	for bar: MeshInstance3D in guest.find_children("Bar", "MeshInstance3D", true, false):
+		if bar.material_override.albedo_color.to_html(false) == "ff8b1f":
+			bars += 1
+	check("the guest is the body of parts: four pivots under one root and 25 nodes below it, every part a scene of the guest's own folder, each in one colour of the look: the point BONE, the plane SECOND, the cube BODY, the limb and its three bars THIRD: %s" % [colours],
+		guest.get_child_count() == 4 and below(guest) == 25 and from_folder and bars == 3 and colours.size() == 4
+		and colours.get("Point") == "f4efe6" and colours.get("Plane") == "22d9ff" and colours.get("Cube") == "c6ff3d" and colours.get("Limb") == "ff8b1f")
+	for pivot: Node3D in guest.pivots:
+		pivot.rotation.y = 0.0
+	guest.angle = 0.0
+	var rest_box := box_of(guest as Node3D)
+	for i in 72:
+		guest._process(1.0 / 60.0)
+	var turned_box := box_of(guest as Node3D)
+	check("the guest stands on the ground at its own origin and fits on a place, 1.6 m wide and deep: at rest its box runs from %s to %s, and with every pivot turned 30 degrees from %s to %s" % [
+		rounded(rest_box.position), rounded(rest_box.end), rounded(turned_box.position), rounded(turned_box.end)],
+		on_a_place(rest_box) and on_a_place(turned_box) and is_equal_approx(guest.angle, deg_to_rad(30.0)))
+	measured["guest"] = {"scene": GUEST + "body-of-parts.tscn", "box_at_rest": [rounded(rest_box.position), rounded(rest_box.end)],
+		"box_turned": [rounded(turned_box.position), rounded(turned_box.end)], "colours": colours}
+	guest.free()
 	await process_frame
 
 func run() -> void:
@@ -654,6 +741,9 @@ func run() -> void:
 			shares[0], shares[1], shares[2], shares[3], shares[4], shares[5]],
 			shares[0] > 1.0 and shares[1] > 1.0 and shares[2] > 1.0 and shares[3] > 1.0 and shares[4] == 0.0 and shares[5] > 1.0)
 		measured["process_png"] = {"bytes": bytes, "tile_differs_from_the_one_before_pct": shares}
+
+	# The guest handed to the room.
+	await guest_checks()
 
 	# The sheet's record, if it has been rendered.
 	if FileAccess.file_exists("res://sheet.json"):

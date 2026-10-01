@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://room.gd" id="Room"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+[ext_resource type="PackedScene" path="res://supplied/marble.tscn" id="Marble"]
+
+[sub_resource type="PlaneMesh" id="FloorMesh"]
+size = Vector2(22, 26)
+
+[sub_resource type="BoxShape3D" id="FloorCollision"]
+size = Vector3(22, 0.1, 26)
+
+[node name="Room" type="Node3D"]
+script = ExtResource("Room")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0, -7)
+mesh = SubResource("FloorMesh")
+
+[node name="FloorBody" type="StaticBody3D" parent="."]
+position = Vector3(0, 0, -7)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorBody"]
+position = Vector3(0, -0.05, 0)
+shape = SubResource("FloorCollision")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(0, 17, 11)
+rotation = Vector3(-0.83, 0, 0)
+fov = 55.0
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(-7, 0, 4)
+through_eyes = true
+
+[node name="Marble" parent="." instance=ExtResource("Marble")]
+position = Vector3(-6, 0.1, 4.6)

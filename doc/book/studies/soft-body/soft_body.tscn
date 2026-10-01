@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://soft_body.gd" id="Scene"]
+[ext_resource type="Script" path="res://cloth.gd" id="Cloth"]
+[ext_resource type="Script" path="res://soft_cloth.gd" id="SoftCloth"]
+[ext_resource type="Script" path="res://supplied/mover.gd" id="Hand"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[sub_resource type="SphereMesh" id="HandMesh"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="PlaneMesh" id="SoftMesh"]
+size = Vector2(1.2, 1.2)
+subdivide_width = 9
+subdivide_depth = 9
+orientation = 2
+
+[node name="SoftBody" instance=ExtResource("Base")]
+script = ExtResource("Scene")
+
+[node name="Cloth" type="MeshInstance3D" parent="."]
+position = Vector3(-1, 2, 0)
+script = ExtResource("Cloth")
+
+[node name="Hand" type="MeshInstance3D" parent="Cloth"]
+position = Vector3(0.6, 0, 0)
+mesh = SubResource("HandMesh")
+script = ExtResource("Hand")
+
+[node name="SoftCloth" type="SoftBody3D" parent="."]
+position = Vector3(1.2, 1.4, 0)
+mesh = SubResource("SoftMesh")
+script = ExtResource("SoftCloth")
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(-2.4, 0, 1)
+keys = false
+
+[node name="Readout" type="Label3D" parent="."]
+position = Vector3(0, 2.8, 0)
+pixel_size = 0.004
+font_size = 30

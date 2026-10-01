@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="ArrayMesh" path="res://guests/body-of-parts/walk.tres" id="Walk"]
+[ext_resource type="Script" path="res://guests/body-of-parts/plane_part.gd" id="Body"]
+
+[node name="Plane" type="MeshInstance3D"]
+mesh = ExtResource("Walk")
+script = ExtResource("Body")
+
+[node name="Body" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]

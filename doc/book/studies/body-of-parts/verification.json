@@ -297,6 +297,30 @@
       "passed": true
     },
     {
+      "name": "the guest scene loads: guests/body-of-parts/body-of-parts.tscn, and its first node is a Node3D",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name: []",
+      "passed": true
+    },
+    {
+      "name": "the guest runs two frames and Godot logs no error: []",
+      "passed": true
+    },
+    {
+      "name": "the guest is the body of parts: four pivots under one root and 25 nodes below it, every part a scene of the guest's own folder, each in one colour of the look: the point BONE, the plane SECOND, the cube BODY, the limb and its three bars THIRD: { \"Point\": \"f4efe6\", \"Plane\": \"22d9ff\", \"Cube\": \"c6ff3d\", \"Limb\": \"ff8b1f\" }",
+      "passed": true
+    },
+    {
+      "name": "the guest stands on the ground at its own origin and fits on a place, 1.6 m wide and deep: at rest its box runs from [-0.45, 0.0, -0.7] to [0.675, 0.5, 0.75], and with every pivot turned 30 degrees from [-0.615, 0.0, -0.792] to [0.702, 0.5, 0.648]",
+      "passed": true
+    },
+    {
       "name": "sheet.json: at rest, and with the root turned 30 degrees, no two values differ on a single pixel, from above or from the top: 0.00% for all six pairs",
       "passed": true
     },
@@ -331,6 +355,39 @@
   ],
   "godot": "4.6-stable (official)",
   "measured": {
+    "guest": {
+      "box_at_rest": [
+        [
+          -0.45,
+          0.0,
+          -0.7
+        ],
+        [
+          0.675,
+          0.5,
+          0.75
+        ]
+      ],
+      "box_turned": [
+        [
+          -0.615,
+          0.0,
+          -0.792
+        ],
+        [
+          0.702,
+          0.5,
+          0.648
+        ]
+      ],
+      "colours": {
+        "Cube": "c6ff3d",
+        "Limb": "ff8b1f",
+        "Plane": "22d9ff",
+        "Point": "f4efe6"
+      },
+      "scene": "res://guests/body-of-parts/body-of-parts.tscn"
+    },
     "plane_swing_m": 0.663,
     "process_png": {
       "bytes": 25847,

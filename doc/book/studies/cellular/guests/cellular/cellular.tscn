@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://guests/cellular/cellular.gd" id="Rule"]
+
+[node name="Cellular" type="Node3D"]
+
+[node name="Automaton" type="Node3D" parent="."]
+position = Vector3(0, 0, 0.72)
+script = ExtResource("Rule")
+pace = 0.8
+rows = 17
+cell = 0.09
+rise = 0.04

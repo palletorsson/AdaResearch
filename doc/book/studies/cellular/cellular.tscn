@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://cellular.gd" id="Rule"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[node name="Cellular" instance=ExtResource("Base")]
+
+[node name="Camera3D" parent="." index="3"]
+position = Vector3(0, 3.3, 7.3)
+rotation = Vector3(-0.31, 0, 0)
+
+[node name="Automaton" type="Node3D" parent="."]
+position = Vector3(0, 0, 1.7)
+script = ExtResource("Rule")
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(-1.2, 0, 2.25)

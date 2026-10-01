@@ -1,0 +1,577 @@
+{
+  "godot": "4.6-stable (official)",
+  "one line more, one line less": {
+    "BODY c6ff3d as rendered": {
+      "front": {
+        "off_by": 15.0,
+        "rendered": "#bdf734",
+        "then_off_by": 153.8,
+        "with_the_sun_switched_off": "#69891c"
+      },
+      "side, away from the sun": {
+        "off_by": 153.8,
+        "rendered": "#69891c",
+        "then_off_by": 153.8,
+        "with_the_sun_switched_off": "#69891c"
+      },
+      "top, to the sun": {
+        "off_by": 6.1,
+        "rendered": "#cbff39",
+        "then_off_by": 153.8,
+        "with_the_sun_switched_off": "#69891c"
+      }
+    },
+    "GROUND 32188a as rendered": {
+      "in_the_sphere's_shadow": "#150547",
+      "in_the_sun": "#2d1388",
+      "off_by": 7.3,
+      "shadow_off_by": 75.4,
+      "sun_against_shadow_contrast": 1.36
+    },
+    "a sky, without the background_mode line": {
+      "box_front": "#252525",
+      "box_side": "#252525",
+      "box_top": "#252525",
+      "floor_in_the_sphere's_shadow": "#252525",
+      "floor_in_the_sun": "#252525",
+      "sky": "#4c4c4c",
+      "sphere_away_from_it": "#252525",
+      "sphere_to_the_sun": "#252525"
+    },
+    "ambient only, without the energy line": {
+      "box_front": "#8a8a8a",
+      "box_side": "#8a8a8a",
+      "box_top": "#8a8a8a",
+      "floor_in_the_sphere's_shadow": "#8a8a8a",
+      "floor_in_the_sun": "#8a8a8a",
+      "sky": "#ff2e93",
+      "sphere_away_from_it": "#8a8a8a",
+      "sphere_to_the_sun": "#8a8a8a"
+    },
+    "box_top_against_floor_contrast": 11.47,
+    "roughness of the sphere": {
+      "0.2": {
+        "brightest_pixel": "#ffffff",
+        "pixels_with_red_above_150": 67,
+        "sphere_pixels": 23963
+      },
+      "0.8": {
+        "brightest_pixel": "#25ffff",
+        "pixels_with_red_above_150": 0,
+        "sphere_pixels": 23963
+      },
+      "0.8 and 0.2 differ on pct of the still": 0.56,
+      "0.8 and 1.0 differ on pct of the still": 0.0,
+      "1.0": {
+        "brightest_pixel": "#28ffff",
+        "pixels_with_red_above_150": 0,
+        "sphere_pixels": 23963
+      }
+    },
+    "the finished look": {
+      "box_front": "#bdf734",
+      "box_side": "#69891c",
+      "box_top": "#cbff39",
+      "floor_in_the_sphere's_shadow": "#150547",
+      "floor_in_the_sun": "#2d1388",
+      "sky": "#ff2e93",
+      "sphere_away_from_it": "#0c7489",
+      "sphere_to_the_sun": "#25f0ff"
+    },
+    "the finished look with sun.visible = false": {
+      "box_front": "#69891c",
+      "box_side": "#69891c",
+      "box_top": "#69891c",
+      "floor_in_the_sphere's_shadow": "#150547",
+      "floor_in_the_sun": "#150547",
+      "sky": "#ff2e93",
+      "sphere_away_from_it": "#0c7489",
+      "sphere_to_the_sun": "#0c7489"
+    },
+    "the look with its filter": {
+      "BODY c6ff3d as rendered": {
+        "front": {
+          "off_by": 21.8,
+          "rendered": "#b9f034"
+        },
+        "side, away from the sun": {
+          "off_by": 162.2,
+          "rendered": "#628222"
+        },
+        "top, to the sun": {
+          "off_by": 9.6,
+          "rendered": "#c8ff46"
+        }
+      },
+      "box_front": "#b9f034",
+      "box_side": "#628222",
+      "box_top": "#c8ff46",
+      "differs_from_the_plain_look_on_pct_of_the_still": 91.68,
+      "floor_in_the_sphere's_shadow": "#120059",
+      "floor_in_the_sun": "#2b089d",
+      "sky": "#741191",
+      "sky_at_the_horizon": "#6f1092",
+      "sky_at_the_top": "#941392",
+      "sphere_away_from_it": "#036696",
+      "sphere_to_the_sun": "#1fe9ff"
+    },
+    "the look with its filter and the sun switched off": {
+      "box_front": "#617b1d",
+      "box_side": "#628222",
+      "box_top": "#61802b",
+      "floor_in_the_sphere's_shadow": "#120059",
+      "floor_in_the_sun": "#110058",
+      "sky": "#741191",
+      "sphere_away_from_it": "#036696",
+      "sphere_to_the_sun": "#076597"
+    },
+    "the same look asked of supplied/look.gd differs on pct of the still": 0.0,
+    "the same look asked of supplied/look.gd is our still, pixel for pixel": true,
+    "the sun turned, without the shadow line": {
+      "box_front": "#828282",
+      "box_side": "#474747",
+      "box_top": "#8c8c8c",
+      "floor_in_the_sphere's_shadow": "#8c8c8c",
+      "floor_in_the_sun": "#8c8c8c",
+      "sky": "#ff2e93",
+      "sphere_away_from_it": "#474747",
+      "sphere_to_the_sun": "#a3a3a3"
+    }
+  },
+  "pairs": {
+    "between_the_stills": {
+      "closest": "lime on violet vs hot pink on violet",
+      "farthest": "lime on violet vs red on green",
+      "pairs": {
+        "hot pink on violet vs grey on grey": {
+          "differ_pct": 63.32,
+          "elsewhere_pct": 56.99,
+          "inside_pct": 6.33,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "hot pink on violet vs red on green": {
+          "differ_pct": 63.32,
+          "elsewhere_pct": 56.99,
+          "inside_pct": 6.33,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "lime on violet vs grey on grey": {
+          "differ_pct": 63.32,
+          "elsewhere_pct": 56.99,
+          "inside_pct": 6.33,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "lime on violet vs hot pink on violet": {
+          "differ_pct": 6.33,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 6.33,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "lime on violet vs red on green": {
+          "differ_pct": 63.32,
+          "elsewhere_pct": 56.99,
+          "inside_pct": 6.33,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "red on green vs grey on grey": {
+          "differ_pct": 63.32,
+          "elsewhere_pct": 56.99,
+          "inside_pct": 6.33,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        }
+      }
+    },
+    "grey on grey": {
+      "body": "#808080",
+      "body_luminance": 0.2159,
+      "contrast_of_the_two_values": 2.14,
+      "ground": "#4d4d4d",
+      "ground_luminance": 0.0742,
+      "hues_apart_deg": null,
+      "in_the_look": {
+        "box_apart_in_grey_of_765": 121.0,
+        "box_apart_of_765": 121.0,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 81.18,
+        "box_seen_pct": 81.18,
+        "grey_levels": {
+          "box_front": 119,
+          "box_side": 66,
+          "box_top": 128,
+          "floor_in_the_sun": 72
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.75,
+        "its_shadow_pct_of_the_still": 0.75,
+        "rendered": {
+          "box_front": "#777777",
+          "box_side": "#424242",
+          "box_top": "#808080",
+          "floor_in_the_sun": "#484848"
+        }
+      },
+      "with_the_sun_switched_off": {
+        "box_apart_in_grey_of_765": 87.0,
+        "box_apart_of_765": 87.0,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 100.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 66,
+          "box_side": 66,
+          "box_top": 66,
+          "floor_in_the_sun": 37
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.0,
+        "its_shadow_pct_of_the_still": 0.0,
+        "rendered": {
+          "box_front": "#424242",
+          "box_side": "#424242",
+          "box_top": "#424242",
+          "floor_in_the_sun": "#252525"
+        }
+      }
+    },
+    "hardest_to_read_in_grey": "red on green",
+    "hot pink on violet": {
+      "body": "#ff2e93",
+      "body_luminance": 0.2532,
+      "contrast_of_the_two_values": 3.71,
+      "ground": "#32188a",
+      "ground_luminance": 0.0317,
+      "hues_apart_deg": 77.3,
+      "in_the_look": {
+        "box_apart_in_grey_of_765": 222.8,
+        "box_apart_of_765": 212.8,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 100.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 132,
+          "box_side": 71,
+          "box_top": 137,
+          "floor_in_the_sun": 47
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.74,
+        "its_shadow_pct_of_the_still": 0.75,
+        "rendered": {
+          "box_front": "#f7268a",
+          "box_side": "#89134c",
+          "box_top": "#ff2a94",
+          "floor_in_the_sun": "#2d1388"
+        }
+      },
+      "with_the_sun_switched_off": {
+        "box_apart_in_grey_of_765": 153.0,
+        "box_apart_of_765": 135.0,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 100.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 71,
+          "box_side": 71,
+          "box_top": 71,
+          "floor_in_the_sun": 20
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.0,
+        "its_shadow_pct_of_the_still": 0.0,
+        "rendered": {
+          "box_front": "#89134c",
+          "box_side": "#89134c",
+          "box_top": "#89134c",
+          "floor_in_the_sun": "#150547"
+        }
+      }
+    },
+    "how": "each pair is look.gd with its two lines const GROUND and const BODY written again; the box's pixels are found by a second still with the box in one flat colour; `seen` is the share of those pixels where the still differs from a still of the same scene with the box away, by more than 25 of 255 over the three channels; `apart` is the mean of that difference; grey is each pixel's luminance, 0.2126 R + 0.7152 G + 0.0722 B of the linear values, written back as a grey",
+    "lime on violet": {
+      "body": "#c6ff3d",
+      "body_luminance": 0.8386,
+      "contrast_of_the_two_values": 10.88,
+      "ground": "#32188a",
+      "ground_luminance": 0.0317,
+      "hues_apart_deg": 176.1,
+      "in_the_look": {
+        "box_apart_in_grey_of_765": 490.2,
+        "box_apart_of_765": 428.1,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 100.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 228,
+          "box_side": 126,
+          "box_top": 237,
+          "floor_in_the_sun": 47
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.74,
+        "its_shadow_pct_of_the_still": 0.75,
+        "rendered": {
+          "box_front": "#bdf734",
+          "box_side": "#69891c",
+          "box_top": "#cbff39",
+          "floor_in_the_sun": "#2d1388"
+        }
+      },
+      "with_the_sun_switched_off": {
+        "box_apart_in_grey_of_765": 318.0,
+        "box_apart_of_765": 259.0,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 100.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 126,
+          "box_side": 126,
+          "box_top": 126,
+          "floor_in_the_sun": 20
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.0,
+        "its_shadow_pct_of_the_still": 0.0,
+        "rendered": {
+          "box_front": "#69891c",
+          "box_side": "#69891c",
+          "box_top": "#69891c",
+          "floor_in_the_sun": "#150547"
+        }
+      }
+    },
+    "red on green": {
+      "body": "#ff0000",
+      "body_luminance": 0.2126,
+      "contrast_of_the_two_values": 1.0,
+      "ground": "#009400",
+      "ground_luminance": 0.2118,
+      "hues_apart_deg": 120.0,
+      "in_the_look": {
+        "box_apart_in_grey_of_765": 41.4,
+        "box_apart_of_765": 362.6,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 19.06,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 123,
+          "box_side": 65,
+          "box_top": 128,
+          "floor_in_the_sun": 125
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.77,
+        "its_shadow_pct_of_the_still": 0.75,
+        "rendered": {
+          "box_front": "#f70808",
+          "box_side": "#890000",
+          "box_top": "#ff0a0a",
+          "floor_in_the_sun": "#099209"
+        }
+      },
+      "with_the_sun_switched_off": {
+        "box_apart_in_grey_of_765": 0.0,
+        "box_apart_of_765": 214.0,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 0.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 65,
+          "box_side": 65,
+          "box_top": 65,
+          "floor_in_the_sun": 65
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.0,
+        "its_shadow_pct_of_the_still": 0.0,
+        "rendered": {
+          "box_front": "#890000",
+          "box_side": "#890000",
+          "box_top": "#890000",
+          "floor_in_the_sun": "#004d00"
+        }
+      }
+    }
+  },
+  "place": {
+    "the marble in the box's shadow, from above": {
+      "mean_colour": "#83807b",
+      "off_BONE_by": 191.2,
+      "pixels": 1288,
+      "rests_at": [
+        0.05,
+        0.1,
+        -0.45
+      ]
+    },
+    "the marble in the sun, from above": {
+      "mean_colour": "#e1ded7",
+      "off_BONE_by": 29.6,
+      "pixels": 1296,
+      "rests_at": [
+        1.3,
+        0.1,
+        -1.0
+      ]
+    },
+    "through the walker's eyes, from behind": {
+      "box_back": "#69891c",
+      "box_side": "#69891c",
+      "box_top": "#cbff46",
+      "sphere_towards_the_walker": "#0c7489",
+      "stands_at": [
+        1.2,
+        0.0,
+        -2.0
+      ]
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "sheet_png": {
+    "bytes": 40113,
+    "height": 536,
+    "width": 1292
+  },
+  "stages": {
+    "a sky": {
+      "box_front": "#8a144d",
+      "box_side": "#8a144d",
+      "box_top": "#8a144d",
+      "floor_in_the_sphere's_shadow": "#8a144d",
+      "floor_in_the_sun": "#8a144d",
+      "sky": "#ff2e93",
+      "sphere_away_from_it": "#8a144d",
+      "sphere_to_the_sun": "#8a144d"
+    },
+    "a sun, unturned": {
+      "box_front": "#a4a4a4",
+      "box_side": "#474747",
+      "box_top": "#474747",
+      "floor_in_the_sphere's_shadow": "#474747",
+      "floor_in_the_sun": "#474747",
+      "sky": "#ff2e93",
+      "sphere_away_from_it": "#828282",
+      "sphere_to_the_sun": "#808080"
+    },
+    "ambient only": {
+      "box_front": "#474747",
+      "box_side": "#474747",
+      "box_top": "#474747",
+      "floor_in_the_sphere's_shadow": "#474747",
+      "floor_in_the_sun": "#474747",
+      "sky": "#ff2e93",
+      "sphere_away_from_it": "#474747",
+      "sphere_to_the_sun": "#474747"
+    },
+    "energy 0.28": {
+      "box_front": "#bdf734",
+      "box_side": "#69891c",
+      "box_top": "#cbff39",
+      "floor_in_the_sphere's_shadow": "#150547",
+      "floor_in_the_sun": "#2d1388",
+      "sky": "#ff2e93",
+      "sphere_away_from_it": "#0c7489",
+      "sphere_to_the_sun": "#25f0ff"
+    },
+    "the bodies": {
+      "box_front": "#ffff4f",
+      "box_side": "#69891c",
+      "box_top": "#ffff58",
+      "floor_in_the_sphere's_shadow": "#150547",
+      "floor_in_the_sun": "#4727bf",
+      "sky": "#ff2e93",
+      "sphere_away_from_it": "#0c7489",
+      "sphere_to_the_sun": "#40ffff"
+    },
+    "the engine's grey": {
+      "box_front": "#000000",
+      "box_side": "#000000",
+      "box_top": "#000000",
+      "floor_in_the_sphere's_shadow": "#000000",
+      "floor_in_the_sun": "#000000",
+      "sky": "#4c4c4c",
+      "sphere_away_from_it": "#000000",
+      "sphere_to_the_sun": "#000000"
+    },
+    "the ground": {
+      "box_front": "#b6b6b6",
+      "box_side": "#474747",
+      "box_top": "#c3c3c3",
+      "floor_in_the_sphere's_shadow": "#150547",
+      "floor_in_the_sun": "#4727bf",
+      "sky": "#ff2e93",
+      "sphere_away_from_it": "#474747",
+      "sphere_to_the_sun": "#dddddd"
+    },
+    "the palette by role": {
+      "box_front": "#bdf734",
+      "box_side": "#69891c",
+      "box_top": "#cbff39",
+      "floor_in_the_sphere's_shadow": "#150547",
+      "floor_in_the_sun": "#2d1388",
+      "sky": "#ff2e93",
+      "sphere_away_from_it": "#0c7489",
+      "sphere_to_the_sun": "#25f0ff"
+    },
+    "the sun turned": {
+      "box_front": "#b6b6b6",
+      "box_side": "#474747",
+      "box_top": "#c3c3c3",
+      "floor_in_the_sphere's_shadow": "#474747",
+      "floor_in_the_sun": "#c3c3c3",
+      "sky": "#ff2e93",
+      "sphere_away_from_it": "#474747",
+      "sphere_to_the_sun": "#dddddd"
+    }
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "changed_most": "a sky",
+    "png": {
+      "bytes": 36069,
+      "height": 266,
+      "width": 2912
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "the engine's grey"
+      },
+      {
+        "differs_from_step_before_pct": 100.0,
+        "step": "a sky"
+      },
+      {
+        "differs_from_step_before_pct": 66.79,
+        "step": "ambient only"
+      },
+      {
+        "differs_from_step_before_pct": 7.04,
+        "step": "a sun, unturned"
+      },
+      {
+        "differs_from_step_before_pct": 63.64,
+        "step": "the sun turned"
+      },
+      {
+        "differs_from_step_before_pct": 57.0,
+        "step": "the ground"
+      },
+      {
+        "differs_from_step_before_pct": 9.79,
+        "step": "the bodies"
+      },
+      {
+        "differs_from_step_before_pct": 63.52,
+        "step": "energy 0.28"
+      },
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "the palette by role"
+      }
+    ],
+    "the palette by role is the still before it, pixel for pixel": true
+  }
+}

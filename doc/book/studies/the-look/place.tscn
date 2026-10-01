@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://place.gd" id="Place"]
+[ext_resource type="PackedScene" path="res://the_look.tscn" id="TheLook"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+[ext_resource type="PackedScene" path="res://supplied/marble.tscn" id="Marble"]
+
+[node name="Place" type="Node3D"]
+script = ExtResource("Place")
+
+[node name="TheLook" parent="." instance=ExtResource("TheLook")]
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(-1.4, 0, 0)
+rotation = Vector3(0, -1.5708, 0)
+
+[node name="Marble" parent="." instance=ExtResource("Marble")]
+position = Vector3(-1.4, 0.1, 1.0)

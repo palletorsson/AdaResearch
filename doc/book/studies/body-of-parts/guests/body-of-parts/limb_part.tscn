@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://guests/body-of-parts/cube_part.tscn" id="Cube"]
+
+[sub_resource type="CylinderMesh" id="Pin"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.22
+radial_segments = 16
+
+[sub_resource type="SphereMesh" id="Point"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereMesh" id="Socket"]
+radius = 0.06
+height = 0.12
+
+[node name="Limb" type="MeshInstance3D"]
+mesh = SubResource("Socket")
+
+[node name="Upper" type="MeshInstance3D" parent="."]
+mesh = SubResource("Pin")
+
+[node name="Bar" parent="Upper" instance=ExtResource("Cube")]
+position = Vector3(0, 0, 0.15)
+scale = Vector3(0.16, 0.16, 0.6)
+
+[node name="Lower" type="MeshInstance3D" parent="Upper"]
+position = Vector3(0, 0, 0.3)
+mesh = SubResource("Pin")
+
+[node name="Bar" parent="Upper/Lower" instance=ExtResource("Cube")]
+position = Vector3(0, 0, 0.15)
+scale = Vector3(0.16, 0.16, 0.6)
+
+[node name="Foot" type="MeshInstance3D" parent="Upper/Lower"]
+position = Vector3(0, 0, 0.3)
+mesh = SubResource("Pin")
+
+[node name="Bar" parent="Upper/Lower/Foot" instance=ExtResource("Cube")]
+position = Vector3(0, 0, 0.15)
+scale = Vector3(0.16, 0.16, 0.6)
+
+[node name="Toe" type="MeshInstance3D" parent="Upper/Lower/Foot"]
+position = Vector3(0, -0.13, 0.3)
+mesh = SubResource("Point")

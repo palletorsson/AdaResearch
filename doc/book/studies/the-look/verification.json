@@ -1,0 +1,314 @@
+{
+  "checks": [
+    {
+      "name": "the project is named The look, its main scene is the_look.tscn, its renderer Compatibility",
+      "passed": true
+    },
+    {
+      "name": "project.godot sets no clear colour, so the background of an undressed scene is the engine's own grey: #4d4d4d",
+      "passed": true
+    },
+    {
+      "name": "the Input Map has the base's nine actions on their keys",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the base's 15 files: [\"base.tscn\", \"base_look.gd\", \"check_guest.gd\", \"look.gd\", \"marble.gd\", \"marble.tscn\", \"mover.gd\", \"segment.gd\", \"sheet_tools.gd\", \"sweep_sheet.gd\", \"sweep_sheet.tscn\", \"trace_strip.gd\", \"verify_tools.gd\", \"walker.gd\", \"walker.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "no script declares a class_name, and the project lists no named class: nothing needs an import: []",
+      "passed": true
+    },
+    {
+      "name": "every script, and every state of the lesson, is indented with tabs: []",
+      "passed": true
+    },
+    {
+      "name": "a new Environment shows the clear colour as its background, takes its ambient light from the background, at energy 1",
+      "passed": true
+    },
+    {
+      "name": "a new DirectionalLight3D is not turned: it shines level, along (0, 0, -1), with energy 1 and no shadow",
+      "passed": true
+    },
+    {
+      "name": "a new StandardMaterial3D is white, with roughness 1 and no metal",
+      "passed": true
+    },
+    {
+      "name": "Color(\"ff2e93\") is red 255, green 46, blue 147, each of 255",
+      "passed": true
+    },
+    {
+      "name": "the_look.tscn holds no material, no light, no environment and no colour: the look is all in look.gd",
+      "passed": true
+    },
+    {
+      "name": "undressed, the scene has four children, [\"Floor\", \"Box\", \"Sphere\", \"Camera3D\"], and prints `ready, with 4 children`",
+      "passed": true
+    },
+    {
+      "name": "the floor, the box and the sphere each have a collider and no material: 3 solid, 3 unpainted",
+      "passed": true
+    },
+    {
+      "name": "the two bodies stand on the ground, 1.4 m wide, 0.6 m deep and 0.6 m high together: (1.4, 0.6, 0.6)",
+      "passed": true
+    },
+    {
+      "name": "the nine states of the lesson each ran with no error: []",
+      "passed": true
+    },
+    {
+      "name": "the engine's grey: no environment, no light, no material",
+      "passed": true
+    },
+    {
+      "name": "a sky: one WorldEnvironment, its background SKY; nothing was said about the ambient light, so it comes from the background, in the sky's colour",
+      "passed": true
+    },
+    {
+      "name": "ambient only: the ambient light is white, of energy 0.25, and there is no sun",
+      "passed": true
+    },
+    {
+      "name": "a sun, unturned: one DirectionalLight3D that travels along (0.0, 0.0, -1.0), 0.0 degrees above the horizon: along the floor",
+      "passed": true
+    },
+    {
+      "name": "the sun turned: it travels along (0.499, -0.682, -0.535), 43.0 degrees above the horizon, with shadows, its energy still 1",
+      "passed": true
+    },
+    {
+      "name": "the ground: one material, on the floor, in 32188a",
+      "passed": true
+    },
+    {
+      "name": "the bodies: three materials, the box c6ff3d, the sphere 22d9ff; the sun's energy still 1",
+      "passed": true
+    },
+    {
+      "name": "energy 0.28: the sun's energy is 0.28 and nothing else changed",
+      "passed": true
+    },
+    {
+      "name": "the palette by role: the script changed and the scene did not: same environment, same sun, same three colours",
+      "passed": true
+    },
+    {
+      "name": "the lesson's last state is look.gd, byte for byte",
+      "passed": true
+    },
+    {
+      "name": "look.gd names the ten roles of supplied/look.gd with the same ten colours: []",
+      "passed": true
+    },
+    {
+      "name": "the_look.tscn ran 180 frames with look.gd and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "its environment is the supplied look's plain one, studio_environment(), in every stored property (101 compared): unlike in []",
+      "passed": true
+    },
+    {
+      "name": "over that the supplied look lays a filter for a scene that runs: environment() differs from the plain one in 7 stored properties, [\"background_mode\", \"sky\", \"ambient_light_color\", \"ambient_light_energy\", \"adjustment_enabled\", \"adjustment_contrast\", \"adjustment_saturation\"]; fill() is a second light of energy 0.05 with no shadow; the sun's shadow edge is blurred by 2.0",
+      "passed": true
+    },
+    {
+      "name": "its sun is the supplied one in every stored property (43 compared): unlike in []",
+      "passed": true
+    },
+    {
+      "name": "the sun stands 43.0 degrees above the horizon and its light travels to the right and away from the camera: (0.499, -0.682, -0.535)",
+      "passed": true
+    },
+    {
+      "name": "the floor is painted as paint(GROUND), the box as paint(BODY), the sphere as paint(SECOND), in every stored property (125 compared): []",
+      "passed": true
+    },
+    {
+      "name": "three bodies, three materials: none is shared",
+      "passed": true
+    },
+    {
+      "name": "two lines of the palette changed, GROUND and BODY, and the floor and the box took the new colours while the sphere kept SECOND: 4 of 4 pairs",
+      "passed": true
+    },
+    {
+      "name": "the red ff0000 and the green 009400 have the same luminance within half a percent: 0.2126 and 0.2118",
+      "passed": true
+    },
+    {
+      "name": "BODY has 26.5 times the luminance of GROUND; the grey 808080 has 2.9 times that of 4d4d4d",
+      "passed": true
+    },
+    {
+      "name": "with `sun.visible = false` the sun is there and not shown, and a marble dropped on the box still rests on it, at 0.70 m: the light went, the body stayed",
+      "passed": true
+    },
+    {
+      "name": "place.tscn ran 180 frames and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "the place opens on the scene's own camera, the walker in it",
+      "passed": true
+    },
+    {
+      "name": "C: the view is the walker's eyes, 1.6 m up",
+      "passed": true
+    },
+    {
+      "name": "M, from where the walker starts: the marble falls on the box and rests on its top, at (-0.4, 0.7, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "the walker walked once round the two bodies, 10.6 m: \"arrived\"",
+      "passed": true
+    },
+    {
+      "name": "it walked at the box and was stopped by it: \"blocked\", its middle 0.30 m from the box's face",
+      "passed": true
+    },
+    {
+      "name": "it stood where the box's shadow falls (\"arrived\" at (0.15, 0.0, -0.66)): the box is between its feet (0.05 m up) and the sun, and not between its knees (0.5 m up) or its eyes and the sun",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped there rests on the floor at (0.05, 0.1, -0.45), the whole of it in the box's shadow",
+      "passed": true
+    },
+    {
+      "name": "on the floor a marble's middle rests a little under its radius of 0.1 m, and how much depends on the drop: 0.090 m dropped from 0.6 m, 0.098 m dropped from 1 m",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped exactly over the middle of the sphere stays on its top, at 0.70 m; dropped 5 cm to the side it rolls off, and after ten seconds it is at (7.25, -126.05, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "the guest's first node is a Node3D and it enters a room with no error",
+      "passed": true
+    },
+    {
+      "name": "it stands on the ground at its own origin and fits the place: 1.4 m wide, 0.6 m deep, 0.6 m high",
+      "passed": true
+    },
+    {
+      "name": "it is the pair in the course's look: the box painted as paint(BODY), the sphere as paint(SECOND), the two colours written out in its own script",
+      "passed": true
+    },
+    {
+      "name": "a marble rests on the guest's box at 0.70 m and a walker is stopped by it: \"blocked\"",
+      "passed": true
+    },
+    {
+      "name": "as recorded in evidence/guest_trial.json: the room's own trial of this guest passed 8 checks; the walk at the guest ended \"blocked\", 0.54 m from the middle of place 2",
+      "passed": true
+    },
+    {
+      "name": "as recorded in evidence/room_look_trial.json: the room with SKY and SHADE exchanged in room_look.gd ran with no error; its sky read back 0d0620 at the horizon, a square ff2e93, and the edge of a number ff2e93",
+      "passed": true
+    },
+    {
+      "name": "Godot logged no error in the whole run: []",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 56,
+  "godot": "4.6-stable (official)",
+  "kit": "The look",
+  "measured": {
+    "contrast_of_two_values": {
+      "BODY on GROUND": 10.88,
+      "BODY on SHADE": 16.7,
+      "BODY on SKY": 2.93,
+      "SHADE on GROUND": 1.54,
+      "SKY on GROUND": 3.71
+    },
+    "marble_dropped_5_cm_off_the_sphere's_middle_is_at": [
+      7.25,
+      -126.05,
+      0.0
+    ],
+    "marble_on_the_box_m": 0.7,
+    "marble_on_the_floor_m": {
+      "dropped_from_0.6_m": 0.09,
+      "dropped_from_1_m": 0.098
+    },
+    "pairs": {
+      "grey on grey": {
+        "body_luminance": 0.2159,
+        "ground_luminance": 0.0742
+      },
+      "hot pink on violet": {
+        "body_luminance": 0.2532,
+        "ground_luminance": 0.0317
+      },
+      "lime on violet": {
+        "body_luminance": 0.8386,
+        "ground_luminance": 0.0317
+      },
+      "red on green": {
+        "body_luminance": 0.2126,
+        "ground_luminance": 0.2118
+      }
+    },
+    "sun_degrees_above_the_horizon": 43.0,
+    "sun_travels_along": [
+      0.499,
+      -0.682,
+      -0.535
+    ],
+    "the_engine's_clear_colour": "#4d4d4d",
+    "the_filter_changes_of_the_environment": [
+      "background_mode",
+      "sky",
+      "ambient_light_color",
+      "ambient_light_energy",
+      "adjustment_enabled",
+      "adjustment_contrast",
+      "adjustment_saturation"
+    ],
+    "the_room's_trial_of_the_guest": {
+      "feet_at_m": 0.0,
+      "guest": "res://guests/the-look/the-look.tscn",
+      "metres_from_the_middle_of_the_place": 0.54,
+      "place": 2.0,
+      "walk_ended": "blocked"
+    },
+    "the_room_with_two_roles_changed": {
+      "GROUND": "#32188a",
+      "INK": "#ffffff",
+      "SHADE": "#ff2e93",
+      "SKY": "#0d0620",
+      "a_number": "#ffffff",
+      "a_square": "#ff2e93",
+      "background_mode_is_a_sky": true,
+      "errors": [],
+      "floor": "#32188a",
+      "guests": 2.0,
+      "its_edge": "#ff2e93",
+      "said": [
+        "My room: place 1 is res://guests/example/example.tscn",
+        "My room: place 2 is res://guests/the-look/the-look.tscn"
+      ],
+      "sky_at_the_horizon": "#0d0620",
+      "sky_overhead": "#5a1fd6",
+      "through_the_walker's_eyes_the_top_of_the_still": "#4d0bc8"
+    },
+    "walker_stopped_m_from_the_box": 0.3
+  },
+  "passed": true
+}

@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://guests/the-look/the-look.gd" id="Guest"]
+
+[sub_resource type="BoxMesh" id="BoxMesh"]
+size = Vector3(0.6, 0.6, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape"]
+size = Vector3(0.6, 0.6, 0.6)
+
+[sub_resource type="SphereMesh" id="SphereMesh"]
+radius = 0.3
+height = 0.6
+
+[sub_resource type="SphereShape3D" id="SphereShape"]
+radius = 0.3
+
+[node name="TheLook" type="Node3D"]
+script = ExtResource("Guest")
+
+[node name="Box" type="MeshInstance3D" parent="."]
+position = Vector3(-0.4, 0.3, 0)
+mesh = SubResource("BoxMesh")
+
+[node name="BoxBody" type="StaticBody3D" parent="Box"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box/BoxBody"]
+shape = SubResource("BoxShape")
+
+[node name="Sphere" type="MeshInstance3D" parent="."]
+position = Vector3(0.4, 0.3, 0)
+mesh = SubResource("SphereMesh")
+
+[node name="SphereBody" type="StaticBody3D" parent="Sphere"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere/SphereBody"]
+shape = SubResource("SphereShape")

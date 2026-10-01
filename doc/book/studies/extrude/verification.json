@@ -1,0 +1,409 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Extrude, its main scene is extrude.tscn, its renderer Compatibility",
+      "passed": true
+    },
+    {
+      "name": "the Input Map has the base's nine actions on their keys",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the kit base's 15 files and none declares a class_name: [\"base.tscn\", \"base_look.gd\", \"check_guest.gd\", \"look.gd\", \"marble.gd\", \"marble.tscn\", \"mover.gd\", \"segment.gd\", \"sheet_tools.gd\", \"sweep_sheet.gd\", \"sweep_sheet.tscn\", \"trace_strip.gd\", \"verify_tools.gd\", \"walker.gd\", \"walker.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "the project lists no named class: nothing needs an import",
+      "passed": true
+    },
+    {
+      "name": "every script is indented with tabs and none declares a class_name: [] []",
+      "passed": true
+    },
+    {
+      "name": "the shipped walk has 8 corners on the floor, inside the square of 1.6 m, clockwise seen from above: it encloses 1.015 m2",
+      "passed": true
+    },
+    {
+      "name": "centre_of(walk), the mean of its corners, is (0.0, 0.0, 0.07)",
+      "passed": true
+    },
+    {
+      "name": "extrude(walk, 0.8, 1.0) returns a mesh of 28 triangles, 84 vertices: 6 for each of 8 walls, 18 for each cap (it has 84)",
+      "passed": true
+    },
+    {
+      "name": "every wall's normal is level and points away from the middle: the first is (-0.62, 0.0, -0.785)",
+      "passed": true
+    },
+    {
+      "name": "the top is a fan at 0.8 m whose normals point straight up, the bottom the same fan on the floor with its normals straight down: (0.0, 1.0, 0.0) and (0.0, -1.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "hard edges: every triangle carries its own front as the normal of all three corners (0 do not)",
+      "passed": true
+    },
+    {
+      "name": "the solid is closed: every edge is shared by two triangles that run along it in opposite ways (0 edges are not)",
+      "passed": true
+    },
+    {
+      "name": "its fronts face out and it holds 0.8117 m3: the walk's area times the height, 0.8117",
+      "passed": true
+    },
+    {
+      "name": "its 84 vertices stand in 16 places: the walk's 8 corners, twice",
+      "passed": true
+    },
+    {
+      "name": "with index(), which lets triangles share a vertex that has one place and one normal, 84 become 59: 4 for each wall, 8 for the top, and 19 for the bottom, where SurfaceTool's normals differ in the sign of a zero. No wall shares a vertex with a cap or with the next wall",
+      "passed": true
+    },
+    {
+      "name": "it is 1.19 m wide, 0.80 m high and 0.93 m deep, and stands on the floor",
+      "passed": true
+    },
+    {
+      "name": "taper scales the upper outline toward centre_of(walk): at 1.0, 0.6, 0.2 and 0.0 the top has [1.0146, 0.3653, 0.0406, 0.0] m2 and the solid holds [0.8117, 0.5303, 0.3355, 0.2706] m3; each is closed, flat-shaded and wound outward",
+      "passed": true
+    },
+    {
+      "name": "at taper 0 the 8 upper corners are one point: 9 places, and 14 of the 28 triangles have an area; the pyramid holds a third of the prism",
+      "passed": true
+    },
+    {
+      "name": "left at SurfaceTool's default smooth group, generate_normals() averages the normals of corners in one place: the top's first normal is (-0.187, 0.903, -0.387), none of the 28 triangles keeps its own front, and Godot logs nothing",
+      "passed": true
+    },
+    {
+      "name": "grammar_extrude: read() welds the prism into 16 corners and 28 triangles, and \"facing up\" is the 6 triangles of the top cap, not the bottom",
+      "passed": true
+    },
+    {
+      "name": "extrude_up(prism, 0.5, 0.3) returns 64 triangles, 1.30 m high, with 6 tops at 1.30 m: one spire for each triangle of the cap's fan, not one for the cap",
+      "passed": true
+    },
+    {
+      "name": "each top is its triangle scaled to 0.3 about its own middle and lifted 0.5 m; the result is closed, flat-shaded, wound outward, and holds 1.0467 m3",
+      "passed": true
+    },
+    {
+      "name": "at taper 1.0, 0.6, 0.2 and 0.0 it reads, chooses and returns as many triangles as the project's own code did: { \"1.0\": { \"triangles_read\": 28, \"facing_up\": 6, \"of_them_in_the_cap\": 6, \"left_under_0.01_m2\": 0, \"left_as_too_thin\": 0, \"pushed_out\": 6, \"triangles_after\": 64 }, \"0.6\": { \"triangles_read\": 28, \"facing_up\": 6, \"of_them_in_the_cap\": 6, \"left_under_0.01_m2\": 0, \"left_as_too_thin\": 0, \"pushed_out\": 6, \"triangles_after\": 64 }, \"0.2\": { \"triangles_read\": 28, \"facing_up\": 16, \"of_them_in_the_cap\": 6, \"left_under_0.01_m2\": 5, \"left_as_too_thin\": 2, \"pushed_out\": 9, \"triangles_after\": 82 }, \"0.0\": { \"triangles_read\": 14, \"facing_up\": 7, \"of_them_in_the_cap\": 0, \"left_under_0.01_m2\": 0, \"left_as_too_thin\": 0, \"pushed_out\": 7, \"triangles_after\": 56 } }",
+      "passed": true
+    },
+    {
+      "name": "extrude.tscn ran 180 frames with no error and no warning: []",
+      "passed": true
+    },
+    {
+      "name": "it prints: 8 corners walked, 84 vertices in the mesh, 0.80 m high",
+      "passed": true
+    },
+    {
+      "name": "Solid holds the mesh extrude() returns, painted BODY",
+      "passed": true
+    },
+    {
+      "name": "8 segments lie on the walk's 8 edges; the first joins the last corner to the first, so the outline is closed",
+      "passed": true
+    },
+    {
+      "name": "Solid/Body/Shape holds a collider made from the mesh: a ConcavePolygonShape3D of 28 triangles",
+      "passed": true
+    },
+    {
+      "name": "height and taper are exported and used: set to 0.3 and 0.6 the solid is 0.30 m high with the smaller top",
+      "passed": true
+    },
+    {
+      "name": "taper 1.0: M drops the marble over the middle of the walk and it rests on the cap, at 0.898 m; the readout says marble at 0.90 m",
+      "passed": true
+    },
+    {
+      "name": "taper 0.6: it rests on the cap, at 0.898 m, 0.20 m from where it landed",
+      "passed": true
+    },
+    {
+      "name": "taper 0.2: it rests on the cap, at 0.898 m, 0.03 m from where it landed",
+      "passed": true
+    },
+    {
+      "name": "taper 0.0: dropped exactly over the point it stays on the point, at 0.898 m",
+      "passed": true
+    },
+    {
+      "name": "dropped 1 cm to the side it rolls off the pyramid: four seconds later it is at -8.56 m, 6.58 m from the middle",
+      "passed": true
+    },
+    {
+      "name": "with the collider's shape taken away the marble falls through the mesh to the floor: 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "the walker sent at the solid of 0.8 m is stopped by its wall: \"blocked\" at x -0.90, 0.3 m from the face, its feet on the floor",
+      "passed": true
+    },
+    {
+      "name": "at 0.3 m it steps up and stands on top of the walk: \"arrived\", its feet at 0.30 m",
+      "passed": true
+    },
+    {
+      "name": "a pyramid of 0.3 m it walks up, to the point: \"arrived\", its feet at 0.29 m",
+      "passed": true
+    },
+    {
+      "name": "the walk in the other order: every front faces in (the top's normal is (0.0, -1.0, 0.0)), the marble falls through the top to the floor inside, 0.098 m, and Godot logs nothing",
+      "passed": true
+    },
+    {
+      "name": "the walker is stopped by the inside-out wall all the same: \"blocked\" at x -0.90",
+      "passed": true
+    },
+    {
+      "name": "walk[i + 1] at the last corner stops the function with: [\"SCRIPT ERROR: Out of bounds get index \\'8\\' (on base: \\'Array[Vector3]\\') (gdscript://-9223371878695959097.gd:6)\"]",
+      "passed": true
+    },
+    {
+      "name": "with spire ticked the solid is handed on: 8 corners walked, 192 vertices in the mesh, 1.30 m high; the collider is made from the new mesh",
+      "passed": true
+    },
+    {
+      "name": "the marble dropped on the spires comes to rest at 1.29 m, 0.24 m from the middle",
+      "passed": true
+    },
+    {
+      "name": "walk.tscn: the seven legs of our walk, held as actions, then Space: it prints one line of code with 8 corners, each within 5 cm of the walk the kit ships",
+      "passed": true
+    },
+    {
+      "name": "the walk is closed, clockwise, and the readout says so: 1.02 m2",
+      "passed": true
+    },
+    {
+      "name": "walked the other way round the kept corners run counter-clockwise (-0.70 m2) and the printed walk is clockwise all the same (0.75 m2)",
+      "passed": true
+    },
+    {
+      "name": "and extrude() of it is a closed solid with its fronts outward",
+      "passed": true
+    },
+    {
+      "name": "a straight run walked in two goes is one edge, and the Hand stops at the edge of the square, 0.75 m from the middle: 4 corners",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "the guest's first node is a Node3D; its solid stands on the ground at its origin and fits the place: 1.19 m wide, 0.93 m deep, 0.80 m high",
+      "passed": true
+    },
+    {
+      "name": "the guest's own copy of extrude() gives the mesh the kit's extrude() gives for its walk, height 0.80 and taper 0.80; it is painted BODY",
+      "passed": true
+    },
+    {
+      "name": "its height and taper are written on it, in INK with a SHADE edge: height 0.80 m, taper 0.80",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped over the guest rests on top of it, at 0.898 m: it has a collider",
+      "passed": true
+    },
+    {
+      "name": "the guest with a walk of 7 corners, height 1.0 and taper 0.7: a closed plinth 1.00 m high whose plate says so; a rider put at centre_of(walk) + UP * height stands with its feet at 1.00 m, and a marble dropped over a rider of 0.5 m rests at 1.598 m",
+      "passed": true
+    },
+    {
+      "name": "from the first check to the last Godot logged no warning and no error but the one this file plants: [\"SCRIPT ERROR: Out of bounds get index \\'8\\' (on base: \\'Array[Vector3]\\') (gdscript://-9223371878695959097.gd:6)\"] []",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 56,
+  "godot": "4.6-stable (official)",
+  "kit": "Extrude",
+  "measured": {
+    "a_step_past_the_end": [
+      "SCRIPT ERROR: Out of bounds get index '8' (on base: 'Array[Vector3]') (gdscript://-9223371878695959097.gd:6)"
+    ],
+    "borrowed_extrude": {
+      "0.0": {
+        "facing_up": 7,
+        "left_as_too_thin": 0,
+        "left_under_0.01_m2": 0,
+        "of_them_in_the_cap": 0,
+        "pushed_out": 7,
+        "triangles_after": 56,
+        "triangles_read": 14
+      },
+      "0.2": {
+        "facing_up": 16,
+        "left_as_too_thin": 2,
+        "left_under_0.01_m2": 5,
+        "of_them_in_the_cap": 6,
+        "pushed_out": 9,
+        "triangles_after": 82,
+        "triangles_read": 28
+      },
+      "0.6": {
+        "facing_up": 6,
+        "left_as_too_thin": 0,
+        "left_under_0.01_m2": 0,
+        "of_them_in_the_cap": 6,
+        "pushed_out": 6,
+        "triangles_after": 64,
+        "triangles_read": 28
+      },
+      "1.0": {
+        "facing_up": 6,
+        "left_as_too_thin": 0,
+        "left_under_0.01_m2": 0,
+        "of_them_in_the_cap": 6,
+        "pushed_out": 6,
+        "triangles_after": 64,
+        "triangles_read": 28
+      }
+    },
+    "guest": {
+      "deep_m": 0.93,
+      "high_m": 0.8,
+      "marble_rests_at_m": 0.898,
+      "wide_m": 1.19
+    },
+    "in_a_scratch_copy_of_my_room_on_2026-10-01": {
+      "guest_trial": {
+        "checks": "8 of 8",
+        "feet_at_m": 0.0,
+        "metres_from_the_middle_of_the_place": 0.8,
+        "place": 2,
+        "walk_ended": "blocked"
+      },
+      "with_the_lessons_three_rider_lines": {
+        "marble_on_the_rider_m": 1.598,
+        "rider": "res://guests/example/example.tscn",
+        "rider_feet_at_m": 1.0,
+        "walker": "blocked, 0.67 m from the middle of the place"
+      }
+    },
+    "marble": {
+      "0.0": {
+        "from_the_middle_m": 0.0,
+        "rests_at_m": 0.898
+      },
+      "0.0, 1 cm aside": {
+        "after_4_s_at_m": -8.56,
+        "from_the_middle_m": 6.58
+      },
+      "0.2": {
+        "from_the_middle_m": 0.027,
+        "rests_at_m": 0.898
+      },
+      "0.6": {
+        "from_the_middle_m": 0.205,
+        "rests_at_m": 0.898
+      },
+      "1.0": {
+        "from_the_middle_m": 0.0,
+        "rests_at_m": 0.898
+      },
+      "no collider": {
+        "rests_at_m": 0.098
+      }
+    },
+    "prism": {
+      "first_wall_normal": "(-0.62, 0.0, -0.785)",
+      "places": 16,
+      "top_first_normal_as_surface_tool_made_it": "(0.0, 1.0, 0.0)",
+      "top_first_normal_read_back_from_the_mesh": "(0.0, 1.0, -0.000015)",
+      "triangles": 28,
+      "vertices": 84,
+      "volume_m3": 0.8117
+    },
+    "prism_indexed": {
+      "bottom_normals_that_differ_in_bits": 3,
+      "vertices": 59
+    },
+    "pyramid": {
+      "places": 9,
+      "triangles_with_area": 14
+    },
+    "recorder": {
+      "line": "var walk: Array[Vector3] = [Vector3(-0.4, 0, -0.4), Vector3(0.31, 0, -0.4), Vector3(0.58, 0, -0.12), Vector3(0.58, 0, 0.36), Vector3(0.41, 0, 0.53), Vector3(-0.38, 0, 0.53), Vector3(-0.61, 0, 0.3), Vector3(-0.61, 0, -0.27)]"
+    },
+    "room_task": {
+      "marble_on_a_rider_of_half_a_metre_m": 1.598,
+      "rider_feet_at_m": 1.0
+    },
+    "smooth_by_default": {
+      "first_wall_normal": "(-0.769, -0.343, -0.539)",
+      "top_first_normal": "(-0.187, 0.903, -0.387)",
+      "top_first_normal_as_printed": "(-0.18654, 0.903099, -0.386801)",
+      "triangles_not_flat": 28
+    },
+    "spire": {
+      "marble_rests_at_m": 1.29,
+      "tops": 6,
+      "triangles": 64,
+      "vertices": 192,
+      "volume_m3": 1.0467
+    },
+    "taper": {
+      "0.0": {
+        "top_area_m2": 0.0,
+        "volume_m3": 0.2706
+      },
+      "0.2": {
+        "top_area_m2": 0.0406,
+        "volume_m3": 0.3355
+      },
+      "0.6": {
+        "top_area_m2": 0.3653,
+        "volume_m3": 0.5303
+      },
+      "1.0": {
+        "top_area_m2": 1.0146,
+        "volume_m3": 0.8117
+      }
+    },
+    "the_other_way_round": {
+      "marble_rests_at_m": 0.098,
+      "top_normal": "(0.0, -1.0, 0.0)",
+      "volume_m3": -0.8117,
+      "walker": "blocked"
+    },
+    "walk": {
+      "area_m2": 1.015,
+      "centre": [
+        0.0,
+        0.0,
+        0.07
+      ],
+      "corners": 8
+    },
+    "walker": {
+      "height 0.3, taper 0.0": {
+        "feet_at_m": 0.29,
+        "walk_ended": "arrived",
+        "x": -0.08
+      },
+      "height 0.3, taper 1.0": {
+        "feet_at_m": 0.3,
+        "walk_ended": "arrived",
+        "x": -0.08
+      },
+      "height 0.8, taper 1.0": {
+        "feet_at_m": 0.0,
+        "walk_ended": "blocked",
+        "x": -0.9
+      }
+    }
+  },
+  "passed": true
+}

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://guests/bullet/bullet.gd" id="Guest"]
+
+[sub_resource type="SphereMesh" id="BallMesh"]
+radius = 0.1
+height = 0.2
+
+[node name="Bullet" type="Node3D"]
+script = ExtResource("Guest")
+
+[node name="Ball" type="MeshInstance3D" parent="."]
+mesh = SubResource("BallMesh")
+
+[node name="Path" type="MeshInstance3D" parent="."]

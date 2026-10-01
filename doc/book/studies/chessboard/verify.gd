@@ -11,6 +11,8 @@ extends SceneTree
 ## numbers in TUTORIAL.md claim (the four rules cell by cell, the marble on a
 ## solid cell and through the ghost, the gap that lets the marble pass), the
 ## steps of the process strip, and that the earlier studies still run.
+## The last checks before the sheet's are of the guest in guests/: the body this
+## chapter hands to the room, which has to stand on its own.
 
 var checks := []
 var measured := {}
@@ -27,6 +29,21 @@ const NAMES := ["every cell alike", "(x + z) % 2 chessboard", "x % 3 stripes", "
 const GHOST := Vector2i(5, 5)
 const TILE := Vector2i(320, 240)
 const GUTTER := 4
+const CheckGuest := preload("res://check_guest.gd")
+const GUEST := "res://guests/chessboard/"       # the body this chapter hands to the room
+const PLACE := 0.8                              # half the width of a place in the room
+
+## Godot hands every message to a Logger. This one keeps the errors while the guest runs.
+class Catcher extends Logger:
+	var errors: Array[String] = []
+	var lock := Mutex.new()   # messages can come from other threads
+
+	func _log_error(_function: String, file: String, line: int, code: String, rationale: String, _editor_notify: bool, error_type: int, _script_backtraces: Array[ScriptBacktrace]) -> void:
+		if error_type == ERROR_TYPE_WARNING:
+			return
+		lock.lock()
+		errors.append("%s (%s:%d)" % [rationale if rationale != "" else code, file, line])
+		lock.unlock()
 
 func _initialize() -> void: run.call_deferred()
 
@@ -182,6 +199,94 @@ func first_pass_mm(holds_mm: int, passes_mm: int, height: float) -> int:
 		else:
 			low = middle
 	return high
+
+## The box around every mesh of a body, in the room.
+func box_of(body: Node3D) -> AABB:
+	var box := AABB()
+	var first := true
+	var meshes: Array[Node] = body.find_children("*", "MeshInstance3D", true, false)
+	meshes.append(body)
+	for node in meshes:
+		var mesh_node := node as MeshInstance3D
+		if mesh_node == null or mesh_node.mesh == null:
+			continue
+		var own: AABB = mesh_node.global_transform * mesh_node.mesh.get_aabb()
+		box = own if first else box.merge(own)
+		first = false
+	return box
+
+## What a ray straight down from 2 m meets first: the height, or -1.0 for nothing.
+func first_under(over: Vector3) -> float:
+	var query := PhysicsRayQueryParameters3D.create(over, Vector3(over.x, -1.0, over.z))
+	var hit := root.get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty():
+		return -1.0
+	return hit.position.y
+
+## The guest: the one body this chapter hands to the room. The room copies its
+## folder alone, so it has to load, run and stand on its own.
+func guest_checks() -> void:
+	var scene: Resource = load(GUEST + "chessboard.tscn")
+	var guest: Node = null
+	if scene is PackedScene and (scene as PackedScene).can_instantiate():
+		guest = (scene as PackedScene).instantiate()
+	check("the guest scene loads: guests/chessboard/chessboard.tscn, and its first node is a Node3D", guest is Node3D)
+	var needs := CheckGuest.outside(GUEST)
+	check("the guest names nothing outside its folder: %s" % [needs], needs.is_empty())
+	var declared := CheckGuest.class_names(GUEST)
+	check("the guest declares no class_name: %s" % [declared], declared.is_empty())
+	if not guest is Node3D:
+		check("the guest runs two frames and Godot logs no error (it did not load)", false)
+		return
+	var catcher := Catcher.new()
+	OS.add_logger(catcher)
+	root.add_child(guest)
+	await frames(2)
+	await physics_frame
+	OS.remove_logger(catcher)
+	check("the guest runs two frames and Godot logs no error: %s" % [catcher.errors], catcher.errors.is_empty())
+	var board: Node3D = guest.get_node("Floor")
+	var placed := board.get_child_count() == 16
+	var from_folder := true
+	var lime := 0
+	var cyan := 0
+	var seen := []
+	for i in board.get_child_count():
+		var cube: MeshInstance3D = board.get_child(i)
+		@warning_ignore("integer_division")
+		var cell := Vector2i(i % 4, i / 4)
+		placed = placed and near(cube.global_position, Vector3((cell.x - 1.5) * 0.3, 0.15, (cell.y - 1.5) * 0.3)) and near(cube.get_aabb().size, Vector3(0.3, 0.3, 0.3))
+		from_folder = from_folder and cube.scene_file_path == GUEST + "cube_part.tscn"
+		var colour: String = cube.material_override.albedo_color.to_html(false)
+		if colour == "c6ff3d" and (cell.x + cell.y) % 2 == 0:
+			lime += 1
+		if colour == "22d9ff" and (cell.x + cell.y) % 2 == 1:
+			cyan += 1
+		if not seen.has(cube.material_override):
+			seen.append(cube.material_override)
+	check("the guest is a small floor of cubes, four by four: 16 instances of the guest's own cube part, 0.3 m on an edge and 0.3 m apart, each with a material of its own, 8 in BODY c6ff3d where x + z is even and 8 in SECOND 22d9ff where it is odd",
+		placed and from_folder and lime == 8 and cyan == 8 and seen.size() == 16)
+	var ghost := Vector2i(board.ghost_x, board.ghost_z)
+	var solid := 0
+	var open_cells := []
+	for z in 4:
+		for x in 4:
+			var top := first_under(Vector3((x - 1.5) * 0.3, 2.0, (z - 1.5) * 0.3))
+			if absf(top - 0.3) < 0.001:
+				solid += 1
+			else:
+				open_cells.append(Vector2i(x, z))
+	check("one of the sixteen is a ghost: a ray straight down stops on 15 cells at 0.30 m and meets nothing over cell (%d, %d), which has its mesh and its colour" % [ghost.x, ghost.y],
+		solid == 15 and open_cells == [ghost] and colliders(board) == 15 and (board.get_child(ghost.y * 4 + ghost.x) as MeshInstance3D).mesh != null)
+	var box := box_of(guest as Node3D)
+	check("the guest stands on the ground at its own origin and fits on a place, 1.6 m wide and deep: its box runs from (%.2f, %.2f, %.2f) to (%.2f, %.2f, %.2f)" % [
+		box.position.x, box.position.y, box.position.z, box.end.x, box.end.y, box.end.z],
+		absf(box.position.y) < 0.001 and box.position.x >= -PLACE and box.position.z >= -PLACE and box.end.x <= PLACE and box.end.z <= PLACE
+		and near(box.get_center(), Vector3(0, 0.15, 0), 0.001))
+	measured["guest"] = {"scene": GUEST + "chessboard.tscn", "cubes": board.get_child_count(), "ghost": [ghost.x, ghost.y],
+		"box": [[snappedf(box.position.x, 0.001), snappedf(box.position.y, 0.001), snappedf(box.position.z, 0.001)], [snappedf(box.end.x, 0.001), snappedf(box.end.y, 0.001), snappedf(box.end.z, 0.001)]]}
+	guest.free()
+	await process_frame
 
 func run() -> void:
 	# The project and the Input Map: the nine actions of the earlier studies, unchanged.
@@ -572,6 +677,9 @@ func run() -> void:
 	var four := Image.load_from_file(ProjectSettings.globalize_path("res://sheet.png"))
 	check("sheet.png is there: the four values of `rhythm` side by side, 4 tiles of 320 x 240, %d bytes" % FileAccess.get_file_as_bytes("res://sheet.png").size(),
 		four != null and four.get_width() == 4 * TILE.x + 3 * GUTTER and FileAccess.get_file_as_bytes("res://sheet.png").size() < 300000)
+
+	# The guest handed to the room.
+	await guest_checks()
 
 	# The sheet's record, if it has been rendered.
 	if FileAccess.file_exists("res://sheet.json"):

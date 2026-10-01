@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="PackedScene" path="res://bullet.tscn" id="Bullet"]
+[ext_resource type="Script" path="res://orbit.gd" id="Orbit"]
+
+[sub_resource type="SphereMesh" id="CentreMesh"]
+radius = 0.15
+height = 0.3
+
+[node name="OrbitTrip" instance=ExtResource("Base")]
+
+[node name="Orbit" parent="." instance=ExtResource("Bullet")]
+script = ExtResource("Orbit")
+launch = Vector3(0, 2, 0)
+start = Vector3(1, 1.6, 0)
+
+[node name="Centre" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.6, 0)
+mesh = SubResource("CentreMesh")

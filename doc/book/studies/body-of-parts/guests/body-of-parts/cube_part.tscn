@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://guests/body-of-parts/cube_part.gd" id="Lesson"]
+
+[node name="Cube" type="MeshInstance3D"]
+script = ExtResource("Lesson")
+
+[node name="Body" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]

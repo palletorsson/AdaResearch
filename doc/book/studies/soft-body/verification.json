@@ -1,0 +1,503 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Soft body, its main scene is soft_body.tscn, its renderer Compatibility",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the 15 files of the base, and the project lists no named class: nothing needs an import",
+      "passed": true
+    },
+    {
+      "name": "every script is indented with tabs and none declares a class_name: [] []",
+      "passed": true
+    },
+    {
+      "name": "a Particle falls: -0.00272 m in its first step, gravity times the step squared, and [-0.537, -1.968, -4.129] m after 20, 40 and 60 steps; it stores no speed, only where it was",
+      "passed": true
+    },
+    {
+      "name": "a PinnedParticle is a Particle; a Particle is not a PinnedParticle",
+      "passed": true
+    },
+    {
+      "name": "PinnedParticle's _init calls super(at): it has the position it was made with, (1.0, 2.0, 3.0)",
+      "passed": true
+    },
+    {
+      "name": "a nailed PinnedParticle stays where it is through step(), nudge() and push_out(), which it inherits and which calls its own nudge()",
+      "passed": true
+    },
+    {
+      "name": "a PinnedParticle with a holder goes where the holder is at every step",
+      "passed": true
+    },
+    {
+      "name": "push_out() puts a Particle on the skin of a ball and of a capsule, and stops it there",
+      "passed": true
+    },
+    {
+      "name": "a subclass whose _init forgets super() is made at (0.0, 0.0, 0.0), not where it was told, and Godot says nothing: no error, no warning",
+      "passed": true
+    },
+    {
+      "name": "a subclass with no _init of its own is made by its parent's",
+      "passed": true
+    },
+    {
+      "name": "the cloth is 121 particles, 220 links and 200 triangles, and every link starts at its own length",
+      "passed": true
+    },
+    {
+      "name": "two particles are pinned, the two ends of the top row: particle 0 by a nail, particle 10 by the Hand",
+      "passed": true
+    },
+    {
+      "name": "the nailed corner is at (-0.6, 0, 0) of the cloth, not at its origin",
+      "passed": true
+    },
+    {
+      "name": "draw() makes one surface of 121 corners, painted BODY and seen from both sides",
+      "passed": true
+    },
+    {
+      "name": "with no pass over the links the two pinned particles stay and the rest falls: after 25 steps the lowest is at -0.02 m",
+      "passed": true
+    },
+    {
+      "name": "two cloths built and stepped alike are alike to the last digit: nothing in the cloth is left to chance",
+      "passed": true
+    },
+    {
+      "name": "with the nailed corner made at the origin the cloth hangs from the middle of its own top edge: lowest point 0.22 m, longest link 141% of its length",
+      "passed": true
+    },
+    {
+      "name": "a PinnedParticle that overrides step() and not nudge() is dragged by its links: after 11 seconds the nailed corner is at (0.60, -1.62, 0.00) of the cloth, and the lowest point at -0.79 m, under the floor",
+      "passed": true
+    },
+    {
+      "name": "at rest after 1200 steps the lowest point is at [0.1162, 0.4264, 0.5603, 0.6465] m for 1, 4, 16 and 64 passes; with links that did not give it would be at 0.80 m",
+      "passed": true
+    },
+    {
+      "name": "the longest link is [284.7, 144.4, 118.1, 107.9]% of its length: at 1 pass nearly three times, at 64 still 8% too long",
+      "passed": true
+    },
+    {
+      "name": "at every count the longest link is one that ends on a pinned corner: at 4 passes it joins particles [0, 11]",
+      "passed": true
+    },
+    {
+      "name": "from 16 to 64 passes the lowest point rises 8.62 cm, not less than one; at 64 it is still 15.35 cm below taut",
+      "passed": true
+    },
+    {
+      "name": "a step costs more with every pass: 0.16, 0.53, 2.08 and 8.29 ms on this machine",
+      "passed": true
+    },
+    {
+      "name": "the same cloth as a net of 6 by 6, 11 by 11 and 21 by 21 points, at 16 passes: the lowest point is at [0.6739, 0.5603, 0.4037] m; the finer net is the softer one",
+      "passed": true
+    },
+    {
+      "name": "with the whole top row pinned the lowest point is at [0.6495, 0.7636, 0.7919, 0.7988] m: from 16 to 64 passes it rises 0.69 cm",
+      "passed": true
+    },
+    {
+      "name": "when the free end of a held link takes the whole correction the lowest point is at [0.2056, 0.4591, 0.5766, 0.6575] m: higher than with our rule at every count",
+      "passed": true
+    },
+    {
+      "name": "16 passes spent as 4 steps of 1/240 s with 4 passes each leave the lowest point at 0.6452 m: within half a centimetre of 64 passes in one step, 0.6465 m, and 8.5 cm above 16 passes in one step",
+      "passed": true
+    },
+    {
+      "name": "the corner goes with the hand, the nailed one stays; 1.2 m toward us the longest link is 181% of its length",
+      "passed": true
+    },
+    {
+      "name": "let_go() puts a new Particle in the place of the first pinned one: the nail is gone, the hand still holds, and there are still 121",
+      "passed": true
+    },
+    {
+      "name": "held by one corner the cloth hangs as a rope down to the floor: 100 particles are in the air, none more than 0.013 m from the line under the hand; the rest lie on the floor",
+      "passed": true
+    },
+    {
+      "name": "let go a second time, nothing holds it: all 121 particles lie on the floor it was told about",
+      "passed": true
+    },
+    {
+      "name": "dragged over a standing capsule and let go, the cloth does not stay on it: 0 of 121 particles above 0.5 m, at 4 and at 16 passes",
+      "passed": true
+    },
+    {
+      "name": "soft_body.tscn ran 300 steps and Godot logged no error and no warning: [] []",
+      "passed": true
+    },
+    {
+      "name": "the readout shows the report of the cloth: 4 passes: lowest point 0.43 m, longest link 144% of its length, 0.69 ms a step",
+      "passed": true
+    },
+    {
+      "name": "soft_cloth.gd pinned the two top corners of the soft body, points 110 and 120, and printed which",
+      "passed": true
+    },
+    {
+      "name": "the soft body hangs from its pinned points at 2 m; at its own 5 passes its lowest point is at 0.760 m",
+      "passed": true
+    },
+    {
+      "name": "S held for a second carries the Hand 1.20 m toward us, and the corner of the cloth is where the Hand is",
+      "passed": true
+    },
+    {
+      "name": "Space: the walker arrived in the cloth, not stopped by it, and the cloth is pushed 0.29 m out of its plane",
+      "passed": true
+    },
+    {
+      "name": "Space again: the walker walked on, and ten seconds later the cloth is 0.024 m out of its plane, coming back",
+      "passed": true
+    },
+    {
+      "name": "M lets go of the nail",
+      "passed": true
+    },
+    {
+      "name": "M again lets go of the hand, and the cloth lies on the floor: the highest particle is at 0.01 m",
+      "passed": true
+    },
+    {
+      "name": "and Godot logged no error to the end of the scene: []",
+      "passed": true
+    },
+    {
+      "name": "the soft body of Godot alone, at precision 1, 4, 16 and 64: its lowest point is at 0.6432, 0.7505, 0.7872 and 0.7975 m in this run",
+      "passed": true
+    },
+    {
+      "name": "from precision 16 to 64 its lowest point rises 1.03 cm",
+      "passed": true
+    },
+    {
+      "name": "a walker walks into the soft body of Godot and arrived; the soft body is pushed 0.0000 m: it does not meet the walker at all",
+      "passed": true
+    },
+    {
+      "name": "with its two points let go, the soft body of Godot falls through the supplied floor: 3 s later its lowest point is at -25.0 m",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "the guest loads and runs 120 steps with no error; it is 1.48 m wide, 0.08 m deep and 2.00 m high, and stands on the ground at its own origin",
+      "passed": true
+    },
+    {
+      "name": "with nobody near it comes to rest and stops stepping, 414 steps after it was made; its lowest point is at 0.50 m",
+      "passed": true
+    },
+    {
+      "name": "a walker walks between the posts and arrived in the middle; the cloth wakes and is pushed 0.27 m out of its plane",
+      "passed": true
+    },
+    {
+      "name": "a post stops the walker: \"blocked\" at z = -0.14",
+      "passed": true
+    },
+    {
+      "name": "the guest's cloth.gd steps as the lesson's does: at 8 passes both have their lowest point at 0.5042 m",
+      "passed": true
+    },
+    {
+      "name": "sheet.json has our cloth where this run has it: [0.1162, 0.4264, 0.5603, 0.6465] m",
+      "passed": true
+    },
+    {
+      "name": "on the sheet the closest pair of our cloth is 16 vs 64 (3.02% of the still) and the farthest 1 vs 64 (13.79%)",
+      "passed": true
+    },
+    {
+      "name": "the soft body of Godot on the sheet: lowest point at [0.573, 0.7007, 0.7708, 0.7952] m, higher than ours at every count; its closest pair is 16 vs 64 (0.86%)",
+      "passed": true
+    },
+    {
+      "name": "sheet.png and process.png are there, each under 300 KB; the strip has 7 steps, and \"6 a walker in it\" changed its tile most",
+      "passed": true
+    },
+    {
+      "name": "Godot logged no error in the whole run: []",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 59,
+  "godot": "4.6-stable (official)",
+  "kit": "Soft body",
+  "measured": {
+    "a_particle_falls_m": {
+      "after_1_step": -0.00272,
+      "after_20_40_60_steps": [
+        -0.537,
+        -1.968,
+        -4.129
+      ]
+    },
+    "followed": {
+      "four_steps_of_four_passes": {
+        "below_taut_cm": 15.48,
+        "longest_link_pct_of_its_length": 108.0,
+        "lowest_point_m": 0.6452,
+        "mean_link_error_pct": 0.3,
+        "ms_for_one_sixtieth_of_a_second": 2.193
+      },
+      "free_end_takes_the_whole_correction": {
+        "1": {
+          "below_taut_cm": 59.44,
+          "longest_link_pct_of_its_length": 207.3,
+          "lowest_point_m": 0.2056,
+          "mean_link_error_pct": 11.55
+        },
+        "16": {
+          "below_taut_cm": 22.34,
+          "longest_link_pct_of_its_length": 110.5,
+          "lowest_point_m": 0.5766,
+          "mean_link_error_pct": 0.85
+        },
+        "4": {
+          "below_taut_cm": 34.09,
+          "longest_link_pct_of_its_length": 124.1,
+          "lowest_point_m": 0.4591,
+          "mean_link_error_pct": 3.12
+        },
+        "64": {
+          "below_taut_cm": 14.25,
+          "longest_link_pct_of_its_length": 104.2,
+          "lowest_point_m": 0.6575,
+          "mean_link_error_pct": 0.25
+        }
+      },
+      "grain_at_16_passes": {
+        "11 by 11": {
+          "below_taut_cm": 23.97,
+          "links": 220,
+          "longest_link_pct_of_its_length": 118.1,
+          "lowest_point_m": 0.5603,
+          "mean_link_error_pct": 0.96,
+          "ms_a_step": 2.075,
+          "particles": 121
+        },
+        "21 by 21": {
+          "below_taut_cm": 39.63,
+          "links": 840,
+          "longest_link_pct_of_its_length": 189.2,
+          "lowest_point_m": 0.4037,
+          "mean_link_error_pct": 3.4,
+          "ms_a_step": 8.066,
+          "particles": 441
+        },
+        "6 by 6": {
+          "below_taut_cm": 12.61,
+          "links": 60,
+          "longest_link_pct_of_its_length": 104.9,
+          "lowest_point_m": 0.6739,
+          "mean_link_error_pct": 0.33,
+          "ms_a_step": 0.543,
+          "particles": 36
+        }
+      },
+      "top_row_pinned": {
+        "1": {
+          "below_taut_cm": 15.05,
+          "longest_link_pct_of_its_length": 143.7,
+          "lowest_point_m": 0.6495,
+          "mean_link_error_pct": 6.62
+        },
+        "16": {
+          "below_taut_cm": 0.81,
+          "longest_link_pct_of_its_length": 102.1,
+          "lowest_point_m": 0.7919,
+          "mean_link_error_pct": 0.34
+        },
+        "4": {
+          "below_taut_cm": 3.64,
+          "longest_link_pct_of_its_length": 110.1,
+          "lowest_point_m": 0.7636,
+          "mean_link_error_pct": 1.54
+        },
+        "64": {
+          "below_taut_cm": 0.12,
+          "longest_link_pct_of_its_length": 100.3,
+          "lowest_point_m": 0.7988,
+          "mean_link_error_pct": 0.05
+        }
+      }
+    },
+    "from_16_to_64_passes_the_lowest_point_rises_cm": 8.62,
+    "godots_soft_body_alone_headless": {
+      "1": {
+        "below_taut_cm": 15.68,
+        "bottom_edge_leans_m": 0.0829,
+        "lowest_point_m": 0.6432
+      },
+      "16": {
+        "below_taut_cm": 1.28,
+        "bottom_edge_leans_m": 0.0085,
+        "lowest_point_m": 0.7872
+      },
+      "4": {
+        "below_taut_cm": 4.95,
+        "bottom_edge_leans_m": 0.0295,
+        "lowest_point_m": 0.7505
+      },
+      "64": {
+        "below_taut_cm": 0.25,
+        "bottom_edge_leans_m": 0.0022,
+        "lowest_point_m": 0.7975
+      }
+    },
+    "godots_soft_body_in_the_scene": {
+      "linear_stiffness": 0.5,
+      "lowest_point_m": 0.7596,
+      "simulation_precision": 5
+    },
+    "godots_soft_body_unpinned_lowest_point_after_3_s_m": -24.95,
+    "guest": {
+      "asleep_after_steps": 414,
+      "cloth_out_of_its_plane_m": 0.273,
+      "depth_m": 0.08,
+      "height_m": 2.0,
+      "lowest_point_m": 0.5042,
+      "walk_ended": "arrived",
+      "width_m": 1.48
+    },
+    "hang": {
+      "1": {
+        "below_taut_cm": 68.38,
+        "longest_link_joins_particles": [
+          0,
+          11
+        ],
+        "longest_link_pct_of_its_length": 284.7,
+        "lowest_point_m": 0.1162,
+        "mean_link_error_pct": 12.57,
+        "ms_a_step": 0.157
+      },
+      "16": {
+        "below_taut_cm": 23.97,
+        "longest_link_joins_particles": [
+          0,
+          1
+        ],
+        "longest_link_pct_of_its_length": 118.1,
+        "lowest_point_m": 0.5603,
+        "mean_link_error_pct": 0.96,
+        "ms_a_step": 2.076
+      },
+      "4": {
+        "below_taut_cm": 37.36,
+        "longest_link_joins_particles": [
+          0,
+          11
+        ],
+        "longest_link_pct_of_its_length": 144.4,
+        "lowest_point_m": 0.4264,
+        "mean_link_error_pct": 3.43,
+        "ms_a_step": 0.525
+      },
+      "64": {
+        "below_taut_cm": 15.35,
+        "longest_link_joins_particles": [
+          0,
+          1
+        ],
+        "longest_link_pct_of_its_length": 107.9,
+        "lowest_point_m": 0.6465,
+        "mean_link_error_pct": 0.28,
+        "ms_a_step": 8.288
+      }
+    },
+    "pinned_without_nudge": {
+      "below_taut_cm": 158.52,
+      "longest_link_pct_of_its_length": 117.5,
+      "lowest_point_m": -0.7852,
+      "mean_link_error_pct": 3.44,
+      "nailed_corner_is_at": "(0.60, -1.62, 0.00)"
+    },
+    "place": {
+      "carried_1.2_m_in_1_s": {
+        "below_taut_cm": 17.38,
+        "longest_link_pct_of_its_length": 178.5,
+        "lowest_point_m": 0.6262,
+        "mean_link_error_pct": 5.81
+      },
+      "dragged_over_a_standing_body": {
+        "16 passes": {
+          "above_0.5_m_after_it_let_go": 0,
+          "above_0.5_m_while_the_hand_holds": 85
+        },
+        "4 passes": {
+          "above_0.5_m_after_it_let_go": 0,
+          "above_0.5_m_while_the_hand_holds": 76
+        }
+      },
+      "held_there_4_s": {
+        "below_taut_cm": 17.8,
+        "longest_link_pct_of_its_length": 180.6,
+        "lowest_point_m": 0.622,
+        "mean_link_error_pct": 5.74
+      },
+      "hung_from_the_hand_alone": {
+        "below_taut_cm": 79.01,
+        "longest_link_pct_of_its_length": 152.4,
+        "lowest_point_m": 0.0099,
+        "mean_link_error_pct": 3.37,
+        "particles_above_0.1_m": 100,
+        "their_farthest_from_the_line_under_the_hand_m": 0.013
+      }
+    },
+    "planted_bug_super_forgotten": {
+      "below_taut_cm": 57.77,
+      "longest_link_pct_of_its_length": 140.9,
+      "lowest_point_m": 0.2223,
+      "mean_link_error_pct": 3.11
+    },
+    "room_trial_recorded": {
+      "a_soft_part_on_a_copy_of_the_example_guest": {
+        "at": "(0, 1.3, 0.35)",
+        "metres_from_the_middle_of_the_place": 0.56,
+        "points": "6 by 5",
+        "pushed_out_of_its_plane_m": 0.13,
+        "spacing_m": 0.1,
+        "walk_ended": "blocked"
+      },
+      "cloth_pushed_out_of_its_plane_m": 0.29,
+      "guest_trial_checks": 8,
+      "guest_trial_failed": 0,
+      "how": "a scratch copy of my-room, this guest copied in at place 2; guest_trial.gd, then a probe that walked the walker through and waited",
+      "metres_from_the_middle_of_the_place": 0.07,
+      "out_of_its_plane_at_rest_m": 0.0006,
+      "rests_again_after_steps": 983,
+      "walk_ended": "arrived",
+      "walked_on_through": "arrived"
+    },
+    "walker_in_godots_soft_body": {
+      "soft_body_out_of_its_plane_m": 0.0,
+      "walk_ended": "arrived"
+    },
+    "walker_in_the_cloth": {
+      "cloth_out_of_its_plane_m": 0.287,
+      "out_of_its_plane_10_s_after_it_walked_on_m": 0.024,
+      "walk_ended": "arrived",
+      "walker_z": 0.051
+    }
+  },
+  "passed": true
+}

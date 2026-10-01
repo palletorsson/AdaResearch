@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://extrude.gd" id="Extrude"]
+[ext_resource type="PackedScene" path="res://supplied/marble.tscn" id="Marble"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[node name="Extrude" instance=ExtResource("Base")]
+script = ExtResource("Extrude")
+
+[node name="Solid" type="MeshInstance3D" parent="."]
+
+[node name="Body" type="StaticBody3D" parent="Solid"]
+
+[node name="Shape" type="CollisionShape3D" parent="Solid/Body"]
+
+[node name="Marble" parent="." instance=ExtResource("Marble")]
+position = Vector3(1.6, 0.1, 0.8)
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(-2.6, 0, 1.4)
+
+[node name="Readout" type="Label3D" parent="."]
+position = Vector3(0, 2.5, 0)
+pixel_size = 0.004
+font_size = 30
+outline_modulate = Color(0.050980393, 0.023529412, 0.1254902, 1)

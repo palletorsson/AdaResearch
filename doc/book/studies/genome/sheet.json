@@ -1,0 +1,394 @@
+{
+  "covers_pct_above": {
+    "0": 3.71,
+    "12": 19.55,
+    "2": 6.35,
+    "4": 9.0,
+    "6": 11.63
+  },
+  "covers_pct_level": {
+    "0": 9.42,
+    "12": 14.95,
+    "2": 12.51,
+    "4": 12.51,
+    "6": 14.47
+  },
+  "godot": "4.6-stable (official)",
+  "one_limb_above": {
+    "covers_pct": 1.32,
+    "differs_pct": 1.37
+  },
+  "pairs_above": {
+    "closest": "0 limbs vs 2 limbs",
+    "farthest": "0 limbs vs 12 limbs",
+    "pairs": {
+      "0 limbs vs 12 limbs": {
+        "differ_pct": 16.44,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.6,
+        "outline_pct": 15.84,
+        "outline_px": 84.03
+      },
+      "0 limbs vs 2 limbs": {
+        "differ_pct": 2.74,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.1,
+        "outline_pct": 2.64,
+        "outline_px": 24.61
+      },
+      "0 limbs vs 4 limbs": {
+        "differ_pct": 5.49,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.2,
+        "outline_pct": 5.29,
+        "outline_px": 41.35
+      },
+      "0 limbs vs 6 limbs": {
+        "differ_pct": 8.21,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.29,
+        "outline_pct": 7.92,
+        "outline_px": 54.48
+      },
+      "2 limbs vs 12 limbs": {
+        "differ_pct": 13.7,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.5,
+        "outline_pct": 13.2,
+        "outline_px": 70.01
+      },
+      "2 limbs vs 4 limbs": {
+        "differ_pct": 2.75,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.11,
+        "outline_pct": 2.64,
+        "outline_px": 20.68
+      },
+      "2 limbs vs 6 limbs": {
+        "differ_pct": 5.47,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.19,
+        "outline_pct": 5.28,
+        "outline_px": 36.29
+      },
+      "4 limbs vs 12 limbs": {
+        "differ_pct": 10.95,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.39,
+        "outline_pct": 10.55,
+        "outline_px": 55.98
+      },
+      "4 limbs vs 6 limbs": {
+        "differ_pct": 8.22,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.3,
+        "outline_pct": 7.92,
+        "outline_px": 54.48
+      },
+      "6 limbs vs 12 limbs": {
+        "differ_pct": 8.23,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.31,
+        "outline_pct": 7.92,
+        "outline_px": 42.02
+      }
+    }
+  },
+  "pairs_level": {
+    "closest": "2 limbs vs 4 limbs",
+    "farthest": "0 limbs vs 12 limbs",
+    "pairs": {
+      "0 limbs vs 12 limbs": {
+        "differ_pct": 7.36,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.83,
+        "outline_pct": 5.53,
+        "outline_px": 33.55
+      },
+      "0 limbs vs 2 limbs": {
+        "differ_pct": 3.12,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.02,
+        "outline_pct": 3.1,
+        "outline_px": 20.53
+      },
+      "0 limbs vs 4 limbs": {
+        "differ_pct": 4.1,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.0,
+        "outline_pct": 3.1,
+        "outline_px": 20.53
+      },
+      "0 limbs vs 6 limbs": {
+        "differ_pct": 5.85,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.8,
+        "outline_pct": 5.05,
+        "outline_px": 31.14
+      },
+      "2 limbs vs 12 limbs": {
+        "differ_pct": 6.44,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.01,
+        "outline_pct": 2.43,
+        "outline_px": 14.76
+      },
+      "2 limbs vs 4 limbs": {
+        "differ_pct": 0.98,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.98,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "2 limbs vs 6 limbs": {
+        "differ_pct": 3.84,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.88,
+        "outline_pct": 1.95,
+        "outline_px": 12.05
+      },
+      "4 limbs vs 12 limbs": {
+        "differ_pct": 5.46,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.02,
+        "outline_pct": 2.43,
+        "outline_px": 14.76
+      },
+      "4 limbs vs 6 limbs": {
+        "differ_pct": 4.82,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.86,
+        "outline_pct": 1.95,
+        "outline_px": 12.05
+      },
+      "6 limbs vs 12 limbs": {
+        "differ_pct": 2.61,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.13,
+        "outline_pct": 0.48,
+        "outline_px": 2.91
+      }
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "series_0_to_12": {
+    "0": {
+      "against_12_above_pct": 16.44,
+      "against_12_level_outline_pct": 5.53,
+      "against_12_level_pct": 7.36,
+      "covers_pct_above": 3.71,
+      "covers_pct_level": 9.42,
+      "turned_by_degrees": 90.0,
+      "turned_differ_pct": 0.0,
+      "turned_outline_pct": 0.0
+    },
+    "1": {
+      "against_12_above_pct": 15.06,
+      "against_12_level_outline_pct": 3.98,
+      "against_12_level_pct": 6.7,
+      "covers_pct_above": 5.03,
+      "covers_pct_level": 10.96,
+      "turned_by_degrees": 90.0,
+      "turned_differ_pct": 1.56,
+      "turned_outline_pct": 1.55
+    },
+    "10": {
+      "against_12_above_pct": 18.8,
+      "against_12_level_outline_pct": 0.56,
+      "against_12_level_pct": 5.44,
+      "covers_pct_above": 16.91,
+      "covers_pct_level": 14.73,
+      "turned_by_degrees": 18.0,
+      "turned_differ_pct": 6.53,
+      "turned_outline_pct": 0.87
+    },
+    "11": {
+      "against_12_above_pct": 19.94,
+      "against_12_level_outline_pct": 0.64,
+      "against_12_level_pct": 5.16,
+      "covers_pct_above": 18.23,
+      "covers_pct_level": 14.86,
+      "turned_by_degrees": 16.4,
+      "turned_differ_pct": 6.5,
+      "turned_outline_pct": 0.81
+    },
+    "12": {
+      "against_12_above_pct": 0.0,
+      "against_12_level_outline_pct": 0.0,
+      "against_12_level_pct": 0.0,
+      "covers_pct_above": 19.55,
+      "covers_pct_level": 14.95,
+      "turned_by_degrees": 15.0,
+      "turned_differ_pct": 6.17,
+      "turned_outline_pct": 0.57
+    },
+    "2": {
+      "against_12_above_pct": 13.7,
+      "against_12_level_outline_pct": 2.43,
+      "against_12_level_pct": 6.44,
+      "covers_pct_above": 6.35,
+      "covers_pct_level": 12.51,
+      "turned_by_degrees": 90.0,
+      "turned_differ_pct": 4.1,
+      "turned_outline_pct": 3.1
+    },
+    "3": {
+      "against_12_above_pct": 12.32,
+      "against_12_level_outline_pct": 2.45,
+      "against_12_level_pct": 4.7,
+      "covers_pct_above": 7.67,
+      "covers_pct_level": 12.49,
+      "turned_by_degrees": 60.0,
+      "turned_differ_pct": 5.84,
+      "turned_outline_pct": 3.95
+    },
+    "4": {
+      "against_12_above_pct": 10.95,
+      "against_12_level_outline_pct": 2.43,
+      "against_12_level_pct": 5.46,
+      "covers_pct_above": 9.0,
+      "covers_pct_level": 12.51,
+      "turned_by_degrees": 45.0,
+      "turned_differ_pct": 5.47,
+      "turned_outline_pct": 2.06
+    },
+    "5": {
+      "against_12_above_pct": 17.62,
+      "against_12_level_outline_pct": 1.3,
+      "against_12_level_pct": 6.16,
+      "covers_pct_above": 10.31,
+      "covers_pct_level": 13.81,
+      "turned_by_degrees": 36.0,
+      "turned_differ_pct": 5.16,
+      "turned_outline_pct": 1.83
+    },
+    "6": {
+      "against_12_above_pct": 8.23,
+      "against_12_level_outline_pct": 0.48,
+      "against_12_level_pct": 2.61,
+      "covers_pct_above": 11.63,
+      "covers_pct_level": 14.47,
+      "turned_by_degrees": 30.0,
+      "turned_differ_pct": 6.21,
+      "turned_outline_pct": 1.67
+    },
+    "7": {
+      "against_12_above_pct": 18.55,
+      "against_12_level_outline_pct": 0.96,
+      "against_12_level_pct": 5.85,
+      "covers_pct_above": 12.95,
+      "covers_pct_level": 14.38,
+      "turned_by_degrees": 25.7,
+      "turned_differ_pct": 6.67,
+      "turned_outline_pct": 1.39
+    },
+    "8": {
+      "against_12_above_pct": 14.88,
+      "against_12_level_outline_pct": 1.2,
+      "against_12_level_pct": 5.08,
+      "covers_pct_above": 14.27,
+      "covers_pct_level": 14.04,
+      "turned_by_degrees": 22.5,
+      "turned_differ_pct": 6.61,
+      "turned_outline_pct": 1.29
+    },
+    "9": {
+      "against_12_above_pct": 17.28,
+      "against_12_level_outline_pct": 0.64,
+      "against_12_level_pct": 4.93,
+      "covers_pct_above": 15.59,
+      "covers_pct_level": 14.65,
+      "turned_by_degrees": 20.0,
+      "turned_differ_pct": 6.88,
+      "turned_outline_pct": 1.09
+    }
+  },
+  "sheet_png": {
+    "bytes": 63125,
+    "height": 510,
+    "width": 1616
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "built": [
+      {
+        "row_parts": [],
+        "specimen_parts": 7,
+        "step": "1 five genes, one body"
+      },
+      {
+        "row_parts": [],
+        "save_returned": "OK",
+        "specimen_parts": 9,
+        "step": "2 saved, recalled"
+      },
+      {
+        "row_parts": [
+          15,
+          15,
+          15,
+          15,
+          15
+        ],
+        "specimen_parts": 15,
+        "step": "3 five bodies, one genome"
+      },
+      {
+        "row_parts": [
+          3,
+          5,
+          7,
+          9,
+          15
+        ],
+        "specimen_parts": 9,
+        "step": "4 five copies"
+      },
+      {
+        "row_parts": [
+          3,
+          5,
+          7,
+          9,
+          15
+        ],
+        "specimen_parts": 5,
+        "step": "5 the walker keeps one",
+        "walk_ended": "arrived"
+      }
+    ],
+    "changed_most": "5 the walker keeps one",
+    "png": {
+      "bytes": 42752,
+      "height": 266,
+      "width": 1616
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 five genes, one body"
+      },
+      {
+        "differs_from_step_before_pct": 0.66,
+        "step": "2 saved, recalled"
+      },
+      {
+        "differs_from_step_before_pct": 7.27,
+        "step": "3 five bodies, one genome"
+      },
+      {
+        "differs_from_step_before_pct": 3.12,
+        "step": "4 five copies"
+      },
+      {
+        "differs_from_step_before_pct": 9.07,
+        "step": "5 the walker keeps one"
+      }
+    ]
+  }
+}

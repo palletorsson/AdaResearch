@@ -1,0 +1,165 @@
+{
+  "godot": "4.6-stable (official)",
+  "look": {
+    "boxes": {
+      "BODY": {
+        "floor_in_its_shadow": "#150548",
+        "floor_in_the_sun_against_its_shadow_contrast": 1.36,
+        "front_face": {
+          "off_by": 14.5,
+          "rendered": "#bdf735"
+        },
+        "front_face_against_floor_contrast": 10.59,
+        "lit_face": {
+          "off_by": 6.5,
+          "rendered": "#ccff3a"
+        },
+        "lit_face_against_floor_contrast": 11.49,
+        "palette": "#c6ff3d"
+      },
+      "BONE": {
+        "floor_in_its_shadow": "#16054b",
+        "floor_in_the_sun_against_its_shadow_contrast": 1.35,
+        "front_face": {
+          "off_by": 13.9,
+          "rendered": "#ece7de"
+        },
+        "front_face_against_floor_contrast": 10.93,
+        "lit_face": {
+          "off_by": 17.9,
+          "rendered": "#fff9f0"
+        },
+        "lit_face_against_floor_contrast": 12.89,
+        "palette": "#f4efe6"
+      },
+      "GHOST": {
+        "floor_in_its_shadow": "#2d138b",
+        "floor_in_the_sun_against_its_shadow_contrast": 1.01,
+        "front_face": {
+          "off_by": 111.5,
+          "rendered": "#5b3ebc"
+        },
+        "front_face_against_floor_contrast": 1.82,
+        "lit_face": {
+          "off_by": 102.3,
+          "rendered": "#6143c0"
+        },
+        "lit_face_against_floor_contrast": 1.97,
+        "palette": "#9b7bff"
+      },
+      "SECOND": {
+        "floor_in_its_shadow": "#150549",
+        "floor_in_the_sun_against_its_shadow_contrast": 1.36,
+        "front_face": {
+          "off_by": 14.4,
+          "rendered": "#1ad0f7"
+        },
+        "front_face_against_floor_contrast": 7.31,
+        "lit_face": {
+          "off_by": 8.2,
+          "rendered": "#1ee0ff"
+        },
+        "lit_face_against_floor_contrast": 8.44,
+        "palette": "#22d9ff"
+      },
+      "THIRD": {
+        "floor_in_its_shadow": "#15054a",
+        "floor_in_the_sun_against_its_shadow_contrast": 1.35,
+        "front_face": {
+          "off_by": 14.5,
+          "rendered": "#f78217"
+        },
+        "front_face_against_floor_contrast": 5.23,
+        "lit_face": {
+          "off_by": 5.2,
+          "rendered": "#ff8c1a"
+        },
+        "lit_face_against_floor_contrast": 5.8,
+        "palette": "#ff8b1f"
+      }
+    },
+    "floor_in_the_sun": {
+      "off_by": 7.3,
+      "rendered": "#2d1388"
+    },
+    "how": "mean of the still's pixels inside each face, the face shrunk to 0.7 of its size; off_by is the distance in red, green and blue together, of 255 each; contrast is (L1 + 0.05) / (L2 + 0.05) of the two relative luminances",
+    "sky": {
+      "off_by": 0.0,
+      "rendered": "#ff2e93"
+    },
+    "sky_against_floor_contrast": 3.89,
+    "sun": {
+      "ambient_energy": 0.25,
+      "energy": 0.28,
+      "fog": false,
+      "glow": false,
+      "tonemap": "linear",
+      "turn_rad": [
+        -0.75,
+        -0.75,
+        0.0
+      ]
+    }
+  },
+  "pairs_above": {
+    "closest": "edge 0.5 m vs edge 0.8 m",
+    "farthest": "edge 0.5 m vs edge 0.8 m",
+    "pairs": {
+      "edge 0.5 m vs edge 0.8 m": {
+        "differ_pct": 22.52,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 22.52,
+        "outline_px": 94.22
+      }
+    }
+  },
+  "pairs_level": {
+    "closest": "edge 0.5 m vs edge 0.8 m",
+    "farthest": "edge 0.5 m vs edge 0.8 m",
+    "pairs": {
+      "edge 0.5 m vs edge 0.8 m": {
+        "differ_pct": 23.83,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.07,
+        "outline_pct": 23.76,
+        "outline_px": 93.78
+      }
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "sheet_png": {
+    "bytes": 13609,
+    "height": 510,
+    "width": 644
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "changed_most": "3 a walker beside it",
+    "marble_rests_at_m": 0.598,
+    "png": {
+      "bytes": 14972,
+      "height": 266,
+      "width": 968
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 a box"
+      },
+      {
+        "differs_from_step_before_pct": 0.27,
+        "step": "2 a marble dropped on it"
+      },
+      {
+        "differs_from_step_before_pct": 8.56,
+        "step": "3 a walker beside it"
+      }
+    ]
+  }
+}

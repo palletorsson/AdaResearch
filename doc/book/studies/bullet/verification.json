@@ -1,0 +1,439 @@
+{
+  "checks": [
+    {
+      "name": "the project is named The bullet, its main scene is launch.tscn, its renderer Compatibility",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the base's 15 files: [\"base.tscn\", \"base_look.gd\", \"check_guest.gd\", \"look.gd\", \"marble.gd\", \"marble.tscn\", \"mover.gd\", \"segment.gd\", \"sheet_tools.gd\", \"sweep_sheet.gd\", \"sweep_sheet.tscn\", \"trace_strip.gd\", \"verify_tools.gd\", \"walker.gd\", \"walker.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "no script declares a class_name, and the project lists no named class: nothing needs an import []",
+      "passed": true
+    },
+    {
+      "name": "every script is indented with tabs: []",
+      "passed": true
+    },
+    {
+      "name": "the engine's own clock: Engine.physics_ticks_per_second is 60, and the delta of _physics_process is 1/60 s (0.016667)",
+      "passed": true
+    },
+    {
+      "name": "bullet.tscn is a Node3D with a Ball of 0.1 m radius and a Path whose mesh is an ImmediateMesh",
+      "passed": true
+    },
+    {
+      "name": "the ball is BODY, the path LINE and unshaded, with a second material for the dots; the path casts no shadow",
+      "passed": true
+    },
+    {
+      "name": "fire() puts the bullet at its start with the launch velocity, one place in its path, dt = 1 / steps_per_second, and nobody to hit",
+      "passed": true
+    },
+    {
+      "name": "one step at dt 1/10: the velocity is (4, 5.02, 0) and the place (0.4, 0.602, 0): the place was moved by the NEW velocity. Got (4.0, 5.02, 0.0) and (0.4, 0.602, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "three steps: the bullet is at (1.2, 1.312, 0) and its path holds four places. [\"1: velocity (4.0, 5.02, 0.0) at (0.4, 0.602, 0.0)\", \"2: velocity (4.0, 4.04, 0.0) at (0.8, 1.006, 0.0)\", \"3: velocity (4.0, 3.06, 0.0) at (1.2, 1.312, 0.0)\"]",
+      "passed": true
+    },
+    {
+      "name": "draw_path() makes two surfaces, a line strip and the dots, and they reach from the start to the last place: [P: (0.0, 0.1, 0.0), S: (1.2, 1.212, 0.00001)]",
+      "passed": true
+    },
+    {
+      "name": "a flight ends on the floor: the ball's middle at 0.1 m, the last place of the path is where it lies, one place for each step and one for the start",
+      "passed": true
+    },
+    {
+      "name": "landing prints one line: dt 1/10 s: 12 steps, landed 4.8 m from the launch",
+      "passed": true
+    },
+    {
+      "name": "the flight takes 12, 36, 73 and 293 steps at 1/10, 1/30, 1/60 and 1/240 s: [12, 36, 73, 293]",
+      "passed": true
+    },
+    {
+      "name": "it lands 4.800, 4.800, 4.867 and 4.883 m from the launch; the formula says 4.898: [4.8, 4.8, 4.8667, 4.8833]",
+      "passed": true
+    },
+    {
+      "name": "1/60 and 1/240 land 1.7 cm apart; 1/10 and 1/30 land on the same spot, both at the step that ends at 1.2 s",
+      "passed": true
+    },
+    {
+      "name": "its highest place is 1.642, 1.838, 1.887 and 1.924 m; the formula says 1.937: [1.642, 1.838, 1.887, 1.924]",
+      "passed": true
+    },
+    {
+      "name": "in the air the stepped bullet is under the formula's bullet of the same moment, by g/2 x time x dt: at most [53.9, 19.1, 9.8, 2.5] cm",
+      "passed": true
+    },
+    {
+      "name": "at 1/4 s it takes 4 steps and lands 4.0 m from the launch, 0.9 m short",
+      "passed": true
+    },
+    {
+      "name": "with the two lines swapped it lands 5.600, 5.067, 5.000 and 4.917 m from the launch: beyond the formula's point, where the right order lands short of it: [5.6, 5.0667, 5.0, 4.9167]",
+      "passed": true
+    },
+    {
+      "name": "swapped, 1/60 takes 75 steps where the right order takes 73, and 1/10 rises to 2.242 m, 0.6 m above its own right order",
+      "passed": true
+    },
+    {
+      "name": "and Godot says nothing about it: no error, no warning",
+      "passed": true
+    },
+    {
+      "name": "launch.tscn fires at its start, at 60 steps a second, 2.45 m left of the middle, and the bullet has found the Walker",
+      "passed": true
+    },
+    {
+      "name": "stepped by the clock it takes the same 73 steps to the same place, 4.867 m, and the Ball is where `at` says: 74 places, 4.867 m, after 74 ticks",
+      "passed": true
+    },
+    {
+      "name": "Space (the action pause) fires again, with the dt of the steps_per_second it has now",
+      "passed": true
+    },
+    {
+      "name": "at 10 steps a second the clock steps it 12 times, once in about six ticks, to 4.8 m: 13 places after 73 more ticks",
+      "passed": true
+    },
+    {
+      "name": "M (the action drop) takes the next of 4, 10, 30, 60, 240 steps a second and fires: [30, 60, 240, 4, 10]",
+      "passed": true
+    },
+    {
+      "name": "the Mark is a GHOST disc with no collider, lying where the formula says the launch comes down: 4.898 m from the Bullet",
+      "passed": true
+    },
+    {
+      "name": "launch.tscn ran more than 180 frames with no error: []",
+      "passed": true
+    },
+    {
+      "name": "orbit.tscn: the bullet starts 1 m to the right of the centre, going up at 2 m/s, pulled towards it at 4 m/s2; the centre is THIRD",
+      "passed": true
+    },
+    {
+      "name": "our two lines keep the orbit: after 60 s and 19.08 turns it has stayed between 0.984 and 1.017 m from the centre",
+      "passed": true
+    },
+    {
+      "name": "the two lines swapped keep it too: between 0.984 and 1.017 m after 60 s. The outline said this orbit would spiral outward; it does not",
+      "passed": true
+    },
+    {
+      "name": "with both lines reading the state from before the step the orbit opens: 1.377 m after one turn, and on the floor after 7.98 s, 479 steps and 1.67 turns, -1.858 m from the launch",
+      "passed": true
+    },
+    {
+      "name": "a step four times shorter slows the leak and does not stop it: on the floor after 25.97 s and 5.71 turns",
+      "passed": true
+    },
+    {
+      "name": "at 1/10 s our two lines still hold it, between 0.920 and 1.120 m: a wider band, and no leak",
+      "passed": true
+    },
+    {
+      "name": "orbit.tscn ran 180 frames with no error, still in orbit",
+      "passed": true
+    },
+    {
+      "name": "the marble thrown with the same launch and no damping rises to our bullet's own heights, to the millimetre, at 60, 10, 30 and 240 ticks a second: { \"60 ticks\": 1.887, \"60 ticks, damped as shipped\": 1.814, \"10 ticks\": 1.642, \"10 ticks, damped as shipped\": 1.561, \"30 ticks\": 1.838, \"30 ticks, damped as shipped\": 1.763, \"240 ticks\": 1.924, \"240 ticks, damped as shipped\": 1.852 }",
+      "passed": true
+    },
+    {
+      "name": "as shipped (default_linear_damp 0.1) the marble rises to 1.814 m, 7.3 cm lower",
+      "passed": true
+    },
+    {
+      "name": "with the walker where it starts, the first flight hits nobody",
+      "passed": true
+    },
+    {
+      "name": "the walker's autopilot walked to the formula's landing point: \"arrived\", standing 4.84 m from the launch",
+      "passed": true
+    },
+    {
+      "name": "standing there it is hit at every step of the axis, lower the longer the step: [0.1, 0.42, 0.6, 0.69] m above the feet at 1/10, 1/30, 1/60, 1/240",
+      "passed": true
+    },
+    {
+      "name": "the hit is soft: the walker stood where it stood, and nothing pushed it",
+      "passed": true
+    },
+    {
+      "name": "at 1/4 s the bullet lands 4.0 m from the launch, short of the walker, and hits nobody",
+      "passed": true
+    },
+    {
+      "name": "the walker moved to where that one lands, and is hit: 0.10 m above the feet",
+      "passed": true
+    },
+    {
+      "name": "a walker 3.5 m from the launch, in the bullet's way, is hit at 1/60 and at 1/10 and is stepped over at 1/4: the bullet was at 3.0 m and then at 4.0 m. { \"stands_m_from_launch\": 3.57, 4: -1.0, 10: 1.37, 60: 1.7 }",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "the guest throws its ball across its place and again: in 4 s it landed 2 times, the ball stayed between -0.68 and 0.68 m of the middle, on the ground and up to 1.38 m",
+      "passed": true
+    },
+    {
+      "name": "with no Walker beside it the guest hits nobody, and it ran 240 ticks with no error",
+      "passed": true
+    },
+    {
+      "name": "its first landing prints one line, once: the bullet, dt 1/60 s: 59 steps, landed 1.18 m from the launch",
+      "passed": true
+    },
+    {
+      "name": "with the lesson's own launch (0.6, 7, 0) at 30 steps a second it prints: the bullet, dt 1/30 s: 42 steps, landed 0.84 m from the launch, and stays in its place (to 0.34 m)",
+      "passed": true
+    },
+    {
+      "name": "the kit's step() and the guest's hold the same two lines in the same order: the velocity first, then the place",
+      "passed": true
+    },
+    {
+      "name": "the whole run logged no error and no warning: [] []",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 53,
+  "godot": "4.6-stable (official)",
+  "kit": "The bullet",
+  "measured": {
+    "default_linear_damp": 0.1,
+    "flights": {
+      "4": {
+        "apex_m": 1.263,
+        "below_formula_cm": 91.9,
+        "landed_m": 4.0,
+        "seconds": 1.0,
+        "short_of_formula_cm": 89.8,
+        "steps": 4
+      },
+      "10": {
+        "apex_m": 1.642,
+        "below_formula_cm": 53.9,
+        "landed_m": 4.8,
+        "seconds": 1.2,
+        "short_of_formula_cm": 9.8,
+        "steps": 12
+      },
+      "30": {
+        "apex_m": 1.838,
+        "below_formula_cm": 19.1,
+        "landed_m": 4.8,
+        "seconds": 1.2,
+        "short_of_formula_cm": 9.8,
+        "steps": 36
+      },
+      "60": {
+        "apex_m": 1.887,
+        "below_formula_cm": 9.8,
+        "landed_m": 4.8667,
+        "seconds": 1.2167,
+        "short_of_formula_cm": 3.1,
+        "steps": 73
+      },
+      "120": {
+        "apex_m": 1.912,
+        "below_formula_cm": 4.9,
+        "landed_m": 4.8667,
+        "seconds": 1.2167,
+        "short_of_formula_cm": 3.1,
+        "steps": 146
+      },
+      "240": {
+        "apex_m": 1.924,
+        "below_formula_cm": 2.5,
+        "landed_m": 4.8833,
+        "seconds": 1.2208,
+        "short_of_formula_cm": 1.5,
+        "steps": 293
+      },
+      "1000": {
+        "apex_m": 1.934,
+        "below_formula_cm": 0.6,
+        "landed_m": 4.896,
+        "seconds": 1.224,
+        "short_of_formula_cm": 0.2,
+        "steps": 1224
+      }
+    },
+    "flights_lines_swapped": {
+      "10": {
+        "apex_m": 2.242,
+        "below_formula_cm": 0.0,
+        "landed_m": 5.6,
+        "seconds": 1.4,
+        "steps": 14
+      },
+      "30": {
+        "apex_m": 2.038,
+        "below_formula_cm": 0.0,
+        "landed_m": 5.0667,
+        "seconds": 1.2667,
+        "steps": 38
+      },
+      "60": {
+        "apex_m": 1.987,
+        "below_formula_cm": 0.0,
+        "landed_m": 5.0,
+        "seconds": 1.25,
+        "steps": 75
+      },
+      "240": {
+        "apex_m": 1.949,
+        "below_formula_cm": 0.0,
+        "landed_m": 4.9167,
+        "seconds": 1.2292,
+        "steps": 295
+      }
+    },
+    "formula": {
+      "apex_m": 1.937,
+      "landed_m": 4.898,
+      "seconds": 1.2245
+    },
+    "guest": {
+      "flights_in_4_s": 2,
+      "highest_m": 1.384,
+      "left_m": -0.68,
+      "lowest_m": 0.0,
+      "right_m": 0.68,
+      "with_launch_0.6_7_at_30_steps": {
+        "formula_range_m": 0.857,
+        "reaches_m_from_the_middle": 0.34
+      }
+    },
+    "marble_apex_m": {
+      "10 ticks": 1.642,
+      "10 ticks, damped as shipped": 1.561,
+      "240 ticks": 1.924,
+      "240 ticks, damped as shipped": 1.852,
+      "30 ticks": 1.838,
+      "30 ticks, damped as shipped": 1.763,
+      "60 ticks": 1.887,
+      "60 ticks, damped as shipped": 1.814
+    },
+    "orbits": {
+      "both from the old state, 1/10": {
+        "after_one_turn_m": 0.0,
+        "ends_m_from_the_launch": -4.068,
+        "farthest_m": 3.415,
+        "landed": true,
+        "nearest_m": 1.02,
+        "seconds": 4.1,
+        "steps": 41,
+        "turns": 0.57
+      },
+      "both from the old state, 1/240": {
+        "after_one_turn_m": 1.102,
+        "ends_m_from_the_launch": -1.416,
+        "farthest_m": 1.558,
+        "landed": true,
+        "nearest_m": 1.0,
+        "seconds": 25.97,
+        "steps": 6232,
+        "turns": 5.71
+      },
+      "both from the old state, 1/60": {
+        "after_one_turn_m": 1.377,
+        "ends_m_from_the_launch": -1.858,
+        "farthest_m": 1.728,
+        "landed": true,
+        "nearest_m": 1.001,
+        "seconds": 7.98,
+        "steps": 479,
+        "turns": 1.67
+      },
+      "lines swapped, 1/60": {
+        "after_one_turn_m": 1.0,
+        "ends_m_from_the_launch": -0.125,
+        "farthest_m": 1.017,
+        "landed": false,
+        "nearest_m": 0.984,
+        "seconds": 60.0,
+        "steps": 3600,
+        "turns": 19.08
+      },
+      "velocity first, 1/10": {
+        "after_one_turn_m": 0.981,
+        "ends_m_from_the_launch": -1.937,
+        "farthest_m": 1.12,
+        "landed": false,
+        "nearest_m": 0.92,
+        "seconds": 60.0,
+        "steps": 600,
+        "turns": 18.59
+      },
+      "velocity first, 1/240": {
+        "after_one_turn_m": 1.0,
+        "ends_m_from_the_launch": -0.186,
+        "farthest_m": 1.004,
+        "landed": false,
+        "nearest_m": 0.996,
+        "seconds": 60.0,
+        "steps": 14400,
+        "turns": 19.1
+      },
+      "velocity first, 1/60": {
+        "after_one_turn_m": 1.0,
+        "ends_m_from_the_launch": -0.145,
+        "farthest_m": 1.017,
+        "landed": false,
+        "nearest_m": 0.984,
+        "seconds": 60.0,
+        "steps": 3600,
+        "turns": 19.08
+      }
+    },
+    "the_first_three_steps_at_1_10": [
+      "1: velocity (4.0, 5.02, 0.0) at (0.4, 0.602, 0.0)",
+      "2: velocity (4.0, 4.04, 0.0) at (0.8, 1.006, 0.0)",
+      "3: velocity (4.0, 3.06, 0.0) at (1.2, 1.312, 0.0)"
+    ],
+    "ticks_of_the_flight_at_60": 74,
+    "walker_at_the_formulas_landing": {
+      "hit_m_above_feet": {
+        "4": -1.0,
+        "10": 0.1,
+        "30": 0.42,
+        "60": 0.6,
+        "240": 0.69
+      },
+      "printed": {
+        "4": "no hit",
+        "10": "hit at step 12, 0.1 m above the feet",
+        "30": "hit at step 34, 0.42 m above the feet",
+        "60": "hit at step 67, 0.6 m above the feet",
+        "240": "hit at step 267, 0.69 m above the feet"
+      },
+      "stands_m_from_launch": 4.84
+    },
+    "walker_in_the_path": {
+      "4": -1.0,
+      "10": 1.37,
+      "60": 1.7,
+      "stands_m_from_launch": 3.57
+    }
+  },
+  "passed": true
+}

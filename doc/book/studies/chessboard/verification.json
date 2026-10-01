@@ -189,6 +189,34 @@
       "passed": true
     },
     {
+      "name": "the guest scene loads: guests/chessboard/chessboard.tscn, and its first node is a Node3D",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name: []",
+      "passed": true
+    },
+    {
+      "name": "the guest runs two frames and Godot logs no error: []",
+      "passed": true
+    },
+    {
+      "name": "the guest is a small floor of cubes, four by four: 16 instances of the guest's own cube part, 0.3 m on an edge and 0.3 m apart, each with a material of its own, 8 in BODY c6ff3d where x + z is even and 8 in SECOND 22d9ff where it is odd",
+      "passed": true
+    },
+    {
+      "name": "one of the sixteen is a ghost: a ray straight down stops on 15 cells at 0.30 m and meets nothing over cell (0, 3), which has its mesh and its colour",
+      "passed": true
+    },
+    {
+      "name": "the guest stands on the ground at its own origin and fits on a place, 1.6 m wide and deep: its box runs from (-0.60, 0.00, -0.60) to (0.60, 0.30, 0.60)",
+      "passed": true
+    },
+    {
       "name": "sheet.json: the four floors are the same 64 cubes with 64 materials, on the same 29.65% of the frame from above and 39.06% from the top; they show 1, 2, 2 and 15 colours",
       "passed": true
     },
@@ -270,6 +298,26 @@
       "predicted_first_passing_spacing_m": 0.700000002980232,
       "rest_height_at_0_55_m": 0.587,
       "rest_height_at_0_75_m": 0.098
+    },
+    "guest": {
+      "box": [
+        [
+          -0.6,
+          0.0,
+          -0.6
+        ],
+        [
+          0.6,
+          0.3,
+          0.6
+        ]
+      ],
+      "cubes": 16,
+      "ghost": [
+        0,
+        3
+      ],
+      "scene": "res://guests/chessboard/chessboard.tscn"
     },
     "hue_band_luminance": [
       0.222,

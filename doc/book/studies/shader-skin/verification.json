@@ -1,0 +1,245 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Shader skin, its main scene is shader_skin.tscn, its renderer Compatibility",
+      "passed": true
+    },
+    {
+      "name": "the action pause is on Space: the key that steps the rim's exponent",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the base's 15 files: [\"base.tscn\", \"base_look.gd\", \"check_guest.gd\", \"look.gd\", \"marble.gd\", \"marble.tscn\", \"mover.gd\", \"segment.gd\", \"sheet_tools.gd\", \"sweep_sheet.gd\", \"sweep_sheet.tscn\", \"trace_strip.gd\", \"verify_tools.gd\", \"walker.gd\", \"walker.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "no script of the kit declares a class_name, and the project lists no named class: nothing needs an import ([])",
+      "passed": true
+    },
+    {
+      "name": "every script and every shader of the kit is indented with tabs and ends its lines with LF: []",
+      "passed": true
+    },
+    {
+      "name": "skin.gdshader is accepted by the shader language: Godot logged nothing when it was put on a material ([])",
+      "passed": true
+    },
+    {
+      "name": "it begins with shader_type spatial;",
+      "passed": true
+    },
+    {
+      "name": "it declares eight uniforms, in this order: [\"body_colour\", \"band_colour\", \"bands\", \"softness\", \"drift\", \"grain\", \"rim_colour\", \"rim_power\"]",
+      "passed": true
+    },
+    {
+      "name": "rim_power is a float with hint_range(0.25, 8.0)",
+      "passed": true
+    },
+    {
+      "name": "its rim is pow(1.0 - dot(NORMAL, VIEW), rim_power), written into EMISSION",
+      "passed": true
+    },
+    {
+      "name": "its fragment() uses sin and smoothstep over UV, fbm over UV, and TIME",
+      "passed": true
+    },
+    {
+      "name": "it declares no sampler2D: the skin is computed and needs no picture",
+      "passed": true
+    },
+    {
+      "name": "the five earlier states of the shader in steps/ are accepted too, with 0, 2, 5, 6 and 7 uniforms: { \"1_uv\": 0, \"2_step\": 2, \"3_bands\": 5, \"4_grain\": 6, \"5_picture\": 7 }",
+      "passed": true
+    },
+    {
+      "name": "the borrowed member is a sphere of 1 m with 64 segments and 32 rings",
+      "passed": true
+    },
+    {
+      "name": "it stands on the ground: from 0.00 m to 1.00 m",
+      "passed": true
+    },
+    {
+      "name": "it brings no material, and a collider: a sphere of the same size",
+      "passed": true
+    },
+    {
+      "name": "it is turned half round: the seam of its UV is at the back",
+      "passed": true
+    },
+    {
+      "name": "make() keeps the segments between 4 and 64",
+      "passed": true
+    },
+    {
+      "name": "shader_skin.tscn ran 180 frames and Godot logged no error and no warning: [] []",
+      "passed": true
+    },
+    {
+      "name": "it printed: the member wears ShaderMaterial with 8 uniforms; rim_power 3.0",
+      "passed": true
+    },
+    {
+      "name": "Skin holds the member, and the member wears Skin's one ShaderMaterial",
+      "passed": true
+    },
+    {
+      "name": "the material's shader is skin.gdshader",
+      "passed": true
+    },
+    {
+      "name": "the script handed the shader three colours of the palette, read back: body_colour BODY, band_colour SHADE, rim_colour SECOND ((0.7765, 1.0, 0.2392, 1.0), (0.051, 0.0235, 0.1255, 1.0), (0.1333, 0.851, 1.0, 1.0))",
+      "passed": true
+    },
+    {
+      "name": "and two numbers: rim_power 3.0 and drift 0.1",
+      "passed": true
+    },
+    {
+      "name": "bands, softness and grain were not handed over: the shader uses its own defaults for them",
+      "passed": true
+    },
+    {
+      "name": "no sampler2D of the shader is left unbound: []",
+      "passed": true
+    },
+    {
+      "name": "the scene has the supplied walker and the readout beside the skin",
+      "passed": true
+    },
+    {
+      "name": "the readout says: rim exponent 3.0",
+      "passed": true
+    },
+    {
+      "name": "Space steps the exponent through 8, 0.5, 1 and back to 3, and the material is handed each: [8.0, 0.5, 1.0, 3.0]",
+      "passed": true
+    },
+    {
+      "name": "and each step is printed",
+      "passed": true
+    },
+    {
+      "name": "four bodies made with rim_power 0.5, 1, 3 and 8 each handed that number to their own material: [0.5, 1.0, 3.0, 8.0]",
+      "passed": true
+    },
+    {
+      "name": "POWERS is the axis: [0.5, 1.0, 3.0, 8.0]",
+      "passed": true
+    },
+    {
+      "name": "a 6 where the shader wants 6.0 is refused: [\"SHADER ERROR: Invalid arguments to operator \\'*\\': \\'float, int\\'. (:4)\", \"ERROR: Shader compilation failed.\"]",
+      "passed": true
+    },
+    {
+      "name": "steps/5_picture.gdshader has a sampler2D, glow_map; left unbound it reads back null, and Godot logs nothing",
+      "passed": true
+    },
+    {
+      "name": "bound to a picture of the CPU's noise, 256 by 128, it reads back a texture",
+      "passed": true
+    },
+    {
+      "name": "set_shader_parameter(\"rim_colur\", ...) is silent: the material keeps the misspelt name, rim_colour stays unset, nothing is logged",
+      "passed": true
+    },
+    {
+      "name": "the walker walked round the body, 1.5 m from its middle, by four points, and arrived",
+      "passed": true
+    },
+    {
+      "name": "walked at the body from four sides it was stopped each time, 0.80 m from the middle: [[\"blocked\", 0.8], [\"blocked\", 0.8], [\"blocked\", 0.8], [\"blocked\", 0.8]]",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped on the top rests at the same height, to the millimetre, with the grain at 0 and at 1: the skin is not a body ({ \"grain 0.0\": 1.09, \"grain 1.0\": 1.09 })",
+      "passed": true
+    },
+    {
+      "name": "and Godot logged no error while the bodies met: []",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "its folder holds three files: [\"shader-skin.gd\", \"shader-skin.tscn\", \"skin.gdshader\"]",
+      "passed": true
+    },
+    {
+      "name": "its skin.gdshader is the kit's skin.gdshader, byte for byte",
+      "passed": true
+    },
+    {
+      "name": "the guest's first node is a Node3D and it ran 60 frames with no error: []",
+      "passed": true
+    },
+    {
+      "name": "it stands on the ground at its own origin and is 1.00 m wide and deep: inside the 1.6 m of a place",
+      "passed": true
+    },
+    {
+      "name": "it wears the skin from its own folder, with the palette's three colours written out and rim_power 3.0",
+      "passed": true
+    },
+    {
+      "name": "it has a collider, and no sampler left unbound",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 48,
+  "godot": "4.6-stable (official)",
+  "kit": "Shader skin",
+  "measured": {
+    "a_whole_number_in_the_shader": [
+      "SHADER ERROR: Invalid arguments to operator '*': 'float, int'. (:4)",
+      "ERROR: Shader compilation failed."
+    ],
+    "marble_rests_at_m": {
+      "grain 0.0": 1.09,
+      "grain 1.0": 1.09
+    },
+    "rim_is_a_tenth_at_of_radius": {
+      "p 0.5": 0.14,
+      "p 1.0": 0.44,
+      "p 3.0": 0.84,
+      "p 8.0": 0.97
+    },
+    "uniforms": [
+      "body_colour",
+      "band_colour",
+      "bands",
+      "softness",
+      "drift",
+      "grain",
+      "rim_colour",
+      "rim_power"
+    ],
+    "walker_stopped_at_m_from_the_middle": [
+      [
+        "blocked",
+        0.8
+      ],
+      [
+        "blocked",
+        0.8
+      ],
+      [
+        "blocked",
+        0.8
+      ],
+      [
+        "blocked",
+        0.8
+      ]
+    ]
+  },
+  "passed": true
+}

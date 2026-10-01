@@ -1,0 +1,107 @@
+{
+  "checks": [
+    {
+      "name": "the project is named My room, its main scene is room.tscn, its renderer Compatibility, and it lists no named class",
+      "passed": true
+    },
+    {
+      "name": "the Input Map has the nine actions of the kit base",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the kit base's 15 files: [\"base.tscn\", \"base_look.gd\", \"check_guest.gd\", \"look.gd\", \"marble.gd\", \"marble.tscn\", \"mover.gd\", \"segment.gd\", \"sheet_tools.gd\", \"sweep_sheet.gd\", \"sweep_sheet.tscn\", \"trace_strip.gd\", \"verify_tools.gd\", \"walker.gd\", \"walker.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "room_look.gd, the room's own look, starts with the colours and the light of supplied/look.gd",
+      "passed": true
+    },
+    {
+      "name": "room_look.gd: paint(BODY) returns a material with BODY as its albedo",
+      "passed": true
+    },
+    {
+      "name": "the room's environment has SKY as its background",
+      "passed": true
+    },
+    {
+      "name": "its floor's material is GROUND, and it has a sun with shadows",
+      "passed": true
+    },
+    {
+      "name": "GUESTS, the one list to edit, holds the example guest and nothing else: [\"res://guests/example/example.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "the room loads with the example guest at place 1, (-7.0, 0.0, 0.0), and says so: [\"My room: place 1 is res://guests/example/example.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "there are 40 places: 8 in a row, 2 m apart, and 5 rows, 4 m apart; place 1 at (-7.0, 0.0, 0.0), place 40 at (7.0, 0.0, -16.0)",
+      "passed": true
+    },
+    {
+      "name": "the walker starts 4 m in front of place 1, on the floor, facing it, and the room is seen through its Eyes",
+      "passed": true
+    },
+    {
+      "name": "switch_camera changes to the fixed camera above the room, and back",
+      "passed": true
+    },
+    {
+      "name": "M drops the marble 1 m in front of the walker, from above its head; it comes to rest on the floor at 0.10 m",
+      "passed": true
+    },
+    {
+      "name": "the walker's autopilot, sent to place 1, is stopped by the example guest's collider: \"blocked\", 0.55 m from the middle of the place",
+      "passed": true
+    },
+    {
+      "name": "sent to place 2, which is free, it arrives: \"arrived\"",
+      "passed": true
+    },
+    {
+      "name": "the room has run more than 180 frames and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "with a second copy of the example in the list, the second stands at place 2, 2 m to the right of place 1",
+      "passed": true
+    },
+    {
+      "name": "and now the walker sent to place 2 is stopped there: \"blocked\"",
+      "passed": true
+    },
+    {
+      "name": "a path with no scene behind it prints one plain line, and Godot logs no error: My room: no scene at res://guests/nobody/nobody.tscn. Check the line in GUESTS against the folder in guests/. The room goes on without it",
+      "passed": true
+    },
+    {
+      "name": "the room goes on: the guest after the bad path stands at the next free place, place 2, and the room ran 60 more frames",
+      "passed": true
+    },
+    {
+      "name": "a scene whose first node is not a Node3D, and a scene file that is broken, get a line each and no place; the example still stands at place 1",
+      "passed": true
+    },
+    {
+      "name": "42 guests for 40 places: 40 stand, the last at place 40, and one line says the rest were not placed: My room has 40 places and all are taken: res://guests/example/example.tscn was not placed, and nothing after it in GUESTS",
+      "passed": true
+    },
+    {
+      "name": "the example guest names nothing outside its folder and declares no class_name",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 23,
+  "godot": "4.6-stable (official)",
+  "kit": "My room",
+  "measured": {
+    "walk_to_place_1": {
+      "ended": "blocked",
+      "metres_from_the_place": 0.55
+    }
+  },
+  "passed": true
+}

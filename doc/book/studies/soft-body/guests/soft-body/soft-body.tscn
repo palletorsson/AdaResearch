@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://guests/soft-body/soft-body.gd" id="Guest"]
+[ext_resource type="Script" path="res://guests/soft-body/cloth.gd" id="Cloth"]
+
+[node name="SoftBody" type="Node3D"]
+script = ExtResource("Guest")
+
+[node name="Cloth" type="MeshInstance3D" parent="."]
+position = Vector3(0, 2, 0)
+script = ExtResource("Cloth")

@@ -383,7 +383,17 @@ one cube → a row → the floor → two colours → hue by index → a ghost ce
 
 Lay a floor for your room, with a rhythm rule of your own and two colours you chose.
 
-Copy `room.tscn`, `room.gd`, `my_plane.tres` and `my_ring.tscn` from your Body of Parts folder into this one. Save a copy of `chessboard.gd` as `my_floor.gd`. In `room.tscn`, add a `Node3D` named `MyFloor` at (−1.75, 0.6, −2) and attach `my_floor.gd` to it *(editor)*. In `my_floor.gd`, set `light` and `dark` to your two colours, decide where the ghost is, and replace `colour_of()` with a rule of your own. Ours:
+The kit's guest is that floor, begun: the folder `guests/chessboard/`, with the scene `chessboard.tscn`, the script `floor.gd` and a cube part of its own. Copy the folder `guests/chessboard/` from your copy of this kit into the `guests/` folder of your room project. Open the room's `room.gd` and add one line to `GUESTS`, under the last one:
+
+```gdscript
+	"res://guests/chessboard/chessboard.tscn",
+```
+
+Run the room and walk to it. In our copy of the room the Output read `My room: place 2 is res://guests/chessboard/chessboard.tscn`. A floor of sixteen cubes lies on the dark square, four by four, lime and cyan by turns, 1.2 m on a side and 0.3 m high. The walker, sent at it from the aisle, stepped up onto it and arrived, 0.08 m from the middle of the place, its feet at 0.30 m.
+
+`floor.gd` is this page's `chessboard.gd` with three things changed. The cube part is read from the guest's own folder and is 0.3 m on an edge, with `n` at 4 and `spacing` at 0.3: sixteen cubes fit on one place, and a walker can step onto them. `light` and `dark` are two colours of the course look, written out. And `colour_of()` holds one rule, the chessboard, and not four. One cell is a ghost, (0, 3): the near left corner as you come from the aisle. Sent onto it, the walker did not fall. It is 0.6 m wide and the cell 0.3 m: it stood over the ghost with its feet at 0.28 m, held by the cells beside it.
+
+Now make it yours, in your room's `guests/chessboard/floor.gd`. Set `light` and `dark` to your two colours, decide where the ghost is, and replace `colour_of()` with a rule of your own. Ours:
 
 ```gdscript
 func colour_of(x: int, z: int) -> Color:
@@ -392,9 +402,9 @@ func colour_of(x: int, z: int) -> Color:
 	return light
 ```
 
-Run `room.tscn`. We made the same room by writing its files. The floor lies under the plane you walked, its top at 1.10 m, 2 cm below the plane. With our rule 22 cells are dark: every third diagonal. We put the ghost at (1, 4). The marble dropped over cell (3, 4) stayed at 1.20 m; over the ghost it fell through the floor to the ground, 0.10 m.
+Run the room. We made the same guest by writing its files. With our rule 6 of the 16 cells are dark: every third diagonal. We put the ghost at (1, 2). The room's marble, dropped by a script from 2 m over cell (2, 2), stayed on the floor at 0.40 m; over the ghost it fell through the floor to the ground, 0.10 m. With your hands it is the M key: it drops the marble one metre in front of you.
 
-Write one line in your README: what your rule repeats, and what it leaves out. Hand in your room with its process strip: one still after each operation, in order, with the operation named under it.
+Write one line at the top of `floor.gd`, as a comment: what your rule repeats, and what it leaves out. Hand in your room with its process strip: one still after each operation, in order, with the operation named under it.
 
 ## What we borrowed
 

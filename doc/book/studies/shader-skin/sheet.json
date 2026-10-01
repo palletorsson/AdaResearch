@@ -1,0 +1,504 @@
+{
+  "clock": {
+    "drift 0.0": {
+      "differ_pct": 0.0,
+      "seconds_apart": 1.08,
+      "stripes_moved_up_px": 0
+    },
+    "drift 0.1": {
+      "differ_pct": 8.48,
+      "seconds_apart": 1.09,
+      "stripes_moved_up_px": 18
+    },
+    "how": "the body is held: stand() stops its own _process, so only the shader's TIME moved between the two stills. moved up: the shift, in pixels, at which the middle column of the first still fits the second best, over 200 rows about the middle; more than 0 is upward"
+  },
+  "dark body at 2.0 m": {
+    "body_pct_of_still": 29.58,
+    "body_pixels": 204480,
+    "closest": "p 3.0 vs p 8.0",
+    "farthest": "p 0.5 vs p 8.0",
+    "pairs": {
+      "p 0.5 vs p 1.0": {
+        "differ_pct": 29.0,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 29.0,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 0.5 vs p 3.0": {
+        "differ_pct": 29.38,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 29.38,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 0.5 vs p 8.0": {
+        "differ_pct": 29.4,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 29.4,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 1.0 vs p 3.0": {
+        "differ_pct": 25.76,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 25.76,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 1.0 vs p 8.0": {
+        "differ_pct": 25.79,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 25.79,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 3.0 vs p 8.0": {
+        "differ_pct": 10.52,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 10.52,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      }
+    },
+    "rim": {
+      "p 0.5": {
+        "band_px": 126.81,
+        "begins_at_of_radius": 0.24,
+        "left_to_right_brightness": 1.04,
+        "mean_colour": "#167c94",
+        "reach_pct_of_body": 99.41
+      },
+      "p 1.0": {
+        "band_px": 111.27,
+        "begins_at_of_radius": 0.41,
+        "left_to_right_brightness": 1.07,
+        "mean_colour": "#0f4f61",
+        "reach_pct_of_body": 87.23
+      },
+      "p 3.0": {
+        "band_px": 45.44,
+        "begins_at_of_radius": 0.81,
+        "left_to_right_brightness": 1.2,
+        "mean_colour": "#081b25",
+        "reach_pct_of_body": 35.62
+      },
+      "p 8.0": {
+        "band_px": 10.63,
+        "begins_at_of_radius": 0.96,
+        "left_to_right_brightness": 1.52,
+        "mean_colour": "#070a12",
+        "reach_pct_of_body": 8.34
+      }
+    }
+  },
+  "dark body at 5.0 m": {
+    "body_pct_of_still": 4.48,
+    "body_pixels": 30996,
+    "closest": "p 3.0 vs p 8.0",
+    "farthest": "p 0.5 vs p 3.0",
+    "pairs": {
+      "p 0.5 vs p 1.0": {
+        "differ_pct": 4.4,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.4,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 0.5 vs p 3.0": {
+        "differ_pct": 4.45,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.45,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 0.5 vs p 8.0": {
+        "differ_pct": 4.45,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.45,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 1.0 vs p 3.0": {
+        "differ_pct": 3.87,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.87,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 1.0 vs p 8.0": {
+        "differ_pct": 3.88,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.88,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 3.0 vs p 8.0": {
+        "differ_pct": 1.54,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.54,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      }
+    },
+    "rim": {
+      "p 0.5": {
+        "band_px": 49.36,
+        "begins_at_of_radius": 0.24,
+        "left_to_right_brightness": 1.04,
+        "mean_colour": "#157a91",
+        "reach_pct_of_body": 99.38
+      },
+      "p 1.0": {
+        "band_px": 42.99,
+        "begins_at_of_radius": 0.42,
+        "left_to_right_brightness": 1.07,
+        "mean_colour": "#0e4e5e",
+        "reach_pct_of_body": 86.56
+      },
+      "p 3.0": {
+        "band_px": 17.1,
+        "begins_at_of_radius": 0.82,
+        "left_to_right_brightness": 1.21,
+        "mean_colour": "#081a24",
+        "reach_pct_of_body": 34.43
+      },
+      "p 8.0": {
+        "band_px": 3.94,
+        "begins_at_of_radius": 0.96,
+        "left_to_right_brightness": 1.57,
+        "mean_colour": "#060a11",
+        "reach_pct_of_body": 7.94
+      }
+    }
+  },
+  "godot": "4.6-stable (official)",
+  "our skin at 2.0 m": {
+    "body_pct_of_still": 29.58,
+    "body_pixels": 204480,
+    "closest": "p 3.0 vs p 8.0",
+    "farthest": "p 0.5 vs p 8.0",
+    "pairs": {
+      "p 0.5 vs p 1.0": {
+        "differ_pct": 28.48,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 28.48,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 0.5 vs p 3.0": {
+        "differ_pct": 29.07,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 29.07,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 0.5 vs p 8.0": {
+        "differ_pct": 29.12,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 29.12,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 1.0 vs p 3.0": {
+        "differ_pct": 24.19,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 24.19,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 1.0 vs p 8.0": {
+        "differ_pct": 24.25,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 24.25,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 3.0 vs p 8.0": {
+        "differ_pct": 9.06,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 9.06,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      }
+    },
+    "rim": {
+      "p 0.5": {
+        "band_px": 125.61,
+        "begins_at_of_radius": 0.25,
+        "left_to_right_brightness": 1.11,
+        "mean_colour": "#45a397",
+        "reach_pct_of_body": 98.47
+      },
+      "p 1.0": {
+        "band_px": 104.64,
+        "begins_at_of_radius": 0.46,
+        "left_to_right_brightness": 1.15,
+        "mean_colour": "#418165",
+        "reach_pct_of_body": 82.03
+      },
+      "p 3.0": {
+        "band_px": 39.2,
+        "begins_at_of_radius": 0.82,
+        "left_to_right_brightness": 1.23,
+        "mean_colour": "#3e5c2c",
+        "reach_pct_of_body": 30.73
+      },
+      "p 8.0": {
+        "band_px": 8.63,
+        "begins_at_of_radius": 0.96,
+        "left_to_right_brightness": 1.26,
+        "mean_colour": "#3d511a",
+        "reach_pct_of_body": 6.77
+      }
+    }
+  },
+  "our skin at 5.0 m": {
+    "body_pct_of_still": 4.48,
+    "body_pixels": 30996,
+    "closest": "p 3.0 vs p 8.0",
+    "farthest": "p 0.5 vs p 3.0",
+    "pairs": {
+      "p 0.5 vs p 1.0": {
+        "differ_pct": 4.32,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.32,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 0.5 vs p 3.0": {
+        "differ_pct": 4.4,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.4,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 0.5 vs p 8.0": {
+        "differ_pct": 4.4,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.4,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 1.0 vs p 3.0": {
+        "differ_pct": 3.63,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.63,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 1.0 vs p 8.0": {
+        "differ_pct": 3.64,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.64,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "p 3.0 vs p 8.0": {
+        "differ_pct": 1.31,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.31,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      }
+    },
+    "rim": {
+      "p 0.5": {
+        "band_px": 48.84,
+        "begins_at_of_radius": 0.26,
+        "left_to_right_brightness": 1.12,
+        "mean_colour": "#45a194",
+        "reach_pct_of_body": 98.34
+      },
+      "p 1.0": {
+        "band_px": 40.32,
+        "begins_at_of_radius": 0.47,
+        "left_to_right_brightness": 1.17,
+        "mean_colour": "#417f62",
+        "reach_pct_of_body": 81.18
+      },
+      "p 3.0": {
+        "band_px": 14.6,
+        "begins_at_of_radius": 0.83,
+        "left_to_right_brightness": 1.25,
+        "mean_colour": "#3d5a2a",
+        "reach_pct_of_body": 29.4
+      },
+      "p 8.0": {
+        "band_px": 3.24,
+        "begins_at_of_radius": 0.96,
+        "left_to_right_brightness": 1.29,
+        "mean_colour": "#3c501a",
+        "reach_pct_of_body": 6.52
+      }
+    }
+  },
+  "place": {
+    "back": {
+      "band_px": 17.54,
+      "begins_at_of_radius": 0.82,
+      "body_pct_of_still": 6.04,
+      "left_to_right_brightness": 0.87,
+      "mean_colour": "#2f4925",
+      "reach_pct_of_body": 30.42
+    },
+    "eye_height_m": 1.6,
+    "front": {
+      "band_px": 17.25,
+      "begins_at_of_radius": 0.83,
+      "body_pct_of_still": 6.04,
+      "left_to_right_brightness": 1.18,
+      "mean_colour": "#466730",
+      "reach_pct_of_body": 29.92
+    },
+    "how": "the walker stands 2 m from the body's middle on four sides and looks at it through its Eyes; rim pixels are the body's pixels that change when rim_colour is set to black",
+    "left": {
+      "band_px": 17.6,
+      "begins_at_of_radius": 0.82,
+      "body_pct_of_still": 6.04,
+      "left_to_right_brightness": 0.81,
+      "mean_colour": "#466630",
+      "reach_pct_of_body": 30.53
+    },
+    "pairs": {
+      "front vs back": {
+        "rim_pixels_shared_pct": 97.31,
+        "skin_without_rim_differs_pct_of_body": 71.26
+      },
+      "front vs left": {
+        "rim_pixels_shared_pct": 97.06,
+        "skin_without_rim_differs_pct_of_body": 51.99
+      },
+      "front vs right": {
+        "rim_pixels_shared_pct": 97.53,
+        "skin_without_rim_differs_pct_of_body": 66.83
+      }
+    },
+    "right": {
+      "band_px": 17.45,
+      "begins_at_of_radius": 0.82,
+      "body_pct_of_still": 6.04,
+      "left_to_right_brightness": 1.25,
+      "mean_colour": "#304b26",
+      "reach_pct_of_body": 30.28
+    }
+  },
+  "place_png": {
+    "bytes": 61869,
+    "height": 266,
+    "width": 1292
+  },
+  "planted_bug": {
+    "bound_mean_colour": "#a2ab8e",
+    "bound_white_pct_of_body": 0.71,
+    "cpu_noise_made_in_ms": 3.9,
+    "cpu_noise_size": [
+      256,
+      128
+    ],
+    "unbound_errors_and_warnings": 0,
+    "unbound_mean_colour": "#ffffff",
+    "unbound_white_pct_of_body": 100.0
+  },
+  "refused_shader": {
+    "body_pct_of_still": 29.58,
+    "errors": [
+      "SHADER ERROR: Invalid arguments to operator '*': 'float, int'. (:7)",
+      "ERROR: Shader compilation failed."
+    ],
+    "mean_colour": "#777777"
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "repaired_shader": {
+    "errors": [],
+    "light_stripes_on_the_middle_column": 5
+  },
+  "room_argues": {
+    "how": "p = 1, from the side at 2 m; the mean colour of the body's pixels in the last tenth of its radius, and its distance from SKY in red, green and blue together",
+    "rim_in_SECOND": {
+      "edge_from_sky_of_441": 238.8,
+      "edge_mean_colour": "#49c1c3"
+    },
+    "rim_in_SKY": {
+      "edge_from_sky_of_441": 73.2,
+      "edge_mean_colour": "#d26076"
+    }
+  },
+  "seam": {
+    "back": {
+      "largest_of_765": 90,
+      "mean_step_across_the_middle_line_of_765": 15.4,
+      "rows": 510
+    },
+    "front": {
+      "largest_of_765": 9,
+      "mean_step_across_the_middle_line_of_765": 1.2,
+      "rows": 510
+    },
+    "how": "the body from behind and from in front at 2 m; for every row of the body, the pixel two to the left of its middle line against the pixel two to the right, red, green and blue added"
+  },
+  "series_against_8": {
+    "p 3.0 vs p 8.0": 9.06,
+    "p 4.0 vs p 8.0": 6.02,
+    "p 5.0 vs p 8.0": 4.07,
+    "p 6.0 vs p 8.0": 2.48,
+    "p 7.0 vs p 8.0": 0.06
+  },
+  "sheet_png": {
+    "bytes": 180695,
+    "height": 536,
+    "width": 1292
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "changed_most": "2 UV as colour",
+    "png": {
+      "bytes": 104647,
+      "height": 266,
+      "width": 2588
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 the look's paint"
+      },
+      {
+        "differs_from_step_before_pct": 15.24,
+        "step": "2 UV as colour"
+      },
+      {
+        "differs_from_step_before_pct": 15.24,
+        "step": "3 step"
+      },
+      {
+        "differs_from_step_before_pct": 6.95,
+        "step": "4 sin and smoothstep"
+      },
+      {
+        "differs_from_step_before_pct": 8.14,
+        "step": "5 fBm grain"
+      },
+      {
+        "differs_from_step_before_pct": 15.24,
+        "step": "6 a sampler nobody bound"
+      },
+      {
+        "differs_from_step_before_pct": 14.95,
+        "step": "7 the CPU's noise bound"
+      },
+      {
+        "differs_from_step_before_pct": 15.19,
+        "step": "8 the rim from the eye"
+      }
+    ]
+  },
+  "unset_uniforms": {
+    "black_pct_of_body": 24.44,
+    "mean_colour": "#060606"
+  }
+}

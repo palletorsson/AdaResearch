@@ -1,0 +1,332 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Kit base, its main scene is base_demo.tscn, its renderer Compatibility",
+      "passed": true
+    },
+    {
+      "name": "the Input Map has nine actions on their keys: the four moves on WASD and the arrows, pause on Space, drop on M, look on V, jump on J, switch_camera on C",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds 15 files: [\"base.tscn\", \"base_look.gd\", \"check_guest.gd\", \"look.gd\", \"marble.gd\", \"marble.tscn\", \"mover.gd\", \"segment.gd\", \"sheet_tools.gd\", \"sweep_sheet.gd\", \"sweep_sheet.tscn\", \"trace_strip.gd\", \"verify_tools.gd\", \"walker.gd\", \"walker.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "no script in supplied/ declares a class_name, and the project lists no named class: nothing needs an import",
+      "passed": true
+    },
+    {
+      "name": "every script is indented with tabs: []",
+      "passed": true
+    },
+    {
+      "name": "look.gd names ten colours by role, with the values of the brief, and BODIES is BODY, SECOND, THIRD, BONE",
+      "passed": true
+    },
+    {
+      "name": "paint(BODY) returns a new StandardMaterial3D with BODY as its albedo, roughness 0.8, no metal",
+      "passed": true
+    },
+    {
+      "name": "ghost() returns GHOST, seen through: alpha 0.45",
+      "passed": true
+    },
+    {
+      "name": "studio_environment() has SKY as its flat background, a plain ambient light of energy 0.25, the linear tonemap, no glow, no fog, no adjustment",
+      "passed": true
+    },
+    {
+      "name": "environment() is the sky of a running scene: SKY_TOP above, SKY at the horizon, GROUND below it, the linear tonemap, no glow and no fog",
+      "passed": true
+    },
+    {
+      "name": "fill() returns a weaker light than the sun, with no shadow",
+      "passed": true
+    },
+    {
+      "name": "sun() returns a new DirectionalLight3D with shadows on, energy 0.28, 43 degrees above the horizon",
+      "passed": true
+    },
+    {
+      "name": "label(text) returns a Label3D in INK with a SHADE edge",
+      "passed": true
+    },
+    {
+      "name": "base.tscn: when it runs, the node Look has made Sky, and the environment's background is SKY",
+      "passed": true
+    },
+    {
+      "name": "base.tscn: the floor's material is GROUND",
+      "passed": true
+    },
+    {
+      "name": "base.tscn: Look has made Sun, with shadows; the fixed camera Camera3D is the current one",
+      "passed": true
+    },
+    {
+      "name": "base.tscn itself holds no colour: look.gd is the one place they are written",
+      "passed": true
+    },
+    {
+      "name": "marble.tscn waits, frozen, where it is put, painted BONE",
+      "passed": true
+    },
+    {
+      "name": "drop(at) over the bare floor: the marble comes to rest with its middle at 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "dropped over the example guest, a box of 0.5 m with a collider, it rests on top, at 0.598 m",
+      "passed": true
+    },
+    {
+      "name": "dropped over a box of the same size with no collider, it falls through the mesh to the floor: 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "mover.gd: move_right held for half a second moves the hand 0.60 m to the right, at its own height (speed 1.2 m/s)",
+      "passed": true
+    },
+    {
+      "name": "it goes no further than `area` from the middle: it stops at (2.4, 1.5)",
+      "passed": true
+    },
+    {
+      "name": "with autopilot ticked it moves by itself and does not listen to the keys: 1.39 m from its start within 120 frames",
+      "passed": true
+    },
+    {
+      "name": "segment.gd: show_between(a, b) lays a cylinder from a to b: its middle between them, 2.291 m long, turned along b - a",
+      "passed": true
+    },
+    {
+      "name": "two segments made in code have a cylinder each, in LINE: the second is 0.3 m long and the first kept its length",
+      "passed": true
+    },
+    {
+      "name": "two points in one place hide the segment",
+      "passed": true
+    },
+    {
+      "name": "trace_strip.gd: draw() of three positions draws one line strip in LINE; of one position, nothing",
+      "passed": true
+    },
+    {
+      "name": "sweep_sheet: hang() stands members 1.2 m apart; a mesh is lifted until its lowest point is on the ground, another body stands where its origin is",
+      "passed": true
+    },
+    {
+      "name": "it keeps what it hung and writes a plate for each in INK; a mesh with no material gets the sheet's paint, BODY; the paper is SHADE",
+      "passed": true
+    },
+    {
+      "name": "walker.tscn is a CharacterBody3D with a capsule 1.8 m high and 0.6 m wide, Eyes at 1.6 m and a Skin in SECOND; walker.gd has 150 lines",
+      "passed": true
+    },
+    {
+      "name": "put down on the floor it stands on it: its feet at 0.000 m, is_on_floor() true",
+      "passed": true
+    },
+    {
+      "name": "walk_to() of a point 6 m across the floor: the walk ended \"arrived\", 0.07 m from the point, after 179 steps of the physics (3.0 s at 2 m/s)",
+      "passed": true
+    },
+    {
+      "name": "walk_to() of two points walks to the first, then to the second, and ends \"arrived\" at the second",
+      "passed": true
+    },
+    {
+      "name": "stop() ends a walk on the way: walk_ended says \"stopped\"",
+      "passed": true
+    },
+    {
+      "name": "walk_to() of a point beyond the edge of the floor: it walks off, falls below -10 m, and the walk ends \"fell\" with the walker back where stand_at() put it",
+      "passed": true
+    },
+    {
+      "name": "walk_to() of an empty list ends \"arrived\" at the next step, where it stands",
+      "passed": true
+    },
+    {
+      "name": "a wall that is a StaticBody3D stops it: the walk ended \"blocked\" with its middle at x = -0.400, 0.3 m (its radius) before the wall's face at -0.1",
+      "passed": true
+    },
+    {
+      "name": "the same wall as a mesh with no collider does not: the walk ended \"arrived\" on the far side",
+      "passed": true
+    },
+    {
+      "name": "put down above a step that is a StaticBody3D, 0.3 m high, it lands and stands on it: feet at 0.300 m",
+      "passed": true
+    },
+    {
+      "name": "put down above the same step as a mesh with no collider, it falls through it and stands on the floor: feet at 0.000 m",
+      "passed": true
+    },
+    {
+      "name": "it steps onto a StaticBody3D no higher than step_height, 0.35 m, and is stopped by a higher one: { \"0.10 m\": \"arrived, feet at 0.10 m\", \"0.18 m\": \"arrived, feet at 0.18 m\", \"0.30 m\": \"arrived, feet at 0.30 m\", \"0.60 m\": \"blocked, feet at 0.00 m\" }",
+      "passed": true
+    },
+    {
+      "name": "with step_height at 0 the capsule alone rolls up 5 cm and is stopped by 10 cm: { \"0.05 m\": \"arrived, feet at 0.05 m\", \"0.10 m\": \"blocked, feet at 0.00 m\" }",
+      "passed": true
+    },
+    {
+      "name": "a stair of three steps of 0.18 m, each 0.4 m deep: the walk ended \"arrived\" on top, feet at 0.54 m",
+      "passed": true
+    },
+    {
+      "name": "walked at the example guest, a box 0.5 m high, it is stopped by the box's collider: \"blocked\", its middle 0.57 m from the guest's (0.25 m of box and 0.3 m of walker)",
+      "passed": true
+    },
+    {
+      "name": "a marble lying in its way does not stop it: the walk ended \"arrived\" and the marble, kicked along, lies at [0.85, 0.09, 1.0]",
+      "passed": true
+    },
+    {
+      "name": "in an Area3D that sets gravity to zero it does not fall: put down 1 m up it stays at 1.00 m, and a walk to a point ends \"blocked\" over the point, never having landed",
+      "passed": true
+    },
+    {
+      "name": "move_forward held for 60 steps walks it 2 m the way it faces, towards -z: from z = 2 to z = 0.03",
+      "passed": true
+    },
+    {
+      "name": "jump lifts it 0.85 m and it lands again",
+      "passed": true
+    },
+    {
+      "name": "switch_camera changes the view from the fixed camera to the walker's Eyes, and back",
+      "passed": true
+    },
+    {
+      "name": "the mouse turns it only while look is held: 100 pixels to the right turn the body -0.30 rad, 50 down tilt the Eyes -0.15 rad; the mouse is not captured",
+      "passed": true
+    },
+    {
+      "name": "with `keys` unticked it does not listen to the keys",
+      "passed": true
+    },
+    {
+      "name": "and walk_to() still walks it: \"arrived\"",
+      "passed": true
+    },
+    {
+      "name": "with `through_eyes` ticked the scene starts looking through the walker's Eyes",
+      "passed": true
+    },
+    {
+      "name": "check_guest: outside(\"res://guests/example/\") is empty and the folder declares no class_name: []",
+      "passed": true
+    },
+    {
+      "name": "the example guest loads: one mesh in BODY, (0.5, 0.5, 0.5) m, its lowest point on the ground at its own origin, one StaticBody3D",
+      "passed": true
+    },
+    {
+      "name": "a guest whose script preloads res://supplied/marble.gd: outside() returns [\"res://supplied/marble.gd\"]",
+      "passed": true
+    },
+    {
+      "name": "that guest loads and runs here all the same, with no error, because this project has supplied/: the check sees what a run does not",
+      "passed": true
+    },
+    {
+      "name": "class_names() lists the class_name it declares: [\"Leaky\"]",
+      "passed": true
+    },
+    {
+      "name": "a folder that is not there, or has no scene of its own name, gives one line and no error: [\"no scene at res://guests/nobody/nobody.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "base_demo.tscn runs 180 frames and Godot logs no error: []",
+      "passed": true
+    },
+    {
+      "name": "in it the walker walks along the front of the floor and to the back on its autopilot, three points, and arrives",
+      "passed": true
+    },
+    {
+      "name": "the marble lies on the example guest, at 0.60 m",
+      "passed": true
+    },
+    {
+      "name": "the segment joins A and the Hand, the Hand's trace has 37 positions, two balls hang on the sheet",
+      "passed": true
+    },
+    {
+      "name": "M drops the marble again, from 1.5 m above the guest",
+      "passed": true
+    },
+    {
+      "name": "verify_tools: `errors`, `warnings` and `printed` hold what Godot logged: an error, a warning and a line made on purpose are there",
+      "passed": true
+    },
+    {
+      "name": "write_result() writes a file with a top-level `passed`, and `checks`, a list of 66 with `name` and `passed`; finish() writes verification.json the same way",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 67,
+  "godot": "4.6-stable (official)",
+  "kit": "Kit base",
+  "measured": {
+    "marble": {
+      "on_the_example_guest_m": 0.598,
+      "on_the_floor_m": 0.098,
+      "through_a_mesh_with_no_collider_m": 0.098
+    },
+    "walker_in_zero_gravity": {
+      "height_after_one_second_m": 1.0,
+      "walk_ended": "blocked"
+    },
+    "walker_jump_height_m": 0.85,
+    "walker_meets_marble": {
+      "ended": "arrived",
+      "marble_went_from": [
+        0.0,
+        0.1,
+        1.0
+      ],
+      "marble_went_to": [
+        0.85,
+        0.09,
+        1.0
+      ]
+    },
+    "walker_six_metres": {
+      "ended": "arrived",
+      "milliseconds_of_this_run": 19,
+      "physics_steps": 179
+    },
+    "walker_stair_of_three": {
+      "ended": "arrived",
+      "feet_at_m": 0.54
+    },
+    "walker_step": {
+      "falls_through_a_mesh_to_m": 0.0,
+      "stands_on_a_static_body_at_m": 0.3
+    },
+    "walker_walks_up_a_step_of": {
+      "step_height_0": {
+        "0.05 m": "arrived, feet at 0.05 m",
+        "0.10 m": "blocked, feet at 0.00 m"
+      },
+      "step_height_0.35": {
+        "0.10 m": "arrived, feet at 0.10 m",
+        "0.18 m": "arrived, feet at 0.18 m",
+        "0.30 m": "arrived, feet at 0.30 m",
+        "0.60 m": "blocked, feet at 0.00 m"
+      }
+    },
+    "walker_wall": {
+      "stopped_at_x_m": -0.4,
+      "with_a_collider": "blocked",
+      "with_no_collider": "arrived"
+    }
+  },
+  "passed": true
+}

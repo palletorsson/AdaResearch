@@ -1,0 +1,286 @@
+{
+  "covers_pct": {
+    "above, taper 0.0": 15.99,
+    "above, taper 0.2": 15.99,
+    "above, taper 0.6": 15.99,
+    "above, taper 1.0": 29.66,
+    "corner, taper 0.0": 11.26,
+    "corner, taper 0.2": 12.67,
+    "corner, taper 0.6": 16.11,
+    "corner, taper 1.0": 20.82,
+    "side, taper 0.0": 15.33,
+    "side, taper 0.2": 17.99,
+    "side, taper 0.6": 24.02,
+    "side, taper 1.0": 31.2
+  },
+  "equal_steps_side": {
+    "0.2 vs 0.0": {
+      "differ_pct": 3.36,
+      "elsewhere_pct": 0.0,
+      "inside_pct": 0.69,
+      "outline_pct": 2.66,
+      "outline_px": 14.73
+    },
+    "0.4 vs 0.2": {
+      "differ_pct": 3.79,
+      "elsewhere_pct": 0.0,
+      "inside_pct": 0.91,
+      "outline_pct": 2.88,
+      "outline_px": 14.8
+    },
+    "0.6 vs 0.4": {
+      "differ_pct": 4.26,
+      "elsewhere_pct": 0.0,
+      "inside_pct": 1.11,
+      "outline_pct": 3.15,
+      "outline_px": 15.07
+    },
+    "0.8 vs 0.6": {
+      "differ_pct": 6.32,
+      "elsewhere_pct": 0.0,
+      "inside_pct": 2.89,
+      "outline_pct": 3.43,
+      "outline_px": 15.35
+    },
+    "1.0 vs 0.8": {
+      "differ_pct": 8.19,
+      "elsewhere_pct": 0.0,
+      "inside_pct": 4.44,
+      "outline_pct": 3.75,
+      "outline_px": 15.74
+    }
+  },
+  "godot": "4.6-stable (official)",
+  "pairs_above": {
+    "closest": "0.2 vs 0.0",
+    "farthest": "1.0 vs 0.0",
+    "pairs": {
+      "0.2 vs 0.0": {
+        "differ_pct": 2.84,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.84,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "0.6 vs 0.0": {
+        "differ_pct": 7.72,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 7.72,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "0.6 vs 0.2": {
+        "differ_pct": 6.59,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 6.59,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "1.0 vs 0.0": {
+        "differ_pct": 23.86,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 10.19,
+        "outline_pct": 13.67,
+        "outline_px": 58.87
+      },
+      "1.0 vs 0.2": {
+        "differ_pct": 23.5,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 9.83,
+        "outline_pct": 13.67,
+        "outline_px": 58.87
+      },
+      "1.0 vs 0.6": {
+        "differ_pct": 17.91,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.24,
+        "outline_pct": 13.67,
+        "outline_px": 58.87
+      }
+    }
+  },
+  "pairs_corner": {
+    "closest": "0.2 vs 0.0",
+    "farthest": "1.0 vs 0.2",
+    "pairs": {
+      "0.2 vs 0.0": {
+        "differ_pct": 2.05,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.64,
+        "outline_pct": 1.4,
+        "outline_px": 9.26
+      },
+      "0.6 vs 0.0": {
+        "differ_pct": 8.73,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.88,
+        "outline_pct": 4.85,
+        "outline_px": 28.33
+      },
+      "0.6 vs 0.2": {
+        "differ_pct": 7.48,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.04,
+        "outline_pct": 3.44,
+        "outline_px": 20.12
+      },
+      "1.0 vs 0.0": {
+        "differ_pct": 17.39,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 7.84,
+        "outline_pct": 9.55,
+        "outline_px": 49.11
+      },
+      "1.0 vs 0.2": {
+        "differ_pct": 18.35,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 10.2,
+        "outline_pct": 8.15,
+        "outline_px": 41.89
+      },
+      "1.0 vs 0.6": {
+        "differ_pct": 9.67,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.97,
+        "outline_pct": 4.71,
+        "outline_px": 24.19
+      }
+    }
+  },
+  "pairs_side": {
+    "closest": "0.2 vs 0.0",
+    "farthest": "1.0 vs 0.2",
+    "pairs": {
+      "0.2 vs 0.0": {
+        "differ_pct": 3.36,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.69,
+        "outline_pct": 2.66,
+        "outline_px": 14.73
+      },
+      "0.6 vs 0.0": {
+        "differ_pct": 12.07,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.38,
+        "outline_pct": 8.7,
+        "outline_px": 41.61
+      },
+      "0.6 vs 0.2": {
+        "differ_pct": 8.3,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.27,
+        "outline_pct": 6.03,
+        "outline_px": 28.86
+      },
+      "1.0 vs 0.0": {
+        "differ_pct": 28.95,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 13.08,
+        "outline_pct": 15.87,
+        "outline_px": 66.65
+      },
+      "1.0 vs 0.2": {
+        "differ_pct": 30.34,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 17.13,
+        "outline_pct": 13.21,
+        "outline_px": 55.46
+      },
+      "1.0 vs 0.6": {
+        "differ_pct": 12.33,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 5.15,
+        "outline_pct": 7.18,
+        "outline_px": 30.14
+      }
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "sheet_png": {
+    "bytes": 42192,
+    "height": 754,
+    "width": 1292
+  },
+  "sheet_rows": [
+    "from the side, 2.5 m from the middle",
+    "from straight above, 2.5 m",
+    "from a corner, the eye at (1.9, 1.5, 2.1)"
+  ],
+  "smooth_vs_flat": {
+    "corner": {
+      "differ_pct": 10.96,
+      "elsewhere_pct": 0.0,
+      "inside_pct": 10.96,
+      "outline_pct": 0.0,
+      "outline_px": 0.0
+    },
+    "side": {
+      "differ_pct": 18.98,
+      "elsewhere_pct": 0.0,
+      "inside_pct": 18.98,
+      "outline_pct": 0.0,
+      "outline_px": 0.0
+    }
+  },
+  "stage_equals_extrude": true,
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "changed_most": "2 a wall for every edge",
+    "marble_on_the_frustum_m": 0.898,
+    "marble_on_the_spires_m": 0.098,
+    "png": {
+      "bytes": 51603,
+      "height": 266,
+      "width": 2588
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 the walked outline"
+      },
+      {
+        "differs_from_step_before_pct": 12.81,
+        "step": "2 a wall for every edge"
+      },
+      {
+        "differs_from_step_before_pct": 12.43,
+        "step": "3 the top: the fan"
+      },
+      {
+        "differs_from_step_before_pct": 5.52,
+        "step": "4 the bottom: the fan reversed"
+      },
+      {
+        "differs_from_step_before_pct": 8.7,
+        "step": "5 one normal for each triangle"
+      },
+      {
+        "differs_from_step_before_pct": 9.02,
+        "step": "6 taper 0.6"
+      },
+      {
+        "differs_from_step_before_pct": 0.58,
+        "step": "7 a collider: the marble stays"
+      },
+      {
+        "differs_from_step_before_pct": 5.77,
+        "step": "8 extruded again: six spires"
+      }
+    ],
+    "triangles": [
+      0,
+      16,
+      22,
+      28,
+      28,
+      28,
+      28,
+      64
+    ]
+  }
+}

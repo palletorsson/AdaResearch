@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="PackedScene" path="res://bullet.tscn" id="Bullet"]
+[ext_resource type="Script" path="res://mark.gd" id="Mark"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[sub_resource type="CylinderMesh" id="MarkMesh"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.01
+
+[node name="Launch" instance=ExtResource("Base")]
+
+[node name="Bullet" parent="." instance=ExtResource("Bullet")]
+position = Vector3(-2.45, 0, 0)
+
+[node name="Mark" type="MeshInstance3D" parent="."]
+position = Vector3(2.448, 0.005, 0)
+mesh = SubResource("MarkMesh")
+script = ExtResource("Mark")
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(1, 0, -1.6)

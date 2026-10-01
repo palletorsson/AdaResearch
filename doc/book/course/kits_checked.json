@@ -1,0 +1,174 @@
+{
+ "_run": {
+  "runs": [
+   "wf_66c74fd8-0b8"
+  ],
+  "written": "2026-10-01T17:52:12",
+  "still_running": [
+   "build:implicit"
+  ],
+  "note": "The build of 2026-10-01 hit the account's usage limit at about 17:05. 7 builders had reported, 9 were cut off in the middle of their work and 17 never started. A kit whose builder was cut off may look finished from its files; nobody finished or reported it."
+ },
+ "balance": {
+  "builder": "not started"
+ },
+ "body-of-parts": {
+  "converted": "reported",
+  "verdict": "accept",
+  "problems": 0
+ },
+ "budget": {
+  "builder": "not started"
+ },
+ "bullet": {
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 53,
+  "verdict": null,
+  "check": "not run"
+ },
+ "cellular": {
+  "builder": "reported",
+  "prediction_held": "yes",
+  "checks_reported": 70,
+  "verdict": null,
+  "check": "not run"
+ },
+ "chessboard": {
+  "converted": "reported",
+  "verdict": "accept",
+  "problems": 0
+ },
+ "collage": {
+  "converted": "cut off",
+  "verdict": null,
+  "check": "not run"
+ },
+ "colour-faces": {
+  "builder": "cut off"
+ },
+ "combine": {
+  "builder": "cut off"
+ },
+ "displace": {
+  "builder": "not started"
+ },
+ "disturbed-order": {
+  "builder": "cut off"
+ },
+ "extrude": {
+  "builder": "reported",
+  "prediction_held": "no",
+  "checks_reported": 56,
+  "verdict": null,
+  "check": "not run"
+ },
+ "family": {
+  "converted": "cut off",
+  "verdict": null,
+  "check": "not run"
+ },
+ "family-editor": {
+  "builder": "cut off"
+ },
+ "field-of-arrows": {
+  "builder": "not started"
+ },
+ "flock": {
+  "builder": "not started"
+ },
+ "genome": {
+  "builder": "reported",
+  "prediction_held": "no",
+  "checks_reported": 70,
+  "verdict": null,
+  "check": "not run"
+ },
+ "grown-and-made": {
+  "builder": "not started"
+ },
+ "impossible-space": {
+  "builder": "not started"
+ },
+ "learning-body": {
+  "builder": "cut off"
+ },
+ "legs": {
+  "builder": "cut off"
+ },
+ "navigate": {
+  "builder": "not started"
+ },
+ "noise": {
+  "builder": "not started"
+ },
+ "organism": {
+  "converted": "cut off",
+  "verdict": null,
+  "check": "not run"
+ },
+ "pattern": {
+  "builder": "not started"
+ },
+ "pendulum": {
+  "builder": "not started"
+ },
+ "point-cube": {
+  "converted": "cut off",
+  "verdict": null,
+  "check": "not run"
+ },
+ "point-plane": {
+  "converted": "cut off",
+  "verdict": null,
+  "check": "not run"
+ },
+ "qfep-lab": {
+  "builder": "cut off"
+ },
+ "recursion": {
+  "builder": "not started"
+ },
+ "regions": {
+  "builder": "not started"
+ },
+ "round": {
+  "builder": "not started"
+ },
+ "shader-skin": {
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 48,
+  "verdict": null,
+  "check": "not run"
+ },
+ "soft-body": {
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 59,
+  "verdict": "accept",
+  "problems": 1
+ },
+ "sound": {
+  "builder": "cut off"
+ },
+ "spiral-stair": {
+  "builder": "cut off"
+ },
+ "the-look": {
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 56,
+  "verdict": null,
+  "check": "not run"
+ },
+ "turtle": {
+  "builder": "not started"
+ },
+ "walker": {
+  "builder": "not started"
+ },
+ "your-hall": {
+  "builder": "not started"
+ }
+}

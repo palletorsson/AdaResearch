@@ -344,7 +344,7 @@ Take out the two lines with `limit`. The turn goes on: at value 1 the chain wind
 
 Repair the first try another way: `plane.reparent(point)` in place of `point.add_child(plane)`, and so for the other two. The root had 1 child, and the plane's pivot read (0.6, −0.055, 0) from its new parent without having moved in the room.
 
-Use your own walk: copy your `my_plane.tres` over `parts/walk.tres`, print the plane's `get_aabb()`, and set `walk_middle` to P plus half of S. A square walk of 1.2 m gave us (1.35, 1.12, 0.6), and its middle fell on the pivot.
+Use your own walk: open `plane.tscn`, add `ResourceSaver.save($Face.mesh, "res://parts/walk.tres")` at the end of `build_face()` in `plane.gd`, run that scene with F6 *(editor)*, walk a loop, press Enter and F, and take the line out again. Then print the plane's `get_aabb()`, and set `walk_middle` to P plus half of S. A square walk of 1.2 m gave us (1.35, 1.12, 0.6), and its middle fell on the pivot.
 
 Misspell a path: `load("res://parts/kube_part.tscn").instantiate()`. We got `Cannot open file 'res://parts/kube_part.tscn'.` and then `Attempt to call function 'instantiate' in base 'null instance' on a null instance.` With `preload()` in place of `load()` the same slip is found before the study starts: `Preload file "res://parts/kube_part.tscn" does not exist.`
 
@@ -360,24 +360,70 @@ point → + plane → + cube → + limb → pivots set → a chain → every piv
 
 `sheet.gd` makes the strip, and counts what each step claims. The root has 1, 2, 3, 4, 4, 1, 1 children, and 1, 4, 7, 21, 25, 25, 25 nodes below it. Two steps changed the picture most, and almost equally: setting the pivots, which brought the plane down from where it was walked (14.30% of the tile), and the turn (14.34%). One step changed the tree most and the picture not at all: *a chain* differs from *pivots set* on 0.00% of the tile. That tile is the chapter's claim.
 
+## The plate, now
+
+The course opened on a plate of nine shells, and every part of the course ends on one question: what of the plate can you make now? This part's answer: the joints as parts under one root: head, chest, belly. And Thompson's move: shift the points of one profile and the helmet becomes the flask.
+
+A shell on the plate swells and pinches along one axis. Take each swelling as a part: the point part three times, each on a pivot of its own, one above the other. For one run, replace `_ready()` in `body.gd` with this:
+
+```gdscript
+func _ready() -> void:
+	var head := add_part("point", self, Vector3(0, 0.95, 0), Vector3.ZERO)
+	var chest := add_part("point", self, Vector3(0, 0.68, 0), Vector3.ZERO)
+	var belly := add_part("point", self, Vector3(0, 0.33, 0), Vector3.ZERO)
+	head.get_child(0).scale = Vector3(1.6, 1.6, 1.6)
+	chest.get_child(0).scale = Vector3(3.2, 3.2, 3.2)
+	belly.get_child(0).scale = Vector3(4.4, 4.4, 4.4)
+	print(get_child_count(), " joints under one root")
+```
+
+Run it and hold V. The output reads `3 joints under one root`. Seen from below, three pale balls stand on one another as one outline: a head, a chest and a belly, 1.07 m high and 0.66 m across at the belly. `get_child(0)` is a node's first child: here the part under its pivot. We scale the part, the leaf, and not the pivot. The pivots still turn in the first second, and a ball turned on its own axis looks the same. From the study's own camera the three run together into one white shape, and the shadow on the floor draws the outline.
+
+Each joint is one point of the shell's profile: how high its pivot stands, and how wide its part is. Thompson's move keeps the body and shifts those points. Change the numbers:
+
+```gdscript
+func _ready() -> void:
+	var head := add_part("point", self, Vector3(0, 1.36, 0), Vector3.ZERO)
+	var chest := add_part("point", self, Vector3(0, 1.0, 0), Vector3.ZERO)
+	var belly := add_part("point", self, Vector3(0, 0.36, 0), Vector3.ZERO)
+	head.get_child(0).scale = Vector3(1.2, 1.2, 1.2)
+	chest.get_child(0).scale = Vector3(1.4, 4.4, 1.4)
+	belly.get_child(0).scale = Vector3(4.8, 4.8, 4.8)
+	print(get_child_count(), " joints under one root")
+```
+
+Run it and hold V. The same three parts under the same root, and another shell: a belly 0.72 m across, a neck 0.66 m long and 0.21 m wide, a small head on top, 1.45 m high. The head stands in front of the Record's text. The helmet became the flask, and no line of the tree changed.
+
+We ran both. What this is not: a wall, a pore, or a line turned round its axis. Three balls are the joints and nothing more. Put back the `_ready()` of *The argument*.
+
 ## In your room
 
 Your room's first assemblage: at least three parts of different origin under one root.
 
-Copy `room.tscn`, `room.gd` and `my_plane.tres` from your Organism folder into this one. One part made in code is already there: your cube, with its joint and its arm. Draw one by hand: a new scene with one `MeshInstance3D` named `Ring`, its mesh a new `TorusMesh` with an inner radius of 0.12 and an outer radius of 0.2, saved as `my_ring.tscn` *(editor)*. Carry one in: ask a classmate for a part scene of theirs, with the scripts it names, and copy the files into your folder. If you work alone, `parts/limb_part.tscn` can stand in. At the end of `_ready()` in `room.gd`, add:
+The kit's guest is that assemblage, begun: the folder `guests/body-of-parts/`, with the scene `body-of-parts.tscn`, the script `body_of_parts.gd` and the four parts beside them. Copy the folder `guests/body-of-parts/` from your copy of this kit into the `guests/` folder of your room project. Open the room's `room.gd` and add one line to `GUESTS`, under the last one:
 
 ```gdscript
-	var ring: Node3D = load("res://my_ring.tscn").instantiate()
-	$Cube.add_child(ring)
-	ring.position = Vector3(0, 0.37, 0)
-	var guest: Node3D = load("res://parts/limb_part.tscn").instantiate()
-	$Cube/Joint.add_child(guest)
-	guest.position = Vector3(0, 0, 0.3)
+	"res://guests/body-of-parts/body-of-parts.tscn",
 ```
 
-Run `room.tscn`. We made the same room by writing its files. The ring lies on the cube. The guest hangs from the end of the arm and sweeps with it: in one second its toe went from (1.05, 1.53, 1.8) to (1.73, 1.53, 1.59), and the ring did not move. We hung the guest from `Joint` and not from `Arm`: the arm is a stretched leaf.
+Run the room and walk to it. In our copy of the room the Output read `My room: place 2 is res://guests/body-of-parts/body-of-parts.tscn`. A cyan plate, a lime cube, an orange limb and a pale point stand on the dark square, each part in one colour, and in the first second each turns 30 degrees on its own spot. The walker, sent at it from the aisle, stepped up onto the body and arrived, 0.05 m from the middle of the place, its feet at 0.29 m.
 
-Here the cube is the root. Is that your choice? Make it one. Write one line in your README saying why that part commands. Hand in your room with its process strip: one still after each part you added, in order, with the operation named under it.
+`body_of_parts.gd` is the script under *One function, four parts*, with the turn of the argument. Three things differ: the parts are read from the guest's own folder, the pivots stand closer together, so that the body fits on one place, and a supplied `paint()` gives each part its colour. Every pivot is the root's child.
+
+Now make it yours, in your room's `guests/body-of-parts/body_of_parts.gd`. One part made in code is already there, the cube. Draw one by hand: a new scene with one `MeshInstance3D` named `Ring`, its mesh a new `TorusMesh` with an inner radius of 0.12 and an outer radius of 0.2, saved as `guests/body-of-parts/ring_part.tscn` *(editor)*. Carry one in: ask a classmate for the ring they drew, which is one file and names no other, copy it into the same folder as `gift_part.tscn`, and add it with a line of its own, `add_part("gift", …)`. If you work alone, the limb is the part carried in: it came from the Organism. Then say who commands. Replace `_ready()` with this:
+
+```gdscript
+func _ready() -> void:
+	add_part("point", self, point_at, Vector3.ZERO)
+	add_part("plane", self, plane_at, walk_middle)
+	var cube := add_part("cube", self, cube_at, Vector3.ZERO)
+	add_part("limb", cube, limb_at, Vector3.ZERO)
+	add_part("ring", cube, cube_at + Vector3(0.0, 0.29, 0.0), Vector3.ZERO)
+```
+
+Run the room. We made the same guest by writing its files. The ring lies on the cube, in the pale colour of a part that has no line in `COLOURS`. The limb hangs from the cube's front face and is turned twice, by the cube's pivot and by its own: in one second its toe went from (−0.2, 0.12, 0.7) to (0.70, 0.12, 0.22), counted from the guest's root, where the flat body left it at (0.25, 0.12, 0.58). The ring did not move. The root has three children, and 27 nodes below it.
+
+Here the cube commands the limb and the ring. Is that your choice? Make it one. Write one line at the top of `body_of_parts.gd`, as a comment, saying why that part commands. Hand in your room with its process strip: one still after each part you added, in order, with the operation named under it.
 
 ## What we borrowed
 
@@ -386,7 +432,7 @@ Here the cube is the root. Is that your choice? Make it one. Write one line in y
 | `plane.tscn` and all it inherits | Point Plane | Inherited. The root runs `plane.gd` unchanged. |
 | `cube.gd` | Point Cube | Ours, unchanged. It runs on the cube part: four times in this body. |
 | `parts/cube_part.tscn`, `parts/limb_part.tscn`, `parts/point_part.tscn` | Saved from our own studies | Use: `load()`, `instantiate()`, `add_child()`. |
-| `parts/plane_part.tscn`, `parts/walk.tres` | Supplied here | Use: a saved walk as a mesh. Put your own `my_plane.tres` in its place and print its `get_aabb()`. |
+| `parts/plane_part.tscn`, `parts/walk.tres` | Supplied here | Use: a saved walk as a mesh. Save a walk of your own in its place and print its `get_aabb()`. |
 | `parts/plane_part.gd` | Supplied here | Use: it makes the plane's body from its mesh, with the three lines of Plane's room. |
 | `get_aabb()`, `print_tree_pretty()` | Godot | Use: the box around a mesh in the node's own numbers; a node and all below it, printed. |
 | `sheet.gd` | Supplied here | Use: it renders the four values of `parenting` in three poses, measures them, and makes the process strip. |

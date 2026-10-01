@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://cabinet.gd" id="Cabinet"]
+[ext_resource type="Script" path="res://supplied/sweep_sheet.gd" id="Sweep"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+[ext_resource type="Script" path="res://place.gd" id="Place"]
+
+[sub_resource type="PlaneMesh" id="PaperMesh"]
+size = Vector2(6.2, 2.0)
+
+[sub_resource type="PlaneMesh" id="PlaceMesh"]
+size = Vector2(1.6, 1.6)
+
+[node name="Cabinet" instance=ExtResource("Base")]
+script = ExtResource("Cabinet")
+
+[node name="Sheet" type="Node3D" parent="."]
+position = Vector3(-2.4, 0, -1.5)
+script = ExtResource("Sweep")
+
+[node name="Paper" type="MeshInstance3D" parent="Sheet"]
+position = Vector3(2.4, 0.005, 0.25)
+mesh = SubResource("PaperMesh")
+
+[node name="Place" type="MeshInstance3D" parent="."]
+position = Vector3(2.2, 0.005, 1.0)
+mesh = SubResource("PlaceMesh")
+script = ExtResource("Place")
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(-2.2, 0, 1.2)

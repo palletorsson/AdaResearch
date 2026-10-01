@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://guests/chessboard/floor.gd" id="Guest"]
+
+[node name="Chessboard" type="Node3D"]
+
+[node name="Floor" type="Node3D" parent="."]
+position = Vector3(-0.45, 0, -0.45)
+script = ExtResource("Guest")

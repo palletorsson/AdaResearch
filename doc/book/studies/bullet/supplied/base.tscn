@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://supplied/base_look.gd" id="BaseLook"]
+
+[sub_resource type="PlaneMesh" id="FloorMesh"]
+size = Vector2(8, 5)
+
+[sub_resource type="BoxShape3D" id="FloorCollision"]
+size = Vector3(8, 0.1, 5)
+
+[node name="Base" type="Node3D"]
+
+[node name="Look" type="Node3D" parent="."]
+script = ExtResource("BaseLook")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("FloorMesh")
+
+[node name="FloorBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorBody"]
+position = Vector3(0, -0.05, 0)
+shape = SubResource("FloorCollision")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+position = Vector3(0, 2.0, 4.7)
+rotation = Vector3(-0.18, 0, 0)
+current = true
+fov = 48.0

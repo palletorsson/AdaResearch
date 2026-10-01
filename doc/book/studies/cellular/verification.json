@@ -1,0 +1,420 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Rules in time",
+      "passed": true
+    },
+    {
+      "name": "its main scene is cellular.tscn",
+      "passed": true
+    },
+    {
+      "name": "no script of the kit declares a class_name: []",
+      "passed": true
+    },
+    {
+      "name": "every script is indented with tabs: []",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the base's 15 files: 15",
+      "passed": true
+    },
+    {
+      "name": "(90 >> index) & 1 gives rule 90's eight answers, for 000 to 111: [0, 1, 0, 1, 1, 0, 1, 0]",
+      "passed": true
+    },
+    {
+      "name": "rule 30: the 11 rows it printed are the rule's rows from one live cell",
+      "passed": true
+    },
+    {
+      "name": "rule 30: its colliders cover the same cells, row for row",
+      "passed": true
+    },
+    {
+      "name": "rule 30: 11 rows, and one tile for each of the 69 live cells: 69",
+      "passed": true
+    },
+    {
+      "name": "rule 30 run twice gives the same rows: nothing in it is drawn by chance",
+      "passed": true
+    },
+    {
+      "name": "rule 90: the 11 rows it printed are the rule's rows from one live cell",
+      "passed": true
+    },
+    {
+      "name": "rule 90: its colliders cover the same cells, row for row",
+      "passed": true
+    },
+    {
+      "name": "rule 90: 11 rows, and one tile for each of the 37 live cells: 37",
+      "passed": true
+    },
+    {
+      "name": "rule 90 from one cell reads the same from either end: 0 cells unlike their mirror",
+      "passed": true
+    },
+    {
+      "name": "now and next are two buffers: writing one leaves the other as it was",
+      "passed": true
+    },
+    {
+      "name": "as a ring, the cell before the first is the last and the cell after the last is the first",
+      "passed": true
+    },
+    {
+      "name": "rule 110: the 11 rows it printed are the rule's rows from one live cell",
+      "passed": true
+    },
+    {
+      "name": "rule 110: its colliders cover the same cells, row for row",
+      "passed": true
+    },
+    {
+      "name": "rule 110: 11 rows, and one tile for each of the 47 live cells: 47",
+      "passed": true
+    },
+    {
+      "name": "rule 250: the 11 rows it printed are the rule's rows from one live cell",
+      "passed": true
+    },
+    {
+      "name": "rule 250: its colliders cover the same cells, row for row",
+      "passed": true
+    },
+    {
+      "name": "rule 250: 11 rows, and one tile for each of the 66 live cells: 66",
+      "passed": true
+    },
+    {
+      "name": "rule 30 with ring unticked: beyond an end is dead, and 2 cells differ from the ring",
+      "passed": true
+    },
+    {
+      "name": "rule 90 with ring unticked: beyond an end is dead, and 6 cells differ from the ring",
+      "passed": true
+    },
+    {
+      "name": "rule 90: the two floors agree up to row 8 and part at row 9, on 6 cells in all: 6",
+      "passed": true
+    },
+    {
+      "name": "with ring unticked, cell_at() answers 0 outside the row",
+      "passed": true
+    },
+    {
+      "name": "rule 110 with ring unticked: beyond an end is dead, and 3 cells differ from the ring",
+      "passed": true
+    },
+    {
+      "name": "rule 250 with ring unticked: beyond an end is dead, and 4 cells differ from the ring",
+      "passed": true
+    },
+    {
+      "name": "with one buffer for both names, rule 90 gives the rows of a rule that reads its own new cells",
+      "passed": true
+    },
+    {
+      "name": "its second row is ten cells, from one left of the seed to the right end: [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+      "passed": true
+    },
+    {
+      "name": "the floor leans (72 cells unlike their mirror) and Godot logged nothing: []",
+      "passed": true
+    },
+    {
+      "name": "cellular.tscn starts with one row laid, and a pace of 0.25 s: 1 rows",
+      "passed": true
+    },
+    {
+      "name": "as shipped it is rule 90 on a ring: 17 cells, 11 rows, cells of 0.4 m, a rise of 0.15 m",
+      "passed": true
+    },
+    {
+      "name": "the rows arrive one at a time: all 11 after 2.50 s of the scene's time",
+      "passed": true
+    },
+    {
+      "name": "after one second about five rows are laid: 5",
+      "passed": true
+    },
+    {
+      "name": "and then it stops: still 11 rows a second later",
+      "passed": true
+    },
+    {
+      "name": "row t stands t x 0.15 m up and t x 0.4 m back",
+      "passed": true
+    },
+    {
+      "name": "each row is one StaticBody3D: 11",
+      "passed": true
+    },
+    {
+      "name": "rule 90: one box for each run of live cells, 33 boxes for 37 tiles",
+      "passed": true
+    },
+    {
+      "name": "every box is one cell deep and as thick as a tile",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped on the seed rests on it, its middle at 0.25 m: 0.248",
+      "passed": true
+    },
+    {
+      "name": "dropped over the middle of row 4, where rule 90 has no cell, it falls to the ground: 0.098",
+      "passed": true
+    },
+    {
+      "name": "the same drop on rule 250, which has a cell there: it rests on the tile, its middle at 0.85 m: 0.848",
+      "passed": true
+    },
+    {
+      "name": "rule 30, up the middle: it climbed to 0.90 m, the top of row 5, fell through to the ground under row 7 and was stopped there, \"blocked\", its feet at 0.00 m",
+      "passed": true
+    },
+    {
+      "name": "rule 90, up the middle: stopped on the seed, \"blocked\", its feet at 0.15 m over row 0",
+      "passed": true
+    },
+    {
+      "name": "rule 110, up the middle: \"arrived\" on the last row, its feet at 1.65 m",
+      "passed": true
+    },
+    {
+      "name": "rule 250, up the middle: stopped on the seed, \"blocked\", its feet at 0.15 m over row 0",
+      "passed": true
+    },
+    {
+      "name": "by the keys, from the front left: D for 36 steps brings it before the seed (x -0.03), then W puts it on the seed and no further: its feet at 0.15 m, z 1.67",
+      "passed": true
+    },
+    {
+      "name": "rule 90 by its left edge, a cell to the left for each row: \"arrived\" on row 8, its feet at 1.46 m",
+      "passed": true
+    },
+    {
+      "name": "rule 90 with its colliders taken away: the walker goes through every tile on the ground, \"arrived\", its feet at 0.00 m",
+      "passed": true
+    },
+    {
+      "name": "the pool has four buffers of 576 numbers",
+      "passed": true
+    },
+    {
+      "name": "it starts full of A, with B in 16 cells in the middle",
+      "passed": true
+    },
+    {
+      "name": "with pace 0 it waits: no step taken",
+      "passed": true
+    },
+    {
+      "name": "step() reads a and b and writes a_next and b_next: writing a_next leaves a as it was",
+      "passed": true
+    },
+    {
+      "name": "after 1000 steps the most B in a cell is 0.420, and 360 of 576 cells hold a tenth or more",
+      "passed": true
+    },
+    {
+      "name": "show_b() hands the collider one height for each cell: B x 0.6 m, and nothing under a tenth",
+      "passed": true
+    },
+    {
+      "name": "a second pool, 1000 steps on, holds the same numbers: nothing in it is drawn by chance",
+      "passed": true
+    },
+    {
+      "name": "a walker standing on the seed, 0.60 m up, is on the ground 604 steps later without having walked: its feet at 0.00 m, 0.86 m at the highest",
+      "passed": true
+    },
+    {
+      "name": "then it walks out over the wall the pool has grown: \"arrived\", its feet 0.22 m up on the way",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "the guest's script is cellular.gd with its one colour written out, and nothing else changed",
+      "passed": true
+    },
+    {
+      "name": "the guest is rule 90, 17 rows of cells 0.09 m wide, a row every 0.8 s",
+      "passed": true
+    },
+    {
+      "name": "in the room it starts with one row: 1",
+      "passed": true
+    },
+    {
+      "name": "and grows over time: 3 rows after two seconds",
+      "passed": true
+    },
+    {
+      "name": "full grown it stands on the ground and fits the place: 1.53 m wide, 1.53 m deep, 0.68 m high",
+      "passed": true
+    },
+    {
+      "name": "a walker sent to its middle: \"arrived\", its feet at 0.32 m",
+      "passed": true
+    },
+    {
+      "name": "cellular.tscn ran 180 frames and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "diffusion.tscn ran 180 frames and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "the whole run logged no error and no warning: [] []",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 70,
+  "godot": "4.6-stable (official)",
+  "kit": "Rules in time",
+  "measured": {
+    "ends": {
+      "110": 3,
+      "250": 4,
+      "30": 2,
+      "90": 6
+    },
+    "guest_box_m": [
+      1.53,
+      0.68,
+      1.53
+    ],
+    "marble_over_row_4_m": {
+      "rule 250": 0.85,
+      "rule 90": 0.1
+    },
+    "one_buffer": {
+      "cells_unlike_their_mirror": 72,
+      "tiles": 68,
+      "tiles_with_two_buffers": 37
+    },
+    "pool_after_1000_steps": {
+      "cells_shown": 360,
+      "highest_m": 0.25,
+      "mean_b": 0.1864,
+      "most_b": 0.42
+    },
+    "pool_most_b_after_one_step": 1.883,
+    "room_trial_recorded_by_hand": {
+      "rule 30": {
+        "feet_at_m": 0.32,
+        "metres_from_the_middle_of_the_place": 0.08,
+        "place": 2,
+        "walk_ended": "arrived"
+      },
+      "rule 90": {
+        "feet_at_m": 0.32,
+        "metres_from_the_middle_of_the_place": 0.08,
+        "place": 2,
+        "walk_ended": "arrived"
+      }
+    },
+    "rule_30_middle_column": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0
+    ],
+    "rules": {
+      "110": {
+        "cells_unlike_their_mirror": 64,
+        "colliders": 22,
+        "tiles": 47
+      },
+      "250": {
+        "cells_unlike_their_mirror": 0,
+        "colliders": 60,
+        "tiles": 66
+      },
+      "30": {
+        "cells_unlike_their_mirror": 48,
+        "colliders": 31,
+        "tiles": 69
+      },
+      "90": {
+        "cells_unlike_their_mirror": 0,
+        "colliders": 33,
+        "tiles": 37
+      }
+    },
+    "seconds_to_lay_all_rows": 2.5,
+    "standing_on_the_pool": {
+      "feet_after_600_steps_m": 0.0,
+      "feet_at_start_m": 0.6,
+      "highest_m": 0.86,
+      "moved_sideways_m": 0.05
+    },
+    "walker_at_the_guest": {
+      "ended": "arrived",
+      "feet_at_m": 0.32
+    },
+    "walking_out_of_the_pool": {
+      "ended": "arrived",
+      "highest_m": 0.22
+    },
+    "walks": {
+      "rule 110, up the middle": {
+        "ended": "arrived",
+        "feet_at_m": 1.65,
+        "highest_m": 1.65,
+        "over_row": 10
+      },
+      "rule 250, up the middle": {
+        "ended": "blocked",
+        "feet_at_m": 0.15,
+        "highest_m": 0.15,
+        "over_row": 0
+      },
+      "rule 30, up the middle": {
+        "ended": "blocked",
+        "feet_at_m": 0.0,
+        "highest_m": 0.9,
+        "over_row": 7
+      },
+      "rule 90, by the keys": {
+        "feet_at_m": 0.15,
+        "z": 1.67
+      },
+      "rule 90, no colliders": {
+        "ended": "arrived",
+        "feet_at_m": 0.0
+      },
+      "rule 90, the left edge": {
+        "ended": "arrived",
+        "feet_at_m": 1.46
+      },
+      "rule 90, up the middle": {
+        "ended": "blocked",
+        "feet_at_m": 0.15,
+        "highest_m": 0.15,
+        "over_row": 0
+      }
+    }
+  },
+  "passed": true
+}

@@ -1,0 +1,416 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Genome, its main scene is cabinet.tscn, its renderer Compatibility",
+      "passed": true
+    },
+    {
+      "name": "the Input Map has the base's nine actions on their keys; pause, on Space, is the one this kit listens to",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the base's 15 files, each byte for byte the file in ../kit-base/supplied: changed []",
+      "passed": true
+    },
+    {
+      "name": "no script declares a class_name and the project lists no named class, so nothing needs an import: []",
+      "passed": true
+    },
+    {
+      "name": "every script is indented with tabs: []",
+      "passed": true
+    },
+    {
+      "name": "the kit's own files are there: the cabinet, the place, the four files of the guest, the lesson, the README and the field note: missing []",
+      "passed": true
+    },
+    {
+      "name": "genes.gd is a Resource and no node, with five exported genes: [\"segments\", \"limb_count\", \"limb_angle\", \"colour\", \"body_seed\"]",
+      "passed": true
+    },
+    {
+      "name": "a new genome is 3 segments, 4 limbs raised 25 degrees, body_seed 1: two whole numbers, a decimal one and a whole one",
+      "passed": true
+    },
+    {
+      "name": "its colour gene starts as the look's BODY, written out: #c6ff3d",
+      "passed": true
+    },
+    {
+      "name": "mutate(\"limb_count\", 6) sets the gene and sends `changed` once: 6, heard 1",
+      "passed": true
+    },
+    {
+      "name": "mutate() with a name the genome does not have changes nothing and Godot says nothing: limb_count is still 6, get(\"limbs\") is <null>",
+      "passed": true
+    },
+    {
+      "name": "handed 2.0 the gene holds the whole number 2; handed the text \"12\" it holds 12: set() converts in silence",
+      "passed": true
+    },
+    {
+      "name": "a second Genes.new() is another genome: it still has 4 limbs",
+      "passed": true
+    },
+    {
+      "name": "genome.tscn: a Node3D named Creature with Parts for what is built, and Trunk, a StaticBody3D with a cylinder of 0.2 m radius and 0.8 m height",
+      "passed": true
+    },
+    {
+      "name": "a new genome builds 7 parts: 3 balls and 4 limbs",
+      "passed": true
+    },
+    {
+      "name": "every part wears the colour gene as the look paints: roughness 0.8, no metal",
+      "passed": true
+    },
+    {
+      "name": "it stands on the ground at its own origin: lowest point 0.000 m, 0.88 m high",
+      "passed": true
+    },
+    {
+      "name": "mutate() rebuilds the body at once, nobody calls build(): 0, 2, 4, 6 and 12 limbs give [3, 5, 7, 9, 15] parts",
+      "passed": true
+    },
+    {
+      "name": "six limbs stand evenly around the lowest ball, 60 degrees apart, each raised 25.0 degrees, its middle 0.4 m from the ball's",
+      "passed": true
+    },
+    {
+      "name": "limb_angle raises the limbs: the first limb's tip is [0.209, 0.483, 0.772] m high at 0, 25 and 60 degrees",
+      "passed": true
+    },
+    {
+      "name": "at its widest, 12 limbs lying flat, it is 1.30 m wide and 1.30 m deep: inside the 1.6 m of a place",
+      "passed": true
+    },
+    {
+      "name": "body_seed 1 gives the same three balls every time, [0.2088, 0.1642, 0.1412] m; body_seed 2 gives others, [0.2334, 0.177, 0.1287] m",
+      "passed": true
+    },
+    {
+      "name": "segments 1 builds 1 ball(s): the body is 0.53 m high",
+      "passed": true
+    },
+    {
+      "name": "segments 5 builds 5 ball(s): the body is 1.20 m high",
+      "passed": true
+    },
+    {
+      "name": "a genome that asks for -3 limbs gets a body with none, and Godot says nothing",
+      "passed": true
+    },
+    {
+      "name": "ResourceSaver.save() returns OK and the file is there; the genome we hold does not take the file's path",
+      "passed": true
+    },
+    {
+      "name": "the file is seven lines of text: it names its script by path, res://guests/genome/genes.gd, and holds `limb_count = 6`",
+      "passed": true
+    },
+    {
+      "name": "it holds no line for the four genes that still have the script's default value",
+      "passed": true
+    },
+    {
+      "name": "a genome with every gene at its default is saved as six lines with no gene in them",
+      "passed": true
+    },
+    {
+      "name": "load() gives a genome back, another object with the same five genes: 6 limbs",
+      "passed": true
+    },
+    {
+      "name": "load() of the same path a second time hands out the SAME object, not a second one",
+      "passed": true
+    },
+    {
+      "name": "after another genome is saved to that path, load() still hands out the remembered one (6 limbs) while it is in use; read past the loader's memory, the file says 12",
+      "passed": true
+    },
+    {
+      "name": "a file with a gene the script does not name, `wings = 2`, loads without it and Godot says nothing",
+      "passed": true
+    },
+    {
+      "name": "`limb_count = \"six\"` in a file loads as 0 and `limb_count = 3.5` as 3, in silence",
+      "passed": true
+    },
+    {
+      "name": "a file that names a script which is not at that path does not load: null, and Godot names the path (6 error lines)",
+      "passed": true
+    },
+    {
+      "name": "load() of a file that is not there gives null and two error lines; the first: ERROR: Cannot open file 'user://verify_no_such_file.tres'.",
+      "passed": true
+    },
+    {
+      "name": "a recall() that does not ask exists() first, with no file: the two lines above, and then the script stops: SCRIPT ERROR: Invalid access to property or key 'limb_count' on a base object of type 'null instance'. (gdscript://-9223371996321020382.gd:5)",
+      "passed": true
+    },
+    {
+      "name": "a file with no gene in it has 4 limbs under our script and 8 under a copy of the script whose default is 8: the default is not in the file",
+      "passed": true
+    },
+    {
+      "name": "save() under a name ending in .txt returns 15 (File unrecognized), writes nothing and logs nothing: only the returned number says so",
+      "passed": true
+    },
+    {
+      "name": "the planted fault: five bodies handed ONE genome stand under the plates [\"0\", \"2\", \"4\", \"6\", \"12\"], each built of [15, 15, 15, 15, 15] parts, each reading [12, 12, 12, 12, 12] limbs",
+      "passed": true
+    },
+    {
+      "name": "and Godot says nothing about it: no error, no warning, no line",
+      "passed": true
+    },
+    {
+      "name": "the repair: each body gets parent.duplicate(true), and the five are built of [3, 5, 7, 9, 15] parts; the parent still has 4 limbs",
+      "passed": true
+    },
+    {
+      "name": "duplicate() is enough for five plain genes; for a resource that holds a resource and a list, duplicate() leaves both shared and duplicate(true) copies both",
+      "passed": true
+    },
+    {
+      "name": "the same sharing, in the scene file: the five creatures have ONE collision shape; set to 2 m on the first it reads 2.0 m on the fifth",
+      "passed": true
+    },
+    {
+      "name": "cabinet.tscn runs 180 frames with no file to recall and Godot logs no error: []",
+      "passed": true
+    },
+    {
+      "name": "it prints what it found and what it built: [\"no file yet: a new genome\", \"limb_count 0: 3 parts\", \"limb_count 2: 5 parts\", \"limb_count 4: 7 parts\", \"limb_count 6: 9 parts\", \"limb_count 12: 15 parts\"]",
+      "passed": true
+    },
+    {
+      "name": "five creatures stand on the sheet 1.2 m apart, under the plates [\"0\", \"2\", \"4\", \"6\", \"12\"]",
+      "passed": true
+    },
+    {
+      "name": "each of the five has a genome of its own, and none has the specimen's",
+      "passed": true
+    },
+    {
+      "name": "the specimen stands on the place, a square in SHADE: with no file it is the new genome, 4 limbs",
+      "passed": true
+    },
+    {
+      "name": "the cabinet's axis is limb_count and its values 0, 2, 4, 6, 12, both exported",
+      "passed": true
+    },
+    {
+      "name": "the walker walks to the front of the creature with six limbs: \"arrived\"",
+      "passed": true
+    },
+    {
+      "name": "Space keeps the nearest: [\"kept 6 limbs in C:/Users/palle/AppData/Roaming/Godot/app_userdata/Genome/specimen.tres: OK\"]",
+      "passed": true
+    },
+    {
+      "name": "the specimen on the place now has six limbs, and the file says `limb_count = 6`",
+      "passed": true
+    },
+    {
+      "name": "the specimen is a copy: the creature it came from is changed to three limbs and the specimen keeps its six",
+      "passed": true
+    },
+    {
+      "name": "walked at the specimen, the walker is stopped by its trunk: \"blocked\", 0.50 m from its middle",
+      "passed": true
+    },
+    {
+      "name": "walked past the trunk and through a limb, it is not stopped: \"arrived\"; a limb is a mesh with no collider",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped over the trunk rests at 0.90 m, on the collider's flat top; dropped over a limb it falls through to the floor, 0.10 m",
+      "passed": true
+    },
+    {
+      "name": "no gene touches the trunk's cylinder: a specimen of one ball, 0.53 m high, and one of five, 1.2 m, stop the walker 0.5 m from the middle, and the marble rests at 0.9 m over both",
+      "passed": true
+    },
+    {
+      "name": "the row saved as five files: [7, 7, 6, 7, 7] lines; the child with 4 limbs, the default, is the one with no gene line",
+      "passed": true
+    },
+    {
+      "name": "after a restart the specimen comes back: a second Godot, started on this project, prints `recalled 6 limbs`",
+      "passed": true
+    },
+    {
+      "name": "the cabinet built again finds the file: the specimen has six limbs and the row is bred from it",
+      "passed": true
+    },
+    {
+      "name": "with axis set to limb_angle and four values the row is four children of the six-limbed specimen, raised [\"0.0\", \"25.0\", \"50.0\", \"75.0\"]",
+      "passed": true
+    },
+    {
+      "name": "a classmate's file, written by hand (5 segments, limbs raised 60 degrees, body_seed 7): `recalled 4 limbs`, and the row is five children of it, each of 5 balls",
+      "passed": true
+    },
+    {
+      "name": "the file the cabinet had before these checks is back in its place (or there was none)",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "the guest's folder holds four files: [\"creature.gd\", \"genes.gd\", \"genome.tscn\", \"specimen.tres\"]",
+      "passed": true
+    },
+    {
+      "name": "its specimen.tres names one path, the genes script in the same folder",
+      "passed": true
+    },
+    {
+      "name": "standing alone, handed no genes, the guest recalls the specimen in its own folder: 6 limbs, 9 parts, 180 frames with no error",
+      "passed": true
+    },
+    {
+      "name": "it stands on the ground over its origin and fits a place: 1.22 m wide, 1.11 m deep, 0.88 m high",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 70,
+  "godot": "4.6-stable (official)",
+  "kit": "Genome",
+  "measured": {
+    "body": {
+      "ball_radii_seed_1_m": [
+        0.2088,
+        0.1642,
+        0.1412
+      ],
+      "ball_radii_seed_2_m": [
+        0.2334,
+        0.177,
+        0.1287
+      ],
+      "first_limb_tip_height_at_0_25_60_degrees_m": [
+        0.209,
+        0.483,
+        0.772
+      ],
+      "height_at_1_and_5_segments_m": [
+        0.53,
+        1.2
+      ],
+      "height_m": 0.879,
+      "widest_m": [
+        1.3,
+        1.3
+      ]
+    },
+    "family_files_lines": [
+      7,
+      7,
+      6,
+      7,
+      7
+    ],
+    "files": {
+      "a_file_whose_script_is_not_there": [
+        "ERROR: Attempt to open script 'res://genes.gd' resulted in error 'File not found'.",
+        "ERROR: Failed loading resource: res://genes.gd.",
+        "ERROR: user://verify_trial.tres:6 - Parse Error: [ext_resource] referenced non-existent resource at: res://genes.gd.",
+        "ERROR: user://verify_trial.tres:6 - Parse Error: [ext_resource] referenced non-existent resource at: res://genes.gd.",
+        "ERROR: Failed loading resource: user://verify_trial.tres.",
+        "ERROR: Error loading resource: 'user://verify_trial.tres'."
+      ],
+      "default_genome_file_text": "[gd_resource type=\"Resource\" format=3]\n\n[ext_resource type=\"Script\" path=\"res://guests/genome/genes.gd\" id=\"1_ljokc\"]\n\n[resource]\nscript = ExtResource(\"1_ljokc\")\n",
+      "genome_file_text": "[gd_resource type=\"Resource\" format=3]\n\n[ext_resource type=\"Script\" path=\"res://guests/genome/genes.gd\" id=\"1_ljokc\"]\n\n[resource]\nscript = ExtResource(\"1_ljokc\")\nlimb_count = 6\n",
+      "load_after_a_second_save_says_limbs": 6,
+      "recall_without_exists": [
+        "ERROR: Cannot open file 'user://verify_no_such_file.tres'.",
+        "ERROR: Failed loading resource: user://verify_no_such_file.tres.",
+        "SCRIPT ERROR: Invalid access to property or key 'limb_count' on a base object of type 'null instance'. (gdscript://-9223371996321020382.gd:5)"
+      ],
+      "the_file_says_limbs": 12
+    },
+    "genes": {
+      "default_colour": "#c6ff3d",
+      "names": [
+        "segments",
+        "limb_count",
+        "limb_angle",
+        "colour",
+        "body_seed"
+      ]
+    },
+    "guest": {
+      "deep_m": 1.11,
+      "high_m": 0.88,
+      "limbs": 6,
+      "parts": 9,
+      "wide_m": 1.22
+    },
+    "place": {
+      "marble_over_a_limb_m": 0.098,
+      "marble_over_the_trunk_m": 0.903,
+      "metres_from_its_middle": 0.5,
+      "one_ball_and_five_balls": {
+        "high_m": [
+          0.53,
+          1.2
+        ],
+        "marble_above_the_top_of_the_one_ball_m": 0.37,
+        "marble_rests_at_m": [
+          0.9,
+          0.9
+        ],
+        "walker_stopped_at_m": [
+          0.5,
+          0.5
+        ]
+      },
+      "walker_at_the_specimen": "blocked",
+      "walker_through_a_limb": "arrived"
+    },
+    "recorded_by_hand": {
+      "a_gene_named_seed": "run with the debugger attached, `@export var seed: int = 1` in genes.gd gave: WARNING: The variable \"seed\" has the same name as a built-in function.",
+      "not_run": "no headset, no hand on a keyboard, no eye on the stills, no exported build",
+      "the_lesson": "every gdscript block of TUTORIAL.md applied in page order to a scratch copy and run after each step: what Godot printed matched the page's output blocks, and the last state equalled the three shipped scripts byte for byte",
+      "the_room": "in a scratch copy of my-room with guests/genome/ copied in and its line added, guest_trial.gd passed 8 of 8: place 2, the walk ended \"blocked\" 0.50 m from the middle of the place; looked at in a second scratch run, the guest had 6 limbs and 9 parts"
+    },
+    "restart": {
+      "second_process_exit_code": 0,
+      "second_process_printed": "recalled 6 limbs"
+    },
+    "sharing": {
+      "parts_with_five_copies": [
+        3,
+        5,
+        7,
+        9,
+        15
+      ],
+      "parts_with_one_genome": [
+        15,
+        15,
+        15,
+        15,
+        15
+      ],
+      "plates": [
+        "0",
+        "2",
+        "4",
+        "6",
+        "12"
+      ]
+    },
+    "supplied_compared_with_the_base": true
+  },
+  "passed": true
+}
