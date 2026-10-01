@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://leg.gd" id="Leg"]
+[ext_resource type="Script" path="res://supplied/segment.gd" id="Line"]
+
+[sub_resource type="SphereMesh" id="MarkMesh"]
+radius = 0.04
+height = 0.08
+
+[node name="Leg" type="Node3D"]
+script = ExtResource("Leg")
+
+[node name="Ray" type="RayCast3D" parent="."]
+
+[node name="Mark" type="MeshInstance3D" parent="."]
+top_level = true
+mesh = SubResource("MarkMesh")
+
+[node name="Beam" type="MeshInstance3D" parent="."]
+top_level = true
+script = ExtResource("Line")

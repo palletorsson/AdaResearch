@@ -1,0 +1,714 @@
+{
+  "checks": [
+    {
+      "name": "the project is Disturbed order and starts with schotter.tscn",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the kit base's 15 parts: []",
+      "passed": true
+    },
+    {
+      "name": "every script of the kit is indented with tabs: []",
+      "passed": true
+    },
+    {
+      "name": "no script of the kit declares a class_name, so a fresh copy needs no import: []",
+      "passed": true
+    },
+    {
+      "name": "the borrowed cube part is a box of 0.5 m with a box collider of 0.5 m and no colour of its own",
+      "passed": true
+    },
+    {
+      "name": "schotter.gd builds 60 cubes: 12 columns of 5",
+      "passed": true
+    },
+    {
+      "name": "every cube is the borrowed part: a mesh with a StaticBody3D and a box shape",
+      "passed": true
+    },
+    {
+      "name": "all 60 share one material, in BODY",
+      "passed": true
+    },
+    {
+      "name": "after the build the generator still holds the seed it was given: 1968",
+      "passed": true
+    },
+    {
+      "name": "it printed `seed 1968, amplitude 20.0: the last cube turned (-5.9, 19.9, 17.2)`: [\"seed 1968, amplitude 20.0: the last cube turned (-5.9, 19.9, 17.2)\", \"PASS schotter.gd builds 60 cubes: 12 columns of 5\", \"PASS every cube is the borrowed part: a mesh with a StaticBody3D and a box shape\", \"PASS all 60 share one material, in BODY\", \"PASS after the build the generator still holds the seed it was given: 1968\"]",
+      "passed": true
+    },
+    {
+      "name": "the first column is in order at amplitude 20: its amount is 0",
+      "passed": true
+    },
+    {
+      "name": "no cube turns or slides further than its column allows, and every middle stays at 0.25 m",
+      "passed": true
+    },
+    {
+      "name": "column 6 is disturbed, and by less than the last: the amount grows with every column (its largest turn about y: 6.4 degrees of 10.9 allowed)",
+      "passed": true
+    },
+    {
+      "name": "the five cubes of the last column are turned five different ways: each cube has draws of its own",
+      "passed": true
+    },
+    {
+      "name": "the colliders follow the cubes: every Body stands and is turned exactly as its mesh",
+      "passed": true
+    },
+    {
+      "name": "the same seed returns the same floor: 60 of 60 cubes stand alike in two builds",
+      "passed": true
+    },
+    {
+      "name": "seed 1969 is another floor",
+      "passed": true
+    },
+    {
+      "name": "build() called again leaves 60 cubes, the same 60: the old ones are freed first",
+      "passed": true
+    },
+    {
+      "name": "at one seed, amplitude 20 turns every cube exactly four times as far as amplitude 5, the same way (largest miss: 0.000000 radians)",
+      "passed": true
+    },
+    {
+      "name": "amplitude 0 is the floor in order, whatever the seed",
+      "passed": true
+    },
+    {
+      "name": "schotter.tscn ran 180 frames with no error, 60 cubes on the floor",
+      "passed": true
+    },
+    {
+      "name": "the scene wears the look: SKY, GROUND and the sun",
+      "passed": true
+    },
+    {
+      "name": "the walker stands on the first column, its feet at 0.50 m",
+      "passed": true
+    },
+    {
+      "name": "Space makes the next floor: seed 1969, 60 cubes, the same floor a fresh build of 1969 gives, and it printed [\"seed 1969, amplitude 20.0: the last cube turned (-8.8, -2.6, -13.8)\"]",
+      "passed": true
+    },
+    {
+      "name": "and the walker still stands on the first column, which is in order under every seed",
+      "passed": true
+    },
+    {
+      "name": "without a seed two builds are two floors, with nothing in the script that asks for it: [\"the last cube turned (18.9, -9.7, 15.3)\", \"the last cube turned (-12.8, 13.1, -2.7)\"]",
+      "passed": true
+    },
+    {
+      "name": "the planted bug compiles: schotter.gd with rng.randomize() under its seed line",
+      "passed": true
+    },
+    {
+      "name": "the planted bug: the generator no longer holds 1968 while seed_value still reads 1968, and two builds are two floors: [\"seed 5231314596287428713, amplitude 20.0: the last cube turned (-1.8, -15.3, 19.1)\", \"seed -8091069983127240109, amplitude 20.0: the last cube turned (14.5, 1.8, 9.7)\"]",
+      "passed": true
+    },
+    {
+      "name": "and Godot logged no error and no warning about it",
+      "passed": true
+    },
+    {
+      "name": "with the seed line in the inner loop the five cubes of a column are turned exactly alike: `seed 1968, amplitude 20.0: the last cube turned (-1.3, -5.8, -10.5)`",
+      "passed": true
+    },
+    {
+      "name": "one unused draw under the seed line and the same seed is another floor, every number moved one place along: `seed 1968, amplitude 20.0: the last cube turned (19.9, 17.2, 4.8)`",
+      "passed": true
+    },
+    {
+      "name": "without float() eleven columns stand in order and the printed line is the same as the right one: `seed 1968, amplitude 20.0: the last cube turned (-5.9, 19.9, 17.2)`",
+      "passed": true
+    },
+    {
+      "name": "seen from above, at 0 and at 5 degrees no cube has a corner over the middle of a gap (at 5 degrees a corner moved at most 0.067 m; the gap is 0.1 m)",
+      "passed": true
+    },
+    {
+      "name": "at 20 degrees 35 of 60 cubes have a corner over the middle of a gap, the first in column 4; at 90 degrees 52, the first in column 1",
+      "passed": true
+    },
+    {
+      "name": "with ten seeds, 1968 to 1977, the first cube puts a corner over the middle of a gap at an amplitude of 5 to 7 degrees, counted in whole degrees: [7, 7, 6, 7, 6, 7, 5, 6, 6, 7]",
+      "passed": true
+    },
+    {
+      "name": "the walker crosses the floor in order on the cubes' tops: \"arrived\" at column 11.1, its feet between 0.50 and 0.50 m",
+      "passed": true
+    },
+    {
+      "name": "at 5 degrees the walker crosses too, and the cubes under it are not level: \"arrived\" at column 11.1, its feet between 0.49 and 0.51 m",
+      "passed": true
+    },
+    {
+      "name": "at 20 degrees the walker crosses too, and the cubes under it are not level: \"arrived\" at column 11.1, its feet between 0.46 and 0.55 m",
+      "passed": true
+    },
+    {
+      "name": "at 90 degrees the walker crosses too, and the cubes under it are not level: \"arrived\" at column 11.1, its feet between 0.38 and 0.68 m",
+      "passed": true
+    },
+    {
+      "name": "8 of 8 walks arrived: the four amplitudes at seed 1968, and 90 degrees at seeds 1969 to 1972. No amplitude made this floor unwalkable for this walker (8 arrived)",
+      "passed": true
+    },
+    {
+      "name": "with the spacing at 0.8 m, gaps of 0.3 m, the walker crosses the floor in order (\"arrived\" at column 10.9, its feet between 0.46 and 0.50 m) and is stopped at 90 degrees (\"blocked\" at column 6.5, its feet between 0.24 and 0.59 m); at 20 degrees: \"arrived\" at column 11.0, its feet between 0.43 and 0.53 m",
+      "passed": true
+    },
+    {
+      "name": "with those gaps, 90 degrees stops the walker under 3 of the 5 seeds 1968 to 1972 and lets it cross under the others: the seed decides",
+      "passed": true
+    },
+    {
+      "name": "a walker that cannot step up (step_height 0) is stopped at 90 degrees under 3 of the 5 seeds 1968 to 1972 and crosses under the others; at 20 degrees, seed 1968: \"arrived\" at column 10.9, its feet between 0.47 and 0.54 m",
+      "passed": true
+    },
+    {
+      "name": "maze.gd builds 24 walls, 6 by 4 cells, and keeps how each leans",
+      "passed": true
+    },
+    {
+      "name": "every wall is turned by one of two angles, 45 or -45 degrees, as its entry in `leans` says",
+      "passed": true
+    },
+    {
+      "name": "every wall has a StaticBody3D",
+      "passed": true
+    },
+    {
+      "name": "seed 1982 is this maze, and it printed `seed 1982: 9 walls lean one way, 15 the other`: [\"/\\\\\\\\\\\\\\\\/\", \"\\\\\\\\/\\\\//\", \"//\\\\/\\\\\\\\\", \"/\\\\\\\\\\\\\\\\\\\\\"]",
+      "passed": true
+    },
+    {
+      "name": "the same seed returns the same maze; seed 1983 is another",
+      "passed": true
+    },
+    {
+      "name": "seed 1982 has 20 openings and 10 corridors, and none of them leads from the west side to the east side",
+      "passed": true
+    },
+    {
+      "name": "4 of its 48 triangles of floor are reached by no corridor: one room with no door",
+      "passed": true
+    },
+    {
+      "name": "maze.tscn ran 180 frames with no error and shows the maze of seed 1982",
+      "passed": true
+    },
+    {
+      "name": "sent straight across, the walker is stopped by the first wall, 0.98 m from where it started",
+      "passed": true
+    },
+    {
+      "name": "led along the longest corridor, in at the west of row 3, the walker comes out at the north of column 1 after 11 cells: \"arrived\"",
+      "passed": true
+    },
+    {
+      "name": "of the 100 seeds 1982 to 2081, 4 give a maze with a corridor from the west side to the east side; the first is 2010",
+      "passed": true
+    },
+    {
+      "name": "the maze of seed 2010 has one corridor from the west side to the east side, and the walker walks it, 16 cells, without one choice to make: \"arrived\"",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "the guest is 25 cubes and says which: `Disturbed order: seed 1968, amplitude 45.0`",
+      "passed": true
+    },
+    {
+      "name": "it fits in a box 1.6 m wide and deep, at amplitude 45 and at 90: no corner is further than 0.706 m from its middle",
+      "passed": true
+    },
+    {
+      "name": "its first column stands in order on the ground; a turned cube dips under it, by 0.070 m at most",
+      "passed": true
+    },
+    {
+      "name": "the same seed returns the same patch",
+      "passed": true
+    },
+    {
+      "name": "seed 2026 is another patch of 25 cubes, and it says so: [\"Disturbed order: seed 2026, amplitude 45.0\"]",
+      "passed": true
+    },
+    {
+      "name": "a walker sent to its middle steps onto it: \"arrived\", its feet at 0.23 m",
+      "passed": true
+    },
+    {
+      "name": "the 5 recovery points in steps/ each build a floor of 60 cubes (5 did)",
+      "passed": true
+    },
+    {
+      "name": "the last recovery point is schotter.gd, byte for byte",
+      "passed": true
+    },
+    {
+      "name": "from the first check to the last Godot logged no error: []",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 66,
+  "godot": "4.6-stable (official)",
+  "kit": "Disturbed order",
+  "measured": {
+    "amplitudes": {
+      "0": {
+        "a_corner_moved_at_most_m": 0.0,
+        "by_column": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "cubes_out_of_their_cell": 0,
+        "first_column_with_one": -1
+      },
+      "20": {
+        "a_corner_moved_at_most_m": 0.269,
+        "by_column": [
+          0,
+          0,
+          0,
+          0,
+          2,
+          3,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "cubes_out_of_their_cell": 35,
+        "first_column_with_one": 4
+      },
+      "5": {
+        "a_corner_moved_at_most_m": 0.067,
+        "by_column": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "cubes_out_of_their_cell": 0,
+        "first_column_with_one": -1
+      },
+      "90": {
+        "a_corner_moved_at_most_m": 0.968,
+        "by_column": [
+          0,
+          3,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          4
+        ],
+        "cubes_out_of_their_cell": 52,
+        "first_column_with_one": 1
+      }
+    },
+    "first_cube_leaves_its_cell_at_degrees": {
+      "each": [
+        7,
+        7,
+        6,
+        7,
+        6,
+        7,
+        5,
+        6,
+        6,
+        7
+      ],
+      "highest": 7,
+      "lowest": 5,
+      "seeds": "1968 to 1977"
+    },
+    "guest": {
+      "at_seed_2026_printed": [
+        "Disturbed order: seed 2026, amplitude 45.0"
+      ],
+      "lowest_corner_m": -0.07,
+      "reaches_from_its_middle_m": 0.706,
+      "walker_sent_to_its_middle": {
+        "feet_at_m": 0.23,
+        "metres_from_the_middle": 0.09,
+        "walk_ended": "arrived"
+      }
+    },
+    "maze_1982": [
+      "/\\\\\\\\/",
+      "\\\\/\\//",
+      "//\\/\\\\",
+      "/\\\\\\\\\\"
+    ],
+    "maze_1982_corridors": {
+      "corridors": 10,
+      "each": [
+        "west of (0, 0) -> 1 cells -> north of cell (0, 0)",
+        "east of (5, 0) -> 6 cells -> east of cell (5, 3)",
+        "west of (0, 1) -> 2 cells -> west of cell (0, 2)",
+        "east of (5, 1) -> 2 cells -> east of cell (5, 2)",
+        "west of (0, 2) -> 2 cells -> west of cell (0, 1)",
+        "east of (5, 2) -> 2 cells -> east of cell (5, 1)",
+        "west of (0, 3) -> 11 cells -> north of cell (1, 0)",
+        "east of (5, 3) -> 6 cells -> east of cell (5, 0)",
+        "north of (0, 0) -> 1 cells -> west of cell (0, 0)",
+        "south of (0, 3) -> 2 cells -> south of cell (1, 3)",
+        "north of (1, 0) -> 11 cells -> west of cell (0, 3)",
+        "south of (1, 3) -> 2 cells -> south of cell (0, 3)",
+        "north of (2, 0) -> 6 cells -> north of cell (3, 0)",
+        "south of (2, 3) -> 6 cells -> south of cell (3, 3)",
+        "north of (3, 0) -> 6 cells -> north of cell (2, 0)",
+        "south of (3, 3) -> 6 cells -> south of cell (2, 3)",
+        "north of (4, 0) -> 2 cells -> north of cell (5, 0)",
+        "south of (4, 3) -> 6 cells -> south of cell (5, 3)",
+        "north of (5, 0) -> 2 cells -> north of cell (4, 0)",
+        "south of (5, 3) -> 6 cells -> south of cell (4, 3)"
+      ],
+      "longest": {
+        "cells": 11,
+        "in": "west of cell (0, 3)",
+        "out": "north of cell (1, 0)"
+      },
+      "openings": 20,
+      "triangles_no_corridor_reaches": 4,
+      "west_to_east": 0
+    },
+    "maze_corridor_walk": {
+      "cells": 11,
+      "in": "west of cell (0, 3)",
+      "metres_from_the_way_out": 0.08,
+      "out": "north of cell (1, 0)",
+      "walk_ended": "arrived"
+    },
+    "maze_crossing_walk": {
+      "cells": 16,
+      "corridors_from_west_to_east": 1,
+      "in": "west of cell (0, 1)",
+      "out": "east of cell (5, 1)",
+      "seed": 2010,
+      "walk_ended": "arrived"
+    },
+    "maze_straight_walk": {
+      "metres_walked": 0.98,
+      "walk_ended": "blocked"
+    },
+    "mazes_with_a_way_from_west_to_east": {
+      "count": 4,
+      "first": 2010,
+      "seeds": "1982 to 2081",
+      "which": [
+        2010,
+        2029,
+        2031,
+        2037
+      ]
+    },
+    "one_unused_draw": "seed 1968, amplitude 20.0: the last cube turned (19.9, 17.2, 4.8)",
+    "printed_line": "seed 1968, amplitude 20.0: the last cube turned (-5.9, 19.9, 17.2)",
+    "seed_line_in_the_inner_loop": "seed 1968, amplitude 20.0: the last cube turned (-1.3, -5.8, -10.5)",
+    "space_printed": [
+      "seed 1969, amplitude 20.0: the last cube turned (-8.8, -2.6, -13.8)"
+    ],
+    "two_builds_with_randomize_under_the_seed_line": {
+      "note": "these two lines are different in every run of verify.gd: that is the fault",
+      "printed": [
+        "seed 5231314596287428713, amplitude 20.0: the last cube turned (-1.8, -15.3, 19.1)",
+        "seed -8091069983127240109, amplitude 20.0: the last cube turned (14.5, 1.8, 9.7)"
+      ],
+      "seed_value_reads": [
+        1968,
+        1968
+      ]
+    },
+    "two_builds_without_a_seed": [
+      "the last cube turned (18.9, -9.7, 15.3)",
+      "the last cube turned (-12.8, 13.1, -2.7)"
+    ],
+    "walks": [
+      {
+        "amplitude": 0.0,
+        "at_column": 11.1,
+        "feet_highest_m": 0.5,
+        "feet_lowest_m": 0.5,
+        "physics_steps": 96,
+        "seed": 1968,
+        "spacing": 0.6,
+        "step_height": 0.35,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 5.0,
+        "at_column": 11.1,
+        "feet_highest_m": 0.51,
+        "feet_lowest_m": 0.49,
+        "physics_steps": 118,
+        "seed": 1968,
+        "spacing": 0.6,
+        "step_height": 0.35,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 20.0,
+        "at_column": 11.1,
+        "feet_highest_m": 0.55,
+        "feet_lowest_m": 0.46,
+        "physics_steps": 101,
+        "seed": 1968,
+        "spacing": 0.6,
+        "step_height": 0.35,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 11.1,
+        "feet_highest_m": 0.68,
+        "feet_lowest_m": 0.38,
+        "physics_steps": 159,
+        "seed": 1968,
+        "spacing": 0.6,
+        "step_height": 0.35,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 10.9,
+        "feet_highest_m": 0.65,
+        "feet_lowest_m": 0.4,
+        "physics_steps": 135,
+        "seed": 1969,
+        "spacing": 0.6,
+        "step_height": 0.35,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 10.9,
+        "feet_highest_m": 0.65,
+        "feet_lowest_m": 0.45,
+        "physics_steps": 116,
+        "seed": 1970,
+        "spacing": 0.6,
+        "step_height": 0.35,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 10.9,
+        "feet_highest_m": 0.65,
+        "feet_lowest_m": 0.44,
+        "physics_steps": 102,
+        "seed": 1971,
+        "spacing": 0.6,
+        "step_height": 0.35,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 10.9,
+        "feet_highest_m": 0.66,
+        "feet_lowest_m": 0.43,
+        "physics_steps": 123,
+        "seed": 1972,
+        "spacing": 0.6,
+        "step_height": 0.35,
+        "walk_ended": "arrived"
+      }
+    ],
+    "walks_with_spacing_0.8": [
+      {
+        "amplitude": 0.0,
+        "at_column": 10.9,
+        "feet_highest_m": 0.5,
+        "feet_lowest_m": 0.46,
+        "physics_steps": 159,
+        "seed": 1968,
+        "spacing": 0.8,
+        "step_height": 0.35,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 20.0,
+        "at_column": 11.0,
+        "feet_highest_m": 0.53,
+        "feet_lowest_m": 0.43,
+        "physics_steps": 123,
+        "seed": 1968,
+        "spacing": 0.8,
+        "step_height": 0.35,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 6.5,
+        "feet_highest_m": 0.59,
+        "feet_lowest_m": 0.24,
+        "physics_steps": 155,
+        "seed": 1968,
+        "spacing": 0.8,
+        "step_height": 0.35,
+        "walk_ended": "blocked"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 10.9,
+        "feet_highest_m": 0.65,
+        "feet_lowest_m": 0.34,
+        "physics_steps": 175,
+        "seed": 1969,
+        "spacing": 0.8,
+        "step_height": 0.35,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 7.6,
+        "feet_highest_m": 0.61,
+        "feet_lowest_m": 0.16,
+        "physics_steps": 155,
+        "seed": 1970,
+        "spacing": 0.8,
+        "step_height": 0.35,
+        "walk_ended": "blocked"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 11.1,
+        "feet_highest_m": 0.65,
+        "feet_lowest_m": 0.38,
+        "physics_steps": 133,
+        "seed": 1971,
+        "spacing": 0.8,
+        "step_height": 0.35,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 9.6,
+        "feet_highest_m": 0.64,
+        "feet_lowest_m": 0.06,
+        "physics_steps": 186,
+        "seed": 1972,
+        "spacing": 0.8,
+        "step_height": 0.35,
+        "walk_ended": "blocked"
+      }
+    ],
+    "walks_without_a_step": [
+      {
+        "amplitude": 90.0,
+        "at_column": 3.3,
+        "feet_highest_m": 0.58,
+        "feet_lowest_m": 0.47,
+        "physics_steps": 93,
+        "seed": 1968,
+        "spacing": 0.6,
+        "step_height": 0.0,
+        "walk_ended": "blocked"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 10.9,
+        "feet_highest_m": 0.63,
+        "feet_lowest_m": 0.42,
+        "physics_steps": 224,
+        "seed": 1969,
+        "spacing": 0.6,
+        "step_height": 0.0,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 7.6,
+        "feet_highest_m": 0.61,
+        "feet_lowest_m": 0.44,
+        "physics_steps": 186,
+        "seed": 1970,
+        "spacing": 0.6,
+        "step_height": 0.0,
+        "walk_ended": "blocked"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 4.2,
+        "feet_highest_m": 0.56,
+        "feet_lowest_m": 0.47,
+        "physics_steps": 124,
+        "seed": 1971,
+        "spacing": 0.6,
+        "step_height": 0.0,
+        "walk_ended": "blocked"
+      },
+      {
+        "amplitude": 90.0,
+        "at_column": 10.9,
+        "feet_highest_m": 0.66,
+        "feet_lowest_m": 0.43,
+        "physics_steps": 232,
+        "seed": 1972,
+        "spacing": 0.6,
+        "step_height": 0.0,
+        "walk_ended": "arrived"
+      },
+      {
+        "amplitude": 20.0,
+        "at_column": 10.9,
+        "feet_highest_m": 0.54,
+        "feet_lowest_m": 0.47,
+        "physics_steps": 200,
+        "seed": 1968,
+        "spacing": 0.6,
+        "step_height": 0.0,
+        "walk_ended": "arrived"
+      }
+    ],
+    "without_float": {
+      "columns_in_order": 11,
+      "printed": "seed 1968, amplitude 20.0: the last cube turned (-5.9, 19.9, 17.2)",
+      "warnings_logged": []
+    }
+  },
+  "passed": true
+}

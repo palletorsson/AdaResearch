@@ -1,0 +1,253 @@
+{
+  "eye_distance_m": 2.6,
+  "figure_square_pct_of_still": 21.95,
+  "godot": "4.6-stable (official)",
+  "one_bead_in_eight": {
+    "beads": 689,
+    "differ_pct_from_the_full_figure": 14.78,
+    "figure_covers_pct_of_its_square": 28.12,
+    "full_figure_covers_pct_of_its_square": 92.43
+  },
+  "pairs_above": {
+    "closest": "3:2 vs 45:32",
+    "farthest": "1:1 vs 45:32",
+    "pairs": {
+      "1:1 vs 2:1": {
+        "differ_pct": 0.24,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.17,
+        "outline_pct": 0.07,
+        "outline_px": 0.35
+      },
+      "1:1 vs 3:2": {
+        "differ_pct": 0.27,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.18,
+        "outline_pct": 0.09,
+        "outline_px": 0.42
+      },
+      "1:1 vs 45:32": {
+        "differ_pct": 0.37,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.28,
+        "outline_pct": 0.09,
+        "outline_px": 0.44
+      },
+      "2:1 vs 3:2": {
+        "differ_pct": 0.18,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.09,
+        "outline_pct": 0.09,
+        "outline_px": 0.44
+      },
+      "2:1 vs 45:32": {
+        "differ_pct": 0.28,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.14,
+        "outline_pct": 0.15,
+        "outline_px": 0.69
+      },
+      "3:2 vs 45:32": {
+        "differ_pct": 0.17,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.11,
+        "outline_pct": 0.05,
+        "outline_px": 0.25
+      }
+    }
+  },
+  "pairs_level": {
+    "closest": "1:1 vs 2:1",
+    "farthest": "1:1 vs 45:32",
+    "pairs": {
+      "1:1 vs 2:1": {
+        "differ_pct": 3.43,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.01,
+        "outline_pct": 3.42,
+        "outline_px": 21.21
+      },
+      "1:1 vs 3:2": {
+        "differ_pct": 4.97,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.01,
+        "outline_pct": 4.96,
+        "outline_px": 29.05
+      },
+      "1:1 vs 45:32": {
+        "differ_pct": 19.65,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.05,
+        "outline_pct": 19.6,
+        "outline_px": 81.4
+      },
+      "2:1 vs 3:2": {
+        "differ_pct": 5.97,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.07,
+        "outline_pct": 5.91,
+        "outline_px": 34.61
+      },
+      "2:1 vs 45:32": {
+        "differ_pct": 18.13,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.21,
+        "outline_pct": 17.92,
+        "outline_px": 74.4
+      },
+      "3:2 vs 45:32": {
+        "differ_pct": 16.69,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.36,
+        "outline_pct": 16.33,
+        "outline_px": 67.82
+      }
+    }
+  },
+  "quarter_turn": {
+    "1:1": {
+      "loudest_wave_plain": 1.0,
+      "turned_0.125": {
+        "differ_pct": 2.65,
+        "figure_covers_pct_of_its_square": 8.39,
+        "loudest_wave": 0.9239
+      },
+      "turned_0.25": {
+        "differ_pct": 2.73,
+        "figure_covers_pct_of_its_square": 8.71,
+        "loudest_wave": 0.7071
+      }
+    },
+    "3:2": {
+      "loudest_wave_plain": 0.953,
+      "turned_0.125": {
+        "differ_pct": 6.12,
+        "figure_covers_pct_of_its_square": 10.37,
+        "loudest_wave": 1.0
+      },
+      "turned_0.25": {
+        "differ_pct": 0.15,
+        "figure_covers_pct_of_its_square": 20.06,
+        "loudest_wave": 0.953
+      }
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "scene_png": {
+    "bytes": 149114,
+    "height": 480,
+    "width": 640
+  },
+  "sheet_png": {
+    "bytes": 27692,
+    "height": 510,
+    "width": 1292
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "both_voices_playing_at_step_6": true,
+    "changed_most": "6 a walker in both",
+    "png": {
+      "bytes": 29591,
+      "height": 266,
+      "width": 1940
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 one tone, in bytes"
+      },
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "2 two tones, looped"
+      },
+      {
+        "differs_from_step_before_pct": 6.01,
+        "step": "3 a voice, a box, a reach"
+      },
+      {
+        "differs_from_step_before_pct": 2.07,
+        "step": "4 the figure"
+      },
+      {
+        "differs_from_step_before_pct": 7.21,
+        "step": "5 a neighbour, 2:1"
+      },
+      {
+        "differs_from_step_before_pct": 8.32,
+        "step": "6 a walker in both"
+      }
+    ]
+  },
+  "values": [
+    "1:1",
+    "2:1",
+    "3:2",
+    "45:32"
+  ],
+  "values_above": {
+    "1:1": {
+      "body_pct_of_still": 24.87,
+      "high_hz": 256.0,
+      "low_hz": 256.0,
+      "ratio_read_back": "1:1"
+    },
+    "2:1": {
+      "body_pct_of_still": 24.82,
+      "high_hz": 512.0,
+      "low_hz": 256.0,
+      "ratio_read_back": "2:1"
+    },
+    "3:2": {
+      "body_pct_of_still": 24.91,
+      "high_hz": 384.0,
+      "low_hz": 256.0,
+      "ratio_read_back": "3:2"
+    },
+    "45:32": {
+      "body_pct_of_still": 24.97,
+      "high_hz": 360.0,
+      "low_hz": 256.0,
+      "ratio_read_back": "45:32"
+    }
+  },
+  "values_level": {
+    "1:1": {
+      "body_pct_of_still": 12.5,
+      "farthest_bead_from_the_rule_m": 0.0,
+      "figure_covers_pct_of_its_square": 4.07,
+      "high_hz": 256.0,
+      "low_hz": 256.0,
+      "ratio_read_back": "1:1"
+    },
+    "2:1": {
+      "body_pct_of_still": 14.34,
+      "farthest_bead_from_the_rule_m": 0.0,
+      "figure_covers_pct_of_its_square": 12.41,
+      "high_hz": 512.0,
+      "low_hz": 256.0,
+      "ratio_read_back": "2:1"
+    },
+    "3:2": {
+      "body_pct_of_still": 16.02,
+      "farthest_bead_from_the_rule_m": 0.0,
+      "figure_covers_pct_of_its_square": 20.08,
+      "high_hz": 384.0,
+      "low_hz": 256.0,
+      "ratio_read_back": "3:2"
+    },
+    "45:32": {
+      "body_pct_of_still": 31.9,
+      "farthest_bead_from_the_rule_m": 0.0,
+      "figure_covers_pct_of_its_square": 92.43,
+      "high_hz": 360.0,
+      "low_hz": 256.0,
+      "ratio_read_back": "45:32"
+    }
+  }
+}

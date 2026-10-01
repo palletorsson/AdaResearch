@@ -1,0 +1,198 @@
+{
+  "what": "The room test of guests/learning-body, run in scratch copies of ../my-room (without .godot), headless, Godot 4.6. The room project itself was not edited.",
+  "as_shipped": {
+    "guest_trial_exit_code": 0,
+    "guest_trial": {
+      "passed": true,
+      "checks_run": 8,
+      "checks": [
+        {
+          "name": "one name was given after `--`: [\"learning-body\"]",
+          "passed": true
+        },
+        {
+          "name": "the guest's folder names nothing outside itself: []",
+          "passed": true
+        },
+        {
+          "name": "it declares no class_name: []",
+          "passed": true
+        },
+        {
+          "name": "the room ran 180 frames with this guest in its list and Godot logged no error: []",
+          "passed": true
+        },
+        {
+          "name": "the guest stands in the room: res://guests/learning-body/learning-body.tscn is at place 2 of 2 taken",
+          "passed": true
+        },
+        {
+          "name": "the walker reached the aisle in front of place 2: \"arrived\"",
+          "passed": true
+        },
+        {
+          "name": "then it walked at the guest and the walk ended \"arrived\", 0.08 m from the middle of the place, its feet at 0.10 m",
+          "passed": true
+        },
+        {
+          "name": "and Godot logged no error to the end: []",
+          "passed": true
+        }
+      ],
+      "measured": {
+        "feet_at_m": 0.1,
+        "guest": "res://guests/learning-body/learning-body.tscn",
+        "metres_from_the_middle_of_the_place": 0.08,
+        "place": 2,
+        "walk_ended": "arrived"
+      }
+    },
+    "the_room_printed": [
+      "My room: place 1 is res://guests/example/example.tscn",
+      "36 labels by the builder; consent recorded; wrong about 2 of its own; and 8 when each is left out",
+      "My room: place 2 is res://guests/learning-body/learning-body.tscn",
+      "My room: 8 checks, 0 failed; passed=true"
+    ],
+    "probe_exit_code": 0,
+    "probe": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "the guest stands in the room, at place 2",
+          "passed": true
+        },
+        {
+          "name": "the walker stepped onto its left half: arrived, feet at 0.10 m, told \"you stand on stay, sure to 100%\"",
+          "passed": true
+        },
+        {
+          "name": "and walked to its right half: arrived, told \"you stand on pass, sure to 100%\"",
+          "passed": true
+        },
+        {
+          "name": "Godot logged no error: []",
+          "passed": true
+        }
+      ],
+      "measured": {
+        "on_its_left_half": {
+          "feet_at_m": 0.1,
+          "told": "you stand on stay, sure to 100%",
+          "walk": "arrived"
+        },
+        "on_its_right_half": {
+          "feet_at_m": 0.1,
+          "told": "you stand on pass, sure to 100%",
+          "walk": "arrived"
+        },
+        "place": 2,
+        "samples_chosen": 36,
+        "says_of_itself": [
+          "36 labels by the builder",
+          "consent recorded",
+          "wrong about 2 of its own",
+          "and 8 when each is left out"
+        ],
+        "trained_on": "the builder"
+      }
+    }
+  },
+  "made_yours": {
+    "guest_trial_exit_code": 0,
+    "guest_trial": {
+      "passed": true,
+      "checks_run": 8,
+      "checks": [
+        {
+          "name": "one name was given after `--`: [\"learning-body\"]",
+          "passed": true
+        },
+        {
+          "name": "the guest's folder names nothing outside itself: []",
+          "passed": true
+        },
+        {
+          "name": "it declares no class_name: []",
+          "passed": true
+        },
+        {
+          "name": "the room ran 180 frames with this guest in its list and Godot logged no error: []",
+          "passed": true
+        },
+        {
+          "name": "the guest stands in the room: res://guests/learning-body/learning-body.tscn is at place 2 of 2 taken",
+          "passed": true
+        },
+        {
+          "name": "the walker reached the aisle in front of place 2: \"arrived\"",
+          "passed": true
+        },
+        {
+          "name": "then it walked at the guest and the walk ended \"arrived\", 0.08 m from the middle of the place, its feet at 0.10 m",
+          "passed": true
+        },
+        {
+          "name": "and Godot logged no error to the end: []",
+          "passed": true
+        }
+      ],
+      "measured": {
+        "feet_at_m": 0.1,
+        "guest": "res://guests/learning-body/learning-body.tscn",
+        "metres_from_the_middle_of_the_place": 0.08,
+        "place": 2,
+        "walk_ended": "arrived"
+      }
+    },
+    "the_room_printed": [
+      "My room: place 1 is res://guests/example/example.tscn",
+      "2 labels by you; consent recorded; wrong about 0 of its own; and 2 when each is left out",
+      "My room: place 2 is res://guests/learning-body/learning-body.tscn",
+      "My room: 8 checks, 0 failed; passed=true"
+    ],
+    "probe_exit_code": 0,
+    "probe": {
+      "passed": true,
+      "checks": [
+        {
+          "name": "the guest stands in the room, at place 2",
+          "passed": true
+        },
+        {
+          "name": "the walker stepped onto its left half: arrived, feet at 0.10 m, told \"you stand on stay, sure to 50%\"",
+          "passed": true
+        },
+        {
+          "name": "and walked to its right half: arrived, told \"you stand on pass, sure to 50%\"",
+          "passed": true
+        },
+        {
+          "name": "Godot logged no error: []",
+          "passed": true
+        }
+      ],
+      "measured": {
+        "on_its_left_half": {
+          "feet_at_m": 0.1,
+          "told": "you stand on stay, sure to 50%",
+          "walk": "arrived"
+        },
+        "on_its_right_half": {
+          "feet_at_m": 0.1,
+          "told": "you stand on pass, sure to 50%",
+          "walk": "arrived"
+        },
+        "place": 2,
+        "samples_chosen": 2,
+        "says_of_itself": [
+          "2 labels by you",
+          "consent recorded",
+          "wrong about 0 of its own",
+          "and 2 when each is left out"
+        ],
+        "trained_on": "you"
+      }
+    }
+  },
+  "made_yours_how": "the guest's samples.json replaced by a my_samples.json the kit wrote when a script pressed the actions pause and drop once each (no person labelled anything), and trained_on set to \"you\" in portrait.gd"
+}

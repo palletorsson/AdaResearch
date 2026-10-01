@@ -136,7 +136,7 @@ godot --path . --xr-mode off --script res://sheet.gd
 godot --headless --path . --xr-mode off --script res://verify.gd
 ```
 
-The first needs a window: it photographs the four floors, writes `sheet.json`, `sheet.png`, `process.png` and `pool.png`, and prints every number in T2 to T6. The second runs 70 checks, among them the rows of T1, the walks and drops of T7 and the numbers of T8, and exits 0.
+The first needs a window: it photographs the four floors, writes `sheet.json`, `sheet.png`, `process.png` and `pool.png`, and prints every number in T2 to T6. The second runs 72 checks, among them the rows of T1, the walks and drops of T7 and the numbers of T8, and exits 0.
 
 ## Evidence
 

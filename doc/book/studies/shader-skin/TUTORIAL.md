@@ -14,7 +14,7 @@ Every message and number on this page comes from running the study in Godot 4.6.
 
 A lesson starts in its hall, with one question: does the hall show one work at several values of one axis? If it does, predict which two look most alike before you read anything beside them.
 
-Neither hall shows a family as a family. The dark sphere that stands in both declares two axes in the registry, `presence` with five values and `body` with four, and stands at one value of each. The screen in the first hall declares `support` and stands at one value too. The five squares and the five bodies declare no axis at all.
+Neither hall shows a family as a family. The dark sphere that stands in both declares two axes in the registry, `presence` with five values and `body` with four, and stands at one value of each. The screen in the first hall declares `support` and `surface` and stands at one value of each too. The five squares and the five bodies declare no axis at all.
 
 But this chapter's axis is in the second hall, three times, and nobody named it. Three of the five bodies light their edge with the same rule and raise it to another power. The pink sphere: `rim = pow(rim, 3.0);`. The black ring: `pow(rim, 2.0)`. The capsule: `pow(noisy_rim, 1.0 - sheen_sharpness)`, and nothing sets `sheen_sharpness`, so it keeps its default of 0.5 and the exponent is 0.5. One rule at 0.5, 2 and 3, on a capsule, a ring and a sphere, in three colours, under three coloured lamps. Nobody can compare them there. We read this from the hall's map file, its script, its five shader files and the artifact registry; we did not walk it.
 
@@ -174,7 +174,7 @@ And add one line to `_ready()`, above the `print` line:
 
 Run it. The edges are soft, and the stripes crawl upward. The Output says `5 uniforms`.
 
-`smoothstep(a, b, x)` is the hall's second desk: 0 below `a`, 1 above `b`, and an S between them. A uniform can have a default, after `=`, and a `hint_range`, which gives it a slider in the Inspector *(editor)*. We set `drift` and left `bands` and `softness` at their defaults. `TIME` is a clock: the seconds since the program started. Our script has no `_process()`: no line of it runs after `_ready()`. The stripes move because the rule is asked again for every frame, with another `TIME`. With `drift` at 0.1, two stills taken 1.09 seconds apart differed on 8.48% of the still, and the stripes had moved up by 18 pixels; with `drift` at 0, on 0.00%. The hall says it of its wave: "It can only be asked again."
+`smoothstep(a, b, x)` is the hall's second desk: 0 below `a`, 1 above `b`, and an S between them. A uniform can have a default, after `=`, and a `hint_range`, which gives it a slider in the Inspector *(editor)*. We set `drift` and left `bands` and `softness` at their defaults. `TIME` is a clock: the seconds since the program started. Our script has no `_process()`: no line of it runs after `_ready()`. The stripes move because the rule is asked again for every frame, with another `TIME`. With `drift` at 0.1, two stills taken 1.08 seconds apart differed on 8.48% of the still, and the stripes had moved up by 18 pixels; with `drift` at 0, on 0.00%. The hall says it of its wave: "It can only be asked again."
 
 ## Grain: noise for every pixel
 
@@ -240,7 +240,7 @@ And one line at the end of `fragment()`:
 
 Run it. The body is white. Not light: white. In our still all of it, 100.00% of its pixels, is exactly `#ffffff`: no stripes, no clouds, no shading. The Output says `7 uniforms` and nothing else. No error, no warning.
 
-A `sampler2D` is a picture the shader may read, and `texture(glow_map, UV)` reads its colour at this pixel's place. We declared the picture and never handed one over. Godot gives a sampler nobody bound a white picture, in silence, and white in `EMISSION` is full glow on every pixel. The hall has this fault twice, more quietly: the cube's tears and the ring's oil are each read from a picture the hall "never hands it".
+A `sampler2D` is a picture the shader may read, and `texture(glow_map, UV)` reads its colour at this pixel's place. We declared the picture and never handed one over. Godot gives a sampler nobody bound a white picture, in silence, and white in `EMISSION` is full glow on every pixel. The hall has this fault twice, more quietly: the cube's tears and the ring's oil are each read from a picture the hall "never hands it". The hall [Shader_10_ReactionDiffusion](../../../../commons/maps/Shader_10_ReactionDiffusion/final.md) has it at full size: one square is green from edge to edge, because its rule asks for a picture of its own last frame and nobody hands it one. "A texture nobody assigns reads as white".
 
 The repair is to bring the picture. Add three lines to `_ready()`, above the `print` line:
 
@@ -250,7 +250,7 @@ The repair is to bring the picture. Add three lines to `_ready()`, above the `pr
 	material.set_shader_parameter("glow_map", ImageTexture.create_from_image(noise.get_image(256, 128)))
 ```
 
-Run it. The stripes are back, under white clouds that glow. `FastNoiseLite` is Godot's noise on the CPU: the script made 256 by 128 values once, in `_ready()` (3.9 ms on our machine), and the shader only looks them up.
+Run it. The stripes are back, under white clouds that glow. `FastNoiseLite` is Godot's noise on the CPU: the script made 256 by 128 values once, in `_ready()` (3.8 ms on our machine), and the shader only looks them up.
 
 ## Glow from the eye: the rim
 
@@ -345,7 +345,7 @@ The stills are made in the sheet's plain studio, under a flat sky; the scene you
 
 The closest pair is 3 and 8, on our skin and on the dark body, and from 5 m as well (1.31% of a still in which the body is small). The course's outline predicted that: "both give a thin bright edge on a dark body". They are still not alike: they differ on 9.06% of the still, nearly a third of the body. At 3 the glow begins 0.82 of the radius from the middle; at 8 it is the last twenty-fifth.
 
-The outline's second sentence was: "0.5 floods the whole body with the rim colour, so it reads as unlit." The flood is real: at 0.5 the rim changes 98.47% of the body, and only a dark pupil is left in the middle, facing you. For "unlit" we measured the sun: it stands to the left, so the body's left half is brighter than its right. At 8 it is 1.26 times as bright, at 0.5 still 1.11 times. The glow covers more than half of the sun's difference and not all of it. On the dark body almost all: 1.04. So that sentence held in part, and how much depends on what is under the rim.
+The outline's second sentence was: "0.5 floods the whole body with the rim colour, so it reads as unlit." The flood is real: at 0.5 the rim changes 98.47% of the body, and only a dark pupil is left in the middle, facing you. For "unlit" we measured the sun: it stands to the left, so the body's left half is brighter than its right. With the rim black the left half is 1.27 times as bright as the right. The same skin with no light at all, the shader with `render_mode unshaded;` added, measures 1.02: the clouds are not the same left and right, and that is the floor of this measure. At 8 the ratio is 1.26, at 0.5 still 1.11. So the glow at 0.5 takes away 0.16 of the 0.25 between lit and unlit, nearly two thirds, and not all of it. On the dark body the sun alone gives 1.95 and no light 1.07, and the rim at 0.5 gives 1.04: by this measure that body cannot be told from an unlit one. So the sentence held on a dark body and in part on ours: how much depends on what is under the rim.
 
 The claim: a skin can be computed from the angle between the body and your eye, and one exponent takes the same body from a lamp with a pupil to a hairline. The outline says "rubber or glass". That is an eye's word, and no eye was asked: every "alike" here is a count of pixels.
 
@@ -385,7 +385,7 @@ the look's paint → UV as colour → step → sin and smoothstep → fBm grain 
 
 ![The process strip: eight stills, one after each step](process.png)
 
-Three steps changed every pixel of the body, 15.24% of the tile each: the first shader, the first `step`, and the picture nobody brought. The step that made stripes changed least, 6.95%.
+From the strip's standpoint the body covers 15.24% of the still. Three steps changed 15.24% of the tile, every pixel of the body: the first shader, the first `step`, and the picture nobody brought. The step that made stripes changed least, 6.95%.
 
 ## In your room
 
@@ -405,9 +405,9 @@ Then give your family a computed skin, and let it argue with your room's colour.
 var rim_colour := Color("ff2e93")
 ```
 
-In the sheet's plain studio the body's upper half stands against a flat pink sky. There its outer tenth was 238.8 away from the sky's colour, of 441, with the rim in SECOND, and 73.2 with the rim in the sky's colour: the edge melts into the sky. In our copy of the room it did not melt. There you look down on the body from 1.60 m, what stands behind it is the violet floor, and the pink rim cut against it. A rim hands the body's edge to whatever is behind it in that colour, and what is behind it depends on where you stand. Which colour your room wants is yours to say.
+In the sheet's plain studio the body's upper half stands against a flat pink sky. There its outer tenth was 238.8 away from the sky's colour, of 441, with the rim in SECOND, and 73.2 with the rim in the sky's colour: the edge melts into the sky. In our copy of the room it did not melt. This is the room as it runs, under its own sky and filter, seen through the walker's eyes 2 m in front of the body. There you look down on it from 1.60 m, and what stands behind it is the floor and the dark square of its place. Against that the edge was 140.9 away with the rim in SECOND and 138.6 with the rim in the sky's colour: the pink rim cut as clearly as the cyan one. A rim hands the body's edge to whatever is behind it in that colour, and what is behind it depends on where you stand. Which colour your room wants is yours to say.
 
-For a body of your own from an earlier chapter, copy `skin.gdshader` into that guest's folder and give its mesh a `ShaderMaterial` as we did here, with the path of its own copy. We did that to the room's example guest, a box, in our copy of the room. It ran with no error. Its front face had three lime stripes, because a box has another UV map than a sphere, and its top and its side glowed cyan all over: a flat face turns from your eye all at once.
+For a body of your own from an earlier chapter, copy `skin.gdshader` into that guest's folder and give its mesh a `ShaderMaterial` as we did here, with the path of its own copy. We did that to the room's example guest, a box, in our copy of the room. It ran with no error, and the walker was `blocked` 0.55 m from the middle of its place. Its front face had three lime stripes, because a box has another UV map than a sphere. Its top is one flat face, and a flat face turns from your eye all at once. Through the walker's eyes from 6 m the top glowed: 13.81% of the box's pixels in the still were cyan (blue above 150 of 255, and above red). From 4 m and from 2 m, looking down on it, none were, and the top was only tinted. The hall [Shader_12_PinkExtravaganza](../../../../commons/maps/Shader_12_PinkExtravaganza/final.md) says it of its black cube: "on a cube the rim is not a band but a face".
 
 Write one line in your README: what your skin answers to, and what it cannot know. Hand in your room with its process strip and your field note.
 

@@ -1,0 +1,89 @@
+{
+  "what": "look.gd with five values of sun.shadow_blur; each still compared with the still at 2.0; run once under each of two renderers, in a scratch copy of this kit",
+  "how": "godot --path . --xr-mode off [--rendering-method forward_plus] --script res://shadow_blur_trial.gd (the script is kept in scratch); shadow_edge_px is the width of the edge of the sphere's shadow along one line on the floor, as sheet.gd measures it",
+  "godot": "4.6-stable (official)",
+  "card": "NVIDIA GeForce RTX 3070",
+  "scene": "the_look.tscn dressed by look.gd, the scene's own camera, a still of 960 x 720",
+  "gl_compatibility": {
+    "driver": "3.3.0 NVIDIA 595.71",
+    "box_top": "#c8ff46",
+    "shadow_blur": {
+      "0.0": {
+        "bytes_unlike_the_still_at_2": 0,
+        "differs_from_the_still_at_2_on_pct": 0.0,
+        "largest_step_of_one_channel": 0,
+        "read_back": 0.0,
+        "shadow_edge_px": 8
+      },
+      "1.0": {
+        "bytes_unlike_the_still_at_2": 0,
+        "differs_from_the_still_at_2_on_pct": 0.0,
+        "largest_step_of_one_channel": 0,
+        "read_back": 1.0,
+        "shadow_edge_px": 8
+      },
+      "2.0": {
+        "bytes_unlike_the_still_at_2": 0,
+        "differs_from_the_still_at_2_on_pct": 0.0,
+        "largest_step_of_one_channel": 0,
+        "read_back": 2.0,
+        "shadow_edge_px": 8
+      },
+      "20.0": {
+        "bytes_unlike_the_still_at_2": 0,
+        "differs_from_the_still_at_2_on_pct": 0.0,
+        "largest_step_of_one_channel": 0,
+        "read_back": 20.0,
+        "shadow_edge_px": 8
+      },
+      "6.0": {
+        "bytes_unlike_the_still_at_2": 0,
+        "differs_from_the_still_at_2_on_pct": 0.0,
+        "largest_step_of_one_channel": 0,
+        "read_back": 6.0,
+        "shadow_edge_px": 8
+      }
+    }
+  },
+  "forward_plus": {
+    "driver": "1.4.329",
+    "box_top": "#8ab337",
+    "shadow_blur": {
+      "0.0": {
+        "bytes_unlike_the_still_at_2": 24695,
+        "differs_from_the_still_at_2_on_pct": 0.25,
+        "largest_step_of_one_channel": 58,
+        "read_back": 0.0,
+        "shadow_edge_px": 4
+      },
+      "1.0": {
+        "bytes_unlike_the_still_at_2": 13994,
+        "differs_from_the_still_at_2_on_pct": 0.01,
+        "largest_step_of_one_channel": 22,
+        "read_back": 1.0,
+        "shadow_edge_px": 13
+      },
+      "2.0": {
+        "bytes_unlike_the_still_at_2": 0,
+        "differs_from_the_still_at_2_on_pct": 0.0,
+        "largest_step_of_one_channel": 0,
+        "read_back": 2.0,
+        "shadow_edge_px": 20
+      },
+      "20.0": {
+        "bytes_unlike_the_still_at_2": 46163,
+        "differs_from_the_still_at_2_on_pct": 1.74,
+        "largest_step_of_one_channel": 41,
+        "read_back": 20.0,
+        "shadow_edge_px": 134
+      },
+      "6.0": {
+        "bytes_unlike_the_still_at_2": 34048,
+        "differs_from_the_still_at_2_on_pct": 0.32,
+        "largest_step_of_one_channel": 41,
+        "read_back": 6.0,
+        "shadow_edge_px": 60
+      }
+    }
+  }
+}

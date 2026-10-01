@@ -179,7 +179,7 @@ Run it:
 2 [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 ```
 
-Two cells, as predicted, and on the floor a triangle with triangular holes: Sierpinski's. Every question now goes to the old row and every answer to the new one. The last three lines are the swap: the two names change places, and no byte is copied. What was written becomes what is read.
+Two cells, as predicted, and on the floor a triangle with triangular holes: Sierpinski's. Every question now goes to the old row and every answer to the new one. The field trip hall [CA_EdgeOfChaos](../../../../commons/maps/CA_EdgeOfChaos/final.md) says it of its own rule: "Every cell reads the previous volume." The last three lines are the swap: the two names change places, and no byte is copied. What was written becomes what is read.
 
 ## The ring
 
@@ -248,7 +248,7 @@ func _process(delta: float) -> void:
 		lay_row()
 ```
 
-And in `lay_row()`, let each row stand one `rise` higher than the last:
+And in `lay_row()`, change the `row.position` line, so that each row stands one `rise` higher than the last:
 
 ```gdscript
 	row.position = Vector3(0.0, made * rise, -made * cell)
@@ -306,7 +306,7 @@ This is the end of the first session. `cellular.gd` should have seven `@export` 
 
 ## The argument: which rule?
 
-The axis is `rule`, from one live cell. The values are 30, 90, 110 and 250. To change it, select `Automaton` in the Scene dock, at the upper left, and set **Rule** in the Inspector, at the right *(editor)*; or change the 90 in the script's first `@export` line.
+The axis is `rule`, from one live cell. The values are 30, 90, 110 and 250. To change it, select `Automaton` in the Scene dock, at the upper left, and set **Rule** in the Inspector, at the right *(editor)*; or change the 90 in the script's first `@export` line. Keep to one of the two ways. A value set in the Inspector is saved in the scene, and the scene's value wins over the script's line: with 30 saved in a scene and 90 in the line, our floor was Rule 30's, and nothing was printed about it.
 
 **Write your prediction before you render.** Four floors of eleven rows. Which two will look most alike? Which are the same on both sides of the middle? And look at the numbers: 90 and 250 differ in two of their eight answers, and so do 30 and 90. Will those two pairs be equally alike?
 
@@ -339,7 +339,7 @@ The claim, as measured: a rule of eight bits decides between a checker, a fracta
 
 The second body of this chapter is in `diffusion.gd`, on the scene `diffusion.tscn`. Open that scene and press F6, which runs the scene that is open instead of the project's main scene *(editor: the button **Run Current Scene** is at the upper right)*. An orange block stands in the middle of the floor with the walker on top of it. The block spreads, hollows, and becomes a square wall that grows outward and settles.
 
-A cell here holds two numbers instead of one bit: how much it has of a substance A and of a substance B. The rule is no longer a table. B is made from A where both are present, both spread to their neighbours, A is fed in everywhere and B is taken out. The supplied part of the file makes four buffers, draws B as tiles, and hands the collider B's heights. The step is the part to write. In `diffusion.gd`, replace `around()` and `step()` with these:
+A cell here holds two numbers instead of one bit: how much it has of a substance A and of a substance B. The rule is no longer a table. B is made from A where both are present, both spread to their neighbours, A is fed in everywhere and B is taken out. The supplied part of the file makes four buffers, draws B as tiles, and hands the collider B's heights. The step is the part to write. The download holds it finished, as it did `cellular.gd`: in `diffusion.gd`, delete `around()` and `step()` and type them again:
 
 ```gdscript
 func around(buffer: PackedFloat32Array, x: int, z: int) -> float:
@@ -408,7 +408,7 @@ Give both names one buffer: in `_ready()` write `next = now` in place of `next.r
 
 Leave the swap out: delete the last three lines of `step()`. Eleven rows, each one tile: the seed, eleven times. The rule writes into `next` and nobody reads it.
 
-Set `rule` to 0, then 255, then 184, with `rows` at 17 and `pace` at 0. In `diffusion.gd`, set `feed` to 0.035 and `kill` to 0.065; we did not render that one.
+Set `rule` to 0, then 255, then 184, with `rows` at 17 and `pace` at 0, in the way you chose for the argument: the Inspector or the script's lines, not both. In `diffusion.gd`, set `feed` to 0.035 and `kill` to 0.065; we did not render that one.
 
 ## The process
 

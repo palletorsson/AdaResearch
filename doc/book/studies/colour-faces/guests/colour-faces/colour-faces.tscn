@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://guests/colour-faces/colour_faces.gd" id="Guest"]
+
+[node name="ColourFaces" type="Node3D"]
+script = ExtResource("Guest")

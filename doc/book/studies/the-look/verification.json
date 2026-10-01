@@ -57,7 +57,11 @@
       "passed": true
     },
     {
-      "name": "the nine states of the lesson each ran with no error: []",
+      "name": "the scene's camera looks down 25.2 degrees and sees 48 degrees from top to bottom, so the top edge of its picture is 1.2 degrees under the horizon: it shows the ground beyond the floor and no sky",
+      "passed": true
+    },
+    {
+      "name": "the fifteen states of the lesson each ran with no error: []",
       "passed": true
     },
     {
@@ -97,31 +101,63 @@
       "passed": true
     },
     {
+      "name": "a gradient sky, its ground unsaid: the background is a Sky with a ProceduralSkyMaterial, SKY_TOP over SKY; under the horizon it has Godot's own colours, #332b22 below #a5a7ab, and it draws a disc for a light (sun_angle_max 30); the flat background colour is kept and not used",
+      "passed": true
+    },
+    {
+      "name": "the gradient sky: its material is the supplied look's in every stored property (17 compared): SKY at the ground's horizon and GROUND below, sky_curve 0.25, no disc for a light; the rest of the environment is still the plain one: unlike it only in [\"background_mode\", \"sky\"]",
+      "passed": true
+    },
+    {
+      "name": "a second light: two lights with a direction; the second is the supplied look's fill() in every stored property (43 compared), FILL at energy 0.05 with no shadow; it travels along (-0.593, -0.479, 0.647): downward, to the left and towards the camera, against the sun over the ground",
+      "passed": true
+    },
+    {
+      "name": "the ambient light tinted: AMBIENT_TINT at energy 0.27; the tint has all of its blue, 89% of its red and 85% of its green, so against the white light at 0.25 it gives less red (0.239) and less green (0.230) and more blue (0.270)",
+      "passed": true
+    },
+    {
+      "name": "shadow blur 2: the sun's shadow_blur reads back 2.0 (a new light has 1.0), the supplied look's SHADOW_BLUR; with it the sun is the sun of a scene that runs in every stored property, and before it was unlike it only in [\"shadow_blur\"]",
+      "passed": true
+    },
+    {
+      "name": "saturation and contrast: the environment is the supplied look's environment() in every stored property, its sky and the sky's material too (124 compared); the state before was unlike it only in [\"adjustment_contrast\", \"adjustment_enabled\", \"adjustment_saturation\"]; the tonemap is the linear one, fog and glow are off: unlike in []",
+      "passed": true
+    },
+    {
       "name": "the lesson's last state is look.gd, byte for byte",
       "passed": true
     },
     {
-      "name": "look.gd names the ten roles of supplied/look.gd with the same ten colours: []",
+      "name": "at the palette step the script is the plain look of every sheet's studio: its environment is studio_environment() in every stored property (101 compared), and its one light is sun() (43 compared): unlike in [] and []",
       "passed": true
     },
     {
-      "name": "the_look.tscn ran 180 frames with look.gd and Godot logged no error: []",
+      "name": "over that the supplied look lays its filter: environment() is unlike the plain one in 7 stored properties, [\"background_mode\", \"sky\", \"ambient_light_color\", \"ambient_light_energy\", \"adjustment_enabled\", \"adjustment_contrast\", \"adjustment_saturation\"]",
       "passed": true
     },
     {
-      "name": "its environment is the supplied look's plain one, studio_environment(), in every stored property (101 compared): unlike in []",
+      "name": "look.gd names the ten roles of supplied/look.gd and the three colours of its filter, SKY_TOP, AMBIENT_TINT and FILL, with the same thirteen colours, and nothing else: []",
       "passed": true
     },
     {
-      "name": "over that the supplied look lays a filter for a scene that runs: environment() differs from the plain one in 7 stored properties, [\"background_mode\", \"sky\", \"ambient_light_color\", \"ambient_light_energy\", \"adjustment_enabled\", \"adjustment_contrast\", \"adjustment_saturation\"]; fill() is a second light of energy 0.05 with no shadow; the sun's shadow edge is blurred by 2.0",
+      "name": "the_look.tscn ran 180 frames with look.gd and Godot logged no error and no warning: [] []",
       "passed": true
     },
     {
-      "name": "its sun is the supplied one in every stored property (43 compared): unlike in []",
+      "name": "its environment is the supplied look's for a scene that runs, environment(), in every stored property, its sky and the sky's material too (124 compared): unlike in []",
+      "passed": true
+    },
+    {
+      "name": "it has two lights; its sun is the supplied one with the softer shadow edge, in every stored property (43 compared): unlike in []",
       "passed": true
     },
     {
       "name": "the sun stands 43.0 degrees above the horizon and its light travels to the right and away from the camera: (0.499, -0.682, -0.535)",
+      "passed": true
+    },
+    {
+      "name": "its second light is the supplied fill() in every stored property (43 compared): unlike in []",
       "passed": true
     },
     {
@@ -133,7 +169,11 @@
       "passed": true
     },
     {
-      "name": "two lines of the palette changed, GROUND and BODY, and the floor and the box took the new colours while the sphere kept SECOND: 4 of 4 pairs",
+      "name": "and that is the look base.tscn gives every later kit's scene: its environment is ours in every stored property, its Sun and its Fill are the two lights ours were compared with",
+      "passed": true
+    },
+    {
+      "name": "two lines of the palette changed, GROUND and BODY, and the floor and the box took the new colours, and the ground beyond the floor (the sky's ground_bottom_color) took the new GROUND, while the sphere kept SECOND: 4 of 4 pairs",
       "passed": true
     },
     {
@@ -145,7 +185,7 @@
       "passed": true
     },
     {
-      "name": "with `sun.visible = false` the sun is there and not shown, and a marble dropped on the box still rests on it, at 0.70 m: the light went, the body stayed",
+      "name": "with `sun.visible = false` the sun is there and not shown, the second light still is, and a marble dropped on the box still rests on it, at 0.70 m: the light went, the body stayed",
       "passed": true
     },
     {
@@ -221,15 +261,26 @@
       "passed": true
     },
     {
+      "name": "as recorded in evidence/shadow_blur_two_renderers.json: under Compatibility five values of sun.shadow_blur, 0 to 20, gave five stills with 0 bytes unlike; under Forward+ the other four each differ from the still at 2, and the shadow's edge is [4, 20, 134] pixels wide at 0, 2 and 20",
+      "passed": true
+    },
+    {
       "name": "Godot logged no error in the whole run: []",
       "passed": true
     }
   ],
   "checks_failed": 0,
-  "checks_run": 56,
+  "checks_run": 67,
   "godot": "4.6-stable (official)",
   "kit": "The look",
   "measured": {
+    "a_new_sky's_ground": {
+      "bottom": "#332b22",
+      "horizon": "#a5a7ab",
+      "sky_curve": 0.15,
+      "sun_angle_max": 30.0
+    },
+    "camera_top_edge_degrees_under_the_horizon": 1.2,
     "contrast_of_two_values": {
       "BODY on GROUND": 10.88,
       "BODY on SHADE": 16.7,
@@ -263,6 +314,87 @@
       "red on green": {
         "body_luminance": 0.2126,
         "ground_luminance": 0.2118
+      }
+    },
+    "second_light_travels_along": [
+      -0.593,
+      -0.479,
+      0.647
+    ],
+    "shadow_blur_under_two_renderers": {
+      "forward_plus": {
+        "0.0": {
+          "bytes_unlike_the_still_at_2": 24695.0,
+          "differs_from_the_still_at_2_on_pct": 0.25,
+          "largest_step_of_one_channel": 58.0,
+          "read_back": 0.0,
+          "shadow_edge_px": 4.0
+        },
+        "1.0": {
+          "bytes_unlike_the_still_at_2": 13994.0,
+          "differs_from_the_still_at_2_on_pct": 0.01,
+          "largest_step_of_one_channel": 22.0,
+          "read_back": 1.0,
+          "shadow_edge_px": 13.0
+        },
+        "2.0": {
+          "bytes_unlike_the_still_at_2": 0.0,
+          "differs_from_the_still_at_2_on_pct": 0.0,
+          "largest_step_of_one_channel": 0.0,
+          "read_back": 2.0,
+          "shadow_edge_px": 20.0
+        },
+        "20.0": {
+          "bytes_unlike_the_still_at_2": 46163.0,
+          "differs_from_the_still_at_2_on_pct": 1.74,
+          "largest_step_of_one_channel": 41.0,
+          "read_back": 20.0,
+          "shadow_edge_px": 134.0
+        },
+        "6.0": {
+          "bytes_unlike_the_still_at_2": 34048.0,
+          "differs_from_the_still_at_2_on_pct": 0.32,
+          "largest_step_of_one_channel": 41.0,
+          "read_back": 6.0,
+          "shadow_edge_px": 60.0
+        }
+      },
+      "gl_compatibility": {
+        "0.0": {
+          "bytes_unlike_the_still_at_2": 0.0,
+          "differs_from_the_still_at_2_on_pct": 0.0,
+          "largest_step_of_one_channel": 0.0,
+          "read_back": 0.0,
+          "shadow_edge_px": 8.0
+        },
+        "1.0": {
+          "bytes_unlike_the_still_at_2": 0.0,
+          "differs_from_the_still_at_2_on_pct": 0.0,
+          "largest_step_of_one_channel": 0.0,
+          "read_back": 1.0,
+          "shadow_edge_px": 8.0
+        },
+        "2.0": {
+          "bytes_unlike_the_still_at_2": 0.0,
+          "differs_from_the_still_at_2_on_pct": 0.0,
+          "largest_step_of_one_channel": 0.0,
+          "read_back": 2.0,
+          "shadow_edge_px": 8.0
+        },
+        "20.0": {
+          "bytes_unlike_the_still_at_2": 0.0,
+          "differs_from_the_still_at_2_on_pct": 0.0,
+          "largest_step_of_one_channel": 0.0,
+          "read_back": 20.0,
+          "shadow_edge_px": 8.0
+        },
+        "6.0": {
+          "bytes_unlike_the_still_at_2": 0.0,
+          "differs_from_the_still_at_2_on_pct": 0.0,
+          "largest_step_of_one_channel": 0.0,
+          "read_back": 6.0,
+          "shadow_edge_px": 8.0
+        }
       }
     },
     "sun_degrees_above_the_horizon": 43.0,

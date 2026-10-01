@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://row.gd" id="Row"]
+[ext_resource type="Script" path="res://f_curve.gd" id="Curve"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[node name="Lab" instance=ExtResource("Base")]
+
+[node name="Camera3D" parent="." index="3"]
+position = Vector3(0, 2.3, 6.3)
+rotation = Vector3(-0.27, 0, 0)
+
+[node name="Row" type="Node3D" parent="."]
+position = Vector3(0, 0, -1.4)
+script = ExtResource("Row")
+
+[node name="Curve" type="Node3D" parent="."]
+position = Vector3(0, 0, 0.4)
+script = ExtResource("Curve")
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(-3.7, 0, 0.4)

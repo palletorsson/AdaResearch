@@ -1,0 +1,533 @@
+{
+  "apex_in_plan_m": {
+    "beyond": {
+      "apex_x": -0.48,
+      "apex_z": -0.48,
+      "over_its_base": false
+    },
+    "centred": {
+      "apex_x": 0.0,
+      "apex_z": 0.0,
+      "over_its_base": true
+    },
+    "corner": {
+      "apex_x": -0.3,
+      "apex_z": -0.3,
+      "over_its_base": true
+    },
+    "edge": {
+      "apex_x": 0.0,
+      "apex_z": -0.3,
+      "over_its_base": true
+    }
+  },
+  "apexes_apart_in_plan_m": {
+    "centred vs beyond": 0.679,
+    "centred vs corner": 0.424,
+    "centred vs edge": 0.3,
+    "corner vs beyond": 0.255,
+    "edge vs beyond": 0.513,
+    "edge vs corner": 0.3
+  },
+  "axis": "apex_stance",
+  "body_covers_pct": {
+    "across, beyond": 14.03,
+    "across, centred": 14.03,
+    "across, corner": 14.04,
+    "across, edge": 13.6,
+    "along, beyond": 12.89,
+    "along, centred": 14.03,
+    "along, corner": 13.24,
+    "along, edge": 13.6,
+    "level, beyond": 11.03,
+    "level, centred": 11.1,
+    "level, corner": 10.89,
+    "level, edge": 10.61,
+    "plan, beyond": 10.62,
+    "plan, centred": 8.2,
+    "plan, corner": 8.2,
+    "plan, edge": 8.2
+  },
+  "closest_by_view": {
+    "across": "centred vs edge",
+    "along": "centred vs corner",
+    "level": "centred vs edge",
+    "plan": "centred vs edge"
+  },
+  "godot": "4.6-stable (official)",
+  "light": {
+    "plus_x_face_turns_to_the_sun_at_lean": 0.96,
+    "sun_above_the_horizon_deg": 43.0,
+    "sun_to_apex_diagonal_deg": 88.0
+  },
+  "pairs_across": {
+    "closest": "centred vs edge",
+    "farthest": "centred vs beyond",
+    "pairs": {
+      "centred vs beyond": {
+        "differ_pct": 12.95,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.28,
+        "outline_pct": 10.68,
+        "outline_px": 66.84
+      },
+      "centred vs corner": {
+        "differ_pct": 11.25,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.24,
+        "outline_pct": 8.02,
+        "outline_px": 50.18
+      },
+      "centred vs edge": {
+        "differ_pct": 4.42,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 4.42,
+        "outline_px": 27.67
+      },
+      "corner vs beyond": {
+        "differ_pct": 11.14,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 5.6,
+        "outline_pct": 5.54,
+        "outline_px": 34.66
+      },
+      "edge vs beyond": {
+        "differ_pct": 11.04,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.61,
+        "outline_pct": 8.43,
+        "outline_px": 52.75
+      },
+      "edge vs corner": {
+        "differ_pct": 8.85,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.95,
+        "outline_pct": 4.89,
+        "outline_px": 30.63
+      }
+    }
+  },
+  "pairs_along": {
+    "closest": "centred vs corner",
+    "farthest": "edge vs beyond",
+    "pairs": {
+      "centred vs beyond": {
+        "differ_pct": 7.59,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 6.45,
+        "outline_pct": 1.14,
+        "outline_px": 7.15
+      },
+      "centred vs corner": {
+        "differ_pct": 0.79,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 0.79,
+        "outline_px": 4.93
+      },
+      "centred vs edge": {
+        "differ_pct": 6.35,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.93,
+        "outline_pct": 4.42,
+        "outline_px": 27.67
+      },
+      "corner vs beyond": {
+        "differ_pct": 6.8,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 6.45,
+        "outline_pct": 0.35,
+        "outline_px": 2.28
+      },
+      "edge vs beyond": {
+        "differ_pct": 10.27,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 6.22,
+        "outline_pct": 4.05,
+        "outline_px": 25.75
+      },
+      "edge vs corner": {
+        "differ_pct": 6.0,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.85,
+        "outline_pct": 4.15,
+        "outline_px": 26.42
+      }
+    }
+  },
+  "pairs_level": {
+    "closest": "centred vs edge",
+    "farthest": "centred vs beyond",
+    "pairs": {
+      "centred vs beyond": {
+        "differ_pct": 7.87,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.57,
+        "outline_pct": 7.3,
+        "outline_px": 51.39
+      },
+      "centred vs corner": {
+        "differ_pct": 5.98,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.26,
+        "outline_pct": 5.72,
+        "outline_px": 40.26
+      },
+      "centred vs edge": {
+        "differ_pct": 0.49,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 0.49,
+        "outline_px": 3.44
+      },
+      "corner vs beyond": {
+        "differ_pct": 3.64,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.64,
+        "outline_pct": 3.0,
+        "outline_px": 21.17
+      },
+      "edge vs beyond": {
+        "differ_pct": 7.58,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.56,
+        "outline_pct": 7.01,
+        "outline_px": 49.51
+      },
+      "edge vs corner": {
+        "differ_pct": 5.75,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.26,
+        "outline_pct": 5.49,
+        "outline_px": 39.0
+      }
+    }
+  },
+  "pairs_plan": {
+    "closest": "centred vs edge",
+    "farthest": "centred vs beyond",
+    "pairs": {
+      "centred vs beyond": {
+        "differ_pct": 6.54,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.11,
+        "outline_pct": 2.42,
+        "outline_px": 17.43
+      },
+      "centred vs corner": {
+        "differ_pct": 3.98,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.98,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "centred vs edge": {
+        "differ_pct": 2.07,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.07,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "corner vs beyond": {
+        "differ_pct": 6.54,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.11,
+        "outline_pct": 2.42,
+        "outline_px": 17.43
+      },
+      "edge vs beyond": {
+        "differ_pct": 6.54,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.11,
+        "outline_pct": 2.42,
+        "outline_px": 17.43
+      },
+      "edge vs corner": {
+        "differ_pct": 4.1,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.1,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      }
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "sheet_png": {
+    "bytes": 56657,
+    "height": 1076,
+    "width": 1292
+  },
+  "spire_series": {
+    "across": [
+      {
+        "differs_from_lean_0_pct": 2.18,
+        "differs_from_the_one_before_pct": 2.18,
+        "lean": 0.2,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 4.01,
+        "differs_from_the_one_before_pct": 2.19,
+        "lean": 0.4,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 5.58,
+        "differs_from_the_one_before_pct": 2.19,
+        "lean": 0.6,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 6.97,
+        "differs_from_the_one_before_pct": 2.19,
+        "lean": 0.8,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 11.25,
+        "differs_from_the_one_before_pct": 3.3,
+        "lean": 1.0,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 11.87,
+        "differs_from_the_one_before_pct": 3.28,
+        "lean": 1.2,
+        "over_its_base": false
+      },
+      {
+        "differs_from_lean_0_pct": 12.44,
+        "differs_from_the_one_before_pct": 3.29,
+        "lean": 1.4,
+        "over_its_base": false
+      },
+      {
+        "differs_from_lean_0_pct": 12.95,
+        "differs_from_the_one_before_pct": 3.28,
+        "lean": 1.6,
+        "over_its_base": false
+      }
+    ],
+    "along": [
+      {
+        "differs_from_lean_0_pct": 0.18,
+        "differs_from_the_one_before_pct": 0.18,
+        "lean": 0.2,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 0.35,
+        "differs_from_the_one_before_pct": 0.17,
+        "lean": 0.4,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 0.51,
+        "differs_from_the_one_before_pct": 0.16,
+        "lean": 0.6,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 0.65,
+        "differs_from_the_one_before_pct": 0.15,
+        "lean": 0.8,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 0.79,
+        "differs_from_the_one_before_pct": 0.14,
+        "lean": 1.0,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 7.47,
+        "differs_from_the_one_before_pct": 6.68,
+        "lean": 1.2,
+        "over_its_base": false
+      },
+      {
+        "differs_from_lean_0_pct": 7.53,
+        "differs_from_the_one_before_pct": 4.78,
+        "lean": 1.4,
+        "over_its_base": false
+      },
+      {
+        "differs_from_lean_0_pct": 7.59,
+        "differs_from_the_one_before_pct": 0.11,
+        "lean": 1.6,
+        "over_its_base": false
+      }
+    ],
+    "level": [
+      {
+        "differs_from_lean_0_pct": 1.69,
+        "differs_from_the_one_before_pct": 1.69,
+        "lean": 0.2,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 3.06,
+        "differs_from_the_one_before_pct": 1.6,
+        "lean": 0.4,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 4.19,
+        "differs_from_the_one_before_pct": 1.51,
+        "lean": 0.6,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 5.16,
+        "differs_from_the_one_before_pct": 1.45,
+        "lean": 0.8,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 5.98,
+        "differs_from_the_one_before_pct": 1.52,
+        "lean": 1.0,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 6.69,
+        "differs_from_the_one_before_pct": 1.59,
+        "lean": 1.2,
+        "over_its_base": false
+      },
+      {
+        "differs_from_lean_0_pct": 7.32,
+        "differs_from_the_one_before_pct": 1.66,
+        "lean": 1.4,
+        "over_its_base": false
+      },
+      {
+        "differs_from_lean_0_pct": 7.87,
+        "differs_from_the_one_before_pct": 1.44,
+        "lean": 1.6,
+        "over_its_base": false
+      }
+    ],
+    "plan": [
+      {
+        "differs_from_lean_0_pct": 0.0,
+        "differs_from_the_one_before_pct": 0.0,
+        "lean": 0.2,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 0.01,
+        "differs_from_the_one_before_pct": 0.01,
+        "lean": 0.4,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 0.02,
+        "differs_from_the_one_before_pct": 0.01,
+        "lean": 0.6,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 0.02,
+        "differs_from_the_one_before_pct": 0.01,
+        "lean": 0.8,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 3.98,
+        "differs_from_the_one_before_pct": 4.01,
+        "lean": 1.0,
+        "over_its_base": true
+      },
+      {
+        "differs_from_lean_0_pct": 4.91,
+        "differs_from_the_one_before_pct": 4.91,
+        "lean": 1.2,
+        "over_its_base": false
+      },
+      {
+        "differs_from_lean_0_pct": 5.73,
+        "differs_from_the_one_before_pct": 4.08,
+        "lean": 1.4,
+        "over_its_base": false
+      },
+      {
+        "differs_from_lean_0_pct": 6.54,
+        "differs_from_the_one_before_pct": 0.81,
+        "lean": 1.6,
+        "over_its_base": false
+      }
+    ]
+  },
+  "steps_by_view": {
+    "across": {
+      "centred vs edge": 4.42,
+      "corner vs beyond": 11.14,
+      "edge vs corner": 8.85,
+      "largest": "corner vs beyond"
+    },
+    "along": {
+      "centred vs edge": 6.35,
+      "corner vs beyond": 6.8,
+      "edge vs corner": 6.0,
+      "largest": "corner vs beyond"
+    },
+    "level": {
+      "centred vs edge": 0.49,
+      "corner vs beyond": 3.64,
+      "edge vs corner": 5.75,
+      "largest": "edge vs corner"
+    },
+    "plan": {
+      "centred vs edge": 2.07,
+      "corner vs beyond": 6.54,
+      "edge vs corner": 4.1,
+      "largest": "corner vs beyond"
+    }
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "changed_most": "5 the rail, walked to its low end",
+    "lean_after_the_walk": 0.0,
+    "png": {
+      "bytes": 29287,
+      "height": 266,
+      "width": 1616
+    },
+    "spire_built_times": 54,
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 the class as written: lean 0"
+      },
+      {
+        "differs_from_step_before_pct": 2.48,
+        "step": "2 the value the scene stores: 1.6"
+      },
+      {
+        "differs_from_step_before_pct": 1.77,
+        "step": "3 set while it stands: 0.8"
+      },
+      {
+        "differs_from_step_before_pct": 3.79,
+        "step": "4 our sheet: Ada's four stances"
+      },
+      {
+        "differs_from_step_before_pct": 7.19,
+        "step": "5 the rail, walked to its low end"
+      }
+    ]
+  },
+  "values_read_from_the_class": [
+    "centred",
+    "edge",
+    "corner",
+    "beyond"
+  ]
+}

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://guests/implicit/implicit.gd" id="Guest"]
+
+[node name="Implicit" type="MeshInstance3D"]
+script = ExtResource("Guest")

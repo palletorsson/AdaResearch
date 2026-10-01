@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://guests/legs/creature.gd" id="Creature"]
+
+[node name="Legs" type="Node3D"]
+
+[node name="Creature" type="Node3D" parent="."]
+position = Vector3(0, 0.4, 0)
+script = ExtResource("Creature")

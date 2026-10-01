@@ -1,0 +1,369 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Family in the editor, its main scene is family_editor.tscn, its renderer Compatibility",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the base's 15 files: [\"base.tscn\", \"base_look.gd\", \"check_guest.gd\", \"look.gd\", \"marble.gd\", \"marble.tscn\", \"mover.gd\", \"segment.gd\", \"sheet_tools.gd\", \"sweep_sheet.gd\", \"sweep_sheet.tscn\", \"trace_strip.gd\", \"verify_tools.gd\", \"walker.gd\", \"walker.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "no script declares a class_name and the project lists no named class, so nothing needs an import: []",
+      "passed": true
+    },
+    {
+      "name": "every script is indented with tabs: []",
+      "passed": true
+    },
+    {
+      "name": "Ada's pyramid offers its four stances to whoever reads its property list: \"centred,edge,corner,beyond\"",
+      "passed": true
+    },
+    {
+      "name": "set before add_child(), each stance builds its own body of six triangles, the apex 0.8 m up and in plan over (0, 0), (0, -0.3), (-0.3, -0.3) and (-0.48, -0.48): { \"centred\": (0.0, 0.0), \"edge\": (0.0, -0.3), \"corner\": (-0.3, -0.3), \"beyond\": (-0.48, -0.48) }",
+      "passed": true
+    },
+    {
+      "name": "in plan the apexes of corner and beyond are the closest pair, 0.255 m apart; centred to edge and edge to corner are 0.300 m: { \"centred vs edge\": 0.3, \"centred vs corner\": 0.424, \"centred vs beyond\": 0.679, \"edge vs corner\": 0.3, \"edge vs beyond\": 0.513, \"corner vs beyond\": 0.255 }",
+      "passed": true
+    },
+    {
+      "name": "with a millimetre of slack only beyond has its apex off its base: [\"beyond\"]",
+      "passed": true
+    },
+    {
+      "name": "exactly on the edge a comparison cannot stand: half the base is 0.300000000000 as a float, the apex of edge comes back from the mesh as 0.299999982119 (inside) and from Ada's own function as 0.300000011921 (outside); hence the slack",
+      "passed": true
+    },
+    {
+      "name": "set to beyond AFTER add_child(), the field reads beyond and the apex is still built over (0, 0); Godot logged nothing: [] []",
+      "passed": true
+    },
+    {
+      "name": "its own _rebuild_pyramid(), called by hand, builds what the field says",
+      "passed": true
+    },
+    {
+      "name": "five words its match does not know (centre, side, past, Beyond, and beyond with a space) each built the centred body; the field kept the word and Godot logged nothing",
+      "passed": true
+    },
+    {
+      "name": "set() with a name the class does not have, and set() with the number 3 on this text field, change nothing and say nothing",
+      "passed": true
+    },
+    {
+      "name": "set_base_color() before add_child() paints the body",
+      "passed": true
+    },
+    {
+      "name": "spire.gd begins with @tool, declares lean with a setter that rebuilds once the node is ready, and asks Engine.is_editor_hint()",
+      "passed": true
+    },
+    {
+      "name": "lean is exported with a range from 0 to 1.6 in steps of 0.05: \"0.0,1.6,0.05\"",
+      "passed": true
+    },
+    {
+      "name": "the scene stores lean = 1.6: the setter ran before the node was ready, kept the value, built nothing and logged no error",
+      "passed": true
+    },
+    {
+      "name": "in the room it is built once, from the stored value: its box reaches from (-0.48, 0, -0.48), 0.78 m wide and deep, 0.8 m high",
+      "passed": true
+    },
+    {
+      "name": "set to 0.5 while it stands, the body follows in the same line: built 2 times, the box 0.6 m wide",
+      "passed": true
+    },
+    {
+      "name": "set to 0.5 again, nothing is built: the setter returns when the value is the one it has",
+      "passed": true
+    },
+    {
+      "name": "its methods answer from the field: apex() is (-0.15, 0.8, -0.15), over_base() is true",
+      "passed": true
+    },
+    {
+      "name": "over_base() is true at lean 1.0 and false at 1.05",
+      "passed": true
+    },
+    {
+      "name": "it paints itself in BODY, written out as c6ff3d, roughness 0.8",
+      "passed": true
+    },
+    {
+      "name": "it has one collider, a convex shape of its five corners under a StaticBody3D, made again at every rebuild",
+      "passed": true
+    },
+    {
+      "name": "at lean 0, 1 and 1.6 the spire has the same five corners as Ada's pyramid at centred, corner and beyond; edge is not on the spire's line",
+      "passed": true
+    },
+    {
+      "name": "a rebuild, a mesh of six triangles and a collider, took 0.04 ms on this machine (the fastest of five rounds of 200)",
+      "passed": true
+    },
+    {
+      "name": "set before add_child(), the value is kept and the body is built once, when it enters the room; no error",
+      "passed": true
+    },
+    {
+      "name": "with lean a plain field, set to 0 while the spire stands: the field reads 0, apex() says (0, 0.8, 0), and the body still leans at 1.6, built 1 time",
+      "passed": true
+    },
+    {
+      "name": "rebuild() called by hand makes the body follow",
+      "passed": true
+    },
+    {
+      "name": "the planted bug: with the setter's is_node_ready() taken out, a value set before the node is in the room logs one script error: [\"SCRIPT ERROR: Invalid assignment of property or key \\'mesh\\' with value of type \\'ArrayMesh\\' on a base object of type \\'Nil\\'. (gdscript://-9223371951878175263.gd:54)\"]",
+      "passed": true
+    },
+    {
+      "name": "after that one error the same spire stands and follows its field: one red line, and a picture that looks right",
+      "passed": true
+    },
+    {
+      "name": "handed the same value 180 times, the setter without `if value == lean` builds 180 times; the shipped one once",
+      "passed": true
+    },
+    {
+      "name": "the scene prints what was asked beside what was built, four lines: [\"centred asked: apex built over (0.0, 0.0)\", \"edge asked: apex built over (0.0, -0.3)\", \"corner asked: apex built over (-0.3, -0.3)\", \"beyond asked: apex built over (-0.48, -0.48)\"]",
+      "passed": true
+    },
+    {
+      "name": "our own sheet stands four members of Ada's pyramid 1.2 m apart, and each is built as its stance says: [(0.0, 0.0), (0.0, -0.3), (-0.3, -0.3), (-0.48, -0.48)]",
+      "passed": true
+    },
+    {
+      "name": "the four take BODIES in order: BODY, SECOND, THIRD, BONE",
+      "passed": true
+    },
+    {
+      "name": "four plates name the stances, and the fourth says it is off its base: [\"centred\", \"edge\", \"corner\", \"beyond\\noff its base\"]",
+      "passed": true
+    },
+    {
+      "name": "values_of() reads the four stances from the class; for base_sides, a plain int, it returns one empty text, and for a name the class does not have nothing",
+      "passed": true
+    },
+    {
+      "name": "at the start the walker stands on the rail's high end: held, value 1.6, lean 1.6, built 1 time",
+      "passed": true
+    },
+    {
+      "name": "180 frames standing there, and the spire is not built again; the readout says: lean 1.60    over its base: false    built 1 times",
+      "passed": true
+    },
+    {
+      "name": "the scene ran those frames with no error and no warning: [] []",
+      "passed": true
+    },
+    {
+      "name": "walked to the rail's low end (\"arrived\"), the spire stands upright: lean 0, the box 0.6 m wide; it was built 49 times on the way, once for each step of the walk that changed the value",
+      "passed": true
+    },
+    {
+      "name": "stepped off the rail, it is no longer held and keeps its value: lean stays 0",
+      "passed": true
+    },
+    {
+      "name": "stepped on again 0.73 m along, the spire takes the value there: lean 0.72, a value between the Inspector's steps of 0.05",
+      "passed": true
+    },
+    {
+      "name": "W held for 30 steps walks the walker 0.97 m along the rail, away from the camera, and the spire straightens: lean 0.77, and the body as built is 0.60 m wide, its apex back over its base",
+      "passed": true
+    },
+    {
+      "name": "S held for 30 steps brings it back: lean 1.60, the body 0.78 m wide again",
+      "passed": true
+    },
+    {
+      "name": "D held for 30 steps steps off the rail, 0.97 m beside it: it is no longer held, lean stays 1.60, and Godot logged no error",
+      "passed": true
+    },
+    {
+      "name": "at lean 0 the spire stops the walker from both sides, 0.60 m from its middle, feet on the floor",
+      "passed": true
+    },
+    {
+      "name": "at lean 1 it stops the walker on the side it leans to, 0.73 m out, and from the far side the walker walks up it: arrived, its feet at 0.42 m",
+      "passed": true
+    },
+    {
+      "name": "at lean 1.6 the walker is stopped 0.92 m from the middle, over floor the base does not cover (its corner is 0.42 m out), and from the far side walks up it: its feet at 0.31 m",
+      "passed": true
+    },
+    {
+      "name": "from the far side, lean by lean in steps of 0.1 from 0.5, the walker first walks up the spire at lean 0.9: { \"0.5\": \"blocked\", \"0.6\": \"blocked\", \"0.7\": \"blocked\", \"0.8\": \"blocked\", \"0.9\": \"arrived\", \"1.0\": \"arrived\" }",
+      "passed": true
+    },
+    {
+      "name": "a member of the wall has no collider: the walker walks into it and stands at its middle, feet on the floor (\"arrived\")",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "alone, with no base and no look, the guest loads without an error, stands on the ground at its own origin and fits the place of 1.6 m: its box reaches from [-0.48, 0.0, -0.48] to [0.3, 0.8, 0.3]",
+      "passed": true
+    },
+    {
+      "name": "in the editor, as the scene opens, the spire's script runs and says so: \"rebuilt in the editor: lean 1.6\"",
+      "passed": true
+    },
+    {
+      "name": "in the editor the spire has its body, and a field set there, as the Inspector sets it, rebuilds it at once: [\"Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org\", \"rebuilt in the editor: lean 1.6\", \"hand before: children 2 box (0.78, 0.8, 0.78)\", \"rebuilt in the editor: lean 0.5\", \"hand after: lean 0.5 box (0.6, 0.8, 0.6)\", \"ERROR: Parameter \\\"t\\\" is null.\", \"at: texture_2d_get (./servers/rendering/dummy/storage/texture_storage.h:106)\", \"GDScript backtrace (most recent call first):\", \"[0] _process (res://hand.gd:16)\", \"hand saved the scene: true\"]",
+      "passed": true
+    },
+    {
+      "name": "saved in the editor after that, the scene file holds lean = 0.5 and nothing the script built: no mesh and no material, because both hang on children the scene does not own",
+      "passed": true
+    },
+    {
+      "name": "without @tool the editor runs nothing of spire.gd: the spire has no body there, and a field set there changes the stored value and nothing to see: [\"Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org\", \"hand before: children 0 box (0.0, 0.0, 0.0)\", \"hand after: lean 0.5 box (0.0, 0.0, 0.0)\", \"ERROR: Parameter \\\"t\\\" is null.\", \"at: texture_2d_get (./servers/rendering/dummy/storage/texture_storage.h:106)\", \"GDScript backtrace (most recent call first):\", \"[0] _process (res://hand.gd:16)\", \"hand saved the scene: true\"]",
+      "passed": true
+    },
+    {
+      "name": "with @tool and the planted bug, the script error is logged inside the editor as the scene opens",
+      "passed": true
+    },
+    {
+      "name": "the copy in .editor_check/ is removed again",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 60,
+  "godot": "4.6-stable (official)",
+  "kit": "Family in the editor",
+  "measured": {
+    "apexes_apart_in_plan_m": {
+      "centred vs beyond": 0.679,
+      "centred vs corner": 0.424,
+      "centred vs edge": 0.3,
+      "corner vs beyond": 0.255,
+      "edge vs beyond": 0.513,
+      "edge vs corner": 0.3
+    },
+    "editor_with_the_planted_bug": [
+      "Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org",
+      "SCRIPT ERROR: Invalid assignment of property or key 'mesh' with value of type 'ArrayMesh' on a base object of type 'Nil'.",
+      "at: rebuild (res://guests/family-editor/spire.gd:54)",
+      "GDScript backtrace (most recent call first):",
+      "[0] rebuild (res://guests/family-editor/spire.gd:54)",
+      "[1] @lean_setter (res://guests/family-editor/spire.gd:15)",
+      "rebuilt in the editor: lean 1.6",
+      "hand before: children 2 box (0.78, 0.8, 0.78)",
+      "rebuilt in the editor: lean 0.5",
+      "hand after: lean 0.5 box (0.6, 0.8, 0.6)",
+      "ERROR: Parameter \"t\" is null.",
+      "at: texture_2d_get (./servers/rendering/dummy/storage/texture_storage.h:106)",
+      "GDScript backtrace (most recent call first):",
+      "[0] _process (res://hand.gd:16)",
+      "hand saved the scene: true"
+    ],
+    "editor_with_tool": [
+      "Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org",
+      "rebuilt in the editor: lean 1.6",
+      "hand before: children 2 box (0.78, 0.8, 0.78)",
+      "rebuilt in the editor: lean 0.5",
+      "hand after: lean 0.5 box (0.6, 0.8, 0.6)",
+      "ERROR: Parameter \"t\" is null.",
+      "at: texture_2d_get (./servers/rendering/dummy/storage/texture_storage.h:106)",
+      "GDScript backtrace (most recent call first):",
+      "[0] _process (res://hand.gd:16)",
+      "hand saved the scene: true"
+    ],
+    "editor_without_tool": [
+      "Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org",
+      "hand before: children 0 box (0.0, 0.0, 0.0)",
+      "hand after: lean 0.5 box (0.0, 0.0, 0.0)",
+      "ERROR: Parameter \"t\" is null.",
+      "at: texture_2d_get (./servers/rendering/dummy/storage/texture_storage.h:106)",
+      "GDScript backtrace (most recent call first):",
+      "[0] _process (res://hand.gd:16)",
+      "hand saved the scene: true"
+    ],
+    "first_lean_the_walker_climbs": 0.9,
+    "from_the_far_side_by_lean": {
+      "0.5": "blocked",
+      "0.6": "blocked",
+      "0.7": "blocked",
+      "0.8": "blocked",
+      "0.9": "arrived",
+      "1.0": "arrived"
+    },
+    "keys": {
+      "D_30_steps_m_beside_the_rail": 0.97,
+      "W_30_steps_m": 0.97,
+      "body_wide_after_S_m": 0.78,
+      "body_wide_after_W_m": 0.6,
+      "lean_after_S": 1.6,
+      "lean_after_W": 0.77
+    },
+    "lean_half_way_along_the_rail": 0.7197,
+    "on_the_edge": {
+      "apex_z_from_adas_own_function": "0.300000011921",
+      "apex_z_from_the_mesh": "0.299999982119",
+      "function_reads_as_off_the_base_without_slack": true,
+      "half_the_base_as_a_float": "0.300000000000",
+      "mesh_reads_as_off_the_base_without_slack": false
+    },
+    "one_rebuild_ms": 0.04,
+    "planted_bug_says": [
+      "SCRIPT ERROR: Invalid assignment of property or key 'mesh' with value of type 'ArrayMesh' on a base object of type 'Nil'. (gdscript://-9223371951878175263.gd:54)"
+    ],
+    "rebuilds_for_180_equal_values": {
+      "with_it": 1,
+      "without_the_equal_value_guard": 180
+    },
+    "rebuilds_walking_the_rail": 49,
+    "scene_saved_in_the_editor": {
+      "holds_a_material": false,
+      "holds_a_mesh": false,
+      "holds_lean_0.5": true
+    },
+    "walker_meets_spire": {
+      "lean 0.0, from the far side": {
+        "feet_at_m": 0.0,
+        "m_from_the_middle": 0.6,
+        "walk_ended": "blocked"
+      },
+      "lean 0.0, from the side it leans to": {
+        "feet_at_m": 0.0,
+        "m_from_the_middle": 0.6,
+        "walk_ended": "blocked"
+      },
+      "lean 1.0, from the far side": {
+        "feet_at_m": 0.42,
+        "m_from_the_middle": 0.1,
+        "walk_ended": "arrived"
+      },
+      "lean 1.0, from the side it leans to": {
+        "feet_at_m": 0.0,
+        "m_from_the_middle": 0.73,
+        "walk_ended": "blocked"
+      },
+      "lean 1.6, from the far side": {
+        "feet_at_m": 0.31,
+        "m_from_the_middle": 0.09,
+        "walk_ended": "arrived"
+      },
+      "lean 1.6, from the side it leans to": {
+        "feet_at_m": 0.0,
+        "m_from_the_middle": 0.92,
+        "walk_ended": "blocked"
+      }
+    }
+  },
+  "passed": true
+}

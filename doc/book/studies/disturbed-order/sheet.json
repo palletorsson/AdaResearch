@@ -1,0 +1,309 @@
+{
+  "floor_covers_pct": {
+    "plan, 0 degrees": 31.25,
+    "plan, 20 degrees": 35.41,
+    "plan, 5 degrees": 32.35,
+    "plan, 90 degrees": 38.98,
+    "raised, 0 degrees": 31.7,
+    "raised, 20 degrees": 31.62,
+    "raised, 5 degrees": 31.71,
+    "raised, 90 degrees": 30.72
+  },
+  "gaps_against_no_gaps_in_plan": {
+    "spacing 0.5 m": {
+      "0 against 20 degrees": {
+        "differ_pct": 4.14,
+        "of_the_floor_pct": 13.25
+      },
+      "0 against 5 degrees": {
+        "differ_pct": 0.59,
+        "of_the_floor_pct": 1.89
+      },
+      "floor_covers_pct": 31.25
+    },
+    "spacing 0.6 m": {
+      "0 against 20 degrees": {
+        "differ_pct": 8.89,
+        "of_the_floor_pct": 28.45
+      },
+      "0 against 5 degrees": {
+        "differ_pct": 1.81,
+        "of_the_floor_pct": 5.79
+      },
+      "floor_covers_pct": 31.25
+    }
+  },
+  "godot": "4.6-stable (official)",
+  "grid_lines_clear_in_plan": {
+    "0 degrees": {
+      "between_columns_pct": [
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ],
+      "clear_pct": 100.0,
+      "whole_rectangle_clear_pct": 27.1
+    },
+    "20 degrees": {
+      "between_columns_pct": [
+        100.0,
+        100.0,
+        100.0,
+        92.8,
+        95.1,
+        49.7,
+        64.7,
+        72.7,
+        79.3,
+        80.2,
+        40.5
+      ],
+      "clear_pct": 80.7,
+      "whole_rectangle_clear_pct": 19.2
+    },
+    "5 degrees": {
+      "between_columns_pct": [
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ],
+      "clear_pct": 100.0,
+      "whole_rectangle_clear_pct": 25.1
+    },
+    "90 degrees": {
+      "between_columns_pct": [
+        96.0,
+        59.5,
+        41.4,
+        33.6,
+        31.0,
+        23.0,
+        24.4,
+        30.5,
+        32.2,
+        39.9,
+        29.6
+      ],
+      "clear_pct": 41.0,
+      "whole_rectangle_clear_pct": 15.2
+    }
+  },
+  "maze_png": {
+    "bytes": 16548,
+    "height": 266,
+    "width": 644
+  },
+  "pairs_plan": {
+    "closest": "0 degrees vs 5 degrees",
+    "farthest": "0 degrees vs 90 degrees",
+    "pairs": {
+      "0 degrees vs 20 degrees": {
+        "differ_pct": 8.89,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.17,
+        "outline_pct": 5.72,
+        "outline_px": 22.56
+      },
+      "0 degrees vs 5 degrees": {
+        "differ_pct": 1.81,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.34,
+        "outline_pct": 1.47,
+        "outline_px": 6.07
+      },
+      "0 degrees vs 90 degrees": {
+        "differ_pct": 21.86,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 9.14,
+        "outline_pct": 12.72,
+        "outline_px": 47.79
+      },
+      "20 degrees vs 90 degrees": {
+        "differ_pct": 20.07,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 11.33,
+        "outline_pct": 8.74,
+        "outline_px": 32.85
+      },
+      "5 degrees vs 20 degrees": {
+        "differ_pct": 6.2,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.81,
+        "outline_pct": 4.39,
+        "outline_px": 17.31
+      },
+      "5 degrees vs 90 degrees": {
+        "differ_pct": 21.53,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 9.78,
+        "outline_pct": 11.75,
+        "outline_px": 44.15
+      }
+    }
+  },
+  "pairs_raised": {
+    "closest": "0 degrees vs 5 degrees",
+    "farthest": "0 degrees vs 90 degrees",
+    "pairs": {
+      "0 degrees vs 20 degrees": {
+        "differ_pct": 3.7,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.83,
+        "outline_pct": 1.87,
+        "outline_px": 7.8
+      },
+      "0 degrees vs 5 degrees": {
+        "differ_pct": 0.73,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.21,
+        "outline_pct": 0.52,
+        "outline_px": 2.16
+      },
+      "0 degrees vs 90 degrees": {
+        "differ_pct": 13.66,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 8.44,
+        "outline_pct": 5.22,
+        "outline_px": 21.75
+      },
+      "20 degrees vs 90 degrees": {
+        "differ_pct": 11.83,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 7.42,
+        "outline_pct": 4.41,
+        "outline_px": 18.39
+      },
+      "5 degrees vs 20 degrees": {
+        "differ_pct": 2.95,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.47,
+        "outline_pct": 1.48,
+        "outline_px": 6.15
+      },
+      "5 degrees vs 90 degrees": {
+        "differ_pct": 12.98,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 7.96,
+        "outline_pct": 5.02,
+        "outline_px": 20.93
+      }
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "seed_1968_against_1969_in_plan": {
+    "20 degrees": {
+      "differ_pct": 11.47,
+      "grid_lines_clear_pct_seed_1968": 80.7,
+      "grid_lines_clear_pct_seed_1969": 77.4
+    },
+    "5 degrees": {
+      "differ_pct": 2.44,
+      "grid_lines_clear_pct_seed_1968": 100.0,
+      "grid_lines_clear_pct_seed_1969": 100.0
+    },
+    "90 degrees": {
+      "differ_pct": 28.85,
+      "grid_lines_clear_pct_seed_1968": 41.0,
+      "grid_lines_clear_pct_seed_1969": 43.2
+    }
+  },
+  "series_in_plan": {
+    "1 degrees": {
+      "differs_from_0_pct": 0.11,
+      "grid_lines_clear_pct": 100.0
+    },
+    "10 degrees": {
+      "differs_from_0_pct": 3.7,
+      "grid_lines_clear_pct": 98.1
+    },
+    "15 degrees": {
+      "differs_from_0_pct": 5.53,
+      "grid_lines_clear_pct": 89.7
+    },
+    "2 degrees": {
+      "differs_from_0_pct": 0.58,
+      "grid_lines_clear_pct": 100.0
+    },
+    "20 degrees": {
+      "differs_from_0_pct": 8.89,
+      "grid_lines_clear_pct": 80.7
+    },
+    "45 degrees": {
+      "differs_from_0_pct": 15.84,
+      "grid_lines_clear_pct": 51.2
+    },
+    "5 degrees": {
+      "differs_from_0_pct": 1.81,
+      "grid_lines_clear_pct": 100.0
+    },
+    "7 degrees": {
+      "differs_from_0_pct": 2.56,
+      "grid_lines_clear_pct": 99.9
+    },
+    "90 degrees": {
+      "differs_from_0_pct": 21.86,
+      "grid_lines_clear_pct": 41.0
+    }
+  },
+  "sheet_png": {
+    "bytes": 56232,
+    "height": 510,
+    "width": 1292
+  },
+  "standpoints": {
+    "plan": "from straight above, without perspective: 120 pixels to a metre, the still 8.0 m by 6.0 m",
+    "raised": "in perspective, the eye at (0, 7.6, 5.4), 9.1 m from the floor's middle"
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "changed_most": "5 one of two turns: 10 PRINT",
+    "png": {
+      "bytes": 67342,
+      "height": 266,
+      "width": 1616
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 a grid of cubes"
+      },
+      {
+        "differs_from_step_before_pct": 9.03,
+        "step": "2 chance turns every cube"
+      },
+      {
+        "differs_from_step_before_pct": 9.6,
+        "step": "3 more with every column"
+      },
+      {
+        "differs_from_step_before_pct": 7.6,
+        "step": "4 a seed names the floor"
+      },
+      {
+        "differs_from_step_before_pct": 45.52,
+        "step": "5 one of two turns: 10 PRINT"
+      }
+    ]
+  }
+}

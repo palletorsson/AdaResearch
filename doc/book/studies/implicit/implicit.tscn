@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://implicit.gd" id="Scene"]
+[ext_resource type="Script" path="res://field_body.gd" id="FieldBody"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[node name="Implicit" instance=ExtResource("Base")]
+script = ExtResource("Scene")
+
+[node name="Camera3D" parent="." index="3"]
+position = Vector3(0, 2.3, 6.9)
+rotation = Vector3(-0.06, 0, 0)
+
+[node name="Body" type="MeshInstance3D" parent="."]
+script = ExtResource("FieldBody")
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(-3.2, 0, 1.9)
+
+[node name="Readout" type="Label3D" parent="."]
+position = Vector3(0, 4.55, 0)
+pixel_size = 0.004
+font_size = 30

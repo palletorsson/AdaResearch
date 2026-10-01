@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://family_editor.gd" id="Family"]
+[ext_resource type="PackedScene" path="res://guests/family-editor/family-editor.tscn" id="Spire"]
+[ext_resource type="Script" path="res://borrowed/slider_rail.gd" id="Rail"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[node name="FamilyEditor" instance=ExtResource("Base")]
+script = ExtResource("Family")
+
+[node name="Spire" parent="." instance=ExtResource("Spire")]
+position = Vector3(-0.62, 0, 1.2)
+
+[node name="Wall" type="Node3D" parent="."]
+position = Vector3(-2.1, 0, -1.6)
+
+[node name="Rail" type="Node3D" parent="."]
+position = Vector3(1.9, 0, -0.2)
+rotation = Vector3(0, -1.5707964, 0)
+script = ExtResource("Rail")
+who = NodePath("../Walker")
+length = 1.6
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(1.9, 0, 1.5)
+
+[node name="Readout" type="Label3D" parent="."]
+position = Vector3(0, 2.7, 0)
+pixel_size = 0.004
+font_size = 30

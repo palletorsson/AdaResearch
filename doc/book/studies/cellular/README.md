@@ -34,16 +34,17 @@ godot --headless --path . --xr-mode off --script res://verify.gd
 godot --path . --xr-mode off --script res://sheet.gd
 ```
 
-`verify.gd` runs 70 checks and writes `verification.json`; its exit code is the number that failed. It needs no import step. It takes about half a minute, because the walker walks in real time, and about three seconds with `--fixed-fps 60` added, with the same result.
+`verify.gd` runs 72 checks and writes `verification.json`; its exit code is the number that failed. It needs no import step. It takes about half a minute, because the walker walks in real time, and about three seconds with `--fixed-fps 60` added. The two give the same result but for one number, which is a time: the eleven rows were laid after 2.50 s with `--fixed-fps 60`, and after 2.50 s in four real-time runs and 2.49 s in a fifth. The `verification.json` here is from the run with `--fixed-fps 60`.
 
 `sheet.gd` needs a window, so it is run without `--headless`. It writes `sheet.png`, `process.png`, `pool.png`, `sheet.json` and the single stills in `stills/`, and closes its window by itself after about ten seconds.
 
 ## What was checked
 
-By `verify.gd`, headless, on a fresh copy of this folder with no `.godot/`, in real time and again with `--fixed-fps 60` (70 of 70 both times):
+By `verify.gd`, headless, on a fresh copy of this folder with no `.godot/`, in real time and again with `--fixed-fps 60` (72 of 72 both times):
 
 - each of the rules 30, 90, 110 and 250: the rows the script prints, and the cells its colliders cover, against the same rule written another way in `verify.gd`; one tile for each live cell; with `ring` unticked as well;
 - that `now` and `next` are two buffers; that the ring joins cell 0 and cell 16; that Rule 30 gives the same rows twice;
+- that a rule saved in a scene wins over the script's line: a scene packed in memory with rule 30, on the script whose line says 90, gives Rule 30's rows;
 - the lesson's planted fault, made by giving both names one buffer: the rows, the ten cells of row 1, 72 cells unlike their mirror, and that Godot logs nothing;
 - the rows arriving one at a time, a quarter of a second apart, and stopping at eleven; where each row stands;
 - one `StaticBody3D` for each row and one box for each run (33 boxes for the 37 tiles of Rule 90); a marble on the seed, through a gap of Rule 90, and on the tile Rule 250 has at the same place;
@@ -56,7 +57,11 @@ By `sheet.gd`, with a window, in the plain studio of `sheet_tools.gd`, and each 
 
 Every code block of the lesson was applied in page order to a fresh copy and each state was run; the outputs the page quotes were in what Godot printed, and the last state equals `cellular.gd` and `diffusion.gd` byte for byte. The three things under *Try* that the page states a result for were run as well.
 
-Faults planted one at a time in scratch copies, each of which made `verify.gd` fail: `step()` writing into the buffer it reads (25 checks failed); `next = now` (25); the swap left out (25); `lay_row()` without colliders (15); `ring` false by default (2); left and right exchanged in the index (7); `pace` 0 by default (3); the pool writing into the buffers it reads (3); the pool's swaps left out (2); a guest that uses `supplied/look.gd` (2); a guest with a `class_name` (3); a guest with cells of 0.12 m (2). A line indented with spaces makes `cellular.gd` fail to parse, so `verify.gd` does not load and Godot exits with code 1 before any check.
+Faults planted one at a time in scratch copies, each of which made `verify.gd` fail: `step()` writing into the buffer it reads (26 checks failed); `next = now` (26); the swap left out (26); `lay_row()` without colliders (15); `ring` false by default (2); left and right exchanged in the index (8); `pace` 0 by default (3); the pool writing into the buffers it reads (3); the pool's swaps left out (2); a guest that uses `supplied/look.gd` (2); a guest with a `class_name` (3); a guest with cells of 0.12 m (2); `rule` without its `@export` (2); a line of `cellular.gd` indented with spaces (2). The last one does not parse: the run ends after 6 checks, and the failed check carries Godot's own message, `Parse Error: Used space character for indentation instead of tab as used before in the file`, with the line's number.
+
+The scene's value against the script's line was also tried with a scene file, once, in a scratch copy: `rule = 30` on `Automaton` in `cellular.tscn` and 110 in the script's line gave Rule 30's rows, with no error and no warning. That run is written into `verification.json` by hand, beside the check that packs a scene in memory.
+
+A second session ran all of this again from fresh copies on the same day and the same machine: `verify.gd` in real time and with `--fixed-fps 60`, every code block of the lesson, the faults, `sheet.gd`, and the room's trial with Rule 90 and with Rule 30. `sheet.json` and the three pictures came out the same byte for byte, and the room's trial gave the same numbers.
 
 The room: in a scratch copy of `my-room` with this guest's folder copied in and its line added to `GUESTS`, `guest_trial.gd` passed 8 of 8. The guest stood at place 2, and the walker arrived 0.08 m from the middle of the place with its feet at 0.32 m. The same again with the guest's rule changed to 30.
 
@@ -64,6 +69,7 @@ The room: in a scratch copy of `my-room` with this guest's folder copied in and 
 
 - Nothing was run in a headset, and no hand was on the keys: every walk is the walker's autopilot, or actions pressed from the script.
 - The editor's windows were not watched: the Inspector's **Rule** field, F6 and the **Run Current Scene** button, and the Output panel are described from knowledge of the editor.
+- That the Inspector writes a changed value into the scene was not watched in the editor. The check packs a scene in a script, and the file test had the line `rule = 30` typed into `cellular.tscn`.
 - No eye was asked which two floors look alike. "Differ" is a count of pixels above a threshold, and a count of cells.
 - The stills were made on one machine and one graphics card. The two running scenes were photographed once each in the look with its filter and looked at; those pictures are not shipped and nothing was measured on them.
 - The pool was run at one pair of numbers. The other pair the lesson offers under *Try* was not rendered.

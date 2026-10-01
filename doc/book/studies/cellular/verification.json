@@ -21,6 +21,10 @@
       "passed": true
     },
     {
+      "name": "cellular.gd and diffusion.gd parse: []",
+      "passed": true
+    },
+    {
       "name": "(90 >> index) & 1 gives rule 90's eight answers, for 000 to 111: [0, 1, 0, 1, 1, 0, 1, 0]",
       "passed": true
     },
@@ -110,6 +114,10 @@
     },
     {
       "name": "rule 250 with ring unticked: beyond an end is dead, and 4 cells differ from the ring",
+      "passed": true
+    },
+    {
+      "name": "a rule saved in a scene wins over the script's line: the line says 90, the scene 30, and the rows are rule 30's",
       "passed": true
     },
     {
@@ -229,7 +237,7 @@
       "passed": true
     },
     {
-      "name": "a walker standing on the seed, 0.60 m up, is on the ground 604 steps later without having walked: its feet at 0.00 m, 0.86 m at the highest",
+      "name": "a walker standing on the seed, 0.60 m up, is on the ground 600 steps later without having walked: its feet at 0.00 m, 0.86 m at the highest",
       "passed": true
     },
     {
@@ -282,7 +290,7 @@
     }
   ],
   "checks_failed": 0,
-  "checks_run": 70,
+  "checks_run": 72,
   "godot": "4.6-stable (official)",
   "kit": "Rules in time",
   "measured": {
@@ -340,6 +348,16 @@
       1,
       0
     ],
+    "rule_saved_in_a_scene": {
+      "rows_are_those_of_rule": 30,
+      "scene": 30,
+      "script_line": 90
+    },
+    "rule_saved_in_the_scene_file_recorded_by_hand": {
+      "rows_are_those_of_rule": 30,
+      "scene": 30,
+      "script_line": 110
+    },
     "rules": {
       "110": {
         "cells_unlike_their_mirror": 64,

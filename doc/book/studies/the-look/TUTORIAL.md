@@ -1,6 +1,6 @@
 # The look — a sky, a light, a palette
 
-Point One gave a position a surface and then a boundary, and its hall had a switch on the wall that took the sun away. Here we take everything else away as well and put it back one decision at a time: a sky, light with no sun, a sun, a colour for the ground, a colour for each body, and at the end a short list of names. We use what Point Zero and Point One gave us: `_ready()`, `.new()`, `add_child()`, a property set with `=`, and `$Name` for a child that is already in the scene. Three words are new: a colour written as `Color("…")`, a material, and `const`.
+Point One gave a position a surface and then a boundary, and its hall had a switch on the wall that took the sun away. Here we take everything else away as well and put it back one decision at a time: a sky, light with no sun, a sun, a colour for the ground, a colour for each body, and a short list of names. Then we lay a filter over that plain look. We use what Point Zero and Point One gave us: `_ready()`, `.new()`, `add_child()`, a property set with `=`, and `$Name` for a child that is already in the scene. Three words are new: a colour written as `Color("…")`, a material, and `const`.
 
 This is a new project. In the Project Manager choose **Import** and open this folder's `project.godot`.
 
@@ -22,7 +22,7 @@ Open `the_look.tscn`: double-click it in the FileSystem dock, at the lower left 
 
 The editor's own 3D view shows the bodies white on a white floor, under a pale sky *(editor)*. That light is the editor's preview and is not in the scene. What is in the scene shows when it runs.
 
-Run it (F5). A hot pink sky, a violet floor, a lime box and a cyan sphere, each with a shadow. The download holds the finished `look.gd`. We will take it apart and build it again.
+Run it (F5). A violet floor that runs back to a pink rim at the top of the window, a lime box and a cyan sphere, each with a shadow. The download holds the finished `look.gd`. We will take it apart and build it again.
 
 ## Nothing: the engine's grey
 
@@ -91,8 +91,6 @@ Add these three lines under the line `sky.background_color = Color("ff2e93")`:
 Run it. Below the pink there is one grey, `#474747`: floor, box and sphere. There is still nothing to see.
 
 Ambient light is light that comes from everywhere at once. The three lines say where it comes from (a colour we name, and no longer the background), which colour (`Color.WHITE` is a colour Godot has a name for) and how strong. It reaches every face by the same amount, so the top of the box, its front and the floor behind it come out alike. Light with no direction cannot show a shape.
-
-We ran it once without the energy line. At energy 1, which is what an `Environment` has when nothing is said, the one grey is `#8a8a8a`. A quarter of the light did not give a quarter of the number: `47` is 71 and `8a` is 138. The numbers of a colour on a screen do not run evenly with the light.
 
 ## A sun that lights no floor
 
@@ -244,7 +242,7 @@ Run it. Nothing changed: the still is the same as the one before, to the pixel. 
 
 `const` is new. It gives a name to a value that does not change while the scene runs. It is written above the functions, and by habit in capitals. `SKY` is a role, and `ff2e93` is the colour that has the role today. The box no longer asks for lime. It asks for `BODY`, and its material is `body_paint`, which will stay a true name whatever `BODY` becomes.
 
-Six of the ten names are not used in this scene. They are the rest of the course's palette, and every later kit uses them: a third body is `THIRD`, a line is `LINE`, a thing with no collider is `GHOST`, a letter is `INK` on `SHADE`. This is the `look.gd` in the download.
+Six of the ten names are not used in this scene. They are the rest of the course's palette, and every later kit uses them: a third body is `THIRD`, a line is `LINE`, a thing with no collider is `GHOST`, a letter is `INK` on `SHADE`. This is the plain look.
 
 ## The hall's switch
 
@@ -256,13 +254,134 @@ Add this line under the line `add_child(sun)`:
 
 Run it. The shadows are gone and the floor is `#150547` everywhere. The box is one flat shape: its top, its front and its side are all `#69891c`. The sphere is a disc, `#0c7489` from edge to edge. This is the line in the hall's switch, on our bodies. Compare it with what you predicted at the wall. As far as its files say, the hall's spheres keep a lit side, because their second lamp has a place. Ours have only the light from everywhere, and they lost their roundness with their shadows.
 
-The bodies did not go. With this line in, a marble dropped on the box still came to rest on it, at 0.70 m.
-
 Take out the line `sun.visible = false`.
+
+## A sky with a top and a horizon
+
+Now a filter goes over the plain look, starting with the sky.
+
+Add these lines under the line that begins `const SHADE`, after an empty line:
+
+```gdscript
+# The filter: colours for the sky and the light, not for bodies.
+const SKY_TOP := Color("5a1fd6")        # violet: the top of the sky; SKY is its horizon
+const AMBIENT_TINT := Color("e2d9ff")   # faintly lavender: the light from everywhere
+const FILL := Color("5fe0ff")           # pale cyan: the second light
+```
+
+Then replace the line `sky.background_mode = Environment.BG_COLOR` with these:
+
+```gdscript
+	var gradient := ProceduralSkyMaterial.new()
+	gradient.sky_top_color = SKY_TOP
+	gradient.sky_horizon_color = SKY
+	sky.sky = Sky.new()
+	sky.sky.sky_material = gradient
+	sky.background_mode = Environment.BG_SKY
+```
+
+<!-- state: 9_sky_ground_unsaid -->
+
+Run it. The pink is gone, and no violet came. Above the floor the picture is a dark brown, `#332920`, under a grey rim. We wrote neither colour.
+
+A `ProceduralSkyMaterial` paints a ball around the whole scene: the half above the horizon from a top colour and a horizon colour, the half below from two more. A `Sky` holds the material, the `Environment` keeps the `Sky` in a property also called `sky`, and `BG_SKY` switches it on. We named the upper half. But our camera looks down, and the top of its picture is one degree under the horizon: all it shows above the floor is the ground beyond the floor. Nobody said what colour that is, so Godot's own came, a brown `332b22` under a grey. It is the first run again: a default is somebody's decision, and it arrives in silence.
+
+Add these lines under the line `gradient.sky_horizon_color = SKY`:
+
+```gdscript
+	gradient.sky_curve = 0.25
+	gradient.ground_horizon_color = SKY
+	gradient.ground_bottom_color = GROUND
+	gradient.sun_angle_max = 0.0
+	gradient.sun_curve = 0.0
+```
+
+<!-- state: 10_gradient_sky -->
+
+Run it. Above the floor the picture is violet, `#32148b`, and the floor in the sun is `#331490`: the floor's far edge has all but gone, and the ground runs on to a pink rim at the top of the window. The sky itself is above this camera; you look up at it in *Walk it*.
+
+The ground now asks the palette for two roles, `SKY` at its horizon and `GROUND` below. `sky_curve` says how soon the horizon's colour gives way to the top's: a level camera of ours read the sky 20 degrees up as `#9723bd`, and as `#7920c9` at 0.15, the value a new sky has. The last two lines take away what this sky draws unasked: a disc for every light that has a direction. Our sun's was a grey smudge in the violet, `#474747`.
+
+Two lines change no pixel, `gradient.sun_curve = 0.0` and the old `sky.background_color = SKY`: we ran the script without each. They are in the base's look, so they are in ours. And the top of the box went from `#cbff39` to `#ccff4e`, bluer: even a matt surface mirrors a little of the sky.
+
+## A second light
+
+Add these lines under the line `add_child(sun)`, after an empty line:
+
+```gdscript
+	var fill := DirectionalLight3D.new()
+	fill.rotation = Vector3(-0.5, 2.4, 0.0)
+	fill.light_color = FILL
+	fill.light_energy = 0.05
+	add_child(fill)
+```
+
+<!-- state: 11_second_light -->
+
+Run it. You will not find the difference by eye: no pixel moved by more than 25 of 765, the threshold of every sheet. The side of the box that the sun does not reach went from `#6b8927` to `#6c8f2a`.
+
+It is a second sun, turned so that its light comes from behind the bodies, on the right: pale cyan, weak, 0.05 against the sun's 0.28, its shadows off.
+
+Its work shows when the sun is gone. With the switch's line back in for one run, the top and the side of the box rose from `#6a8930` and `#6b8927` to `#6b8e32` and `#6c8f2a`, and the front stayed `#6a8925`: this light does not reach it. It is the hall's second lamp, and it gives the box its edges back by five or six levels of 255.
+
+Now the light from everywhere. Replace the two lines that begin `sky.ambient_light_color` and `sky.ambient_light_energy` with these:
+
+```gdscript
+	sky.ambient_light_color = AMBIENT_TINT
+	sky.ambient_light_energy = 0.27
+```
+
+<!-- state: 12_tinted_ambient -->
+
+Run it. The front of the box went from `#bef73e` to `#b5e63f`, the shaded side of the sphere from `#13748b` to `#126590`. The tint has all of its blue, 89% of its red and 85% of its green, so it is not even-handed: every shaded face lost some green and gained a little blue.
+
+## A softer shadow, which this renderer does not draw
+
+Add this line under the line `sun.light_energy = 0.28`:
+
+```gdscript
+	sun.shadow_blur = 2.0
+```
+
+<!-- state: 13_shadow_blur -->
+
+Run it. Nothing changed: the still is the one before it, to the pixel.
+
+`shadow_blur` is meant to soften a shadow's edge, and the base's look sets it to 2. We ran 0, 1, 2, 6 and 20: five stills with not one byte between them, the edge of the sphere's shadow 8 pixels wide in each. Under Forward+, another of Godot's renderers, the same five gave an edge of 4 pixels at 0, 20 at 2 and 134 at 20. So the property is real, and the Compatibility renderer does not draw it: one more silence. The line stays, so that our look says what the base's says.
+
+## Saturation and contrast
+
+Add these lines under the line `sky.ambient_light_energy = 0.27`:
+
+```gdscript
+	sky.adjustment_enabled = true
+	sky.adjustment_saturation = 1.08
+	sky.adjustment_contrast = 1.04
+```
+
+<!-- state: 14_saturation_contrast -->
+
+Run it. Every colour is a little stronger: the floor in the sun went from `#311496` to `#2b089d`, the top of the box from `#c4fd50` to `#c8ff46`.
+
+An adjustment is made after the picture is drawn, on every pixel alike. Saturation moves a pixel away from the grey of its own lightness, contrast away from middle grey; at 1 each does nothing.
+
+This is the `look.gd` in the download, 71 lines. Its filter is most of what this renderer has for one. The rest was tried here and left out:
+
+- **Fog**, as it comes, laid Godot's own grey blue, `848d9b`, over what is far: the ground beyond the floor went `#838e9d`, and the top of the box went from 9.6 to 16.3 away from `BODY`.
+- **Glow**, as it comes, moved no channel by more than 2 of 255. With `glow_bloom = 0.5` it lifted every colour, shadows too: the top was 20.7 away.
+- **The other tonemaps.** A tonemap turns the light the renderer counted into the numbers of a screen; ours, the linear one, leaves them as they are. Reinhard gave the same still, to the byte. Filmic made the top of the box `#e6ff63`, ACES `#f4ff9a`, AgX `#bacd6d`: two pale yellows and a dull olive.
+
+Try one. Add this line under the line `sky.adjustment_contrast = 1.04`:
+
+```gdscript
+	sky.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+```
+
+Run it and look at the box. Take out the line `sky.tonemap_mode = Environment.TONE_MAPPER_FILMIC`.
 
 ## What every later kit does
 
-Open `supplied/look.gd` and read it. Do not change it. Its first ten `const` lines are yours. Further down is this. It is a reading, not a block to type:
+Open `supplied/look.gd` and read it. Do not change it. Its first ten `const` lines are yours, and under `# The filter` are your three names and six values you wrote where they are used. Further down is this. It is a reading, not a block to type:
 
 ```gdscript
 static func paint(color: Color) -> StandardMaterial3D:
@@ -273,15 +392,17 @@ static func paint(color: Color) -> StandardMaterial3D:
 	return material
 ```
 
-`paint` is a function somebody wrote, as `_ready` is one we wrote, with a name of its own. It holds the three lines we typed three times, and `return` hands the finished material to whoever asked. In the same file `studio_environment()` holds our six lines for the sky, and `sun()` our four for the sun, with the same numbers. From the next kit on, a script asks that file. It begins with `const Look := preload("res://supplied/look.gd")` and paints a body in one line: `body.material_override = Look.paint(Look.BODY)`.
+`paint` is a function somebody wrote, as we wrote `_ready`. It holds the three lines we typed three times, and `return` hands the finished material to whoever asked. `environment()`, `sun()` and `fill()` hold our lines for the sky and the two lights, and one more, `ground_curve`, at the value a new sky has; the blur is set in `supplied/base_look.gd`. From the next kit on, a script begins with `const Look := preload("res://supplied/look.gd")` and paints a body in one line: `body.material_override = Look.paint(Look.BODY)`.
 
 We ran this scene dressed by that file in place of ours. The still is ours, pixel for pixel.
 
-This plain look is the one every sheet of the course is photographed in, so that the stills of two kits can be laid side by side. A scene that runs in a later kit wears a filter over it. The filter is in the same file, under the comment `# The filter`, and it is nine more values: a sky that goes from violet overhead to pink at the horizon in place of one flat colour; an ambient light tinted faintly lavender; a second, weak, cyan light from the other side with no shadow, `fill()`; a softer edge on the shadows; a little more saturation and contrast. The builder of the kit base chose it by eye from ten variants. We did not repeat that. We did run our scene with it: the still differs from the plain one on 91.68% of the picture, the top of the box is `#c8ff46`, 9.6 from the lime we wrote, and its side in shade is `#628222`.
+So the look every later kit opens in is these 71 lines. They are decisions. The engine's nature was the first run, a grey and black, and it spoke twice more unasked: a brown ground, a grey-blue fog.
 
-The fill light does the work of the hall's second lamp. With the filter on and the sun switched off, the three faces of the box are `#61802b`, `#617b1d` and `#628222`: close, and no longer one colour. A light with a direction, however weak, gives a box its edges back.
+## The plain studio
 
-So the look every later kit opens in is the 46 lines above and nine more values. They are decisions, and none of them is the engine's nature. The engine's nature was the first run: a grey, and black.
+`studio_environment()`, in the same file, is our sky as it stood at the palette step. Every sheet of the course is photographed there, with no second light. We ran the palette step against it: the same still, pixel for pixel.
+
+The reason is the filter. With not one body moved it changed 91.68% of the picture, and a measurement should be of the body. So a running scene wears the filter and a sheet does not. Under the filter the grey box was seen whole, where the plain look loses its shaded side (81.18% seen): the number would have been about the filter.
 
 ## The argument: which pair?
 
@@ -303,7 +424,7 @@ const GROUND := Color("009400")   # a green as light as the red
 const BODY := Color("ff0000")     # a red
 ```
 
-Run it. A red box on a green floor. The sphere stayed cyan: it asks for `SECOND`. Try the other pairs the same way. Then replace the two lines that begin `const GROUND` and `const BODY` with the course's pair again:
+Run it. A red box on a green floor. The sphere stayed cyan: it asks for `SECOND`. The ground beyond the floor went green: the sky asks for `GROUND`. Try the other pairs the same way. Then replace the two lines that begin `const GROUND` and `const BODY` with the course's pair again:
 
 ```gdscript
 const GROUND := Color("32188a")   # violet: the floor
@@ -316,7 +437,7 @@ The course's outline made its own: red on green differs most in hue and least in
 
 ![The four pairs as rendered, and the same four stills made grey](sheet.png)
 
-`sheet.gd` makes each pair the way you just did, by writing the two lines again, and photographs it. It needs a terminal; the [README](README.md) has the command, and you can go on without it. For each pair it finds the box's pixels, takes a second still with the box away, and counts how far each of the box's pixels is from the bare ground: the three channels added, out of 765. Then it turns both stills to grey and counts again. The box covers 6.33% of the still.
+`sheet.gd` makes each pair the way you just did, by writing the two lines again, but in the plain look, and photographs it. It needs a terminal; the [README](README.md) has the command, and you can go on without it. For each pair it finds the box's pixels, takes a second still with the box away, and counts how far each of the box's pixels is from the bare ground: the three channels added, out of 765. Then it turns both stills to grey and counts again. The box covers 6.33% of the still.
 
 | pair | hues apart | box from ground, as rendered | made grey | of the box, still seen in grey |
 | --- | --- | --- | --- | --- |
@@ -343,31 +464,31 @@ The grey of the first run is a decision somebody made. It reads as neutral only 
 
 A palette chosen for contrast also decides who can read it. The outline gives the figure: about one man in twelve does not tell red from green by hue. Our grey still is not that eye. It removes every hue at once, which no eye does, and we tested no eye. But it shows which way the risk runs: red on green, 362.6 apart on our screen, kept 41.4. Lime on violet kept everything.
 
-And the light changes the colour. `BODY` is `c6ff3d` in the script. On the screen it is `#cbff39` on the face turned to the sun, 6.1 away; `#bdf734` on the front, 15.0 away; and `#69891c` on the side in shade, 153.8 away. With the sun switched off every face is 153.8 away. With the sun at energy 1 the box was yellow. Under the filter the top is 9.6 away and the side 162.2. The palette names what a body is given, never what an eye gets. And the number that holds it together, 0.28, compensates for a behaviour of this renderer that we measured and could not explain.
-
-Roughness did least. At 0.2 the sphere gets a white spot, `#ffffff`, the sun's reflection. At 0.8 and at 1 there is none, and those two stills differ on 0.00%.
+And the light changes the colour. `BODY` is `c6ff3d` in the script. In the plain look it is `#cbff39` on the face turned to the sun, 6.1 away; `#bdf734` on the front, 15.0 away; and `#69891c` on the side in shade, 153.8 away. With the sun switched off every face is 153.8 away. With the sun at energy 1 the box was yellow. Under the filter, which is what a running scene shows, the top is 9.6 away and the side 162.2. The palette names what a body is given, never what an eye gets. And the number that holds it together, 0.28, compensates for a behaviour of this renderer that we measured and could not explain.
 
 ## Walk it
 
 Open `place.tscn` and run it with F6, **Run Current Scene**, the button beside Play at the top right of the editor *(editor)*. It is supplied: your scene, dressed by your `look.gd`, with a walker and a marble in it. Its script, `place.gd`, has one `if` in it, a word the course brings soon.
 
-A cyan capsule stands to the left of the box. That is the walker, a second body, so it is `SECOND`. Press M. The marble falls from above the walker's head, one metre in front of it, lands on the box and stays: it rests at 0.70 m. Press C and you look through the walker's eyes, 1.6 m up. W, A, S and D walk. Hold V, or the right mouse button, and move the mouse to look.
+A cyan capsule stands to the left of the box. That is the walker, a second body, so it is `SECOND`. Press M. The marble falls from above the walker's head, one metre in front of it, lands on the box and stays: it rests at 0.70 m. Press C and you look through the walker's eyes, 1.6 m up. W, A, S and D walk. Hold V, or the right mouse button, and move the mouse to look. Look up: the sky the scene's camera never showed is `#f81e94` at the horizon, `#9a15c5` 20 degrees up and `#570fe2` overhead.
 
-Walk once round the two bodies. Walk at the box: it stops you, your middle 0.30 m from its face. Then go behind the bodies, to the side the shadows point to, and look back at them. The two walls of the box that face you are the same colour, `#69891c` and `#69891c`, and the edge between them is gone. Only its top is lit, `#cbff46`. The sphere's near side is flat, `#0c7489`. From the shadow side a body shows you what the ambient light alone gives it. It is the switch's picture, and you did not touch the switch.
+Walk once round the two bodies. Walk at the box: it stops you, your middle 0.30 m from its face. Then go behind the bodies, to the side the shadows point to, and look back at them. The two walls of the box that face you are `#628320` and `#628221`, one level of 255 apart, and the edge between them is all but gone. Only its top is sunlit, `#c8ff55`. The sphere's near side is flat, `#0b6ea0`. From the shadow side a body shows you what the light from everywhere gives it, and the little the second light adds. It is nearly the switch's picture, and you did not touch the switch.
 
-Now stand where the box's shadow falls, close behind its right corner. The box is between your feet and the sun. It is not between your knees and the sun: where a walker can stand, the shadow of a box 0.6 m high does not reach its knees. A marble dropped there lies wholly in it. Seen from above it is `#83807b`. The same marble in the sun is `#e1ded7`. `BONE` is `f4efe6`.
+Now stand where the box's shadow falls, close behind its right corner. The box is between your feet and the sun. It is not between your knees and the sun: where a walker can stand, the shadow of a box 0.6 m high does not reach its knees. A marble dropped there lies wholly in it. Seen from above it is `#7a7489`. The same marble in the sun is `#ddd6e4`. `BONE` is `f4efe6`; the filter made it a little lavender.
 
-How this was run: the walker was walked by its autopilot and the keys were pressed from a script. The walk round ended "arrived", the walk at the box "blocked". No hand was on a keyboard and no headset was used. One thing the script found: a marble dropped 5 cm off the middle of the sphere rolls off it, across the floor and over the edge, and nothing here brings it back.
+How this was run: the walker's autopilot walked, and a script pressed the keys. The walk round ended "arrived", the walk at the box "blocked". No hand was on a keyboard and no headset was used.
 
 ## The process
 
 A body made by more than one operation has a recipe. Ours, one still after each step, from one camera:
 
-the engine's grey → a sky → ambient only → a sun, unturned → the sun turned → the ground → the bodies → energy 0.28 → the palette by role
+the engine's grey → a sky → ambient only → a sun, unturned → the sun turned → the ground → the bodies → energy 0.28 → the palette by role → a sky's top, its ground unsaid → the gradient sky → a second light → a tinted ambient → shadow blur 2 → saturation, contrast
 
-![The process strip: nine stills, one after each operation](process.png)
+![The process strip: fifteen stills, one after each operation](process.png)
 
-The sky changed the picture most: every pixel of the tile, 100%, because it coloured the background and, unasked, lit the bodies. The unturned sun changed 7.04% and the turned one 63.64%. The last step, the one this lesson is named for, changed 0.00%: the palette changed the script and left the picture alone.
+These tiles are stills of the scene as it runs, not of the plain studio, because the steps change the scene's own sky and light.
+
+The first sky changed the picture most: every pixel of the tile, 100%, because it coloured the background and, unasked, lit the bodies. The unturned sun changed 7.04% and the turned one 63.64%. The palette changed 0.00%: the script changed and the picture did not. Of the filter, saturation and contrast changed most, 40.69%; each sky step 33.21%, all of it above the floor; the second light and the shadow blur 0.00%.
 
 ## In your room
 
@@ -391,7 +512,7 @@ My room: place 2 is res://guests/the-look/the-look.tscn
 
 Walk to place 2. We ran the room's own trial on it in a copy of the room: the walker reached the aisle, walked at the guest and was stopped by it, 0.54 m from the middle of the place.
 
-Then the room's own look. The room has a file `room_look.gd`. It begins as a copy of the supplied look, filter and all: the same ten names. There `SKY` is the colour of the sky at the horizon, and `SKY_TOP` its colour overhead. Change two roles, and say why. Ours: in `room_look.gd`, replace the two lines that begin `const SKY` and `const SHADE` with these:
+Then the room's own look. The room has a file `room_look.gd`. It begins as a copy of the supplied look, filter and all. Change two roles, and say why. Ours: in `room_look.gd`, replace the two lines that begin `const SKY` and `const SHADE` with these:
 
 ```gdscript
 const SKY := Color("0d0620")      # near black: a night sky
@@ -409,19 +530,18 @@ Write in your field note which two roles you changed, and why.
 | Part | From | How far we go |
 | --- | --- | --- |
 | `the_look.tscn`: a floor, a box, a sphere, a camera | Supplied here | Use: the bodies and their colliders are in the scene; `look.gd` dresses them. |
-| `Environment`, `WorldEnvironment` | Godot | Use: `background_mode`, `background_color`, and the three `ambient_light_` properties. |
-| `DirectionalLight3D` | Godot | Use: `rotation`, `shadow_enabled`, `light_energy`, `visible`. |
+| `Environment`, `WorldEnvironment`, `Sky`, `ProceduralSkyMaterial` | Godot | Use: a background, flat or a sky with a ground under it; the `ambient_light_` and `adjustment_` properties. |
+| `DirectionalLight3D` | Godot | Use: `rotation`, `shadow_enabled`, `light_energy`, `light_color`, `visible`; `shadow_blur`, which this renderer does not draw. |
 | `StandardMaterial3D` | Godot | Use: `albedo_color` and `roughness`; `material_override` puts it on a mesh. |
 | `Color("…")`, `Color.WHITE` | Godot | Use: a colour from six digits; a colour with a name. |
 | `supplied/look.gd` | The kit base | Understand: read beside our own; from the next kit on, use. |
-| `place.tscn`, `place.gd` | Supplied here | Use: our scene with the walker and the marble; M drops the marble. |
-| `supplied/walker.tscn`, `supplied/marble.tscn` | The kit base | Use: a body with eyes, and a ball that rests on colliders. |
+| `place.tscn`, `place.gd`, the walker and the marble | Supplied here; the kit base | Use: our scene with a body that has eyes and a ball that rests on colliders; M drops the ball. |
 | `sheet.gd` | Supplied here | Use: it makes the four pairs, the grey stills and the process strip. |
 
-What we made is `look.gd`: ten names, six lines for a sky and its light, four for a sun, and three materials that ask for a role.
+What we made is `look.gd`: thirteen names, a sky with its light and its adjustment, a sun, a second light, and three materials that ask for a role.
 
 ## What we carry forward
 
-We leave with a background that has to be switched on; with ambient light, which shows no shape; with a sun, which has a direction and no place; with a material as half of a colour; with `Color("…")` and `const`; and with a palette of roles, so that a body asks for `BODY`. And with one measure for any pair of colours: turn it grey and see what is left.
+We leave with a background that has to be switched on; with ambient light, which shows no shape; with a sun, which has a direction and no place; with a material as half of a colour; with `Color("…")` and `const`; with a palette of roles, so that a body asks for `BODY`; and with a filter, which changes every pixel and is kept out of a measurement. And with one measure for any pair of colours: turn it grey and see what is left.
 
 From here on every kit opens in this look, with its filter over it, and you know what both are made of.

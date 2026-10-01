@@ -1,0 +1,559 @@
+{
+  "axis": "segments: parts in each leg, the leg 0.8 m long every time",
+  "godot": "4.6-stable (official)",
+  "pairs_above": {
+    "closest": "3 parts vs 6 parts",
+    "farthest": "1 part vs 3 parts",
+    "pairs": {
+      "1 part vs 2 parts": {
+        "differ_pct": 2.8,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.51,
+        "outline_pct": 1.29,
+        "outline_px": 7.91
+      },
+      "1 part vs 3 parts": {
+        "differ_pct": 2.84,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.47,
+        "outline_pct": 1.36,
+        "outline_px": 8.36
+      },
+      "1 part vs 6 parts": {
+        "differ_pct": 2.47,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.2,
+        "outline_pct": 1.27,
+        "outline_px": 7.8
+      },
+      "2 parts vs 3 parts": {
+        "differ_pct": 1.53,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.1,
+        "outline_pct": 0.42,
+        "outline_px": 2.6
+      },
+      "2 parts vs 6 parts": {
+        "differ_pct": 1.4,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.09,
+        "outline_pct": 0.31,
+        "outline_px": 1.91
+      },
+      "3 parts vs 6 parts": {
+        "differ_pct": 0.5,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.34,
+        "outline_pct": 0.17,
+        "outline_px": 1.02
+      }
+    }
+  },
+  "pairs_level": {
+    "closest": "3 parts vs 6 parts",
+    "farthest": "1 part vs 3 parts",
+    "pairs": {
+      "1 part vs 2 parts": {
+        "differ_pct": 6.55,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.52,
+        "outline_pct": 5.03,
+        "outline_px": 37.73
+      },
+      "1 part vs 3 parts": {
+        "differ_pct": 6.66,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.15,
+        "outline_pct": 5.51,
+        "outline_px": 40.74
+      },
+      "1 part vs 6 parts": {
+        "differ_pct": 6.59,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.19,
+        "outline_pct": 5.4,
+        "outline_px": 39.89
+      },
+      "2 parts vs 3 parts": {
+        "differ_pct": 5.44,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.72,
+        "outline_pct": 3.73,
+        "outline_px": 27.57
+      },
+      "2 parts vs 6 parts": {
+        "differ_pct": 4.76,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.3,
+        "outline_pct": 3.46,
+        "outline_px": 25.55
+      },
+      "3 parts vs 6 parts": {
+        "differ_pct": 3.03,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.23,
+        "outline_pct": 1.8,
+        "outline_px": 13.29
+      }
+    }
+  },
+  "pairs_level_flat": {
+    "closest": "3 parts vs 6 parts",
+    "farthest": "1 part vs 6 parts",
+    "pairs": {
+      "1 part vs 2 parts": {
+        "differ_pct": 6.55,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.45,
+        "outline_pct": 5.1,
+        "outline_px": 38.16
+      },
+      "1 part vs 3 parts": {
+        "differ_pct": 6.8,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.09,
+        "outline_pct": 5.7,
+        "outline_px": 41.84
+      },
+      "1 part vs 6 parts": {
+        "differ_pct": 6.84,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.04,
+        "outline_pct": 5.8,
+        "outline_px": 42.35
+      },
+      "2 parts vs 3 parts": {
+        "differ_pct": 4.74,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.65,
+        "outline_pct": 3.09,
+        "outline_px": 22.68
+      },
+      "2 parts vs 6 parts": {
+        "differ_pct": 4.42,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.54,
+        "outline_pct": 2.87,
+        "outline_px": 20.99
+      },
+      "3 parts vs 6 parts": {
+        "differ_pct": 1.94,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.78,
+        "outline_pct": 1.16,
+        "outline_px": 8.49
+      }
+    }
+  },
+  "pairs_level_walked": {
+    "closest": "3 parts vs 6 parts",
+    "farthest": "1 part vs 2 parts",
+    "pairs": {
+      "1 part vs 2 parts": {
+        "differ_pct": 5.72,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.09,
+        "outline_pct": 4.63,
+        "outline_px": 34.95
+      },
+      "1 part vs 3 parts": {
+        "differ_pct": 5.56,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.3,
+        "outline_pct": 4.26,
+        "outline_px": 32.21
+      },
+      "1 part vs 6 parts": {
+        "differ_pct": 5.09,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.38,
+        "outline_pct": 3.71,
+        "outline_px": 28.37
+      },
+      "2 parts vs 3 parts": {
+        "differ_pct": 4.67,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.54,
+        "outline_pct": 3.13,
+        "outline_px": 23.61
+      },
+      "2 parts vs 6 parts": {
+        "differ_pct": 4.64,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.87,
+        "outline_pct": 2.78,
+        "outline_px": 20.94
+      },
+      "3 parts vs 6 parts": {
+        "differ_pct": 4.61,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.81,
+        "outline_pct": 2.79,
+        "outline_px": 21.1
+      }
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "sheet_png": {
+    "bytes": 82419,
+    "height": 754,
+    "width": 1292
+  },
+  "sheet_rows": [
+    "from the side, standing from rest",
+    "from the side, standing after a walk of 1.2 m",
+    "from straight above, standing from rest"
+  ],
+  "standing_after_a_walk_of_1_2_m": {
+    "1 part": {
+      "body_at_x_m": 1.673,
+      "body_height_m": 0.494,
+      "feet_height_m": [
+        0.0,
+        0.156,
+        0.219,
+        0.0
+      ],
+      "hip_to_foot_m": [
+        0.605,
+        0.486,
+        0.445,
+        0.605
+      ],
+      "leg_end_to_foot_m": [
+        0.195,
+        0.314,
+        0.355,
+        0.195
+      ],
+      "sharpest_bend_deg": 0.0,
+      "worst_miss_m": 0.355
+    },
+    "2 parts": {
+      "body_at_x_m": 1.673,
+      "body_height_m": 0.494,
+      "feet_height_m": [
+        0.0,
+        0.156,
+        0.219,
+        0.0
+      ],
+      "hip_to_foot_m": [
+        0.605,
+        0.486,
+        0.445,
+        0.605
+      ],
+      "leg_end_to_foot_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sharpest_bend_deg": 112.4,
+      "worst_miss_m": 0.0
+    },
+    "3 parts": {
+      "body_at_x_m": 1.673,
+      "body_height_m": 0.494,
+      "feet_height_m": [
+        0.0,
+        0.156,
+        0.219,
+        0.0
+      ],
+      "hip_to_foot_m": [
+        0.605,
+        0.486,
+        0.445,
+        0.605
+      ],
+      "leg_end_to_foot_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sharpest_bend_deg": 111.0,
+      "worst_miss_m": 0.0
+    },
+    "6 parts": {
+      "body_at_x_m": 1.673,
+      "body_height_m": 0.494,
+      "feet_height_m": [
+        0.0,
+        0.156,
+        0.219,
+        0.0
+      ],
+      "hip_to_foot_m": [
+        0.605,
+        0.486,
+        0.445,
+        0.605
+      ],
+      "leg_end_to_foot_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sharpest_bend_deg": 165.0,
+      "worst_miss_m": 0.0
+    }
+  },
+  "standing_on_the_flat_floor": {
+    "1 part": {
+      "body_height_m": 0.4,
+      "feet_height_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "hip_to_foot_m": [
+        0.532,
+        0.532,
+        0.532,
+        0.532
+      ],
+      "leg_end_to_foot_m": [
+        0.268,
+        0.268,
+        0.268,
+        0.268
+      ],
+      "sharpest_bend_deg": 0.0,
+      "worst_miss_m": 0.268
+    },
+    "2 parts": {
+      "body_height_m": 0.4,
+      "feet_height_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "hip_to_foot_m": [
+        0.532,
+        0.532,
+        0.532,
+        0.532
+      ],
+      "leg_end_to_foot_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sharpest_bend_deg": 96.7,
+      "worst_miss_m": 0.0
+    },
+    "3 parts": {
+      "body_height_m": 0.4,
+      "feet_height_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "hip_to_foot_m": [
+        0.532,
+        0.532,
+        0.532,
+        0.532
+      ],
+      "leg_end_to_foot_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sharpest_bend_deg": 76.6,
+      "worst_miss_m": 0.0
+    },
+    "6 parts": {
+      "body_height_m": 0.4,
+      "feet_height_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "hip_to_foot_m": [
+        0.532,
+        0.532,
+        0.532,
+        0.532
+      ],
+      "leg_end_to_foot_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sharpest_bend_deg": 47.8,
+      "worst_miss_m": 0.0
+    }
+  },
+  "standing_on_the_uneven_ground": {
+    "1 part": {
+      "body_height_m": 0.493,
+      "feet_height_m": [
+        0.0,
+        0.154,
+        0.218,
+        0.0
+      ],
+      "hip_to_foot_m": [
+        0.605,
+        0.487,
+        0.445,
+        0.605
+      ],
+      "leg_end_to_foot_m": [
+        0.195,
+        0.313,
+        0.355,
+        0.195
+      ],
+      "sharpest_bend_deg": 0.0,
+      "worst_miss_m": 0.355
+    },
+    "2 parts": {
+      "body_height_m": 0.493,
+      "feet_height_m": [
+        0.0,
+        0.154,
+        0.218,
+        0.0
+      ],
+      "hip_to_foot_m": [
+        0.605,
+        0.487,
+        0.445,
+        0.605
+      ],
+      "leg_end_to_foot_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sharpest_bend_deg": 112.4,
+      "worst_miss_m": 0.0
+    },
+    "3 parts": {
+      "body_height_m": 0.493,
+      "feet_height_m": [
+        0.0,
+        0.154,
+        0.218,
+        0.0
+      ],
+      "hip_to_foot_m": [
+        0.605,
+        0.487,
+        0.445,
+        0.605
+      ],
+      "leg_end_to_foot_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sharpest_bend_deg": 113.2,
+      "worst_miss_m": 0.0
+    },
+    "6 parts": {
+      "body_height_m": 0.493,
+      "feet_height_m": [
+        0.0,
+        0.154,
+        0.218,
+        0.0
+      ],
+      "hip_to_foot_m": [
+        0.605,
+        0.487,
+        0.445,
+        0.605
+      ],
+      "leg_end_to_foot_m": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sharpest_bend_deg": 74.9,
+      "worst_miss_m": 0.0
+    }
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "changed_most": "5 four legs, rays as they came",
+    "one_leg": {
+      "hip_led_away_m": 0.189,
+      "leg_end_to_hand_m": 0.014
+    },
+    "png": {
+      "bytes": 59772,
+      "height": 266,
+      "width": 2264
+    },
+    "rays_as_they_came": {
+      "body_at": [
+        0.0,
+        0.4,
+        0.0
+      ]
+    },
+    "rays_look_down": {
+      "body_height_m": 0.573,
+      "worst_miss_m": 0.0
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 a chain laid down the hip"
+      },
+      {
+        "differs_from_step_before_pct": 1.81,
+        "step": "2 one part follows the hand"
+      },
+      {
+        "differs_from_step_before_pct": 1.45,
+        "step": "3 the loop: all follow"
+      },
+      {
+        "differs_from_step_before_pct": 2.66,
+        "step": "4 the hip holds"
+      },
+      {
+        "differs_from_step_before_pct": 14.22,
+        "step": "5 four legs, rays as they came"
+      },
+      {
+        "differs_from_step_before_pct": 13.63,
+        "step": "6 the rays look down"
+      },
+      {
+        "differs_from_step_before_pct": 13.31,
+        "step": "7 the body follows its feet"
+      }
+    ],
+    "walked_m_in_1_5_s": 0.46
+  },
+  "values": [
+    1,
+    2,
+    3,
+    6
+  ]
+}

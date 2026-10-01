@@ -1,0 +1,597 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Spiral stair, its main scene is spiral_stair.tscn, its renderer Compatibility",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the base's 15 files: [\"base.tscn\", \"base_look.gd\", \"check_guest.gd\", \"look.gd\", \"marble.gd\", \"marble.tscn\", \"mover.gd\", \"segment.gd\", \"sheet_tools.gd\", \"sweep_sheet.gd\", \"sweep_sheet.tscn\", \"trace_strip.gd\", \"verify_tools.gd\", \"walker.gd\", \"walker.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "the 18 scripts of the kit are indented with tabs and end their lines with a line feed: []",
+      "passed": true
+    },
+    {
+      "name": "no script declares a class_name, and the project lists no named class: nothing needs an import",
+      "passed": true
+    },
+    {
+      "name": "walk_test.gd, the lesson's own test, is built on the supplied harness and writes walk_test.json, not this file's result",
+      "passed": true
+    },
+    {
+      "name": "sin(deg_to_rad(30)) is 0.5 and sin(30) is -0.988032: sin() reads its number as radians",
+      "passed": true
+    },
+    {
+      "name": "a whole turn is TAU radians, 6.283185; half a turn is PI",
+      "passed": true
+    },
+    {
+      "name": "one radian is 57.30 degrees",
+      "passed": true
+    },
+    {
+      "name": "the lesson's first tread: at angle 0 it is printed (1.2, 0.09, 0.0), at 1.0 (0.648363, 0.09, 1.009765), at deg_to_rad(30.0), which is 0.5236, (1.03923, 0.09, 0.6)",
+      "passed": true
+    },
+    {
+      "name": "print(sin(30), \" \", sin(deg_to_rad(30))) gives -0.98803162409286 0.5",
+      "passed": true
+    },
+    {
+      "name": "place(i, r) stays r from the middle and rises 0.18 m with every i: place(0) is (1.2, 0, 0), place(3) is (0, 0.54, 1.2), place(6) is (-1.2, 1.08, 0), place(9) is (0, 1.62, -1.2)",
+      "passed": true
+    },
+    {
+      "name": "place() takes a number between two treads: place(0.5) is 15 degrees round and 0.09 m up",
+      "passed": true
+    },
+    {
+      "name": "the straight way from one tread's middle to the next comes 0.0409 m nearer the middle than the circle: 1.2 * gap_to_circle(12)",
+      "passed": true
+    },
+    {
+      "name": "gap_to_circle(16) is 0.0192, the family lesson's 1 - cos(11.25 degrees); gap_to_circle(12) is 0.0341",
+      "passed": true
+    },
+    {
+      "name": "wave_height(x, z) is sin(x) * sin(z): 1 at (PI / 2, PI / 2), 0 along x = PI, and the same again TAU metres on",
+      "passed": true
+    },
+    {
+      "name": "catenoid(u, v) is a circle whose radius is cosh(v): 1 at the waist, 1.543 one metre up",
+      "passed": true
+    },
+    {
+      "name": "base_ring(4, 1.2) is place(i + 2.5, 1.2) with a turn of 90 degrees and no rise: the pyramid's base is this chapter's function, started at 225 degrees",
+      "passed": true
+    },
+    {
+      "name": "the stair is 9 treads: each a StaticBody3D with a box of 0.9 x 0.18 x 0.7 m as its mesh and as its collider, the middle of its top at place(i)",
+      "passed": true
+    },
+    {
+      "name": "each tread is turned so that its long side points away from the middle",
+      "passed": true
+    },
+    {
+      "name": "each tread is painted BODY",
+      "passed": true
+    },
+    {
+      "name": "route() is 10 points, from the foot on the floor at (1.2, 0, 0) to the middle of the top tread; top() is 1.62 m",
+      "passed": true
+    },
+    {
+      "name": "route() gives places in the room: move the stair and the route moves with it",
+      "passed": true
+    },
+    {
+      "name": "spiral_stair.tscn inherits the base: the look, a Stair of 9 treads, the Walker on the floor at (2.7, 0, 0)",
+      "passed": true
+    },
+    {
+      "name": "run, the walker climbs the stair: its walk ended \"arrived\" with its feet at 1.62 m, on the top tread",
+      "passed": true
+    },
+    {
+      "name": "climb.gd prints what happened: \"the walker arrived with its feet at 1.62 m; the top is at 1.62 m\"",
+      "passed": true
+    },
+    {
+      "name": "the scene ran 180 frames more and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "with no colliders the same walk ends \"arrived\" with the feet at 0.00 m: the walker went through the treads, so \"arrived\" alone does not say it climbed",
+      "passed": true
+    },
+    {
+      "name": "rise 0.10 m: the walk ended \"arrived\" with the feet at 0.90 m; the top is at 0.90 m",
+      "passed": true
+    },
+    {
+      "name": "rise 0.18 m: the walk ended \"arrived\" with the feet at 1.62 m; the top is at 1.62 m",
+      "passed": true
+    },
+    {
+      "name": "rise 0.30 m: the walk ended \"arrived\" with the feet at 2.70 m; the top is at 2.70 m",
+      "passed": true
+    },
+    {
+      "name": "rise 0.60 m: the walk ended \"blocked\" with the feet at 0.00 m, in front of the first tread; the top is at 5.40 m",
+      "passed": true
+    },
+    {
+      "name": "the limit is the walker's step_height, 0.35 m: at a rise of 0.35 m it reaches the top (3.15 m), at 0.36 m it is stopped on the floor",
+      "passed": true
+    },
+    {
+      "name": "the supplied walker steps up 0.35 m; as a CharacterBody3D it calls a slope a floor up to 45 degrees and snaps to a floor within 0.1 m",
+      "passed": true
+    },
+    {
+      "name": "16 treads go once round and a third, and tread 12 hangs over the foot. At a rise of 0.18 m its underside is 11 rises up, 1.98 m, and the walker is stopped on the floor (feet at 0.00 m); at 0.30 m it reaches the top, 4.80 m",
+      "passed": true
+    },
+    {
+      "name": "with 11 rises of 0.20 m overhead, 2.20 m, it takes one tread and is stopped (feet at 0.20 m); with 11 of 0.21 m, 2.31 m, it climbs to the top, 3.36 m",
+      "passed": true
+    },
+    {
+      "name": "with 30 read as radians each tread lies 278.9 degrees on from the last, which is 81.1 degrees back: [-81.1, -162.3, 116.6, 35.5, -45.6, -126.8, 152.1, 71.0, -10.1]; two neighbours are 1.56 m apart, not 0.62 m",
+      "passed": true
+    },
+    {
+      "name": "30 radians is 4.77 turns: four whole turns and 278.9 degrees",
+      "passed": true
+    },
+    {
+      "name": "the walker's walk ends \"blocked\" with its feet at 0.00 m: the top tread hangs over the foot of the stair, its underside at 1.44 m",
+      "passed": true
+    },
+    {
+      "name": "and Godot logged no error and no warning: the fault is silent",
+      "passed": true
+    },
+    {
+      "name": "nine treads 81.1 degrees apart go 2.03 times round the middle, backwards; the walker stands at x = 2.00 m, 0.80 m short of the foot",
+      "passed": true
+    },
+    {
+      "name": "with `ramp` ticked the stair is one body: a surface of 10 pieces, 60 corners, and one ConcavePolygonShape3D of 20 triangles",
+      "passed": true
+    },
+    {
+      "name": "the ramp starts on the floor and ends at 1.80 m, one piece past the walker's last point; it is BODY, drawn from both sides",
+      "passed": true
+    },
+    {
+      "name": "each piece is two flat triangles, one 12.3 and one 25.6 degrees steep; the curve under the walker's feet rises at 16.0 degrees",
+      "passed": true
+    },
+    {
+      "name": "the ramp at a rise of 0.10 m: the walk ended \"arrived\" with the feet at 0.91 m of 0.90 m; its steepest triangle is 14.9 degrees",
+      "passed": true
+    },
+    {
+      "name": "the ramp at a rise of 0.18 m: the walk ended \"arrived\" with the feet at 1.65 m of 1.62 m; its steepest triangle is 25.6 degrees",
+      "passed": true
+    },
+    {
+      "name": "the ramp at a rise of 0.30 m: the walk ended \"arrived\" with the feet at 2.69 m of 2.70 m; its steepest triangle is 38.7 degrees",
+      "passed": true
+    },
+    {
+      "name": "the ramp at 0.60 m: the walk ended \"blocked\" with the feet at 0.23 m. The curve under the feet rises at 43.7 degrees; the steepest triangle is 58.0, more than the 45 the walker calls a floor",
+      "passed": true
+    },
+    {
+      "name": "a walker told that 70 degrees is still a floor climbs that ramp: \"arrived\", feet at 5.41 m. The slope was what stopped it",
+      "passed": true
+    },
+    {
+      "name": "that ramp's steepest triangle is 58.0 degrees, yet a walker with a floor_max_angle of 60 is stopped (feet at 0.45 m) and one with 61 climbs: the limit is not the triangle's own slope",
+      "passed": true
+    },
+    {
+      "name": "the ramp's own limit for this walker lies between a rise of 0.38 m (\"arrived\") and of 0.40 m (\"blocked\", feet at 0.16 m)",
+      "passed": true
+    },
+    {
+      "name": "a walker with step_height 0, a body that does not step, is stopped on the floor by the stair at 0.10, 0.18 and 0.30 m",
+      "passed": true
+    },
+    {
+      "name": "the same body reaches the top of the ramp at 0.10, 0.18 and 0.30 m: 0.89, 1.61 and 2.69 m",
+      "passed": true
+    },
+    {
+      "name": "on the ramp at 0.35 m, which the walker climbs up to 0.38 m, the body that does not step is stopped with its feet at 0.26 m: the step helps on a ramp too",
+      "passed": true
+    },
+    {
+      "name": "at 0.60 m it is stopped by both: on the floor by the stair, with its feet at 0.23 m by the ramp",
+      "passed": true
+    },
+    {
+      "name": "sent back down the same route, the walker ends \"arrived\" on the floor, on the stair and on the ramp",
+      "passed": true
+    },
+    {
+      "name": "going down the ramp with floor_snap_length 0.1 it is off the floor in 0 of 221 steps; with the snap at 0 in 158 of 226; down the stair, with the snap, in 77 of 216",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped on the top tread stays there: its middle at 1.71 m",
+      "passed": true
+    },
+    {
+      "name": "dropped on the same point of the ramp it rolls down and away: four seconds later it is at 0.09 m, 3.62 m from the middle",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "the guest is a Node3D: a stair of 6 treads and a plate at its foot, standing on the ground, 1.80 m high",
+      "passed": true
+    },
+    {
+      "name": "it fits the place of 1.6 m by 1.6 m: from -0.799 to 0.763 m in x and from -0.793 to 0.780 m in z",
+      "passed": true
+    },
+    {
+      "name": "its treads are BODY and its plate LINE, written out as the look's own values",
+      "passed": true
+    },
+    {
+      "name": "a walker that steps on the plate is handed the route and climbs: its walk ended \"arrived\" with its feet at 1.80 m, on the top tread",
+      "passed": true
+    },
+    {
+      "name": "the guest stops a body that does not step, on the floor",
+      "passed": true
+    },
+    {
+      "name": "as a ramp at its own rise, 0.30 m, it stops the walker too, its feet at 0.09 m: on a place 1.6 m wide that ramp is too steep",
+      "passed": true
+    },
+    {
+      "name": "a ramp that fits the place and can be walked rises 0.10 m a piece: it ends \"arrived\" at 0.61 m",
+      "passed": true
+    },
+    {
+      "name": "at the kit's own rise, 0.18 m, the narrow stair stops the walker on the floor: on treads 0.35 m deep this body needs the steeper stair",
+      "passed": true
+    },
+    {
+      "name": "why: lifted 0.35 m and moved ahead, the walker would come down on tread 2, whose top is at 0.36 m, and on its edge: the landing's normal has y = 0.85, and the walker steps only onto a level top, y above 0.9",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 69,
+  "godot": "4.6-stable (official)",
+  "kit": "Spiral stair",
+  "measured": {
+    "a_body_that_does_not_step": {
+      "ramp 0.10": {
+        "feet": 0.89,
+        "from_the_last_point_m": 0.09,
+        "how": "arrived",
+        "top": 0.9
+      },
+      "ramp 0.18": {
+        "feet": 1.61,
+        "from_the_last_point_m": 0.1,
+        "how": "arrived",
+        "top": 1.62
+      },
+      "ramp 0.30": {
+        "feet": 2.69,
+        "from_the_last_point_m": 0.1,
+        "how": "arrived",
+        "top": 2.7
+      },
+      "ramp 0.35": {
+        "feet": 0.26,
+        "from_the_last_point_m": 1.95,
+        "how": "blocked",
+        "top": 3.15
+      },
+      "ramp 0.60": {
+        "feet": 0.23,
+        "from_the_last_point_m": 1.84,
+        "how": "blocked",
+        "top": 5.4
+      },
+      "stair 0.10": {
+        "feet": 0.0,
+        "from_the_last_point_m": 1.77,
+        "how": "blocked",
+        "top": 0.9
+      },
+      "stair 0.18": {
+        "feet": 0.0,
+        "from_the_last_point_m": 1.74,
+        "how": "blocked",
+        "top": 1.62
+      },
+      "stair 0.30": {
+        "feet": 0.0,
+        "from_the_last_point_m": 1.74,
+        "how": "blocked",
+        "top": 2.7
+      },
+      "stair 0.60": {
+        "feet": 0.0,
+        "from_the_last_point_m": 1.74,
+        "how": "blocked",
+        "top": 5.4
+      }
+    },
+    "down_again": {
+      "ramp, snap 0": {
+        "down": "arrived",
+        "feet": 0.0,
+        "steps_down": 226,
+        "steps_in_the_air": 158,
+        "up": "arrived"
+      },
+      "ramp, snap 0.1": {
+        "down": "arrived",
+        "feet": 0.0,
+        "steps_down": 221,
+        "steps_in_the_air": 0,
+        "up": "arrived"
+      },
+      "stair, snap 0.1": {
+        "down": "arrived",
+        "feet": 0.0,
+        "steps_down": 216,
+        "steps_in_the_air": 77,
+        "up": "arrived"
+      }
+    },
+    "guest": {
+      "at_the_kits_rise": {
+        "landing_normal_y": 0.85,
+        "that_treads_top_m": 0.36,
+        "the_walker_lifts_itself_m": 0.35,
+        "walk_ended": "blocked",
+        "would_land_on_tread": 2
+      },
+      "box_x": [
+        -0.799,
+        0.763
+      ],
+      "box_z": [
+        -0.793,
+        0.78
+      ],
+      "feet_at_m": 1.8,
+      "height_m": 1.8,
+      "others": {
+        "a body that does not step": {
+          "feet_at_m": 0.0,
+          "top_m": 1.8,
+          "walk_ended": "blocked"
+        },
+        "as a ramp": {
+          "feet_at_m": 0.09,
+          "top_m": 1.8,
+          "walk_ended": "blocked"
+        },
+        "as a ramp with a rise of 0.10 m": {
+          "feet_at_m": 0.61,
+          "top_m": 0.6,
+          "walk_ended": "arrived"
+        },
+        "with the kit's rise, 0.18 m": {
+          "feet_at_m": 0.0,
+          "top_m": 1.08,
+          "walk_ended": "blocked"
+        }
+      },
+      "walk_ended": "arrived"
+    },
+    "marble": {
+      "ramp": {
+        "after_4_s_at_m": 0.09,
+        "from_the_middle_m": 3.62
+      },
+      "stair": {
+        "after_4_s_at_m": 1.71,
+        "from_the_middle_m": 1.2
+      }
+    },
+    "no_colliders": {
+      "feet_at_m": 0.0,
+      "walk_ended": "arrived"
+    },
+    "planted_bug": {
+      "degrees_back_per_tread": 81.1,
+      "feet_at_m": 0.0,
+      "neighbours_apart_m": 1.56,
+      "short_of_the_foot_m": 0.8,
+      "tread_angles_deg": [
+        -81.1,
+        -162.3,
+        116.6,
+        35.5,
+        -45.6,
+        -126.8,
+        152.1,
+        71.0,
+        -10.1
+      ],
+      "turns_backwards": 2.03,
+      "walk_ended": "blocked",
+      "walker_at": [
+        2.0,
+        0.0
+      ]
+    },
+    "ramp": {
+      "0.10": {
+        "curve_under_the_feet_deg": 9.0,
+        "feet": 0.91,
+        "flattest_triangle_deg": 6.9,
+        "from_the_last_point_m": 0.08,
+        "how": "arrived",
+        "steepest_triangle_deg": 14.9,
+        "top": 0.9
+      },
+      "0.18": {
+        "curve_under_the_feet_deg": 16.0,
+        "feet": 1.65,
+        "flattest_triangle_deg": 12.3,
+        "from_the_last_point_m": 0.1,
+        "how": "arrived",
+        "steepest_triangle_deg": 25.6,
+        "top": 1.62
+      },
+      "0.30": {
+        "curve_under_the_feet_deg": 25.5,
+        "feet": 2.69,
+        "flattest_triangle_deg": 20.0,
+        "from_the_last_point_m": 0.09,
+        "how": "arrived",
+        "steepest_triangle_deg": 38.7,
+        "top": 2.7
+      },
+      "0.38": {
+        "feet": 3.48,
+        "from_the_last_point_m": 0.07,
+        "how": "arrived",
+        "top": 3.42
+      },
+      "0.40": {
+        "feet": 0.16,
+        "from_the_last_point_m": 1.87,
+        "how": "blocked",
+        "top": 3.6
+      },
+      "0.60": {
+        "curve_under_the_feet_deg": 43.7,
+        "feet": 0.23,
+        "flattest_triangle_deg": 36.0,
+        "from_the_last_point_m": 1.84,
+        "how": "blocked",
+        "steepest_triangle_deg": 58.0,
+        "top": 5.4
+      },
+      "0.60, floor_max_angle 60": {
+        "feet": 0.45,
+        "from_the_last_point_m": 1.92,
+        "how": "blocked",
+        "top": 5.4
+      },
+      "0.60, floor_max_angle 61": {
+        "feet": 5.41,
+        "from_the_last_point_m": 0.09,
+        "how": "arrived",
+        "top": 5.4
+      },
+      "0.60, floor_max_angle 70": {
+        "feet": 5.41,
+        "from_the_last_point_m": 0.09,
+        "how": "arrived",
+        "top": 5.4
+      }
+    },
+    "rises": {
+      "0.10": {
+        "feet": 0.9,
+        "from_the_last_point_m": 0.07,
+        "how": "arrived",
+        "top": 0.9
+      },
+      "0.18": {
+        "feet": 1.62,
+        "from_the_last_point_m": 0.07,
+        "how": "arrived",
+        "top": 1.62
+      },
+      "0.30": {
+        "feet": 2.7,
+        "from_the_last_point_m": 0.07,
+        "how": "arrived",
+        "top": 2.7
+      },
+      "0.35": {
+        "feet": 3.15,
+        "from_the_last_point_m": 0.07,
+        "how": "arrived",
+        "top": 3.15
+      },
+      "0.36": {
+        "feet": 0.0,
+        "from_the_last_point_m": 1.74,
+        "how": "blocked",
+        "top": 3.24
+      },
+      "0.60": {
+        "feet": 0.0,
+        "from_the_last_point_m": 1.74,
+        "how": "blocked",
+        "top": 5.4
+      }
+    },
+    "sixteen_treads": {
+      "0.18": {
+        "feet": 0.0,
+        "from_the_last_point_m": 2.14,
+        "how": "blocked",
+        "top": 2.88
+      },
+      "0.20": {
+        "feet": 0.2,
+        "from_the_last_point_m": 1.73,
+        "how": "blocked",
+        "top": 3.2
+      },
+      "0.21": {
+        "feet": 3.36,
+        "from_the_last_point_m": 0.07,
+        "how": "arrived",
+        "top": 3.36
+      },
+      "0.30": {
+        "feet": 4.8,
+        "from_the_last_point_m": 0.08,
+        "how": "arrived",
+        "top": 4.8
+      }
+    },
+    "the_scene": {
+      "feet_at_m": 1.62,
+      "printed": "the walker arrived with its feet at 1.62 m; the top is at 1.62 m",
+      "walk_ended": "arrived"
+    },
+    "trigonometry": {
+      "TAU": 6.283185,
+      "chord_between_tread_middles_m": 0.621,
+      "deg_to_rad_30": 0.5236,
+      "one_radian_deg": 57.3,
+      "route_nearer_the_middle_than_the_circle_m": 0.0409,
+      "sin_30": -0.988032,
+      "sin_30_printed": "-0.98803162409286",
+      "sin_deg_to_rad_30": 0.5,
+      "the_first_tread_printed": [
+        "(1.2, 0.09, 0.0)",
+        "(0.648363, 0.09, 1.009765)",
+        "(1.03923, 0.09, 0.6)"
+      ]
+    }
+  },
+  "passed": true
+}

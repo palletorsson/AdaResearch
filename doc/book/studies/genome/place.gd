@@ -12,5 +12,5 @@ func _ready() -> void:
 	var plate := Look.label(title)
 	plate.font_size = 64
 	plate.rotation.x = -PI / 2.0    # flat on the ground, its top away from us
-	plate.position = Vector3(0.0, 0.015, 0.6)
+	plate.position = Vector3(-0.22, 0.015, 0.5)   # left of the middle: the fixed camera cuts the square at its right
 	add_child(plate)

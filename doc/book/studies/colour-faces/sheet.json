@@ -1,0 +1,919 @@
+{
+  "godot": "4.6-stable (official)",
+  "lamp": {
+    "at_the_start": {
+      "hsv_first_step_lamp_off": "#bdf734",
+      "hsv_first_step_lamp_white": "#ffff64",
+      "linear_first_step_lamp_off": "#bdf734",
+      "linear_first_step_lamp_white": "#ffff5e",
+      "oklab_first_step_lamp_off": "#bdf735",
+      "oklab_first_step_lamp_white": "#e6ff48",
+      "rgb_first_step_lamp_off": "#bdf734",
+      "rgb_first_step_lamp_white": "#ffff5a"
+    },
+    "cone_degrees": 25.0,
+    "energy": 3.0,
+    "how": "faces.gd in the sheet's studio, a marker in the walker's place at (0, 0, 1.6), the eye where the walker's eyes would be (1.6 m up, field of view 70 degrees); a step's colour is the mean of the still inside the middle half of its face",
+    "lamp_at": [
+      0.0,
+      0.7,
+      1.6
+    ],
+    "lights": {
+      "first": {
+        "hsv_middle": "#ff4240",
+        "light": "#c6ff3d",
+        "linear_middle": "#c4ff90",
+        "oklab_middle": "#77c0a2",
+        "rgb_middle": "#a4bc7b"
+      },
+      "off": {
+        "hsv_middle": "#d8133b",
+        "light": "none",
+        "linear_middle": "#8cb28a",
+        "oklab_middle": "#61939f",
+        "rgb_middle": "#767676"
+      },
+      "second": {
+        "hsv_middle": "#e11360",
+        "light": "#3900c2",
+        "linear_middle": "#92b2bf",
+        "oklab_middle": "#6393bc",
+        "rgb_middle": "#7b76a3"
+      },
+      "white": {
+        "hsv_middle": "#ff4273",
+        "light": "#ffffff",
+        "linear_middle": "#e0ffdd",
+        "oklab_middle": "#83c0cf",
+        "rgb_middle": "#bcbcbc"
+      }
+    },
+    "one_colour_two_lights": {
+      "hsv": {
+        "off_vs_white_rgb_of_255": 82.8,
+        "painted": "#e11b44",
+        "under_first_vs_under_second_oklab_times_100": 10.1,
+        "under_first_vs_under_second_rgb_of_255": 64.0
+      },
+      "linear": {
+        "off_vs_white_rgb_of_255": 140.6,
+        "painted": "#96bc93",
+        "under_first_vs_under_second_oklab_times_100": 24.8,
+        "under_first_vs_under_second_rgb_of_255": 102.6
+      },
+      "oklab": {
+        "off_vs_white_rgb_of_255": 73.9,
+        "painted": "#6a9ca8",
+        "under_first_vs_under_second_oklab_times_100": 14.9,
+        "under_first_vs_under_second_rgb_of_255": 55.3
+      },
+      "rgb": {
+        "off_vs_white_rgb_of_255": 121.6,
+        "painted": "#808080",
+        "under_first_vs_under_second_oklab_times_100": 23.6,
+        "under_first_vs_under_second_rgb_of_255": 90.7
+      }
+    }
+  },
+  "lamp_png": {
+    "bytes": 39830,
+    "height": 266,
+    "width": 1292
+  },
+  "lime_violet": {
+    "closest_by_oklab": "rgb vs oklab",
+    "closest_by_rgb": "rgb vs oklab",
+    "farthest_by_rgb": "hsv vs oklab",
+    "first": "#c6ff3d",
+    "how": "each wall alone, its nine steps 0.4 m wide and 1.8 m high, the eye level, 4.4 m away; a step's colour is the mean of the still inside its face, shrunk to 0.7; two walls are compared step against step: the mean distance in red, green and blue together (each of 255), the mean distance in OKLab times 100, and how many of the nine steps differ by more than the threshold",
+    "second": "#3900c2",
+    "standard": {
+      "closest": "rgb vs hsv",
+      "farthest": "rgb vs hsv",
+      "pairs": {
+        "hsv vs linear": {
+          "differ_pct": 38.57,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 38.57,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "hsv vs oklab": {
+          "differ_pct": 38.57,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 38.57,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "linear vs oklab": {
+          "differ_pct": 38.57,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 38.57,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "rgb vs hsv": {
+          "differ_pct": 38.57,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 38.57,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "rgb vs linear": {
+          "differ_pct": 38.57,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 38.57,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "rgb vs oklab": {
+          "differ_pct": 38.57,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 38.57,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        }
+      }
+    },
+    "standard_is_a_tie": true,
+    "steps_apart": {
+      "hsv vs linear": {
+        "each_step_rgb_of_255": [
+          0.0,
+          72.4,
+          121.0,
+          181.2,
+          191.7,
+          166.4,
+          153.7,
+          94.9,
+          0.0
+        ],
+        "oklab_times_100": 17.3,
+        "rgb_of_255": 109.0,
+        "steps_over_the_threshold": 7
+      },
+      "hsv vs oklab": {
+        "each_step_rgb_of_255": [
+          0.0,
+          93.2,
+          140.4,
+          193.6,
+          199.4,
+          172.8,
+          160.4,
+          91.2,
+          0.0
+        ],
+        "oklab_times_100": 16.4,
+        "rgb_of_255": 116.8,
+        "steps_over_the_threshold": 7
+      },
+      "linear vs oklab": {
+        "each_step_rgb_of_255": [
+          0.0,
+          24.3,
+          38.9,
+          50.2,
+          57.8,
+          60.8,
+          57.1,
+          43.6,
+          0.0
+        ],
+        "oklab_times_100": 7.6,
+        "rgb_of_255": 37.0,
+        "steps_over_the_threshold": 7
+      },
+      "rgb vs hsv": {
+        "each_step_rgb_of_255": [
+          0.0,
+          72.2,
+          101.0,
+          145.8,
+          149.9,
+          129.8,
+          131.6,
+          68.8,
+          0.0
+        ],
+        "oklab_times_100": 13.8,
+        "rgb_of_255": 88.8,
+        "steps_over_the_threshold": 7
+      },
+      "rgb vs linear": {
+        "each_step_rgb_of_255": [
+          0.0,
+          23.5,
+          41.2,
+          55.5,
+          66.9,
+          75.0,
+          77.0,
+          67.9,
+          0.0
+        ],
+        "oklab_times_100": 11.0,
+        "rgb_of_255": 45.2,
+        "steps_over_the_threshold": 7
+      },
+      "rgb vs oklab": {
+        "each_step_rgb_of_255": [
+          0.0,
+          33.0,
+          46.2,
+          52.1,
+          53.6,
+          52.5,
+          48.2,
+          39.0,
+          0.0
+        ],
+        "oklab_times_100": 5.4,
+        "rgb_of_255": 36.1,
+        "steps_over_the_threshold": 7
+      }
+    },
+    "steps_apart_as_painted": {
+      "hsv vs linear": {
+        "each_step_rgb_of_255": [
+          0.0,
+          73.1,
+          121.5,
+          183.2,
+          194.4,
+          169.5,
+          158.5,
+          104.9,
+          0.0
+        ],
+        "oklab_times_100": 17.8,
+        "rgb_of_255": 111.7,
+        "steps_over_the_threshold": 7
+      },
+      "hsv vs oklab": {
+        "each_step_rgb_of_255": [
+          0.0,
+          94.0,
+          141.3,
+          195.4,
+          201.7,
+          175.4,
+          164.2,
+          98.2,
+          0.0
+        ],
+        "oklab_times_100": 16.6,
+        "rgb_of_255": 118.9,
+        "steps_over_the_threshold": 7
+      },
+      "linear vs oklab": {
+        "each_step_rgb_of_255": [
+          0.0,
+          24.4,
+          39.0,
+          50.1,
+          57.6,
+          60.8,
+          57.5,
+          44.2,
+          0.0
+        ],
+        "oklab_times_100": 7.5,
+        "rgb_of_255": 37.1,
+        "steps_over_the_threshold": 7
+      },
+      "rgb vs hsv": {
+        "each_step_rgb_of_255": [
+          0.0,
+          72.3,
+          101.3,
+          147.4,
+          152.1,
+          131.7,
+          133.8,
+          71.6,
+          0.0
+        ],
+        "oklab_times_100": 13.9,
+        "rgb_of_255": 90.0,
+        "steps_over_the_threshold": 7
+      },
+      "rgb vs linear": {
+        "each_step_rgb_of_255": [
+          0.0,
+          23.9,
+          41.2,
+          55.4,
+          66.9,
+          75.0,
+          77.6,
+          69.6,
+          0.0
+        ],
+        "oklab_times_100": 11.0,
+        "rgb_of_255": 45.5,
+        "steps_over_the_threshold": 7
+      },
+      "rgb vs oklab": {
+        "each_step_rgb_of_255": [
+          0.0,
+          33.7,
+          46.5,
+          52.0,
+          53.7,
+          52.7,
+          48.9,
+          40.3,
+          0.0
+        ],
+        "oklab_times_100": 5.5,
+        "rgb_of_255": 36.4,
+        "steps_over_the_threshold": 7
+      }
+    },
+    "walls": {
+      "hsv": {
+        "covers_pct": 49.59,
+        "least_rendered_saturation": 0.781,
+        "middle_off_by": 13.0,
+        "middle_painted": "#e11b44",
+        "middle_rendered": "#d8153c",
+        "middle_rendered_saturation": 0.902,
+        "painted": [
+          "#c6ff3d",
+          "#f7e734",
+          "#f0962b",
+          "#e84423",
+          "#e11b44",
+          "#d91386",
+          "#d10dc9",
+          "#8906ca",
+          "#3900c2"
+        ],
+        "rendered": [
+          "#bdf736",
+          "#efdf2d",
+          "#e88d25",
+          "#e03c1d",
+          "#d8153c",
+          "#d00e7d",
+          "#c80ac0",
+          "#8008c1",
+          "#3008b9"
+        ]
+      },
+      "linear": {
+        "covers_pct": 49.59,
+        "least_rendered_saturation": 0.199,
+        "middle_off_by": 15.4,
+        "middle_painted": "#96bc93",
+        "middle_rendered": "#8db38a",
+        "middle_rendered_saturation": 0.229,
+        "painted": [
+          "#c6ff3d",
+          "#bbf05d",
+          "#b0e173",
+          "#a3cf84",
+          "#96bc93",
+          "#86a5a1",
+          "#7389ad",
+          "#5c63b8",
+          "#3900c2"
+        ],
+        "rendered": [
+          "#bdf736",
+          "#b3e854",
+          "#a7d86a",
+          "#9ac67b",
+          "#8db38a",
+          "#7d9c98",
+          "#6a80a4",
+          "#535aaf",
+          "#3008b9"
+        ]
+      },
+      "oklab": {
+        "covers_pct": 49.59,
+        "least_rendered_saturation": 0.313,
+        "middle_off_by": 15.2,
+        "middle_painted": "#6a9ca8",
+        "middle_rendered": "#61939f",
+        "middle_rendered_saturation": 0.388,
+        "painted": [
+          "#c6ff3d",
+          "#ade66e",
+          "#96ce88",
+          "#7fb59b",
+          "#6a9ca8",
+          "#5781b2",
+          "#4865b9",
+          "#3d44be",
+          "#3900c2"
+        ],
+        "rendered": [
+          "#bdf736",
+          "#a5de65",
+          "#8dc580",
+          "#76ac92",
+          "#61939f",
+          "#4f78a9",
+          "#3f5cb0",
+          "#353bb5",
+          "#3008b9"
+        ]
+      },
+      "rgb": {
+        "covers_pct": 49.59,
+        "least_rendered_saturation": 0.0,
+        "middle_off_by": 15.1,
+        "middle_painted": "#808080",
+        "middle_rendered": "#777777",
+        "middle_rendered_saturation": 0.0,
+        "painted": [
+          "#c6ff3d",
+          "#b4df4e",
+          "#a3bf5e",
+          "#919f6f",
+          "#808080",
+          "#6e6090",
+          "#5c40a1",
+          "#4b20b1",
+          "#3900c2"
+        ],
+        "rendered": [
+          "#bdf736",
+          "#acd746",
+          "#9ab656",
+          "#889666",
+          "#777777",
+          "#655787",
+          "#533798",
+          "#4219a8",
+          "#3008b9"
+        ]
+      }
+    }
+  },
+  "painted_steps_of_the_hsv_wall": {
+    "step 2": {
+      "from": "#f0962b",
+      "to": "#67269c",
+      "with": "#3900c2"
+    },
+    "step 6": {
+      "from": "#d10dc9",
+      "to": "#c9c260",
+      "with": "#c6ff3d"
+    }
+  },
+  "red_cyan": {
+    "closest_by_oklab": "linear vs oklab",
+    "closest_by_rgb": "linear vs oklab",
+    "farthest_by_rgb": "hsv vs linear",
+    "first": "#ff0000",
+    "how": "each wall alone, its nine steps 0.4 m wide and 1.8 m high, the eye level, 4.4 m away; a step's colour is the mean of the still inside its face, shrunk to 0.7; two walls are compared step against step: the mean distance in red, green and blue together (each of 255), the mean distance in OKLab times 100, and how many of the nine steps differ by more than the threshold",
+    "second": "#00ffff",
+    "standard": {
+      "closest": "rgb vs hsv",
+      "farthest": "rgb vs hsv",
+      "pairs": {
+        "hsv vs linear": {
+          "differ_pct": 38.57,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 38.57,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "hsv vs oklab": {
+          "differ_pct": 38.57,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 38.57,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "linear vs oklab": {
+          "differ_pct": 38.57,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 38.57,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "rgb vs hsv": {
+          "differ_pct": 38.57,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 38.57,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "rgb vs linear": {
+          "differ_pct": 38.57,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 38.57,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "rgb vs oklab": {
+          "differ_pct": 38.57,
+          "elsewhere_pct": 0.0,
+          "inside_pct": 38.57,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        }
+      }
+    },
+    "standard_is_a_tie": true,
+    "steps_apart": {
+      "hsv vs linear": {
+        "each_step_rgb_of_255": [
+          0.0,
+          81.5,
+          133.1,
+          172.8,
+          192.3,
+          234.9,
+          202.5,
+          116.9,
+          0.0
+        ],
+        "oklab_times_100": 16.3,
+        "rgb_of_255": 126.0,
+        "steps_over_the_threshold": 7
+      },
+      "hsv vs oklab": {
+        "each_step_rgb_of_255": [
+          0.0,
+          44.3,
+          105.9,
+          151.1,
+          176.4,
+          229.5,
+          203.5,
+          126.5,
+          0.0
+        ],
+        "oklab_times_100": 16.5,
+        "rgb_of_255": 115.2,
+        "steps_over_the_threshold": 7
+      },
+      "linear vs oklab": {
+        "each_step_rgb_of_255": [
+          0.0,
+          43.6,
+          51.2,
+          53.1,
+          50.3,
+          44.0,
+          36.6,
+          26.3,
+          0.0
+        ],
+        "oklab_times_100": 3.9,
+        "rgb_of_255": 33.9,
+        "steps_over_the_threshold": 7
+      },
+      "rgb vs hsv": {
+        "each_step_rgb_of_255": [
+          0.0,
+          70.5,
+          148.8,
+          188.9,
+          168.4,
+          181.9,
+          149.9,
+          74.3,
+          0.0
+        ],
+        "oklab_times_100": 22.6,
+        "rgb_of_255": 109.2,
+        "steps_over_the_threshold": 7
+      },
+      "rgb vs linear": {
+        "each_step_rgb_of_255": [
+          0.0,
+          92.5,
+          106.7,
+          108.5,
+          104.3,
+          96.8,
+          87.0,
+          69.7,
+          0.0
+        ],
+        "oklab_times_100": 11.4,
+        "rgb_of_255": 73.9,
+        "steps_over_the_threshold": 7
+      },
+      "rgb vs oklab": {
+        "each_step_rgb_of_255": [
+          0.0,
+          58.3,
+          74.8,
+          86.3,
+          94.9,
+          100.8,
+          101.2,
+          88.2,
+          0.0
+        ],
+        "oklab_times_100": 10.1,
+        "rgb_of_255": 67.2,
+        "steps_over_the_threshold": 7
+      }
+    },
+    "steps_apart_as_painted": {
+      "hsv vs linear": {
+        "each_step_rgb_of_255": [
+          0.0,
+          100.2,
+          150.4,
+          188.5,
+          208.1,
+          250.7,
+          213.4,
+          128.8,
+          0.0
+        ],
+        "oklab_times_100": 16.6,
+        "rgb_of_255": 137.8,
+        "steps_over_the_threshold": 7
+      },
+      "hsv vs oklab": {
+        "each_step_rgb_of_255": [
+          0.0,
+          61.4,
+          119.7,
+          163.5,
+          189.8,
+          243.7,
+          216.8,
+          141.0,
+          0.0
+        ],
+        "oklab_times_100": 16.7,
+        "rgb_of_255": 126.2,
+        "steps_over_the_threshold": 7
+      },
+      "linear vs oklab": {
+        "each_step_rgb_of_255": [
+          0.0,
+          44.6,
+          51.9,
+          52.7,
+          49.7,
+          44.1,
+          36.4,
+          26.2,
+          0.0
+        ],
+        "oklab_times_100": 3.9,
+        "rgb_of_255": 34.0,
+        "steps_over_the_threshold": 7
+      },
+      "rgb vs hsv": {
+        "each_step_rgb_of_255": [
+          0.0,
+          78.1,
+          156.2,
+          196.5,
+          180.3,
+          196.5,
+          156.2,
+          78.1,
+          0.0
+        ],
+        "oklab_times_100": 22.7,
+        "rgb_of_255": 115.8,
+        "steps_over_the_threshold": 7
+      },
+      "rgb vs linear": {
+        "each_step_rgb_of_255": [
+          0.0,
+          96.6,
+          108.8,
+          108.8,
+          104.0,
+          96.7,
+          87.1,
+          71.5,
+          0.0
+        ],
+        "oklab_times_100": 11.5,
+        "rgb_of_255": 74.8,
+        "steps_over_the_threshold": 7
+      },
+      "rgb vs oklab": {
+        "each_step_rgb_of_255": [
+          0.0,
+          61.0,
+          75.5,
+          86.0,
+          94.9,
+          101.1,
+          101.9,
+          90.5,
+          0.0
+        ],
+        "oklab_times_100": 10.2,
+        "rgb_of_255": 67.9,
+        "steps_over_the_threshold": 7
+      }
+    },
+    "walls": {
+      "hsv": {
+        "covers_pct": 49.59,
+        "least_rendered_saturation": 0.955,
+        "middle_off_by": 15.2,
+        "middle_painted": "#80ff00",
+        "middle_rendered": "#77f70a",
+        "middle_rendered_saturation": 0.961,
+        "painted": [
+          "#ff0000",
+          "#ff6000",
+          "#ffbf00",
+          "#dfff00",
+          "#80ff00",
+          "#20ff00",
+          "#00ff40",
+          "#00ff9f",
+          "#00ffff"
+        ],
+        "rendered": [
+          "#f70b0b",
+          "#f7570b",
+          "#f7b60b",
+          "#d7f70a",
+          "#77f70a",
+          "#19f709",
+          "#09f737",
+          "#08f796",
+          "#08f7f7"
+        ]
+      },
+      "linear": {
+        "covers_pct": 49.59,
+        "least_rendered_saturation": 0.0,
+        "middle_off_by": 14.7,
+        "middle_painted": "#bcbcbc",
+        "middle_rendered": "#b3b3b3",
+        "middle_rendered_saturation": 0.0,
+        "painted": [
+          "#ff0000",
+          "#f06363",
+          "#e18989",
+          "#cfa5a5",
+          "#bcbcbc",
+          "#a5cfcf",
+          "#89e1e1",
+          "#63f0f0",
+          "#00ffff"
+        ],
+        "rendered": [
+          "#f70b0b",
+          "#e85b5b",
+          "#d88080",
+          "#c69c9c",
+          "#b3b3b3",
+          "#9cc6c6",
+          "#80d8d8",
+          "#5ae8e8",
+          "#08f7f7"
+        ]
+      },
+      "oklab": {
+        "covers_pct": 49.59,
+        "least_rendered_saturation": 0.098,
+        "middle_off_by": 15.2,
+        "middle_painted": "#d2a993",
+        "middle_rendered": "#caa08b",
+        "middle_rendered_saturation": 0.314,
+        "painted": [
+          "#ff0000",
+          "#f8513b",
+          "#ee745b",
+          "#e29078",
+          "#d2a993",
+          "#bec0ae",
+          "#a3d6c9",
+          "#79ebe4",
+          "#00ffff"
+        ],
+        "rendered": [
+          "#f70b0b",
+          "#f04934",
+          "#e66b53",
+          "#da876f",
+          "#caa08b",
+          "#b5b7a5",
+          "#99cdc0",
+          "#70e2db",
+          "#08f7f7"
+        ]
+      },
+      "rgb": {
+        "covers_pct": 49.59,
+        "least_rendered_saturation": 0.0,
+        "middle_off_by": 15.1,
+        "middle_painted": "#808080",
+        "middle_rendered": "#777777",
+        "middle_rendered_saturation": 0.0,
+        "painted": [
+          "#ff0000",
+          "#df2020",
+          "#bf4040",
+          "#9f6060",
+          "#808080",
+          "#609f9f",
+          "#40bfbf",
+          "#20dfdf",
+          "#00ffff"
+        ],
+        "rendered": [
+          "#f70b0b",
+          "#d71b1b",
+          "#b63838",
+          "#965757",
+          "#777777",
+          "#579696",
+          "#37b6b6",
+          "#19d7d7",
+          "#08f7f7"
+        ]
+      }
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "sheet_png": {
+    "bytes": 20516,
+    "height": 510,
+    "width": 1292
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "changed_most": "6 a class: four spaces",
+    "png": {
+      "bytes": 36350,
+      "height": 266,
+      "width": 2588
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 one step, half way"
+      },
+      {
+        "differs_from_step_before_pct": 10.49,
+        "step": "2 a row: RGB"
+      },
+      {
+        "differs_from_step_before_pct": 10.91,
+        "step": "3 a second row: HSV"
+      },
+      {
+        "differs_from_step_before_pct": 21.09,
+        "step": "4 pink to orange: the long way"
+      },
+      {
+        "differs_from_step_before_pct": 8.71,
+        "step": "5 the turn wrapped"
+      },
+      {
+        "differs_from_step_before_pct": 39.96,
+        "step": "6 a class: four spaces"
+      },
+      {
+        "differs_from_step_before_pct": 19.55,
+        "step": "7 under the lamp"
+      },
+      {
+        "differs_from_step_before_pct": 2.26,
+        "step": "8 painted by the ray"
+      }
+    ]
+  },
+  "two_lights": {
+    "how": "a wall painted 808080, the mean red channel of the 40 x 40 pixels at the middle of the still, where the lamp points; the ambient light is in all four stills, so it is taken off once",
+    "lamp_energy_1": {
+      "ambient_only": 66.0,
+      "if_added_as_light": 157.6,
+      "if_added_as_numbers": 179.4,
+      "with_both": 179.8,
+      "with_the_lamp": 126.4,
+      "with_the_sun": 119.0
+    },
+    "lamp_energy_3": {
+      "ambient_only": 66.0,
+      "if_added_as_light": 211.2,
+      "if_added_as_numbers": 244.3,
+      "with_both": 244.8,
+      "with_the_lamp": 191.3,
+      "with_the_sun": 119.0
+    }
+  }
+}

@@ -4,14 +4,19 @@ extends "res://supplied/verify_tools.gd"
 ## Writes verification.json; the exit code is the number of checks that failed.
 ## No import step is needed: nothing here has a class_name. Headless draws no
 ## frames, so what the eye gets (every colour the lesson quotes) is measured by
-## sheet.gd, with a window. Here: what look.gd builds, state by state, that it
-## is the look supplied/look.gd gives, the place, and the guest.
+## sheet.gd, with a window. Here: what look.gd builds, state by state; that at
+## its palette step it is the plain look of every sheet's studio and at its end
+## the look supplied/look.gd gives a scene that runs, filter and all; the place;
+## and the guest.
 
 const Look := preload("res://supplied/look.gd")
 const CheckGuest := preload("res://supplied/check_guest.gd")
 const SCENE := "res://the_look.tscn"
 const GUEST := "res://guests/the-look/"
-const STEPS := ["0_engine_grey", "1_sky", "2_ambient_only", "3_sun_unturned", "4_sun_turned", "5_ground", "6_bodies", "7_energy", "8_palette"]
+const STEPS := ["0_engine_grey", "1_sky", "2_ambient_only", "3_sun_unturned", "4_sun_turned", "5_ground", "6_bodies", "7_energy", "8_palette",
+	"9_sky_ground_unsaid", "10_gradient_sky", "11_second_light", "12_tinted_ambient", "13_shadow_blur", "14_saturation_contrast"]
+const PLAIN := "res://steps/8_palette.gd"      # the look before its filter: the sheet's studio
+const FILTER := ["SKY_TOP", "AMBIENT_TINT", "FILL"]
 const ROLES := ["SKY", "GROUND", "BODY", "SECOND", "THIRD", "BONE", "LINE", "GHOST", "INK", "SHADE"]
 const KEYS := {
 	"move_left": [KEY_A, KEY_LEFT], "move_right": [KEY_D, KEY_RIGHT], "move_forward": [KEY_W, KEY_UP], "move_backward": [KEY_S, KEY_DOWN],
@@ -29,6 +34,7 @@ func run() -> void:
 	engine_defaults()
 	await bare_scene()
 	await states()
+	await plain_look()
 	await finished_look()
 	await pairs()
 	await switch()
@@ -62,17 +68,19 @@ func dress(source: String) -> Node3D:
 func kinds(node: Node, kind: String) -> Array:
 	return node.find_children("*", kind, true, false)
 
-## What a state has built, read back from the scene.
+## What a state has built, read back from the scene. The first light with a
+## direction is the sun; a second one is the fill.
 func built(node: Node3D) -> Dictionary:
 	var worlds := kinds(node, "WorldEnvironment")
 	var suns := kinds(node, "DirectionalLight3D")
+	var second: DirectionalLight3D = suns[1] if suns.size() > 1 else null
 	var paints := []
 	for body: String in ["Floor", "Box", "Sphere"]:
 		var paint: Material = node.get_node(body).material_override
 		if paint != null:
 			paints.append(paint)
 	return {"worlds": worlds.size(), "air": worlds[0].environment if not worlds.is_empty() else null,
-		"suns": suns.size(), "sun": suns[0] if not suns.is_empty() else null, "paints": paints}
+		"suns": suns.size(), "sun": suns[0] if not suns.is_empty() else null, "fill": second, "paints": paints}
 
 ## The way a light travels, and how many degrees it stands above the horizon.
 func travel(sun: DirectionalLight3D) -> Vector3:
@@ -81,22 +89,43 @@ func travel(sun: DirectionalLight3D) -> Vector3:
 func degrees_up(sun: DirectionalLight3D) -> float:
 	return rad_to_deg(asin(-travel(sun).y))
 
-## The stored properties in which two objects of one kind are not alike.
+## The stored properties in which two objects of one kind are not alike. A
+## property that holds a resource (an environment's sky, a sky's material) is
+## compared property by property too, and named as `sky.sky_material.sky_curve`.
 func unlike(a: Object, b: Object, skip: Array = ["name", "script"]) -> Array:
 	var out := []
 	for property: Dictionary in a.get_property_list():
 		if property["usage"] & PROPERTY_USAGE_STORAGE == 0 or skip.has(property["name"]):
 			continue
-		if a.get(property["name"]) != b.get(property["name"]):
+		var mine: Variant = a.get(property["name"])
+		var theirs: Variant = b.get(property["name"])
+		if mine is Resource and theirs is Resource and (mine as Resource).get_class() == (theirs as Resource).get_class():
+			for inner: String in unlike(mine, theirs, skip):
+				out.append("%s.%s" % [property["name"], inner])
+		elif mine != theirs:
 			out.append(property["name"])
 	return out
 
+## How many stored properties that compares, those of the resources inside too.
 func stored(a: Object) -> int:
 	var count := 0
 	for property: Dictionary in a.get_property_list():
 		if property["usage"] & PROPERTY_USAGE_STORAGE != 0:
 			count += 1
+			if a.get(property["name"]) is Resource:
+				count += stored(a.get(property["name"]))
 	return count
+
+func sorted(list: Array) -> Array:
+	var out := list.duplicate()
+	out.sort()
+	return out
+
+## The sun of a scene that runs, as supplied/base_look.gd makes it: sun() with the softer shadow edge.
+func supplied_sun() -> DirectionalLight3D:
+	var sun: DirectionalLight3D = Look.sun()
+	sun.shadow_blur = Look.SHADOW_BLUR
+	return sun
 
 func colour_is(paint: Material, colour: Color) -> bool:
 	return paint is StandardMaterial3D and (paint as StandardMaterial3D).albedo_color.is_equal_approx(colour)
@@ -209,6 +238,12 @@ func bare_scene() -> void:
 	var box := box_of(node.get_node("Box")).merge(box_of(node.get_node("Sphere")))
 	check(is_zero_approx(box.position.y) and absf(box.size.x - 1.4) < 0.01 and is_equal_approx(box.size.z, 0.6) and is_equal_approx(box.size.y, 0.6),
 		"the two bodies stand on the ground, 1.4 m wide, 0.6 m deep and 0.6 m high together: %s" % box.size.snappedf(0.01))
+	var eye: Camera3D = node.get_node("Camera3D")
+	var down := -rad_to_deg(eye.rotation.x)
+	var top_edge := down - eye.fov / 2.0     # degrees under the horizon, at the top of the picture
+	check(eye.current and absf(down - 25.2) < 0.1 and top_edge > 1.0 and top_edge < 1.5,
+		"the scene's camera looks down %.1f degrees and sees %.0f degrees from top to bottom, so the top edge of its picture is %.1f degrees under the horizon: it shows the ground beyond the floor and no sky" % [down, eye.fov, top_edge])
+	measured["camera_top_edge_degrees_under_the_horizon"] = snappedf(top_edge, 0.1)
 
 # ---------------------------------------------------------------- the lesson, state by state
 
@@ -224,12 +259,24 @@ func states() -> void:
 		s["sun_up"] = degrees_up(s["sun"]) if s["sun"] != null else 0.0
 		s["sun_energy"] = s["sun"].light_energy if s["sun"] != null else 0.0
 		s["sun_shadow"] = s["sun"].shadow_enabled if s["sun"] != null else false
+		s["sun_blur"] = s["sun"].shadow_blur if s["sun"] != null else 0.0
+		var their_sun := supplied_sun()
+		s["sun_unlike"] = unlike(s["sun"], their_sun) if s["sun"] != null else ["no sun"]
+		their_sun.free()
+		var their_fill: DirectionalLight3D = Look.fill()
+		s["fill_unlike"] = unlike(s["fill"], their_fill) if s["fill"] != null else ["no second light"]
+		s["fill_compared"] = stored(their_fill)
+		their_fill.free()
+		s["fill_travel"] = travel(s["fill"]) if s["fill"] != null else Vector3.ZERO
+		s["fill_energy"] = s["fill"].light_energy if s["fill"] != null else 0.0
+		s["fill_shadow"] = s["fill"].shadow_enabled if s["fill"] != null else false
+		s["fill_colour"] = s["fill"].light_color if s["fill"] != null else Color.BLACK
 		s["air"] = (s["air"] as Environment).duplicate() if s["air"] != null else null
 		var colours := []
 		for paint: StandardMaterial3D in s["paints"]:
 			colours.append(paint.albedo_color.to_html(false))
 		s["colours"] = colours
-	check(errors.size() == before, "the nine states of the lesson each ran with no error: %s" % [errors.slice(before)])
+	check(errors.size() == before and seen.size() == 15, "the fifteen states of the lesson each ran with no error: %s" % [errors.slice(before)])
 	var a: Dictionary = seen["0_engine_grey"]
 	check(a["worlds"] == 0 and a["suns"] == 0 and a["paints"].is_empty(), "the engine's grey: no environment, no light, no material")
 	a = seen["1_sky"]
@@ -256,41 +303,102 @@ func states() -> void:
 	var b: Dictionary = seen["8_palette"]
 	check(b["colours"] == a["colours"] and unlike(a["air"], b["air"]).is_empty() and b["sun_travel"].is_equal_approx(a["sun_travel"]) and is_equal_approx(b["sun_energy"], a["sun_energy"]) and b["sun_shadow"] == a["sun_shadow"],
 		"the palette by role: the script changed and the scene did not: same environment, same sun, same three colours")
-	check(text_of("res://steps/8_palette.gd") == text_of("res://look.gd"), "the lesson's last state is look.gd, byte for byte")
+	# the filter, line by line
+	a = seen["9_sky_ground_unsaid"]
+	var fresh := ProceduralSkyMaterial.new()
+	var dome: ProceduralSkyMaterial = a["air"].sky.sky_material if a["air"].sky != null else null
+	check(a["air"].background_mode == Environment.BG_SKY and dome != null and dome.sky_top_color.is_equal_approx(Look.SKY_TOP) and dome.sky_horizon_color.is_equal_approx(Look.SKY)
+		and dome.ground_bottom_color == fresh.ground_bottom_color and dome.ground_horizon_color == fresh.ground_horizon_color and dome.sun_angle_max == fresh.sun_angle_max
+		and a["air"].background_color.is_equal_approx(Look.SKY) and b["air"].sky == null,
+		"a gradient sky, its ground unsaid: the background is a Sky with a ProceduralSkyMaterial, SKY_TOP over SKY; under the horizon it has Godot's own colours, %s below %s, and it draws a disc for a light (sun_angle_max %.0f); the flat background colour is kept and not used" % [
+			hex(fresh.ground_bottom_color), hex(fresh.ground_horizon_color), fresh.sun_angle_max])
+	measured["a_new_sky's_ground"] = {"bottom": hex(fresh.ground_bottom_color), "horizon": hex(fresh.ground_horizon_color), "sky_curve": snappedf(fresh.sky_curve, 0.01), "sun_angle_max": fresh.sun_angle_max}
+	a = seen["10_gradient_sky"]
+	dome = a["air"].sky.sky_material if a["air"].sky != null else null
+	var their_dome: ProceduralSkyMaterial = Look.environment().sky.sky_material
+	check(dome != null and unlike(dome, their_dome).is_empty() and dome.ground_horizon_color.is_equal_approx(Look.SKY) and dome.ground_bottom_color.is_equal_approx(Look.GROUND)
+		and is_equal_approx(dome.sky_curve, 0.25) and dome.sun_angle_max == 0.0 and sorted(unlike(a["air"], Look.studio_environment())) == ["background_mode", "sky"],
+		"the gradient sky: its material is the supplied look's in every stored property (%d compared): SKY at the ground's horizon and GROUND below, sky_curve 0.25, no disc for a light; the rest of the environment is still the plain one: unlike it only in %s" % [
+			stored(their_dome), sorted(unlike(a["air"], Look.studio_environment()))])
+	a = seen["11_second_light"]
+	var sun_way: Vector3 = a["sun_travel"]
+	var fill_way: Vector3 = a["fill_travel"]
+	check(a["suns"] == 2 and seen["10_gradient_sky"]["suns"] == 1 and a["fill_unlike"].is_empty() and not a["fill_shadow"] and is_equal_approx(a["fill_energy"], 0.05) and a["fill_colour"].is_equal_approx(Look.FILL)
+		and fill_way.y < 0.0 and fill_way.x * sun_way.x + fill_way.z * sun_way.z < 0.0 and fill_way.x < 0.0 and fill_way.z > 0.0,
+		"a second light: two lights with a direction; the second is the supplied look's fill() in every stored property (%d compared), FILL at energy 0.05 with no shadow; it travels along %s: downward, to the left and towards the camera, against the sun over the ground" % [
+			a["fill_compared"], fill_way.snappedf(0.001)])
+	measured["second_light_travels_along"] = [snappedf(fill_way.x, 0.001), snappedf(fill_way.y, 0.001), snappedf(fill_way.z, 0.001)]
+	a = seen["12_tinted_ambient"]
+	var tint: Color = a["air"].ambient_light_color
+	check(tint.is_equal_approx(Look.AMBIENT_TINT) and is_equal_approx(a["air"].ambient_light_energy, 0.27) and seen["11_second_light"]["air"].ambient_light_color == Color.WHITE
+		and 0.27 * tint.r < 0.25 and 0.27 * tint.g < 0.25 and 0.27 * tint.b > 0.25 and roundi(tint.r * 100.0) == 89 and roundi(tint.g * 100.0) == 85 and tint.b == 1.0,
+		"the ambient light tinted: AMBIENT_TINT at energy 0.27; the tint has all of its blue, %d%% of its red and %d%% of its green, so against the white light at 0.25 it gives less red (%.3f) and less green (%.3f) and more blue (%.3f)" % [
+			roundi(tint.r * 100.0), roundi(tint.g * 100.0), 0.27 * tint.r, 0.27 * tint.g, 0.27 * tint.b])
+	a = seen["13_shadow_blur"]
+	check(is_equal_approx(a["sun_blur"], 2.0) and is_equal_approx(Look.SHADOW_BLUR, 2.0) and is_equal_approx(seen["12_tinted_ambient"]["sun_blur"], 1.0)
+		and a["sun_unlike"].is_empty() and seen["12_tinted_ambient"]["sun_unlike"] == ["shadow_blur"],
+		"shadow blur 2: the sun's shadow_blur reads back %.1f (a new light has 1.0), the supplied look's SHADOW_BLUR; with it the sun is the sun of a scene that runs in every stored property, and before it was unlike it only in %s" % [
+			a["sun_blur"], seen["12_tinted_ambient"]["sun_unlike"]])
+	a = seen["14_saturation_contrast"]
+	var worn := Look.environment()
+	var before_it := sorted(unlike(seen["13_shadow_blur"]["air"], worn))
+	check(unlike(a["air"], worn).is_empty() and a["air"].adjustment_enabled and is_equal_approx(a["air"].adjustment_saturation, 1.08) and is_equal_approx(a["air"].adjustment_contrast, 1.04)
+		and before_it == ["adjustment_contrast", "adjustment_enabled", "adjustment_saturation"]
+		and a["air"].tonemap_mode == Environment.TONE_MAPPER_LINEAR and not a["air"].fog_enabled and not a["air"].glow_enabled,
+		"saturation and contrast: the environment is the supplied look's environment() in every stored property, its sky and the sky's material too (%d compared); the state before was unlike it only in %s; the tonemap is the linear one, fog and glow are off: unlike in %s" % [
+			stored(worn), before_it, unlike(a["air"], worn)])
+	check(text_of("res://steps/14_saturation_contrast.gd") == text_of("res://look.gd"), "the lesson's last state is look.gd, byte for byte")
 
 # ---------------------------------------------------------------- the finished look
+
+## The script as it stood at the palette step: the plain look, which is the
+## look of the sheet's studio of every kit.
+func plain_look() -> void:
+	var node := await dress(text_of(PLAIN))
+	var state := built(node)
+	var air: Environment = state["air"]
+	var studio := Look.studio_environment()
+	var sun: DirectionalLight3D = state["sun"]
+	var their_sun: DirectionalLight3D = Look.sun()
+	check(state["worlds"] == 1 and air != null and unlike(air, studio).is_empty() and state["suns"] == 1 and sun != null and unlike(sun, their_sun).is_empty(),
+		"at the palette step the script is the plain look of every sheet's studio: its environment is studio_environment() in every stored property (%d compared), and its one light is sun() (%d compared): unlike in %s and %s" % [
+			stored(studio), stored(their_sun), unlike(air, studio) if air != null else ["no environment"], unlike(sun, their_sun) if sun != null else ["no sun"]])
+	their_sun.free()
+	var filter := unlike(Look.environment(), studio)
+	check(filter.size() == 7 and filter.has("background_mode") and filter.has("sky") and filter.has("ambient_light_color") and filter.has("adjustment_enabled"),
+		"over that the supplied look lays its filter: environment() is unlike the plain one in %d stored properties, %s" % [filter.size(), filter])
+	measured["the_filter_changes_of_the_environment"] = filter
 
 func finished_look() -> void:
 	var own: Dictionary = (load("res://look.gd") as Script).get_script_constant_map()
 	var theirs: Dictionary = (Look as Script).get_script_constant_map()
 	var apart := []
-	for role: String in ROLES:
+	for role: String in ROLES + FILTER:
 		if not own.has(role) or own[role] != theirs[role]:
 			apart.append(role)
-	check(apart.is_empty(), "look.gd names the ten roles of supplied/look.gd with the same ten colours: %s" % [apart])
+	check(apart.is_empty() and own.size() == 13, "look.gd names the ten roles of supplied/look.gd and the three colours of its filter, SKY_TOP, AMBIENT_TINT and FILL, with the same thirteen colours, and nothing else: %s" % [apart])
+	if scene != null and is_instance_valid(scene):
+		scene.free()
 	var before := errors.size()
+	var warned := warnings.size()
 	var node: Node3D = load(SCENE).instantiate()     # the scene as the learner runs it, with look.gd
 	root.add_child(node)
 	await frames(180)
-	check(errors.size() == before, "the_look.tscn ran 180 frames with look.gd and Godot logged no error: %s" % [errors.slice(before)])
+	check(errors.size() == before and warnings.size() == warned, "the_look.tscn ran 180 frames with look.gd and Godot logged no error and no warning: %s %s" % [errors.slice(before), warnings.slice(warned)])
 	var state := built(node)
 	var air: Environment = state["air"]
-	var supplied_air := Look.studio_environment()
-	check(state["worlds"] == 1 and air != null and unlike(air, supplied_air).is_empty(),
-		"its environment is the supplied look's plain one, studio_environment(), in every stored property (%d compared): unlike in %s" % [stored(supplied_air), unlike(air, supplied_air) if air != null else ["no environment"]])
-	var filter := unlike(Look.environment(), supplied_air)
-	var fill := Look.fill()
-	check(filter.size() > 0 and fill is DirectionalLight3D and not fill.shadow_enabled and fill.light_energy < 0.1 and Look.SHADOW_BLUR > 1.0,
-		"over that the supplied look lays a filter for a scene that runs: environment() differs from the plain one in %d stored properties, %s; fill() is a second light of energy %.2f with no shadow; the sun's shadow edge is blurred by %.1f" % [filter.size(), filter, fill.light_energy, Look.SHADOW_BLUR])
-	measured["the_filter_changes_of_the_environment"] = filter
-	fill.free()
+	var worn := Look.environment()
+	check(state["worlds"] == 1 and air != null and unlike(air, worn).is_empty(),
+		"its environment is the supplied look's for a scene that runs, environment(), in every stored property, its sky and the sky's material too (%d compared): unlike in %s" % [stored(worn), unlike(air, worn) if air != null else ["no environment"]])
 	var sun: DirectionalLight3D = state["sun"]
-	var supplied_sun := Look.sun()
-	check(state["suns"] == 1 and sun != null and unlike(sun, supplied_sun).is_empty(),
-		"its sun is the supplied one in every stored property (%d compared): unlike in %s" % [stored(supplied_sun), unlike(sun, supplied_sun) if sun != null else ["no sun"]])
+	var their_sun := supplied_sun()
+	check(state["suns"] == 2 and sun != null and unlike(sun, their_sun).is_empty(),
+		"it has two lights; its sun is the supplied one with the softer shadow edge, in every stored property (%d compared): unlike in %s" % [stored(their_sun), unlike(sun, their_sun) if sun != null else ["no sun"]])
 	check(sun != null and absf(degrees_up(sun) - 43.0) < 0.1 and travel(sun).x > 0.0 and travel(sun).z < 0.0,
 		"the sun stands %.1f degrees above the horizon and its light travels to the right and away from the camera: %s" % [degrees_up(sun) if sun != null else 0.0, travel(sun).snappedf(0.001) if sun != null else Vector3.ZERO])
-	supplied_sun.free()
+	var fill: DirectionalLight3D = state["fill"]
+	var their_fill: DirectionalLight3D = Look.fill()
+	check(fill != null and unlike(fill, their_fill).is_empty(), "its second light is the supplied fill() in every stored property (%d compared): unlike in %s" % [stored(their_fill), unlike(fill, their_fill) if fill != null else ["no second light"]])
 	var paints: Array = state["paints"]
 	var wrong := []
 	var wanted := [Look.GROUND, Look.BODY, Look.SECOND]
@@ -301,6 +409,20 @@ func finished_look() -> void:
 	check(paints.size() == 3 and wrong.is_empty(), "the floor is painted as paint(GROUND), the box as paint(BODY), the sphere as paint(SECOND), in every stored property (%d compared): %s" % [stored(Look.paint(Look.BODY)), wrong])
 	check(paints.size() == 3 and paints[0] != paints[1] and paints[1] != paints[2] and paints[0] != paints[2], "three bodies, three materials: none is shared")
 	node.free()
+	await frames(1)
+	# What a later kit's scene really gets: base.tscn, dressed by supplied/base_look.gd.
+	var base: Node3D = load("res://supplied/base.tscn").instantiate()
+	root.add_child(base)
+	await frames(2)
+	var base_air: Environment = base.get_node("Look/Sky").environment if base.has_node("Look/Sky") else null
+	var base_sun: Node = base.get_node_or_null("Look/Sun")
+	var base_fill: Node = base.get_node_or_null("Look/Fill")
+	check(base_air != null and base_sun != null and base_fill != null and air != null and unlike(air, base_air).is_empty()
+		and unlike(base_sun, their_sun).is_empty() and unlike(base_fill, their_fill).is_empty(),
+		"and that is the look base.tscn gives every later kit's scene: its environment is ours in every stored property, its Sun and its Fill are the two lights ours were compared with")
+	base.free()
+	their_sun.free()
+	their_fill.free()
 	await frames(1)
 
 # ---------------------------------------------------------------- the argument
@@ -320,11 +442,13 @@ func pairs() -> void:
 	var table := {}
 	for pair: Array in PAIRS:
 		var node := await dress(with_pair(pair[1], pair[2]))
-		var paints: Array = built(node)["paints"]
-		if paints.size() == 3 and colour_is(paints[0], Color(pair[2])) and colour_is(paints[1], Color(pair[1])) and colour_is(paints[2], Look.SECOND):
+		var state := built(node)
+		var paints: Array = state["paints"]
+		var beyond: ProceduralSkyMaterial = state["air"].sky.sky_material if state["air"] != null and state["air"].sky != null else null
+		if paints.size() == 3 and colour_is(paints[0], Color(pair[2])) and colour_is(paints[1], Color(pair[1])) and colour_is(paints[2], Look.SECOND) and beyond != null and beyond.ground_bottom_color.is_equal_approx(Color(pair[2])):
 			carried += 1
 		table[pair[0]] = {"body_luminance": snappedf(luminance(Color(pair[1])), 0.0001), "ground_luminance": snappedf(luminance(Color(pair[2])), 0.0001)}
-	check(carried == 4, "two lines of the palette changed, GROUND and BODY, and the floor and the box took the new colours while the sphere kept SECOND: %d of 4 pairs" % carried)
+	check(carried == 4, "two lines of the palette changed, GROUND and BODY, and the floor and the box took the new colours, and the ground beyond the floor (the sky's ground_bottom_color) took the new GROUND, while the sphere kept SECOND: %d of 4 pairs" % carried)
 	measured["pairs"] = table
 	# For the room: how two values stand against each other, as (L1 + 0.05) / (L2 + 0.05).
 	measured["contrast_of_two_values"] = {
@@ -351,8 +475,8 @@ func switch() -> void:
 	node.add_child(marble)
 	marble.drop(Vector3(-0.4, 1.5, 0.0))
 	var rest := await settle(marble)
-	check(state["suns"] == 1 and not state["sun"].visible and absf(rest.y - 0.7) < 0.01,
-		"with `sun.visible = false` the sun is there and not shown, and a marble dropped on the box still rests on it, at %.2f m: the light went, the body stayed" % rest.y)
+	check(state["suns"] == 2 and not state["sun"].visible and state["fill"].visible and absf(rest.y - 0.7) < 0.01,
+		"with `sun.visible = false` the sun is there and not shown, the second light still is, and a marble dropped on the box still rests on it, at %.2f m: the light went, the body stayed" % rest.y)
 	marble.free()
 
 # ---------------------------------------------------------------- the place
@@ -447,9 +571,9 @@ func guest() -> void:
 
 # ---------------------------------------------------------------- what was run once, elsewhere
 
-## Two runs that need another project, the room. They were made once, in a
-## scratch copy of my-room, and their results are kept in evidence/. These two
-## checks read the records; they do not run the room again.
+## Runs that need another project, the room, or another renderer. They were
+## made once, in scratch copies, and their results are kept in evidence/. These
+## checks read the records; they do not run them again.
 func records() -> void:
 	var trial: Variant = JSON.parse_string(text_of("res://evidence/guest_trial.json"))
 	var ok: bool = trial is Dictionary and trial.get("passed", false) and trial["measured"]["guest"] == "res://guests/the-look/the-look.tscn"
@@ -462,3 +586,20 @@ func records() -> void:
 	check(ok, "as recorded in evidence/room_look_trial.json: the room with SKY and SHADE exchanged in room_look.gd ran with no error; its sky read back 0d0620 at the horizon, a square ff2e93, and the edge of a number ff2e93")
 	if ok:
 		measured["the_room_with_two_roles_changed"] = look["read_back"]
+	var blur: Variant = JSON.parse_string(text_of("res://evidence/shadow_blur_two_renderers.json"))
+	ok = blur is Dictionary and blur.has("gl_compatibility") and blur.has("forward_plus")
+	var unlike_here := 0
+	var moved_there := 0
+	var edges := []
+	if ok:
+		for value: String in blur["gl_compatibility"]["shadow_blur"]:
+			unlike_here += int(blur["gl_compatibility"]["shadow_blur"][value]["bytes_unlike_the_still_at_2"])
+		for value: String in ["0.0", "2.0", "20.0"]:
+			edges.append(int(blur["forward_plus"]["shadow_blur"][value]["shadow_edge_px"]))
+		for value: String in blur["forward_plus"]["shadow_blur"]:
+			if int(blur["forward_plus"]["shadow_blur"][value]["bytes_unlike_the_still_at_2"]) > 0:
+				moved_there += 1
+	check(ok and unlike_here == 0 and moved_there == 4 and blur["gl_compatibility"]["shadow_blur"].size() == 5,
+		"as recorded in evidence/shadow_blur_two_renderers.json: under Compatibility five values of sun.shadow_blur, 0 to 20, gave five stills with %d bytes unlike; under Forward+ the other four each differ from the still at 2, and the shadow's edge is %s pixels wide at 0, 2 and 20" % [unlike_here, edges])
+	if ok:
+		measured["shadow_blur_under_two_renderers"] = {"gl_compatibility": blur["gl_compatibility"]["shadow_blur"], "forward_plus": blur["forward_plus"]["shadow_blur"]}

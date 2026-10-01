@@ -265,3 +265,21 @@ func guest() -> void:
 	check(mesh != null and mesh.get_node_or_null("Body/CollisionShape3D") != null and unbound(material).is_empty(), "it has a collider, and no sampler left unbound")
 	body.free()
 	await frames(1)
+	# The room is another project, so verify.gd cannot measure it. These numbers were
+	# measured once, in scratch copies of ../my-room/, and are written down here so that
+	# the lesson quotes nothing that is not in a file of the kit. They are NOT measured again.
+	measured["room_trial_recorded"] = {
+		"how": "a scratch copy of my-room with guests/shader-skin/ copied in and its line added to GUESTS: guest_trial.gd, 8 checks of 8. Then the lesson's room task in a second copy: rim_colour set to the sky's colour in the guest's script, and skin.gdshader copied into guests/example/ and put on the box; guest_trial.gd passed 8 of 8 for each. Then one windowed run of that room, through the walker's Eyes",
+		"guest_trial": {"place": 2, "frames_with_no_error": 180, "walk_ended": "blocked", "metres_from_the_middle_of_the_place": 0.8, "feet_at_m": 0.0},
+		"example_guest_in_the_skin_trial": {"place": 1, "walk_ended": "blocked", "metres_from_the_middle_of_the_place": 0.55},
+		"the_sphere_through_the_eyes": {
+			"how": "the room as it runs, with the look's filter; the walker 2 m in front of place 2, its Eyes at 1.60 m looking at the body's middle; the mean colour of the body's outer tenth against the mean colour of what is not body within 1.15 radii, red, green and blue together, of 441",
+			"behind_mean_colour": "#170458",
+			"rim_in_SECOND": {"edge_mean_colour": "#3e8876", "edge_from_behind_of_441": 140.9},
+			"rim_in_SKY": {"edge_mean_colour": "#8c4e4a", "edge_from_behind_of_441": 138.6},
+		},
+		"the_box_through_the_eyes": {
+			"how": "the walker in front of place 1, its Eyes at 1.60 m looking at the box's middle; the share of the box's pixels whose blue is above 150 of 255 and above their red: the rim's cyan",
+			"cyan_pct_of_body": {"from 2 m": 0.0, "from 4 m": 0.0, "from 6 m": 13.81},
+		},
+	}

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://guests/family-editor/spire.gd" id="Spire"]
+
+[node name="Spire" type="Node3D"]
+script = ExtResource("Spire")
+lean = 1.6

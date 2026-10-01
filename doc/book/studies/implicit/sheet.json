@@ -1,0 +1,321 @@
+{
+  "eye": {
+    "distance_m": 6.5,
+    "looks_at": [
+      0.0,
+      2.0,
+      0.0
+    ],
+    "view": "level"
+  },
+  "godot": "4.6-stable (official)",
+  "longest_frame_ms_in_a_window": {
+    "cells_40": {
+      "build_ms_main": [
+        97.3,
+        93.7,
+        94.9
+      ],
+      "build_ms_worker": [
+        94.2,
+        96.8,
+        93.3
+      ],
+      "longest_of_120_usual_frames_ms": 17.08,
+      "main": [
+        108.45,
+        107.53,
+        106.98
+      ],
+      "triangles": 6282,
+      "usual_frame_ms": 16.68,
+      "worker": [
+        26.95,
+        27.5,
+        26.23
+      ]
+    },
+    "cells_80": {
+      "build_ms_main": [
+        661.6,
+        660.4,
+        652.0
+      ],
+      "build_ms_worker": [
+        664.9,
+        662.4,
+        651.2
+      ],
+      "longest_of_120_usual_frames_ms": 17.18,
+      "main": [
+        711.35,
+        708.4,
+        700.09
+      ],
+      "triangles": 25264,
+      "usual_frame_ms": 16.68,
+      "worker": [
+        63.29,
+        62.06,
+        62.39
+      ]
+    },
+    "how": "the scene implicit.tscn in a window; the time from one frame to the next, the longest from rebuild() until two frames after the new skin is on; three builds each way"
+  },
+  "pairs_cells_10": {
+    "closest": "0.6 vs 0.8",
+    "farthest": "0.2 vs 0.8",
+    "pairs": {
+      "0.2 vs 0.4": {
+        "differ_pct": 26.17,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 8.64,
+        "outline_pct": 17.53,
+        "outline_px": 58.0
+      },
+      "0.2 vs 0.6": {
+        "differ_pct": 41.61,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 6.18,
+        "outline_pct": 35.43,
+        "outline_px": 117.24
+      },
+      "0.2 vs 0.8": {
+        "differ_pct": 48.1,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.33,
+        "outline_pct": 45.77,
+        "outline_px": 151.43
+      },
+      "0.4 vs 0.6": {
+        "differ_pct": 23.12,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 5.21,
+        "outline_pct": 17.91,
+        "outline_px": 73.42
+      },
+      "0.4 vs 0.8": {
+        "differ_pct": 30.53,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.29,
+        "outline_pct": 28.24,
+        "outline_px": 115.79
+      },
+      "0.6 vs 0.8": {
+        "differ_pct": 12.25,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.91,
+        "outline_pct": 10.33,
+        "outline_px": 62.98
+      }
+    }
+  },
+  "pairs_cells_40": {
+    "closest": "0.6 vs 0.8",
+    "farthest": "0.2 vs 0.8",
+    "pairs": {
+      "0.2 vs 0.4": {
+        "differ_pct": 27.02,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 10.44,
+        "outline_pct": 16.58,
+        "outline_px": 54.68
+      },
+      "0.2 vs 0.6": {
+        "differ_pct": 40.05,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 5.87,
+        "outline_pct": 34.18,
+        "outline_px": 112.71
+      },
+      "0.2 vs 0.8": {
+        "differ_pct": 47.16,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.36,
+        "outline_pct": 43.8,
+        "outline_px": 144.44
+      },
+      "0.4 vs 0.6": {
+        "differ_pct": 22.12,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.53,
+        "outline_pct": 17.6,
+        "outline_px": 70.79
+      },
+      "0.4 vs 0.8": {
+        "differ_pct": 30.47,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.25,
+        "outline_pct": 27.22,
+        "outline_px": 109.49
+      },
+      "0.6 vs 0.8": {
+        "differ_pct": 12.14,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.51,
+        "outline_pct": 9.62,
+        "outline_px": 55.73
+      }
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "sheet_png": {
+    "bytes": 141255,
+    "height": 536,
+    "width": 1292
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "stills": {
+    "threshold_0.2_cells_10": {
+      "build_ms": 3.2,
+      "covers_pct_of_the_still": 50.25,
+      "pieces": 1,
+      "triangles": 534,
+      "triangles_of_each": [
+        534
+      ]
+    },
+    "threshold_0.2_cells_40": {
+      "build_ms": 100.3,
+      "covers_pct_of_the_still": 50.57,
+      "pieces": 1,
+      "triangles": 8296,
+      "triangles_of_each": [
+        8296
+      ]
+    },
+    "threshold_0.4_cells_10": {
+      "build_ms": 3.3,
+      "covers_pct_of_the_still": 32.72,
+      "pieces": 1,
+      "triangles": 364,
+      "triangles_of_each": [
+        364
+      ]
+    },
+    "threshold_0.4_cells_40": {
+      "build_ms": 92.8,
+      "covers_pct_of_the_still": 33.99,
+      "pieces": 1,
+      "triangles": 6282,
+      "triangles_of_each": [
+        6282
+      ]
+    },
+    "threshold_0.6_cells_10": {
+      "build_ms": 2.1,
+      "covers_pct_of_the_still": 14.81,
+      "pieces": 3,
+      "triangles": 224,
+      "triangles_of_each": [
+        76,
+        76,
+        72
+      ]
+    },
+    "threshold_0.6_cells_40": {
+      "build_ms": 84.5,
+      "covers_pct_of_the_still": 16.4,
+      "pieces": 3,
+      "triangles": 3588,
+      "triangles_of_each": [
+        1220,
+        1184,
+        1184
+      ]
+    },
+    "threshold_0.8_cells_10": {
+      "build_ms": 1.6,
+      "covers_pct_of_the_still": 4.48,
+      "pieces": 3,
+      "triangles": 64,
+      "triangles_of_each": [
+        24,
+        24,
+        16
+      ]
+    },
+    "threshold_0.8_cells_40": {
+      "build_ms": 78.3,
+      "covers_pct_of_the_still": 6.77,
+      "pieces": 3,
+      "triangles": 1508,
+      "triangles_of_each": [
+        520,
+        496,
+        492
+      ]
+    }
+  },
+  "strip": {
+    "bodies_and_triangles": [
+      {
+        "pieces": 3,
+        "step": "1 three sources, 10 cells",
+        "triangles": 224
+      },
+      {
+        "pieces": 3,
+        "step": "2 a grid of 40 cells",
+        "triangles": 3528
+      },
+      {
+        "pieces": 3,
+        "step": "3 noise in the field",
+        "triangles": 3588
+      },
+      {
+        "pieces": 1,
+        "step": "4 the threshold falls to 0.4",
+        "triangles": 6282
+      },
+      {
+        "pieces": 1,
+        "step": "5 two holes carved",
+        "triangles": 6326
+      },
+      {
+        "pieces": 1,
+        "step": "6 a walker stands in it",
+        "triangles": 6326
+      }
+    ],
+    "changed_most": "4 the threshold falls to 0.4",
+    "png": {
+      "bytes": 59966,
+      "height": 266,
+      "width": 1940
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 three sources, 10 cells"
+      },
+      {
+        "differs_from_step_before_pct": 3.26,
+        "step": "2 a grid of 40 cells"
+      },
+      {
+        "differs_from_step_before_pct": 1.72,
+        "step": "3 noise in the field"
+      },
+      {
+        "differs_from_step_before_pct": 15.86,
+        "step": "4 the threshold falls to 0.4"
+      },
+      {
+        "differs_from_step_before_pct": 2.88,
+        "step": "5 two holes carved"
+      },
+      {
+        "differs_from_step_before_pct": 2.37,
+        "step": "6 a walker stands in it"
+      }
+    ]
+  }
+}

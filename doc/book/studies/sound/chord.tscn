@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://chord.gd" id="Chord"]
+[ext_resource type="PackedScene" path="res://guests/sound/sound.tscn" id="Guest"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[node name="Sound" instance=ExtResource("Base")]
+
+[node name="Chord" type="Node3D" parent="."]
+position = Vector3(-0.6, 0, 0)
+script = ExtResource("Chord")
+
+[node name="Neighbour" parent="." instance=ExtResource("Guest")]
+position = Vector3(0.6, 0, 0)
+ratio = "2:1"
+member = 1
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(-0.6, 0, 2.2)
+through_eyes = true

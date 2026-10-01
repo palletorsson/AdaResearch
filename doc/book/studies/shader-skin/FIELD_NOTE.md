@@ -1,6 +1,6 @@
 # Field note: one exponent on one sphere
 
-1 October 2026. Observer: Claude, the session that built this kit, working from the repository and from stills. Nothing here was walked by a body in a headset, and no person looked at the stills to say which two look alike.
+1 October 2026. Observer: Claude, the session that built this kit and a second session that ran it all again the same day, working from the repository and from stills. Nothing here was walked by a body in a headset, and no person looked at the stills to say which two look alike.
 
 This is the kit's own note, in the form of [the decision and the field note](../../course/opening/FIELD_NOTE.md). It is an example of the form. Your note will have another decision in it.
 
@@ -70,8 +70,10 @@ The member in the finished skin, `rim_power` 3. From the side at 2 m the body co
 
 **Intervention.** None; a second measure on the stills of T2 and T3. The sun stands to the left, so the body's left half is brighter than its right. If the body read as unlit the two halves would be alike.
 **Observed.** Left half to right half, mean brightness: 1.26 at exponent 8, 1.23 at 3, 1.15 at 1, 1.11 at 0.5. On the dark body: 1.52, 1.20, 1.07, 1.04.
-**Concluded.** The flood is real: at 0.5 the rim reaches 98.47% of the body. On our skin the glow covers a little more than half of the sun's left-to-right difference, not all of it. On the dark body nearly all.
-**Guessed.** That an eye would call the dark body at 0.5 unlit and ours not. No eye was asked. And one ratio of two halves is a thin measure of "lit": it would also move if the stripes were not the same left and right. They are, by the shader, but I did not test the measure on a body I knew to be unlit.
+**Another cause.** One ratio of two halves is a thin measure of "lit": it also moves if the skin is not the same left and right. So the measure was given its two ends, in the second session. One end: the rim black, the sun alone. The other: the same skin with `render_mode unshaded;`, a body no light reaches.
+**Observed.** The sun alone: 1.27 on our skin, 1.95 on the dark body. No light: 1.02 on our skin, 1.07 on the dark body.
+**Concluded.** The flood is real: at 0.5 the rim reaches 98.47% of the body. The measure has a floor that is not 1: the clouds are not the same left and right. On our skin the glow at 0.5 takes the ratio from 1.27 to 1.11, 0.16 of the 0.25 between lit and unlit. On the dark body it takes it from 1.95 to 1.04, under that body's unlit 1.07: by this measure the dark body at 0.5 cannot be told from an unlit one.
+**Guessed.** That an eye would call the dark body at 0.5 unlit and ours not. No eye was asked.
 
 ### T5. Between the closest pair (parent T2, status: consolidate)
 
@@ -95,6 +97,14 @@ The member in the finished skin, `rim_power` 3. From the side at 2 m the body co
 **Observed.** A marble dropped on the top came to rest at 1.09 m, in the middle, with `grain` at 0 and at 1.
 **Guessed.** That 1.09 and not 1.10, the sum of the two radii, is an overlap the physics allows between two touching bodies. The base's README has the same marble at 0.60 m on a box of 0.5 m, with no centimetre missing. I did not look further.
 
+### T8. The room (parent T6, status: consolidate)
+
+**Intervention.** The guest in a copy of the room, as it runs, seen through the walker's eyes at 1.60 m. The rim in SECOND and in the sky's colour, from 2 m. Then the skin on the room's example box, from 2, 4 and 6 m.
+**Observed.** What stood behind the sphere was the floor and the dark square of its place, `#170458` on average. The body's outer tenth was 140.9 of 441 from it with the rim in SECOND and 138.6 with the rim in the sky's colour. In the studio, against the flat sky, the same two rims were 238.8 and 73.2 from the sky's colour.
+**Observed.** The box's pixels with the rim's cyan in them (blue above 150 of 255 and above red): 0.00% from 2 m, 0.00% from 4 m, 13.81% from 6 m.
+**Concluded.** A rim in the sky's colour melts where the sky is behind the body and not where the floor is. On a flat face the rim is the whole face or none of it, by where the eye stands.
+**Guessed.** That the 13.81% is the box's top face. I looked at the still and it is; I did not count the top's pixels apart from the front's.
+
 ## What was observed, what was concluded, what is guessed
 
 - **Observed.** The share of pixels on which each pair of exponents differs, on two bodies and from two distances. How much of the body the rim changes. The brightness of the two halves. The white body and the silent log. The rim's pixels from four sides. Where the walker stopped and the marble came to rest.
@@ -104,7 +114,7 @@ The member in the finished skin, `rim_power` 3. From the side at 2 m the body co
 ## Unresolved
 
 - **No eye was asked.** Every "alike" above is pixels.
-- **"Reads as unlit"** was measured with one ratio and held in part. A better measure would compare with a body that is unlit by construction.
+- **"Reads as unlit"** was measured with one ratio, between a lit and an unlit body of the same skin. It held on the dark body and in part on ours. The eye is still missing.
 - **Rubber or glass.** The claim names two materials. I measured the width of an edge.
 - **One graphics card.** `hash()` takes the sine of a large number, and cards differ there. The clouds may be other clouds elsewhere; the rim should not be.
 - **The centimetre** under the marble.
@@ -117,10 +127,11 @@ The member in the finished skin, `rim_power` 3. From the side at 2 m the body co
 | T1 | settle | the planted fault is real and silent, as the outline said |
 | T2 | follow | the prediction said "on a dark body" and ours is half lime |
 | T3 | settle | the pair stayed closest on both bodies and from both distances |
-| T4 | leave open | "unlit" needs a measure I trust, and an eye |
+| T4 | follow once, then leave open | the measure got its two ends, a lit body and an unlit one; the eye is still missing |
 | T5 | follow once | the closest pair still differed on a third of the body |
 | T5 | settle | the series falls at every step; the last drop is the measure's own |
 | T7 | leave open | a centimetre is a lesson about colliders, not about skins |
+| T8 | settle | the rim's colour and the flat face both turned out to depend on where the eye stands, which is the chapter's claim |
 
 **The decision of this note: follow once, then settle.** I followed the cause the prediction itself named, the dark body, because a pair that is closest on one skin has been tested once. It stayed closest. I followed the pair inward once more, because 9.06% is not alike, and found a slope with no step in it. I settle there: the kit claims that 3 and 8 are the closest pair and says how far apart they still are, and that 0.5 floods the body without making it unlit.
 
@@ -133,11 +144,11 @@ godot --path . --xr-mode off --script res://sheet.gd
 godot --headless --path . --xr-mode off --script res://verify.gd
 ```
 
-The first needs a window: it photographs the bodies, writes `sheet.json`, `sheet.png`, `process.png` and `place.png`, and prints every number in T1 to T6. The second runs 48 checks, among them the silent sampler of T1 and the walker and marble of T7, and exits 0.
+The first needs a window: it photographs the bodies, writes `sheet.json`, `sheet.png`, `process.png` and `place.png`, and prints every number in T1 to T6. The second runs 48 checks, among them the silent sampler of T1 and the walker and marble of T7, and exits 0. T8 was measured in a scratch copy of the room and is not replayed by either command; its numbers are written down in `verification.json` under `room_trial_recorded`.
 
 ## Evidence
 
-- `sheet.json`: every pair, body and distance; the rim's reach; the series against 8; the four sides; the seam; the planted bug.
+- `sheet.json`: every pair, body and distance; the rim's reach; the two ends of the measure of "lit"; the series against 8; the four sides; the seam; the planted bug.
 - `sheet.png`: the four exponents on our skin and on the dark body. `place.png`: the four sides. `process.png`: the strip.
 - `verification.json`: the checks, with what each measured.
 - `stills/`: the single stills. The folder is not tracked; `sheet.gd` makes it again.

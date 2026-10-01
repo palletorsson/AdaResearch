@@ -3,11 +3,9 @@
   "runs": [
    "wf_66c74fd8-0b8"
   ],
-  "written": "2026-10-01T17:52:12",
-  "still_running": [
-   "build:implicit"
-  ],
-  "note": "The build of 2026-10-01 hit the account's usage limit at about 17:05. 7 builders had reported, 9 were cut off in the middle of their work and 17 never started. A kit whose builder was cut off may look finished from its files; nobody finished or reported it."
+  "written": "2026-10-01T22:12:40",
+  "still_running": [],
+  "note": "Built in two runs on 2026-10-01: the first stopped at about 17:05 on the account's usage limit, the second (17:58 to about 22:00, four agents at a time) finished the cut-off kits and stopped again when the usage credits ran out. Kits accepted by an independent second check so far: 19. Kits not built yet: 17. A kit whose builder was cut off may look finished from its files until someone finishes and reports it."
  },
  "balance": {
   "builder": "not started"
@@ -24,15 +22,17 @@
   "builder": "reported",
   "prediction_held": "partly",
   "checks_reported": 53,
-  "verdict": null,
-  "check": "not run"
+  "verdict": "accept",
+  "check": "not run",
+  "problems": 0
  },
  "cellular": {
   "builder": "reported",
-  "prediction_held": "yes",
-  "checks_reported": 70,
-  "verdict": null,
-  "check": "not run"
+  "prediction_held": "partly",
+  "checks_reported": 72,
+  "verdict": "accept",
+  "check": "not run",
+  "problems": 0
  },
  "chessboard": {
   "converted": "reported",
@@ -45,23 +45,36 @@
   "check": "not run"
  },
  "colour-faces": {
-  "builder": "cut off"
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 63,
+  "verdict": "accept",
+  "problems": 0
  },
  "combine": {
-  "builder": "cut off"
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 71,
+  "verdict": "accept",
+  "problems": 0
  },
  "displace": {
   "builder": "not started"
  },
  "disturbed-order": {
-  "builder": "cut off"
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 66,
+  "verdict": "accept",
+  "problems": 0
  },
  "extrude": {
   "builder": "reported",
   "prediction_held": "no",
   "checks_reported": 56,
-  "verdict": null,
-  "check": "not run"
+  "verdict": "accept",
+  "check": "not run",
+  "problems": 1
  },
  "family": {
   "converted": "cut off",
@@ -69,7 +82,11 @@
   "check": "not run"
  },
  "family-editor": {
-  "builder": "cut off"
+  "builder": "reported",
+  "prediction_held": "no",
+  "checks_reported": 60,
+  "verdict": "accept",
+  "problems": 0
  },
  "field-of-arrows": {
   "builder": "not started"
@@ -81,20 +98,36 @@
   "builder": "reported",
   "prediction_held": "no",
   "checks_reported": 70,
-  "verdict": null,
-  "check": "not run"
+  "verdict": "accept",
+  "check": "not run",
+  "problems": 0
  },
  "grown-and-made": {
   "builder": "not started"
+ },
+ "implicit": {
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 84,
+  "verdict": "accept",
+  "problems": 0
  },
  "impossible-space": {
   "builder": "not started"
  },
  "learning-body": {
-  "builder": "cut off"
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 128,
+  "verdict": "accept",
+  "problems": 0
  },
  "legs": {
-  "builder": "cut off"
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 107,
+  "verdict": "accept",
+  "problems": 0
  },
  "navigate": {
   "builder": "not started"
@@ -124,7 +157,11 @@
   "check": "not run"
  },
  "qfep-lab": {
-  "builder": "cut off"
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 77,
+  "verdict": "accept",
+  "problems": 0
  },
  "recursion": {
   "builder": "not started"
@@ -139,28 +176,38 @@
   "builder": "reported",
   "prediction_held": "partly",
   "checks_reported": 48,
-  "verdict": null,
-  "check": "not run"
+  "verdict": "accept",
+  "check": "not run",
+  "problems": 2
  },
  "soft-body": {
   "builder": "reported",
   "prediction_held": "partly",
   "checks_reported": 59,
   "verdict": "accept",
-  "problems": 1
+  "problems": 0
  },
  "sound": {
-  "builder": "cut off"
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 52,
+  "verdict": "accept",
+  "problems": 3
  },
  "spiral-stair": {
-  "builder": "cut off"
+  "builder": "reported",
+  "prediction_held": "partly",
+  "checks_reported": 69,
+  "verdict": "accept",
+  "problems": 1
  },
  "the-look": {
   "builder": "reported",
   "prediction_held": "partly",
-  "checks_reported": 56,
-  "verdict": null,
-  "check": "not run"
+  "checks_reported": 67,
+  "verdict": "accept",
+  "check": "not run",
+  "problems": 2
  },
  "turtle": {
   "builder": "not started"

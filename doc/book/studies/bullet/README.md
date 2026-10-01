@@ -78,9 +78,11 @@ Checked, with a window, by `sheet.gd`, and each picture looked at: `sheet.png` (
 
 Every code block of the lesson was extracted and run in page order, headless and as the running project in a window. The last state equals `bullet.gd` and `orbit.gd` byte for byte.
 
-Negative tests, in scratch copies, one fault at a time; each failed `verify.gd`: the two lines swapped; both lines from the old state; the frame's delta as the step; one material for line and dots; the landed ball not put on the floor; `launch` changed and the Mark not moved; no node named Walker; a hit that is never recorded; a guest that uses the kit's look; a guest thrown wider than its place; the guest's two lines swapped; an orbit that pulls away from its centre; spaces for tabs.
+Negative tests, in scratch copies, one fault at a time; each failed `verify.gd`: the two lines swapped; both lines from the old state; the frame's delta as the step; one material for line and dots; the landed ball not put on the floor; `launch` changed and the Mark not moved; no node named Walker; a hit that is never recorded; a guest that uses the kit's look; a guest thrown wider than its place; the guest's two lines swapped; an orbit that pulls away from its centre; spaces for tabs. A second pass added four, and each failed too: `flying` never turned false; `dt` typed as 0.0167 for 1/60; `get_node()` in place of `get_node_or_null()`; a `class_name` in the guest.
 
 The room: in a scratch copy of `my-room` the guest stood at place 2, the room ran 180 frames with no error, and the walker's autopilot walked at the guest and arrived 0.07 m from the middle of the place, its feet on the floor: the guest has no collider. The same test passed with the two lines of the lesson's room task changed.
+
+A second session ran all of the above again on the same day, from fresh copies: 53 of 53; every code block in page order, the last state equal byte for byte; `sheet.png`, `orbit.png` and `process.png` the same to the pixel, and every number of `sheet.json` the same but the five flights by the frame; the room test the same. It also did the lesson's *Stand where it lands* with the actions the keys give, pressed from a script in a scratch copy: S and then D stood the Walker on the Mark, within 4 cm of its middle, and Space printed `hit at step 68, 0.51 m above the feet`. The lesson's own hit line, step 67 and 0.6 m, is the autopilot's, which stops about 6 cm before the Mark.
 
 Not checked:
 

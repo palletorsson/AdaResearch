@@ -1,0 +1,681 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Bodies that learn",
+      "passed": true
+    },
+    {
+      "name": "its main scene is learning_body.tscn",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds its 15 files: 15",
+      "passed": true
+    },
+    {
+      "name": "the Input Map has pause (Space) and drop (M), the two keys that label a place",
+      "passed": true
+    },
+    {
+      "name": "every script is indented with tabs and has LF line ends: []",
+      "passed": true
+    },
+    {
+      "name": "no .uid, .import or .godot is in the folder: []",
+      "passed": true
+    },
+    {
+      "name": "samples.json parses as JSON, and is a dictionary: []",
+      "passed": true
+    },
+    {
+      "name": "with one comma taken out the text does not parse, and Godot says where: [\"ERROR: Parse JSON failed. Error at line 15: Expected \\',\\'\"]",
+      "passed": true
+    },
+    {
+      "name": "it says of itself that nobody in it is a person: \"Stand-in data, made by make_samples.gd. Nobody in this file is a person.\"",
+      "passed": true
+    },
+    {
+      "name": "it holds 144 samples: 144",
+      "passed": true
+    },
+    {
+      "name": "every sample is {x, z, label, labelled_by}; x and z are numbers and the label is stay or pass",
+      "passed": true
+    },
+    {
+      "name": "every sample lies on the floor, at most 3.7 m and 2.2 m from its middle",
+      "passed": true
+    },
+    {
+      "name": "six labellers: { \"the builder\": 36, \"classmate 1\": 12, \"classmate 2\": 12, \"classmate 3\": 12, \"nobody\": 36, \"a coin\": 36 }",
+      "passed": true
+    },
+    {
+      "name": "consent is recorded for the builder and three classmates, and for nobody else: { \"classmate 1\": true, \"classmate 2\": true, \"classmate 3\": true, \"the builder\": true }",
+      "passed": true
+    },
+    {
+      "name": "the coin labels the builder's own 36 places",
+      "passed": true
+    },
+    {
+      "name": "and gives 17 of them another label than the builder did: 17",
+      "passed": true
+    },
+    {
+      "name": "the builder said stay 13 times and pass 23 times: { \"stay\": 13, \"pass\": 23 }",
+      "passed": true
+    },
+    {
+      "name": "learning_body.gd loads and parses: []",
+      "passed": true
+    },
+    {
+      "name": "it declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "it reads with JSON.parse_string() and writes with JSON.stringify()",
+      "passed": true
+    },
+    {
+      "name": "its _ready() asserts that a line fails XOR",
+      "passed": true
+    },
+    {
+      "name": "the kit ships no my_samples.json: that file is the learner's own",
+      "passed": true
+    },
+    {
+      "name": "as shipped it is set to one person, 3 neighbours, the neighbours' rule and the kit's file: 0, 3, 0, res://samples.json",
+      "passed": true
+    },
+    {
+      "name": "its _ready() runs to its end on the kit's file: []",
+      "passed": true
+    },
+    {
+      "name": "one person: 36 of 144 samples are chosen, those labelled by \"the builder\", and a ball stands on each, lime for stay and cyan for pass",
+      "passed": true
+    },
+    {
+      "name": "one person: it prints who labelled them and their consent: 36 of 144 samples; labelled by, and their consent: { \"the builder\": true }",
+      "passed": true
+    },
+    {
+      "name": "the balls and the field have no collider: a walker walks through them",
+      "passed": true
+    },
+    {
+      "name": "the class: 36 of 144 samples are chosen, those labelled by \"classmate\", and a ball stands on each, lime for stay and cyan for pass",
+      "passed": true
+    },
+    {
+      "name": "the class: it prints who labelled them and their consent: 36 of 144 samples; labelled by, and their consent: { \"classmate 1\": true, \"classmate 2\": true, \"classmate 3\": true }",
+      "passed": true
+    },
+    {
+      "name": "a default dataset: 36 of 144 samples are chosen, those labelled by \"nobody\", and a ball stands on each, lime for stay and cyan for pass",
+      "passed": true
+    },
+    {
+      "name": "a default dataset: it prints who labelled them and their consent: 36 of 144 samples; labelled by, and their consent: { \"nobody\": \"not recorded\" }",
+      "passed": true
+    },
+    {
+      "name": "random labels: 36 of 144 samples are chosen, those labelled by \"a coin\", and a ball stands on each, lime for stay and cyan for pass",
+      "passed": true
+    },
+    {
+      "name": "random labels: it prints who labelled them and their consent: 36 of 144 samples; labelled by, and their consent: { \"a coin\": \"not recorded\" }",
+      "passed": true
+    },
+    {
+      "name": "you: the kit's file holds no label of yours, so nothing is chosen",
+      "passed": true
+    },
+    {
+      "name": "and the field then says nothing of a place: [\"\", 0.0]",
+      "passed": true
+    },
+    {
+      "name": "and every cell is painted GROUND",
+      "passed": true
+    },
+    {
+      "name": "a value saved in a scene wins over the script's line: saved as 2, the line says 0, and the default dataset is chosen",
+      "passed": true
+    },
+    {
+      "name": "one person, k 1: all 640 cells get the label and the share that the vote written another way gives; 205 say stay; the shares are [1.0]",
+      "passed": true
+    },
+    {
+      "name": "one person, k 3: all 640 cells get the label and the share that the vote written another way gives; 222 say stay; the shares are [0.67, 1.0]",
+      "passed": true
+    },
+    {
+      "name": "one person, k 5: all 640 cells get the label and the share that the vote written another way gives; 214 say stay; the shares are [0.6, 0.8, 1.0]",
+      "passed": true
+    },
+    {
+      "name": "the class, k 1: all 640 cells get the label and the share that the vote written another way gives; 349 say stay; the shares are [1.0]",
+      "passed": true
+    },
+    {
+      "name": "the class, k 3: all 640 cells get the label and the share that the vote written another way gives; 367 say stay; the shares are [0.67, 1.0]",
+      "passed": true
+    },
+    {
+      "name": "the class, k 5: all 640 cells get the label and the share that the vote written another way gives; 369 say stay; the shares are [0.6, 0.8, 1.0]",
+      "passed": true
+    },
+    {
+      "name": "a default dataset, k 1: all 640 cells get the label and the share that the vote written another way gives; 327 say stay; the shares are [1.0]",
+      "passed": true
+    },
+    {
+      "name": "a default dataset, k 3: all 640 cells get the label and the share that the vote written another way gives; 320 say stay; the shares are [0.67, 1.0]",
+      "passed": true
+    },
+    {
+      "name": "a default dataset, k 5: all 640 cells get the label and the share that the vote written another way gives; 327 say stay; the shares are [0.6, 0.8, 1.0]",
+      "passed": true
+    },
+    {
+      "name": "random labels, k 1: all 640 cells get the label and the share that the vote written another way gives; 351 say stay; the shares are [1.0]",
+      "passed": true
+    },
+    {
+      "name": "random labels, k 3: all 640 cells get the label and the share that the vote written another way gives; 388 say stay; the shares are [0.67, 1.0]",
+      "passed": true
+    },
+    {
+      "name": "random labels, k 5: all 640 cells get the label and the share that the vote written another way gives; 423 say stay; the shares are [0.6, 0.8, 1.0]",
+      "passed": true
+    },
+    {
+      "name": "one person's field says stay on 205, 222 and 214 cells with 1, 3 and 5 neighbours: { \"1\": 205, \"3\": 222, \"5\": 214 }",
+      "passed": true
+    },
+    {
+      "name": "where the walker starts, (-3.2, 2.0), three neighbours say stay with two votes of three: [\"stay\", 0.66666666666667]",
+      "passed": true
+    },
+    {
+      "name": "and at (1.0, 2.0) they say pass, all three: [\"pass\", 1.0]",
+      "passed": true
+    },
+    {
+      "name": "the field is a PlaneMesh of 8 m by 5 m",
+      "passed": true
+    },
+    {
+      "name": "its image has one pixel for each of 32 by 20 cells",
+      "passed": true
+    },
+    {
+      "name": "its material shows the texture, each pixel as one sharp cell",
+      "passed": true
+    },
+    {
+      "name": "every pixel is GROUND turned toward its label's colour by three quarters of the share: 0 of 640 are not",
+      "passed": true
+    },
+    {
+      "name": "one person's field has four colours, sure and unsure of each label: [\"26a8e1\", \"2a78c4\", \"7c8b63\", \"a1c550\"]",
+      "passed": true
+    },
+    {
+      "name": "it prints `painted 640 cells`",
+      "passed": true
+    },
+    {
+      "name": "with one neighbour, the cell a sample lies in has that sample's label for 36 of 36 (two samples can share a cell)",
+      "passed": true
+    },
+    {
+      "name": "paint_field() hands the painted image to the texture: texture.update(image)",
+      "passed": true
+    },
+    {
+      "name": "why that check reads text: without a window a texture made red, and updated with a green image, reads back #ff0000",
+      "passed": true
+    },
+    {
+      "name": "the planted fault can be made: the script has that line once, and parses without it",
+      "passed": true
+    },
+    {
+      "name": "without the line the image is still painted, all 640 cells, and `painted 640 cells` is printed",
+      "passed": true
+    },
+    {
+      "name": "and Godot logs no error and no warning: the fault is silent",
+      "passed": true
+    },
+    {
+      "name": "with one neighbour the field is wrong about none of its own samples, whoever labelled them, the coin too",
+      "passed": true
+    },
+    {
+      "name": "one person, k 1, 3, 5, 9: wrong about { \"1\": 0, \"3\": 2, \"5\": 7, \"9\": 6 } of 36",
+      "passed": true
+    },
+    {
+      "name": "with three: the class 5, the default dataset 0, random labels 11: { \"one person\": { \"1\": 0, \"3\": 2, \"5\": 7, \"9\": 6 }, \"the class\": { \"1\": 0, \"3\": 5, \"5\": 8, \"9\": 10 }, \"a default dataset\": { \"1\": 0, \"3\": 0, \"5\": 0, \"9\": 0 }, \"random labels\": { \"1\": 0, \"3\": 11, \"5\": 11, \"9\": 15 } }",
+      "passed": true
+    },
+    {
+      "name": "the script prints `wrong about its own samples: 2 of 36`",
+      "passed": true
+    },
+    {
+      "name": "the two are sample 7, a stay alone among passes, and sample 21, a pass alone among stays: [7, 21]",
+      "passed": true
+    },
+    {
+      "name": "the line trained twice is the same line: weights and bias (-0.040999, -0.073998, -0.1)",
+      "passed": true
+    },
+    {
+      "name": "the line answers every cell by its side, and is always sure",
+      "passed": true
+    },
+    {
+      "name": "after 100 rounds one person's line is wrong about 21 of 36: 21",
+      "passed": true
+    },
+    {
+      "name": "and it does not settle: after 99, 100, 101 and 102 rounds it is wrong about { \"99\": 22, \"100\": 21, \"101\": 12, \"102\": 22 }",
+      "passed": true
+    },
+    {
+      "name": "the default dataset's line is wrong about none, at every one of those rounds: { \"99\": 0, \"100\": 0, \"101\": 0, \"102\": 0 }",
+      "passed": true
+    },
+    {
+      "name": "the class 15 and random labels 21 after 100 rounds: { \"one person\": { \"99\": 22, \"100\": 21, \"101\": 12, \"102\": 22 }, \"the class\": { \"99\": 14, \"100\": 15, \"101\": 11, \"102\": 14 }, \"a default dataset\": { \"99\": 0, \"100\": 0, \"101\": 0, \"102\": 0 }, \"random labels\": { \"99\": 15, \"100\": 21, \"101\": 21, \"102\": 19 } }",
+      "passed": true
+    },
+    {
+      "name": "the line trained 1000 rounds on XOR is wrong about 2 of 4",
+      "passed": true
+    },
+    {
+      "name": "xor_wrong() puts the rule and the chosen samples back",
+      "passed": true
+    },
+    {
+      "name": "of 360 directions and 61 offsets no line gets all four right; the best is wrong about 1",
+      "passed": true
+    },
+    {
+      "name": "with the assert turned round Godot says: SCRIPT ERROR: Assertion failed: a line split XOR: no line can, so the test is broken (gdscript://-9223371914347543095.gd:27)",
+      "passed": true
+    },
+    {
+      "name": "and the rest of _ready() is not run: no sample was loaded",
+      "passed": true
+    },
+    {
+      "name": "in the running scene that is the only error in 30 frames: _process() waits for a text that was never made: 1",
+      "passed": true
+    },
+    {
+      "name": "in the middle of the floor both weights are 0 and the error is 1: 1.000",
+      "passed": true
+    },
+    {
+      "name": "where the walker starts it is 4.01, as the sum written out gives",
+      "passed": true
+    },
+    {
+      "name": "walk_down() goes down at every one of its 17 steps and ends where none of the four cells around is lower: (-0.20, 0.75), error 0.926",
+      "passed": true
+    },
+    {
+      "name": "one person's: 17 steps to (-0.2, 0.75)",
+      "passed": true
+    },
+    {
+      "name": "with the rule at `the error` every pixel is GROUND turned toward THIRD by an eighth of the error there: 0 of 640 are not",
+      "passed": true
+    },
+    {
+      "name": "the scene stands on the supplied base: its sky, and the floor in GROUND",
+      "passed": true
+    },
+    {
+      "name": "its camera is moved back and up, to (0, 3.2, 7.6)",
+      "passed": true
+    },
+    {
+      "name": "the walker starts on stay: the readout says \"you stand on stay, sure to 67%\"",
+      "passed": true
+    },
+    {
+      "name": "it stands on the floor, its feet at 0.00 m",
+      "passed": true
+    },
+    {
+      "name": "sent 4.2 m to the right, to (1.0, 2.0), it arrived with its feet at 0.00 m: nothing on the field stops a body",
+      "passed": true
+    },
+    {
+      "name": "there the readout says \"you stand on pass, sure to 100%\"",
+      "passed": true
+    },
+    {
+      "name": "on the way the readout changed 4 times: [\"you stand on stay, sure to 67%\", \"you stand on stay, sure to 100%\", \"you stand on stay, sure to 67%\", \"you stand on pass, sure to 67%\", \"you stand on pass, sure to 100%\"]",
+      "passed": true
+    },
+    {
+      "name": "walked along z 1.89 through the ball at (-2.25, 1.89), it \"arrived\": a ball has no collider",
+      "passed": true
+    },
+    {
+      "name": "the scene ran more than 180 frames and Godot logged no error and no warning: [] []",
+      "passed": true
+    },
+    {
+      "name": "set to `you`, with no saved file: 144 samples, none of them chosen",
+      "passed": true
+    },
+    {
+      "name": "Space (the action pause) adds a sample where the walker stands, labelled stay by you: { \"x\": -3.2, \"z\": 2.0, \"label\": \"stay\", \"labelled_by\": \"you\" }",
+      "passed": true
+    },
+    {
+      "name": "it is chosen at once, and a ball stands on it",
+      "passed": true
+    },
+    {
+      "name": "one label, and every one of the 640 cells says stay, sure to 100%",
+      "passed": true
+    },
+    {
+      "name": "the readout: \"you stand on stay, sure to 100%\"",
+      "passed": true
+    },
+    {
+      "name": "the file is saved at once: 145 samples, the last one yours, and `you: true` under consent",
+      "passed": true
+    },
+    {
+      "name": "it is written with JSON.stringify() and a tab, one field to a line",
+      "passed": true
+    },
+    {
+      "name": "M (the action drop) adds one labelled pass: { \"x\": 2.0, \"z\": -1.0, \"label\": \"pass\", \"labelled_by\": \"you\" }",
+      "passed": true
+    },
+    {
+      "name": "two labels: each place takes the nearer one's, and no place is sure of it by more than a half: [\"stay\", 0.5] [\"pass\", 0.5]",
+      "passed": true
+    },
+    {
+      "name": "started again, the script finds the saved file and reads it: 146 samples, 2 chosen",
+      "passed": true
+    },
+    {
+      "name": "and prints your consent: 2 of 146 samples; labelled by, and their consent: { \"you\": true }",
+      "passed": true
+    },
+    {
+      "name": "the other four values still train on their own 36: one person is wrong about 2 as before",
+      "passed": true
+    },
+    {
+      "name": "with the rule at `the error` the field sends the walker downhill as the scene starts",
+      "passed": true
+    },
+    {
+      "name": "it \"arrived\" within a step's slack of (-0.2, 0.75): (-0.29, 0.78)",
+      "passed": true
+    },
+    {
+      "name": "the readout there: \"error 0.92 here; the line of these weights gets 15 of 36 wrong\"",
+      "passed": true
+    },
+    {
+      "name": "the line of the weights lies on the floor, 4.8 m long",
+      "passed": true
+    },
+    {
+      "name": "at right angles to the walker's place, whose x and z, a quarter each, are the two weights: (-0.07244, 0.193758)",
+      "passed": true
+    },
+    {
+      "name": "Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "its folder holds three files: [\"learning-body.tscn\", \"portrait.gd\", \"samples.json\"]",
+      "passed": true
+    },
+    {
+      "name": "its samples.json is the builder's 36 samples of the kit's file, in the floor's own metres, with the builder's consent",
+      "passed": true
+    },
+    {
+      "name": "it stands on the ground and fits the place, its words too: 1.52 m wide, 1.24 m deep, 2.92 m high",
+      "passed": true
+    },
+    {
+      "name": "trained on 36 labels: wrong about 2 of its own and 8 when each is left out",
+      "passed": true
+    },
+    {
+      "name": "it prints what it says of itself",
+      "passed": true
+    },
+    {
+      "name": "its vote is the kit's: all 640 cells get the same label and share from both",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped on it rests on the slab, its middle at 0.20 m",
+      "passed": true
+    },
+    {
+      "name": "with nobody on it, it says what it was trained on",
+      "passed": true
+    },
+    {
+      "name": "the walker, sent onto it, \"arrived\" with its feet at 0.10 m: it stepped up onto the slab",
+      "passed": true
+    },
+    {
+      "name": "and is told what it stands on: \"you stand on stay, sure to 100%\"",
+      "passed": true
+    },
+    {
+      "name": "its words, one line longer now, are 1.47 m wide: still inside the place",
+      "passed": true
+    },
+    {
+      "name": "0.8 m to the right on the slab it stands on the other label: \"you stand on pass, sure to 100%\"",
+      "passed": true
+    },
+    {
+      "name": "the guest ran with a marble and a walker on it and Godot logged no error: []",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 128,
+  "godot": "4.6-stable (official)",
+  "kit": "Bodies that learn",
+  "measured": {
+    "a_failed_assert_says": "SCRIPT ERROR: Assertion failed: a line split XOR: no line can, so the test is broken (gdscript://-9223371914347543095.gd:27)",
+    "a_line_wrong": {
+      "a default dataset": {
+        "100": 0,
+        "101": 0,
+        "102": 0,
+        "99": 0
+      },
+      "one person": {
+        "100": 21,
+        "101": 12,
+        "102": 22,
+        "99": 22
+      },
+      "random labels": {
+        "100": 21,
+        "101": 21,
+        "102": 19,
+        "99": 15
+      },
+      "the class": {
+        "100": 15,
+        "101": 11,
+        "102": 14,
+        "99": 14
+      }
+    },
+    "a_missing_comma_says": [
+      "ERROR: Parse JSON failed. Error at line 15: Expected ','"
+    ],
+    "across_the_boundary": {
+      "at": [
+        0.93,
+        2.0
+      ],
+      "ended": "arrived",
+      "feet_at_m": 0.0,
+      "readouts": [
+        "you stand on stay, sure to 67%",
+        "you stand on stay, sure to 100%",
+        "you stand on stay, sure to 67%",
+        "you stand on pass, sure to 67%",
+        "you stand on pass, sure to 100%"
+      ]
+    },
+    "cells_that_say_stay": {
+      "a default dataset": {
+        "1": 327,
+        "3": 320,
+        "5": 327
+      },
+      "one person": {
+        "1": 205,
+        "3": 222,
+        "5": 214
+      },
+      "random labels": {
+        "1": 351,
+        "3": 388,
+        "5": 423
+      },
+      "the class": {
+        "1": 349,
+        "3": 367,
+        "5": 369
+      }
+    },
+    "downhill": {
+      "at": [
+        -0.29,
+        0.78
+      ],
+      "ended": "arrived",
+      "feet_at_m": 0.0,
+      "readout": "error 0.92 here; the line of these weights gets 15 of 36 wrong"
+    },
+    "errors_in_30_frames_after_a_failed_assert": 1,
+    "field_colours": [
+      "26a8e1",
+      "2a78c4",
+      "7c8b63",
+      "a1c550"
+    ],
+    "guest_box": {
+      "deep": 1.24,
+      "high": 2.92,
+      "lowest": 0.0,
+      "wide": 1.52,
+      "words_wide_with_a_walker_on_it": 1.47
+    },
+    "headless_texture_after_update": "#ff0000",
+    "labels": {
+      "a default dataset": {
+        "pass": 18,
+        "stay": 18
+      },
+      "one person": {
+        "pass": 23,
+        "stay": 13
+      },
+      "random labels": {
+        "pass": 16,
+        "stay": 20
+      },
+      "the class": {
+        "pass": 17,
+        "stay": 19
+      }
+    },
+    "on_the_guest": {
+      "after_a_step_to_the_right": "you stand on pass, sure to 100%",
+      "ended": "arrived",
+      "feet_at_m": 0.1,
+      "readout": "you stand on stay, sure to 100%"
+    },
+    "one_person_k3_wrong_samples": [
+      7,
+      21
+    ],
+    "printed_for_one_person": "36 of 144 samples; labelled by, and their consent: { \"the builder\": true }",
+    "printed_for_you": "2 of 146 samples; labelled by, and their consent: { \"you\": true }",
+    "readout_with_no_label": "no label yet: Space says stay here, M says pass",
+    "samples_whose_own_cell_has_their_label_k1": 36,
+    "walk_down": {
+      "ends": [
+        -0.2,
+        0.75
+      ],
+      "error_there": 0.926,
+      "steps": 17
+    },
+    "wrong_about_its_own": {
+      "a default dataset": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "9": 0
+      },
+      "one person": {
+        "1": 0,
+        "3": 2,
+        "5": 7,
+        "9": 6
+      },
+      "random labels": {
+        "1": 0,
+        "3": 11,
+        "5": 11,
+        "9": 15
+      },
+      "the class": {
+        "1": 0,
+        "3": 5,
+        "5": 8,
+        "9": 10
+      }
+    },
+    "xor_wrong_of_4": 2
+  },
+  "passed": true
+}

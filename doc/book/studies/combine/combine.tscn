@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://combine.gd" id="Combine"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[node name="Combine" instance=ExtResource("Base")]
+
+[node name="Carved" type="Node3D" parent="."]
+script = ExtResource("Combine")
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(1.6, 0, 2.6)

@@ -1,0 +1,481 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Sound, its main scene is chord.tscn, its renderer Compatibility",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds its 15 files, none declares a class_name, and the project lists no named class: nothing needs an import",
+      "passed": true
+    },
+    {
+      "name": "every script is indented with tabs: []",
+      "passed": true
+    },
+    {
+      "name": "headless, Godot mixes with its Dummy driver at 44100 samples a second: nothing reaches a loudspeaker, and the mixer can still be read",
+      "passed": true
+    },
+    {
+      "name": "one second of one tone of 256 Hz is 88200 bytes; its first four samples are [0, 1194, 2388, 3578], sample 43 is 32766, the loudest is 32766 of 32767",
+      "passed": true
+    },
+    {
+      "name": "render() of the chord 3:2 writes 88200 bytes, each sample the two sines at half height times 32767, cut to a whole number: the first four are [0, 1493, 2983, 4466]",
+      "passed": true
+    },
+    {
+      "name": "the loudest sample of 3:2 is 31226: the two tones never stand at their tops together",
+      "passed": true
+    },
+    {
+      "name": "the voice's stream is an AudioStreamWAV: 16 bits, 44100 samples a second, one channel, 1.000 s long, holding those bytes",
+      "passed": true
+    },
+    {
+      "name": "it loops forward from sample 0 to sample 44100",
+      "passed": true
+    },
+    {
+      "name": "the voice is an AudioStreamPlayer3D on top of the box, unit_size 1, silent until a body comes",
+      "passed": true
+    },
+    {
+      "name": "for 1:1, 2:1, 3:2 and 45:32 on 256 Hz the faster tone is 256, 512, 384 and 360 Hz, read back, and the loop closes: the step at the seam is no larger than a step inside. { \"1:1\": { \"high_hz\": 256.0, \"loudest\": 32766, \"seam_step\": 1194, \"largest_step_inside\": 1195 }, \"2:1\": { \"high_hz\": 512.0, \"loudest\": 28837, \"seam_step\": 1791, \"largest_step_inside\": 1792 }, \"3:2\": { \"high_hz\": 384.0, \"loudest\": 31226, \"seam_step\": 1493, \"largest_step_inside\": 1493 }, \"45:32\": { \"high_hz\": 360.0, \"loudest\": 32760, \"seam_step\": 1437, \"largest_step_inside\": 1437 } }",
+      "passed": true
+    },
+    {
+      "name": "on 261.63 Hz, the piano's middle C, the second does not hold a whole number of turns: the step at the seam is 5114, the largest inside 1527. A click once a second",
+      "passed": true
+    },
+    {
+      "name": "encode_s16(i * 2, wave) with the wave between -1 and 1: 88200 bytes and every sample is 0. Sample 43, where the wave is 0.999997, is 0",
+      "passed": true
+    },
+    {
+      "name": "before anything plays the Master bus is at -200.0 dB: Godot's floor",
+      "passed": true
+    },
+    {
+      "name": "played, the unscaled buffer is silence: playing is true, the position moves (0.10 s), the bus stays at -200.0 dB, and Godot logs no error and no warning in this run",
+      "passed": true
+    },
+    {
+      "name": "with no loop the player stops by itself when the second is over: playing is false",
+      "passed": true
+    },
+    {
+      "name": "the repaired buffer is heard: the bus reaches 0.0 dB, and the mix holds 256 Hz at 1.00 of full range and none of the other tones",
+      "passed": true
+    },
+    {
+      "name": "the chord 3:2 through a plain player, looped: still playing after 1.3 s, the bus at -0.4 dB, the mix holds 256 Hz at 0.50 and 384 Hz at 0.50, and no 360 or 512",
+      "passed": true
+    },
+    {
+      "name": "without the two halves the sum reaches 62452, past 32767; encode_s16() does not refuse it, it wraps: 17600 of 44100 samples read back as another number. The first is sample 12: 33888 was asked, -31648 is in the buffer",
+      "passed": true
+    },
+    {
+      "name": "a tone of 43844 Hz, 256 short of the rate, gives the samples of 256 Hz upside down: the largest difference over the second is 0 of 32767. The buffer cannot tell the two apart",
+      "passed": true
+    },
+    {
+      "name": "a tone of 22050 Hz, half the rate, is sampled where it crosses zero each time: every sample is 0",
+      "passed": true
+    },
+    {
+      "name": "each of the four chords has one figure: a MultiMesh of 5512 boxes of 2 cm in LINE, with no collider; by the rule no bead leaves the square of 1 m, and each figure closes within the eighth of a second the beads cover",
+      "passed": true
+    },
+    {
+      "name": "by the rule the beads fall in 50, 273, 464 and 2166 of the 2500 cells of a 50 by 50 grid over the square, for 1:1, 2:1, 3:2 and 45:32",
+      "passed": true
+    },
+    {
+      "name": "ratio changed on a chord that already stands in the room is kept as a text and changes nothing: the faster tone is still 360 Hz. set() with a name the script does not have does nothing, in silence",
+      "passed": true
+    },
+    {
+      "name": "chord.tscn runs 180 frames and Godot logs no error: []",
+      "passed": true
+    },
+    {
+      "name": "in it Chord runs chord.gd at 3:2 and Neighbour is the guest at 2:1; each prints its line: Chord: 3:2, 256.0 and 384.0 Hz",
+      "passed": true
+    },
+    {
+      "name": "the chord is a box in BODY with a collider, a ring in GHOST on the floor, an Area3D and the figure; the neighbour's box is SECOND",
+      "passed": true
+    },
+    {
+      "name": "the walker starts 2.2 m in front of the Chord, looking through its Eyes; the two chords stand 1.2 m apart, so their rings of 0.8 m overlap",
+      "passed": true
+    },
+    {
+      "name": "with the walker outside both reaches nothing plays: the bus is at -200.0 dB",
+      "passed": true
+    },
+    {
+      "name": "by the keys: W held for 45 steps brings the walker to (-0.6, 0.0, 0.73) and the Chord sounds alone; D for 18 steps to (-0.03, 0.0, 0.73) and both sound; D for 22 more to (0.67, 0.0, 0.73) and the Neighbour sounds alone",
+      "passed": true
+    },
+    {
+      "name": "walked back to its start it is outside both reaches and both are silent",
+      "passed": true
+    },
+    {
+      "name": "the walker walks into the Chord's reach and arrives: Chord sounds, the Neighbour does not; the mix holds [256, 384] Hz, at -7.1 dB",
+      "passed": true
+    },
+    {
+      "name": "C changes to the fixed camera, and the ears go with the eyes: the same chord is now -16.9 dB, was -7.1 dB",
+      "passed": true
+    },
+    {
+      "name": "C again: back behind the walker's eyes",
+      "passed": true
+    },
+    {
+      "name": "it walks between the two boxes and through both figures, which stop nothing, and arrives where the rings overlap: both sound, the mix holds [256, 384, 512] Hz, at -2.4 dB",
+      "passed": true
+    },
+    {
+      "name": "walked at the Neighbour's box it is stopped, \"blocked\", 0.46 m from its middle; there only the Neighbour sounds: [256, 512] Hz, at -6.3 dB",
+      "passed": true
+    },
+    {
+      "name": "it walks away and both are silent again: -200.0 dB",
+      "passed": true
+    },
+    {
+      "name": "the whole walk, and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "in its first steps the reach is entered by two bodies, the floor's and the chord's own box, both a StaticBody3D: [\"StaticBody3D\", \"StaticBody3D\"]. The `if` keeps the chord silent for them",
+      "passed": true
+    },
+    {
+      "name": "the marble dropped over the middle falls through the figure and rests on the box, at 0.50 m; a marble is not a walker, and the chord stays silent",
+      "passed": true
+    },
+    {
+      "name": "dropped 0.35 m to the side, through the beads, it lies on the floor at 0.10 m: the figure stops nothing",
+      "passed": true
+    },
+    {
+      "name": "with unit_size 1 the voice is heard at -3.4 dB from 1 m, -9.4 from 2 m and -15.3 from 4 m: each doubling takes about 6 dB",
+      "passed": true
+    },
+    {
+      "name": "with the voice 2 m to the listener's left the left side is louder: -7.3 dB against -13.4 dB",
+      "passed": true
+    },
+    {
+      "name": "with Godot's default unit_size of 10 the voice is as loud from 4 m as from 1 m, -0.4 and -0.4 dB: on a floor of 8 m distance would not be heard",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "its folder holds a scene and one script: [\"sound.gd\", \"sound.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "the guest's script is chord.gd with the look's colours written out: 89 lines of chord.gd that do not name the look stand in it, in order. Missing: []",
+      "passed": true
+    },
+    {
+      "name": "the guest loads alone: it stands on the ground (lowest point 0.000 m), reaches 0.80 m from its middle, so it fits the place of 1.6 m, and wears BODY, GHOST and LINE as the kit does",
+      "passed": true
+    },
+    {
+      "name": "a walker sent at it is stopped by its box, 0.47 m from the middle, and stands in its reach: it sounds, [256, 384] Hz at -5.6 dB",
+      "passed": true
+    },
+    {
+      "name": "the room task, done to a copy of the guest's script (5:4 on 192 Hz, and one line for a swell): it prints Sound: 5:4, 192.0 and 240.0 Hz, the loudest sample is 32271, the samples at 0 s and 0.5 s are 0 and 0, and the loop closes: the step at the seam is 0",
+      "passed": true
+    },
+    {
+      "name": "a walker in its reach: the mix holds [192, 240] Hz, and over six short listenings the level went from -15.6 to -5.9 dB: it swells",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 52,
+  "godot": "4.6-stable (official)",
+  "kit": "Sound",
+  "measured": {
+    "audio_driver": "Dummy",
+    "chord_3_2_heard_plain": {
+      "256": 0.5,
+      "360": 0.0,
+      "384": 0.5,
+      "512": 0.0,
+      "db": -0.4,
+      "left_db": -0.4,
+      "right_db": -0.4
+    },
+    "distance": {
+      "to_the_left_2_m": {
+        "256": 0.168,
+        "360": 0.0,
+        "384": 0.169,
+        "512": 0.0,
+        "db": -7.3,
+        "left_db": -7.3,
+        "right_db": -13.4
+      },
+      "unit_size_10_db_at_1_and_4_m": [
+        -0.4,
+        -0.4
+      ],
+      "unit_size_1_db_at_1_2_4_m": [
+        -3.4,
+        -9.4,
+        -15.3
+      ]
+    },
+    "figures_by_the_rule": {
+      "1:1": {
+        "beads": 5512,
+        "cells_of_2500_with_a_bead": 50,
+        "closes_after_s": 0.00390625,
+        "turns_of_the_slower_tone": 1
+      },
+      "2:1": {
+        "beads": 5512,
+        "cells_of_2500_with_a_bead": 273,
+        "closes_after_s": 0.00390625,
+        "turns_of_the_slower_tone": 1
+      },
+      "3:2": {
+        "beads": 5512,
+        "cells_of_2500_with_a_bead": 464,
+        "closes_after_s": 0.0078125,
+        "turns_of_the_slower_tone": 2
+      },
+      "45:32": {
+        "beads": 5512,
+        "cells_of_2500_with_a_bead": 2166,
+        "closes_after_s": 0.125,
+        "turns_of_the_slower_tone": 32
+      }
+    },
+    "folding": {
+      "largest_difference_from_256_hz_upside_down": 0,
+      "loudest_sample_of_22050_hz": 0,
+      "tone_hz": 43844
+    },
+    "guest": {
+      "heard": {
+        "256": 0.275,
+        "360": 0.0,
+        "384": 0.276,
+        "512": 0.0,
+        "db": -5.6,
+        "left_db": -5.6,
+        "right_db": -5.6
+      },
+      "lowest_point_m": 0.0,
+      "metres_from_the_middle": 0.47,
+      "reaches_m": 0.8,
+      "walk": "blocked"
+    },
+    "headless_bead_100_reads_back": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "loop_on_261_63_hz": {
+      "high_hz": 392.445,
+      "largest_step_inside": 1527,
+      "seam_step": 5114
+    },
+    "marble": {
+      "entered_the_reach_at_the_start": [
+        "StaticBody3D",
+        "StaticBody3D",
+        "RigidBody3D"
+      ],
+      "on_the_box_m": 0.498,
+      "through_the_figure_m": 0.098
+    },
+    "mix_rate": 44100.0,
+    "one_tone_256": {
+      "bytes": 88200,
+      "first_four_samples": [
+        0,
+        1194,
+        2388,
+        3578
+      ],
+      "loudest": 32766,
+      "sample_43": 32766
+    },
+    "one_tone_heard": {
+      "256": 1.0,
+      "360": 0.0,
+      "384": 0.0,
+      "512": 0.0,
+      "db": 0.0,
+      "left_db": 0.0,
+      "right_db": 0.0
+    },
+    "planted_bug": {
+      "bus_db": -200.0,
+      "errors_and_warnings": 0,
+      "loudest_sample": 0,
+      "playing": true
+    },
+    "room_task": {
+      "heard": {
+        "192": 0.111,
+        "240": 0.111,
+        "256": 0.0,
+        "384": 0.0,
+        "db": -6.6,
+        "left_db": -6.6,
+        "right_db": -6.6
+      },
+      "largest_step_inside": 1008,
+      "levels_db_over_six_listenings": [
+        -7.1,
+        -5.9,
+        -15.6,
+        -7.8,
+        -6.4,
+        -9.3
+      ],
+      "loudest_sample": 32271,
+      "prints": "Sound: 5:4, 192.0 and 240.0 Hz",
+      "seam_step": 0
+    },
+    "room_trial_recorded": {
+      "checks": "8 of 8",
+      "feet_at_m": 0.0,
+      "from": "guest_trial.json of a scratch copy of my-room, 1 October 2026",
+      "metres_from_the_middle_of_the_place": 0.45,
+      "place": 2,
+      "printed": "Sound sounds",
+      "walk_ended": "blocked"
+    },
+    "sum_without_the_halves": {
+      "asked": 33888,
+      "first_wrapped_sample": 12,
+      "in_the_buffer": -31648,
+      "largest_number_asked": 62452,
+      "samples_wrapped": 17600
+    },
+    "the_four_chords": {
+      "1:1": {
+        "high_hz": 256.0,
+        "largest_step_inside": 1195,
+        "loudest": 32766,
+        "seam_step": 1194
+      },
+      "2:1": {
+        "high_hz": 512.0,
+        "largest_step_inside": 1792,
+        "loudest": 28837,
+        "seam_step": 1791
+      },
+      "3:2": {
+        "high_hz": 384.0,
+        "largest_step_inside": 1493,
+        "loudest": 31226,
+        "seam_step": 1493
+      },
+      "45:32": {
+        "high_hz": 360.0,
+        "largest_step_inside": 1437,
+        "loudest": 32760,
+        "seam_step": 1437
+      }
+    },
+    "walk": {
+      "after_C": {
+        "256": 0.071,
+        "360": 0.0,
+        "384": 0.072,
+        "512": 0.0,
+        "db": -16.9,
+        "left_db": -16.9,
+        "right_db": -17.6
+      },
+      "at_the_neighbours_box": {
+        "heard": {
+          "256": 0.276,
+          "360": 0.0,
+          "384": 0.0,
+          "512": 0.277,
+          "db": -6.3,
+          "left_db": -6.3,
+          "right_db": -6.3
+        },
+        "metres_from_its_middle": 0.46,
+        "walk": "blocked"
+      },
+      "away": {
+        "heard": {
+          "256": 0.0,
+          "360": 0.0,
+          "384": 0.0,
+          "512": 0.0,
+          "db": -200.0,
+          "left_db": -200.0,
+          "right_db": -200.0
+        },
+        "walk": "arrived"
+      },
+      "by_the_keys": {
+        "after_D": [
+          -0.03,
+          0.73
+        ],
+        "after_D_again": [
+          0.67,
+          0.73
+        ],
+        "after_W": [
+          -0.6,
+          0.73
+        ]
+      },
+      "in_both": {
+        "feet_m": 0.0,
+        "heard": {
+          "256": 0.393,
+          "360": 0.0,
+          "384": 0.251,
+          "512": 0.252,
+          "db": -2.4,
+          "left_db": -3.0,
+          "right_db": -2.4
+        },
+        "walk": "arrived"
+      },
+      "in_the_chord": {
+        "heard": {
+          "256": 0.229,
+          "360": 0.0,
+          "384": 0.23,
+          "512": 0.0,
+          "db": -7.1,
+          "left_db": -7.3,
+          "right_db": -7.1
+        },
+        "walk": "arrived"
+      }
+    }
+  },
+  "passed": true
+}

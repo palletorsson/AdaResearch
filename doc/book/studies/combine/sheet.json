@@ -1,0 +1,333 @@
+{
+  "b_clear_of_the_tunnel": {
+    "b_x": 0.95,
+    "first_two_orders_differ_pct_front": 0.0,
+    "first_two_orders_differ_pct_front_right": 0.0
+  },
+  "godot": "4.6-stable (official)",
+  "not_baked_vs_baked_differ_pct": 0.0,
+  "of_either_above": {
+    "closest": "(A union B) minus C vs (A minus C) union B",
+    "pairs": {
+      "(A intersect B) minus C vs A minus (B union C)": {
+        "differ_of_either_pct": 100.0,
+        "either_pct": 8.67
+      },
+      "(A minus C) union B vs (A intersect B) minus C": {
+        "differ_of_either_pct": 96.6,
+        "either_pct": 14.33
+      },
+      "(A minus C) union B vs A minus (B union C)": {
+        "differ_of_either_pct": 66.4,
+        "either_pct": 14.33
+      },
+      "(A union B) minus C vs (A intersect B) minus C": {
+        "differ_of_either_pct": 96.2,
+        "either_pct": 14.11
+      },
+      "(A union B) minus C vs (A minus C) union B": {
+        "differ_of_either_pct": 2.9,
+        "either_pct": 14.33
+      },
+      "(A union B) minus C vs A minus (B union C)": {
+        "differ_of_either_pct": 65.3,
+        "either_pct": 14.11
+      }
+    }
+  },
+  "of_either_front": {
+    "closest": "(A union B) minus C vs (A minus C) union B",
+    "pairs": {
+      "(A intersect B) minus C vs A minus (B union C)": {
+        "differ_of_either_pct": 100.0,
+        "either_pct": 9.06
+      },
+      "(A minus C) union B vs (A intersect B) minus C": {
+        "differ_of_either_pct": 99.7,
+        "either_pct": 24.37
+      },
+      "(A minus C) union B vs A minus (B union C)": {
+        "differ_of_either_pct": 72.8,
+        "either_pct": 24.37
+      },
+      "(A union B) minus C vs (A intersect B) minus C": {
+        "differ_of_either_pct": 95.5,
+        "either_pct": 16.9
+      },
+      "(A union B) minus C vs (A minus C) union B": {
+        "differ_of_either_pct": 59.5,
+        "either_pct": 24.37
+      },
+      "(A union B) minus C vs A minus (B union C)": {
+        "differ_of_either_pct": 60.7,
+        "either_pct": 16.9
+      }
+    }
+  },
+  "of_either_front_right": {
+    "closest": "(A union B) minus C vs (A minus C) union B",
+    "pairs": {
+      "(A intersect B) minus C vs A minus (B union C)": {
+        "differ_of_either_pct": 100.0,
+        "either_pct": 14.96
+      },
+      "(A minus C) union B vs (A intersect B) minus C": {
+        "differ_of_either_pct": 99.7,
+        "either_pct": 27.4
+      },
+      "(A minus C) union B vs A minus (B union C)": {
+        "differ_of_either_pct": 86.3,
+        "either_pct": 27.4
+      },
+      "(A union B) minus C vs (A intersect B) minus C": {
+        "differ_of_either_pct": 97.5,
+        "either_pct": 27.01
+      },
+      "(A union B) minus C vs (A minus C) union B": {
+        "differ_of_either_pct": 44.2,
+        "either_pct": 27.4
+      },
+      "(A union B) minus C vs A minus (B union C)": {
+        "differ_of_either_pct": 63.8,
+        "either_pct": 27.01
+      }
+    }
+  },
+  "orders": [
+    {
+      "covers_pct_front": 16.9,
+      "order": "((A union B) minus C) intersect S",
+      "triangles": 574,
+      "triangles_listed": 768,
+      "volume_m3": 1.859
+    },
+    {
+      "covers_pct_front": 24.37,
+      "order": "((A minus C) union B) intersect S",
+      "triangles": 544,
+      "triangles_listed": 768,
+      "volume_m3": 3.239
+    },
+    {
+      "covers_pct_front": 2.72,
+      "order": "((A intersect B) minus C) intersect S",
+      "triangles": 150,
+      "triangles_listed": 768,
+      "volume_m3": 0.196
+    },
+    {
+      "covers_pct_front": 8.34,
+      "order": "(A minus (B union C)) intersect S",
+      "triangles": 422,
+      "triangles_listed": 768,
+      "volume_m3": 0.793
+    }
+  ],
+  "pairs_above": {
+    "closest": "(A union B) minus C vs (A minus C) union B",
+    "farthest": "(A minus C) union B vs (A intersect B) minus C",
+    "pairs": {
+      "(A intersect B) minus C vs A minus (B union C)": {
+        "differ_pct": 8.67,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.57,
+        "outline_pct": 6.1,
+        "outline_px": 53.56
+      },
+      "(A minus C) union B vs (A intersect B) minus C": {
+        "differ_pct": 13.84,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.63,
+        "outline_pct": 10.22,
+        "outline_px": 63.3
+      },
+      "(A minus C) union B vs A minus (B union C)": {
+        "differ_pct": 9.52,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.32,
+        "outline_pct": 7.2,
+        "outline_px": 44.61
+      },
+      "(A union B) minus C vs (A intersect B) minus C": {
+        "differ_pct": 13.58,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.58,
+        "outline_pct": 10.0,
+        "outline_px": 62.41
+      },
+      "(A union B) minus C vs (A minus C) union B": {
+        "differ_pct": 0.42,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.2,
+        "outline_pct": 0.22,
+        "outline_px": 1.37
+      },
+      "(A union B) minus C vs A minus (B union C)": {
+        "differ_pct": 9.23,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.24,
+        "outline_pct": 6.98,
+        "outline_px": 43.59
+      }
+    }
+  },
+  "pairs_front": {
+    "closest": "(A intersect B) minus C vs A minus (B union C)",
+    "farthest": "(A minus C) union B vs (A intersect B) minus C",
+    "pairs": {
+      "(A intersect B) minus C vs A minus (B union C)": {
+        "differ_pct": 9.06,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.01,
+        "outline_pct": 7.05,
+        "outline_px": 57.24
+      },
+      "(A minus C) union B vs (A intersect B) minus C": {
+        "differ_pct": 24.3,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 2.65,
+        "outline_pct": 21.65,
+        "outline_px": 102.84
+      },
+      "(A minus C) union B vs A minus (B union C)": {
+        "differ_pct": 17.75,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.72,
+        "outline_pct": 16.03,
+        "outline_px": 76.14
+      },
+      "(A union B) minus C vs (A intersect B) minus C": {
+        "differ_pct": 16.15,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.97,
+        "outline_pct": 14.17,
+        "outline_px": 80.87
+      },
+      "(A union B) minus C vs (A minus C) union B": {
+        "differ_pct": 14.5,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 7.03,
+        "outline_pct": 7.47,
+        "outline_px": 35.5
+      },
+      "(A union B) minus C vs A minus (B union C)": {
+        "differ_pct": 10.26,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.71,
+        "outline_pct": 8.55,
+        "outline_px": 48.8
+      }
+    }
+  },
+  "pairs_front_right": {
+    "closest": "(A union B) minus C vs (A minus C) union B",
+    "farthest": "(A minus C) union B vs (A intersect B) minus C",
+    "pairs": {
+      "(A intersect B) minus C vs A minus (B union C)": {
+        "differ_pct": 14.96,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.49,
+        "outline_pct": 11.47,
+        "outline_px": 71.62
+      },
+      "(A minus C) union B vs (A intersect B) minus C": {
+        "differ_pct": 27.33,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.27,
+        "outline_pct": 23.05,
+        "outline_px": 103.29
+      },
+      "(A minus C) union B vs A minus (B union C)": {
+        "differ_pct": 23.66,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 10.36,
+        "outline_pct": 13.3,
+        "outline_px": 59.58
+      },
+      "(A union B) minus C vs (A intersect B) minus C": {
+        "differ_pct": 26.33,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 3.67,
+        "outline_pct": 22.66,
+        "outline_px": 102.27
+      },
+      "(A union B) minus C vs (A minus C) union B": {
+        "differ_pct": 12.12,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 11.73,
+        "outline_pct": 0.39,
+        "outline_px": 1.74
+      },
+      "(A union B) minus C vs A minus (B union C)": {
+        "differ_pct": 17.24,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.33,
+        "outline_pct": 12.91,
+        "outline_px": 58.25
+      }
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "sheet_png": {
+    "bytes": 107569,
+    "height": 754,
+    "width": 1292
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "changed_most": "4 intersect a shell: nothing",
+    "png": {
+      "bytes": 50278,
+      "height": 266,
+      "width": 2264
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 member A"
+      },
+      {
+        "differs_from_step_before_pct": 15.44,
+        "step": "2 union: member B"
+      },
+      {
+        "differs_from_step_before_pct": 10.37,
+        "step": "3 minus: the tunnel"
+      },
+      {
+        "differs_from_step_before_pct": 23.45,
+        "step": "4 intersect a shell: nothing"
+      },
+      {
+        "differs_from_step_before_pct": 20.69,
+        "step": "5 intersect: the foot closed"
+      },
+      {
+        "differs_from_step_before_pct": 4.31,
+        "step": "6 a walker: through the floor"
+      },
+      {
+        "differs_from_step_before_pct": 2.26,
+        "step": "7 baked: it stands"
+      }
+    ],
+    "triangles": [
+      256,
+      296,
+      392,
+      0,
+      574,
+      574,
+      574
+    ],
+    "walker_feet_m": [
+      0.0,
+      0.3
+    ]
+  }
+}

@@ -1,0 +1,831 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Implicit",
+      "passed": true
+    },
+    {
+      "name": "its main scene is implicit.tscn",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds its 15 files: 15",
+      "passed": true
+    },
+    {
+      "name": "the 9 scripts of the kit are there: []",
+      "passed": true
+    },
+    {
+      "name": "every script of the kit is indented with tabs: []",
+      "passed": true
+    },
+    {
+      "name": "no script of the kit declares a class_name: []",
+      "passed": true
+    },
+    {
+      "name": "no .uid and no .import file is left in the kit: []",
+      "passed": true
+    },
+    {
+      "name": "the triangle table has 256 rows, each a list of threes, 820 triangles in all: 256 rows, 820 triangles",
+      "passed": true
+    },
+    {
+      "name": "every row of the triangle table uses exactly the edges its corners say are crossed: 0 rows do not",
+      "passed": true
+    },
+    {
+      "name": "Ada's edge table, as borrowed, disagrees with the corner bits in 32 of its 256 rows, 48 to 63 and 192 to 207: [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207]",
+      "passed": true
+    },
+    {
+      "name": "and 4 of those rows name a thirteenth edge, which a cell does not have",
+      "passed": true
+    },
+    {
+      "name": "field_body.gd never reads the edge table",
+      "passed": true
+    },
+    {
+      "name": "the guest's own copy of the table holds the same four lists",
+      "passed": true
+    },
+    {
+      "name": "the four corners Ada's comment calls the bottom face differ from the four it calls the top face in z, not in y",
+      "passed": true
+    },
+    {
+      "name": "table_station.tscn prints its three lines: [\"triangle table: 256 rows, 820 triangles; rows that disagree with the corner bits: []\", \"edge table: 256 rows; rows that disagree with the corner bits: [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207]\", \"edge table: rows that name a thirteenth edge: [62, 63, 192, 193]\"]",
+      "passed": true
+    },
+    {
+      "name": "a body with field_body.gd builds its first skin and Godot logs no error: []",
+      "passed": true
+    },
+    {
+      "name": "the field at a centre, between the two lower centres and 2 m in front: { \"(-1.15, 0.9, 0.0)\": \"1.022\", \"(0.0, 0.9, 0.0)\": \"0.475\", \"(0.0, 0.9, 2.0)\": \"-0.012\" }",
+      "passed": true
+    },
+    {
+      "name": "the grid has 68921 samples, 5873 of them inside at 0.4; asking them all took 56.1 ms here",
+      "passed": true
+    },
+    {
+      "name": "at 0.4 the skin has 18846 points, 6282 triangles, and is 1 body",
+      "passed": true
+    },
+    {
+      "name": "every triangle with an area faces outward, toward where the field is lower: a share of 1.0000",
+      "passed": true
+    },
+    {
+      "name": "above the ground the skin is closed: 0 open edges",
+      "passed": true
+    },
+    {
+      "name": "it is open where it stands: a rim of 29 edges at height 0.0000 m",
+      "passed": true
+    },
+    {
+      "name": "5 of its triangles have two corners in one place",
+      "passed": true
+    },
+    {
+      "name": "every point of the skin lies where the field is 0.4, give or take 0.0114",
+      "passed": true
+    },
+    {
+      "name": "the body has a wall: a StaticBody3D with one shape, made from the same triangles",
+      "passed": true
+    },
+    {
+      "name": "every point has a normal, the points in one place share one, and 18846 of 18846 point to where the field is lower",
+      "passed": true
+    },
+    {
+      "name": "at 0.2, 0.4, 0.6 and 0.8 the skin is [1, 1, 3, 3] bodies",
+      "passed": true
+    },
+    {
+      "name": "at all four it is closed above the ground and faces outward",
+      "passed": true
+    },
+    {
+      "name": "at 0.4 it stands on the ground; at 0.6 its lowest point is 0.217 m up: nothing holds the bodies",
+      "passed": true
+    },
+    {
+      "name": "at 0.6 the 3588 triangles meet in 1800 places: three closed skins with no seam",
+      "passed": true
+    },
+    {
+      "name": "one body up to 0.48, two at 0.49, three from 0.50",
+      "passed": true
+    },
+    {
+      "name": "with the sources 2.83 radii apart in place of 2.42, the four thresholds give [1, 3, 3, 3] bodies: the count changes between 0.2 and 0.4",
+      "passed": true
+    },
+    {
+      "name": "without the noise the three necks part together: { \"0.44\": 1, \"0.45\": 1, \"0.46\": 1, \"0.47\": 1, \"0.48\": 3, \"0.49\": 3, \"0.50\": 3, \"0.51\": 3, \"0.52\": 3 }",
+      "passed": true
+    },
+    {
+      "name": "a finer grid makes more triangles of the same field: 364, 1548, 6282 and 25264 at 10, 20, 40 and 80 cells",
+      "passed": true
+    },
+    {
+      "name": "the grid decides where one body ends: up to 0.46, 0.47, 0.48 and 0.48",
+      "passed": true
+    },
+    {
+      "name": "and where three begin: from 0.51, 0.50 and 0.51 at 20, 40 and 80 cells; at 10 cells there are still two at 0.52",
+      "passed": true
+    },
+    {
+      "name": "at 0.43 the grid of 80 cells finds a crumb of 8 triangles beside the body; the grid of 40 does not: [24196, 8] against [6024]",
+      "passed": true
+    },
+    {
+      "name": "at the sheet's four thresholds every grid counts the same: [1, 1, 3, 3]",
+      "passed": true
+    },
+    {
+      "name": "at 0.2 a box of 4.4 m cuts the body open (92 open edges above the ground); the box of 5 m holds it (0)",
+      "passed": true
+    },
+    {
+      "name": "the body builds on a worker thread, and once the skin is on no task is left waiting",
+      "passed": true
+    },
+    {
+      "name": "the longest frame while the body is built: [102.14, 103.76, 102.33] ms on the main thread, [15.58, 15.64, 15.7] ms with a worker (three builds each, no window)",
+      "passed": true
+    },
+    {
+      "name": "the hand-back, show_mesh(), took 7.81 ms of the main thread; the build took 96.7 ms of the worker",
+      "passed": true
+    },
+    {
+      "name": "asked again while a build runs, the body remembers it: stale",
+      "passed": true
+    },
+    {
+      "name": "it finished the build for 0.2 (1 body), then built for 0.8 (3 bodies): [1, 3]",
+      "passed": true
+    },
+    {
+      "name": "carve() during a build does not touch the field yet",
+      "passed": true
+    },
+    {
+      "name": "it carves when the build has handed back, and a new build starts",
+      "passed": true
+    },
+    {
+      "name": "and then the field in the hole is under every threshold: -1.80",
+      "passed": true
+    },
+    {
+      "name": "a body freed in the middle of a build: Godot logs no error: []",
+      "passed": true
+    },
+    {
+      "name": "at 1.2 the field has no skin: no triangle, 0 bodies, a wall with no shape, no error",
+      "passed": true
+    },
+    {
+      "name": "field_body.gd holds `show_mesh.call_deferred(made, count,` once, and loads with `show_mesh(made, count,` in its place",
+      "passed": true
+    },
+    {
+      "name": "show_mesh() called from the worker thread: Godot logs 4 errors and does not stop",
+      "passed": true
+    },
+    {
+      "name": "one of them is about add_child(): Adding children to a node inside the SceneTree is only allowed from the main thread",
+      "passed": true
+    },
+    {
+      "name": "the other three are for `mesh =` and for the signal: The caller thread can't call the function ... on this node",
+      "passed": true
+    },
+    {
+      "name": "the skin is on all the same, and the wall is not in the scene",
+      "passed": true
+    },
+    {
+      "name": "the line over the scene stays empty: nobody heard `built`",
+      "passed": true
+    },
+    {
+      "name": "and a walker sent at the body walks through it: \"arrived\"",
+      "passed": true
+    },
+    {
+      "name": "field_body.gd holds `if at[i] > level:` once, and loads with `if at[i] < level:` in its place",
+      "passed": true
+    },
+    {
+      "name": "with `<` in place of `>` the same 6282 triangles are made and 0% of them face outward: inside out, and no error",
+      "passed": true
+    },
+    {
+      "name": "the scene ran 180 frames and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "the line over the scene: threshold 0.4: 1 body, 6282 triangles",
+      "passed": true
+    },
+    {
+      "name": "the body is BODY and the line is INK",
+      "passed": true
+    },
+    {
+      "name": "Space: threshold 0.6: 3 bodies, 3588 triangles",
+      "passed": true
+    },
+    {
+      "name": "and it says what the build cost: built in 107 ms on a worker thread; the longest frame meanwhile 21 ms",
+      "passed": true
+    },
+    {
+      "name": "three more: 0.8, 0.2 and back to 0.4",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped from 4.6 m over the top source meets the skin: one second later it is 3.68 m up, on the skin; the same drop beside the body is at 0.10 m, on the floor",
+      "passed": true
+    },
+    {
+      "name": "the walker is stopped by the body, carves, is stopped again, carves, and walks through: [[\"blocked\", 0.71], [\"blocked\", -0.19], [\"arrived\", -2.12]]",
+      "passed": true
+    },
+    {
+      "name": "two holes, and the body is still 1 body",
+      "passed": true
+    },
+    {
+      "name": "no point of the skin is nearer than 0.5 m to a hole's middle line, and 2649 lie on the holes' walls",
+      "passed": true
+    },
+    {
+      "name": "the rest stands: 4.16 m wide and 3.83 m high, as before",
+      "passed": true
+    },
+    {
+      "name": "and the carved skin is closed above the ground",
+      "passed": true
+    },
+    {
+      "name": "the walker stands inside: \"arrived\" at z -0.09, with the third source over its head (the field there is 1.00)",
+      "passed": true
+    },
+    {
+      "name": "and Godot logged no error in all of it: []",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "its first node is a kind of Node3D: MeshInstance3D",
+      "passed": true
+    },
+    {
+      "name": "alone it builds once and rests: threshold 0.6, 3 bodies, 1 build",
+      "passed": true
+    },
+    {
+      "name": "it stands on the ground and fits its place: 1.15 m wide, 0.44 m deep, 0.99 m high",
+      "passed": true
+    },
+    {
+      "name": "a walker 6 m away does not wake it",
+      "passed": true
+    },
+    {
+      "name": "the walker comes near: the threshold falls to 0.3 in 6 builds and the three are 1 body",
+      "passed": true
+    },
+    {
+      "name": "its wall stops the walker (\"blocked\", 0.97 m from its middle, its feet at 0.00 m); it is 1.38 m wide and 0.66 m deep now",
+      "passed": true
+    },
+    {
+      "name": "the walker leaves: three bodies again after 13 builds in all, and then it rests",
+      "passed": true
+    },
+    {
+      "name": "and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "fused: a fourth source between the three makes the guest 1 body while nobody is near",
+      "passed": true
+    },
+    {
+      "name": "carved: a hole between the two lower sources, at threshold 0.3: 419 points on its wall, none inside, 1614 triangles where there were 1420, still 1 body",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 84,
+  "godot": "4.6-stable (official)",
+  "kit": "Implicit",
+  "measured": {
+    "bodies_by_threshold_in_hundredths": {
+      "0.40": 1,
+      "0.41": 1,
+      "0.42": 1,
+      "0.43": 1,
+      "0.44": 1,
+      "0.45": 1,
+      "0.46": 1,
+      "0.47": 1,
+      "0.48": 1,
+      "0.49": 2,
+      "0.50": 3,
+      "0.51": 3,
+      "0.52": 3,
+      "0.53": 3,
+      "0.54": 3,
+      "0.55": 3,
+      "0.56": 3,
+      "0.57": 3,
+      "0.58": 3,
+      "0.59": 3,
+      "0.60": 3
+    },
+    "bodies_by_threshold_without_noise": {
+      "0.44": 1,
+      "0.45": 1,
+      "0.46": 1,
+      "0.47": 1,
+      "0.48": 3,
+      "0.49": 3,
+      "0.50": 3,
+      "0.51": 3,
+      "0.52": 3
+    },
+    "box": {
+      "open_edges_at_0.2_in_a_box_of_4.4_m": 92,
+      "open_edges_at_0.2_in_the_box_of_5_m": 0
+    },
+    "build_ms_without_a_window": {
+      "main": [
+        92.4,
+        93.4,
+        92.1
+      ],
+      "worker": [
+        95.0,
+        96.2,
+        96.7
+      ]
+    },
+    "field": {
+      "asking_every_sample_ms": 56.1,
+      "at": {
+        "(-1.15, 0.9, 0.0)": "1.022",
+        "(0.0, 0.9, 0.0)": "0.475",
+        "(0.0, 0.9, 2.0)": "-0.012"
+      },
+      "furthest_a_point_is_from_the_threshold": 0.0114,
+      "one_lower_source_alone_halfway_between_the_two": 0.231,
+      "samples": 68921,
+      "samples_inside_at_0.4": 5873
+    },
+    "grids": {
+      "10": {
+        "build_ms_at_0.4": 2.7,
+        "cell_m": 0.5,
+        "one_body_up_to": 0.46,
+        "pieces_at_0.2_0.4_0.6_0.8": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "three_bodies_from": 0.0,
+        "triangles_at_0.4": 364,
+        "triangles_of_each_piece": {
+          "0.43": [
+            344
+          ],
+          "0.44": [
+            344
+          ],
+          "0.45": [
+            344
+          ],
+          "0.46": [
+            340
+          ],
+          "0.47": [
+            220,
+            104
+          ],
+          "0.48": [
+            220,
+            104
+          ],
+          "0.49": [
+            220,
+            100
+          ],
+          "0.50": [
+            212,
+            100
+          ],
+          "0.51": [
+            208,
+            96
+          ],
+          "0.52": [
+            204,
+            96
+          ]
+        }
+      },
+      "20": {
+        "build_ms_at_0.4": 14.4,
+        "cell_m": 0.25,
+        "one_body_up_to": 0.47,
+        "pieces_at_0.2_0.4_0.6_0.8": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "three_bodies_from": 0.51,
+        "triangles_at_0.4": 1548,
+        "triangles_of_each_piece": {
+          "0.43": [
+            1488
+          ],
+          "0.44": [
+            1476
+          ],
+          "0.45": [
+            1456
+          ],
+          "0.46": [
+            1424
+          ],
+          "0.47": [
+            1384
+          ],
+          "0.48": [
+            908,
+            436
+          ],
+          "0.49": [
+            872,
+            420
+          ],
+          "0.50": [
+            844,
+            404
+          ],
+          "0.51": [
+            408,
+            396,
+            380
+          ],
+          "0.52": [
+            404,
+            388,
+            372
+          ]
+        }
+      },
+      "40": {
+        "build_ms_at_0.4": 92.9,
+        "cell_m": 0.125,
+        "one_body_up_to": 0.48,
+        "pieces_at_0.2_0.4_0.6_0.8": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "three_bodies_from": 0.5,
+        "triangles_at_0.4": 6282,
+        "triangles_of_each_piece": {
+          "0.43": [
+            6024
+          ],
+          "0.44": [
+            5936
+          ],
+          "0.45": [
+            5812
+          ],
+          "0.46": [
+            5664
+          ],
+          "0.47": [
+            5560
+          ],
+          "0.48": [
+            5428
+          ],
+          "0.49": [
+            3504,
+            1756
+          ],
+          "0.50": [
+            1712,
+            1708,
+            1696
+          ],
+          "0.51": [
+            1652,
+            1608,
+            1608
+          ],
+          "0.52": [
+            1612,
+            1556,
+            1552
+          ]
+        }
+      },
+      "80": {
+        "build_ms_at_0.4": 664.2,
+        "cell_m": 0.0625,
+        "one_body_up_to": 0.48,
+        "pieces_at_0.2_0.4_0.6_0.8": [
+          1,
+          1,
+          3,
+          3
+        ],
+        "three_bodies_from": 0.51,
+        "triangles_at_0.4": 25264,
+        "triangles_of_each_piece": {
+          "0.43": [
+            24196,
+            8
+          ],
+          "0.44": [
+            24068
+          ],
+          "0.45": [
+            23684
+          ],
+          "0.46": [
+            23092
+          ],
+          "0.47": [
+            22504,
+            8
+          ],
+          "0.48": [
+            21888
+          ],
+          "0.49": [
+            14128,
+            7008
+          ],
+          "0.50": [
+            13628,
+            6792
+          ],
+          "0.51": [
+            6560,
+            6512,
+            6492
+          ],
+          "0.52": [
+            6352,
+            6264,
+            6248
+          ]
+        }
+      }
+    },
+    "guest": {
+      "alone": {
+        "bodies": 3,
+        "threshold": 0.6,
+        "triangles": 776
+      },
+      "builds_after_the_walker_left": 13,
+      "builds_when_the_three_were_one": 7,
+      "walker_feet_at_m": 0.0,
+      "walker_stopped_at_m_from_its_middle": 0.97,
+      "walker_waited_at_m_from_its_middle": 2.0,
+      "with_a_walker_near": {
+        "bodies": 1,
+        "deep_m": 0.66,
+        "high_m": 1.12,
+        "threshold": 0.3,
+        "triangles": 1420,
+        "wide_m": 1.38
+      }
+    },
+    "hand_back_ms_without_a_window": 7.81,
+    "longest_frame_ms_without_a_window": {
+      "main": [
+        102.14,
+        103.76,
+        102.33
+      ],
+      "worker": [
+        15.58,
+        15.64,
+        15.7
+      ]
+    },
+    "marble": {
+      "beside_the_body_after_one_second_m": 0.1,
+      "over_the_top_source_after_one_second_m": 3.68
+    },
+    "place": {
+      "bodies_after": 1,
+      "holes": 2,
+      "points_inside_a_hole": 0,
+      "points_on_the_holes_walls": 2649,
+      "triangles_after": 6330,
+      "walks": [
+        [
+          "blocked",
+          0.71
+        ],
+        [
+          "blocked",
+          -0.19
+        ],
+        [
+          "arrived",
+          -2.12
+        ]
+      ]
+    },
+    "planted_bug": {
+      "a_walker_sent_at_the_body": "arrived",
+      "errors": [
+        "ERROR: /root/Implicit/Body: The caller thread can't call the function `update_gizmos()` on this node. Use `call_deferred()` or `call_deferred_thread_group()` instead.",
+        "ERROR: /root/Implicit/Body: The caller thread can't call the function `emit_signalp()` on this node. Use `call_deferred()` or `call_deferred_thread_group()` instead.",
+        "ERROR: Adding children to a node inside the SceneTree is only allowed from the main thread. Use call_deferred(\"add_child\",node).",
+        "ERROR: /root/Implicit/Body: The caller thread can't call the function `emit_signalp()` on this node. Use `call_deferred()` or `call_deferred_thread_group()` instead."
+      ],
+      "the_skin_is_on": true,
+      "the_wall_is_in_the_scene": false
+    },
+    "room_task": {
+      "carved_bodies_at_0.3": 1,
+      "carved_points_on_the_holes_wall": 419,
+      "carved_triangles_at_0.3": 1614,
+      "fused_bodies_at_0.6": 1
+    },
+    "room_trial_recorded": {
+      "checks": 8,
+      "feet_at_m": 0.0,
+      "metres_from_the_middle_of_the_place": 0.64,
+      "passed": 8,
+      "place": 2,
+      "probe": {
+        "builds_after_the_walker_left": 13,
+        "builds_by_then": 7,
+        "builds_while_nobody_is_near": 1,
+        "threshold_with_the_walker_in_the_aisle_2_m_away": 0.3,
+        "triangles_then": 1420
+      },
+      "walk_at_the_guest": "blocked",
+      "walk_to_the_aisle": "arrived"
+    },
+    "skin_at_0.4": {
+      "build_ms": 100.1,
+      "open_edges_above_ground": 0,
+      "points": 18846,
+      "rim_edges_on_the_ground": 29,
+      "share_facing_outward": 1.0,
+      "triangles": 6282,
+      "triangles_with_two_corners_in_one_place": 5
+    },
+    "sources_further_apart": {
+      "bodies_at_0.2_0.4_0.6_0.8": [
+        1,
+        3,
+        3,
+        3
+      ],
+      "radii_apart": 2.83,
+      "radii_apart_in_the_kit": 2.42
+    },
+    "table": {
+      "edge_table_rows_that_disagree": [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207
+      ],
+      "edge_table_rows_with_a_thirteenth_edge": 4,
+      "triangle_rows": 256,
+      "triangles": 820
+    },
+    "table_station_prints": [
+      "triangle table: 256 rows, 820 triangles; rows that disagree with the corner bits: []",
+      "edge table: 256 rows; rows that disagree with the corner bits: [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207]",
+      "edge table: rows that name a thirteenth edge: [62, 63, 192, 193]"
+    ],
+    "thresholds": {
+      "0.2": {
+        "bodies": 1,
+        "build_ms": 101.2,
+        "deep_m": 2.54,
+        "high_m": 4.12,
+        "lowest_point_m": 0.0,
+        "triangles": 8296,
+        "triangles_of_each": [
+          8296
+        ],
+        "wide_m": 4.73
+      },
+      "0.4": {
+        "bodies": 1,
+        "build_ms": 92.6,
+        "deep_m": 1.89,
+        "high_m": 3.83,
+        "lowest_point_m": 0.0,
+        "triangles": 6282,
+        "triangles_of_each": [
+          6282
+        ],
+        "wide_m": 4.16
+      },
+      "0.6": {
+        "bodies": 3,
+        "build_ms": 85.8,
+        "deep_m": 1.4,
+        "high_m": 3.6,
+        "lowest_point_m": 0.217,
+        "triangles": 3588,
+        "triangles_of_each": [
+          1220,
+          1184,
+          1184
+        ],
+        "wide_m": 3.69
+      },
+      "0.8": {
+        "bodies": 3,
+        "build_ms": 77.3,
+        "deep_m": 0.98,
+        "high_m": 3.36,
+        "lowest_point_m": 0.456,
+        "triangles": 1508,
+        "triangles_of_each": [
+          520,
+          496,
+          492
+        ],
+        "wide_m": 3.24
+      }
+    },
+    "with_adas_comparison": {
+      "share_facing_outward": 0.0,
+      "triangles": 6282
+    }
+  },
+  "passed": true
+}

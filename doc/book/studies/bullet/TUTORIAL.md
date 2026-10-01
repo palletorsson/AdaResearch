@@ -12,7 +12,7 @@ A lesson starts in its hall, with one question: does the hall show one work at s
 
 The launch hall, [VFM_05_Launch](../../../../commons/maps/VFM_05_Launch/final.md), opens in a chamber. Press FIRE and "An amber marker leaves its pad, rises, falls, and stops at the landing height." PAIR adds a second flight at the same speed: "thirty in one lane and sixty in the other". That is one work at two values of its angle, made by a button. The hall's text shows how the marker is placed: `launch_velocity(index) * t` and `Vector3.DOWN * 0.5 * gravity * t * t`. That is a formula. It is asked where the marker is at the time `t`, and it takes no steps.
 
-[Change_Intro](../../../../commons/maps/Change_Intro/final.md) holds seventeen works. One, a staircase, declares this lesson's axis in the registry: `tick`, with the values once, coarse, fine, dense and limit, which are 1, 3, 9, 27 and 81 readings of one smooth motion. The hall sets none of them, so the staircase stands at `fine`: nine readings, one value. The hall's text passes it in half a sentence: "frame-sized steps on the staircase".
+[Change_Intro](../../../../commons/maps/Change_Intro/final.md) holds seventeen works. One, a staircase, declares this lesson's axis in the registry: `tick`, with the values once, coarse, fine, dense and limit, which are 1, 3, 9, 27 and 81 readings of one smooth motion. The hall sets none of them, so the staircase stands at `fine`: nine readings, one value. The hall's text passes it in half a sentence: "frame-sized steps on the staircase". Two more works there are each set to one value of an axis they declare: the bridge to `longhand` of its `evidence` (result, trace, longhand), the synthesis stand to `hero` of its `mode` (auto, hero, series). In the launch hall a demonstration of force declares `measure` (both, acceleration, velocity, none), and the hall sets none. One value each, and no family.
 
 The field trip, [VFM_07_Gravity](../../../../commons/maps/VFM_07_Gravity/final.md), shows steps as steps: "A little change of velocity. A step in position." Its bodies are advanced "240 times per model second".
 
@@ -307,7 +307,7 @@ Run it. The ball flies. Nothing is red, nothing is yellow, and the output is one
 dt 1/60 s: 75 steps, landed 5.0 m from the launch
 ```
 
-Thirteen centimetres further than before. Press M three times, to 10 steps a second: `dt 1/10 s: 14 steps, landed 5.6 m from the launch`, eighty centimetres further, and 0.6 m higher at the top. Godot printed no error and no warning; `verify.gd` checks that silence. Both orders are a throw. Only one is the throw we wrote down.
+Thirteen centimetres further than before. Press M three times, to 10 steps a second: `dt 1/10 s: 14 steps, landed 5.6 m from the launch`, eighty centimetres further, and 0.6 m higher at the top. Godot printed no error and no warning; `verify.gd` checks that silence. Reading an error is ordinary, and a red line would have named its own place in the script. This fault gives you nothing to read. Both orders are a throw. Only one is the throw we wrote down.
 
 The swapped ball moves first, with the velocity of the step before, and only then lets gravity act: it hears of gravity one step late. The lower row of the sheet below shows it. Swapped, each path runs above the formula's curve, where ours runs under it.
 

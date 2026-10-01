@@ -1,0 +1,490 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Combine, its main scene is combine.tscn, its renderer Compatibility",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the base's 15 files: [\"base.tscn\", \"base_look.gd\", \"check_guest.gd\", \"look.gd\", \"marble.gd\", \"marble.tscn\", \"mover.gd\", \"segment.gd\", \"sheet_tools.gd\", \"sweep_sheet.gd\", \"sweep_sheet.tscn\", \"trace_strip.gd\", \"verify_tools.gd\", \"walker.gd\", \"walker.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "no script of the kit declares a class_name, and the project lists no named class: nothing needs an import: []",
+      "passed": true
+    },
+    {
+      "name": "every script is indented with tabs: []",
+      "passed": true
+    },
+    {
+      "name": "member.gd (Families): make(16) is a SphereMesh of 16 segments and 8 rings listing 288 triangles, make(4) one of 4 and 2 listing 24",
+      "passed": true
+    },
+    {
+      "name": "make() keeps the segments between 4 and 64, as the class Globe did",
+      "passed": true
+    },
+    {
+      "name": "tunnel.gd (Implicit bodies): value(p) is below 0 in the middle of the tunnel and above 0 under its floor, beyond its wall, over its top and past its end",
+      "passed": true
+    },
+    {
+      "name": "make(24) asks along 24 spokes and returns a closed skin: 96 triangles, 48 of them its wall, 0 open edges, 3.686 m3 inside",
+      "passed": true
+    },
+    {
+      "name": "the tunnel is 0.80 m wide, 2.10 m high and 2.40 m long, and its floor is level at height 0.000",
+      "passed": true
+    },
+    {
+      "name": "scan.gd (Collage): make(false) is a shell: 340 triangles and 20 edges that belong to one triangle only, the rim of the foot",
+      "passed": true
+    },
+    {
+      "name": "make(true) adds the foot: 360 triangles, 0 open edges, 4.665 m3 inside",
+      "passed": true
+    },
+    {
+      "name": "the scan stands on the ground at its origin, 2.85 m high, 1.58 m wide and 1.58 m deep: inside a guest's 1.6 m",
+      "passed": true
+    },
+    {
+      "name": "asked in the frame its operand was added, bake_static_mesh() returns null: the combiner has not worked its result out yet",
+      "passed": true
+    },
+    {
+      "name": "one frame later it returns a mesh. A alone: 288 triangles listed, 256 in the result (the 32 with no area at the poles are gone)",
+      "passed": true
+    },
+    {
+      "name": "A, then union B, then minus C, then intersect S: the result has [256, 296, 392, 574] triangles",
+      "passed": true
+    },
+    {
+      "name": "every face of the result wears the paint of the operand it came from: BODY, SECOND, THIRD and BONE on [172, 101, 81, 220] triangles",
+      "passed": true
+    },
+    {
+      "name": "bake_collision_shape() returns a ConcavePolygonShape3D of the same 574 triangles",
+      "passed": true
+    },
+    {
+      "name": "the result is a closed skin: 0 open edges, 1.859 m3 inside",
+      "passed": true
+    },
+    {
+      "name": "the seams leave small triangles: under 1 cm2 there are 0, 4, 16 and 26 after the four verbs; the smallest of the result is 0.016 cm2",
+      "passed": true
+    },
+    {
+      "name": "A union B and B union A enclose the same 4.523 m3; A minus B encloses 1.723 m3 and B minus A 1.530 m3",
+      "passed": true
+    },
+    {
+      "name": "with the tunnel put first, minus has nothing to take from: the result is the body with no tunnel, 528 triangles, the same as with no C at all, and Godot logged nothing",
+      "passed": true
+    },
+    {
+      "name": "A intersected with the scan as a shell, its foot open: the result has 0 triangles, and Godot logged no error and no warning",
+      "passed": true
+    },
+    {
+      "name": "the shell united with A, or taken from A, changes nothing: 256 and 256 triangles, A alone. A shell has no inside, so the combiner treats it as nothing",
+      "passed": true
+    },
+    {
+      "name": "the lesson's body with Scan.make(false) for its last operand: 0 triangles",
+      "passed": true
+    },
+    {
+      "name": "child order is operand order: A, B, minus C gives 392 triangles; A, minus C, B gives 364; minus C, A, B gives 296, which is A and B with no tunnel; and Godot logged nothing",
+      "passed": true
+    },
+    {
+      "name": "combine.tscn ran more than 180 frames and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "it printed the verbs and the two counts: [\"((A union B) minus C) intersect S: 768 triangles listed, 574 in the result\", \"the walker arrived, its feet at 0.3 m\"]",
+      "passed": true
+    },
+    {
+      "name": "the walker walked into the tunnel on its autopilot and the scene printed: the walker arrived, its feet at 0.3 m",
+      "passed": true
+    },
+    {
+      "name": "Carved holds a MeshInstance3D of 574 triangles, and the combiner is gone",
+      "passed": true
+    },
+    {
+      "name": "the mesh has a StaticBody3D with a collider made from it",
+      "passed": true
+    },
+    {
+      "name": "the body stands on the ground, 2.85 m high, 1.39 m wide and 1.37 m deep: inside a guest's 1.6 m",
+      "passed": true
+    },
+    {
+      "name": "with `baked` false the combiner stays, 574 triangles to the eye, and no collider",
+      "passed": true
+    },
+    {
+      "name": "not baked: the walker walks in at the door and \"arrived\" in the middle with its feet at 0.00 m, 0.30 m under the floor of the hollow",
+      "passed": true
+    },
+    {
+      "name": "from there it walks out through the side wall: \"arrived\" at x 1.43",
+      "passed": true
+    },
+    {
+      "name": "and with move_right held for a second, as the D key gives it, it is 1.97 m to the right of the middle: through the wall",
+      "passed": true
+    },
+    {
+      "name": "put on the floor of the hollow, at 0.30 m, it falls through it: a second later its feet are at -0.00 m",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped in the hollow comes to rest at 0.10 m: on the ground, under the floor",
+      "passed": true
+    },
+    {
+      "name": "baked: the walker steps up at the door and \"arrived\" in the hollow with its feet at 0.30 m",
+      "passed": true
+    },
+    {
+      "name": "walked at the right wall it is \"blocked\", 0.06 m from the middle",
+      "passed": true
+    },
+    {
+      "name": "and at the left wall \"blocked\", 0.06 m from the middle",
+      "passed": true
+    },
+    {
+      "name": "put on the floor of the hollow it stays there: its feet at 0.30 m a second later",
+      "passed": true
+    },
+    {
+      "name": "by the actions the keys give: move_right held for a second leaves it 0.06 m right of the middle and move_left, after it, 0.04 m left of it, at the walls; from the middle move_backward takes it out at the door and down to 0.00 m; move_forward takes it in again and up to 0.30 m",
+      "passed": true
+    },
+    {
+      "name": "it walks on through the tunnel and out at the back: \"arrived\", its feet on the ground at 0.00 m",
+      "passed": true
+    },
+    {
+      "name": "walked at the body from the side it is \"blocked\" by the outer wall, 1.00 m from the middle",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped in the hollow comes to rest at 0.40 m: on the floor of the hollow",
+      "passed": true
+    },
+    {
+      "name": "with use_collision the combiner itself is the collider, and a CSGCombiner3D is not a StaticBody3D",
+      "passed": true
+    },
+    {
+      "name": "use_collision: a walker put on the floor of the hollow stays there, its feet at 0.30 m",
+      "passed": true
+    },
+    {
+      "name": "but the supplied walker does not step in from outside: \"blocked\" at the door, 0.80 m in front of the middle, its feet at 0.00 m. It steps only onto a StaticBody3D",
+      "passed": true
+    },
+    {
+      "name": "the marble dropped in the hollow rests on its floor, at 0.40 m",
+      "passed": true
+    },
+    {
+      "name": "(A union B) minus C: 574 triangles, 1.859 m3; the walker \"arrived\" in the hollow at 0.30 m",
+      "passed": true
+    },
+    {
+      "name": "(A minus C) union B: 544 triangles, 3.239 m3; B stands in the tunnel and the walker is \"blocked\" at the door, 0.80 m in front of the middle",
+      "passed": true
+    },
+    {
+      "name": "(A intersect B) minus C: 150 triangles, 0.196 m3; the walker \"arrived\" on what is left of the floor, at 0.30 m",
+      "passed": true
+    },
+    {
+      "name": "A minus (B union C): 422 triangles, 0.793 m3; there is no floor in the middle and the walker \"arrived\" on the ground, at 0.00 m",
+      "passed": true
+    },
+    {
+      "name": "all four results are closed skins",
+      "passed": true
+    },
+    {
+      "name": "by volume: (A minus C) union B 3.239, (A union B) minus C 1.859, A minus (B union C) 0.793, (A intersect B) minus C 0.196 m3",
+      "passed": true
+    },
+    {
+      "name": "the intersection keeps 10.5% of the first order's volume",
+      "passed": true
+    },
+    {
+      "name": "with B moved to x 0.95, clear of the tunnel, the first two orders give the same body: 576 and 576 triangles, 1.5763 and 1.5763 m3, the same 292 corners to a tenth of a millimetre and the same triangles; the surfaces come in the order of the children, [207, 58, 65, 246] and [207, 65, 58, 246] triangles",
+      "passed": true
+    },
+    {
+      "name": "keep() with nothing baked writes no file and says so",
+      "passed": true
+    },
+    {
+      "name": "keep(path) writes the baked mesh as a file: read back it has 574 triangles in 4 surfaces, and carries the line \"((A union B) minus C) intersect S\"",
+      "passed": true
+    },
+    {
+      "name": "the file names no operand, no verb and no other file: 66196 bytes of corners, triangles and four paints",
+      "passed": true
+    },
+    {
+      "name": "with b_x at 0.3 the body is another body, 582 triangles of 768 listed; it is 1.49 m wide, the walker \"arrived\" in its hollow at 0.30 m, and keep() writes it with its line",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "guests/combine/ holds three files: [\"carved.tres\", \"carved_body.gd\", \"combine.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "the guest's first node is a Node3D, and it ran 60 frames with no error",
+      "passed": true
+    },
+    {
+      "name": "carved.tres is the body the kit's scene bakes now: 574 triangles, 1.859 m3, the same line of verbs",
+      "passed": true
+    },
+    {
+      "name": "with its plate the guest stands on the ground and is 1.39 m wide and 1.42 m deep: inside 1.6 m",
+      "passed": true
+    },
+    {
+      "name": "the verbs hang over the door as a text: ((A union B) minus C) intersect S / 768 triangles listed, 574 baked",
+      "passed": true
+    },
+    {
+      "name": "the walker walks into the guest and \"arrived\" in its hollow, its feet at 0.30 m",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped in the guest's hollow rests at 0.40 m",
+      "passed": true
+    },
+    {
+      "name": "from the first check to the last Godot logged no error: []",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 71,
+  "godot": "4.6-stable (official)",
+  "kit": "Combine",
+  "measured": {
+    "b_clear_of_the_tunnel": {
+      "b_x": 0.95,
+      "corner_lists_equal_as_lists": false,
+      "same_corners": true,
+      "same_triangles": true,
+      "triangles": [
+        576,
+        576
+      ],
+      "triangles_by_surface": [
+        [
+          207,
+          58,
+          65,
+          246
+        ],
+        [
+          207,
+          65,
+          58,
+          246
+        ]
+      ],
+      "volume_m3": [
+        1.5763,
+        1.5763
+      ]
+    },
+    "baked": {
+      "blocked_left_at_x_m": -0.056,
+      "blocked_outside_at_x_m": 1.0,
+      "blocked_right_at_x_m": 0.056,
+      "marble_m": 0.398,
+      "move_left_held_x_m": -0.045,
+      "move_right_held_x_m": 0.056,
+      "walker_in_the_hollow_feet_m": 0.301
+    },
+    "body": {
+      "depth_m": 1.368,
+      "height_m": 2.85,
+      "triangles_built": 574,
+      "triangles_listed": 768,
+      "walker_feet_m": 0.3,
+      "width_m": 1.393
+    },
+    "chain": {
+      "after_intersect_S": 574,
+      "after_minus_C": 392,
+      "after_union_B": 296,
+      "collider_triangles": 574,
+      "result_triangles_by_operand": {
+        "22d9ff": 101,
+        "c6ff3d": 172,
+        "f4efe6": 220,
+        "ff8b1f": 81
+      },
+      "result_volume_m3": 1.859,
+      "smallest_triangle_cm2": 0.016,
+      "triangles_after_A": 256,
+      "triangles_listed": 768,
+      "triangles_under_1_cm2": [
+        0,
+        4,
+        16,
+        26
+      ]
+    },
+    "guest": {
+      "depth_m": 1.424,
+      "height_m": 2.85,
+      "marble_m": 0.398,
+      "plate_width_m": 1.228,
+      "walker": "arrived",
+      "walker_feet_m": 0.301,
+      "width_m": 1.393
+    },
+    "kept": {
+      "bytes": 66196,
+      "surfaces": 4,
+      "triangles": 574
+    },
+    "not_baked": {
+      "marble_m": 0.098,
+      "put_on_the_floor_feet_m": -0.001,
+      "walker_in_the_middle_feet_m": 0.0
+    },
+    "operands": {
+      "A_member_16_triangles": 288,
+      "B_member_4_triangles": 24,
+      "C_tunnel_triangles": 96,
+      "C_tunnel_volume_m3": 3.686,
+      "C_tunnel_wall_triangles": 48,
+      "S_scan_triangles": 360,
+      "S_scan_volume_m3": 4.665,
+      "S_shell_open_edges": 20,
+      "S_shell_triangles": 340,
+      "triangles_listed_after_each_operand": [
+        288,
+        312,
+        408,
+        768
+      ]
+    },
+    "orders": [
+      {
+        "feet_m": 0.3,
+        "open_edges": 0,
+        "order": "((A union B) minus C) intersect S",
+        "stopped_at_z_m": 0.08,
+        "triangles": 574,
+        "volume_m3": 1.859,
+        "walk_to_the_middle": "arrived"
+      },
+      {
+        "feet_m": 0.0,
+        "open_edges": 0,
+        "order": "((A minus C) union B) intersect S",
+        "stopped_at_z_m": 0.8,
+        "triangles": 544,
+        "volume_m3": 3.239,
+        "walk_to_the_middle": "blocked"
+      },
+      {
+        "feet_m": 0.3,
+        "open_edges": 0,
+        "order": "((A intersect B) minus C) intersect S",
+        "stopped_at_z_m": 0.08,
+        "triangles": 150,
+        "volume_m3": 0.196,
+        "walk_to_the_middle": "arrived"
+      },
+      {
+        "feet_m": 0.0,
+        "open_edges": 0,
+        "order": "(A minus (B union C)) intersect S",
+        "stopped_at_z_m": 0.08,
+        "triangles": 422,
+        "volume_m3": 0.793,
+        "walk_to_the_middle": "arrived"
+      }
+    ],
+    "orders_apart_by_volume_m3": {
+      "closest": "(A intersect B) minus C vs A minus (B union C)",
+      "pairs": {
+        "(A intersect B) minus C vs A minus (B union C)": 0.597,
+        "(A minus C) union B vs (A intersect B) minus C": 3.043,
+        "(A minus C) union B vs A minus (B union C)": 2.446,
+        "(A union B) minus C vs (A intersect B) minus C": 1.663,
+        "(A union B) minus C vs (A minus C) union B": 1.38,
+        "(A union B) minus C vs A minus (B union C)": 1.066
+      }
+    },
+    "own_body": {
+      "b_x": 0.3,
+      "triangles": 582,
+      "triangles_listed": 768,
+      "verbs": "((A union B) minus C) intersect S",
+      "walker": "arrived",
+      "walker_feet_m": 0.301,
+      "width_m": 1.49
+    },
+    "room_trial_record": {
+      "checks": 8,
+      "failed": 0,
+      "feet_at_m": 0.3,
+      "measured_by": "my-room/guest_trial.gd in a scratch copy of the room, not by verify.gd",
+      "metres_from_the_middle_of_the_place": 0.08,
+      "place": 2,
+      "walk_ended": "arrived"
+    },
+    "silent": {
+      "shell_intersect_triangles": 0,
+      "shell_minus_triangles": 256,
+      "shell_union_triangles": 256,
+      "three_operands_by_child_order_triangles": {
+        "a b": 296,
+        "a b c": 392,
+        "a c b": 364,
+        "c a b": 296
+      },
+      "triangles_listed_with_a_shell": 748,
+      "tunnel_first_triangles": 528
+    },
+    "two_operands_m3": {
+      "A_minus_B": 1.723,
+      "A_union_B": 4.523,
+      "B_minus_A": 1.53,
+      "B_union_A": 4.523
+    },
+    "use_collision": {
+      "marble_m": 0.398,
+      "stopped_at_z_m": 0.801,
+      "walk_in": "blocked",
+      "walker_put_in_feet_m": 0.3
+    }
+  },
+  "passed": true
+}

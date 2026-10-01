@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://guests/learning-body/portrait.gd" id="Portrait"]
+
+[node name="LearningBody" type="Node3D"]
+script = ExtResource("Portrait")

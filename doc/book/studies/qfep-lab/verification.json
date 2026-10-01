@@ -1,0 +1,512 @@
+{
+  "checks": [
+    {
+      "name": "the project is The QFEP laboratory and starts with lab.tscn",
+      "passed": true
+    },
+    {
+      "name": "the 15 supplied files are here: []",
+      "passed": true
+    },
+    {
+      "name": "the kit's five scripts are indented with tabs and end their lines with LF: [] []",
+      "passed": true
+    },
+    {
+      "name": "none of them declares a class_name: []",
+      "passed": true
+    },
+    {
+      "name": "sketchbook.json is a log: a list `entries`, each with a chapter, a predicted and an observed number",
+      "passed": true
+    },
+    {
+      "name": "lab.tscn ran 180 frames and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "the scene is the supplied base with three nodes of its own: Row runs row.gd, Curve runs f_curve.gd, Walker is the supplied walker",
+      "passed": true
+    },
+    {
+      "name": "the row holds 200 symbols, each a whole number from 0 to 9",
+      "passed": true
+    },
+    {
+      "name": "under seed 40 the row begins [2, 6, 6, 3, 8, 4, 2, 6, 1, 8, 0, 6]",
+      "passed": true
+    },
+    {
+      "name": "and the scene printed `as drawn: H = 3.296 bits; the row begins [2, 6, 6, 3, 8, 4, 2, 6, 1, 8, 0, 6]`",
+      "passed": true
+    },
+    {
+      "name": "the label over the row reads `as drawn: H = 3.296 bits`",
+      "passed": true
+    },
+    {
+      "name": "tally() counts 0 to 9 as [21, 18, 22, 14, 25, 18, 17, 16, 26, 23], 200 in all",
+      "passed": true
+    },
+    {
+      "name": "the dictionary keeps its keys in the order the row met them: [2, 6, 3, 8, 4, 1, 0, 5, 7, 9]",
+      "passed": true
+    },
+    {
+      "name": "entropy() gives 3.295841 bits, under the most ten symbols can give, 3.321928",
+      "passed": true
+    },
+    {
+      "name": "the same seed draws the same row; seed 41 draws another (182 of 200 places differ)",
+      "passed": true
+    },
+    {
+      "name": "the body is one MultiMesh of 200 boxes of 0.02 x 1 x 0.3 m whose material takes each instance's colour",
+      "passed": true
+    },
+    {
+      "name": "for a body the row is one box of 4 x 1 x 0.3 m",
+      "passed": true
+    },
+    {
+      "name": "each of the four arrangements holds the same 200 symbols: sorted again, all four are one list",
+      "passed": true
+    },
+    {
+      "name": "`order` names every draw once, and `goes_to` is the same list read the other way",
+      "passed": true
+    },
+    {
+      "name": "as drawn, the row is the list of draws",
+      "passed": true
+    },
+    {
+      "name": "sorted by value, the row is what sort() makes of the draws",
+      "passed": true
+    },
+    {
+      "name": "sorted in reverse, it is that list backwards",
+      "passed": true
+    },
+    {
+      "name": "sorted by colour, the four colours stand in blocks, and inside a block the values rise: 0, 4, 8, then 1, 5, 9, then 2, 6, then 3, 7",
+      "passed": true
+    },
+    {
+      "name": "two equal symbols keep the order they were drawn in, in all four",
+      "passed": true
+    },
+    {
+      "name": "the four rows have the same entropy to the last bit: 3.29584088399618570",
+      "passed": true
+    },
+    {
+      "name": "arrange() printed the line of the reversed row",
+      "passed": true
+    },
+    {
+      "name": "a count that sees order: places where a symbol differs from its left neighbour, plus one: { \"as drawn\": 175, \"sorted by value\": 10, \"sorted by colour\": 10, \"sorted in reverse\": 10 }",
+      "passed": true
+    },
+    {
+      "name": "Space asks for the next arrangement: sorted by value, a tween is running, and every bar leaves the place it was drawn at",
+      "passed": true
+    },
+    {
+      "name": "the count is made before the glide ends, and is the same",
+      "passed": true
+    },
+    {
+      "name": "the glide ends by itself (1.47 s by the clock; with --fixed-fps the clock runs fast)",
+      "passed": true
+    },
+    {
+      "name": "Space pressed during a glide stops it and starts the next: sorted in reverse",
+      "passed": true
+    },
+    {
+      "name": "a fourth Space brings the row back as it was drawn",
+      "passed": true
+    },
+    {
+      "name": "row.gd skips a symbol that never occurs",
+      "passed": true
+    },
+    {
+      "name": "the planted bug: without the two lines, a row of 12 symbols has an entropy that is not a number (and it does not equal itself)",
+      "passed": true
+    },
+    {
+      "name": "it printed `as drawn: H = -nan bits; the row begins [2, 6, 6, 3, 8, 4, 2, 6, 1, 8, 0, 6]`",
+      "passed": true
+    },
+    {
+      "name": "and Godot logged no error and no warning",
+      "passed": true
+    },
+    {
+      "name": "three symbols never occur in the first 12 draws: [5, 7, 9]",
+      "passed": true
+    },
+    {
+      "name": "with 200 symbols the same faulty script gives 3.296: every symbol occurs, and the fault does not show",
+      "passed": true
+    },
+    {
+      "name": "row.gd as shipped counts the 12 symbols as 2.584963 bits",
+      "passed": true
+    },
+    {
+      "name": "log(0.0) is -inf, 0.0 * log(0.0) is nan; print() writes it `nan` and \"%.3f\" writes it `-nan`",
+      "passed": true
+    },
+    {
+      "name": "with `return false` for two equal symbols the row sorted by value reads the same, and 197 of the 200 draws stand at another place",
+      "passed": true
+    },
+    {
+      "name": "a value's name with a comma in it is refused: `SCRIPT ERROR: Parse Error: Argument 4 of annotation \"@export_enum\" contains a comma. Use separate arguments instead.`",
+      "passed": true
+    },
+    {
+      "name": "summed in the order the row meets its symbols, the four entropies lie within 0.0000000000000004441 of each other",
+      "passed": true
+    },
+    {
+      "name": "the same row counted by colour, four symbols, has 1.921 bits of at most 2",
+      "passed": true
+    },
+    {
+      "name": "of the rows of seeds 1 to 100 none reaches 3.322 bits: they lie between 3.245 and 3.319, 3.292 on average",
+      "passed": true
+    },
+    {
+      "name": "the curve read 16 chapters from sketchbook.json and gave each its F, the distance between predicted and observed",
+      "passed": true
+    },
+    {
+      "name": "sort_custom ranks them, the most wrong first: [\"extrude 8.97\", \"genome 5.49\", \"family-editor 3.15\", \"chessboard 3.14\"]; and the scene printed the first",
+      "passed": true
+    },
+    {
+      "name": "9 of the 16 have F = 0: the pair named was the closest pair",
+      "passed": true
+    },
+    {
+      "name": "16 plates of 0.4 x 0.8 m in BODY stand side by side on the ground, each 0.05 m high and 0.03 m more for every point of F",
+      "passed": true
+    },
+    {
+      "name": "every plate has a StaticBody3D with a convex shape",
+      "passed": true
+    },
+    {
+      "name": "15 segments in LINE join the middles of the plates' tops: the line of F",
+      "passed": true
+    },
+    {
+      "name": "each plate has its chapter and its F on the floor in front of it",
+      "passed": true
+    },
+    {
+      "name": "another log, another body: three chapters, three plates, most wrong `two` with F = 6.5",
+      "passed": true
+    },
+    {
+      "name": "a log that is not there: one error from Godot, our line `no log to read at res://no_such.json`, and nothing built",
+      "passed": true
+    },
+    {
+      "name": "the log with one comma taken out: `ERROR: Parse JSON failed. Error at line 5: Expected ','`, and nothing built",
+      "passed": true
+    },
+    {
+      "name": "an entry with no `observed`: `SCRIPT ERROR: Invalid access to property or key 'observed' on a base object of type 'Dictionary'. (res://f_curve.gd:36)`",
+      "passed": true
+    },
+    {
+      "name": "the walker stands on the floor at the left end of the log",
+      "passed": true
+    },
+    {
+      "name": "sent from plate to plate along the log, the walker arrived 16 times of 16",
+      "passed": true
+    },
+    {
+      "name": "on the highest plate, extrude, its feet are at 0.320 m; the plate's top is at 0.319 m",
+      "passed": true
+    },
+    {
+      "name": "it is 0.6 m wide and a plate 0.4 m: on 6 plates its feet are more than 2 cm above the plate, held by a higher one beside it: [\"family\", \"collage\", \"family-editor\", \"bullet\", \"disturbed-order\", \"soft-body\"]",
+      "passed": true
+    },
+    {
+      "name": "it steps off the last plate onto the floor: \"arrived\"",
+      "passed": true
+    },
+    {
+      "name": "sent at the row from in front, it is stopped: \"blocked\", its middle 0.32 m from the row's face",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped over the zeros, bars 0.1 m high, rests at 1.10 m: on the row's box, 0.9 m above the bars it is over",
+      "passed": true
+    },
+    {
+      "name": "with `rise` at 0.1 the plate of extrude is 0.95 m high, a wall: the walk ends \"blocked\" on collage, the plate before it, 0.10 m short of its middle, after 3 plates",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "the guest's own sketchbook.json is the kit's log, byte for byte",
+      "passed": true
+    },
+    {
+      "name": "it loads, its first node is a Node3D, and it printed `QFEP lab: 16 chapters; most wrong: extrude, F = 8.97`",
+      "passed": true
+    },
+    {
+      "name": "16 plates stand on the ground round its origin in a box of 1.50 x 0.60 m, 0.30 m high",
+      "passed": true
+    },
+    {
+      "name": "every plate has a box collider of its own size, and its colour is the look's BODY, written out",
+      "passed": true
+    },
+    {
+      "name": "the plate of the largest F, extrude, is 0.3 m high and SECOND, and the label over the body reads `extrude  F 8.97`",
+      "passed": true
+    },
+    {
+      "name": "a walker sent at it from the front is stopped by it: \"blocked\", 0.49 m from the guest's middle, its feet at 0.00 m",
+      "passed": true
+    },
+    {
+      "name": "with another log in its place the guest is another body: three plates, and `QFEP lab: 3 chapters; most wrong: two, F = 6.50`",
+      "passed": true
+    },
+    {
+      "name": "three plates are 0.5 m wide each, and the walker steps onto the highest: \"arrived\", its feet at 0.30 m",
+      "passed": true
+    },
+    {
+      "name": "with no log it prints one line, builds nothing and logs no error",
+      "passed": true
+    },
+    {
+      "name": "steps/ holds the two scripts as they are after each step of the lesson (7 and 2 files); the last of each is the script as shipped",
+      "passed": true
+    },
+    {
+      "name": "from the first check to the last Godot logged no error but the 4 this run provoked on purpose: [\"SCRIPT ERROR: Parse Error: Argument 4 of annotation \\\"@export_enum\\\" contains a comma. Use separate arguments instead.\", \"ERROR: Parse JSON failed. Error at line 0: Unknown error getting token\", \"ERROR: Parse JSON failed. Error at line 5: Expected \\',\\'\", \"SCRIPT ERROR: Invalid access to property or key \\'observed\\' on a base object of type \\'Dictionary\\'. (res://f_curve.gd:36)\"]",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 77,
+  "godot": "4.6-stable (official)",
+  "kit": "The QFEP laboratory",
+  "measured": {
+    "chapters_with_f_0": 9,
+    "counts_0_to_9": [
+      21,
+      18,
+      22,
+      14,
+      25,
+      18,
+      17,
+      16,
+      26,
+      23
+    ],
+    "draws_that_changed_place": {
+      "as drawn": 0,
+      "sorted by colour": 198,
+      "sorted by value": 198,
+      "sorted in reverse": 199
+    },
+    "entropy_at_most_bits": 3.32192809488736,
+    "entropy_bits": 3.29584088399619,
+    "entropy_counted_by_colour_bits": 1.92061646767433,
+    "entropy_of_each_arrangement": {
+      "as drawn": "3.29584088399618570",
+      "sorted by colour": "3.29584088399618570",
+      "sorted by value": "3.29584088399618570",
+      "sorted in reverse": "3.29584088399618570"
+    },
+    "entropy_of_seeds_1_to_100": {
+      "least": 3.24498472070603,
+      "mean": 3.29184213899441,
+      "most": 3.31872888611719
+    },
+    "entropy_of_the_first_12_bits": 2.58496250072116,
+    "entropy_summed_in_the_order_met": {
+      "as drawn": "3.29584088399618570",
+      "sorted by colour": "3.29584088399618570",
+      "sorted by value": "3.29584088399618570",
+      "sorted in reverse": "3.29584088399618610"
+    },
+    "entropy_summed_in_the_order_met_all_equal": false,
+    "entropy_summed_in_the_order_met_spread": 0.000000000000000444089209850063,
+    "error_for_a_comma_in_a_name": "SCRIPT ERROR: Parse Error: Argument 4 of annotation \"@export_enum\" contains a comma. Use separate arguments instead.",
+    "error_for_a_missing_comma": "ERROR: Parse JSON failed. Error at line 5: Expected ','",
+    "error_for_a_missing_key": "SCRIPT ERROR: Invalid access to property or key 'observed' on a base object of type 'Dictionary'. (res://f_curve.gd:36)",
+    "error_for_a_missing_log": "ERROR: Parse JSON failed. Error at line 0: Unknown error getting token",
+    "glide_seconds_by_the_clock": 1.47,
+    "guest_box_m": [
+      1.5,
+      0.3,
+      0.6
+    ],
+    "highest_plate_m": 0.319099992513657,
+    "keys_in_the_order_met": [
+      2,
+      6,
+      3,
+      8,
+      4,
+      1,
+      0,
+      5,
+      7,
+      9
+    ],
+    "log_entries": 16,
+    "marble_over_the_zeros_rests_at_m": 1.1,
+    "plates_where_a_neighbour_holds_the_walker": [
+      "family",
+      "collage",
+      "family-editor",
+      "bullet",
+      "disturbed-order",
+      "soft-body"
+    ],
+    "plates_where_the_feet_are_on_the_plate": [
+      "organism",
+      "chessboard",
+      "extrude",
+      "legs",
+      "spiral-stair",
+      "sound",
+      "shader-skin",
+      "cellular",
+      "genome",
+      "combine"
+    ],
+    "ranked": [
+      "extrude 8.97",
+      "genome 5.49",
+      "family-editor 3.15",
+      "chessboard 3.14"
+    ],
+    "rise_0_1": {
+      "extrude_plate_m": 0.947,
+      "feet_m": 0.05,
+      "metres_short_of_the_middle": 0.1,
+      "plates_reached": 3,
+      "stopped_on": "collage",
+      "walk_ended": "blocked"
+    },
+    "runs": {
+      "as drawn": 175,
+      "sorted by colour": 10,
+      "sorted by value": 10,
+      "sorted in reverse": 10
+    },
+    "seed_41_entropy_bits": 3.27641294112115,
+    "sent_at_the_row": {
+      "metres_from_the_face": 0.32,
+      "walk_ended": "blocked"
+    },
+    "symbols_absent_from_the_first_12": [
+      5,
+      7,
+      9
+    ],
+    "ties_answered_false_draws_at_another_place": 197,
+    "walk_plate_by_plate": {
+      "bullet": {
+        "feet_m": 0.122,
+        "plate_m": 0.071
+      },
+      "cellular": {
+        "feet_m": 0.05,
+        "plate_m": 0.05
+      },
+      "chessboard": {
+        "feet_m": 0.144,
+        "plate_m": 0.144
+      },
+      "collage": {
+        "feet_m": 0.3,
+        "plate_m": 0.05
+      },
+      "combine": {
+        "feet_m": 0.051,
+        "plate_m": 0.05
+      },
+      "disturbed-order": {
+        "feet_m": 0.108,
+        "plate_m": 0.05
+      },
+      "extrude": {
+        "feet_m": 0.32,
+        "plate_m": 0.319
+      },
+      "family": {
+        "feet_m": 0.125,
+        "plate_m": 0.05
+      },
+      "family-editor": {
+        "feet_m": 0.297,
+        "plate_m": 0.145
+      },
+      "genome": {
+        "feet_m": 0.216,
+        "plate_m": 0.215
+      },
+      "legs": {
+        "feet_m": 0.05,
+        "plate_m": 0.05
+      },
+      "organism": {
+        "feet_m": 0.071,
+        "plate_m": 0.07
+      },
+      "shader-skin": {
+        "feet_m": 0.05,
+        "plate_m": 0.05
+      },
+      "soft-body": {
+        "feet_m": 0.188,
+        "plate_m": 0.05
+      },
+      "sound": {
+        "feet_m": 0.126,
+        "plate_m": 0.126
+      },
+      "spiral-stair": {
+        "feet_m": 0.05,
+        "plate_m": 0.05
+      }
+    },
+    "walker_at_the_guest": {
+      "feet_m": 0.0,
+      "metres_from_the_middle": 0.49,
+      "walk_ended": "blocked"
+    },
+    "walker_at_the_guest_of_three_chapters": {
+      "feet_m": 0.3,
+      "walk_ended": "arrived"
+    }
+  },
+  "passed": true
+}

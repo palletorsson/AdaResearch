@@ -88,7 +88,7 @@ Each state names its parent. Status is one of continue, consolidate, branch, unr
 ### T7. Another solver (parent T2, status: unresolved)
 
 **Intervention.** Godot's `SoftBody3D` on a plane of the same 11 by 11 points, pinned at the same two corners, Linear Stiffness 0.5, at Simulation Precision 1, 4, 16 and 64.
-**Observed, with a window, in `sheet.gd`.** Lowest point at 0.5730, 0.7007, 0.7708 and 0.7952 m. Closest pair 16 and 64, 0.86% of the still. From 16 to 64: 2.44 cm. Twice the same to the last pixel.
+**Observed, with a window, in `sheet.gd`.** Lowest point at 0.5730, 0.7007, 0.7708 and 0.7952 m. Closest pair 16 and 64, 0.86% of the still. From 16 to 64: 2.44 cm. Twice the same to the last pixel. A third run drew the still at precision 1 differently on 19 pixels; the four heights were the same to four digits.
 **Observed, without a window, in `verify.gd`.** 0.6432, 0.7505, 0.7872 and 0.7975 m. From 16 to 64: 1.03 cm.
 **Observed.** In scratch probes, which are not in this kit, it rested at 0.72 to 0.74 m at precision 4, and what had stood in the scene before it changed where it rested.
 **Concluded.** It is tighter than ours at every count, and the outline's centimetre is false for it too, by a little or by a lot.

@@ -1,0 +1,553 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Legs",
+      "passed": true
+    },
+    {
+      "name": "its main scene is legs.tscn",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the base's 15 files: 15",
+      "passed": true
+    },
+    {
+      "name": "no script of the kit declares a class_name: []",
+      "passed": true
+    },
+    {
+      "name": "every script is indented with tabs: []",
+      "passed": true
+    },
+    {
+      "name": "res://leg.gd is in the kit",
+      "passed": true
+    },
+    {
+      "name": "res://leg.tscn is in the kit",
+      "passed": true
+    },
+    {
+      "name": "res://creature.gd is in the kit",
+      "passed": true
+    },
+    {
+      "name": "res://legs.tscn is in the kit",
+      "passed": true
+    },
+    {
+      "name": "res://carry.tscn is in the kit",
+      "passed": true
+    },
+    {
+      "name": "res://carry.gd is in the kit",
+      "passed": true
+    },
+    {
+      "name": "res://ghost_plank.gd is in the kit",
+      "passed": true
+    },
+    {
+      "name": "res://borrowed/terrain.gd is in the kit",
+      "passed": true
+    },
+    {
+      "name": "res://TUTORIAL.md is in the kit",
+      "passed": true
+    },
+    {
+      "name": "res://README.md is in the kit",
+      "passed": true
+    },
+    {
+      "name": "res://FIELD_NOTE.md is in the kit",
+      "passed": true
+    },
+    {
+      "name": "a leg of 1 has 1 parts, laid along the hip's own down",
+      "passed": true
+    },
+    {
+      "name": "its end hangs 0.8 m under the hip: (0.0, -0.8, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "a leg of 2 has 2 parts, laid along the hip's own down",
+      "passed": true
+    },
+    {
+      "name": "its end hangs 0.8 m under the hip: (0.0, -0.8, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "a leg of 3 has 3 parts, laid along the hip's own down",
+      "passed": true
+    },
+    {
+      "name": "its end hangs 0.8 m under the hip: (0.0, -0.8, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "a leg of 6 has 6 parts, laid along the hip's own down",
+      "passed": true
+    },
+    {
+      "name": "its end hangs 0.8 m under the hip: (0.0, -0.8, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "1, 2, 3 and 6 parts make the same length: [0.8, 0.8, 0.8, 0.8]",
+      "passed": true
+    },
+    {
+      "name": "a leg of 2 parts has its end within 1 mm of a place 0.54 m from the hip after 2 calls of follow()",
+      "passed": true
+    },
+    {
+      "name": "every part of it kept its length, 0.400 m",
+      "passed": true
+    },
+    {
+      "name": "the chain's upper end is on the hip",
+      "passed": true
+    },
+    {
+      "name": "the loop led the hip's end away from the hip before the chain was carried back",
+      "passed": true
+    },
+    {
+      "name": "a leg of 3 parts has its end within 1 mm of a place 0.54 m from the hip after 2 calls of follow()",
+      "passed": true
+    },
+    {
+      "name": "every part of it kept its length, 0.267 m",
+      "passed": true
+    },
+    {
+      "name": "the chain's upper end is on the hip",
+      "passed": true
+    },
+    {
+      "name": "the loop led the hip's end away from the hip before the chain was carried back",
+      "passed": true
+    },
+    {
+      "name": "a leg of 6 parts has its end within 1 mm of a place 0.54 m from the hip after 4 calls of follow()",
+      "passed": true
+    },
+    {
+      "name": "every part of it kept its length, 0.133 m",
+      "passed": true
+    },
+    {
+      "name": "the chain's upper end is on the hip",
+      "passed": true
+    },
+    {
+      "name": "the loop led the hip's end away from the hip before the chain was carried back",
+      "passed": true
+    },
+    {
+      "name": "a leg of one part points at the place and ends 0.259 m past it: 0.8 m less the 0.541 m to the place",
+      "passed": true
+    },
+    {
+      "name": "a place 1.08 m from the hip is out of reach: the leg stretches at it and ends 0.282 m short",
+      "passed": true
+    },
+    {
+      "name": "moving the foot 0.5 m led the hip's end 0.020 m: it follows, and less far",
+      "passed": true
+    },
+    {
+      "name": "a leg that hangs straight down follows a place straight under its hip and Godot logs no warning: []",
+      "passed": true
+    },
+    {
+      "name": "and it does not bend: after 50 calls of follow() a straight leg of 3 parts ends 0.200 m past a place 0.6 m straight under its hip, as a leg of one part would",
+      "passed": true
+    },
+    {
+      "name": "look_at() straight down with the room's up, its default, logs: WARNING: Target and up vectors are colinear. This is not advised as it may cause unwanted rotation around local Z axis.",
+      "passed": true
+    },
+    {
+      "name": "the foot carried 2 m with nothing holding the hip: the hip's end travelled 1.64 m after it and trails 0.80 m behind, 0.02 m above the foot where it began 0.80 m above",
+      "passed": true
+    },
+    {
+      "name": "on a hip turned a quarter, find_ground() finds the floor",
+      "passed": true
+    },
+    {
+      "name": "the place it found is straight under the leg's rest place, on the floor: (3.447487, 0.0, 0.752513)",
+      "passed": true
+    },
+    {
+      "name": "the ray looks 2 m straight down in the room, whatever the hip's turn",
+      "passed": true
+    },
+    {
+      "name": "with a lead of 0.2 m the ray starts 0.2 m further on",
+      "passed": true
+    },
+    {
+      "name": "past the edge of the floor it finds nothing, says false, and keeps the place it had",
+      "passed": true
+    },
+    {
+      "name": "a ray that had a hit and now has none still gives a point, the last one it had: (3.647488, 0.0, 0.752513)",
+      "passed": true
+    },
+    {
+      "name": "a leg whose first look finds no ground keeps the place it had, and is not sent to (0, 0, 0)",
+      "passed": true
+    },
+    {
+      "name": "on the borrowed ground the ray's place is the ground's height there, within 0.013 m at five places",
+      "passed": true
+    },
+    {
+      "name": "a new RayCast3D looks 1 m along its own down: (0.0, -1.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "on a hip that is not turned it finds the floor under it",
+      "passed": true
+    },
+    {
+      "name": "on a hip turned a quarter the same ray looks sideways: (0.71, 0.0, -0.71)",
+      "passed": true
+    },
+    {
+      "name": "it finds nothing",
+      "passed": true
+    },
+    {
+      "name": "and the point it gives is (0, 0, 0), the middle of the room: (0.0, 0.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "Godot logged nothing about it",
+      "passed": true
+    },
+    {
+      "name": "the creature has four legs",
+      "passed": true
+    },
+    {
+      "name": "each hip is turned a quarter: its own down points out of the body, level",
+      "passed": true
+    },
+    {
+      "name": "one foot's turn comes every fifth of a second or a little later: 23 turns in 5 seconds",
+      "passed": true
+    },
+    {
+      "name": "standing on the floor for five seconds, its four feet are on the floor",
+      "passed": true
+    },
+    {
+      "name": "and its body rides 0.4 m above them: 0.400",
+      "passed": true
+    },
+    {
+      "name": "every leg's end is within 1 mm of its foot's place: 0.0000",
+      "passed": true
+    },
+    {
+      "name": "it has not left its place: (-3.0, 0.4, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "with a heading it walks: 2.78 m to the right in 8 seconds, and nothing moved its body but its feet",
+      "passed": true
+    },
+    {
+      "name": "every foot that has arrived stands on the ground under it, within 0.014 m (the ground's mesh has a corner every 0.2 m and is flat between them)",
+      "passed": true
+    },
+    {
+      "name": "the body is 0.4 m above the middle of its feet in every step, within 0.002 m: one step behind them",
+      "passed": true
+    },
+    {
+      "name": "the kit's scene ran 13 seconds and Godot logged no error and no warning: [\"WARNING: Target and up vectors are colinear. This is not advised as it may cause unwanted rotation around local Z axis.\"]",
+      "passed": true
+    },
+    {
+      "name": "where the floor ends a ray finds nothing and the creature turns round: it got to x = 3.45 of a floor that ends at 4, and walks back",
+      "passed": true
+    },
+    {
+      "name": "on a leash of 0.3 m it paces between x = -0.35 and 0.35",
+      "passed": true
+    },
+    {
+      "name": "segments = 1 gives legs of 1 parts",
+      "passed": true
+    },
+    {
+      "name": "with one part the legs' ends are 0.339 m from their feet's places on average, walking the uneven ground",
+      "passed": true
+    },
+    {
+      "name": "segments = 2 gives legs of 2 parts",
+      "passed": true
+    },
+    {
+      "name": "with 2 parts they are 0.006 m from them on average (worst 0.057), walking the uneven ground",
+      "passed": true
+    },
+    {
+      "name": "segments = 3 gives legs of 3 parts",
+      "passed": true
+    },
+    {
+      "name": "with 3 parts they are 0.008 m from them on average (worst 0.031), walking the uneven ground",
+      "passed": true
+    },
+    {
+      "name": "segments = 6 gives legs of 6 parts",
+      "passed": true
+    },
+    {
+      "name": "with 6 parts they are 0.005 m from them on average (worst 0.048), walking the uneven ground",
+      "passed": true
+    },
+    {
+      "name": "the creature walks equally far with 1, 2, 3 and 6 parts: the feet's places do not depend on the legs: [2.05, 2.05, 2.05, 2.05]",
+      "passed": true
+    },
+    {
+      "name": "the plank is on layer 2 and on no other",
+      "passed": true
+    },
+    {
+      "name": "feet that look at layer 1 find the floor under the plank: their highest place there is 0.000 m",
+      "passed": true
+    },
+    {
+      "name": "feet that look at layers 1 and 2 step onto the plank: their highest place there is 0.250 m, its top",
+      "passed": true
+    },
+    {
+      "name": "the walker walked onto the uneven ground and stands on it: \"arrived\", its feet at 0.17 m where the ground is 0.17 m",
+      "passed": true
+    },
+    {
+      "name": "the walker walked to the middle of the plank and through it: \"arrived\", its feet on the floor",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped over the plank falls through it to the floor: it rests at 0.10 m",
+      "passed": true
+    },
+    {
+      "name": "the walker walked at the standing creature and was stopped by its body: \"blocked\", 0.54 m from its middle",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped on the creature's back rests on it, at 0.58 m",
+      "passed": true
+    },
+    {
+      "name": "the walker stood where a foot's ray comes down and the foot stayed on the floor: the ray starts at hip height, inside the walker",
+      "passed": true
+    },
+    {
+      "name": "a ray that starts above the walker's head finds the walker, 1.80 m up: on layer 1 the walker is ground too",
+      "passed": true
+    },
+    {
+      "name": "a ray that starts inside the walker does not see it and finds the floor: FloorBody",
+      "passed": true
+    },
+    {
+      "name": "with the walker as its hand, the creature's first foot is asked to be where the walker is",
+      "passed": true
+    },
+    {
+      "name": "the walker carried the foot 2.8 m and the body followed its leg: it moved 2.59 m and stands 0.88 m from the walker",
+      "passed": true
+    },
+    {
+      "name": "in carry.tscn the leg's end stays within 5 cm of the hand while the hand is within reach of the hip (107 frames of 844, in 6.5 seconds)",
+      "passed": true
+    },
+    {
+      "name": "its readout says how far the foot is from the hand",
+      "passed": true
+    },
+    {
+      "name": "carry.tscn ran 6.5 seconds and Godot logged no error and no warning: [\"WARNING: Target and up vectors are colinear. This is not advised as it may cause unwanted rotation around local Z axis.\"]",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "the guest's first node is a Node3D",
+      "passed": true
+    },
+    {
+      "name": "the guest's own origin stays where it was put",
+      "passed": true
+    },
+    {
+      "name": "it stands on the ground: its lowest point over 9 seconds is -0.040 m, the underside of a foot's mark, a ball of 4 cm",
+      "passed": true
+    },
+    {
+      "name": "it fits in a box 1.6 m wide and deep while it paces: nothing of it is further than 0.758 m from its middle",
+      "passed": true
+    },
+    {
+      "name": "it paces: its body moved between -0.06 and 0.06 m from its place",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped on its back is held by it: at 0.58 m after a second and a half",
+      "passed": true
+    },
+    {
+      "name": "the guest ran 11 seconds and Godot logged no error and no warning: [\"WARNING: Target and up vectors are colinear. This is not advised as it may cause unwanted rotation around local Z axis.\"]",
+      "passed": true
+    },
+    {
+      "name": "with a rider, a box of 0.5 m, the legs carry it: it stands on the trunk's back, at 0.48 m",
+      "passed": true
+    },
+    {
+      "name": "and a marble dropped on the rider rests on it, at 1.08 m",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 107,
+  "godot": "4.6-stable (official)",
+  "kit": "Legs",
+  "measured": {
+    "a_straight_leg_over_a_place_0_6_m_under_its_hip_ends_past_it_m": 0.2,
+    "axis": {
+      "1": {
+        "mean_miss_m": 0.339,
+        "parts_in_all": 4,
+        "places_under_the_ground_pct": 24.9,
+        "places_under_the_ground_pct_from_a_start_half_a_metre_on": 26.9,
+        "steps_over_the_uneven_ground": 257,
+        "walked_m_in_6_s": 2.05,
+        "worst_miss_m": 0.439
+      },
+      "2": {
+        "mean_miss_m": 0.006,
+        "parts_in_all": 8,
+        "places_under_the_ground_pct": 0.0,
+        "places_under_the_ground_pct_from_a_start_half_a_metre_on": 0.6,
+        "steps_over_the_uneven_ground": 257,
+        "walked_m_in_6_s": 2.05,
+        "worst_miss_m": 0.057
+      },
+      "3": {
+        "mean_miss_m": 0.008,
+        "parts_in_all": 12,
+        "places_under_the_ground_pct": 0.0,
+        "places_under_the_ground_pct_from_a_start_half_a_metre_on": 0.7,
+        "steps_over_the_uneven_ground": 257,
+        "walked_m_in_6_s": 2.05,
+        "worst_miss_m": 0.031
+      },
+      "6": {
+        "mean_miss_m": 0.005,
+        "parts_in_all": 24,
+        "places_under_the_ground_pct": 3.5,
+        "places_under_the_ground_pct_from_a_start_half_a_metre_on": 4.9,
+        "steps_over_the_uneven_ground": 257,
+        "walked_m_in_6_s": 2.05,
+        "worst_miss_m": 0.048
+      }
+    },
+    "carry": {
+      "body_at": "(-1.52, 0.4, 2.13)",
+      "body_ends_m_from_the_walker": 0.88,
+      "body_moved_m": 2.59,
+      "body_moved_m_in_the_first_second": 0.51,
+      "other_feet_highest_above_the_ground_m": 0.0,
+      "walker_walked_m": 2.8,
+      "worst_miss_m": 0.0
+    },
+    "feet_turns_in_5_s": 23,
+    "follow_calls_until_1_mm": {
+      "2": 2,
+      "3": 2,
+      "6": 4
+    },
+    "foot_against_height_at_worst_m": 0.014,
+    "foot_carried_2_m": {
+      "hip_end_above_the_foot_m": 0.02,
+      "hip_end_behind_the_foot_m": 0.8,
+      "hip_end_travelled_m": 1.64
+    },
+    "ground_height_at_the_rooms_middle_m": 0.18,
+    "guest": {
+      "furthest_from_its_middle_m": 0.758,
+      "lowest_point_m": -0.04,
+      "marble_on_it_at_m_after_1_5_s": 0.58,
+      "marble_on_the_rider_at_m": 1.08,
+      "paces_between_m": [
+        -0.06,
+        0.06
+      ],
+      "rider_bottom_at_m": 0.48
+    },
+    "hip_end_led_m_by_a_foot_moved_0_5_m": 0.02,
+    "leash_0_3_paces_between": [
+      -0.35,
+      0.35
+    ],
+    "look_at_straight_down_with_the_rooms_up": "WARNING: Target and up vectors are colinear. This is not advised as it may cause unwanted rotation around local Z axis.",
+    "marble_on_the_creature_rests_at_m": 0.58,
+    "marble_over_the_plank_rests_at_m": 0.1,
+    "one_part_misses_m": 0.259,
+    "plank": {
+      "ground_1_highest_foot_place_m": 0.0,
+      "ground_3_highest_foot_place_m": 0.25
+    },
+    "ray_against_height_at_worst_m": 0.013,
+    "ray_from_above_the_walker": {
+      "at_height_m": 1.8,
+      "finds": "Walker"
+    },
+    "ray_from_inside_the_walker": {
+      "at_height_m": 0.0,
+      "finds": "FloorBody"
+    },
+    "turned_back_at_x": 3.45,
+    "unrepaired_ray": {
+      "colliding": false,
+      "looks": "(0.71, 0.0, -0.71)",
+      "point": "(0.0, 0.0, 0.0)"
+    },
+    "walked_m_in_8_s": 2.78,
+    "walker_at_the_creature": {
+      "metres_from_its_middle": 0.54,
+      "walk_ended": "blocked"
+    },
+    "walker_at_the_plank": {
+      "feet_at_m": 0.0,
+      "walk_ended": "arrived"
+    },
+    "walker_on_the_ground": {
+      "feet_at_m": 0.17,
+      "ground_there_m": 0.17,
+      "walk_ended": "arrived"
+    }
+  },
+  "passed": true
+}

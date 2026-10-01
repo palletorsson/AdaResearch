@@ -8,18 +8,24 @@ extends "res://supplied/verify_tools.gd"
 ## measured by sheet.gd.
 
 const CheckGuest := preload("res://supplied/check_guest.gd")
-const Automaton := preload("res://cellular.gd")
-const Pool := preload("res://diffusion.gd")
 const RULES := [30, 90, 110, 250]
 const N := 17
 const ROWS := 11
 const CELL := 0.4
 const RISE := 0.15
 
+## The two scripts of the lesson. They are loaded in run() and not preloaded:
+## a preloaded script that does not parse stops verify.gd before its first check.
+var automaton_script: GDScript
+var pool_script: GDScript
+
 func run() -> void:
 	project()
+	if not the_scripts():
+		return
 	await the_rule()
 	await the_ends()
+	await a_saved_value()
 	await one_buffer()
 	await rows_in_time()
 	await a_body()
@@ -43,7 +49,7 @@ func close(node: Node) -> void:
 
 func automaton(rule: int, ring := true, pace := 0.0) -> Node3D:
 	var body := Node3D.new()
-	body.set_script(Automaton)
+	body.set_script(automaton_script)
 	body.rule = rule
 	body.ring = ring
 	body.pace = pace
@@ -182,6 +188,16 @@ func project() -> void:
 	check(spaced.is_empty(), "every script is indented with tabs: %s" % [spaced])
 	check(DirAccess.get_files_at("res://supplied/").size() == 15, "supplied/ holds the base's 15 files: %d" % DirAccess.get_files_at("res://supplied/").size())
 
+## A script that does not parse is one failed check here, with Godot's own
+## message in it, and the run ends: nothing after this can be measured.
+func the_scripts() -> bool:
+	var before := errors.size()
+	automaton_script = load("res://cellular.gd")
+	pool_script = load("res://diffusion.gd")
+	var parsed := automaton_script != null and automaton_script.can_instantiate() and pool_script != null and pool_script.can_instantiate()
+	check(parsed, "cellular.gd and diffusion.gd parse: %s" % [errors.slice(before)])
+	return parsed
+
 func the_rule() -> void:
 	var base := await world()
 	var answers := []
@@ -242,6 +258,32 @@ func the_ends() -> void:
 			check(body.cell_at(-1) == 0 and body.cell_at(N) == 0, "with ring unticked, cell_at() answers 0 outside the row")
 		body.free()
 		await frames(1)
+	await close(base)
+
+## A value set in the Inspector is saved in the scene. Here a scene is packed
+## in memory, as the editor packs one to save it, with rule 30 on a script
+## whose line says 90, and then made again from what was packed.
+func a_saved_value() -> void:
+	var base := await world()
+	var by_hand := automaton(30)
+	var saved := PackedScene.new()
+	var packed := saved.pack(by_hand)
+	by_hand.free()
+	var plain := Node3D.new()
+	plain.set_script(automaton_script)
+	var line: int = plain.rule
+	plain.free()
+	var before := printed.size()
+	var body: Node3D = saved.instantiate()
+	base.add_child(body)
+	await frames(2)
+	var said := printed_rows(before)
+	check(packed == OK and line == 90 and body.rule == 30 and said == expected(30, true), "a rule saved in a scene wins over the script's line: the line says %d, the scene 30, and the rows are rule %d's" % [line, body.rule])
+	measured["rule_saved_in_a_scene"] = {"script_line": line, "scene": 30, "rows_are_those_of_rule": 30 if said == expected(30, true) else -1}
+	# Not measured here: the same with a scene FILE, run once in a scratch copy on
+	# 1 October 2026. cellular.tscn had `rule = 30` on Automaton and the script's
+	# line said 110; the rows printed were rule 30's, with no error and no warning.
+	measured["rule_saved_in_the_scene_file_recorded_by_hand"] = {"script_line": 110, "scene": 30, "rows_are_those_of_rule": 30}
 	await close(base)
 
 ## The lesson's planted fault: one buffer read and written in the same pass.
@@ -405,7 +447,7 @@ func walks() -> void:
 
 func new_pool() -> Node3D:
 	var pool := Node3D.new()
-	pool.set_script(Pool)
+	pool.set_script(pool_script)
 	pool.pace = 0
 	return pool
 
@@ -462,16 +504,19 @@ func the_pool_carries() -> void:
 	var pool: Node3D = scene.get_node("Pool")
 	var walker: CharacterBody3D = scene.get_node("Walker")
 	var start := walker.global_position
-	var highest := start.y
+	var top := [start.y]     # the highest the walker's feet were, read at every physics step
+	var watch := func() -> void: top[0] = maxf(top[0], walker.global_position.y)
+	physics_frame.connect(watch)
 	var waited := 0
-	while pool.steps < 600 and waited < 2000:
-		await physics_frame
+	while pool.steps < 600 and waited < 4000:    # the pool steps in _process, so its steps are counted there
+		await process_frame
 		waited += 1
-		highest = maxf(highest, walker.global_position.y)
+	pool.pace = 0
+	physics_frame.disconnect(watch)
+	var highest: float = top[0]
 	var after := walker.global_position
 	measured["standing_on_the_pool"] = {"feet_at_start_m": snappedf(start.y, 0.01), "highest_m": snappedf(highest, 0.01), "feet_after_600_steps_m": snappedf(after.y, 0.01), "moved_sideways_m": snappedf(Vector2(after.x - start.x, after.z - start.z).length(), 0.01)}
 	check(is_equal_approx(start.y, 0.6) and after.y < 0.02 and not walker.walking, "a walker standing on the seed, 0.60 m up, is on the ground %d steps later without having walked: its feet at %.2f m, %.2f m at the highest" % [pool.steps, after.y, highest])
-	pool.pace = 0
 	walker.walk_to([Vector3(-2.0, 0.0, 0.0)])
 	highest = 0.0
 	while walker.walking:

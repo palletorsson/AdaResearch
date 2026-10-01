@@ -1,0 +1,270 @@
+{
+  "axis": "arrangement: how the same 200 symbols stand in the row",
+  "counts_0_to_9": [
+    21,
+    18,
+    22,
+    14,
+    25,
+    18,
+    17,
+    16,
+    26,
+    23
+  ],
+  "draw_0_read_back_from_the_bars": {
+    "as drawn": {
+      "height_m": 0.3,
+      "place_asked": 0,
+      "place_of_the_bar": 0.0,
+      "symbol": 2
+    },
+    "sorted by colour": {
+      "height_m": 0.3,
+      "place_asked": 131,
+      "place_of_the_bar": 131.0,
+      "symbol": 2
+    },
+    "sorted by value": {
+      "height_m": 0.3,
+      "place_asked": 39,
+      "place_of_the_bar": 39.0,
+      "symbol": 2
+    },
+    "sorted in reverse": {
+      "height_m": 0.3,
+      "place_asked": 139,
+      "place_of_the_bar": 139.0,
+      "symbol": 2
+    }
+  },
+  "entropy_bits": {
+    "as drawn": "3.29584088399618570",
+    "sorted by colour": "3.29584088399618570",
+    "sorted by value": "3.29584088399618570",
+    "sorted in reverse": "3.29584088399618570"
+  },
+  "glide": {
+    "bars": 200,
+    "between_two_places_at_0_37_of_the_way": 194,
+    "h_at_the_end": "3.29584088399618570",
+    "not_on_their_place_0_5_s_later": 0,
+    "tween_under_way_after_0_3_s": true
+  },
+  "godot": "4.6-stable (official)",
+  "mirror": {
+    "sorted by value vs sorted in reverse, above": 7.59,
+    "sorted by value vs sorted in reverse, level": 19.92,
+    "the same pair with the second still flipped left to right, above": 0.17,
+    "the same pair with the second still flipped left to right, level": 0.12
+  },
+  "pairs_above": {
+    "closest": "sorted by colour vs sorted in reverse",
+    "farthest": "sorted by value vs sorted in reverse",
+    "pairs": {
+      "as drawn vs sorted by colour": {
+        "differ_pct": 6.9,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 6.0,
+        "outline_pct": 0.9,
+        "outline_px": 7.59
+      },
+      "as drawn vs sorted by value": {
+        "differ_pct": 6.31,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 5.26,
+        "outline_pct": 1.05,
+        "outline_px": 8.86
+      },
+      "as drawn vs sorted in reverse": {
+        "differ_pct": 6.84,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 5.59,
+        "outline_pct": 1.25,
+        "outline_px": 10.52
+      },
+      "sorted by colour vs sorted in reverse": {
+        "differ_pct": 5.72,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 4.02,
+        "outline_pct": 1.7,
+        "outline_px": 14.83
+      },
+      "sorted by value vs sorted by colour": {
+        "differ_pct": 6.19,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 5.53,
+        "outline_pct": 0.66,
+        "outline_px": 5.76
+      },
+      "sorted by value vs sorted in reverse": {
+        "differ_pct": 7.59,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 5.5,
+        "outline_pct": 2.1,
+        "outline_px": 18.27
+      }
+    }
+  },
+  "pairs_level": {
+    "closest": "sorted by colour vs sorted in reverse",
+    "farthest": "sorted by value vs sorted in reverse",
+    "pairs": {
+      "as drawn vs sorted by colour": {
+        "differ_pct": 18.97,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 10.66,
+        "outline_pct": 8.31,
+        "outline_px": 43.13
+      },
+      "as drawn vs sorted by value": {
+        "differ_pct": 17.2,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 9.26,
+        "outline_pct": 7.95,
+        "outline_px": 41.28
+      },
+      "as drawn vs sorted in reverse": {
+        "differ_pct": 19.47,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 10.55,
+        "outline_pct": 8.92,
+        "outline_px": 46.33
+      },
+      "sorted by colour vs sorted in reverse": {
+        "differ_pct": 15.55,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 5.97,
+        "outline_pct": 9.58,
+        "outline_px": 59.01
+      },
+      "sorted by value vs sorted by colour": {
+        "differ_pct": 16.05,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 8.96,
+        "outline_pct": 7.09,
+        "outline_px": 43.67
+      },
+      "sorted by value vs sorted in reverse": {
+        "differ_pct": 19.92,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 7.23,
+        "outline_pct": 12.7,
+        "outline_px": 79.38
+      }
+    }
+  },
+  "rendered_front_faces": {
+    "BODY": {
+      "bars": 72,
+      "front_face": "#bdf735",
+      "off_by_of_765": 25.0,
+      "palette": "#c6ff3d"
+    },
+    "BONE": {
+      "bars": 30,
+      "front_face": "#ece7dd",
+      "off_by_of_765": 25.0,
+      "palette": "#f4efe6"
+    },
+    "SECOND": {
+      "bars": 59,
+      "front_face": "#1bd0f7",
+      "off_by_of_765": 24.0,
+      "palette": "#22d9ff"
+    },
+    "THIRD": {
+      "bars": 39,
+      "front_face": "#f78218",
+      "off_by_of_765": 24.0,
+      "palette": "#ff8b1f"
+    }
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "row_covers_pct_above": {
+    "as drawn": 7.77,
+    "sorted by colour": 7.09,
+    "sorted by value": 7.24,
+    "sorted in reverse": 7.24
+  },
+  "row_covers_pct_level": {
+    "as drawn": 20.39,
+    "sorted by colour": 14.5,
+    "sorted by value": 14.07,
+    "sorted in reverse": 14.07
+  },
+  "seed": 40,
+  "seed_41_level": {
+    "closest": "sorted by value vs sorted by colour",
+    "entropy_bits": {
+      "as drawn": "3.27641294112114640",
+      "sorted by colour": "3.27641294112114640",
+      "sorted by value": "3.27641294112114640",
+      "sorted in reverse": "3.27641294112114640"
+    },
+    "farthest": "sorted by value vs sorted in reverse",
+    "pairs": {
+      "as drawn vs sorted by colour": 18.18,
+      "as drawn vs sorted by value": 17.32,
+      "as drawn vs sorted in reverse": 17.71,
+      "sorted by colour vs sorted in reverse": 14.52,
+      "sorted by value vs sorted by colour": 13.3,
+      "sorted by value vs sorted in reverse": 18.3
+    }
+  },
+  "sheet_png": {
+    "bytes": 26000,
+    "height": 510,
+    "width": 1292
+  },
+  "sheet_rows": [
+    "from the side, 4.95 m from the row",
+    "from straight above, the same distance"
+  ],
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "changed_most": "the log as plates",
+    "png": {
+      "bytes": 32224,
+      "height": 266,
+      "width": 1940
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "200 draws as bars"
+      },
+      {
+        "differs_from_step_before_pct": 3.41,
+        "step": "a colour for each value"
+      },
+      {
+        "differs_from_step_before_pct": 5.37,
+        "step": "sort_custom by value"
+      },
+      {
+        "differs_from_step_before_pct": 5.17,
+        "step": "by colour"
+      },
+      {
+        "differs_from_step_before_pct": 6.56,
+        "step": "the log as plates"
+      },
+      {
+        "differs_from_step_before_pct": 0.27,
+        "step": "the line of F"
+      }
+    ]
+  },
+  "values": [
+    "as drawn",
+    "sorted by value",
+    "sorted by colour",
+    "sorted in reverse"
+  ]
+}

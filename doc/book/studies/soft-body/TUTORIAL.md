@@ -14,7 +14,7 @@ Every message and number on this page comes from running the study in Godot 4.6.
 
 A lesson starts in its hall, with one question: does the hall show one work at several values of one axis?
 
-The chapter leans on three halls, and none of them shows that side by side. Two show it in time. In FormFinding_Relaxation one bench stands, a magenta cloth of ten by eight points. Its axis is `relaxation`, with four values: nudged, worked, pressed and held, which are 1, 4, 8 and 12 passes. The hall places it once, at worked, and gives it a button, PASSES, that goes through the four. The reading gives two numbers for it: at one pass the worst spring is about 34% off its length, at four passes 8.9%. In Topology_Entropy_Morphogenesis one surface stands, with one seed, and its desk steps through four cuts. In SoftBodies_Soft_Body_Deformation the jelly cube stands at one value of its axis `assay`, and beside it five jellies that differ in three numbers at once. We read this from the halls' map files, the artifact registry and the readings. We did not walk them.
+The chapter leans on three halls, and none of them shows that side by side. Two show it in time. In FormFinding_Relaxation one bench stands, a magenta cloth of ten by eight points. Its axis is `relaxation`, with four values: nudged, worked, pressed and held, which are 1, 4, 8 and 12 passes. The hall places it once, at worked, and gives it a button, PASSES, that goes through the four. The reading gives two numbers for it: at one pass the worst spring is about 34% off its length, at four passes 8.9%. In Topology_Entropy_Morphogenesis one surface stands, with one seed, and its desk steps through four cuts. In SoftBodies_Soft_Body_Deformation the jelly cube stands at one value of its axis `assay`, and beside it five jellies that differ in stiffness, damping, pressure and mass all at once. We read this from the halls' map files, the artifact registry and the readings. We did not walk them.
 
 So stand at the bench in Form Finding and press PASSES four times. Before you do, write down which two of the four outlines you expect to be hardest to tell apart. The project's own notes predicted 8 and 12.
 
@@ -22,7 +22,7 @@ So stand at the bench in Form Finding and press PASSES four times. Before you do
 
 Open `soft_body.tscn` from the FileSystem dock, at the lower left of the editor. The editor's own view shows a white floor under Godot's preview light. The look is put on by a script when the scene runs.
 
-Run it (F5). On the left a lime cloth hangs by its two top corners and sags between them. The small white ball on its right corner is the Hand. On the right hangs a cyan square: the soft body Godot has built in. At the far left stands the walker. Over them a line reads `4 passes: lowest point 0.43 m, longest link 144% of its length`, and then a time, which is your machine's.
+Run it (F5). On the left a lime cloth hangs by its two top corners and sags between them. The small white ball on its right corner is the Hand. On the right hangs a cyan square: the soft body Godot has built in. At the far left stands the walker. Over them a line reads `4 passes: lowest point 0.43 m, longest link 144% of its length`, and then a time, which is your machine's. The numbers move while the cloth swings; read them when it hangs still.
 
 The arrows or WASD move the Hand. Space sends the walker to its next stop. M lets go. Try them now, or wait for *Place*.
 
@@ -316,7 +316,7 @@ pinned point 120 at (-0.6, 0.6, 0.0)
 
 `SoftBody3D` is a node that does what `cloth.gd` does, inside the engine. It takes a mesh, here a plane of 11 by 11 points, and makes every point of it a particle. We do not write its step. We say which points stay: `set_point_pinned()`. To find the two top corners we ask the mesh for its points and take the two that lie highest and furthest out.
 
-Select `SoftCloth` in the Scene dock and look in the Inspector, at the right of the editor *(editor)*: **Simulation Precision** is 5 and **Linear Stiffness** is 0.5. The first is the engine's name for our `iterations`. The second sets how hard a link pulls. We did not open the engine to see how.
+Select `SoftCloth` in the Scene dock, at the upper left of the editor, and look in the Inspector, at the right *(editor)*: **Simulation Precision** is 5 and **Linear Stiffness** is 0.5. The first is the engine's name for our `iterations`. The second sets how hard a link pulls. We did not open the engine to see how.
 
 ## Stop here: what we have
 
@@ -481,7 +481,7 @@ We ran the room's own trial with this guest at place 2: the walker `arrived`, 0.
 
 Now your own. **Give one body in your room a soft part that a visitor can deform.**
 
-The guest's folder holds a second `cloth.gd`. It is ours made to stand alone: it writes its colour out, and it asks the room itself which bodies are near. Copy that one file into the folder of one of your own guests. Open that guest's scene. In the Scene dock, at the upper left, right-click the top node, choose **Add Child Node** and add a `MeshInstance3D`. Drag the copied `cloth.gd` from the FileSystem dock onto it *(editor)*. Its place is where the top edge hangs; set it in the Inspector, with **Across**, **Down** and **Spacing**.
+The guest's folder holds a second `cloth.gd`. It is ours made to stand alone: it writes its colour out, and it asks the room itself which bodies are near. Copy that one file into the folder of one of your own guests. Open that guest's scene. In the Scene dock, right-click the top node, choose **Add Child Node** and add a `MeshInstance3D`. Drag the copied `cloth.gd` from the FileSystem dock onto it *(editor)*. Its place is where the top edge hangs; set it in the Inspector, with **Across**, **Down** and **Spacing**.
 
 We did this with a copy of the example guest, the lime box, by writing its scene file: a cloth of 6 by 5 points, 0.1 m apart, at (0, 1.3, 0.35), which is in front of the box. The walker walked at the box and was blocked 0.56 m from the middle of the place. The flag was pushed 0.13 m.
 

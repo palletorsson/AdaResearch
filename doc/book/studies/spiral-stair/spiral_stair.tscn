@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://climb.gd" id="Climb"]
+[ext_resource type="Script" path="res://stair.gd" id="Stair"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[node name="SpiralStair" instance=ExtResource("Base")]
+script = ExtResource("Climb")
+
+[node name="Stair" type="Node3D" parent="."]
+script = ExtResource("Stair")
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(2.7, 0, 0)

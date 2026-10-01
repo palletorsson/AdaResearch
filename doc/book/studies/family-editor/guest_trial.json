@@ -1,0 +1,48 @@
+{
+  "checks": [
+    {
+      "name": "one name was given after `--`: [\"family-editor\"]",
+      "passed": true
+    },
+    {
+      "name": "the guest's folder names nothing outside itself: []",
+      "passed": true
+    },
+    {
+      "name": "it declares no class_name: []",
+      "passed": true
+    },
+    {
+      "name": "the room ran 180 frames with this guest in its list and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "the guest stands in the room: res://guests/family-editor/family-editor.tscn is at place 2 of 2 taken",
+      "passed": true
+    },
+    {
+      "name": "the walker reached the aisle in front of place 2: \"arrived\"",
+      "passed": true
+    },
+    {
+      "name": "then it walked at the guest and the walk ended \"blocked\", 0.44 m from the middle of the place, its feet at 0.00 m",
+      "passed": true
+    },
+    {
+      "name": "and Godot logged no error to the end: []",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 8,
+  "godot": "4.6-stable (official)",
+  "kit": "My room",
+  "measured": {
+    "feet_at_m": 0.0,
+    "guest": "res://guests/family-editor/family-editor.tscn",
+    "metres_from_the_middle_of_the_place": 0.44,
+    "place": 2,
+    "walk_ended": "blocked"
+  },
+  "passed": true
+}

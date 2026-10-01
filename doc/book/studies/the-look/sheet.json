@@ -1,7 +1,7 @@
 {
   "godot": "4.6-stable (official)",
   "one line more, one line less": {
-    "BODY c6ff3d as rendered": {
+    "BODY c6ff3d as rendered in the plain look": {
       "front": {
         "off_by": 15.0,
         "rendered": "#bdf734",
@@ -21,7 +21,7 @@
         "with_the_sun_switched_off": "#69891c"
       }
     },
-    "GROUND 32188a as rendered": {
+    "GROUND 32188a as rendered in the plain look": {
       "in_the_sphere's_shadow": "#150547",
       "in_the_sun": "#2d1388",
       "off_by": 7.3,
@@ -34,9 +34,11 @@
       "box_top": "#252525",
       "floor_in_the_sphere's_shadow": "#252525",
       "floor_in_the_sun": "#252525",
+      "just_above_the_floor's_far_edge": "#4c4c4c",
       "sky": "#4c4c4c",
       "sphere_away_from_it": "#252525",
-      "sphere_to_the_sun": "#252525"
+      "sphere_to_the_sun": "#252525",
+      "top_edge_of_the_picture": "#4c4c4c"
     },
     "ambient only, without the energy line": {
       "box_front": "#8a8a8a",
@@ -44,12 +46,14 @@
       "box_top": "#8a8a8a",
       "floor_in_the_sphere's_shadow": "#8a8a8a",
       "floor_in_the_sun": "#8a8a8a",
+      "just_above_the_floor's_far_edge": "#ff2e93",
       "sky": "#ff2e93",
       "sphere_away_from_it": "#8a8a8a",
-      "sphere_to_the_sun": "#8a8a8a"
+      "sphere_to_the_sun": "#8a8a8a",
+      "top_edge_of_the_picture": "#ff2e93"
     },
     "box_top_against_floor_contrast": 11.47,
-    "roughness of the sphere": {
+    "roughness of the sphere, in the plain look": {
       "0.2": {
         "brightest_pixel": "#ffffff",
         "pixels_with_red_above_150": 67,
@@ -68,74 +72,43 @@
         "sphere_pixels": 23963
       }
     },
-    "the finished look": {
+    "the plain look": {
       "box_front": "#bdf734",
       "box_side": "#69891c",
       "box_top": "#cbff39",
       "floor_in_the_sphere's_shadow": "#150547",
       "floor_in_the_sun": "#2d1388",
+      "just_above_the_floor's_far_edge": "#ff2e93",
       "sky": "#ff2e93",
       "sphere_away_from_it": "#0c7489",
-      "sphere_to_the_sun": "#25f0ff"
+      "sphere_to_the_sun": "#25f0ff",
+      "top_edge_of_the_picture": "#ff2e93"
     },
-    "the finished look with sun.visible = false": {
+    "the plain look asked of supplied/look.gd differs on pct of the still": 0.0,
+    "the plain look asked of supplied/look.gd is our still, pixel for pixel": true,
+    "the plain look with sun.visible = false": {
       "box_front": "#69891c",
       "box_side": "#69891c",
       "box_top": "#69891c",
       "floor_in_the_sphere's_shadow": "#150547",
       "floor_in_the_sun": "#150547",
+      "just_above_the_floor's_far_edge": "#ff2e93",
       "sky": "#ff2e93",
       "sphere_away_from_it": "#0c7489",
-      "sphere_to_the_sun": "#0c7489"
+      "sphere_to_the_sun": "#0c7489",
+      "top_edge_of_the_picture": "#ff2e93"
     },
-    "the look with its filter": {
-      "BODY c6ff3d as rendered": {
-        "front": {
-          "off_by": 21.8,
-          "rendered": "#b9f034"
-        },
-        "side, away from the sun": {
-          "off_by": 162.2,
-          "rendered": "#628222"
-        },
-        "top, to the sun": {
-          "off_by": 9.6,
-          "rendered": "#c8ff46"
-        }
-      },
-      "box_front": "#b9f034",
-      "box_side": "#628222",
-      "box_top": "#c8ff46",
-      "differs_from_the_plain_look_on_pct_of_the_still": 91.68,
-      "floor_in_the_sphere's_shadow": "#120059",
-      "floor_in_the_sun": "#2b089d",
-      "sky": "#741191",
-      "sky_at_the_horizon": "#6f1092",
-      "sky_at_the_top": "#941392",
-      "sphere_away_from_it": "#036696",
-      "sphere_to_the_sun": "#1fe9ff"
-    },
-    "the look with its filter and the sun switched off": {
-      "box_front": "#617b1d",
-      "box_side": "#628222",
-      "box_top": "#61802b",
-      "floor_in_the_sphere's_shadow": "#120059",
-      "floor_in_the_sun": "#110058",
-      "sky": "#741191",
-      "sphere_away_from_it": "#036696",
-      "sphere_to_the_sun": "#076597"
-    },
-    "the same look asked of supplied/look.gd differs on pct of the still": 0.0,
-    "the same look asked of supplied/look.gd is our still, pixel for pixel": true,
     "the sun turned, without the shadow line": {
       "box_front": "#828282",
       "box_side": "#474747",
       "box_top": "#8c8c8c",
       "floor_in_the_sphere's_shadow": "#8c8c8c",
       "floor_in_the_sun": "#8c8c8c",
+      "just_above_the_floor's_far_edge": "#ff2e93",
       "sky": "#ff2e93",
       "sphere_away_from_it": "#474747",
-      "sphere_to_the_sun": "#a3a3a3"
+      "sphere_to_the_sun": "#a3a3a3",
+      "top_edge_of_the_picture": "#ff2e93"
     }
   },
   "pairs": {
@@ -288,7 +261,7 @@
         }
       }
     },
-    "how": "each pair is look.gd with its two lines const GROUND and const BODY written again; the box's pixels are found by a second still with the box in one flat colour; `seen` is the share of those pixels where the still differs from a still of the same scene with the box away, by more than 25 of 255 over the three channels; `apart` is the mean of that difference; grey is each pixel's luminance, 0.2126 R + 0.7152 G + 0.0722 B of the linear values, written back as a grey",
+    "how": "each pair is the plain look (steps/8_palette.gd, the script as it stood before the filter) with its two lines const GROUND and const BODY written again; the box's pixels are found by a second still with the box in one flat colour; `seen` is the share of those pixels where the still differs from a still of the same scene with the box away, by more than 25 of 255 over the three channels; `apart` is the mean of that difference; grey is each pixel's luminance, 0.2126 R + 0.7152 G + 0.0722 B of the linear values, written back as a grey",
     "lime on violet": {
       "body": "#c6ff3d",
       "body_luminance": 0.8386,
@@ -390,10 +363,189 @@
       }
     }
   },
+  "pairs under the filter": {
+    "grey on grey": {
+      "in_the_look": {
+        "box_apart_in_grey_of_765": 115.6,
+        "box_apart_of_765": 111.9,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 100.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 112,
+          "box_side": 60,
+          "box_top": 125,
+          "floor_in_the_sun": 69
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.75,
+        "its_shadow_pct_of_the_still": 0.75,
+        "rendered": {
+          "box_front": "#746e7d",
+          "box_side": "#3d3a4a",
+          "box_top": "#7d7a92",
+          "floor_in_the_sun": "#46425a"
+        }
+      },
+      "with_the_sun_switched_off": {
+        "box_apart_in_grey_of_765": 81.0,
+        "box_apart_of_765": 72.9,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 100.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 57,
+          "box_side": 60,
+          "box_top": 59,
+          "floor_in_the_sun": 30
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.0,
+        "its_shadow_pct_of_the_still": 0.0,
+        "rendered": {
+          "box_front": "#3c3645",
+          "box_side": "#3d3a4a",
+          "box_top": "#3b3851",
+          "floor_in_the_sun": "#1f1b34"
+        }
+      }
+    },
+    "hot pink on violet": {
+      "in_the_look": {
+        "box_apart_in_grey_of_765": 208.5,
+        "box_apart_of_765": 218.0,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 100.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 131,
+          "box_side": 68,
+          "box_top": 136,
+          "floor_in_the_sun": 49
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.74,
+        "its_shadow_pct_of_the_still": 0.75,
+        "rendered": {
+          "box_front": "#f91492",
+          "box_side": "#840558",
+          "box_top": "#ff1ba5",
+          "floor_in_the_sun": "#2b089d"
+        }
+      },
+      "with_the_sun_switched_off": {
+        "box_apart_in_grey_of_765": 131.4,
+        "box_apart_of_765": 120.6,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 100.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 66,
+          "box_side": 68,
+          "box_top": 68,
+          "floor_in_the_sun": 22
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.0,
+        "its_shadow_pct_of_the_still": 0.0,
+        "rendered": {
+          "box_front": "#830152",
+          "box_side": "#840558",
+          "box_top": "#84045b",
+          "floor_in_the_sun": "#110058"
+        }
+      }
+    },
+    "how": "the same measure on look.gd as shipped, with its filter: the gradient sky, the second light, the tinted ambient light, saturation 1.08 and contrast 1.04",
+    "lime on violet": {
+      "in_the_look": {
+        "box_apart_in_grey_of_765": 465.6,
+        "box_apart_of_765": 448.9,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 100.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 222,
+          "box_side": 120,
+          "box_top": 236,
+          "floor_in_the_sun": 49
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.74,
+        "its_shadow_pct_of_the_still": 0.75,
+        "rendered": {
+          "box_front": "#b9f034",
+          "box_side": "#628222",
+          "box_top": "#c8ff46",
+          "floor_in_the_sun": "#2b089d"
+        }
+      },
+      "with_the_sun_switched_off": {
+        "box_apart_in_grey_of_765": 279.1,
+        "box_apart_of_765": 260.7,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 100.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 114,
+          "box_side": 120,
+          "box_top": 118,
+          "floor_in_the_sun": 22
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.0,
+        "its_shadow_pct_of_the_still": 0.0,
+        "rendered": {
+          "box_front": "#617b1d",
+          "box_side": "#628222",
+          "box_top": "#61802b",
+          "floor_in_the_sun": "#110058"
+        }
+      }
+    },
+    "red on green": {
+      "in_the_look": {
+        "box_apart_in_grey_of_765": 37.0,
+        "box_apart_of_765": 390.9,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 19.03,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 127,
+          "box_side": 65,
+          "box_top": 128,
+          "floor_in_the_sun": 126
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.77,
+        "its_shadow_pct_of_the_still": 0.75,
+        "rendered": {
+          "box_front": "#fd0804",
+          "box_side": "#860702",
+          "box_top": "#ff0027",
+          "floor_in_the_sun": "#099225"
+        }
+      },
+      "with_the_sun_switched_off": {
+        "box_apart_in_grey_of_765": 10.8,
+        "box_apart_of_765": 224.9,
+        "box_pct_of_the_still": 6.33,
+        "box_seen_in_grey_pct": 0.0,
+        "box_seen_pct": 100.0,
+        "grey_levels": {
+          "box_front": 63,
+          "box_side": 65,
+          "box_top": 64,
+          "floor_in_the_sun": 60
+        },
+        "its_shadow_in_grey_pct_of_the_still": 0.0,
+        "its_shadow_pct_of_the_still": 0.0,
+        "rendered": {
+          "box_front": "#850100",
+          "box_side": "#860702",
+          "box_top": "#85001f",
+          "floor_in_the_sun": "#00471c"
+        }
+      }
+    }
+  },
   "place": {
     "the marble in the box's shadow, from above": {
-      "mean_colour": "#83807b",
-      "off_BONE_by": 191.2,
+      "mean_colour": "#7a7489",
+      "off_BONE_by": 196.6,
       "pixels": 1288,
       "rests_at": [
         0.05,
@@ -402,8 +554,8 @@
       ]
     },
     "the marble in the sun, from above": {
-      "mean_colour": "#e1ded7",
-      "off_BONE_by": 29.6,
+      "mean_colour": "#ddd6e4",
+      "off_BONE_by": 34.0,
       "pixels": 1296,
       "rests_at": [
         1.3,
@@ -411,11 +563,17 @@
         -1.0
       ]
     },
+    "the sky through the walker's eyes, the middle of the picture": {
+      "0 degrees up": "#f81e94",
+      "20 degrees up": "#9a15c5",
+      "45 degrees up": "#6110de",
+      "80 degrees up": "#570fe2"
+    },
     "through the walker's eyes, from behind": {
-      "box_back": "#69891c",
-      "box_side": "#69891c",
-      "box_top": "#cbff46",
-      "sphere_towards_the_walker": "#0c7489",
+      "box_back": "#628320",
+      "box_side": "#628221",
+      "box_top": "#c8ff55",
+      "sphere_towards_the_walker": "#0b6ea0",
       "stands_at": [
         1.2,
         0.0,
@@ -430,15 +588,41 @@
     "width": 1292
   },
   "stages": {
+    "a second light": {
+      "box_front": "#bef73e",
+      "box_side": "#6c8f2a",
+      "box_top": "#cdff4f",
+      "floor_in_the_sphere's_shadow": "#1c0a54",
+      "floor_in_the_sun": "#331693",
+      "just_above_the_floor's_far_edge": "#32148b",
+      "sky": "#731d8d",
+      "sphere_away_from_it": "#13748b",
+      "sphere_to_the_sun": "#30f0ff",
+      "top_edge_of_the_picture": "#97208f"
+    },
     "a sky": {
       "box_front": "#8a144d",
       "box_side": "#8a144d",
       "box_top": "#8a144d",
       "floor_in_the_sphere's_shadow": "#8a144d",
       "floor_in_the_sun": "#8a144d",
+      "just_above_the_floor's_far_edge": "#ff2e93",
       "sky": "#ff2e93",
       "sphere_away_from_it": "#8a144d",
-      "sphere_to_the_sun": "#8a144d"
+      "sphere_to_the_sun": "#8a144d",
+      "top_edge_of_the_picture": "#ff2e93"
+    },
+    "a sky's top, its ground unsaid": {
+      "box_front": "#bef73a",
+      "box_side": "#6a8922",
+      "box_top": "#ccff4e",
+      "floor_in_the_sphere's_shadow": "#1b0651",
+      "floor_in_the_sun": "#321490",
+      "just_above_the_floor's_far_edge": "#332920",
+      "sky": "#57534d",
+      "sphere_away_from_it": "#12748a",
+      "sphere_to_the_sun": "#2df0ff",
+      "top_edge_of_the_picture": "#6c6766"
     },
     "a sun, unturned": {
       "box_front": "#a4a4a4",
@@ -446,9 +630,23 @@
       "box_top": "#474747",
       "floor_in_the_sphere's_shadow": "#474747",
       "floor_in_the_sun": "#474747",
+      "just_above_the_floor's_far_edge": "#ff2e93",
       "sky": "#ff2e93",
       "sphere_away_from_it": "#828282",
-      "sphere_to_the_sun": "#808080"
+      "sphere_to_the_sun": "#808080",
+      "top_edge_of_the_picture": "#ff2e93"
+    },
+    "a tinted ambient": {
+      "box_front": "#b5e63f",
+      "box_side": "#627f2b",
+      "box_top": "#c4fd50",
+      "floor_in_the_sphere's_shadow": "#1a0857",
+      "floor_in_the_sun": "#311496",
+      "just_above_the_floor's_far_edge": "#32148b",
+      "sky": "#731d8d",
+      "sphere_away_from_it": "#126590",
+      "sphere_to_the_sun": "#2ee1ff",
+      "top_edge_of_the_picture": "#97208f"
     },
     "ambient only": {
       "box_front": "#474747",
@@ -456,9 +654,11 @@
       "box_top": "#474747",
       "floor_in_the_sphere's_shadow": "#474747",
       "floor_in_the_sun": "#474747",
+      "just_above_the_floor's_far_edge": "#ff2e93",
       "sky": "#ff2e93",
       "sphere_away_from_it": "#474747",
-      "sphere_to_the_sun": "#474747"
+      "sphere_to_the_sun": "#474747",
+      "top_edge_of_the_picture": "#ff2e93"
     },
     "energy 0.28": {
       "box_front": "#bdf734",
@@ -466,9 +666,35 @@
       "box_top": "#cbff39",
       "floor_in_the_sphere's_shadow": "#150547",
       "floor_in_the_sun": "#2d1388",
+      "just_above_the_floor's_far_edge": "#ff2e93",
       "sky": "#ff2e93",
       "sphere_away_from_it": "#0c7489",
-      "sphere_to_the_sun": "#25f0ff"
+      "sphere_to_the_sun": "#25f0ff",
+      "top_edge_of_the_picture": "#ff2e93"
+    },
+    "saturation, contrast": {
+      "box_front": "#b9f034",
+      "box_side": "#628222",
+      "box_top": "#c8ff46",
+      "floor_in_the_sphere's_shadow": "#120059",
+      "floor_in_the_sun": "#2b089d",
+      "just_above_the_floor's_far_edge": "#2c0891",
+      "sky": "#741191",
+      "sphere_away_from_it": "#036696",
+      "sphere_to_the_sun": "#1fe9ff",
+      "top_edge_of_the_picture": "#9c1393"
+    },
+    "shadow blur 2": {
+      "box_front": "#b5e63f",
+      "box_side": "#627f2b",
+      "box_top": "#c4fd50",
+      "floor_in_the_sphere's_shadow": "#1a0857",
+      "floor_in_the_sun": "#311496",
+      "just_above_the_floor's_far_edge": "#32148b",
+      "sky": "#731d8d",
+      "sphere_away_from_it": "#126590",
+      "sphere_to_the_sun": "#2ee1ff",
+      "top_edge_of_the_picture": "#97208f"
     },
     "the bodies": {
       "box_front": "#ffff4f",
@@ -476,9 +702,11 @@
       "box_top": "#ffff58",
       "floor_in_the_sphere's_shadow": "#150547",
       "floor_in_the_sun": "#4727bf",
+      "just_above_the_floor's_far_edge": "#ff2e93",
       "sky": "#ff2e93",
       "sphere_away_from_it": "#0c7489",
-      "sphere_to_the_sun": "#40ffff"
+      "sphere_to_the_sun": "#40ffff",
+      "top_edge_of_the_picture": "#ff2e93"
     },
     "the engine's grey": {
       "box_front": "#000000",
@@ -486,9 +714,23 @@
       "box_top": "#000000",
       "floor_in_the_sphere's_shadow": "#000000",
       "floor_in_the_sun": "#000000",
+      "just_above_the_floor's_far_edge": "#4c4c4c",
       "sky": "#4c4c4c",
       "sphere_away_from_it": "#000000",
-      "sphere_to_the_sun": "#000000"
+      "sphere_to_the_sun": "#000000",
+      "top_edge_of_the_picture": "#4c4c4c"
+    },
+    "the gradient sky": {
+      "box_front": "#bef73e",
+      "box_side": "#6b8927",
+      "box_top": "#ccff4e",
+      "floor_in_the_sphere's_shadow": "#1c0651",
+      "floor_in_the_sun": "#331490",
+      "just_above_the_floor's_far_edge": "#32148b",
+      "sky": "#731d8d",
+      "sphere_away_from_it": "#13748b",
+      "sphere_to_the_sun": "#30f0ff",
+      "top_edge_of_the_picture": "#97208f"
     },
     "the ground": {
       "box_front": "#b6b6b6",
@@ -496,9 +738,11 @@
       "box_top": "#c3c3c3",
       "floor_in_the_sphere's_shadow": "#150547",
       "floor_in_the_sun": "#4727bf",
+      "just_above_the_floor's_far_edge": "#ff2e93",
       "sky": "#ff2e93",
       "sphere_away_from_it": "#474747",
-      "sphere_to_the_sun": "#dddddd"
+      "sphere_to_the_sun": "#dddddd",
+      "top_edge_of_the_picture": "#ff2e93"
     },
     "the palette by role": {
       "box_front": "#bdf734",
@@ -506,9 +750,11 @@
       "box_top": "#cbff39",
       "floor_in_the_sphere's_shadow": "#150547",
       "floor_in_the_sun": "#2d1388",
+      "just_above_the_floor's_far_edge": "#ff2e93",
       "sky": "#ff2e93",
       "sphere_away_from_it": "#0c7489",
-      "sphere_to_the_sun": "#25f0ff"
+      "sphere_to_the_sun": "#25f0ff",
+      "top_edge_of_the_picture": "#ff2e93"
     },
     "the sun turned": {
       "box_front": "#b6b6b6",
@@ -516,9 +762,11 @@
       "box_top": "#c3c3c3",
       "floor_in_the_sphere's_shadow": "#474747",
       "floor_in_the_sun": "#c3c3c3",
+      "just_above_the_floor's_far_edge": "#ff2e93",
       "sky": "#ff2e93",
       "sphere_away_from_it": "#474747",
-      "sphere_to_the_sun": "#dddddd"
+      "sphere_to_the_sun": "#dddddd",
+      "top_edge_of_the_picture": "#ff2e93"
     }
   },
   "still": {
@@ -528,12 +776,18 @@
     "width": 960
   },
   "strip": {
+    "a second light differs from the still before it on pct of the still": 0.0,
+    "a second light: bytes unlike the still before it, and the largest step of one channel": [
+      933675,
+      12
+    ],
     "changed_most": "a sky",
     "png": {
-      "bytes": 36069,
-      "height": 266,
-      "width": 2912
+      "bytes": 116629,
+      "height": 806,
+      "width": 1616
     },
+    "shadow blur 2 is the still before it, pixel for pixel": true,
     "steps": [
       {
         "differs_from_step_before_pct": 0.0,
@@ -570,8 +824,359 @@
       {
         "differs_from_step_before_pct": 0.0,
         "step": "the palette by role"
+      },
+      {
+        "differs_from_step_before_pct": 33.21,
+        "step": "a sky's top, its ground unsaid"
+      },
+      {
+        "differs_from_step_before_pct": 33.21,
+        "step": "the gradient sky"
+      },
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "a second light"
+      },
+      {
+        "differs_from_step_before_pct": 4.74,
+        "step": "a tinted ambient"
+      },
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "shadow blur 2"
+      },
+      {
+        "differs_from_step_before_pct": 40.69,
+        "step": "saturation, contrast"
       }
     ],
+    "the finished look differs from the plain look on pct of the still": 91.68,
     "the palette by role is the still before it, pixel for pixel": true
+  },
+  "the filter, line by line": {
+    "lines that change no pixel": {
+      "shadow_blur": {
+        "0.0": {
+          "bytes_unlike_the_still_at_2": 0,
+          "read_back": 0.0,
+          "shadow_edge_px": 8
+        },
+        "1.0": {
+          "bytes_unlike_the_still_at_2": 0,
+          "read_back": 1.0,
+          "shadow_edge_px": 8
+        },
+        "20.0": {
+          "bytes_unlike_the_still_at_2": 0,
+          "read_back": 20.0,
+          "shadow_edge_px": 8
+        },
+        "6.0": {
+          "bytes_unlike_the_still_at_2": 0,
+          "read_back": 6.0,
+          "shadow_edge_px": 8
+        }
+      },
+      "with `gradient.ground_curve = 0.02` added: the same still, pixel for pixel": true,
+      "without `gradient.sun_curve = 0.0`: the same still, pixel for pixel": true,
+      "without `sky.background_color = SKY`: the same still, pixel for pixel": true
+    },
+    "saturation 2.0": {
+      "box_front": "#cfff00",
+      "box_side": "#6ca600",
+      "box_top": "#daff00",
+      "floor_in_the_sphere's_shadow": "#050089",
+      "floor_in_the_sun": "#1400e8",
+      "just_above_the_floor's_far_edge": "#1a00d5",
+      "sky": "#8800be",
+      "sphere_away_from_it": "#0074cd",
+      "sphere_to_the_sun": "#00ffff",
+      "top_edge_of_the_picture": "#c500b5"
+    },
+    "the disc this sky draws for a light": {
+      "finished look without the two sun lines: the disc of the second light": "#000000",
+      "finished look without the two sun lines: the disc of the sun": "#454545",
+      "the same place in the sky with sun_angle_max = 0": "#651ed2",
+      "the sun's disc, its middle": "#474747"
+    },
+    "the finished look": {
+      "BODY c6ff3d as rendered": {
+        "front": {
+          "off_by": 21.8,
+          "rendered": "#b9f034"
+        },
+        "side, away from the sun": {
+          "off_by": 162.2,
+          "rendered": "#628222"
+        },
+        "top, to the sun": {
+          "off_by": 9.6,
+          "rendered": "#c8ff46"
+        }
+      },
+      "GROUND 32188a in the sun, off by": 25.8,
+      "box_front": "#b9f034",
+      "box_side": "#628222",
+      "box_top": "#c8ff46",
+      "floor_in_the_sphere's_shadow": "#120059",
+      "floor_in_the_sun": "#2b089d",
+      "just_above_the_floor's_far_edge": "#2c0891",
+      "shadow_edge": {
+        "edge_band_px": 8,
+        "pixels_on_the_line": 223
+      },
+      "sky": "#741191",
+      "sphere_away_from_it": "#036696",
+      "sphere_to_the_sun": "#1fe9ff",
+      "top_edge_of_the_picture": "#9c1393"
+    },
+    "the finished look asked of supplied/look.gd is our still, pixel for pixel": true,
+    "the finished look asked of supplied/look.gd: bytes unlike, and the largest step of one channel": [
+      0,
+      0
+    ],
+    "the gradient sky mirrored in the bodies": {
+      "box_side_in_the_plain_look": "#69891c",
+      "box_side_under_the_gradient_sky": "#6b8927",
+      "box_side_with_reflected_light_disabled": "#69891c",
+      "box_top_in_the_plain_look": "#cbff39",
+      "box_top_under_the_gradient_sky": "#ccff4e",
+      "box_top_with_reflected_light_disabled": "#cbff39"
+    },
+    "the second light": {
+      "at energy 0.5": {
+        "box_front": "#bef73e",
+        "box_side": "#72b93a",
+        "box_top": "#d2ff5b",
+        "floor_in_the_sphere's_shadow": "#1f1b6d",
+        "floor_in_the_sun": "#3522ab",
+        "just_above_the_floor's_far_edge": "#32148b",
+        "sky": "#731d8d",
+        "sphere_away_from_it": "#13768e",
+        "sphere_to_the_sun": "#30f0ff",
+        "top_edge_of_the_picture": "#97208f"
+      },
+      "the sun switched off, before the second light": {
+        "box_front": "#6a8925",
+        "box_side": "#6b8927",
+        "box_top": "#6a8930",
+        "floor_in_the_sphere's_shadow": "#1c0651",
+        "floor_in_the_sun": "#1b064f",
+        "just_above_the_floor's_far_edge": "#32148b",
+        "sky": "#731d8d",
+        "sphere_away_from_it": "#13748b",
+        "sphere_to_the_sun": "#16748c",
+        "top_edge_of_the_picture": "#97208f"
+      },
+      "the sun switched off, in the finished look": {
+        "BODY c6ff3d as rendered": {
+          "front": {
+            "off_by": 169.3,
+            "rendered": "#617b1d"
+          },
+          "side, away from the sun": {
+            "off_by": 162.2,
+            "rendered": "#628222"
+          },
+          "top, to the sun": {
+            "off_by": 163.3,
+            "rendered": "#61802b"
+          }
+        },
+        "box_front": "#617b1d",
+        "box_side": "#628222",
+        "box_top": "#61802b",
+        "floor_in_the_sphere's_shadow": "#120059",
+        "floor_in_the_sun": "#110058",
+        "just_above_the_floor's_far_edge": "#2c0891",
+        "sky": "#741191",
+        "sphere_away_from_it": "#036696",
+        "sphere_to_the_sun": "#076597",
+        "top_edge_of_the_picture": "#9c1393"
+      },
+      "the sun switched off, with the second light": {
+        "box_front": "#6a8925",
+        "box_side": "#6c8f2a",
+        "box_top": "#6b8e32",
+        "floor_in_the_sphere's_shadow": "#1c0a54",
+        "floor_in_the_sun": "#1b0853",
+        "just_above_the_floor's_far_edge": "#32148b",
+        "sky": "#731d8d",
+        "sphere_away_from_it": "#13748b",
+        "sphere_to_the_sun": "#16748c",
+        "top_edge_of_the_picture": "#97208f"
+      },
+      "the two differ on pct of the still": 0.0
+    },
+    "the sky by degrees above the horizon, from a level camera": {
+      "its ground unsaid, the curve as it comes (0.15)": {
+        "-1": "#757372",
+        "-10": "#322a20",
+        "-5": "#3a3229",
+        "0": "#c76e9c",
+        "10": "#a724b7",
+        "20": "#7920c9",
+        "30": "#651ed2",
+        "45": "#5b1dd6",
+        "5": "#cd28a7",
+        "60": "#5a1dd6",
+        "89": "#5a1dd6"
+      },
+      "the finished look": {
+        "-1": "#af1693",
+        "-10": "#2c0891",
+        "-5": "#3b0a91",
+        "0": "#fc1f94",
+        "10": "#ca1ab0",
+        "20": "#9a15c5",
+        "30": "#7a12d3",
+        "45": "#6110de",
+        "5": "#e91da3",
+        "60": "#590fe1",
+        "89": "#570fe2"
+      },
+      "the gradient sky": {
+        "-1": "#a9238f",
+        "-10": "#32158a",
+        "-5": "#3f168b",
+        "0": "#f72c93",
+        "10": "#c327ac",
+        "20": "#9723bd",
+        "30": "#7a20c9",
+        "45": "#631dd3",
+        "5": "#df2aa0",
+        "60": "#5b1dd6",
+        "89": "#5a1dd6"
+      }
+    },
+    "tried and left out": {
+      "fog, as it comes": {
+        "box_front": "#b9ef3d",
+        "box_side": "#63822b",
+        "box_top": "#c7ff4d",
+        "box_top_off_BODY_by": 16.3,
+        "bytes_unlike_the_finished_look": 1988223,
+        "differs_from_the_finished_look_on_pct_of_the_still": 85.76,
+        "floor_in_the_sphere's_shadow": "#1d125c",
+        "floor_in_the_sun": "#321b9e",
+        "just_above_the_floor's_far_edge": "#848d9e",
+        "largest_step_of_one_channel": 134,
+        "sky": "#838e9d",
+        "sphere_away_from_it": "#106796",
+        "sphere_to_the_sun": "#29e8ff",
+        "top_edge_of_the_picture": "#848d9e"
+      },
+      "glow with bloom 0.5": {
+        "box_front": "#c2f33b",
+        "box_side": "#6c8c28",
+        "box_top": "#cfff50",
+        "box_top_off_BODY_by": 20.7,
+        "bytes_unlike_the_finished_look": 2037721,
+        "differs_from_the_finished_look_on_pct_of_the_still": 2.44,
+        "floor_in_the_sphere's_shadow": "#170063",
+        "floor_in_the_sun": "#310ba7",
+        "just_above_the_floor's_far_edge": "#330a9b",
+        "largest_step_of_one_channel": 23,
+        "sky": "#7f149b",
+        "sphere_away_from_it": "#066d9f",
+        "sphere_to_the_sun": "#25ecff",
+        "top_edge_of_the_picture": "#a4179d"
+      },
+      "glow, as it comes": {
+        "box_front": "#baf034",
+        "box_side": "#638222",
+        "box_top": "#c8ff47",
+        "box_top_off_BODY_by": 9.8,
+        "bytes_unlike_the_finished_look": 622575,
+        "differs_from_the_finished_look_on_pct_of_the_still": 0.0,
+        "floor_in_the_sphere's_shadow": "#130059",
+        "floor_in_the_sun": "#2b089d",
+        "just_above_the_floor's_far_edge": "#2c0791",
+        "largest_step_of_one_channel": 2,
+        "sky": "#741091",
+        "sphere_away_from_it": "#036595",
+        "sphere_to_the_sun": "#1fe8ff",
+        "top_edge_of_the_picture": "#9b1393"
+      },
+      "tonemap ACES": {
+        "box_front": "#eaff7c",
+        "box_side": "#7da72a",
+        "box_top": "#f4ff9a",
+        "box_top_off_BODY_by": 103.4,
+        "bytes_unlike_the_finished_look": 2032340,
+        "differs_from_the_finished_look_on_pct_of_the_still": 99.99,
+        "floor_in_the_sphere's_shadow": "#000063",
+        "floor_in_the_sun": "#0d00c6",
+        "just_above_the_floor's_far_edge": "#0d00b4",
+        "largest_step_of_one_channel": 139,
+        "sky": "#8a00b6",
+        "sphere_away_from_it": "#007cbe",
+        "sphere_to_the_sun": "#9ffcff",
+        "top_edge_of_the_picture": "#c500b9"
+      },
+      "tonemap AgX": {
+        "box_front": "#b1c359",
+        "box_side": "#657c18",
+        "box_top": "#bacd6d",
+        "box_top_off_BODY_by": 70.5,
+        "bytes_unlike_the_finished_look": 1919300,
+        "differs_from_the_finished_look_on_pct_of_the_still": 98.38,
+        "floor_in_the_sphere's_shadow": "#020d53",
+        "floor_in_the_sun": "#1b2a9b",
+        "just_above_the_floor's_far_edge": "#1e2391",
+        "largest_step_of_one_channel": 90,
+        "sky": "#702991",
+        "sphere_away_from_it": "#006a95",
+        "sphere_to_the_sun": "#73c6d3",
+        "top_edge_of_the_picture": "#972d92"
+      },
+      "tonemap Reinhard": {
+        "box_front": "#b9f034",
+        "box_side": "#628222",
+        "box_top": "#c8ff46",
+        "box_top_off_BODY_by": 9.6,
+        "bytes_unlike_the_finished_look": 0,
+        "differs_from_the_finished_look_on_pct_of_the_still": 0.0,
+        "floor_in_the_sphere's_shadow": "#120059",
+        "floor_in_the_sun": "#2b089d",
+        "just_above_the_floor's_far_edge": "#2c0891",
+        "largest_step_of_one_channel": 0,
+        "sky": "#741191",
+        "sphere_away_from_it": "#036696",
+        "sphere_to_the_sun": "#1fe9ff",
+        "top_edge_of_the_picture": "#9c1393"
+      },
+      "tonemap filmic": {
+        "box_front": "#dbfd4a",
+        "box_side": "#81a630",
+        "box_top": "#e6ff63",
+        "box_top_off_BODY_by": 49.7,
+        "bytes_unlike_the_finished_look": 2034224,
+        "differs_from_the_finished_look_on_pct_of_the_still": 100.0,
+        "floor_in_the_sphere's_shadow": "#1b0077",
+        "floor_in_the_sun": "#3a0ac5",
+        "just_above_the_floor's_far_edge": "#3609b7",
+        "largest_step_of_one_channel": 41,
+        "sky": "#9714b7",
+        "sphere_away_from_it": "#0784bd",
+        "sphere_to_the_sun": "#30faff",
+        "top_edge_of_the_picture": "#c117b9"
+      },
+      "what a new Environment has": {
+        "fog_light_color": "#848d9b",
+        "glow_hdr_threshold": 1.0,
+        "tonemap_mode_is_linear": true,
+        "tonemap_white": 1.0
+      },
+      "what a new ProceduralSkyMaterial has": {
+        "ground_bottom_color": "#332b22",
+        "ground_curve": 0.02,
+        "ground_horizon_color": "#a5a7ab",
+        "sky_curve": 0.15,
+        "sky_horizon_color": "#a5a7ab",
+        "sky_top_color": "#62748c",
+        "sun_angle_max": 30.0
+      }
+    }
   }
 }

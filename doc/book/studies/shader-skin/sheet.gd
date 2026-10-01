@@ -9,7 +9,8 @@ extends "res://supplied/sheet_tools.gd"
 ##   process.png  the strip: one still after each step of the lesson
 ##   place.png    the body through the walker's eyes from four sides
 ##   sheet.json   every number the lesson quotes: the pairs, how far the rim
-##                reaches, the planted bug, the refused shader, the four sides
+##                reaches, the measure of "lit" tried on a body with no light,
+##                the planted bug, the refused shader, the four sides
 ## and the single stills, in stills/. The stripes do not crawl here: drift is 0
 ## in every still, so that two stills show one moment.
 
@@ -19,6 +20,7 @@ const BLACK := Color(0.0, 0.0, 0.0)
 
 func run() -> void:
 	await argument()
+	await unlit()
 	await process_strip()
 	await planted_bug()
 	await place()
@@ -57,6 +59,7 @@ func argument() -> void:
 			var stills := []
 			var pixels := []
 			var rims := {}
+			var sun_alone := 0.0
 			for power: float in POWERS:
 				var body := skinned(power)
 				await stand(body)
@@ -70,6 +73,7 @@ func argument() -> void:
 				stills.append(taken[0])
 				pixels.append(taken[1])
 				rims["p %s" % power] = rim_of(taken[0], without, taken[1])
+				sun_alone = rim_of(without, without, taken[1])["left_to_right_brightness"]
 				if distance == 2.0:
 					tiles.append(small(taken[0]))
 					captions.append("%s, p = %s" % [row, power])
@@ -79,6 +83,8 @@ func argument() -> void:
 			record["body_pct_of_still"] = share(pixels[0])
 			record["body_pixels"] = pixels[0].count(1)
 			record["rim"] = rims
+			record["left_to_right_brightness_with_the_rim_black"] = sun_alone
+			print("with the rim black: left half %.2f times as bright as the right" % sun_alone)
 			for name: String in rims:
 				print("%s: the rim changes %5.2f%% of the body; it begins %.2f of the radius from the middle; left half %.2f times as bright as the right" % [
 					name, rims[name]["reach_pct_of_body"], rims[name]["begins_at_of_radius"], rims[name]["left_to_right_brightness"]])
@@ -96,6 +102,25 @@ func argument() -> void:
 		series["p %s vs p 8.0" % power] = differ_pct(await shot(""), last)
 	print("against 8: ", series)
 	report["series_against_8"] = series
+
+## The measure of "lit", tried on a body that is unlit by construction: the
+## same skin with `render_mode unshaded;`, so that no light reaches it, and
+## with the rim's colour black. A measure that is sound finds its left half
+## and its right half equally bright.
+func unlit() -> void:
+	var shader := Shader.new()
+	shader.code = FileAccess.get_file_as_string("res://skin.gdshader").replace("shader_type spatial;", "shader_type spatial;\nrender_mode unshaded;")
+	var record := {}
+	for row: String in ["our skin", "dark body"]:
+		var values := {"body_colour": Look.SHADE if row == "dark body" else Look.BODY, "band_colour": Look.SHADE, "rim_colour": BLACK}
+		var taken: Array = await photograph(member_with(shader, values), "level", "unlit_" + row.replace(" ", "_"))
+		record[row] = {
+			"left_to_right_brightness": rim_of(taken[0], taken[0], taken[1])["left_to_right_brightness"],
+			"mean_colour": mean_colour(taken[0], taken[1]),
+		}
+		print("unlit by construction, %s: left half %.2f times as bright as the right; the body is %s" % [row, record[row]["left_to_right_brightness"], record[row]["mean_colour"]])
+	record["how"] = "skin.gdshader with render_mode unshaded added and rim_colour black, from the side at 2 m: no light reaches the body, so whatever the two halves differ by is the skin's own and the measure's"
+	report["unlit_by_construction"] = record
 
 ## What the rim adds: `still` is the body with its rim, `without` the same body
 ## with the rim's colour set to black, `pixels` where the body is.
@@ -196,7 +221,10 @@ func process_strip() -> void:
 		await stand(bodies[i])
 		look_from(Vector3(1.3, 1.25, 2.3), Vector3(0.0, 0.42, 0.0))
 		tiles.append(small(await shot("strip_%d" % (i + 1))))
+	var last: Array = await portrait(bodies[bodies.size() - 1])
 	report["strip"] = await strip(tiles, names)
+	report["strip"]["body_pct_of_still"] = share(last[1])
+	print("from the strip's standpoint the body covers %.2f%% of the still" % report["strip"]["body_pct_of_still"])
 
 ## The planted bug and the refused shader, measured.
 func planted_bug() -> void:

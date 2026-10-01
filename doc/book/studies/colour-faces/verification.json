@@ -1,0 +1,391 @@
+{
+  "checks": [
+    {
+      "name": "the project is named Colour faces, its main scene is faces.tscn, its renderer Compatibility",
+      "passed": true
+    },
+    {
+      "name": "supplied/ holds the base's 15 files: [\"base.tscn\", \"base_look.gd\", \"check_guest.gd\", \"look.gd\", \"marble.gd\", \"marble.tscn\", \"mover.gd\", \"segment.gd\", \"sheet_tools.gd\", \"sweep_sheet.gd\", \"sweep_sheet.tscn\", \"trace_strip.gd\", \"verify_tools.gd\", \"walker.gd\", \"walker.tscn\"]",
+      "passed": true
+    },
+    {
+      "name": "no script declares a class_name and the project lists no named class: nothing needs an import",
+      "passed": true
+    },
+    {
+      "name": "every script is indented with tabs: []",
+      "passed": true
+    },
+    {
+      "name": "lerp(0.0, 10.0, 0.25) is 2.5, lerp(0.0, 10.0, 0.5) is 5.0, lerp(4.0, 8.0, 0.5) is 6.0, and lerpf() gives the same",
+      "passed": true
+    },
+    {
+      "name": "the pair is BODY, c6ff3d, and BODY.inverted(), 3900c2",
+      "passed": true
+    },
+    {
+      "name": "half way between them in RGB is 808080, a grey: its saturation is 0.0",
+      "passed": true
+    },
+    {
+      "name": "the two hues are half a turn apart: 0.2156 and 0.7156",
+      "passed": true
+    },
+    {
+      "name": "without float() the weight is a whole number: [0, 0, 0, 0, 0, 0, 0, 0, 1], eight steps in the first colour and one in the second",
+      "passed": true
+    },
+    {
+      "name": "`var h := lerp(a, b, t)` does not compile: SCRIPT ERROR: Parse Error: The variable type is being inferred from a Variant value, so it will be typed as Variant. (Warning treated as error.)",
+      "passed": true
+    },
+    {
+      "name": "SKY has hue 0.919 and THIRD hue 0.080: 0.161 of a turn apart across red, 0.839 the other way",
+      "passed": true
+    },
+    {
+      "name": "lerpf() on the two hues goes the long way round: 7 of 9 steps lie between yellow and violet, the middle one is 26ffff, a cyan",
+      "passed": true
+    },
+    {
+      "name": "with the difference wrapped the wall goes across red: none of its 9 steps lies between yellow and violet, the middle one is ff2627",
+      "passed": true
+    },
+    {
+      "name": "for the complements the difference of the hues is 0.50000004, more than a half by a rounding error, so the `if` fires",
+      "passed": true
+    },
+    {
+      "name": "and the HSV wall goes from lime to violet by way of red: its middle is e11b44, hue 0.966",
+      "passed": true
+    },
+    {
+      "name": "without the wrap it goes the other way, by cyan: the middle is 1be1b8, hue 0.466. Both ways are half a turn",
+      "passed": true
+    },
+    {
+      "name": "a wall builds 9 steps, 0.4 m apart, each a box with a collider under it, each painted mix(t) with t from 0 to 1",
+      "passed": true
+    },
+    {
+      "name": "in all four spaces the first step is BODY and the last its complement: the spaces agree about the ends",
+      "passed": true
+    },
+    {
+      "name": "and each wall has nine different colours: t is not cut to a whole number",
+      "passed": true
+    },
+    {
+      "name": "the four middles are four colours: { \"rgb\": \"808080\", \"hsv\": \"e11b44\", \"linear\": \"96bc93\", \"oklab\": \"6a9ca8\" }",
+      "passed": true
+    },
+    {
+      "name": "the RGB wall reaches grey: saturation 0 at its middle",
+      "passed": true
+    },
+    {
+      "name": "the HSV wall never comes near grey: its least saturated step has 0.761",
+      "passed": true
+    },
+    {
+      "name": "the linear-light wall does not reach grey between these two: its least saturated step has 0.188, its middle 0.214",
+      "passed": true
+    },
+    {
+      "name": "nor does the OKLab wall: least 0.298, middle 0.368",
+      "passed": true
+    },
+    {
+      "name": "linear mixes after srgb_to_linear() and comes back with linear_to_srgb(): 96bc93; without the way back it would be 4d804b",
+      "passed": true
+    },
+    {
+      "name": "between red and cyan RGB and linear light both reach a grey, 808080 and bcbcbc, and HSV never leaves full saturation: { \"rgb\": \"808080\", \"hsv\": \"80ff00\", \"linear\": \"bcbcbc\", \"oklab\": \"d2a993\" }",
+      "passed": true
+    },
+    {
+      "name": "with the complement taken in linear light (b000fa) it is the linear wall that reaches grey, bcbcbc, and the RGB wall that misses it: bb809b, saturation 0.319",
+      "passed": true
+    },
+    {
+      "name": "each ruler finds its own wall the most even: by distance in RGB the RGB wall (largest gap / smallest 1.00), by distance in OKLab the OKLab wall (1.00); the others: { \"rgb\": { \"rgb_ruler\": 1.0, \"oklab_ruler\": 2.13 }, \"hsv\": { \"rgb_ruler\": 1.55, \"oklab_ruler\": 2.95 }, \"linear\": { \"rgb_ruler\": 3.79, \"oklab_ruler\": 3.64 }, \"oklab\": { \"rgb_ruler\": 2.06, \"oklab_ruler\": 1.0 } }",
+      "passed": true
+    },
+    {
+      "name": "a space the wall does not know is loud: 9 error lines (ERROR: wall.gd has no space called hsl) and 9 black steps",
+      "passed": true
+    },
+    {
+      "name": "asked for 1 step the wall builds 2: there is no way from a colour to another in fewer",
+      "passed": true
+    },
+    {
+      "name": "oklab.gd: white is (1, 0, 0) and red is (0.628, 0.225, 0.126), the published values",
+      "passed": true
+    },
+    {
+      "name": "oklab.gd: every colour of the palette comes back from OKLab as itself, and mix() gives the two ends at t = 0 and t = 1",
+      "passed": true
+    },
+    {
+      "name": "oklab.gd: between BODY and its complement no colour had to be cut to fit the screen (0 of 101)",
+      "passed": true
+    },
+    {
+      "name": "oklab.gd: apart() is 0 for a colour and itself and 100.0 for black and white",
+      "passed": true
+    },
+    {
+      "name": "faces.tscn ran 180 frames and Godot logged no error: []",
+      "passed": true
+    },
+    {
+      "name": "it printed the four middles: [\"rgb: the middle is 808080\", \"hsv: the middle is e11b44\", \"linear: the middle is 96bc93\", \"oklab: the middle is 6a9ca8\"]",
+      "passed": true
+    },
+    {
+      "name": "four walls stand one on the other at z = -1, the first on the floor: rgb, hsv, linear, oklab",
+      "passed": true
+    },
+    {
+      "name": "the lamp is a SpotLight3D, white, 0.7 m above the walker's feet, with a cone of 25 degrees",
+      "passed": true
+    },
+    {
+      "name": "the walker walks along the wall to its middle (\"arrived\") and the lamp goes with it: the lamp is at (-0.07, 0.7, 1.6)",
+      "passed": true
+    },
+    {
+      "name": "the walker turned the way it walked; the lamp did not turn: it points at the wall",
+      "passed": true
+    },
+    {
+      "name": "with the key D held for half a second the walker goes 1 m to the right, still facing the wall, and the lamp with it: x = -0.03",
+      "passed": true
+    },
+    {
+      "name": "Space gives the lamp the next colour: c6ff3d, 3900c2, then white again; it printed [\"the lamp is c6ff3d\", \"the lamp is 3900c2\", \"the lamp is ffffff\"]",
+      "passed": true
+    },
+    {
+      "name": "M paints the step the ray meets, the middle of the HSV wall, half way to the lamp's colour: e11b44 became d38d40; the other 35 steps kept theirs",
+      "passed": true
+    },
+    {
+      "name": "and it printed what it did: [\"painted e11b44 to d38d40\"]",
+      "passed": true
+    },
+    {
+      "name": "a second M goes half of what is left: cdc63f",
+      "passed": true
+    },
+    {
+      "name": "walked at the wall the walker is stopped by it (\"blocked\"), its middle at z = -0.60, 0.3 m from the wall's face",
+      "passed": true
+    },
+    {
+      "name": "with the walker against the wall the ray still meets a step: [\"painted cdc63f to c9e23e\"]",
+      "passed": true
+    },
+    {
+      "name": "a ray that meets no step says so: [\"the ray met nothing\"]",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped over the top wall comes to rest on it, at 1.90 m: the wall is a body",
+      "passed": true
+    },
+    {
+      "name": "and Godot logged no error to the end: []",
+      "passed": true
+    },
+    {
+      "name": "with `rgb, hsl` in spaces the scene logs 10 lines `ERROR: wall.gd has no space called hsl` and prints `hsl: the middle is 000000`",
+      "passed": true
+    },
+    {
+      "name": "the guest names nothing outside its folder: []",
+      "passed": true
+    },
+    {
+      "name": "the guest declares no class_name",
+      "passed": true
+    },
+    {
+      "name": "palette.tres is a Resource with palette.gd as its script and the fields first, second, space, steps and because",
+      "passed": true
+    },
+    {
+      "name": "the shipped palette mixes c6ff3d and 3900c2 in oklab, in 9 steps, and says why",
+      "passed": true
+    },
+    {
+      "name": "the guest's palette.gd and the kit's wall.gd give the same colour for 4 pairs, 4 spaces and 33 values of t",
+      "passed": true
+    },
+    {
+      "name": "pink and orange in hsv give a row of eight squares from ff2e93 to ff8b1f: [\"ff2e93\", \"ff2c75\", \"ff2a56\", \"ff2837\", \"ff3425\", \"ff5123\", \"ff6e21\", \"ff8b1f\"]",
+      "passed": true
+    },
+    {
+      "name": "and a space it does not know is as loud there: [\"ERROR: palette.gd has no space called hsl\"]",
+      "passed": true
+    },
+    {
+      "name": "the guest's first node is a Node3D and it enters a scene with no error",
+      "passed": true
+    },
+    {
+      "name": "it stands on the ground at its own origin and fits the place: 1.44 m wide, 0.20 m deep, 1.00 m high",
+      "passed": true
+    },
+    {
+      "name": "its 9 steps are the palette's: step(0) to step(8)",
+      "passed": true
+    },
+    {
+      "name": "a walker sent at it is stopped (\"blocked\") at z = 0.40, 0.3 m from its face",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped on it rests on its top, at 1.10 m",
+      "passed": true
+    }
+  ],
+  "checks_failed": 0,
+  "checks_run": 63,
+  "godot": "4.6-stable (official)",
+  "kit": "Colour faces",
+  "measured": {
+    "across_red": [
+      "ff2e93",
+      "ff2c79",
+      "ff2a5e",
+      "ff2842",
+      "ff2627",
+      "ff3f25",
+      "ff5823",
+      "ff7121",
+      "ff8b1f"
+    ],
+    "complement_in_linear_light": {
+      "linear_middle": "bcbcbc",
+      "rgb_middle": "bb809b",
+      "rgb_middle_saturation": 0.319,
+      "second": "b000fa"
+    },
+    "complement_turn": 0.500000044703484,
+    "guest": {
+      "depth_m": 0.2,
+      "height_m": 1.0,
+      "marble_rests_at_m": 1.1,
+      "palette": {
+        "because": "Lime and its complement, mixed in OKLab: the middle keeps some colour where RGB turns grey, and the way there stays between green and blue where HSV crosses red.",
+        "first": "c6ff3d",
+        "second": "3900c2",
+        "space": "oklab",
+        "steps": 9
+      },
+      "walker": "blocked",
+      "width_m": 1.44
+    },
+    "hsv_middle_by_cyan": "1be1b8",
+    "hsv_middle_by_red": "e11b44",
+    "largest_gap_over_smallest": {
+      "hsv": {
+        "oklab_ruler": 2.95,
+        "rgb_ruler": 1.55
+      },
+      "linear": {
+        "oklab_ruler": 3.64,
+        "rgb_ruler": 3.79
+      },
+      "oklab": {
+        "oklab_ruler": 1.0,
+        "rgb_ruler": 2.06
+      },
+      "rgb": {
+        "oklab_ruler": 2.13,
+        "rgb_ruler": 1.0
+      }
+    },
+    "least_saturation": {
+      "hsv": 0.761,
+      "linear": 0.188,
+      "oklab": 0.298,
+      "rgb": 0.0
+    },
+    "lerp_with_inferred_type": "SCRIPT ERROR: Parse Error: The variable type is being inferred from a Variant value, so it will be typed as Variant. (Warning treated as error.)",
+    "long_way_round": [
+      "ff2e93",
+      "e72cff",
+      "612aff",
+      "2878ff",
+      "26ffff",
+      "25ff75",
+      "5cff23",
+      "e6ff21",
+      "ff8b1f"
+    ],
+    "marble_rests_at_m": 1.9,
+    "middle_saturation": {
+      "hsv": 0.88,
+      "linear": 0.214,
+      "oklab": 0.368,
+      "rgb": 0.0
+    },
+    "middles": {
+      "hsv": "e11b44",
+      "linear": "96bc93",
+      "oklab": "6a9ca8",
+      "rgb": "808080"
+    },
+    "oklab_cut_of_101": 0,
+    "painted": [
+      "e11b44",
+      "d38d40",
+      "cdc63f"
+    ],
+    "pair": {
+      "first": "c6ff3d",
+      "first_hsv": [
+        0.2156,
+        0.7608,
+        1.0
+      ],
+      "rgb_middle": "808080",
+      "second": "3900c2",
+      "second_hsv": [
+        0.7156,
+        1.0,
+        0.7608
+      ]
+    },
+    "red_cyan_least_saturation": {
+      "hsv": 1.0,
+      "linear": 0.0,
+      "oklab": 0.082,
+      "rgb": 0.0
+    },
+    "red_cyan_middles": {
+      "hsv": "80ff00",
+      "linear": "bcbcbc",
+      "oklab": "d2a993",
+      "rgb": "808080"
+    },
+    "room_squares_pink_to_orange_in_hsv": [
+      "ff2e93",
+      "ff2c75",
+      "ff2a56",
+      "ff2837",
+      "ff3425",
+      "ff5123",
+      "ff6e21",
+      "ff8b1f"
+    ],
+    "unknown_space_error_lines": 10,
+    "walker_stopped_at_z": -0.6
+  },
+  "passed": true
+}

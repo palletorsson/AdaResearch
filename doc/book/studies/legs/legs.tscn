@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://borrowed/terrain.gd" id="Terrain"]
+[ext_resource type="Script" path="res://ghost_plank.gd" id="Plank"]
+[ext_resource type="Script" path="res://creature.gd" id="Creature"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[node name="Legs" instance=ExtResource("Base")]
+
+[node name="Terrain" type="StaticBody3D" parent="."]
+script = ExtResource("Terrain")
+
+[node name="Plank" type="StaticBody3D" parent="."]
+position = Vector3(3.0, 0.225, 0)
+script = ExtResource("Plank")
+
+[node name="Creature" type="Node3D" parent="."]
+position = Vector3(-3.0, 0.4, 0)
+script = ExtResource("Creature")
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(-3.4, 0, 1.9)

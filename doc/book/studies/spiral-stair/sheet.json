@@ -1,0 +1,269 @@
+{
+  "godot": "4.6-stable (official)",
+  "pairs_plan": {
+    "closest": "0.10 vs 0.18",
+    "farthest": "0.10 vs 0.18",
+    "pairs": {
+      "0.10 vs 0.18": {
+        "differ_pct": 0.0,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "0.10 vs 0.30": {
+        "differ_pct": 0.0,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "0.10 vs 0.60": {
+        "differ_pct": 0.0,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "0.18 vs 0.30": {
+        "differ_pct": 0.0,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "0.18 vs 0.60": {
+        "differ_pct": 0.0,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      },
+      "0.30 vs 0.60": {
+        "differ_pct": 0.0,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.0,
+        "outline_pct": 0.0,
+        "outline_px": 0.0
+      }
+    }
+  },
+  "pairs_plan_to_the_pixel": {
+    "0.10 vs 0.18": {
+      "largest_difference_of_765": 1,
+      "of": 691200,
+      "pixels_not_the_same": 297
+    },
+    "0.10 vs 0.30": {
+      "largest_difference_of_765": 1,
+      "of": 691200,
+      "pixels_not_the_same": 752
+    },
+    "0.10 vs 0.60": {
+      "largest_difference_of_765": 1,
+      "of": 691200,
+      "pixels_not_the_same": 1832
+    },
+    "0.18 vs 0.30": {
+      "largest_difference_of_765": 1,
+      "of": 691200,
+      "pixels_not_the_same": 455
+    },
+    "0.18 vs 0.60": {
+      "largest_difference_of_765": 1,
+      "of": 691200,
+      "pixels_not_the_same": 1535
+    },
+    "0.30 vs 0.60": {
+      "largest_difference_of_765": 1,
+      "of": 691200,
+      "pixels_not_the_same": 1080
+    }
+  },
+  "pairs_side": {
+    "closest": "0.10 vs 0.18",
+    "farthest": "0.18 vs 0.60",
+    "pairs": {
+      "0.10 vs 0.18": {
+        "differ_pct": 5.21,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.27,
+        "outline_pct": 3.94,
+        "outline_px": 42.46
+      },
+      "0.10 vs 0.30": {
+        "differ_pct": 7.65,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.57,
+        "outline_pct": 7.07,
+        "outline_px": 66.62
+      },
+      "0.10 vs 0.60": {
+        "differ_pct": 13.05,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.34,
+        "outline_pct": 12.7,
+        "outline_px": 90.71
+      },
+      "0.18 vs 0.30": {
+        "differ_pct": 7.13,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.68,
+        "outline_pct": 5.45,
+        "outline_px": 51.29
+      },
+      "0.18 vs 0.60": {
+        "differ_pct": 13.57,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 0.56,
+        "outline_pct": 13.01,
+        "outline_px": 92.91
+      },
+      "0.30 vs 0.60": {
+        "differ_pct": 12.59,
+        "elsewhere_pct": 0.0,
+        "inside_pct": 1.22,
+        "outline_pct": 11.37,
+        "outline_px": 81.19
+      }
+    }
+  },
+  "pairs_side_0.08_apart": {
+    "0.10 vs 0.18": 5.21,
+    "0.22 vs 0.30": 6.2,
+    "0.52 vs 0.60": 7.51
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "sheet_png": {
+    "bytes": 64855,
+    "height": 1076,
+    "width": 1292
+  },
+  "standpoints": {
+    "plan": {
+      "from": "straight above",
+      "metres_across_the_still": 4.4,
+      "projection": "orthogonal"
+    },
+    "side": {
+      "looking_at_height_m": 2.70000004768372,
+      "metres_from_the_middle": 9.0,
+      "projection": "perspective"
+    }
+  },
+  "still": {
+    "differ_threshold_of_255": 25,
+    "fov": 40.0,
+    "height": 720,
+    "width": 960
+  },
+  "strip": {
+    "changed_most": "5 degrees read as radians",
+    "png": {
+      "bytes": 39022,
+      "height": 266,
+      "width": 1940
+    },
+    "steps": [
+      {
+        "differs_from_step_before_pct": 0.0,
+        "step": "1 one tread on the circle",
+        "treads": 1
+      },
+      {
+        "differs_from_step_before_pct": 13.93,
+        "step": "2 nine by the function",
+        "treads": 9
+      },
+      {
+        "differs_from_step_before_pct": 1.9,
+        "feet_at_m": 0.0,
+        "step": "3 the walker, sent: through",
+        "walk_ended": "arrived"
+      },
+      {
+        "differs_from_step_before_pct": 4.47,
+        "feet_at_m": 1.62,
+        "step": "4 a collider each: at the top",
+        "walk_ended": "arrived"
+      },
+      {
+        "differs_from_step_before_pct": 26.72,
+        "feet_at_m": 0.0,
+        "step": "5 degrees read as radians",
+        "walk_ended": "blocked"
+      },
+      {
+        "differs_from_step_before_pct": 24.88,
+        "feet_at_m": 1.65,
+        "step": "6 the ramp: one surface",
+        "walk_ended": "arrived"
+      }
+    ]
+  },
+  "the_stair_covers_pct_of_the_still": {
+    "plan 0.10": 19.37,
+    "plan 0.18": 19.37,
+    "plan 0.30": 19.37,
+    "plan 0.60": 19.37,
+    "side 0.10": 3.91,
+    "side 0.18": 4.74,
+    "side 0.30": 6.2,
+    "side 0.60": 10.79
+  },
+  "walks": {
+    "ramp 0.10": {
+      "feet_at_m": 0.91,
+      "top_m": 0.9,
+      "walk_ended": "arrived"
+    },
+    "ramp 0.18": {
+      "feet_at_m": 1.65,
+      "top_m": 1.62,
+      "walk_ended": "arrived"
+    },
+    "ramp 0.30": {
+      "feet_at_m": 2.69,
+      "top_m": 2.7,
+      "walk_ended": "arrived"
+    },
+    "ramp 0.60": {
+      "feet_at_m": 0.23,
+      "top_m": 5.4,
+      "walk_ended": "blocked"
+    },
+    "stair 0.10": {
+      "feet_at_m": 0.9,
+      "top_m": 0.9,
+      "walk_ended": "arrived"
+    },
+    "stair 0.18": {
+      "feet_at_m": 1.62,
+      "top_m": 1.62,
+      "walk_ended": "arrived"
+    },
+    "stair 0.30": {
+      "feet_at_m": 2.7,
+      "top_m": 2.7,
+      "walk_ended": "arrived"
+    },
+    "stair 0.60": {
+      "feet_at_m": 0.0,
+      "top_m": 5.4,
+      "walk_ended": "blocked"
+    }
+  },
+  "well": {
+    "bytes": 52349,
+    "eyes_at": [
+      -0.07,
+      3.22,
+      -1.18
+    ],
+    "looking_at": [
+      0.3,
+      0.0,
+      0.2
+    ]
+  }
+}

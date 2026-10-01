@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://guests/colour-faces/palette.gd" id="Palette"]
+
+[resource]
+script = ExtResource("Palette")
+first = Color(0.7764706, 1, 0.23921569, 1)
+second = Color(0.22352941, 0, 0.7607843, 1)
+space = "oklab"
+steps = 9
+because = "Lime and its complement, mixed in OKLab: the middle keeps some colour where RGB turns grey, and the way there stays between green and blue where HSV crosses red."
