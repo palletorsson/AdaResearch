@@ -1,0 +1,389 @@
+{
+ "note": "Added 2026-10-01 after two prompts from Palle: a 'Generation Process' slide (a body written as a chain of operations) and 'see mesh grammar in the project'. Two operations (extrude, displace), a process strip per assemblage, and the project's own MeshGrammar as the general tool behind both. Loaded by build_v2.py.",
+ "mesh_grammar": {
+  "what": "MeshGrammar is the project's own grammar of mesh operations (commons/mesh_grammar/): a seed mesh, a list of rules, applied generation by generation. A rule is a selector (which faces: all, upward, random, tagged) plus an operation plus parameters. The grammar keeps a snapshot of every generation, so a body built with it carries its own process strip.",
+  "classes": "MeshGrammar (set_seed, add_rule, apply_step, get_mesh_at_generation), MeshData (from_arrays, from_array_mesh, create_cube, create_icosahedron, to_array_mesh, topology_report), MeshRule, MeshSelector (all_faces, by_normal_direction, by_random, by_tag), and 28 operations in operations/.",
+  "slide_to_grammar": [
+   {
+    "slide": "Extrude Mesh",
+    "grammar": "ExtrudeFaceOp: distance, scale (below 1 tapers)"
+   },
+   {
+    "slide": "Scale Elements",
+    "grammar": "ScaleFaceOp: scale; InsetFaceOp: amount"
+   },
+   {
+    "slide": "Voronoi Texture, Wave Texture (as displacement)",
+    "grammar": "NoiseDisplaceOp: amplitude, frequency, noise_type (simplex, perlin, cellular), direction (normal, radial, y)"
+   },
+   {
+    "slide": "subdivided seed",
+    "grammar": "SplitFaceOp: pattern (midpoint, fan); MeshData.create_icosahedron"
+   },
+   {
+    "slide": "Set Material",
+    "grammar": "PaintByTagOp"
+   },
+   {
+    "slide": "Mesh Bevel",
+    "grammar": "none; InsetFaceOp is the nearest"
+   },
+   {
+    "slide": "Mesh Boolean",
+    "grammar": "none; CSG, at ch44 Combine"
+   }
+  ],
+  "where_to_see": "On the spine: LSystems_Grammar_Lab (mesh_grammar_lsystem_tree), LSystems_Architecture (coral fingers, petal flower), ProceduralGeneration_Reaction_Diffusion_Systems (detailed bulge). Off the spine: Gallery_MeshGrammar and the encyclopedia's /mesh-grammar-gallery hold all twenty-one.",
+  "in_the_course": "Used through one supplied function at ch45 (the learner has no dictionaries yet), used directly at ch46, opened at ch43, where a rule is read as a selector, an operation and its parameters.",
+  "as_placed": "Measured 2026-10-01, commit 0f506f14b. Until that day the twenty-one mesh_grammar_* registry names all loaded one scene with no rules, so placed in a hall each was the bare seed. Nineteen now have a scene of their own that names a recipe, and the demo and the halls build from one shared list. The sphere seed was repaired in the same commit: it was wound inward and was not closed, so every operation along the normal grew into it; it is now a closed surface wound outward. In stills, all nine works this course points at read as their name. Nine of the twenty recipes are unseeded, so two builds of one name differ; branching coral is a bare seed in about one build of thirty-six. A draft hall, PG_Mesh_Grammar (not in any sequence), shows fourteen grammar steps on the icosahedron."
+ },
+ "strip": "The process strip: for an assemblage, and for any body made by more than one operation, one still after each operation with the operation named under it, in order. It is the body's recipe, and it is what you hand in. A body built with MeshGrammar gets its strip for free: the grammar keeps every generation.",
+ "source": {
+  "name": "A 'Generation Process' slide, supplied by Palle on 2026-10-01: two geometry-node recipes for climbing holds, organic (cube, Voronoi texture, wave texture, scale elements, boolean, material) and geometric (curve circle, extrude, scale elements, bevel, boolean, material); and the project's MeshGrammar (commons/mesh_grammar/), which already holds the same operations as rules",
+  "role": "the process strip; the operations extrude (ch45) and displace (ch46)"
+ },
+ "chapters": {
+  "ch45": {
+   "id": "ch45",
+   "part": "p1",
+   "title": "Extrude: the plane is pulled into a solid",
+   "spine": [
+    "primitives"
+   ],
+   "verb": "extrude",
+   "halls": [
+    {
+     "map": "Primitives_Polythedra",
+     "role": "carrier"
+    },
+    {
+     "map": "Point_Triangle_Context",
+     "role": "field trip"
+    }
+   ],
+   "works": [
+    {
+     "token": "mesh_grammar_extruded_spire",
+     "note": "two extrusions of the upward faces, each scaled down: the same two numbers as this chapter"
+    },
+    {
+     "token": "mesh_grammar_inset_towers",
+     "note": "inset, then extrude the inset: the order of operations matters"
+    }
+   ],
+   "code_new": [],
+   "code_returns": [
+    "arrays",
+    "loops",
+    "vectors",
+    "functions",
+    "parameters",
+    "return",
+    "surface_tool",
+    "normals",
+    "collision"
+   ],
+   "body": "Your walked outline from ch07, pulled up by a height into a solid. For every edge of the outline, a wall of two triangles between the edge and its copy above; the fan you already have is the top cap, and the same fan wound the other way is the bottom. A second number, the taper, scales the upper outline toward its centre: 1 gives a prism, 0 a pyramid. One function of your own, extrude(outline, height, taper), returns the mesh, and a collider made from it lets a body stand on top of your walk. Then the same move as the project makes it: a supplied function hands your solid to MeshGrammar, which pushes its upward faces out again by a distance and a scale, the same two numbers, and returns a spire.",
+   "argument": {
+    "axis": "taper of the upper outline, same walk and height",
+    "values": [
+     "1.0: a prism",
+     "0.6: a frustum",
+     "0.2",
+     "0.0: a pyramid"
+    ],
+    "predict": "Seen from the side, 1.0 and 0.6 will look most alike: both are flat-topped blocks, and only the slope of the walls differs. 0.0 is the odd one: the top cap has no area and the solid ends in a point. Write the pair you expect, and where the marble will rest on each, before you render.",
+    "claim": "One outline and two numbers make a family of solids; the cube of the next chapter is this function called with a square and a taper of 1."
+   },
+   "debt": "An extrusion remembers only its outline. Every wall is flat, every section has the same shape, and the solid cannot bulge, lean or twist: it is the default body of drawing software, and most buildings on a screen are extrusions of their plan. The walls also want their own normals, so each wall carries four vertices of its own; a solid that looks like one piece is a set of flat pieces that do not share a corner.",
+   "place": "Stand on top of your walk: the marble dropped over the solid rests on the cap at the height you chose, and rolls off the pyramid. In the headset it is a plinth made from your own path, at the height of your hand.",
+   "godot": [
+    "SurfaceTool: two triangles per wall, one fan per cap",
+    "a reversed fan for the bottom (winding, ch07)",
+    "hard edges: walls do not share vertices with caps",
+    "create_trimesh_shape() from the returned mesh",
+    "a centroid as the taper's centre",
+    "MeshData.from_array_mesh() and ExtrudeFaceOp, behind one supplied function"
+   ],
+   "borrows": [
+    {
+     "part": "spire(mesh, distance, scale, times) -> ArrayMesh: hands a mesh to MeshGrammar, extrudes its upward faces 'times' times, returns the result (wraps MeshData.from_array_mesh, MeshSelector.by_normal_direction and ExtrudeFaceOp; opened at ch43)",
+     "depth": "use"
+    },
+    {
+     "part": "MeshGrammar, a copy of commons/mesh_grammar/ supplied in the kit",
+     "depth": "use"
+    }
+   ],
+   "lineage": {
+    "processing": "Learning Processing beginShape / endShape, previewed [mem]",
+    "noc": "none",
+    "application_wp": "pre-WP foundation; WP2 queer meshes, previewed",
+    "klee": "I.4 medial lines whose finished figures read as planes; II dimension: the third direction [V via v1]",
+    "reference": "The 'Generation Process' slide (a geometric hold: curve circle, extrude mesh, scale elements, bevel, boolean, material); ExtrudeFaceOp's header: 'Push selected faces outward along their normal ... scale below 1.0 = taper' [V commons/mesh_grammar/operations/extrude_face_op.gd]; Form+Code 'Parameterize' [V]"
+   },
+   "departure": null,
+   "project_step": "A plinth in your room, extruded from a walk of your own, with its height and taper written on it; put one earlier body on top of it.",
+   "tracks": [
+    "long"
+   ]
+  },
+  "ch46": {
+   "id": "ch46",
+   "part": "p6",
+   "title": "Displace: a body pushed along its normals by a field",
+   "spine": [
+    "noise"
+   ],
+   "verb": "displace",
+   "halls": [
+    {
+     "map": "Noise_Inside_Noise",
+     "role": "carrier"
+    },
+    {
+     "map": "Noise_One",
+     "role": "field trip"
+    },
+    {
+     "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+     "role": "field trip"
+    }
+   ],
+   "works": [
+    {
+     "token": "mesh_grammar_crumpled",
+     "note": "Perlin noise pushes vertices along their normals"
+    },
+    {
+     "token": "mesh_grammar_noise_sculpture",
+     "note": "cellular noise, pushed radially"
+    },
+    {
+     "token": "mesh_grammar_detailed_bulge",
+     "note": "split every face first, then deform: resolution before the push; placed in the reaction-diffusion hall"
+    }
+   ],
+   "code_new": [],
+   "code_returns": [
+    "noise",
+    "packed_arrays",
+    "dictionaries",
+    "surface_tool",
+    "normals",
+    "collision",
+    "loops",
+    "classes",
+    "export",
+    "seeds"
+   ],
+   "body": "Take a body you have made and move every vertex along its own normal by the value of a field sampled at that vertex. First by hand, on your own mesh: read its vertices and normals as packed arrays, add normal times noise times an amplitude to each position, generate the normals again, rebuild the collider. Then as the project does it: a MeshGrammar with an icosahedron as its seed and two rules, SplitFaceOp to give the field somewhere to act and NoiseDisplaceOp to push. A sphere under cellular noise becomes a pebble; under a sine it becomes a ripple; your extruded plinth under either stops being an extrusion. Terrain (ch12) lifted a flat grid; this bends any body, and it is the organic half of making form.",
+   "argument": {
+    "axis": "how many times the faces are split before the push, same field, seed and amplitude",
+    "values": [
+     "0 splits: 20 faces",
+     "1 split: 80 faces",
+     "2 splits: 320 faces",
+     "3 splits: 1280 faces"
+    ],
+    "predict": "2 and 3 splits will look most alike: past a certain density the field is fully drawn and more faces change nothing you can see. With no split the body stays an icosahedron with its corners moved, because the field has almost nowhere to act. Write the pair you expect, and the split at which you think the body stops changing, before you render.",
+    "claim": "A field can only show where there are vertices to move: resolution is the price of organic form, and it is paid in triangles."
+   },
+   "debt": "Polycount against smooth deformation, the application's own sentence, measured on your body. And the blob: bodies displaced by noise resemble each other more than they resemble what they were, so a room of them reads as one aesthetic. Push further than the body's own curvature and the surface passes through itself, which no picture from outside will show you; the marble will.",
+   "place": "Grip it: an organic hold. On the desktop, carry it and let the marble settle in its hollows; in the headset, hold it in your hand and turn it. Then put it on the plinth from ch45, a geometric body carrying an organic one.",
+   "godot": [
+    "mesh.surface_get_arrays(0): ARRAY_VERTEX and ARRAY_NORMAL as packed arrays",
+    "FastNoiseLite.get_noise_3dv(position); TYPE_CELLULAR for the pebble",
+    "MeshGrammar: set_seed, add_rule, apply_step",
+    "SplitFaceOp {pattern: midpoint}, NoiseDisplaceOp {amplitude, frequency, noise_type, direction}",
+    "get_mesh_at_generation(g).to_array_mesh() for each tile of the strip",
+    "the collider rebuilt after the push"
+   ],
+   "borrows": [
+    {
+     "part": "MeshGrammar, a copy of commons/mesh_grammar/ supplied in the kit: MeshData, MeshSelector, SplitFaceOp, NoiseDisplaceOp, used directly with their parameter dictionaries (opened at ch43)",
+     "depth": "use"
+    }
+   ],
+   "lineage": {
+    "processing": "none",
+    "noc": "ch0 Perlin noise, applied to a surface [V lineage map]",
+    "application_wp": "WP1 Basic Elements: Perlin noise, Voronoi diagrams, sine curves; 'the trade-off between polygons and the possibility of deforming a body smoothly'",
+    "klee": "none: out of the sketchbook",
+    "reference": "The 'Generation Process' slide (an organic hold: cube, Voronoi texture, wave texture, scale elements, boolean, material); NoiseDisplaceOp's header: 'Creates organic crumpled/rough surfaces. Inspired by: erupting ceramic vessels, cabbage bowls' [V commons/mesh_grammar/operations/noise_displace_op.gd]; Queer 3D World, layer 2: 'noise algorithms produced a blob aesthetic' [V QUEER3D digest]; Noise_One's relief shader, the same push done on the GPU (opened at ch30)"
+   },
+   "departure": null,
+   "project_step": "One displaced body in your room, made from a body you already had, with the field, the seed and the number of splits written beside it, and the split at which it stopped changing.",
+   "tracks": [
+    "long"
+   ]
+  }
+ },
+ "edits": {
+  "ch33": {
+   "body_append": " MeshGrammar is the same idea with faces for symbols: its rules rewrite a mesh generation by generation, and its own header says it is modelled after the L-system. LSystems_Grammar_Lab places one such tree beside the string grammar.",
+   "works": [
+    {
+     "token": "mesh_grammar_lsystem_tree",
+     "note": "a tree grown by rules on faces, placed in LSystems_Grammar_Lab"
+    },
+    {
+     "token": "mesh_grammar_coral_fingers",
+     "note": "tube branches from upward faces, placed in LSystems_Architecture"
+    }
+   ]
+  },
+  "ch43": {
+   "body_append": " This is also where MeshGrammar, borrowed since ch45, is opened: a rule is a selector, an operation and a dictionary of parameters, and the frame may be grown by it (TubeBranchOp over two generations is the Branching Coral) as well as by your own turtle.",
+   "works": [
+    {
+     "token": "mesh_grammar_branching_coral",
+     "note": "second-generation branches grow from the tips of the first"
+    },
+    {
+     "token": "mesh_grammar_ca_growth",
+     "note": "a cellular automaton on the faces decides which ones extrude"
+    }
+   ],
+   "borrows": [
+    {
+     "part": "MeshGrammar (commons/mesh_grammar/): MeshRule, MeshSelector and the operations, read and changed here",
+     "depth": "understand"
+    }
+   ]
+  }
+ },
+ "process": {
+  "ch45": [
+   "the walked outline (ch07)",
+   "a wall for every edge",
+   "the top cap: the fan",
+   "the bottom cap: the fan reversed",
+   "taper the upper outline",
+   "collider",
+   "extrude the top again: a spire (ExtrudeFaceOp, borrowed)"
+  ],
+  "ch42": [
+   "point (ch02)",
+   "+ plane (ch07)",
+   "+ cube (ch08)",
+   "+ limb (ch13)",
+   "pivots set",
+   "a chain",
+   "every pivot turned"
+  ],
+  "ch18": [
+   "the cube, pulled",
+   "stood on its diagonal",
+   "two corners cut",
+   "a drafted answer",
+   "a found body arrives",
+   "its unit and its origin"
+  ],
+  "ch10": [
+   "a 4 x 4 source",
+   "a symmetry rule",
+   "pixels into an Image",
+   "an ImageTexture",
+   "UV scale over the floor",
+   "dress each part of the assemblage"
+  ],
+  "ch46": [
+   "the seed: an icosahedron",
+   "split every face (SplitFaceOp), k times",
+   "sample the field at each vertex",
+   "push along the normal (NoiseDisplaceOp)",
+   "generate the normals again",
+   "rebuild the collider",
+   "paint"
+  ],
+  "ch25": [
+   "noise terrain (ch12)",
+   "stones: family members (ch14)",
+   "the rim shader as their skin (ch30)",
+   "a state machine per stone",
+   "the walker (ch19)",
+   "HUD and restart",
+   "export"
+  ],
+  "ch43": [
+   "axiom and rules (ch33)",
+   "the turtle draws the frame",
+   "recursion branches it (ch32)",
+   "the automaton gates solid and ghost (ch31)",
+   "hang the family on the frames (ch14)",
+   "one seed for all three"
+  ],
+  "ch44": [
+   "two family members",
+   "union",
+   "the implicit body's tunnel (ch36)",
+   "subtraction",
+   "the scanned shell (ch18)",
+   "intersection",
+   "bake the mesh and the collider",
+   "material"
+  ],
+  "ch41": [
+   "choose the families",
+   "their sheets, predictions and claims",
+   "one public sculpture",
+   "provenance records",
+   "place them in the hall",
+   "export to desktop and Quest"
+  ],
+  "ch09": [
+   "one cube",
+   "a row",
+   "the floor",
+   "two colours",
+   "hue by index",
+   "a ghost cell",
+   "spacing opened"
+  ],
+  "ch14": [
+   "a sphere, written out",
+   "the same, as a class",
+   "a row of four",
+   "hung and named",
+   "the axis by name: four alike",
+   "the right name"
+  ]
+ },
+ "decision": "Decide, and say why: follow or settle. If your prediction was wrong, or two ways of looking disagreed (the picture and the marble, the editor and the exported build, one camera and another), you may follow it: change one more thing and look again. Or you may settle and build your body. Either is a good decision; a stop is part of the work. Write which, and the reason, in your field note: question, baseline, intervention, prediction, observation, another cause, decision, reason, how to run it again.",
+ "method": {
+  "name": "Palle Torsson's QFEP method handoff, 1 October 2026",
+  "what": "A proposed artistic research method for deciding when to hold an organisation together and when to reopen it: establish a configuration, observe it, make a limited intervention, inspect the consequence, decide what to follow, and either widen the inquiry or provisionally consolidate it. The course's argument was already prediction, comparison and claim; the method adds the decision, the alternative explanation and the kept trajectory.",
+  "cautions": [
+   "Keep what was observed, what is concluded from it and what is guessed on separate lines.",
+   "Do not say entropy rose unless a probability distribution and an estimator have been stated. Variational free energy, thermodynamic entropy, uncertainty in beliefs, diversity among samples and visual complexity are different quantities.",
+   "QFEP is used here as a proposed method, not as an experimentally validated replacement for variational free energy; the QFE equation is heuristic.",
+   "An ordinary cause (a collision margin, a clipping camera) does not make an observation less worth keeping.",
+   "A screenshot alone cannot show that something can be passed; use a body (the marble, the walker)."
+  ],
+  "template": "doc/book/course/opening/FIELD_NOTE.md",
+  "worked_note": "doc/book/course/field_notes/2026-10-01-pyramid-family.md"
+ },
+ "plate": {
+  "title": "The plate",
+  "what": "The course opens with one picture and returns to it at the end of every part: plate 31 of Ernst Haeckel's Kunstformen der Natur (1904), Cyrtoidea, nine radiolarian shells. Read as rules it is one body with about ten numbers, shown nine times: a family on a comparison sheet.",
+  "citation": "Ernst Haeckel and Adolf Giltsch, Kunstformen der Natur, Tafel 31, Cyrtoidea (Flaschenstrahlinge), 1904. Public domain.",
+  "link": "https://commons.wikimedia.org/wiki/File:Haeckel_Cyrtoidea.jpg",
+  "lesson": "doc/book/course/opening/PLATE.md",
+  "lineage": "Haeckel drew the forms. D'Arcy Thompson (On Growth and Form, 1917) read a form as a diagram of forces and turned one form into another by transforming its grid. Turing (The Chemical Basis of Morphogenesis, 1952) asked whether a rule could grow them; his student Bernard Richards solved the equations on a sphere and matched radiolaria Haeckel drew for the Challenger report. Palle Torsson takes Turing as the project's muse. The three are the course's three ways of working: decode, transform, grow.",
+  "remake": "commons/artifacts/cyrtoid_by_rule/ (lookup cyrtoid_by_rule; axes form and stage). Two rules were added to the mesh grammar for it on 2026-10-01: MeshData.create_lathe and CellInsetOp. Gate: commons/testing/probe_lathe_cells.gd.",
+  "question": "What of the plate can you make now?",
+  "by_part": {
+   "p1": "The outline: one half of a shell as a recorded line, from the horn to the lip, and the axis beside it. With the turn handed to you as one function, a solid vase with joints (stage: profile, turned).",
+   "p2": "The joints as parts under one root: head, chest, belly. And Thompson's move: shift the points of one profile and the helmet becomes the flask.",
+   "p3": "Counting round the axis: three feet, eighteen teeth. Then the shell as one class with its numbers, and the plate as a comparison sheet of one family (form).",
+   "p4": "The pores: cells of six, opened, wider toward the mouth; bone white on black. Here the vase becomes a skeleton (stage: pored).",
+   "p5": "Feet that curve, drawn as a path made of steps. A shell that sinks and drifts under a force you wrote.",
+   "p6": "Bristles from a seeded chance (stage: bristled). Pores whose size follows a noise field, as on the large shell in the middle of the plate. A shader for the engraved line.",
+   "p7": "Turing's question: do not place the pores and spines; let a rule decide where they come, and open and branch what it marks. One individual saved as a file of numbers.",
+   "p8": "A wall with thickness, and pores made by taking away. Many shells drifting together.",
+   "p9": "A hall of shells in the collective museum, each with its numbers shown, and what the plate hides said beside it."
+  },
+  "not_reached": "The remake's wall is a sheet with no thickness, its pores are hexagons where the plate has rounded holes, its feet are straight, and it has no wings. Each is a rule the project does not have yet."
+ }
+}

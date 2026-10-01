@@ -1,0 +1,345 @@
+{
+  "checks": [
+    {
+      "name": "action move_left exists, bound to A, Left",
+      "passed": true
+    },
+    {
+      "name": "action move_right exists, bound to D, Right",
+      "passed": true
+    },
+    {
+      "name": "action move_forward exists, bound to W, Up",
+      "passed": true
+    },
+    {
+      "name": "action move_backward exists, bound to S, Down",
+      "passed": true
+    },
+    {
+      "name": "action pause exists, bound to Space",
+      "passed": true
+    },
+    {
+      "name": "action close exists, bound to Enter",
+      "passed": true
+    },
+    {
+      "name": "action fill exists, bound to F",
+      "passed": true
+    },
+    {
+      "name": "action drop exists, bound to M",
+      "passed": true
+    },
+    {
+      "name": "action look exists, bound to V",
+      "passed": true
+    },
+    {
+      "name": "line.tscn still runs on its own: readout 1.50 m",
+      "passed": true
+    },
+    {
+      "name": "trace.tscn still runs on its own: 1 kept, B carries mover.gd",
+      "passed": true
+    },
+    {
+      "name": "the study starts open with an empty list",
+      "passed": true
+    },
+    {
+      "name": "Trace's A, B, Segment, Readout, Strip and Record are inherited; B carries mover.gd",
+      "passed": true
+    },
+    {
+      "name": "the root runs plane.gd",
+      "passed": true
+    },
+    {
+      "name": "Face has a material and no mesh yet; FaceBody's shape is empty",
+      "passed": true
+    },
+    {
+      "name": "the marble carries marble.gd and waits frozen on the floor",
+      "passed": true
+    },
+    {
+      "name": "the Under camera is supplied and not current",
+      "passed": true
+    },
+    {
+      "name": "the first frame keeps B's starting position",
+      "passed": true
+    },
+    {
+      "name": "holding still adds nothing (30 live frames); the strip draws nothing",
+      "passed": true
+    },
+    {
+      "name": "holding move_right moves B over live frames",
+      "passed": true
+    },
+    {
+      "name": "the Record label reads open",
+      "passed": true
+    },
+    {
+      "name": "look held: the Under camera is current; released: the borrowed camera is",
+      "passed": true
+    },
+    {
+      "name": "close with 1 kept: refused, the study stays open",
+      "passed": true
+    },
+    {
+      "name": "fill on an open study: no face",
+      "passed": true
+    },
+    {
+      "name": "close with 2 kept: refused (a loop needs three edges)",
+      "passed": true
+    },
+    {
+      "name": "close with 3 kept: closed, and the recorder stops",
+      "passed": true
+    },
+    {
+      "name": "closed: the outline has 13 entries, one more than the list",
+      "passed": true
+    },
+    {
+      "name": "the outline's last entry is the first kept position: first == last joined",
+      "passed": true
+    },
+    {
+      "name": "the list itself is unchanged by closing: 12 kept",
+      "passed": true
+    },
+    {
+      "name": "the strip draws the closed outline: 13 vertices, last == first, one line strip",
+      "passed": true
+    },
+    {
+      "name": "around = route + straight: 5.80 m, and the Record says so",
+      "passed": true
+    },
+    {
+      "name": "closed: moving B 1.1 m keeps nothing",
+      "passed": true
+    },
+    {
+      "name": "closed: even with recording on again, nothing is kept",
+      "passed": true
+    },
+    {
+      "name": "before fill, a marble dropped inside the outline falls to the floor: rests at 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "fill: Face.mesh is an ArrayMesh with one surface of triangles",
+      "passed": true
+    },
+    {
+      "name": "12 kept positions make 10 triangles, 30 vertices (n - 2, three each)",
+      "passed": true
+    },
+    {
+      "name": "every triangle shares the first kept position: a fan (p0, pi, pi+1)",
+      "passed": true
+    },
+    {
+      "name": "normals exist, one per vertex, and point up (the walk was clockwise from above)",
+      "passed": true
+    },
+    {
+      "name": "Plane(v0, v1, v2).normal agrees with the generated normal, triangle by triangle (clockwise is the front)",
+      "passed": true
+    },
+    {
+      "name": "the material culls back faces (one side drawn)",
+      "passed": true
+    },
+    {
+      "name": "FaceBody's shape is a trimesh of the same 10 triangles, with backface collision on",
+      "passed": true
+    },
+    {
+      "name": "the Record counts the triangles",
+      "passed": true
+    },
+    {
+      "name": "without generate_normals() the surface carries no NORMAL at all",
+      "passed": true
+    },
+    {
+      "name": "after fill, the marble rests ON the plane: 1.218 m (1.12 + 0.10 radius), not below it",
+      "passed": true
+    },
+    {
+      "name": "the Record reports the marble's height",
+      "passed": true
+    },
+    {
+      "name": "a ray from above meets the plane at y = 1.12",
+      "passed": true
+    },
+    {
+      "name": "dropped outside the walk, the marble falls past the plane to the floor: 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "the drop key puts the marble one metre above B",
+      "passed": true
+    },
+    {
+      "name": "and it comes to rest on the plane under B: 1.218 m",
+      "passed": true
+    },
+    {
+      "name": "side 0 clockwise: front up, normals up, culls back faces",
+      "passed": true
+    },
+    {
+      "name": "side 0: the marble still rests at 1.218 m and rays from above and below both meet the plane: the collider reads triangles, not winding or cull mode",
+      "passed": true
+    },
+    {
+      "name": "side 1 clockwise flipped normals: front up, normals down, culls back faces",
+      "passed": true
+    },
+    {
+      "name": "side 1: the marble still rests at 1.218 m and rays from above and below both meet the plane: the collider reads triangles, not winding or cull mode",
+      "passed": true
+    },
+    {
+      "name": "side 2 counter-clockwise: front down, normals down, culls back faces",
+      "passed": true
+    },
+    {
+      "name": "side 2: the marble still rests at 1.218 m and rays from above and below both meet the plane: the collider reads triangles, not winding or cull mode",
+      "passed": true
+    },
+    {
+      "name": "side 3 counter-clockwise double-sided: front down, normals down, draws both sides",
+      "passed": true
+    },
+    {
+      "name": "side 3: the marble still rests at 1.218 m and rays from above and below both meet the plane: the collider reads triangles, not winding or cull mode",
+      "passed": true
+    },
+    {
+      "name": "backface_collision off (the default), counter-clockwise: a ray from above misses, from below hits, and the marble falls through to 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "backface_collision off, clockwise: a ray from above hits, from below misses: by default the body shares the eye's side",
+      "passed": true
+    },
+    {
+      "name": "smooth and flat normals are identical on a planar fan (30 normals): no visible pair there",
+      "passed": true
+    },
+    {
+      "name": "capacity 5, 8 positions kept: the start has left, and the outline closes to the 4th, the oldest still held",
+      "passed": true
+    },
+    {
+      "name": "the L from B: 4 triangles, and the marble in the notch rests on overspill at 1.218 m; from A it falls through to 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: from above the counter-clockwise face changes under 0.1% of the frame and from below over 2%; the clockwise face the reverse (rendered by sheet.gd)",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the closest pair from above is clockwise and counter-clockwise double-sided, as predicted",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: flipped normals keep the face where it is and darken it; no normals at all change under 0.1% of the frame",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: only the clockwise faces cast a shadow on the floor",
+      "passed": true
+    }
+  ],
+  "godot": "4.6-stable (official)",
+  "measured": {
+    "L_from_A_marble_in_notch_m": 0.098,
+    "L_from_B_marble_in_notch_m": 1.218,
+    "around_m": 5.8,
+    "marble_rest_on_plane_m": 1.218,
+    "sheet_above": {
+      "clockwise": {
+        "face_brightness": 1.0,
+        "face_share_pct": 5.53,
+        "shadow_share_pct": 0.78,
+        "value": "clockwise",
+        "view": "above"
+      },
+      "clockwise flipped normals": {
+        "face_brightness": 0.8,
+        "face_share_pct": 5.52,
+        "shadow_share_pct": 0.79,
+        "value": "clockwise flipped normals",
+        "view": "above"
+      },
+      "counter-clockwise": {
+        "face_brightness": 0.0,
+        "face_share_pct": 0.0,
+        "shadow_share_pct": 0.0,
+        "value": "counter-clockwise",
+        "view": "above"
+      },
+      "counter-clockwise double-sided": {
+        "face_brightness": 1.0,
+        "face_share_pct": 5.54,
+        "shadow_share_pct": 0.0,
+        "value": "counter-clockwise double-sided",
+        "view": "above"
+      }
+    },
+    "sheet_below": {
+      "clockwise": {
+        "face_brightness": 0.0,
+        "face_share_pct": 0.0,
+        "shadow_share_pct": 0.1,
+        "value": "clockwise",
+        "view": "below"
+      },
+      "clockwise flipped normals": {
+        "face_brightness": 0.0,
+        "face_share_pct": 0.0,
+        "shadow_share_pct": 0.1,
+        "value": "clockwise flipped normals",
+        "view": "below"
+      },
+      "counter-clockwise": {
+        "face_brightness": 0.8,
+        "face_share_pct": 15.24,
+        "shadow_share_pct": 0.26,
+        "value": "counter-clockwise",
+        "view": "below"
+      },
+      "counter-clockwise double-sided": {
+        "face_brightness": 0.8,
+        "face_share_pct": 15.25,
+        "shadow_share_pct": 0.26,
+        "value": "counter-clockwise double-sided",
+        "view": "below"
+      }
+    },
+    "sheet_closest_pair_above": "0 vs 3",
+    "sheet_pairs_above_pct": {
+      "0 vs 1": 5.54,
+      "0 vs 2": 6.31,
+      "0 vs 3": 0.82,
+      "1 vs 2": 6.31,
+      "1 vs 3": 6.32,
+      "2 vs 3": 5.54
+    }
+  },
+  "passed": true
+}

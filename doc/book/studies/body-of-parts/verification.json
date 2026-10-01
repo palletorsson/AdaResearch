@@ -1,0 +1,975 @@
+{
+  "checks": [
+    {
+      "name": "the project is named 'A Body of Parts' and its main scene is body.tscn",
+      "passed": true
+    },
+    {
+      "name": "the nine actions exist with their keys: A/D/W/S and the arrows, Space, Enter, F, M, V",
+      "passed": true
+    },
+    {
+      "name": "each of the four part scenes loads as a PackedScene: point, plane, cube, limb",
+      "passed": true
+    },
+    {
+      "name": "instantiate() gives a new node every time: two instances of the cube part are two nodes",
+      "passed": true
+    },
+    {
+      "name": "an instance that was never added is not in the tree, and its _ready() has not run: the cube has no mesh yet",
+      "passed": true
+    },
+    {
+      "name": "added to the tree, each part is one child of its parent, named Point, Plane, Cube and Limb",
+      "passed": true
+    },
+    {
+      "name": "the parts bring 1, 3, 3 and 14 nodes: the point alone; the plane and the cube with a Body and a shape; the limb with thirteen nodes below it",
+      "passed": true
+    },
+    {
+      "name": "the point part is the sphere of the earlier studies: 0.075 m in radius, no script",
+      "passed": true
+    },
+    {
+      "name": "the cube part runs cube.gd, unchanged: 8 corners, 12 outward triangles, 0.5 m on every edge, a Body with a shape",
+      "passed": true
+    },
+    {
+      "name": "the limb part is a scene made of scenes: its three bars are instances of the cube part, each scaled (0.16, 0.16, 0.6)",
+      "passed": true
+    },
+    {
+      "name": "the limb's chain is Limb > Upper > Lower > Foot > Toe, with no joint scaled; the toe hangs at (0, -0.13, 0.9) from the hip",
+      "passed": true
+    },
+    {
+      "name": "who owns whom: Upper's owner is the Limb, a bar's Body's owner is the Bar, and a part added by code has no owner",
+      "passed": true
+    },
+    {
+      "name": "the plane part's mesh is the saved walk, parts/walk.tres: 28 triangles, 16 of them with area, each of those clockwise from above with its normal up; 0.80 square metres",
+      "passed": true
+    },
+    {
+      "name": "the walk keeps its own numbers: it begins at (0.75, 1.12, 0) and is 0.9 m wide and 0.9 m deep, so its middle is (1.2, 1.12, 0.45)",
+      "passed": true
+    },
+    {
+      "name": "plane_part.gd gives the plane its body from the mesh: a shape of 28 triangles, solid from both sides",
+      "passed": true
+    },
+    {
+      "name": "plane.tscn still runs on its own: open, no face, no cube",
+      "passed": true
+    },
+    {
+      "name": "walk.tres is what plane.gd builds from a walk of D, S, A, W, 0.9 m each: closed, 3.51 m around, 28 triangles",
+      "passed": true
+    },
+    {
+      "name": "line.tscn still runs on its own: readout 1.50 m; its A is an instance of the point part",
+      "passed": true
+    },
+    {
+      "name": "trace.tscn still runs on its own: 1 kept",
+      "passed": true
+    },
+    {
+      "name": "cube.tscn still runs on its own: its Cube is an instance of the cube part at (1.05, 1.37, 0.6), 12 outward triangles",
+      "passed": true
+    },
+    {
+      "name": "organism.tscn still runs on its own: its Hip is an instance of the limb part at (-0.9, 1.12, 0.8), thirteen nodes below it",
+      "passed": true
+    },
+    {
+      "name": "and one whole turn of that limb still takes 33 cells: '55 of 88 cells'",
+      "passed": true
+    },
+    {
+      "name": "body.tscn inherits plane.tscn: the root runs plane.gd, with A, B, Segment, Strip, Record, Face, Marble and Under; no Cube and no Organism of the old kind",
+      "passed": true
+    },
+    {
+      "name": "Body is a plain Node3D on the floor at (0, 0, 0.9) and runs body.gd; it holds no node of its own in the scene file: all it has, the script added",
+      "passed": true
+    },
+    {
+      "name": "flat: the root has four children, the pivots, and each pivot has one child, its part",
+      "passed": true
+    },
+    {
+      "name": "a pivot is an empty Node3D made by Node3D.new(): no mesh, no script, no owner; the body keeps the four in `pivots`",
+      "passed": true
+    },
+    {
+      "name": "25 nodes hang below the root: 4 pivots and the 21 nodes the parts bring",
+      "passed": true
+    },
+    {
+      "name": "at rest the parts are where the lesson puts them: the point at (-0.8, 0.075, 0.9), the plane's middle at (-0.2, 0.02, 0.9), the cube at (0.55, 0.25, 0.9), the hip at (0.55, 0.25, 1.15), the toe at (0.55, 0.12, 2.05)",
+      "passed": true
+    },
+    {
+      "name": "the plane's node stands at (-1.4, -1.1, 0.45), under the floor: its position is minus the walk's middle, and its pivot carries the middle to its place",
+      "passed": true
+    },
+    {
+      "name": "the root moved 0.5 m along x: each of the 25 nodes below it is 0.5 m further along x in the room, and no `position` below the root changed",
+      "passed": true
+    },
+    {
+      "name": "the knee turned 30 degrees: the only nodes that moved are Lower and the eight below it; the toe is at (0.85, 0.12, 1.97)",
+      "passed": true
+    },
+    {
+      "name": "flat, the cube's pivot turned 30 degrees: the pivot, the cube and its Body moved, and the limb beside it did not",
+      "passed": true
+    },
+    {
+      "name": "a plane instanced without a pivot arrives where it was walked: its middle 1.12 m up, at (1.2, 1.12, 1.35)",
+      "passed": true
+    },
+    {
+      "name": "turned 30 degrees on its own origin its middle swings 0.66 m, to (1.264, 1.12, 0.69); turned on its pivot the middle stays at (-0.2, 0.02, 0.9)",
+      "passed": true
+    },
+    {
+      "name": "each part brought its body: a ray sent down meets the cube's at 0.5 m, the plane's at 0.02 m and a bar's at 0.29 m",
+      "passed": true
+    },
+    {
+      "name": "the root scaled (2, 2, 2): the cube is 1 m on an edge and stands at (1.1, 0.5, 0.9); the point and the cube are 2.723 m apart, where they were 1.361",
+      "passed": true
+    },
+    {
+      "name": "an even scale keeps the angles: with every pivot at 30 degrees the limb's x and z axes stand at 90.0 degrees at scale 1, 2 and 4",
+      "passed": true
+    },
+    {
+      "name": "the root stretched to (1, 1, 2): the turned limb shears: its x and z axes stand at 123.0 degrees, 1.323 and 1.803 long; the cube's stand at 123.0",
+      "passed": true
+    },
+    {
+      "name": "the same stretch with nothing turned shears nothing: the axes stand at 90.0 degrees",
+      "passed": true
+    },
+    {
+      "name": "add_child() of a pivot that already has a parent changes nothing: the root still has four children, the plane's pivot is still the root's, and it does not follow the point's turn",
+      "passed": true
+    },
+    {
+      "name": "reparent() moves it: the root has three children, the plane's pivot is the point's child, its position reads (0.6, -0.055, 0) and it has not moved in the room",
+      "passed": true
+    },
+    {
+      "name": "parenting 0, flat: the root has 4 children, and the tree is the one the lesson draws; 25 nodes below the root",
+      "passed": true
+    },
+    {
+      "name": "parenting 0: every pivot stands at its part's middle",
+      "passed": true
+    },
+    {
+      "name": "parenting 0: with every pivot at 30 degrees seven places on the body are where the turns worked out by hand put them; the toe is at (1.000, 0.120, 1.929), 0.47 m from where it rested",
+      "passed": true
+    },
+    {
+      "name": "parenting 0: one second of _process at 30, 60, 90 and 144 frames a second turns every pivot 30 degrees and puts the toe there; a second later nothing has moved",
+      "passed": true
+    },
+    {
+      "name": "parenting 1, a chain: the root has 1 child, and the tree is the one the lesson draws; 25 nodes below the root",
+      "passed": true
+    },
+    {
+      "name": "parenting 1: every pivot stands at its part's middle",
+      "passed": true
+    },
+    {
+      "name": "parenting 1: with every pivot at 30 degrees seven places on the body are where the turns worked out by hand put them; the toe is at (1.124, 0.120, -0.500), 2.61 m from where it rested",
+      "passed": true
+    },
+    {
+      "name": "parenting 1: one second of _process at 30, 60, 90 and 144 frames a second turns every pivot 30 degrees and puts the toe there; a second later nothing has moved",
+      "passed": true
+    },
+    {
+      "name": "parenting 2, a chain with offset pivots: the root has 1 child, and the tree is the one the lesson draws; 25 nodes below the root",
+      "passed": true
+    },
+    {
+      "name": "parenting 2: every pivot stands 0.25 m to the left of its part's middle",
+      "passed": true
+    },
+    {
+      "name": "parenting 2: with every pivot at 30 degrees seven places on the body are where the turns worked out by hand put them; the toe is at (0.749, 0.120, -0.716), 2.77 m from where it rested",
+      "passed": true
+    },
+    {
+      "name": "parenting 2: one second of _process at 30, 60, 90 and 144 frames a second turns every pivot 30 degrees and puts the toe there; a second later nothing has moved",
+      "passed": true
+    },
+    {
+      "name": "parenting 3, two chains from one hip: the root has 2 children, and the tree is the one the lesson draws; 25 nodes below the root",
+      "passed": true
+    },
+    {
+      "name": "parenting 3: every pivot stands at its part's middle",
+      "passed": true
+    },
+    {
+      "name": "parenting 3: with every pivot at 30 degrees seven places on the body are where the turns worked out by hand put them; the toe is at (1.454, 0.120, 1.567), 1.03 m from where it rested",
+      "passed": true
+    },
+    {
+      "name": "parenting 3: one second of _process at 30, 60, 90 and 144 frames a second turns every pivot 30 degrees and puts the toe there; a second later nothing has moved",
+      "passed": true
+    },
+    {
+      "name": "at rest the four values put every part in the same place: only the tree differs",
+      "passed": true
+    },
+    {
+      "name": "with the root turned 30 degrees they still agree, place for place: the toe is at (1.051, 0.12, 1.621) in all four",
+      "passed": true
+    },
+    {
+      "name": "with every pivot turned 30 degrees the four toes are the lesson's: (1.0, 1.929), (1.124, -0.5), (0.749, -0.716) and (1.454, 1.567) in x and z",
+      "passed": true
+    },
+    {
+      "name": "the toe travels 0.47 m flat, 2.61 m in the chain, 2.77 m with offset pivots and 1.03 m in two chains: the chain swings its last part more than five times as far",
+      "passed": true
+    },
+    {
+      "name": "the root set to B's position and B walked to x = -0.73, the pivots at 30 degrees: the body is picked up to 1.12 m and every part comes with it; the toe is at (0.27, 1.24, 1.03), still (1.0, 0.12, 1.03) from the root",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped from one metre above B lands on the carried plane: 1.238 m",
+      "passed": true
+    },
+    {
+      "name": "the bodies are carried too: a ray sent down over the carried cube meets its Body at 1.62 m",
+      "passed": true
+    },
+    {
+      "name": "scaled by four while carried, as the hall scales its room: the cube is 2 m on an edge, its top at 3.12 m, and the toe is (4.0, 0.48, 4.12) from the root: four times its place at scale 1",
+      "passed": true
+    },
+    {
+      "name": "strip 1, point: the root has 1 child, 1 node below it, at (-0.8, 0.075, 0.9)",
+      "passed": true
+    },
+    {
+      "name": "strip 2, + plane: 2 children, 4 nodes; the plane's middle is where it was walked, 1.12 m up, at (1.2, 1.12, 1.35)",
+      "passed": true
+    },
+    {
+      "name": "strip 3, + cube: 3 children, 7 nodes; the cube stands on the floor, its middle at 0.25 m",
+      "passed": true
+    },
+    {
+      "name": "strip 4, + limb: 4 children, 21 nodes; the toe is at (0.55, 0.12, 2.05)",
+      "passed": true
+    },
+    {
+      "name": "strip 5, pivots set: still 4 children, now the pivots; 25 nodes; the plane's middle has come down to (-0.2, 0.02, 0.9)",
+      "passed": true
+    },
+    {
+      "name": "strip 6, a chain: 1 child, 25 nodes; every node is where it was in the room: the operation moved nothing",
+      "passed": true
+    },
+    {
+      "name": "strip 7, every pivot turned: still 1 child, 25 nodes; the toe has gone to (1.124, 0.12, -0.5)",
+      "passed": true
+    },
+    {
+      "name": "process.png is there: 7 tiles of 320 x 240 with a band of names under them, 25847 bytes",
+      "passed": true
+    },
+    {
+      "name": "in process.png every tile differs from the one before it (8.96, 3.56, 1.72, 14.30% of the tile), except 'a chain', which differs from 'pivots set' on 0.00%; the turn then changes 14.34%",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: at rest, and with the root turned 30 degrees, no two values differ on a single pixel, from above or from the top: 0.00% for all six pairs",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: with every pivot turned 30 degrees every pair differs: on 0.55% of the frame at least from the top, 1.47% from above",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the closest pair then is flat and two chains, from above and from the top; the farthest is the chain with offset pivots and two chains",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the chain and the chain with offset pivots are not the farthest pair: 2.97% from the top against 4.77% for the farthest",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: with a window the four toes are where they are headless, and the root has 4, 1, 1 and 2 children",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the root scaled (2, 2, 2) keeps the limb's axes at 90 degrees; stretched to (1, 1, 2) they stand at 123 degrees, and the still changes",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the strip's seven steps counted 1, 2, 3, 4, 4, 1, 1 children of the root and 1, 4, 7, 21, 25, 25, 25 nodes below it",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the step that changed the picture most was '7 every pivot turned'; 'a chain' changed it on 0.00% of the tile",
+      "passed": true
+    }
+  ],
+  "godot": "4.6-stable (official)",
+  "measured": {
+    "plane_swing_m": 0.663,
+    "process_png": {
+      "bytes": 25847,
+      "tile_differs_from_the_one_before_pct": [
+        8.96,
+        3.56,
+        1.72,
+        14.3,
+        0.0,
+        14.34
+      ]
+    },
+    "rest": {
+      "cube": [
+        0.55,
+        0.25,
+        0.9
+      ],
+      "hip": [
+        0.55,
+        0.25,
+        1.15
+      ],
+      "plane_middle": [
+        -0.2,
+        0.02,
+        0.9
+      ],
+      "point": [
+        -0.8,
+        0.075,
+        0.9
+      ],
+      "toe": [
+        0.55,
+        0.12,
+        2.05
+      ]
+    },
+    "shear_limb_axes_degrees": 123.0,
+    "sheet": {
+      "0": {
+        "body_share_pivots_above_pct": 3.69,
+        "body_share_pivots_top_pct": 3.08,
+        "body_share_rest_above_pct": 3.56,
+        "body_share_rest_top_pct": 3.18,
+        "body_share_root_above_pct": 3.68,
+        "body_share_root_top_pct": 3.15,
+        "nodes_below_root": 25.0,
+        "pivots": {
+          "cube": [
+            0.55,
+            0.25,
+            0.9
+          ],
+          "hip": [
+            0.55,
+            0.25,
+            1.15
+          ],
+          "plane_middle": [
+            -0.2,
+            0.02,
+            0.9
+          ],
+          "point": [
+            -0.8,
+            0.075,
+            0.9
+          ],
+          "toe": [
+            1.0,
+            0.12,
+            1.929
+          ]
+        },
+        "rest": {
+          "cube": [
+            0.55,
+            0.25,
+            0.9
+          ],
+          "hip": [
+            0.55,
+            0.25,
+            1.15
+          ],
+          "plane_middle": [
+            -0.2,
+            0.02,
+            0.9
+          ],
+          "point": [
+            -0.8,
+            0.075,
+            0.9
+          ],
+          "toe": [
+            0.55,
+            0.12,
+            2.05
+          ]
+        },
+        "root": {
+          "cube": [
+            0.476,
+            0.25,
+            0.625
+          ],
+          "hip": [
+            0.601,
+            0.25,
+            0.842
+          ],
+          "plane_middle": [
+            -0.173,
+            0.02,
+            1.0
+          ],
+          "point": [
+            -0.693,
+            0.075,
+            1.3
+          ],
+          "toe": [
+            1.051,
+            0.12,
+            1.621
+          ]
+        },
+        "root_children": 4.0,
+        "value": "flat"
+      },
+      "1": {
+        "body_share_pivots_above_pct": 2.81,
+        "body_share_pivots_top_pct": 3.15,
+        "body_share_rest_above_pct": 3.56,
+        "body_share_rest_top_pct": 3.18,
+        "body_share_root_above_pct": 3.68,
+        "body_share_root_top_pct": 3.15,
+        "nodes_below_root": 25.0,
+        "pivots": {
+          "cube": [
+            0.095,
+            0.25,
+            -0.05
+          ],
+          "hip": [
+            0.345,
+            0.25,
+            -0.05
+          ],
+          "plane_middle": [
+            -0.28,
+            0.02,
+            0.6
+          ],
+          "point": [
+            -0.8,
+            0.075,
+            0.9
+          ],
+          "toe": [
+            1.124,
+            0.12,
+            -0.5
+          ]
+        },
+        "rest": {
+          "cube": [
+            0.55,
+            0.25,
+            0.9
+          ],
+          "hip": [
+            0.55,
+            0.25,
+            1.15
+          ],
+          "plane_middle": [
+            -0.2,
+            0.02,
+            0.9
+          ],
+          "point": [
+            -0.8,
+            0.075,
+            0.9
+          ],
+          "toe": [
+            0.55,
+            0.12,
+            2.05
+          ]
+        },
+        "root": {
+          "cube": [
+            0.476,
+            0.25,
+            0.625
+          ],
+          "hip": [
+            0.601,
+            0.25,
+            0.842
+          ],
+          "plane_middle": [
+            -0.173,
+            0.02,
+            1.0
+          ],
+          "point": [
+            -0.693,
+            0.075,
+            1.3
+          ],
+          "toe": [
+            1.051,
+            0.12,
+            1.621
+          ]
+        },
+        "root_children": 1.0,
+        "value": "a chain"
+      },
+      "2": {
+        "body_share_pivots_above_pct": 2.58,
+        "body_share_pivots_top_pct": 3.09,
+        "body_share_rest_above_pct": 3.56,
+        "body_share_rest_top_pct": 3.18,
+        "body_share_root_above_pct": 3.68,
+        "body_share_root_top_pct": 3.15,
+        "nodes_below_root": 25.0,
+        "pivots": {
+          "cube": [
+            -0.155,
+            0.25,
+            -0.3
+          ],
+          "hip": [
+            -0.03,
+            0.25,
+            -0.266
+          ],
+          "plane_middle": [
+            -0.405,
+            0.02,
+            0.383
+          ],
+          "point": [
+            -0.833,
+            0.075,
+            0.775
+          ],
+          "toe": [
+            0.749,
+            0.12,
+            -0.716
+          ]
+        },
+        "rest": {
+          "cube": [
+            0.55,
+            0.25,
+            0.9
+          ],
+          "hip": [
+            0.55,
+            0.25,
+            1.15
+          ],
+          "plane_middle": [
+            -0.2,
+            0.02,
+            0.9
+          ],
+          "point": [
+            -0.8,
+            0.075,
+            0.9
+          ],
+          "toe": [
+            0.55,
+            0.12,
+            2.05
+          ]
+        },
+        "root": {
+          "cube": [
+            0.476,
+            0.25,
+            0.625
+          ],
+          "hip": [
+            0.601,
+            0.25,
+            0.842
+          ],
+          "plane_middle": [
+            -0.173,
+            0.02,
+            1.0
+          ],
+          "point": [
+            -0.693,
+            0.075,
+            1.3
+          ],
+          "toe": [
+            1.051,
+            0.12,
+            1.621
+          ]
+        },
+        "root_children": 1.0,
+        "value": "a chain with offset pivots"
+      },
+      "3": {
+        "body_share_pivots_above_pct": 3.73,
+        "body_share_pivots_top_pct": 3.1,
+        "body_share_rest_above_pct": 3.56,
+        "body_share_rest_top_pct": 3.18,
+        "body_share_root_above_pct": 3.68,
+        "body_share_root_top_pct": 3.15,
+        "nodes_below_root": 25.0,
+        "pivots": {
+          "cube": [
+            0.55,
+            0.25,
+            0.9
+          ],
+          "hip": [
+            0.675,
+            0.25,
+            1.117
+          ],
+          "plane_middle": [
+            -0.2,
+            0.02,
+            0.9
+          ],
+          "point": [
+            -0.72,
+            0.075,
+            1.2
+          ],
+          "toe": [
+            1.454,
+            0.12,
+            1.567
+          ]
+        },
+        "rest": {
+          "cube": [
+            0.55,
+            0.25,
+            0.9
+          ],
+          "hip": [
+            0.55,
+            0.25,
+            1.15
+          ],
+          "plane_middle": [
+            -0.2,
+            0.02,
+            0.9
+          ],
+          "point": [
+            -0.8,
+            0.075,
+            0.9
+          ],
+          "toe": [
+            0.55,
+            0.12,
+            2.05
+          ]
+        },
+        "root": {
+          "cube": [
+            0.476,
+            0.25,
+            0.625
+          ],
+          "hip": [
+            0.601,
+            0.25,
+            0.842
+          ],
+          "plane_middle": [
+            -0.173,
+            0.02,
+            1.0
+          ],
+          "point": [
+            -0.693,
+            0.075,
+            1.3
+          ],
+          "toe": [
+            1.051,
+            0.12,
+            1.621
+          ]
+        },
+        "root_children": 2.0,
+        "value": "two chains from one hip"
+      },
+      "closest_pair_pivots_above": "0 vs 3",
+      "closest_pair_pivots_top": "0 vs 3",
+      "closest_pair_rest_above": "0 vs 1",
+      "closest_pair_rest_top": "0 vs 1",
+      "closest_pair_root_above": "0 vs 1",
+      "closest_pair_root_top": "0 vs 1",
+      "farthest_pair_pivots_above": "2 vs 3",
+      "farthest_pair_pivots_top": "2 vs 3",
+      "farthest_pair_rest_above": "0 vs 1",
+      "farthest_pair_rest_top": "0 vs 1",
+      "farthest_pair_root_above": "0 vs 1",
+      "farthest_pair_root_top": "0 vs 1",
+      "godot": "4.6-stable (official)",
+      "pairs_pivots_above_pct": {
+        "0 vs 1": 4.52,
+        "0 vs 2": 5.26,
+        "0 vs 3": 1.47,
+        "1 vs 2": 2.58,
+        "1 vs 3": 4.66,
+        "2 vs 3": 5.32
+      },
+      "pairs_pivots_top_pct": {
+        "0 vs 1": 3.54,
+        "0 vs 2": 4.75,
+        "0 vs 3": 0.55,
+        "1 vs 2": 2.97,
+        "1 vs 3": 3.66,
+        "2 vs 3": 4.77
+      },
+      "pairs_rest_above_pct": {
+        "0 vs 1": 0.0,
+        "0 vs 2": 0.0,
+        "0 vs 3": 0.0,
+        "1 vs 2": 0.0,
+        "1 vs 3": 0.0,
+        "2 vs 3": 0.0
+      },
+      "pairs_rest_top_pct": {
+        "0 vs 1": 0.0,
+        "0 vs 2": 0.0,
+        "0 vs 3": 0.0,
+        "1 vs 2": 0.0,
+        "1 vs 3": 0.0,
+        "2 vs 3": 0.0
+      },
+      "pairs_root_above_pct": {
+        "0 vs 1": 0.0,
+        "0 vs 2": 0.0,
+        "0 vs 3": 0.0,
+        "1 vs 2": 0.0,
+        "1 vs 3": 0.0,
+        "2 vs 3": 0.0
+      },
+      "pairs_root_top_pct": {
+        "0 vs 1": 0.0,
+        "0 vs 2": 0.0,
+        "0 vs 3": 0.0,
+        "1 vs 2": 0.0,
+        "1 vs 3": 0.0,
+        "2 vs 3": 0.0
+      },
+      "process_png": {
+        "bytes": 25847.0,
+        "height": 266.0,
+        "width": 2264.0
+      },
+      "renderer": "NVIDIA GeForce RTX 3070",
+      "scaled_2": {
+        "cube_x_to_z_degrees": 90.0,
+        "differs_from_unscaled_pct": 9.94,
+        "limb_x_length": 2.0,
+        "limb_x_to_z_degrees": 90.0,
+        "limb_z_length": 2.0,
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ],
+        "toe": [
+          2.0,
+          0.24,
+          2.959
+        ]
+      },
+      "stretched_z": {
+        "cube_x_to_z_degrees": 123.0,
+        "differs_from_unscaled_pct": 3.59,
+        "limb_x_length": 1.323,
+        "limb_x_to_z_degrees": 123.0,
+        "limb_z_length": 1.803,
+        "scale": [
+          1.0,
+          1.0,
+          2.0
+        ],
+        "toe": [
+          1.0,
+          0.12,
+          2.959
+        ]
+      },
+      "strip": [
+        {
+          "differs_from_step_before_pct": 0.0,
+          "nodes_below_root": 1.0,
+          "root_children": 1.0,
+          "step": "1 point"
+        },
+        {
+          "differs_from_step_before_pct": 8.96,
+          "nodes_below_root": 4.0,
+          "plane_middle": [
+            1.2,
+            1.12,
+            1.35
+          ],
+          "root_children": 2.0,
+          "step": "2 + plane"
+        },
+        {
+          "differs_from_step_before_pct": 3.56,
+          "nodes_below_root": 7.0,
+          "plane_middle": [
+            1.2,
+            1.12,
+            1.35
+          ],
+          "root_children": 3.0,
+          "step": "3 + cube"
+        },
+        {
+          "differs_from_step_before_pct": 1.72,
+          "nodes_below_root": 21.0,
+          "plane_middle": [
+            1.2,
+            1.12,
+            1.35
+          ],
+          "root_children": 4.0,
+          "step": "4 + limb",
+          "toe": [
+            0.55,
+            0.12,
+            2.05
+          ]
+        },
+        {
+          "differs_from_step_before_pct": 14.3,
+          "nodes_below_root": 25.0,
+          "plane_middle": [
+            -0.2,
+            0.02,
+            0.9
+          ],
+          "root_children": 4.0,
+          "step": "5 pivots set",
+          "toe": [
+            0.55,
+            0.12,
+            2.05
+          ]
+        },
+        {
+          "differs_from_step_before_pct": 0.0,
+          "nodes_below_root": 25.0,
+          "plane_middle": [
+            -0.2,
+            0.02,
+            0.9
+          ],
+          "root_children": 1.0,
+          "step": "6 a chain",
+          "toe": [
+            0.55,
+            0.12,
+            2.05
+          ]
+        },
+        {
+          "differs_from_step_before_pct": 14.34,
+          "nodes_below_root": 25.0,
+          "plane_middle": [
+            -0.28,
+            0.02,
+            0.6
+          ],
+          "root_children": 1.0,
+          "step": "7 every pivot turned",
+          "toe": [
+            1.124,
+            0.12,
+            -0.5
+          ]
+        }
+      ],
+      "strip_step_that_changed_most": "7 every pivot turned"
+    },
+    "toe_travel_m": [
+      0.466,
+      2.613,
+      2.773,
+      1.026
+    ],
+    "toe_with_every_pivot_at_30": [
+      [
+        1.0,
+        0.12,
+        1.929
+      ],
+      [
+        1.124,
+        0.12,
+        -0.5
+      ],
+      [
+        0.749,
+        0.12,
+        -0.716
+      ],
+      [
+        1.454,
+        0.12,
+        1.567
+      ]
+    ],
+    "walk": {
+      "square_metres": 0.804,
+      "triangles": 28,
+      "with_area": 16
+    }
+  },
+  "passed": true
+}

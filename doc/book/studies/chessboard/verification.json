@@ -1,0 +1,738 @@
+{
+  "checks": [
+    {
+      "name": "the project is named 'The Chessboard' and its main scene is chessboard.tscn",
+      "passed": true
+    },
+    {
+      "name": "the nine actions exist with their keys: A/D/W/S and the arrows, Space, Enter, F, M, V",
+      "passed": true
+    },
+    {
+      "name": "line.tscn, trace.tscn and plane.tscn still run on their own: '1.50 m', '1 kept', 'open', and none of them has a Chessboard",
+      "passed": true
+    },
+    {
+      "name": "cube.tscn still runs on its own: its Cube is an instance of the cube part at (1.05, 1.37, 0.6), 12 outward triangles, orange",
+      "passed": true
+    },
+    {
+      "name": "the organism's lattice is the same idea: 88 cells from a loop inside a loop, sharing 1 mesh with its one material",
+      "passed": true
+    },
+    {
+      "name": "organism.tscn still runs on its own: one whole turn of the limb still takes 33 cells: '55 of 88 cells'",
+      "passed": true
+    },
+    {
+      "name": "body.tscn still runs on its own: four pivots under the root, 25 nodes below it, the cube part among them",
+      "passed": true
+    },
+    {
+      "name": "the cube part is unchanged: it runs cube.gd, 12 outward triangles, 0.5 m on every edge, a Body with a shape of 12 triangles",
+      "passed": true
+    },
+    {
+      "name": "two instances are two nodes with two meshes and two shapes, and ONE material: the part's own, saved in its scene file",
+      "passed": true
+    },
+    {
+      "name": "chessboard.tscn inherits plane.tscn: the root runs plane.gd, with A, B, Segment, Strip, Record, Face, Marble and Under; no Cube, no Organism, no Body",
+      "passed": true
+    },
+    {
+      "name": "Chessboard is a plain Node3D on the ground at (-1.75, 0, -2) and runs chessboard.gd; it holds no node of its own in the scene file; the marble waits at (2.6, 0.1, 1.2), clear of the floor",
+      "passed": true
+    },
+    {
+      "name": "the floor is 64 instances of the cube part, kept in `cubes` in the order they were made; 192 nodes hang below the board",
+      "passed": true
+    },
+    {
+      "name": "index to position: the cube made at (x, z) stands at (x * 0.5, 0.25, z * 0.5) from the board, for all 64; x runs first: cube 1 is at x = 0.5, cube 8 starts the next row at z = 0.5",
+      "passed": true
+    },
+    {
+      "name": "the floor is 4 m by 4 m and 0.5 m high: from (-2, 0, -2.25) to (2, 0.5, 1.75) in the room; A stands over cell (2, 4) and B over cell (5, 4)",
+      "passed": true
+    },
+    {
+      "name": "the finished floor is the chessboard: 64 materials made in code, 2 colours, 32 cells light and 32 dark; count_materials() says 64",
+      "passed": true
+    },
+    {
+      "name": "what the floor adds: 192 nodes, 64 meshes of 12 triangles (768 in all), 64 shapes and 64 materials: nothing is shared but the scene file",
+      "passed": true
+    },
+    {
+      "name": "one cell is a ghost: the collider of cube (5, 5) is disabled and no other; it keeps its mesh, its shape and its colour, so the eye cannot find it",
+      "passed": true
+    },
+    {
+      "name": "a ray sent down over cell (5, 4) meets that cube's Body at 0.5 m; over the ghost it meets the ground under the floor, at 0.00 m",
+      "passed": true
+    },
+    {
+      "name": "M with B over cell (5, 4): the marble falls from one metre above B and rests on the cell: 'marble at 0.60 m'",
+      "passed": true
+    },
+    {
+      "name": "B walked 0.5 m towards us, over cell (5, 5): the marble falls through the ghost to the ground and lies inside the cube: 'marble at 0.10 m'",
+      "passed": true
+    },
+    {
+      "name": "one cube: 1 child, 3 nodes; it stands at (-1.75, 0.25, -2) in the room, on the ground, in the far left corner",
+      "passed": true
+    },
+    {
+      "name": "one loop, a row: 8 cubes, 24 nodes, the last at x = 3.5; still one material",
+      "passed": true
+    },
+    {
+      "name": "the loop inside the loop, the floor: 64 cubes, 192 nodes, the last at (3.5, 0.25, 3.5); with no material code all 64 wear ONE material, the part's orange",
+      "passed": true
+    },
+    {
+      "name": "the part's material is shared: one cube's colour changed, and all 64 read the new colour; so does a cube instanced afterwards",
+      "passed": true
+    },
+    {
+      "name": "one material made in code and given to every cube: 1 material; its colour changed once through cube 0, and all 64 changed",
+      "passed": true
+    },
+    {
+      "name": "one material made for each cube: 64 materials; the same line changes cube 0 and no other: 1 dark, 63 light",
+      "passed": true
+    },
+    {
+      "name": "duplicate() gives each cube a copy of what it had: 64 materials again, one colour",
+      "passed": true
+    },
+    {
+      "name": "the part's material is orange again for whoever instances it next",
+      "passed": true
+    },
+    {
+      "name": "each value of `rhythm` builds the same 64 cubes with 64 materials and 64 colliders, and every cube wears what colour_of(x, z) returns; 1, 2, 2 and 15 colours",
+      "passed": true
+    },
+    {
+      "name": "0 every cell alike: all 64 are the light colour",
+      "passed": true
+    },
+    {
+      "name": "1 chessboard: light where (x + z) % 2 is 0, dark where it is 1; all 112 pairs of side-by-side cells differ",
+      "passed": true
+    },
+    {
+      "name": "2 stripes: dark where x % 3 is 0: columns 0, 3 and 6, 24 cells dark and 40 light; z does not enter the rule",
+      "passed": true
+    },
+    {
+      "name": "3 hue: Color.from_hsv(float(x + z) / (2 * n), 0.8, 0.6): 15 values of x + z, from 0 to 14, so 15 colours; a hue step is 1/16 of the circle",
+      "passed": true
+    },
+    {
+      "name": "the planted mistake: (x + z) / (2 * n) in whole numbers is 0 for every cell, so every cell is Color.from_hsv(0, 0.8, 0.6), red (0.6, 0.12, 0.12); with float() there are 15 values, up to 0.875",
+      "passed": true
+    },
+    {
+      "name": "swap x and z and 0, 0, 30 and 0 cells change colour; turn the floor half round and 0, 0, 48 and 56 do: the stripes and the hue ramp both have a direction, the other two have none",
+      "passed": true
+    },
+    {
+      "name": "equal steps of hue are not equal steps of light: the 15 bands' luminance runs from 0.167 (band 11) to 0.553 (band 3); pure yellow has 0.565 and pure blue 0.155, 3.7 times less",
+      "passed": true
+    },
+    {
+      "name": "the gap is g = s - w with w = 0.5 m, and the marble is d = 0.2 m across, so g = d at s = 0.70; at s = 0.55 the marble rests on the two cubes (0.59 m), at s = 0.75 it lies on the ground (0.10 m)",
+      "passed": true
+    },
+    {
+      "name": "dropped from 2 m: widening, the first spacing that passes is 0.680; narrowing, the last that passes is 0.680; to the millimetre it is 0.679, a gap of 0.179 m, 0.021 m less than the marble; at s = 0.65 the marble is neither on top nor through: it ends at 0.34 m",
+      "passed": true
+    },
+    {
+      "name": "let go at 0.75 m: widening and narrowing agree again, at 0.700; to the millimetre the first spacing that passes is 0.700: g = d, as predicted, within 1 mm",
+      "passed": true
+    },
+    {
+      "name": "strip 1 to 3, one cube, a row, the floor: 1, 8 and 64 cubes; 3, 24 and 192 nodes; 1, 8 and 64 colliders; one material and one colour throughout",
+      "passed": true
+    },
+    {
+      "name": "strip 4, two colours: still 64 cubes; 64 materials where there was 1, and 2 colours",
+      "passed": true
+    },
+    {
+      "name": "strip 5, hue by index: 64 materials still, and 15 colours where there were 2",
+      "passed": true
+    },
+    {
+      "name": "strip 6, a ghost cell: 63 colliders where there were 64; cubes, nodes, materials and colours as before",
+      "passed": true
+    },
+    {
+      "name": "strip 7, spacing opened to 0.6: nothing is added or removed; the far corner cube goes from (3.5, 3.5) to (4.2, 4.2), seven times the change",
+      "passed": true
+    },
+    {
+      "name": "process.png is there: 7 tiles of 320 x 240 with a band of names under them, 33858 bytes",
+      "passed": true
+    },
+    {
+      "name": "in process.png every tile differs from the one before it (4.56, 28.33, 32.38, 32.38% of the tile), except 'a ghost cell', which differs from 'hue by index' on 0.00%; opening the spacing then changes 43.42%",
+      "passed": true
+    },
+    {
+      "name": "sheet.png is there: the four values of `rhythm` side by side, 4 tiles of 320 x 240, 23403 bytes",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the four floors are the same 64 cubes with 64 materials, on the same 29.65% of the frame from above and 39.06% from the top; they show 1, 2, 2 and 15 colours",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: cell by cell the closest pair is 'every cell alike' and the stripes, from above (11.12% of the frame) and from the top (14.84%): 24 of 64 cells, three eighths of the floor",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the chessboard and the stripes are not the closest pair: they differ on 14.26% of the frame from above, about half the floor, like 'every cell alike' and the chessboard (15.04%)",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the hue ramp differs from each of the other three on the whole floor: 29.22% of the frame from above",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: by average colour the order turns round: the chessboard and the stripes are the closest pair, 17.77 apart from above, and 'every cell alike' and the chessboard the farthest, 71.43",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: with a window the strip's seven steps counted what they count headless: 1, 8, 64 cubes; 1, 1, 1, 64 materials; 2, then 15 colours; 64, then 63 colliders",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the step that changed the picture most was '7 spacing opened'; 'a ghost cell' changed it on 0.00% of the tile",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: what the floor costs to draw, from the strip's camera with the light's shadow on: 5 draw calls without it, 10 with one cube, 45 with a row, 325 with the floor: 5 a cube; one material or 64, the count is the same",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: from the top camera, with no shadow, the floor costs 1 draw call a cube: 1 without it, 65 with it",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: equal steps of hue are unequal steps on the screen: from the top the smallest step between two bands is 46.0, between bands 2 and 3, either side of yellow, and the largest 66.0; the blue bands stand 60.0 and 63.0 apart",
+      "passed": true
+    }
+  ],
+  "godot": "4.6-stable (official)",
+  "measured": {
+    "cells_changed_by_a_half_turn": [
+      0,
+      0,
+      48,
+      56
+    ],
+    "cells_changed_by_swapping_x_and_z": [
+      0,
+      0,
+      30,
+      0
+    ],
+    "floor": {
+      "colliders": 63,
+      "cubes": 64,
+      "materials": 64,
+      "meshes": 64,
+      "nodes_below_board": 192,
+      "shapes": 64,
+      "triangles": 768
+    },
+    "gap": {
+      "cube_width_m": 0.5,
+      "dropped_from_2_m": {
+        "first_pass_to_the_mm_m": 0.679,
+        "narrowing_last_pass_m": 0.68,
+        "rest_height_at_0_65_m": 0.336,
+        "widening_first_pass_m": 0.68
+      },
+      "let_go_at_0_75_m": {
+        "first_pass_to_the_mm_m": 0.7,
+        "narrowing_last_pass_m": 0.7,
+        "widening_first_pass_m": 0.7
+      },
+      "marble_diameter_m": 0.200000002980232,
+      "physics_ticks_per_second": 60,
+      "predicted_first_passing_spacing_m": 0.700000002980232,
+      "rest_height_at_0_55_m": 0.587,
+      "rest_height_at_0_75_m": 0.098
+    },
+    "hue_band_luminance": [
+      0.222,
+      0.351,
+      0.48,
+      0.553,
+      0.514,
+      0.476,
+      0.472,
+      0.485,
+      0.498,
+      0.369,
+      0.24,
+      0.167,
+      0.206,
+      0.244,
+      0.248
+    ],
+    "marble": {
+      "on_a_solid_cell_m": 0.598,
+      "through_the_ghost_m": 0.098
+    },
+    "materials": {
+      "one_made_before_the_loops": 1,
+      "one_made_in_the_inner_loop": 64,
+      "the_parts_own": 1
+    },
+    "process_png": {
+      "bytes": 33858,
+      "tile_differs_from_the_one_before_pct": [
+        4.56,
+        28.33,
+        32.38,
+        32.38,
+        0.0,
+        43.42
+      ]
+    },
+    "sheet": {
+      "0": {
+        "colours": 1.0,
+        "cubes": 64.0,
+        "drawn_above": {
+          "draw_calls": 345.0,
+          "objects": 345.0
+        },
+        "drawn_top": {
+          "draw_calls": 65.0,
+          "objects": 65.0
+        },
+        "floor_share_above_pct": 29.65,
+        "floor_share_top_pct": 39.06,
+        "materials": 64.0,
+        "tone_above": [
+          0.503,
+          0.519,
+          0.526
+        ],
+        "tone_top": [
+          0.514,
+          0.504,
+          0.476
+        ],
+        "value": "every cell alike"
+      },
+      "1": {
+        "colours": 2.0,
+        "cubes": 64.0,
+        "drawn_above": {
+          "draw_calls": 345.0,
+          "objects": 345.0
+        },
+        "drawn_top": {
+          "draw_calls": 65.0,
+          "objects": 65.0
+        },
+        "floor_share_above_pct": 29.65,
+        "floor_share_top_pct": 39.06,
+        "materials": 64.0,
+        "tone_above": [
+          0.385,
+          0.422,
+          0.461
+        ],
+        "tone_top": [
+          0.386,
+          0.406,
+          0.42
+        ],
+        "value": "(x + z) % 2 chessboard"
+      },
+      "2": {
+        "colours": 2.0,
+        "cubes": 64.0,
+        "drawn_above": {
+          "draw_calls": 345.0,
+          "objects": 345.0
+        },
+        "drawn_top": {
+          "draw_calls": 65.0,
+          "objects": 65.0
+        },
+        "floor_share_above_pct": 29.65,
+        "floor_share_top_pct": 39.06,
+        "materials": 64.0,
+        "tone_above": [
+          0.414,
+          0.446,
+          0.477
+        ],
+        "tone_top": [
+          0.418,
+          0.43,
+          0.434
+        ],
+        "value": "x % 3 stripes"
+      },
+      "3": {
+        "bands_top": {
+          "colours": [
+            [
+              0.788,
+              0.2,
+              0.212
+            ],
+            [
+              0.788,
+              0.447,
+              0.208
+            ],
+            [
+              0.788,
+              0.678,
+              0.208
+            ],
+            [
+              0.729,
+              0.8,
+              0.208
+            ],
+            [
+              0.518,
+              0.8,
+              0.208
+            ],
+            [
+              0.271,
+              0.8,
+              0.208
+            ],
+            [
+              0.196,
+              0.8,
+              0.38
+            ],
+            [
+              0.2,
+              0.8,
+              0.635
+            ],
+            [
+              0.196,
+              0.8,
+              0.827
+            ],
+            [
+              0.196,
+              0.608,
+              0.827
+            ],
+            [
+              0.196,
+              0.361,
+              0.827
+            ],
+            [
+              0.271,
+              0.2,
+              0.827
+            ],
+            [
+              0.518,
+              0.2,
+              0.827
+            ],
+            [
+              0.729,
+              0.2,
+              0.827
+            ],
+            [
+              0.788,
+              0.2,
+              0.706
+            ]
+          ],
+          "largest_step_from_band": 6.0,
+          "smallest_step_from_band": 2.0,
+          "step_to_next": [
+            64.0,
+            59.0,
+            46.0,
+            54.0,
+            63.0,
+            63.0,
+            66.0,
+            50.0,
+            49.0,
+            63.0,
+            60.0,
+            63.0,
+            54.0,
+            46.0
+          ]
+        },
+        "colours": 15.0,
+        "cubes": 64.0,
+        "drawn_above": {
+          "draw_calls": 345.0,
+          "objects": 345.0
+        },
+        "drawn_top": {
+          "draw_calls": 65.0,
+          "objects": 65.0
+        },
+        "floor_share_above_pct": 29.65,
+        "floor_share_top_pct": 39.06,
+        "materials": 64.0,
+        "tone_above": [
+          0.347,
+          0.444,
+          0.498
+        ],
+        "tone_top": [
+          0.34,
+          0.455,
+          0.454
+        ],
+        "value": "hue from x + z"
+      },
+      "closest_pair_above": "0 vs 2",
+      "closest_pair_top": "0 vs 2",
+      "closest_tone_above": "1 vs 2",
+      "closest_tone_top": "1 vs 2",
+      "empty": {
+        "draw_calls": 5.0,
+        "objects": 5.0
+      },
+      "empty_above": {
+        "draw_calls": 25.0,
+        "objects": 25.0
+      },
+      "empty_top": {
+        "draw_calls": 1.0,
+        "objects": 1.0
+      },
+      "farthest_pair_above": "0 vs 3",
+      "farthest_pair_top": "0 vs 3",
+      "godot": "4.6-stable (official)",
+      "pairs_above_pct": {
+        "0 vs 1": 15.04,
+        "0 vs 2": 11.12,
+        "0 vs 3": 29.22,
+        "1 vs 2": 14.26,
+        "1 vs 3": 29.22,
+        "2 vs 3": 29.22
+      },
+      "pairs_top_pct": {
+        "0 vs 1": 20.05,
+        "0 vs 2": 14.84,
+        "0 vs 3": 39.06,
+        "1 vs 2": 19.79,
+        "1 vs 3": 39.06,
+        "2 vs 3": 39.06
+      },
+      "process_png": {
+        "bytes": 33858.0,
+        "height": 266.0,
+        "width": 2264.0
+      },
+      "renderer": "NVIDIA GeForce RTX 3070",
+      "sheet_png": {
+        "bytes": 23403.0,
+        "height": 266.0,
+        "width": 1292.0
+      },
+      "strip": [
+        {
+          "colliders": 1.0,
+          "colours": 1.0,
+          "cubes": 1.0,
+          "differs_from_step_before_pct": 0.0,
+          "draw_calls": 10.0,
+          "far_corner": [
+            0.0,
+            0.0
+          ],
+          "materials": 1.0,
+          "nodes_below_board": 3.0,
+          "objects": 10.0,
+          "step": "1 one cube"
+        },
+        {
+          "colliders": 8.0,
+          "colours": 1.0,
+          "cubes": 8.0,
+          "differs_from_step_before_pct": 4.56,
+          "draw_calls": 45.0,
+          "far_corner": [
+            3.5,
+            0.0
+          ],
+          "materials": 1.0,
+          "nodes_below_board": 24.0,
+          "objects": 45.0,
+          "step": "2 a row"
+        },
+        {
+          "colliders": 64.0,
+          "colours": 1.0,
+          "cubes": 64.0,
+          "differs_from_step_before_pct": 28.33,
+          "draw_calls": 325.0,
+          "far_corner": [
+            3.5,
+            3.5
+          ],
+          "materials": 1.0,
+          "nodes_below_board": 192.0,
+          "objects": 325.0,
+          "step": "3 the floor"
+        },
+        {
+          "colliders": 64.0,
+          "colours": 2.0,
+          "cubes": 64.0,
+          "differs_from_step_before_pct": 32.38,
+          "draw_calls": 325.0,
+          "far_corner": [
+            3.5,
+            3.5
+          ],
+          "materials": 64.0,
+          "nodes_below_board": 192.0,
+          "objects": 325.0,
+          "step": "4 two colours"
+        },
+        {
+          "colliders": 64.0,
+          "colours": 15.0,
+          "cubes": 64.0,
+          "differs_from_step_before_pct": 32.38,
+          "draw_calls": 325.0,
+          "far_corner": [
+            3.5,
+            3.5
+          ],
+          "materials": 64.0,
+          "nodes_below_board": 192.0,
+          "objects": 325.0,
+          "step": "5 hue by index"
+        },
+        {
+          "colliders": 63.0,
+          "colours": 15.0,
+          "cubes": 64.0,
+          "differs_from_step_before_pct": 0.0,
+          "draw_calls": 325.0,
+          "far_corner": [
+            3.5,
+            3.5
+          ],
+          "materials": 64.0,
+          "nodes_below_board": 192.0,
+          "objects": 325.0,
+          "step": "6 a ghost cell"
+        },
+        {
+          "colliders": 63.0,
+          "colours": 15.0,
+          "cubes": 64.0,
+          "differs_from_step_before_pct": 43.42,
+          "draw_calls": 325.0,
+          "far_corner": [
+            4.2,
+            4.2
+          ],
+          "materials": 64.0,
+          "nodes_below_board": 192.0,
+          "objects": 325.0,
+          "step": "7 spacing opened"
+        }
+      ],
+      "strip_step_that_changed_most": "7 spacing opened",
+      "tones_apart_above": {
+        "0 vs 1": 71.43,
+        "0 vs 2": 53.67,
+        "0 vs 3": 65.85,
+        "1 vs 2": 17.77,
+        "1 vs 3": 24.75,
+        "2 vs 3": 22.85
+      },
+      "tones_apart_top": {
+        "0 vs 1": 71.56,
+        "0 vs 2": 53.88,
+        "0 vs 3": 62.28,
+        "1 vs 2": 17.67,
+        "1 vs 3": 32.64,
+        "2 vs 3": 31.0
+      }
+    },
+    "strip": [
+      [
+        1,
+        3,
+        1,
+        1,
+        1
+      ],
+      [
+        8,
+        24,
+        1,
+        1,
+        8
+      ],
+      [
+        64,
+        192,
+        1,
+        1,
+        64
+      ],
+      [
+        64,
+        192,
+        64,
+        2,
+        64
+      ],
+      [
+        64,
+        192,
+        64,
+        15,
+        64
+      ],
+      [
+        64,
+        192,
+        64,
+        15,
+        63
+      ],
+      [
+        64,
+        192,
+        64,
+        15,
+        63
+      ]
+    ],
+    "yellow_over_blue_luminance": 3.66
+  },
+  "passed": true
+}

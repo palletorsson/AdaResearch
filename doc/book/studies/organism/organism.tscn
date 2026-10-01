@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="PackedScene" path="res://cube.tscn" id="Cube"]
+[ext_resource type="Script" path="res://organism.gd" id="Lesson"]
+[ext_resource type="Script" path="res://cube.gd" id="Bar"]
+[ext_resource type="Script" path="res://lattice.gd" id="Cells"]
+
+[sub_resource type="StandardMaterial3D" id="BarMaterial"]
+albedo_color = Color(0.62, 0.34, 0.12, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="PinMaterial"]
+albedo_color = Color(0.94, 0.92, 0.88, 1)
+roughness = 0.6
+
+[sub_resource type="CylinderMesh" id="Pin"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.22
+radial_segments = 16
+material = SubResource("PinMaterial")
+
+[sub_resource type="StandardMaterial3D" id="ToeMaterial"]
+albedo_color = Color(1, 0.3, 0.6, 1)
+roughness = 0.5
+
+[sub_resource type="SphereMesh" id="Point"]
+radius = 0.05
+height = 0.1
+material = SubResource("ToeMaterial")
+
+[sub_resource type="SphereMesh" id="Socket"]
+radius = 0.06
+height = 0.12
+material = SubResource("PinMaterial")
+
+[node name="OrganismStudy" instance=ExtResource("Cube")]
+
+[node name="Organism" type="Node3D" parent="."]
+script = ExtResource("Lesson")
+
+[node name="Hip" type="MeshInstance3D" parent="Organism"]
+position = Vector3(-0.9, 1.12, 0.8)
+mesh = SubResource("Socket")
+
+[node name="Upper" type="MeshInstance3D" parent="Organism/Hip"]
+mesh = SubResource("Pin")
+
+[node name="Bar" type="MeshInstance3D" parent="Organism/Hip/Upper"]
+position = Vector3(0, 0, 0.15)
+scale = Vector3(0.16, 0.16, 0.6)
+material_override = SubResource("BarMaterial")
+script = ExtResource("Bar")
+
+[node name="Body" type="StaticBody3D" parent="Organism/Hip/Upper/Bar"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Organism/Hip/Upper/Bar/Body"]
+
+[node name="Lower" type="MeshInstance3D" parent="Organism/Hip/Upper"]
+position = Vector3(0, 0, 0.3)
+mesh = SubResource("Pin")
+
+[node name="Bar" type="MeshInstance3D" parent="Organism/Hip/Upper/Lower"]
+position = Vector3(0, 0, 0.15)
+scale = Vector3(0.16, 0.16, 0.6)
+material_override = SubResource("BarMaterial")
+script = ExtResource("Bar")
+
+[node name="Body" type="StaticBody3D" parent="Organism/Hip/Upper/Lower/Bar"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Organism/Hip/Upper/Lower/Bar/Body"]
+
+[node name="Foot" type="MeshInstance3D" parent="Organism/Hip/Upper/Lower"]
+position = Vector3(0, 0, 0.3)
+mesh = SubResource("Pin")
+
+[node name="Bar" type="MeshInstance3D" parent="Organism/Hip/Upper/Lower/Foot"]
+position = Vector3(0, 0, 0.15)
+scale = Vector3(0.16, 0.16, 0.6)
+material_override = SubResource("BarMaterial")
+script = ExtResource("Bar")
+
+[node name="Body" type="StaticBody3D" parent="Organism/Hip/Upper/Lower/Foot/Bar"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Organism/Hip/Upper/Lower/Foot/Bar/Body"]
+
+[node name="Toe" type="MeshInstance3D" parent="Organism/Hip/Upper/Lower/Foot"]
+position = Vector3(0, -0.13, 0.3)
+mesh = SubResource("Point")
+
+[node name="Lattice" type="Node3D" parent="Organism"]
+position = Vector3(-0.6, 0.99, 0.24)
+script = ExtResource("Cells")
+
+[node name="Count" type="Label3D" parent="Organism/Lattice"]
+position = Vector3(0.42, 0.3, 1.5)
+pixel_size = 0.004
+font_size = 32

@@ -12,12 +12,16 @@
  },
  "rhythm": [
   "Decode the hall: walk the chapter's carrier hall first and guess how its work is built (PRIMM's Predict; Aesthetic Programming's Decode).",
+  "Find the family in the hall: where the hall shows one work at several values of one axis, predict which two look most alike before you read anything beside them. It is the same question the kit will ask of your own body.",
   "Run, investigate and modify the kit or the supplied body: change one line and see what moves.",
   "The closed exercise is the argument: one exported axis, three to five values. Write the prediction in your sketchbook README before rendering, with the arithmetic when there is one. Then make the comparison sheet and write one claim it supports. The prediction is a floor, not a forecast: when the sheet comes back less different than you predicted, look for the fault before you believe it.",
   "The planted bug: each chapter has one real error, and you read its message before you fix it.",
   "Make: build your own body (the project step) and carry it into your room.",
   "Debt, after the making: what the approximation owes or hides, in one reading or one code-critique snippet of Ada's own code.",
-  "Place: a body meets yours. Stand on it, walk through it, carry it, become it."
+  "Place: a body meets yours. Stand on it, walk through it, carry it, become it.",
+  "The process strip: for an assemblage, and for any body made by more than one operation, one still after each operation with the operation named under it, in order. It is the body's recipe, and it is what you hand in. A body built with MeshGrammar gets its strip for free: the grammar keeps every generation.",
+  "The plate: each part ends on one question about the course's opening picture: what of it can you make now? The answer goes in your sketchbook, as a sketch or a still.",
+  "Decide, and say why: follow or settle. If your prediction was wrong, or two ways of looking disagreed (the picture and the marble, the editor and the exported build, one camera and another), you may follow it: change one more thing and look again. Or you may settle and build your body. Either is a good decision; a stop is part of the work. Write which, and the reason, in your field note: question, baseline, intervention, prediction, observation, another cause, decision, reason, how to run it again."
  ],
  "sources": [
   {
@@ -91,6 +95,14 @@
   {
    "name": "Wendy Hui Kyong Chun, Programmed Visions (2011)",
    "role": "'sourcery' at the first generated and first supplied code (ch08)"
+  },
+  {
+   "name": "A 'Generation Process' slide, supplied by Palle on 2026-10-01: two geometry-node recipes for climbing holds, organic (cube, Voronoi texture, wave texture, scale elements, boolean, material) and geometric (curve circle, extrude, scale elements, bevel, boolean, material); and the project's MeshGrammar (commons/mesh_grammar/), which already holds the same operations as rules",
+   "role": "the process strip; the operations extrude (ch45) and displace (ch46)"
+  },
+  {
+   "name": "Palle Torsson's QFEP method handoff, 1 October 2026",
+   "role": "the decision step, the field note and the cautions about entropy and inference"
   }
  ],
  "learned_from": [
@@ -111,10 +123,79 @@
   "Earlier candidates of this run: c1's prediction log as QFEP's F term (ch40); c5's chance returning as entropy (ch40); c6's 'the same net is rubber or chain' (ch35); c8's 'the enum as allowed identities' (ch25) and the bias study turned on the course's own assistant (ch38).",
   "What no comparable course has, and the course says so plainly [V LEARN]: bodies in 3D and VR that a person stands on, carries or becomes; a falsifiable prediction of the closest pair before every render; and a geometric and topological queering (polycount against deformation, the blob, the recursion that must be stopped, impossible space) that the critical-code canon, whose critique is social and linguistic, does not yet cover."
  ],
+ "mesh_grammar": {
+  "what": "MeshGrammar is the project's own grammar of mesh operations (commons/mesh_grammar/): a seed mesh, a list of rules, applied generation by generation. A rule is a selector (which faces: all, upward, random, tagged) plus an operation plus parameters. The grammar keeps a snapshot of every generation, so a body built with it carries its own process strip.",
+  "classes": "MeshGrammar (set_seed, add_rule, apply_step, get_mesh_at_generation), MeshData (from_arrays, from_array_mesh, create_cube, create_icosahedron, to_array_mesh, topology_report), MeshRule, MeshSelector (all_faces, by_normal_direction, by_random, by_tag), and 28 operations in operations/.",
+  "slide_to_grammar": [
+   {
+    "slide": "Extrude Mesh",
+    "grammar": "ExtrudeFaceOp: distance, scale (below 1 tapers)"
+   },
+   {
+    "slide": "Scale Elements",
+    "grammar": "ScaleFaceOp: scale; InsetFaceOp: amount"
+   },
+   {
+    "slide": "Voronoi Texture, Wave Texture (as displacement)",
+    "grammar": "NoiseDisplaceOp: amplitude, frequency, noise_type (simplex, perlin, cellular), direction (normal, radial, y)"
+   },
+   {
+    "slide": "subdivided seed",
+    "grammar": "SplitFaceOp: pattern (midpoint, fan); MeshData.create_icosahedron"
+   },
+   {
+    "slide": "Set Material",
+    "grammar": "PaintByTagOp"
+   },
+   {
+    "slide": "Mesh Bevel",
+    "grammar": "none; InsetFaceOp is the nearest"
+   },
+   {
+    "slide": "Mesh Boolean",
+    "grammar": "none; CSG, at ch44 Combine"
+   }
+  ],
+  "where_to_see": "On the spine: LSystems_Grammar_Lab (mesh_grammar_lsystem_tree), LSystems_Architecture (coral fingers, petal flower), ProceduralGeneration_Reaction_Diffusion_Systems (detailed bulge). Off the spine: Gallery_MeshGrammar and the encyclopedia's /mesh-grammar-gallery hold all twenty-one.",
+  "in_the_course": "Used through one supplied function at ch45 (the learner has no dictionaries yet), used directly at ch46, opened at ch43, where a rule is read as a selector, an operation and its parameters.",
+  "as_placed": "Measured 2026-10-01, commit 0f506f14b. Until that day the twenty-one mesh_grammar_* registry names all loaded one scene with no rules, so placed in a hall each was the bare seed. Nineteen now have a scene of their own that names a recipe, and the demo and the halls build from one shared list. The sphere seed was repaired in the same commit: it was wound inward and was not closed, so every operation along the normal grew into it; it is now a closed surface wound outward. In stills, all nine works this course points at read as their name. Nine of the twenty recipes are unseeded, so two builds of one name differ; branching coral is a bare seed in about one build of thirty-six. A draft hall, PG_Mesh_Grammar (not in any sequence), shows fourteen grammar steps on the icosahedron."
+ },
+ "method": {
+  "name": "Palle Torsson's QFEP method handoff, 1 October 2026",
+  "what": "A proposed artistic research method for deciding when to hold an organisation together and when to reopen it: establish a configuration, observe it, make a limited intervention, inspect the consequence, decide what to follow, and either widen the inquiry or provisionally consolidate it. The course's argument was already prediction, comparison and claim; the method adds the decision, the alternative explanation and the kept trajectory.",
+  "cautions": [
+   "Keep what was observed, what is concluded from it and what is guessed on separate lines.",
+   "Do not say entropy rose unless a probability distribution and an estimator have been stated. Variational free energy, thermodynamic entropy, uncertainty in beliefs, diversity among samples and visual complexity are different quantities.",
+   "QFEP is used here as a proposed method, not as an experimentally validated replacement for variational free energy; the QFE equation is heuristic.",
+   "An ordinary cause (a collision margin, a clipping camera) does not make an observation less worth keeping.",
+   "A screenshot alone cannot show that something can be passed; use a body (the marble, the walker)."
+  ],
+  "template": "doc/book/course/opening/FIELD_NOTE.md",
+  "worked_note": "doc/book/course/field_notes/2026-10-01-pyramid-family.md"
+ },
+ "plate": {
+  "title": "The plate",
+  "what": "The course opens with one picture and returns to it at the end of every part: plate 31 of Ernst Haeckel's Kunstformen der Natur (1904), Cyrtoidea, nine radiolarian shells. Read as rules it is one body with about ten numbers, shown nine times: a family on a comparison sheet.",
+  "citation": "Ernst Haeckel and Adolf Giltsch, Kunstformen der Natur, Tafel 31, Cyrtoidea (Flaschenstrahlinge), 1904. Public domain.",
+  "link": "https://commons.wikimedia.org/wiki/File:Haeckel_Cyrtoidea.jpg",
+  "lesson": "doc/book/course/opening/PLATE.md",
+  "lineage": "Haeckel drew the forms. D'Arcy Thompson (On Growth and Form, 1917) read a form as a diagram of forces and turned one form into another by transforming its grid. Turing (The Chemical Basis of Morphogenesis, 1952) asked whether a rule could grow them; his student Bernard Richards solved the equations on a sphere and matched radiolaria Haeckel drew for the Challenger report. Palle Torsson takes Turing as the project's muse. The three are the course's three ways of working: decode, transform, grow.",
+  "remake": "commons/artifacts/cyrtoid_by_rule/ (lookup cyrtoid_by_rule; axes form and stage). Two rules were added to the mesh grammar for it on 2026-10-01: MeshData.create_lathe and CellInsetOp. Gate: commons/testing/probe_lathe_cells.gd.",
+  "question": "What of the plate can you make now?",
+  "not_reached": "The remake's wall is a sheet with no thickness, its pores are hexagons where the plate has rounded holes, its feet are straight, and it has no wings. Each is a rule the project does not have yet."
+ },
+ "dna": {
+  "promoted_artifacts": 916,
+  "declared_axes": 1349,
+  "chapters": 46,
+  "chapters_with_promoted_work": 44,
+  "chapters_with_family_shown": 11,
+  "method": "The hall shows the family, the kit makes one. Where a chapter's hall holds a work with a declared axis, the hall shows that work at three to five values of the axis, side by side, and the first step of the lesson is to predict the closest pair there. The kit then sweeps an axis on the student's own body with the same sheet. A hall marked 'at its default' holds the work but not yet its family: adding the sibling tokens (name#axis:value) is the integration."
+ },
  "title": "The Sketchbook in Drag: a grammar of bodies",
- "subtitle": "Place, join, articulate, repeat, vary, surface, move, disturb, grow, deform, combine, learn, release: the operations of form in Ada's order, each part closed by an assemblage",
+ "subtitle": "Place, join, extrude, articulate, repeat, vary, surface, move, disturb, displace, grow, deform, combine, learn, release: the operations of form in Ada's order, each part closed by an assemblage",
  "date": "2026-10-01",
- "state": "v2, refined by hand on 2026-10-01 from the auto-research winner (d2_ada_first, course_v1.json): the same 41 chapters reordered into the spine's order of form operations, three assemblage chapters added, one chapter split. A proposal: no tutorial, kit, spine or curriculum.json changed.",
+ "state": "v2, refined by hand on 2026-10-01 from the auto-research winner (d2_ada_first, course_v1.json): the same 41 chapters reordered into the spine's order of form operations, three assemblage chapters added, one chapter split; then two operations (extrude, displace), a process strip per assemblage, and the project's MeshGrammar as the tool behind both. A proposal: no tutorial, kit, spine or curriculum.json changed.",
  "state_detail": "Palle, 2026-10-01: 'refine this order to make it possible to introduce capacity to make different assemblages or forms in logical Ada order'. v1 followed Klee's Pedagogical Sketchbook for its first 30 chapters; v2 keeps Klee only where the spine already agrees (the point on a walk is the primitives sequence) and otherwise follows the spine, so that every part adds operations to one growing toolkit and ends by composing them.",
  "principle": "Every chapter adds one operation of form to the student's toolkit (place, join, articulate, repeat, vary, surface, move, disturb, grow, deform, combine, learn), in the order Ada's spine puts them; and every part ends in an assemblage, a body composed from the operations learned so far, made of parts of different origin. The spine's order is the order of operations; a chapter that returns to an earlier sequence says it is a return. The capacity the course builds is the capacity to make different assemblages: by the end the student can make a body by any of the operations and compose them.",
  "thesis": "This course walks the way Paul Klee's Pedagogical Sketchbook walks, the book Ada's own research plan says it wants to put 'in drag, in VR'. A point goes for a walk and becomes a line; the line closes into a plane you can stand on; the plane repeats and becomes structure; chance disturbs the structure and, given a memory, becomes ground; the body gets joints, becomes a family, stands, falls along a curve, swings, sounds and glows, and the book ends in colour. Where Klee stops, the course follows Ada's spine out of the sketchbook and says so. Every chapter also carries one of five verbs (repeat, transform, parameterize, visualize, simulate), so you can always say what your code is doing to form, and each verb needs the one before it: disorder is invisible without a grid, a family needs a class, a simulation needs all of these. The programming ideas arrive when a body needs them: a point needs a variable, a line a function, a walk a list, a floor a loop, a family a class, a balance physics, a curve your own gravity, a swing sine. In every chapter you build a body in GDScript, vary it along one axis, write down before rendering which two variants will look most alike, defend one sentence with the picture, ask what the approximation owes or hides, and then stand on the body, carry it, walk through it or become it. 'In drag' names an operation in the code: Klee maps active, medial and passive onto brain, tendon and bone and onto male and female, and the scene tree does the same with parent and child. You will learn that hierarchy, and then make the passive end drive.",
@@ -127,6 +208,7 @@
   "ch05": "join",
   "ch06": "record",
   "ch07": "close",
+  "ch45": "extrude",
   "ch08": "build, direct, ship",
   "ch13": "articulate",
   "ch42": "assemble",
@@ -148,6 +230,7 @@
   "ch28": "field",
   "ch11": "disturb",
   "ch12": "noise",
+  "ch46": "displace",
   "ch30": "skin",
   "ch25": "play",
   "ch31": "rule in time",
@@ -168,43 +251,43 @@
  "assemblages": [
   {
    "chapter": "ch42",
-   "n": 10,
+   "n": 11,
    "number": "I",
    "title": "A body of parts: the first assemblage"
   },
   {
    "chapter": "ch18",
-   "n": 15,
+   "n": 16,
    "number": "II",
    "title": "Collage: a found body joins the family (assemblage II)"
   },
   {
    "chapter": "ch10",
-   "n": 17,
+   "n": 18,
    "number": "III (dressed, inside the chapter)",
    "title": "Pattern: structure moves into the surface"
   },
   {
    "chapter": "ch25",
-   "n": 30,
+   "n": 32,
    "number": "IV (midterm)",
    "title": "To stand despite all possibilities to fall: a round (assemblage IV, midterm)"
   },
   {
    "chapter": "ch43",
-   "n": 36,
+   "n": 38,
    "number": "V",
    "title": "Same desire: grown bodies join made ones (assemblage V)"
   },
   {
    "chapter": "ch44",
-   "n": 39,
+   "n": 41,
    "number": "VI",
    "title": "Combine: union, subtraction, intersection (assemblage VI)"
   },
   {
    "chapter": "ch41",
-   "n": 44,
+   "n": 46,
    "number": "VII (final)",
    "title": "Out of the lab: your hall in the collective museum (assemblage VII, final)"
   }
@@ -235,7 +318,7 @@
   {
    "id": "long",
    "title": "One year: the operations of form in Ada's order, with seven assemblages",
-   "length": "44 weeks as written (Part 1 at two chapters a week, then one a week, and a pause week with no new code after ch8, ch18, ch25 and ch43); 36 weeks with the eight pairings below",
+   "length": "46 weeks as written (Part 1 at two chapters a week, then one a week, and a pause week with no new code after ch8, ch18, ch25 and ch43); 36 weeks with the eight pairings below",
    "chapters": [
     "ch01",
     "ch02",
@@ -244,6 +327,7 @@
     "ch05",
     "ch06",
     "ch07",
+    "ch45",
     "ch08",
     "ch13",
     "ch42",
@@ -265,6 +349,7 @@
     "ch28",
     "ch11",
     "ch12",
+    "ch46",
     "ch30",
     "ch25",
     "ch31",
@@ -323,7 +408,7 @@
   {
    "id": "p1",
    "title": "Place and join (primitives; Klee I.1-4)",
-   "promise": "You can put a body where you say, give it size and a boundary, carry it, join two into a line, keep a walk as a record, close the record into a plane you can stand on, and ship a build.",
+   "promise": "You can put a body where you say, give it size and a boundary, carry it, join two into a line, keep a walk as a record, close the record into a plane you can stand on, pull the plane up into a solid, and ship a build.",
    "chapters": [
     "ch01",
     "ch02",
@@ -332,6 +417,7 @@
     "ch05",
     "ch06",
     "ch07",
+    "ch45",
     "ch08"
    ],
    "toolkit_so_far": [
@@ -342,8 +428,10 @@
     "join",
     "record",
     "close",
+    "extrude",
     "build, direct, ship"
-   ]
+   ],
+   "plate_now": "The outline: one half of a shell as a recorded line, from the horn to the lip, and the axis beside it. With the turn handed to you as one function, a solid vase with joints (stage: profile, turned)."
   },
   {
    "id": "p2",
@@ -361,10 +449,12 @@
     "join",
     "record",
     "close",
+    "extrude",
     "build, direct, ship",
     "articulate",
     "assemble"
-   ]
+   ],
+   "plate_now": "The joints as parts under one root: head, chest, belly. And Thompson's move: shift the points of one profile and the helmet becomes the flask."
   },
   {
    "id": "p3",
@@ -385,6 +475,7 @@
     "join",
     "record",
     "close",
+    "extrude",
     "build, direct, ship",
     "articulate",
     "assemble",
@@ -393,7 +484,8 @@
     "tune",
     "budget",
     "collage"
-   ]
+   ],
+   "plate_now": "Counting round the axis: three feet, eighteen teeth. Then the shell as one class with its numbers, and the plate as a comparison sheet of one family (form)."
   },
   {
    "id": "p4",
@@ -411,6 +503,7 @@
     "join",
     "record",
     "close",
+    "extrude",
     "build, direct, ship",
     "articulate",
     "assemble",
@@ -421,7 +514,8 @@
     "collage",
     "colour",
     "pattern"
-   ]
+   ],
+   "plate_now": "The pores: cells of six, opened, wider toward the mouth; bone white on black. Here the vase becomes a skeleton (stage: pored)."
   },
   {
    "id": "p5",
@@ -446,6 +540,7 @@
     "join",
     "record",
     "close",
+    "extrude",
     "build, direct, ship",
     "articulate",
     "assemble",
@@ -465,15 +560,17 @@
     "swing",
     "sound",
     "field"
-   ]
+   ],
+   "plate_now": "Feet that curve, drawn as a path made of steps. A shell that sinks and drifts under a force you wrote."
   },
   {
    "id": "p6",
    "title": "Disturb, field, skin (randomness, noise, shaders)",
-   "promise": "You can let chance in with a seed, make ground from a field that remembers its neighbour, write a skin per pixel, and assemble a round someone can lose: the midterm.",
+   "promise": "You can let chance in with a seed, make ground from a field that remembers its neighbour, bend any body with that field, write a skin per pixel, and assemble a round someone can lose: the midterm.",
    "chapters": [
     "ch11",
     "ch12",
+    "ch46",
     "ch30",
     "ch25"
    ],
@@ -485,6 +582,7 @@
     "join",
     "record",
     "close",
+    "extrude",
     "build, direct, ship",
     "articulate",
     "assemble",
@@ -506,9 +604,11 @@
     "field",
     "disturb",
     "noise",
+    "displace",
     "skin",
     "play"
-   ]
+   ],
+   "plate_now": "Bristles from a seeded chance (stage: bristled). Pores whose size follows a noise field, as on the large shell in the middle of the plate. A shader for the engraved line."
   },
   {
    "id": "p7",
@@ -530,6 +630,7 @@
     "join",
     "record",
     "close",
+    "extrude",
     "build, direct, ship",
     "articulate",
     "assemble",
@@ -551,6 +652,7 @@
     "field",
     "disturb",
     "noise",
+    "displace",
     "skin",
     "play",
     "rule in time",
@@ -559,7 +661,8 @@
     "save a genome",
     "navigate",
     "assemble"
-   ]
+   ],
+   "plate_now": "Turing's question: do not place the pores and spines; let a rule decide where they come, and open and branch what it marks. One individual saved as a file of numbers."
   },
   {
    "id": "p8",
@@ -579,6 +682,7 @@
     "join",
     "record",
     "close",
+    "extrude",
     "build, direct, ship",
     "articulate",
     "assemble",
@@ -600,6 +704,7 @@
     "field",
     "disturb",
     "noise",
+    "displace",
     "skin",
     "play",
     "rule in time",
@@ -612,7 +717,8 @@
     "imply",
     "combine",
     "flock"
-   ]
+   ],
+   "plate_now": "A wall with thickness, and pores made by taking away. Many shells drifting together."
   },
   {
    "id": "p9",
@@ -632,6 +738,7 @@
     "join",
     "record",
     "close",
+    "extrude",
     "build, direct, ship",
     "articulate",
     "assemble",
@@ -653,6 +760,7 @@
     "field",
     "disturb",
     "noise",
+    "displace",
     "skin",
     "play",
     "rule in time",
@@ -669,7 +777,8 @@
     "break",
     "measure",
     "release"
-   ]
+   ],
+   "plate_now": "A hall of shells in the collective museum, each with its numbers shown, and what the plate hides said beside it."
   }
  ],
  "chapters": [
@@ -734,13 +843,46 @@
      "sequence": "primitives",
      "order": 1,
      "visit": 1,
-     "of": 12
+     "of": 13
     }
    ],
    "opening_stop": "day_zero",
    "kit": "doc/book/studies/day-zero",
    "status": "runnable",
-   "status_note": "The Day Zero kit runs in Godot 4.6 (desktop; the headset route is written but untried). The place_at() helper this chapter calls is not in it yet."
+   "status_note": "The Day Zero kit runs in Godot 4.6 (desktop; the headset route is written but untried). The place_at() helper this chapter calls is not in it yet.",
+   "hall_families": [
+    {
+     "hall": "Point_Zero",
+     "role": "encounter",
+     "token": "frame_counter_display",
+     "axis": "reading",
+     "values": [
+      "count",
+      "rate",
+      "delta",
+      "budget"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Point_Zero",
+     "role": "encounter",
+     "token": "you_are_here",
+     "axis": "deixis",
+     "values": [
+      "words_and_mark",
+      "words_only",
+      "mark_only",
+      "arrow",
+      "plan_fragment"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch02",
@@ -807,13 +949,46 @@
      "sequence": "primitives",
      "order": 1,
      "visit": 2,
-     "of": 12
+     "of": 13
     }
    ],
    "opening_stop": "Point_Zero",
    "kit": "doc/book/studies/point-zero",
    "status": "runnable",
-   "status_note": "The kit runs in Godot 4.6 and carries the chapter's body; the chapter's argument sheet, prediction and planted bug are not yet written into it."
+   "status_note": "The kit runs in Godot 4.6 and carries the chapter's body; the chapter's argument sheet, prediction and planted bug are not yet written into it.",
+   "hall_families": [
+    {
+     "hall": "Point_Zero",
+     "role": "carrier",
+     "token": "frame_counter_display",
+     "axis": "reading",
+     "values": [
+      "count",
+      "rate",
+      "delta",
+      "budget"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Point_Zero",
+     "role": "carrier",
+     "token": "you_are_here",
+     "axis": "deixis",
+     "values": [
+      "words_and_mark",
+      "words_only",
+      "mark_only",
+      "arrow",
+      "plan_fragment"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch03",
@@ -882,7 +1057,7 @@
      "sequence": "primitives",
      "order": 1,
      "visit": 3,
-     "of": 12
+     "of": 13
     }
    ],
    "opening_stop": "Point_One",
@@ -961,7 +1136,7 @@
      "sequence": "primitives",
      "order": 1,
      "visit": 4,
-     "of": 12
+     "of": 13
     },
     {
      "sequence": "transformation",
@@ -971,7 +1146,54 @@
    "opening_stop": "Point_Coordinates",
    "kit": "doc/book/studies/point-coordinates",
    "status": "runnable",
-   "status_note": "The kit runs in Godot 4.6 and carries the chapter's body; the chapter's argument sheet, prediction and planted bug are not yet written into it."
+   "status_note": "The kit runs in Godot 4.6 and carries the chapter's body; the chapter's argument sheet, prediction and planted bug are not yet written into it.",
+   "hall_families": [
+    {
+     "hall": "Point_Coordinates",
+     "role": "carrier",
+     "token": "SoundscapeRadioRack",
+     "axis": "face",
+     "values": [
+      "scale",
+      "presets",
+      "list",
+      "void"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Point_Coordinates",
+     "role": "carrier",
+     "token": "floating_sphere_field",
+     "axis": "density",
+     "values": [
+      "sparse",
+      "scarce",
+      "dense",
+      "fog"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Point_Coordinates",
+     "role": "carrier",
+     "token": "fontana_puncture",
+     "axis": "breach",
+     "values": [
+      "pierced",
+      "opened",
+      "severed",
+      "husk"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch05",
@@ -1044,7 +1266,7 @@
      "sequence": "primitives",
      "order": 1,
      "visit": 5,
-     "of": 12
+     "of": 13
     },
     {
      "sequence": "forces",
@@ -1054,7 +1276,61 @@
    "opening_stop": "Point_Lines",
    "kit": "doc/book/studies/point-lines",
    "status": "runnable",
-   "status_note": "The kit runs in Godot 4.6 and carries the chapter's body; the chapter's argument sheet, prediction and planted bug are not yet written into it."
+   "status_note": "The kit runs in Godot 4.6 and carries the chapter's body; the chapter's argument sheet, prediction and planted bug are not yet written into it.",
+   "hall_families": [
+    {
+     "hall": "Point_Lines",
+     "role": "carrier",
+     "token": "wall_abstract",
+     "axis": "work",
+     "values": [
+      "divide_horizontal",
+      "divide_vertical",
+      "divide_diagonal",
+      "divide_off_centre",
+      "horizon_soft",
+      "point_one"
+     ],
+     "shown": [
+      "cube_wire",
+      "divide_diagonal"
+     ],
+     "family_shown": true,
+     "predicted": true
+    },
+    {
+     "hall": "Point_Lines",
+     "role": "carrier",
+     "token": "perspective_lines",
+     "axis": "vanishing_points",
+     "values": [
+      "one",
+      "two",
+      "three"
+     ],
+     "shown": [
+      "one"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Point_Lines",
+     "role": "carrier",
+     "token": "scale_lines",
+     "axis": "rungs",
+     "values": [
+      "world",
+      "decade",
+      "body"
+     ],
+     "shown": [
+      "body"
+     ],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch06",
@@ -1122,13 +1398,52 @@
      "sequence": "primitives",
      "order": 1,
      "visit": 6,
-     "of": 12
+     "of": 13
     }
    ],
    "opening_stop": "Point_Trace",
    "kit": "doc/book/studies/point-trace",
    "status": "runnable",
-   "status_note": "The kit runs in Godot 4.6 and carries the chapter's body; the chapter's argument sheet, prediction and planted bug are not yet written into it."
+   "status_note": "The kit runs in Godot 4.6 and carries the chapter's body; the chapter's argument sheet, prediction and planted bug are not yet written into it.",
+   "hall_families": [
+    {
+     "hall": "Point_Trace",
+     "role": "carrier",
+     "token": "draw_dot",
+     "axis": "ink",
+     "values": [
+      "magenta",
+      "cyan",
+      "amber",
+      "lime",
+      "white"
+     ],
+     "shown": [
+      "0000ff",
+      "00ff00",
+      "ff0000"
+     ],
+     "family_shown": true,
+     "predicted": false
+    },
+    {
+     "hall": "Point_Trace",
+     "role": "carrier",
+     "token": "science_screen",
+     "axis": "support",
+     "values": [
+      "stand",
+      "frame",
+      "cabinet",
+      "pylon"
+     ],
+     "shown": [
+      "pylon"
+     ],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch07",
@@ -1161,17 +1476,17 @@
    ],
    "body": "Close the walk: the recorded points become a triangle fan through SurfaceTool, normals are generated, and a collider made from the mesh lets you stand on the plane you walked.",
    "argument": {
-    "axis": "winding and normals",
+    "axis": "winding and the side the face shows",
     "values": [
-     "clockwise, flat normals",
-     "clockwise, smooth normals",
-     "counter-clockwise (reversed)",
-     "reversed, double-sided"
+     "clockwise",
+     "clockwise, flipped normals",
+     "counter-clockwise",
+     "counter-clockwise, double-sided"
     ],
-    "predict": "'clockwise flat' and 'reversed double-sided' will look most alike from above: both are visible and flat-lit. 'reversed' alone vanishes from the front.",
+    "predict": "From above, clockwise and counter-clockwise double-sided will look most alike: both show a lit face and differ only by the shadow (measured: 0.82% of the frame). Counter-clockwise alone shows nothing from above and everything from below. Write which pair you expect before you render.",
     "claim": "A surface has a side: what you see of a plane is a promise its winding and normals make (Godot winds front faces clockwise)."
    },
-   "debt": "Culling (Gaboury, Image Objects, 'Culling Vision'): hidden-surface algorithms decide what exists for the eye; a one-sided plane is invisible from behind while its collider still stops you. The fan also fails on concave walks: the approximation owes the shape its dents.",
+   "debt": "Culling (Gaboury, Image Objects, 'Culling Vision'): hidden-surface algorithms decide what exists for the eye; a one-sided plane is invisible from behind while its collider still stops you. The fan also fails on concave walks: the approximation owes the shape its dents. Measured in the kit: the collider is one-sided too. A marble falls through a counter-clockwise face from above unless backface_collision is set, so a surface that shows from one side also holds from one side.",
    "place": "Stand on your walk: the plane made from your own trace becomes floor; walk to its edge and look under it.",
    "godot": [
     "SurfaceTool PRIMITIVE_TRIANGLES, add_vertex(), generate_normals(), commit()",
@@ -1199,17 +1514,229 @@
      "sequence": "primitives",
      "order": 1,
      "visit": 7,
-     "of": 12
+     "of": 13
     }
+   ],
+   "opening_stop": "ch07",
+   "kit": "doc/book/studies/point-plane",
+   "status": "runnable",
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "Primitives_Polythedra",
+     "role": "field trip",
+     "token": "prism_block",
+     "axis": "grain",
+     "values": [
+      "solid",
+      "split",
+      "quartered",
+      "lattice",
+      "shell"
+     ],
+     "shown": [
+      "quartered",
+      "shell"
+     ],
+     "family_shown": true,
+     "predicted": false
+    },
+    {
+     "hall": "Point_Triangle_Context",
+     "role": "carrier",
+     "token": "triangle_line_puzzle",
+     "axis": "stock",
+     "values": [
+      "racked",
+      "strewn",
+      "ringed"
+     ],
+     "shown": [
+      "ringed"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Point_Triangle_Context",
+     "role": "carrier",
+     "token": "draw_triangle_faces",
+     "axis": "retention",
+     "values": [
+      "none",
+      "trace",
+      "lattice",
+      "archive",
+      "wax"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
+  },
+  {
+   "id": "ch45",
+   "part": "p1",
+   "title": "Extrude: the plane is pulled into a solid",
+   "spine": [
+    "primitives"
+   ],
+   "verb": "extrude",
+   "halls": [
+    {
+     "map": "Primitives_Polythedra",
+     "role": "carrier"
+    },
+    {
+     "map": "Point_Triangle_Context",
+     "role": "field trip"
+    }
+   ],
+   "works": [
+    {
+     "token": "mesh_grammar_extruded_spire",
+     "note": "two extrusions of the upward faces, each scaled down: the same two numbers as this chapter"
+    },
+    {
+     "token": "mesh_grammar_inset_towers",
+     "note": "inset, then extrude the inset: the order of operations matters"
+    }
+   ],
+   "code_new": [],
+   "code_returns": [
+    "arrays",
+    "loops",
+    "vectors",
+    "functions",
+    "parameters",
+    "return",
+    "surface_tool",
+    "normals",
+    "collision"
+   ],
+   "body": "Your walked outline from ch07, pulled up by a height into a solid. For every edge of the outline, a wall of two triangles between the edge and its copy above; the fan you already have is the top cap, and the same fan wound the other way is the bottom. A second number, the taper, scales the upper outline toward its centre: 1 gives a prism, 0 a pyramid. One function of your own, extrude(outline, height, taper), returns the mesh, and a collider made from it lets a body stand on top of your walk. Then the same move as the project makes it: a supplied function hands your solid to MeshGrammar, which pushes its upward faces out again by a distance and a scale, the same two numbers, and returns a spire.",
+   "argument": {
+    "axis": "taper of the upper outline, same walk and height",
+    "values": [
+     "1.0: a prism",
+     "0.6: a frustum",
+     "0.2",
+     "0.0: a pyramid"
+    ],
+    "predict": "Seen from the side, 1.0 and 0.6 will look most alike: both are flat-topped blocks, and only the slope of the walls differs. 0.0 is the odd one: the top cap has no area and the solid ends in a point. Write the pair you expect, and where the marble will rest on each, before you render.",
+    "claim": "One outline and two numbers make a family of solids; the cube of the next chapter is this function called with a square and a taper of 1."
+   },
+   "debt": "An extrusion remembers only its outline. Every wall is flat, every section has the same shape, and the solid cannot bulge, lean or twist: it is the default body of drawing software, and most buildings on a screen are extrusions of their plan. The walls also want their own normals, so each wall carries four vertices of its own; a solid that looks like one piece is a set of flat pieces that do not share a corner.",
+   "place": "Stand on top of your walk: the marble dropped over the solid rests on the cap at the height you chose, and rolls off the pyramid. In the headset it is a plinth made from your own path, at the height of your hand.",
+   "godot": [
+    "SurfaceTool: two triangles per wall, one fan per cap",
+    "a reversed fan for the bottom (winding, ch07)",
+    "hard edges: walls do not share vertices with caps",
+    "create_trimesh_shape() from the returned mesh",
+    "a centroid as the taper's centre",
+    "MeshData.from_array_mesh() and ExtrudeFaceOp, behind one supplied function"
+   ],
+   "borrows": [
+    {
+     "part": "spire(mesh, distance, scale, times) -> ArrayMesh: hands a mesh to MeshGrammar, extrudes its upward faces 'times' times, returns the result (wraps MeshData.from_array_mesh, MeshSelector.by_normal_direction and ExtrudeFaceOp; opened at ch43)",
+     "depth": "use"
+    },
+    {
+     "part": "MeshGrammar, a copy of commons/mesh_grammar/ supplied in the kit",
+     "depth": "use"
+    }
+   ],
+   "lineage": {
+    "processing": "Learning Processing beginShape / endShape, previewed [mem]",
+    "noc": "none",
+    "application_wp": "pre-WP foundation; WP2 queer meshes, previewed",
+    "klee": "I.4 medial lines whose finished figures read as planes; II dimension: the third direction [V via v1]",
+    "reference": "The 'Generation Process' slide (a geometric hold: curve circle, extrude mesh, scale elements, bevel, boolean, material); ExtrudeFaceOp's header: 'Push selected faces outward along their normal ... scale below 1.0 = taper' [V commons/mesh_grammar/operations/extrude_face_op.gd]; Form+Code 'Parameterize' [V]"
+   },
+   "departure": null,
+   "project_step": "A plinth in your room, extruded from a walk of your own, with its height and taper written on it; put one earlier body on top of it.",
+   "tracks": [
+    "long"
    ],
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "n": 8,
+   "spine_visits": [
+    {
+     "sequence": "primitives",
+     "order": 1,
+     "visit": 8,
+     "of": 13
+    }
+   ],
+   "process": [
+    "the walked outline (ch07)",
+    "a wall for every edge",
+    "the top cap: the fan",
+    "the bottom cap: the fan reversed",
+    "taper the upper outline",
+    "collider",
+    "extrude the top again: a spire (ExtrudeFaceOp, borrowed)"
+   ],
+   "hall_families": [
+    {
+     "hall": "Primitives_Polythedra",
+     "role": "carrier",
+     "token": "prism_block",
+     "axis": "grain",
+     "values": [
+      "solid",
+      "split",
+      "quartered",
+      "lattice",
+      "shell"
+     ],
+     "shown": [
+      "quartered",
+      "shell"
+     ],
+     "family_shown": true,
+     "predicted": false
+    },
+    {
+     "hall": "Primitives_Polythedra",
+     "role": "carrier",
+     "token": "cube_scene",
+     "axis": "grain",
+     "values": [
+      "solid",
+      "split",
+      "quartered",
+      "lattice",
+      "shell"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Primitives_Polythedra",
+     "role": "carrier",
+     "token": "diamonds",
+     "axis": "twist_rule",
+     "values": [
+      "linear",
+      "fixed",
+      "alternating",
+      "accelerating"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch08",
-   "n": 8,
+   "n": 9,
    "part": "p1",
    "title": "When things go wrong: the drafter is a machine",
    "spine": [
@@ -1241,17 +1768,17 @@
    ],
    "body": "A cube from 8 corners and 12 triangles (Point_Animatedcube's body), drafted by an AI assistant from your written instruction under a protocol of three lines: what should change, what must not change, and one observation that would prove the code wrong. You run it, step through it with breakpoints until you find where its faces turn inside out, repair it, and export a desktop build.",
    "argument": {
-    "axis": "how much the prompt fixes",
+    "axis": "which draft builds the cube",
     "values": [
-     "vague ('make a cube')",
-     "counted ('8 corners, 12 triangles')",
-     "measured ('0.5 m, resting on the floor')",
-     "located ('at the end of my walk, in Godot's clockwise winding')"
+     "my one face",
+     "the one-line draft (make a cube)",
+     "the three-line draft",
+     "the repaired draft"
     ],
-    "predict": "vague and counted will look most alike: both come back as a default 1 m cube at the origin, and both are likely inside out, because the model's idea of a cube comes from engines that wind counter-clockwise. Only 'located' is right side out on the first try.",
-    "claim": "Where the prompt is open, the model fills in its defaults: the generated body shows the model's idea of a body and of an engine, not yours."
+    "predict": "From above, your one face and the three-line draft will look most alike (measured: 0.36% of the frame apart), because the draft's top is wound the wrong way and is absent. The one-line draft, wrong in every triangle, looks like a whole cube from above and like an open room from behind; a marble dropped on it comes to rest inside. Write which pair you expect, from above and from behind, before you render.",
+    "claim": "An instruction fixes what it names; naming is not checking. The draft that looks most finished from one side is the one that is wrong everywhere."
    },
-   "debt": "Algorithmic enclosure and the default body: the assistant learned from other people's code and repeats its norms (a cube at the origin, a capsule player, OpenGL winding). Chun's 'sourcery': seeing generated source is not knowing what it does. A build is a second machine with its own errors (read-only res://, another refresh rate).",
+   "debt": "Algorithmic enclosure and the default body: the assistant learned from other people's code and repeats its norms (a cube at the origin, a capsule player, OpenGL winding). Chun's 'sourcery': seeing generated source is not knowing what it does. A build is a second machine with its own errors (read-only res://, another refresh rate). Measured in the kit's first export: assert() is skipped in a release build, push_error() loses its line number there, and the exe without its .pck answers that the project data could not be loaded; what the editor told you, the build may not.",
    "place": "Run your exported build on a classmate's laptop, or on the headset where one is available (the headset is an export): the first time your room exists outside your editor, and you stand in it. In the short track, the scans made on day 4 are imported by the teacher (glTF, scale fixed) and already stand in your room for this first export, so the collage reaches the headset in week one; ch18 teaches the import and makes the scan a member of your family.",
    "godot": [
     "breakpoints, step over and step into, the Debugger's Stack Frames and Members",
@@ -1278,22 +1805,77 @@
     {
      "sequence": "primitives",
      "order": 1,
-     "visit": 8,
-     "of": 12
+     "visit": 9,
+     "of": 13
     },
     {
      "sequence": "postfoundationscrisis",
      "order": 25
     }
    ],
-   "opening_stop": "W01_break_it_on_purpose",
-   "kit": null,
-   "status": "planned",
-   "status_note": "The debugger half of this chapter is the existing workshop W01 (Break it on purpose, then look it up), whose messages come from Godot 4.6 runs. The AI drafter protocol and the first export are not written. The opening's checkpoint CP1 (a draft) fits between ch07 and ch08."
+   "opening_stop": "ch08",
+   "kit": "doc/book/studies/point-cube",
+   "status": "runnable",
+   "status_note": "The debugger half of this chapter is the existing workshop W01 (Break it on purpose, then look it up), whose messages come from Godot 4.6 runs. The AI drafter protocol and the first export are not written. The opening's checkpoint CP1 (a draft) fits between ch07 and ch08.",
+   "hall_families": [
+    {
+     "hall": "Point_Animatedcube",
+     "role": "carrier",
+     "token": "pyramid",
+     "axis": "base_sides",
+     "values": [
+      "3",
+      "4",
+      "5",
+      "6",
+      "8"
+     ],
+     "shown": [
+      "3",
+      "4",
+      "5",
+      "6",
+      "8"
+     ],
+     "family_shown": true,
+     "predicted": false
+    },
+    {
+     "hall": "Point_Animatedcube",
+     "role": "carrier",
+     "token": "station_crates",
+     "axis": "upkeep",
+     "values": [
+      "service",
+      "store",
+      "scrap",
+      "works"
+     ],
+     "shown": [
+      "store"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Point_Animatedcube",
+     "role": "carrier",
+     "token": "animatedcubebuilder",
+     "axis": "order",
+     "values": [
+      "ascend",
+      "descend",
+      "together"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch13",
-   "n": 9,
+   "n": 10,
    "part": "p2",
    "title": "The organism: bone, tendon, muscle",
    "spine": [
@@ -1329,17 +1911,17 @@
    ],
    "body": "A limb of three segments as a parent-child chain with pivots, each joint turning by angle += speed * delta in _process: the course's first body that moves by itself. Beside it, Trans_Body's lattice loses cells where the limb passes.",
    "argument": {
-    "axis": "where the pivot sits on each segment (same joint angles)",
+    "axis": "where the pivot sits on each segment, same joint angles",
     "values": [
      "at the end",
      "at one third",
      "at the centre",
-     "outside the segment"
+     "outside the bar"
     ],
-    "predict": "'at the end' and 'at one third' will look most alike after 30 degrees: both bend like a finger. 'outside' makes the chain orbit instead of bend.",
+    "predict": "At rest all four look the same: the pivot moves origins, not bars (measured: no pair differs on more than 0.18% of the frame). With every joint at 30 degrees, one third and the centre are the closest pair, and only the pivot at the end keeps the chain joined: the others open a gap at the knee (5 and 8 cm). Write the pair you expect, at rest and turned, before you render.",
     "claim": "A body's motion is decided by where its joints are, not by what its parts look like."
    },
-   "debt": "Klee maps active, medial and passive onto brain, tendon and bone, and onto male and female organs ('Male organs (anthers), active'). The scene tree encodes the same command chain: the parent moves the child, never the reverse. That hierarchy is taught here and inverted in ch21. And frames are not time: speed per frame runs 1.5 times faster at the headset's 90 Hz than at 60 Hz; delta is the repair promised in ch2.",
+   "debt": "Klee maps active, medial and passive onto brain, tendon and bone, and onto male and female organs ('Male organs (anthers), active'). The scene tree encodes the same command chain: the parent moves the child, never the reverse. That hierarchy is taught here and inverted in ch21. And frames are not time: speed per frame runs 1.5 times faster at the headset's 90 Hz than at 60 Hz; delta is the repair promised in ch2. Measured in the kit: delta repairs the speed, not the sampling. At 144, 60 and 30 frames a second one turn of the limb carves the same 33 cells; at 3 frames a second it carves 26, because the foot is only asked where it is when a frame comes.",
    "place": "Become it: attach the chain to your hand (headset) or the carried point and walk it through Trans_Body's lattice, carving a passage with your own movement ('chip from chip').",
    "godot": [
     "the Node3D hierarchy, transform and basis",
@@ -1371,10 +1953,71 @@
      "of": 2
     }
    ],
-   "opening_stop": null,
-   "kit": null,
-   "status": "planned",
-   "status_note": null
+   "opening_stop": "ch13",
+   "kit": "doc/book/studies/organism",
+   "status": "runnable",
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "Trans_Rotation",
+     "role": "carrier",
+     "token": "carousel_cake",
+     "axis": "profile",
+     "values": [
+      "cake",
+      "ziggurat",
+      "column",
+      "spindle",
+      "flare"
+     ],
+     "shown": [
+      "cake",
+      "column",
+      "flare",
+      "spindle",
+      "ziggurat"
+     ],
+     "family_shown": true,
+     "predicted": false
+    },
+    {
+     "hall": "Trans_Translation",
+     "role": "field trip",
+     "token": "translation_cube_demo",
+     "axis": "course",
+     "values": [
+      "lift_lateral",
+      "lateral_lift",
+      "lift_depth",
+      "lateral",
+      "free"
+     ],
+     "shown": [
+      "free",
+      "lift_lateral"
+     ],
+     "family_shown": true,
+     "predicted": false
+    },
+    {
+     "hall": "Trans_Rotation",
+     "role": "carrier",
+     "token": "boolean_tunnel",
+     "axis": "accrual",
+     "values": [
+      "ramp",
+      "burst",
+      "mirror",
+      "plateau",
+      "none"
+     ],
+     "shown": [
+      "ramp"
+     ],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch42",
@@ -1422,8 +2065,8 @@
      "a chain with offset pivots",
      "two chains from one hip"
     ],
-    "predict": "At rest, flat and chain look identical: parenting changes nothing you can see in a still. Write that down, then render the sheet one second after the root turns 30 degrees: flat keeps every part where it was relative to the root; the chain swings the last part furthest; offset pivots make the same chain bend at different places. The closest pair is flat and chain at rest; the farthest is chain and offset pivots in motion.",
-    "claim": "An assemblage's structure is invisible at rest and decisive in motion: the tree, not the parts, says what the body does."
+    "predict": "At rest all four look the same, and they still look the same when the root turns 30 degrees: every pair differs on 0.00% of the frame, because a root carries everything below it whatever the tree looks like. Turn every pivot 30 degrees and they part: flat and two chains stay closest (0.55% of the frame), the offset chain and two chains are farthest (4.77%), and the toe travels 0.47 m in the flat body against 2.61 m at the end of the chain. Write which pair you expect closest, and when you expect any difference at all, before you render.",
+    "claim": "The structure of an assemblage is invisible at rest and while only its root moves; it shows when a part inside moves. The tree, not the parts, says what the body does."
    },
    "debt": "A hierarchy is a command chain. The root moves, the leaves obey, and nothing in the picture shows who commanded whom. Klee drew it as brain, muscle, bone, active to passive; Godot draws it as a tree whose root you chose. The debt is that the choice of root is a choice of who gets to be the body's centre, and the default (the first node you made) is not a neutral one.",
    "place": "Carry the root: pick the whole body up (XR hand or desktop carry) and the parts come with it, pivots and all. Then walk into Trans_Scale with it: the room scales by four, the body scales with the room, and the door you could not use before is usable; the body's relations survive the scale, which is what a hierarchy is for.",
@@ -1447,11 +2090,11 @@
     "short",
     "long"
    ],
-   "opening_stop": null,
-   "kit": null,
-   "status": "planned",
+   "opening_stop": "ch42",
+   "kit": "doc/book/studies/body-of-parts",
+   "status": "runnable",
    "status_note": null,
-   "n": 10,
+   "n": 11,
    "assemblage": "I",
    "spine_visits": [
     {
@@ -1460,11 +2103,71 @@
      "visit": 2,
      "of": 2
     }
+   ],
+   "process": [
+    "point (ch02)",
+    "+ plane (ch07)",
+    "+ cube (ch08)",
+    "+ limb (ch13)",
+    "pivots set",
+    "a chain",
+    "every pivot turned"
+   ],
+   "hall_families": [
+    {
+     "hall": "Trans_Introduction",
+     "role": "carrier",
+     "token": "matrix_4x4_viewer",
+     "axis": "pose",
+     "values": [
+      "none",
+      "translate",
+      "rotate",
+      "scale",
+      "shear",
+      "project"
+     ],
+     "shown": [
+      "translate"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Trans_Introduction",
+     "role": "carrier",
+     "token": "balance_puzzle",
+     "axis": "tell",
+     "values": [
+      "mark",
+      "none",
+      "ghost",
+      "exemplar"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Trans_Introduction",
+     "role": "carrier",
+     "token": "rotation_gimbal",
+     "axis": "regime",
+     "values": [
+      "free",
+      "approaching",
+      "locked",
+      "past"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
    ]
   },
   {
    "id": "ch09",
-   "n": 11,
+   "n": 12,
    "part": "p3",
    "title": "The chessboard: purely repetitive and therefore structural",
    "spine": [
@@ -1512,10 +2215,10 @@
      "x % 3 stripes",
      "hue from x + z"
     ],
-    "predict": "The chessboard and the x % 3 stripes will look most alike from 6 m, where both read as texture. The hue ramp is the only floor with a direction; 'every cell alike' is the only one without rhythm.",
+    "predict": "Cell by cell, every cell alike and the x % 3 stripes are the closest pair: they differ in 24 of 64 cells (measured: 11.12% of the frame from the study camera). The chessboard and the stripes disagree on about half the floor (14.26%). Only when the cells are averaged away do the chessboard and the stripes come closest, and that distance was not rendered: it is arithmetic on the stills. The stripes have a direction too: swapping x and z changes 30 of their cells. Write the pair you expect before you render, and say from how far.",
     "claim": "Structure is the repetition rule, not the cube: the same 64 bodies make four different floors."
    },
-   "debt": "The grid is the unexamined ground of 3D (editor grids, voxels, the frame buffer as a grid, after Gaboury); it is a choice, and the standing ruling holds that the first line did not need it. HSV promises equal steps of hue, and the eye does not see them as equal: the yellow band looks brighter and wider than the blue one.",
+   "debt": "The grid is the unexamined ground of 3D (editor grids, voxels, the frame buffer as a grid, after Gaboury); it is a choice, and the standing ruling holds that the first line did not need it. HSV promises equal steps of hue, and the eye does not see them as equal: the yellow band looks brighter and wider than the blue one. Measured in the kit: the planted integer division, (x + z) / (2 * n) without float(), gives hue 0 in all 64 cells, a red floor with one warning and no error. One material made before the loops is one material on 64 cubes: change one cube and all 64 change. And the gap a body meets depends on how fast it arrives: a marble let go at 0.75 m passes when the gap equals its width, to the millimetre; dropped from 2 m it passes 2 cm earlier and, just below that, sticks between the cubes. Why it switches where it does is not explained.",
    "place": "Walk the floor; turn one cell into a ghost with ch3's if and fall through it.",
    "godot": [
     "nested for over range()",
@@ -1556,14 +2259,79 @@
      "order": 4
     }
    ],
-   "opening_stop": null,
-   "kit": null,
-   "status": "planned",
-   "status_note": null
+   "opening_stop": "ch09",
+   "kit": "doc/book/studies/chessboard",
+   "status": "runnable",
+   "status_note": null,
+   "process": [
+    "one cube",
+    "a row",
+    "the floor",
+    "two colours",
+    "hue by index",
+    "a ghost cell",
+    "spacing opened"
+   ],
+   "hall_families": [
+    {
+     "hall": "Array",
+     "role": "carrier",
+     "token": "column_3_z",
+     "axis": "notation",
+     "values": [
+      "label",
+      "none",
+      "tape",
+      "tally",
+      "plate"
+     ],
+     "shown": [
+      "plate"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Array",
+     "role": "carrier",
+     "token": "grid_2d_4x4",
+     "axis": "notation",
+     "values": [
+      "label",
+      "none",
+      "tape",
+      "tally",
+      "plate"
+     ],
+     "shown": [
+      "plate"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Point_Line_Grid",
+     "role": "carrier",
+     "token": "modulor_man_demo",
+     "axis": "measure",
+     "values": [
+      "body",
+      "scale",
+      "canon",
+      "module",
+      "crowd"
+     ],
+     "shown": [
+      "scale"
+     ],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch14",
-   "n": 12,
+   "n": 13,
    "part": "p3",
    "title": "Families: one body in a single class",
    "spine": [
@@ -1601,10 +2369,10 @@
      "16",
      "64"
     ],
-    "predict": "16 and 64 will look most alike at 2 m: the silhouette of 16 segments misses the true circle by 1 - cos(11.25 deg), about 2% of the radius. 4 is not a coarse sphere but another body, close to an octahedron. The chord arithmetic is given to you here; at ch24 you compute it with cos() yourself.",
-    "claim": "Above about 16 segments a sphere stops paying visibly; below 8 it changes category: the class's integer decides which body you have."
+    "predict": "16 and 64 will look most alike at 2 m (measured: they differ on 0.85% of the still from the side, 0.99% from above, and stay the closest pair lit flat, at 4.65%). Most of that likeness is smooth shading: the rim differs by a band about 3 pixels wide. From above, the outline of 16 misses the circle by 2.06% (the chord arithmetic gives 1.92%). 4 is another body, but not the octahedron: with rings at half it has two rings and 16 triangles. Write the pair you expect, and what you think the likeness is made of, before you render.",
+    "claim": "The class's integer decides which body you have, and there is no step where a sphere stops paying: against 64 the difference falls evenly, 15.27, 5.17, 0.85, 0.19% for 4, 8, 16 and 32 segments. What looks like enough is a decision about distance and light."
    },
-   "debt": "A class's fields decide which bodies are possible (the CCSWG prompt 'describe it in a single class', turned to a body): an int cannot have 3.5 segments, and no value of rings makes a torus. Polycount against smooth deformation, the application's topology question, enters here. And a typed set() refuses a wrong type in silence, so a sweep can publish four identical members and look finished (the Ada project's own science_screen case).",
+   "debt": "A class's fields decide which bodies are possible (the CCSWG prompt 'describe it in a single class', turned to a body): an int cannot have 3.5 segments, and no value of rings makes a torus. Polycount against smooth deformation, the application's topology question, enters here. Measured in the kit: set() on a typed int does not refuse a text. It converts it in silence: '16' becomes 16, 'sixteen' becomes 0, '4 8 16 64' becomes 481664, and 640 passes an @export_range of 4 to 64. What set() does refuse in silence is a name the class does not have, and a number handed to a String field. So the planted fault is a wrong field name: four members come back alike under four different plates, and only the printed triangle counts say so (the Ada project's own science_screen case).",
    "place": "Walk the sheet as a gallery wall; carry one member into your room.",
    "godot": [
     "class_name and extends",
@@ -1632,18 +2400,82 @@
     {
      "sequence": "primitives",
      "order": 1,
-     "visit": 9,
-     "of": 12
+     "visit": 10,
+     "of": 13
     }
    ],
-   "opening_stop": null,
-   "kit": null,
-   "status": "planned",
-   "status_note": null
+   "opening_stop": "ch14",
+   "kit": "doc/book/studies/family",
+   "status": "runnable",
+   "status_note": null,
+   "process": [
+    "a sphere, written out",
+    "the same, as a class",
+    "a row of four",
+    "hung and named",
+    "the axis by name: four alike",
+    "the right name"
+   ],
+   "hall_families": [
+    {
+     "hall": "Primitives_Polythedra",
+     "role": "encounter",
+     "token": "prism_block",
+     "axis": "grain",
+     "values": [
+      "solid",
+      "split",
+      "quartered",
+      "lattice",
+      "shell"
+     ],
+     "shown": [
+      "quartered",
+      "shell"
+     ],
+     "family_shown": true,
+     "predicted": false
+    },
+    {
+     "hall": "Primitives_Ignorance",
+     "role": "carrier",
+     "token": "cube_scene",
+     "axis": "grain",
+     "values": [
+      "solid",
+      "split",
+      "quartered",
+      "lattice",
+      "shell"
+     ],
+     "shown": [
+      "quartered"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Primitives_Ignorance",
+     "role": "carrier",
+     "token": "dark_sphere",
+     "axis": "body",
+     "values": [
+      "orb",
+      "swarm",
+      "cage",
+      "cairn"
+     ],
+     "shown": [
+      "cairn"
+     ],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch15",
-   "n": 13,
+   "n": 14,
    "part": "p3",
    "title": "The family in the editor: setters, @tool and the sheet opened",
    "spine": [
@@ -1717,8 +2549,8 @@
     {
      "sequence": "primitives",
      "order": 1,
-     "visit": 10,
-     "of": 12
+     "visit": 11,
+     "of": 13
     },
     {
      "sequence": "color",
@@ -1732,11 +2564,82 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "Color_Context_Placed",
+     "role": "field trip",
+     "token": "chroma_stack",
+     "axis": "stack",
+     "values": [
+      "bauhaus",
+      "turned",
+      "cut",
+      "beads",
+      "discs",
+      "offset"
+     ],
+     "shown": [
+      "bauhaus",
+      "beads",
+      "cut",
+      "discs",
+      "festival",
+      "offset",
+      "turned"
+     ],
+     "family_shown": true,
+     "predicted": true
+    },
+    {
+     "hall": "Color_Context_Placed",
+     "role": "field trip",
+     "token": "color_dna_stack",
+     "axis": "study",
+     "values": [
+      "mondrian",
+      "albers",
+      "memphis",
+      "bauhaus_tall",
+      "blue",
+      "kras_rainbow"
+     ],
+     "shown": [
+      "albers",
+      "bauhaus_tall",
+      "blue",
+      "kras_rainbow",
+      "memphis",
+      "memphis_beacon",
+      "mondrian",
+      "rainbow_crown"
+     ],
+     "family_shown": true,
+     "predicted": false
+    },
+    {
+     "hall": "Primitives_Ignorance",
+     "role": "carrier",
+     "token": "cube_scene",
+     "axis": "grain",
+     "values": [
+      "solid",
+      "split",
+      "quartered",
+      "lattice",
+      "shell"
+     ],
+     "shown": [
+      "quartered"
+     ],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch16",
-   "n": 14,
+   "n": 15,
    "part": "p3",
    "title": "The budget: polycount measured, a claim tested",
    "spine": [
@@ -1807,8 +2710,8 @@
     {
      "sequence": "primitives",
      "order": 1,
-     "visit": 11,
-     "of": 12
+     "visit": 12,
+     "of": 13
     },
     {
      "sequence": "formfinding",
@@ -1818,11 +2721,60 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "FormFinding_Catenary",
+     "role": "carrier",
+     "token": "cable_builder",
+     "axis": "slack",
+     "values": [
+      "catenary",
+      "chord",
+      "spline",
+      "festoon",
+      "truss"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Primitives_Portals",
+     "role": "carrier",
+     "token": "capsule",
+     "axis": "facture",
+     "values": [
+      "cast",
+      "facet",
+      "armature",
+      "section",
+      "wear"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Primitives_Portals",
+     "role": "carrier",
+     "token": "combine_portals",
+     "axis": "taxonomy",
+     "values": [
+      "table",
+      "ladder",
+      "stack",
+      "heap"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch18",
-   "n": 15,
+   "n": 16,
    "part": "p3",
    "title": "Collage: a found body joins the family (assemblage II)",
    "spine": [
@@ -1850,15 +2802,14 @@
    "argument": {
     "axis": "how the body was made",
     "values": [
-     "hand-coded",
-     "AI-coded from your instruction",
-     "scanned",
-     "sculpted in VR"
+     "by hand",
+     "drafted from your three lines",
+     "found (a stand-in for a scan)"
     ],
-    "predict": "The hand-coded and the AI-coded will look most alike: same instruction, same primitives. The scan is the outlier by triangle count, not by silhouette.",
-    "claim": "How a body was made shows less in its silhouette than in its triangle count and its errors."
+    "predict": "By hand and drafted will look most alike, and here they are the same picture: 0.00% of the still differs from the side, from above and lit flat. The reason is not that they share primitives (one is built with SurfaceTool, the other from an indexed array); the three lines named every number the picture shows. Ask both for a value the lines did not name and they part: a cut of 0.9 is clamped by one and kept by the other, and the stills differ on 14.88%. The found body differs from the solid on about 3% and has 5,851 triangles to its 20. Whether a real scan is the outlier by count and not by silhouette is not tested here: the stand-in was made from the solid, so its outline is near by construction. Write the pair you expect, and what would make two bodies made the same way differ.",
+    "claim": "Two bodies that look the same have agreed only about what was named. How a body was made shows in what it does with a value nobody asked for, and in its triangle count."
    },
-   "debt": "Recreation (SFPC Recreating the Past): the difference between Durer's solid and yours is where the debt is written; the Melencolia hall already says its hidden surfaces 'are decisions we have made'. The scan has millions of triangles, holes and no inside, and whose bodies scan well is not neutral (Queer 3D: stretchability, topology, bias).",
+   "debt": "Recreation (SFPC Recreating the Past): the difference between Durer's solid and yours is where the debt is written; the Melencolia hall already says its hidden surfaces 'are decisions we have made'. The scan has millions of triangles, holes and no inside, and whose bodies scan well is not neutral (Queer 3D: stretchability, topology, bias). Measured in the kit: the import arrives 99.04 m high, its lowest point 4.3 m up and 43 m from its plate, with none of its corners in view. Godot prints no error and still reports the triangle count; the picture shows an empty plate. Scale alone does not bring it home: the file has its own origin, and that is a second fault. The drafted answer in the kit came from one question put once to an assistant of the same kind as the one that wrote the lesson, so it is not an independent witness.",
    "place": "A hybrid room (Queer 3D's ontology layer): imported and procedural bodies share one floor. Export the build and show it.",
    "godot": [
     "glTF import and its settings: scale, root type, generate collision",
@@ -1884,19 +2835,76 @@
     {
      "sequence": "primitives",
      "order": 1,
-     "visit": 12,
-     "of": 12
+     "visit": 13,
+     "of": 13
     }
    ],
-   "opening_stop": null,
-   "kit": null,
+   "opening_stop": "ch18",
+   "kit": "doc/book/studies/collage",
    "status": "planned",
    "status_note": null,
-   "assemblage": "II"
+   "assemblage": "II",
+   "process": [
+    "the cube, pulled",
+    "stood on its diagonal",
+    "two corners cut",
+    "a drafted answer",
+    "a found body arrives",
+    "its unit and its origin"
+   ],
+   "hall_families": [
+    {
+     "hall": "Primitives_Melencolia",
+     "role": "carrier",
+     "token": "code_display",
+     "axis": "support",
+     "values": [
+      "none",
+      "stand",
+      "frame",
+      "pylon"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Primitives_Melencolia",
+     "role": "carrier",
+     "token": "cube_scene",
+     "axis": "grain",
+     "values": [
+      "solid",
+      "split",
+      "quartered",
+      "lattice",
+      "shell"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Primitives_Melencolia",
+     "role": "carrier",
+     "token": "dark_sphere",
+     "axis": "presence",
+     "values": [
+      "witness",
+      "hush",
+      "beacon",
+      "eclipse",
+      "becoming"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch29",
-   "n": 16,
+   "n": 17,
    "part": "p4",
    "title": "A colour has many faces",
    "spine": [
@@ -1979,11 +2987,59 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "Color_Walls",
+     "role": "carrier",
+     "token": "color_constellation_office",
+     "axis": "mixture",
+     "values": [
+      "bench",
+      "light",
+      "retina"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Color_Walls",
+     "role": "carrier",
+     "token": "dark_sphere",
+     "axis": "presence",
+     "values": [
+      "witness",
+      "hush",
+      "beacon",
+      "eclipse",
+      "becoming"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Color_Flashlight",
+     "role": "carrier",
+     "token": "flashlight_demo",
+     "axis": "ground",
+     "values": [
+      "white",
+      "swatch",
+      "relief",
+      "mirror",
+      "none"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch10",
-   "n": 17,
+   "n": 18,
    "part": "p4",
    "title": "Pattern: structure moves into the surface",
    "spine": [
@@ -2077,11 +3133,68 @@
    "kit": null,
    "status": "planned",
    "status_note": null,
-   "assemblage": "III (dressed, inside the chapter)"
+   "assemblage": "III (dressed, inside the chapter)",
+   "process": [
+    "a 4 x 4 source",
+    "a symmetry rule",
+    "pixels into an Image",
+    "an ImageTexture",
+    "UV scale over the floor",
+    "dress each part of the assemblage"
+   ],
+   "hall_families": [
+    {
+     "hall": "Symmetry_Seventeen",
+     "role": "carrier",
+     "token": "pattern_artifact",
+     "axis": "group",
+     "values": [
+      "unset",
+      "p1",
+      "p2",
+      "pm",
+      "pg",
+      "cm"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Symmetry_Seventeen",
+     "role": "carrier",
+     "token": "pattern_atlas_gallery",
+     "axis": "credit",
+     "values": [
+      "named",
+      "title_only",
+      "redacted",
+      "anonymous"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Symmetry_Seventeen",
+     "role": "carrier",
+     "token": "pattern_loom",
+     "axis": "colophon",
+     "values": [
+      "none",
+      "repeat",
+      "symmetry",
+      "catalogue"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch22",
-   "n": 18,
+   "n": 19,
    "part": "p5",
    "title": "The bullet: a curve made of steps",
    "spine": [
@@ -2161,11 +3274,60 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "Change_Intro",
+     "role": "carrier",
+     "token": "ftc_bridge",
+     "axis": "evidence",
+     "values": [
+      "result",
+      "trace",
+      "longhand"
+     ],
+     "shown": [
+      "longhand"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Change_Intro",
+     "role": "carrier",
+     "token": "synthesis_stand",
+     "axis": "mode",
+     "values": [
+      "auto",
+      "hero",
+      "series"
+     ],
+     "shown": [
+      "hero"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "VFM_05_Launch",
+     "role": "carrier",
+     "token": "ForceMagnitudeDemo",
+     "axis": "measure",
+     "values": [
+      "both",
+      "acceleration",
+      "velocity",
+      "none"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch19",
-   "n": 19,
+   "n": 20,
    "part": "p5",
    "title": "Eye level: the walker opened",
    "spine": [
@@ -2254,11 +3416,58 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "VFM_03_Motion",
+     "role": "carrier",
+     "token": "ForceMagnitudeDemo",
+     "axis": "measure",
+     "values": [
+      "both",
+      "acceleration",
+      "velocity",
+      "none"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "VFM_03_Motion",
+     "role": "carrier",
+     "token": "VectorForces",
+     "axis": "regime",
+     "values": [
+      "crosswind",
+      "freefall",
+      "stalemate",
+      "liftoff"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "VFM_03_Motion",
+     "role": "carrier",
+     "token": "VectorMotion",
+     "axis": "drive",
+     "values": [
+      "constant",
+      "central",
+      "inertial",
+      "resisted"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch23",
-   "n": 20,
+   "n": 21,
    "part": "p5",
    "title": "Regions with other laws",
    "spine": [
@@ -2333,11 +3542,56 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "Vectors_Act4a_KineticForces",
+     "role": "carrier",
+     "token": "drag_corridor",
+     "axis": "swimmer",
+     "values": [
+      "dart",
+      "extinguisher"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": true
+    },
+    {
+     "hall": "Vectors_Act5_ForceAsPlace",
+     "role": "carrier",
+     "token": "force_cube",
+     "axis": "decomposition",
+     "values": [
+      "both",
+      "chain",
+      "box",
+      "none"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Vectors_Act5_ForceAsPlace",
+     "role": "carrier",
+     "token": "force_field_zone",
+     "axis": "law",
+     "values": [
+      "gravity",
+      "lift",
+      "crossing",
+      "weightless"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch21",
-   "n": 21,
+   "n": 22,
    "part": "p5",
    "title": "Legs: the passive part drives",
    "spine": [
@@ -2418,7 +3672,7 @@
   },
   {
    "id": "ch20",
-   "n": 22,
+   "n": 23,
    "part": "p5",
    "title": "The tightrope walker: balance",
    "spine": [
@@ -2499,11 +3753,57 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "FormFinding_Forge",
+     "role": "carrier",
+     "token": "balance_puzzle",
+     "axis": "tell",
+     "values": [
+      "mark",
+      "none",
+      "ghost",
+      "exemplar"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "FormFinding_Equilibrium",
+     "role": "carrier",
+     "token": "calder_mobile",
+     "axis": "lever",
+     "values": [
+      "solved",
+      "halved",
+      "inverted"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "FormFinding_Equilibrium",
+     "role": "carrier",
+     "token": "science_screen",
+     "axis": "support",
+     "values": [
+      "stand",
+      "frame",
+      "cabinet",
+      "pylon"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch24",
-   "n": 23,
+   "n": 24,
    "part": "p5",
    "title": "The stair climber: a spiral you can walk",
    "spine": [
@@ -2580,11 +3880,60 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "Wavefunctions_Sky_Stairs",
+     "role": "carrier",
+     "token": "cube_scene",
+     "axis": "grain",
+     "values": [
+      "solid",
+      "split",
+      "quartered",
+      "lattice",
+      "shell"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Wavefunctions_Sky_Stairs",
+     "role": "carrier",
+     "token": "dark_sphere",
+     "axis": "presence",
+     "values": [
+      "witness",
+      "hush",
+      "beacon",
+      "eclipse",
+      "becoming"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Wavefunctions_Sky_Stairs",
+     "role": "carrier",
+     "token": "math_objects",
+     "axis": "taxonomy",
+     "values": [
+      "table",
+      "ladder",
+      "stack",
+      "heap"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch26",
-   "n": 24,
+   "n": 25,
    "part": "p5",
    "title": "Pendulum, circle, spiral: time laid into space",
    "spine": [
@@ -2674,11 +4023,58 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "WaveFunctions_Pendulum",
+     "role": "carrier",
+     "token": "BigPipeSystem",
+     "axis": "slack",
+     "values": [
+      "spline",
+      "chord",
+      "catenary",
+      "festoon",
+      "truss"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "WaveFunctions_Pendulum",
+     "role": "carrier",
+     "token": "GlassRack",
+     "axis": "admission",
+     "values": [
+      "none",
+      "bench",
+      "residue",
+      "exhibit"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "WaveFunctions_Pendulum",
+     "role": "carrier",
+     "token": "VRAudioMonitor",
+     "axis": "feed",
+     "values": [
+      "live",
+      "test",
+      "saturated"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch27",
-   "n": 25,
+   "n": 26,
    "part": "p5",
    "title": "Sound: the swing heard",
    "spine": [
@@ -2762,11 +4158,64 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "WaveFunctions_Effect_Sound",
+     "role": "carrier",
+     "token": "DualBallFMController",
+     "axis": "evidence",
+     "values": [
+      "result",
+      "trace",
+      "sources",
+      "longhand"
+     ],
+     "shown": [
+      "longhand"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "WaveFunctions_Effect_Sound",
+     "role": "carrier",
+     "token": "timbre_sculptor",
+     "axis": "waveform",
+     "values": [
+      "sine",
+      "square",
+      "sawtooth",
+      "triangle",
+      "formant"
+     ],
+     "shown": [
+      "square"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "WaveFunctions_Effect_Sound",
+     "role": "carrier",
+     "token": "rack_room",
+     "axis": "machinery",
+     "values": [
+      "none",
+      "plate",
+      "vacancy",
+      "frame",
+      "works"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": true
+    }
+   ]
   },
   {
    "id": "ch28",
-   "n": 26,
+   "n": 27,
    "part": "p5",
    "title": "The arrow and the field of arrows",
    "spine": [
@@ -2848,11 +4297,58 @@
      "part": "field.gd: sample(x, z) -> Vector3, a smooth field over the room (opened at ch12, where noise is taught)",
      "depth": "use"
     }
+   ],
+   "hall_families": [
+    {
+     "hall": "Vectors_Act3_FieldsAndMotion",
+     "role": "carrier",
+     "token": "field_room",
+     "axis": "law",
+     "values": [
+      "gravity",
+      "point_charge",
+      "dipole",
+      "vortex"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": true
+    },
+    {
+     "hall": "Vectors_Act3_FieldsAndMotion",
+     "role": "carrier",
+     "token": "VectorFieldFlow",
+     "axis": "field",
+     "values": [
+      "spiral",
+      "orbit",
+      "sink",
+      "source"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Vectors_Act3_FieldsAndMotion",
+     "role": "carrier",
+     "token": "VectorMotion",
+     "axis": "drive",
+     "values": [
+      "constant",
+      "central",
+      "inertial",
+      "resisted"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
    ]
   },
   {
    "id": "ch11",
-   "n": 27,
+   "n": 28,
    "part": "p6",
    "title": "Disturbed order: chance enters the grid",
    "spine": [
@@ -2931,11 +4427,63 @@
    "opening_stop": null,
    "kit": "doc/book/studies/random-definition",
    "status": "runnable",
-   "status_note": "The kit runs in Godot 4.6 and carries the chapter's body; the chapter's argument sheet, prediction and planted bug are not yet written into it."
+   "status_note": "The kit runs in Godot 4.6 and carries the chapter's body; the chapter's argument sheet, prediction and planted bug are not yet written into it.",
+   "hall_families": [
+    {
+     "hall": "Randomness_10_PRINT_Algorithm",
+     "role": "carrier",
+     "token": "ten_print_structure",
+     "axis": "form",
+     "values": [
+      "floor",
+      "wall",
+      "overhead"
+     ],
+     "shown": [
+      "floor",
+      "wall"
+     ],
+     "family_shown": true,
+     "predicted": true
+    },
+    {
+     "hall": "Randomness_10_PRINT_Algorithm",
+     "role": "carrier",
+     "token": "ten_print",
+     "axis": "semicolon",
+     "values": [
+      "on",
+      "off"
+     ],
+     "shown": [
+      "on"
+     ],
+     "family_shown": false,
+     "predicted": true
+    },
+    {
+     "hall": "Random_Definition",
+     "role": "carrier",
+     "token": "seed_replay_demo",
+     "axis": "comparison",
+     "values": [
+      "single",
+      "replicas",
+      "seeds",
+      "ladder",
+      "offset"
+     ],
+     "shown": [
+      "replicas"
+     ],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch12",
-   "n": 28,
+   "n": 29,
    "part": "p6",
    "title": "Noise: chance that remembers its neighbour",
    "spine": [
@@ -3012,7 +4560,7 @@
      "sequence": "noise",
      "order": 11,
      "visit": 1,
-     "of": 1
+     "of": 2
     },
     {
      "sequence": "randomness",
@@ -3022,11 +4570,226 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "Noise_Space_10",
+     "role": "carrier",
+     "token": "dark_sphere",
+     "axis": "presence",
+     "values": [
+      "witness",
+      "hush",
+      "beacon",
+      "eclipse",
+      "becoming"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Noise_Space_10",
+     "role": "carrier",
+     "token": "noise_space",
+     "axis": "generator",
+     "values": [
+      "simplex",
+      "perlin",
+      "value",
+      "cellular"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Noise_Columns",
+     "role": "field trip",
+     "token": "synthesis_stand",
+     "axis": "mode",
+     "values": [
+      "auto",
+      "hero",
+      "series"
+     ],
+     "shown": [
+      "hero"
+     ],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
+  },
+  {
+   "id": "ch46",
+   "part": "p6",
+   "title": "Displace: a body pushed along its normals by a field",
+   "spine": [
+    "noise",
+    "softbodies"
+   ],
+   "verb": "displace",
+   "halls": [
+    {
+     "map": "Noise_Inside_Noise",
+     "role": "carrier"
+    },
+    {
+     "map": "Noise_One",
+     "role": "field trip"
+    },
+    {
+     "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+     "role": "field trip"
+    }
+   ],
+   "works": [
+    {
+     "token": "mesh_grammar_crumpled",
+     "note": "Perlin noise pushes vertices along their normals"
+    },
+    {
+     "token": "mesh_grammar_noise_sculpture",
+     "note": "cellular noise, pushed radially"
+    },
+    {
+     "token": "mesh_grammar_detailed_bulge",
+     "note": "split every face first, then deform: resolution before the push; placed in the reaction-diffusion hall"
+    }
+   ],
+   "code_new": [],
+   "code_returns": [
+    "noise",
+    "packed_arrays",
+    "dictionaries",
+    "surface_tool",
+    "normals",
+    "collision",
+    "loops",
+    "classes",
+    "export",
+    "seeds"
+   ],
+   "body": "Take a body you have made and move every vertex along its own normal by the value of a field sampled at that vertex. First by hand, on your own mesh: read its vertices and normals as packed arrays, add normal times noise times an amplitude to each position, generate the normals again, rebuild the collider. Then as the project does it: a MeshGrammar with an icosahedron as its seed and two rules, SplitFaceOp to give the field somewhere to act and NoiseDisplaceOp to push. A sphere under cellular noise becomes a pebble; under a sine it becomes a ripple; your extruded plinth under either stops being an extrusion. Terrain (ch12) lifted a flat grid; this bends any body, and it is the organic half of making form.",
+   "argument": {
+    "axis": "how many times the faces are split before the push, same field, seed and amplitude",
+    "values": [
+     "0 splits: 20 faces",
+     "1 split: 80 faces",
+     "2 splits: 320 faces",
+     "3 splits: 1280 faces"
+    ],
+    "predict": "2 and 3 splits will look most alike: past a certain density the field is fully drawn and more faces change nothing you can see. With no split the body stays an icosahedron with its corners moved, because the field has almost nowhere to act. Write the pair you expect, and the split at which you think the body stops changing, before you render.",
+    "claim": "A field can only show where there are vertices to move: resolution is the price of organic form, and it is paid in triangles."
+   },
+   "debt": "Polycount against smooth deformation, the application's own sentence, measured on your body. And the blob: bodies displaced by noise resemble each other more than they resemble what they were, so a room of them reads as one aesthetic. Push further than the body's own curvature and the surface passes through itself, which no picture from outside will show you; the marble will.",
+   "place": "Grip it: an organic hold. On the desktop, carry it and let the marble settle in its hollows; in the headset, hold it in your hand and turn it. Then put it on the plinth from ch45, a geometric body carrying an organic one.",
+   "godot": [
+    "mesh.surface_get_arrays(0): ARRAY_VERTEX and ARRAY_NORMAL as packed arrays",
+    "FastNoiseLite.get_noise_3dv(position); TYPE_CELLULAR for the pebble",
+    "MeshGrammar: set_seed, add_rule, apply_step",
+    "SplitFaceOp {pattern: midpoint}, NoiseDisplaceOp {amplitude, frequency, noise_type, direction}",
+    "get_mesh_at_generation(g).to_array_mesh() for each tile of the strip",
+    "the collider rebuilt after the push"
+   ],
+   "borrows": [
+    {
+     "part": "MeshGrammar, a copy of commons/mesh_grammar/ supplied in the kit: MeshData, MeshSelector, SplitFaceOp, NoiseDisplaceOp, used directly with their parameter dictionaries (opened at ch43)",
+     "depth": "use"
+    }
+   ],
+   "lineage": {
+    "processing": "none",
+    "noc": "ch0 Perlin noise, applied to a surface [V lineage map]",
+    "application_wp": "WP1 Basic Elements: Perlin noise, Voronoi diagrams, sine curves; 'the trade-off between polygons and the possibility of deforming a body smoothly'",
+    "klee": "none: out of the sketchbook",
+    "reference": "The 'Generation Process' slide (an organic hold: cube, Voronoi texture, wave texture, scale elements, boolean, material); NoiseDisplaceOp's header: 'Creates organic crumpled/rough surfaces. Inspired by: erupting ceramic vessels, cabbage bowls' [V commons/mesh_grammar/operations/noise_displace_op.gd]; Queer 3D World, layer 2: 'noise algorithms produced a blob aesthetic' [V QUEER3D digest]; Noise_One's relief shader, the same push done on the GPU (opened at ch30)"
+   },
+   "departure": null,
+   "project_step": "One displaced body in your room, made from a body you already had, with the field, the seed and the number of splits written beside it, and the split at which it stopped changing.",
+   "tracks": [
+    "long"
+   ],
+   "opening_stop": null,
+   "kit": null,
+   "status": "planned",
+   "status_note": null,
+   "n": 30,
+   "spine_visits": [
+    {
+     "sequence": "noise",
+     "order": 11,
+     "visit": 2,
+     "of": 2
+    },
+    {
+     "sequence": "softbodies",
+     "order": 17
+    }
+   ],
+   "process": [
+    "the seed: an icosahedron",
+    "split every face (SplitFaceOp), k times",
+    "sample the field at each vertex",
+    "push along the normal (NoiseDisplaceOp)",
+    "generate the normals again",
+    "rebuild the collider",
+    "paint"
+   ],
+   "hall_families": [
+    {
+     "hall": "Noise_Inside_Noise",
+     "role": "carrier",
+     "token": "dark_sphere",
+     "axis": "presence",
+     "values": [
+      "witness",
+      "hush",
+      "beacon",
+      "eclipse",
+      "becoming"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Noise_Inside_Noise",
+     "role": "carrier",
+     "token": "noisesphere",
+     "axis": "readout",
+     "values": [
+      "relief",
+      "plate",
+      "none"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "ProceduralGeneration_Reaction_Diffusion_Systems",
+     "role": "field trip",
+     "token": "turing_pattern_generator",
+     "axis": "seeding",
+     "values": [
+      "discs",
+      "centre",
+      "lattice",
+      "ring"
+     ],
+     "shown": [
+      "centre"
+     ],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch30",
-   "n": 29,
+   "n": 31,
    "part": "p6",
    "title": "The pixel's colour circle: shaders",
    "spine": [
@@ -3121,11 +4884,60 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "Shader_01_Shaping",
+     "role": "carrier",
+     "token": "dark_sphere",
+     "axis": "presence",
+     "values": [
+      "witness",
+      "hush",
+      "beacon",
+      "eclipse",
+      "becoming"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Shader_11_QueerRubber",
+     "role": "carrier",
+     "token": "dark_sphere",
+     "axis": "presence",
+     "values": [
+      "witness",
+      "hush",
+      "beacon",
+      "eclipse",
+      "becoming"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Shader_01_Shaping",
+     "role": "carrier",
+     "token": "science_screen",
+     "axis": "support",
+     "values": [
+      "stand",
+      "frame",
+      "cabinet",
+      "pylon"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch25",
-   "n": 30,
+   "n": 32,
    "part": "p6",
    "title": "To stand despite all possibilities to fall: a round (assemblage IV, midterm)",
    "spine": [
@@ -3212,11 +5024,72 @@
    "kit": null,
    "status": "planned",
    "status_note": null,
-   "assemblage": "IV (midterm)"
+   "assemblage": "IV (midterm)",
+   "process": [
+    "noise terrain (ch12)",
+    "stones: family members (ch14)",
+    "the rim shader as their skin (ch30)",
+    "a state machine per stone",
+    "the walker (ch19)",
+    "HUD and restart",
+    "export"
+   ],
+   "hall_families": [
+    {
+     "hall": "Random_Game",
+     "role": "carrier",
+     "token": "cube_projectile_spawner",
+     "axis": "warning",
+     "values": [
+      "none",
+      "stain",
+      "cage",
+      "beacon",
+      "shroud"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Random_Game",
+     "role": "carrier",
+     "token": "r_c",
+     "axis": "posture",
+     "values": [
+      "cycle",
+      "seated",
+      "leaving",
+      "sunken",
+      "arriving"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Random_Cubes",
+     "role": "field trip",
+     "token": "coin_toss",
+     "axis": "disclosure",
+     "values": [
+      "oracle",
+      "tally",
+      "ledger",
+      "works",
+      "origin"
+     ],
+     "shown": [
+      "origin"
+     ],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch31",
-   "n": 31,
+   "n": 33,
    "part": "p7",
    "title": "Rules in time: cellular automata",
    "spine": [
@@ -3301,11 +5174,60 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "CA_Introduction",
+     "role": "carrier",
+     "token": "synthesis_stand",
+     "axis": "mode",
+     "values": [
+      "auto",
+      "hero",
+      "series"
+     ],
+     "shown": [
+      "hero"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "CA_GameOfLife",
+     "role": "carrier",
+     "token": "ca_bridge",
+     "axis": "rule",
+     "values": [
+      "30",
+      "90",
+      "110",
+      "250"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "CA_Introduction",
+     "role": "carrier",
+     "token": "dark_sphere",
+     "axis": "presence",
+     "values": [
+      "witness",
+      "hush",
+      "beacon",
+      "eclipse",
+      "becoming"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch32",
-   "n": 32,
+   "n": 34,
    "part": "p7",
    "title": "The tree and its mad branch: recursion",
    "spine": [
@@ -3387,11 +5309,66 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "Fractal_Recursion",
+     "role": "carrier",
+     "token": "example_8_3_recursion_circles_vr",
+     "axis": "depth",
+     "values": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+     ],
+     "shown": [
+      "1"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Fractal_Recursion",
+     "role": "carrier",
+     "token": "fractal_recursion_2",
+     "axis": "depth",
+     "values": [
+      "1",
+      "2",
+      "4",
+      "6",
+      "7"
+     ],
+     "shown": [
+      "1"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Fractal_RecursiveTrees",
+     "role": "carrier",
+     "token": "inverted_tree_cloud",
+     "axis": "aftermath",
+     "values": [
+      "form",
+      "strata",
+      "envelope",
+      "apparatus"
+     ],
+     "shown": [
+      "strata"
+     ],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch33",
-   "n": 33,
+   "n": 35,
    "part": "p7",
    "title": "The point walks again: grammars and the turtle",
    "spine": [
@@ -3431,7 +5408,7 @@
     "transforms",
     "player"
    ],
-   "body": "An L-system: an axiom string rewritten by a Dictionary of rules n times, then read by a 3D turtle that draws on F, turns on + and -, and pushes and pops its frame on [ and ]. Klee's walking point from ch6, now walking a grammar.",
+   "body": "An L-system: an axiom string rewritten by a Dictionary of rules n times, then read by a 3D turtle that draws on F, turns on + and -, and pushes and pops its frame on [ and ]. Klee's walking point from ch6, now walking a grammar. MeshGrammar is the same idea with faces for symbols: its rules rewrite a mesh generation by generation, and its own header says it is modelled after the L-system. LSystems_Grammar_Lab places one such tree beside the string grammar.",
    "argument": {
     "axis": "branching angle, same rules and generations",
     "values": [
@@ -3475,11 +5452,73 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "works": [
+    {
+     "token": "mesh_grammar_lsystem_tree",
+     "note": "a tree grown by rules on faces, placed in LSystems_Grammar_Lab"
+    },
+    {
+     "token": "mesh_grammar_coral_fingers",
+     "note": "tube branches from upward faces, placed in LSystems_Architecture"
+    }
+   ],
+   "hall_families": [
+    {
+     "hall": "LSystems_Grammar_Lab",
+     "role": "carrier",
+     "token": "lsystem_editor",
+     "axis": "grammar",
+     "values": [
+      "koch",
+      "sierpinski",
+      "dragon",
+      "plant",
+      "bush",
+      "fern"
+     ],
+     "shown": [
+      "koch"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "LSystems_Grammar_Lab",
+     "role": "carrier",
+     "token": "dark_sphere",
+     "axis": "presence",
+     "values": [
+      "witness",
+      "hush",
+      "beacon",
+      "eclipse",
+      "becoming"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "LSystems_Grammar_Lab",
+     "role": "carrier",
+     "token": "lsystem_tree",
+     "axis": "evidence",
+     "values": [
+      "result",
+      "trace",
+      "longhand",
+      "axiom"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch17",
-   "n": 34,
+   "n": 36,
    "part": "p7",
    "title": "Genes as files: a family saved, a body recalled",
    "spine": [
@@ -3567,11 +5606,61 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "PG_Genetic_Evolution",
+     "role": "carrier",
+     "token": "GeneticProgramming",
+     "axis": "alphabet",
+     "values": [
+      "primitives",
+      "csg_tree",
+      "parametric",
+      "voxel"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "PG_Genetic_Evolution",
+     "role": "carrier",
+     "token": "science_screen",
+     "axis": "support",
+     "values": [
+      "stand",
+      "frame",
+      "cabinet",
+      "pylon"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Random_Definition",
+     "role": "field trip",
+     "token": "seed_replay_demo",
+     "axis": "comparison",
+     "values": [
+      "single",
+      "replicas",
+      "seeds",
+      "ladder",
+      "offset"
+     ],
+     "shown": [
+      "replicas"
+     ],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch34",
-   "n": 35,
+   "n": 37,
    "part": "p7",
    "title": "How do we navigate an auto-generated world?",
    "spine": [
@@ -3665,7 +5754,57 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "Randomness_10_PRINT_Algorithm",
+     "role": "field trip",
+     "token": "ten_print_structure",
+     "axis": "form",
+     "values": [
+      "floor",
+      "wall",
+      "overhead"
+     ],
+     "shown": [
+      "floor",
+      "wall"
+     ],
+     "family_shown": true,
+     "predicted": true
+    },
+    {
+     "hall": "PG_Caves_Mazes",
+     "role": "carrier",
+     "token": "maze_generation",
+     "axis": "hand",
+     "values": [
+      "backtracker",
+      "prim",
+      "binary_tree",
+      "sidewinder",
+      "labyrinth"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "GT_Pathfinding",
+     "role": "carrier",
+     "token": "pathfinding3d",
+     "axis": "frontier",
+     "values": [
+      "unsearched",
+      "route",
+      "expanded",
+      "flooded"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch43",
@@ -3706,7 +5845,7 @@
     "export",
     "seeds"
    ],
-   "body": "One body from three growth rules and one made family. The grammar of ch33 grows the frame; the recursion of ch32 branches it; your family members from ch14 hang on the branches as instanced parts, oriented by the turtle's frame; and the cellular automaton of ch31 decides, row by row, which branches are solid and which are ghosts (ch3's if, now driven by a rule in time). Assemblage_Same_Desire is the hall's own version: one array of small choices, drawn as marks, as paths, and as a floor that carries you.",
+   "body": "One body from three growth rules and one made family. The grammar of ch33 grows the frame; the recursion of ch32 branches it; your family members from ch14 hang on the branches as instanced parts, oriented by the turtle's frame; and the cellular automaton of ch31 decides, row by row, which branches are solid and which are ghosts (ch3's if, now driven by a rule in time). Assemblage_Same_Desire is the hall's own version: one array of small choices, drawn as marks, as paths, and as a floor that carries you. This is also where MeshGrammar, borrowed since ch45, is opened: a rule is a selector, an operation and a dictionary of parameters, and the frame may be grown by it (TubeBranchOp over two generations is the Branching Coral) as well as by your own turtle.",
    "argument": {
     "axis": "which rule grows the frame, from the same seed and the same hung family",
     "values": [
@@ -3738,11 +5877,27 @@
    "tracks": [
     "long"
    ],
+   "works": [
+    {
+     "token": "mesh_grammar_branching_coral",
+     "note": "second-generation branches grow from the tips of the first"
+    },
+    {
+     "token": "mesh_grammar_ca_growth",
+     "note": "a cellular automaton on the faces decides which ones extrude"
+    }
+   ],
+   "borrows": [
+    {
+     "part": "MeshGrammar (commons/mesh_grammar/): MeshRule, MeshSelector and the operations, read and changed here",
+     "depth": "understand"
+    }
+   ],
    "opening_stop": null,
    "kit": null,
    "status": "planned",
    "status_note": null,
-   "n": 36,
+   "n": 38,
    "assemblage": "V",
    "spine_visits": [
     {
@@ -3759,11 +5914,69 @@
      "sequence": "cellularautomata",
      "order": 13
     }
+   ],
+   "process": [
+    "axiom and rules (ch33)",
+    "the turtle draws the frame",
+    "recursion branches it (ch32)",
+    "the automaton gates solid and ghost (ch31)",
+    "hang the family on the frames (ch14)",
+    "one seed for all three"
+   ],
+   "hall_families": [
+    {
+     "hall": "Assemblage_Same_Desire",
+     "role": "carrier",
+     "token": "synthesis_stand",
+     "axis": "mode",
+     "values": [
+      "auto",
+      "hero",
+      "series"
+     ],
+     "shown": [
+      "hero"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "PG_Branching_Growth",
+     "role": "carrier",
+     "token": "branching_growth_algorithm",
+     "axis": "aftermath",
+     "values": [
+      "form",
+      "field",
+      "envelope",
+      "apparatus",
+      "strata"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Assemblage_Same_Desire",
+     "role": "carrier",
+     "token": "godel_statement_plaque",
+     "axis": "outside",
+     "values": [
+      "quotation",
+      "margin",
+      "breach",
+      "omission",
+      "habitat"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
    ]
   },
   {
    "id": "ch35",
-   "n": 37,
+   "n": 39,
    "part": "p8",
    "title": "Soft bodies: the organism returns",
    "spine": [
@@ -3850,11 +6063,58 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "FormFinding_Relaxation",
+     "role": "carrier",
+     "token": "verlet_workbench",
+     "axis": "relaxation",
+     "values": [
+      "worked",
+      "nudged",
+      "pressed",
+      "held"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": true
+    },
+    {
+     "hall": "Topology_Entropy_Morphogenesis",
+     "role": "carrier",
+     "token": "entropy_morphogenesis",
+     "axis": "found_state",
+     "values": [
+      "sorted",
+      "stirred",
+      "mixed"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "SoftBodies_Soft_Body_Deformation",
+     "role": "carrier",
+     "token": "jelly_cube",
+     "axis": "assay",
+     "values": [
+      "none",
+      "gauge",
+      "control",
+      "chart",
+      "vitrine"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch36",
-   "n": 38,
+   "n": 40,
    "part": "p8",
    "title": "A body with no vertices until you ask: implicit bodies",
    "spine": [
@@ -3940,7 +6200,55 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "ISO_Metaballs",
+     "role": "carrier",
+     "token": "metaball_world",
+     "axis": "emplacement",
+     "values": [
+      "column",
+      "ring",
+      "pair",
+      "shell",
+      "scatter"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": true
+    },
+    {
+     "hall": "ISO_Metaballs",
+     "role": "carrier",
+     "token": "nakama_metaballs",
+     "axis": "imprint",
+     "values": [
+      "relief",
+      "blank",
+      "swollen",
+      "flayed"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": true
+    },
+    {
+     "hall": "ISO_Introduction",
+     "role": "carrier",
+     "token": "voxel_noise_demo",
+     "axis": "generator",
+     "values": [
+      "simplex",
+      "perlin",
+      "value",
+      "cellular"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": true
+    }
+   ]
   },
   {
    "id": "ch44",
@@ -4016,7 +6324,7 @@
    "kit": null,
    "status": "planned",
    "status_note": null,
-   "n": 39,
+   "n": 41,
    "assemblage": "VI",
    "spine_visits": [
     {
@@ -4029,11 +6337,83 @@
      "sequence": "isosurfaces",
      "order": 18
     }
+   ],
+   "process": [
+    "two family members",
+    "union",
+    "the implicit body's tunnel (ch36)",
+    "subtraction",
+    "the scanned shell (ch18)",
+    "intersection",
+    "bake the mesh and the collider",
+    "material"
+   ],
+   "hall_families": [
+    {
+     "hall": "Boolean_Gallery",
+     "role": "field trip",
+     "token": "removal_room",
+     "axis": "subtraction",
+     "values": [
+      "cross",
+      "third",
+      "gasket",
+      "figure"
+     ],
+     "shown": [
+      "cross",
+      "figure",
+      "gasket",
+      "third"
+     ],
+     "family_shown": true,
+     "predicted": true
+    },
+    {
+     "hall": "Boolean_Gallery",
+     "role": "field trip",
+     "token": "coincident_face",
+     "axis": "separation",
+     "values": [
+      "coincident",
+      "clear",
+      "hairline",
+      "inverted"
+     ],
+     "shown": [
+      "clear",
+      "coincident",
+      "hairline",
+      "inverted"
+     ],
+     "family_shown": true,
+     "predicted": false
+    },
+    {
+     "hall": "Boolean_Gallery",
+     "role": "field trip",
+     "token": "csg_difference_demo",
+     "axis": "workings",
+     "values": [
+      "outcome",
+      "trace",
+      "operands",
+      "expression"
+     ],
+     "shown": [
+      "expression",
+      "operands",
+      "outcome",
+      "trace"
+     ],
+     "family_shown": true,
+     "predicted": false
+    }
    ]
   },
   {
    "id": "ch37",
-   "n": 40,
+   "n": 42,
    "part": "p8",
    "title": "Many bodies with rules: swarms",
    "spine": [
@@ -4119,11 +6499,58 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "SwarmIntelligence_PhysarumColony",
+     "role": "carrier",
+     "token": "PhysarumColony",
+     "axis": "anchorage",
+     "values": [
+      "triad",
+      "pair",
+      "ring",
+      "scattered"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "SwarmIntelligence_Boids_Algorithm",
+     "role": "carrier",
+     "token": "boid_manager",
+     "axis": "accord",
+     "values": [
+      "school",
+      "orb",
+      "lane",
+      "lattice"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "SwarmIntelligence_Boids_Algorithm",
+     "role": "carrier",
+     "token": "boids_aquarium",
+     "axis": "accord",
+     "values": [
+      "school",
+      "orb",
+      "lane",
+      "lattice"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch38",
-   "n": 41,
+   "n": 43,
    "part": "p9",
    "title": "Bodies that learn: whose data trains the body",
    "spine": [
@@ -4214,11 +6641,59 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+     "role": "carrier",
+     "token": "bias_from_inside",
+     "axis": "perspective_blend",
+     "values": [
+      "0.0",
+      "0.5",
+      "1.0"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+     "role": "carrier",
+     "token": "bias_visualizer",
+     "axis": "disclosure",
+     "values": [
+      "oracle",
+      "tally",
+      "ledger",
+      "works",
+      "origin"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "ML_Classification",
+     "role": "carrier",
+     "token": "enhanced_kmeans",
+     "axis": "cohort",
+     "values": [
+      "blobs",
+      "block",
+      "rings",
+      "braid",
+      "skew"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch39",
-   "n": 42,
+   "n": 44,
    "part": "p9",
    "title": "The crisis of foundations: impossible possible space",
    "spine": [
@@ -4306,11 +6781,61 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "NonEuclidean_Spaces",
+     "role": "carrier",
+     "token": "curvature_slider",
+     "axis": "witness",
+     "values": [
+      "number",
+      "surface",
+      "normals"
+     ],
+     "shown": [
+      "surface"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "NonEuclidean_Spaces",
+     "role": "carrier",
+     "token": "elliptic_surface",
+     "axis": "postulate",
+     "values": [
+      "bare",
+      "parallels",
+      "triangle",
+      "net",
+      "euclid"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "Escher_Impossible",
+     "role": "carrier",
+     "token": "escher_staircase",
+     "axis": "seam",
+     "values": [
+      "none",
+      "hairline",
+      "gap",
+      "scaffold",
+      "field"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch40",
-   "n": 43,
+   "n": 45,
    "part": "p9",
    "title": "Order toward entropy: the QFEP laboratory",
    "spine": [
@@ -4347,7 +6872,7 @@
     "json",
     "dictionaries"
    ],
-   "body": "Your own prediction log becomes a body: every prediction and observation you wrote since ch2, loaded from your sketchbook, with F = |prediction - observation| per chapter drawn as a line you walk along (QFEP's F term). Beside it, 200 seeded symbols sorted by a tween while their Shannon entropy is counted (Random_Entropy).",
+   "body": "Your own prediction log becomes a body: every prediction and observation you wrote since ch2, loaded from your sketchbook, with F = |prediction - observation| per chapter drawn as a line you walk along (a heuristic reading of QFEP's F term: a prediction error you wrote down, not a measured free energy). Beside it, 200 seeded symbols sorted by a tween while their Shannon entropy is counted (Random_Entropy).",
    "argument": {
     "axis": "how the same 200 symbols are arranged",
     "values": [
@@ -4359,7 +6884,7 @@
     "predict": "'sorted by value' and 'reversed' will look most alike: they are mirror images. All four carry exactly the same counted entropy: the picture changes and the number does not.",
     "claim": "Entropy counts what there is, not how it is arranged: order is a picture, not a quantity."
    },
-   "debt": "Shannon entropy measures a distribution and is blind to arrangement: the metric hides exactly what a visual argument shows. QFEP is the project's own framework, and the F term measured on the course's learners must not become a score (c2's warning): the log is for the student, not for the grade.",
+   "debt": "Shannon entropy measures a distribution and is blind to arrangement: the metric hides exactly what a visual argument shows. QFEP is the project's own framework, and the F term measured on the course's learners must not become a score (c2's warning): the log is for the student, not for the grade. The entropy counted here is the Shannon entropy of the symbol frequencies in one row, a stated distribution and a stated estimator. It is not the entropy of the room, of your search or of you, and the chapter makes no claim about those.",
    "place": "Walk your own F curve: the chapters where your prediction was most wrong are the highest points; stand on them.",
    "godot": [
     "Array.sort() and sort_custom()",
@@ -4396,11 +6921,64 @@
    "opening_stop": null,
    "kit": null,
    "status": "planned",
-   "status_note": null
+   "status_note": null,
+   "hall_families": [
+    {
+     "hall": "QFEP_F_Term",
+     "role": "carrier",
+     "token": "lambda_slider",
+     "axis": "calibration",
+     "values": [
+      "optimum",
+      "band",
+      "dispute",
+      "gap",
+      "none"
+     ],
+     "shown": [
+      "none"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "QFEP_Lambda_Spectrum",
+     "role": "carrier",
+     "token": "bifurcation_walkway",
+     "axis": "regime",
+     "values": [
+      "all",
+      "stable",
+      "cascade",
+      "chaos",
+      "period3"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "QFEP_Lambda_Spectrum",
+     "role": "carrier",
+     "token": "complexity_pattern",
+     "axis": "rule",
+     "values": [
+      "life",
+      "highlife",
+      "seeds",
+      "replicator",
+      "maze",
+      "coral"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   },
   {
    "id": "ch41",
-   "n": 44,
+   "n": 46,
    "part": "p9",
    "title": "Out of the lab: your hall in the collective museum (assemblage VII, final)",
    "spine": [
@@ -4487,7 +7065,65 @@
    "kit": null,
    "status": "planned",
    "status_note": null,
-   "assemblage": "VII (final)"
+   "assemblage": "VII (final)",
+   "process": [
+    "choose the families",
+    "their sheets, predictions and claims",
+    "one public sculpture",
+    "provenance records",
+    "place them in the hall",
+    "export to desktop and Quest"
+   ],
+   "hall_families": [
+    {
+     "hall": "CriticalAlgorithms_Applied_Ethics",
+     "role": "carrier",
+     "token": "room_shape_demonstrator",
+     "axis": "plan",
+     "values": [
+      "pair",
+      "head",
+      "circle",
+      "panopticon",
+      "vacant"
+     ],
+     "shown": [
+      "head"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "CriticalAlgorithms_Applied_Ethics",
+     "role": "carrier",
+     "token": "synthesis_stand",
+     "axis": "mode",
+     "values": [
+      "auto",
+      "hero",
+      "series"
+     ],
+     "shown": [
+      "hero"
+     ],
+     "family_shown": false,
+     "predicted": false
+    },
+    {
+     "hall": "CriticalAlgorithms_Applied_Ethics",
+     "role": "carrier",
+     "token": "bias_from_inside",
+     "axis": "perspective_blend",
+     "values": [
+      "0.0",
+      "0.5",
+      "1.0"
+     ],
+     "shown": [],
+     "family_shown": false,
+     "predicted": false
+    }
+   ]
   }
  ],
  "lineage": [
@@ -4502,6 +7138,7 @@
     "ch05",
     "ch06",
     "ch07",
+    "ch45",
     "ch08",
     "ch09",
     "ch14",
@@ -4655,6 +7292,7 @@
    "sequence": "noise",
    "chapters": [
     "ch12",
+    "ch46",
     "ch30",
     "ch36"
    ],
@@ -4736,6 +7374,7 @@
    "sequence": "softbodies",
    "chapters": [
     "ch15",
+    "ch46",
     "ch31",
     "ch35"
    ],
@@ -4847,7 +7486,7 @@
   }
  ],
  "spine_relation": {
-  "order_agreement": 0.978,
+  "order_agreement": 0.979,
   "order_agreement_note": "fraction of chapter pairs whose carrier sequences are in spine order; 1.0 is the spine itself",
   "v1_order_agreement_same_metric": 0.894,
   "spine_control_order_agreement": 1.0,
@@ -4860,7 +7499,7 @@
   "departures": [
    {
     "chapter": "ch14",
-    "n": 12,
+    "n": 13,
     "title": "Families: one body in a single class",
     "kind": "return",
     "below_spine_order": true,
@@ -4868,7 +7507,7 @@
    },
    {
     "chapter": "ch15",
-    "n": 13,
+    "n": 14,
     "title": "The family in the editor: setters, @tool and the sheet opened",
     "kind": "return",
     "below_spine_order": true,
@@ -4876,7 +7515,7 @@
    },
    {
     "chapter": "ch16",
-    "n": 14,
+    "n": 15,
     "title": "The budget: polycount measured, a claim tested",
     "kind": "return",
     "below_spine_order": true,
@@ -4884,7 +7523,7 @@
    },
    {
     "chapter": "ch18",
-    "n": 15,
+    "n": 16,
     "title": "Collage: a found body joins the family (assemblage II)",
     "kind": "return",
     "below_spine_order": true,
@@ -4892,7 +7531,7 @@
    },
    {
     "chapter": "ch28",
-    "n": 26,
+    "n": 27,
     "title": "The arrow and the field of arrows",
     "kind": "return",
     "below_spine_order": true,
@@ -4900,7 +7539,7 @@
    },
    {
     "chapter": "ch25",
-    "n": 30,
+    "n": 32,
     "title": "To stand despite all possibilities to fall: a round (assemblage IV, midterm)",
     "kind": "return",
     "below_spine_order": true,
@@ -4915,7 +7554,7 @@
   "unknown_ids": 0,
   "halls_off_spine": 0,
   "chapters_over_three_new_ideas": 0,
-  "chapters": 44
+  "chapters": 46
  },
  "source_candidate": "d2_ada_first (course_v1.json), refined by hand"
 }

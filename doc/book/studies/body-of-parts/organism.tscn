@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://cube.tscn" id="Cube"]
+[ext_resource type="Script" path="res://organism.gd" id="Lesson"]
+[ext_resource type="PackedScene" path="res://parts/limb_part.tscn" id="LimbPart"]
+[ext_resource type="Script" path="res://lattice.gd" id="Cells"]
+
+[node name="OrganismStudy" instance=ExtResource("Cube")]
+
+[node name="Organism" type="Node3D" parent="."]
+script = ExtResource("Lesson")
+
+[node name="Hip" parent="Organism" instance=ExtResource("LimbPart")]
+position = Vector3(-0.9, 1.12, 0.8)
+
+[node name="Lattice" type="Node3D" parent="Organism"]
+position = Vector3(-0.6, 0.99, 0.24)
+script = ExtResource("Cells")
+
+[node name="Count" type="Label3D" parent="Organism/Lattice"]
+position = Vector3(0.42, 0.3, 1.5)
+pixel_size = 0.004
+font_size = 32

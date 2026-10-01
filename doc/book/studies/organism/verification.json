@@ -1,0 +1,636 @@
+{
+  "checks": [
+    {
+      "name": "action move_left exists, bound to A, Left",
+      "passed": true
+    },
+    {
+      "name": "action move_right exists, bound to D, Right",
+      "passed": true
+    },
+    {
+      "name": "action move_forward exists, bound to W, Up",
+      "passed": true
+    },
+    {
+      "name": "action move_backward exists, bound to S, Down",
+      "passed": true
+    },
+    {
+      "name": "action pause exists, bound to Space",
+      "passed": true
+    },
+    {
+      "name": "action close exists, bound to Enter",
+      "passed": true
+    },
+    {
+      "name": "action fill exists, bound to F",
+      "passed": true
+    },
+    {
+      "name": "action drop exists, bound to M",
+      "passed": true
+    },
+    {
+      "name": "action look exists, bound to V",
+      "passed": true
+    },
+    {
+      "name": "line.tscn still runs on its own: readout 1.50 m",
+      "passed": true
+    },
+    {
+      "name": "trace.tscn still runs on its own: 1 kept",
+      "passed": true
+    },
+    {
+      "name": "plane.tscn still runs on its own: open, no face, no cube",
+      "passed": true
+    },
+    {
+      "name": "cube.tscn still runs on its own: a cube of 12 outward triangles, and no organism",
+      "passed": true
+    },
+    {
+      "name": "the root still runs plane.gd; A, B, Segment, Strip, Record, Face, FaceBody, Marble and Under are inherited",
+      "passed": true
+    },
+    {
+      "name": "the cube stands where it stood, at (1.05, 1.37, 0.6), repaired: 12 outward triangles, 0.5 m on every edge",
+      "passed": true
+    },
+    {
+      "name": "the marble still reads the cube: dropped over its top it rests at 1.710 m",
+      "passed": true
+    },
+    {
+      "name": "Organism runs organism.gd and Lattice runs lattice.gd",
+      "passed": true
+    },
+    {
+      "name": "the chain is nested in the scene: Organism > Hip > Upper > Lower > Foot > Toe",
+      "passed": true
+    },
+    {
+      "name": "thirteen nodes hang below Hip: three pins, three bars with a Body and a shape each, and the toe",
+      "passed": true
+    },
+    {
+      "name": "the lattice is no part of the chain: it is Organism's other child",
+      "passed": true
+    },
+    {
+      "name": "each of the three joints has a Bar that runs our cube.gd, with the cube's own 8 corners and 12 triples and a Body",
+      "passed": true
+    },
+    {
+      "name": "each Bar's mesh is still the cube, 0.5 m on every edge; the node's scale (0.16, 0.16, 0.6) makes it a bar of 0.08 x 0.08 x 0.3 m",
+      "passed": true
+    },
+    {
+      "name": "no joint is scaled: the stretch sits on the leaves",
+      "passed": true
+    },
+    {
+      "name": "corner 6 of the upper bar is (0.25, 0.25, 0.25) in its list and (-0.86, 1.16, 1.1) in the room: to_global()",
+      "passed": true
+    },
+    {
+      "name": "at rest the Hip stands at (-0.9, 1.12, 0.8), at the height of the walk, and Upper, its pin, stands in it",
+      "passed": true
+    },
+    {
+      "name": "at rest the three bars lie end to end along +z: 0.8 to 1.1, 1.1 to 1.4, 1.4 to 1.7",
+      "passed": true
+    },
+    {
+      "name": "at rest the foot's position is (0, 0, 0.3) and its global_position is (-0.9, 1.12, 1.4); the toe is at (-0.9, 0.99, 1.7)",
+      "passed": true
+    },
+    {
+      "name": "Upper turned 30 degrees: the foot's position is still (0, 0, 0.3); its global_position is (-0.6, 1.12, 1.3196), 0.6 m from the hip",
+      "passed": true
+    },
+    {
+      "name": "Upper and Lower turned 30 degrees: the foot is at (-0.4902, 1.12, 1.2098), as worked out by hand",
+      "passed": true
+    },
+    {
+      "name": "turning Lower swings the foot around Lower's origin: 0.3 m from the knee at five angles, and the knee does not move",
+      "passed": true
+    },
+    {
+      "name": "at three other sets of joint angles the foot's and the toe's global_position equal the sum worked out by hand, and their position never changes",
+      "passed": true
+    },
+    {
+      "name": "every joint at 30 degrees: the foot's basis.z is (0.5, 0, 0.866) and its global_basis.z is (1, 0, 0): it points along +x",
+      "passed": true
+    },
+    {
+      "name": "the toe is at (-0.1902, 0.99, 1.2098): the foot's global_position and 0.3 m along its global_basis.z, 0.13 m down",
+      "passed": true
+    },
+    {
+      "name": "to_global() does the same sum: foot.to_global(Vector3(0, -0.13, 0.3)) is the toe; to_local() undoes it",
+      "passed": true
+    },
+    {
+      "name": "a ray sent down meets the foot's bar where it now lies, at its top, 1.16 m, and nothing where it lay at rest",
+      "passed": true
+    },
+    {
+      "name": "the foot placed by hand at (0, 1.12, 1.0): the hip and the knee stay; the foot's position becomes (0.9, 0, -0.1)",
+      "passed": true
+    },
+    {
+      "name": "the hip moved 0.5 m along x: the knee, the foot and the toe move 0.5 m with it, and no position below the hip changes",
+      "passed": true
+    },
+    {
+      "name": "the three Bars turned 30 degrees and no joint: every bar spins on its own middle, and the foot and the toe stay where they rest",
+      "passed": true
+    },
+    {
+      "name": "and the chain comes apart: the upper bar's far end and the lower bar's near end are 0.155 m apart",
+      "passed": true
+    },
+    {
+      "name": "one call of _process(0.25) with speed 0.6: angle is 0.15, and each of the three joints is turned by it",
+      "passed": true
+    },
+    {
+      "name": "angle += speed * delta: after one second the angle is 0.6000 rad at 30, 60, 90 and 144 frames a second",
+      "passed": true
+    },
+    {
+      "name": "angle += 0.01 a frame: after one second it is 0.30 at 30, 0.60 at 60, 0.90 at 90 and 1.44 at 144: it scales with the frame rate",
+      "passed": true
+    },
+    {
+      "name": "without delta, 90 frames a second turn the limb 1.5 times as far as 60, and 144 turn it 4.8 times as far as 30",
+      "passed": true
+    },
+    {
+      "name": "pivot 0 at the end: with every joint at 30 degrees the toe is at (-0.190, 0.990, 1.210), as worked out by hand",
+      "passed": true
+    },
+    {
+      "name": "pivot 1 at one third: with every joint at 30 degrees the toe is at (-0.290, 0.990, 1.310), as worked out by hand",
+      "passed": true
+    },
+    {
+      "name": "pivot 2 at the centre: with every joint at 30 degrees the toe is at (-0.340, 0.990, 1.360), as worked out by hand",
+      "passed": true
+    },
+    {
+      "name": "pivot 3 outside: with every joint at 30 degrees the toe is at (-0.040, 0.990, 1.060), as worked out by hand",
+      "passed": true
+    },
+    {
+      "name": "at rest the four values put every bar and the toe in the same place: only the pins differ",
+      "passed": true
+    },
+    {
+      "name": "the Upper pin stands 0, 0.1, 0.15 m ahead of the hip and 0.15 m behind it; Lower and Foot stay one bar's length from their parents",
+      "passed": true
+    },
+    {
+      "name": "the toes at 30 degrees are the lesson's: (-0.19, 1.21), (-0.29, 1.31), (-0.34, 1.36) and (-0.04, 1.06) in x and z",
+      "passed": true
+    },
+    {
+      "name": "the closest two toes are one third and the centre, 0.071 m apart; the end and one third are 0.141 m apart",
+      "passed": true
+    },
+    {
+      "name": "only with the pivot at the end does the chain stay joined: the gap at the knee is 0.000, 0.052, 0.078 and 0.078 m",
+      "passed": true
+    },
+    {
+      "name": "the lattice is 8 columns by 11 rows of 0.1 m cells, 0.12 m apart: 88 cells, the first at (-0.6, 0.99, 0.24), their tops at 1.04 m",
+      "passed": true
+    },
+    {
+      "name": "the limb slides over it and only the toe dips in: the bars' undersides are at 1.08 m, the toe's middle at 0.99 m",
+      "passed": true
+    },
+    {
+      "name": "carve() far from every cell takes nothing and returns 0",
+      "passed": true
+    },
+    {
+      "name": "carve() over the middle of cell (3, 5), five metres up, returns 5: the cell and its four neighbours; height does not count",
+      "passed": true
+    },
+    {
+      "name": "carve() at the same place again returns 0: the cut stays, and nothing is lost twice",
+      "passed": true
+    },
+    {
+      "name": "fill() builds the lattice again, whole",
+      "passed": true
+    },
+    {
+      "name": "one whole turn, told the toe's global_position: the lattice loses 33 cells and reads '55 of 88 cells'",
+      "passed": true
+    },
+    {
+      "name": "they are the cells the toe passed over: every cell within 0.16 m of the path worked out by hand, and no other",
+      "passed": true
+    },
+    {
+      "name": "a second turn takes nothing more: the cut is kept",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped over the cut falls through the lattice to the floor: 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped over cells that are left rests on them: 1.138 m, their tops at 1.04 m and its radius",
+      "passed": true
+    },
+    {
+      "name": "told the toe's position, (0, -0.13, 0.3), the lattice loses 6 cells in the first frame and no more in a whole turn: '82 of 88 cells'",
+      "passed": true
+    },
+    {
+      "name": "they are the wrong cells: columns 4 to 6 of rows 0 and 1, over the spot 0.3 m in front of the middle of the room",
+      "passed": true
+    },
+    {
+      "name": "not one of them is a cell the toe passes over: the two cuts share no cell",
+      "passed": true
+    },
+    {
+      "name": "one turn takes 33 cells at 144, 60, 30 and 10 frames a second, 32 at 5 and 26 at 3: slow frames step over cells",
+      "passed": true
+    },
+    {
+      "name": "one turn takes 33, 26, 23 and 45 cells at the four values of pivot: the same bars and angles, four cuts",
+      "passed": true
+    },
+    {
+      "name": "Upper stretched to (1, 1, 2) with the joints at 30 degrees: Lower's x and z axes stand at 123.0 degrees, where they stood at 90.0",
+      "passed": true
+    },
+    {
+      "name": "and they are no longer 1 long: 1.323 and 1.803; Lower's own scale still reads (1, 1, 1)",
+      "passed": true
+    },
+    {
+      "name": "B starts at (0.75, 1.12, 0), at the hip's height: the hip can take B's position as it is",
+      "passed": true
+    },
+    {
+      "name": "the hip carried by B from x = 0.75 to -1.55, the limb held straight: the toe cuts a passage of 16 cells, rows 5 and 6 from side to side",
+      "passed": true
+    },
+    {
+      "name": "a marble dropped over the passage falls through it to the floor: 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "second.json: runs with --fixed-fps 30, 60, 90 and 144 counted 30, 60, 90 and 144 frames in one second",
+      "passed": true
+    },
+    {
+      "name": "second.json: with speed * delta the angle after one second was 0.6000 rad in all four runs, and the toe in the same place",
+      "passed": true
+    },
+    {
+      "name": "second.json: with 0.01 a frame it was 0.30, 0.60, 0.90 and 1.44 rad: 17, 34, 52 and 83 degrees",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: with every joint at 30 degrees the closest pair is one third and the centre, from above and from the top",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: at rest no two values differ on more than 0.3% of the frame (the pins); at 30 degrees every pair differs on more than 1%",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: with a window the four toes are where they are headless",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: with a window one turn takes the same 33, 26, 23 and 45 cells",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: told the toe's position, the lattice lost 6 cells in a whole turn",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the bars turned and no joint: the toe stays at (-0.9, 0.99, 1.7), and the still differs from rest",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: a stretch on Upper shears Lower to 123 degrees and changes the still on more than 1% of the frame",
+      "passed": true
+    }
+  ],
+  "godot": "4.6-stable (official)",
+  "measured": {
+    "bars_turned_gap_m": 0.155,
+    "cells_lost_in_one_turn_by_frame_rate": {
+      "3": 26,
+      "5": 32,
+      "10": 33,
+      "30": 33,
+      "60": 33,
+      "144": 33
+    },
+    "cells_lost_in_one_turn_by_pivot": [
+      33,
+      26,
+      23,
+      45
+    ],
+    "cells_lost_in_one_turn_global": 33,
+    "cells_lost_local_position": 6,
+    "knee_gap_at_30_by_pivot_m": [
+      0.0,
+      0.052,
+      0.078,
+      0.078
+    ],
+    "one_second_144_frames": {
+      "angle_per_frame": 1.44,
+      "angle_with_delta": 0.6,
+      "toe_with_delta": [
+        -0.159,
+        0.99,
+        1.088
+      ]
+    },
+    "one_second_30_frames": {
+      "angle_per_frame": 0.3,
+      "angle_with_delta": 0.6,
+      "toe_with_delta": [
+        -0.159,
+        0.99,
+        1.088
+      ]
+    },
+    "one_second_60_frames": {
+      "angle_per_frame": 0.6,
+      "angle_with_delta": 0.6,
+      "toe_with_delta": [
+        -0.159,
+        0.99,
+        1.088
+      ]
+    },
+    "one_second_90_frames": {
+      "angle_per_frame": 0.9,
+      "angle_with_delta": 0.6,
+      "toe_with_delta": [
+        -0.159,
+        0.99,
+        1.088
+      ]
+    },
+    "second": {
+      "144": {
+        "per_frame": {
+          "angle_deg": 82.51,
+          "angle_rad": 1.44,
+          "frames": 144.0,
+          "seconds": 1.0,
+          "toe": [
+            -0.802,
+            0.99,
+            0.435
+          ]
+        },
+        "per_second": {
+          "angle_deg": 34.38,
+          "angle_rad": 0.6,
+          "frames": 144.0,
+          "seconds": 1.0,
+          "toe": [
+            -0.159,
+            0.99,
+            1.088
+          ]
+        }
+      },
+      "30": {
+        "per_frame": {
+          "angle_deg": 17.19,
+          "angle_rad": 0.3,
+          "frames": 30.0,
+          "seconds": 1.0,
+          "toe": [
+            -0.407,
+            0.99,
+            1.521
+          ]
+        },
+        "per_second": {
+          "angle_deg": 34.38,
+          "angle_rad": 0.6,
+          "frames": 30.0,
+          "seconds": 1.0,
+          "toe": [
+            -0.159,
+            0.99,
+            1.088
+          ]
+        }
+      },
+      "60": {
+        "per_frame": {
+          "angle_deg": 34.38,
+          "angle_rad": 0.6,
+          "frames": 60.0,
+          "seconds": 1.0,
+          "toe": [
+            -0.159,
+            0.99,
+            1.088
+          ]
+        },
+        "per_second": {
+          "angle_deg": 34.38,
+          "angle_rad": 0.6,
+          "frames": 60.0,
+          "seconds": 1.0,
+          "toe": [
+            -0.159,
+            0.99,
+            1.088
+          ]
+        }
+      },
+      "90": {
+        "per_frame": {
+          "angle_deg": 51.57,
+          "angle_rad": 0.9,
+          "frames": 90.0,
+          "seconds": 1.0,
+          "toe": [
+            -0.245,
+            0.99,
+            0.647
+          ]
+        },
+        "per_second": {
+          "angle_deg": 34.38,
+          "angle_rad": 0.6,
+          "frames": 90.0,
+          "seconds": 1.0,
+          "toe": [
+            -0.159,
+            0.99,
+            1.088
+          ]
+        }
+      }
+    },
+    "shear_lower_axes_degrees": 123.0,
+    "sheet": {
+      "0": {
+        "cells_lost_in_one_turn": 33.0,
+        "limb_share_above_pct": 0.51,
+        "limb_share_top_pct": 1.2,
+        "toe": [
+          -0.19,
+          0.99,
+          1.21
+        ],
+        "toe_from_hip_m": 0.82,
+        "value": "at the end"
+      },
+      "1": {
+        "cells_lost_in_one_turn": 26.0,
+        "limb_share_above_pct": 0.49,
+        "limb_share_top_pct": 1.22,
+        "toe": [
+          -0.29,
+          0.99,
+          1.31
+        ],
+        "toe_from_hip_m": 0.795,
+        "value": "at one third"
+      },
+      "2": {
+        "cells_lost_in_one_turn": 23.0,
+        "limb_share_above_pct": 0.52,
+        "limb_share_top_pct": 1.23,
+        "toe": [
+          -0.34,
+          0.99,
+          1.36
+        ],
+        "toe_from_hip_m": 0.792,
+        "value": "at the centre"
+      },
+      "3": {
+        "cells_lost_in_one_turn": 45.0,
+        "limb_share_above_pct": 0.56,
+        "limb_share_top_pct": 1.27,
+        "toe": [
+          -0.04,
+          0.99,
+          1.06
+        ],
+        "toe_from_hip_m": 0.898,
+        "value": "outside"
+      },
+      "bars_turned": {
+        "differs_from_centre_pct": 1.65,
+        "differs_from_rest_pct": 1.04,
+        "toe": [
+          -0.9,
+          0.99,
+          1.7
+        ]
+      },
+      "closest_pair_above": "1 vs 2",
+      "closest_pair_rest_top": "2 vs 3",
+      "closest_pair_top": "1 vs 2",
+      "farthest_pair_above": "2 vs 3",
+      "farthest_pair_rest_top": "1 vs 2",
+      "farthest_pair_top": "2 vs 3",
+      "godot": "4.6-stable (official)",
+      "local_position": {
+        "asked_at": [
+          0.0,
+          -0.13,
+          0.3
+        ],
+        "cells": "[(4, 0), (4, 1), (5, 0), (5, 1), (6, 0), (6, 1)]",
+        "cells_lost_in_one_turn": 6.0
+      },
+      "pairs_above_pct": {
+        "0 vs 1": 0.72,
+        "0 vs 2": 0.87,
+        "0 vs 3": 0.83,
+        "1 vs 2": 0.52,
+        "1 vs 3": 0.96,
+        "2 vs 3": 1.01
+      },
+      "pairs_rest_top_pct": {
+        "0 vs 1": 0.16,
+        "0 vs 2": 0.16,
+        "0 vs 3": 0.16,
+        "1 vs 2": 0.18,
+        "1 vs 3": 0.18,
+        "2 vs 3": 0.06
+      },
+      "pairs_top_pct": {
+        "0 vs 1": 1.94,
+        "0 vs 2": 2.11,
+        "0 vs 3": 2.13,
+        "1 vs 2": 1.27,
+        "1 vs 3": 2.18,
+        "2 vs 3": 2.19
+      },
+      "renderer": "NVIDIA GeForce RTX 3070",
+      "stretched_joint": {
+        "differs_from_unstretched_pct": 2.5,
+        "lower_x_length": 1.323,
+        "lower_x_to_z_degrees": 123.0,
+        "lower_z_length": 1.803,
+        "toe": [
+          0.165,
+          0.99,
+          1.825
+        ]
+      }
+    },
+    "toe_at_30_30_30": [
+      -0.19,
+      0.99,
+      1.21
+    ],
+    "toe_at_30_by_pivot": [
+      [
+        -0.19,
+        0.99,
+        1.21
+      ],
+      [
+        -0.29,
+        0.99,
+        1.31
+      ],
+      [
+        -0.34,
+        0.99,
+        1.36
+      ],
+      [
+        -0.04,
+        0.99,
+        1.06
+      ]
+    ]
+  },
+  "passed": true
+}

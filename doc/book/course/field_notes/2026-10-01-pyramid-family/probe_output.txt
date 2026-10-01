@@ -1,0 +1,50 @@
+# What the probes printed (2026-10-01)
+
+## probe_token.gd, first measurement (T2): read before the body had run
+TOKEN pyramid#base_sides:8 | config={ "base_sides": true } | overrides={ "rotation_y_degrees": 8.0 } | pyramid.base_sides=4 | mesh vertices=-1
+TOKEN pyramid#base_sides:3 | config={ "base_sides": true } | overrides={ "rotation_y_degrees": 3.0 } | pyramid.base_sides=4 | mesh vertices=-1
+TOKEN pyramid#base_sides:6 | config={ "base_sides": true } | overrides={ "rotation_y_degrees": 6.0 } | pyramid.base_sides=4 | mesh vertices=-1
+TOKEN pyramid#apex_stance:corner | config={ "apex_stance": "corner" } | overrides={  } | pyramid.base_sides=4 | mesh vertices=-1
+TOKEN pyramid | config={  } | overrides={  } | pyramid.base_sides=4 | mesh vertices=-1
+
+## probe_family.gd after listing base_sides (T3, T4): BEFORE is the misread value, built
+BEFORE pyramid#base_sides:8 as it was misread -> base_sides=3 mesh_vertices=12 rotation_y_deg=8.0
+AFTER  pyramid#base_sides:3 | config={ "base_sides": "3" } overrides={  } -> base_sides=3 mesh_vertices=12 rotation_y_deg=0.0
+AFTER  pyramid#base_sides:4 | config={ "base_sides": "4" } overrides={  } -> base_sides=4 mesh_vertices=18 rotation_y_deg=0.0
+AFTER  pyramid#base_sides:5 | config={ "base_sides": "5" } overrides={  } -> base_sides=5 mesh_vertices=24 rotation_y_deg=0.0
+AFTER  pyramid#base_sides:6 | config={ "base_sides": "6" } overrides={  } -> base_sides=6 mesh_vertices=30 rotation_y_deg=0.0
+AFTER  pyramid#base_sides:8 | config={ "base_sides": "8" } overrides={  } -> base_sides=8 mesh_vertices=42 rotation_y_deg=0.0
+AFTER  pyramid | config={  } overrides={  } -> base_sides=4 mesh_vertices=18 rotation_y_deg=0.0
+
+## probe_rule.gd before listing rule (T8)
+RULE ca_rule_explorer:180:1.04:1#study:neighb | config={ "study": "neighbours", "rule": true, "plinth": "0", "room": "comparison" } | overrides={ "rotation_y_degrees": 90.0, "y_position": 1.04, "uniform_scale": 1.0 }
+RULE ca_rule_explorer:270:1.04#study:neighbou | config={ "study": "neighbours", "rule": true, "speed": "4", "plinth": "0", "room": "ring" } | overrides={ "rotation_y_degrees": 90.0, "y_position": 1.04 }
+
+## probe_rule.gd after
+RULE ca_rule_explorer:180:1.04:1#study:neighb | config={ "study": "neighbours", "rule": "90", "plinth": "0", "room": "comparison" } | overrides={ "rotation_y_degrees": 180.0, "y_position": 1.04, "uniform_scale": 1.0 }
+RULE ca_rule_explorer:270:1.04#study:neighbou | config={ "study": "neighbours", "rule": "90", "speed": "4", "plinth": "0", "room": "ring" } | overrides={ "rotation_y_degrees": 270.0, "y_position": 1.04 }
+
+## probe_numeric_axis_keys.gd before (last lines) and after
+[numeric-axis] FAIL ten_print_textile#odds:0 -> config={ "odds": true } overrides={ "rotation_y_degrees": 0.0 }  (randomness.json)
+[numeric-axis] FAIL combined_forces_demo#force_count:1 -> config={ "force_count": true } overrides={ "rotation_y_degrees": 1.0 }  (vectors_demos.json)
+[numeric-axis] 46 numeric axes checked, 29 misread
+[numeric-axis] 46 numeric axes checked, 0 misread
+
+## museum messages: first placement (row 11), then against the wall (row 12)
+[em-seal] polyhedron_nets_cube seals 7 cell(s) — the route is severed, and it stands where the map put it
+[em-seal] pyramid seals 1 cell(s) — the route is severed, and it stands where the map put it
+[em-seal] station_crates seals 1 cell(s) — the route is severed, and it stands where the map put it
+[em-pack] primitives · point animatedcube <- Point_Animatedcube: 18 verbatim + 0 slid of 20, 2 left behind, 2 plinth(s)
+--
+[em-seal] polyhedron_nets_cube seals 7 cell(s) — the route is severed, and it stands where the map put it
+[em-seal] station_crates seals 1 cell(s) — the route is severed, and it stands where the map put it
+[em-pack] primitives · point animatedcube <- Point_Animatedcube: 18 verbatim + 0 slid of 20, 2 left behind, 2 plinth(s)
+
+## replay, 11:55
+[numeric-axis] 46 numeric axes checked, 0 misread
+AFTER  pyramid#base_sides:3 | config={ "base_sides": "3" } overrides={  } -> base_sides=3 mesh_vertices=12 rotation_y_deg=0.0
+AFTER  pyramid#base_sides:4 | config={ "base_sides": "4" } overrides={  } -> base_sides=4 mesh_vertices=18 rotation_y_deg=0.0
+AFTER  pyramid#base_sides:5 | config={ "base_sides": "5" } overrides={  } -> base_sides=5 mesh_vertices=24 rotation_y_deg=0.0
+AFTER  pyramid#base_sides:6 | config={ "base_sides": "6" } overrides={  } -> base_sides=6 mesh_vertices=30 rotation_y_deg=0.0
+AFTER  pyramid#base_sides:8 | config={ "base_sides": "8" } overrides={  } -> base_sides=8 mesh_vertices=42 rotation_y_deg=0.0
+AFTER  pyramid | config={  } overrides={  } -> base_sides=4 mesh_vertices=18 rotation_y_deg=0.0

@@ -1,0 +1,285 @@
+{
+  "closest_pair_above": "by hand vs drafted",
+  "closest_pair_faceted": "by hand vs drafted",
+  "closest_pair_level": "by hand vs drafted",
+  "cut_0.9_asked_of_both": {
+    "by hand": {
+      "cut_field_says": 0.5,
+      "height_m": 0.883,
+      "triangles": 20
+    },
+    "differ": {
+      "differ_pct": 14.88,
+      "inside_pct": 3.87,
+      "outline_pct": 11.01,
+      "outline_px": 58.92
+    },
+    "drafted": {
+      "cut_field_says": 0.9,
+      "height_m": 0.53,
+      "triangles": 20
+    }
+  },
+  "farthest_pair_above": "by hand vs found",
+  "farthest_pair_faceted": "by hand vs found",
+  "farthest_pair_level": "by hand vs found",
+  "found_in_its_own_material_vs_by_hand": {
+    "differ_pct": 20.3,
+    "inside_pct": 19.34,
+    "outline_pct": 0.96,
+    "outline_px": 5.0
+  },
+  "godot": "4.6-stable (official)",
+  "members": {
+    "by hand": {
+      "box_m": [
+        0.789,
+        0.989,
+        0.789
+      ],
+      "class": "MeshInstance3D",
+      "corners_listed": 60,
+      "covers_pct_above": 15.43,
+      "covers_pct_faceted": 20.3,
+      "covers_pct_level": 20.3,
+      "has_a_list_of_corner_numbers": false,
+      "lowest_point_m": 0.0,
+      "mesh_nodes": 1,
+      "painted_by_the_sheet": true,
+      "primitives_drawn": 24,
+      "triangles": 20,
+      "triangles_with_area": 20
+    },
+    "drafted": {
+      "box_m": [
+        0.789,
+        0.989,
+        0.789
+      ],
+      "class": "MeshInstance3D",
+      "corners_listed": 36,
+      "covers_pct_above": 15.43,
+      "covers_pct_faceted": 20.3,
+      "covers_pct_level": 20.3,
+      "has_a_list_of_corner_numbers": true,
+      "lowest_point_m": 0.0,
+      "mesh_nodes": 1,
+      "painted_by_the_sheet": true,
+      "primitives_drawn": 24,
+      "triangles": 20,
+      "triangles_with_area": 20
+    },
+    "found": {
+      "box_m": [
+        0.756,
+        0.99,
+        0.75
+      ],
+      "class": "Node3D",
+      "corners_listed": 2993,
+      "covers_pct_above": 13.38,
+      "covers_pct_faceted": 19.34,
+      "covers_pct_level": 19.34,
+      "has_a_list_of_corner_numbers": true,
+      "lowest_point_m": 0.0,
+      "mesh_nodes": 1,
+      "painted_by_the_sheet": false,
+      "primitives_drawn": 5855,
+      "primitives_drawn_from": {
+        "16.0 m": 5855,
+        "2.0 m": 5855,
+        "4.0 m": 5855,
+        "8.0 m": 5855
+      },
+      "triangles": 5851,
+      "triangles_with_area": 5851
+    }
+  },
+  "pairs_above": {
+    "by hand vs drafted": {
+      "differ_pct": 0.0,
+      "inside_pct": 0.0,
+      "outline_pct": 0.0,
+      "outline_px": 0.0
+    },
+    "by hand vs found": {
+      "differ_pct": 3.61,
+      "inside_pct": 1.57,
+      "outline_pct": 2.04,
+      "outline_px": 12.2
+    },
+    "drafted vs found": {
+      "differ_pct": 3.61,
+      "inside_pct": 1.57,
+      "outline_pct": 2.04,
+      "outline_px": 12.2
+    }
+  },
+  "pairs_faceted": {
+    "by hand vs drafted": {
+      "differ_pct": 0.0,
+      "inside_pct": 0.0,
+      "outline_pct": 0.0,
+      "outline_px": 0.0
+    },
+    "by hand vs found": {
+      "differ_pct": 2.68,
+      "inside_pct": 1.72,
+      "outline_pct": 0.96,
+      "outline_px": 5.0
+    },
+    "drafted vs found": {
+      "differ_pct": 2.68,
+      "inside_pct": 1.72,
+      "outline_pct": 0.96,
+      "outline_px": 5.0
+    }
+  },
+  "pairs_level": {
+    "by hand vs drafted": {
+      "differ_pct": 0.0,
+      "inside_pct": 0.0,
+      "outline_pct": 0.0,
+      "outline_px": 0.0
+    },
+    "by hand vs found": {
+      "differ_pct": 2.91,
+      "inside_pct": 1.95,
+      "outline_pct": 0.96,
+      "outline_px": 5.0
+    },
+    "drafted vs found": {
+      "differ_pct": 2.91,
+      "inside_pct": 1.95,
+      "outline_pct": 0.96,
+      "outline_px": 5.0
+    }
+  },
+  "primitives_drawn_with_nobody": 4,
+  "process_png": {
+    "bytes": 31935,
+    "height": 266,
+    "width": 1940
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "sheet_png": {
+    "bytes": 58175,
+    "height": 754,
+    "width": 968
+  },
+  "still": {
+    "fov": 40.0,
+    "height": 720,
+    "metres_to_the_body": 2.0,
+    "width": 960
+  },
+  "strip": [
+    {
+      "bodies": 1,
+      "differs_from_step_before_pct": 0.0,
+      "first_corners": 8,
+      "first_height_m": 0.765,
+      "last_height_m": 0.765,
+      "last_lowest_point_m": 0.0,
+      "last_middle_from_its_plate_m": 0.0,
+      "plates": [
+        "by hand"
+      ],
+      "step": "1 the cube, pulled",
+      "triangles": [
+        12
+      ]
+    },
+    {
+      "bodies": 1,
+      "differs_from_step_before_pct": 6.96,
+      "first_corners": 8,
+      "first_height_m": 1.325,
+      "last_height_m": 1.325,
+      "last_lowest_point_m": 0.0,
+      "last_middle_from_its_plate_m": 0.0,
+      "plates": [
+        "by hand"
+      ],
+      "step": "2 stood on its diagonal",
+      "triangles": [
+        12
+      ]
+    },
+    {
+      "bodies": 1,
+      "differs_from_step_before_pct": 3.42,
+      "first_corners": 12,
+      "first_height_m": 0.989,
+      "last_height_m": 0.989,
+      "last_lowest_point_m": 0.0,
+      "last_middle_from_its_plate_m": 0.0,
+      "plates": [
+        "by hand"
+      ],
+      "step": "3 two corners cut",
+      "triangles": [
+        20
+      ]
+    },
+    {
+      "bodies": 2,
+      "differs_from_step_before_pct": 5.68,
+      "first_corners": 12,
+      "first_height_m": 0.989,
+      "last_height_m": 0.989,
+      "last_lowest_point_m": 0.0,
+      "last_middle_from_its_plate_m": 0.0,
+      "plates": [
+        "by hand",
+        "drafted"
+      ],
+      "step": "4 a drafted answer",
+      "triangles": [
+        20,
+        20
+      ]
+    },
+    {
+      "bodies": 3,
+      "differs_from_step_before_pct": 0.57,
+      "first_corners": 12,
+      "first_height_m": 0.989,
+      "last_height_m": 99.039,
+      "last_lowest_point_m": 4.3,
+      "last_middle_from_its_plate_m": 42.951,
+      "plates": [
+        "by hand",
+        "drafted",
+        "found"
+      ],
+      "step": "5 a found body arrives",
+      "triangles": [
+        20,
+        20,
+        5851
+      ]
+    },
+    {
+      "bodies": 3,
+      "differs_from_step_before_pct": 4.74,
+      "first_corners": 12,
+      "first_height_m": 0.989,
+      "last_height_m": 0.99,
+      "last_lowest_point_m": 0.0,
+      "last_middle_from_its_plate_m": 0.0,
+      "plates": [
+        "by hand",
+        "drafted",
+        "found"
+      ],
+      "step": "6 its unit and its origin",
+      "triangles": [
+        20,
+        20,
+        5851
+      ]
+    }
+  ],
+  "strip_step_that_changed_most": "2 stood on its diagonal"
+}

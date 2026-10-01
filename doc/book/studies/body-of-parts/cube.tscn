@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://plane.tscn" id="Plane"]
+[ext_resource type="PackedScene" path="res://parts/cube_part.tscn" id="CubePart"]
+
+[node name="CubeStudy" instance=ExtResource("Plane")]
+
+[node name="Cube" parent="." instance=ExtResource("CubePart")]
+position = Vector3(1.05, 1.37, 0.6)

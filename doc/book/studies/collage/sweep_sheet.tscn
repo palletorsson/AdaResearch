@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://sweep_sheet.gd" id="Sweep"]
+
+[sub_resource type="StandardMaterial3D" id="Paint"]
+albedo_color = Color(0.45, 0.38, 0.3, 1)
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="PaperMaterial"]
+albedo_color = Color(0.13, 0.14, 0.16, 1)
+roughness = 0.95
+
+[sub_resource type="PlaneMesh" id="PaperMesh"]
+material = SubResource("PaperMaterial")
+size = Vector2(5.0, 2.0)
+
+[node name="Sheet" type="Node3D"]
+script = ExtResource("Sweep")
+paint = SubResource("Paint")
+
+[node name="Paper" type="MeshInstance3D" parent="."]
+position = Vector3(1.8, 0.005, 0.25)
+mesh = SubResource("PaperMesh")

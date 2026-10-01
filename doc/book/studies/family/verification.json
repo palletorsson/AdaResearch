@@ -1,0 +1,1271 @@
+{
+  "checks": [
+    {
+      "name": "the project is named 'Families' and its main scene is family.tscn",
+      "passed": true
+    },
+    {
+      "name": "the nine actions exist with their keys: A/D/W/S and the arrows, Space, Enter, F, M, V",
+      "passed": true
+    },
+    {
+      "name": "line.tscn, trace.tscn and plane.tscn still run on their own: '1.50 m', '1 kept', 'open', and none of them has a Sheet or a Family",
+      "passed": true
+    },
+    {
+      "name": "cube.tscn still runs on its own: its Cube is an instance of the cube part at (1.05, 1.37, 0.6), 12 outward triangles, orange",
+      "passed": true
+    },
+    {
+      "name": "organism.tscn still runs on its own: one whole turn of the limb still takes 33 cells: '55 of 88 cells'",
+      "passed": true
+    },
+    {
+      "name": "body.tscn still runs on its own: four pivots under the root, 25 nodes below it, the cube part among them",
+      "passed": true
+    },
+    {
+      "name": "chessboard.tscn still runs on its own: 64 cubes, 64 materials, 32 light and 32 dark, one ghost at cell (5, 5); it has no Sheet and no Family",
+      "passed": true
+    },
+    {
+      "name": "globe.gd begins 'class_name Globe' and 'extends MeshInstance3D'; Godot lists Globe as a class whose base is MeshInstance3D; a new member is a MeshInstance3D",
+      "passed": true
+    },
+    {
+      "name": "its two fields are exported whole numbers with a range: segments 16, from 4 to 64, and rings 8, from 1 to 32",
+      "passed": true
+    },
+    {
+      "name": "a member has no mesh until it enters the room; then _ready() calls build(): a SphereMesh of 16 segments and 8 rings, 1 m across",
+      "passed": true
+    },
+    {
+      "name": "triangles() counts what the mesh lists: 288 for the member of 16, three corner numbers for each; 256 of them have area, 32 are slivers at the two poles",
+      "passed": true
+    },
+    {
+      "name": "the four members list 24, 80, 288 and 4224 triangles: 2 x segments x (rings + 1); 16, 64, 256 and 4096 have area: 2 x segments x rings",
+      "passed": true
+    },
+    {
+      "name": "fields set AFTER add_child() change the field and not the body: the field says 4, the mesh still lists 288 triangles; build() again and it lists 24",
+      "passed": true
+    },
+    {
+      "name": "@export_range binds the Inspector, not code: set() gave the fields 640 and 0; build() is where the class decides: it built 64 segments and 1 ring; asked for 2 and 320 it built 4 and 32",
+      "passed": true
+    },
+    {
+      "name": "Godot's own SphereMesh has a floor too, and says nothing: asked for 2 segments it holds 4",
+      "passed": true
+    },
+    {
+      "name": "set() does NOT refuse a text on a typed int: set(\"segments\", \"4\") makes it 4 and \" 64\" makes it 64. The course outline expected a silent refusal",
+      "passed": true
+    },
+    {
+      "name": "set() converts what it can and says nothing: \"sixteen\" becomes 0, an empty text 0, 3.5 becomes 3, true becomes 1, and \"4 8 16 64\" becomes 481664",
+      "passed": true
+    },
+    {
+      "name": "set() refuses what it cannot convert and says nothing: after a Vector3, a list and null the field is still 16, 16 and 16",
+      "passed": true
+    },
+    {
+      "name": "set() with a name the class does not have does nothing and says nothing: segments is still 16, and get(\"radial_segments\") is null",
+      "passed": true
+    },
+    {
+      "name": "the other direction IS refused: a field typed String keeps 'smooth' when set() hands it the number 16, and a field typed bool keeps true when handed the text \"false\"",
+      "passed": true
+    },
+    {
+      "name": "a whole number divided by a whole number is a whole number: 7 / 2 is 3, 5 / 2 is 2, 64 / 2 is 32; 7 / 2.0 is 3.5; int(\"16\") + 1 is 17 and str(16) + \"1\" is \"161\"",
+      "passed": true
+    },
+    {
+      "name": "sweep_sheet.tscn is a Node3D named Sheet running sweep_sheet.gd, with a Paper under it, a spacing of 1.2 m and one paint",
+      "passed": true
+    },
+    {
+      "name": "hang() stands each member on the ground, 1.2 m from the last: the first at (0, 0.5, 0), the second at (1.2, 0.5, 0); a member nobody added stands with the sheet",
+      "passed": true
+    },
+    {
+      "name": "hang() writes the title on a plate at the member's feet and gives the sheet's paint to a member that has none; it leaves a member's own material, its fields and its mesh alone",
+      "passed": true
+    },
+    {
+      "name": "family.tscn inherits plane.tscn: the root runs plane.gd, with A, B, Segment, Strip, Record, Face, Marble and Under; no Cube, no Organism, no Body, no Chessboard",
+      "passed": true
+    },
+    {
+      "name": "it adds two nodes at (-1.8, 0, 0.9): Sheet, an instance of sweep_sheet.tscn, and Family, a plain Node3D running family.gd; the marble waits at (3.2, 0.1, 1.2), clear of the sheet",
+      "passed": true
+    },
+    {
+      "name": "Family has two exported text fields: axis is \"segments\" and values is \"4, 8, 16, 64\"",
+      "passed": true
+    },
+    {
+      "name": "the finished study: four members of the class under Family, with [4, 8, 16, 64] segments and [2, 4, 8, 32] rings, half of that; they list [24, 80, 288, 4224] triangles",
+      "passed": true
+    },
+    {
+      "name": "they stand in a row on the sheet, 1.2 m apart, from (-1.8, 0.5, 0.9) to (1.8, 0.5, 0.9); the plates at their feet read 4, 8, 16 and 64; four meshes, one paint",
+      "passed": true
+    },
+    {
+      "name": "B walked 0.9 m towards us stands over the member of 16; M: the marble falls through the member to the ground and lies inside it, 0.43 m from its middle: 'marble at 0.10 m'",
+      "passed": true
+    },
+    {
+      "name": "with a body from create_trimesh_collision(), the marble dropped over the middle rests on top of every member, at 1.10, 1.10, 1.10 and 1.10 m: on the point of the member of 4 as well",
+      "passed": true
+    },
+    {
+      "name": "a member carried by its numbers: Globe.new() with 8 and 4, added anywhere, has the same corners and the same triangles as the member of 8 on the sheet",
+      "passed": true
+    },
+    {
+      "name": "the planted fault: with axis \"radial_segments\", a name the class does not have, four members come back alike: [16, 16, 16, 16] segments, [288, 288, 288, 288] triangles; the plates, which read back, say [\"<null>\", \"<null>\", \"<null>\", \"<null>\"]",
+      "passed": true
+    },
+    {
+      "name": "sweeping rings with the half rule still in the script gives four alike again, [288, 288, 288, 288] triangles, and the plates say so: [\"8\", \"8\", \"8\", \"8\"]",
+      "passed": true
+    },
+    {
+      "name": "the text field: \"4,8,16,64\" builds [24, 80, 288, 4224]; \"4 8 16 64\", with no commas, is ONE word, 481664, and the class builds 1 member of [64] segments; an empty text builds 1 member of [4], with [16] triangles; \"sixteen\" builds one of 4 segments and 16 triangles: 0 and 0, raised by the class to 4 and 1, the octahedron",
+      "passed": true
+    },
+    {
+      "name": "strip 1, a sphere written out: 1 body, not of the class, 288 triangles, no plate",
+      "passed": true
+    },
+    {
+      "name": "strip 2, the same as a class: 1 body, of the class; the same corners, the same triangles, the same place: the picture cannot tell",
+      "passed": true
+    },
+    {
+      "name": "strip 3, a row of four: 4 bodies of the class, 24, 80, 288 and 4224 triangles, four different bodies, no plate",
+      "passed": true
+    },
+    {
+      "name": "strip 4, hung and named: the same four bodies in the same four places, now painted, with 4 plates: 4, 8, 16, 64",
+      "passed": true
+    },
+    {
+      "name": "strip 5, the axis by name, with the wrong name: 4 bodies, 288 triangles each, ONE body four times, under plates that read 4, 8, 16, 64",
+      "passed": true
+    },
+    {
+      "name": "strip 6, the right name: four different bodies again under the same four plates",
+      "passed": true
+    },
+    {
+      "name": "process.png is there: 6 tiles of 320 x 240 with a band of names under them, 46882 bytes",
+      "passed": true
+    },
+    {
+      "name": "in process.png 'the same, as a class' differs from 'a sphere, written out' on 0.00% of the tile; every later tile differs from the one before: 12.49, 12.15, 3.13 and 3.13%",
+      "passed": true
+    },
+    {
+      "name": "sheet.png is there: the four members in four columns and three rows (from the side, from above, faceted), 123989 bytes",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: with a window the four members are the four of the headless run: the same segments, rings and triangles",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the closest pair is 16 and 64 from all four standpoints: they differ on 0.85% of the still from the side, 0.99% from above, 0.76% turned half a segment, 4.65% faceted",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the member of 4 stands apart from all four standpoints: its nearest sibling, 8, is farther from it (10.54% from the side) than 8 is from 64 (5.17%); 8 and 16 differ on 3.73%",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: with smooth normals 16 and 64 differ on the rim and hardly inside: from the side 0.73% of the still is rim, a band of 3.17 pixels, and 0.11% inside",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: lit flat, the same two differ on 4.65% of the still, 3.92% of it inside the outline: the rim is the same 0.73%; the smooth normals hid the rest",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: against 64, from the side, the difference falls at every step and has no step of its own at 16: 15.27, 7.70, 5.17, 2.21, 0.85, 0.29, 0.19 and 0.04% for 4, 6, 8, 12, 16, 24, 32 and 48 segments",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: seen from above, the outline of 16 segments misses the circle by 2.06% of the radius; the arithmetic says 1 - cos(11.25 degrees), 1.92%; the member of 64 reads 0.49%, about a pixel, which is as fine as this measure goes",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the rim between 16 and 64 is a band of 3.41 pixels from 1.5 m, 3.17 from 2 m, 1.72 from 4 m and 0.65 from 8 m: under one pixel only at 8 m",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the octahedron is 4 segments and ONE ring, 8 triangles with area; the member of 4 has two rings and 16. It differs from the octahedron on 9.06% of the still from the side and 4.83% from above: nearer than its sibling of 8 (10.54% and 11.84%), and not the same body",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the renderer drew 4 primitives with nobody on the sheet, 28 with the member of 4 and 4228 with the member of 64: every listed triangle, slivers and all",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: with a window the strip's six steps counted what they count headless",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: 'the same, as a class' changed the picture on 0.00% of the tile; the step that changed it most was '3 a row of four'",
+      "passed": true
+    }
+  ],
+  "godot": "4.6-stable (official)",
+  "measured": {
+    "family": {
+      "members": 4,
+      "plates": [
+        "4",
+        "8",
+        "16",
+        "64"
+      ],
+      "rings": [
+        2,
+        4,
+        8,
+        32
+      ],
+      "segments": [
+        4,
+        8,
+        16,
+        64
+      ],
+      "triangles": [
+        24,
+        80,
+        288,
+        4224
+      ]
+    },
+    "marble": {
+      "on_top_with_a_body_m": [
+        1.1,
+        1.1,
+        1.1,
+        1.1
+      ],
+      "through_a_member_m": 0.098
+    },
+    "process_png": {
+      "bytes": 46882,
+      "tile_differs_from_the_one_before_pct": [
+        0.0,
+        12.49,
+        12.15,
+        3.13,
+        3.13
+      ]
+    },
+    "sheet": {
+      "against_64_above": {
+        "12": {
+          "differ_pct": 1.61,
+          "inside_pct": 0.29,
+          "rim_pct": 1.32,
+          "rim_px": 5.69
+        },
+        "16": {
+          "differ_pct": 0.99,
+          "inside_pct": 0.09,
+          "rim_pct": 0.89,
+          "rim_px": 3.85
+        },
+        "24": {
+          "differ_pct": 0.67,
+          "inside_pct": 0.0,
+          "rim_pct": 0.67,
+          "rim_px": 2.9
+        },
+        "32": {
+          "differ_pct": 0.16,
+          "inside_pct": 0.0,
+          "rim_pct": 0.16,
+          "rim_px": 0.68
+        },
+        "4": {
+          "differ_pct": 15.87,
+          "inside_pct": 3.57,
+          "rim_pct": 12.29,
+          "rim_px": 53.01
+        },
+        "48": {
+          "differ_pct": 0.15,
+          "inside_pct": 0.0,
+          "rim_pct": 0.15,
+          "rim_px": 0.64
+        },
+        "6": {
+          "differ_pct": 8.31,
+          "inside_pct": 1.69,
+          "rim_pct": 6.62,
+          "rim_px": 28.54
+        },
+        "8": {
+          "differ_pct": 4.12,
+          "inside_pct": 1.11,
+          "rim_pct": 3.01,
+          "rim_px": 12.99
+        }
+      },
+      "against_64_faceted": {
+        "12": {
+          "differ_pct": 8.32,
+          "inside_pct": 6.57,
+          "rim_pct": 1.75,
+          "rim_px": 7.53
+        },
+        "16": {
+          "differ_pct": 4.65,
+          "inside_pct": 3.92,
+          "rim_pct": 0.73,
+          "rim_px": 3.17
+        },
+        "24": {
+          "differ_pct": 2.11,
+          "inside_pct": 1.85,
+          "rim_pct": 0.26,
+          "rim_px": 1.12
+        },
+        "32": {
+          "differ_pct": 0.89,
+          "inside_pct": 0.71,
+          "rim_pct": 0.18,
+          "rim_px": 0.78
+        },
+        "4": {
+          "differ_pct": 21.77,
+          "inside_pct": 15.16,
+          "rim_pct": 6.61,
+          "rim_px": 28.51
+        },
+        "48": {
+          "differ_pct": 0.29,
+          "inside_pct": 0.25,
+          "rim_pct": 0.04,
+          "rim_px": 0.17
+        },
+        "6": {
+          "differ_pct": 15.7,
+          "inside_pct": 11.58,
+          "rim_pct": 4.12,
+          "rim_px": 17.77
+        },
+        "8": {
+          "differ_pct": 13.97,
+          "inside_pct": 10.93,
+          "rim_pct": 3.04,
+          "rim_px": 13.1
+        }
+      },
+      "against_64_level": {
+        "12": {
+          "differ_pct": 2.21,
+          "inside_pct": 0.47,
+          "rim_pct": 1.75,
+          "rim_px": 7.53
+        },
+        "16": {
+          "differ_pct": 0.85,
+          "inside_pct": 0.11,
+          "rim_pct": 0.73,
+          "rim_px": 3.17
+        },
+        "24": {
+          "differ_pct": 0.29,
+          "inside_pct": 0.03,
+          "rim_pct": 0.26,
+          "rim_px": 1.12
+        },
+        "32": {
+          "differ_pct": 0.19,
+          "inside_pct": 0.01,
+          "rim_pct": 0.18,
+          "rim_px": 0.78
+        },
+        "4": {
+          "differ_pct": 15.27,
+          "inside_pct": 8.65,
+          "rim_pct": 6.61,
+          "rim_px": 28.51
+        },
+        "48": {
+          "differ_pct": 0.04,
+          "inside_pct": 0.0,
+          "rim_pct": 0.04,
+          "rim_px": 0.17
+        },
+        "6": {
+          "differ_pct": 7.7,
+          "inside_pct": 3.58,
+          "rim_pct": 4.12,
+          "rim_px": 17.77
+        },
+        "8": {
+          "differ_pct": 5.17,
+          "inside_pct": 2.13,
+          "rim_pct": 3.04,
+          "rim_px": 13.1
+        }
+      },
+      "against_64_turned": {
+        "12": {
+          "differ_pct": 1.64,
+          "inside_pct": 0.65,
+          "rim_pct": 0.99,
+          "rim_px": 4.26
+        },
+        "16": {
+          "differ_pct": 0.76,
+          "inside_pct": 0.14,
+          "rim_pct": 0.62,
+          "rim_px": 2.67
+        },
+        "24": {
+          "differ_pct": 0.4,
+          "inside_pct": 0.01,
+          "rim_pct": 0.39,
+          "rim_px": 1.7
+        },
+        "32": {
+          "differ_pct": 0.15,
+          "inside_pct": 0.01,
+          "rim_pct": 0.15,
+          "rim_px": 0.63
+        },
+        "4": {
+          "differ_pct": 15.25,
+          "inside_pct": 6.03,
+          "rim_pct": 9.22,
+          "rim_px": 39.77
+        },
+        "48": {
+          "differ_pct": 0.07,
+          "inside_pct": 0.0,
+          "rim_pct": 0.07,
+          "rim_px": 0.31
+        },
+        "6": {
+          "differ_pct": 8.88,
+          "inside_pct": 4.42,
+          "rim_pct": 4.47,
+          "rim_px": 19.26
+        },
+        "8": {
+          "differ_pct": 4.84,
+          "inside_pct": 2.45,
+          "rim_pct": 2.39,
+          "rim_px": 10.3
+        }
+      },
+      "closest_pair_above": "16 vs 64",
+      "closest_pair_faceted": "16 vs 64",
+      "closest_pair_level": "16 vs 64",
+      "closest_pair_turned": "16 vs 64",
+      "farthest_pair_above": "4 vs 64",
+      "farthest_pair_faceted": "4 vs 16",
+      "farthest_pair_level": "4 vs 64",
+      "farthest_pair_turned": "4 vs 64",
+      "from_four_distances": {
+        "1.5 m": {
+          "16 vs 64": {
+            "differ_pct": 1.38,
+            "inside_pct": 0.3,
+            "rim_pct": 1.08,
+            "rim_px": 3.41
+          },
+          "8 vs 16": {
+            "differ_pct": 8.87,
+            "inside_pct": 2.55,
+            "rim_pct": 6.32,
+            "rim_px": 20.09
+          },
+          "body_share_pct": 55.45
+        },
+        "2.0 m": {
+          "16 vs 64": {
+            "differ_pct": 0.85,
+            "inside_pct": 0.11,
+            "rim_pct": 0.73,
+            "rim_px": 3.17
+          },
+          "8 vs 16": {
+            "differ_pct": 3.73,
+            "inside_pct": 1.43,
+            "rim_pct": 2.3,
+            "rim_px": 10.06
+          },
+          "body_share_pct": 29.58
+        },
+        "4.0 m": {
+          "16 vs 64": {
+            "differ_pct": 0.22,
+            "inside_pct": 0.02,
+            "rim_pct": 0.19,
+            "rim_px": 1.72
+          },
+          "8 vs 16": {
+            "differ_pct": 0.66,
+            "inside_pct": 0.3,
+            "rim_pct": 0.35,
+            "rim_px": 3.16
+          },
+          "body_share_pct": 7.04
+        },
+        "8.0 m": {
+          "16 vs 64": {
+            "differ_pct": 0.04,
+            "inside_pct": 0.01,
+            "rim_pct": 0.04,
+            "rim_px": 0.65
+          },
+          "8 vs 16": {
+            "differ_pct": 0.15,
+            "inside_pct": 0.07,
+            "rim_pct": 0.08,
+            "rim_px": 1.49
+          },
+          "body_share_pct": 1.74
+        }
+      },
+      "godot": "4.6-stable (official)",
+      "members": {
+        "12": {
+          "outline_above": {
+            "farthest_px": 255.0,
+            "misses_the_circle_by_pct": 3.53,
+            "nearest_px": 246.0,
+            "pixels": 195416.0,
+            "share_pct": 28.27
+          },
+          "outline_faceted": {
+            "farthest_px": 255.25,
+            "misses_the_circle_by_pct": 5.68,
+            "nearest_px": 240.75,
+            "pixels": 192416.0,
+            "share_pct": 27.84
+          },
+          "outline_level": {
+            "farthest_px": 255.25,
+            "misses_the_circle_by_pct": 5.68,
+            "nearest_px": 240.75,
+            "pixels": 192416.0,
+            "share_pct": 27.84
+          },
+          "outline_turned": {
+            "farthest_px": 255.5,
+            "misses_the_circle_by_pct": 3.33,
+            "nearest_px": 247.0,
+            "pixels": 197672.0,
+            "share_pct": 28.6
+          },
+          "primitives_drawn": 172.0,
+          "rings": 6.0,
+          "segments": 12.0,
+          "triangles": 168.0,
+          "triangles_with_area": 144.0
+        },
+        "16": {
+          "outline_above": {
+            "farthest_px": 254.5,
+            "misses_the_circle_by_pct": 2.06,
+            "nearest_px": 249.25,
+            "pixels": 198360.0,
+            "share_pct": 28.7
+          },
+          "outline_faceted": {
+            "farthest_px": 255.5,
+            "misses_the_circle_by_pct": 3.03,
+            "nearest_px": 247.75,
+            "pixels": 199416.0,
+            "share_pct": 28.85
+          },
+          "outline_level": {
+            "farthest_px": 255.5,
+            "misses_the_circle_by_pct": 3.03,
+            "nearest_px": 247.75,
+            "pixels": 199416.0,
+            "share_pct": 28.85
+          },
+          "outline_turned": {
+            "farthest_px": 255.25,
+            "misses_the_circle_by_pct": 2.25,
+            "nearest_px": 249.5,
+            "pixels": 200204.0,
+            "share_pct": 28.96
+          },
+          "primitives_drawn": 292.0,
+          "rings": 8.0,
+          "segments": 16.0,
+          "triangles": 288.0,
+          "triangles_with_area": 256.0
+        },
+        "24": {
+          "outline_above": {
+            "farthest_px": 254.0,
+            "misses_the_circle_by_pct": 1.28,
+            "nearest_px": 250.75,
+            "pixels": 199884.0,
+            "share_pct": 28.92
+          },
+          "outline_faceted": {
+            "farthest_px": 255.75,
+            "misses_the_circle_by_pct": 1.27,
+            "nearest_px": 252.5,
+            "pixels": 202716.0,
+            "share_pct": 29.33
+          },
+          "outline_level": {
+            "farthest_px": 255.75,
+            "misses_the_circle_by_pct": 1.27,
+            "nearest_px": 252.5,
+            "pixels": 202716.0,
+            "share_pct": 29.33
+          },
+          "outline_turned": {
+            "farthest_px": 255.5,
+            "misses_the_circle_by_pct": 1.76,
+            "nearest_px": 251.0,
+            "pixels": 201776.0,
+            "share_pct": 29.19
+          },
+          "primitives_drawn": 628.0,
+          "rings": 12.0,
+          "segments": 24.0,
+          "triangles": 624.0,
+          "triangles_with_area": 576.0
+        },
+        "32": {
+          "outline_above": {
+            "farthest_px": 255.75,
+            "misses_the_circle_by_pct": 0.88,
+            "nearest_px": 253.5,
+            "pixels": 203444.0,
+            "share_pct": 29.43
+          },
+          "outline_faceted": {
+            "farthest_px": 255.5,
+            "misses_the_circle_by_pct": 0.98,
+            "nearest_px": 253.0,
+            "pixels": 203240.0,
+            "share_pct": 29.4
+          },
+          "outline_level": {
+            "farthest_px": 255.5,
+            "misses_the_circle_by_pct": 0.98,
+            "nearest_px": 253.0,
+            "pixels": 203240.0,
+            "share_pct": 29.4
+          },
+          "outline_turned": {
+            "farthest_px": 255.5,
+            "misses_the_circle_by_pct": 0.88,
+            "nearest_px": 253.25,
+            "pixels": 203500.0,
+            "share_pct": 29.44
+          },
+          "primitives_drawn": 1092.0,
+          "rings": 16.0,
+          "segments": 32.0,
+          "triangles": 1088.0,
+          "triangles_with_area": 1024.0
+        },
+        "4": {
+          "outline_above": {
+            "farthest_px": 244.0,
+            "misses_the_circle_by_pct": 29.3,
+            "nearest_px": 172.5,
+            "pixels": 119560.0,
+            "share_pct": 17.3
+          },
+          "outline_faceted": {
+            "farthest_px": 247.0,
+            "misses_the_circle_by_pct": 13.56,
+            "nearest_px": 213.5,
+            "pixels": 158778.0,
+            "share_pct": 22.97
+          },
+          "outline_level": {
+            "farthest_px": 247.0,
+            "misses_the_circle_by_pct": 13.56,
+            "nearest_px": 213.5,
+            "pixels": 158778.0,
+            "share_pct": 22.97
+          },
+          "outline_turned": {
+            "farthest_px": 246.75,
+            "misses_the_circle_by_pct": 27.56,
+            "nearest_px": 178.75,
+            "pixels": 140742.0,
+            "share_pct": 20.36
+          },
+          "primitives_drawn": 28.0,
+          "rings": 2.0,
+          "segments": 4.0,
+          "triangles": 24.0,
+          "triangles_with_area": 16.0
+        },
+        "48": {
+          "outline_above": {
+            "farthest_px": 255.0,
+            "misses_the_circle_by_pct": 0.59,
+            "nearest_px": 253.5,
+            "pixels": 203512.0,
+            "share_pct": 29.44
+          },
+          "outline_faceted": {
+            "farthest_px": 255.75,
+            "misses_the_circle_by_pct": 0.68,
+            "nearest_px": 254.0,
+            "pixels": 204328.0,
+            "share_pct": 29.56
+          },
+          "outline_level": {
+            "farthest_px": 255.75,
+            "misses_the_circle_by_pct": 0.68,
+            "nearest_px": 254.0,
+            "pixels": 204328.0,
+            "share_pct": 29.56
+          },
+          "outline_turned": {
+            "farthest_px": 255.75,
+            "misses_the_circle_by_pct": 0.78,
+            "nearest_px": 253.75,
+            "pixels": 204072.0,
+            "share_pct": 29.52
+          },
+          "primitives_drawn": 2404.0,
+          "rings": 24.0,
+          "segments": 48.0,
+          "triangles": 2400.0,
+          "triangles_with_area": 2304.0
+        },
+        "6": {
+          "outline_above": {
+            "farthest_px": 247.0,
+            "misses_the_circle_by_pct": 13.56,
+            "nearest_px": 213.5,
+            "pixels": 158784.0,
+            "share_pct": 22.97
+          },
+          "outline_faceted": {
+            "farthest_px": 253.0,
+            "misses_the_circle_by_pct": 10.77,
+            "nearest_px": 225.75,
+            "pixels": 175988.0,
+            "share_pct": 25.46
+          },
+          "outline_level": {
+            "farthest_px": 253.0,
+            "misses_the_circle_by_pct": 10.77,
+            "nearest_px": 225.75,
+            "pixels": 175988.0,
+            "share_pct": 25.46
+          },
+          "outline_turned": {
+            "farthest_px": 247.25,
+            "misses_the_circle_by_pct": 7.79,
+            "nearest_px": 228.0,
+            "pixels": 173616.0,
+            "share_pct": 25.12
+          },
+          "primitives_drawn": 52.0,
+          "rings": 3.0,
+          "segments": 6.0,
+          "triangles": 48.0,
+          "triangles_with_area": 36.0
+        },
+        "64": {
+          "outline_above": {
+            "farthest_px": 255.75,
+            "misses_the_circle_by_pct": 0.49,
+            "nearest_px": 254.5,
+            "pixels": 204540.0,
+            "share_pct": 29.59
+          },
+          "outline_faceted": {
+            "farthest_px": 255.75,
+            "misses_the_circle_by_pct": 0.59,
+            "nearest_px": 254.25,
+            "pixels": 204480.0,
+            "share_pct": 29.58
+          },
+          "outline_level": {
+            "farthest_px": 255.75,
+            "misses_the_circle_by_pct": 0.59,
+            "nearest_px": 254.25,
+            "pixels": 204480.0,
+            "share_pct": 29.58
+          },
+          "outline_turned": {
+            "farthest_px": 255.75,
+            "misses_the_circle_by_pct": 0.49,
+            "nearest_px": 254.5,
+            "pixels": 204488.0,
+            "share_pct": 29.58
+          },
+          "primitives_drawn": 4228.0,
+          "rings": 32.0,
+          "segments": 64.0,
+          "triangles": 4224.0,
+          "triangles_with_area": 4096.0
+        },
+        "8": {
+          "outline_above": {
+            "farthest_px": 255.0,
+            "misses_the_circle_by_pct": 7.84,
+            "nearest_px": 235.0,
+            "pixels": 183720.0,
+            "share_pct": 26.58
+          },
+          "outline_faceted": {
+            "farthest_px": 251.0,
+            "misses_the_circle_by_pct": 6.47,
+            "nearest_px": 234.75,
+            "pixels": 183488.0,
+            "share_pct": 26.55
+          },
+          "outline_level": {
+            "farthest_px": 251.0,
+            "misses_the_circle_by_pct": 6.47,
+            "nearest_px": 234.75,
+            "pixels": 183488.0,
+            "share_pct": 26.55
+          },
+          "outline_turned": {
+            "farthest_px": 255.5,
+            "misses_the_circle_by_pct": 6.56,
+            "nearest_px": 238.75,
+            "pixels": 187980.0,
+            "share_pct": 27.2
+          },
+          "primitives_drawn": 84.0,
+          "rings": 4.0,
+          "segments": 8.0,
+          "triangles": 80.0,
+          "triangles_with_area": 64.0
+        }
+      },
+      "octahedron": {
+        "against_4_above": {
+          "differ_pct": 4.83,
+          "inside_pct": 4.41,
+          "rim_pct": 0.43,
+          "rim_px": 2.38
+        },
+        "against_4_level": {
+          "differ_pct": 9.06,
+          "inside_pct": 3.16,
+          "rim_pct": 5.9,
+          "rim_px": 28.86
+        },
+        "against_4_turned": {
+          "differ_pct": 7.95,
+          "inside_pct": 2.03,
+          "rim_pct": 5.92,
+          "rim_px": 30.75
+        },
+        "against_8_above": {
+          "differ_pct": 15.48,
+          "inside_pct": 6.62,
+          "rim_pct": 8.86,
+          "rim_px": 40.28
+        },
+        "against_8_level": {
+          "differ_pct": 15.96,
+          "inside_pct": 7.05,
+          "rim_pct": 8.91,
+          "rim_px": 40.57
+        },
+        "against_8_turned": {
+          "differ_pct": 16.2,
+          "inside_pct": 4.2,
+          "rim_pct": 12.0,
+          "rim_px": 53.97
+        },
+        "rings": 1.0,
+        "segments": 4.0,
+        "triangles": 16.0,
+        "triangles_with_area": 8.0
+      },
+      "pairs_above": {
+        "16 vs 64": {
+          "differ_pct": 0.99,
+          "inside_pct": 0.09,
+          "rim_pct": 0.89,
+          "rim_px": 3.85
+        },
+        "4 vs 16": {
+          "differ_pct": 14.6,
+          "inside_pct": 3.2,
+          "rim_pct": 11.4,
+          "rim_px": 49.91
+        },
+        "4 vs 64": {
+          "differ_pct": 15.87,
+          "inside_pct": 3.57,
+          "rim_pct": 12.29,
+          "rim_px": 53.01
+        },
+        "4 vs 8": {
+          "differ_pct": 11.84,
+          "inside_pct": 2.56,
+          "rim_pct": 9.28,
+          "rim_px": 42.23
+        },
+        "8 vs 16": {
+          "differ_pct": 2.86,
+          "inside_pct": 0.73,
+          "rim_pct": 2.12,
+          "rim_px": 9.29
+        },
+        "8 vs 64": {
+          "differ_pct": 4.12,
+          "inside_pct": 1.11,
+          "rim_pct": 3.01,
+          "rim_px": 12.99
+        }
+      },
+      "pairs_faceted": {
+        "16 vs 64": {
+          "differ_pct": 4.65,
+          "inside_pct": 3.92,
+          "rim_pct": 0.73,
+          "rim_px": 3.17
+        },
+        "4 vs 16": {
+          "differ_pct": 22.04,
+          "inside_pct": 16.17,
+          "rim_pct": 5.88,
+          "rim_px": 25.67
+        },
+        "4 vs 64": {
+          "differ_pct": 21.77,
+          "inside_pct": 15.16,
+          "rim_pct": 6.61,
+          "rim_px": 28.51
+        },
+        "4 vs 8": {
+          "differ_pct": 17.97,
+          "inside_pct": 14.16,
+          "rim_pct": 3.81,
+          "rim_px": 17.36
+        },
+        "8 vs 16": {
+          "differ_pct": 13.1,
+          "inside_pct": 10.79,
+          "rim_pct": 2.3,
+          "rim_px": 10.06
+        },
+        "8 vs 64": {
+          "differ_pct": 13.97,
+          "inside_pct": 10.93,
+          "rim_pct": 3.04,
+          "rim_px": 13.1
+        }
+      },
+      "pairs_level": {
+        "16 vs 64": {
+          "differ_pct": 0.85,
+          "inside_pct": 0.11,
+          "rim_pct": 0.73,
+          "rim_px": 3.17
+        },
+        "4 vs 16": {
+          "differ_pct": 14.08,
+          "inside_pct": 8.2,
+          "rim_pct": 5.88,
+          "rim_px": 25.67
+        },
+        "4 vs 64": {
+          "differ_pct": 15.27,
+          "inside_pct": 8.65,
+          "rim_pct": 6.61,
+          "rim_px": 28.51
+        },
+        "4 vs 8": {
+          "differ_pct": 10.54,
+          "inside_pct": 6.73,
+          "rim_pct": 3.81,
+          "rim_px": 17.36
+        },
+        "8 vs 16": {
+          "differ_pct": 3.73,
+          "inside_pct": 1.43,
+          "rim_pct": 2.3,
+          "rim_px": 10.06
+        },
+        "8 vs 64": {
+          "differ_pct": 5.17,
+          "inside_pct": 2.13,
+          "rim_pct": 3.04,
+          "rim_px": 13.1
+        }
+      },
+      "pairs_turned": {
+        "16 vs 64": {
+          "differ_pct": 0.76,
+          "inside_pct": 0.14,
+          "rim_pct": 0.62,
+          "rim_px": 2.67
+        },
+        "4 vs 16": {
+          "differ_pct": 14.08,
+          "inside_pct": 5.48,
+          "rim_pct": 8.6,
+          "rim_px": 37.49
+        },
+        "4 vs 64": {
+          "differ_pct": 15.25,
+          "inside_pct": 6.03,
+          "rim_pct": 9.22,
+          "rim_px": 39.77
+        },
+        "4 vs 8": {
+          "differ_pct": 10.57,
+          "inside_pct": 3.74,
+          "rim_pct": 6.83,
+          "rim_px": 30.73
+        },
+        "8 vs 16": {
+          "differ_pct": 3.44,
+          "inside_pct": 1.63,
+          "rim_pct": 1.81,
+          "rim_px": 7.89
+        },
+        "8 vs 64": {
+          "differ_pct": 4.84,
+          "inside_pct": 2.45,
+          "rim_pct": 2.39,
+          "rim_px": 10.3
+        }
+      },
+      "primitives_drawn_with_nobody": 4.0,
+      "process_png": {
+        "bytes": 46882.0,
+        "height": 266.0,
+        "width": 1940.0
+      },
+      "renderer": "NVIDIA GeForce RTX 3070",
+      "sheet_png": {
+        "bytes": 123989.0,
+        "height": 754.0,
+        "width": 1292.0
+      },
+      "still": {
+        "fov": 40.0,
+        "height": 720.0,
+        "metres_to_the_member": 2.0,
+        "width": 960.0
+      },
+      "strip": [
+        {
+          "bodies": 1.0,
+          "different_bodies": 1.0,
+          "differs_from_step_before_pct": 0.0,
+          "of_the_class": 0.0,
+          "plates": [],
+          "step": "1 a sphere, written out",
+          "triangles": [
+            288.0
+          ]
+        },
+        {
+          "bodies": 1.0,
+          "different_bodies": 1.0,
+          "differs_from_step_before_pct": 0.0,
+          "of_the_class": 1.0,
+          "plates": [],
+          "step": "2 the same, as a class",
+          "triangles": [
+            288.0
+          ]
+        },
+        {
+          "bodies": 4.0,
+          "different_bodies": 4.0,
+          "differs_from_step_before_pct": 12.49,
+          "of_the_class": 4.0,
+          "plates": [],
+          "step": "3 a row of four",
+          "triangles": [
+            24.0,
+            80.0,
+            288.0,
+            4224.0
+          ]
+        },
+        {
+          "bodies": 4.0,
+          "different_bodies": 4.0,
+          "differs_from_step_before_pct": 12.15,
+          "of_the_class": 4.0,
+          "plates": [
+            "4",
+            "8",
+            "16",
+            "64"
+          ],
+          "step": "4 hung and named",
+          "triangles": [
+            24.0,
+            80.0,
+            288.0,
+            4224.0
+          ]
+        },
+        {
+          "bodies": 4.0,
+          "different_bodies": 1.0,
+          "differs_from_step_before_pct": 3.13,
+          "of_the_class": 4.0,
+          "plates": [
+            "4",
+            "8",
+            "16",
+            "64"
+          ],
+          "step": "5 the axis by name: four alike",
+          "triangles": [
+            288.0,
+            288.0,
+            288.0,
+            288.0
+          ]
+        },
+        {
+          "bodies": 4.0,
+          "different_bodies": 4.0,
+          "differs_from_step_before_pct": 3.13,
+          "of_the_class": 4.0,
+          "plates": [
+            "4",
+            "8",
+            "16",
+            "64"
+          ],
+          "step": "6 the right name",
+          "triangles": [
+            24.0,
+            80.0,
+            288.0,
+            4224.0
+          ]
+        }
+      ],
+      "strip_step_that_changed_most": "3 a row of four"
+    },
+    "strip": [
+      [
+        1,
+        0,
+        [
+          288
+        ],
+        1,
+        []
+      ],
+      [
+        1,
+        1,
+        [
+          288
+        ],
+        1,
+        []
+      ],
+      [
+        4,
+        4,
+        [
+          24,
+          80,
+          288,
+          4224
+        ],
+        4,
+        []
+      ],
+      [
+        4,
+        4,
+        [
+          24,
+          80,
+          288,
+          4224
+        ],
+        4,
+        [
+          "4",
+          "8",
+          "16",
+          "64"
+        ]
+      ],
+      [
+        4,
+        4,
+        [
+          288,
+          288,
+          288,
+          288
+        ],
+        1,
+        [
+          "4",
+          "8",
+          "16",
+          "64"
+        ]
+      ],
+      [
+        4,
+        4,
+        [
+          24,
+          80,
+          288,
+          4224
+        ],
+        4,
+        [
+          "4",
+          "8",
+          "16",
+          "64"
+        ]
+      ]
+    ],
+    "triangles_listed": [
+      24,
+      80,
+      288,
+      4224
+    ],
+    "triangles_with_area": [
+      16,
+      64,
+      256,
+      4096
+    ]
+  },
+  "passed": true
+}

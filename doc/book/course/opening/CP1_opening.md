@@ -97,4 +97,4 @@ The depth each capability should have reached by now, taken from the lessons as 
 
 ## What comes next
 
-After this session we leave the kits. In W02 we start `my_room`, an empty project of our own, and carry our point, segment and recorder into it.
+After this session the kits go on. The next stop closes the trace into a plane, and from there every stop ends in a room of your own: one scene, inside your copy of the kit, that grows through the track.

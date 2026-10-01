@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://trace.tscn" id="Trace"]
+[ext_resource type="Script" path="res://plane.gd" id="Lesson"]
+[ext_resource type="Script" path="res://marble.gd" id="Probe"]
+
+[sub_resource type="StandardMaterial3D" id="FaceMaterial"]
+albedo_color = Color(0.94, 0.92, 0.88, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="MarbleMaterial"]
+albedo_color = Color(0.35, 0.72, 0.95, 1)
+roughness = 0.35
+
+[sub_resource type="SphereMesh" id="MarbleMesh"]
+radius = 0.1
+height = 0.2
+material = SubResource("MarbleMaterial")
+
+[sub_resource type="SphereShape3D" id="MarbleShape"]
+radius = 0.1
+
+[node name="PlaneStudy" instance=ExtResource("Trace")]
+script = ExtResource("Lesson")
+
+[node name="Face" type="MeshInstance3D" parent="."]
+material_override = SubResource("FaceMaterial")
+
+[node name="FaceBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FaceBody"]
+
+[node name="Marble" type="RigidBody3D" parent="."]
+position = Vector3(2.0, 0.1, 1.2)
+continuous_cd = true
+freeze = true
+script = ExtResource("Probe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Marble"]
+mesh = SubResource("MarbleMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Marble"]
+shape = SubResource("MarbleShape")
+
+[node name="Under" type="Camera3D" parent="."]
+position = Vector3(0.15, 0.15, 2.6)
+rotation = Vector3(0.43, 0, 0)
+fov = 48.0

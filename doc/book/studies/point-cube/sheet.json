@@ -1,0 +1,169 @@
+{
+  "0_above": {
+    "cube_brightness": 0.74,
+    "cube_share_pct": 0.55,
+    "shadow_share_pct": 0.34,
+    "value": "my one face",
+    "view": "above"
+  },
+  "0_behind": {
+    "cube_brightness": 0.0,
+    "cube_share_pct": 0.0,
+    "shadow_share_pct": 0.0,
+    "value": "my one face",
+    "view": "behind"
+  },
+  "0_below": {
+    "cube_brightness": 0.76,
+    "cube_share_pct": 3.45,
+    "shadow_share_pct": 0.0,
+    "value": "my one face",
+    "view": "below"
+  },
+  "1_above": {
+    "cube_brightness": 0.73,
+    "cube_share_pct": 5.34,
+    "shadow_share_pct": 0.36,
+    "value": "one-line draft",
+    "view": "above"
+  },
+  "1_behind": {
+    "cube_brightness": 0.47,
+    "cube_share_pct": 19.44,
+    "shadow_share_pct": 0.09,
+    "value": "one-line draft",
+    "view": "behind"
+  },
+  "1_below": {
+    "cube_brightness": 0.6,
+    "cube_share_pct": 24.67,
+    "shadow_share_pct": 0.0,
+    "value": "one-line draft",
+    "view": "below"
+  },
+  "2_above": {
+    "cube_brightness": 0.73,
+    "cube_share_pct": 0.69,
+    "shadow_share_pct": 0.53,
+    "value": "three-line draft",
+    "view": "above"
+  },
+  "2_behind": {
+    "cube_brightness": 0.34,
+    "cube_share_pct": 2.84,
+    "shadow_share_pct": 0.0,
+    "value": "three-line draft",
+    "view": "behind"
+  },
+  "2_below": {
+    "cube_brightness": 0.68,
+    "cube_share_pct": 5.14,
+    "shadow_share_pct": 0.0,
+    "value": "three-line draft",
+    "view": "below"
+  },
+  "3_above": {
+    "cube_brightness": 0.74,
+    "cube_share_pct": 1.31,
+    "shadow_share_pct": 0.43,
+    "value": "repaired",
+    "view": "above"
+  },
+  "3_behind": {
+    "cube_brightness": 0.42,
+    "cube_share_pct": 4.84,
+    "shadow_share_pct": 0.01,
+    "value": "repaired",
+    "view": "behind"
+  },
+  "3_below": {
+    "cube_brightness": 0.63,
+    "cube_share_pct": 5.98,
+    "shadow_share_pct": 0.0,
+    "value": "repaired",
+    "view": "below"
+  },
+  "closest_pair_above": "0 vs 2",
+  "closest_pair_behind": "2 vs 3",
+  "closest_pair_below": "2 vs 3",
+  "godot": "4.6-stable (official)",
+  "hall_face_above": {
+    "cube_brightness": 0.0,
+    "cube_share_pct": 0.0,
+    "shadow_share_pct": 0.0
+  },
+  "hall_face_behind": {
+    "cube_brightness": 0.33,
+    "cube_share_pct": 2.03,
+    "shadow_share_pct": 0.0
+  },
+  "marble_0": {
+    "rest": [
+      1.15,
+      0.098,
+      0.5
+    ],
+    "value": "my one face"
+  },
+  "marble_1": {
+    "rest": [
+      1.15,
+      0.968,
+      0.5
+    ],
+    "value": "one-line draft"
+  },
+  "marble_2": {
+    "rest": [
+      1.15,
+      0.098,
+      0.5
+    ],
+    "value": "three-line draft"
+  },
+  "marble_3": {
+    "rest": [
+      1.15,
+      1.71,
+      0.5
+    ],
+    "value": "repaired"
+  },
+  "no_normals_vs_flat_above_pct": 0.66,
+  "on_plane_above": {
+    "cube_brightness": 0.74,
+    "cube_share_pct": 1.32,
+    "shadow_share_pct": 0.53
+  },
+  "on_plane_below": {
+    "cube_brightness": 0.63,
+    "cube_share_pct": 5.98,
+    "shadow_share_pct": 0.01
+  },
+  "pairs_above_pct": {
+    "0 vs 1": 5.22,
+    "0 vs 2": 0.36,
+    "0 vs 3": 1.1,
+    "1 vs 2": 5.09,
+    "1 vs 3": 4.43,
+    "2 vs 3": 0.93
+  },
+  "pairs_behind_pct": {
+    "0 vs 1": 19.56,
+    "0 vs 2": 2.87,
+    "0 vs 3": 4.85,
+    "1 vs 2": 17.41,
+    "1 vs 3": 16.2,
+    "2 vs 3": 2.03
+  },
+  "pairs_below_pct": {
+    "0 vs 1": 23.63,
+    "0 vs 2": 1.72,
+    "0 vs 3": 2.65,
+    "1 vs 2": 23.62,
+    "1 vs 3": 23.62,
+    "2 vs 3": 0.95
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "smooth_vs_flat_above_pct": 0.6
+}

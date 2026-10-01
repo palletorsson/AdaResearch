@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://plane.tscn" id="Plane"]
+[ext_resource type="Script" path="res://body.gd" id="Lesson"]
+
+[node name="BodyStudy" instance=ExtResource("Plane")]
+
+[node name="Body" type="Node3D" parent="."]
+position = Vector3(0, 0, 0.9)
+script = ExtResource("Lesson")

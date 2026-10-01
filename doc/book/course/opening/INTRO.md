@@ -1,8 +1,10 @@
-# How to follow the opening
+# How to follow the short track
 
-This is the beginning of a Godot course through Ada Research. It runs from Day Zero, where we get a project to run, to a checkpoint after Point Trace, where we show what we can do. The step after the checkpoint is shown as a preview. The course uses Godot 4.6 Standard and GDScript.
+This is the short track of a Godot course through Ada Research: seventeen stops, three weeks, from [one picture](PLATE.md), Haeckel's plate of radiolaria, and Day Zero, where we get a project to run, to the first family in drag, a body of our own shown to the class. The whole course is outlined on [the course page](/course/outline); this track is its first part and a half. The course uses Godot 4.6 Standard and GDScript.
 
-The halls come in museum order. Each one gives us one new thing to make, and each start keeps what the previous one made: a script that runs, a point with a body, two named positions, a line between them, a trace of where one went.
+Each stop adds one operation to what we can do with a body: place it, decide whether it is solid, carry it, join two, record a walk, close the record into a plane, build a cube, articulate a limb, assemble parts into one body, repeat a cube into a floor, turn a body into a family, let a scanned body join it. Each start keeps what the previous one made. The order follows the course's order of operations, which is mostly the museum's order; where a stop goes back to an earlier hall, its page says it is a return. The stops after Point Trace are being built in that order, and each turns runnable as its kit passes its checks.
+
+The course returns to the plate at the end of every part and asks one question: what of it can you make now?
 
 ## Two working places
 
@@ -10,7 +12,7 @@ The halls come in museum order. Each one gives us one new thing to make, and eac
 
 **The Ada course project, for the xr route.** Held and walked encounters happen in this repository's own project, with its XR player already set up. It needs the XR Tools add-on on disk, which a fresh clone does not include.
 
-**my_room, from W02.** After the checkpoint we leave the kits. We make an empty project of our own, called `my_room`, and carry our point, segment and recorder into it. From then on the making happens there.
+**Your room, from the plane on.** Every stop after Point Trace ends with "In your room": the body you made goes into one scene of your own, inside your copy of the kit, and that scene grows through the track. The mini project at the end is assembled from it.
 
 ## Borrowed parts, and three depths
 
@@ -21,6 +23,10 @@ Every study lends us parts we did not make: a camera, a floor, a light, a drawin
 - **change**: we can change it or replace it ourselves.
 
 The same three words describe what we learn. A stop may introduce something at "use" that a later stop takes to "understand". Nothing needs to be understood before it is used.
+
+## The decision and the field note
+
+Every lesson asks for a prediction before you look. After you have looked there is one more step: decide whether to follow what you saw or to settle, and write down why. [The decision and the field note](FIELD_NOTE.md) explains it and gives the note to copy into your sketchbook. [The pyramid family](../field_notes/2026-10-01-pyramid-family.md) is a full note from the making of this course.
 
 ## Desktop and xr
 

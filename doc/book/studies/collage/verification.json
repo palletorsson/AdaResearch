@@ -1,0 +1,706 @@
+{
+  "checks": [
+    {
+      "name": "the project is named 'Collage' and its main scene is collage.tscn",
+      "passed": true
+    },
+    {
+      "name": "the nine actions exist with their keys: A/D/W/S and the arrows, Space, Enter, F, M, V",
+      "passed": true
+    },
+    {
+      "name": "line.tscn, trace.tscn and plane.tscn still run on their own: '1.50 m', '1 kept', 'open', and none of them has a Sheet or a Collage",
+      "passed": true
+    },
+    {
+      "name": "cube.tscn still runs on its own: its Cube is an instance of the cube part at (1.05, 1.37, 0.6), 12 outward triangles, orange",
+      "passed": true
+    },
+    {
+      "name": "organism.tscn still runs on its own: one whole turn of the limb still takes 33 cells: '55 of 88 cells'",
+      "passed": true
+    },
+    {
+      "name": "body.tscn still runs on its own: four pivots under the root, 25 nodes below it, the cube part among them",
+      "passed": true
+    },
+    {
+      "name": "chessboard.tscn still runs on its own: 64 cubes, 64 materials, 32 light and 32 dark, one ghost at cell (5, 5)",
+      "passed": true
+    },
+    {
+      "name": "family.tscn still runs on its own: four members of the class Globe, [24, 80, 288, 4224] triangles, under plates [\"4\", \"8\", \"16\", \"64\"]; it has no Collage",
+      "passed": true
+    },
+    {
+      "name": "solid.gd begins 'class_name Solid' and 'extends MeshInstance3D'; Godot lists Solid as a class whose base is MeshInstance3D",
+      "passed": true
+    },
+    {
+      "name": "its two fields are exported numbers with decimals and a range: stretch 1.53, from 1 to 2, and cut 0.38, from 0 to 0.5",
+      "passed": true
+    },
+    {
+      "name": "a member has no mesh until it enters the room; then build() makes one: 20 triangles, all with area, all facing outward; 60 corners listed, three for each triangle, and no list of corner numbers",
+      "passed": true
+    },
+    {
+      "name": "it is a closed solid of 12 corners, 18 edges and 8 flat faces, 6 with five corners and 2 with three: 12 - 18 + 8 = 2; every face is lit flat: 8 directions for 8 faces",
+      "passed": true
+    },
+    {
+      "name": "it stands 0.989 m high in a box 0.789 m wide and deep, its middle at the node's origin; the sharpest corner of a five-cornered face is 72.01 degrees",
+      "passed": true
+    },
+    {
+      "name": "it is the hall's solid: the 12 corners of DurerPolyhedron.gd's construction, for a cube of 0.5 m, lie within 0.08 mm of ours. The hall works its stretch out from 72 degrees, 1.5302; ours is that number to two decimals",
+      "passed": true
+    },
+    {
+      "name": "the two fields are the two operations: with cut 0 the member is the pulled cube on its point, 8 corners, 1.325 m high, 12 of its 20 listed triangles with area; with stretch 1 as well it is the cube of Point Cube on a corner, 0.866 m high",
+      "passed": true
+    },
+    {
+      "name": "build() is where the class decides: asked for a stretch of 3 and a cut of 0.9, the fields say 2.0 and 0.5 and the member stands 1.155 m high",
+      "passed": true
+    },
+    {
+      "name": "drafted_solid.gd is the answer as it came back, unedited (md5 e8ab9850ada3b58906faa554c2468312); it extends MeshInstance3D and has no class_name",
+      "passed": true
+    },
+    {
+      "name": "it kept the second line: two exported fields, stretch 1.53 and cut 0.38, with no range; build() runs from _ready(); triangles() says 20",
+      "passed": true
+    },
+    {
+      "name": "it passes the third line: its box is (0.789, 0.989, 0.789) m, all 20 of its triangles face outward, and nothing was printed",
+      "passed": true
+    },
+    {
+      "name": "it is the same body as ours: its 12 corners lie within 0.0001 mm of ours. It is written down another way: 36 corners listed and a list of 60 corner numbers, where ours lists 60 corners and no numbers",
+      "passed": true
+    },
+    {
+      "name": "the two part where the three lines were silent: asked for a cut of 0.9, ours says 0.5 and stands 0.883 m, the drafted one says 0.9 and stands 0.530 m; asked for a stretch of 3 it says 3.0; with cut 0 it lists 18 triangles where ours lists 20",
+      "passed": true
+    },
+    {
+      "name": "found.gltf is one text file of 144723 bytes that says what it is: 'found_make.py, Collage study kit (Ada Research course). A stand-in for a phone scan: made by a script, not scanned.'",
+      "passed": true
+    },
+    {
+      "name": "its numbers are centimetres: the corners it lists reach from (-0.8, 4.3, -59.3) to (74.8, 103.3, 15.7), 99.0 high, around a point that is not its own middle",
+      "passed": true
+    },
+    {
+      "name": "Godot imported it with the settings it chooses by itself: root scale 1.0, no root type, nothing extra for single nodes; this kit ships no .import file",
+      "passed": true
+    },
+    {
+      "name": "what Godot makes of it: a Node3D named 'scan' with 1 child, a MeshInstance3D named 'scan_mesh' with an ArrayMesh of 1 surface; neither is moved, turned or scaled",
+      "passed": true
+    },
+    {
+      "name": "it arrives 100 times too large: its box is [P: (-0.804559, 4.3, -59.32127), S: (75.61543, 99.03934, 75.02676)], 99 METRES high, its lowest point 4.3 m above its own origin and its middle 43 m to one side",
+      "passed": true
+    },
+    {
+      "name": "many triangles: 2993 corners and a list of 17553 corner numbers, 5851 triangles, all with area: 293 times the 20 of the solid by hand",
+      "passed": true
+    },
+    {
+      "name": "holes and no inside: 137 of its edges belong to one triangle only, in 2 rings, one around its foot and one on top (on average [1.2, 95.1] units above its lowest point); its material 'scan_paper' is drawn from one side",
+      "passed": true
+    },
+    {
+      "name": "found.gd begins 'class_name Found' and 'extends Node3D'; its two exported fields are a text and a number: file 'res://found.gltf' and unit 0.01",
+      "passed": true
+    },
+    {
+      "name": "a Found holds nothing until it enters the room; then build() brings the file in, gives it its unit and moves the middle of its foot to the node's origin: it stands 0.990 m high in a box 0.756 by 0.750 m, its foot 0.0 mm from the origin; triangles() says 5851",
+      "passed": true
+    },
+    {
+      "name": "the unit is the whole repair of the size: with unit 1.0 the same body stands 99.04 m high on the same spot",
+      "passed": true
+    },
+    {
+      "name": "the sheet stands a mesh on its foot and paints it; a body from a file it stands where the body's own origin is and leaves in its own material: the first at (0.0, 0.495, 0.0), the second at (1.2, 0.0, 0.0)",
+      "passed": true
+    },
+    {
+      "name": "collage.tscn inherits plane.tscn: the root runs plane.gd, with A, B, Segment, Strip, Record, Face, Marble and Under; no Cube, no Organism, no Body, no Chessboard, no Family",
+      "passed": true
+    },
+    {
+      "name": "it adds two nodes at (-1.8, 0, 0.9): Sheet, an instance of sweep_sheet.tscn, and Collage, a plain Node3D running collage.gd; the marble waits at (3.2, 0.1, 1.2)",
+      "passed": true
+    },
+    {
+      "name": "Collage has one exported text field, the axis: made is \"by hand, drafted, found\"",
+      "passed": true
+    },
+    {
+      "name": "the finished study: three bodies under Collage, one of the class Solid, one from the drafted script, one of the class Found; they have [20, 20, 5851] triangles with area under plates [\"by hand\", \"drafted\", \"found\"]",
+      "passed": true
+    },
+    {
+      "name": "they stand in a row on the sheet, 1.2 m apart, each with its lowest point on the ground and its middle over its place; they are [0.989, 0.989, 0.99] m high; the sheet painted the two made bodies, the found one wears the material its file brought",
+      "passed": true
+    },
+    {
+      "name": "B walked 0.9 m towards us stands over the found body, 0.15 m from its middle; M: the marble falls through it to the ground and lies under it: 'marble at 0.10 m'",
+      "passed": true
+    },
+    {
+      "name": "it falls through the solid by hand as well: 'marble at 0.10 m'. For the marble neither body is there",
+      "passed": true
+    },
+    {
+      "name": "with a body from create_trimesh_collision() the marble rests on top of the solid by hand, at 1.08 m; dropped over the middle of the found body it does not stay: it rolls off, and after ten seconds it is at -176.59 m, 5.58 m from the body",
+      "passed": true
+    },
+    {
+      "name": "the axis is a text: \"found, by hand\" stands [5851, 20] under [\"found\", \"by hand\"]; with \"sculpted\" as the second of three words, nobody was made that way and the loop goes on: 2 bodies, plates [\"by hand\", \"found\"]",
+      "passed": true
+    },
+    {
+      "name": "strip 1, the cube pulled along its diagonal: 1 body, 8 corners, 12 triangles with area, in a box (0.765, 0.765, 0.765) m, none of its corners over its middle: it leans",
+      "passed": true
+    },
+    {
+      "name": "strip 2, stood on its diagonal: the same 8 corners and 12 triangles, now 1.325 m high, the two ends of the diagonal over each other",
+      "passed": true
+    },
+    {
+      "name": "strip 3, two corners cut: 12 corners, 20 triangles with area, 0.989 m high: the solid",
+      "passed": true
+    },
+    {
+      "name": "strip 4, a drafted answer: 2 bodies, 20 and 20 triangles, the second 0.989 m high on its own plate",
+      "passed": true
+    },
+    {
+      "name": "strip 5, the planted fault: the found body as its file gives it. 3 bodies and 3 plates, 5851 triangles, and the body is 99.04 m high, its lowest point 4.30 m above the ground, its middle 42.95 m from its plate; 0 of its 2993 corners are in the camera's view",
+      "passed": true
+    },
+    {
+      "name": "strip 6, its unit and its origin: the same 3 bodies and 5851 triangles; the found one now 0.990 m high, on the ground, over its plate",
+      "passed": true
+    },
+    {
+      "name": "process.png is there: 6 tiles of 320 x 240 with a band of names under them, 31935 bytes",
+      "passed": true
+    },
+    {
+      "name": "in process.png every tile differs from the one before: 6.96, 3.42, 5.68, 0.57 and 4.74% of the tile. The fourth of these is the found body arriving: a plate, and no body",
+      "passed": true
+    },
+    {
+      "name": "sheet.png is there: the three bodies in three columns and three rows (from the side, from above, faceted), 58175 bytes",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: with a window the three bodies are the three of the headless run: 20, 20 and 5851 triangles",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the closest pair is by hand and drafted from all three standpoints: they differ on 0.00%, 0.00% and 0.00% of the still. The two pictures are one picture",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the found body is the odd one from all three: against the one by hand it differs on 2.91% of the still from the side, 3.61% from above, 2.68% faceted",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: by its outline it is near: 0.96% of the still, a band of 5.00 pixels, where the body covers 20.30%; from above, where its hole shows, 2.04%. By its triangles it is 293 times the other two",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: in the material its file brought, the found body differs from the one by hand on 20.30% of the still: every pixel of the body. In the sheet's paint, 2.91%",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the renderer drew 4 primitives with nobody on the sheet, 24 with the solid by hand, 24 with the drafted one and 5855 with the found body, from 2 m; with the found body from 2, 4, 8 and 16 m: { \"16.0 m\": 5855.0, \"2.0 m\": 5855.0, \"4.0 m\": 5855.0, \"8.0 m\": 5855.0 }",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: a cut of 0.9 asked of both made bodies: by hand says 0.50, drafted says 0.90, and the two differ on 14.88% of the still",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: with a window the strip's six steps counted what they count headless",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the found body arriving changed the picture on 0.57% of the tile, a plate and no body; the step that changed it most was '2 stood on its diagonal'",
+      "passed": true
+    }
+  ],
+  "godot": "4.6-stable (official)",
+  "measured": {
+    "drafted": {
+      "corners_listed": 36,
+      "cut_0.9": {
+        "drafted_height_m": 0.530007541179657,
+        "drafted_says": 0.9,
+        "ours_height_m": 0.88334596157074,
+        "ours_says": 0.5
+      },
+      "md5": "e8ab9850ada3b58906faa554c2468312",
+      "mm_from_ours": 0.000121057610158459,
+      "triangles": 20
+    },
+    "found": {
+      "depth_m": 0.750267624855042,
+      "height_m": 0.990393400192261,
+      "triangles": 5851,
+      "width_m": 0.756154298782349
+    },
+    "found_file": {
+      "box_as_it_arrives": "[P: (-0.804559, 4.3, -59.32127), S: (75.61543, 99.03934, 75.02676)]",
+      "bytes": 144723,
+      "corners": 2993,
+      "open_edges": 137,
+      "open_rings": 2,
+      "triangles": 5851
+    },
+    "hall_stretch_for_72_degrees": 1.53024206794215,
+    "marble": {
+      "on_the_solid_by_hand_with_a_body_m": 1.079,
+      "over_the_found_body_with_a_body_m": -176.595,
+      "through_the_found_body_m": 0.098,
+      "through_the_solid_by_hand_m": 0.098
+    },
+    "planted_fault": {
+      "corners_in_the_cameras_view": 0,
+      "height_m": 99.039,
+      "lowest_point_m": 4.3,
+      "middle_from_its_plate_m": 42.951,
+      "middle_from_the_camera_m": 66.32
+    },
+    "process_png": {
+      "bytes": 31935,
+      "tile_differs_from_the_one_before_pct": [
+        6.96,
+        3.42,
+        5.68,
+        0.57,
+        4.74
+      ]
+    },
+    "sheet": {
+      "closest_pair_above": "by hand vs drafted",
+      "closest_pair_faceted": "by hand vs drafted",
+      "closest_pair_level": "by hand vs drafted",
+      "cut_0.9_asked_of_both": {
+        "by hand": {
+          "cut_field_says": 0.5,
+          "height_m": 0.883,
+          "triangles": 20.0
+        },
+        "differ": {
+          "differ_pct": 14.88,
+          "inside_pct": 3.87,
+          "outline_pct": 11.01,
+          "outline_px": 58.92
+        },
+        "drafted": {
+          "cut_field_says": 0.9,
+          "height_m": 0.53,
+          "triangles": 20.0
+        }
+      },
+      "farthest_pair_above": "by hand vs found",
+      "farthest_pair_faceted": "by hand vs found",
+      "farthest_pair_level": "by hand vs found",
+      "found_in_its_own_material_vs_by_hand": {
+        "differ_pct": 20.3,
+        "inside_pct": 19.34,
+        "outline_pct": 0.96,
+        "outline_px": 5.0
+      },
+      "godot": "4.6-stable (official)",
+      "members": {
+        "by hand": {
+          "box_m": [
+            0.789,
+            0.989,
+            0.789
+          ],
+          "class": "MeshInstance3D",
+          "corners_listed": 60.0,
+          "covers_pct_above": 15.43,
+          "covers_pct_faceted": 20.3,
+          "covers_pct_level": 20.3,
+          "has_a_list_of_corner_numbers": false,
+          "lowest_point_m": 0.0,
+          "mesh_nodes": 1.0,
+          "painted_by_the_sheet": true,
+          "primitives_drawn": 24.0,
+          "triangles": 20.0,
+          "triangles_with_area": 20.0
+        },
+        "drafted": {
+          "box_m": [
+            0.789,
+            0.989,
+            0.789
+          ],
+          "class": "MeshInstance3D",
+          "corners_listed": 36.0,
+          "covers_pct_above": 15.43,
+          "covers_pct_faceted": 20.3,
+          "covers_pct_level": 20.3,
+          "has_a_list_of_corner_numbers": true,
+          "lowest_point_m": 0.0,
+          "mesh_nodes": 1.0,
+          "painted_by_the_sheet": true,
+          "primitives_drawn": 24.0,
+          "triangles": 20.0,
+          "triangles_with_area": 20.0
+        },
+        "found": {
+          "box_m": [
+            0.756,
+            0.99,
+            0.75
+          ],
+          "class": "Node3D",
+          "corners_listed": 2993.0,
+          "covers_pct_above": 13.38,
+          "covers_pct_faceted": 19.34,
+          "covers_pct_level": 19.34,
+          "has_a_list_of_corner_numbers": true,
+          "lowest_point_m": 0.0,
+          "mesh_nodes": 1.0,
+          "painted_by_the_sheet": false,
+          "primitives_drawn": 5855.0,
+          "primitives_drawn_from": {
+            "16.0 m": 5855.0,
+            "2.0 m": 5855.0,
+            "4.0 m": 5855.0,
+            "8.0 m": 5855.0
+          },
+          "triangles": 5851.0,
+          "triangles_with_area": 5851.0
+        }
+      },
+      "pairs_above": {
+        "by hand vs drafted": {
+          "differ_pct": 0.0,
+          "inside_pct": 0.0,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "by hand vs found": {
+          "differ_pct": 3.61,
+          "inside_pct": 1.57,
+          "outline_pct": 2.04,
+          "outline_px": 12.2
+        },
+        "drafted vs found": {
+          "differ_pct": 3.61,
+          "inside_pct": 1.57,
+          "outline_pct": 2.04,
+          "outline_px": 12.2
+        }
+      },
+      "pairs_faceted": {
+        "by hand vs drafted": {
+          "differ_pct": 0.0,
+          "inside_pct": 0.0,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "by hand vs found": {
+          "differ_pct": 2.68,
+          "inside_pct": 1.72,
+          "outline_pct": 0.96,
+          "outline_px": 5.0
+        },
+        "drafted vs found": {
+          "differ_pct": 2.68,
+          "inside_pct": 1.72,
+          "outline_pct": 0.96,
+          "outline_px": 5.0
+        }
+      },
+      "pairs_level": {
+        "by hand vs drafted": {
+          "differ_pct": 0.0,
+          "inside_pct": 0.0,
+          "outline_pct": 0.0,
+          "outline_px": 0.0
+        },
+        "by hand vs found": {
+          "differ_pct": 2.91,
+          "inside_pct": 1.95,
+          "outline_pct": 0.96,
+          "outline_px": 5.0
+        },
+        "drafted vs found": {
+          "differ_pct": 2.91,
+          "inside_pct": 1.95,
+          "outline_pct": 0.96,
+          "outline_px": 5.0
+        }
+      },
+      "primitives_drawn_with_nobody": 4.0,
+      "process_png": {
+        "bytes": 31935.0,
+        "height": 266.0,
+        "width": 1940.0
+      },
+      "renderer": "NVIDIA GeForce RTX 3070",
+      "sheet_png": {
+        "bytes": 58175.0,
+        "height": 754.0,
+        "width": 968.0
+      },
+      "still": {
+        "fov": 40.0,
+        "height": 720.0,
+        "metres_to_the_body": 2.0,
+        "width": 960.0
+      },
+      "strip": [
+        {
+          "bodies": 1.0,
+          "differs_from_step_before_pct": 0.0,
+          "first_corners": 8.0,
+          "first_height_m": 0.765,
+          "last_height_m": 0.765,
+          "last_lowest_point_m": 0.0,
+          "last_middle_from_its_plate_m": 0.0,
+          "plates": [
+            "by hand"
+          ],
+          "step": "1 the cube, pulled",
+          "triangles": [
+            12.0
+          ]
+        },
+        {
+          "bodies": 1.0,
+          "differs_from_step_before_pct": 6.96,
+          "first_corners": 8.0,
+          "first_height_m": 1.325,
+          "last_height_m": 1.325,
+          "last_lowest_point_m": 0.0,
+          "last_middle_from_its_plate_m": 0.0,
+          "plates": [
+            "by hand"
+          ],
+          "step": "2 stood on its diagonal",
+          "triangles": [
+            12.0
+          ]
+        },
+        {
+          "bodies": 1.0,
+          "differs_from_step_before_pct": 3.42,
+          "first_corners": 12.0,
+          "first_height_m": 0.989,
+          "last_height_m": 0.989,
+          "last_lowest_point_m": 0.0,
+          "last_middle_from_its_plate_m": 0.0,
+          "plates": [
+            "by hand"
+          ],
+          "step": "3 two corners cut",
+          "triangles": [
+            20.0
+          ]
+        },
+        {
+          "bodies": 2.0,
+          "differs_from_step_before_pct": 5.68,
+          "first_corners": 12.0,
+          "first_height_m": 0.989,
+          "last_height_m": 0.989,
+          "last_lowest_point_m": 0.0,
+          "last_middle_from_its_plate_m": 0.0,
+          "plates": [
+            "by hand",
+            "drafted"
+          ],
+          "step": "4 a drafted answer",
+          "triangles": [
+            20.0,
+            20.0
+          ]
+        },
+        {
+          "bodies": 3.0,
+          "differs_from_step_before_pct": 0.57,
+          "first_corners": 12.0,
+          "first_height_m": 0.989,
+          "last_height_m": 99.039,
+          "last_lowest_point_m": 4.3,
+          "last_middle_from_its_plate_m": 42.951,
+          "plates": [
+            "by hand",
+            "drafted",
+            "found"
+          ],
+          "step": "5 a found body arrives",
+          "triangles": [
+            20.0,
+            20.0,
+            5851.0
+          ]
+        },
+        {
+          "bodies": 3.0,
+          "differs_from_step_before_pct": 4.74,
+          "first_corners": 12.0,
+          "first_height_m": 0.989,
+          "last_height_m": 0.99,
+          "last_lowest_point_m": 0.0,
+          "last_middle_from_its_plate_m": 0.0,
+          "plates": [
+            "by hand",
+            "drafted",
+            "found"
+          ],
+          "step": "6 its unit and its origin",
+          "triangles": [
+            20.0,
+            20.0,
+            5851.0
+          ]
+        }
+      ],
+      "strip_step_that_changed_most": "2 stood on its diagonal"
+    },
+    "solid": {
+      "box_m": [
+        0.78867518901825,
+        0.989347577095032,
+        0.78867518901825
+      ],
+      "corners": 12,
+      "edges": 18,
+      "faces": 8,
+      "mm_from_the_halls": 0.0782609422458336,
+      "sharpest_face_corner_deg": 72.0070985701302,
+      "triangles": 20
+    },
+    "strip": [
+      [
+        1,
+        [
+          12
+        ],
+        [
+          "by hand"
+        ],
+        8,
+        0.765,
+        0.765,
+        0.0,
+        0.0
+      ],
+      [
+        1,
+        [
+          12
+        ],
+        [
+          "by hand"
+        ],
+        8,
+        1.325,
+        1.325,
+        0.0,
+        0.0
+      ],
+      [
+        1,
+        [
+          20
+        ],
+        [
+          "by hand"
+        ],
+        12,
+        0.989,
+        0.989,
+        0.0,
+        0.0
+      ],
+      [
+        2,
+        [
+          20,
+          20
+        ],
+        [
+          "by hand",
+          "drafted"
+        ],
+        12,
+        0.989,
+        0.989,
+        0.0,
+        0.0
+      ],
+      [
+        3,
+        [
+          20,
+          20,
+          5851
+        ],
+        [
+          "by hand",
+          "drafted",
+          "found"
+        ],
+        12,
+        0.989,
+        99.039,
+        4.3,
+        42.951
+      ],
+      [
+        3,
+        [
+          20,
+          20,
+          5851
+        ],
+        [
+          "by hand",
+          "drafted",
+          "found"
+        ],
+        12,
+        0.989,
+        0.99,
+        0.0,
+        0.0
+      ]
+    ],
+    "study": {
+      "bodies": 3,
+      "heights_m": [
+        0.989,
+        0.989,
+        0.99
+      ],
+      "plates": [
+        "by hand",
+        "drafted",
+        "found"
+      ],
+      "triangles": [
+        20,
+        20,
+        5851
+      ]
+    }
+  },
+  "passed": true
+}

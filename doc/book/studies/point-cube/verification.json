@@ -1,0 +1,418 @@
+{
+  "checks": [
+    {
+      "name": "action move_left exists, bound to A, Left",
+      "passed": true
+    },
+    {
+      "name": "action move_right exists, bound to D, Right",
+      "passed": true
+    },
+    {
+      "name": "action move_forward exists, bound to W, Up",
+      "passed": true
+    },
+    {
+      "name": "action move_backward exists, bound to S, Down",
+      "passed": true
+    },
+    {
+      "name": "action pause exists, bound to Space",
+      "passed": true
+    },
+    {
+      "name": "action close exists, bound to Enter",
+      "passed": true
+    },
+    {
+      "name": "action fill exists, bound to F",
+      "passed": true
+    },
+    {
+      "name": "action drop exists, bound to M",
+      "passed": true
+    },
+    {
+      "name": "action look exists, bound to V",
+      "passed": true
+    },
+    {
+      "name": "line.tscn still runs on its own: readout 1.50 m",
+      "passed": true
+    },
+    {
+      "name": "trace.tscn still runs on its own: 1 kept",
+      "passed": true
+    },
+    {
+      "name": "plane.tscn still runs on its own: open, no face, no cube",
+      "passed": true
+    },
+    {
+      "name": "the root still runs plane.gd; A, B, Segment, Strip, Record, Face, FaceBody, Marble and Under are inherited",
+      "passed": true
+    },
+    {
+      "name": "the plane is still to be walked: 1 kept, open, Face has no mesh",
+      "passed": true
+    },
+    {
+      "name": "Cube is a MeshInstance3D running cube.gd, with a material and a Body of its own",
+      "passed": true
+    },
+    {
+      "name": "Cube stands at (1.05, 1.37, 0.6); draft is 3, repaired, unless the Inspector says otherwise",
+      "passed": true
+    },
+    {
+      "name": "8 corners",
+      "passed": true
+    },
+    {
+      "name": "the corners are the eight combinations of -0.25 and 0.25: a cube of 0.5 m around the node's origin",
+      "passed": true
+    },
+    {
+      "name": "corner 0 is bottom back left and corner 6 is top front right, the hall's numbering",
+      "passed": true
+    },
+    {
+      "name": "12 triangles",
+      "passed": true
+    },
+    {
+      "name": "36 indices, each from 0 to 7, every corner used (4, 5 or 6 times)",
+      "passed": true
+    },
+    {
+      "name": "the triples are the repaired list, front face first",
+      "passed": true
+    },
+    {
+      "name": "the mesh is one surface of triangles with 36 vertices: 12 x 3 calls of add_vertex()",
+      "passed": true
+    },
+    {
+      "name": "vertex 3t + k of the mesh is corners[triangles[t][k]]: the loop emits the list in order",
+      "passed": true
+    },
+    {
+      "name": "repaired: every one of the 12 triangles faces outward: dot(normal, centroid - middle) > 0",
+      "passed": true
+    },
+    {
+      "name": "repaired: two triangles face each of the six directions",
+      "passed": true
+    },
+    {
+      "name": "each face is two triples that share two corners: a diagonal",
+      "passed": true
+    },
+    {
+      "name": "normals: one per vertex, each the direction its own triangle faces (flat, smooth group -1)",
+      "passed": true
+    },
+    {
+      "name": "the cube is 0.5 m on every edge and stands at the height of the walk: from 1.12 m to 1.62 m",
+      "passed": true
+    },
+    {
+      "name": "Body's shape is a trimesh of the same 12 triangles, backface collision left off: the body shares the eye's side",
+      "passed": true
+    },
+    {
+      "name": "repaired: a marble dropped over the top rests ON it: 1.710 m (top 1.62 + radius), still over the cube",
+      "passed": true
+    },
+    {
+      "name": "repaired: dropped over the middle of the top, it rests there too: 1.710 m",
+      "passed": true
+    },
+    {
+      "name": "dropped beside the cube, the marble falls past it to the floor: 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "repaired: dropped 3.5 cm from the top's diagonal, the marble rolls off the top and ends on the floor: 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "the same drop with backface_collision on stays on the top: 1.711 m",
+      "passed": true
+    },
+    {
+      "name": "the drop key puts the marble one metre above B, with B under the cube",
+      "passed": true
+    },
+    {
+      "name": "and it comes to rest on the cube above B: 1.710 m",
+      "passed": true
+    },
+    {
+      "name": "a walk D, S, A, W from B's start closes around the cube: the plane has 2 triangles and the cube's bottom lies on it at 1.12 m",
+      "passed": true
+    },
+    {
+      "name": "beside the cube and inside the walk, the marble now rests on the plane: 1.218 m",
+      "passed": true
+    },
+    {
+      "name": "first answer: the corners are ours, untouched (line 2 of the instruction was kept)",
+      "passed": true
+    },
+    {
+      "name": "first answer: the two front triples are ours, untouched",
+      "passed": true
+    },
+    {
+      "name": "first answer: 12 triples, and four of them differ from the repair: 3, 8, 9 and 11",
+      "passed": true
+    },
+    {
+      "name": "first answer, triple 3 is [0, 2, 8]: it asks for a ninth corner",
+      "passed": true
+    },
+    {
+      "name": "first answer, triples 8 and 9 are the top face in the other order: [2, 3, 6] and [3, 7, 6]",
+      "passed": true
+    },
+    {
+      "name": "first answer, triple 11 is [1, 5, 5]: one corner twice",
+      "passed": true
+    },
+    {
+      "name": "first answer run as it came back: build() stops at triple 3, so there is no mesh and no collider",
+      "passed": true
+    },
+    {
+      "name": "second answer: 8 corners in the same order, each twice as far from the middle: a cube of 1 m",
+      "passed": true
+    },
+    {
+      "name": "second answer: 12 triples, and our front triples are not among them",
+      "passed": true
+    },
+    {
+      "name": "draft 0 my one face: 2 triangles: 2 outward, 0 inward, 0 without area; both are the front face",
+      "passed": true
+    },
+    {
+      "name": "draft 1 one-line draft: 12 triangles: 0 outward, 12 inward, 0 without area; a cube of 1 m",
+      "passed": true
+    },
+    {
+      "name": "draft 2 three-line draft: 11 triangles: 8 outward, 2 inward, 1 without area; triple 3 was skipped by our loop",
+      "passed": true
+    },
+    {
+      "name": "draft 2: the two inward triangles are the top face (their middles lie at the top, y = 0.25), and no other face is inside out",
+      "passed": true
+    },
+    {
+      "name": "draft 2: the back and the bottom each keep one triangle of two",
+      "passed": true
+    },
+    {
+      "name": "draft 2 on a walked plane: the marble falls through the top and the bottom and rests on the plane inside the cube: 1.218 m",
+      "passed": true
+    },
+    {
+      "name": "draft 2 with backface_collision switched on: the marble rests on the inside-out top at 1.710 m, and no longer finds the fault",
+      "passed": true
+    },
+    {
+      "name": "draft 3 repaired: 12 triangles: 12 outward, 0 inward, 0 without area",
+      "passed": true
+    },
+    {
+      "name": "draft 0: there is no top, and the marble falls to the floor: 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "draft 1: the marble falls in and stays in: it rests at 0.968 m, on the inside of the bottom, 0.87 m + radius",
+      "passed": true
+    },
+    {
+      "name": "draft 2: the marble falls through the top and out through the bottom, to the floor: 0.098 m",
+      "passed": true
+    },
+    {
+      "name": "draft 3: the marble rests on top: 1.710 m",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: from above the closest pair is my one face and the three-line draft; from below and from behind it is the three-line draft and the repair",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the three-line draft shows less cube than the repair from above, from below and from behind: a face or half a face is missing each time",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the one-line draft covers more than three times the frame the repair covers, from every standpoint",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: my one face shows from above and from below and is absent from behind",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: the same face in the hall's order is absent from above and shows from behind",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: smooth normals change the repaired cube on more than 0.3% of the frame; on a plane they changed nothing",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: with a window the marble ends where it ends headless: floor, inside, floor, on top",
+      "passed": true
+    },
+    {
+      "name": "sheet.json: on a walked plane the cube shows from below as much as without one: the plane is not drawn from below",
+      "passed": true
+    }
+  ],
+  "godot": "4.6-stable (official)",
+  "measured": {
+    "marble_draft_0": [
+      1.15,
+      0.098,
+      0.5
+    ],
+    "marble_draft_1": [
+      1.15,
+      0.968,
+      0.5
+    ],
+    "marble_draft_2": [
+      1.15,
+      0.098,
+      0.5
+    ],
+    "marble_draft_3": [
+      1.15,
+      1.71,
+      0.5
+    ],
+    "marble_on_repaired_m": 1.71,
+    "sheet_above": {
+      "my one face": {
+        "cube_brightness": 0.74,
+        "cube_share_pct": 0.55,
+        "shadow_share_pct": 0.34,
+        "value": "my one face",
+        "view": "above"
+      },
+      "one-line draft": {
+        "cube_brightness": 0.73,
+        "cube_share_pct": 5.34,
+        "shadow_share_pct": 0.36,
+        "value": "one-line draft",
+        "view": "above"
+      },
+      "repaired": {
+        "cube_brightness": 0.74,
+        "cube_share_pct": 1.31,
+        "shadow_share_pct": 0.43,
+        "value": "repaired",
+        "view": "above"
+      },
+      "three-line draft": {
+        "cube_brightness": 0.73,
+        "cube_share_pct": 0.69,
+        "shadow_share_pct": 0.53,
+        "value": "three-line draft",
+        "view": "above"
+      }
+    },
+    "sheet_behind": {
+      "my one face": {
+        "cube_brightness": 0.0,
+        "cube_share_pct": 0.0,
+        "shadow_share_pct": 0.0,
+        "value": "my one face",
+        "view": "behind"
+      },
+      "one-line draft": {
+        "cube_brightness": 0.47,
+        "cube_share_pct": 19.44,
+        "shadow_share_pct": 0.09,
+        "value": "one-line draft",
+        "view": "behind"
+      },
+      "repaired": {
+        "cube_brightness": 0.42,
+        "cube_share_pct": 4.84,
+        "shadow_share_pct": 0.01,
+        "value": "repaired",
+        "view": "behind"
+      },
+      "three-line draft": {
+        "cube_brightness": 0.34,
+        "cube_share_pct": 2.84,
+        "shadow_share_pct": 0.0,
+        "value": "three-line draft",
+        "view": "behind"
+      }
+    },
+    "sheet_below": {
+      "my one face": {
+        "cube_brightness": 0.76,
+        "cube_share_pct": 3.45,
+        "shadow_share_pct": 0.0,
+        "value": "my one face",
+        "view": "below"
+      },
+      "one-line draft": {
+        "cube_brightness": 0.6,
+        "cube_share_pct": 24.67,
+        "shadow_share_pct": 0.0,
+        "value": "one-line draft",
+        "view": "below"
+      },
+      "repaired": {
+        "cube_brightness": 0.63,
+        "cube_share_pct": 5.98,
+        "shadow_share_pct": 0.0,
+        "value": "repaired",
+        "view": "below"
+      },
+      "three-line draft": {
+        "cube_brightness": 0.68,
+        "cube_share_pct": 5.14,
+        "shadow_share_pct": 0.0,
+        "value": "three-line draft",
+        "view": "below"
+      }
+    },
+    "sheet_closest_pair_above": "0 vs 2",
+    "sheet_closest_pair_behind": "2 vs 3",
+    "sheet_closest_pair_below": "2 vs 3",
+    "sheet_pairs_above_pct": {
+      "0 vs 1": 5.22,
+      "0 vs 2": 0.36,
+      "0 vs 3": 1.1,
+      "1 vs 2": 5.09,
+      "1 vs 3": 4.43,
+      "2 vs 3": 0.93
+    },
+    "sheet_pairs_behind_pct": {
+      "0 vs 1": 19.56,
+      "0 vs 2": 2.87,
+      "0 vs 3": 4.85,
+      "1 vs 2": 17.41,
+      "1 vs 3": 16.2,
+      "2 vs 3": 2.03
+    },
+    "sheet_pairs_below_pct": {
+      "0 vs 1": 23.63,
+      "0 vs 2": 1.72,
+      "0 vs 3": 2.65,
+      "1 vs 2": 23.62,
+      "1 vs 3": 23.62,
+      "2 vs 3": 0.95
+    }
+  },
+  "passed": true
+}

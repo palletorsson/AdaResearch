@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://plane.tscn" id="Plane"]
+[ext_resource type="Script" path="res://chessboard.gd" id="Lesson"]
+
+[node name="ChessboardStudy" instance=ExtResource("Plane")]
+
+[node name="Marble" parent="."]
+position = Vector3(2.6, 0.1, 1.2)
+
+[node name="Chessboard" type="Node3D" parent="."]
+position = Vector3(-1.75, 0, -2)
+script = ExtResource("Lesson")

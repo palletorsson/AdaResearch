@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://plane.tscn" id="Plane"]
+[ext_resource type="PackedScene" path="res://sweep_sheet.tscn" id="SweepSheet"]
+[ext_resource type="Script" path="res://collage.gd" id="Lesson"]
+
+[node name="CollageStudy" instance=ExtResource("Plane")]
+
+[node name="Marble" parent="."]
+position = Vector3(3.2, 0.1, 1.2)
+
+[node name="Sheet" parent="." instance=ExtResource("SweepSheet")]
+position = Vector3(-1.8, 0, 0.9)
+
+[node name="Collage" type="Node3D" parent="."]
+position = Vector3(-1.8, 0, 0.9)
+script = ExtResource("Lesson")

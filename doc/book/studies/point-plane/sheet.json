@@ -1,0 +1,73 @@
+{
+  "0_above": {
+    "face_brightness": 1.0,
+    "face_share_pct": 5.53,
+    "shadow_share_pct": 0.78,
+    "value": "clockwise",
+    "view": "above"
+  },
+  "0_below": {
+    "face_brightness": 0.0,
+    "face_share_pct": 0.0,
+    "shadow_share_pct": 0.1,
+    "value": "clockwise",
+    "view": "below"
+  },
+  "1_above": {
+    "face_brightness": 0.8,
+    "face_share_pct": 5.52,
+    "shadow_share_pct": 0.79,
+    "value": "clockwise flipped normals",
+    "view": "above"
+  },
+  "1_below": {
+    "face_brightness": 0.0,
+    "face_share_pct": 0.0,
+    "shadow_share_pct": 0.1,
+    "value": "clockwise flipped normals",
+    "view": "below"
+  },
+  "2_above": {
+    "face_brightness": 0.0,
+    "face_share_pct": 0.0,
+    "shadow_share_pct": 0.0,
+    "value": "counter-clockwise",
+    "view": "above"
+  },
+  "2_below": {
+    "face_brightness": 0.8,
+    "face_share_pct": 15.24,
+    "shadow_share_pct": 0.26,
+    "value": "counter-clockwise",
+    "view": "below"
+  },
+  "3_above": {
+    "face_brightness": 1.0,
+    "face_share_pct": 5.54,
+    "shadow_share_pct": 0.0,
+    "value": "counter-clockwise double-sided",
+    "view": "above"
+  },
+  "3_below": {
+    "face_brightness": 0.8,
+    "face_share_pct": 15.25,
+    "shadow_share_pct": 0.26,
+    "value": "counter-clockwise double-sided",
+    "view": "below"
+  },
+  "closest_pair_above": "0 vs 3",
+  "godot": "4.6-stable (official)",
+  "marble_on_counter_clockwise": {
+    "rest_y": 1.218
+  },
+  "no_normals_vs_clockwise_above_pct": 0.0,
+  "pairs_above_pct": {
+    "0 vs 1": 5.54,
+    "0 vs 2": 6.31,
+    "0 vs 3": 0.82,
+    "1 vs 2": 6.31,
+    "1 vs 3": 6.32,
+    "2 vs 3": 5.54
+  },
+  "walk_points": 12
+}

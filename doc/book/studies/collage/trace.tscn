@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://line.tscn" id="Line"]
+[ext_resource type="Script" path="res://trace.gd" id="Lesson"]
+[ext_resource type="Script" path="res://mover.gd" id="Hand"]
+[ext_resource type="Script" path="res://trace_strip.gd" id="Display"]
+
+[node name="TraceStudy" instance=ExtResource("Line")]
+script = ExtResource("Lesson")
+
+[node name="Camera3D" parent="." index="3"]
+position = Vector3(0, 5, 3.6)
+rotation = Vector3(-0.9, 0, 0)
+
+[node name="B" parent="." index="7"]
+script = ExtResource("Hand")
+
+[node name="Strip" type="MeshInstance3D" parent="."]
+script = ExtResource("Display")
+
+[node name="Record" type="Label3D" parent="."]
+position = Vector3(0, 2.35, 0)
+font_size = 40
+pixel_size = 0.004

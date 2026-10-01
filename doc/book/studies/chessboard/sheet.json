@@ -1,0 +1,373 @@
+{
+  "0": {
+    "colours": 1,
+    "cubes": 64,
+    "drawn_above": {
+      "draw_calls": 345,
+      "objects": 345
+    },
+    "drawn_top": {
+      "draw_calls": 65,
+      "objects": 65
+    },
+    "floor_share_above_pct": 29.65,
+    "floor_share_top_pct": 39.06,
+    "materials": 64,
+    "tone_above": [
+      0.503,
+      0.519,
+      0.526
+    ],
+    "tone_top": [
+      0.514,
+      0.504,
+      0.476
+    ],
+    "value": "every cell alike"
+  },
+  "1": {
+    "colours": 2,
+    "cubes": 64,
+    "drawn_above": {
+      "draw_calls": 345,
+      "objects": 345
+    },
+    "drawn_top": {
+      "draw_calls": 65,
+      "objects": 65
+    },
+    "floor_share_above_pct": 29.65,
+    "floor_share_top_pct": 39.06,
+    "materials": 64,
+    "tone_above": [
+      0.385,
+      0.422,
+      0.461
+    ],
+    "tone_top": [
+      0.386,
+      0.406,
+      0.42
+    ],
+    "value": "(x + z) % 2 chessboard"
+  },
+  "2": {
+    "colours": 2,
+    "cubes": 64,
+    "drawn_above": {
+      "draw_calls": 345,
+      "objects": 345
+    },
+    "drawn_top": {
+      "draw_calls": 65,
+      "objects": 65
+    },
+    "floor_share_above_pct": 29.65,
+    "floor_share_top_pct": 39.06,
+    "materials": 64,
+    "tone_above": [
+      0.414,
+      0.446,
+      0.477
+    ],
+    "tone_top": [
+      0.418,
+      0.43,
+      0.434
+    ],
+    "value": "x % 3 stripes"
+  },
+  "3": {
+    "bands_top": {
+      "colours": [
+        [
+          0.788,
+          0.2,
+          0.212
+        ],
+        [
+          0.788,
+          0.447,
+          0.208
+        ],
+        [
+          0.788,
+          0.678,
+          0.208
+        ],
+        [
+          0.729,
+          0.8,
+          0.208
+        ],
+        [
+          0.518,
+          0.8,
+          0.208
+        ],
+        [
+          0.271,
+          0.8,
+          0.208
+        ],
+        [
+          0.196,
+          0.8,
+          0.38
+        ],
+        [
+          0.2,
+          0.8,
+          0.635
+        ],
+        [
+          0.196,
+          0.8,
+          0.827
+        ],
+        [
+          0.196,
+          0.608,
+          0.827
+        ],
+        [
+          0.196,
+          0.361,
+          0.827
+        ],
+        [
+          0.271,
+          0.2,
+          0.827
+        ],
+        [
+          0.518,
+          0.2,
+          0.827
+        ],
+        [
+          0.729,
+          0.2,
+          0.827
+        ],
+        [
+          0.788,
+          0.2,
+          0.706
+        ]
+      ],
+      "largest_step_from_band": 6,
+      "smallest_step_from_band": 2,
+      "step_to_next": [
+        64.0,
+        59.0,
+        46.0,
+        54.0,
+        63.0,
+        63.0,
+        66.0,
+        50.0,
+        49.0,
+        63.0,
+        60.0,
+        63.0,
+        54.0,
+        46.0
+      ]
+    },
+    "colours": 15,
+    "cubes": 64,
+    "drawn_above": {
+      "draw_calls": 345,
+      "objects": 345
+    },
+    "drawn_top": {
+      "draw_calls": 65,
+      "objects": 65
+    },
+    "floor_share_above_pct": 29.65,
+    "floor_share_top_pct": 39.06,
+    "materials": 64,
+    "tone_above": [
+      0.347,
+      0.444,
+      0.498
+    ],
+    "tone_top": [
+      0.34,
+      0.455,
+      0.454
+    ],
+    "value": "hue from x + z"
+  },
+  "closest_pair_above": "0 vs 2",
+  "closest_pair_top": "0 vs 2",
+  "closest_tone_above": "1 vs 2",
+  "closest_tone_top": "1 vs 2",
+  "empty": {
+    "draw_calls": 5,
+    "objects": 5
+  },
+  "empty_above": {
+    "draw_calls": 25,
+    "objects": 25
+  },
+  "empty_top": {
+    "draw_calls": 1,
+    "objects": 1
+  },
+  "farthest_pair_above": "0 vs 3",
+  "farthest_pair_top": "0 vs 3",
+  "godot": "4.6-stable (official)",
+  "pairs_above_pct": {
+    "0 vs 1": 15.04,
+    "0 vs 2": 11.12,
+    "0 vs 3": 29.22,
+    "1 vs 2": 14.26,
+    "1 vs 3": 29.22,
+    "2 vs 3": 29.22
+  },
+  "pairs_top_pct": {
+    "0 vs 1": 20.05,
+    "0 vs 2": 14.84,
+    "0 vs 3": 39.06,
+    "1 vs 2": 19.79,
+    "1 vs 3": 39.06,
+    "2 vs 3": 39.06
+  },
+  "process_png": {
+    "bytes": 33858,
+    "height": 266,
+    "width": 2264
+  },
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "sheet_png": {
+    "bytes": 23403,
+    "height": 266,
+    "width": 1292
+  },
+  "strip": [
+    {
+      "colliders": 1,
+      "colours": 1,
+      "cubes": 1,
+      "differs_from_step_before_pct": 0.0,
+      "draw_calls": 10,
+      "far_corner": [
+        0.0,
+        0.0
+      ],
+      "materials": 1,
+      "nodes_below_board": 3,
+      "objects": 10,
+      "step": "1 one cube"
+    },
+    {
+      "colliders": 8,
+      "colours": 1,
+      "cubes": 8,
+      "differs_from_step_before_pct": 4.56,
+      "draw_calls": 45,
+      "far_corner": [
+        3.5,
+        0.0
+      ],
+      "materials": 1,
+      "nodes_below_board": 24,
+      "objects": 45,
+      "step": "2 a row"
+    },
+    {
+      "colliders": 64,
+      "colours": 1,
+      "cubes": 64,
+      "differs_from_step_before_pct": 28.33,
+      "draw_calls": 325,
+      "far_corner": [
+        3.5,
+        3.5
+      ],
+      "materials": 1,
+      "nodes_below_board": 192,
+      "objects": 325,
+      "step": "3 the floor"
+    },
+    {
+      "colliders": 64,
+      "colours": 2,
+      "cubes": 64,
+      "differs_from_step_before_pct": 32.38,
+      "draw_calls": 325,
+      "far_corner": [
+        3.5,
+        3.5
+      ],
+      "materials": 64,
+      "nodes_below_board": 192,
+      "objects": 325,
+      "step": "4 two colours"
+    },
+    {
+      "colliders": 64,
+      "colours": 15,
+      "cubes": 64,
+      "differs_from_step_before_pct": 32.38,
+      "draw_calls": 325,
+      "far_corner": [
+        3.5,
+        3.5
+      ],
+      "materials": 64,
+      "nodes_below_board": 192,
+      "objects": 325,
+      "step": "5 hue by index"
+    },
+    {
+      "colliders": 63,
+      "colours": 15,
+      "cubes": 64,
+      "differs_from_step_before_pct": 0.0,
+      "draw_calls": 325,
+      "far_corner": [
+        3.5,
+        3.5
+      ],
+      "materials": 64,
+      "nodes_below_board": 192,
+      "objects": 325,
+      "step": "6 a ghost cell"
+    },
+    {
+      "colliders": 63,
+      "colours": 15,
+      "cubes": 64,
+      "differs_from_step_before_pct": 43.42,
+      "draw_calls": 325,
+      "far_corner": [
+        4.2,
+        4.2
+      ],
+      "materials": 64,
+      "nodes_below_board": 192,
+      "objects": 325,
+      "step": "7 spacing opened"
+    }
+  ],
+  "strip_step_that_changed_most": "7 spacing opened",
+  "tones_apart_above": {
+    "0 vs 1": 71.43,
+    "0 vs 2": 53.67,
+    "0 vs 3": 65.85,
+    "1 vs 2": 17.77,
+    "1 vs 3": 24.75,
+    "2 vs 3": 22.85
+  },
+  "tones_apart_top": {
+    "0 vs 1": 71.56,
+    "0 vs 2": 53.88,
+    "0 vs 3": 62.28,
+    "1 vs 2": 17.67,
+    "1 vs 3": 32.64,
+    "2 vs 3": 31.0
+  }
+}

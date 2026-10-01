@@ -66,6 +66,63 @@ edit("ch15", spine=["primitives", "color", "softbodies"],
 edit("ch10", project_step=CH["ch10"].get("project_step", "") +
      " Then dress the assemblage from Part 3: every part of your body of parts gets a material from your palette (ch29) and one tiled skin by rule; the imported part keeps its own texture, so the seam between made and found stays visible.")
 
+# ch07: the axis as the kit measured it (point-plane, 2026-10-01, 66/66): smooth and flat normals are identical on a flat fan,
+# and a face with no normals renders the same, so the visible values are winding and flipped normals.
+CH["ch07"]["argument"].update({
+    "axis": "winding and the side the face shows",
+    "values": ["clockwise", "clockwise, flipped normals", "counter-clockwise", "counter-clockwise, double-sided"],
+    "predict": "From above, clockwise and counter-clockwise double-sided will look most alike: both show a lit face and differ only by the shadow (measured: 0.82% of the frame). Counter-clockwise alone shows nothing from above and everything from below. Write which pair you expect before you render.",
+})
+edit("ch07", debt=CH["ch07"]["debt"] + " Measured in the kit: the collider is one-sided too. A marble falls through a counter-clockwise face from above unless backface_collision is set, so a surface that shows from one side also holds from one side.")
+
+# ch08: the axis as the kit measured it (point-cube, 2026-10-01, 68/68). The winner's axis ("how much the prompt fixes") was a
+# claim about what a model returns, which a kit that runs without one cannot measure; the axis is which draft builds the cube.
+CH["ch08"]["argument"].update({
+    "axis": "which draft builds the cube",
+    "values": ["my one face", "the one-line draft (make a cube)", "the three-line draft", "the repaired draft"],
+    "predict": "From above, your one face and the three-line draft will look most alike (measured: 0.36% of the frame apart), because the draft's top is wound the wrong way and is absent. The one-line draft, wrong in every triangle, looks like a whole cube from above and like an open room from behind; a marble dropped on it comes to rest inside. Write which pair you expect, from above and from behind, before you render.",
+    "claim": "An instruction fixes what it names; naming is not checking. The draft that looks most finished from one side is the one that is wrong everywhere.",
+})
+edit("ch08", debt=CH["ch08"]["debt"] + " Measured in the kit's first export: assert() is skipped in a release build, push_error() loses its line number there, and the exe without its .pck answers that the project data could not be loaded; what the editor told you, the build may not.")
+
+# ch13: the axis as the kit measured it (organism, 2026-10-01, 83/83). The winner predicted that the pivot at the end and at
+# one third would look most alike; measured at 30 degrees per joint, the closest pair is one third and the centre.
+CH["ch13"]["argument"].update({
+    "axis": "where the pivot sits on each segment, same joint angles",
+    "values": ["at the end", "at one third", "at the centre", "outside the bar"],
+    "predict": "At rest all four look the same: the pivot moves origins, not bars (measured: no pair differs on more than 0.18% of the frame). With every joint at 30 degrees, one third and the centre are the closest pair, and only the pivot at the end keeps the chain joined: the others open a gap at the knee (5 and 8 cm). Write the pair you expect, at rest and turned, before you render.",
+})
+edit("ch13", debt=CH["ch13"]["debt"] + " Measured in the kit: delta repairs the speed, not the sampling. At 144, 60 and 30 frames a second one turn of the limb carves the same 33 cells; at 3 frames a second it carves 26, because the foot is only asked where it is when a frame comes.")
+
+# ch09: the argument as the kit measured it (chessboard, 2026-10-01, 57/57). The outline predicted that the chessboard and
+# the stripes would look most alike and that only the hue ramp has a direction; cell by cell both are false.
+CH["ch09"]["argument"].update({
+    "predict": "Cell by cell, every cell alike and the x % 3 stripes are the closest pair: they differ in 24 of 64 cells (measured: 11.12% of the frame from the study camera). The chessboard and the stripes disagree on about half the floor (14.26%). Only when the cells are averaged away do the chessboard and the stripes come closest, and that distance was not rendered: it is arithmetic on the stills. The stripes have a direction too: swapping x and z changes 30 of their cells. Write the pair you expect before you render, and say from how far.",
+})
+edit("ch09", debt=CH["ch09"]["debt"] + " Measured in the kit: the planted integer division, (x + z) / (2 * n) without float(), gives hue 0 in all 64 cells, a red floor with one warning and no error. One material made before the loops is one material on 64 cubes: change one cube and all 64 change. And the gap a body meets depends on how fast it arrives: a marble let go at 0.75 m passes when the gap equals its width, to the millimetre; dropped from 2 m it passes 2 cm earlier and, just below that, sticks between the cubes. Why it switches where it does is not explained.")
+
+# ch14: the argument as the kit measured it (family, 2026-10-01, 56/56). The outline's closest pair held, the first
+# on the short track to do so. Its planted bug did not: Godot 4.6 converts a String handed to a typed int through set().
+CH["ch14"]["argument"].update({
+    "predict": "16 and 64 will look most alike at 2 m (measured: they differ on 0.85% of the still from the side, 0.99% from above, and stay the closest pair lit flat, at 4.65%). Most of that likeness is smooth shading: the rim differs by a band about 3 pixels wide. From above, the outline of 16 misses the circle by 2.06% (the chord arithmetic gives 1.92%). 4 is another body, but not the octahedron: with rings at half it has two rings and 16 triangles. Write the pair you expect, and what you think the likeness is made of, before you render.",
+    "claim": "The class's integer decides which body you have, and there is no step where a sphere stops paying: against 64 the difference falls evenly, 15.27, 5.17, 0.85, 0.19% for 4, 8, 16 and 32 segments. What looks like enough is a decision about distance and light.",
+})
+edit("ch14", debt=CH["ch14"]["debt"].replace(" And a typed set() refuses a wrong type in silence, so a sweep can publish four identical members and look finished (the Ada project's own science_screen case).", "")
+     + " Measured in the kit: set() on a typed int does not refuse a text. It converts it in silence: '16' becomes 16, 'sixteen' becomes 0, '4 8 16 64' becomes 481664, and 640 passes an @export_range of 4 to 64. What set() does refuse in silence is a name the class does not have, and a number handed to a String field. So the planted fault is a wrong field name: four members come back alike under four different plates, and only the printed triangle counts say so (the Ada project's own science_screen case).")
+
+# ch18: the argument as the kit measured it (collage, 2026-10-01, 59/59). Three values, not four: nothing in the kit
+# was sculpted by a hand in a headset. The found body is a stand-in made by a script from the solid itself.
+CH["ch18"]["argument"].update({
+    "values": ["by hand", "drafted from your three lines", "found (a stand-in for a scan)"],
+    "predict": "By hand and drafted will look most alike, and here they are the same picture: 0.00% of the still differs from the side, from above and lit flat. The reason is not that they share primitives (one is built with SurfaceTool, the other from an indexed array); the three lines named every number the picture shows. Ask both for a value the lines did not name and they part: a cut of 0.9 is clamped by one and kept by the other, and the stills differ on 14.88%. The found body differs from the solid on about 3% and has 5,851 triangles to its 20. Whether a real scan is the outlier by count and not by silhouette is not tested here: the stand-in was made from the solid, so its outline is near by construction. Write the pair you expect, and what would make two bodies made the same way differ.",
+    "claim": "Two bodies that look the same have agreed only about what was named. How a body was made shows in what it does with a value nobody asked for, and in its triangle count.",
+})
+edit("ch18", debt=CH["ch18"]["debt"] + " Measured in the kit: the import arrives 99.04 m high, its lowest point 4.3 m up and 43 m from its plate, with none of its corners in view. Godot prints no error and still reports the triangle count; the picture shows an empty plate. Scale alone does not bring it home: the file has its own origin, and that is a second fault. The drafted answer in the kit came from one question put once to an assistant of the same kind as the one that wrote the lesson, so it is not an independent witness.")
+
+# ch40: the QFEP chapter speaks of F and of entropy; the method handoff (2026-10-01) asks that both be stated as what they are.
+edit("ch40", body=CH["ch40"]["body"].replace("(QFEP's F term)", "(a heuristic reading of QFEP's F term: a prediction error you wrote down, not a measured free energy)"),
+     debt=CH["ch40"]["debt"] + " The entropy counted here is the Shannon entropy of the symbol frequencies in one row, a stated distribution and a stated estimator. It is not the entropy of the room, of your search or of you, and the chapter makes no claim about those.")
+
 # ch17 moves to Part 7, where PG_Genetic_Evolution sits on the spine.
 edit("ch17", spine=["proceduralgeneration", "randomness"])
 
@@ -168,15 +225,33 @@ NEW["ch44"] = {
     "project_step": "One carved body in your room with its verbs written beside it (the operand order as a line of text on the plinth), baked, standable, and its triangle count before and after baking in the README.",
     "tracks": ["long"],
 }
+ADD = json.load(open(os.path.join(HERE, "v2_additions.json"), encoding="utf-8"))
+for _id, _ch in ADD["chapters"].items():
+    NEW[_id] = _ch
+for _id, _e in ADD["edits"].items():
+    _t = NEW[_id] if _id in NEW else CH[_id]
+    if "body_append" in _e:
+        _t["body"] = _t["body"] + _e["body_append"]
+    for _k in ("works", "borrows"):
+        if _k in _e:
+            _t[_k] = _t.get(_k, []) + _e[_k]
 for k, v in NEW.items():
     v.setdefault("opening_stop", None); v.setdefault("kit", None); v.setdefault("status", "planned"); v.setdefault("status_note", None)
     CH[k] = v
 
+# ch42: the axis as the kit measured it (body-of-parts, 2026-10-01, 82/82). The chapter said the parenting shows once the
+# root turns. It does not: the four arrangements are pixel-identical at rest AND while only the root moves.
+CH["ch42"]["argument"].update({
+    "values": ["flat: four children of the root", "a chain: each part the child of the one before", "a chain with offset pivots", "two chains from one hip"],
+    "predict": "At rest all four look the same, and they still look the same when the root turns 30 degrees: every pair differs on 0.00% of the frame, because a root carries everything below it whatever the tree looks like. Turn every pivot 30 degrees and they part: flat and two chains stay closest (0.55% of the frame), the offset chain and two chains are farthest (4.77%), and the toe travels 0.47 m in the flat body against 2.61 m at the end of the chain. Write which pair you expect closest, and when you expect any difference at all, before you render.",
+    "claim": "The structure of an assemblage is invisible at rest and while only its root moves; it shows when a part inside moves. The tree, not the parts, says what the body does.",
+})
+
 # ---------------------------------------------------------------- the v2 order: parts of form operations
 PARTS = [
     ("p1", "Place and join (primitives; Klee I.1-4)",
-     "You can put a body where you say, give it size and a boundary, carry it, join two into a line, keep a walk as a record, close the record into a plane you can stand on, and ship a build.",
-     ["ch01", "ch02", "ch03", "ch04", "ch05", "ch06", "ch07", "ch08"]),
+     "You can put a body where you say, give it size and a boundary, carry it, join two into a line, keep a walk as a record, close the record into a plane you can stand on, pull the plane up into a solid, and ship a build.",
+     ["ch01", "ch02", "ch03", "ch04", "ch05", "ch06", "ch07", "ch45", "ch08"]),
     ("p2", "Articulate (transformation)",
      "You can nest parts into one body with pivots, move the whole and keep the parts' relations while it moves: the first assemblage.",
      ["ch13", "ch42"]),
@@ -190,8 +265,8 @@ PARTS = [
      "You can write motion as steps, give a region its own law, open the walker you have used since day one, balance a body, make legs that follow, climb a spiral and hear a swing: bodies that move by rules you wrote.",
      ["ch22", "ch19", "ch23", "ch21", "ch20", "ch24", "ch26", "ch27", "ch28"]),
     ("p6", "Disturb, field, skin (randomness, noise, shaders)",
-     "You can let chance in with a seed, make ground from a field that remembers its neighbour, write a skin per pixel, and assemble a round someone can lose: the midterm.",
-     ["ch11", "ch12", "ch30", "ch25"]),
+     "You can let chance in with a seed, make ground from a field that remembers its neighbour, bend any body with that field, write a skin per pixel, and assemble a round someone can lose: the midterm.",
+     ["ch11", "ch12", "ch46", "ch30", "ch25"]),
     ("p7", "Grow by rule (cellular automata, fractals, L-systems, procedural generation)",
      "You can grow bodies from rules in time, from recursion and from grammars, keep a genome as a file, generate a world and navigate it, and join grown bodies to made ones.",
      ["ch31", "ch32", "ch33", "ch17", "ch34", "ch43"]),
@@ -209,10 +284,15 @@ VERBS = {"ch01": "instruct", "ch02": "place", "ch03": "decide: solid or ghost", 
          "ch12": "noise", "ch30": "skin", "ch25": "play", "ch31": "rule in time", "ch32": "recurse", "ch33": "grow", "ch17": "save a genome",
          "ch34": "navigate", "ch43": "assemble", "ch35": "deform", "ch36": "imply", "ch44": "combine", "ch37": "flock", "ch38": "learn",
          "ch39": "break", "ch40": "measure", "ch41": "release"}
+VERBS.update({"ch45": "extrude", "ch46": "displace"})
 ASSEMBLAGES = {"ch42": "I", "ch18": "II", "ch10": "III (dressed, inside the chapter)", "ch25": "IV (midterm)", "ch43": "V", "ch44": "VI", "ch41": "VII (final)"}
 
+OPENING_STOP = {"ch01": "day_zero", "ch02": "Point_Zero", "ch03": "Point_One", "ch04": "Point_Coordinates", "ch05": "Point_Lines",
+                "ch06": "Point_Trace", "ch07": "ch07", "ch08": "ch08", "ch13": "ch13", "ch42": "ch42", "ch09": "ch09", "ch14": "ch14", "ch18": "ch18"}
+_mp = os.path.join(REPO, "doc/book/course/opening.json")
+MANIFEST_STOPS = {st["id"]: st for st in json.load(open(_mp, encoding="utf-8"))["stops"]} if os.path.exists(_mp) else {}
 order = [cid for _, _, _, ids in PARTS for cid in ids]
-assert len(order) == len(set(order)) == 44, len(order)
+assert len(order) == len(set(order)) == 46, len(order)
 missing = set(CH) - set(order)
 assert not missing, f"winner chapters left out: {missing}"
 
@@ -228,6 +308,12 @@ for n, cid in enumerate(order, 1):
     ch["n"] = n
     ch["part"] = next(p for p, _, _, ids in PARTS if cid in ids)
     ch["verb"] = VERBS[cid]
+    # the /course manifest: a chapter links to its stop only when opening.json has that stop
+    stop_id = OPENING_STOP.get(cid)
+    if stop_id and stop_id in MANIFEST_STOPS:
+        ch["opening_stop"] = stop_id
+        ch["status"] = MANIFEST_STOPS[stop_id].get("status", "planned")
+        ch["kit"] = MANIFEST_STOPS[stop_id].get("kit")
     if cid in ASSEMBLAGES:
         ch["assemblage"] = ASSEMBLAGES[cid]
     chapters.append(ch)
@@ -309,12 +395,85 @@ for ch in chapters:
         ch["spine_visits"].append({"sequence": extra, "order": ORDER[extra]})
 coverage = sorted({s for ch in chapters for s in ch["spine"]}, key=lambda s: ORDER[s])
 
+# the process strip: the chain of operations behind a body, one still after each
+for ch in chapters:
+    if ch["id"] in ADD["process"]:
+        ch["process"] = ADD["process"][ch["id"]]
+
+# the DNA families already standing in each chapter's halls: registry dna.axes x the halls' map tokens.
+# A token counts on an axis only when it carries a value on one of that artifact's own declared axes.
+import glob
+REG = {}
+for _f in glob.glob(os.path.join(REPO, "commons/artifacts/registry/*.json")):
+    try:
+        _d = json.load(open(_f, encoding="utf-8", errors="replace"))
+    except Exception:
+        continue
+    _e = _d.get("artifacts", _d) if isinstance(_d, dict) else {}
+    if not isinstance(_e, dict):
+        continue
+    for _t, _v in _e.items():
+        if isinstance(_v, dict) and (_v.get("dna") or {}).get("axes"):
+            REG[_t] = {"axes": _v["dna"]["axes"], "predicted": bool(_v["dna"].get("predicted_degeneracy"))}
+
+
+def hall_tokens(m):
+    try:
+        d = json.load(open(os.path.join(REPO, "commons/maps", m, "map_data.json"), encoding="utf-8", errors="replace"))
+    except Exception:
+        return []
+    out = []
+    for row in (d.get("layers") or {}).get("interactables", []):
+        for c in row:
+            c = str(c).strip()
+            if c and c not in ("0", "."):
+                out.append(c)
+    return out
+
+
+def axis_values(v):
+    if isinstance(v, list):
+        return [str(x) for x in v]
+    if isinstance(v, dict):
+        return [str(x) for x in v.keys()]
+    return []
+
+
+DNA = {"promoted_artifacts": len(REG), "declared_axes": sum(len(v["axes"]) for v in REG.values()),
+       "chapters": len(chapters), "chapters_with_promoted_work": 0, "chapters_with_family_shown": 0}
+for ch in chapters:
+    fams = []
+    for h in ch["halls"]:
+        per = {}
+        for c in hall_tokens(h["map"]):
+            base = re.split(r"[:#]", c)[0]
+            if base not in REG:
+                continue
+            ent = per.setdefault(base, {})
+            for seg in c.split("#")[1:]:
+                k = seg.split(":")[0]
+                if k in REG[base]["axes"]:
+                    ent.setdefault(k, set()).add(seg.split(":", 1)[1] if ":" in seg else "")
+        for base, shown in per.items():
+            axes = REG[base]["axes"]
+            axis = max(axes, key=lambda a: len(shown.get(a, ())))
+            fams.append({"hall": h["map"], "role": h["role"], "token": base, "axis": axis,
+                         "values": axis_values(axes[axis])[:6], "shown": sorted(shown.get(axis, [])),
+                         "family_shown": len(shown.get(axis, ())) >= 2, "predicted": REG[base]["predicted"]})
+    fams.sort(key=lambda f: (not f["family_shown"], f["role"] != "carrier", not f["shown"], not f["predicted"], f["token"]))
+    if fams:
+        ch["hall_families"] = fams[:3]
+        DNA["chapters_with_promoted_work"] += 1
+    if any(f["family_shown"] for f in fams):
+        DNA["chapters_with_family_shown"] += 1
+
 # toolkit so far, per part
 toolkit = []
 parts = []
 for pid, title, promise, ids in PARTS:
     toolkit += [VERBS[c] for c in ids]
-    parts.append({"id": pid, "title": title, "promise": promise, "chapters": ids, "toolkit_so_far": list(toolkit)})
+    parts.append({"id": pid, "title": title, "promise": promise, "chapters": ids, "toolkit_so_far": list(toolkit),
+                  "plate_now": ADD["plate"]["by_part"].get(pid, "")})
 
 # tracks
 short_ids = ["ch01", "ch02", "ch03", "ch04", "ch05", "ch06", "ch07", "ch08", "ch13", "ch42", "ch09", "ch14", "ch18"]
@@ -327,7 +486,7 @@ tracks = [
      "supplied": "the walker, the sketch helper (point / line / box), base.tscn, the sweep sheet, the XR rig in the course project; scanning done in one session, imported by the teacher",
      "mini_project": "A family in drag, assembled: one class of your own with one exported axis of 3-5 values, instanced as parts into a body of parts (ch42) with one scanned or found part (ch18); the closest pair predicted in writing before rendering; the comparison sheet; one claim sentence and one debt comment; shown to the class on day 15. Week 1: ch1-ch6 two a day on days 1-3, ch7 and a scanning / Tilt Brush session on day 4, ch8 (first export) on day 5. Week 2: ch13, ch42, ch9, ch14, ch18 (export on Friday; the brief is due the same day as a flowchart and a paper prototype). Week 3: the mini project, with two critique sessions in the SFPC Code Societies format and no new code: (a) the command chain, walked in Trans_Body and VFM_09_Legs, then each student re-roots a supplied three-segment organism in the Scene dock and moves it; (b) the blob aesthetic and the default body, walked in ISO_Metaballs and ML_Classification."},
     {"id": "long", "title": "One year: the operations of form in Ada's order, with seven assemblages",
-     "length": "44 weeks as written (Part 1 at two chapters a week, then one a week, and a pause week with no new code after ch8, ch18, ch25 and ch43); 36 weeks with the eight pairings below",
+     "length": "46 weeks as written (Part 1 at two chapters a week, then one a week, and a pause week with no new code after ch8, ch18, ch25 and ch43); 36 weeks with the eight pairings below",
      "chapters": order,
      "mini_project": "Midterm at ch25: a round in your room that a classmate can lose, on your own terrain, exported and played. Final at ch41: your hall in Ada's endless museum, built from your families and assemblages, exported to desktop and Quest; for each body a prediction, a comparison sheet, a claim and a debt comment, plus one public sculpture whose visitors' changes are kept as provenance records.",
      "pairings_36_weeks": [["ch15", "ch16"], ["ch22", "ch23"], ["ch26", "ch27"], ["ch12", "ch30"], ["ch32", "ch33"], ["ch17", "ch34"], ["ch35", "ch36"], ["ch38", "ch39"]]},
@@ -342,12 +501,22 @@ for s in sorted(ORDER, key=lambda s: ORDER[s]):
     row["chapters"] = [ch["id"] for ch in chapters if s in ch["spine"]]
     lineage.append(row)
 
-out = {k: V1[k] for k in ("strands", "layers", "rhythm", "sources", "learned_from")}
+out = {k: copy.deepcopy(V1[k]) for k in ("strands", "layers", "rhythm", "sources", "learned_from")}
+out["rhythm"].append(ADD["strip"])
+out["sources"].append(ADD["source"])
+out["mesh_grammar"] = ADD["mesh_grammar"]
+out["method"] = ADD["method"]
+out["plate"] = {k: v for k, v in ADD["plate"].items() if k != "by_part"}
+out["rhythm"].append("The plate: each part ends on one question about the course's opening picture: what of it can you make now? The answer goes in your sketchbook, as a sketch or a still.")
+out["rhythm"].append(ADD["decision"])
+out["sources"].append({"name": ADD["method"]["name"], "role": "the decision step, the field note and the cautions about entropy and inference"})
+out["dna"] = dict(DNA, method="The hall shows the family, the kit makes one. Where a chapter's hall holds a work with a declared axis, the hall shows that work at three to five values of the axis, side by side, and the first step of the lesson is to predict the closest pair there. The kit then sweeps an axis on the student's own body with the same sheet. A hall marked 'at its default' holds the work but not yet its family: adding the sibling tokens (name#axis:value) is the integration.")
+out["rhythm"].insert(1, "Find the family in the hall: where the hall shows one work at several values of one axis, predict which two look most alike before you read anything beside them. It is the same question the kit will ask of your own body.")
 out.update({
     "title": "The Sketchbook in Drag: a grammar of bodies",
-    "subtitle": "Place, join, articulate, repeat, vary, surface, move, disturb, grow, deform, combine, learn, release: the operations of form in Ada's order, each part closed by an assemblage",
+    "subtitle": "Place, join, extrude, articulate, repeat, vary, surface, move, disturb, displace, grow, deform, combine, learn, release: the operations of form in Ada's order, each part closed by an assemblage",
     "date": "2026-10-01",
-    "state": "v2, refined by hand on 2026-10-01 from the auto-research winner (d2_ada_first, course_v1.json): the same 41 chapters reordered into the spine's order of form operations, three assemblage chapters added, one chapter split. A proposal: no tutorial, kit, spine or curriculum.json changed.",
+    "state": "v2, refined by hand on 2026-10-01 from the auto-research winner (d2_ada_first, course_v1.json): the same 41 chapters reordered into the spine's order of form operations, three assemblage chapters added, one chapter split; then two operations (extrude, displace), a process strip per assemblage, and the project's MeshGrammar as the tool behind both. A proposal: no tutorial, kit, spine or curriculum.json changed.",
     "state_detail": "Palle, 2026-10-01: 'refine this order to make it possible to introduce capacity to make different assemblages or forms in logical Ada order'. v1 followed Klee's Pedagogical Sketchbook for its first 30 chapters; v2 keeps Klee only where the spine already agrees (the point on a walk is the primitives sequence) and otherwise follows the spine, so that every part adds operations to one growing toolkit and ends by composing them.",
     "principle": "Every chapter adds one operation of form to the student's toolkit (place, join, articulate, repeat, vary, surface, move, disturb, grow, deform, combine, learn), in the order Ada's spine puts them; and every part ends in an assemblage, a body composed from the operations learned so far, made of parts of different origin. The spine's order is the order of operations; a chapter that returns to an earlier sequence says it is a return. The capacity the course builds is the capacity to make different assemblages: by the end the student can make a body by any of the operations and compose them.",
     "thesis": V1.get("thesis", ""),
@@ -391,11 +560,34 @@ def md():
         L.append(f"| {p['title']} | {ops} | {'; '.join(closing) if closing else '-'} |")
     L.append("\n### What an assemblage is here\n")
     L.append("A body composed from parts of different origin and different operations: a part made by code, a part drawn by hand, a part scanned, a part grown by a rule, a part carved by subtraction, under one root whose choice is itself a decision. There are seven, and each uses everything learned before it: I a body of parts (the scene tree), II collage (a found body joins the family), III dressed (inside the pattern chapter), IV the round (the midterm game), V grown bodies join made ones, VI combine (boolean), VII your hall in the museum (the final).\n")
+    mg = out["mesh_grammar"]
+    L.append("### The project's own grammar of operations\n")
+    L.append(mg["what"] + " " + mg["in_the_course"] + "\n")
+    L.append("| the slide's node | MeshGrammar |")
+    L.append("|---|---|")
+    for row in mg["slide_to_grammar"]:
+        L.append(f"| {row['slide']} | {row['grammar']} |")
+    L.append("\n" + mg["where_to_see"] + "\n")
+    L.append(mg["as_placed"])
+    L.append("")
+    dn = out["dna"]
+    L.append("### The families already in the halls\n")
+    L.append(f"{dn['method']} Measured for this course: {dn['promoted_artifacts']} artifacts declare {dn['declared_axes']} axes; {dn['chapters_with_promoted_work']} of the {dn['chapters']} chapters have such a work standing in their halls, and {dn['chapters_with_family_shown']} of them already show a family.\n")
+    me = out["method"]
+    pl = out["plate"]
+    L.append("### The plate\n")
+    L.append(pl["what"] + " " + pl["lineage"] + "\n")
+    L.append(pl["citation"] + " " + pl["link"] + " The lesson is `" + pl["lesson"] + "`; the remake is " + pl["remake"] + " " + pl["not_reached"] + "\n")
+    L.append("### The decision and the field note\n")
+    L.append(me["what"] + " The template is `" + me["template"] + "`; a worked note from this project is `" + me["worked_note"] + "`.\n")
+    for c in me["cautions"]:
+        L.append(f"- {c}")
+    L.append("")
     L.append("### Two tracks\n")
     for t in tracks:
         L.append(f"**{t['title']}** - {t['length']}. Chapters: {', '.join(t['chapters'])}.\n\n{t['mini_project']}\n")
     L.append("### Relation to the spine\n")
-    L.append(f"The carrier sequences of the 44 chapters are in spine order for {order_agreement:.3f} of chapter pairs (v1, Klee-first: {v1_agreement:.3f}; the spine itself: 1.000). {len(departures)} chapters sit below the running spine order, all declared as returns:\n")
+    L.append(f"The carrier sequences of the {len(chapters)} chapters are in spine order for {order_agreement:.3f} of chapter pairs (v1, Klee-first: {v1_agreement:.3f}; the spine itself: 1.000). {len(departures)} chapters sit below the running spine order, all declared as returns:\n")
     for d in departures:
         L.append(f"- {d['chapter']} (n{d['n']}) {d['title']}: {d['reason']}")
     L.append(f"\n{len(coverage)} of 25 spine sequences are touched. Decisions a reader may want to flip: chance stays at its spine place (Part 6), with `random()` met as a value in the chessboard (ch9), as Nake, Nees and Molnar lay disorder over a built grid; the first shader stays at spine 12 (Part 6), not with colour; the player's body is opened where motion is the subject (Part 5), having been borrowed since day one.\n")
@@ -404,6 +596,8 @@ def md():
         L.append(f"### {p['title']}\n")
         L.append(f"*{p['promise']}*\n")
         L.append(f"Toolkit so far: {', '.join(p['toolkit_so_far'])}.\n")
+        if p.get("plate_now"):
+            L.append("Of the plate, now: " + p["plate_now"] + "\n")
         for cid in p["chapters"]:
             ch = CH[cid]
             L.append(f"#### {ch['n']}. {ch['title']}\n")
@@ -416,6 +610,15 @@ def md():
             L.append(f"- **Place:** {ch['place']}")
             if ch.get("borrows"):
                 L.append(f"- **Borrows:** " + "; ".join(f"{b['part']} ({b['depth']})" for b in ch["borrows"]))
+            if ch.get("works"):
+                L.append("- **Works to see:** " + "; ".join(f"{w['token']} ({w['note']})" for w in ch["works"]))
+            if ch.get("process"):
+                L.append("- **Process strip:** " + " -> ".join(ch["process"]))
+            if ch.get("hall_families"):
+                L.append("- **Families in the hall:** " + "; ".join(
+                    f"{f['token']}.{f['axis']} ({' / '.join(f['values'])}) in {f['hall']}: "
+                    + ("family shown: " + ", ".join(f["shown"]) if f["family_shown"] else ("one value shown: " + ", ".join(f["shown"]) if f["shown"] else "at its default"))
+                    for f in ch["hall_families"]))
             L.append(f"- **In your room:** {ch['project_step']}")
             if ch.get("departure"):
                 L.append(f"- **Departure:** {ch['departure']}")
@@ -426,7 +629,7 @@ def md():
     for r in lineage:
         L.append(f"| {r['order']} {r['sequence']} | {', '.join(r['chapters']) or '-'} | {r.get('application_wp','')} | {r.get('klee','')[:80]} | {r.get('processing','')[:80]} | {r.get('noc','')[:60]} |")
     L.append("\n## What changed from v1\n")
-    L.append("- The order: v1 followed Klee's Pedagogical Sketchbook for 30 chapters (point, line, plane, structure, family, balance, gravity, kinetic forms, colour) and the spine after; v2 follows the spine's order of operations throughout, which keeps Klee's walk only where the spine already walks it (primitives).\n- Parts are named by operations and each ends in an assemblage; the toolkit is printed per part.\n- Three new chapters: ch42 a body of parts (assemblage I), ch43 same desire (assemblage V), ch44 combine (assemblage VI). ch36 is now implicit bodies only.\n- Moved: the family (ch14-16, 18) to Part 3 after the chessboard; chance, noise and the first shader to Part 6 at their spine places; the walker, balance, legs, stairs, swing and sound to Part 5 with change, forces, form finding and waves; the genome file (ch17) to Part 7 with procedural generation; the round (ch25) to the end of Part 6 as the midterm.\n- Re-anchored: ch19 on VFM_03_Motion (forces) with Trans_Scale as a visit; ch15 on Primitives_Ignorance; ch28 borrows a supplied field until noise is taught.\n- Everything else is the winner's text. Untried with students; past the opening the chapters are plans.\n")
+    L.append("- The order: v1 followed Klee's Pedagogical Sketchbook for 30 chapters (point, line, plane, structure, family, balance, gravity, kinetic forms, colour) and the spine after; v2 follows the spine's order of operations throughout, which keeps Klee's walk only where the spine already walks it (primitives).\n- Parts are named by operations and each ends in an assemblage; the toolkit is printed per part.\n- Three new chapters: ch42 a body of parts (assemblage I), ch43 same desire (assemblage V), ch44 combine (assemblage VI). ch36 is now implicit bodies only.\n- Moved: the family (ch14-16, 18) to Part 3 after the chessboard; chance, noise and the first shader to Part 6 at their spine places; the walker, balance, legs, stairs, swing and sound to Part 5 with change, forces, form finding and waves; the genome file (ch17) to Part 7 with procedural generation; the round (ch25) to the end of Part 6 as the midterm.\n- Re-anchored: ch19 on VFM_03_Motion (forces) with Trans_Scale as a visit; ch15 on Primitives_Ignorance; ch28 borrows a supplied field until noise is taught.\n- Added after a slide Palle supplied (a body written as a chain of operations) and his pointer to MeshGrammar: ch45 extrude, right after the plane; ch46 displace, right after noise; a process strip on every assemblage and on both new chapters; MeshGrammar used at ch45, used directly at ch46, opened at ch43.\n- Everything else is the winner's text. Untried with students; past the opening the chapters are plans.\n")
     return "\n".join(L)
 
 open(os.path.join(HERE, "COURSE_v2.md"), "w", encoding="utf-8").write(md())

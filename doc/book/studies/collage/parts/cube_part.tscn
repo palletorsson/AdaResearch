@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://cube.gd" id="Lesson"]
+
+[sub_resource type="StandardMaterial3D" id="CubeMaterial"]
+albedo_color = Color(0.62, 0.34, 0.12, 1)
+roughness = 0.8
+
+[node name="Cube" type="MeshInstance3D"]
+material_override = SubResource("CubeMaterial")
+script = ExtResource("Lesson")
+
+[node name="Body" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
