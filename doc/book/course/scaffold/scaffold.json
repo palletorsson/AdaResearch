@@ -1,0 +1,5691 @@
+{
+ "source": "curriculum_spine.json + sequences/*.json + /api/spine-roles",
+ "chapters": [
+  {
+   "chapter": 1,
+   "sequence": "primitives",
+   "title": "Primitives: Points Build Worlds",
+   "truth": "A position, a visible surface and a physical boundary are different constructions. Their relations can be made and changed.",
+   "demonstration": "Locate a point; connect two distinct positions into a segment; join three non-collinear points and add a triangular face; assemble faces around four non-coplanar points. Compare visible enclosure with collision, then inspect mesh connections, reusable scenes and finite resolution.",
+   "halls": [
+    {
+     "hall": "Point_Zero",
+     "primary": [
+      {
+       "work": "arrival_shaft"
+      },
+      {
+       "work": "frame_counter_display"
+      },
+      {
+       "work": "folding_past"
+      },
+      {
+       "work": "origin"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "you_are_here"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Point_One",
+     "primary": [
+      {
+       "work": "point_absent"
+      },
+      {
+       "work": "point_visible"
+      },
+      {
+       "work": "point_solid"
+      },
+      {
+       "box": "The 3D Coordinate System",
+       "works": []
+      },
+      {
+       "work": "point_pedestal"
+      },
+      {
+       "work": "point_corridor_door"
+      },
+      {
+       "work": "point_sun_switch"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Point_Coordinates",
+     "primary": [
+      {
+       "work": "point_corridor_door"
+      },
+      {
+       "work": "point_held"
+      },
+      {
+       "work": "fontana_puncture"
+      },
+      {
+       "work": "code_evolution_screen"
+      },
+      {
+       "work": "coordinate_readout"
+      },
+      {
+       "work": "drag_point_target"
+      },
+      {
+       "work": "comment_box"
+      },
+      {
+       "work": "CoordinateSystem3M"
+      },
+      {
+       "work": "the_invisible_point"
+      },
+      {
+       "work": "floating_sphere_field"
+      },
+      {
+       "work": "SoundscapeRadioRack"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Point_Lines",
+     "primary": [
+      {
+       "box": "A connection and an instruction",
+       "works": [
+        "line_demo",
+        "do_not_cross_barrier",
+        "line"
+       ]
+      },
+      {
+       "box": "An instruction and a recorded walk",
+       "works": [
+        "walk_this_line_marking",
+        "player_trace",
+        "line_relations_gallery"
+       ]
+      },
+      {
+       "work": "line_black_box"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "modulor_man_demo"
+      },
+      {
+       "work": "line_sledgehammer"
+      },
+      {
+       "work": "parallel_line_puzzle"
+      },
+      {
+       "work": "street_talker"
+      },
+      {
+       "work": "lightrod"
+      },
+      {
+       "work": "wall_health_station"
+      },
+      {
+       "work": "wall_abstract"
+      },
+      {
+       "work": "axis_line"
+      },
+      {
+       "work": "anamorphic_cross"
+      },
+      {
+       "work": "perspective_lines"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "sketch_monitor"
+      },
+      {
+       "work": "scale_lines"
+      },
+      {
+       "work": "health_cross"
+      },
+      {
+       "work": "laser_exploding_sphere"
+      },
+      {
+       "work": "redline"
+      },
+      {
+       "work": "line_proof_pair"
+      },
+      {
+       "work": "line_space_workshop"
+      },
+      {
+       "work": "grabbable_line"
+      },
+      {
+       "work": "two_point_ruler"
+      },
+      {
+       "work": "two_points_line"
+      },
+      {
+       "work": "laser_measure"
+      },
+      {
+       "work": "parallel_lines"
+      },
+      {
+       "work": "line_collection"
+      },
+      {
+       "note": "a line divides, directs, measures, connects, and acts at a distance"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "secondary",
+       "text": "a line divides, directs, measures, connects, and acts at a distance"
+      }
+     ]
+    },
+    {
+     "hall": "Point_Trace",
+     "primary": [
+      {
+       "box": "One gesture, four recording rules",
+       "works": [
+        "draw_dot"
+       ]
+      },
+      {
+       "work": "trace_ball_ramp"
+      },
+      {
+       "work": "whiteboard"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "hand_telemetry_diptych"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Point_Line_Grid",
+     "primary": [
+      {
+       "box": "A place we can name again",
+       "works": [
+        "grab_sphere_point_snap",
+        "player_trace"
+       ]
+      },
+      {
+       "work": "grid_lines"
+      },
+      {
+       "work": "plan_vitrine"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "room_grammar"
+      },
+      {
+       "work": "floating_sphere_field"
+      },
+      {
+       "work": "modulor_man_demo"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Point_Triangle_Context",
+     "primary": [
+      {
+       "box": "Close a boundary, then inspect its fill",
+       "works": [
+        "triangle_line_puzzle",
+        "triangle_construction_plate",
+        "draw_triangle_faces",
+        "triangle_live_twin"
+       ]
+      }
+     ],
+     "secondary": [
+      {
+       "work": "pink_triangle"
+      },
+      {
+       "work": "quad_line_puzzle"
+      },
+      {
+       "work": "quad"
+      },
+      {
+       "work": "folded_strip"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Primitives_Polythedra",
+     "primary": [
+      {
+       "note": "add prism lock as blocker"
+      },
+      {
+       "box": "What closes a surface, what blocks a body",
+       "works": [
+        "grab_trihedron",
+        "grab_tetrahedron",
+        "polyhedra_boundary_plate"
+       ]
+      },
+      {
+       "note": "prism_block in combination shop the how basic shapes can from flow or obstacles"
+      },
+      {
+       "box": "Prism, barrier, slope and direction",
+       "works": [
+        "prism_block",
+        "concrete_barrier",
+        "street_sign"
+       ]
+      }
+     ],
+     "secondary": [
+      {
+       "box": "Count a solid, change a corner",
+       "works": [
+        "pyramid_edit",
+        "cube_scene"
+       ]
+      },
+      {
+       "box": "Repetition, irregularity and sections",
+       "works": [
+        "diamonds",
+        "rock_spawner",
+        "rock_scanner"
+       ]
+      },
+      {
+       "work": "path_watchdog"
+      },
+      {
+       "work": "path_game_controller"
+      },
+      {
+       "work": "interactive_point_origin_force"
+      },
+      {
+       "work": "becoming_catalyst"
+      },
+      {
+       "work": "if_not_exist_create"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "add prism lock as blocker"
+      },
+      {
+       "id": "note-2",
+       "role": "primary",
+       "text": "prism_block in combination shop the how basic shapes can from flow or obstacles"
+      }
+     ]
+    },
+    {
+     "hall": "Point_Animatedcube",
+     "primary": [
+      {
+       "box": "Connections that survive a deformation",
+       "works": [
+        "cube_lines",
+        "animatedcubebuilder",
+        "cube_diagonal_plate",
+        "polyhedron_nets_cube"
+       ]
+      },
+      {
+       "work": "prefab_box_library"
+      }
+     ],
+     "secondary": [
+      {
+       "box": "Boxes Example",
+       "works": [
+        "wooden_pallet",
+        "hangar_supply_pile",
+        "crate",
+        "station_crates",
+        "glove_box",
+        "first_phosphor"
+       ]
+      },
+      {
+       "work": "first_shadow"
+      },
+      {
+       "work": "pyramid"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Primitives_Ignorance",
+     "primary": [
+      {
+       "work": "sphere"
+      },
+      {
+       "work": "geometry_courtyard"
+      },
+      {
+       "box": "What the polygons cannot hold",
+       "works": [
+        "sphere_high",
+        "sphere_mid",
+        "sphere_low",
+        "sphere_resolution_atlas",
+        "budget_of_smoothness"
+       ]
+      },
+      {
+       "work": "capsule_reliquary"
+      },
+      {
+       "work": "primitive_mesh_library"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "cube_scene"
+      },
+      {
+       "work": "star_primitive"
+      },
+      {
+       "work": "hole_with_cones"
+      },
+      {
+       "work": "truncatedtetrahedron"
+      },
+      {
+       "work": "grab_octahedron"
+      },
+      {
+       "work": "snap_octahedron_puzzle"
+      },
+      {
+       "work": "roughrock"
+      },
+      {
+       "work": "righttriangle"
+      },
+      {
+       "work": "primitive_pillar"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "seven_words_choir"
+      },
+      {
+       "work": "cylinder_radials_rings"
+      },
+      {
+       "work": "diamonds"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Primitives_Portals",
+     "primary": [
+      {
+       "box": "Finite displays of approaching a limit",
+       "works": [
+        "combine_portals",
+        "achilles_tortoise"
+       ]
+      }
+     ],
+     "secondary": [
+      {
+       "work": "capsule"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Primitives_Melencolia",
+     "primary": [
+      {
+       "note": "the frame is a portal to the same map?"
+      },
+      {
+       "box": "Four corners, a centre, then the tools",
+       "works": [
+        "pyramid",
+        "pyramidlong",
+        "cube_scene",
+        "snap_pyramid_puzzle",
+        "durer_scene",
+        "frame_counter_display"
+       ]
+      },
+      {
+       "note": "we need to add an aesthetic platform with pyramids here"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "prism_block"
+      },
+      {
+       "work": "bigframe"
+      },
+      {
+       "work": "diamondtoruscollection"
+      },
+      {
+       "work": "code_display"
+      },
+      {
+       "work": "eleven_dots"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "the frame is a portal to the same map?"
+      },
+      {
+       "id": "note-2",
+       "role": "primary",
+       "text": "we need to add an aesthetic platform with pyramids here"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "chapter": 2,
+   "sequence": "transformation",
+   "title": "Transformation: What Stays the Same When Everything Changes",
+   "truth": "Changing position, orientation or size changes possible passage. Ask which properties survive each operation and which body the resulting space admits.",
+   "demonstration": "Collect, ride, turn, grow, approach and wait: seven halls connect a concrete operation to its spatial consequence.",
+   "halls": [
+    {
+     "hall": "Trans_Pre",
+     "primary": [
+      {
+       "work": "pick_up_cube"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "y_translation_cube"
+      },
+      {
+       "work": "rotation_oscillation_cube"
+      },
+      {
+       "work": "uniform_scale_marker"
+      },
+      {
+       "work": "health_cross"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Trans_Introduction",
+     "primary": [
+      {
+       "note": "the important things are happen in the utility layer"
+      },
+      {
+       "work": "tc"
+      },
+      {
+       "work": "sc"
+      },
+      {
+       "work": "rc"
+      },
+      {
+       "work": "adjustable_landing"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "matrix_4x4_viewer"
+      },
+      {
+       "work": "z_translation_cube"
+      },
+      {
+       "work": "transform_composition"
+      },
+      {
+       "work": "rotation_gimbal"
+      },
+      {
+       "work": "balance_puzzle"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "the important things are happen in the utility layer"
+      }
+     ]
+    },
+    {
+     "hall": "Trans_Translation",
+     "primary": [
+      {
+       "work": "tc"
+      },
+      {
+       "work": "pick_up_cube"
+      },
+      {
+       "work": "translation_cube_demo"
+      },
+      {
+       "note": "the important things are happen in the utility layer"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "z_translation_cube"
+      },
+      {
+       "work": "x_translation_cube"
+      },
+      {
+       "work": "y_translation_cube"
+      },
+      {
+       "work": "toruscylinder"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "the important things are happen in the utility layer"
+      }
+     ]
+    },
+    {
+     "hall": "Trans_Rotation",
+     "primary": [
+      {
+       "work": "rotation_wall_crossings"
+      },
+      {
+       "work": "rotation_array_compare"
+      },
+      {
+       "work": "transform_composition_workbench"
+      },
+      {
+       "work": "axial_sweep"
+      },
+      {
+       "work": "boolean_tunnel"
+      },
+      {
+       "work": "carousel_cake"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "hinge_release"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Trans_Scale",
+     "primary": [
+      {
+       "work": "scale_me"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "reference_passage"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Trans_Body",
+     "primary": [
+      {
+       "work": "approach_wall"
+      },
+      {
+       "work": "carve_grid"
+      },
+      {
+       "work": "approach_scale"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "dark_sphere"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Trans_Pit",
+     "primary": [
+      {
+       "work": "pusher_block"
+      },
+      {
+       "work": "rc"
+      },
+      {
+       "work": "grower_block"
+      },
+      {
+       "work": "transformation_airlock"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "free_ball_launcher"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 3,
+   "sequence": "array_tutorial",
+   "title": "Arrays and Regularity",
+   "truth": "A familiar body becomes addressable copies, a plane, a volume, a repeated surface and a score. The rule and its appearance remain separate things to examine.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "Array",
+     "primary": [
+      {
+       "work": "row_3_x"
+      },
+      {
+       "work": "grid_2d_4x4"
+      },
+      {
+       "work": "array_floor_writer"
+      },
+      {
+       "work": "molnar_cube_study"
+      },
+      {
+       "note": "THE OVERTURE (Palle, 2026-09-07). This hall keeps row_3_x, column_3_z, grid_2d_4x4 and grid_3d_4x4x4 even though each now has its own room in the revived array_tutorial ladder. That is the point: you see the whole ladder standing at once before you climb it, and the seven rooms after take one rung each. The duplication is the argument, not debt from the 2026-08-24 fold."
+      },
+      {
+       "note": "Author decision, 24 September 2026: develop the changing floor. array_floor_writer replaces the old gridagent placement, making actual grid occupancy alter support underfoot. Primary reading order follows the current five-hall sequence and includes the existing Molnár study. The older overture note above is retained as history."
+      }
+     ],
+     "secondary": [
+      {
+       "work": "column_3_z"
+      },
+      {
+       "work": "xyz_coordinates"
+      },
+      {
+       "work": "pulsar_visualizer"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "THE OVERTURE (Palle, 2026-09-07). This hall keeps row_3_x, column_3_z, grid_2d_4x4 and grid_3d_4x4x4 even though each now has its own room in the revived array_tutorial ladder. That is the point: you see the whole ladder standing at once before you climb it, and the seven rooms after take one rung each. The duplication is the argument, not debt from the 2026-08-24 fold."
+      },
+      {
+       "id": "array-changing-floor-2026-09-24",
+       "role": "primary",
+       "text": "Author decision, 24 September 2026: develop the changing floor. array_floor_writer replaces the old gridagent placement, making actual grid occupancy alter support underfoot. Primary reading order follows the current five-hall sequence and includes the existing Molnár study. The older overture note above is retained as history."
+      }
+     ]
+    },
+    {
+     "hall": "Tutorial_3D",
+     "primary": [
+      {
+       "work": "array_flight_lab"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "open_structures"
+      },
+      {
+       "work": "reference_suspension"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Tutorial_Tiling_Floor",
+     "primary": [
+      {
+       "work": "tiling_principles"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Tutorial_Tiling_Walls",
+     "primary": [
+      {
+       "work": "tiling_principles"
+      },
+      {
+       "work": "wall_exception"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Tutorial_Disco",
+     "primary": [
+      {
+       "work": "disco_controls"
+      },
+      {
+       "work": "step_sequencer"
+      },
+      {
+       "work": "standalone_disco"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 4,
+   "sequence": "color",
+   "title": "Color and Composition",
+   "truth": "A colour value enters an encounter: a light, a surface, a position, a neighbour and a viewer. Implement each relation, then examine what the implementation leaves out.",
+   "demonstration": "Mix RGB to create colors. See how context changes perception. Watch gradients reveal interpolation. Paint and observe.",
+   "halls": [
+    {
+     "hall": "Color_Context_Placed",
+     "primary": [
+      {
+       "work": "chroma_stack"
+      },
+      {
+       "work": "color_dna_stack"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "reference_landscape"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Color_Flashlight",
+     "primary": [
+      {
+       "work": "flashlight_demo"
+      },
+      {
+       "work": "colour_light_rooms"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "sphere_in_pink"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Color_Nails",
+     "primary": [
+      {
+       "work": "nail_color_controller"
+      },
+      {
+       "work": "hand_color_controller"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "colorballs"
+      },
+      {
+       "work": "nail_salon"
+      },
+      {
+       "work": "brick_wall_factory"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Color_Rainbow",
+     "primary": [
+      {
+       "work": "rainbow"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "catalyst_pedestal"
+      },
+      {
+       "work": "pick_up_cube"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Color_Pillar",
+     "primary": [
+      {
+       "work": "pillarcolorcollection"
+      },
+      {
+       "work": "color_sets_overview"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "visual_color_mixing"
+      },
+      {
+       "work": "grab_rainbow_stick"
+      },
+      {
+       "work": "SpectrumVisualizer"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Color_Grid_Pallet",
+     "primary": [
+      {
+       "work": "gridcolorizer"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "spectrum_forest"
+      },
+      {
+       "work": "science_screen"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Color_Paint",
+     "primary": [
+      {
+       "work": "ball_painting_demo"
+      },
+      {
+       "work": "albers_wall_gallery"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Color_Walls",
+     "primary": [
+      {
+       "work": "color_constellation_office"
+      },
+      {
+       "work": "color_space_navigator"
+      },
+      {
+       "work": "gradient_interpolator"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "rainbow_hallway"
+      },
+      {
+       "work": "subpixel_display"
+      },
+      {
+       "work": "colour_assembly"
+      },
+      {
+       "work": "colour_wall_studies"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 5,
+   "sequence": "tiling",
+   "title": "Patterns: Dress the Architecture",
+   "truth": "A source, a copying rule and a receiving surface each contribute to a pattern. Keep one fixed and change another: what returns as the same, and what becomes possible for a body?",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "Pattern_Disco",
+     "primary": [
+      {
+       "work": "disco_controls"
+      },
+      {
+       "work": "standalone_disco"
+      },
+      {
+       "work": "step_sequencer"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Pattern_Foundry",
+     "primary": [
+      {
+       "work": "pattern_architecture"
+      },
+      {
+       "work": "pattern_tile_4x4"
+      },
+      {
+       "work": "pattern_tile_mirror"
+      },
+      {
+       "work": "pattern_machine_a"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "pattern_machine_c"
+      },
+      {
+       "work": "pattern_studio_plate"
+      },
+      {
+       "work": "pattern_tile_herringbone"
+      },
+      {
+       "work": "pattern_maker_station"
+      },
+      {
+       "work": "pattern_mill"
+      },
+      {
+       "work": "pattern_tile_plate"
+      },
+      {
+       "work": "drag_catwalk"
+      },
+      {
+       "work": "tiling_demo"
+      },
+      {
+       "work": "pattern_machine_d"
+      },
+      {
+       "work": "pattern_tile_brick"
+      },
+      {
+       "work": "super_drag_mirror"
+      },
+      {
+       "work": "wall_drawing_291"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Tutorial_Pattern",
+     "primary": [
+      {
+       "work": "pattern_maker_station"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "grid_model"
+      },
+      {
+       "work": "pattern_studio_plate"
+      },
+      {
+       "work": "pattern_tile_plate"
+      },
+      {
+       "work": "pattern_tile_mirror"
+      },
+      {
+       "work": "pattern_tile_puzzle"
+      },
+      {
+       "work": "panel_bridge_loom"
+      },
+      {
+       "work": "script_runner"
+      },
+      {
+       "work": "pulsar_compact"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Array_Patterns",
+     "primary": [
+      {
+       "work": "pattern_tunnel_machine"
+      },
+      {
+       "work": "pattern_tile_brick"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "pattern_tile_4x4"
+      },
+      {
+       "work": "vr_tile_editor_mirror"
+      },
+      {
+       "work": "pattern_tile_mirror"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "tiling_demo"
+      },
+      {
+       "work": "dark_sphere"
+      },
+      {
+       "work": "pattern_tile_plate"
+      },
+      {
+       "work": "panel_bridge_loom"
+      },
+      {
+       "work": "grid_model"
+      },
+      {
+       "work": "facade_grammar_demo"
+      },
+      {
+       "work": "pattern_tile_herringbone"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Symmetry_Seventeen",
+     "primary": [
+      {
+       "work": "vr_tile_editor"
+      },
+      {
+       "work": "wallpaper_cage"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "loom_alhambra_p6m"
+      },
+      {
+       "work": "wall_pattern_gallery"
+      },
+      {
+       "work": "pattern_loom"
+      },
+      {
+       "work": "loom_escher_mirror"
+      },
+      {
+       "work": "mill_alhambra_p6m"
+      },
+      {
+       "work": "pattern_tile_puzzle"
+      },
+      {
+       "work": "mill_persian_p4"
+      },
+      {
+       "work": "mill_escher_p4g"
+      },
+      {
+       "work": "kaleidoscope"
+      },
+      {
+       "work": "pattern_atlas_gallery"
+      },
+      {
+       "work": "pattern_artifact"
+      },
+      {
+       "work": "tile_meander_floor"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Ribbon_Patterns_01",
+     "primary": [
+      {
+       "work": "grid_2d_4x4"
+      },
+      {
+       "work": "grid_3d_4x4x4"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "xyz_coordinates"
+      },
+      {
+       "work": "column_3_z"
+      },
+      {
+       "work": "row_3_x"
+      },
+      {
+       "work": "grid3d"
+      },
+      {
+       "work": "bar_array"
+      },
+      {
+       "work": "bar_array_bubble_sort"
+      },
+      {
+       "work": "sorting_algorithm_race"
+      },
+      {
+       "work": "shelf"
+      },
+      {
+       "work": "shelf_with_stickers"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Ribbon_Patterns_02",
+     "primary": [
+      {
+       "work": "SimultaneousContrast"
+      },
+      {
+       "work": "MetamerismLab"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "spherecolors"
+      },
+      {
+       "work": "hue_carousel"
+      },
+      {
+       "work": "grabcolorcollection"
+      },
+      {
+       "work": "color_mixing"
+      },
+      {
+       "work": "dark_side_prism"
+      },
+      {
+       "work": "prism"
+      },
+      {
+       "work": "grab_stick_scanner"
+      },
+      {
+       "work": "color_scanner"
+      },
+      {
+       "work": "grab_stick"
+      },
+      {
+       "work": "two_roads"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Ribbon_Patterns_03",
+     "primary": [
+      {
+       "work": "fabric_shader_studio"
+      },
+      {
+       "work": "super_drag_mirror"
+      },
+      {
+       "work": "drag_catwalk"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "pulsar_visualizer"
+      },
+      {
+       "work": "standalone_disco"
+      },
+      {
+       "work": "coloredlines"
+      },
+      {
+       "work": "RotatingLaser"
+      },
+      {
+       "work": "minimalglitch"
+      },
+      {
+       "work": "textureglitch"
+      },
+      {
+       "work": "glitchcolor"
+      },
+      {
+       "work": "advancedglitch"
+      },
+      {
+       "work": "colortrails"
+      },
+      {
+       "work": "neon_garden"
+      },
+      {
+       "work": "strobe_lasers"
+      },
+      {
+       "work": "disco_lights"
+      },
+      {
+       "work": "one_bulb_room"
+      },
+      {
+       "work": "laser_turret"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 6,
+   "sequence": "change",
+   "title": "Change: Rate, Accumulation, and Flow",
+   "truth": "A value, a local rate and an accumulated total retain different things. Repeated updates can make the next address depend on the path already taken.",
+   "demonstration": "Compare a wide finite difference with an analytic local rate. Keep the function fixed while changing the samples used for an area estimate. Predict the net height difference of an arch, then compare it with a finite sum of its signed rate. Let each particle update determine the address of its next direction lookup.",
+   "halls": [
+    {
+     "hall": "Change_Intro",
+     "primary": [
+      {
+       "work": "tangent_slope_workbench"
+      },
+      {
+       "work": "riemann_sum_workbench"
+      },
+      {
+       "work": "ftc_bridge"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "derivative_pair"
+      },
+      {
+       "work": "integral_area"
+      },
+      {
+       "work": "riemann_pump"
+      },
+      {
+       "work": "gradient_descent_well"
+      },
+      {
+       "work": "paper_regatta"
+      },
+      {
+       "work": "partial_derivative_terrain"
+      },
+      {
+       "work": "descent_marble_toy"
+      },
+      {
+       "work": "riemann_pi"
+      },
+      {
+       "work": "zeno_staircase"
+      },
+      {
+       "work": "velocity_arrow"
+      },
+      {
+       "work": "slope_tangent_demo"
+      },
+      {
+       "work": "code_display"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "synthesis_stand"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Flow_Field",
+     "primary": [
+      {
+       "work": "flow_field_painter"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "vector_field_visualizer"
+      },
+      {
+       "work": "vector_field_grid"
+      },
+      {
+       "work": "particle_flow_swarm"
+      },
+      {
+       "work": "noc_5_04_flow_field"
+      },
+      {
+       "work": "grand_zoetrope"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 7,
+   "sequence": "forces",
+   "title": "Vectors & Forces: From Direction to Dynamics",
+   "truth": "An arrow does not decide what happens. Its quantity, frame, receiver and retained state give it a consequence.",
+   "demonstration": "Move two endpoints together; compare routes with the same sum; retain the perpendicular remainder of a projection. Launch a prescribed trajectory, then let a rigid body retain motion after a push. Give two receivers the same field, compare drag, signed work and circular motion, release a spring, change timing, allow a source to respond, test support and targeting, then enter an acceleration field beside a loose cube.",
+   "halls": [
+    {
+     "hall": "Vectors_Act1_WhatAVectorIs",
+     "primary": [
+      {
+       "work": "VectorBasics"
+      },
+      {
+       "work": "vector_normalize_demo"
+      },
+      {
+       "note": "The only room in the chapter whose floor already matches its lesson one to one â€” a where, a which-way, a how-far and a how-far refused, and deliberately no arithmetic; leave the four stations exactly as they stand."
+      }
+     ],
+     "secondary": [
+      {
+       "work": "route_vector"
+      },
+      {
+       "work": "CoordinateSystem3M"
+      },
+      {
+       "work": "length_lantern"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "The only room in the chapter whose floor already matches its lesson one to one â€” a where, a which-way, a how-far and a how-far refused, and deliberately no arithmetic; leave the four stations exactly as they stand."
+      }
+     ]
+    },
+    {
+     "hall": "VFM_02_Operations",
+     "primary": [
+      {
+       "work": "adder_board"
+      },
+      {
+       "note": "The bench. Twenty-seven instruments and not one caption: every operation here is said again in the captioned room next door, at walk-in scale."
+      }
+     ],
+     "secondary": [
+      {
+       "work": "vector_projection_demo"
+      },
+      {
+       "work": "2d_in_3d_vectors_vis"
+      },
+      {
+       "work": "basis_vectors_rig"
+      },
+      {
+       "work": "coordinate_system_switcher"
+      },
+      {
+       "work": "VectorSubtraction"
+      },
+      {
+       "work": "example_1_4_vector_multiplication_vr"
+      },
+      {
+       "work": "stretch_bench"
+      },
+      {
+       "work": "vector_addition_demo"
+      },
+      {
+       "work": "vector_addition_xl"
+      },
+      {
+       "work": "vector_magnitude_demo"
+      },
+      {
+       "work": "vector_subtraction_demo"
+      },
+      {
+       "work": "vector_dot_product_xl"
+      },
+      {
+       "work": "vector_cross_product_xl"
+      },
+      {
+       "work": "vector_translation_demo"
+      },
+      {
+       "work": "dot_aligner"
+      },
+      {
+       "work": "torque_crank"
+      },
+      {
+       "work": "VectorTorque"
+      },
+      {
+       "work": "dot_product_projector"
+      },
+      {
+       "work": "VectorWorkbench"
+      },
+      {
+       "work": "vector_add"
+      },
+      {
+       "work": "vector_projection_reflection_xl"
+      },
+      {
+       "work": "projection_shadow"
+      },
+      {
+       "work": "agreement_gauge"
+      },
+      {
+       "work": "opening_pair"
+      },
+      {
+       "work": "torque_demo"
+      },
+      {
+       "work": "exercise_5_9_angle_between"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "The bench. Twenty-seven instruments and not one caption: every operation here is said again in the captioned room next door, at walk-in scale."
+      }
+     ]
+    },
+    {
+     "hall": "Vectors_Act2_VectorArithmetic",
+     "primary": [
+      {
+       "work": "vector_add"
+      },
+      {
+       "work": "vector_sub"
+      },
+      {
+       "work": "dot_aligner"
+      },
+      {
+       "work": "projection_shadow"
+      },
+      {
+       "work": "torque_crank"
+      },
+      {
+       "note": "The tutorial. Eight caption panels down column 9 and one rung beside each: add, subtract, scale, dot, project, cross, and the two laser exhibits at the door."
+      },
+      {
+       "note": "The tutorial hall for rung 2, and the room where the chapter's two-scale rhythm is said inside a single space: six operations, each once in your hand and once at the size of a room, in the order the eight caption panels stand down the centre aisle. Ten rungs on the thread, hand then room at each of the four paired stations; the two laser exhibits at the door stay in the room as a third scale met after the closing line, not as a lesson. The bench next door holds the same instruments and defers all of them here, so this is where an operation is actually taught."
+      }
+     ],
+     "secondary": [
+      {
+       "work": "vector_addition_walk"
+      },
+      {
+       "work": "example_2_3_gravity_scaled_by_mass_vr"
+      },
+      {
+       "work": "vector_dot_product_xl"
+      },
+      {
+       "work": "vector_projection_reflection_xl"
+      },
+      {
+       "work": "vector_cross_product_xl"
+      },
+      {
+       "work": "vector_addition_xl_laser"
+      },
+      {
+       "work": "vector_subtraction_xl_laser"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "The tutorial. Eight caption panels down column 9 and one rung beside each: add, subtract, scale, dot, project, cross, and the two laser exhibits at the door."
+      },
+      {
+       "id": "note-2",
+       "role": "primary",
+       "text": "The tutorial hall for rung 2, and the room where the chapter's two-scale rhythm is said inside a single space: six operations, each once in your hand and once at the size of a room, in the order the eight caption panels stand down the centre aisle. Ten rungs on the thread, hand then room at each of the four paired stations; the two laser exhibits at the door stay in the room as a third scale met after the closing line, not as a lesson. The bench next door holds the same instruments and defers all of them here, so this is where an operation is actually taught."
+      }
+     ]
+    },
+    {
+     "hall": "VFM_05_Launch",
+     "primary": [
+      {
+       "work": "launch_arc"
+      },
+      {
+       "note": "Thirty-one placements and the room says throw sixteen ways, so the tutorial is F=ma, then the net force, then the arc composed and decomposed, then you as the projectile, then many bodies, then the census that shows all four launchers running one equation; friction_ramp is the one artifact here that would be better MOVED than demoted â€” it belongs beside wedge_slide in Act4a."
+      }
+     ],
+     "secondary": [
+      {
+       "work": "ForceMagnitudeDemo"
+      },
+      {
+       "work": "VectorForces"
+      },
+      {
+       "work": "catapult"
+      },
+      {
+       "work": "hl_turret_vectors"
+      },
+      {
+       "work": "turret_boll_infoboard"
+      },
+      {
+       "work": "mortar_vector_siege"
+      },
+      {
+       "work": "firework_burst"
+      },
+      {
+       "work": "VectorThrowing"
+      },
+      {
+       "work": "firework_launcher"
+      },
+      {
+       "work": "return_launcher"
+      },
+      {
+       "work": "human_catapult"
+      },
+      {
+       "work": "force_pad"
+      },
+      {
+       "work": "drag_lane"
+      },
+      {
+       "work": "circle_train"
+      },
+      {
+       "work": "slingshot_launcher"
+      },
+      {
+       "work": "foresight_range"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "Thirty-one placements and the room says throw sixteen ways, so the tutorial is F=ma, then the net force, then the arc composed and decomposed, then you as the projectile, then many bodies, then the census that shows all four launchers running one equation; friction_ramp is the one artifact here that would be better MOVED than demoted â€” it belongs beside wedge_slide in Act4a."
+      }
+     ]
+    },
+    {
+     "hall": "VFM_03_Motion",
+     "primary": [
+      {
+       "work": "VectorMotion"
+      },
+      {
+       "work": "friction_ramp"
+      },
+      {
+       "note": "The motion bench. Its own intent names the stations: the eight-metre bouncing-ball chamber anchors it, the friction threshold and the normal force stand together, and the collision crasher prowls the far corner behind a warning."
+      }
+     ],
+     "secondary": [
+      {
+       "work": "normal_force_demo"
+      },
+      {
+       "work": "example_1_9_motion_101_velocity_and_random_acceleration_vr"
+      },
+      {
+       "work": "vector_drone"
+      },
+      {
+       "work": "bouncing_ball"
+      },
+      {
+       "work": "trajectory_artifact"
+      },
+      {
+       "work": "ForceMagnitudeDemo"
+      },
+      {
+       "work": "VectorForces"
+      },
+      {
+       "work": "exercise_1_3_solution_3_d_bouncing_ball_vr"
+      },
+      {
+       "work": "exercise_1_5_solution_accelerate_and_decelerate_vr"
+      },
+      {
+       "work": "example_2_5_fluid_resistance_vr"
+      },
+      {
+       "work": "example_3_2_forces_with_arbitrary_angular_motion_vr"
+      },
+      {
+       "work": "example_3_3_pointing_in_the_direction_of_motion_vr"
+      },
+      {
+       "work": "newton_cradle"
+      },
+      {
+       "work": "combined_forces_demo"
+      },
+      {
+       "work": "collision_crasher"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "The motion bench. Its own intent names the stations: the eight-metre bouncing-ball chamber anchors it, the friction threshold and the normal force stand together, and the collision crasher prowls the far corner behind a warning."
+      }
+     ]
+    },
+    {
+     "hall": "Vectors_Act3_FieldsAndMotion",
+     "primary": [
+      {
+       "work": "VectorFieldFlow"
+      },
+      {
+       "note": "One primary compares two receiver rules in the same field. VectorMotion remains a supporting exhibit after its primary encounter in the previous hall. All 13 artifact identities remain; previous prose and roles are backed up in doc/space/field-receivers-2026-09-11/before."
+      }
+     ],
+     "secondary": [
+      {
+       "work": "field_room"
+      },
+      {
+       "work": "force_field_visualizer"
+      },
+      {
+       "work": "force_fields"
+      },
+      {
+       "work": "force_vortex"
+      },
+      {
+       "work": "magnetic_simulation"
+      },
+      {
+       "work": "particle_systems"
+      },
+      {
+       "work": "vector_field"
+      },
+      {
+       "work": "vector_fields"
+      },
+      {
+       "work": "weather_vector_field"
+      },
+      {
+       "work": "launch_arc"
+      },
+      {
+       "work": "bubble_blaster"
+      },
+      {
+       "work": "VectorMotion"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "One primary compares two receiver rules in the same field. VectorMotion remains a supporting exhibit after its primary encounter in the previous hall. All 13 artifact identities remain; previous prose and roles are backed up in doc/space/field-receivers-2026-09-11/before."
+      }
+     ]
+    },
+    {
+     "hall": "Vectors_Act4a_KineticForces",
+     "primary": [
+      {
+       "work": "drag_corridor"
+      },
+      {
+       "work": "force_mower"
+      },
+      {
+       "work": "centrifuge_ring"
+      },
+      {
+       "note": "The park is already a clean five-rung tutorial â€” work, drag, turn, fall, slope â€” and the only change is force_pad, which keeps its floor beat and its place at the park's midpoint but stops carrying a lesson launch already owns; the two category heroes stay exactly where they are, doing a hero's job of setting the register before the beats speak."
+      }
+     ],
+     "secondary": [
+      {
+       "work": "wedge_slide"
+      },
+      {
+       "work": "orbit_walk"
+      },
+      {
+       "work": "force_pad"
+      },
+      {
+       "work": "sisyphus_mower"
+      },
+      {
+       "work": "prop_carousel"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "The park is already a clean five-rung tutorial â€” work, drag, turn, fall, slope â€” and the only change is force_pad, which keeps its floor beat and its place at the park's midpoint but stops carrying a lesson launch already owns; the two category heroes stay exactly where they are, doing a hero's job of setting the register before the beats speak."
+      }
+     ]
+    },
+    {
+     "hall": "Vectors_Act4b_Oscillation",
+     "primary": [
+      {
+       "work": "spring_tower"
+      },
+      {
+       "note": "FLAG for Palle: the room's law is F = -kx and the floor delivers spring_tower LAST â€” spawn is south, the tower is north â€” so the room's own tutorial.md opens on the artifact the walk closes on; swapping spawn and teleporter is the one map change that would make this room's order correct, and it is a decision for you, not for this pass."
+      }
+     ],
+     "secondary": [
+      {
+       "work": "pendulum_hall"
+      },
+      {
+       "work": "ChainSwing"
+      },
+      {
+       "work": "ConeTwistBag"
+      },
+      {
+       "work": "calder_object_mobile"
+      },
+      {
+       "work": "HingeCrank"
+      },
+      {
+       "work": "SliderPress"
+      },
+      {
+       "work": "coupled_pendulums"
+      },
+      {
+       "work": "harmonic_motion_demo"
+      },
+      {
+       "work": "mass_spring_damper"
+      },
+      {
+       "work": "slingshot_pull"
+      },
+      {
+       "work": "spring_network"
+      },
+      {
+       "work": "spring_system"
+      },
+      {
+       "work": "vector_joint_playground"
+      },
+      {
+       "work": "work_energy_demo"
+      },
+      {
+       "work": "example_6_4_windmill_vr"
+      },
+      {
+       "work": "weather_vane"
+      },
+      {
+       "work": "calder_mobile"
+      },
+      {
+       "work": "lever_balance"
+      },
+      {
+       "work": "momentum_cradle"
+      },
+      {
+       "work": "bounce_well"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "FLAG for Palle: the room's law is F = -kx and the floor delivers spring_tower LAST â€” spawn is south, the tower is north â€” so the room's own tutorial.md opens on the artifact the walk closes on; swapping spawn and teleporter is the one map change that would make this room's order correct, and it is a decision for you, not for this pass."
+      }
+     ]
+    },
+    {
+     "hall": "Change_Choreography",
+     "primary": [
+      {
+       "work": "phase_rod_array"
+      },
+      {
+       "work": "conveyor_backlog"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "parametric_pendulum_waves"
+      },
+      {
+       "work": "paired_time"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "VFM_07_Gravity",
+     "primary": [
+      {
+       "work": "orbital_mechanics_demo"
+      },
+      {
+       "work": "three_body_problem"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "nbody_simulation"
+      },
+      {
+       "work": "forcedirected3d"
+      },
+      {
+       "work": "exercise_1_8_solution_attraction_magnitude_vr"
+      },
+      {
+       "work": "example_2_8_two_body_attraction_vr"
+      },
+      {
+       "work": "example_2_9_n_body_attraction_vr"
+      },
+      {
+       "work": "orbit_pair"
+      },
+      {
+       "work": "gravity_well"
+      },
+      {
+       "work": "grid3d_force_directed"
+      },
+      {
+       "work": "chaos_attractor"
+      },
+      {
+       "note": "The two primary experiments now lead the walk, at (11,8) and (11,24). All nine supporting artifacts follow in their original relative arrangement."
+      },
+      {
+       "note": "The new primaries share a softened gravity law. Supporting graph layout and other legacy solvers use their own rules; do not present them as identical implementations. Earlier notes are preserved in the revision record."
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "secondary",
+       "text": "The two primary experiments now lead the walk, at (11,8) and (11,24). All nine supporting artifacts follow in their original relative arrangement."
+      },
+      {
+       "id": "note-2",
+       "role": "secondary",
+       "text": "The new primaries share a softened gravity law. Supporting graph layout and other legacy solvers use their own rules; do not present them as identical implementations. Earlier notes are preserved in the revision record."
+      }
+     ]
+    },
+    {
+     "hall": "VFM_09_Legs",
+     "primary": [
+      {
+       "work": "support_polygon_lab"
+      },
+      {
+       "work": "four_leg_critter"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "one_leg"
+      },
+      {
+       "work": "two_leg_critter"
+      },
+      {
+       "work": "three_leg_critter"
+      },
+      {
+       "work": "five_leg_critter"
+      },
+      {
+       "work": "six_leg_critter"
+      },
+      {
+       "work": "octapod_ik"
+      },
+      {
+       "note": "The seven original walkers remain as a comparison family. The physical support table and the four-leg walker anchor the book: support geometry, actual contact, and procedural stepping are distinct. Earlier leg-count claims and placements are archived in the revision record."
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "secondary",
+       "text": "The seven original walkers remain as a comparison family. The physical support table and the four-leg walker anchor the book: support geometry, actual contact, and procedural stepping are distinct. Earlier leg-count claims and placements are archived in the revision record."
+      }
+     ]
+    },
+    {
+     "hall": "VFM_08_Arena",
+     "primary": [
+      {
+       "work": "arena_relation_lab"
+      },
+      {
+       "work": "collision_carts"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "brake_skid"
+      },
+      {
+       "work": "parlour_orbits"
+      },
+      {
+       "work": "newtons_laws"
+      },
+      {
+       "work": "paused_fountain"
+      },
+      {
+       "work": "prop_mobile"
+      },
+      {
+       "work": "prop_spigot"
+      },
+      {
+       "work": "revolving_door"
+      },
+      {
+       "work": "three_gravities"
+      },
+      {
+       "work": "tug_of_war"
+      },
+      {
+       "work": "umbrella_field"
+      },
+      {
+       "work": "turret_targeting"
+      },
+      {
+       "work": "reflection_hall"
+      },
+      {
+       "work": "vector_arena"
+      },
+      {
+       "work": "momentum_cradle"
+      },
+      {
+       "work": "sentry_turret"
+      },
+      {
+       "work": "momentum_collision"
+      },
+      {
+       "work": "example_2_1_forces_vr"
+      },
+      {
+       "work": "head_crab"
+      },
+      {
+       "note": "A scoped creature encounter precedes the retained collision-carts comparison. Other Arena artifacts remain supporting encounters with their own rules. The previous exam/primary count note is archived in the before record."
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "secondary",
+       "text": "A scoped creature encounter precedes the retained collision-carts comparison. Other Arena artifacts remain supporting encounters with their own rules. The previous exam/primary count note is archived in the before record."
+      }
+     ]
+    },
+    {
+     "hall": "Vectors_Act5_ForceAsPlace",
+     "primary": [
+      {
+       "work": "vector_machine"
+      },
+      {
+       "work": "force_cube"
+      },
+      {
+       "work": "force_field_zone"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "free_vector"
+      },
+      {
+       "work": "force_field"
+      },
+      {
+       "work": "invisible_hill"
+      },
+      {
+       "note": "Aim the machine, observe the probe, then enter the field. The retained plank makes a second crossing available. Desktop carry and landing are verified; headset visit remains open. The former forced-crossing note is archived in the before record."
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "secondary",
+       "text": "Aim the machine, observe the probe, then enter the field. The retained plank makes a second crossing available. Desktop carry and landing are verified; headset visit remains open. The former forced-crossing note is archived in the before record."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "chapter": 8,
+   "sequence": "formfinding",
+   "title": "Form Finding: Rules, Constraints and Possible Shapes",
+   "truth": "A chosen update, objective and set of constraints make some configurations accessible. An accepted endpoint depends on the model and its stopping rule.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "FormFinding_Descent",
+     "primary": [
+      {
+       "work": "descent_landscape_lab"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "descent_marble_toy"
+      },
+      {
+       "work": "gradient_descent"
+      },
+      {
+       "work": "gradient_descent_well"
+      },
+      {
+       "work": "settling_tremble"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "note": "Begin with the controlled landscape. Retain the five earlier exhibits as comparisons with distinct dynamics. Small slope, frame exit and budget exhaustion are separate endings; headset walkthrough pending."
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "secondary",
+       "text": "Begin with the controlled landscape. Retain the five earlier exhibits as comparisons with distinct dynamics. Small slope, frame exit and budget exhaustion are separate endings; headset walkthrough pending."
+      }
+     ]
+    },
+    {
+     "hall": "FormFinding_Catenary",
+     "primary": [
+      {
+       "work": "cable_builder"
+      },
+      {
+       "work": "laundry_line_cathedral"
+      },
+      {
+       "work": "catenoid"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "helicoid"
+      },
+      {
+       "work": "science_screen"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "FormFinding_Relaxation",
+     "primary": [
+      {
+       "work": "verlet_workbench"
+      },
+      {
+       "work": "mass_spring_bench"
+      },
+      {
+       "work": "frozen_glass_vessel"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "science_screen"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "FormFinding_Equilibrium",
+     "primary": [
+      {
+       "work": "calder_mobile"
+      },
+      {
+       "work": "tensegrity_triangle"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "fractal_truss_tower"
+      },
+      {
+       "work": "science_screen"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "FormFinding_Annealing",
+     "primary": [
+      {
+       "work": "energy_landscape_bench"
+      },
+      {
+       "work": "simulated_annealing"
+      },
+      {
+       "work": "max_q_basin_room"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "impossible_end_table"
+      },
+      {
+       "work": "science_screen"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "FormFinding_Forge",
+     "primary": [
+      {
+       "work": "balance_puzzle"
+      },
+      {
+       "work": "self_shaping_forge"
+      },
+      {
+       "work": "gradient_descent_optimizer"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "science_screen"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 9,
+   "sequence": "wavefunctions",
+   "title": "Wavefunctions: What Returns",
+   "truth": "Returning to one value need not mean returning to the same state. Follow what a repeated movement carries into a record, a space, a sound and a sum.",
+   "demonstration": "Release a pendulum, compare sampling clocks, walk beside sine-shaped space, then discover the coordinate projection of a turning point. Compare coupling, modulation, chance, struck voices, sampled steps, beats and finite harmonic sums.",
+   "halls": [
+    {
+     "hall": "WaveFunctions_Intro",
+     "primary": [
+      {
+       "work": "control_pendulum"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "rotatescalecubes"
+      },
+      {
+       "work": "pickup_cube_static"
+      },
+      {
+       "work": "cube_scene"
+      },
+      {
+       "work": "transformation_cube"
+      },
+      {
+       "work": "rotating_cube"
+      },
+      {
+       "work": "y_oscillation_cube"
+      },
+      {
+       "work": "rotating_cube_demo"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "pickup_cube_transforming"
+      },
+      {
+       "work": "pickup_cube_rotating"
+      },
+      {
+       "work": "pick_up_cube"
+      },
+      {
+       "work": "oscillation_controlled_cube"
+      },
+      {
+       "work": "mario_cube_time_trace"
+      },
+      {
+       "work": "SphericalHarmonics"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "WaveFunctions_Pendulum",
+     "primary": [
+      {
+       "work": "PendulumWave"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "WavePaintings"
+      },
+      {
+       "work": "foucault_pendulum"
+      },
+      {
+       "work": "draw_dot_time_domain"
+      },
+      {
+       "work": "BigPipeSystem"
+      },
+      {
+       "work": "lab_table"
+      },
+      {
+       "work": "seismograph"
+      },
+      {
+       "work": "GlassRack"
+      },
+      {
+       "work": "VRAudioMonitor"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "WaveFunctions_Sine_Space",
+     "primary": [
+      {
+       "work": "sine_flow_tray"
+      },
+      {
+       "work": "sine_wall_corridor"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "sine_wall_explanation"
+      },
+      {
+       "work": "sine_space"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "WaveFunctions_Unit_Circle",
+     "primary": [
+      {
+       "work": "unit_circle_advanced"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "SimpleOscillatingBridge"
+      },
+      {
+       "work": "OscillationCurve"
+      },
+      {
+       "work": "cube_scene"
+      },
+      {
+       "work": "colorballs"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "WaveFunctions_3D_Wave_Propagation",
+     "primary": [
+      {
+       "work": "coupled_oscillator_lattice"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "kusama_sine"
+      },
+      {
+       "work": "wave_propagation_3d"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "WaveFunctions_Effect_Sound",
+     "primary": [
+      {
+       "work": "DualBallFMController"
+      },
+      {
+       "note": "The book follows DualBallFMController: hold one note, change one modulator direction, compare, then inspect the phase-modulation expression. The surrounding racks remain further explorations. The scope selects two carrier periods and rescales its lanes; a visible trace and a heard note preserve different evidence. Claude built and repaired the encounter; Astra independently reviewed it on 12 September with 100 passing desktop checks. Listening and headset review remain open."
+      }
+     ],
+     "secondary": [
+      {
+       "work": "BigPipeSystem"
+      },
+      {
+       "work": "AudioContr"
+      },
+      {
+       "work": "RackSineBasic"
+      },
+      {
+       "work": "cable_builder"
+      },
+      {
+       "work": "VRAudioMonitor"
+      },
+      {
+       "work": "Rack303Acid"
+      },
+      {
+       "work": "RackMoogBass"
+      },
+      {
+       "work": "RackDX7Piano"
+      },
+      {
+       "work": "audio_catalog_tablet"
+      },
+      {
+       "work": "wave_interference_3d"
+      },
+      {
+       "work": "harmonic_distance_table"
+      },
+      {
+       "work": "chord_tension_spring"
+      },
+      {
+       "work": "timbre_sculptor"
+      },
+      {
+       "work": "MarioSoundController"
+      },
+      {
+       "work": "MelodyChaser3D"
+      }
+     ],
+     "notes": [
+      {
+       "id": "note-1",
+       "role": "primary",
+       "text": "The book follows DualBallFMController: hold one note, change one modulator direction, compare, then inspect the phase-modulation expression. The surrounding racks remain further explorations. The scope selects two carrier periods and rescales its lanes; a visible trace and a heard note preserve different evidence. Claude built and repaired the encounter; Astra independently reviewed it on 12 September with 100 passing desktop checks. Listening and headset review remain open."
+      }
+     ]
+    },
+    {
+     "hall": "Wavefunctions_Bernini",
+     "primary": [
+      {
+       "work": "bernini_columns"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "ElphabaDress"
+      },
+      {
+       "work": "vowel_sound_board"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "WaveFunctions_John_Cage",
+     "primary": [
+      {
+       "work": "john_cage_tech_noir"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "dual_display_test"
+      },
+      {
+       "work": "ruth_asawa_sculpture"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "WaveFunctions_AirMusic",
+     "primary": [
+      {
+       "work": "resonating_metallophone"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "GlassRack"
+      },
+      {
+       "work": "lab_table"
+      },
+      {
+       "work": "SystemsMusicTest"
+      },
+      {
+       "work": "RackAmbientDrone"
+      },
+      {
+       "work": "BigPipeSystem"
+      },
+      {
+       "work": "air_music_display_case"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Wavefunctions_Sky_Stairs",
+     "primary": [
+      {
+       "work": "sine_cylinder_staircase"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "cube_scene"
+      },
+      {
+       "work": "math_objects"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "WaveFunctions_TrigWalkingPath",
+     "primary": [
+      {
+       "work": "beat_frequency_demo"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "sine_oscillation"
+      },
+      {
+       "work": "lissajous_curves"
+      },
+      {
+       "work": "TrigWalkingPath"
+      },
+      {
+       "work": "wave_interference"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "WaveFunctions_Synthesis_Lab",
+     "primary": [
+      {
+       "work": "additive_wave_demo"
+      },
+      {
+       "work": "ambient_patch"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "dna_specimen"
+      },
+      {
+       "work": "holographicdisplay"
+      },
+      {
+       "work": "electronicscales"
+      },
+      {
+       "work": "air_music_display_case"
+      },
+      {
+       "work": "lissajous_curves"
+      },
+      {
+       "work": "seismograph"
+      },
+      {
+       "work": "GlassRack"
+      },
+      {
+       "work": "biomagneticresonator"
+      },
+      {
+       "work": "UnitCircleTrig"
+      },
+      {
+       "work": "record_room"
+      },
+      {
+       "work": "hallway_scene"
+      },
+      {
+       "work": "synthesis_stand"
+      },
+      {
+       "work": "samplevialrack"
+      },
+      {
+       "work": "oscilloscope"
+      },
+      {
+       "work": "double_helix_scene"
+      },
+      {
+       "work": "spring_demo"
+      },
+      {
+       "work": "SoundscapeRadioRack"
+      },
+      {
+       "work": "petri_dish_worms"
+      },
+      {
+       "work": "atmosphericmonitoring"
+      },
+      {
+       "work": "chladni_plate"
+      },
+      {
+       "work": "microscope"
+      },
+      {
+       "work": "chemicalapparatus"
+      },
+      {
+       "work": "multimeter"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 10,
+   "sequence": "randomness",
+   "title": "Randomness: What Can Chance Change?",
+   "truth": "",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "Random_Definition",
+     "primary": [
+      {
+       "work": "seed_replay_demo"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "prng_crank_machine"
+      },
+      {
+       "work": "slot_machine"
+      },
+      {
+       "work": "trng_vs_prng"
+      },
+      {
+       "work": "random_number_book_page_1955"
+      },
+      {
+       "work": "catalyst_pickup"
+      },
+      {
+       "work": "textile_comparison"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Random_Entropy",
+     "primary": [
+      {
+       "work": "shannon_entropy_meter"
+      },
+      {
+       "work": "entropy_axiom"
+      },
+      {
+       "work": "entropy_ruin"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "entropy_jar"
+      },
+      {
+       "work": "hardware_entropy_decay"
+      },
+      {
+       "work": "random_butterflies"
+      },
+      {
+       "work": "signal_room"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Random_Remove",
+     "primary": [
+      {
+       "work": "remove_random"
+      },
+      {
+       "work": "random_removal_arena"
+      },
+      {
+       "work": "sampling_hoppers"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Randomness_10_PRINT_Algorithm",
+     "primary": [
+      {
+       "work": "ten_print_maze_3d"
+      },
+      {
+       "work": "ten_print_structure"
+      },
+      {
+       "work": "ten_print"
+      },
+      {
+       "work": "composition_stochastique"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "remove_random"
+      },
+      {
+       "work": "pickup_cube_placer"
+      },
+      {
+       "work": "clipboard"
+      },
+      {
+       "work": "nature_system_demo"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Random_Cubes",
+     "primary": [
+      {
+       "work": "dice_throw"
+      },
+      {
+       "work": "paired_dice_column"
+      },
+      {
+       "work": "continuing_die"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "coin_toss"
+      },
+      {
+       "work": "random_object_spawner"
+      },
+      {
+       "work": "random_edge_profile"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Random_Rotate_Random_XYZ",
+     "primary": [
+      {
+       "work": "random_decay_multimesh"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "hardware_entropy_decay"
+      },
+      {
+       "work": "Random_Rotate_Random_XYZ"
+      },
+      {
+       "work": "RotateGridCubes"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Random_Walk",
+     "primary": [
+      {
+       "work": "random_walk_terrarium"
+      },
+      {
+       "work": "random_walk_128"
+      },
+      {
+       "work": "random_draw_dot"
+      },
+      {
+       "work": "random_position_rails"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "random_walk_collection"
+      },
+      {
+       "work": "random_walk_leash"
+      },
+      {
+       "work": "pixel_cloud"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Random_Gaussian",
+     "primary": [
+      {
+       "work": "distribution_sampler"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "galton_board"
+      },
+      {
+       "work": "distribution_comparator"
+      },
+      {
+       "work": "GaussianPaintSplatter"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Random_Mushrooms",
+     "primary": [
+      {
+       "work": "mushrooms"
+      },
+      {
+       "work": "silhouette_arrivals"
+      },
+      {
+       "work": "couture_comparison"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "bubbles_random"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Random_Space_Geometry",
+     "primary": [
+      {
+       "work": "perlin_noise_bridge"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "env_one"
+      },
+      {
+       "work": "curl_noise_particles"
+      },
+      {
+       "work": "random_transformations_geometric"
+      },
+      {
+       "work": "sculpt_one"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Randomness_Examples_of_Randomness",
+     "primary": [
+      {
+       "work": "pollock_painting_in_3d"
+      },
+      {
+       "work": "monte_carlo_dartboard"
+      },
+      {
+       "work": "pipe_dream"
+      },
+      {
+       "work": "extreme_randomness"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Random_Pheromone",
+     "primary": [
+      {
+       "work": "pheromone_terrain"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "clipboard"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Random_Space",
+     "primary": [
+      {
+       "work": "noise_mixer"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "worley_noise"
+      },
+      {
+       "work": "random_space"
+      },
+      {
+       "work": "shannon_entropy_meter"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Random_Game",
+     "primary": [
+      {
+       "work": "r_c"
+      },
+      {
+       "work": "random_removal_arena"
+      },
+      {
+       "work": "random_doors"
+      },
+      {
+       "work": "cube_projectile_spawner"
+      },
+      {
+       "work": "door_timing_trials"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "waiting_profile"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 11,
+   "sequence": "noise",
+   "title": "Noise: Fields and Possible Bodies",
+   "truth": "A field can be read as colour, relief, an address or a threshold. Each use makes different bodies and passages possible.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "Random_Noise_Types",
+     "primary": [
+      {
+       "work": "randompoint"
+      },
+      {
+       "work": "randompoints"
+      },
+      {
+       "work": "WhiteNoiseGallery"
+      },
+      {
+       "work": "NoiseColors3D"
+      },
+      {
+       "work": "related_weather"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Noise_Columns",
+     "primary": [
+      {
+       "work": "MeltingBerniniScene"
+      },
+      {
+       "work": "dark_sphere"
+      },
+      {
+       "work": "synthesis_stand"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Noise_One",
+     "primary": [
+      {
+       "work": "noisetorus"
+      },
+      {
+       "work": "noiselayers"
+      },
+      {
+       "work": "dark_sphere"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Noise_Voxel",
+     "primary": [
+      {
+       "work": "perlin_terrain_sculptor"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "voxelnoise"
+      },
+      {
+       "work": "dark_sphere"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Noise_6_Wall",
+     "primary": [
+      {
+       "work": "shader_noise_space"
+      },
+      {
+       "work": "dark_sphere"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Noise_Inside_Noise",
+     "primary": [
+      {
+       "work": "noisesphere"
+      },
+      {
+       "work": "dark_sphere"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Noise_Space_10",
+     "primary": [
+      {
+       "work": "noise_space"
+      },
+      {
+       "work": "dark_sphere"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Noise_Perlin_Simplex",
+     "primary": [
+      {
+       "work": "simplex_noise"
+      },
+      {
+       "work": "perlin_noise"
+      },
+      {
+       "work": "perlin_noise_terrain"
+      },
+      {
+       "work": "dark_sphere"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "configurable_portal"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Lab_Path",
+     "primary": [],
+     "secondary": [],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 12,
+   "sequence": "shaders",
+   "title": "Shaders: What a Surface Answers To",
+   "truth": "A shader is a rule run for every pixel at once. It keeps no memory and has no body; what it answers to is light, position and time. The passage, the pillar hall and the basin are where the museum lets that show.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "Shader_01_Shaping",
+     "primary": [
+      {
+       "work": "shader_01_shaping"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "dark_sphere"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Shader_05_Patterns",
+     "primary": [
+      {
+       "work": "shader_05_patterns"
+      },
+      {
+       "work": "dark_sphere"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "reference_pattern_garden"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Shader_11_QueerRubber",
+     "primary": [
+      {
+       "work": "dark_sphere"
+      },
+      {
+       "work": "shader_11_queerrubber"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Shader_09_FBM",
+     "primary": [
+      {
+       "work": "basin_water"
+      },
+      {
+       "work": "dark_sphere"
+      },
+      {
+       "work": "shader_09_fbm"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Shader_12_PinkExtravaganza",
+     "primary": [
+      {
+       "work": "dark_sphere"
+      },
+      {
+       "work": "shader_12_pinkextravaganza"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "reference_plural_body"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Shader_10_ReactionDiffusion",
+     "primary": [
+      {
+       "work": "dark_sphere"
+      },
+      {
+       "work": "shader_10_reactiondiffusion"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 13,
+   "sequence": "cellularautomata",
+   "title": "Cellular Automata: Local Rules, Global Patterns",
+   "truth": "Local rules, global patterns. Each cell knows only its neighbors, yet worlds emerge. Rule 110 is Turing completeâ€”simple rules can compute anything.",
+   "demonstration": "Watch Game of Life emerge from four rules. See Rule 30 generate randomness from simplicity. Build patterns that compute.",
+   "halls": [
+    {
+     "hall": "CA_Introduction",
+     "primary": [
+      {
+       "work": "ca_rule_explorer"
+      },
+      {
+       "work": "persian_rug"
+      },
+      {
+       "work": "line_network_ca"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "dark_sphere"
+      },
+      {
+       "work": "synthesis_stand"
+      },
+      {
+       "work": "langton_swarm"
+      },
+      {
+       "work": "rule110_computer"
+      },
+      {
+       "work": "ca_showcase"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "CA_ElementaryRules",
+     "primary": [
+      {
+       "work": "structure_growth"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "CA_GameOfLife",
+     "primary": [
+      {
+       "work": "ca_bridge"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "lab_room"
+      },
+      {
+       "work": "ca_columns"
+      },
+      {
+       "work": "mirrored_cellular_automata"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "CA_BeyondBinary",
+     "primary": [
+      {
+       "work": "game_of_life_petri"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "mold_network"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "hexagon_ca_vr"
+      },
+      {
+       "work": "ca_growth_network"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "CA_ExpandingSpace",
+     "primary": [
+      {
+       "work": "decaying_bridge"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "ca_chair_test"
+      },
+      {
+       "work": "catalyst_vent"
+      },
+      {
+       "work": "catalyst_prompter_box"
+      },
+      {
+       "work": "cellular_automata_3d_tree"
+      },
+      {
+       "work": "crossway_ca"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "CA_SoftRules",
+     "primary": [
+      {
+       "work": "rd_artifact"
+      },
+      {
+       "work": "the_clockmaker_of_rules"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "lattice_gas_pump"
+      },
+      {
+       "work": "ca_sphere"
+      },
+      {
+       "work": "crack_propagation_ca"
+      },
+      {
+       "work": "rule_30_110_gravity"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "CA_AgentsCircuits",
+     "primary": [
+      {
+       "work": "ca_rule_explorer"
+      },
+      {
+       "work": "sierpinski_pyramid"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "CA_EdgeOfChaos",
+     "primary": [
+      {
+       "work": "self_organization_ca"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "ca_screen"
+      },
+      {
+       "work": "disease_spread_ca"
+      },
+      {
+       "work": "volumetric_fog_ca"
+      },
+      {
+       "work": "crackpropagation_ca"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 14,
+   "sequence": "fractals",
+   "title": "Fractals: Rules, Scale and Room to Move",
+   "truth": "A finite construction lets us investigate repeated rules, scale, removal and the cost of further detail.",
+   "demonstration": "Compare a single call with branching, inspect retained and removed parts, follow openings through a finite Menger specimen, and distinguish a numerical recurrence from its spatial display.",
+   "halls": [
+    {
+     "hall": "Fractal_Recursion",
+     "primary": [
+      {
+       "work": "fractal_recursion_2"
+      },
+      {
+       "work": "example_8_3_recursion_circles_vr"
+      },
+      {
+       "work": "cube_subdivision"
+      },
+      {
+       "work": "recursive_chair"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "recursive_table"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "fibonacci_pagoda"
+      },
+      {
+       "work": "synthesis_stand"
+      },
+      {
+       "work": "cube_staircase"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Fractal_RecursiveTrees",
+     "primary": [
+      {
+       "work": "recursive_tree_2"
+      },
+      {
+       "work": "recursive_tree"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "living_paper"
+      },
+      {
+       "work": "fractal_lsystem_tree"
+      },
+      {
+       "work": "small_subdivision_cube"
+      },
+      {
+       "work": "inverted_tree_cloud"
+      },
+      {
+       "work": "cube_desk"
+      },
+      {
+       "work": "fractal_scene"
+      },
+      {
+       "work": "mobius_world"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Fractal_CantorSet",
+     "primary": [
+      {
+       "work": "cantor_set"
+      },
+      {
+       "work": "example_8_4_cantor_pagoda_vr"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "fractal_clouds"
+      },
+      {
+       "work": "example_8_4_cantor_set_vr"
+      },
+      {
+       "work": "stochastic_tree_separated"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Fractal_KochSierpinski",
+     "primary": [
+      {
+       "work": "fractal_koch_curve"
+      },
+      {
+       "work": "sierpinski_triangle"
+      },
+      {
+       "work": "box_counting_dimension"
+      },
+      {
+       "work": "sierpinski_pyramid"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "cube_cabin"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "recursion_observatory"
+      },
+      {
+       "work": "koch_curve_3d"
+      },
+      {
+       "work": "cube_bookshelf"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Fractal_MengerSponge",
+     "primary": [
+      {
+       "work": "menger_sponge"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "diffusion_limited_aggregation"
+      },
+      {
+       "work": "catalyst_prompter_box"
+      },
+      {
+       "work": "catalyst_vent"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Fractal_GoldenSpiral",
+     "primary": [
+      {
+       "work": "fibonacci_sequences"
+      },
+      {
+       "work": "golden_rectangle"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "the_recursion_cabinet"
+      },
+      {
+       "work": "diffusion_limited_aggregation"
+      },
+      {
+       "work": "fibonacci_terrain"
+      },
+      {
+       "work": "romanesco"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Fractal_Synthesis",
+     "primary": [
+      {
+       "work": "cantor_set"
+      },
+      {
+       "work": "recursive_tree"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "fractal_recursion_1"
+      },
+      {
+       "work": "koch_curve"
+      },
+      {
+       "work": "sierpinski_triangle"
+      },
+      {
+       "work": "fractal_clouds"
+      },
+      {
+       "work": "strange_attractors"
+      },
+      {
+       "work": "romanesco"
+      },
+      {
+       "work": "fibonacci_sequences"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 15,
+   "sequence": "lsystems",
+   "title": "L-Systems: Rules Grow Structure",
+   "truth": "A sentence can become a forest. Grammar is generative.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "LSystems_Grammar_Lab",
+     "primary": [
+      {
+       "work": "lsystem_editor"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "mesh_grammar_lsystem_tree"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "grammar_provenance"
+      },
+      {
+       "work": "lsystem_tree"
+      },
+      {
+       "work": "fractal_lsystem_string"
+      },
+      {
+       "work": "city_bench"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "LSystems_Growth",
+     "primary": [
+      {
+       "work": "parametric_lsystem"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "ContextSensitiveTree"
+      },
+      {
+       "work": "AnimatedTree"
+      },
+      {
+       "work": "lsystem_tree"
+      },
+      {
+       "work": "modulor_cypress"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "LSystems_Grammars_And_Curves",
+     "primary": [
+      {
+       "work": "the_believing_turtle"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "ContextFreeGrammars"
+      },
+      {
+       "work": "space_filling_curve_gallery"
+      },
+      {
+       "work": "Hilbert3D"
+      },
+      {
+       "work": "lindenmayer_tube_tree"
+      },
+      {
+       "work": "tube_painting"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "LSystems_Architecture",
+     "primary": [
+      {
+       "work": "lsystem_dungeon"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "catalyst_vent"
+      },
+      {
+       "work": "mesh_grammar_petal_flower"
+      },
+      {
+       "work": "dragon_room"
+      },
+      {
+       "work": "CityGenerator"
+      },
+      {
+       "work": "grammar_seed"
+      },
+      {
+       "work": "catalyst_prompter_box"
+      },
+      {
+       "work": "mesh_grammar_coral_fingers"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "LSystems_Competition",
+     "primary": [
+      {
+       "work": "ForestCompetition"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "branching_coral"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "LSystems_Living",
+     "primary": [
+      {
+       "work": "genetic_tree_sculptor"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "lsystem_tree"
+      },
+      {
+       "work": "branching_coral"
+      },
+      {
+       "work": "living_paper_fern"
+      },
+      {
+       "work": "living_paper_tree"
+      },
+      {
+       "work": "living_paper_dragon"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "LSystems_Shape_Grammars",
+     "primary": [
+      {
+       "work": "form_grammar_family"
+      },
+      {
+       "work": "form_grammar_canopy"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "Assemblage_Same_Desire",
+     "primary": [
+      {
+       "work": "ten_print_textile"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "grid_substrate_runner"
+      },
+      {
+       "work": "synthesis_stand"
+      },
+      {
+       "work": "panel_bridge_loom"
+      },
+      {
+       "work": "pattern_atlas_gallery"
+      },
+      {
+       "work": "dragon_bench"
+      },
+      {
+       "work": "mamma_monster_gallery"
+      },
+      {
+       "work": "godel_statement_plaque"
+      },
+      {
+       "work": "incompleteness_scale"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 16,
+   "sequence": "proceduralgeneration",
+   "title": "Procedural Generation: Rules Build Worlds",
+   "truth": "A generated world carries choices about representation, growth, connection and support. Those choices can be inspected and revised.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "PG_Genetic_Evolution",
+     "primary": [
+      {
+       "work": "GeneticProgramming"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "science_screen"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "PG_Space_Colonization",
+     "primary": [
+      {
+       "work": "space_colonization_algorithm"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "PG_Branching_Growth",
+     "primary": [
+      {
+       "work": "branching_growth_algorithm"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "organic_space"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "PG_Percolation_Network",
+     "primary": [
+      {
+       "work": "percolationnetwork_ca"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "synthesis_stand"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "PG_Caves_Mazes",
+     "primary": [
+      {
+       "work": "caverandomwalk"
+      },
+      {
+       "work": "maze_generation"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "binary_space_partitioning"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "PG_Sculpted_Forms",
+     "primary": [
+      {
+       "work": "cube_mound_scene"
+      },
+      {
+       "work": "dome"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "layered_membrane"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "PG_Mirrored_Patterns",
+     "primary": [
+      {
+       "work": "mirror_cellular_texture_for_3d"
+      },
+      {
+       "work": "rhizomatic_maze_space"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "pattern_tunnel_machine"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 17,
+   "sequence": "softbodies",
+   "title": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
+   "truth": "Form is not imposed  --  it emerges from the material's own dynamics.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "SoftBodies_Soft_Body_Deformation",
+     "primary": [
+      {
+       "work": "jelly_cube"
+      },
+      {
+       "work": "softmill"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "jelly_variants"
+      },
+      {
+       "work": "radiolaria"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SoftBodies_Cloth_Physics",
+     "primary": [
+      {
+       "work": "cloth_straps"
+      },
+      {
+       "work": "softstopscene"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "tension_membrane"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SoftBodies_Carusell",
+     "primary": [
+      {
+       "work": "revolving_joy_ride"
+      },
+      {
+       "work": "cloth_straps"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "synthesis_stand"
+      },
+      {
+       "work": "pick_up_cube"
+      },
+      {
+       "work": "grab_long_stick"
+      },
+      {
+       "work": "flex_cloth_pad"
+      },
+      {
+       "work": "soft_mushroom"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SoftBodies_Obsticals",
+     "primary": [
+      {
+       "work": "breathing_room"
+      },
+      {
+       "work": "softbody_gallery_part2"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "pick_up_cube"
+      },
+      {
+       "work": "flagdancer"
+      },
+      {
+       "work": "grab_long_stick"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SoftBodies_Obsticals_Part2",
+     "primary": [
+      {
+       "work": "softbody_gallery_part2"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "pick_up_cube"
+      },
+      {
+       "work": "grab_long_stick"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SoftBodies_Playground_of_Joy",
+     "primary": [
+      {
+       "work": "rounded_softbody_test"
+      },
+      {
+       "work": "frozen_glass_vessel"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "branching_growth_algorithm"
+      },
+      {
+       "work": "entropy_morphogenesis"
+      },
+      {
+       "work": "gridagent"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SoftBodies_Affect_Theory_Visualization",
+     "primary": [
+      {
+       "work": "radiolaria"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "ProceduralGeneration_Reaction_Diffusion_Systems",
+     "primary": [
+      {
+       "work": "turing_pattern_generator"
+      },
+      {
+       "work": "reaction_diffusion"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "mesh_grammar_detailed_bulge"
+      },
+      {
+       "work": "softstopscene"
+      },
+      {
+       "work": "the_confessing_body"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Topology_Entropy_Morphogenesis",
+     "primary": [
+      {
+       "work": "entropy_morphogenesis"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 18,
+   "sequence": "isosurfaces",
+   "title": "Isosurfaces: Implicit to Explicit",
+   "truth": "A field assigns values; sampling and a chosen level make a boundary available to construct.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "ISO_Introduction",
+     "primary": [
+      {
+       "work": "voxel_noise_demo"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "science_screen"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ISO_LookupTable",
+     "primary": [
+      {
+       "work": "fifteen_cases_demo"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "mc_cave"
+      },
+      {
+       "work": "metaball_world"
+      },
+      {
+       "work": "the_threshold_opinion"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ISO_ShapesGallery",
+     "primary": [
+      {
+       "work": "mc_shapes_gallery"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "mc_torus_sculpture"
+      },
+      {
+       "work": "mc_sculpt_vr"
+      },
+      {
+       "work": "gyroid_demo"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ISO_TorusGyroid",
+     "primary": [
+      {
+       "work": "mc_torus_sculpture"
+      },
+      {
+       "work": "GyroidDemo"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "voxel_noise_demo"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ISO_Sculpting",
+     "primary": [
+      {
+       "work": "mc_sculpt_vr"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "fountain_demo"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ISO_FlatTerrain",
+     "primary": [
+      {
+       "work": "mc_flat_landscape"
+      },
+      {
+       "work": "mc_overhang_landscape"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "mc_terrain_demo"
+      },
+      {
+       "work": "rhizome_cave_system"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ISO_PortalLandscape",
+     "primary": [
+      {
+       "work": "marchingcubes_portal_landscape"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "iso_portal_console"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ISO_Caves",
+     "primary": [
+      {
+       "work": "mc_inside_cave"
+      },
+      {
+       "work": "mc_portal_landscape"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "rhizome_cave_demo"
+      },
+      {
+       "work": "raymarched_metaballs"
+      },
+      {
+       "work": "queer_marching_cave"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ISO_CaveGeneration",
+     "primary": [
+      {
+       "work": "marchingcubes_cave"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "marchingcave"
+      },
+      {
+       "work": "iso_specimen_stage"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ISO_AnimatedNoise",
+     "primary": [
+      {
+       "work": "animated_noise_explorer"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "mc_base"
+      },
+      {
+       "work": "iso_specimen_stage"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ISO_Metaballs",
+     "primary": [
+      {
+       "work": "metaball_world"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "raymarched_metaballs"
+      },
+      {
+       "work": "nakama_metaballs"
+      },
+      {
+       "work": "metaballs"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ISO_ImplicitModeling",
+     "primary": [
+      {
+       "work": "implicit_surface_modeling"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "ISO_RhizomeBody",
+     "primary": [
+      {
+       "work": "rhizome_inside"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 19,
+   "sequence": "boolean_surfaces",
+   "title": "Boolean Surfaces: CSG as Composition",
+   "truth": "Union, intersection and difference compose solid regions; collision and clearance determine how a body can inhabit the result.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "Boolean_Verbs",
+     "primary": [
+      {
+       "work": "csg_union_demo"
+      },
+      {
+       "work": "csg_intersection_demo"
+      },
+      {
+       "work": "csg_difference_demo"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "the_argument_of_solids"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Boolean_Gallery",
+     "primary": [
+      {
+       "work": "csg_difference_demo"
+      },
+      {
+       "work": "removal_room"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "csg_union_demo"
+      },
+      {
+       "work": "csg_intersection_demo"
+      },
+      {
+       "work": "subtraction_suite"
+      },
+      {
+       "work": "coincident_face"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Boolean_Works",
+     "primary": [
+      {
+       "work": "csg_compose_workbench"
+      },
+      {
+       "work": "boolean_burrow"
+      },
+      {
+       "work": "sdf_cavern_room"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "subtraction_suite"
+      },
+      {
+       "work": "sphere_splitting_showcase"
+      },
+      {
+       "work": "recursive_boolean_cube"
+      },
+      {
+       "work": "csg_architecture_cavity"
+      },
+      {
+       "work": "boolean_eggs"
+      },
+      {
+       "work": "booleanvariations"
+      },
+      {
+       "work": "coincident_face"
+      },
+      {
+       "work": "conical_sightline"
+      },
+      {
+       "work": "kapoor_void_studies"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 20,
+   "sequence": "swarmintelligence",
+   "title": "Swarm Intelligence: Where Coordination Lives",
+   "truth": "Collective movement does not identify its cause. Look for the field, neighbour, memory, objective and support that make it possible.",
+   "demonstration": "Compare agents writing trails, following supplied arrows, steering relative to neighbours and pursuing remembered scores. Finish by observing local ecology alongside a visible account of population support.",
+   "halls": [
+    {
+     "hall": "SwarmIntelligence_PhysarumColony",
+     "primary": [
+      {
+       "work": "PhysarumColony"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "ant_agent"
+      },
+      {
+       "work": "particle_swarm_optimization_legacy"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SwarmIntelligence_FlowFields",
+     "primary": [
+      {
+       "work": "FlowFieldMain"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "AntColonyV2"
+      },
+      {
+       "work": "ecosystem_simulation"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SwarmIntelligence_Boids_Algorithm",
+     "primary": [
+      {
+       "work": "flocking_controls"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "boids_aquarium"
+      },
+      {
+       "work": "boids_2d_in_3d"
+      },
+      {
+       "work": "boid_manager"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+     "primary": [
+      {
+       "work": "ant_colony_optimization"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "catalyst_prompter_box"
+      },
+      {
+       "work": "physarum_colony"
+      },
+      {
+       "work": "catalyst_foe"
+      },
+      {
+       "work": "catalyst_vent"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SwarmIntelligence_Ant_Colony_Optimization",
+     "primary": [
+      {
+       "work": "AntColonyV2"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "SwarmIntelligence_Particle_Swarm_Optimization",
+     "primary": [
+      {
+       "work": "fitness_landscape_politics"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "tick_flock"
+      },
+      {
+       "work": "self_organizing_patterns"
+      },
+      {
+       "work": "ant_colony_v2"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+     "primary": [
+      {
+       "work": "ecosystem_simulation"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 21,
+   "sequence": "machinelearning",
+   "title": "Machine Learning: What Changes, and Why?",
+   "truth": "A change in appearance is not yet evidence of learning. Follow what changes, what measures it and what stays fixed.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "ML_Evolution",
+     "primary": [
+      {
+       "work": "non_teleological_evolution"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "evolved_creatures"
+      },
+      {
+       "work": "gradient_descent_visualization"
+      },
+      {
+       "work": "evolvingflowers"
+      },
+      {
+       "work": "science_screen"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ML_Gradient_Landscape",
+     "primary": [
+      {
+       "work": "loss_function_comparator"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "gradient_descent_visualization"
+      },
+      {
+       "work": "pca_visualization"
+      },
+      {
+       "work": "evolved_creatures"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ML_Classification",
+     "primary": [
+      {
+       "work": "enhanced_kmeans"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "svm_visualization"
+      },
+      {
+       "work": "random_forest_visualization"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ML_Neural_Networks",
+     "primary": [
+      {
+       "work": "neural_network_visualization"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "neural_networks_vr"
+      },
+      {
+       "work": "fine_tuning_vr"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ML_Perception",
+     "primary": [
+      {
+       "work": "computer_vision_vr"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "convolutional_neural_networks_cnns_vr"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ML_Sequence_Memory",
+     "primary": [
+      {
+       "work": "lstms_vr"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "transformers_vr"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "ML_Generative",
+     "primary": [
+      {
+       "work": "generative_adversarial_networks_gans_vr"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "ML_Synthesis",
+     "primary": [
+      {
+       "work": "anomaly_detection"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "joint_learn_walk"
+      },
+      {
+       "work": "explainable_ai_xai_vr"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 22,
+   "sequence": "graphtheory",
+   "title": "Graph Theory: What Connections Permit",
+   "truth": "The same connections can host different journeys. What the graph leaves out will not be recovered by choosing another route.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "GT_Foundations",
+     "primary": [
+      {
+       "work": "two_travelers"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "synthesis_stand"
+      },
+      {
+       "work": "graphspace"
+      },
+      {
+       "work": "graphspace3d"
+      },
+      {
+       "work": "KonigsbergBridge"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "GT_Layout",
+     "primary": [
+      {
+       "work": "force_directed_layout"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "living_paper_bfs"
+      },
+      {
+       "work": "graph_basilica"
+      },
+      {
+       "work": "forcedirected3d"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "GT_Pathfinding",
+     "primary": [
+      {
+       "work": "impatient_river"
+      },
+      {
+       "work": "salesman_knot"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "grid_substrate_runner"
+      },
+      {
+       "work": "pathfinding3d"
+      },
+      {
+       "work": "family_chandelier"
+      },
+      {
+       "work": "living_paper_dfs_maze"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "GT_Network_Analysis",
+     "primary": [
+      {
+       "work": "network_analysis"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "rhizomatic_structure"
+      },
+      {
+       "work": "networkflow3d"
+      },
+      {
+       "work": "evidence_network"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "GT_Connectivity",
+     "primary": [
+      {
+       "work": "tarjan_algorithm"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "topological_sort"
+      },
+      {
+       "work": "kosaraju_algorithm"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "GT_Spanning_Trees",
+     "primary": [
+      {
+       "work": "mst_visualization"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "GT_Flow",
+     "primary": [
+      {
+       "work": "push_relabel_algorithm"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "grid3d_dfs"
+      },
+      {
+       "work": "grid3d_prim"
+      },
+      {
+       "work": "karger_algorithm"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "GT_Matching",
+     "primary": [
+      {
+       "work": "edmonds_algorithm"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 23,
+   "sequence": "foundationscrisis",
+   "title": "Foundations Crisis: The Limits of Formalization",
+   "truth": "Different formal systems and representations have different powers and limits. Investigate their assumptions before generalising.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "Euclid_Parallel",
+     "primary": [
+      {
+       "work": "euclid_postulates_plaque"
+      },
+      {
+       "work": "parallel_lines"
+      },
+      {
+       "work": "angle_sum_triangle"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "science_screen"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "NonEuclidean_Spaces",
+     "primary": [
+      {
+       "work": "triangle_curvature_workbench"
+      },
+      {
+       "work": "riemann_sphere"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "curvature_slider"
+      },
+      {
+       "work": "elliptic_surface"
+      },
+      {
+       "work": "poincare_disk"
+      },
+      {
+       "work": "hyperbolic_surface"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Russell_Paradox",
+     "primary": [
+      {
+       "work": "russell_set_box"
+      },
+      {
+       "work": "barber_paradox"
+      },
+      {
+       "work": "russell_paradox_workbench"
+      },
+      {
+       "work": "hilbert_hotel"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "euclid_postulates_plaque"
+      },
+      {
+       "work": "self_membership_set"
+      },
+      {
+       "work": "liar_loop"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Godel_Incompleteness",
+     "primary": [
+      {
+       "work": "godel_sentence_machine"
+      },
+      {
+       "work": "provability_sorter"
+      },
+      {
+       "work": "print_gallery_recursion"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "negative_control_fixture"
+      },
+      {
+       "work": "critic_regress_stack"
+      },
+      {
+       "work": "rice_verifier_booth"
+      },
+      {
+       "work": "synthesis_stand"
+      },
+      {
+       "work": "fluency_seam"
+      },
+      {
+       "work": "godel_statement_plaque"
+      },
+      {
+       "work": "incompleteness_tower"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Escher_Impossible",
+     "primary": [
+      {
+       "work": "escher_staircase"
+      },
+      {
+       "work": "penrose_triangle"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "magritte_pipe"
+      },
+      {
+       "work": "impossible_trident"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Brouwer_Intuitionism",
+     "primary": [
+      {
+       "work": "brouwer_choice_sequence"
+      },
+      {
+       "work": "constructive_proof"
+      },
+      {
+       "work": "cantor_diagonal_workbench"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "excluded_middle_demo"
+      },
+      {
+       "work": "constructive_staircase"
+      },
+      {
+       "work": "angle_sum_triangle"
+      },
+      {
+       "work": "parallel_lines"
+      },
+      {
+       "work": "intractable_evidence"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Florensky_Paraconsistent",
+     "primary": [
+      {
+       "work": "both_true_gate"
+      },
+      {
+       "work": "florensky_sphere"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "schrodinger_box"
+      },
+      {
+       "work": "superposition_display"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "Crisis_Synthesis",
+     "primary": [
+      {
+       "work": "qfep_formula_3d"
+      },
+      {
+       "work": "lambda_slider"
+      },
+      {
+       "work": "phi_slider"
+      },
+      {
+       "work": "bifurcation_diagram"
+      },
+      {
+       "work": "goedel_atrium"
+      },
+      {
+       "work": "russell_paradox_workbench"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "godel_statement_plaque"
+      },
+      {
+       "work": "russell_set_box"
+      },
+      {
+       "work": "escher_staircase"
+      },
+      {
+       "work": "florensky_sphere"
+      },
+      {
+       "work": "sentence_authority"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 24,
+   "sequence": "qfeplaboratory",
+   "title": "QFEP Laboratory: The Formula Made Interactive",
+   "truth": "A manipulable formula becomes accountable through explicit quantities, receivers and tests.",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "QFEP_Introduction",
+     "primary": [
+      {
+       "work": "qfep_balance_workbench"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "tt"
+      },
+      {
+       "work": "grab_sphere_F"
+      },
+      {
+       "work": "lambda_slider"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "phi_slider"
+      },
+      {
+       "work": "synthesis_stand"
+      },
+      {
+       "work": "qfep_formula_3d"
+      },
+      {
+       "work": "grab_sphere_E"
+      },
+      {
+       "work": "grab_sphere_lambda"
+      },
+      {
+       "work": "orange_and_apples"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "QFEP_F_Term",
+     "primary": [
+      {
+       "work": "shannon_workbench"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "tt"
+      },
+      {
+       "work": "lambda_slider"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "snap_octahedron_puzzle"
+      },
+      {
+       "work": "snap_tetrahedron_puzzle"
+      },
+      {
+       "work": "crystal_cluster"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "QFEP_E_Term",
+     "primary": [
+      {
+       "work": "entropy_fan"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "tt"
+      },
+      {
+       "work": "microstate_counter"
+      },
+      {
+       "work": "possibility_space_cloud"
+      },
+      {
+       "work": "particle_chaos"
+      },
+      {
+       "work": "lambda_slider"
+      },
+      {
+       "work": "random_cubes"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "QFEP_Lambda_Spectrum",
+     "primary": [
+      {
+       "work": "lambda_hall"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "qfep_chalkboard"
+      },
+      {
+       "work": "edge_particles"
+      },
+      {
+       "work": "chaos_particles"
+      },
+      {
+       "work": "phase_cube"
+      },
+      {
+       "work": "bifurcation_walkway"
+      },
+      {
+       "work": "dissolving_form"
+      },
+      {
+       "work": "ordered_grid"
+      },
+      {
+       "work": "complexity_pattern"
+      },
+      {
+       "work": "crystal_formation"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "QFEP_Phi_Term",
+     "primary": [
+      {
+       "work": "phi_slider"
+      },
+      {
+       "work": "transforming_pattern"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "rigid_sculpture"
+      },
+      {
+       "work": "fluid_form"
+      },
+      {
+       "work": "preserved_pattern"
+      },
+      {
+       "work": "lambda_promenade"
+      },
+      {
+       "work": "tt"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "QFEP_Edge_Of_Chaos",
+     "primary": [
+      {
+       "work": "edge_of_chaos_unlocked"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "tt"
+      },
+      {
+       "work": "emergence_zone"
+      },
+      {
+       "work": "turing_pattern"
+      },
+      {
+       "work": "edge_core"
+      },
+      {
+       "work": "lambda_slider"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "QFEP_Sandbox",
+     "primary": [
+      {
+       "work": "lambda_slider"
+      },
+      {
+       "work": "phi_slider"
+      },
+      {
+       "work": "qfep_reactor"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "tt"
+      },
+      {
+       "work": "reactive_particles"
+      },
+      {
+       "work": "qfep_formula_3d"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "QFEP_Synthesis",
+     "primary": [
+      {
+       "work": "queer_morphology_specimen"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "tt"
+      },
+      {
+       "work": "grab_sphere_F"
+      },
+      {
+       "work": "qfep_formula_3d"
+      },
+      {
+       "work": "entropy_ceiling"
+      },
+      {
+       "work": "entropy_meter"
+      },
+      {
+       "work": "grasp_cabinet"
+      },
+      {
+       "work": "grab_sphere_E"
+      },
+      {
+       "work": "grab_sphere_lambda"
+      },
+      {
+       "work": "grab_sphere_phi"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  },
+  {
+   "chapter": 25,
+   "sequence": "postfoundationscrisis",
+   "title": "Post-Crisis: Applied Limits",
+   "truth": "Knowing the limits of formalization, what do we build?",
+   "demonstration": "",
+   "halls": [
+    {
+     "hall": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+     "primary": [
+      {
+       "work": "bias_from_inside"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "bias_visualizer"
+      },
+      {
+       "work": "science_screen"
+      },
+      {
+       "work": "situated_readout"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "CriticalAlgorithms_Applied_Ethics",
+     "primary": [
+      {
+       "work": "room_shape_demonstrator"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "tt"
+      },
+      {
+       "work": "excluded_class_visualizer"
+      },
+      {
+       "work": "bias_from_inside"
+      },
+      {
+       "work": "godel_statement_plaque"
+      },
+      {
+       "work": "synthesis_stand"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SpeculativeComputation_Paraconsistent_Engineering",
+     "primary": [
+      {
+       "work": "merge_conflict_visualizer"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "florensky_sphere"
+      },
+      {
+       "work": "shannon_workbench"
+      },
+      {
+       "work": "superposition_display"
+      },
+      {
+       "work": "schrodinger_box"
+      },
+      {
+       "work": "cap_theorem_walk"
+      },
+      {
+       "work": "tt"
+      },
+      {
+       "work": "rhizome_vault"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SpeculativeComputation_Situated_Computation",
+     "primary": [
+      {
+       "work": "situated_readout"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "head_crab"
+      },
+      {
+       "work": "museum_witnesses"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SpeculativeComputation_Collective_Knowledge",
+     "primary": [
+      {
+       "work": "peer_production_tool"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "the_fourth_limit"
+      },
+      {
+       "work": "wiki_fragment"
+      },
+      {
+       "work": "the_commons_table"
+      }
+     ],
+     "notes": []
+    },
+    {
+     "hall": "SpeculativeComputation_Rhizome_Network",
+     "primary": [
+      {
+       "work": "rhizome_cave_demo"
+      },
+      {
+       "work": "rhizome_grower"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "AdvancedLaboratory_Lab_Equipment_Simulation",
+     "primary": [
+      {
+       "work": "MolecularDesigner"
+      }
+     ],
+     "secondary": [],
+     "notes": []
+    },
+    {
+     "hall": "PostCrisis_Synthesis",
+     "primary": [
+      {
+       "work": "assembly_return"
+      },
+      {
+       "work": "accountability_ledger"
+      }
+     ],
+     "secondary": [
+      {
+       "work": "tt"
+      },
+      {
+       "work": "edge_ground_synthesis"
+      },
+      {
+       "work": "bias_from_inside"
+      },
+      {
+       "work": "qfep_formula_3d"
+      },
+      {
+       "work": "florensky_sphere"
+      }
+     ],
+     "notes": []
+    }
+   ]
+  }
+ ]
+}
