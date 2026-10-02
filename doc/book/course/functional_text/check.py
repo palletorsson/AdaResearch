@@ -26,7 +26,9 @@ Passes
                   section, as its bold name and its steps; elsewhere it is only called by name
   e  unused       every introduced entry is used after its section
   f  length, sentence, filler, voice: short-speak
+     device       no marker the page does not declare (enters:, from:, an arrow, [run] ...)
   g  code, run    each gdscript block parses in Godot; a run block runs headless
+     top          each run block's script is one the top node, a Node3D, can hold
 
 Python 3.10, standard library only.
 """
@@ -60,6 +62,9 @@ ADMIN_SLOTS = ("node", "code", "file", "n")
 OFF = set(x.strip() for x in os.environ.get("FT_OFF", "").split(",") if x.strip())
 ADMIN_RULES = ("admin-taxonomy", "admin-order", "admin-again", "admin-define", "admin-signature",
                "admin-calls", "admin-link")
+# the other switches: device (a marker that is no device of the page, FUNCTIONAL_TEXT 2b) and
+# top-node (a script the top node cannot hold, FUNCTIONAL_TEXT 3)
+OTHER_RULES = ("device", "top-node")
 
 EX = 999            # the exercises of chapter N sort as (N, 999)
 HEAD = 0            # the chapter head sorts as (N, 0)
@@ -91,6 +96,16 @@ POETIC_VERBS = ["remembers", "remembered", "forgets", "forgot", "dreams", "dream
                 "yearns", "longs for", "whispers", "whispered", "sings", "sang", "breathes",
                 "weeps", "wept", "mourns", "hopes", "wishes", "loves", "fears", "believes",
                 "sighs", "longs", "owns", "knows", "wants"]
+# The markers round one of the compression tests proposed and round two dropped (FUNCTIONAL_TEXT
+# 2b): they cost words, moved no score, and stalled readers where a page used one undeclared.
+# They are no device of the page. 'Restore:' is one, and stays.
+# - a label that opens a prose line: 'enters:', 'from:', 'State:', 'Not yet:', 'Not here:'
+# - an arrow that opens a prose line: '→ Start in the hall.', '-> ...'
+# - a provenance tag anywhere in a prose line, bare or as the whole of a code span: [read] [run]
+#   [derived]. A code span that holds more ('values[run]', '-> void') is code, not a marker.
+DEVICE_LEAD = re.compile(r"^\s*(?:(?:enters|from|state|not\s+yet|not\s+here)\s*:|→|->)", re.IGNORECASE)
+DEVICE_TAG = re.compile(r"(?<![\w\]])\[(?:read|run|derived)\](?![\w(\[:])", re.IGNORECASE)
+DEVICE_TAG_SPAN = re.compile(r"\s*\[(?:read|run|derived)\]\s*", re.IGNORECASE)
 # the verbs an instruction starts with: numbers before its colon are inputs, not claims
 IMPERATIVES = set("""add attach build carve change close count cut double drag draw drop find
 give grow halve hold join keep let look lower make move name open pick press put raise read
@@ -1342,7 +1357,7 @@ def declarations(toks):
 
 CODE_SPAN = re.compile(r"`([^`]+)`")
 # an admin procedure's defining line: '**Run the project**: press Play, at the top right.' or,
-# with its first argument, '**Save this script as** `field.gd`: in the script editor, ...'
+# with its first argument, '**Make a new script** `field.gd`: click Script, at the top.'
 ADMIN_DEF = re.compile(r"^\*\*([^*]+)\*\*(\s+`[^`]+`)?:\s*(.+)$")
 # any line that opens with a bold name, however it goes on: a list item, a quote, a dash
 DEF_ATTEMPT = re.compile(r"^(?:>\s*)?(?:(?:\d+[.)]|[-*+])\s+)?\*\*([^*]+)\*\*(.*)$")
@@ -2418,7 +2433,7 @@ class Checker:
                         names, _ = declarations(tokenize_code(b.text)[0])
                         acc |= names
                 for ln, raw, kind in s.prose:
-                    # 'Save this script as `cup.gd`' names a file of the chapter's own
+                    # 'Make a new script `cup.gd`' names a file of the chapter's own
                     acc |= set(SAVE_AS.findall(raw))
                 s.locals = set(acc)
         # pass c, d over every section
@@ -2696,6 +2711,8 @@ class Checker:
         line = visible(raw)
         if kind == "heading":
             line = re.sub(r"^\d+\.(\d+|x)\s+", "", line)
+        if kind in ("line", "label", "heading") and "device" not in OFF:
+            self.check_devices(file, ln, line, kind)
         if kind == "equation":
             return          # a displayed formula: code, read as code
         n = count_words(line)
@@ -2746,6 +2763,23 @@ class Checker:
                 hit = re.search(r"(?<![\w'])" + re.escape(v) + r"(?![\w'])", prose, re.IGNORECASE)
             if hit:
                 rep.warn(file, ln, "voice", "%r: write in the second person" % hit.group(0))
+
+    def check_devices(self, file, ln, line, kind):
+        """FUNCTIONAL_TEXT 2b: the page uses its declared devices and no others. A marker that
+        round one proposed and round two dropped is refused: a label or an arrow that opens the
+        line, and a provenance tag anywhere in it. 'Restore:' is a device and passes."""
+        hits = []
+        if kind != "heading":
+            m = DEVICE_LEAD.match(line)
+            if m:
+                hits.append(m.group(0).strip())
+        # a code span is code, unless it holds nothing but a tag: `[run]` is the marker
+        bare = CODE_SPAN.sub(lambda m: m.group(1).strip() if DEVICE_TAG_SPAN.fullmatch(m.group(1))
+                             else " " * len(m.group(0)), line)
+        hits.extend(t.group(0) for t in DEVICE_TAG.finditer(bare))
+        for h in hits:
+            self.rep.error(file, ln, "device", "%r: the marker is not a device (FUNCTIONAL_TEXT 2b)"
+                           % h)
 
     # -- numbers in the lines, tied to the code
     def check_numbers(self, s):
@@ -3139,7 +3173,8 @@ def norm_def(s):
 
 RUNNER = r'''extends SceneTree
 ## Written by check.py. Parses every unit in one boot, runs the run units in turn, and at the
-## end of each run asks its claims.
+## end of each run asks its claims. Each run unit's script stands in for the node the text puts
+## it on, the top node (a Node3D) unless on= says another: FT_BASE says whether it may go there.
 var runs := []
 var cur = null
 var cur_id := ""
@@ -3160,7 +3195,7 @@ func _initialize() -> void:
 		var ok := gd != null and gd.can_instantiate()
 		print("FT_PARSE ", u[0], " ", "ok" if ok else "fail")
 		if ok and int(u[2]) > 0:
-			runs.append([u[0], gd, int(u[2]), int(u[3]), u[4] == "1"])
+			runs.append([u[0], gd, int(u[2]), int(u[3]), u[4] == "1", u[5] if u.size() > 5 else "Node3D"])
 
 func _process(_delta: float) -> bool:
 	if cur == null:
@@ -3175,6 +3210,8 @@ func _process(_delta: float) -> bool:
 		t0 = Time.get_ticks_msec()
 		print("FT_RUN_BEGIN ", cur_id)
 		cur = r[1].new()
+		var base: String = cur.get_class()
+		print("FT_BASE ", cur_id, " ", base, " ", "yes" if ClassDB.is_parent_class(r[5], base) else "no")
 		if cur.has_method("_ft_scene"):
 			cur._ft_scene()
 		root.add_child(cur)
@@ -3200,6 +3237,10 @@ func _process(_delta: float) -> bool:
 
 CLASS_LINE = re.compile(r"^(func|var|const|signal|enum|static|class|@\w+)\b")
 SCRIPT_LINE = re.compile(r"^(extends|class_name)\b")
+# One convention for scripts (2 October 2026): every chapter script goes on the base scene's top
+# node, a Node3D, where $Supplied resolves. A script for a MeshInstance3D cannot go there: Godot
+# refuses it. A block whose script goes on another node says so: on=CharacterBody3D.
+TOP_NODE = "Node3D"
 EXTENDS_LINE = re.compile(r"^extends\s+\S")
 
 
@@ -3218,6 +3259,8 @@ class Unit:
         self.no_extends = False
         self.bad_nodes = []
         self.until = None
+        # the node the text puts the script on: the top node, a Node3D, unless a block says on=
+        self.on = next((b.opts["on"] for b in blocks if isinstance(b.opts.get("on"), str)), TOP_NODE)
 
 
 def runs_block(b):
@@ -3506,8 +3549,9 @@ def run_godot(checker, chapters, exe, opts):
         with open(os.path.join(project, "blocks", "%s.gd" % u.id), "w", encoding="utf-8",
                   newline="\n") as f:
             f.write(u.text)
-        rows.append("%s|res://blocks/%s.gd|%d|%d|%d" % (u.id, u.id, 0 if u.fails else u.frames,
-                                                        len(u.claims), 1 if u.until else 0))
+        rows.append("%s|res://blocks/%s.gd|%d|%d|%d|%s" % (u.id, u.id, 0 if u.fails else u.frames,
+                                                           len(u.claims), 1 if u.until else 0,
+                                                           u.on))
     with open(os.path.join(project, "units.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(rows) + "\n")
     log = os.path.join(project, "log.txt")
@@ -3561,10 +3605,18 @@ def run_godot(checker, chapters, exe, opts):
         e = host_files[host][0]
         rep.error(tax.path, e.line, "code", "Godot, in the supplied stubs at %s: %s" % (host, msg))
     claims_said = {(a, int(b)): c for a, b, c in re.findall(r"^FT_CLAIM (u\d+) (\d+) (yes|no)", text, re.M)}
+    bases = {a: (b, c) for a, b, c in re.findall(r"^FT_BASE (u\d+) (\w+) (yes|no)", text, re.M)}
     for u in units:
         b0 = u.blocks[0]
         status = parse_ok.get(u.id)
         errs = found.get(u.id, [])
+        # the top-node rule: the script must be one the node it goes on can hold
+        base = bases.get(u.id)
+        if base and base[1] == "no" and "top-node" not in OFF:
+            where = ("the top node, a %s" % u.on) if u.on == TOP_NODE else ("a %s (on=)" % u.on)
+            rep.error(u.sec.file, b0.fence_line, "top", "this script is for a %s, and the text puts "
+                      "it on %s: Godot refuses it there. Extend %s, and make the body in code, a "
+                      "child (FUNCTIONAL_TEXT 3)" % (base[0], where, u.on))
         if u.fails:
             if status == "ok":
                 rep.error(u.sec.file, b0.fence_line, "code", "this block should fail to parse, "

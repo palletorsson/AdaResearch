@@ -504,6 +504,97 @@ class TestShortSpeak(Base):
         self.assertBites(rep, "voice", sev="warning", line=line_no(ch1, "Our point"))
 
 
+# ------------------------------------------------------------------ the page's devices
+
+# The markers round one of the compression tests proposed and round two dropped
+# (FUNCTIONAL_TEXT 2b): each planted in a prose line of 1.2, the line it must be caught on.
+DEVICE_FAULTS = {
+    "enters:": "enters: a point, from the section before.",
+    "from:": "from: point, node.",
+    "State:": "State: the whole position.",
+    "Not yet:": "Not yet: the position.",
+    "Not here:": "Not here: the node.",
+    "→": "→ Move the position to a point.",
+    "->": "-> Move the position to a point.",
+    "[read]": "The position holds a point [read].",
+    "[run]": "The node keeps its position `[run]`.",
+    "[derived]": "A point is a place [derived].",
+}
+
+
+class TestDevices(Base):
+    """FUNCTIONAL_TEXT 2b: the page uses its declared devices and no others. Each marker round
+    two dropped is refused where it stands; 'Restore:' and code that holds an arrow are not."""
+
+    def plant(self, line):
+        ch1 = after(CH1, LAST_LINE_1, line)
+        return ch1, self.run_check(ch1=ch1)
+
+    def device_at(self, rep, ln):
+        return [i for i in rep.items if i[2] == ln and i[3] == "device"]
+
+    def test_each_dropped_marker_is_refused(self):
+        for marker, line in DEVICE_FAULTS.items():
+            with self.subTest(marker=marker):
+                ch1, rep = self.plant(line)
+                self.assertBites(rep, "device", file="ch01.md", line=line_no(ch1, line),
+                                 contains="the marker is not a device (FUNCTIONAL_TEXT 2b)")
+                self.assertTrue(any(marker.lower() in i[4].lower() for i in rep.items
+                                    if i[3] == "device"), "the message names %r" % marker)
+
+    def test_each_line_passes_without_its_marker(self):
+        """The passing case for each fault: the same claim with the marker taken out."""
+        clean = {
+            "enters:": "A point comes from the section before.",
+            "from:": "It uses a point and a node.",
+            "State:": "The whole position is set.",
+            "Not yet:": "The position waits.",
+            "Not here:": "The node waits.",
+            "→": "Move the position to a point.",
+            "->": "Move the position to a point.",
+            "[read]": "The position holds a point.",
+            "[run]": "The node keeps its position.",
+            "[derived]": "A point is a place.",
+        }
+        self.assertEqual(set(clean), set(DEVICE_FAULTS))
+        for marker, line in clean.items():
+            with self.subTest(marker=marker):
+                ch1, rep = self.plant(line)
+                self.assertEqual(self.device_at(rep, line_no(ch1, line)), [], "\n".join(rep.lines()))
+                self.assertClean(rep)
+
+    def test_restore_is_a_device(self):
+        ch1, rep = self.plant("Restore: put the point back.")
+        self.assertEqual(self.device_at(rep, line_no(ch1, "Restore:")), [], "\n".join(rep.lines()))
+
+    def test_an_arrow_in_code_is_no_marker(self):
+        # an arrow in a code span that opens the line, in a fenced block, and in mid-line
+        for line in ("`-> void` says what the func hands back.", "`values[run]` is one value.",
+                     "The position goes to a point -> once.", "From the point, the node moves.",
+                     "Not yet placed, the node waits.", "[run](#a-position) is a link, not a tag."):
+            with self.subTest(line=line):
+                ch1, rep = self.plant(line)
+                self.assertEqual(self.device_at(rep, line_no(ch1, line)), [], "\n".join(rep.lines()))
+        ch1 = CH1.replace("\t$Supplied.stamp($Ball.position)",
+                          "\t$Supplied.stamp($Ball.position)\n\nfunc keep() -> void:\n\tpass")
+        rep = self.run_check(ch1=ch1)
+        self.assertFalse(self.found(rep, "device"), "\n".join(rep.lines()))
+
+    def test_switching_the_rule_off_lets_the_marker_through(self):
+        line = DEVICE_FAULTS["enters:"]
+        ch1, rep = self.plant(line)
+        self.assertTrue(self.found(rep, "device", line=line_no(ch1, line)))
+        saved = set(check.OFF)
+        check.OFF.add("device")
+        try:
+            ch1, rep = self.plant(line)
+        finally:
+            check.OFF.clear()
+            check.OFF.update(saved)
+        self.assertFalse(self.found(rep, "device"), "device is off, and the marker is still "
+                         "caught: the test does not prove the rule")
+
+
 # ------------------------------------------------------------------ the Types box
 
 class TestTypesBox(Base):
@@ -1299,6 +1390,27 @@ class TestAdmin(Base):
                 self.assertTrue(e.get("step_phrases"), e["id"])
                 self.assertFalse(e["forms"]["code"], e["id"])
 
+    def test_the_real_taxonomy_holds_the_script_admins(self):
+        """2 October 2026: a new script is made new, never saved over another (Save As copied
+        the old class_name); a script goes on a node by a drop from the FileSystem. Each is
+        defined where the written chapters first need it, and says its steps are unverified."""
+        with open(REAL_TAXONOMY, encoding="utf-8") as f:
+            entries = {e["id"]: e for e in json.load(f)["entries"]}
+        self.assertNotIn("save_this_script_as", entries)
+        make, put = entries["make_a_new_script"], entries["put_a_script_on_a_node"]
+        self.assertEqual((make["kind"], make["forms"]["text"][0], make["introduced_at"]),
+                         ("admin", "make a new script", "18.1"))
+        self.assertEqual((put["kind"], put["forms"]["text"][0], put["introduced_at"]),
+                         ("admin", "put a script on a node", "1.3"))
+        self.assertIn("New Script", make["def"])
+        self.assertIn("FileSystem", put["def"])
+        self.assertIn("put {file} on", put["calls"])
+        self.assertEqual(entries["FileSystem"]["introduced_at"], "1.1")
+        for e in (make, put):
+            self.assertIn("NOT verified in a live editor", e["note"], e["id"])
+        # drag is the force of 7.6: the drop says no drag
+        self.assertNotIn("drag", put["def"].lower())
+
 
 class TestAdminRound2(Base):
     """The second adversary's report on admin (2 October 2026): each way it fooled the rules,
@@ -1517,8 +1629,15 @@ class TestAdminRound2(Base):
             "Double-click it and type `Dot`.": "add_a_node",
             "Create a `Node3D`.": "add_a_node",
             "Make a `MeshInstance3D` named `Dot` with a small `SphereMesh`.": "add_a_node",
-            "Choose File, then Save as, and type `bell2.gd`.": "save_this_script_as",
-            "Save the file as `bell2.gd`.": "save_this_script_as",
+            # Save As was the old way to a new script file: its wordings say make a new script
+            "Choose File, then Save as, and type `bell2.gd`.": "make_a_new_script",
+            "Save the file as `bell2.gd`.": "make_a_new_script",
+            "Save this script as `bell2.gd`.": "make_a_new_script",
+            "Create a new script `bell2.gd`.": "make_a_new_script",
+            "Choose File, then New Script.": "make_a_new_script",
+            "Attach `bell.gd` to the top node.": "put_a_script_on_a_node",
+            "Attach the supplied `contact_probe.gd` to it.": "put_a_script_on_a_node",
+            "Drop `bell.gd` onto the top node.": "put_a_script_on_a_node",
         }
         for line, eid in bites.items():
             with self.subTest(line=line):
@@ -1537,6 +1656,10 @@ class TestAdminRound2(Base):
             "The box stands at the top right of the court.",
             "The top right of the Inspector holds the mesh.",
             "Code can add a `MeshInstance3D` too, with `add_child()`.",
+            # a supplied scene is dropped the same way, and is no script
+            "Drop `counter_panel.tscn` from the FileSystem onto the top node.",
+            "Godot fills the new script with some code.",
+            "Right-click the top node and choose Attach Script.",
         ]
         for line in quiet:
             with self.subTest(line=line):
@@ -1550,6 +1673,11 @@ class TestAdminRound2(Base):
             "`add_child()` is how code can add a `MeshInstance3D` to the scene.": [],
             "`add_child()` is how code can add a node.": [],
             "Twelve lines need twelve beads: add twelve `MeshInstance3D` nodes by code.": [],
+            "Make a new script `bell.gd`.": ["make_a_new_script"],
+            "Put `bell.gd` on the top node.": ["put_a_script_on_a_node"],
+            "Put the supplied `contact_probe.gd` on the new `Node3D`.": ["put_a_script_on_a_node"],
+            "Put `bell.gd` on the top node, then run the project.": ["put_a_script_on_a_node",
+                                                                     "run_the_project"],
         }
         for line, want in calls.items():
             with self.subTest(line=line):
@@ -1641,6 +1769,32 @@ class TestGodot(Base):
             "\t$Ball.position = Vector3(1, 2, 3)", "\t$Ball.position = Vector3(1, 2, 3)")
         rep = self.run_check(ch1=ch1, godot=True)
         self.assertClean(rep)
+
+    # one convention for scripts: each goes on the top node, a Node3D (FUNCTIONAL_TEXT 3)
+    def test_top_node_a_script_the_top_node_can_hold_passes(self):
+        rep = self.run_check(godot=True)
+        self.assertFalse(self.found(rep, "top"), "\n".join(rep.lines()))
+
+    def test_top_node_a_script_for_another_node_is_refused(self):
+        bad = CH1.replace("```gdscript\nextends Node3D\n", "```gdscript\nextends MeshInstance3D\n", 1)
+        self.assertNotEqual(bad, CH1)
+        rep = self.run_check(ch1=bad, godot=True)
+        self.assertBites(rep, "top", file="ch01.md", line=line_no(bad, "```gdscript"),
+                         contains="this script is for a MeshInstance3D, and the text puts it on "
+                                  "the top node, a Node3D")
+        # on= says the script goes on another node: then a MeshInstance3D is right
+        ok = bad.replace("<!-- code: nodes=Ball:Node3D", "<!-- code: on=MeshInstance3D nodes=Ball:Node3D", 1)
+        rep = self.run_check(ch1=ok, godot=True)
+        self.assertFalse(self.found(rep, "top"), "\n".join(rep.lines()))
+        # switched off, the fault passes: the test bites by this rule
+        saved = set(check.OFF)
+        check.OFF.add("top-node")
+        try:
+            rep = self.run_check(ch1=bad, godot=True)
+        finally:
+            check.OFF.clear()
+            check.OFF.update(saved)
+        self.assertFalse(self.found(rep, "top"), "top-node is off, and the fault is still caught")
 
     def test_a_relative_workdir(self):
         cwd = os.getcwd()

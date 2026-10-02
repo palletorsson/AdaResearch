@@ -199,13 +199,9 @@ Copies of every file from before each run are in `C:/Users/palle/AppData/Local/T
 5. Rename heading 1.1, "Press Play"? It is the definition of *run the project*.
 6. The fixer narrowed the 1.4 link to "Add". Keep that, or reverse it?
 7. Is the Inspector's "give it a mesh" teaching (the builder's view) or partly admin, where to click (the attacker's view)?
-8. Chapter 18:
-   - Which node holds `field.gd`? `extends MeshInstance3D` cannot go on the top `Node3D`, yet `$Supplied` only works from the top node.
-   - Should the text say to attach the script?
-   - Save before or after typing the new code? Saving first briefly shows "Class Field hides a global script class".
-   - Run calls are missing in 18.4, 18.5 and 18.7.
-9. Steps for 1.3's supplied `contact_probe.gd` and 1.6's counter panel. They need a name for the FileSystem panel, or a file name for the counter panel.
-10. Godot 4.6 labels no one has checked in a live editor: Create in the Attach dialog, FileSystem at the bottom left, the Script button at the top, Cmd+B and Cmd+R, Ctrl+A to add a node.
+8. Chapter 18. **Settled 2 October, evening, on Palle's "go with what you think works best":** one convention for scripts. Every script extends `Node3D` (through `Field`) and goes on the top node; the marched body is a child `MeshInstance3D` made in code (`seen`). *Save this script as* is gone: *make a new script* (File, New Script, 18.1) and *put a script on a node* (a drop from the FileSystem, 1.3) replace it. Every section 18.1 to 18.8 now puts its script on the top node and runs the project. check.py's `top` rule fails a script the top node cannot hold.
+9. **Settled the same evening:** 1.1 names the FileSystem; 1.3 defines *put a script on a node* for `contact_probe.gd`; 1.6 drops `counter_panel.tscn` in one inline line (used once; the walker of 2.5 would make it an admin).
+10. Godot 4.6 labels no one has checked in a live editor: Create in the Attach dialog, FileSystem at the bottom left, the Script button at the top, Cmd+B and Cmd+R, Ctrl+A to add a node; and now File > New Script and Create, a script dropped from the FileSystem onto a node, and a scene dropped onto the top node.
 
 **Round three (T1)**
 

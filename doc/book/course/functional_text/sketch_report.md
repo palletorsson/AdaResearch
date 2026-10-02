@@ -8,7 +8,7 @@ python functional_text/check.py --taxonomy taxonomy.json --sketch sketch/sketch.
     --report functional_text/sketch_report.md
 ```
 
-Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 604 entries. Run: 34 errors, 570 warnings.
+Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 606 entries. Run: 34 errors, 572 warnings.
 
 ## Counts
 
@@ -525,7 +525,7 @@ Code a section teaches that the chapter's code_new list leaves out.
 | rule | errors | warnings | notes |
 |---|---:|---:|---:|
 | admin | 0 | 2 | 0 |
-| gives | 0 | 82 | 8 |
+| gives | 0 | 83 | 8 |
 | listing | 0 | 43 | 0 |
 | never | 27 | 1 | 0 |
 | order | 7 | 0 | 0 |
@@ -534,7 +534,7 @@ Code a section teaches that the chapter's code_new list leaves out.
 | taxonomy | 0 | 2 | 0 |
 | twice | 0 | 23 | 0 |
 | unplaced | 0 | 7 | 0 |
-| unused | 0 | 347 | 0 |
+| unused | 0 | 348 | 0 |
 
 `unused` warnings say an element is taught and the sketch's own text never uses it
 again; the chapters will. `gives` and `listing` warnings are about the sketch's lists,

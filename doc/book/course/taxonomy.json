@@ -125,6 +125,13 @@
       "introduced_at": "1.1", "synonyms": ["hierarchy"], "depends_on": ["scene", "node", "editor"]
     },
     {
+      "id": "FileSystem", "kind": "concept",
+      "forms": {"text": ["FileSystem"], "code": []},
+      "def": "The editor's panel of the project's files.",
+      "introduced_at": "1.1", "synonyms": ["file system", "file browser"], "depends_on": ["editor"],
+      "note": "2 October 2026: named where 1.1 opens base.tscn in it, because put a script on a node (1.3) and the counter panel (1.6) start there. Godot's own label, so it matches as written: 'FileSystem', never 'file system'."
+    },
+    {
       "id": "base_scene", "kind": "supplied",
       "forms": {"text": ["base scene", "course look"], "code": ["base.tscn"]},
       "def": "Floor, sky, sun, camera and one node to place.",
@@ -338,6 +345,17 @@
       "note": "The steps are admin. Which node, its name and what it holds are the lesson, and stay in the line that calls it: 'Add a `Node3D` named `Here`: a position, nothing else.' A {node} slot holds a node class, an entry whose depends_on reaches node. A call is an instruction to the student: 'code can add a `MeshInstance3D`' and 'add twelve nodes by code' teach add_child and are no call. 'Create a `Node3D`', 'Make a ...' and 'Put a ...' are other wordings of the call (synonym templates): say 'Add a `Node3D`'. + and Ctrl+A count only beside the scene tree or a node, so 'Press + to zoom in' is no step of it. The first step is there because + adds under the selected node: 'Under `Solid`, add a ...' needs Solid selected."
     },
     {
+      "id": "put_a_script_on_a_node", "kind": "admin",
+      "forms": {"text": ["put a script on a node", "putting a script on a node"], "code": []},
+      "def": "Drop it from the FileSystem onto the node.",
+      "introduced_at": "1.3",
+      "synonyms": ["attach {file} to", "attach the supplied {file} to", "attach {file} on"],
+      "step_phrases": [{"phrase": "drop", "cues": [".gd"]}, {"phrase": "Quick Load", "cues": ["script", ".gd"]}],
+      "calls": ["put {file} on", "put the supplied {file} on"],
+      "depends_on": ["script", "FileSystem", "node"],
+      "note": "2 October 2026: one convention for scripts. Every chapter script extends Node3D and goes on the top node of the base scene, so $Supplied resolves; a body a script shows is made in code, a child (MeshInstance3D.new(), add_child). 1.3 is its first need: the supplied contact_probe.gd goes on a new Node3D. ch18 calls it for each new script: 'Put `bell.gd` on the top node.' The call names the file: 'put {file} on'; the link covers 'Put'. 'Attach `x.gd` to ...' is another wording of the call. The word is drop, not drag: drag is the force of 7.6, one word, one meaning. The editor step is NOT verified in a live editor (the checker cannot click): Godot 4's scene tree takes a script dropped on a node and replaces the node's script, as far as we know. A script that extends a class the node is not (MeshInstance3D on a Node3D) is refused there: check.py's top-node rule runs every script as the top node and fails it."
+    },
+    {
       "id": "primitive", "kind": "concept",
       "forms": {"text": ["primitive", "primitives"], "code": []},
       "def": "A mesh Godot makes for you from a few numbers.",
@@ -470,9 +488,10 @@
     },
     {
       "id": "counter_panel", "kind": "supplied",
-      "forms": {"text": ["counter panel"], "code": []},
+      "forms": {"text": ["counter panel"], "code": ["counter_panel.tscn"]},
       "def": "A `Label3D` on a stand, named Counter.",
-      "introduced_at": "supplied:1.6", "synonyms": [], "depends_on": ["Label3D"]
+      "introduced_at": "supplied:1.6", "synonyms": [], "depends_on": ["Label3D"],
+      "note": "2 October 2026: a supplied scene, counter_panel.tscn, whose top node is the Label3D named Counter. 1.6 adds it in one line, dropped from the FileSystem onto the top node; that is used once in the chapters written so far, so it is no admin. When a second supplied scene is added the same way (walker.tscn, 2.5), the step becomes an admin defined at 1.6. NOT verified in a live editor: the checker builds the Label3D itself (nodes=Counter:Label3D)."
     },
     {
       "id": "mouse_point()", "kind": "supplied",
@@ -2821,14 +2840,14 @@
       "introduced_at": "18.1", "synonyms": [], "depends_on": ["address"]
     },
     {
-      "id": "save_this_script_as", "kind": "admin",
-      "forms": {"text": ["save this script as", "saved this script as", "saving this script as"], "code": []},
-      "def": "Click Script, at the top. Choose File, then Save As. Type the name and choose Save.",
+      "id": "make_a_new_script", "kind": "admin",
+      "forms": {"text": ["make a new script", "made a new script", "making a new script"], "code": []},
+      "def": "Click Script, at the top. Choose File, then New Script. Type the name and choose Create. Replace the code in it with the code below.",
       "introduced_at": "18.1",
-      "synonyms": ["save the script as"],
-      "step_phrases": [{"phrase": "save as", "cues": ["script", "File", ".gd"]}, {"phrase": "save the file as", "cues": ["script", "File", ".gd"]}, {"phrase": "save it as", "cues": ["script", "File", ".gd"]}],
+      "synonyms": ["create a new script", "create a script", "save this script as", "save the script as"],
+      "step_phrases": ["New Script", {"phrase": "Ctrl+N", "cues": ["script", "File", ".gd"]}, {"phrase": "save as", "cues": ["script", "File", ".gd"]}, {"phrase": "save the file as", "cues": ["script", "File", ".gd"]}, {"phrase": "save it as", "cues": ["script", "File", ".gd"]}],
       "depends_on": ["script"],
-      "note": "18.1 is its first use in the chapters written so far; the first chapter that names a script file will define it, and 18.1 will call it. The script's name follows the call, as a file in code style: 'Save this script as `bell.gd`.' Save As writes the script under the new name and the node keeps it, so the file the script had before stays as it was: ch18 replaces the code and saves each new class under its own name. File is the menu of the Script screen (the Script button at the top): Godot's main menu has none, and its Scene menu saves a scene, so 'Choose Save As to keep the old scene' is no step of this (the cues: script, File, .gd)."
+      "note": "2 October 2026: replaces save this script as. Save As copied the open file, so the new file declared the old class_name until its code was typed (Godot: 'Class Field hides a global script class'), and typing the new code into the old file first let a run save over it. A new script starts empty of classes: Godot fills it with its own few lines, which the last step replaces. The file's name follows the call in code style: 'Make a new script `bell.gd`.' The script is then put on the top node by put a script on a node (1.3). 18.1 is its first need in the chapters written so far; a chapter before 18 that makes a second script defines it there, and 18.1 calls it. Save As wordings ('Save the file as `bell2.gd`') describe getting a script under a new name, so they are its synonyms and step phrases: say 'Make a new script'. File is the menu of the Script screen (the Script button at the top); 'Choose Save As to keep the old scene' is no step of this (the cues: script, File, .gd). The editor steps (Script, File, New Script, the name, Create) are NOT verified in a live editor: the checker cannot click."
     },
     {
       "id": "level", "kind": "concept",

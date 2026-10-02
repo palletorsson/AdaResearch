@@ -26,7 +26,7 @@ The form every lesson of the Godot course is written in. Agreed with Palle on 2 
 
 ## Admin is said once
 
-Admin is the scaffolding around the teaching: running the project, adding a node, saving a script under a name.
+Admin is the scaffolding around the teaching: running the project, adding a node, making a new script.
 Agreed with Palle on 2 October 2026: "how to run the project can be described once. after that we can just say run the project."
 
 - An admin procedure is described once, where it is first needed: its name in bold, then its steps.

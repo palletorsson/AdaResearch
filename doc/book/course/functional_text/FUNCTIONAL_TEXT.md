@@ -114,13 +114,13 @@ Everyday words need no listing.
 Names the code declares are its own: `count`, `gap`, `$Ball`.
 They stay in their chapter, like a module's private names.
 A declared name may not spell a later element: `var velocity` in chapter 1 is an error.
-A file the chapter saves is its own: "Save this script as `cup.gd`."
+A file the chapter makes is its own: "Make a new script `cup.gd`."
 A name used across chapters is an entry.
 
 ## 2a Admin is said once
 
 Admin is the scaffolding around the teaching.
-Running the project, adding a node, saving a script under a name.
+Running the project, adding a node, making a script, putting it on a node.
 Palle, 2 October 2026: "how to run the project can be described once. after that we can just say run the project."
 He added: "not everything should be linked back I mean not the teaching of that tutorial but admin".
 
@@ -173,7 +173,7 @@ borrows: base_scene
 If Godot asks for a main scene, choose Select Current.
 ```
 
-An argument in code style may stand between the name and the colon: "**Save this script as** `field.gd`: click Script, at the top."
+An argument in code style may stand between the name and the colon: "**Make a new script** `field.gd`: click Script, at the top."
 After that the text says only the name, as a step line: "Run the project."
 A call may carry what follows: "Run the project: the number climbs."
 A section that calls it lists it in `needs`.
@@ -228,10 +228,23 @@ The admin entries, 2 October 2026:
 
 | entry | defined | calls in ch01 and ch18 |
 |---|---|---|
-| *run the project* | 1.1 | 1.1 (once, after its steps), 1.3, 1.6 (twice), 18.1, 18.3, 18.6 |
+| *run the project* | 1.1 | 1.1 (once, after its steps), 1.3, 1.6 (twice), 18.1 to 18.8, eight |
 | *add a node* | 1.3 | 1.4, 1.7 (and six in 1.3 itself) |
-| *save this script as* | 18.1 | 18.2 to 18.8, seven |
+| *put a script on a node* | 1.3 | 1.3 (once, after its step), 18.1 to 18.8, eight |
+| *make a new script* | 18.1 | 18.2 to 18.8, seven |
 | *run the scene* | `missing` | none |
+
+*Put a script on a node* is a drop from the FileSystem onto the node: "Put `bell.gd` on the top node."
+Its call names the file, `put {file} on`; the page links "Put".
+The word is drop, not drag: *drag* is the force of 7.6.
+*Make a new script* makes the file new: "Make a new script `bell.gd`."
+It replaced *save this script as* on 2 October 2026.
+Save As copied the open file, so the copy declared the old `class_name` until its code was typed.
+Godot then said "Class Field hides a global script class".
+Save As wordings ("Save the file as `bell2.gd`") are its synonyms now: say "Make a new script".
+The editor steps of both are not verified in a live editor: the checker cannot click.
+A supplied scene is dropped the same way, once, in 1.6: one inline line, no admin.
+The walker of 2.5 is the second; it makes that drop an admin, defined at 1.6.
 
 *Run the scene* is F6: the open scene alone, where F5 runs the main scene.
 No section defines it yet: every chapter written so far runs the base scene.
@@ -259,6 +272,19 @@ Each is declared here, once, so the page never has to explain its own markup.
 Round one proposed more (arrows, `enters:`, `from:`, provenance tags).
 Round two measured them: 11–36 % more words, no score moved, and readers stalled where a page used one undeclared.
 They are not devices. A pointer into the course is generated from the taxonomy, never typed.
+
+The checker refuses them, rule `device`, in every prose line, label and heading.
+
+| marker | refused where |
+|---|---|
+| `enters:` `from:` `State:` `Not yet:` `Not here:` | opening the line, in any case |
+| `→` or `->` | opening the line |
+| `[read]` `[run]` `[derived]` | anywhere in the line, bare or as the whole of a code span |
+
+The message: `'enters:': the marker is not a device (FUNCTIONAL_TEXT 2b)`.
+`Restore:` passes.
+Code is no marker: `` `-> void` ``, `` `values[run]` ``, and a fenced block pass.
+A link's words are no tag: `[run](#x)` reads "run".
 
 ## 3 The chapter file
 
@@ -302,11 +328,21 @@ Code options:
 | `parse` | parse it, never run it: a warning, since nothing it shows is checked |
 | `fails` | it must fail to parse (a lesson that breaks on purpose) |
 | `skip` | not code Godot sees: a warning |
+| `on=CharacterBody3D` | the script goes on a node of this class, not on the top node |
 
 A block of statements is wrapped into `func _ready():`.
 A block with `func` or members stays at script level.
 A block with no `extends` takes the last one the book showed.
 None before it is an error.
+
+One convention for scripts, 2 October 2026.
+Every script goes on the top node of the base scene, a `Node3D`.
+There `$Supplied` resolves, and every example runs where the last one ran.
+A script extends `Node3D`, or a class whose chain reaches it: `Bell` extends `Field` extends `Node3D`.
+A body the script shows is made in code, a child: `MeshInstance3D.new()`, then `add_child()`.
+The checker runs each script as the top node.
+A script for another node, `extends MeshInstance3D`, is a `top` error: Godot refuses it there.
+A section whose script goes on another node says so with `on=`.
 A supplied call lives where its `host` says.
 `$Supplied.line(a, b)` reaches the base scene's node `Supplied`.
 `var table := preload("res://supplied/triangle_table.gd")` reaches a supplied script.
@@ -326,9 +362,9 @@ Chapter 1's section 1.3, as the file has it.
 
 ````markdown
 <!-- section 1.3
-needs: position, point, scene_tree, node, editor, Node3D, supplied, func, _ready, $, =, Vector3, run_the_project
+needs: position, point, scene_tree, node, editor, Node3D, supplied, func, _ready, $, =, Vector3, run_the_project, FileSystem
 gives: mesh, shape, body, Inspector, MeshInstance3D, SphereMesh, StaticBody3D, CollisionShape3D, SphereShape3D
-admin: add_a_node
+admin: add_a_node, put_a_script_on_a_node
 borrows: feeler
 -->
 ## 1.3 A position needs a body
@@ -352,7 +388,8 @@ Add a `StaticBody3D` and name it `Solid`.
 Under `Solid`, add a `MeshInstance3D` with a `SphereMesh`.
 Under `Solid`, add a `CollisionShape3D` with a `SphereShape3D`.
 Under the top node, add one more `Node3D`.
-Attach the supplied `contact_probe.gd` to it.
+**Put a script on a node**: drop it from the FileSystem onto the node.
+Put the supplied `contact_probe.gd` on the new `Node3D`.
 It is the feeler, a cyan rod that moves.
 
 **Example 1.1: three stations**
@@ -437,11 +474,13 @@ The source never types one. No concept or term gets a link.
 | f | `hedge` | none of: might, could, possibly, seems, appears to, likely, arguably, somehow, sort of, kind of, tends to, presumably, may be |
 | f | `poetic` | no thing that remembers, dreams, whispers, sings, knows, owns, wants |
 | f | `voice` | warning on we, our, us, I |
+| f | `device` | no marker the page does not declare: `enters:`, `from:`, an arrow, `[run]` ... (2b) |
 | — | `types` | the Types box matches the signatures and the taxonomy's defs |
 | — | `number` | a number a run section states is in its code, a printed line or a claim |
 | g | `code` | each `gdscript` block parses in Godot 4.6 |
 | g | `run` | each block runs headless without an error, and prints what it must |
 | g | `claim` | every claim holds at the end of its run, and every `until` comes true |
+| g | `top` | each run block's script is one the top node, a `Node3D`, can hold (or the node `on=` names) |
 
 Inline code and fenced code are always technical.
 An image's alt text, a link's title and an HTML title are read: the reader sees them.
@@ -469,6 +508,7 @@ Without `--godot`, pass g is skipped, and says so.
 `--keep --workdir <dir>` keeps the scratch Godot project.
 `--quiet-warnings` prints errors only.
 `FT_OFF=admin-again` (an environment variable) switches a rule off, for a test.
+The switches: the seven admin rules of 2a, `device` and `top-node`.
 
 `--sketch` checks the course plan before any chapter exists.
 `code_new` is what a chapter gives.
@@ -529,6 +569,8 @@ A run is finite: an error after the frames, and after any `until`, passes.
 Each `class_name` is declared once per checked run, so the whole book cannot yet be run as one.
 Code runs in a scratch project, without the repository's autoloads.
 Names are global: a chapter's local may not spell any later element.
+The top-node rule knows the node a script goes on; it cannot see the student drop it there.
+An admin's editor steps are text: no run clicks Script, File or New Script.
 An admin's steps said in new words, which no synonym or step phrase holds, pass: "Press the green arrow", "Or press Ctrl+Shift+S" without its "Or".
 "Play it again" passes: the checker cannot tell whether *it* is the scene or a sound.
 "run it" as a call is read as running the project, never as running the scene.
