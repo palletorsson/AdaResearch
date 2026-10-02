@@ -106,7 +106,9 @@ Every section declares a signature.
 
 A section gives only what its lines declare.
 A type it gives needs one declaring line: "A frame is ...", "... is a frame", "frame: ...".
-A code element it gives needs a line that names it.
+A code element it gives needs a line that says what it does: naming is not explaining.
+In round two six of seven readers stalled on `-> void` and `.new()`, which a section listed and never explained.
+The checker sees that the line exists; whether it explains is the reviewer's.
 A section uses only what it needs, gives or borrows.
 Everyday words need no listing.
 Names the code declares are its own: `count`, `gap`, `$Ball`.
@@ -235,6 +237,28 @@ The admin entries, 2 October 2026:
 No section defines it yet: every chapter written so far runs the base scene.
 Its wordings ("press F6", "Run Current Scene", "run only the open scene") are reported as described before any definition.
 The first section that runs a second scene by itself defines it, no earlier than 3.1.
+
+## 2b The page's devices
+
+A chapter uses these devices and no others.
+Each is declared here, once, so the page never has to explain its own markup.
+
+| device | what it is |
+|---|---|
+| `*[...]*` | a figure line: what the picture shows |
+| `**Example N.M: name**` | the caption of a runnable example |
+| a fenced block | code, tagged `gdscript`, `gdshader` or `text` |
+| `1.` `2.` ... | numbered steps, for an algorithm too long for lines |
+| one equation per line | each with its own figure |
+| `**Why**` | a folded box: the one place for compressed prose |
+| `**What it hides**` | a few lines of the critical layer |
+| `Restore:` | after an experiment that changed the code, how to put it back |
+| the **Types** box | the chapter's declared terms, code and supplied parts |
+| `N.x` | the chapter's exercises |
+
+Round one proposed more (arrows, `enters:`, `from:`, provenance tags).
+Round two measured them: 11–36 % more words, no score moved, and readers stalled where a page used one undeclared.
+They are not devices. A pointer into the course is generated from the taxonomy, never typed.
 
 ## 3 The chapter file
 

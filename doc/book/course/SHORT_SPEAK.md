@@ -12,7 +12,8 @@ The form every lesson of the Godot course is written in. Agreed with Palle on 2 
 - Parallel lines may repeat with one change ("Give it a mesh: it shows." / "Give it a shape: it stops things."). That is the only ornament.
 - A section ends on its technical point, not on an image.
 - No filler: just, simply, now, basically, actually, note that, we will, let's, in order to.
-- No hedging and no measurement reports in the lesson. Numbers the student needs stay; caveats and "not checked" go to the README or the teacher notes.
+- No hedging. A measured scope stays, as one plain line: "in our run", "from one seed", "in the editor, not the running game". Long measurement reports and "not checked" lists go to the README or the teacher notes.
+- A decision says who made it: "we chose a tenth", not "a tenth is the threshold".
 - Second person, present tense.
 
 ## Type-safe text
@@ -49,6 +50,20 @@ Run the project: the number climbs.
 
 "Add a `Node3D` named `Here`: a position, nothing else." calls *add a node*. Its steps (the + button, the name) are admin; which node, and why, is the lesson, and stays in the line.
 
+## What compression keeps
+
+Measured on 2 October 2026 by two rounds of compress, unfold, compare (`functional_text/round_trip/REPORT.md`).
+Readers had the lesson open and, in half the cells, the course before it; blind judges scored understanding, not likeness to the original.
+
+- **How short.** A lesson rewritten in this form lands at about half the old prose when the lesson is short, and at 35–45 % when it is long. Half and a third lost no understanding the test could see. Code is shown whole where it is needed and is not counted.
+- **No extra markup.** No arrows, no `enters:`, no `from:`, no provenance tags. Round one proposed eleven such devices; they cost 11–36 % more words and moved no score, and the ones a page did not declare stalled the reader. The text's devices are the ones FUNCTIONAL_TEXT names, and no others.
+- **Two devices stay.** After an experiment that changes the code, one `Restore:` line says how to put it back. A file is shown whole the first time it is met, and wherever the student is told to stop and compare. Each removed a recorded stall.
+- **Cut words, not referents.** A short line keeps the thing its words point at. "Nothing was printed about it", not "nothing printed"; "those 3 came round the ring", not "via the ring".
+- **A contrast states its ranking.** The one misunderstanding in round two came from a paragraph of the original whose contrast implied an order its own table refuted. One claim per line: say which pair is closer, or show the table and say nothing.
+- **Naming is not explaining.** A code element a section introduces gets a line that says what it does. `-> void` and `.new()` were listed and never explained, and six of seven readers stalled on them.
+- **A pointer into the course is never typed by hand.** "From chapter 9" is generated from the taxonomy or left out. The one hand-typed pointer in round two was false, and only readers who had the earlier chapters could see it.
+- **Admin compresses; teaching does not.** An admin step becomes a call (above). A concept taught earlier is used by its name; it is not re-taught, and it is not linked.
+
 ## Example
 
 **1.2 A position needs a body**
@@ -56,7 +71,7 @@ Run the project: the number climbs.
 *[three stations: empty · a sphere · a sphere that stops the feeler]*
 
 A position is three numbers.
-It has no size. Nothing shows.
+It has no size: nothing shows.
 
 ```gdscript
 var spot := Vector3(0, 1.12, 0)
@@ -108,4 +123,4 @@ It stops at one.
 Work that happens once goes in `_ready`.
 Work that changes goes in `_process`.
 
-> **Types** (chapter 1) · *position*: where something is, a `Vector3` · *mesh*: what is seen · *shape*: what is touched · *body*: a node you place · *frame*: one turn of the loop · *variable*: a name for a value
+> **Types** (chapter 1) · *position*: where something is, a `Vector3` · *mesh*: what is seen · *shape*: what is touched · *body*: a node you place · *frame*: one picture Godot draws before it draws the next · *variable*: a name for a value
