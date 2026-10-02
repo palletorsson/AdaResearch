@@ -1,0 +1,301 @@
+[
+  {
+    "op": "add",
+    "id": "delete_a_node",
+    "fields": {
+      "kind": "admin",
+      "forms": {
+        "text": [
+          "delete a node",
+          "deleted a node",
+          "deleting a node",
+          "delete every node"
+        ],
+        "code": []
+      },
+      "def": "Select it, then press Delete.",
+      "introduced_at": "2.1",
+      "synonyms": [
+        "remove {code}"
+      ],
+      "step_phrases": [
+        {
+          "phrase": "Delete",
+          "cues": [
+            "press",
+            "key"
+          ]
+        }
+      ],
+      "calls": [
+        "delete {code}"
+      ],
+      "depends_on": [
+        "scene_tree",
+        "node"
+      ],
+      "note": "2 October 2026, from four student readings of chapters 2 to 5: each chapter began in a scene still holding the last chapter's nodes, and by 2.8, 3.1, 4.4 and 5.1 old bodies stood on the new ones at the origin. 2.1 defines it; 2.1, 3.1, 4.1 and 5.1 open with 'Delete every node you added: keep the base scene's own.' (its text form 'delete every node' makes that line a call, linked like the others); 2.7, 2.8, 4.4, 4.5 and 4.8 call it for one node or a few: 'Delete `Room`.' Its call is 'delete {code}', so a sentence that deletes code must not say 'Delete `x`': 5.5 says 'Take `flip()` out of `_ready`'. 'Restore: delete that line of code.' holds no code span and is no call. The editor step is NOT verified in a live editor."
+    },
+    "why": "Students 2, 3, 4 and 5: leftover nodes from earlier sections and chapters stood over the new figures; deleting a node is admin, so it is defined once and called."
+  },
+  {
+    "op": "add",
+    "id": "action",
+    "fields": {
+      "kind": "concept",
+      "forms": {
+        "text": [
+          "action",
+          "actions"
+        ],
+        "code": []
+      },
+      "def": "A name for one or more keys.",
+      "introduced_at": "2.6",
+      "synonyms": [],
+      "depends_on": [],
+      "note": "2 October 2026, student reading of chapter 2: 'is this key held' was followed by a call that takes an action, and action was never said. 2.6 declares it before is_action_pressed. The sketch never uses the word."
+    },
+    "why": "Student 2: key or action, never defined."
+  },
+  {
+    "op": "update",
+    "id": "is_action_pressed",
+    "fields": {
+      "def": "Is this action's key held down at this moment?",
+      "depends_on": [
+        "Input",
+        "action"
+      ]
+    },
+    "why": "The def asked about a key; the call takes an action."
+  },
+  {
+    "op": "update",
+    "id": "ui_left",
+    "fields": {
+      "depends_on": [
+        "Input",
+        "action"
+      ]
+    },
+    "why": "Its def says action, now an entry."
+  },
+  {
+    "op": "update",
+    "id": "ui_right",
+    "fields": {
+      "depends_on": [
+        "Input",
+        "action"
+      ]
+    },
+    "why": "Its def says action, now an entry."
+  },
+  {
+    "op": "delete",
+    "id": "ui_accept",
+    "why": "Moved to 4.6 (the add below): chapter 2 taught it at 2.6 and no chapter 2 code used it."
+  },
+  {
+    "op": "add",
+    "id": "ui_accept",
+    "fields": {
+      "kind": "godot",
+      "forms": {
+        "text": [],
+        "code": [
+          "ui_accept"
+        ]
+      },
+      "def": "The action that Space and Enter set off.",
+      "introduced_at": "4.6",
+      "synonyms": [],
+      "depends_on": [
+        "Input",
+        "action"
+      ],
+      "note": "2 October 2026, student reading of chapter 2: 2.6 explained it and no code of chapter 2 used it. It moves to 4.6, where Space first reruns a rule; chapter 2's exercise 2 asks for ui_left instead. 4.7 and 18.8 use it after. The sketch never names it. 18.8's own line explaining it again was cut."
+    },
+    "why": "Teach it where code first uses it."
+  },
+  {
+    "op": "update",
+    "id": "base_scene",
+    "fields": {
+      "note": "the course look (palette, sky, light) comes with it; 17.1 and 19.x borrow the Look by name. Merge of chapters 2 to 5 (2 October 2026): its Input Map leaves the arrows (ui_left, ui_right: 2.6) and Space (ui_accept: 4.6, 4.7, 18.8) to the student's code. kit-base binds the arrows to move_left and move_right and Space to pause; the course project must not, or one key does two things. Student readings (same day): every chapter from 2 on opens by deleting the nodes the student added (delete a node, 2.1); the base scene's own nodes stay."
+    },
+    "why": "ui_accept moved to 4.6; the chapter openings now clear the scene."
+  },
+  {
+    "op": "update",
+    "id": "walker",
+    "fields": {
+      "def": "The cyan capsule you steer with W, A, S and D: the visitor.",
+      "note": "first named at 2.5, where its node name, Walker, is said; chapters 17 to 20 borrow it again. Merge of chapters 2 to 5 (2 October 2026): the walker takes the W, A, S and D keys only. 2.6 gives the arrows to the student's own code (ui_left, ui_right) while the walker stands in the scene; kit-base's move_left and move_right also hold the arrow keys, so a course walker built on them moves with the cube. Student reading of chapter 2: 'WASD' was never spelled out."
+    },
+    "why": "Student 2: WASD not spelled out; the node name was never said."
+  },
+  {
+    "op": "update",
+    "id": "length",
+    "fields": {
+      "def": "A `Vector3`'s distance from the origin.",
+      "depends_on": [
+        "Vector3",
+        "origin"
+      ]
+    },
+    "why": "Student 2: 'the distance it spans' spans from where?"
+  },
+  {
+    "op": "update",
+    "id": "else",
+    "fields": {
+      "def": "Runs its block when the `if` at its indent failed.",
+      "depends_on": [
+        "if",
+        "indent"
+      ]
+    },
+    "why": "Student 2: the test before else in 2.4 is not its if; the indent decides."
+  },
+  {
+    "op": "update",
+    "id": "elif",
+    "fields": {
+      "def": "Asks again when the test at its indent failed.",
+      "depends_on": [
+        "indent"
+      ]
+    },
+    "why": "Same as else."
+  },
+  {
+    "op": "update",
+    "id": "cube_scene",
+    "fields": {
+      "def": "A half-metre lime cube: the walker takes it.",
+      "depends_on": [
+        "scene",
+        "walker",
+        "metre"
+      ]
+    },
+    "why": "Student 3: the cube's size was never given, so 0.25 had no reason."
+  },
+  {
+    "op": "update",
+    "id": "tile_scene",
+    "fields": {
+      "def": "A flat metre-square tile, off-white on top, near-black under.",
+      "depends_on": [
+        "metre"
+      ]
+    },
+    "why": "Student 3: the tile's size was never given."
+  },
+  {
+    "op": "update",
+    "id": "collection_record",
+    "fields": {
+      "note": "2 October 2026, chapter 3: moved from 3.2 to 3.4, where the walker first meets the cubes (it flies into the lattice and takes one). The flight region shows it: a 1 per cube, 0 once taken (3.4 says so, after a student read 'one per cube' as either). The supplied walker takes the cube, not the student's code. Chapter 5 opens it only in an exercise."
+    },
+    "why": "Record what 3.4 now says the part shows."
+  },
+  {
+    "op": "update",
+    "id": "cell_at()",
+    "fields": {
+      "def": "Looks for the floor tile standing at an address.",
+      "note": "2 October 2026, chapter 3: moved from 3.6 to 3.8, the first section that changes tiles after they are made (the clock asks every tile again each beat). Opened at 5.3, when arrays arrive. The stub finds the top node's last child standing at x and z, so the floor of 3.8 (tiles at whole metres) answers it; chapter 4 borrows it for the floor cubes of 4.6. Merge of chapters 2 to 5: chapters 3 and 4 both patched the stub, word for word the same; one stub serves 3.8 and 4.6, and chapter 4's op changed nothing. Student readings: 3.8 now says it looks for the tile standing at x, z (a student asked where the tiles were kept), so 5.3's 'looked for' has something to stand on."
+    },
+    "why": "Student 3: how does it find a tile when the code keeps no record?"
+  },
+  {
+    "op": "update",
+    "id": "point_on_canvas()",
+    "fields": {
+      "forms": {
+        "text": [],
+        "code": [
+          "point_on_canvas",
+          "point_on_canvas(nozzle)",
+          "point_on_canvas(position)"
+        ]
+      },
+      "def": "The point on the canvas straight ahead of a position.",
+      "note": "the ray inside is never opened; the call takes the can's position (ray is missing in the taxonomy, so the parameter is not named ray). Student reading of chapter 4: the Types box said point_on_canvas(nozzle) while the text called it with position, and no nozzle appears; the box shows point_on_canvas(position) now. The stub answers straight ahead along -z, where the canvas stands.",
+      "depends_on": [
+        "point",
+        "position"
+      ]
+    },
+    "why": "Student 4: 'nozzle' never appears in the text."
+  },
+  {
+    "op": "update",
+    "id": "set_pixel",
+    "fields": {
+      "def": "Sets the colour of one square of an `Image`."
+    },
+    "why": "Student 5: 'place' did four jobs in chapter 5; an image's place is a square now, like the floor square it lands on."
+  },
+  {
+    "op": "update",
+    "id": "texture_filter",
+    "fields": {
+      "def": "How a texture blends one square into the next."
+    },
+    "why": "Student 5: 'drawn between places' meant nothing."
+  },
+  {
+    "op": "update",
+    "id": "make_a_new_script",
+    "fields": {
+      "def": "Click Script, at the top. Choose File, then New Script. Type the name and choose Create. Replace its code with the code below, then press Ctrl+S.",
+      "note": "2 October 2026: replaces save this script as. Save As copied the open file, so the new file declared the old class_name until its code was typed (Godot: 'Class Field hides a global script class'), and typing the new code into the old file first let a run save over it. A new script starts empty of classes: Godot fills it with its own few lines, which the last step replaces. The file's name follows the call in code style: 'Make a new script `bell.gd`.' The script is then put on the top node by put a script on a node (1.3), or, for a class (4.7, 4.8), made with .new(). 4.7 is its first need: spray_can.gd, the first script that is not the top node's (moved from 18.1 by the chapter 4 writer, as this note foresaw); 18.1 calls it. Save As wordings ('Save the file as `bell2.gd`') describe getting a script under a new name, so they are its synonyms and step phrases: say 'Make a new script'. File is the menu of the Script screen (the Script button at the top); 'Choose Save As to keep the old scene' is no step of this (the cues: script, File, .gd). Student reading of chapter 4: SprayCan.new() in the top node's script shows as an error until spray_can.gd is saved, since Godot learns a class_name when its file is saved; the last step now ends 'then press Ctrl+S'. The editor steps (Script, File, New Script, the name, Create, Ctrl+S) are NOT verified in a live editor: the checker cannot click."
+    },
+    "why": "Student 4: saving was never taught, and the new class is unknown to other scripts until its file is saved."
+  },
+  {
+    "op": "add",
+    "id": "interaction",
+    "fields": {
+      "kind": "plain",
+      "forms": {
+        "text": [
+          "interaction",
+          "interactions"
+        ],
+        "code": []
+      },
+      "def": "Acting on each other.",
+      "introduced_at": "everyday",
+      "synonyms": [],
+      "depends_on": [],
+      "note": "2 October 2026: pinned when action (2.6) became an entry, so 'interaction' (the sketch's chapter 1 head, Albers' Interaction of Color) is no form of it."
+    },
+    "why": "action is an entry now; its derived-form rule read 'interaction' as a form of it."
+  },
+  {
+    "op": "add",
+    "id": "reaction",
+    "fields": {
+      "kind": "plain",
+      "forms": {
+        "text": [
+          "reaction",
+          "reactions"
+        ],
+        "code": []
+      },
+      "def": "What happens in answer to something.",
+      "introduced_at": "everyday",
+      "synonyms": [],
+      "depends_on": [],
+      "note": "2 October 2026: pinned when action (2.6) became an entry, so 'reaction' (12.8, 'the same reaction rule') is no form of it. reaction-diffusion keeps its own entry."
+    },
+    "why": "Same as interaction."
+  }
+]

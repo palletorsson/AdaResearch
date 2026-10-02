@@ -224,7 +224,7 @@ Each rule can be switched off for a test: `FT_OFF=admin-again`.
 The switches: `admin-taxonomy`, `admin-order`, `admin-again`, `admin-define`, `admin-signature`, `admin-calls`, `admin-link`.
 `test_check.py` switches each off and proves its planted fault then passes.
 
-The admin entries, 2 October 2026, after chapters 2 to 5 were merged:
+The admin entries, 2 October 2026, after the student readings of chapters 2 to 5:
 
 | entry | defined | calls in chapters 1 to 5 and 18 |
 |---|---|---|
@@ -232,8 +232,15 @@ The admin entries, 2 October 2026, after chapters 2 to 5 were merged:
 | *add a node* | 1.3 | 19: six in 1.3 itself, then 1.4, 1.7, 2.1, 2.4, 2.7, 2.8, 3.7, 4.3, 4.4 |
 | *put a script on a node* | 1.3 | 1.3 (once, after its step), 18.1 to 18.8 |
 | *add a scene* | 1.6 | 2.5, 3.4 (twice), 5.8 |
+| *delete a node* | 2.1 | 2.1 (once, after its step), 2.7, 2.8, 3.1, 4.1, 4.4, 4.5, 4.8, 5.1 |
 | *make a new script* | 4.7 | 4.8, 18.1 to 18.8 |
 | *run the scene* | `missing` | none |
+
+*Delete a node* opens every chapter from 2 on: "Delete every node you added: keep the base scene's own."
+Four student readers stalled on the same thing: old bodies from the last section or chapter stood on the new ones.
+Its text form *delete every node* makes that line a call; `delete {code}` finds "Delete `Room`."
+So a line that deletes code never says "Delete `x`": "Take `flip()` out of `_ready`".
+*Make a new script* now ends "then press Ctrl+S": Godot learns a `class_name` when its file is saved.
 
 *Put a script on a node* is a drop from the FileSystem onto the node: "Put `bell.gd` on the top node."
 Its call names the file, `put {file} on`; the page links "Put".

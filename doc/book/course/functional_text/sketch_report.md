@@ -8,7 +8,7 @@ python functional_text/check.py --taxonomy taxonomy.json --sketch sketch/sketch.
     --report functional_text/sketch_report.md
 ```
 
-Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 625 entries. Run: 34 errors, 619 warnings.
+Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 629 entries. Run: 34 errors, 622 warnings.
 
 ## Counts
 
@@ -494,7 +494,6 @@ Code a section teaches that the chapter's code_new list leaves out.
 | `-` | 1.8 |  |
 | `/` | 1.8 | the sketch's 1.8 says 'arithmetic': + - * / |
 | `height` | 1.8 | restored from functional/ch01.md; the sketch never names it |
-| `ui_accept` | 2.6 | inferred: 2.6 teaches Input.is_action_pressed(); its action names come with it |
 | `ui_left` | 2.6 | 2.6: the arrows steer the cube while the walker keeps WASD. A Godot default action, so it exists in every project. |
 | `ui_right` | 2.6 | 2.6, beside ui_left. A Godot default action. |
 | quotes | 2.6 | 2 October 2026: chapter 2's 2.6 types the first string literals, the action names "ui_left" and "ui_right". Chapter 3's writer first proposed this entry at 3.1; 2.6 types an action name first, so it stands at 2.6 and chapter 3's patch dropped its copy (merge of chapters 2 to 5). The checker counts every string literal as the entry with the code form ""; String (15.1) teaches text as a value. |
@@ -504,6 +503,7 @@ Code a section teaches that the chapter's code_new list leaves out.
 | `inverted` | 4.2 |  |
 | `SpotLight3D` | 4.3 | taught by 4.3's idea; chapter 4's code_new does not list it |
 | `light_color` | 4.3 | taught by 4.3's idea; chapter 4's code_new does not list it |
+| `ui_accept` | 4.6 | 2 October 2026, student reading of chapter 2: 2.6 explained it and no code of chapter 2 used it. It moves to 4.6, where Space first reruns a rule; chapter 2's exercise 2 asks for ui_left instead. 4.7 and 18.8 use it after. The sketch never names it. 18.8's own line explaining it again was cut. |
 | `new` | 4.1 | 4.1 makes each material in code: StandardMaterial3D.new(). 4.7 names the kind a class and the new one an object: SprayCan.new(). Moved from 4.8 by the chapter 4 writer, 2 October 2026; the old def needed class and object, which 4.7 gives. |
 | `transparency` | 4.8 |  |
 | `TRANSPARENCY_ALPHA` | 4.8 |  |
@@ -536,16 +536,16 @@ Code a section teaches that the chapter's code_new list leaves out.
 | rule | errors | warnings | notes |
 |---|---:|---:|---:|
 | admin | 0 | 2 | 0 |
-| gives | 0 | 99 | 9 |
+| gives | 0 | 100 | 9 |
 | listing | 0 | 57 | 0 |
 | never | 27 | 1 | 0 |
 | order | 7 | 0 | 0 |
 | sense | 0 | 41 | 0 |
 | synonym | 0 | 22 | 0 |
-| taxonomy | 0 | 5 | 0 |
+| taxonomy | 0 | 6 | 0 |
 | twice | 0 | 23 | 0 |
 | unplaced | 0 | 4 | 0 |
-| unused | 0 | 365 | 0 |
+| unused | 0 | 366 | 0 |
 
 `unused` warnings say an element is taught and the sketch's own text never uses it
 again; the chapters will. `gives` and `listing` warnings are about the sketch's lists,

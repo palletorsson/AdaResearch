@@ -54,6 +54,10 @@ Meaning: a workflow resume reuses finished agents only while calls arrive in the
 Score: chapters 1–5 and 18 pass `--godot` at 0 errors, alone and all six in one run; 188 tests pass; the sketch report stays at 34 errors (619 warnings). `taxonomy.json` went from 606 to 625 entries through four chapter patches and one merge patch, all kept in `functional/patches/`.
 Meaning: 50 writer operations applied as written, one found identical across two patches (the `cell_at()` stub), seven merge operations (the lamp's def, `uv_repeat` deleted, five notes). New admin *add a scene* (1.6); *make a new script* moved to 4.7, so 18.1 now calls it. A new code option, `keep=`, shows a member once and lets later sections keep it: chapter 5 fell from 639 to 502 lines with the same prose. The course walker must steer with WASD only, and Space must stay free (`base_scene` and `walker` notes): kit-base binds the arrows and Space.
 
+**R12. Four student readings of chapters 2 to 5, acted on (2 October, late evening).**
+Score: chapters 1–5 and 18 pass `--godot` at 0 errors, alone and in one run (122 warnings, 113 before); the sketch report stays at 34 errors (622 warnings, 619 before); 188 tests pass. `taxonomy.json` 625 → 629 entries through 22 operations (`functional/patches/students_ch02-ch05.taxonomy_patch.json`). Prose words: ch02 1,495 → 1,569, ch03 1,445 → 1,604, ch04 1,837 → 1,994, ch05 1,555 → 1,730.
+Meaning: each stall a reader could act on now has a line, and the price is 5–11 % more prose. All four readers stalled first on the scene: old bodies stood on new ones. New admin *delete a node* (2.1) opens every chapter: "Delete every node you added: keep the base scene's own." New concept *action* (2.6). `ui_accept` moved 2.6 → 4.6, where code first uses it. 3.4 teaches that `*` and `/` come before `+` and `-`, 3.5 that `%` ranks with `*`; 2.2, 4.5 and 4.7 say what `.0` keeps. 3.8 times its beat with a clock, not frames. 5.6 builds the floor's material in `picture()`, which 5.8 keeps.
+
 ---
 
 ## 1 What we are doing
