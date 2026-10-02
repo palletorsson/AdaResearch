@@ -1,0 +1,1516 @@
+{
+ "lesson": "doc/book/studies/cellular/TUTORIAL.md",
+ "chapter": 13,
+ "title": "Rules in time - a row that writes the next row",
+ "after": "The Nature of Code ch. 7 (cellular automata)",
+ "written": "2026-10-02",
+ "purpose": "Atomic claims of the uncompressed lesson, written before compression, so that a compressed and re-unfolded version can be scored for what fails to return.",
+ "kinds": {
+  "fact": 71,
+  "step": 19,
+  "code": 29,
+  "direction": 10,
+  "force": 20,
+  "connection": 26
+ },
+ "claims": [
+  {
+   "id": "C1",
+   "kind": "direction",
+   "text": "Until this chapter a body was built once (a loop ran and the mesh was there); here the body is a history.",
+   "section": "Rules in time (opening)",
+   "key": "hist"
+  },
+  {
+   "id": "C2",
+   "kind": "fact",
+   "text": "One row of cells: each cell is on or off.",
+   "section": "Rules in time (opening)",
+   "key": "row"
+  },
+  {
+   "id": "C3",
+   "kind": "fact",
+   "text": "A rule of eight answers makes the next row from the current one, and the next from that.",
+   "section": "Rules in time (opening)",
+   "key": "rule8"
+  },
+  {
+   "id": "C4",
+   "kind": "fact",
+   "text": "Every row is kept, as a step of a stair you can walk.",
+   "section": "Rules in time (opening)",
+   "key": "kept"
+  },
+  {
+   "id": "C5",
+   "kind": "connection",
+   "text": "The student already has every part from earlier chapters: a packed array, a loop, `%`, a `MultiMesh`, a collider.",
+   "section": "Rules in time (opening)",
+   "key": "parts"
+  },
+  {
+   "id": "C6",
+   "kind": "fact",
+   "text": "One idea is new, the buffer: read from one row, write to another, and then the two change places.",
+   "section": "Rules in time (opening)",
+   "key": "bufnew"
+  },
+  {
+   "id": "C7",
+   "kind": "step",
+   "text": "Start a new project, as at every stop of the course: in the Project Manager choose Import and open this folder's `project.godot`.",
+   "section": "Rules in time (opening)",
+   "key": "import"
+  },
+  {
+   "id": "C8",
+   "kind": "connection",
+   "text": "The hall CA_GameOfLife lays the rows of Rule 30 across a basin as tiles, and says: \"The line can pass through it; your foot would need support.\"",
+   "section": "Rules in time (opening)",
+   "key": "golq"
+  },
+  {
+   "id": "C9",
+   "kind": "connection",
+   "text": "One hall earlier, the board of CA_Introduction shows the loop this lesson is built on and says what it is for: \"An answer written at the left cannot slip into the question being asked at the right.\"",
+   "section": "Rules in time (opening)",
+   "key": "introq"
+  },
+  {
+   "id": "C10",
+   "kind": "fact",
+   "text": "The study takes two sessions: the first builds the stair and ends at Stop here; the second compares four rules on a sheet, runs a second rule on the same step, and walks both.",
+   "section": "Rules in time (opening)",
+   "key": "sessions"
+  },
+  {
+   "id": "C11",
+   "kind": "force",
+   "text": "Every message and number on the page comes from running the study in Godot 4.6; parts marked (editor) describe the editor's windows and were not watched; no headset was used anywhere.",
+   "section": "Rules in time (opening)",
+   "key": "honest"
+  },
+  {
+   "id": "C12",
+   "kind": "step",
+   "text": "A lesson starts in its hall with one question: does the hall show one work at several values of one axis?",
+   "section": "Find the family in the hall",
+   "key": "hallq"
+  },
+  {
+   "id": "C13",
+   "kind": "fact",
+   "text": "Not side by side: the bridge of CA_GameOfLife declares the axis `rule` with four values (30, 90, 110, 250), but the hall stands on one of them; its history study sets Rule 30, fifteen cells across, at most twenty-four rows.",
+   "section": "Find the family in the hall",
+   "key": "golaxis"
+  },
+  {
+   "id": "C14",
+   "kind": "fact",
+   "text": "The CA_Introduction board is placed at Rule 90 and its small panel has buttons for 30, 90, 110 and 184, so a visitor can put four members of the family on one board one after another: a family in time, not on a wall.",
+   "section": "Find the family in the hall",
+   "key": "introboard"
+  },
+  {
+   "id": "C15",
+   "kind": "fact",
+   "text": "Two more works in CA_Introduction declare an axis and stand at one value: the stand that holds the dark sphere, and the sphere.",
+   "section": "Find the family in the hall",
+   "key": "twoworks"
+  },
+  {
+   "id": "C16",
+   "kind": "force",
+   "text": "The hall facts were read from the halls' map files, scripts and the artifact registry; the halls were not walked.",
+   "section": "Find the family in the hall",
+   "key": "notwalked"
+  },
+  {
+   "id": "C17",
+   "kind": "step",
+   "text": "Stand at the bridge and write one prediction down: of 30, 90, 110 and 250, which floor would you least like to cross on foot? Keep it.",
+   "section": "Find the family in the hall",
+   "key": "predict0"
+  },
+  {
+   "id": "C18",
+   "kind": "direction",
+   "text": "The study builds all four rules, so the bridge prediction is carried forward to be tested.",
+   "section": "Find the family in the hall",
+   "key": "buildsall"
+  },
+  {
+   "id": "C19",
+   "kind": "step",
+   "text": "Open the study's README, then `cellular.tscn`.",
+   "section": "Open the study",
+   "key": "open"
+  },
+  {
+   "id": "C20",
+   "kind": "fact",
+   "text": "`cellular.tscn` inherits the supplied base: the violet floor, a sky running from violet down to a pink horizon, the light, and a camera (moved back and up to see the whole floor).",
+   "section": "Open the study",
+   "key": "base"
+  },
+  {
+   "id": "C21",
+   "kind": "fact",
+   "text": "The scene adds two nodes: `Automaton`, an empty `Node3D` at (0, 0, 1.7) that runs `cellular.gd`, and `Walker`, the supplied walker, at the front left.",
+   "section": "Open the study",
+   "key": "nodes"
+  },
+  {
+   "id": "C22",
+   "kind": "force",
+   "text": "The editor's own view shows a white floor and its preview light, because the look is applied by a script only when the scene runs.",
+   "section": "Open the study",
+   "key": "white"
+  },
+  {
+   "id": "C23",
+   "kind": "fact",
+   "text": "Running the finished study: one lime tile at the front, then every quarter of a second a row behind the last one and 0.15 m higher, until eleven rows stand as a triangle with holes rising away; the Output panel prints each row as it is laid.",
+   "section": "Open the study",
+   "key": "finished"
+  },
+  {
+   "id": "C24",
+   "kind": "fact",
+   "text": "`cellular.gd` is the student's own (FileSystem dock, lower left); the download holds the finished version, which the lesson takes apart and builds again.",
+   "section": "Open the study",
+   "key": "ours"
+  },
+  {
+   "id": "C25",
+   "kind": "step",
+   "text": "Replace everything in `cellular.gd` with the one-row script.",
+   "section": "One row",
+   "key": "replace1"
+  },
+  {
+   "id": "C26",
+   "kind": "code",
+   "text": "`extends Node3D` and `const Look := preload(\"res://supplied/look.gd\")`.",
+   "section": "One row",
+   "key": "c_head"
+  },
+  {
+   "id": "C27",
+   "kind": "code",
+   "text": "`@export var n := 17` (cells in a row), `@export var cell := 0.4` (metres: a cell's width and depth), `@export var rise := 0.15` (metres: a tile's thickness, and how much higher the next row stands).",
+   "section": "One row",
+   "key": "c_exp1"
+  },
+  {
+   "id": "C28",
+   "kind": "code",
+   "text": "`var now := PackedByteArray()` (the row we read: one byte per cell, 0 or 1) and `var tile := BoxMesh.new()` (one mesh for every cell).",
+   "section": "One row",
+   "key": "c_vars1"
+  },
+  {
+   "id": "C29",
+   "kind": "code",
+   "text": "`_ready()` sets `tile.size = Vector3(cell * 0.9, rise, cell * 0.9)` and `tile.material = Look.paint(Look.BODY)`, then `now.resize(n)`, `@warning_ignore(\"integer_division\")`, `now[n / 2] = 1`, `lay_row()`.",
+   "section": "One row",
+   "key": "c_ready1"
+  },
+  {
+   "id": "C30",
+   "kind": "code",
+   "text": "`lay_row()` makes a `Node3D` row and a `MultiMesh` with `transform_format = MultiMesh.TRANSFORM_3D`, `mesh = tile`, `instance_count = now.count(1)`, drawn by a `MultiMeshInstance3D` added to the row.",
+   "section": "One row",
+   "key": "c_lay1"
+  },
+  {
+   "id": "C31",
+   "kind": "code",
+   "text": "`lay_row()` loops `for i in n` with a counter `k`; for each live cell it calls `tiles.set_instance_transform(k, Transform3D(Basis(), Vector3(x_of(i), rise / 2.0, 0.0)))` and `k += 1`; it ends with `print(now)`.",
+   "section": "One row",
+   "key": "c_lay1loop"
+  },
+  {
+   "id": "C32",
+   "kind": "code",
+   "text": "`func x_of(i: int) -> float: return (i - (n - 1) / 2.0) * cell`.",
+   "section": "One row",
+   "key": "c_xof"
+  },
+  {
+   "id": "C33",
+   "kind": "fact",
+   "text": "Running it gives one lime tile and one output line: seventeen values, all 0 except a 1 at index 8.",
+   "section": "One row",
+   "key": "out1"
+  },
+  {
+   "id": "C34",
+   "kind": "fact",
+   "text": "`now` is a buffer: seventeen bytes side by side, and nothing else; `resize(n)` makes them, all 0.",
+   "section": "One row",
+   "key": "buffer"
+  },
+  {
+   "id": "C35",
+   "kind": "fact",
+   "text": "17 / 2 is 8 as a whole number; the `@warning_ignore` line above it tells Godot that this is meant.",
+   "section": "One row",
+   "key": "intdiv"
+  },
+  {
+   "id": "C36",
+   "kind": "fact",
+   "text": "The one live cell in the middle is the seed.",
+   "section": "One row",
+   "key": "seed"
+  },
+  {
+   "id": "C37",
+   "kind": "fact",
+   "text": "`lay_row()` turns the buffer into something to see; `count(1)` says how many cells are alive.",
+   "section": "One row",
+   "key": "laysee"
+  },
+  {
+   "id": "C38",
+   "kind": "connection",
+   "text": "The `MultiMesh` is the pendulum chapter's: it draws that many tiles from one mesh.",
+   "section": "One row",
+   "key": "pendulum"
+  },
+  {
+   "id": "C39",
+   "kind": "connection",
+   "text": "`x_of()` is the chessboard chapter's index turned into a place, with the middle cell over the node's middle.",
+   "section": "One row",
+   "key": "chessidx"
+  },
+  {
+   "id": "C40",
+   "kind": "fact",
+   "text": "A cell's next state depends on three cells of the row before: its left neighbour, itself, its right neighbour.",
+   "section": "The rule",
+   "key": "three"
+  },
+  {
+   "id": "C41",
+   "kind": "fact",
+   "text": "Three cells that are each 0 or 1 can stand in eight ways, and a rule gives one answer for each.",
+   "section": "The rule",
+   "key": "eight"
+  },
+  {
+   "id": "C42",
+   "kind": "fact",
+   "text": "Rule 90's table: 111 -> 0, 110 -> 1, 101 -> 0, 100 -> 1, 011 -> 1, 010 -> 0, 001 -> 1, 000 -> 0; read as numbers, the patterns run 7 down to 0.",
+   "section": "The rule",
+   "key": "table90"
+  },
+  {
+   "id": "C43",
+   "kind": "fact",
+   "text": "Read the eight answers as one binary number, 01011010 = 64 + 16 + 8 + 2 = 90: the rule is its own name.",
+   "section": "The rule",
+   "key": "name90"
+  },
+  {
+   "id": "C44",
+   "kind": "code",
+   "text": "`left * 4 + self * 2 + right` is the pattern's number (the table's middle row), and `(rule >> index) & 1` reads the answer.",
+   "section": "The rule",
+   "key": "c_index"
+  },
+  {
+   "id": "C45",
+   "kind": "fact",
+   "text": "`>>` moves the number's binary digits `index` places to the right, and `& 1` keeps the last one.",
+   "section": "The rule",
+   "key": "shift"
+  },
+  {
+   "id": "C46",
+   "kind": "code",
+   "text": "`@export_range(0, 255) var rule := 90` (the eight answers, written as one number) comes first, and `@export var rows := 11` (rows we keep) joins `n`, `cell`, `rise`.",
+   "section": "The rule",
+   "key": "c_exp2"
+  },
+  {
+   "id": "C47",
+   "kind": "code",
+   "text": "`var made := 0` (rows laid so far) is added between `now` and `tile`.",
+   "section": "The rule",
+   "key": "c_made"
+  },
+  {
+   "id": "C48",
+   "kind": "code",
+   "text": "At the end of `_ready()`, under `lay_row()`: `while made < rows: step(); lay_row()`.",
+   "section": "The rule",
+   "key": "c_while1"
+  },
+  {
+   "id": "C49",
+   "kind": "code",
+   "text": "The first `step()`: `for i in n: var index := now[(i - 1 + n) % n] * 4 + now[i] * 2 + now[(i + 1) % n]; now[i] = (rule >> index) & 1`.",
+   "section": "The rule",
+   "key": "c_step1"
+  },
+  {
+   "id": "C50",
+   "kind": "code",
+   "text": "In `lay_row()`, `row.position = Vector3(0.0, 0.0, -made * cell)` comes before `add_child(row)`, so each row lies behind the one before.",
+   "section": "The rule",
+   "key": "c_posz"
+  },
+  {
+   "id": "C51",
+   "kind": "code",
+   "text": "In `lay_row()`, `print(made, \" \", now)` and then `made += 1` replace `print(now)`.",
+   "section": "The rule",
+   "key": "c_print2"
+  },
+  {
+   "id": "C52",
+   "kind": "force",
+   "text": "Before you run, predict row 1.",
+   "section": "The rule",
+   "key": "predictforce"
+  },
+  {
+   "id": "C53",
+   "kind": "fact",
+   "text": "By the Rule 90 table a cell is alive next when exactly one of its two neighbours is alive; the seed's two dead neighbours each have the seed beside them, so row 1 should be two cells with a gap; and since the table treats left and right alike, the floor should be the same on both sides.",
+   "section": "The rule",
+   "key": "predictwhy"
+  },
+  {
+   "id": "C54",
+   "kind": "fact",
+   "text": "The run prints row 1 as ten cells, from one left of the seed to the right end of the row; the floor on screen is a ragged field leaning to the right.",
+   "section": "The rule",
+   "key": "out2"
+  },
+  {
+   "id": "C55",
+   "kind": "force",
+   "text": "Godot printed nothing else, no error and no warning: the code ran exactly as written, and reading a result like this one is ordinary work.",
+   "section": "The rule",
+   "key": "silent"
+  },
+  {
+   "id": "C56",
+   "kind": "fact",
+   "text": "The fault is the last line of `step()`: it writes row 1 into `now` while the loop is still reading row 0 from `now`.",
+   "section": "The rule",
+   "key": "fault"
+  },
+  {
+   "id": "C57",
+   "kind": "fact",
+   "text": "Cell 7 is right (it read cells 6, 7 and 8, all old); cell 8 is wrong, because its left neighbour, cell 7, is already new.",
+   "section": "The rule",
+   "key": "cell78"
+  },
+  {
+   "id": "C58",
+   "kind": "fact",
+   "text": "Every wrong answer becomes the next cell's left neighbour, so the mistake runs to the right end in one step, the way the loop runs.",
+   "section": "The rule",
+   "key": "runsright"
+  },
+  {
+   "id": "C59",
+   "kind": "fact",
+   "text": "Of the floor's 187 cells, 72 differ from their mirror image; Rule 90 should have none.",
+   "section": "The rule",
+   "key": "mirror72"
+  },
+  {
+   "id": "C60",
+   "kind": "direction",
+   "text": "The gap between the row-1 prediction and the output leads to the repair: a second row.",
+   "section": "Two buffers",
+   "key": "repair"
+  },
+  {
+   "id": "C61",
+   "kind": "code",
+   "text": "`var next := PackedByteArray()` (the row we write) under `var now`, and `next.resize(n)` under `now.resize(n)`.",
+   "section": "Two buffers",
+   "key": "c_next"
+  },
+  {
+   "id": "C62",
+   "kind": "code",
+   "text": "The repaired `step()` writes `next[i] = (rule >> index) & 1`, then swaps: `var spare := now`, `now = next`, `next = spare`.",
+   "section": "Two buffers",
+   "key": "c_step2"
+  },
+  {
+   "id": "C63",
+   "kind": "fact",
+   "text": "Run again: row 1 is two cells, as predicted, and the floor is a triangle with triangular holes, Sierpinski's.",
+   "section": "Two buffers",
+   "key": "sierp"
+  },
+  {
+   "id": "C64",
+   "kind": "fact",
+   "text": "Every question now goes to the old row and every answer to the new one.",
+   "section": "Two buffers",
+   "key": "oldnew"
+  },
+  {
+   "id": "C65",
+   "kind": "connection",
+   "text": "The field trip hall CA_EdgeOfChaos says it of its own rule: \"Every cell reads the previous volume.\"",
+   "section": "Two buffers",
+   "key": "edgeq"
+  },
+  {
+   "id": "C66",
+   "kind": "fact",
+   "text": "The swap's three lines make the two names change places and copy no byte: what was written becomes what is read.",
+   "section": "Two buffers",
+   "key": "swap"
+  },
+  {
+   "id": "C67",
+   "kind": "fact",
+   "text": "In row 8 the triangle reaches both ends; in row 9 cell 0 is alive because exactly one of its neighbours was, and that neighbour is cell 16, at the other end.",
+   "section": "The ring",
+   "key": "row9"
+  },
+  {
+   "id": "C68",
+   "kind": "fact",
+   "text": "`(i - 1 + n) % n` is 16 for cell 0.",
+   "section": "The ring",
+   "key": "mod16"
+  },
+  {
+   "id": "C69",
+   "kind": "connection",
+   "text": "`%` is the chessboard chapter's remainder; here it bends the row into a ring, and the hall says of its own board: \"What looks like a line on the desk is a ring to the calculation.\"",
+   "section": "The ring",
+   "key": "ringq"
+  },
+  {
+   "id": "C70",
+   "kind": "force",
+   "text": "A grid has to end somewhere, and a ring is only one choice.",
+   "section": "The ring",
+   "key": "mustend"
+  },
+  {
+   "id": "C71",
+   "kind": "direction",
+   "text": "So the lesson makes the ring visible, as a choice the student can switch.",
+   "section": "The ring",
+   "key": "visible"
+  },
+  {
+   "id": "C72",
+   "kind": "code",
+   "text": "`@export var ring := true` under the `rule` line (the two ends of a row are neighbours; unticked, beyond an end is dead).",
+   "section": "The ring",
+   "key": "c_ring"
+  },
+  {
+   "id": "C73",
+   "kind": "code",
+   "text": "`func cell_at(i: int) -> int: if ring: return now[(i + n) % n]; if i < 0 or i >= n: return 0; return now[i]`, placed above `step()`.",
+   "section": "The ring",
+   "key": "c_cellat"
+  },
+  {
+   "id": "C74",
+   "kind": "code",
+   "text": "In `step()`, `var index := cell_at(i - 1) * 4 + now[i] * 2 + cell_at(i + 1)`.",
+   "section": "The ring",
+   "key": "c_index2"
+  },
+  {
+   "id": "C75",
+   "kind": "step",
+   "text": "Run (the same rows), then change `ring` to false and run again: rows 0 to 8 are the same, and row 9 has live cells only at 1 and 15.",
+   "section": "The ring",
+   "key": "ringoff"
+  },
+  {
+   "id": "C76",
+   "kind": "fact",
+   "text": "The ring floor and the dead-end floor differ on 6 cells, all in the last two rows, at the border.",
+   "section": "The ring",
+   "key": "diff6"
+  },
+  {
+   "id": "C77",
+   "kind": "step",
+   "text": "Set `ring` back to true.",
+   "section": "The ring",
+   "key": "ringback"
+  },
+  {
+   "id": "C78",
+   "kind": "direction",
+   "text": "So far the whole history is made before the first frame; next it is given a pace.",
+   "section": "Rows in time",
+   "key": "pacedir"
+  },
+  {
+   "id": "C79",
+   "kind": "code",
+   "text": "`@export var pace := 0.25` under `ring` (seconds from one row to the next; 0 lays every row at once) and `var clock := 0.0` under `made` (seconds since the last row).",
+   "section": "Rows in time",
+   "key": "c_pace"
+  },
+  {
+   "id": "C80",
+   "kind": "code",
+   "text": "The `_ready()` loop becomes `while pace <= 0.0 and made < rows:`.",
+   "section": "Rows in time",
+   "key": "c_while2"
+  },
+  {
+   "id": "C81",
+   "kind": "code",
+   "text": "`func _process(delta: float)`: return if `pace <= 0.0 or made >= rows`; `clock += delta`; if `clock >= pace`: `clock -= pace`, `step()`, `lay_row()`.",
+   "section": "Rows in time",
+   "key": "c_process"
+  },
+  {
+   "id": "C82",
+   "kind": "code",
+   "text": "`row.position = Vector3(0.0, made * rise, -made * cell)`, so each row stands one `rise` higher than the last.",
+   "section": "Rows in time",
+   "key": "c_posy"
+  },
+  {
+   "id": "C83",
+   "kind": "fact",
+   "text": "The rows arrive one at a time, four a second, each 0.15 m above the one before; in the authors' run all eleven were laid after 2.50 s.",
+   "section": "Rows in time",
+   "key": "fourps"
+  },
+  {
+   "id": "C84",
+   "kind": "fact",
+   "text": "Depth and height now both mean time: the row furthest away and highest up is the latest.",
+   "section": "Rows in time",
+   "key": "time"
+  },
+  {
+   "id": "C85",
+   "kind": "fact",
+   "text": "`clock` saves up `delta`, the time since the last frame; when a quarter of a second is there, one step is taken and what is left over is kept.",
+   "section": "Rows in time",
+   "key": "clock"
+  },
+  {
+   "id": "C86",
+   "kind": "step",
+   "text": "Walk the walker into the stair: D to the right until it stands before the seed, then W.",
+   "section": "A body",
+   "key": "walkin"
+  },
+  {
+   "id": "C87",
+   "kind": "fact",
+   "text": "The walker goes through every tile, on the ground, because the tiles are a `MultiMesh`, there for the eye; the autopilot sent the same way arrived at the far end with its feet at 0.00 m.",
+   "section": "A body",
+   "key": "ghost"
+  },
+  {
+   "id": "C88",
+   "kind": "direction",
+   "text": "So each row gets one body.",
+   "section": "A body",
+   "key": "bodydir"
+  },
+  {
+   "id": "C89",
+   "kind": "code",
+   "text": "The new `lay_row()` makes `row` a `StaticBody3D`, placed at `Vector3(0.0, made * rise, -made * cell)`.",
+   "section": "A body",
+   "key": "c_static"
+  },
+  {
+   "id": "C90",
+   "kind": "code",
+   "text": "`var start := -1` (where the current run of live cells began; -1: in none), the loop `for i in n + 1:`, and `if i < n and now[i] == 1:` lays a tile and sets `start = i` if `start < 0`.",
+   "section": "A body",
+   "key": "c_start"
+  },
+  {
+   "id": "C91",
+   "kind": "code",
+   "text": "`elif start >= 0:` adds to the row a `CollisionShape3D` holding a `BoxShape3D` of size `((i - start) * cell, rise, cell)`, at `((x_of(start) + x_of(i - 1)) / 2.0, rise / 2.0, 0.0)`, then `start = -1`.",
+   "section": "A body",
+   "key": "c_box"
+  },
+  {
+   "id": "C92",
+   "kind": "fact",
+   "text": "The colliders are merged: a run is a stretch of live cells with no gap; `start` remembers where it began, and the first dead cell after it closes the run with one box as long as the run.",
+   "section": "A body",
+   "key": "merged"
+  },
+  {
+   "id": "C93",
+   "kind": "force",
+   "text": "The loop goes one past the end, `n + 1`, so that a run which reaches the last cell is closed too.",
+   "section": "A body",
+   "key": "nplus1"
+  },
+  {
+   "id": "C94",
+   "kind": "fact",
+   "text": "Rule 90 gives 37 tiles and 33 boxes; Rule 30 will give 69 tiles and 31 boxes.",
+   "section": "A body",
+   "key": "counts"
+  },
+  {
+   "id": "C95",
+   "kind": "fact",
+   "text": "Walked again, the walker steps onto the seed and stands 0.15 m up, then stops: row 1 is two tiles with a gap of one cell, 0.4 m, and the walker is 0.6 m wide.",
+   "section": "A body",
+   "key": "stops"
+  },
+  {
+   "id": "C96",
+   "kind": "fact",
+   "text": "End of the first session: `cellular.gd` has seven `@export` lines, five `var` lines and six functions: `_ready`, `_process`, `cell_at`, `step`, `lay_row`, `x_of`.",
+   "section": "Stop here: what we have",
+   "key": "end1"
+  },
+  {
+   "id": "C97",
+   "kind": "step",
+   "text": "Run the study and check three things: eleven rows arrive one by one and rise; the output's row 1 is two cells; the walker stands on the seed.",
+   "section": "Stop here: what we have",
+   "key": "check3"
+  },
+  {
+   "id": "C98",
+   "kind": "fact",
+   "text": "The axis is `rule`, from one live cell; the values are 30, 90, 110 and 250.",
+   "section": "The argument: which rule?",
+   "key": "axis"
+  },
+  {
+   "id": "C99",
+   "kind": "connection",
+   "text": "The argument's axis and four values are the ones the CA_GameOfLife bridge declares; the study builds what the hall shows only one of.",
+   "section": "The argument: which rule?",
+   "key": "axishall"
+  },
+  {
+   "id": "C100",
+   "kind": "step",
+   "text": "Change the rule either by selecting `Automaton` in the Scene dock and setting Rule in the Inspector, or by changing the 90 in the script's first `@export` line.",
+   "section": "The argument: which rule?",
+   "key": "howset"
+  },
+  {
+   "id": "C101",
+   "kind": "force",
+   "text": "Keep to one of the two ways: a value set in the Inspector is saved in the scene and wins over the script's line, silently (with 30 saved in the scene and 90 in the line the floor was Rule 30's, and nothing was printed).",
+   "section": "The argument: which rule?",
+   "key": "oneway"
+  },
+  {
+   "id": "C102",
+   "kind": "force",
+   "text": "Write your prediction before you render: which two of the four floors will look most alike, which are the same on both sides of the middle, and will 90/250 and 30/90 (each two answers apart) be equally alike?",
+   "section": "The argument: which rule?",
+   "key": "predict2"
+  },
+  {
+   "id": "C103",
+   "kind": "fact",
+   "text": "The course outline predicted that 90 and 250 will look most alike (a triangle with Sierpinski's holes and a checker) and that 30 and 110 are both lopsided.",
+   "section": "The argument: which rule?",
+   "key": "outline"
+  },
+  {
+   "id": "C104",
+   "kind": "connection",
+   "text": "`sheet.gd`, run as the README says, makes stills of each floor alone and needs a terminal; it is optional, because the lesson's table is what the run measured.",
+   "section": "The argument: which rule?",
+   "key": "sheet"
+  },
+  {
+   "id": "C105",
+   "kind": "fact",
+   "text": "Pair differences (from above / from the front / cells of 187 / answers of 8): 30-90 12.45% / 7.97% / 46 / 2; 30-110 15.50% / 9.50% / 56 / 3; 30-250 13.24% / 8.06% / 49 / 4; 90-110 15.52% / 11.03% / 58 / 3; 90-250 8.19% / 4.83% / 29 / 2; 110-250 15.92% / 10.96% / 59 / 3; the stills are from 9 m above and 6.5 m in front.",
+   "section": "The argument: which rule?",
+   "key": "pairs"
+  },
+  {
+   "id": "C106",
+   "kind": "fact",
+   "text": "The closest pair is 90 and 250, in every column, so the outline's prediction held: every tile of Rule 90 is also a tile of Rule 250, and the checker is Sierpinski's triangle with its holes filled.",
+   "section": "The argument: which rule?",
+   "key": "closest"
+  },
+  {
+   "id": "C107",
+   "kind": "fact",
+   "text": "Rule 110 is lopsided by weight: 33 tiles left of the middle and 3 right of it, and those 3 came round the ring.",
+   "section": "The argument: which rule?",
+   "key": "r110"
+  },
+  {
+   "id": "C108",
+   "kind": "fact",
+   "text": "Rule 30 is not lopsided by weight (32 left, 30 right); its two sides differ in arrangement, on 48 cells of 187; Rules 90 and 250 differ from their mirror on none.",
+   "section": "The argument: which rule?",
+   "key": "r30"
+  },
+  {
+   "id": "C109",
+   "kind": "force",
+   "text": "Counting the answers that differ does not tell how far apart two floors will be: 30-90 and 90-250 are each two answers apart yet differ on 46 and 29 cells; 30-250 are four apart and closer than three of the pairs that are three apart.",
+   "section": "The argument: which rule?",
+   "key": "bitsnot"
+  },
+  {
+   "id": "C110",
+   "kind": "force",
+   "text": "The claim, as measured: a rule of eight bits decides between a checker, a fractal, a lopsided growth and a disorder, and the eight bits do not say which; it was found out only by running them.",
+   "section": "The argument: which rule?",
+   "key": "claim"
+  },
+  {
+   "id": "C111",
+   "kind": "force",
+   "text": "The sheet is only eleven rows from one seed; two other floors were counted without rendering and 90-250 stayed the closest pair: with dead ends, 27 of 187 cells; on a ring of 33 cells and 17 rows, 70 of 561.",
+   "section": "The argument: which rule?",
+   "key": "scope"
+  },
+  {
+   "id": "C112",
+   "kind": "fact",
+   "text": "The eye's closest pair is not closest for a body: a marble dropped over the middle of row 4 fell to the ground through Rule 90 (0.10 m) and stayed on a tile of Rule 250 (0.85 m).",
+   "section": "The argument: which rule?",
+   "key": "marble"
+  },
+  {
+   "id": "C113",
+   "kind": "direction",
+   "text": "The next intervention would be the cell's size: make `cell` 0.2 m, smaller than the marble is wide, and drop it again; or settle on the one of the four floors your room needs.",
+   "section": "The argument: which rule?",
+   "key": "nextint"
+  },
+  {
+   "id": "C114",
+   "kind": "force",
+   "text": "Either choice, the intervention or settling, is right.",
+   "section": "The argument: which rule?",
+   "key": "either"
+  },
+  {
+   "id": "C115",
+   "kind": "connection",
+   "text": "Write the decision and its reason in the FIELD_NOTE; the authors' note there is an example of the form, not of the answer.",
+   "section": "The argument: which rule?",
+   "key": "fieldnote"
+  },
+  {
+   "id": "C116",
+   "kind": "step",
+   "text": "Open `diffusion.tscn` and press F6, which runs the open scene instead of the project's main scene (the Run Current Scene button, upper right).",
+   "section": "The same step, another rule",
+   "key": "f6"
+  },
+  {
+   "id": "C117",
+   "kind": "fact",
+   "text": "An orange block stands in the middle of the floor with the walker on top; it spreads, hollows, and becomes a square wall that grows outward and settles.",
+   "section": "The same step, another rule",
+   "key": "orange"
+  },
+  {
+   "id": "C118",
+   "kind": "fact",
+   "text": "A cell here holds two numbers instead of one bit, how much it has of substance A and of substance B; the rule is no longer a table.",
+   "section": "The same step, another rule",
+   "key": "twonums"
+  },
+  {
+   "id": "C119",
+   "kind": "fact",
+   "text": "B is made from A where both are present, both spread to their neighbours, A is fed in everywhere and B is taken out.",
+   "section": "The same step, another rule",
+   "key": "abrule"
+  },
+  {
+   "id": "C120",
+   "kind": "connection",
+   "text": "The supplied part of `diffusion.gd` makes four buffers, draws B as tiles and hands the collider B's heights; the step is the part the student writes.",
+   "section": "The same step, another rule",
+   "key": "supplieddiff"
+  },
+  {
+   "id": "C121",
+   "kind": "step",
+   "text": "In `diffusion.gd`, delete `around()` and `step()` and type them again.",
+   "section": "The same step, another rule",
+   "key": "retype"
+  },
+  {
+   "id": "C122",
+   "kind": "code",
+   "text": "`around(buffer, x, z)` reads left `buffer[z * g + (x - 1 + g) % g]`, right `buffer[z * g + (x + 1) % g]`, back `buffer[(z - 1 + g) % g * g + x]`, front `buffer[(z + 1) % g * g + x]`, and returns their sum / 4.0.",
+   "section": "The same step, another rule",
+   "key": "c_around"
+  },
+  {
+   "id": "C123",
+   "kind": "code",
+   "text": "For each cell `i := z * g + x`: `eaten := a[i] * b[i] * b[i]`; `a_next[i] = a[i] + 0.32 * (around(a, x, z) - a[i]) - eaten + feed * (1.0 - a[i])`; `b_next[i] = b[i] + 0.16 * (around(b, x, z) - b[i]) + eaten - (feed + kill) * b[i]`.",
+   "section": "The same step, another rule",
+   "key": "c_gs"
+  },
+  {
+   "id": "C124",
+   "kind": "code",
+   "text": "After the loops, `step()` swaps `a` with `a_next` and `b` with `b_next` through `spare`, and adds 1 to `steps`.",
+   "section": "The same step, another rule",
+   "key": "c_swap2"
+  },
+  {
+   "id": "C125",
+   "kind": "connection",
+   "text": "It is the stair's step, twice: everything is read from `a` and `b`, written to `a_next` and `b_next`, and then swapped.",
+   "section": "The same step, another rule",
+   "key": "twice"
+  },
+  {
+   "id": "C126",
+   "kind": "fact",
+   "text": "The 24 by 24 floor lies in one buffer, row after row: cell (x, z) is number `z * g + x`.",
+   "section": "The same step, another rule",
+   "key": "flat"
+  },
+  {
+   "id": "C127",
+   "kind": "fact",
+   "text": "`around()` is the neighbourhood, the mean of the four cells beside this one, with the same `%` at every edge, so this floor is a ring both ways.",
+   "section": "The same step, another rule",
+   "key": "neigh"
+  },
+  {
+   "id": "C128",
+   "kind": "fact",
+   "text": "Each cell moves towards its neighbourhood mean, B half as fast as A; `eaten` is what B takes from A.",
+   "section": "The same step, another rule",
+   "key": "halfspeed"
+  },
+  {
+   "id": "C129",
+   "kind": "fact",
+   "text": "In the authors' run the most B in one cell was 0.420 after 1000 steps, and 360 of the 576 cells held a tenth or more, which is where `show_b()` begins to draw a tile.",
+   "section": "The same step, another rule",
+   "key": "pool1000"
+  },
+  {
+   "id": "C130",
+   "kind": "fact",
+   "text": "A second pool run beside the first held the same numbers, to the last digit.",
+   "section": "The same step, another rule",
+   "key": "determ"
+  },
+  {
+   "id": "C131",
+   "kind": "connection",
+   "text": "The field trip hall Reaction_Diffusion_Systems has a desk that steps through six pairs of `feed` and `kill`; the kit's pool is one pair.",
+   "section": "The same step, another rule",
+   "key": "rddesk"
+  },
+  {
+   "id": "C132",
+   "kind": "force",
+   "text": "A grid must end: the ring and the dead end differ on 2, 6, 3 and 4 cells for rules 30, 90, 110 and 250, always from row 9 on, always at the border.",
+   "section": "What the floor owes",
+   "key": "mustend2"
+  },
+  {
+   "id": "C133",
+   "kind": "force",
+   "text": "Neither ending is the rule's own: the rule is defined on a row without ends, and no machine has one; the pool wraps too, its wall growing until it meets itself coming round.",
+   "section": "What the floor owes",
+   "key": "notown"
+  },
+  {
+   "id": "C134",
+   "kind": "fact",
+   "text": "Rule 30 looks like chance and has none in it: run twice it gave the same eleven rows, its middle column reading 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0 both times.",
+   "section": "What the floor owes",
+   "key": "r30chance"
+  },
+  {
+   "id": "C135",
+   "kind": "connection",
+   "text": "That middle column has been used as a random number generator: it is the seeds chapter again, since whoever has the rule and the first row has every \"random\" number in advance.",
+   "section": "What the floor owes",
+   "key": "rng"
+  },
+  {
+   "id": "C136",
+   "kind": "fact",
+   "text": "The pool is not Turing's own equations: in 1952 Alan Turing proposed that two substances which react and spread at different speeds could make the spots and stripes of living bodies; the kit uses a later, simpler scheme by Gray and Scott, as the hall's footnote says.",
+   "section": "What the floor owes",
+   "key": "turing"
+  },
+  {
+   "id": "C137",
+   "kind": "connection",
+   "text": "The hall says \"Pattern formation alone has not made a solid that can bear your weight\"; the kit's pool bears weight because of one line that hands B to a collider and one threshold, a tenth, below which a cell counts as nothing.",
+   "section": "What the floor owes",
+   "key": "bearq"
+  },
+  {
+   "id": "C138",
+   "kind": "force",
+   "text": "That line and that threshold are the author's decisions; the pattern has no part in them.",
+   "section": "What the floor owes",
+   "key": "ourdec"
+  },
+  {
+   "id": "C139",
+   "kind": "direction",
+   "text": "The outline carries a question from its Queer 3D reference into the chapter, can twisted rooms transcend power?, and leaves it as a question; the kit shows something smaller: a floor made by its own neighbours' rule, whose author still chose the edge, the seed and what counts as there.",
+   "section": "What the floor owes",
+   "key": "queer"
+  },
+  {
+   "id": "C140",
+   "kind": "connection",
+   "text": "The place this chapter asks for is to stand on the history and walk up Sierpinski's rows.",
+   "section": "Stand on the history",
+   "key": "place"
+  },
+  {
+   "id": "C141",
+   "kind": "fact",
+   "text": "Walker keys: D and W to walk, J to jump, C to look through the walker's eyes.",
+   "section": "Stand on the history",
+   "key": "keys"
+  },
+  {
+   "id": "C142",
+   "kind": "fact",
+   "text": "Autopilot from in front of the seed straight up the middle: Rule 30 climbed six rows to 0.90 m, fell through a gap and was stopped on the ground under row 7 (0.00 m); Rules 90 and 250 stepped onto the seed and were stopped there (0.15 m); Rule 110 arrived on the last row (1.65 m).",
+   "section": "Stand on the history",
+   "key": "walks"
+  },
+  {
+   "id": "C143",
+   "kind": "fact",
+   "text": "Rule 110 keeps its middle column alive in every row, so the middle is a stair; Rules 90 and 250 put two tiles either side of a one-cell gap in row 1, and the walker does not fit between them.",
+   "section": "Stand on the history",
+   "key": "why110"
+  },
+  {
+   "id": "C144",
+   "kind": "fact",
+   "text": "Sierpinski's rows can be walked by their edge, which moves one cell to the left with every row; sent that way the walker arrived on row 8 with its feet at 1.46 m.",
+   "section": "Stand on the history",
+   "key": "edge"
+  },
+  {
+   "id": "C145",
+   "kind": "fact",
+   "text": "The pool moves a body that stands still: the walker started on the seed block at 0.60 m, was lifted to 0.86 m as B rose, and 600 steps later stood on the ground (0.00 m) in the hollow middle with a wall around it, without walking; sent out, it arrived outside with its feet 0.22 m up as it crossed the wall.",
+   "section": "Stand on the history",
+   "key": "poolbody"
+  },
+  {
+   "id": "C146",
+   "kind": "force",
+   "text": "No headset was used and no hand was on the keys: every walk reported was the autopilot's.",
+   "section": "Stand on the history",
+   "key": "autopilot"
+  },
+  {
+   "id": "C147",
+   "kind": "step",
+   "text": "Try `next = now` in `_ready()` in place of `next.resize(n)`: the leaning floor of The rule comes back, row for row.",
+   "section": "Try",
+   "key": "alias"
+  },
+  {
+   "id": "C148",
+   "kind": "fact",
+   "text": "A packed array's name is a handle: `=` gives a second name for the same bytes, so the swap swaps nothing; `next = now.duplicate()` would make a copy.",
+   "section": "Try",
+   "key": "handle"
+  },
+  {
+   "id": "C149",
+   "kind": "step",
+   "text": "Try deleting the swap (the last three lines of `step()`): eleven rows of one tile each, the seed eleven times, because the rule writes into `next` and nobody reads it.",
+   "section": "Try",
+   "key": "noswap"
+  },
+  {
+   "id": "C150",
+   "kind": "step",
+   "text": "Try `rule` at 0, then 255, then 184, with `rows` at 17 and `pace` at 0, changed in the one way chosen for the argument (Inspector or script, not both); in `diffusion.gd` try `feed` 0.035 and `kill` 0.065, which the authors did not render.",
+   "section": "Try",
+   "key": "tryrules"
+  },
+  {
+   "id": "C151",
+   "kind": "fact",
+   "text": "A body made by more than one operation has a recipe; the process strip shows one still after each step, from one standpoint.",
+   "section": "The process",
+   "key": "recipe"
+  },
+  {
+   "id": "C152",
+   "kind": "fact",
+   "text": "The recipe: one row -> the rule, one buffer -> two buffers, swapped -> each row a step up -> a collider for each row -> a walker on the rows -> the same step, diffusing.",
+   "section": "The process",
+   "key": "chain"
+  },
+  {
+   "id": "C153",
+   "kind": "connection",
+   "text": "`sheet.gd` makes the strip and counts what each step holds: tiles 1, 68, 37, 37, 37, 37 and colliders 0, 0, 0, 0, 33, 33 in the first six.",
+   "section": "The process",
+   "key": "stripcount"
+  },
+  {
+   "id": "C154",
+   "kind": "fact",
+   "text": "The last step changed the still most, 15.33%, being another body; of the stair's own steps the faulty rule changed it most (14.51%) and its repair nearly as much (13.26%): in the picture the fault and the fix are the same size.",
+   "section": "The process",
+   "key": "change"
+  },
+  {
+   "id": "C155",
+   "kind": "force",
+   "text": "One step changed the body and not the picture: a collider for each row differs from the step before on 0.00% of the still.",
+   "section": "The process",
+   "key": "invisible"
+  },
+  {
+   "id": "C156",
+   "kind": "step",
+   "text": "Let a rule grow one part of your room over time; keep the rule number.",
+   "section": "In your room",
+   "key": "grow"
+  },
+  {
+   "id": "C157",
+   "kind": "connection",
+   "text": "The body this kit hands to the room is `guests/cellular/`: a small stair 1.53 m wide and deep, 17 rows of Rule 90, a row every 0.8 s, whose script is the student's `cellular.gd` with its colour written out.",
+   "section": "In your room",
+   "key": "guest"
+  },
+  {
+   "id": "C158",
+   "kind": "force",
+   "text": "A guest may name nothing outside its own folder, which is why the guest's script has its colour written out.",
+   "section": "In your room",
+   "key": "guestrule"
+  },
+  {
+   "id": "C159",
+   "kind": "step",
+   "text": "Copy the folder `guests/cellular/` into the room project's `guests/` folder, and add the line `\"res://guests/cellular/cellular.tscn\",` to `GUESTS` in `room.gd`, under the last one.",
+   "section": "In your room",
+   "key": "copyguest"
+  },
+  {
+   "id": "C160",
+   "kind": "fact",
+   "text": "Running the room printed `My room: place 2 is res://guests/cellular/cellular.tscn` and then the rows one by one; the room's walker sent to place 2 arrived 0.08 m from its middle with its feet at 0.32 m, standing on the little stair.",
+   "section": "In your room",
+   "key": "roomrun"
+  },
+  {
+   "id": "C161",
+   "kind": "step",
+   "text": "In the room's copy of `guests/cellular/cellular.gd`, change the 90 in the first `@export` line to a chosen rule (try several first in this kit, where the floor is large), and paste in any `step()` changed here.",
+   "section": "In your room",
+   "key": "ownrule"
+  },
+  {
+   "id": "C162",
+   "kind": "fact",
+   "text": "With 30 set in the authors' copy, the room ran with no error, the rows were Rule 30's, and the walker arrived on the guest as before, 0.08 m from the middle of place 2 with its feet at 0.32 m.",
+   "section": "In your room",
+   "key": "own30"
+  },
+  {
+   "id": "C163",
+   "kind": "step",
+   "text": "Write the rule number in your README with one line on what this rule grows and what it leaves out; hand in the room with its process strip and your field note.",
+   "section": "In your room",
+   "key": "handin"
+  },
+  {
+   "id": "C164",
+   "kind": "connection",
+   "text": "Supplied `supplied/base.tscn` and `look.gd`: the floor, sky and light; used as `Look.paint()`, `Look.BODY`, `Look.THIRD`.",
+   "section": "What we borrowed",
+   "key": "b_look"
+  },
+  {
+   "id": "C165",
+   "kind": "connection",
+   "text": "Supplied `supplied/walker.tscn`: the keys, or `walk_to(points)`; a walk ends \"arrived\", \"blocked\", \"fell\" or \"stopped\".",
+   "section": "What we borrowed",
+   "key": "b_walker"
+  },
+  {
+   "id": "C166",
+   "kind": "connection",
+   "text": "Godot's `PackedByteArray` and `PackedFloat32Array`: used for `resize()`, `fill()`, `count()`, `duplicate()`; a name is a handle to the bytes.",
+   "section": "What we borrowed",
+   "key": "b_packed"
+  },
+  {
+   "id": "C167",
+   "kind": "connection",
+   "text": "`MultiMesh`, from Godot by way of the pendulum chapter: `instance_count`, `set_instance_transform()`.",
+   "section": "What we borrowed",
+   "key": "b_mm"
+  },
+  {
+   "id": "C168",
+   "kind": "connection",
+   "text": "Godot's `StaticBody3D` and `BoxShape3D`: one body for each row, one box for each run.",
+   "section": "What we borrowed",
+   "key": "b_body"
+  },
+  {
+   "id": "C169",
+   "kind": "connection",
+   "text": "`_ready()` and `show_b()` of `diffusion.gd` are supplied: four buffers, B drawn as tiles, and a `HeightMapShape3D` taking one height for each cell; not opened further.",
+   "section": "What we borrowed",
+   "key": "b_diff"
+  },
+  {
+   "id": "C170",
+   "kind": "connection",
+   "text": "The numbers 0.055 and 0.062 are used from Gray and Scott's model.",
+   "section": "What we borrowed",
+   "key": "b_gs"
+  },
+  {
+   "id": "C171",
+   "kind": "connection",
+   "text": "`sheet.gd` is supplied: it photographs the four rules, measures the pairs and makes the strip.",
+   "section": "What we borrowed",
+   "key": "b_sheet"
+  },
+  {
+   "id": "C172",
+   "kind": "fact",
+   "text": "What the student made is `cellular.gd`: a row in a buffer, a rule read from one number, a step that reads one buffer, writes another and swaps them, a choice at the ends, a row laid every quarter of a second, and one body for each row with a box for each run.",
+   "section": "What we borrowed",
+   "key": "made"
+  },
+  {
+   "id": "C173",
+   "kind": "direction",
+   "text": "Carried forward: the buffer and the swap, a rule that is a number, `%` as a ring, a body that is a record of its own making.",
+   "section": "What we carry forward",
+   "key": "carry"
+  },
+  {
+   "id": "C174",
+   "kind": "force",
+   "text": "The habit carried forward: when a floor leans, ask which row the rule was reading.",
+   "section": "What we carry forward",
+   "key": "habit"
+  },
+  {
+   "id": "C175",
+   "kind": "direction",
+   "text": "The next stop, The tree and its mad branch, keeps the idea of a rule applied to its own result and drops the grid: a function that calls itself.",
+   "section": "What we carry forward",
+   "key": "nextstop"
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Rule 90 is called 90. Where does the number come from, and how does the code read one answer out of it?",
+   "answer": "The eight answers of the table, read in the order 111 down to 000, form the binary number 01011010 = 64 + 16 + 8 + 2 = 90: the rule is its own name. The code turns a cell's neighbourhood into the pattern's number with left * 4 + self * 2 + right, then reads the answer with (rule >> index) & 1: >> shifts the binary digits index places right and & 1 keeps the last one.",
+   "claims": [
+    "C42",
+    "C43",
+    "C44",
+    "C45",
+    "C41"
+   ],
+   "kinds": [
+    "fact",
+    "code"
+   ]
+  },
+  {
+   "q": "Write the two lines inside the loop of the finished step() of cellular.gd, and say what the three lines after the loop do.",
+   "answer": "var index := cell_at(i - 1) * 4 + now[i] * 2 + cell_at(i + 1) and next[i] = (rule >> index) & 1. After the loop, var spare := now; now = next; next = spare swaps the two names, so what was written becomes what is read, and no byte is copied.",
+   "claims": [
+    "C74",
+    "C62",
+    "C66"
+   ],
+   "kinds": [
+    "fact",
+    "code"
+   ]
+  },
+  {
+   "q": "With only one buffer, what does row 1 of Rule 90 look like, and exactly why?",
+   "answer": "Ten live cells, from one left of the seed to the right end, and a floor leaning right. The last line of step() writes row 1 into now while the loop still reads row 0 from now: cell 7 reads old cells and is right, but cell 8 reads the already-new cell 7 as its left neighbour, and each wrong answer becomes the next cell's left neighbour, so the error runs right in one step, the way the loop runs. 72 of the 187 cells differ from their mirror image; Rule 90 should have none.",
+   "claims": [
+    "C54",
+    "C56",
+    "C57",
+    "C58",
+    "C59"
+   ],
+   "kinds": [
+    "fact"
+   ]
+  },
+  {
+   "q": "What did you predict for row 1 before running, on what reasoning, and what is the lesson's instruction about when to predict?",
+   "answer": "Two live cells with a one-cell gap, the same on both sides: in Rule 90 a cell is alive next when exactly one of its two neighbours is alive, and the table treats left and right alike. The prediction must be made before running; the mismatch with the output is what leads to the second buffer.",
+   "claims": [
+    "C52",
+    "C53",
+    "C60",
+    "C63"
+   ],
+   "kinds": [
+    "fact",
+    "direction",
+    "force"
+   ]
+  },
+  {
+   "q": "In the Try section you write next = now instead of next.resize(n). What happens, and what does that tell you about a packed array?",
+   "answer": "The leaning floor of The rule comes back, row for row. A packed array's name is a handle: = gives a second name for the same bytes, so the swap swaps nothing. next = now.duplicate() would make a copy.",
+   "claims": [
+    "C147",
+    "C148",
+    "C166"
+   ],
+   "kinds": [
+    "fact",
+    "step",
+    "connection"
+   ]
+  },
+  {
+   "q": "What does cell_at() return with ring true and with ring false, and how much do the two floors differ for Rule 90?",
+   "answer": "With ring true it returns now[(i + n) % n], so beyond one end is the other end (for cell 0 the left neighbour is cell 16). With ring false it returns 0 for i < 0 or i >= n, otherwise now[i]. Rows 0 to 8 are the same; the floors differ on 6 cells, all in the last two rows, at the border.",
+   "claims": [
+    "C73",
+    "C72",
+    "C68",
+    "C67",
+    "C76",
+    "C75"
+   ],
+   "kinds": [
+    "fact",
+    "step",
+    "code"
+   ]
+  },
+  {
+   "q": "How do you change the rule for the argument, and what must you not do?",
+   "answer": "Either select Automaton in the Scene dock and set Rule in the Inspector, or change the 90 in the script's first @export line, but keep to one of the two ways: an Inspector value is saved in the scene and silently wins over the script's line (30 in the scene and 90 in the line gave Rule 30's floor with nothing printed).",
+   "claims": [
+    "C100",
+    "C101",
+    "C150"
+   ],
+   "kinds": [
+    "step",
+    "force"
+   ]
+  },
+  {
+   "q": "Rules 30 and 90 differ in two of their eight answers, and so do 90 and 250. Are the two pairs equally alike? What does the lesson conclude?",
+   "answer": "No. 90 and 250 differ on 29 cells of 187 (the closest pair in every column; every Rule 90 tile is also a Rule 250 tile), while 30 and 90 differ on 46; and 30-250, four answers apart, is closer than three of the three-apart pairs. Counting differing answers does not tell how far apart two floors will be: the eight bits decide between checker, fractal, lopsided growth and disorder but do not say which, and that was found only by running them, on a sheet of eleven rows from one seed.",
+   "claims": [
+    "C105",
+    "C106",
+    "C109",
+    "C110",
+    "C111"
+   ],
+   "kinds": [
+    "fact",
+    "force"
+   ]
+  },
+  {
+   "q": "Why does lay_row() loop to n + 1, and how many tiles and boxes does Rule 90 give?",
+   "answer": "Colliders are merged per run of live cells: start remembers where a run began and the first dead cell after it closes the run with one box as long as the run. Looping one past the end closes a run that reaches the last cell too. Rule 90 gives 37 tiles and 33 boxes (Rule 30: 69 tiles, 31 boxes).",
+   "claims": [
+    "C90",
+    "C91",
+    "C92",
+    "C93",
+    "C94"
+   ],
+   "kinds": [
+    "fact",
+    "code",
+    "force"
+   ]
+  },
+  {
+   "q": "The lesson opens by asking, at the CA_GameOfLife bridge, which floor you would least like to cross on foot. How does the lesson return to that question, why does a body answer it differently from the eye, and what are you then asked to decide?",
+   "answer": "The bridge declares the axis rule with 30, 90, 110 and 250 but the hall stands on Rule 30 only; the study builds all four. A walker (0.6 m wide) is stopped on the seed by Rules 90 and 250, whose row 1 has a 0.4 m gap; Rule 30 drops it under row 7; Rule 110 keeps its middle alive and carries it to the last row at 1.65 m. A marble falls through Rule 90 but stays on Rule 250, so the eye's closest pair is not closest for a body. The next intervention would be cell at 0.2 m, or settle on one floor; either is right, and the decision and reason go in the field note, whose example shows the form, not the answer.",
+   "claims": [
+    "C17",
+    "C18",
+    "C13",
+    "C99",
+    "C95",
+    "C142",
+    "C143",
+    "C112",
+    "C113",
+    "C114",
+    "C115"
+   ],
+   "kinds": [
+    "fact",
+    "step",
+    "direction",
+    "force",
+    "connection"
+   ]
+  },
+  {
+   "q": "What makes the diffusion pool a floor that bears weight, and what does the lesson say that leaves with the author?",
+   "answer": "The supplied part of diffusion.gd hands B's heights to a HeightMapShape3D collider, and show_b() draws a tile only where B is a tenth or more. The hall says pattern formation alone has not made a solid that can bear your weight: the kit's floor bears weight because of that one line and that one threshold, and both are the author's decisions, not the pattern's. The Queer 3D question (can twisted rooms transcend power?) is left open; the kit shows that the author still chose the edge, the seed and what counts as there.",
+   "claims": [
+    "C120",
+    "C169",
+    "C129",
+    "C137",
+    "C138",
+    "C139"
+   ],
+   "kinds": [
+    "fact",
+    "direction",
+    "force",
+    "connection"
+   ]
+  },
+  {
+   "q": "What habit does the lesson carry forward, where did it come from, and what does the next stop keep and drop?",
+   "answer": "When a floor leans, ask which row the rule was reading. It comes from the one-buffer fault, which printed no error or warning (reading such a result is ordinary work), and it is what the CA_Introduction board says the loop is for: an answer written at the left cannot slip into the question at the right. The next stop, The tree and its mad branch, keeps a rule applied to its own result and drops the grid: a function that calls itself.",
+   "claims": [
+    "C174",
+    "C55",
+    "C9",
+    "C173",
+    "C175"
+   ],
+   "kinds": [
+    "direction",
+    "force",
+    "connection"
+   ]
+  },
+  {
+   "q": "How is the diffusion step the same as the stair's step, and how does around() find a cell's neighbours?",
+   "answer": "It is the stair's step, twice: read from a and b, write to a_next and b_next, then swap both. The 24 by 24 floor is one buffer, cell (x, z) at z * g + x; around() takes the mean of the four cells beside it, wrapping every edge with %, so the pool is a ring both ways. B moves towards the mean half as fast as A (0.16 against 0.32), and eaten = a * b * b is what B takes from A.",
+   "claims": [
+    "C125",
+    "C126",
+    "C127",
+    "C122",
+    "C123",
+    "C124",
+    "C128"
+   ],
+   "kinds": [
+    "fact",
+    "code",
+    "connection"
+   ]
+  },
+  {
+   "q": "Rule 30 looks random. Is it, and which earlier chapter does the lesson connect this to?",
+   "answer": "No: it has no chance in it. Run twice it gave the same eleven rows, its middle column 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0 both times. That column has been used as a random number generator; it is the seeds chapter again: whoever has the rule and the first row has every \"random\" number in advance.",
+   "claims": [
+    "C134",
+    "C135"
+   ],
+   "kinds": [
+    "fact",
+    "connection"
+   ]
+  },
+  {
+   "q": "How does the stair you built get into your room, and what rule governs a guest's script?",
+   "answer": "Copy guests/cellular/ (a 1.53 m stair, 17 rows of Rule 90, a row every 0.8 s) into the room's guests/ folder and add \"res://guests/cellular/cellular.tscn\", to GUESTS in room.gd under the last line. A guest may name nothing outside its own folder, so its script is your cellular.gd with the colour written out. Change the 90 to your chosen rule in the room's copy, and write the rule number in the README with what it grows and leaves out.",
+   "claims": [
+    "C157",
+    "C158",
+    "C159",
+    "C160",
+    "C161",
+    "C163"
+   ],
+   "kinds": [
+    "fact",
+    "step",
+    "force",
+    "connection"
+   ]
+  },
+  {
+   "q": "In the process strip, which step changed the body but not the picture, and what does the strip say about the fault and its fix?",
+   "answer": "A collider for each row: 0.00% difference from the step before, though colliders went from 0 to 33. The faulty rule changed the still by 14.51% and its repair by 13.26%: in the picture the fault and the fix are the same size.",
+   "claims": [
+    "C155",
+    "C153",
+    "C154",
+    "C152"
+   ],
+   "kinds": [
+    "fact",
+    "force",
+    "connection"
+   ]
+  }
+ ],
+ "quiz_coverage": {
+  "questions": 16,
+  "kinds_covered": [
+   "fact",
+   "step",
+   "code",
+   "direction",
+   "force",
+   "connection"
+  ],
+  "questions_testing_direction_force_connection_together": [
+   10,
+   11,
+   12
+  ],
+  "claims_tested": 80,
+  "claims_total": 175
+ }
+}

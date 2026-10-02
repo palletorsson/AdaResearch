@@ -1,0 +1,50 @@
+{
+ "about": "Round two (run wf_a7f0e640-19c): which reading condition each judge sheet label stands for. results.json[lesson].judges[j].sheets[].sheet uses these labels; judge index j uses order j. Cells: O = original, A/B = round one L2 (old), C/D = round two L2v2 (new); noctx/ctx = without/with the earlier content.",
+ "cells": [
+  "O-noctx",
+  "O-ctx",
+  "A-old-noctx",
+  "B-old-ctx",
+  "C-new-noctx",
+  "D1-new-ctx",
+  "D2-new-ctx"
+ ],
+ "orders": [
+  [
+   3,
+   6,
+   0,
+   5,
+   1,
+   4,
+   2
+  ],
+  [
+   5,
+   2,
+   4,
+   0,
+   6,
+   1,
+   3
+  ]
+ ],
+ "judge_1": {
+  "S1": "B-old-ctx",
+  "S2": "D2-new-ctx",
+  "S3": "O-noctx",
+  "S4": "D1-new-ctx",
+  "S5": "O-ctx",
+  "S6": "C-new-noctx",
+  "S7": "A-old-noctx"
+ },
+ "judge_2": {
+  "S1": "D1-new-ctx",
+  "S2": "A-old-noctx",
+  "S3": "C-new-noctx",
+  "S4": "O-noctx",
+  "S5": "D2-new-ctx",
+  "S6": "O-ctx",
+  "S7": "B-old-ctx"
+ }
+}
