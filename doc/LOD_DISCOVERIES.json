@@ -768,6 +768,24 @@
       "topic": "release gates",
       "insight": "On Windows never feed git --stdin a Python str with text=True: stdin writes \\r\\n and check-ignore answers nothing. Pass bytes. Bit three breaths running (09-22, 09-23, 09-24).",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-09-25T07:21:33.547429+00:00",
+      "topic": "stranded-work",
+      "insight": "Gate N refills every ~2 days from book sessions' uncommitted probe kits; land after >36h idle + forum check + one-boot check_compile",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-09-29T07:18:18.830602+00:00",
+      "topic": "release gates",
+      "insight": "Gate I tree_state must be asked per anchor FILE: by room, a dirty map_data.json convicted clean critical.md files and hid 5 committed losses (7a5773d04) as live prose",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-10-02T07:20:11.970949+00:00",
+      "topic": "stranded-work",
+      "insight": "A GitHub Desktop branch switch auto-stashes and restores the whole tree (3981b6493, 09-28 11:56->12:01), which resets every file's mtime. Before trusting an age reading, match the file's blob against the stash commits (git log --all). The book JSON (commons/data/book) has been uncommitted since 09-12 and no gate checks it.",
+      "lod": 3
     }
   ]
 }

@@ -1,17 +1,17 @@
 {
   "measurement": {
-    "measured_at": "2026-09-30T14:27:58+02:00",
+    "measured_at": "2026-10-02T09:14:54+02:00",
     "measured_by": "tools/run_release_gates.py",
-    "head": "7f7191b4903ea895e27ca6bfaa4d990fe366ff9a",
-    "head_subject": "chore(gates M,N): land 13 stranded files - 9 registry-reached artifact files + 4 probes",
-    "tree_dirty": 1981,
-    "tree_untracked": 3694,
+    "head": "4213f90860015083f71f495757fbe4226fe71297",
+    "head_subject": "feat(course): ten more long-track kits, the look lesson extended, six kits re-checked",
+    "tree_dirty": 1994,
+    "tree_untracked": 3783,
     "tree_state_detector": "PASS"
   },
   "overall_pass": false,
   "overall_status": "FAIL",
   "enabled_gate_count": 15,
-  "passing_enabled_gate_count": 9,
+  "passing_enabled_gate_count": 8,
   "total_gate_count": 15,
   "command_exit_codes": {
     "sequence_contract": 0,
@@ -19,11 +19,11 @@
     "validate_map_all": 0,
     "audit_lab_chain": 0,
     "validate_museum_templates": 0,
-    "em_autopilot": 0,
+    "em_autopilot": 3,
     "check_map_tokens": 0,
-    "check_prose_reachable": 3,
-    "check_artifacts_reachable": 35,
-    "check_tools_reachable": 4,
+    "check_prose_reachable": 2,
+    "check_artifacts_reachable": 32,
+    "check_tools_reachable": 1,
     "check_cell_types": 0
   },
   "gates": [
@@ -34,7 +34,7 @@
       "metrics": {
         "missing_declared_maps": 0,
         "duplicate_entries_within_sequence": 0,
-        "undeclared_map_folders": 1869
+        "undeclared_map_folders": 1870
       },
       "enabled": true
     },
@@ -57,7 +57,7 @@
       "name": "Map Validation",
       "pass": true,
       "metrics": {
-        "grade_A": 2307,
+        "grade_A": 2308,
         "grade_B": 354,
         "grade_C": 150,
         "grade_F": 0,
@@ -108,17 +108,18 @@
     {
       "id": "F",
       "name": "Museum Walkthrough (autopilot)",
-      "pass": true,
+      "pass": false,
       "metrics": {
-        "museums": 3,
-        "z_reached": 81.0,
-        "goal_z": 81.0,
-        "walked_s": 25.2,
-        "cells_unlearned": 0,
-        "stall_events": 0,
-        "frontier_z": 88,
-        "reason": "",
-        "autopilot_says": "watchdog: first result after 13s | watchdog: child exited 0 after 42s | autopilot: PASS (attempt 1) - 3 museums, z=81.0/81.0, 25.2s walked, 0 cells unlearned, 0 stall events, frontier z=88, reason=none"
+        "museums": -1,
+        "z_reached": -1.0,
+        "goal_z": -1.0,
+        "walked_s": -1.0,
+        "cells_unlearned": -1,
+        "stall_events": -1,
+        "frontier_z": -1,
+        "reason": "contended_builder",
+        "autopilot_says": "autopilot: REFUSED - 1 Godot instance(s) already hold this project (detector=psutil). A second boot either dies on the user:// lock or walks a tree the resident session is still saving into, and its verdict then reads as a fact about the corridor. | pid 37664: C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46 --editor --rendering-driver vulkan",
+        "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
     },
@@ -195,7 +196,7 @@
         "no_registry": 0,
         "broken_body": 0,
         "hero_ghost": 0,
-        "open_not_counted": "empty 117 · stub 60 · elsewhere 46 · no_body 6 · no_subject 48",
+        "open_not_counted": "empty 117 · stub 60 · elsewhere 51 · no_body 6 · no_subject 48",
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
@@ -209,16 +210,16 @@
         "rooms_declared": 1017,
         "rooms_resolved": 937,
         "prose_files": 1469,
-        "prose_tracked": 1466,
-        "unreachable_from_a_clone": 3,
-        "stranded_words": 2715,
-        "age_reading": "every one of these has lain untouched for over 24h (oldest 50.4h). Nobody is mid-sentence: this is finished writing sitting outside the repository.",
+        "prose_tracked": 1467,
+        "unreachable_from_a_clone": 2,
+        "stranded_words": 1724,
+        "age_reading": "every one of these has lain untouched for over 24h (oldest 93.2h). Nobody is mid-sentence: this is finished writing sitting outside the repository.",
         "claimed_in_the_forum": 2,
-        "claimed_reading": "2 of 3 claimed in writing by claude-opus-artifacts -- leave those alone. The other 1 are nobody's: no open thread names them.",
-        "claimed_by": "commons/maps/Color_Context_Placed/field_notes.md -> claude-opus-artifacts (260909-onegs, 21d), claude-chroma (260917-q1h14, 13.2d), claude-chroma (260917-13jf7, 13.1d), commons/maps/Color_Context_Placed/final.md -> claude-opus-artifacts (260909-onegs, 21d), claude-chroma (260917-q1h14, 13.2d), claude-chroma (260917-13jf7, 13.1d)",
-        "unreachable": "commons/maps/Array/technical.md, commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md",
+        "claimed_reading": "2 of 2 claimed in writing by claude-opus-artifacts -- leave those alone. The other 0 are nobody's: no open thread names them.",
+        "claimed_by": "commons/maps/Color_Context_Placed/field_notes.md -> claude-opus-artifacts (260909-onegs, 22.8d), claude-chroma (260917-q1h14, 15d), claude-chroma (260917-13jf7, 14.9d), commons/maps/Color_Context_Placed/final.md -> claude-opus-artifacts (260909-onegs, 22.8d), claude-chroma (260917-q1h14, 15d), claude-chroma (260917-13jf7, 14.9d)",
+        "unreachable": "commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md",
         "declared_case_mismatch": "none",
-        "tree_state": "untracked 3  [untracked: commons/maps/Array/technical.md, commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md]"
+        "tree_state": "untracked 2  [untracked: commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md]"
       },
       "enabled": true
     },
@@ -228,17 +229,17 @@
       "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "artifacts_declared": 2887,
-        "files_checked": 6343,
-        "unreachable_from_a_clone": 35,
-        "rooms_affected": 63,
+        "artifacts_declared": 2890,
+        "files_checked": 6374,
+        "unreachable_from_a_clone": 32,
+        "rooms_affected": 62,
         "absent_from_every_tree": 81,
         "vendored_not_in_repo": 102,
         "ignored_on_purpose": 31,
-        "live_under_24h": 0,
-        "stranded": 4,
-        "landable_today": 4,
-        "floor_reading": "31 gitignored on purpose (a rule decides them, not a commit), 0 touched within 24h (somebody's open buffer), 4 stranded (0 of them claimed in the forum). Landable by an agent today: 4.",
+        "live_under_24h": 1,
+        "stranded": 0,
+        "landable_today": 0,
+        "floor_reading": "31 gitignored on purpose (a rule decides them, not a commit), 1 touched within 24h (somebody's open buffer), 0 stranded (0 of them claimed in the forum). Landable by an agent today: 0.",
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
@@ -249,13 +250,13 @@
       "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "tools_on_disk": 952,
-        "tools_tracked": 946,
-        "unreachable_from_a_clone": 4,
-        "live_uncommitted": 2,
+        "tools_on_disk": 960,
+        "tools_tracked": 951,
+        "unreachable_from_a_clone": 1,
+        "live_uncommitted": 8,
         "ignored_on_purpose": 0,
-        "stranded": "tools/build_tutorial_lineage.py (28h), tools/em_shots.py (50h), tools/probes/hall_portal_navigation.gd (24h), tools/test_tutorial_lineage_preview.py (25h)",
-        "tree_state": "untracked 4  [untracked: tools/build_tutorial_lineage.py, tools/em_shots.py, tools/probes/hall_portal_navigation.gd, tools/test_tutorial_lineage_preview.py]"
+        "stranded": "tools/em_shots.py (93h)",
+        "tree_state": "untracked 1  [untracked: tools/em_shots.py]"
       },
       "enabled": true
     },
@@ -265,8 +266,8 @@
       "pass": true,
       "metrics": {
         "detector_selftest": "PASS",
-        "maps_scanned": 2809,
-        "cells_scanned": 3758446,
+        "maps_scanned": 2810,
+        "cells_scanned": 3760840,
         "non_string_cells": 0,
         "maps_affected": 0,
         "in_working_tree": 0,
@@ -281,17 +282,17 @@
       "total_sequences": 83,
       "declared_entries": 1052,
       "declared_unique_maps": 1013,
-      "map_folders_with_data": 2809,
+      "map_folders_with_data": 2810,
       "duplicate_entries_within_sequence": 0,
       "duplicates_across_sequences": 39,
       "missing_declared_maps": 0,
-      "undeclared_map_folders": 1869,
+      "undeclared_map_folders": 1870,
       "undeclared_prefix_hints": 1065,
       "cross_sequence_prefix_hints": 433
     },
     "artifact_audit_summary": {
-      "total_entries": 3101,
-      "dict_entries": 3101,
+      "total_entries": 3112,
+      "dict_entries": 3112,
       "non_dict_entries": 0,
       "placeholder_entries": 0,
       "missing_scene_path": 0,
@@ -301,12 +302,12 @@
       "unresolved_scene_files": 0,
       "missing_include_in_map_data": 107,
       "missing_map_ready": 101,
-      "missing_map_sequences_field": 356,
+      "missing_map_sequences_field": 366,
       "empty_map_sequences": 839,
       "algorithm_without_curation": 5
     },
     "grade_counts": {
-      "A": 2307,
+      "A": 2308,
       "C": 150,
       "B": 354
     },
@@ -340,11 +341,11 @@
         "| `total_sequences` | 83 |",
         "| `declared_entries` | 1052 |",
         "| `declared_unique_maps` | 1013 |",
-        "| `map_folders_with_data` | 2809 |",
+        "| `map_folders_with_data` | 2810 |",
         "| `duplicate_entries_within_sequence` | 0 |",
         "| `duplicates_across_sequences` | 39 |",
         "| `missing_declared_maps` | 0 |",
-        "| `undeclared_map_folders` | 1869 |",
+        "| `undeclared_map_folders` | 1870 |",
         "| `undeclared_prefix_hints` | 1065 |",
         "| `cross_sequence_prefix_hints` | 433 |",
         "",
@@ -359,8 +360,8 @@
         "",
         "| Metric | Count |",
         "|---|---:|",
-        "| `total_entries` | 3101 |",
-        "| `dict_entries` | 3101 |",
+        "| `total_entries` | 3112 |",
+        "| `dict_entries` | 3112 |",
         "| `non_dict_entries` | 0 |",
         "| `placeholder_entries` | 0 |",
         "| `missing_scene_path` | 0 |",
@@ -370,7 +371,7 @@
         "| `unresolved_scene_files` | 0 |",
         "| `missing_include_in_map_data` | 107 |",
         "| `missing_map_ready` | 101 |",
-        "| `missing_map_sequences_field` | 356 |",
+        "| `missing_map_sequences_field` | 366 |",
         "| `empty_map_sequences` | 839 |",
         "| `algorithm_without_curation` | 5 |"
       ],

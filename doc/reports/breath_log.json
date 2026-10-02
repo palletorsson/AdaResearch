@@ -8322,6 +8322,95 @@
         "doc/reports/improvement_trajectory.json"
       ],
       "duration_minutes": 20
+    },
+    {
+      "breath_id": "2026-09-30T18:50",
+      "mode": "evolve-only",
+      "baseline_avg": 6.08,
+      "post_avg": 6.08,
+      "delta": 0.0,
+      "items_attempted": [
+        "harvest-2026-09-30-morning-breath",
+        "verify-morning-claims-against-tree",
+        "proposal-evidence-check"
+      ],
+      "items_succeeded": [
+        "harvest-2026-09-30-morning-breath",
+        "verify-morning-claims-against-tree",
+        "proposal-evidence-check"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "The scorer now reads 25 sequences, not 24: shaders (spine 12, 2026-09-25) is scored and heads at stage 6 like the rest. randomness is the one COMPLETE sequence. global_avg is still 6.080, so CLAUDE.md's '24 spine sequences' line is one behind.",
+        "The breather's forum heads-ups go unanswered: 260925-aonoc, 260929-hnbzo and 260930-h914x all have 0 replies. That is three for three, but no breath failed on it, so it is a note and not a proposal. A heads-up that lands additions does not need an answer; hnbzo asks the book owner a question and does.",
+        "The morning's commits (7f7191b49 landing, ef2831c3f ledger) are both in HEAD. Five commits today; three came from other sessions (point-zero, point-lines, museum walker probe)."
+      ],
+      "files_changed": [
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "duration_minutes": 8
+    },
+    {
+      "breath_id": "2026-10-02T08:30",
+      "mode": "full",
+      "baseline_avg": 6.08,
+      "post_avg": 6.08,
+      "delta": 0.0,
+      "gates_before": "8/15",
+      "gates_after": "8/15",
+      "items_attempted": [
+        "gate-sweep-for-landable-strays",
+        "gate-K-echo-provenance",
+        "book-json-uncommitted-audit",
+        "stash-3981b6493-provenance",
+        "forum-261002-4pya2-heads-up"
+      ],
+      "items_succeeded": [
+        "gate-sweep-for-landable-strays",
+        "gate-K-echo-provenance",
+        "book-json-uncommitted-audit",
+        "stash-3981b6493-provenance",
+        "forum-261002-4pya2-heads-up"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 5,
+          "succeeded": 5,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "THE BOOK IS UNCOMMITTED AND NO GATE SEES IT. 23 of 26 commons/data/book/*.json are modified, and tiling.json and shaders.json are untracked. Parsed rather than line-diffed (the files are also re-indented), 198 existing wall lines have changed text and ~130 notes changed. Lines added or removed: forces 148->52, color 50->15, boolean_surfaces 4->19. The last book commit is 52c945daf (09-12). Gate L reads prose under maps/, not the book JSON, so the authored truth for what a wall says is the one source no gate checks for reachability.",
+        "THE 09-28 12:01 MTIME IS GITHUB DESKTOP, NOT AN AUTHOR. The working-tree blobs of forces/color/fractals/randomness/array_tutorial are byte-identical to 3981b6493, '!!GitHub_Desktop<palm-scanner-door-entry>', an auto-stash of 41,331 files taken at 11:56 on a branch switch and restored at 12:01. The restore was faithful. This also explains the 09-29 breath's 'checkout/restore-shaped' single mtime on 11 LOST anchors. Every age reading based on mtime (gate L/M/N 'idle Nh') was reset that day. To learn a file's real age, match its blob against the stash commits first.",
+        "GATE K'S 18 ECHOES COME IN TWO KINDS. 8 are 'by: draft' lines (Tutorial_Disco x3, Array x2, Pattern_Disco x3) that exist only in the uncommitted book; HEAD gives those works different text. 10 are 'by: hand' refrains ('Point one.' x6, 'laser,' x2, 'everything is made of triangles' x2). The gate convicts a refrain and a lazy copy the same way. Whether a refrain counts is Palle's call, not a breath's.",
+        "NOTHING LANDABLE TODAY. shaders.json overlaps nothing at HEAD but every line's text is empty, so it is a scaffold with no words to save. tiling.json repeats 4 pearls that HEAD still keeps in color/array_tutorial/symmetry, so landing it alone would put those halls in two chapters. L's 2 files are claimed, M has 0 landable, N's em_shots.py is claimed.",
+        "The 2026-10-01 morning breath landed 7 files (2a1815aae) and posted 261001-4i6c8, but wrote no breath_log row and no breath(...) commit. Its row is missing, not failed. It was not reconstructed here."
+      ],
+      "files_changed": [
+        "doc/reports/breath_baseline_2026-10-02_08-30.json",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/RELEASE_GATES.json",
+        "doc/reports/RELEASE_GATES.md"
+      ],
+      "duration_minutes": 30
     }
   ]
 }
