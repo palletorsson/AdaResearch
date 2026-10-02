@@ -181,6 +181,13 @@
       "note": "restored from functional/ch01.md; the sketch never names it"
     },
     {
+      "id": "built_in_class", "kind": "concept",
+      "forms": {"text": ["built-in class", "built-in classes"], "code": []},
+      "def": "A kind of thing that comes with Godot, like `Node3D`.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["Node3D"],
+      "note": "Palle, 2 October 2026: built-in class belongs among the primitives, explained where the first one appears; the Godot documentation's own term"
+    },
+    {
       "id": "func", "kind": "gdscript",
       "forms": {"text": [], "code": ["func"]},
       "def": "Starts a named block of code.",
@@ -1034,7 +1041,7 @@
     {
       "id": "function", "kind": "concept",
       "forms": {"text": ["function", "functions"], "code": []},
-      "def": "A named block of code that takes values and can answer.",
+      "def": "A named block of code that can return a value.",
       "introduced_at": "4.2", "synonyms": [], "depends_on": [],
       "note": "def changed by the chapter 4 writer, 2 October 2026: _ready and add_piece (4.2) are functions that answer nothing; return is what makes one answer"
     },
@@ -1047,14 +1054,21 @@
     {
       "id": "return", "kind": "gdscript",
       "forms": {"text": [], "code": ["return"]},
-      "def": "Ends a function and hands its answer back.",
-      "introduced_at": "4.2", "synonyms": [], "depends_on": ["function"],
-      "note": "the sketch also says returns for comes back (6.6, chapter 9's title)"
+      "def": "Ends a function and sends a value back.",
+      "introduced_at": "4.2", "synonyms": ["answer", "answers", "answered"], "depends_on": ["function", "call"],
+      "note": "the sketch also says returns for comes back (6.6, chapter 9's title). Palle, 2 October 2026: return, not answer: answer and its forms are forbidden synonyms"
+    },
+    {
+      "id": "void", "kind": "gdscript",
+      "forms": {"text": [], "code": ["void"]},
+      "def": "Marks a function that returns no value.",
+      "introduced_at": "4.2", "synonyms": [], "depends_on": ["function", "return"],
+      "doc": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
     },
     {
       "id": "->", "kind": "gdscript",
       "forms": {"text": [], "code": ["->"]},
-      "def": "Says what kind of value a function answers with.",
+      "def": "Marks what a function returns.",
       "introduced_at": "4.2", "synonyms": [], "depends_on": ["function"]
     },
     {
@@ -1233,7 +1247,7 @@
     {
       "id": "alpha", "kind": "concept",
       "forms": {"text": ["alpha"], "code": []},
-      "def": "A colour's fourth number: how much it covers.",
+      "def": "A colour's fourth number: its opacity.",
       "introduced_at": "4.8", "synonyms": [], "depends_on": ["Color"]
     },
     {
@@ -2309,7 +2323,7 @@
     {
       "id": "ALBEDO", "kind": "godot",
       "forms": {"text": [], "code": ["ALBEDO"]},
-      "def": "The colour a fragment answers with.",
+      "def": "The base colour a fragment sets.",
       "introduced_at": "12.1", "synonyms": [], "depends_on": ["fragment"]
     },
     {
@@ -3133,7 +3147,7 @@
     {
       "id": "add_task", "kind": "godot",
       "forms": {"text": [], "code": ["add_task"]},
-      "def": "Gives a waiting thread a function, and answers a number.",
+      "def": "Runs a function on another thread and returns a task number.",
       "introduced_at": "18.8", "synonyms": [], "depends_on": ["function", "thread"]
     },
     {
@@ -3340,7 +3354,7 @@
     {
       "id": "error", "kind": "maths",
       "forms": {"text": ["error", "errors"], "code": []},
-      "def": "How far an answer is from the right one.",
+      "def": "How far a result is from the right value.",
       "introduced_at": "21.2", "synonyms": [], "depends_on": []
     },
     {
@@ -3421,7 +3435,7 @@
     {
       "id": "hidden_layer", "kind": "concept",
       "forms": {"text": ["hidden layer", "hidden layers"], "code": []},
-      "def": "Weighted sums between the inputs and the answer.",
+      "def": "Weighted sums between the inputs and the result.",
       "introduced_at": "21.6", "synonyms": [], "depends_on": ["weighted_sum", "input"]
     },
     {
@@ -4046,7 +4060,7 @@
     {
       "id": "reaction", "kind": "plain",
       "forms": {"text": ["reaction", "reactions"], "code": []},
-      "def": "What happens in answer to something.",
+      "def": "What happens in response to something.",
       "introduced_at": "everyday", "synonyms": [], "depends_on": [],
       "note": "2 October 2026: pinned when action (2.6) became an entry, so 'reaction' (12.8, 'the same reaction rule') is no form of it. reaction-diffusion keeps its own entry."
     }

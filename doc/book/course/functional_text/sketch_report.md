@@ -8,7 +8,7 @@ python functional_text/check.py --taxonomy taxonomy.json --sketch sketch/sketch.
     --report functional_text/sketch_report.md
 ```
 
-Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 629 entries. Run: 34 errors, 622 warnings.
+Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 631 entries. Run: 34 errors, 641 warnings.
 
 ## Counts
 
@@ -21,7 +21,7 @@ Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 629 entries. Run: 34 e
 | explained by an element taught later (the taxonomy's depends_on) | 2 | 2 |
 | the same word in another sense, declared (not an order break) | 17 | 41 |
 | taught in a chapter's code_new, but no section names it | 4 | - |
-| taught in a section, missing from the chapter's code_new | 57 | - |
+| taught in a section, missing from the chapter's code_new | 58 | - |
 
 A use is one line of the sketch that names the element: a section title, idea or figure,
 an example, an exercise, a project step, or a code_new item. A section `N.x` is chapter N's
@@ -499,6 +499,7 @@ Code a section teaches that the chapter's code_new list leaves out.
 | quotes | 2.6 | 2 October 2026: chapter 2's 2.6 types the first string literals, the action names "ui_left" and "ui_right". Chapter 3's writer first proposed this entry at 3.1; 2.6 types an action name first, so it stands at 2.6 and chapter 3's patch dropped its copy (merge of chapters 2 to 5). The checker counts every string literal as the entry with the code form ""; String (15.1) teaches text as a value. |
 | `$/` | 2.7 | inferred: 2.7 teaches parent and child; $A/B reaches B under A |
 | `StandardMaterial3D` | 4.1 |  |
+| `void` | 4.2 |  |
 | `->` | 4.2 |  |
 | `inverted` | 4.2 |  |
 | `SpotLight3D` | 4.3 | taught by 4.3's idea; chapter 4's code_new does not list it |
@@ -536,16 +537,16 @@ Code a section teaches that the chapter's code_new list leaves out.
 | rule | errors | warnings | notes |
 |---|---:|---:|---:|
 | admin | 0 | 2 | 0 |
-| gives | 0 | 100 | 9 |
-| listing | 0 | 57 | 0 |
+| gives | 0 | 102 | 9 |
+| listing | 0 | 58 | 0 |
 | never | 27 | 1 | 0 |
 | order | 7 | 0 | 0 |
 | sense | 0 | 41 | 0 |
-| synonym | 0 | 22 | 0 |
+| synonym | 0 | 36 | 0 |
 | taxonomy | 0 | 6 | 0 |
 | twice | 0 | 23 | 0 |
 | unplaced | 0 | 4 | 0 |
-| unused | 0 | 366 | 0 |
+| unused | 0 | 368 | 0 |
 
 `unused` warnings say an element is taught and the sketch's own text never uses it
 again; the chapters will. `gives` and `listing` warnings are about the sketch's lists,
