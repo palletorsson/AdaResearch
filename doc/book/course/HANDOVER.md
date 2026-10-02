@@ -35,6 +35,14 @@ What the drift looked like, all found by Palle, all fixed in `3083866fe`:
 
 ---
 
+## 1b. The two anchors (added at the end of the session, after the mistakes above were traced)
+
+Every drift today came from structure or words invented by a model and then copied. Two things outside the model now fix both:
+
+- **Structure: the scaffold, read from the spine.** [scaffold/SCAFFOLD.md](scaffold/SCAFFOLD.md) (data: `scaffold/scaffold.json`, regenerate with `python doc/book/course/scaffold/build_scaffold.py`, dev server needed). One chapter per spine sequence, one hall per map in the sequence's order, and in each hall the works in Palle's own arrangement: his primary works, his named boxes with their works, his notes. 25 chapters, 204 halls, 419 primary works. Palle: "we should have used scaffold from the spine sequence." A chapter is written hall by hall from this, and each primary work is something the student builds, in code. The sketch (`sketch/sketch.json`) did not do this: it took the Learning Processing ladder as its skeleton and pulled works from across halls; treat the sketch as background, the scaffold as the skeleton. The ladder still decides which programming idea arrives when a work first needs it.
+- **Words: Godot's own documentation and editor labels.** The 4.6-stable class reference and the 4.6 editor UI strings are downloaded (with Palle's permission) at `C:/Users/palle/Documents/GitHub/godot_reference_4.6/` (outside the repo). A derived vocabulary (classes, member names, 5,485 UI strings) is `godot_vocabulary_4.6.json` there. Not yet wired into the checker: that is the next mechanical job (every Godot name and every quoted editor label must exist there; Godot entries' definitions derived from the docs).
+- **Bodies are made in code**, from chapter 1 (Palle: "it is all wrong to use the dollar mesh tscn approach"). The `$Name` pattern came from an agent-written chapter-1 seed and the checker's `nodes=` runner, not from Palle or the sketch.
+
 ## 2. What the project is
 
 A Godot 4 course for first-time programmers, inside Ada Research (the VR museum of algorithms). One chapter per spine sequence: 25 chapters. Part I follows the Learning Processing ladder; The Nature of Code follows; case studies (Haeckel's radiolaria and others) come later as extensions.
