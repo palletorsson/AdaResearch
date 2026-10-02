@@ -75,6 +75,16 @@
       ],
       "port": 3001,
       "autoPort": false
+    },
+    {
+      "name": "course-docs",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\site && .venv\\Scripts\\python.exe build_site.py && .venv\\Scripts\\python.exe -m mkdocs serve -a 127.0.0.1:8008"
+      ],
+      "port": 8008,
+      "autoPort": false
     }
   ]
 }

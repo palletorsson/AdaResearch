@@ -1,0 +1,1583 @@
+/* The course look on Material for MkDocs. Dark only.
+   Layout after the s&box documentation: a 285 px tree, a 767 px column, a 232 px
+   "On this page". Colours are the course's own: violet-navy ground, lavender text,
+   hot pink links, acid lime marks, cyan accents. */
+
+:root,
+[data-md-color-scheme="slate"] {
+  --ada-bg: #15112a;
+  --ada-bg-deep: #100c22;
+  --ada-surface: #1c1737;
+  --ada-surface-2: #241e45;
+  --ada-line: #312a5a;
+  --ada-text: #d3cce9;
+  --ada-muted: #aaa2cc;
+  --ada-white: #ffffff;
+  --ada-pink: #ff2e93;
+  --ada-pink-soft: rgba(255, 46, 147, 0.13);
+  --ada-lime: #c6ff3d;
+  --ada-cyan: #22d9ff;
+  --ada-orange: #ff8b1f;
+  --ada-lavender: #9b7bff;
+  --ada-code-bg: #0c0919;
+  --ada-code-strip: #161130;
+  --ada-code-text: #e9e4f8;
+  --ada-code-line: #251e48;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-hue: 250;
+  --md-default-bg-color: var(--ada-bg);
+  --md-default-bg-color--light: rgba(21, 17, 42, 0.54);
+  --md-default-bg-color--lighter: rgba(21, 17, 42, 0.26);
+  --md-default-bg-color--lightest: rgba(21, 17, 42, 0.07);
+  --md-default-fg-color: rgba(233, 228, 248, 0.92);
+  --md-default-fg-color--light: var(--ada-muted);
+  --md-default-fg-color--lighter: rgba(170, 162, 204, 0.42);
+  --md-default-fg-color--lightest: rgba(170, 162, 204, 0.14);
+  --md-primary-fg-color: var(--ada-bg-deep);
+  --md-primary-fg-color--light: var(--ada-surface);
+  --md-primary-fg-color--dark: #0b0818;
+  --md-primary-bg-color: #ffffff;
+  --md-primary-bg-color--light: rgba(255, 255, 255, 0.72);
+  --md-accent-fg-color: #ff5aa9;
+  --md-accent-fg-color--transparent: rgba(255, 46, 147, 0.12);
+  --md-accent-bg-color: var(--ada-bg);
+  --md-accent-bg-color--light: rgba(21, 17, 42, 0.7);
+  --md-typeset-color: var(--ada-text);
+  --md-typeset-a-color: var(--ada-pink);
+  --md-typeset-mark-color: rgba(198, 255, 61, 0.28);
+  --md-typeset-table-color: rgba(170, 162, 204, 0.18);
+  --md-typeset-table-color--light: rgba(170, 162, 204, 0.06);
+  --md-typeset-kbd-color: var(--ada-surface-2);
+  --md-typeset-kbd-accent-color: var(--ada-line);
+  --md-typeset-kbd-border-color: #0b0818;
+  --md-admonition-fg-color: var(--ada-text);
+  --md-admonition-bg-color: var(--ada-surface);
+  --md-footer-fg-color: #ffffff;
+  --md-footer-fg-color--light: var(--ada-muted);
+  /* The copyright line and "Made with": the muted text colour, 8.2:1 on the footer
+     (the 60 % tint it replaces was 3.6:1 at 12.8 px). */
+  --md-footer-fg-color--lighter: var(--ada-muted);
+  --md-footer-bg-color: var(--ada-bg-deep);
+  --md-footer-bg-color--dark: #0b0818;
+  --md-shadow-z1: none;
+  --md-shadow-z2: 0 4px 18px rgba(0, 0, 0, 0.35);
+  --md-shadow-z3: 0 8px 28px rgba(0, 0, 0, 0.45);
+
+  /* Code: near-black violet, highlight colours from the palette. */
+  --md-code-bg-color: var(--ada-code-bg);
+  --md-code-fg-color: var(--ada-code-text);
+  --md-code-hl-color: rgba(255, 46, 147, 0.5);
+  --md-code-hl-color--light: rgba(255, 46, 147, 0.12);
+  --md-code-hl-keyword-color: var(--ada-pink);
+  --md-code-hl-string-color: var(--ada-lime);
+  --md-code-hl-number-color: var(--ada-orange);
+  --md-code-hl-function-color: var(--ada-cyan);
+  --md-code-hl-constant-color: var(--ada-cyan);
+  --md-code-hl-special-color: var(--ada-orange);
+  --md-code-hl-name-color: var(--ada-code-text);
+  --md-code-hl-variable-color: var(--ada-code-text);
+  --md-code-hl-operator-color: #cfc4ff;
+  --md-code-hl-punctuation-color: #bdb4de;
+  --md-code-hl-comment-color: #9d94c4;
+  --md-code-hl-generic-color: var(--ada-cyan);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--ada-bg);
+  color: var(--ada-text);
+}
+
+/* ---------------------------------------------------------------- top bar */
+
+.md-header {
+  background: var(--ada-bg-deep);
+  border-bottom: 1px solid var(--ada-line);
+  box-shadow: none;
+}
+
+.md-header--shadow {
+  box-shadow: none;
+}
+
+.md-header__button.md-logo {
+  padding: 0.3rem;
+  margin-right: 0.2rem;
+}
+
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 34px;
+  width: 34px;
+}
+
+.md-header__title {
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.005em;
+}
+
+.ada-sitelinks {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  margin: 0 12px 0 4px;
+  flex-shrink: 0;
+}
+
+.ada-sitelinks a {
+  color: var(--ada-muted);
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.ada-sitelinks a:hover,
+.ada-sitelinks a:focus-visible {
+  color: #ffffff;
+  background: var(--ada-surface);
+}
+
+.ada-sitelinks a.ada-sitelinks--here {
+  color: #ffffff;
+}
+
+@media screen and (min-width: 76.25em) {
+  .ada-sitelinks {
+    display: flex;
+  }
+  .md-header__title {
+    flex: 0 0 236px;
+    margin-left: 6px;
+    margin-right: 14px;
+  }
+  .md-header__inner .md-search {
+    margin-left: auto;
+  }
+
+  /* A taller bar with a larger mark, nearer the s&box documentation's (about 64 px
+     against Material's 48). Everything that is placed below the bar moves with it:
+     the sticky sidebars and the scroll margin of a linked heading. */
+  .md-header__inner {
+    height: 64px;
+  }
+  .md-header__button.md-logo img,
+  .md-header__button.md-logo svg {
+    height: 44px;
+    width: 44px;
+  }
+  .md-header__button.md-logo {
+    padding: 0.25rem;
+  }
+  .md-header__title {
+    font-size: 18px;
+    height: 64px;
+    line-height: 64px;
+  }
+  .md-sidebar {
+    top: 65px;
+  }
+  .md-typeset :target {
+    --md-scroll-margin: 88px;
+  }
+  .ada-sitelinks a {
+    font-size: 14.5px;
+    padding: 8px 12px;
+  }
+  .md-search__form {
+    height: 38px;
+  }
+}
+
+.md-search__form {
+  background: var(--ada-surface);
+  border: 1px solid var(--ada-line);
+  border-radius: 9px;
+}
+
+.md-search__form:hover {
+  background: var(--ada-surface-2);
+}
+
+.md-search__input {
+  font-size: 14px;
+}
+
+.md-search__input::placeholder,
+.md-search__input + .md-search__icon {
+  color: var(--ada-muted);
+}
+
+[data-md-toggle="search"]:checked ~ .md-header .md-search__form {
+  background: var(--ada-surface);
+  border-radius: 9px 9px 0 0;
+}
+
+/* An open search widens to Material's 34.4rem. With the section links beside it the
+   bar was wider than the window and the page scrolled sideways (67 px at 1440 wide).
+   While searching, the section links step aside. */
+[data-md-toggle="search"]:checked ~ .md-header .ada-sitelinks {
+  display: none;
+}
+
+.md-search__output,
+.md-search__scrollwrap {
+  background: var(--ada-surface);
+}
+
+.md-search-result__meta {
+  background: var(--ada-surface-2);
+  color: var(--ada-muted);
+}
+
+.md-search-result mark {
+  color: var(--ada-pink);
+  background: transparent;
+}
+
+/* ------------------------------------------------------- three columns */
+
+@media screen and (min-width: 76.25em) {
+  .md-main__inner.md-grid {
+    max-width: 1440px;
+    padding: 0 56px 0 16px;
+    box-sizing: border-box;
+    margin-top: 0;
+  }
+  .md-header__inner.md-grid {
+    max-width: 1440px;
+    padding: 0 40px 0 12px;
+    box-sizing: border-box;
+  }
+  .md-sidebar--primary {
+    width: 285px;
+  }
+  .md-sidebar--secondary {
+    width: 232px;
+  }
+  .md-content {
+    max-width: none;
+  }
+  html .md-content > .md-content__inner {
+    margin-left: 44px !important;
+    margin-right: 40px !important;
+    max-width: 767px;
+  }
+  .md-content > .md-path {
+    margin-left: 44px;
+    margin-right: 40px;
+    max-width: 767px;
+  }
+}
+
+@media screen and (min-width: 60em) and (max-width: 76.234375em) {
+  .md-sidebar--secondary {
+    width: 232px;
+  }
+}
+
+/* -------------------------------------------------------- left tree */
+
+.md-nav {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Sticky over the tree. The shadow under it says that rows pass beneath a header:
+   Material scrolls the tree so the current page is in view, and without the shadow
+   the half-hidden row under the box read as a glitch. */
+.ada-filter {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 4px 10px 14px 6px;
+  background: var(--ada-bg);
+  box-shadow: 0 12px 10px -10px rgba(0, 0, 0, 0.75);
+}
+
+/* Phones and tablets: the tree is Material's drawer, whose sections slide in as panels
+   over the top-level list. The box would sit over each panel's first entries, so the
+   drawer goes without it; the search in the bar covers a phone. */
+@media screen and (max-width: 76.234375em) {
+  .ada-filter {
+    display: none;
+  }
+}
+
+.ada-filter__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ada-muted);
+  margin: 2px 0 10px 4px;
+}
+
+.ada-filter__input {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--ada-surface);
+  border: 1px solid var(--ada-line);
+  border-radius: 9px;
+  color: #ffffff;
+  font: inherit;
+  font-size: 13.5px;
+  padding: 8px 12px;
+  outline: none;
+}
+
+.ada-filter__input::placeholder {
+  color: var(--ada-muted);
+}
+
+.ada-filter__input:focus {
+  border-color: var(--ada-pink);
+}
+
+.ada-hide {
+  display: none !important;
+}
+
+/* Read by search and screen readers, not drawn: "(short track, stop 13)" after an H1. */
+.ada-sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-nav--primary > .md-nav__title {
+    display: none;
+  }
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    margin: 0;
+  }
+  .md-sidebar--primary .md-sidebar__inner {
+    padding-right: 8px;
+  }
+}
+
+.md-nav--primary .md-nav__item {
+  padding: 0;
+}
+
+.md-nav--primary .md-nav__link {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0;
+  margin: 1px 0;
+  padding: 6px 10px 6px 8px;
+  border-radius: 8px;
+  color: #cbc4e4;
+  scroll-snap-align: start;
+}
+
+.md-nav--primary .md-nav__link > .md-ellipsis {
+  flex: 1 1 auto;
+}
+
+.md-nav--primary .md-nav__link:hover,
+.md-nav--primary .md-nav__link:focus-visible {
+  color: #ffffff;
+  background: rgba(170, 162, 204, 0.08);
+}
+
+.md-nav--primary .md-nav__link--active,
+.md-nav--primary .md-nav__link--active:hover {
+  color: var(--ada-pink);
+  background: var(--ada-pink-soft);
+  font-weight: 700;
+}
+
+/* A section with an index page: the link and the +/- sit in one row. */
+.md-nav--primary .md-nav__container {
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  gap: 0;
+}
+
+.md-nav--primary .md-nav__container > .md-nav__link {
+  margin: 0;
+}
+
+.md-nav--primary .md-nav__container > a.md-nav__link {
+  flex: 1 1 auto;
+  padding-left: 2px;
+}
+
+.md-nav--primary .md-nav__container > label.md-nav__link {
+  order: -1;
+  flex: 0 0 auto;
+  padding: 6px 2px 6px 8px;
+  border-radius: 8px 0 0 8px;
+}
+
+.md-nav--primary .md-nav__container:has(> a.md-nav__link--active) {
+  background: var(--ada-pink-soft);
+  border-radius: 8px;
+}
+
+.md-nav--primary .md-nav__container > a.md-nav__link--active {
+  background: transparent;
+}
+
+/* + when closed, a minus when open, before the name. On a phone the drawer slides
+   sections in as panels, and keeps Material's own arrow. */
+@media screen and (min-width: 76.25em) {
+  .md-nav--primary .md-nav__icon {
+    order: -1;
+    flex: 0 0 auto;
+    width: 16px;
+    height: 20px;
+    margin: 0 6px 0 0;
+    border-radius: 0;
+  }
+
+  .md-nav--primary .md-nav__icon::after {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    background: none !important;
+    content: "+";
+    display: block;
+    width: 16px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: var(--ada-muted);
+    transform: none !important;
+  }
+
+  .md-nav--primary .md-nav__toggle:checked ~ .md-nav__link .md-nav__icon::after,
+  .md-nav--primary .md-nav__toggle:checked ~ .md-nav__link > .md-nav__icon::after {
+    content: "\2212";
+    color: var(--ada-pink);
+  }
+}
+
+.md-nav--primary .md-nav__item--nested > .md-nav__link {
+  color: #ece7fb;
+}
+
+/* Pages: a small dot where a section has its + or minus. The dot and its margins take
+   exactly the room of the icon and its margins plus the 2 px the section link adds
+   (label 8 + icon 16 + 6 + 2 + link 2 = 34; link 8 + 10 + dot 4 + 12 = 34), so a page's
+   name starts where a section's does, at every level. */
+.md-nav--primary .md-nav__item:not(.md-nav__item--nested) > .md-nav__link::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 4px;
+  height: 4px;
+  margin: 8px 12px 0 10px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.md-nav--primary .md-nav__item:not(.md-nav__item--nested) > .md-nav__link--active::before {
+  opacity: 1;
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-nav--primary .md-nav .md-nav__list {
+    margin-left: 14px;
+    padding-left: 4px;
+    border-left: 1px solid var(--ada-line);
+  }
+  .md-nav--primary .md-nav__item--section {
+    margin: 0;
+  }
+}
+
+/* The drawer on phones and tablets. */
+@media screen and (max-width: 76.234375em) {
+  .md-nav--primary .md-nav__title {
+    background: var(--ada-bg-deep);
+    color: #ffffff;
+  }
+  .md-nav--primary .md-nav__title[for="__drawer"] {
+    background: var(--ada-bg-deep);
+  }
+  .md-nav--primary .md-nav__item {
+    border-top: 1px solid rgba(49, 42, 90, 0.6);
+  }
+  .md-nav--primary .md-nav__link {
+    padding: 10px 14px;
+    margin: 0;
+    border-radius: 0;
+  }
+  .md-nav--primary .md-nav__icon {
+    order: 2;
+    margin: 0 0 0 auto;
+  }
+  .md-nav--primary .md-nav__container > label.md-nav__link {
+    order: 2;
+    border-radius: 0;
+  }
+  .md-sidebar--primary {
+    background: var(--ada-bg);
+  }
+  .md-sidebar--primary .md-nav {
+    background: var(--ada-bg);
+  }
+}
+
+/* ----------------------------------------------------- right column */
+
+.md-nav--secondary {
+  font-size: 13.5px;
+}
+
+.md-nav--secondary .md-nav__title {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13.5px;
+  text-transform: none;
+  letter-spacing: 0;
+  /* Opaque, with the filter box's shadow under it: a long "On this page" scrolls under
+     its sticky title. */
+  background: var(--ada-bg);
+  box-shadow: 0 10px 8px -10px rgba(0, 0, 0, 0.75);
+  padding: 4px 0 10px 12px;
+}
+
+.md-nav--secondary .md-nav__link {
+  color: var(--ada-muted);
+  padding: 2px 12px;
+  margin: 4px 0;
+}
+
+.md-nav--secondary .md-nav__link:hover {
+  color: #ffffff;
+}
+
+.md-nav--secondary .md-nav__link--active,
+.md-nav--secondary .md-nav__link--passed.md-nav__link--active {
+  color: var(--ada-pink);
+}
+
+.md-nav--secondary .md-nav__link--passed {
+  color: rgba(170, 162, 204, 0.75);
+}
+
+@media screen and (min-width: 60em) {
+  .md-nav--secondary > .md-nav__list {
+    border-left: 1px solid var(--ada-line);
+  }
+}
+
+/* ------------------------------------------------------- breadcrumb */
+
+.md-path {
+  font-size: 13px;
+  margin-top: 26px;
+  color: var(--ada-muted);
+}
+
+.md-path__item:not(:first-child)::before {
+  background-color: var(--ada-muted);
+}
+
+.md-path__link {
+  color: var(--ada-muted);
+}
+
+.md-path__link:hover {
+  color: var(--ada-pink);
+}
+
+/* ---------------------------------------------------------- the text */
+
+.md-typeset {
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--ada-text);
+}
+
+.md-content__inner {
+  padding-top: 6px;
+}
+
+/* A top-level page has no breadcrumb: give its title the same room. */
+.md-content > article.md-content__inner:first-child {
+  padding-top: 34px;
+}
+
+.md-content__inner > :first-child {
+  margin-top: 0;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+
+.md-typeset h1 {
+  font-size: 40px;
+  line-height: 1.2;
+  margin: 6px 0 18px;
+  color: #ffffff;
+}
+
+.md-typeset h2 {
+  font-size: 24px;
+  line-height: 1.35;
+  margin: 2em 0 0.7em;
+}
+
+.md-typeset h3 {
+  font-size: 19.5px;
+  line-height: 1.4;
+  margin: 1.6em 0 0.6em;
+}
+
+.md-typeset h4 {
+  font-size: 17px;
+}
+
+.md-typeset p,
+.md-typeset ul,
+.md-typeset ol {
+  margin-block: 0 1em;
+}
+
+.md-typeset strong {
+  color: #f1edfc;
+}
+
+.md-typeset a {
+  color: var(--ada-pink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 46, 147, 0.35);
+}
+
+.md-typeset a:hover,
+.md-typeset a:focus-visible {
+  color: #ff5aa9;
+  border-bottom-color: #ff5aa9;
+}
+
+.md-typeset a.headerlink {
+  border-bottom: none;
+  color: var(--ada-line);
+}
+
+.md-typeset a.headerlink:hover {
+  color: var(--ada-pink);
+}
+
+.md-typeset .lead,
+.md-typeset p.lead {
+  font-size: 19.5px;
+  line-height: 1.7;
+  color: #e3ddf5;
+}
+
+.md-typeset hr {
+  border-bottom-color: var(--ada-line);
+}
+
+.md-typeset blockquote {
+  border-left: 3px solid var(--ada-lavender);
+  color: #ddd6f2;
+  padding-left: 18px;
+}
+
+.md-typeset ::selection {
+  background: rgba(255, 46, 147, 0.35);
+  color: #ffffff;
+}
+
+/* Inline code */
+.md-typeset code {
+  font-family: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+}
+
+.md-typeset :not(pre) > code {
+  font-size: 0.84em;
+  color: #ece6ff;
+  background: rgba(155, 123, 255, 0.16);
+  border-radius: 5px;
+  padding: 0.1em 0.36em;
+  word-break: break-word;
+}
+
+.md-typeset a > code {
+  color: inherit;
+  background: var(--ada-pink-soft);
+}
+
+/* Code blocks. As in the s&box documentation, every block has a strip along its top
+   with the language on the left and Copy on the right, so the copy button sits above
+   the first line instead of over it. The strip is the code element's own background
+   (it stays put when a long line is scrolled sideways); the label is the pre's ::before. */
+.md-typeset pre {
+  margin: 1.1em 0 1.4em;
+  --ada-strip: 36px;
+}
+
+.md-typeset pre > code {
+  font-size: 14.5px;
+  line-height: 1.62;
+  tab-size: 4;
+  -moz-tab-size: 4;
+  padding: calc(var(--ada-strip) + 14px) 20px 16px;
+  border: 1px solid var(--ada-code-line);
+  border-radius: 10px;
+  background:
+    linear-gradient(to bottom,
+      var(--ada-code-strip) 0 var(--ada-strip),
+      var(--ada-code-line) var(--ada-strip) calc(var(--ada-strip) + 1px),
+      var(--ada-code-bg) calc(var(--ada-strip) + 1px));
+  color: var(--ada-code-text);
+  /* A thumb that can be seen: the muted text colour at 55 % (it was the border colour,
+     1.5:1 on the block). */
+  scrollbar-color: rgba(170, 162, 204, 0.55) transparent;
+}
+
+.md-typeset pre > code:hover {
+  scrollbar-color: rgba(170, 162, 204, 0.8) transparent;
+}
+
+.md-typeset .highlight > pre::before {
+  content: "Code";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  z-index: 1;
+  height: var(--ada-strip);
+  line-height: var(--ada-strip);
+  padding-left: 19px;
+  font-family: var(--md-text-font-family), sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ada-muted);
+  pointer-events: none;
+}
+
+.md-typeset .language-gdscript > pre::before {
+  content: "GDScript";
+}
+
+.md-typeset .language-glsl > pre::before {
+  content: "Shader";
+}
+
+.md-typeset .language-text > pre::before {
+  content: "Text";
+}
+
+/* Material 9.7's copy button lives in .md-code__nav, top right of the pre. Centred in
+   the strip, and given the word as well as the icon. */
+.md-typeset .md-code__nav {
+  top: 1px;
+  right: 1px;
+  height: var(--ada-strip);
+  align-items: center;
+  padding: 0 8px;
+  background: transparent !important;
+}
+
+.md-typeset .md-code__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: 6px;
+  color: var(--ada-muted);
+  font-family: var(--md-text-font-family), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.md-typeset .md-code__button[data-md-type="copy"]::before {
+  content: "Copy";
+}
+
+.md-typeset .md-code__button::after {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+}
+
+:hover > * > .md-code__button {
+  color: var(--ada-muted);
+}
+
+.md-typeset .md-code__button:hover,
+.md-typeset .md-code__button.focus-visible {
+  color: var(--ada-pink);
+  background: rgba(255, 46, 147, 0.1);
+}
+
+/* A long line runs past the block's edge: a fade on the right says there is more.
+   ada.js sets .ada-more while the block can still scroll right. */
+.md-typeset pre.ada-more::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--ada-strip) + 2px);
+  right: 1px;
+  bottom: 1px;
+  width: 56px;
+  border-radius: 0 9px 9px 0;
+  background: linear-gradient(to right, rgba(12, 9, 25, 0), var(--ada-code-bg) 85%);
+  pointer-events: none;
+}
+
+.md-typeset .highlight span.filename {
+  background: var(--ada-surface-2);
+  color: var(--ada-muted);
+}
+
+.md-typeset .highlight .c,
+.md-typeset .highlight .c1,
+.md-typeset .highlight .cm {
+  font-style: italic;
+}
+
+.md-typeset .highlight .err {
+  color: var(--ada-orange);
+  background: none;
+  border: none;
+}
+
+.md-typeset .highlight .nb.nb-Type,
+.md-typeset .highlight .kt {
+  color: var(--ada-lavender);
+}
+
+.md-typeset .highlight .nb {
+  color: var(--ada-cyan);
+}
+
+.md-typeset .highlight .bp,
+.md-typeset .highlight .kc {
+  color: var(--ada-orange);
+}
+
+.md-typeset .highlight .si {
+  color: var(--ada-orange);
+}
+
+/* Tables */
+.md-typeset table:not([class]) {
+  font-size: 14.5px;
+  line-height: 1.55;
+  background: var(--ada-surface);
+  border: 1px solid var(--ada-line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--ada-surface-2);
+  color: #ffffff;
+  font-weight: 700;
+  min-width: 0;
+}
+
+.md-typeset table:not([class]) td {
+  border-top: 1px solid var(--ada-line);
+  vertical-align: top;
+}
+
+.md-typeset table:not([class]) tr:hover {
+  background: rgba(170, 162, 204, 0.05);
+  box-shadow: none;
+}
+
+/* The teachers' outline: 46 rows, six columns. The chapter column gets room for its
+   title and the short-track tag, hall names stay on one line, the part is a plain
+   number, and the page takes the width of the hidden right column (below). */
+.md-typeset .outline-table .md-typeset__table,
+.md-typeset .outline-table table:not([class]) {
+  display: table;
+  width: 100%;
+}
+
+.md-typeset .outline-table td:nth-child(2) {
+  min-width: 16em;
+}
+
+/* The columns after the title shrink to their content; the title takes the rest. A
+   heading may wrap ("Prediction / held"); the cells do not. */
+.md-typeset .outline-table td:nth-child(n+3),
+.md-typeset .outline-table th:nth-child(n+3) {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.md-typeset .outline-table th:nth-child(n+3) {
+  white-space: normal;
+}
+
+/* A hall name stays on one line. The generator puts one break opportunity in a name
+   longer than 30 characters (SpeculativeComputation_ / Collective_Knowledge), which
+   would otherwise set the column's width alone. */
+.md-typeset .outline-table td .hall-ref {
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.md-typeset .outline-part {
+  color: var(--ada-muted);
+}
+
+.md-typeset .outline-table td:nth-child(3),
+.md-typeset .outline-table th:nth-child(3) {
+  text-align: center;
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--secondary[hidden] ~ .md-content > .md-content__inner:has(.ada-wide),
+  .md-sidebar--secondary[hidden] ~ .md-content:has(.ada-wide) > .md-path {
+    max-width: none;
+  }
+}
+
+/* On a phone the six columns do not fit: each row becomes a small card, the number
+   and title on top, part, hall, status and prediction under it, so nothing hides
+   behind a sideways scroll. */
+@media screen and (max-width: 44.984375em) {
+  .md-typeset .outline-table .md-typeset__scrollwrap {
+    margin: 1em 0;
+    overflow: visible;
+  }
+  .md-typeset .outline-table .md-typeset__table {
+    display: block;
+    padding: 0;
+  }
+  .md-typeset .outline-table table:not([class]) {
+    display: block;
+    width: 100%;
+  }
+  .md-typeset .outline-table thead {
+    display: none;
+  }
+  .md-typeset .outline-table tbody {
+    display: block;
+  }
+  .md-typeset .outline-table tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 10px;
+    padding: 12px 14px;
+    border-top: 1px solid var(--ada-line);
+  }
+  .md-typeset .outline-table tr:first-child {
+    border-top: 0;
+  }
+  .md-typeset .outline-table td {
+    display: block;
+    width: auto !important;
+    border: 0 !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+  }
+  .md-typeset .outline-table td:nth-child(n+3) {
+    flex: 0 0 auto;
+  }
+  .md-typeset .outline-table td:nth-child(1) {
+    flex: 0 0 1.9em;
+    color: #ffffff;
+    font-weight: 700;
+  }
+  .md-typeset .outline-table td:nth-child(2) {
+    flex: 1 1 calc(100% - 2.9em);
+  }
+  .md-typeset .outline-table td:nth-child(3) {
+    margin-left: calc(1.9em + 10px);
+    text-align: left;
+  }
+  .md-typeset .outline-table td:nth-child(3)::before {
+    content: "Part ";
+    color: var(--ada-muted);
+  }
+  .md-typeset .outline-held::before {
+    content: "prediction held: ";
+  }
+  .md-typeset .outline-held {
+    color: var(--ada-muted);
+    font-size: 13px;
+  }
+}
+
+/* Task lists ("- [ ] ..." on the checkpoint). An open item is an empty ring, so it does
+   not read as already ticked (Material's default open icon is a filled circle with a
+   check in it); a ticked one is the lime check. */
+:root {
+  --md-tasklist-icon: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 1-8-8 8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2z"/></svg>');
+}
+
+.md-typeset .task-list-indicator::before {
+  background-color: var(--ada-muted);
+}
+
+.md-typeset [type="checkbox"]:checked + .task-list-indicator::before {
+  background-color: var(--ada-lime);
+}
+
+.md-typeset .task-list-item {
+  margin-left: 0.3em;
+}
+
+/* A note the site adds to a line of the teachers' material that reads differently here. */
+.md-typeset .site-note {
+  display: block;
+  margin: 0.45em 0 0.2em;
+  padding: 0.35em 0.7em;
+  font-size: 0.88em;
+  line-height: 1.55;
+  color: #cfc6ee;
+  background: rgba(34, 217, 255, 0.07);
+  border-left: 2px solid var(--ada-cyan);
+  border-radius: 4px;
+}
+
+.md-typeset .site-note b {
+  color: var(--ada-cyan);
+}
+
+/* Images */
+.md-typeset img {
+  border-radius: 10px;
+}
+
+.md-typeset figure {
+  margin: 1.4em auto;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.md-typeset figure > br {
+  display: none;
+}
+
+.md-typeset figure img {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid var(--ada-line);
+}
+
+.md-typeset figcaption {
+  max-width: none;
+  margin: 10px auto 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  font-style: normal;
+  color: var(--ada-muted);
+}
+
+.md-typeset p > img {
+  display: block;
+  margin: 1.2em auto;
+  max-width: 100%;
+  border: 1px solid var(--ada-line);
+}
+
+/* ------------------------------------------------- the lesson's head */
+
+.md-typeset .lesson-meta {
+  margin: 0 0 18px;
+}
+
+.md-typeset .lesson-meta > p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+
+.md-typeset .lesson-meta__note {
+  display: block;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ada-muted);
+}
+
+.md-typeset .chip,
+.md-typeset a.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--ada-line);
+  background: var(--ada-surface);
+  color: var(--ada-text);
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: nowrap;
+}
+
+.md-typeset a.chip {
+  color: var(--ada-pink);
+  border-color: rgba(255, 46, 147, 0.45);
+}
+
+.md-typeset a.chip:hover {
+  background: var(--ada-pink-soft);
+  color: #ff5aa9;
+}
+
+.md-typeset .chip--accent {
+  color: #ffffff;
+  background: var(--ada-surface-2);
+  font-weight: 700;
+}
+
+.md-typeset .chip--runnable {
+  color: #15112a;
+  background: var(--ada-lime);
+  border-color: var(--ada-lime);
+  font-weight: 700;
+}
+
+.md-typeset .chip--draft {
+  color: var(--ada-orange);
+  border-color: rgba(255, 139, 31, 0.6);
+  font-weight: 700;
+}
+
+.md-typeset .chip--building {
+  color: var(--ada-cyan);
+  border-color: rgba(34, 217, 255, 0.5);
+}
+
+.md-typeset .chip--planned {
+  color: var(--ada-muted);
+}
+
+.md-typeset .chip--pass {
+  color: var(--ada-lime);
+  border-color: rgba(198, 255, 61, 0.4);
+}
+
+.md-typeset .chip--fail {
+  color: var(--ada-orange);
+  border-color: rgba(255, 139, 31, 0.6);
+}
+
+.md-typeset .chip--muted {
+  color: var(--ada-muted);
+}
+
+/* A stop with no kit: nothing to install (instead of "runnable", which is said of kits). */
+.md-typeset .chip--read {
+  color: #d8ccff;
+  border-color: rgba(155, 123, 255, 0.6);
+  font-weight: 700;
+}
+
+.md-typeset .chip--cyan {
+  color: var(--ada-cyan);
+  border-color: rgba(34, 217, 255, 0.45);
+}
+
+.md-typeset .hall-ref {
+  font-family: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 0.82em;
+  color: var(--ada-cyan);
+  background: rgba(34, 217, 255, 0.09);
+  border-radius: 5px;
+  padding: 0.05em 0.35em;
+  overflow-wrap: anywhere;
+}
+
+.md-typeset td .hall-ref {
+  font-size: 12px;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.md-typeset td .chip {
+  white-space: nowrap;
+}
+
+.md-typeset td .chip {
+  font-size: 12px;
+  padding: 1px 9px;
+}
+
+.md-typeset .tag-short {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--ada-lime);
+  border: 1px solid rgba(198, 255, 61, 0.4);
+  white-space: nowrap;
+}
+
+.md-typeset .chip .hall-ref {
+  font-size: 12px;
+  padding: 0;
+  background: none;
+}
+
+/* The kit box */
+.md-typeset .kit-box {
+  margin: 0 0 22px;
+  padding: 16px 20px 6px;
+  border: 1px solid var(--ada-line);
+  border-left: 4px solid var(--ada-lime);
+  border-radius: 12px;
+  background: var(--ada-surface);
+  font-size: 15.5px;
+  line-height: 1.65;
+}
+
+.md-typeset .kit-box > p {
+  margin: 0 0 10px;
+}
+
+.md-typeset .kit-box--empty {
+  border-left-color: var(--ada-line);
+  padding-bottom: 6px;
+  color: var(--ada-muted);
+}
+
+.md-typeset .kit-box__label {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ada-lime);
+}
+
+.md-typeset .kit-box--empty .kit-box__label {
+  color: var(--ada-muted);
+}
+
+.md-typeset .kit-box__size {
+  color: var(--ada-muted);
+  font-size: 14px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+.md-typeset .kit-box__docs {
+  display: block;
+  color: var(--ada-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.md-typeset .md-button {
+  border-radius: 9px;
+  font-size: 14.5px;
+  font-weight: 700;
+  padding: 7px 16px;
+  border: 2px solid var(--ada-pink);
+  color: var(--ada-pink);
+}
+
+.md-typeset .md-button--primary {
+  background: var(--ada-pink);
+  border-color: var(--ada-pink);
+  color: #15112a;
+}
+
+.md-typeset .md-button:hover,
+.md-typeset .md-button:focus,
+.md-typeset .md-button--primary:hover,
+.md-typeset .md-button--primary:focus {
+  background: #ff5aa9;
+  border-color: #ff5aa9;
+  color: #15112a;
+}
+
+.md-typeset .stop-figure img {
+  background: #0c0919;
+  width: auto;
+  max-width: 100%;
+  max-height: 460px;
+}
+
+/* ------------------------------------------------------- admonitions */
+
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: 16px;
+  line-height: 1.65;
+  background: var(--ada-surface);
+  border: 1px solid var(--ada-line);
+  border-left-width: 4px;
+  border-radius: 10px;
+  box-shadow: none;
+  color: var(--ada-text);
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  font-weight: 700;
+  color: #ffffff;
+  background: transparent !important;
+  border: none;
+}
+
+.md-typeset details[open] > summary {
+  border-bottom: 1px solid var(--ada-line);
+}
+
+/* The first paragraph of an open box keeps clear of the summary's divider. */
+.md-typeset details > summary + * {
+  margin-top: 0.9em;
+}
+
+.md-typeset summary::after {
+  background-color: var(--ada-muted);
+}
+
+:root {
+  --ada-icon-teacher: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zm-7 10.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>');
+  --ada-icon-note: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 9h-2V7h2m0 10h-2v-6h2m-1-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2z"/></svg>');
+  --ada-icon-check: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>');
+  --ada-icon-alert: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14h-2V9h2m0 9h-2v-2h2M1 21h22L12 2 1 21z"/></svg>');
+  --ada-icon-plate: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2 9 6h6l-3-4zm0 5c-3.3 0-5 2.2-5 4.6 0 1.3.5 2.3 1.2 3C5.6 16 4 18 4 20.5V22h16v-1.5c0-2.5-1.6-4.5-4.2-5.9.7-.7 1.2-1.7 1.2-3C17 9.2 15.3 7 12 7z"/></svg>');
+}
+
+.md-typeset .teacher,
+.md-typeset details.teacher {
+  border-color: var(--ada-line);
+  border-left-color: var(--ada-lavender);
+}
+
+.md-typeset .teacher > .admonition-title::before,
+.md-typeset .teacher > summary::before {
+  background-color: var(--ada-lavender);
+  -webkit-mask-image: var(--ada-icon-teacher);
+  mask-image: var(--ada-icon-teacher);
+}
+
+.md-typeset .kitnote {
+  border-color: var(--ada-line);
+  border-left-color: var(--ada-cyan);
+}
+
+.md-typeset .kitnote > .admonition-title::before,
+.md-typeset .kitnote > summary::before {
+  background-color: var(--ada-cyan);
+  -webkit-mask-image: var(--ada-icon-note);
+  mask-image: var(--ada-icon-note);
+}
+
+.md-typeset .didit {
+  border-color: var(--ada-line);
+  border-left-color: var(--ada-lime);
+}
+
+.md-typeset .didit > .admonition-title::before,
+.md-typeset .didit > summary::before {
+  background-color: var(--ada-lime);
+  -webkit-mask-image: var(--ada-icon-check);
+  mask-image: var(--ada-icon-check);
+}
+
+.md-typeset .notyet {
+  border-color: rgba(255, 139, 31, 0.45);
+  border-left-color: var(--ada-orange);
+  background: rgba(255, 139, 31, 0.07);
+}
+
+.md-typeset .notyet > .admonition-title::before,
+.md-typeset .notyet > summary::before {
+  background-color: var(--ada-orange);
+  -webkit-mask-image: var(--ada-icon-alert);
+  mask-image: var(--ada-icon-alert);
+}
+
+.md-typeset .admonition.plate {
+  border-color: var(--ada-line);
+  border-left-color: var(--ada-pink);
+  font-size: 18px;
+  padding-top: 4px;
+}
+
+.md-typeset .admonition.plate > p:first-child,
+.md-typeset .admonition.plate > p {
+  margin: 12px 0;
+}
+
+/* ------------------------------------------------------------- home */
+
+.md-typeset .plate-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.706fr) minmax(0, 1.727fr);
+  gap: 16px;
+  align-items: start;
+  margin: 0 0 26px;
+}
+
+.md-typeset .plate-hero figure {
+  margin: 0;
+  width: auto;
+  min-width: 0;
+}
+
+.md-typeset .plate-hero figure img {
+  width: 100%;
+  height: auto;
+}
+
+.md-typeset .plate-hero figcaption {
+  font-size: 13px;
+}
+
+.md-typeset .ways-in {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 26px 0 10px;
+}
+
+.md-typeset .way {
+  padding: 16px 18px 6px;
+  border: 1px solid var(--ada-line);
+  border-top: 3px solid var(--ada-pink);
+  border-radius: 12px;
+  background: var(--ada-surface);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+.md-typeset .way:nth-child(2) {
+  border-top-color: var(--ada-lime);
+}
+
+.md-typeset .way:nth-child(3) {
+  border-top-color: var(--ada-cyan);
+}
+
+.md-typeset .way > p {
+  margin: 0 0 10px;
+}
+
+.md-typeset a.way__title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+  border-bottom: none;
+}
+
+.md-typeset a.way__title::after {
+  content: " \2192";
+  color: var(--ada-pink);
+}
+
+.md-typeset a.way__title:hover {
+  color: var(--ada-pink);
+}
+
+/* ----------------------------------------------------------- footer */
+
+.md-footer {
+  background: var(--ada-bg-deep);
+  border-top: 1px solid var(--ada-line);
+}
+
+.md-footer__link:hover {
+  opacity: 1;
+  color: var(--ada-pink);
+}
+
+.md-footer-meta {
+  background: #0b0818;
+}
+
+/* The footer on the same 1440 px grid as the bar and the three columns. */
+@media screen and (min-width: 76.25em) {
+  .md-footer__inner.md-grid,
+  .md-footer-meta__inner.md-grid {
+    max-width: 1440px;
+    padding: 0 56px 0 16px;
+    box-sizing: border-box;
+  }
+  .md-footer__inner.md-grid {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+  }
+}
+
+.md-top {
+  background: var(--ada-surface-2);
+  color: #ffffff;
+}
+
+/* ------------------------------------------------------------ phone */
+
+@media screen and (max-width: 44.984375em) {
+  .md-typeset {
+    font-size: 16.5px;
+    line-height: 1.7;
+  }
+  .md-typeset h1 {
+    font-size: 30px;
+  }
+  .md-typeset h2 {
+    font-size: 21px;
+  }
+  .md-typeset .lead,
+  .md-typeset p.lead {
+    font-size: 17px;
+  }
+  .md-typeset .plate-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .md-typeset .plate-hero figure:first-child img {
+    width: 74%;
+  }
+  .md-typeset .ways-in {
+    grid-template-columns: 1fr;
+  }
+  .md-typeset pre > code {
+    font-size: 13.5px;
+    padding: calc(var(--ada-strip) + 12px) 14px 14px;
+  }
+  .md-typeset .highlight > pre::before {
+    padding-left: 13px;
+  }
+  .md-typeset .chip {
+    white-space: normal;
+  }
+  .md-typeset .kit-box {
+    padding: 14px 14px 4px;
+  }
+  .md-path {
+    margin-top: 16px;
+  }
+  .md-content > article.md-content__inner:first-child {
+    padding-top: 8px;
+  }
+}

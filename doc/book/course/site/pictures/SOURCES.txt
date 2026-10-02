@@ -1,0 +1,19 @@
+Stop pictures of the short track that are not elsewhere in the repository.
+
+opening.json names each stop's picture as "/course/<name>", a path in the encyclopedia's
+public/ folder (ada_encyclopedia/public/course/). build_site.py looks for a picture first in
+doc/book/course/opening/, then in the kit file listed in PICTURE_SOURCES (a kit's tracked
+process.png), and last here. These nine were copied here once on 2026-10-02, byte for byte,
+from ada_encyclopedia/public/course/, so that the site builds without the encyclopedia:
+
+day-zero.png           25e4eeed613d99660aa4e3ff5c33b054
+organism.png           46a818c6bf301ca11247c1e18733f470   (= doc/book/studies/organism/stills/0_above.png, untracked)
+point-coordinates.png  7f7e997964d83b67de2955905a90c061
+point-cube.png         a50e896bd6ecd7dc427f8ec4e401e027   (= doc/book/studies/point-cube/stills/3_marble_above.png, untracked)
+point-lines.png        db062c62fc151fe88f5d010340ebc234
+point-one.png          c6c48fd8044a59bf117daabefd0d58f6   (= doc/book/iterations/2026-09-30-point-one-companions/contact-default.png)
+point-plane.png        d868605c9046c2276db0cf2494557e90   (= doc/book/studies/point-plane/stills/0_above.png, untracked)
+point-trace.png        188eb4d3709ec598bb74ebc8bd4eb7d4
+point-zero.png         be03d4eeca761875c501822cb7ac033d
+
+(md5 sums.) If the encyclopedia's copy of a picture changes, copy it here again.

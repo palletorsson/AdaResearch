@@ -1,0 +1,80 @@
+# The Godot course of Ada Research as a documentation site.
+# docs/ is generated: run `python build_site.py` first (see README.md).
+site_name: The Sketchbook in Drag
+site_description: >-
+  A Godot 4.6 course of the Ada Research project: making bodies by rule, from one
+  picture of radiolaria to a hall of your own.
+site_author: Palle Torsson
+# Read the Docs sets READTHEDOCS_CANONICAL_URL; locally the site has no fixed address.
+site_url: !ENV [READTHEDOCS_CANONICAL_URL, ""]
+copyright: Ada Research · Palle Torsson · course text, kits and pictures from the Ada Research repository
+
+docs_dir: docs
+site_dir: _build
+use_directory_urls: true
+dev_addr: 127.0.0.1:8008
+
+exclude_docs: |
+  _nav.json
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: en
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  font:
+    text: Poppins
+    code: JetBrains Mono
+  palette:
+    scheme: slate
+    primary: custom
+    accent: custom
+  features:
+    - navigation.indexes
+    - navigation.path
+    - navigation.footer
+    - navigation.top
+    - toc.follow
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+
+extra_css:
+  - assets/ada.css
+extra_javascript:
+  - assets/ada.js
+
+hooks:
+  - hooks.py
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+      title: On this page
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.superfences:
+      preserve_tabs: true
+  - pymdownx.highlight:
+      use_pygments: true
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  # "- [ ] ..." lists (the checkpoint) as checkboxes, coloured in ada.css.
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+validation:
+  omitted_files: info
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
+  not_found: warn
