@@ -1,0 +1,3854 @@
+{
+  "title": "The hard taxonomy of the Godot course",
+  "about": "Every element the book may use. Nothing outside this file may appear as a technical element. The form and the fields are defined in functional_text/FUNCTIONAL_TEXT.md; functional_text/check.py verifies it. Built 2026-10-02 from the whole of sketch/sketch.json (25 chapters, as it stood at 10:20). introduced_at is where the sketch teaches an element: a section, N.0 when only chapter N's code_new names it, supplied:N.M for a borrowed part, everyday, or missing when the sketch uses it and never teaches it. Entries are sorted by where they are introduced; ids are stable keys.",
+  "chapters": 25,
+  "entries": [
+    {
+      "id": "line_of_code", "kind": "plain",
+      "forms": {"text": ["line of code", "lines of code"], "code": []},
+      "def": "What you type on one row.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "pointing", "kind": "plain",
+      "forms": {"text": ["pointing", "pointer", "pointers"], "code": []},
+      "def": "Aiming at something.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "facing", "kind": "plain",
+      "forms": {"text": ["facing"], "code": []},
+      "def": "Turned toward something.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "printed", "kind": "plain",
+      "forms": {"text": ["printed"], "code": []},
+      "def": "Shown as words on a panel.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "stacked", "kind": "plain",
+      "forms": {"text": ["stacked"], "code": []},
+      "def": "Piled one on another.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "means", "kind": "plain",
+      "forms": {"text": ["means"], "code": []},
+      "def": "The verb: says, comes to.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "floating", "kind": "plain",
+      "forms": {"text": ["floating"], "code": []},
+      "def": "Hanging in the air.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "degrees", "kind": "plain",
+      "forms": {"text": ["degree", "degrees"], "code": []},
+      "def": "Everyday turn measure: a full turn is 360.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "camera", "kind": "plain",
+      "forms": {"text": ["camera", "cameras"], "code": []},
+      "def": "The eye you see the room through.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "lined_up", "kind": "plain",
+      "forms": {"text": ["lined up"], "code": []},
+      "def": "Standing in a row.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "forced", "kind": "plain",
+      "forms": {"text": ["forced"], "code": []},
+      "def": "Made to, with no choice.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "graphics", "kind": "plain",
+      "forms": {"text": ["graphics"], "code": []},
+      "def": "Pictures a computer draws.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "select", "kind": "plain",
+      "forms": {"text": ["select", "selects", "selected", "selecting"], "code": []},
+      "def": "Pick out, as with a click.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "positive", "kind": "plain",
+      "forms": {"text": ["positive"], "code": []},
+      "def": "More than zero.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "original", "kind": "plain",
+      "forms": {"text": ["original", "originally"], "code": []},
+      "def": "The first one, before any others.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "supplied", "kind": "concept",
+      "forms": {"text": ["supplied", "supplied part", "supplied parts"], "code": []},
+      "def": "Made for you, to use before it is taught.",
+      "introduced_at": "1.1", "synonyms": ["helper", "helpers", "borrowed"], "depends_on": []
+    },
+    {
+      "id": "node", "kind": "concept",
+      "forms": {"text": ["node", "nodes"], "code": []},
+      "def": "One thing Godot keeps and runs.",
+      "introduced_at": "1.1", "synonyms": ["entity", "entities"], "depends_on": [],
+      "other_senses": [{"words": ["node", "nodes"], "at": ["25.0", "25.5", "25.6"], "sense": "a point of a graph"}]
+    },
+    {
+      "id": "scene", "kind": "concept",
+      "forms": {"text": ["scene", "scenes"], "code": []},
+      "def": "Nodes that Godot runs together.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node"]
+    },
+    {
+      "id": "editor", "kind": "concept",
+      "forms": {"text": ["editor"], "code": []},
+      "def": "Godot's window, where you build a scene.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["scene"]
+    },
+    {
+      "id": "scene_tree", "kind": "concept",
+      "forms": {"text": ["scene tree"], "code": []},
+      "def": "The list of a scene's nodes, in the editor.",
+      "introduced_at": "1.1", "synonyms": ["hierarchy"], "depends_on": ["scene", "node", "editor"]
+    },
+    {
+      "id": "base_scene", "kind": "supplied",
+      "forms": {"text": ["base scene", "course look"], "code": ["base.tscn"]},
+      "def": "Floor, sky, sun, camera and one node to place.",
+      "introduced_at": "supplied:1.1", "synonyms": [], "depends_on": ["node"],
+      "note": "the course look (palette, sky, light) comes with it; 17.1 and 19.x borrow the Look by name"
+    },
+    {
+      "id": "script", "kind": "concept",
+      "forms": {"text": ["script", "scripts"], "code": []},
+      "def": "Text on a node, which the node runs as code.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node"]
+    },
+    {
+      "id": "run_the_project", "kind": "admin",
+      "forms": {"text": ["run the project", "ran the project", "running the project", "runs the project"], "code": []},
+      "def": "Press Play, at the top right. If Godot asks for a main scene, choose Select Current.",
+      "introduced_at": "1.1",
+      "synonyms": ["press Play", "click Play", "hit Play", "press F5", "run it", "run the game", "play the scene", "play the project", "play the game", "start the game", "start the project", "launch the project", "launch the game", "run your project", "run the room", "run your room", "run the study"],
+      "step_phrases": ["Play", "F5", "Run Project", "Cmd+B", "\u25b6", "Select Current", {"phrase": "main scene", "cues": ["asks", "Select"]}, {"phrase": "top right", "cues": ["Play", "button", "arrow", "triangle"]}],
+      "unless": ["animation", "AnimationPlayer", "AudioStreamPlayer", "clip"],
+      "depends_on": ["scene"],
+      "note": "Palle's name for it, 2 October 2026; it replaces the concept play (the Play button is a step of it now). F5 runs the project's main scene, which 1.1 makes the base scene; every chapter written so far runs that. Running the open scene alone (F6, Run Current Scene) is not in the course yet: it arrives with the first section that runs a second scene by itself, no earlier than 3.1, where the first scene of the student's own is saved. That section defines 'run the scene' (run_the_scene, missing until then). Its other forms are a call in another tense ('You ran the project.'); the wordings that would describe it again are its synonyms, matched in any case. A synonym that opens with a verb counts only as a call, at the head of its clause or after 'then', 'you', ...; 'a waiting thread will run it' runs a function. 'run the room' and 'run your room' are this while the room is built in the base scene; they move to run the scene if the room becomes a scene of its own. unless: a line about an animation or a clip has its own Play."
+    },
+    {
+      "id": "run_the_scene", "kind": "admin",
+      "forms": {"text": ["run the scene"], "code": []},
+      "def": "Press F6, or Run Current Scene beside Play.",
+      "introduced_at": "missing",
+      "synonyms": ["run this scene", "run the current scene", "run the open scene", "run only this scene", "run only the open scene", "press F6", "Run Current Scene"],
+      "step_phrases": ["F6", "Cmd+R"],
+      "unless": ["animation", "AnimationPlayer", "AudioStreamPlayer", "clip"],
+      "depends_on": ["scene"],
+      "note": "2 October 2026, split from run the project: F5 runs the project's main scene, F6 runs the open scene alone, and advice to say 'Run the project' for F6 changed what the student does. No section defines it yet: every chapter written so far runs the base scene. The first section that runs a second scene by itself (no earlier than 3.1, where the student's own scene is saved) defines it and sets introduced_at; until then each wording of it is reported as described before any definition."
+    },
+    {
+      "id": "extends", "kind": "gdscript",
+      "forms": {"text": [], "code": ["extends"]},
+      "def": "Names the kind of node a script is for.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node", "script"],
+      "note": "restored from functional/ch01.md, which teaches extends Node3D at 1.1; the sketch teaches extends only with inheritance (17.3)"
+    },
+    {
+      "id": "Node3D", "kind": "godot",
+      "forms": {"text": [], "code": ["Node3D"]},
+      "def": "A node with a position.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node", "position"],
+      "note": "restored from functional/ch01.md; the sketch never names it"
+    },
+    {
+      "id": "func", "kind": "gdscript",
+      "forms": {"text": [], "code": ["func"]},
+      "def": "Starts a named block of code.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "_ready", "kind": "godot",
+      "forms": {"text": [], "code": ["_ready"]},
+      "def": "Runs once, when the scene starts.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["scene"]
+    },
+    {
+      "id": "indent", "kind": "concept",
+      "forms": {"text": ["indent", "indents", "indented"], "code": []},
+      "def": "One tab in, setting a line of code under another.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "$", "kind": "gdscript",
+      "forms": {"text": [], "code": ["$"]},
+      "def": "`$Name` reaches the node named Name.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node"]
+    },
+    {
+      "id": "=", "kind": "gdscript",
+      "forms": {"text": [], "code": ["="]},
+      "def": "Sets the left side to the value on the right.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "Vector3", "kind": "godot",
+      "forms": {"text": [], "code": ["Vector3"]},
+      "def": "Three numbers held as one value.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "position", "kind": "concept",
+      "forms": {"text": ["position", "positions"], "code": ["position"]},
+      "def": "Where a node stands, as a `Vector3`.",
+      "introduced_at": "1.1", "synonyms": ["location", "locations", "spot", "spots"], "depends_on": ["node", "Vector3"],
+      "other_senses": [{"words": ["spots", "spot"], "at": ["13.8", "17.8", "24.6"], "sense": "a round patch of a pattern"}]
+    },
+    {
+      "id": "origin", "kind": "concept",
+      "forms": {"text": ["origin"], "code": []},
+      "def": "Where counting starts, at zero, zero, zero.",
+      "introduced_at": "1.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "metre", "kind": "concept",
+      "forms": {"text": ["metre", "metres"], "code": []},
+      "def": "The length of a count of one.",
+      "introduced_at": "1.2", "synonyms": ["meter", "meters"], "depends_on": []
+    },
+    {
+      "id": "axis", "kind": "concept",
+      "forms": {"text": ["axis", "axes"], "code": []},
+      "def": "A straight way out from the origin, counted in metres.",
+      "introduced_at": "1.2", "synonyms": [], "depends_on": ["origin", "metre"]
+    },
+    {
+      "id": "x", "kind": "concept",
+      "forms": {"text": ["x"], "code": ["x"]},
+      "def": "How far right, along the x axis.",
+      "introduced_at": "1.2", "synonyms": [], "depends_on": ["axis"]
+    },
+    {
+      "id": "y", "kind": "concept",
+      "forms": {"text": ["y"], "code": ["y"]},
+      "def": "How far up, along the y axis.",
+      "introduced_at": "1.2", "synonyms": [], "depends_on": ["axis"]
+    },
+    {
+      "id": "z", "kind": "concept",
+      "forms": {"text": ["z"], "code": ["z"]},
+      "def": "How far toward you, along the z axis.",
+      "introduced_at": "1.2", "synonyms": [], "depends_on": ["axis"]
+    },
+    {
+      "id": "coordinate", "kind": "concept",
+      "forms": {"text": ["coordinate", "coordinates"], "code": []},
+      "def": "One count from the origin, along x, y or z.",
+      "introduced_at": "1.2", "synonyms": [], "depends_on": ["origin", "x", "y", "z"]
+    },
+    {
+      "id": "point", "kind": "concept",
+      "forms": {"text": ["point", "points"], "code": []},
+      "def": "A place given by three coordinates, with no size.",
+      "introduced_at": "1.2", "synonyms": [], "depends_on": ["coordinate"]
+    },
+    {
+      "id": "mesh", "kind": "concept",
+      "forms": {"text": ["mesh", "meshes"], "code": ["mesh"]},
+      "def": "What is seen.",
+      "introduced_at": "1.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "shape", "kind": "concept",
+      "forms": {"text": ["shape", "shapes"], "code": ["shape"]},
+      "def": "What is touched.",
+      "introduced_at": "1.3", "synonyms": ["collider", "colliders", "boundary", "boundaries", "hitbox", "hitboxes", "hit box", "collision shape", "collision shapes", "hull", "hulls"], "depends_on": [],
+      "other_senses": [{"words": ["boundary"], "at": ["14.5", "18.2"], "sense": "the edge of a region"}],
+      "note": "the sketch also says shape for a form (1.4, 2.2, 4.1, 14.8, 19.x): the checker cannot see it"
+    },
+    {
+      "id": "body", "kind": "concept",
+      "forms": {"text": ["body", "bodies"], "code": []},
+      "def": "A node you place, with a position.",
+      "introduced_at": "1.3", "synonyms": [], "depends_on": ["node", "position"]
+    },
+    {
+      "id": "MeshInstance3D", "kind": "godot",
+      "forms": {"text": [], "code": ["MeshInstance3D"]},
+      "def": "A node that shows a mesh.",
+      "introduced_at": "1.3", "synonyms": [], "depends_on": ["node", "mesh"]
+    },
+    {
+      "id": "SphereMesh", "kind": "godot",
+      "forms": {"text": [], "code": ["SphereMesh"]},
+      "def": "A round mesh.",
+      "introduced_at": "1.3", "synonyms": [], "depends_on": ["mesh"]
+    },
+    {
+      "id": "StaticBody3D", "kind": "godot",
+      "forms": {"text": [], "code": ["StaticBody3D"]},
+      "def": "A body that stays put and stops things.",
+      "introduced_at": "1.3", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "CollisionShape3D", "kind": "godot",
+      "forms": {"text": [], "code": ["CollisionShape3D"]},
+      "def": "A node that holds a shape.",
+      "introduced_at": "1.3", "synonyms": [], "depends_on": ["node", "shape"]
+    },
+    {
+      "id": "SphereShape3D", "kind": "godot",
+      "forms": {"text": [], "code": ["SphereShape3D"]},
+      "def": "A round shape.",
+      "introduced_at": "1.3", "synonyms": [], "depends_on": ["shape"]
+    },
+    {
+      "id": "feeler", "kind": "supplied",
+      "forms": {"text": ["feeler", "feelers"], "code": ["contact_probe.gd"]},
+      "def": "A cyan rod that moves and stops at a shape.",
+      "introduced_at": "supplied:1.3", "synonyms": ["probe", "probes"], "depends_on": ["shape"]
+    },
+    {
+      "id": "Inspector", "kind": "concept",
+      "forms": {"text": ["Inspector"], "code": []},
+      "def": "The editor's panel of a node's numbers.",
+      "introduced_at": "1.3", "synonyms": [], "depends_on": ["editor", "node"]
+    },
+    {
+      "id": "add_a_node", "kind": "admin",
+      "forms": {"text": ["add a node", "added a node", "adding a node"], "code": []},
+      "def": "Select the node it goes under. Press + above the scene tree. Choose its kind, then Create. Double-click the new node to name it.",
+      "introduced_at": "1.3",
+      "synonyms": ["add a child node", "add a new node", "create a node", "create a new node", "create a {node}", "create an {node}", "make a {node}", "make an {node}", "put a {node}", "put an {node}"],
+      "step_phrases": ["Create New Node", "Add Child Node", {"phrase": "+", "cues": ["scene tree", "Scene dock", "node", "nodes"]}, {"phrase": "Ctrl+A", "cues": ["scene tree", "Scene dock", "node", "nodes"]}, {"phrase": "double-click", "cues": ["rename", "name it", "to name", "new node", "and type"]}],
+      "calls": ["add a {node}", "add an {node}", "add one more {node}", "add {n} {node}"],
+      "depends_on": ["scene_tree", "node"],
+      "note": "The steps are admin. Which node, its name and what it holds are the lesson, and stay in the line that calls it: 'Add a `Node3D` named `Here`: a position, nothing else.' A {node} slot holds a node class, an entry whose depends_on reaches node. A call is an instruction to the student: 'code can add a `MeshInstance3D`' and 'add twelve nodes by code' teach add_child and are no call. 'Create a `Node3D`', 'Make a ...' and 'Put a ...' are other wordings of the call (synonym templates): say 'Add a `Node3D`'. + and Ctrl+A count only beside the scene tree or a node, so 'Press + to zoom in' is no step of it. The first step is there because + adds under the selected node: 'Under `Solid`, add a ...' needs Solid selected."
+    },
+    {
+      "id": "primitive", "kind": "concept",
+      "forms": {"text": ["primitive", "primitives"], "code": []},
+      "def": "A mesh Godot makes for you from a few numbers.",
+      "introduced_at": "1.4", "synonyms": [], "depends_on": ["mesh"]
+    },
+    {
+      "id": "BoxMesh", "kind": "godot",
+      "forms": {"text": [], "code": ["BoxMesh"]},
+      "def": "A box primitive.",
+      "introduced_at": "1.4", "synonyms": [], "depends_on": ["primitive"]
+    },
+    {
+      "id": "CylinderMesh", "kind": "godot",
+      "forms": {"text": [], "code": ["CylinderMesh"]},
+      "def": "A cylinder primitive.",
+      "introduced_at": "1.4", "synonyms": [], "depends_on": ["primitive"]
+    },
+    {
+      "id": "PrismMesh", "kind": "godot",
+      "forms": {"text": [], "code": ["PrismMesh"]},
+      "def": "A prism primitive.",
+      "introduced_at": "1.4", "synonyms": [], "depends_on": ["primitive"]
+    },
+    {
+      "id": "TorusMesh", "kind": "godot",
+      "forms": {"text": [], "code": ["TorusMesh"]},
+      "def": "A ring primitive.",
+      "introduced_at": "1.4", "synonyms": [], "depends_on": ["primitive"]
+    },
+    {
+      "id": "top_radius", "kind": "godot",
+      "forms": {"text": [], "code": ["top_radius"]},
+      "def": "The radius of a `CylinderMesh` at its top.",
+      "introduced_at": "1.4", "synonyms": [], "depends_on": ["CylinderMesh"],
+      "note": "restored from functional/ch01.md; the sketch never names it"
+    },
+    {
+      "id": "segment", "kind": "concept",
+      "forms": {"text": ["segment", "segments"], "code": []},
+      "def": "One slice around a round mesh.",
+      "introduced_at": "1.4", "synonyms": [], "depends_on": ["mesh"],
+      "note": "1.5 (a thin white segment) and 14.5 (replace every segment) use it for a straight piece"
+    },
+    {
+      "id": "radial_segments", "kind": "godot",
+      "forms": {"text": [], "code": ["radial_segments"]},
+      "def": "How many segments go around.",
+      "introduced_at": "1.4", "synonyms": [], "depends_on": ["segment"]
+    },
+    {
+      "id": "line", "kind": "concept",
+      "forms": {"text": ["line", "lines"], "code": []},
+      "def": "The straight piece between two points.",
+      "introduced_at": "1.5", "synonyms": [], "depends_on": ["point"],
+      "other_senses": [{"words": ["line", "lines"], "at": ["1.1"], "sense": "a line of code"}]
+    },
+    {
+      "id": "face", "kind": "concept",
+      "forms": {"text": ["face", "faces"], "code": []},
+      "def": "The flat piece filled between three points.",
+      "introduced_at": "1.5", "synonyms": [], "depends_on": ["point"],
+      "other_senses": [{"words": ["face", "faces"], "at": ["10.3", "25.2"], "sense": "a side of a die; to face something"}]
+    },
+    {
+      "id": "call", "kind": "concept",
+      "forms": {"text": ["call", "calls", "called", "calling"], "code": []},
+      "def": "Asks a supplied part, or Godot, to do its work.",
+      "introduced_at": "1.5", "synonyms": [], "depends_on": ["supplied"]
+    },
+    {
+      "id": "line()", "kind": "supplied",
+      "forms": {"text": [], "code": ["line", "line(a, b)"]},
+      "def": "Draws a line between two points.",
+      "introduced_at": "supplied:1.5", "synonyms": [], "depends_on": ["line", "point"],
+      "opened_at": "11.7",
+      "stub": "func line(a: Vector3, b: Vector3) -> void:\n\tif a.is_equal_approx(b):\n\t\tpush_error(\"line(): the two points are one point: no line\")",
+      "host": "$Supplied"
+    },
+    {
+      "id": "triangle()", "kind": "supplied",
+      "forms": {"text": [], "code": ["triangle", "triangle(a, b, c)"]},
+      "def": "Fills a face between three points.",
+      "introduced_at": "supplied:1.5", "synonyms": [], "depends_on": ["face", "point"],
+      "opened_at": "11.7",
+      "stub": "func triangle(a: Vector3, b: Vector3, c: Vector3) -> void:\n\tif (b - a).cross(c - a).length() < 0.000001:\n\t\tpush_error(\"triangle(): the three points are in one line: no face\")",
+      "host": "$Supplied"
+    },
+    {
+      "id": "frame", "kind": "concept",
+      "forms": {"text": ["frame", "frames"], "code": []},
+      "def": "One picture Godot draws before it draws the next.",
+      "introduced_at": "1.6", "synonyms": ["tick", "ticks", "update", "updates"], "depends_on": [],
+      "note": "the sketch also says frame for a picture frame or border (3.5, 3.8, 14.1, 18.8, 23.7)"
+    },
+    {
+      "id": "_process", "kind": "godot",
+      "forms": {"text": [], "code": ["_process"]},
+      "def": "Runs again every frame.",
+      "introduced_at": "1.6", "synonyms": [], "depends_on": ["frame"]
+    },
+    {
+      "id": "Engine", "kind": "godot",
+      "forms": {"text": [], "code": ["Engine"]},
+      "def": "Godot itself, as something you can ask.",
+      "introduced_at": "1.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "get_process_frames", "kind": "godot",
+      "forms": {"text": [], "code": ["get_process_frames"]},
+      "def": "How many frames have run so far.",
+      "introduced_at": "1.6", "synonyms": [], "depends_on": ["frame"]
+    },
+    {
+      "id": "Label3D", "kind": "godot",
+      "forms": {"text": [], "code": ["Label3D"]},
+      "def": "A node that shows words in the room.",
+      "introduced_at": "1.6", "synonyms": [], "depends_on": ["node"]
+    },
+    {
+      "id": "text", "kind": "godot",
+      "forms": {"text": [], "code": ["text"]},
+      "def": "The words a `Label3D` shows.",
+      "introduced_at": "1.6", "synonyms": [], "depends_on": ["Label3D"]
+    },
+    {
+      "id": "str", "kind": "gdscript",
+      "forms": {"text": [], "code": ["str"]},
+      "def": "Turns a number into words.",
+      "introduced_at": "1.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "counter_panel", "kind": "supplied",
+      "forms": {"text": ["counter panel"], "code": []},
+      "def": "A `Label3D` on a stand, named Counter.",
+      "introduced_at": "supplied:1.6", "synonyms": [], "depends_on": ["Label3D"]
+    },
+    {
+      "id": "mouse_point()", "kind": "supplied",
+      "forms": {"text": [], "code": ["mouse_point", "mouse_point()"]},
+      "def": "The point on the floor under the mouse.",
+      "introduced_at": "supplied:1.7", "synonyms": [], "depends_on": ["point"],
+      "stub": "func mouse_point() -> Vector3:\n\tvar t := Engine.get_process_frames() * 0.1\n\treturn Vector3(cos(t), 0, sin(t)) * 2.0",
+      "host": "$Supplied"
+    },
+    {
+      "id": "copy", "kind": "concept",
+      "forms": {"text": ["copy", "copies", "copied"], "code": []},
+      "def": "A new node made from another, the same in all.",
+      "introduced_at": "1.7", "synonyms": ["clone", "clones", "duplicates", "replica", "replicas"], "depends_on": ["node"]
+    },
+    {
+      "id": "duplicate", "kind": "godot",
+      "forms": {"text": [], "code": ["duplicate"]},
+      "def": "Makes a copy of a node.",
+      "introduced_at": "1.7", "synonyms": [], "depends_on": ["copy", "node"]
+    },
+    {
+      "id": "add_child", "kind": "godot",
+      "forms": {"text": [], "code": ["add_child"]},
+      "def": "Puts a new node into the scene.",
+      "introduced_at": "1.7", "synonyms": [], "depends_on": ["node", "scene"]
+    },
+    {
+      "id": "variable", "kind": "concept",
+      "forms": {"text": ["variable", "variables"], "code": []},
+      "def": "A name for a value.",
+      "introduced_at": "1.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "var", "kind": "gdscript",
+      "forms": {"text": [], "code": ["var"]},
+      "def": "Makes a variable.",
+      "introduced_at": "1.8", "synonyms": [], "depends_on": ["variable"]
+    },
+    {
+      "id": ":=", "kind": "gdscript",
+      "forms": {"text": [], "code": [":="]},
+      "def": "Gives a new variable its first value.",
+      "introduced_at": "1.8", "synonyms": [], "depends_on": ["variable"]
+    },
+    {
+      "id": "+=", "kind": "gdscript",
+      "forms": {"text": [], "code": ["+="]},
+      "def": "Adds to what a variable holds.",
+      "introduced_at": "1.8", "synonyms": [], "depends_on": ["variable"]
+    },
+    {
+      "id": "+", "kind": "gdscript",
+      "forms": {"text": [], "code": ["+"]},
+      "def": "Adds.",
+      "introduced_at": "1.8", "synonyms": [], "depends_on": [],
+      "note": "1.8: count += 1 is count = count + 1; the sketch also writes StaticBody3D + CollisionShape3D in chapter 1"
+    },
+    {
+      "id": "-", "kind": "gdscript",
+      "forms": {"text": [], "code": ["-"]},
+      "def": "Takes away, or turns a number the other way.",
+      "introduced_at": "1.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "*", "kind": "gdscript",
+      "forms": {"text": [], "code": ["*"]},
+      "def": "Multiplies.",
+      "introduced_at": "2.1", "synonyms": [], "depends_on": [],
+      "note": "2.1's code_new multiplies first: position += speed * delta; chapter 1 needs no *"
+    },
+    {
+      "id": "/", "kind": "gdscript",
+      "forms": {"text": [], "code": ["/"]},
+      "def": "Divides.",
+      "introduced_at": "1.8", "synonyms": [], "depends_on": [],
+      "note": "the sketch's 1.8 says 'arithmetic': + - * /"
+    },
+    {
+      "id": "height", "kind": "godot",
+      "forms": {"text": [], "code": ["height"]},
+      "def": "How tall a mesh is, in metres.",
+      "introduced_at": "1.8", "synonyms": [], "depends_on": ["mesh", "metre"],
+      "note": "restored from functional/ch01.md; the sketch never names it"
+    },
+    {
+      "id": "delta", "kind": "godot",
+      "forms": {"text": ["delta"], "code": ["delta"]},
+      "def": "The seconds since the last frame.",
+      "introduced_at": "2.1", "synonyms": [], "depends_on": ["frame"]
+    },
+    {
+      "id": "frame_rate", "kind": "concept",
+      "forms": {"text": ["frame rate", "frame rates"], "code": []},
+      "def": "How many frames Godot draws in a second.",
+      "introduced_at": "2.1", "synonyms": [], "depends_on": ["frame"]
+    },
+    {
+      "id": "rider_code", "kind": "supplied",
+      "forms": {"text": ["rider code"], "code": ["_translate_rider"]},
+      "def": "Carries whoever stands on a moving cube.",
+      "introduced_at": "supplied:2.1", "synonyms": [], "depends_on": [],
+      "note": "section inferred: 2.1 builds the first carriers"
+    },
+    {
+      "id": "rotate_y", "kind": "godot",
+      "forms": {"text": [], "code": ["rotate_y"]},
+      "def": "Turns a body around its own y axis.",
+      "introduced_at": "2.2", "synonyms": [], "depends_on": ["body", "y", "axis"]
+    },
+    {
+      "id": "rotation", "kind": "concept",
+      "forms": {"text": ["rotation", "rotations", "rotate"], "code": []},
+      "def": "A turn around an axis.",
+      "introduced_at": "2.2", "synonyms": [], "depends_on": ["axis"],
+      "note": "2.2: rotate_y() turns a body"
+    },
+    {
+      "id": "scale", "kind": "godot",
+      "forms": {"text": ["scale", "scaled"], "code": ["scale"]},
+      "def": "How many times its size a body is drawn.",
+      "introduced_at": "2.2", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "transform", "kind": "concept",
+      "forms": {"text": ["transform", "transforms"], "code": []},
+      "def": "A move, turn or growth given to a body.",
+      "introduced_at": "2.2", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "conditional", "kind": "concept",
+      "forms": {"text": ["conditional", "conditionals"], "code": []},
+      "def": "Code that runs only when a test is true.",
+      "introduced_at": "2.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "if", "kind": "gdscript",
+      "forms": {"text": [], "code": ["if"]},
+      "def": "Runs its block only when the test is true.",
+      "introduced_at": "2.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "comparison", "kind": "concept",
+      "forms": {"text": ["comparison", "comparisons"], "code": []},
+      "def": "A test of two values: less, more, equal, not equal.",
+      "introduced_at": "2.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "<", "kind": "gdscript",
+      "forms": {"text": [], "code": ["<"]},
+      "def": "Is less than.",
+      "introduced_at": "2.3", "synonyms": [], "depends_on": ["comparison"]
+    },
+    {
+      "id": ">", "kind": "gdscript",
+      "forms": {"text": [], "code": [">"]},
+      "def": "Is more than.",
+      "introduced_at": "2.3", "synonyms": [], "depends_on": ["comparison"]
+    },
+    {
+      "id": "==", "kind": "gdscript",
+      "forms": {"text": [], "code": ["=="]},
+      "def": "Is equal to.",
+      "introduced_at": "2.3", "synonyms": [], "depends_on": ["comparison"]
+    },
+    {
+      "id": "!=", "kind": "gdscript",
+      "forms": {"text": [], "code": ["!="]},
+      "def": "Is not equal to.",
+      "introduced_at": "2.3", "synonyms": [], "depends_on": ["comparison"]
+    },
+    {
+      "id": "true", "kind": "gdscript",
+      "forms": {"text": [], "code": ["true"]},
+      "def": "The value of a test that passes.",
+      "introduced_at": "2.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "false", "kind": "gdscript",
+      "forms": {"text": [], "code": ["false"]},
+      "def": "The value of a test that fails.",
+      "introduced_at": "2.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "else", "kind": "gdscript",
+      "forms": {"text": [], "code": ["else"]},
+      "def": "Runs its block when the test before it failed.",
+      "introduced_at": "2.4", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "elif", "kind": "gdscript",
+      "forms": {"text": [], "code": ["elif"]},
+      "def": "Asks again when the test before it failed.",
+      "introduced_at": "2.4", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "bool", "kind": "gdscript",
+      "forms": {"text": ["bool", "bools", "boolean", "booleans"], "code": ["bool"]},
+      "def": "A value that is `true` or `false`.",
+      "introduced_at": "2.4", "synonyms": [], "depends_on": ["true", "false"]
+    },
+    {
+      "id": "length", "kind": "godot",
+      "forms": {"text": [], "code": ["length"]},
+      "def": "How long a `Vector3` is: the distance it spans.",
+      "introduced_at": "2.5", "synonyms": [], "depends_on": ["Vector3"]
+    },
+    {
+      "id": "queue_free", "kind": "godot",
+      "forms": {"text": [], "code": ["queue_free"]},
+      "def": "Takes a node out of the scene.",
+      "introduced_at": "2.5", "synonyms": [], "depends_on": ["node", "scene"]
+    },
+    {
+      "id": "walker", "kind": "supplied",
+      "forms": {"text": ["walker", "walkers"], "code": ["walker.tscn"]},
+      "def": "The cyan capsule you steer with WASD: the visitor.",
+      "introduced_at": "supplied:2.5", "synonyms": [], "depends_on": [],
+      "note": "first named at 2.5; chapters 17 to 20 borrow it again"
+    },
+    {
+      "id": "and", "kind": "gdscript",
+      "forms": {"text": [], "code": ["and"]},
+      "def": "True when both tests are true.",
+      "introduced_at": "2.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "or", "kind": "gdscript",
+      "forms": {"text": [], "code": ["or"]},
+      "def": "True when either test is true.",
+      "introduced_at": "2.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "not", "kind": "gdscript",
+      "forms": {"text": [], "code": ["not"]},
+      "def": "Turns true into false, and false into true.",
+      "introduced_at": "2.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "Input", "kind": "godot",
+      "forms": {"text": [], "code": ["Input"]},
+      "def": "Godot's keyboard, mouse and controller, as something you ask.",
+      "introduced_at": "2.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "is_action_pressed", "kind": "godot",
+      "forms": {"text": [], "code": ["is_action_pressed", "Input.is_action_pressed"]},
+      "def": "Is this key held down at this moment?",
+      "introduced_at": "2.6", "synonyms": [], "depends_on": ["Input"]
+    },
+    {
+      "id": "ui_accept", "kind": "godot",
+      "forms": {"text": [], "code": ["ui_accept"]},
+      "def": "The action that Space and Enter set off.",
+      "introduced_at": "2.6", "synonyms": [], "depends_on": ["Input"],
+      "note": "inferred: 2.6 teaches Input.is_action_pressed(); its action names come with it"
+    },
+    {
+      "id": "lerp", "kind": "gdscript",
+      "forms": {"text": ["lerp"], "code": ["lerp"]},
+      "def": "A value part way between two ends.",
+      "introduced_at": "supplied:2.6", "synonyms": [], "depends_on": [],
+      "opened_at": "4.5",
+      "note": "a Godot built-in, called before functions are taught; section inferred beside pingpong"
+    },
+    {
+      "id": "pingpong", "kind": "gdscript",
+      "forms": {"text": [], "code": ["pingpong"]},
+      "def": "A value that runs to an end and back, repeating.",
+      "introduced_at": "supplied:2.6", "synonyms": [], "depends_on": [],
+      "note": "2.6: the notes say pingpong() moves Trans_Pit's grower; never opened"
+    },
+    {
+      "id": "parent", "kind": "concept",
+      "forms": {"text": ["parent", "parents"], "code": []},
+      "def": "The node that holds another in the scene tree.",
+      "introduced_at": "2.7", "synonyms": [], "depends_on": ["node", "scene_tree"],
+      "note": "16.3 also says parents for the bodies whose genes are mixed"
+    },
+    {
+      "id": "child", "kind": "concept",
+      "forms": {"text": ["child", "children"], "code": []},
+      "def": "A node held by another: it follows that node.",
+      "introduced_at": "2.7", "synonyms": [], "depends_on": ["node"]
+    },
+    {
+      "id": "$/", "kind": "gdscript",
+      "forms": {"text": [], "code": ["$/"]},
+      "def": "Reaches a node's child by a path of names.",
+      "introduced_at": "2.7", "synonyms": [], "depends_on": ["child", "node"],
+      "note": "inferred: 2.7 teaches parent and child; $A/B reaches B under A"
+    },
+    {
+      "id": "translate", "kind": "godot",
+      "forms": {"text": [], "code": ["translate"]},
+      "def": "Moves a body along its own axes.",
+      "introduced_at": "2.8", "synonyms": [], "depends_on": ["body", "axis"]
+    },
+    {
+      "id": "loop", "kind": "concept",
+      "forms": {"text": ["loop", "loops"], "code": []},
+      "def": "Code that runs its block again and again.",
+      "introduced_at": "3.1", "synonyms": [], "depends_on": [],
+      "note": "22.6 and 23.5 also say loop for a cycle in a graph or a path"
+    },
+    {
+      "id": "while", "kind": "gdscript",
+      "forms": {"text": [], "code": ["while"]},
+      "def": "Repeats its block as long as its test is true.",
+      "introduced_at": "3.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "preload", "kind": "gdscript",
+      "forms": {"text": [], "code": ["preload"]},
+      "def": "Loads a scene file once, when the script is read.",
+      "introduced_at": "3.1", "synonyms": [], "depends_on": ["scene", "script"]
+    },
+    {
+      "id": "PackedScene", "kind": "godot",
+      "forms": {"text": [], "code": ["PackedScene"]},
+      "def": "A saved scene, ready to make copies of.",
+      "introduced_at": "3.1", "synonyms": [], "depends_on": ["scene", "copy"]
+    },
+    {
+      "id": "instantiate", "kind": "godot",
+      "forms": {"text": ["instantiate"], "code": ["instantiate", "PackedScene.instantiate"]},
+      "def": "Makes a new node, with its children, from a `PackedScene`.",
+      "introduced_at": "3.1", "synonyms": [], "depends_on": ["node", "child", "PackedScene"]
+    },
+    {
+      "id": "collection_record", "kind": "supplied",
+      "forms": {"text": ["collection record"], "code": []},
+      "def": "Per cube, 1 until it is taken, then 0.",
+      "introduced_at": "supplied:3.2", "synonyms": [], "depends_on": [],
+      "note": "section inferred: 3.2 first shows the pickup cubes; ch5 opens it only in an exercise"
+    },
+    {
+      "id": "for", "kind": "gdscript",
+      "forms": {"text": [], "code": ["for"]},
+      "def": "Runs its block once for each value in turn.",
+      "introduced_at": "3.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "in", "kind": "gdscript",
+      "forms": {"text": [], "code": ["in"]},
+      "def": "Names what a `for` goes through.",
+      "introduced_at": "3.2", "synonyms": [], "depends_on": ["for"]
+    },
+    {
+      "id": "loop_variable", "kind": "concept",
+      "forms": {"text": ["loop variable", "loop variables"], "code": []},
+      "def": "The variable a `for` sets anew each time round.",
+      "introduced_at": "3.2", "synonyms": [], "depends_on": ["variable", "for"]
+    },
+    {
+      "id": "address", "kind": "concept",
+      "forms": {"text": ["address", "addresses"], "code": []},
+      "def": "Where a copy sits in a grid: its counts.",
+      "introduced_at": "3.3", "synonyms": [], "depends_on": ["copy", "x", "z", "grid"]
+    },
+    {
+      "id": "grid", "kind": "concept",
+      "forms": {"text": ["grid", "grids"], "code": []},
+      "def": "Copies laid out in rows and columns.",
+      "introduced_at": "3.3", "synonyms": [], "depends_on": ["copy"],
+      "note": "3.3: a loop for z inside a loop for x"
+    },
+    {
+      "id": "lattice", "kind": "concept",
+      "forms": {"text": ["lattice", "lattices"], "code": []},
+      "def": "A grid that also climbs in y.",
+      "introduced_at": "3.4", "synonyms": [], "depends_on": ["grid", "y"],
+      "note": "3.4: a third loop for y"
+    },
+    {
+      "id": "nested_loop", "kind": "concept",
+      "forms": {"text": ["nested loop", "nested loops"], "code": []},
+      "def": "A loop inside a loop: every pair of counts.",
+      "introduced_at": "3.3", "synonyms": [], "depends_on": ["loop"]
+    },
+    {
+      "id": "flight_region", "kind": "supplied",
+      "forms": {"text": ["flight region"], "code": []},
+      "def": "Lets the walker fly inside the lattice.",
+      "introduced_at": "supplied:3.4", "synonyms": [], "depends_on": ["walker", "lattice"]
+    },
+    {
+      "id": "%", "kind": "gdscript",
+      "forms": {"text": [], "code": ["%"]},
+      "def": "The remainder after dividing.",
+      "introduced_at": "3.5", "synonyms": [], "depends_on": ["remainder"]
+    },
+    {
+      "id": "remainder", "kind": "maths",
+      "forms": {"text": ["remainder", "remainders"], "code": []},
+      "def": "What is left when one count divides another.",
+      "introduced_at": "3.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "reflection", "kind": "maths",
+      "forms": {"text": ["reflection", "reflections", "mirror", "mirrors", "mirrored", "mirroring"], "code": []},
+      "def": "A copy flipped, as a mirror shows it.",
+      "introduced_at": "3.6", "synonyms": [], "depends_on": ["copy"],
+      "note": "3.6 mirrors tiles by address; 5.4 and 16.7 teach the same reflection by index again"
+    },
+    {
+      "id": "diagonal_tile", "kind": "supplied",
+      "forms": {"text": ["diagonal tile", "diagonal tiles"], "code": []},
+      "def": "A half-black square, made with `triangle(a, b, c)`.",
+      "introduced_at": "supplied:3.6", "synonyms": [], "depends_on": ["triangle()"]
+    },
+    {
+      "id": "cell_at()", "kind": "supplied",
+      "forms": {"text": [], "code": ["cell_at", "cell_at(x, z)"]},
+      "def": "Finds a floor tile by its address.",
+      "introduced_at": "supplied:3.6", "synonyms": [], "depends_on": ["address"],
+      "opened_at": "5.3",
+      "stub": "func cell_at(x: int, z: int) -> Node3D:\n\treturn null",
+      "note": "3.6 and 5.3 inferred: the sketch says chapter 3, and until arrays arrive in chapter 5",
+      "host": "$Supplied"
+    },
+    {
+      "id": "phase", "kind": "maths",
+      "forms": {"text": ["phase", "phases"], "code": ["phase"]},
+      "def": "How far through its repeat a repeating thing has got.",
+      "introduced_at": "3.8", "synonyms": [], "depends_on": [],
+      "note": "3.8 teaches it as a clock offset; 9.2 teaches it again for oscillation"
+    },
+    {
+      "id": "local_variable", "kind": "concept",
+      "forms": {"text": ["local variable", "local variables"], "code": []},
+      "def": "A variable that lives only inside its function.",
+      "introduced_at": "4.0", "synonyms": [], "depends_on": ["variable", "function"],
+      "note": "chapter 4's code_new names it; no section does"
+    },
+    {
+      "id": "Color", "kind": "godot",
+      "forms": {"text": [], "code": ["Color", "Color(r, g, b)"]},
+      "def": "A colour as three numbers from 0 to 1.",
+      "introduced_at": "4.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "rgb", "kind": "concept",
+      "forms": {"text": ["RGB", "red, green and blue"], "code": []},
+      "def": "A colour mixed from red, green and blue light.",
+      "introduced_at": "4.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "material", "kind": "concept",
+      "forms": {"text": ["material", "materials"], "code": []},
+      "def": "What a mesh wears: its colour and how it shines.",
+      "introduced_at": "4.1", "synonyms": [], "depends_on": ["mesh"]
+    },
+    {
+      "id": "albedo_color", "kind": "godot",
+      "forms": {"text": [], "code": ["albedo_color"]},
+      "def": "A material's own colour.",
+      "introduced_at": "4.1", "synonyms": [], "depends_on": ["material"]
+    },
+    {
+      "id": "function", "kind": "concept",
+      "forms": {"text": ["function", "functions"], "code": []},
+      "def": "A named block of code that takes values and answers.",
+      "introduced_at": "4.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "parameter", "kind": "concept",
+      "forms": {"text": ["parameter", "parameters"], "code": []},
+      "def": "A value a function is given when it is called.",
+      "introduced_at": "4.2", "synonyms": [], "depends_on": ["function", "call"]
+    },
+    {
+      "id": "return", "kind": "gdscript",
+      "forms": {"text": [], "code": ["return"]},
+      "def": "Ends a function and hands its answer back.",
+      "introduced_at": "4.2", "synonyms": [], "depends_on": ["function"],
+      "note": "the sketch also says returns for comes back (6.6, chapter 9's title)"
+    },
+    {
+      "id": "->", "kind": "gdscript",
+      "forms": {"text": [], "code": ["->"]},
+      "def": "Says what kind of value a function answers with.",
+      "introduced_at": "4.2", "synonyms": [], "depends_on": ["function"]
+    },
+    {
+      "id": "by_height", "kind": "name",
+      "forms": {"text": [], "code": ["by_height"]},
+      "def": "Your function: a colour for a height.",
+      "introduced_at": "4.2", "synonyms": [], "depends_on": ["function"]
+    },
+    {
+      "id": "SpotLight3D", "kind": "godot",
+      "forms": {"text": [], "code": ["SpotLight3D"]},
+      "def": "A node that shines a cone of light.",
+      "introduced_at": "4.3", "synonyms": [], "depends_on": ["node"],
+      "note": "taught by 4.3's idea; chapter 4's code_new does not list it"
+    },
+    {
+      "id": "light_color", "kind": "godot",
+      "forms": {"text": [], "code": ["light_color"]},
+      "def": "The colour of a light.",
+      "introduced_at": "4.3", "synonyms": [], "depends_on": [],
+      "note": "taught by 4.3's idea; chapter 4's code_new does not list it"
+    },
+    {
+      "id": "lamp", "kind": "supplied",
+      "forms": {"text": ["lamp you can carry"], "code": []},
+      "def": "A pickup with a `SpotLight3D` inside.",
+      "introduced_at": "supplied:4.3", "synonyms": [], "depends_on": ["SpotLight3D"]
+    },
+    {
+      "id": "colour_from", "kind": "name",
+      "forms": {"text": [], "code": ["colour_from"]},
+      "def": "Your function: a colour for a point in a box.",
+      "introduced_at": "4.4", "synonyms": [], "depends_on": ["function", "point"]
+    },
+    {
+      "id": "from_hsv", "kind": "godot",
+      "forms": {"text": [], "code": ["from_hsv", "Color.from_hsv"]},
+      "def": "Makes a `Color` from hue, saturation and value.",
+      "introduced_at": "4.5", "synonyms": [], "depends_on": ["Color", "hue", "saturation"]
+    },
+    {
+      "id": "hsv", "kind": "concept",
+      "forms": {"text": ["HSV"], "code": []},
+      "def": "A colour as hue, saturation and value.",
+      "introduced_at": "4.5", "synonyms": [], "depends_on": ["hue", "saturation"]
+    },
+    {
+      "id": "hue", "kind": "concept",
+      "forms": {"text": ["hue", "hues"], "code": []},
+      "def": "Where a colour sits on the colour circle.",
+      "introduced_at": "4.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "saturation", "kind": "concept",
+      "forms": {"text": ["saturation"], "code": []},
+      "def": "How strong a colour is, from grey to full.",
+      "introduced_at": "4.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "hue_for", "kind": "name",
+      "forms": {"text": [], "code": ["hue_for"]},
+      "def": "Your function: a hue for one band of many.",
+      "introduced_at": "4.5", "synonyms": [], "depends_on": ["function", "hue"]
+    },
+    {
+      "id": "colour_at", "kind": "name",
+      "forms": {"text": [], "code": ["colour_at"]},
+      "def": "Your function: a colour for any point.",
+      "introduced_at": "4.5", "synonyms": [], "depends_on": ["function", "point"]
+    },
+    {
+      "id": "band_mesh", "kind": "supplied",
+      "forms": {"text": ["band mesh"], "code": []},
+      "def": "The rainbow's arch of bands; you write the colours.",
+      "introduced_at": "supplied:4.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "ink", "kind": "name",
+      "forms": {"text": [], "code": ["ink"]},
+      "def": "Your function: one of four colours for an address.",
+      "introduced_at": "4.6", "synonyms": [], "depends_on": ["function", "address"]
+    },
+    {
+      "id": "class", "kind": "concept",
+      "forms": {"text": ["class", "classes"], "code": []},
+      "def": "A kind of thing you write: data and behaviour.",
+      "introduced_at": "4.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "object", "kind": "concept",
+      "forms": {"text": ["object", "objects"], "code": []},
+      "def": "One thing made from a class.",
+      "introduced_at": "4.7", "synonyms": [], "depends_on": ["class"]
+    },
+    {
+      "id": "method", "kind": "concept",
+      "forms": {"text": ["method", "methods"], "code": []},
+      "def": "A function that belongs to a class.",
+      "introduced_at": "4.7", "synonyms": [], "depends_on": ["function", "class"]
+    },
+    {
+      "id": "class_name", "kind": "gdscript",
+      "forms": {"text": [], "code": ["class_name"]},
+      "def": "Names a class so other scripts can use it.",
+      "introduced_at": "4.7", "synonyms": [], "depends_on": ["class", "script"]
+    },
+    {
+      "id": "@export", "kind": "gdscript",
+      "forms": {"text": [], "code": ["@export"]},
+      "def": "Shows a variable in the Inspector, to set per object.",
+      "introduced_at": "4.7", "synonyms": [], "depends_on": ["variable", "Inspector", "object"]
+    },
+    {
+      "id": "SprayCan", "kind": "name",
+      "forms": {"text": [], "code": ["SprayCan"]},
+      "def": "Your class: a can with a colour that sprays.",
+      "introduced_at": "4.7", "synonyms": [], "depends_on": ["class"]
+    },
+    {
+      "id": "spray", "kind": "name",
+      "forms": {"text": [], "code": ["spray"]},
+      "def": "SprayCan's method: paints its colour onto the canvas.",
+      "introduced_at": "4.7", "synonyms": [], "depends_on": ["method"]
+    },
+    {
+      "id": "paint_call", "kind": "supplied",
+      "forms": {"text": ["paint-into-image call"], "code": []},
+      "def": "Paints a colour into the canvas picture.",
+      "introduced_at": "supplied:4.7", "synonyms": [], "depends_on": [],
+      "opened_at": "5.6",
+      "note": "the sketch says images are opened in chapter 5: 5.6 teaches Image"
+    },
+    {
+      "id": "point_on_canvas()", "kind": "supplied",
+      "forms": {"text": [], "code": ["point_on_canvas", "point_on_canvas(ray)"]},
+      "def": "The point on the canvas the nozzle aims at.",
+      "introduced_at": "supplied:4.7", "synonyms": [], "depends_on": ["point"],
+      "stub": "func point_on_canvas(ray) -> Vector3:\n\treturn Vector3()",
+      "note": "the ray inside is never opened",
+      "host": "$Supplied"
+    },
+    {
+      "id": "new", "kind": "gdscript",
+      "forms": {"text": [], "code": ["new"]},
+      "def": "Makes an object from a class.",
+      "introduced_at": "4.8", "synonyms": [], "depends_on": ["object", "class"],
+      "note": "4.8 teaches many objects from one class; the sketch never writes .new() itself"
+    },
+    {
+      "id": "Pane", "kind": "name",
+      "forms": {"text": [], "code": ["Pane"]},
+      "def": "Your class: a see-through pane of one colour.",
+      "introduced_at": "4.8", "synonyms": [], "depends_on": ["class"]
+    },
+    {
+      "id": "size", "kind": "godot",
+      "forms": {"text": [], "code": ["size"]},
+      "def": "How many values an array holds.",
+      "introduced_at": "5.0", "synonyms": [], "depends_on": ["array"],
+      "note": "chapter 5's code_new names it; no section does"
+    },
+    {
+      "id": "append", "kind": "godot",
+      "forms": {"text": [], "code": ["append"]},
+      "def": "Adds a value to the end of an array.",
+      "introduced_at": "5.0", "synonyms": [], "depends_on": ["array"],
+      "note": "chapter 5's code_new names it; no section does"
+    },
+    {
+      "id": "array", "kind": "concept",
+      "forms": {"text": ["array", "arrays"], "code": ["Array"]},
+      "def": "Values kept in order, one after another.",
+      "introduced_at": "5.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "item", "kind": "concept",
+      "forms": {"text": ["item", "items"], "code": []},
+      "def": "One value kept in an array.",
+      "introduced_at": "5.1", "synonyms": [], "depends_on": ["array"],
+      "note": "5.0's code_new: for item in array"
+    },
+    {
+      "id": "cell", "kind": "concept",
+      "forms": {"text": ["cell", "cells"], "code": []},
+      "def": "One place of a grid, holding a state.",
+      "introduced_at": "5.1", "synonyms": [], "depends_on": ["grid"],
+      "other_senses": [{"words": ["cell", "cells"], "at": ["17.6"], "sense": "a panel of a figure"}],
+      "note": "the sketch says cell from chapter 5 on (three lit cells, the source cell); 13.1 gives a cell its state and returns to it"
+    },
+    {
+      "id": "index", "kind": "concept",
+      "forms": {"text": ["index", "indices", "indexes"], "code": []},
+      "def": "An item's place in an array, counted from 0.",
+      "introduced_at": "5.1", "synonyms": [], "depends_on": ["array", "item"],
+      "other_senses": [{"words": ["index"], "at": ["3.4"], "sense": "a loop's counter: the third loop of a lattice"}]
+    },
+    {
+      "id": "[]", "kind": "gdscript",
+      "forms": {"text": [], "code": ["[]"]},
+      "def": "Makes an array, or reads one item by its index.",
+      "introduced_at": "5.1", "synonyms": [], "depends_on": ["array", "index", "item"]
+    },
+    {
+      "id": "note_per_track", "kind": "supplied",
+      "forms": {"text": ["note per track"], "code": []},
+      "def": "The sound behind each step of the sequencer.",
+      "introduced_at": "supplied:5.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "AudioStreamPlayer", "kind": "godot",
+      "forms": {"text": [], "code": ["AudioStreamPlayer"]},
+      "def": "A node that plays a sound.",
+      "introduced_at": "supplied:5.1", "synonyms": [], "depends_on": ["node"],
+      "note": "inside the supplied note per track; never opened, though 9.7 needs one to play its tone"
+    },
+    {
+      "id": "array_of_arrays", "kind": "concept",
+      "forms": {"text": ["array of arrays", "arrays of arrays"], "code": []},
+      "def": "An array whose items are arrays: a grid by rows.",
+      "introduced_at": "5.3", "synonyms": [], "depends_on": ["array", "grid", "item"]
+    },
+    {
+      "id": "wrap", "kind": "concept",
+      "forms": {"text": ["wrap", "wraps", "wrapping", "wrapped"], "code": []},
+      "def": "Running off one end, coming back at the other.",
+      "introduced_at": "5.4", "synonyms": [], "depends_on": ["address"],
+      "note": "5.6's title says wrap a room: to dress it"
+    },
+    {
+      "id": "pick()", "kind": "supplied",
+      "forms": {"text": [], "code": ["pick", "pick()"]},
+      "def": "The floor square under the pointer or the controller.",
+      "introduced_at": "supplied:5.5", "synonyms": [], "depends_on": [],
+      "stub": "func pick() -> Vector2i:\n\treturn Vector2i(0, 0)",
+      "note": "the ray inside is never opened",
+      "host": "$Supplied"
+    },
+    {
+      "id": "Image", "kind": "godot",
+      "forms": {"text": [], "code": ["Image"]},
+      "def": "A picture held in memory, that code can write into.",
+      "introduced_at": "5.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "set_pixel", "kind": "godot",
+      "forms": {"text": [], "code": ["set_pixel", "Image.set_pixel"]},
+      "def": "Sets the colour at one place of an `Image`.",
+      "introduced_at": "5.6", "synonyms": [], "depends_on": ["Image"]
+    },
+    {
+      "id": "ImageTexture", "kind": "godot",
+      "forms": {"text": [], "code": ["ImageTexture"]},
+      "def": "An `Image` made ready for a material to wear.",
+      "introduced_at": "5.6", "synonyms": [], "depends_on": ["Image", "material"]
+    },
+    {
+      "id": "texture", "kind": "concept",
+      "forms": {"text": ["texture", "textures"], "code": []},
+      "def": "A picture a material wears on a mesh.",
+      "introduced_at": "5.6", "synonyms": [], "depends_on": ["material", "mesh"]
+    },
+    {
+      "id": "wallpaper_group", "kind": "concept",
+      "forms": {"text": ["wallpaper group", "wallpaper groups", "wallpaper", "wallpapers", "P1", "PM", "PG", "P4", "P2"], "code": []},
+      "def": "One way to repeat a tile: P1, PM, PG, P4.",
+      "introduced_at": "5.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "catwalk_path", "kind": "supplied",
+      "forms": {"text": ["catwalk path"], "code": []},
+      "def": "The path your figures walk along.",
+      "introduced_at": "supplied:5.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "uv_repeat", "kind": "supplied",
+      "forms": {"text": ["UV repeat"], "code": []},
+      "def": "How the hall repeats the pattern on the skirt.",
+      "introduced_at": "supplied:5.8", "synonyms": [], "depends_on": [],
+      "note": "the course puts an ImageTexture on the skirt instead"
+    },
+    {
+      "id": "velocity", "kind": "maths",
+      "forms": {"text": ["velocity", "velocities"], "code": ["velocity"]},
+      "def": "How far a body moves in a second: a `Vector3`.",
+      "introduced_at": "6.1", "synonyms": [], "depends_on": ["body", "Vector3"]
+    },
+    {
+      "id": "acceleration", "kind": "maths",
+      "forms": {"text": ["acceleration", "accelerations"], "code": ["acceleration"]},
+      "def": "How much the velocity changes in a second.",
+      "introduced_at": "6.2", "synonyms": [], "depends_on": ["velocity"]
+    },
+    {
+      "id": "gravity", "kind": "maths",
+      "forms": {"text": ["gravity"], "code": []},
+      "def": "The pull down: an acceleration every body shares.",
+      "introduced_at": "6.2", "synonyms": [], "depends_on": ["acceleration", "body"]
+    },
+    {
+      "id": "fixed_step", "kind": "concept",
+      "forms": {"text": ["fixed step", "step size"], "code": []},
+      "def": "A step of time that does not change between frames.",
+      "introduced_at": "6.2", "synonyms": [], "depends_on": ["frame"]
+    },
+    {
+      "id": "_physics_process", "kind": "godot",
+      "forms": {"text": [], "code": ["_physics_process"]},
+      "def": "Runs at a fixed step, the same on every machine.",
+      "introduced_at": "6.2", "synonyms": [], "depends_on": ["fixed_step"],
+      "note": "6.2 inferred: the throw is stepped there"
+    },
+    {
+      "id": "rate", "kind": "maths",
+      "forms": {"text": ["rate", "rates"], "code": []},
+      "def": "A rise divided by the gap it rose over.",
+      "introduced_at": "6.3", "synonyms": [], "depends_on": [],
+      "note": "8.1 and 8.2 also say rate for a step size"
+    },
+    {
+      "id": "f()", "kind": "supplied",
+      "forms": {"text": [], "code": ["f", "f(x)"]},
+      "def": "The Change_Intro curve: one height for each x.",
+      "introduced_at": "supplied:6.3", "synonyms": [], "depends_on": ["x"],
+      "stub": "func f(x: float) -> float:\n\treturn 0.0",
+      "note": "built from sines; sin and cos are opened in chapter 9",
+      "host": "$Supplied"
+    },
+    {
+      "id": "secant", "kind": "maths",
+      "forms": {"text": ["secant", "secants"], "code": []},
+      "def": "A line through two points of a curve.",
+      "introduced_at": "6.3", "synonyms": [], "depends_on": ["line", "point"]
+    },
+    {
+      "id": "tangent", "kind": "maths",
+      "forms": {"text": ["tangent", "tangents"], "code": []},
+      "def": "The line a curve runs along at one point.",
+      "introduced_at": "6.3", "synonyms": [], "depends_on": ["line", "point"]
+    },
+    {
+      "id": "accumulation", "kind": "maths",
+      "forms": {"text": ["accumulation"], "code": []},
+      "def": "A total built by adding many small parts.",
+      "introduced_at": "6.4", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "field", "kind": "concept",
+      "forms": {"text": ["field", "fields"], "code": []},
+      "def": "A rule that gives every place its own value.",
+      "introduced_at": "6.5", "synonyms": [], "depends_on": [],
+      "other_senses": [{"words": ["field", "fields"], "at": ["3.6", "3.7", "4.5", "4.x", "5.4", "5.5", "5.6", "5.8"], "sense": "an area of colour or pattern"}],
+      "note": "18.1 defines it again: a function that returns one number for any point"
+    },
+    {
+      "id": "flow_field", "kind": "concept",
+      "forms": {"text": ["flow field", "flow fields", "flow-field"], "code": []},
+      "def": "A field whose value at each place is a direction.",
+      "introduced_at": "6.5", "synonyms": ["direction field", "direction fields", "arrow field", "arrow fields"], "depends_on": ["field"]
+    },
+    {
+      "id": "particle", "kind": "concept",
+      "forms": {"text": ["particle", "particles"], "code": []},
+      "def": "A body that is only a point that moves.",
+      "introduced_at": "6.5", "synonyms": [], "depends_on": ["body", "point"]
+    },
+    {
+      "id": "field_direction()", "kind": "supplied",
+      "forms": {"text": [], "code": ["field_direction", "field_direction(p)"]},
+      "def": "The flow field's direction at a place.",
+      "introduced_at": "supplied:6.5", "synonyms": [], "depends_on": ["flow_field"],
+      "stub": "func field_direction(p: Vector3) -> Vector3:\n\treturn Vector3.RIGHT",
+      "note": "supplied because its noise comes in chapter 11 and its sin and cos in chapter 9",
+      "host": "$Supplied"
+    },
+    {
+      "id": "trail()", "kind": "supplied",
+      "forms": {"text": [], "code": ["trail", "trail(points, n)"]},
+      "def": "Keeps the last n places of a moving body.",
+      "introduced_at": "supplied:6.5", "synonyms": [], "depends_on": ["body"],
+      "opened_at": "9.4",
+      "stub": "func trail(points: Array, n: int) -> void:\n\tpass",
+      "host": "$Supplied"
+    },
+    {
+      "id": "fposmod", "kind": "gdscript",
+      "forms": {"text": [], "code": ["fposmod"]},
+      "def": "A remainder that is never negative: it wraps.",
+      "introduced_at": "6.6", "synonyms": [], "depends_on": ["remainder", "wrap"]
+    },
+    {
+      "id": "RigidBody3D", "kind": "godot",
+      "forms": {"text": ["rigid body", "rigid bodies"], "code": ["RigidBody3D"]},
+      "def": "A body Godot moves for you, by forces and contact.",
+      "introduced_at": "7.0", "synonyms": [], "depends_on": ["body", "force"],
+      "note": "chapter 7's code_new names it; no section does"
+    },
+    {
+      "id": "apply_central_force", "kind": "godot",
+      "forms": {"text": [], "code": ["apply_central_force"]},
+      "def": "Pushes a `RigidBody3D` with a force through its centre.",
+      "introduced_at": "7.0", "synonyms": [], "depends_on": ["RigidBody3D", "force"],
+      "note": "chapter 7's code_new names it; no section does"
+    },
+    {
+      "id": "vector", "kind": "maths",
+      "forms": {"text": ["vector", "vectors"], "code": []},
+      "def": "A move: a length and a direction, end minus start.",
+      "introduced_at": "7.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "unit_vector", "kind": "maths",
+      "forms": {"text": ["unit vector", "unit vectors", "unit direction", "unit directions"], "code": []},
+      "def": "A vector of length one: a pure direction.",
+      "introduced_at": "7.1", "synonyms": [], "depends_on": ["vector"]
+    },
+    {
+      "id": "normalized", "kind": "godot",
+      "forms": {"text": [], "code": ["normalized"]},
+      "def": "The unit vector in the same direction.",
+      "introduced_at": "7.1", "synonyms": [], "depends_on": ["unit_vector"]
+    },
+    {
+      "id": "draw_arrow()", "kind": "supplied",
+      "forms": {"text": [], "code": ["draw_arrow", "draw_arrow(from, to, colour)"]},
+      "def": "Draws a vector as a rod and a cone.",
+      "introduced_at": "supplied:7.1", "synonyms": [], "depends_on": ["vector"],
+      "stub": "func draw_arrow(from: Vector3, to: Vector3, colour: Color) -> void:\n\tpass",
+      "host": "$Supplied"
+    },
+    {
+      "id": "dot", "kind": "maths",
+      "forms": {"text": ["dot product", "dot products"], "code": ["dot"]},
+      "def": "How much two directions agree: large along, zero across.",
+      "introduced_at": "7.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "projection", "kind": "maths",
+      "forms": {"text": ["projection", "projections"], "code": []},
+      "def": "The part of one vector that runs along another.",
+      "introduced_at": "7.3", "synonyms": [], "depends_on": ["vector"]
+    },
+    {
+      "id": "mass", "kind": "maths",
+      "forms": {"text": ["mass", "masses"], "code": ["mass"]},
+      "def": "How much a body resists a change of velocity.",
+      "introduced_at": "7.4", "synonyms": [], "depends_on": ["body", "velocity"]
+    },
+    {
+      "id": "force", "kind": "maths",
+      "forms": {"text": ["force", "forces"], "code": []},
+      "def": "A push that changes velocity: acceleration times mass.",
+      "introduced_at": "7.4", "synonyms": [], "depends_on": ["velocity", "acceleration", "mass"]
+    },
+    {
+      "id": "apply_force", "kind": "name",
+      "forms": {"text": [], "code": ["apply_force"]},
+      "def": "Your method: adds a force into this step's acceleration.",
+      "introduced_at": "7.4", "synonyms": [], "depends_on": ["method", "force", "acceleration"],
+      "note": "7.4 inferred"
+    },
+    {
+      "id": "drag", "kind": "maths",
+      "forms": {"text": ["drag"], "code": []},
+      "def": "A force against the velocity: -c times velocity.",
+      "introduced_at": "7.6", "synonyms": [], "depends_on": ["force", "velocity"]
+    },
+    {
+      "id": "spring", "kind": "maths",
+      "forms": {"text": ["spring", "springs"], "code": []},
+      "def": "A force back toward rest: -k times the stretch.",
+      "introduced_at": "7.6", "synonyms": [], "depends_on": ["force"]
+    },
+    {
+      "id": "attraction", "kind": "maths",
+      "forms": {"text": ["attraction", "attractor", "attractors"], "code": []},
+      "def": "A pull between two bodies that weakens with distance.",
+      "introduced_at": "7.7", "synonyms": [], "depends_on": ["body"],
+      "note": "16.x says attraction again for steps toward the nearest food points"
+    },
+    {
+      "id": "centre_of_mass", "kind": "maths",
+      "forms": {"text": ["centre of mass"], "code": []},
+      "def": "The point a body balances on.",
+      "introduced_at": "7.8", "synonyms": [], "depends_on": ["body", "point"]
+    },
+    {
+      "id": "support_outline", "kind": "concept",
+      "forms": {"text": ["support outline", "support outlines"], "code": []},
+      "def": "The outline round where a body touches the ground.",
+      "introduced_at": "7.8", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "Geometry2D", "kind": "godot",
+      "forms": {"text": [], "code": ["Geometry2D"]},
+      "def": "Godot's tools for flat geometry.",
+      "introduced_at": "7.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "convex_hull", "kind": "godot",
+      "forms": {"text": [], "code": ["convex_hull", "Geometry2D.convex_hull"]},
+      "def": "The tightest outline round a set of points.",
+      "introduced_at": "7.8", "synonyms": [], "depends_on": ["point"]
+    },
+    {
+      "id": "Area3D", "kind": "godot",
+      "forms": {"text": [], "code": ["Area3D"]},
+      "def": "A region that notices bodies and can change gravity.",
+      "introduced_at": "7.9", "synonyms": [], "depends_on": ["body", "gravity"]
+    },
+    {
+      "id": "body_entered", "kind": "godot",
+      "forms": {"text": [], "code": ["body_entered"]},
+      "def": "The signal an `Area3D` sends when a body comes in.",
+      "introduced_at": "7.9", "synonyms": [], "depends_on": ["signal", "Area3D", "body"],
+      "late_deps": ["signal"],
+      "note": "a signal before signals: 24.7 teaches them"
+    },
+    {
+      "id": "body_exited", "kind": "godot",
+      "forms": {"text": [], "code": ["body_exited"]},
+      "def": "The signal an `Area3D` sends when a body leaves.",
+      "introduced_at": "7.9", "synonyms": [], "depends_on": ["signal", "Area3D", "body"],
+      "late_deps": ["signal"],
+      "note": "a signal before signals: 24.7 teaches them"
+    },
+    {
+      "id": "slope", "kind": "maths",
+      "forms": {"text": ["slope", "slopes"], "code": []},
+      "def": "How steep a curve is at a place: its rate.",
+      "introduced_at": "8.1", "synonyms": [], "depends_on": ["rate"]
+    },
+    {
+      "id": "gradient", "kind": "maths",
+      "forms": {"text": ["gradient", "gradients"], "code": []},
+      "def": "The slope in each direction: which way is uphill.",
+      "introduced_at": "8.1", "synonyms": [], "depends_on": ["slope"]
+    },
+    {
+      "id": "sample", "kind": "concept",
+      "forms": {"text": ["sample", "samples", "sampled", "sampling"], "code": []},
+      "def": "One value read from a rule at one place.",
+      "introduced_at": "8.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "central_difference", "kind": "maths",
+      "forms": {"text": ["central difference", "central differences"], "code": []},
+      "def": "A slope from two samples, one on each side.",
+      "introduced_at": "8.1", "synonyms": [], "depends_on": ["slope", "sample"]
+    },
+    {
+      "id": "gradient_descent", "kind": "maths",
+      "forms": {"text": ["gradient descent"], "code": []},
+      "def": "Stepping against the gradient, again and again, to go downhill.",
+      "introduced_at": "8.1", "synonyms": [], "depends_on": ["gradient"],
+      "note": "21.3 teaches it again, by nudging"
+    },
+    {
+      "id": "-=", "kind": "gdscript",
+      "forms": {"text": [], "code": ["-="]},
+      "def": "Takes away from what a variable holds.",
+      "introduced_at": "8.1", "synonyms": [], "depends_on": ["variable"]
+    },
+    {
+      "id": "cost_function", "kind": "maths",
+      "forms": {"text": ["cost function", "cost functions", "cost surface", "cost"], "code": []},
+      "def": "A height to make small: lower is better.",
+      "introduced_at": "8.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "landscape()", "kind": "supplied",
+      "forms": {"text": [], "code": ["landscape", "landscape(x, z)"]},
+      "def": "The halls' cost functions: hills and valleys.",
+      "introduced_at": "supplied:8.1", "synonyms": [], "depends_on": ["cost_function", "x", "z"],
+      "stub": "func landscape(x: float, z: float) -> float:\n\treturn 0.0",
+      "note": "wrinkled with sines; trig is opened in chapter 9",
+      "host": "$Supplied"
+    },
+    {
+      "id": "stopping_rule", "kind": "concept",
+      "forms": {"text": ["stopping rule", "stopping rules"], "code": []},
+      "def": "The test that says a search is done.",
+      "introduced_at": "8.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "cosh", "kind": "gdscript",
+      "forms": {"text": [], "code": ["cosh"]},
+      "def": "The curve a hanging chain makes.",
+      "introduced_at": "8.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "Curve3D", "kind": "godot",
+      "forms": {"text": [], "code": ["Curve3D"]},
+      "def": "A smooth path through points you give.",
+      "introduced_at": "8.3", "synonyms": [], "depends_on": ["point"],
+      "note": "8.3 inferred"
+    },
+    {
+      "id": "verlet", "kind": "maths",
+      "forms": {"text": ["Verlet", "Verlet integration"], "code": []},
+      "def": "Next place from this place and the last one.",
+      "introduced_at": "8.4", "synonyms": [], "depends_on": ["velocity"]
+    },
+    {
+      "id": "Particle", "kind": "name",
+      "forms": {"text": [], "code": ["Particle"]},
+      "def": "Your class: a particle that remembers where it was.",
+      "introduced_at": "8.4", "synonyms": [], "depends_on": ["class", "particle"]
+    },
+    {
+      "id": "pin", "kind": "concept",
+      "forms": {"text": ["pin", "pins", "pinned"], "code": []},
+      "def": "A point held still while the rest moves.",
+      "introduced_at": "8.4", "synonyms": [], "depends_on": ["point"],
+      "other_senses": [{"words": ["pins"], "at": ["7.1", "7.x"], "sense": "marker pins on the floor"}],
+      "note": "17.2 teaches it again: a pin is a point that may not move"
+    },
+    {
+      "id": "rest_length", "kind": "concept",
+      "forms": {"text": ["rest length", "rest lengths"], "code": []},
+      "def": "The length a link has when nothing pulls it.",
+      "introduced_at": "8.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "constraint", "kind": "concept",
+      "forms": {"text": ["constraint", "constraints"], "code": []},
+      "def": "A rule two points must keep, like a rest length.",
+      "introduced_at": "8.5", "synonyms": [], "depends_on": ["point", "rest_length"]
+    },
+    {
+      "id": "relax", "kind": "concept",
+      "forms": {"text": ["relax", "relaxed", "relaxing", "relaxation"], "code": []},
+      "def": "Pulling every constraint back toward true, pass after pass.",
+      "introduced_at": "8.5", "synonyms": [], "depends_on": ["constraint"]
+    },
+    {
+      "id": "lever_law", "kind": "maths",
+      "forms": {"text": ["lever law", "lever"], "code": []},
+      "def": "Balance: mass times distance is equal on both sides.",
+      "introduced_at": "8.6", "synonyms": [], "depends_on": ["mass"]
+    },
+    {
+      "id": "calder_builder", "kind": "supplied",
+      "forms": {"text": ["Calder mobile's builder"], "code": []},
+      "def": "Hangs arms from arms by calling itself.",
+      "introduced_at": "supplied:8.6", "synonyms": [], "depends_on": ["call"],
+      "note": "recursion inside; chapter 14 teaches it"
+    },
+    {
+      "id": "simulated_annealing", "kind": "maths",
+      "forms": {"text": ["simulated annealing", "annealing", "annealer"], "code": []},
+      "def": "A search that accepts worse steps less as it cools.",
+      "introduced_at": "8.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "exp", "kind": "gdscript",
+      "forms": {"text": [], "code": ["exp"]},
+      "def": "e raised to a power: fast growth, or fast fading.",
+      "introduced_at": "8.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "chance()", "kind": "supplied",
+      "forms": {"text": [], "code": ["chance", "chance(p)"]},
+      "def": "True with a likelihood p.",
+      "introduced_at": "supplied:8.7", "synonyms": [], "depends_on": [],
+      "opened_at": "10.1",
+      "stub": "func chance(p: float) -> bool:\n\treturn false",
+      "note": "opened when 10.1 teaches randf()",
+      "host": "$Supplied"
+    },
+    {
+      "id": "sleeping", "kind": "godot",
+      "forms": {"text": [], "code": ["sleeping"]},
+      "def": "True while a `RigidBody3D` has come to rest.",
+      "introduced_at": "8.8", "synonyms": [], "depends_on": ["RigidBody3D"]
+    },
+    {
+      "id": "TAU", "kind": "gdscript",
+      "forms": {"text": [], "code": ["TAU"]},
+      "def": "One full turn, about 6.28.",
+      "introduced_at": "9.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "radian", "kind": "maths",
+      "forms": {"text": ["radian", "radians"], "code": []},
+      "def": "The angle unit Godot uses: a full turn is `TAU`.",
+      "introduced_at": "9.1", "synonyms": [], "depends_on": ["TAU"]
+    },
+    {
+      "id": "sin", "kind": "gdscript",
+      "forms": {"text": [], "code": ["sin"]},
+      "def": "The height of a point going round a circle.",
+      "introduced_at": "9.1", "synonyms": [], "depends_on": ["point"]
+    },
+    {
+      "id": "cos", "kind": "gdscript",
+      "forms": {"text": [], "code": ["cos"]},
+      "def": "The sideways place of a point going round a circle.",
+      "introduced_at": "9.1", "synonyms": [], "depends_on": ["point"]
+    },
+    {
+      "id": "polar_coordinates", "kind": "maths",
+      "forms": {"text": ["polar coordinates", "polar"], "code": []},
+      "def": "A place as a distance and an angle.",
+      "introduced_at": "9.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "sine", "kind": "maths",
+      "forms": {"text": ["sine", "sines", "sine wave", "sine waves"], "code": []},
+      "def": "The rise and fall of `sin` over time.",
+      "introduced_at": "9.2", "synonyms": [], "depends_on": ["sin"]
+    },
+    {
+      "id": "amplitude", "kind": "maths",
+      "forms": {"text": ["amplitude", "amplitudes"], "code": []},
+      "def": "How far a repeating thing swings from its middle.",
+      "introduced_at": "9.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "period", "kind": "maths",
+      "forms": {"text": ["period", "periods"], "code": []},
+      "def": "How long one repeat takes.",
+      "introduced_at": "9.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "frequency", "kind": "maths",
+      "forms": {"text": ["frequency", "frequencies"], "code": ["frequency"]},
+      "def": "How many repeats happen in a second.",
+      "introduced_at": "9.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "angular_velocity", "kind": "maths",
+      "forms": {"text": ["angular velocity"], "code": []},
+      "def": "How fast an angle changes.",
+      "introduced_at": "9.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "angular_acceleration", "kind": "maths",
+      "forms": {"text": ["angular acceleration"], "code": []},
+      "def": "How fast the angular velocity changes.",
+      "introduced_at": "9.3", "synonyms": [], "depends_on": ["angular_velocity"]
+    },
+    {
+      "id": "push_front", "kind": "godot",
+      "forms": {"text": [], "code": ["push_front"]},
+      "def": "Puts an item at the start of an array.",
+      "introduced_at": "9.4", "synonyms": [], "depends_on": ["array", "item"]
+    },
+    {
+      "id": "resize", "kind": "godot",
+      "forms": {"text": [], "code": ["resize"]},
+      "def": "Makes an array exactly n items long.",
+      "introduced_at": "9.4", "synonyms": [], "depends_on": ["array", "item"]
+    },
+    {
+      "id": "surface", "kind": "maths",
+      "forms": {"text": ["surface", "surfaces"], "code": []},
+      "def": "A thin sheet bent through space.",
+      "introduced_at": "9.5", "synonyms": [], "depends_on": [],
+      "other_senses": [{"words": ["surface"], "at": ["1.0", "1.x"], "sense": "the mesh: what is seen"}]
+    },
+    {
+      "id": "oscillation", "kind": "maths",
+      "forms": {"text": ["oscillation", "oscillations", "oscillate", "oscillates", "oscillating"], "code": []},
+      "def": "A motion that repeats about a middle.",
+      "introduced_at": "9.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "wave", "kind": "maths",
+      "forms": {"text": ["wave", "waves"], "code": []},
+      "def": "The same oscillation, later the farther from the source.",
+      "introduced_at": "9.6", "synonyms": [], "depends_on": ["oscillation"],
+      "other_senses": [{"words": ["wave"], "at": ["9.4"], "sense": "the shape one pendulum's record makes when laid out in time"}]
+    },
+    {
+      "id": "AudioStreamWAV", "kind": "godot",
+      "forms": {"text": [], "code": ["AudioStreamWAV"]},
+      "def": "A sound made from numbers you write.",
+      "introduced_at": "9.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "PackedByteArray", "kind": "godot",
+      "forms": {"text": [], "code": ["PackedByteArray"]},
+      "def": "A compact array of small numbers, from 0 to 255.",
+      "introduced_at": "9.7", "synonyms": [], "depends_on": ["array"]
+    },
+    {
+      "id": "encode_s16", "kind": "godot",
+      "forms": {"text": [], "code": ["encode_s16", "PackedByteArray.encode_s16"]},
+      "def": "Writes one sound sample into a `PackedByteArray`.",
+      "introduced_at": "9.7", "synonyms": [], "depends_on": ["sample", "PackedByteArray"]
+    },
+    {
+      "id": "ValueMapper3D", "kind": "supplied",
+      "forms": {"text": [], "code": ["ValueMapper3D"]},
+      "def": "A cage: where you hold a ball becomes three numbers.",
+      "introduced_at": "supplied:9.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "random", "kind": "concept",
+      "forms": {"text": ["random", "randomness", "randomly"], "code": []},
+      "def": "Not chosen by you, and not known before it comes.",
+      "introduced_at": "10.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "RandomNumberGenerator", "kind": "godot",
+      "forms": {"text": [], "code": ["RandomNumberGenerator"]},
+      "def": "An object that draws random numbers for you.",
+      "introduced_at": "10.1", "synonyms": [], "depends_on": ["object", "random"],
+      "note": "10.1 inferred: code_new lists it with randf()"
+    },
+    {
+      "id": "randf", "kind": "gdscript",
+      "forms": {"text": [], "code": ["randf"]},
+      "def": "A random number from 0 to 1.",
+      "introduced_at": "10.1", "synonyms": [], "depends_on": ["random"]
+    },
+    {
+      "id": "seed", "kind": "concept",
+      "forms": {"text": ["seed", "seeds", "seeded"], "code": ["seed"]},
+      "def": "The start number that makes the same random draws again.",
+      "introduced_at": "10.2", "synonyms": [], "depends_on": ["random"],
+      "note": "12.8, 13.4, 17.8 and 22.x also say seed for the first live cells or a starting point"
+    },
+    {
+      "id": "histogram", "kind": "maths",
+      "forms": {"text": ["histogram", "histograms"], "code": []},
+      "def": "Bars that count how often each value came up.",
+      "introduced_at": "10.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "distribution", "kind": "maths",
+      "forms": {"text": ["distribution", "distributions"], "code": []},
+      "def": "How often each value comes up, over many draws.",
+      "introduced_at": "10.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "uniform_distribution", "kind": "maths",
+      "forms": {"text": ["uniform distribution"], "code": []},
+      "def": "A distribution where every value is equally likely.",
+      "introduced_at": "10.3", "synonyms": [], "depends_on": ["distribution"]
+    },
+    {
+      "id": "randi_range", "kind": "gdscript",
+      "forms": {"text": [], "code": ["randi_range"]},
+      "def": "A random number with no fractional part, between two ends.",
+      "introduced_at": "10.4", "synonyms": [], "depends_on": ["random"]
+    },
+    {
+      "id": "ten_print", "kind": "name",
+      "forms": {"text": ["10 PRINT"], "code": []},
+      "def": "A maze drawn by one random choice per square.",
+      "introduced_at": "10.4", "synonyms": [], "depends_on": ["random"]
+    },
+    {
+      "id": "random_walk", "kind": "maths",
+      "forms": {"text": ["random walk", "random walks"], "code": []},
+      "def": "A path made of random steps.",
+      "introduced_at": "10.6", "synonyms": [], "depends_on": ["random"]
+    },
+    {
+      "id": "Wanderer", "kind": "name",
+      "forms": {"text": ["wanderer", "wanderers"], "code": ["Wanderer"]},
+      "def": "Your class: a position taking a random step each frame.",
+      "introduced_at": "10.6", "synonyms": [], "depends_on": ["class", "position", "random", "frame"]
+    },
+    {
+      "id": "trace()", "kind": "supplied",
+      "forms": {"text": [], "code": ["trace", "trace(points)"]},
+      "def": "Draws a line through an array of positions.",
+      "introduced_at": "supplied:10.6", "synonyms": [], "depends_on": ["line", "array", "position"],
+      "stub": "func trace(points: Array) -> void:\n\tpass",
+      "host": "$Supplied"
+    },
+    {
+      "id": "probability", "kind": "maths",
+      "forms": {"text": ["probability", "probabilities"], "code": []},
+      "def": "How likely something is, from 0 (never) to 1 (always).",
+      "introduced_at": "10.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "normal_distribution", "kind": "maths",
+      "forms": {"text": ["normal distribution", "bell curve"], "code": []},
+      "def": "The bell: values near the middle, few far out.",
+      "introduced_at": "10.7", "synonyms": ["Gaussian"], "depends_on": ["distribution"]
+    },
+    {
+      "id": "randfn", "kind": "gdscript",
+      "forms": {"text": [], "code": ["randfn"]},
+      "def": "A random number from the normal distribution.",
+      "introduced_at": "10.7", "synonyms": [], "depends_on": ["random", "normal_distribution"],
+      "note": "10.7 inferred: its caption names randfn()"
+    },
+    {
+      "id": "drawn_wait", "kind": "concept",
+      "forms": {"text": ["drawn wait", "drawn waits"], "code": []},
+      "def": "A pause whose length is a random draw.",
+      "introduced_at": "10.8", "synonyms": [], "depends_on": ["random"]
+    },
+    {
+      "id": "await", "kind": "gdscript",
+      "forms": {"text": ["await"], "code": ["await"]},
+      "def": "Pauses a function until something happens.",
+      "introduced_at": "supplied:10.8", "synonyms": [], "depends_on": ["function"],
+      "note": "the sketch says await is taught later; no chapter teaches it"
+    },
+    {
+      "id": "get_tree", "kind": "godot",
+      "forms": {"text": [], "code": ["get_tree"]},
+      "def": "The scene tree that runs, as something you ask.",
+      "introduced_at": "supplied:10.8", "synonyms": [], "depends_on": ["scene_tree"],
+      "note": "part of the supplied timer line; never opened"
+    },
+    {
+      "id": "create_timer", "kind": "godot",
+      "forms": {"text": [], "code": ["create_timer", "timeout"]},
+      "def": "A timer that sends `timeout` after some seconds.",
+      "introduced_at": "supplied:10.8", "synonyms": [], "depends_on": [],
+      "note": "part of the supplied timer line; never opened"
+    },
+    {
+      "id": "create_tween", "kind": "godot",
+      "forms": {"text": ["tween", "tweens"], "code": ["create_tween"]},
+      "def": "Slides a value smoothly from one end to the other.",
+      "introduced_at": "supplied:10.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "noise", "kind": "maths",
+      "forms": {"text": ["noise", "noises"], "code": []},
+      "def": "Random values whose neighbours are related.",
+      "introduced_at": "11.1", "synonyms": [], "depends_on": ["random"]
+    },
+    {
+      "id": "FastNoiseLite", "kind": "godot",
+      "forms": {"text": [], "code": ["FastNoiseLite"]},
+      "def": "Godot's noise maker.",
+      "introduced_at": "11.1", "synonyms": [], "depends_on": ["noise"]
+    },
+    {
+      "id": "get_noise_1d", "kind": "godot",
+      "forms": {"text": [], "code": ["get_noise_1d"]},
+      "def": "The noise at a place on a line.",
+      "introduced_at": "11.1", "synonyms": [], "depends_on": ["noise", "line"]
+    },
+    {
+      "id": "get_noise_2d", "kind": "godot",
+      "forms": {"text": [], "code": ["get_noise_2d"]},
+      "def": "The noise at a place on a plane.",
+      "introduced_at": "11.1", "synonyms": [], "depends_on": ["noise"],
+      "note": "chapter 11's code_new writes get_noise_1d/2d/3d"
+    },
+    {
+      "id": "get_noise_3d", "kind": "godot",
+      "forms": {"text": [], "code": ["get_noise_3d"]},
+      "def": "The noise at a place in space.",
+      "introduced_at": "11.1", "synonyms": [], "depends_on": ["noise"],
+      "note": "chapter 11's code_new writes get_noise_1d/2d/3d"
+    },
+    {
+      "id": "white_noise", "kind": "maths",
+      "forms": {"text": ["white noise"], "code": []},
+      "def": "Random values with no relation between neighbours.",
+      "introduced_at": "11.1", "synonyms": [], "depends_on": ["random"]
+    },
+    {
+      "id": "perlin", "kind": "name",
+      "forms": {"text": ["Perlin", "Perlin noise"], "code": []},
+      "def": "Ken Perlin's noise: smooth hills of related values.",
+      "introduced_at": "11.1", "synonyms": [], "depends_on": ["noise"]
+    },
+    {
+      "id": "vertex", "kind": "concept",
+      "forms": {"text": ["vertex", "vertices"], "code": []},
+      "def": "A corner point of a mesh.",
+      "introduced_at": "11.3", "synonyms": [], "depends_on": ["point", "mesh"],
+      "note": "22.x also says vertex for a place in a graph"
+    },
+    {
+      "id": "normal", "kind": "maths",
+      "forms": {"text": ["normal", "normals"], "code": []},
+      "def": "The direction straight out of a surface at a point.",
+      "introduced_at": "11.3", "synonyms": [], "depends_on": ["surface", "point"]
+    },
+    {
+      "id": "map_range", "kind": "maths",
+      "forms": {"text": ["mapping a range"], "code": []},
+      "def": "Turning a value from one range into another.",
+      "introduced_at": "11.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "displace()", "kind": "supplied",
+      "forms": {"text": [], "code": ["displace", "displace(mesh, f)"]},
+      "def": "Moves each vertex along its normal by a function.",
+      "introduced_at": "supplied:11.3", "synonyms": [], "depends_on": ["vertex", "normal", "function"],
+      "opened_at": "11.7",
+      "stub": "func displace(m, fn) -> void:\n\tpass",
+      "host": "$Supplied"
+    },
+    {
+      "id": "grid_mesh()", "kind": "supplied",
+      "forms": {"text": [], "code": ["grid_mesh", "grid_mesh(heights, cells, size)"]},
+      "def": "A surface and its shape, built from heights.",
+      "introduced_at": "supplied:11.3", "synonyms": [], "depends_on": ["surface", "shape"],
+      "opened_at": "11.7",
+      "stub": "func grid_mesh(heights, cells, size) -> Mesh:\n\treturn null",
+      "host": "$Supplied"
+    },
+    {
+      "id": "threshold", "kind": "maths",
+      "forms": {"text": ["threshold", "thresholds"], "code": []},
+      "def": "The value that splits above from below.",
+      "introduced_at": "11.4", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "voxel", "kind": "concept",
+      "forms": {"text": ["voxel", "voxels"], "code": []},
+      "def": "One cube of a 3D grid, there or not there.",
+      "introduced_at": "11.4", "synonyms": [], "depends_on": ["grid"]
+    },
+    {
+      "id": "octave", "kind": "maths",
+      "forms": {"text": ["octave", "octaves"], "code": []},
+      "def": "Noise again at double frequency and half strength.",
+      "introduced_at": "11.5", "synonyms": [], "depends_on": ["noise", "frequency"]
+    },
+    {
+      "id": "fractal_sum", "kind": "maths",
+      "forms": {"text": ["fractal sum", "fBm"], "code": []},
+      "def": "Noise added to itself over several octaves.",
+      "introduced_at": "11.5", "synonyms": [], "depends_on": ["noise", "octave"],
+      "note": "12.6 teaches it again on the GPU, as fBm"
+    },
+    {
+      "id": "lacunarity", "kind": "maths",
+      "forms": {"text": ["lacunarity"], "code": []},
+      "def": "How fast frequency grows from octave to octave.",
+      "introduced_at": "11.5", "synonyms": [], "depends_on": ["frequency", "octave"]
+    },
+    {
+      "id": "gain", "kind": "maths",
+      "forms": {"text": ["gain"], "code": []},
+      "def": "How fast strength shrinks from octave to octave.",
+      "introduced_at": "11.5", "synonyms": [], "depends_on": ["octave"]
+    },
+    {
+      "id": "domain_warp", "kind": "maths",
+      "forms": {"text": ["domain warp", "warp", "warped", "warping"], "code": []},
+      "def": "Noise asked at an address another noise has moved.",
+      "introduced_at": "11.6", "synonyms": [], "depends_on": ["noise", "address"]
+    },
+    {
+      "id": "heightfield", "kind": "concept",
+      "forms": {"text": ["heightfield", "heightfields", "height field", "height fields"], "code": []},
+      "def": "A grid of heights: one height per place.",
+      "introduced_at": "11.7", "synonyms": [], "depends_on": ["grid"]
+    },
+    {
+      "id": "ArrayMesh", "kind": "godot",
+      "forms": {"text": [], "code": ["ArrayMesh"]},
+      "def": "A mesh you build from your own points.",
+      "introduced_at": "11.7", "synonyms": [], "depends_on": ["mesh", "point"]
+    },
+    {
+      "id": "SurfaceTool", "kind": "godot",
+      "forms": {"text": [], "code": ["SurfaceTool"]},
+      "def": "Collects points, three to a face, and makes an `ArrayMesh`.",
+      "introduced_at": "11.7", "synonyms": [], "depends_on": ["point", "face", "ArrayMesh"],
+      "note": "inferred: 11.7 builds an ArrayMesh from a grid of heights; SurfaceTool is how this course builds one"
+    },
+    {
+      "id": "begin", "kind": "godot",
+      "forms": {"text": [], "code": ["begin"]},
+      "def": "Starts a `SurfaceTool` on one kind of piece.",
+      "introduced_at": "11.7", "synonyms": [], "depends_on": ["SurfaceTool"],
+      "note": "inferred: 11.7 builds an ArrayMesh from a grid of heights; SurfaceTool is how this course builds one"
+    },
+    {
+      "id": "Mesh", "kind": "godot",
+      "forms": {"text": [], "code": ["Mesh"]},
+      "def": "Godot's name for every kind of mesh.",
+      "introduced_at": "11.7", "synonyms": [], "depends_on": ["mesh"],
+      "note": "inferred: 11.7 builds an ArrayMesh from a grid of heights; SurfaceTool is how this course builds one"
+    },
+    {
+      "id": "PRIMITIVE_TRIANGLES", "kind": "godot",
+      "forms": {"text": [], "code": ["PRIMITIVE_TRIANGLES"]},
+      "def": "Every three points make one face.",
+      "introduced_at": "11.7", "synonyms": [], "depends_on": ["point", "face"],
+      "note": "inferred: 11.7 builds an ArrayMesh from a grid of heights; SurfaceTool is how this course builds one"
+    },
+    {
+      "id": "add_vertex", "kind": "godot",
+      "forms": {"text": [], "code": ["add_vertex"]},
+      "def": "Adds one vertex to a `SurfaceTool`.",
+      "introduced_at": "11.7", "synonyms": [], "depends_on": ["vertex", "SurfaceTool"],
+      "note": "inferred: 11.7 builds an ArrayMesh from a grid of heights; SurfaceTool is how this course builds one"
+    },
+    {
+      "id": "generate_normals", "kind": "godot",
+      "forms": {"text": [], "code": ["generate_normals"]},
+      "def": "Works out the normal at every vertex, for the light.",
+      "introduced_at": "11.7", "synonyms": [], "depends_on": ["normal", "vertex"],
+      "note": "inferred: 11.7 builds an ArrayMesh from a grid of heights; SurfaceTool is how this course builds one"
+    },
+    {
+      "id": "commit", "kind": "godot",
+      "forms": {"text": [], "code": ["commit"]},
+      "def": "Hands back the `ArrayMesh` a `SurfaceTool` built.",
+      "introduced_at": "11.7", "synonyms": [], "depends_on": ["ArrayMesh", "SurfaceTool"],
+      "note": "inferred: 11.7 builds an ArrayMesh from a grid of heights; SurfaceTool is how this course builds one"
+    },
+    {
+      "id": "create_trimesh_shape", "kind": "godot",
+      "forms": {"text": [], "code": ["create_trimesh_shape"]},
+      "def": "Makes a shape that matches a mesh exactly.",
+      "introduced_at": "11.7", "synonyms": [], "depends_on": ["shape", "mesh"]
+    },
+    {
+      "id": "gpu", "kind": "concept",
+      "forms": {"text": ["GPU", "graphics card"], "code": []},
+      "def": "The part of the computer that draws.",
+      "introduced_at": "12.1", "synonyms": [], "depends_on": [],
+      "note": "two names in the sketch: GPU (12.6) and graphics card (12.1)"
+    },
+    {
+      "id": "pixel", "kind": "concept",
+      "forms": {"text": ["pixel", "pixels"], "code": []},
+      "def": "One dot of the picture on the screen.",
+      "introduced_at": "12.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "shader", "kind": "concept",
+      "forms": {"text": ["shader", "shaders"], "code": []},
+      "def": "A program the GPU runs for every pixel at once.",
+      "introduced_at": "12.1", "synonyms": [], "depends_on": ["gpu", "pixel"]
+    },
+    {
+      "id": "shading_language", "kind": "concept",
+      "forms": {"text": ["shading language"], "code": []},
+      "def": "The language shaders are written in.",
+      "introduced_at": "12.1", "synonyms": [], "depends_on": ["shader"]
+    },
+    {
+      "id": "shader_type", "kind": "godot",
+      "forms": {"text": [], "code": ["shader_type"]},
+      "def": "The first line of a shader: what it shades.",
+      "introduced_at": "12.1", "synonyms": [], "depends_on": ["shader", "line"]
+    },
+    {
+      "id": "spatial", "kind": "godot",
+      "forms": {"text": [], "code": ["spatial"]},
+      "def": "The shader type for 3D meshes.",
+      "introduced_at": "12.1", "synonyms": [], "depends_on": ["shader", "mesh"]
+    },
+    {
+      "id": "fragment", "kind": "godot",
+      "forms": {"text": ["fragment"], "code": ["fragment"]},
+      "def": "The shader function run for every pixel.",
+      "introduced_at": "12.1", "synonyms": [], "depends_on": ["shader", "function", "pixel"]
+    },
+    {
+      "id": "UV", "kind": "godot",
+      "forms": {"text": ["UV", "UVs"], "code": ["UV"]},
+      "def": "Where a pixel sits on its mesh, 0 to 1.",
+      "introduced_at": "12.1", "synonyms": [], "depends_on": ["pixel", "mesh"]
+    },
+    {
+      "id": "ALBEDO", "kind": "godot",
+      "forms": {"text": [], "code": ["ALBEDO"]},
+      "def": "The colour a fragment answers with.",
+      "introduced_at": "12.1", "synonyms": [], "depends_on": ["fragment"]
+    },
+    {
+      "id": "shaping_function", "kind": "maths",
+      "forms": {"text": ["shaping function", "shaping functions", "shaping"], "code": []},
+      "def": "A function that bends values from 0 to 1.",
+      "introduced_at": "12.2", "synonyms": [], "depends_on": ["function"]
+    },
+    {
+      "id": "step", "kind": "godot",
+      "forms": {"text": [], "code": ["step"]},
+      "def": "0 below an edge, 1 above it.",
+      "introduced_at": "12.2", "synonyms": [], "depends_on": [],
+      "note": "17.3-17.4 also name the Particle's own step(); one code form, two meanings"
+    },
+    {
+      "id": "smoothstep", "kind": "godot",
+      "forms": {"text": [], "code": ["smoothstep"]},
+      "def": "A step with eased sides.",
+      "introduced_at": "12.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "mix", "kind": "godot",
+      "forms": {"text": [], "code": ["mix"]},
+      "def": "A value part way between two others, in a shader.",
+      "introduced_at": "12.2", "synonyms": [], "depends_on": ["shader"]
+    },
+    {
+      "id": "uniform", "kind": "concept",
+      "forms": {"text": ["uniform", "uniforms"], "code": ["uniform"]},
+      "def": "A number your script hands a shader.",
+      "introduced_at": "12.3", "synonyms": [], "depends_on": ["script", "shader"]
+    },
+    {
+      "id": "set_shader_parameter", "kind": "godot",
+      "forms": {"text": [], "code": ["set_shader_parameter"]},
+      "def": "Hands a uniform its value from a script.",
+      "introduced_at": "12.3", "synonyms": [], "depends_on": ["uniform", "script"]
+    },
+    {
+      "id": "TIME", "kind": "godot",
+      "forms": {"text": [], "code": ["TIME"]},
+      "def": "The seconds since start, handed to every shader.",
+      "introduced_at": "12.3", "synonyms": [], "depends_on": ["shader"]
+    },
+    {
+      "id": "fract", "kind": "godot",
+      "forms": {"text": [], "code": ["fract"]},
+      "def": "Keeps only the fractional part: 2.7 becomes 0.7.",
+      "introduced_at": "12.4", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "floor", "kind": "godot",
+      "forms": {"text": [], "code": ["floor"]},
+      "def": "Drops the fractional part: 2.7 becomes 2.",
+      "introduced_at": "12.4", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "hash()", "kind": "supplied",
+      "forms": {"text": [], "code": ["hash", "hash(p)"]},
+      "def": "Turns a tile's address into a number that seems random.",
+      "introduced_at": "supplied:12.4", "synonyms": [], "depends_on": ["address", "random"],
+      "note": "shader code from The Book of Shaders; no GDScript stub, since GDScript has its own hash()"
+    },
+    {
+      "id": "truchet", "kind": "name",
+      "forms": {"text": ["Truchet"], "code": []},
+      "def": "Tiles of quarter arcs, each turned by a coin.",
+      "introduced_at": "12.4", "synonyms": [], "depends_on": [],
+      "note": "the subject of 12.4's figure and Example 12.2"
+    },
+    {
+      "id": "NORMAL", "kind": "godot",
+      "forms": {"text": [], "code": ["NORMAL"]},
+      "def": "The normal at a pixel, in a shader.",
+      "introduced_at": "12.5", "synonyms": [], "depends_on": ["normal", "pixel", "shader"]
+    },
+    {
+      "id": "VIEW", "kind": "godot",
+      "forms": {"text": [], "code": ["VIEW"]},
+      "def": "The direction from a pixel toward your eye.",
+      "introduced_at": "12.5", "synonyms": [], "depends_on": ["pixel"]
+    },
+    {
+      "id": "rim", "kind": "concept",
+      "forms": {"text": ["rim"], "code": []},
+      "def": "Where a surface turns away from your eye.",
+      "introduced_at": "12.5", "synonyms": [], "depends_on": ["surface"]
+    },
+    {
+      "id": "EMISSION", "kind": "godot",
+      "forms": {"text": [], "code": ["EMISSION"]},
+      "def": "Light a surface gives off by itself.",
+      "introduced_at": "12.5", "synonyms": [], "depends_on": ["surface"]
+    },
+    {
+      "id": "value_noise", "kind": "maths",
+      "forms": {"text": ["value noise"], "code": []},
+      "def": "Noise made by blending random values at grid corners.",
+      "introduced_at": "12.6", "synonyms": [], "depends_on": ["noise", "random", "grid"]
+    },
+    {
+      "id": "vertex()", "kind": "godot",
+      "forms": {"text": [], "code": ["vertex"]},
+      "def": "The shader function run for every vertex.",
+      "introduced_at": "12.7", "synonyms": [], "depends_on": ["shader", "function", "vertex"]
+    },
+    {
+      "id": "buffer", "kind": "concept",
+      "forms": {"text": ["buffer", "buffers"], "code": []},
+      "def": "A picture kept so the next frame can read it.",
+      "introduced_at": "12.8", "synonyms": [], "depends_on": ["frame"]
+    },
+    {
+      "id": "SubViewport", "kind": "godot",
+      "forms": {"text": ["viewport", "viewports", "SubViewports"], "code": ["SubViewport"]},
+      "def": "A node that draws its own picture, off screen.",
+      "introduced_at": "12.8", "synonyms": [], "depends_on": ["node"]
+    },
+    {
+      "id": "ping_pong_rig", "kind": "supplied",
+      "forms": {"text": ["ping-pong rig"], "code": []},
+      "def": "Two viewports that swap their pictures every frame.",
+      "introduced_at": "supplied:12.8", "synonyms": [], "depends_on": ["SubViewport", "frame"]
+    },
+    {
+      "id": "MultiMesh", "kind": "godot",
+      "forms": {"text": [], "code": ["MultiMesh"]},
+      "def": "One mesh drawn many times, in one go.",
+      "introduced_at": "13.0", "synonyms": [], "depends_on": ["mesh"],
+      "note": "chapter 13's code_new names it; no section does"
+    },
+    {
+      "id": "bit", "kind": "concept",
+      "forms": {"text": ["bit", "bits"], "code": []},
+      "def": "One binary digit: 0 or 1.",
+      "introduced_at": "13.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "neighbourhood", "kind": "concept",
+      "forms": {"text": ["neighbourhood", "neighbourhoods"], "code": []},
+      "def": "A cell and the cells it reads.",
+      "introduced_at": "13.2", "synonyms": [], "depends_on": ["cell"]
+    },
+    {
+      "id": "rule_number", "kind": "concept",
+      "forms": {"text": ["rule number", "rule numbers"], "code": []},
+      "def": "Eight bits: what each neighbourhood becomes.",
+      "introduced_at": "13.2", "synonyms": [], "depends_on": ["bit", "neighbourhood"]
+    },
+    {
+      "id": "<<", "kind": "gdscript",
+      "forms": {"text": [], "code": ["<<"]},
+      "def": "Shifts bits left.",
+      "introduced_at": "13.2", "synonyms": [], "depends_on": ["bit"]
+    },
+    {
+      "id": ">>", "kind": "gdscript",
+      "forms": {"text": [], "code": [">>"]},
+      "def": "Shifts bits right.",
+      "introduced_at": "13.2", "synonyms": [], "depends_on": ["bit"]
+    },
+    {
+      "id": "|", "kind": "gdscript",
+      "forms": {"text": [], "code": ["|"]},
+      "def": "A 1 wherever either side has a 1.",
+      "introduced_at": "13.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "&", "kind": "gdscript",
+      "forms": {"text": [], "code": ["&"]},
+      "def": "A 1 wherever both sides have a 1.",
+      "introduced_at": "13.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "generation", "kind": "concept",
+      "forms": {"text": ["generation", "generations"], "code": []},
+      "def": "One step of a rule applied to everything at once.",
+      "introduced_at": "13.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "two_buffers", "kind": "concept",
+      "forms": {"text": ["two buffers", "two-buffer"], "code": []},
+      "def": "Read one array, write the other, then swap.",
+      "introduced_at": "13.3", "synonyms": [], "depends_on": ["array"],
+      "note": "12.8 does it with SubViewports first"
+    },
+    {
+      "id": "Moore", "kind": "concept",
+      "forms": {"text": ["Moore", "Moore neighbourhood"], "code": []},
+      "def": "The eight cells round a cell.",
+      "introduced_at": "13.5", "synonyms": [], "depends_on": ["cell"]
+    },
+    {
+      "id": "von_Neumann", "kind": "concept",
+      "forms": {"text": ["von Neumann"], "code": []},
+      "def": "The four cells that share a side with a cell.",
+      "introduced_at": "13.5", "synonyms": [], "depends_on": ["cell"]
+    },
+    {
+      "id": "game_of_life", "kind": "concept",
+      "forms": {"text": ["Game of Life", "Life"], "code": []},
+      "def": "Conway's rule: birth on three, survival on two or three.",
+      "introduced_at": "13.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "glider", "kind": "concept",
+      "forms": {"text": ["glider", "gliders"], "code": []},
+      "def": "A Life pattern that walks across the grid.",
+      "introduced_at": "13.5", "synonyms": [], "depends_on": ["game_of_life", "grid"]
+    },
+    {
+      "id": "enum", "kind": "gdscript",
+      "forms": {"text": ["enum", "enums"], "code": ["enum"]},
+      "def": "A set of named values for a variable to hold.",
+      "introduced_at": "13.6", "synonyms": [], "depends_on": ["variable"],
+      "note": "19.5, 20.6 and 23.6 teach it again"
+    },
+    {
+      "id": "float", "kind": "gdscript",
+      "forms": {"text": ["float", "floats", "floating point"], "code": ["float"]},
+      "def": "A number with a fractional part.",
+      "introduced_at": "13.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "input", "kind": "concept",
+      "forms": {"text": ["input", "inputs"], "code": []},
+      "def": "A value a rule reads from outside.",
+      "introduced_at": "13.7", "synonyms": [], "depends_on": [],
+      "note": "2.6's Input is Godot's keyboard and mouse: the same word"
+    },
+    {
+      "id": "laplacian", "kind": "maths",
+      "forms": {"text": ["Laplacian"], "code": []},
+      "def": "Four neighbours minus four times yourself: how you differ.",
+      "introduced_at": "13.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "reaction_diffusion", "kind": "concept",
+      "forms": {"text": ["reaction-diffusion", "reaction and diffusion", "Gray-Scott"], "code": []},
+      "def": "Two amounts that spread and react, and grow patterns.",
+      "introduced_at": "13.8", "synonyms": [], "depends_on": [],
+      "note": "Gray-Scott is the model 13.8 builds; chapter 13 never names it"
+    },
+    {
+      "id": "HeightMapShape3D", "kind": "godot",
+      "forms": {"text": [], "code": ["HeightMapShape3D"]},
+      "def": "A shape made from a grid of heights.",
+      "introduced_at": "supplied:13.8", "synonyms": [], "depends_on": ["shape", "grid"]
+    },
+    {
+      "id": "recursion", "kind": "concept",
+      "forms": {"text": ["recursion", "recursive", "recursively"], "code": []},
+      "def": "A function that calls itself.",
+      "introduced_at": "14.1", "synonyms": [], "depends_on": ["function", "call"]
+    },
+    {
+      "id": "base_case", "kind": "concept",
+      "forms": {"text": ["base case", "base cases"], "code": []},
+      "def": "Where a recursion stops calling itself.",
+      "introduced_at": "14.2", "synonyms": [], "depends_on": ["recursion", "call"]
+    },
+    {
+      "id": "depth", "kind": "concept",
+      "forms": {"text": ["depth", "depths"], "code": []},
+      "def": "How many calls deep a recursion has gone.",
+      "introduced_at": "14.2", "synonyms": [], "depends_on": ["recursion", "call"]
+    },
+    {
+      "id": "call_stack", "kind": "concept",
+      "forms": {"text": ["call stack"], "code": []},
+      "def": "The pile of calls still waiting to finish.",
+      "introduced_at": "14.2", "synonyms": [], "depends_on": ["call"]
+    },
+    {
+      "id": "stack_overflow", "kind": "concept",
+      "forms": {"text": ["stack overflow"], "code": []},
+      "def": "Too many calls waiting: Godot stops the program.",
+      "introduced_at": "14.2", "synonyms": [], "depends_on": ["call"]
+    },
+    {
+      "id": "Debugger", "kind": "concept",
+      "forms": {"text": ["Debugger"], "code": []},
+      "def": "The editor's panel that shows a running program from inside.",
+      "introduced_at": "14.2", "synonyms": [], "depends_on": ["editor"]
+    },
+    {
+      "id": "stack_frames", "kind": "concept",
+      "forms": {"text": ["Stack Frames"], "code": []},
+      "def": "The Debugger's list of the calls waiting.",
+      "introduced_at": "14.2", "synonyms": [], "depends_on": ["Debugger", "call"]
+    },
+    {
+      "id": "basis", "kind": "maths",
+      "forms": {"text": ["basis"], "code": ["basis", "Basis"]},
+      "def": "Three directions that say which way a body is turned.",
+      "introduced_at": "14.3", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "Transform3D", "kind": "godot",
+      "forms": {"text": [], "code": ["Transform3D"]},
+      "def": "A place and a turn as one value.",
+      "introduced_at": "14.3", "synonyms": [], "depends_on": ["origin", "basis"]
+    },
+    {
+      "id": "cantor_set", "kind": "maths",
+      "forms": {"text": ["Cantor set", "Cantor"], "code": []},
+      "def": "Keep the outer thirds, drop the middle, again and again.",
+      "introduced_at": "14.4", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "koch", "kind": "maths",
+      "forms": {"text": ["Koch", "Koch curve", "Koch's"], "code": []},
+      "def": "Each straight piece replaced by four, a third as long.",
+      "introduced_at": "14.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "menger_sponge", "kind": "maths",
+      "forms": {"text": ["Menger sponge", "sponge"], "code": []},
+      "def": "A cube split in 27, keeping 20, again and again.",
+      "introduced_at": "14.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "dimension", "kind": "maths",
+      "forms": {"text": ["dimension", "dimensions"], "code": []},
+      "def": "How fast the count of pieces grows as they shrink.",
+      "introduced_at": "14.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "log", "kind": "gdscript",
+      "forms": {"text": ["log", "logarithm", "logarithms", "log-log"], "code": ["log"]},
+      "def": "The power a base must be raised to.",
+      "introduced_at": "14.7", "synonyms": [], "depends_on": [],
+      "note": "24.2 and 24.3 teach the logarithm again"
+    },
+    {
+      "id": "sierpinski", "kind": "maths",
+      "forms": {"text": ["Sierpinski", "Sierpinski triangle"], "code": []},
+      "def": "A triangle keeping three of its four halves, repeatedly.",
+      "introduced_at": "14.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "fit_line()", "kind": "supplied",
+      "forms": {"text": [], "code": ["fit_line", "fit_line()"]},
+      "def": "Draws the straight line through a row of counts.",
+      "introduced_at": "supplied:14.7", "synonyms": [], "depends_on": ["line"],
+      "stub": "func fit_line(points: Array) -> void:\n\tpass",
+      "host": "$Supplied"
+    },
+    {
+      "id": "recurrence", "kind": "maths",
+      "forms": {"text": ["recurrence", "recurrences"], "code": []},
+      "def": "The next number made from the ones before.",
+      "introduced_at": "14.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "golden_rectangle", "kind": "maths",
+      "forms": {"text": ["golden rectangle", "golden spiral"], "code": []},
+      "def": "A rectangle that, minus a square, is itself again, smaller.",
+      "introduced_at": "14.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "character", "kind": "concept",
+      "forms": {"text": ["character", "characters"], "code": []},
+      "def": "One letter, digit or sign.",
+      "introduced_at": "15.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "String", "kind": "gdscript",
+      "forms": {"text": ["string", "strings"], "code": ["String", "\"\""]},
+      "def": "Text as a value: characters in order.",
+      "introduced_at": "15.1", "synonyms": [], "depends_on": ["character"],
+      "note": "\"\" stands for a string literal in code: \"count \", \"ui_accept\". The sketch uses action names from 2.6 (Input.is_action_pressed(\"ui_left\")) before 15.1 teaches strings"
+    },
+    {
+      "id": "Dictionary", "kind": "gdscript",
+      "forms": {"text": ["dictionary", "dictionaries"], "code": ["Dictionary"]},
+      "def": "Values kept under keys, to look up by key.",
+      "introduced_at": "15.1", "synonyms": [], "depends_on": [],
+      "note": "15.1 inferred: its rules are first used there"
+    },
+    {
+      "id": "rewriting", "kind": "concept",
+      "forms": {"text": ["rewrite", "rewrites", "rewriting", "rewritten"], "code": []},
+      "def": "Replacing every letter by its rule, all at once.",
+      "introduced_at": "15.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "turtle", "kind": "concept",
+      "forms": {"text": ["turtle", "turtles"], "code": []},
+      "def": "A pen with a position and heading, moved by letters.",
+      "introduced_at": "15.2", "synonyms": [], "depends_on": ["position"]
+    },
+    {
+      "id": "symbol", "kind": "concept",
+      "forms": {"text": ["symbol", "symbols"], "code": []},
+      "def": "One letter that a rule or a turtle reads.",
+      "introduced_at": "15.3", "synonyms": [], "depends_on": ["turtle"]
+    },
+    {
+      "id": "stack", "kind": "concept",
+      "forms": {"text": ["stack", "stacks"], "code": []},
+      "def": "A pile: add to the top, take from the top.",
+      "introduced_at": "15.3", "synonyms": [], "depends_on": [],
+      "other_senses": [{"words": ["stack", "stacks"], "at": ["4.1", "4.2", "4.x", "8.8"], "sense": "a pile of bodies"}]
+    },
+    {
+      "id": "push_back", "kind": "godot",
+      "forms": {"text": [], "code": ["push_back"]},
+      "def": "Adds an item at the end of an array.",
+      "introduced_at": "15.3", "synonyms": [], "depends_on": ["array", "item"]
+    },
+    {
+      "id": "pop_back", "kind": "godot",
+      "forms": {"text": [], "code": ["pop_back"]},
+      "def": "Takes the last item off an array and returns it.",
+      "introduced_at": "15.3", "synonyms": [], "depends_on": ["array", "item"]
+    },
+    {
+      "id": "Resource", "kind": "godot",
+      "forms": {"text": ["resource", "resources"], "code": ["Resource"]},
+      "def": "Data saved to a file and loaded again.",
+      "introduced_at": "15.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "gene", "kind": "concept",
+      "forms": {"text": ["gene", "genes"], "code": []},
+      "def": "One number of a body's recipe.",
+      "introduced_at": "15.7", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "mesh_grammar", "kind": "concept",
+      "forms": {"text": ["mesh grammar", "mesh grammars"], "code": []},
+      "def": "Rules that pick a mesh's faces and act on them.",
+      "introduced_at": "15.8", "synonyms": [], "depends_on": ["face", "mesh"]
+    },
+    {
+      "id": "inset", "kind": "concept",
+      "forms": {"text": ["inset", "insets"], "code": []},
+      "def": "Shrink a face inside itself, leaving a border.",
+      "introduced_at": "15.8", "synonyms": [], "depends_on": ["face"]
+    },
+    {
+      "id": "extrude", "kind": "concept",
+      "forms": {"text": ["extrude", "extrudes", "extruded"], "code": []},
+      "def": "Push a face out, building walls behind it.",
+      "introduced_at": "15.8", "synonyms": [], "depends_on": ["face"]
+    },
+    {
+      "id": "MeshGrammar", "kind": "supplied",
+      "forms": {"text": [], "code": ["MeshGrammar"]},
+      "def": "The project's mesh grammar, as a box of tools.",
+      "introduced_at": "supplied:15.8", "synonyms": [], "depends_on": ["mesh_grammar"]
+    },
+    {
+      "id": "genome", "kind": "concept",
+      "forms": {"text": ["genome", "genomes"], "code": []},
+      "def": "The genes of one body, as an array of numbers.",
+      "introduced_at": "16.1", "synonyms": [], "depends_on": ["gene", "body", "array"]
+    },
+    {
+      "id": "fitness", "kind": "concept",
+      "forms": {"text": ["fitness", "fitness function", "fitness functions"], "code": []},
+      "def": "One number per body that says how good it is.",
+      "introduced_at": "16.2", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "population", "kind": "concept",
+      "forms": {"text": ["population", "populations"], "code": []},
+      "def": "All the bodies of one generation.",
+      "introduced_at": "16.3", "synonyms": [], "depends_on": ["body", "generation"],
+      "note": "16.3 inferred: chapter 16's code_new names it, no idea does"
+    },
+    {
+      "id": "selection", "kind": "concept",
+      "forms": {"text": ["selection"], "code": []},
+      "def": "Choosing which bodies pass their genes on.",
+      "introduced_at": "16.3", "synonyms": [], "depends_on": ["body", "gene"]
+    },
+    {
+      "id": "tournament", "kind": "concept",
+      "forms": {"text": ["tournament", "tournaments"], "code": []},
+      "def": "Pick a few at random; the fittest wins.",
+      "introduced_at": "16.3", "synonyms": [], "depends_on": ["random"]
+    },
+    {
+      "id": "crossover", "kind": "concept",
+      "forms": {"text": ["crossover"], "code": []},
+      "def": "Mixing two genomes into a new one.",
+      "introduced_at": "16.3", "synonyms": [], "depends_on": ["genome"]
+    },
+    {
+      "id": "mutation", "kind": "concept",
+      "forms": {"text": ["mutation", "mutations", "mutate", "mutated"], "code": []},
+      "def": "A small random change to a gene.",
+      "introduced_at": "16.3", "synonyms": [], "depends_on": ["random", "gene"]
+    },
+    {
+      "id": "elite", "kind": "concept",
+      "forms": {"text": ["elite", "elites"], "code": []},
+      "def": "The best bodies, kept unchanged into the next generation.",
+      "introduced_at": "16.3", "synonyms": [], "depends_on": ["body", "generation"]
+    },
+    {
+      "id": "space_colonization", "kind": "concept",
+      "forms": {"text": ["space colonization", "space-colonization"], "code": []},
+      "def": "Tips grow toward the food points nearest them.",
+      "introduced_at": "16.4", "synonyms": [], "depends_on": ["point"]
+    },
+    {
+      "id": "flood", "kind": "concept",
+      "forms": {"text": ["flood", "floods", "flood fill"], "code": []},
+      "def": "Spreading from a start to every neighbour it can reach.",
+      "introduced_at": "16.5", "synonyms": [], "depends_on": [],
+      "note": "16.5 inferred"
+    },
+    {
+      "id": "percolation", "kind": "concept",
+      "forms": {"text": ["percolation"], "code": []},
+      "def": "Whether a flow can pass through cells filled at random.",
+      "introduced_at": "16.5", "synonyms": [], "depends_on": ["cell", "random"],
+      "note": "16.5's subject by its builds"
+    },
+    {
+      "id": "digger", "kind": "concept",
+      "forms": {"text": ["digger", "diggers"], "code": []},
+      "def": "A random walk that removes cells as it goes.",
+      "introduced_at": "16.6", "synonyms": [], "depends_on": ["random_walk", "cell"]
+    },
+    {
+      "id": "depth_first_search", "kind": "concept",
+      "forms": {"text": ["depth-first search", "depth-first"], "code": []},
+      "def": "Go as deep as you can, then back up.",
+      "introduced_at": "16.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "backtracking", "kind": "concept",
+      "forms": {"text": ["backtracking", "backtrack"], "code": []},
+      "def": "Backing up to the last choice at a dead end.",
+      "introduced_at": "16.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "Look", "kind": "supplied",
+      "forms": {"text": [], "code": ["Look"]},
+      "def": "The course's palette, sky and light, as one part.",
+      "introduced_at": "supplied:17.1", "synonyms": [], "depends_on": [],
+      "note": "part of the base scene since 1.1 (the course look); chapters 17 and 19 borrow it by name"
+    },
+    {
+      "id": "SoftBody3D", "kind": "godot",
+      "forms": {"text": [], "code": ["SoftBody3D"]},
+      "def": "A body whose every point Godot moves for you.",
+      "introduced_at": "17.1", "synonyms": [], "depends_on": ["body", "point"]
+    },
+    {
+      "id": "soft_body", "kind": "concept",
+      "forms": {"text": ["soft body", "soft bodies"], "code": []},
+      "def": "A body that gives way and comes back.",
+      "introduced_at": "17.1", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "stiffness", "kind": "maths",
+      "forms": {"text": ["stiffness"], "code": []},
+      "def": "How hard a body pulls back toward its rest.",
+      "introduced_at": "17.1", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "damping", "kind": "maths",
+      "forms": {"text": ["damping", "damped", "damp"], "code": []},
+      "def": "How fast a body's movement dies away.",
+      "introduced_at": "17.1", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "pressure", "kind": "maths",
+      "forms": {"text": ["pressure"], "code": []},
+      "def": "How hard a closed body pushes out from inside.",
+      "introduced_at": "17.1", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "linear_stiffness", "kind": "godot",
+      "forms": {"text": [], "code": ["linear_stiffness"]},
+      "def": "A `SoftBody3D`'s stiffness.",
+      "introduced_at": "17.1", "synonyms": [], "depends_on": ["SoftBody3D", "stiffness"]
+    },
+    {
+      "id": "damping_coefficient", "kind": "godot",
+      "forms": {"text": [], "code": ["damping_coefficient"]},
+      "def": "A `SoftBody3D`'s damping.",
+      "introduced_at": "17.1", "synonyms": [], "depends_on": ["SoftBody3D", "damping"]
+    },
+    {
+      "id": "pressure_coefficient", "kind": "godot",
+      "forms": {"text": [], "code": ["pressure_coefficient"]},
+      "def": "A `SoftBody3D`'s pressure.",
+      "introduced_at": "17.1", "synonyms": [], "depends_on": ["SoftBody3D", "pressure"]
+    },
+    {
+      "id": "set_point_pinned", "kind": "godot",
+      "forms": {"text": [], "code": ["set_point_pinned"]},
+      "def": "Pins one point of a `SoftBody3D` by its index.",
+      "introduced_at": "17.2", "synonyms": [], "depends_on": ["pin", "point", "SoftBody3D", "index"]
+    },
+    {
+      "id": "boundary_condition", "kind": "concept",
+      "forms": {"text": ["boundary condition", "boundary conditions"], "code": []},
+      "def": "Which points must stay, given as a list of indices.",
+      "introduced_at": "17.2", "synonyms": [], "depends_on": ["point", "index"]
+    },
+    {
+      "id": "inheritance", "kind": "concept",
+      "forms": {"text": ["inheritance", "inherit", "inherits"], "code": []},
+      "def": "A class built on another, with everything it has.",
+      "introduced_at": "17.3", "synonyms": [], "depends_on": ["class"]
+    },
+    {
+      "id": "PinnedParticle", "kind": "name",
+      "forms": {"text": [], "code": ["PinnedParticle"]},
+      "def": "Your class: a `Particle` that keeps its place.",
+      "introduced_at": "17.3", "synonyms": [], "depends_on": ["class", "Particle"]
+    },
+    {
+      "id": "override", "kind": "concept",
+      "forms": {"text": ["override", "overrides", "overriding", "overridden"], "code": []},
+      "def": "Writing a method again in a class built on another.",
+      "introduced_at": "17.4", "synonyms": [], "depends_on": ["method", "class"],
+      "other_senses": [{"words": ["overrides"], "at": ["7.0"], "sense": "replaces, in everyday speech: a region that overrides gravity"}],
+      "note": "17.4 inferred: Write step() again"
+    },
+    {
+      "id": "super", "kind": "gdscript",
+      "forms": {"text": [], "code": ["super"]},
+      "def": "Calls the method it overrides.",
+      "introduced_at": "17.4", "synonyms": [], "depends_on": ["call", "method", "override"]
+    },
+    {
+      "id": "AnimatableBody3D", "kind": "godot",
+      "forms": {"text": [], "code": ["AnimatableBody3D"]},
+      "def": "A body your code moves that pushes others.",
+      "introduced_at": "17.5", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "HingeJoint3D", "kind": "godot",
+      "forms": {"text": [], "code": ["HingeJoint3D"]},
+      "def": "A link that lets two bodies turn about one axis.",
+      "introduced_at": "17.5", "synonyms": [], "depends_on": ["body", "axis"]
+    },
+    {
+      "id": "friction", "kind": "maths",
+      "forms": {"text": ["friction"], "code": []},
+      "def": "A force that resists sliding.",
+      "introduced_at": "17.6", "synonyms": [], "depends_on": ["force"]
+    },
+    {
+      "id": "strain", "kind": "maths",
+      "forms": {"text": ["strain"], "code": []},
+      "def": "How far a point has moved from its rest place.",
+      "introduced_at": "17.7", "synonyms": [], "depends_on": ["point"],
+      "note": "17.7 inferred: its caption colours the strain"
+    },
+    {
+      "id": "freeze", "kind": "concept",
+      "forms": {"text": ["freeze", "freezing", "frozen"], "code": []},
+      "def": "Stop a soft body; keep it as a still mesh.",
+      "introduced_at": "17.7", "synonyms": [], "depends_on": ["soft_body", "mesh"],
+      "other_senses": [{"words": ["freeze"], "at": ["12.x"], "sense": "stop a clock"}]
+    },
+    {
+      "id": "bake", "kind": "concept",
+      "forms": {"text": ["bake", "baked", "baking"], "code": []},
+      "def": "Turn a moving or combined body into a plain mesh.",
+      "introduced_at": "17.7", "synonyms": [], "depends_on": ["body", "mesh"]
+    },
+    {
+      "id": "scalar_field", "kind": "maths",
+      "forms": {"text": ["scalar field", "scalar fields"], "code": []},
+      "def": "A field whose value at each place is one number.",
+      "introduced_at": "18.1", "synonyms": [], "depends_on": ["field"]
+    },
+    {
+      "id": "value_at", "kind": "name",
+      "forms": {"text": [], "code": ["value_at"]},
+      "def": "Your function that gives the field's number at a point.",
+      "introduced_at": "18.1", "synonyms": [], "depends_on": ["function", "field", "point"]
+    },
+    {
+      "id": "PackedFloat32Array", "kind": "godot",
+      "forms": {"text": [], "code": ["PackedFloat32Array"]},
+      "def": "A compact array of floats.",
+      "introduced_at": "18.1", "synonyms": [], "depends_on": ["array", "float"]
+    },
+    {
+      "id": "Vector3i", "kind": "godot",
+      "forms": {"text": [], "code": ["Vector3i"]},
+      "def": "Three counts held as one value, as an address.",
+      "introduced_at": "18.1", "synonyms": [], "depends_on": ["address"]
+    },
+    {
+      "id": "save_this_script_as", "kind": "admin",
+      "forms": {"text": ["save this script as", "saved this script as", "saving this script as"], "code": []},
+      "def": "Click Script, at the top. Choose File, then Save As. Type the name and choose Save.",
+      "introduced_at": "18.1",
+      "synonyms": ["save the script as"],
+      "step_phrases": [{"phrase": "save as", "cues": ["script", "File", ".gd"]}, {"phrase": "save the file as", "cues": ["script", "File", ".gd"]}, {"phrase": "save it as", "cues": ["script", "File", ".gd"]}],
+      "depends_on": ["script"],
+      "note": "18.1 is its first use in the chapters written so far; the first chapter that names a script file will define it, and 18.1 will call it. The script's name follows the call, as a file in code style: 'Save this script as `bell.gd`.' Save As writes the script under the new name and the node keeps it, so the file the script had before stays as it was: ch18 replaces the code and saves each new class under its own name. File is the menu of the Script screen (the Script button at the top): Godot's main menu has none, and its Scene menu saves a scene, so 'Choose Save As to keep the old scene' is no step of this (the cues: script, File, .gd)."
+    },
+    {
+      "id": "level", "kind": "concept",
+      "forms": {"text": ["level", "levels"], "code": []},
+      "def": "The number that splits inside from outside.",
+      "introduced_at": "18.2", "synonyms": [], "depends_on": [],
+      "other_senses": [{"words": ["level", "levels"], "at": ["4.2", "8.6", "10.3"], "sense": "flat, or a tier"}],
+      "note": "19.7 (a level floor) and 24.3 (four levels) use the word for flat and for a tier"
+    },
+    {
+      "id": "isosurface", "kind": "concept",
+      "forms": {"text": ["isosurface", "isosurfaces"], "code": []},
+      "def": "Every point where a field equals the level.",
+      "introduced_at": "18.2", "synonyms": [], "depends_on": ["point", "field", "level"]
+    },
+    {
+      "id": "marching_cubes", "kind": "concept",
+      "forms": {"text": ["marching cubes"], "code": []},
+      "def": "Corner values pick, from a table, each cell's faces.",
+      "introduced_at": "18.3", "synonyms": [], "depends_on": ["cell", "face"]
+    },
+    {
+      "id": "case_number", "kind": "concept",
+      "forms": {"text": ["case number", "case numbers"], "code": []},
+      "def": "Eight corner bits read as one number.",
+      "introduced_at": "18.3", "synonyms": [], "depends_on": ["bit"]
+    },
+    {
+      "id": "interpolation", "kind": "maths",
+      "forms": {"text": ["interpolation", "interpolate", "interpolated"], "code": []},
+      "def": "Finding the value between two known ones.",
+      "introduced_at": "18.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "triangle_table", "kind": "supplied",
+      "forms": {"text": ["triangle table"], "code": ["triangle_table.gd", "triangles_for", "triangles_for(case_number)", "MarchingCubesLookupTables"]},
+      "def": "The lines to join, for each case number.",
+      "introduced_at": "supplied:18.3", "synonyms": [], "depends_on": ["line", "case_number"],
+      "host": "res://supplied/triangle_table.gd",
+      "stub": "static func triangles_for(case_number: int) -> Array:\n\t# Ada's triangle table (MarchingCubesLookupTables.gd), row for row.\n\tconst ROWS = [\n\t\t[],\n\t\t[0, 8, 3],\n\t\t[0, 1, 9],\n\t\t[1, 8, 3, 9, 8, 1],\n\t\t[1, 2, 10],\n\t\t[0, 8, 3, 1, 2, 10],\n\t\t[9, 2, 10, 0, 2, 9],\n\t\t[2, 8, 3, 2, 10, 8, 10, 9, 8],\n\t\t[3, 11, 2],\n\t\t[0, 11, 2, 8, 11, 0],\n\t\t[1, 9, 0, 2, 3, 11],\n\t\t[1, 11, 2, 1, 9, 11, 9, 8, 11],\n\t\t[3, 10, 1, 11, 10, 3],\n\t\t[0, 10, 1, 0, 8, 10, 8, 11, 10],\n\t\t[3, 9, 0, 3, 11, 9, 11, 10, 9],\n\t\t[9, 8, 10, 10, 8, 11],\n\t\t[4, 7, 8],\n\t\t[4, 3, 0, 7, 3, 4],\n\t\t[0, 1, 9, 8, 4, 7],\n\t\t[4, 1, 9, 4, 7, 1, 7, 3, 1],\n\t\t[1, 2, 10, 8, 4, 7],\n\t\t[3, 4, 7, 3, 0, 4, 1, 2, 10],\n\t\t[9, 2, 10, 9, 0, 2, 8, 4, 7],\n\t\t[2, 10, 9, 2, 9, 7, 2, 7, 3, 7, 9, 4],\n\t\t[8, 4, 7, 3, 11, 2],\n\t\t[11, 4, 7, 11, 2, 4, 2, 0, 4],\n\t\t[9, 0, 1, 8, 4, 7, 2, 3, 11],\n\t\t[4, 7, 11, 9, 4, 11, 9, 11, 2, 9, 2, 1],\n\t\t[3, 10, 1, 3, 11, 10, 7, 8, 4],\n\t\t[1, 11, 10, 1, 4, 11, 1, 0, 4, 7, 11, 4],\n\t\t[4, 7, 8, 9, 0, 11, 9, 11, 10, 11, 0, 3],\n\t\t[4, 7, 11, 4, 11, 9, 9, 11, 10],\n\t\t[9, 5, 4],\n\t\t[9, 5, 4, 0, 8, 3],\n\t\t[0, 5, 4, 1, 5, 0],\n\t\t[8, 5, 4, 8, 3, 5, 3, 1, 5],\n\t\t[1, 2, 10, 9, 5, 4],\n\t\t[3, 0, 8, 1, 2, 10, 4, 9, 5],\n\t\t[5, 2, 10, 5, 4, 2, 4, 0, 2],\n\t\t[2, 10, 5, 3, 2, 5, 3, 5, 4, 3, 4, 8],\n\t\t[9, 5, 4, 2, 3, 11],\n\t\t[0, 11, 2, 0, 8, 11, 4, 9, 5],\n\t\t[0, 5, 4, 0, 1, 5, 2, 3, 11],\n\t\t[2, 1, 5, 2, 5, 8, 2, 8, 11, 4, 8, 5],\n\t\t[10, 3, 11, 10, 1, 3, 9, 5, 4],\n\t\t[4, 9, 5, 0, 8, 1, 8, 10, 1, 8, 11, 10],\n\t\t[5, 4, 0, 5, 0, 11, 5, 11, 10, 11, 0, 3],\n\t\t[5, 4, 8, 5, 8, 10, 10, 8, 11],\n\t\t[9, 7, 8, 5, 7, 9],\n\t\t[9, 3, 0, 9, 5, 3, 5, 7, 3],\n\t\t[0, 7, 8, 0, 1, 7, 1, 5, 7],\n\t\t[1, 5, 3, 3, 5, 7],\n\t\t[9, 7, 8, 9, 5, 7, 10, 1, 2],\n\t\t[10, 1, 2, 9, 5, 0, 5, 3, 0, 5, 7, 3],\n\t\t[8, 0, 2, 8, 2, 5, 8, 5, 7, 10, 5, 2],\n\t\t[2, 10, 5, 2, 5, 3, 3, 5, 7],\n\t\t[7, 9, 5, 7, 8, 9, 3, 11, 2],\n\t\t[9, 5, 7, 9, 7, 2, 9, 2, 0, 2, 7, 11],\n\t\t[2, 3, 11, 0, 1, 8, 1, 7, 8, 1, 5, 7],\n\t\t[11, 2, 1, 11, 1, 7, 7, 1, 5],\n\t\t[9, 5, 8, 8, 5, 7, 10, 1, 3, 10, 3, 11],\n\t\t[5, 7, 0, 5, 0, 9, 7, 11, 0, 1, 0, 10, 11, 10, 0],\n\t\t[11, 10, 0, 11, 0, 3, 10, 5, 0, 8, 0, 7, 5, 7, 0],\n\t\t[11, 10, 5, 7, 11, 5],\n\t\t[10, 6, 5],\n\t\t[0, 8, 3, 5, 10, 6],\n\t\t[9, 0, 1, 5, 10, 6],\n\t\t[1, 8, 3, 1, 9, 8, 5, 10, 6],\n\t\t[1, 6, 5, 2, 6, 1],\n\t\t[1, 6, 5, 1, 2, 6, 3, 0, 8],\n\t\t[9, 6, 5, 9, 0, 6, 0, 2, 6],\n\t\t[5, 9, 8, 5, 8, 2, 5, 2, 6, 3, 2, 8],\n\t\t[2, 3, 11, 10, 6, 5],\n\t\t[11, 0, 8, 11, 2, 0, 10, 6, 5],\n\t\t[0, 1, 9, 2, 3, 11, 5, 10, 6],\n\t\t[5, 10, 6, 1, 9, 2, 9, 11, 2, 9, 8, 11],\n\t\t[6, 3, 11, 6, 5, 3, 5, 1, 3],\n\t\t[0, 8, 11, 0, 11, 5, 0, 5, 1, 5, 11, 6],\n\t\t[3, 11, 6, 0, 3, 6, 0, 6, 5, 0, 5, 9],\n\t\t[6, 5, 9, 6, 9, 11, 11, 9, 8],\n\t\t[5, 10, 6, 4, 7, 8],\n\t\t[4, 3, 0, 4, 7, 3, 6, 5, 10],\n\t\t[1, 9, 0, 5, 10, 6, 8, 4, 7],\n\t\t[10, 6, 5, 1, 9, 7, 1, 7, 3, 7, 9, 4],\n\t\t[6, 1, 2, 6, 5, 1, 4, 7, 8],\n\t\t[1, 2, 5, 5, 2, 6, 3, 0, 4, 3, 4, 7],\n\t\t[8, 4, 7, 9, 0, 5, 0, 6, 5, 0, 2, 6],\n\t\t[7, 3, 2, 7, 2, 4, 4, 2, 6, 4, 6, 5, 4, 5, 9],\n\t\t[3, 11, 2, 7, 8, 4, 10, 6, 5],\n\t\t[5, 10, 6, 4, 7, 2, 4, 2, 0, 2, 7, 11],\n\t\t[0, 1, 9, 4, 7, 8, 2, 3, 11, 5, 10, 6],\n\t\t[9, 2, 1, 9, 11, 2, 9, 4, 11, 7, 11, 4, 5, 10, 6],\n\t\t[8, 4, 7, 3, 11, 5, 3, 5, 1, 5, 11, 6],\n\t\t[5, 1, 11, 5, 11, 6, 1, 0, 11, 7, 11, 4, 0, 4, 11],\n\t\t[0, 5, 9, 0, 6, 5, 0, 3, 6, 11, 6, 3, 8, 4, 7],\n\t\t[6, 5, 9, 6, 9, 11, 4, 7, 9, 7, 11, 9],\n\t\t[10, 4, 9, 6, 4, 10],\n\t\t[4, 10, 6, 4, 9, 10, 0, 8, 3],\n\t\t[10, 0, 1, 10, 6, 0, 6, 4, 0],\n\t\t[8, 3, 1, 8, 1, 6, 8, 6, 4, 6, 1, 10],\n\t\t[1, 4, 9, 1, 2, 4, 2, 6, 4],\n\t\t[3, 0, 8, 1, 2, 9, 2, 4, 9, 2, 6, 4],\n\t\t[0, 2, 4, 4, 2, 6],\n\t\t[8, 3, 2, 8, 2, 4, 4, 2, 6],\n\t\t[10, 4, 9, 10, 6, 4, 11, 2, 3],\n\t\t[0, 8, 2, 2, 8, 11, 4, 9, 10, 4, 10, 6],\n\t\t[3, 11, 2, 0, 1, 6, 0, 6, 4, 6, 1, 10],\n\t\t[6, 4, 1, 6, 1, 10, 4, 8, 1, 2, 1, 11, 8, 11, 1],\n\t\t[9, 6, 4, 9, 3, 6, 9, 1, 3, 11, 6, 3],\n\t\t[8, 11, 1, 8, 1, 0, 11, 6, 1, 9, 1, 4, 6, 4, 1],\n\t\t[3, 11, 6, 3, 6, 0, 0, 6, 4],\n\t\t[6, 4, 8, 11, 6, 8],\n\t\t[7, 10, 6, 7, 8, 10, 8, 9, 10],\n\t\t[0, 7, 3, 0, 10, 7, 0, 9, 10, 6, 7, 10],\n\t\t[10, 6, 7, 1, 10, 7, 1, 7, 8, 1, 8, 0],\n\t\t[10, 6, 7, 10, 7, 1, 1, 7, 3],\n\t\t[1, 2, 6, 1, 6, 8, 1, 8, 9, 8, 6, 7],\n\t\t[2, 6, 9, 2, 9, 1, 6, 7, 9, 0, 9, 3, 7, 3, 9],\n\t\t[7, 8, 0, 7, 0, 6, 6, 0, 2],\n\t\t[7, 3, 2, 6, 7, 2],\n\t\t[2, 3, 11, 10, 6, 8, 10, 8, 9, 8, 6, 7],\n\t\t[2, 0, 7, 2, 7, 11, 0, 9, 7, 6, 7, 10, 9, 10, 7],\n\t\t[1, 8, 0, 1, 7, 8, 1, 10, 7, 6, 7, 10, 2, 3, 11],\n\t\t[11, 2, 1, 11, 1, 7, 10, 6, 1, 6, 7, 1],\n\t\t[8, 9, 6, 8, 6, 7, 9, 1, 6, 11, 6, 3, 1, 3, 6],\n\t\t[0, 9, 1, 11, 6, 7],\n\t\t[7, 8, 0, 7, 0, 6, 3, 11, 0, 11, 6, 0],\n\t\t[7, 11, 6],\n\t\t[7, 6, 11],\n\t\t[3, 0, 8, 11, 7, 6],\n\t\t[0, 1, 9, 11, 7, 6],\n\t\t[8, 1, 9, 8, 3, 1, 11, 7, 6],\n\t\t[10, 1, 2, 6, 11, 7],\n\t\t[1, 2, 10, 3, 0, 8, 6, 11, 7],\n\t\t[2, 9, 0, 2, 10, 9, 6, 11, 7],\n\t\t[6, 11, 7, 2, 10, 3, 10, 8, 3, 10, 9, 8],\n\t\t[7, 2, 3, 6, 2, 7],\n\t\t[7, 0, 8, 7, 6, 0, 6, 2, 0],\n\t\t[2, 7, 6, 2, 3, 7, 0, 1, 9],\n\t\t[1, 6, 2, 1, 8, 6, 1, 9, 8, 8, 7, 6],\n\t\t[10, 7, 6, 10, 1, 7, 1, 3, 7],\n\t\t[10, 7, 6, 1, 7, 10, 1, 8, 7, 1, 0, 8],\n\t\t[0, 3, 7, 0, 7, 10, 0, 10, 9, 6, 10, 7],\n\t\t[7, 6, 10, 7, 10, 8, 8, 10, 9],\n\t\t[6, 8, 4, 11, 8, 6],\n\t\t[3, 6, 11, 3, 0, 6, 0, 4, 6],\n\t\t[8, 6, 11, 8, 4, 6, 9, 0, 1],\n\t\t[9, 4, 6, 9, 6, 3, 9, 3, 1, 11, 3, 6],\n\t\t[6, 8, 4, 6, 11, 8, 2, 10, 1],\n\t\t[1, 2, 10, 3, 0, 11, 0, 6, 11, 0, 4, 6],\n\t\t[4, 11, 8, 4, 6, 11, 0, 2, 9, 2, 10, 9],\n\t\t[10, 9, 3, 10, 3, 2, 9, 4, 3, 11, 3, 6, 4, 6, 3],\n\t\t[8, 2, 3, 8, 4, 2, 4, 6, 2],\n\t\t[0, 4, 2, 4, 6, 2],\n\t\t[1, 9, 0, 2, 3, 4, 2, 4, 6, 4, 3, 8],\n\t\t[1, 9, 4, 1, 4, 2, 2, 4, 6],\n\t\t[8, 1, 3, 8, 6, 1, 8, 4, 6, 6, 10, 1],\n\t\t[10, 1, 0, 10, 0, 6, 6, 0, 4],\n\t\t[4, 6, 3, 4, 3, 8, 6, 10, 3, 0, 3, 9, 10, 9, 3],\n\t\t[10, 9, 4, 6, 10, 4],\n\t\t[4, 9, 5, 7, 6, 11],\n\t\t[0, 8, 3, 4, 9, 5, 11, 7, 6],\n\t\t[5, 0, 1, 5, 4, 0, 7, 6, 11],\n\t\t[11, 7, 6, 8, 3, 4, 3, 5, 4, 3, 1, 5],\n\t\t[9, 5, 4, 10, 1, 2, 7, 6, 11],\n\t\t[6, 11, 7, 1, 2, 10, 0, 8, 3, 4, 9, 5],\n\t\t[7, 6, 11, 5, 4, 10, 4, 2, 10, 4, 0, 2],\n\t\t[3, 4, 8, 3, 5, 4, 3, 2, 5, 10, 5, 2, 11, 7, 6],\n\t\t[7, 2, 3, 7, 6, 2, 5, 4, 9],\n\t\t[9, 5, 4, 0, 8, 6, 0, 6, 2, 6, 8, 7],\n\t\t[3, 6, 2, 3, 7, 6, 1, 5, 0, 5, 4, 0],\n\t\t[6, 2, 8, 6, 8, 7, 2, 1, 8, 4, 8, 5, 1, 5, 8],\n\t\t[9, 5, 4, 10, 1, 6, 1, 7, 6, 1, 3, 7],\n\t\t[1, 6, 10, 1, 7, 6, 1, 0, 7, 8, 7, 0, 9, 5, 4],\n\t\t[4, 0, 10, 4, 10, 5, 0, 3, 10, 6, 10, 7, 3, 7, 10],\n\t\t[7, 6, 10, 7, 10, 8, 5, 4, 10, 4, 8, 10],\n\t\t[6, 9, 5, 6, 11, 9, 11, 8, 9],\n\t\t[3, 6, 11, 0, 6, 3, 0, 5, 6, 0, 9, 5],\n\t\t[0, 11, 8, 0, 5, 11, 0, 1, 5, 5, 6, 11],\n\t\t[6, 11, 3, 6, 3, 5, 5, 3, 1],\n\t\t[1, 2, 10, 9, 5, 11, 9, 11, 8, 11, 5, 6],\n\t\t[0, 11, 3, 0, 6, 11, 0, 9, 6, 5, 6, 9, 1, 2, 10],\n\t\t[11, 8, 5, 11, 5, 6, 8, 0, 5, 10, 5, 2, 0, 2, 5],\n\t\t[6, 11, 3, 6, 3, 5, 2, 10, 3, 10, 5, 3],\n\t\t[5, 8, 9, 5, 2, 8, 5, 6, 2, 3, 8, 2],\n\t\t[9, 5, 6, 9, 6, 0, 0, 6, 2],\n\t\t[1, 5, 8, 1, 8, 0, 5, 6, 8, 3, 8, 2, 6, 2, 8],\n\t\t[1, 5, 6, 2, 1, 6],\n\t\t[1, 3, 6, 1, 6, 10, 3, 8, 6, 5, 6, 9, 8, 9, 6],\n\t\t[10, 1, 0, 10, 0, 6, 9, 5, 0, 5, 6, 0],\n\t\t[0, 3, 8, 5, 6, 10],\n\t\t[10, 5, 6],\n\t\t[11, 5, 10, 7, 5, 11],\n\t\t[11, 5, 10, 11, 7, 5, 8, 3, 0],\n\t\t[5, 11, 7, 5, 10, 11, 1, 9, 0],\n\t\t[10, 7, 5, 10, 11, 7, 9, 8, 1, 8, 3, 1],\n\t\t[11, 1, 2, 11, 7, 1, 7, 5, 1],\n\t\t[0, 8, 3, 1, 2, 7, 1, 7, 5, 7, 2, 11],\n\t\t[9, 7, 5, 9, 2, 7, 9, 0, 2, 2, 11, 7],\n\t\t[7, 5, 2, 7, 2, 11, 5, 9, 2, 3, 2, 8, 9, 8, 2],\n\t\t[2, 5, 10, 2, 3, 5, 3, 7, 5],\n\t\t[8, 2, 0, 8, 5, 2, 8, 7, 5, 10, 2, 5],\n\t\t[9, 0, 1, 5, 10, 3, 5, 3, 7, 3, 10, 2],\n\t\t[9, 8, 2, 9, 2, 1, 8, 7, 2, 10, 2, 5, 7, 5, 2],\n\t\t[1, 3, 5, 3, 7, 5],\n\t\t[0, 8, 7, 0, 7, 1, 1, 7, 5],\n\t\t[9, 0, 3, 9, 3, 5, 5, 3, 7],\n\t\t[9, 8, 7, 5, 9, 7],\n\t\t[5, 8, 4, 5, 10, 8, 10, 11, 8],\n\t\t[5, 0, 4, 5, 11, 0, 5, 10, 11, 11, 3, 0],\n\t\t[0, 1, 9, 8, 4, 10, 8, 10, 11, 10, 4, 5],\n\t\t[10, 11, 4, 10, 4, 5, 11, 3, 4, 9, 4, 1, 3, 1, 4],\n\t\t[2, 5, 1, 2, 8, 5, 2, 11, 8, 4, 5, 8],\n\t\t[0, 4, 11, 0, 11, 3, 4, 5, 11, 2, 11, 1, 5, 1, 11],\n\t\t[0, 2, 5, 0, 5, 9, 2, 11, 5, 4, 5, 8, 11, 8, 5],\n\t\t[9, 4, 5, 2, 11, 3],\n\t\t[2, 5, 10, 3, 5, 2, 3, 4, 5, 3, 8, 4],\n\t\t[5, 10, 2, 5, 2, 4, 4, 2, 0],\n\t\t[3, 10, 2, 3, 5, 10, 3, 8, 5, 4, 5, 8, 0, 1, 9],\n\t\t[5, 10, 2, 5, 2, 4, 1, 9, 2, 9, 4, 2],\n\t\t[8, 4, 5, 8, 5, 3, 3, 5, 1],\n\t\t[0, 4, 5, 1, 0, 5],\n\t\t[8, 4, 5, 8, 5, 3, 9, 0, 5, 0, 3, 5],\n\t\t[9, 4, 5],\n\t\t[4, 11, 7, 4, 9, 11, 9, 10, 11],\n\t\t[0, 8, 3, 4, 9, 7, 9, 11, 7, 9, 10, 11],\n\t\t[1, 10, 11, 1, 11, 4, 1, 4, 0, 7, 4, 11],\n\t\t[8, 3, 1, 8, 1, 4, 1, 10, 4, 7, 4, 11, 10, 11, 4],\n\t\t[4, 11, 7, 9, 11, 4, 9, 2, 11, 9, 1, 2],\n\t\t[9, 7, 4, 9, 11, 7, 9, 1, 11, 2, 11, 1, 0, 8, 3],\n\t\t[11, 7, 4, 11, 4, 2, 2, 4, 0],\n\t\t[11, 7, 4, 11, 4, 2, 8, 3, 4, 3, 2, 4],\n\t\t[2, 9, 10, 2, 7, 9, 2, 3, 7, 7, 4, 9],\n\t\t[9, 10, 7, 9, 7, 4, 10, 2, 7, 8, 7, 0, 2, 0, 7],\n\t\t[3, 7, 10, 3, 10, 2, 7, 4, 10, 1, 10, 0, 4, 0, 10],\n\t\t[1, 10, 2, 8, 7, 4],\n\t\t[4, 9, 1, 4, 1, 7, 7, 1, 3],\n\t\t[4, 9, 1, 4, 1, 7, 0, 8, 1, 8, 7, 1],\n\t\t[4, 0, 3, 7, 4, 3],\n\t\t[4, 8, 7],\n\t\t[9, 10, 8, 10, 11, 8],\n\t\t[3, 0, 9, 3, 9, 11, 11, 9, 10],\n\t\t[0, 1, 10, 0, 10, 8, 8, 10, 11],\n\t\t[3, 1, 10, 11, 3, 10],\n\t\t[1, 2, 11, 1, 11, 9, 9, 11, 8],\n\t\t[3, 0, 9, 3, 9, 11, 1, 2, 9, 2, 11, 9],\n\t\t[0, 2, 11, 8, 0, 11],\n\t\t[3, 2, 11],\n\t\t[2, 3, 8, 2, 8, 10, 10, 8, 9],\n\t\t[9, 10, 2, 0, 9, 2],\n\t\t[2, 3, 8, 2, 8, 10, 0, 1, 8, 1, 10, 8],\n\t\t[1, 10, 2],\n\t\t[1, 3, 8, 9, 1, 8],\n\t\t[0, 9, 1],\n\t\t[0, 3, 8],\n\t\t[],\n\t]\n\treturn ROWS[case_number]",
+      "note": "one supplied part: the table and the call that reads a row. Preload it: const Table = preload(\"res://supplied/triangle_table.gd\")"
+    },
+    {
+      "id": "metaball", "kind": "concept",
+      "forms": {"text": ["metaball", "metaballs"], "code": []},
+      "def": "A centre whose falloff adds to a field.",
+      "introduced_at": "18.4", "synonyms": [], "depends_on": ["falloff", "field"]
+    },
+    {
+      "id": "falloff", "kind": "concept",
+      "forms": {"text": ["falloff", "falloffs"], "code": []},
+      "def": "How a value fades with distance from its centre.",
+      "introduced_at": "18.4", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "min", "kind": "gdscript",
+      "forms": {"text": [], "code": ["min"]},
+      "def": "The smaller of two values.",
+      "introduced_at": "18.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "max", "kind": "gdscript",
+      "forms": {"text": [], "code": ["max"]},
+      "def": "The larger of two values.",
+      "introduced_at": "18.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "union", "kind": "maths",
+      "forms": {"text": ["union", "unions"], "code": []},
+      "def": "Every point that belongs to either.",
+      "introduced_at": "18.5", "synonyms": [], "depends_on": ["point"],
+      "note": "19.2 teaches union again, with CSG"
+    },
+    {
+      "id": "distance_field", "kind": "maths",
+      "forms": {"text": ["distance field", "distance fields"], "code": []},
+      "def": "A field of each place's distance to a body.",
+      "introduced_at": "18.5", "synonyms": [], "depends_on": ["field", "body"]
+    },
+    {
+      "id": "periodic", "kind": "maths",
+      "forms": {"text": ["periodic"], "code": []},
+      "def": "Repeating the same values at a fixed period.",
+      "introduced_at": "18.6", "synonyms": [], "depends_on": ["period"]
+    },
+    {
+      "id": "gyroid", "kind": "maths",
+      "forms": {"text": ["gyroid", "gyroids"], "code": []},
+      "def": "One surface that folds through all of space.",
+      "introduced_at": "18.6", "synonyms": [], "depends_on": ["surface"]
+    },
+    {
+      "id": "density_terrain", "kind": "concept",
+      "forms": {"text": ["density terrain"], "code": []},
+      "def": "Ground from height minus y, plus 3D noise.",
+      "introduced_at": "18.7", "synonyms": [], "depends_on": ["y", "noise"]
+    },
+    {
+      "id": "thread", "kind": "concept",
+      "forms": {"text": ["thread", "threads", "threaded", "main thread", "worker thread"], "code": []},
+      "def": "One strand of work the computer runs beside others.",
+      "introduced_at": "18.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "WorkerThreadPool", "kind": "godot",
+      "forms": {"text": [], "code": ["WorkerThreadPool"]},
+      "def": "Godot's threads for work off the main thread.",
+      "introduced_at": "18.8", "synonyms": [], "depends_on": ["thread"]
+    },
+    {
+      "id": "call_deferred", "kind": "godot",
+      "forms": {"text": [], "code": ["call_deferred"]},
+      "def": "Calls a method later, on the main thread.",
+      "introduced_at": "18.8", "synonyms": [], "depends_on": ["call", "method", "frame", "thread"]
+    },
+    {
+      "id": "add_task", "kind": "godot",
+      "forms": {"text": [], "code": ["add_task"]},
+      "def": "Gives a waiting thread a function, and answers a number.",
+      "introduced_at": "18.8", "synonyms": [], "depends_on": ["function", "thread"]
+    },
+    {
+      "id": "Callable", "kind": "godot",
+      "forms": {"text": ["callable", "callables"], "code": ["Callable"]},
+      "def": "A function held as a value, to call later.",
+      "introduced_at": "18.8", "synonyms": [], "depends_on": ["function", "call"],
+      "note": "18.8 hands build to a thread: the function itself, not a call"
+    },
+    {
+      "id": "wait_for_task_completion", "kind": "godot",
+      "forms": {"text": [], "code": ["wait_for_task_completion"]},
+      "def": "Waits until a thread has finished the task.",
+      "introduced_at": "18.8", "synonyms": [], "depends_on": ["thread"]
+    },
+    {
+      "id": "_exit_tree", "kind": "godot",
+      "forms": {"text": [], "code": ["_exit_tree"]},
+      "def": "Runs when the node leaves the scene tree.",
+      "introduced_at": "18.8", "synonyms": [], "depends_on": ["node", "scene_tree"]
+    },
+    {
+      "id": "solid", "kind": "concept",
+      "forms": {"text": ["solid", "solids"], "code": []},
+      "def": "A body as a question: is this point inside?",
+      "introduced_at": "19.1", "synonyms": [], "depends_on": ["body", "point"],
+      "other_senses": [{"words": ["solid"], "at": ["11.4", "18.7"], "sense": "firm, not empty"}]
+    },
+    {
+      "id": "volume", "kind": "maths",
+      "forms": {"text": ["volume"], "code": []},
+      "def": "How much space a solid fills.",
+      "introduced_at": "19.1", "synonyms": [], "depends_on": ["solid"]
+    },
+    {
+      "id": "CSG", "kind": "concept",
+      "forms": {"text": ["CSG"], "code": []},
+      "def": "Building solids by combining solids.",
+      "introduced_at": "19.2", "synonyms": [], "depends_on": ["solid"]
+    },
+    {
+      "id": "CSGCombiner3D", "kind": "godot",
+      "forms": {"text": [], "code": ["CSGCombiner3D"]},
+      "def": "A node whose CSG children make one body.",
+      "introduced_at": "19.2", "synonyms": [], "depends_on": ["node", "CSG", "child", "body"]
+    },
+    {
+      "id": "operation", "kind": "godot",
+      "forms": {"text": [], "code": ["operation"]},
+      "def": "Which verb a CSG child applies to those before it.",
+      "introduced_at": "19.2", "synonyms": [], "depends_on": ["CSG", "child"]
+    },
+    {
+      "id": "UNION", "kind": "godot",
+      "forms": {"text": [], "code": ["UNION"]},
+      "def": "The CSG operation that keeps either.",
+      "introduced_at": "19.2", "synonyms": [], "depends_on": ["CSG", "operation"]
+    },
+    {
+      "id": "intersection", "kind": "maths",
+      "forms": {"text": ["intersection", "intersections"], "code": []},
+      "def": "Every point that belongs to both.",
+      "introduced_at": "19.3", "synonyms": [], "depends_on": ["point"]
+    },
+    {
+      "id": "INTERSECTION", "kind": "godot",
+      "forms": {"text": [], "code": ["INTERSECTION"]},
+      "def": "The CSG operation that keeps both.",
+      "introduced_at": "19.3", "synonyms": [], "depends_on": ["CSG", "operation"]
+    },
+    {
+      "id": "difference", "kind": "maths",
+      "forms": {"text": ["difference", "differences"], "code": []},
+      "def": "Every point of one that is not in the other.",
+      "introduced_at": "19.4", "synonyms": [], "depends_on": ["point"],
+      "other_senses": [{"words": ["difference"], "at": ["13.x"], "sense": "a change between two runs"}]
+    },
+    {
+      "id": "SUBTRACTION", "kind": "godot",
+      "forms": {"text": [], "code": ["SUBTRACTION"]},
+      "def": "The CSG operation that carves one body out of another.",
+      "introduced_at": "19.4", "synonyms": [], "depends_on": ["CSG", "operation", "body"]
+    },
+    {
+      "id": "operand", "kind": "concept",
+      "forms": {"text": ["operand", "operands"], "code": []},
+      "def": "One of the bodies an operation acts on.",
+      "introduced_at": "19.5", "synonyms": [], "depends_on": ["body", "operation"]
+    },
+    {
+      "id": "use_collision", "kind": "godot",
+      "forms": {"text": [], "code": ["use_collision"]},
+      "def": "Gives a CSG body a shape to stand on.",
+      "introduced_at": "19.7", "synonyms": [], "depends_on": ["CSG", "body", "shape"]
+    },
+    {
+      "id": "bake_static_mesh", "kind": "godot",
+      "forms": {"text": [], "code": ["bake_static_mesh"]},
+      "def": "Bakes a CSG body into a plain mesh.",
+      "introduced_at": "19.7", "synonyms": [], "depends_on": ["bake", "CSG", "body", "mesh"]
+    },
+    {
+      "id": "bake_collision_shape", "kind": "godot",
+      "forms": {"text": [], "code": ["bake_collision_shape"]},
+      "def": "Bakes a CSG body's shape for a `StaticBody3D`.",
+      "introduced_at": "19.7", "synonyms": [], "depends_on": ["bake", "CSG", "body", "shape", "StaticBody3D"]
+    },
+    {
+      "id": "MultiMeshInstance3D", "kind": "godot",
+      "forms": {"text": [], "code": ["MultiMeshInstance3D"]},
+      "def": "A node that draws a `MultiMesh`.",
+      "introduced_at": "20.0", "synonyms": [], "depends_on": ["node", "MultiMesh"],
+      "note": "chapter 20's code_new says met in chapter 13; chapter 13 names only MultiMesh"
+    },
+    {
+      "id": "particle_system", "kind": "concept",
+      "forms": {"text": ["particle system", "particle systems"], "code": []},
+      "def": "Many particles, born, ageing and removed.",
+      "introduced_at": "20.1", "synonyms": [], "depends_on": ["particle"]
+    },
+    {
+      "id": "Spark", "kind": "name",
+      "forms": {"text": [], "code": ["Spark"]},
+      "def": "Your class: a `Particle` with an age.",
+      "introduced_at": "20.1", "synonyms": [], "depends_on": ["class", "Particle"]
+    },
+    {
+      "id": "agent", "kind": "concept",
+      "forms": {"text": ["agent", "agents"], "code": []},
+      "def": "A body that senses and acts by its own rule.",
+      "introduced_at": "20.2", "synonyms": [], "depends_on": ["body"]
+    },
+    {
+      "id": "trail_grid", "kind": "concept",
+      "forms": {"text": ["trail grid", "trail grids"], "code": []},
+      "def": "A grid agents write into, that spreads and fades.",
+      "introduced_at": "20.2", "synonyms": [], "depends_on": ["agent", "grid"]
+    },
+    {
+      "id": "steering", "kind": "concept",
+      "forms": {"text": ["steering", "steering force"], "code": []},
+      "def": "The velocity you want minus the velocity you have.",
+      "introduced_at": "20.3", "synonyms": [], "depends_on": ["velocity"]
+    },
+    {
+      "id": "desired_velocity", "kind": "maths",
+      "forms": {"text": ["desired velocity"], "code": []},
+      "def": "The velocity an agent would like to have.",
+      "introduced_at": "20.3", "synonyms": [], "depends_on": ["velocity", "agent"]
+    },
+    {
+      "id": "maximum_force", "kind": "concept",
+      "forms": {"text": ["maximum force"], "code": []},
+      "def": "The largest steering an agent may use.",
+      "introduced_at": "20.3", "synonyms": [], "depends_on": ["steering", "agent"]
+    },
+    {
+      "id": "cost_field", "kind": "supplied",
+      "forms": {"text": ["cost field"], "code": []},
+      "def": "A flood out from a target: each cell's arrow home.",
+      "introduced_at": "supplied:20.4", "synonyms": [], "depends_on": ["flood", "cell"],
+      "opened_at": "22.2",
+      "note": "the sketch says graph search is taught in chapter 22: 22.2 inferred"
+    },
+    {
+      "id": "weight", "kind": "concept",
+      "forms": {"text": ["weight", "weights", "weighted"], "code": []},
+      "def": "A number that says how much one part counts.",
+      "introduced_at": "20.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "weighted_sum", "kind": "maths",
+      "forms": {"text": ["weighted sum", "weighted sums"], "code": []},
+      "def": "Each part times its weight, all added.",
+      "introduced_at": "20.5", "synonyms": [], "depends_on": ["weight"],
+      "note": "21.5 teaches it again for the perceptron"
+    },
+    {
+      "id": "boid", "kind": "concept",
+      "forms": {"text": ["boid", "boids"], "code": []},
+      "def": "An agent that steers by its neighbours: apart, along, together.",
+      "introduced_at": "20.5", "synonyms": [], "depends_on": ["agent"]
+    },
+    {
+      "id": "add_to_group", "kind": "godot",
+      "forms": {"text": [], "code": ["add_to_group"]},
+      "def": "Puts a node into a named group.",
+      "introduced_at": "20.5", "synonyms": [], "depends_on": ["node"],
+      "note": "20.5 inferred"
+    },
+    {
+      "id": "get_nodes_in_group", "kind": "godot",
+      "forms": {"text": [], "code": ["get_nodes_in_group"]},
+      "def": "Every node in a named group.",
+      "introduced_at": "20.5", "synonyms": [], "depends_on": ["node"],
+      "note": "20.5 inferred"
+    },
+    {
+      "id": "particle_swarm", "kind": "concept",
+      "forms": {"text": ["particle swarm", "swarm", "swarms"], "code": []},
+      "def": "Particles that search, each keeping its best and the swarm's.",
+      "introduced_at": "20.7", "synonyms": [], "depends_on": ["particle"]
+    },
+    {
+      "id": "error", "kind": "maths",
+      "forms": {"text": ["error", "errors"], "code": []},
+      "def": "How far an answer is from the right one.",
+      "introduced_at": "21.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "loss_function", "kind": "maths",
+      "forms": {"text": ["loss function", "loss functions", "loss surface", "loss"], "code": []},
+      "def": "Error as one number: lower is better.",
+      "introduced_at": "21.2", "synonyms": [], "depends_on": ["error"]
+    },
+    {
+      "id": "squared_error", "kind": "maths",
+      "forms": {"text": ["squared error", "squared-error"], "code": []},
+      "def": "The error times itself, added over all points.",
+      "introduced_at": "21.2", "synonyms": [], "depends_on": ["error", "point"]
+    },
+    {
+      "id": "intercept", "kind": "maths",
+      "forms": {"text": ["intercept"], "code": []},
+      "def": "Where a line crosses the up axis.",
+      "introduced_at": "21.2", "synonyms": [], "depends_on": ["line", "axis"]
+    },
+    {
+      "id": "nudge", "kind": "concept",
+      "forms": {"text": ["nudge", "nudges", "nudging", "nudged"], "code": []},
+      "def": "Change one number a little and watch the error.",
+      "introduced_at": "21.3", "synonyms": [], "depends_on": ["error"]
+    },
+    {
+      "id": "finite_difference", "kind": "maths",
+      "forms": {"text": ["finite difference", "finite differences"], "code": []},
+      "def": "A slope from a value and a nudged value.",
+      "introduced_at": "21.3", "synonyms": [], "depends_on": ["slope", "nudge"]
+    },
+    {
+      "id": "learning_rate", "kind": "maths",
+      "forms": {"text": ["learning rate"], "code": []},
+      "def": "How big a step a learner takes downhill.",
+      "introduced_at": "21.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "mean", "kind": "maths",
+      "forms": {"text": ["the mean", "a mean", "its mean", "their mean", "mean squared"], "code": []},
+      "def": "The middle of many values: their sum over their count.",
+      "introduced_at": "21.4", "synonyms": [], "depends_on": [],
+      "note": "the verb 'mean' (what do the numbers mean?) is everyday; the average is 'the mean'"
+    },
+    {
+      "id": "k_means", "kind": "maths",
+      "forms": {"text": ["k-means"], "code": []},
+      "def": "Points join the nearest centre; centres move to their mean.",
+      "introduced_at": "21.4", "synonyms": [], "depends_on": ["point", "mean"]
+    },
+    {
+      "id": "perceptron", "kind": "concept",
+      "forms": {"text": ["perceptron", "perceptrons"], "code": []},
+      "def": "Weigh the inputs, add, take the sign: one learned line.",
+      "introduced_at": "21.5", "synonyms": [], "depends_on": ["input", "line"]
+    },
+    {
+      "id": "sign", "kind": "gdscript",
+      "forms": {"text": [], "code": ["sign"]},
+      "def": "-1, 0 or 1: which side of zero.",
+      "introduced_at": "21.5", "synonyms": [], "depends_on": [],
+      "note": "20.8 already flips a sign"
+    },
+    {
+      "id": "floor_painter", "kind": "supplied",
+      "forms": {"text": ["floor painter"], "code": []},
+      "def": "An `Image` worn by the floor, one pixel per cell.",
+      "introduced_at": "supplied:21.5", "synonyms": [], "depends_on": ["Image", "pixel", "cell"],
+      "note": "section inferred: the learning-body kit is built in 21.5"
+    },
+    {
+      "id": "XOR", "kind": "concept",
+      "forms": {"text": ["XOR"], "code": []},
+      "def": "True when exactly one of two is true.",
+      "introduced_at": "21.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "hidden_layer", "kind": "concept",
+      "forms": {"text": ["hidden layer", "hidden layers"], "code": []},
+      "def": "Weighted sums between the inputs and the answer.",
+      "introduced_at": "21.6", "synonyms": [], "depends_on": ["weighted_sum", "input"]
+    },
+    {
+      "id": "train", "kind": "concept",
+      "forms": {"text": ["train", "trains", "trained", "training"], "code": []},
+      "def": "Changing weights until the error is small.",
+      "introduced_at": "21.6", "synonyms": [], "depends_on": ["weight", "error"]
+    },
+    {
+      "id": "convolution", "kind": "maths",
+      "forms": {"text": ["convolution", "convolutions"], "code": []},
+      "def": "Sliding a small grid of weights over an image.",
+      "introduced_at": "21.7", "synonyms": [], "depends_on": ["weight", "grid"]
+    },
+    {
+      "id": "kernel", "kind": "maths",
+      "forms": {"text": ["kernel", "kernels"], "code": []},
+      "def": "The small grid of weights a convolution slides.",
+      "introduced_at": "21.7", "synonyms": [], "depends_on": ["weight", "convolution", "grid"]
+    },
+    {
+      "id": "sobel", "kind": "name",
+      "forms": {"text": ["Sobel"], "code": []},
+      "def": "A kernel that lights up where neighbours differ.",
+      "introduced_at": "21.7", "synonyms": [], "depends_on": ["kernel"]
+    },
+    {
+      "id": "neuroevolution", "kind": "concept",
+      "forms": {"text": ["neuroevolution", "neuroevolved"], "code": []},
+      "def": "Weights treated as genes and bred, not trained.",
+      "introduced_at": "21.8", "synonyms": [], "depends_on": ["weight", "gene", "train"]
+    },
+    {
+      "id": "graph", "kind": "concept",
+      "forms": {"text": ["graph", "graphs"], "code": []},
+      "def": "Places and the connections between them.",
+      "introduced_at": "22.1", "synonyms": [], "depends_on": [],
+      "other_senses": [{"words": ["graph"], "at": ["12.2"], "sense": "a drawn curve of values"}]
+    },
+    {
+      "id": "adjacency_list", "kind": "concept",
+      "forms": {"text": ["adjacency list", "adjacency lists"], "code": []},
+      "def": "For each place, the places it connects to.",
+      "introduced_at": "22.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "graph_degree", "kind": "concept",
+      "forms": {"text": ["vertex degree", "vertex degrees"], "code": []},
+      "def": "How many connections a place has.",
+      "introduced_at": "22.1", "synonyms": [], "depends_on": ["graph"],
+      "note": "degree alone is the everyday angle; the graph's count is the vertex degree. The sketch's 22.1 says degree for it: a sense the checker cannot see"
+    },
+    {
+      "id": "konigsberg", "kind": "name",
+      "forms": {"text": ["Königsberg", "Konigsberg"], "code": []},
+      "def": "The town whose seven bridges no walk crosses once each.",
+      "introduced_at": "22.1", "synonyms": [], "depends_on": [],
+      "note": "22.1's subject by its builds and figure"
+    },
+    {
+      "id": "queue", "kind": "concept",
+      "forms": {"text": ["queue", "queues"], "code": []},
+      "def": "Items that leave in the order they came.",
+      "introduced_at": "22.2", "synonyms": [], "depends_on": ["item"]
+    },
+    {
+      "id": "pop_front", "kind": "godot",
+      "forms": {"text": [], "code": ["pop_front"]},
+      "def": "Takes the first item off an array and returns it.",
+      "introduced_at": "22.2", "synonyms": [], "depends_on": ["array", "item"]
+    },
+    {
+      "id": "visited_set", "kind": "concept",
+      "forms": {"text": ["visited set"], "code": []},
+      "def": "The places a search has already seen.",
+      "introduced_at": "22.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "breadth_first_search", "kind": "concept",
+      "forms": {"text": ["breadth-first search", "breadth-first"], "code": []},
+      "def": "Visit every place one step away, then two, then three.",
+      "introduced_at": "22.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "force_directed_layout", "kind": "concept",
+      "forms": {"text": ["force-directed layout", "force-directed"], "code": []},
+      "def": "Springs pull connected places together; every pair pushes apart.",
+      "introduced_at": "22.3", "synonyms": [], "depends_on": ["spring"]
+    },
+    {
+      "id": "repulsion", "kind": "maths",
+      "forms": {"text": ["repulsion"], "code": []},
+      "def": "A push apart that weakens with distance.",
+      "introduced_at": "22.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "came_from", "kind": "name",
+      "forms": {"text": [], "code": ["came_from"]},
+      "def": "Your dictionary: each place, and where you reached it from.",
+      "introduced_at": "22.4", "synonyms": [], "depends_on": ["Dictionary"]
+    },
+    {
+      "id": "AStar3D", "kind": "godot",
+      "forms": {"text": [], "code": ["AStar3D"]},
+      "def": "Godot's shortest-path search over points you connect.",
+      "introduced_at": "22.4", "synonyms": [], "depends_on": ["point"]
+    },
+    {
+      "id": "add_point", "kind": "godot",
+      "forms": {"text": [], "code": ["add_point"]},
+      "def": "Adds a point to an `AStar3D`.",
+      "introduced_at": "22.4", "synonyms": [], "depends_on": ["point", "AStar3D"]
+    },
+    {
+      "id": "connect_points", "kind": "godot",
+      "forms": {"text": [], "code": ["connect_points"]},
+      "def": "Joins two points of an `AStar3D`.",
+      "introduced_at": "22.4", "synonyms": [], "depends_on": ["point", "AStar3D"]
+    },
+    {
+      "id": "get_point_path", "kind": "godot",
+      "forms": {"text": [], "code": ["get_point_path"]},
+      "def": "The shortest path between two points of an `AStar3D`.",
+      "introduced_at": "22.4", "synonyms": [], "depends_on": ["point", "AStar3D"]
+    },
+    {
+      "id": "set_point_disabled", "kind": "godot",
+      "forms": {"text": [], "code": ["set_point_disabled"]},
+      "def": "Takes a point of an `AStar3D` out of every path.",
+      "introduced_at": "22.4", "synonyms": [], "depends_on": ["point", "AStar3D"]
+    },
+    {
+      "id": "directed", "kind": "concept",
+      "forms": {"text": ["directed", "directed edge", "directed edges"], "code": []},
+      "def": "One way only: from one place to another.",
+      "introduced_at": "22.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "component", "kind": "concept",
+      "forms": {"text": ["component", "components"], "code": []},
+      "def": "Places that can all reach each other.",
+      "introduced_at": "22.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "cycle", "kind": "concept",
+      "forms": {"text": ["cycle", "cycles"], "code": []},
+      "def": "A path that comes back to where it started.",
+      "introduced_at": "22.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "union_find", "kind": "concept",
+      "forms": {"text": ["union-find"], "code": []},
+      "def": "Groups you can join, and ask whether two share one.",
+      "introduced_at": "22.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "spanning_tree", "kind": "concept",
+      "forms": {"text": ["spanning tree", "spanning trees"], "code": []},
+      "def": "Connections reaching every place, with no ring.",
+      "introduced_at": "22.6", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "path_compression", "kind": "supplied",
+      "forms": {"text": ["path compression"], "code": []},
+      "def": "Keeps union-find fast by shortening its chains.",
+      "introduced_at": "supplied:22.6", "synonyms": [], "depends_on": ["union_find"]
+    },
+    {
+      "id": "capacity", "kind": "concept",
+      "forms": {"text": ["capacity", "capacities"], "code": []},
+      "def": "How much one connection can carry.",
+      "introduced_at": "22.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "augmenting_path", "kind": "concept",
+      "forms": {"text": ["augmenting path", "augmenting paths"], "code": []},
+      "def": "A path from source to sink that still has room.",
+      "introduced_at": "22.7", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "matching", "kind": "concept",
+      "forms": {"text": ["matching", "matchings"], "code": []},
+      "def": "Pairs of places in which no place is used twice.",
+      "introduced_at": "22.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "greedy", "kind": "concept",
+      "forms": {"text": ["greedy"], "code": []},
+      "def": "Taking the best-looking choice at once, never undoing it.",
+      "introduced_at": "22.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "axiom", "kind": "concept",
+      "forms": {"text": ["axiom", "axioms"], "code": []},
+      "def": "A rule taken as true, not proved.",
+      "introduced_at": "23.1", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "euclid", "kind": "name",
+      "forms": {"text": ["Euclid"], "code": []},
+      "def": "The geometer whose five axioms flat space rests on.",
+      "introduced_at": "23.1", "synonyms": [], "depends_on": ["axiom"]
+    },
+    {
+      "id": "acos", "kind": "gdscript",
+      "forms": {"text": [], "code": ["acos"]},
+      "def": "The angle that a `cos` gives back as this number.",
+      "introduced_at": "23.2", "synonyms": [], "depends_on": ["cos"]
+    },
+    {
+      "id": "great_circle", "kind": "maths",
+      "forms": {"text": ["great circle", "great-circle", "great circles"], "code": []},
+      "def": "The widest circle on a sphere: its straightest line.",
+      "introduced_at": "23.2", "synonyms": [], "depends_on": ["line"]
+    },
+    {
+      "id": "slerp", "kind": "godot",
+      "forms": {"text": ["slerp"], "code": ["slerp", "Vector3.slerp"]},
+      "def": "Walks between two directions along a great circle.",
+      "introduced_at": "23.2", "synonyms": [], "depends_on": ["great_circle"]
+    },
+    {
+      "id": "poincare_disk", "kind": "maths",
+      "forms": {"text": ["Poincaré disk", "Poincare disk"], "code": []},
+      "def": "A disk that holds a whole curved plane.",
+      "introduced_at": "23.2", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "statement", "kind": "concept",
+      "forms": {"text": ["statement", "statements"], "code": []},
+      "def": "A sentence that is true or false.",
+      "introduced_at": "23.4", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "integer", "kind": "gdscript",
+      "forms": {"text": ["integer", "integers"], "code": ["int"]},
+      "def": "A number with no fractional part.",
+      "introduced_at": "23.4", "synonyms": ["whole number", "whole numbers"], "depends_on": []
+    },
+    {
+      "id": "prime", "kind": "maths",
+      "forms": {"text": ["prime", "primes"], "code": []},
+      "def": "A number only 1 and itself divide.",
+      "introduced_at": "23.4", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "godel_numbering", "kind": "maths",
+      "forms": {"text": ["Gödel numbering", "Godel numbering", "Gödel number", "Godel number", "Gödel numbers", "Godel numbers"], "code": []},
+      "def": "A statement coded as one integer, from primes and powers.",
+      "introduced_at": "23.4", "synonyms": [], "depends_on": ["statement", "integer", "prime"]
+    },
+    {
+      "id": "godel_encoder", "kind": "supplied",
+      "forms": {"text": ["Gödel encoder", "Godel encoder"], "code": []},
+      "def": "Codes statements as numbers, guarding against overflow.",
+      "introduced_at": "supplied:23.4", "synonyms": [], "depends_on": ["statement"]
+    },
+    {
+      "id": "closed_loop", "kind": "concept",
+      "forms": {"text": ["closed loop", "closed loops"], "code": []},
+      "def": "A path that ends where it began.",
+      "introduced_at": "23.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "illusion", "kind": "concept",
+      "forms": {"text": ["illusion", "illusions"], "code": []},
+      "def": "A body that looks closed from one place only.",
+      "introduced_at": "23.5", "synonyms": [], "depends_on": ["body"],
+      "note": "23.5 inferred"
+    },
+    {
+      "id": "TRUE_FALSE_NOT_YET", "kind": "name",
+      "forms": {"text": [], "code": ["NOT_YET", "TRUE", "FALSE"]},
+      "def": "Your enum's three values: a truth may wait.",
+      "introduced_at": "23.6", "synonyms": [], "depends_on": ["enum"]
+    },
+    {
+      "id": "contradiction", "kind": "concept",
+      "forms": {"text": ["contradiction", "contradictions"], "code": []},
+      "def": "Two statements that cannot both be true.",
+      "introduced_at": "23.7", "synonyms": [], "depends_on": ["statement"]
+    },
+    {
+      "id": "handle", "kind": "concept",
+      "forms": {"text": ["handle", "handles"], "code": []},
+      "def": "One term of Ada's formula that you can turn.",
+      "introduced_at": "23.8", "synonyms": [], "depends_on": [],
+      "note": "23.8 gives Ada's formula a button for each term: the handles; chapter 24 returns to them"
+    },
+    {
+      "id": "qfe", "kind": "name",
+      "forms": {"text": [], "code": ["qfe"]},
+      "def": "Your function: Ada's formula of four handles.",
+      "introduced_at": "24.1", "synonyms": [], "depends_on": ["function", "handle"]
+    },
+    {
+      "id": "λ", "kind": "concept",
+      "forms": {"text": ["λ"], "code": []},
+      "def": "The handle for where you stand, from 0 to 1.",
+      "introduced_at": "24.1", "synonyms": [], "depends_on": ["handle"]
+    },
+    {
+      "id": "φ", "kind": "concept",
+      "forms": {"text": ["φ"], "code": []},
+      "def": "The signed handle: which way change is weighted.",
+      "introduced_at": "24.1", "synonyms": [], "depends_on": ["handle", "weight"]
+    },
+    {
+      "id": "entropy", "kind": "maths",
+      "forms": {"text": ["entropy", "Shannon entropy", "Shannon"], "code": []},
+      "def": "How unpredictable a source is, in bits.",
+      "introduced_at": "24.2", "synonyms": [], "depends_on": ["bit"]
+    },
+    {
+      "id": "signal", "kind": "concept",
+      "forms": {"text": ["signal", "signals"], "code": []},
+      "def": "A message a node sends that others can connect to.",
+      "introduced_at": "24.7", "synonyms": [], "depends_on": ["node"]
+    },
+    {
+      "id": "connect", "kind": "godot",
+      "forms": {"text": [], "code": ["connect"]},
+      "def": "Joins a signal to the method it should run.",
+      "introduced_at": "24.7", "synonyms": [], "depends_on": ["signal", "method"]
+    },
+    {
+      "id": "disconnect", "kind": "godot",
+      "forms": {"text": [], "code": ["disconnect"]},
+      "def": "Cuts a signal from its method.",
+      "introduced_at": "24.7", "synonyms": [], "depends_on": ["signal", "method"]
+    },
+    {
+      "id": "queer_morphology_specimen", "kind": "supplied",
+      "forms": {"text": [], "code": ["queer_morphology_specimen"]},
+      "def": "The hall's soft body in its jar.",
+      "introduced_at": "supplied:24.8", "synonyms": [], "depends_on": ["soft_body"]
+    },
+    {
+      "id": "version", "kind": "concept",
+      "forms": {"text": ["version", "versions"], "code": []},
+      "def": "One state of a thing, as someone left it.",
+      "introduced_at": "25.3", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "merge", "kind": "concept",
+      "forms": {"text": ["merge", "merges", "merging"], "code": []},
+      "def": "Joining two versions into one.",
+      "introduced_at": "25.3", "synonyms": [], "depends_on": ["version"],
+      "note": "25.3 inferred"
+    },
+    {
+      "id": "seen_list", "kind": "concept",
+      "forms": {"text": ["seen-list", "seen list"], "code": []},
+      "def": "The sources counted already, so each counts once.",
+      "introduced_at": "25.5", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "rhizome", "kind": "concept",
+      "forms": {"text": ["rhizome", "rhizomes"], "code": []},
+      "def": "Growth with no root: new points link to near ones.",
+      "introduced_at": "25.6", "synonyms": [], "depends_on": ["point"]
+    },
+    {
+      "id": "provenance", "kind": "concept",
+      "forms": {"text": ["provenance", "who, when, what", "who, when and what"], "code": []},
+      "def": "Who changed it, when, and what: a record's source.",
+      "introduced_at": "25.8", "synonyms": [], "depends_on": [],
+      "note": "chapter 25's code_new names it; 25.8 writes it"
+    },
+    {
+      "id": "user_dir", "kind": "concept",
+      "forms": {"text": ["user://"], "code": []},
+      "def": "The folder Godot lets your game write to.",
+      "introduced_at": "25.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "FileAccess", "kind": "godot",
+      "forms": {"text": [], "code": ["FileAccess"]},
+      "def": "Opens a file to read or write.",
+      "introduced_at": "25.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "JSON", "kind": "godot",
+      "forms": {"text": ["JSON"], "code": ["JSON"]},
+      "def": "Data as text: Godot's way to save a Dictionary.",
+      "introduced_at": "25.8", "synonyms": [], "depends_on": ["Dictionary"]
+    },
+    {
+      "id": "stringify", "kind": "godot",
+      "forms": {"text": [], "code": ["stringify", "JSON.stringify"]},
+      "def": "Turns a value into JSON text.",
+      "introduced_at": "25.8", "synonyms": [], "depends_on": ["JSON"]
+    },
+    {
+      "id": "READ_WRITE", "kind": "godot",
+      "forms": {"text": [], "code": ["READ_WRITE"]},
+      "def": "Opens a file to add to what it holds.",
+      "introduced_at": "25.8", "synonyms": [], "depends_on": ["FileAccess"]
+    },
+    {
+      "id": "WRITE", "kind": "godot",
+      "forms": {"text": [], "code": ["WRITE"]},
+      "def": "Opens a file empty, to write anew.",
+      "introduced_at": "25.8", "synonyms": [], "depends_on": ["FileAccess"],
+      "note": "25.8 inferred: writing needs it; the sketch names it only in a 25.x exercise"
+    },
+    {
+      "id": "seek_end", "kind": "godot",
+      "forms": {"text": [], "code": ["seek_end"]},
+      "def": "Moves to the end of a file, to add there.",
+      "introduced_at": "25.8", "synonyms": [], "depends_on": ["FileAccess"]
+    },
+    {
+      "id": "export_preset", "kind": "concept",
+      "forms": {"text": ["export preset", "export presets"], "code": []},
+      "def": "The settings that build your game for one machine.",
+      "introduced_at": "25.8", "synonyms": [], "depends_on": []
+    },
+    {
+      "id": "export_presets_cfg", "kind": "supplied",
+      "forms": {"text": ["export templates"], "code": ["export_presets.cfg"]},
+      "def": "The Quest export preset and Godot's export templates.",
+      "introduced_at": "supplied:25.8", "synonyms": [], "depends_on": ["export_preset"]
+    },
+    {
+      "id": "snapped", "kind": "gdscript",
+      "forms": {"text": [], "code": ["snapped"]},
+      "def": "Rounds a number to the nearest step.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": [],
+      "note": "used in a 3.x exercise; never taught, never borrowed"
+    },
+    {
+      "id": "ray", "kind": "concept",
+      "forms": {"text": ["ray", "rays"], "code": []},
+      "def": "A straight line from a point, going one way.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["line", "point"],
+      "note": "named only inside supplied parts (chapters 4 and 5); never opened"
+    },
+    {
+      "id": "quaternion", "kind": "maths",
+      "forms": {"text": ["quaternion", "quaternions"], "code": []},
+      "def": "Four numbers that hold a turn in 3D.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": [],
+      "note": "named inside draw_arrow (chapter 7's borrowed list): not taught"
+    },
+    {
+      "id": "Mover", "kind": "name",
+      "forms": {"text": ["Mover", "Movers"], "code": ["Mover"]},
+      "def": "Your class: a body moved only by forces.",
+      "introduced_at": "7.x", "synonyms": [], "depends_on": ["class", "body", "force"],
+      "note": "the class Example 7.2 names: chapter 7's own name; a use in another chapter (8.x) is an error"
+    },
+    {
+      "id": "limit_length", "kind": "godot",
+      "forms": {"text": [], "code": ["limit_length"]},
+      "def": "Shortens a vector to at most a length.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["vector"],
+      "note": "used in a 7.x exercise; never taught"
+    },
+    {
+      "id": "lissajous", "kind": "name",
+      "forms": {"text": ["Lissajous"], "code": []},
+      "def": "The curve of two oscillations at right angles.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["oscillation"],
+      "note": "named in a 9.x exercise"
+    },
+    {
+      "id": "accept_reject", "kind": "maths",
+      "forms": {"text": ["accept-reject"], "code": []},
+      "def": "Keep a draw only if a second draw passes.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": [],
+      "note": "named in a 10.x exercise (NOC 0.5)"
+    },
+    {
+      "id": "simplex", "kind": "maths",
+      "forms": {"text": ["simplex"], "code": []},
+      "def": "Another kind of smooth noise.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["noise"],
+      "note": "named in an 11.x exercise"
+    },
+    {
+      "id": "noise_type", "kind": "godot",
+      "forms": {"text": [], "code": ["noise_type"]},
+      "def": "Which kind of noise a `FastNoiseLite` makes.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["noise", "FastNoiseLite"],
+      "note": "used in an 11.x exercise; never taught"
+    },
+    {
+      "id": "feed_kill", "kind": "maths",
+      "forms": {"text": ["feed and kill"], "code": []},
+      "def": "The two rates of reaction-diffusion: feed in, kill off.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["reaction_diffusion", "rate"],
+      "note": "used at 17.8 and 24.6; 13.8 never names them"
+    },
+    {
+      "id": "fractal", "kind": "maths",
+      "forms": {"text": ["fractal", "fractals"], "code": []},
+      "def": "A form made of smaller copies of itself.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["copy"],
+      "note": "used in 14.x exercises; no section or code_new of chapter 14 names it"
+    },
+    {
+      "id": "output_panel", "kind": "concept",
+      "forms": {"text": ["Output panel"], "code": []},
+      "def": "The editor's panel where printed values appear.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["editor"],
+      "note": "named in Example 15.1; never taught, nor is print"
+    },
+    {
+      "id": "print", "kind": "gdscript",
+      "forms": {"text": ["print"], "code": ["print"]},
+      "def": "Writes a value to the Output panel.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["output_panel"],
+      "note": "used in a 6.x exercise and Example 13.1; never taught"
+    },
+    {
+      "id": "genetic_algorithm", "kind": "concept",
+      "forms": {"text": ["genetic algorithm", "genetic algorithms"], "code": []},
+      "def": "Breeding bodies by fitness, crossover and mutation.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["fitness", "crossover", "mutation", "body"],
+      "note": "21.1 calls chapter 16's breeding by this name; chapter 16 never does"
+    },
+    {
+      "id": "evolution", "kind": "concept",
+      "forms": {"text": ["evolution", "evolve", "evolves", "evolving", "evolved"], "code": []},
+      "def": "Change over generations, by selection and mutation.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["generation", "selection", "mutation"],
+      "note": "Example 16.2 and chapter 21 use it; no section teaches the word"
+    },
+    {
+      "id": "symmetric_difference", "kind": "maths",
+      "forms": {"text": ["symmetric difference"], "code": []},
+      "def": "What belongs to one of two, not both.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": [],
+      "note": "named in a 19.x exercise"
+    },
+    {
+      "id": "physarum", "kind": "name",
+      "forms": {"text": ["Physarum"], "code": []},
+      "def": "A slime mould whose trails build networks.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": [],
+      "note": "named in Example 20.2; no section names it"
+    },
+    {
+      "id": "chain_rule", "kind": "maths",
+      "forms": {"text": ["chain rule"], "code": []},
+      "def": "How a change passes through a chain of functions.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["function"],
+      "note": "named in chapter 21's code_new as not needed; never taught"
+    },
+    {
+      "id": "vehicle", "kind": "name",
+      "forms": {"text": ["vehicle", "vehicles"], "code": []},
+      "def": "Your steering agent from chapter 20.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["steering", "agent"],
+      "note": "21.8 says your Chapter 20 vehicle; chapter 20 never calls it that"
+    },
+    {
+      "id": "huber", "kind": "name",
+      "forms": {"text": ["Huber"], "code": []},
+      "def": "A loss: squared near zero, straight far out.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["loss_function"],
+      "note": "named in a 21.x exercise"
+    },
+    {
+      "id": "gate", "kind": "concept",
+      "forms": {"text": ["gate", "gates"], "code": []},
+      "def": "A number from 0 to 1 that lets values through.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": [],
+      "note": "21.x (memory gates) and Example 23.5 (a logic gate); never taught",
+      "other_senses": [{"words": ["gate"], "at": ["23.x"], "sense": "a logic gate: true when its inputs are"}]
+    },
+    {
+      "id": "memory_cell", "kind": "concept",
+      "forms": {"text": ["memory cell", "memory cells"], "code": []},
+      "def": "A cell keeping a value across steps, behind gates.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["gate", "cell"],
+      "note": "a 21.x exercise (ML_Sequence_Memory)"
+    },
+    {
+      "id": "token", "kind": "concept",
+      "forms": {"text": ["token", "tokens"], "code": []},
+      "def": "One item of a sequence a learner reads.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["item"],
+      "note": "a 21.x exercise"
+    },
+    {
+      "id": "topological_sort", "kind": "concept",
+      "forms": {"text": ["topological sort"], "code": []},
+      "def": "An order in which every arrow runs forward.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": [],
+      "note": "named in a 22.x exercise"
+    },
+    {
+      "id": "russell", "kind": "name",
+      "forms": {"text": ["Russell"], "code": []},
+      "def": "The logician of the set that cannot decide.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": [],
+      "note": "a person's name, in Example 23.3's title: names are everyday"
+    },
+    {
+      "id": "penrose", "kind": "name",
+      "forms": {"text": ["Penrose"], "code": []},
+      "def": "The tribar and stairs that close from one place only.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": [],
+      "note": "named in a 23.x exercise"
+    },
+    {
+      "id": "bifurcation", "kind": "maths",
+      "forms": {"text": ["bifurcation"], "code": []},
+      "def": "One value splitting into two as a number grows.",
+      "introduced_at": "missing", "synonyms": [], "depends_on": [],
+      "note": "named in a 23.x exercise"
+    }
+  ]
+}
