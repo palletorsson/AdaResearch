@@ -341,6 +341,18 @@ class TestTaxonomy(Base):
         rep = self.run_check(tax_with(lambda t: entry(t, "stamp()").pop("host")))
         self.assertBites(rep, "taxonomy", contains="a stub needs a host")
 
+    # a supplied scene (chapter 3, 2 October 2026): the host is res://x.tscn, the stub its text
+    def test_a_scene_host_takes_the_scene_text(self):
+        ok = add(E("orb_scene", "supplied", [], ["orb.tscn"], "A saved orb.", "supplied:1.2",
+                   stub='[gd_scene format=3]\n\n[node name="Orb" type="Node3D"]\n',
+                   host="res://supplied/orb.tscn"))
+        rep = self.run_check(ok)
+        self.assertFalse(self.found(rep, "taxonomy", contains="stub"), "\n".join(rep.lines()))
+        bad = add(E("orb_scene", "supplied", [], ["orb.tscn"], "A saved orb.", "supplied:1.2",
+                    stub="func orb() -> void:\n\tpass", host="res://supplied/orb.tscn"))
+        rep = self.run_check(bad)
+        self.assertBites(rep, "taxonomy", contains="a scene host's stub is the scene's text")
+
 
 # ------------------------------------------------------------------ pass b: gives
 
@@ -1114,7 +1126,8 @@ class TestQuiet(Base):
         with open(REAL_TAXONOMY, encoding="utf-8") as f:
             entries = {e["id"]: e for e in json.load(f)["entries"]}
         self.assertNotIn("triangle_table()", entries)
-        self.assertEqual(entries["cell"]["introduced_at"], "5.1")
+        # chapter 5 (2 October 2026): 5.1's row of steps holds no grid; the 4 x 4 source of 5.3 does
+        self.assertEqual(entries["cell"]["introduced_at"], "5.3")
         self.assertEqual(entries["handle"]["introduced_at"], "23.8")
         self.assertEqual(entries["Mover"]["introduced_at"], "7.x")
         self.assertEqual(entries["russell"]["introduced_at"], "everyday")
@@ -1392,24 +1405,31 @@ class TestAdmin(Base):
 
     def test_the_real_taxonomy_holds_the_script_admins(self):
         """2 October 2026: a new script is made new, never saved over another (Save As copied
-        the old class_name); a script goes on a node by a drop from the FileSystem. Each is
-        defined where the written chapters first need it, and says its steps are unverified."""
+        the old class_name); a script goes on a node by a drop from the FileSystem, and so does a
+        supplied scene. Each is defined where the written chapters first need it, and says its
+        steps are unverified. Chapter 4's spray_can.gd (4.7) is the first new script."""
         with open(REAL_TAXONOMY, encoding="utf-8") as f:
             entries = {e["id"]: e for e in json.load(f)["entries"]}
         self.assertNotIn("save_this_script_as", entries)
         make, put = entries["make_a_new_script"], entries["put_a_script_on_a_node"]
+        scene = entries["add_a_scene"]
         self.assertEqual((make["kind"], make["forms"]["text"][0], make["introduced_at"]),
-                         ("admin", "make a new script", "18.1"))
+                         ("admin", "make a new script", "4.7"))
+        self.assertEqual((scene["kind"], scene["forms"]["text"][0], scene["introduced_at"]),
+                         ("admin", "add a scene", "1.6"))
+        self.assertIn("FileSystem", scene["def"])
+        self.assertIn("add {file} to", scene["calls"])
         self.assertEqual((put["kind"], put["forms"]["text"][0], put["introduced_at"]),
                          ("admin", "put a script on a node", "1.3"))
         self.assertIn("New Script", make["def"])
         self.assertIn("FileSystem", put["def"])
         self.assertIn("put {file} on", put["calls"])
         self.assertEqual(entries["FileSystem"]["introduced_at"], "1.1")
-        for e in (make, put):
+        for e in (make, put, scene):
             self.assertIn("NOT verified in a live editor", e["note"], e["id"])
         # drag is the force of 7.6: the drop says no drag
         self.assertNotIn("drag", put["def"].lower())
+        self.assertNotIn("drag", scene["def"].lower())
 
 
 class TestAdminRound2(Base):
@@ -1638,6 +1658,9 @@ class TestAdminRound2(Base):
             "Attach `bell.gd` to the top node.": "put_a_script_on_a_node",
             "Attach the supplied `contact_probe.gd` to it.": "put_a_script_on_a_node",
             "Drop `bell.gd` onto the top node.": "put_a_script_on_a_node",
+            # a supplied scene dropped is add a scene (1.6): the walker of 2.5 made it an admin
+            "Drop `counter_panel.tscn` from the FileSystem onto the top node.": "add_a_scene",
+            "Instance `walker.tscn` under the top node.": "add_a_scene",
         }
         for line, eid in bites.items():
             with self.subTest(line=line):
@@ -1656,14 +1679,14 @@ class TestAdminRound2(Base):
             "The box stands at the top right of the court.",
             "The top right of the Inspector holds the mesh.",
             "Code can add a `MeshInstance3D` too, with `add_child()`.",
-            # a supplied scene is dropped the same way, and is no script
-            "Drop `counter_panel.tscn` from the FileSystem onto the top node.",
             "Godot fills the new script with some code.",
             "Right-click the top node and choose Attach Script.",
         ]
         for line in quiet:
             with self.subTest(line=line):
                 self.assertEqual(tax.admin_hits(line), [])
+        # a script dropped is no scene added: the step phrase drop counts beside a .tscn only
+        self.assertNotIn("add_a_scene", [h[3].id for h in tax.admin_hits("Drop `bell.gd` onto the top node.")])
         # a call is an instruction; teaching add_child is none
         calls = {
             "Under `Solid`, add a `MeshInstance3D` with a `SphereMesh`.": ["add_a_node"],
@@ -1678,6 +1701,8 @@ class TestAdminRound2(Base):
             "Put the supplied `contact_probe.gd` on the new `Node3D`.": ["put_a_script_on_a_node"],
             "Put `bell.gd` on the top node, then run the project.": ["put_a_script_on_a_node",
                                                                      "run_the_project"],
+            "Add `walker.tscn` to the top node.": ["add_a_scene"],
+            "Add the supplied `counter_panel.tscn` to the top node.": ["add_a_scene"],
         }
         for line, want in calls.items():
             with self.subTest(line=line):
@@ -1693,10 +1718,96 @@ class TestAdminRound2(Base):
                                  "\n".join(rep.lines()))
 
 
+# ------------------------------------------------------------------ keep= (chapter 5)
+
+# 2.2 keeps 2.1's _process: the page shows it once, and the run still has it
+KEEP_22 = """<!-- section 2.2
+needs: frame, position, node, func, _ready, $, =, Vector3, _process
+gives: shape
+-->
+## 2.2 A shape
+
+A shape is what is touched.
+Each frame, the node keeps its position.
+Put a shape on it under `func _ready():`.
+Keep `_process`: replace the rest.
+
+<!-- code: nodes=Ball:Node3D keep=_process claim="$Ball.position.y == 1" -->
+```gdscript
+func _ready():
+	$Ball.position = Vector3(0, 5, 0)
+```
+"""
+
+
+def keep_ch2(block_opts="nodes=Ball:Node3D keep=_process", keep_line="Keep `_process`: replace the rest.\n",
+             body="func _ready():\n\t$Ball.position = Vector3(0, 5, 0)\n"):
+    sec = KEEP_22.replace("nodes=Ball:Node3D keep=_process", block_opts).replace(
+        "Keep `_process`: replace the rest.\n", keep_line).replace(
+        "func _ready():\n\t$Ball.position = Vector3(0, 5, 0)\n", body)
+    start = CH2.index("<!-- section 2.2")
+    end = CH2.index("<!-- section 2.x")
+    return CH2[:start] + sec + "\n" + CH2[end:]
+
+
+class TestKeep(Base):
+    def test_a_kept_member_is_named_and_defined_earlier(self):
+        rep = self.run_check(ch2=keep_ch2())
+        self.assertFalse(self.found(rep, "keep"), "\n".join(rep.lines()))
+
+    def test_keep_without_a_line_that_names_it_bites(self):
+        ch2 = keep_ch2(keep_line="")
+        rep = self.run_check(ch2=ch2)
+        self.assertBites(rep, "keep", file="ch02.md", line=line_no(ch2, "keep=_process") ,
+                         contains="never told it stays")
+
+    def test_keep_of_a_name_no_earlier_example_defines_bites(self):
+        ch2 = keep_ch2(block_opts="nodes=Ball:Node3D keep=_process,lift",
+                       keep_line="Keep `_process` and `lift()`: replace the rest.\n")
+        rep = self.run_check(ch2=ch2)
+        self.assertBites(rep, "keep", file="ch02.md", contains="no earlier example of chapter 2 "
+                         "defines `lift`")
+
+    def test_keep_and_show_again_bites(self):
+        ch2 = keep_ch2(body="func _ready():\n\t$Ball.position = Vector3(0, 5, 0)\n\n"
+                            "func _process(_delta):\n\tpass\n")
+        rep = self.run_check(ch2=ch2)
+        self.assertBites(rep, "keep", file="ch02.md", contains="keep it or show it, not both")
+
+    def test_a_member_ends_at_its_closing_bracket(self):
+        lines = ["var steps := [", "\t1,", "\t2,", "]", "var beat := 0", "", "func go():",
+                 "\tbeat += 1", "", "# a comment", "func stop():", "\tpass"]
+        self.assertEqual(check.member_spans(lines),
+                         [("steps", 0, 4), ("beat", 4, 5), ("go", 6, 8), ("stop", 10, 12)])
+        self.assertEqual(check.member_spans(["@export var colour := Color(1, 0, 0)"]),
+                         [("colour", 0, 1)])
+
+
 # ------------------------------------------------------------------ pass g: Godot
 
 @unittest.skipUnless(HAVE_GODOT, "Godot not found at %s" % GODOT)
 class TestGodot(Base):
+    # keep= (2 October 2026, chapter 5): the run holds the kept member, from where the page shows it
+    def test_a_kept_member_runs(self):
+        rep = self.run_check(ch2=keep_ch2(), godot=True)
+        self.assertFalse(any(self.found(rep, r) for r in ("code", "run", "claim", "keep")),
+                         "\n".join(rep.lines()))
+        # without keep, the run has no _process: the ball stays at 5
+        ch2 = keep_ch2(block_opts="nodes=Ball:Node3D", keep_line="")
+        rep = self.run_check(ch2=ch2, godot=True)
+        self.assertBites(rep, "claim", file="ch02.md", contains="does not hold")
+
+    # an array whose last ']' stands at the left edge is a member, not a statement in _ready
+    def test_an_array_closed_at_the_left_edge_is_a_member(self):
+        ch1 = CH1.replace('<!-- code: nodes=Ball:Node3D prints="(1.0, 2.0, 3.0)" -->',
+                          '<!-- code: nodes=Ball:Node3D prints="(1.0, 2.0, 3.0)" claim="steps.size() == 2" -->')
+        ch1 = ch1.replace("`print` writes the position.",
+                          "```gdscript\nvar steps := [\n\t1,\n\t2,\n]\n```\n\n`print` writes the position.")
+        self.assertNotEqual(ch1, CH1)
+        rep = self.run_check(ch1=ch1, godot=True)
+        self.assertFalse(any(self.found(rep, r) for r in ("code", "run", "claim")),
+                         "\n".join(rep.lines()))
+
     def test_fixture_parses_and_runs(self):
         rep = self.run_check(godot=True)
         self.assertClean(rep)
@@ -1759,10 +1870,38 @@ class TestGodot(Base):
         rep = self.run_check(ch1=ch1, godot=True)
         self.assertBites(rep, "code", line=line_no(ch1, "\tstamp($Ball"), contains="Godot:")
 
+    # 2 October 2026, chapter 4: a claim that raises an error in Godot crashed the checker
+    # (a format string short of its arguments); it is a claim error, at the claim
+    def test_21a_a_claim_that_errs_in_godot_is_a_claim_error(self):
+        ch1 = CH1.replace('prints="(1.0, 2.0, 3.0)"',
+                          'prints="(1.0, 2.0, 3.0)" claim="$Nowhere.position.y == 3"')
+        self.assertNotEqual(ch1, CH1)
+        rep = self.run_check(ch1=ch1, godot=True)
+        self.assertBites(rep, "claim", line=line_no(ch1, "claim="), contains="Godot: in claim")
+
     def test_21_a_claim_that_does_not_hold(self):
         ch1 = CH1.replace('prints="(1.0, 2.0, 3.0)"', 'claim="$Ball.position.y == 3"')
         rep = self.run_check(ch1=ch1, godot=True)
         self.assertBites(rep, "claim", contains="does not hold")
+
+    # a supplied scene is written where its host says, so preload() finds it (chapter 3)
+    def test_a_supplied_scene_is_preloaded_from_its_host(self):
+        scene = '[gd_scene format=3]\n\n[node name="Orb" type="Node3D"]\n'
+        ch1 = CH1.replace('prints="(1.0, 2.0, 3.0)"', 'prints="(1.0, 2.0, 3.0)" claim="has_node(\'Orb\')"').replace(
+            "extends Node3D\n\nfunc _ready():\n",
+            'extends Node3D\n\nvar orb := preload("res://supplied/orb.tscn")\n\nfunc _ready():\n'
+            "\tadd_child(orb.instantiate())\n", 1)
+        self.assertNotEqual(ch1, CH1)
+        godot_rules = ("code", "run", "claim")
+        good = add(E("orb_scene", "supplied", [], ["orb.tscn"], "A saved orb.", "supplied:1.2",
+                     stub=scene, host="res://supplied/orb.tscn"))
+        rep = self.run_check(good, ch1=ch1, godot=True)
+        self.assertFalse(any(self.found(rep, r) for r in godot_rules), "\n".join(rep.lines()))
+        # written elsewhere, the scene is not found: Godot refuses the preload
+        bad = add(E("orb_scene", "supplied", [], ["orb.tscn"], "A saved orb.", "supplied:1.2",
+                    stub=scene, host="res://supplied/elsewhere.tscn"))
+        rep = self.run_check(bad, ch1=ch1, godot=True)
+        self.assertBites(rep, "code", file="ch01.md", contains="Godot:")
 
     def test_a_nested_scene_node(self):
         ch1 = CH1.replace("nodes=Ball:Node3D", "nodes=Ball:Node3D,Ball/Child:Node3D").replace(

@@ -1,0 +1,270 @@
+[
+ {
+  "op": "update",
+  "id": "new",
+  "fields": {
+   "introduced_at": "4.1",
+   "def": "Makes a new one of the kind named before it.",
+   "depends_on": [],
+   "note": "4.1 makes each material in code: StandardMaterial3D.new(). 4.7 names the kind a class and the new one an object: SprayCan.new(). Moved from 4.8 by the chapter 4 writer, 2 October 2026; the old def needed class and object, which 4.7 gives."
+  },
+  "why": "4.1 needs a material per piece in code; .new() is taught there with a line, and 4.7 names the kind a class"
+ },
+ {
+  "op": "add",
+  "id": "StandardMaterial3D",
+  "fields": {
+   "kind": "godot",
+   "forms": {
+    "text": [],
+    "code": [
+     "StandardMaterial3D"
+    ]
+   },
+   "def": "Godot's usual material: a colour, and how it shines.",
+   "introduced_at": "4.1",
+   "synonyms": [],
+   "depends_on": [
+    "material"
+   ]
+  },
+  "why": "4.1's material is a StandardMaterial3D; the taxonomy had the concept and albedo_color, not the class. ch05.taxonomy_patch.json adds it too ('if chapter 4's own patch adds it, keep chapter 4's')"
+ },
+ {
+  "op": "update",
+  "id": "material",
+  "fields": {
+   "forms": {
+    "text": [
+     "material",
+     "materials"
+    ],
+    "code": [
+     "material"
+    ]
+   },
+   "note": "code form added by chapter 5 and chapter 4 alike: mesh.material is what a mesh wears, as the def says. 4.1 teaches it: piece.mesh.material = orange."
+  },
+  "why": "4.1 puts each material on its mesh with mesh.material, as chapter 5 does (box.mesh.material); the forms are ch05.taxonomy_patch.json's, word for word"
+ },
+ {
+  "op": "update",
+  "id": "function",
+  "fields": {
+   "def": "A named block of code that takes values and can answer.",
+   "note": "def changed by the chapter 4 writer, 2 October 2026: _ready and add_piece (4.2) are functions that answer nothing; return is what makes one answer"
+  },
+  "why": "the old def ('takes values and answers') is false of _ready and of 4.2's add_piece, which build and answer nothing"
+ },
+ {
+  "op": "update",
+  "id": "local_variable",
+  "fields": {
+   "introduced_at": "4.2",
+   "note": "4.2: look and piece live only inside add_piece"
+  },
+  "why": "4.2 names it: the look and piece of add_piece"
+ },
+ {
+  "op": "add",
+  "id": "inverted",
+  "fields": {
+   "kind": "godot",
+   "forms": {
+    "text": [],
+    "code": [
+     "inverted"
+    ]
+   },
+   "def": "The opposite colour: one minus each number.",
+   "introduced_at": "4.2",
+   "synonyms": [],
+   "depends_on": [
+    "Color"
+   ]
+  },
+  "why": "4.2's fourth rule takes the colour below and answers its opposite, as the hall's by_neighbour does; the hall turns the hue half way round, which is HSV, given only at 4.5"
+ },
+ {
+  "op": "update",
+  "id": "lamp",
+  "fields": {
+   "kind": "plain",
+   "introduced_at": "everyday",
+   "def": "A lamp you move: here, by the mouse.",
+   "depends_on": [],
+   "note": "chapter 4 writer, 2 October 2026: 4.3 adds its three SpotLight3D lamps as nodes and the student's own code moves the blue one to mouse_point(); no section borrows a carried pickup, so the phrase is pinned plain. The sketch's chapter 4 borrowed item for it is stale."
+  },
+  "why": "4.3 makes the lamps itself (the sketch's own note: 'four nodes set by hand'); the student's own mouse_point() line carries the blue one, so no supplied pickup is handed out"
+ },
+ {
+  "op": "update",
+  "id": "hsv",
+  "fields": {
+   "def": "A colour as hue, saturation and brightness.",
+   "note": "chapter 4 writer, 2 October 2026: brightness, not value, for HSV's third number; value already means what a variable holds (1.8), one word, one meaning"
+  },
+  "why": "value is the everyday word for what a variable holds; HSV's v is called brightness in the text"
+ },
+ {
+  "op": "update",
+  "id": "from_hsv",
+  "fields": {
+   "def": "Makes a `Color` from hue, saturation and brightness."
+  },
+  "why": "as hsv: brightness, not value"
+ },
+ {
+  "op": "update",
+  "id": "band_mesh",
+  "fields": {
+   "forms": {
+    "text": [
+     "band mesh"
+    ],
+    "code": [
+     "band",
+     "band(i, n, colour)"
+    ]
+   },
+   "def": "The rainbow's arch of bands: you write their colours.",
+   "stub": "func band(i: int, n: int, colour: Color) -> void:\n\tif i < 0 or i >= n:\n\t\tpush_error(\"band(): band %d of %d is not on the arch\" % [i, n])",
+   "host": "$Supplied",
+   "note": "4.5 colours band i of n with $Supplied.band(i, n, colour); the arch's geometry is supplied"
+  },
+  "why": "4.5 calls it in code, so it needs a code form and a stub; the old def held a semicolon, which a Types box line refuses"
+ },
+ {
+  "op": "update",
+  "id": "paint_call",
+  "fields": {
+   "forms": {
+    "text": [
+     "paint-into-image call"
+    ],
+    "code": [
+     "paint_at",
+     "paint_at(point, colour)"
+    ]
+   },
+   "stub": "func paint_at(point: Vector3, colour: Color) -> void:\n\tpass",
+   "host": "$Supplied",
+   "note": "the sketch says images are opened in chapter 5: 5.6 teaches Image. 4.7's SprayCan.spray() calls canvas.paint_at(point, colour) on $Supplied, which holds the canvas. Named paint_at, not paint: chapter 5 names a material paint (var paint := StandardMaterial3D.new())."
+  },
+  "why": "4.7's spray() calls it in code: a code form and a stub; paint_at, since ch05 declares a local named paint"
+ },
+ {
+  "op": "update",
+  "id": "point_on_canvas()",
+  "fields": {
+   "forms": {
+    "text": [],
+    "code": [
+     "point_on_canvas",
+     "point_on_canvas(nozzle)"
+    ]
+   },
+   "stub": "func point_on_canvas(nozzle: Vector3) -> Vector3:\n\treturn Vector3(nozzle.x, nozzle.y, -2)",
+   "note": "the ray inside is never opened; the call takes the nozzle's position (ray is missing in the taxonomy, so the parameter is not named ray)"
+  },
+  "why": "ray is a missing entry: the signature names the nozzle, which is what 4.7 passes (the can's position)"
+ },
+ {
+  "op": "update",
+  "id": "cell_at()",
+  "fields": {
+   "stub": "func cell_at(x: int, z: int) -> Node3D:\n\tvar found: Node3D = null\n\tfor c in get_parent().get_children():\n\t\tif c is Node3D and is_equal_approx(c.position.x, x) and is_equal_approx(c.position.z, z):\n\t\t\tfound = c\n\treturn found"
+  },
+  "why": "4.6 sets the material of the tiles cell_at finds; the old stub returned null. The stub is chapter 3's, word for word (ch03.taxonomy_patch.json), which finds the top node's child standing at x and z: 4.6 lays its own tiles at whole metres. Identical to ch03's op, so the two do not conflict; drop this op if ch03's is applied."
+ },
+ {
+  "op": "update",
+  "id": "make_a_new_script",
+  "fields": {
+   "introduced_at": "4.7",
+   "note": "2 October 2026: replaces save this script as. Save As copied the open file, so the new file declared the old class_name until its code was typed (Godot: 'Class Field hides a global script class'), and typing the new code into the old file first let a run save over it. A new script starts empty of classes: Godot fills it with its own few lines, which the last step replaces. The file's name follows the call in code style: 'Make a new script `bell.gd`.' The script is then put on the top node by put a script on a node (1.3), or, for a class (4.7, 4.8), made with .new(). 4.7 is its first need: spray_can.gd, the first script that is not the top node's (moved from 18.1 by the chapter 4 writer, as this note foresaw); 18.1 calls it. Save As wordings ('Save the file as `bell2.gd`') describe getting a script under a new name, so they are its synonyms and step phrases: say 'Make a new script'. File is the menu of the Script screen (the Script button at the top); 'Choose Save As to keep the old scene' is no step of this (the cues: script, File, .gd). The editor steps (Script, File, New Script, the name, Create) are NOT verified in a live editor: the checker cannot click."
+  },
+  "why": "4.7 makes spray_can.gd, the first second script in the book; the definition moves there and 18.1's bold definition becomes the call 'Make a new script `field.gd`.' (ch18.md must change with this patch)"
+ },
+ {
+  "op": "add",
+  "id": "alpha",
+  "fields": {
+   "kind": "concept",
+   "forms": {
+    "text": [
+     "alpha"
+    ],
+    "code": []
+   },
+   "def": "A colour's fourth number: how much it covers.",
+   "introduced_at": "4.8",
+   "synonyms": [],
+   "depends_on": [
+    "Color"
+   ]
+  },
+  "why": "4.8's panes are see-through: Color(0, 1, 1, 0.5) has a fourth number"
+ },
+ {
+  "op": "add",
+  "id": "transparency",
+  "fields": {
+   "kind": "godot",
+   "forms": {
+    "text": [],
+    "code": [
+     "transparency"
+    ]
+   },
+   "def": "How a material lets the view behind it through.",
+   "introduced_at": "4.8",
+   "synonyms": [],
+   "depends_on": [
+    "material"
+   ]
+  },
+  "why": "a material ignores alpha until its transparency says otherwise"
+ },
+ {
+  "op": "add",
+  "id": "TRANSPARENCY_ALPHA",
+  "fields": {
+   "kind": "godot",
+   "forms": {
+    "text": [],
+    "code": [
+     "TRANSPARENCY_ALPHA",
+     "BaseMaterial3D.TRANSPARENCY_ALPHA",
+     "BaseMaterial3D"
+    ]
+   },
+   "def": "Lets a material's alpha decide how much shows through.",
+   "introduced_at": "4.8",
+   "synonyms": [],
+   "depends_on": [
+    "alpha",
+    "transparency",
+    "material"
+   ]
+  },
+  "why": "the value 4.8 gives transparency: look.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA"
+ },
+ {
+  "op": "update",
+  "id": "class",
+  "fields": {
+   "def": "A plan you write for things: their data and behaviour.",
+   "note": "chapter 4 writer, 2 October 2026: 'a kind of thing' trips the hedge rule ('kind of'), in the def and in 4.7's declaring line"
+  },
+  "why": "the old def 'A kind of thing you write' holds 'kind of', a hedge the checker refuses in the line that declares it"
+ },
+ {
+  "op": "update",
+  "id": "spray",
+  "fields": {
+   "def": "A `SprayCan` method: paints its colour onto the canvas."
+  },
+  "why": "the old def named SprayCan out of code style, which the Types box refuses"
+ }
+]

@@ -8,7 +8,7 @@ python functional_text/check.py --taxonomy taxonomy.json --sketch sketch/sketch.
     --report functional_text/sketch_report.md
 ```
 
-Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 606 entries. Run: 34 errors, 572 warnings.
+Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 625 entries. Run: 34 errors, 619 warnings.
 
 ## Counts
 
@@ -20,8 +20,8 @@ Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 606 entries. Run: 34 e
 | taught twice | 22 | 23 |
 | explained by an element taught later (the taxonomy's depends_on) | 2 | 2 |
 | the same word in another sense, declared (not an order break) | 17 | 41 |
-| taught in a chapter's code_new, but no section names it | 7 | - |
-| taught in a section, missing from the chapter's code_new | 43 | - |
+| taught in a chapter's code_new, but no section names it | 4 | - |
+| taught in a section, missing from the chapter's code_new | 57 | - |
 
 A use is one line of the sketch that names the element: a section title, idea or figure,
 an example, an exercise, a project step, or a code_new item. A section `N.x` is chapter N's
@@ -239,7 +239,7 @@ First use of each element against where it is taught, the widest first.
 
 | element | first taught | taught again | the sketch says |
 |---|---|---|---|
-| cell | 5.1 | 13.1 | A cell is a number, 0 or 1, and a row of cells is an array. |
+| cell | 5.3 | 13.1 | A cell is a number, 0 or 1, and a row of cells is an array. |
 
 **The same word in another sense** (declared in the taxonomy; not an order break)
 
@@ -462,9 +462,6 @@ taxonomy places them at `N.0`, the chapter's start.
 
 | element | chapter | note |
 |---|---|---|
-| local variable | 4 | chapter 4's code_new names it; no section does |
-| `size` | 5 | chapter 5's code_new names it; no section does |
-| `append` | 5 | chapter 5's code_new names it; no section does |
 | rigid body | 7 | chapter 7's code_new names it; no section does |
 | `apply_central_force` | 7 | chapter 7's code_new names it; no section does |
 | `MultiMesh` | 13 | chapter 13's code_new names it; no section does |
@@ -498,12 +495,26 @@ Code a section teaches that the chapter's code_new list leaves out.
 | `/` | 1.8 | the sketch's 1.8 says 'arithmetic': + - * / |
 | `height` | 1.8 | restored from functional/ch01.md; the sketch never names it |
 | `ui_accept` | 2.6 | inferred: 2.6 teaches Input.is_action_pressed(); its action names come with it |
+| `ui_left` | 2.6 | 2.6: the arrows steer the cube while the walker keeps WASD. A Godot default action, so it exists in every project. |
+| `ui_right` | 2.6 | 2.6, beside ui_left. A Godot default action. |
+| quotes | 2.6 | 2 October 2026: chapter 2's 2.6 types the first string literals, the action names "ui_left" and "ui_right". Chapter 3's writer first proposed this entry at 3.1; 2.6 types an action name first, so it stands at 2.6 and chapter 3's patch dropped its copy (merge of chapters 2 to 5). The checker counts every string literal as the entry with the code form ""; String (15.1) teaches text as a value. |
 | `$/` | 2.7 | inferred: 2.7 teaches parent and child; $A/B reaches B under A |
+| `StandardMaterial3D` | 4.1 |  |
 | `->` | 4.2 |  |
+| `inverted` | 4.2 |  |
 | `SpotLight3D` | 4.3 | taught by 4.3's idea; chapter 4's code_new does not list it |
 | `light_color` | 4.3 | taught by 4.3's idea; chapter 4's code_new does not list it |
-| `new` | 4.8 | 4.8 teaches many objects from one class; the sketch never writes .new() itself |
+| `new` | 4.1 | 4.1 makes each material in code: StandardMaterial3D.new(). 4.7 names the kind a class and the new one an object: SprayCan.new(). Moved from 4.8 by the chapter 4 writer, 2 October 2026; the old def needed class and object, which 4.7 gives. |
+| `transparency` | 4.8 |  |
+| `TRANSPARENCY_ALPHA` | 4.8 |  |
 | `[]` | 5.1 |  |
+| `create_empty` | 5.6 |  |
+| `FORMAT_RGB8` | 5.6 |  |
+| `create_from_image` | 5.6 |  |
+| `albedo_texture` | 5.6 |  |
+| `texture_filter` | 5.6 | TEXTURE_FILTER_NEAREST is its one value in the course: a 16 x 16 picture on a 16 metre floor stays sixteen sharp squares a side, not a blur. |
+| `PlaneMesh` | 5.6 |  |
+| `QuadMesh` | 5.7 |  |
 | `get_noise_2d` | 11.1 | chapter 11's code_new writes get_noise_1d/2d/3d |
 | `get_noise_3d` | 11.1 | chapter 11's code_new writes get_noise_1d/2d/3d |
 | `SurfaceTool` | 11.7 | inferred: 11.7 builds an ArrayMesh from a grid of heights; SurfaceTool is how this course builds one |
@@ -525,16 +536,16 @@ Code a section teaches that the chapter's code_new list leaves out.
 | rule | errors | warnings | notes |
 |---|---:|---:|---:|
 | admin | 0 | 2 | 0 |
-| gives | 0 | 83 | 8 |
-| listing | 0 | 43 | 0 |
+| gives | 0 | 99 | 9 |
+| listing | 0 | 57 | 0 |
 | never | 27 | 1 | 0 |
 | order | 7 | 0 | 0 |
 | sense | 0 | 41 | 0 |
 | synonym | 0 | 22 | 0 |
-| taxonomy | 0 | 2 | 0 |
+| taxonomy | 0 | 5 | 0 |
 | twice | 0 | 23 | 0 |
-| unplaced | 0 | 7 | 0 |
-| unused | 0 | 348 | 0 |
+| unplaced | 0 | 4 | 0 |
+| unused | 0 | 365 | 0 |
 
 `unused` warnings say an element is taught and the sketch's own text never uses it
 again; the chapters will. `gives` and `listing` warnings are about the sketch's lists,

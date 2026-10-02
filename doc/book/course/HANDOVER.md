@@ -50,6 +50,10 @@ Meaning: this is Palle's rule, with his boundary: "not the teaching of that tuto
 Score: the understanding test itself (exam to judges) took about 27 minutes for cellular and 14–19 for Point One. The whole round took about two hours, of which about 55 minutes were repeated: cellular was compressed three times and Point One's readers ran twice, after a stop and a computer crash.
 Meaning: a workflow resume reuses finished agents only while calls arrive in the same order, and parallel stages break that. Write expensive outputs (compressions) to files before the test, not inside it.
 
+**R11. Chapters 2 to 5 are written, merged and checked (2 October, evening).**
+Score: chapters 1–5 and 18 pass `--godot` at 0 errors, alone and all six in one run; 188 tests pass; the sketch report stays at 34 errors (619 warnings). `taxonomy.json` went from 606 to 625 entries through four chapter patches and one merge patch, all kept in `functional/patches/`.
+Meaning: 50 writer operations applied as written, one found identical across two patches (the `cell_at()` stub), seven merge operations (the lamp's def, `uv_repeat` deleted, five notes). New admin *add a scene* (1.6); *make a new script* moved to 4.7, so 18.1 now calls it. A new code option, `keep=`, shows a member once and lets later sections keep it: chapter 5 fell from 639 to 502 lines with the same prose. The course walker must steer with WASD only, and Space must stay free (`base_scene` and `walker` notes): kit-base binds the arrows and Space.
+
 ---
 
 ## 1 What we are doing

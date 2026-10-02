@@ -944,10 +944,15 @@ class Taxonomy:
             if e.stub is not None and not e.supplied_key:
                 rep.error(path, e.line, "taxonomy", "%r: only a supplied entry has a stub" % e.id)
             if e.stub is not None and not (isinstance(e.host, str) and
-                                           re.fullmatch(r"\$[A-Za-z_]\w*|res://[\w/.-]+\.gd", e.host)):
+                                           re.fullmatch(r"\$[A-Za-z_]\w*|res://[\w/.-]+\.(?:gd|tscn)",
+                                                        e.host)):
                 rep.error(path, e.line, "taxonomy", "%r: a stub needs a host the student's code can "
-                          "reach: \"$Node\" (a node in the scene) or \"res://path.gd\" (a preloaded "
-                          "script)" % e.id)
+                          "reach: \"$Node\" (a node in the scene), \"res://path.gd\" (a preloaded "
+                          "script) or \"res://path.tscn\" (a preloaded scene)" % e.id)
+            if (e.stub is not None and isinstance(e.host, str) and e.host.endswith(".tscn")
+                    and not e.stub.startswith("[gd_scene")):
+                rep.error(path, e.line, "taxonomy", "%r: a scene host's stub is the scene's text: "
+                          "it starts with [gd_scene" % e.id)
             if e.own_chapter is not None and e.kind != "name":
                 rep.error(path, e.line, "taxonomy", "%r: N.x is for a name a chapter's examples give "
                           "(a class of your own); a %s is introduced in a section" % (e.id, e.kind))
@@ -2420,6 +2425,7 @@ class Checker:
                               % (s.id if not s.head else "head of chapter %d" % ch.n,
                                  sec_name(last_key)))
                 last_key = max(last_key, s.key) if last_key else s.key
+                s.chapter = ch
                 self.program.append(s)
         present = set(seen_ch)
         complete = bool(tax.chapters) and present == set(range(1, int(tax.chapters) + 1))
@@ -2483,9 +2489,37 @@ class Checker:
                              "run, so nothing it shows is checked")
                 elif b.lang in ("gdscript", "gd") and b.opts.get("skip"):
                     rep.warn(s.file, b.fence_line, "code", "skip: Godot never sees this block")
+        for ch in chapters:
+            for s in ch.sections:
+                for b in s.blocks:
+                    if b.lang in ("gdscript", "gd") and keep_names(b):
+                        self.check_keep(ch, s, b)
         # pass g
         if godot is not None:
             run_godot(self, chapters, godot, godot_opts or {})
+
+    def check_keep(self, ch, s, b):
+        """keep=a,b: the section's script keeps members an earlier example of the chapter shows.
+        Each is defined there and not again here, and a line of the section names it: the student
+        is told what stays in the file (FUNCTIONAL_TEXT 3)."""
+        names = keep_names(b)
+        _, missing = kept_members(ch, s, names)
+        own = {nm for bb in s.blocks if bb.lang in ("gdscript", "gd")
+               for nm, _, _ in member_spans(bb.lines)}
+        said = set()
+        for ln, raw, kind in s.prose:
+            for sp in CODE_SPAN.findall(visible(raw)):
+                said.add(sp.strip())
+        for name in names:
+            if name in missing:
+                self.rep.error(s.file, b.fence_line - 1, "keep", "keep=%s: no earlier example of "
+                               "chapter %s defines `%s`" % (name, ch.n, name))
+            elif name in own:
+                self.rep.error(s.file, b.fence_line - 1, "keep", "keep=%s, and this section "
+                               "defines `%s` again: keep it or show it, not both" % (name, name))
+            if name not in said and name + "()" not in said:
+                self.rep.error(s.file, b.fence_line - 1, "keep", "keep=%s: no line of %s names "
+                               "`%s`, so the student is never told it stays" % (name, s.id, name))
 
     def check_signature(self, s):
         tax, rep = self.tax, self.rep
@@ -2793,7 +2827,11 @@ class Checker:
         if not runs:
             return
         known = set()
-        for b in s.blocks:
+        # keep=: the members a section's script keeps are its code too
+        kept = []
+        if getattr(s, "chapter", None) is not None:
+            kept = kept_members(s.chapter, s, [n for b in runs for n in keep_names(b)])[0]
+        for b in s.blocks + kept:
             if b.lang not in CODE_LANGS:
                 continue
             for t in tokenize_code(b.text)[0]:
@@ -3242,6 +3280,10 @@ SCRIPT_LINE = re.compile(r"^(extends|class_name)\b")
 # refuses it. A block whose script goes on another node says so: on=CharacterBody3D.
 TOP_NODE = "Node3D"
 EXTENDS_LINE = re.compile(r"^extends\s+\S")
+# keep= (2 October 2026, chapter 5): a section's script keeps members an earlier example of the
+# chapter defined, so the page shows them once. A member as a script holds it:
+MEMBER_HEAD = re.compile(r"^(?:@\w+(?:\([^)]*\))?\s+)*(?:static\s+)?(?:var|const|func)\s+(\w+)")
+CLOSER = re.compile(r"^[\]\)\}]+,?\s*$")
 
 
 class Unit:
@@ -3264,14 +3306,16 @@ class Unit:
 
 
 def runs_block(b):
-    return not (b.opts.get("parse") or b.opts.get("skip") or b.opts.get("fails"))
+    return not (b.opts.get("parse") or b.opts.get("skip") or b.opts.get("fails")
+                or b.opts.get("kept"))
 
 
 def block_kinds(blocks):
     kinds = []
     for b in blocks:
         ls = b.lines
-        top = [x for x in ls if x.strip() and not x[0].isspace() and not x.startswith("#")]
+        top = [x for x in ls if x.strip() and not x[0].isspace() and not x.startswith("#")
+               and not CLOSER.match(x)]     # an array's last ']' at the left edge
         if any(SCRIPT_LINE.match(x) for x in ls):
             kinds.append("script")
         elif any(CLASS_LINE.match(x) and not re.match(r"^(var|const)\b", x) for x in top):
@@ -3424,6 +3468,72 @@ def build_unit(unit, tax, inherited):
             unit.prints.append((b, want))
 
 
+def member_spans(lines):
+    """The members a block of script defines, as (name, first, end): a var, const or func at
+    the left edge, and the lines that belong to it: indented, blank, or a closing bracket at the
+    left edge, as an array's last ']' stands. Trailing blank lines are not its own."""
+    spans = []
+    i = 0
+    while i < len(lines):
+        m = MEMBER_HEAD.match(lines[i])
+        if not m:
+            i += 1
+            continue
+        j = i + 1
+        while j < len(lines) and (not lines[j].strip() or lines[j][0].isspace()
+                                  or CLOSER.match(lines[j])):
+            j += 1
+        end = j
+        while end > i + 1 and not lines[end - 1].strip():
+            end -= 1
+        spans.append((m.group(1), i, end))
+        i = j
+    return spans
+
+
+def keep_names(b):
+    """keep=palette,source,square: the members a block's script keeps from earlier examples."""
+    v = b.opts.get("keep")
+    if not isinstance(v, str):
+        return []
+    names = [n.strip().rstrip("()").strip() for n in v.split(",")]
+    return [n for n in names if n]
+
+
+def kept_members(ch, s, names):
+    """For each kept name, its last definition in an earlier section of the chapter, as a block
+    whose lines point at the lines the page shows there. Answers (blocks, names not found)."""
+    earlier = []
+    for t in ch.sections:
+        if t is s:
+            break
+        earlier.append(t)
+    blocks, missing = [], []
+    for name in names:
+        hit = None
+        for t in reversed(earlier):
+            for b in reversed(t.blocks):
+                if (b.lang not in ("gdscript", "gd") or b.opts.get("skip") or b.opts.get("fails")
+                        or b.opts.get("kept")):
+                    continue
+                for nm, i, j in reversed(member_spans(b.lines)):
+                    if nm == name:
+                        hit = (b, i, j)
+                        break
+                if hit:
+                    break
+            if hit:
+                break
+        if not hit:
+            missing.append(name)
+            continue
+        b, i, j = hit
+        kb = Block(b.lang, b.fence_line + i, {"kept": True})
+        kb.lines = b.lines[i:j]
+        blocks.append(kb)
+    return blocks, missing
+
+
 def collect_units(chapters):
     units = []
     for ch in chapters:
@@ -3435,11 +3545,14 @@ def collect_units(chapters):
                 if b.opts.get("skip"):
                     continue
                 if b.opts.get("alone") or b.opts.get("fails"):
-                    units.append(Unit("u%d" % (len(units) + 1), s, [b]))
+                    kept = kept_members(ch, s, keep_names(b))[0]
+                    units.append(Unit("u%d" % (len(units) + 1), s, [b] + kept))
                 else:
                     group.append(b)
             if group:
-                units.append(Unit("u%d" % (len(units) + 1), s, group))
+                # kept members go last: a unit's first block is one the page shows
+                kept = kept_members(ch, s, [n for b in group for n in keep_names(b)])[0]
+                units.append(Unit("u%d" % (len(units) + 1), s, group + kept))
     return units
 
 
@@ -3463,6 +3576,15 @@ def write_hosts(project, tax):
             by_host.setdefault(e.host, []).append(e)
     files = {}
     for host, es in by_host.items():
+        if host.endswith(".tscn"):
+            # a supplied scene: its stub is the scene's text, written as it is, so that
+            # preload("res://supplied/x.tscn") finds a PackedScene
+            path = os.path.join(project, *host[len("res://"):].split("/"))
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            with open(path, "w", encoding="utf-8", newline="\n") as f:
+                f.write(es[0].stub.rstrip("\n") + "\n")
+            files[host] = es
+            continue
         if host.startswith("$"):
             rel = "hosts/%s.gd" % host[1:]
             head = ("extends Node\n## Written by check.py: the supplied parts on the base scene's "
@@ -3630,8 +3752,9 @@ def run_godot(checker, chapters, exe, opts):
                 where = (u.sec.file, src[0].fence_line + 1 + src[1])
             elif src and src[0] == "claim":
                 where = (u.sec.file, src[1].fence_line - 1)
-                msg = "in %s %r: %s" % (("claim", u.claims[src[2]][1]) if src[2] >= 0
-                                        else ("until", u.until)) + (msg,)
+                # the tuple is whole before %: "%" binds tighter than "+"
+                msg = "in %s %r: %s" % ((("claim", u.claims[src[2]][1]) if src[2] >= 0
+                                         else ("until", u.until)) + (msg,))
                 kind = "claim"
             elif src and src[0] in ("nodes", "extends"):
                 where = (u.sec.file, src[1].fence_line - (1 if src[0] == "nodes" else 0))

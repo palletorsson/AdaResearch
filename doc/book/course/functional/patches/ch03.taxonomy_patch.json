@@ -1,0 +1,125 @@
+[
+ {
+  "op": "add",
+  "id": "rotation_degrees",
+  "fields": {
+   "kind": "godot",
+   "forms": {
+    "text": [],
+    "code": [
+     "rotation_degrees"
+    ]
+   },
+   "def": "A body's turn around x, y and z, in degrees.",
+   "introduced_at": "3.5",
+   "synonyms": [],
+   "depends_on": [
+    "body",
+    "x",
+    "y",
+    "z"
+   ],
+   "note": "2 October 2026, chapter 3: 3.5 turns a tile over by its address (180 * ((x + z) % 2)), 3.6 turns it by quarter turns (90 * ((x + z) % 4)), 3.8 by the clock. rotate_y() (2.2) adds a turn in radians, which wait for 9.1 (TAU); rotation_degrees sets the turn, in everyday degrees, so a remainder can choose it exactly."
+  },
+  "why": "A quarter turn and a half turn, chosen by a remainder, need a turn in degrees; rotate_y() is in radians and TAU waits for 9.1."
+ },
+ {
+  "op": "add",
+  "id": "cube_scene",
+  "fields": {
+   "kind": "supplied",
+   "forms": {
+    "text": [],
+    "code": [
+     "cube.tscn"
+    ]
+   },
+   "def": "A scene of one lime cube: the walker takes it.",
+   "introduced_at": "supplied:3.1",
+   "synonyms": [],
+   "depends_on": [
+    "scene",
+    "walker"
+   ],
+   "host": "res://supplied/cube.tscn",
+   "stub": "[gd_scene format=3]\n\n[sub_resource type=\"StandardMaterial3D\" id=\"lime\"]\nalbedo_color = Color(0.72, 0.95, 0.2, 1)\n\n[sub_resource type=\"BoxMesh\" id=\"box\"]\nmaterial = SubResource(\"lime\")\nsize = Vector3(0.5, 0.5, 0.5)\n\n[node name=\"Cube\" type=\"MeshInstance3D\"]\nmesh = SubResource(\"box\")\n",
+   "note": "2 October 2026, chapter 3: the scene 3.1 to 3.4 make copies of, half a metre wide (Array's pickup cube). The stub is the scene's text: check.py writes it to res://supplied/cube.tscn, so preload() finds a PackedScene. The walker's touch (3.4) is the real part's, not the stub's."
+  },
+  "why": "3.1 needs a scene file to preload; supplying it keeps the section on the loop (making a scene is no part of what 3.1 teaches)."
+ },
+ {
+  "op": "add",
+  "id": "tile_scene",
+  "fields": {
+   "kind": "supplied",
+   "forms": {
+    "text": [],
+    "code": [
+     "tile.tscn"
+    ]
+   },
+   "def": "A flat tile, off-white on top and near-black underneath.",
+   "introduced_at": "supplied:3.5",
+   "synonyms": [],
+   "depends_on": [],
+   "host": "res://supplied/tile.tscn",
+   "stub": "[gd_scene format=3]\n\n[sub_resource type=\"StandardMaterial3D\" id=\"light\"]\nalbedo_color = Color(0.95, 0.93, 0.88, 1)\n\n[sub_resource type=\"PlaneMesh\" id=\"top\"]\nmaterial = SubResource(\"light\")\nsize = Vector2(1, 1)\n\n[sub_resource type=\"StandardMaterial3D\" id=\"dark\"]\nalbedo_color = Color(0.06, 0.05, 0.08, 1)\n\n[sub_resource type=\"PlaneMesh\" id=\"under\"]\nmaterial = SubResource(\"dark\")\nsize = Vector2(1, 1)\nflip_faces = true\n\n[node name=\"Tile\" type=\"Node3D\"]\n\n[node name=\"Top\" type=\"MeshInstance3D\" parent=\".\"]\nmesh = SubResource(\"top\")\n\n[node name=\"Under\" type=\"MeshInstance3D\" parent=\".\"]\nmesh = SubResource(\"under\")\n",
+   "note": "2 October 2026, chapter 3: one tile, two faces. Turned over (rotation_degrees.x = 180) it shows near-black, so the checker of 3.5 and the blinking floor of 3.8 need no colour: colour waits for 4.1."
+  },
+  "why": "3.5 and 3.8 make an off-white and near-black floor before colour (4.1); a tile turned over by its remainder does it with a turn."
+ },
+ {
+  "op": "update",
+  "id": "diagonal_tile",
+  "fields": {
+   "forms": {
+    "text": [
+     "diagonal tile",
+     "diagonal tiles"
+    ],
+    "code": [
+     "diagonal_tile.tscn"
+    ]
+   },
+   "host": "res://supplied/diagonal_tile.tscn",
+   "stub": "[gd_scene format=3]\n\n[sub_resource type=\"StandardMaterial3D\" id=\"light\"]\nalbedo_color = Color(0.95, 0.93, 0.88, 1)\n\n[sub_resource type=\"PlaneMesh\" id=\"square\"]\nmaterial = SubResource(\"light\")\nsize = Vector2(1, 1)\n\n[node name=\"DiagonalTile\" type=\"Node3D\"]\n\n[node name=\"Square\" type=\"MeshInstance3D\" parent=\".\"]\nmesh = SubResource(\"square\")\n",
+   "note": "2 October 2026, chapter 3: a supplied scene, diagonal_tile.tscn, that 3.6 and 3.7 preload and turn by address; its top node is a Node3D, so a turn or a flip applies to the whole tile. The stub is a stand-in, an off-white square (check.py writes it to res://supplied/diagonal_tile.tscn); the real part draws its near-black half with triangle(a, b, c)."
+  },
+  "why": "3.6 preloads it as a scene file: it needs the file name as a code form and a scene for the checker to load."
+ },
+ {
+  "op": "update",
+  "id": "flight_region",
+  "fields": {
+   "forms": {
+    "text": [
+     "flight region"
+    ],
+    "code": [
+     "flight_region.tscn"
+    ]
+   },
+   "note": "2 October 2026, chapter 3: a supplied scene, added to the top node in 3.4 (add a scene, 1.6) beside walker.tscn. Inside it the walker flies, Space climbing and Shift sinking; it also shows the collection record."
+  },
+  "why": "3.4 names the file the student adds: flight_region.tscn."
+ },
+ {
+  "op": "update",
+  "id": "collection_record",
+  "fields": {
+   "introduced_at": "supplied:3.4",
+   "note": "2 October 2026, chapter 3: moved from 3.2 to 3.4, where the walker first meets the cubes (it flies into the lattice and takes one). The flight region shows it. Chapter 5 opens it only in an exercise."
+  },
+  "why": "Within chapter 3: 3.2 has no walker, so nothing is taken there; 3.4 is where a cube is taken and its address stays."
+ },
+ {
+  "op": "update",
+  "id": "cell_at()",
+  "fields": {
+   "introduced_at": "supplied:3.8",
+   "stub": "func cell_at(x: int, z: int) -> Node3D:\n\tvar found: Node3D = null\n\tfor c in get_parent().get_children():\n\t\tif c is Node3D and is_equal_approx(c.position.x, x) and is_equal_approx(c.position.z, z):\n\t\t\tfound = c\n\treturn found",
+   "note": "2 October 2026, chapter 3: moved from 3.6 to 3.8, the first section that changes tiles after they are made (the clock asks every tile again each beat). Opened at 5.3, when arrays arrive. The stub finds the top node's last child standing at x and z, so the floor of 3.8 (tiles at whole metres) answers it; chapter 4 borrows it for the floor cubes of 4.6."
+  },
+  "why": "Within chapter 3: 3.6 builds its floors once and never finds a tile again; 3.8 must, every beat. The old stub returned null, which a run cannot call into."
+ }
+]

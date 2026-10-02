@@ -285,7 +285,7 @@
       "loops: for i in n, counting for you; the loop variable as an address, i * spacing",
       "preload() and PackedScene.instantiate(): many copies of one scene",
       "loops: nested loops, x then z, then y",
-      "loops: % (remainder), a rule that repeats",
+      "loops: % (remainder), a rule that repeats; rotation_degrees turns a tile by it",
       "loops: a rule plus a clock, (x + z + phase) % 2"
      ],
      "noc": "Learning Processing ch. 6 (no Nature of Code chapter)",
@@ -383,6 +383,8 @@
       "Anni Albers' weaving drafts as nested loops."
      ],
      "borrowed": [
+      "cube.tscn: one lime cube, the scene 3.1 to 3.4 copy",
+      "tile.tscn: a tile, off-white on top and near-black underneath (3.5, 3.8)",
       "the diagonal tile: a half-black square made with ch1's triangle(a, b, c)",
       "the flight region: lets the walker fly inside the lattice (Tutorial_3D)",
       "cell_at(x, z): finds a floor tile by its address, until arrays arrive in ch5",
@@ -547,7 +549,7 @@
        "n": "5.1",
        "title": "A list of steps",
        "idea": "var steps := [true, false, false, true] keeps values in order; steps[i] reads one, and the playhead reads them in turn.",
-       "figure": "The step sequencer grid with a cyan playhead on one column and three lit cells.",
+       "figure": "The step sequencer grid with a cyan playhead on one column and three lit steps.",
        "builds": "step_sequencer (Pattern_Disco)"
       },
       {
@@ -631,8 +633,7 @@
      "borrowed": [
       "a note per track: the AudioStreamPlayer behind each sequencer step",
       "the catwalk path the figures walk along",
-      "pick(): the floor cell under the pointer or the controller, for painting a cell; the ray inside is supplied and not opened in this course",
-      "the skirt's UV repeat: shown as a shader in the hall; the course puts an ImageTexture on the skirt, and shaders come in ch12"
+      "pick(): the floor cell under the pointer or the controller, for painting a cell; the ray inside is supplied and not opened in this course"
      ],
      "notes_for_palle": "Ribbon_Patterns_02 is a colour annex (contrast, metamerism, prism) with no array argument. Its contrast study is exercise 5; the rest is a hook. The halls draw patterns with shaders; the course uses Image.set_pixel. P6M, the kaleidoscope and the full 17-group cage need 60-degree turns (trigonometry) and stay as hooks. Ribbon_Patterns_01's bar_array_bubble_sort is the place for sorting if you want it.",
      "media": {

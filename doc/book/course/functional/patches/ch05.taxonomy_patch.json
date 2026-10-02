@@ -1,0 +1,279 @@
+[
+  {
+    "op": "update",
+    "id": "size",
+    "fields": {
+      "introduced_at": "5.1",
+      "note": "5.1: for i in steps.size() visits every index; beat % steps.size() wraps the playhead."
+    },
+    "why": "5.1 is its first need: the playhead counts through steps.size() and wraps by it."
+  },
+  {
+    "op": "update",
+    "id": "append",
+    "fields": {
+      "introduced_at": "5.5",
+      "note": "5.5: flip() builds each row again from its far end, one append at a time; 5.8 appends bodies."
+    },
+    "why": "5.5 is its first need: flip() rebuilds a row with append()."
+  },
+  {
+    "op": "update",
+    "id": "cell",
+    "fields": {
+      "introduced_at": "5.3",
+      "note": "5.3: the 4 x 4 source is the first grid of chapter 5, sixteen cells each holding a palette number; 5.1's row of steps calls its boxes squares. 13.1 gives a cell its state and returns to it."
+    },
+    "why": "5.1 has one row of steps, not a grid; the 4 x 4 source of 5.3 is the first grid whose places hold a state."
+  },
+  {
+    "op": "add",
+    "id": "palette",
+    "fields": {
+      "kind": "concept",
+      "forms": {
+        "text": [
+          "palette",
+          "palettes"
+        ],
+        "code": []
+      },
+      "def": "An array of colours, read by a number.",
+      "introduced_at": "5.2",
+      "synonyms": [],
+      "depends_on": [
+        "array"
+      ],
+      "note": "5.2: palette[value] turns a 0 or 1 into a colour; from 5.3 on source holds palette numbers, as the halls do."
+    },
+    "why": "The sketch's 5.2 title and idea; every later section of chapter 5 reads palette[source[z][x]]. A term that matters is a type."
+  },
+  {
+    "op": "update",
+    "id": "note_per_track",
+    "fields": {
+      "forms": {
+        "text": [
+          "note per track"
+        ],
+        "code": [
+          "note",
+          "note()"
+        ]
+      },
+      "stub": "func note() -> void:\n\tpass",
+      "host": "$Supplied",
+      "note": "5.1: $Supplied.note() sounds the step the playhead reads; the AudioStreamPlayer inside is never opened."
+    },
+    "why": "5.1's code has to sound a step: the supplied part needed a call and a stub, as line() has."
+  },
+  {
+    "op": "update",
+    "id": "pick()",
+    "fields": {
+      "introduced_at": "supplied:5.6",
+      "def": "The floor square under the mouse, as an array: x, z.",
+      "depends_on": [
+        "array",
+        "x",
+        "z"
+      ],
+      "stub": "func pick() -> Array:\n\treturn [10, 1]",
+      "note": "5.6: hover the patterned floor; at[0] % 4 and at[1] % 4 find the cell of source a square reads. An array, not a Vector2i: chapter 5 keeps y for up, so a floor square is x and z, and Vector2i would call z y. The ray inside is never opened."
+    },
+    "why": "Chapter 5 paints nothing by hand in 5.5 (it writes into source by code before drawing); the first section that points at a square is 5.6, the floor that reads source. The stub answers the sketch's floor square [10, 1]."
+  },
+  {
+    "op": "update",
+    "id": "catwalk_path",
+    "fields": {
+      "forms": {
+        "text": [
+          "catwalk path"
+        ],
+        "code": [
+          "catwalk.tscn"
+        ]
+      },
+      "def": "A strip of floor your figures walk along.",
+      "note": "5.8: a supplied scene dropped on the top node, a stage only; the walk itself is the student's code (position.z += delta, turn by turn)."
+    },
+    "why": "5.8 borrows it as the stage the bodies walk on; it needed a file the student can drop, as counter_panel.tscn is."
+  },
+  {
+    "op": "update",
+    "id": "uv_repeat",
+    "fields": {
+      "kind": "concept",
+      "introduced_at": "missing",
+      "forms": {
+        "text": [
+          "UV repeat"
+        ],
+        "code": []
+      },
+      "def": "How the hall repeats the pattern on the skirt.",
+      "note": "chapter 5 writer, 2 October 2026: no longer supplied. 5.8 dresses the skirts with the ImageTexture of 5.6, so nothing borrows the hall's shader repeat; it needs UV (12.1). A supplied part must have a section, so it is a missing concept until chapter 12 teaches it or it is deleted."
+    },
+    "why": "5.8 does not need it (the skirt wears the 5.6 ImageTexture); a supplied part cannot be missing, so its kind changes. Delete it if chapter 12 has no use for it."
+  },
+  {
+    "op": "add",
+    "id": "create_empty",
+    "fields": {
+      "kind": "godot",
+      "forms": {
+        "text": [],
+        "code": [
+          "create_empty",
+          "Image.create_empty"
+        ]
+      },
+      "def": "Makes a blank `Image`, so wide and so high.",
+      "introduced_at": "5.6",
+      "synonyms": [],
+      "depends_on": [
+        "Image"
+      ]
+    },
+    "why": "5.6 makes the 16 x 16 Image the floor wears."
+  },
+  {
+    "op": "add",
+    "id": "FORMAT_RGB8",
+    "fields": {
+      "kind": "godot",
+      "forms": {
+        "text": [],
+        "code": [
+          "FORMAT_RGB8"
+        ]
+      },
+      "def": "An `Image` kind: red, green and blue at each place.",
+      "introduced_at": "5.6",
+      "synonyms": [],
+      "depends_on": [
+        "Image",
+        "rgb"
+      ]
+    },
+    "why": "create_empty() needs a format; 5.6 uses Image.FORMAT_RGB8."
+  },
+  {
+    "op": "add",
+    "id": "create_from_image",
+    "fields": {
+      "kind": "godot",
+      "forms": {
+        "text": [],
+        "code": [
+          "create_from_image",
+          "ImageTexture.create_from_image"
+        ]
+      },
+      "def": "Makes an `ImageTexture` from an `Image`.",
+      "introduced_at": "5.6",
+      "synonyms": [],
+      "depends_on": [
+        "ImageTexture",
+        "Image"
+      ]
+    },
+    "why": "5.6 turns the Image into a texture with ImageTexture.create_from_image()."
+  },
+  {
+    "op": "add",
+    "id": "albedo_texture",
+    "fields": {
+      "kind": "godot",
+      "forms": {
+        "text": [],
+        "code": [
+          "albedo_texture"
+        ]
+      },
+      "def": "The texture a material wears as its colour.",
+      "introduced_at": "5.6",
+      "synonyms": [],
+      "depends_on": [
+        "texture",
+        "material"
+      ]
+    },
+    "why": "5.6 puts the texture on the floor's material."
+  },
+  {
+    "op": "add",
+    "id": "texture_filter",
+    "fields": {
+      "kind": "godot",
+      "forms": {
+        "text": [],
+        "code": [
+          "texture_filter",
+          "TEXTURE_FILTER_NEAREST"
+        ]
+      },
+      "def": "How a texture is drawn between its places.",
+      "introduced_at": "5.6",
+      "synonyms": [],
+      "depends_on": [
+        "texture"
+      ],
+      "note": "TEXTURE_FILTER_NEAREST is its one value in the course: a 16 x 16 picture on a 16 metre floor stays sixteen sharp squares a side, not a blur."
+    },
+    "why": "Without it the 16 x 16 picture is blurred across the floor and the cells cannot be read."
+  },
+  {
+    "op": "add",
+    "id": "PlaneMesh",
+    "fields": {
+      "kind": "godot",
+      "forms": {
+        "text": [],
+        "code": [
+          "PlaneMesh"
+        ]
+      },
+      "def": "A flat square mesh lying down, 2 metres a side.",
+      "introduced_at": "5.6",
+      "synonyms": [],
+      "depends_on": [
+        "mesh",
+        "metre"
+      ]
+    },
+    "why": "5.6's floor wears the picture; a BoxMesh would spread it over six faces."
+  },
+  {
+    "op": "add",
+    "id": "QuadMesh",
+    "fields": {
+      "kind": "godot",
+      "forms": {
+        "text": [],
+        "code": [
+          "QuadMesh"
+        ]
+      },
+      "def": "A flat square mesh standing up, 1 metre a side.",
+      "introduced_at": "5.7",
+      "synonyms": [],
+      "depends_on": [
+        "mesh",
+        "metre"
+      ]
+    },
+    "why": "5.7's four panels stand up, as in the chapter's opening picture."
+  },
+  {
+    "op": "update",
+    "id": "Look",
+    "fields": {
+      "depends_on": [
+        "palette"
+      ]
+    },
+    "why": "Look's def says palette, which chapter 5 makes an entry (5.2); a def's terms are its dependencies."
+  }
+]

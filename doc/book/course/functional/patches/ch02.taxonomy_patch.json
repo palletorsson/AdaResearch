@@ -1,0 +1,149 @@
+[
+  {
+    "op": "add",
+    "id": "add_a_scene",
+    "fields": {
+      "kind": "admin",
+      "forms": {
+        "text": [
+          "add a scene",
+          "added a scene",
+          "adding a scene"
+        ],
+        "code": []
+      },
+      "def": "Drop it from the FileSystem onto the node it goes under.",
+      "introduced_at": "1.6",
+      "synonyms": [
+        "instance {file}"
+      ],
+      "step_phrases": [
+        {
+          "phrase": "drop",
+          "cues": [
+            ".tscn"
+          ]
+        }
+      ],
+      "calls": [
+        "add {file} to",
+        "add the supplied {file} to"
+      ],
+      "depends_on": [
+        "scene",
+        "FileSystem",
+        "node"
+      ],
+      "note": "2 October 2026, chapter 2: FUNCTIONAL_TEXT 2a said the walker of 2.5 is the second supplied scene dropped, which makes that drop an admin, defined at 1.6. 1.6 defines it for counter_panel.tscn; 2.5 calls it for walker.tscn: 'Add `walker.tscn` to the top node.' Its call is 'add {file} to', so it never collides with put a script on a node ('put {file} on'). Its step phrase 'drop' counts only beside a .tscn, so a script dropped (`bell.gd`) stays put a script on a node; no 'drop {file} onto' synonym, since {file} takes a .gd too and the longer match would win. The editor step is NOT verified in a live editor."
+    },
+    "why": "2.5 drops walker.tscn, the second supplied scene after 1.6's counter panel; FUNCTIONAL_TEXT 2a: 'it makes that drop an admin, defined at 1.6'. Needs ch01 1.6 to define it (edited: two lines and admin: add_a_scene)."
+  },
+  {
+    "op": "update",
+    "id": "rider_code",
+    "fields": {
+      "introduced_at": "supplied:2.0",
+      "note": "2 October 2026, chapter 2 written: no section hands it out. The carrier of 2.4 crosses before the walker exists (2.5) and carries nothing. supplied:2.0 keeps the sketch's claim (chapter 2 borrows it) without a section; the unused rule will say so once every chapter is checked. Give it to the first section whose carrier carries the walker, or drop it from the sketch's borrowed list."
+    },
+    "why": "Chapter 2 hands out no rider code: 2.4's carrier carries nothing, since the walker only comes in 2.5. A supplied part cannot be missing (check.py), so 2.0: chapter 2, no section."
+  },
+  {
+    "op": "update",
+    "id": "lerp",
+    "fields": {
+      "introduced_at": "supplied:2.2",
+      "note": "a Godot built-in, called before functions are taught. Chapter 2 (2 October 2026): handed out at 2.2 with pingpong, for the pickup cube's pulse; 4.5 opens it."
+    },
+    "why": "Moved within chapter 2: the pickup cube of 2.2 pulses its scale with lerp(0.7, 1.3, pingpong(clock, 1)); 2.6 has no use for it."
+  },
+  {
+    "op": "update",
+    "id": "pingpong",
+    "fields": {
+      "introduced_at": "supplied:2.2",
+      "opened_at": "2.3",
+      "note": "Chapter 2 (2 October 2026): handed out at 2.2 for the pickup cube's pulse; opened at 2.3, where the student writes the same back-and-forth with two ifs and the text says pingpong() does this."
+    },
+    "why": "Moved within chapter 2: used in 2.2's pulse, and 2.3's bounce is the back-and-forth it makes, so 2.3 opens it."
+  },
+  {
+    "op": "add",
+    "id": "ui_left",
+    "fields": {
+      "kind": "godot",
+      "forms": {
+        "text": [],
+        "code": [
+          "ui_left"
+        ]
+      },
+      "def": "The action that the Left arrow sets off.",
+      "introduced_at": "2.6",
+      "synonyms": [],
+      "depends_on": [
+        "Input"
+      ],
+      "note": "2.6: the arrows steer the cube while the walker keeps WASD. A Godot default action, so it exists in every project."
+    },
+    "why": "2.6 asks Input.is_action_pressed(\"ui_left\"); a string in code must be an entry."
+  },
+  {
+    "op": "add",
+    "id": "ui_right",
+    "fields": {
+      "kind": "godot",
+      "forms": {
+        "text": [],
+        "code": [
+          "ui_right"
+        ]
+      },
+      "def": "The action that the Right arrow sets off.",
+      "introduced_at": "2.6",
+      "synonyms": [],
+      "depends_on": [
+        "Input"
+      ],
+      "note": "2.6, beside ui_left. A Godot default action."
+    },
+    "why": "2.6 asks Input.is_action_pressed(\"ui_right\")."
+  },
+  {
+    "op": "add",
+    "id": "quotes",
+    "fields": {
+      "kind": "gdscript",
+      "forms": {
+        "text": [
+          "quotes"
+        ],
+        "code": [
+          "\"\""
+        ]
+      },
+      "def": "Text typed between quotes, which the code keeps as written.",
+      "introduced_at": "2.6",
+      "synonyms": [],
+      "depends_on": [],
+      "note": "2 October 2026: chapter 2's 2.6 types the first string literals, the action names \"ui_left\" and \"ui_right\". Chapter 3's patch adds this same entry at 3.1 and says to move it to chapter 2 if 2.6 types an action name first: it does. The checker counts every string literal as the entry with the code form \"\"; String (15.1) teaches text as a value."
+    },
+    "why": "2.6 types \"ui_left\" and \"ui_right\": a string literal was String's (15.1), an order error. Same entry as ch03.taxonomy_patch.json's quotes, moved to 2.6 as its note asks: keep one, at 2.6."
+  },
+  {
+    "op": "update",
+    "id": "String",
+    "fields": {
+      "forms": {
+        "text": [
+          "string",
+          "strings"
+        ],
+        "code": [
+          "String"
+        ]
+      },
+      "note": "2 October 2026: the code form \"\" (a string literal) moved to the entry quotes (2.6), where the action names are first typed in quotes. String teaches text as a value at 15.1."
+    },
+    "why": "One form, one entry: \"\" moves to quotes (2.6). Same op as in ch03.taxonomy_patch.json."
+  }
+]

@@ -136,7 +136,7 @@
       "forms": {"text": ["base scene", "course look"], "code": ["base.tscn"]},
       "def": "Floor, sky, sun, camera and one node to place.",
       "introduced_at": "supplied:1.1", "synonyms": [], "depends_on": ["node"],
-      "note": "the course look (palette, sky, light) comes with it; 17.1 and 19.x borrow the Look by name"
+      "note": "the course look (palette, sky, light) comes with it; 17.1 and 19.x borrow the Look by name. Merge of chapters 2 to 5 (2 October 2026): its Input Map leaves the arrows (ui_left, ui_right: 2.6) and Space (ui_accept: 2.x, 4.6, 4.7, 18.8) to the student's code. kit-base binds the arrows to move_left and move_right and Space to pause; the course project must not, or one key does two things."
     },
     {
       "id": "script", "kind": "concept",
@@ -487,11 +487,22 @@
       "introduced_at": "1.6", "synonyms": [], "depends_on": []
     },
     {
+      "id": "add_a_scene", "kind": "admin",
+      "forms": {"text": ["add a scene", "added a scene", "adding a scene"], "code": []},
+      "def": "Drop it from the FileSystem onto the node it goes under.",
+      "introduced_at": "1.6",
+      "synonyms": ["instance {file}"],
+      "step_phrases": [{"phrase": "drop", "cues": [".tscn"]}],
+      "calls": ["add {file} to", "add the supplied {file} to"],
+      "depends_on": ["scene", "FileSystem", "node"],
+      "note": "2 October 2026, chapter 2: FUNCTIONAL_TEXT 2a said the walker of 2.5 is the second supplied scene dropped, which makes that drop an admin, defined at 1.6. 1.6 defines it for counter_panel.tscn; 2.5 calls it for walker.tscn: 'Add `walker.tscn` to the top node.' Its call is 'add {file} to', so it never collides with put a script on a node ('put {file} on'). Its step phrase 'drop' counts only beside a .tscn, so a script dropped (`bell.gd`) stays put a script on a node; no 'drop {file} onto' synonym, since {file} takes a .gd too and the longer match would win. The editor step is NOT verified in a live editor."
+    },
+    {
       "id": "counter_panel", "kind": "supplied",
       "forms": {"text": ["counter panel"], "code": ["counter_panel.tscn"]},
       "def": "A `Label3D` on a stand, named Counter.",
       "introduced_at": "supplied:1.6", "synonyms": [], "depends_on": ["Label3D"],
-      "note": "2 October 2026: a supplied scene, counter_panel.tscn, whose top node is the Label3D named Counter. 1.6 adds it in one line, dropped from the FileSystem onto the top node; that is used once in the chapters written so far, so it is no admin. When a second supplied scene is added the same way (walker.tscn, 2.5), the step becomes an admin defined at 1.6. NOT verified in a live editor: the checker builds the Label3D itself (nodes=Counter:Label3D)."
+      "note": "2 October 2026: a supplied scene, counter_panel.tscn, whose top node is the Label3D named Counter. 1.6 adds it with add a scene, the admin 1.6 defines; 2.5 calls it again for walker.tscn, 3.4 for walker.tscn and flight_region.tscn, 5.8 for catwalk.tscn. NOT verified in a live editor: the checker builds the Label3D itself (nodes=Counter:Label3D)."
     },
     {
       "id": "mouse_point()", "kind": "supplied",
@@ -593,8 +604,8 @@
       "id": "rider_code", "kind": "supplied",
       "forms": {"text": ["rider code"], "code": ["_translate_rider"]},
       "def": "Carries whoever stands on a moving cube.",
-      "introduced_at": "supplied:2.1", "synonyms": [], "depends_on": [],
-      "note": "section inferred: 2.1 builds the first carriers"
+      "introduced_at": "supplied:2.0", "synonyms": [], "depends_on": [],
+      "note": "2 October 2026, chapter 2 written: no section hands it out. The carrier of 2.4 crosses before the walker exists (2.5) and carries nothing. supplied:2.0 keeps the sketch's claim (chapter 2 borrows it) without a section; the unused rule will say so once every chapter is checked. Give it to the first section whose carrier carries the walker, or drop it from the sketch's borrowed list."
     },
     {
       "id": "rotate_y", "kind": "godot",
@@ -710,7 +721,7 @@
       "forms": {"text": ["walker", "walkers"], "code": ["walker.tscn"]},
       "def": "The cyan capsule you steer with WASD: the visitor.",
       "introduced_at": "supplied:2.5", "synonyms": [], "depends_on": [],
-      "note": "first named at 2.5; chapters 17 to 20 borrow it again"
+      "note": "first named at 2.5; chapters 17 to 20 borrow it again. Merge of chapters 2 to 5 (2 October 2026): the walker takes WASD only. 2.6 gives the arrows to the student's own code (ui_left, ui_right) while the walker stands in the scene; kit-base's move_left and move_right also hold the arrow keys, so a course walker built on them moves with the cube."
     },
     {
       "id": "and", "kind": "gdscript",
@@ -753,16 +764,38 @@
       "id": "lerp", "kind": "gdscript",
       "forms": {"text": ["lerp"], "code": ["lerp"]},
       "def": "A value part way between two ends.",
-      "introduced_at": "supplied:2.6", "synonyms": [], "depends_on": [],
+      "introduced_at": "supplied:2.2", "synonyms": [], "depends_on": [],
       "opened_at": "4.5",
-      "note": "a Godot built-in, called before functions are taught; section inferred beside pingpong"
+      "note": "a Godot built-in, called before functions are taught. Chapter 2 (2 October 2026): handed out at 2.2 with pingpong, for the pickup cube's pulse; 4.5 opens it."
     },
     {
       "id": "pingpong", "kind": "gdscript",
       "forms": {"text": [], "code": ["pingpong"]},
       "def": "A value that runs to an end and back, repeating.",
-      "introduced_at": "supplied:2.6", "synonyms": [], "depends_on": [],
-      "note": "2.6: the notes say pingpong() moves Trans_Pit's grower; never opened"
+      "introduced_at": "supplied:2.2", "synonyms": [], "depends_on": [],
+      "opened_at": "2.3",
+      "note": "Chapter 2 (2 October 2026): handed out at 2.2 for the pickup cube's pulse; opened at 2.3, where the student writes the same back-and-forth with two ifs and the text says pingpong() does this."
+    },
+    {
+      "id": "ui_left", "kind": "godot",
+      "forms": {"text": [], "code": ["ui_left"]},
+      "def": "The action that the Left arrow sets off.",
+      "introduced_at": "2.6", "synonyms": [], "depends_on": ["Input"],
+      "note": "2.6: the arrows steer the cube while the walker keeps WASD. A Godot default action, so it exists in every project."
+    },
+    {
+      "id": "ui_right", "kind": "godot",
+      "forms": {"text": [], "code": ["ui_right"]},
+      "def": "The action that the Right arrow sets off.",
+      "introduced_at": "2.6", "synonyms": [], "depends_on": ["Input"],
+      "note": "2.6, beside ui_left. A Godot default action."
+    },
+    {
+      "id": "quotes", "kind": "gdscript",
+      "forms": {"text": ["quotes"], "code": ["\"\""]},
+      "def": "Text typed between quotes, which the code keeps as written.",
+      "introduced_at": "2.6", "synonyms": [], "depends_on": [],
+      "note": "2 October 2026: chapter 2's 2.6 types the first string literals, the action names \"ui_left\" and \"ui_right\". Chapter 3's writer first proposed this entry at 3.1; 2.6 types an action name first, so it stands at 2.6 and chapter 3's patch dropped its copy (merge of chapters 2 to 5). The checker counts every string literal as the entry with the code form \"\"; String (15.1) teaches text as a value."
     },
     {
       "id": "parent", "kind": "concept",
@@ -822,11 +855,20 @@
       "introduced_at": "3.1", "synonyms": [], "depends_on": ["node", "child", "PackedScene"]
     },
     {
+      "id": "cube_scene", "kind": "supplied",
+      "forms": {"text": [], "code": ["cube.tscn"]},
+      "def": "A scene of one lime cube: the walker takes it.",
+      "introduced_at": "supplied:3.1", "synonyms": [], "depends_on": ["scene", "walker"],
+      "stub": "[gd_scene format=3]\n\n[sub_resource type=\"StandardMaterial3D\" id=\"lime\"]\nalbedo_color = Color(0.72, 0.95, 0.2, 1)\n\n[sub_resource type=\"BoxMesh\" id=\"box\"]\nmaterial = SubResource(\"lime\")\nsize = Vector3(0.5, 0.5, 0.5)\n\n[node name=\"Cube\" type=\"MeshInstance3D\"]\nmesh = SubResource(\"box\")\n",
+      "host": "res://supplied/cube.tscn",
+      "note": "2 October 2026, chapter 3: the scene 3.1 to 3.4 make copies of, half a metre wide (Array's pickup cube). The stub is the scene's text: check.py writes it to res://supplied/cube.tscn, so preload() finds a PackedScene. The walker's touch (3.4) is the real part's, not the stub's."
+    },
+    {
       "id": "collection_record", "kind": "supplied",
       "forms": {"text": ["collection record"], "code": []},
       "def": "Per cube, 1 until it is taken, then 0.",
-      "introduced_at": "supplied:3.2", "synonyms": [], "depends_on": [],
-      "note": "section inferred: 3.2 first shows the pickup cubes; ch5 opens it only in an exercise"
+      "introduced_at": "supplied:3.4", "synonyms": [], "depends_on": [],
+      "note": "2 October 2026, chapter 3: moved from 3.2 to 3.4, where the walker first meets the cubes (it flies into the lattice and takes one). The flight region shows it. Chapter 5 opens it only in an exercise."
     },
     {
       "id": "for", "kind": "gdscript",
@@ -874,9 +916,10 @@
     },
     {
       "id": "flight_region", "kind": "supplied",
-      "forms": {"text": ["flight region"], "code": []},
+      "forms": {"text": ["flight region"], "code": ["flight_region.tscn"]},
       "def": "Lets the walker fly inside the lattice.",
-      "introduced_at": "supplied:3.4", "synonyms": [], "depends_on": ["walker", "lattice"]
+      "introduced_at": "supplied:3.4", "synonyms": [], "depends_on": ["walker", "lattice"],
+      "note": "2 October 2026, chapter 3: a supplied scene, added to the top node in 3.4 (add a scene, 1.6) beside walker.tscn. Inside it the walker flies, Space climbing and Shift sinking; it also shows the collection record."
     },
     {
       "id": "%", "kind": "gdscript",
@@ -891,6 +934,22 @@
       "introduced_at": "3.5", "synonyms": [], "depends_on": []
     },
     {
+      "id": "rotation_degrees", "kind": "godot",
+      "forms": {"text": [], "code": ["rotation_degrees"]},
+      "def": "A body's turn around x, y and z, in degrees.",
+      "introduced_at": "3.5", "synonyms": [], "depends_on": ["body", "x", "y", "z"],
+      "note": "2 October 2026, chapter 3: 3.5 turns a tile over by its address (180 * ((x + z) % 2)), 3.6 turns it by quarter turns (90 * ((x + z) % 4)), 3.8 by the clock. rotate_y() (2.2) adds a turn in radians, which wait for 9.1 (TAU); rotation_degrees sets the turn, in everyday degrees, so a remainder can choose it exactly."
+    },
+    {
+      "id": "tile_scene", "kind": "supplied",
+      "forms": {"text": [], "code": ["tile.tscn"]},
+      "def": "A flat tile, off-white on top and near-black underneath.",
+      "introduced_at": "supplied:3.5", "synonyms": [], "depends_on": [],
+      "stub": "[gd_scene format=3]\n\n[sub_resource type=\"StandardMaterial3D\" id=\"light\"]\nalbedo_color = Color(0.95, 0.93, 0.88, 1)\n\n[sub_resource type=\"PlaneMesh\" id=\"top\"]\nmaterial = SubResource(\"light\")\nsize = Vector2(1, 1)\n\n[sub_resource type=\"StandardMaterial3D\" id=\"dark\"]\nalbedo_color = Color(0.06, 0.05, 0.08, 1)\n\n[sub_resource type=\"PlaneMesh\" id=\"under\"]\nmaterial = SubResource(\"dark\")\nsize = Vector2(1, 1)\nflip_faces = true\n\n[node name=\"Tile\" type=\"Node3D\"]\n\n[node name=\"Top\" type=\"MeshInstance3D\" parent=\".\"]\nmesh = SubResource(\"top\")\n\n[node name=\"Under\" type=\"MeshInstance3D\" parent=\".\"]\nmesh = SubResource(\"under\")\n",
+      "host": "res://supplied/tile.tscn",
+      "note": "2 October 2026, chapter 3: one tile, two faces. Turned over (rotation_degrees.x = 180) it shows near-black, so the checker of 3.5 and the blinking floor of 3.8 need no colour: colour waits for 4.1."
+    },
+    {
       "id": "reflection", "kind": "maths",
       "forms": {"text": ["reflection", "reflections", "mirror", "mirrors", "mirrored", "mirroring"], "code": []},
       "def": "A copy flipped, as a mirror shows it.",
@@ -899,18 +958,21 @@
     },
     {
       "id": "diagonal_tile", "kind": "supplied",
-      "forms": {"text": ["diagonal tile", "diagonal tiles"], "code": []},
+      "forms": {"text": ["diagonal tile", "diagonal tiles"], "code": ["diagonal_tile.tscn"]},
       "def": "A half-black square, made with `triangle(a, b, c)`.",
-      "introduced_at": "supplied:3.6", "synonyms": [], "depends_on": ["triangle()"]
+      "introduced_at": "supplied:3.6", "synonyms": [], "depends_on": ["triangle()"],
+      "stub": "[gd_scene format=3]\n\n[sub_resource type=\"StandardMaterial3D\" id=\"light\"]\nalbedo_color = Color(0.95, 0.93, 0.88, 1)\n\n[sub_resource type=\"PlaneMesh\" id=\"square\"]\nmaterial = SubResource(\"light\")\nsize = Vector2(1, 1)\n\n[node name=\"DiagonalTile\" type=\"Node3D\"]\n\n[node name=\"Square\" type=\"MeshInstance3D\" parent=\".\"]\nmesh = SubResource(\"square\")\n",
+      "host": "res://supplied/diagonal_tile.tscn",
+      "note": "2 October 2026, chapter 3: a supplied scene, diagonal_tile.tscn, that 3.6 and 3.7 preload and turn by address; its top node is a Node3D, so a turn or a flip applies to the whole tile. The stub is a stand-in, an off-white square (check.py writes it to res://supplied/diagonal_tile.tscn); the real part draws its near-black half with triangle(a, b, c)."
     },
     {
       "id": "cell_at()", "kind": "supplied",
       "forms": {"text": [], "code": ["cell_at", "cell_at(x, z)"]},
       "def": "Finds a floor tile by its address.",
-      "introduced_at": "supplied:3.6", "synonyms": [], "depends_on": ["address"],
+      "introduced_at": "supplied:3.8", "synonyms": [], "depends_on": ["address"],
       "opened_at": "5.3",
-      "stub": "func cell_at(x: int, z: int) -> Node3D:\n\treturn null",
-      "note": "3.6 and 5.3 inferred: the sketch says chapter 3, and until arrays arrive in chapter 5",
+      "stub": "func cell_at(x: int, z: int) -> Node3D:\n\tvar found: Node3D = null\n\tfor c in get_parent().get_children():\n\t\tif c is Node3D and is_equal_approx(c.position.x, x) and is_equal_approx(c.position.z, z):\n\t\t\tfound = c\n\treturn found",
+      "note": "2 October 2026, chapter 3: moved from 3.6 to 3.8, the first section that changes tiles after they are made (the clock asks every tile again each beat). Opened at 5.3, when arrays arrive. The stub finds the top node's last child standing at x and z, so the floor of 3.8 (tiles at whole metres) answers it; chapter 4 borrows it for the floor cubes of 4.6. Merge of chapters 2 to 5: chapters 3 and 4 both patched the stub, word for word the same; one stub serves 3.8 and 4.6, and chapter 4's op changed nothing.",
       "host": "$Supplied"
     },
     {
@@ -924,8 +986,8 @@
       "id": "local_variable", "kind": "concept",
       "forms": {"text": ["local variable", "local variables"], "code": []},
       "def": "A variable that lives only inside its function.",
-      "introduced_at": "4.0", "synonyms": [], "depends_on": ["variable", "function"],
-      "note": "chapter 4's code_new names it; no section does"
+      "introduced_at": "4.2", "synonyms": [], "depends_on": ["variable", "function"],
+      "note": "4.2: look and piece live only inside add_piece"
     },
     {
       "id": "Color", "kind": "godot",
@@ -941,9 +1003,10 @@
     },
     {
       "id": "material", "kind": "concept",
-      "forms": {"text": ["material", "materials"], "code": []},
+      "forms": {"text": ["material", "materials"], "code": ["material"]},
       "def": "What a mesh wears: its colour and how it shines.",
-      "introduced_at": "4.1", "synonyms": [], "depends_on": ["mesh"]
+      "introduced_at": "4.1", "synonyms": [], "depends_on": ["mesh"],
+      "note": "code form added by chapter 5 and chapter 4 alike: mesh.material is what a mesh wears, as the def says. 4.1 teaches it: piece.mesh.material = orange."
     },
     {
       "id": "albedo_color", "kind": "godot",
@@ -952,10 +1015,17 @@
       "introduced_at": "4.1", "synonyms": [], "depends_on": ["material"]
     },
     {
+      "id": "StandardMaterial3D", "kind": "godot",
+      "forms": {"text": [], "code": ["StandardMaterial3D"]},
+      "def": "Godot's usual material: a colour, and how it shines.",
+      "introduced_at": "4.1", "synonyms": [], "depends_on": ["material"]
+    },
+    {
       "id": "function", "kind": "concept",
       "forms": {"text": ["function", "functions"], "code": []},
-      "def": "A named block of code that takes values and answers.",
-      "introduced_at": "4.2", "synonyms": [], "depends_on": []
+      "def": "A named block of code that takes values and can answer.",
+      "introduced_at": "4.2", "synonyms": [], "depends_on": [],
+      "note": "def changed by the chapter 4 writer, 2 October 2026: _ready and add_piece (4.2) are functions that answer nothing; return is what makes one answer"
     },
     {
       "id": "parameter", "kind": "concept",
@@ -983,6 +1053,12 @@
       "introduced_at": "4.2", "synonyms": [], "depends_on": ["function"]
     },
     {
+      "id": "inverted", "kind": "godot",
+      "forms": {"text": [], "code": ["inverted"]},
+      "def": "The opposite colour: one minus each number.",
+      "introduced_at": "4.2", "synonyms": [], "depends_on": ["Color"]
+    },
+    {
       "id": "SpotLight3D", "kind": "godot",
       "forms": {"text": [], "code": ["SpotLight3D"]},
       "def": "A node that shines a cone of light.",
@@ -997,10 +1073,11 @@
       "note": "taught by 4.3's idea; chapter 4's code_new does not list it"
     },
     {
-      "id": "lamp", "kind": "supplied",
+      "id": "lamp", "kind": "plain",
       "forms": {"text": ["lamp you can carry"], "code": []},
-      "def": "A pickup with a `SpotLight3D` inside.",
-      "introduced_at": "supplied:4.3", "synonyms": [], "depends_on": ["SpotLight3D"]
+      "def": "Something that gives out light.",
+      "introduced_at": "everyday", "synonyms": [], "depends_on": [],
+      "note": "chapter 4 writer, 2 October 2026: 4.3 adds its three SpotLight3D lamps as nodes and the student's own code moves the blue one to mouse_point(); no section borrows a carried pickup, so the phrase is pinned plain. The sketch's chapter 4 borrowed item for it is stale. Merge of chapters 2 to 5: the def is the everyday sense, as a plain entry pins it; only 4.3's blue lamp follows the mouse, and the sketch's later lamps (a tree of lamps, the IN and OUT lamps) are plain lamps."
     },
     {
       "id": "colour_from", "kind": "name",
@@ -1011,14 +1088,15 @@
     {
       "id": "from_hsv", "kind": "godot",
       "forms": {"text": [], "code": ["from_hsv", "Color.from_hsv"]},
-      "def": "Makes a `Color` from hue, saturation and value.",
+      "def": "Makes a `Color` from hue, saturation and brightness.",
       "introduced_at": "4.5", "synonyms": [], "depends_on": ["Color", "hue", "saturation"]
     },
     {
       "id": "hsv", "kind": "concept",
       "forms": {"text": ["HSV"], "code": []},
-      "def": "A colour as hue, saturation and value.",
-      "introduced_at": "4.5", "synonyms": [], "depends_on": ["hue", "saturation"]
+      "def": "A colour as hue, saturation and brightness.",
+      "introduced_at": "4.5", "synonyms": [], "depends_on": ["hue", "saturation"],
+      "note": "chapter 4 writer, 2 October 2026: brightness, not value, for HSV's third number; value already means what a variable holds (1.8), one word, one meaning"
     },
     {
       "id": "hue", "kind": "concept",
@@ -1046,9 +1124,12 @@
     },
     {
       "id": "band_mesh", "kind": "supplied",
-      "forms": {"text": ["band mesh"], "code": []},
-      "def": "The rainbow's arch of bands; you write the colours.",
-      "introduced_at": "supplied:4.5", "synonyms": [], "depends_on": []
+      "forms": {"text": ["band mesh"], "code": ["band", "band(i, n, colour)"]},
+      "def": "The rainbow's arch of bands: you write their colours.",
+      "introduced_at": "supplied:4.5", "synonyms": [], "depends_on": [],
+      "stub": "func band(i: int, n: int, colour: Color) -> void:\n\tif i < 0 or i >= n:\n\t\tpush_error(\"band(): band %d of %d is not on the arch\" % [i, n])",
+      "host": "$Supplied",
+      "note": "4.5 colours band i of n with $Supplied.band(i, n, colour); the arch's geometry is supplied"
     },
     {
       "id": "ink", "kind": "name",
@@ -1059,8 +1140,9 @@
     {
       "id": "class", "kind": "concept",
       "forms": {"text": ["class", "classes"], "code": []},
-      "def": "A kind of thing you write: data and behaviour.",
-      "introduced_at": "4.7", "synonyms": [], "depends_on": []
+      "def": "A plan you write for things: their data and behaviour.",
+      "introduced_at": "4.7", "synonyms": [], "depends_on": [],
+      "note": "chapter 4 writer, 2 October 2026: 'a kind of thing' trips the hedge rule ('kind of'), in the def and in 4.7's declaring line"
     },
     {
       "id": "object", "kind": "concept",
@@ -1095,32 +1177,34 @@
     {
       "id": "spray", "kind": "name",
       "forms": {"text": [], "code": ["spray"]},
-      "def": "SprayCan's method: paints its colour onto the canvas.",
+      "def": "A `SprayCan` method: paints its colour onto the canvas.",
       "introduced_at": "4.7", "synonyms": [], "depends_on": ["method"]
     },
     {
       "id": "paint_call", "kind": "supplied",
-      "forms": {"text": ["paint-into-image call"], "code": []},
+      "forms": {"text": ["paint-into-image call"], "code": ["paint_at", "paint_at(point, colour)"]},
       "def": "Paints a colour into the canvas picture.",
       "introduced_at": "supplied:4.7", "synonyms": [], "depends_on": [],
       "opened_at": "5.6",
-      "note": "the sketch says images are opened in chapter 5: 5.6 teaches Image"
+      "stub": "func paint_at(point: Vector3, colour: Color) -> void:\n\tpass",
+      "host": "$Supplied",
+      "note": "the sketch says images are opened in chapter 5: 5.6 teaches Image. 4.7's SprayCan.spray() calls canvas.paint_at(point, colour) on $Supplied, which holds the canvas. Named paint_at, not paint: chapter 5 names a material paint (var paint := StandardMaterial3D.new())."
     },
     {
       "id": "point_on_canvas()", "kind": "supplied",
-      "forms": {"text": [], "code": ["point_on_canvas", "point_on_canvas(ray)"]},
+      "forms": {"text": [], "code": ["point_on_canvas", "point_on_canvas(nozzle)"]},
       "def": "The point on the canvas the nozzle aims at.",
       "introduced_at": "supplied:4.7", "synonyms": [], "depends_on": ["point"],
-      "stub": "func point_on_canvas(ray) -> Vector3:\n\treturn Vector3()",
-      "note": "the ray inside is never opened",
+      "stub": "func point_on_canvas(nozzle: Vector3) -> Vector3:\n\treturn Vector3(nozzle.x, nozzle.y, -2)",
+      "note": "the ray inside is never opened; the call takes the nozzle's position (ray is missing in the taxonomy, so the parameter is not named ray)",
       "host": "$Supplied"
     },
     {
       "id": "new", "kind": "gdscript",
       "forms": {"text": [], "code": ["new"]},
-      "def": "Makes an object from a class.",
-      "introduced_at": "4.8", "synonyms": [], "depends_on": ["object", "class"],
-      "note": "4.8 teaches many objects from one class; the sketch never writes .new() itself"
+      "def": "Makes a new one of the kind named before it.",
+      "introduced_at": "4.1", "synonyms": [], "depends_on": [],
+      "note": "4.1 makes each material in code: StandardMaterial3D.new(). 4.7 names the kind a class and the new one an object: SprayCan.new(). Moved from 4.8 by the chapter 4 writer, 2 October 2026; the old def needed class and object, which 4.7 gives."
     },
     {
       "id": "Pane", "kind": "name",
@@ -1129,18 +1213,43 @@
       "introduced_at": "4.8", "synonyms": [], "depends_on": ["class"]
     },
     {
+      "id": "alpha", "kind": "concept",
+      "forms": {"text": ["alpha"], "code": []},
+      "def": "A colour's fourth number: how much it covers.",
+      "introduced_at": "4.8", "synonyms": [], "depends_on": ["Color"]
+    },
+    {
+      "id": "transparency", "kind": "godot",
+      "forms": {"text": [], "code": ["transparency"]},
+      "def": "How a material lets the view behind it through.",
+      "introduced_at": "4.8", "synonyms": [], "depends_on": ["material"]
+    },
+    {
+      "id": "TRANSPARENCY_ALPHA", "kind": "godot",
+      "forms": {"text": [], "code": ["TRANSPARENCY_ALPHA", "BaseMaterial3D.TRANSPARENCY_ALPHA", "BaseMaterial3D"]},
+      "def": "Lets a material's alpha decide how much shows through.",
+      "introduced_at": "4.8", "synonyms": [], "depends_on": ["alpha", "transparency", "material"]
+    },
+    {
       "id": "size", "kind": "godot",
       "forms": {"text": [], "code": ["size"]},
       "def": "How many values an array holds.",
-      "introduced_at": "5.0", "synonyms": [], "depends_on": ["array"],
-      "note": "chapter 5's code_new names it; no section does"
+      "introduced_at": "5.1", "synonyms": [], "depends_on": ["array"],
+      "note": "5.1: for i in steps.size() visits every index; beat % steps.size() wraps the playhead."
+    },
+    {
+      "id": "palette", "kind": "concept",
+      "forms": {"text": ["palette", "palettes"], "code": []},
+      "def": "An array of colours, read by a number.",
+      "introduced_at": "5.2", "synonyms": [], "depends_on": ["array"],
+      "note": "5.2: palette[value] turns a 0 or 1 into a colour; from 5.3 on source holds palette numbers, as the halls do."
     },
     {
       "id": "append", "kind": "godot",
       "forms": {"text": [], "code": ["append"]},
       "def": "Adds a value to the end of an array.",
-      "introduced_at": "5.0", "synonyms": [], "depends_on": ["array"],
-      "note": "chapter 5's code_new names it; no section does"
+      "introduced_at": "5.5", "synonyms": [], "depends_on": ["array"],
+      "note": "5.5: flip() builds each row again from its far end, one append at a time; 5.8 appends bodies."
     },
     {
       "id": "array", "kind": "concept",
@@ -1159,9 +1268,9 @@
       "id": "cell", "kind": "concept",
       "forms": {"text": ["cell", "cells"], "code": []},
       "def": "One place of a grid, holding a state.",
-      "introduced_at": "5.1", "synonyms": [], "depends_on": ["grid"],
+      "introduced_at": "5.3", "synonyms": [], "depends_on": ["grid"],
       "other_senses": [{"words": ["cell", "cells"], "at": ["17.6"], "sense": "a panel of a figure"}],
-      "note": "the sketch says cell from chapter 5 on (three lit cells, the source cell); 13.1 gives a cell its state and returns to it"
+      "note": "5.3: the 4 x 4 source is the first grid of chapter 5, sixteen cells each holding a palette number; 5.1's row of steps calls its boxes squares. 13.1 gives a cell its state and returns to it."
     },
     {
       "id": "index", "kind": "concept",
@@ -1178,9 +1287,12 @@
     },
     {
       "id": "note_per_track", "kind": "supplied",
-      "forms": {"text": ["note per track"], "code": []},
+      "forms": {"text": ["note per track"], "code": ["note", "note()"]},
       "def": "The sound behind each step of the sequencer.",
-      "introduced_at": "supplied:5.1", "synonyms": [], "depends_on": []
+      "introduced_at": "supplied:5.1", "synonyms": [], "depends_on": [],
+      "stub": "func note() -> void:\n\tpass",
+      "host": "$Supplied",
+      "note": "5.1: $Supplied.note() sounds the step the playhead reads; the AudioStreamPlayer inside is never opened."
     },
     {
       "id": "AudioStreamPlayer", "kind": "godot",
@@ -1203,12 +1315,49 @@
       "note": "5.6's title says wrap a room: to dress it"
     },
     {
+      "id": "create_empty", "kind": "godot",
+      "forms": {"text": [], "code": ["create_empty", "Image.create_empty"]},
+      "def": "Makes a blank `Image`, so wide and so high.",
+      "introduced_at": "5.6", "synonyms": [], "depends_on": ["Image"]
+    },
+    {
+      "id": "FORMAT_RGB8", "kind": "godot",
+      "forms": {"text": [], "code": ["FORMAT_RGB8"]},
+      "def": "An `Image` kind: red, green and blue at each place.",
+      "introduced_at": "5.6", "synonyms": [], "depends_on": ["Image", "rgb"]
+    },
+    {
+      "id": "create_from_image", "kind": "godot",
+      "forms": {"text": [], "code": ["create_from_image", "ImageTexture.create_from_image"]},
+      "def": "Makes an `ImageTexture` from an `Image`.",
+      "introduced_at": "5.6", "synonyms": [], "depends_on": ["ImageTexture", "Image"]
+    },
+    {
+      "id": "albedo_texture", "kind": "godot",
+      "forms": {"text": [], "code": ["albedo_texture"]},
+      "def": "The texture a material wears as its colour.",
+      "introduced_at": "5.6", "synonyms": [], "depends_on": ["texture", "material"]
+    },
+    {
+      "id": "texture_filter", "kind": "godot",
+      "forms": {"text": [], "code": ["texture_filter", "TEXTURE_FILTER_NEAREST"]},
+      "def": "How a texture is drawn between its places.",
+      "introduced_at": "5.6", "synonyms": [], "depends_on": ["texture"],
+      "note": "TEXTURE_FILTER_NEAREST is its one value in the course: a 16 x 16 picture on a 16 metre floor stays sixteen sharp squares a side, not a blur."
+    },
+    {
+      "id": "PlaneMesh", "kind": "godot",
+      "forms": {"text": [], "code": ["PlaneMesh"]},
+      "def": "A flat square mesh lying down, 2 metres a side.",
+      "introduced_at": "5.6", "synonyms": [], "depends_on": ["mesh", "metre"]
+    },
+    {
       "id": "pick()", "kind": "supplied",
       "forms": {"text": [], "code": ["pick", "pick()"]},
-      "def": "The floor square under the pointer or the controller.",
-      "introduced_at": "supplied:5.5", "synonyms": [], "depends_on": [],
-      "stub": "func pick() -> Vector2i:\n\treturn Vector2i(0, 0)",
-      "note": "the ray inside is never opened",
+      "def": "The floor square under the mouse, as an array: x, z.",
+      "introduced_at": "supplied:5.6", "synonyms": [], "depends_on": ["array", "x", "z"],
+      "stub": "func pick() -> Array:\n\treturn [10, 1]",
+      "note": "5.6: hover the patterned floor; at[0] % 4 and at[1] % 4 find the cell of source a square reads. An array, not a Vector2i: chapter 5 keeps y for up, so a floor square is x and z, and Vector2i would call z y. The ray inside is never opened.",
       "host": "$Supplied"
     },
     {
@@ -1242,17 +1391,17 @@
       "introduced_at": "5.7", "synonyms": [], "depends_on": []
     },
     {
-      "id": "catwalk_path", "kind": "supplied",
-      "forms": {"text": ["catwalk path"], "code": []},
-      "def": "The path your figures walk along.",
-      "introduced_at": "supplied:5.8", "synonyms": [], "depends_on": []
+      "id": "QuadMesh", "kind": "godot",
+      "forms": {"text": [], "code": ["QuadMesh"]},
+      "def": "A flat square mesh standing up, 1 metre a side.",
+      "introduced_at": "5.7", "synonyms": [], "depends_on": ["mesh", "metre"]
     },
     {
-      "id": "uv_repeat", "kind": "supplied",
-      "forms": {"text": ["UV repeat"], "code": []},
-      "def": "How the hall repeats the pattern on the skirt.",
+      "id": "catwalk_path", "kind": "supplied",
+      "forms": {"text": ["catwalk path"], "code": ["catwalk.tscn"]},
+      "def": "A strip of floor your figures walk along.",
       "introduced_at": "supplied:5.8", "synonyms": [], "depends_on": [],
-      "note": "the course puts an ImageTexture on the skirt instead"
+      "note": "5.8: a supplied scene dropped on the top node, a stage only; the walk itself is the student's code (position.z += delta, turn by turn)."
     },
     {
       "id": "velocity", "kind": "maths",
@@ -2512,10 +2661,10 @@
     },
     {
       "id": "String", "kind": "gdscript",
-      "forms": {"text": ["string", "strings"], "code": ["String", "\"\""]},
+      "forms": {"text": ["string", "strings"], "code": ["String"]},
       "def": "Text as a value: characters in order.",
       "introduced_at": "15.1", "synonyms": [], "depends_on": ["character"],
-      "note": "\"\" stands for a string literal in code: \"count \", \"ui_accept\". The sketch uses action names from 2.6 (Input.is_action_pressed(\"ui_left\")) before 15.1 teaches strings"
+      "note": "2 October 2026: the code form \"\" (a string literal) moved to the entry quotes (2.6), where the action names are first typed in quotes. String teaches text as a value at 15.1."
     },
     {
       "id": "Dictionary", "kind": "gdscript",
@@ -2688,7 +2837,7 @@
       "id": "Look", "kind": "supplied",
       "forms": {"text": [], "code": ["Look"]},
       "def": "The course's palette, sky and light, as one part.",
-      "introduced_at": "supplied:17.1", "synonyms": [], "depends_on": [],
+      "introduced_at": "supplied:17.1", "synonyms": [], "depends_on": ["palette"],
       "note": "part of the base scene since 1.1 (the course look); chapters 17 and 19 borrow it by name"
     },
     {
@@ -2843,11 +2992,11 @@
       "id": "make_a_new_script", "kind": "admin",
       "forms": {"text": ["make a new script", "made a new script", "making a new script"], "code": []},
       "def": "Click Script, at the top. Choose File, then New Script. Type the name and choose Create. Replace the code in it with the code below.",
-      "introduced_at": "18.1",
+      "introduced_at": "4.7",
       "synonyms": ["create a new script", "create a script", "save this script as", "save the script as"],
       "step_phrases": ["New Script", {"phrase": "Ctrl+N", "cues": ["script", "File", ".gd"]}, {"phrase": "save as", "cues": ["script", "File", ".gd"]}, {"phrase": "save the file as", "cues": ["script", "File", ".gd"]}, {"phrase": "save it as", "cues": ["script", "File", ".gd"]}],
       "depends_on": ["script"],
-      "note": "2 October 2026: replaces save this script as. Save As copied the open file, so the new file declared the old class_name until its code was typed (Godot: 'Class Field hides a global script class'), and typing the new code into the old file first let a run save over it. A new script starts empty of classes: Godot fills it with its own few lines, which the last step replaces. The file's name follows the call in code style: 'Make a new script `bell.gd`.' The script is then put on the top node by put a script on a node (1.3). 18.1 is its first need in the chapters written so far; a chapter before 18 that makes a second script defines it there, and 18.1 calls it. Save As wordings ('Save the file as `bell2.gd`') describe getting a script under a new name, so they are its synonyms and step phrases: say 'Make a new script'. File is the menu of the Script screen (the Script button at the top); 'Choose Save As to keep the old scene' is no step of this (the cues: script, File, .gd). The editor steps (Script, File, New Script, the name, Create) are NOT verified in a live editor: the checker cannot click."
+      "note": "2 October 2026: replaces save this script as. Save As copied the open file, so the new file declared the old class_name until its code was typed (Godot: 'Class Field hides a global script class'), and typing the new code into the old file first let a run save over it. A new script starts empty of classes: Godot fills it with its own few lines, which the last step replaces. The file's name follows the call in code style: 'Make a new script `bell.gd`.' The script is then put on the top node by put a script on a node (1.3), or, for a class (4.7, 4.8), made with .new(). 4.7 is its first need: spray_can.gd, the first script that is not the top node's (moved from 18.1 by the chapter 4 writer, as this note foresaw); 18.1 calls it. Save As wordings ('Save the file as `bell2.gd`') describe getting a script under a new name, so they are its synonyms and step phrases: say 'Make a new script'. File is the menu of the Script screen (the Script button at the top); 'Choose Save As to keep the old scene' is no step of this (the cues: script, File, .gd). The editor steps (Script, File, New Script, the name, Create) are NOT verified in a live editor: the checker cannot click."
     },
     {
       "id": "level", "kind": "concept",

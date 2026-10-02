@@ -48,7 +48,7 @@ An entry:
 | `other_senses` | where the sketch uses a form in another sense |
 | `note` | why it stands where it stands |
 | `stub` | for a supplied call: GDScript that stands in for it when code runs |
-| `host` | where the stub lives: `$Supplied` (a node of the base scene) or `res://supplied/x.gd` |
+| `host` | where the stub lives: `$Supplied` (a node of the base scene), `res://supplied/x.gd`, or a supplied scene `res://supplied/x.tscn` |
 | `step_phrases` | an admin's words that would say its steps again; `{"phrase", "cues"}` counts only beside a cue |
 | `calls` | an admin's call templates: `add a {node}` is "Add a `Node3D`" |
 
@@ -224,14 +224,15 @@ Each rule can be switched off for a test: `FT_OFF=admin-again`.
 The switches: `admin-taxonomy`, `admin-order`, `admin-again`, `admin-define`, `admin-signature`, `admin-calls`, `admin-link`.
 `test_check.py` switches each off and proves its planted fault then passes.
 
-The admin entries, 2 October 2026:
+The admin entries, 2 October 2026, after chapters 2 to 5 were merged:
 
-| entry | defined | calls in ch01 and ch18 |
+| entry | defined | calls in chapters 1 to 5 and 18 |
 |---|---|---|
-| *run the project* | 1.1 | 1.1 (once, after its steps), 1.3, 1.6 (twice), 18.1 to 18.8, eight |
-| *add a node* | 1.3 | 1.4, 1.7 (and six in 1.3 itself) |
-| *put a script on a node* | 1.3 | 1.3 (once, after its step), 18.1 to 18.8, eight |
-| *make a new script* | 18.1 | 18.2 to 18.8, seven |
+| *run the project* | 1.1 | every section that runs, 48 in all |
+| *add a node* | 1.3 | 19: six in 1.3 itself, then 1.4, 1.7, 2.1, 2.4, 2.7, 2.8, 3.7, 4.3, 4.4 |
+| *put a script on a node* | 1.3 | 1.3 (once, after its step), 18.1 to 18.8 |
+| *add a scene* | 1.6 | 2.5, 3.4 (twice), 5.8 |
+| *make a new script* | 4.7 | 4.8, 18.1 to 18.8 |
 | *run the scene* | `missing` | none |
 
 *Put a script on a node* is a drop from the FileSystem onto the node: "Put `bell.gd` on the top node."
@@ -243,8 +244,11 @@ Save As copied the open file, so the copy declared the old `class_name` until it
 Godot then said "Class Field hides a global script class".
 Save As wordings ("Save the file as `bell2.gd`") are its synonyms now: say "Make a new script".
 The editor steps of both are not verified in a live editor: the checker cannot click.
-A supplied scene is dropped the same way, once, in 1.6: one inline line, no admin.
-The walker of 2.5 is the second; it makes that drop an admin, defined at 1.6.
+*Add a scene* is the same drop for a supplied scene: "Add `walker.tscn` to the top node."
+Its call names the file, `add {file} to`; the page links "Add".
+Its step phrase *drop* counts only beside a `.tscn`, so a dropped script stays *put a script on a node*.
+1.6 defines it for `counter_panel.tscn`; the walker of 2.5 was the second drop, which made it an admin.
+*Make a new script* moved from 18.1 to 4.7, where `spray_can.gd` is the book's first second script.
 
 *Run the scene* is F6: the open scene alone, where F5 runs the main scene.
 No section defines it yet: every chapter written so far runs the base scene.
@@ -291,7 +295,8 @@ A link's words are no tag: `[run](#x)` reads "run".
 One file per chapter: `doc/book/course/functional/chNN.md`.
 Signatures and code options sit in HTML comments: the student never sees them.
 The Types box is all the student sees of types.
-[`functional/ch01.md`](../functional/ch01.md) and [`functional/ch18.md`](../functional/ch18.md) pass.
+Chapters 1 to 5 and 18 pass ([`functional/ch01.md`](../functional/ch01.md) to `ch05.md`, and `ch18.md`).
+Each chapter's taxonomy patch, and the merge that applied them, is kept in `functional/patches/`.
 
 The parts, in order:
 
@@ -329,11 +334,19 @@ Code options:
 | `fails` | it must fail to parse (a lesson that breaks on purpose) |
 | `skip` | not code Godot sees: a warning |
 | `on=CharacterBody3D` | the script goes on a node of this class, not on the top node |
+| `keep=palette,source,square` | the script also holds these members, from the last earlier example of the chapter that shows them |
 
 A block of statements is wrapped into `func _ready():`.
 A block with `func` or members stays at script level.
 A block with no `extends` takes the last one the book showed.
 None before it is an error.
+
+`keep=` shows a member once and lets later sections keep it.
+The student keeps it in the file and replaces the rest: a line of the section says so.
+"Keep `palette`, `source` and `square()`: replace the rest."
+The checker adds each kept member, as the earlier example shows it, to the section's run.
+A kept name no earlier example defines, one the section shows again, or one no line names, is a `keep` error.
+Chapter 5 keeps its palette, source and `square()` this way from 5.2 on.
 
 One convention for scripts, 2 October 2026.
 Every script goes on the top node of the base scene, a `Node3D`.
@@ -346,6 +359,8 @@ A section whose script goes on another node says so with `on=`.
 A supplied call lives where its `host` says.
 `$Supplied.line(a, b)` reaches the base scene's node `Supplied`.
 `var table := preload("res://supplied/triangle_table.gd")` reaches a supplied script.
+`var cube := preload("res://supplied/cube.tscn")` reaches a supplied scene.
+A scene's stub is the scene's text, `[gd_scene ...`: the checker writes it to its host as it is.
 A bare `line(a, b)` fails in Godot, as it would for the student.
 Every stub notes its calls in `_ft_calls`, so a claim can count them.
 A stub may refuse bad input: `line()` with two equal points is an error.
@@ -477,6 +492,7 @@ The source never types one. No concept or term gets a link.
 | f | `device` | no marker the page does not declare: `enters:`, `from:`, an arrow, `[run]` ... (2b) |
 | — | `types` | the Types box matches the signatures and the taxonomy's defs |
 | — | `number` | a number a run section states is in its code, a printed line or a claim |
+| — | `keep` | a kept member is defined in an earlier example of the chapter, not shown again, and named by a line |
 | g | `code` | each `gdscript` block parses in Godot 4.6 |
 | g | `run` | each block runs headless without an error, and prints what it must |
 | g | `claim` | every claim holds at the end of its run, and every `until` comes true |
@@ -566,6 +582,8 @@ The watch-list is not a lexicon.
 A technical word that is on no list and in no entry still passes.
 Claims prove only what they say: a writer can claim too little.
 A run is finite: an error after the frames, and after any `until`, passes.
+A key is pressed in a claim, never by a hand: `Input.action_press("ui_accept")`, then released.
+`keep=` checks that a line names the kept member, not that the student kept it.
 Each `class_name` is declared once per checked run, so the whole book cannot yet be run as one.
 Code runs in a scratch project, without the repository's autoloads.
 Names are global: a chapter's local may not spell any later element.

@@ -1,0 +1,56 @@
+[
+  {
+    "op": "update",
+    "id": "quotes",
+    "fields": {
+      "note": "2 October 2026: chapter 2's 2.6 types the first string literals, the action names \"ui_left\" and \"ui_right\". Chapter 3's writer first proposed this entry at 3.1; 2.6 types an action name first, so it stands at 2.6 and chapter 3's patch dropped its copy (merge of chapters 2 to 5). The checker counts every string literal as the entry with the code form \"\"; String (15.1) teaches text as a value."
+    },
+    "why": "Merge: the note named an op chapter 3's patch no longer holds."
+  },
+  {
+    "op": "update",
+    "id": "cell_at()",
+    "fields": {
+      "note": "2 October 2026, chapter 3: moved from 3.6 to 3.8, the first section that changes tiles after they are made (the clock asks every tile again each beat). Opened at 5.3, when arrays arrive. The stub finds the top node's last child standing at x and z, so the floor of 3.8 (tiles at whole metres) answers it; chapter 4 borrows it for the floor cubes of 4.6. Merge of chapters 2 to 5: chapters 3 and 4 both patched the stub, word for word the same; one stub serves 3.8 and 4.6, and chapter 4's op changed nothing."
+    },
+    "why": "Merge: two patches touched this entry; record that they agree."
+  },
+  {
+    "op": "update",
+    "id": "counter_panel",
+    "fields": {
+      "note": "2 October 2026: a supplied scene, counter_panel.tscn, whose top node is the Label3D named Counter. 1.6 adds it with add a scene, the admin 1.6 defines; 2.5 calls it again for walker.tscn, 3.4 for walker.tscn and flight_region.tscn, 5.8 for catwalk.tscn. NOT verified in a live editor: the checker builds the Label3D itself (nodes=Counter:Label3D)."
+    },
+    "why": "Merge: the note said the drop was no admin; chapter 2's patch made it one (add_a_scene, 1.6)."
+  },
+  {
+    "op": "update",
+    "id": "lamp",
+    "fields": {
+      "def": "Something that gives out light.",
+      "note": "chapter 4 writer, 2 October 2026: 4.3 adds its three SpotLight3D lamps as nodes and the student's own code moves the blue one to mouse_point(); no section borrows a carried pickup, so the phrase is pinned plain. The sketch's chapter 4 borrowed item for it is stale. Merge of chapters 2 to 5: the def is the everyday sense, as a plain entry pins it; only 4.3's blue lamp follows the mouse, and the sketch's later lamps (a tree of lamps, the IN and OUT lamps) are plain lamps."
+    },
+    "why": "Merge: chapter 4's def ('A lamp you move: here, by the mouse.') was true of one lamp in 4.3; a plain entry pins the everyday word."
+  },
+  {
+    "op": "delete",
+    "id": "uv_repeat",
+    "why": "Merge: chapter 5's patch made it a missing concept because 5.8 dresses the skirts with 5.6's ImageTexture and borrows nothing. Its only use was chapter 5's borrowed item in sketch.json, which named a part the course no longer supplies; that item is removed (the sketch's notes_for_palle already say the course uses Image.set_pixel where the halls use shaders). Nothing else uses it, so it is deleted, as the chapter 5 writer asked."
+  },
+  {
+    "op": "update",
+    "id": "walker",
+    "fields": {
+      "note": "first named at 2.5; chapters 17 to 20 borrow it again. Merge of chapters 2 to 5 (2 October 2026): the walker takes WASD only. 2.6 gives the arrows to the student's own code (ui_left, ui_right) while the walker stands in the scene; kit-base's move_left and move_right also hold the arrow keys, so a course walker built on them moves with the cube."
+    },
+    "why": "Merge: chapter 2's writer found that kit-base steers the walker with the arrows too; the def already says WASD, so the supplied part must keep to it."
+  },
+  {
+    "op": "update",
+    "id": "base_scene",
+    "fields": {
+      "note": "the course look (palette, sky, light) comes with it; 17.1 and 19.x borrow the Look by name. Merge of chapters 2 to 5 (2 October 2026): its Input Map leaves the arrows (ui_left, ui_right: 2.6) and Space (ui_accept: 2.x, 4.6, 4.7, 18.8) to the student's code. kit-base binds the arrows to move_left and move_right and Space to pause; the course project must not, or one key does two things."
+    },
+    "why": "Merge: the chapters ask the arrows and Space through Godot's default ui_ actions; the supplied scene must leave those keys free."
+  }
+]
