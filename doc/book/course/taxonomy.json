@@ -352,15 +352,15 @@
       "note": "The steps are admin. Which node, its name and what it holds are the lesson, and stay in the line that calls it: 'Add a `Node3D` named `Here`: a position, nothing else.' A {node} slot holds a node class, an entry whose depends_on reaches node. A call is an instruction to the student: 'code can add a `MeshInstance3D`' and 'add twelve nodes by code' teach add_child and are no call. 'Create a `Node3D`', 'Make a ...' and 'Put a ...' are other wordings of the call (synonym templates): say 'Add a `Node3D`'. + and Ctrl+A count only beside the scene tree or a node, so 'Press + to zoom in' is no step of it. The first step is there because + adds under the selected node: 'Under `Solid`, add a ...' needs Solid selected."
     },
     {
-      "id": "put_a_script_on_a_node", "kind": "admin",
-      "forms": {"text": ["put a script on a node", "putting a script on a node"], "code": []},
+      "id": "attach_a_script", "kind": "admin",
+      "forms": {"text": ["attach a script", "attached a script", "attaching a script"], "code": []},
       "def": "Drop it from the FileSystem onto the node.",
       "introduced_at": "1.3",
-      "synonyms": ["attach {file} to", "attach the supplied {file} to", "attach {file} on"],
+      "synonyms": ["put a script on a node", "put {file} on", "put the supplied {file} on"],
       "step_phrases": [{"phrase": "drop", "cues": [".gd"]}, {"phrase": "Quick Load", "cues": ["script", ".gd"]}],
-      "calls": ["put {file} on", "put the supplied {file} on"],
+      "calls": ["attach {file} to", "attach the supplied {file} to"],
       "depends_on": ["script", "FileSystem", "node"],
-      "note": "2 October 2026: one convention for scripts. Every chapter script extends Node3D and goes on the top node of the base scene, so $Supplied resolves; a body a script shows is made in code, a child (MeshInstance3D.new(), add_child). 1.3 is its first need: the supplied contact_probe.gd goes on a new Node3D. ch18 calls it for each new script: 'Put `bell.gd` on the top node.' The call names the file: 'put {file} on'; the link covers 'Put'. 'Attach `x.gd` to ...' is another wording of the call. The word is drop, not drag: drag is the force of 7.6, one word, one meaning. The editor step is NOT verified in a live editor (the checker cannot click): Godot 4's scene tree takes a script dropped on a node and replaces the node's script, as far as we know. A script that extends a class the node is not (MeshInstance3D on a Node3D) is refused there: check.py's top-node rule runs every script as the top node and fails it."
+      "note": "Godot's own term (the Attach Script menu item; the docs say attach a script to a node). Palle, 2 October 2026, corrected 'Put a script on the root node' as the wrong kind of language: the admin was 'put a script on a node' and made 'attach' a forbidden synonym; now attach is the call and 'put ... on' is forbidden. Every chapter script extends Node3D and is attached to the root node of the base scene, so $Supplied resolves. 1.3 is its first need (the supplied contact_probe.gd); ch18 calls it for each script: 'Attach `bell.gd` to the root node.' The editor step is NOT verified in a live editor (the checker cannot click)."
     },
     {
       "id": "primitive", "kind": "concept",
@@ -502,14 +502,14 @@
       "step_phrases": [{"phrase": "drop", "cues": [".tscn"]}],
       "calls": ["add {file} to", "add the supplied {file} to"],
       "depends_on": ["scene", "FileSystem", "node"],
-      "note": "2 October 2026, chapter 2: FUNCTIONAL_TEXT 2a said the walker of 2.5 is the second supplied scene dropped, which makes that drop an admin, defined at 1.6. 1.6 defines it for counter_panel.tscn; 2.5 calls it for walker.tscn: 'Add `walker.tscn` to the top node.' Its call is 'add {file} to', so it never collides with put a script on a node ('put {file} on'). Its step phrase 'drop' counts only beside a .tscn, so a script dropped (`bell.gd`) stays put a script on a node; no 'drop {file} onto' synonym, since {file} takes a .gd too and the longer match would win. The editor step is NOT verified in a live editor."
+      "note": "2 October 2026, chapter 2: FUNCTIONAL_TEXT 2a said the walker of 2.5 is the second supplied scene dropped, which makes that drop an admin, defined at 1.6. 1.6 defines it for counter_panel.tscn; 2.5 calls it for walker.tscn: 'Add `walker.tscn` to the root node.' Its call is 'add {file} to', so it never collides with put a script on a node ('put {file} on'). Its step phrase 'drop' counts only beside a .tscn, so a script dropped (`bell.gd`) stays put a script on a node; no 'drop {file} onto' synonym, since {file} takes a .gd too and the longer match would win. The editor step is NOT verified in a live editor."
     },
     {
       "id": "counter_panel", "kind": "supplied",
       "forms": {"text": ["counter panel"], "code": ["counter_panel.tscn"]},
       "def": "A `Label3D` on a stand, named Counter.",
       "introduced_at": "supplied:1.6", "synonyms": [], "depends_on": ["Label3D"],
-      "note": "2 October 2026: a supplied scene, counter_panel.tscn, whose top node is the Label3D named Counter. 1.6 adds it with add a scene, the admin 1.6 defines; 2.5 calls it again for walker.tscn, 3.4 for walker.tscn and flight_region.tscn, 5.8 for catwalk.tscn. NOT verified in a live editor: the checker builds the Label3D itself (nodes=Counter:Label3D)."
+      "note": "2 October 2026: a supplied scene, counter_panel.tscn, whose root node is the Label3D named Counter. 1.6 adds it with add a scene, the admin 1.6 defines; 2.5 calls it again for walker.tscn, 3.4 for walker.tscn and flight_region.tscn, 5.8 for catwalk.tscn. NOT verified in a live editor: the checker builds the Label3D itself (nodes=Counter:Label3D)."
     },
     {
       "id": "mouse_point()", "kind": "supplied",
@@ -937,7 +937,7 @@
       "forms": {"text": ["flight region"], "code": ["flight_region.tscn"]},
       "def": "Lets the walker fly inside the lattice.",
       "introduced_at": "supplied:3.4", "synonyms": [], "depends_on": ["walker", "lattice"],
-      "note": "2 October 2026, chapter 3: a supplied scene, added to the top node in 3.4 (add a scene, 1.6) beside walker.tscn. Inside it the walker flies, Space climbing and Shift sinking; it also shows the collection record."
+      "note": "2 October 2026, chapter 3: a supplied scene, added to the root node in 3.4 (add a scene, 1.6) beside walker.tscn. Inside it the walker flies, Space climbing and Shift sinking; it also shows the collection record."
     },
     {
       "id": "%", "kind": "gdscript",
@@ -981,7 +981,7 @@
       "introduced_at": "supplied:3.6", "synonyms": [], "depends_on": ["triangle()"],
       "stub": "[gd_scene format=3]\n\n[sub_resource type=\"StandardMaterial3D\" id=\"light\"]\nalbedo_color = Color(0.95, 0.93, 0.88, 1)\n\n[sub_resource type=\"PlaneMesh\" id=\"square\"]\nmaterial = SubResource(\"light\")\nsize = Vector2(1, 1)\n\n[node name=\"DiagonalTile\" type=\"Node3D\"]\n\n[node name=\"Square\" type=\"MeshInstance3D\" parent=\".\"]\nmesh = SubResource(\"square\")\n",
       "host": "res://supplied/diagonal_tile.tscn",
-      "note": "2 October 2026, chapter 3: a supplied scene, diagonal_tile.tscn, that 3.6 and 3.7 preload and turn by address; its top node is a Node3D, so a turn or a flip applies to the whole tile. The stub is a stand-in, an off-white square (check.py writes it to res://supplied/diagonal_tile.tscn); the real part draws its near-black half with triangle(a, b, c)."
+      "note": "2 October 2026, chapter 3: a supplied scene, diagonal_tile.tscn, that 3.6 and 3.7 preload and turn by address; its root node is a Node3D, so a turn or a flip applies to the whole tile. The stub is a stand-in, an off-white square (check.py writes it to res://supplied/diagonal_tile.tscn); the real part draws its near-black half with triangle(a, b, c)."
     },
     {
       "id": "cell_at()", "kind": "supplied",
@@ -990,7 +990,7 @@
       "introduced_at": "supplied:3.8", "synonyms": [], "depends_on": ["address"],
       "opened_at": "5.3",
       "stub": "func cell_at(x: int, z: int) -> Node3D:\n\tvar found: Node3D = null\n\tfor c in get_parent().get_children():\n\t\tif c is Node3D and is_equal_approx(c.position.x, x) and is_equal_approx(c.position.z, z):\n\t\t\tfound = c\n\treturn found",
-      "note": "2 October 2026, chapter 3: moved from 3.6 to 3.8, the first section that changes tiles after they are made (the clock asks every tile again each beat). Opened at 5.3, when arrays arrive. The stub finds the top node's last child standing at x and z, so the floor of 3.8 (tiles at whole metres) answers it; chapter 4 borrows it for the floor cubes of 4.6. Merge of chapters 2 to 5: chapters 3 and 4 both patched the stub, word for word the same; one stub serves 3.8 and 4.6, and chapter 4's op changed nothing. Student readings: 3.8 now says it looks for the tile standing at x, z (a student asked where the tiles were kept), so 5.3's 'looked for' has something to stand on.",
+      "note": "2 October 2026, chapter 3: moved from 3.6 to 3.8, the first section that changes tiles after they are made (the clock asks every tile again each beat). Opened at 5.3, when arrays arrive. The stub finds the root node's last child standing at x and z, so the floor of 3.8 (tiles at whole metres) answers it; chapter 4 borrows it for the floor cubes of 4.6. Merge of chapters 2 to 5: chapters 3 and 4 both patched the stub, word for word the same; one stub serves 3.8 and 4.6, and chapter 4's op changed nothing. Student readings: 3.8 now says it looks for the tile standing at x, z (a student asked where the tiles were kept), so 5.3's 'looked for' has something to stand on.",
       "host": "$Supplied"
     },
     {
@@ -1433,7 +1433,7 @@
       "forms": {"text": ["catwalk path"], "code": ["catwalk.tscn"]},
       "def": "A strip of floor your figures walk along.",
       "introduced_at": "supplied:5.8", "synonyms": [], "depends_on": [],
-      "note": "5.8: a supplied scene dropped on the top node, a stage only; the walk itself is the student's code (position.z += delta, turn by turn)."
+      "note": "5.8: a supplied scene dropped on the root node, a stage only; the walk itself is the student's code (position.z += delta, turn by turn)."
     },
     {
       "id": "velocity", "kind": "maths",
@@ -3020,16 +3020,7 @@
       "def": "Three counts held as one value, as an address.",
       "introduced_at": "18.1", "synonyms": [], "depends_on": ["address"]
     },
-    {
-      "id": "make_a_new_script", "kind": "admin",
-      "forms": {"text": ["make a new script", "made a new script", "making a new script"], "code": []},
-      "def": "Click Script, at the top. Choose File, then New Script. Type the name and choose Create. Replace its code with the code below, then press Ctrl+S.",
-      "introduced_at": "4.7",
-      "synonyms": ["create a new script", "create a script", "save this script as", "save the script as"],
-      "step_phrases": ["New Script", {"phrase": "Ctrl+N", "cues": ["script", "File", ".gd"]}, {"phrase": "save as", "cues": ["script", "File", ".gd"]}, {"phrase": "save the file as", "cues": ["script", "File", ".gd"]}, {"phrase": "save it as", "cues": ["script", "File", ".gd"]}],
-      "depends_on": ["script"],
-      "note": "2 October 2026: replaces save this script as. Save As copied the open file, so the new file declared the old class_name until its code was typed (Godot: 'Class Field hides a global script class'), and typing the new code into the old file first let a run save over it. A new script starts empty of classes: Godot fills it with its own few lines, which the last step replaces. The file's name follows the call in code style: 'Make a new script `bell.gd`.' The script is then put on the top node by put a script on a node (1.3), or, for a class (4.7, 4.8), made with .new(). 4.7 is its first need: spray_can.gd, the first script that is not the top node's (moved from 18.1 by the chapter 4 writer, as this note foresaw); 18.1 calls it. Save As wordings ('Save the file as `bell2.gd`') describe getting a script under a new name, so they are its synonyms and step phrases: say 'Make a new script'. File is the menu of the Script screen (the Script button at the top); 'Choose Save As to keep the old scene' is no step of this (the cues: script, File, .gd). Student reading of chapter 4: SprayCan.new() in the top node's script shows as an error until spray_can.gd is saved, since Godot learns a class_name when its file is saved; the last step now ends 'then press Ctrl+S'. The editor steps (Script, File, New Script, the name, Create, Ctrl+S) are NOT verified in a live editor: the checker cannot click."
-    },
+    {"id": "create_a_new_script", "kind": "admin", "forms": {"text": ["create a new script", "created a new script", "creating a new script"], "code": []}, "def": "Click Script, at the top. Choose File, then New Script. Type the name and choose Create. Replace its code with the code below, then press Ctrl+S.", "introduced_at": "4.7", "synonyms": ["make a new script", "made a new script", "making a new script", "save this script as", "save the script as"], "step_phrases": ["New Script", {"phrase": "Ctrl+N", "cues": ["script", "File", ".gd"]}, {"phrase": "save as", "cues": ["script", "File", ".gd"]}, {"phrase": "save the file as", "cues": ["script", "File", ".gd"]}, {"phrase": "save it as", "cues": ["script", "File", ".gd"]}], "depends_on": ["script"], "note": "Godot's own words (Script editor: File, New Script; the dialog's button is Create). Palle, 2 October 2026: the admin was 'make a new script' and made 'create a new script' a forbidden synonym; swapped back. 2 October 2026: replaces save this script as. Save As copied the open file, so the new file declared the old class_name until its code was typed (Godot: 'Class Field hides a global script class'), and typing the new code into the old file first let a run save over it. A new script starts empty of classes: Godot fills it with its own few lines, which the last step replaces. The file's name follows the call in code style: 'Make a new script `bell.gd`.' The script is then put on the root node by put a script on a node (1.3), or, for a class (4.7, 4.8), made with .new(). 4.7 is its first need: spray_can.gd, the first script that is not the root node's (moved from 18.1 by the chapter 4 writer, as this note foresaw); 18.1 calls it. Save As wordings ('Save the file as `bell2.gd`') describe getting a script under a new name, so they are its synonyms and step phrases: say 'Make a new script'. File is the menu of the Script screen (the Script button at the top); 'Choose Save As to keep the old scene' is no step of this (the cues: script, File, .gd). Student reading of chapter 4: SprayCan.new() in the root node's script shows as an error until spray_can.gd is saved, since Godot learns a class_name when its file is saved; the last step now ends 'then press Ctrl+S'. The editor steps (Script, File, New Script, the name, Create, Ctrl+S) are NOT verified in a live editor: the checker cannot click."},
     {
       "id": "level", "kind": "concept",
       "forms": {"text": ["level", "levels"], "code": []},

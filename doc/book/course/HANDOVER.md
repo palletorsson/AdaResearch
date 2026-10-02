@@ -141,7 +141,7 @@ Times `delta`: per second, at any frame rate.
 - `needs`: entries the section uses (all introduced earlier). `gives`: entries it introduces (each needs a defining line in the text). `admin`: admin procedures it defines. `borrows`: supplied parts it hands out.
 - The form: plain lead line, numbered steps (doing), code, a bullet tree (understanding: a child explains, qualifies, follows from or restores its parent; at most two levels), plain point line.
 - The page's devices are listed in FUNCTIONAL_TEXT 2b. Nothing else (no arrows, no `enters:`, no `from:`, no provenance tags: the checker refuses them).
-- Every chapter script `extends Node3D` and sits on the top node of the base scene (the checker's `top` rule).
+- Every chapter script `extends Node3D` and sits on the root node of the base scene (the checker's `top` rule).
 
 ### Commands (run from `doc/book/course/`)
 
@@ -186,7 +186,7 @@ Today the chapters do both:
 | 5 | 0 | 21 | 1 |
 | 18 | 0 | 7 | 1 |
 
-This session recommended **code**: it is a coding course; the checker can run code but cannot click the editor; loops (chapter 3 on) need code; Ada's own artifacts are built in code in `_ready()`. The editor would keep opening the base scene, putting the script on the top node, running, and looking. Chapter 1 would say it once: "In this course, code makes the bodies. The editor runs them and shows you what code made."
+This session recommended **code**: it is a coding course; the checker can run code but cannot click the editor; loops (chapter 3 on) need code; Ada's own artifacts are built in code in `_ready()`. The editor would keep opening the base scene, putting the script on the root node, running, and looking. Chapter 1 would say it once: "In this course, code makes the bodies. The editor runs them and shows you what code made."
 **Palle did not answer.** Ask him before changing anything. If he says code: chapters 1 to 3 change (`.new()` and `add_child` move into chapter 1 in the taxonomy; chapter 3's scene files become bodies made in a loop; chapter 4 may name the repeated making as a function that returns a body). If he says editor: write the rule into chapter 1 and leave chapters 4, 5 and 18 as code with one sentence on why.
 
 ### 6.2 Type highlighting (asked, not built)
@@ -247,7 +247,7 @@ Ada repo (`palm-scanner-door-entry`):
 | `2161e5ab7` | the docs site |
 | `9f7cddf35` | cellular kit: the edge walker hangs on row 9's edge, it does not stand on row 8 at 1.46 m |
 | `05f13cf7e` | specs amended from round two |
-| `ee8602cb1` | one convention for scripts (top node, extends Node3D); admin "make a new script", "put a script on a node"; the device rule |
+| `ee8602cb1` | one convention for scripts (root node, extends Node3D); admin "make a new script", "put a script on a node"; the device rule |
 | `9099afac2` | chapters 2 to 5 written, their taxonomy patches merged |
 | `720bbf194` | chapters 2 to 5 fixed after four student readings |
 | `6b5b6f6d1` | lines in a tree |

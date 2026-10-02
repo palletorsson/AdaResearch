@@ -114,7 +114,7 @@ Everyday words need no listing.
 Names the code declares are its own: `count`, `gap`, `$Ball`.
 They stay in their chapter, like a module's private names.
 A declared name may not spell a later element: `var velocity` in chapter 1 is an error.
-A file the chapter makes is its own: "Make a new script `cup.gd`."
+A file the chapter makes is its own: "Create a new script `cup.gd`."
 A name used across chapters is an entry.
 
 ## 2a Admin is said once
@@ -173,7 +173,7 @@ borrows: base_scene
 If Godot asks for a main scene, choose Select Current.
 ```
 
-An argument in code style may stand between the name and the colon: "**Make a new script** `field.gd`: click Script, at the top."
+An argument in code style may stand between the name and the colon: "**Create a new script** `field.gd`: click Script, at the top."
 After that the text says only the name, as a step line: "Run the project."
 A call may carry what follows: "Run the project: the number climbs."
 A section that calls it lists it in `needs`.
@@ -230,32 +230,32 @@ The admin entries, 2 October 2026, after the student readings of chapters 2 to 5
 |---|---|---|
 | *run the project* | 1.1 | every section that runs, 48 in all |
 | *add a node* | 1.3 | 19: six in 1.3 itself, then 1.4, 1.7, 2.1, 2.4, 2.7, 2.8, 3.7, 4.3, 4.4 |
-| *put a script on a node* | 1.3 | 1.3 (once, after its step), 18.1 to 18.8 |
+| *attach a script* | 1.3 | 1.3 (once, after its step), 18.1 to 18.8 |
 | *add a scene* | 1.6 | 2.5, 3.4 (twice), 5.8 |
 | *delete a node* | 2.1 | 2.1 (once, after its step), 2.7, 2.8, 3.1, 4.1, 4.4, 4.5, 4.8, 5.1 |
-| *make a new script* | 4.7 | 4.8, 18.1 to 18.8 |
+| *create a new script* | 4.7 | 4.8, 18.1 to 18.8 |
 | *run the scene* | `missing` | none |
 
 *Delete a node* opens every chapter from 2 on: "Delete every node you added: keep the base scene's own."
 Four student readers stalled on the same thing: old bodies from the last section or chapter stood on the new ones.
 Its text form *delete every node* makes that line a call; `delete {code}` finds "Delete `Room`."
 So a line that deletes code never says "Delete `x`": "Take `flip()` out of `_ready`".
-*Make a new script* now ends "then press Ctrl+S": Godot learns a `class_name` when its file is saved.
+*Create a new script* now ends "then press Ctrl+S": Godot learns a `class_name` when its file is saved.
 
-*Put a script on a node* is a drop from the FileSystem onto the node: "Put `bell.gd` on the top node."
+*Attach a script* is a drop from the FileSystem onto the node: "Attach `bell.gd` to the root node."
 Its call names the file, `put {file} on`; the page links "Put".
 The word is drop, not drag: *drag* is the force of 7.6.
-*Make a new script* makes the file new: "Make a new script `bell.gd`."
+*Create a new script* makes the file new: "Create a new script `bell.gd`."
 It replaced *save this script as* on 2 October 2026.
 Save As copied the open file, so the copy declared the old `class_name` until its code was typed.
 Godot then said "Class Field hides a global script class".
 Save As wordings ("Save the file as `bell2.gd`") are its synonyms now: say "Make a new script".
 The editor steps of both are not verified in a live editor: the checker cannot click.
-*Add a scene* is the same drop for a supplied scene: "Add `walker.tscn` to the top node."
+*Add a scene* is the same drop for a supplied scene: "Add `walker.tscn` to the root node."
 Its call names the file, `add {file} to`; the page links "Add".
-Its step phrase *drop* counts only beside a `.tscn`, so a dropped script stays *put a script on a node*.
+Its step phrase *drop* counts only beside a `.tscn`, so a dropped script stays *attach a script*.
 1.6 defines it for `counter_panel.tscn`; the walker of 2.5 was the second drop, which made it an admin.
-*Make a new script* moved from 18.1 to 4.7, where `spray_can.gd` is the book's first second script.
+*Create a new script* moved from 18.1 to 4.7, where `spray_can.gd` is the book's first second script.
 
 *Run the scene* is F6: the open scene alone, where F5 runs the main scene.
 No section defines it yet: every chapter written so far runs the base scene.
@@ -290,7 +290,7 @@ A step is an instruction: "2. Add a `MeshInstance3D` named `Cube` with a `BoxMes
 Two or more doing lines in a row are numbered.
 A lone doing line stays plain, unless it has children: "1." promises a "2.".
 The run line is one: plain, right under the code, what it shows after its colon.
-Where the script goes on a node after the code, the run is the last numbered step: "1. Put `field.gd` on the top node." "2. Run the project: 1331 dots."
+Where the script goes on a node after the code, the run is the last numbered step: "1. Attach `field.gd` to the root node." "2. Run the project: 1331 dots."
 A bullet is a claim, and its children explain, qualify or follow from it.
 An experiment is a bullet, its last child `Restore:`.
 Two levels at most: a bullet and its children, or a step and its children.
@@ -401,7 +401,7 @@ Code options:
 | `parse` | parse it, never run it: a warning, since nothing it shows is checked |
 | `fails` | it must fail to parse (a lesson that breaks on purpose) |
 | `skip` | not code Godot sees: a warning |
-| `on=CharacterBody3D` | the script goes on a node of this class, not on the top node |
+| `on=CharacterBody3D` | the script goes on a node of this class, not on the root node |
 | `keep=palette,source,square` | the script also holds these members, from the last earlier example of the chapter that shows them |
 
 A block of statements is wrapped into `func _ready():`.
@@ -417,11 +417,11 @@ A kept name no earlier example defines, one the section shows again, or one no l
 Chapter 5 keeps its palette, source and `square()` this way from 5.2 on.
 
 One convention for scripts, 2 October 2026.
-Every script goes on the top node of the base scene, a `Node3D`.
+Every script goes on the root node of the base scene, a `Node3D`.
 There `$Supplied` resolves, and every example runs where the last one ran.
 A script extends `Node3D`, or a class whose chain reaches it: `Bell` extends `Field` extends `Node3D`.
 A body the script shows is made in code, a child: `MeshInstance3D.new()`, then `add_child()`.
-The checker runs each script as the top node.
+The checker runs each script as the root node.
 A script for another node, `extends MeshInstance3D`, is a `top` error: Godot refuses it there.
 A section whose script goes on another node says so with `on=`.
 A supplied call lives where its `host` says.
@@ -447,7 +447,7 @@ Chapter 1's section 1.3, as the file has it.
 <!-- section 1.3
 needs: position, point, scene_tree, node, editor, Node3D, supplied, func, _ready, $, =, Vector3, run_the_project, FileSystem
 gives: mesh, shape, body, Inspector, MeshInstance3D, SphereMesh, StaticBody3D, CollisionShape3D, SphereShape3D
-admin: add_a_node, put_a_script_on_a_node
+admin: add_a_node, attach_a_script
 borrows: feeler
 -->
 ## 1.3 A position needs a body
@@ -462,7 +462,7 @@ Press + above the scene tree.
 Choose its kind, then Create.
 Double-click the new node to name it.
 
-Build three stations in a row under the top node.
+Build three stations in a row under the root node.
 1. Add a `Node3D` named `Here`: a position, nothing else.
 2. Add a `MeshInstance3D` and name it `Seen`.
 3. In the Inspector, give `Seen` a `SphereMesh`.
@@ -471,11 +471,11 @@ Build three stations in a row under the top node.
    - `StaticBody3D` is Godot's node for a body that stays put.
 5. Under `Solid`, add a `MeshInstance3D` with a `SphereMesh`.
 6. Under `Solid`, add a `CollisionShape3D` with a `SphereShape3D`.
-7. Under the top node, add one more `Node3D`.
+7. Under the root node, add one more `Node3D`.
 
-**Put a script on a node**: drop it from the FileSystem onto the node.
+**Attach a script**: drop it from the FileSystem onto the node.
 
-8. Put the supplied `contact_probe.gd` on the new `Node3D`.
+8. Attach the supplied `contact_probe.gd` to the new `Node3D`.
    - It is the feeler, a cyan rod that moves.
 
 **Example 1.1: three stations**
@@ -512,7 +512,7 @@ Section 2.1 is shown whole in SHORT_SPEAK.md, "Lines in a tree".
 In 2.5 a step has children, three spaces in:
 
 ```markdown
-1. Add `walker.tscn` to the top node.
+1. Add `walker.tscn` to the root node.
    - It is the walker, a node named `Walker`.
    - W, A, S and D steer it.
 ```
@@ -588,7 +588,7 @@ The source never types one. No concept or term gets a link.
 | g | `code` | each `gdscript` block parses in Godot 4.6 |
 | g | `run` | each block runs headless without an error, and prints what it must |
 | g | `claim` | every claim holds at the end of its run, and every `until` comes true |
-| g | `top` | each run block's script is one the top node, a `Node3D`, can hold (or the node `on=` names) |
+| g | `top` | each run block's script is one the root node, a `Node3D`, can hold (or the node `on=` names) |
 
 Inline code and fenced code are always technical.
 An image's alt text, a link's title and an HTML title are read: the reader sees them.

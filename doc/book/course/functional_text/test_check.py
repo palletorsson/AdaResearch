@@ -1671,19 +1671,19 @@ class TestAdmin(Base):
         with open(REAL_TAXONOMY, encoding="utf-8") as f:
             entries = {e["id"]: e for e in json.load(f)["entries"]}
         self.assertNotIn("save_this_script_as", entries)
-        make, put = entries["make_a_new_script"], entries["put_a_script_on_a_node"]
+        make, put = entries["create_a_new_script"], entries["attach_a_script"]
         scene = entries["add_a_scene"]
         self.assertEqual((make["kind"], make["forms"]["text"][0], make["introduced_at"]),
-                         ("admin", "make a new script", "4.7"))
+                         ("admin", "create a new script", "4.7"))
         self.assertEqual((scene["kind"], scene["forms"]["text"][0], scene["introduced_at"]),
                          ("admin", "add a scene", "1.6"))
         self.assertIn("FileSystem", scene["def"])
         self.assertIn("add {file} to", scene["calls"])
         self.assertEqual((put["kind"], put["forms"]["text"][0], put["introduced_at"]),
-                         ("admin", "put a script on a node", "1.3"))
+                         ("admin", "attach a script", "1.3"))
         self.assertIn("New Script", make["def"])
         self.assertIn("FileSystem", put["def"])
-        self.assertIn("put {file} on", put["calls"])
+        self.assertIn("attach {file} to", put["calls"])
         self.assertEqual(entries["FileSystem"]["introduced_at"], "1.1")
         for e in (make, put, scene):
             self.assertIn("NOT verified in a live editor", e["note"], e["id"])
@@ -1910,17 +1910,17 @@ class TestAdminRound2(Base):
             "Create a `Node3D`.": "add_a_node",
             "Make a `MeshInstance3D` named `Dot` with a small `SphereMesh`.": "add_a_node",
             # Save As was the old way to a new script file: its wordings say make a new script
-            "Choose File, then Save as, and type `bell2.gd`.": "make_a_new_script",
-            "Save the file as `bell2.gd`.": "make_a_new_script",
-            "Save this script as `bell2.gd`.": "make_a_new_script",
-            "Create a new script `bell2.gd`.": "make_a_new_script",
-            "Choose File, then New Script.": "make_a_new_script",
-            "Attach `bell.gd` to the top node.": "put_a_script_on_a_node",
-            "Attach the supplied `contact_probe.gd` to it.": "put_a_script_on_a_node",
-            "Drop `bell.gd` onto the top node.": "put_a_script_on_a_node",
+            "Choose File, then Save as, and type `bell2.gd`.": "create_a_new_script",
+            "Save the file as `bell2.gd`.": "create_a_new_script",
+            "Save this script as `bell2.gd`.": "create_a_new_script",
+            "Make a new script `bell2.gd`.": "create_a_new_script",
+            "Choose File, then New Script.": "create_a_new_script",
+            "Put `bell.gd` on the root node.": "attach_a_script",
+            "Put the supplied `contact_probe.gd` on it.": "attach_a_script",
+            "Drop `bell.gd` onto the root node.": "attach_a_script",
             # a supplied scene dropped is add a scene (1.6): the walker of 2.5 made it an admin
-            "Drop `counter_panel.tscn` from the FileSystem onto the top node.": "add_a_scene",
-            "Instance `walker.tscn` under the top node.": "add_a_scene",
+            "Drop `counter_panel.tscn` from the FileSystem onto the root node.": "add_a_scene",
+            "Instance `walker.tscn` under the root node.": "add_a_scene",
         }
         for line, eid in bites.items():
             with self.subTest(line=line):
@@ -1940,13 +1940,13 @@ class TestAdminRound2(Base):
             "The top right of the Inspector holds the mesh.",
             "Code can add a `MeshInstance3D` too, with `add_child()`.",
             "Godot fills the new script with some code.",
-            "Right-click the top node and choose Attach Script.",
+            "Right-click the root node and choose Attach Script.",
         ]
         for line in quiet:
             with self.subTest(line=line):
                 self.assertEqual(tax.admin_hits(line), [])
         # a script dropped is no scene added: the step phrase drop counts beside a .tscn only
-        self.assertNotIn("add_a_scene", [h[3].id for h in tax.admin_hits("Drop `bell.gd` onto the top node.")])
+        self.assertNotIn("add_a_scene", [h[3].id for h in tax.admin_hits("Drop `bell.gd` onto the root node.")])
         # a call is an instruction; teaching add_child is none
         calls = {
             "Under `Solid`, add a `MeshInstance3D` with a `SphereMesh`.": ["add_a_node"],
@@ -1956,13 +1956,13 @@ class TestAdminRound2(Base):
             "`add_child()` is how code can add a `MeshInstance3D` to the scene.": [],
             "`add_child()` is how code can add a node.": [],
             "Twelve lines need twelve beads: add twelve `MeshInstance3D` nodes by code.": [],
-            "Make a new script `bell.gd`.": ["make_a_new_script"],
-            "Put `bell.gd` on the top node.": ["put_a_script_on_a_node"],
-            "Put the supplied `contact_probe.gd` on the new `Node3D`.": ["put_a_script_on_a_node"],
-            "Put `bell.gd` on the top node, then run the project.": ["put_a_script_on_a_node",
+            "Create a new script `bell.gd`.": ["create_a_new_script"],
+            "Attach `bell.gd` to the root node.": ["attach_a_script"],
+            "Attach the supplied `contact_probe.gd` to the new `Node3D`.": ["attach_a_script"],
+            "Attach `bell.gd` to the root node, then run the project.": ["attach_a_script",
                                                                      "run_the_project"],
-            "Add `walker.tscn` to the top node.": ["add_a_scene"],
-            "Add the supplied `counter_panel.tscn` to the top node.": ["add_a_scene"],
+            "Add `walker.tscn` to the root node.": ["add_a_scene"],
+            "Add the supplied `counter_panel.tscn` to the root node.": ["add_a_scene"],
         }
         for line, want in calls.items():
             with self.subTest(line=line):
@@ -2169,7 +2169,7 @@ class TestGodot(Base):
         rep = self.run_check(ch1=ch1, godot=True)
         self.assertClean(rep)
 
-    # one convention for scripts: each goes on the top node, a Node3D (FUNCTIONAL_TEXT 3)
+    # one convention for scripts: each goes on the root node, a Node3D (FUNCTIONAL_TEXT 3)
     def test_top_node_a_script_the_top_node_can_hold_passes(self):
         rep = self.run_check(godot=True)
         self.assertFalse(self.found(rep, "top"), "\n".join(rep.lines()))
@@ -2180,7 +2180,7 @@ class TestGodot(Base):
         rep = self.run_check(ch1=bad, godot=True)
         self.assertBites(rep, "top", file="ch01.md", line=line_no(bad, "```gdscript"),
                          contains="this script is for a MeshInstance3D, and the text puts it on "
-                                  "the top node, a Node3D")
+                                  "the root node, a Node3D")
         # on= says the script goes on another node: then a MeshInstance3D is right
         ok = bad.replace("<!-- code: nodes=Ball:Node3D", "<!-- code: on=MeshInstance3D nodes=Ball:Node3D", 1)
         rep = self.run_check(ch1=ok, godot=True)

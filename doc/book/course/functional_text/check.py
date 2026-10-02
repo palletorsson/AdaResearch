@@ -31,7 +31,7 @@ Passes
                   at its parent's content offset, one sentence per item, a plain lead and point,
                   each list read as Markdown reads it; a lone numbered step warns
   g  code, run    each gdscript block parses in Godot; a run block runs headless
-     top          each run block's script is one the top node, a Node3D, can hold
+     top          each run block's script is one the root node, a Node3D, can hold
 
 Python 3.10, standard library only.
 """
@@ -66,7 +66,7 @@ OFF = set(x.strip() for x in os.environ.get("FT_OFF", "").split(",") if x.strip(
 ADMIN_RULES = ("admin-taxonomy", "admin-order", "admin-again", "admin-define", "admin-signature",
                "admin-calls", "admin-link")
 # the other switches: device (a marker that is no device of the page, FUNCTIONAL_TEXT 2b) and
-# top-node (a script the top node cannot hold, FUNCTIONAL_TEXT 3)
+# top-node (a script the root node cannot hold, FUNCTIONAL_TEXT 3)
 OTHER_RULES = ("device", "top-node")
 # the list rules (SHORT_SPEAK, Lines in a tree), each its own switch: a bullet deeper than two
 # levels; an indented line with no list item above it; a child not at its parent's content
@@ -3369,7 +3369,7 @@ def norm_def(s):
 RUNNER = r'''extends SceneTree
 ## Written by check.py. Parses every unit in one boot, runs the run units in turn, and at the
 ## end of each run asks its claims. Each run unit's script stands in for the node the text puts
-## it on, the top node (a Node3D) unless on= says another: FT_BASE says whether it may go there.
+## it on, the root node (a Node3D) unless on= says another: FT_BASE says whether it may go there.
 var runs := []
 var cur = null
 var cur_id := ""
@@ -3458,7 +3458,7 @@ class Unit:
         self.no_extends = False
         self.bad_nodes = []
         self.until = None
-        # the node the text puts the script on: the top node, a Node3D, unless a block says on=
+        # the node the text puts the script on: the root node, a Node3D, unless a block says on=
         self.on = next((b.opts["on"] for b in blocks if isinstance(b.opts.get("on"), str)), TOP_NODE)
 
 
@@ -3892,7 +3892,7 @@ def run_godot(checker, chapters, exe, opts):
         # the top-node rule: the script must be one the node it goes on can hold
         base = bases.get(u.id)
         if base and base[1] == "no" and "top-node" not in OFF:
-            where = ("the top node, a %s" % u.on) if u.on == TOP_NODE else ("a %s (on=)" % u.on)
+            where = ("the root node, a %s" % u.on) if u.on == TOP_NODE else ("a %s (on=)" % u.on)
             rep.error(u.sec.file, b0.fence_line, "top", "this script is for a %s, and the text puts "
                       "it on %s: Godot refuses it there. Extend %s, and make the body in code, a "
                       "child (FUNCTIONAL_TEXT 3)" % (base[0], where, u.on))

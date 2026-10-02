@@ -9,9 +9,9 @@ SphereMesh, at y = 1.0. Not yet reviewed by Palle. -->
 
 Code can make a body.
 
-1. Open the supplied base scene.
-2. Put a new script on the top node.
-3. Replace its code with this.
+1. Open `base.tscn`: double-click it in the FileSystem dock.
+2. Add a new script to the root node: right-click it in the Scene dock and choose Attach Script, then Create.
+3. Replace the template code with this.
 
 ```gdscript
 extends Node3D
@@ -31,7 +31,7 @@ Run the project: a sphere stands one metre up.
   - `ball.mesh = SphereMesh.new()` gives the node its mesh.
 - `position` is a property: where the node stands.
   - `Vector3(0, 1, 0)` is one metre up.
-- `add_child(ball)` adds `ball` as a child of the top node.
+- `add_child(ball)` adds `ball` as a child of the root node.
   - Without it, nothing shows.
 - Change the `1` to `2`: the sphere stands two metres up.
   - Restore: `Vector3(0, 1, 0)`.

@@ -23,7 +23,7 @@ Palle, 2 October 2026: "can we make it even more readable by indented point list
 The lines stay short-speak. What changes is that they are grouped.
 
 - **Numbered steps are for doing.** Two or more doing lines in a row: setup and admin calls, in the order the student does them. A step is an instruction.
-- **A lone doing line stays plain.** "1." promises a "2.". One step alone is a plain line, unless it has children ("Add `walker.tscn` to the top node." in 2.5 keeps its number, for the two lines under it).
+- **A lone doing line stays plain.** "1." promises a "2.". One step alone is a plain line, unless it has children ("Add `walker.tscn` to the root node." in 2.5 keeps its number, for the two lines under it).
 - **The run line stays plain, right under the code.** "Run the project: the cube rises." is a lone doing line, and what it shows follows its colon. The tree that explains the run comes after it. Where the script is put on a node after the code is written (chapter 18), the run is the last of those numbered steps.
 - **A bullet tree is for understanding.** What you see, and why it is so.
 - **A child explains its parent.** Indented under a bullet or a step, it says what the parent means, why, how much, or what to put back. If you cannot say which of these it does, it is a sibling.
