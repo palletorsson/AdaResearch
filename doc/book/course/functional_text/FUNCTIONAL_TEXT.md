@@ -272,13 +272,69 @@ Each is declared here, once, so the page never has to explain its own markup.
 | `*[...]*` | a figure line: what the picture shows |
 | `**Example N.M: name**` | the caption of a runnable example |
 | a fenced block | code, tagged `gdscript`, `gdshader` or `text` |
-| `1.` `2.` ... | numbered steps, for an algorithm too long for lines |
+| `1.` `2.` ... | numbered steps, for doing: two or more setup and admin calls in the student's order; an algorithm too long for lines is one use |
+| `- ` and, two spaces in, `- ` | the bullet tree, for understanding: a bullet and its children, what you see and why |
 | one equation per line | each with its own figure |
 | `**Why**` | a folded box: the one place for compressed prose |
 | `**What it hides**` | a few lines of the critical layer |
 | `Restore:` | after an experiment that changed the code, how to put it back |
 | the **Types** box | the chapter's declared terms, code and supplied parts |
 | `N.x` | the chapter's exercises |
+
+### Steps and the tree
+
+Palle, 2 October 2026: "can we make it even more readable by indented point list the we can group related hieratical meaning?"
+The voice of the tree is [SHORT_SPEAK.md](../SHORT_SPEAK.md), "Lines in a tree"; this is its form.
+
+A step is an instruction: "2. Add a `MeshInstance3D` named `Cube` with a `BoxMesh`."
+Two or more doing lines in a row are numbered.
+A lone doing line stays plain, unless it has children: "1." promises a "2.".
+The run line is one: plain, right under the code, what it shows after its colon.
+Where the script goes on a node after the code, the run is the last numbered step: "1. Put `field.gd` on the top node." "2. Run the project: 1331 dots."
+A bullet is a claim, and its children explain, qualify or follow from it.
+An experiment is a bullet, its last child `Restore:`.
+Two levels at most: a bullet and its children, or a step and its children.
+A child of `- ` is indented two spaces, a child of `1. ` three, as CommonMark reads them.
+One item is one line and one sentence.
+The section's lead and its point stay plain lines: lead, steps, code, tree, point.
+A section whose script goes on a node after it is written reads lead, code, steps, tree, point.
+The tree comes after the code; a lead longer than two lines holds only what the steps or the code need first.
+A section may open on its numbered steps, never on a bullet.
+An admin definition stays plain: the bold line, and the def's other steps, unnumbered, a blank line apart from the lead.
+The steps that follow it are calls, and numbered.
+An algorithm's steps may be numbered, under a plain line that ends in a colon: "Marching cubes means six steps in every cell:".
+A caption sits on its code: the steps come before it.
+A section with no list is valid.
+
+Every rule of short-speak and of types reads an item's text without its marker.
+"1. Run the project." is a call; "- Run the project: the cube rises." is one too.
+A term an item declares is declared: "- A shape is what is touched."
+
+The checker's rule `list`, each finding with its switch:
+
+| switch | finds |
+|---|---|
+| `list-depth` | an item three levels deep |
+| `list-orphan` | an indented line or item with no list item right above it, a blank line between them included |
+| `list-indent` | a child off its parent's content offset; an item of a list indented under no parent; a tab |
+| `list-point` | a section whose last prose is a list item, not a plain point |
+| `list-lead` | a section whose first line is a bullet |
+| `list-sentence` | an item holding two sentences: on its line, or by a line right under it that Markdown joins to it |
+| `list-loose` | a list parted from one of its kind above by blank lines alone: the same bullet, or numbers with the same delimiter |
+| `list-start` | a numbered list right under a plain line, a label, a figure or an equation, starting past 1 |
+| `list-lone` | a warning: a numbered list of one step with no children |
+
+The head and the exercises keep their own form: no lead, no point asked of them.
+A blank line ends a list here.
+CommonMark would let an indented line after it go on with the item; the checker calls that line an orphan.
+CommonMark reads a new item of the same kind after a blank line into the list above, as one loose list.
+The break the writer meant does not show: `list-loose` refuses it.
+Groups in one tree are made by parents, and two lists are parted by a plain line.
+Another bullet, `*` after `-`, starts another list in CommonMark, and passes.
+A numbered list may interrupt a plain line only at 1: "8." right under a line is read into it, `list-start`.
+The page still sets a loose item as tight as any other.
+
+### Markers that are no device
 
 Round one proposed more (arrows, `enters:`, `from:`, provenance tags).
 Round two measured them: 11–36 % more words, no score moved, and readers stalled where a page used one undeclared.
@@ -303,6 +359,7 @@ One file per chapter: `doc/book/course/functional/chNN.md`.
 Signatures and code options sit in HTML comments: the student never sees them.
 The Types box is all the student sees of types.
 Chapters 1 to 5 and 18 pass ([`functional/ch01.md`](../functional/ch01.md) to `ch05.md`, and `ch18.md`).
+All six are written in steps and a tree, from 2 October 2026: chapter 2 was the pilot.
 Each chapter's taxonomy patch, and the merge that applied them, is kept in `functional/patches/`.
 
 The parts, in order:
@@ -318,7 +375,11 @@ The parts, in order:
 | label | `**Example 1.1: three stations**` on its own line |
 | equation | a line that is one code span: `` `t = (level - at[a]) / (at[b] - at[a])` `` |
 | lines | one sentence per line, ending in . ! ? or : |
+| lead | the section's first claim, one or two plain lines; a section that opens on its steps has none |
+| steps | `1. ` items, one a line, two or more; a child `- ` three spaces in; an admin definition stands plain above them |
 | code | a fenced `gdscript` block; options in `<!-- code: ... -->` just before it |
+| tree | `- ` items, one a line; a child `- ` two spaces in; two levels at most |
+| point | the section's last line, plain, a blank line before it |
 | exercises | signature `<!-- section 1.x needs: ... -->`, heading `## Exercises`; gives nothing |
 | Types box | a blockquote at the end: `**Types**`, `**Code**`, `**Supplied**` |
 
@@ -400,19 +461,22 @@ It has no size: nothing shows.
 Press + above the scene tree.
 Choose its kind, then Create.
 Double-click the new node to name it.
-The Inspector is the editor's panel of a node's numbers.
+
 Build three stations in a row under the top node.
-Add a `Node3D` named `Here`: a position, nothing else.
-Add a `MeshInstance3D` and name it `Seen`.
-In the Inspector, give `Seen` a `SphereMesh`.
-Add a `StaticBody3D` and name it `Solid`.
-`StaticBody3D` is Godot's node for a body that stays put.
-Under `Solid`, add a `MeshInstance3D` with a `SphereMesh`.
-Under `Solid`, add a `CollisionShape3D` with a `SphereShape3D`.
-Under the top node, add one more `Node3D`.
+1. Add a `Node3D` named `Here`: a position, nothing else.
+2. Add a `MeshInstance3D` and name it `Seen`.
+3. In the Inspector, give `Seen` a `SphereMesh`.
+   - The Inspector is the editor's panel of a node's numbers.
+4. Add a `StaticBody3D` and name it `Solid`.
+   - `StaticBody3D` is Godot's node for a body that stays put.
+5. Under `Solid`, add a `MeshInstance3D` with a `SphereMesh`.
+6. Under `Solid`, add a `CollisionShape3D` with a `SphereShape3D`.
+7. Under the top node, add one more `Node3D`.
+
 **Put a script on a node**: drop it from the FileSystem onto the node.
-Put the supplied `contact_probe.gd` on the new `Node3D`.
-It is the feeler, a cyan rod that moves.
+
+8. Put the supplied `contact_probe.gd` on the new `Node3D`.
+   - It is the feeler, a cyan rod that moves.
 
 **Example 1.1: three stations**
 
@@ -425,20 +489,33 @@ func _ready():
 ```
 
 Run the project.
-The feeler runs along the three stations.
-At `Here`, it meets nothing.
-At `Seen`, a white sphere: the feeler passes through.
-At `Solid`, the same sphere: the feeler stops.
 
-A mesh is what is seen.
-A shape is what is touched.
-Each station is a body, a node you place.
-The nodes under `Solid` go where `Solid` goes.
+- The feeler runs along the three stations.
+  - At `Here`, it meets nothing.
+  - At `Seen`, a white sphere: the feeler passes through.
+  - At `Solid`, the same sphere: the feeler stops.
+- A mesh is what is seen.
+- A shape is what is touched.
+- Each station is a body, a node you place.
+  - The nodes under `Solid` go where `Solid` goes.
+
 The feeler meets the shape, never the mesh.
 ````
 
 Node names go in code style: `Point` is a node.
 *point* is a type.
+
+The admin definitions stand plain, a blank line apart, and the steps that call them are numbered.
+Step 8 follows a definition, so a blank line comes before it: a list may interrupt a line only at 1.
+The run line is plain under the code; the tree under it explains what the run shows.
+Section 2.1 is shown whole in SHORT_SPEAK.md, "Lines in a tree".
+In 2.5 a step has children, three spaces in:
+
+```markdown
+1. Add `walker.tscn` to the top node.
+   - It is the walker, a node named `Walker`.
+   - W, A, S and D steer it.
+```
 
 ### The Types box
 
@@ -470,6 +547,13 @@ The link covers the call's words before its first argument: "Add a" in "Add a `N
 The count, the class and the name are the lesson's, and stay outside the link.
 The link is light: the line keeps its colour, a dotted rule marks the call.
 A call never breaks across two lines: at phone width it moves down whole.
+A call inside a list item links the same way: the marker is no part of its text.
+Numbered steps show as steps, the number quiet in the margin.
+The tree shows as a tree: a small dot for a parent, the child level on a thin guide line, a short tick to each child.
+Both are compact, one item a line, at the line height of the plain lines.
+A plain line gets a hard break before the next plain line; a list item gets none, since Markdown gives it its own line.
+So no item is joined to a line, and none is broken: the checker keeps each item one line, a blank line after the list.
+The styles live beside the page, in `functional-text.css`, scoped to the chapter: other pages keep their lists.
 The page makes the links from `taxonomy.json` and the signatures' `admin:`.
 The source never types one. No concept or term gets a link.
 `/course/sketch/order` shows the order report.
@@ -497,6 +581,7 @@ The source never types one. No concept or term gets a link.
 | f | `poetic` | no thing that remembers, dreams, whispers, sings, knows, owns, wants |
 | f | `voice` | warning on we, our, us, I |
 | f | `device` | no marker the page does not declare: `enters:`, `from:`, an arrow, `[run]` ... (2b) |
+| f | `list` | steps and the tree: two levels at most, each child at its parent's content offset, no orphan, one sentence per item, a plain lead and point, no list Markdown reads otherwise (loose, or started past 1 under a line); a warning on a lone step (2b) |
 | — | `types` | the Types box matches the signatures and the taxonomy's defs |
 | — | `number` | a number a run section states is in its code, a printed line or a claim |
 | — | `keep` | a kept member is defined in an earlier example of the chapter, not shown again, and named by a line |
@@ -531,7 +616,7 @@ Without `--godot`, pass g is skipped, and says so.
 `--keep --workdir <dir>` keeps the scratch Godot project.
 `--quiet-warnings` prints errors only.
 `FT_OFF=admin-again` (an environment variable) switches a rule off, for a test.
-The switches: the seven admin rules of 2a, `device` and `top-node`.
+The switches: the seven admin rules of 2a, `device`, `top-node` and the nine list rules of 2b.
 
 `--sketch` checks the course plan before any chapter exists.
 `code_new` is what a chapter gives.
@@ -602,3 +687,9 @@ An admin's steps said in new words, which no synonym or step phrase holds, pass:
 A key named in passing is read as its step: "F5 among them" is an `admin` error.
 A call template sees only the calls it spells: "add five `MeshInstance3D` nodes" needs `add {n} {node}`.
 The call rule reads position and a few words (*by code*, `add_child`), not meaning: a sentence about code that names neither is read as a call.
+Whether a child explains its parent is meaning: the checker sees the indent, never the relation.
+A step is told from a claim by its marker alone: a claim numbered as a step passes.
+A doing line left plain passes, and so does a lone step with children: whether they earn the number is meaning.
+Where the run line stands is not checked: right under the code is the writer's.
+How long a tree runs is not checked: a group needs a parent, and only meaning finds one.
+Step numbers are not checked: Markdown numbers a list from its first item, and only "starts past 1 under a line" is read.

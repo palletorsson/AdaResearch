@@ -607,6 +607,266 @@ class TestDevices(Base):
                          "caught: the test does not prove the rule")
 
 
+# ------------------------------------------------------------------ lines in a tree
+
+# SHORT_SPEAK, Lines in a tree: section 2.2 of the fixture grouped by meaning. A plain lead,
+# numbered steps (a step with a child, 3 spaces in), a bullet tree (children 2 spaces in) and
+# a plain point after a blank line.
+FLAT_22 = """A shape is what is touched.
+Each frame, the node keeps its position.
+Put a shape on it under `func _ready():`.
+"""
+TREE_22 = """A shape is what is touched.
+
+1. Put a shape on the node under `func _ready():`.
+2. Give the node a position.
+   - The shape goes where the node goes.
+
+- Each frame, the node keeps its position.
+  - The shape stays on the node.
+  - Nothing moves it.
+- The node holds one shape.
+
+The node keeps its shape and its position.
+"""
+assert FLAT_22 in CH2
+CH2_TREE = CH2.replace(FLAT_22, TREE_22, 1)
+
+
+class TestLists(Base):
+    """Numbered steps for doing, a bullet tree for understanding: two levels at most, each
+    child at its parent's content offset, one sentence per item, a plain lead and a plain
+    point. Each rule bites on a planted fault, stays quiet on its passing case, and lets the
+    fault through when it is switched off."""
+
+    def tree(self, old=None, new=None):
+        ch2 = CH2_TREE if old is None else CH2_TREE.replace(old, new, 1)
+        self.assertTrue(old is None or ch2 != CH2_TREE, "the fault was not planted: %r" % old)
+        return ch2, self.run_check(ch2=ch2)
+
+    def lists(self, rep):
+        return [i for i in rep.items if i[3] == "list"]
+
+    def test_the_tree_fixture_is_clean(self):
+        ch2, rep = self.tree()
+        self.assertClean(rep)
+        self.assertEqual(self.lists(rep), [], "\n".join(rep.lines()))
+
+    def test_a_section_with_no_list_passes(self):
+        rep = self.run_check()
+        self.assertClean(rep)
+        self.assertEqual(self.lists(rep), [])
+
+    def test_the_exercises_keep_their_list(self):
+        # 1.x is one numbered list, its first line and its last: no lead, no point
+        rep = self.run_check(ch2=CH2_TREE)
+        self.assertFalse(self.found(rep, "list", file="ch01.md"), "\n".join(rep.lines()))
+        self.assertFalse(any(i[3] == "list" and i[2] == line_no(CH1, EX_LINE_1) for i in rep.items))
+
+    # every short-speak and type rule reads an item's text without its marker
+    def test_an_item_is_read_without_its_marker(self):
+        # fourteen words and a marker: the marker is no word, so no length error
+        ch2, rep = self.tree("  - Nothing moves it.",
+                             "  - Nothing moves it, and the node keeps the shape it holds in every frame.")
+        self.assertFalse(self.found(rep, "length", line=line_no(ch2, "every frame.")),
+                         "\n".join(rep.lines()))
+        ch2, rep = self.tree("  - Nothing moves it.", "  - Nothing simply moves it.")
+        self.assertBites(rep, "filler", line=line_no(ch2, "simply"), contains="'simply'")
+        ch2, rep = self.tree("2. Give the node a position.", "2. Give the node a spot.")
+        self.assertBites(rep, "synonym", line=line_no(ch2, "a spot."), contains="'spot'")
+        ch2, rep = self.tree("- The node holds one shape.", "- The node holds one shape;")
+        self.assertBites(rep, "sentence", line=line_no(ch2, "one shape;"))
+        ch2, rep = self.tree("  - Nothing moves it.", "  - -> Nothing moves it.")
+        self.assertBites(rep, "device", line=line_no(ch2, "Nothing moves it."))
+
+    def test_a_term_declared_in_an_item_is_declared(self):
+        ch2, rep = self.tree("A shape is what is touched.\n\n1. Put",
+                             "Each node is a thing.\n\n- A shape is what is touched.\n\n1. Put")
+        self.assertFalse(self.found(rep, "gives"), "\n".join(rep.lines()))
+
+    def test_an_admin_call_inside_an_item(self):
+        """A numbered step 'Run the project.' is a call, and so is a bullet that opens with
+        one: each is recorded, so the section must need it."""
+        for item in ("1. Run the project.", "- Run the project: its position stays."):
+            with self.subTest(item=item):
+                ch2 = admin_ch2().replace("`func` starts each one.\nRun the project.",
+                                          "`func` starts each one.\n\n%s\n\n`_ready` runs again." % item, 1)
+                self.assertIn(item, ch2)
+                rep = self.run_check(tax=admin_tax(), ch1=admin_ch1(), ch2=ch2)
+                self.assertClean(rep)
+                bare = ch2.replace(", run_the_project\n", "\n", 1)
+                rep = self.run_check(tax=admin_tax(), ch1=admin_ch1(), ch2=bare)
+                self.assertBites(rep, "signature", file="ch02.md",
+                                 contains="uses run the project (line %d)" % line_no(bare, item))
+
+    # the new rules: a planted fault each, at the line it is on
+    def test_depth_three_levels_is_refused(self):
+        ch2, rep = self.tree("  - Nothing moves it.\n", "  - Nothing moves it.\n    - Not even a frame.\n")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "Not even a frame."),
+                         contains="3 levels deep: at most two")
+
+    def test_orphan_an_indented_line_with_no_item_above_it(self):
+        ch2, rep = self.tree("A shape is what is touched.\n\n",
+                             "A shape is what is touched.\n\n  The node holds it.\n\n")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "The node holds it."),
+                         contains="an indented line with no list item above it")
+        # a child cut off from its parent by a blank line is an orphan too
+        ch2, rep = self.tree("- The node holds one shape.\n",
+                             "- The node holds one shape.\n\n  - It is one.\n")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "It is one."),
+                         contains="an indented item with no list item above it")
+
+    def test_indent_a_child_off_its_parents_content_offset(self):
+        # under '- ' a child is indented 2, not 4
+        ch2, rep = self.tree("  - The shape stays on the node.", "    - The shape stays on the node.")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "stays on the node"),
+                         contains="indented 4 spaces under the item at line %d"
+                                  % line_no(ch2, "- Each frame"))
+        # under '1. ' a child is indented 3, not 2
+        ch2, rep = self.tree("   - The shape goes where", "  - The shape goes where")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "goes where"),
+                         contains="indented 2 spaces, under no item")
+        # a tab is no indent
+        ch2, rep = self.tree("  - Nothing moves it.", "\t- Nothing moves it.")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "Nothing moves it."),
+                         contains="a tab indents this line")
+
+    def test_point_a_section_that_ends_on_an_item(self):
+        ch2, rep = self.tree("\nThe node keeps its shape and its position.\n", "")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "- The node holds one shape."),
+                         contains="2.2 ends on a list item")
+
+    def test_lead_a_section_that_opens_on_a_bullet(self):
+        ch2, rep = self.tree("A shape is what is touched.\n\n1. Put",
+                             "- A shape is what is touched.\n\n1. Put")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "- A shape is"),
+                         contains="2.2 opens on a bullet")
+        # a section may open on its numbered steps: a step is an instruction, not a claim
+        ch2, rep = self.tree("A shape is what is touched.\n\n1. Put", "1. Put")
+        ch2 = ch2.replace("The node keeps its shape and its position.", "A shape is what is touched.")
+        rep = self.run_check(ch2=ch2)
+        self.assertClean(rep)
+        self.assertEqual(self.lists(rep), [], "\n".join(rep.lines()))
+
+    def test_sentence_an_item_holding_two_sentences(self):
+        # on its own line
+        ch2, rep = self.tree("  - Nothing moves it.", "  - Nothing moves it. It stays.")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "It stays."),
+                         contains="the item holds two sentences")
+        # by a line indented under it, which Markdown joins to it
+        ch2, rep = self.tree("- The node holds one shape.\n", "- The node holds one shape.\n  It is one.\n")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "  It is one."),
+                         contains="goes on with the item at line %d" % line_no(ch2, "holds one shape"))
+        # by a plain line right under it: the point needs a blank line before it
+        ch2, rep = self.tree("- The node holds one shape.\n\n", "- The node holds one shape.\n")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "The node keeps its shape"),
+                         contains="goes on with the item")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "The node keeps its shape"),
+                         contains="2.2 ends on a list item")
+
+    # each list as Markdown reads it: a blank line does not part two lists of one kind
+    LOOSE = ("  - Nothing moves it.\n- The node holds one shape.",
+             "  - Nothing moves it.\n\n- The node holds one shape.")
+
+    def test_loose_two_lists_of_one_kind_parted_by_a_blank_line(self):
+        ch2, rep = self.tree(*self.LOOSE)
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "- The node holds one shape."),
+                         contains="only a blank line parts this list from the one ending at line %d"
+                                  % line_no(ch2, "Nothing moves it."))
+        # numbered steps too: '2.' after a blank line goes on with '1.', as a loose list
+        ch2, rep = self.tree("`func _ready():`.\n2. Give", "`func _ready():`.\n\n2. Give")
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "2. Give"),
+                         contains="Markdown reads the two as one loose list")
+
+    def test_loose_passes_a_list_of_another_kind_or_a_plain_line_between(self):
+        # the fixture: steps, a blank line, then bullets: two kinds, two lists
+        ch2, rep = self.tree()
+        self.assertFalse(self.found(rep, "list", contains="loose list"))
+        # another bullet character starts another list in CommonMark
+        ch2, rep = self.tree(self.LOOSE[0], "  - Nothing moves it.\n\n* The node holds one shape.")
+        self.assertFalse(self.found(rep, "list", contains="loose list"), "\n".join(rep.lines()))
+        # a plain line between parts them
+        ch2, rep = self.tree(self.LOOSE[0], "  - Nothing moves it.\n\nThe node is one.\n\n"
+                                            "- The node holds one shape.")
+        self.assertFalse(self.found(rep, "list", contains="loose list"), "\n".join(rep.lines()))
+
+    START = ("A shape is what is touched.\n\n1. Put a shape on the node under `func _ready():`.\n2. Give",
+             "A shape is what is touched.\n3. Put a shape on the node under `func _ready():`.\n4. Give")
+
+    def test_start_a_numbered_list_past_1_right_under_a_plain_line(self):
+        ch2, rep = self.tree(*self.START)
+        self.assertBites(rep, "list", file="ch02.md", line=line_no(ch2, "3. Put"),
+                         contains="starts at 1, or Markdown reads '3.' into that line")
+
+    def test_start_passes_at_1_or_after_a_blank_line(self):
+        ch2, rep = self.tree(self.START[0], "A shape is what is touched.\n1. Put a shape on the node "
+                                            "under `func _ready():`.\n2. Give")
+        self.assertFalse(self.found(rep, "list", contains="starts at 1"), "\n".join(rep.lines()))
+        ch2, rep = self.tree(self.START[0], "A shape is what is touched.\n\n3. Put a shape on the node "
+                                            "under `func _ready():`.\n4. Give")
+        self.assertFalse(self.found(rep, "list", contains="starts at 1"), "\n".join(rep.lines()))
+
+    LONE = ("2. Give the node a position.\n   - The shape goes where the node goes.\n",
+            "\nGive the node a position.\nThe shape goes where the node goes.\n")
+
+    def test_lone_a_numbered_list_of_one_step_warns(self):
+        ch2, rep = self.tree(*self.LONE)
+        self.assertClean(rep)
+        self.assertBites(rep, "list", sev="warning", file="ch02.md", line=line_no(ch2, "1. Put"),
+                         contains="a numbered list of one step")
+
+    def test_lone_passes_a_step_with_children(self):
+        ch2, rep = self.tree("2. Give the node a position.\n", "")
+        self.assertFalse(self.found(rep, "list", sev="warning"), "\n".join(rep.lines()))
+        # the exercises keep their numbered list, whatever its length
+        rep = self.run_check(ch2=CH2_TREE)
+        self.assertFalse(self.found(rep, "list", sev="warning", file="ch01.md"))
+
+    def test_switching_off_each_list_rule_silences_its_test(self):
+        faults = {
+            "list-depth": (("  - Nothing moves it.\n", "  - Nothing moves it.\n    - Not even a frame.\n"),
+                           "levels deep"),
+            "list-orphan": (("A shape is what is touched.\n\n", "A shape is what is touched.\n\n  The node holds it.\n\n"),
+                            "with no list item above it"),
+            "list-indent": (("  - The shape stays on the node.", "    - The shape stays on the node."),
+                            "under the item at line"),
+            "list-point": (("\nThe node keeps its shape and its position.\n", ""), "ends on a list item"),
+            "list-lead": (("A shape is what is touched.\n\n1. Put", "- A shape is what is touched.\n\n1. Put"),
+                          "opens on a bullet"),
+            "list-sentence": (("- The node holds one shape.\n", "- The node holds one shape.\n  It is one.\n"),
+                              "goes on with the item"),
+            "list-loose": (self.LOOSE, "loose list"),
+            "list-start": (self.START, "starts at 1"),
+            "list-lone": (self.LONE, "a numbered list of one step"),
+        }
+        self.assertEqual(set(faults), set(check.LIST_RULES))
+        for rule, ((old, new), text) in faults.items():
+            sev = "warning" if rule == "list-lone" else "error"
+            with self.subTest(rule=rule):
+                ch2, rep = self.tree(old, new)
+                self.assertTrue(self.found(rep, "list", sev=sev, contains=text), "%s does not bite:\n%s"
+                                % (rule, "\n".join(rep.lines())))
+                saved = set(check.OFF)
+                check.OFF.add(rule)
+                try:
+                    ch2, rep = self.tree(old, new)
+                finally:
+                    check.OFF.clear()
+                    check.OFF.update(saved)
+                self.assertFalse(self.found(rep, "list", sev=sev, contains=text),
+                                 "%s is off, and its fault is still caught: the test does not "
+                                 "prove the rule" % rule)
+        # off, the single-line case falls back to the plain sentence rule: still an error
+        saved = set(check.OFF)
+        check.OFF.add("list-sentence")
+        try:
+            ch2, rep = self.tree("  - Nothing moves it.", "  - Nothing moves it. It stays.")
+        finally:
+            check.OFF.clear()
+            check.OFF.update(saved)
+        self.assertBites(rep, "sentence", line=line_no(ch2, "It stays."), contains="more than one sentence")
+
+
 # ------------------------------------------------------------------ the Types box
 
 class TestTypesBox(Base):

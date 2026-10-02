@@ -27,6 +27,9 @@ Passes
   e  unused       every introduced entry is used after its section
   f  length, sentence, filler, voice: short-speak
      device       no marker the page does not declare (enters:, from:, an arrow, [run] ...)
+     list         lines in a tree: numbered steps and bullets, two levels at most, each child
+                  at its parent's content offset, one sentence per item, a plain lead and point,
+                  each list read as Markdown reads it; a lone numbered step warns
   g  code, run    each gdscript block parses in Godot; a run block runs headless
      top          each run block's script is one the top node, a Node3D, can hold
 
@@ -65,6 +68,15 @@ ADMIN_RULES = ("admin-taxonomy", "admin-order", "admin-again", "admin-define", "
 # the other switches: device (a marker that is no device of the page, FUNCTIONAL_TEXT 2b) and
 # top-node (a script the top node cannot hold, FUNCTIONAL_TEXT 3)
 OTHER_RULES = ("device", "top-node")
+# the list rules (SHORT_SPEAK, Lines in a tree), each its own switch: a bullet deeper than two
+# levels; an indented line with no list item above it; a child not at its parent's content
+# offset; a section that ends on a list item; one that opens on a bullet; an item holding two
+# sentences, on its line or by a line that goes on with it; two lists of one kind parted only
+# by a blank line, which Markdown joins into one loose list; a numbered list right under a
+# plain line that starts past 1, which Markdown reads into the line; and, a warning, a
+# numbered list of one step with no children
+LIST_RULES = ("list-depth", "list-orphan", "list-indent", "list-point", "list-lead",
+              "list-sentence", "list-loose", "list-start", "list-lone")
 
 EX = 999            # the exercises of chapter N sort as (N, 999)
 HEAD = 0            # the chapter head sorts as (N, 0)
@@ -1366,6 +1378,9 @@ CODE_SPAN = re.compile(r"`([^`]+)`")
 ADMIN_DEF = re.compile(r"^\*\*([^*]+)\*\*(\s+`[^`]+`)?:\s*(.+)$")
 # any line that opens with a bold name, however it goes on: a list item, a quote, a dash
 DEF_ATTEMPT = re.compile(r"^(?:>\s*)?(?:(?:\d+[.)]|[-*+])\s+)?\*\*([^*]+)\*\*(.*)$")
+# a list item, as CommonMark reads one: its indent, its marker ('-' a bullet, '1.' a numbered
+# step) and the spaces before its text (SHORT_SPEAK, Lines in a tree)
+LIST_ITEM = re.compile(r"^([ \t]*)([-*+]|\d{1,9}[.)])([ \t]+)(\S.*)$")
 # a code span that holds a key or a label, not code: `F5`, `Play`, `Ctrl+S`, `Select Current`
 KEY_SPAN = re.compile("(?:[A-Z][A-Za-z0-9]*|▶)(?:[+ ](?:[A-Z][A-Za-z0-9]*|[0-9]+))*")
 LITTLE_WORDS = {"the", "a", "an", "this", "that", "your", "its", "my", "our"}
@@ -1507,7 +1522,7 @@ def strip_markup(line):
     s = line
     s = re.sub(r"^\s*>\s?", "", s)
     s = re.sub(r"^\s*#+\s*", "", s)
-    s = re.sub(r"^\s*(?:[-*+]|\d+\.)\s+", "", s)
+    s = re.sub(r"^\s*(?:[-*+]|\d+[.)])\s+", "", s)
     spans = []
 
     def keep(m):
@@ -1654,6 +1669,8 @@ class Section:
         self.needs, self.gives, self.borrows = [], [], []
         self.admin = []      # the admin procedures this section defines
         self.prose = []      # (lineno, raw line, kind)
+        self.items = {}      # lineno -> ListLine, for each prose line that stands in a list
+        self.lists = []      # each list as Markdown reads it: first line, numbered, items by level
         self.blocks = []
         self.uses = {}       # entry id -> [first line, in lines, in code]
         self.locals = set()
@@ -1667,6 +1684,21 @@ class Section:
             u[2] = True
         else:
             u[1] = True
+
+
+class ListLine:
+    """Where a prose line stands in a list (SHORT_SPEAK, Lines in a tree): an item, with its
+    depth (1 a parent, 2 its child) and whether it is a numbered step; or, with cont_of, a line
+    that goes on with the item at that line, which Markdown joins into the item."""
+
+    def __init__(self, depth=0, step=False, cont_of=None):
+        self.depth = depth
+        self.step = step
+        self.cont_of = cont_of
+
+    @property
+    def item(self):
+        return self.cont_of is None
 
 
 class Chapter:
@@ -1733,6 +1765,95 @@ def parse_chapter(path, rep):
     comment, comment_start = None, 0
     pending_opts = None
     in_types = False
+    # the list items open above the current line: (indent, content offset, line, marker); the
+    # last prose line and its kind; the last line that stood in a list, with its list's first
+    # marker; the list being read, as a record of its section's lists
+    lst = {"stack": [], "last": 0, "kind": None, "open": None, "rec": None}
+
+    def same_list(a, b):
+        """Two markers CommonMark reads as one list: the same bullet, or numbers with the same
+        delimiter ('1.' and '4.', never '1.' and '4)')."""
+        if a[0].isdigit() != b[0].isdigit():
+            return False
+        return a[-1] == b[-1] if a[0].isdigit() else a == b
+
+    def list_line(ln, raw, kind):
+        """SHORT_SPEAK, Lines in a tree: where a prose line stands in a list, read as CommonMark
+        reads it. A list goes on only over prose lines with no gap: a blank line, a fence, a
+        comment or a heading ends it. A child of '- ' is indented 2 spaces, a child of '1. '
+        3: its parent's content offset. A line that is no item, right under an item, goes on
+        with that item: Markdown joins the two, whatever the indent. Two lists of one kind
+        with only a blank line between are one loose list to Markdown, and a numbered list
+        that starts past 1 right under a plain line is read into that line."""
+        stack = lst["stack"]
+        prev, prev_kind, prev_open = lst["last"], lst["kind"], lst["open"]
+        broken = prev != ln - 1
+        if broken or kind in ("h1", "heading", "html"):
+            del stack[:]
+        lst["last"], lst["kind"] = ln, kind
+        if kind in ("h1", "heading", "html"):
+            return
+        ws = re.match(r"[ \t]*", raw).group(0)
+        indent = len(ws.expandtabs(4))
+        m = LIST_ITEM.match(raw) if kind == "line" else None
+        if m and not indent and broken and prev_open and prev_open[0] == prev \
+                and all(not x.strip() for x in lines[prev:ln - 1]) \
+                and same_list(prev_open[1], m.group(2)) and "list-loose" not in OFF:
+            rep.error(path, ln, "list", "only a blank line parts this list from the one ending at "
+                      "line %d: Markdown reads the two as one loose list, so the break does not "
+                      "show. Join them into one tree, or put a plain line between" % prev)
+        if m and m.group(2)[0].isdigit() and not indent and not broken and not stack \
+                and prev_kind in ("line", "label", "figure", "equation", "image") \
+                and int(m.group(2)[:-1]) != 1 and "list-start" not in OFF:
+            rep.error(path, ln, "list", "a numbered list right under a plain line starts at 1, or "
+                      "Markdown reads '%s' into that line: put a blank line before it"
+                      % m.group(2))
+        if "\t" in ws and (m or stack or indent) and "list-indent" not in OFF:
+            rep.error(path, ln, "list", "a tab indents this line: indent with spaces, a child 2 "
+                      "under `- ` and 3 under `1. `")
+        if m is None:
+            if stack:
+                cur.items[ln] = ListLine(cont_of=stack[-1][2])
+                lst["open"] = (ln, stack[0][3])
+                if "list-sentence" not in OFF:
+                    rep.error(path, ln, "list", "this line goes on with the item at line %d: "
+                              "Markdown joins them, so the item holds two sentences. One sentence "
+                              "per item: make the line an item, or put a blank line before it"
+                              % stack[-1][2])
+            elif indent and "list-orphan" not in OFF:
+                rep.error(path, ln, "list", "an indented line with no list item above it: indent "
+                          "only a child, right under its parent, with no blank line between")
+            return
+        had = bool(stack)
+        while stack and stack[-1][1] > indent:
+            stack.pop()
+        depth = len(stack) + 1
+        if not had and indent:
+            if "list-orphan" not in OFF:
+                rep.error(path, ln, "list", "an indented item with no list item above it: a list "
+                          "starts at the margin, and a child sits right under its parent")
+        elif "list-indent" not in OFF:
+            want = stack[-1][1] if stack else 0
+            if indent != want and stack:
+                rep.error(path, ln, "list", "indented %d spaces under the item at line %d: a child "
+                          "sits at its parent's content offset, %d under `%s ` (2 under `- `, 3 "
+                          "under `1. `)" % (indent, stack[-1][2], want, stack[-1][3]))
+            elif indent != want:
+                rep.error(path, ln, "list", "indented %d spaces, under no item: a parent starts at "
+                          "the margin, and a child sits at its parent's content offset (2 under "
+                          "`- `, 3 under `1. `)" % indent)
+        if depth > 2 and "list-depth" not in OFF:
+            rep.error(path, ln, "list", "a list item %d levels deep: at most two, a bullet and its "
+                      "children; indentation never means emphasis" % depth)
+        marker, gap = m.group(2), len(m.group(3).expandtabs(4))
+        stack.append((indent, indent + len(marker) + (gap if gap <= 4 else 1), ln, marker))
+        cur.items[ln] = ListLine(depth=depth, step=marker[0].isdigit())
+        lst["open"] = (ln, stack[0][3])
+        if not had:
+            lst["rec"] = {"line": ln, "step": marker[0].isdigit(), "top": 0, "kids": 0}
+            cur.lists.append(lst["rec"])
+        lst["rec"]["top" if depth == 1 else "kids"] += 1
+
     for i, raw in enumerate(lines):
         ln = i + 1
         if in_fence:
@@ -1804,6 +1925,7 @@ def parse_chapter(path, rep):
         else:
             kind = "line"
         cur.prose.append((ln, raw, kind))
+        list_line(ln, raw, kind)
     if in_fence:
         rep.error(path, block.fence_line, "format", "code fence never closed")
     if comment is not None:
@@ -2718,10 +2840,12 @@ class Checker:
         several lines, since Markdown joins them and the student reads one sentence."""
         rep = self.rep
         pending = []        # the lines of the sentence being read
+        self.check_lists(s)
         for ln, raw, kind in s.prose:
             if kind == "h1":
                 continue
-            self.short_speak(s.file, ln, raw, kind)
+            li = s.items.get(ln)
+            self.short_speak(s.file, ln, raw, kind, item=bool(li and li.item))
             if kind != "line":
                 pending = []
                 continue
@@ -2740,7 +2864,36 @@ class Checker:
                               "lines (at most %d)" % (n, len(pending), MAX_WORDS))
             pending = []
 
-    def short_speak(self, file, ln, raw, kind):
+    def check_lists(self, s):
+        """SHORT_SPEAK, Lines in a tree: a section reads lead, steps, code, tree, point. Its
+        first line is plain or a numbered step, never a bullet: the lead is a claim, and a
+        section that opens with setup opens with its steps. Its last prose is a plain line, the
+        point, never a list item. A section with no list passes; the chapter head and the
+        exercises keep their own form."""
+        if s.head or s.key is None or s.key[1] == EX or not s.items:
+            return
+        rep = self.rep
+        lines = [ln for ln, raw, kind in s.prose if kind == "line"]
+        if lines and "list-lead" not in OFF:
+            li = s.items.get(lines[0])
+            if li is not None and li.item and not li.step:
+                rep.error(s.file, lines[0], "list", "%s opens on a bullet: its lead is a plain "
+                          "line, and a bullet comes after it (a section may open on its numbered "
+                          "steps)" % s.id)
+        if s.prose and "list-point" not in OFF:
+            ln = s.prose[-1][0]
+            if ln in s.items:
+                rep.error(s.file, ln, "list", "%s ends on a list item: its point is a plain line "
+                          "after the tree, with a blank line before it" % s.id)
+        # a lone doing line stays plain: '1.' promises a '2.' (a step with children may stay)
+        if "list-lone" not in OFF:
+            for rec in s.lists:
+                if rec["step"] and rec["top"] == 1 and not rec["kids"]:
+                    rep.warn(s.file, rec["line"], "list", "a numbered list of one step: '1.' "
+                             "promises a '2.'. A lone doing line stays a plain line, unless it "
+                             "has children")
+
+    def short_speak(self, file, ln, raw, kind, item=False):
         rep = self.rep
         line = visible(raw)
         if kind == "heading":
@@ -2765,7 +2918,11 @@ class Checker:
         prose = CODE_SPAN.sub(" X ", line)
         if kind == "line":
             if sentence_breaks(prose):
-                rep.error(file, ln, "sentence", "more than one sentence on the line")
+                if item and "list-sentence" not in OFF:
+                    rep.error(file, ln, "list", "the item holds two sentences: one sentence per "
+                              "item, so make the second an item of its own")
+                else:
+                    rep.error(file, ln, "sentence", "more than one sentence on the line")
             if ";" in prose:
                 rep.error(file, ln, "sentence", "a semicolon joins two claims: one claim per line")
             if re.search(r"\s[—–]\s|\s--\s|\w—\w|\s-\s", prose):
