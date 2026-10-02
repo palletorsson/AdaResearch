@@ -1,0 +1,3173 @@
+{
+ "title": "The Godot Course, Sketched",
+ "date": "2026-10-02",
+ "rules": [
+  "The order is the Ada spine: its 25 sequences, one chapter each; you learn programming by building the Ada examples of that sequence's halls.",
+  "Part I (sequences 1 to 5) climbs the Learning Processing ladder (Shiffman) in Godot 4.6 and GDScript: shapes and coordinates, flow, interaction, variables, conditionals, loops, functions, objects, arrays. A concept is used only after it is taught; a part a hall needs earlier is supplied and named as borrowed.",
+  "From sequence 6 (change) on, the content is The Nature of Code (Shiffman) in the spine's order; shaders, isosurfaces, boolean surfaces, graph theory and the last three sequences are Ada's own.",
+  "The voice is The Nature of Code's: second person, friendly, exact, as little text as possible. One idea per short numbered section, a picture for every idea, the code, a sentence or two of why; numbered examples, a few exercises, one running project.",
+  "Build from the ground up: each chapter uses only what came before. Haeckel's radiolaria and other specific forms are case studies for later, noted as hooks.",
+  "Godot 4.6, GDScript, desktop first, the headset where a hall is about being held or walked. The course look: hot pink sky, violet ground, acid lime body, cyan, orange, off-white, lavender for what has no collider."
+ ],
+ "running_project": "One running project goes through the whole book: your room, and a figure you make yourself (after Learning Processing's Zoog). The figure is composed from Godot's shapes (1), moves and decides (2), stands on a floor of copies (3), becomes a class (4) and is kept in an array and dressed in a pattern (5). Then it is thrown (6), becomes a Mover that forces push (7), gets a net hung over it and a marble (8), and swings and rings (9). It wanders by seeded chance (10), climbs a noise hill (11), wears a computed skin (12), climbs a Rule 90 stair (13) and walks through a Menger sponge (14). It keeps a garden, a family of plants grown by one rule with different genes (15), and enters a world bred from one seed (16). It walks through a soft curtain (17), stands in a doorway cut from a field (18) and from solids (19), and is copied into a flock (20). It learns (21), finds its way through the room's graph (22), stands where an impossible body closes (23) and is wired to the laboratory's handles (24). In 25 the room is released with one body any visitor can change.",
+ "media_plan": {
+  "answer": "Yes, for the chapters about motion: the picture is a short Godot Movie Maker clip of the real scene with the line of code on screen, because a still cannot show a rate, a settling, a wander or a flock, and the overlay ties the picture to the line that causes it. Keep stills for static forms (3, 5, 14, 19 and most of the rest). Clips are recorded windowed with --write-movie and --fixed-fps, because a headless run draws no frames.",
+  "clips": [
+   6,
+   7,
+   8,
+   9,
+   10,
+   13,
+   17,
+   20
+  ],
+  "recorded": [
+   6
+  ],
+  "state": "The 25 chapter pictures exist as stills, and one proof clip is recorded (chapter 6: Godot Movie Maker, 98 frames at 30 fps, the two lines of code and their live values over the real scene). The 197 section figures are described, not yet rendered; the other clips are planned, not recorded."
+ },
+ "parts": [
+  {
+   "part": "I",
+   "title": "Coding with Bodies",
+   "summary": "Part I teaches programming from nothing, using the first five spine sequences. Each sequence takes the next rungs of the Learning Processing ladder, in order. Primitives (ch1) opens with how to make a script and press Play, then teaches shapes and coordinates, flow, interaction and variables. Transformation (ch2) teaches conditionals. array_tutorial (ch3) teaches loops. Color (ch4) teaches functions, then objects. Tiling (ch5) teaches arrays. Every chapter builds the main examples of its halls with only what came before. Where a hall needs something earlier, a small supplied part does the job and is named as borrowed. The running project is My Room: a figure you make yourself (Learning Processing's Zoog). It is composed from Godot's shapes, then moves and decides, then stands on a floor of copies, then becomes a class with colour functions, and is finally kept in an array and dressed in a pattern.",
+   "chapters": [
+    {
+     "n": 1,
+     "sequence": "primitives",
+     "title": "Points Build Bodies",
+     "subtitle": "Three numbers place a body; a script makes it stay, move and follow you.",
+     "code_new": [
+      "flow: a script on a node; _ready() runs once when you press Play",
+      "shapes and coordinates: Vector3(x, y, z), y up, counted from the origin; a node's position set from the script",
+      "shapes and coordinates: MeshInstance3D with Godot's primitive meshes; StaticBody3D + CollisionShape3D, a boundary apart from the surface",
+      "flow: _process() runs every frame",
+      "interaction: reading the mouse every frame; duplicate() and add_child() make a copy in code",
+      "variables: var, := and a starting value; += and arithmetic; a counter of your own"
+     ],
+     "noc": "Learning Processing ch. 1-4 (no Nature of Code chapter)",
+     "halls": [
+      "Point_Zero",
+      "Point_One",
+      "Point_Coordinates",
+      "Point_Lines",
+      "Point_Trace",
+      "Point_Line_Grid",
+      "Point_Triangle_Context",
+      "Primitives_Polythedra",
+      "Point_Animatedcube",
+      "Primitives_Ignorance",
+      "Primitives_Portals",
+      "Primitives_Melencolia"
+     ],
+     "make": "A court of your own shapes, built from Godot's primitive meshes at chosen coordinates, with a point that follows your mouse and draws.",
+     "sections": [
+      {
+       "n": "1.1",
+       "title": "Press Play",
+       "idea": "A script is text on a node: the lines in func _ready() run once, when you press Play.",
+       "figure": "The empty room, pink sky over violet floor, and the same room after Play with one lime sphere that a one-line _ready placed.",
+       "builds": "origin (Point_Zero)"
+      },
+      {
+       "n": "1.2",
+       "title": "Somewhere to count from",
+       "idea": "Every place in a 3D world is three numbers, x, y and z, counted from zero.",
+       "figure": "The origin sphere with three short axes (lime x, cyan y, orange z), from above and to one side.",
+       "builds": "origin (Point_Zero); CoordinateSystem3M (Point_Coordinates)"
+      },
+      {
+       "n": "1.3",
+       "title": "A position needs a body",
+       "idea": "A position stays invisible until you give it a mesh, and a mesh lets things pass until you give it a collider.",
+       "figure": "Three stations in a row: an empty label, a white sphere, and a sphere that stops the cyan feeler.",
+       "builds": "point_absent, point_visible, point_solid (Point_One)"
+      },
+      {
+       "n": "1.4",
+       "title": "Godot's own shapes",
+       "idea": "Box, sphere, cylinder, prism and torus are shapes you set with a few numbers.",
+       "figure": "A row of lime primitives (box, sphere, cylinder, prism, torus) and a sphere at 4, 8, 16 and 64 segments.",
+       "builds": "sphere_low / sphere_mid / sphere_high (Primitives_Ignorance); prism_block (Primitives_Polythedra); the torus ring (Primitives_Portals)"
+      },
+      {
+       "n": "1.5",
+       "title": "Two points, three points",
+       "idea": "Give the supplied helper two points and it draws a line; give it three and it fills a face.",
+       "figure": "Two white spheres joined by a thin white segment, and three spheres closed into a lime triangle seen from slightly above.",
+       "builds": "two_points_line, line_demo (Point_Lines); triangle_construction_plate (Point_Triangle_Context); grab_tetrahedron (Primitives_Polythedra); cube_lines (Point_Animatedcube)"
+      },
+      {
+       "n": "1.6",
+       "title": "Every frame",
+       "idea": "_process runs again every frame, so a number can count while the program runs.",
+       "figure": "A frame-counter panel in three stills a second apart, the number larger each time.",
+       "builds": "frame_counter_display (Point_Zero)"
+      },
+      {
+       "n": "1.7",
+       "title": "Follow the mouse",
+       "idea": "Read the mouse in _process and the point goes there; leave a copy behind each frame with duplicate() and add_child(), and you are drawing.",
+       "figure": "Top view: a lime point at the cursor with a trail of small white dots behind it.",
+       "builds": "point_held (Point_Coordinates); draw_dot (Point_Trace)"
+      },
+      {
+       "n": "1.8",
+       "title": "Name a number",
+       "idea": "A variable is a name for a value you can read, change and use again: keep the court's sizes in variables.",
+       "figure": "The court from the front right in the course look: cyan corner pyramids, a lime spire on an off-white pedestal, orange cubes, an off-white sphere.",
+       "builds": "coordinate_readout (Point_Coordinates); pyramid, cube_scene, durer_scene (Primitives_Melencolia)"
+      }
+     ],
+     "examples": [
+      "Example 1.1: three stations (position, surface, boundary)",
+      "Example 1.2: a court of your own shapes",
+      "Example 1.3: the frame counter",
+      "Example 1.4: draw with the mouse"
+     ],
+     "exercises": [
+      "Make the collider bigger than the mesh and find the gap with the probe.",
+      "Set a SphereMesh to 4 radial segments: what body is it now?",
+      "Count by twos, then move the count into _ready and say what happens.",
+      "Halve the whole court by changing one variable."
+     ],
+     "project_step": "Start your room: a figure of your own made from Godot's shapes, placed by coordinates, with its sizes in variables, following the mouse.",
+     "image": {
+      "file": "/course/sketch/01-primitives.png",
+      "source": "Rendered new: Godot 4.6, course look (court of shapes, origin axes, mouse trail)",
+      "caption": "A court of Godot's own shapes at chosen coordinates: pyramids, cubes, a sphere and a torus, the origin with its three axes, and the dots a point leaves as it follows the mouse.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Dürer's truncated solid from Melencolia I, rebuilt from its corners once vertices sit in an array.",
+      "Archimedes' polygons closing on the circle (Primitives_Portals), once loops exist.",
+      "LeWitt's location drawings: an instruction as coordinates.",
+      "Kandinsky's point that becomes a plane as it grows."
+     ],
+     "borrowed": [
+      "base.tscn: floor, pink sky, sun, camera and a node named Point, in the course look (kit-base)",
+      "line(a, b) and triangle(a, b, c): supplied helpers that draw a segment or a filled face between points; they stay supplied until 11.7 opens the ArrayMesh they build",
+      "mouse_point(): the point on the floor under the cursor",
+      "contact_probe.gd: a moving cyan feeler that stops at colliders (Point One kit)",
+      "the frame-counter panel: a Label3D whose text you set"
+     ],
+     "notes_for_palle": "Primitives has 12 halls but only six ideas fit. The later halls need loops or arrays: Point_Trace's list, Point_Line_Grid's 5x5 plan_vitrine, Point_Animatedcube's vertex lists, Portals' polygon perimeter; they are built here at the depth the rung allows. 1.1 is a new opening section (make a script, attach it, press Play). length() moves to 2.5 and snapped() to a ch3 exercise. Durer's court stays the hall's subject, but the chapter calls it a court of your own shapes and Durer is a hook.",
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 2,
+     "sequence": "transformation",
+     "title": "Bodies That Change",
+     "subtitle": "Bodies move, turn and grow every frame, and an if decides when.",
+     "code_new": [
+      "delta: the time since the last frame; position += speed * delta",
+      "rotate_y() and scale (Godot transforms); translate(): a step along the body's own axes",
+      "conditionals: if and a true-or-false test; comparisons < > == !=",
+      "conditionals: else and elif; bool, a variable that remembers a state",
+      "conditionals: and, or, not; Input.is_action_pressed(), keys as conditions",
+      "length(): the distance between two points, b - a; queue_free(): remove a node, as when a cube is collected",
+      "parent and child: a child moves, turns and grows with its parent"
+     ],
+     "noc": "Learning Processing ch. 5 (no Nature of Code chapter)",
+     "halls": [
+      "Trans_Pre",
+      "Trans_Introduction",
+      "Trans_Translation",
+      "Trans_Rotation",
+      "Trans_Scale",
+      "Trans_Body",
+      "Trans_Pit"
+     ],
+     "make": "A pickup cube that bobs, turns and pulses, a carrier that waits at each bank, a wall that opens as you come, and a room you can scale small.",
+     "sections": [
+      {
+       "n": "2.1",
+       "title": "A little every frame",
+       "idea": "Add a small step to position in every _process and the body travels; multiply the step by delta and the speed holds at any frame rate.",
+       "figure": "A lime cube rising in three poses, the two earlier poses in lavender.",
+       "builds": "y_translation_cube (Trans_Pre); x / y / z_translation_cube carriers (Trans_Translation)"
+      },
+      {
+       "n": "2.2",
+       "title": "Turn and grow",
+       "idea": "rotate_y() turns a body around its own axis, and scale multiplies its size; both keep its shape.",
+       "figure": "One cube turned in three steps, and one cube at three sizes.",
+       "builds": "rotation_oscillation_cube, uniform_scale_marker (Trans_Pre)"
+      },
+      {
+       "n": "2.3",
+       "title": "If it passes the line",
+       "idea": "An if asks a question that is true or false: if the cube is above the top, reverse its speed.",
+       "figure": "The rising cube under a white top line with 'if y > top: turn back' above it.",
+       "builds": "pick_up_cube, the bob (Trans_Pre)"
+      },
+      {
+       "n": "2.4",
+       "title": "Wait, then go back",
+       "idea": "A bool remembers whether the body is moving or waiting, and else says what happens otherwise.",
+       "figure": "The carrier cube resting at the far bank over a fire basin, a half-full timer bar under it.",
+       "builds": "the transport carrier tc and the turning plank rc (Trans_Introduction); rotation_wall_crossings (Trans_Rotation)"
+      },
+      {
+       "n": "2.5",
+       "title": "Close enough",
+       "idea": "Measure the distance to the visitor with length(); under the reach, open the slat, shrink the block or collect the cube with queue_free().",
+       "figure": "A wall of slats from above, the ones nearest a cyan walker turned open.",
+       "builds": "approach_wall, approach_scale (Trans_Body); collecting pick_up_cube (Trans_Translation)"
+      },
+      {
+       "n": "2.6",
+       "title": "Keys decide",
+       "idea": "Input.is_action_pressed() asks about a key, and and, or and not join several questions into one.",
+       "figure": "The cyan walker between orange pusher blocks, the arrow keys drawn on the floor.",
+       "builds": "adjustable_landing (Trans_Introduction); pusher_block, grower_block (Trans_Pit)"
+      },
+      {
+       "n": "2.7",
+       "title": "Children follow",
+       "idea": "A child moves, turns and grows with its parent: scale the room and everything in it follows.",
+       "figure": "The room at scale = 4, the orange door walkable, its scale-1 outline in lavender.",
+       "builds": "scale_me (Trans_Scale)"
+      },
+      {
+       "n": "2.8",
+       "title": "Order matters",
+       "idea": "translate() moves along the body's own axes, so turning then moving is not the same as moving then turning.",
+       "figure": "Two finned forms from one start, X-then-Y in cyan and Y-then-X in orange, pointing different ways.",
+       "builds": "transform_composition (Trans_Introduction); transform_composition_workbench (Trans_Rotation)"
+      }
+     ],
+     "examples": [
+      "Example 2.1: the pickup cube (bob, turn, pulse)",
+      "Example 2.2: a cube bouncing between floor and top",
+      "Example 2.3: the carrier that waits at each bank",
+      "Example 2.4: the wall that opens as you come",
+      "Example 2.5: a room scaled by four"
+     ],
+     "exercises": [
+      "Make the pickup cube pause at the top before it falls.",
+      "Open the slats only if the visitor is close and moving.",
+      "Steer the plank with two keys and cross the gap.",
+      "Swap rotate and translate, and say where the fin will point before you run it."
+     ],
+     "project_step": "Your figure moves, turns and grows; keys steer it, walls turn it back, and it waits at an edge.",
+     "image": {
+      "file": "/course/sketch/02-transformation.png",
+      "source": "Rendered new: Godot 4.6, course look (still, move, turn, grow)",
+      "caption": "Still, move, turn, grow: two earlier poses in lavender, the present one in lime; the moving cube turns back at the top line.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Carroll's DRINK ME (Trans_Scale): what uniform scaling keeps and what it gives a body.",
+      "The platform-game pickup as a study in game feel.",
+      "Escher's stairs return in the foundations crisis."
+     ],
+     "borrowed": [
+      "walker.tscn: the cyan capsule you steer with WASD, the visitor (kit-base)",
+      "rider code: carries whoever stands on a carrier (_translate_rider in the hall)",
+      "lerp() and pingpong(): built-ins that pick a value between two ends; called, not written"
+     ],
+     "notes_for_palle": "Trans_Rotation's rotation_array_compare needs a loop, so it is an exercise in ch3. Trans_Pit's grower moves by cosine; pingpong() stands in until wave functions (NOC 3). Mouse and key events, Learning Processing's ch3, arrive here because Godot asks about input through if. length() (from the old 1.7) opens in 2.5; translate() is added to 2.8 so the order of two steps can be taught here. Carroll's DRINK ME is a hook; the room is just a room scaled by four.",
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 3,
+     "sequence": "array_tutorial",
+     "title": "Many From One",
+     "subtitle": "A loop makes a row, a grid, a lattice and a floor with a rule.",
+     "code_new": [
+      "loops: while, repeat as long as a test is true",
+      "loops: for i in n, counting for you; the loop variable as an address, i * spacing",
+      "preload() and PackedScene.instantiate(): many copies of one scene",
+      "loops: nested loops, x then z, then y",
+      "loops: % (remainder), a rule that repeats",
+      "loops: a rule plus a clock, (x + z + phase) % 2"
+     ],
+     "noc": "Learning Processing ch. 6 (no Nature of Code chapter)",
+     "halls": [
+      "Array",
+      "Tutorial_3D",
+      "Tutorial_Tiling_Floor",
+      "Tutorial_Tiling_Walls",
+      "Tutorial_Disco"
+     ],
+     "make": "A hall of copies: a row, a 4 x 4 grid, a 4 x 4 x 4 lattice you can fly through, and an off-white and near-black floor whose rule changes with the beat.",
+     "sections": [
+      {
+       "n": "3.1",
+       "title": "Again, while it holds",
+       "idea": "while repeats its block as long as its test is true: instantiate() a cube while there are fewer than four.",
+       "figure": "Four lime cubes in a row with a counter i under each.",
+       "builds": "row_3_x (Array)"
+      },
+      {
+       "n": "3.2",
+       "title": "for counts for you",
+       "idea": "for i in 4 runs its block four times with i = 0, 1, 2, 3, and i times the spacing places each copy.",
+       "figure": "Four pickup cubes in a row, i = 0 to 3 written above them, a second line along z.",
+       "builds": "row_3_x, column_3_z (Array); rotation_array_compare rows (Trans_Rotation, revisited)"
+      },
+      {
+       "n": "3.3",
+       "title": "A loop inside a loop",
+       "idea": "Put a loop for z inside a loop for x and you get a grid; each cube knows its address, x and z.",
+       "figure": "A 4 x 4 grid of cyan cubes from above, each on a plate that shows its x and z.",
+       "builds": "grid_2d_4x4 (Array)"
+      },
+      {
+       "n": "3.4",
+       "title": "The third index",
+       "idea": "A third loop for y makes a lattice, and the spacing decides whether a body fits between the cubes.",
+       "figure": "The 4 x 4 x 4 orange lattice with a cyan capsule hovering inside it.",
+       "builds": "grid_3d_4x4x4 (Array); array_flight_lab (Tutorial_3D)"
+      },
+      {
+       "n": "3.5",
+       "title": "A rule at every address",
+       "idea": "(x + z) % 2 is 0 or 1, so each tile asks it once and the floor becomes a checker.",
+       "figure": "An 8 x 8 floor of off-white and near-black tiles with a lime frame, one tile outlined in orange with its sum written on it.",
+       "builds": "tiling_principles, TRANSLATE and ALTERNATE (Tutorial_Tiling_Floor)"
+      },
+      {
+       "n": "3.6",
+       "title": "Turn the tile by its address",
+       "idea": "One diagonal tile, turned by (x + z) % 4 quarter turns, mirrored or shifted by address, gives six floors.",
+       "figure": "Six off-white and near-black fields from one diagonal tile, each in a lime frame, the last with one exception.",
+       "builds": "tiling_principles, six fields and ONE EXCEPTION (Tutorial_Tiling_Floor)"
+      },
+      {
+       "n": "3.7",
+       "title": "Stand it up",
+       "idea": "Swap z for y and the same loops build a wall; one if keeps one tile different.",
+       "figure": "The six fields as tall panels in lime frames, and the hinged exception panel turned open onto the landing.",
+       "builds": "tiling_principles in wall mode, wall_exception (Tutorial_Tiling_Walls)"
+      },
+      {
+       "n": "3.8",
+       "title": "A floor with a clock",
+       "idea": "Add a phase that grows each beat, and (x + z + phase) % 2 makes the floor blink.",
+       "figure": "The disco checker one step apart: off-white and near-black swapped on the same tiles, in a lime frame.",
+       "builds": "standalone_disco, disco_controls (Tutorial_Disco)",
+       "caption": "Rows, diagonals and a snake are other rules for the same clock."
+      }
+     ],
+     "examples": [
+      "Example 3.1: a row of copies",
+      "Example 3.2: the grid with addresses",
+      "Example 3.3: the lattice you can fly through",
+      "Example 3.4: six floors from one tile",
+      "Example 3.5: the blinking disco floor"
+     ],
+     "exercises": [
+      "Build the row with while, then with for; which reads better?",
+      "Build the row of rotations: six cubes, each turned 18 degrees more than the last.",
+      "Widen the lattice spacing until the capsule fits between the cubes.",
+      "Write a rule for stripes, and one that leaves a single tile different.",
+      "Place each cube with snapped(x, 0.5) so it falls on a half-metre grid."
+     ],
+     "project_step": "Lay a floor in your room: a grid of copies under your figure, with a rule of your own that ticks with a phase.",
+     "image": {
+      "file": "/course/sketch/03-array_tutorial.png",
+      "source": "Rendered new: Godot 4.6, course look, scratchpad/sketch/p1_render/render.gd --mode=ch3 (Array's row, grid and lattice, and the tiling floor's checker)",
+      "caption": "Four loops, four bodies: for i, for x and z, for x, y and z, and (x + z) % 2.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Vera Molnár's (Des)Ordres (the Array hall's molnar_cube_study), once randomness can disturb the lattice.",
+      "Truchet's diagonal tiles (1704) behind the tiling floor.",
+      "Anni Albers' weaving drafts as nested loops."
+     ],
+     "borrowed": [
+      "the diagonal tile: a half-black square made with ch1's triangle(a, b, c)",
+      "the flight region: lets the walker fly inside the lattice (Tutorial_3D)",
+      "cell_at(x, z): finds a floor tile by its address, until arrays arrive in ch5",
+      "the collection record (a value going from 1 to 0 when a cube is taken): shown, written as an array in ch5"
+     ],
+     "notes_for_palle": "array_tutorial is named for arrays, but the ladder puts arrays last. So it teaches loops and addresses; its stored values (Array's tables, Tutorial_3D's values[y][z][x]) are written in ch5. The step_sequencer waits for ch5, where Pattern_Disco has the same machine. array_floor_writer, pulsar_visualizer and molnar_cube_study are not built. Tutorial_3D is a hall about flying in a headset; on desktop you fly with keys.",
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 4,
+     "sequence": "color",
+     "title": "Colour by Function",
+     "subtitle": "Write functions that answer with a colour, then a class whose objects each carry their own.",
+     "code_new": [
+      "Color(r, g, b) and a material's albedo_color",
+      "functions: func with parameters",
+      "functions: return, a function answers",
+      "functions: local variables live inside their function",
+      "functions: Color.from_hsv() and lerp() read as functions like yours",
+      "objects: class_name, a class of your own",
+      "objects: @export, one class with many settings",
+      "objects: methods, and many objects from one class"
+     ],
+     "noc": "Learning Processing ch. 7-8 (no Nature of Code chapter)",
+     "halls": [
+      "Color_Context_Placed",
+      "Color_Flashlight",
+      "Color_Nails",
+      "Color_Rainbow",
+      "Color_Pillar",
+      "Color_Grid_Pallet",
+      "Color_Paint",
+      "Color_Walls"
+     ],
+     "make": "A colour hall of your own: stacks coloured by four functions, a rainbow, a field of pillars, and spray cans and glass panes that are objects of your own classes.",
+     "sections": [
+      {
+       "n": "4.1",
+       "title": "A colour is three numbers",
+       "idea": "Color(1, 0.55, 0.1) is red, green and blue from 0 to 1; give it to a material and the body wears it.",
+       "figure": "One stack of five shapes, all in orange.",
+       "builds": "chroma_stack, one colour (Color_Context_Placed)"
+      },
+      {
+       "n": "4.2",
+       "title": "A function answers",
+       "idea": "func by_height(level) -> Color takes a number and returns a colour: one stack, four functions, four columns.",
+       "figure": "Four identical stacks: one colour, by shape, by height, from below.",
+       "builds": "chroma_stack, four rules (Color_Context_Placed)"
+      },
+      {
+       "n": "4.3",
+       "title": "Light has a colour",
+       "idea": "A SpotLight3D has a light_color, and where a red pool meets a green one you see yellow.",
+       "figure": "Red, green and blue lamp pools overlapping on a pale board.",
+       "builds": "flashlight_demo (Color_Flashlight)"
+      },
+      {
+       "n": "4.4",
+       "title": "Where you hold it",
+       "idea": "colour_from(p) turns a point in a box into red, green and blue; move the point and the nails change.",
+       "figure": "A giant hand with lime nails, and a point held inside a wireframe RGB box that sets their colour.",
+       "builds": "nail_color_controller, hand_color_controller (Color_Nails)"
+      },
+      {
+       "n": "4.5",
+       "title": "Around the hue circle",
+       "idea": "Color.from_hsv() walks around the colour circle: hue_for(i, count) shares it among bands, and colour_at(p) spreads it over a field.",
+       "figure": "The rainbow arch at six bands and at forty-eight, and the pillar field: hue across, saturation along, value up.",
+       "builds": "rainbow (Color_Rainbow); pillarcolorcollection (Color_Pillar)"
+      },
+      {
+       "n": "4.6",
+       "title": "A rule over the floor",
+       "idea": "ink(x, z) returns one of four colours from (x + z) % 4, and a colour you paint by hand stays until the rule runs again.",
+       "figure": "The grid floor in the four-colour rule, one square outlined in white.",
+       "builds": "gridcolorizer (Color_Grid_Pallet)"
+      },
+      {
+       "n": "4.7",
+       "title": "A class of your own",
+       "idea": "class_name SprayCan, with an @export colour and a spray() method: thirty cans from one class, each in its own colour.",
+       "figure": "A tray of spray cans in many colours before a canvas with a soft lime patch.",
+       "builds": "ball_painting_demo (Color_Paint)"
+      },
+      {
+       "n": "4.8",
+       "title": "Objects in a room",
+       "idea": "Twelve Pane objects, each with its own colour, width and turn, make an office you can see through.",
+       "figure": "Staggered translucent cyan and orange panes overlapping into a third colour, a chair behind them.",
+       "builds": "color_constellation_office, gradient_interpolator (Color_Walls)"
+      }
+     ],
+     "examples": [
+      "Example 4.1: four colour rules on one stack",
+      "Example 4.2: three lamps on a board",
+      "Example 4.3: the rainbow divided again",
+      "Example 4.4: the HSV pillar field",
+      "Example 4.5: thirty spray cans from one class"
+     ],
+     "exercises": [
+      "Write a fifth rule: colour by distance from the sphere.",
+      "Make a hue sweep from pink to orange go the short way round.",
+      "Give SprayCan a size export and place three cans of different sizes.",
+      "Mix two colours in RGB and in HSV and find where the middles differ most."
+     ],
+     "project_step": "Your figure becomes a class: @export its colour and size, colour its parts with your own functions, and place three of them.",
+     "image": {
+      "file": "/course/sketch/04-color.png",
+      "source": "Rendered new: Godot 4.6, course look (one stack of five shapes, four colour functions)",
+      "caption": "One stack of five shapes, four functions that answer with a colour.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Albers' Interaction of Color: one colour made to look like two (albers_wall_gallery, SimultaneousContrast).",
+      "Bauhaus colour-shape pairs, such as Kandinsky's yellow triangle, in Color_Context_Placed.",
+      "Audre Lorde and skin colour in Color_Nails: what a colour slider cannot change."
+     ],
+     "borrowed": [
+      "a lamp you can carry: the supplied pickup with a SpotLight3D inside (Color_Flashlight)",
+      "cell_at(x, z): finds the floor cube at an address (from ch3), until arrays exist",
+      "the canvas's paint-into-image call behind spray(); images are opened in ch5",
+      "point_on_canvas(ray): the point where a ray from the nozzle meets the canvas; supplied, the ray inside is not opened in this course",
+      "the rainbow's band mesh; you write the colours"
+     ],
+     "notes_for_palle": "Objects arrive with Color_Paint (hall 7), so Flashlight's four lamps (hall 2) are four nodes set by hand. Color_Paint's canvas is a shader in the hall; the course paints into an Image and leaves shaders for ch12. Color_Walls' PANES table is an array in the hall; here the panes are made in a loop from i.",
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 5,
+     "sequence": "tiling",
+     "title": "A Source, Many Copies",
+     "subtitle": "Keep a 4 x 4 source in an array and copy it by symmetry.",
+     "code_new": [
+      "arrays: [ ] and an index, steps[i]",
+      "arrays: size() and append()",
+      "arrays: for item in array",
+      "arrays: writing into an array, steps[i] = true",
+      "arrays: arrays of arrays, source[y][x]",
+      "arrays: % wraps an address back into the source",
+      "Image.set_pixel() and ImageTexture: a picture from an array",
+      "arrays: an array of objects"
+     ],
+     "noc": "Learning Processing ch. 9 (no Nature of Code chapter)",
+     "halls": [
+      "Pattern_Disco",
+      "Pattern_Foundry",
+      "Tutorial_Pattern",
+      "Array_Patterns",
+      "Symmetry_Seventeen",
+      "Ribbon_Patterns_01",
+      "Ribbon_Patterns_02",
+      "Ribbon_Patterns_03"
+     ],
+     "make": "A patterned room: a 4 x 4 source you paint, copied over floor and walls by P1, PM, PG and P4, and a row of your figures wearing it.",
+     "sections": [
+      {
+       "n": "5.1",
+       "title": "A list of steps",
+       "idea": "var steps := [true, false, false, true] keeps values in order; steps[i] reads one, and the playhead reads them in turn.",
+       "figure": "The step sequencer grid with a cyan playhead on one column and three lit cells.",
+       "builds": "step_sequencer (Pattern_Disco)"
+      },
+      {
+       "n": "5.2",
+       "title": "A palette is a list",
+       "idea": "palette[value] turns a 0 or 1 into a colour; swap the palette and every square changes while the values stay.",
+       "figure": "One checker split down the middle: cyan and orange on the left half, lime and lavender on the right, the same array of values under both.",
+       "builds": "disco_controls, COLOUR (Pattern_Disco)"
+      },
+      {
+       "n": "5.3",
+       "title": "A tile is rows",
+       "idea": "source[y][x] holds sixteen colours in four rows of four, and two loops draw it as cells.",
+       "figure": "The 4 x 4 source: a lime bend, a cyan corner and an orange dot on off-white.",
+       "builds": "pattern_tile_4x4 (Pattern_Foundry); grid_2d_4x4 (Ribbon_Patterns_01)"
+      },
+      {
+       "n": "5.4",
+       "title": "Copy by rule",
+       "idea": "Every cell of a big field reads source[y % 4][x % 4]; read x backwards in odd columns and the copies mirror.",
+       "figure": "The P1 and PM panels side by side, made from one source.",
+       "builds": "pattern_tile_mirror, pattern_machine_a (Pattern_Foundry)"
+      },
+      {
+       "n": "5.5",
+       "title": "Write into the source",
+       "idea": "Painting a cell writes a colour into the array and every copy changes at once; FLIP X rebuilds each row from its far end.",
+       "figure": "The pattern maker console with one cell repainted, the new colour appearing across both fields.",
+       "builds": "pattern_maker_station (Tutorial_Pattern)"
+      },
+      {
+       "n": "5.6",
+       "title": "Wrap a room",
+       "idea": "Write the field into an Image and the floor and walls wear it; % brings every address back into the source.",
+       "figure": "The tunnel with floor cell [10, 1] outlined and source cell [2, 1] lit on the console.",
+       "builds": "pattern_tunnel_machine, pattern_tile_brick (Array_Patterns)"
+      },
+      {
+       "n": "5.7",
+       "title": "What counts as the same",
+       "idea": "P1, PM, PG and P4 are four ways to read one array: translate, mirror, glide, turn.",
+       "figure": "One source on the floor and four panels behind it: P1, PM, PG, P4.",
+       "builds": "vr_tile_editor, wallpaper_cage (Symmetry_Seventeen)"
+      },
+      {
+       "n": "5.8",
+       "title": "A list of bodies",
+       "idea": "An array can hold objects: keep your figures in a list, dress each in the pattern, and send them down the catwalk in turn.",
+       "figure": "Three lime figures in a row on a catwalk, their skirts in the patterned field.",
+       "builds": "drag_catwalk, fabric_shader_studio (Ribbon_Patterns_03); grid_3d_4x4x4 (Ribbon_Patterns_01)"
+      }
+     ],
+     "examples": [
+      "Example 5.1: a sixteen-step score",
+      "Example 5.2: one value, two palettes",
+      "Example 5.3: the 4 x 4 source painted by hand",
+      "Example 5.4: four wallpapers from one array",
+      "Example 5.5: a row of dressed figures"
+     ],
+     "exercises": [
+      "Keep chapter 3's collected cubes in an array: values[i] = 0 when one is taken.",
+      "Write P2: odd tiles turned half a turn.",
+      "Make the source 5 x 5 by changing one number in the rule.",
+      "Sort your figures by height with two loops and a swap.",
+      "Put one grey square on an array of coloured grounds: why does it look like several greys?"
+     ],
+     "project_step": "Paint a 4 x 4 source for your room, dress its floor and walls with one wallpaper rule, and keep your figures in an array.",
+     "image": {
+      "file": "/course/sketch/05-tiling.png",
+      "source": "Rendered new: Godot 4.6, course look, scratchpad/sketch/p1_render/render.gd --mode=ch5 (after Symmetry_Seventeen's source and rules)",
+      "caption": "One 4 x 4 source array read four ways: P1 translate, PM mirror, PG glide, P4 turn.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "The Alhambra and the seventeen wallpaper groups (mill_alhambra_p6m, wallpaper_cage).",
+      "Escher's tessellations (loom_escher_mirror).",
+      "LeWitt's Wall Drawing 291 in Pattern_Foundry.",
+      "Persian girih (mill_persian_p4).",
+      "The drag runway: pattern as dress and performance (Ribbon_Patterns_03)."
+     ],
+     "borrowed": [
+      "a note per track: the AudioStreamPlayer behind each sequencer step",
+      "the catwalk path the figures walk along",
+      "pick(): the floor cell under the pointer or the controller, for painting a cell; the ray inside is supplied and not opened in this course",
+      "the skirt's UV repeat: shown as a shader in the hall; the course puts an ImageTexture on the skirt, and shaders come in ch12"
+     ],
+     "notes_for_palle": "Ribbon_Patterns_02 is a colour annex (contrast, metamerism, prism) with no array argument. Its contrast study is exercise 5; the rest is a hook. The halls draw patterns with shaders; the course uses Image.set_pixel. P6M, the kaleidoscope and the full 17-group cage need 60-degree turns (trigonometry) and stay as hooks. Ribbon_Patterns_01's bar_array_bubble_sort is the place for sorting if you want it.",
+     "media": {
+      "kind": "still"
+     }
+    }
+   ],
+   "ladder_problems": [
+    "array_tutorial (ch3) is named for arrays, but the ladder puts arrays last. ch3 teaches loops and addresses; its stored values are only shown there and are written as arrays in ch5.",
+    "GDScript has no static mode, so from the first line of ch1 code goes inside func _ready(). 1.1 now teaches that: how to make a script, attach it to a node and press Play.",
+    "Making a copy in code (duplicate, add_child, instantiate, queue_free) is taught where it first matters: 1.7, 2.5 and 3.1.",
+    "The later Primitives halls need loops and arrays; they are built with Godot's primitive meshes and the supplied line() and triangle(), which stay supplied until 11.7 opens the ArrayMesh they build.",
+    "Learning Processing's mouse and key events move to conditionals (ch2), because Godot asks about input through if; ch1's interaction rung is reading the mouse every frame.",
+    "random() waits for randomness (NOC 0, ch10). Godot built-ins (snapped, lerp, pingpong, Color.from_hsv) are called from the start; writing your own functions waits for ch4.",
+    "Rays are used by the spray can (4.7) and the pattern painter (5.5) and are supplied, not opened.",
+    "Objects arrive at Color_Paint (hall 7 of color), so Color_Flashlight's four lamps are first set by hand."
+   ]
+  },
+  {
+   "part": "II",
+   "title": "Motion",
+   "summary": "Part II opens The Nature of Code. You already have the whole ladder from Part I; now things start to move. Chapter 6 starts with velocity and acceleration (NOC 1), then reads a rate and a sum out of the same steps, and ends on a field that tells a particle where to go next. Chapter 7 opens the vector itself (add, dot, length) and builds a Mover class that wind, drag, a spring and an attractor push around; it ends with a place that has its own gravity (NOC 1 and 2). Chapter 8 lets rules settle into forms: a point walks downhill, a net of Particles relaxes into a hanging form that turns over into a vault, arms balance, and an annealer climbs out of small valleys (NOC 6). Chapter 9 turns the circle sideways into a sine and follows what returns: a pendulum, its swing laid out across the floor, sine surfaces, travelling waves, a tone computed sample by sample, and sums of waves (NOC 3). Each chapter adds one thing to your figure and your room: a launch, a Mover with a corner of its own gravity, a hung-and-inverted vault, and something that returns.",
+   "chapters": [
+    {
+     "n": 6,
+     "sequence": "change",
+     "title": "A Curve of Steps",
+     "subtitle": "A rate is a rise over a gap; motion is a sum of small steps.",
+     "code_new": [
+      "velocity: position += velocity * delta",
+      "acceleration: velocity += acceleration * delta, before the position line",
+      "_physics_process and a fixed step of your own",
+      "rate = (f(x + h) - f(x)) / h",
+      "accumulation: total += f(x) * width in a loop",
+      "a direction field: ask for a direction at the place you are now",
+      "wrapping at the edges with fposmod"
+     ],
+     "noc": "NOC 1 Vectors (motion: velocity and acceleration as rates); the flow field is borrowed from NOC 5 and used as prescribed motion",
+     "halls": [
+      "Change_Intro",
+      "Flow_Field"
+     ],
+     "make": "A ball you launch with two lines of your own (velocity += gravity * delta; position += velocity * delta), and a canvas of particles that ask a field for their next step.",
+     "sections": [
+      {
+       "n": "6.1",
+       "title": "Velocity is a rate in time",
+       "idea": "Velocity is how far you move in a second, so every frame you add velocity times delta to the position.",
+       "figure": "A lime ball crossing the floor, leaving a white dot at every tick, evenly spaced, with a cyan velocity arrow at the ball.",
+       "builds": "velocity_arrow"
+      },
+      {
+       "n": "6.2",
+       "title": "A curve made of steps",
+       "idea": "Add gravity to the velocity, then the velocity to the position, every step, and a throw draws its own arc.",
+       "figure": "A lime ball thrown across the floor: the same throw stepped in big orange steps and in small white dots, the ball at the landing.",
+       "builds": "the bullet (kit), checked against launch_arc's formula"
+      },
+      {
+       "n": "6.3",
+       "title": "Two readings, one rate",
+       "idea": "Read a curve at two places and divide the rise by the gap: that is a rate, and a smaller gap reads closer.",
+       "figure": "Side view: a white curve against the pink sky with a lime point, and secant lines to a lavender and a cyan point that turn toward the tangent as the gap shrinks.",
+       "builds": "tangent_slope_workbench"
+      },
+      {
+       "n": "6.4",
+       "title": "One height for a width",
+       "idea": "Let one height stand for a whole strip and add the strips: you get an area, and more strips give a closer total.",
+       "figure": "A curve above the violet floor with sixty-four thin lime strips under it, and four wide lavender strips outlined over them.",
+       "builds": "riemann_sum_workbench"
+      },
+      {
+       "n": "6.5",
+       "title": "Ask the field",
+       "idea": "A particle asks for a direction where it stands, takes a small step, and asks again, so the path draws itself.",
+       "figure": "Top view of the flow field canvas: a grid of short white arrows, with lime particles leaving white trails that bend along them.",
+       "builds": "flow_field_painter"
+      },
+      {
+       "n": "6.6",
+       "title": "The edge returns you",
+       "idea": "When a particle leaves one side of the canvas, put it back on the other.",
+       "figure": "The same canvas: one trail leaves the right edge and goes on from the left, with the stray line the drawing makes across the jump.",
+       "builds": "flow_field_painter"
+      }
+     ],
+     "examples": [
+      "Example 6.1: A ball with a velocity",
+      "Example 6.2: The bullet: a throw in steps",
+      "Example 6.3: A secant becomes a tangent",
+      "Example 6.4: Strips under a curve",
+      "Example 6.5: Particles in a held field"
+     ],
+     "exercises": [
+      "Swap the bullet's two lines and see where it lands.",
+      "Halve h five times and print the rate each time: when does it stop changing?",
+      "Take the strip heights from the left edge instead of the middle: which total is closer?",
+      "Replace the wrap with a wall the particle bounces off."
+     ],
+     "project_step": "Your figure is thrown: two lines of your own launch it across the room, at a step size you chose.",
+     "borrowed": [
+      "f(x): the Change_Intro curve, a supplied function built from sines (sin and cos are opened in chapter 9)",
+      "field_direction(p): returns a unit direction at an address; supplied, because its noise comes in chapter 11 and its cos and sin in chapter 9",
+      "trail(points, n): keeps the last n places of a moving body; opened in 9.4, where push_front() and resize() are taught"
+     ],
+     "case_study_hooks": [
+      "Zeno's staircase (zeno_staircase): infinitely many steps with a finite total",
+      "Archimedes' pi from polygons (riemann_pi)",
+      "Marey's chronophotographs: motion recorded as steps"
+     ],
+     "notes_for_palle": "The chapter now leads with velocity and acceleration (NOC 1) and brings the rate and the sum in afterwards; the fundamental theorem (old 6.3, ftc_bridge) is an extension, not a section. Change has only two halls; its motion half is the bullet kit. Flow_Field is NOC 5 material used as prescribed motion; its noise is supplied until chapter 11. Change_Intro's secondary encounters (riemann_pump, zeno_staircase, paper_regatta, descent_marble_toy) are not on the path.",
+     "image": {
+      "file": "/course/sketch/06-change.png",
+      "source": "Rendered new: Godot 4.6, course look (secant to tangent, and one throw stepped two ways)",
+      "caption": "A rate: the gap shrinks toward the tangent (left). One throw in big steps and in small ones (right).",
+      "rendered_new": true
+     },
+     "extensions": [
+      {
+       "title": "Adding up the changes",
+       "idea": "Add every small rise and fall along an arch and you get its height difference, but not where it started.",
+       "figure": "An arch with signed strips beneath it, rising strips lime and falling strips orange.",
+       "builds": "ftc_bridge"
+      }
+     ],
+     "media": {
+      "kind": "clip",
+      "overlay": "velocity += gravity * delta; position += velocity * delta",
+      "plan": "The throw stepped at 0.18 s and at 1/60 s, the two lines of code on screen.",
+      "file": "/course/sketch/06-change.webp"
+     }
+    },
+    {
+     "n": 7,
+     "sequence": "forces",
+     "title": "Arrows That Push",
+     "subtitle": "A vector is a move; a force is a vector that changes velocity, divided by mass.",
+     "code_new": [
+      "length() and normalized(); vector addition and subtraction as moves",
+      "dot() and projection",
+      "mass, and acceleration = force / mass; apply_force(): forces summed into acceleration, cleared every step",
+      "RigidBody3D and apply_central_force()",
+      "drag (-c * velocity) and spring (-k * x) as functions that return vectors",
+      "attraction: G * m1 * m2 / r squared, along the line between two bodies",
+      "centre of mass and the support outline (Geometry2D.convex_hull)",
+      "Area3D: a region that overrides gravity; body_entered and body_exited"
+     ],
+     "noc": "NOC 1 Vectors (vector math) and NOC 2 Forces",
+     "halls": [
+      "Vectors_Act1_WhatAVectorIs",
+      "VFM_02_Operations",
+      "Vectors_Act2_VectorArithmetic",
+      "VFM_05_Launch",
+      "VFM_03_Motion",
+      "Vectors_Act3_FieldsAndMotion",
+      "Vectors_Act4a_KineticForces",
+      "Vectors_Act4b_Oscillation",
+      "VFM_07_Gravity",
+      "VFM_09_Legs",
+      "VFM_08_Arena",
+      "Vectors_Act5_ForceAsPlace"
+     ],
+     "make": "A Mover class of your own (position, velocity, acceleration, mass, apply_force) that wind, drag, a spring and an attractor push around, and a corner of your room with its own gravity.",
+     "sections": [
+      {
+       "n": "7.1",
+       "title": "The arrow between two points",
+       "idea": "A vector is end minus start: a move you can carry anywhere, with a length and a direction.",
+       "figure": "Two lime pins with a white arrow between them, and a lavender copy of both shifted sideways: the arrow is the same.",
+       "builds": "VectorBasics, vector_normalize_demo"
+      },
+      {
+       "n": "7.2",
+       "title": "Add two moves",
+       "idea": "Adding joins two moves into one: walk the first, then the second, and you have arrived by their sum.",
+       "figure": "Overhead plan: a lime leg, then an orange leg, ending at a cyan mark, with the direct white arrow from the start to the mark.",
+       "builds": "adder_board, vector_sub"
+      },
+      {
+       "n": "7.3",
+       "title": "How much two directions agree",
+       "idea": "The dot product says how much two directions agree: large when they point the same way, zero at a right angle.",
+       "figure": "A gap arrow and its shadow on a rail, seen from above: the shadow is long when the arrow runs along the rail.",
+       "builds": "dot_aligner, projection_shadow"
+      },
+      {
+       "n": "7.4",
+       "title": "A push that ends",
+       "idea": "A force changes velocity, a heavier body changes less, and when the push stops the velocity stays.",
+       "figure": "Side view of a lime cube on the violet floor: an orange force arrow for the first second only, then a cyan velocity arrow that carries on, with white dots spreading out and then evenly spaced.",
+       "builds": "launch_arc, VectorMotion"
+      },
+      {
+       "n": "7.5",
+       "title": "One field, two receivers",
+       "idea": "Read the field of 6.5 as the velocity and a body stops where the field is zero; add it to the velocity and the body overshoots.",
+       "figure": "A sink field of white arrows on the floor; a cyan body comes to rest at the centre, while a lime body crosses it and turns back.",
+       "builds": "VectorFieldFlow"
+      },
+      {
+       "n": "7.6",
+       "title": "Forces that answer the body",
+       "idea": "Drag pushes against the velocity and a spring pulls back toward rest; each force is a function that returns a vector.",
+       "figure": "One lime cube with two orange arrows: the drag against its velocity, and a spring's pull toward its rest line.",
+       "builds": "drag_corridor, spring_tower"
+      },
+      {
+       "n": "7.7",
+       "title": "Bodies that pull",
+       "idea": "Attraction points from one body to the other and weakens with distance; a sideways velocity turns the fall into an orbit.",
+       "figure": "An orange attractor and a lime satellite on a white elliptical trail, with an orange arrow pointing inward and a cyan arrow pointing along the path.",
+       "builds": "orbital_mechanics_demo, three_body_problem"
+      },
+      {
+       "n": "7.8",
+       "title": "Contact holds you up",
+       "idea": "A body stands while its centre of mass is above the outline of its feet.",
+       "figure": "A lime plate on three posts seen from above: the white outline of the post tops, and an orange mark at the plate's centre of mass inside it.",
+       "builds": "support_polygon_lab"
+      },
+      {
+       "n": "7.9",
+       "title": "A room with its own gravity",
+       "idea": "An Area3D can replace gravity for whatever enters it, so a law becomes a place.",
+       "figure": "A lavender cage of air over a gap, with a cube inside it rising along a tilted orange arrow.",
+       "builds": "vector_machine, force_field_zone"
+      }
+     ],
+     "examples": [
+      "Example 7.1: An arrow between two pins",
+      "Example 7.2: The Mover: wind and gravity on three masses",
+      "Example 7.3: Drag on three equal throws",
+      "Example 7.4: A spring that overshoots",
+      "Example 7.5: An orbit"
+     ],
+     "exercises": [
+      "Cap the Mover's speed with limit_length().",
+      "Make drag act only inside a box on the floor: a pool of honey.",
+      "Put a plate on three posts and move its centre of mass until it tips; predict first.",
+      "Roll two carts into each other and find what the pair keeps."
+     ],
+     "project_step": "Your figure becomes a Mover (position, velocity, acceleration, mass): it moves only by forces you wrote, and one corner of your room has its own gravity.",
+     "borrowed": [
+      "draw_arrow(from, to, colour): a supplied part that draws a vector as a rod and a cone (it turns the rod with a quaternion, which is not taught)"
+     ],
+     "case_study_hooks": [
+      "The head crab choosing its target (VFM_08_Arena), once steering arrives in chapter 20",
+      "The three-body problem as a first study of chaos",
+      "Galileo's two balls: why gravity grows with the mass it pulls"
+     ],
+     "notes_for_palle": "Nine sections (add, subtract and dot no longer share one; collisions are an exercise, not part of the centre-of-mass section). Change_Choreography moves to 9.2, where phase is taught. VFM_08_Arena's primary, the head crab choosing a target, is steering (chapter 20), so only its collision carts are used, as exercise 4. Springs are built here as a force, which gives chapter 9 their oscillation. No kit covers 7.1 to 7.7.",
+     "image": {
+      "file": "/course/sketch/07-forces.png",
+      "source": "Rendered new: Godot 4.6, course look (four panels: sum, masses, media, pull)",
+      "caption": "Forces add (wind + gravity = the sum); the same push on 1, 2 and 4 kg; the same slide in air, water and honey; a pull toward a centre.",
+      "rendered_new": true
+     },
+     "media": {
+      "kind": "clip",
+      "overlay": "apply_force(wind); apply_force(drag)",
+      "plan": "Wind on three masses, then the same slide in air, water and honey, the force lines on screen."
+     }
+    },
+    {
+     "n": 8,
+     "sequence": "formfinding",
+     "title": "Finding the Form",
+     "subtitle": "Let a rule settle: downhill steps, relaxed links and balanced arms find shapes nobody drew.",
+     "code_new": [
+      "the gradient from two samples on each side (central difference)",
+      "gradient descent: p -= rate * gradient(p); stopping rules: small slope, step limit, leaving the frame",
+      "cosh() and Curve3D",
+      "Verlet integration: a Particle class keeps position and previous; the velocity is now minus before; a pinned flag",
+      "constraints relaxed in passes",
+      "the lever law: m1 * d1 = m2 * d2",
+      "simulated annealing: accept a worse step with chance exp(-dE / T)",
+      "a stillness test: RigidBody3D sleeping, timed"
+     ],
+     "noc": "NOC 6 Physics and relaxation (Verlet, springs, constraints); descent and annealing come from Ada's halls",
+     "halls": [
+      "FormFinding_Descent",
+      "FormFinding_Catenary",
+      "FormFinding_Relaxation",
+      "FormFinding_Equilibrium",
+      "FormFinding_Annealing",
+      "FormFinding_Forge"
+     ],
+     "make": "A net that relaxes into a hanging form you turn over into a vault, and a point that walks downhill to the bottom of a landscape you wrote.",
+     "sections": [
+      {
+       "n": "8.1",
+       "title": "Downhill, one step",
+       "idea": "Read the slope on both sides of where you stand and step against it: p -= rate * gradient.",
+       "figure": "A cyan cost surface seen from three-quarters above, with a lime point leaving white dots down into a valley and an orange arrow pointing downhill.",
+       "builds": "descent_landscape_lab"
+      },
+      {
+       "n": "8.2",
+       "title": "Where it stops",
+       "idea": "The start picks the valley, a step that is too large jumps out of it, and you decide when it is done.",
+       "figure": "Two valleys: two trails from two starts ending in different hollows, and a third trail zigzagging out with a large rate.",
+       "builds": "descent_landscape_lab"
+      },
+      {
+       "n": "8.3",
+       "title": "The hanging chain",
+       "idea": "A chain hangs in a cosh curve, and drawing a sag by hand is not the same as finding it.",
+       "figure": "Side view: a hand-drawn lime cable sagging away from the white cosh curve it should have followed, with the curve's lavender mirror arch above.",
+       "builds": "cable_builder, laundry_line_cathedral, catenoid"
+      },
+      {
+       "n": "8.4",
+       "title": "The past is the velocity",
+       "idea": "A Particle keeps where it is and where it was, so its next place is now + (now - before) + gravity * dt * dt.",
+       "figure": "A row of lime Particles falling, each with a faint lavender copy at its previous place and the step drawn as a short white line.",
+       "builds": "verlet_workbench"
+      },
+      {
+       "n": "8.5",
+       "title": "Relax, pass after pass",
+       "idea": "Pull every link back toward its rest length, many times a step, and a net settles into a form nobody drew.",
+       "figure": "A net of Particles pinned at four orange corners: held flat, settled into a bowl, and turned over into an off-white vault.",
+       "builds": "verlet_workbench, mass_spring_bench"
+      },
+      {
+       "n": "8.6",
+       "title": "Where forces cancel",
+       "idea": "A lever balances when mass times distance is equal on both sides; hang arms from arms and a mobile balances itself.",
+       "figure": "A two-level mobile of lime and orange discs on white wires, with the heavy disc on the short arm.",
+       "builds": "calder_mobile"
+      },
+      {
+       "n": "8.7",
+       "title": "Willing to get worse",
+       "idea": "Accept an uphill step with a chance that shrinks as you cool, and the search can climb out of a small valley.",
+       "figure": "A corrugated bowl from three-quarters above: wide white jumps at first, then tight steps in the deepest hollow.",
+       "builds": "simulated_annealing, energy_landscape_bench"
+      },
+      {
+       "n": "8.8",
+       "title": "A shape that counts",
+       "idea": "Release a stack and let the engine decide: it counts only if it stands tall and stays still.",
+       "figure": "Two tiles: a tall lime stack standing, and the same pieces fallen into a quiet heap.",
+       "builds": "balance_puzzle, self_shaping_forge"
+      }
+     ],
+     "examples": [
+      "Example 8.1: Downhill on a bowl",
+      "Example 8.2: Two valleys, two starts",
+      "Example 8.3: A Verlet chain",
+      "Example 8.4: A hanging net turned into a vault",
+      "Example 8.5: Annealing on a wrinkled bowl"
+     ],
+     "exercises": [
+      "Make the step shrink as the slope flattens, and count the steps to the bottom.",
+      "Pin the net at three corners instead of four and turn it over.",
+      "Give the chain one heavy link: where does the curve bend?",
+      "Cool the annealer ten times faster: how often does it stop in the wrong valley?"
+     ],
+     "project_step": "Hang a net of Particles in your room from points you choose, let it settle, and stand its turned-over form over your Mover as a vault; add a marble that rolls downhill on a landscape you wrote.",
+     "borrowed": [
+      "landscape(x, z): the halls' cost functions, wrinkled with sines (trig is opened in chapter 9)",
+      "chance(p): true with probability p, for annealing; supplied until chapter 10 teaches randf()",
+      "the Calder mobile's builder, which hangs arms from arms by calling itself (recursion is chapter 14; build two levels by hand here)"
+     ],
+     "case_study_hooks": [
+      "Gaudi's hanging-chain model for the Colonia Guell crypt: form found by turning it over",
+      "Frei Otto's soap-film roofs (catenoid, minimal surfaces)",
+      "Calder's mobiles, balanced by the lever law"
+     ],
+     "notes_for_palle": "Chapter 8 owns the Particle class, Verlet and the constraint pass; soft bodies (chapter 17, also NOC 6) reuse them, not teach them again. frozen_glass_vessel moved to 17.7 (it needs ArrayMesh). Forge's balance puzzle needs RigidBody3D sleeping as a stillness test; the old balance kit covers it but has no pictures yet.",
+     "image": {
+      "file": "/course/sketch/08-formfinding.png",
+      "source": "Rendered for this sketch: scratch Godot 4.6 project, a Verlet net with 8 constraint passes, using the kit base's supplied look.gd",
+      "caption": "A net pinned at four corners relaxes into a form nobody drew; turned over, it is a vault.",
+      "rendered_new": true
+     },
+     "media": {
+      "kind": "clip",
+      "overlay": "relax(links)",
+      "plan": "The net settling pass after pass, then turned over into the vault; the constraint pass on screen."
+     }
+    },
+    {
+     "n": 9,
+     "sequence": "wavefunctions",
+     "title": "What Returns",
+     "subtitle": "Turn a circle sideways and it is a sine: pendulums, waves, stairs and tones.",
+     "code_new": [
+      "radians and TAU; sin() and cos()",
+      "polar coordinates: (r, angle) to x and y",
+      "amplitude, period, frequency, phase",
+      "angular velocity and angular acceleration (the pendulum)",
+      "a bounded record: push_front() and resize()",
+      "a wave: the same oscillation, delayed by distance",
+      "AudioStreamWAV filled sample by sample (PackedByteArray.encode_s16)",
+      "adding waves"
+     ],
+     "noc": "NOC 3 Oscillation (angles, trigonometry, polar coordinates, oscillation, waves, the pendulum); computed sound is Ada's own",
+     "halls": [
+      "WaveFunctions_Unit_Circle",
+      "Change_Choreography",
+      "WaveFunctions_Intro",
+      "WaveFunctions_Pendulum",
+      "WaveFunctions_Sine_Space",
+      "Wavefunctions_Bernini",
+      "Wavefunctions_Sky_Stairs",
+      "WaveFunctions_3D_Wave_Propagation",
+      "WaveFunctions_AirMusic",
+      "WaveFunctions_Effect_Sound",
+      "WaveFunctions_John_Cage",
+      "WaveFunctions_TrigWalkingPath",
+      "WaveFunctions_Synthesis_Lab"
+     ],
+     "make": "A point that goes round, a pendulum whose swing you can walk beside, and a bar that rings with a tone you computed sample by sample.",
+     "sections": [
+      {
+       "n": "9.1",
+       "title": "A point goes round",
+       "idea": "Add a little to an angle every frame and place the point at (cos, sin) times the radius: it goes round.",
+       "figure": "A ring of white dots on the pink sky, a lime point on it, and a white radius line from the centre.",
+       "builds": "unit_circle_advanced"
+      },
+      {
+       "n": "9.2",
+       "title": "Amplitude, period, phase",
+       "idea": "Laid out in time, the point's height is a sine, and its amplitude, period and phase are three numbers.",
+       "figure": "Twenty rods in a 4 by 5 grid, each a fifth of a turn ahead of its neighbour, their heights drawn as one sine above them.",
+       "builds": "unit_circle_advanced, phase_rod_array"
+      },
+      {
+       "n": "9.3",
+       "title": "The pendulum",
+       "idea": "Gravity pulls the bob back by the sine of its angle, and the angle together with the angular velocity says what comes next.",
+       "figure": "A lime bob on a white line above a ring, shown twice at the same place with cyan velocity arrows pointing opposite ways.",
+       "builds": "control_pendulum"
+      },
+      {
+       "n": "9.4",
+       "title": "A swing laid into space",
+       "idea": "Keep each sample with its time and push older ones farther away: a duration becomes a length you can walk beside.",
+       "figure": "The pendulum frame with white marks receding along the violet floor in a long wave.",
+       "builds": "PendulumWave"
+      },
+      {
+       "n": "9.5",
+       "title": "A sine you stand on",
+       "idea": "Feed a sine a position instead of a time and it becomes a surface, a twisted column or a stair.",
+       "figure": "A spiral stair of lime treads whose radius breathes in and out, with the cyan walker halfway up.",
+       "builds": "sine_flow_tray, bernini_columns, sine_cylinder_staircase"
+      },
+      {
+       "n": "9.6",
+       "title": "A wave travels",
+       "idea": "Give every point the same oscillation, a little later the farther it is from the source, and a ripple moves while nothing travels.",
+       "figure": "A grid of lime spheres seen from three-quarters above, with rings of height spreading from one corner.",
+       "builds": "coupled_oscillator_lattice, wave_propagation_3d"
+      },
+      {
+       "n": "9.7",
+       "title": "A wave you hear",
+       "idea": "Write a sine into an AudioStreamWAV, 44 100 numbers a second, let it fade with exp(), and a bar rings.",
+       "figure": "Eight lime bars on a table, one glowing, with its tone drawn above as a white sine under a fading lavender envelope.",
+       "builds": "resonating_metallophone, DualBallFMController"
+      },
+      {
+       "n": "9.8",
+       "title": "Adding waves",
+       "idea": "Two close tones add into a slow beat.",
+       "figure": "Three rows of lime bars, A, B and A+B, with the slow envelope traced on the sum.",
+       "builds": "beat_frequency_demo, additive_wave_demo",
+       "caption": "Five harmonics in the right amounts add into a sawtooth."
+      }
+     ],
+     "examples": [
+      "Example 9.1: A point on a circle",
+      "Example 9.2: Twenty rods out of phase",
+      "Example 9.3: A pendulum",
+      "Example 9.4: The swing laid on the floor",
+      "Example 9.5: A tone computed sample by sample"
+     ],
+     "exercises": [
+      "Give x and y different frequencies and draw a Lissajous figure.",
+      "Damp the pendulum, lay its record out, and watch the wave shrink.",
+      "Build a stair whose rise follows a sine instead of its radius: can the walker still climb it?",
+      "Ring the bars in a fixed order with fixed gaps: write a short piece of your own."
+     ],
+     "project_step": "Give your figure something that returns: its arm swings like a pendulum, a stair breathes under it, or a computed tone rings when it passes.",
+     "borrowed": [
+      "ValueMapper3D: the cage that turns where you hold a ball into three numbers for the FM rig (Effect_Sound)"
+     ],
+     "case_study_hooks": [
+      "Bernini's Solomonic columns in the St Peter's baldacchino",
+      "John Cage's chance operations and 4'33\"",
+      "Chladni plates (chladni_plate): standing waves made visible",
+      "The harmonograph: two pendulums drawing one figure"
+     ],
+     "notes_for_palle": "Twelve halls, plus Change_Choreography's phase rods from forces. Unit_Circle has to come first, because every other hall needs sin. Sky_Stairs and Bernini are one idea (a sine fed a position) and share 9.5. The AirMusic bar (one sine, one exp) is the clean way into sound; Effect_Sound's FM rig is heavy for a first tone and comes second. Kits that exist: sound (Lissajous ratios) and spiral-stair; no pendulum kit was built. The image was rendered new.",
+     "image": {
+      "file": "/course/sketch/09-wavefunctions.png",
+      "source": "Rendered for this sketch: scratch Godot 4.6 project scratchpad/sketch/part2_render/render.gd, using the kit base's supplied look.gd",
+      "caption": "A point goes round; its height, laid out in time, is a sine.",
+      "rendered_new": true
+     },
+     "media": {
+      "kind": "clip",
+      "overlay": "angle += speed * delta",
+      "plan": "A point going round while its height is drawn out as a sine; the pendulum's swing laid on the floor."
+     }
+    }
+   ],
+   "ladder_problems": [
+    "Chapter 6 uses Vector3 + and * for motion before chapter 7 opens vector maths. It holds because Part I already used b - a and offsets; NOC 1 is split across chapters 6 and 7.",
+    "Chapters 6 and 8 use functions built from sin and cos before chapter 9 teaches trig. They are supplied as borrowed functions.",
+    "Flow_Field needs noise (chapter 11). It is supplied as field_direction(p); it is NOC 5 material used early as prescribed motion, and 7.5 and 20.4 reuse it.",
+    "Change_Choreography is in the forces sequence but teaches period and phase. It is built in 9.2, out of its sequence.",
+    "VFM_08_Arena's primary (the head crab choosing a target) is steering, NOC 5, chapter 20. Chapter 7 uses only its collision carts, as an exercise.",
+    "The wavefunctions hall order puts the pendulum before Unit_Circle, which teaches sin. Chapter 9 moves Unit_Circle to the front.",
+    "Annealing needs a random draw before randomness (chapter 10). A supplied chance(p) stands in; the theory waits for chapter 10.",
+    "A trimmed trail needs push_front() and resize(), taught in 9.4. 6.6 uses a supplied trail(points, n) until then.",
+    "The Calder mobile's builder is recursive, before recursion (chapter 14). Two levels are built by hand and the rest is borrowed.",
+    "The spine puts form finding (NOC 6) before oscillation (NOC 3), and soft bodies (chapter 17) is NOC 6 again. Springs are taught in 7.6 and the Particle class, Verlet and constraint passes in chapter 8, so chapter 17 builds on chapter 8."
+   ]
+  },
+  {
+   "part": "III",
+   "title": "Chance and Skin",
+   "summary": "Part III covers NOC 0 in two chapters. First you draw numbers you did not choose and learn to bring them back with a seed. Then you give them a memory of their neighbours (noise) so they become ground you can walk. Chapter 12 is Ada's own: the same shaping, noise and octaves move onto the GPU, where they become a skin computed for every pixel. It ends with a buffer that gives the rule a past, which is the door into cellular automata.",
+   "chapters": [
+    {
+     "n": 10,
+     "sequence": "randomness",
+     "title": "Chance Enters the Grid",
+     "subtitle": "Draw a number, keep its seed, and let it turn, choose, walk and wait.",
+     "code_new": [
+      "RandomNumberGenerator, randf(), randi_range()",
+      "seed: the same draws again, in the same order",
+      "counting draws into an array: a histogram, the uniform distribution",
+      "probability that is not flat: two dice, the sum",
+      "the random walk: a Wanderer class with a Vector3 step and a trail",
+      "randfn(): the normal distribution",
+      "a drawn wait: chance decides when, not what"
+     ],
+     "noc": "NOC 0 Randomness (0.1 to 0.5: random walks, uniform and normal distributions, custom distributions)",
+     "halls": [
+      "Random_Definition",
+      "Random_Entropy",
+      "Random_Cubes",
+      "Random_Remove",
+      "Randomness_10_PRINT_Algorithm",
+      "Random_Rotate_Random_XYZ",
+      "Random_Walk",
+      "Random_Gaussian",
+      "Random_Mushrooms",
+      "Randomness_Examples_of_Randomness",
+      "Random_Game"
+     ],
+     "make": "You end with a seeded floor of disturbed cubes, a 10 PRINT maze you can walk into, a random wanderer in a glass box, and three stones that sink after random waits.",
+     "sections": [
+      {
+       "n": "10.1",
+       "title": "A number you didn't choose",
+       "idea": "randf() hands you a number between 0 and 1, and three of them make a colour.",
+       "figure": "One lime cube whose colour came from three draws, the draws shown as red, green and blue bars standing in front of it.",
+       "builds": "seed_replay_demo (Random_Definition)"
+      },
+      {
+       "n": "10.2",
+       "title": "The seed brings it back",
+       "idea": "Set the seed and the same numbers come back in the same order.",
+       "figure": "Two 4 x 4 grids of coloured cubes from seed 42, side by side: in the right one an unused draw has shifted each colour one place.",
+       "builds": "seed_replay_demo (Random_Definition)",
+       "caption": "Spend one extra draw and every colour slides one place."
+      },
+      {
+       "n": "10.3",
+       "title": "Count the throws",
+       "idea": "Throw a die 600 times and count each face in an array: the six bars come out nearly level.",
+       "figure": "Six columns of stacked cubes, one per face, almost the same height.",
+       "builds": "dice_throw (Random_Cubes), shannon_entropy_meter (Random_Entropy)",
+       "caption": "Sorting the throws leaves the bars unchanged."
+      },
+      {
+       "n": "10.4",
+       "title": "One of two: 10 PRINT",
+       "idea": "randi_range(0, 1) leans each wall left or right, and a maze appears that you can walk into.",
+       "figure": "The maze of leaning lime walls from above at one seed, with the cyan walker standing in a corridor.",
+       "builds": "ten_print_maze_3d (Randomness_10_PRINT_Algorithm)"
+      },
+      {
+       "n": "10.5",
+       "title": "Chance against order",
+       "idea": "Turn each cube of a grid by a draw, more with every column.",
+       "figure": "A floor of 60 cubes in plan: in order on the left, turning into rubble on the right, at 0, 5, 20 and 90 degrees.",
+       "builds": "disturbed-order floor; composition_stochastique (Molnar board); Random_Rotate_Random_XYZ (three axes, three draws)",
+       "caption": "You see the disorder only because the grid is there."
+      },
+      {
+       "n": "10.6",
+       "title": "A random wander",
+       "idea": "A Wanderer object keeps a position and adds a random step every frame.",
+       "figure": "A bead in a glass box seen from the side: on the left a 2D trail held at one height, on the right a 3D tangle.",
+       "builds": "random_walk_terrarium (Random_Walk)",
+       "caption": "Its trail is an array of where it has been."
+      },
+      {
+       "n": "10.7",
+       "title": "The middle wins",
+       "idea": "Add two dice and seven comes up six times as often as twelve.",
+       "figure": "Eleven bars for the sums 2 to 12, rising to a peak at seven.",
+       "builds": "paired_dice_column (Random_Cubes), galton_board, distribution_sampler, GaussianPaintSplatter (Random_Gaussian)",
+       "caption": "Add many small chances and you get a bell, which randfn() draws from directly."
+      },
+      {
+       "n": "10.8",
+       "title": "Wait for it",
+       "idea": "A stone stays up for a random wait and then sinks.",
+       "figure": "Three cyan stones across a pit. The middle one is orange and halfway down, and a small number above each stone shows the time left of its drawn wait.",
+       "builds": "r_c crossing (Random_Game)",
+       "caption": "You know the order of its states but never the length of the next pause."
+      }
+     ],
+     "examples": [
+      "Example 10.1: A colour grid that returns (seeded generator)",
+      "Example 10.2: 10 PRINT, a maze you can walk",
+      "Example 10.3: Disturbed order, a floor of cubes",
+      "Example 10.4: The random wanderer",
+      "Example 10.5: A Gaussian splatter with randfn()"
+     ],
+     "exercises": [
+      "Remove a random cube from a 4 x 4 range until it is empty: the cubes outside the range never go.",
+      "Give the wanderer a long step now and then: accept a length only if a second draw falls under its curve (accept-reject, NOC 0.5).",
+      "Plant a meadow of 80 mushrooms with sizes drawn from randfn(1.0, 0.15).",
+      "Let chance choose which bar of 9.7 rings and when: a piece by chance.",
+      "List three things in a room that are chance, and write the draw for each."
+     ],
+     "project_step": "Your figure gets a wander and its seed on a label: the same seed gives the same walk, and the same disturbed floor, in anyone's room.",
+     "image": {
+      "file": "/course/sketch/10-randomness.png",
+      "source": "doc/book/studies/disturbed-order/sheet.png (kit sheet, resized to 1200 px)",
+      "caption": "One seeded floor of cubes at 0, 5, 20 and 90 degrees of chance, in plan and from above.",
+      "rendered_new": false
+     },
+     "case_study_hooks": [
+      "Vera Molnar's board of 100 diagonals with 1, 5, 30 and 50 turned: where does order stop? (composition_stochastique)",
+      "Georg Nees, Schotter (1968), as the plotter original of 10.5",
+      "A Pollock drip painting as a random walk (pollock_painting_in_3d)",
+      "The RAND book of a million random digits, 1955 (random_number_book_page_1955)",
+      "Frieder Nake's question: can a pseudo-random number stand in for intuition?",
+      "Ants that follow their own trail (Random_Pheromone), in the swarms chapter",
+      "Estimating pi by dropping marbles on a square with a circle in it (monte_carlo_dartboard)"
+     ],
+     "borrowed": [
+      "await get_tree().create_timer(wait).timeout: pauses the stone's function for the drawn number of seconds while the game runs on (await is taught later)",
+      "create_tween(): slides the stone down and back up smoothly",
+      "trace(points): draws a line through an array of positions for the wanderer's trail (supplied)"
+     ],
+     "notes_for_palle": "Random_Space_Geometry and Random_Space sit in the randomness sequence but teach coherent noise and octaves, so ch11 opens with them. Random_Pheromone (a walk biased by its own trail) is a hook for ch20. Random_Remove, Random_Mushrooms and Examples_of_Randomness are exercises 1, 3 and 5; the John Cage bars of 9.7 are exercise 4. The random walker is the class Wanderer so it does not clash with the supplied cyan walker. Estimating pi by marbles (monte_carlo_dartboard) is a hook. Random_Game is a small game and borrows a timer and a tween.",
+     "sequence_note": "",
+     "media": {
+      "kind": "clip",
+      "overlay": "position += Vector3(randf_range(-1, 1), 0, randf_range(-1, 1))",
+      "plan": "The wanderer's trail growing step by step (10.6), then the same seed run twice."
+     }
+    },
+    {
+     "n": 11,
+     "sequence": "noise",
+     "title": "Chance That Remembers",
+     "subtitle": "Noise gives neighbours related values: a path, a body, and ground you can walk.",
+     "code_new": [
+      "FastNoiseLite: get_noise_1d/2d/3d, seed, frequency",
+      "noise in time: sample at t instead of drawing again",
+      "mapping a range: what a value from -1 to 1 becomes (a colour, a height, a push along the normal)",
+      "a threshold: 3D noise above a line makes a voxel",
+      "octaves: a fractal sum with lacunarity and gain",
+      "domain warp: sample at an address moved by another noise",
+      "a heightfield: an ArrayMesh built from a grid of heights, with create_trimesh_shape() for its collider"
+     ],
+     "noc": "NOC 0 Randomness (0.6 Perlin noise: noise in time, noise ranges, noise detail, 2D noise)",
+     "halls": [
+      "Random_Space_Geometry",
+      "Random_Noise_Types",
+      "Noise_Columns",
+      "Noise_One",
+      "Noise_Voxel",
+      "Random_Space",
+      "Noise_Inside_Noise",
+      "Noise_Space_10",
+      "Noise_Perlin_Simplex"
+     ],
+     "make": "You end with a walkable noise terrain, reached by way of a breathing column, a voxel body cut by a threshold and a warped sphere.",
+     "sections": [
+      {
+       "n": "11.1",
+       "title": "Randomness with a memory",
+       "idea": "randf() gives each column its own height, while noise gives neighbours related heights, and a landscape appears.",
+       "figure": "Two rows of 32 columns seen from a raised front view: white noise spiky and unrelated on the left, Perlin rolling in broad shapes on the right.",
+       "builds": "perlin_noise_bridge (Random_Space_Geometry), WhiteNoiseGallery (Random_Noise_Types)"
+      },
+      {
+       "n": "11.2",
+       "title": "Noise in time",
+       "idea": "Sample noise at t, a little further each frame, and a value wanders smoothly without ever making the sine's return.",
+       "figure": "Three columns side by side, one held still, one rising and sinking on a sine, one on noise. Under each is its value over ten seconds as a line.",
+       "builds": "MeltingBerniniScene (Noise_Columns)"
+      },
+      {
+       "n": "11.3",
+       "title": "What a value becomes",
+       "idea": "Noise answers between -1 and 1: you decide whether that becomes a colour, a height or a push.",
+       "figure": "Two rings made from the same field: one folded by pushing its vertices along their normals, the other keeping its shape and coloured, a pale marker at the same address on both.",
+       "builds": "noisetorus, noiselayers (Noise_One)"
+      },
+      {
+       "n": "11.4",
+       "title": "The line that decides",
+       "idea": "Ask 3D noise at every cell of a 12 x 12 x 12 grid and put a cube wherever the value passes a threshold.",
+       "figure": "The same lime block body from one corner at three thresholds: solid, porous, a few islands.",
+       "builds": "voxelnoise, perlin_terrain_sculptor (Noise_Voxel)",
+       "caption": "Move the line and the body changes."
+      },
+      {
+       "n": "11.5",
+       "title": "Octaves add detail",
+       "idea": "Add the noise to itself at double the frequency and half the strength, a few times over, and detail grows inside the big shapes.",
+       "figure": "Four square tiles of the same field at 1, 2, 4 and 6 octaves, side by side, seen from above.",
+       "builds": "noise_mixer (Random_Space); octave windows drawn into an Image (Image.set_pixel, as in 5.6)"
+      },
+      {
+       "n": "11.6",
+       "title": "Borrow an address",
+       "idea": "Move where you ask before you ask: noise sampled at p plus another noise folds the field like marble.",
+       "figure": "A sphere with a colouring, warped on the right, and an orange point marking the same direction on both halves.",
+       "builds": "noisesphere (Noise_Inside_Noise)"
+      },
+      {
+       "n": "11.7",
+       "title": "Ground you can walk",
+       "idea": "Build a mesh from a grid of heights, give it a collider, and walk across what you made.",
+       "figure": "The cyan walker standing on a lime noise terrain over the violet floor.",
+       "builds": "noise_space (Noise_Space_10)"
+      }
+     ],
+     "examples": [
+      "Example 11.1: White and Perlin columns side by side",
+      "Example 11.2: A body that breathes with noise in time",
+      "Example 11.3: Noise voxels and a threshold",
+      "Example 11.4: A walkable noise terrain"
+     ],
+     "exercises": [
+      "Perlin or simplex: swap noise_type under the same seed and grid. What stays the same?",
+      "Colour the terrain by height, violet below and lime above.",
+      "Make the ground move: sample 3D noise with z = time. Can you still stand on it?",
+      "Warp the terrain's address with a second noise and walk the new ridges."
+     ],
+     "project_step": "Your room gets a walkable noise hill with its seed and height exported: your figure climbs it, and a marble rolls into its hollows.",
+     "image": {
+      "file": "/course/sketch/11-noise.png",
+      "source": "Rendered for this sketch: scratchpad/sketch/noise_render/render.gd (Godot 4.6, Compatibility, course look); one 72 x 72 grid at seed 1968, lifted by randf() and by 4-octave Perlin noise",
+      "caption": "One grid lifted by randf() and by noise: only the one that remembers its neighbour can be walked.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Bernini's columns, melting (MeltingBerniniScene)",
+      "Ken Perlin's noise for Tron (1982), and why it won an Oscar",
+      "The blob: why noisy bodies all start to look alike",
+      "Weather maps read as noise (related_weather)",
+      "Voxel worlds dug from a threshold (Noise_Voxel)"
+     ],
+     "borrowed": [
+      "grid_mesh(heights, cells, size): builds the surface and its trimesh collider from a grid of heights; supplied for 11.3 to 11.6, written by you in 11.7",
+      "displace(mesh, f): moves each vertex along its normal by f(position); supplied for 11.3, opened in 11.7"
+     ],
+     "notes_for_palle": "No noise kit exists on disk, so the chapter image was rendered fresh. Noise_6_Wall is a GPU shader; it moves to 12.6, and 11.5 draws its octave windows on the CPU into an Image. 11.7 now teaches ArrayMesh and the trimesh collider (the first mesh built from vertices in the course); 11.3 uses supplied grid_mesh and displace until then. Lab_Path is an optional return with no example. Hall order is kept, so the terrain closes the chapter.",
+     "sequence_note": "",
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 12,
+     "sequence": "shaders",
+     "title": "Every Pixel at Once",
+     "subtitle": "The noise moves onto the graphics card: a skin made for every pixel.",
+     "code_new": [
+      "the shading language: shader_type spatial, fragment(), UV, ALBEDO",
+      "shaping functions: step, smoothstep, mix, sin",
+      "uniforms and set_shader_parameter(); TIME",
+      "fract() and floor(): folding space into tiles, a coin from the tile's address",
+      "NORMAL, VIEW and the rim; EMISSION against ALBEDO",
+      "value noise and fBm inside a shader",
+      "vertex(): moving vertices by a rule of position and time",
+      "a buffer: a SubViewport that hands the rule its last frame"
+     ],
+     "noc": "Ada's own (after The Book of Shaders)",
+     "halls": [
+      "Shader_01_Shaping",
+      "Shader_05_Patterns",
+      "Shader_11_QueerRubber",
+      "Shader_09_FBM",
+      "Noise_6_Wall",
+      "Shader_12_PinkExtravaganza",
+      "Shader_10_ReactionDiffusion"
+     ],
+     "make": "You end with a sphere wearing a computed skin (stripes, grain and a rim that follows your eye), a pool of water driven by the clock, and a shader that remembers its last frame.",
+     "sections": [
+      {
+       "n": "12.1",
+       "title": "A rule for every pixel",
+       "idea": "A shader is one function the graphics card runs for every pixel at once.",
+       "figure": "A square coloured by its UV: black at the lower left, red to the right, green upward, yellow in the far corner.",
+       "builds": "shader_01_shaping (Shader_01_Shaping)",
+       "caption": "Give it the pixel's UV and it answers with a colour."
+      },
+      {
+       "n": "12.2",
+       "title": "Shaping functions",
+       "idea": "step() cuts, smoothstep() eases and sin() repeats: three ways to decide where value goes across a square.",
+       "figure": "Three dark squares, each with a white graph line: a step, an S curve, a sine wave.",
+       "builds": "shader_01_shaping (Shader_01_Shaping)"
+      },
+      {
+       "n": "12.3",
+       "title": "Numbers from outside",
+       "idea": "A uniform is a number your script hands the shader, and TIME is the one Godot hands it every frame.",
+       "figure": "The step square at three slider values, with the stroke at 0.2, 0.5 and 0.8 and the slider drawn under each.",
+       "builds": "shader_01_shaping THRESHOLD desk, science_screen"
+      },
+      {
+       "n": "12.4",
+       "title": "Fold space",
+       "idea": "fract() throws away the whole number, so every pixel thinks it is in the one tile.",
+       "figure": "A Truchet labyrinth of quarter arcs whose seams cannot be found, one tile outlined.",
+       "builds": "shader_05_patterns (Shader_05_Patterns)",
+       "caption": "A coin drawn from the tile's address flips it."
+      },
+      {
+       "n": "12.5",
+       "title": "The skin answers your eye",
+       "idea": "dot(NORMAL, VIEW) is small where the surface turns away from you.",
+       "figure": "The striped lime sphere with a cyan rim, in four views: front, right, back and left.",
+       "builds": "shader_11_queerrubber (Shader_11_QueerRubber), shader_12_pinkextravaganza emission, shader-skin kit",
+       "caption": "Put a colour there and the rim follows you round."
+      },
+      {
+       "n": "12.6",
+       "title": "Noise on the GPU",
+       "idea": "The octaves of the last chapter, written as a shader function, cloud a skin at every pixel on every frame.",
+       "figure": "The striped sphere with fBm grain across its skin, lime and dark.",
+       "builds": "shader_09_fbm (Shader_09_FBM), shader_noise_space"
+      },
+      {
+       "n": "12.7",
+       "title": "Water from the clock",
+       "idea": "vertex() lifts every vertex by sines and noise of its position and TIME.",
+       "figure": "A section through the basin showing the glass lid, the wave surface below it, the pool floor, and the walker standing on the glass.",
+       "builds": "basin_water (Shader_09_FBM), shader_12_pinkextravaganza melt and water",
+       "caption": "The water keeps no state, and you cannot stand on it."
+      },
+      {
+       "n": "12.8",
+       "title": "A rule with a past",
+       "idea": "A shader remembers nothing until you hand it its last frame.",
+       "figure": "The same reaction rule fed its own last frame: a pattern grown from ten seed cells.",
+       "builds": "shader_10_reactiondiffusion (Shader_10_ReactionDiffusion)",
+       "caption": "Two SubViewports passing a picture back and forth give the rule a past."
+      }
+     ],
+     "examples": [
+      "Example 12.1: UV, step and smoothstep on a square",
+      "Example 12.2: Tiles and Truchet arcs from fract()",
+      "Example 12.3: The shader skin: stripes, grain, rim",
+      "Example 12.4: Water from the clock (a vertex shader)",
+      "Example 12.5: A feedback buffer (reaction-diffusion)"
+     ],
+     "exercises": [
+      "Make the stripe count a uniform and step it with a key.",
+      "Bricks: slide every second row half a tile before fract().",
+      "Put the rim in the sky's pink and walk round the body. Where does it vanish?",
+      "Hand the water your own clock as a uniform, then freeze it."
+     ],
+     "project_step": "Your figure wears a computed skin: stripes, grain and rim, with its colours handed over from the look as uniforms.",
+     "image": {
+      "file": "/course/sketch/12-shaders.png",
+      "source": "doc/book/studies/shader-skin/process.png: six of its eight steps (1-5 and 8) arranged 3 x 2, relabelled without step numbers",
+      "caption": "One sphere, one shader growing: UV, step, sine stripes, fBm grain, and a rim that follows your eye.",
+      "rendered_new": false
+     },
+     "case_study_hooks": [
+      "Truchet's tiles (1704) and Wang tiles",
+      "Latex, leather and oil slick: materials as answers to light (Shader_11_QueerRubber)",
+      "Turing's reaction-diffusion: spots and stripes, in the soft bodies chapter",
+      "Thin-film iridescence: the queer gloss shader",
+      "The Book of Shaders as a parallel path"
+     ],
+     "borrowed": [
+      "hash(p): one line from The Book of Shaders that turns a tile's address into a repeatable pseudo-random number",
+      "ping-pong rig: two SubViewports that swap their textures each frame, supplied for 12.8; chapter 13 meets the same two-buffer trick with arrays"
+     ],
+     "notes_for_palle": "The shader halls have no tutorial.md, but the shader-skin kit covers 12.1 to 12.6 and is tested. Shader_10's rule is never handed its last frame, so it shows green by design; 12.8 makes the missing buffer the lesson, and the reaction-diffusion rule itself is written in 13.8. Noise_6_Wall (the room wearing an fBm sum) is 12.6's second build. Shader_12 is folded into 12.5 and 12.7. Six deferred halls (Shader_02 colours, 03 shapes, 04 matrices, 06 random, 07 noise, 08 cellular) would fill 12.2 to 12.6 if revived.",
+     "sequence_note": "",
+     "media": {
+      "kind": "still"
+     }
+    }
+   ],
+   "ladder_problems": [
+    "NOC order: randomness is NOC 0, but the spine puts it after forces and oscillation (ch 6-9). Anything earlier that needs a random draw names it as borrowed (chance(p) in ch8); ch10 teaches it.",
+    "Two randomness halls, Random_Space_Geometry and Random_Space, teach coherent noise and octaves; they move to ch11 and open it. Random_Pheromone waits for swarms in ch20.",
+    "Ch10 uses Random_Cubes' dice in 10.3 and 10.7, around 10 PRINT, out of hall order.",
+    "Ch10 10.8 (Random_Game) needs a timed wait and a tween before either is taught; both are supplied.",
+    "11.7 teaches ArrayMesh and the trimesh collider (the first mesh built from vertices in the course). 11.3 to 11.6 use a supplied grid_mesh and displace; 11.7 writes grid_mesh.",
+    "Noise_6_Wall sits in the noise sequence but is a GPU shader: it moves to 12.6, and 11.5 draws its octave windows on the CPU.",
+    "12.8 hands the rule its last frame with two SubViewports; 13.3 meets the same two-buffer trick with arrays, and reaction-diffusion proper is written once, in 13.8."
+   ]
+  },
+  {
+   "part": "IV",
+   "title": "Growth",
+   "summary": "Four chapters where small rules, repeated, grow large forms. Cellular automata (NOC 7): a cell reads its neighbours, and the history becomes a floor you stand on. Fractals (NOC 8.1-8.5): a function calls itself, and trees, dust, snowflakes and a sponge you walk into come out of one line. L-systems (NOC 8.6): a sentence is rewritten and a turtle reads it, so a string becomes a plant, a corridor, or a family of faces. Procedural generation (NOC 9, plus Ada's own): bodies are bred by a score, trees grow toward food, rooms are carved, and patterns are copied, all from one seed. Each chapter builds only on what came before it: two buffers (13), then recursion (14), then strings and stacks (15), then populations and search (16). Case studies (Turing, Haeckel, Conway, Sims) are noted as hooks for later.",
+   "chapters": [
+    {
+     "n": 13,
+     "sequence": "cellularautomata",
+     "title": "Rules in Time",
+     "subtitle": "Each cell reads only its neighbours, and the whole grid grows a world.",
+     "code_new": [
+      "a row of cells as an array of 0 and 1, read with wrapping, (i + n) % n",
+      "a rule as a bit lookup: (l << 2) | (c << 1) | r indexes the rule number's bits, (rule >> index) & 1",
+      "two buffers: read one, write the other, then swap",
+      "a 2D grid in one array: i = y * n + x; eight neighbours (Moore) and four (von Neumann)",
+      "MultiMesh: one mesh drawn many times",
+      "more states (an enum) and number states (float)",
+      "the Laplacian: four neighbours minus four times yourself"
+     ],
+     "noc": "NOC 7 Cellular Automata",
+     "halls": [
+      "CA_Introduction",
+      "CA_GameOfLife",
+      "CA_BeyondBinary",
+      "CA_ElementaryRules",
+      "CA_ExpandingSpace",
+      "CA_SoftRules",
+      "CA_AgentsCircuits",
+      "CA_EdgeOfChaos"
+     ],
+     "make": "A Rule 90 stair that lays one row at a time and carries you up it, and a floor of reaction and diffusion that moves under your feet.",
+     "sections": [
+      {
+       "n": "13.1",
+       "title": "A row of cells",
+       "idea": "A cell is a number, 0 or 1, and a row of cells is an array.",
+       "figure": "Seventeen tiles in a row on the violet floor, one lime tile alive in the middle, seen from in front and above.",
+       "builds": "ca_rule_explorer (CA_Introduction)"
+      },
+      {
+       "n": "13.2",
+       "title": "Eight answers make a rule",
+       "idea": "Read left, self and right as a three-bit number; the rule's bit at that place is the cell's next state.",
+       "figure": "The eight neighbourhoods 111 down to 000 as triplets of tiles, each above its answer tile for Rule 90, flat and from the front.",
+       "builds": "ca_rule_explorer"
+      },
+      {
+       "n": "13.3",
+       "title": "Read one row, write another",
+       "idea": "Write the next generation into a second array, as 12.8's two viewports did, or the rule reads its own new answers.",
+       "figure": "Two Rule 90 triangles from above: the even one from two buffers, the lopsided one from one buffer.",
+       "builds": "ca_rule_explorer"
+      },
+      {
+       "n": "13.4",
+       "title": "Time stacked into a floor",
+       "idea": "Lay each new row one step higher and the history becomes a stair you can climb.",
+       "figure": "The Rule 90 stair with the cyan walker standing on the seed row, three-quarter view.",
+       "builds": "ca_bridge (CA_GameOfLife)"
+      },
+      {
+       "n": "13.5",
+       "title": "Life on a grid",
+       "idea": "Give each cell eight neighbours and two rules, birth on three and survival on two or three, and a glider walks.",
+       "figure": "A glider on a 2D grid at steps 0 to 4, one address outlined in orange, from above.",
+       "builds": "game_of_life_petri (CA_BeyondBinary)"
+      },
+      {
+       "n": "13.6",
+       "title": "A cell with a past",
+       "idea": "A third state, fading, lets a cell stay present without being counted; in 3D it has twenty-six neighbours.",
+       "figure": "A 3x3x3 neighbourhood pulled apart, the centre outlined in white, live cubes lime and fading cubes lavender.",
+       "builds": "structure_growth (CA_ElementaryRules)"
+      },
+      {
+       "n": "13.7",
+       "title": "Cells that hold numbers",
+       "idea": "Let a cell keep a number between 0 and 1, and your body can be one of its inputs: stand still and the bridge wears thin.",
+       "figure": "The decaying bridge from the side: the walker on a faded tile, the basin visible below it.",
+       "builds": "decaying_bridge (CA_ExpandingSpace)"
+      },
+      {
+       "n": "13.8",
+       "title": "Reaction and diffusion",
+       "idea": "Each cell holds two amounts; they spread to the four neighbours and react where they meet, and spots and rings appear.",
+       "figure": "The reaction-diffusion pool after 0, 100, 300 and 1000 steps: orange heights rising from the violet floor.",
+       "builds": "rd_artifact (CA_SoftRules)"
+      }
+     ],
+     "examples": [
+      "Example 13.1: One row, one rule, printed row by row",
+      "Example 13.2: The stair: each row a step",
+      "Example 13.3: Life in a dish: block, blinker, glider",
+      "Example 13.4: The pool: reaction and diffusion on a height field",
+      "Example 13.5: One difference, followed: two runs one cell apart"
+     ],
+     "exercises": [
+      "Run rules 30, 90, 110 and 250 from one live cell; guess which two floors look most alike before you look.",
+      "Untick the ring and watch what the edges do.",
+      "Give Life a hexagonal neighbourhood and find a birth rule that still moves.",
+      "Run Rule 90 for sixteen rows and find the triangle inside the triangle; keep it for chapter 14."
+     ],
+     "project_step": "Your figure climbs a Rule 90 stair that the room lays one row at a time, with the rule number in an @export.",
+     "image": {
+      "file": "/course/sketch/13-cellularautomata.png",
+      "source": "Rendered new: Godot 4.6, course look (rule 90 stair, four rules from above)",
+      "caption": "Rule 90 laid as a stair, each row a step higher (left), and rules 30, 90, 110 and 250 grown from one live cell (right).",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Turing's 1952 morphogenesis: the same reaction-diffusion as a theory of spots and stripes.",
+      "Conus textile: a sea snail's shell painted by something close to Rule 30.",
+      "Rule 30 used as a random-number generator: chapter 10's pseudo-randomness comes back.",
+      "Conway's Life as a computer: Gosper's glider gun.",
+      "Wireworld: electrons on wires, logic gates made of cells (CA_AgentsCircuits tutorial).",
+      "The Persian rug in CA_Introduction: a carpet whose symmetry is put back every step."
+     ],
+     "borrowed": [
+      "HeightMapShape3D (supplied in the pool scene): turns the pool's numbers into a collider, so the floor you stand on rises with the pattern."
+     ],
+     "notes_for_palle": "CA_ElementaryRules is called elementary but holds the 3D, three-state automaton; the chapter builds it sixth, after Life. CA_AgentsCircuits's tutorial.md is about Wireworld, but the hall holds the Rule 90 explorer beside a Sierpinski pyramid; Wireworld becomes a hook and the pyramid a bridge to 14. CA_EdgeOfChaos is example 13.5, not a section. 13.8 is the one place the two-value reaction-diffusion rule is written; 12.8, 17.8 and 24.6 reuse it. A collider for each row (old code_new item) is just StaticBody3D again.",
+     "media": {
+      "kind": "clip",
+      "overlay": "next[i] = (rule >> index) & 1",
+      "plan": "Rule 90 laying its stair one row at a time, the walker climbing it."
+     }
+    },
+    {
+     "n": 14,
+     "sequence": "fractals",
+     "title": "Again, Smaller",
+     "subtitle": "A function that calls itself builds trees, dust and sponges until you tell it to stop.",
+     "code_new": [
+      "recursion: a function that calls itself",
+      "the base case: where it stops",
+      "the call stack, seen in the Debugger's Stack Frames",
+      "passing a Transform3D down the calls: origin moved, basis turned",
+      "replacing every part in an array with smaller parts, one generation at a time",
+      "three nested loops over 27 cells, skipping 7",
+      "dimension: D = log N / log S",
+      "a recurrence: the next number made from the last two"
+     ],
+     "noc": "NOC 8 Fractals (8.1 to 8.5)",
+     "halls": [
+      "Fractal_Recursion",
+      "Fractal_RecursiveTrees",
+      "Fractal_CantorSet",
+      "Fractal_KochSierpinski",
+      "Fractal_MengerSponge",
+      "Fractal_GoldenSpiral",
+      "Fractal_Synthesis"
+     ],
+     "make": "A recursive tree and a Menger sponge whose biggest passage your body fits through, each built by one function that calls itself.",
+     "sections": [
+      {
+       "n": "14.1",
+       "title": "A function that calls itself",
+       "idea": "Draw a square, then call yourself with half the size: one line of code makes many squares.",
+       "figure": "Squares nested inside a frame, the same sizes standing as doorframes on the floor, three-quarter view.",
+       "builds": "fractal_recursion_2, example_8_3_recursion_circles_vr (Fractal_Recursion)"
+      },
+      {
+       "n": "14.2",
+       "title": "Where it stops",
+       "idea": "Every recursion needs a base case; forget it and Godot stops with a stack overflow.",
+       "figure": "A tower of lime plates, one plate per call, the lowest labelled depth 0 and standing on the floor, the plates above it numbered 1, 2, 3.",
+       "builds": "none",
+       "caption": "Without a depth 0 the tower never stops, and Godot ends it with a stack overflow."
+      },
+      {
+       "n": "14.3",
+       "title": "Two calls make a tree",
+       "idea": "Draw a branch, turn, and call yourself twice with a shorter length.",
+       "figure": "A lime tree at generations 1 to 4, side by side, from the front.",
+       "builds": "recursive_tree_2, recursive_tree (Fractal_RecursiveTrees)"
+      },
+      {
+       "n": "14.4",
+       "title": "Cut out the middle",
+       "idea": "Keep the outer thirds, drop the middle, and repeat: the Cantor set is a row of smaller and smaller bars.",
+       "figure": "Five rows of Cantor bars stacked as storeys, the removed thirds as lavender ghosts, from the side.",
+       "builds": "cantor_set, example_8_4_cantor_pagoda_vr (Fractal_CantorSet)"
+      },
+      {
+       "n": "14.5",
+       "title": "The boundary takes a detour",
+       "idea": "Replace every segment with four, each a third as long: Koch's line grows longer while its ends stay where they were.",
+       "figure": "The Koch curve at generations 0 to 4 stacked from above, each longer than the last.",
+       "builds": "fractal_koch_curve (Fractal_KochSierpinski)"
+      },
+      {
+       "n": "14.6",
+       "title": "A hole becomes a place",
+       "idea": "Split a cube into 27, keep 20, and call again on each: the Menger sponge opens passages.",
+       "figure": "The Menger sponge at depth 2 in lime, the cyan walker on a step at its middle opening.",
+       "builds": "menger_sponge (Fractal_MengerSponge)"
+      },
+      {
+       "n": "14.7",
+       "title": "How rough is it?",
+       "idea": "Count the boxes that touch the shape on finer and finer grids; the slope of the counts is its dimension.",
+       "figure": "The Sierpinski points under a fine grid with the covered cells lit lime.",
+       "builds": "box_counting_dimension (Fractal_KochSierpinski)",
+       "caption": "The slope of the counts on a log-log line is the dimension."
+      },
+      {
+       "n": "14.8",
+       "title": "A recurrence is not a shape",
+       "idea": "1, 1, 2, 3, 5: each number comes from the two before it, and a shape appears only when you choose how to draw it.",
+       "figure": "The golden rectangle cut into squares with its quarter-arc spiral, from above.",
+       "builds": "fibonacci_sequences, golden_rectangle (Fractal_GoldenSpiral)",
+       "caption": "A row of Fibonacci columns is the same numbers drawn another way."
+      }
+     ],
+     "examples": [
+      "Example 14.1: Squares inside squares",
+      "Example 14.2: The recursive tree",
+      "Example 14.3: The Cantor stair",
+      "Example 14.4: Koch's line",
+      "Example 14.5: The Menger sponge, walkable at depth 2"
+     ],
+     "exercises": [
+      "Give the tree one seeded mad branch that turns the wrong way, and follow how far its children carry the mistake.",
+      "Predict how many cubes the sponge has at depth 3 before you run it.",
+      "Make the Cantor rule keep the middle and drop the ends; is it still a fractal?",
+      "Draw the Sierpinski triangle: keep three of the four half-size triangles at every call.",
+      "In a gallery of fractals, write down the stopping condition of each work, and say why 'make smaller things' is not enough to rebuild it."
+     ],
+     "project_step": "Your figure walks through a Menger sponge at depth 2, big enough to pass its largest tunnel.",
+     "image": {
+      "file": "/course/sketch/14-fractals.png",
+      "source": "Rendered new: Godot 4.6, course look (four depths, all three tunnel axes, walker at the opening)",
+      "caption": "One function calls itself on 20 of 27 smaller cubes: the Menger sponge at depths 0 to 3, cut along all three axes, with a cyan walker on a step at its middle opening.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Romanesco: a spiral of spirals, already standing in Fractal_GoldenSpiral.",
+      "Diffusion-limited aggregation: coral and lightning grown by random walkers that stick (it stands in Fractal_MengerSponge).",
+      "Mandelbrot and Julia sets (their halls are deferred): a recurrence on complex numbers, drawn as a shader.",
+      "How long is the coast of Britain? Richardson's and Mandelbrot's rough line.",
+      "Haeckel's radiolaria: silica lattices that look recursive, for later, once lathe and inset are taught."
+     ],
+     "borrowed": [
+      "fit_line() (supplied): draws the straight line through the box counts, so 14.7 can read a slope without a statistics lesson."
+     ],
+     "notes_for_palle": "Fractal_Recursion's tutorial.md is a list of code (factorial, memo, tail calls) with no artifact, so the sections follow the hall's essay instead. Fractal_GoldenSpiral is a recurrence, not recursion; it closes the chapter as the contrast that leads into L-systems. Julia, Mandelbrot and CrossSequence are deferred, so complex numbers do not appear. The pagoda and the sponge need ramps or flight in VR; on desktop the student walks the ground floor.",
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 15,
+     "sequence": "lsystems",
+     "title": "A Sentence Grows",
+     "subtitle": "Rewrite a sentence, let a turtle read it, and a plant grows.",
+     "code_new": [
+      "String: building a new string one character at a time",
+      "a Dictionary of rules",
+      "rewriting for n generations, and why the string explodes",
+      "a turtle: a position and a Basis, moved by F; + and - turn, & and ^ tilt, / rolls",
+      "a stack: push_back() and pop_back() of the turtle's state for [ and ]",
+      "a Resource of genes with @export, saved and loaded as .tres",
+      "a mesh grammar: rules that select faces and act on them"
+     ],
+     "noc": "NOC 8.6 L-systems",
+     "halls": [
+      "LSystems_Grammar_Lab",
+      "LSystems_Growth",
+      "LSystems_Grammars_And_Curves",
+      "LSystems_Architecture",
+      "LSystems_Competition",
+      "LSystems_Living",
+      "LSystems_Shape_Grammars",
+      "Assemblage_Same_Desire"
+     ],
+     "make": "A plant grown from one sentence by a 3D turtle, its genes saved as a file, and the same turtle laying corridors you can walk.",
+     "sections": [
+      {
+       "n": "15.1",
+       "title": "A sentence rewritten",
+       "idea": "Start with F and replace every F by the rule, once per generation, and the sentence grows.",
+       "figure": "F, F+F-F-F+F and the next generation printed as strings above their three drawings, from the front.",
+       "builds": "lsystem_editor (LSystems_Grammar_Lab)"
+      },
+      {
+       "n": "15.2",
+       "title": "The turtle reads",
+       "idea": "F moves forward and draws, + and - turn: the same sentence at 90 and at 120 degrees gives two bodies.",
+       "figure": "Two Koch drawings side by side with the same sentence printed under both, angle labels above.",
+       "builds": "lsystem_editor"
+      },
+      {
+       "n": "15.3",
+       "title": "Brackets save the turtle",
+       "idea": "[ pushes the turtle's position and heading onto a stack and ] pops it back, so a branch returns to its fork.",
+       "figure": "F[+F]F[-F]F stepped through symbol by symbol, the cyan turtle back at the fork after ], the stack drawn as a pile of cards.",
+       "builds": "parametric_lsystem (LSystems_Growth)",
+       "caption": "Add & to tilt and / to roll, and the branches leave the plane."
+      },
+      {
+       "n": "15.4",
+       "title": "One sentence, three readers",
+       "idea": "Change only how a symbol is read, and the same sentence draws turned, wider or mirrored.",
+       "figure": "One sentence read three ways: at 25 degrees, at 45 degrees, and with x and y swapped.",
+       "builds": "the_believing_turtle, Hilbert3D (LSystems_Grammars_And_Curves)"
+      },
+      {
+       "n": "15.5",
+       "title": "A line gets walls",
+       "idea": "Give each F a width and walls, and the turtle's path becomes corridors that a body has to fit.",
+       "figure": "The plan F[+RF][-RF]F laid out as corridors seen from above, the walker inside, a room at the R junction.",
+       "builds": "lsystem_dungeon (LSystems_Architecture)"
+      },
+      {
+       "n": "15.6",
+       "title": "Rules meet the soil",
+       "idea": "Let a rule run only when there is food under it, and whoever goes first decides who grows.",
+       "figure": "Two stems, orange and cyan, over a tiled soil field, the patch each one took darkened, three-quarter view.",
+       "builds": "ForestCompetition (LSystems_Competition)"
+      },
+      {
+       "n": "15.7",
+       "title": "Genes behind the grammar",
+       "idea": "Keep depth, angle and taper in a saved Resource of genes: one rule with different genes grows a family.",
+       "figure": "A tree from the front with the gene panel in front of it, Depth going from 4 to 5.",
+       "builds": "genetic_tree_sculptor (LSystems_Living)"
+      },
+      {
+       "n": "15.8",
+       "title": "Faces instead of letters",
+       "idea": "A mesh grammar's rule picks faces and insets or extrudes them, and one cube grows a family.",
+       "figure": "Six cubes in a row: inset, extrude, three rounds, a wider inset, and all twelve faces grown.",
+       "builds": "form_grammar_family (LSystems_Shape_Grammars)"
+      }
+     ],
+     "examples": [
+      "Example 15.1: Rewriting in the Output panel",
+      "Example 15.2: The turtle draws Koch",
+      "Example 15.3: The bracketed plant in 3D",
+      "Example 15.4: Corridors from a sentence",
+      "Example 15.5: A tree from a saved genome"
+     ],
+     "exercises": [
+      "Turn the plant's angle from 25 to 45 degrees: when does a plant become a lattice?",
+      "Rewrite the string in place instead of into a new one, and explain why it runs away in one generation.",
+      "Write a rule for a plant of your own and give it three genes.",
+      "In the closing assemblage, read the same two marks three ways (diagonals, orthogonals, blocks) and say which choices stayed fixed."
+     ],
+     "project_step": "Your figure keeps a garden: a family of three plants grown by one rule with three gene files (.tres) that the room loads.",
+     "image": {
+      "file": "/course/sketch/15-lsystems.png",
+      "source": "Rendered new: Godot 4.6, course look (3D turtle, generations 3 to 6; the earlier flat plant is replaced)",
+      "caption": "One sentence, A -> F[&A]/[&A]/[&A] with F -> FF, read by a 3D turtle (& tilts 40 degrees, / rolls 120): generations 3 to 6.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Lindenmayer's algae (1968): the first L-system, about cell division, not trees.",
+      "Prusinkiewicz's The Algorithmic Beauty of Plants: leaf spirals and flowers.",
+      "Space-filling curves (Hilbert, Peano) as one route through every room of a building.",
+      "Weaving drafts as a grammar: the panel bridge loom in Assemblage_Same_Desire.",
+      "Haeckel's radiolaria remade by a mesh grammar (cyrtoid_by_rule): a lathe seed and a cell inset."
+     ],
+     "borrowed": [
+      "MeshGrammar (supplied from the project): seeds, selectors and face operations (inset, extrude), used in 15.8 as a box of tools whose insides are not yet opened."
+     ],
+     "notes_for_palle": "Assemblage_Same_Desire is a 10 PRINT and weaving assemblage, not an L-system hall; it closes the chapter as the assemblage and the project step. LSystems_Shape_Grammars has no tutorial.md and relies on MeshGrammar, which the course has not taught, so it is borrowed here. Saving and loading a Resource moves here from the old genome chapter (ch36), because LSystems_Living stores genes and PG_Genetic_Evolution needs a genome next.",
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 16,
+     "sequence": "proceduralgeneration",
+     "title": "Rules Build Worlds",
+     "subtitle": "Breed bodies by a score, grow toward food, carve rooms, copy by mirrors.",
+     "code_new": [
+      "a genome: an array of numbers a builder reads, kept as a population across generations",
+      "a fitness function: one number per body; selection by tournament, crossover, mutation; elites kept",
+      "attraction: adding up unit vectors toward the nearest targets",
+      "a flood through six face neighbours",
+      "a random digger that removes cells",
+      "depth-first search with a stack: the backtracking maze",
+      "reflection by index: n - 1 - x"
+     ],
+     "noc": "NOC 9 Evolutionary Computing; growing, carving and copying are Ada's own",
+     "halls": [
+      "PG_Genetic_Evolution",
+      "PG_Space_Colonization",
+      "PG_Branching_Growth",
+      "PG_Percolation_Network",
+      "PG_Caves_Mazes",
+      "PG_Mirrored_Patterns"
+     ],
+     "make": "A small world from one seed: a body bred toward a target, a tree grown toward food, and a maze you can walk out of.",
+     "sections": [
+      {
+       "n": "16.1",
+       "title": "A body written as genes",
+       "idea": "A genome is a list of numbers, and a builder reads it to make a body.",
+       "figure": "Six bodies of stacked primitives on plinths, each with its gene list printed below, from the front.",
+       "builds": "GeneticProgramming (PG_Genetic_Evolution)"
+      },
+      {
+       "n": "16.2",
+       "title": "The score decides",
+       "idea": "A fitness function gives each body one number, and it notices only what it counts.",
+       "figure": "The six bodies reordered after the target changes from 8 to 16, the leader orange, a ring the score ignores circled.",
+       "builds": "GeneticProgramming"
+      },
+      {
+       "n": "16.3",
+       "title": "Breed the next generation",
+       "idea": "Keep the best two, choose parents by tournament, mix their genes, mutate a few, and repeat.",
+       "figure": "Two rows of towers: generation 0 in off-white at the back, generation 25 in lime at the front, reaching the cyan target line.",
+       "builds": "GeneticProgramming"
+      },
+      {
+       "n": "16.4",
+       "title": "Grow toward food",
+       "idea": "Scatter food points; each tip steps toward the sum of the directions to the food nearest it, and eats what it reaches.",
+       "figure": "A space-colonization tree with cyan food points in its crown, from the front.",
+       "builds": "space_colonization_algorithm (PG_Space_Colonization), branching_growth_algorithm (PG_Branching_Growth)"
+      },
+      {
+       "n": "16.5",
+       "title": "What reaches what",
+       "idea": "Fill a lattice at random, pour flow in at one face, and let it pass only where faces touch.",
+       "figure": "An 18-cube lattice at densities 0.2, 0.4 and 0.6, the flow in orange, three-quarter view.",
+       "builds": "percolationnetwork_ca (PG_Percolation_Network)"
+      },
+      {
+       "n": "16.6",
+       "title": "Carve room for a body",
+       "idea": "A digger that removes cells hollows out a cave; a digger with a stack carves a maze and backs up at dead ends.",
+       "figure": "The maze seen from above, the stack's path drawn in cyan.",
+       "builds": "caverandomwalk, maze_generation (PG_Caves_Mazes)",
+       "caption": "The cave is the same digger without a stack, its carving dots orange."
+      },
+      {
+       "n": "16.7",
+       "title": "Copy by mirrors",
+       "idea": "Compute one quarter and mirror it into four with the index n - 1 - x.",
+       "figure": "The mirrored field with its source quarter in orange and the two mirror axes in white.",
+       "builds": "mirror_cellular_texture_for_3d (PG_Mirrored_Patterns)"
+      }
+     ],
+     "examples": [
+      "Example 16.1: Bodies from genomes",
+      "Example 16.2: Evolving toward a height",
+      "Example 16.3: Space colonization",
+      "Example 16.4: Percolation in a box",
+      "Example 16.5: The backtracking maze, walked"
+     ],
+     "exercises": [
+      "Change the target and watch the leader change before any body does.",
+      "Add a gene the score cannot see, a ring, and check whether it survives the generations.",
+      "Carve the maze with a queue instead of a stack: how do the corridors change?",
+      "Raise the percolation density in steps of 0.1 and find where the flow first crosses."
+     ],
+     "project_step": "Your figure's world: a maze from a seed that your figure can enter and leave, with one body bred by a score waiting inside.",
+     "image": {
+      "file": "/course/sketch/16-proceduralgeneration.png",
+      "source": "Rendered new: Godot 4.6, course look (bred, grown, carved, copied by mirrors)",
+      "caption": "Four ways a rule builds: bodies bred toward the cyan target, a tree grown toward cyan food, a maze carved with a stack, and one orange quarter copied by mirrors.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Karl Sims' evolved virtual creatures (1994): bodies and behaviour bred by a score.",
+      "Leaf veins and tree crowns grown by space colonization (Runions and others).",
+      "Percolation as forest fire, or coffee through its grounds.",
+      "Roguelike dungeons: caves smoothed by a cellular rule, rooms by binary space partition (binary_space_partitioning stands in PG_Caves_Mazes).",
+      "Haeckel's Kunstformen: radial and bilateral symmetry as copying, and the radiolaria plate bred by a score.",
+      "Turing's reaction-diffusion as a skin generator, a return to 13.8."
+     ],
+     "borrowed": [],
+     "notes_for_palle": "NOC 9 covers only 16.1 to 16.3; growing, percolation, carving and copying are Ada's own. The hall order puts Space Colonization before Branching Growth, so the chapter keeps that order and builds nearest-target as a variant. Percolation is a cellular flood, a return to chapter 13. PG_Sculpted_Forms (voxel skin, CSG dome) is now exercise 4 of ch18 (the skin) and ch19 (the dome, where the hall is listed) where those tools are taught; the rhizome network of PG_Mirrored_Patterns is an exercise in ch22. That leaves this chapter with no supplied parts.",
+     "media": {
+      "kind": "still"
+     }
+    }
+   ],
+   "ladder_problems": [
+    "Ch13: CA_ElementaryRules holds a 3D automaton with three states and 26 neighbours. The chapter builds it sixth, after Life, so that the 1D rule and the 2D grid come first.",
+    "Ch13: CA_AgentsCircuits shows a Sierpinski pyramid (recursion) before chapter 14 teaches recursion. The student only looks at it, and the Wireworld in its tutorial.md is kept as a hook.",
+    "Ch14: Fractal_GoldenSpiral is a numerical recurrence, not recursion. It stays last in the chapter as the contrast that leads into L-systems.",
+    "Ch15: LSystems_Shape_Grammars needs MeshGrammar face operations the course has not taught, so MeshGrammar is borrowed.",
+    "Ch15: Assemblage_Same_Desire is not L-system content (it is 10 PRINT and weaving). It serves as the chapter's closing assemblage.",
+    "Ch15: saving and loading a Resource moves here from the old genome chapter, because LSystems_Living stores genes and chapter 16 needs a genome. A family is one rule with different genes.",
+    "Ch16: the voxel skin and CSG dome of PG_Sculpted_Forms return as exercises in ch18 and ch19, and the rhizome network of PG_Mirrored_Patterns in ch22, so nothing is supplied.",
+    "Ch16: NOC 9 (evolution) fills only three sections. Space colonization, percolation, caves, mazes and mirroring are Ada's own, with no NOC chapter behind them."
+   ]
+  },
+  {
+   "part": "V",
+   "title": "Many Kinds of Body",
+   "summary": "Four new ways to have a body: one that yields (soft bodies, NOC 6), one made from a field (isosurfaces, Ada's own), one made by combining solids (boolean surfaces, Ada's own), and many bodies moving as one (swarms, NOC 4 and 5). Each chapter ends with a body that goes into your figure's room.",
+   "chapters": [
+    {
+     "n": 17,
+     "sequence": "softbodies",
+     "title": "Matter That Yields",
+     "subtitle": "A body whose points move apart and come back: pinned, driven, pressed, frozen.",
+     "code_new": [
+      "SoftBody3D: Godot moves every point of a mesh (linear_stiffness, damping_coefficient, pressure_coefficient)",
+      "set_point_pinned(): boundary conditions as a list of point indices",
+      "inheritance: PinnedParticle extends Particle, overriding step() and calling super()",
+      "a driven support: AnimatableBody3D turned by code, bodies on HingeJoint3D links; a sine as the input (pressure from sin(t))",
+      "contact: rigid colliders with bounce and friction; a seeded replay",
+      "reading a soft body back: point positions, strain as distance from rest",
+      "freezing: run N steps, bake the points into an ArrayMesh (opened in 11.7)"
+     ],
+     "noc": "NOC 6 (physics libraries: soft bodies, springs, Verlet)",
+     "halls": [
+      "SoftBodies_Soft_Body_Deformation",
+      "SoftBodies_Cloth_Physics",
+      "SoftBodies_Carusell",
+      "SoftBodies_Obsticals",
+      "SoftBodies_Obsticals_Part2",
+      "SoftBodies_Playground_of_Joy",
+      "ProceduralGeneration_Reaction_Diffusion_Systems"
+     ],
+     "make": "A curtain of your own net and Godot's soft bodies, hung on pins you choose, carried by one corner, that a walker can push through.",
+     "sections": [
+      {
+       "n": "17.1",
+       "title": "A body that gives way",
+       "idea": "Give Godot a closed mesh and it moves every point for you; three numbers decide how it answers: stiffness, damping, pressure.",
+       "figure": "Three jelly cubes on violet ground just after the same drop, front view: stiff and upright, soft and spread, inflated and round.",
+       "builds": "jelly_cube"
+      },
+      {
+       "n": "17.2",
+       "title": "Which points must stay",
+       "idea": "A pin is a point that may not move; change the pins and the same cloth hangs another way.",
+       "figure": "Three lime strips from one bar, front view: top row pinned, two corners pinned, one corner pinned.",
+       "builds": "cloth_straps"
+      },
+      {
+       "n": "17.3",
+       "title": "A pinned particle is a particle",
+       "idea": "A PinnedParticle extends your Particle from 8.4 and keeps its place: it is a particle that never moves on its own.",
+       "figure": "Your net from chapter 8 hanging by two pinned points, each pin an orange PinnedParticle.",
+       "builds": "soft-body kit cloth.gd"
+      },
+      {
+       "n": "17.4",
+       "title": "Carry the pin with a hand",
+       "idea": "Write step() again so the pin goes where a hand goes, and the net follows.",
+       "figure": "Your net hanging by one corner, the pinned point carried by a white ball with its earlier place in lavender.",
+       "builds": "soft-body kit cloth.gd"
+      },
+      {
+       "n": "17.5",
+       "title": "Drive it from outside",
+       "idea": "Turn a hub, or swing a wall's pressure with a sine: the body answers a motion it cannot push back.",
+       "figure": "The carousel from front-above: lime teardrops swinging out on hinged links.",
+       "builds": "revolving_joy_ride, breathing_room",
+       "caption": "A wall pinned at its edges breathes when its pressure follows a sine."
+      },
+      {
+       "n": "17.6",
+       "title": "Same fall, another obstacle",
+       "idea": "Drop the same soft sphere onto different rigid shapes, and replay the drop from the same seed.",
+       "figure": "Four cells in a row, front view: one soft sphere landed on a cube, a torus, a prism and a slippery slab.",
+       "builds": "softbody_gallery_part2"
+      },
+      {
+       "n": "17.7",
+       "title": "Measure it, freeze it",
+       "idea": "Stop after N steps and keep the shape as a plain ArrayMesh that no longer yields.",
+       "figure": "One vessel frozen at 40, 200 and 400 steps, side by side.",
+       "builds": "rounded_softbody_test, frozen_glass_vessel",
+       "caption": "Or read the points back and colour the strain, lime at rest to orange where stretched."
+      },
+      {
+       "n": "17.8",
+       "title": "A pattern with a metabolism",
+       "idea": "Run your 13.8 rule with other feed and kill numbers: spots, stripes, a maze or dividing cells grow from one patch.",
+       "figure": "Top view of one 32-cell grid after a thousand steps from the same centre seed, four regimes: spots, stripes, maze, mitosis.",
+       "builds": "turing_pattern_generator, reaction_diffusion"
+      }
+     ],
+     "examples": [
+      "Example 17.1: Jelly cube with three sliders",
+      "Example 17.2: Three strips, three pin sets",
+      "Example 17.3: Your net with PinnedParticle and a carried corner",
+      "Example 17.4: A breathing wall",
+      "Example 17.5: Gray-Scott with other feed and kill numbers"
+     ],
+     "exercises": [
+      "Match one silhouette twice: once by changing only pins, once by changing only stiffness.",
+      "Give PinnedParticle the walker's hand as its holder.",
+      "Freeze the vessel at 40, 200 and 400 steps and stand the three in a row.",
+      "Colour a cloth by a reaction-diffusion field running on its points."
+     ],
+     "project_step": "A soft part in your room: your net becomes a curtain on pins that your figure walks through, or a wall that breathes.",
+     "borrowed": [
+      "Walker (supplied): a capsule body that walks into the cloth",
+      "Look (supplied): palette, sky and light"
+     ],
+     "case_study_hooks": [
+      "Haeckel's radiolaria (SoftBodies_Affect_Theory_Visualization): remake one seeded shell as a soft body you can press.",
+      "Turing 1952: a reaction-diffusion coat on a soft creature.",
+      "The Confessing Body: a reaction-diffusion field displacing a body.",
+      "Soft mushroom and flag dancer: soft parts on a plant and on a dancer."
+     ],
+     "notes_for_palle": "Affect_Theory hall holds only radiolaria, so it leaves the path as a case study; its point (looking alive is not being simulated) sits in 17.7. Verlet particles and relax passes belong to ch8; inheritance starts here at 17.3 because the spine puts soft bodies before particle systems. The RD hall is named ProceduralGeneration_ but lives here and reuses ch13's rule. frozen_glass_vessel is built only here. Topology_Entropy_Morphogenesis moved to 18.6, where the mesher it needs is built. The soft-body kit should be trimmed to start at inheritance.",
+     "image": {
+      "file": "/course/sketch/17-softbodies.png",
+      "source": "Rendered new: Godot 4.6, course look (a Verlet net in three pin sets, drawn as a lime mesh)",
+      "caption": "One cloth, three sets of pins: the whole top row, two corners, and one corner carried by a hand.",
+      "rendered_new": true
+     },
+     "media": {
+      "kind": "clip",
+      "overlay": "pin.position = hand.position",
+      "plan": "The carried corner pulling the net along (17.4)."
+     }
+    },
+    {
+     "n": 18,
+     "sequence": "isosurfaces",
+     "title": "Bodies From Fields",
+     "subtitle": "A number for every place, a level that cuts it, marching cubes for the skin.",
+     "code_new": [
+      "a scalar field as a function value_at(p), sampled on a 3D grid (three nested loops into a PackedFloat32Array)",
+      "a level classifies samples inside or outside",
+      "marching cubes: eight corner bits make a case number that picks triangles from a table; edge interpolation t = (level - a) / (b - a), then lerp",
+      "combining fields: sum, min (union), max(a, -b) (cut)",
+      "a periodic field: sin(x)cos(y) + sin(y)cos(z) + sin(z)cos(x)",
+      "density terrain: h(x, z) - y plus 3D noise",
+      "building off the main thread: WorkerThreadPool, hand-back with call_deferred"
+     ],
+     "noc": "Ada's own",
+     "halls": [
+      "ISO_Introduction",
+      "ISO_LookupTable",
+      "ISO_Metaballs",
+      "ISO_ShapesGallery",
+      "ISO_TorusGyroid",
+      "Topology_Entropy_Morphogenesis",
+      "ISO_FlatTerrain",
+      "ISO_PortalLandscape",
+      "ISO_Caves",
+      "ISO_CaveGeneration",
+      "ISO_Sculpting",
+      "ISO_AnimatedNoise"
+     ],
+     "make": "A body made from three sources and noise, cut at a level you chose, meshed by your own marching cubes on a worker thread, with a hole a walker can stand in.",
+     "sections": [
+      {
+       "n": "18.1",
+       "title": "A number for every place",
+       "idea": "A field is a function that returns one number for any point; sample it on a grid and draw the samples.",
+       "figure": "A 10 x 10 x 10 lattice of white dots, iso view, each dot sized by its noise value.",
+       "builds": "voxel_noise_demo"
+      },
+      {
+       "n": "18.2",
+       "title": "A level makes a boundary",
+       "idea": "Pick one number: samples above it are inside, below it outside, and the boundary runs between.",
+       "figure": "One field of three sources cut at 0.2, 0.4, 0.6 and 0.8, front view: one body, one body, three, three smaller.",
+       "builds": "the_threshold_opinion"
+      },
+      {
+       "n": "18.3",
+       "title": "Eight corners, one case",
+       "idea": "Each cell turns its eight corners into a case number; a table says which edges to join, and the corner values say where on each edge.",
+       "figure": "One cube, corners lit lime (inside) or dark (outside), their bit numbers written on them, and the triangle the table draws across it.",
+       "builds": "fifteen_cases_demo"
+      },
+      {
+       "n": "18.4",
+       "title": "Sources that add up",
+       "idea": "Add a falloff for each source and two bodies join with a neck before their centres meet.",
+       "figure": "Two sources in three frames, front view: apart, joined by a neck, one body.",
+       "builds": "metaball_world"
+      },
+      {
+       "n": "18.5",
+       "title": "Union is min, cut is max",
+       "idea": "Combine distance fields point by point: min keeps either body, max(a, -b) carves b out of a.",
+       "figure": "Chair and cup from the shapes gallery, front view, the cup's one-line formula under it.",
+       "builds": "mc_shapes_gallery"
+      },
+      {
+       "n": "18.6",
+       "title": "A formula that repeats",
+       "idea": "sin(x)cos(y) + sin(y)cos(z) + sin(z)cos(x), cut at a level, is one surface that folds through all of space.",
+       "figure": "A gyroid block at period 1 and period 2, iso view, side by side.",
+       "builds": "GyroidDemo, mc_torus_sculpture, entropy_morphogenesis (Topology_Entropy_Morphogenesis)",
+       "caption": "One slider can move frequency, noise and level together; pull them apart to see what it bundled."
+      },
+      {
+       "n": "18.7",
+       "title": "Ground with a second answer",
+       "idea": "Height minus y gives one ground per column; add 3D noise and one column can pass solid, air, solid: overhangs and caves.",
+       "figure": "Side cut through a hill with an overhang and a cave, an orange vertical line crossing it: one column, three crossings.",
+       "builds": "mc_flat_landscape, mc_overhang_landscape, marchingcubes_portal_landscape, mc_inside_cave"
+      },
+      {
+       "n": "18.8",
+       "title": "Rebuild while you watch",
+       "idea": "Mesh on a worker thread and hand the result back with call_deferred, so a hand can sculpt while the room keeps its frame rate.",
+       "figure": "The sculpting frame, front view: an orange brush point and a new lime deposit joined to the old one by a smooth seam.",
+       "builds": "mc_sculpt_vr, animated_noise_explorer"
+      }
+     ],
+     "examples": [
+      "Example 18.1: Field dots",
+      "Example 18.2: Marching cubes on three sources",
+      "Example 18.3: The cup by min and max",
+      "Example 18.4: A gyroid with a period slider and one knob for three settings",
+      "Example 18.5: A threaded sculptor"
+     ],
+     "exercises": [
+      "Find the level where three bodies become one; halve the grid and find it again.",
+      "Write a torus field and union it with the gyroid.",
+      "Bundle frequency, noise and level behind one slider and pull them apart: what did the slider hide?",
+      "Drop a pile of cubes, freeze them, and draw only the faces where a filled cell meets an empty one: a voxel skin.",
+      "Move the noise offset and rebuild twice a second: which block moved?"
+     ],
+     "project_step": "A field-made body in your room, cut at your level, with a doorway carved by max(a, -b) that your figure can stand in.",
+     "borrowed": [
+      "Marching-cubes triangle table (Ada's MarchingCubesLookupTables): the edges to join for each of 256 cases",
+      "Walker (supplied): tests that the hole fits a body"
+     ],
+     "case_study_hooks": [
+      "Rhizome body (ISO_RhizomeBody): a chamber graph with loops blended into passages you walk, once graphs arrive in ch22.",
+      "Caves from conditions (ISO_CaveGeneration): one generator, many caves; which ones can you walk?",
+      "A radiolarian lattice as a field: a gyroid shell cut by a sphere.",
+      "Raymarching the same sources in a shader (ISO_ImplicitModeling), if chapter 12 ever gains a distance-field step."
+     ],
+     "notes_for_palle": "ISO_Metaballs moves up to 18.4 (a sum of sources is the simplest field and the implicit kit's own); ISO_Sculpting moves to 18.8 where the thread is taught. Portal, Caves and CaveGeneration share 18.7. ImplicitModeling is no longer an exercise (raymarching needs a ch12 step the course does not have). RhizomeBody needs a graph (ch22), so it is a case study. Topology_Entropy_Morphogenesis (from ch17) is built in 18.6 and exercise 3; PG_Sculpted_Forms' voxel skin is exercise 4. The implicit kit covers 18.1-18.3 and 18.8; min/max, gyroid and terrain have no kit yet. The gyroid is written with floats (GDScript has no swizzle).",
+     "image": {
+      "file": "/course/sketch/18-isosurfaces.png",
+      "source": "doc/book/studies/implicit/sheet.png (study kit implicit)",
+      "caption": "One field of three sources cut at four levels, on 40 and on 10 cells: one body or three.",
+      "rendered_new": false
+     },
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 19,
+     "sequence": "boolean_surfaces",
+     "title": "Three Verbs for Solids",
+     "subtitle": "Union, intersection and difference: bodies combined, then baked so you can walk in them.",
+     "code_new": [
+      "a solid as a test: is this point inside?",
+      "volume by counting lattice points",
+      "CSGCombiner3D with CSG children: operation UNION, INTERSECTION, SUBTRACTION",
+      "child order is the order of the verbs",
+      "an @export enum that sweeps a family of cuts",
+      "use_collision, then bake_static_mesh() and bake_collision_shape() to a MeshInstance3D and StaticBody3D",
+      "recursion that leaves holes by not building cells"
+     ],
+     "noc": "Ada's own",
+     "halls": [
+      "Boolean_Verbs",
+      "Boolean_Gallery",
+      "Boolean_Works",
+      "PG_Sculpted_Forms"
+     ],
+     "make": "A carved body in your room: two of your grown forms (chapters 15 and 16) united, a tunnel taken out, the order written on its plinth, baked so a walker can step inside.",
+     "sections": [
+      {
+       "n": "19.1",
+       "title": "Inside or outside",
+       "idea": "A solid is a question you can ask any point: am I inside?",
+       "figure": "A box and a sphere overlapping, front view, inside a lattice of dots: lime inside both, cyan inside one, none outside.",
+       "builds": "csg_intersection_demo",
+       "caption": "Count the yeses on a lattice and you have its volume."
+      },
+      {
+       "n": "19.2",
+       "title": "Union keeps either",
+       "idea": "Put two shapes under a CSGCombiner3D and the result is every point that belongs to either, with no seam.",
+       "figure": "A box and a sphere overlapping as one lime union, front view, their two outlines in lavender.",
+       "builds": "csg_union_demo"
+      },
+      {
+       "n": "19.3",
+       "title": "Intersection keeps both",
+       "idea": "Only the points both shapes claim survive; move them apart and nothing is the right answer.",
+       "figure": "The rounded lime survivor of a box and a sphere on its plinth, front view.",
+       "builds": "csg_intersection_demo"
+      },
+      {
+       "n": "19.4",
+       "title": "Difference carves",
+       "idea": "Subtract the sphere from the box and the cut grows a face neither shape had.",
+       "figure": "A lime box with a spherical bite, iso view, the new face in the sphere's cyan.",
+       "builds": "csg_difference_demo"
+      },
+      {
+       "n": "19.5",
+       "title": "One setting, a family of cuts",
+       "idea": "Export an enum that moves the operands, and build every value side by side.",
+       "figure": "The gallery's union row from above: distinct, necked, lobed, single.",
+       "builds": "csg_union_demo, subtraction_suite, removal_room"
+      },
+      {
+       "n": "19.6",
+       "title": "Order is part of the form",
+       "idea": "Children are applied top to bottom, so the same three shapes in another order make another body.",
+       "figure": "Four carved bodies in a row, front view: (A u B) - C, (A - C) u B, (A n B) - C, A - (B u C).",
+       "builds": "csg_compose_workbench"
+      },
+      {
+       "n": "19.7",
+       "title": "A hollow you can walk into",
+       "idea": "A carved hollow is only a picture until you bake it to a mesh with a collider and a level floor.",
+       "figure": "Cut-away side view of a burrow: the cyan walker standing on the baked floor inside the carved tunnel.",
+       "builds": "boolean_burrow, csg_architecture_cavity, sdf_cavern_room"
+      },
+      {
+       "n": "19.8",
+       "title": "The hole never made",
+       "idea": "Recursion can leave holes by simply not building some cells: it looks like subtraction and cuts nothing.",
+       "figure": "The recursive cube with its holes, iso view: nothing was subtracted, the cells were never built.",
+       "builds": "recursive_boolean_cube"
+      }
+     ],
+     "examples": [
+      "Example 19.1: Lattice volume of two overlapping shapes",
+      "Example 19.2: Three verbs on a box and a sphere",
+      "Example 19.3: Four orders of the same three operands",
+      "Example 19.4: A baked burrow with a walker inside"
+     ],
+     "exercises": [
+      "Predict which two of the four orders look alike, then build them.",
+      "Make the symmetric difference (A - B) u (B - A) with two combiners.",
+      "Put two faces in one plane and watch them flicker; move one by a millimetre.",
+      "Cut a dome's hollow out of a block with a difference, then bake it so a walker can stand inside."
+     ],
+     "project_step": "Carve a doorway or a niche into your room with the three verbs, the order written on the plinth, baked so your figure can stand in it.",
+     "borrowed": [
+      "Walker (supplied): proves a hollow can be entered",
+      "Look (supplied): palette, sky and light"
+     ],
+     "case_study_hooks": [
+      "Kapoor's voids (boolean_eggs): an egg with a black cut you look into.",
+      "A Menger sponge you can enter: the recursive cube at room size.",
+      "The same verbs on fields: an SDF cavern carved by max(d, -sphere) (sdf_cavern_room)."
+     ],
+     "notes_for_palle": "Boolean_Gallery's own subject is the registry against the code (DNA axes); for the student it becomes an @export enum sweep. Gallery comes before Works so the halls stay in order (19.5 then 19.6). 19.8 leans on ch14's recursion. The verbs on fields were met in 18.5 (min, max); here they act on meshes. Rendering the images for 17, 19 and 20 left an engine shader cache at AppData/Roaming/Godot/app_userdata/P5 Sketch Render (safe to delete).",
+     "image": {
+      "file": "/course/sketch/19-boolean_surfaces.png",
+      "source": "rendered new: scratch Godot 4.6 scene (scratchpad/sketch/p5_render), CSGBox3D and CSGSphere3D under a CSGCombiner3D, course look",
+      "caption": "A box and a sphere under the three verbs: union, intersection, difference.",
+      "rendered_new": true
+     },
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 20,
+     "sequence": "swarmintelligence",
+     "title": "Many Bodies, Local Rules",
+     "subtitle": "Particles that age, agents that steer, and neighbours that make a crowd.",
+     "code_new": [
+      "a particle system: Spark objects (extends Particle) that are born, age and are removed (loop backwards)",
+      "a trail grid: agents deposit, the grid spreads and fades",
+      "steering: desired velocity minus velocity, limited to a maximum force",
+      "reading a flow field at your position (the field of 6.5)",
+      "neighbours within a radius; a weighted sum of behaviours; groups: add_to_group(), get_nodes_in_group()",
+      "agent state with an enum (seeking food, going home)",
+      "personal best and global best (particle swarm)",
+      "MultiMeshInstance3D for hundreds of bodies (met in ch13)"
+     ],
+     "noc": "NOC 4 (particle systems) and NOC 5 (autonomous agents)",
+     "halls": [
+      "SwarmIntelligence_PhysarumColony",
+      "SwarmIntelligence_FlowFields",
+      "SwarmIntelligence_Boids_Algorithm",
+      "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "SwarmIntelligence_Ant_Colony_Optimization",
+      "SwarmIntelligence_Particle_Swarm_Optimization",
+      "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+     ],
+     "make": "A flock of your own bodies that steers through your room by separation, alignment and cohesion, drawn with one MultiMesh, leaving a trail others can follow.",
+     "sections": [
+      {
+       "n": "20.1",
+       "title": "Many of one class",
+       "idea": "A Spark is a Particle with an age: keep them in an array, add a few each frame and remove the old ones.",
+       "figure": "A fountain of lime points rising from one emitter, front view, turning lavender as they age.",
+       "builds": "none"
+      },
+      {
+       "n": "20.2",
+       "title": "Agents that write the ground",
+       "idea": "Each agent smells three spots ahead, turns toward the strongest and leaves trail; the trail spreads and fades.",
+       "figure": "Top view of the colony: a bright network between three anchors, the agents as dots along it.",
+       "builds": "PhysarumColony"
+      },
+      {
+       "n": "20.3",
+       "title": "Want minus have",
+       "idea": "Steering is the velocity you want minus the velocity you have, limited to a maximum force.",
+       "figure": "One agent with three arrows: its velocity (white), the desired velocity (cyan), and the steering (orange) that closes the gap.",
+       "builds": "FlowFieldMain"
+      },
+      {
+       "n": "20.4",
+       "title": "Follow the arrows",
+       "idea": "You met the arrow field in 6.5: now an agent looks up the arrow where it stands and steers along it.",
+       "figure": "Top view of a grid of arrows bending round a block, lime agents streaming along them.",
+       "builds": "FlowFieldMain"
+      },
+      {
+       "n": "20.5",
+       "title": "Three ways to be near",
+       "idea": "Inside a radius, move away from the too close, turn with your neighbours, pull toward their middle; weight the three and add.",
+       "figure": "One cyan boid inside its lavender sight sphere with three arrows (separate, align, cohere), the flock around it.",
+       "builds": "boid_manager, flocking_controls"
+      },
+      {
+       "n": "20.6",
+       "title": "Two trails, one change of mind",
+       "idea": "An ant looking for food lays a home trail; finding food flips its state, and it lays a food trail home.",
+       "figure": "Top view: a nest, two food piles, and two overlapping trails, cyan for home and orange for food.",
+       "builds": "AntColonyV2, ant_colony_optimization"
+      },
+      {
+       "n": "20.7",
+       "title": "Memory and a score",
+       "idea": "Each particle remembers its best spot and the swarm remembers the best of all; best is whatever the score says it is.",
+       "figure": "The same swarm from above under CONVERGE and under SPREAD, same start, side by side.",
+       "builds": "fitness_landscape_politics"
+      },
+      {
+       "n": "20.8",
+       "title": "A population that lives on",
+       "idea": "Predators and prey steer by one rule with the sign flipped; each birth passes on five numbers with a small mutation.",
+       "figure": "The ecosystem from above, the two population counts drawn as lines under it.",
+       "builds": "ecosystem_simulation"
+      }
+     ],
+     "examples": [
+      "Example 20.1: A particle fountain",
+      "Example 20.2: Physarum on a trail grid",
+      "Example 20.3: Flow-field followers",
+      "Example 20.4: Boids with three sliders and a radius",
+      "Example 20.5: Ants with two trails"
+     ],
+     "exercises": [
+      "Change only the radius and watch the same weights make another flock.",
+      "Let new ants arrive on an old trail; then clear the grid and compare.",
+      "Switch the particle swarm's score from CONVERGE to SPREAD mid-run.",
+      "Draw 800 boids, first as nodes, then as one MultiMesh."
+     ],
+     "project_step": "A flock of copies of your figure steers through your room and round the visitor.",
+     "borrowed": [
+      "Cost field (graph search, taught in ch22): floods out from a target to give each cell its arrow in the route scenes of 20.4",
+      "Walker (supplied): the visitor the flock steers around"
+     ],
+     "case_study_hooks": [
+      "Physarum's rail map: anchors at real stations, compare the network it grows.",
+      "A murmuration flown through in the headset.",
+      "Termite building: agents that deposit material by trail, stigmergy as architecture.",
+      "Physarum meets L-systems (MissionPhysarum_Lsystems)."
+     ],
+     "notes_for_palle": "No hall is a plain particle system, so 20.1 builds no Ada example; its Spark extends the Particle of ch8 and ch17, which is where the inheritance of 17.3 is reused. The sequence starts with Physarum before steering; kept, because Physarum needs only turning, no forces. ABM and ACO are both ants and share 20.6. The flow-field step was met in 6.5 and 7.5; 20.4 only adds the steering on top. No study kit exists here ('flock' was planned, not built). The Boids hall's big flock passes through walls and visitors; the student's flock should steer round the walker.",
+     "image": {
+      "file": "/course/sketch/20-swarmintelligence.png",
+      "source": "Rendered new: Godot 4.6, course look (150 boids, one with its sight and neighbour lines)",
+      "caption": "A flock of 150: one boid (cyan) steers only by the neighbours inside its sight, the lavender sphere and the white lines.",
+      "rendered_new": true
+     },
+     "media": {
+      "kind": "clip",
+      "overlay": "steer = desired - velocity",
+      "plan": "The flock steering round the visitor, the three behaviours switched on one by one."
+     }
+    }
+   ],
+   "ladder_problems": [
+    "The spine puts soft bodies (NOC 6) before particles and agents (NOC 4 and 5), so inheritance, which NOC teaches with particle systems, is taught in ch17 (PinnedParticle extends Particle) and reused in 20.1 (Spark extends Particle).",
+    "ch17 builds on ch8's Particle class and relax passes; the Verlet lesson is not repeated.",
+    "ch17's SoftBodies_Affect_Theory_Visualization holds only Haeckel's radiolaria, so by rule 5 it leaves the path as a case study.",
+    "Topology_Entropy_Morphogenesis needs ch18's mesher, so it moved from ch17 to 18.6.",
+    "ch18 changes the hall order: ISO_Metaballs (11th in the sequence) is taught 4th, and ISO_Sculpting (5th) is taught last, with the thread.",
+    "ch18's ISO_RhizomeBody builds from a chamber graph (ch22), so it is a case study, not a section.",
+    "ch20's flow-field route scenes need a breadth-first flood over the grid (graph theory, ch22), supplied as a borrowed part.",
+    "ch20 opens with NOC 4's particle system, but no hall is one, so 20.1 builds no Ada example."
+   ]
+  },
+  {
+   "part": "VI",
+   "title": "Beyond",
+   "summary": "Part VI starts with bodies that learn: NOC 10 neural networks, framed by NOC 11 neuroevolution and the return of Chapter 16's genetic algorithm. Next comes graph theory: connections you can search, draw, cross, cut and pair. Then Ada's own ending. The crisis of foundations builds bodies that the rules you have used cannot hold. The QFEP laboratory takes Ada's formula apart into four handles and wires them to bodies. Post-crisis computing turns every earlier tool back on the room: who it lets in, what it keeps, who may change it. The running project, My Room, ends here, released to desktop and headset with a guest any visitor can change.",
+   "chapters": [
+    {
+     "n": 21,
+     "sequence": "machinelearning",
+     "title": "Bodies That Learn",
+     "subtitle": "A learner is a rule that changes its own numbers when it is wrong.",
+     "code_new": [
+      "a loss function: error as one number",
+      "the gradient by nudging (finite differences) and the learning rate",
+      "k-means: assign to the nearest centre, move the centre to the mean",
+      "the perceptron: weighted sum, sign, error times input times learning rate",
+      "a hidden layer: nine weights trained by the same nudge, no chain rule",
+      "a convolution kernel slid over an Image",
+      "weights as a genome (neuroevolution)"
+     ],
+     "noc": "NOC 10 Neural Networks and NOC 11 Neuroevolution (NOC 9's genetic algorithm returns)",
+     "halls": [
+      "ML_Evolution",
+      "ML_Gradient_Landscape",
+      "ML_Classification",
+      "ML_Neural_Networks",
+      "ML_Perception",
+      "ML_Sequence_Memory",
+      "ML_Synthesis"
+     ],
+     "make": "A floor that colours itself from labelled points, a perceptron that finds its line by walking down its error, and a vehicle whose brain is evolved, not taught.",
+     "sections": [
+      {
+       "n": "21.1",
+       "title": "A learner with no teacher",
+       "idea": "Take the score out of your Chapter 16 genetic algorithm and the population still changes, because the world does the selecting.",
+       "figure": "Two populations from above: bodies drifting over energy cells with their trails, and a scored population whose best are copied each generation.",
+       "builds": "non_teleological_evolution, evolved_creatures"
+      },
+      {
+       "n": "21.2",
+       "title": "Error is a height",
+       "idea": "Every line through your points has an error, so draw the error as a height over slope and intercept and you get a landscape.",
+       "figure": "The squared-error bowl over a floor whose axes are slope and intercept, one candidate line marked as a lime point on it.",
+       "builds": "loss_function_comparator"
+      },
+      {
+       "n": "21.3",
+       "title": "Walk downhill",
+       "idea": "Nudge each number, see which way the error falls and step that way: that is gradient descent.",
+       "figure": "Top view of the bowl with two trails of steps: small steps curving into the bottom, large steps overshooting back and forth.",
+       "builds": "gradient_descent_visualization",
+       "caption": "The step size is the learning rate."
+      },
+      {
+       "n": "21.4",
+       "title": "Centres that move",
+       "idea": "Give each point to its nearest centre, move each centre to the middle of its points and repeat until nothing changes.",
+       "figure": "Three frames from above: random centres, the first colouring, the settled centres with their coloured points.",
+       "builds": "enhanced_kmeans"
+      },
+      {
+       "n": "21.5",
+       "title": "The perceptron",
+       "idea": "Weigh the inputs, add them up and take the sign; when the answer is wrong, move each weight by error times input times learning rate.",
+       "figure": "Cyan and lime labelled points on the floor, with the perceptron's line after 0, 10 and 100 corrections.",
+       "builds": "learning-body kit (a line), svm_visualization"
+      },
+      {
+       "n": "21.6",
+       "title": "Hidden layers",
+       "idea": "No line separates XOR: add a hidden layer and train its nine weights by the nudge of 21.3.",
+       "figure": "A 2-2-1 network drawn as spheres and wires whose thickness is the weight, the four XOR points at its inputs.",
+       "builds": "neural_network_visualization"
+      },
+      {
+       "n": "21.7",
+       "title": "A filter that finds edges",
+       "idea": "Slide a 3x3 grid of weights over an image and add up: a Sobel kernel lights up only where neighbours differ.",
+       "figure": "A pixel image of a cross and a disk, the 3x3 window outlined on it, and its edges lit lime.",
+       "builds": "computer_vision_vr"
+      },
+      {
+       "n": "21.8",
+       "title": "A brain that evolves",
+       "idea": "Give your Chapter 20 vehicle a small network for a brain, treat its weights as genes, and let selection do the training.",
+       "figure": "Trails of a dozen vehicles toward a target at generations 1, 10 and 30: scattered, then converging.",
+       "builds": "evolved_creatures; joint_learn_walk (met as the reward-learning comparison)"
+      }
+     ],
+     "examples": [
+      "Example 21.1: Drift, a population with no fitness",
+      "Example 21.2: Downhill on a loss surface",
+      "Example 21.3: k-means on the floor",
+      "Example 21.4: A perceptron learns a line",
+      "Example 21.5: Neuroevolved steering"
+     ],
+     "exercises": [
+      "Raise the outliers and compare the squared-error and Huber landscapes on the same points.",
+      "Run k-means with four centres on three blobs: what does the fourth centre do?",
+      "Build the memory cell c = f*c + i*x with three gate sliders, and feed it two histories that end on the same token.",
+      "Score each point by its distance from the mean in spreads and lift the ones past a threshold."
+     ],
+     "project_step": "Your figure learns: a floor in your room colours itself from places you label with two keys, and your figure steers by a small evolved network.",
+     "image": {
+      "file": "/course/sketch/21-machinelearning.png",
+      "source": "Rendered new: Godot 4.6, course look (perceptron, three stages)",
+      "caption": "A perceptron finds its line: before any correction, after 30, and when every point is on its side.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "A creature that teaches itself to walk from a reward every tenth of a second (joint_learn_walk), as a reinforcement-learning extension.",
+      "A real generator and discriminator trained on the student's own shapes (what ML_Generative only diagrams).",
+      "Train on visitors' stops in the room, with consent, and print who labelled each point.",
+      "Backpropagation: the chain rule does the nudging of all the weights in one backward pass instead of nine nudges."
+     ],
+     "borrowed": [
+      "The floor painter (Image to ImageTexture, one pixel per cell) from the learning-body kit's supplied files."
+     ],
+     "notes_for_palle": "ML_Generative is left out: its losses are scripted curves and nothing trains. ML_Sequence_Memory is an exercise so the chapter keeps 8 sections. ML_Perception's labels are not learned from its edges, so the chapter builds the filter and stops there. The learning-body kit's who-labelled argument is strong but is a case study. The hidden layer is trained by the finite-difference nudge of 21.3, so no chain rule and no supplied train_step() are needed; backpropagation is a hook. No data file is loaded here (FileAccess and JSON arrive in ch25).",
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 22,
+     "sequence": "graphtheory",
+     "title": "What Connections Permit",
+     "subtitle": "Places and the connections between them: searched, drawn, crossed, cut and paired.",
+     "code_new": [
+      "a graph as a Dictionary of neighbour Arrays (adjacency list) and degree",
+      "a queue and a stack (push_back, pop_front, pop_back); a visited set; came_from and walking a path back from the goal",
+      "force-directed layout: springs on edges, repulsion between every pair",
+      "AStar3D (add_point, connect_points, get_point_path, set_point_disabled)",
+      "directed edges and components you can return through",
+      "union-find",
+      "capacity, flow and the augmenting path",
+      "matching: greedy against maximum"
+     ],
+     "noc": "Ada's own (NOC 2 forces and Chapter 17's springs return in the layout)",
+     "halls": [
+      "GT_Foundations",
+      "GT_Layout",
+      "GT_Pathfinding",
+      "GT_Network_Analysis",
+      "GT_Connectivity",
+      "GT_Spanning_Trees",
+      "GT_Flow",
+      "GT_Matching"
+     ],
+     "make": "A graph of your room's places that a companion can search, lay out, cross by the shortest route and connect at the lowest cost.",
+     "sections": [
+      {
+       "n": "22.1",
+       "title": "Places and connections",
+       "idea": "A graph lists places and, for each place, the places it connects to; count a place's connections and you have its degree.",
+       "figure": "Four spheres and seven edges, one sphere per island, each labelled with its degree: all odd.",
+       "builds": "KonigsbergBridge, graphspace"
+      },
+      {
+       "n": "22.2",
+       "title": "The tide and the diver",
+       "idea": "Keep the places still to visit in a list: take from the front to spread, from the back to dive.",
+       "figure": "The same tree of lamps twice, numbered in visit order: row by row for the tide (breadth-first), branch by branch for the diver (depth-first).",
+       "builds": "two_travelers"
+      },
+      {
+       "n": "22.3",
+       "title": "A drawing is not the graph",
+       "idea": "Pull connected places together with springs and push every pair apart, and the graph draws itself: the drawing moves, the connections stay.",
+       "figure": "A cube's eight vertices as a random tangle on the left, settled into a readable cube on the right.",
+       "builds": "force_directed_layout, forcedirected3d"
+      },
+      {
+       "n": "22.4",
+       "title": "The shortest way across",
+       "idea": "Breadth-first search notes where it came from, so following the notes back from the goal gives the shortest route.",
+       "figure": "Stepping stones from above with the spark's route lit; one stone sunk and the new route drawn around it.",
+       "builds": "impatient_river, living_paper_dfs_maze",
+       "caption": "AStar3D adds a guess of the distance left."
+      },
+      {
+       "n": "22.5",
+       "title": "One way, and back",
+       "idea": "Give edges a direction and reaching a place no longer means you can come back; places that can all reach each other form a component.",
+       "figure": "Eight spheres joined by arrows, three coloured groups each holding a cycle, one-way arrows running between the groups.",
+       "builds": "tarjan_algorithm"
+      },
+      {
+       "n": "22.6",
+       "title": "The cheapest network",
+       "idea": "Take edges from cheapest up and keep each one that joins two separate groups: you get every place connected with no loops.",
+       "figure": "A weighted graph with accepted edges in lime and rejected ones lavender.",
+       "builds": "mst_visualization, grid3d_prim",
+       "caption": "A maze is a spanning tree of a grid."
+      },
+      {
+       "n": "22.7",
+       "title": "What a pipe can carry",
+       "idea": "Give every edge a capacity and keep pushing along any path that still has room: the bottleneck decides the total.",
+       "figure": "Source on the left, sink on the right, edges as tubes filled flow-over-capacity, and the full edges that form the cut marked.",
+       "builds": "push_relabel_algorithm"
+      },
+      {
+       "n": "22.8",
+       "title": "Pairing places",
+       "idea": "A matching pairs places so that none is used twice; greedy pairs can block a better set.",
+       "figure": "A ring of five with five spokes: a greedy matching in orange leaves a gap, and one swap in lime fills it.",
+       "builds": "edmonds_algorithm",
+       "caption": "Look for a path that swaps pairs to add one more."
+      }
+     ],
+     "examples": [
+      "Example 22.1: Königsberg's degrees",
+      "Example 22.2: The tide and the diver",
+      "Example 22.3: A cube draws itself",
+      "Example 22.4: A river of stones (AStar3D)",
+      "Example 22.5: A maze is a spanning tree"
+     ],
+     "exercises": [
+      "Which place is busiest? Count the shortest paths through each vertex and compare that with its degree.",
+      "Remove one bridge from Konigsberg so that a walk over every bridge exists.",
+      "Swap the queue for a stack in your path search: is the route still the shortest?",
+      "Connect six seeds as a tree, then add one edge to make a loop: count the components and the cycles.",
+      "Order a list of chores with 'before' arrows (a topological sort)."
+     ],
+     "project_step": "Your room becomes a graph: its forty places as vertices and walls as missing edges; your figure finds the way to any place, and a test proves every place can be reached.",
+     "image": {
+      "file": "/course/sketch/22-graphtheory.png",
+      "source": "Rendered new: Godot 4.6, course look (one tree, two visit orders)",
+      "caption": "One tree of lamps numbered in the order each search visits it: breadth-first, the tide, and depth-first, the diver.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Desire lines: the route people actually walk against the shortest one, cut into the room's walls.",
+      "The rhizome cave (SpeculativeComputation_Rhizome_Network): a graph whose edges are walkable tunnels.",
+      "A salesman's tour drawn as one closed line (salesman_knot)."
+     ],
+     "borrowed": [
+      "Path compression in union-find: one supplied line; the idea of joining groups is taught."
+     ],
+     "notes_for_palle": "GT_Network_Analysis's centrality is authored, not computed from its edges, so it is an exercise where the student computes what the hall only shows. GT_Flow shows push-relabel; the chapter builds augmenting paths with the breadth-first search from 22.2 and uses the hall for comparison. The rhizome tree-then-loop of PG_Mirrored_Patterns is exercise 4. If Part IV carved mazes (PG_Caves_Mazes), 22.6 is a return.",
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 23,
+     "sequence": "foundationscrisis",
+     "title": "Where Foundations Fail",
+     "subtitle": "Every system you have built stands on choices; here you build what those choices cannot hold.",
+     "code_new": [
+      "axioms as data: an Array of Strings and a toggle",
+      "the angle between directions (dot product, acos); great-circle sides with Vector3.slerp",
+      "a Boolean with no consistent value",
+      "a statement as an integer (Godel numbering)",
+      "a closed loop's height changes sum to zero",
+      "an illusion that closes from one camera position only",
+      "an enum with a third value: TRUE, FALSE, NOT_YET",
+      "keeping a contradiction without letting it prove everything"
+     ],
+     "noc": "Ada's own",
+     "halls": [
+      "Euclid_Parallel",
+      "NonEuclidean_Spaces",
+      "Russell_Paradox",
+      "Godel_Incompleteness",
+      "Escher_Impossible",
+      "Brouwer_Intuitionism",
+      "Florensky_Paraconsistent",
+      "Crisis_Synthesis"
+     ],
+     "make": "A gallery of impossible bodies: a triangle whose angles add to more than 180°, a set that cannot decide, a staircase that closes from one standpoint, a row that waits for you, and a gate that holds two answers.",
+     "sections": [
+      {
+       "n": "23.1",
+       "title": "Five sentences you agreed to",
+       "idea": "Every world you have built rests on rules you never wrote down, so write Euclid's five as an array and switch the fifth off.",
+       "figure": "Five plinths in a horseshoe, the fifth in orange, and two lime lines that run parallel from the first.",
+       "builds": "euclid_postulates_plaque, parallel_lines"
+      },
+      {
+       "n": "23.2",
+       "title": "A triangle on a sphere",
+       "idea": "On a sphere, with sides drawn by slerp and corners measured by dot, the angles add up to more than 180°.",
+       "figure": "The same three corners on a plane, on a sphere and in a Poincaré disk, with the angle sum printed under each.",
+       "builds": "triangle_curvature_workbench, riemann_sphere, poincare_disk"
+      },
+      {
+       "n": "23.3",
+       "title": "The set that cannot decide",
+       "idea": "Ask whether the set of all sets that do not contain themselves contains itself: try true, try false, and both break the rule.",
+       "figure": "Two buttons on a plinth, IN and OUT: pressing IN lights the OUT lamp orange and pressing OUT lights the IN lamp orange, so no lamp can stay lit.",
+       "builds": "russell_paradox_workbench, russell_set_box"
+      },
+      {
+       "n": "23.4",
+       "title": "A statement that is a number",
+       "idea": "Code each symbol as a number and a whole statement as one integer, and arithmetic can talk about its own statements.",
+       "figure": "A row of five lime tiles carrying symbols, each with a tower of cubes for its prime raised to its code, and one tall off-white column whose height is their product.",
+       "builds": "godel_sentence_machine, incompleteness_tower"
+      },
+      {
+       "n": "23.5",
+       "title": "Every step right, the loop wrong",
+       "idea": "The height changes around a closed loop always add up to zero, so a staircase that only climbs can close only where the drop is hidden.",
+       "figure": "The staircase from its one standpoint, the loop closing, the hidden drop marked in lavender on the far side.",
+       "builds": "escher_staircase, penrose_triangle"
+      },
+      {
+       "n": "23.6",
+       "title": "True, false, not yet",
+       "idea": "Give truth a third value: a row that grows only when you choose its next term cannot yet answer a question about all its terms.",
+       "figure": "A row of cyan and orange beads ending in a question mark, and a readout: 'contains a 1' TRUE, 'never a 1' NOT_YET.",
+       "builds": "brouwer_choice_sequence, excluded_middle_demo"
+      },
+      {
+       "n": "23.7",
+       "title": "Both, and nothing follows",
+       "idea": "Keep two reports that disagree, open and closed, and do not let their clash prove anything else.",
+       "figure": "A door frame with two see-through leaves, one open and one shut, and a readout: alarm, NO SUPPORT.",
+       "builds": "both_true_gate, florensky_sphere"
+      },
+      {
+       "n": "23.8",
+       "title": "A formula with handles",
+       "idea": "Ada's formula waits at the end of the hall with a button for each term.",
+       "figure": "The formula as floating 3D letters with one term lit and its question printed beneath.",
+       "builds": "qfep_formula_3d"
+      }
+     ],
+     "examples": [
+      "Example 23.1: Parallel lines, fifth on and off",
+      "Example 23.2: A triangle on a sphere",
+      "Example 23.3: Russell's two buttons",
+      "Example 23.4: The staircase that closes from one place",
+      "Example 23.5: The both-true gate"
+     ],
+     "exercises": [
+      "In the Poincaré disk, find a triangle whose angles add up to almost nothing.",
+      "The barber shaves everyone who does not shave himself: write his two rows.",
+      "Plot x → r·x·(1−x) for r from 2.5 to 4 and watch one value split into two, four, then scatter (the hall's bifurcation diagram).",
+      "Build a Penrose tribar from three straight beams that closes from one camera position only."
+     ],
+     "project_step": "Put an impossible body in your room, a stair that closes from one place, and mark that place on the floor for your figure to stand on.",
+     "image": {
+      "file": "/course/sketch/23-foundationscrisis.png",
+      "source": "Rendered new: Godot 4.6, course look (orthographic standpoint and one step aside)",
+      "caption": "The staircase from its one standpoint, where the loop closes, and from one step aside, where it opens.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Escher's Ascending and Descending as a walkable hall with one true standpoint (headset route).",
+      "Hilbert's hotel (in Russell_Paradox): a full hotel that still takes a guest.",
+      "Magritte's pipe (in Escher_Impossible): a label that denies its own body."
+     ],
+     "borrowed": [
+      "A Gödel encoder with a supplied list of primes that guards against overflow: prime powers pass GDScript's 64-bit int almost at once. The student writes the decoder for single symbols."
+     ],
+     "notes_for_palle": "No Nature of Code anchor: this chapter teaches thinking with code, using small tools (Booleans, enums, slerp, a sum around a loop). Godel_Incompleteness's machine is a timed sculpture; the chapter builds a real search over a toy system, so the student's version does more than the hall's. 23.8 is only a teaser; the formula is presented in 24.1.",
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 24,
+     "sequence": "qfeplaboratory",
+     "title": "The QFEP Laboratory",
+     "subtitle": "Ada's formula taken apart into four handles you turn, count and wire to bodies.",
+     "code_new": [
+      "a formula as a function of four parameters",
+      "Shannon entropy from a probability (log base 2)",
+      "counting outcomes: branches multiply, a logarithm adds",
+      "position as a parameter (the walker's place along a hall as 0 to 1)",
+      "a signed parameter: sign and size read apart",
+      "connecting and cutting a signal route (connect, disconnect)",
+      "parameters mapped onto a body's stiffness and damping"
+     ],
+     "noc": "Ada's own (NOC 0's probability and Chapter 17's soft body return)",
+     "halls": [
+      "QFEP_Introduction",
+      "QFEP_F_Term",
+      "QFEP_E_Term",
+      "QFEP_Lambda_Spectrum",
+      "QFEP_Phi_Term",
+      "QFEP_Edge_Of_Chaos",
+      "QFEP_Sandbox",
+      "QFEP_Synthesis"
+     ],
+     "make": "A laboratory of four handles, F, E, λ and φ, wired to a console, a walkable λ hall, a reaction-diffusion floor and a soft body, with one route you can cut.",
+     "sections": [
+      {
+       "n": "24.1",
+       "title": "Four handles, one number",
+       "idea": "Write the formula as a function qfe(F, E, λ, φ), turn its handles and find two settings that give the same number.",
+       "figure": "The console's four-axis diamond for two different settings drawn over each other, both reading the same total.",
+       "builds": "qfep_balance_workbench, grab_sphere_F, grab_sphere_E"
+      },
+      {
+       "n": "24.2",
+       "title": "How predictable is a bit?",
+       "idea": "Draw bits that are 1 with probability p: −p log₂ p − (1−p) log₂ (1−p) is highest at one half and zero at both ends.",
+       "figure": "Bit grids at p = 0.1, 0.5 and 0.9 above the entropy curve, with the three points marked on it.",
+       "builds": "shannon_workbench"
+      },
+      {
+       "n": "24.3",
+       "title": "Counting futures",
+       "idea": "Each choice multiplies the futures, and the logarithm of the count turns that product back into a sum.",
+       "figure": "A fan from one point branching 1, 2 and 3 ways over four levels, with the leaf counts 1, 16 and 81 beneath.",
+       "builds": "entropy_fan, microstate_counter"
+      },
+      {
+       "n": "24.4",
+       "title": "λ is where you stand",
+       "idea": "Read your place along the hall as λ from 0 to 1 and lerp every block from its lattice place toward a scattered one.",
+       "figure": "The λ hall from the entrance: a wall of aligned lime cubes dissolving into tumbling orange ones, with the lit strip between.",
+       "builds": "lambda_hall"
+      },
+      {
+       "n": "24.5",
+       "title": "A handle with a sign",
+       "idea": "φ runs from −1 to +1: its sign says which way change is weighted and its size says how much, so read them apart.",
+       "figure": "The φ rail at −0.6, 0 and +0.6, with particles sinking, still and rising.",
+       "builds": "phi_slider, preserved_pattern, transforming_pattern"
+      },
+      {
+       "n": "24.6",
+       "title": "Driving a pattern",
+       "idea": "Map λ onto your 13.8 field's feed and kill rates and slide it slowly: spots, then stripes, then a blank.",
+       "figure": "Five tiles of one field along the λ route, same start and same time.",
+       "builds": "edge_of_chaos_unlocked, turing_pattern"
+      },
+      {
+       "n": "24.7",
+       "title": "Connect the route",
+       "idea": "Connect a slider's signal to the reactor, then cut it: the reactor keeps its last value.",
+       "figure": "Two sliders, the reactor orb and the wire between them, lit when connected and dark when cut, with the handle value and the used value side by side.",
+       "builds": "lambda_slider, phi_slider, qfep_reactor"
+      },
+      {
+       "n": "24.8",
+       "title": "What should this body keep?",
+       "idea": "Send λ to your soft body's stiffness and φ to its damping: one changes how it holds a shape, the other how long it keeps moving.",
+       "figure": "A 2x2 grid of the specimen in its jar at two λ values and two φ values.",
+       "builds": "queer_morphology_specimen"
+      }
+     ],
+     "examples": [
+      "Example 24.1: The balance console",
+      "Example 24.2: Bits from p",
+      "Example 24.3: Same symbols, four orders (qfep-lab kit)",
+      "Example 24.4: Walking λ",
+      "Example 24.5: The wired reactor"
+     ],
+     "exercises": [
+      "Find three settings of the console that give the same total: what does the number hide?",
+      "Make the dark room, a field where nothing changes: what is its entropy, and what is there to predict?",
+      "Throw a die three times: how many futures, and how many bits?",
+      "Sort 200 symbols by value, by colour and in reverse, and show that the entropy never moves."
+     ],
+     "project_step": "Give your room its handles: λ moves your figure's blocks from lattice toward scatter, φ sets its damping, and one route you can cut.",
+     "image": {
+      "file": "/course/sketch/24-qfeplaboratory.png",
+      "source": "Rendered new: Godot 4.6, course look (the lambda hall, walker on the path)",
+      "caption": "The λ hall: an ordered lattice at λ = 0 and tumbling blocks at λ = 1, with the walker on the lit path between.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Your own prediction log as a walkable F curve (the qfep-lab kit's f_curve), if the course ever keeps a sketchbook of predictions.",
+      "Langton's ant set loose on the reaction-diffusion floor at the edge.",
+      "The snap puzzle (QFEP_F_Term): a body that lowers its error as your hands assemble it."
+     ],
+     "borrowed": [
+      "Your Gray-Scott step from 13.8.",
+      "The soft body from Chapter 17 (the student's own, or the hall's queer_morphology_specimen)."
+     ],
+     "notes_for_palle": "The hall names do not fit their content: QFEP_F_Term teaches Shannon entropy and QFEP_E_Term counts branches. The chapter keeps each hall's content in order and its section titles avoid the F/E labels. The kit's F curve depends on a prediction log the new course does not keep, so it becomes a hook.",
+     "media": {
+      "kind": "still"
+     }
+    },
+    {
+     "n": 25,
+     "sequence": "postfoundationscrisis",
+     "title": "Open the Room",
+     "subtitle": "Every tool you have learned, turned back on the room you made.",
+     "code_new": [
+      "a record that carries its source (who, when, what)",
+      "keeping both versions of a disagreement",
+      "a seen-list for counting distinct contributors",
+      "growth by nearest earlier neighbours; cutting a node and counting components",
+      "writing to user:// (FileAccess, JSON.stringify), appending (READ_WRITE, seek_end), loading in another scene",
+      "export presets for desktop and Quest"
+     ],
+     "noc": "Ada's own",
+     "halls": [
+      "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "CriticalAlgorithms_Applied_Ethics",
+      "SpeculativeComputation_Paraconsistent_Engineering",
+      "SpeculativeComputation_Situated_Computation",
+      "SpeculativeComputation_Collective_Knowledge",
+      "SpeculativeComputation_Rhizome_Network",
+      "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "PostCrisis_Synthesis"
+     ],
+     "make": "Your room, released: one body any visitor can change, every change kept with its source, exported to desktop and headset.",
+     "sections": [
+      {
+       "n": "25.1",
+       "title": "Room to tell apart",
+       "idea": "Lerp one group of labels into a tight knot and the other apart: every word stays, but some can no longer be told from each other.",
+       "figure": "Floating labels at blend 1: the orange ones crowded into a knot, the off-white ones spread wide.",
+       "builds": "bias_from_inside"
+      },
+      {
+       "n": "25.2",
+       "title": "Who the room faces",
+       "idea": "One loop places six chairs round a table or in a line, and decides who is easy to speak to.",
+       "figure": "Two miniature rooms side by side: a long table with a head chair, and a round table with six equal chairs.",
+       "builds": "room_shape_demonstrator"
+      },
+      {
+       "n": "25.3",
+       "title": "Keep both branches",
+       "idea": "When two versions disagree, keep both with their sources instead of letting the last write win; a resolution is a choice you make in the open.",
+       "figure": "Branch A and branch B as two pillars meeting at a lit junction, both kept.",
+       "builds": "merge_conflict_visualizer",
+       "caption": "A resolution shrinks one to a labelled stump, in the open."
+      },
+      {
+       "n": "25.4",
+       "title": "A verdict with an address",
+       "idea": "Let every reading carry the place it was made from, and four panels can disagree about one subject without any of them lying.",
+       "figure": "Four panels facing inward around one subject number, each showing its verdict, its confidence and a footer giving its position.",
+       "builds": "situated_readout"
+      },
+      {
+       "n": "25.5",
+       "title": "Count the voices",
+       "idea": "Count contributions and contributors apart: a seen-list lets each source count once.",
+       "figure": "A helix of facets fed by twelve rim nodes, coloured by source, with two counters: pieces and sources.",
+       "builds": "peer_production_tool, the_commons_table"
+      },
+      {
+       "n": "25.6",
+       "title": "Grow without a root",
+       "idea": "Let each new point link to its three nearest earlier points, then cut a busy one and count what still connects with your Chapter 22 search.",
+       "figure": "The rhizome from above, one busy node cut to a lavender ghost and the surviving groups in different colours.",
+       "builds": "rhizome_grower, rhizome_cave_demo"
+      },
+      {
+       "n": "25.7",
+       "title": "A body you can change",
+       "idea": "Pull one joint of a body of spheres and springs and let go: the body keeps your change, and the change is now data.",
+       "figure": "A figure of joints and links with one hand pulled far out, the original pose ghosted behind it.",
+       "builds": "MolecularDesigner"
+      },
+      {
+       "n": "25.8",
+       "title": "Save it, carry it, release it",
+       "idea": "Write each change to user:// with who, when and what, and load it in another room.",
+       "figure": "Two bodies side by side, the cyan start pose and the orange kept pose, with a ledger of entries scrolling between them.",
+       "builds": "assembly_return, accountability_ledger",
+       "caption": "Then export the room for desktop and headset."
+      }
+     ],
+     "examples": [
+      "Example 25.1: Compressed labels",
+      "Example 25.2: Two rooms from one loop",
+      "Example 25.3: A merge that keeps both",
+      "Example 25.4: A rhizome you can cut",
+      "Example 25.5: The body that returns (save and load)"
+     ],
+     "exercises": [
+      "Build a fair pair: the same chair count, size and colour, with only the arrangement changed.",
+      "Feed one source ten times and watch contributions and contributors part.",
+      "Give the situated readout a fifth panel whose verdict is computed from what it can see.",
+      "Open the log with WRITE on every visit, watch the history stay one entry long, and repair it."
+     ],
+     "project_step": "FINAL: your room, released, with your figure standing and one body any visitor may change; each change is kept for the next visitor to read, and the room is exported to desktop and Quest.",
+     "image": {
+      "file": "/course/sketch/25-postfoundationscrisis.png",
+      "source": "Rendered new: Godot 4.6, course look (the figure, the change, the ledger)",
+      "caption": "Your room, released: the figure a visitor changed, its first pose in lavender, and the ledger that keeps who changed what.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "A shared class museum: each student's room as one hall, walked together in the headset.",
+      "Repairability as a brief: a guest that can be opened and mended by someone else.",
+      "The commons table: a round table with an opening at its centre instead of an object."
+     ],
+     "borrowed": [
+      "The Quest export preset (export_presets.cfg, shipped in every kit) and Godot's export templates.",
+      "The spring-jointed body from Chapter 17, reused as the changeable guest."
+     ],
+     "notes_for_palle": "Six of the eight halls teach almost no new code: they reuse lerp, loops, dictionaries and the Chapter 22 search, so the new code gathers in 25.7 and 25.8 (persistence, provenance, export). Many of these halls' tutorials end with 'Next experiment, not yet a visitor control'. Those are exactly what the student can build, so the final project can finish the halls' open experiments. The name MolecularDesigner suggests chemistry, but the hall is a catalogue of assemblies.",
+     "media": {
+      "kind": "still"
+     }
+    }
+   ],
+   "ladder_problems": [
+    "Chapter 21: the halls start with evolution and Nature of Code starts with the perceptron. The chapter opens on the Chapter 16 genetic algorithm (no teacher), runs NOC 10, and closes on neuroevolution (NOC 11).",
+    "Chapter 21: the hidden layer is trained by the finite-difference nudge of 21.3, so the chain rule is not needed; backpropagation is a hook.",
+    "Chapter 21: ML_Generative trains nothing (scripted curves) and is not built. ML_Sequence_Memory drops to an exercise to keep 8 sections.",
+    "Chapter 22 comes after machine learning, so a neural network (a graph) is drawn in Chapter 21 before graphs are taught. GT_Network_Analysis's exhibit computes nothing from its edges, so it is only an exercise.",
+    "Chapter 23: Godel numbers overflow GDScript's 64-bit int, so a supplied encoder is used. The hall's Godel machine is a timed sculpture, not a search, so the student's build differs from the hall.",
+    "Chapter 23.8 only teases the formula; 24.1 presents it.",
+    "Chapter 24: hall names do not match content (QFEP_F_Term teaches Shannon entropy). Reaction-diffusion is the student's own from 13.8.",
+    "Chapter 25: most halls reuse earlier code, so the chapter's new ideas (files in user://, provenance, export) gather in its last two sections."
+   ]
+  }
+ ],
+ "open_questions": [
+  "Stills or video? You asked: use Godot video with the line of code over the actual scene? The sketch says yes for the chapters about motion (6, 7, 8, 9, 10, 13, 17, 20) and stills for static forms. A proof clip of chapter 6 plays under its picture. Confirm, and say whether the 197 section figures are rendered as stills, clips, or only the ones that carry a rate or a change.",
+  "The rendered ground is deep indigo (about 46, 12, 164), not violet, and it swallows near-black tiles. Retune the look's ground to a lighter violet, or call it indigo? Until then 3.5 to 3.8 use off-white and near-black tiles in a lime frame.",
+  "Rays: the spray can (4.7) and the pattern painter (5.5) need a ray from a hand to a surface. It is supplied and never opened. Teach Godot's ray cast once (chapter 7 or 20) or leave it supplied?",
+  "Chapter 7 has nine sections: add, subtract and dot no longer share one, and collisions became an exercise. Keep nine, or move the centre-of-mass section (7.8) to an exercise too?",
+  "11.7 now teaches ArrayMesh and the trimesh collider, the first mesh built from vertices; line() and triangle() from chapter 1 stay supplied until then, and 17.7 reuses it. Fine, or should chapter 5 open them with a triangle built from an array?",
+  "Names: the random walker of 10.6 is a class Wanderer, so it does not clash with the supplied cyan walker, which the book calls the walker; 16.6's digger is a digger. Fine?",
+  "Chapter 1 is built around a court of your own shapes; Durer's Melencolia court is the hall's subject and a hook, and the picture is unchanged. Fine?",
+  "Backpropagation: 21.6 trains the hidden layer by the finite-difference nudge of 21.3 (nine weights, no chain rule); the chain rule is a hook. Or teach the chain rule in chapter 6?",
+  "Inheritance is taught in 17.3 (PinnedParticle extends Particle) because the spine puts soft bodies before particle systems, and reused in 20.1; Nature of Code teaches it with particles. Keep?",
+  "Halls moved out of their sequence: Topology_Entropy_Morphogenesis from 17 to 18.6 (it needs the mesher), Noise_6_Wall from 11 to 12.6, PG_Sculpted_Forms into exercises of 18 and 19, the rhizome network into an exercise of 22, and three randomness halls into exercises of 10. Agreed?",
+  "Chapter 6 now leads with velocity and acceleration; the fundamental theorem (ftc_bridge) is an extension, not a section. Agreed?",
+  "SHORT_SPEAK.md (2 October) names what is seen a mesh and what is touched a shape, one name per term; the sketch still says collider. Align when the lessons are written?",
+  "Chapter 1 now holds six ideas in eight sections (script and _ready, coordinates, mesh and collider, _process, mouse and a copy in code, variables); length() moved to 2.5 and snapped() to a chapter 3 exercise. Can a first-time programmer finish it?"
+ ]
+}
