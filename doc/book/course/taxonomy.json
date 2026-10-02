@@ -102,7 +102,7 @@
     {
       "id": "node", "kind": "concept",
       "forms": {"text": ["node", "nodes"], "code": []},
-      "def": "One thing Godot keeps and runs.",
+      "def": "A basic building block in Godot.",
       "introduced_at": "1.1", "synonyms": ["entity", "entities"], "depends_on": [],
       "other_senses": [{"words": ["node", "nodes"], "at": ["25.0", "25.5", "25.6"], "sense": "a point of a graph"}]
     },
@@ -141,7 +141,7 @@
     {
       "id": "script", "kind": "concept",
       "forms": {"text": ["script", "scripts"], "code": []},
-      "def": "Text on a node, which the node runs as code.",
+      "def": "Contains code; here, attached to a node.",
       "introduced_at": "1.1", "synonyms": [], "depends_on": ["node"]
     },
     {
@@ -190,8 +190,8 @@
     {
       "id": "func", "kind": "gdscript",
       "forms": {"text": [], "code": ["func"]},
-      "def": "Starts a named block of code.",
-      "introduced_at": "1.1", "synonyms": [], "depends_on": []
+      "def": "Defines a function.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["function"]
     },
     {
       "id": "_ready", "kind": "godot",
@@ -208,8 +208,8 @@
     {
       "id": "$", "kind": "gdscript",
       "forms": {"text": [], "code": ["$"]},
-      "def": "`$Name` reaches the node named Name.",
-      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node"]
+      "def": "`$Name` gets the child node named Name.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node", "child"]
     },
     {
       "id": "=", "kind": "gdscript",
@@ -490,7 +490,7 @@
     {
       "id": "str", "kind": "gdscript",
       "forms": {"text": [], "code": ["str"]},
-      "def": "Turns a number into words.",
+      "def": "Converts a value to text.",
       "introduced_at": "1.6", "synonyms": [], "depends_on": []
     },
     {
@@ -825,8 +825,8 @@
     {
       "id": "child", "kind": "concept",
       "forms": {"text": ["child", "children"], "code": []},
-      "def": "A node held by another: it follows that node.",
-      "introduced_at": "2.7", "synonyms": [], "depends_on": ["node"]
+      "def": "A node that sits under another node.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node"]
     },
     {
       "id": "$/", "kind": "gdscript",
@@ -1041,8 +1041,8 @@
     {
       "id": "function", "kind": "concept",
       "forms": {"text": ["function", "functions"], "code": []},
-      "def": "A named block of code that can return a value.",
-      "introduced_at": "4.2", "synonyms": [], "depends_on": [],
+      "def": "A named block of code.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": [],
       "note": "def changed by the chapter 4 writer, 2 October 2026: _ready and add_piece (4.2) are functions that answer nothing; return is what makes one answer"
     },
     {

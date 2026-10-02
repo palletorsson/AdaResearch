@@ -8,7 +8,7 @@ python functional_text/check.py --taxonomy taxonomy.json --sketch sketch/sketch.
     --report functional_text/sketch_report.md
 ```
 
-Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 631 entries. Run: 34 errors, 641 warnings.
+Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 631 entries. Run: 34 errors, 644 warnings.
 
 ## Counts
 
@@ -17,7 +17,7 @@ Sketch: The Godot Course, Sketched, 2026-10-02. Taxonomy: 631 entries. Run: 34 e
 | used before it is taught | 7 | 7 |
 | used, never taught (`introduced_at: missing`) | 22 | 28 |
 | never taught, named only inside a supplied part or a code_new | 3 | - |
-| taught twice | 22 | 23 |
+| taught twice | 22 | 24 |
 | explained by an element taught later (the taxonomy's depends_on) | 2 | 2 |
 | the same word in another sense, declared (not an order break) | 17 | 41 |
 | taught in a chapter's code_new, but no section names it | 4 | - |
@@ -51,6 +51,14 @@ First use of each element against where it is taught, the widest first.
 | surface | ch1 code_new, 1.x | the mesh: what is seen | surface | 9.5 |
 | lines | 1.1 | a line of code | line | 1.5 |
 | line | 1.1 | a line of code | line | 1.5 |
+
+### Chapter 2: Bodies That Change
+
+**Taught twice**
+
+| element | first taught | taught again | the sketch says |
+|---|---|---|---|
+| child | 1.1 | ch2 code_new | parent and child: a child moves, turns and grows with its parent |
 
 ### Chapter 3: Many From One
 
@@ -344,7 +352,7 @@ First use of each element against where it is taught, the widest first.
 
 | element | first taught | taught again | the sketch says |
 |---|---|---|---|
-| child | 2.7 | ch19 code_new | child order is the order of the verbs |
+| child | 1.1 | ch19 code_new | child order is the order of the verbs |
 | recursion | 14.1 | ch19 code_new | recursion that leaves holes by not building cells |
 
 ### Chapter 20: Many Bodies, Local Rules
@@ -537,14 +545,14 @@ Code a section teaches that the chapter's code_new list leaves out.
 | rule | errors | warnings | notes |
 |---|---:|---:|---:|
 | admin | 0 | 2 | 0 |
-| gives | 0 | 102 | 9 |
+| gives | 0 | 104 | 9 |
 | listing | 0 | 58 | 0 |
 | never | 27 | 1 | 0 |
 | order | 7 | 0 | 0 |
 | sense | 0 | 41 | 0 |
 | synonym | 0 | 36 | 0 |
 | taxonomy | 0 | 6 | 0 |
-| twice | 0 | 23 | 0 |
+| twice | 0 | 24 | 0 |
 | unplaced | 0 | 4 | 0 |
 | unused | 0 | 368 | 0 |
 

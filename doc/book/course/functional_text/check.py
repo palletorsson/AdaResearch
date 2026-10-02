@@ -1587,7 +1587,7 @@ def defines(text, forms):
         fp = r"[\s-]+".join(re.escape(w) for w in re.split(r"[\s-]+", f.strip()) if w)
         flags = 0 if case_exact(f) else re.IGNORECASE
         pats = [
-            r"(?:^|[:;]\s*)(?:%s\s+)?(?:%s)\s+(?:is|are|means|names)\b" % (det, fp),
+            r"(?:^|[:;]\s*)(?:%s\s+)?(?:%s)\s+(?:is|are|means|names|contains)\b" % (det, fp),
             r"\b(?:is|are|called|named)\s+(?:%s\s+)?(?:%s)(?![\w])" % (det, fp),
             r"(?:^|\s)(?:%s\s+)?(?:%s)\s*:" % (det, fp),
             r":\s*(?:%s\s+)?(?:%s)\s*[.!?]?$" % (det, fp),

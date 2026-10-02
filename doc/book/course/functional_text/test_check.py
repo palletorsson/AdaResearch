@@ -1265,6 +1265,11 @@ class TestFooled(Base):
         rep = self.run_check(ch2=ch2)
         self.assertBites(rep, "gives", file="ch02.md", contains="no line declares it")
 
+    def test_15_contains_declares(self):
+        """Palle's wording, 2 October 2026: 'A script contains code.' says what a script is."""
+        self.assertTrue(check.defines("A script contains code.", ["script"]))
+        self.assertFalse(check.defines("The script runs.", ["script"]))
+
     def test_15_a_code_element_given_in_code_only_is_an_error(self):
         ch1 = CH1.replace("`print` writes the position.\n", "")
         rep = self.run_check(ch1=ch1)
