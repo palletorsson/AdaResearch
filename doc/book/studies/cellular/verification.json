@@ -201,7 +201,7 @@
       "passed": true
     },
     {
-      "name": "rule 90 by its left edge, a cell to the left for each row: \"arrived\" on row 8, its feet at 1.46 m",
+      "name": "rule 90 by its left edge, a cell to the left for each row: it climbs a row a step to row 8 at 1.35 m, oversteps to 1.50 m on row 9, and ends \"arrived\" hanging on row 9's front edge, its feet at 1.46 m",
       "passed": true
     },
     {
@@ -424,7 +424,10 @@
       },
       "rule 90, the left edge": {
         "ended": "arrived",
-        "feet_at_m": 1.46
+        "feet_at_m": 1.46,
+        "highest_m": 1.5,
+        "rests_on": "row 9's front edge",
+        "stood_on_row_8": true
       },
       "rule 90, up the middle": {
         "ended": "blocked",

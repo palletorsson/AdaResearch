@@ -396,7 +396,7 @@ Use the keys: D and W to walk, J to jump, C to look through the walker's eyes. W
 
 Rule 110 keeps its middle column alive in every row, so the middle is a stair. Rules 90 and 250 put two tiles either side of a one-cell gap in row 1, and the walker does not fit between them.
 
-Sierpinski's rows can be walked by their edge, which moves one cell to the left with every row. Sent that way, the walker arrived on row 8 with its feet at 1.46 m.
+Sierpinski's rows can be walked by their edge, which moves one cell to the left with every row. Sent that way, the walker climbs a row at every step, 0.15 m each, and reaches row 8 at 1.35 m. Told to stop there, it oversteps onto row 9, slides back, and comes to rest hanging on row 9's front edge, its feet at 1.46 m: "arrived" by its own signal, but on an edge, not on a tile.
 
 The pool moves a body that stands still. The walker started on the seed block, 0.60 m up. In the first steps B rose under it and lifted it to 0.86 m; 600 steps later it stood on the ground, 0.00 m, in the hollow middle, with a wall around it. It had not walked. Then we sent it out: it arrived outside, and its feet were 0.22 m up as it crossed the wall.
 

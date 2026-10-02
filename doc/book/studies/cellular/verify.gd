@@ -424,9 +424,21 @@ func walks() -> void:
 	var route := []
 	for t in 9:
 		route.append(Vector3(-t * CELL, 0.0, 1.7 - t * CELL))
-	var ended := await walk(climber, route)
-	check(ended == "arrived" and climber.global_position.y > 9 * RISE - 0.02, "rule 90 by its left edge, a cell to the left for each row: \"%s\" on row 8, its feet at %.2f m" % [ended, climber.global_position.y])
-	measured["walks"]["rule 90, the left edge"] = {"ended": ended, "feet_at_m": snappedf(climber.global_position.y, 0.01)}
+	climber.walk_to(route)
+	var reached_row_8 := false   # did its feet stand on row 8's top, 9 x RISE, on the way?
+	var edge_highest := 0.0
+	while climber.walking:
+		await physics_frame
+		reached_row_8 = reached_row_8 or absf(climber.global_position.y - 9 * RISE) < 0.01
+		edge_highest = maxf(edge_highest, climber.global_position.y)
+	await process_frame
+	var ended: String = climber.ended
+	var feet := climber.global_position.y
+	# It does not end ON row 8: it oversteps onto row 9 and slides back onto that row's front
+	# edge, so its feet rest between the two tops. The old check (feet > 9 x RISE) let that pass
+	# as "on row 8"; this one says what happens.
+	check(ended == "arrived" and reached_row_8 and absf(edge_highest - 10 * RISE) < 0.02 and feet > 9 * RISE + 0.02 and feet < 10 * RISE - 0.01, "rule 90 by its left edge, a cell to the left for each row: it climbs a row a step to row 8 at %.2f m, oversteps to %.2f m on row 9, and ends \"%s\" hanging on row 9's front edge, its feet at %.2f m" % [9 * RISE, edge_highest, ended, feet])
+	measured["walks"]["rule 90, the left edge"] = {"ended": ended, "feet_at_m": snappedf(feet, 0.01), "highest_m": snappedf(edge_highest, 0.01), "stood_on_row_8": reached_row_8, "rests_on": "row 9's front edge"}
 	await close(edge)
 	# The same floor with its colliders taken away: tiles for the eye only.
 	var ghost: Node3D = load("res://cellular.tscn").instantiate()

@@ -92,7 +92,7 @@ Rule 90, two buffers, a ring: 37 tiles in 11 rows, 0 cells unlike their mirror i
 
 ### T7. A body (parent T2, status: branch)
 
-**Observed.** The autopilot, from in front of the seed straight up the middle: on 90 and on 250 it stepped onto the seed and was stopped there, its feet at 0.15 m; on 30 it climbed to 0.90 m, fell through and was stopped on the ground under row 7; on 110 it arrived on the last row at 1.65 m. Up the left edge of 90 it arrived on row 8, at 1.46 m. A marble dropped over the middle of row 4 came to rest at 0.10 m under Rule 90 and at 0.85 m on Rule 250.
+**Observed.** The autopilot, from in front of the seed straight up the middle: on 90 and on 250 it stepped onto the seed and was stopped there, its feet at 0.15 m; on 30 it climbed to 0.90 m, fell through and was stopped on the ground under row 7; on 110 it arrived on the last row at 1.65 m. Up the left edge of 90 it climbed a row a step to row 8 at 1.35 m, overstepped onto row 9 and came to rest hanging on that row's front edge, its feet at 1.46 m. (This line first said "arrived on row 8, at 1.46 m"; a re-run on 2 October 2026 found the perch: one contact, row 9's tile at 1.50 m, with row 8's top 0.11 m below the walker's middle.) A marble dropped over the middle of row 4 came to rest at 0.10 m under Rule 90 and at 0.85 m on Rule 250.
 **Concluded.** The pair that is closest for the count of pixels is treated alike by the walker on this route and differently by the marble at this place.
 **Guessed.** That the walker is stopped on the seed because the one-cell gap in row 1, 0.4 m, is narrower than the walker, 0.6 m, and the two tiles beside it stand in its way. I did not try a wider cell.
 
