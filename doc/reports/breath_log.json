@@ -8411,6 +8411,74 @@
         "doc/reports/RELEASE_GATES.md"
       ],
       "duration_minutes": 30
+    },
+    {
+      "breath_id": "2026-10-02T19:00",
+      "mode": "evolve-only",
+      "baseline_avg": 6.08,
+      "post_avg": 6.08,
+      "delta": 0.0,
+      "items_attempted": [
+        "harvest-2026-10-02-morning-breath",
+        "proposal-evidence-check"
+      ],
+      "items_succeeded": [
+        "harvest-2026-10-02-morning-breath",
+        "proposal-evidence-check"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 2,
+          "succeeded": 2,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "No skill has 3+ failures on one pattern in today's logs; no proposal written. 10-01 morning breath row still missing."
+      ],
+      "files_changed": [
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json"
+      ],
+      "duration_minutes": 5
+    },
+    {
+      "breath_id": "2026-10-05T09:00",
+      "mode": "full",
+      "baseline_avg": 6.08,
+      "post_avg": 6.08,
+      "delta": 0.0,
+      "items_attempted": [
+        "gate-N-stranded-tools"
+      ],
+      "items_succeeded": [
+        "gate-N-stranded-tools"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "Pipeline flat at 6.080: 24 of 25 sequences sit at stage 6 (VR), not movable without headset feedback. Gate M 5 landable artifact files and the book (forum 261002-4pya2) left alone; the 3 course/book items are claimed by live sessions. Landed 22 gate-N python tools (py_compile only)."
+      ],
+      "files_changed": [
+        "tools/*.py (22 stranded)",
+        "doc/reports/breath_log.json"
+      ],
+      "duration_minutes": 10
     }
   ]
 }
