@@ -1,18 +1,18 @@
 # Circular Approximation and Limits
 
-The previous room asked when a finite model was enough to hold a distinction. Here we make that question move. Add a division, then another. **What would count as arriving?**
+The court asked when a finite model was enough to hold a distinction. Here we make that question move. Add a division, then another. **What would count as arriving?**
 
 <!-- @combine_portals -->
 
 Begin beside an early faceted ring. Follow a straight edge around its opening, then look along the progression. Choose a later ring that seems round enough from where you stand. Keep that choice in mind as you approach it. Does the edge you had stopped seeing return?
 
-There are twenty members in this family. The first uses three divisions in each of the torus's two surface directions. Each following member adds one in one direction and two in the other. Both are changing; the last has twenty-two and forty-one.[^portals-mesh]
+These are portals for looking through: twenty rings that frame the space beyond. Near the beginning, their flat patches are easy to see. Each following member divides both surface directions more finely.[^portals-mesh]
 
 At the side instrument, use **NEXT RING** and **PREVIOUS** to select a member. It turns gold. Find the selected ring in the space. The button directs your attention while leaving your body where it is.
 
-The display names the two subdivisions and counts the mesh's triangles. It also names a **separate unit polygon**. This is a simpler question placed beside the torus: how closely does a regular polygon's perimeter approach the circumference of a circle of radius one?
+Beside the counts, a rose-coloured polygon sits inside a grey circle. Selecting a finer ring adds sides to the polygon while the circle stays. This separate, flat figure borrows one of the torus's subdivision counts to ask a simpler question: how closely can straight sides approach a circle?
 
-Predict which way its gap will move when you select a finer ring. Compare the numbers, then look at the object again. The display borrows the torus's ring count as the polygon's number of sides. Its code calculates:
+The circle has radius one. For its inscribed polygon, the code calculates:
 
 ```gdscript
 var perimeter: float = 2.0*mesh.rings*sin(PI/mesh.rings)
@@ -20,33 +20,31 @@ var perimeter: float = 2.0*mesh.rings*sin(PI/mesh.rings)
 
 Each straight side is a chord between two points on the circle. Adding sides brings their total length closer to the circumference, which the panel labels **Circle**. The positive gap belongs to this planar comparison; a measure of the whole torus's accuracy would need its own definition.[^portals-circle]
 
+![Three states of the museum diagram: three, eight and twenty-two straight sides approach the same circle.](/book-review/doc/book/figures/Primitives_Portals/portals-visible-limit.png)
+
+*The corner becomes harder to see. The gap remains. These are three states of the same diagram beside the rings; the numbers compare boundary lengths.*
+
 This is **convergence**: as the rule continues, the perimeters approach a limit. They can get arbitrarily close to the circumference, though no finite polygon in this sequence has that exact perimeter. Twenty examples show part of an approach that can continue beyond the display.
 
-For this comparison, choose a small positive gap you would accept for a use you can describe. Check whether any displayed member meets it. That bound is a **tolerance**: a criterion for stopping. It may select a different member from your earlier judgment of “round enough”. What matters for this use?
+Suppose you needed this polygon for something you were making. You could set a small positive gap you were willing to accept and stop when a member met it. That bound is a **tolerance**. It might lead you to a different choice from the ring that first looked round enough. The comparison answers to a requirement you supplied. Passing it leaves other decisions open: the corner you like, the view through the opening, the place this ring might have beside another.
 
-Now predict what **REVERSE** will do. Press it and inspect the beginning again. The positions stay; the same family of resolutions appears in the opposite order. What the earlier arrangement kept for later has become the entrance.
+Press **REVERSE** and return to the beginning. The positions stay; the same family of resolutions appears in the opposite order. What the earlier arrangement kept for later has become the entrance.
 
-The sequence had quietly given refinement a direction. Does walking toward more sides still describe what you want from these forms? Keep one corner in mind that you would lose by smoothing it away. Reverse again if you want to restore the earlier order.
+The sequence had quietly given refinement a direction. Walking the other way, corners become available again. You might want one of those corners. Adding more sides would take it away.
 
 Through this change, the openings remain. More divisions need not give the body another kind of passage.[^portals-hole]
 
 <!-- @achilles_tortoise -->
 
-Two figures wait along the next instrument's track. Before pressing **NEXT STEP**, point to where you think Achilles will go. Press once, compare, and predict again.
+Two figures wait along the next instrument's track. Press **NEXT STEP** and watch the space between them.
 
 Achilles is placed where the tortoise was. The tortoise moves ahead again. In this construction the gaps halve at each stage. The marked end of the track stays where it is.[^portals-zeno]
 
-The script chooses Achilles' next position with:
+The first stage carries Achilles halfway along the track, the second three quarters of the way. Each new stage leaves half the remaining distance. The endpoint is close enough to point to. The rule keeps putting him short of it.
 
-```gdscript
-var a_z := -track_length * (1.0 - 1.0 / pow(2.0, float(n)))
-```
+At stage ten, the instrument holds. The bodies may look as though they have arrived together, but Achilles' anchor is still less than six millimetres from the limit. His visible body is larger than the gap. The display has a last stage. Does the sequence it represents have one?
 
-Here `n` is the stage number. The minus sign sends him along this track's negative Z direction. The first stage covers half the track, the second three quarters. Each leaves a smaller distance to the same limit.
-
-Continue to stage ten. The instrument now holds. Read **A to limit now**. Achilles' anchor still has about 5.86 millimetres to the limit, although the bodies may look as though they have arrived together. His visible body is larger than the gap. The display has a last stage. Does the sequence it represents have one?
-
-Press **RESTART**, then **PLAY**, and pause during a movement. Compare **A to limit now** with **A to limit at stage target**. One describes where the marker is; the other describes where this movement was taking it.
+Use **RESTART**, then **PLAY** to let the figures move between stages. Pause them partway through a movement. The panel keeps both distances in view: where Achilles is now, and where this step was taking him.
 
 The program gives these stages a regular schedule and adds movement between them. That schedule does not reproduce the shrinking durations of a continuous runner's journey. An infinite subdivision can have a finite total; it does not make ordinary motion impossible.
 
@@ -58,7 +56,7 @@ Twenty rings. Ten stages. Each display has a last member because someone chose w
 
 **The limit gives the sequence a direction. It does not tell us where to stop.**
 
-Name something your stopping criterion leaves open for another visit. A finite encounter can teach us something without exhausting what its rules make possible.
+There may already be a ring you want to return to. A finite encounter can teach us something without exhausting what its rules make possible.
 
 Melencolia gathers the tools we have learned to use. They can give exact answers. What would make the work complete?
 
