@@ -21,7 +21,7 @@ check_map_tokens.py: state the fact, let the ruling be a ruling.
 """
 import collections, json, os, sys
 
-PLAN = "ada_run/em_plan.json"
+PLAN = "commons/data/museum/em_plan.json"
 HAND = "ada_run/necklace_hand.json"
 AUTH = "commons/data/map_authored.json"
 

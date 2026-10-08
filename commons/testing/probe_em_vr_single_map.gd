@@ -14,7 +14,7 @@ func _initialize() -> void:
 func _run() -> void:
 	var packed := load("res://commons/scenes/endless_museum.tscn") as PackedScene
 	var museum := packed.instantiate() as Node3D
-	museum.set("_plan_path", "res://ada_run/em_plan.json")
+	museum.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	get_root().add_child(museum)
 	var waited := 0.0
 	while not bool(museum.get("_museum_ready")) and waited < 35.0:

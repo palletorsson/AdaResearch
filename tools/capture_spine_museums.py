@@ -24,7 +24,7 @@ def capture(item):
     for name in ['necklace_hand.json','em_overrides.json']:
         if (ROOT/'ada_run'/name).exists():shutil.copy2(ROOT/'ada_run'/name,run/name)
         else:build.write(run/name,{})
-    shutil.copy2(ROOT/'ada_run/em_plan.json',run/'plan.json')
+    shutil.copy2(ROOT/'commons/data/museum/em_plan.json',run/'plan.json')
     build.write(run/'spec.json',{'run':prefix,'item':item,'output':'res://'+out.relative_to(ROOT).as_posix()+'/'})
     cmd=[os.environ.get('GODOT_EXE','C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe'),'--path',str(ROOT),'--xr-mode','off','--no-window','--rendering-method','gl_compatibility','--script','res://tools/probes/spine_film_museum.gd','--',prefix+'spec.json']
     try:

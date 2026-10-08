@@ -14,7 +14,7 @@ So this is the sibling engine, over the chain doc/SPATIAL_PIPELINE.md already na
     building     tools/spatial_floorplan.py     one of 30 authored museums
     negotiate    tools/spatial_negotiation.py   slot/rotation/mode, or a refusal
     lineage      spatial_negotiation.hang_run   DNA runs as rows on walls
-    export       tools/export_museum_plan.py    ada_run/em_plan.json
+    export       tools/export_museum_plan.py    commons/data/museum/em_plan.json
     assemble     commons/scenes/endless_museum.gd --em-plan
     publish      tools/publish_iteration.py     -> /spatial-iterations
 
@@ -53,7 +53,7 @@ from spatial_floorplan import PATTERNS, VOID, WALL, from_museum
 from spatial_negotiation import Occupancy, hang_run, run as negotiate_run
 
 RELATIONS = REPO / "commons" / "data" / "artifact_relations.json"
-EM_PLAN = REPO / "ada_run" / "em_plan.json"
+EM_PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
 RECIPES = REPO / "commons" / "data" / "museum_recipes"
 RUNS = REPO / "ada_run" / "museum_wizard"
 GODOT = Path(os.environ.get("GODOT_EXE",
@@ -76,7 +76,7 @@ STEPS: list[dict[str, Any]] = [
     {"op": "lineage",   "n": "5", "title": "Lineage",
      "sub": "DNA runs hung as rows on walls", "world": False},
     {"op": "export",    "n": "6", "title": "Plan",
-     "sub": "ada_run/em_plan.json — what the museum receives", "world": True},
+     "sub": "commons/data/museum/em_plan.json — what the museum receives", "world": True},
     {"op": "assemble",  "n": "7", "title": "Assembly",
      "sub": "endless_museum.gd stamps it · before = the blind dealer", "world": True},
     {"op": "publish",   "n": "8", "title": "Publish",
@@ -307,7 +307,7 @@ def stage_export(spec: dict[str, Any], neg: dict[str, Any]) -> dict[str, Any]:
     now_tokens = {p["artifact"] for p in neg["placements"] if p["result"] == "ACCEPT"}
     return {
         "op": "export",
-        "path": "ada_run/em_plan.json",
+        "path": "commons/data/museum/em_plan.json",
         "museum": key,
         "exists": EM_PLAN.exists(),
         "museums_on_disk": sorted((on_disk.get("museums") or {}).keys()),
@@ -319,7 +319,7 @@ def stage_export(spec: dict[str, Any], neg: dict[str, Any]) -> dict[str, Any]:
         "added": sorted(now_tokens - prev_tokens),
         "removed": sorted(prev_tokens - now_tokens),
         "world": True,
-        "world_action": (f"rewrite the '{key}' entry of ada_run/em_plan.json "
+        "world_action": (f"rewrite the '{key}' entry of commons/data/museum/em_plan.json "
                          f"(other museums in the file are left alone)"),
         "why": ("the museum is a dealer and stays one — it consumes resolved "
                 "cells, it does not solve. A museum key absent from this file "

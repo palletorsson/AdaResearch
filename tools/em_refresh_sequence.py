@@ -30,7 +30,7 @@ except ImportError:
     import em_map_halls
 
 ROOT = Path(__file__).resolve().parents[1]
-PLAN_PATHS = (Path('ada_run/em_plan.json'), Path('commons/data/museum/em_plan.json'))
+PLAN_PATHS = (Path('commons/data/museum/em_plan.json'), Path('commons/data/museum/em_plan.json'))
 DECLARATION = Path('commons/data/map_authored.json')
 
 

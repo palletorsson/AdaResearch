@@ -28,7 +28,7 @@ func _run() -> void:
 			if i == 0 and ca.size() == 0: ok = false; why.append("seg 0 has no cards")
 			if i == 0 and ba.size() == 0: ok = false; why.append("seg 0 has no bodies")
 			# with a bake on disk every stamp must come from it: nothing measured, nothing unbaked
-			if FileAccess.file_exists("res://ada_run/em_bake.json"):
+			if FileAccess.file_exists("res://commons/data/museum/em_bake.json"):
 				if not bool(A.get("replay", false)): ok = false; why.append("seg %d desktop did not replay the bake" % i)
 				if not bool(B.get("replay", false)): ok = false; why.append("seg %d vr did not replay the bake" % i)
 				if int(A.get("unbaked", 0)) + int(B.get("unbaked", 0)) > 0: ok = false; why.append("seg %d: %d/%d bodies placed the live way — the bake is stale for this plan (python tools/em_bake.py)" % [i, int(A.get("unbaked", 0)), int(B.get("unbaked", 0))])
@@ -48,7 +48,7 @@ func _run() -> void:
 func _build(vr: bool) -> Dictionary:
 	if FileAccess.file_exists(BUILT): DirAccess.remove_absolute(ProjectSettings.globalize_path(BUILT))
 	var m: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
-	m.set("_plan_path", "res://ada_run/em_plan.json")
+	m.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	m.set("_force_vr", vr)
 	get_root().add_child(m)
 	# wait for two segments (the museum opens the second on its own at boot),

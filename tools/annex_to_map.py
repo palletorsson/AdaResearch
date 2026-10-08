@@ -9,7 +9,7 @@ WHAT WAS HARD, precisely. One hall's space was spread over three files in two
 alphabets, and two of the three could disagree without anyone being told:
 
     commons/maps/<Map>/map_data.json   structure, passage, basin, props_deny
-    ada_run/em_overrides.json          the four ANNEX rows, keyed by PEARL
+    commons/data/museum/em_overrides.json          the four ANNEX rows, keyed by PEARL
     commons/data/em_layout.json        the annex's fittings (window, drop hole)
 
 The annex rows were the worst of it. They lived in the rulings file under a
@@ -39,8 +39,8 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OVERRIDES = os.path.join(ROOT, "ada_run", "em_overrides.json")
-PLAN = os.path.join(ROOT, "ada_run", "em_plan.json")
+OVERRIDES = os.path.join(ROOT, "commons", "data", "museum", "em_overrides.json")
+PLAN = os.path.join(ROOT, "commons", "data", "museum", "em_plan.json")
 VESTIBULE_H = 4
 
 

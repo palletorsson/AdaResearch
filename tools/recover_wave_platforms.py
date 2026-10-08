@@ -57,7 +57,7 @@ def refresh_active_plans(active):
     anchors. The existing active maps already fit their halls.
     """
     import em_map_halls
-    for rel in ['ada_run/em_plan.json', 'commons/data/museum/em_plan.json']:
+    for rel in ['commons/data/museum/em_plan.json', 'commons/data/museum/em_plan.json']:
         path = ROOT / rel
         plan = read(path)
         original = copy.deepcopy(plan)
@@ -107,7 +107,7 @@ def main():
         # Collect every historical file before writing any current map.
         history = {p: subprocess.check_output(['git', '-c', 'safe.directory=' + ROOT.as_posix(),
                    'show', f'{HISTORICAL}:{p.as_posix()}'], cwd=ROOT) for p in docs}
-        extra = [Path(p) for p in ['ada_run/em_plan.json', 'commons/data/museum/em_plan.json',
+        extra = [Path(p) for p in ['commons/data/museum/em_plan.json', 'commons/data/museum/em_plan.json',
                   'commons/data/map_authored.json', 'commons/data/museum_order_effective.json',
                   'tools/em_map_halls.py', 'commons/scenes/endless_museum.gd',
                   'doc/research/waves-chance-noise/audit.json',

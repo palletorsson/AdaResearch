@@ -50,7 +50,7 @@ def _facts() -> dict:
     what happens when the caption and the run drift apart.
     """
     out: dict = {}
-    plan = REPO / "ada_run" / "em_plan.json"
+    plan = REPO / "commons" / "data" / "museum" / "em_plan.json"
     if plan.exists():
         try:
             d = json.loads(plan.read_text(encoding="utf-8"))

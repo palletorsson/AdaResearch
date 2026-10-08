@@ -43,7 +43,7 @@ def audit():
     roles = js('commons/data/artifact_roles.json')['roles']
     effective = js('commons/data/museum_order_effective.json')
     authored = js('commons/data/map_authored.json')
-    museum_plan = js('ada_run/em_plan.json')
+    museum_plan = js('commons/data/museum/em_plan.json')
     read('commons/maps/curriculum_spine.json')
     read('commons/artifacts/the_same_cloud/the_same_cloud.gd')
     sequence_docs = {s: js(f'commons/maps/sequences/{s}.json')['sequences'][s] for s in SEQUENCES}

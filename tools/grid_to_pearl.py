@@ -29,7 +29,7 @@ REPO = Path(__file__).resolve().parent.parent
 BOOK = REPO / "commons" / "data" / "book"
 MAPS = REPO / "commons" / "maps"
 SPINE = REPO / "commons" / "maps" / "curriculum_spine.json"
-PLAN = REPO / "ada_run" / "em_plan.json"
+PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
 OUT = REPO / "doc" / "reports" / "grid_to_pearl_dry.md"
 
 

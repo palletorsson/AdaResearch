@@ -37,7 +37,7 @@ func _run() -> void:
 	var ps: PackedScene = load("res://commons/scenes/endless_museum.tscn")
 	var inst: Node3D = ps.instantiate() as Node3D
 	inst.set("EM_CONTROL", "res://ada_run/_trial_well_trim_control.json")
-	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	get_root().add_child(inst)
 	for i in range(12):
 		await create_timer(0.3).timeout

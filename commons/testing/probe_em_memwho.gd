@@ -18,7 +18,7 @@ func _mb() -> float:
 func _run() -> void:
 	var report: Dictionary = {}
 	var m0 := _mb()
-	var plan_txt := FileAccess.get_file_as_string("res://ada_run/em_plan.json")
+	var plan_txt := FileAccess.get_file_as_string("res://commons/data/museum/em_plan.json")
 	var m1 := _mb()
 	var plan_v: Variant = JSON.parse_string(plan_txt)
 	var m2 := _mb()

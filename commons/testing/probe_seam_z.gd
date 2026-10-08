@@ -7,7 +7,7 @@ func _run() -> void:
 	for a in OS.get_cmdline_user_args():
 		if String(a).begins_with("--z="): Z = float(String(a).substr(4))
 	var m: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
-	m.set("_plan_path", "res://ada_run/em_plan.json"); m.set("_first_chapter", "primitives")
+	m.set("_plan_path", "res://commons/data/museum/em_plan.json"); m.set("_first_chapter", "primitives")
 	get_root().add_child(m); await create_timer(0.8).timeout
 	m.call("_build_segment"); await create_timer(0.3).timeout
 	var stack: Array = [m]; var hits: Array = []

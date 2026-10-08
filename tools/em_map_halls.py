@@ -21,7 +21,7 @@ Two modes:
                                           only; never touches live files (the
                                           probe-isolation rule)
   python tools/em_map_halls.py --apply    PLAN MODE — patches the LIVE
-                                          ada_run/em_plan.json (backup kept at
+                                          commons/data/museum/em_plan.json (backup kept at
                                           em_plan.backup.json) and ships via
                                           em_ship.py, so desktop AND the Quest
                                           export walk the map-authored halls
@@ -42,7 +42,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DECLARATION = ROOT / "commons" / "data" / "map_authored.json"
 OUT = ROOT / "ada_run" / "_trial_map_plan.json"
-LIVE = ROOT / "ada_run" / "em_plan.json"
+LIVE = ROOT / "commons" / "data" / "museum" / "em_plan.json"
 BACKUP = ROOT / "ada_run" / "em_plan.backup.json"
 
 

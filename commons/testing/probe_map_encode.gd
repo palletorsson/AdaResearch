@@ -15,7 +15,7 @@ func _run() -> void:
 	var fails: Array = []
 	var original := FileAccess.get_file_as_string(MAP)
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
-	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	inst.set("EM_CONTROL", "res://ada_run/_trial_encode_control.json")
 	inst.set("_overrides_path", "res://ada_run/_trial_encode_overrides.json")
 	inst.set("_hand_path", "res://ada_run/_trial_map_hand.json")

@@ -5,7 +5,7 @@ extends SceneTree
 ## west/north/south galleries at y=0 walkable, the hall floor cells NOT in the
 ## walk map, two ramps, the body stamped. GATE: without the row, no hall.
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/test_em_hall.gd
-const PLAN := "res://ada_run/em_plan.json"
+const PLAN := "res://commons/data/museum/em_plan.json"
 const TRIAL := "res://ada_run/_trial_em_plan_hall.json"
 func _initialize() -> void: call_deferred("_run")
 func _run() -> void:

@@ -10,7 +10,7 @@ func _run() -> void:
 	var fails: Array[String] = []
 	if FileAccess.file_exists(P): DirAccess.remove_absolute(ProjectSettings.globalize_path(P))
 	var m: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
-	m.set("_plan_path", "res://ada_run/em_plan.json")
+	m.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	m.set("_overrides_path", P)
 	m.set("_edit_mode", true)
 	get_root().add_child(m)

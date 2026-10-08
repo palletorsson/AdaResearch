@@ -23,7 +23,7 @@ OUT = ROOT / 'doc/space/sequence-platform-recovery-2026-09-10'
 SEQUENCES = ['randomness', 'noise', 'cellularautomata']
 REFS = {'pre-museum': 'a36f33c996004abcdc67ea2a0ac3fce72eba42fd',
         'pre-rewrite': '4d8dc7c7cbea69bc189b259b5c998a44b4a13e46'}
-PLAN_PATHS = ['ada_run/em_plan.json', 'commons/data/museum/em_plan.json']
+PLAN_PATHS = ['commons/data/museum/em_plan.json', 'commons/data/museum/em_plan.json']
 SPAWN_REPAIRS = {'Random_Mushrooms', 'Randomness_Examples_of_Randomness'}
 
 

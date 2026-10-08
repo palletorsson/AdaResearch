@@ -6,7 +6,7 @@ extends RefCounted
 ## evidence rather than game data. Probes move to this helper as they are touched;
 ## tools/sweep_evidence.py collects whatever still lands in ada_run/.
 ##
-## NEVER for game data. The museum reads ada_run/em_plan.json, necklace_hand.json and
+## NEVER for game data. The museum reads commons/data/museum/em_plan.json, necklace_hand.json and
 ## em_cartridges/ every run; those stay where they are, and nothing here may route them.
 ##
 ## preload, not class_name — a new class_name is not in the global cache until the next

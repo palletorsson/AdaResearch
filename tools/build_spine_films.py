@@ -127,7 +127,7 @@ def build(place=False,only=None):
     write(BASE/'catalog.json',entries)
     write(OUT/'catalog.json',entries)
     if not place:return entries
-    plans={p:read(ROOT/p) for p in ['ada_run/em_plan.json','commons/data/museum/em_plan.json']}
+    plans={p:read(ROOT/p) for p in ['commons/data/museum/em_plan.json','commons/data/museum/em_plan.json']}
     placed=[]
     unplaced=[]
     original_plans=copy.deepcopy(plans)

@@ -58,13 +58,13 @@ extends SceneTree
 ##
 ## WHY NOT --em-bake-n. The brief asked for it to keep the run small. It cannot be
 ## used from here: --em-bake-n= sets _bake_mode, and bake mode MERGES into and
-## rewrites ada_run/em_bake.json (endless_museum.gd:1279-1285), the derived truth
+## rewrites commons/data/museum/em_bake.json (endless_museum.gd:1279-1285), the derived truth
 ## the whole museum replays from, and then quits itself at _bake_total. A probe
 ## must not rewrite a shared cache to ask a question. The run is kept small the
 ## way probe_museum_sculptures.gd and probe_grey_halls.gd keep it small: pin the
 ## streaming window open and call _build_segment exactly SEGMENTS times.
 ##
-## IT STILL WRITES ada_run/em_bake.json, and so does every other museum probe.
+## IT STILL WRITES commons/data/museum/em_bake.json, and so does every other museum probe.
 ## _heal_bake (endless_museum.gd:9566) writes a live-measured segment's verdicts
 ## back on ANY desktop boot whose plan lives under res://ada_run — walking the
 ## museum is how the bake heals. Measured here: 8 halls healed in one run. That

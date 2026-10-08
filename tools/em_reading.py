@@ -18,7 +18,7 @@ import json, sys
 from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 TRUNK = REPO / "commons" / "data" / "trunk_branches.json"
-PLAN = REPO / "ada_run" / "em_plan.json"
+PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
     sys.stdout.reconfigure(encoding="utf-8")
 

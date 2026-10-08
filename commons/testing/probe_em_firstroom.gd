@@ -22,7 +22,7 @@ func _run() -> void:
 	var mem0 := OS.get_static_memory_usage()
 	var ps: PackedScene = load("res://commons/scenes/endless_museum.tscn")
 	var inst: Node3D = ps.instantiate() as Node3D
-	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	inst.set("_force_patient", true)   # measure the deferred path even headless
 	get_root().add_child(inst)   # _ready: plan parse + segment 0, synchronous
 	var t_seg0 := Time.get_ticks_msec() - t0

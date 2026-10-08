@@ -7,7 +7,7 @@ placement itself, so nothing the negotiator concluded ever reached a walkable
 room. Every 3D image in this pass came from a bench probe using the museum's
 parts rather than the museum.
 
-This writes `ada_run/em_plan.json`:
+This writes `commons/data/museum/em_plan.json`:
 
     {"schema": ..., "museums": {"<key>": {"artifacts": [
         {"token","cell":[x,z],"rotation","mode","support_height_m","venue"}
@@ -60,7 +60,7 @@ from exhibition_brief import spine_order
 from spatial_floorplan import PATTERNS, from_museum
 from spatial_negotiation import hang_run, run
 
-OUT = REPO / "ada_run" / "em_plan.json"
+OUT = REPO / "commons" / "data" / "museum" / "em_plan.json"
 RELATIONS = REPO / "commons" / "data" / "artifact_relations.json"
 GRAPH = REPO / "commons" / "data" / "museum_relational_graph.json"
 DNA_ENVELOPES = REPO / "commons" / "data" / "museum_dna_wall_envelopes.json"

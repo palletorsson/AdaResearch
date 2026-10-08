@@ -44,7 +44,7 @@ def find(obj):
 
 pairs=h.declared()['primitives']
 idx=next(i for i,p in enumerate(pairs) if p[1]==MAP)
-for name,dest in [('plan','ada_run/em_plan.json'),('shipped','commons/data/museum/em_plan.json')]:
+for name,dest in [('plan','commons/data/museum/em_plan.json'),('shipped','commons/data/museum/em_plan.json')]:
     p=ROOT/dest
     data=json.loads(p.read_text(encoding='utf-8-sig'))
     old=find(data)

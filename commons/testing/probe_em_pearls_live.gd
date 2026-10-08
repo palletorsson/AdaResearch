@@ -6,7 +6,7 @@ func _initialize() -> void:
 func _run() -> void:
 	var ps: PackedScene = load("res://commons/scenes/endless_museum.tscn")
 	var m: Node3D = ps.instantiate() as Node3D
-	m.set("_plan_path", "res://ada_run/em_plan.json")
+	m.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	m.set("start_chapter", "primitives")
 	m.set("start_map", "Point_Lines")
 	get_root().add_child(m)

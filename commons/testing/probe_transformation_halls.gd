@@ -81,7 +81,7 @@ func _run() -> void:
 		fails.append("only %d segment(s) built, wanted 7" % segs.size())
 	# plan h per pearl (pre-chicane) for the passage check
 	var plan_h: Dictionary = {}
-	var plan_v: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://ada_run/em_plan.json"))
+	var plan_v: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/museum/em_plan.json"))
 	if plan_v is Dictionary:
 		for r_v in ((plan_v as Dictionary).get("plans", []) as Array):
 			var r: Dictionary = r_v

@@ -107,7 +107,7 @@ import time
 # ── where things live ────────────────────────────────────────────────────────
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LAYOUT = os.path.join(REPO, "ada_run", "em_layout_walk.json")
-PLAN = os.path.join(REPO, "ada_run", "em_plan.json")
+PLAN = os.path.join(REPO, "commons", "data", "museum", "em_plan.json")
 CONTROL = os.path.join(REPO, "ada_run", "em_control.json")
 MUSEUM_GD = os.path.join(REPO, "commons", "scenes", "endless_museum.gd")
 WATCHDOG = os.path.join(REPO, "tools", "godot_watchdog.py")
@@ -272,7 +272,7 @@ def refusal_text(want: str, halls: dict) -> str:
                 break
     if row is not None:
         chap, pearl, mp = row.get("sequence", ""), row.get("pearl", ""), row.get("map", "")
-        lines.append("  It IS planned (row %d of ada_run/em_plan.json: chapter %s, pearl %s, map %s)"
+        lines.append("  It IS planned (row %d of commons/data/museum/em_plan.json: chapter %s, pearl %s, map %s)"
                      % (row.get("_plan_index", -1), chap, pearl, mp))
         lines.append("  — the museum has simply never built it. Build it once, then shoot:")
         lines.append('      "%s" --path . --xr-mode off --no-window %s -- \\'
@@ -283,7 +283,7 @@ def refusal_text(want: str, halls: dict) -> str:
         lines.append("    (that run writes the hall's row; then re-run this tool)")
     else:
         near = sorted(halls, key=lambda k: -_overlap(w, norm(k)))[:5]
-        lines.append("  It is not in ada_run/em_plan.json either. Nearest recorded halls:")
+        lines.append("  It is not in commons/data/museum/em_plan.json either. Nearest recorded halls:")
         for k in near:
             lines.append("      %s" % k)
         lines.append("  Run --list for the full set.")
@@ -305,7 +305,7 @@ def plan_orphan(hall_key: str) -> str:
     if not plan:
         return ""
     return ("" if norm(hall_key).replace("/", "|") in plan else
-            "'%s' has an engine row but is NOT in ada_run/em_plan.json. --em-map will name "
+            "'%s' has an engine row but is NOT in commons/data/museum/em_plan.json. --em-map will name "
             "a pearl the chapter no longer deals, and the museum will open at the chapter's "
             "FIRST pearl instead. Expect WRONG HALL." % hall_key)
 

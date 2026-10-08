@@ -15,7 +15,7 @@ itself would deal it into:
     floorplan      tools/spatial_floorplan.py      one of 30 AUTHORED museums
     negotiation    tools/spatial_negotiation.py    slot/rotation/mode, or a refusal
     lineage        spatial_negotiation.hang_run    DNA runs as rows on walls
-    plan           tools/export_museum_plan.py     ada_run/em_plan.json
+    plan           tools/export_museum_plan.py     commons/data/museum/em_plan.json
     assembly       commons/scenes/endless_museum.gd --em-plan
 
 NOTHING HERE RE-IMPLEMENTS A STAGE — same rule as tools/museum_wizard.py. The
@@ -60,7 +60,7 @@ from spatial_negotiation import Occupancy, hang_run, run as negotiate_run
 
 RELATIONS = REPO / "commons" / "data" / "artifact_relations.json"
 CROWNS = REPO / "commons" / "data" / "museum_crowns.json"
-EM_PLAN = REPO / "ada_run" / "em_plan.json"
+EM_PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
 GODOT = Path(os.environ.get("GODOT_EXE",
                             "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe"))
 USERDIR = Path("C:/Users/palle/AppData/Roaming/Godot/app_userdata/Ada Research Zero One")
@@ -476,7 +476,7 @@ def _fixed_cells(seq: str, museum: str, pearl: str, apron: int, only: set | None
     only: for an ORDERED pearl (the poem is the cast) a hand row bites only when its
     token is a line of the poem — the studio moves a line, it does not add one."""
     try:
-        prev = json.loads((REPO / "ada_run" / "em_plan.json").read_text(encoding="utf-8"))
+        prev = json.loads((REPO / "commons" / "data" / "museum" / "em_plan.json").read_text(encoding="utf-8"))
     except Exception:
         return {}
     row = next((p for p in prev.get("plans", []) if p.get("museum") == museum and p.get("sequence") == seq and p.get("pearl") == pearl), None)
@@ -846,7 +846,7 @@ STAMP_RE = re.compile(
 def capture(museums: list[str], out: Path, root: Path | None = None) -> dict[str, Any]:
     """One frame per museum, stamped from the plan. Serialized, one Godot at a time.
 
-    `--em-plan` makes the museum a consumer of `ada_run/em_plan.json` instead of
+    `--em-plan` makes the museum a consumer of `commons/data/museum/em_plan.json` instead of
     a dealer, so these frames are the spine run's own arithmetic standing in a
     room. `_deal_from_plan` prints what it could and could not stamp, and that
     line is the only place the corpus's dead artifacts become visible: a token
@@ -1194,7 +1194,7 @@ def main() -> int:
                     help="truncate each chapter's cast (0 = the whole chapter)")
     ap.add_argument("--json", default="ada_run/spine_run.json")
     ap.add_argument("--write-plan", action="store_true",
-                    help="also rewrite ada_run/em_plan.json from this run")
+                    help="also rewrite commons/data/museum/em_plan.json from this run")
     ap.add_argument("--worktree", default="C:/Users/palle/Documents/GitHub/_ada46_sortprobe")
     ap.add_argument("--segments", type=int, default=6)
     ap.add_argument("--arms", default="neither,fix1,both")

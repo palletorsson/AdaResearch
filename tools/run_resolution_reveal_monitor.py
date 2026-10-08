@@ -40,7 +40,7 @@ for name in ['necklace_hand.json', 'em_overrides.json']:
     path = ROOT / 'ada_run' / name
     if path.exists(): shutil.copy2(path, RUN / name)
     else: (RUN / name).write_text('{}', encoding='utf-8')
-shutil.copy2(ROOT / 'ada_run/em_plan.json', RUN / 'plan.json')
+shutil.copy2(ROOT / 'commons/data/museum/em_plan.json', RUN / 'plan.json')
 (RUN / 'spec.json').write_text(json.dumps({'run': prefix, 'film': '--film' in sys.argv}), encoding='utf-8')
 protected = ['commons/maps/Primitives_Ignorance/map_data.json',
              'commons/artifacts/ignorance_gallery/sphere_resolution_atlas.gd',

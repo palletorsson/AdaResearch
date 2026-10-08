@@ -20,7 +20,7 @@ extends SceneTree
 ## are not in that list; `speed` is. The key then arrives as the BOOLEAN `true`,
 ## and grower_block.gd:92 does `float(config_data["min"])` with no guard, so
 ## min_scale and max_scale both become 1.0. The museum's lane has no such branch:
-## ada_run/em_plan.json carries this hall's config as
+## commons/data/museum/em_plan.json carries this hall's config as
 ## {"min": "0.3", "max": "3.5", "speed": "0.3"}, strings, intact.
 ##
 ## So the prediction is that the same three blocks breathe in the endless museum

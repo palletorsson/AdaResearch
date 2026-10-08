@@ -11,7 +11,7 @@ func _run() -> void:
 	var fails: Array[String] = []
 	var ps: PackedScene = load("res://commons/scenes/endless_museum.tscn")
 	var m: Node3D = ps.instantiate() as Node3D
-	m.set("_plan_path", "res://ada_run/em_plan.json")
+	m.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	get_root().add_child(m)
 	await create_timer(0.8).timeout
 	var gate: Dictionary = m.get("_gate")
@@ -52,7 +52,7 @@ func _run() -> void:
 	await create_timer(0.2).timeout
 	# GATE: an autopilot run builds no gate
 	var a: Node3D = ps.instantiate() as Node3D
-	a.set("_plan_path", "res://ada_run/em_plan.json"); a.set("_autopilot", 1)
+	a.set("_plan_path", "res://commons/data/museum/em_plan.json"); a.set("_autopilot", 1)
 	get_root().add_child(a)
 	await create_timer(0.8).timeout
 	if not (a.get("_gate") as Dictionary).is_empty(): fails.append("GATE: an autopilot run built a gate")

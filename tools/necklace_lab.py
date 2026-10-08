@@ -567,7 +567,7 @@ def propose():
     Output: ada_run/necklace_proposals.json + the table below."""
     lab = read_json(REPO / "ada_run" / "necklace_lab.json") or {}
     rep = read_json(REPO / "ada_run" / "em_pack_report.json") or {}
-    plan = read_json(REPO / "ada_run" / "em_plan.json") or {}
+    plan = read_json(REPO / "commons" / "data" / "museum" / "em_plan.json") or {}
     measures = lab.get("measures", {})
     order = []
     for row in plan.get("plans", []):

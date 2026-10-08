@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Drop write-only fields from ada_run/em_plan.json.
+"""Drop write-only fields from commons/data/museum/em_plan.json.
 
 2026-08-28, Palle: "remove the 43% that has no reader."
 
@@ -43,7 +43,7 @@ import shutil
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PLAN = os.path.join(ROOT, "ada_run", "em_plan.json")
+PLAN = os.path.join(ROOT, "commons", "data", "museum", "em_plan.json")
 
 #: Write-only per-row arrays. Anything added here must first come back empty from
 #: a repo-wide grep for its name in .gd, .py, .ts and .tsx — the producer itself

@@ -28,7 +28,7 @@ func _run() -> void:
 	var chapter := _arg("chapter", "primitives")
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	inst.set("EM_CONTROL", "res://ada_run/_trial_hd_control.json")
-	inst.set("_overrides_path", "res://ada_run/em_overrides.json")
+	inst.set("_overrides_path", "res://commons/data/museum/em_overrides.json")
 	inst.set("_hand_path", "res://ada_run/necklace_hand.json")
 	inst.set("start_chapter", chapter)
 	if _arg("walk", "1") == "0":

@@ -6,7 +6,7 @@ func _run() -> void:
 	f0.store_string(JSON.stringify({"first_chapter": "primitives", "first_map": "", "dollhouse": 1}, " "))
 	f0.close()
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
-	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	inst.set("EM_CONTROL", "res://ada_run/_doll_trial_control.json")   # never the live session's file
 	get_root().add_child(inst)
 	await create_timer(1.0).timeout

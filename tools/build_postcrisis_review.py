@@ -55,7 +55,7 @@ def inspect(halls):
     declaration = read_json(ROOT / "commons/data/map_authored.json")
     sequence = read_json(SEQ)["sequences"]["postfoundationscrisis"]
     entries = registry()
-    plans = {name: read_json(ROOT / name) for name in ["commons/data/museum/em_plan.json", "ada_run/em_plan.json"]}
+    plans = {name: read_json(ROOT / name) for name in ["commons/data/museum/em_plan.json", "commons/data/museum/em_plan.json"]}
     expected = sequence["maps"]
     failures = []
     if [h["map"] for h in halls] != expected:

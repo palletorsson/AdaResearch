@@ -18,7 +18,7 @@ import argparse, json, subprocess, sys
 from datetime import datetime
 from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
-PLAN = REPO / "ada_run" / "em_plan.json"
+PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
 
 
 def _cell(v):

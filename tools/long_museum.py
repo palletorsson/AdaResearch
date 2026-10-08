@@ -22,7 +22,7 @@ ONE TRUTH, AND WHERE IT COMES FROM (2026-08-27, Palle: "wall-map and
 long-museum and the endless museum godot are not the same. Can we make them one
 truth?"). Three things used to answer differently:
 
-  WHICH HALLS   The editors stand ada_run/em_plan.json — what the museum deals
+  WHICH HALLS   The editors stand commons/data/museum/em_plan.json — what the museum deals
                 from the trunk's pearls. This file used to stand Ribbon_*
                 placeholders for every unauthored chapter: 208 halls of which
                 155 existed nowhere else, only 53 shared with the editors. It
@@ -115,7 +115,7 @@ def planned_chapters():
     They did not, and the gap was not small. This strip stood 208 halls of which
     155 were Ribbon_* — placeholder rooms cut to fit a sequence's map count. The
     editors (/wall-map, /wall-texts, /lines) stand the 196 halls of
-    ada_run/em_plan.json, which is what the museum deals from the trunk's pearls.
+    commons/data/museum/em_plan.json, which is what the museum deals from the trunk's pearls.
     Only 53 halls were common to both. So a hall you scrolled past in the strip
     usually had no row in any editor, and a hall you wrote a wall text for was
     usually not in the strip.
@@ -131,7 +131,7 @@ def planned_chapters():
     proposal and `built` still says so per chapter. What changes is WHICH ROOMS
     are proposed: the ones the museum names, which you can open in an editor and
     write a wall text for, instead of stand-ins nobody else has heard of."""
-    plan = os.path.join(ROOT, "ada_run", "em_plan.json")
+    plan = os.path.join(ROOT, "commons", "data", "museum", "em_plan.json")
     if not os.path.exists(plan):
         return {}
     try:
@@ -604,7 +604,7 @@ def build():
         source = "+".join(sorted(srcs)) if len(srcs) > 1 else next(iter(srcs), "authored")
         # BUILT OR PROPOSED, AND THE PAGE MUST BE ABLE TO SAY WHICH.
         # endless_museum.gd builds a plan row from its own map ONLY when the
-        # row says authored == "map" (:4858). In ada_run/em_plan.json that is
+        # row says authored == "map" (:4858). In commons/data/museum/em_plan.json that is
         # true of 67 of 223 rows, all in the five chapters map_authored.json
         # names; the other 156 build from one of 26 templates. And
         # `grep -c Ribbon endless_museum.gd` is 0 — the engine has never heard

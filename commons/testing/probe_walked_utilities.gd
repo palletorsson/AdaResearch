@@ -33,7 +33,7 @@ func _run() -> void:
 	# untested differences between a probe and the walker. Read-only here —
 	# the museum only writes them from the editor, which a probe never arms.
 	if not OS.get_cmdline_user_args().has("--trial-rulings"):
-		inst.set("_overrides_path", "res://ada_run/em_overrides.json")
+		inst.set("_overrides_path", "res://commons/data/museum/em_overrides.json")
 		inst.set("_hand_path", "res://ada_run/necklace_hand.json")
 	else:
 		inst.set("_overrides_path", "res://ada_run/_trial_wu_overrides.json")

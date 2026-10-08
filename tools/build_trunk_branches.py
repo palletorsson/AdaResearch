@@ -40,7 +40,7 @@ SPINE = REPO / "commons" / "maps" / "curriculum_spine.json"
 ORDER = REPO / "commons" / "data" / "spine_artifact_order.json"
 POLICIES = REPO / "commons" / "data" / "artifact_order_policies.json"
 RELATIONS = REPO / "commons" / "data" / "artifact_relations.json"
-PLAN = REPO / "ada_run" / "em_plan.json"
+PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
 REGISTRY = REPO / "commons" / "artifacts" / "registry"
 
 KINDS = ["extends", "edge", "contradicts", "queers", "synthesizes", "varies"]

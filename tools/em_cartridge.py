@@ -21,15 +21,15 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 GODOT = os.environ.get("GODOT_EXE", "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe")
-PLAN = REPO / "ada_run" / "em_plan.json"
+PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
 INDEX = REPO / "ada_run" / "em_cartridges" / "index.json"
 REPORT = REPO / "ada_run" / "em_cartridges" / "spine_report.json"
 SPINE = REPO / "commons" / "maps" / "curriculum_spine.json"
 SEQUENCES = REPO / "commons" / "maps" / "sequences"
 FIXED_SOURCES = [
     PLAN,
-    REPO / "ada_run" / "em_bake.json",
-    REPO / "ada_run" / "em_overrides.json",
+    REPO / "commons" / "data" / "museum" / "em_bake.json",
+    REPO / "commons" / "data" / "museum" / "em_overrides.json",
     REPO / "commons" / "data" / "template_patterns.json",
     REPO / "commons" / "data" / "em_layout.json",
     REPO / "commons" / "scenes" / "endless_museum.gd",

@@ -4,8 +4,8 @@
 Palle, 2026-08-18: "Why can we use the desktop as an editor and save the
 changes directly into the map json?"
 
-Until now a ruling lived in ada_run/em_overrides.json and was applied on top
-of ada_run/em_plan.json at every build. That layer is honest — it keeps the
+Until now a ruling lived in commons/data/museum/em_overrides.json and was applied on top
+of commons/data/museum/em_plan.json at every build. That layer is honest — it keeps the
 negotiator's plan and the hand's word apart, and it survives a regeneration
 — but it binds by (chapter, token, from-cell), and the plan MOVES rows, so a
 ruling written last week can quietly stop matching. Palle's twelve rulings
@@ -37,8 +37,8 @@ from datetime import datetime
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-PLAN = REPO / "ada_run" / "em_plan.json"
-OVERRIDES = REPO / "ada_run" / "em_overrides.json"
+PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
+OVERRIDES = REPO / "commons" / "data" / "museum" / "em_overrides.json"
 BAKED = REPO / "ada_run" / "em_rulings_baked.json"
 APRON = 14
 
@@ -127,7 +127,7 @@ def bake(plan: dict, rulings: list[dict], max_bind: int = MAX_BIND_CELLS) -> tup
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--apply", action="store_true", help="write ada_run/em_plan.json")
+    ap.add_argument("--apply", action="store_true", help="write commons/data/museum/em_plan.json")
     ap.add_argument("--keep", action="store_true", help="do not empty em_overrides.json after baking")
     ap.add_argument("--replay", action="store_true", help="bake em_rulings_baked.json back into a regenerated plan")
     ap.add_argument("--max-distance", type=int, default=MAX_BIND_CELLS,
@@ -136,7 +136,7 @@ def main() -> int:
 
     plan = load(PLAN)
     if not plan:
-        print("no ada_run/em_plan.json"); return 2
+        print("no commons/data/museum/em_plan.json"); return 2
     if a.replay:
         rulings = load(BAKED, {}).get("rulings", [])
         print(f"replaying {len(rulings)} baked ruling(s) into the plan")
@@ -152,7 +152,7 @@ def main() -> int:
     print(f"\n{n} ruling(s) bake into the plan, {len(unbound)} stay in the overrides layer")
 
     if not a.apply:
-        print("(dry run — pass --apply to write ada_run/em_plan.json)")
+        print("(dry run — pass --apply to write commons/data/museum/em_plan.json)")
         return 0
     PLAN.write_text(json.dumps(plan, indent=2) + "\n", encoding="utf-8")
     hist = load(BAKED, {"rulings": []})
@@ -162,7 +162,7 @@ def main() -> int:
         if k not in keys:
             hist.setdefault("rulings", []).append({k2: v for k2, v in r.items() if not k2.startswith("_")})
     hist["schema"] = "adaresearch.em_rulings_baked.v1"
-    hist["_readme"] = ("Rulings written INTO ada_run/em_plan.json by tools/bake_rulings.py. "
+    hist["_readme"] = ("Rulings written INTO commons/data/museum/em_plan.json by tools/bake_rulings.py. "
                        "A regeneration (spine_run --write-plan) returns the plan to the negotiator; "
                        "replay these with `python tools/bake_rulings.py --replay --apply`.")
     BAKED.write_text(json.dumps(hist, indent=1) + "\n", encoding="utf-8")

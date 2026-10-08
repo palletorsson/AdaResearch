@@ -1118,13 +1118,13 @@ def build(reg=None, live=None, ops_doc=None, ops_state=None):
             "candidates": len(candidates),
             # SAID OUT LOUD, because silence here is the failure this project
             # keeps writing memory files about. endless_museum.gd:27 defaults to
-            # a PLAN (ada_run/em_plan.json, 210 rows carrying their own tokens);
+            # a PLAN (commons/data/museum/em_plan.json, 210 rows carrying their own tokens);
             # the dealing order only decides what a template hall receives. So a
             # hand edit reaches the museum's POOL immediately and reaches a
             # planned hall only after the plan is rebuilt - and no planner reads
             # the hand file today.
             "plan_note": ("the museum's shipped default is plan mode "
-                          "(endless_museum.gd:27 -> ada_run/em_plan.json); this "
+                          "(endless_museum.gd:27 -> commons/data/museum/em_plan.json); this "
                           "order deals template halls now, and planned halls only "
                           "after the plan is regenerated"),
         },

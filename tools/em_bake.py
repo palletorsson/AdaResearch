@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bake the endless museum: every placement decision made ONCE, written to a file.
 
-    python tools/em_bake.py            # full bake of ada_run/em_plan.json -> ada_run/em_bake.json
+    python tools/em_bake.py            # full bake of commons/data/museum/em_plan.json -> commons/data/museum/em_bake.json
     python tools/em_bake.py --check    # is the bake younger than the plan? (exit 1 if stale/missing)
 
 The runtime used to measure each body's AABB the instant it entered the tree
@@ -16,8 +16,8 @@ import argparse, json, os, subprocess, sys, time
 from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 GODOT = os.environ.get("GODOT_EXE", "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe")
-PLAN = REPO / "ada_run" / "em_plan.json"
-BAKE = REPO / "ada_run" / "em_bake.json"
+PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
+BAKE = REPO / "commons" / "data" / "museum" / "em_bake.json"
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
     sys.stdout.reconfigure(encoding="utf-8")
 

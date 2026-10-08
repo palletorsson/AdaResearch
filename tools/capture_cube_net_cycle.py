@@ -21,7 +21,7 @@ junction(work/'.godot/imported',ROOT/'.godot/imported')
 project = (ROOT/'project.godot').read_text(encoding='utf-8-sig').replace('config/name="Ada Research Zero One"','config/name="'+work.name+'"').replace('buses/default_bus_layout="uid://rwex60pqapc"','buses/default_bus_layout="res://default_bus_layout.tres"')
 (work/'project.godot').write_text(project,encoding='utf-8')
 state = work/'ada_run/cube-net-cycle'; state.mkdir(parents=True)
-shutil.copy2(ROOT/'ada_run/em_plan.json',work/'ada_run/em_plan.json')
+shutil.copy2(ROOT/'commons/data/museum/em_plan.json',work/'commons/data/museum/em_plan.json')
 startup = subprocess.STARTUPINFO(); startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW; startup.wShowWindow = 0
 engine = os.environ.get('GODOT_EXE',str(Path.home()/'Desktop/Godot_v4.6-stable_win64.exe'))
 cmd = [sys.executable,str(ROOT/'tools/godot_watchdog.py'),'--expect='+str(state/'report.json'),'--grace=95','--',engine,'--path',str(work),'--xr-mode','off','--rendering-method','gl_compatibility','--position','-10000,-10000','--resolution','1440x960','--log-file',str(OUT/'godot.log'),'--script','res://commons/testing/capture_cube_net_cycle.gd']

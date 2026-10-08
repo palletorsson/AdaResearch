@@ -12,7 +12,7 @@ they are touched, and tools/sweep_evidence.py collects whatever still lands in t
 place.
 
 WHAT IS NOT EVIDENCE, and must never be routed here: anything the GAME reads. The museum
-reads ada_run/em_plan.json, necklace_hand.json, em_overrides.json, em_control.json,
+reads commons/data/museum/em_plan.json, necklace_hand.json, em_overrides.json, em_control.json,
 runtime_flags.json and the whole of ada_run/em_cartridges/ every run; the VR feedback
 bridge writes desktop_feedback.md there. Those are game data that happen to live in a
 folder named like a scratch directory. sweep_evidence.py derives that list from the game

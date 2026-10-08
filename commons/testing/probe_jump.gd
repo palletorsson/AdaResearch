@@ -7,7 +7,7 @@ func _run() -> void:
 	f.store_string(JSON.stringify({"first_chapter": "transformation", "first_map": "Trans_Translation"}, " "))
 	f.close()
 	var m: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
-	m.set("_plan_path", "res://ada_run/em_plan.json")
+	m.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	get_root().add_child(m)
 	await create_timer(5.0).timeout
 	# 2. the jump list

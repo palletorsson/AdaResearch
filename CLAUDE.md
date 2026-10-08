@@ -326,11 +326,17 @@ find which cache is stale — do not pick a winner by eye.
 
 | derived (rebuild, never edit) | producer | covers |
 |---|---|---|
-| `ada_run/em_plan.json` | `spine_run` | the deal: 196 halls, the order, which map |
-| `ada_run/em_bake.json` | Godot bake | what **stands** in each hall, keyed `chapter\|pearl` |
+| `commons/data/museum/em_plan.json` | `spine_run` | the deal: 196 halls, the order, which map |
+| `commons/data/museum/em_bake.json` | Godot bake | what **stands** in each hall, keyed `chapter\|pearl` |
 | `ada_run/em_layout_walk.json` | Godot, as it builds | each hall's **span and shape** — the museum's own cursor |
 | `ada_run/em_built.json` | Godot, live | the streaming window only — **2 segments**, never the museum |
 | `commons/data/long_museum.json` | `tools/long_museum.py` | the strip, laid out from the two above |
+
+The plan, the bake and the hand's rulings (`em_overrides.json`) **live in `commons/data/museum/`
+and are tracked** since 2026-10-08 (Palle: "it is not good if they are untracked") — generated-but-
+committed, like `long_museum.json`: regenerate with `spine_run --write-plan` / `tools/em_bake.py`,
+and git shows the diff. `ada_run/` is ignored and keeps only the live channel (`em_control.json`),
+the engine's walk record and the reports.
 
 Consumers: the museum reads plan + bake + maps + book. `/wall-map`, `/wall-texts` and
 `/lines` read plan + book (`halls_get`). `/long-museum` reads `long_museum.json`.

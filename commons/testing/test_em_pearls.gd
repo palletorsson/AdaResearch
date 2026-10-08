@@ -11,7 +11,7 @@ extends SceneTree
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/test_em_pearls.gd -- --trial=res://ada_run/_trial_em_plan_pearls.json
 
-const PLAN := "res://ada_run/em_plan.json"
+const PLAN := "res://commons/data/museum/em_plan.json"
 
 func _initialize() -> void:
 	call_deferred("_run")

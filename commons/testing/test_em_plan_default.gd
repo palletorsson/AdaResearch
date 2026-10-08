@@ -1,6 +1,6 @@
 extends SceneTree
 ## Pressing Play must use the plan. The scene carries plan_file, so a run with
-## NO command line reads ada_run/em_plan.json — the fault that made every plan
+## NO command line reads commons/data/museum/em_plan.json — the fault that made every plan
 ## edit invisible ("still no change when I run endless_museum.tscn").
 ## GATE: clearing plan_file gives back v1 pool dealing, and it SAYS so.
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/test_em_plan_default.gd

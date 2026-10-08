@@ -13,7 +13,7 @@ extends SceneTree
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/test_em_side_room.gd
 
-const PLAN := "res://ada_run/em_plan.json"
+const PLAN := "res://commons/data/museum/em_plan.json"
 const TRIAL := "res://ada_run/_trial_em_plan_side_room.json"
 const BARE := "res://ada_run/_trial_em_plan_no_rooms.json"   # the real plan with every room ask removed
 

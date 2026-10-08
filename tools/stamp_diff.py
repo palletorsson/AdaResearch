@@ -107,7 +107,7 @@ def draw(tile, arts, ox, oy, changed, mark):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--before", default="ada_run/em_plan.backup.json")
-    ap.add_argument("--after", default="ada_run/em_plan.json")
+    ap.add_argument("--after", default="commons/data/museum/em_plan.json")
     ap.add_argument("--out", default="ada_run/stamp_diff.svg")
     ap.add_argument("--ascii", action="store_true")
     args = ap.parse_args()

@@ -27,7 +27,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 PATTERNS = REPO / "commons" / "data" / "template_patterns.json"
 TRUNK = REPO / "commons" / "data" / "trunk_branches.json"
-PLAN = REPO / "ada_run" / "em_plan.json"
+PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
 WALL = "4"
 DEFAULT_PITCH = 6
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":

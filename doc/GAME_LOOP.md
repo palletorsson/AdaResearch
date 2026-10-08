@@ -148,8 +148,8 @@ exists. VR yields five frames between them so the compositor keeps getting frame
 | 4.2 | `EM::_load_modules` | `modules_loaded` | the `commons/scenes/em/*.gd` modules (materials, lighting, environment, detail, props, gate, feel, audio, …) |
 | 4.3 | museum data | `museum_data` | templates, crowns, the 2.6 MB relations file |
 | 4.4 | `EM::_load_pool` | `pool_done` | **the living registry**: 260 registry files, 11.4 MB of JSON, a `ResourceLoader.exists` per scene, spine order; inside it `EM::_start_at_chapter` resolves the start chapter (flag → resume → menu statics → Inspector → `em_control.json`) — the largest pre-world cost, repaid on every re-entry |
-| 4.5 | `EM::_load_plan` | `plan_parsed` | `ada_run/em_plan.json` (2.6 MB) + hand overrides |
-| 4.6 | `EM::_load_bake` | `bake_parsed` | `ada_run/em_bake.json` replay + staleness check |
+| 4.5 | `EM::_load_plan` | `plan_parsed` | `commons/data/museum/em_plan.json` (2.6 MB) + hand overrides |
+| 4.6 | `EM::_load_bake` | `bake_parsed` | `commons/data/museum/em_bake.json` replay + staleness check |
 | 4.7 | `EM::_warm_grid_catalogue` | `grid_warm` | only when the plan has a `simulation.grid` row: `GridInteractablesComponent.warm_registry_cache()` so the first simulation-grid hall does not pay the registry scan |
 | 4.8 | `EM::_start_at_map`, `EM::_load_guests` | `guests_loaded` | the first pearl/map of the chapter, guest artifacts |
 | 4.9 | `EM::_setup_world` | `world_ready` | desktop: walker + camera, costume, pointer, AA, environment and sky (night panorama + moon), `em_feel`, `em_audio` synthesis. VR: only the environment, the `PlayerBoundsCheck` reshape and the plain-hands strip — the XR rig owns the rest |

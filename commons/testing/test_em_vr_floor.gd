@@ -54,7 +54,7 @@ func _floor_cols(vr: bool) -> int:
 	var ps: PackedScene = load("res://commons/scenes/endless_museum.tscn")
 	var inst: Node3D = ps.instantiate() as Node3D
 	inst.set("_force_vr", vr)
-	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	get_root().add_child(inst)
 	for i in range(5):
 		await create_timer(0.2).timeout

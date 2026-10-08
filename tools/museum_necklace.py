@@ -69,7 +69,7 @@ assumed:
 
   THE STATE COMES FROM THE PACK LEDGER. THE BAKE CANNOT ANSWER THE QUESTION.
 
-Version one of this tool read `placed` / `refused` out of ada_run/em_bake.json
+Version one of this tool read `placed` / `refused` out of commons/data/museum/em_bake.json
 and got 67 of the 534 built beads wrong — 12.5% — in two ways, both structural:
 
   * `refused` IN THE BAKE IS A FAILED CANDIDATE CELL, NOT A MISSING ARTIFACT.
@@ -137,9 +137,9 @@ read, and `_meta.source_check` records whether it agrees, so the page can say
 
   READ   commons/maps/*/map_data.json        via tools/long_museum.py
          commons/artifacts/registry/*.json   via tools/necklace_order.py
-         ada_run/em_plan.json                the plan the museum builds from
+         commons/data/museum/em_plan.json                the plan the museum builds from
          ada_run/em_pack_report.json         WHERE EVERY BODY STANDS - the state
-         ada_run/em_bake.json                advisory only: its stamps, and how
+         commons/data/museum/em_bake.json                advisory only: its stamps, and how
                                              many candidate cells each hall burned
          commons/data/spine_order_effective.json   the OTHER string, for cross-links
          commons/data/long_museum.json       only to report agreement
@@ -170,8 +170,8 @@ except ImportError as exc:  # pragma: no cover - a broken sibling, not a broken 
 
 OUT = os.path.join(ROOT, "commons", "data", "museum_order_effective.json")
 SNAPSHOT = os.path.join(ROOT, "commons", "data", "long_museum.json")
-PLAN = os.path.join(ROOT, "ada_run", "em_plan.json")
-BAKE = os.path.join(ROOT, "ada_run", "em_bake.json")
+PLAN = os.path.join(ROOT, "commons", "data", "museum", "em_plan.json")
+BAKE = os.path.join(ROOT, "commons", "data", "museum", "em_bake.json")
 PACK = os.path.join(ROOT, "ada_run", "em_pack_report.json")
 SPINE_EFFECTIVE = os.path.join(ROOT, "commons", "data", "spine_order_effective.json")
 SPINE_GENERATED = os.path.join(ROOT, "commons", "data", "spine_artifact_order.json")

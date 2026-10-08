@@ -56,7 +56,7 @@ from compact_map_json import _ser as house_ser        # the corpus's own seriali
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WALK = os.path.join(ROOT, "ada_run", "em_layout_walk.json")
-PLAN = os.path.join(ROOT, "ada_run", "em_plan.json")
+PLAN = os.path.join(ROOT, "commons", "data", "museum", "em_plan.json")
 MAPS = os.path.join(ROOT, "commons", "maps")
 OUT = os.path.join(ROOT, "doc", "reports", "em_room_writeback.json")
 

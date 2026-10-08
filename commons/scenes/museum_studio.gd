@@ -34,7 +34,7 @@ extends Node3D
 ## tools/em_speak.py, reseeded, rebuilt — the wall changes).
 
 const MUSEUM_SCENE := "res://commons/scenes/endless_museum.tscn"
-const PLAN := "res://ada_run/em_plan.json"
+const PLAN := "res://commons/data/museum/em_plan.json"
 const EM_CONTROL := "res://ada_run/em_control.json"
 const VESTIBULE_H := 4
 const PICK_PX := 26.0

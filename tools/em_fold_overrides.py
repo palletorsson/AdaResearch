@@ -8,7 +8,7 @@ Palle, 2026-08-20: "if we make changes in the endless museum desktop can we have
 them be direct like in the hall?"
 
 The walking editor (TAB in the desktop museum) autosaves rulings to
-ada_run/em_overrides.json within 0.6 s — instant in 3D, but a THIRD channel:
+commons/data/museum/em_overrides.json within 0.6 s — instant in 3D, but a THIRD channel:
 invisible to /halls and /lines, and never part of the plan's hand rows. This
 tool folds each ruling into the plan as a HAND ROW (em_plan_write's semantics,
 by "walk"), where it survives regenerations like any hand fact, shows in
@@ -25,8 +25,8 @@ from __future__ import annotations
 import json, subprocess, sys
 from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
-OV = REPO / "ada_run" / "em_overrides.json"
-PLAN = REPO / "ada_run" / "em_plan.json"
+OV = REPO / "commons" / "data" / "museum" / "em_overrides.json"
+PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
     sys.stdout.reconfigure(encoding="utf-8")
 

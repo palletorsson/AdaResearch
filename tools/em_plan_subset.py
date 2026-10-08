@@ -10,7 +10,7 @@ you name them — and the museum, handed it with --em-plan, walks them in succes
   godot --path . --xr-mode off res://commons/scenes/endless_museum.tscn -- --em-plan=res://ada_run/em_plan_biome.json --em-chapter=primitives --em-map=Biome_Ladder_Primitives
 
 Everything under ada_run/ is derived; this file is too — regenerate it after every
-`em_map_halls.py --apply`. The rows are copied verbatim from ada_run/em_plan.json (tile,
+`em_map_halls.py --apply`. The rows are copied verbatim from commons/data/museum/em_plan.json (tile,
 bodies, rulings), only `museum`, `sequence`, `pearl_index` and `pearls_total` are rewritten
 so the five read as one string. Halls not in the plan are named and skipped.
 """
@@ -19,7 +19,7 @@ import argparse, json, sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-PLAN = REPO / "ada_run" / "em_plan.json"
+PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
 
 
 def main() -> int:

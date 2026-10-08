@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 REPO = Path(__file__).resolve().parents[1]
-PLAN = REPO / "ada_run" / "em_plan.json"
+PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
 ENVELOPES = REPO / "commons" / "data" / "museum_dna_wall_envelopes.json"
 OUT = REPO / "ada_run" / "museum_dna_wall_validation.json"
 TOLERANCE_M = 0.051

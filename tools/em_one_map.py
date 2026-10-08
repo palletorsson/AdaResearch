@@ -15,7 +15,7 @@ import json
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = "C:/Users/palle/Documents/GitHub/AdaResearch_46"
-plan = json.load(open(ROOT + "/ada_run/em_plan.json", encoding="utf-8"))
+plan = json.load(open(ROOT + "/commons/data/museum/em_plan.json", encoding="utf-8"))
 best = json.load(open(ROOT + "/doc/reports/em_best_of.json", encoding="utf-8"))
 hero_of = {(h["sequence"], h["map"]): h for h in best["halls"]}
 

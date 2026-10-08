@@ -54,7 +54,7 @@ def main():
     rel = 'commons/data/museum_order_effective.json'
     assert [(r['name'], r['sequence']) for r in read(ROOT / rel)['halls']] == [
         (r['name'], r['sequence']) for r in read(ARCHIVE / 'before' / rel)['halls']]
-    for rel in ['ada_run/em_plan.json', 'commons/data/museum/em_plan.json']:
+    for rel in ['commons/data/museum/em_plan.json', 'commons/data/museum/em_plan.json']:
         old, new = read(ARCHIVE / 'before' / rel), read(ROOT / rel)
         assert len(old['plans']) == len(new['plans'])
         assert [r['map'] for r in new['plans'] if r.get('sequence') == 'wavefunctions'] == report['active_route']

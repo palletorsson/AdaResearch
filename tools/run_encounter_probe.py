@@ -70,7 +70,7 @@ def main():
             shutil.copy2(original, run / name)
         else:
             (run / name).write_text('{}', encoding='utf-8')
-    shutil.copy2(ROOT / 'ada_run/em_plan.json', run / 'plan.json')
+    shutil.copy2(ROOT / 'commons/data/museum/em_plan.json', run / 'plan.json')
     spec = json.loads(args.spec.read_text(encoding='utf-8-sig')) if args.spec else {}
     spec.update(room=args.room, sequence=args.sequence, run=prefix)
     (run / 'spec.json').write_text(json.dumps(spec, indent=2), encoding='utf-8')
@@ -79,7 +79,7 @@ def main():
                 'sources': {}}
     for path in [source_path, ROOT / f'commons/maps/{args.room}/map_data.json',
                  probe, ROOT / 'tools/run_encounter_probe.py',
-                 ROOT / 'ada_run/em_plan.json', run / 'control.json', run / 'necklace_hand.json',
+                 ROOT / 'commons/data/museum/em_plan.json', run / 'control.json', run / 'necklace_hand.json',
                  run / 'em_overrides.json', run / 'em_bake.json']:
         if not path.exists():
             continue

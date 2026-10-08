@@ -8,7 +8,7 @@ extends RefCounted
 ## THIRD author of placement — invisible to the plan, clobbered on regeneration,
 ## unexplainable by any trace.
 ##
-## WHAT THIS IS: a hand that writes ada_run/em_overrides.json, keyed
+## WHAT THIS IS: a hand that writes commons/data/museum/em_overrides.json, keyed
 ## (chapter, token, from-cell), provenance "hand". The negotiator keeps its
 ## plan; the override rides on top at _deal_from_plan time; the live node moves
 ## immediately as a PREVIEW of what the next build will do. Hand authorship is
@@ -26,7 +26,7 @@ extends RefCounted
 ## The museum owns the state (records, selection, overrides); this module is
 ## arithmetic and IO, stateless, like every other em/ module.
 
-const OVERRIDES_PATH := "res://ada_run/em_overrides.json"
+const OVERRIDES_PATH := "res://commons/data/museum/em_overrides.json"
 
 
 ## A record's node, or null once it has been FREED.

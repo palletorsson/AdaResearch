@@ -41,7 +41,7 @@ func _run() -> void:
 	f.store_string(JSON.stringify({"first_chapter": "primitives", "first_map": "Point_One", "travel": 1, "dollhouse": 0}, " "))
 	f.close()
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
-	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	inst.set("EM_CONTROL", CTL)
 	inst.set("_overrides_path", TRIAL_OVERRIDES)
 	inst.set("_book_dir", BOOK)

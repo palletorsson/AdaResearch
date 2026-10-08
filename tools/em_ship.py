@@ -3,7 +3,7 @@
 
     python tools/em_ship.py
 
-Copies ada_run/{em_plan,em_bake,em_control,em_overrides}.json and the compiled
+Copies ada_run/{em_control,em_layout_walk}.json and the compiled
 em_cartridges/ directory into commons/data/museum/ — a folder every export carries (ada_run/ is authoring
 ground and exports have excluded it; the Quest 3 walked a plan-less v1 museum
 for a day because of that). endless_museum.gd reads ada_run first and falls
@@ -34,8 +34,9 @@ DST = REPO / "commons" / "data" / "museum"
 # order disagrees with the engine's own walk on 9 of 134 crossings). Without it
 # on the headset every crossing falls back to the old chicane and the seam is a
 # desktop-only feature nobody can see in VR.
-FILES = ["em_plan.json", "em_bake.json", "em_control.json", "em_overrides.json",
-         "em_layout_walk.json"]
+# 2026-10-08: em_plan.json, em_bake.json and em_overrides.json LIVE in DST now (tracked,
+# generated-but-committed); only the live channel and the engine's walk record still travel.
+FILES = ["em_control.json", "em_layout_walk.json"]
 EXTRA = {"trunk_branches.json": REPO / "commons" / "data" / "trunk_branches.json"}   # the pearls + their speak
 def main() -> int:
     DST.mkdir(parents=True, exist_ok=True)

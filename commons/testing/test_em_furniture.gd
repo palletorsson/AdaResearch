@@ -121,7 +121,7 @@ func _museum() -> Node3D:
 	var inst: Node3D = ps.instantiate() as Node3D
 	inst.set("_edit_mode", true)
 	inst.set("_overrides_path", OUT)   # the trial writes ITS file, not the curator's
-	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	inst.set("_first_key", "sainsbury-false-perspective-enfilade")
 	get_root().add_child(inst)
 	for i in range(5):

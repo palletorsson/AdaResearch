@@ -28,7 +28,7 @@ project = project.replace('buses/default_bus_layout="uid://rwex60pqapc"', 'buses
 (work/'project.godot').write_text(project, encoding='utf-8')
 state = work/'ada_run/light-opening-museum'
 state.mkdir(parents=True)
-shutil.copy2(ROOT/'ada_run/em_plan.json', work/'ada_run/em_plan.json')
+shutil.copy2(ROOT/'commons/data/museum/em_plan.json', work/'commons/data/museum/em_plan.json')
 if (ROOT/'ada_run/necklace_hand.json').exists(): shutil.copy2(ROOT/'ada_run/necklace_hand.json', state/'hand.json')
 startup = subprocess.STARTUPINFO()
 startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
@@ -52,7 +52,7 @@ if result.returncode == 0 and (state/'report.json').exists():
     sources = ['commons/maps/Color_Flashlight/map_data.json', 'commons/maps/sequences/color.json',
         'commons/artifacts/colour_light_rooms/colour_light_rooms.gd',
         'commons/artifacts/colour_light_rooms/colour_light_rooms.tscn',
-        'commons/scenes/endless_museum.gd','commons/testing/capture_light_opening_museum.gd','ada_run/em_plan.json']
+        'commons/scenes/endless_museum.gd','commons/testing/capture_light_opening_museum.gd','commons/data/museum/em_plan.json']
     (OUT/'provenance.json').write_text(json.dumps({'godot':engine,'private_project':str(work),
         'source_files':{p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in sources},
         'scope':'Actual museum assembly. Private runtime state, frozen for stills; distance culling follows capture eye. No headset test.'},indent=2)+'\n',encoding='utf-8')

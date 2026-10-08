@@ -18,7 +18,7 @@ junction(work/'.godot/imported',ROOT/'.godot/imported')
 project=(ROOT/'project.godot').read_text(encoding='utf-8-sig').replace('config/name="Ada Research Zero One"','config/name="'+work.name+'"').replace('buses/default_bus_layout="uid://rwex60pqapc"','buses/default_bus_layout="res://default_bus_layout.tres"')
 (work/'project.godot').write_text(project,encoding='utf-8')
 state=work/'ada_run/study-integration';state.mkdir(parents=True)
-shutil.copy2(ROOT/'ada_run/em_plan.json',work/'ada_run/em_plan.json')
+shutil.copy2(ROOT/'commons/data/museum/em_plan.json',work/'commons/data/museum/em_plan.json')
 if (ROOT/'ada_run/necklace_hand.json').exists(): shutil.copy2(ROOT/'ada_run/necklace_hand.json',state/'hand.json')
 startup=subprocess.STARTUPINFO();startup.dwFlags|=subprocess.STARTF_USESHOWWINDOW;startup.wShowWindow=0
 engine=str(Path.home()/'Desktop/Godot_v4.6-stable_win64.exe')

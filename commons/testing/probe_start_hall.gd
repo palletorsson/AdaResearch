@@ -27,7 +27,7 @@ func _run() -> void:
 	var root: Node = (load("res://commons/scenes/endless_museum_staged.tscn" if staged
 		else "res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate()
 	var inst: Node3D = (root.find_child("Museum", true, false) as Node3D) if staged else (root as Node3D)
-	inst.set("_overrides_path", "res://ada_run/em_overrides.json")
+	inst.set("_overrides_path", "res://commons/data/museum/em_overrides.json")
 	inst.set("_hand_path", "res://ada_run/necklace_hand.json")
 	inst.set("_force_patient", true)
 	if lane == "vr":

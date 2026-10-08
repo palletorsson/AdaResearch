@@ -20,7 +20,7 @@ func _initialize() -> void:
 func _run() -> void:
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	inst.set("EM_CONTROL", "res://ada_run/_trial_vp_control.json")
-	inst.set("_overrides_path", "res://ada_run/em_overrides.json")
+	inst.set("_overrides_path", "res://commons/data/museum/em_overrides.json")
 	inst.set("_hand_path", "res://ada_run/necklace_hand.json")
 	var ctl := FileAccess.open("res://ada_run/_trial_vp_control.json", FileAccess.WRITE)
 	ctl.store_string(JSON.stringify({"first_chapter": "", "first_map": "",

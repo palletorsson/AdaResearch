@@ -36,7 +36,7 @@ func _run() -> void:
 			fw.store_string(JSON.stringify({"first_chapter": "primitives", "dollhouse": 1, "grid_pack": 0}, " "))
 		fw.close()
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
-	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	inst.set("EM_CONTROL", "res://ada_run/_trial_sweep_control.json")
 	inst.set("_overrides_path", TRIAL_OVR)
 	inst.set("_hand_path", "res://ada_run/_trial_map_hand.json")

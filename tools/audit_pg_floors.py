@@ -10,7 +10,7 @@ from em_map_halls import derive_row
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'doc/space/pg-floor-audit-2026-09-14'
-PLANS = ['ada_run/em_plan.json', 'commons/data/museum/em_plan.json']
+PLANS = ['commons/data/museum/em_plan.json', 'commons/data/museum/em_plan.json']
 REF = 'a36f33c996004abcdc67ea2a0ac3fce72eba42fd'
 
 def read(path): return json.loads(path.read_text(encoding='utf-8-sig'))

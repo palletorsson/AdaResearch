@@ -23,7 +23,7 @@ func _run() -> void:
 	f.close()
 	var ps: PackedScene = load("res://commons/scenes/endless_museum.tscn")
 	var inst: Node3D = ps.instantiate() as Node3D
-	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	get_root().add_child(inst)
 	await create_timer(0.5).timeout
 	var pl: CharacterBody3D = inst.get("_player")
@@ -41,8 +41,8 @@ func _run() -> void:
 	# ── (b) the watcher ──────────────────────────────────────────────────────
 	for i in range(3):
 		await create_timer(1.0).timeout   # first checks adopt the baseline mtime
-	var plan_txt := FileAccess.get_file_as_string("res://ada_run/em_plan.json")
-	var f2 := FileAccess.open("res://ada_run/em_plan.json", FileAccess.WRITE)
+	var plan_txt := FileAccess.get_file_as_string("res://commons/data/museum/em_plan.json")
+	var f2 := FileAccess.open("res://commons/data/museum/em_plan.json", FileAccess.WRITE)
 	f2.store_string(plan_txt)
 	f2.close()
 	var armed := false

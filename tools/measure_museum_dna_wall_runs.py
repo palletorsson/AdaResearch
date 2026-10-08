@@ -2,7 +2,7 @@
 """Measure configured DNA wall variants and publish compact planning envelopes.
 
 This is a preflight, not a registry writer.  It reads accepted wall-series
-instructions from ``ada_run/em_plan.json``, configures those exact variants in
+instructions from ``commons/data/museum/em_plan.json``, configures those exact variants in
 Godot 4.6, and writes the maximum family envelope consumed by the spatial
 negotiator.  A crash is isolated to one ``anchor|axis|value`` and recorded as
 an explicit skipped value instead of making the whole corpus unknowable.
@@ -27,7 +27,7 @@ from pathlib import Path
 from typing import Any
 
 REPO = Path(__file__).resolve().parents[1]
-PLAN = REPO / "ada_run" / "em_plan.json"
+PLAN = REPO / "commons" / "data" / "museum" / "em_plan.json"
 SPEC = REPO / "ada_run" / "museum_dna_wall_measure_spec.json"
 RAW = REPO / "ada_run" / "museum_dna_wall_measurements.json"
 PROGRESS = REPO / "ada_run" / "museum_dna_wall_measurements.progress.txt"
@@ -124,7 +124,7 @@ def build_spec(sequence: str = "") -> dict[str, Any]:
         "schema": "adaresearch.museum_dna_wall_measure_spec.v1",
         "run_id": run_id,
         "measurer_sha256": source_hash,
-        "source": "ada_run/em_plan.json accepted wall_runs",
+        "source": "commons/data/museum/em_plan.json accepted wall_runs",
         "sequence": sequence,
         "families": serial,
         "skip": [],

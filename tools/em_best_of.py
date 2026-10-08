@@ -125,7 +125,7 @@ def main() -> int:
         if a.startswith("--chapter="):
             only = a.split("=", 1)[1]
 
-    plan = json.load(open(ROOT / "ada_run" / "em_plan.json", encoding="utf-8"))
+    plan = json.load(open(ROOT / "commons" / "data" / "museum" / "em_plan.json", encoding="utf-8"))
     rows = [r for r in plan["plans"] if not only or r.get("sequence") == only]
 
     df = corpus_df()

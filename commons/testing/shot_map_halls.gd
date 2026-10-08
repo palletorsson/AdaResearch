@@ -48,10 +48,10 @@ func _run() -> void:
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
 	var plan := PLAN
 	if OS.get_cmdline_user_args().has("--live"):
-		plan = "res://ada_run/em_plan.json"
+		plan = "res://commons/data/museum/em_plan.json"
 	inst.set("_plan_path", plan)
 	inst.set("EM_CONTROL", CTL)
-	inst.set("_overrides_path", "res://ada_run/em_overrides.json" if live_rules else "res://ada_run/_trial_map_overrides.json")
+	inst.set("_overrides_path", "res://commons/data/museum/em_overrides.json" if live_rules else "res://ada_run/_trial_map_overrides.json")
 	inst.set("_hand_path", HAND)
 	get_root().add_child(inst)
 	await create_timer(3.0).timeout

@@ -21,7 +21,7 @@ import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-OVR = ROOT / "ada_run" / "em_overrides.json"
+OVR = ROOT / "commons" / "data" / "museum" / "em_overrides.json"
 DECL = ROOT / "commons" / "data" / "map_authored.json"
 
 def main() -> None:

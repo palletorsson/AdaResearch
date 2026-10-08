@@ -31,7 +31,7 @@ func _run() -> void:
 		 "plinth": false, "stamp": true}]}}}, " "))
 	fh.close()
 	var inst: Node3D = (load("res://commons/scenes/endless_museum.tscn") as PackedScene).instantiate() as Node3D
-	inst.set("_plan_path", "res://ada_run/em_plan.json")
+	inst.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	inst.set("EM_CONTROL", CTL)
 	inst.set("_overrides_path", "res://ada_run/_doll_trial_overrides.json")
 	inst.set("_hand_path", "res://ada_run/_trial_hand.json")

@@ -24,7 +24,7 @@ func _run() -> void:
 		fails.append("staged scene has no Museum child")
 	else:
 		museum.set("_force_vr", true)
-		museum.set("_plan_path", "res://ada_run/em_plan.json")
+		museum.set("_plan_path", "res://commons/data/museum/em_plan.json")
 	get_root().add_child(inst)
 	for i in range(6):
 		await create_timer(0.25).timeout

@@ -61,7 +61,7 @@ static func open_at(chapter: String, map: String = "") -> void:
 ## in the log to say why. Palle lost an afternoon to it: "still no change when
 ## I run endless_museum.tscn". Now the scene carries the plan itself; the flag
 ## still wins, and clearing this field in the Inspector gives back v1 dealing.
-@export_file("*.json") var plan_file: String = "res://ada_run/em_plan.json"
+@export_file("*.json") var plan_file: String = "res://commons/data/museum/em_plan.json"
 
 const _SPINE_JSON := "res://commons/maps/curriculum_spine.json"
 const _SEQ_DIR := "res://commons/maps/sequences/"
@@ -147,7 +147,7 @@ const TEMPLATES := "res://commons/data/template_patterns.json"
 # file, or no entry for this museum's key, and the segment deals exactly as it
 # did before. Cells arrive already in TILE space (the exporter subtracts its own
 # apron), so this side never does that arithmetic.
-const EM_PLAN := "res://ada_run/em_plan.json"
+const EM_PLAN := "res://commons/data/museum/em_plan.json"
 const REGISTRY_DIR := "res://commons/artifacts/registry"
 const SPINE_ORDER := "res://commons/data/spine_artifact_order.json"
 # the HAND's dealing order — written by /spine-order-editor, read FIRST when
@@ -597,14 +597,19 @@ var _pearl_cursor: Dictionary = {}
 ## differently every run, so the same plan built different rooms. The bake
 ## decides once: a headless run (--em-bake) walks every pearl and writes, per
 ## "chapter|pearl", the bodies it PLACED (token, cell, the exact cells sealed)
-## and the bodies it REFUSED (token, cell, why) to ada_run/em_bake.json.
+## and the bodies it REFUSED (token, cell, why) to commons/data/museum/em_bake.json.
 ## With the file present, every later run — desktop or headset — REPLAYS it:
 ## a baked body seals its baked cells with no measurement and no reach probe,
 ## a refused body is refused before it is even instantiated, and a body the
 ## bake never saw (a plan row newer than the bake) goes the live way and is
 ## counted as `unbaked`, which is how a stale bake shows itself.
-const BAKE_PATH := "res://ada_run/em_bake.json"
-## SHIPPED COPIES (2026-08-18). The museum's generated files are authored in
+const BAKE_PATH := "res://commons/data/museum/em_bake.json"
+## ONE HOME (2026-10-08, Palle: "it is not good if they are untracked"): the plan,
+## the bake and the hand's rulings LIVE in commons/data/museum/ and are tracked,
+## generated-but-committed. ada_run/ keeps only the live channel, the walk record
+## and the reports. The shipped-copy fallback below is kept for the files that
+## still travel by em_ship.py (control, layout walk, cartridges).
+## SHIPPED COPIES (2026-08-18, superseded above). The museum's generated files are authored in
 ## ada_run/, which exports have excluded (the Quest 3 walked a plan-less v1
 ## museum for a day because of it). `python tools/em_ship.py` copies the four
 ## runtime files — plan, bake, control, overrides — into
@@ -827,7 +832,7 @@ func _load_bake() -> void:
 		_bake_in.size(), _bake_at, plan_at])
 	# staleness by mtime is an AUTHORING-tree question (ada_run/); shipped
 	# copies are written together and a pak has no mtimes at all
-	if _plan_path.begins_with("res://ada_run/") and bake_path.begins_with("res://ada_run/") 			and FileAccess.file_exists(_plan_path) 			and FileAccess.get_modified_time(_plan_path) > FileAccess.get_modified_time(bake_path) + 1:
+	if not OS.has_feature("template") and _plan_path.begins_with(SHIPPED_DIR) and bake_path.begins_with(SHIPPED_DIR) 			and FileAccess.file_exists(_plan_path) 			and FileAccess.get_modified_time(_plan_path) > FileAccess.get_modified_time(bake_path) + 1:
 		_bake_stale = true
 		print("[em-bake] STALE — the plan was edited after the bake; rows the bake never saw go the live way (see `unbaked` in em_built.json). Re-bake: python tools/em_bake.py")
 
@@ -873,7 +878,7 @@ var _plan_owner: Dictionary = {}
 # ── the curator's hand (--em-edit) ──────────────────────────────────────────
 # Records of every stamped artifact (node + plan identity) so the editor can
 # select and preview; overrides are the TRUTH and live in
-# ada_run/em_overrides.json, applied by _deal_from_plan on top of the plan.
+# commons/data/museum/em_overrides.json, applied by _deal_from_plan on top of the plan.
 # The live node move is only a preview of what the next build will do.
 var _edit_mode: bool = false
 var _edit_records: Array = []      # [{node, token, tile_cell, rotation, chapter}]
@@ -1156,7 +1161,7 @@ var _edit_overrides: Array = []
 # private path before add_child (the _plan_path pattern), so no gate can ever
 # read, write or delete a curator's saved work. Palle lost two sessions of
 # rulings on 08-15 to test_em_editor deleting this file at start.
-var _overrides_path: String = "res://ada_run/em_overrides.json"
+var _overrides_path: String = "res://commons/data/museum/em_overrides.json"
 var _edit_dirty: bool = false
 var _edit_hud: Label = null
 var _edit_pal: Array = []
@@ -1387,7 +1392,7 @@ func _boot_museum() -> void:
 		_plan_path = plan_file
 		print("[em-plan] no --em-plan flag; using the scene's plan_file: %s" % plan_file)
 	elif _plan_path == "":
-		print("[em-plan] NO PLAN — dealing from the pool as v1 (plan_file is empty or missing); nothing in ada_run/em_plan.json will show")
+		print("[em-plan] NO PLAN — dealing from the pool as v1 (plan_file is empty or missing); nothing in commons/data/museum/em_plan.json will show")
 	_start_at_chapter()
 	# after the pool, because a plan naming an artifact the pool never built is
 	# a stale plan and the museum should be able to say so by name.
@@ -14795,7 +14800,7 @@ func _dress_sculptures(seg: Node3D, _tile: Array, w: int, h: int, zbase: int, _d
 	#
 	# The family is allowed[absi(hash(ch)) % allowed.size()]. Appending ONE name
 	# takes that modulo from 37 to 38 and reassigns the statue in EVERY chapter
-	# at once: 22 halls change identity, ada_run/em_bake.json goes stale, every
+	# at once: 22 halls change identity, commons/data/museum/em_bake.json goes stale, every
 	# published capture starts lying, and the diff that did it is a single added
 	# string. Nothing in the museum prints that it happened. A pin names the
 	# chapter instead and leaves the modulo alone, so a layout file without the
