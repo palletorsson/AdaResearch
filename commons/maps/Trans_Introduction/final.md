@@ -1,100 +1,111 @@
 # The far bank is already there
 
-A transformation is defined by what it refuses to change.
+In the previous hall, a cube learned to rise, turn and swell. You could watch those movements, walk around them, leave them running.
 
-Melencolia left you with a solid that would not move. This is the room where the primitives finally do, and there are exactly three ways they can: a thing can go somewhere else, it can turn, or it can grow. The chapter's whole question is asked in the first hall and answered in the last: when everything changes, what stays the same? Each of the three moves has a different answer, and each is named for the one thing it gives up.
+Here the floor is missing. Fire glows at the bottom of the basins. If you fall into the fire, you die. The museum returns you to a save point, and you can try the crossing again.
 
-## Three ways to close a gap
+Stand at the first gap. Look across, then down. The far side is already there. What would have to change for it to become somewhere you can go?
 
-One lane runs the length of this hall and three pits are cut into it, and there is a different cube at each one. The cyan cube carries you across by going somewhere else: your position changes and nothing else does. The orange cube is a slab that turns a quarter circle about the upright, holds for four seconds and turns back. It does not tilt and it does not grow; the gap is bridged by facing differently. The green cube swells until there is no gap left to cross, holds while you walk over it, and shrinks away again. Same pit, three answers, and you will walk all three before the chapter is out.
+A transformation is defined by what it refuses to change. The chapter's whole question is asked in the first hall and answered in the last: when everything changes, what stays the same? Each of the three moves has a different answer, and each is named for the one thing it gives up.
+
+<!-- @tc -->
+
+A cube travels between the banks. Let it make a journey without you. Its top meets the floor at each end; between them, it is a small piece of floor with nothing beside it.
+
+Step onto it when it returns. Watch the bank you left. Now look down at the cube.
+
+Relative to the room, you are moving. Relative to the cube, you may be standing still.
+
+The transport script moves the cube towards `target_position`, its destination:
 
 ```gdscript
-func srt(position: Vector3, rotation_rad: Vector3, scale_factors: Vector3) -> Transform3D:
-    var t := Transform3D.IDENTITY
-    t = t.scaled(scale_factors)
-    t = t.rotated(Vector3.UP, rotation_rad.y)
-    t = t.rotated(Vector3.RIGHT, rotation_rad.x)
-    t = t.rotated(Vector3.FORWARD, rotation_rad.z)
-    t.origin = position
-    return t
+global_position = global_position.move_toward(target_position, move_speed * delta)
 ```
 
-Scale, then rotate, then translate. The order is not a convention. Do it in another order and the same three numbers land the same point somewhere else, and the machine can show you exactly where.
+The destination is two metres farther along the room's z direction. `move_speed * delta` gives the distance the cube can travel during this update: its speed multiplied by the elapsed time. The cube keeps its size and facing.
 
-## What each refuses
+To carry you, the script also applies each small displacement to the rider it has detected on top:
 
-<!-- @invariants_demo -->
+```gdscript
+var movement_delta = global_position - previous_position
+_translate_rider(carried_player, movement_delta)
+```
 
-A triangle with its measurements written on it: side lengths, angles, area. Press a button and watch which numbers survive. The ones that survive glow green, the ones that change glow red. Slide it and every number stays green. Turn it and every number stays green. Grow it and the angles stay green while the sides and the area go red. Shear it and all three angles go red, two of the sides go with them, and the base and the area hold. Each transformation has a signature, and the signature is what it cannot touch.
+`movement_delta` is the difference between the cube's new position and its previous one. `_translate_rider` adds that difference to your position too. In VR, it moves both the body used to test contact and the viewpoint through which you see the room. The bank recedes while the surface beneath you stays close.
 
-<!-- @x_translation_cube -->
+Step off at the far bank. The cube waits, then goes back. The gap has not closed. You crossed with a temporary surface under your feet.
 
-Three cubes stand apart in this hall, each allowed one axis. This one slides sideways, on a rail, with four fading ghosts behind it and its one coordinate counting on a label.
+<!-- @sc -->
 
-<!-- @y_translation_cube -->
+At the next gap, a cube grows about a fixed centre below the floor. Watch its upper face rise and its edges approach the banks.
 
-This one lifts. The same operation, and the one that reads least like it.
+Wait until the surface is level with the floor, then walk across during its pause. Look back as it shrinks. What made a floor a moment ago is withdrawing below it.
 
-<!-- @z_translation_cube -->
+The cube grows from half a metre to three metres on each side. Its visible shape, the mesh, is built one metre on a side. The script multiplies all three dimensions by the same factor, `safe_scale`, from a half to three:
 
-This one goes into the depth, where the same displacement reads almost entirely as getting bigger. Translation, taken apart, is three of these, and the room after next will forbid you two of them at a time to prove it.
+```gdscript
+var scale_vec: Vector3 = Vector3(safe_scale, safe_scale, safe_scale)
+mesh_instance.scale = scale_vec
+box_shape.size = scale_vec
+```
 
-<!-- @ -->
+The last line enlarges the collision box, the shape the program uses to test contact with the cube. The visible surface and the surface that supports your feet grow together.
 
-## Order
+The centre sits below the floor so that the upper face reaches it at full size. Growth spreads downwards as well as upwards. From the bank, you might notice only the part that arrives to meet you.
 
-<!-- @spin -->
+The cube keeps its proportions throughout. It is recognisably the same shape when it is too small to carry your walk and when it reaches both banks. Your way across appears and disappears within that sameness.
 
-A row of copies that slides, then turns, then slides again. The turn is inserted in the middle of the process, and it changes the copies without changing where they go. The row stays straight, because every phase adds the same step along the same axis and only the basis is turned. Twelve copies tumble fifteen degrees each, and the last ten stand upside down and still in line.
+<!-- @rc -->
 
-<!-- @transform_composition -->
+The third gap has a thin plank. A control marked MOVE THE BANK stands at the approach. Leave its slider at the starting setting for now and watch a turn before stepping onto the plank. At first the plank lies across your route, its ends pointing to either side. A quarter-turn brings those ends towards the banks.
 
-The same house twice: rotated then moved, in blue, and moved then rotated, in red. It lands in two different places, and the two matrices beside it are written out so you can see that the product is different when the factors change sides. Order matters here in a way it never did for adding.
+Cross while it holds that alignment. The same length of plank now reaches the places you need it to reach, with its centre still in the middle of the gap.
 
-<!-- @rotation_gimbal -->
+The step-and-pause rotation code assigns an angle around the upright axis:
 
-Three rings, one inside the other, one per axis, driven by a pad of three sliders. Push the Y slider toward ninety degrees and the outer and inner rings come into line, and at that moment one of your three freedoms is gone: gimbal lock. It is the reason a rotation is better kept as a single turn about a single axis than as three angles, and the rest of the chapter keeps it that way.
+```gdscript
+mesh_instance.rotation_degrees = rotation_axis * current_angle
+```
 
-<!-- @ -->
+The visible plank and its collision body turn together, between zero and ninety degrees, with a four-second pause at each end. The plank is three metres long, one metre wide and 20 centimetres thick. Its upper face stays level with the floor; its ends meet the banks when aligned.
 
-## One matrix
-
-<!-- @homogeneous_coordinates -->
-
-Why four by four for a three-dimensional world. The panel is colour-coded: the block of nine carries rotation and scale, the last column carries translation, and the bottom row is three zeros and a one. That extra row is the trick. It lets a move that is really an addition ride along with the moves that are multiplications, so that all three become one multiplication, and a chain of them is a chain of products.
-
-<!-- @matrix_4x4_viewer -->
-
-The same matrix, live. Sliders for the three translations, one rotation and a uniform scale, and a wireframe cube that obeys them while the sixteen numbers update in front of you. This is where the abstraction and the object are the same thing at the same time.
-
-<!-- @ -->
-
-## Moves with something at stake
-
-<!-- @balance_puzzle -->
-
-Eight pieces, and a line at forty centimetres. Stack them past it and hold every piece still for a second and a half, and the pile stops being a pile: the eight blocks gather and walk away as a creature. Every drop is a translation and a small rotation, and the test is not the moves. The test is whether the stack is still standing when you take your hands off it.
-
-<!-- @scale_me -->
-
-A sphere you can take hold of. Do, and the dark sphere across the hall swells ten times over two seconds. You are not carried with it. In the instant you close your hand, before anything has started to grow, your distance from the room's corner is doubled and your height set to five metres, so you arrive at the new view before the sphere does. It does not come back while you are here, and neither do you. Alice had a bottle for this.
-
-<!-- @pick_up_cube -->
-
-A black cube in orange wireframe, turning and bobbing on its own axis. You cannot carry it. Walk into it and it is gone with a rising chirp and one point on the score, so the translation the room counts here is yours and not the cube's.
-
-<!-- @head_crab -->
-
-A small black crab on four jointed legs, which finds you at fourteen metres and comes. Inside two metres it dashes. The bite takes a third of your health and puts you back at the door, so the one thing in this hall that moves itself is also the only one that can undo your walk.
-
-<!-- @dark_sphere -->
-
-This is the sphere the grab handle goes looking for. It turns slowly and its purple emission breathes, and otherwise it is only ever acted upon, which is what makes a tenfold change in it legible.
+From the bank, follow one end with your eyes as it turns away again. The centre stays in place while the end sweeps a curve around it, carrying the edge of your crossing out of reach.
 
 <!-- @ -->
 
-## What stays the same
+<!-- @adjustable_landing -->
 
-Here is the question in one sentence: what stays the same when everything changes? Translation keeps everything but position. Rotation keeps everything but direction. Scale keeps the angles and the proportions and gives up the sizes. Shear keeps the area and the side it stands on, and gives up the rest; it is the fourth button on the first panel in the hall, and the chapter does not give it a lane, which is a choice the panel quietly argues with. A transformation is a promise about what will not be touched, and the chapter is a walk through three promises and one that did not get a door.
+Return to MOVE THE BANK at the near bank. The far landing rests on rails. Slide BANK a little, then watch the plank make its usual turn.
 
-The next hall is translation on its own, and its floor has holes in it.
+The plank has the same length, the same centre, the same quarter-turn. You have moved the place it needs to reach.
+
+At the starting setting, the aligned plank meets the landing edge to edge. Move the bank and a gap opens between their surfaces. The readout measures how far apart they have become.
+
+![The aligned plank meets the landing at BANK +0.00 m.](/book-review/doc/book/figures/Trans_Introduction/bank-edges-meet.png)
+
+![A gap opens beyond the same plank at BANK +1.00 m.](/book-review/doc/book/figures/Trans_Introduction/bank-full-gap.png)
+
+*The same crossing at two bank settings: meeting edges, then a one-metre gap. The plank holds the same quarter-turn in both views. The camera has not moved.*
+
+Let the plank turn again. An operation that worked a moment ago keeps running exactly as before. The crossing has lost one of its agreements.
+
+The landing uses a translation too:
+
+```gdscript
+displacement = move_toward(displacement, target_displacement, SPEED * delta)
+landing.position = HOME + Vector3.BACK * displacement
+```
+
+The slider sets `target_displacement`, how far the landing should move from `HOME`. `Vector3.BACK` points along the rails, the local positive z direction. The bank can travel one metre, taking its visible surface and its support with it. The side aisles let you return to the control while the gap stays open.
+
+<!-- @ -->
+
+Bring the landing back with RESET. The plank has kept making the same turn through both crossings. The bank was part of what made one of them work; giving it a handle lets us find out how.
+
+The travelling cube asks you to board and stay with it. The growing cube asks you to wait until it reaches the banks, then cross before it shrinks. The turning plank gives you a pause in which to cross. Same gap, three answers, and you will walk all three before the chapter is out. A place to stand can also be a moment you have to meet.
+
+The timers keep going while you think. The simulation supplies an opening and a duration. It does not know how long you need to understand what just carried you.
+
+Here is the question in one sentence: what stays the same when everything changes? Translation keeps everything but position. Rotation keeps everything but direction. Scale keeps the angles and the proportions and gives up the sizes. A transformation is a promise about what will not be touched, and the chapter is a walk through three promises.
+
+There is more to examine beside the route: measurements, matrices, the order of operations. For now, take the experience of crossing into the next hall, where displacement has more work to do.

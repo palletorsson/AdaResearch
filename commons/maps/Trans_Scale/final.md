@@ -1,62 +1,71 @@
 # A door, at last
 
+<!-- @scale_me -->
+
+In the rotation hall, you tried the openings against the size of your body. Here, something waits to be taken.
+
+A figure stands behind a tower of food. Crystal grows through her suit; broad panels lean around her body. The food has begun to flower. Porcelain plates climb above it, and smaller serving plates wind down the side. These are familiar enough to approach, strange enough to keep looking at. In the far wall, beside the figure, a little gold frame surrounds a door.
+
+Try to put yourself through it.
+
+You can see the opening. You can point to the space beyond. Your body will not follow. For the moment, calling it an exit describes somebody else's possibility.
+
+There is a bottle on the highest plate. DRINK ME. Alice ate a cake and drank from a bottle for this. Take it.
+
+A cut. Now the plate is under your feet. The figure rises beyond you, her leaning panels large enough to seem architectural. The table has become a place to stand. Look down along the serving plates. What could be read at a glance now asks for a journey.
+
+The bottle is gone. You have not watched the room swell through the sizes between. The room and its contents are suddenly four times as large: the food, the figure, the spaces between them. Your body has kept its size. The effect may feel like shrinking. The program has made that feeling by changing the other side of the comparison.
+
 There is no size, only size relative to something else: scaling the object and scaling yourself are one operation seen from two sides, and proportion is what survives it.
 
 Translation changed position. Rotation changed direction. Scale is the last freedom in the matrix, and it is the strange one, because it is the only transformation you cannot see from inside. Double everything, including your ruler, and nothing has happened. Size is not a property a thing has. It is a comparison, and this hall is a room full of things to compare.
 
 ```gdscript
-func volume_ratio(before: Vector3, after: Vector3) -> float:
-    return (after.x * after.y * after.z) / (before.x * before.y * before.z)
+room.scale = Vector3.ONE * FACTOR
 ```
+
+`FACTOR` is four. The food and the figure belong to `room`, so the same multiplication reaches their positions as well as their dimensions. The figure is farther from the table now. Increasing only their dimensions would have left the distance between them unchanged.
+
+The arrival on the plate is another operation. Scaling the room would not put you there. The program takes the top plate's local position and asks where it has arrived in the enlarged world:
+
+```gdscript
+var feet := table.to_global(landings[0]) + Vector3.UP*0.08
+```
+
+Then it places your feet there, eight centimetres above the porcelain. The room has changed size, and you have been given a new place from which to meet it.
+
+Follow the plates down. Their winding descent was already present when they were small. Nothing in their arrangement needed to be invented after you took the bottle. Yet the distance from one to the next now belongs to balance, gravity and the time spent falling. The program did not multiply your walking speed or the gravity with the room. Uniform scaling has left a very uneven experience.
 
 Double every length and the volume goes up eight times. That is the one place scale is not gentle: lengths scale as the factor, areas as its square, volumes as its cube, and a body at double the size is eight times heavier standing on four times the bone, which is why nothing shaped like a mouse is ever the size of a horse.
 
-## Scale me
+Find the little door again. It was forty-five centimetres wide and sixty high. Now it is 1.8 metres wide and 2.4 high. Walk through.
 
-<!-- @scale_me -->
+Just beyond it stands a second gold frame, also 1.8 metres wide and 2.4 high. Pass through that one too. It stood at this size before you took the bottle.
 
-A sphere that asks to be held. Take it, and the sphere it finds grows ten times over two seconds. You do not travel with it. At the moment you close your hand the machine sets your height to five metres and doubles your distance from the room's origin, so you arrive at the new view before anything has started to move. It does not come back while you are here. The timer is set to a thousand seconds, and even when it fires it shrinks only the sphere, over two, and leaves you exactly where it put you. Alice ate a cake and drank from a bottle for this. What has changed is the comparison, and that is enough to make the same hall intimate, then monumental.
+![The tiny gold doorway and its enlarged version viewed from the same standing height and distance.](/book-review/doc/book/iterations/2026-09-23-scale-door-and-body/door-and-body.png)
 
-<!-- @prism_block -->
+*The camera stays 1.65 metres above the floor and 2.5 metres from the opening in both views. On the right, the second gold frame beyond the doorway has stayed at its original size.*
 
-Seven triangular prisms, every one a metre on a side, scattered across the floor of the far chamber, with a single one left behind on the near side of the low wall that crosses the hall. They are here because a cube is too symmetrical to show the difference: turn a prism and a different face takes the light, which is a thing a cube will never show you.
+The little doorway has kept its proportions. There is a difference between preserving a shape and preserving what someone can do there. If the bottle had enlarged you by the same factor, would that doorway have become an exit?
 
-<!-- @cube_scene -->
-
-Three cubes among them, the same metre, seated two-tenths higher off the floor. They are the comparison. Without them the hall is a room, and with them it is a room of a known size, and when the sphere changes you it is against these that you know it.
-
-<!-- @chair_assembly_puzzle -->
-
-Ten identical cubes on a bench, each shrunk to a tenth, and six cyan ghosts standing at full size where a seat, four legs and a back should go. Six of the cubes have a ghost waiting for them and four are spares. Move, turn and scale the cubes into the ghosts, and when the sixth one lands the puzzle does something stranger than finishing. Every cube you placed is deleted, and a solid wooden chair appears where they were, a fifth larger than the ghosts you were matching. You did not build that chair. You proved it could be built, and the room took the proof and handed you the object.
-
-<!-- @clipboard -->
-
-A clipboard at half size, turned to face you. Walk within a metre and a half and the page fades up: a drawing of the right-hand controller with one button marked, and a line saying that scale snaps to fixed sizes. It is the only writing in the hall, and it is printed at half the size of the thing it describes.
-
-<!-- @science_screen -->
-
-A screen on the wall, and it is the one thing here that is not looking at the room. It was set to a bar chart before it could scan, and nothing in this hall feeds a bar chart, so it draws twenty bars from a fixed seed. Take the sphere and it will not notice. A measuring instrument that has been told what to measure is not measuring.
-
-<!-- @dark_sphere -->
-
-The dark sphere, where the prisms end. It turns on itself the whole time you are here and never leaves its cell, and it is the one thing in this hall the pill goes looking for.
-
-<!-- @ -->
-
-## The hole is the way
-
-The wall on your right has two doorways in it, and through them a second hall with its floor cut four times. Two slots run away from you, each crossed by a cube you ride: on one the space grows by a third around you as you go, on the other it shrinks by nearly a quarter, and both give it back on the way back. Between them and the next cut, a square of empty floor three cells across with a small cube at its middle, which grows to the size of the square and shrinks again: the hole is the room a scaling needs, and the cube is exactly the size of it. A slot runs sideways, crossed with the space growing. At the end a lift stands on the floor and takes you up two metres with the space growing by half, and brings you down again. Nothing here scales the things; it scales the distance between you and them, which the first sentence of this room said was the only kind of size there is.
-
-<!-- @mario_cube -->
-
-Two yellow cubes, one at the end of the landing the two slots share and one past the sideways slot. Walk into one and a rainbow of seven bands stands up three metres over it. The first one you reach does something more: the dark sphere shrinks to nothing in little more than a second and is gone. The thing the pill goes looking for is the price of the first crossing.
-
-<!-- @ -->
-
-## What survives
-
-Every transformation in this chapter was a promise about what would not be touched. Scale's promise is proportion: every ratio is kept, every angle is kept, and every size is given up. That is why it is the transformation that most directly shows what invariance means. Nothing here scales you. The pill moves you instead, and moving you is enough: from five metres up and twice as far out, the room is the same shape and none of it is the size it was.
+Every transformation in this chapter was a promise about what would not be touched. Scale's promise is proportion: every ratio is kept, every angle is kept, and every size is given up. That is why it is the transformation that most directly shows what invariance means.
 
 That is the chapter's question answered three times. Position, direction, size: each move gives one of them up and keeps the rest. What stays the same when everything changes is whatever the move refused to touch, and the refusing is the move.
 
-Next: the three moves from inside, where each one is a way of being removed.
+The figure has not become hostile by becoming enormous. Her unfamiliar body remains with you through the change. The same is true of the food: its strangeness preceded its usefulness as a landscape. You can learn a route through something without exhausting what it is.
+
+<!-- @ -->
+
+<!-- study-spine:reference_passage -->
+
+<!-- @reference_passage -->
+
+Another wall waits beyond the enlarged room. Its opening changes width; your body stays the same. At the narrow setting the strip on the floor continues through a passage you cannot take. Walk around the wall instead.
+
+The displaced dark disc belongs to this sparse arrangement too. Following the supplied Bałka reference, a few architectural parts make the missing room present. The code can name a clearance. It cannot decide whose body ought to be the measure. Widen the opening and return to the same strip.
+
+<!-- @ -->
+
+Beyond the changing opening, turn toward the museum's own exit. There is still a short walk to the next hall. The museum and its second frame have kept their ordinary size. The code placed the furnished room inside the change and left them outside it. In the next hall, your approach will be enough to make the surroundings respond.
+
+<!-- @ -->

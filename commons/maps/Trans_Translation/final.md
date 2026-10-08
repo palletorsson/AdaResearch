@@ -1,64 +1,91 @@
 # Translation: seven journeys
 
+The far bank is familiar now. In the last hall, a moving surface carried you across. Here seven carriers link a chain of islands, rising to an upper route and descending again.
+
+Before boarding, follow the small waiting cubes with your eyes. Some hang over the fire basin. Others mark the upper route, beyond the reach of a hand from the floor. The carriers give you a way to meet them.
+
+The gaps in this floor are not obstacles. They are invitations, because translation is the operation that does not care what lies between two positions.
+
+<!-- @tc -->
+
+The first carrier travels into depth. Step aboard and let the room pass. Look at the cube under your feet: it keeps its facing and size. Along this journey, only its z coordinate changes.
+
 Translation changes nothing about a thing except where it is. That is why a void can be crossed by it, and why a path can be kept as nothing but a list of positions.
 
-This hall has holes in its floor, and every one of them is the trace of a translation. Three slots run away from you, each exactly as wide and as long as the cube that travels it, and the cube is the only way across: the first carries you straight, the second turns you a quarter on the way, the third grows the space around you by a third and gives it back on the return. One slot runs sideways. Three holes stand in the front of a raised floor with a lift in each, and you enter them by dropping in and leave them on top. One slot runs down through that floor, a cube sliding forward and down at once. The whole room is displacement made into infrastructure, and the emptiness is the drawing of it. Nothing here is reshaped by being moved, which is not the same as nothing turning: the cubes you collect spin on the spot, and two of the rides turn you with them.
+At the next island, the route turns sideways. The carrier moves along x. You can keep looking towards the far end of the hall while travelling across it. Direction of travel and direction of attention have separated.
+
+Then the way goes up.
+
+Stand on the lift and watch the lower landing descend from view. It is still where it was. The carrier changes y; the room gives that change a consequence. You arrive beside an upper platform, three metres above the ground route.
+
+Near the entrance, three small axis markers show x, y and z separately. Along the route, those directions have become sideways travel, a lift and a passage into depth. Depth is the one direction in which a pure displacement is read as a change of size, and nothing about the cube has changed at all.
+
+The transport script calculates a destination from a starting position, a direction and a distance:
 
 ```gdscript
-func move_to(node: Node3D, target: Vector3) -> void:
-    node.global_position = target
+target_position = initial_position + (move_direction * move_distance)
 ```
 
-One assignment, and the object is elsewhere. Everything it was, it still is.
+The direction is normalised: its vector is given a length of one. Multiplying it by `move_distance` sets how far the carrier will go. Adding that displacement to `initial_position` gives its destination. Three metres up and three metres forward use the same addition, with different directions.
 
-## Over the void
+On the upper route, another carrier travels along z. It repeats a direction you have already travelled near the floor. Now you can look down past its edge to the route that brought you here.
 
-<!-- @player_trace -->
-
-Your own path, drawn. Every step you take writes another point, and the line behind you is not only where you were. It is tinted by how fast you got there, green where you dawdled and amber where you ran, full amber at two metres a second. The recorder keeps three lists: positions, times, speeds. The first sentence of this room says a path can be kept as nothing but positions, and the first thing in it keeps more.
-
-<!-- @z_translation_cube -->
-
-A cube on a rail that runs away from you, sliding forty centimetres out and forty back, with four ghosts of itself shrinking behind it. Watch what your eye does. Depth is the one direction in which a pure displacement is read as a change of size, and nothing about the cube has changed at all.
-
-<!-- @y_translation_cube -->
-
-This one lifts, on its own rail, with its own ghosts. Those are the two directions this hall mostly uses to get you across: the transport cubes go forward, and they go up. Once, in the middle of the hall, one goes sideways, and once one goes forward and down at the same time.
+A sideways return carries you back across x in the opposite direction. Then the next carrier moves down and forward together, like an escalator. Its surface stays level while its path slopes: three metres down, two metres further along z. Watch the pickup approach as the lower landing comes towards you.
 
 <!-- @pick_up_cube -->
 
-Seven cubes, each turning on its own axis and bobbing: six standing on the ground, one of those up on the raised floor, and one hanging over the hole near the entrance. You cannot pick one up. Walk into it and it is gone with a rising chirp, and the score is one larger. The only thing translated here is you: the cube never moves at all, and the count is what your crossing leaves behind.
+The small pickups have been waiting along these journeys. They rise and fall without turning. Their small vertical loop continues as the carrier brings you into contact with them, and each collected cube disappears with a sound.
 
-<!-- @pickup_gate -->
+Take one, then look back while the carrier moves on.
 
-The gate at the end counts. It wants seven on the score you have been carrying since the first hall, and for the first time the hall holds seven of its own, the last of them up on the raised floor. The cube beside the gate displays the number, and the gate is closed until the count gets there and open the moment it does. Nothing about the gate is clever, and that is the point: enough crossings changed a number, and the number changed a wall.
+The carrier brings your body to a pickup by sharing its displacement:
 
-<!-- @synthesis_stand -->
+```gdscript
+var movement_delta = global_position - previous_position
+_translate_rider(carried_player, movement_delta)
+```
 
-The cube you have been walking into has a family: wire, steel, clay, crate and foam, five stocks of the same object. The measurements ruled the family a series, so there is no hero to pin. Told to show one anyway, the plinth takes the far end of the measured ladder and stands it up: foam. The plaque says pick_up_cube stock=foam and nothing else, because a series verdict carries no single number to print. Every cube in the room is the near end, wire, the shipped form nobody chose.
+For each small move of the carrier, your position moves with it. You are not transported. You are added to, frame by frame, by a cube doing to you exactly what the first line of code did to the object. That is translation's promise, and it is the only transformation in the chapter whose promise covers you.
 
-<!-- @science_screen -->
-
-The screen is set to track a point, and there is no point in this hall for it to track. It wants a neighbour with the word point in its name and a body it can hold, finds none, and draws the instrument anyway: POINT POSITION, P = (x, y), a grid, and a dot pinned at the origin reading plus zero with a trail of nothing. Along the bottom it recites this map's own blurb. A diagram of translation with the translation left out is the most honest object in the room.
-
-<!-- @transform_composition_workbench -->
-
-A workbench with a slider that picks one of four pairs of moves. The same tetrahedron is shown three times: pale and untransformed in the middle, then done in one order on the left and the other on the right, with an arrow from the ghost to each result. Three of the four pairs land in different places, and a badge over the stage says so. None of the four is the pair this hall is about. Two translations always commute, whatever their directions and however many, which is why nothing you do in this room has an order: take the cubes in any sequence and you reach the gate with the same count. Translation is the operation that does not care, and the rotation halls are where that stops being true.
-
-<!-- @dark_sphere -->
-
-A dark sphere that never leaves its cell while you cross. It is not still: it turns slowly, it wobbles, and its glow breathes between dim and dimmer. It is the room's control, and a strict one, because the only thing it refuses to do is the one thing everything else here does.
-
-<!-- @mario_cube -->
-
-Eight yellow cubes, one at the far end of every hole: past the three slots, at the landing of the sideways slot, on top of the raised floor where each lift arrives, and at the foot of the slot that comes down. They are the places you were meant to reach, and they know when you have. Walk into one and a rainbow of seven bands stands up three metres over it. The first one you reach does something more: the dark sphere shrinks to nothing in little more than a second and is gone. The room's control is the price of the first crossing, and darkness becomes colour at the moment a hole has been crossed. The others keep their rainbows, and the sphere does not come back.
+A pickup detects the arriving body and disappears. Ride back to its place. The carrier can repeat the journey; the cube is gone.
 
 <!-- @ -->
 
-## Here becomes there
+At the last crossing, the waiting cubes run diagonally over the pit. Watch an edge of the carrier as you travel. It does not turn.
 
-The gaps in this floor are not obstacles. They are invitations, because translation is the operation that does not care what lies between two positions, and every gap here is the exact size of the move that crosses it: the hole is the drawing of the translation, and the translation is the only way through the drawing. And the transport cube does cross the void, slowly. Stand on it, wait a second, and it moves at two metres a second toward the far side, and on every frame it adds the distance it just moved to your position as well as to its own. You are not transported. You are added to, frame by frame, by a cube doing to you exactly what the first line of code did to the object.
+This direction changes x and z together. The destination lies eight metres across and eight metres further into the hall. Both coordinates change during the same journey. We have combined directions without adding rotation.
 
-That is translation's promise, and it is the only transformation in the chapter whose promise covers you.
+Thirteen pickups mark this passage through seven rides. By the final terrace, the cubes you collected have left empty places along the route. Another arrangement of carriers and pickups could lead you elsewhere using the same operations.
 
-The next hall takes the same operation apart into three, in a room that forbids you two of them at a time.
+<!-- @translation_cube_demo -->
+
+Step onto the final terrace. Two pairs of small doors stand on plinths, a left door and a right door in each frame. One pair has rails; the other shows translucent panels where its doors can end up. Try the same upward-and-sideways gesture on a square handle in each frame. A pale line stays behind the moving handle.
+
+At the rail-guided door, the line rises. The sideways part of your gesture has gone missing. Beside it, the other mechanism lets the handle move in both directions together. Its line can cross the opening diagonally.
+
+Lift the guided handle to the corner of its rail, then move it sideways. A bend leads to the place the other handle could reach directly. The translucent panel beside the second door marks its destination. Compare the two handles in their frames: they have the same distance to travel up and across.
+
+The guided door retains the part of a displacement that runs along its current axis:
+
+```gdscript
+var t = (knob_pos - start).dot(phase1_dir)
+knob_pos = start + phase1_dir * t
+```
+
+Here `phase1_dir` points upwards. `.dot()` extracts the part of your movement along that direction; the next line puts the handle there. The full implementation also limits how far it can go.
+
+The trail records the handle after this correction. Your hand can propose a diagonal and leave a vertical line.
+
+In the trace hall, movement left positions behind. Here the handle has already been corrected before its position is kept. The line can be an accurate record of where the handle went without showing everything your hand tried.
+
+Bring the free handle back towards its starting corner, then try a curved route to the translucent panel. The recent lines remain together as you try another way. There is room to take the long way within the frame.
+
+![Two door mechanisms leave different traces for different permitted paths.](/book-review/doc/book/iterations/2026-09-23-translation-paths/translation-paths.png)
+
+*A guided bend, a direct diagonal, and a curved route to the same relative endpoint. Each panel records a separate gesture at the handle.*
+
+Up followed by sideways reaches the same position as sideways followed by up. Translation itself does not impose this order. The first mechanism does. The second gives both freedoms together. A destination can be shared by journeys with very different permissions.
+
+<!-- @ -->
+
+The torus beside the course already turns while its cylinder rises and falls. It offers a glimpse of the next question. Our carriers have kept their facing throughout; this neighbouring object combines the operations. Keep the difference between travelling and facing in mind. In the next hall, the turn itself will become the question.
