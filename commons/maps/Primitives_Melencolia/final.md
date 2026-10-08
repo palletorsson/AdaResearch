@@ -92,13 +92,9 @@ That is what the tools are for, and it is also what they are. A compass can draw
 
 We have learned to recognise a construction and change its rule. The reasons for choosing it have histories too.[^geometric-desire]
 
-This desire will return with different demands. In the patterned surfaces of the Alhambra, geometry belongs to built space; Escher's study of its mosaics later fed his own investigations of repeating figures.[^pattern] A rule can continue beyond the piece of wall that holds it. Our museum also stops building at an edge while letting us imagine more.
+Abstraction need not carry us away from the body. Lygia Clark's hinged metal *Bichos* ask for hands: a flat arrangement opens into a changing object.[^clark] To call this Brazilian work only escapist would miss that return to touch. Perhaps the escape is from having to remain a spectator. What can geometry make possible between a form and the person who meets it?
 
-Malevich's tilted square in *White on White* offers another possibility: a painted surface can suggest release into unbounded space. Hilma af Klint's *Paintings for the Temple* give abstract forms a different task, within a spiritual inquiry.[^abstraction] The same circle would not mean the same thing in each of these worlds. What someone asks of it matters.
-
-And abstraction need not carry us away from the body. Lygia Clark's hinged metal *Bichos* ask for hands: a flat arrangement opens into a changing object.[^clark] To call this Brazilian work only escapist would miss that return to touch. Perhaps the escape is from having to remain a spectator. What can geometry make possible between a form and the person who meets it?
-
-These histories meet here because we have placed them beside one another. Their different desires remain. Keep that question beside the seated figure. The tools are here. Their next use is not settled.
+Keep that question beside the seated figure. The tools are here. Their next use is not settled.
 
 ## The number that was already running
 
@@ -133,10 +129,6 @@ The door behind you works. The next chapter is transformation, which is the one 
 [^durer]: Albrecht Dürer, *Melencolia I* (1514), [Metropolitan Museum of Art](https://www.metmuseum.org/art/collection/search/360018). The museum describes several interpretations rather than a settled key. The [National Gallery of Art](https://www.nga.gov/artworks/6641-melencolia-i) provides a detailed visual description. AdaResearch follows the principal objects and their image relationships in a stylised sculptural arrangement. Depth, rear surfaces, dimensions and the solid's proportions are authored interpretations. The passage from ideal form to embodied hesitation is this book's reading, not a settled account of Dürer's intention.
 
 [^sublime]: Kant's [*Critique of Judgement*](https://www.gutenberg.org/files/48433/48433-h/48433-h.htm), §§25–27, discusses the mathematical sublime through the distinction between apprehending parts and comprehending a whole; §49 describes aesthetic ideas as occasioning thought beyond what a determinate concept can exhaust. These offer a later vocabulary for this room's investigation: how a finite arrangement can keep attention moving among possibilities we have not yet specified.
-
-[^pattern]: The [Metropolitan Museum's account of geometric pattern](https://www.metmuseum.org/essays/geometric-patterns-in-islamic-art) describes its construction and combination with other ornament. It does not license a single spiritual meaning for all Islamic geometry. [Escher in The Palace's timeline](https://escherinhetpaleis.nl/en/about-escher/timeline) records his sustained study of the Alhambra and Córdoba mosaics in 1936; tessellation already appeared in his earlier work.
-
-[^abstraction]: Kazimir Malevich, [*Suprematist Composition: White on White* (1918)](https://www.moma.org/collection/works/80385), MoMA; Hilma af Klint, [*Paintings for the Temple*](https://www.guggenheim.org/teaching-materials/hilma-af-klint-paintings-for-thefuture/paintings-for-the-temple), Guggenheim. These are distinct historical projects. Their juxtaposition here asks what abstraction promises; it does not establish a direct line of influence from Dürer or treat spiritual claims as scientific evidence.
 
 [^clark]: Lygia Clark, [*Poetic Shelter* (1964)](https://www.moma.org/collection/works/91767), MoMA, and the museum's account of [Neo-Concrete art](https://www.moma.org/collection/terms/neo-concrete-art). Clark's participatory work is a particular Brazilian response to geometric abstraction, not a description of every South American modernism. The suggestion that participation changes what escape can mean is this book's proposal.
 
