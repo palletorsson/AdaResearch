@@ -1,0 +1,110 @@
+{
+ "id": "stranded-work-triage",
+ "title": "Bring Stranded Work Into The Repo Without Stealing A Live Writer's Buffer",
+ "description": "A reachability gate (L, M, N) names files a clone cannot read. Most are finished work whose session ended at the write, not at the commit. The gate's own age and claim qualifiers split the safe set from the live one, so the sweep is a filter rather than a refusal.",
+ "triggers": [
+  "gate L is red",
+  "unreachable_from_a_clone",
+  "stranded_words",
+  "untracked prose",
+  "another session's uncommitted work"
+ ],
+ "granularity": "micro",
+ "model_version": "opus-5",
+ "created": "2026-09-20",
+ "updated": "2026-10-08",
+ "earned_from": "breath 2026-09-20T06:40 \u00e2\u20ac\u201d gate L read 182 unreachable / 84,069 stranded words. Its own age_reading and claimed_reading split that into 9 fresh, 4 forum-claimed and 169 safe. Committing the 169 took the gate to 13 and prose_tracked 1278 -> 1447, against four consecutive breaths of delta 0.0 on a pinned scorer. EXTENDED 2026-09-23 (breath 09:15): the same filter run against L, M and N in one morning took 13 -> 4, 68 -> 31 and 10 -> 1, and every one of the 36 rows left standing is either forum-claimed or gitignored on purpose. The new node is `revisit`: 37 of gate M's 68 were files this same flow held back 24h earlier for being fresh, and nobody had touched or claimed them since. EXTENDED 2026-10-08 (breath 09:12): L 10 -> 4, M 63 -> 52 (stranded 11 -> 0), N 57 -> 0 PASS in one additive commit of 80 files; gates 8/15 -> 9/15. Two new facts: (1) a stale .git/index.lock (0 bytes, days old, no git process) blocks the additive stage - check `ls -la .git/index.lock` and `tasklist | grep -i git` before removing it; (2) six of gate L's rows were one study-spine block copied four times per room, so 'substance' can come back 'generated stub' and the honest move is to land it WITH that label in the commit and the thread, not to leave the gate red for want of literature.",
+ "nodes": [
+  {
+   "id": "revisit",
+   "type": "action",
+   "label": "Re-read yesterday's held-back set BEFORE reading today's red list",
+   "detail": "A file held back for being FRESH is a 24-hour hypothesis - 'this looks like a live session' - and the next breath is where it gets tested, not where it gets forgotten. On 09-22 this flow held back 37 interface/joystick/Assembly files at under 36h idle and named them in the forum as somebody's live work. On 09-23 they read 39.7-59.9h idle, still untracked, and `forum_claims.attribute` returned zero claims on all 37: the hypothesis had resolved the other way, and those 37 were 54% of everything gate M was still convicting. Re-run the age and claim check on the previous heads-up's exclusion list first; the gate's count alone will not tell you that a row changed category overnight. The exclusions are a queue, not a verdict."
+  },
+  {
+   "id": "qualifier",
+   "type": "action",
+   "label": "Read age_reading and claimed_reading, not the count",
+   "detail": "The count says how much is outside the repo. The qualifiers say whose it is. Gate L prints `age_reading` (how many touched within 24h, oldest idle hours) and `claimed_reading` (how many are named by an open forum thread, and by whom). 182 with no qualifier is untouchable; 182 split into 9 + 4 + 169 is a morning's work. Same rule as .claude/flows/gate-row-attribution.json, applied to a reachability row."
+  },
+  {
+   "id": "ignored",
+   "type": "decision",
+   "label": "Is the file gitignored, or merely never added?",
+   "detail": "`git check-ignore -v <paths>`. Exit 1 on every path means nothing was stopping these entering the repo \u00e2\u20ac\u201d the sessions ended at the write. A gitignored path is a deliberate exclusion and must NOT be forced in; see forum 260914-kdrdw, where git was taught to refuse images under ada_run/ and doc/reports/ on purpose. When the gitignored rows are ALL that is left, the gate's floor is a policy decision, not a task - say so in the report instead of leaving it reading FAIL forever. Gate M's residual 31 are .tres materials excluded by .gitignore:328 ('*.tres' placed after the '!*.tres' force-include at line 320, so exclusion wins); asked of Palle in 260922-zhdio and 260923-pc08y, unanswered."
+  },
+  {
+   "id": "substance",
+   "type": "action",
+   "label": "Measure whether it is writing or a stub",
+   "detail": "Word count distribution plus a TODO/TBD/placeholder/lorem scan across the whole safe set, then READ two files end to end. A commit is a claim that this is work; make the claim on evidence. On 09-20: median 412 words, zero placeholders, and the GT_Flow final named the limit of its own exhibit. Short files are not automatically stubs \u00e2\u20ac\u201d five ISO intent.md came in at 23-27 words because intent is a one-line walk-through spine in those rooms, not because they were unfinished."
+  },
+  {
+   "id": "heads_up",
+   "type": "action",
+   "label": "Post the claim in the forum BEFORE staging",
+   "detail": "`python tools/forum.py ask` naming the exact set, the exact exclusions by path, and an offer to revert one file on request. The protocol in CLAUDE.md says post before touching what another session owns. It also makes the exclusions checkable by the sessions that own them."
+  },
+  {
+   "id": "additive",
+   "type": "action",
+   "label": "Stage new files ONLY, and prove it",
+   "detail": "Check the shared index is empty first (`git diff --cached --name-only | wc -l` \u00e2\u20ac\u201d the index is shared between concurrent sessions). Stage from a pathspec file with `git add --pathspec-from-file=` (strip CRLF first, or every path gets a trailing \\r and git rejects the lot). Then prove additivity: `git diff --cached --name-status | grep -cv '^A'` must read 0. A commit of pure additions cannot overwrite anyone's uncommitted work, which is what makes the sweep safe to do without asking. CRLF bites twice, not once: a path list written by Windows python and read through bash carries \\r, which broke `git check-ignore --stdin` on 09-22 (reported nothing ignored) and `xargs git add` on 09-23 (pathspec 'angular_handle.gd?' did not match). `tr -d '\\r'` before the pipe, every time. If `git add` dies on `.git/index.lock: File exists`, do not remove it on reflex: read the lock's mtime and check tasklist for git/GitHubDesktop. On 2026-10-08 it was 0 bytes, dated 3 days back, with no process alive - stale, removed, staged. A lock with a live process behind it is another session mid-commit; wait."
+  },
+  {
+   "id": "verify",
+   "type": "action",
+   "label": "Re-run the gate against the committed tree",
+   "detail": "Not the working tree, and not the script's own bookkeeping. The gate's after-count is the only evidence the commit did what the message says. On 09-20 it read 182 -> 13, and the 13 were exactly the held-back set, which is itself the check that the filter did what it claimed."
+  },
+  {
+   "id": "answer",
+   "type": "action",
+   "label": "Answer your own thread with the measured result",
+   "detail": "Before and after numbers, the commit sha, and what is still red and why. The next session reads `forum open`, not the breath log."
+  }
+ ],
+ "edges": [
+  {
+   "from": "revisit",
+   "to": "qualifier"
+  },
+  {
+   "from": "qualifier",
+   "to": "ignored"
+  },
+  {
+   "from": "ignored",
+   "to": "substance",
+   "label": "never added"
+  },
+  {
+   "from": "ignored",
+   "to": "answer",
+   "label": "gitignored on purpose \u00e2\u20ac\u201d stop, say so"
+  },
+  {
+   "from": "substance",
+   "to": "heads_up"
+  },
+  {
+   "from": "heads_up",
+   "to": "additive"
+  },
+  {
+   "from": "additive",
+   "to": "verify"
+  },
+  {
+   "from": "verify",
+   "to": "answer"
+  }
+ ],
+ "anti_patterns": [
+  "Committing the whole red list. The fresh and the claimed are somebody's open buffer; sweeping them steals work and the gate told you which they were.",
+  "Refusing the whole red list because some of it is live. That is what four consecutive delta-0.0 breaths did while 84,069 words sat one `git clean` from gone.",
+  "Turning a reachability gate green by committing spent one-shot scripts. Gate N's 120 are ~100 build_*_review.py builders that have run once and will not run again; committing them games the gate instead of repairing the repo. Prose is the artifact itself, so gate L was a different call from gate N. TENSION, recorded 2026-10-08: the breather landed gate-N tools five mornings running (09-25, 09-30, 10-01, 10-05, 10-08) with a forum heads-up each time and no objection, on the argument that a probe whose report sits in doc/reports/ is a reproducibility file, not a spent script. Neither side has been ruled on. Whichever you do, say in the thread which side you took.",
+  "Treating the held-back set as permanently somebody else's. Freshness expires. If the next breath does not re-read it, the flow quietly converts a one-breath courtesy into a permanent exclusion - which is how 37 files sat convicted for an extra day with nobody claiming them.",
+  "Reporting a clone gate as FAIL without saying what the residual IS. 'L=4, M=31, N=1' reads like unfinished work; 'all 4 claimed, all 31 gitignored pending a ruling, the 1 claimed' reads like a floor. Same number, opposite instruction to the next session."
+ ]
+}

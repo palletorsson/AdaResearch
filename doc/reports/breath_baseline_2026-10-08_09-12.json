@@ -1,0 +1,63 @@
+{
+ "timestamp": "2026-10-08T09:21:05",
+ "phase": "baseline",
+ "mode": "full",
+ "pipeline_summary": {
+  "global_avg": 6.08,
+  "sequences_scored": 25,
+  "complete": 1,
+  "at_stage_6_vr": 24,
+  "heads": {
+   "randomness": "COMPLETE",
+   "all_others": "stage 6: vr_testing (primitives 80% polish)"
+  },
+  "vr_pull": "pull_vr_feedback.py: Quest 2G0YC5ZG4M0569 on USB, both installs readable, no desktop_feedback/ -> SEND never pressed"
+ },
+ "heat_map_top_5": [
+  {
+   "item": "stranded-work",
+   "temperature": 60,
+   "reason": "deep discovery: Gate N refills every ~2 days from book s",
+   "action": "follow up"
+  },
+  {
+   "item": "release gates",
+   "temperature": 60,
+   "reason": "deep discovery: Gate I tree_state must be asked per anch",
+   "action": "follow up"
+  }
+ ],
+ "garden_health": {
+  "total": 4975,
+  "voiced": 3507,
+  "embodied": 785,
+  "reaching": 1193,
+  "phantom_limbs": 1909,
+  "voice_coverage_pct": 70,
+  "embodiment_rate_pct": 22
+ },
+ "release_gates": {
+  "A": "PASS",
+  "B": "PASS",
+  "C": "PASS",
+  "D": "PASS",
+  "E": "PASS",
+  "F": "FAIL",
+  "G": "PASS",
+  "H": "PASS",
+  "I": "FAIL",
+  "J": "FAIL",
+  "K": "FAIL",
+  "L": "FAIL",
+  "M": "FAIL",
+  "N": "FAIL",
+  "O": "PASS"
+ },
+ "gate_residuals": {
+  "F": "contended_builder: Palle's editor pid 38608 holds the project",
+  "I": "16 lost edges; 11 of the files are tracked-modified in live course sessions (primitives critical.md)",
+  "L": "10 unreachable: 4 Color_Context_Placed claimed by claude-opus-artifacts/claude-chroma; 6 Shader_05/Shader_12 intent/technical/critical nobody's (idle 6d)",
+  "M": "63 unreachable: 31 gitignored .tres, 21 live <24h, 11 stranded landable (38-160h)",
+  "N": "57 stranded tools (38-237h), 82 live uncommitted"
+ }
+}
