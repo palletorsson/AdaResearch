@@ -1,66 +1,149 @@
-# From a closed boundary to a visible face
+# Three positions become a face
 
-In [Grid](../Point_Line_Grid/tutorial.md), positions became addresses we could return to. This hall uses that repeatability to make corners meet. Its first question is small: **does closing three edges also make their centre visible?**
+## Learning elements
 
-## Close, look, then fill
+- Three selected array entries
+- A closed boundary and a face
+- Clockwise vertex order
+- A guard for a collapsed triangle
 
-At `triangle_line_puzzle`, fit two edges and look through the opening. Fit the third. The instrument reports a closed boundary; the centre is still unfilled. Press SHOW / HIDE FILL. Compare the coloured face with the retained outline, and walk around it before hiding it again.
+## In the museum
 
-The completed puzzle's fill uses three target positions. This is the actual submission in its script:
+Your drawing has reached Grid as a sculpture. Here, choose three positions from its original record. The triangle tools in this hall show the difference between connecting corners and giving the space between them a surface. We will make that difference with the point and line classes already used.
 
+The saved record still uses the drawing station's local metres. Grid's rounded copy did not replace it. This lesson reads the original archive and creates three temporary PointBody handles at selected entries. It does not save their later edits back to the drawing.
+
+Lines already connected two positions. The new step is to store a connection as a recipe that refers to entries in a position list. Three Vector3 values alone do not instruct Godot to draw a face. We choose which entries belong together and in which order; the same stored position can later belong to several faces.
+
+## Make this study
+
+Start with CORNERS = Vector3i(0, 1, 2). These are **entry numbers**, not spatial coordinates. If those entries lie on one straight segment of your drawing, lift one handle to make a face, or choose another triple in the record. A trace with fewer than three entries needs another visit to Trace.
+
+Attach lesson.gd to an empty Node3D named TriangleStudy in your working copy of this museum hall. Keep its scale at one; its translation places the study without changing the saved local measurements. The existing museum supplies the player, camera, light and XR pickup functions. This program constructs its own handles, edges, face and label.
+
+Carried unchanged from [Lines](../Point_Lines/tutorial.md): `point_body.gd`, `line_skin.gd`. Carried unchanged from [Trace](../Point_Trace/tutorial.md): `trace_archive.gd`.
+
+### The program
+
+<!-- student-code:lesson.gd -->
 ```gdscript
-mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
-for p: Vector3 in target_positions: mesh.surface_add_vertex(p)
-mesh.surface_end()
+extends Node3D
+const PointBody = preload("point_body.gd")
+const FaceBody = preload("face_body.gd")
+const Archive = preload("trace_archive.gd")
+const CORNERS := Vector3i(0, 1, 2)
+var handles: Array[Node3D] = []
+var points: Array[Vector3] = []
+var face := FaceBody.new()
+var message := Label3D.new()
+
+func _ready() -> void:
+    add_child(face)
+    add_child(message)
+    message.position = Vector3(0, 2, 0)
+    message.font_size = 32
+    message.pixel_size = 0.003
+    var drawing := Archive.load_drawing()
+    if drawing == null:
+        message.text = "Return to Trace; draw and release the point."
+        return
+    var record: PackedVector3Array = drawing.get_meta("positions")
+    drawing.free()
+    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:
+        if index < 0 or index >= record.size():
+            message.text = "Choose three indices inside the saved record."
+            return
+    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:
+        var point := PointBody.new()
+        point.position = record[index]
+        add_child(point)
+        handles.append(point)
+
+func _process(_delta: float) -> void:
+    if handles.size() != 3:
+        return
+    var current: Array[Vector3] = []
+    for point in handles:
+        current.append(point.position)
+    if current == points:
+        return
+    points = current
+    if face.show_faces(points, [Vector3i(0, 1, 2)]):
+        message.text = "Three positions; one face."
+    else:
+        message.text = "Separate the corners; lift one off the line."
 ```
 
-The primitive type tells the renderer how to interpret the vertices. Connecting line endpoints and submitting a filled triangle are separate operations. The button is enabled in effect only after the puzzle is complete: pressing it earlier creates no face.
+### Dependency: face_body.gd
 
-Three distinct, non-collinear points determine a unique plane. Move your viewpoint until the face looks narrow. Its projected width can shrink while its area stays fixed. Making the points themselves collinear would be a different change, leaving zero triangle area. The puzzle's material displays both sides; an edge-on view is not proof that a side has been culled.
-
-## Record your own corners
-
-At `draw_triangle_faces`, pick up the drawing point. Hold at each intended corner until a numbered point appears. The held-placement interval is one second, with at least 0.15 metres of travel from the last corner; positions round to a 0.1-metre world grid. Returning within the existing-point snap radius can reuse a point. Make a triangle, returning to the first point to close it.
-
-The instrument separates filled loops from logical triangles. A three-corner loop adds one of each. SHOW / HIDE FILL changes visibility without deleting corners or boundary lines.
-
-Release at the closing corner. The release callback can record that position, but an unheld tool does not continue timed sampling. Existing corner handles remain editable; moving and releasing one stores its new snapped position and rebuilds its faces. This editor can change side lengths; it is not a linkage of rigid rods.
-
-For an independent comparison, release, press NEW OUTLINE and pick up again. Completed faces and their numbered corners remain. START identifies the first point in the new path; it is not a command to clear everything.
-
-## Keep the outline, change its start
-
-Make this simple L in a horizontal plane, clear of the practice triangle so its points do not catch the new corners. Coordinates are metres along two horizontal directions from a chosen origin; hold the height fixed. The labels A–F are our recipe, not labels supplied by the tool.
-
-```text
-A (0.0, 0.0)     B (1.2, 0.0)     C (1.2, 0.4)
-D (0.4, 0.4)     E (0.4, 1.2)     F (0.0, 1.2)
-```
-
-1. Follow A → B → C → D → E → F → A. Inspect the fill.
-2. Release, start a new outline and reuse those six corners in B → C → D → E → F → A → B order.
-3. Keep the boundary direction, positions and height fixed. Check START before closing; look into the missing notch after each fill.
-
-Both routes bound the same region. The fan from B extends into the notch. To locate the decision, read these lines from `_create_triangles_from_path()`:
-
+<!-- student-code:face_body.gd -->
 ```gdscript
-var first_point = placed_points[loop_points[0]]
-for i in range(1, loop_points.size() - 1):
-    var v0 = first_point
-    var v1 = placed_points[loop_points[i]]
-    var v2 = placed_points[loop_points[i + 1]]
+extends Node3D
+## Visible triangular faces and their edges. This class adds no collision.
+const LineSkin = preload("line_skin.gd")
+var surface := MeshInstance3D.new()
+var edges := Node3D.new()
+
+func _init() -> void:
+    add_child(surface)
+    add_child(edges)
+    var paper := StandardMaterial3D.new()
+    paper.albedo_color = Color(0.92, 0.91, 0.87)
+    paper.roughness = 0.75
+    surface.material_override = paper
+
+func show_faces(points: Array[Vector3], faces: Array[Vector3i]) -> bool:
+    surface.mesh = null
+    for edge in edges.get_children():
+        edge.free()
+    if faces.is_empty():
+        return false
+    for face in faces:
+        for index in [face.x, face.y, face.z]:
+            if index < 0 or index >= points.size():
+                return false
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        if (c - a).cross(b - a).length() < 0.00001:
+            return false
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for face in faces:
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        # Godot's front faces use clockwise winding.
+        var normal := (c - a).cross(b - a).normalized()
+        for point in [a, b, c]:
+            builder.set_normal(normal)
+            builder.add_vertex(point)
+        for pair in [[a, b], [b, c], [c, a]]:
+            var edge := LineSkin.new()
+            edge.material_override.albedo_color = Color(0.04, 0.04, 0.045)
+            edges.add_child(edge)
+            var difference: Vector3 = pair[1] - pair[0]
+            edge.show_segment(pair[0], difference, difference.length())
+    surface.mesh = builder.commit()
+    return true
 ```
 
-The following code submits each triple as a triangle, with normals, colour and a reversed copy. Here the important choice is which indices share `first_point`. From B, the logical triangles are BCD, BDE, BEF and BFA. Some cross the region you left open.
+## Read the construction
 
-For `n` corners, this loop makes `n - 2` logical triangles. Both Ls together add two loops and eight triangles. If you kept the first practice triangle and made no extra loops, the total becomes three loops and nine triangles. Hiding a fill does not subtract it from the counter.
+`record[index]` reads one saved position. `PointBody.new()` gives it the same visible, pickable body you already know. The three handles can move independently; their current local positions form a short array.
 
-A first-vertex fan fills a convex planar polygon. Some concave polygons also admit this fan from a suitable vertex. The failure is not “concave means impossible”; it is a particular method applied from a particular start. The artifact does not check coplanarity, self-intersections or whether the fan stays inside an intended polygon.
+`Vector3i(0, 1, 2)` tells FaceBody which three entries to visit, in order. Its renderer adds three edges and a triangular surface. The points specify **where**; the triple specifies **how they connect**. This is a face recipe, not another set of positions.
 
-## Carry a distinction to the next room
+Order matters. Godot treats clockwise vertices, viewed from the front, as a front face. Walk around the triangle: this example keeps normal back-face culling. Reversing the triple to `Vector3i(0, 2, 1)` reverses the front. The outline remains visible from either side.
 
-Explain the overspill by pointing to one emitted triangle. Then choose what you would preserve: the outline, this filling method or the unexpected surface as material for another work. A new use is possible without changing code; a different filling algorithm would require an implementation change.
+Three collinear positions enclose no area. FaceBody checks the cross-product magnitude before submitting vertices and clears the previous face when the triangle collapses. The cross product is supplied here as the area-and-normal calculation; vector products return in Forces. The small threshold also rejects nearly collapsed triangles. The helper creates visible geometry, not a physical barrier.
 
-The [secondary studies](detours.md) extend this into shared edges, folds, symbols and measurement. We can return to them. [Polyhedra](../Primitives_Polythedra/tutorial.md) asks what faces need to enclose a volume. Three faces meeting at a corner still leave an opening; a tetrahedron needs four triangular faces.
+## Make it your own
 
-Source details and validation limits are in [technical.md](technical.md) and [encounter-reference.md](encounter-reference.md).
+Choose another three saved entries. Make a valid face, flatten it until it disappears, then restore it. Reverse the order and explain which side is now the front. Keep the original saved drawing unchanged.
+
+Carry forward the position array, its ordered face recipe, and FaceBody. The next hall adds a fourth position and asks whether several faces can enclose a volume.
+
+Godot documents clockwise front faces and ordered vertex submission in [SurfaceTool](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html).
+
+[Current lesson.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Triangle_Context/lesson.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)

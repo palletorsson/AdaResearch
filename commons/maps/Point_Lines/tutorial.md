@@ -1,64 +1,210 @@
-# Point Lines — keep two ends in relation
+# Point Lines — what can two lines do?
 
-In the black box, take one endpoint. The other stays where it is. Between them, the pale segment turns and changes length. The number on the wall follows.
+**Learning elements**
 
-Coordinates gave us two positions in the same frame. Here we use them together. Day Zero has already supplied the running project; Point One supplied the visible markers. The new work is a relation between their positions.
+- Endpoints and a segment
+- Displacement and distance
+- A class and its instances
+- Parallel, cross and X
+- Position in depth
 
-## Two positions, one distance
+Take one end of the line in the black room. The other stays. The span turns and changes length. We will make that relation using the point from Coordinates, then arrange two lines into parallel marks, a plus and an X.
 
-Open the supplied [line study](../../../doc/book/studies/point-lines/README.md). It contains A, B, a thin cylinder and a readout. This is a small desktop construction study. The museum keeps the XR pickup we borrowed in Coordinates; this download does not include that player.
+## Keep the point; give it another end
 
-In `line.gd`, A starts at `(-0.75, 1.12, 0.0)` and B at `(0.75, 1.12, 0.0)`. Their height and depth agree. Only X differs.
+Continue from your working [Coordinates script](../Point_Coordinates/tutorial.md). Save `point_body.gd`, `line.gd` and `line_skin.gd` together. All three files are printed below; only the drawing helper is supplied. On your existing `PointStudy` node, replace the attached `point.gd` with `line.gd`. Keep `point.gd` as the previous working version. The prepared museum supplies the room, light and configured XR hands.
 
+Keep `PointStudy` at scale `(1, 1, 1)`. With this scale, our measured units remain metres.
+
+## Give the familiar point a class — point_body.gd
+
+We have already built a sphere with a matching boundary and made it pickable. Move those instructions into `point_body.gd`. A class gives us a repeatable construction: each call to `PointBody.new()` makes a separate point.
+
+<!-- student-code:point_body.gd -->
 ```gdscript
-var displacement := b - a
-var distance := displacement.length()
+extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -> void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
 ```
 
-Subtract the start from the end: the displacement is `(1.5, 0, 0)`. Its length is `1.5`. We use one scene unit as one metre. Change B's X to `0.25`. The distance becomes one metre. You have changed one endpoint; the line and readout agree without editing either of them.
+`extends XRToolsPickable` keeps the pickup behaviour supplied by XR Tools. Our class adds the sphere, its collider and the settings chosen in Coordinates. Inside this file, `add_child(surface)` attaches the surface to this point; there is no outer `point.` prefix.
 
-## Turn without lengthening
+`_init()` runs when we call `.new()`. It builds the point before the lesson adds it to the scene. We leave XR Tools' `_ready()` in place.
 
-Keep A at its original position. Give B the position `Vector3(-0.75, 2.62, 0.0)`. The segment now stands upright. Its length is still 1.5 metres. Return B to its first position, then change its Z component instead. You have moved out of the first plane.
+## The complete continuation — line.gd
 
-Reverse the subtraction to `a - b`. The direction reverses; the length does not. A distance alone cannot tell us which end we chose as the start.
+This smaller lesson places two instances and reads their relation each frame. The coordinate readout stays here.
 
-## Read again as the endpoints move
-
-Here is the complete lesson script in the download:
-
+<!-- student-code:line.gd -->
 ```gdscript
 extends Node3D
 
+const CENTRE := Vector3(0, 1.12, 0)
+
+const PointBody = preload("point_body.gd")
+
+const LineSkin = preload("line_skin.gd")
+
+var point: XRToolsPickable
+var readout: Label3D
+var point_b: XRToolsPickable
+var line: MeshInstance3D
+var distance := 0.0
+
 func _ready() -> void:
-    $A.position = Vector3(-0.75, 1.12, 0.0)
-    $B.position = Vector3(0.75, 1.12, 0.0)
+    point = PointBody.new()
+    point.position = CENTRE
+    add_child(point)
+
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.6, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.005
+    add_child(readout)
+
+    point_b = PointBody.new()
+    point_b.position = CENTRE + Vector3(1.0, 0, 0)
+    add_child(point_b)
+
+    line = LineSkin.new()
+    add_child(line)
 
 func _process(_delta: float) -> void:
-    var a: Vector3 = $A.position
-    var b: Vector3 = $B.position
+    var world_position := point.global_position
+    var local_position := to_local(world_position)
+    readout.text = "LOCAL " + str(local_position) + "\nWORLD " + str(world_position)
+
+    var a := local_position
+    var b := to_local(point_b.global_position)
     var displacement := b - a
-    var distance := displacement.length()
-    $Segment.show_between(a, b)
-    $Readout.text = "%.2f m" % distance
+    distance = displacement.length()
+    line.show_segment(a, displacement, distance)
+    readout.text += "\nDISTANCE " + str(distance)
 ```
 
-`_ready()` places the two markers once. `_process()` reads their positions again each frame. While running in the editor, use the Remote scene tree to change B's position: both the segment and the number follow. This borrows the editor as our moving hand. In the museum, the grab system moves the endpoint instead. The relation needs the positions, whichever tool changes them.
+Run it. Two equal points begin one metre apart. Carry either one: the pink segment follows, and DISTANCE changes. Release it: the endpoint stays where you left it.
 
-`show_between()` is our supplied drawing helper, in `segment.gd`. It places the cylinder halfway between A and B, gives it their distance as its height, then turns its long axis towards B. Its thickness is a choice made for visibility. If both ends coincide, the helper hides the cylinder rather than trying to point it in an undefined direction. Its rotation code can stay borrowed for now.
+## One class, two instances
 
-`%.2f` rounds the readout to two decimal places. The underlying positions keep more precision. A hand can move without changing the displayed number.
+`preload("point_body.gd")` loads our script class and gives it the local name `PointBody`. Calling `.new()` twice makes two instances. They share the construction and inherited pickup behaviour; each has its own position, surface and collider. Carry A, then B. Moving one must leave the other where you put it.
 
-## A connection can do something else
+`point` is our first endpoint, A. `point_b` is B. The references live outside `_ready()`, so `_process()` can read them too. `preload("line_skin.gd")` loads the drawing helper printed below; `LineSkin.new()` creates its visible segment.
 
-The next museum encounter asks **CAN YOU CONNECT THE DOTS?** Bring the points close and release. Their connection draws a line and breaks the nearby **DO NOT CROSS** barrier. The passage opens because an additional instruction connects those events. Distance alone cannot decide whether you are allowed through.
+The class holds what makes this a pickable point. The station holds what makes these two points a line.
 
-The hammer and laser use the same reversible break response. The laser reads the first body its ray reaches; holding its beam on a study for 1.2 seconds breaks that study. Eight seconds later it returns. We leave that pickup, collision and reset machinery in the supplied museum. Implementing it is not a prerequisite for making our first segment.
+Coordinates already produced `local_position` for the first point. Here `a` keeps that value. `to_local(point_b.global_position)` expresses B in the same `PointStudy` frame. Now we can subtract like from like.
 
-## What have the two ends left out?
+`b - a` is the displacement from A to B: initially `(1, 0, 0)`. Its `.length()` returns `1.0`. The displacement holds direction and length; the distance holds length alone. The final `+=` adds a DISTANCE line to the coordinate text written earlier in that frame.
 
-Walk the black stripe, then take a detour. Compare the recorded trail with the straight line. The same starting and ending positions give the same displacement, however you travel between them. Our script replaces its reading every frame. It keeps no journey.
+Each frame reads the bodies again; the line remains a relation between their current positions.
 
-In the open room, two lines can make a plus or a cross; moving one away from the other reveals the depth hidden by the first view. In the exit corridor, those signs have been given different consequences: × damages, + restores. Their meanings are attachments to their geometry.
+Change B's starting offset from `Vector3(1.0, 0, 0)` to `Vector3(0, 1.0, 0)`. Predict the distance, then run. The line stands upright and keeps its length. Restore the original offset.
 
-Keep the two positions, subtraction, length and the supplied segment renderer. In Trace, we will begin keeping the positions in between.
+Try `a - b` instead of `b - a`. The distance stays the same, but the cylinder now points the opposite way from A and misses B. Subtraction has an order. Restore `b - a`.
+
+## The supplied drawing code — line_skin.gd
+
+A mathematical line has no thickness. Our example joins two endpoints into a finite segment; this helper gives that segment a surface. It supplies no collider or pickup behaviour.
+
+It places the cylinder halfway between the ends and turns its long axis along their displacement. The orientation calculation is supplied for now; basis vectors are not a prerequisite for this lesson.
+
+<!-- student-code:line_skin.gd -->
+```gdscript
+# Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -> void:
+	var cylinder := CylinderMesh.new()
+	cylinder.top_radius = 0.012
+	cylinder.bottom_radius = 0.012
+	cylinder.radial_segments = 16
+	cylinder.rings = 0
+	mesh = cylinder
+	var finish := StandardMaterial3D.new()
+	finish.albedo_color = Color(0.98, 0.70, 0.82)
+	finish.roughness = 0.3
+	material_override = finish
+	visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -> void:
+	# A zero-length segment has no direction. Do not normalize it.
+	visible = distance > 0.0001
+	if not visible:
+		return
+	(mesh as CylinderMesh).height = distance
+	position = start + displacement * 0.5
+	# CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+	var direction := displacement / distance
+	var right := direction.cross(Vector3.UP).normalized()
+	if right.length() < 0.001:
+		right = Vector3.RIGHT
+	var depth := right.cross(direction).normalized()
+	basis = Basis(right, direction, depth)
+```
+
+## What can two lines do?
+
+Look at the parallel planks, the plus and the X in the hall. A second segment gives us something to arrange in relation to the first. Add this block in `_ready()`, immediately after `add_child(line)`:
+
+<!-- student-code:two-lines-plus -->
+```gdscript
+    point.position = Vector3(-0.6, 1.42, 0)
+    point_b.position = Vector3(0.6, 1.42, 0)
+    var c := Vector3(0, 0.82, 0)
+    var d := Vector3(0, 2.02, 0)
+    var other_line := LineSkin.new()
+    add_child(other_line)
+    other_line.show_segment(c, d - c, (d - c).length())
+```
+
+This makes a plus. A and B still belong to held bodies. C and D are position values: we have given them no spheres or pickup bodies. The second segment is drawn once in `_ready()` and stays while you move the first. An endpoint can define a relation without becoming a separate object we can grab.
+
+Change those four assignments to try another arrangement. A means `point.position`; B means `point_b.position`. C and D are the two vector values. All use the same station frame.
+
+| Arrangement | A | B | C | D |
+|---|---|---|---|---|
+| Parallel | (-0.6, 1.12, 0) | (0.6, 1.12, 0) | (-0.6, 1.62, 0) | (0.6, 1.62, 0) |
+| Plus | (-0.6, 1.42, 0) | (0.6, 1.42, 0) | (0, 0.82, 0) | (0, 2.02, 0) |
+| X | (-0.6, 0.82, 0) | (0.6, 2.02, 0) | (-0.6, 2.02, 0) | (0.6, 0.82, 0) |
+
+Make an X. Then set the Z component of both C and D to `0.2`. Viewed straight on, the lines can still look crossed. Step sideways: they occupy different depths. No shared vertex has been created where the drawings cross. We still have four endpoints and two relations.
+
+Choose an arrangement of your own. Predict which endpoints need to move, then make it. Can you keep both lengths while changing what the pair suggests?
+
+## What the line keeps
+
+Return to the one-line version. Replace `CENTRE + Vector3(1.0, 0, 0)` with `CENTRE` for B's initial position. Both ends now occupy the same place: displacement and distance are zero. The helper hides spans of `0.0001` units or less; it cannot orient a segment with no direction.
+
+Restore the offset. Carry B around a detour and return it to its starting place. The line returns to the same span. It has kept no journey.
+
+Keep `point_body.gd`, `line.gd` and `line_skin.gd`. Trace will keep more positions, in order, so that a detour can remain.
+
+
+Class reference: [GDScript classes and constructors](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#class-constructor).
+
+[Current line.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Lines/line.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)
+
+[Complete experiment: line_reversed.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Lines/line_reversed.gd)

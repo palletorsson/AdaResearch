@@ -1,87 +1,86 @@
-# Enclose a region, then meet a body
+# Four positions enclose a body
 
-Triangle separated closing a loop from drawing its face. This hall follows faces into an open corner, a closed surface and a route through the room. The next hall, Point_Animatedcube, makes the construction of a cube available for inspection.
+## Learning elements
 
-## Inspect the opening
+- Shared vertices
+- A list of face-index triples
+- Tetrahedron connectivity
+- Surface enclosure versus collision
 
-Turn `grab_trihedron`. Count three faces sharing an apex and locate the missing base. Compare `grab_tetrahedron`, whose fourth face completes a closed surface. The regular tetrahedron has different proportions from the open corner; the comparison concerns closure, not a live before/after button.
+## In the museum
 
-The trihedron's actual face indices are:
+A tetrahedron is the smallest closed body made entirely of triangular faces. The museum's polyhedra let you encounter a surface from outside and imagine the volume it encloses. Our construction begins with the same three saved entries used for Triangle and adds one point behind their face.
 
+This lesson reloads the original Trace record. Moving a temporary Triangle handle did not change that file. Use the same CORNERS triple you selected there; the number of stored drawing entries determines which indices are available.
+
+## Make this study
+
+Attach lesson.gd to a unit-scale Node3D named PolyhedronStudy in this hall's working copy. Copy FaceBody, LineSkin and TraceArchive alongside it. No replacement camera, player or room is required.
+
+The body uses a two-sided material so that removing a face lets you see the remaining surfaces from inside. Their winding still defines a front, as in Triangle; this display choice does not add volume or collision.
+
+Carried unchanged from [Lines](../Point_Lines/tutorial.md): `line_skin.gd`. Carried unchanged from [Trace](../Point_Trace/tutorial.md): `trace_archive.gd`. Carried unchanged from [Triangle](../Point_Triangle_Context/tutorial.md): `face_body.gd`.
+
+### The program
+
+<!-- student-code:lesson.gd -->
 ```gdscript
-[0, 1, 2]
-[0, 2, 3]
-[0, 3, 1]
+extends Node3D
+const Archive = preload("trace_archive.gd")
+const FaceBody = preload("face_body.gd")
+const CORNERS := Vector3i(0, 1, 2)
+const DEPTH := 0.6
+var points: Array[Vector3] = []
+var faces: Array[Vector3i] = [
+    Vector3i(0, 1, 2), Vector3i(0, 3, 1),
+    Vector3i(1, 3, 2), Vector3i(2, 3, 0)]
+var body := FaceBody.new()
+var message := Label3D.new()
+
+func _ready() -> void:
+    body.surface.material_override.cull_mode = BaseMaterial3D.CULL_DISABLED
+    add_child(body)
+    add_child(message)
+    message.position = Vector3(0, 2, 0)
+    message.pixel_size = 0.003
+    var drawing := Archive.load_drawing()
+    if drawing == null:
+        message.text = "Bring a drawing from Trace."
+        return
+    var record: PackedVector3Array = drawing.get_meta("positions")
+    drawing.free()
+    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:
+        if index < 0 or index >= record.size():
+            message.text = "Choose three saved indices."
+            return
+    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:
+        points.append(record[index])
+    var normal := (points[2] - points[0]).cross(points[1] - points[0])
+    if normal.length() < 0.00001 or DEPTH <= 0.0:
+        message.text = "Use a valid triangle and a positive depth."
+        return
+    var centre := (points[0] + points[1] + points[2]) / 3.0
+    points.append(centre - normal.normalized() * DEPTH)
+    body.show_faces(points, faces)
+    message.text = "%d positions; %d faces." % [points.size(), faces.size()]
 ```
 
-Its renderer emits those faces. Separately, the script gives its collision shape all four positions:
+## Read the construction
 
-```gdscript
-var convex_shape = ConvexPolygonShape3D.new()
-convex_shape.points = geometry["vertices"]
-collision_shape.shape = convex_shape
-```
+`points` holds four positions. `faces` holds four **triples of indices into points**. In `Vector3i(0, 3, 1)`, the renderer reads entries zero, three and one; it does not create three new independent corners.
 
-The hull includes the missing base. This is a reason to distinguish visible opening and physical passage. A test must identify a colliding body and its layers; the behavior of an unconstrained tracked hand cannot settle that question.
+The fourth position starts at the base triangle's centre and moves DEPTH metres behind its front. Using the base normal means the apex remains off the base plane whichever way the saved triangle faces. A zero-area base cannot define that normal; the guard stops before normalizing it. DEPTH must be positive.
 
-## Carry the comparison into the room
+Each of the tetrahedron's six edges belongs to exactly two faces. Adjacent faces traverse their common edge in opposite directions, keeping their fronts outside. The renderer reads the same position again wherever its index occurs. For flat lighting it submits separate render vertices per face, but the construction still has four shared positions.
 
-At `prism_block`, compare the whole block, quartered version and shell. Each is a placed configuration. Changing the visible grain leaves the original static collision surface. There is no visitor grain selector here.
+Change `points[3]`, then call `body.show_faces(points, faces)` again. Three faces move with that one entry. Editing an index changes a connection instead. A closed mesh is still only a visible surface: this program adds no collision shape.
 
-Try the utility wedges from the low end. Their rise and run are scaled by the museum builder, but successful ascent also needs connected floors and suitable movement settings. Compare with approaching an upright face. Report a failed join as a failed join.
+## Make it your own
 
-Follow the concrete enclosure's outside edge. Its striped material and extruded profile make a visible boundary; `#blocking:1` supplies a physical one. Then read STOP and the arrows. Those sign scenes contain no collision object. Ask where a pause began, and inspect a suggested route before trusting it.
+Replace the selected base with another valid triple, then halve DEPTH. Check that all four faces remain and that the apex is still off the base plane. Explain why a fifth copied point would not automatically become part of the enclosure.
 
-We can now distinguish a surface's enclosure, a body's collision and a reader's response to a sign. All participate in this room, with different rules. The [technical reference](technical.md) unfolds the source and calculations behind the comparison.
+Carry the separation between positions and connectivity into Cube. A longer face list will reuse the same renderer.
 
-## Return visits
+Godot documents clockwise front faces and ordered vertex submission in [SurfaceTool](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html).
 
-These works remain in their original positions. Choose a question; their secondary role does not make them disposable.
-
-### Barrier and sign: stay with the arrangement
-
-The first passage touches these briefly. To continue, follow the stepped end profile of `concrete_barrier` and compare it with the bare prism. Both use a cross-section carried along a length; their profiles differ. The technical reference shows the actual extrusion code.
-
-At `street_sign`, find ahead, left, right and both ways. Stand where one becomes legible, then inspect its route. The rectangular shaft and triangular head form a geometric mark; the mark does not check the floor. Choose one pause you would preserve, one arrow you would turn or one barrier you would move. Whose movement would change? The installed fixtures remain fixed, so distinguish a proposal from an available grab control.
-
-The critical text develops continuity, division and the question of who benefits from an arrangement. This later reading does not require deciding that barriers are intrinsically oppressive or that every opening is beneficial.
-
-### Pyramid: change a corner
-
-At `pyramid_edit`, find the apex handle and four base handles. Keep the base still and raise the apex. Predict which faces change before lowering it again. Then change a base corner. The placed editor allows independent movement; its other constraint modes are source configuration options, not promised buttons.
-
-A crossing or collapsed set of faces can outlive the name we gave it. The editor updates positions without certifying every result as an enclosed pyramid. A changed apex can still make a perfectly valid pyramid. The question is which relations remain, not how far the handle moved.
-
-Source: [pyramid_edit.gd](../../primitives/pyramid/pyramid_edit.gd).
-
-### Cube: count and compare
-
-At `cube_scene`, count eight vertices, twelve edges and six geometric square faces. Compare the tetrahedron's four, six and four. Both give `V - E + F = 2`. Be explicit about whether you count square faces or rendering triangles: introducing a face diagonal adds an edge as well as a face.
-
-The technical reference keeps this calculation and angular defect. Neither measures volume. These are useful questions to revisit after the small enclosure lesson, without requiring the visitor to learn every invariant before leaving.
-
-### Diamonds: a relation repeated
-
-Follow how successive units turn along the stack. The configured default accumulates an angle from one unit to the next. Distinguish the shape of a unit from the rule arranging several. The source offers fixed, alternating and accelerating arrangements too; this room does not supply a switch between them. Those would make a comparison for a later iteration.
-
-Source: [diamonds.gd](../../primitives/combines/diamonds.gd).
-
-### Rocks: a boundary between neighbours
-
-The `rock_spawner` placement requests thirty irregular rocks. Look for gaps between their boundaries. Shape, arrangement, gravity and collision all contribute to the pile. Irregularity does not by itself establish that no denser packing is possible. The existing wall phrase “thirty rocks that never pack” is an invitation to investigate, not a mathematical result.
-
-Source: [RockSpawner.gd](../../primitives/rockfactory/RockSpawner.gd).
-
-### Scanner: what would a section retain?
-
-At `rock_scanner`, watch the cyan plane move through its height range. Predict how a cut through a rock would change as the height changes. The current scene moves the plane and its thin collision box. Its own ready/process path does not call the separate display-creation and cross-section-update functions, so do not expect an active measured contour display.
-
-The unused display code is also an approximation, not a mesh-intersection algorithm. A future comparison should hold one rock still, expose the cut height, and distinguish its geometric intersection from any approximation. The plane currently has a collider, so a later slicing experiment must decide whether the instrument should also move the objects it is meant to examine.
-
-Source: [RockScanner.gd](../../primitives/rockfactory/RockScanner.gd).
-
-### Other systems and a request
-
-`interactive_point_origin_force` and `becoming_catalyst` retain a route toward acting on other bodies. `path_watchdog` and `path_game_controller` retain the older path-game layer. They are not prerequisites for this geometric walk, and their presence alone does not demonstrate an active path game in the endless museum. Inspect their integration before giving visitors a challenge that depends on it.
-
-The `if_not_exist_create` marker requests a primitive gallery. It records work still to make. Two traffic cones remain part of the room's directional vocabulary. None of these has been removed to narrow the book.
+[Current lesson.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Primitives_Polythedra/lesson.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)

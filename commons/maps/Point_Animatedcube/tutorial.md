@@ -1,99 +1,86 @@
-# Follow a corner through the cube
+# Eight corners, twelve triangles
 
-The small experiment is this: move one vertex and find which surfaces must follow. This room builds on the triangle hall's three positions per face and the polyhedra hall's distinction between a visible boundary and a physical obstacle.
+## Learning elements
 
-## Begin with connections
+- A reusable CubeBody class
+- Shared corner data
+- Two triangles per square side
+- Connectivity versus object position
 
-At `cube_lines`, follow the three edges meeting at one corner. The complete outline shows twelve edges. Faces are not needed for you to recognise the cube, although its wire outline has not closed a surface around an interior.
+## In the museum
 
-The builder stores two kinds of information separately: where the vertices are, and which ones form edges or triangle patches. A list of positions by itself is not a surface.
+The cube appears simple enough to arrive ready-made. The diagonal study in this hall exposes a decision hidden by that familiar outline: a square surface is represented here by two triangles. Build one cube, then a second with the other diagonal on its front side.
 
-## Replay before editing
+We keep FaceBody from the preceding halls. CubeBody adds a particular set of eight positions and twelve index triples. It is the cube we can carry into Transformation and Arrays.
 
-Both `animatedcubebuilder` placements have the discovery instrument. Keep one unchanged so you have a reference.
+## Make this study
 
-| Control | What it does here |
-| --- | --- |
-| REPLAY | Hides and reveals corners, edges and patches using the current vertex positions. |
-| PAUSE / RESUME | Stops or resumes this builder's assembly steps. Replay first if assembly has finished. |
-| RESTORE CUBE | Returns the eight initial corner positions and shows the completed cube. |
-| DIAGONALS | Shows or hides six face diagonals after assembly completes. |
+Attach lesson.gd to an empty unit-scale Node3D named CubeStudy in the museum hall. CubeBody constructs its visible mesh itself. The placements in lesson.gd leave room between two one-metre cubes; they do not alter their local vertex data.
 
-Replay the builder and pause when the shape becomes recognisable. Resume and let it finish. Corner handles can be picked up after completion; they are disabled during assembly. Release a held corner before using replay or restore.
+Carried unchanged from [Lines](../Point_Lines/tutorial.md): `line_skin.gd`. Carried unchanged from [Triangle](../Point_Triangle_Context/tutorial.md): `face_body.gd`.
 
-The source constructs the hidden geometry at setup. Its timed steps change visibility. This is not the same operation as translating a finished cube across the room. Pausing this sequence does not stop the room clock or the neighbouring net.
+### The program
 
-## Make the seam visible
-
-Find the face containing `v4`, `v5`, `v6` and `v7`. Before moving anything, trace its boundary and predict what will follow `v6`. Pull that corner a little out of the face's plane, leaving the others unchanged. Look for a crease, then use DIAGONALS to check it.
-
-The two triangle entries for that face are:
-
+<!-- student-code:lesson.gd -->
 ```gdscript
-[4, 5, 7]
-[5, 6, 7]
+extends Node3D
+const CubeBody = preload("cube_body.gd")
+var first := CubeBody.new()
+var second := CubeBody.new()
+
+func _ready() -> void:
+    first.position = Vector3(-0.7, 0.7, 0)
+    second.position = Vector3(0.7, 0.7, 0)
+    add_child(first)
+    add_child(second)
+    second.other_diagonal()
 ```
 
-The numbers are indices into the builder's vertex list. Both triangles use vertices 5 and 7, so that pair forms their common edge. Only the second triangle uses vertex 6. Moving it out of the original plane tilts that triangle while the other remains in place. Moving it only within the plane would not demonstrate this crease.
+### Dependency: cube_body.gd
 
-The update reads a changed handle position into the stored geometry:
-
+<!-- student-code:cube_body.gd -->
 ```gdscript
-vertices[i] = handle_nodes[i].position / cube_size
+extends "face_body.gd"
+# Eight shared positions; each triple addresses three entries.
+var points: Array[Vector3] = [
+    Vector3(-0.5, 0, -0.5), Vector3(0.5, 0, -0.5),
+    Vector3(0.5, 1, -0.5), Vector3(-0.5, 1, -0.5),
+    Vector3(-0.5, 0, 0.5), Vector3(0.5, 0, 0.5),
+    Vector3(0.5, 1, 0.5), Vector3(-0.5, 1, 0.5)]
+var faces: Array[Vector3i] = [
+    Vector3i(4, 7, 5), Vector3i(5, 7, 6),
+    Vector3i(0, 4, 1), Vector3i(1, 4, 5),
+    Vector3i(2, 6, 3), Vector3i(3, 6, 7),
+    Vector3i(1, 2, 0), Vector3i(0, 2, 3),
+    Vector3i(0, 3, 4), Vector3i(4, 3, 7),
+    Vector3i(5, 6, 1), Vector3i(1, 6, 2)]
+
+func _init() -> void:
+    super()
+    show_faces(points, faces)
+
+func other_diagonal() -> void:
+    faces[0] = Vector3i(4, 6, 5)
+    faces[1] = Vector3i(4, 7, 6)
+    show_faces(points, faces)
 ```
 
-`i` identifies the handle and its corresponding vertex. `position` is local to the builder; dividing by `cube_size` converts it back to the builder's stored coordinates. The edges and patches are rebuilt from those coordinates using the same connection lists.
+## Read the construction
 
-Release the handle. Predict what REPLAY will show, then test it. Predict what RESTORE CUBE will change, then test that. One repeats the presentation; the other restores the original coordinates.
+CubeBody extends FaceBody, so it inherits the face renderer. Its `_init()` first calls `super()` to attach the parent's surface and edge container, then calls the renderer with this cube's recipe. Each call to `CubeBody.new()` creates a new object with its own position array, face array and mesh.
 
-## Compare a different operation
+The corners use x and z values of −0.5 or 0.5 and y values of zero or one. The first two triples cover the positive-z side. `other_diagonal()` changes those two triples, keeping the four corner positions fixed. The black internal line moves to the other diagonal; the square's boundary and area stay the same.
 
-At `polyhedron_nets_cube`, follow one square as the net folds and unfolds. Each square remains rigid. The program changes hinge angles through `fold_progress`. The room has one net placement using the default cross configuration and `loop_fold:true`; the source's other net configurations are not additional displays here.
+Node position and vertex position do different jobs. `second.position` places the whole cube in the study. `second.points[6] += Vector3(0, 0, 0.35)` changes one local corner; call `second.show_faces(second.points, second.faces)` afterward to redraw it. Every face using entry six changes. A formerly square side can become two angled planes, making the diagonal matter to the surface itself.
 
-In your edited builder a corner moved relative to its neighbours. In the net, an entire face rotates around a hinge. Use this difference to explain why one square creased and the other stayed flat.
+These cubes have visible edges and faces, without colliders.
 
-The detailed timing, triangle counts and folding code are in the [technical chapter](/book?map=Point_Animatedcube&section=technical). More general position, rotation and scale experiments belong to the transformation sequence.
+## Make it your own
 
-## Recognise the room that carries you
+Make a third CubeBody and place it somewhere else. Change one corner on that instance and redraw it. Verify that the first two cubes keep their shapes. Then explain the difference between moving a body and editing the data from which it is made.
 
-After comparing the builder and the folding net, look at the museum floor and walls. Follow the box form from an exhibit into the surrounding structure. In the endless museum, floor slabs and wall blocks use scaled box meshes, with separate box-shaped collision geometry. The editable builder offers corner handles; the architecture participates in the movement of the visitor's body.
+Keep CubeBody. The next hall asks whether a short rule can generate a position list that we have so far written out.
 
-Compare a crate's planks and reinforcing strips with the builder's triangle pairs. Six geometric faces do not prescribe one mesh budget. A detailed box-shaped prefab can contain many pieces and many more triangles while remaining recognisable as a box.
+Godot documents clockwise front faces and ordered vertex submission in [SurfaceTool](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html).
 
-This recognition belongs to the main walk. Composing new arrangements can develop later. For now, connect the object you are examining with the construction you are already inside. The [technical chapter](/book?map=Point_Animatedcube&section=technical) follows the shared box mesh and its separate colliders in the museum source.
-
-## Return visits
-
-These comparisons remain in the room. Choose one if it helps the question you are following; none is an additional requirement for finishing the main walk.
-
-### A world without composition yet
-
-Read the pallet's **A WORLD / WITHOUT / COMPOSITION**, the supply pile's **WITHOUT COMPOSITION / YET**, and the single crate's **YET**. Their arrangement already composes a scene. The admission concerns what we have learned to choose and examine so far.
-
-Compare the pallet, supply pile and two `station_crates` placements as arrangements. Which box seems accessible, protected, ready to move or forgotten? Identify the position, spacing or surrounding object that produces your reading. The box shape alone cannot account for all of it.
-
-Compare a detailed crate with the bare builder. Both may be recognisable as boxes, but that resemblance does not require an identical mesh or triangle budget. The [technical chapter](/book?map=Point_Animatedcube&section=technical) counts the builder's particular representation; it does not assign that count to every crate.
-
-### The glove between bodies
-
-The single-glove chamber offers a different encounter with an enclosure. A glove stands between an imagined worker and the contents. Compare the kind of access its design suggests with the exposed handles on the cube. This is a comparison of represented access; the glove is not an additional working sculpting control.
-
-### A shadow with a setting
-
-In `first_shadow`, compare the turning triangle with the thin line beside it. Then inspect `_build_line()` in its source. The line is a narrow cylinder, and its `cast_shadow` setting is explicitly OFF. The triangle's is ON.
-
-The missing line shadow therefore cannot establish that every line lacks a shadow because it has no area. This rendered line has thickness, and the program has disabled its shadow. The comparison exposes a setting as well as a shape. A later experiment could change that setting while keeping the same geometry; no switch for it is installed here.
-
-### The point returns through an instrument
-
-The dark glass of `first_phosphor` carries a green dot. Follow its repeating light and fading glow. The program changes material emission over time; this is a representation of a phosphor display, not an electron-beam simulation. What was added to make the point visible, and what does that addition let you notice?
-
-### Another neighbour list
-
-The nearby pyramid is configured `#base_sides:8`. Follow its apex connections and compare them with the three cube edges meeting at a corner. Its different pattern of neighbours provides a comparison for the builder, whose edits keep the old connections. The pyramid has no matching corner-editing instrument here.
-
-The floating sphere field remains decoration. Its presence need not become another compulsory lesson before the next room's investigation of the sphere.
-
-## For a second pass
-
-The existing instruments support deformation and comparison. They do not validate an enclosure, save a collection of altered forms or make the surface into walkable collision geometry. Keep those possible developments distinct from actions available now. A headset visit still needs to check reach and sightlines between the two builders and the net.
+[Current lesson.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Animatedcube/lesson.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)

@@ -1,47 +1,71 @@
-# Primitives Melencolia
+# Arrange what you can already make
 
-The current lesson begins with the geometric court and ends at the Dürer tableau. The walkable prose is in `final.md`; these notes connect its observations to the shipped implementation.
+## Learning elements
 
-## First recognise, then compare
+- Composition with known classes
+- Independent instances
+- Placement versus construction
+- Reusing a learned capability
 
-Circle the four corner pyramids. Predict whether their vertex, edge and face counts change when you move. Take the side ramp onto their platform and compare the central spire.
+## In the museum
 
-A square pyramid has five geometric vertices, eight edges and five faces. In `commons/primitives/pyramid/pyramidlong.gd`, `create_pyramid_vertices()` builds four corners on the XZ plane and adds the apex:
+Dürer's objects gather in the museum's Melencolia hall. Our tutorial closes this sequence with a smaller task: make an arrangement from two instances of your cube and the familiar sphere point. The reflective text can ask what geometry promises; the tutorial gives you enough control to make an arrangement of your own.
 
+There is no new mesh recipe here. Keep CubeBody from Cube and PointBody from the earlier point lessons.
+
+## Make this study
+
+Attach lesson.gd to a unit-scale Node3D named ArrangementStudy in this hall's working copy. Place that study at floor level. The cube's local bottom is y = 0; the sphere's centre is one radius above the floor. PointBody retains pickup and frozen release; the cubes remain visible mesh objects without colliders.
+
+Carried unchanged from [Lines](../Point_Lines/tutorial.md): `point_body.gd`, `line_skin.gd`. Carried unchanged from [Triangle](../Point_Triangle_Context/tutorial.md): `face_body.gd`. Carried unchanged from [Cube](../Point_Animatedcube/tutorial.md): `cube_body.gd`.
+
+### The program
+
+<!-- student-code:lesson.gd -->
 ```gdscript
-vertices.append_array(ring)
-vertices.append(_apex_position(ring))
+extends Node3D
+const CubeBody = preload("cube_body.gd")
+const PointBody = preload("point_body.gd")
+var places: Array[Vector3] = [Vector3(-0.8, 0, 0), Vector3(0.5, 0, -0.7)]
+var cubes: Array[Node3D] = []
+var point := PointBody.new()
+
+func _ready() -> void:
+    for place in places:
+        var cube := CubeBody.new()
+        cube.position = place
+        add_child(cube)
+        cubes.append(cube)
+    point.position = Vector3(0.1, PointBody.RADIUS, 0.6)
+    add_child(point)
 ```
 
-The default base is 0.8 × 0.8 metres and the default apex is at Y = 2.8. In this hall, `#pedestal_height:0.8` raises the pyramid mesh onto a separate matching block: its tip is 3.6 metres above the court. The four corner pyramids use the sibling `pyramid.gd` with `#height:2.4`, retaining their 0.6-metre square bases. Their different proportions do not require a different connection graph. `create_pyramid_faces()` divides the square base into two triangles and adds four triangular sides: six render triangles representing five geometric faces. The pedestal is a separate cuboid and is not included in those counts.
+## Read the construction
 
-The four `cube_scene` instances use scale 0.8. Their centres are lifted 0.4 metres above the court so their lower faces meet it. The same cube vocabulary also supplies the supporting grid structure. An artifact's role in a composition is not stored in its vertex count.
+The loop constructs two independent CubeBody instances and assigns positions from places. Reusing a class does not mean sharing one mutable vertex array. Moving an instance should leave its geometry and its neighbour unchanged.
 
-The supplied manuscript image guides the solid finishes: `#solid_color:B7C7DB` for the blue corners, `#solid_color:DF93B8` for the pink spire and pedestal, and `#solid_color:D9AB63` for the ochre cubes. These placement settings select opaque matte materials. Unconfigured instances keep their original materials and dimensions. The drawing suggests proportions and relationships; the metre values are an adaptation for this walkable court.
+The point is the same white sphere with the same size and interaction settings. It can be picked up and left somewhere else during a run. That temporary placement is not written back into this script. To keep an arrangement across runs, put your chosen coordinates in the source; persistent composition is a later capability.
 
-## What the puzzle recognises
+The program uses constructors, arrays, a loop and positions you have already met. Scale and rotation stay for Transformation. You can still change the relation between bodies through distance, overlap and placement. The resulting arrangement is your decision, not the inevitable output of the cube rule.
 
-Beside the court, use the five snap points to make a four-point base cycle and connect each corner to the apex. The connection manager's `square_pyramid_formed` signal invokes `_on_pyramid_formed()` in `snap_pyramid_puzzle.gd`. That method checks that all five points belong to this puzzle before calling the shared completion routine.
+## Make it your own
 
-The detector checks connections, not right angles, equal lengths or base planarity. Its success is narrower than the mathematical name. The separately authored court, connection and Dürer deck exist before success; do not describe them as geometry generated by this puzzle.
+Make a second arrangement by changing only places and the point's initial position. Keep the classes unchanged. Show how a different interval or overlap changes what you notice. You should be able to reconstruct both arrangements from their saved script values.
 
-## A square that can be checked
+## After the chapter: an arrangement without a recipe
 
-At the second platform, read the square generated by `commons/scenes/demos/durer/MagicSquare.gd`. Its `magic_data` array is:
+Choose a different arrangement in a clear part of your working museum hall. Use the earlier files as references, but write your own small main script. This is an independent challenge; there is no new construction hidden in a supplied answer.
 
-```gdscript
-var magic_data = [
-    [16, 3, 2, 13],
-    [5, 10, 11, 8],
-    [9, 6, 7, 12],
-    [4, 15, 14, 1]
-]
-```
+- Generate a list of at least five positions with a rule you can explain. Keep an unchanged source list and modify an independently owned copy.
+- Reuse PointBody and FaceBody. Choose three non-collinear entries from the list and connect them as a face.
+- Show two spheres of equal radius with different resolutions, using the construction already studied in Godot Primitives.
+- Decide their spacing and arrangement. Keep the known collider behaviour; making a new walkable structure is outside this task.
 
-Add a row, a column and a main diagonal. Each sums to 34. Then choose an arbitrary group of four entries: the rule does not promise that every such group sums to 34. The exact result answers a stated question without deciding what the whole tableau means.
+Show the arrangement to someone who has not seen your script. Locate the stored values, the variable referring to each body, and the indices establishing the face. Explain what the generator decided, what resolution changed, what you preserved, and one aesthetic choice that no calculation required.
 
-The tableau is instantiated from `commons/scenes/demos/durer/DurerScene.tscn`, with its authored polyhedron and tools, at half scale. Its default `apparatus=finish` retains those props. This is an interpretation assembled for the museum, not an exact reconstruction of Dürer's engraving. The former tutorial's eight cube vertices did not implement the claimed truncation; the earlier draft is archived with this room revision.
+Run your script and check that changing the copy leaves the source intact, that the selected face has area, and that each sphere keeps its own mesh. Then change one choice and predict the result before running again. Successful execution is evidence about the program; explaining and transferring the choices gives evidence about what you learned.
 
-## Carry a relation forward
+Carry CubeBody and PointBody into Transformation. A body that you can place is ready to become a body whose position, rotation or scale changes over time.
 
-Choose a relation in the court: repeated corners, a tall centre, or the connection between two levels. Predict which part survives moving, turning or scaling the objects. That prediction is the handover to transformation. Purpose, pleasure and the desire to continue investigating remain questions alongside the implementation.
+
+[Current lesson.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Primitives_Melencolia/lesson.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)

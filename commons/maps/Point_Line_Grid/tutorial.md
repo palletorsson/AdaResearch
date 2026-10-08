@@ -1,66 +1,109 @@
-# Point_Line_Grid — from a retained position to an address
+# Point Grid — place the drawing you made
 
-The dot in Point_Trace retained selected positions. This room gives positions integer addresses within a chosen grid and tests what we can do with them. Follow the four primary artifacts in [final.md](final.md); [technical.md](technical.md) provides the full source reference.
+**Learning elements**
 
-## 1. Metres and indices
+- Loading your saved trace
+- Reusing a drawing as a sculpture
+- One record, different representations
+- Source positions and grid addresses
+- Integer coordinates and rounding
+- Changing a copy while keeping the original
 
-Pick up `grab_sphere_point_snap`, move, release, and read its table. Its scene sets `grid_size = 0.05` metres. The source rounds world X, Y and Z independently. On one axis, the operation can be written as:
+We are in the Endless Museum. In Trace, you moved the held point and released it to save the drawing. Here, place that drawing beside the ruled field. The gesture has become something you can walk around.
 
+The pink sculpture is your saved work: the same retained positions and the same segment geometry. We do not build another point or ask for another gesture. **One record can support different representations.** Here we derive grid addresses from it and change a separate green copy.
+
+## Bring your drawing
+
+Continue in the **same working copy of the museum**. Keep `trace.gd` for returning to Trace. Save `grid.gd` beside `trace_archive.gd` and the unchanged `line_skin.gd`, then attach it to your unit-scale `PointStudy` on the clear floor beside Grid's glass field. The museum provides the hall, light and player. Carried unchanged from [Lines](../Point_Lines/tutorial.md): `line_skin.gd`. Carried unchanged from [Trace](../Point_Trace/tutorial.md): `trace_archive.gd`.
+
+Release the point in Trace before leaving. The supplied archive stores a snapshot under `user://ada_student_trace.scn`; opening Grid loads that snapshot. Without a saved drawing, the readout asks you to return to Trace. It does not invent a replacement. Grid never writes this file.
+
+The first copy stays pink. The two copies stand 1.6 metres apart so you can compare them; these display offsets do not change the saved positions or the grid calculation.
+
+## The complete Grid program — grid.gd
+
+<!-- student-code:grid.gd -->
 ```gdscript
-var index = roundi(pos.x / grid_size)
-var placed_x = index * grid_size
+extends Node3D
+
+const TraceArchive = preload("trace_archive.gd")
+const LineSkin = preload("line_skin.gd")
+
+var sculpture: Node3D
+var grid_copy: Node3D
+var positions := PackedVector3Array()
+var addresses: Array[Vector3i] = []
+var grid_step := 0.25
+var readout: Label3D
+
+func _ready() -> void:
+    readout = Label3D.new()
+    readout.position = Vector3(0, 2.0, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.003
+    add_child(readout)
+
+    sculpture = TraceArchive.load_drawing()
+    if sculpture == null:
+        readout.text = "Draw in Trace, then release the point to save."
+        return
+    add_child(sculpture)
+    positions = sculpture.get_meta("positions").duplicate()
+
+    grid_copy = sculpture.duplicate() as Node3D
+    add_child(grid_copy)
+    sculpture.position.x = -0.8
+    grid_copy.position.x = 0.8
+    for i in grid_copy.get_child_count():
+        var segment := grid_copy.get_child(i)
+        var original := sculpture.get_child(i)
+        segment.set_script(LineSkin)
+        segment.mesh = original.mesh.duplicate()
+        segment.material_override = original.material_override.duplicate()
+        segment.material_override.albedo_color = Color(0.25, 0.85, 0.60)
+    _place_on_grid()
+
+func _place_on_grid() -> void:
+    addresses.clear()
+    for p in positions:
+        addresses.append(Vector3i(
+            roundi(p.x / grid_step),
+            roundi(p.y / grid_step),
+            roundi(p.z / grid_step)
+        ))
+    for i in range(1, addresses.size()):
+        var a := Vector3(addresses[i - 1]) * grid_step
+        var b := Vector3(addresses[i]) * grid_step
+        var displacement := b - a
+        grid_copy.get_child(i - 1).show_segment(a, displacement, displacement.length())
+    readout.text = "YOUR SAVED TRACE\nPOINTS " + str(positions.size())
+    readout.text += "\nGRID " + str(grid_step) + " m"
 ```
 
-At this spacing, X = 0.12 gives index 2 and retained X = 0.10. X = 0.13 gives index 3 and retained X = 0.15. The integer counts intervals from world zero; multiplying by the spacing converts that index back to metres.
+`load_drawing()` returns the saved sculpture, including its recorded positions. `add_child(sculpture)` places it under this study. The positions are local to the study and measured in metres; the hall supplies the study's location. Moving the study moves the sculpture as a whole without rewriting the gesture.
 
-Move within a rounding region, then cross its halfway boundary. Nearby input positions share an address. The table's two columns describe the retained output in different units; they do not compare raw and rounded measurements. A lattice address names a representative point. Do not confuse it with every possible scheme for numbering the areas enclosed by drawn lines.
+`duplicate()` makes a second node tree. The saved sculpture is static. We attach the familiar `LineSkin` script only to the copy we want to change, then give each copied segment its own saved mesh and material. Otherwise changing a segment's length or colour could change the pink original. This is the same ownership question we met with two PointBody instances. The archive saves shapes and transforms, so loading the pink sculpture does not rerun its construction script.
 
-On release, the handle moves by the correction needed to align the sampled marker, preserving the marker's offset from the handle. The retained table stays visible. This release can append a repeated address, so its row count is not a count of distinct places.
+## An entry is not an address
 
-## 2. The chosen point and the ordered path
+`positions[2]` means the third sample in the recorded order. A `Vector3i` address instead counts grid intervals from this study's origin. At a spacing of 0.25 metres, X = 0.10 rounds to address 0; X = 0.15 rounds to 1. X = -0.15 rounds to -1. At exact halfway values, `roundi()` rounds away from zero.
 
-Walk with `player_trace`. Desktop uses the active walking body; VR uses headset world X/Z and rig-origin world Y. The source then enters the recorder's local frame:
+Multiplying the address by the spacing returns a position in metres. The loop visits neighbouring addresses and calls the renderer we already used in Trace. Two entries can receive the same address; they stay in the record, while their zero-length connecting segment becomes invisible. All three coordinates are rounded, including height.
 
-```gdscript
-var local_point = to_local(current_global)
-local_point.y += trace_height_offset
-local_point.x = roundf(local_point.x / seam_grid) * seam_grid
-local_point.z = roundf(local_point.z / seam_grid) * seam_grid
-```
+The saved original remains untouched. We change only the green copy's existing segments. Their connections can be diagonal; this is not a route restricted to grid edges.
 
-The room sets `seam_grid` to one metre. A finer sampled reference accompanies the coarse path. Compare a small loop with a larger one, and in VR compare leaning with stepping. You are testing both the rounding and the choice of point being measured.
+## Change a rule, keep your work
 
-The recorder suppresses consecutive repeated rounded positions but can return to a previous address later. It retains an ordered list, including time/speed data in this recorder, and draws direct segments between accepted positions. It does not compute a route along grid edges. Counting recorded segments does not measure distance in metres: their lengths can differ, and they can be diagonal.
+Change `grid_step` from `0.25` to `0.50` and run the study again. Both versions load the same saved sculpture; you do not repeat the gesture. Walk around it and compare the two forms. Restore `0.25` afterwards.
 
-## 3. A copy is given another scale
+Before switching, choose a corner and predict its new address. Find two visits that acquire the same address. Switch back: the finer interpretation returns because the original data was kept, not because coarse rounding can be reversed.
 
-Release a Trace dot or stick with at least two retained positions. `TraceData` duplicates that list. The whiteboard image and walking path are separate; neither is this input.
+For one experiment, replace `roundi(p.y / grid_step)` with `0`. Run Grid again. Pink keeps the recorded height; green is placed on the study's Y = 0 plane. Restore the expression.
 
-At `grid_lines`, find the released drawing. The display computes the source bounds' centre and a scale capped to keep the longest dimension within five metres:
+One drawing can now be a record, a sculpture and material for another calculation. Keep its original positions. Triangle can select three corners from them and ask what closes the boundary and gives it a face.
 
-```gdscript
-mesh.surface_add_vertex((p - center) * final_scale)
-```
 
-Pink uses this transformation. Green snaps those displayed positions to 1/6 metre on each display axis. The source list is unchanged. Its coordinates in the panel therefore need not match the displayed locations. The technical reference distinguishes the source frame, display pitch and the other grids in this room.
+[Current grid.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Line_Grid/grid.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)
 
-## 4. Use two indices to arrange a plan
-
-The placed `plan_vitrine` contains `simulation_grid`. Its source makes five rows of five cell meshes. With the tile mesh and materials already prepared, this is the placement portion of the loop:
-
-```gdscript
-for z in range(SIDE):
-    for x in range(SIDE):
-        var mesh := MeshInstance3D.new()
-        mesh.name = "Cell_%d_%d" % [x,z]
-        mesh.mesh = tile
-        mesh.material_override = light if (x+z)%2 == 0 else dark
-        mesh.position = Vector3(x-2, -0.024, z-2)
-        add_child(mesh)
-```
-
-`SIDE` is 5. Indices run from 0 through 4; subtracting 2 centres the plan. The small vertical offset places the tile surfaces just above the host floor to avoid flicker. These finite cell labels differ from the snapping tool's world-space lattice indices.
-
-Find a cell by its two numbers, walk away and return. The divisions help describe placements without restricting walking to grid edges. A separately created five-by-five box collider supplies the continuous floor. The glass enclosure's panes have no colliders.
-
-Carry this distinction into Point_Triangle_Context: naming or connecting positions does not automatically produce a visible face or a supporting surface.
+[Complete experiment: grid_flat_y.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Line_Grid/grid_flat_y.gd)
