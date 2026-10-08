@@ -2,32 +2,41 @@
 
 <!-- @color_constellation_office -->
 
-Someone has prepared a place for you. A desk, a monitor, a chair. Seven more places repeat along the aisle. The glass has colour; the office has an order.
+A sheet of cyan stands higher than you. Beyond it, magenta crosses your view. The pale floor continues through both colours. For a moment, the room seems to have several distances at once.
 
-Choose a cubicle. Before entering, look toward its desk through a pane. There is almost nothing between you and the chair. Almost. Walk toward the opening instead. Your view took a route your body could not.
+Step sideways. A dark patch narrows, then opens into blue. Nothing in the office has moved. You have changed which panes stand between you and the far wall.
 
-At the entrance console, press **GLASS / OPAQUE**. Return to the same cubicle. The chair has disappeared behind a coloured wall. Find the opening again. Has the route become longer, or has finding it become a different task?
+There are twelve sheets, staggered across the floor. Some turn away from the others. Their edges stop short of enclosing a room. Follow one edge until you can pass it; the colour that covered the next space falls behind you.
 
-Press once more. The furniture returns to view. No doorway has opened.
+A desk waits to one side. Two more places to work are scattered among the partitions. Sit in imagination, or stand beside a chair and look back through the colours. How much of this office could you call your own without being able to close it?
 
-The switch changes two material properties on each of forty panes:
+![Looking through the overlapping colour planes in the museum office.](/book-review/doc/book/iterations/2026-10-01-office-open-colour/layers-glass.png)
+
+*The overlap changes with your position. The panes and the gaps remain still.*
+
+At the entrance, press **FILTER / OPAQUE**. The view closes into coloured surfaces. Take the same route again. The next opening is harder to see, although it has not become narrower.
+
+Press once more. A chair returns through a pane. The pane still stops your body.
+
+In filter mode, the surface lets the view behind it contribute to the colour:
 
 ```gdscript
-mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if glass_visible else BaseMaterial3D.TRANSPARENCY_DISABLED
-mat.albedo_color.a = 0.26 if glass_visible else 1.0
+surface.albedo_color.a = 0.52
 ```
 
-The collision bodies remain where they were. Each cubicle still has its 1.2-metre entrance; the walls still meet at right angles. A change to visibility can alter how you approach a place without changing the geometry that admits you.
+An overlap adds another tint. The pale backing keeps the view bright enough to follow through the layers. This is a blend of screen colours, not a simulation of the wavelengths passing through real glass.
 
-In Paint, two gestures entered one image. Here the image and the body encounter different accounts of the same wall. Let that disagreement stay visible. An invitation to look is not yet an invitation to enter. Perhaps the useful discovery is the doorway; perhaps it is the distinction that lets you ask for another kind of doorway.
-
-Move until several panes overlap. Their colours enter the renderer's transparency calculation. This glass does not calculate the wavelengths a real pane would absorb. Its clearness is a setting. Even the apparently empty space between you and the desk has been made by a procedure.
+In Paint, your mark joined someone else's on a shared surface. Here the colour between two people changes what each can see. Opaque walls can interrupt that exchange. Gaps still let a view reach around them. Privacy depends on where you stand, where someone else stands, and how far the partition extends.
 
 <!-- @color_space_navigator -->
 
-Leave the cubicle through its opening. At the smaller models, look for red, first in the cube and then in the cylinder. Where could you go from it?
+Find a gap between the panes and leave the office. At the smaller models, find the red corner of the cube, then look for red around the cylinder. The colour is familiar. Its neighbours have moved.
 
 You have been walking through an arrangement of coloured space. These models arrange colour values in space. In the cube, increasing the red channel moves a sample along one axis. Green and blue have their own directions. A colour has become an address again, but the address now comes from the colour itself.
+
+![The museum’s RGB cube and HSV cylinder, each displaying five hundred colour samples.](/book-review/doc/book/iterations/2026-09-28-walls-a-view-from-inside/colour-coordinates.png)
+
+*RGB channels become three straight directions. In HSV, hue goes around, saturation moves outward and value changes height.*
 
 The RGB model assigns a sample's position and colour together. In this shortened version of the construction:
 
@@ -36,15 +45,19 @@ position = (Vector3(r, g, b) - Vector3.ONE * 0.5) * cube_size
 colour = Color(r, g, b)
 ```
 
-Look across to the HSV cylinder. Hue turns around its axis, saturation moves outward, and value changes height. Going around has replaced one of the cube's straight directions. The two models offer different ways to organise colour values.
+Follow the RGB cube upwards: that direction adds green. Across in the HSV cylinder, rising changes value, as height did among the pillars. Hue goes around its axis; saturation moves outward. Up is still up in the room, but the colour rule gives it another job.
 
 Neither contains every colour as a visible point: each holds five hundred samples. The gaps belong to the display we have built. Even the black corner has been brightened slightly so that you can find it. To show a value, the exhibit has already made an accommodation. What would disappear if it refused?
 
 <!-- @gradient_interpolator -->
 
-The next bench starts with red at one end and blue at the other. Sixteen small cubes hold the intervening values. Follow them with your eyes, then press **RGB / HSV**. Leave the endpoints alone.
+At the next bench, red and blue mark the ends of a row of sixteen small cubes. Follow the colours between them, then press **RGB / HSV**. Leave the endpoints alone.
 
 The middle changes. The agreement about where to begin and end did not decide how to travel.
+
+![The same sixteen gradient cubes between red and blue in RGB and HSV modes.](/book-review/doc/book/iterations/2026-09-23-walls-view-and-passage/same-endpoints.png)
+
+*The endpoints remain red and blue. Changing the interpolation changes the colours encountered between them.*
 
 In RGB mode, the calculation is:
 
@@ -58,4 +71,22 @@ The path was chosen in code. The number of places along it was chosen too. Sixte
 
 <!-- @ -->
 
-A view through glass, a position in a colour model, a calculated passage: similar appearances can conceal different operations. Carry that habit of asking how into the chamber ahead. When colour and shape both change, which operation did your gesture actually set in motion?
+<!-- study-spine:colour_assembly -->
+
+<!-- @colour_assembly -->
+
+Twelve numbered panels hang above an open floor. Their colours repeat. From the controls, choose SCREENS: the same panels stand upright and divide the space ahead. Choose GATHER. Some return overhead while others hold an edge around an open centre.
+
+Walk into it. Naming a space for gathering does not say who may gather there, or who is allowed to move its walls. Gillick's secondary structures make that uncertainty productive for this study. Here the arrangement can be changed from the console, while the colour can be changed independently. Find a panel by its number. Where did its neighbour go?
+
+<!-- study-spine:colour_wall_studies -->
+
+<!-- @colour_wall_studies -->
+
+On the wall, twenty-four coloured rails stand at equal intervals. Widen the spacing. The same material now occupies more wall; the gaps have become a larger part of what you see.
+
+Beside them, pull the vertical members of a crossing forward. Its drawing acquires depth and a second, shadowed grid. Further along, one rail can be omitted from an open composition and restored. These responses to Gillick keep a small vocabulary available for rearrangement. The clarity of the parts can suggest a comprehensible system. It does not disclose who made it, who maintains it, or who gets to change the plan.
+
+<!-- @ -->
+
+Ahead, the disco floor returns in colour. Keep its arrangement and change its palette. Does the same pattern still invite the same movement?
