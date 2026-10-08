@@ -1,6 +1,6 @@
 # Lines, Networks, Measure
 
-The point gave us somewhere to begin. Now put two positions into relation.
+The point gave us somewhere to begin. Now put two positions into relation. The point you could carry becomes an end: moving it changes a span. Soon that span will ask you to walk, forbid you to cross, or gather with another line into a sign.
 
 <!-- @line_black_box -->
 
@@ -8,14 +8,11 @@ In the black room, a pale line hangs between two small points. Take one end and 
 
 A number on the wall follows the distance between them. Try changing the direction without changing that number. The dark room leaves very little else to look at: two positions, and what happens between them.
 
-Can you find a span of one metre? Keep one end still and move the other around it. The segment turns while its length stays steady. We can describe that relation with two small operations:
+Can you find a span of one metre? Keep one end still and move the other around it. The segment turns while its length stays steady. The number can remain the same while the line points somewhere else. What has the measurement kept, and what has it left for your eye and hand to follow?
 
-```gdscript
-var displacement := b - a
-var distance := displacement.length()
-```
+Give the segment an order — from here to there — and something new appears. It points. `b - a` is a displacement: it has a size and a way round. `.length()` throws the way round away and keeps a number. `.normalized()` throws the number away and keeps the way round. Nothing is left of the segment in either result, and neither result can be turned back into it alone.
 
-The first keeps a direction as well as a distance. The second gives us the length alone. Reverse the subtraction and the direction reverses; the length stays the same. Your hand may keep moving while the rounded number on the wall appears still. A display has its own smallest difference.
+Your hand may also keep moving while the rounded number on the wall appears still. A display has its own smallest difference.
 
 Through the side passage: **CAN YOU CONNECT THE DOTS?**
 
@@ -25,7 +22,9 @@ Two black points wait beside a barrier: **DO NOT CROSS.** Bring one close to the
 
 The barrier flies apart.
 
-Keep hold of this small beginning: **two distinct points determine a straight line.**[^point-lines-euclid] Here we draw only the part between them: a segment. Move an endpoint. The segment changes length and direction while the connection remains.
+Keep hold of this small beginning: **two distinct points determine a straight line.**[^point-lines-euclid] Here we draw only the part between them: a segment. To keep only what lies between them is already a decision. Move an endpoint. The segment changes length and direction while the connection remains.
+
+*Two points, a distance, a segment, a direction.* They are not four names for the same thing, and the room is the demonstration. A distance is a single number. An infinite line has no length at all. A segment has one because somebody chose two ends. A direction is what is left when you throw the length away. Each is the one before it with something added — and the something is always a body.
 
 Already something else has attached itself to the lesson. Joining two points has opened a passage.
 
@@ -37,11 +36,15 @@ Connecting the points sends another instruction to the barrier. Someone joined t
 
 The words, the plank and the collision boundary all helped to say **DO NOT CROSS**. Opening the way required changing what enforced that instruction. For a moment, a line has given us passage through another line's prohibition.
 
+You do not have to. It is a police line and a prohibition and somebody put it there, and walking round it costs nothing. But the room has now made the choice available, and *available* is a different thing from *forbidden*, which is what the barrier was pretending to be.
+
 In Coordinates, leaving the target made another arrival possible. Here, joining the points gives us a few seconds of passage. The clock has acquired another task: it puts a prohibition back.
 
 <!-- @redline -->
 
-A red line marks another division. A colour can lend urgency to the same thin form. What, here, gives it the right to stop you?
+A red line marks another division. In speech, a red line can name the limit beyond which we refuse to go. Here the phrase has a colour and a place in the room. Before touching it, you may already have supplied the warning.
+
+The line gathers these associations as we move: a connection, a border, a promise to go no further. The words beside it, the bodies it separates and what happens when we cross give its thin shape different force. What, here, gives it the right to stop you?
 
 Ahead, the instruction moves from a barrier to the floor.
 
@@ -61,7 +64,7 @@ Turn and look at the route your movement has left behind. Compare it with the st
 
 The recorder saves positions and joins them with straight segments. The X and Z come from your headset; the line is drawn near floor level. A lean can change the drawing even when your feet stay put.
 
-Choose a start and an end. Walk between them with a detour. Imagine walking directly between those same positions instead. The endpoint calculation, `b - a`, gives the same answer for both journeys. It contains no record of the turn you took.
+Choose a start and an end. Walk between them with a detour. Imagine walking directly between those same positions instead. The span between the endpoints is the same for both journeys. It contains no record of the turn you took.
 
 The trace has kept more positions. How many did it need? What happened between the ones it kept?
 
@@ -83,11 +86,19 @@ Look up at the edge of the ceiling. A shorter length hangs nearer to you. Move a
 
 The two objects have stayed still. Your movement let them become one edge, then gave them back their distance. What else in the room is held together by the place from which you see it?
 
+And here parallels meet after all — not because they stopped being parallel, but because you are standing somewhere. Perspective is the one honest confession the room makes: every reading so far has had a position in it, and this is the only place that says so out loud.
+
 ## Four views
 
-Two sticks make a plus. Further along, two of the same length make an X. From the marked starting position, each reads as one familiar sign. Step sideways. The sticks sit in slightly different depth planes; the crossing belongs to your view. Take one in your hand and bring it forward. How far can the sign come apart before you stop seeing it?
+What can two lines become together? Two sticks make a plus. Further along, two of the same length make an X. From the marked starting position, each reads as one familiar sign. Step sideways. The sticks sit in slightly different depth planes; the crossing belongs to your view. Take one in your hand and bring it forward. How far can the sign come apart before you stop seeing it? Two lines that cross agree on precisely one point and disagree about every other point in the universe, and we call that agreement an intersection, as though it were a place. It is a coincidence with a name.
 
-Beside them, two planks lie parallel. Walk between them. From one end the gap narrows into the distance; moving your head changes that appearance without moving either plank. Then move a plank. Now you have changed the relation itself. The two graduated measures beyond them give the hand another pair to compare.
+Beside them, two planks lie parallel. Walk between them. From one end the gap narrows into the distance; moving your head changes that appearance without moving either plank. Then move a plank. Now you have changed the relation itself. Parallel is the stronger claim: not *they have not met yet* but *they will not, ever, however far you follow them*. It is a promise about infinity made by two short segments in a small room, and everything built square is built on it. The two graduated measures beyond them give the hand another pair to compare.
+
+Stop adjusting the segment and it becomes a ruler. That is the whole of metrology in one gesture: not a special object, just a distance somebody decided to keep. Once you can say *how much*, you have a unit, and a unit came from somewhere — a foot, a forearm, a platinum bar in a vault outside Paris, and since 1983 the distance light travels in 1/299792458 of a second. The metric system is not a discovery about space. It is a decision about which line to trust.
+
+<!-- @modulor_man_demo -->
+
+Le Corbusier took one imaginary man — 1.83 m, six feet, the handsome policeman of an English detective novel — and made his body the measure of doorways, ceilings and chairs for a generation. Nobody was measured. The earlier version of the system used 1.75 m and was revised upward because six feet is a rounder number in the system he was arguing against. Stand next to him. The scale is either yours or it is not, and if it is not, the building will keep telling you so in small ways for as long as you are inside it.
 
 In the third view, two beams stand upright. A thin luminous horizon crosses the space behind them. Your own upright posture has company. Turn one beam in your hand and keep it there. The room does not correct it when you let go.
 
@@ -95,9 +106,11 @@ The fourth view begins with six lines: three in each direction. Together they su
 
 The fixed lines on the walls keep another version of these arrangements. Your hands can change the bodies in the room while the wall keeps its own arrangement.
 
-Take the measuring laser. Its number ends at the body the beam meets. Keep it on a rod and the rod breaks; the reading reaches whatever lies behind it. The instrument that measured a distance has removed one of its limits.
+Take the measuring laser. Its number ends at the body the beam meets. Keep it on a rod and the rod breaks; the reading reaches whatever lies behind it. The instrument that measured a distance has removed one of its limits. The same object. The same straight line, aimed the same way, with something different at the far end. Pointing and destroying are not two techniques; they are one technique and two situations, and the line cannot tell them apart. Nothing in the vector records the difference.
 
 The hammer can break these studies too; the pink gun leaves them coloured for a while. Wait, and the study returns. Take the rod again. Its ability to come back belongs to the room we have written, as much as its ability to resist a hand.
+
+The hammer is not a metaphor and not a reward — the same object, still two points and everything between them, still a length and a direction, with a mass at one end and your hands at the other. Nothing was added but the body. It has to be *swung*. Resting it against something does nothing, which is the difference between a hammer and a wand: the damage is not in the object, it is in what you did with it.
 
 ## Follow this line
 

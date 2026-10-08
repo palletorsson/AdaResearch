@@ -12,6 +12,8 @@ Its first number for you is not its first number.
 
 You can stand in a room you did not build. Someone has made that possible. Their work gives us somewhere to begin and brings decisions with it. We inherit possibilities before we know their conditions.
 
+We can make more than we can explain. What can we borrow for now, and what must we understand to make the work our own?
+
 Let it run while you look around. When you return to the number, it has moved on.
 
 Where does the next one come from?
@@ -53,7 +55,7 @@ Through the entrance window, rectangular frames recede within frames. They keep 
 
 Ten frames, scaled and moved through a repeating cycle, make this depth. They hold no record of your arrival. A few repeated shapes can invite a journey far beyond their repeating cycle.
 
-We could stay with the counter: how a digit gets its shape, how its glass is drawn. We would also like time to pick something up. The code we leave unread keeps working while our attention moves elsewhere. Who gets to decide which questions can wait?
+We could stay with the counter: how a digit gets its shape, how its glass is drawn. We would also like time to pick something up. The code we leave unread keeps working while our attention moves elsewhere. Choosing a first principle also means choosing what we will, for now, take on trust. Who gets to decide which questions can wait?
 
 <!-- @origin -->
 

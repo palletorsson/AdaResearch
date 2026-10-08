@@ -1,79 +1,76 @@
 # Closing a boundary, adding a face
 
-Three points can close a boundary. What must the machine add before there is a face to look at?
+Three edges meet. You can still see the room between them.
 
-You have connected endpoints, recorded a path and given positions addresses you can return to. Now bring three edges together. Something can close without becoming a surface.
+Everything you have seen so far was drawn in triangles. The sphere in the first room. The hammer. The plinths, the walls, the floor you are standing on. Not the lines, which are their own thing, but every *surface*: each one is a closed outline filled with triangles, because that is the only shape the machine knows how to fill. This room is where you meet the unit.
 
 <!-- @triangle_line_puzzle -->
 
-Bring two edges into place. Look through the remaining opening before adding the third. What do you expect to arrive with the last connection?
+Bring the loose lines to the three waiting corners. Fit the last edge and look through the triangle. Closing it has not covered anything.
 
-The boundary closes. Its centre stays unfilled. The small instrument beside it reports the closed boundary and the hidden fill. Press **SHOW / HIDE FILL**, then look from another side. Press again. The edges remain while the patch of colour comes and goes.
+Press **SHOW / HIDE FILL**. A translucent patch appears between the same corners. Press again. The edges stay; the patch goes.
 
-We have made two things happen separately. Connecting the endpoints closes a loop. Adding a triangle mesh gives that loop a visible face. The first operation does not secretly contain the second.
+A boundary and a face have arrived through different actions. Connecting these three points closes a loop. Asking the renderer to make a triangle gives it a surface to show. We have chosen that these corners belong together, in this order. Their positions did not make that commitment for us.
 
-The button waits for the completed boundary. Once it is closed, its mesh receives the three target positions:
+Why triangles, and not squares, or anything else? Because three points always share a plane. There is no fourth point to disagree, so a triangle is flat by necessity, and a flat face is something the renderer can light with one direction.
 
-```gdscript
-mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
-for p: Vector3 in target_positions: mesh.surface_add_vertex(p)
-mesh.surface_end()
-```
+<!-- @triangle_construction_plate -->
 
-The word `TRIANGLES` asks the renderer to treat each three vertices as a face. The positions alone did not ask for this. Their order, the primitive type and the material participate in what you see.
+The wall plate holds the distinction still: three points, three connected edges, a face.
 
-This fill is visible from both sides. Walk around it. Its appearance can narrow almost to a line without its three corners moving. The material permits a view from either side; the edge-on projection leaves little of the surface to show.[^point-triangle-winding]
+![The same three corners shown as points, a connected boundary and a filled triangle.](/book-review/doc/book/figures/Point_Triangle_Context/triangle-construction.png)
 
-Three distinct, non-collinear points determine a triangle and a unique plane. “Non-collinear” means that the third point is not on the line through the other two. Without that condition, the boundary can collapse into a line with no area.
-
-## Close a loop, then inspect the fill
+We built this plate while writing the chapter. The book needed an image; the room gained another object to approach. This illustration is a Godot view of that same construction. A sentence can ask for something to try, and making it can change the sentence.
 
 <!-- @draw_triangle_faces -->
 
-Pick up the drawing point and make a small triangle in the air. The tool records a corner while held once its one-second interval has elapsed and the tip has moved far enough from the previous point. Move to each intended corner, watch for the numbered point, then return near the first to close the loop. Positions round to a ten-centimetre grid. The addressing we met in Grid helps corners meet here.
+At the small drawing station, a triangle waits with black corners and an off-white face. If you released a drawing in Trace, your own bend waits here instead, still open. Its journey has changed it: six positions kept, its span reduced to arm's reach, its height flattened. The machine has prepared your drawing for a method that expects a plane. What did that preparation leave behind?[^point-triangle-carry]
 
-Look for the filled face. The side instrument distinguishes **filled loops** from **triangles**: one three-corner loop makes one triangle. Press **SHOW / HIDE FILL** and compare the surface with its retained boundary. Hiding the fill preserves the points and edges.
+Move the drawing point near the first corner to close that carried loop. For the simpler comparison, **RESTORE TRIANGLE** replaces the current drawing with three editable corners.
 
-Each corner has a number. **START** marks the first point of the current path. That number is about order, not importance. We will give it a different job in a moment.
+<!-- @triangle_live_twin -->
 
-Release the tool at the corner where you closed the loop. Release can record a final position; after that the resting tool adds no timed samples. Your earlier corners remain grabbable. Move one and release it; the faces that use it rebuild.
+Look up. The small drawing has a twin in the middle of the hall. Move a corner and watch the same change arrive more than three times larger. Your hand can reach the small figure; your body can walk around the other.
 
-For another independent outline, release the pen and press **NEW OUTLINE**, then pick it up again. The button keeps completed faces and lets you choose a new first corner. Use it before each comparison below.
+Leave the corners where they are. Walk towards the side of the large face. Its breadth narrows until the black edges almost meet in your view. Step back and the surface opens again. You have changed where you look from, without moving a single corner.[^point-triangle-winding]
 
-Beside your first triangle, in a clear patch of space, make a six-corner L in one horizontal plane. Think of a 1.2-metre square with a 0.8-metre square missing from one corner. Each arm of the L is 0.4 metres wide. Keep the line from crossing itself.
+Now return to the small drawing. Bring its upper corner down onto the line between the other two and release it. The large figure flattens too. This time walking around cannot recover the missing area. Three positions remain, but they lie along one line. Lift the corner away and a face opens between them again.
 
-For a precise version, the coordinates below name the two horizontal directions in metres, relative to the lower-left outer corner; keep every point at the same height:
+From one view, these two events can look alike. In one, the face waits for another viewpoint. In the other, we must change what we made.
 
-```text
-A (0.0, 0.0)     B (1.2, 0.0)     C (1.2, 0.4)
-D (0.4, 0.4)     E (0.4, 1.2)     F (0.0, 1.2)
-```
+<!-- @draw_triangle_faces -->
 
-First follow **A → B → C → D → E → F → A**. Inspect the fill. Begin a new outline and follow the same boundary from its next corner: **B → C → D → E → F → A → B**. Reuse the six existing corner points. These letters name our route; the tool shows numbers. Check START before closing. Should beginning elsewhere change which region lies inside the L?
+Press **SHOW / HIDE FILL** while the triangle is open in your view. Both copies lose their faces together; the corners and edges remain. Hiding a surface has left its geometry available for a return. The large fill also lets you walk through it while it is visible. What covers your view need not stop your body.
 
-The boundary has not moved, but from B the added fill reaches into the missing notch. Something is covering a place you left open.
+<!-- @pink_triangle -->
 
-The tool uses the first point as the centre of a triangle fan, connecting it to successive pairs around the loop. For the second L it submits these four triangles:
+A triangle on a stick, pink from here. Walk round it. Blue.
 
-```text
-B C D
-B D E
-B E F
-B F A
-```
+A face has a front, and the front is decided by nothing more than the order its three corners are listed in. Swap two and the same three points face the other way. The renderer, by default, draws only the front and throws the back away unseen, so most of the triangles you have ever looked at were visible from one side and did not exist from the other. This parasol was built to show both, which is a decision somebody had to make, and the two colours are that decision made visible.
 
-Follow their edges across the notch. The code kept its rule; the rule failed to keep your boundary. Choosing another start changed the input order, not the polygon's interior.
+We have been calling all of these a triangle. A boundary, a rendered face, a figure seen edge-on, three corners with no area: keeping their differences lets us do more with the name. It is the unit because it is the only shape that cannot lie: always flat, always one shape for its lengths, always facing one way. Everything larger is made by agreeing triangles together, and every fold, crease and seam you will ever see in here is a place where the agreement ends.
 
-Each six-corner loop adds four triangles to the readout. Keeping both Ls adds two filled loops and eight triangles to whatever you already made. The counter includes the triangles that overspill. It can count a construction without deciding whether it fills the intended region.
+The tool will accept longer outlines too. Draw a six-corner L, close it, then release the handles and press **SHIFT START**. The corners stay where they were. The fill can reach across the notch you left open.[^point-triangle-construction]
 
-The method works for a triangle and for a convex planar polygon. Some concave polygons also work from suitable starting vertices. Concavity by itself does not guarantee failure, which is why this comparison keeps the boundary fixed and changes the start deliberately.
+Every triangle in this method shares the first corner. Choosing another beginning changes the fan. Its rule has kept working while failing to keep your intended interior. The counter still reports four triangles; counting them does not tell us whether they belong there.
 
-You could choose a better starting vertex where one exists, redraw a shape the fan handles, or keep this outline and ask for another filling algorithm.[^point-triangle-triangulation] You might also want that unwanted patch for another work: a wing, a pleat, something extending beyond its frame. Changing its use would give the result another purpose. It would not repair the original fill.
+We can choose a suitable start, ask for a different filling method, or keep the unexpected wing as the beginning of another work.[^point-triangle-triangulation] The mistake needs an explanation, but its explanation need not decide what we want from it.
 
-We need not settle every use of a triangle before leaving. The folds, symbols and other surfaces remain here to return to. Carry this distinction onward: closing a boundary, making a face and choosing how to show it are operations we can separate. A convenient method need not require everyone to want a convenient shape.
+<!-- @quad_line_puzzle -->
+
+At the far end, four edges offer another empty boundary. Three points pass by construction. A fourth may not, and when it sits off the plane there is no face to draw, so the machine does the only thing it can: it splits the quad into two triangles, and the line it splits along is a fold.
+
+<!-- @quad -->
+
+Nearby, the quad adds two triangular faces along a diagonal. Lift a corner away from that diagonal: one face follows while the other stays. Move an end of the shared edge and both change. A shape that looked like one square has given us two surfaces that can tilt apart. Four rods with hinges lean; three rods with hinges hold, and that is why every truss, every bicycle frame and every roof that has stayed up is triangles under the skin.
+
+<!-- @folded_strip -->
+
+Twenty-four faces in a strip, pleated like paper, and every fold is where two triangles meet at an angle. Fold it further. Nothing tears, because nothing here was ever one surface. It was always this many, and the folds were only hidden while they were flat.
 
 Next, faces meet at a corner. What must we add to enclose a volume?
 
 [^point-triangle-winding]: For the rendering convention, see [Godot 4.6’s SurfaceTool documentation](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html): triangle front faces use clockwise winding. Vertex order, shading normals and the material’s culling setting have different jobs. The puzzle deliberately displays both sides. That choice changes visibility; it does not give the face thickness or a collider.
-
 [^point-triangle-triangulation]: One available development route is Godot’s [`Geometry2D.triangulate_polygon`](https://docs.godotengine.org/en/4.6/classes/class_geometry2d.html#class-geometry2d-method-triangulate-polygon), which returns triangle indices for a 2D polygon and an empty result if triangulation fails. A planar 3D drawing would first need coordinates in its plane, followed by mapping the returned indices back to its vertices and handling winding. This room still uses its first-vertex fan; no alternate triangulator is installed by this note.
+[^point-triangle-carry]: The trace travels on the same `TraceData` autoload that brings your drawing to the ruled field in Grid: releasing one of the three coloured drawing pens in Trace appends a snapshot of its retained positions, and this tool reads the most recent one. Grid and Triangle each read that saved drawing; Triangle does not receive Grid's enlarged or snapped display. If nothing was released there, or you have come to this room first, the tool opens with one editable triangle, also shown by the large twin. NEW OUTLINE begins another drawing while keeping that triangle. A carried trace is left open; the twin does not close it for you. The reduction to six corners, the rescaling and the flattening happen on arrival, not in Trace; the stored positions are unchanged, and the whiteboard's image travels by no route at all.
+[^point-triangle-construction]: The [technical companion](/book?map=Point_Triangle_Context&section=technical) gives the six coordinates and the manual two-fill comparison. SHIFT START changes the last completed loop; release the pen and every corner, and leave no unfinished outline. The instrument reports START and whether the action is ready. Letters A–F name our route here; the tool displays numbered corners.

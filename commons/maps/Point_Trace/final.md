@@ -4,15 +4,21 @@ Bring the detour.
 
 There was time between the ends. We passed through it. Let the next line try to keep something of the passage.[^point-trace-klee]
 
+A segment keeps two ends and everything between them, and it keeps them as a *rule*: move either end and the between recomputes. That is its whole economy. It is why a line can be stored in six numbers and why it can be drawn a thousand times without getting tired.
+
+The price is that a line has no history. It cannot tell you whether it was drawn quickly, whether the hand stopped halfway, whether it was drawn and undrawn and drawn again. Those are not lost in the drawing; there is nowhere in a line for them to be.
+
 ## Let the hand leave a line
 
 <!-- @draw_dot -->
 
-The drawing points wait on their plinths. Take the first dot and draw a short loop in the air. Pause with it still in your hand. Beside the line, a small instrument tilts its face towards reading: a count above a table of positions.
+Three coloured pens wait on their plinths. Take the red pen and draw a short loop in the air. Pause with it still in your hand. Beside the line, a small instrument tilts its face towards reading: a count above a table of positions.
+
+The nib is the point being followed. Turn your wrist while keeping your hand almost still: the tip can travel while your grip barely moves.
 
 Watch during the pause. Does another point enter merely because time passes?
 
-Move again. Give the loop a tail, then release the dot. Your hand can rest while the line stays. Something of the movement has become available to look at from another side.
+Move again. Give the loop a tail, then release the pen. Your hand can rest while the line stays. Something of the movement has become available to look at from another side.
 
 The count comes from a list:
 
@@ -20,61 +26,90 @@ The count comes from a list:
 var point_count = _trail_points.size()
 ```
 
-Each accepted position occupies a place in that ordered list. The recorder joins neighbouring positions with straight segments. Enough small segments can let us see a curve. Go closer to a turn: the smooth-looking gesture has acquired joints. The connection between two samples has been drawn; it is not a measurement of everything your hand did between them.[^point-trace-sampling]
+`_trail_points` holds positions in the order they were kept; `size()` counts them. The recorder joins each position to the next with a straight segment. Repeated in small enough steps, the two-point construction from the last room lets us see a curve. The gesture has acquired joints. Between those joints, the program draws a connection; your hand may have taken another way.[^point-trace-sampling]
 
-The dot waits for at least five millimetres of movement before considering another sample. Below that movement threshold, the update can return without adding a position. A stationary pause can leave the list unchanged while Point One's counter has plenty more calls to count.
+The recorder waits for at least five millimetres of movement before considering another position. A still pause can leave the count unchanged while Point Zero's counter keeps running. You spend time holding the line still; the position list does not say how long you waited.
 
 Pickup, tracking, drawing, the letters on the screen: more code is running than we can read here. We follow the movement gate because it answers the question our hand just asked.
 
-Read two neighbouring rows. The coordinates give places in world metres. If your loop has more than ten points, its first row may have left the table: the instrument shows the last ten, while the larger count names the whole retained list. The line can hold something its small window is no longer showing.
+Each row gives three coordinates for a retained position. As the drawing grows, earlier rows leave the small table. The drawing still has its beginning. What has left the screen has not yet left the line.
 
 ## Another resolution, another gesture
 
-Try the other drawing dots. Red rounds positions to a 10 mm grid, green to 40 mm, blue to 80 mm. The first dot adds no such grid. Read the instrument to find which rule you are holding.
+The other pens give the line a coarser grain. From red through green to blue, their grids grow wider.
 
-Repeat a small bend with the blue dot. Then enlarge the movement until another turn appears. Your wrist is negotiating with a spacing. A gesture that one recorder can distinguish may need to become larger for another.
+Repeat a small bend with the blue pen. Then enlarge the movement until another turn appears. Your wrist is negotiating with a spacing. A gesture that one recorder can distinguish may need to become larger for another.
 
-The grid operation is small enough to read. With `rec` as a position and `s` as the spacing in metres:
+The program rounds each coordinate to the nearest grid position. Several movements of your hand can arrive at the same saved address. Until a different address is kept, the line has no new corner.[^point-trace-quantisation]
 
-```gdscript
-rec = Vector3(snappedf(rec.x, s), snappedf(rec.y, s), snappedf(rec.z, s))
-```
+The saved positions lie on the grid, but the segments between them can cut across it diagonally. A grid of corners does not require a drawing made only of right angles.
 
-Each component moves to the nearest multiple of the spacing. If the result repeats the last stored position, the recorder does not add it again. The movement gate decides whether to consider a reading; the grid helps decide where that reading can stand. These are different choices.[^point-trace-quantisation]
+Two separate operations, and it matters which is which. **The loss happened when the samples were taken** — at the grain, at the lattice, before you looked. The lines perform the other one: they *invent* what happened in between. Nothing was recorded there, and a straight segment is the machine's guess, drawn at full confidence.
 
-The segments can cross the grid diagonally. Follow one of those shortcuts. Even the finest dot reads positions during successive calls while the rest of the museum runs between them.
+So the thing you are looking at is part record and part fabrication, and it does not distinguish them anywhere.
 
 Now give the coarse recorder something it might do well. Make a corner you can return to. Let your hand wander while one address stays steady, then find the edge where it changes. The same interval that swallowed a small flourish can help you repeat a shape. What kind of drawing do you want to make with it?
 
-The list is finite too: beyond 4096 accepted positions, keeping a new one means dropping the oldest. We can read that limit on the instrument and leave its questions for a return. These dots do not fade their live trails merely because time passes.
+There is also a limit to how many positions a pen can keep. Near the exit, another dot has a shorter memory. We will reach its limit while drawing. Every archive is a decision about a boundary, taken before anything is in it.
 
-## Move the place that draws
 
-<!-- @draw_stick -->
+## After the hand lets go
 
-Take the stick. Keep your fist nearly still and turn your wrist. The tip travels an arc. This tool uses the same recorder, but puts the sampling point at the end of a rod. A small turn can become a large mark.
+<!-- @trace_ball_ramp -->
 
-The movement threshold is still five millimetres. We moved the place the recorder observes. Which part of your movement has the line begun to describe?
+A black ball rests on a pale plinth. A plank slopes from its edge to the floor. Pick up the ball, set it near the top of the plank and let go.
+
+The ball continues. A thin black line stays behind it.
+
+The point has acquired weight. Your hand chose where to release it; gravity, the slope and contact with the plank carry the movement further. Here the recorder follows the ball's centre. The mark hangs a radius above the surface it seems to draw on.
+
+Wait until the ball settles in the shallow tray. The line stops growing. Walk alongside it: the slope has become part of the drawing. Carry the ball back and release it from another place. The next release begins a new trace.
+
+You have set a line in motion and let something else continue it. How much of the drawing did you make when you placed the ball?
+
 
 ## Touch the page
 
 <!-- @whiteboard -->
 
-Four pens hang in front of the whiteboard. These belong to the board. Take the red one and touch its nib to the face. Make a short stroke, lift the pen, cross a little space, and touch down again.
+Four pens and an eraser wait on the shelf beneath the wall-mounted whiteboard. These belong to the board. Take the red one and touch its nib to the face. Make a short stroke, lift the pen, cross a little space, and touch down again.
 
 Your hand travelled across the gap. The picture leaves it white.
 
 The pen writes within the board's edges and close enough to its face. Lift beyond that contact allowance, and the next touch begins a new stroke. Your hand keeps moving across the gap; the rule stops admitting it to the picture. You can use that interruption to give two marks some space.
 
-The board brings the nib's world position into its own frame with `to_local(world_tip)`, then turns the accepted contacts into a painted image. The coloured pens have the familiar spacings. For now, try making something with the lift between strokes.
+The board turns the accepted contacts into a painted image. The coloured pens have the familiar spacings. A lift of the hand gives the drawing a gap.
 
-Other machines nearby keep timed rows or make wordless handwriting. They offer further ways to read movement. Let them remain available while we follow the record we have just made.
+## A line with a short memory
+
+<!-- @trace_short_memory -->
+
+The amber point near the exit has room for thirty-two positions. Draw a loop, then lead it away. Small beads mark the positions the cord joins. Watch its far end.
+
+At first you make more line. Then you begin to unmake it.
+
+Hold your hand still. Does the remaining line wait with you?
+
+This recorder uses the same movement gate as the red pen. We have given its list less room. When a new position takes it over that limit, the oldest goes:
+
+```gdscript
+if _trail_points.size() > trail_max_points:
+    _trail_points.pop_front()
+```
+
+Waiting does not spend another place. Continuing the drawing can. Thirty-two positions are neither thirty-two seconds nor a fixed length of line.
+
+Now try drawing with the loss. Give yourself a tail. Curl it around your other hand, then lead it elsewhere. The space you just marked can open again. What would you make with a line that follows you without keeping all of where you have been?
 
 <!-- @ -->
 
-Return to a line you want to keep. Release the drawing dot or stick after making it: that release is how we send a copy onward. A whiteboard image is kept differently and will not take this route.
+Return to a line you want to keep. Release the drawing pen after making it: that release sends a copy onward. With the amber dot, only the surviving positions travel.[^point-trace-carry]
 
-We can carry the record forward. The movement that made it has already passed.[^point-trace-inscription] The copied positions can enter another program and be given another task.
+We bring that trace into the next hall. Your hand can rest now. The movement that made the line has already passed; its recorded positions can remain.[^point-trace-inscription] There we will place the drawing as a sculpture, something you can approach from another side.
+
+The trace sends perfectly: this is what a GPS track is, and a mocap take, and every gesture your phone has ever kept. **The trace is transmissible as data and irrecoverable as event.** Copy it exactly and it still never happens again.
+
+The recorder was made to keep a gesture. Its list can now become something to compose with. A bend of the wrist may return at the size of a room, inviting another movement. The first use is still there, but it no longer tells us everything the record can become.[^point-trace-hauntology]
 
 In the next room, look for your bend. It may have grown.
 
@@ -82,6 +117,10 @@ In the next room, look for your bend. It may have grown.
 
 [^point-trace-sampling]: Claude E. Shannon, [“Communication in the Presence of Noise”](https://fab.cba.mit.edu/classes/S62.12/docs/Shannon_noise.pdf), *Proceedings of the IRE* 37, no. 1 (1949), 10–21, Theorem 1, gives a reconstruction result for band-limited signals sampled uniformly in time. It is a technical neighbour, not a guarantee for this trace: frame timing, a movement threshold and spatial rounding do not meet those assumptions. Joining retained positions with straight segments cannot by itself recover the intervening gesture.
 
-[^point-trace-quantisation]: Godot’s [`snappedf`](https://docs.godotengine.org/en/4.6/classes/class_%40globalscope.html#class-globalscope-method-snappedf) returns the nearest multiple of a spacing. Here this quantises spatial components; it does not set a fixed temporal sampling rate. The separate movement gate determines whether to consider another reading. Changing either operation can alter the record, for different reasons.
+[^point-trace-quantisation]: Godot’s [`snappedf`](https://docs.godotengine.org/en/4.6/classes/class_%40globalscope.html#class-globalscope-method-snappedf) returns the nearest multiple of a spacing. Here this quantises spatial components; it does not set a fixed temporal sampling rate. The separate movement gate determines whether to consider another reading. Changing either operation can alter the record, for different reasons. The [technical companion](/book?map=Point_Trace&section=technical) gives the spacings, recording gate and list capacities.
 
-[^point-trace-inscription]: Sigmund Freud’s [“A Note upon the ‘Mystic Writing-Pad’”](https://web.english.upenn.edu/~cavitch/pdf-library/Freud_WritingPad.pdf) (1925) and Jacques Derrida’s “Freud and the Scene of Writing,” in [*Writing and Difference*](https://press.uchicago.edu/ucp/books/book/chicago/W/bo27619783.html), translated by Alan Bass (1978), open a neighbouring inquiry into inscription, retention and the relation between a mark and what is no longer present. A list of coordinates is not Derrida’s philosophical trace or a model of psychic memory. The connection here is a question to pursue, not an identity between these concepts.
+[^point-trace-carry]: A drawing pen must retain at least two positions to send a copy onward. The whiteboard's image and the ball's path stay in this hall. The [technical companion](/book?map=Point_Trace&section=technical) distinguishes these records and their transfer routes.
+
+[^point-trace-inscription]: Sigmund Freud’s [“A Note upon the ‘Mystic Writing-Pad’”](https://web.english.upenn.edu/~cavitch/pdf-library/Freud_WritingPad.pdf) (1925) and Jacques Derrida’s “Freud and the Scene of Writing,” in [*Writing and Difference*](https://press.uchicago.edu/ucp/books/book/chicago/W/bo27619783.html), translated by Alan Bass (1978), open a neighbouring inquiry into inscription, retention and the relation between a mark and what is no longer present. Here they open a question to pursue: what can a retained mark tell us about a movement that has already passed?
+
+[^point-trace-hauntology]: Jacques Derrida's [*Specters of Marx*](https://api.pageplace.de/preview/DT0400.9781040559963_A63760427/preview-9781040559963_A63760427.pdf) (1993; English translation by Peggy Kamuf, 1994), “Exordium,” connects inheritance with responsibilities towards those no longer or not yet present. Ada extends this question to technical use: a tool can carry an earlier purpose into an unanticipated connection. The [project afterword](/book-review/doc/book/iterations/2026-09-23-book-frame/index.html#afterword) develops this proposal alongside entropy as difference and Ashby's requisite variety.

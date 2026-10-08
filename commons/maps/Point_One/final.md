@@ -1,173 +1,68 @@
-# Position Without Extension
+# Point One — A body in the light
 
-… You arrive late.[^1]
+<!-- @point_absent -->
 
-<!-- @frame_counter_display -->
+The corridor begins with a label: “Point one”. Above it, nothing.
 
-The number is already changing. Its first number for you is not its first number. While you find somewhere to stand, the room continues with whatever it was doing before you arrived.
+There is somewhere to look because the words have given you a place to look. The name arrives before its object. You can stand in front of it, lean closer, and pass your hand through the empty space.
 
-You can already stand in a room you could not yet build. Someone has made that possible. Their work gives us somewhere to begin, and brings decisions with it. We inherit possibilities before we know their conditions.
-
-We can make more than we can explain. What can we borrow for now, and what must we understand to make the work our own?
-
-Follow the number for a moment. Where does the next one come from?
-
-A small counter can begin here:
+Here is the point, but you cannot see it. We can keep its position in three numbers:[^point-one-code]
 
 ```gdscript
-extends Node3D
-
-var _count := 0
-
-func _process(delta: float) -> void:
-    _count += 1
+var point_position := Vector3(0.0, 1.12, 0.0)
 ```
 
-Godot calls `_process` once per process frame while this node is processing. The engine supplies the repetition. Each call reaches the indented line: add one to `_count`. One, then two, then three. Declared outside the function, `_count` keeps its value between calls. Its zero belongs to the beginning of this instance.
+We have given that position a name, `point_position`. The numbers locate a place. They draw nothing. In the next hall, we will take them apart.
 
-`delta` carries this update's time interval in seconds. We receive it here but do not use it yet. Adding one counts calls. The same count could have accumulated through different durations; the number keeps how many, leaving how long unanswered.
+A mathematical point has no extent.[^point-one-euclid] To let it appear in the room, we will have to give it something a point does not have: a surface.
 
-The room's counter reads a total that began earlier:
+<!-- @point_visible -->
 
-```gdscript
-var frames: int = int(Engine.get_process_frames())
-```
-
-`Engine.get_process_frames()` counts process frames since the engine started. The panel reads and displays that total on each `_process` call. It includes frames before the panel existed, and before you found the number. Loading the room has already occupied some of those intervals.
-
-We begin with a number that includes something we did not witness.
-
-We have read the line that asks for that number. Much of the code making it readable remains unopened.
-
-<!-- @folding_past -->
-
-Through the entrance window, frames recede within frames. They keep folding while you look elsewhere. There is a temptation to follow them back to a first frame, a place from which everything here might be explained in order.
-
-The source gives this particular depth a small inventory: ten frames, scaled and moved through a repeating cycle. It makes a figure of a past. It has no record of the route you took to arrive here. A few repeated shapes can invite a much longer journey than the one their program keeps.
-
-We could turn back into the counter: how a digit gets its shape, how its glass is drawn, how the engine returns to `_process`. Any of those questions could take the rest of our time here. To begin with the point, we have to leave some invitations unanswered. The lesson borrows operations we have not learned to examine yet.
-
-The code we leave unread keeps working. It gives the number its appearance and the room its possibilities while our attention moves elsewhere. Choosing a first principle also means choosing what we will, for now, take on trust. Who gets to decide which questions can wait?
-
-Alice's rabbit is already ahead. There are functions we would like to open, but we still have a point to find. We carry a question forward; others fold behind us.
-
-<!-- @origin -->
-
-We cannot follow everything back to its beginning. But we can choose somewhere to count from.
-
-Find the origin marker. Zero has been given a place in this room too. This zero is a reference in space, not the first moment of the running clock.
-
-```gdscript
-var origin := Vector3.ZERO
-```
-
-The origin is a point chosen as the reference from which other positions are measured. Calling it zero establishes a relation with other positions. It does not put zero outside the world it helps describe.
-
-Nearby, a sign says “~~you~~ are here.” The location remains legible after its visitor is crossed out. What part of you has arrived at this address?[^point-one-ahmed-reach]
-
-<!-- @the_invisible_point -->
-
-In the glass case, four brass arrows address an empty centre. Two thin red lines meet there. Follow either line towards the crossing. There is no dot to take over the work of locating it.
-
-What have you found, if there is no body there?
-
-The source names the meeting place:
-
-```gdscript
-const FOCUS := Vector3(0.0, 1.25, 0.0)
-```
-
-`Vector3` holds three components. Here we use them as a position: zero along the case's local X direction, 1.25 metres along its Y direction, zero along Z. These are coordinates relative to the case. They specify a location without making anything visible.
-
-The arrows and lines are built in relation to `FOCUS`. They make its location available through things beside it and passing through it. The point itself is never drawn. It has no hidden mesh and no later appearance to wait for.
-
-That is a strange thing to exhibit: a position you can locate, with no body of its own. The source offers another access to it. You can read the address and follow how the surrounding construction was arranged. The position has become available through those relations, without acquiring a surface.
-
-<!-- @code_evolution_screen -->
-
-The nearby code screen builds a visible marker in a separate example. Its excerpts give a sphere a position, then colour and a label. The screen does not execute these scripts. Their sphere belongs to that example; the point in the case remains undrawn. The complete illustrative scripts accompany the excerpts in the room's source.
-
-In a later stage, `_process(delta)` adds `delta` to `elapsed`. The example accumulates time rather than adding one per call; that elapsed time selects when its marker would be drawn. Its position stays the same. This is a construction we could make from a position. The invisible point keeps its empty centre.
-
-The additions matter separately, even though they arrive together when we look at the finished object. A position does not contain a colour. A mesh does not tell us whether a hand can hold it. To make the next point approachable, we have to give it more.
-
-<!-- @interactive_point_origin_force -->
-
-The dark point offers itself to your hands. Pick it up. Follow it a little to one side, then back. Its appearance can change as you handle it; successive pickups also cycle its coordinate display through several formats, including one that hides the label.
+Further along, the same label sits below a small white sphere. Now there is something to look around. Its curved surface holds a highlight; as you move, the highlight moves too.
 
 The first point has already broken the promise of taking things one step at a time. There is shine here, a surface, a changing body. We are already Alice. We can follow that interest into the construction, where the things meeting us at once were made separately.
 
-A mathematical point specifies a location without extension.[^point-one-euclid] This artifact gives it a sphere, a collision shape and ways to respond. Those additions let us meet it through movement. They also give it possibilities that a position alone does not have.
+Walk towards it. The sphere does not stop you. Your view can pass through its surface and come out the other side. You have crossed something you could see.
 
-```gdscript
-var p := Vector3(1.0, 0.5, 0.0)
-```
+We have given the position a surface for the light to meet. Make the sphere larger and more of the room disappears behind it. Its centre can stay exactly where it was. Drawing this body has still given it no power to stop you.
 
-Three components again, now another position. There is nowhere in this value to put the sphere's radius, your hesitation, or the reason you chose this place. The position can be used by a program that records those things separately. On its own, it does not tell that story.
+<!-- @point_solid -->
 
-What drew your hand towards the point may be among the things its coordinates cannot report. Knowing how the sphere was made need not finish that interest. It gives you places to intervene: another surface, another response, another way to make a location felt.
+The next white sphere has the same size and finish. It says “Point one” too. Try the same approach.
 
-<!-- @coordinate_readout -->
+This time a collision body occupies the place the surface describes. Your movement meets a limit. The difference was invisible until you tried to cross it. Two objects can look alike and permit different lives around them.
 
-Keep the point in your hand. Move it while watching the white card. The changing body now has an address. What does the address follow, and what does it leave out?
+Its visible surface and its physical boundary are made separately. We have given them the same size and position. They could have been arranged otherwise. Make only the boundary larger, and your approach would stop before you reached the sphere. The empty space would resist you.
 
-The opening between the two areas lets you carry the same point towards the coloured frame. Its guides and the card follow the point you are already holding.
+<!-- @point_sun_switch -->
 
-The card marked `WORLD` puts its position into another visible form. Move the point slightly while watching the card. A printed component may stay unchanged through a movement you can see.
+## First there was light
 
-The reporting operation can be written like this:
+First there was light, right? Look at the crooked shadows under the white spheres. Round bodies leave stretched marks on the floor. Something outside the shape has helped to draw them.
 
-```gdscript
-func report_position(point: Node3D) -> String:
-    var p := point.global_position
-    return "(%.2f, %.2f, %.2f)" % [p.x, p.y, p.z]
-```
+There is a switch on the wall. Turn it.
 
-`%.2f` rounds each component to two decimal places in the text. The stored position is left alone. The card has made the location easier to read by allowing several nearby positions to share a printed address. The apparent stillness belongs to that report.
+You have removed their sun.
 
-<!-- @CoordinateSystem3M -->
+The long shadows disappear. The spheres remain, faintly lit. Try approaching the solid one again. Its boundary has not gone with its shadow. What helped you see the body was never what stopped your body.
 
-Follow the coloured frame's guides as you move the point in your hand. Red follows X, green follows Y, blue follows Z. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.
+Here the sun is a direction from which light arrives. We did not have to build a burning star. A few instructions gave the room a familiar consequence, and familiarity let the source go unquestioned. The switch puts that borrowed certainty within reach.
 
-The frame has its own origin, orientation and scale. Its script uses `to_local()` to express a world position relative to that frame. The white card and the coloured frame can therefore give different addresses for the same place. Remember the case's `FOCUS`: its 1.25 was measured from the case, too.
+Turn it back. A shadow returns to the same place. It makes the sphere easier to locate, but it is not another point beneath the first one. It belongs to a relation between a surface, a light and somewhere for the light to be interrupted.
 
-A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.[^point-one-haraway]
+<!-- @point_pedestal -->
 
-Carry the point beyond an arrow's end. The drawn axis has a length; the coordinate system can describe positions beyond it. An earlier version confined the point to the arrows' span. A drawing made to explain movement had also been deciding where movement could end. The frame now keeps describing the point outside that span.
+## The size of a point
 
-<!-- @drag_point_target -->
+Before leaving, you meet a white sphere on a pedestal. It is 1.3 metres across. The text still says “Point one”.
 
-The red arrow says “drag point here”. Carry the point towards it. Watch for the falling balls. Leave and return by another route.
+The small sphere let you approach its centre. This one asks you to walk around it. A change in size has changed how much of the room you can see, and where your body can go. Its centre can still be written with three numbers. The same short address leaves a great deal unsaid.
 
-“Here” has become a request, and the request has a tolerance. This is the distance test, reduced to one position:
+Look from the small white spheres to the sphere on the pedestal. We have given each a body and called each a point. Neither has to stop being interesting once we know the difference.
 
-```gdscript
-@export var catch_radius: float = 0.45
-@export var catch_height: float = 1.20
+In the next room, the point can leave its place with your hand. Now we can ask where it has gone.
 
-func accepts_position(p: Vector3) -> bool:
-    var centre := global_position + Vector3(0.0, catch_height, 0.0)
-    return p.distance_to(centre) <= catch_radius
-```
-
-The comparison accepts a position within 0.45 metres of a centre 1.20 metres above the target's origin. A hand has room to arrive. The accepted position can be close enough without being identical to the centre.
-
-The target checks points registered in its coordinate-point group. It requires no release and rearms when the point leaves. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.
-
-Return again, and a destination can become an instrument. The rhythm of your arrivals changes what the room's instruction is useful for. A detour may matter to that rhythm while remaining absent from the success test. We could give the target a memory of the journey; we would then have to decide what it remembers, and what someone else could read from it.
-
-<!-- @ -->
-
-The counter has continued through all of this. A position has acquired a body, different addresses, a tolerance for arrival. It still leaves questions unanswered.
-
-One of them travels with us: how did it get there?
-
-The next room brings two points into relation. A line begins.
-
-[^1]: Heidegger’s *thrownness* names finding ourselves already delivered into an existence we did not choose—not simply arriving after the clock started. Here, the room offers a small encounter with that condition. Genesis, first light: we look for a beginning. But is this the world beginning, or our first glimpse of something already underway? See [*Being and Time*, §29](https://www.beyng.com/pages/en/BeingandTimeMR/BeingandTimeMR.174.html).
-
-[^point-one-ahmed-reach]: Sara Ahmed, [*Queer Phenomenology: Orientations, Objects, Others*](https://www.dukeupress.edu/queer-phenomenology) (Duke University Press, 2006), introduction. Ada’s questions about orientation and reach draw on her account of bodies finding their bearings through relations with objects, spaces and others. Lines will make this conversation more explicit.
+[^point-one-code]: The position is drawn from the station's construction in `point_condition.gd`. The absent station creates no hidden sphere. The separate tutorial keeps a position, adds a visible surface and compares it with a collision boundary. Reading the three components and using pickup belong to the next hall, Point Coordinates.
 
 [^point-one-euclid]: Euclid, [*Elements*, Book I, Definition 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html), defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart.
 
-[^point-one-haraway]: Donna Haraway, [“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”](https://doi.org/10.2307/3178066), *Feminist Studies* 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. Naming a coordinate frame is not equivalent to that epistemology. It gives this room a technical way to ask a related question: what must accompany a reading for someone else to understand its reference and limits?

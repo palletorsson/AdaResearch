@@ -2,6 +2,10 @@
 
 The court asked when a finite model was enough to hold a distinction. Here we make that question move. Add a division, then another. **What would count as arriving?**
 
+<!-- @capsule -->
+
+The pill from the court is at the door, closed, five-sided, exactly as it was. It is here so you can see what a hole does to a form.
+
 <!-- @combine_portals -->
 
 Begin beside an early faceted ring. Follow a straight edge around its opening, then look along the progression. Choose a later ring that seems round enough from where you stand. Keep that choice in mind as you approach it. Does the edge you had stopped seeing return?
@@ -26,6 +30,8 @@ Each straight side is a chord between two points on the circle. Adding sides bri
 
 This is **convergence**: as the rule continues, the perimeters approach a limit. They can get arbitrarily close to the circumference, though no finite polygon in this sequence has that exact perimeter. Twenty examples show part of an approach that can continue beyond the display.
 
+Archimedes did this by hand. He started from a hexagon and doubled, twelve, twenty-four, forty-eight, ninety-six, and with ninety-six sides he boxed the number that a circle is between 3.1408 and 3.1429. Ninety-six sides give 3.1410. It is very close. It is not there, and no doubling you can name gets there, because the gap at every finite n is a positive number, smaller than the last one and larger than zero. A circle is a limit, and a limit is not a place.
+
 Suppose you needed this polygon for something you were making. You could set a small positive gap you were willing to accept and stop when a member met it. That bound is a **tolerance**. It might lead you to a different choice from the ring that first looked round enough. The comparison answers to a requirement you supplied. Passing it leaves other decisions open: the corner you like, the view through the opening, the place this ring might have beside another.
 
 Press **REVERSE** and return to the beginning. The positions stay; the same family of resolutions appears in the opposite order. What the earlier arrangement kept for later has become the entrance.
@@ -33,6 +39,10 @@ Press **REVERSE** and return to the beginning. The positions stay; the same fami
 The sequence had quietly given refinement a direction. Walking the other way, corners become available again. You might want one of those corners. Adding more sides would take it away.
 
 Through this change, the openings remain. More divisions need not give the body another kind of passage.[^portals-hole]
+
+Count a torus. At three rings and three sides, at twenty-two and forty-one, at any resolution you like, vertices minus edges plus faces is zero. The hole is not something the surface has. It is a change in the number the surface cannot help giving you, and that number does not care how finely the ring is drawn. You can push the side count toward the circle forever and the torus stays a torus, with its zero, because the hole was never made of sides.
+
+That is what a portal is, before it is anything magical: a surface whose count is zero, which you can walk through because of it.
 
 <!-- @achilles_tortoise -->
 
@@ -44,9 +54,11 @@ The first stage carries Achilles halfway along the track, the second three quart
 
 At stage ten, the instrument holds. The bodies may look as though they have arrived together, but Achilles' anchor is still less than six millimetres from the limit. His visible body is larger than the gap. The display has a last stage. Does the sequence it represents have one?
 
+Then run the code, and watch the machine disagree. At the fifty-fourth step, the covered fraction becomes exactly one. Not close to one: equal. The half that remained was smaller than a float can hold next to the number one, so it rounded away, and the runner arrived. The machine reaches the limit by running out of digits. Mathematics never gets there. Floats do, by forgetting.
+
 Use **RESTART**, then **PLAY** to let the figures move between stages. Pause them partway through a movement. The panel keeps both distances in view: where Achilles is now, and where this step was taking him.
 
-The program gives these stages a regular schedule and adds movement between them. That schedule does not reproduce the shrinking durations of a continuous runner's journey. An infinite subdivision can have a finite total; it does not make ordinary motion impossible.
+The program gives these stages a regular schedule and adds movement between them. That schedule does not reproduce the shrinking durations of a continuous runner's journey. An infinite subdivision can have a finite total; it does not make ordinary motion impossible. What it proves is that a finite distance can hold infinitely many steps, and that arrival is not one of them.
 
 This instrument can pause while the museum continues. We have held one process still long enough to ask about it.
 
